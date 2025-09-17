@@ -1,0 +1,2093 @@
+\documentclass[12pt]{article}
+\usepackage{xcolor}
+\usepackage[margin=0.5in]{geometry} % Reduced margins
+\usepackage{tcolorbox}
+\usepackage{listings}
+
+% Define styles for code blocks
+\lstdefinestyle{customJavaScript}{
+    language=JavaScript,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    stringstyle=\color{green!70!black},
+    commentstyle=\color{gray},
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    showstringspaces=false
+}
+
+\begin{document}
+
+% Section 1
+\section*{\textcolor{red}{\textbf{How to use External StyleSheet}}}
+
+The issue is that you're using React Native \texttt{StyleSheet} syntax in a CSS file. The file should either be renamed to have a \texttt{.js}/\texttt{.ts} extension, or the styles should be converted to regular CSS syntax.
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!80, sharp corners=all, boxrule=0.5pt]
+Since this is React Native code, let's rename the file: \\
+Rename \texttt{HeroSection.css} to \texttt{HeroSection.styles.ts}.
+\end{tcolorbox}
+
+\hrule
+\vspace{0.5em}
+
+% Section 2
+\section*{\textcolor{red}{\textbf{KeyboardAvoidingView in React Native}}}
+
+In \textbf{React Native}, when you type in a text input, the keyboard pops up and sometimes hides the input field.  
+
+\texttt{<KeyboardAvoidingView>} helps by \textbf{moving the screen content up} so that the text input stays visible and is not hidden behind the keyboard.
+
+\subsection*{\textcolor{red}{1. Example Use Case}}
+
+Imagine you're filling out a form. Without \texttt{<KeyboardAvoidingView>}, the keyboard might block the input box you're typing in. But if you use \texttt{<KeyboardAvoidingView>}, it will push the input box up so you can see what you're typing.
+
+\subsection*{\textcolor{red}{2. Comparison}}
+
+\paragraph{\textcolor{red}{Without \texttt{<KeyboardAvoidingView>}}:}  
+The keyboard covers the input, and you can’t see what you're typing.
+
+\paragraph{\textcolor{red}{With \texttt{<KeyboardAvoidingView>}}:}  
+The screen adjusts (moves up) to make the input visible.
+
+\hrule
+\vspace{0.5em}
+
+% Section 3
+\section*{\textcolor{red}{\textbf{What is `react-hook-form`?}}}
+
+\texttt{react-hook-form} is a popular library in React and React Native for managing forms. It simplifies form handling by reducing the need to write a lot of boilerplate code for managing inputs, validation, and state updates.
+
+\subsection*{\textcolor{red}{Why Use `react-hook-form` Instead of `useState`?}}
+
+While you \textbf{can} use \texttt{useState} for managing forms, \texttt{react-hook-form} offers several advantages:
+
+\begin{tabular}{|p{3.5cm}|p{4.5cm}|p{4.5cm}|}
+\hline
+\textbf{Feature} & \textbf{With `useState`} & \textbf{With `react-hook-form`} \\
+\hline
+Form State Management & Separate \texttt{useState} for each input field. & Automatically tracks the state of all inputs. \\
+\hline
+Validation & Write custom validation logic for each field. & Built-in validation using \texttt{register} or schema validation. \\
+\hline
+Performance & Re-renders on every keystroke. & Optimized re-renders for better performance. \\
+\hline
+Error Handling & Manage errors manually. & Automatic error handling with \texttt{errors} object. \\
+\hline
+Ease of Use & Suitable for small forms. & Better for large forms or dynamic forms. \\
+\hline
+\end{tabular}
+
+\vspace{0.5em}
+
+\subsection*{\textcolor{red}{Example Code: `useState` vs `react-hook-form`}}
+
+\subsubsection*{\textcolor{red}{With `useState`}}
+
+\begin{tcolorbox}[colback=gray!5, colframe=gray!50, title=React Native Code Example (With `useState`)]
+\begin{lstlisting}[style=customJavaScript]
+// Import required modules
+import React, { useState } from 'react';
+import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+
+const FormWithUseState = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [errors, setErrors] = useState({});
+
+  const handleSubmit = () => {
+    let validationErrors = {};
+    if (!name) validationErrors.name = "Name is required.";
+    if (!email || !email.includes('@')) 
+      validationErrors.email = "Valid email is required.";
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      console.log("Form submitted:", { name, email });
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder="Name"
+        value={name}
+        onChangeText={setName}
+      />
+      {errors.name && <Text style={styles.error}>{errors.name}</Text>}
+
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+      />
+      {errors.email && <Text style={styles.error}>{errors.email}</Text>}
+
+      <Button title="Submit" onPress={handleSubmit} />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: { padding: 20 },
+  input: { borderBottomWidth: 1, marginBottom: 10 },
+  error: { color: 'red' },
+});
+
+export default FormWithUseState;
+\end{lstlisting}
+\end{tcolorbox}
+
+---
+
+\subsubsection*{\textcolor{red}{With `react-hook-form`}}
+
+\begin{tcolorbox}[colback=gray!5, colframe=gray!50, title=React Native Code Example (With `react-hook-form`)]
+\begin{lstlisting}[style=customJavaScript]
+// Import required modules
+import React from 'react';
+import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+import { useForm, Controller } from 'react-hook-form';
+
+const FormWithReactHookForm = () => {
+  const { control, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = (data) => {
+    console.log("Form submitted:", data);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Controller
+        control={control}
+        name="name"
+        rules={{ required: "Name is required." }}
+        render={({ field: { onChange, value } }) => (
+          <TextInput
+            style={styles.input}
+            placeholder="Name"
+            value={value}
+            onChangeText={onChange}
+          />
+        )}
+      />
+      {errors.name && <Text style={styles.error}>{errors.name.message}</Text>}
+
+      <Controller
+        control={control}
+        name="email"
+        rules={{
+          required: "Email is required.",
+          pattern: { value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/, message: "Enter a valid email." }
+        }}
+        render={({ field: { onChange, value } }) => (
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            value={value}
+            onChangeText={onChange}
+          />
+        )}
+      />
+      {errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
+
+      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: { padding: 20 },
+  input: { borderBottomWidth: 1, marginBottom: 10 },
+  error: { color: 'red' },
+});
+
+export default FormWithReactHookForm;
+\end{lstlisting}
+\end{tcolorbox}
+
+---
+
+\subsection*{\textcolor{red}{Key Takeaways}}
+
+- `react-hook-form` simplifies form handling by reducing boilerplate code.
+- It improves performance and provides built-in validation and error handling.
+- Use `useState` for small, simple forms and `react-hook-form` for larger or more complex forms.
+
+=================================
+\hrule
+
+\section*{\textcolor{red}{\textbf{AppState: Provides the current state of the app (active, background, or inactive).
+}}}
+\section*{\textcolor{green}{\textbf{import BackgroundTimer from 'react-native-background-timer'.
+}}}
+
+
+
+% Define styles for code blocks
+\lstdefinestyle{customJavaScript}{
+    language=JavaScript,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    stringstyle=\color{green!70!black},
+    commentstyle=\color{gray},
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    showstringspaces=false
+}
+
+\begin{document}
+
+% Section 1
+\section*{\textcolor{red}{\textbf{Alert and Modal in React Native}}}
+
+In \textbf{React Native}, there are two commonly used components for displaying notifications or custom overlays: \texttt{Alert} and \texttt{Modal}.
+
+\subsection*{\textcolor{red}{1. Alert}}
+
+The \texttt{Alert} component is used to display simple, native pop-up alerts (like dialogs) to the user. These alerts can show messages, ask for confirmation, or notify users of something important. For example, you can use it to show an error message or ask the user if they are sure about a certain action (like deleting something).
+
+\textbf{Example:}
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!80, sharp corners=all, boxrule=0.5pt]
+\begin{lstlisting}[style=customJavaScript]
+// Import the Alert component from React Native
+import { Alert } from 'react-native';
+
+// Show an alert with a title and message
+Alert.alert('Title', 'This is the message');
+\end{lstlisting}
+\end{tcolorbox}
+
+\subsection*{\textcolor{red}{2. Modal}}
+
+A \texttt{Modal} is a more flexible component that allows you to create custom, overlay pop-ups with more control. Unlike \texttt{Alert}, which is simple and predefined, \texttt{Modal} lets you design your own content (like forms, images, etc.) that appear on top of the main screen. You can control how the modal looks and behaves (such as showing or hiding it based on user actions).
+
+\textbf{Example:}
+
+\begin{tcolorbox}[colback=gray!10, colframe=gray!80, sharp corners=all, boxrule=0.5pt]
+\begin{lstlisting}[style=customJavaScript]
+// Import necessary components from React Native
+import React, { useState } from 'react';
+import { Modal, View, Text, Button } from 'react-native';
+
+const App = () => {
+  const [modalVisible, setModalVisible] = useState(false);  // State to control modal visibility
+
+  return (
+    <View>
+      {/* Button to show the modal */}
+      <Button title="Show Modal" onPress={() => setModalVisible(true)} />
+      
+      {/* Modal component */}
+      <Modal
+        visible={modalVisible}  // Controls modal visibility
+        transparent={true}  // Makes the background semi-transparent
+        animationType="slide"  // Slide animation for modal appearance
+        onRequestClose={() => setModalVisible(false)}  // Close the modal when requested
+      >
+        {/* Modal content */}
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+          <View style={{ width: 300, padding: 20, backgroundColor: 'white' }}>
+            <Text>This is a modal</Text>
+            {/* Button to close the modal */}
+            <Button title="Close Modal" onPress={() => setModalVisible(false)} />
+          </View>
+        </View>
+      </Modal>
+    </View>
+  );
+};
+
+export default App;
+\end{lstlisting}
+\end{tcolorbox}
+
+\subsection*{\textcolor{red}{Summary}}
+
+\begin{itemize}
+    \item \textbf{Alert}: Used for simple notifications or confirmations.
+    \item \textbf{Modal}: Used for custom, flexible pop-ups with more control over content and behavior.
+\end{itemize}
+
+===========================================
+\hrule
+
+\begin{document}
+
+% Heading
+\section*{\textcolor{red}{\textbf{When a Full Rebuild is Required in a React Native Project}}}
+
+In a React Native project, certain changes require a \textbf{rebuild} (via \texttt{npx react-native run-android}) rather than just a reload. This is because those changes are part of the native side of the app (Java/Kotlin for Android and Objective-C/Swift for iOS). Reloading (via hot reload or fast refresh) typically only updates the JavaScript code and does not affect the native code or configurations.
+
+\subsection*{\textcolor{red}{1. Android Files:}}
+\begin{itemize}
+    \item \textbf{\texttt{AndroidManifest.xml}}: Changes to this file (e.g., adding permissions or modifying activities) require a rebuild.
+    \item \textbf{\texttt{build.gradle}}: 
+    \begin{itemize}
+        \item Changes to build configurations, dependencies, SDK versions, or build-related settings.
+        \item Adding or changing dependencies in \texttt{android/app/build.gradle} will require a rebuild.
+    \end{itemize}
+    \item \textbf{Native Java/Kotlin Code}: Modifications in the native Android code (Java/Kotlin files) require a rebuild.
+    \item \textbf{\texttt{settings.gradle}}: Changes in this file (used to configure modules) require a rebuild.
+    \item \textbf{\texttt{proguard-rules.pro}}: Changes in ProGuard rules for minification require a rebuild.
+\end{itemize}
+
+\subsection*{\textcolor{red}{2. iOS Files (if applicable):}}
+\begin{itemize}
+    \item \textbf{\texttt{Info.plist}}: Changes to this file (e.g., modifying permissions, app settings) require a rebuild.
+    \item \textbf{\texttt{Podfile}}: Changes to the Podfile (managing CocoaPods dependencies) require running \texttt{pod install} and rebuilding the app.
+    \item \textbf{Native Swift/Objective-C Code}: Modifications to native code (Swift, Objective-C, or Xcode configuration) require a rebuild.
+    \item \textbf{Build Settings in Xcode}: Modifying build settings in Xcode (e.g., adding frameworks or changing configurations) requires a rebuild.
+\end{itemize}
+
+\subsection*{\textcolor{red}{3. Assets and Resources:}}
+\begin{itemize}
+    \item \textbf{Images, Fonts, and Other Resources}: Adding or modifying assets (like images, fonts) may require a rebuild to ensure correct bundling.
+    \item \textbf{\texttt{res/} directory in Android}: Any changes in resources (e.g., layout, drawables) require a rebuild.
+\end{itemize}
+
+\subsection*{\textcolor{red}{4. Dependencies or Linking Native Modules:}}
+\begin{itemize}
+    \item \textbf{Adding or Updating Native Dependencies}: If you add a new native dependency (e.g., camera or geolocation library), a rebuild is needed to integrate the native code.
+    \item \textbf{Linking with Custom Native Modules}: Any modification to custom native modules requires a rebuild.
+\end{itemize}
+
+\subsection*{\textcolor{red}{5. Configuration Files for Custom Builds:}}
+\begin{itemize}
+    \item \textbf{\texttt{metro.config.js}} or \texttt{babel.config.js}: Changes may not always require a rebuild, but sometimes custom transformations may necessitate one.
+\end{itemize}
+
+\subsection*{\textcolor{red}{6. Files That \textbf{Do Not Require} a Rebuild:}}
+\begin{itemize}
+    \item \textbf{JavaScript/TypeScript files}: Changes to JavaScript/TypeScript files are automatically applied with a reload or fast refresh.
+    \item \textbf{JSON files}: Static JSON file updates do not require a rebuild unless they affect the native build configuration.
+    \item \textbf{Styling Files (CSS/Styles)}: Changes to styles do not require a rebuild unless they are part of a custom native module.
+\end{itemize}
+
+\subsection*{\textcolor{red}{Summary:}}
+
+You need to \textbf{rebuild} the app using \texttt{npx react-native run-android} (or \texttt{npx react-native run-ios}) if you make changes to:
+\begin{itemize}
+    \item \textbf{Android}: \texttt{AndroidManifest.xml}, \texttt{build.gradle}, native Java/Kotlin code, \texttt{settings.gradle}, \texttt{proguard-rules.pro}, assets.
+    \item \textbf{iOS}: \texttt{Info.plist}, \texttt{Podfile}, native Swift/Objective-C code, Xcode build settings, assets.
+    \item \textbf{Native Modules or Dependencies}: Adding or updating linking of native modules.
+\end{itemize}
+
+Other JavaScript or asset changes can be reflected with a \textbf{reload} (hot reload or fast refresh) without requiring a full rebuild.
+
+===========================================
+\hrule
+
+
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    backgroundcolor=\color{lightgray!20},
+    showspaces=false,
+    showstringspaces=false,
+    frame=single,
+    rulecolor=\color{black},
+    breaklines=true,
+    breakatwhitespace=false,
+}
+
+\title{\textbf{Comprehensive Guide to Debugging in React Native}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Understanding React Native Debugging Using React Native DevTools}
+
+Debugging in React Native allows developers to inspect code execution, examine variables, and troubleshoot application issues. This guide breaks down the process step-by-step with examples and explanations.
+
+\section{Setting Up Debugging}
+\subsection*{What You Need:}
+\begin{enumerate}
+    \item A running \textbf{React Native app} on a device or emulator.
+    \item Chrome browser or React Native Debugger (an optional standalone tool).
+\end{enumerate}
+
+\subsection*{Steps to Enable Debugging:}
+\begin{enumerate}
+    \item Start your React Native app:
+    \begin{lstlisting}[language=bash]
+    npx react-native run-android  # For Android
+    npx react-native run-ios      # For iOS
+    \end{lstlisting}
+    \item Open the \textbf{Developer Menu}:
+    \begin{itemize}
+        \item \textbf{Android}: \texttt{Ctrl + M} (or \texttt{Cmd + M} on Mac) or shake the device.
+        \item \textbf{iOS}: \texttt{Cmd + D} (or shake the device).
+    \end{itemize}
+    \item Select \textbf{Debug JS Remotely} from the menu.
+    \item A new Chrome window will open with \textbf{React Native DevTools} connected to your app.
+\end{enumerate}
+
+\section{Adding a \texttt{debugger} Statement}
+Here’s a small example to demonstrate debugging:
+\begin{lstlisting}[language=JavaScript]
+import React, { useState } from 'react';
+import { View, Button, Text } from 'react-native';
+
+const DebuggerExample = () => {
+  const [count, setCount] = useState(0);
+
+  const incrementCount = () => {
+    console.log('Before debugger, count:', count);
+    debugger; // Pause here during execution
+    setCount(count + 1);
+    console.log('After debugger, count:', count);
+  };
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Current Count: {count}</Text>
+      <Button title="Increment" onPress={incrementCount} />
+    </View>
+  );
+};
+
+export default DebuggerExample;
+\end{lstlisting}
+
+\section{Using Chrome DevTools for Debugging}
+\subsection*{Key Debugging Buttons:}
+\begin{enumerate}
+    \item \textbf{Resume Script Execution (▶️)}: Continues app execution after a pause.
+    \item \textbf{Step Over Next Function Call (⏭️)}: Executes the current line without going into functions.
+    \item \textbf{Step Into Next Function Call (↘️)}: Goes into the function to debug its internals.
+    \item \textbf{Step Out (↗️)}: Exits the current function and returns to the caller.
+\end{enumerate}
+
+\section{Setting Breakpoints}
+Breakpoints pause execution at specific lines. Here’s how to set one:
+\begin{enumerate}
+    \item Go to the \textbf{Sources} tab in Chrome DevTools.
+    \item Navigate to your file (e.g., \texttt{DebuggerExample.tsx}).
+    \item Click the line number where you want to pause execution.
+\end{enumerate}
+
+\section{React DevTools for State and Props}
+\begin{enumerate}
+    \item Install React Developer Tools:
+    \begin{lstlisting}[language=bash]
+    npm install -g react-devtools
+    react-devtools
+    \end{lstlisting}
+    \item Open React DevTools to inspect:
+    \begin{itemize}
+        \item \textbf{Props}: Properties passed to the component.
+        \item \textbf{State}: Current state of the component (e.g., \texttt{count}).
+    \end{itemize}
+\end{enumerate}
+
+\section{Advanced Example with Async Functions}
+\begin{lstlisting}[language=JavaScript]
+const fetchData = async () => {
+  console.log('Fetching data...');
+  debugger; // Pause here to inspect the fetch logic
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  const data = await response.json();
+  console.log('Data fetched:', data);
+};
+\end{lstlisting}
+
+\section{Summary}
+\begin{itemize}
+    \item Add \texttt{debugger} statements or breakpoints to pause code execution.
+    \item Use controls like \textbf{Resume}, \textbf{Step Over}, and \textbf{Step Into} for detailed debugging.
+    \item Use React DevTools to inspect components, state, and props.
+\end{itemize}
+
+By following these steps, you can effectively debug your React Native app and solve issues with ease!
+
+
+=========================================================================================
+\hrule
+
+
+
+
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=8pt,
+    backgroundcolor=\color{lightgray!20},
+    showspaces=false,
+    showstringspaces=false,
+    frame=single,
+    rulecolor=\color{black},
+    breaklines=true,
+    breakatwhitespace=false,
+}
+
+\title{\textbf{Comprehensive Guide to Debugging in React Native}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Understanding React Native Debugging Using React Native DevTools}
+
+Debugging in React Native allows developers to inspect code execution, examine variables, and troubleshoot application issues. This guide breaks down the process step-by-step with examples and explanations.
+
+\section{Setting Up Debugging}
+\subsection*{What You Need:}
+\begin{enumerate}
+    \item A running \textbf{React Native app} on a device or emulator.
+    \item Chrome browser or React Native Debugger (an optional standalone tool).
+\end{enumerate}
+
+\subsection*{Steps to Enable Debugging:}
+\begin{enumerate}
+    \item Start your React Native app:
+    \begin{lstlisting}[language=bash]
+    npx react-native run-android  # For Android
+    npx react-native run-ios      # For iOS
+    \end{lstlisting}
+    \item Open the \textbf{Developer Menu}:
+    \begin{itemize}
+        \item \textbf{Android}: \texttt{Ctrl + M} (or \texttt{Cmd + M} on Mac) or shake the device.
+        \item \textbf{iOS}: \texttt{Cmd + D} (or shake the device).
+    \end{itemize}
+    \item Select \textbf{Debug JS Remotely} from the menu.
+    \item A new Chrome window will open with \textbf{React Native DevTools} connected to your app.
+\end{enumerate}
+
+\section{Adding a \texttt{debugger} Statement}
+Here’s a small example to demonstrate debugging:
+\begin{lstlisting}[language=JavaScript]
+import React, { useState } from 'react';
+import { View, Button, Text } from 'react-native';
+
+const DebuggerExample = () => {
+  const [count, setCount] = useState(0);
+
+  const incrementCount = () => {
+    console.log('Before debugger, count:', count);
+    debugger; // Pause here during execution
+    setCount(count + 1);
+    console.log('After debugger, count:', count);
+  };
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Current Count: {count}</Text>
+      <Button title="Increment" onPress={incrementCount} />
+    </View>
+  );
+};
+
+export default DebuggerExample;
+\end{lstlisting}
+
+\section{Using Chrome DevTools for Debugging}
+\subsection*{Key Debugging Buttons:}
+\begin{enumerate}
+    \item \textbf{Resume Script Execution (▶️)}: Continues app execution after a pause.
+    \item \textbf{Step Over Next Function Call (⏭️)}: Executes the current line without going into functions.
+    \item \textbf{Step Into Next Function Call (↘️)}: Goes into the function to debug its internals.
+    \item \textbf{Step Out (↗️)}: Exits the current function and returns to the caller.
+\end{enumerate}
+
+\section{Setting Breakpoints}
+Breakpoints pause execution at specific lines. Here’s how to set one:
+\begin{enumerate}
+    \item Go to the \textbf{Sources} tab in Chrome DevTools.
+    \item Navigate to your file (e.g., \texttt{DebuggerExample.tsx}).
+    \item Click the line number where you want to pause execution.
+\end{enumerate}
+
+\section{React DevTools for State and Props}
+\begin{enumerate}
+    \item Install React Developer Tools:
+    \begin{lstlisting}[language=bash]
+    npm install -g react-devtools
+    react-devtools
+    \end{lstlisting}
+    \item Open React DevTools to inspect:
+    \begin{itemize}
+        \item \textbf{Props}: Properties passed to the component.
+        \item \textbf{State}: Current state of the component (e.g., \texttt{count}).
+    \end{itemize}
+\end{enumerate}
+
+\section{Advanced Example with Async Functions}
+\begin{lstlisting}[language=JavaScript]
+const fetchData = async () => {
+  console.log('Fetching data...');
+  debugger; // Pause here to inspect the fetch logic
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  const data = await response.json();
+  console.log('Data fetched:', data);
+};
+\end{lstlisting}
+
+\section{Summary}
+\begin{itemize}
+    \item Add \texttt{debugger} statements or breakpoints to pause code execution.
+    \item Use controls like \textbf{Resume}, \textbf{Step Over}, and \textbf{Step Into} for detailed debugging.
+    \item Use React DevTools to inspect components, state, and props.
+\end{itemize}
+
+By following these steps, you can effectively debug your React Native app and solve issues with ease!
+
+=========================================================================================
+\hrule
+
+
+
+% Define custom colors for code
+\definecolor{background}{rgb}{0.95,0.95,0.95}
+\definecolor{keyword}{rgb}{0,0,0.6}
+\definecolor{comment}{rgb}{0.5,0.5,0.5}
+\definecolor{string}{rgb}{0.58,0,0.82}
+
+% Define listing styles
+\lstset{
+  backgroundcolor=\color{background},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{keyword}\bfseries,
+  commentstyle=\color{comment}\itshape,
+  stringstyle=\color{string},
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny,
+  frame=single,
+  breaklines=true,
+  captionpos=b,
+  tabsize=2,
+}
+
+\title{Swiper in React Native}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\subsection*{\textcolor{red}{Swiper in React Native}}
+
+\texttt{react-native-swiper} ek library hai jo React Native me horizontal ya vertical scrolling slides create karne ke liye use hoti hai. Yeh onboarding screens, product showcase, ya image carousels ke liye kaam aati hai. Swiper me slides ko swipe kar sakte ho, aur pagination indicators (dots) bhi use kar sakte ho.
+
+\section*{Example with Line-by-Line Explanation in Hinglish}
+
+Yeh code ek onboarding screen banata hai, jisme \texttt{Swiper} ka use hai:
+
+\begin{lstlisting}[language=JavaScript, caption={Swiper Example in React Native}]
+import React, { useRef, useEffect, useCallback } from 'react';
+// React ke hooks (useRef, useEffect, useCallback) import karte hain.
+
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+// React Native ke basic components import karte hain.
+
+import Swiper from 'react-native-swiper';
+// Swiper component import karte hain jo slides ke liye use hota hai.
+
+const { width, height } = Dimensions.get('window');
+// Screen ka width aur height lete hain taaki responsive design ban sake.
+
+const OnboardingScreens = () => {
+  const fadeIn = useRef(new Animated.Value(0)).current;
+  // Animated.Value banate hain fade animation ke liye.
+
+  const animateContent = useCallback(() => {
+    fadeIn.setValue(0);
+    // Fade animation ko reset karte hain.
+
+    Animated.timing(fadeIn, {
+      toValue: 1,
+      duration: 1500,
+      useNativeDriver: true,
+    }).start();
+    // Animation ko 1.5 second tak chalate hain.
+  }, [fadeIn]);
+
+  useEffect(() => {
+    animateContent();
+    // Jab component render hota hai to animation chalate hain.
+  }, [animateContent]);
+
+  return (
+    <Swiper
+      loop={false}
+      // Loop false ka matlab slides last tak pahunchne ke baad repeat nahi hoga.
+
+      showsPagination={true}
+      // Pagination indicators (dots) ko dikhata hai.
+
+      dot={<View style={styles.dot} />}
+      // Inactive dot ka style define karte hain.
+
+      activeDot={<View style={styles.activeDot} />}
+      // Active dot ka style define karte hain.
+
+      onIndexChanged={animateContent}
+      // Slide change hone par animation chalata hai.
+    >
+      {/* First Slide */}
+      <View style={styles.slide}>
+        <Text style={styles.text}>Welcome to App!</Text>
+      </View>
+
+      {/* Second Slide */}
+      <View style={styles.slide}>
+        <Text style={styles.text}>Discover Amazing Features</Text>
+      </View>
+
+      {/* Third Slide */}
+      <View style={styles.slide}>
+        <Text style={styles.text}>Get Started Now</Text>
+      </View>
+    </Swiper>
+  );
+};
+
+const styles = StyleSheet.create({
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9',
+    // Slide ke background ka color define karte hain.
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
+    // Text style define karte hain.
+  },
+  dot: {
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 3,
+    // Inactive dot ka style define karte hain.
+  },
+  activeDot: {
+    backgroundColor: '#000',
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginHorizontal: 3,
+    // Active dot ka style define karte hain.
+  },
+});
+
+export default OnboardingScreens;
+// Component ko export karte hain taaki dusre files me use ho sake.
+\end{lstlisting}
+
+\section*{Key Points}
+\begin{enumerate}
+    \item \textbf{Swiper}: Slides banane aur swipe karne ke liye.
+    \item \textbf{Pagination Dots}: Dots swipe progress show karte hain.
+    \item \textbf{Responsive Dimensions}: \texttt{Dimensions.get('window')} responsive layouts ke liye helpful hai.
+    \item \textbf{Animations}: React Native's \texttt{Animated} API ka use animations ke liye hota hai.
+\end{enumerate}
+
+
+
+=========================================================================================
+\hrule
+
+
+% Define custom colors for code
+\definecolor{background}{rgb}{0.95,0.95,0.95}
+\definecolor{keyword}{rgb}{0,0,0.6}
+\definecolor{comment}{rgb}{0.5,0.5,0.5}
+\definecolor{string}{rgb}{0.58,0,0.82}
+
+% Define listing styles
+\lstset{
+  backgroundcolor=\color{background},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{keyword}\bfseries,
+  commentstyle=\color{comment}\itshape,
+  stringstyle=\color{string},
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny,
+  frame=single,
+  breaklines=true,
+  captionpos=b,
+  tabsize=2,
+}
+
+\title{LinearGradient in React Native}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{\textcolor{red}{LinearGradient kya hai?}
+LinearGradient ek tarika hai background me \textbf{doh ya zyada colors ka mix}} dikhane ka, jo ek smooth transition banata hai.
+
+Jaise:
+\begin{itemize}
+    \item Aapke paas ek screen hai jiska background ek hi color (jaise safed) hai. 
+    \item Agar aap chahein ki neeche se halka blue ho aur upar jaate-jaate white ho jaye, to aap LinearGradient ka use karte hain.
+\end{itemize}
+
+\section*{Ek Example}
+Socho aapko ek gradient background banana hai jo ek sky jaisa dikhe:
+\begin{itemize}
+    \item Neeche halka blue
+    \item Upar light sky color
+\end{itemize}
+
+Code ke saath explain karte hain:
+
+\begin{lstlisting}[language=JavaScript, caption={Gradient Background Example}]
+import React from 'react'; 
+// React ko import karte hain
+
+import { View, StyleSheet, Text } from 'react-native'; 
+// React Native ke components import karte hain
+
+import LinearGradient from 'react-native-linear-gradient'; 
+// Gradient background banane ke liye LinearGradient import karte hain
+
+const GradientExample = () => {
+  return (
+    <LinearGradient
+      colors={['#87CEEB', '#FFFFFF']} 
+      // Gradient ke liye do colors define karte hain: sky blue aur white
+      // Yeh neeche se halka blue se white tak transition karega
+
+      style={styles.container} 
+      // Style apply karte hain container pe
+    >
+      <Text style={styles.text}>Yeh ek Gradient Background hai!</Text> 
+      // Gradient ke upar ek text dikhate hain
+    </LinearGradient>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, 
+    // Pura screen cover karne ke liye flex: 1
+    justifyContent: 'center', 
+    // Content ko vertically center karte hain
+    alignItems: 'center', 
+    // Content ko horizontally center karte hain
+  },
+  text: {
+    fontSize: 18, 
+    // Text ka size
+    color: '#000', 
+    // Text ka color black hai
+  },
+});
+
+export default GradientExample; 
+// Component ko export karte hain taaki use kiya ja sake
+\end{lstlisting}
+
+\subsection*{Output}
+\begin{itemize}
+    \item Screen ka neeche ka background halka \textbf{blue} hoga.
+    \item Upar jaate-jaate wo smoothly \textbf{white} me badal jayega.
+    \item Iske upar "Yeh ek Gradient Background hai!" text dikhayi dega.
+\end{itemize}
+
+\section*{Ek aur Example}
+\begin{lstlisting}[language=JavaScript, caption={Three-Color Gradient Example}]
+<LinearGradient 
+  colors={['#FF5733', '#FFC300', '#DAF7A6']} 
+  // Orange, Yellow, aur Light Green ka gradient
+
+  style={styles.container}>
+</LinearGradient>
+\end{lstlisting}
+
+Isme 3 colors ka gradient hoga:
+\begin{enumerate}
+    \item Orange se start hoga.
+    \item Yellow ke through light green tak smoothly transition karega.
+\end{enumerate}
+
+\section*{LinearGradient Use Kaha Karein?}
+\begin{enumerate}
+    \item \textbf{Backgrounds}: Onboarding screens, headers, ya buttons.
+    \item \textbf{Overlays}: Image ke upar halki shading dene ke liye.
+    \item \textbf{Fancy Design}: Attractive UI banane ke liye.
+\end{enumerate}
+
+=========================================================================================
+\hrule
+
+
+% Define custom colors for code
+\definecolor{background}{rgb}{0.95,0.95,0.95}
+\definecolor{keyword}{rgb}{0,0,0.6}
+\definecolor{comment}{rgb}{0.5,0.5,0.5}
+\definecolor{string}{rgb}{0.58,0,0.82}
+
+% Define listing styles
+\lstset{
+  backgroundcolor=\color{background},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{keyword}\bfseries,
+  commentstyle=\color{comment}\itshape,
+  stringstyle=\color{string},
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny,
+  frame=single,
+  breaklines=true,
+  captionpos=b,
+  tabsize=2,
+}
+
+\title{TouchableHighlight in React Native}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{\textcolor{red}{TouchableHighlight kya hai?}}
+React Native me \texttt{TouchableHighlight} ek component hai jo \textbf{pressable area} create karta hai (jaise button ya link). 
+Jab user isko press karta hai, to ek \textbf{highlight effect} dikhayi deta hai.
+
+Iska use tab hota hai jab aapko kisi action (like reset password, navigate, etc.) ke liye pressable area banana ho aur press karte waqt visual feedback dena ho.
+
+\section*{Example Code}
+\begin{lstlisting}[language=JavaScript, caption={TouchableHighlight Example}]
+import React from 'react';
+import { TouchableHighlight, Text, StyleSheet, Alert } from 'react-native';
+
+const Example = () => {
+  const handlePress = () => {
+    Alert.alert('Button Pressed!', 'You clicked the button.');
+    // Button press hone par ek alert dikhata hai.
+  };
+
+  return (
+    <TouchableHighlight
+      style={styles.button} 
+      // Button ke style ke liye
+
+      onPress={handlePress} 
+      // Jab user button ko press karega, ye function chalega
+
+      underlayColor="#D3D3D3" 
+      // Button press karte samay dikhne wala background color
+    >
+      <Text style={styles.buttonText}>Press Me</Text> 
+      // Button ke andar dikhne wala text
+    </TouchableHighlight>
+  );
+};
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: '#4CAF50', 
+    // Button ka base color green
+    padding: 10, 
+    // Button ke andar space
+    borderRadius: 5, 
+    // Button ke edges rounded banane ke liye
+    alignItems: 'center', 
+    // Text ko horizontally center karta hai
+  },
+  buttonText: {
+    color: '#FFFFFF', 
+    // Text ka color white
+    fontSize: 16, 
+    // Text ka size
+  },
+});
+
+export default Example;
+\end{lstlisting}
+
+\section*{Code Explanation}
+\begin{enumerate}
+    \item \textbf{\texttt{TouchableHighlight}}:
+    \begin{itemize}
+        \item Yeh ek wrapper hai jo pressable area banata hai.
+        \item Jab user press karta hai, ek \textbf{highlighted background} dikhata hai.
+    \end{itemize}
+    \item \textbf{\texttt{style}}:
+    \begin{itemize}
+        \item Button ke appearance ko define karta hai (color, size, padding, etc.).
+    \end{itemize}
+    \item \textbf{\texttt{onPress}}:
+    \begin{itemize}
+        \item Jab user button ko click kare, yeh function chalega.
+        \item Is example me ek alert message dikhaya ja raha hai.
+    \end{itemize}
+    \item \textbf{\texttt{underlayColor}}:
+    \begin{itemize}
+        \item Jab button ko press kiya jaye, tab dikhne wala background color.
+    \end{itemize}
+    \item \textbf{\texttt{Text}}:
+    \begin{itemize}
+        \item Button ke andar ka text. Iske saath styling lagayi ja sakti hai.
+    \end{itemize}
+\end{enumerate}
+
+\section*{Output}
+\begin{enumerate}
+    \item Button screen pe green color me dikhayi dega.
+    \item Jab button ko press karoge:
+    \begin{itemize}
+        \item Button ka background color \texttt{\#D3D3D3} hoga (highlight effect).
+        \item Ek alert box pop-up hoga: \texttt{"Button Pressed! You clicked the button."}
+    \end{itemize}
+\end{enumerate}
+
+\section*{Jab Use Karein}
+\begin{enumerate}
+    \item \textbf{Buttons}: Jahan visual feedback chahiye, jaise form submission ya navigation.
+    \item \textbf{Interactive Lists}: Pressable list items ke liye.
+    \item \textbf{Links}: Clickable links ya actions.
+\end{enumerate}
+
+
+=========================================================================================
+\hrule
+
+
+
+
+
+\begin{document}
+
+\section*{\textcolor{red}{What is MaterialIcons from \texttt{react-native-vector-icons/MaterialIcons}?}}
+
+\begin{itemize}
+    \item \textbf{\texttt{react-native-vector-icons}} ek library hai jo \textbf{icon fonts} provide karti hai.
+    \item \textbf{\texttt{MaterialIcons}} ek specific icon set hai jo Google ke Material Design ke icons ko support karta hai.
+    \item Aap isse \textbf{buttons, headers, menus} aur UI enhance karne ke liye icons add kar sakte ho.
+\end{itemize}
+
+\section*{How to Use \texttt{MaterialIcons}}
+
+\subsection*{Example Code}
+\begin{verbatim}
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+const IconExample = () => {
+  return (
+    <View style={styles.container}>
+      {/* Back Arrow Icon */}
+      <MaterialIcons name="arrow-back" size={30} color="black" />
+      
+      {/* Forward Arrow Icon */}
+      <MaterialIcons name="arrow-forward" size={30} color="blue" />
+      
+      {/* Informative Text */}
+      <Text style={styles.text}>Icons se UI aur intuitive lagta hai!</Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f0f0f0',
+  },
+  text: {
+    marginTop: 20,
+    fontSize: 16,
+    color: '#333',
+  },
+});
+
+export default IconExample;
+\end{verbatim}
+
+\section*{Code Explanation}
+
+\begin{enumerate}
+    \item \textbf{Importing MaterialIcons:}
+    \begin{verbatim}
+    import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+    \end{verbatim}
+    Yeh line library ke andar se \texttt{MaterialIcons} component ko import karti hai.
+    
+    \item \textbf{\texttt{name} Property:}
+    \begin{verbatim}
+    <MaterialIcons name="arrow-back" size={30} color="black" />
+    \end{verbatim}
+    \begin{itemize}
+        \item \texttt{name}: Icon ka naam define karta hai. \texttt{"arrow-back"} ek predefined Material Design icon hai.
+        \item Material Design ke saare icons ke naam \href{https://material.io/resources/icons/}{Material Icons} site par available hain.
+    \end{itemize}
+    
+    \item \textbf{\texttt{size} Property:}
+    Icon ka size pixels me define karta hai. Example: \texttt{size=\{30\}}.
+    
+    \item \textbf{\texttt{color} Property:}
+    Icon ka color set karta hai. Example: \texttt{color="black"}.
+\end{enumerate}
+
+\section*{Commonly Used Icons in MaterialIcons}
+
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Category} & \textbf{Icon Name} & \textbf{Description} \\ \hline
+\textbf{Navigation} & \texttt{menu} & Hamburger menu \\ 
+& \texttt{home} & Home page icon \\ 
+& \texttt{arrow-back} & Back navigation arrow \\ 
+& \texttt{arrow-forward} & Forward navigation arrow \\ \hline
+\textbf{Actions} & \texttt{add} & Plus icon for adding items \\ 
+& \texttt{delete} & Trash icon for deleting items \\ 
+& \texttt{done} & Checkmark for completion \\ \hline
+\textbf{Feedback} & \texttt{error} & Error icon \\ 
+& \texttt{info} & Information icon \\ \hline
+\textbf{Media Controls} & \texttt{play-arrow} & Play button \\ 
+& \texttt{pause} & Pause button \\ 
+& \texttt{volume-up} & Volume increase icon \\ \hline
+\end{tabular}
+
+\section*{Benefits of Using MaterialIcons}
+
+\begin{itemize}
+    \item \textbf{Predefined Icons}: Aapko manually icons design karne ki zarurat nahi hoti.
+    \item \textbf{Highly Customizable}: Size aur color ko dynamically change kar sakte ho.
+    \item \textbf{Cross-Platform Support}: iOS aur Android dono platforms me icons consistent lagte hain.
+\end{itemize}
+
+\section*{Tips for Working with Icons}
+
+\begin{enumerate}
+    \item \textbf{Icon Names:} MaterialIcons ke icons ke saare names \href{https://material.io/resources/icons/}{Material Design Icons} website par available hain.
+    
+    \item \textbf{Dynamic Styling:} Icon ke size aur color ko dynamically state/props ke through adjust kar sakte hain.
+    \begin{verbatim}
+    <MaterialIcons name="check" size={props.size || 24} color={props.color || "green"} />
+    \end{verbatim}
+    
+    \item \textbf{Use With Buttons:}
+    Icons ko buttons ke saath wrap kar ke interactive elements bana sakte ho:
+    \begin{verbatim}
+    import { TouchableOpacity } from 'react-native';
+
+    <TouchableOpacity onPress={() => console.log("Icon Pressed")}>
+        <MaterialIcons name="add" size={30} color="white" />
+    </TouchableOpacity>
+    \end{verbatim}
+\end{enumerate}
+
+=========================================================================================
+\hrule
+
+
+
+=========================================================================================
+\hrule
+
+boxes
+
+\begin{document}
+
+\section*{\textcolor{blue}{React Navigation: Drawer Navigator, Stack Navigator, Tab Navigator}}
+
+React Native me navigation ke liye \textbf{React Navigation} library ka use hota hai. Isme \textbf{Drawer Navigator}, \textbf{Stack Navigator}, aur \textbf{Tab Navigator} kaafi common types hain. Sabka alag purpose hota hai. Niche unka use aur differences explain kiya gaya hai.
+
+\subsection*{\textcolor{red}{1. Stack Navigator}}
+\subsubsection*{Kya karta hai?}
+\begin{itemize}
+    \item Ek screen ke upar doosri screen \textbf{stack} (ek ke baad ek) karta hai, jaise browser me "Back" button kaam karta hai.
+    \item Mostly sequential navigation ke liye use hota hai.
+\end{itemize}
+
+\subsubsection*{Example Code}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!10!white, title=Stack Navigator Example]
+\begin{verbatim}
+import React from 'react';
+import { View, Text, Button } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'; // Stack navigator ko import karte hain.
+import { NavigationContainer } from '@react-navigation/native'; // Navigation container ko import karte hain jo navigation ko wrap karega.
+
+const Stack = createNativeStackNavigator(); // Stack navigator ka ek instance banate hain.
+
+const HomeScreen = ({ navigation }) => (
+  <View>
+    <Text>Yeh Home Screen hai</Text>
+    {/* Home screen ka message dikha rahe hain */}
+    <Button title="Go to Details" onPress={() => navigation.navigate('Details')} />
+    {/* Button dikhta hai, jab press hoga toh 'Details' screen par navigate karega */}
+  </View>
+);
+
+const DetailsScreen = () => (
+  <View>
+    <Text>Yeh Details Screen hai</Text>
+    {/* Details screen ka message dikha rahe hain */}
+  </View>
+);
+
+const App = () => (
+  <NavigationContainer>
+    {/* NavigationContainer se app ko navigation ka context milta hai */}
+    <Stack.Navigator>
+      {/* Stack.Navigator ke andar hum screens define karenge */}
+      <Stack.Screen name="Home" component={HomeScreen} />
+      {/* 'Home' screen ko stack me add karte hain */}
+      <Stack.Screen name="Details" component={DetailsScreen} />
+      {/* 'Details' screen ko stack me add karte hain */}
+    </Stack.Navigator>
+  </NavigationContainer>
+);
+
+export default App;
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection*{Explanation}
+\begin{itemize}
+    \item \textbf{\texttt{createNativeStackNavigator()}}: Stack navigator banata hai jo ek screen ke baad dusri screen ko manage karta hai.
+    \item \textbf{\texttt{NavigationContainer}}: Navigation ko wrap karta hai, jo react-navigation ko use karte waqt zaroori hota hai.
+    \item \textbf{\texttt{Stack.Navigator}}: Yeh stack me multiple screens ko add karne ka kaam karta hai.
+    \item \textbf{\texttt{navigation.navigate('Details')}}: Yeh method 'Details' screen ko stack me push karne ka kaam karta hai.
+\end{itemize}
+
+\subsection*{\textcolor{red}{2. Tab Navigator}}
+\subsubsection*{Kya karta hai?}
+\begin{itemize}
+    \item Neeche ek \textbf{tab bar} banata hai jo alag-alag screens ke beech toggle karne ke liye use hota hai.
+    \item Social media apps jaise Instagram ke liye perfect hota hai.
+\end{itemize}
+
+\subsubsection*{Example Code}
+\begin{tcolorbox}[colframe=green!50!black, colback=green!10!white, title=Tab Navigator Example]
+\begin{verbatim}
+import React from 'react';
+import { View, Text } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; // Tab navigator ko import karte hain.
+import { NavigationContainer } from '@react-navigation/native'; // Navigation container ko import karte hain jo navigation ko wrap karega.
+
+const Tab = createBottomTabNavigator(); // Tab navigator ka ek instance banate hain.
+
+const HomeScreen = () => (
+  <View>
+    <Text>Yeh Home Tab hai</Text>
+    {/* Home tab ka message dikha rahe hain */}
+  </View>
+);
+
+const SettingsScreen = () => (
+  <View>
+    <Text>Yeh Settings Tab hai</Text>
+    {/* Settings tab ka message dikha rahe hain */}
+  </View>
+);
+
+const App = () => (
+  <NavigationContainer>
+    {/* NavigationContainer se app ko navigation ka context milta hai */}
+    <Tab.Navigator>
+      {/* Tab.Navigator ke andar hum tabs define karenge */}
+      <Tab.Screen name="Home" component={HomeScreen} />
+      {/* 'Home' tab ko add karte hain */}
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+      {/* 'Settings' tab ko add karte hain */}
+    </Tab.Navigator>
+  </NavigationContainer>
+);
+
+export default App;
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection*{Explanation}
+\begin{itemize}
+    \item \textbf{\texttt{createBottomTabNavigator()}}: Bottom tab navigator banata hai, jisme neeche tabs dikhte hain.
+    \item \textbf{\texttt{Tab.Navigator}}: Yeh tab ke beech me navigation ko handle karta hai.
+    \item \textbf{\texttt{Tab.Screen}}: Har ek tab ko define karne ka kaam karta hai.
+\end{itemize}
+
+\subsection*{\textcolor{red}{3. Drawer Navigator}}
+\subsubsection*{Kya karta hai?}
+\begin{itemize}
+    \item Ek \textbf{side menu (drawer)} banata hai jo screen ke side se slide kar ke khulta hai.
+    \item Settings ya rarely used screens ke liye perfect hota hai.
+\end{itemize}
+
+\subsubsection*{Example Code}
+\begin{tcolorbox}[colframe=red!50!black, colback=red!10!white, title=Drawer Navigator Example]
+\begin{verbatim}
+import React from 'react';
+import { View, Text } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer'; // Drawer navigator ko import karte hain.
+import { NavigationContainer } from '@react-navigation/native'; // Navigation container ko import karte hain jo navigation ko wrap karega.
+
+const Drawer = createDrawerNavigator(); // Drawer navigator ka instance banate hain.
+
+const HomeScreen = () => (
+  <View>
+    <Text>Yeh Home Drawer hai</Text>
+    {/* Home screen ka message dikha rahe hain */}
+  </View>
+);
+
+const ProfileScreen = () => (
+  <View>
+    <Text>Yeh Profile Drawer hai</Text>
+    {/* Profile screen ka message dikha rahe hain */}
+  </View>
+);
+
+const App = () => (
+  <NavigationContainer>
+    {/* NavigationContainer se app ko navigation ka context milta hai */}
+    <Drawer.Navigator>
+      {/* Drawer.Navigator ke andar hum drawers define karenge */}
+      <Drawer.Screen name="Home" component={HomeScreen} />
+      {/* 'Home' drawer ko add karte hain */}
+      <Drawer.Screen name="Profile" component={ProfileScreen} />
+      {/* 'Profile' drawer ko add karte hain */}
+    </Drawer.Navigator>
+  </NavigationContainer>
+);
+
+export default App;
+\end{verbatim}
+\end{tcolorbox}
+
+\subsubsection*{Explanation}
+\begin{itemize}
+    \item \textbf{\texttt{createDrawerNavigator()}}: Drawer navigator banata hai jo side se slide ho kar screen me appear hota hai.
+    \item \textbf{\texttt{Drawer.Navigator}}: Yeh drawer ke andar screens ko manage karta hai.
+    \item \textbf{\texttt{Drawer.Screen}}: Yeh drawer menu me items ko add karne ka kaam karta hai.
+\end{itemize}
+
+\subsection*{Differences in Simple Words}
+
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Feature} & \textbf{Stack Navigator} & \textbf{Tab Navigator} & \textbf{Drawer Navigator} \\ \hline
+\textbf{Purpose} & Sequential navigation (ek ke baad ek). & Tabs ke beech toggle karna. & Side menu for rarely used screens. \\ 
+\textbf{UI} & Back button ke saath ek stack of screens. & Neeche tab bar dikhai deta hai. & Screen ke side se slide karne wala menu. \\ 
+\textbf{Best For} & Sequential flows (e.g., onboarding). & Frequent switching (e.g., tabs). & Hidden screens (e.g., settings). \\ 
+\textbf{Examples} & Login -> Home -> Details flow. & Instagram-like tabs. & Settings, Profile in side menu. \\ \hline
+\end{tabular}
+
+\subsection*{Real-Life Examples}
+\begin{itemize}
+    \item \textbf{Stack Navigator}: Login flow, onboarding screens.
+    \item \textbf{Tab Navigator}: Social media apps (Instagram, Twitter).
+    \item \textbf{Drawer Navigator}: Hidden settings or admin options.
+\end{itemize}
+
+=========================================================================================
+\hrule
+
+
+
+\begin{document}
+
+\section*{\textcolor{red}{React Native: Toggle Element Inspector}}
+
+\textbf{Toggle Element Inspector} ek debugging tool hai jo \textbf{React Native} me developers ko UI components ke styles aur properties inspect karne me madad karta hai. Iska use karke aap pata kar sakte ho ki kaunsa CSS style apply ho raha hai, kaunsa nahi ho raha hai, aur kaunsa overwrite ho raha hai.
+
+\subsection*{Toggle Element Inspector Kya Hai?}
+\begin{itemize}
+    \item Ye ek \textbf{interactive debugging tool} hai jo aapko React Native app ke UI components inspect karne ki facility deta hai.
+    \item Iske madad se aap styles aur layouts ka detailed information dekh sakte hain.
+\end{itemize}
+
+\subsection*{Features}
+\begin{itemize}
+    \item \textbf{CSS Styles Debugging}:
+        \begin{itemize}
+            \item Jo styles apply ho rahe hain, unka live preview dekh sakte hain.
+        \end{itemize}
+    \item \textbf{Layout Properties}:
+        \begin{itemize}
+            \item Components ke size, position, aur alignment check kar sakte hain.
+        \end{itemize}
+    \item \textbf{Overwriting Issues Solve Karna}:
+        \begin{itemize}
+            \item Ye pata kar sakte hain ki kaunsa style overwrite ho raha hai.
+        \end{itemize}
+\end{itemize}
+
+\subsection*{Toggle Element Inspector Ko Enable Kaise Karein?}
+\begin{enumerate}
+    \item \textbf{Basic Enable Karna}:
+        \begin{itemize}
+            \item App run hone ke baad, \textbf{`Cmd+D` (Mac)} ya \textbf{`Ctrl+M` (Windows/Android)} press karein.
+            \item Menu me se \textbf{"Toggle Element Inspector"} select karein.
+        \end{itemize}
+    \item \textbf{Advanced Tools}:
+        \begin{itemize}
+            \item \textbf{React Developer Tools} ka use karein agar aapko aur zyada insights chahiye.
+        \end{itemize}
+\end{enumerate}
+
+\subsection*{\textcolor{red}{Kaise Pata Karein Ki CSS Style Apply Hua Ya Nahi?}}
+\begin{enumerate}
+    \item \textbf{Inspect Element}:
+        \begin{itemize}
+            \item Inspector enable karke kisi bhi UI component pe tap karein.
+        \end{itemize}
+    \item \textbf{Style Properties Dekhein}:
+        \begin{itemize}
+            \item Inspector me jo properties listed hain, wahi styles apply ho rahi hain.
+        \end{itemize}
+    \item \textbf{Overwriting Issues Find Karein}:
+        \begin{itemize}
+            \item Agar expected style apply nahi hua, to wo kisi aur style se overwrite ho raha ho sakta hai.
+        \end{itemize}
+\end{enumerate}
+
+\subsection*{Example Code (Inspect Style \& Debugging)}
+\begin{tcolorbox}[colframe=blue!50!black, colback=blue!10!white, title=Example Code: React Native Style Debugging]
+\begin{verbatim}
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+const App = () => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Yeh Title Hai</Text>
+      {/* Expected: Red Color aur Font Size 20 */}
+      <Text style={styles.subtitle}>Yeh Subtitle Hai</Text>
+      {/* Expected: Blue Color aur Font Size 18 */}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, // Full screen cover karta hai
+    justifyContent: 'center', // Content ko vertically center karta hai
+    alignItems: 'center', // Content ko horizontally center karta hai
+    backgroundColor: '#f0f0f0', // Light gray background set kiya
+  },
+  title: {
+    fontSize: 20, // Font size set kiya
+    color: 'red', // Text ka color red rakha
+    marginBottom: 10, // Neeche thoda space diya
+  },
+  subtitle: {
+    fontSize: 18, // Font size set kiya
+    color: 'blue', // Text ka color blue rakha
+  },
+});
+
+export default App;
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Debugging Steps}
+\begin{enumerate}
+    \item \textbf{Run the App}:
+        \begin{itemize}
+            \item App run karein aur \textbf{Toggle Element Inspector} enable karein.
+        \end{itemize}
+    \item \textbf{Inspect Title}:
+        \begin{itemize}
+            \item Title (\texttt{Yeh Title Hai}) ko tap karein.
+            \item Inspector me check karein ki \texttt{color: red} aur \texttt{fontSize: 20} visible hai ya nahi.
+        \end{itemize}
+    \item \textbf{Inspect Subtitle}:
+        \begin{itemize}
+            \item Subtitle (\texttt{Yeh Subtitle Hai}) ko tap karein.
+            \item Agar \texttt{fontSize: 18} nahi hai, to code me jaake error fix karein.
+        \end{itemize}
+\end{enumerate}
+
+\subsection*{Common Problems Jo Inspector Solve Kar Sakta Hai}
+\begin{enumerate}
+    \item \textbf{CSS Apply Nahi Hua}:
+        \begin{itemize}
+            \item Style property defined nahi hogi.
+        \end{itemize}
+    \item \textbf{Style Overwritten}:
+        \begin{itemize}
+            \item Higher specificity wali style overwrite kar rahi hogi.
+        \end{itemize}
+    \item \textbf{Invalid Property}:
+        \begin{itemize}
+            \item Galat property likhne se wo ignore ho jati hai.
+        \end{itemize}
+\end{enumerate}
+
+\subsection*{Advanced Debugging with React Developer Tools}
+\begin{enumerate}
+    \item \textbf{Install React Developer Tools}:
+        \begin{itemize}
+            \item \texttt{npm install --save-dev react-devtools}
+        \end{itemize}
+    \item \textbf{Run Developer Tools}:
+        \begin{itemize}
+            \item Run karein aur React Native app ko connect karein.
+        \end{itemize}
+    \item \textbf{Inspect Components}:
+        \begin{itemize}
+            \item Components ke structure aur props ka detail view dekh sakte hain.
+        \end{itemize}
+\end{enumerate}
+
+=========================================================================================
+\hrule
+
+
+
+% Define custom colors
+\definecolor{myblue}{rgb}{0.2, 0.4, 0.8}
+\definecolor{myred}{rgb}{0.8, 0.2, 0.2}
+\definecolor{mygreen}{rgb}{0.2, 0.6, 0.2}
+\definecolor{mypurple}{rgb}{0.6, 0.2, 0.6}
+
+% Set up code listing style
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{myblue},
+    commentstyle=\color{mygreen},
+    stringstyle=\color{mypurple},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny,
+    breaklines=true,
+    frame=single,
+    language=Python
+}
+
+\title{\textbf{Reactotron in React Native: Step-by-Step Guide}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{\textcolor{myblue}{1. Introduction to Reactotron It is a debugger to see Network request and response..}}
+Reactotron ek powerful tool hai jo React Native apps ko debug karne ke liye use hota hai.  
+Ye API requests/responses, state changes, errors, aur logs ko monitor karta hai, jo debugging process ko kaafi easy banata hai.
+
+---
+
+\section*{\textcolor{myblue}{2. Steps to Use Reactotron in a React Native Project}}
+
+\subsection*{\textcolor{myred}{Step 1: Install Required Dependencies}}
+Reactotron aur Reactotron React Native dependencies install karo.
+
+\begin{lstlisting}[language=bash]
+npm install reactotron-react-native
+\end{lstlisting}
+
+---
+
+\subsection*{\textcolor{myred}{Step 2: Configure Reactotron}}
+\textbf{ReactotronConfig.js} file banao aur Reactotron ko configure karo.
+
+\begin{lstlisting}
+// ReactotronConfig.js
+import Reactotron from 'reactotron-react-native';
+
+// Reactotron ko setup kar rahe hain for debugging
+Reactotron.configure({
+  host: '192.168.x.x', // Yaha apke system ka local IP address aayega
+}) 
+  .useReactNative() // React Native plugins ko use karne ke liye
+  .connect(); // Connection establish karte hain
+
+console.tron = Reactotron; // Logs ke liye
+Reactotron.clear(); // Purane logs ko clear karte hain
+\end{lstlisting}
+
+\textcolor{mygreen}{\textbf{Note:}} Replace \texttt{192.168.x.x} apne local IP address se.  
+IP address ko \texttt{ipconfig} (Windows) ya \texttt{ifconfig} (Mac/Linux) se find karein.
+
+---
+
+\subsection*{\textcolor{myred}{Step 3: Import Reactotron in Your Entry File}}
+ReactotronConfig file ko app ke entry point (\texttt{App.js}) me import karein.
+
+\begin{lstlisting}
+// App.js
+import './ReactotronConfig'; // Reactotron import karte hain
+import React from 'react';
+import { View, Text } from 'react-native';
+
+const App = () => {
+  console.tron.log('App started!'); // Logs Reactotron par show honge
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Hello Reactotron!</Text>
+    </View>
+  );
+};
+
+export default App;
+\end{lstlisting}
+
+---
+
+\subsection*{\textcolor{myred}{Step 4: Run Your App}}
+Metro Bundler ke saath app ko run karein.
+
+\begin{lstlisting}[language=bash]
+npx react-native run-android
+\end{lstlisting}
+
+---
+
+\subsection*{\textcolor{myred}{Step 5: Start Reactotron}}
+1. Reactotron ko download karein [Reactotron GitHub Releases](https://github.com/infinitered/reactotron/releases) se.
+2. Reactotron open karein aur ensure karein ki app connect ho raha hai.
+
+---
+
+\section*{\textcolor{myblue}{3. Attach Reactotron to an APK}}
+Reactotron ko real device par use karne ke liye:
+1. Device ko same Wi-Fi par connect karein jisme computer hai.
+2. ReactotronConfig.js me computer ke IP address ko \texttt{host} field me add karein.
+
+---
+
+\section*{\textcolor{myblue}{4. Monitor API Requests and Responses}}
+
+\subsection*{\textcolor{myred}{Step 1: Install Axios Plugin}}
+API requests ke liye Axios install karein.
+
+\begin{lstlisting}[language=bash]
+npm install axios
+\end{lstlisting}
+
+---
+
+\subsection*{\textcolor{myred}{Step 2: Use Reactotron for Monitoring API}}
+Reactotron configuration ko Axios ke liye update karein.
+
+\begin{lstlisting}
+// ReactotronConfig.js
+import Reactotron from 'reactotron-react-native';
+import { reactotronAxios } from 'reactotron-axios';
+
+Reactotron.configure({
+  host: '192.168.x.x', // Computer ka IP address
+})
+  .useReactNative() // React Native plugins
+  .use(reactotronAxios()) // Axios ke requests ko monitor karne ke liye
+  .connect();
+
+console.tron = Reactotron;
+Reactotron.clear();
+\end{lstlisting}
+
+---
+
+\subsection*{\textcolor{myred}{Step 3: Set Up Axios with Reactotron}}
+Axios instance banao aur usse Reactotron ke saath connect karo.
+
+\begin{lstlisting}
+// apiClient.js
+import axios from 'axios';
+
+const apiClient = axios.create({
+  baseURL: 'https://jsonplaceholder.typicode.com', // API base URL
+});
+
+export default apiClient;
+\end{lstlisting}
+
+---
+
+\subsection*{\textcolor{myred}{Step 4: Make an API Call}}
+API ko call karo aur response ko Reactotron par log karo.
+
+\begin{lstlisting}
+// App.js
+import React, { useEffect } from 'react';
+import { View, Text } from 'react-native';
+import apiClient from './apiClient';
+
+const App = () => {
+  useEffect(() => {
+    apiClient.get('/posts').then(response => {
+      console.tron.log(response.data); // Reactotron par response show karein
+    });
+  }, []);
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>API Monitoring with Reactotron</Text>
+    </View>
+  );
+};
+
+export default App;
+\end{lstlisting}
+
+---
+
+\section*{\textcolor{myblue}{Summary}}
+\begin{enumerate}
+    \item \textcolor{myred}{Reactotron Setup:}
+    \begin{itemize}
+        \item Install \texttt{reactotron-react-native}.
+        \item Configure with \texttt{ReactotronConfig.js}.
+        \item Add \texttt{.connect()} for real-time debugging.
+    \end{itemize}
+
+    \item \textcolor{myred}{Debugging:}
+    \begin{itemize}
+        \item Use \texttt{console.tron.log()} for logs.
+        \item Monitor API calls using Axios plugin.
+    \end{itemize}
+
+    \item \textcolor{myred}{Real Device Debugging:}
+    \begin{itemize}
+        \item Use your computer's IP in \texttt{ReactotronConfig.js}.
+        \item Ensure device and computer are on the same network.
+    \end{itemize}
+\end{enumerate}
+
+
+
+=========================================================================================
+\hrule
+
+
+\pagestyle{empty}
+
+\definecolor{lightblue}{rgb}{0.678, 0.847, 0.902}
+\definecolor{lightgreen}{rgb}{0.564, 0.933, 0.564}
+
+\lstset{
+  language=JavaScript,
+  backgroundcolor=\color{lightgray},
+  basicstyle=\footnotesize\ttfamily,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{black},
+  captionpos=b,
+}
+
+\begin{document}
+
+\section*{\huge \textbf{React Native Components and Examples}}
+
+\textbf{\huge 1. ImageBackground}
+
+\underline{\textbf{Kya hai?}}  
+Yeh ek React Native ka component hai jo kisi image ko poore screen ya ek section ka background banane ke liye use hota hai. Iske andar aap aur components add kar sakte ho, jaise \texttt{Text}, \texttt{Button}, etc.  
+Normal \texttt{View} ke background set karne se better lagta hai, kyunki yeh image ko full stretch ya resize kar sakta hai.
+
+\textbf{Example:}  
+Splash screen ya kisi profile page ka decorative background banane ke liye.
+
+\begin{lstlisting}[caption={ImageBackground Example}]
+import React from 'react';
+import { StyleSheet, ImageBackground, Text } from 'react-native';
+
+const App = () => {
+  return (
+    <ImageBackground
+      source={{ uri: 'https://example.com/background.jpg' }} // Background image ka link
+      style={styles.background}>
+      <Text style={styles.text}>Welcome to My App!</Text> {/* Text on the background */}
+    </ImageBackground>
+  );
+};
+
+const styles = StyleSheet.create({
+  background: {
+    flex: 1, // Poore screen ko cover karega
+    justifyContent: 'center', // Content center mein align hoga
+    alignItems: 'center',
+  },
+  text: {
+    color: 'white', // Text ka color white hoga
+    fontSize: 24, // Text ka size
+  },
+});
+
+export default App;
+\end{lstlisting}
+
+\textbf{Yeh kya karega?}  
+Image poore screen ka background banegi, aur \textit{"Welcome to My App!"} text uske upar center mein dikhayega.
+
+\hrulefill
+
+\textbf{\huge 2. RNPickerSelect}
+
+\underline{\textbf{Kya hai?}}  
+Dropdown ya picker banane ke liye ek library. User ko options choose karne dena ho toh yeh kaam aata hai. React Native ka default picker thoda limited hota hai, isliye \texttt{RNPickerSelect} zyada flexible aur stylish hota hai.
+
+\underline{\textbf{Install karne ke steps:}}  
+\begin{lstlisting}[language=bash]
+npm install react-native-picker-select
+\end{lstlisting}
+
+\textbf{Example:} User ko fruits choose karne dena:
+
+\begin{lstlisting}[caption={RNPickerSelect Example}]
+import React from 'react';
+import RNPickerSelect from 'react-native-picker-select';
+
+const App = () => {
+  return (
+    <RNPickerSelect
+      onValueChange={(value) => console.log(value)} // Value select hone par callback chalega
+      items={[
+        { label: 'Apple', value: 'apple' },
+        { label: 'Banana', value: 'banana' },
+        { label: 'Orange', value: 'orange' },
+      ]}
+      placeholder={{ label: 'Select a fruit', value: null }} // Placeholder text
+    />
+  );
+};
+
+export default App;
+\end{lstlisting}
+
+\textbf{Yeh kya karega?}  
+Dropdown banayega jisme \textit{"Apple," "Banana," aur "Orange"} options honge. User ne jo select kiya, uska value console mein print hoga.
+
+\hrulefill
+
+\textbf{\huge 3. useFocusEffect}
+
+\underline{\textbf{Kya hai?}}  
+React Navigation ka ek hook hai jo tab run hota hai jab koi screen visible hoti hai (focus hoti hai).  
+Agar aapko data fetch karna ho ya koi effect run karna ho jab screen open ho, toh yeh use hota hai.
+
+\textbf{Example:} Console mein message show karna jab screen focus ho.
+
+\begin{lstlisting}[caption={useFocusEffect Example}]
+import React from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { View, Text } from 'react-native';
+
+const Screen = () => {
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log('Screen is focused'); // Jab screen dikhegi
+      return () => console.log('Screen is unfocused'); // Jab screen chhup jayegi
+    }, [])
+  );
+
+  return (
+    <View>
+      <Text>Focus Effect Example</Text>
+    </View>
+  );
+};
+
+export default Screen;
+\end{lstlisting}
+
+\textbf{Yeh kya karega?}  
+\textit{"Screen is focused"} message tab print hoga jab screen dikhegi, aur \textit{"Screen is unfocused"} tab hoga jab screen chhup jayegi.
+
+\hrulefill
+
+\textbf{\huge 4. NavigationContainer}
+
+\underline{\textbf{Kya hai?}}  
+React Navigation ka root component hai jo app ke navigation ko manage karta hai. Iske andar aap navigators, jaise Stack ya Tab, ko rakhte ho.
+
+\textbf{Example:} Basic navigation setup.
+
+\begin{lstlisting}[caption={NavigationContainer Example}]
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      {/* Add navigators here */}
+    </NavigationContainer>
+  );
+};
+
+export default App;
+\end{lstlisting}
+
+\textbf{Yeh kya karega?}  
+Navigation enable karega aur aap yahan Stack ya Tab navigators add kar sakte ho.
+
+\hrulefill
+
+\textbf{\huge 5. GestureHandlerRootView}
+
+\underline{\textbf{Kya hai?}}  
+React Native Gesture Handler ke liye ek wrapper. Iske bina gestures (jaise swipe, drag) properly kaam nahi karenge.
+
+\textbf{Example:} Gesture ko enable karna:
+
+\begin{lstlisting}[caption={GestureHandlerRootView Example}]
+import React from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+const App = () => {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      {/* Add components with gestures */}
+    </GestureHandlerRootView>
+  );
+};
+
+export default App;
+\end{lstlisting}
+
+\textbf{Yeh kya karega?}  
+Gestures ko properly handle karega.
+
+\hrulefill
+
+\textbf{\huge 6. SafeAreaView}
+
+\underline{\textbf{Kya hai?}}  
+Ek wrapper jo content ko screen ke safe area mein rakhne ke liye use hota hai. Notch ya status bar se content overlap hone se bachaata hai.
+
+\textbf{Example:}
+
+\begin{lstlisting}[caption={SafeAreaView Example}]
+import React from 'react';
+import { SafeAreaView, Text } from 'react-native';
+
+const App = () => {
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Text>Safe Area Content</Text>
+    </SafeAreaView>
+  );
+};
+
+export default App;
+\end{lstlisting}
+
+\textbf{Yeh kya karega?}  
+Text safe area ke andar dikhega.
+
+\hrulefill
+
+\textbf{\huge 7. StatusBar}
+
+\underline{\textbf{Kya hai?}}  
+Phone ke status bar ko customize karne ke liye use hota hai. Background color aur text style change kar sakte ho.
+
+\textbf{Example:}
+
+\begin{lstlisting}[caption={StatusBar Example}]
+import React from 'react';
+import { StatusBar, View } from 'react-native';
+
+const App = () => {
+  return (
+    <View style={{ flex: 1 }}>
+      <StatusBar backgroundColor="blue" barStyle="light-content" />
+    </View>
+  );
+};
+
+export default App;
+\end{lstlisting}
+
+\textbf{Yeh kya karega?}  
+Status bar ka background blue hoga aur text white dikhega.
+
+\hrulefill
+
+\textbf{\huge 8. Toast}
+
+\underline{\textbf{Kya hai?}}  
+Short message show karne ke liye use hota hai, jo kuch seconds ke baad dismiss ho jata hai.
+
+\underline{\textbf{Install:}}  
+\begin{lstlisting}[language=bash]
+npm install react-native-toast-message
+\end{lstlisting}
+
+\textbf{Example:}
+
+\begin{lstlisting}[caption={Toast Example}]
+import React from 'react';
+import { Button, View } from 'react-native';
+import Toast from 'react-native-toast-message';
+
+const App = () => {
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Success',
+      text2: 'Your action was successful!',
+    });
+  };
+
+  return (
+    <View>
+      <Button title="Show Toast" onPress={showToast} />
+      <Toast />
+    </View>
+  );
+};
+
+export default App;
+\end{lstlisting}
+
+\textbf{Yeh kya karega?}  
+Ek success message dikhayega, jo kuch seconds baad automatically dismiss ho jayega.
+
+=========================================================================================
+\hrule
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

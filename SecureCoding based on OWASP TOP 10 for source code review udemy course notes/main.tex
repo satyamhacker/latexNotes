@@ -1,0 +1,4006 @@
+\documentclass[a4paper, 12pt]{article}
+
+% Packages
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{amssymb}
+
+% Layout
+\geometry{a4paper, margin=1in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% Colors
+\definecolor{sectionblue}{RGB}{0, 0, 255}
+\definecolor{importantred}{RGB}{255, 0, 0}
+\definecolor{keyconceptgreen}{RGB}{0, 128, 0}
+\definecolor{codegray}{RGB}{240, 240, 240}
+\definecolor{keywordblue}{RGB}{0, 0, 255}
+\definecolor{stringred}{RGB}{255, 0, 0}
+\definecolor{commentgreen}{RGB}{0, 128, 0}
+\definecolor{functionorange}{RGB}{255, 165, 0}
+\definecolor{variablepurple}{RGB}{128, 0, 128}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{sectionblue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{sectionblue}}
+  {\thesubsection}{1em}{}
+
+% Custom JavaScript language definition for listings
+\lstdefinelanguage{JavaScript}{
+  keywords={const, let, var, if, else, return, function, require, module.exports},
+  keywordstyle=\color{keywordblue},
+  comment=[l]{//},
+  commentstyle=\color{commentgreen},
+  string=[b]{"},
+  stringstyle=\color{stringred},
+  identifierstyle=\color{variablepurple},
+  functionstyle=\color{functionorange},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"""
+}
+
+% Code listing setup
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  tabsize=2,
+  language=JavaScript % Default language for code snippets
+}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Broken Access Control in Express.js}
+\lhead{\leftmark}
+\rfoot{Page \thepage}
+
+% Document start
+\begin{document}
+
+\section*{\textbf{\LARGE \textcolor{violet}{
+Owasp top10 secure coding 
+and How to do Source code review NOtes...
+}}}
+
+% Title
+\title{\textbf{\color{sectionblue}Broken Access Control in Express.js}}
+\author{Bug Bounty Hunter}
+\date{\today}
+\maketitle
+
+% Introduction
+\section{Introduction}
+Alright, bhai! Let's dive into this topic step-by-step. Since you're a source code reviewer, bug bounty hunter, aur certified ethical hacker, we'll make sure you get solid examples of \textbf{\color{importantred}vulnerable code} aur \textbf{\color{keyconceptgreen}secure code} in Express.js, specifically for \textbf{\color{importantred}Broken Access Control} from the OWASP Top 10. I'll explain everything in Hinglish so it's easy to samajh and you can use it in your job to find flaws aur secure websites like a pro.
+
+\section{Broken Access Control Kya Hai?}
+Broken Access Control hota hai jab koi user ya attacker aisa data ya functionality access kar leta hai jiska usko permission nahi hona chahiye. For example, ek normal user admin ka dashboard dekh le ya kisi aur user ka private data edit kar de. Yeh problem tab aati hai jab code mein proper checks nahi hote.
+
+\textbf{\color{importantred}Chhota Example:}
+\begin{itemize}
+    \item Ek website pe \texttt{/user/profile} endpoint hai jo sirf logged-in user ka data dikhana chahiye.
+    \item Lekin agar koi attacker \texttt{/user/profile?userId=123} mein \texttt{userId} change karke dusre user ka data dekh le, toh yeh Broken Access Control hai.
+\end{itemize}
+
+Ab main tumhe \textbf{\color{importantred}vulnerable code} aur \textbf{\color{keyconceptgreen}secure code} side-by-side dikhaunga Express.js mein, with explanations.
+
+\section{Example 1: User Profile Access}
+\subsection{Vulnerable Code:}
+\begin{lstlisting}[caption={Vulnerable User Profile Endpoint}]
+const express = require('express');
+const app = express();
+
+app.get('/user/profile', (req, res) => {
+  const userId = req.query.userId; // Attacker yahan userId change kar sakta hai
+  // Database se data fetch kar rahe hain bina check ke
+  const userData = { id: userId, name: "Test User", email: "test@example.com" }; 
+  res.json(userData);
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Yeh code \texttt{req.query.userId} direct le raha hai aur koi check nahi kar raha ki current logged-in user ka ID match karta hai ya nahi.
+    \item \textbf{\color{importantred}Attacker} bas URL mein \texttt{?userId=999} daal kar kisi bhi user ka data dekh sakta hai.
+    \item No authentication ya authorization check hai.
+\end{itemize}
+
+\subsection{Secure Code:}
+\begin{lstlisting}[caption={Secure User Profile Endpoint}]
+const express = require('express');
+const app = express();
+
+// Dummy function for logged-in user
+const getCurrentUser = (req) => {
+  return { id: 1, name: "Logged User" }; // Yeh session ya token se aayega real mein
+};
+
+app.get('/user/profile', (req, res) => {
+  const currentUser = getCurrentUser(req); // Current logged-in user ka data
+  const requestedUserId = parseInt(req.query.userId);
+
+  // Check karo ki requested userId current user se match karta hai ya nahi
+  if (currentUser.id !== requestedUserId) {
+    return res.status(403).json({ error: 'Access denied, bhai!' });
+  }
+
+  const userData = { id: requestedUserId, name: "Test User", email: "test@example.com" };
+  res.json(userData);
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Secure Hai?}
+\begin{itemize}
+    \item Ab code check karta hai ki jo \texttt{userId} request mein aaya hai, woh current logged-in user ka ID hai ya nahi.
+    \item Agar match nahi karta, toh \textbf{\color{importantred}403 (Forbidden)} response bhejta hai.
+    \item Isse attacker dusre user ka data nahi dekh sakta.
+\end{itemize}
+
+\section{Example 2: Admin Dashboard Access}
+\subsection{Vulnerable Code:}
+\begin{lstlisting}[caption={Vulnerable Admin Dashboard}]
+const express = require('express');
+const app = express();
+
+app.get('/admin/dashboard', (req, res) => {
+  // Koi role check nahi hai, bas endpoint hit karne se admin dashboard dikh raha hai
+  res.send('Welcome to Admin Dashboard, sab kuch dikhta hai!');
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Yeh code kisi bhi user ko \texttt{/admin/dashboard} pe jaane deta hai bina yeh check kiye ki woh admin hai ya nahi.
+    \item \textbf{\color{importantred}Attacker} bas URL hit karke admin panel access kar sakta hai.
+\end{itemize}
+
+\subsection{Secure Code:}
+\begin{lstlisting}[caption={Secure Admin Dashboard with Middleware}]
+const express = require('express');
+const app = express();
+
+// Dummy function for logged-in user
+const getCurrentUser = (req) => {
+  return { id: 1, role: "user" }; // Real mein yeh session ya JWT se aayega
+};
+
+const isAdmin = (req, res, next) => {
+  const currentUser = getCurrentUser(req);
+  if (currentUser.role !== 'admin') {
+    return res.status(403).json({ error: 'Tu admin nahi hai, bhai!' });
+  }
+  next(); // Agar admin hai toh aage badho
+};
+
+app.get('/admin/dashboard', isAdmin, (req, res) => {
+  res.send('Welcome to Admin Dashboard, sirf admin ke liye!');
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Secure Hai?}
+\begin{itemize}
+    \item \texttt{isAdmin} middleware check karta hai ki user ka role "admin" hai ya nahi.
+    \item Agar nahi hai, toh \textbf{\color{importantred}403 error} bhejta hai.
+    \item Sirf admin role wale users hi dashboard dekh sakte hain.
+\end{itemize}
+
+\section{Example 3: Rate Limiting (Broken Access Control Prevention)}
+\subsection{Vulnerable Code:}
+\begin{lstlisting}[caption={Vulnerable Login Endpoint}]
+const express = require('express');
+const app = express();
+
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  // Koi rate limit nahi, attacker infinite requests bhej sakta hai
+  if (username === 'admin' && password === 'pass123') {
+    res.json({ message: 'Login successful' });
+  } else {
+    res.status(401).json({ error: 'Galat credentials' });
+  }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Isme koi rate limiting nahi hai, toh attacker \textbf{\color{importantred}brute force attack} kar sakta hai aur infinite login attempts bhej sakta hai.
+    \item Yeh Broken Access Control ko allow karta hai kyunki koi protection nahi hai against excessive requests.
+\end{itemize}
+
+\subsection{Secure Code:}
+\begin{lstlisting}[caption={Secure Login with Rate Limiting}]
+const express = require('express');
+const rateLimit = require('express-rate-limit'); // Rate limiting ke liye package
+const app = express();
+
+// Rate limit setup: 5 requests per IP in 15 minutes
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // 5 requests allowed
+  message: 'Bhai, bahut zyada requests bhej raha hai, thodi der ruk!'
+});
+
+app.post('/login', loginLimiter, (req, res) => {
+  const { username, password } = req.body;
+  if (username === 'admin' && password === 'pass123') {
+    res.json({ message: 'Login successful' });
+  } else {
+    res.status(401).json({ error: 'Galat credentials' });
+  }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Secure Hai?}
+\begin{itemize}
+    \item \texttt{express-rate-limit} package use kiya gaya hai jo har IP ke liye 15 minute mein sirf 5 requests allow karta hai.
+    \item Agar attacker zyada requests bhejta hai, toh woh block ho jayega aur \textbf{\color{importantred}"Too Many Requests"} message milega.
+    \item Yeh brute force attacks ko rokta hai aur access control ko strong banata hai.
+\end{itemize}
+
+\section{Broken Access Control Ko Rokne Ke Methods}
+\begin{itemize}
+    \item \textbf{\color{keyconceptgreen}Authentication \& Authorization:}
+    \begin{itemize}
+        \item Har sensitive endpoint pe check karo ki user authenticated hai aur uska role ya permission sahi hai.
+        \item Example: \texttt{isAdmin} middleware jaise upar use kiya.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}Rate Limiting:}
+    \begin{itemize}
+        \item \texttt{express-rate-limit} jaise tools se limit lagao taaki attacker excessive requests na bhej sake.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}CAPTCHA:}
+    \begin{itemize}
+        \item Login ya sensitive actions pe CAPTCHA add karo taaki bots automate na kar sake.
+        \item Example: Google reCAPTCHA integrate kar sakte ho.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}IP-Based Rate Limiting:}
+    \begin{itemize}
+        \item Har IP ke liye request count track karo aur limit exceed hone pe block kar do (upar wala code dekho).
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}Session Management:}
+    \begin{itemize}
+        \item Valid session ya JWT token check karo har request pe.
+    \end{itemize}
+\end{itemize}
+
+\section{Rate Limit Attack Ko Express.js Mein Kaise Bachayein?}
+\begin{itemize}
+    \item \textbf{\color{keyconceptgreen}Step 1:} \texttt{express-rate-limit} install karo:
+    \begin{lstlisting}[language=bash]
+npm install express-rate-limit
+    \end{lstlisting}
+    
+    \item \textbf{\color{keyconceptgreen}Step 2:} Upar wale secure code jaise configure karo:
+    \begin{itemize}
+        \item \texttt{windowMs}: Time window define karo (e.g., 15 minutes).
+        \item \texttt{max}: Max requests allowed in that window.
+        \item Custom message ya status code set karo.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}Step 3:} Redis ya database ke saath integrate karo agar distributed system hai, taaki memory-based limit crash na kare.
+\end{itemize}
+
+\textbf{\color{importantred}Example Output:}
+\begin{itemize}
+    \item Agar koi 5 se zyada requests bhejta hai 15 minute mein, toh response aayega:
+    \begin{lstlisting}[language=json]
+{ "message": "Bhai, bahut zyada requests bhej raha hai, thodi der ruk!" }
+    \end{lstlisting}
+\end{itemize}
+
+===============================
+===============================
+\hrule
+
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% Colors
+\definecolor{sectionblue}{RGB}{0, 0, 255}
+\definecolor{importantred}{RGB}{255, 0, 0}
+\definecolor{keyconceptgreen}{RGB}{0, 128, 0}
+\definecolor{codegray}{RGB}{240, 240, 240}
+\definecolor{keywordblue}{RGB}{0, 0, 255}
+\definecolor{stringred}{RGB}{255, 0, 0}
+\definecolor{commentgreen}{RGB}{0, 128, 0}
+\definecolor{functionorange}{RGB}{255, 165, 0}
+\definecolor{variablepurple}{RGB}{128, 0, 128}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{sectionblue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{sectionblue}}
+  {\thesubsection}{1em}{}
+
+% Custom JavaScript language definition for listings
+\lstdefinelanguage{JavaScript}{
+  keywords={const, let, var, if, else, return, function, require, module.exports, crypto, express, app, post, get, listen, json, status, update, final, createCipher, createCipheriv, randomBytes, toString, digest, hash, bcrypt},
+  keywordstyle=\color{keywordblue},
+  comment=[l]{//},
+  commentstyle=\color{commentgreen},
+  string=[b]{"},
+  stringstyle=\color{stringred},
+  identifierstyle=\color{variablepurple},
+  functionstyle=\color{functionorange},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"""
+}
+
+% Code listing setup
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  tabsize=2,
+  language=JavaScript % Default language for code snippets
+}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Cryptographic Failures in Express.js}
+\lhead{\leftmark}
+\rfoot{Page \thepage}
+
+% Document start
+\begin{document}
+
+\section*{\textbf{\LARGE \textcolor{violet}{Cryptographic Failures in Express.js}}}
+
+
+
+% Introduction
+\section{Introduction}
+Alright, bhai! Let's dive into \textbf{\color{sectionblue}Cryptographic Failures} from the OWASP Top 10. Main tujhe is topic ko Hinglish mein samjhaunga, with vulnerable aur secure code examples in Express.js, aur har cheez ko break down karke bataunga taaki tu apne job mein source code review aur ethical hacking mein pro ban jaye. Topic hai \textbf{\color{importantred}Cryptographic Failures}, aur isme weak algorithms, improper key management, aur inadequate encryption practices cover karenge. Chalo shuru karte hain!
+
+\section{Cryptographic Failures Kya Hai?}
+Cryptographic Failures tab hote hain jab aapka code sensitive data ko protect karne mein fail ho jata hai kyunki aap weak ya outdated encryption use kar rahe ho, keys ko galat tarike se manage kar rahe ho, ya data ko properly encrypt nahi kar rahe ho. Isse attacker data ko crack kar sakta hai, eavesdrop kar sakta hai, ya unauthorized access le sakta hai.
+
+\textbf{\color{importantred}Examples:}
+\begin{itemize}
+    \item Agar tum MD5 ya SHA-1 jaise purane algorithms use karte ho, toh attacker inhe tod sakta hai.
+    \item Agar keys code mein hard-coded hain ya insecure jagah pe store hain, toh koi bhi unhe chura sakta hai.
+    \item Agar data encryption weak hai ya transmission ke waqt encrypt nahi hota, toh data leak ho sakta hai.
+\end{itemize}
+
+Ab main tujhe \textbf{\color{importantred}vulnerable code} aur \textbf{\color{keyconceptgreen}secure code} dikhaunga, with reasons.
+
+\section{Example 1: Weak Cipher Usage}
+\subsection{Vulnerable Code:}
+\begin{lstlisting}[caption={Vulnerable Encryption Using DES}]
+const express = require('express');
+const crypto = require('crypto');
+const app = express();
+
+app.post('/encrypt', (req, res) => {
+  const data = req.body.secret;
+  const key = 'mysecretkey12345'; // Weak key
+  const cipher = crypto.createCipher('des', key); // DES is outdated aur weak
+  let encrypted = cipher.update(data, 'utf8', 'hex');
+  encrypted += cipher.final('hex');
+  res.json({ encrypted });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Yeh code \textbf{\color{importantred}DES} (Data Encryption Standard) use kar raha hai, jo ab outdated aur weak mana jata hai kyunki iski key size chhoti hai (56-bit) aur modern hardware se easily crack ho sakta hai.
+    \item Key bhi weak hai (\texttt{mysecretkey12345}) aur predictable hai.
+    \item \textbf{\color{importantred}Attacker} is encrypted data ko brute force ya cryptographic attacks se decrypt kar sakta hai.
+\end{itemize}
+
+\subsection{Secure Code:}
+\begin{lstlisting}[caption={Secure Encryption Using AES-256}]
+const express = require('express');
+const crypto = require('crypto');
+const app = express();
+
+app.post('/encrypt', (req, res) => {
+  const data = req.body.secret;
+  const key = crypto.randomBytes(32); // 256-bit strong key
+  const iv = crypto.randomBytes(16); // Initialization vector for randomness
+  const cipher = crypto.createCipheriv('aes-256-cbc', key, iv); // AES-256 strong cipher
+  let encrypted = cipher.update(data, 'utf8', 'hex');
+  encrypted += cipher.final('hex');
+  res.json({ encrypted, iv: iv.toString('hex'), key: key.toString('hex') }); // IV aur key bhej rahe hain (real mein secure storage mein rakhna)
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Secure Hai?}
+\begin{itemize}
+    \item \textbf{\color{keyconceptgreen}AES-256-CBC} use kiya jo ek modern aur strong encryption algorithm hai.
+    \item Key 256-bit ka hai aur \texttt{crypto.randomBytes} se randomly generate kiya gaya hai, toh predictable nahi hai.
+    \item \textbf{\color{keyconceptgreen}IV (Initialization Vector)} add kiya gaya taaki har encryption unique ho, even agar same data ho.
+    \item Yeh brute force aur cryptographic attacks ke against resistant hai.
+\end{itemize}
+
+\section{Example 2: Hardcoded Keys}
+\subsection{Vulnerable Code:}
+\begin{lstlisting}[caption={Vulnerable Hardcoded Key}]
+const express = require('express');
+const crypto = require('crypto');
+const app = express();
+
+const SECRET_KEY = 'hardcoded123'; // Hard-coded key, bhai yeh galat hai!
+
+app.post('/encrypt', (req, res) => {
+  const data = req.body.secret;
+  const iv = crypto.randomBytes(16);
+  const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(SECRET_KEY), iv);
+  let encrypted = cipher.update(data, 'utf8', 'hex');
+  encrypted += cipher.final('hex');
+  res.json({ encrypted });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item \textbf{\color{importantred}Hard-coded key} (\texttt{SECRET\_KEY}) code mein likha hai, jo kisi bhi developer ya attacker ko source code dekhne pe mil jayega.
+    \item Key chhota aur weak hai (\texttt{hardcoded123}), toh guess karna ya brute force karna aasan hai.
+    \item Agar key leak ho gaya, toh saara encrypted data compromise ho jayega.
+\end{itemize}
+
+\subsection{Secure Code:}
+\begin{lstlisting}[caption={Secure Key Management Using .env}]
+const express = require('express');
+const crypto = require('crypto');
+require('dotenv').config(); // .env file se key load karne ke liye
+const app = express();
+
+app.post('/encrypt', (req, res) => {
+  const data = req.body.secret;
+  const key = Buffer.from(process.env.SECRET_KEY, 'hex'); // .env se strong key load karo
+  const iv = crypto.randomBytes(16);
+  const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
+  let encrypted = cipher.update(data, 'utf8', 'hex');
+  encrypted += cipher.final('hex');
+  res.json({ encrypted, iv: iv.toString('hex') });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Setup for .env:}
+\begin{itemize}
+    \item \texttt{npm install dotenv} karo.
+    \item \texttt{.env} file banao aur usme likho:
+    \begin{lstlisting}[language=bash]
+SECRET_KEY=your_random_32_byte_key_in_hex_here
+    \end{lstlisting}
+    (Key generate karne ke liye: \texttt{crypto.randomBytes(32).toString('hex')})
+\end{itemize}
+
+\subsection{Kyun Secure Hai?}
+\begin{itemize}
+    \item Key ab hard-coded nahi hai, balki \textbf{\color{keyconceptgreen}.env} file se load ho raha hai, jo source code mein nahi dikhta.
+    \item Key strong hai (32 bytes = 256-bit) aur randomly generated hai.
+    \item \texttt{.env} file ko gitignore karo taaki repo mein upload na ho, aur production mein secure vault (jaise AWS Secrets Manager) use karo.
+\end{itemize}
+
+\section{Example 3: Securing Hashing Algorithm}
+\subsection{Vulnerable Code:}
+\begin{lstlisting}[caption={Vulnerable MD5 Hashing}]
+const express = require('express');
+const crypto = require('crypto');
+const app = express();
+
+app.post('/register', (req, res) => {
+  const { password } = req.body;
+  const hash = crypto.createHash('md5').update(password).digest('hex'); // MD5 weak hai
+  res.json({ message: 'User registered', hash });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item \textbf{\color{importantred}MD5} use kiya gaya jo ek outdated aur insecure hashing algorithm hai.
+    \item MD5 mein collision attacks possible hain (2 alag inputs se same hash ban sakta hai).
+    \item Yeh fast hai, toh brute force karna aasan hai, aur passwords ko crack karna simple ho jata hai.
+\end{itemize}
+
+\subsection{Secure Code:}
+\begin{lstlisting}[caption={Secure Password Hashing with Bcrypt}]
+const express = require('express');
+const bcrypt = require('bcrypt');
+const app = express();
+
+app.post('/register', async (req, res) => {
+  const { password } = req.body;
+  const saltRounds = 10;
+  const hash = await bcrypt.hash(password, saltRounds); // Bcrypt strong hai
+  res.json({ message: 'User registered', hash });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Setup:}
+\begin{itemize}
+    \item \texttt{npm install bcrypt} karo.
+\end{itemize}
+
+\subsection{Kyun Secure Hai?}
+\begin{itemize}
+    \item \textbf{\color{keyconceptgreen}Bcrypt} use kiya jo password hashing ke liye specially designed hai.
+    \item Yeh salt automatically add karta hai, toh har baar same password ka alag hash banta hai.
+    \item Computationally intensive hai, toh brute force attacks mushkil ho jate hain.
+\end{itemize}
+
+\section{Cryptographic Failures Prevention Guide}
+\begin{itemize}
+    \item \textbf{\color{keyconceptgreen}Strong Encryption:}
+    \begin{itemize}
+        \item AES-256 jaise modern algorithms use karo, purane jaise DES ya MD5 avoid karo.
+        \item IV (Initialization Vector) use karo taaki encryption unique rahe.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}Secure Key Management:}
+    \begin{itemize}
+        \item Keys ko hard-code mat karo, \texttt{.env} ya secure vaults (AWS Secrets Manager, HashiCorp Vault) mein store karo.
+        \item Keys ko regularly rotate karo (har 6 mahine ya saal mein).
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}Hashing Ke Liye Bcrypt:}
+    \begin{itemize}
+        \item Passwords ke liye \textbf{bcrypt} use karo kyunki yeh salt add karta hai aur slow hai, jo security ke liye acha hai.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}Random Values:}
+    \begin{itemize}
+        \item Secure random values ke liye \texttt{crypto.randomBytes()} ya \texttt{secrets.token\_hex()} use karo, \texttt{random.randint()} avoid karo kyunki woh predictable hai.
+    \end{itemize}
+\end{itemize}
+
+\section{Algorithms Explained in Hinglish}
+\begin{itemize}
+    \item \textbf{\color{keyconceptgreen}hashlib.sha256(), hashlib.sha3\_256(), hashlib.sha3:}
+    \begin{itemize}
+        \item Yeh cryptographic hash functions hain jo data integrity check ke liye theek hain, lekin passwords ke liye nahi kyunki inme salt nahi hota aur fast hote hain.
+        \item SHA-256 aur SHA-3 abhi secure hain, lekin bcrypt se kam strong password hashing ke liye.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}bcrypt:}
+    \begin{itemize}
+        \item Password hashing ke liye best hai kyunki yeh salt add karta hai aur slow hai, toh brute force mushkil ho jata hai.
+        \item Har baar same password ka alag hash banata hai.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}secrets.token\_hex(x):}
+    \begin{itemize}
+        \item Yeh Node.js ke \texttt{crypto} module ka part hai, secure random tokens banata hai (e.g., \texttt{crypto.randomBytes(16).toString('hex')}).
+        \item Yeh keys ya tokens ke liye acha hai.
+    \end{itemize}
+    
+    \item \textbf{\color{importantred}Insecure Methods:}
+    \begin{itemize}
+        \item \texttt{hashlib.md5()}: Yeh purana hai aur collision attacks ka shikaar ho sakta hai (2 alag inputs se same hash). Passwords ya signatures ke liye bilkul mat use karo.
+        \item \texttt{hashlib.sha1()}: Yeh bhi outdated hai, collisions possible hain, aur ab secure protocols mein deprecated hai.
+        \item \texttt{random.randint()}: Yeh cryptographic random nahi hai, predictable values deta hai, toh salt ya keys ke liye bekaar hai.
+    \end{itemize}
+\end{itemize}
+
+===============================
+===============================
+\hrule
+
+
+
+
+
+
+% Colors
+\definecolor{sectionblue}{RGB}{0, 0, 255}
+\definecolor{importantred}{RGB}{255, 0, 0}
+\definecolor{keyconceptgreen}{RGB}{0, 128, 0}
+\definecolor{codegray}{RGB}{240, 240, 240}
+\definecolor{keywordblue}{RGB}{0, 0, 255}
+\definecolor{stringred}{RGB}{255, 0, 0}
+\definecolor{commentgreen}{RGB}{0, 128, 0}
+\definecolor{functionorange}{RGB}{255, 165, 0}
+\definecolor{variablepurple}{RGB}{128, 0, 128}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{sectionblue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{sectionblue}}
+  {\thesubsection}{1em}{}
+
+% Custom JavaScript language definition for listings
+\lstdefinelanguage{JavaScript}{
+  keywords={const, let, var, if, else, return, function, require, module.exports, express, app, post, get, listen, json, status, query, exec, execFile, mysql, createConnection, xml2js, parseString, multer, path, v4, uuidv4},
+  keywordstyle=\color{keywordblue},
+  comment=[l]{//},
+  commentstyle=\color{commentgreen},
+  string=[b]{"},
+  stringstyle=\color{stringred},
+  identifierstyle=\color{variablepurple},
+  functionstyle=\color{functionorange},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"""
+}
+
+% Code listing setup
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  tabsize=2,
+  language=JavaScript % Default language for code snippets
+}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Injections in Express.js}
+\lhead{\leftmark}
+\rfoot{Page \thepage}
+
+% Document start
+\begin{document}
+
+\section*{\textbf{\LARGE \textcolor{violet}{Injections}}}
+
+
+
+% Introduction
+\section{Injections Kya Hai?}
+Injections tab hote hain jab attacker user input ke through malicious code daal deta hai jo backend pe execute ho jata hai. Yeh sensitive data chura sakta hai, system ko hack kar sakta hai, ya pura database delete kar sakta hai. Common injections hain:
+\begin{itemize}
+    \item \textbf{\color{importantred}SQL Injection}: Database queries mein malicious SQL daal dena.
+    \item \textbf{\color{importantred}Command Injection}: System commands execute karwana.
+    \item \textbf{\color{importantred}XML/LDAP Injection}: XML ya LDAP queries ko manipulate karna.
+\end{itemize}
+
+\textbf{\color{importantred}Example}: Agar ek login form mein user input \texttt{username} ya \texttt{password} ke jagah \texttt{' OR 1=1 --} daal de aur yeh query mein chale jaye, toh bina password ke login ho sakta hai.
+
+\section{Example 1: SQL Injection}
+\subsection{Vulnerable Code:}
+\begin{lstlisting}[caption={Vulnerable SQL Query}]
+const express = require('express');
+const mysql = require('mysql');
+const app = express();
+
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'mydb'
+});
+
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`; // Direct string concatenation
+  db.query(query, (err, results) => {
+    if (err) throw err;
+    if (results.length > 0) {
+      res.json({ message: 'Login successful' });
+    } else {
+      res.status(401).json({ error: 'Galat credentials' });
+    }
+  });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Yeh code user input (\texttt{username} aur \texttt{password}) ko direct query mein concatenate kar raha hai.
+    \item Agar attacker \texttt{username} mein \texttt{' OR 1=1 --} daal de, toh query banegi:
+    \begin{lstlisting}[language=SQL]
+SELECT * FROM users WHERE username = '' OR 1=1 --' AND password = 'whatever'
+    \end{lstlisting}
+    \item Yeh hamesha true hoga kyunki \texttt{1=1} hamesha true hota hai, aur \texttt{--} baaki query ko comment kar deta hai. Attacker bina password ke login kar lega.
+\end{itemize}
+
+\subsection{Secure Code:}
+\begin{lstlisting}[caption={Secure Parameterized Query}]
+const express = require('express');
+const mysql = require('mysql');
+const app = express();
+
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'mydb'
+});
+
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  const query = 'SELECT * FROM users WHERE username = ? AND password = ?'; // Parameterized query
+  db.query(query, [username, password], (err, results) => {
+    if (err) throw err;
+    if (results.length > 0) {
+      res.json({ message: 'Login successful' });
+    } else {
+      res.status(401).json({ error: 'Galat credentials' });
+    }
+  });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Secure Hai?}
+\begin{itemize}
+    \item \textbf{\color{keyconceptgreen}Parameterized query} use ki gayi hai (\texttt{?} placeholders ke saath), jo user input ko query string mein mix hone se rokti hai.
+    \item Input ab SQL code ke roop mein execute nahi hota, balki sirf data ke roop mein treat hota hai.
+    \item \texttt{' OR 1=1 --} daalne se bhi query manipulate nahi hogi.
+\end{itemize}
+
+\section{Example 2: Command Injection}
+\subsection{Backend Mein Command Execute Kab Karna Padta Hai?}
+Kabhi-kabhi backend ko system commands run karne padte hain, jaise:
+\begin{itemize}
+    \item File conversion (e.g., \texttt{ffmpeg} se video convert karna).
+    \item System status check (e.g., \texttt{df -h} se disk space check karna).
+    \item External tool integration.
+\end{itemize}
+
+\textbf{\color{importantred}Problem}: Agar user input direct command mein jata hai, toh attacker malicious command inject kar sakta hai.
+
+\subsection{Vulnerable Code:}
+\begin{lstlisting}[caption={Vulnerable Command Execution}]
+const express = require('express');
+const { exec } = require('child_process');
+const app = express();
+
+app.get('/check-disk', (req, res) => {
+  const disk = req.query.disk; // User input
+  const command = `df -h ${disk}`; // Direct input command mein
+  exec(command, (err, stdout, stderr) => {
+    if (err) return res.status(500).json({ error: 'Kuch galat ho gaya' });
+    res.send(stdout);
+  });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Agar attacker \texttt{disk} mein \texttt{; rm -rf /} daal de, toh command banega:
+    \begin{lstlisting}[language=bash]
+df -h ; rm -rf /
+    \end{lstlisting}
+    \item Yeh disk check ke baad pura system delete kar dega.
+    \item User input ko direct command mein daal rahe ho bina sanitize kiye.
+\end{itemize}
+
+\subsection{Secure Code:}
+\begin{lstlisting}[caption={Secure Command Execution}]
+const express = require('express');
+const { execFile } = require('child_process');
+const app = express();
+
+app.get('/check-disk', (req, res) => {
+  const disk = req.query.disk;
+  // Input validation - sirf valid disk names allow karo
+  if (!disk || !/^[a-zA-Z0-9_-]+$/.test(disk)) {
+    return res.status(400).json({ error: 'Galat disk name, bhai!' });
+  }
+  // execFile use karo jo arguments alag se pass karta hai
+  execFile('df', ['-h', disk], (err, stdout, stderr) => {
+    if (err) return res.status(500).json({ error: 'Kuch galat ho gaya' });
+    res.send(stdout);
+  });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Secure Hai?}
+\begin{itemize}
+    \item \textbf{\color{keyconceptgreen}Input validation}: Regex se check kiya ki \texttt{disk} mein sirf alphanumeric aur \texttt{\_ -} ho, no special characters like \texttt{;}.
+    \item \textbf{\color{keyconceptgreen}execFile}: Yeh command string ke bajaye arguments array ke roop mein leta hai, toh injection ka risk nahi hai.
+    \item Attacker ab \texttt{; rm -rf /} nahi daal sakta.
+\end{itemize}
+
+\section{Example 3: XML Injection}
+\subsection{Vulnerable Code:}
+\begin{lstlisting}[caption={Vulnerable XML Parsing}]
+const express = require('express');
+const xml2js = require('xml2js');
+const app = express();
+
+app.post('/parse-xml', (req, res) => {
+  const xmlData = req.body.xml; // User input
+  xml2js.parseString(xmlData, (err, result) => {
+    if (err) return res.status(500).json({ error: 'XML galat hai' });
+    res.json(result);
+  });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Agar attacker XML mein malicious entities daal de jaise:
+    \begin{lstlisting}[language=xml]
+<!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd">]>
+<root>&xxe;</root>
+    \end{lstlisting}
+    \item Yeh \textbf{\color{importantred}XXE (XML External Entity)} attack banega aur sensitive files (jaise \texttt{/etc/passwd}) leak ho sakte hain.
+\end{itemize}
+
+\subsection{Secure Code:}
+\begin{lstlisting}[caption={Secure XML Parsing}]
+const express = require('express');
+const xml2js = require('xml2js');
+const app = express();
+
+app.post('/parse-xml', (req, res) => {
+  const xmlData = req.body.xml;
+  const parser = new xml2js.Parser({ noent: false }); // External entities disable karo
+  parser.parseString(xmlData, (err, result) => {
+    if (err) return res.status(500).json({ error: 'XML galat hai' });
+    res.json(result);
+  });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Secure Hai?}
+\begin{itemize}
+    \item \texttt{noent: false} se external entities processing disable ho gaya, toh XXE attack nahi hoga.
+\end{itemize}
+
+\section{Injection Preventing Guide}
+\begin{itemize}
+    \item \textbf{\color{keyconceptgreen}Validate \& Sanitize Inputs:}
+    \begin{itemize}
+        \item Har user input ko check karo ki woh expected format mein hai ya nahi.
+        \item \textbf{\color{keyconceptgreen}Regex}: Pattern use karo (e.g., \texttt{/\^{}[a-zA-Z0-9]+\$/}) taaki special characters reject ho jayein.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}Parameterized Queries:}
+    \begin{itemize}
+        \item SQL queries mein \texttt{?} placeholders use karo (upar SQL example dekho).
+        \item Yeh input ko code ke roop mein execute hone se rokta hai.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}ORM Libraries:}
+    \begin{itemize}
+        \item Sequelize ya Mongoose jaise ORM use karo jo automatically queries ko sanitize karte hain.
+        \item Example: \texttt{User.findOne(\{ where: \{ username \} \})} - yeh injection safe hai.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}Escape \& Encode Output:}
+    \begin{itemize}
+        \item Output ko webpage pe dikhane se pehle encode karo taaki \texttt{<script>} jaise tags execute na ho.
+        \item Special characters (\texttt{<}, \texttt{>}, \texttt{\&}) ko harmless banaya jata hai:
+        \begin{itemize}
+            \item \texttt{<} → \texttt{\&lt;}
+            \item \texttt{>} → \texttt{\&gt;}
+            \item \texttt{\&} → \texttt{\&amp;}
+        \end{itemize}
+        \item Yeh XSS (Cross-Site Scripting) rokta hai.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}File Upload Security Checks:}
+    \begin{itemize}
+        \item \textbf{File Extension Check}: Sirf allowed extensions (e.g., \texttt{.jpg}, \texttt{.pdf}) accept karo.
+        \begin{itemize}
+            \item Kyun? Attacker \texttt{.php} ya \texttt{.exe} upload kar sakta hai jo server pe execute ho.
+        \end{itemize}
+        \item \textbf{MIME Type Check}: File ka actual type check karo (e.g., \texttt{image/jpeg}), kyunki extension fake ho sakti hai.
+        \item \textbf{Limit File Size}: Bada file upload rokne ke liye limit set karo (e.g., 5MB), taaki server crash na ho.
+        \item \textbf{Generate Secure Filename}: User ka filename use mat karo, random name banao (e.g., \texttt{uuidv4() + '.jpg'}) taaki overwrite ya path traversal attack na ho.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Example File Upload Secure Code:}
+\begin{lstlisting}[caption={Secure File Upload}]
+const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('uuid');
+const app = express();
+
+const upload = multer({
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
+    if (!allowedTypes.includes(file.mimetype)) {
+      return cb(new Error('Sirf images ya PDF allowed!'));
+    }
+    cb(null, true);
+  },
+  storage: multer.diskStorage({
+    destination: 'uploads/',
+    filename: (req, file, cb) => {
+      const ext = path.extname(file.originalname);
+      cb(null, `${uuidv4()}${ext}`); // Random secure filename
+    }
+  })
+});
+
+app.post('/upload', upload.single('file'), (req, res) => {
+  res.json({ message: 'File uploaded successfully', filename: req.file.filename });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Yeh Secure Hai?}
+\begin{itemize}
+    \item File size limited hai, MIME type check hota hai, aur random filename generate hota hai, toh attacker malicious file upload nahi kar sakta.
+\end{itemize}
+
+===============================
+===============================
+\hrule
+
+
+
+% Colors
+\definecolor{sectionblue}{RGB}{0, 0, 255}
+\definecolor{importantred}{RGB}{255, 0, 0}
+\definecolor{keyconceptgreen}{RGB}{0, 128, 0}
+\definecolor{codegray}{RGB}{240, 240, 240}
+\definecolor{keywordblue}{RGB}{0, 0, 255}
+\definecolor{stringred}{RGB}{255, 0, 0}
+\definecolor{commentgreen}{RGB}{0, 128, 0}
+\definecolor{functionorange}{RGB}{255, 165, 0}
+\definecolor{variablepurple}{RGB}{128, 0, 128}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{sectionblue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{sectionblue}}
+  {\thesubsection}{1em}{}
+
+% Custom JavaScript language definition for listings
+\lstdefinelanguage{JavaScript}{
+  keywords={const, let, var, if, else, return, function, require, module.exports, express, app, post, get, listen, json, status, parseInt, find},
+  keywordstyle=\color{keywordblue},
+  comment=[l]{//},
+  commentstyle=\color{commentgreen},
+  string=[b]{"},
+  stringstyle=\color{stringred},
+  identifierstyle=\color{variablepurple},
+  functionstyle=\color{functionorange},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"""
+}
+
+% Code listing setup
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  tabsize=2,
+  language=JavaScript % Default language for code snippets
+}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Insecure Design in Web Applications}
+\lhead{\leftmark}
+\rfoot{Page \thepage}
+
+\section*{\textbf{\LARGE \textcolor{violet}{Insecure Design in Web Applications}}}
+
+% Document start
+\begin{document}
+
+% Title
+\title{\textbf{\color{sectionblue}Insecure Design in Web Applications}}
+\author{Bug Bounty Hunter}
+\date{\today}
+\maketitle
+
+% Introduction
+\section{Insecure Design Kya Hai?}
+Insecure Design tab hota hai jab tumhara application ka design hi galat hota hai, matlab security ko pehle se socha hi nahi gaya. Yeh coding mistake se alag hai—yeh problem planning aur architecture level pe hoti hai. Agar design mein hi security weak hai, toh chahe code kitna bhi acha likho, attacker usko tod sakta hai.
+
+\textbf{\color{importantred}Simple Example:}
+\begin{itemize}
+    \item Ek website banaayi jisme admin aur user dono same login page use karte hain, aur koi role-based check nahi hai design mein.
+    \item Ya ek system jisme sensitive data (jaise passwords) plain text mein store karne ka plan hai.
+\end{itemize}
+
+Insecure design ka matlab hai ki tumne threat modeling nahi kiya, ya security requirements ko ignore kar diya.
+
+\section{Insecure Design Ka Ek Chhota Example}
+Maan lo ek e-commerce app bana rahe ho. Tumne design yeh socha ki har user apne order ka status check kar sakta hai bas order ID daal ke. Lekin design mein yeh nahi socha ki koi dusre user ka order ID guess kar ke uska data dekh sakta hai. Yeh insecure design hai kyunki tumne access control ko pehle se plan nahi kiya.
+
+\section{Vulnerable Code vs Secure Code Example}
+\subsection{Vulnerable Code: Order Status Check}
+\begin{lstlisting}[caption={Vulnerable Order Status Check}]
+const express = require('express');
+const app = express();
+
+const orders = [
+  { id: 1, userId: 101, status: 'Shipped' },
+  { id: 2, userId: 102, status: 'Pending' }
+];
+
+app.get('/order/status', (req, res) => {
+  const orderId = parseInt(req.query.orderId); // User input se order ID
+  const order = orders.find(o => o.id === orderId);
+  if (order) {
+    res.json({ order });
+  } else {
+    res.status(404).json({ error: 'Order nahi mila' });
+  }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Yeh design galat hai kyunki koi bhi user kisi bhi \texttt{orderId} daal ke dusre user ka order dekh sakta hai.
+    \item Koi authentication ya authorization check nahi hai ki yeh order current user ka hai ya nahi.
+    \item \textbf{\color{importantred}Attacker} bas \texttt{orderId=1}, \texttt{orderId=2} try kar ke sabka data le sakta hai.
+    \item Yeh \textbf{\color{importantred}Broken Access Control} ka bhi example ban jata hai, lekin yeh problem design level pe hai—tumne pehle se yeh socha hi nahi ki user-specific access chahiye.
+\end{itemize}
+
+\subsection{Secure Code: Order Status Check}
+\begin{lstlisting}[caption={Secure Order Status Check}]
+const express = require('express');
+const app = express();
+
+// Dummy function for logged-in user
+const getCurrentUser = (req) => {
+  return { id: 101, name: 'Test User' }; // Real mein session ya token se aayega
+};
+
+const orders = [
+  { id: 1, userId: 101, status: 'Shipped' },
+  { id: 2, userId: 102, status: 'Pending' }
+];
+
+app.get('/order/status', (req, res) => {
+  const currentUser = getCurrentUser(req); // Current user ka data
+  const orderId = parseInt(req.query.orderId);
+  const order = orders.find(o => o.id === orderId && o.userId === currentUser.id); // User-specific check
+  if (order) {
+    res.json({ order });
+  } else {
+    res.status(404).json({ error: 'Order nahi mila ya tera nahi hai, bhai!' });
+  }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\subsection{Kyun Secure Hai?}
+\begin{itemize}
+    \item Ab design mein yeh socha gaya hai ki har user sirf apne orders hi dekh sakta hai.
+    \item \texttt{o.userId === currentUser.id} check karta hai ki order current logged-in user ka hai ya nahi.
+    \item \textbf{\color{keyconceptgreen}Attacker} ab dusre user ka \texttt{orderId} daal ke data nahi dekh sakta.
+    \item Yeh secure design ka example hai kyunki access control pehle se plan kiya gaya.
+\end{itemize}
+
+\section{Insecure Design Ke Aur Examples}
+\begin{itemize}
+    \item \textbf{\color{importantred}No Rate Limiting in Design:}
+    \begin{itemize}
+        \item Agar tumne login page ke design mein rate limiting (e.g., 5 attempts per IP) nahi socha, toh attacker brute force kar sakta hai. Yeh coding se pehle planning ka issue hai.
+    \end{itemize}
+    
+    \item \textbf{\color{importantred}Hard-Coded Sensitive Logic:}
+    \begin{itemize}
+        \item Agar design mein yeh decide kiya ki API keys ya passwords code mein hi rahenge (jaise \texttt{const API\_KEY = 'xyz'}), toh yeh insecure design hai. Keys ko external vault mein rakhna chahiye tha.
+    \end{itemize}
+    
+    \item \textbf{\color{importantred}Missing Threat Modeling:}
+    \begin{itemize}
+        \item Agar tumne pehle se nahi socha ki attacker file upload ke through malicious files daal sakta hai, aur design mein validation nahi rakha, toh yeh insecure hai.
+    \end{itemize}
+\end{itemize}
+
+\section{Insecure Design Kyun Hota Hai?}
+\begin{itemize}
+    \item \textbf{\color{importantred}Jaldi Baazi}: Developers ya designers security ko baad mein sochenge bol ke skip kar dete hain.
+    \item \textbf{\color{importantred}Knowledge Ki Kami}: Team ko pata hi nahi hota ki threat modeling kya hota hai.
+    \item \textbf{\color{importantred}Wrong Assumptions}: "Yeh feature toh sirf internal use ke liye hai" soch ke security ignore kar dete hain.
+\end{itemize}
+
+\section{Insecure Design Ko Kaise Rokna Hai?}
+\begin{itemize}
+    \item \textbf{\color{keyconceptgreen}Threat Modeling Karo:}
+    \begin{itemize}
+        \item Pehle socho ki attacker kahan se attack kar sakta hai. Har feature ke liye risks likho.
+        \item Example: "Order status check mein koi bhi order ID daal sakta hai" → isko fix karo.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}Security Requirements Define Karo:}
+    \begin{itemize}
+        \item Design phase mein hi decide karo ki authentication, authorization, encryption kahan-kahan lagega.
+        \item Example: "Har user sirf apna data dekh sakta hai" ko requirement banao.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}Secure by Default:}
+    \begin{itemize}
+        \item Default settings secure rakho. Jaise, agar koi feature optional hai, toh usko off rakho jab tak zarurat na ho.
+    \end{itemize}
+    
+    \item \textbf{\color{keyconceptgreen}Review Design:}
+    \begin{itemize}
+        \item Code likhne se pehle design ko security expert se review karwao taaki galtiyaan pehle pakdi ja sakein.
+    \end{itemize}
+\end{itemize}
+
+\section{Real-World Example in Hinglish}
+Maan lo ek banking app bana rahe ho. Tumne design yeh socha ki \texttt{/transfer-money} endpoint banao jisme \texttt{amount} aur \texttt{toAccount} user input se aayega. Lekin yeh nahi socha ki koi user apne account se kisi aur ke account mein paisa transfer kar sakta hai bina check ke.
+
+\subsection{Vulnerable Design Output:}
+\begin{itemize}
+    \item User A (ID: 101) \texttt{/transfer-money?amount=500\&toAccount=102} hit karta hai.
+    \item Paisa User B (ID: 102) ke account mein chala jata hai bina yeh check kiye ki User A ka yeh right hai ya nahi.
+\end{itemize}
+
+\subsection{Secure Design Output:}
+\begin{itemize}
+    \item Design mein yeh add kiya ki \texttt{/transfer-money} pe current user ka ID check hoga aur sirf uske linked accounts mein transfer allowed hoga.
+    \item Ab User A sirf apne accounts mein hi paisa bhej sakta hai.
+\end{itemize}
+
+\section{Conclusion}
+Insecure Design ka matlab hai ki tumne building banane se pehle foundation hi galat rakha. Chahe code kitna bhi acha ho, agar design mein security nahi sochi gayi, toh attacker usko tod dega. Upar wale examples se tujhe idea mil gaya hoga ki kaise design level pe sochna hai. Yeh tere notes ke liye perfect hai, aur job mein bhi kaam aayega jab tu code review karega ya vulnerabilities dhoondhega.
+
+===============================
+===============================
+\hrule
+
+
+% Colors
+\definecolor{sectionblue}{RGB}{0, 0, 255}
+\definecolor{importantred}{RGB}{255, 0, 0}
+\definecolor{keyconceptgreen}{RGB}{0, 128, 0}
+\definecolor{codegray}{RGB}{240, 240, 240}
+\definecolor{keywordblue}{RGB}{0, 0, 255}
+\definecolor{stringred}{RGB}{255, 0, 0}
+\definecolor{commentgreen}{RGB}{0, 128, 0}
+\definecolor{functionorange}{RGB}{255, 165, 0}
+\definecolor{variablepurple}{RGB}{128, 0, 128}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{sectionblue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{sectionblue}}
+  {\thesubsection}{1em}{}
+
+% Custom JavaScript language definition for listings (adapted from Kotlin)
+\lstdefinelanguage{JavaScript}{
+  keywords={const, let, var, function, if, else, require, process, throw, new, use},
+  keywordstyle=\color{keywordblue},
+  comment=[l]{//},
+  commentstyle=\color{commentgreen},
+  string=[b]{"},
+  stringstyle=\color{stringred},
+  identifierstyle=\color{variablepurple},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"""
+}
+
+% Code listing setup
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  tabsize=2,
+  language=JavaScript % Default language for code snippets
+}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Secure Coding Guide}
+\lhead{\leftmark}
+\rfoot{Page \thepage}
+
+\section*{\textbf{\LARGE \textcolor{violet}{Secure Coding Guide: Security Misconfiguration aur Hardening}}}
+
+% Document start
+\begin{document}
+
+
+
+% Introduction
+\section{Introduction}
+Alright, bhai! Let’s dive into Section 6: \textbf{\color{importantred}Secure Coding} with a focus on \textbf{\color{keyconceptgreen}Security Misconfiguration} and \textbf{\color{keyconceptgreen}Security Hardening} in Hinglish. Main tujhe har cheez step-by-step samjhaunga, notes ke style mein, aur code ke saath comments bhi daalunga taaki tu apne job mein bug bounty hunting ya code review mein pro ban jaye. Chalo shuru karte hain!
+
+% Section 6
+\section{Secure Coding - Security Misconfiguration aur Security Hardening}
+
+\subsection{Security Misconfiguration Kya Hai?}
+Security misconfiguration hota hai jab tumhara application ya server sahi tarike se configure nahi hota, aur is wajah se attacker usme ghus sakta hai. Yeh tab hota hai jab \textbf{\color{importantred}default settings, unnecessary features, ya galat configurations} chhod di jati hain. Iska matlab hai ki tumne apne fort ke darwaze khulle chhod diye!
+
+\subsection{Security Hardening Kya Hai?}
+Security hardening ka matlab hai apne application ya server ko itna mazboot banana ki attacker ke liye ghusna mushkil ho jaye. Isme \textbf{\color{keyconceptgreen}default cheezein hatao, secure settings lagao}, aur latest security features use karo.
+
+\section{Common Security Misconfiguration Issues aur Unko Kaise Fix Karna Hai}
+
+\subsection{Default Accounts aur Passwords}
+\begin{itemize}
+    \item \textbf{\color{importantred}Problem}: Bahut saare applications default accounts (jaise admin:admin ya root:password) ke saath aate hain. Agar yeh change nahi kiye, toh attacker guess kar lega.
+    \item \textbf{\color{keyconceptgreen}Fix}: Default accounts disable karo ya passwords strong banao.
+    \item Example: Agar tum ek app bana rahe ho, toh production mein jaane se pehle test users (jaise test:test123) hata do.
+\end{itemize}
+
+\subsection{Default Pages, Ports, Services}
+\begin{itemize}
+    \item \textbf{\color{importantred}Problem}: Kai baar default pages (jaise WordPress ka license.txt ya readme.html) ya services (jaise HTTP port 80 bina TLS ke) live chhod di jati hain, jo attacker ko info deti hain.
+    \item \textbf{\color{keyconceptgreen}Fix}: Inko hatao ya disable karo.
+    \item Example: WordPress ke default files (license.txt, readme.html) delete kar do taaki attacker ko version pata na chale.
+\end{itemize}
+
+\subsection{Default Headers}
+\begin{itemize}
+    \item \textbf{\color{importantred}Problem}: Server headers (jaise "Server: Apache/2.4.41") version info dete hain, jo attacker exploit ke liye use kar sakta hai.
+    \item \textbf{\color{keyconceptgreen}Fix}: Headers hatao ya customize karo.
+\end{itemize}
+
+\subsection{Debug Mode}
+\begin{itemize}
+    \item \textbf{\color{importantred}Problem}: Agar debug mode on hai (jaise Django mein DEBUG = True), toh error pages pe sensitive info (jaise DB details) leak ho sakta hai.
+    \item \textbf{\color{keyconceptgreen}Fix}: Production mein debug mode off rakho.
+    \item Example: Django mein `settings.py` mein `DEBUG = False` set karo.
+\end{itemize}
+
+\subsection{Error Handling aur Stack Traces}
+\begin{itemize}
+    \item \textbf{\color{importantred}Problem}: Agar error messages mein stack traces ya sensitive info (jaise "SQL syntax error at line 42") dikhayi dete hain, toh attacker ko attack plan banane mein madad milti hai.
+    \item \textbf{\color{keyconceptgreen}Fix}: Generic error messages dikhao aur sensitive info expose mat karo.
+    \item Example: "SQL syntax error" ke bajaye "Kuch galat ho gaya, baad mein koshish karo" dikhao.
+\end{itemize}
+
+\subsection{Code aur Sensitive Data Exposure}
+\begin{itemize}
+    \item \textbf{\color{importantred}Problem}: Agar error messages ya logs mein passwords, API keys, ya DB details leak ho jayein, toh attacker unko use kar sakta hai.
+    \item \textbf{\color{keyconceptgreen}Fix}: Logs mein bhi sensitive data mat daalo, aur custom error pages banao.
+\end{itemize}
+
+\section{Secure Coding Examples in Express.js}
+
+\subsection{Example 1: Debug Mode aur Error Handling}
+Vulnerable Code:
+\begin{lstlisting}[caption={Vulnerable Debug Mode}]
+const express = require('express');
+const app = express();
+
+// Vulnerable Code - Debug mode on aur detailed errors
+app.get('/test', (req, res) => {
+    throw new Error('Kuch toh galat hai!'); // Error throw kar rahe hain
+});
+
+// Yeh middleware har error ko catch karta hai aur detailed stack trace dikhata hai
+app.use((err, req, res, next) => {
+    res.status(500).send(err.stack); // Attacker ko pura stack trace mil jayega
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+- \textbf{\color{importantred}Kyun Vulnerable Hai?}: Yeh code error ka pura stack trace (line numbers, file paths) dikhata hai, jo attacker ko system ke bare mein info deta hai.
+
+Secure Code:
+\begin{lstlisting}[caption={Secure Debug Mode}]
+// Secure Code - Generic error message aur debug off
+const express = require('express');
+const app = express();
+
+// Production mein debug mode off hai, toh environment check karo
+const isProduction = process.env.NODE_ENV === 'production';
+
+app.get('/test', (req, res) => {
+    throw new Error('Kuch toh galat hai!'); // Error throw kar rahe hain
+});
+
+// Custom error handling middleware
+app.use((err, req, res, next) => {
+    // Agar production mein hai, toh generic message dikhao
+    if (isProduction) {
+        res.status(500).json({ error: 'Kuch galat ho gaya, baad mein koshish karo' });
+    } else {
+        // Development mein thoda detail dikha sakte hain
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+- \textbf{\color{keyconceptgreen}Kyun Secure Hai?}: Production mein generic message dikhata hai, aur stack trace hide karta hai. Development mein thoda detail deta hai debugging ke liye.
+
+\subsection{Example 2: Default Headers Remove Karna}
+Vulnerable Code:
+\begin{lstlisting}[caption={Vulnerable Headers}]
+const express = require('express');
+const app = express();
+
+// Vulnerable Code - Default headers expose karte hain server info
+app.get('/', (req, res) => {
+    res.send('Hello, bhai!');
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+- \textbf{\color{importantred}Kyun Vulnerable Hai?}: Yeh code "X-Powered-By: Express" header bhejta hai, jo attacker ko batata hai ki Express use ho raha hai.
+
+Secure Code:
+\begin{lstlisting}[caption={Secure Headers}]
+// Secure Code - Headers remove karo
+const express = require('express');
+const app = express();
+
+// Default header hatao
+app.disable('x-powered-by');
+
+app.get('/', (req, res) => {
+    res.send('Hello, bhai!');
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+- \textbf{\color{keyconceptgreen}Kyun Secure Hai?}: `app.disable('x-powered-by')` se Express ka default header hat jata hai, aur attacker ko extra info nahi milti.
+
+\subsection{Example 3: Custom Error Pages}
+\begin{lstlisting}[caption={Custom Error Pages}]
+const express = require('express');
+const app = express();
+
+// 404 error ke liye custom page
+app.use((req, res, next) => {
+    res.status(404).json({ error: 'Bhai, yeh page nahi mila!' }); // 404 ke liye generic message
+});
+
+// 500 error ke liye custom handler
+app.use((err, req, res, next) => {
+    console.error(err.stack); // Internal log mein error save karo
+    res.status(500).json({ error: 'Server mein kuch gadbad hai, baad mein try karo' });
+});
+
+app.get('/fail', (req, res) => {
+    throw new Error('Forced error'); // Test ke liye error
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+- \textbf{\color{keyconceptgreen}Kyun Secure Hai?}: Yeh code 404 aur 500 errors ke liye custom messages dikhata hai, sensitive info hide karta hai, aur errors ko internally log karta hai.
+
+\section{Secure Configurations for Servers}
+
+\subsection{IIS (Internet Information Services) Security Settings}
+\begin{itemize}
+    \item \textbf{Request Filtering}: Unwanted HTTP requests (jaise HEAD ya TRACE) block karo.
+    \item \textbf{IP and Domain Restrictions}: Specific IPs ya domains ko allow/block karo.
+    \item \textbf{Dynamic IP Restrictions}: Agar koi IP zyada requests bhejta hai, toh auto-block karo.
+\end{itemize}
+
+\subsection{Apache Security Settings}
+\begin{itemize}
+    \item \textbf{ModSecurity}: Web application firewall lagao jo common attacks (SQL injection, XSS) rokta hai.
+    \item \textbf{AllowOverride None}: `.htaccess` files disable karo taaki security settings override na ho.
+    \item \textbf{Directory Indexing Off}: `Options -Indexes` set karo taaki directory listing na dikhe.
+\end{itemize}
+
+\subsection{Django Security Features}
+\begin{itemize}
+    \item \textbf{CSRF Protection}: Django forms mein CSRF token automatically aata hai.
+    \item \textbf{Query Parameterization}: Django querysets SQL injection se safe hain kyunki parameterized queries use karte hain.
+\end{itemize}
+
+\section{Production Se Pehle Checklist}
+\begin{enumerate}
+    \item \textbf{Default Accounts Disable Karo}: Admin/test accounts hatao ya passwords change karo.
+    \item \textbf{Insecure Services Off Karo}: HTTP (port 80) ke bajaye HTTPS (port 443) use karo.
+    \item \textbf{Default Pages Hatao}: WordPress ke readme.txt ya license.txt delete karo.
+    \item \textbf{Debug Mode Off Karo}: Django mein `DEBUG = False`, Express mein `NODE_ENV=production`.
+    \item \textbf{Unnecessary Functionalities Hatao}: Unused ports, services, ya test routes disable karo.
+\end{enumerate}
+
+\section{Error Handling Best Practices}
+\begin{itemize}
+    \item \textbf{\color{keyconceptgreen}Generic Messages}: Users ko "Kuch galat ho gaya" jaisa message dikhao.
+    \item \textbf{Internal Logs}: Detailed errors (stack traces) server logs mein save karo, public se hide rakho.
+    \item \textbf{Custom Error Pages}: 404, 500 jaise errors ke liye alag pages banao.
+\end{itemize}
+
+
+
+===============================
+===============================
+\hrule
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% Colors
+\definecolor{sectionblue}{RGB}{0, 0, 255}
+\definecolor{importantred}{RGB}{255, 0, 0}
+\definecolor{keyconceptgreen}{RGB}{0, 128, 0}
+\definecolor{codegray}{RGB}{240, 240, 240}
+\definecolor{keywordblue}{RGB}{0, 0, 255}
+\definecolor{stringred}{RGB}{255, 0, 0}
+\definecolor{commentgreen}{RGB}{0, 128, 0}
+\definecolor{functionorange}{RGB}{255, 165, 0}
+\definecolor{variablepurple}{RGB}{128, 0, 128}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{sectionblue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{sectionblue}}
+  {\thesubsection}{1em}{}
+
+% Custom JavaScript language definition for listings
+\lstdefinelanguage{JavaScript}{
+  keywords={const, let, var, function, if, else, require, process, throw, new},
+  keywordstyle=\color{keywordblue},
+  comment=[l]{//},
+  commentstyle=\color{commentgreen},
+  string=[b]{"},
+  stringstyle=\color{stringred},
+  identifierstyle=\color{variablepurple},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"""
+}
+
+% Code listing setup
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  tabsize=2,
+  language=JavaScript % Default language for code snippets
+}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Secure Coding Guide}
+\lhead{\leftmark}
+\rfoot{Page \thepage}
+
+\section*{\textbf{\LARGE \textcolor{violet}{Secure Coding Guide: Vulnerable and Outdated Components}}}
+
+% Document start
+\begin{document}
+
+
+
+% Introduction
+\section{Introduction}
+Alright, bhai! Since you're shifting your work to a source code reviewer, I'll help you create a new section for your notes based on your request. Yeh section \textbf{\color{importantred}"Vulnerable and Outdated Components"} ke baare mein hoga, jo OWASP Top 10 ka ek important part hai. Main tujhe vulnerable code, secure code, aur har line ke saath comments dunga taaki tu har cheez ko achhe se samajh sake aur apne job mein use kar sake. Sab kuch Hinglish mein hoga, jaise tune bola, aur teri uploaded notes ke style mein likha jayega. Chalo shuru karte hain!
+
+% Section 7
+\section{Section 7: Secure Coding - Vulnerable and Outdated Components}
+
+\subsection{7.1 Vulnerable and Outdated Components Kya Hai?}
+Bhai, yeh problem tab aati hai jab tumhare code mein purane ya outdated libraries, frameworks, ya components use ho rahe hote hain jismein already security bugs ya vulnerabilities pata chal chuki hoti hain. Agar inko update nahi kiya gaya, toh attacker inka fayda utha sakta hai aur system ko hack kar sakta hai. Yeh ek common issue hai kyunki developers aksar sochte hain \textbf{\color{importantred}"chal raha hai toh chhod do,"} lekin yeh galat hai.
+
+\textbf{Simple Example:}
+\begin{itemize}
+    \item Maan lo tum Express.js ke version 4.16.0 use kar rahe ho, jo purana hai aur isme ek known vulnerability hai (CVE-2019-XXXX) jisse attacker Denial of Service (DoS) attack kar sakta hai.
+    \item Agar tum isko update nahi karte, toh attacker bas ek malformed request bhejke server crash kar sakta hai.
+\end{itemize}
+Ab main tujhe vulnerable code aur secure code ka example dunga, aur yeh bhi bataunga ki kaise inko find aur patch karna hai.
+
+\subsection{7.2 Example: Outdated Express.js Version}
+
+\subsubsection{7.2.1 Vulnerable Code}
+\textbf{Listing 22: Vulnerable Code with Outdated Express.js}
+\begin{lstlisting}[caption={Vulnerable Code with Outdated Express.js}]
+const express = require('express'); // Yeh version 4.16.0 hai jo outdated hai
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Hello, Bhai! Server chal raha hai.');
+});
+
+app.listen(3000, () => console.log('Server chal raha hai port 3000 pe'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable Code with Comments}]
+const express = require('express'); // Yeh line Express.js ko import karti hai, lekin agar yeh version 4.16.0 hai toh isme known vulnerabilities hain jaise DoS attack ka risk
+const app = express(); // Express app banaya gaya, yeh basic setup hai
+app.get('/', (req, res) => { // '/' route pe GET request handle karne ka code
+    res.send('Hello, Bhai! Server chal raha hai.'); // Response mein simple message bhej raha hai
+});
+app.listen(3000, () => console.log('Server chal raha hai port 3000 pe')); // Server 3000 port pe start ho raha hai, lekin purana version security risk la sakta hai
+\end{lstlisting}
+
+\subsubsection{7.2.2 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Yeh code Express.js ke version 4.16.0 pe chal raha hai, jo purana hai aur isme security patches nahi hain.
+    \item Is version mein ek known issue hai (hypothetical CVE-2019-XXXX) jisse attacker malformed input bhejke server ko crash kar sakta hai.
+    \item Agar attacker jaan bujhkar galat request bhejta hai (jaise invalid headers), toh server hang ho sakta hai ya memory leak ho sakta hai.
+    \item Koi version check ya update ka dhyan nahi rakha gaya.
+\end{itemize}
+
+\subsubsection{7.2.3 Secure Code}
+\textbf{Listing 23: Secure Code with Updated Express.js}
+\begin{lstlisting}[caption={Secure Code with Updated Express.js}]
+const express = require('express'); // Yeh latest version 4.18.2 ya uske upar ka hai, jo secure hai
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Hello, Bhai! Secure server chal raha hai.');
+});
+
+app.listen(3000, () => console.log('Server chal raha hai port 3000 pe'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure Code with Comments}]
+const express = require('express'); // Express.js ko import kiya, lekin ab latest version (jaise 4.18.2) use kar rahe hain jisme security patches hain
+const app = express(); // Express app banaya, yeh same hai lekin ab secure foundation pe hai
+app.get('/', (req, res) => { // '/' route pe GET request handle kar raha hai
+    res.send('Hello, Bhai! Secure server chal raha hai.'); // Response mein message bhej raha hai, ab safe hai
+});
+app.listen(3000, () => console.log('Server chal raha hai port 3000 pe')); // Server 3000 port pe chal raha hai, aur latest version ke saath secure hai
+\end{lstlisting}
+
+\subsubsection{7.2.4 Kyun Secure Hai?}
+\begin{itemize}
+    \item Latest Express.js version (jaise 4.18.2 ya uske upar) use kiya gaya, jisme purane bugs aur vulnerabilities fix ho chuke hain.
+    \item Developer ne package.json mein version update kiya aur npm install chalaya taaki latest code mile.
+    \item Ab attacker ke DoS attack ka chance kam hai kyunki new version mein better error handling aur security fixes hain.
+\end{itemize}
+
+\subsection{7.3 Vulnerable Outdated Components Kaise Find Karein?}
+Bhai, jab tu source code review karega, toh outdated components ko dhoondhne ke liye yeh steps follow kar:
+\begin{enumerate}
+    \item \textbf{Package.json Check Karo:}
+        \begin{itemize}
+            \item Project ke root folder mein `package.json` file kholo.
+            \item Dekho ki dependencies aur devDependencies mein kaunse packages hain aur unke versions kya hain.
+            \item Example: Agar `"express": "^4.16.0"` likha hai, toh yeh purana hai.
+        \end{itemize}
+    \item \textbf{NPM Outdated Command Use Karo:}
+        \begin{itemize}
+            \item Terminal mein jao aur `npm outdated` run karo.
+            \item Yeh list dega ki kaunse packages outdated hain, unka current version kya hai, aur latest version kya hai.
+            \item Output aisa hoga:
+            \begin{verbatim}
+            Package  Current  Wanted  Latest
+            express  4.16.0   4.16.0  4.18.2
+            \end{verbatim}
+        \end{itemize}
+    \item \textbf{CVE Database Check Karo:}
+        \begin{itemize}
+            \item Websites jaise \texttt{[NVD (National Vulnerability Database)](https://nvd.nist.gov/)} pe jao.
+            \item Package name aur version daal ke check karo ki usme koi known vulnerability hai ya nahi.
+            \item Example: "Express 4.16.0" search karo aur CVE entries dekho.
+        \end{itemize}
+    \item \textbf{Dependency Scanners Use Karo:}
+        \begin{itemize}
+            \item Tools jaise `npm audit` ya `Snyk` chalao.
+            \item `npm audit` run karne pe yeh bolega:
+            \begin{verbatim}
+            found 3 vulnerabilities (1 low, 2 moderate)
+            run `npm audit fix` to fix them
+            \end{verbatim}
+            \item Yeh automatically vulnerabilities dhoondh lega.
+        \end{itemize}
+    \item \textbf{Code Mein Manual Check:}
+        \begin{itemize}
+            \item Agar koi package directly import kiya gaya hai (jaise `require('express')`), toh uska version package.json se match karo aur check karo ki woh latest hai ya nahi.
+        \end{itemize}
+\end{enumerate}
+
+\subsection{7.4 Vulnerable Components Ko Kaise Patch Karein?}
+\begin{enumerate}
+    \item \textbf{Version Update Karo:}
+        \begin{itemize}
+            \item `package.json` mein version change karo, jaise:
+            \begin{verbatim}
+            "express": "^4.18.2"
+            \end{verbatim}
+            \item Phir `npm install` run karo taaki latest version install ho jaye.
+        \end{itemize}
+    \item \textbf{NPM Audit Fix Use Karo:}
+        \begin{itemize}
+            \item `npm audit fix` run karo, yeh automatically chhoti vulnerabilities ko patch kar dega.
+            \item Agar breaking changes hain, toh manually update karna padega.
+        \end{itemize}
+    \item \textbf{Breaking Changes Check Karo:}
+        \begin{itemize}
+            \item Latest version ke release notes padho (GitHub pe milenge).
+            \item Dekho ki koi bada change hai ya nahi, taaki code toot na jaye.
+        \end{itemize}
+    \item \textbf{Test Karo:}
+        \begin{itemize}
+            \item Update ke baad pura code test karo taaki pata chale ki koi functionality break toh nahi hui.
+        \end{itemize}
+    \item \textbf{Auto-Update Tools:}
+        \begin{itemize}
+            \item `Dependabot` (GitHub pe) ya `Renovate` use karo jo automatically PR banayega jab koi package outdated ho.
+        \end{itemize}
+\end{enumerate}
+
+\subsection{7.5 Real-World Example in Hinglish}
+Maan lo ek project mein tu `lodash` library use kar raha hai version 4.17.15 pe. Yeh version purana hai aur isme ek vulnerability hai (CVE-2021-23337) jisse attacker malicious input bhejke code execute kar sakta hai.
+
+\textbf{Vulnerable Setup:}
+\begin{itemize}
+    \item `package.json` mein: `"lodash": "^4.17.15"`
+    \item Code: `const _ = require('lodash');`
+    \item Attacker input bhejta hai aur server crash ho jata hai.
+\end{itemize}
+
+\textbf{Secure Fix:}
+\begin{itemize}
+    \item `package.json` update karo: `"lodash": "^4.17.21"`
+    \item `npm install` chalao.
+    \item Ab vulnerability fix ho gayi, aur attacker ka attack kaam nahi karega.
+\end{itemize}
+
+\subsection{7.6 Prevention Tips}
+\begin{itemize}
+    \item \textbf{\color{keyconceptgreen}Regular Updates:} Har mahine `npm outdated` check karo aur packages update karo.
+    \item \textbf{\color{keyconceptgreen}Minimal Dependencies:} Sirf wahi packages use karo jo zaruri hain, zyada packages matlab zyada risk.
+    \item \textbf{Security Alerts:} GitHub pe Dependabot enable karo taaki alert mile.
+    \item \textbf{Documentation Padho:} Naye version ke changes samajh lo pehle.
+\end{itemize}
+
+
+
+===============================
+===============================
+\hrule
+
+
+
+
+
+% Colors
+\definecolor{sectionblue}{RGB}{0, 0, 255}
+\definecolor{importantred}{RGB}{255, 0, 0}
+\definecolor{keyconceptgreen}{RGB}{0, 128, 0}
+\definecolor{codegray}{RGB}{240, 240, 240}
+\definecolor{keywordblue}{RGB}{0, 0, 255}
+\definecolor{stringred}{RGB}{255, 0, 0}
+\definecolor{commentgreen}{RGB}{0, 128, 0}
+\definecolor{functionorange}{RGB}{255, 165, 0}
+\definecolor{variablepurple}{RGB}{128, 0, 128}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{sectionblue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{sectionblue}}
+  {\thesubsection}{1em}{}
+
+% Custom JavaScript language definition for listings
+\lstdefinelanguage{JavaScript}{
+  keywords={const, let, var, function, if, else, require, process, throw, new, return},
+  keywordstyle=\color{keywordblue},
+  comment=[l]{//},
+  commentstyle=\color{commentgreen},
+  string=[b]{"},
+  stringstyle=\color{stringred},
+  identifierstyle=\color{variablepurple},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"""
+}
+
+% Code listing setup
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  tabsize=2,
+  language=JavaScript % Default language for code snippets
+}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Secure Coding Guide}
+\lhead{\leftmark}
+\rfoot{Page \thepage}
+
+\section*{\textbf{\LARGE \textcolor{violet}{Secure Coding Guide: Identification and Authentication Failures}}}
+
+% Document start
+\begin{document}
+
+% Title
+\title{\textbf{\color{sectionblue}Secure Coding Guide: Identification and Authentication Failures}}}
+\author{Your Name}
+\date{March 28, 2025}
+\maketitle
+
+% Introduction
+\section{Introduction}
+Alright, bhai! Ab hum ek naye section banayenge tere notes ke liye: \textbf{\color{importantred}"Secure Coding - Identification and Authentication Failures"}. Yeh OWASP Top 10 ka ek important part hai aur isme main tujhe sab kuch Hinglish mein explain karunga—weak authentication policies, brute force aur credential stuffing attacks, weak passwords, ineffective credential recovery, lack of MFA (Multi-Factor Authentication), weak session management, aur jo bhi extra points baki hain, unko bhi add kar dunga. Har cheez ke liye vulnerable code, secure code, aur line-by-line comments dunga taaki tu apne source code review ke kaam mein pro ban jaye. Chalo shuru karte hain!
+
+% Section 8
+\section{Section 8: Secure Coding - Identification and Authentication Failures}
+
+\subsection{8.1 Identification and Authentication Failures Kya Hai?}
+Bhai, yeh problem tab hoti hai jab system mein user ko identify aur authenticate karne ka process weak ya galat hota hai. Matlab, agar login system mein kami hai, toh attacker asani se account takeover kar sakta hai. Isme \textbf{\color{importantred}weak passwords, no MFA, weak session management, aur galat forgot-password process} jaise issues aate hain. Agar yeh theek nahi kiya, toh brute force, credential stuffing, ya session hijacking jaise attacks ho sakte hain.
+
+\textbf{Common Issues:}
+\begin{itemize}
+    \item Weak Authentication Policies (kamzor login checks).
+    \item Vulnerable to Brute Force aur Credential Stuffing Attacks.
+    \item Weak Password Usage (simple passwords jaise "123456").
+    \item Weak Credential Recovery/Forgot-Password Process.
+    \item Lack of Multi-Factor Authentication (MFA).
+    \item Weak Session Process (session ID galat tarike se use hona).
+    \item Exposing Session ID in URL, Reusing Session ID, Not Invalidating Session After Logout.
+\end{itemize}
+Ab ek-ek karke examples ke saath samjhaunga.
+
+\subsection{8.2 Example 1: Weak Authentication (Vulnerable to Brute Force)}
+
+\subsubsection{8.2.1 Vulnerable Code}
+\textbf{Listing 24: Vulnerable Login with No Brute Force Protection}
+\begin{lstlisting}[caption={Vulnerable Login with No Brute Force Protection}]
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    // Dummy check, real mein database se hoga
+    if (username === 'admin' && password === 'pass123') {
+        res.json({ message: 'Login successful, bhai!' });
+    } else {
+        res.status(401).json({ error: 'Galat credentials' });
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable Login with Comments}]
+const express = require('express'); // Express import kiya, basic setup hai
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye middleware
+app.post('/login', (req, res) => { // '/login' endpoint pe POST request handle kar raha hai
+    const { username, password } = req.body; // Request body se username aur password liya
+    if (username === 'admin' && password === 'pass123') { // Direct check, koi rate limit ya protection nahi
+        res.json({ message: 'Login successful, bhai!' }); // Agar match hua toh success message
+    } else {
+        res.status(401).json({ error: 'Galat credentials' }); // Nahi toh error
+    }
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 pe chal raha hai
+\end{lstlisting}
+
+\subsubsection{8.2.2 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Koi rate limiting nahi hai, toh attacker infinite login attempts bhej sakta hai (brute force attack).
+    \item Weak password ("pass123") use kiya gaya, jo guess karna aasan hai.
+    \item Credential stuffing ke liye bhi vulnerable hai kyunki koi extra check (jaise CAPTCHA) nahi hai.
+    \item Agar attacker ek leaked password list se try kare, toh yeh asani se crack ho sakta hai.
+\end{itemize}
+
+\subsubsection{8.2.3 Secure Code}
+\textbf{Listing 25: Secure Login with Rate Limiting and Strong Password Check}
+\begin{lstlisting}[caption={Secure Login with Rate Limiting}]
+const express = require('express');
+const rateLimit = require('express-rate-limit'); // Rate limiting ke liye
+const app = express();
+app.use(express.json());
+
+// Rate limit: 5 attempts per IP in 15 minutes
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minute window
+    max: 5, // 5 requests allowed
+    message: 'Bhai, zyada try kar raha hai, 15 minute ruk!'
+});
+
+app.post('/login', loginLimiter, (req, res) => {
+    const { username, password } = req.body;
+    // Password strength check (min 8 chars, 1 number, 1 special char)
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+    if (!passwordRegex.test(password)) {
+        return res.status(400).json({ error: 'Password kamzor hai, bhai!' });
+    }
+    if (username === 'admin' && password === 'Secure@123') {
+        res.json({ message: 'Login successful, bhai!' });
+    } else {
+        res.status(401).json({ error: 'Galat credentials' });
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure Login with Comments}]
+const express = require('express'); // Express import kiya
+const rateLimit = require('express-rate-limit'); // Rate limiting package import kiya
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye
+const loginLimiter = rateLimit({ // Rate limiter configure kiya
+    windowMs: 15 * 60 * 1000, // 15 minute ka time window
+    max: 5, // Sirf 5 attempts allow honge
+    message: 'Bhai, zyada try kar raha hai, 15 minute ruk!' // Custom message jab limit cross ho
+});
+app.post('/login', loginLimiter, (req, res) => { // Login endpoint pe rate limiter add kiya
+    const { username, password } = req.body; // Username aur password liya
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/; // Strong password ka regex (8+ chars, number, special char)
+    if (!passwordRegex.test(password)) { // Password check kiya
+        return res.status(400).json({ error: 'Password kamzor hai, bhai!' }); // Agar weak hai toh error
+    }
+    if (username === 'admin' && password === 'Secure@123') { // Strong password ke saath check
+        res.json({ message: 'Login successful, bhai!' }); // Success message
+    } else {
+        res.status(401).json({ error: 'Galat credentials' }); // Error message
+    }
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server start
+\end{lstlisting}
+
+\subsubsection{8.2.4 Kyun Secure Hai?}
+\begin{itemize}
+    \item `express-rate-limit` use kiya taaki brute force attack ruk jaye (5 attempts ke baad block).
+    \item Password strength check add kiya (regex) taaki weak passwords reject ho jayein.
+    \item Strong password ("Secure@123") example diya, jo guess karna mushkil hai.
+    \item Credential stuffing ke liye bhi protection hai kyunki attempts limited hain.
+\end{itemize}
+
+\subsection{8.3 Example 2: Weak Credential Recovery/Forgot-Password Process}
+
+\subsubsection{8.3.1 Vulnerable Code}
+\textbf{Listing 26: Vulnerable Forgot-Password Process}
+\begin{lstlisting}[caption={Vulnerable Forgot-Password Process}]
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.post('/forgot-password', (req, res) => {
+    const { email } = req.body;
+    // Dummy user check
+    if (email === 'test@example.com') {
+        const resetLink = `http://example.com/reset?email=${email}`; // Email URL mein expose ho raha hai
+        res.json({ message: 'Reset link bhej diya: ' + resetLink });
+    } else {
+        res.status(404).json({ error: 'Email nahi mila' });
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable Forgot-Password with Comments}]
+const express = require('express'); // Express import kiya
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye
+app.post('/forgot-password', (req, res) => { // Forgot-password endpoint
+    const { email } = req.body; // Email liya request se
+    if (email === 'test@example.com') { // Dummy check, real mein DB se hoga
+        const resetLink = `http://example.com/reset?email=${email}`; // Reset link banaya, email expose ho raha hai URL mein
+        res.json({ message: 'Reset link bhej diya: ' + resetLink }); // Link response mein bhej diya, jo galat hai
+    } else {
+        res.status(404).json({ error: 'Email nahi mila' }); // Agar email nahi mila toh error
+    }
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server start
+\end{lstlisting}
+
+\subsubsection{8.3.2 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Reset link mein email direct URL mein expose ho raha hai, jo attacker dekh sakta hai agar response intercept ho.
+    \item Koi unique token nahi hai, toh attacker email guess karke reset kar sakta hai.
+    \item Koi expiry time nahi hai link ka, toh kabhi bhi use ho sakta hai.
+    \item Response mein reset link bhejna bhi galat hai, yeh email pe bhejna chahiye.
+\end{itemize}
+
+\subsubsection{8.3.3 Secure Code}
+\textbf{Listing 27: Secure Forgot-Password Process}
+\begin{lstlisting}[caption={Secure Forgot-Password Process}]
+const express = require('express');
+const crypto = require('crypto');
+const app = express();
+app.use(express.json());
+
+app.post('/forgot-password', (req, res) => {
+    const { email } = req.body;
+    if (email === 'test@example.com') {
+        const resetToken = crypto.randomBytes(32).toString('hex'); // Random secure token
+        const resetLink = `http://example.com/reset?token=${resetToken}`; // Token ke saath link
+        // Real mein yeh email pe bhejna chahiye, DB mein store karo with expiry
+        console.log(`Reset link (email pe bhejo): ${resetLink}`);
+        res.json({ message: 'Reset link email pe bhej diya, check karo!' });
+    } else {
+        res.status(404).json({ error: 'Email nahi mila' });
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure Forgot-Password with Comments}]
+const express = require('express'); // Express import kiya
+const crypto = require('crypto'); // Crypto module random token ke liye
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye
+app.post('/forgot-password', (req, res) => { // Forgot-password endpoint
+    const { email } = req.body; // Email liya
+    if (email === 'test@example.com') { // Dummy check
+        const resetToken = crypto.randomBytes(32).toString('hex'); // 32-byte random token banaya, secure hai
+        const resetLink = `http://example.com/reset?token=${resetToken}`; // Token ke saath reset link banaya
+        console.log(`Reset link (email pe bhejo): ${resetLink}`); // Link console pe dikha raha, real mein email pe jayega
+        res.json({ message: 'Reset link email pe bhej diya, check karo!' }); // User ko generic message
+    } else {
+        res.status(404).json({ error: 'Email nahi mila' }); // Email nahi mila toh error
+    }
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server start
+\end{lstlisting}
+
+\subsubsection{8.3.4 Kyun Secure Hai?}
+\begin{itemize}
+    \item Random token (`crypto.randomBytes`) use kiya jo guess karna mushkil hai.
+    \item Email URL mein expose nahi ho raha, sirf token hai.
+    \item Reset link response mein nahi bheja, user ko email check karne ko bola (real mein email bhejna chahiye).
+    \item Token ko DB mein store karo aur 1 ghante ka expiry time do taaki secure rahe.
+\end{itemize}
+
+\subsection{8.4 Example 3: Lack of Multi-Factor Authentication (MFA)}
+
+\subsubsection{8.4.1 Vulnerable Code}
+\textbf{Listing 28: Login Without MFA}
+\begin{lstlisting}[caption={Login Without MFA}]
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    if (username === 'admin' && password === 'pass123') {
+        res.json({ message: 'Login successful, bhai!' });
+    } else {
+        res.status(401).json({ error: 'Galat credentials' });
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Login Without MFA with Comments}]
+const express = require('express'); // Express import kiya
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye
+app.post('/login', (req, res) => { // Login endpoint
+    const { username, password } = req.body; // Username aur password liya
+    if (username === 'admin' && password === 'pass123') { // Sirf password check, MFA nahi
+        res.json({ message: 'Login successful, bhai!' }); // Success message
+    } else {
+        res.status(401).json({ error: 'Galat credentials' }); // Error message
+    }
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server start
+\end{lstlisting}
+
+\subsubsection{8.4.2 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Sirf username aur password pe depend hai, agar password leak ho gaya toh attacker direct login kar lega.
+    \item MFA nahi hai, toh ek layer ki security missing hai.
+    \item Agar attacker phishing se password chura le, toh koi rok nahi hai.
+\end{itemize}
+
+\subsubsection{8.4.3 Secure Code}
+\textbf{Listing 29: Login with MFA (OTP Simulation)}
+\begin{lstlisting}[caption={Login with MFA}]
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    if (username === 'admin' && password === 'Secure@123') {
+        // MFA step: OTP bhejna (dummy simulation)
+        const otp = Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
+        console.log(`OTP bheja (real mein SMS/email pe): ${otp}`);
+        res.json({ message: 'OTP bhej diya, enter karo!', step: 'otp' });
+    } else {
+        res.status(401).json({ error: 'Galat credentials' });
+    }
+});
+
+app.post('/verify-otp', (req, res) => {
+    const { otp } = req.body;
+    if (otp === '123456') { // Dummy OTP check, real mein DB se verify karo
+        res.json({ message: 'Login successful with MFA!' });
+    } else {
+        res.status(401).json({ error: 'Galat OTP' });
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Login with MFA with Comments}]
+const express = require('express'); // Express import kiya
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye
+app.post('/login', (req, res) => { // Login endpoint
+    const { username, password } = req.body; // Username aur password liya
+    if (username === 'admin' && password === 'Secure@123') { // Strong password check
+        const otp = Math.floor(100000 + Math.random() * 900000); // Random 6-digit OTP banaya
+        console.log(`OTP bheja (real mein SMS/email pe): ${otp}`); // OTP console pe, real mein SMS/email pe jayega
+        res.json({ message: 'OTP bhej diya, enter karo!', step: 'otp' }); // User ko OTP enter karne ko bola
+    } else {
+        res.status(401).json({ error: 'Galat credentials' }); // Galat credentials pe error
+    }
+});
+app.post('/verify-otp', (req, res) => { // OTP verify endpoint
+    const { otp } = req.body; // OTP liya
+    if (otp === '123456') { // Dummy check, real mein DB se match karo
+        res.json({ message: 'Login successful with MFA!' }); // Success message
+    } else {
+        res.status(401).json({ error: 'Galat OTP' }); // Galat OTP pe error
+    }
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server start
+\end{lstlisting}
+
+\subsubsection{8.4.4 Kyun Secure Hai?}
+\begin{itemize}
+    \item MFA add kiya gaya (OTP), toh sirf password se login nahi hoga.
+    \item Attacker ko password ke saath OTP bhi chahiye, jo mushkil hai.
+    \item Real mein OTP ko SMS/email pe bhejna aur DB mein store karna chahiye with expiry (e.g., 5 minutes).
+\end{itemize}
+
+\subsection{8.5 Example 4: Weak Session Management}
+
+\subsubsection{8.5.1 Vulnerable Code}
+\textbf{Listing 30: Vulnerable Session Management}
+\begin{lstlisting}[caption={Vulnerable Session Management}]
+const express = require('express');
+const app = express();
+
+app.get('/login', (req, res) => {
+    const sessionId = '12345'; // Fixed session ID, galat hai
+    res.redirect(`/dashboard?session=${sessionId}`); // Session ID URL mein expose ho raha hai
+});
+
+app.get('/dashboard', (req, res) => {
+    const sessionId = req.query.session;
+    if (sessionId === '12345') {
+        res.send('Welcome to Dashboard, bhai!');
+    } else {
+        res.status(403).json({ error: 'Invalid session' });
+    }
+});
+
+app.get('/logout', (req, res) => {
+    res.send('Logged out, bhai!'); // Session invalidate nahi kiya
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable Session Management with Comments}]
+const express = require('express'); // Express import kiya
+const app = express(); // Express app banaya
+app.get('/login', (req, res) => { // Login endpoint (dummy)
+    const sessionId = '12345'; // Fixed session ID, yeh predictable aur galat hai
+    res.redirect(`/dashboard?session=${sessionId}`); // Session ID URL mein daal diya, expose ho raha hai
+});
+app.get('/dashboard', (req, res) => { // Dashboard endpoint
+    const sessionId = req.query.session; // URL se session ID liya
+    if (sessionId === '12345') { // Fixed ID check, koi real session management nahi
+        res.send('Welcome to Dashboard, bhai!'); // Success message
+    } else {
+        res.status(403).json({ error: 'Invalid session' }); // Error message
+    }
+});
+app.get('/logout', (req, res) => { // Logout endpoint
+    res.send('Logged out, bhai!'); // Session invalidate nahi kiya, purana ID reuse ho sakta hai
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server start
+\end{lstlisting}
+
+\subsubsection{8.5.2 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Session ID fixed hai ("12345"), jo predictable hai aur attacker guess kar sakta hai.
+    \item Session ID URL mein expose ho raha hai (?session=12345), jo logs ya browser history mein leak ho sakta hai.
+    \item Login ke baad naya session ID nahi banaya, reuse ho raha hai.
+    \item Logout ke baad session invalidate nahi kiya, toh purana ID kaam karta rahega.
+\end{itemize}
+
+\subsubsection{8.5.3 Secure Code}
+\textbf{Listing 31: Secure Session Management}
+\begin{lstlisting}[caption={Secure Session Management}]
+const express = require('express');
+const session = require('express-session'); // Session management ke liye
+const app = express();
+
+app.use(session({
+    secret: 'mysecretkey', // Secure secret key
+    resave: false, // Session ko unnecessarily save nahi karega
+    saveUninitialized: false, // Uninitialized session save nahi hoga
+    cookie: { secure: true, httpOnly: true } // Cookie secure aur HTTP-only
+}));
+
+app.get('/login', (req, res) => {
+    req.session.user = { id: 1, name: 'admin' }; // Session mein user data store
+    res.redirect('/dashboard');
+});
+
+app.get('/dashboard', (req, res) => {
+    if (req.session.user) { // Session check
+        res.send(`Welcome to Dashboard, ${req.session.user.name}!`);
+    } else {
+        res.status(403).json({ error: 'Login kar pehle, bhai!' });
+    }
+});
+
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => { // Session invalidate kiya
+        res.send('Logged out successfully, bhai!');
+    });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure Session Management with Comments}]
+const express = require('express'); // Express import kiya
+const session = require('express-session'); // Session management package
+const app = express(); // Express app banaya
+app.use(session({ // Session middleware configure kiya
+    secret: 'mysecretkey', // Secret key session sign karne ke liye, real mein strong rakhna
+    resave: false, // Session ko baar-baar save nahi karega
+    saveUninitialized: false, // Blank session save nahi hoga
+    cookie: { secure: true, httpOnly: true } // Cookie ko secure (HTTPS) aur HTTP-only banaya taaki JS se access na ho
+}));
+app.get('/login', (req, res) => { // Login endpoint
+    req.session.user = { id: 1, name: 'admin' }; // Session mein user data store kiya
+    res.redirect('/dashboard'); // Dashboard pe redirect, session ID URL mein nahi hai
+});
+app.get('/dashboard', (req, res) => { // Dashboard endpoint
+    if (req.session.user) { // Session check kiya ki user logged in hai ya nahi
+        res.send(`Welcome to Dashboard, ${req.session.user.name}!`); // User-specific message
+    } else {
+        res.status(403).json({ error: 'Login kar pehle, bhai!' }); // Agar session nahi toh error
+    }
+});
+app.get('/logout', (req, res) => { // Logout endpoint
+    req.session.destroy(() => { // Session ko destroy kiya taaki invalidate ho jaye
+        res.send('Logged out successfully, bhai!'); // Success message
+    });
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server start
+\end{lstlisting}
+
+\subsubsection{8.5.4 Kyun Secure Hai?}
+\begin{itemize}
+    \item `express-session` use kiya jo secure session ID generate karta hai (random aur unpredictable).
+    \item Session ID URL mein expose nahi hota, cookie mein store hota hai.
+    \item Cookie `secure` aur `httpOnly` hai, toh HTTPS pe chalta hai aur JS se access nahi ho sakta.
+    \item Logout pe session destroy hota hai, toh purana ID kaam nahi karega.
+\end{itemize}
+
+\subsection{8.6 Prevention Guide for Identification and Authentication Failures}
+\begin{enumerate}
+    \item \textbf{Strong Authentication Policies:}
+        \begin{itemize}
+            \item Password minimum 8 chars, numbers, aur special chars ke saath rakho (regex check karo).
+            \item Rate limiting lagao (`express-rate-limit`) taaki brute force na ho.
+        \end{itemize}
+    \item \textbf{Brute Force aur Credential Stuffing Rokne Ke Liye:}
+        \begin{itemize}
+            \item CAPTCHA add karo (Google reCAPTCHA) sensitive endpoints pe.
+            \item Account lockout feature dalo (5 galat attempts ke baad 15 minute lock).
+        \end{itemize}
+    \item \textbf{Weak Passwords Avoid Karo:}
+        \begin{itemize}
+            \item Bcrypt jaise strong hashing use karo passwords ke liye (salt ke saath).
+            \item Common passwords (jaise "password123") ko blacklist karo.
+        \end{itemize}
+    \item \textbf{Secure Credential Recovery:}
+        \begin{itemize}
+            \item Random token use karo reset links ke liye (`crypto.randomBytes`).
+            \item Token ko DB mein store karo with expiry (e.g., 1 hour).
+            \item Link email pe bhejo, response mein mat dikhao.
+        \end{itemize}
+    \item \textbf{Multi-Factor Authentication (MFA):}
+        \begin{itemize}
+            \item OTP (SMS/email) ya TOTP (Google Authenticator) add karo.
+            \item Har sensitive action pe MFA mandatory karo (jaise money transfer).
+        \end{itemize}
+    \item \textbf{Strong Session Management:}
+        \begin{itemize}
+            \item `express-session` ya JWT use karo secure session IDs ke liye.
+            \item Session ID ko cookie mein store karo, URL mein mat daalo.
+            \item `secure` aur `httpOnly` flags lagao cookies pe.
+            \item Login ke baad naya session ID generate karo.
+            \item Logout pe session invalidate karo (`req.session.destroy`).
+        \end{itemize}
+    \item \textbf{Extra Tips:}
+        \begin{itemize}
+            \item Session timeout set karo (e.g., 30 minute inactivity pe logout).
+            \item Session ID rotation implement karo har login ke baad.
+        \end{itemize}
+\end{enumerate}
+
+\subsection{8.7 Real-World Example in Hinglish}
+Maan lo ek banking app mein login sirf username aur password se hai. Attacker ek leaked password "pass123" se brute force karta hai aur account hack kar leta hai kyunki koi rate limit ya MFA nahi tha. Session ID bhi URL mein tha (?session=12345), jo browser history se chura liya gaya.
+
+\textbf{Secure Fix:}
+\begin{itemize}
+    \item Rate limiting lagaya (5 attempts pe block).
+    \item MFA add kiya (OTP email pe).
+    \item Session ID cookie mein store kiya aur logout pe destroy kar diya.
+    \item Ab attacker ke liye hack karna mushkil ho gaya.
+\end{itemize}
+
+===============================
+===============================
+\hrule
+
+
+
+
+
+% Colors
+\definecolor{sectionblue}{RGB}{0, 0, 255}
+\definecolor{importantred}{RGB}{255, 0, 0}
+\definecolor{keyconceptgreen}{RGB}{0, 128, 0}
+\definecolor{codegray}{RGB}{240, 240, 240}
+\definecolor{keywordblue}{RGB}{0, 0, 255}
+\definecolor{stringred}{RGB}{255, 0, 0}
+\definecolor{commentgreen}{RGB}{0, 128, 0}
+\definecolor{functionorange}{RGB}{255, 165, 0}
+\definecolor{variablepurple}{RGB}{128, 0, 128}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{sectionblue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{sectionblue}}
+  {\thesubsection}{1em}{}
+
+% Custom JavaScript language definition for listings
+\lstdefinelanguage{JavaScript}{
+  keywords={const, let, var, function, if, else, require, process, return},
+  keywordstyle=\color{keywordblue},
+  comment=[l]{//},
+  commentstyle=\color{commentgreen},
+  string=[b]{"},
+  stringstyle=\color{stringred},
+  identifierstyle=\color{variablepurple},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"""
+}
+
+% Code listing setup
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  tabsize=2,
+  language=JavaScript % Default language for code snippets
+}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Secure Coding Guide}
+\lhead{\leftmark}
+\rfoot{Page \thepage}
+
+\section*{\textbf{\LARGE \textcolor{violet}{Secure Coding Guide: Identification and Authentication Failures Examples}}}
+
+% Document start
+\begin{document}
+
+% Title
+\title{\textbf{\color{sectionblue}Secure Coding Guide: Identification and Authentication Failures Examples}}}
+\author{Your Name}
+\date{March 28, 2025}
+\maketitle
+
+% Section 9
+\section{Section 9: Identification and Authentication Failures Examples}
+
+\subsection{9.1 Example 1: Login Brute Force}
+
+\subsubsection{9.1.1 Vulnerable Code}
+\textbf{Listing 32: Vulnerable Login Endpoint (Brute Force Possible)}
+\begin{lstlisting}[caption={Vulnerable Login Endpoint}]
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    // Dummy check, real mein database se hoga
+    if (username === 'admin' && password === 'pass123') {
+        res.json({ message: 'Login ho gaya, bhai!' });
+    } else {
+        res.status(401).json({ error: 'Galat username ya password' });
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable Login with Comments}]
+const express = require('express'); // Express framework import kiya
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body ko parse karne ke liye middleware
+app.post('/login', (req, res) => { // '/login' endpoint pe POST request handle kar raha hai
+    const { username, password } = req.body; // Request body se username aur password liya
+    if (username === 'admin' && password === 'pass123') { // Direct check kiya, koi limit ya protection nahi
+        res.json({ message: 'Login ho gaya, bhai!' }); // Agar credentials match kare toh success
+    } else {
+        res.status(401).json({ error: 'Galat username ya password' }); // Nahi toh error
+    }
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsubsection{9.1.2 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Koi rate limiting ya lockout policy nahi hai, toh attacker infinite baar login try kar sakta hai (brute force attack).
+    \item Weak password ("pass123") use kiya gaya, jo asani se guess ho sakta hai.
+    \item Agar attacker ek script chalaye aur 1000 passwords try kare, toh yeh system usko rok nahi sakega.
+    \item Koi log ya monitoring bhi nahi hai jo failed attempts track kare.
+\end{itemize}
+
+\subsubsection{9.1.3 Secure Code}
+\textbf{Listing 33: Secure Login with Lockout Policy}
+\begin{lstlisting}[caption={Secure Login with Lockout Policy}]
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+// Dummy storage for failed attempts (real mein DB use karo)
+const failedAttempts = {};
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    const ip = req.ip; // User ka IP address liya
+    failedAttempts[ip] = failedAttempts[ip] || { count: 0, lockedUntil: null };
+
+    // Check if IP is locked
+    if (failedAttempts[ip].lockedUntil && failedAttempts[ip].lockedUntil > Date.now()) {
+        return res.status(429).json({ error: 'Bhai, lock ho gaya, 15 minute ruk!' });
+    }
+
+    if (username === 'admin' && password === 'Secure@123') {
+        failedAttempts[ip].count = 0; // Success pe reset karo
+        res.json({ message: 'Login ho gaya, bhai!' });
+    } else {
+        failedAttempts[ip].count += 1; // Failed attempt count badhao
+        if (failedAttempts[ip].count >= 5) { // 5 attempts ke baad lock
+            failedAttempts[ip].lockedUntil = Date.now() + 15 * 60 * 1000; // 15 minute lock
+            return res.status(429).json({ error: '5 galat attempts, 15 minute ke liye lock!' });
+        }
+        res.status(401).json({ error: 'Galat username ya password' });
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure Login with Comments}]
+const express = require('express'); // Express import kiya
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye
+const failedAttempts = {}; // Failed attempts track karne ke liye object (real mein DB use karo)
+app.post('/login', (req, res) => { // Login endpoint
+    const { username, password } = req.body; // Username aur password liya
+    const ip = req.ip; // User ka IP address liya taaki usko track kar sakein
+    failedAttempts[ip] = failedAttempts[ip] || { count: 0, lockedUntil: null }; // IP ke liye entry banayi, count aur lock time ke saath
+    if (failedAttempts[ip].lockedUntil && failedAttempts[ip].lockedUntil > Date.now()) { // Check kiya ki IP lock hai ya nahi
+        return res.status(429).json({ error: 'Bhai, lock ho gaya, 15 minute ruk!' }); // Agar lock hai toh error bhejo
+    }
+    if (username === 'admin' && password === 'Secure@123') { // Strong password ke saath check
+        failedAttempts[ip].count = 0; // Success pe failed attempts reset kiya
+        res.json({ message: 'Login ho gaya, bhai!' }); // Success message
+    } else {
+        failedAttempts[ip].count += 1; // Failed attempt ka count badhaya
+        if (failedAttempts[ip].count >= 5) { // Agar 5 ya zyada attempts ho gaye
+            failedAttempts[ip].lockedUntil = Date.now() + 15 * 60 * 1000; // 15 minute ka lock time set kiya
+            return res.status(429).json({ error: '5 galat attempts, 15 minute ke liye lock!' }); // Lock message
+        }
+        res.status(401).json({ error: 'Galat username ya password' }); // Normal error agar credentials galat hain
+    }
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server start
+\end{lstlisting}
+
+\subsubsection{9.1.4 Kyun Secure Hai?}
+\begin{itemize}
+    \item Lockout policy add ki gayi—5 galat attempts ke baad IP 15 minute ke liye lock ho jata hai.
+    \item Brute force attack ruk jata hai kyunki attacker infinite tries nahi kar sakta.
+    \item Strong password ("Secure@123") use kiya, jo guess karna mushkil hai.
+    \item Failed attempts ko track kiya ja raha hai (real mein DB ya Redis use karo).
+\end{itemize}
+
+\subsection{9.2 Example 2: Sensitive Data in GET Request}
+
+\subsubsection{9.2.1 Vulnerable Code}
+\textbf{Listing 34: Vulnerable Login with Sensitive Data in GET}
+\begin{lstlisting}[caption={Vulnerable Login with GET}]
+const express = require('express');
+const app = express();
+
+app.get('/login', (req, res) => {
+    const username = req.query.username; // URL se username liya
+    const password = req.query.password; // URL se password liya
+    if (username === 'admin' && password === 'pass123') {
+        res.json({ message: 'Login ho gaya, bhai!' });
+    } else {
+        res.status(401).json({ error: 'Galat username ya password' });
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable Login with GET Comments}]
+const express = require('express'); // Express import kiya
+const app = express(); // Express app banaya
+app.get('/login', (req, res) => { // GET request pe '/login' endpoint banaya
+    const username = req.query.username; // Username URL query se liya (?username=admin)
+    const password = req.query.password; // Password URL query se liya (?password=pass123)
+    if (username === 'admin' && password === 'pass123') { // Direct check kiya
+        res.json({ message: 'Login ho gaya, bhai!' }); // Success message
+    } else {
+        res.status(401).json({ error: 'Galat username ya password' }); // Error message
+    }
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server start
+\end{lstlisting}
+
+\subsubsection{9.2.2 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Sensitive data (username aur password) GET request ke URL mein hai (e.g., `/login?username=admin&password=pass123`), jo browser history, server logs, aur network traffic mein expose ho sakta hai.
+    \item Attacker URL intercept karke credentials chura sakta hai.
+    \item GET request ka use login ke liye galat hai kyunki yeh data hide nahi karta.
+    \item Weak password ("pass123") bhi hai, jo aur bura banata hai.
+\end{itemize}
+
+\subsubsection{9.2.3 Secure Code}
+\textbf{Listing 35: Secure Login with POST and Encrypted Data}
+\begin{lstlisting}[caption={Secure Login with POST}]
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body; // POST body se data liya
+    if (username === 'admin' && password === 'Secure@123') {
+        res.json({ message: 'Login ho gaya, bhai!' });
+    } else {
+        res.status(401).json({ error: 'Galat username ya password' });
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure Login with POST Comments}]
+const express = require('express'); // Express import kiya
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye middleware
+app.post('/login', (req, res) => { // POST request pe '/login' endpoint banaya
+    const { username, password } = req.body; // Username aur password body se liya, URL mein nahi
+    if (username === 'admin' && password === 'Secure@123') { // Strong password ke saath check
+        res.json({ message: 'Login ho gaya, bhai!' }); // Success message
+    } else {
+        res.status(401).json({ error: 'Galat username ya password' }); // Error message
+    }
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server start
+\end{lstlisting}
+
+\subsubsection{9.2.4 Kyun Secure Hai?}
+\begin{itemize}
+    \item POST request use kiya, toh sensitive data (username, password) URL mein nahi, body mein jata hai.
+    \item Data HTTPS pe encrypt hota hai (agar server HTTPS use karta hai), toh logs ya network mein expose nahi hoga.
+    \item Strong password ("Secure@123") use kiya, jo guess karna mushkil hai.
+    \item Attacker ke liye credentials churana ab tough hai.
+\end{itemize}
+
+\subsection{9.3 Identification and Authentication Failures Prevention Guide}
+
+\subsubsection{9.3.1 Brute Force Attacks Ko Rokna}
+\begin{itemize}
+    \item \textbf{Lockout Policy Use Karo:}
+        \begin{itemize}
+            \item Agar user 5 baar galat password daale, toh uska account ya IP 15 minute ke liye lock kar do.
+            \item Example upar wale secure code mein hai—`failedAttempts` object IP ke hisaab se track karta hai aur 5 attempts ke baad lock karta hai.
+            \item Real mein yeh logic database ya Redis mein store karo taaki server restart pe data na khoye.
+            \item \textbf{\color{keyconceptgreen}Kyun Kaam Karta Hai?} Attacker infinite tries nahi kar sakta, aur har lock ke baad wait karna padega, jo brute force ko slow karta hai.
+        \end{itemize}
+    \item \textbf{Rate Limiting Add Karo:}
+        \begin{itemize}
+            \item `express-rate-limit` package use karo taaki ek IP se limited requests hi aayein (e.g., 5 requests 15 minute mein).
+            \item Yeh bhi brute force ko rokta hai.
+        \end{itemize}
+    \item \textbf{CAPTCHA Lagao:}
+        \begin{itemize}
+            \item Google reCAPTCHA add karo taaki bots automate na kar sakein.
+            \item Har login attempt pe CAPTCHA solve karwana padega.
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{9.3.2 Sensitive Data Protection}
+\begin{itemize}
+    \item \textbf{POST Use Karo GET Ki Jagah:}
+        \begin{itemize}
+            \item Login jaise sensitive actions ke liye hamesha POST ya PUT use karo, GET mat karo kyunki GET URL mein data daal deta hai.
+            \item POST body mein data encrypt hota hai HTTPS pe.
+        \end{itemize}
+    \item \textbf{HTTPS Enable Karo:}
+        \begin{itemize}
+            \item Server pe SSL/TLS configure karo taaki data encrypted rahe network pe.
+            \item Agar HTTPS nahi hai, toh attacker man-in-the-middle attack se data chura sakta hai.
+        \end{itemize}
+\end{itemize}
+
+\subsubsection{9.3.3 Strong Password Policies}
+\begin{itemize}
+    \item Password minimum 8 characters, ek number, ek special char ke saath rakho.
+    \item Regex check use karo jaise: `/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/`.
+    \item Common passwords (jaise "123456") ko blacklist karo.
+\end{itemize}
+
+\subsubsection{9.3.4 Multi-Factor Authentication (MFA)}
+\begin{itemize}
+    \item OTP (SMS/email) ya TOTP (Google Authenticator) add karo.
+    \item Har login pe doosra factor verify karo taaki sirf password se kaam na chale.
+\end{itemize}
+
+\subsubsection{9.3.5 Session Management}
+\begin{itemize}
+    \item Random session IDs generate karo (`express-session` use karo).
+    \item Session ID ko cookie mein store karo, URL mein mat daalo.
+    \item Logout pe session destroy karo (`req.session.destroy`).
+\end{itemize}
+
+\subsubsection{9.3.6 Extra Tips}
+\begin{itemize}
+    \item \textbf{Failed Login Logs:}
+        \begin{itemize}
+            \item Har galat attempt ko log karo taaki suspicious activity track ho sake.
+        \end{itemize}
+    \item \textbf{Account Lock Notification:}
+        \begin{itemize}
+            \item User ko email bhejo agar account lock ho jaye taaki woh alert rahe.
+        \end{itemize}
+    \item \textbf{Password Hashing:}
+        \begin{itemize}
+            \item Bcrypt use karo passwords ko hash karne ke liye, salt ke saath.
+        \end{itemize}
+\end{itemize}
+
+\subsection{9.4 Real-World Example in Hinglish}
+Maan lo ek e-commerce site pe login GET request se ho raha tha (`/login?username=admin&password=pass123`). Attacker ne URL intercept kiya aur credentials chura liye. Uske baad brute force script chalaya aur 1000 attempts mein password crack kar liya kyunki koi lockout policy nahi thi.
+
+\textbf{Secure Fix:}
+\begin{itemize}
+    \item Login ko POST pe shift kiya (`/login` with body).
+    \item Lockout policy lagayi—5 galat attempts pe 15 minute lock.
+    \item HTTPS enable kiya taaki data encrypt rahe.
+    \item Ab attacker ke liye hack karna mushkil ho gaya.
+\end{itemize}
+
+===============================
+===============================
+\hrule
+
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% Colors
+\definecolor{sectionblue}{RGB}{0, 0, 255}
+\definecolor{importantred}{RGB}{255, 0, 0}
+\definecolor{keyconceptgreen}{RGB}{0, 128, 0}
+\definecolor{codegray}{RGB}{240, 240, 240}
+\definecolor{keywordblue}{RGB}{0, 0, 255}
+\definecolor{stringred}{RGB}{255, 0, 0}
+\definecolor{commentgreen}{RGB}{0, 128, 0}
+\definecolor{functionorange}{RGB}{255, 165, 0}
+\definecolor{variablepurple}{RGB}{128, 0, 128}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{sectionblue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{sectionblue}}
+  {\thesubsection}{1em}{}
+
+% Custom JavaScript language definition for listings
+\lstdefinelanguage{JavaScript}{
+  keywords={const, let, var, function, if, else, require, process, return, then, catch},
+  keywordstyle=\color{keywordblue},
+  comment=[l]{//},
+  commentstyle=\color{commentgreen},
+  string=[b]{"},
+  stringstyle=\color{stringred},
+  identifierstyle=\color{variablepurple},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"""
+}
+
+% Code listing setup
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  tabsize=2,
+  language=JavaScript % Default language for code snippets
+}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Secure Coding Guide}
+\lhead{\leftmark}
+\rfoot{Page \thepage}
+
+% Document start
+\begin{document}
+
+\section*{\textbf{\LARGE \textcolor{violet}{Secure Coding Guide: Express.js Vulnerabilities}}}
+
+% Title
+\title{\textbf{\color{sectionblue}Secure Coding Guide: Express.js Vulnerabilities}}}
+\author{Your Name}
+\date{March 28, 2025}
+\maketitle
+
+% Section: XSS
+\section{Section: Cross-Site Scripting (XSS) in Express.js}
+
+\subsection{1.1 XSS Kya Hai?}
+Bhai, Cross-Site Scripting (XSS) tab hota hai jab attacker koi malicious JavaScript code inject kar deta hai jo user ke browser mein chal jata hai. Yeh attack website ke input fields, URL parameters, ya database se aaye data ke through ho sakta hai. Agar XSS ho gaya, toh attacker user ka session chura sakta hai, fake pages dikha sakta hai, ya sensitive data (jaise cookies) le sakta hai.
+
+\textbf{Types:}
+\begin{itemize}
+    \item \textbf{Reflected XSS}: Jab malicious code URL mein hota hai aur server usko reflect karta hai.
+    \item \textbf{Stored XSS}: Jab code database mein save ho jata hai aur har user ko dikhayi deta hai.
+    \item \textbf{DOM-based XSS}: Jab client-side JavaScript input ko galat tarike se handle karta hai.
+\end{itemize}
+Ab main tujhe ek vulnerable aur secure code example deta hoon Express.js mein.
+
+\subsection{1.2 Vulnerable Code}
+\textbf{Listing: Vulnerable XSS Endpoint}
+\begin{lstlisting}[caption={Vulnerable XSS Endpoint}]
+const express = require('express');
+const app = express();
+
+app.get('/search', (req, res) => {
+    const query = req.query.q; // User ka input URL se liya
+    // Direct HTML mein input daal diya bina check ke
+    res.send(`<h1>Search Results for: ${query}</h1>`);
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable XSS with Comments}]
+const express = require('express'); // Express framework import kiya
+const app = express(); // Express app banaya
+app.get('/search', (req, res) => { // '/search' endpoint pe GET request handle kar raha hai
+    const query = req.query.q; // URL se query parameter liya (?q=xyz)
+    res.send(`<h1>Search Results for: ${query}</h1>`); // User input ko direct HTML mein daal diya, koi sanitization nahi
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{1.3 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Yeh code user input (`req.query.q`) ko direct HTML mein daal raha hai bina kisi sanitization ke.
+    \item Agar attacker URL mein `?q=<script>alert('hacked')</script>` daal de, toh yeh browser mein execute ho jayega.
+    \item Stored XSS ke case mein, agar yeh input DB mein save hua aur baad mein dikhaya gaya, toh har user ko attack hoga.
+    \item Attacker user ke cookies chura sakta hai ya fake login page dikha sakta hai.
+\end{itemize}
+
+\subsection{1.4 Secure Code}
+\textbf{Listing: Secure XSS Prevention}
+\begin{lstlisting}[caption={Secure XSS Prevention}]
+const express = require('express');
+const sanitizeHtml = require('sanitize-html'); // HTML sanitization ke liye package
+const app = express();
+
+app.get('/search', (req, res) => {
+    const query = req.query.q; // User ka input URL se liya
+    // Input ko sanitize karke sirf safe HTML allow karo
+    const safeQuery = sanitizeHtml(query, {
+        allowedTags: [], // Koi tags allow nahi, plain text hi rahega
+        allowedAttributes: {} // Koi attributes bhi nahi
+    });
+    res.send(`<h1>Search Results for: ${safeQuery}</h1>`);
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure XSS with Comments}]
+const express = require('express'); // Express framework import kiya
+const sanitizeHtml = require('sanitize-html'); // Sanitize-html package import kiya, yeh malicious code hata dega
+const app = express(); // Express app banaya
+app.get('/search', (req, res) => { // '/search' endpoint pe GET request handle kar raha hai
+    const query = req.query.q; // URL se query parameter liya (?q=xyz)
+    const safeQuery = sanitizeHtml(query, { // Input ko sanitize kiya
+        allowedTags: [], // Koi HTML tags allow nahi, sirf plain text
+        allowedAttributes: {} // Koi attributes bhi allow nahi
+    });
+    res.send(`<h1>Search Results for: ${safeQuery}</h1>`); // Sanitized input ko HTML mein daala, ab safe hai
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{1.5 Kyun Secure Hai?}
+\begin{itemize}
+    \item `sanitize-html` package se input ko sanitize kiya gaya, toh `<script>` jaise tags remove ho jate hain.
+    \item Ab attacker chahe `?q=<script>alert('hacked')</script>` daale, yeh sirf text ke roop mein dikhega, execute nahi hoga.
+    \item Yeh reflected aur stored XSS dono ko rokta hai jab tak output sanitize hota rahe.
+\end{itemize}
+
+\subsection{1.6 Prevention Tips}
+\begin{itemize}
+    \item \textbf{Input Validation}: User input ko check karo ki woh expected format mein hai (e.g., regex se).
+    \item \textbf{Output Escaping}: HTML mein daalne se pehle special characters escape karo (`<` → `<`).
+    \item \textbf{CSP}: Content Security Policy lagao (`res.set('Content-Security-Policy', "script-src 'self'")`) taaki external scripts na chalein.
+    \item \textbf{Tools}: ESLint plugin (`eslint-plugin-no-unsanitized`) use karo XSS dhoondhne ke liye.
+\end{itemize}
+
+\section{Section: Cross-Site Request Forgery (CSRF) in Express.js}
+
+\subsection{2.1 CSRF Kya Hai?}
+CSRF tab hota hai jab attacker user ko fake request karne pe majboor karta hai jab woh already logged-in hota hai. Jaise, agar tu bank app mein logged-in hai aur kisi malicious link pe click karta hai, toh attacker tere account se paisa transfer karwa sakta hai bina tere pata chale.
+
+\subsection{2.2 Vulnerable Code}
+\textbf{Listing: Vulnerable CSRF Endpoint}
+\begin{lstlisting}[caption={Vulnerable CSRF Endpoint}]
+const express = require('express');
+const app = express();
+app.use(express.urlencoded({ extended: true })); // Form data parse karne ke liye
+
+app.post('/transfer', (req, res) => {
+    const { amount, toAccount } = req.body; // Form se data liya
+    // Koi CSRF check nahi, direct action perform kar raha hai
+    res.send(`Transferred ${amount} to ${toAccount}, bhai!`);
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable CSRF with Comments}]
+const express = require('express'); // Express framework import kiya
+const app = express(); // Express app banaya
+app.use(express.urlencoded({ extended: true })); // Form data ko parse karne ke liye middleware
+app.post('/transfer', (req, res) => { // '/transfer' endpoint pe POST request handle kar raha hai
+    const { amount, toAccount } = req.body; // Form se amount aur toAccount liya
+    res.send(`Transferred ${amount} to ${toAccount}, bhai!`); // Koi CSRF check nahi, direct response bhej diya
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{2.3 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Yeh code koi CSRF token check nahi karta, toh attacker ek fake form bana ke user ko submit karwa sakta hai.
+    \item Agar user logged-in hai, toh browser cookies ke saath request bhej dega, aur transfer ho jayega.
+    \item Example: Attacker `<form action="http://example.com/transfer" method="POST">` bana ke `amount=1000` aur `toAccount=attacker` set kar sakta hai.
+\end{itemize}
+
+\subsection{2.4 Secure Code}
+\textbf{Listing: Secure CSRF Protection}
+\begin{lstlisting}[caption={Secure CSRF Protection}]
+const express = require('express');
+const csurf = require('csurf'); // CSRF protection ke liye package
+const cookieParser = require('cookie-parser');
+const app = express();
+
+app.use(cookieParser()); // Cookies parse karne ke liye
+app.use(express.urlencoded({ extended: true })); // Form data parse karne ke liye
+app.use(csurf({ cookie: true })); // CSRF protection middleware
+
+app.post('/transfer', (req, res) => {
+    const { amount, toAccount } = req.body; // Form se data liya
+    // CSRF token automatically check ho gaya middleware se
+    res.send(`Transferred ${amount} to ${toAccount}, bhai!`);
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure CSRF with Comments}]
+const express = require('express'); // Express framework import kiya
+const csurf = require('csurf'); // CSRF protection package import kiya
+const cookieParser = require('cookie-parser'); // Cookies parse karne ke liye package
+const app = express(); // Express app banaya
+app.use(cookieParser()); // Cookies ko parse karne ke liye middleware
+app.use(express.urlencoded({ extended: true })); // Form data parse karne ke liye middleware
+app.use(csurf({ cookie: true })); // CSRF protection lagaya, token cookie mein store hoga
+app.post('/transfer', (req, res) => { // '/transfer' endpoint pe POST request handle kar raha hai
+    const { amount, toAccount } = req.body; // Form se amount aur toAccount liya
+    res.send(`Transferred ${amount} to ${toAccount}, bhai!`); // CSRF token middleware ne check kar liya
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{2.5 Kyun Secure Hai?}
+\begin{itemize}
+    \item `csurf` middleware har POST request pe CSRF token check karta hai, jo form mein hidden field ke roop mein hona chahiye.
+    \item Agar token match nahi karta, toh request fail ho jayega (403 error).
+    \item Attacker ke fake form mein token nahi hoga, toh attack kaam nahi karega.
+\end{itemize}
+
+\subsection{2.6 Prevention Tips}
+\begin{itemize}
+    \item \textbf{CSRF Token}: Har form mein unique token daal ke server pe verify karo.
+    \item \textbf{SameSite Cookies}: `cookie: { sameSite: 'strict' }` lagao taaki cross-site requests na chalein.
+    \item \textbf{HTTP Method Check}: Sensitive actions ko POST/DELETE pe rakho, GET pe mat.
+\end{itemize}
+
+\section{Section: Server-Side Request Forgery (SSRF) in Express.js}
+
+\subsection{3.1 SSRF Kya Hai?}
+SSRF tab hota hai jab attacker server ko aisa URL fetch karne pe majboor karta hai jo internal systems ya sensitive resources tak jata hai, jaise `http://localhost` ya `http://internal-api`.
+
+\subsection{3.2 Vulnerable Code}
+\textbf{Listing: Vulnerable SSRF Endpoint}
+\begin{lstlisting}[caption={Vulnerable SSRF Endpoint}]
+const express = require('express');
+const axios = require('axios'); // HTTP requests ke liye
+const app = express();
+
+app.get('/fetch', (req, res) => {
+    const url = req.query.url; // User ka input URL se liya
+    // Direct URL fetch kar rahe hain bina check ke
+    axios.get(url).then(response => {
+        res.send(response.data);
+    }).catch(err => res.status(500).send('Kuch galat ho gaya'));
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable SSRF with Comments}]
+const express = require('express'); // Express framework import kiya
+const axios = require('axios'); // HTTP requests ke liye package
+const app = express(); // Express app banaya
+app.get('/fetch', (req, res) => { // '/fetch' endpoint pe GET request handle kar raha hai
+    const url = req.query.url; // URL parameter se user input liya (?url=xyz)
+    axios.get(url).then(response => { // Direct user ka URL fetch kiya, koi validation nahi
+        res.send(response.data); // Response client ko bhej diya
+    }).catch(err => res.status(500).send('Kuch galat ho gaya')); // Error handle kiya
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{3.3 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Yeh code user ke diye URL ko direct fetch karta hai bina kisi check ke.
+    \item Attacker `?url=http://localhost/admin` ya `?url=file:///etc/passwd` daal sakta hai aur sensitive data le sakta hai.
+    \item Internal network ke resources (jaise DB ya admin panel) expose ho sakte hain.
+\end{itemize}
+
+\subsection{3.4 Secure Code}
+\textbf{Listing: Secure SSRF Prevention}
+\begin{lstlisting}[caption={Secure SSRF Prevention}]
+const express = require('express');
+const axios = require('axios');
+const url = require('url'); // URL parsing ke liye
+const app = express();
+
+app.get('/fetch', (req, res) => {
+    const inputUrl = req.query.url; // User ka input URL se liya
+    const parsedUrl = url.parse(inputUrl); // URL ko parse kiya
+    // Whitelist check: Sirf allowed domains
+    const allowedDomains = ['api.example.com', 'www.example.com'];
+    if (!allowedDomains.includes(parsedUrl.hostname)) {
+        return res.status(403).send('Bhai, yeh URL allowed nahi hai!');
+    }
+    axios.get(inputUrl).then(response => {
+        res.send(response.data);
+    }).catch(err => res.status(500).send('Kuch galat ho gaya'));
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure SSRF with Comments}]
+const express = require('express'); // Express framework import kiya
+const axios = require('axios'); // HTTP requests ke liye package
+const url = require('url'); // URL ko parse karne ke liye Node.js module
+const app = express(); // Express app banaya
+app.get('/fetch', (req, res) => { // '/fetch' endpoint pe GET request handle kar raha hai
+    const inputUrl = req.query.url; // URL parameter se user input liya
+    const parsedUrl = url.parse(inputUrl); // URL ko parse kiya taaki hostname check kar sakein
+    const allowedDomains = ['api.example.com', 'www.example.com']; // Allowed domains ki list
+    if (!allowedDomains.includes(parsedUrl.hostname)) { // Check kiya ki URL ka hostname allowed hai ya nahi
+        return res.status(403).send('Bhai, yeh URL allowed nahi hai!'); // Agar nahi hai toh error
+    }
+    axios.get(inputUrl).then(response => { // Allowed URL ko fetch kiya
+        res.send(response.data); // Response client ko bhej diya
+    }).catch(err => res.status(500).send('Kuch galat ho gaya')); // Error handle kiya
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{3.5 Kyun Secure Hai?}
+\begin{itemize}
+    \item URL ko parse karke hostname check kiya gaya aur sirf whitelist domains allow kiye gaye.
+    \item Attacker ab `localhost` ya internal IPs fetch nahi kar sakta.
+    \item Yeh SSRF attacks ko rokta hai kyunki invalid URLs reject ho jate hain.
+\end{itemize}
+
+\subsection{3.6 Prevention Tips}
+\begin{itemize}
+    \item \textbf{Whitelist}: Sirf trusted domains allow karo.
+    \item \textbf{Block Internal IPs}: `127.0.0.1`, `10.0.0.0/8` jaise addresses block karo.
+    \item \textbf{URL Validation}: `url.parse()` ya regex se URL check karo.
+\end{itemize}
+
+\section{Section: File Inclusion/Path Traversal in Express.js}
+
+\subsection{4.1 File Inclusion/Path Traversal Kya Hai?}
+Yeh tab hota hai jab attacker user input ke through server ke file system mein ghusta hai aur sensitive files (jaise `/etc/passwd`) padh leta hai. Path traversal mein `../` use karke directory structure manipulate kiya jata hai.
+
+\subsection{4.2 Vulnerable Code}
+\textbf{Listing: Vulnerable Path Traversal}
+\begin{lstlisting}[caption={Vulnerable Path Traversal}]
+const express = require('express');
+const fs = require('fs');
+const app = express();
+
+app.get('/file', (req, res) => {
+    const fileName = req.query.name; // User ka input URL se liya
+    // Direct file path bana diya bina check ke
+    const filePath = `./files/${fileName}`;
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Kuch galat ho gaya');
+        res.send(data);
+    });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable Path Traversal with Comments}]
+const express = require('express'); // Express framework import kiya
+const fs = require('fs'); // File system module import kiya
+const app = express(); // Express app banaya
+app.get('/file', (req, res) => { // '/file' endpoint pe GET request handle kar raha hai
+    const fileName = req.query.name; // URL se file name liya (?name=xyz)
+    const filePath = `./files/${fileName}`; // Direct file path bana diya, koi sanitization nahi
+    fs.readFile(filePath, 'utf8', (err, data) => { // File ko read kiya
+        if (err) return res.status(500).send('Kuch galat ho gaya'); // Error handle kiya
+        res.send(data); // File ka data client ko bhej diya
+    });
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{4.3 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item User input (`req.query.name`) ko direct file path mein use kiya gaya bina sanitization ke.
+    \item Attacker `?name=../../etc/passwd` daal sakta hai aur sensitive files padh sakta hai.
+    \item Koi base directory check nahi hai, toh file system ke bahar ja sakta hai.
+\end{itemize}
+
+\subsection{4.4 Secure Code}
+\textbf{Listing: Secure Path Traversal Prevention}
+\begin{lstlisting}[caption={Secure Path Traversal Prevention}]
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const app = express();
+
+app.get('/file', (req, res) => {
+    const fileName = req.query.name; // User ka input URL se liya
+    // Base directory set kiya aur path normalize kiya
+    const baseDir = path.resolve('./files');
+    const filePath = path.join(baseDir, fileName);
+    // Check kiya ki file base directory ke andar hai
+    if (!filePath.startsWith(baseDir)) {
+        return res.status(403).send('Bhai, bahar mat jao!');
+    }
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) return res.status(500).send('Kuch galat ho gaya');
+        res.send(data);
+    });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure Path Traversal with Comments}]
+const express = require('express'); // Express framework import kiya
+const fs = require('fs'); // File system module import kiya
+const path = require('path'); // Path manipulation ke liye module
+const app = express(); // Express app banaya
+app.get('/file', (req, res) => { // '/file' endpoint pe GET request handle kar raha hai
+    const fileName = req.query.name; // URL se file name liya (?name=xyz)
+    const baseDir = path.resolve('./files'); // Base directory ko absolute path mein set kiya
+    const filePath = path.join(baseDir, fileName); // Safe path banaya, ../ ko handle karta hai
+    if (!filePath.startsWith(baseDir)) { // Check kiya ki file base directory ke andar hai ya nahi
+        return res.status(403).send('Bhai, bahar mat jao!'); // Agar bahar jata hai toh error
+    }
+    fs.readFile(filePath, 'utf8', (err, data) => { // File ko read kiya
+        if (err) return res.status(500).send('Kuch galat ho gaya'); // Error handle kiya
+        res.send(data); // File ka data client ko bhej diya
+    });
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{4.5 Kyun Secure Hai?}
+\begin{itemize}
+    \item `path.resolve()` aur `path.join()` se path normalize hota hai, toh `../` kaam nahi karta.
+    \item `startsWith` check se ensure kiya gaya ki file base directory ke andar hi rahe.
+    \item Attacker ab system files access nahi kar sakta.
+\end{itemize}
+
+\subsection{4.6 Prevention Tips}
+\begin{itemize}
+    \item \textbf{Sanitization}: `path.normalize()` use karo `../` hatane ke liye.
+    \item \textbf{Base Directory}: Hamesha fixed base directory set karo.
+    \item \textbf{Validation}: File names ko regex se check karo (e.g., `/^[a-zA-Z0-9-.]+$/`).
+\end{itemize}
+
+\section{Section: Logging and Monitoring Failures in Express.js}
+
+\subsection{5.1 Logging and Monitoring Failures Kya Hai?}
+Yeh tab hota hai jab system mein proper logs ya monitoring nahi hoti, toh attacks detect nahi hote. Ethical hackers isko check karte hain ki failed logins, errors, ya suspicious activity track ho rahi hai ya nahi.
+
+\subsection{5.2 Vulnerable Code}
+\textbf{Listing: Vulnerable No Logging}
+\begin{lstlisting}[caption={Vulnerable No Logging}]
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    // Koi logging nahi, direct check
+    if (username === 'admin' && password === 'pass123') {
+        res.json({ message: 'Login ho gaya, bhai!' });
+    } else {
+        res.status(401).send('Galat credentials');
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable No Logging with Comments}]
+const express = require('express'); // Express framework import kiya
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye
+app.post('/login', (req, res) => { // '/login' endpoint pe POST request handle kar raha hai
+    const { username, password } = req.body; // Username aur password liya
+    if (username === 'admin' && password === 'pass123') { // Direct check, koi log nahi
+        res.json({ message: 'Login ho gaya, bhai!' }); // Success message
+    } else {
+        res.status(401).send('Galat credentials'); // Error message, koi log nahi
+    }
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{5.3 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Failed login attempts ka koi log nahi hai, toh brute force attack pata nahi chalega.
+    \item Success ya failure dono ka record nahi rakha ja raha.
+    \item Agar attacker 1000 baar try kare, toh koi monitoring nahi hai usko pakadne ke liye.
+\end{itemize}
+
+\subsection{5.4 Secure Code}
+\textbf{Listing: Secure Logging with Winston}
+\begin{lstlisting}[caption={Secure Logging with Winston}]
+const express = require('express');
+const winston = require('winston'); // Logging ke liye package
+const app = express();
+app.use(express.json());
+
+// Logger setup
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.json()
+    ),
+    transports: [new winston.transports.File({ filename: 'app.log' })]
+});
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    const ip = req.ip; // IP address liya
+    if (username === 'admin' && password === 'pass123') {
+        logger.info(`Login successful for ${username} from ${ip}`); // Success log
+        res.json({ message: 'Login ho gaya, bhai!' });
+    } else {
+        logger.warn(`Failed login attempt for ${username} from ${ip}`); // Failure log
+        res.status(401).send('Galat credentials');
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure Logging with Comments}]
+const express = require('express'); // Express framework import kiya
+const winston = require('winston'); // Winston logging package import kiya
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye
+const logger = winston.createLogger({ // Logger configure kiya
+    level: 'info', // Info level se logging hogi
+    format: winston.format.combine( // Log format set kiya
+        winston.format.timestamp(), // Timestamp add kiya
+        winston.format.json() // JSON format mein logs
+    ),
+    transports: [new winston.transports.File({ filename: 'app.log' })] // Logs file mein save honge
+});
+app.post('/login', (req, res) => { // '/login' endpoint pe POST request handle kar raha hai
+    const { username, password } = req.body; // Username aur password liya
+    const ip = req.ip; // User ka IP address liya
+    if (username === 'admin' && password === 'pass123') { // Credentials check
+        logger.info(`Login successful for ${username} from ${ip}`); // Success ka log banaya
+        res.json({ message: 'Login ho gaya, bhai!' }); // Success message
+    } else {
+        logger.warn(`Failed login attempt for ${username} from ${ip}`); // Failure ka log banaya
+        res.status(401).send('Galat credentials'); // Error message
+    }
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{5.5 Kyun Secure Hai?}
+\begin{itemize}
+    \item `winston` se har login attempt (success ya failure) ka log banaya ja raha hai.
+    \item IP address bhi track ho raha hai, toh suspicious activity monitor kar sakte ho.
+    \item Logs `app.log` file mein save hote hain, jo analysis ke liye use ho sakte hain.
+\end{itemize}
+
+\subsection{5.6 Prevention Tips}
+\begin{itemize}
+    \item \textbf{Log Everything}: Failed logins, errors, aur sensitive actions log karo.
+    \item \textbf{No Sensitive Data}: Passwords ya tokens logs mein mat daalo.
+    \item \textbf{Monitoring}: Logs ko ELK stack ya Splunk se monitor karo.
+\end{itemize}
+
+\section{Section: Business Logic Flaws in Express.js}
+
+\subsection{6.1 Business Logic Flaws Kya Hai?}
+Yeh tab hota hai jab app ka logic attacker ke favor mein manipulate ho jata hai, jaise price change karna ya unauthorized access lena. Yeh code bug nahi, balki design ya logic ki kami hoti hai.
+
+\subsection{6.2 Vulnerable Code}
+\textbf{Listing: Vulnerable Price Manipulation}
+\begin{lstlisting}[caption={Vulnerable Price Manipulation}]
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.post('/buy', (req, res) => {
+    const { itemId, price } = req.body; // Client se price liya
+    // Direct client ka price use kiya bina check ke
+    res.send(`Bought item ${itemId} for ${price}, bhai!`);
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable Price Manipulation with Comments}]
+const express = require('express'); // Express framework import kiya
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye
+app.post('/buy', (req, res) => { // '/buy' endpoint pe POST request handle kar raha hai
+    const { itemId, price } = req.body; // Client se itemId aur price liya
+    res.send(`Bought item ${itemId} for ${price}, bhai!`); // Client ka price direct use kiya, koi server check nahi
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{6.3 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Client se aaya `price` direct use ho raha hai, toh attacker `price=0` ya negative value bhej sakta hai.
+    \item Server pe koi validation nahi hai ki price sahi hai ya nahi.
+    \item Yeh business logic flaw hai kyunki app trust kar raha hai client pe.
+\end{itemize}
+
+\subsection{6.4 Secure Code}
+\textbf{Listing: Secure Price Validation}
+\begin{lstlisting}[caption={Secure Price Validation}]
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+// Dummy DB for item prices
+const items = { 1: 100, 2: 200 };
+
+app.post('/buy', (req, res) => {
+    const { itemId, price } = req.body; // Client se data liya
+    const actualPrice = items[itemId]; // Server se real price liya
+    if (!actualPrice || price !== actualPrice) { // Price match check kiya
+        return res.status(403).send('Bhai, price galat hai!');
+    }
+    res.send(`Bought item ${itemId} for ${actualPrice}, bhai!`);
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure Price Validation with Comments}]
+const express = require('express'); // Express framework import kiya
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye
+const items = { 1: 100, 2: 200 }; // Dummy DB jahan real prices store hain
+app.post('/buy', (req, res) => { // '/buy' endpoint pe POST request handle kar raha hai
+    const { itemId, price } = req.body; // Client se itemId aur price liya
+    const actualPrice = items[itemId]; // Server se item ka asli price liya
+    if (!actualPrice || price !== actualPrice) { // Check kiya ki price match karta hai ya nahi
+        return res.status(403).send('Bhai, price galat hai!'); // Agar galat hai toh error
+    }
+    res.send(`Bought item ${itemId} for ${actualPrice}, bhai!`); // Real price ke saath response
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{6.5 Kyun Secure Hai?}
+\begin{itemize}
+    \item Price ko server-side DB se check kiya gaya, client ka input ignore kiya.
+    \item Attacker ab price manipulate nahi kar sakta kyunki server pe validation hai.
+    \item Yeh logic flaw ko fix karta hai.
+\end{itemize}
+
+\subsection{6.6 Prevention Tips}
+\begin{itemize}
+    \item \textbf{Server-Side Validation}: Sensitive values (price, quantity) client pe trust mat karo.
+    \item \textbf{DB Checks}: Har action ke liye DB ya config se data verify karo.
+    \item \textbf{Rate Limiting}: Unlimited purchases rokne ke liye limit lagao.
+\end{itemize}
+
+\section{Section: API Security in Express.js}
+
+\subsection{7.1 API Security Kya Hai?}
+API security mein REST ya GraphQL endpoints ko secure karna hota hai taaki unauthorized access, data leaks, ya abuse na ho. Common issues hain broken auth, no rate limiting, aur input validation ki kami.
+
+\subsection{7.2 Vulnerable Code}
+\textbf{Listing: Vulnerable API Endpoint}
+\begin{lstlisting}[caption={Vulnerable API Endpoint}]
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.get('/api/data', (req, res) => {
+    const apiKey = req.query.key; // API key URL se liya
+    // Weak API key check
+    if (apiKey === '12345') {
+        res.json({ data: 'Secret data, bhai!' });
+    } else {
+        res.status(401).send('Galat key');
+    }
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable API with Comments}]
+const express = require('express'); // Express framework import kiya
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye
+app.get('/api/data', (req, res) => { // '/api/data' endpoint pe GET request handle kar raha hai
+    const apiKey = req.query.key; // API key URL se liya (?key=xyz)
+    if (apiKey === '12345') { // Weak aur predictable key check
+        res.json({ data: 'Secret data, bhai!' }); // Data bhej diya
+    } else {
+        res.status(401).send('Galat key'); // Error message
+    }
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{7.3 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item API key weak aur predictable hai (`12345`), guess karna aasan hai.
+    \item Key URL mein expose ho raha hai, logs mein leak ho sakta hai.
+    \item Koi rate limiting nahi hai, toh brute force ho sakta hai.
+\end{itemize}
+
+\subsection{7.4 Secure Code}
+\textbf{Listing: Secure API Endpoint}
+\begin{lstlisting}[caption={Secure API Endpoint}]
+const express = require('express');
+const rateLimit = require('express-rate-limit');
+const app = express();
+app.use(express.json());
+
+// Rate limiter
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minute window
+    max: 100 // 100 requests per IP
+});
+
+// Dummy valid API key
+const validApiKey = 'x7k9p2m4q8r5t1n3';
+
+app.get('/api/data', apiLimiter, (req, res) => {
+    const apiKey = req.headers['x-api-key']; // Header se key liya
+    if (apiKey !== validApiKey) { // Strong key check
+        return res.status(401).send('Galat key, bhai!');
+    }
+    res.json({ data: 'Secret data, bhai!' });
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure API with Comments}]
+const express = require('express'); // Express framework import kiya
+const rateLimit = require('express-rate-limit'); // Rate limiting package
+const app = express(); // Express app banaya
+app.use(express.json()); // JSON body parse karne ke liye
+const apiLimiter = rateLimit({ // Rate limiter configure kiya
+    windowMs: 15 * 60 * 1000, // 15 minute ka window
+    max: 100 // 100 requests allow honge per IP
+});
+const validApiKey = 'x7k9p2m4q8r5t1n3'; // Strong random API key
+app.get('/api/data', apiLimiter, (req, res) => { // '/api/data' endpoint pe GET request
+    const apiKey = req.headers['x-api-key']; // API key header se liya, URL mein nahi
+    if (apiKey !== validApiKey) { // Strong key ke saath check
+        return res.status(401).send('Galat key, bhai!'); // Error message
+    }
+    res.json({ data: 'Secret data, bhai!' }); // Data bhej diya
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{7.5 Kyun Secure Hai?}
+\begin{itemize}
+    \item API key header mein liya gaya (`x-api-key`), toh URL mein expose nahi hota.
+    \item Strong random key use kiya, guess karna mushkil hai.
+    \item `rateLimit` se brute force attacks rukenge.
+\end{itemize}
+
+\subsection{7.6 Prevention Tips}
+\begin{itemize}
+    \item \textbf{JWT}: Complex APIs ke liye JWT tokens use karo.
+    \item \textbf{Rate Limiting}: Har endpoint pe limit lagao.
+    \item \textbf{Input Validation}: API inputs ko strictly check karo.
+\end{itemize}
+
+\section{Section: Dependency Injection/Supply Chain Attacks in Express.js}
+
+\subsection{8.1 Dependency Injection/Supply Chain Attacks Kya Hai?}
+Yeh tab hota hai jab koi malicious npm package ya dependency install ho jati hai jo code mein backdoor ya data leak kar sakti hai.
+
+\subsection{8.2 Vulnerable Code}
+\textbf{Listing: Vulnerable Dependency Usage}
+\begin{lstlisting}[caption={Vulnerable Dependency Usage}]
+const express = require('express');
+const badPackage = require('malicious-package'); // Fake malicious package
+const app = express();
+
+app.get('/', (req, res) => {
+    badPackage.run(); // Malicious code chal sakta hai
+    res.send('Hello, bhai!');
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Vulnerable Dependency with Comments}]
+const express = require('express'); // Express framework import kiya
+const badPackage = require('malicious-package'); // Fake malicious package import kiya
+const app = express(); // Express app banaya
+app.get('/', (req, res) => { // '/' endpoint pe GET request handle kar raha hai
+    badPackage.run(); // Malicious package ka function call kiya, yeh kuch bhi kar sakta hai
+    res.send('Hello, bhai!'); // Response bhej diya
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{8.3 Kyun Vulnerable Hai?}
+\begin{itemize}
+    \item Unknown package (`malicious-package`) use kiya gaya jo data chura sakta hai ya server crash kar sakta hai.
+    \item Package verify nahi kiya gaya install se pehle.
+    \item Supply chain attack ka risk hai.
+\end{itemize}
+
+\subsection{8.4 Secure Code}
+\textbf{Listing: Secure Dependency Management}
+\begin{lstlisting}[caption={Secure Dependency Management}]
+const express = require('express');
+const app = express();
+
+// package.json mein lock kiya hua trusted version
+// "express": "^4.18.2" aur package-lock.json use kiya
+
+app.get('/', (req, res) => {
+    res.send('Hello, bhai!'); // Sirf trusted code
+});
+
+app.listen(3000, () => console.log('Server chal raha hai'));
+\end{lstlisting}
+
+\textbf{Line-by-Line Explanation with Comments:}
+\begin{lstlisting}[caption={Secure Dependency with Comments}]
+const express = require('express'); // Express framework import kiya, trusted version
+const app = express(); // Express app banaya
+app.get('/', (req, res) => { // '/' endpoint pe GET request handle kar raha hai
+    res.send('Hello, bhai!'); // Sirf trusted code chal raha hai, koi extra package nahi
+});
+app.listen(3000, () => console.log('Server chal raha hai')); // Server 3000 port pe start kiya
+\end{lstlisting}
+
+\subsection{8.5 Kyun Secure Hai?}
+\begin{itemize}
+    \item Sirf trusted aur verified package (`express`) use kiya gaya.
+    \item `package-lock.json` se exact versions lock kiye gaye, toh malicious update nahi aayega.
+    \item Extra dependencies avoid ki gayi.
+\end{itemize}
+
+\subsection{8.6 Prevention Tips}
+\begin{itemize}
+    \item \textbf{Audit}: `npm audit` chalao har dependency check karne ke liye.
+    \item \textbf{Lock File}: `package-lock.json` commit karo repo mein.
+    \item \textbf{Trusted Sources}: Sirf official npm packages use karo.
+\end{itemize}
+
+\section{Section: Secure Coding Best Practices Summary}
+
+\subsection{9.1 Secure Coding Best Practices Kya Hai?}
+Yeh ek quick summary hai jo har ethical hacker aur developer ko yaad rakhna chahiye. Yeh tere notes ka conclusion bhi ban sakta hai.
+
+\subsection{9.2 Best Practices}
+\begin{itemize}
+    \item \textbf{Input Validation}: Har user input ko check karo (regex, type checking).
+    \item \textbf{Output Escaping}: HTML, JS mein data daalne se pehle escape karo.
+    \item \textbf{Least Privilege}: Server ko minimum permissions do (e.g., read-only DB user).
+    \item \textbf{Defense-in-Depth}: Multiple layers of security lagao (auth, rate limiting, encryption).
+    \item \textbf{Tools}: `eslint-plugin-security`, OWASP ZAP, Burp Suite use karo testing ke liye.
+    \item \textbf{Checklist}: Production se pehle default accounts hatao, HTTPS enable karo, logs setup karo.
+\end{itemize}
+
+\subsection{9.3 Hinglish Summary}
+"Bhai, hamesha input check karo, output escape karo, server ko kam power do, aur tools jaise Burp Suite se test karo. Production mein jaane se pehle sab double-check kar lena!"
+
+\section{Conclusion}
+This guide covered \textbf{\color{importantred}XSS, CSRF, SSRF, Path Traversal, Logging Failures, Business Logic Flaws, API Security, aur Dependency Attacks} in Express.js with vulnerable and secure examples. \textbf{\color{keyconceptgreen}Key takeaways} include input validation, output sanitization, proper logging, and dependency management. Ab tu in vulnerabilities ko spot aur fix kar sakta hai, bhai!
+
+===============================
+===============================
+\hrule
+
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% Colors
+\definecolor{sectionblue}{RGB}{0, 0, 255}
+\definecolor{importantred}{RGB}{255, 0, 0}
+\definecolor{keyconceptgreen}{RGB}{0, 128, 0}
+\definecolor{codegray}{RGB}{240, 240, 240}
+\definecolor{keywordblue}{RGB}{0, 0, 255}
+\definecolor{stringred}{RGB}{255, 0, 0}
+\definecolor{commentgreen}{RGB}{0, 128, 0}
+\definecolor{functionorange}{RGB}{255, 165, 0}
+\definecolor{variablepurple}{RGB}{128, 0, 128}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{sectionblue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{sectionblue}}
+  {\thesubsection}{1em}{}
+
+% Custom JavaScript language definition for listings
+\lstdefinelanguage{JavaScript}{
+  keywords={const, let, var, function, if, else, require, process, return, await},
+  keywordstyle=\color{keywordblue},
+  comment=[l]{//},
+  commentstyle=\color{commentgreen},
+  string=[b]{"},
+  stringstyle=\color{stringred},
+  identifierstyle=\color{variablepurple},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"""
+}
+
+% Code listing setup
+\lstset{
+  backgroundcolor=\color{codegray},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  showstringspaces=false,
+  tabsize=2,
+  language=JavaScript % Default language for code snippets
+}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Secure Coding \& Hacking Guide}
+\lhead{\leftmark}
+\rfoot{Page \thepage}
+
+% Document start
+\begin{document}
+
+\section*{\textbf{\LARGE \textcolor{violet}{Vulnerable Machines for Practice and Source Code Review Step by Step process followed by Hackers...}}}
+
+% Title
+\title{\textbf{\color{sectionblue}Vulnerable Machines for Practice and Source Code Review Step by Step process followed by Hackers...}}}
+\date{March 28, 2025}
+\maketitle
+
+
+
+\section{Vulnerable machines for practice}
+
+\subsection{2. WebGoat (OWASP Project)}
+\begin{itemize}
+    \item \textbf{Kya Hai?} Yeh OWASP ka ek vulnerable web app hai jo Java pe based hai aur real-world vulnerabilities sikhaane ke liye banaya gaya hai.
+    \item \textbf{GitHub Link:} \url{https://github.com/WebGoat/WebGoat}
+    \item \textbf{Kaise Use Kare?}
+    \begin{itemize}
+        \item Isko Docker ya JAR file se run kar sakta hai (Java install hona chahiye).
+        \item Pehle black-box se attack kar—har lesson mein ek challenge hota hai (jaise SQL Injection ya Broken Authentication).
+        \item Hint ya solution chahiye toh source code (Java files) khol ke dekh—har vulnerability ka explanation milta hai.
+    \end{itemize}
+    \item \textbf{Fayda:} Yeh thoda advanced hai aur source code review ke liye bhi detailed hai. Real-world scenarios cover karta hai.
+\end{itemize}
+
+\subsection{1. Juice Shop (OWASP Project)}
+\begin{itemize}
+    \item \textbf{Kya Hai?} Yeh ek modern vulnerable web app hai jo Node.js pe based hai aur OWASP Top 10 vulnerabilities cover karta hai.
+    \item \textbf{GitHub Link:} \url{https://github.com/juice-shop/juice-shop}
+    \item \textbf{Kaise Use Kare?}
+    \begin{itemize}
+        \item Isko Docker ya npm se run kar sakta hai.
+        \item Black-box se shuru kar—XSS, SQL Injection, ya Broken Access Control try kar.
+        \item Source code (JavaScript/Node.js files) khol ke padh—har vulnerability ka logic clearly samajh aata hai.
+    \end{itemize}
+    \item \textbf{Fayda:} Yeh modern tech stack pe kaam karta hai aur code review ke liye bahut acha hai. CTF-style challenges bhi hain.
+\end{itemize}
+
+\subsection{Practical Approach Kaise Lena Hai?}
+\begin{enumerate}
+    \item \textbf{Black-Box Pehle:}
+    \begin{itemize}
+        \item Machine ko run kar aur pehle bina source code dekhe hack karne ki koshish kar.
+        \item Tools jaise Burp Suite, nmap, Metasploit, ya manual payloads use kar.
+        \item Goal rakho ki kam se kam ek vulnerability exploit kar sake.
+    \end{itemize}
+    \item \textbf{Agar Nahi Hua Toh Source Code:}
+    \begin{itemize}
+        \item GitHub repo ya VM ke files khol aur code padh.
+        \item Vulnerable function calls (jaise `eval()`, `system()`, `mysql_query()`) dhoondh.
+        \item Samajh ke baad dobara exploit try kar aur confirm kar ki kaam karta hai ya nahi.
+    \end{itemize}
+    \item \textbf{Notes Banao:}
+    \begin{itemize}
+        \item Har machine ke baad likh ki kya seekha—black-box se kya mila aur source code se kya samajh aaya.
+        \item Yeh tere job mein code review ke liye bahut kaam aayega.
+    \end{itemize}
+\end{enumerate}
+
+\section{General Source Code Review Technique Step-by-Step (Hacker’s Approach)}
+
+Alright, bhai! Tujhe source code review ka detailed step-by-step tarika chahiye jo ek hacker follow karta hai, especially jab koi company apna project deke bolti hai, "Bhai, iska code review kar do." Main tujhe ek general approach dunga jo real-world mein kaam aayega, aur isme login functionality ka example bhi mix kar dunga taaki tujhe samajh aaye. Yeh approach black-box aur white-box dono ko cover karega, kyunki tu shuruat mein black-box try karega aur agar nahi hua toh source code padhega. Chalo shuru karte hain!
+
+\subsection{Step 1: Project Ko Samajhna (Reconnaissance)}
+\begin{itemize}
+    \item \textbf{Kya Karna Hai?}  
+    Pehle project ka basic idea samajh—yeh kya hai? Web app hai, API hai, ya koi aur cheez? Company se basic info le:  
+    \begin{itemize}
+        \item Tech stack kya hai? (e.g., Express.js, PHP, Django)  
+        \item Kya-kya features hain? (e.g., login, file upload, payments)  
+        \item Koi specific area jahan focus chahiye? (e.g., login functionality)  
+    \end{itemize}
+    \item \textbf{Login Example:}  
+    Maan le company boli, "Hamara login page check karo." Toh pehle samajh ki login ka flow kaisa hai—username/password ya OAuth? Frontend mein form hai ya API call?
+    \item \textbf{Tools:}  
+    \begin{itemize}
+        \item Documentation (agar diya ho) padh.  
+        \item Browser mein app khol ke dekho (black-box style).  
+    \end{itemize}
+    \item \textbf{Goal:}  
+    High-level understanding banao taaki code padhne mein context clear ho.
+\end{itemize}
+
+\subsection{Step 2: Black-Box Testing Se Shuruat}
+\begin{itemize}
+    \item \textbf{Kya Karna Hai?}  
+    Bina code dekhe pehle app ko hack karne ki koshish karo. Yeh real-world mein common hai kyunki hacker ko shuru mein code nahi milta.  
+    \begin{itemize}
+        \item Input fields dhoondho (e.g., email, password).  
+        \item Common attacks try karo:  
+        \begin{itemize}
+            \item SQL Injection: `' OR 1=1 --`  
+            \item XSS: `<script>alert(1)</script>`  
+            \item CSRF: Fake form bana ke POST request bhejo.  
+            \item Brute Force: Password guess karo (e.g., `admin:admin`).  
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Login Example:}  
+    Login form pe email mein `' OR 1=1 --` daal ke dekho—kya login ho jata hai? Password field mein `<script>` try karo—kya error aata hai ya execute hota hai?  
+    \item \textbf{Tools:}  
+    \begin{itemize}
+        \item Burp Suite (requests intercept karo).  
+        \item Postman (API endpoints test karo).  
+        \item Browser DevTools (network calls dekho).  
+    \end{itemize}
+    \item \textbf{Goal:}  
+    Weak points dhoondho aur note karo ki kahan attack kaam karta hai ya fail hota hai. Agar fail hua, toh yeh hint hai ki code mein kya check karna hai.
+\end{itemize}
+
+\subsection{Step 3: Source Code Access Ke Baad White-Box Shuru}
+\begin{itemize}
+    \item \textbf{Kya Karna Hai?}  
+    Jab black-box se kuch nahi mila ya company ne code de diya, toh ab source code khol ke padhna shuru karo.  
+    \begin{itemize}
+        \item Codebase ka structure samajho:  
+        \begin{itemize}
+            \item Main files kahan hain? (e.g., `app.js`, `routes/`, `controllers/`)  
+            \item Configuration files kahan hain? (e.g., `.env`, `config.js`)  
+        \end{itemize}
+        \item Vulnerable areas pe focus karo jo black-box mein try kiye (e.g., login).  
+    \end{itemize}
+    \item \textbf{Login Example:}  
+    Login ka endpoint dhoondho (e.g., `app.post('/login', ...)`). Yeh file mein check karo ki email aur password ka input kaise liya gaya hai.  
+    \item \textbf{Tools:}  
+    \begin{itemize}
+        \item VS Code (code search ke liye).  
+        \item `grep` ya `find` commands (specific keywords dhoondhne ke liye).  
+    \end{itemize}
+    \item \textbf{Goal:}  
+    Code ka flow samajhna aur entry points (user input) dhoondhna.
+\end{itemize}
+
+\subsection{Step 4: Input Handling Aur Validation Check Karna}
+\begin{itemize}
+    \item \textbf{Kya Karna Hai?}  
+    Har jagah jahan user input aata hai (query params, body, headers), usko trace karo aur dekho:  
+    \begin{itemize}
+        \item Input kaise liya gaya hai? (e.g., `req.body.email`, `req.query.id`)  
+        \item Kya sanitization ya validation hai? (e.g., regex, length check)  
+        \item Kya direct database ya system call mein ja raha hai?  
+    \end{itemize}
+    \item \textbf{Login Example:}  
+    Code mein dekho:  
+    \begin{lstlisting}[caption={Vulnerable Login Input Handling}]
+app.post('/login', (req, res) => {
+    const { email, password } = req.body; // Input yahan se liya
+    const query = `SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`; // Direct concatenation?
+});
+    \end{lstlisting}
+    \begin{itemize}
+        \item Yeh vulnerable hai kyunki email/password direct query mein ja raha hai—SQL Injection possible hai.  
+        \item Secure version mein parameterized query hona chahiye:  
+        \begin{lstlisting}[caption={Secure Login Input Handling}]
+db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password]);
+        \end{lstlisting}
+    \end{itemize}
+    \item \textbf{Dhoondhne Wali Cheezein:}  
+    \begin{itemize}
+        \item No validation (e.g., email ka regex nahi).  
+        \item Unsafe string concatenation (e.g., `${email}`).  
+        \item Missing escaping/encoding.  
+    \end{itemize}
+    \item \textbf{Goal:}  
+    Input handling ke flaws dhoondho jo injection ya bypass allow kar sakein.
+\end{itemize}
+
+\subsection{Step 5: Authentication Aur Authorization Check}
+\begin{itemize}
+    \item \textbf{Kya Karna Hai?}  
+    Dekho ki app user ko kaise authenticate aur authorize karta hai:  
+    \begin{itemize}
+        \item Login ke baad session ya token kaise manage hota hai? (e.g., JWT, cookies)  
+        \item Sensitive endpoints pe permission check hai ya nahi? (e.g., `/admin`)  
+        \item Weak credentials allowed hain? (e.g., `admin:admin`)  
+    \end{itemize}
+    \item \textbf{Login Example:}  
+    Code mein dekho:  
+    \begin{lstlisting}[caption={Vulnerable Authentication}]
+if (email === 'admin' && password === 'pass123') {
+    res.send('Logged in!');
+}
+    \end{lstlisting}
+    \begin{itemize}
+        \item Yeh weak hai kyunki hardcoded credentials hain aur koi hash nahi.  
+        \item Secure version mein bcrypt hona chahiye:  
+        \begin{lstlisting}[caption={Secure Authentication}]
+const hash = await bcrypt.hash(password, 10);
+if (await bcrypt.compare(password, storedHash)) { ... }
+        \end{lstlisting}
+        \item Authorization check bhi dhoondho:  
+        \begin{lstlisting}
+if (req.user.role !== 'admin') { res.status(403).send('Access denied'); }
+        \end{lstlisting}
+    \end{itemize}
+    \item \textbf{Dhoondhne Wali Cheezein:}  
+    \begin{itemize}
+        \item Hardcoded credentials.  
+        \item Missing role checks.  
+        \item Weak session management (e.g., predictable tokens).  
+    \end{itemize}
+    \item \textbf{Goal:}  
+    Authentication bypass ya privilege escalation ke risks dhoondho.
+\end{itemize}
+
+\subsection{Step 6: Sensitive Data Exposure Check}
+\begin{itemize}
+    \item \textbf{Kya Karna Hai?}  
+    Dekho ki sensitive data (passwords, API keys, PII) kaise handle hota hai:  
+    \begin{itemize}
+        \item Kya encryption hai? (e.g., AES-256)  
+        \item Kya logs mein leak ho raha hai? (e.g., `console.log(password)`)  
+        \item Kya hardcoded secrets hain? (e.g., `const API_KEY = 'xyz'`)  
+    \end{itemize}
+    \item \textbf{Login Example:}  
+    Code mein dekho:  
+    \begin{lstlisting}[caption={Vulnerable Data Exposure}]
+console.log(`Login attempt: ${email}, ${password}`);
+    \end{lstlisting}
+    \begin{itemize}
+        \item Yeh galat hai kyunki password logs mein leak ho sakta hai.  
+        \item Secure mein sensitive data log nahi karna:  
+        \begin{lstlisting}[caption={Secure Data Handling}]
+logger.info(`Login attempt for ${email}`);
+        \end{lstlisting}
+    \end{itemize}
+    \item \textbf{Dhoondhne Wali Cheezein:}  
+    \begin{itemize}
+        \item Weak ciphers (e.g., DES, MD5).  
+        \item Hardcoded keys in code.  
+        \item Unencrypted data transmission (HTTP ke bajaye HTTPS).  
+    \end{itemize}
+    \item \textbf{Goal:}  
+    Data leaks ya weak encryption dhoondho.
+\end{itemize}
+
+\subsection{Step 7: Business Logic Aur Edge Cases}
+\begin{itemize}
+    \item \textbf{Kya Karna Hai?}  
+    App ke logic ko samajho aur dekho ki kahan attacker usko manipulate kar sakta hai:  
+    \begin{itemize}
+        \item Kya price, quantity ya status client se aata hai aur server check nahi karta?  
+        \item Kya rate limiting hai ya unlimited requests allowed hain?  
+    \end{itemize}
+    \item \textbf{Login Example:}  
+    Agar login attempts limit nahi hai:  
+    \begin{lstlisting}[caption={Vulnerable Logic}]
+app.post('/login', (req, res) => { ... }); // No rate limit
+    \end{lstlisting}
+    \begin{itemize}
+        \item Yeh brute force ke liye vulnerable hai.  
+        \item Secure mein rate limiting add karo:  
+        \begin{lstlisting}[caption={Secure Logic}]
+const loginLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5 });
+app.post('/login', loginLimiter, (req, res) => { ... });
+        \end{lstlisting}
+    \end{itemize}
+    \item \textbf{Dhoondhne Wali Cheezein:}  
+    \begin{itemize}
+        \item Client-controlled values (e.g., price=0).  
+        \item Missing rate limits.  
+        \item Logical flaws (e.g., negative values allowed).  
+    \end{itemize}
+    \item \textbf{Goal:}  
+    Logic flaws jo app ke purpose ko break kar sakein.
+\end{itemize}
+
+\subsection{Step 8: Dependencies Aur Third-Party Code}
+\begin{itemize}
+    \item \textbf{Kya Karna Hai?}  
+    Check karo ki app mein kaunsi external libraries ya packages use hue hain:  
+    \begin{itemize}
+        \item `package.json` ya `requirements.txt` dekho.  
+        \item Known vulnerabilities ke liye check karo (e.g., `npm audit`).  
+        \item Third-party code mein suspicious logic dhoondho.  
+    \end{itemize}
+    \item \textbf{Login Example:}  
+    Agar koi outdated package hai:  
+    \begin{verbatim}
+    "express": "4.0.0" // Old version with known bugs
+    \end{verbatim}
+    \begin{itemize}
+        \item Isko latest version pe update karna chahiye.  
+    \end{itemize}
+    \item \textbf{Tools:}  
+    \begin{itemize}
+        \item `npm audit` (Node.js).  
+        \item Snyk ya Dependabot (vulnerability scanning).  
+    \end{itemize}
+    \item \textbf{Goal:}  
+    Supply chain attacks ya outdated code ke risks dhoondho.
+\end{itemize}
+
+\subsection{Step 9: Findings Document Karna}
+\begin{itemize}
+    \item \textbf{Kya Karna Hai?}  
+    Har vulnerability ko note karo aur report banao:  
+    \begin{itemize}
+        \item Issue kya hai? (e.g., SQL Injection in login)  
+        \item Code ka snippet (vulnerable line).  
+        \item Impact kya hoga? (e.g., unauthorized access)  
+        \item Fix ka suggestion (e.g., parameterized query).  
+    \end{itemize}
+    \item \textbf{Login Example:}  
+    \begin{verbatim}
+Vulnerability: SQL Injection in /login endpoint
+Code: `SELECT * FROM users WHERE email = '${email}'`
+Impact: Attacker can bypass login with ' OR 1=1 --
+Fix: Use `db.query('SELECT * FROM users WHERE email = ?', [email])`
+    \end{verbatim}
+    \item \textbf{Goal:}  
+    Company ko clear aur actionable report dena.
+\end{itemize}
+
+\subsection{Step 10: Verification Aur Retesting}
+\begin{itemize}
+    \item \textbf{Kya Karna Hai?}  
+    Fixes ke baad dobara test karo:  
+    \begin{itemize}
+        \item Black-box se confirm karo ki attack ab kaam nahi karta.  
+        \item Code mein check karo ki suggestion apply hua ya nahi.  
+    \end{itemize}
+    \item \textbf{Login Example:}  
+    Agar parameterized query add hua, toh `' OR 1=1 --` try karo—ab login nahi hona chahiye.  
+    \item \textbf{Goal:}  
+    Ensure karna ki vulnerabilities fix ho gayi hain.
+\end{itemize}
+
+\subsection{Tera Practice Plan}
+\begin{enumerate}
+    \item \textbf{Notes Se Shuru Kar:}  
+    Tere notes (jo tune upload kiye) mein examples hain—jaise login ka vulnerable code (`SELECT * FROM users WHERE email = '${email}'`). Inko padh aur samajh.
+    \item \textbf{Juice Shop Ya WebGoat Try Kar:}  
+    In vulnerable apps pe pehle black-box karo (e.g., login bypass), phir code khol ke dekho ki kyun vulnerable tha.
+    \item \textbf{Chhota Project Bana:}  
+    Ek simple Express.js app bana (login wala) aur jaan bujh ke flaws daal—phir upar wale steps follow karke review kar.
+    \item \textbf{Tools Use Kar:}  
+    Burp Suite, Postman, VS Code jaise tools ke saath practice kar.
+\end{enumerate}
+
+\subsection{General Tips}
+\begin{itemize}
+    \item \textbf{Pattern Dhoondho:} Har language mein common flaws hote hain (e.g., Express.js mein no rate limiting, direct input usage).  
+    \item \textbf{Hinglish Mein Socho:} "Bhai, yeh input kahan ja raha hai? Kya yeh query mein direct mix ho raha hai?"  
+    \item \textbf{Patience Rakho:} Shuruat mein time lagega, lekin practice se speed aayegi.
+\end{itemize}
+
+\section{Conclusion}
+This guide covers \textbf{\color{importantred}vulnerable machines} like WebGoat and Juice Shop for practice, plus a \textbf{\color{keyconceptgreen}hacker’s step-by-step source code review approach}. Ab tu black-box se shuru karke white-box tak ja sakta hai aur real-world vulnerabilities dhoondh sakta hai, bhai!
+
+===============================
+\hrule
+
+
+\end{document}

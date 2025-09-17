@@ -1,0 +1,3786 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{sectsty}
+\usepackage{fancyhdr}
+
+% Set colors for headings and highlights
+\sectionfont{\color{blue}}
+\subsectionfont{\color{blue!70!black}}
+\definecolor{examplegreen}{rgb}{0,0.5,0}
+\definecolor{warningred}{rgb}{0.7,0,0}
+
+% Code block style
+\lstset{
+    basicstyle=\ttfamily\small,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    keywordstyle=\color{blue},
+    commentstyle=\color{examplegreen},
+    stringstyle=\color{red},
+    breaklines=true,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt
+}
+
+% Document title
+\title{\textbf{Using \texttt{vi} Editor in Linux (Hinglish Explanation)}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+\lhead{\textbf{Linux Essentials}}
+\rhead{\textbf{\texttt{vi} Editor Notes}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\section*{Introduction}
+\texttt{vi} editor ek powerful text editor hai jo Linux mein kaafi commonly use hota hai, especially DevOps tasks ke liye. \texttt{vim} (Vi IMproved) iska advanced version hai jo additional features provide karta hai.
+
+\hrule
+
+\section*{Basic Commands to Open and Exit \texttt{vi}}
+\subsection*{1. File Open Karna}
+\begin{lstlisting}[language=bash]
+vi filename.txt
+\end{lstlisting}
+\begin{itemize}
+    \item Agar file exist nahi karti, toh \texttt{vi} nayi file create karega.
+    \item Agar file exist karti hai, toh uska content edit karne ke liye open hoga.
+\end{itemize}
+
+\subsection*{2. File Close Karna}
+\textbf{Save and Exit:}
+\begin{lstlisting}
+:wq
+\end{lstlisting}
+\begin{itemize}
+    \item \texttt{:w}: File ko save karta hai.
+    \item \texttt{:q}: Editor se bahar nikalta hai.
+\end{itemize}
+
+\textbf{Exit Without Saving:}
+\begin{lstlisting}
+:q!
+\end{lstlisting}
+\begin{itemize}
+    \item Force quit karta hai bina changes save kiye.
+\end{itemize}
+
+\hrule
+
+\section*{Modes in \texttt{vi}}
+\subsection*{1. Normal Mode}
+Default mode hota hai jab file open karte ho. Commands execute karne ke liye use hota hai.
+
+\subsection*{2. Insert Mode}
+\begin{itemize}
+    \item Text add/edit karne ke liye.
+    \item Insert mode mein jane ke liye press karo:
+\begin{lstlisting}
+i
+\end{lstlisting}
+    \item Insert mode se normal mode mein wapas aane ke liye press karo:
+\begin{lstlisting}
+ESC
+\end{lstlisting}
+\end{itemize}
+
+\subsection*{3. Command Mode}
+\begin{itemize}
+    \item Commands like save, exit, search, etc. ke liye.
+    \item Normal mode mein \texttt{:} press karne ke baad command likho.
+\end{itemize}
+
+\hrule
+
+\section*{Basic Navigation Commands}
+\subsection*{1. Move Cursor}
+\begin{itemize}
+    \item \texttt{h}: Left
+    \item \texttt{l}: Right
+    \item \texttt{j}: Down
+    \item \texttt{k}: Up
+\end{itemize}
+
+\subsection*{2. Jump to Specific Line}
+\begin{lstlisting}
+:n
+\end{lstlisting}
+Example: Line 10 pe jump karne ke liye type karo:
+\begin{lstlisting}
+:10
+\end{lstlisting}
+
+\subsection*{3. Scroll}
+\begin{itemize}
+    \item \texttt{Ctrl+d}: Half page down
+    \item \texttt{Ctrl+u}: Half page up
+\end{itemize}
+
+\hrule
+
+\section*{Editing Commands}
+\subsection*{1. Insert Text}
+\begin{itemize}
+    \item \texttt{i}: Cursor ke current position pe text insert karega.
+    \item \texttt{a}: Current position ke baad text add karega.
+\end{itemize}
+
+\subsection*{2. Delete Text}
+\begin{itemize}
+    \item \texttt{x}: Current character delete karega.
+    \item \texttt{dd}: Entire line delete karega.
+\end{itemize}
+
+\subsection*{3. Undo and Redo}
+Undo:
+\begin{lstlisting}
+u
+\end{lstlisting}
+Redo:
+\begin{lstlisting}
+Ctrl+r
+\end{lstlisting}
+
+\subsection*{4. Copy and Paste}
+Copy Line:
+\begin{lstlisting}
+yy
+\end{lstlisting}
+Paste Line:
+\begin{lstlisting}
+p
+\end{lstlisting}
+
+\hrule
+
+\section*{Searching in \texttt{vi} Editor}
+\subsection*{1. Search for a Word}
+Forward Search:
+\begin{lstlisting}
+/word
+\end{lstlisting}
+Example: File mein \texttt{error} word search karne ke liye type karo:
+\begin{lstlisting}
+/error
+\end{lstlisting}
+Backward Search:
+\begin{lstlisting}
+?word
+\end{lstlisting}
+
+\subsection*{2. Move Between Matches}
+\begin{itemize}
+    \item \texttt{n}: Next Match
+    \item \texttt{N}: Previous Match
+\end{itemize}
+
+\subsection*{3. Highlight All Matches}
+\begin{lstlisting}
+:set hlsearch
+\end{lstlisting}
+Disable Highlight:
+\begin{lstlisting}
+:set nohlsearch
+\end{lstlisting}
+
+\hrule
+
+\section*{Mini-Example: Edit a File with \texttt{vi}}
+\begin{enumerate}
+    \item File Open Karo:
+\begin{lstlisting}[language=bash]
+vi example.txt
+\end{lstlisting}
+    \item Text Insert Karo:
+    \begin{lstlisting}
+This is a test file for vi editor.
+\end{lstlisting}
+    \item Save Changes:
+\begin{lstlisting}
+:wq
+\end{lstlisting}
+    \item Search Text:
+\begin{lstlisting}
+/test
+\end{lstlisting}
+    \item Delete Line:
+\begin{lstlisting}
+dd
+\end{lstlisting}
+    \item Save aur Exit Without Error:
+\begin{lstlisting}
+:wq
+\end{lstlisting}
+\end{enumerate}
+
+\hrule
+
+\section*{Outcome}
+\begin{itemize}
+    \item Aapko \texttt{vi} aur \texttt{vim} editor use karna aayega.
+    \item Search, edit, aur file manage karna easy ho jayega.
+    \item DevOps tasks jaise configuration file changes ya logs edit karna seamless ho jayega.
+\end{itemize}
+
+===============================
+\hrule
+
+
+% Set colors
+\definecolor{headingcolor}{RGB}{0, 51, 102}
+\definecolor{subheadingcolor}{RGB}{0, 102, 51}
+\definecolor{importantcolor}{RGB}{204, 0, 0}
+\definecolor{codebg}{RGB}{240, 240, 240}
+
+% Custom section styles
+\sectionfont{\color{headingcolor}\Huge\bfseries}
+\subsectionfont{\color{subheadingcolor}\LARGE\bfseries}
+\subsubsectionfont{\color{black}\Large\bfseries}
+
+% Code block settings
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{importantcolor},
+}
+
+% Header/Footer setup
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{Linux Services in DevOps (Hinglish Notes)}}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{\textit{Prepared by AI}}
+
+\begin{document}
+
+% Title Section
+\begin{center}
+    {\huge \textbf{Linux Services in DevOps (Notes)}}
+    \vspace{0.5cm}
+\end{center}
+
+\noindent Systemd Linux systems par services ko manage karne ka ek modern aur powerful tool hai. Agar aap apne Python, Node.js, ya kisi aur application ko ek service ke roop mein run karwana chahte ho jo automatically boot par start ho aur crash hone par restart ho, toh \texttt{systemd} ka use hota hai.
+
+\vspace{0.5cm}
+
+\section*{Steps to Create and Configure a Service}
+
+\subsection*{1. Service File Banayein}
+Service file ka location hota hai: \\
+\texttt{/etc/systemd/system}
+
+\noindent\textbf{Steps:}
+\begin{enumerate}
+    \item Ek nayi service file create karte hain:  
+    \begin{lstlisting}[language=bash]
+    sudo nano /etc/systemd/system/my_app.service
+    \end{lstlisting}
+
+    \item File mein configuration likhiye:
+    \begin{lstlisting}
+    [Unit]
+    Description=My Python Application
+    After=network.target
+
+    [Service]
+    ExecStart=/usr/bin/python3 /opt/code/my_app.py
+    ExecStartPre=/opt/code/configure_db.sh
+    ExecStartPost=/opt/code/email_status.sh
+    Restart=always
+
+    [Install]
+    WantedBy=multi-user.target
+    \end{lstlisting}
+
+    \item Configuration Breakdown:
+    \begin{itemize}
+        \item \textbf{[Unit]}: 
+        \begin{itemize}
+            \item \textbf{Description}: Service ke baare mein ek short description.
+            \item \textbf{After}: Dependency batata hai ki yeh service kab start hogi (e.g., \texttt{network.target} ke baad).
+        \end{itemize}
+        \item \textbf{[Service]}:
+        \begin{itemize}
+            \item \textbf{ExecStart}: Yeh command app ko start karne ke liye run hoti hai.
+            \item \textbf{ExecStartPre}: App start hone ke pehle koi script run karne ke liye.
+            \item \textbf{ExecStartPost}: App start hone ke baad koi script run karne ke liye.
+            \item \textbf{Restart}: Agar app crash kare, toh restart karne ke liye.
+        \end{itemize}
+        \item \textbf{[Install]}: 
+        \begin{itemize}
+            \item \textbf{WantedBy}: Service ko multi-user environment mein enable karta hai.
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{2. Service Ko Reload aur Start Karein}
+\begin{enumerate}
+    \item \textbf{Daemon Reload:} 
+    \begin{lstlisting}[language=bash]
+    sudo systemctl daemon-reload
+    \end{lstlisting}
+
+    \item \textbf{Service Start Karein:}
+    \begin{lstlisting}[language=bash]
+    sudo systemctl start my_app
+    \end{lstlisting}
+
+    \item \textbf{Service Status Check Karein:}
+    \begin{lstlisting}[language=bash]
+    sudo systemctl status my_app
+    \end{lstlisting}
+
+    \item \textbf{Service Automatically Boot Par Start Karna (Enable):}
+    \begin{lstlisting}[language=bash]
+    sudo systemctl enable my_app
+    \end{lstlisting}
+\end{enumerate}
+
+\vspace{0.5cm}
+
+\section*{Mini-Example: Python App as a Service}
+\subsection*{Python Script: \texttt{my\_app.py}}
+\begin{lstlisting}[language=python]
+# my_app.py
+import time
+
+while True:
+    print("My app is running...")
+    time.sleep(5)
+\end{lstlisting}
+
+\subsection*{Database Configuration Script: \texttt{configure\_db.sh}}
+\begin{lstlisting}[language=bash]
+#!/bin/bash
+echo "Configuring database..."
+\end{lstlisting}
+
+\subsection*{Service File: \texttt{/etc/systemd/system/my\_app.service}}
+\begin{lstlisting}
+[Unit]
+Description=My Python App Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/code/my_app.py
+ExecStartPre=/opt/code/configure_db.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+\end{lstlisting}
+
+\section*{Outcome}
+\begin{itemize}
+    \item Aapke apps ko system service ki tarah manage karna easy ho jayega.
+    \item Automated start, stop, restart, aur monitoring system-level par possible hoga.
+\end{itemize}
+
+===============================
+\hrule
+
+% Latex Code for "Linux Services in DevOps (With Line-by-Line Explanation)"
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red},
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  tabsize=4,
+  showstringspaces=false
+}
+
+\title{\textbf{Linux Services in DevOps (With Line-by-Line Explanation)}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Objective}
+\textbf{Yeh notes aapko step-by-step batayenge ki kaise ek Python application ya kisi bhi program ko Linux systemd service ki tarah configure karein. Har line ko detail mein explain kiya gaya hai.}
+
+\section*{1. Create a Service File}
+\subsection*{Command to Create a Service File}
+\begin{lstlisting}[language=bash]
+sudo nano /etc/systemd/system/my_app.service
+\end{lstlisting}
+\begin{itemize}
+  \item \textbf{sudo}: Superuser permissions ke liye.
+  \item \textbf{nano}: Text editor ka naam.
+  \item \textbf{/etc/systemd/system/my_app.service}: Service file ka location aur naam.
+\end{itemize}
+
+\section*{2. Service File Content}
+Yahaan ek service file ka example hai with line-by-line comments:
+\begin{lstlisting}[language=bash]
+[Unit]
+# Unit section service ka metadata define karta hai.
+Description=My Python Application
+# Service ka ek short description.
+After=network.target
+# Iska matlab hai yeh service tab start hogi jab network service ready hogi.
+
+[Service]
+# Service section service ke kaam aur behavior define karta hai.
+ExecStart=/usr/bin/python3 /opt/code/my_app.py
+# Yeh command app ko start karega. Yahan Python script run kar rahe hain jo `/opt/code/my_app.py` par hai.
+ExecStartPre=/opt/code/configure_db.sh
+# App start hone ke pehle yeh script run hogi. Isse hum database ya environment prepare kar sakte hain.
+ExecStartPost=/opt/code/email_status.sh
+# App start hone ke baad yeh script run hogi. Iska use status ya logs bhejne ke liye hota hai.
+Restart=always
+# Agar app crash kare, toh yeh automatically restart karega.
+
+[Install]
+# Install section define karta hai ki yeh service kaise enable ya disable hogi.
+WantedBy=multi-user.target
+# Yeh multi-user mode mein service ko enable karne ke liye use hota hai.
+\end{lstlisting}
+
+\section*{3. Python Application (my\_app.py)}
+Ek simple Python app jo continuously run karta hai:
+\begin{lstlisting}[language=Python]
+# my_app.py
+import time  # Time module ko import karte hain sleep function ke liye.
+
+# Infinite loop run karte hain to simulate continuous execution.
+while True:
+    print("My app is running...")  # Console par message print karte hain.
+    time.sleep(5)  # Har 5 seconds ke baad repeat karte hain.
+\end{lstlisting}
+
+\section*{4. Pre-Execution Script (configure\_db.sh)}
+Yeh script app start hone se pehle execute hoti hai:
+\begin{lstlisting}[language=bash]
+#!/bin/bash
+# Script bash shell mein likhi gayi hai.
+echo "Configuring database..."
+# Console par message print karta hai ki database configure ho raha hai.
+\end{lstlisting}
+
+\section*{5. Post-Execution Script (email\_status.sh)}
+Yeh script app start hone ke baad execute hoti hai:
+\begin{lstlisting}[language=bash]
+#!/bin/bash
+# Script bash shell mein likhi gayi hai.
+echo "Emailing status: Application started successfully."
+# Console par message print karta hai ki application successfully start ho gaya hai.
+\end{lstlisting}
+
+\section*{6. Configure the Service}
+\begin{enumerate}
+  \item \textbf{Daemon Reload Command}
+  \begin{lstlisting}[language=bash]
+sudo systemctl daemon-reload
+  \end{lstlisting}
+  \textbf{Explanation:} Yeh command systemd ko batata hai ki naye ya modified services load karein.
+
+  \item \textbf{Start the Service}
+  \begin{lstlisting}[language=bash]
+sudo systemctl start my_app
+  \end{lstlisting}
+  \textbf{Explanation:} Yeh command service ko run karne ke liye use hoti hai.
+
+  \item \textbf{Check Service Status}
+  \begin{lstlisting}[language=bash]
+sudo systemctl status my_app
+  \end{lstlisting}
+  \textbf{Explanation:} Service ke current status ko check karta hai (active, inactive, failed, etc.).
+
+  \item \textbf{Enable Service on Boot}
+  \begin{lstlisting}[language=bash]
+sudo systemctl enable my_app
+  \end{lstlisting}
+  \textbf{Explanation:} Service ko boot time par automatically start karne ke liye use hoti hai.
+
+  \item \textbf{Disable Service on Boot}
+  \begin{lstlisting}[language=bash]
+sudo systemctl disable my_app
+  \end{lstlisting}
+  \textbf{Explanation:} Service ko boot time par start hone se rokti hai.
+
+  \item \textbf{Stop the Service}
+  \begin{lstlisting}[language=bash]
+sudo systemctl stop my_app
+  \end{lstlisting}
+  \textbf{Explanation:} Service ko manually band karne ke liye.
+
+  \item \textbf{Restart the Service}
+  \begin{lstlisting}[language=bash]
+sudo systemctl restart my_app
+  \end{lstlisting}
+  \textbf{Explanation:} Service ko band karke dobara start karta hai.
+\end{enumerate}
+
+\section*{7. Logs Dekhne ka Tarika}
+\begin{lstlisting}[language=bash]
+journalctl -u my_app
+\end{lstlisting}
+\textbf{Explanation:} \texttt{journalctl} system logs ko read karne ke liye use hota hai, aur \texttt{-u my\_app} sirf specific service ke logs dekhne ke liye.
+
+\section*{Complete Flow of Commands}
+\begin{lstlisting}[language=bash]
+# Step 1: Create the service file
+sudo nano /etc/systemd/system/my_app.service
+
+# Step 2: Reload systemd
+sudo systemctl daemon-reload
+
+# Step 3: Start the service
+sudo systemctl start my_app
+
+# Step 4: Check service status
+sudo systemctl status my_app
+
+# Step 5: Enable service to run on boot
+sudo systemctl enable my_app
+\end{lstlisting}
+
+\section*{Outcome}
+\begin{itemize}
+  \item Aapne ek custom service banaya jo automatically boot par chalti hai.
+  \item Pre- and post-scripts kaise configure karte hain, yeh samajh liya.
+  \item Logs aur systemd commands ka use karke service ka monitoring seekha.
+\end{itemize}
+
+Yeh process DevOps workflows mein automation ke liye helpful hai. Agar aur details chahiye, toh mujhe batayein! ��
+
+===============================
+\hrule
+
+
+
+% Define colors for headings, examples, and warnings
+\definecolor{blue}{rgb}{0.0, 0.0, 1.0}
+\definecolor{green}{rgb}{0.0, 0.5, 0.0}
+\definecolor{red}{rgb}{1.0, 0.0, 0.0}
+
+% Set up code formatting style
+\lstset{
+  backgroundcolor=\color{gray!10},  
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green},
+  stringstyle=\color{red},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=5pt,
+  frame=single,
+  rulecolor=\color{black},
+  captionpos=b,
+  breaklines=true,
+  showstringspaces=false
+}
+
+\begin{document}
+
+% Title
+\title{\textbf{Networking Basics Required for DevOps}}
+\author{}
+\date{}
+\maketitle
+
+\section*{\textbf{Introduction}}
+\noindent
+Networking DevOps ke core mein hoti hai. Domain Name System (DNS) aur IP addressing ko samajhna zaroori hai, kyunki yeh web applications aur services ke liye backbone ka kaam karta hai.
+
+\hrule
+\vspace{0.3cm}
+
+\section*{\textbf{1. IP Addressing and DNS}}
+\noindent
+Networking DevOps ke core mein hoti hai. Domain Name System (DNS) aur IP addressing ko samajhna zaroori hai, kyunki yeh web applications aur services ke liye backbone ka kaam karta hai.
+
+\hrule
+\vspace{0.3cm}
+
+\section*{\textbf{2. \texttt{/etc/hosts} File}}
+
+\subsection*{\textbf{Purpose}}
+\noindent
+Linux systems mein \texttt{/etc/hosts} file ek local configuration file hai jo IP addresses ko domain names ke saath map karti hai.
+
+\subsection*{\textbf{Location}}
+\noindent
+File ka location hai:  
+\begin{lstlisting}[language=bash]
+/etc/hosts
+\end{lstlisting}
+
+\subsection*{\textbf{Example Format}}
+\begin{lstlisting}[language=plaintext]
+127.0.0.1   localhost
+192.168.1.10   web-server.local
+\end{lstlisting}
+
+\subsection*{\textbf{Use Cases}}
+\begin{enumerate}
+    \item DNS server ke bina local hostname resolution.
+    \item Development aur testing ke liye custom mappings create karna.
+    \item Certain domain names ko block karna.
+\end{enumerate}
+
+\subsection*{\textbf{How to Modify}}
+\noindent
+1. File ko edit karna:
+\begin{lstlisting}[language=bash]
+sudo nano /etc/hosts
+\end{lstlisting}
+
+2. Custom mapping add karein:
+\begin{lstlisting}[language=plaintext]
+192.168.1.100   my-app.local
+\end{lstlisting}
+
+3. Changes ko save kar ke check karein:
+\begin{lstlisting}[language=bash]
+ping my-app.local
+\end{lstlisting}
+
+\hrule
+\vspace{0.3cm}
+
+\section*{\textbf{3. DNS Record Types}}
+
+\subsection*{\textbf{DNS (Domain Name System)}}
+\noindent
+DNS ek hierarchical system hai jo human-readable domain names (e.g., \texttt{example.com}) ko machine-readable IP addresses (e.g., \texttt{192.168.1.1}) mein map karta hai.
+
+\subsection*{\textbf{Common DNS Record Types}}
+
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Record Type} & \textbf{Purpose} & \textbf{Example} \\
+\hline
+\textbf{A (Address)} & IPv4 address ko map karta hai. & \texttt{web-server.example.com $\to$ 192.168.1.1} \\
+\textbf{AAAA} & IPv6 address ko map karta hai. & \texttt{web-server.example.com $\to$ 2001:0db8::ff00:42:8329} \\
+\textbf{CNAME} & Alias record, ek domain ko dusre domain ke saath map karta hai. & \texttt{blog.example.com $\to$ web-server.example.com} \\
+\textbf{MX (Mail Exchanger)} & Email server ke liye priority aur routing instructions define karta hai. & \texttt{10 mail.example.com} \\
+\textbf{TXT} & Human-readable text records, often use for verification ya configurations. & \texttt{google-site-verification=abc123} \\
+\textbf{PTR (Pointer)} & Reverse DNS ke liye use hota hai, IP address ko domain name se map karta hai. & \texttt{192.168.1.1 $\to$ example.com} \\
+\hline
+\end{tabular}
+
+\hrule
+\vspace{0.3cm}
+
+\section*{\textbf{4. Explanation of Record Types with Examples}}
+
+\subsection*{\textbf{A Record}}
+\noindent
+\textbf{Purpose}: IPv4 address se map karta hai.\\
+\textbf{Example}:
+\begin{lstlisting}[language=plaintext]
+web-server.example.com → 192.168.1.1
+\end{lstlisting}
+
+\subsection*{\textbf{AAAA Record}}
+\noindent
+\textbf{Purpose}: IPv6 address ke liye use hota hai.\\
+\textbf{Example}:
+\begin{lstlisting}[language=plaintext]
+web-server.example.com → 2001:0db8::ff00:42:8329
+\end{lstlisting}
+
+\subsection*{\textbf{CNAME (Canonical Name)}}
+\noindent
+\textbf{Purpose}: Ek domain ko dusre domain ke liye alias banata hai.\\
+\textbf{Example}:
+\begin{lstlisting}[language=plaintext]
+food.example.com → eat.example.com
+\end{lstlisting}
+
+\subsection*{\textbf{MX (Mail Exchanger)}}
+\noindent
+\textbf{Purpose}: Email routing ke liye priority set karta hai.\\
+\textbf{Example}:
+\begin{lstlisting}[language=plaintext]
+10 mail.example.com
+\end{lstlisting}
+
+\subsection*{\textbf{TXT Record}}
+\noindent
+\textbf{Purpose}: Verification aur metadata ke liye use hota hai.\\
+\textbf{Example}:
+\begin{lstlisting}[language=plaintext]
+google-site-verification=abc123
+\end{lstlisting}
+
+\hrule
+\vspace{0.3cm}
+
+\section*{\textbf{5. Reverse DNS}}
+\noindent
+Reverse DNS ka use IP address ko domain name ke saath map karne ke liye hota hai, jaise PTR records ke zariye:
+\begin{lstlisting}[language=plaintext]
+192.168.1.1 → web-server.example.com
+\end{lstlisting}
+
+\hrule
+\vspace{0.3cm}
+
+\section*{\textbf{6. DNS Tools for DevOps}}
+
+\subsection*{\textbf{Useful Commands}}
+
+\begin{enumerate}
+    \item \textbf{nslookup}: DNS resolution check karne ke liye.  
+    \begin{lstlisting}[language=bash]
+    nslookup example.com
+    \end{lstlisting}
+
+    \item \textbf{dig}: Detailed DNS query results ke liye.  
+    \begin{lstlisting}[language=bash]
+    dig example.com
+    \end{lstlisting}
+
+    \item \textbf{ping}: Domain ya IP ki connectivity check karne ke liye.  
+    \begin{lstlisting}[language=bash]
+    ping example.com
+    \end{lstlisting}
+
+    \item \textbf{traceroute}: Network path trace karne ke liye.  
+    \begin{lstlisting}[language=bash]
+    traceroute example.com
+    \end{lstlisting}
+
+    \item \textbf{host}: Simple DNS lookup tool.  
+    \begin{lstlisting}[language=bash]
+    host example.com
+    \end{lstlisting}
+\end{enumerate}
+
+\hrule
+\vspace{0.3cm}
+
+\section*{\textbf{7. DevOps Context Use Cases}}
+
+\begin{enumerate}
+    \item \textbf{Testing Custom Domain Mappings}:  
+    \texttt{/etc/hosts} file ko modify karke testing environments mein local domain mappings setup karna.
+    
+    \item \textbf{DNS Records Configuration}:  
+    Cloud providers (AWS, Azure, GCP) ke DNS management services ka use karke A, CNAME, aur TXT records configure karna.
+
+    \item \textbf{Load Balancers and CDN}:  
+    A aur CNAME records ka use karke services ko load balancers aur CDNs ke saath map karna.
+
+    \item \textbf{Email Services}:  
+    MX aur TXT records ka use karke email servers configure karna.
+\end{enumerate}
+
+\hrule
+\vspace{0.3cm}
+
+\section*{\textbf{Outcome}}
+
+\begin{itemize}
+    \item Aapne networking basics ko samajh liya jo DevOps mein critical hai.
+    \item \texttt{/etc/hosts} aur DNS records ka kaise use karte hain yeh clear ho gaya.
+    \item Tools aur commands kaise use karte hain, yeh seekh liya.
+\end{itemize}
+
+Agar aapko aur depth mein samajhna ho ya kisi specific tool ka practical example chahiye, toh batayein! ��
+
+===============================
+\hrule
+
+\documentclass[a4paper,12pt]{article}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{amsmath}
+
+% Define colors
+\definecolor{blue}{rgb}{0.2, 0.2, 0.8}
+\definecolor{green}{rgb}{0.0, 0.6, 0.0}
+\definecolor{red}{rgb}{0.8, 0.0, 0.0}
+\definecolor{purple}{rgb}{0.6, 0.0, 0.6}
+
+\lstset{ 
+    backgroundcolor=\color{white},   
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    captionpos=b,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red},
+    showstringspaces=false
+}
+
+\title{\textbf{Git Merge Conflicts - Complete Explanation}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{\textbf{Objective:}}
+Git merge conflicts tab hote hain jab do log ek hi file ko different tariko se modify karte hain aur Git ko decide nahi hota ki kaunsa change rakhna chahiye. DevOps mein yeh bahut common scenario hai jab multiple developers ek project par kaam kar rahe hote hain aur changes merge karte hain.
+
+\section*{\textbf{1. What is a Git Merge Conflict?}}
+Git merge conflict tab hoti hai jab aap \texttt{git merge} ya \texttt{git pull} command chalate ho, aur Git ko lagta hai ki aapke changes aur dusre branch ke changes ek hi line ya section par conflict kar rahe hain.
+
+\textbf{Example:}  
+Maan lo, aapke paas do branches hain:
+\begin{itemize}
+    \item \texttt{main}
+    \item \texttt{feature-branch}
+\end{itemize}
+
+Aap dono same line ko modify karte ho dono branches mein alag-alag tarike se.
+
+\textbf{Scenario:}
+\begin{itemize}
+    \item \texttt{main} branch mein aapne yeh change kiya:
+    \begin{lstlisting}[language=Python]
+def greeting():
+    return "Hello from main branch!"
+    \end{lstlisting}
+    \item \texttt{feature-branch} mein kisi ne yeh change kiya:
+    \begin{lstlisting}[language=Python]
+def greeting():
+    return "Hello from feature branch!"
+    \end{lstlisting}
+\end{itemize}
+
+Jab aap \texttt{git merge feature-branch} \texttt{main} branch par karte ho, toh conflict ho sakta hai kyunki dono branches mein same code ka hissa modify kiya gaya hai.
+
+\section*{\textbf{2. How Merge Conflicts Occur?}}
+Aapko merge conflict tab hoti hai jab Git ko lagta hai ki dono changes ek hi section mein conflicting hain. Git merge karne ke liye kuch guidelines follow karta hai, lekin agar dono changes compatible nahi hote, toh yeh conflict ka error show karta hai.
+
+\section*{\textbf{3. Conflict Markers (\texttt{HEAD}, \texttt{<<<<}, \texttt{====}, \texttt{>>>>})}}
+Jab Git conflict detect karta hai, toh woh file mein special conflict markers insert kar deta hai, jisse aapko pata chale ki conflict kis part mein hua hai. Yeh markers hain:
+
+\begin{itemize}
+    \item \textbf{\texttt{HEAD}}: Yeh current branch ko refer karta hai jisme aap ho (jaise \texttt{main} ya \texttt{feature-branch}).
+    \item \textbf{\texttt{<<<<<<}}: Yeh marker indicate karta hai ki yeh code aapke local changes ko represent karta hai.
+    \item \textbf{\texttt{======}}: Yeh separator hai jo bataata hai ki yeh section dono branches ke changes ke beech ka difference hai.
+    \item \textbf{\texttt{>>>>>>}}: Yeh marker indicate karta hai ki yeh changes dusri branch se aaye hain.
+\end{itemize}
+
+\textbf{Example:}  
+Agar aap \texttt{git merge} kar rahe ho aur conflict hoti hai, toh aapko kuch aise dekhega:
+\begin{lstlisting}[language=Python]
+def greeting():
+<<<<<<< HEAD
+    return "Hello from main branch!"
+=======
+    return "Hello from feature branch!"
+>>>>>>> feature-branch
+\end{lstlisting}
+
+\section*{\textbf{4. How to Resolve Merge Conflicts}}
+
+Aapko yeh conflict manually resolve karna padta hai. Aapko decide karna hota hai ki kaunsa code rakhna hai, ya dono changes ko merge karna hai.
+
+\textbf{Steps to Resolve Conflicts:}
+\begin{enumerate}
+    \item \textbf{Identify the Conflict}  
+    Jab aap \texttt{git merge} ya \texttt{git pull} chalate ho aur conflict hoti hai, toh Git file ko mark kar deta hai jahan conflict hua hai. Yeh conflict markers (\texttt{<<<<<<}, \texttt{======}, \texttt{>>>>>>}) show karte hain ki kahaan changes different hain.
+    \item \textbf{Open the Conflicted File}  
+    File ko open karke conflict markers ko dekhein.
+    \item \textbf{Decide the Correct Changes}  
+    Aap decide kar sakte hain:
+    \begin{itemize}
+        \item Current branch changes ko rakhna (HEAD ke changes ko rakhna).
+        \item Dusri branch ke changes ko rakhna (feature-branch ke changes ko rakhna).
+        \item Dono changes ko merge karna: Agar aap dono ke beech mein kuch aur chahte hain toh manually code merge kar sakte hain.
+    \end{itemize}
+    \item \textbf{Remove the Conflict Markers}  
+    Jab aap decide kar lete ho ki kaunsa code rakhna hai, toh conflict markers ko remove kar dena hoga.  
+    For example, aapko apna final code aise dikhna chahiye:
+    \begin{lstlisting}[language=Python]
+def greeting():
+    return "Hello from both branches!"
+    \end{lstlisting}
+    \item \textbf{Stage the Resolved File}  
+    File ko stage karte hain:
+    \begin{lstlisting}[language=bash]
+git add <filename>
+    \end{lstlisting}
+    \item \textbf{Complete the Merge}  
+    Merge ko complete karne ke liye commit karte hain:
+    \begin{lstlisting}[language=bash]
+git commit
+    \end{lstlisting}
+    \item \textbf{Push the Changes}  
+    Apne changes ko remote repository par push karte hain:
+    \begin{lstlisting}[language=bash]
+git push origin main
+    \end{lstlisting}
+\end{enumerate}
+
+\section*{\textbf{5. Example with Commands}}
+
+\textbf{Scenario:} Maan lo aapke paas \texttt{feature-branch} hai aur aap \texttt{main} branch par kaam kar rahe hain. Aap dono same file ko modify kar rahe ho.
+
+\textbf{Steps:}
+\begin{enumerate}
+    \item \textbf{Checkout to Main Branch}  
+    \begin{lstlisting}[language=bash]
+git checkout main
+    \end{lstlisting}
+    \item \textbf{Pull Latest Changes from Remote}  
+    \begin{lstlisting}[language=bash]
+git pull origin main
+    \end{lstlisting}
+    \item \textbf{Merge Feature Branch into Main}  
+    \begin{lstlisting}[language=bash]
+git merge feature-branch
+    \end{lstlisting}
+    \item \textbf{Resolve Merge Conflict}  
+    Conflict hone par file ko open karke change karen jaise bataya gaya tha.
+    \item \textbf{Stage the File}  
+    \begin{lstlisting}[language=bash]
+git add <conflicted-file>
+    \end{lstlisting}
+    \item \textbf{Commit the Merge}  
+    \begin{lstlisting}[language=bash]
+git commit -m "Resolved merge conflict between main and feature-branch"
+    \end{lstlisting}
+    \item \textbf{Push Changes}  
+    \begin{lstlisting}[language=bash]
+git push origin main
+    \end{lstlisting}
+\end{enumerate}
+
+\section*{\textbf{6. Common Merge Conflict Scenarios}}
+
+\begin{itemize}
+    \item \textbf{One Developer Modifies a Line, Another Deletes It}  
+    Agar ek developer ek line modify karta hai aur doosra developer us line ko delete karne ki koshish karta hai, toh conflict ho sakti hai.
+    \item \textbf{One Developer Adds a New Function, Another Modifies It}  
+    Agar ek developer ek nayi function add karta hai aur doosra developer usi function ko modify karta hai, toh bhi conflict ho sakti hai.
+\end{itemize}
+
+\section*{\textbf{7. How to Avoid Merge Conflicts}}
+
+\begin{itemize}
+    \item \textbf{Pull Latest Changes Regularly}  
+    \texttt{git pull} ka use karke aap hamesha latest changes ko apne local branch mein merge kar sakte hain, taaki aapko conflict na ho.
+    \item \textbf{Work on Smaller Changes}  
+    Chote-chote changes karna aur frequently merge karna avoid karega large conflicts.
+    \item \textbf{Use Feature Branches}  
+    Feature branches mein kaam karna aur phir merge karna safer option hai.
+\end{itemize}
+
+\section*{\textbf{Conclusion}}
+
+Git merge conflicts DevOps mein bahut common hain jab multiple developers ek hi codebase pe kaam karte hain. Aapko conflicts ko samajhna aur manually resolve karna aana chahiye. Upar diye gaye steps ko follow karte hue aap easily conflicts resolve kar sakte hain.
+
+
+===============================
+\hrule
+
+
+% Define colors
+\definecolor{headingblue}{RGB}{0,0,255}
+\definecolor{examplegreen}{RGB}{0,128,0}
+\definecolor{criticalred}{RGB}{255,0,0}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{gray!10},
+  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+\title{\textbf{\textcolor{headingblue}{Fork in Git: Explanation in Hinglish}}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introduction}
+Aap jab kisi project mein contributor nahi hote (matlab aap project ke main repository ke member nahi ho), lekin aap chahte hain ki aap apne changes contribute karen, toh aap \textbf{\textcolor{criticalred}{"fork"}} ka use karte hain. Fork karna ka matlab hai ki aap original project ka ek apna copy banate hain jisme aap apne changes kar sakte hain, bina main project ko directly modify kiye.
+
+Yeh workflow \textbf{pull request} ke liye use hota hai jisme aap apne changes original project ke owner tak bhejte hain taaki wo changes merge kiye jaa sakein.
+
+\section*{Fork Karne Ke Steps}
+
+\begin{enumerate}
+    \item \textbf{\textcolor{headingblue}{Fork the Repository}}:
+    \begin{itemize}
+        \item GitHub par ya GitLab par jaake aapko original repository ke page par jana hota hai.
+        \item Wahan ek option milega \textbf{\textcolor{criticalred}{"Fork"}} ka button. Usko click karke aap original project ka apna copy bana sakte hain.
+    \end{itemize}
+    \textbf{Example}: Agar original repository ka URL hai:
+    \begin{lstlisting}
+https://github.com/original-user/awesome-project
+    \end{lstlisting}
+    Aap \textbf{Fork} karenge toh aapka repository URL kuch is tarah dikhega:
+    \begin{lstlisting}
+https://github.com/your-username/awesome-project
+    \end{lstlisting}
+
+    \item \textbf{\textcolor{headingblue}{Clone the Forked Repository to Your Local Machine}}:
+    Fork karne ke baad, aapke paas apna copy hoga. Ab aap is repository ko apne local system par clone kar sakte hain.
+    \textbf{Command}:
+    \begin{lstlisting}[language=bash]
+git clone https://github.com/your-username/awesome-project.git
+    \end{lstlisting}
+
+    \item \textbf{\textcolor{headingblue}{Create a New Branch}}:
+    Jab aap local repository mein kaam kar rahe hain, toh hamesha apne changes ek alag branch mein karna chahiye, taaki main branch safe rahe.
+    \textbf{Command}:
+    \begin{lstlisting}[language=bash]
+git checkout -b my-new-feature
+    \end{lstlisting}
+
+    \item \textbf{\textcolor{headingblue}{Make Changes in Your Forked Repository}}:
+    Ab aap apne local repository mein changes kar sakte hain. Aap koi bhi files modify kar sakte hain, nayi features add kar sakte hain, ya bug fixes kar sakte hain.
+
+    \textbf{Example}:
+    \begin{lstlisting}[language=python]
+def greeting():
+    return "Hello from my new feature!"
+    \end{lstlisting}
+
+    \item \textbf{\textcolor{headingblue}{Commit Your Changes}}:
+    Jab aap changes kar lete hain, toh unhe commit karna padta hai taaki aapke changes Git ke record mein save ho jaayein.
+    \textbf{Command}:
+    \begin{lstlisting}[language=bash]
+git add .
+git commit -m "Added a new greeting feature"
+    \end{lstlisting}
+
+    \item \textbf{\textcolor{headingblue}{Push Your Changes to Your Forked Repository}}:
+    Aapne apne local repository mein changes commit kiye hain, ab un changes ko apne forked GitHub repository par push karna hoga.
+    \textbf{Command}:
+    \begin{lstlisting}[language=bash]
+git push origin my-new-feature
+    \end{lstlisting}
+
+    \item \textbf{\textcolor{headingblue}{Create a Pull Request}}:
+    Jab aap apne changes ko apne forked repository par push kar lete hain, tab aap GitHub (ya GitLab) par wapas jaake \textbf{Pull Request} bana sakte hain.
+    \begin{itemize}
+        \item \textbf{Pull Request} ka matlab hai ki aap apne changes ko original project (main repository) mein merge karne ke liye request kar rahe ho.
+        \item GitHub par apne forked repository ke page par jayenge aur wahan ek button dikhega \textbf{\textcolor{criticalred}{"Compare & pull request"}} ka.
+    \end{itemize}
+
+    \item \textbf{\textcolor{headingblue}{Review and Merge}}:
+    Jab aap Pull Request send karte ho, toh original project ka maintainer (owner) aapke changes ko review karega.
+    Agar sab kuch sahi hota hai, toh wo Pull Request ko \textbf{merge} kar dega, matlab aapke changes original project mein chala jayenge.
+\end{enumerate}
+
+\section*{Example}
+Maan lo aap ek open-source project par kaam kar rahe ho jo \texttt{awesome-project} hai.
+
+\begin{enumerate}
+    \item \textbf{Fork the repository}:  
+    Aap GitHub par \texttt{awesome-project} ka page open karte hain aur fork karte hain. Ab aapke paas apna copy hota hai:
+    \begin{lstlisting}
+https://github.com/your-username/awesome-project
+    \end{lstlisting}
+
+    \item \textbf{Clone the repository}:  
+    Apne system par clone karte hain:
+    \begin{lstlisting}[language=bash]
+git clone https://github.com/your-username/awesome-project.git
+cd awesome-project
+    \end{lstlisting}
+
+    \item \textbf{Create a branch and make changes}:  
+    Ek new branch banate hain:
+    \begin{lstlisting}[language=bash]
+git checkout -b new-feature
+    \end{lstlisting}
+    Aur \texttt{greeting.py} file mein change karte hain:
+    \begin{lstlisting}[language=python]
+def greeting():
+    return "Hello from my new feature!"
+    \end{lstlisting}
+
+    \item \textbf{Commit and push the changes}:  
+    Changes ko commit karte hain aur push karte hain:
+    \begin{lstlisting}[language=bash]
+git add .
+git commit -m "Added a new greeting feature"
+git push origin new-feature
+    \end{lstlisting}
+
+    \item \textbf{Create a Pull Request}:  
+    GitHub par apni forked repository mein jaake Pull Request create karte hain.
+\end{enumerate}
+
+\section*{Summary}
+\begin{itemize}
+    \item \textbf{Fork}: Jab aap kisi project ka copy apne GitHub par banate hain, taaki aap bina original repository ko affect kiye changes kar sakein.
+    \item \textbf{Clone}: Aap apne forked repository ko apne local machine par laate hain.
+    \item \textbf{Create Branch}: Alag branch banate hain taaki aapke changes main branch ko affect na karein.
+    \item \textbf{Commit \& Push}: Aap changes karte hain, commit karte hain aur push karte hain apni forked repository par.
+    \item \textbf{Pull Request}: Aap apne changes ko original project ke owner tak bhejte hain taaki wo aapke changes ko merge kar sakein.
+\end
+
+===============================
+\hrule
+
+
+
+\begin{document}
+
+\begin{center}
+    {\Huge \bfseries \color{headingblue} CI/CD Kya Hai?}
+\end{center}
+\vspace{0.5cm}
+
+\section{CI (Continuous Integration):}
+\textbf{Continuous Integration} ka matlab hai ki developers apne code changes ko frequently (roz ya har kuch ghante) main branch mein merge karte hain.  
+Yeh process automation tools ki madad se hota hai jo ensure karte hain ki har code change sahi tarike se integrate ho aur kisi bug ka issue na ho.
+
+\begin{itemize}
+    \item \textbf{\color{criticalred}Main Idea:} Har developer apne changes ko ek jagah combine kare.
+    \item \textbf{\color{examplegreen}Benefits:}
+    \begin{itemize}
+        \item Bugs jaldi pakad mein aate hain.
+        \item Code conflicts kam hote hain.
+        \item Software stability maintain hoti hai.
+    \end{itemize}
+\end{itemize}
+
+\section{CD (Continuous Delivery/Deployment):}
+\textbf{Continuous Delivery} aur \textbf{Continuous Deployment} do alag concepts hain:
+\begin{itemize}
+    \item \textbf{\color{headingblue}Continuous Delivery:} Code changes ko production-ready banaya jata hai. Matlab changes testing aur review ke baad production mein jaane ke liye ready hote hain.
+    \item \textbf{\color{headingblue}Continuous Deployment:} Yeh next step hai jisme code changes ko automatically production environment mein deploy kiya jata hai.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{\color{criticalred}Main Idea:} Code hamesha deploy hone ke liye ready ho.
+    \item \textbf{\color{examplegreen}Benefits:}
+    \begin{itemize}
+        \item Human intervention ki zarurat nahi hoti (Continuous Deployment).
+        \item Updates jaldi aur reliably launch hote hain.
+    \end{itemize}
+\end{itemize}
+
+\section{CI/CD (Combined):}
+CI/CD ek combined process hai jo automation ke zariye development aur deployment process ko fast aur reliable banata hai.  
+Iska purpose hai:
+\begin{enumerate}
+    \item Developers apna kaam integrate karein (CI).
+    \item Final product ko production-ready aur deployable banayein (CD).
+\end{enumerate}
+
+\section{CI/CD Kyu Develop Kiya Gaya?}
+\begin{itemize}
+    \item Pehle software development process slow aur error-prone hota tha:
+    \begin{itemize}
+        \item Developers alag-alag kaam karte aur end mein merge karte, jo time-consuming hota tha.
+        \item Manual testing aur deployment mein errors aate the.
+    \end{itemize}
+    \item \textbf{CI/CD Process Ke Fayde:}
+    \begin{itemize}
+        \item Automation se time bachta hai.
+        \item Bugs aur errors jaldi detect aur fix hote hain.
+        \item Code changes jaldi aur safely deploy hote hain.
+    \end{itemize}
+\end{itemize}
+
+\section{What is Jenkins?}
+\subsection{Jenkins Kya Hai?}
+Jenkins ek open-source automation tool hai jo CI/CD pipeline ko implement karne ke liye use hota hai. Iska kaam hai:
+\begin{enumerate}
+    \item Code changes ko build karna.
+    \item Changes ko test karna.
+    \item Final product ko deploy karna.
+\end{enumerate}
+
+\subsection{Jenkins Kyu Use Hota Hai?}
+\begin{itemize}
+    \item \textbf{Automation:} Build, test, aur deploy ka process automatically handle hota hai.
+    \item \textbf{Plugins Support:} Alag-alag tools aur services ke saath integrate hota hai.
+    \item \textbf{Cross-Platform:} Jenkins Windows, Linux, aur macOS par run hota hai.
+    \item \textbf{Community Support:} Strong ecosystem aur large user base ke wajah se popular hai.
+\end{itemize}
+
+\subsection{Jenkins Ke Main Features:}
+\begin{enumerate}
+    \item \textbf{Distributed Builds:} Large projects ko multiple machines par distribute karte hain.
+    \item \textbf{Pipeline as Code:} CI/CD pipeline ko script ke form mein define karte hain.
+    \item \textbf{Plugins:} Extra functionalities add karne ke liye plugins ka use hota hai.
+\end{enumerate}
+
+\section{What are Plugins in Jenkins?}
+\subsection{Plugins Kya Hote Hain?}
+Plugins Jenkins ke liye extra functionalities add karte hain.  
+\textbf{Examples:}
+\begin{itemize}
+    \item \textbf{Git Plugin:} Git repositories ke saath connect karne ke liye.
+    \item \textbf{Slack Plugin:} Notifications ke liye Slack integration.
+    \item \textbf{Docker Plugin:} Docker containers ke saath Jenkins integration.
+\end{itemize}
+
+\section{Jenkins Kaise Kaam Karta Hai?}
+\begin{enumerate}
+    \item Developer apne code changes ko Git repository mein push karta hai.
+    \item Jenkins code ko fetch karta hai aur pipeline start karta hai:
+    \begin{enumerate}
+        \item Code build hota hai.
+        \item Automated tests run hote hain.
+        \item Deployment hoti hai (agar koi error na ho).
+    \end{enumerate}
+\end{enumerate}
+
+\section{Example of CI/CD in Jenkins}
+\subsection{Code Repository Setup:}
+GitHub par apna code push karna:
+\begin{lstlisting}[language=bash]
+git push origin main
+\end{lstlisting}
+
+\subsection{Jenkins Pipeline Setup:}
+Pipeline script ka example:
+\begin{lstlisting}[language=groovy]
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'echo "Code Build Ho Raha Hai"'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'echo "Tests Run Ho Rahe Hain"'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'echo "Deployment Start"'
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+\subsection{Jenkins Console Output:}
+Jenkins automatically pipeline steps ko run karta hai aur output dikhata hai.  
+Agar koi step fail hota hai, toh Jenkins fail ko highlight karega.
+
+\section{Conclusion}
+\begin{itemize}
+    \item CI/CD development aur deployment process ko fast aur reliable banata hai.
+    \item Jenkins ek popular tool hai jo CI/CD implement karne ke liye use hota hai.
+    \item Plugins Jenkins ke functionalities ko enhance karte hain.
+\end{itemize}
+
+
+===============================
+\hrule
+
+% LaTeX code for Jenkins Installation Steps in Hinglish
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{titlesec}
+
+% Colors
+\definecolor{blue}{RGB}{0,0,255}
+\definecolor{green}{RGB}{0,128,0}
+\definecolor{red}{RGB}{255,0,0}
+
+% Code block settings
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    breaklines=true,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red},
+}
+
+% Formatting for sections
+\titleformat{\section}{\large\bfseries\color{blue}}{}{0em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{blue}}{}{0em}{}
+
+\begin{document}
+
+\section*{\textbf{Jenkins Installation Steps on Linux (Step-by-Step in Hinglish)}}
+
+\subsection*{\textbf{Step 1: System Update}}
+Sabse pehle apna system update karein.
+
+\begin{lstlisting}[language=bash]
+sudo apt update && sudo apt upgrade -y
+\end{lstlisting}
+
+\textbf{Explanation:}
+\begin{itemize}
+    \item \texttt{sudo apt update}: System package list ko update karta hai.
+    \item \texttt{sudo apt upgrade -y}: Jo outdated packages hain unhe upgrade karta hai.
+\end{itemize}
+
+\hrule
+
+\subsection*{\textbf{Step 2: Java Install Karein}}
+Jenkins ko chalane ke liye Java required hota hai.
+
+\begin{lstlisting}[language=bash]
+sudo apt install openjdk-11-jdk -y
+\end{lstlisting}
+
+\textbf{Explanation:}
+\begin{itemize}
+    \item Jenkins ko Java runtime environment ki zarurat hoti hai.
+    \item \texttt{openjdk-11-jdk}: Java ka open-source version install karta hai.
+\end{itemize}
+
+\hrule
+
+\subsection*{\textbf{Step 3: Jenkins Repository Add Karein}}
+Jenkins ko install karne ke liye uska official repository add karna hota hai.
+
+\textbf{1. Jenkins ke repository key ko add karein:}
+\begin{lstlisting}[language=bash]
+curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
+/usr/share/keyrings/jenkins-keyring.asc > /dev/null
+\end{lstlisting}
+
+\textbf{2. Jenkins repository ko apne package manager mein add karein:}
+\begin{lstlisting}[language=bash]
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+https://pkg.jenkins.io/debian binary/ | sudo tee \
+/etc/apt/sources.list.d/jenkins.list > /dev/null
+\end{lstlisting}
+
+\textbf{Explanation:}
+\begin{itemize}
+    \item \texttt{curl}: Jenkins ke repository key ko download karta hai.
+    \item \texttt{echo}: Jenkins repository ko system ke package list mein add karta hai.
+\end{itemize}
+
+\hrule
+
+\subsection*{\textbf{Step 4: Jenkins Install Karein}}
+Jenkins ko install karne ke liye:
+
+\begin{lstlisting}[language=bash]
+sudo apt update
+sudo apt install jenkins -y
+\end{lstlisting}
+
+\textbf{Explanation:}
+\begin{itemize}
+    \item \texttt{sudo apt update}: Nayi repository ke packages ko load karta hai.
+    \item \texttt{sudo apt install jenkins}: Jenkins install karta hai.
+\end{itemize}
+
+\hrule
+
+\subsection*{\textbf{Step 5: Jenkins Start and Enable Karein}}
+Jenkins service ko start aur enable karein:
+
+\begin{lstlisting}[language=bash]
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+\end{lstlisting}
+
+\textbf{Explanation:}
+\begin{itemize}
+    \item \texttt{systemctl start jenkins}: Jenkins service ko start karta hai.
+    \item \texttt{systemctl enable jenkins}: System reboot ke baad Jenkins automatically start ho.
+\end{itemize}
+
+\hrule
+
+\subsection*{\textbf{Step 6: Jenkins Access Karein}}
+\begin{enumerate}
+    \item Apne web browser mein Jenkins ko access karein:
+    \begin{verbatim}
+    http://<your_server_ip>:8080
+    \end{verbatim}
+    Agar localhost par kaam kar rahe hain:
+    \begin{verbatim}
+    http://localhost:8080
+    \end{verbatim}
+    \item Initial Admin Password ko find karein:
+    \begin{lstlisting}[language=bash]
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+\end{lstlisting}
+    \item Jenkins ke setup wizard mein password paste karein.
+\end{enumerate}
+
+\hrule
+
+\subsection*{\textbf{Step 7: Jenkins Setup Complete Karein}}
+\begin{itemize}
+    \item Plugins install karne ke liye "Install Suggested Plugins" ka option select karein.
+    \item Apna admin user create karein aur Jenkins dashboard access karein.
+\end{itemize}
+
+\hrule
+
+\section*{\textbf{How to Install a Plugin in Jenkins}}
+
+\subsection*{\textbf{Step 1: Plugin Manager Open Karein}}
+\begin{enumerate}
+    \item Jenkins dashboard mein login karein.
+    \item \textbf{Manage Jenkins} par click karein.
+    \item "Manage Plugins" ka option select karein.
+\end{enumerate}
+
+\hrule
+
+\subsection*{\textbf{Step 2: Plugin Search and Install Karein}}
+\begin{enumerate}
+    \item \textbf{Available Tab} par click karein.
+    \item Plugin ka naam search karein (e.g., Git Plugin).
+    \item "Install Without Restart" par click karein.
+\end{enumerate}
+
+\hrule
+
+\section*{\textbf{How to Integrate Jenkins with a Plugin (Example: Git Plugin)}}
+
+\subsection*{\textbf{Step 1: Git Plugin Install Karein}}
+\begin{enumerate}
+    \item \textbf{Manage Plugins} section mein jaakar "Git Plugin" search karein.
+    \item Plugin install karne ke baad Jenkins ko restart karein (agar required ho).
+\end{enumerate}
+
+\subsection*{\textbf{Step 2: Git Repository Configure Karein}}
+\begin{enumerate}
+    \item \textbf{New Item} par click karein aur ek Freestyle Project create karein.
+    \item Project Configuration Page mein:
+    \begin{itemize}
+        \item \textbf{Source Code Management} mein "Git" select karein.
+        \item Git repository ka URL enter karein (e.g., \texttt{https://github.com/username/repo.git}).
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{\textbf{Step 3: Build Steps Define Karein}}
+\begin{enumerate}
+    \item "Build Steps" mein "Execute Shell" ka option select karein.
+    \item Command likhein jo Git repository ke code ko build kare:
+    \begin{lstlisting}[language=bash]
+echo "Building the project..."
+\end{lstlisting}
+\end{enumerate}
+
+\hrule
+
+\section*{\textbf{How to Resolve Errors in Jenkins}}
+Agar koi error aaye (e.g., plugin fail ho), toh:
+\begin{enumerate}
+    \item \textbf{Log Files Check Karein:}
+    \begin{lstlisting}[language=bash]
+sudo tail -f /var/log/jenkins/jenkins.log
+\end{lstlisting}
+    \item Plugin ko uninstall aur reinstall karein.
+\end{enumerate}
+
+\hrule
+
+\section*{\textbf{Conclusion}}
+Jenkins ko Linux par install karna aur plugins ka use karna DevOps automation ke liye essential hai.
+\begin{itemize}
+    \item Jenkins installation ke steps simple hain.
+    \item Plugins (e.g., Git Plugin) Jenkins ki functionality badhate hain.
+    \item Automation pipelines easily setup ho jaati hain Jenkins ke saath.
+\end{itemize}
+
+Iska use kar ke CI/CD pipelines efficiently implement ki ja sakti hain. \smiley
+
+
+===============================
+\hrule
+
+
+
+% Code formatting
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    rulecolor=\color{gray!50},
+    keywordstyle=\color{blue},
+    commentstyle=\color{examplecolor},
+    stringstyle=\color{red},
+    breaklines=true
+}
+
+\begin{document}
+
+\section*{\textbf{System Administration with Jenkins: Backup, Restore, and Monitoring (Step-by-Step in Hinglish)}}
+
+Jenkins ko efficiently manage karna ek System Administrator ki responsibility hoti hai. Isme sabse zaroori kaam hain:
+\begin{itemize}
+    \item \textbf{\textcolor{examplecolor}{Backup}}: Data ko safe rakhna.
+    \item \textbf{\textcolor{examplecolor}{Restore}}: Data ko wapas laana agar Jenkins crash ya corrupt ho jaye.
+    \item \textbf{\textcolor{examplecolor}{Monitoring}}: Jenkins ke health status ko check karna.
+\end{itemize}
+
+---
+
+\section*{\textcolor{headingcolor}{Jenkins Home Directory (\texttt{JENKINS\_HOME})}}
+Jenkins ka core data \texttt{JENKINS\_HOME} folder mein store hota hai.
+
+\subsection*{\textcolor{headingcolor}{Contents of \texttt{JENKINS\_HOME} Folder}}
+\begin{itemize}
+    \item \textbf{\texttt{config.xml}}: Jenkins ki main configuration file. \newline
+    \textit{Is file mein Jenkins ke settings aur configurations stored hoti hain.}
+
+    \item \textbf{\texttt{jobs} Folder}: \newline
+    Jenkins ke saare jobs/projects ka data store karta hai. Har job/project ke configuration aur logs isi folder mein hote hain.
+
+    \item \textbf{\texttt{plugins} Folder}: \newline
+    Jenkins mein jo bhi plugins install kiye gaye hain, unka data is folder mein hota hai.
+
+    \item \textbf{\texttt{users} Folder}: \newline
+    Jenkins ke users ka data yahan store hota hai.
+
+    \item \textbf{\texttt{secrets} Folder}: \newline
+    Sensitive data, jaise credentials aur API tokens, is folder mein store hote hain.
+\end{itemize}
+
+---
+
+\section*{\textcolor{headingcolor}{Why Backup is Necessary?}}
+\begin{itemize}
+    \item \textbf{\textcolor{examplecolor}{Data Loss Avoid Karne Ke Liye}}: Agar Jenkins server crash ho jaye ya files corrupt ho, toh backup se hum saara data wapas laa sakte hain.
+    \item \textbf{\textcolor{examplecolor}{Disaster Recovery}}: Server migration ya accidental deletion ke case mein backup kaam aata hai.
+    \item \textbf{\textcolor{examplecolor}{Business Continuity}}: Without backup, Jenkins ko wapas setup karna time-consuming ho sakta hai, jo operations delay karega.
+\end{itemize}
+
+---
+
+\section*{\textcolor{headingcolor}{Backup Jenkins Using ThinBackup Plugin}}
+ThinBackup ek popular Jenkins plugin hai jo Jenkins ka backup aur restore karne ke liye use hota hai.
+
+\subsection*{\textcolor{headingcolor}{Step 1: ThinBackup Plugin Install Karein}}
+\begin{enumerate}
+    \item Jenkins dashboard par login karein.
+    \item \textbf{Manage Jenkins > Manage Plugins} par click karein.
+    \item \textbf{Available} tab mein search karein \texttt{ThinBackup}.
+    \item Plugin install karein (Restart Jenkins agar required ho).
+\end{enumerate}
+
+---
+
+\subsection*{\textcolor{headingcolor}{Step 2: ThinBackup Configuration}}
+\begin{enumerate}
+    \item Jenkins dashboard par jaake \textbf{Manage Jenkins > ThinBackup} par click karein.
+    \item \textbf{Backup Settings} configure karein:
+    \begin{itemize}
+        \item \textbf{Backup Directory}: Backup files ko store karne ka path (e.g., \texttt{/var/jenkins\_backups/}).
+        \item \textbf{Backup Schedule}: CRON expression mein backup ka schedule set karein (e.g., \texttt{H 0 * * *} for daily backup at midnight).
+        \item \textbf{Files to Backup}: Default settings ko rakhein; ye \texttt{JENKINS\_HOME} directory ka saara data backup karega.
+    \end{itemize}
+    \item Save karein.
+\end{enumerate}
+
+---
+
+\subsection*{\textcolor{headingcolor}{Step 3: Manual Backup Karein}}
+\begin{enumerate}
+    \item ThinBackup page mein jaake \textbf{Backup Now} button par click karein.
+    \item Backup ke files configured path (e.g., \texttt{/var/jenkins\_backups/}) par save ho jayenge.
+\end{enumerate}
+
+---
+
+\section*{\textcolor{headingcolor}{Restore Jenkins Using ThinBackup}}
+
+\subsection*{\textcolor{headingcolor}{Step 1: Restore Ke Use Cases}}
+\begin{itemize}
+    \item \textbf{Crash Recovery}: Agar Jenkins server crash ho gaya ya files corrupt ho gayi.
+    \item \textbf{Server Migration}: Agar Jenkins ko ek server se dusre server par migrate karna ho.
+\end{itemize}
+
+\subsection*{\textcolor{headingcolor}{Step 2: ThinBackup Restore Karein}}
+\begin{enumerate}
+    \item Jenkins dashboard par \textbf{Manage Jenkins > ThinBackup > Restore} par click karein.
+    \item Backup directory ka path select karein jahan backup stored hai.
+    \item Saare files aur configurations restore karne ke liye \textbf{Restore Now} button par click karein.
+\end{enumerate}
+
+---
+
+\section*{\textcolor{headingcolor}{Monitoring Jenkins Health}}
+
+\subsection*{\textcolor{headingcolor}{Log Files Monitor Karein}}
+\begin{enumerate}
+    \item Jenkins log files ko check karein:
+    \begin{lstlisting}[language=bash]
+sudo tail -f /var/log/jenkins/jenkins.log
+    \end{lstlisting}
+    \item Agar koi plugin fail ho ya job execution mein problem aaye, toh logs mein error milega.
+\end{enumerate}
+
+\subsection*{\textcolor{headingcolor}{System Resource Usage}}
+\begin{itemize}
+    \item Server ki CPU aur RAM usage ko monitor karein.
+    \item Agar Jenkins slow ho raha hai, toh resource allocation increase karein.
+\end{itemize}
+
+---
+
+\section*{\textcolor{headingcolor}{Conclusion}}
+\begin{itemize}
+    \item \textbf{Backup ka Importance}: Jenkins ka data safe aur secure rakhna zaroori hai.
+    \item \textbf{ThinBackup Plugin}: Jenkins backup aur restore process ko simplify karta hai.
+    \item \textbf{Monitoring}: Jenkins ki health aur logs ko regular basis par monitor karna chahiye.
+\end{itemize}
+
+Ab aap Jenkins ko effectively manage karne ke liye ready hain! \textbf{\textcolor{examplecolor}{��}}
+
+
+===============================
+\hrule
+
+
+
+\begin{document}
+
+% Title Section
+\begin{center}
+    {\LARGE \textbf{Jenkinsfile: Jenkins Pipeline ka Code Representation}} \\
+    \vspace{0.5em}
+    {\color{headingblue}\rule{\textwidth}{0.5mm}}
+\end{center}
+
+\section*{Introduction}
+\textbf{Jenkinsfile} ek text file hai jo Jenkins pipeline ki poori configuration ko define karti hai. Jenkins pipelines ek tarika hai jo automation process ko step-by-step define karta hai, jahan hum apne software ke build, test, aur deployment ka process likhte hain.
+
+\vspace{1em}
+\section*{Jenkinsfile Ke Core Concepts}
+\subsection*{1. Pipeline}
+\begin{itemize}
+    \item Pipeline Jenkins ka execution model hai jo ek software project ke kaam ko automate karta hai.
+    \item Syntax:
+\end{itemize}
+\vspace{-0.5em}
+\begin{lstlisting}[language=Groovy]
+pipeline {
+    // Configuration yahan likhte hain
+}
+\end{lstlisting}
+
+\subsection*{2. Agent}
+\begin{itemize}
+    \item Agent define karta hai ki pipeline ka code kaunsa machine ya environment par chalega.
+    \item Syntax:
+\end{itemize}
+\vspace{-0.5em}
+\begin{lstlisting}[language=Groovy]
+agent any  // Kisi bhi available agent par chalega
+\end{lstlisting}
+
+\subsection*{3. Stages}
+\begin{itemize}
+    \item Stages ka matlab hai pipeline ke alag-alag logical blocks, jaise build, test, deploy.
+    \item Syntax:
+\end{itemize}
+\vspace{-0.5em}
+\begin{lstlisting}[language=Groovy]
+stages {
+    stage('Stage Name') {
+        steps {
+            // Actions to perform
+        }
+    }
+}
+\end{lstlisting}
+
+\subsection*{4. Steps}
+\begin{itemize}
+    \item Steps woh commands hain jo ek stage ke andar chalti hain.
+    \item Syntax:
+\end{itemize}
+\vspace{-0.5em}
+\begin{lstlisting}[language=Groovy]
+steps {
+    sh 'echo Hello World'  // Bash command
+}
+\end{lstlisting}
+
+\section*{Jenkinsfile Example with Line-by-Line Explanation}
+\begin{lstlisting}[language=Groovy]
+pipeline {
+    agent any                   // Jenkins kisi bhi available agent par ye pipeline run karega
+
+    stages {
+        stage('Build') {        // "Build" stage define ho raha hai
+            steps {
+                sh 'echo Building the project...'  // Bash command jo project build process start karegi
+                sh 'mvn clean install'            // Maven command project build karne ke liye
+            }
+        }
+
+        stage('Test') {         // "Test" stage define ho raha hai
+            steps {
+                sh 'echo Running tests...'        // Bash command for running tests
+                sh 'mvn test'                    // Maven command jo unit tests run karegi
+            }
+        }
+
+        stage('Deploy') {       // "Deploy" stage define ho raha hai
+            steps {
+                sh 'echo Deploying the project...' // Bash command jo deployment message show karegi
+                sh './deploy.sh'                   // Custom script jo deployment karega
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+\section*{Why Jenkinsfile is Important in DevOps?}
+\begin{itemize}
+    \item {\color{examplegreen}\textbf{Code as Configuration:}} Jenkinsfile ke through aap apni pipeline ka configuration code mein likh sakte hain.
+    \item {\color{examplegreen}\textbf{Version Control:}} Jenkinsfile ko Git mein version control kar sakte hain, isse changes ka track record milta hai.
+    \item {\color{examplegreen}\textbf{Reusability:}} Jenkinsfile ek standardized format provide karta hai jo team mein reuse ho sakta hai.
+    \item {\color{examplegreen}\textbf{Automation:}} Puri CI/CD process ko automate karna Jenkinsfile ke through possible hai.
+\end{itemize}
+
+\section*{How to Use Jenkinsfile in Jenkins?}
+\begin{enumerate}
+    \item Git repository ke root directory mein ek \texttt{Jenkinsfile} file create karein.
+    \item Jenkins dashboard par ek new pipeline job banayein.
+    \item Pipeline ka source as \textbf{Pipeline script from SCM} select karein.
+    \item Git repository ka URL aur branch specify karein.
+\end{enumerate}
+
+\section*{Conclusion}
+\begin{itemize}
+    \item Jenkinsfile ka use kar ke aap apni CI/CD pipelines ko effectively configure kar sakte hain.
+    \item Yeh ek powerful tool hai jo Jenkins pipelines ko maintainable aur reusable banata hai.
+\end{itemize}
+
+
+
+
+===============================
+\hrule
+
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    rulecolor=\color{black},
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{OliveGreen},
+    stringstyle=\color{BrickRed},
+    breaklines=true,
+    columns=fullflexible
+}
+
+\begin{document}
+
+% Title Section
+\section*{\textbf{Jenkinsfile Naming and Overview}}
+
+\textbf{Jenkinsfile} ka naam \textbf{``Jenkinsfile''} hi rakha jata hai, jo default Jenkins pipelines ke liye samjha jata hai. Yeh ek text file hai jo project ke root directory me hoti hai aur isme CI/CD pipeline ke steps likhe jate hain.
+
+\rule{\linewidth}{0.4pt}
+
+% Basic Example Section
+\section*{\textbf{Basic Jenkinsfile Example}}
+\begin{lstlisting}[language=groovy,caption={Jenkinsfile Example},label={lst:basic-jenkinsfile}]
+pipeline {                      // Pipeline block ka start
+    agent any                   // Koi bhi available agent pipeline execute karega
+
+    stages {                    // Stages block defines logical steps
+        stage('Checkout Code') {  // First stage: Checkout code from Git
+            steps {
+                git 'https://github.com/example/repo.git'  // Git repository se code pull karna
+            }
+        }
+
+        stage('Build') {        // Second stage: Build the project
+            steps {
+                sh 'echo Building the project...'        // Bash command for build
+                sh './build.sh'                          // Custom build script
+            }
+        }
+
+        stage('Test') {         // Third stage: Run tests
+            steps {
+                sh 'echo Running tests...'              // Bash command for test message
+                sh './run_tests.sh'                     // Custom test script
+            }
+        }
+
+        stage('Deploy') {       // Fourth stage: Deploy the application
+            steps {
+                sh 'echo Deploying the application...'  // Bash command for deployment message
+                sh './deploy.sh'                        // Deployment script
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+\rule{\linewidth}{0.4pt}
+
+% Explanation Section
+\section*{\textbf{Jenkinsfile Code Explanation in Hinglish}}
+\begin{enumerate}
+    \item \textbf{Pipeline Block:}  \texttt{pipeline} keyword se Jenkinsfile ka main structure shuru hota hai. Yahan hum stages aur agent define karte hain.
+    \item \textbf{Agent Block:}  \texttt{agent any} ka matlab hai ki yeh pipeline kisi bhi available Jenkins agent par run karega.
+    \item \textbf{Stages Block:}  \texttt{stages} ek block hai jo pipeline ke logical steps ko define karta hai.
+    \item \textbf{Stage: Checkout Code:}  \texttt{git 'https://github.com/example/repo.git'} ka matlab hai ki Jenkins Git repository se code checkout karega.
+    \item \textbf{Stage: Build:}  \texttt{sh './build.sh'} ek shell script run karta hai jo project build karne ke liye hai.
+    \item \textbf{Stage: Test:}  \texttt{sh './run_tests.sh'} unit tests chalane ke liye ek script execute karta hai.
+    \item \textbf{Stage: Deploy:}  \texttt{sh './deploy.sh'} deployment process chalata hai.
+\end{enumerate}
+
+\rule{\linewidth}{0.4pt}
+
+% Multistage Pipeline Section
+\section*{\textbf{What is a Multistage Pipeline?}}
+\textbf{Multistage pipeline} ek advanced Jenkins pipeline hai jo multiple independent stages me kaam ko todti hai. Har stage ka specific kaam hota hai, jaise code ko checkout karna, build karna, test karna, aur deploy karna.
+
+\subsection*{\textbf{Multistage Pipeline Example}}
+\begin{lstlisting}[language=groovy,caption={Multistage Pipeline Example},label={lst:multistage-pipeline}]
+pipeline {
+    agent any  // Koi bhi available agent use karega
+
+    stages {
+        stage('Stage 1: Checkout Code') { // First stage
+            steps {
+                git 'https://github.com/example/repo.git'  // Git repo se code pull karna
+            }
+        }
+
+        stage('Stage 2: Build') {  // Second stage
+            steps {
+                sh 'echo Building the code...'           // Bash command
+                sh 'mvn clean install'                  // Maven build command
+            }
+        }
+
+        stage('Stage 3: Test') {   // Third stage
+            steps {
+                sh 'echo Running tests...'              // Bash command
+                sh 'mvn test'                           // Maven test command
+            }
+        }
+
+        stage('Stage 4: Deploy') {  // Fourth stage
+            steps {
+                sh 'echo Deploying application...'      // Bash command
+                sh './deploy.sh'                        // Deployment script
+            }
+        }
+    }
+
+    post {  // Post steps execution
+        always {
+            sh 'echo Cleaning up workspace...'          // Workspace cleanup
+            cleanWs()                                   // Jenkins workspace cleanup
+        }
+    }
+}
+\end{lstlisting}
+
+% Explanation Section for Multistage Pipeline
+\section*{\textbf{Multistage Pipeline Explanation in Hinglish}}
+\begin{itemize}
+    \item \textbf{Stages:} Multistage pipeline ka har ek stage independent kaam define karta hai. Example: Build stage ka kaam code ko compile karna, Test stage ka kaam unit tests run karna.
+    \item \textbf{Stage: Checkout Code:} \texttt{git 'https://github.com/example/repo.git'} code ko Git se pull karta hai.
+    \item \textbf{Stage: Build:} \texttt{sh 'mvn clean install'} Maven tool se code ko build karta hai.
+    \item \textbf{Stage: Test:} \texttt{sh 'mvn test'} test cases chalata hai aur ensure karta hai ki code bugs-free hai.
+    \item \textbf{Stage: Deploy:} \texttt{sh './deploy.sh'} custom deployment script ko run karta hai.
+    \item \textbf{Post Section:} Post section cleanup actions ke liye hota hai, jaise \texttt{cleanWs()} workspace ko clear karta hai.
+\end{itemize}
+
+\rule{\linewidth}{0.4pt}
+
+% Advantages Section
+\section*{\textbf{Advantages of Multistage Pipelines}}
+\begin{enumerate}
+    \item \textbf{Better Modularity:} Har stage ka specific kaam hota hai, jo pipeline ko samajhna aur debug karna asaan banata hai.
+    \item \textbf{Faster Feedback:} Agar ek stage fail hoti hai toh agle stages ko skip kar sakte hain.
+    \item \textbf{Improved Resource Usage:} Ek stage ke complete hone ke baad resources free ho jate hain.
+    \item \textbf{Reusability:} Pipeline ko multiple projects me reuse kar sakte hain.
+\end{enumerate}
+
+% Usage Section
+\section*{\textbf{How to Create Jenkinsfile for Multistage Pipeline?}}
+\begin{enumerate}
+    \item Project ke root directory me ek file create karein aur uska naam \texttt{Jenkinsfile} rakhein.
+    \item Above example ka code copy karein aur file me paste karein.
+    \item Jenkins dashboard par ek pipeline job create karein.
+    \item Pipeline ka source as \texttt{Pipeline script from SCM} select karein aur Git URL provide karein.
+\end{enumerate}
+
+\textbf{Jenkins automatically Jenkinsfile read karega aur multistage pipeline ko execute karega! ��}
+
+===============================
+\hrule
+
+
+\begin{document}
+
+\section*{How to Build a Sample Pipeline in Jenkins}
+\noindent Follow these steps to set up and run a simple pipeline in Jenkins. Each step is explained in Hinglish for better understanding. \textcolor{examplecolor}{\textbf{\(\star\)}}
+
+\rule{\textwidth}{0.4pt}
+
+\section*{Step 1: Install Jenkins}
+\noindent Agar Jenkins installed nahi hai, to pehle Jenkins ko install karein. Steps:
+\begin{enumerate}
+    \item Install Jenkins on Linux by following the \href{https://www.jenkins.io/doc/book/installing/}{installation guide}.
+    \item Start Jenkins service:
+\end{enumerate}
+
+\begin{lstlisting}[language=bash, label=lst:start_jenkins, caption=Start Jenkins Service]
+sudo systemctl start jenkins
+\end{lstlisting}
+
+\rule{\textwidth}{0.4pt}
+
+\section*{Step 2: Create a New Pipeline Job}
+\begin{enumerate}
+    \item \textbf{Login to Jenkins Dashboard:}
+    \noindent Open Jenkins in your browser (e.g., \texttt{http://localhost:8080}).
+
+    \item \textbf{Click on \textquotedbl New Item\textquotedbl :}
+    \begin{itemize}
+        \item Jenkins Dashboard par top left corner me \textbf{\textquotedbl New Item\textquotedbl} button par click karein.
+        \item \textbf{Job Type Select Karein:}
+        \begin{itemize}
+            \item Job ka naam de (e.g., \texttt{SamplePipeline}) aur \textbf{\textquotedbl Pipeline\textquotedbl} select karein.
+            \item \textquotedbl OK\textquotedbl button par click karein.
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\rule{\textwidth}{0.4pt}
+
+\section*{Step 3: Configure Your Pipeline}
+\begin{enumerate}
+    \item \textbf{General Section:}
+    \begin{itemize}
+        \item \textbf{Project Description:} Yahan ek brief description likhein, jaise,
+        \textit{\textquotedbl This is a sample Jenkins pipeline for testing purposes.\textquotedbl}
+    \end{itemize}
+
+    \item \textbf{Build Triggers:}
+    \begin{itemize}
+        \item Build ko schedule karne ke liye options hote hain:
+        \begin{itemize}
+            \item \textbf{Poll SCM:} Agar source control me koi change aaye to pipeline trigger ho.
+            \item \textbf{Build Periodically:} Specific interval par build karne ke liye.
+        \end{itemize}
+        Example: Poll SCM me cron syntax add karein:
+        \begin{lstlisting}[label=lst:cron_syntax, caption=Poll SCM Example]
+H/5 * * * *
+        \end{lstlisting}
+        Yeh syntax har 5 minute me SCM check karega.
+    \end{itemize}
+
+    \item \textbf{Advanced Project Options:}
+    \begin{itemize}
+        \item \textbf{Quiet Period:} Jenkins build ke start hone ke delay ke liye time configure karein.
+        \item \textbf{Display Name:} Job ka unique display name de sakte hain for better identification.
+    \end{itemize}
+
+    \item \textbf{Pipeline Section:}
+    \begin{itemize}
+        \item Pipeline ka source choose karein:
+        \begin{itemize}
+            \item \textbf{Pipeline script:} Inline script likhein.
+            \item \textbf{Pipeline script from SCM:} Git ya kisi SCM se Jenkinsfile fetch karein.
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\rule{\textwidth}{0.4pt}
+
+\section*{Step 4: Add Pipeline Script}
+\subsection*{Sample Pipeline Script}
+\begin{lstlisting}[language=groovy, label=lst:sample_pipeline, caption=Sample Jenkins Pipeline]
+pipeline {
+    agent any  // Available agent par run karega
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git 'https://github.com/example/sample-repo.git'  // Git se code pull karein
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'echo Building the project...'  // Bash command
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'echo Running tests...'  // Testing stage
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'echo Deploying the application...'  // Deployment stage
+            }
+        }
+    }
+}
+\end{lstlisting}
+\noindent \textbf{Explanation:}
+\begin{itemize}
+    \item \textbf{Agent:} Yeh define karta hai ki pipeline kaunse agent par run karega.
+    \item \textbf{Stages:} Logical blocks me pipeline ko todta hai.
+    \item \textbf{Steps:} Har stage ke andar ke specific commands.
+\end{itemize}
+
+\rule{\textwidth}{0.4pt}
+
+\section*{Step 5: Save and Build}
+\begin{enumerate}
+    \item \textbf{Click \textquotedbl Save\textquotedbl :} Configuration save karein.
+    \item \textbf{Click \textquotedbl Build Now\textquotedbl :} Dashboard par \textquotedbl Build Now\textquotedbl button par click karein.
+    \item \textbf{Check Console Output:} Build ka result dekhne ke liye \textquotedbl Console Output\textquotedbl option par click karein.
+\end{enumerate}
+
+\rule{\textwidth}{0.4pt}
+
+\section*{Most Important Features in Jenkins}
+\begin{enumerate}
+    \item \textbf{Build Triggers:}
+    \begin{itemize}
+        \item Automatically build karne ke liye triggers set karte hain.
+        \item Common options: Poll SCM, Webhooks, Build Periodically.
+    \end{itemize}
+
+    \item \textbf{Pipeline:}
+    \begin{itemize}
+        \item CI/CD ke liye Jenkins pipeline ka use hota hai.
+        \item Jenkinsfile me saari build, test, aur deploy steps likhi jati hain.
+    \end{itemize}
+
+    \item \textbf{Advanced Project Options:}
+    \begin{itemize}
+        \item Quiet period, Retry count, aur Display name configure karte hain.
+        \item Advance options se builds aur logs ko organize kar sakte hain.
+    \end{itemize}
+
+    \item \textbf{Build Environment:}
+    \begin{itemize}
+        \item Specific environment variables ya credentials set karte hain jo build ke liye zaruri hain.
+    \end{itemize}
+
+    \item \textbf{Plugins:}
+    \begin{itemize}
+        \item Jenkins ke functionality ko extend karne ke liye plugins ka use hota hai.
+        \item Example: Git Plugin, Docker Plugin, ThinBackup.
+    \end{itemize}
+
+    \item \textbf{Console Output:}
+    \begin{itemize}
+        \item Build process ka real-time status dekhne ke liye console output ka use hota hai.
+    \end{itemize}
+\end{enumerate}
+
+\rule{\textwidth}{0.4pt}
+
+\section*{Conclusion}
+\noindent Ab aapne ek basic Jenkins pipeline configure ki aur samjha ki important features jaise Build Triggers, Pipeline, aur Plugins kaise kaam karte hain. Yeh CI/CD process ke liye ek strong foundation provide karta hai. \textcolor{examplecolor}{\textbf{\(\star\)}}
+
+===============================
+\hrule
+
+
+
+\begin{document}
+
+\begin{center}
+    {\huge \textbf{Multistage Pipeline in Jenkins}}
+\end{center}
+\vspace{1em}
+
+---
+
+\section*{What is a Multistage Pipeline?}
+
+\begin{itemize}
+    \item \textbf{Multistage Pipeline} ek aisi pipeline hai jo software development lifecycle ke alag-alag stages ko manage karti hai:
+    \begin{enumerate}
+        \item \textbf{Build Stage}: Code ko compile aur package karta hai.
+        \item \textbf{Test Stage}: Unit tests aur integration tests ko run karta hai.
+        \item \textbf{Deploy Stage}: Application ko production ya testing environment me deploy karta hai.
+    \end{enumerate}
+    \item \textbf{Benefits:}
+    \begin{itemize}
+        \item Development process ko streamline karna.
+        \item Continuous Integration (CI) aur Continuous Deployment (CD) ko simplify karna.
+    \end{itemize}
+\end{itemize}
+
+---
+
+\section*{Why Multistage Pipeline?}
+
+\begin{itemize}
+    \item \textbf{Organized Workflow}: Different stages ko clearly define karta hai.
+    \item \textbf{Error Detection}: Har stage me agar koi issue hota hai, to turant detect hota hai.
+    \item \textbf{Scalability}: Complex projects ke liye useful.
+    \item \textbf{Automation}: CI/CD process ka core feature.
+\end{itemize}
+
+---
+
+\section*{Example of Multistage Pipeline}
+
+\textbf{Sample Jenkinsfile:}
+\begin{lstlisting}[language=groovy]
+pipeline {
+    agent any  // Pipeline ko kisi bhi available agent par run karega
+
+    stages {
+        // Stage 1: Build Code
+        stage('Build') {
+            steps {
+                echo 'Building the project...'
+                sh 'mvn clean package'
+            }
+        }
+
+        // Stage 2: Run Tests
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh 'mvn test'
+            }
+        }
+
+        // Stage 3: Deploy Code
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the application...'
+                sh 'scp target/myapp.war user@server:/path/to/deploy'
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+---
+
+\section*{Detailed Explanation of Each Block}
+
+\subsection*{1. Pipeline Block}
+\begin{lstlisting}[language=groovy]
+pipeline {
+    agent any
+    stages { ... }
+}
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{pipeline}: Jenkinsfile ka root block.
+    \item \textbf{agent any}: Pipeline kisi bhi available agent par run karega.
+\end{itemize}
+
+\subsection*{2. Stages Block}
+\begin{lstlisting}[language=groovy]
+stages { ... }
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{Stages}: Pipeline ke logical blocks.
+    \item Har stage ka specific purpose hota hai.
+\end{itemize}
+
+\subsection*{3. Individual Stages}
+
+\textbf{Build Stage:}
+\begin{lstlisting}[language=groovy]
+stage('Build') {
+    steps {
+        echo 'Building the project...'
+        sh 'mvn clean package'
+    }
+}
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{stage('Build')}: Build process ke liye.
+    \item \textbf{sh 'mvn clean package'}: Maven command to compile code.
+\end{itemize}
+
+\textbf{Test Stage:}
+\begin{lstlisting}[language=groovy]
+stage('Test') {
+    steps {
+        echo 'Running tests...'
+        sh 'mvn test'
+    }
+}
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{stage('Test')}: Testing block.
+    \item \textbf{sh 'mvn test'}: Maven command for tests.
+\end{itemize}
+
+\textbf{Deploy Stage:}
+\begin{lstlisting}[language=groovy]
+stage('Deploy') {
+    steps {
+        echo 'Deploying the application...'
+        sh 'scp target/myapp.war user@server:/path/to/deploy'
+    }
+}
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{stage('Deploy')}: Deployment block.
+    \item \textbf{sh 'scp target/myapp.war...'}: Secure Copy Protocol for deployment.
+\end{itemize}
+
+---
+
+\section*{Steps to Build a Multistage Pipeline in Jenkins}
+
+\begin{enumerate}
+    \item \textbf{Login to Jenkins:} Browser me Jenkins dashboard open karein.
+    \item \textbf{Create a New Pipeline Job:}
+    \begin{itemize}
+        \item \textbf{"New Item"} par click karein.
+        \item Job ka naam de (e.g., \textbf{MultistagePipeline}).
+        \item \textbf{"Pipeline"} select karein aur "OK" karein.
+    \end{itemize}
+    \item \textbf{Pipeline Section:}
+    \begin{itemize}
+        \item "Pipeline Script" choose karein.
+        \item Jenkinsfile code paste karein.
+    \end{itemize}
+    \item \textbf{Save and Build:}
+    \begin{itemize}
+        \item \textbf{"Save"} par click karein.
+        \item \textbf{"Build Now"} se pipeline execute karein.
+    \end{itemize}
+    \item \textbf{Check Console Output:} Console Output section me stage-wise execution dekhein.
+\end{enumerate}
+
+---
+
+\section*{Benefits of Multistage Pipeline}
+
+\begin{itemize}
+    \item \textbf{Error Tracking:} Agar ek stage fail hoti hai, to turant pata chalega.
+    \item \textbf{Time-Saving:} Automation testing aur deployment me madad karta hai.
+    \item \textbf{Modularity:} Har stage independent hoti hai, maintenance asaan.
+    \item \textbf{Improved Collaboration:} Workflow developers aur DevOps engineers ke liye streamline hota hai.
+\end{itemize}
+
+---
+
+\section*{Conclusion}
+
+Multistage pipeline ek powerful feature hai jo Jenkins CI/CD workflow ka integral part hai. Yeh software lifecycle ke different stages ko automate karta hai aur development process ko fast aur error-free banata hai.
+
+===============================
+\hrule
+
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{myblue}{rgb}{0.0, 0.0, 0.8}
+\definecolor{mygreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{myred}{rgb}{0.8, 0.0, 0.0}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{white},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    columns=flexible,
+    frame=single,
+    rulecolor=\color{black},
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red}
+}
+
+\title{\textbf{Building a CI Pipeline in Jenkins (with Jenkinsfile)}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{\color{myblue}Introduction}
+
+Aapko ek CI pipeline create karni hai jisme code ko build, test aur deploy karna ho. Hum Jenkinsfile me yeh define karenge. Jenkinsfile ek script hota hai jo Jenkins ko bataata hai ki pipeline ko kis tarah execute karna hai.
+
+\section*{\color{myblue}Example CI Pipeline Jenkinsfile}
+
+\begin{lstlisting}[language=Groovy, style=mystyle, caption=CI Pipeline Jenkinsfile]
+pipeline {
+    agent any  // Iska matlab hai ki koi bhi available agent pe yeh pipeline run ho sakti hai.
+
+    environment {
+        // Yaha hum environment variables define kar sakte hain
+        APP_NAME = 'my_app'
+    }
+
+    stages {
+        // First Stage - Code Checkout
+        stage('Checkout') {
+            steps {
+                echo 'Checking out code from repository...'  // Console pe message print hoga
+                git 'https://github.com/your-repo/my_app.git'  // Git repository se code pull karega
+            }
+        }
+
+        // Second Stage - Build Application
+        stage('Build') {
+            steps {
+                echo 'Building the application...'  // Console pe message print hoga
+                sh 'mvn clean install'  // Maven build command, jo application ko build karega
+            }
+        }
+
+        // Third Stage - Run Unit Tests
+        stage('Test') {
+            steps {
+                echo 'Running unit tests...'  // Console pe message print hoga
+                sh 'mvn test'  // Maven command to run unit tests
+            }
+        }
+
+        // Fourth Stage - Deploy
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the application to server...'  // Console pe message print hoga
+                sh 'scp target/myapp.war user@server:/path/to/deploy'  // Application ko deploy karne ke liye SCP use karna
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline execution completed.'  // Yeh step har condition me run hoga
+        }
+        success {
+            echo 'Build was successful!'  // Agar build successful ho to message print hoga
+        }
+        failure {
+            echo 'Build failed, please check logs!'  // Agar build fail ho to message print hoga
+        }
+    }
+}
+\end{lstlisting}
+
+\section*{\color{myblue}Explanation of the CI Pipeline}
+
+\begin{itemize}
+    \item \textbf{Pipeline Block}:
+    \begin{itemize}
+        \item \texttt{agent any}: Yeh define karta hai ki pipeline kisi bhi available agent par run ho sakti hai.
+        \item \texttt{environment \{\}}: Yaha pe hum environment variables set karte hain jo humare pipeline me use honge.
+    \end{itemize}
+
+    \item \textbf{Stages}: 
+    \begin{itemize}
+        \item \textbf{Checkout}: Git se code pull karne ke liye \texttt{git} command ka use hota hai.
+        \item \textbf{Build}: Build process ko define karta hai. Maven ko use karke \texttt{mvn clean install} se code build hota hai.
+        \item \textbf{Test}: Tests ko run karne ke liye \texttt{mvn test} command use hoti hai.
+        \item \textbf{Deploy}: Application ko deploy karne ke liye \texttt{scp} command se war file ko deploy kiya jata hai.
+    \end{itemize}
+
+    \item \textbf{Post Section}:
+    \begin{itemize}
+        \item Yeh post actions run karte hain, jaise ki success ya failure messages, chahe pipeline pass ho ya fail ho.
+    \end{itemize}
+\end{itemize}
+
+\hrule
+
+\section*{\color{myblue}Building a CD Pipeline in Jenkins}
+
+Continuous Deployment (CD) pipeline ka main focus hota hai ki deploy ke process ko automate kiya jaaye. Aap is pipeline me automatically application ko production ya kisi aur environment me deploy karte hain.
+
+\section*{\color{myblue}Example CD Pipeline Jenkinsfile}
+
+\begin{lstlisting}[language=Groovy, style=mystyle, caption=CD Pipeline Jenkinsfile]
+pipeline {
+    agent any
+
+    stages {
+        // First Stage - Build Docker Image
+        stage('Build Image') {
+            steps {
+                script {
+                    app = docker.build('my-app:latest')  // Docker image ko build karne ke liye command
+                }
+            }
+        }
+
+        // Second Stage - Push Docker Image to Docker Hub
+        stage('Push Image to Docker Hub') {
+            steps {
+                script {
+                    docker.withRegistry('https://hub.docker.com', 'dockerhub-credentials') {
+                        app.push()  // Docker image ko Docker Hub pe push karna
+                    }
+                }
+            }
+        }
+
+        // Third Stage - Deploy the Docker Container
+        stage('Deploy') {
+            steps {
+                script {
+                    sh 'docker run -d -p 8080:80 my-app:latest'  // Docker container ko run karna
+                }
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+\section*{\color{myblue}Explanation of the CD Pipeline}
+
+\begin{itemize}
+    \item \textbf{Build Image}:
+    \begin{itemize}
+        \item \texttt{docker.build('my-app:latest')}: Yeh command Docker image build karti hai. Isme \texttt{my-app:latest} image ka naam hai jo hum build kar rahe hain.
+    \end{itemize}
+
+    \item \textbf{Push Image to Docker Hub}:
+    \begin{itemize}
+        \item \texttt{docker.withRegistry('https://hub.docker.com', 'dockerhub-credentials')}: Yeh Docker Hub ko connect karta hai using provided credentials.
+        \item \texttt{app.push()}: Jo image humne build ki thi, usse Docker Hub pe push karte hain.
+    \end{itemize}
+
+    \item \textbf{Deploy the Docker Container}:
+    \begin{itemize}
+        \item \texttt{sh 'docker run -d -p 8080:80 my-app:latest'}: Yeh command Docker container ko run karne ke liye hoti hai. \texttt{-d} flag se container background me run hota hai, aur \texttt{-p} port mapping set karta hai.
+    \end{itemize}
+\end{itemize}
+
+\hrule
+
+\section*{\color{myblue}Jenkins Docker Plugins Explained}
+
+\begin{itemize}
+    \item \textbf{Docker Plugin}: Yeh plugin Jenkins ko Docker containers ke saath interact karne ka capability deta hai.
+    \item \textbf{Docker Pipeline Plugin}: Yeh plugin Jenkins pipeline ke andar Docker commands ko run karne ke liye use hota hai.
+    \item \textbf{Docker Common Plugin}: Yeh plugin Docker ke common commands ko Jenkins ke workflow me integrate karne ka kaam karta hai.
+    \item \textbf{Docker API Plugin}: Yeh plugin Docker engine ke API se interact karne ke liye hota hai.
+\end{itemize}
+
+\hrule
+
+\section*{\color{myblue}How to Install Docker Plugins in Jenkins}
+
+\begin{itemize}
+    \item \textbf{Login to Jenkins}: Jenkins dashboard me login karen.
+    \item \textbf{Go to Manage Jenkins}: Jenkins ke left side me "Manage Jenkins" option pe click karen.
+    \item \textbf{Select Manage Plugins}: "Manage Jenkins" page pe, "Manage Plugins" option ko select karen.
+    \item \textbf{Search for Docker Plugins}: "Available" tab me jaake search bar me "docker" likhkar Docker plugins ko search karen.
+    \item \textbf{Install the Required Plugins}: Aapko Docker-related plugins jaise Docker, Docker Pipeline, etc. install karne hain.
+\end{itemize}
+
+\hrule
+
+\section*{\color{myblue}Running Jenkins Pipeline and Checking Console Output}
+
+\begin{itemize}
+    \item \textbf{Run the Pipeline}: Jenkins job ko run karne ke liye, "Build Now" button pe click karen.
+    \item \textbf{Console Output}:
+    \begin{itemize}
+        \item Job start hone ke baad, aap "Console Output" dekh sakte hain jo job ki execution ko detail me show karta hai.
+        \item Console Output me aapko har step ka result, errors, aur logs milenge. Yeh aapko help karta hai agar koi problem aaye to usse troubleshoot karne me.
+    \end{itemize}
+\end{itemize}
+
+\hrule
+
+\section*{\color{myblue}Conclusion}
+
+Jenkins me CI aur CD pipelines ko configure karna aapko automation aur streamlining ke liye bahut zaroori hai. Docker plugins ka use karke aap Jenkins aur Docker ke beech integration ko bahut asaan bana sakte hain. Multistage pipeline ke through aap code ko efficiently build, test aur deploy kar sakte hain.
+
+
+===============================
+\hrule
+
+\documentclass[a4paper,12pt]{article}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define colors for the document
+\definecolor{myblue}{rgb}{0.0, 0.0, 0.8}
+\definecolor{mygreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{myred}{rgb}{0.8, 0.0, 0.0}
+
+% Set page margins
+\usepackage[margin=1in]{geometry}
+
+% Set code style
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{lightgray},
+  keywordstyle=\color{myblue}\bfseries,
+  commentstyle=\color{mygreen},
+  stringstyle=\color{myred},
+  showstringspaces=false,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{black}
+}
+
+\begin{document}
+
+\title{\textbf{Full Pipeline Deployment with Jenkinsfile}}
+\author{}
+\date{}
+\maketitle
+
+\section*{Full Pipeline Deployment with Jenkinsfile}
+
+Jenkinsfile ka use karke aap apne deployment process ko automate kar sakte hain. Aapko pipeline create karne ka step-by-step process dikhane ke liye main ek full pipeline ka example deta hoon jisme hum source code ko clone karenge, application ko build karenge, tests run karenge, aur phir deploy karenge. Yeh sab hum Jenkinsfile me likhenge.
+
+\subsection*{Example Jenkinsfile for Full Pipeline Deployment}
+\begin{lstlisting}[language=groovy]
+pipeline {
+    agent any  // Yeh batata hai ki pipeline kisi bhi available agent pe run ho sakti hai.
+
+    environment {
+        // Yaha pe environment variables define kar sakte hain jo pipeline ke andar use honge
+        APP_NAME = 'my_application'
+        DEPLOY_DIR = '/var/www/myapp'  // Deployment directory ka path define kar rahe hain
+    }
+
+    stages {
+        // First Stage - Checkout the Code from Git Repository
+        stage('Checkout') {
+            steps {
+                echo 'Cloning the code from Git repository...'  // Yeh message console pe print hoga
+                git 'https://github.com/your-repo/my_application.git'  // Git se code clone karna
+            }
+        }
+
+        // Second Stage - Build Application
+        stage('Build') {
+            steps {
+                echo 'Building the application...'  // Yeh message console pe print hoga
+                sh 'cd my_application && mvn clean install'  // Maven command se application ko build karna
+            }
+        }
+
+        // Third Stage - Run Unit Tests
+        stage('Test') {
+            steps {
+                echo 'Running unit tests...'  // Yeh message console pe print hoga
+                sh 'cd my_application && mvn test'  // Maven command se unit tests ko run karna
+            }
+        }
+
+        // Fourth Stage - Deploy to Production Server
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the application to production server...'  // Yeh message console pe print hoga
+                sh 'scp target/myapp.war user@production-server:/var/www/myapp'  // War file ko production server pe SCP command se copy karna
+            }
+        }
+
+        // Fifth Stage - Run Post Deployment Tasks
+        stage('Post Deployment') {
+            steps {
+                echo 'Running post deployment tasks...'  // Yeh message console pe print hoga
+                sh 'ssh user@production-server "cd /var/www/myapp && ./post_deploy_script.sh"'  // SSH se server pe post-deployment script run karna
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline execution finished.'  // Yeh step hamesha chalega chahe build success ho ya failure
+        }
+        success {
+            echo 'Deployment was successful!'  // Agar build successful ho to message print hoga
+        }
+        failure {
+            echo 'Deployment failed, please check logs!'  // Agar build fail ho to message print hoga
+        }
+    }
+}
+\end{lstlisting}
+
+\newpage
+
+\section*{Explanation of Jenkinsfile (Step-by-Step)}
+
+\begin{itemize}
+    \item \textbf{`pipeline {}` Block}: Yeh block pipeline ka structure define karta hai. Yaha pe agent, environment variables, aur stages ko define kiya jata hai.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{`agent any`}: Yeh batata hai ki pipeline ko kisi bhi available agent par run hone diya jayega. Iska matlab hai ki Jenkins ka koi bhi available worker node pipeline ko execute kar sakta hai.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{`environment {}` Block}: Yaha pe hum environment variables define karte hain jo poori pipeline me access kiye ja sakte hain. Jaise \texttt{APP\_NAME} ko aap kisi bhi stage me use kar sakte hain.
+    \item \texttt{DEPLOY\_DIR}: Yeh variable deployment directory ka path rakhta hai.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Stages}: Stages pipeline ke alag-alag steps ko define karte hain. Har stage ek specific task perform karta hai.
+\end{itemize}
+
+\newpage
+
+\section*{Explanation of Each Stage}
+
+\begin{itemize}
+    \item \textbf{`stage('Checkout')`}: 
+    \begin{itemize}
+        \item \textbf{Purpose}: Yaha pe hum source code ko Git repository se clone karte hain.
+        \item \textbf{Steps}: 
+        \begin{itemize}
+            \item \texttt{git 'https://github.com/your-repo/my\_application.git'}: Yeh command Git repository se code pull karegi.
+            \item \texttt{echo 'Cloning the code from Git repository...'}: Yeh message Jenkins console pe show hoga.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{`stage('Build')`}: 
+    \begin{itemize}
+        \item \textbf{Purpose}: Yaha pe hum application ko build karte hain.
+        \item \textbf{Steps}: 
+        \begin{itemize}
+            \item \texttt{sh 'cd my\_application \&\& mvn clean install'}: Yeh command Maven ke through application ko build karegi. \texttt{mvn clean install} se project ko clean karke phir build kiya jata hai.
+            \item \texttt{echo 'Building the application...'}: Yeh message Jenkins console pe print hoga.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{`stage('Test')`}: 
+    \begin{itemize}
+        \item \textbf{Purpose}: Yaha pe hum unit tests run karte hain.
+        \item \textbf{Steps}: 
+        \begin{itemize}
+            \item \texttt{sh 'cd my\_application \&\& mvn test'}: Yeh command Maven ke through unit tests run karne ke liye hoti hai.
+            \item \texttt{echo 'Running unit tests...'}: Yeh message Jenkins console pe print hoga.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{`stage('Deploy')`}: 
+    \begin{itemize}
+        \item \textbf{Purpose}: Yaha pe hum application ko production server pe deploy karte hain.
+        \item \textbf{Steps}: 
+        \begin{itemize}
+            \item \texttt{sh 'scp target/myapp.war user@production-server:/var/www/myapp'}: Yeh command SCP ke through build ki gayi war file ko production server pe copy karegi.
+            \item \texttt{echo 'Deploying the application to production server...'}: Yeh message Jenkins console pe show hoga.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{`stage('Post Deployment')`}: 
+    \begin{itemize}
+        \item \textbf{Purpose}: Yaha pe hum deployment ke baad kuch tasks run karte hain jaise server configuration ya database migration.
+        \item \textbf{Steps}: 
+        \begin{itemize}
+            \item \texttt{sh 'ssh user@production-server "cd /var/www/myapp \&\& ./post\_deploy\_script.sh"'}: Yeh command SSH ke through production server pe post-deployment script run karegi jo additional configuration tasks kar sake.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\newpage
+
+\section*{Post Actions (Post Block)}
+
+\begin{itemize}
+    \item \textbf{`post {}` Block}: Yeh block wo actions define karta hai jo pipeline ke complete hone ke baad execute honge, jaise success ya failure messages.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{`always`}: Yeh block hamesha run hota hai chahe pipeline success ho ya fail ho. Example: "Pipeline execution finished" message jo hamesha print hoga.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{`success`}: Yeh block tab run hota hai jab pipeline successfully complete ho. Example: "Deployment was successful!" message.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{`failure`}: Yeh block tab run hota hai jab pipeline fail hoti hai. Example: "Deployment failed, please check logs!" message.
+\end{itemize}
+
+\newpage
+
+\section*{Running the Pipeline in Jenkins}
+
+\begin{itemize}
+    \item \textbf{Create a New Pipeline Job}: 
+    \begin{itemize}
+        \item Jenkins dashboard me login karen.
+        \item "New Item" pe click karen, phir "Pipeline" select karen aur apne job ka naam dekar "OK" pe click karen.
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Configure Jenkinsfile}: 
+    \begin{itemize}
+        \item Job configure karne ke baad, "Pipeline" section me "Pipeline Script" ko select karen.
+        \item Upar diye gaye Jenkinsfile ko yaha paste karen.
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Run the Job}: 
+    \begin{itemize}
+        \item Job ko run karne ke liye "Build Now" pe click karen.
+        \item Console output dekhne ke liye "Console Output" pe click karen.
+    \end{itemize}
+\end{itemize}
+
+\newpage
+
+\section*{Conclusion}
+
+Yeh tha ek full pipeline deployment process Jenkinsfile ke through. Humne yeh sikha ki kaise code ko clone karein, build karein, tests run karein aur deployment ke baad post-deployment tasks execute karein. Jenkinsfile me stages define karke aap apne complete deployment process ko automate kar sakte hain, jisme har stage apna specific task perform karta hai.
+
+===============================
+\hrule
+
+
+
+% Color Definitions
+\definecolor{blue}{rgb}{0.0, 0.0, 1.0}
+\definecolor{green}{rgb}{0.0, 0.5, 0.0}
+\definecolor{red}{rgb}{1.0, 0.0, 0.0}
+
+% Code Style
+\lstset{
+    backgroundcolor=\color{white},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{black},
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red},
+}
+
+\title{\textbf{Docker Explained in Simple Words (Hinglish)}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{\textcolor{blue}{Docker Explained in Simple Words}}
+Docker ek open-source platform hai jo aapko applications ko containerized environment me run karne ka option deta hai. Containers lightweight hote hain aur aapki application aur dependencies ek saath ek isolated environment me run karte hain. Iska use DevOps me application development, deployment, aur testing ko automate karne ke liye hota hai.
+
+\hrule
+\vspace{10pt}
+
+\section*{\textcolor{blue}{Commonly Used Docker Commands (With Examples)}}
+
+\subsection*{\textcolor{blue}{1. \texttt{docker run}}}
+\textbf{Use}: Ek naya container create aur run karne ke liye. \\
+\textbf{Syntax}: \texttt{docker run <image\_name>} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker run hello-world
+\end{lstlisting}
+\textbf{Output}:
+\begin{lstlisting}
+Hello from Docker! This message shows that your installation appears to be working correctly.
+\end{lstlisting}
+- Yeh command ek "hello-world" image download karega aur ek container me run karega.
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{2. \texttt{docker ps}}}
+\textbf{Use}: Jo containers abhi chal rahe hain unka status dekhne ke liye. \\
+\textbf{Syntax}: \texttt{docker ps} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker ps
+\end{lstlisting}
+\textbf{Output}:
+\begin{lstlisting}
+CONTAINER ID   IMAGE        COMMAND      STATUS         PORTS     NAMES
+123abc456xyz   nginx        "nginx -g…"  Up 10 minutes  80/tcp    dreamy_kapoor
+\end{lstlisting}
+- Yeh command sirf actively running containers ko list karega.
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{3. \texttt{docker ps -a}}}
+\textbf{Use}: Sabhi containers (running + stopped) ka status dekhne ke liye. \\
+\textbf{Syntax}: \texttt{docker ps -a} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker ps -a
+\end{lstlisting}
+\textbf{Output}:
+\begin{lstlisting}
+CONTAINER ID   IMAGE        COMMAND      STATUS                     NAMES
+123abc456xyz   nginx        "nginx -g…"  Up 10 minutes              dreamy_kapoor
+789def123uvw   ubuntu       "bash"       Exited (0) 5 hours ago     brave_singh
+\end{lstlisting}
+- Yeh command stopped aur exited containers ko bhi dikhata hai.
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{4. \texttt{docker stop}}}
+\textbf{Use}: Running container ko stop karne ke liye. \\
+\textbf{Syntax}: \texttt{docker stop <container\_id>} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker stop 123abc456xyz
+\end{lstlisting}
+\textbf{Output}:
+\begin{lstlisting}
+123abc456xyz
+\end{lstlisting}
+- Yeh command specified container ko stop karega.
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{5. \texttt{docker images}}}
+\textbf{Use}: Locally available Docker images ko list karne ke liye. \\
+\textbf{Syntax}: \texttt{docker images} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker images
+\end{lstlisting}
+\textbf{Output}:
+\begin{lstlisting}
+REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+nginx         latest    abc123xyz789   2 days ago     23MB
+ubuntu        20.04     def456uvw123   1 week ago     29MB
+\end{lstlisting}
+- Yeh command aapke system par available sabhi Docker images ko list karega.
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{6. \texttt{docker rmi}}}
+\textbf{Use}: Docker image ko delete karne ke liye. \\
+\textbf{Syntax}: \texttt{docker rmi <image\_id>} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker rmi abc123xyz789
+\end{lstlisting}
+\textbf{Output}:
+\begin{lstlisting}
+Untagged: nginx:latest
+Deleted: sha256:abc123xyz789
+\end{lstlisting}
+- Yeh command "nginx" image ko delete karega.
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{7. \texttt{docker pull}}}
+\textbf{Use}: Docker image ko Docker Hub se download karne ke liye. \\
+\textbf{Syntax}: \texttt{docker pull <image\_name>} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker pull nginx
+\end{lstlisting}
+\textbf{Output}:
+\begin{lstlisting}
+latest: Pulling from library/nginx
+Digest: sha256:abc123xyz789
+Status: Downloaded newer image for nginx:latest
+\end{lstlisting}
+- Yeh command "nginx" image ko pull karega.
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{8. \texttt{docker exec}}}
+\textbf{Use}: Running container ke andar command execute karne ke liye. \\
+\textbf{Syntax}: \texttt{docker exec <container\_id> <command>} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker exec 123abc456xyz ls /
+\end{lstlisting}
+\textbf{Output}:
+\begin{lstlisting}
+bin   boot  dev  etc  home  lib  ...
+\end{lstlisting}
+- Yeh command "ls /" ko running container ke andar execute karega.
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{9. \texttt{docker run -d}}}
+\textbf{Use}: Ek container ko detached mode (background me) run karne ke liye. \\
+\textbf{Syntax}: \texttt{docker run -d <image\_name>} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker run -d nginx
+\end{lstlisting}
+\textbf{Output}:
+\begin{lstlisting}
+123abc456xyz
+\end{lstlisting}
+- Container background me chalega aur terminal free rahega.
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{10. \texttt{docker attach}}}
+\textbf{Use}: Running container ke output ko terminal pe dekhne ke liye. \\
+\textbf{Syntax}: \texttt{docker attach <container\_id>} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker attach 123abc456xyz
+\end{lstlisting}
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{11. \texttt{docker run -it}}}
+\textbf{Use}: Interactive terminal ke saath container run karne ke liye. \\
+\textbf{Syntax}: \texttt{docker run -it <image\_name> /bin/bash} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker run -it ubuntu /bin/bash
+\end{lstlisting}
+\textbf{Output}:
+\begin{lstlisting}
+root@123abc456xyz:/#
+\end{lstlisting}
+- Interactive bash shell me enter karta hai.
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{12. \texttt{docker run -p}}}
+\textbf{Use}: Port mapping ke liye (host aur container ke port map karne ke liye). \\
+\textbf{Syntax}: \texttt{docker run -p <host\_port>:<container\_port> <image\_name>} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker run -p 80:5000 myapp
+\end{lstlisting}
+- Host ke port 80 ko container ke port 5000 se map karega.
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{13. \texttt{docker run -v}}}
+\textbf{Use}: Volume mount karne ke liye (host aur container ke directories ko share karne ke liye). \\
+\textbf{Syntax}: \texttt{docker run -v <host\_dir>:<container\_dir> <image\_name>} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker run -v /opt/datadir:/var/lib/mysql mysql
+\end{lstlisting}
+- Host directory \texttt{/opt/datadir} ko container directory \texttt{/var/lib/mysql} me mount karega.
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{14. \texttt{docker inspect}}}
+\textbf{Use}: Container ya image ke details dekhne ke liye. \\
+\textbf{Syntax}: \texttt{docker inspect <container\_id\_or\_name>} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker inspect nginx
+\end{lstlisting}
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{15. \texttt{docker logs}}}
+\textbf{Use}: Container ke logs dekhne ke liye. \\
+\textbf{Syntax}: \texttt{docker logs <container\_id\_or\_name>} \\
+\textbf{Example}:
+\begin{lstlisting}[language=bash]
+docker logs test
+\end{lstlisting}
+
+\hrule
+\vspace{10pt}
+
+\subsection*{\textcolor{blue}{16. \texttt{docker stop} and \texttt{docker rm}}}
+\textbf{\texttt{docker stop}}: Running container ko stop karne ke liye. \\
+\textbf{\texttt{docker rm}}: Stopped container ko remove karne ke liye.
+
+\hrule
+\vspace{10pt}
+
+\section*{\textcolor{blue}{Common Workflow}}
+
+\begin{enumerate}
+    \item \textbf{Pull Image}:
+    \begin{lstlisting}[language=bash]
+    docker pull nginx
+    \end{lstlisting}
+
+    \item \textbf{Run Container}:
+    \begin{lstlisting}[language=bash]
+    docker run -d -p 80:80 nginx
+    \end{lstlisting}
+
+    \item \textbf{Check Running Containers}:
+    \begin{lstlisting}[language=bash]
+    docker ps
+    \end{lstlisting}
+
+    \item \textbf{Stop Container}:
+    \begin{lstlisting}[language=bash]
+    docker stop <container\_id>
+    \end{lstlisting}
+
+    \item \textbf{Remove Image}:
+    \begin{lstlisting}[language=bash]
+    docker rmi <image\_id>
+    \end{lstlisting}
+\end{enumerate}
+
+\hrule
+\vspace{10pt}
+
+Docker commands ka use karke aap easily apne application ko build, test, aur deploy kar sakte hain. Iska use karne se deployment process bahut efficient ho jata hai. 
+
+\section*{\textcolor{blue}{Summary}}
+\begin{itemize}
+    \item Docker allows running applications in isolated environments called containers.
+    \item Docker commands like \texttt{run}, \texttt{ps}, \texttt{stop}, \texttt{pull}, etc., help in managing containers and images.
+    \item \texttt{docker-compose} can be used for managing multi-container applications.
+    \item Docker ka use DevOps aur automation me hota hai.
+\end{itemize}
+
+
+===============================
+\hrule
+
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\title{Docker Notes}
+\author{User}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{\textcolor{blue}{Docker Images: What Are They?}}
+Docker images ek blueprint hota hai jo ek container ko run karne ke liye zaroori hota hai. Isme application, libraries, aur dependencies ki sari details hoti hai jo container me run hone wali hoti hai. Docker images ko ek baar banane ke baad, aap unhe kahi par bhi deploy kar sakte ho aur containers create kar sakte ho.
+
+\section*{\textcolor{blue}{How to Create Your Own Docker Image:}}
+Docker image create karne ke liye aapko ek \texttt{Dockerfile} likhna padta hai. Yeh file instructions deta hai ki kaunsa base image use karna hai, dependencies install karni hain, aur application ka code kahan se lana hai. Chaliye ek example ke through samajhte hain:
+
+\subsection*{\textcolor{green}{Step-by-Step Dockerfile Explanation:}}
+
+\textbf{\textcolor{blue}{Dockerfile Example:}}
+
+\begin{lstlisting}[language=Docker, backgroundcolor=\color{gray!10}, basicstyle=\ttfamily\small]
+# 1. Base image ko specify karte hain, jisme hum apna application build karenge.
+FROM ubuntu
+
+# 2. Container ke andar python aur flask ko install karte hain
+RUN apt-get update && apt-get install -y python3 python3-pip python3-flask
+
+# 3. Apne local project ko Docker container me copy karte hain
+COPY . /opt/source-code
+
+# 4. Flask application ko run karne ke liye entrypoint set karte hain
+ENTRYPOINT ["python3", "/opt/source-code/app.py"]
+
+# 5. Flask application ko 5000 port pe run karne ke liye
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
+\end{lstlisting}
+
+\subsection*{\textcolor{orange}{Line-by-Line Explanation:}}
+
+\textbf{\textcolor{blue}{1. \texttt{FROM ubuntu}}}
+\begin{itemize}
+    \item \textcolor{blue}{Explanation}: Hum yeh bata rahe hain ki hum apne container ko \texttt{ubuntu} base image se build karenge. Matlab humara container Ubuntu operating system par chalega.
+\end{itemize}
+
+\textbf{\textcolor{blue}{2. \texttt{RUN apt-get update \&\& apt-get install -y python3 python3-pip python3-flask}}}
+\begin{itemize}
+    \item \textcolor{blue}{Explanation}: Hum yeh command use kar rahe hain taaki container ke andar python, pip (Python package manager), aur Flask install ho jayein. \texttt{RUN} command container ke build process me execute hoti hai.
+    \item \textcolor{green}{\texttt{apt-get update}}: Package list ko update karta hai.
+    \item \textcolor{green}{\texttt{apt-get install -y}}: Packages ko install karta hai.
+    \item \textcolor{red}{\texttt{-y}}: Automatically "yes" reply karta hai installation ke prompts ke liye.
+\end{itemize}
+
+\textbf{\textcolor{blue}{3. \texttt{COPY . /opt/source-code}}}
+\begin{itemize}
+    \item \textcolor{blue}{Explanation}: Yeh command apne current directory (jo Dockerfile ke sath hai) ka saara code \texttt{/opt/source-code} directory me Docker container me copy karne ke liye hoti hai.
+\end{itemize}
+
+\textbf{\textcolor{blue}{4. \texttt{ENTRYPOINT ["python3", "/opt/source-code/app.py"]}}}
+\begin{itemize}
+    \item \textcolor{blue}{Explanation}: \texttt{ENTRYPOINT} command specify karti hai ki jab container run ho, tab kis application ko start karna hai. Is case mein Flask application \texttt{/opt/source-code/app.py} file se start hoga.
+    \item \textcolor{red}{Note}: \texttt{ENTRYPOINT} ko hum default command samajh sakte hain.
+\end{itemize}
+
+\textbf{\textcolor{blue}{5. \texttt{CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]}}}
+\begin{itemize}
+    \item \textcolor{blue}{Explanation}: \texttt{CMD} command ko use karke hum Flask application ko 5000 port pe run karte hain. \texttt{--host=0.0.0.0} ka matlab hai ki application container ke bahar se accessible hoga.
+    \item \textcolor{green}{\texttt{CMD}} ko hum executable arguments ke roop me use karte hain.
+\end{itemize}
+
+\section*{\textcolor{blue}{Commands to Build, Push, and Run Docker Image:}}
+
+\subsection*{\textcolor{green}{1. \texttt{docker build -t <image\_name> <path\_to\_dockerfile}}}
+\begin{itemize}
+    \item \textcolor{blue}{Explanation}: Docker image build karte hain using the \texttt{Dockerfile}.
+    \item \textcolor{green}{Command}: 
+    \begin{lstlisting}[language=bash]
+    docker build -t my_flask_app .
+    \end{lstlisting}
+    \item \textcolor{blue}{Explanation}: 
+    \begin{itemize}
+        \item \textcolor{green}{\texttt{-t}}: Image ko ek naam dene ke liye.
+        \item \textcolor{green}{\texttt{.}}: Current directory ko build context dene ke liye (yahan hum Dockerfile rakhenge).
+    \end{itemize}
+\end{itemize}
+
+\textcolor{red}{\textbf{Output}}:
+\begin{lstlisting}[language=bash]
+Step 1/5 : FROM ubuntu
+ ---> abc123xyz456
+Step 2/5 : RUN apt-get update && apt-get install -y python3 python3-pip python3-flask
+ ---> Running in xyz987abc654
+Step 3/5 : COPY . /opt/source-code
+ ---> cdef789xyz123
+Step 4/5 : ENTRYPOINT ["python3", "/opt/source-code/app.py"]
+ ---> Running in def123ghk456
+Step 5/5 : CMD ["flask", "run", "--host=0.0.0.0", "--port=5000"]
+ ---> Running in abc123xyz789
+Successfully built abc123xyz789
+Successfully tagged my_flask_app:latest
+\end{lstlisting}
+
+\subsection*{\textcolor{green}{2. \texttt{docker push <image\_name>}}}
+\begin{itemize}
+    \item \textcolor{blue}{Explanation}: Docker image ko Docker Hub (ya kisi aur registry) pe push karte hain taaki woh publicly available ho.
+    \item \textcolor{green}{Command}:
+    \begin{lstlisting}[language=bash]
+    docker push my_flask_app
+    \end{lstlisting}
+\end{itemize}
+
+\textcolor{red}{\textbf{Output}}:
+\begin{lstlisting}[language=bash]
+The push refers to a repository [docker.io/my_flask_app]
+abc123xyz456: Pushed
+latest: Pushed
+\end{lstlisting}
+
+\section*{\textcolor{blue}{Docker Layer Architecture:}}
+
+Docker images ko layers me break kiya jata hai. Har \texttt{RUN}, \texttt{COPY}, ya \texttt{ADD} command ek new layer create karta hai. Yeh layers cached hoti hain, iska matlab hai agar aapko koi layer rebuild karni ho, toh woh sirf failed step se dobara run hoti hai. Isse build process fast ho jata hai.
+
+\subsection*{\textcolor{green}{Example:}}
+Agar aap Dockerfile me kuch changes karte hain, toh Docker pehle un steps ko run karta hai jo modify nahi hue hain. Agar koi step fail hoti hai, toh woh step se rebuild hoti hai, baki layers cached hoti hain.
+
+\section*{\textcolor{blue}{Can Everything Be Containerized?}}
+
+Haan! Sab kuch containerize kiya ja sakta hai, jaise:
+\begin{itemize}
+    \item \textcolor{blue}{Database}: Aap Docker containers me databases jaise MySQL, PostgreSQL, MongoDB etc. run kar sakte hain.
+    \item \textcolor{blue}{OS}: Operating systems ko container me run karne ke liye aap Docker ka use kar sakte hain.
+    \item \textcolor{blue}{Browsers}: Browsers ko bhi containerize kiya ja sakta hai for testing purposes.
+\end{itemize}
+
+\section*{\textcolor{blue}{How to Make a Database Container?}}
+
+Let's say aapko MySQL ka container banana hai:
+
+\subsection*{\textcolor{green}{1. MySQL Dockerfile Example:}}
+
+\begin{lstlisting}[language=Docker, backgroundcolor=\color{gray!10}, basicstyle=\ttfamily\small]
+FROM mysql:latest
+ENV MYSQL_ROOT_PASSWORD=root_password
+ENV MYSQL_DATABASE=mydb
+ENV MYSQL_USER=user
+ENV MYSQL_PASSWORD=user_password
+EXPOSE 3306
+\end{lstlisting}
+
+\subsection*{\textcolor{blue}{2. Explanation:}}
+\begin{itemize}
+    \item \textcolor{blue}{\texttt{FROM mysql:latest}}: Hum MySQL ka latest image use kar rahe hain.
+    \item \textcolor{blue}{\texttt{ENV MYSQL\_ROOT\_PASSWORD=root\_password}}: Root user ke liye password set karte hain.
+    \item \textcolor{blue}{\texttt{EXPOSE 3306}}: MySQL default port expose karte hain.
+\end{itemize}
+
+\subsection*{\textcolor{green}{3. Build and Run MySQL Container:}}
+
+\begin{lstlisting}[language=bash]
+docker build -t my_mysql .
+docker run -d -p 3306:3306 my_mysql
+\end{lstlisting}
+
+\subsection*{\textcolor{blue}{4. Check Running MySQL Container:}}
+\begin{lstlisting}[language=bash]
+docker ps
+\end{lstlisting}
+
+\subsection*{\textcolor{blue}{5. Connect to MySQL:}}
+\begin{lstlisting}[language=bash]
+docker exec -it <container_id> mysql -u root -p
+\end{lstlisting}
+
+\section*{\textcolor{blue}{Conclusion:}}
+
+Docker ke through aap apne applications, databases, aur operating systems ko easily containerize kar sakte hain. Yeh DevOps ke liye ek powerful tool hai jo continuous integration aur continuous deployment (CI/CD) me help karta hai. Har command ka apna role hota hai aur understanding of Docker commands helps in effective deployment and management.
+
+===============================
+\hrule
+
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+
+\title{\textbf{\Huge Docker Notes}}
+\author{}
+\date{}
+
+\definecolor{blue}{rgb}{0.1, 0.2, 0.5}
+\definecolor{green}{rgb}{0.2, 0.5, 0.2}
+\definecolor{red}{rgb}{0.7, 0, 0}
+\definecolor{lightgray}{rgb}{0.9, 0.9, 0.9}
+
+\lstset{
+  backgroundcolor=\color{lightgray},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=flexible,
+  frame=single,
+  xleftmargin=\parindent,
+  language=Dockerfile,
+}
+
+\begin{document}
+
+\maketitle
+
+\section*{\color{blue}Difference Between \texttt{CMD} and \texttt{ENTRYPOINT} in Docker:}
+
+\noindent
+In Docker, both \texttt{CMD} and \texttt{ENTRYPOINT} are used to specify what command the container should run when it starts, but they behave differently.
+
+\subsection*{\color{blue}1. \texttt{CMD} (Default Command)}
+
+\textbf{Purpose}: \texttt{CMD} specifies the default command that will run when the container starts, but it can be overridden by providing a different command at the time of running the container.
+
+\noindent
+\textbf{Example:}
+
+\begin{lstlisting}[language=Dockerfile]
+FROM ubuntu
+CMD ["echo", "Hello World"]
+\end{lstlisting}
+
+\noindent
+\textbf{Explanation}: Jab aap container run karenge, toh by default \texttt{"Hello World"} print hoga. Agar aap container run karte waqt koi alag command dete hain, toh woh \texttt{CMD} command ko override kar dega.
+
+\textbf{Example:}
+\begin{lstlisting}[language=sh]
+docker run my_image "Goodbye World"
+\end{lstlisting}
+\textbf{Output}: \texttt{Goodbye World} (instead of \texttt{Hello World}).
+
+\subsection*{\color{blue}2. \texttt{ENTRYPOINT} (Always Runs)}
+
+\textbf{Purpose}: \texttt{ENTRYPOINT} is the command that will always run when the container starts. You cannot override it with a different command at runtime unless you use the \texttt{--entrypoint} flag with \texttt{docker run}.
+
+\noindent
+\textbf{Example:}
+
+\begin{lstlisting}[language=Dockerfile]
+FROM ubuntu
+ENTRYPOINT ["echo", "Hello World"]
+\end{lstlisting}
+
+\noindent
+\textbf{Explanation}: Jab aap container run karenge, \texttt{"Hello World"} hamesha print hoga. Aap jo command bhi pass karenge, woh \texttt{ENTRYPOINT} ke command ke arguments ke roop me pass ho jayega.
+
+\textbf{Example:}
+\begin{lstlisting}[language=sh]
+docker run my_image "Goodbye World"
+\end{lstlisting}
+\textbf{Output}: \texttt{Hello World Goodbye World}.
+
+\subsection*{\color{blue}3. Combination of \texttt{CMD} and \texttt{ENTRYPOINT}:}
+Aap dono ko combine bhi kar sakte hain, jaise:
+
+\begin{lstlisting}[language=Dockerfile]
+FROM ubuntu
+ENTRYPOINT ["echo"]
+CMD ["Hello World"]
+\end{lstlisting}
+
+\noindent
+\textbf{Explanation}: Yahan \texttt{ENTRYPOINT} ko command set kiya gaya hai (\texttt{echo}), aur \texttt{CMD} ke through default argument (\texttt{"Hello World"}) diya gaya hai.
+
+\noindent
+Agar aap \texttt{docker run my\_image} run karenge, toh output hoga: \texttt{Hello World}. Agar aap \texttt{docker run my\_image Goodbye} run karenge, toh output hoga: \texttt{Goodbye}.
+
+\section*{\color{blue}Environment Variables in Docker:}
+
+\noindent
+\textbf{Environment variables} ek key-value pair hoti hain jo container ke andar configuration information ko store karne ke liye use hoti hain. Yeh variables aapke application ko runtime par configure karne mein madad karte hain, jaise database connection string, port number, etc.
+
+\subsection*{\color{blue}Why Do We Need to Set Environment Variables?}
+
+\begin{itemize}
+    \item \textcolor{blue}{\textbf{Configuration Management}}: Aap Docker containers ko different environments (development, production, etc.) mein run karte hain, aur environment variables ke through aap un environments ke liye different configurations set kar sakte hain.
+    \item \textcolor{blue}{\textbf{Avoid Hardcoding}}: Code me sensitive information ko hardcode karna insecure ho sakta hai. Environment variables se aap configuration ko secure aur dynamic bana sakte hain.
+    \item \textcolor{blue}{\textbf{Portability}}: Agar aap same application ko alag environments me run karte hain, toh environment variables help karte hain har environment ke liye specific configurations set karne mein.
+\end{itemize}
+
+\subsection*{\color{blue}Example of Setting Environment Variable in Dockerfile:}
+
+\begin{lstlisting}[language=Dockerfile]
+FROM ubuntu
+ENV MY_ENV_VAR="This is my environment variable"
+CMD echo $MY_ENV_VAR
+\end{lstlisting}
+
+\noindent
+\textbf{Explanation}:
+\begin{itemize}
+    \item \textcolor{blue}{\textbf{ENV MY\_ENV\_VAR="This is my environment variable"}}: Is line se humne ek environment variable \texttt{MY\_ENV\_VAR} set kiya hai jiska value \texttt{"This is my environment variable"} hai.
+    \item \textcolor{blue}{\textbf{CMD echo \$MY\_ENV\_VAR}}: Jab container start hoga, yeh command environment variable ko print karega.
+\end{itemize}
+
+\subsection*{\color{blue}How to Build and Run:}
+
+\begin{itemize}
+    \item \textcolor{blue}{\textbf{Build the Image:}} \begin{lstlisting}[language=sh]docker build -t my_env_image .\end{lstlisting}
+    \item \textcolor{blue}{\textbf{Run the Container:}} \begin{lstlisting}[language=sh]docker run my_env_image\end{lstlisting}
+    \item \textcolor{red}{\textbf{Output}}: \texttt{This is my environment variable}.
+\end{itemize}
+
+\subsection*{\color{blue}How to Inspect the Environment Variables of a Running Container:}
+
+Agar aapko running container ke environment variables dekhne hain, toh aap \texttt{docker inspect} command ka use kar sakte hain:
+
+\begin{lstlisting}[language=sh]
+docker inspect <container_name_or_id>
+\end{lstlisting}
+
+\noindent
+\textbf{Example:}
+
+\begin{lstlisting}[language=sh]
+docker inspect my_env_container
+\end{lstlisting}
+
+\textbf{Output Example}:
+
+\begin{lstlisting}[language=json]
+[
+  {
+    "Id": "abc123xyz456",
+    "Config": {
+      "Env": [
+        "MY_ENV_VAR=This is my environment variable",
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      ]
+    }
+  }
+]
+\end{lstlisting}
+
+\noindent
+\textbf{Explanation}: Output me \texttt{Env} key ke andar environment variables ki list milegi. Yahan \texttt{MY\_ENV\_VAR} ko \texttt{"This is my environment variable"} set kiya gaya hai.
+
+\subsection*{\color{blue}Setting Environment Variables at Runtime Using \texttt{docker run}:}
+
+Aap environment variables ko runtime pe bhi set kar sakte hain jab aap container ko run karte hain.
+
+\begin{lstlisting}[language=sh]
+docker run -e MY_ENV_VAR="Dynamic value" my_image
+\end{lstlisting}
+
+\noindent
+\textbf{Explanation}:
+\begin{itemize}
+    \item \textcolor{blue}{\textbf{-e MY\_ENV\_VAR="Dynamic value"}}: Is command se \texttt{MY\_ENV\_VAR} ko runtime par \texttt{"Dynamic value"} set kiya gaya hai.
+    \item Agar container me \texttt{CMD} ya \texttt{ENTRYPOINT} ke through environment variable ko print kiya gaya ho, toh output hoga:
+\end{itemize}
+
+\textcolor{red}{\textbf{Output}}:
+\begin{lstlisting}[language=sh]
+Dynamic value
+\end{lstlisting}
+
+\section*{\color{blue}Summary:}
+
+\begin{itemize}
+    \item \textcolor{green}{\textbf{CMD}}: Default command jo container start hone par run hota hai, lekin yeh runtime pe override kiya ja sakta hai.
+    \item \textcolor{green}{\textbf{ENTRYPOINT}}: Command jo hamesha container ke start hone par run hoti hai.
+    \item \textcolor{green}{\textbf{Environment Variables}}: Configuration ko store karne ke liye use hoti hain, jise aap runtime pe modify bhi kar sakte hain.
+    \item \textcolor{green}{\textbf{Docker Inspect}}: Running container ke environment variables ko dekhne ke liye \texttt{docker inspect} ka use karte hain.
+\end{itemize}
+
+
+
+===============================
+\hrule
+
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define Colors
+\definecolor{blue}{rgb}{0.2, 0.2, 1}
+\definecolor{green}{rgb}{0.2, 0.8, 0.2}
+\definecolor{red}{rgb}{1, 0, 0}
+\definecolor{orange}{rgb}{1, 0.6, 0}
+\definecolor{purple}{rgb}{0.5, 0, 0.5}
+
+\lstset{
+  backgroundcolor=\color{lightgray},
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  commentstyle=\color{green},
+  keywordstyle=\color{blue},
+  stringstyle=\color{purple},
+}
+
+\begin{document}
+
+\title{\textbf{Docker Engine, Storage, and Networking Explained in Simple Hinglish}}
+\author{}
+\date{}
+\maketitle
+
+\section*{\textbf{Docker Engine, Storage, and Networking Explained in Simple Hinglish}}
+
+Docker Engine, Docker Storage, aur Docker Networking ke concepts ko samajhna bohot zaroori hai, especially jab aap production-level applications ko containerize karte hain. Aaj hum in sab ko simple examples ke saath samjhenge.
+
+\hrule
+\vspace{0.4cm}
+
+\section*{\textbf{1. Docker Engine:}}
+\textbf{Docker Engine} Docker ka core component hai jo containers ko run karta hai. Yeh ek client-server architecture pe based hota hai:
+
+\begin{itemize}
+    \item \textbf{Docker Daemon:} Docker Engine ka core hota hai, jo containers ko create, run, aur manage karta hai. Yeh system-level process hota hai.
+    \item \textbf{Docker Client:} Yeh user ke interface se interact karta hai. Aap jab bhi Docker command run karte hain, woh client se daemon ko request bhejta hai.
+    \item \textbf{Docker API:} Docker Engine ko manage karne ke liye API interface bhi available hai.
+\end{itemize}
+
+\textbf{Example:} Jab aap command run karte hain:
+
+\begin{lstlisting}[language=bash]
+docker run hello-world
+\end{lstlisting}
+
+Toh Docker Client daemon ko command send karta hai aur Docker Engine container run karta hai.
+
+\hrule
+\vspace{0.4cm}
+
+\section*{\textbf{2. Docker Storage:}}
+
+Docker me storage ko handle karne ke liye kuch specific directories aur volumes hote hain. Docker container ke liye jo bhi storage hota hai, uska path \texttt{/var/lib/docker/} me hota hai.
+
+\textbf{Docker Storage Folders:}
+
+\begin{itemize}
+    \item \textbf{\texttt{/var/lib/docker/aufs/}}: Yeh folder Docker ke file system ka part hai jahan images aur layers store hoti hain. \texttt{aufs} ek file system hai jo Docker ke liye use hota hai.
+    \item \textbf{\texttt{/var/lib/docker/containers/}}: Is directory me container-specific data hota hai jaise logs aur container configuration.
+    \item \textbf{\texttt{/var/lib/docker/images/}}: Docker images ko store karne ka location hota hai. Jaise agar aap koi image pull karte hain, toh woh yahan store hoti hai.
+    \item \textbf{\texttt{/var/lib/docker/volumes/}}: Docker volumes ko store karta hai. Volumes ko persistent storage ke liye use kiya jata hai, jisse container ke lifecycle ke baad bhi data safe rahe.
+\end{itemize}
+
+\textbf{Mounting Docker Volumes:}
+
+Jab aap container ko run karte hain, toh aap container ke andar external data ko mount kar sakte hain.
+
+\textbf{Example:}
+
+\begin{lstlisting}[language=bash]
+docker run --mount type=bind,source=/host/path,target=/container/path my_image
+\end{lstlisting}
+
+\textbf{Explanation:} Is command me aap apne system ke kisi bhi folder ko container ke andar mount kar sakte hain, jisse container ke andar jo bhi changes honge, woh aapke host system me reflect honge.
+
+\hrule
+\vspace{0.4cm}
+
+\section*{\textbf{3. Docker Networking:}}
+
+Docker me networking ka use containers ke beech communication ko manage karne ke liye hota hai. Docker container ka apna network hota hai aur containers ek doosre se communicate kar sakte hain.
+
+\textbf{Types of Docker Networks:}
+
+\begin{itemize}
+    \item \textbf{Bridge Network:} Yeh default network hota hai jab aap container run karte hain bina kisi custom network ke. Yeh container ko ek isolated network me rakhta hai.
+    \item \textbf{Host Network:} Yeh container ko host machine ke network stack ko use karne deta hai.
+    \item \textbf{None Network:} Yeh container ko kisi bhi network se connect nahi karta hai, yeh isolated hota hai.
+\end{itemize}
+
+\textbf{Inspecting Docker Container Networks:}
+
+Agar aapko apne container ka IP address ya MAC address dekhna hai, toh aap \texttt{docker inspect} command ka use karte hain.
+
+\textbf{Example:}
+
+\begin{lstlisting}[language=bash]
+docker inspect my_container
+\end{lstlisting}
+
+\textbf{Output Example:}
+
+\begin{lstlisting}[language=json]
+[
+  {
+    "Id": "abcd1234xyz",
+    "NetworkSettings": {
+      "Networks": {
+        "bridge": {
+          "IPAddress": "172.17.0.2",
+          "MacAddress": "02:42:ac:11:00:02"
+        }
+      }
+    }
+  }
+]
+\end{lstlisting}
+
+\textbf{Explanation:} Is output me aapko \texttt{IPAddress} (container ka IP address) aur \texttt{MacAddress} (container ka MAC address) milega. Agar aapko container ke network details dekhni ho, toh yeh helpful hota hai.
+
+\textbf{Running Docker Containers with Specific Network:}
+
+Agar aapko container ko specific network pe run karna hai, toh aap \texttt{--network} flag ka use karte hain.
+
+\textbf{Example:}
+
+\begin{lstlisting}[language=bash]
+docker run --network my_custom_network my_image
+\end{lstlisting}
+
+\textbf{Explanation:} Yeh command \texttt{my_custom_network} network pe container ko run karega.
+
+\hrule
+\vspace{0.4cm}
+
+\section*{\textbf{Additional Docker Commands and Their Usage:}}
+
+\textbf{Inspecting Container Details:}
+
+\begin{lstlisting}[language=bash]
+docker inspect container_name_or_id
+\end{lstlisting}
+
+\textbf{Explanation:} Is command se aap container ka detailed information jaise network settings, volumes, aur environment variables dekh sakte hain.
+
+\textbf{Viewing Docker Logs:}
+
+\begin{lstlisting}[language=bash]
+docker logs container_name_or_id
+\end{lstlisting}
+
+\textbf{Explanation:} Yeh command container ke logs ko show karta hai. Agar aapko container ke behavior ko samajhna ho, toh logs kaafi useful hote hain.
+
+\hrule
+\vspace{0.4cm}
+
+\section*{\textbf{Summary:}}
+
+\begin{itemize}
+    \item \textbf{Docker Engine:} Docker ka core component hai jo containers ko run karta hai. Client-server architecture pe based hota hai.
+    \item \textbf{Docker Storage:}
+    \begin{itemize}
+        \item \texttt{/var/lib/docker/aufs/} -- File system aur image layers.
+        \item \texttt{/var/lib/docker/containers/} -- Container-specific data.
+        \item \texttt{/var/lib/docker/images/} -- Images ko store karta hai.
+        \item \texttt{/var/lib/docker/volumes/} -- Persistent data ko store karta hai.
+    \end{itemize}
+    \item \textbf{Networking:} Docker me containers apne isolated networks me run karte hain. Agar containers ko communicate karna hai, toh networking ka use kiya jata hai.
+    \item \textbf{Mounting Volumes:} Data ko persistent rakhne ke liye volumes ka use hota hai.
+\end{itemize}
+
+Is tarah se aap Docker ko samajh ke uske networking aur storage ko effectively manage kar sakte hain.
+
+===============================
+\hrule
+
+
+\title{\textbf{\huge Kubernetes, Docker, aur Containers ke baare mein Hinglish mein samjhate hain}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{\textbf{\huge 1. Kubernetes kya hai?}}
+\textcolor{blue}{\textbf{Kubernetes}} ek open-source platform hai jo containerized applications ko deploy, scale, aur manage karne mein madad karta hai. Yeh aapko multiple containers ko manage karne ki suvidha deta hai, unko easily orchestrate (manage) karne ke liye. Kubernetes ko Google ne develop kiya tha aur ab yeh Cloud Native Computing Foundation (CNCF) ke under maintain hota hai.
+
+\textcolor{red}{\textbf{Kubernetes ka main kaam:}}
+\begin{itemize}
+    \item \textcolor{green}{Container orchestration}: Containers ko automate tareeke se manage karta hai.
+    \item \textcolor{green}{Scaling}: Agar aapke application ka load badhta hai, toh Kubernetes apne aap containers ki quantity ko badha sakta hai.
+    \item \textcolor{green}{Self-healing}: Agar koi container fail hota hai, toh Kubernetes usko replace karne ka kaam karta hai.
+    \item \textcolor{green}{Load balancing}: Agar multiple instances run ho rahe hain, toh Kubernetes traffic ko evenly distribute karne ka kaam karta hai.
+\end{itemize}
+
+\textbf{Example:} Agar aapke paas 10 containers hain, aur unmein se koi container crash ho jata hai, toh Kubernetes automatically usko restart kar dega aur traffic ko properly distribute karega.
+
+\section*{\textbf{\huge 2. Docker aur Kubernetes ka difference:}}
+
+\textbf{Docker aur Kubernetes ka use containerization ke liye hota hai, lekin dono ka role thoda alag hota hai:}
+
+\subsection*{\textbf{Docker:}}
+\begin{itemize}
+    \item \textcolor{blue}{Containerization platform} hai.
+    \item Docker ka kaam ek single container ko run karna hota hai.
+    \item Docker ke through aap apne applications ko containerize kar sakte ho aur ek isolated environment me run kar sakte ho.
+\end{itemize}
+
+\textbf{Example:} Agar aap apne app ko Docker container me run karna chahte hain, toh aap ek Docker image banate hain aur \texttt{docker run} command se usse run karte hain.
+
+\textcolor{orange}{\textbf{Command Example:}}
+\begin{lstlisting}[language=bash]
+docker run -d -p 8080:80 my_image
+\end{lstlisting}
+
+\begin{itemize}
+    \item \texttt{-d} means detached mode.
+    \item \texttt{8080:80} port mapping ka matlab hai ki aapke host machine ka port 8080 container ke port 80 se map ho jayega.
+\end{itemize}
+
+\subsection*{\textbf{Kubernetes:}}
+\begin{itemize}
+    \item \textcolor{blue}{Orchestration platform} hai.
+    \item Kubernetes ka kaam multiple containers ko manage karna hota hai.
+    \item Agar aapke paas bohot saare containers hain (kuch thousand containers), toh Kubernetes un containers ko manage, scale, aur deploy karne mein madad karta hai.
+\end{itemize}
+
+\textbf{Example:} Agar aapko apne app ko 100 containers mein run karna hai, toh aap Kubernetes ko use karke un 100 containers ko manage kar sakte hain.
+
+\section*{\textbf{\huge 3. Containers kya hote hain?}}
+
+\textcolor{blue}{\textbf{Containers}} ek lightweight, portable, aur isolated environment hote hain jo application ko chalane ke liye sab required dependencies ke saath ek package me bundle karte hain. Docker iske liye sabse popular containerization tool hai.
+
+\textbf{Containers ka fayda:}
+\begin{itemize}
+    \item \textcolor{green}{Isolation}: Ek container ka apna environment hota hai, jo doosre containers se alag hota hai.
+    \item \textcolor{green}{Portability}: Agar aap container banate ho, toh aap usko kisi bhi machine pe run kar sakte ho, chahe wo Windows ho ya Linux.
+\end{itemize}
+
+\textbf{Example:} Aap ek Flask app bana rahe ho. Agar aap is app ko containerize karte ho, toh is container mein Flask aur uske sare dependencies included honge. Aap is container ko koi bhi machine pe deploy kar sakte ho bina kisi configuration problem ke.
+
+\section*{\textbf{\huge 4. Kubernetes aur Docker ka Fark:}}
+
+\begin{tabular}{| p{4cm} | p{4cm} | p{4cm} |}
+\hline
+\textbf{Feature} & \textbf{Docker} & \textbf{Kubernetes} \\
+\hline
+\textbf{Role} & Containerization tool & Orchestration tool \\
+\hline
+\textbf{Scope} & Ek single container ko run karne ka kaam karta hai & Multiple containers ko manage karne ka kaam karta hai \\
+\hline
+\textbf{Focus} & App ko ek isolated environment mein run karna & Multiple containers ko manage, scale, aur heal karna \\
+\hline
+\textbf{Use Case} & Development aur testing environments & Production environments jahan scaling aur management bohot important hote hain \\
+\hline
+\end{tabular}
+
+
+
+
+\textbf{Example:} Agar aap apne app ko containerize karte hain using Docker, aur jab aapko us app ko ek large scale pe run karna hota hai (hundreds ya thousands of containers), tab aap Kubernetes ka use karte hain.
+
+\section*{\textbf{\huge 5. Kubernetes ke Fayde:}}
+
+\subsection*{\textbf{a) Auto-Scaling:}}
+Agar aapke app par load badhta hai, toh Kubernetes automatically containers ko scale kar sakta hai, matlab aur containers create kar sakta hai jisse app ka load balance ho sake.
+
+\textbf{Example:} Agar aapke paas 5 containers hain aur suddenly app pe heavy traffic aa jata hai, toh Kubernetes automatically aur 5 containers create kar dega.
+
+\subsection*{\textbf{b) Self-healing:}}
+Agar koi container fail ho jata hai, toh Kubernetes us container ko restart kar deta hai ya replace kar deta hai.
+
+\textbf{Example:} Agar ek container crash ho jata hai, Kubernetes automatically us container ko dubara start kar dega.
+
+\subsection*{\textbf{c) Load Balancing:}}
+Jab aapke paas multiple containers hote hain, Kubernetes automatically incoming traffic ko un containers ke beech distribute kar deta hai.
+
+\textbf{Example:} Agar 3 containers run kar rahe hain, aur 2nd container pe load zyada aa raha hai, toh Kubernetes traffic ko automatically 1st aur 3rd containers ki taraf redirect kar dega.
+
+\subsection*{\textbf{d) Declarative Configuration:}}
+Kubernetes me aap apne desired state ko define karte ho, aur Kubernetes us state ko maintain karta hai.
+
+\textbf{Example:} Agar aap chahte ho ki 3 replicas of a container run karein, toh aap YAML file me likhte ho aur Kubernetes automatically 3 containers ko deploy karega.
+
+\section*{\textbf{\huge Summary:}}
+
+\begin{itemize}
+    \item \textcolor{red}{\textbf{Docker}} ek containerization platform hai jo aapko single container ko run karne ki suvidha deta hai.
+    \item \textcolor{red}{\textbf{Kubernetes}} ek orchestration platform hai jo multiple containers ko manage, scale, aur automate karta hai.
+    \item \textcolor{red}{\textbf{Containers}} ek lightweight aur portable environment hote hain jo applications ko isolate karke run karte hain.
+    \item \textcolor{green}{\textbf{Kubernetes ke fayde}}: Auto-scaling, Self-healing, Load balancing, aur declarative configuration.
+\end{itemize}
+
+Is tarah se aap Docker aur Kubernetes ko samajh sakte ho aur jab aapko large-scale applications ko manage karna ho toh Kubernetes ka use kar sakte ho.
+
+
+===============================
+\hrule
+
+\end{document}
+
+
+
+
+
+
+
+
+

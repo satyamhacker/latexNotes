@@ -1,0 +1,4667 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry} % Standard A4 margins
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{hyperref}
+
+% Custom colors
+\definecolor{headingcolor}{RGB}{0, 0, 255} % Blue color for headings
+\definecolor{examplecolor}{RGB}{0, 128, 0} % Green color for examples
+\definecolor{warningcolor}{RGB}{255, 0, 0} % Red color for warnings
+\definecolor{boxbackground}{RGB}{245, 245, 245} % Light gray for code boxes
+\definecolor{framecolor}{RGB}{200, 200, 200} % Light gray for box border
+
+% Code box styling
+\lstset{
+    backgroundcolor=\color{boxbackground},   % Background color of code
+    basicstyle=\ttfamily\small,              % Code font
+    frame=single,                            % Frame around code
+    rulecolor=\color{framecolor},            % Frame color
+    breaklines=true,                         % Auto line breaking
+    columns=flexible,                        % Flexible column alignment
+    xleftmargin=\parindent,                  % Left margin
+    xrightmargin=\parindent,                 % Right margin
+    upquote=true                             % Proper quote formatting
+}
+
+% Heading styles
+\titleformat{\section}{\color{headingcolor}\Large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\color{headingcolor}\large\bfseries}{}{0em}{}
+\titleformat{\subsubsection}{\color{headingcolor}\normalsize\bfseries}{}{0em}{}
+\titlespacing*{\section}{0pt}{1.5ex}{1ex}
+\titlespacing*{\subsection}{0pt}{1.2ex}{0.8ex}
+\titlespacing*{\subsubsection}{0pt}{1ex}{0.5ex}
+
+% Horizontal line
+\newcommand{\sectiondivider}{\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}}
+
+\begin{document}
+
+% Main Heading
+\section*{\textbf{\LARGE \textcolor{violet}{Django: Most Important Points to Note and Remember...}}}
+
+\vspace{\baselineskip}
+
+\sectiondivider
+
+\section*{\textbf{How to Print the Request Object in Django}}
+
+\subsection*{\textbf{Understanding \texttt{dir()} Function}}
+\texttt{dir()} ek built-in Python function hai jo kisi bhi object ke sare attributes (methods, properties, etc.) list kar deta hai.\newline
+\textbf{Django me kyu use karte hain?} Jab request object ke andar kya-kya data hai yeh pata nahi hota, tab \texttt{dir(request)} use karke available attributes dekh sakte hain.
+
+% Example of dir(request)
+\textcolor{examplecolor}{\textbf{Example Usage:}}
+\begin{lstlisting}
+attributes = dir(request)
+print("Request Attributes:", attributes)
+\end{lstlisting}
+
+\subsection*{\textbf{Practical Example: Exploring Request Attributes}}
+Agar aap \texttt{dir(request)} run karenge, to yeh output milega:
+\begin{lstlisting}
+['COOKIES', 'FILES', 'GET', 'POST', 'META', 'body', 'headers', 'method', 'path', ...]
+\end{lstlisting}
+\textbf{Explanation:}
+\begin{itemize}
+    \item \texttt{GET} - Query parameters ko store karta hai (e.g., \texttt{?search=django}).
+    \item \texttt{POST} - User ke form data ko store karta hai.
+    \item \texttt{headers} - HTTP headers jaise authorization token ko contain karta hai.
+    \item \texttt{body} - Raw request body hota hai (JSON data APIs ke liye useful hota hai).
+\end{itemize}
+
+\subsection*{\textbf{Using Middleware to Print Request Attributes}}
+\textcolor{examplecolor}{\textbf{Code:}}
+\begin{lstlisting}
+class DebugMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        print("Request Attributes:", dir(request))  # Debugging request attributes
+        return self.get_response(request)
+\end{lstlisting}
+
+\vspace{1ex}
+\textcolor{warningcolor}{\textbf{Warning:}}
+Sensitive information jaise passwords ya authentication tokens ko production logs me print mat karein.
+
+\subsection*{\textbf{Extracting Specific Request Data}}
+Aap request object se specific data aise extract kar sakte hain:
+\textcolor{examplecolor}{\textbf{Code:}}
+\begin{lstlisting}
+# Query parameters ko extract karna (e.g., ?search=django)
+print("Query Params:", request.GET)
+
+# Form data (POST requests ke liye)
+print("Form Data:", request.POST)
+
+# Headers extract karna (e.g., Authorization header)
+print("Headers:", request.headers)
+
+# Raw request body extract karna (JSON data ke liye)
+print("Body:", request.body.decode('utf-8'))
+\end{lstlisting}
+
+\subsection*{\textbf{Expected Output}}
+Agar request ke headers aur body print karenge, to kuch aisa output milega:
+\begin{lstlisting}
+Query Params: {'search': 'django'}
+Form Data: {'username': 'admin', 'password': '1234'}
+Headers: {'Authorization': 'Bearer abc123'}
+Body: '{"task": "Learn Django"}'
+\end{lstlisting}
+
+\subsection*{\textbf{Summary}}
+\begin{itemize}
+    \item \texttt{dir(request)} Django ke request object ke attributes explore karne ke liye use hota hai.
+    \item Debugging aur request ka data samajhne ke liye useful hai.
+    \item Sensitive data ko production me log mat karein.
+    \item Common attributes: \texttt{GET}, \texttt{POST}, \texttt{headers}, \texttt{body}, etc.
+\end{itemize}
+
+\sectiondivider
+
+===============================
+===============================
+\hrule
+
+% Custom colors
+\definecolor{headingcolor}{RGB}{0, 0, 255} % Blue for headings
+\definecolor{examplecolor}{RGB}{0, 128, 0} % Green for examples
+\definecolor{importantcolor}{RGB}{255, 69, 0} % Orange-Red for important points
+\definecolor{boxbackground}{RGB}{245, 245, 245} % Light gray for code boxes
+\definecolor{framecolor}{RGB}{200, 200, 200} % Light gray for box borders
+
+% Code box styling
+\lstset{
+    backgroundcolor=\color{boxbackground},
+    basicstyle=\ttfamily\small,
+    frame=single,
+    rulecolor=\color{framecolor},
+    breaklines=true,
+    columns=flexible,
+    upquote=true
+}
+
+% Heading styles
+\titleformat{\section}{\color{headingcolor}\Large\bfseries}{}{0em}{}
+\titleformat{\subsection}{\color{headingcolor}\large\bfseries}{}{0em}{}
+\titleformat{\subsubsection}{\color{headingcolor}\normalsize\bfseries}{}{0em}{}
+
+\begin{document}
+
+% Main Heading
+\section*{\textbf{Raw Strings in Python URLs}}
+Raw strings in Python URLs (like \texttt{r'string'}) are used to handle special characters (such as backslashes \texttt{\\}) properly. Let's understand this in Hinglish with a small example:
+
+\section*{\textbf{Raw String \texttt{r} ka use kya hai?}}
+Python me jab hum kisi string ke aage \texttt{r} lagate hain, usse wo \textcolor{importantcolor}{\textbf{raw string}} ban jati hai. Raw string ka matlab hota hai ki Python us string me \textbf{escape sequences (\texttt{\textbackslash{}n}, \texttt{\textbackslash{}t}, etc.) ko special meaning nahi dega.}
+
+\vspace{1ex}
+\textcolor{examplecolor}{\textbf{Example:}} Agar hum kisi URL me backslash (\texttt{\\}) use karte hain, toh Python escape sequences ko misinterpret kar sakta hai. Raw string se yeh problem solve ho jati hai.
+
+\section*{\textbf{URL.py example with raw string (\texttt{r})}}
+\begin{lstlisting}[language=Python]
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path(r'home\details', views.home_details, name='home_details'),
+]
+\end{lstlisting}
+
+\subsection*{\textbf{Explanation:}}
+- \texttt{\textbf{r'home\\details'}}: \textcolor{importantcolor}{Yaha \texttt{r} ensure karta hai ki \texttt{\\d} ko Python as-is treat kare.} Without \texttt{r}, Python \texttt{\\d} ko \textbf{escape sequence (digit regex)} samajh sakta hai.
+- Agar \texttt{r} nahi diya, toh:
+\begin{lstlisting}[language=Python]
+path('home\details', views.home_details, name='home_details')
+\end{lstlisting}
+  - Yaha \texttt{\\d} ko Python regex samajh lega, jo URL ko break karega ya galat behavior karega.
+  - Aapko \texttt{"SyntaxError"} ya \texttt{"URL not found"} ka error mil sakta hai.
+
+\section*{\textbf{Without raw string example:}}
+\begin{lstlisting}[language=Python]
+path('home\details', views.home_details, name='home_details')
+\end{lstlisting}
+- Yaha \texttt{\\d} Python ke liye \textbf{escape sequence} ban gaya (jo regex match karega numbers ke liye), toh URL ka \textbf{actual path galat ho jayega.}
+
+\section*{\textbf{Output difference:}}
+1. \textbf{With \texttt{r} (Correct behavior):}  
+   URL correctly match karega \texttt{/home/details}.
+
+2. \textbf{Without \texttt{r} (Incorrect behavior):}  
+   Python \texttt{\\d} ko misinterpret karega as regex for digits, and URL break ho sakta hai.
+
+\section*{\textbf{Summary in Hinglish:}}
+\begin{itemize}
+    \item \textcolor{importantcolor}{Raw string (\texttt{r'string'}) ka use special characters ko avoid karne ke liye hota hai, jaise backslash (\texttt{\\}).}
+    \item Agar \texttt{r} nahi diya URL me, toh escape sequences galat behavior karenge, jaise regex misinterpretation.
+    \item Yeh practice \textbf{URLs, file paths, ya regex me backslash handle karne ke liye mandatory hai.}
+\end{itemize}
+
+===============================
+===============================
+\hrule
+
+% Custom colors
+\definecolor{headingcolor}{RGB}{255, 0, 0} % Red color for headings
+\definecolor{boxbackground}{RGB}{245, 245, 245} % Very light gray for code boxes
+\definecolor{framecolor}{RGB}{200, 200, 200} % Light gray for box border
+
+% Box styling for code
+\lstset{
+    backgroundcolor=\color{boxbackground},   % background color of code
+    basicstyle=\ttfamily\small,               % code font
+    frame=single,                             % frame around the code block
+    rulecolor=\color{framecolor},             % color of the frame
+    breaklines=true,                          % auto line breaking
+    columns=flexible,                         % makes code more readable
+    xleftmargin=\parindent,                   % left margin for code block
+    xrightmargin=\parindent,                  % right margin for code block
+    upquote=true,                             % allows single quotes
+}
+
+% Heading style
+\titleformat{\section}{\color{headingcolor}\Large\bfseries}{}{0em}{}
+\titlespacing*{\section}{0pt}{1ex}{1ex}
+
+\begin{document}
+
+\section*{How to Import Function or Class}
+
+\subsection*{\textbf{Understanding the Import Syntax:}}
+Python me jab aap \texttt{from .models import DeveloperTask} dekhte hain, to iska matlab hota hai ki aap ek \textbf{relative import} kar rahe hain. Chaliye ise break down karte hain:
+
+\begin{lstlisting}
+from .models import DeveloperTask
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textbf{\texttt{from .models}}: 
+    \begin{itemize}
+        \item Yaha \texttt{.} (dot) ka matlab hai \textbf{current directory}, matlab jo file chal rahi hai uske folder me hi \texttt{models} module ko dhundo.
+        \item Ye \textbf{relative import} hai jo ek package ke andar modules ko import karne ke liye use hota hai.
+    \end{itemize}
+    \vspace{\baselineskip}
+    \item \textbf{\texttt{import DeveloperTask}}:
+    \begin{itemize}
+        \item Yeh \texttt{models.py} file ke andar se \texttt{DeveloperTask} class ko import karega.
+    \end{itemize}
+\end{itemize}
+
+\subsection*{\textbf{Example Folder Structure (Relative Import)}}
+Maan lijiye aapke paas yeh folder structure hai:
+
+\begin{lstlisting}
+my_project/
+│
+├── app/
+│   ├── __init__.py
+│   ├── models.py
+│   ├── views.py
+│   └── tasks.py
+└── manage.py
+\end{lstlisting}
+
+Agar aap \texttt{views.py} ke andar ho aur \texttt{models.py} se \texttt{DeveloperTask} import karna chahte ho, toh aap likhoge:
+
+\begin{lstlisting}
+# In views.py
+from .models import DeveloperTask  # From models.py (same folder as views.py)
+\end{lstlisting}
+
+\subsection*{\textbf{How to Import From a Different Folder}}
+Agar \texttt{models.py} kisi aur folder me ho, toh usko import karne ke liye do tareeke hain: \textbf{relative imports} aur \textbf{absolute imports}.
+
+\subsubsection*{1. Relative Imports (For Same Package Structure)}
+Agar structure kuch aisa hai:
+
+\begin{lstlisting}
+my_project/
+│
+├── app/
+│   ├── __init__.py
+│   ├── models/
+│   │   └── models.py
+│   ├── views.py
+│   └── tasks.py
+└── manage.py
+\end{lstlisting}
+
+Aur aapko \texttt{views.py} me \texttt{models/models.py} se \texttt{DeveloperTask} import karna hai, toh aap likh sakte hain:
+
+\begin{lstlisting}
+# In views.py
+from .models.models import DeveloperTask  # From models/models.py (relative to the current folder)
+\end{lstlisting}
+
+\subsubsection*{2. Absolute Imports (From Any Folder in the Project)}
+Agar aap ek specific folder se import karna chahte hain bina relative import ka use kiye, toh absolute import ka use karein:
+
+\begin{lstlisting}
+# In views.py
+from app.models.models import DeveloperTask  # Absolute import from app/models/models.py
+\end{lstlisting}
+
+Yaha \texttt{app} project ka top-level folder hai, aur \texttt{models.models} uska path hai jo \texttt{models.py} tak le jaata hai.
+
+\subsection*{\textbf{3. Importing from a Folder Outside the Project}}
+Agar aapko kisi aur folder se import karna hai jo aapke Django project se bahar hai, toh aapko \texttt{sys.path} modify karna padega:
+
+\begin{lstlisting}
+import sys
+sys.path.append('/path/to/your/folder')
+
+from mymodule import MyClass
+\end{lstlisting}
+
+Par ye tareeka \textbf{recommended nahi hai} Django applications ke liye. Best practice hai ki aap apne project ka structure theek se organize karein.
+
+\subsection*{\textbf{Summary}}
+\begin{itemize}
+    \item \textbf{Relative Imports}: \texttt{from .models import DeveloperTask} ka use karein agar same folder me ho.
+    \item \textbf{Absolute Imports}: \texttt{from app.models.models import DeveloperTask} use karein agar kisi aur folder se import karna ho.
+    \item \textbf{Subfolder Imports}: \texttt{from .models.models import DeveloperTask} ka use karein agar module kisi subfolder me ho.
+\end{itemize}
+
+Relative imports internal structure ke liye useful hote hain, jabki absolute imports clarity aur readability ke liye better hote hain.
+
+===============================
+===============================
+\hrule
+
+\section*{Understanding the \texttt{breakpoint()} Function for Debugging in Python}
+
+\subsection*{What is \texttt{breakpoint()}?}
+
+The \texttt{breakpoint()} function is a built-in function in Python that pauses the execution of your code at the point where it's called and opens an interactive debugging session. This helps you inspect the state of the program, check variable values, and step through the code to find issues.
+
+When you call \texttt{breakpoint()}, it activates the \textbf{Python Debugger (pdb)} and gives you access to several commands to inspect and control the execution flow. For example, you can step through the code line by line, print variables, or continue execution.
+
+\subsection*{Example 1: Simple Example with \texttt{breakpoint()}}
+
+Let's go through a simple Python function to see how \texttt{breakpoint()} works.
+
+\begin{lstlisting}[language=Python]
+def calculate_sum(a, b):
+    result = a + b
+    breakpoint()  # Execution will stop here
+    return result
+
+x = 5
+y = 3
+sum_result = calculate_sum(x, y)
+print(f"Sum is: {sum_result}")
+\end{lstlisting}
+
+\subsubsection*{How it works:}
+
+\begin{enumerate}
+    \item \textbf{Call the Function}: When you run the script, the function \texttt{calculate\_sum(x, y)} is called with \texttt{x=5} and \texttt{y=3}.
+    \item \textbf{Breakpoint}: The execution will stop right at \texttt{breakpoint()} inside the function.
+    \item \textbf{Debugging}: Once the breakpoint is hit, Python will pause execution, and you'll enter the debugger. You can then interact with the program to inspect variables and control the flow.
+    \item \textbf{Continue Execution}: After inspecting the values and stepping through the code, you can continue executing the program.
+\end{enumerate}
+
+\subsubsection*{What happens in the terminal:}
+
+When you run the code, it will output the following at the point where the execution is paused:
+
+\begin{verbatim}
+> script.py(5)calculate_sum()
+-> return result
+(Pdb)
+\end{verbatim}
+
+Here, \texttt{(Pdb)} indicates that you are in the Python Debugger. The code execution is paused at the line \texttt{return result}.
+
+
+At this point, you can use the following debugging commands:
+\vspace{\baselineskip}
+
+\begin{itemize}
+    \item \texttt{p <variable>}: Prints the value of a variable. For example:
+    \begin{verbatim}
+    (Pdb) p a
+    5
+    (Pdb) p b
+    3
+    (Pdb) p result
+    8
+    \end{verbatim}
+    \item \texttt{n} (next): Move to the next line of code.
+    \begin{verbatim}
+    (Pdb) n
+    > script.py(6)<module>()
+    \end{verbatim}
+    \item \texttt{c} (continue): Continue executing the code until the next breakpoint or the end of the program.
+    \begin{verbatim}
+    (Pdb) c
+    \end{verbatim}
+    \item \texttt{q} (quit): Exit the debugger and stop the execution of the program.
+    \begin{verbatim}
+    (Pdb) q
+    \end{verbatim}
+\end{itemize}
+
+After continuing with \texttt{c}, the program will run the rest of the code and output:
+
+\begin{verbatim}
+Sum is: 8
+\end{verbatim}
+
+\subsection*{Example 2: Debugging a More Complex Scenario}
+
+Let's see an example where you want to debug a function that might have an error, and you'll use \texttt{breakpoint()} to inspect variables and understand where it fails.
+
+\begin{lstlisting}[language=Python]
+def divide_numbers(a, b):
+    breakpoint()  # Execution will stop here
+    return a / b
+
+num1 = 10
+num2 = 0  # This will cause a ZeroDivisionError
+result = divide_numbers(num1, num2)
+print(f"Result is: {result}")
+\end{lstlisting}
+
+\subsubsection*{How it works:}
+
+\begin{enumerate}
+    \item The \texttt{divide\_numbers} function is called with \texttt{num1 = 10} and \texttt{num2 = 0}.
+    \item The program hits the \texttt{breakpoint()} and pauses.
+    \item You can inspect the values of \texttt{a} and \texttt{b} before the division happens, and check if the division will lead to an error.
+    \item After inspecting the variables, you can choose to continue or step through the code to see what happens when it tries to divide by zero.
+\end{enumerate}
+
+When you run the code, it will stop at the breakpoint, and you can inspect the values of \texttt{a} and \texttt{b}:
+
+\begin{verbatim}
+> script.py(3)divide_numbers()
+-> return a / b
+(Pdb) p a
+10
+(Pdb) p b
+0
+\end{verbatim}
+
+Here, you see that \texttt{b} is \texttt{0}, which will cause a \texttt{ZeroDivisionError} when the code executes the line \texttt{return a / b}.
+
+At this point, you can either choose to continue (\texttt{c}) or step (\texttt{n}). If you continue, it will raise the error as expected:
+
+\begin{verbatim}
+(Pdb) c
+Traceback (most recent call last):
+  File "script.py", line 7, in <module>
+    result = divide_numbers(num1, num2)
+  File "script.py", line 4, in divide_numbers
+    return a / b
+ZeroDivisionError: division by zero
+\end{verbatim}
+
+This allows you to catch and understand errors while debugging before the program crashes.
+
+\subsection*{Summary of \texttt{breakpoint()} Use}
+
+\begin{itemize}
+    \item \textbf{Setting the Breakpoint}: Place \texttt{breakpoint()} wherever you want to stop the code execution.
+    \item \textbf{Inspecting Variables}: Use commands like \texttt{p <variable>} to check variable values.
+    \item \textbf{Step Through the Code}: Use commands like \texttt{n} (next) to step through the code, and \texttt{c} (continue) to run the code until the next breakpoint.
+    \item \textbf{Examine the Stack}: Use \texttt{bt} (backtrace) to examine the call stack and trace the flow of execution.
+    \item \textbf{Exit the Debugger}: Use \texttt{q} to quit the debugger and stop execution.
+\end{itemize}
+
+\subsection*{Useful Debugger Commands:}
+
+\begin{itemize}
+    \item \texttt{n} — Execute the next line of code.
+    \item \texttt{s} — Step into a function.
+    \item \texttt{c} — Continue execution until the next breakpoint.
+    \item \texttt{p <var>} — Print the value of a variable.
+    \item \texttt{q} — Quit the debugger and exit the program.
+    \item \texttt{bt} — Print the call stack to see where the error occurred.
+\end{itemize}
+
+By using \texttt{breakpoint()}, you can pause your program's execution, inspect the state of variables, and debug issues interactively.
+
+===============================
+===============================
+\hrule
+
+% Define colors
+\definecolor{myblue}{RGB}{0, 102, 204}
+\definecolor{codebg}{RGB}{240, 240, 240}
+
+% Define the heading format
+\titleformat{\section}
+  {\color{myblue}\normalfont\Large\bfseries}
+  {}{0em}{}
+
+% Code box style
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    framerule=0pt,
+    xleftmargin=0.5cm,
+    xrightmargin=0.5cm,
+    framesep=5pt,
+    rulecolor=\color{codebg},
+}
+
+\begin{document}
+
+\section*{\texttt{locals()} Python me: Ek Overview}
+
+\texttt{locals()} ek built-in function hai jo ek dictionary return karta hai jo current local symbol table ko represent karta hai. Yeh symbol table saari local variables aur unki values ko store karta hai jahan \texttt{locals()} call hota hai.
+
+\section*{Syntax}
+\begin{lstlisting}[language=Python]
+locals()
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{Kya return hota hai?}: Ek dictionary jisme keys variable names (as strings) hote hain aur values unka corresponding data hota hai.
+\end{itemize}
+
+\section*{Kab Use Karein \texttt{locals()}?}
+\begin{enumerate}
+    \item \textbf{Debugging}: Current local scope ke saare variables dekhne ke liye.
+    \item \textbf{Dynamic Code Execution}: Runtime me variables modify ya interact karne ke liye.
+    \item \textbf{Template Rendering}: Saare local variables ek function ya template ko pass karne ke liye (Django/Jinja2 me useful).
+    \item \textbf{Introspection}: Program ki state analyze ya log karne ke liye.
+\end{enumerate}
+
+\section*{Examples}
+
+\subsection*{1. Debugging with \texttt{locals()}}
+Jab debugging karni ho, to \texttt{locals()} ka use karke saare variables print kar sakte hain.
+\begin{lstlisting}[language=Python]
+def debug_example():
+    x = 10
+    y = "hello"
+    z = [1, 2, 3]
+    print(locals())  # {'x': 10, 'y': 'hello', 'z': [1, 2, 3]}
+\end{lstlisting}
+
+\subsection*{2. Modifying Local Variables Dynamically}
+Directly \texttt{locals()} ko modify karna achha practice nahi hai, lekin testing/debugging ke liye useful ho sakta hai.
+\begin{lstlisting}[language=Python]
+def dynamic_example():
+    a = 5
+    b = 10
+    local_vars = locals()
+    print(local_vars)  # {'a': 5, 'b': 10}
+
+    # Dynamically modifying values
+    local_vars['a'] = 20  # Yeh change actual variable pe effect nahi karega
+    print(a)  # Output: 5 (not affected)
+\end{lstlisting}
+
+\subsection*{3. Variables ko Templates me Pass Karna}
+Django ya Jinja2 frameworks me saare local variables ko template me bhejne ke liye use hota hai.
+\begin{lstlisting}[language=Python]
+def template_example():
+    name = "John"
+    age = 30
+    return render_template("profile.html", **locals())  # Passes {'name': 'John', 'age': 30}
+\end{lstlisting}
+
+\subsection*{4. Logging State}
+Troubleshooting ya analysis ke liye saare local variables log karna.
+\begin{lstlisting}[language=Python]
+def log_example():
+    user_id = 123
+    action = "login"
+    print(f"Local variables: {locals()}")
+    # Output: Local variables: {'user_id': 123, 'action': 'login'}
+\end{lstlisting}
+
+\subsection*{5. Interactive Debugging}
+\texttt{breakpoint()} ya \texttt{pdb} ke sath \texttt{locals()} ka use karke variables inspect kar sakte hain.
+\begin{lstlisting}[language=Python]
+def interactive_debug():
+    x = 42
+    y = "debug"
+    breakpoint()  # Interactive debugging mode enter karega
+\end{lstlisting}
+Debugging session me:
+\begin{verbatim}
+(Pdb) locals()
+{'x': 42, 'y': 'debug'}
+\end{verbatim}
+
+\section*{Limitations}
+\begin{itemize}
+    \item \textbf{Read-Only in Function Scope}: Function ke andar, \texttt{locals()} ka dictionary modify karne se actual variables change nahi hote.
+    \item \textbf{Dynamic Scope}: \texttt{locals()} ka output depend karta hai ki usko kaha call kiya gaya hai.
+\end{itemize}
+
+\section*{Common Syntax Variations}
+
+\begin{enumerate}
+    \item \textbf{Specific Variable Access Karna}
+    \begin{lstlisting}[language=Python]
+    locals()['variable_name']
+    \end{lstlisting}
+    
+    \item \textbf{Variables ko Filter Karna}
+    Specific prefix wale variables ko extract karne ke liye:
+    \begin{lstlisting}[language=Python]
+    {k: v for k, v in locals().items() if k.startswith('my_')}
+    \end{lstlisting}
+    
+    \item \textbf{Values Dynamically Update Karna (Avoid in Practice)}
+    \begin{lstlisting}[language=Python]
+    local_vars = locals()
+    local_vars['new_var'] = 100
+    print(local_vars)  # {'new_var': 100}
+    \end{lstlisting}
+\end{enumerate}
+
+\section*{Best Practices}
+\begin{itemize}
+    \item \texttt{locals()} ka use sirf \textbf{introspection} aur \textbf{debugging} ke liye karein, variables modify karne ke liye nahi.
+    \item Agar function ya complex scope me use kar rahe hain, to dhyan dein ki sensitive data expose na ho.
+\end{itemize}
+
+===============================
+===============================
+\hrule
+
+\begin{document}
+
+\title{\textbf{Important Note: Django View Functions me URL Parameters Pass Karna}}
+\author{}
+\date{}
+\maketitle
+
+\section*{\textcolor{red}{Django View Functions me URL Parameters Kaise Pass Kare}}
+\noindent Django me jab aap URL pattern me koi parameter define karte hain (jaise \texttt{int:task\_index}), to usko aapko apni view function me as an argument lena zaroori hota hai. Isse aap URL se milne wale value ko view function ke logic me use kar sakte hain.
+
+\section*{\textcolor{red}{URL Patterns Aur View Function Parameters}}
+\noindent Django ka URL dispatcher URL pattern me diye gaye parameters ko extract karke unko corresponding view function ko pass karta hai. Niche ek example diya gaya hai jo is concept ko samjhne me madad karega.
+
+\subsection*{\textcolor{red}{Example 1: Basic URL Parameter Handling}}
+\noindent Maan lijiye aapke paas ye URL pattern hai:
+\begin{verbatim}
+path('<int:task_index>/', DeveloperTaskView.as_view()),  # GET, PUT, DELETE ke liye task_index
+\end{verbatim}
+Yaha URL ek integer parameter \texttt{task\_index} expect karta hai. Django is value ko URL se extract karke \texttt{DeveloperTaskView} class ke method ko as an argument bhejega.
+
+\section*{\textcolor{red}{Yeh Kaise Kaam Karta Hai?}}
+\begin{enumerate}
+    \item \textbf{URL Pattern:} \texttt{path('<int:task\_index>/', DeveloperTaskView.as\_view())}
+    \begin{itemize}
+        \item Ye pattern \texttt{task\_index} ko URL se capture karega.
+        \item Agar URL \texttt{/api/tasks/0/} hai, to \texttt{task\_index = 0} hoga.
+    \end{itemize}
+    \item \textbf{View Function:} View function ya method (\texttt{get}, \texttt{put}, \texttt{patch} etc.) ko ye parameter lena hoga.
+\end{enumerate}
+
+\subsection*{\textcolor{red}{Example View Function}}
+Aap apni view class me \texttt{task\_index} parameter capture kar sakte hain:
+
+\begin{verbatim}
+class DeveloperTaskView(APIView):
+    def patch(self, request, task_index):
+        # Yaha task_index URL se automatically pass hoke aayega
+        print(f"Updating task at index {task_index} for user_id {request.user_id}")
+        
+        # Yaha aapka update logic hoga
+\end{verbatim}
+
+\section*{\textcolor{red}{Kyun Ye Kaam Karta Hai?}}
+\begin{itemize}
+    \item \textbf{URL Parameter Capture:} \texttt{int:task\_index} URL se ek integer capture karta hai aur use \texttt{task\_index} parameter ke roop me bhejta hai.
+    \item \textbf{View Function Parameter:} View function ya method me jo argument diya gaya hai (\texttt{task\_index}), wahi URL se milta hai.
+\end{itemize}
+
+\subsection*{\textcolor{red}{Example 2: Multiple Parameters in URL}}
+Agar aapko ek se zyada parameters pass karne hain, to aap aisa likh sakte hain:
+
+\begin{lstlisting}[breaklines=true]
+path('<int:user_id>/<int:task_index>/', DeveloperTaskView.as_view()),  # user_id aur task_index pass karne ke liye
+\end{lstlisting}
+
+Agar URL \texttt{/api/tasks/6/2/} hai, to:
+\begin{itemize}
+    \item \texttt{user\_id = 6}
+    \item \texttt{task\_index = 2}
+\end{itemize}
+
+\subsection*{\textcolor{red}{Updated View Function}}
+\begin{verbatim}
+class DeveloperTaskView(APIView):
+    def patch(self, request, user_id, task_index):
+        # Yaha user_id aur task_index URL se pass ho kar aayenge
+        print(f"Updating task {task_index} for user {user_id}")
+        
+        # Yaha aapka update logic hoga
+\end{verbatim}
+
+\section*{\textcolor{red}{Key Points Yaad Rakhein}}
+\begin{enumerate}
+    \item \textbf{URL Parameters:} Jo bhi aap \texttt{path()} me define karenge (\texttt{<int:task\_index>}), woh URL se extract kiya jayega.
+    \item \textbf{View Function Arguments:} Jo parameters URL pattern me diye gaye hain (\texttt{task\_index}, \texttt{user\_id}, etc.), unko aapko view function me as an argument lena hoga.
+    \item \textbf{Correct Matching:} Aapka URL pattern aur view function ka parameter name aur type match karna chahiye.
+\end{enumerate}
+
+\noindent Ye concept Django ke URL routing ka ek important hissa hai jo har developer ko samajhna chahiye.
+
+===============================
+===============================
+\hrule
+
+
+
+\begin{document}
+
+\section*{\textcolor{red}{Tracing and Modifying ROOT\_URLCONF in Django}}
+\noindent \texttt{ROOT\_URLCONF} ek setting hai jo \texttt{settings.py} file me define hoti hai aur yeh batati hai ki sabse pehle Django kis \texttt{urls.py} file ko check karega jab koi request aaye.
+
+\subsection*{\textcolor{red}{1. ROOT\_URLCONF Kya Hai?}}
+\noindent Jab bhi koi HTTP request Django application ke server pe aati hai, toh \texttt{ROOT\_URLCONF} us request ko process karne ke liye batata hai ki kaunsa URL configuration file use hoga.
+
+\noindent Example:
+\begin{verbatim}
+ROOT_URLCONF = "my_project.urls"
+\end{verbatim}
+\noindent Yeh line specify karti hai ki jab koi bhi request aaye, toh sabse pehle \texttt{my\_project} folder ke andar jo \texttt{urls.py} file hai, usko check kiya jayega.
+
+\subsection*{\textcolor{red}{2. Multi-App Projects ke liye Customization}}
+\noindent Agar project me multiple apps hain, toh \texttt{ROOT\_URLCONF} me define \texttt{urls.py} file se har app ka \texttt{urls.py} include kiya jata hai:
+\begin{verbatim}
+from django.urls import include, path
+
+urlpatterns = [
+    path("app1/", include("app1.urls")),  # App1 ke URLs ko handle karega
+    path("app2/", include("app2.urls")),  # App2 ke URLs ko handle karega
+]
+\end{verbatim}
+
+\subsection*{\textcolor{red}{3. Dynamic Modification}}
+\noindent Kuch advanced use cases jaise ki multi-tenancy me runtime par \texttt{ROOT\_URLCONF} ko dynamically modify kiya ja sakta hai:
+\begin{verbatim}
+from django.conf import settings
+settings.ROOT_URLCONF = "another_project.urls"
+\end{verbatim}
+\noindent Iska matlab hai ki request ko ek naye URL configuration file ki taraf redirect kiya ja sakta hai, jaise ki alag-alag tenants ke liye alag URL configurations.
+
+\subsection*{\textcolor{red}{4. Debugging ke Liye ROOT\_URLCONF Ka Mahatva}}
+\begin{itemize}
+    \item \texttt{settings.py} file me \texttt{ROOT\_URLCONF} ko check karein taki pata chale ki request kis \texttt{urls.py} file ko refer kar rahi hai.
+    \item \texttt{urlpatterns} ko follow karein taki pata chale ki kis URL par kaunsa view function call ho raha hai.
+    \item Agar request expected response nahi de rahi, toh \texttt{ROOT\_URLCONF} check karna ek acha debugging step ho sakta hai.
+\end{itemize}
+
+\noindent \textbf{Summary:} \texttt{ROOT\_URLCONF} Django application ka primary URL configuration define karta hai. Yeh batata hai ki sabse pehle kaunsi \texttt{urls.py} file ko use kiya jayega, aur usme se kaunsi routes available hain. Multi-app projects me har app ke \texttt{urls.py} ko include kiya jata hai, aur kuch advanced cases me isko dynamically modify bhi kiya ja sakta hai.
+
+===============================
+===============================
+\hrule
+
+
+
+\begin{document}
+
+\title{\textbf{Importing a cURL Request into Postman: Capturing Network Requests, Copying cURL, and Automatically Setting Up Request in Postman}}
+\author{}
+\date{}
+\maketitle
+
+\section*{\textcolor{red}{Importing a cURL Request into Postman: Capturing and Converting Network Requests to Postman}}
+\noindent Yeh process "Importing a cURL request into Postman" kehlata hai. Iska matlab hai ke agar tumne kisi browser ke developer tools se ek HTTP request capture ki hai, toh usse Postman me import karke test ya debug kar sakte ho. Chalo step-by-step samajhte hain:
+
+\section*{\textcolor{red}{Steps for Importing a cURL Request into Postman: From Browser Developer Tools to Postman Request}}
+\begin{enumerate}
+    \item \textbf{Browser Developer Tools Open Karo: Request Capture Karna}
+    \begin{itemize}
+        \item Apna browser (Chrome, Firefox, etc.) open karo.
+        \item Jis webpage ka network request capture karna hai, waha jao.
+        \item Right-click karo aur \textbf{Inspect} select karo ya \texttt{Ctrl + Shift + I} (Windows/Linux) ya \texttt{Cmd + Option + I} (Mac) dabao.
+    \end{itemize}
+    
+    \item \textbf{Network Tab Par Jao: Network Activity Dekhna}
+    \begin{itemize}
+        \item Developer Tools me \textbf{Network} tab par click karo.
+    \end{itemize}
+    
+    \item \textbf{Request Trigger Karo: Request Capture Karna}
+    \begin{itemize}
+        \item Page refresh karo ya koi aisa action lo jo request bhejta ho (e.g., button click karna, form submit karna).
+    \end{itemize}
+    
+    \item \textbf{Request Dhundo: Network Tab Me Apni Request Dekho}
+    \begin{itemize}
+        \item Network tab me jo requests show ho rahi hain, unme se apni request dhundo.
+        \item Request type (e.g., \texttt{XHR}, \texttt{Fetch}) ya naam ke basis par filter kar sakte ho.
+    \end{itemize}
+    
+    \item \textbf{Request Copy Karo: cURL Format Me Copy Karna}
+    \begin{itemize}
+        \item Apni request par right-click karo.
+        \item Context menu se \textbf{Copy} $\rightarrow$ \textbf{Copy as cURL (bash)} select karo.
+    \end{itemize}
+    
+    \item \textbf{Postman Open Karo: Request Import Karne Ke Liye}
+    \begin{itemize}
+        \item \textbf{Postman} open karo ya Postman web app launch karo.
+    \end{itemize}
+    
+    \item \textbf{cURL Import Karo: Postman Me Request Convert Karna}
+    \begin{itemize}
+        \item Postman me \textbf{Import} button par click karo.
+        \item \textbf{Raw Text} option select karo.
+        \item Clipboard se copied cURL command paste karo aur \textbf{Continue} dabao.
+    \end{itemize}
+    
+    \item \textbf{Request Edit Karo Aur Send Karo}
+    \begin{itemize}
+        \item Postman automatically cURL command ko request me convert kar dega.
+        \item Tum headers, body ya parameters ko modify kar sakte ho.
+        \item \textbf{Send} button dabao aur response dekho.
+    \end{itemize}
+\end{enumerate}
+
+\section*{\textcolor{red}{Behind the Scenes: cURL Aur Postman Ka Kaam Kaise Hota Hai}}
+\begin{itemize}
+    \item \textbf{cURL} (Client URL) ek command-line tool hai jo HTTP requests send karne ke liye use hota hai. Jab tum "Copy as cURL" karte ho, toh poori request (headers, body, method, etc.) ek format me milti hai jo Postman samajh sakta hai.
+    \item \textbf{Postman} ek API testing tool hai jo cURL request ko ek graphical interface request me convert karta hai, taaki tum bina manually details enter kiye request send kar sako.
+\end{itemize}
+
+\noindent Yeh process debugging aur testing ke liye bahut useful hoti hai, taaki tum browser me chali requests ko Postman me easily test kar sako. ��
+
+===============================
+===============================
+\hrule
+
+
+
+
+\begin{document}
+
+\title{\textbf{Difference Between PUT and PATCH in Short and Simple Terms}}
+\author{}
+\date{}
+\maketitle
+
+\section*{\textcolor{red}{Difference Between PUT and PATCH: Key Distinctions in HTTP Methods}}
+\noindent Jab bhi kisi resource ko HTTP ke through update karna hota hai, toh \textbf{PUT} aur \textbf{PATCH} dono use kiye ja sakte hain. Lekin yeh dono tarike alag tareeke se kaam karte hain.
+
+\section*{\textcolor{red}{PUT: Complete Update of the Resource}}
+\noindent \textbf{Definition:}  
+\textbf{PUT} method ek resource ko completely replace kar deta hai. Matlab agar tumne sirf kuch fields provide ki hain, toh jo baaki fields hain wo delete ya default ho sakti hain.
+
+\textbf{Key Characteristics:}
+\begin{itemize}
+    \item Pura resource replace hota hai jo naye data se provide kiya gaya hai.
+    \item Agar koi field request me include nahi ki gayi, toh wo hata di jati hai ya default ho jati hai.
+\end{itemize}
+
+\textbf{Example:}
+\begin{verbatim}
+PUT /user/123
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com"
+}
+\end{verbatim}
+Agar pehle ke resource me "address" field bhi thi, lekin request me nahi di gayi, toh wo field remove ho jayegi.
+
+\section*{\textcolor{red}{PATCH: Partial Update of the Resource}}
+\noindent \textbf{Definition:}  
+\textbf{PATCH} method sirf wahi fields modify karta hai jo request me di gayi hain. Baaki fields same rehti hain.
+
+\textbf{Key Characteristics:}
+\begin{itemize}
+    \item Efficient hai agar sirf kuch fields update karni ho.
+    \item Sirf wahi fields modify hoti hain jo request me include ki gayi hain.
+\end{itemize}
+
+\textbf{Example:}
+\begin{verbatim}
+PATCH /user/123
+{
+  "email": "john.doe@example.com"
+}
+\end{verbatim}
+Is case me sirf "email" field update hogi, aur "name" ya "address" jaise fields same rahenge.
+
+\section*{\textcolor{red}{Summary: PUT vs PATCH}}
+\begin{itemize}
+    \item \textbf{PUT:} Pura resource replace karta hai naye data se.
+    \item \textbf{PATCH:} Sirf specific fields ko update karta hai bina baaki resource ko modify kiye.
+\end{itemize}
+
+===============================
+===============================
+\hrule
+
+
+\lstset{
+  backgroundcolor=\color{lightgray},
+  basicstyle=\ttfamily\small,
+  breaklines=true
+}
+
+\begin{document}
+
+\section*{\textcolor{red}{Django Mein \textbf{Celery}, \textbf{Redis}, \textbf{Celery Beat}, aur \textbf{Caching} Ka Complete Guide}}
+Is guide mein hum Django project mein \textbf{Celery}, \textbf{Redis}, \textbf{Celery Beat}, aur \textbf{Caching} ko integrate karne ke steps dekhenge. Har step ko detail mein samjhaya jayega, filenames, code, aur comments ke saath.
+
+\hrule
+
+\subsection*{\textcolor{red}{Ye Components Kya Hain?}}
+
+\begin{itemize}
+    \item \textbf{Celery}: Asynchronous tasks ke liye use hota hai. Isse aap background mein tasks run kar sakte hain, jaise emails bhejna, data processing karna, etc.
+    \item \textbf{Redis}: Celery ka message broker hai. Ye tasks ko hold karta hai aur unhe queue mein rakhta hai taki Celery workers unhe process kar sake.
+    \item \textbf{Celery Beat}: Periodic tasks ke liye ek scheduler hai. Isse aap specific intervals par tasks schedule kar sakte hain (e.g., har ghante, har din).
+    \item \textbf{Caching}: Django app ko fast banata hai by frequently accessed data ko memory mein store karke.
+\end{itemize}
+
+\subsection*{\textcolor{red}{Step-by-Step Setup}}
+
+\subsubsection*{\textcolor{red}{1. Required Packages Install Kare}}
+
+Sabse pehle Celery, Redis, aur Django-Celery-Beat package ko install kare:
+
+\begin{lstlisting}[language=bash]
+pip install celery[redis] django-celery-beat redis
+\end{lstlisting}
+
+\subsubsection*{\textcolor{red}{2. Django Mein Celery Set Up Kare}}
+
+\textbf{Directory Structure:}
+
+Aapke project folder ka structure kuch aisa hona chahiye:
+
+\begin{lstlisting}[language=bash]
+myproject/
+    myproject/
+        __init__.py
+        settings.py
+        urls.py
+        wsgi.py
+        celery.py  # <-- Naya file
+    myapp/
+        __init__.py
+        tasks.py   # <-- Naya file
+    manage.py
+\end{lstlisting}
+
+\subsubsection*{\textcolor{red}{2.1 \texttt{celery.py} File Banaye}}
+
+Apne project directory mein (jahan \texttt{settings.py} hai), ek \texttt{celery.py} file banaye. Ye file Celery ko configure karega taki wo aapke Django project ke saath kaam kare.
+
+\begin{lstlisting}[language=python]
+# myproject/celery.py
+
+from __future__ import absolute_import, unicode_literals
+import os
+from celery import Celery
+
+# Django settings module ko set kare
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+
+# Celery instance banaye aur project ke naam se naamkaran kare
+app = Celery('myproject')
+
+# Django ke settings se Celery ko configure kare
+app.config_from_object('django.conf:settings', namespace='CELERY')
+
+# Sabhi registered Django apps mein tasks ko automatically discover kare
+app.autodiscover_tasks()
+
+@app.task(bind=True)
+def debug_task(self):
+    # Celery kaam kar raha hai ya nahi, ye debug task se check kare
+    print('Request: {0!r}'.format(self.request))
+\end{lstlisting}
+
+\textbf{Explanation}:
+\begin{itemize}
+    \item \texttt{os.environ.setdefault('DJANGO\_SETTINGS\_MODULE', 'myproject.settings')}: Default Django settings module set karta hai.
+    \item \texttt{app = Celery('myproject')}: Celery app ko initialize karta hai aur uska naam \texttt{myproject} rakhta hai.
+    \item \texttt{app.config\_from\_object('django.conf:settings', namespace='CELERY')}: Celery configuration ko Django ke \texttt{settings.py} se load karta hai.
+    \item \texttt{app.autodiscover\_tasks()}: Sabhi installed Django apps mein tasks ko automatically dhoondhta hai.
+\end{itemize}
+
+\subsubsection*{\textcolor{red}{2.2 \texttt{\_\_init\_\_.py} File Update Kare}}
+
+Ensure kare ki Celery Django app start hote hi load ho jaye. \texttt{myproject/\_\_init\_\_.py} file ko open kare aur ye add kare:
+
+\begin{lstlisting}[language=python]
+# myproject/__init__.py
+
+from __future__ import absolute_import, unicode_literals
+
+# Ye ensure karega ki app hamesha import ho jab
+# Django start hota hai taki shared_task is app ka use kare.
+from .celery import app as celery_app
+
+__all__ = ('celery_app',)
+\end{lstlisting}
+
+\subsubsection*{\textcolor{red}{3. \texttt{settings.py} Mein Celery Configure Kare}}
+
+\texttt{settings.py} mein Redis broker URL ko configure kare:
+
+\begin{lstlisting}[language=python]
+# myproject/settings.py
+
+# Celery configuration
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Redis server URL
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # Results store karne ke liye Redis
+CELERY_ACCEPT_CONTENT = ['json']  # Task messages ke liye sirf JSON accept kare
+CELERY_TASK_SERIALIZER = 'json'  # Task messages JSON format mein serialize kare
+CELERY_TIMEZONE = 'UTC'  # Task scheduling ke liye timezone set kare
+\end{lstlisting}
+
+\textbf{Explanation}:
+\begin{itemize}
+    \item \texttt{CELERY\_BROKER\_URL}: Redis ko broker ke roop mein specify karta hai.
+    \item \texttt{CELERY\_RESULT\_BACKEND}: Task results store karne ke liye Redis use karta hai.
+    \item \texttt{CELERY\_ACCEPT\_CONTENT} aur \texttt{CELERY\_TASK\_SERIALIZER}: Tasks ko JSON format mein serialize karta hai.
+    \item \texttt{CELERY\_TIMEZONE}: Task scheduling ke liye timezone set karta hai.
+\end{itemize}
+
+\subsubsection*{\textcolor{red}{4. Celery Tasks Banaye aur Configure Kare}}
+
+Background tasks banaye jo Celery execute kar sake. Apne app mein \texttt{tasks.py} file banaye.
+
+\subsubsection*{\textcolor{red}{4.1 \texttt{tasks.py} File Banaye}}
+
+\begin{lstlisting}[language=python]
+# myapp/tasks.py
+from celery import shared_task
+
+# Example task: Do numbers ko asynchronously add kare
+@shared_task
+def add(x, y):
+    return x + y
+
+# Ek aur task: Email bhejne ka simulate kare
+@shared_task
+def send_email_task(email):
+    # Email bhejne ka simulate kare
+    print(f"Sending email to {email}")
+\end{lstlisting}
+
+\textbf{Explanation}:
+\begin{itemize}
+    \item \texttt{@shared\_task}: Ye decorator ek function ko Celery task ke roop mein register karta hai, jise asynchronously execute kiya ja sakta hai.
+    \item \texttt{add()}: Do numbers ko asynchronously add karta hai.
+    \item \texttt{send\_email\_task()}: Email bhejne ka simulate karta hai.
+\end{itemize}
+
+\subsubsection*{\textcolor{red}{4.2 Tasks Ko Asynchronously Call Kare}}
+
+Apne code mein kahi se bhi tasks ko call kare:
+
+\begin{lstlisting}[language=python]
+# Task ko asynchronously call kare
+from myapp.tasks import add
+result = add.delay(4, 6)
+\end{lstlisting}
+
+\textbf{Explanation}:
+\begin{itemize}
+    \item \texttt{add.delay(4, 6)}: Task ko Celery ko bhejta hai taki wo background mein process ho sake.
+\end{itemize}
+
+\subsubsection*{\textcolor{red}{5. Periodic Tasks Ke Liye Celery Beat Set Up Kare}}
+
+Celery Beat periodic tasks ko schedule karta hai.
+
+\subsubsection*{\textcolor{red}{5.1 \texttt{django-celery-beat} Install Kare}}
+
+Required package ko install kare:
+
+\begin{lstlisting}[language=bash]
+pip install django-celery-beat
+\end{lstlisting}
+
+\subsubsection*{\textcolor{red}{5.2 \texttt{INSTALLED\_APPS} Mein Add Kare}}
+
+\texttt{settings.py} mein \texttt{'django\_celery\_beat'} ko \texttt{INSTALLED\_APPS} mein add kare:
+
+\begin{lstlisting}[language=python]
+# myproject/settings.py
+
+INSTALLED_APPS = [
+    ...
+    'django_celery_beat',  # Ye line add kare
+]
+\end{lstlisting}
+
+\subsubsection*{\textcolor{red}{5.3 Database Migrate Kare}}
+
+Celery Beat ke liye required tables banane ke liye migrations run kare:
+
+\begin{lstlisting}[language=bash]
+python manage.py migrate django_celery_beat
+\end{lstlisting}
+
+\subsubsection*{\textcolor{red}{5.4 Periodic Tasks Schedule Kare}}
+
+Periodic tasks ko \texttt{celery.py} mein configure kare:
+
+\begin{lstlisting}[language=python]
+# myproject/celery.py
+from celery.schedules import crontab
+
+app.conf.beat_schedule = {
+    'send-email-every-minute': {
+        'task': 'myapp.tasks.send_email_task',
+        'schedule': crontab(minute='*/1'),  # Har minute run kare
+        'args': ('user@example.com',),
+    },
+}
+\end{lstlisting}
+
+\textbf{Explanation}:
+\begin{itemize}
+    \item \texttt{crontab(minute='*/1')}: Task ko har minute run karne ke liye define karta hai.
+    \item \texttt{args}: Task function ko pass kiye gaye arguments.
+
+    \subsubsection*{\textcolor{red}{5.5 Celery Beat Run Kare}}
+
+    Tasks ko schedule karne ke liye, Celery Beat ko niche diye gaye command se run kare:
+
+\begin{lstlisting}
+[language=bash]
+celery -A myproject beat --loglevel=info
+
+\end{lstlisting}
+\end{itemize}
+
+\subsubsection*{\textcolor{red}{6. Redis Ke Saath Caching Set Up Kare}}
+
+\subsubsection*{\textcolor{red}{6.1 \texttt{django-redis} Install Kare}}
+
+Required Redis package ko install kare:
+
+\begin{lstlisting}[language=bash]
+pip install django-redis
+\end{lstlisting}
+
+\subsubsection*{\textcolor{red}{6.2 \texttt{settings.py} Mein Caching Configure Kare}}
+
+\texttt{settings.py} mein cache backend ko Redis ke saath configure kare:
+
+\begin{lstlisting}[language=python]
+# myproject/settings.py
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',  # Redis database 1
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+    }
+}
+\end{lstlisting}
+
+\textbf{Explanation}:
+\begin{itemize}
+    \item \texttt{'BACKEND'}: Cache backend specify karta hai (yahan Redis hai).
+    \item \texttt{'LOCATION'}: Redis server aur database (caching ke liye database 1).
+\end{itemize}
+
+\subsubsection*{\textcolor{red}{6.3 Views Mein Caching Ka Use Kare}}
+
+Aap views ya data ko cache kar sakte hain.
+
+\begin{lstlisting}[language=python]
+# myapp/views.py
+from django.shortcuts import render
+from django.core.cache import cache
+
+def my_view(request):
+    # Cache se data fetch kare
+    data = cache.get('my_key')
+
+    if not data:
+        # Agar cache mein nahi hai, to database se fetch kare ya compute kare
+        data = 'Expensive data'
+        # Data ko cache mein 1 hour (3600 seconds) ke liye store kare
+        cache.set('my_key', data, timeout=3600)
+
+    return render(request, 'my_template.html', {'data': data})
+\end{lstlisting}
+
+\textbf{Explanation}:
+\begin{itemize}
+    \item \texttt{cache.get('my\_key')}: Cache se data fetch karta hai.
+    \item \texttt{cache.set('my\_key', data, timeout=3600)}: Data ko 1 hour (3600 seconds) ke liye cache mein store karta hai.
+\end{itemize}
+
+\subsection*{\textcolor{red}{7. Sab Kuch Run Kare}}
+
+Apne project ko run karne ke liye, in steps ko follow kare:
+
+\begin{itemize}
+    \item \textbf{Redis Start Kare (agar already running nahi hai):}
+    \begin{lstlisting}[language=bash]
+    redis-server
+    \end{lstlisting}
+
+    \item \textbf{Django Development Server Run Kare:}
+    \begin{lstlisting}[language=bash]
+    python manage.py runserver
+    \end{lstlisting}
+
+    \item \textbf{Celery Worker Start Kare (naye terminal window mein):}
+    \begin{lstlisting}[language=bash]
+    celery -A myproject worker --loglevel=info
+    \end{lstlisting}
+
+    \item \textbf{Celery Beat Start Kare (periodic tasks schedule karne ke liye):}
+    \begin{lstlisting}[language=bash]
+    celery -A myproject beat --loglevel=info
+    \end{lstlisting}
+\end{itemize}
+
+\subsection*{\textcolor{red}{Summary}}
+
+\begin{itemize}
+    \item \textbf{Celery}: Background tasks ko asynchronously run karne ke liye use hota hai.
+    \item \textbf{Redis}: Celery ka message broker aur cache backend ke roop mein use hota hai.
+    \item \textbf{Celery Beat}: Periodic tasks ko schedule karne ke liye use hota hai.
+    \item \textbf{Caching}: Performance improve karne ke liye data ko temporarily memory mein store karta hai.
+\end{itemize}
+\hrule
+
+===============================
+===============================
+\hrule
+
+\lstset{
+  backgroundcolor=\color{lightgray},
+  basicstyle=\ttfamily\small,
+  breaklines=true
+}
+
+
+
+\begin{document}
+
+\section*{\textcolor{red}{\textbf{Python Virtual Environment: Summary}}}
+
+A \textbf{virtual environment} in Python ek isolated environment hota hai jo ek project ke liye specific dependencies manage karne ki suvidha deta hai bina system-wide Python installation ko affect kiye. Isse alag-alag projects ke dependencies conflict nahi karte hain.
+
+\hrule
+
+\subsection*{\textcolor{red}{\textbf{Why Use Virtual Environments?}}}
+\begin{itemize}
+    \item \textbf{Isolation}: Har project ka apna alag environment hota hai.
+    \item \textbf{Version Management}: Alag-alag projects ke liye alag package versions use kiye ja sakte hain.
+    \item \textbf{Cleaner Environment}: System Python ko cluttered hone se bachata hai.
+\end{itemize}
+
+\hrule
+
+\subsection*{\textcolor{red}{\textbf{Commands and Examples}}}
+
+\subsubsection*{\textcolor{red}{\textbf{1. Create a Virtual Environment}}}
+\begin{lstlisting}[language=bash]
+python -m venv env_name
+\end{lstlisting}
+\textbf{Explanation:} \texttt{env\_name} virtual environment ka folder name hota hai (e.g., \texttt{env}).
+
+\textbf{Example:}
+\begin{lstlisting}[language=bash]
+python -m venv myenv
+\end{lstlisting}
+
+\hrule
+
+\subsubsection*{\textcolor{red}{\textbf{2. Activate the Virtual Environment}}}
+
+\textbf{Windows:}
+\begin{lstlisting}[language=bash]
+.\env_name\Scripts\activate
+\end{lstlisting}
+
+\textbf{Linux/Mac:}
+\begin{lstlisting}[language=bash]
+source env_name/bin/activate
+\end{lstlisting}
+
+\textbf{Example:}
+\begin{lstlisting}[language=bash]
+source myenv/bin/activate
+\end{lstlisting}
+
+Activate hone ke baad terminal prompt me environment ka naam show karega, jaise \texttt{(myenv)}.
+
+\hrule
+
+\subsubsection*{\textcolor{red}{\textbf{3. Deactivate the Virtual Environment}}}
+\begin{lstlisting}[language=bash]
+deactivate
+\end{lstlisting}
+
+\textbf{Example:}
+\begin{lstlisting}[language=bash]
+(myenv) deactivate
+\end{lstlisting}
+
+Ye command global Python environment me wapas le aayegi.
+
+\hrule
+
+\subsubsection*{\textcolor{red}{\textbf{4. Install Packages Inside the Virtual Environment}}}
+Activate hone ke baad \texttt{pip} ka use karke packages install kar sakte hain:
+\begin{lstlisting}[language=bash]
+pip install package_name
+\end{lstlisting}
+
+\textbf{Example:}
+\begin{lstlisting}[language=bash]
+pip install django
+\end{lstlisting}
+
+\hrule
+
+\subsubsection*{\textcolor{red}{\textbf{5. Save Installed Packages}}}
+Environment ke dependencies ko \texttt{requirements.txt} me save karne ke liye:
+\begin{lstlisting}[language=bash]
+pip freeze > requirements.txt
+\end{lstlisting}
+
+\hrule
+
+\subsubsection*{\textcolor{red}{\textbf{6. Install Packages from \texttt{requirements.txt}}}}
+\begin{lstlisting}[language=bash]
+pip install -r requirements.txt
+\end{lstlisting}
+
+\hrule
+
+\subsubsection*{\textcolor{red}{\textbf{7. Delete a Virtual Environment}}}
+Virtual environment delete karne ke liye uska folder remove karein:
+\begin{lstlisting}[language=bash]
+rm -rf env_name
+\end{lstlisting}
+
+\hrule
+
+\subsection*{\textcolor{red}{\textbf{Example Workflow}}}
+
+\begin{enumerate}
+    \item Ek project folder banayein aur usme navigate karein:
+    \begin{lstlisting}[language=bash]
+    mkdir my_project
+    cd my_project
+    \end{lstlisting}
+
+    \item Virtual environment create karein:
+    \begin{lstlisting}[language=bash]
+    python -m venv env
+    \end{lstlisting}
+
+    \item Environment activate karein:
+    \begin{lstlisting}[language=bash]
+    source env/bin/activate
+    \end{lstlisting}
+
+    \item Dependencies install karein:
+    \begin{lstlisting}[language=bash]
+    pip install django
+    \end{lstlisting}
+
+    \item Installed packages save karein:
+    \begin{lstlisting}[language=bash]
+    pip freeze > requirements.txt
+    \end{lstlisting}
+
+    \item Kaam khatam hone ke baad deactivate karein:
+    \begin{lstlisting}[language=bash]
+    deactivate
+    \end{lstlisting}
+\end{enumerate}
+
+\hrule
+
+\subsection*{\textcolor{red}{\textbf{Key Points}}}
+\begin{itemize}
+    \item Har project ka apna isolated environment hota hai.
+    \item Project-specific commands run karne se pehle virtual environment activate karein.
+    \item \texttt{pip freeze} ka use karke environment setup share karein.
+\end{itemize}
+
+\hrule
+
+\lstset{
+  backgroundcolor=\color{lightgray},
+  basicstyle=\ttfamily\small,
+  breaklines=true
+}
+
+\begin{document}
+
+\section*{\textcolor{red}{\textbf{Understanding `pip freeze` in Django (or Python in General)}}}
+
+\noindent The \texttt{pip freeze} command is used to list all installed Python packages in your currently active virtual environment along with their exact versions. This is particularly useful in Django projects to generate a \texttt{requirements.txt} file, which helps in sharing and replicating the project setup across different systems.
+
+\hrule
+
+\subsection*{\textcolor{red}{\textbf{Example Usage and Explanation}}}
+
+\subsubsection*{\textcolor{red}{\textbf{1. List Installed Packages}}}
+\noindent To view all installed packages and their versions in the current environment, use:
+\begin{lstlisting}[language=bash]
+pip freeze
+\end{lstlisting}
+
+\noindent \textbf{Explanation:} This command fetches and displays the list of all installed dependencies in the active virtual environment.
+
+\noindent \textbf{Example Output:}
+\begin{lstlisting}
+Django==4.2.5
+djangorestframework==3.14.0
+mysqlclient==2.1.3
+\end{lstlisting}
+
+\hrule
+
+\subsubsection*{\textcolor{red}{\textbf{2. Save Installed Packages to \texttt{requirements.txt}}}}
+\noindent To store the installed packages in a \texttt{requirements.txt} file, run:
+\begin{lstlisting}[language=bash]
+pip freeze > requirements.txt
+\end{lstlisting}
+
+\noindent \textbf{Explanation:} This command creates a text file named \texttt{requirements.txt} and writes all installed package names along with their versions into it. This file is useful for setting up the same environment on another system.
+
+\hrule
+
+\subsubsection*{\textcolor{red}{\textbf{3. Install Packages from \texttt{requirements.txt}}}}
+\noindent If you need to install the exact dependencies listed in \texttt{requirements.txt}, use:
+\begin{lstlisting}[language=bash]
+pip install -r requirements.txt
+\end{lstlisting}
+
+\noindent \textbf{Explanation:} This command reads the \texttt{requirements.txt} file and installs all the listed packages with the specified versions, ensuring that your environment matches the one where the file was created.
+
+\hrule
+
+\lstset{
+  backgroundcolor=\color{lightgray},
+  basicstyle=\ttfamily\small,
+  breaklines=true
+}
+
+\begin{document}
+
+\newpage
+
+\textbf{\textcolor{blue}{Comprehensive Guide to Django ORM: CRUD Operations aur Query Optimization}}
+
+\section*{\textcolor{red}{\textbf{1. Create (Naya Record Insert Karna)}}}
+
+\subsection*{\textcolor{red}{\textbf{Using \texttt{.create()}}}}
+\begin{lstlisting}[language=python]
+User.objects.create(username='JohnDoe', email='johndoe@example.com', password='securepassword')
+\end{lstlisting}
+- \textbf{\texttt{User}}: Yeh model database table \texttt{User} ko represent karta hai.
+- \textbf{\texttt{objects.create()}}: Ek hi step me naya record create aur save karta hai.
+- \textbf{\texttt{username, email, password}}: Ye fields naye record ko populate karne ke liye hain.
+
+\subsection*{\textcolor{red}{\textbf{Using Model Instance}}}
+\begin{lstlisting}[language=python]
+user = User(username='JaneDoe', email='janedoe@example.com') 
+user.set_password('securepassword')  # Password ko hash karne ke liye
+user.save()
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{\lstinline[breaklines=true]|User(username=..., email=...)|}: Ye ek unsaved object create karta hai.
+    \item \textbf{\lstinline[breaklines=true]|set_password()|}: Password ko securely hash karta hai.
+    \item \textbf{\lstinline[breaklines=true]|save()|}: Object ko database me save karta hai.
+\end{itemize}
+
+
+\section*{\textcolor{red}{\textbf{2. Read (Records Retrieve Karna)}}}
+
+\subsection*{\textcolor{red}{\textbf{Retrieve Sabhi Records}}}
+\begin{lstlisting}[language=python]
+users = User.objects.all()
+\end{lstlisting}
+- \textbf{\texttt{all()}}: \texttt{User} table ke sabhi records ko QuerySet ke roop me fetch karta hai.
+
+\subsection*{\textcolor{red}{\textbf{Retrieve Ek Specific Record}}}
+\begin{lstlisting}[language=python]
+user = User.objects.get(id=1)
+\end{lstlisting}
+- \textbf{\texttt{get()}}: Sirf ek record fetch karega jisme \texttt{id=1} hoga.
+- Agar record nahi mila toh \texttt{DoesNotExist} error aayega, aur agar multiple matches hue toh \texttt{MultipleObjectsReturned} error milega.
+
+\subsection*{\textcolor{red}{\textbf{Retrieve with Filtering}}}
+\begin{lstlisting}[language=python]
+active_users = User.objects.filter(is_active=True)
+\end{lstlisting}
+- \textbf{\texttt{filter()}}: Sirf wahi records fetch karega jo condition \texttt{is_active=True} match karte hain.
+
+\subsection*{\textcolor{red}{\textbf{Retrieve Specific Fields}}}
+\begin{lstlisting}[language=python]
+user_emails = User.objects.values('email')
+\end{lstlisting}
+- \textbf{\texttt{values('field')}}: Sirf specified field ke data ka dictionary return karega.
+
+
+\section*{\textcolor{red}{\textbf{3. Update (Records Modify Karna)}}}
+
+\subsection*{\textcolor{red}{\textbf{Update Ek Single Record}}}
+\begin{lstlisting}[language=python]
+user = User.objects.get(username='JohnDoe')
+user.email = 'newemail@example.com'
+user.save()
+\end{lstlisting}
+- \textbf{\texttt{get()}}: Jo record update karna hai usko fetch karta hai.
+- \textbf{\texttt{save()}}: Database me changes save karta hai.
+
+\subsection*{\textcolor{red}{\textbf{Update Multiple Records}}}
+\begin{lstlisting}[language=python]
+User.objects.filter(is_active=False).update(is_active=True)
+\end{lstlisting}
+- \textbf{\texttt{filter()}}: Multiple records ko select karega.
+- \textbf{\texttt{update()}}: Selected records ko bulk me update karega.
+
+
+\section*{\textcolor{red}{\textbf{4. Delete (Records Remove Karna)}}}
+
+\subsection*{\textcolor{red}{\textbf{Delete Ek Single Record}}}
+\begin{lstlisting}[language=python]
+user = User.objects.get(username='JohnDoe')
+user.delete()
+\end{lstlisting}
+- \textbf{\texttt{delete()}}: Record database se hata dega.
+
+\subsection*{\textcolor{red}{\textbf{Delete Multiple Records}}}
+\begin{lstlisting}[language=python]
+User.objects.filter(is_active=False).delete()
+\end{lstlisting}
+- \textbf{\texttt{filter()}}: Jo records delete karne hain unko select karega.
+- \textbf{\texttt{delete()}}: Sab selected records delete kar dega.
+
+
+\section*{\textcolor{red}{\textbf{5. Common Aggregation aur Annotation}}}
+
+\subsection*{\textcolor{red}{\textbf{Count}}}
+\begin{lstlisting}[language=python]
+user_count = User.objects.count()
+\end{lstlisting}
+- \textbf{\texttt{count()}}: QuerySet me kitne records hain uska count return karega.
+
+\subsection*{\textcolor{red}{\textbf{Aggregate}}}
+\begin{lstlisting}[language=python]
+stats = User.objects.aggregate(avg_id=Avg('id'))
+\end{lstlisting}
+- \textbf{\texttt{aggregate()}}: Fields par calculations karta hai jaise \texttt{Avg}, \texttt{Max}, \texttt{Sum}.
+
+\subsection*{\textcolor{red}{\textbf{Annotate}}}
+\begin{lstlisting}[language=python]
+users_with_groups = User.objects.annotate(group_count=Count('groups'))
+\end{lstlisting}
+- \textbf{\texttt{annotate()}}: Har record ke saath ek calculated field \texttt{group_count} add karega.
+
+\hrule
+
+\lstset{
+  backgroundcolor=\color{lightgray},
+  basicstyle=\ttfamily\small,
+  breaklines=true
+}
+
+\begin{document}
+
+\section*{\textbf{\textcolor{red}{6. Bulk Operations}}}
+
+\subsection*{Bulk Create}
+\begin{lstlisting}[language=python]
+users = [User(username='User1'), User(username='User2')]
+User.objects.bulk_create(users)
+\end{lstlisting}
+- \textbf{\texttt{bulk\_create()}}: Ek saath multiple records insert karne ke liye use hota hai. Yeh ek hi query me execute hota hai, jo performance improve karta hai.
+
+\subsection*{Bulk Update}
+\begin{lstlisting}[language=python]
+users = User.objects.filter(is_staff=False)
+for user in users:
+    user.is_active = True
+User.objects.bulk_update(users, ['is_active'])
+\end{lstlisting}
+- \textbf{\texttt{bulk\_update()}}: Ek saath multiple records update karne ke liye use hota hai. Isme sirf wahi fields update hoti hain jo specify ki hoti hain (yaha \texttt{is\_active}).
+
+\section*{\textbf{\textcolor{red}{7. QuerySet Chaining}}}
+\begin{lstlisting}[language=python]
+users = User.objects.filter(is_staff=True).exclude(is_active=False).order_by('-date_joined')
+\end{lstlisting}
+- \textbf{\texttt{filter()}}: Jo records condition ko match karte hain, unhe fetch karta hai.
+- \textbf{\texttt{exclude()}}: Jo condition ko match karte hain, unko hata kar baaki records fetch karta hai.
+- \textbf{\texttt{order\_by()}}: Sorting ke liye use hota hai (\texttt{-date\_joined} descending order ke liye hai).
+
+\section*{\textbf{\textcolor{red}{8. Raw SQL Queries}}}
+\begin{lstlisting}[language=python]
+users = User.objects.raw('SELECT * FROM auth_user WHERE is_active=%s', [True])
+\end{lstlisting}
+- \textbf{\texttt{raw()}}: Jab ORM se zyada control chahiye ho, tab SQL queries likh ke execute karne ke liye use hota hai.
+
+\section*{\textbf{\textcolor{red}{9. Transactions}}}
+\begin{lstlisting}[language=python]
+from django.db import transaction
+
+with transaction.atomic():
+    user1 = User.objects.create(username='Temp1')
+\end{lstlisting}
+- \textbf{\texttt{transaction.atomic()}}: Yeh ensure karta hai ki agar ek operation fail ho jaye, to saari operations rollback ho jayein, jisse data consistency bani rahe.
+
+\section*{\textbf{\textcolor{red}{10. Performance Optimization}}}
+\subsection*{Select Related}
+\begin{lstlisting}[language=python]
+users = User.objects.select_related('profile').all()
+\end{lstlisting}
+- \textbf{\texttt{select\_related()}}: Jab ForeignKey relations efficiently load karne ho tab use hota hai, yeh ek hi query me data fetch karta hai.
+
+\subsection*{Prefetch Related}
+\begin{lstlisting}[language=python]
+users = User.objects.prefetch_related('groups').all()
+\end{lstlisting}
+- \textbf{\texttt{prefetch\_related()}}: Jab many-to-many ya reverse relationships ko efficiently fetch karna ho, tab use hota hai. Yeh alag query execute karke memory me optimize karta hai.
+
+\hrule
+
+
+
+\definecolor{lightgray}{rgb}{0.9, 0.9, 0.9}
+
+\title{\textcolor{blue}{Django Relationships: ForeignKey aur One-to-One}}
+\author{}
+\date{}
+
+\lstdefinestyle{customstyle}{
+  backgroundcolor=\color{lightgray},
+  basicstyle=\ttfamily,
+  frame=single,
+  breaklines=true,
+}
+
+\begin{document}
+
+\maketitle
+
+Django mein, models ke beech relationships ko define karne ke liye fields jaise \texttt{ForeignKey}, \texttt{OneToOneField}, aur \texttt{ManyToManyField} ka use kiya jata hai. Ye fields tables ko link karne aur database management ko simplify karne mein madad karte hain. Aaj hum \textbf{ForeignKey} (Many-to-One) aur \textbf{One-to-One} relationships par focus karenge aur dekhenge ki ye Django mein kaise kaam karte hain.
+
+\section*{\textcolor{blue}{1. ForeignKey (Many-to-One Relationship)}}
+
+\texttt{ForeignKey} ka use \textbf{Many-to-One} relationship define karne ke liye kiya jata hai. Is relationship mein, ek related model ka record current model ke multiple records ke saath associated ho sakta hai.
+
+\subsection*{\textcolor{blue}{ForeignKey Ka Syntax}}
+
+\begin{lstlisting}[style=customstyle]
+class Book(models.Model):
+    title = models.CharField(max_length=100)  % Book ka title
+    author = models.ForeignKey(  % Author se ForeignKey relationship
+        'Author',  % Related model
+        on_delete=models.CASCADE,  % Jab referenced object delete ho, to kya hoga
+    )
+\end{lstlisting}
+
+\begin{itemize}
+    \item \texttt{ForeignKey}: \texttt{Book} aur \texttt{Author} ke beech many-to-one relationship banata hai.
+    \item \texttt{'Author'}: Ye related model hai jisse ye field link karta hai.
+    \item \texttt{on\_delete=models.CASCADE}: Agar ek \texttt{Author} delete ho jata hai, to usse related sabhi \texttt{Book} records bhi delete ho jayenge.
+    \item \texttt{author}: Ye field \texttt{Book} mein hai jo \texttt{Author} se link karta hai.
+\end{itemize}
+
+\subsection*{\textcolor{blue}{ForeignKey Ka Example}}
+
+\begin{lstlisting}[style=customstyle]
+class Author(models.Model):
+    name = models.CharField(max_length=100)  % Author ka naam
+
+    def __str__(self):
+        return self.name
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)  % Book ka title
+    author = models.ForeignKey(  % Author se ForeignKey relationship
+        'Author',  % Related model 'Author'
+        on_delete=models.CASCADE,  % Author delete hone par related Book bhi delete ho jayegi
+    )
+
+    def __str__(self):
+        return self.title
+\end{lstlisting}
+
+\subsection*{\textcolor{blue}{Database Structure}}
+
+\begin{itemize}
+    \item \textbf{Author Table}:
+    \[
+    \begin{array}{|c|c|}
+    \hline
+    \text{id} & \text{name} \\
+    \hline
+    1 & \text{J.K. Rowling} \\
+    2 & \text{George R.R. Martin} \\
+    \hline
+    \end{array}
+    \]
+    
+    \item \textbf{Book Table}:
+    \[
+    \begin{array}{|c|c|c|}
+    \hline
+    \text{id} & \text{title} & \text{author\_id (ForeignKey)} \\
+    \hline
+    1 & \text{Harry Potter 1} & 1 \\
+    2 & \text{Harry Potter 2} & 1 \\
+    3 & \text{Game of Thrones} & 2 \\
+    \hline
+    \end{array}
+    \]
+    
+    \item \textbf{ForeignKey Kaise Kaam Karta Hai}:
+    \begin{itemize}
+        \item Har \texttt{Book} record ek \texttt{Author} se \texttt{author} field ke through link hota hai.
+        \item Ek hi \texttt{Author} ke multiple \texttt{Book} records ho sakte hain, lekin har \texttt{Book} ka sirf ek hi \texttt{Author} hoga.
+    \end{itemize}
+\end{itemize}
+
+\subsection*{\textcolor{blue}{Data Access Kaise Kare}}
+
+Agar aap ek book ka author access karna chahte hain, to aap is tarah kar sakte hain:
+
+\begin{lstlisting}[style=customstyle]
+book = Book.objects.first()
+print(book.author.name)  % Book ke author ka naam print karega
+\end{lstlisting}
+
+\section*{\textcolor{blue}{2. One-to-One Relationship}}
+
+Ek \textbf{One-to-One} relationship ka matlab hai ki ek model ka ek record dusre model ke ek record ke saath associated hota hai. Ye tab useful hota hai jab aap kisi model ko additional fields ya attributes ke saath extend karna chahte hain, bina original model ko modify kiye.
+
+\subsection*{\textcolor{blue}{One-to-One Relationship Ka Syntax}}
+
+\begin{lstlisting}[style=customstyle]
+class Employee(models.Model):
+    name = models.CharField(max_length=100)  % Employee ka naam
+
+class EmployeeDetails(models.Model):
+    employee = models.OneToOneField(  % One-to-One relationship
+        'Employee',  % Related model
+        on_delete=models.CASCADE,  % Jab related Employee delete ho, to kya hoga
+    )
+    phone = models.CharField(max_length=15)  % Employee ka phone number
+    address = models.TextField()  % Employee ka address
+\end{lstlisting}
+
+\begin{itemize}
+    \item \texttt{OneToOneField}: \texttt{EmployeeDetails} aur \texttt{Employee} ke beech one-to-one relationship banata hai.
+    \item \texttt{'Employee'}: Ye model hai jisse ye field related hai (target model).
+    \item \texttt{on\_delete=models.CASCADE}: Agar ek \texttt{Employee} delete ho jata hai, to uska associated \texttt{EmployeeDetails} bhi delete ho jayega.
+    \item \texttt{employee}: Ye field \texttt{EmployeeDetails} mein hai jo \texttt{Employee} se link karta hai.
+\end{itemize}
+
+\subsection*{\textcolor{blue}{One-to-One Relationship Ka Example}}
+
+\begin{lstlisting}[style=customstyle]
+class Employee(models.Model):
+    name = models.CharField(max_length=100)  % Employee ka naam
+
+    def __str__(self):
+        return self.name
+
+class EmployeeDetails(models.Model):
+    employee = models.OneToOneField(  % Employee se One-to-One relationship
+        'Employee',  % Related model
+        on_delete=models.CASCADE,  % Employee delete hone par related EmployeeDetails bhi delete ho jayega
+    )
+    phone = models.CharField(max_length=15)  % Employee ka phone number
+    address = models.TextField()  % Employee ka address
+
+    def __str__(self):
+        return f"{self.employee.name}'s Details"
+\end{lstlisting}
+
+\subsection*{\textcolor{blue}{Database Structure}}
+
+\begin{itemize}
+    \item \textbf{Employee Table}:
+    \[
+    \begin{array}{|c|c|}
+    \hline
+    \text{id} & \text{name} \\
+    \hline
+    1 & \text{John Doe} \\
+    2 & \text{Jane Smith} \\
+    \hline
+    \end{array}
+    \]
+
+    \item \textbf{EmployeeDetails Table} (foreign key column \texttt{employee\_id} hai):
+    \[
+    \begin{array}{|c|c|c|c|}
+    \hline
+    \text{id} & \text{employee\_id (ForeignKey)} & \text{phone} & \text{address} \\
+    \hline
+    1 & 1 & \text{123-456-7890} & \text{1234 Elm St} \\
+    2 & 2 & \text{987-654-3210} & \text{5678 Oak Ave} \\
+    \hline
+    \end{array}
+    \]
+\end{itemize}
+
+\subsection*{\textcolor{blue}{One-to-One Mein Foreign Key Column Ka Naam}}
+
+By default, related table (\texttt{EmployeeDetails}) mein foreign key column ka naam \\
+\texttt{<related\_model\_name>\_id} hota hai. Is case mein, ye \texttt{employee\_id} hoga.
+
+\subsection*{\textcolor{blue}{Foreign Key Column Ka Naam Customize Kare}}
+
+Agar aap foreign key column ka naam customize karna chahte hain, to \texttt{db\_column} option ka use kar sakte hain:
+
+\begin{lstlisting}[style=customstyle]
+class EmployeeDetails(models.Model):
+    employee = models.OneToOneField(
+        'Employee',
+        on_delete=models.CASCADE,
+        db_column='emp_id'  % Foreign key column ka custom naam
+    )
+    phone = models.CharField(max_length=15)
+    address = models.TextField()
+\end{lstlisting}
+
+===============================
+===============================
+\hrule
+
+\definecolor{myblue}{rgb}{0.0, 0.0, 1.0}
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+
+\lstset{
+    backgroundcolor=\color{lightgray},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    literate={__}{{\_}{\_}}1
+}
+
+\title{\textbf{\Huge Using \texttt{Q()} in Django Queries}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{\textcolor{myblue}{Step-by-Step Example with Models and Queries}}
+
+\subsection*{\textcolor{myblue}{Why Use \texttt{Q()} in Django Queries?}}
+
+Jab hume complex queries likhni hoti hain, jaise:
+\begin{itemize}
+    \item Multiple conditions ko **AND** ya **OR** ke saath combine karna.
+    \item Related models (ForeignKey wale fields) pe filtering karni.
+    \item **Dynamic filtering** jisme kabhi condition change ho sakti hai.
+\end{itemize}
+Tab \texttt{Q()} ka use karna best hota hai.  
+
+Agar hum \texttt{Q()} ka use nahi karenge, toh **chained filter()** method likhna padega, jo har baar **AND condition** hi lagayega, aur \texttt{|} (OR) ka use nahi kar paayenge.
+
+\textbf{Problem Without \texttt{Q()}:}
+\begin{lstlisting}[language=Python]
+# Yeh sirf AND condition ko support karega
+tasks = Task.objects.filter(user__username='JohnDoe').filter(status='completed')
+\end{lstlisting}
+
+Yahan \texttt{AND} to work karega, lekin agar hume **OR** ya complex conditions likhni ho toh problem ho sakti hai.  
+Isi wajah se hume \texttt{Q()} ka use karna padta hai.
+
+\subsection*{\textcolor{myblue}{Models}}
+
+Hum do models use karenge: \texttt{User} aur \texttt{Task}.  
+\texttt{User} mein \texttt{username} hoga, aur \texttt{Task} ka ek ForeignKey relation hoga \texttt{User} ke saath.
+
+\begin{lstlisting}[language=Python]
+from django.db import models
+
+class User(models.Model):
+    username = models.CharField(max_length=100)
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.username
+
+class Task(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  
+    status = models.CharField(max_length=20)  
+
+    def __str__(self):
+        return self.title
+\end{lstlisting}
+
+\subsection*{\textcolor{myblue}{Step 1: Using \texttt{Q()} for Complex Queries}}
+
+Ab hum \texttt{Q()} object use karke \texttt{Task} objects ko filter karenge.
+
+\subsubsection*{\textcolor{myblue}{Example 1: Basic Query with \texttt{Q()}}}
+
+Hum aise tasks filter karna chahte hain jisme:
+\begin{itemize}
+    \item \texttt{User} ka \texttt{username} \texttt{'JohnDoe'} ho.
+    \item \texttt{Task} ka \texttt{status} \texttt{'completed'} ho.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+from django.db.models import Q
+from .models import Task
+
+tasks = Task.objects.filter(
+    Q(user__username='JohnDoe') & Q(status='completed')
+)
+\end{lstlisting}
+
+\textbf{Explanation:}
+\begin{itemize}
+    \item \texttt{Q(user\_\_username='JohnDoe')} - \texttt{Task} ko filter karta hai jisme \texttt{User} ka \texttt{username} 'JohnDoe' ho.
+    \item \texttt{Q(status='completed')} - Sirf wahi tasks lega jisme \texttt{status} 'completed' ho.
+    \item \texttt{\&} (AND) - Dono conditions true honi chahiye tabhi record milega.
+\end{itemize}
+
+\subsubsection*{\textcolor{myblue}{Example 2: Using \texttt{Q()} with \texttt{OR} Condition}}
+
+Agar hum chahte hain ki tasks tabhi aaye jab:
+\begin{itemize}
+    \item \texttt{username} \texttt{'JohnDoe'} ho \textbf{ya phir} \texttt{status} \texttt{'completed'} ho.
+\end{itemize}
+
+\begin{lstlisting}[language=Python]
+tasks = Task.objects.filter(
+    Q(user__username='JohnDoe') | Q(status='completed')
+)
+\end{lstlisting}
+
+\textbf{Without \texttt{Q()}, yeh possible nahi hota!}
+
+\textbf{Explanation:}
+\begin{itemize}
+    \item \texttt{|} (OR) - Koi bhi ek condition true ho toh record return hoga.
+\end{itemize}
+
+\subsubsection*{\textcolor{myblue}{Example 3: Filtering with \texttt{\_\_in} for Multiple Values}}
+
+Agar hume multiple usernames aur multiple statuses ke basis pe filter karna ho?
+
+\begin{lstlisting}[language=Python]
+usernames = ['JohnDoe', 'JaneSmith']
+statuses = ['completed', 'pending']
+
+tasks = Task.objects.filter(
+    Q(user__username__in=usernames) & Q(status__in=statuses)
+)
+\end{lstlisting}
+
+\textbf{Explanation:}
+\begin{itemize}
+    \item \texttt{user\_\_username\_\_in=usernames} - \texttt{User} ka \texttt{username} \texttt{JohnDoe} ya \texttt{JaneSmith} ho sakta hai.
+    \item \texttt{status\_\_in=statuses} - \texttt{Task} ka \texttt{status} \texttt{completed} ya \texttt{pending} ho sakta hai.
+\end{itemize}
+
+\subsubsection*{\textcolor{myblue}{Example 4: Checking for Null Values in Related Models}}
+
+Agar hume aise tasks chahiye jisme \texttt{User} ke paas \texttt{email} na ho (i.e., NULL ho):
+
+\begin{lstlisting}[language=Python]
+tasks = Task.objects.filter(
+    Q(user__email__isnull=True)
+)
+\end{lstlisting}
+
+\textbf{Without \texttt{Q()}, yeh query likhna complex ho sakta hai!}
+
+\subsection*{\textcolor{myblue}{Conclusion}}
+
+\texttt{Q()} object Django me queries ko flexible aur powerful banata hai.  
+Agar aapko complex filtering karni hai toh \texttt{Q()} ka use karna best practice hai! ��  
+Agar hum \texttt{Q()} ka use nahi karenge toh:
+\begin{itemize}
+    \item **AND conditions** hi use ho payengi.
+    \item **OR conditions** likhna mushkil ho jayega.
+    \item **Dynamic conditions** implement karna hard ho jayega.
+\end{itemize}
+
+Toh agar aapko advanced queries likhni hain, toh **Q() ka use zaroor karein!** ��
+
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\definecolor{myred}{rgb}{1.0, 0.0, 0.0}
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+
+\lstset{
+    backgroundcolor=\color{lightgray},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    literate={__}{{\_}{\_}}1
+}
+
+\begin{document}
+
+\textbf{\textcolor{myred}{Bilkul, main aapko ek alag aur simple example ke saath samjhata hoon. Is baar tables ka context thoda badalte hain.}}
+
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+queries.append(Q(order__products__name__in=product_list))
+\end{lstlisting}
+
+\section*{Scenario:}
+
+Maan lo, humare paas 2 tables hain:
+
+\begin{itemize}
+    \item \textbf{Order Table}:
+    \begin{itemize}
+        \item \textbf{order\_id} (Primary Key)
+        \item \textbf{order\_name}
+        \item \textbf{products} (Ye ek Many-to-Many relationship hai jo Product Table se link hota hai)
+    \end{itemize}
+    
+    \item \textbf{Product Table}:
+    \begin{itemize}
+        \item \textbf{product\_id} (Primary Key)
+        \item \textbf{name} (Product ka naam)
+    \end{itemize}
+\end{itemize}
+
+\section*{Example:}
+
+\subsection*{Product Table:}
+
+\[
+\begin{array}{|c|c|}
+\hline
+\textbf{product\_id} & \textbf{name} \\
+\hline
+1 & Product X \\
+2 & Product Y \\
+3 & Product Z \\
+\hline
+\end{array}
+\]
+\\
+\\
+
+\subsection*{Order Table:}
+
+\[
+\begin{array}{|c|c|c|}
+\hline
+\textbf{order\_id} & \textbf{order\_name} & \textbf{products} \\
+\hline
+1 & Order 1 & [Product X, Product Y] \\
+2 & Order 2 & [Product X] \\
+3 & Order 3 & [Product Z] \\
+\hline
+\end{array}
+\]
+
+\section*{`product\_list` List:}
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+product_list = ['Product X']
+\end{lstlisting}
+
+\section*{Ab samajhte hain ki ye line kya karti hai:}
+
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+queries.append(Q(order__products__name__in=product_list))
+\end{lstlisting}
+
+\section*{Step-by-Step Explanation:}
+
+\begin{itemize}
+  \item \textbf{\lstinline[breaklines=true]|Q(order__products__name__in=product_list)|}:
+    \begin{itemize}
+      \item \textbf{\lstinline[breaklines=true]|order|}: Ye \lstinline[breaklines=true]|Order| model ko refer karta hai.
+      \item \textbf{\lstinline[breaklines=true]|products|}: Ye \textbf{Order} model ki field hai jo \textbf{Many-to-Many relationship} ko represent karti hai. Matlab har order ke multiple products ho sakte hain.
+      \item \textbf{\lstinline[breaklines=true]|name|}: Ye \lstinline[breaklines=true]|Product| table ke \lstinline[breaklines=true]|name| field ko refer karta hai, jo product ka naam store karta hai.
+      \item \textbf{\lstinline[breaklines=true]|in=product_list|}: \lstinline[breaklines=true]|product_list| ek list hai jisme hum check kar rahe hain ki \lstinline[breaklines=true]|Product| table ke \lstinline[breaklines=true]|name| field ka koi bhi naam is list mein hai ya nahi. Yahan, \lstinline[breaklines=true]|product_list| mein \lstinline[breaklines=true]|['Product X']| hai, toh hum dekh rahe hain ki orders ke \textbf{products} ke naam mein \lstinline[breaklines=true]|Product X| hai ya nahi.
+    \end{itemize}
+\end{itemize}
+
+
+\section*{Example ko samajhte hain:}
+
+\begin{itemize}
+  \item \textbf{Order 1}:
+    \begin{itemize}
+      \item \textbf{Products}: \lstinline[breaklines=true]|Product X|, \lstinline[breaklines=true]|Product Y|
+      \item \textbf{Condition}: Hum dekh rahe hain ki \lstinline[breaklines=true]|Product X| is \lstinline[breaklines=true]|product_list| mein hai ya nahi.
+      \item \textbf{Result}: \textbf{Order 1} match karega aur query mein aayega.
+    \end{itemize}
+
+  \item \textbf{Order 2}:
+    \begin{itemize}
+      \item \textbf{Products}: \lstinline[breaklines=true]|Product X|
+      \item \textbf{Condition}: Hum dekh rahe hain ki \lstinline[breaklines=true]|Product X| is \lstinline[breaklines=true]|product_list| mein hai ya nahi.
+      \item \textbf{Result}: \textbf{Order 2} match karega aur query mein aayega.
+    \end{itemize}
+
+  \item \textbf{Order 3}:
+    \begin{itemize}
+      \item \textbf{Products}: \lstinline[breaklines=true]|Product Z|
+      \item \textbf{Condition}: Hum dekh rahe hain ki \lstinline[breaklines=true]|Product X| is \lstinline[breaklines=true]|product_list| mein hai ya nahi.
+      \item \textbf{Result}: \textbf{Order 3} \textbf{match nahi karega}, kyunki \lstinline[breaklines=true]|Product Z| is list mein nahi hai.
+    \end{itemize}
+\end{itemize}
+
+
+\section*{Final Filtered Result:}
+Is query ke through \textbf{sirf wo orders} filter honge jisme \textbf{products} ka naam `Product X` list mein ho. Yani, \textbf{Order 1} aur \textbf{Order 2} match karenge, aur \textbf{Order 3} match nahi karega.
+
+\section*{SQL Query (for illustration):}
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+SELECT * FROM order
+WHERE products.name IN ('Product X')
+\end{lstlisting}
+
+\section*{Kyun use karein \texttt{Q()}?}
+Agar hum \texttt{Q()} ka use nahi karenge aur directly \texttt{filter()} ka use karenge toh problem ho sakti hai:
+
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+queries.append(filter(order__products__name__in=product_list))
+\end{lstlisting}
+
+Ye sirf ek simple condition ko handle karega, lekin agar hume:
+\begin{itemize}
+    \item Multiple conditions combine karni ho (AND / OR)
+    \item Dynamic queries likhni ho jisme kabhi condition change ho sakti hai
+    \item Complex lookups perform karni ho
+\end{itemize}
+Toh \textbf{Q()} ka use karna best hota hai.
+
+\section*{Conclusion:}
+Aapka \textbf{`queries.append(Q(order\_\_products\_\_name\_\_in=product_\_list))`} ka matlab hai: 
+
+\textbf{"Hum un orders ko filter karna chahte hain jinke associated products ka naam `Product X` list mein hai."}
+
+Is query ko run karne par \textbf{Order 1} aur \textbf{Order 2} milenge, jo \textbf{Product X} ko apne products mein rakhte hain.
+
+Yeh example aapko zyada clear ho gaya hoga! ����
+
+===============================
+===============================
+\hrule
+
+% Define custom colors
+\definecolor{lightgray}{gray}{0.9}
+\definecolor{blue}{rgb}{0,0,1}
+\definecolor{green}{rgb}{0,0.5,0}
+
+% Configure lstlisting for Python code
+\lstset{
+    language=Python,
+    backgroundcolor=\color{lightgray},
+    basicstyle=\ttfamily,
+    keywordstyle=\bfseries\color{blue},
+    commentstyle=\itshape\color{green!50!black},
+    stringstyle=\color{orange},
+    showstringspaces=false,
+    frame=single,
+    rulecolor=\color{black}
+}
+
+\begin{document}
+
+% Main heading
+{\color{blue}\section*{Table Naming in Django Models}}
+
+\textbf{{\color{blue}1. Default Table Name:}} \\
+Agar aap **koi custom table name specify nahi karte**, toh Django **automatically** ek table name generate karega jo **app name aur model name** ka combination hoga. Yeh name **lowercase** hoga aur words ko **underscore** se separate karega.  
+
+\textbf{Format}: \texttt{appname\_modelname}  
+
+\textbf{Example}:  
+Maan lo ek Django app hai \texttt{blog}, jisme ek model hai \texttt{BlogPost}. Agar hum **koi custom name specify nahi karte**, toh Django automatically table ka naam **blog\_blogpost** bana dega.
+
+\begin{lstlisting}[language=Python]
+class BlogPost(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+\end{lstlisting}
+\textbf{Generated Table Name}: \texttt{blog\_blogpost}  
+
+\textbf{{\color{blue}2. Custom Table Name:}} \\
+Agar aap **apni pasand ka table name rakhna chahte hain**, toh aap \texttt{Meta} class ke andar **db\_table** specify kar sakte hain:
+
+\begin{lstlisting}[language=Python]
+class BlogPost(models.Model):
+    title = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'custom_table_name'
+\end{lstlisting}
+
+\textbf{Result}: Django ab \texttt{blog\_blogpost} ke jagah **custom\_table\_name** use karega.
+
+\textbf{{\color{blue}3. Plural Form in Admin:}} \\
+Django by default model name ka **plural form** generate karta hai **admin panel** me.  
+
+\textbf{Example:}  
+Agar aapka model \texttt{BlogPost} hai, toh Django isko **"BlogPosts"** likh ke dikhayega.  
+
+Agar aap **plural form ko customize** karna chahte hain, toh aap \texttt{verbose\_name\_plural} ka use kar sakte hain:
+
+\begin{lstlisting}[language=Python]
+class BlogPost(models.Model):
+    title = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = "Blog Entries"
+\end{lstlisting}
+
+\textbf{Result}: Django ab **"BlogPosts"** ke jagah **"Blog Entries"** show karega.
+
+\textbf{{\color{blue}4. Primary Key:}} \\
+Django **automatically** har table me ek **primary key** field add karta hai **id** naam se, agar aap explicitly define nahi karte.  
+
+\textbf{Example:}  
+Agar aap ye model likhte hain:
+
+\begin{lstlisting}[language=Python]
+class BlogPost(models.Model):
+    title = models.CharField(max_length=100)
+\end{lstlisting}
+
+Toh Django automatically ye SQL create karega:
+
+\begin{lstlisting}[language=SQL]
+CREATE TABLE blog_blogpost (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(100)
+);
+\end{lstlisting}
+
+Agar aap **custom primary key** rakhna chahte hain, toh manually define kar sakte hain:
+
+\begin{lstlisting}[language=Python]
+class BlogPost(models.Model):
+    blog_id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=100)
+\end{lstlisting}
+
+\textbf{{\color{blue}5. Migrations:}} \\
+Django **models ko database tables me convert** karne ke liye **migrations** ka use karta hai. Jab bhi aap **naya model banayein ya existing model me change karein**, toh aapko migrations run karni padti hai.  
+
+\textbf{Commands:}
+\begin{lstlisting}[language=bash]
+python manage.py makemigrations
+python manage.py migrate
+\end{lstlisting}
+
+\textbf{Explanation:}
+- \texttt{makemigrations}: Ye **model changes ko detect** karke migration file generate karta hai.
+- \texttt{migrate}: Ye migration file ko **database par apply** karta hai, taaki tables update ho sakein.
+
+\textbf{{\color{blue}6. Field Naming:}} \\
+Django ke field names likhne ka **best practice**:
+
+✔ **Lowercase aur underscore** ka use karein (e.g., \texttt{first\_name}).  
+❌ **CamelCase na use karein** (e.g., \texttt{FirstName}, \texttt{firstName}).  
+❌ **Python ke reserved keywords avoid karein** (e.g., \texttt{class}, \texttt{def}, \texttt{for}).  
+
+\textbf{Example:}
+\begin{lstlisting}[language=Python]
+class Employee(models.Model):
+    first_name = models.CharField(max_length=50)  # ✔ Correct
+    last_name = models.CharField(max_length=50)   # ✔ Correct
+    age = models.IntegerField()                   # ✔ Correct
+    # class = models.CharField(max_length=50)     # ❌ Wrong (Python keyword)
+\end{lstlisting}
+
+\textbf{{\color{blue}Example Model with Everything}}:  
+Yahaan ek full example hai jisme **custom table name, primary key, verbose\_name\_plural sab kuch define** kiya gaya hai:
+
+\begin{lstlisting}[language=Python]
+from django.db import models
+
+class BlogPost(models.Model):
+    blog_id = models.AutoField(primary_key=True)  # Custom primary key
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    published_date = models.DateTimeField()
+
+    class Meta:
+        db_table = 'blog_posts'  # Custom table name
+        verbose_name_plural = "Blog Posts"  # Customize admin display
+\end{lstlisting}
+
+\textbf{Final Result:}
+- Table ka naam **blog\_posts** hoga.
+- **Primary key** \texttt{blog\_id} hogi (default \texttt{id} nahi).
+- **Admin panel me "Blog Posts" dikhayega** (default "BlogPosts" nahi).
+
+
+===============================
+===============================
+\hrule
+
+% Define custom colors
+\definecolor{lightgray}{gray}{0.9}
+\definecolor{blue}{rgb}{0,0,1}
+\definecolor{green}{rgb}{0,0.5,0}
+
+% Configure lstlisting for Python code
+\lstset{
+    language=Python,
+    backgroundcolor=\color{lightgray},
+    basicstyle=\ttfamily,
+    keywordstyle=\bfseries\color{blue},
+    commentstyle=\itshape\color{green!50!black},
+    stringstyle=\color{orange},
+    showstringspaces=false,
+    frame=single,
+    rulecolor=\color{black}
+}
+
+\begin{document}
+
+% Main heading
+{\color{blue}\section*{Foreign Key Naming in Django}}
+
+\textbf{{\color{blue}1. Default Foreign Key Field Name:}} \\
+Agar aap ek **foreign key field define karte hain** Django model me, toh Django **automatically** uska database column **is format me create karta hai**:  
+
+\textbf{\texttt{field\_name\_id}}  
+
+Yahaan:  
+\begin{itemize}
+  \item \textbf{\lstinline[breaklines=true]|field_name|}: Model me jo foreign key field ka naam diya hai.
+\item \textbf{\texttt{\_id}}: Django automatically \textbf{"\_id" suffix} add karta hai taaki database me yeh clear ho ki yeh \textbf{foreign key ka reference hai}.
+
+\end{itemize}
+
+
+\textbf{Example:}  
+Agar aap yeh models likhte hain:  
+\begin{lstlisting}[language=Python]
+from django.db import models
+
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+\end{lstlisting}
+
+Toh Django **"book" table** me ek column create karega:  
+\begin{lstlisting}[language=SQL]
+CREATE TABLE book (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(100),
+    author_id INTEGER REFERENCES author(id)
+);
+\end{lstlisting}
+
+\textbf{Generated Table:}  
+\begin{tcolorbox}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Table Name}  & \textbf{Columns} \\ \hline
+\texttt{author}      & \texttt{id} (primary key), \texttt{name} \\ \hline
+\texttt{book}        & \texttt{id} (primary key), \texttt{title}, \texttt{author\_id} (foreign key) \\ \hline
+\end{tabular}
+\end{tcolorbox}
+
+\textbf{�� Note:}  
+- \texttt{author} field ka actual **database column** **\texttt{author\_id}** hoga, na ki sirf **\texttt{author}**.  
+- Par Django **Python code me \texttt{author} field se access** karega, \texttt{author\_id} ka direct use nahi hoga.  
+
+---
+
+\textbf{{\color{blue}2. Custom Column Name:}} \\
+Agar aap **foreign key ka database column name change** karna chahte hain, toh \texttt{db\_column} use kar sakte hain:  
+
+\begin{lstlisting}[language=Python]
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, db_column='writer_id')
+\end{lstlisting}
+
+\textbf{Result:}  
+- **Default:** \texttt{author\_id}  
+- **Custom:** \texttt{writer\_id}  
+
+\textbf{SQL Table Structure After This Change:}  
+\begin{lstlisting}[language=SQL]
+CREATE TABLE book (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(100),
+    writer_id INTEGER REFERENCES author(id)
+);
+\end{lstlisting}
+
+---
+
+\textbf{{\color{blue}3. Foreign Key Relationships:}} \\
+Django **automatically constraints add karta hai** taaki foreign key sirf valid records ki taraf point kare.  
+
+✔ Default behavior yeh hota hai ki foreign key **related model ke primary key** ko reference karegi.  
+
+\textbf{Example:}  
+\begin{lstlisting}[language=Python]
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+\end{lstlisting}
+\begin{lstlisting}[language=SQL]
+CREATE TABLE book (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(100),
+    author_id INTEGER REFERENCES author(id) ON DELETE CASCADE
+);
+\end{lstlisting}
+
+\textbf{ON DELETE CASCADE}:  
+Agar **Author delete hota hai**, toh usse related **sabhi books bhi delete ho jayengi**.  
+
+---
+
+\textbf{{\color{blue}4. Field in Query:}} \\
+Foreign key se related object ko query karne ke liye aap **field name hi use karte hain, na ki column name**.  
+
+\textbf{Example:}  
+\begin{lstlisting}[language=Python]
+book = Book.objects.get(id=1)
+print(book.author)  # Returns Author object
+print(book.author.name)  # Prints author's name
+\end{lstlisting}
+
+\textbf{�� Important:}  
+- **Django automatically related object fetch kar leta hai** (e.g., \texttt{book.author} returns \texttt{Author} object).  
+- **\texttt{book.author\_id} use karne ki zaroorat nahi hoti**, par agar sirf **ID chahiye ho toh use kar sakte hain**:  
+
+\begin{lstlisting}[language=Python]
+print(book.author_id)  # Prints only the author's ID
+\end{lstlisting}
+
+---
+
+\textbf{{\color{blue}5. Best Practices:}}  
+
+✔ **Consistent naming convention follow karein** (e.g., \texttt{author} instead of \texttt{a\_id}).  
+✔ **Use descriptive names** (e.g., \texttt{related\_author} agar multiple relations ho).  
+✔ **ON DELETE behavior samjhein** (e.g., \texttt{CASCADE}, \texttt{SET NULL}).  
+
+\textbf{Example with All Best Practices:}  
+
+\begin{lstlisting}[language=Python]
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    writer = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, db_column="writer_id")
+
+    class Meta:
+        db_table = 'book_collection'
+\end{lstlisting}
+
+\textbf{What Happens Here?}  
+- **Custom column name:** \texttt{writer\_id} instead of \texttt{author\_id}.  
+- **Custom table name:** \texttt{book\_collection} instead of \texttt{book}.  
+- **ON DELETE SET NULL:** Agar **author delete hota hai**, toh **book ka foreign key NULL ho jayega** instead of getting deleted.  
+
+---
+
+\textbf{{\color{blue}Final Notes:}}  
+- Foreign key ke liye **Django by default "\_id" suffix lagata hai** table me, par Python code me nahi.  
+- Queries me **foreign key ka field name hi use hota hai** (e.g., \texttt{book.author}), na ki **database column name (e.g., \texttt{author\_id})**.  
+- **Best practices follow karein** taaki future me readability aur maintainability achhi rahe. 
+
+===============================
+===============================
+\hrule
+
+% Define background color for code blocks
+\definecolor{lightgray}{rgb}{0.9, 0.9, 0.9}
+\definecolor{blue}{rgb}{0, 0, 1}
+\definecolor{red}{rgb}{1, 0, 0}
+\definecolor{green}{rgb}{0, 0.5, 0}
+
+\begin{document}
+
+\textbf{\textcolor{red}{Understanding Foreign Keys and Primary Keys in Django}}
+
+\section*{Scenario Description}
+
+Agar \texttt{user\_id} ek field hai Django model me aur yeh kisi **dusre table ko reference** karta hai (e.g., \texttt{UserSettings}), toh iska **matlab yeh hai ki** \texttt{user\_id} **foreign key hai**, jo \texttt{UserSettings} table ke **primary key** (jo ki \texttt{id} ya \texttt{uuid} ho sakti hai) ko store karega.  
+
+\textbf{�� Key Points:}
+- Har table ka ek **primary key (PK)** hota hai jo **uniquely identify karta hai har row**.
+- Jab ek **foreign key (FK)** kisi **dusre table ke PK ko reference karti hai**, toh tables ke beech **relationship establish hota hai**.
+- **Foreign key ka datatype PK ke datatype ke sath match hona chahiye** (e.g., agar PK UUID hai toh FK bhi UUID hoga).  
+
+---
+
+\section*{Model Example}
+
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+import uuid
+from django.db import models
+
+class UserSettings(models.Model):
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user_name = models.CharField(max_length=255)
+
+class SomeOtherModel(models.Model):
+    user_id = models.ForeignKey(UserSettings, on_delete=models.CASCADE)
+\end{lstlisting}
+
+\textbf{�� Explanation:}
+- **UserSettings Table:**  
+  - **uuid** ek **primary key hai** aur UUID format me store hoti hai.
+  - **user\_name** ek simple text field hai.  
+
+- **SomeOtherModel Table:**  
+  - **user\_id** ek **foreign key hai**, jo \texttt{UserSettings} ke **uuid primary key** ko reference karta hai.  
+  - Agar **UserSettings ka ek row delete hota hai**, toh **uska related row bhi delete ho jayega** (\texttt{on\_delete=models.CASCADE} ki wajah se).  
+
+---
+
+\section*{What Happens?}
+
+\begin{itemize}
+    \item \textbf{\texttt{user\_id} field} in \texttt{SomeOtherModel} will store the **primary key value** of the corresponding row from \texttt{UserSettings}.
+    \item Agar **UserSettings ka primary key UUID hai**, toh \texttt{user\_id} field bhi **UUID store karega**.
+    \item Agar **UserSettings ka primary key integer ID hai**, toh \texttt{user\_id} field bhi **integer store karega**.
+\end{itemize}
+
+\textbf{Example Table Structure (When Using UUID as Primary Key):}
+\begin{tcolorbox}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Table Name}  & \textbf{Columns} \\ \hline
+\texttt{user\_settings}      & \texttt{uuid} (Primary Key), \texttt{user\_name} \\ \hline
+\texttt{some\_other\_model}  & \texttt{id} (Primary Key), \texttt{user\_id} (Foreign Key to \texttt{user\_settings.uuid}) \\ \hline
+\end{tabular}
+\end{tcolorbox}
+
+\textbf{�� Important Notes:}
+- Agar aap **UUIDField ko primary key banate hain**, toh **ForeignKey bhi UUIDField ka reference lega**.
+- Agar aap default \texttt{id} (integer) primary key use karte hain, toh **foreign key bhi integer store karega**.
+- **\texttt{on\_delete=models.CASCADE} ka matlab hai ki** agar \texttt{UserSettings} ka ek row delete hota hai, toh **uska corresponding row bhi SomeOtherModel me delete ho jayega**.  
+
+---
+
+\section*{Real-World Example}
+
+Agar ek **UserSettings table** me **users ke preferences store ho rahe hain**, aur ek **SomeOtherModel table** me users ke related records ho, toh:  
+
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+# UserSettings Table (UUID Primary Key)
+| uuid                                  | user_name  |
+|---------------------------------------|------------|
+| 550e8400-e29b-41d4-a716-446655440000  | Alice      |
+| 123e4567-e89b-12d3-a456-426614174000  | Bob        |
+
+# SomeOtherModel Table (Foreign Key referencing UserSettings)
+| id  | user_id                              |
+|-----|--------------------------------------|
+| 1   | 550e8400-e29b-41d4-a716-446655440000 |
+| 2   | 123e4567-e89b-12d3-a456-426614174000 |
+\end{lstlisting}
+
+Agar \textbf{Alice ka record delete hota hai}, toh uska **related row bhi SomeOtherModel me delete ho jayega** because of **CASCADE**.
+
+---
+
+\section*{Querying the Data}
+
+\textbf{Fetch related data:}
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+# Fetch user settings for a specific entry
+obj = SomeOtherModel.objects.get(id=1)
+print(obj.user_id)  # Prints UUID of UserSettings record
+print(obj.user_id.user_name)  # Prints 'Alice'
+\end{lstlisting}
+
+\textbf{�� Explanation:}
+- **\texttt{obj.user\_id}** → UserSettings ka UUID return karega.
+- **\texttt{obj.user\_id.user\_name}** → Directly related user ka naam fetch karega.
+
+===============================
+===============================
+\hrule
+
+% Define custom colors
+\definecolor{lightgray}{gray}{0.9}
+\definecolor{blue}{rgb}{0,0,1}
+
+% Configure lstlisting for Python code
+\lstset{
+    language=Python,
+    backgroundcolor=\color{lightgray},
+    basicstyle=\ttfamily,
+    keywordstyle=\bfseries\color{blue},
+    commentstyle=\itshape\color{green!50!black},
+    stringstyle=\color{orange},
+    showstringspaces=false,
+    frame=single,
+    rulecolor=\color{black}
+}
+
+\begin{document}
+% Main heading
+{\color{blue}\section*{Understanding the Relationship Between Tables Through Foreign Keys}}
+
+\texttt{main\_courselicense} table mein do foreign keys hain—\\
+\texttt{main\_courselicense\_course\_id\_id\_2b75b991\_fk\_main\_course\_uuid} aur \texttt{main\_courselicense\_project\_id\_id\_be155323\_fk\_main\_project\_uuid}—jo yeh dikhata hai ki \texttt{main\_courselicense} table \texttt{main\_course} aur \texttt{main\_project} tables ke saath linked hai in foreign keys ke zariye. Yeh iska matlab hai:
+
+\textbf{{\color{blue}1. \texttt{main\_courselicense\_course\_id\_id\_2b75b991\_fk\_main\_course\_uuid}:}} \\
+- Yeh foreign key \texttt{main\_course} table mein ek record ko refer karta hai. \\
+- Yeh ek \texttt{Course License} ko ek specific \texttt{Course} (jo \texttt{main\_course} table mein hai) se link karta hai. \\
+- Iska matlab hai ki \texttt{main\_courselicense} table ka har entry ek specific course ke saath associated hai
+\\
+(through \texttt{main\_course} table).
+
+\textbf{{\color{blue}2. \texttt{main\_courselicense\_project\_id\_id\_be155323\_fk\_main\_project\_uuid}:}} \\
+- Yeh foreign key \texttt{main\_project} table mein ek record ko refer karta hai. \\
+- Yeh ek \texttt{Course License} ko ek specific \texttt{Project} (jo \texttt{main\_project} table mein hai) se link karta hai. \\
+- Iska matlab hai ki \texttt{main\_courselicense} table ka har entry ek specific project ke saath associated hai 
+\\
+(through \texttt{main\_project} table).
+
+\textbf{{\color{blue}Understanding the Relationship:}} \\
+- \texttt{main\_courselicense} table ek \texttt{license} ko represent karta hai jo kisi specific \texttt{project} aur \texttt{course} ke saath associated ho sakta hai. \\
+- Yeh do foreign keys yeh dikhate hain:
+   - Ek \texttt{Course License} ek specific \texttt{Course} ke saath tied ho sakta hai 
+   \\
+   (\texttt{main\_courselicense\_course\_id\_id\_2b75b991\_fk\_main\_course\_uuid} ke zariye, jo \texttt{main\_course} table ko reference karta hai).
+   - Ek \texttt{Course License} ek specific \texttt{Project} ke saath bhi tied ho sakta hai 
+   \\
+   (\texttt{main\_courselicense\_project\_id\_id\_be155323\_fk\_main\_project\_uuid} ke zariye, jo \texttt{main\_project} table ko reference karta hai).
+
+\textbf{{\color{blue}Example in Database Terms:}} \\
+Isse ek example ke zariye samajhte hain:
+- \textbf{\texttt{Course}}: Ek course ek training module, class, ya lesson ho sakta hai, jo \texttt{main\_course} table mein represent hota hai.
+- \textbf{\texttt{Project}}: Ek project ek initiative ya courses ka collection ho sakta hai jo ek specific goal ya activity ke related ho, jo \texttt{main\_project} table mein represent hota hai.
+- \textbf{\texttt{Course License}}: Ek license jo kisi specific course ya project ke liye hota hai aur ek user ya group ko access deta hai.
+
+Aapke database mein:
+- \texttt{main\_courselicense\_course\_id\_id\_2b75b991\_fk\_main\_course\_uuid} \texttt{main\_course} table se course ka ID rakhta hoga.
+- \texttt{main\_courselicense\_project\_id\_id\_be155323\_fk\_main\_project\_uuid} \texttt{main\_project} table se project ka ID rakhta hoga.
+
+\textbf{{\color{blue}Foreign Key Example in Django Models:}} \\
+Isse aur clarify karne ke liye, yeh foreign keys Django models mein kuch is tarah represent ho sakte hain:
+
+\begin{lstlisting}[language=Python]
+class MainCourse(models.Model):
+    name = models.CharField(max_length=100)
+
+class MainProject(models.Model):
+    name = models.CharField(max_length=100)
+
+class CourseLicense(models.Model):
+    course = models.ForeignKey(MainCourse, on_delete=models.CASCADE)
+    project = models.ForeignKey(MainProject, on_delete=models.CASCADE)
+\end{lstlisting}
+
+\textbf{{\color{blue}Key Points:}} \\
+1. \texttt{main\_courselicense\_course\_id\_id\_2b75b991\_fk\_main\_course\_uuid}: Foreign key jo \texttt{MainCourse} table ko reference karta hai. \\
+2. \texttt{main\_courselicense\_project\_id\_id\_be155323\_fk\_main\_project\_uuid}: Foreign key jo \texttt{MainProject} table ko reference karta hai. \\
+3. Yeh relationships ensure karte hain ki har course license \texttt{MainCourse} table mein ek \texttt{course} aur \texttt{MainProject} table mein ek \texttt{project} ke saath linked ho.
+
+===============================
+===============================
+\hrule
+
+% Define background color for code blocks
+\definecolor{lightgray}{rgb}{0.9, 0.9, 0.9}
+
+\begin{document}
+
+\textbf{\textcolor{red}{Understanding Foreign Key in Django Models}}
+
+\section*{Explanation of the Line:=Understanding Foreign Key in Django Models}
+
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+project_id = models.ForeignKey("Project", on_delete=models.CASCADE, null=True, blank=True, related_name="project_id")
+\end{lstlisting}
+
+\subsection*{What Does This Line Do?}
+
+\begin{itemize}
+    \item \textbf{Field Definition:}
+    \begin{itemize}
+        \item Ye line ek foreign key relationship banati hai current model (jaise \texttt{UserSettings}) aur \texttt{Project} model ke beech.
+        \\
+        \item \texttt{project\_id} field current model mein \texttt{Project} table ke primary key (\texttt{id}) ko store karta hai.
+    \end{itemize}
+    \item \textbf{Behavior:}
+    \begin{itemize}
+        \item \texttt{on\_delete=models.CASCADE}: Agar referenced \texttt{Project} delete ho jata hai, toh current table (jaise \texttt{UserSettings}) ke saare rows jo usse refer karte hain, wo bhi delete ho jayenge.
+        \item \texttt{null=True}: \texttt{project\_id} field \texttt{NULL} value rakh sakta hai (matlab koi associated \texttt{Project} nahi hai).
+        \item \texttt{blank=True}: Django forms mein is field ko khali chhodna allowed hai.
+        \item \texttt{related\_name="project\_id"}: Ye reverse relationship ka naam define karta hai. \texttt{Project} model se, aap \texttt{project\_id} use karke specific project se related saare \texttt{UserSettings} access kar sakte hain.
+    \end{itemize}
+    \item \textbf{Stored Data:}
+    \begin{itemize}
+        \item \texttt{project\_id} field referenced \texttt{Project} ka \textbf{primary key (ID)} store karta hai. Ye typically ek integer hota hai.
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Data Stored in \texttt{project\_id}:}
+
+\[
+\begin{array}{|c|c|}
+\hline
+\textbf{id} & \textbf{project\_name} \\
+\hline
+1 & \text{Project Alpha} \\
+2 & \text{Project Beta} \\
+\hline
+\end{array}
+\]
+
+Phir current table (jaise \texttt{UserSettings}) mein, \texttt{project\_id} ye store karega:
+
+\[
+\begin{array}{|c|c|c|}
+\hline
+\textbf{id} & \textbf{project\_id} & \textbf{other\_fields} \\
+\hline
+1 & 1 & \text{...} \\
+2 & 2 & \text{...} \\
+\hline
+\end{array}
+\]
+
+\subsection*{Example for Better Understanding:}
+
+Maano aapke paas ek \texttt{Project} table hai aur ek \texttt{UserSettings} table hai. \texttt{Project} table mein 2 projects hain:
+\begin{itemize}
+    \item Project Alpha (id = 1)
+    \item Project Beta (id = 2)
+\end{itemize}
+
+Ab agar \texttt{UserSettings} table mein koi entry \texttt{project\_id = 1} ke saath hai, toh iska matlab hai ki wo entry \texttt{Project Alpha} se related hai.
+
+\subsection*{Comparison to the Other Line:}
+
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+user = models.ForeignKey(User, related_name='settings', on_delete=models.CASCADE)
+\end{lstlisting}
+
+\subsection*{Key Differences:}
+
+\begin{itemize}
+    \item \textbf{related\_name:}
+    \begin{itemize}
+        \item \texttt{related\_name="project\_id"}: \texttt{Project} model mein, reverse relationship \texttt{project\_id} use karega current model ke related rows access karne ke liye.
+        \item \texttt{related\_name="settings"}: \texttt{User} model mein, reverse relationship \texttt{settings} use karega current model ke related rows access karne ke liye.
+    \end{itemize}
+    \item \textbf{Field Name:}
+    \begin{itemize}
+        \item \texttt{project\_id}: Ye field specifically projects se related hai.
+        \item \texttt{user}: Ye field specifically users se related hai.
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Usage:}
+
+For \texttt{project\_id}:
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+project = Project.objects.get(id=1)
+user_settings = project.project_id.all()  # Using the related_name="project_id"
+\end{lstlisting}
+
+For \texttt{user}:
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+user = User.objects.get(id=1)
+user_settings = user.settings.all()  # Using the related_name="settings"
+\end{lstlisting}
+
+\subsection*{Stored Data:}
+
+In \texttt{project\_id}: Stores the ID of the referenced \texttt{Project} table.
+
+In \texttt{user}: Stores the ID of the referenced \texttt{User} table.
+
+\subsection*{Notes Summary:}
+
+\textbf{project\_id Field Definition:}
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+project_id = models.ForeignKey("Project", on_delete=models.CASCADE, null=True, blank=True, related_name="project_id")
+\end{lstlisting}
+\begin{itemize}
+    \item \texttt{Project} table ke saath ek foreign key relationship banata hai.
+    \item Current table mein referenced \texttt{Project} ka \textbf{id} store karta hai.
+    \item Nullable values (\texttt{null=True}) aur empty form fields (\texttt{blank=True}) allow karta hai.
+    \item Agar \texttt{Project} delete ho jata hai, toh current model ke saare related rows bhi delete ho jate hain (\texttt{on\_delete=models.CASCADE}).
+    \item \texttt{Project} model mein, reverse relationship ka naam \texttt{project\_id} hai.
+\end{itemize}
+
+\textbf{Difference Between \texttt{project\_id} and \texttt{user}:}
+\begin{itemize}
+    \item Dono \texttt{ForeignKey} fields hain, lekin:
+    \begin{itemize}
+    \\\vspace{\baselineskip}
+        \item \texttt{project\_id} \texttt{Project} table ko reference karta hai, aur uska primary key (\texttt{id}) store karta hai.
+        \item \texttt{user} \texttt{User} table ko reference karta hai, aur uska primary key (\texttt{id}) store karta hai.
+    \end{itemize}
+    \item \texttt{related\_name} reverse relationship ka naam define karta hai, jisse aap dusre model ke related rows access kar sakte hain.
+\end{itemize}
+
+\subsection*{Example for Reverse Relationship:}
+
+Maano aapke paas ek \texttt{Project} hai jiska \texttt{id = 1} hai. Agar aap us project se related saare \texttt{UserSettings} access karna chahte hain, toh aap ye code use kar sakte hain:
+
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+project = Project.objects.get(id=1)
+user_settings = project.project_id.all()
+\end{lstlisting}
+
+Isi tarah, agar aapke paas ek \texttt{User} hai jiska \texttt{id = 1} hai, aur aap us user se related saare \texttt{UserSettings} access karna chahte hain, toh aap ye code use kar sakte hain:
+
+\begin{lstlisting}[backgroundcolor=\color{lightgray}]
+user = User.objects.get(id=1)
+user_settings = user.settings.all()
+\end{lstlisting}
+
+\subsection*{Conclusion:}
+
+Foreign key Django models mein ek powerful feature hai jo aapko tables ke beech relationships define karne mein madad karta hai. \texttt{on\_delete}, \texttt{null}, \texttt{blank}, aur \texttt{related\_name} jaise options use karke aap apne models ko flexible aur efficient bana sakte hain. Umeed hai ki ye explanation aur examples aapko foreign key ko samajhne mein madad karenge!
+
+===============================
+===============================
+\hrule
+
+
+\section*{\textcolor{red}{\textbf{Understanding ProductSerializer in Django (Hinglish Explanation)}}}
+
+\textbf{Ye code ka explanation line-by-line de raha hoon in simple words:}
+
+\lstset{
+    backgroundcolor=\color{gray!10},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    framesep=8pt,
+    rulecolor=\color{gray!80},
+    xleftmargin=10pt,
+    xrightmargin=10pt
+}
+
+\begin{tcolorbox}[colframe=blue!80, colback=gray!5, title=\textcolor{blue}{\textbf{ProductSerializer Code}}]
+\begin{lstlisting}[language=Python]
+class ProductSerializer(serializers.ModelSerializer):
+    category_name = serializers.CharField(source='category.cat_name', read_only=True)
+
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'vendor', 'status', 'activity', 'category', 'required_field', 'category_name']
+
+    def get_category_name(self, obj):
+        return obj.category.cat_name
+\end{lstlisting}
+\end{tcolorbox}
+
+\subsection*{\textbf{Code Breakdown (Hinglish Explanation):}}
+
+\begin{lstlisting}[language=Python]
+class ProductSerializer(serializers.ModelSerializer):
+\end{lstlisting}
+- Ye ek naya serializer define kar raha hai jiska naam hai \texttt{ProductSerializer}.
+- Ye inherit karta hai \texttt{serializers.ModelSerializer} se, jo Django models ke liye data ko serialize aur deserialize karne ke kaam aata hai.
+
+\begin{lstlisting}[language=Python]
+category_name = serializers.CharField(source='category.cat_name', read_only=True)
+\end{lstlisting}
+- \textbf{\texttt{category\_name}:} Ek custom field hai jo serializer me add ki gayi hai. Ye \texttt{Product} model me directly nahi hai.
+- \textbf{\texttt{serializers.CharField}:} Ye batata hai ki ye field string data rakhegi.
+- \textbf{\texttt{source='category.cat\_name'}:}
+  - Ye field \texttt{Category} model ke \texttt{cat\_name} field se value le raha hai.
+  - Ye possible hai kyunki \texttt{category} ek foreign key hai \texttt{Product} model me.
+- \textbf{\texttt{read\_only=True}:} Ye batata hai ki field sirf output me dikhegi aur request se update/create nahi ho sakti.
+
+\begin{lstlisting}[language=Python]
+class Meta:
+\end{lstlisting}
+- Ye ek nested \texttt{Meta} class hai jo serializer ke baare me metadata provide karta hai, jaise model kaunsa use ho raha hai aur kaunse fields include karni hain.
+
+\begin{lstlisting}[language=Python]
+model = Product
+\end{lstlisting}
+- Ye specify karta hai ki serializer \texttt{Product} model ke liye banaya gaya hai.
+- Ye serializer \texttt{Product} model ke fields aur relationships ka use karega.
+
+\begin{lstlisting}[language=Python]
+fields = ['id', 'name', 'vendor', 'status', 'activity', 'category', 'required_field', 'category_name']
+\end{lstlisting}
+- \textbf{\texttt{fields}:} Ek list hai jo batati hai ki kaunse fields serialized output me dikhengi.
+- Ye batata hai serializer ko:
+  - \texttt{id}, \texttt{name}, \texttt{vendor}, \texttt{status}, \texttt{activity}, \texttt{category}, aur \texttt{required\_field} ko \texttt{Product} model se directly le.
+  - Saath me \texttt{category\_name} custom field bhi include kare.
+
+\begin{lstlisting}[language=Python]
+def get_category_name(self, obj):
+    return obj.category.cat_name
+\end{lstlisting}
+- \textbf{\texttt{get\_category\_name}:} Ye ek custom method hai jo \texttt{category\_name} field ke liye value provide karta hai.
+- \textbf{\texttt{self}:} \texttt{ProductSerializer} class ke instance ko refer karta hai.
+- \textbf{\texttt{obj}:} \texttt{Product} object ko refer karta hai jo serialize ho raha hai.
+- \textbf{\texttt{return obj.category.cat\_name}:} Ye current product ke liye \texttt{Category} model se \texttt{cat\_name} ki value retrieve karta hai.
+
+\subsection*{\textbf{\textcolor{green}{Summary of What the Serializer Does:}}}
+
+\begin{itemize}
+    \item Serializer \texttt{Product} model se linked hai jo uske data ko serialize aur deserialize karta hai.
+    \item Model ke saath fields bhi use karta hai (\texttt{id}, \texttt{name}, \texttt{vendor}, etc.) aur ek custom field \texttt{category\_name}.
+    \item \texttt{category\_name} field ke liye:
+    \begin{itemize}
+        \item \texttt{Category} model ke \texttt{cat\_name} field se value fetch karta hai (via \texttt{category} foreign key).
+        \item Ye field \textbf{read-only} hai aur API requests se update nahi ho sakti.
+    \end{itemize}
+    \item Ye output aur input data structure ko control karta hai \texttt{Product} model ke liye APIs ke kaam me.
+\end{itemize}
+
+
+
+
+
+\begin{document}
+
+\maketitle
+
+\section*{Code Example:}
+\begin{lstlisting}
+class UserSettingsSerializerALL(serializers.ModelSerializer):
+    is_active = serializers.BooleanField()
+
+    class Meta:
+        model = UserSettings
+        fields = "__all__"
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+\end{lstlisting}
+
+\section*{Code Line-by-Line Explanation in Hinglish:}
+
+\subsection*{\textcolor{myred}{1. \texttt{class UserSettingsSerializerALL(serializers.ModelSerializer):}}}
+- Ye ek \textbf{serializer class} hai jo \texttt{ModelSerializer} inherit kar rahi hai.
+- \texttt{ModelSerializer} ka matlab hai ki ye class directly ek Django model (\texttt{UserSettings}) ke upar based hai.
+- Iska kaam hoga \texttt{UserSettings} model ke data ko JSON me convert karna aur wapas.
+
+---
+
+\subsection*{\textcolor{myred}{2.\ \texttt{is\_active = serializers.BooleanField()}}}
+\begin{itemize}
+  \item Yaha \texttt{is\_active} ek \textbf{extra field} banayi gayi hai jo model me shayad nahi hai, but hum ise serializer me add kar rahe hain.
+\end{itemize}
+
+- \texttt{BooleanField} ka matlab hai ki iska value sirf \textbf{True} ya \textbf{False} ho sakta hai.
+
+---
+
+\subsection*{\textcolor{myred}{3. \texttt{class Meta:}}}
+- \texttt{Meta} ek nested class hai jo \textbf{serializer ke configuration} ke liye hoti hai.
+- Isme batate hain ki serializer kis model ke saath kaam karega aur kaunse fields use karega.
+
+---
+
+\subsection*{\textcolor{myred}{4. \texttt{model = UserSettings}}}
+- Batata hai ki ye serializer \texttt{UserSettings} model ke saath linked hai.
+- Matlab, \texttt{UserSettings} ka data serialize/deserialize karne ke liye ye serializer use hoga.
+
+---
+
+\subsection*{\textcolor{myred}{5. \texttt{fields = "\_\_all\_\_"}}}
+- \texttt{fields} define karta hai ki model ke kaunse fields ko serializer me include karna hai.
+- \texttt{\_\_all\_\_} ka matlab hai \textbf{model ke saare fields ko include karo.}
+
+---
+
+\subsection*{\textcolor{myred}{6. \texttt{extra\_kwargs = \{'password': \{'write\_only': True\}\}}}}
+- \textbf{\texttt{extra\_kwargs}} ek special configuration hai jo kuch fields ke behavior ko customize karne ke liye use hoti hai.
+- \texttt{password} field ke liye \texttt{write\_only: True} ka matlab hai:
+    - Ye field sirf \textbf{create} aur \textbf{update} operations ke liye use hogi.
+    - \textbf{\textcolor{myred}{Read (fetch) operations me ye field nahi milegi}} (security ke liye).
+
+---
+
+\section*{Code in Short:}
+Ye serializer \texttt{UserSettings} model ke saare fields handle karega, lekin:
+\begin{enumerate}
+    \item \textcolor{myblue}{Ek extra field \texttt{is\_active} add karega (jo True/False hogi).}
+    \item \textcolor{myblue}{\texttt{password} field ko \textbf{write-only} banayega (sirf set/update karne ke liye, read nahi kar sakte).}
+\end{enumerate}
+
+
+
+===============================================================================================================
+\hrule
+
+
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{darkgreen}\itshape, % Comments are now dark green
+    stringstyle=\color{red},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    frame=single,
+    captionpos=b,
+}
+
+\begin{document}
+
+\section*{\textcolor{red}{\textbf{Django REST Framework: Custom Serializer Field with \texttt{SerializerMethodField}}}}
+
+\subsection*{\textcolor{red}{Listing 1: Book Model Definition (Data Source)}}
+
+\begin{lstlisting}[language=Python]
+from django.db import models  # Django ke models import kar rahe hain
+
+class Book(models.Model):  # Book ka ek model define kar rahe hain
+    title = models.CharField(max_length=255)  # Book ka title, max 255 characters
+    author = models.CharField(max_length=255)  # Author ka naam, max 255 characters
+    publication_year = models.IntegerField()  # Book ka publication year, integer field
+
+    def __str__(self):  # String representation define karte hain jab object ko print karein
+        return self.title  # Title return karega
+\end{lstlisting}
+
+---
+
+\subsection*{\textcolor{red}{Listing 2: Book Serializer Definition (Data Serialization)}}
+
+\begin{lstlisting}[language=Python]
+from rest_framework import serializers  # DRF se serializers import karte hain
+from .models import Book  # Book model ko import karte hain jo data source hai
+
+class BookSerializer(serializers.ModelSerializer):  
+    # Serializer banate hain jo Book model ko JSON format me convert karega
+
+    is_classic = serializers.SerializerMethodField()  
+    # Ek custom field add kiya `is_classic` jo runtime pe calculate hoga using get_is_classic
+
+    class Meta:  # Meta class ke through model aur fields define karte hain
+        model = Book  # Ye serializer Book model pe kaam karega
+        fields = ['title', 'author', 'publication_year', 'is_classic']  
+        # Output me ye fields include honge: title, author, publication_year, aur is_classic
+
+    def get_is_classic(self, obj):  
+        # Custom method hai jo `is_classic` field ki value calculate karega
+        return obj.publication_year < 2000  
+        # Agar publication_year 2000 se pehle ka hai toh True return karega, warna False
+\end{lstlisting}
+
+---
+
+\subsection*{\textcolor{red}{Listing 3: Serializer Usage (Converting Data to JSON)}}
+
+\begin{lstlisting}[language=Python]
+# Ek Book ka object banate hain
+book = Book(title="The Great Gatsby", author="F. Scott Fitzgerald", publication_year=1925)
+
+# Serializer ka instance banate hain aur Book object pass karte hain
+serializer = BookSerializer(book)
+
+# Serialized data ko print karte hain
+print(serializer.data)  # JSON format me data return karega
+\end{lstlisting}
+
+---
+
+\subsection*{\textcolor{red}{Listing 4: Serialized Output with Comments}}
+
+\begin{lstlisting}[language=JSON]
+{
+    "title": "The Great Gatsby",  # Book ka title
+    "author": "F. Scott Fitzgerald",  # Book ka author
+    "publication_year": 1925,  # Book ka publication year
+    "is_classic": true  # Custom field, True kyunki 1925, 2000 se pehle hai
+}
+\end{lstlisting}
+
+---
+
+\subsection*{\textcolor{red}{Line-by-Line Explanation in Hinglish}}
+
+\begin{itemize}
+    \item \textbf{Model Definition:}
+    \begin{itemize}
+        \item \texttt{Book}: Ek model hai jo database me table banata hai.
+        \item \textbf{Fields:}
+        \begin{itemize}
+            \item \texttt{title}: Book ka naam store karta hai.
+            \item \texttt{author}: Author ka naam store karta hai.
+            \item \texttt{publication\_year}: Book kis year me publish hui thi.
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{Serializer Definition:}
+    \begin{itemize}
+        \item \texttt{BookSerializer}: Book model ka data JSON me convert karta hai.
+        \item \texttt{is\_classic}:
+        \begin{itemize}
+            \item Ye ek \texttt{SerializerMethodField} hai jo custom logic ke through value calculate karta hai.
+            \item \texttt{get\_is\_classic}: Is field ka value yahan define hota hai.
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{Serializer Usage:}
+    \begin{itemize}
+        \item Ek Book object lete hain aur uska serializer instance banate hain.
+        \item \texttt{serializer.data}: Serialized JSON data return karta hai.
+    \end{itemize}
+
+    \item \textbf{Serialized Output:}
+    \begin{itemize}
+        \item Yeh output ka structure hota hai jab serializer ka use hota hai.
+        \item Custom field \texttt{is\_classic} dynamically calculate hota hai based on condition (\texttt{publication\_year < 2000}).
+    \end{itemize}
+\end{itemize}
+
+---
+
+\subsection*{\textcolor{red}{Why Use \texttt{SerializerMethodField}?}}
+
+\begin{itemize}
+    \item Jab kisi field ki value runtime pe calculate karni ho.
+    \item Jaise, yahan humne \texttt{is\_classic} field add kiya jo model me nahi tha, par JSON output me chahiye tha.
+\end{itemize}
+
+---
+
+==============================================================================================================
+\hrule
+
+\begin{document}
+
+\section*{\textcolor{headingcolor}{\textbf{Code: Model with \texttt{\_\_str\_\_} Method}}}
+\begin{lstlisting}[language=Python]
+from django.db import models
+from django.db.models import JSONField
+
+class ReportCustomization(models.Model):  # BaseModel ke jagah Django ka Model use karein
+    user_customization = models.ForeignKey(
+        "UserSettings", 
+        related_name='user_customization', 
+        on_delete=models.CASCADE
+    )
+    report_type = models.CharField(max_length=250, null=True, blank=True)
+    customizations = JSONField(null=True, blank=True)
+
+    # __str__ method to provide string representation
+    def __str__(self):
+        return self.user_customization.userName  # Returning user's name
+\end{lstlisting}
+
+\section*{\textcolor{headingcolor}{\textbf{Explanation in Hinglish}}}
+
+\subsection*{\textbf{1. Kya hota hai \texttt{\_\_str\_\_} method?}}
+- \texttt{\_\_str\_\_} method ka kaam hai \textbf{object ka human-readable string representation dena}.
+- Jab bhi aap kisi model ka object query karte ho (e.g., Admin panel me ya shell me), Django isko \textbf{as a string represent} karta hai.  
+
+\subsection*{\textbf{2. Agar \texttt{\_\_str\_\_} method diya hai:}}
+- Jab aap \texttt{ReportCustomization} model ka object call karoge, aapko \textbf{user's name (\texttt{user\_customization.userName})} dikhega.
+- Example:
+\begin{lstlisting}[language=Python]
+obj = ReportCustomization.objects.first()
+print(obj)  # Output: userName (user_customization field ka userName)
+\end{lstlisting}
+
+\subsection*{\textbf{3. Agar \texttt{\_\_str\_\_} method nahi diya (default behavior):}}
+- Django default behavior follow karega, aur object ka string representation kuch aise hoga:
+\begin{lstlisting}
+<ReportCustomization: ReportCustomization object (1)>
+\end{lstlisting}
+- Example:
+\begin{lstlisting}[language=Python]
+obj = ReportCustomization.objects.first()
+print(obj)  # Output: <ReportCustomization: ReportCustomization object (1)>
+\end{lstlisting}
+
+\subsection*{\textbf{4. Admin panel me difference:}}
+- \textbf{With \texttt{\_\_str\_\_}:} Admin panel me \texttt{ReportCustomization} ka object user-friendly string (e.g., \texttt{userName}) me show hoga.
+- \textbf{Without \texttt{\_\_str\_\_}:} Admin panel me \texttt{ReportCustomization object (ID)} show karega, jo debugging ke liye confusing ho sakta hai.
+
+\section*{\textcolor{headingcolor}{\textbf{Why Sometimes We Don't Use \texttt{\_\_str\_\_}?}}}
+
+\subsection*{\textbf{1. Jab zarurat nahi hoti:}}
+- Agar model ka data sirf backend processing ke liye hai, toh \texttt{\_\_str\_\_} method skip karte hain.
+
+\subsection*{\textbf{2. Built-in representation sufficient hai:}}
+- Kuch cases me primary key ya default representation kaafi hoti hai.
+
+\section*{\textcolor{headingcolor}{\textbf{Consequences If We Don’t Use \texttt{\_\_str\_\_}:}}}
+
+\subsection*{\textbf{Admin Panel:}}
+- Admin me objects readable aur understandable nahi lagte:
+\begin{lstlisting}
+ReportCustomization object (1)
+ReportCustomization object (2)
+\end{lstlisting}
+
+\subsection*{\textbf{Debugging:}}
+- \texttt{print(object)} ya logs me object samajhne me dikkat ho sakti hai.
+
+\section*{\textcolor{headingcolor}{\textbf{Summary:}}}
+\begin{itemize}
+    \item \textbf{\texttt{\_\_str\_\_} ka kaam:} Object ka human-readable string representation dena.
+    \item \textbf{Agar \texttt{\_\_str\_\_} diya:} Output me relevant aur understandable string (e.g., \texttt{userName}) milega.
+    \item \textbf{Agar nahi diya:} Default string format (\texttt{<ModelName: ModelName object (ID)>}) use hoga.
+    \item \textbf{Best Practice:} Human-facing areas (admin, debugging) ke liye \texttt{\_\_str\_\_} define karein.
+\end{itemize}
+
+\section*{\textcolor{headingcolor}{\textbf{Example Comparison:}}}
+
+\subsection*{\textcolor{examplecolor}{\textbf{With \texttt{\_\_str\_\_}:}}}
+\begin{lstlisting}[language=Python]
+obj = ReportCustomization.objects.first()
+print(obj)  # Output: userName
+\end{lstlisting}
+
+\subsection*{\textcolor{warningcolor}{\textbf{Without \texttt{\_\_str\_\_}:}}}
+\begin{lstlisting}[language=Python]
+obj = ReportCustomization.objects.first()
+print(obj)  # Output: <ReportCustomization: ReportCustomization object (1)>
+\end{lstlisting}
+
+
+==============================================================================================================
+\hrule
+
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{darkgreen}\itshape, % Comments are now dark green
+    stringstyle=\color{red},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    frame=single,
+    captionpos=b,
+}
+
+\begin{document}
+
+\section*{\textcolor{red}{\textbf{Django Shell Testing Explained (For Beginners)}}}
+
+If you want to test a specific part of your Django code, like functions, models, or utilities, you can use the **Django shell**. Below is a beginner-friendly explanation, including folder structure, step-by-step setup, and examples.
+
+---
+
+\subsection*{\textcolor{red}{Listing 1: Project Folder Structure}}
+
+Let’s assume you have the following Django project:
+
+\begin{lstlisting}[language=plaintext]
+my_django_project/
+├── manage.py  
+├── myapp/  
+│   ├── __init__.py  
+│   ├── models.py         # Your database models  
+│   ├── views.py          # Contains functions for HTTP requests  
+│   ├── tasks.py          # Custom utility functions (e.g., business logic)  
+│   ├── migrations/       # Auto-generated files for database changes  
+├── my_django_project/  
+│   ├── __init__.py  
+│   ├── settings.py       # Configuration file  
+│   ├── urls.py           # Routes HTTP requests to views  
+\end{lstlisting}
+
+---
+
+\subsection*{\textcolor{red}{Listing 2: What is `python manage.py shell`?}}
+
+The `python manage.py shell` command allows you to interact with your Django project in an interactive Python shell.
+
+\begin{itemize}
+    \item It gives access to all models, utilities, and settings in your project.
+    \item You can use it to **test small pieces of code**, **query the database**, or **debug functions**.
+\end{itemize}
+
+---
+
+\subsection*{\textcolor{red}{Listing 3: How to Use `manage.py shell`}}
+
+\paragraph{\textcolor{red}{Step 1: Start the Shell}}  
+Run the following command in your project directory:
+
+\begin{lstlisting}[language=bash]
+python manage.py shell
+\end{lstlisting}
+
+\paragraph{\textcolor{red}{Step 2: Import Your Code}}  
+Inside the shell, import the function, model, or code you want to test.
+
+\begin{lstlisting}[language=Python]
+# Importing a Function from `tasks.py`
+from myapp.tasks import my_function
+
+# Importing a Model from `models.py`
+from myapp.models import MyModel
+\end{lstlisting}
+
+\paragraph{\textcolor{red}{Step 3: Run Your Code}}  
+Call the function or query the database.
+
+---
+
+\subsection*{\textcolor{red}{Listing 4: Simple Code Examples}}
+
+\subsubsection*{\textcolor{red}{Example 1: Testing a Function in `tasks.py`}}
+
+\begin{lstlisting}[language=Python, caption=tasks.py]
+# tasks.py
+def greet_user(name):
+    return f"Hello, {name}!"
+\end{lstlisting}
+
+Testing in the Shell:
+
+\begin{lstlisting}[language=bash]
+python manage.py shell
+\end{lstlisting}
+
+Inside the shell:
+
+\begin{lstlisting}[language=Python]
+from myapp.tasks import greet_user
+print(greet_user("Alice"))
+# Output: "Hello, Alice!"
+\end{lstlisting}
+
+---
+
+\subsubsection*{\textcolor{red}{Example 2: Querying the Database with a Model}}
+
+\begin{lstlisting}[language=Python, caption=models.py]
+from django.db import models
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.CharField(max_length=100)
+    published_year = models.IntegerField()
+\end{lstlisting}
+
+Testing in the Shell:
+
+\begin{lstlisting}[language=bash]
+python manage.py shell
+\end{lstlisting}
+
+Inside the shell:
+
+\begin{lstlisting}[language=Python]
+from myapp.models import Book
+
+# Fetch all books
+books = Book.objects.all()
+print(books)
+
+# Create a new book
+new_book = Book.objects.create(title="Django for Beginners", author="John Doe", published_year=2024)
+print(new_book.title)
+
+# Filter books by author
+filtered_books = Book.objects.filter(author="John Doe")
+print(filtered_books)
+\end{lstlisting}
+
+---
+
+\subsubsection*{\textcolor{red}{Example 3: Testing an API Call Function}}
+
+\begin{lstlisting}[language=Python, caption=tasks.py]
+import requests
+
+def fetch_data_from_api(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()
+    return {"error": "Failed to fetch data"}
+\end{lstlisting}
+
+Testing in the Shell:
+
+\begin{lstlisting}[language=bash]
+python manage.py shell
+\end{lstlisting}
+
+Inside the shell:
+
+\begin{lstlisting}[language=Python]
+from myapp.tasks import fetch_data_from_api
+
+# Test with a public API
+data = fetch_data_from_api("https://jsonplaceholder.typicode.com/posts")
+print(data)
+\end{lstlisting}
+
+---
+
+\subsection*{\textcolor{red}{Listing 5: Bonus: Using `shell_plus` for Auto Imports}}
+
+If importing manually feels tedious, you can use **`shell_plus`** from the `django-extensions` package:
+
+\begin{lstlisting}[language=bash]
+# Install django-extensions
+pip install django-extensions
+
+# Add to INSTALLED_APPS in settings.py
+INSTALLED_APPS += ['django_extensions']
+
+# Run the enhanced shell
+python manage.py shell_plus
+\end{lstlisting}
+
+This will auto-import all your models and utilities, saving time.
+
+---
+
+
+==============================================================================================================
+\hrule
+
+
+
+% Define custom colors
+\definecolor{lightgray}{gray}{0.9}
+\definecolor{red}{rgb}{1,0,0}
+\definecolor{blue}{rgb}{0,0,1}
+
+\begin{document}
+
+% Main heading
+\begin{center}
+    {\Huge \textbf{\textcolor{red}{What is a Container?}}}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{tcolorbox}[colback=lightgray!20, colframe=blue!50, title=\textbf{Definition}]
+A \textbf{container} ek lightweight, standalone aur executable package hota hai jo kisi bhi application ke run hone ke liye zaroori sab cheezein contain karta hai:
+\begin{itemize}
+    \item \textbf{Code}
+    \item \textbf{Runtime} (like Python, Node.js, etc.)
+    \item \textbf{System tools and libraries}
+    \item \textbf{Dependencies}
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=lightgray!10, colframe=blue!40, title=\textbf{Key Concept}]
+Containers application ko host system se isolate kar dete hain. Iska matlab hai ki **containerized application har jagah ek jaisa chalega**, chahe woh laptop ho, server ho, ya cloud ho.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=red!50, title=\textbf{Understanding via Example}]
+Ek container ko aap ek **virtual box** samajh sakte hain jo aapke app ko secure karta hai, **lekin yeh traditional Virtual Machines (VMs) se kaafi chhota aur fast hota hai** kyunki yeh apna alag OS nahi chalayega, balki host system ka OS share karega.
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+% Main heading
+\begin{center}
+    {\Huge \textbf{\textcolor{red}{What is Docker?}}}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{tcolorbox}[colback=lightgray!20, colframe=blue!50, title=\textbf{Definition}]
+\textbf{Docker} ek platform hai jo containers ko **easily create, manage, aur run karne me madad karta hai**. Yeh tools provide karta hai:
+\begin{enumerate}
+    \item \textbf{Build}: Code se container banane ke liye (Dockerfile ka use karke).
+    \item \textbf{Ship}: Container ko share ya distribute karne ke liye (Docker Hub ya kisi registry ke through).
+    \item \textbf{Run}: Containers ko different environments me consistently execute karne ke liye.
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=red!50, title=\textbf{Understanding via Analogy}]
+Docker ko ek **factory** samajh lo jo **containers create aur manage karne ka kaam karti hai**.
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+% Main heading
+\begin{center}
+    {\Huge \textbf{\textcolor{red}{Analogy to Understand:}}}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{tcolorbox}[colback=lightgray!10, colframe=blue!40, title=\textbf{Real-Life Example}]
+\begin{itemize}
+    \item Ek **container** ek ready-to-eat meal ki tarah hai (jisme khana, cutlery, aur sab kuch ready hai).
+    \item **Docker** ek chef aur packaging system hai jo meal ko prepare karta hai aur ensure karta hai ki **har bar ek jaisa ho**.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+% Main heading
+\begin{center}
+    {\Huge \textbf{\textcolor{red}{How They Work Together (Example):}}}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{tcolorbox}[colback=lightgray!20, colframe=blue!50, title=\textbf{Without Docker/Containers}]
+\textit{Sochiye, aapne ek Python app develop kiya jo aapke laptop pe perfect chal raha hai. Lekin jab aap ise kisi server pe run karne ki koshish karte hain, toh errors aate hain kyunki server pe Python ka version ya libraries install nahi hain.}
+\end{tcolorbox}
+
+\vspace{0.3cm}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=red!50, title=\textbf{With Docker and Containers}]
+\begin{itemize}
+    \item Aap Docker ka use karke apne Python app ka ek **container** bana sakte hain.
+    \item Yeh container contain karega:
+    \begin{itemize}
+        \item App ka code.
+        \item Required Python version.
+        \item Saari zaroori libraries.
+    \end{itemize}
+    
+    \item Ab yeh **container kisi bhi jagah run ho sakta hai bina environment dependency ke**.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+% Main heading
+\begin{center}
+    {\Huge \textbf{\textcolor{red}{Why are Containers Useful?}}}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{tcolorbox}[colback=lightgray!10, colframe=blue!40, title=\textbf{Key Advantages}]
+\begin{itemize}
+    \item \textbf{Portability}: "Write once, run anywhere" ka concept implement hota hai.
+    \item \textbf{Isolation}: Har container apni environment maintain karta hai, jo **conflicts prevent karta hai**.
+    \item \textbf{Efficiency}: Containers **traditional VMs se zyada fast aur lightweight hote hain**.
+\end{itemize}
+\end{tcolorbox}
+
+===============================
+===============================
+\hrule
+
+
+% Define custom colors
+\definecolor{headingcolor}{rgb}{0.8, 0, 0}
+\definecolor{lightgray}{gray}{0.9}
+\definecolor{blue}{rgb}{0,0,1}
+\definecolor{lightbackground}{rgb}{0.95, 0.95, 0.95}
+
+% Set up listings style for Python
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{lightbackground},
+  frame=single,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
+  breaklines=true,
+  breakatwhitespace=true
+}
+
+\begin{document}
+
+\title{\textbf{\textcolor{headingcolor}{AWS Notes for Backend Django Developers}}}
+\author{}
+\date{}
+\maketitle
+
+\section*{\textbf{\textcolor{headingcolor}{1. Amazon S3 (Simple Storage Service)}}}
+
+\begin{tcolorbox}[colback=lightgray!20, colframe=blue!50, title=\textbf{What is it?}]
+Amazon S3 ek cloud storage service hai jo kisi bhi type ke data (files, images, logs, etc.) store karne ke liye use hoti hai.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=red!50, title=\textbf{Key Features}]
+\begin{itemize}
+    \item Data \textbf{buckets} (folders) me store hota hai.
+    \item Highly scalable aur durable (99.999999999% durability).
+    \item Use cases: backups, static website hosting, aur media/data storage.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=lightgray!10, colframe=blue!40, title=\textbf{Why Django Developers Should Know It}]
+\begin{itemize}
+    \item Static files aur media uploads ke liye S3 ka use kar sakte hain.
+    \item \texttt{django-storages} ke through S3 integration easily ho sakti hai.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\section*{\textbf{\textcolor{headingcolor}{2. AWS Glue}}}
+
+\begin{tcolorbox}[colback=lightgray!20, colframe=blue!50, title=\textbf{What is it?}]
+AWS Glue ek serverless data processing tool hai jo data ko prepare aur transform karta hai analytics aur machine learning ke liye.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=red!50, title=\textbf{Key Features}]
+\begin{itemize}
+    \item \textbf{Crawler}: Data ko scan karke schema create karta hai.
+    \item \textbf{ETL (Extract, Transform, Load)}: Data clean ya convert karta hai (e.g., CSV to Parquet).
+    \item S3, Redshift, aur Athena ke saath smoothly kaam karta hai.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=lightgray!10, colframe=blue!40, title=\textbf{Why Django Developers Should Know It}]
+\begin{itemize}
+    \item Data cleaning aur analytics ke automation ke liye helpful hai.
+    \item S3 ke saath Glue ka use karke reports ya ML datasets prepare kiye ja sakte hain.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\section*{\textbf{\textcolor{headingcolor}{3. AWS Data Pipeline}}}
+
+\begin{tcolorbox}[colback=lightgray!20, colframe=blue!50, title=\textbf{What is it?}]
+AWS Data Pipeline ek service hai jo AWS services aur external systems ke beech data movement aur transformation automate karti hai.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=red!50, title=\textbf{Key Features}]
+\begin{itemize}
+    \item Workflows automate karta hai (e.g., S3 se Redshift me data copy karna).
+    \item AWS aur non-AWS systems ke beech data transfer possible karta hai.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=lightgray!10, colframe=blue!40, title=\textbf{Why Django Developers Should Know It}]
+\begin{itemize}
+    \item Processed data ko transfer karne aur backups automate karne ke liye use hota hai.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\section*{\textbf{\textcolor{headingcolor}{4. Parquet File Format}}}
+
+\begin{tcolorbox}[colback=lightgray!20, colframe=blue!50, title=\textbf{What is it?}]
+Parquet ek compressed column-based file format hai jo large datasets store karne ke liye efficient hota hai.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=red!50, title=\textbf{Key Features}]
+\begin{itemize}
+    \item Analytics me fast performance deta hai kyunki sirf required columns read hote hain.
+    \item File size chhoti hoti hai, jo storage cost bachata hai.
+    \item Glue, Spark, aur Athena jese big data tools ke saath commonly use hota hai.
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=lightgray!10, colframe=blue!40, title=\textbf{Why Django Developers Should Know It}]
+\begin{itemize}
+    \item Large datasets (logs, reports) S3 me efficiently store karne ke liye useful hai.
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\section*{\textbf{\textcolor{headingcolor}{What AWS Services a Django Backend Developer Should Know}}}
+
+\begin{tcolorbox}[colback=lightgray!10, colframe=blue!50, title=\textbf{Essential AWS Services}]
+\begin{enumerate}
+    \item \textbf{S3} - Static/media files aur backups ke liye.
+    \item \textbf{RDS} - Managed PostgreSQL/MySQL databases.
+    \item \textbf{EC2} - Django apps deploy karne ke liye.
+    \item \textbf{Elastic Beanstalk} - Easy deployment ke liye.
+    \item \textbf{AWS Lambda} - Background tasks aur automation ke liye.
+    \item \textbf{CloudWatch} - Logging aur monitoring ke liye.
+    \item \textbf{IAM} - AWS security aur access management.
+    \item \textbf{AWS Secrets Manager} - Securely credentials store karne ke liye.
+\end{enumerate}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+\section*{\textbf{\textcolor{headingcolor}{Code Example: Using S3 with Django}}}
+
+\begin{tcolorbox}[colback=lightgray!10, colframe=blue!50, title=\textbf{settings.py Configuration for S3}]
+\begin{lstlisting}
+# settings.py configuration for S3 storage using django-storages
+
+INSTALLED_APPS = [
+    'storages',
+]
+
+AWS_ACCESS_KEY_ID = '<your-access-key>'
+AWS_SECRET_ACCESS_KEY = '<your-secret-key>'
+AWS_STORAGE_BUCKET_NAME = '<your-bucket-name>'
+# Static files (CSS, JavaScript, images)
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+
+# Media files
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+\end{lstlisting}
+\end{tcolorbox}
+
+===============================
+===============================
+\hrule
+
+
+
+\begin{document}
+
+\section*{\textcolor{important}{\textbf{Git Commands}}}
+
+Yeh guide aapko \textbf{most commonly used Git commands} ko \textbf{Hinglish} mein samjhata hai, unke kaam aur ek chhota sa example \textbf{Git stash} command ka bhi deta hai.
+
+\subsection*{\textbf{Common Git Commands:}}
+
+\textbf{1. git init} \\
+\textit{Kya karta hai:} Ek nayi Git repository create karta hai. \\
+\textit{Use kahan hota hai:} Jab naye project ko version control mein lana ho. \\
+\textbf{Example:}
+\begin{lstlisting}
+git init
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+Initialized empty Git repository in /path/to/your/repo/.git/
+\end{verbatim}
+\end{outputbox}
+
+\textbf{2. git clone} \\
+\textit{Kya karta hai:} Ek remote repository ka copy local machine par download karta hai. \\
+\textbf{Example:}
+\begin{lstlisting}
+git clone https://github.com/username/repository.git
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+Cloning into 'repository'...
+remote: Enumerating objects: 100, done.
+remote: Counting objects: 100% (100/100), done.
+remote: Compressing objects: 100% (80/80), done.
+Receiving objects: 100% (100/100), 10.00 MiB | 1.00 MiB/s, done.
+Resolving deltas: 100% (20/20), done.
+\end{verbatim}
+\end{outputbox}
+
+\textbf{3. git add} \\
+\textit{Kya karta hai:} Files ko staging area mein le jaata hai, taaki commit ke liye ready ho. \\
+\textbf{Example:}
+\begin{lstlisting}
+git add file.txt
+git add .
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+(No output if successful)
+\end{verbatim}
+\end{outputbox}
+
+\textbf{4. git commit} \\
+\textit{Kya karta hai:} Changes ko save karta hai Git repository mein. \\
+\textbf{Example:}
+\begin{lstlisting}
+git commit -m "Yeh mera first commit hai"
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+[main (root-commit) abc1234] Yeh mera first commit hai
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file.txt
+\end{verbatim}
+\end{outputbox}
+
+\textbf{5. git status} \\
+\textit{Kya karta hai:} Current repository ka status dikhata hai (kaunsi files change hui hain, staged hain, etc.). \\
+\textbf{Example:}
+\begin{lstlisting}
+git status
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   file.txt
+\end{verbatim}
+\end{outputbox}
+
+\textbf{6. git log} \\
+\textit{Kya karta hai:} Commit history dikhata hai. \\
+\textbf{Example:}
+\begin{lstlisting}
+git log
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+commit abc1234 (HEAD -> main)
+Author: Your Name <your.email@example.com>
+Date:   Mon Oct 2 12:00:00 2023 +0530
+
+    Yeh mera first commit hai
+\end{verbatim}
+\end{outputbox}
+
+\textbf{7. git pull} \\
+\textit{Kya karta hai:} Remote repository ke latest changes ko apne local repository mein download aur merge karta hai. \\
+\textbf{Example:}
+\begin{lstlisting}
+git pull origin main
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (3/3), done.
+Unpacking objects: 100% (3/3), 1.00 KiB | 1.00 MiB/s, done.
+From https://github.com/username/repository
+ * branch            main       -> FETCH_HEAD
+   abc1234..def5678  main       -> origin/main
+Updating abc1234..def5678
+Fast-forward
+ file.txt | 1 +
+ 1 file changed, 1 insertion(+)
+\end{verbatim}
+\end{outputbox}
+
+\textbf{8. git push} \\
+\textit{Kya karta hai:} Apne local repository ke changes ko remote repository mein upload karta hai. \\
+\textbf{Example:}
+\begin{lstlisting}
+git push origin main
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Writing objects: 100% (3/3), 300 bytes | 300.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/username/repository.git
+   abc1234..def5678  main -> main
+\end{verbatim}
+\end{outputbox}
+
+\textbf{9. git branch} \\
+\textit{Kya karta hai:} Naye branch banata hai ya branches ka list dikhata hai. \\
+\textbf{Example:}
+\begin{lstlisting}
+git branch
+git branch new-feature
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+* main
+  new-feature
+\end{verbatim}
+\end{outputbox}
+
+\textbf{10. git checkout} \\
+\textit{Kya karta hai:} Branch switch karne ke liye ya kisi specific commit par kaam karne ke liye use hota hai. \\
+\textbf{Example:}
+\begin{lstlisting}
+git checkout new-feature
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+Switched to branch 'new-feature'
+\end{verbatim}
+\end{outputbox}
+
+\textbf{11. git merge} \\
+\textit{Kya karta hai:} Ek branch ke changes ko dusre branch mein merge karta hai. \\
+\textbf{Example:}
+\begin{lstlisting}
+git merge new-feature
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+Updating abc1234..def5678
+Fast-forward
+ file.txt | 1 +
+ 1 file changed, 1 insertion(+)
+\end{verbatim}
+\end{outputbox}
+
+\textbf{12. git stash} \\
+\textit{Kya karta hai:} Apke changes ko temporarily save karta hai bina commit kare, taaki aap baad mein wapas le sako. \\
+\textbf{Example:}
+\begin{lstlisting}
+git stash
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+Saved working directory and index state WIP on main: abc1234 Yeh mera first commit hai
+\end{verbatim}
+\end{outputbox}
+
+\textbf{13. git remote} \\
+\textit{Kya karta hai:} Remote repository ko manage karne ke liye commands deta hai. \\
+\textbf{Example:}
+\begin{lstlisting}
+git remote add origin https://github.com/username/repository.git
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+(No output if successful)
+\end{verbatim}
+\end{outputbox}
+
+\textbf{14. git diff} \\
+\textit{Kya karta hai:} Changes ko compare karta hai (unstaged ya staged). \\
+\textbf{Example:}
+\begin{lstlisting}
+git diff
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+diff --git a/file.txt b/file.txt
+index abc1234..def5678 100644
+--- a/file.txt
++++ b/file.txt
+@@ -1 +1,2 @@
+ Hello World
++New changes
+\end{verbatim}
+\end{outputbox}
+
+\section*{\textbf{Git Stash - Small Example}}
+
+\textit{Scenario:} Aap kisi file mein kaam kar rahe ho, aur achanak aapko ek aur urgent branch par kaam karna padta hai. \\
+Lekin aapko current changes ko commit nahi karna.
+
+\textbf{Steps:}
+
+1. Apni file mein changes karo: 
+\begin{lstlisting}
+echo "Naye changes add kiye" >> file.txt
+\end{lstlisting}
+
+2. Check karo ki file modify hui hai:
+\begin{lstlisting}
+git status
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   file.txt
+\end{verbatim}
+\end{outputbox}
+
+3. Changes ko stash mein daalo:
+\begin{lstlisting}
+git stash
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+Saved working directory and index state WIP on main: abc1234 Yeh mera first commit hai
+\end{verbatim}
+\end{outputbox}
+
+4. Ab branch switch karo:
+\begin{lstlisting}
+git checkout new-feature
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+Switched to branch 'new-feature'
+\end{verbatim}
+\end{outputbox}
+
+5. Jab kaam complete ho jaye, apne changes ko wapas lao:
+\begin{lstlisting}
+git stash apply
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+On branch new-feature
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   file.txt
+\end{verbatim}
+\end{outputbox}
+
+6. Stash ko delete kar do agar wapas nahi chahiye:
+\begin{lstlisting}
+git stash drop
+\end{lstlisting}
+\begin{outputbox}
+\begin{verbatim}
+Dropped refs/stash@{0} (abc1234...)
+\end{verbatim}
+\end{outputbox}
+
+\textbf{\textcolor{important}{Important Notes:}} \\
+Git stash \textbf{\textcolor{important}{useful hai jab aap apne changes ko commit kiye bina temporarily save karna chahte hain}}. Multiple stashes ko save karne ke liye:
+\begin{lstlisting}
+git stash save "Mera first stash"
+\end{lstlisting}
+
+===============================
+===============================
+\hrule
+
+
+% Define colors
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{outputbg}{rgb}{0.95, 0.95, 0.95}
+\definecolor{important}{rgb}{1, 0, 0}
+\definecolor{green}{rgb}{0, 0.5, 0}
+
+% Define heading styles
+\newcommand{\redheading}[1]{\textbf{\textcolor{important}{#1}}}
+\newcommand{\greenheading}[1]{\textbf{\textcolor{green}{#1}}}
+
+% Formatting for Python code
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{gray},
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{gray!50},
+    backgroundcolor=\color{gray!10},
+    showstringspaces=false,
+    captionpos=b
+}
+
+% Output box for command outputs
+
+
+\begin{document}
+
+\section*{\redheading{Vs Code Tricks === Searching within Selected Lines}}
+
+Jab aap 10 lines of code select karte hain aur \textbf{Ctrl+F} (ya \textbf{Cmd+F} Mac par) dabate hain, to search sirf selected text par apply hota hai.
+
+Agar aap ise pure function par apply karna chahte hain (bina manually select kiye), to aap ye kar sakte hain:
+\begin{enumerate}
+    \item Editor ke "Select Function" option ka use kare (modern code editors mein available hai).
+    \item Ya phir keyboard shortcuts ka use karke selection ko function level tak expand kare (IDE/editor ke hisab se alag ho sakta hai).
+    \item Function select karne ke baad, \textbf{Ctrl+F} (ya \textbf{Cmd+F}) dabakar sirf function ke andar search kare.
+\end{enumerate}
+
+\hrule
+================================================
+
+\section*{\greenheading{Django \texttt{update\_or\_create} Function}}
+
+Django mein \texttt{update\_or\_create} function ek \textbf{shortcut method} hai jo:
+\begin{enumerate}
+    \item \textbf{Update} karta hai agar object exist karta hai, ya
+    \item \textbf{Create} karta hai agar object exist nahi karta.
+\end{enumerate}
+
+\section*{\greenheading{Syntax}}
+\begin{lstlisting}
+Model.objects.update_or_create(defaults=None, **kwargs)
+\end{lstlisting}
+\begin{itemize}
+    \item \textbf{\texttt{kwargs}}: Database mein object ko dhoondhne ke liye use hone wale fields.
+    \item \textbf{\texttt{defaults}}: Object ko update karne ke liye use hone wale fields (agar mil gaya) ya naye object ke liye values set karne ke liye (agar create karna hai).
+\end{itemize}
+
+\section*{\greenheading{Key Points}}
+\begin{enumerate}
+    \item \textbf{Returns a Tuple}:
+    \begin{itemize}
+        \item \texttt{(object, created)} jahan:
+        \begin{itemize}
+            \item \texttt{object}: Updated ya created object.
+            \item \texttt{created}: Ek boolean (\texttt{True} agar create hua, \texttt{False} agar update hua).
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Atomic}:
+    \begin{itemize}
+        \item Operation ko safe rakhta hai aur race conditions se bachata hai.
+    \end{itemize}
+    \item \textbf{Useful For}:
+    \begin{itemize}
+        \item Duplicate data se bachne ke liye.
+        \item Consistent updates ya inserts ensure karne ke liye.
+    \end{itemize}
+\end{enumerate}
+
+\section*{\greenheading{Example 1: Basic Usage}}
+\begin{lstlisting}
+from myapp.models import User
+
+# Update kare agar username 'john' wala user exist karta hai; create kare agar nahi.
+user, created = User.objects.update_or_create(
+    username='john',  # Lookup field
+    defaults={'email': 'john@example.com', 'first_name': 'John'}
+)
+
+if created:
+    print("User created:", user)
+else:
+    print("User updated:", user)
+\end{lstlisting}
+
+\section*{\greenheading{Example 2: No \texttt{defaults}}}
+\begin{lstlisting}
+# Sirf specific fields ko update kare
+user, created = User.objects.update_or_create(
+    username='jane',
+    defaults={'email': 'jane.doe@example.com'}
+)
+\end{lstlisting}
+
+\section*{\greenheading{What Happens Internally?}}
+\begin{enumerate}
+    \item \textbf{Lookup Phase}:
+    \begin{itemize}
+        \item Django \texttt{kwargs} ka use karke database mein object dhoondhta hai (e.g., \texttt{username='john'}).
+    \end{itemize}
+    \item \textbf{Update or Create Phase}:
+    \begin{itemize}
+        \item Agar mil gaya: \texttt{defaults} mein diye gaye fields ko update karta hai.
+        \item Agar nahi mila: \texttt{kwargs} aur \texttt{defaults} mein diye gaye fields ke saath naya object create karta hai.
+    \end{itemize}
+\end{enumerate}
+
+\section*{\greenheading{Example Output}}
+\begin{itemize}
+    \item \textbf{Agar \texttt{username='john'} wala user exist karta hai}:
+    \begin{itemize}
+        \item \texttt{email} aur \texttt{first\_name} ko update karta hai.
+        \item \texttt{created = False} return karta hai.
+    \end{itemize}
+    \item \textbf{Agar aisa koi user exist nahi karta}:
+    \begin{itemize}
+        \item \texttt{username}, \texttt{email}, aur \texttt{first\_name} ke saath naya user create karta hai.
+        \item \texttt{created = True} return karta hai.
+    \end{itemize}
+\end{itemize}
+
+\section*{\greenheading{Notes for Quick Reference}}
+\begin{itemize}
+    \item \textbf{Use Cases}: Upsert operations (update + insert) ke liye ideal hai.
+    \item \textbf{Atomicity}: Multi-threaded environments mein data inconsistencies se bachata hai.
+    \item \textbf{Defaults}: Fields ko set ya update karne ke liye use kare.
+\end{itemize}
+
+===============================
+===============================
+\hrule
+
+\hrule
+
+
+
+% Define colors
+\definecolor{codebg}{RGB}{240, 240, 240}         % Light background for code
+\definecolor{important}{RGB}{255, 0, 0}          % Red for important points
+\definecolor{noteblue}{RGB}{0, 0, 255}           % Blue for notes
+\definecolor{highlight}{RGB}{0, 128, 0}          % Green for highlights
+\definecolor{keywordcolor}{RGB}{128, 0, 128}     % Purple for keywords
+\definecolor{functioncolor}{RGB}{0, 128, 128}    % Teal for function names
+\definecolor{variablecolor}{RGB}{0, 0, 255}      % Blue for variables
+\definecolor{stringcolor}{RGB}{163, 21, 21}      % Dark red for strings
+\definecolor{commentcolor}{RGB}{63, 127, 95}     % Green for comments
+
+% Configure listings for code blocks
+\lstset{
+    backgroundcolor=\color{codebg},              % Background color for code
+    frame=single,                                % Add a frame around the code
+    rulecolor=\color{black},                     % Frame color
+    basicstyle=\ttfamily\small,                  % Font style for code
+    breaklines=true,                             % Enable line breaks
+    tabsize=4,                                   % Tab size
+    captionpos=b,                                % Caption position
+    keywordstyle=\color{keywordcolor}\bfseries,  % Style for keywords
+    identifierstyle=\color{variablecolor},       % Style for variables
+    stringstyle=\color{stringcolor},             % Style for strings
+    commentstyle=\color{commentcolor}\itshape,   % Style for comments
+    morekeywords={val, var, fun, if, else, when, for, while, return, class, object, interface, override, import, package}, % Kotlin keywords
+}
+
+
+
+\begin{document}
+
+% Title
+\title{\textcolor{violet}{\Huge \textbf{Comprehensive Notes on Django Serializers with All Doubts Solved (in Hinglish)}}}
+
+\maketitle
+
+% Section 1: Serializer ka Kaam Kya Hai?
+\section*{\textcolor{noteblue}{1️⃣ Serializer ka Kaam Kya Hai?}}
+Serializer ka kaam hai \textbf{complex data types} (jaise Django models) ko \textbf{Python data types} mein convert karna, jo phir JSON, XML, ya dusre formats mein easily render ho sakte hain. Iske alawa, serializer incoming data (jaise API request se aane wala JSON) ko bhi validate aur process karke Python objects mein convert karta hai.
+
+\begin{itemize}
+    \item \textbf{Serialize}: Django model ya Python object ko JSON ya dusre formats mein convert karna.
+    \item \textbf{Deserialize}: Incoming data (JSON, etc.) ko validate karke Python objects mein convert karna.
+\end{itemize}
+
+---
+
+% Section 2: Fields Attribute Kya Hai?
+\section*{\textcolor{noteblue}{2️⃣ Fields Attribute Kya Hai?}}
+\texttt{fields} attribute serializer mein define hota hai, jo batata hai ki \textbf{kaunse fields serialized output mein include honge}. Ye bahut zaroori hai jab aap chahte hain ki sirf zaroori data hi expose ho.
+
+\subsection*{Example Model}
+\begin{lstlisting}[language=Python]
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.IntegerField()
+    description = models.TextField()
+    is_available = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+\end{lstlisting}
+
+\subsection*{Serializer}
+\begin{lstlisting}[language=Python]
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'price', 'is_available']
+\end{lstlisting}
+
+\subsection*{Explanation}
+\begin{itemize}
+    \item 
+    \begin{tcolorbox}
+        \texttt{fields} list mein jo fields mention kiye gaye hain (\texttt{id}, \texttt{name}, \texttt{price}, \texttt{is\_available}), unhi fields ko serializer output mein include karega.\\
+        Baki fields jaise \texttt{description}, \texttt{created\_at}, aur \texttt{updated\_at} ko ignore karega.
+    \end{tcolorbox}
+ 
+\end{itemize}
+
+
+
+
+---
+
+% Section 3: Agar Frontend Se Extra Data Aaye to Kya Hoga?
+\section*{\textcolor{noteblue}{3️⃣ Agar Frontend Se Extra Data Aaye to Kya Hoga?}}
+Agar frontend se extra fields ke saath data bheja jaye, lekin serializer mein sirf chune hue fields (\texttt{fields}) define kiye gaye hain, to:
+
+\begin{itemize}
+    \item \textbf{Sirf wahi data database mein save hoga jo serializer ke \texttt{fields} mein define hai.}
+    \item Baaki fields (jo serializer mein nahi hain) \textbf{ignore ho jayenge}.
+\end{itemize}
+
+\subsection*{Example}
+\begin{itemize}
+    \item Frontend se aaya data:
+    \begin{lstlisting}[language=Python]
+    {
+        "name": "Laptop",
+        "price": 50000,
+        "description": "A high-end gaming laptop",
+        "is_available": true,
+        "created_at": "2023-10-01T12:00:00Z"
+    }
+    \end{lstlisting}
+
+    \item Serializer mein \texttt{fields} defined hai:
+    \begin{lstlisting}[language=Python]
+    fields = ['id', 'name', 'price', 'is_available']
+    \end{lstlisting}
+
+    \item \textbf{Database mein save hone wala data}:
+    \begin{lstlisting}[language=Python]
+    {
+        "id": 1,
+        "name": "Laptop",
+        "price": 50000,
+        "is_available": true
+    }
+    \end{lstlisting}
+\end{itemize}
+
+\begin{notebox}
+    \textbf{Hinglish Explanation}:
+    \begin{itemize}
+        \item Frontend se jitne bhi fields bheje gaye hain, agar wo serializer ke \texttt{fields} mein nahi hain, to wo \textbf{ignore ho jayenge}.
+        \item Sirf \texttt{fields} mein define kiye gaye fields hi database mein save honge.
+        \item Is tarah aap control kar sakte hain ki kya data database tak pahunchega.
+    \end{itemize}
+\end{notebox}
+
+---
+
+% Section 4: Custom Fields Kaise Add Karein?
+\section*{\textcolor{noteblue}{4️⃣ Custom Fields Kaise Add Karein?}}
+Agar aap chahte hain ki serializer mein ek field jo model mein directly nahi hai, usko dynamically add karein, toh aap \texttt{SerializerMethodField} ka use kar sakte hain.
+
+\subsection*{Example}
+\begin{lstlisting}[language=Python]
+class ProductSerializer(serializers.ModelSerializer):
+    category_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'price', 'is_available', 'category_name']
+
+    def get_category_name(self, obj):
+        return obj.category.cat_name
+\end{lstlisting}
+
+\subsection*{Explanation}
+\begin{itemize}
+    \item \texttt{category\_name} ek custom field hai jo serializer mein define kiya gaya hai.
+    \item \texttt{get\_category\_name} method dynamically \texttt{category\_name} field ki value calculate karta hai.
+    \item Is tarah aap serializer mein model ke alawa bhi custom logic add kar sakte hain.
+\end{itemize}
+
+---
+
+% Section 5: Validation in Serializers
+\section*{\textcolor{noteblue}{5️⃣ Validation in Serializers}}
+Serializer automatically validate karta hai ki incoming data model ke rules aur constraints ko follow karta hai ya nahi.
+
+\subsection*{Example}
+\begin{lstlisting}[language=Python]
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'price', 'is_available']
+
+    def validate_price(self, value):
+        if value < 0:
+            raise serializers.ValidationError("Price cannot be negative.")
+        return value
+\end{lstlisting}
+
+\subsection*{Explanation}
+\begin{itemize}
+    \item \texttt{validate\_price} method ensure karta hai ki \texttt{price} field negative value na le.
+    \item Agar validation fail hoti hai, to error raise hoga.
+\end{itemize}
+
+---
+
+% Section 6: Atomic Operations with `update_or_create`
+\section*{\textcolor{noteblue}{6️⃣ Atomic Operations with `update_or_create`}}
+Agar aap chahte hain ki agar record exist karta hai to update ho, warna naya record create ho, toh \texttt{update\_or\_create} ka use karein.
+
+\subsection*{Example}
+\begin{lstlisting}[language=Python]
+product, created = Product.objects.update_or_create(
+    id=1,
+    defaults={'name': 'Updated Laptop', 'price': 60000}
+)
+\end{lstlisting}
+
+\subsection*{Explanation}
+\begin{itemize}
+    \item Agar \texttt{id=1} wala product exist karta hai, toh uska \texttt{name} aur \texttt{price} update hoga.
+    \item Agar nahi exist karta, toh naya product create hoga.
+\end{itemize}
+
+---
+
+% Section 7: Summary in Hinglish
+\section*{\textcolor{noteblue}{7️⃣ Summary in Hinglish}}
+\begin{itemize}
+    \item \textbf{Serializer ka kaam}:
+    \begin{itemize}
+        \item Data ko convert karta hai (Python ↔ JSON).
+        \item Validation karta hai (sirf zaroori fields hi accept kare).
+        \item Custom fields add karne ke liye \texttt{SerializerMethodField} ka use karte hain.
+    \end{itemize}
+
+    \item \textbf{Fields ka use kab karte hain?}
+    \begin{itemize}
+        \item Jab database se sirf zaroori data nikalna ho.
+        \item Jab sensitive ya unnecessary data ko exclude karna ho.
+        \item Jab performance improve karna ho (heavy fields ko avoid karke).
+    \end{itemize}
+
+    \item \textbf{Frontend se extra data aa raha hai to kya hoga?}
+    \begin{itemize}
+        \item Sirf wahi data database mein save hoga jo serializer ke \texttt{fields} mein define hai.
+        \item Baaki fields ignore ho jayenge.
+    \end{itemize}
+
+    \item \textbf{Custom fields}:
+    \begin{itemize}
+        \item \texttt{SerializerMethodField} ka use karke dynamic fields add kar sakte hain.
+    \end{itemize}
+
+    \item \textbf{Validation}:
+    \begin{itemize}
+        \item Serializer automatic validation karta hai, aur custom validation methods bhi add kar sakte hain.
+    \end{itemize}
+\end{itemize}
+
+===============================
+===============================
+\hrule
+
+% Define colors
+\definecolor{codebg}{RGB}{240, 240, 240}         % Light background for code
+\definecolor{important}{RGB}{255, 0, 0}          % Red for important points
+\definecolor{noteblue}{RGB}{0, 0, 255}           % Blue for notes
+\definecolor{highlight}{RGB}{0, 128, 0}          % Green for highlights
+\definecolor{keywordcolor}{RGB}{128, 0, 128}     % Purple for keywords
+\definecolor{functioncolor}{RGB}{0, 128, 128}    % Teal for function names
+\definecolor{variablecolor}{RGB}{0, 0, 255}      % Blue for variables
+\definecolor{stringcolor}{RGB}{163, 21, 21}      % Dark red for strings
+\definecolor{commentcolor}{RGB}{63, 127, 95}     % Green for comments
+
+% Configure listings for code blocks
+\lstset{
+    backgroundcolor=\color{codebg},              % Background color for code
+    frame=single,                                % Add a frame around the code
+    rulecolor=\color{black},                     % Frame color
+    basicstyle=\ttfamily\small,                  % Font style for code
+    breaklines=true,                             % Enable line breaks
+    tabsize=4,                                   % Tab size
+    captionpos=b,                                % Caption position
+    keywordstyle=\color{keywordcolor}\bfseries,  % Style for keywords
+    identifierstyle=\color{variablecolor},       % Style for variables
+    stringstyle=\color{stringcolor},             % Style for strings
+    commentstyle=\color{commentcolor}\itshape,   % Style for comments
+    morekeywords={override, fun, val, var, if, else, import, package, class, return}, % Kotlin keywords
+    moredelim=[s][\color{functioncolor}]{fun}{(}, % Highlight function definitions
+    moredelim=[s][\color{functioncolor}]{override}{(}, % Highlight overridden functions
+}
+
+\begin{document}
+
+% Title
+\title{\textcolor{violet}{\Huge \textbf{Why Use Django Shell When You Can Import Everything in One File and Run That File? (Hinglish Explanation)}}}
+
+
+
+\author{}
+\date{}
+\maketitle
+
+% Section 1: Setup Ka Asaan Hona
+\section*{\textcolor{noteblue}{1. Setup Ka Asaan Hona}}
+
+\vspace{5pt} % Thoda gap add karega
+
+\noindent
+\textbf{Alag File Banane Mein:}  
+\begin{itemize}
+    \item Agar aap ek alag file banate hain, toh aapko har baar manually:
+    \begin{itemize}
+        \item \texttt{Django settings} configure karna padega (\texttt{DJANGO\_SETTINGS\_MODULE} set karna).
+        \item Saare zaruri modules/models/functions import karna padega.
+        \item Database connection aur environment setup karna padega.
+    \end{itemize}
+    \item Isme time lagta hai aur debugging bhi complex ho sakta hai agar koi cheez miss ho jaati hai.
+\end{itemize}
+
+\vspace{10pt} % Extra spacing between two sections
+
+\noindent
+\textbf{Django Shell Mein:}  
+\begin{itemize}
+    \item Django shell automatically sab kuch set kar deta hai.
+    \item Aap sirf command likhkar direct models, functions, ya database queries test kar sakte hain.
+\end{itemize}
+
+
+
+\begin{lstlisting}[language=Python]
+from myapp.models import User
+users = User.objects.all()
+print(users)
+\end{lstlisting}
+
+
+Yahan koi extra setup nahi chahiye.
+
+---
+
+% Section 2: Interactive Testing
+\section*{\textcolor{noteblue}{2. Interactive Testing}}
+- **Alag File Banane Mein:**  
+  Jab aap ek alag file banate hain, toh aapko har baar file save karni padti hai aur phir run karni padti hai. Agar koi error aata hai, toh dubara edit karna padta hai. Ye process slow ho sakta hai.
+
+- **Django Shell Mein:**  
+  Django shell interactive hota hai. Aap ek line likhkar dekh sakte hain ki wo kaise behave karti hai. Agar koi error aata hai, toh turant fix karke next step pe move kar sakte hain.  
+
+
+\begin{lstlisting}[language=Python]
+user = User.objects.first()
+print(user.name)  # Agar output correct nahi hai, toh turant debug kar sakte hain.
+\end{lstlisting}
+
+
+---
+
+% Section 3: Database Changes Ko Real-Time Test Karna
+\section*{\textcolor{noteblue}{3. Database Changes Ko Real-Time Test Karna}}
+- **Alag File Banane Mein:**  
+  Agar aap database par koi changes karte hain (jaise create, update, delete), toh aapko har baar file run karke check karna padta hai. Isme time lagta hai aur kuch errors unnoticed reh sakte hain.
+
+- **Django Shell Mein:**  
+  Django shell mein aap direct database queries run kar sakte hain aur results ko real-time dekh sakte hain.  
+
+
+\begin{lstlisting}[language=Python]
+new_user = User.objects.create(name="John", email="john@example.com")
+print(new_user.id)  # Turant dekh sakte hain ki user create hua hai ya nahi.
+\end{lstlisting}
+
+
+---
+
+% Section 4: Debugging Aur Experimentation
+\section*{\textcolor{noteblue}{4. Debugging Aur Experimentation}}
+- **Alag File Banane Mein:**  
+  Debugging ke liye aapko har baar file ko edit karna padta hai, logs capture karna padta hai, aur phir analyse karna padta hai. Ye process tedious ho sakta hai.
+
+- **Django Shell Mein:**  
+  Django shell mein aap direct variables ko inspect kar sakte hain, queries ko test kar sakte hain, aur results ko turant dekh sakte hain.  
+
+\begin{mdframed}[backgroundcolor=codebg, linewidth=1pt]
+\begin{lstlisting}[language=Python]
+users = User.objects.filter(is_active=True)
+print(users.query)  # SQL query ko dekh sakte hain.
+print(users)        # Results ko dekh sakte hain.
+\end{lstlisting}
+\end{mdframed}
+
+---
+
+% Section 5: Third-Party Tools Ya Utilities Ko Test Karna
+\section*{\textcolor{noteblue}{5. Third-Party Tools Ya Utilities Ko Test Karna}}
+- **Alag File Banane Mein:**  
+  Agar aap third-party libraries (jaise `requests`, `pandas`, etc.) ya custom utilities test karna chahte hain, toh alag file mein har baar import karna padta hai.
+
+- **Django Shell Mein:**  
+  Django shell mein aap direct in tools ko import karke test kar sakte hain.  
+
+
+\begin{lstlisting}[language=Python]
+import requests
+response = requests.get("https://jsonplaceholder.typicode.com/posts")
+print(response.json())
+\end{lstlisting}
+
+
+---
+
+% Section 6: Shell Plus Ka Fayda
+\section*{\textcolor{noteblue}{6. Shell Plus Ka Fayda}}
+- **Alag File Banane Mein:**  
+  Har baar models, functions, aur utilities import karna padta hai, jo boring aur time-consuming ho sakta hai.
+
+- **Django Shell Plus (django-extensions):**  
+  Agar aap `shell_plus` use karte hain, toh ye automatically saari models aur utilities import kar leta hai. Aap sirf apne code ko likhna shuru kar sakte hain.  
+
+
+\begin{lstlisting}[language=Bash]
+python manage.py shell_plus
+\end{lstlisting}
+
+
+Ab aapko manually kuch bhi import nahi karna padega.
+
+---
+
+% Section 7: Quick Prototyping
+\section*{\textcolor{noteblue}{7. Quick Prototyping}}
+- **Alag File Banane Mein:**  
+  Jab aap kisi feature ya logic ko prototype kar rahe hote hain, toh alag file mein har baar code likhna aur run karna padta hai.
+
+- **Django Shell Mein:**  
+  Django shell mein aap quickly prototyping kar sakte hain. Jaise, agar aap kisi model par koi logic test karna chahte hain, toh turant kar sakte hain.  
+
+
+\begin{lstlisting}[language=Python]
+from myapp.models import Product
+products = Product.objects.filter(price__gt=1000)
+print([p.name for p in products])  # Quick testing of logic.
+\end{lstlisting}
+
+
+---
+
+% Section 8: Directly Django ORM Methods Use Kar Sakte Hain
+\section*{\textcolor{noteblue}{8. Directly Django ORM Methods Use Kar Sakte Hain}}
+- **Alag File Banane Mein:**  
+  Alag file mein aapko models import karna padta hai, aur phir ORM methods use karna padta hai.
+
+- **Django Shell Mein:**  
+  Django shell mein aap directly ORM methods use kar sakte hain bina kisi extra import ke (agar `shell_plus` use karte hain).  
+
+\begin{mdframed}[backgroundcolor=codebg, linewidth=1pt]
+\begin{lstlisting}[language=Python]
+# Without importing anything explicitly
+users = User.objects.all()
+print(users)
+\end{lstlisting}
+\end{mdframed}
+
+---
+
+% Conclusion
+\section*{\textcolor{noteblue}{Conclusion (Nishkarsh)}}
+- **Alag File Banane Ka Fayda:**  
+  Permanent scripts ya reusable code ke liye alag file banana useful hota hai.
+
+- **Django Shell Ka Fayda:**  
+  Quick testing, debugging, aur experimentation ke liye Django shell kaafi better hota hai kyunki:
+  - Setup asaan hai.
+  - Interactive hai.
+  - Real-time feedback milta hai.
+  - Environment ready hota hai.
+
+Isliye, jab tak aapka kaam permanent script nahi ban raha, Django shell ka use karna best practice hai. ��
+
+===============================
+===============================
+\hrule
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
