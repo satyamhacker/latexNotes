@@ -1,0 +1,651 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{listings, breakable}
+\usepackage{listings}
+\usepackage[parfill]{parskip}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage[sfdefault]{roboto}
+\usepackage{mathptmx}
+\usepackage{hyperref}
+
+\usepackage{longtable}
+\usepackage{array}
+
+% Palette
+\definecolor{HeadingBlue}{RGB}{0,119,187}
+\definecolor{ImportantRed}{RGB}{227,27,35}
+\definecolor{CodeBackground}{RGB}{247,247,247}
+\definecolor{KeywordColor}{RGB}{85,55,123}
+\definecolor{StringColor}{RGB}{180,130,0}
+\definecolor{CommentColor}{RGB}{42,122,52}
+\definecolor{FunctionColor}{RGB}{0,63,154}
+\definecolor{NumberColor}{RGB}{93,173,93}
+
+% Heading styles
+\titleformat{\section}
+  {\LARGE\sffamily\color{HeadingBlue}}
+  {\thesection}
+  {0em}
+  {\centering}
+\titlespacing*{\section}{0pt}{2em}{1em}
+
+% Important text (red)
+\newcommand\imp[1]{{\color{ImportantRed}#1}}
+
+% Code box setup
+\lstset{
+  language=sh,
+  basicstyle=\ttfamily,
+  backgroundcolor=\color{CodeBackground},
+  frame=tb,
+  framerule=0pt,
+  aboveskip=6pt,
+  belowskip=6pt,
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\footnotesize\color{gray},
+  numbersep=10pt,
+  numberblanklines=false,
+  breaklines=true,
+  prebreak={\mbox{\textcolor{gray}{$\hookrightarrow$}\space}},
+  postbreak={\mbox{\space\textcolor{gray}{$\hookleftarrow$}}},
+  keywordstyle=\color{KeywordColor},
+  stringstyle=\color{StringColor},
+  commentstyle=\color{CommentColor},
+  identifierstyle=\color{FunctionColor},
+  literate={*}{{\textcolor{KeywordColor}{*}}}1
+    {=}{{\textcolor{KeywordColor}{=}}}1
+    {|}{{\textcolor{KeywordColor}{|}}}1
+    {>}{{\textcolor{KeywordColor}{>}}}1
+    {<}{{\textcolor{KeywordColor}{<}}}1
+    {-}{{\textcolor{KeywordColor}{-}}}1
+    {/}{{\textcolor{KeywordColor}{/}}}1
+    {(}{{\textcolor{KeywordColor}{(}}}1
+    {)}{{\textcolor{KeywordColor}{)}}}1
+    {[}{{\textcolor{KeywordColor}{[}}}1
+    {]}{{\textcolor{KeywordColor}{]}}}1
+    {+}{{\textcolor{KeywordColor}{+}}}1,
+  escapeinside={*@}{@*}
+}
+
+\newtcblisting{codeblock}[1][sh]{
+  listing only,
+  listing options={language=#1,style=tcblatex},
+  colback=CodeBackground,
+  arc=3pt,
+  boxrule=0.4pt,
+  colframe=gray,
+  size=fbox,
+  left=4pt,
+  right=4pt,
+  top=4pt,
+  bottom=4pt,
+  breakable,
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{\footnotesize React Native Notes}
+\fancyhead[R]{\footnotesize \thepage}
+
+\begin{document}
+
+===================================================================
+\section*{React Native Setup \& Basics}
+\rmfamily
+
+React Native ek powerful framework hai jo JavaScript use karke ek hi codebase se dono (Android aur iOS) ke liye native mobile apps bana sakte ho. Setup karne ke liye \imp{Node.js} aur \imp{Java} (Android ke liye), \imp{Xcode} (iOS ke liye) chahiye hota hai.
+
+Aap \imp{Android Studio} ya \imp{Xcode} aur \imp{expo} ya \imp{react-native-cli} use kar sakte ho project start karne ke liye.  
+Pehle hi baat: \imp{npx react-native init ProjectName} se project create hota hai. Fir \texttt{cd ProjectName} se us project ke folder mein chale jao.
+
+===================================================================
+\section*{React Native Commands}
+\subsection*{1. npx react-native init ProjectName}
+\imp{Kya karta hai?}\\
+Yeh ek naya React Native project create karta hai, projectName ke naam se. Uske andar source code, dependencies aur ek ready-to-run mobile app ka structure generate hota hai.
+
+\imp{Kyun use karein?}\\
+Kyunki koi project start karne ke liye ye command basic step hai. Without this, project ka structure nahi milega, app banayege kahan se?
+
+\imp{Agar nahi karenge toh kya hoga?}\\
+Project structure hi nhi milega, app bana hi nahi payenge.
+
+\vspace{0.9em}
+\subsection*{2. npx react-native start}
+\imp{Kya karta hai?}\\
+Yeh Metro bundler start karta hai – jo JavaScript code ko compile karke device/emulator pe run karne ke liye bundle banata hai.
+
+\imp{Kyun use karein?}\\
+App development ke time, Metro bundler ke bina, JS code changes device/emulator pe reflect nahi honge.
+
+\vspace{0.9em}
+\subsection*{3. npx react-native start --reset-cache}
+\imp{Kya karta hai?}\\
+Yeh Metro bundler ko restart karta hai \imp{cache ko clear kar ke}. Cache clear karne se bundler pura naya build karta hai, old cached files se effect nahi aata.
+
+\imp{Kyun use karein?}\\
+Agar app mein koi style change ya code change reflect nahi ho raha, errors aa rahe ho, bundler stuck ho gaya hai, ya hot reloading kaam nahi kar raha, toh iss command se bundler restart hoga aur fresh start ho jata hai.
+
+\imp{Agar use na karein toh kya hoga?}\\
+Old cached files ke karan app mein bugs ya unexpected behavior aa sakte hain, ya changes reflect nahi honge.
+
+\imp{Kab use karein?}\\
+App pe bug ya unexpected behavior dikhe, ya changes reflect nahi ho rahe ho, toh Metro bundler ko ye command dekar restart karein.
+
+\imp{Example}\\
+Open terminal, app ke root folder pe:
+
+\begin{codeblock}
+npx react-native start --reset-cache
+\end{codeblock}
+
+\vspace{0.9em}
+\subsection*{4. npx react-native run-android}
+\imp{Kya karta hai?}\\
+Yeh command apni app ko Android device/emulator pe install aur run kar deta hai.
+
+\imp{Kyun use karein?}\\
+Apni app ko Android pe check karna hai, ya test karna hai toh ye command zaruri hai.
+
+\imp{Agar use na karein toh kya hoga?}\\
+App device pe nahi chal payegi.
+
+\imp{Kab use karein?}\\
+Jab app ka development kar rahe ho aur check karna chahte ho ki Android device/emulator mein kaise run ho raha hai.
+
+\vspace{0.9em}
+\subsection*{5. cd android}
+\imp{Kya karta hai?}\\
+Yeh command app ke \imp{android} folder mein chale jata hai.
+
+\imp{Kyun use karein?}\\
+Android ke native operations, like Gradle build commands chalaane ke liye.
+
+\vspace{0.9em}
+\subsection*{6. ./gradlew clean}
+\imp{Kya karta hai?}\\
+Yeh command Android project ke build folder ko clean kar deta hai, sab old build files delete ho jaate hain.
+
+\imp{Kyun use karein?}\\
+Agar app build karne mein errors aa rahe ho, ya build fail ho raha ho, ya strange behavior dikh raha ho, toh clean command se build cache clear hota hai aur naya build banta hai.
+
+\imp{Agar use na karein toh kya hoga?}\\
+Build errors ya cache related problems rahenge.
+
+\imp{Kab use karein?}\\
+Jab Android project mein koi build error ho, ya app run nahi ho rahi ho, ya app behavior unexpected ho, toh iss command se cache clean karein.
+
+\imp{Example}\\
+App ke root folder pe:
+
+\begin{codeblock}
+cd android
+./gradlew clean
+\end{codeblock}
+
+Fir \texttt{cd ..} se wapas app ke root pe aao.
+
+\vspace{0.9em}
+\section*{Saare Commands Ek Sath: Common Flow}
+- \imp{Create Project:}\\
+  \texttt{npx react-native init MyApp}
+- \imp{Go to Project Directory:}\\
+  \texttt{cd MyApp}
+- \imp{Start Metro Bundler:}\\
+  \texttt{npx react-native start}\\
+  (ya fir \texttt{npx react-native start --reset-cache} agar issues ho)
+- \imp{Run App on Android:}\\
+  \texttt{npx react-native run-android}
+- \imp{Clean Android Build (if needed):}
+  \begin{codeblock}
+cd android
+./gradlew clean
+\end{codeblock}
+  Fir wapas \texttt{cd ..} pe aao.
+
+\vspace{0.5em}
+\section*{Summary Table: Commands, Usages, Aur Effects}
+
+\begin{center}
+\small % Reduce font size to fit content
+\begin{longtable}{|p{2.5cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+\hline
+\textbf{Command} & \textbf{Kya Karta Hai} & \textbf{Kyun Use Karein} & \textbf{Agar Na Karen Toh?} & \textbf{Example Use Case} \\
+\hline
+\endfirsthead
+
+\multicolumn{5}{c}%
+{{\bfseries Summary Table: Commands, Usages, Aur Effects - continued from previous page}} \\
+\hline
+\textbf{Command} & \textbf{Kya Karta Hai} & \textbf{Kyun Use Karein} & \textbf{Agar Na Karen Toh?} & \textbf{Example Use Case} \\
+\hline
+\endhead
+
+\hline \multicolumn{5}{|r|}{{Continued on next page}} \\ \hline
+\endfoot
+
+\hline
+\endlastfoot
+
+npx react-native init MyApp & New project banata hai & App shuru karne ke liye & Project create hi nahi hoga & Sabse pehla step – app banana hai \\
+\hline
+
+npx react-native start & Metro bundler start karta hai & App development/testing ke liye & Changes reflect nahi honge & Normal development time \\
+\hline
+
+npx react-native start --reset-cache & Cache clear karke bundler restart karta hai & Jaldi naye changes, bugs resolve & Old issues theek nahi honge & Errors, unexpected behavior, changes reflect nahi ho \\
+\hline
+
+npx react-native run-android & App Android pe run karta hai & App check/run karne ke liye & App device pe run nahi hogi & Development, testing \\
+\hline
+
+cd android & Android folder mein enter karein & Android-specific operations ke liye & Android commands run nahi kar payenge & App build error/time \\
+\hline
+
+./gradlew clean & Android build cache clean karta hai & Clean build, errors resolve & Build errors rahenge & Build issues, app run nahi ho rahi \\
+\hline
+
+\end{longtable}
+\end{center}
+
+\vspace{1em}
+\section*{Conclusion}
+In commands ko samajhna zaruri hai kyuki har command ka apna purpose hai – kuch project setup, kuch app run, kuch clean build, kuch debugging. Agar kisi command ka sahi use na karo, ya use na karo, toh app mein bugs, build errors, ya unexpected behavior dikh sakta hai.  
+Sahi tareeke se sab use karna sikho, toh kisi bhi problem se quickly recover kar payenge – aur app development fast, smooth aur professional hota hai!
+
+=============================================================
+\section*{ADB Basics – Kya Hai Aur Kaam Kaise Karta Hai?}
+\imp{ADB (Android Debug Bridge)} ek command-line tool hai jo aapko Android devices (real ya emulator) se communicate karne mein help karta hai. Developer, tester, ya koi bhi techie apne computer se Android device control kar sakta hai, directly code ki help se. ADB ka use karke, app install/uninstall kar sakte ho, files copy kar sakte ho, device restart ya reboot kar sakte ho, logcat log dekh sakte ho, screen record, screenshot, aur bahut kuch kar sakte ho.
+
+\imp{ADB ka main purpose:}\\
+- \imp{Debugging:} App ke bugs ko find and fix karna\\
+- \imp{Device Testing:} Apps test karna\\
+- \imp{File Transfer:} File upload/download karna\\
+- \imp{System Control:} Device reboot, shell access, logs capture karna\\
+- \imp{Automation:} Automation testing ke liye adb command use hota hai
+
+\imp{Kuch Common ADB Commands:}\\
+- \texttt{adb devices} – Connected Android devices list karta hai\\
+- \texttt{adb install app.apk} – Kisi bhi APK ko device pe install karta hai\\
+- \texttt{adb logcat} – Device ka logcat (logs) real-time dekhta hai\\
+- \texttt{adb reboot} – Device restart karta hai\\
+- \texttt{adb shell} – Device pe shell access deta hai (jaise terminal)\\
+- \texttt{adb kill-server} – ADB server restart karta hai (jab devices show nahi ho rahe ho)
+
+\imp{Kisne use kiya chahiye?}\\
+App developer, tester, ya jo Android pe kuch bhi advanced karna chahe, uske liye ADB must hai.
+
+\vspace{1em}
+\section*{React Native Commands – npx react-native start, npx react-native run-android. Kab Kon Sa Use Karein?}
+\imp{npx react-native start}\\
+- \imp{Kya karta hai?}\\
+  Ye \imp{Metro bundler} start karta hai. Metro bundler, apne JavaScript code ko compile karke device/emulator ke liye ek bundle banata hai.\\
+- \imp{Kyun use karein?}\\
+  Development ke time pe, Metro bundler running ho chahiye nahi toh changes reflect nahi honge device pe.\\
+- \imp{Kab use karein?}\\
+  Jab app ka development kar rahe ho, kuch change kiya ho, toh jab bhi phone/emulator pe reload/refresh karenge, Metro bundler code ko refresh karega.\\
+- \imp{Agar ye nahi chalaoge toh?}\\
+  Changes reflect nahi honge. Bundler ke bina app run hi nahi hogi (live reload, error display bhi nahi hoga).
+
+\imp{npx react-native run-android}\\
+- \imp{Kya karta hai?}\\
+  Ye command apni app ko \imp{Android device/emulator} pe build, install, aur run kar deta hai.\\
+- \imp{Kyun use karein?}\\
+  Apni app ko Android pe run karna hai, test karna hai, ya koi native part change kiya hai toh, ye command hi chalana padega.\\
+- \imp{Kab use karein?}\\
+  Jab app ka native side (jaise AndroidManifest.xml, new library, etc.) kuch change hua hai, ya platform-specific code likha hai.\\
+- \imp{Agar ye command nahi chalaoge toh?}\\
+  App device/emulator pe install hi nahi hogi, yani test ya run hi nahi kar payenge.
+
+\vspace{1em}
+\section*{Dono Commands ka Farq – Kya, Kyun, Kab?}
+\begin{center}
+\small % Reduce font size to fit content
+\begin{longtable}{|p{2.5cm}|p{3.5cm}|p{3cm}|p{2.5cm}|p{3.5cm}|}
+\hline
+\textbf{Command} & \textbf{Kya Karta Hai} & \textbf{Kyun Important Hai?} & \textbf{Kab Use Karein?} & \textbf{Agar Na Chalaoge Toh?} \\
+\hline
+\endfirsthead
+
+\multicolumn{5}{c}%
+{{\bfseries Continued Table - Commands Summary}} \\
+\hline
+\textbf{Command} & \textbf{Kya Karta Hai} & \textbf{Kyun Important Hai?} & \textbf{Kab Use Karein?} & \textbf{Agar Na Chalaoge Toh?} \\
+\hline
+\endhead
+
+\hline \multicolumn{5}{|r|}{{Continued on next page}} \\ \hline
+\endfoot
+
+\hline
+\endlastfoot
+
+npx react-native start & Metro bundler start karta hai & JS code changes reflect karne ke liye & Dev time, jab code change ho & No live reload, no error display, app naya code pe nahi chalega \\
+\hline
+
+npx react-native run-android & App ko device/emulator pe build-install-run & App ko test/run karna & Native code change hai, ya app install karna hai & App install nahi hogi, device pe nahi chalegi \\
+\hline
+
+\end{longtable}
+\end{center}
+
+\imp{Real Life Example:}\\
+Suppose aapne app.js mein kuch change kiya. Sirf \texttt{npx react-native start} chalate raho, app reload karo, changes dikh jayenge.  
+Lekin agar aapne AndroidManifest.xml ya koi native library add/remove ki hai, toh \texttt{npx react-native run-android} chalana padega, tabhi changes device pe apply honge.
+
+\vspace{1em}
+\section*{Dono Chalaney ka Saahi Process}
+1. \imp{Metro bundler chalao:}\\
+   \texttt{npx react-native start}\\
+   (Isse bundler shuru ho jayega, app reload pe code changes reflect honge.)
+2. \imp{Agle terminal se:}\\
+   \texttt{npx react-native run-android}\\
+   (Isse app device/emulator pe build, install aur run hogi.)
+
+\imp{Kya Hoga Agar Sirf Run-Android Chalao?}\\
+Windows mein, \texttt{npx react-native run-android} chalaane se automatically bundler bhi chalu ho jata hai.  
+Lekin Linux pe, alag se bundler chalu karna padta hai.  
+Best practice hai dono command chalao:  
+Pehle \texttt{npx react-native start}, phir alag terminal pe \texttt{npx react-native run-android}.  
+Isse live reload, error display, aur app run dono sahi se honge.
+
+\vspace{1em}
+\section*{Saara Doubt Clear – Final Tips}
+- \imp{Jab bhi React Native ki development karo, Metro bundler run hona chahiye.}\\
+  Metro bundler ke bina, JS code changes reflect nahi honge device pe.
+- \imp{Jab bhi native code (Android/iOS) mein kuch change karo, naya library add karo, toh npx react-native run-android ya run-ios chalana padega.}\\
+  Sirf Metro bundler ke bina native changes reflect nahi honge.
+- \imp{Metro bundler kabhi bhi close na ho warna app kaam nahi karegi.}\\
+  Hot Reload/Fast Refresh Metro bundler par depend karta hai.
+- \imp{Kabhi error aaye, logcat se log dekhlo (adb logcat).}
+- \imp{Kabhi device show na ho, toh adb devices karke device list dekho, ya adb kill-server phir adb start-server kar do.}
+
+\vspace{1em}
+\section*{Summary in One Line}
+\imp{npx react-native start} – JS code changes reflect karne ke liye;\\
+\imp{npx react-native run-android} – App ko build-install-run karne ke liye;\\
+Agar native code change hua ho, toh dono chalao – bundler aur run-android.\\
+ADB – Device ko control, debug, log read, file transfer, aur advanced automation ke liye use karo.
+
+\imp{Ye doubt clear ho gaya hoga ki kab, kaun sa command use karna hai. Ab toh live reload, code change, native kaam, sab smooth ho jayega!}
+
+=============================================================
+
+****
+\section*{React Native Project Config Files: Metro \& Babel – Ek Dum Beginner Level, Pure Hinglish, Sab Cheezein Clear (Notes Type)}
+\rmfamily
+
+****
+\section*{Metro – Kya Hai?}
+- \imp{Metro} React Native ka default \imp{JavaScript bundler} hai.
+- \imp{Bundler ka kaam:} Aapke saare JS/JSX/TypeScript files ko \imp{eke JavaScript bundle} mein convert karta hai, jo device pe chalega.
+- \imp{Live Reload/Fast Refresh:} Agar aap code change karo, toh Metro bundler instantly usme reflect karta hai, app apne aap refresh ho jati hai screen pe (hot reload).
+- \imp{Aur bhi karte hai:} Assets (images, fonts, etc.) bundle karna, code optimize/minify karna, aur app ko production-ready banana.
+
+\imp{Why Important?}\\
+Metro ke bina React Native app chal hi nahi sakti. Metro bundler chalao, tabhi JS code device pe aayega aur changes dikhenge.
+
+****
+\section*{metro.config.js – What Is This File?}
+- \imp{metro.config.js} ek configuration file hai jo Metro bundler ki \imp{custom tuning} karne ke liye hai.
+- \imp{Isme kya hota hai?} Aap settings daal sakte ho — jaise kaunsi files bundle hogi, kaunsi asset files include hogi, ya custom transformer/plugins add kar sakte ho.
+- \imp{Usually:} Ye file automatically ban jati hai, aur mostly empty ya default rehti hai, kyuki Metro khud decent settings use karta hai.
+- \imp{Customize kab karein?} Jab aapko bundling ke rules change karne ho, ya third-party tools integrate karne ho, tab.
+
+\imp{Example:}\\
+Normally, ye file mein sirf default config import hoti hai:
+
+\begin{codeblock}
+const { getDefaultConfig } = require('@react-native/metro-config');
+const config = getDefaultConfig(__dirname);
+module.exports = config;
+\end{codeblock}
+
+Isse app default Metro config par chalegi.
+
+****
+\section*{metro.config.js – Kab Change Karein? Real-life Examples}
+
+\subsection*{1. Extra Asset Files (Images, Fonts, etc.) Bundle Karna}
+\imp{Scenario:} Hume \texttt{.svg}, \texttt{.ttf}, \texttt{.webp} files bhi bundle karvani hai, Metro by default inko nahi le raha.
+\imp{Solution:}\\
+\texttt{metro.config.js} mein extra extensions add karo:
+
+\begin{codeblock}
+const { getDefaultConfig } = require('@react-native/metro-config');
+const config = getDefaultConfig(__dirname);
+config.resolver.assetExts.push('svg', 'ttf', 'webp');
+module.exports = config;
+\end{codeblock}
+
+Isse aapki app in extra files ko bhi bundle karegi.
+
+****
+\subsection*{2. Monorepo (Multi-folder/Shared Code) ka Scene}
+\imp{Scenario:} Aapke project ke alawa ek \texttt{shared-lib} folder bhi hai, usme code hai jo app mein use karna hai.
+\imp{Solution:}\\
+Ek extra folder (\texttt{watchFolders}) Metro ko batao:
+
+\begin{codeblock}
+const { getDefaultConfig } = require('@react-native/metro-config');
+const path = require('path');
+const config = getDefaultConfig(__dirname);
+config.watchFolders = [
+  ...config.watchFolders,
+  path.resolve(__dirname, '../shared-lib')
+];
+module.exports = config;
+\end{codeblock}
+
+Isse Metro apni wajah se wahan ka code bhi bundle karega.
+
+****
+\subsection*{3. Sentry (Third-part\subsection*{3. Sentry (Third-party Tool) Integration}
+\imp{Scenario:} Sentry SDK (error monitoring) use karna hai.
+\imp{Solution:}\\
+Sentry ke wrapper ko config mein shamil karo:
+
+\begin{codeblock}
+const { getDefaultConfig } = require('@react-native/metro-config');
+const { withSentryConfig } = require('@sentry/react-native/metro');
+const config = getDefaultConfig(__dirname);
+module.exports = withSentryConfig(config);
+\end{codeblock}
+
+Isse Sentry bhi bundling ke waqt apna kaam kar payega.
+
+****
+\subsection*{4. Custom Transformer/Plugin Add Karna}
+\imp{Scenario:} Koi extra plugin ya custom transformer chahiye ho.
+\imp{Solution:}\\
+Config object mein transformer/plugin add karo.
+
+****
+\section*{Agar metro.config.js File Na Ho?}
+- \imp{Agar file nahi hogi, toh Metro default config use karega.} App chalti rahegi.
+- \imp{Agar custom karna ho, ya third-party tool ka requirement ho, toh hi file banana zaruri hai.}
+
+****
+\section*{Agar metro.config.js Mein Change Karo, Toh Kya Karein?}
+- \imp{Agar aapne \texttt{metro.config.js} ya kisi bhi Metro config file mein kuch change kiya, toh Metro bundler ko restart karna padta hai.}
+- \imp{Restart kaise karein?}
+  - \imp{Pehle Metro bundler band karo} (terminal jis par \texttt{npx react-native start} chal raha tha, vahan Ctrl+C dabao).
+  - \imp{Naya bundler chalao:}
+\begin{bashblock}
+npx react-native start --reset-cache
+\end{bashblock}
+  \imp{--reset-cache ka matlab, pura purana cache saaf ho jayega, aur naya build hoga jo apne changes ko reflect karega.}
+- \imp{Bina restart kiye Metro, naye changes apply nahi honge!}
+
+****
+\section*{babel.config.js – Kya Hai? Kyun Zaruri Hai?}
+- \imp{Babel} ek \imp{JavaScript transpiler} hai, jo modern JS (\texttt{const}, \texttt{async/await}, \texttt{import/export}, etc.) ko older devices/browsers ke liye compatible code mein convert karta hai.
+- \imp{React Native} bhi Babel ka use karta hai, taaki aap latest JS likh sako, lekin device par wo code chal jaye.
+- \imp{babel.config.js} React Native project ki \imp{Babel settings ki configuration file} hai.
+- Yahan aap \imp{presets} (e.g. React Native preset), \imp{plugins} (jaise module aliases, experimental features) define kar sakte ho.
+
+\imp{Default Example:}\\
+App root par \texttt{babel.config.js}:
+
+\begin{codeblock}
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset']
+};
+\end{codeblock}
+
+Isse app React Native ki zaruri transformations use karegi.
+
+****
+\section*{Kab babel.config.js Mein Change Karna Padega?}
+
+\subsection*{1. Module Aliases (Short Import Paths)}
+\imp{Scenario:} Aap chahte ho ki \texttt{@components/Button} import ho sake, istead of \texttt{../../components/Button}.
+\imp{Solution:}\\
+Plugin \texttt{babel-plugin-module-resolver} add karo, aur config karo:
+
+\begin{codeblock}
+module.exports = function(api) {
+  api.cache(true);
+  return {
+    presets: ['module:metro-react-native-babel-preset'],
+    plugins: [
+      ['module-resolver', {
+        root: ['./src'],
+        alias: {
+          '@components': './src/components',
+          '@screens': './src/screens'
+        }
+      }]
+    ]
+  };
+};
+\end{codeblock}
+
+Isse aap puri project mein \texttt{@components/Button} import kar sakte hain, aur path confusion nahi rahegi.
+
+****
+\subsection*{2. Experimental JS Features (Decorators, etc.)}
+\imp{Scenario:} Aap chahte ho ki \texttt{@decorator} jaise ES proposals work karein.
+\imp{Solution:}\\
+Extra plugin add karo:
+
+\begin{codeblock}
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset'],
+  plugins: [
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
+    '@babel/plugin-proposal-class-properties'
+  ]
+};
+\end{codeblock}
+
+Isse app development mein experimental JS features use kar sakoge.
+
+****
+\subsection*{3. Monorepo Ya Custom Build Pipeline}
+\imp{Scenario:} Monorepo project hai, ya build process modified karna hai.
+\imp{Solution:}\\
+Custom Babel config karo, aur extra plugins/presets daalo.
+
+****
+\section*{Agar babel.config.js File Na Ho?}
+- \imp{Agar file nahi hogi, toh preset \texttt{package.json} ki \texttt{babel} key mein bhi ho sakta hai.}
+- \imp{Lekin best practice hai root pe file banaye rakhna.}
+- \imp{Agar file delete kar do, toh \texttt{react-native} preset dekhne lagta hai, lekin agar koi custom plugin, alias, experimental feature add karna ho, toh file banana padega.}
+
+****
+\section*{Agar babel.config.js Mein Change Karo, Toh Kya Karein?}
+- \imp{Agar aapne \texttt{babel.config.js} mein change kiya, toh Metro bundler ko restart karna zaruri hai.}\\
+  \imp{Restart command:}
+\begin{codeblock}
+npx react-native start --reset-cache
+\end{codeblock}
+- \imp{Bina restart kiye Babel config ke changes reflect nahi honge!}
+
+****
+\section*{Summary Table: Metro aur Babel Files – Sab Kuch Ek Sath}
+
+\small % Reduce font size to fit content
+\begin{center}
+\begin{longtable}{|p{2.5cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+\hline
+\textbf{File Name}         & \textbf{Kya Hai?}                       & \textbf{Kya Rakhna Chahiye?}                    & \textbf{Agar Na Ho?}                & \textbf{Agar Change Ho Toh?}                \\
+\hline
+\endfirsthead
+\multicolumn{5}{c}{{\bfseries Summary Table: Metro aur Babel Files – Sab Kuch Ek Sath - continued from previous page}} \\
+\hline
+\textbf{File Name}         & \textbf{Kya Hai?}                       & \textbf{Kya Rakhna Chahiye?}                    & \textbf{Agar Na Ho?}                & \textbf{Agar Change Ho Toh?}                \\
+\hline
+\endhead
+\hline
+\multicolumn{5}{|r|}{{Continued on next page}} \\
+\hline
+\endfoot
+\hline
+\endlastfoot
+
+metro.config.js   & Metro bundler configuration   & Default: kuch nahi, custom: code       & Metro default use karegi  & Metro restart (\texttt{start --reset-cache}) \\
+\hline
+babel.config.js   & Babel config                  & Preset: \texttt{'module:metro-react-native-babel-preset'} & Preset package.json me bhi ho sakta & Metro restart (\texttt{start --reset-cache}) \\
+\hline
+\end{longtable}
+\end{center}
+\vspace{1em}
+
+****
+\section*{Final Cheat Sheet (Saare Points: Metro \& Babel)}
+- \imp{Metro} React Native ka bundler hai, code/assets ko device pe bundle karta hai.
+- \imp{metro.config.js} mein changes tab karo jab custom bundling, assets, plugins, ya third-party integration chahiye.
+- \imp{babel.config.js} mein changes tab karo jab advanced JS features, module aliases, ya experimental Babel plugins chahiye.
+- \imp{Dono files ke changes ke baad Metro bundler restart zaruri hai.}\\
+\begin{codeblock}
+npx react-native start --reset-cache
+\end{codeblock}
+- \imp{Bina restart kiye naye changes apply nahi honge.}
+- \imp{Agar dono files nahi bhi ho, toh React Native default config par chalta hai, lekin custom setting, hot reload, aliases, etc. ka scene hota hai, toh file banana padega.}
+- \imp{Ye files project root (\texttt{package.json} ke paas) mein rahegi.}
+
+****
+\section*{Ek Dum Beginner-Friendly Example}
+\imp{Scenario:}\\
+Aapne babel.config.js mein module alias (\texttt{@components/Button}) add kiya, lekin app par error de raha hai.\\
+\imp{Samajh:}\\
+Aapne Metro bundler restart nahi kiya.\\
+\imp{Solution:}\\
+Metro band karo, aur ye command chalao:\\
+\begin{codeblock}
+npx react-native start --reset-cache
+\end{codeblock}
+Ab app reload karo, import kaam karega!\\
+\imp{Yahi process sab file ke changes ke sath hai. Restart karo, changes reflect honge!}
+
+****
+\section*{Extra Advice (Aapke Notes Ke Liye)}
+- \imp{Don’t touch metro.config.js/babel.config.js jab tak custom requirement na ho.}
+- \imp{React Native project create karte hue ye files automatically ban jaati hain.}
+- \imp{Third-party tools (jaise Sentry) ya advanced JS features chahiye ho, tab configure karo.}
+- \imp{Har bar config change karne ke baad Metro restart zaruri hai.}
+- \imp{Agar kuch samajh nahi aaye, toh Metro band karke naya bundler chalao.}
+
+****
+\section*{Conclusion}
+\imp{Yeh dono config files React Native ke bundling aur JS transformations ko control karti hain.}\\
+\imp{Aap beginner ho, toh default se chalao. Customize tab karo jab koi special requirement ho.}\\
+\imp{Har bar config change ke baad bundler restart karo, warna changes reflect nahi honge!}\\
+\imp{Ye sab padhne ke baad, aapko Metro aur Babel ki files ka full concept samajh a gaya hoga.}\\
+\imp{Ab aap apni project ki structure, file aliases, experimental JS features, ya third-party tool integration kar sakte ho.}\\
+\imp{Jab bhi doubt ho, just \texttt{npx react-native start --reset-cache} chala lo!}
+
+****
+\imp{Yehi sab cheezein sirf notes ke tarah likhni hai, toh aap yaani yehi sab samajh ke likh lo, aapko complete clarity ho jayegi React Native project config files ke bare mein!}\\
+\imp{Aage agar aur topics ke notes chahiye, process chahiye, ya kisi file ka internal structure samajhna hai, toh bolo!}
+
+=============================================================
+\end{document}
