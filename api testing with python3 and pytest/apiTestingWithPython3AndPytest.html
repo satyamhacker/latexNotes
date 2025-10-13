@@ -288,6 +288,83 @@ Activate hone ke baad:</p>
 <li><span class="important">Kyun zaroori</span>: Dusre project switch karne ke liye.</li>
 </ul>
 
+<pre class="separator">===================================================================</pre>
+<h3>Pytest Class Test Execution — Without Manual Object Creation</h3>
+
+<p><span class="important">Bhai Satyam, tu ekdum sahi jagah pe curious ho!</span> Ye jo tu poochh raha hai — "class ka object banaya hi nahi, fir bhi test kaise chal gaya?" — ye <span class="important">pytest ka ek hidden magic</span> hai. Chal Hinglish mein samjhaata hoon:</p>
+
+<h4>Tera Code:</h4>
+<div class="codebox"><pre><code><span class="keyword">class</span> <span class="function">TestAuthAPI</span>:
+    <span class="keyword">def</span> <span class="function">test_login_success</span>(<span class="keyword">self</span>):
+        ...</code></pre></div>
+
+<p>Tu kahin <code>TestAuthAPI()</code> ka object nahi bana raha — phir bhi <span class="important">pytest uske methods ko call kar raha hai</span>. <strong>Kaise?</strong></p>
+
+<h4>Pytest Automatically Instantiates Test Classes</h4>
+
+<p><strong>Pytest ka default behavior:</strong></p>
+<ul>
+<li>Agar class ka naam <span class="important">Test se start hota hai</span> (<code>TestAuthAPI</code>)</li>
+<li>Aur uske andar methods <span class="important">test_ se start hote hain</span> (<code>test_login_success</code>)</li>
+<li>Toh <span class="important">pytest automatically us class ka object banata hai per test run</span>.</li>
+</ul>
+
+<p>Isliye tu <code>self.register_payload</code> use kar pa raha hai — because <span class="important">self is auto-created by pytest</span>.</p>
+
+<h4>How Fixtures Work in Class Context</h4>
+
+<p><strong>1. @pytest.fixture(scope="class", autouse=True)</strong></p>
+<ul>
+<li>Ye fixture <span class="important">class level pe run hota hai once per class</span>.</li>
+<li><code>autouse=True</code> means tu use karne ke liye explicitly call nahi karega — <span class="important">pytest khud hi laga dega</span>.</li>
+</ul>
+
+<p><strong>2. @pytest.fixture(autouse=True)</strong></p>
+<ul>
+<li>Ye <span class="important">per test method run hota hai</span>.</li>
+<li>Isme tu <code>self.register_payload</code> set kar raha hai — <span class="important">har test ke liye fresh data</span>.</li>
+</ul>
+
+<h4>Behind the Scenes</h4>
+
+<p>Pytest internally does:</p>
+<div class="codebox"><pre><code><span class="keyword">for</span> test_method <span class="keyword">in</span> <span class="function">TestAuthAPI</span>:
+    obj = <span class="function">TestAuthAPI</span>()  <span class="comment"># ✅ automatic instantiation</span>
+    obj.<span class="function">test_method</span>()</code></pre></div>
+
+<h4>Bonus Tip: Want to Share Setup Across Classes?</h4>
+
+<p>Use <code>conftest.py</code> with session or module scoped fixtures. I can scaffold that for you with <span class="important">dry-run safe health checks and mock payloads</span>.</p>
+
+<p>Tu chahe toh main ek reusable <code>BaseAPITest</code> class bhi bana sakta hoon jisme common payloads, headers, and health checks ho — fir har service ke liye subclass bana le. <span class="important">Bole toh DevOps-style scalable test architecture</span>.</p>
+
+<pre class="separator">===================================================================</pre>rd">pip</span> <span class="function">install</span> <span class="string">requests</span> <span class="string">pytest</span></code></pre></div>
+
+<ul>
+<li>pip install: Package manager call karta hai install ke liye.</li>
+<li>requests pytest: Do libraries install, requests API calls ke liye, pytest testing ke liye.</li>
+<li><span class="important">Kyun zaroori</span>: Yeh <span class="important">sirf virtual environment mein install honge</span>.</li>
+</ul>
+
+<p><strong>Step 5: Requirements File Banana</strong></p>
+
+<div class="codebox"><pre><code><span class="keyword">pip</span> <span class="function">freeze</span> &gt; <span class="string">requirements.txt</span></code></pre></div>
+
+<ul>
+<li>pip freeze: Current installed packages ki list with versions deta hai.</li>
+<li>&gt; requirements.txt: Output ko file mein save karta hai.</li>
+<li><span class="important">Kyun zaroori</span>: <span class="important">Dusre machine pe same setup karne ke liye</span>. Agar change: File naam badlo, lekin <span class="important">standard hai requirements.txt</span>.</li>
+</ul>
+
+<p><strong>Step 6: Deactivate Karna</strong></p>
+
+<div class="codebox"><pre><code><span class="function">deactivate</span></code></pre></div>
+
+<ul>
+<li>deactivate: Environment ko off karta hai, wapas system Python pe.</li>
+<li><span class="important">Kyun zaroori</span>: Dusre project switch karne ke liye.</li>
+</ul>
+
 <p><strong>Agar Na Use Kiya To Kya?</strong>: <span class="important">Bugs miss ho jaayenge</span> kyunki wrong library version se <span class="important">tests fail honge</span>. Time waste hoga debugging mein, <span class="important">system messy ho jaayega</span>, <span class="important">deployment fail</span>, team collaboration mushkil. Real-world: Ek developer ne bina venv ke code likha, production mein library conflict se <span class="important">app crash, company ko loss</span>.</p>
 
 <p><strong>Common Doubts/Confusions Clear Kar</strong>:</p>
