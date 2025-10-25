@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>React Native Complete Tutorial — Hinglish Guide</title>
+    <style>
+      :root {
+        --heading-blue: #0055cc;
+        --important-red: #d40000;
+        --code-bg: #f8f9fa;
+        --keyword-color: #0066cc;
+        --string-color: #22863a;
+        --comment-color: #6a737d;
+        --function-color: #6f42c1;
+        --import-color: #e36209;
+        --number-color: #005cc5;
+        --tag-color: #22863a;
+        --attr-color: #6f42c1;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 11pt;
+        line-height: 1.65;
+        background: #ffffff;
+        color: #1a1a1a;
+        padding: 30px 50px;
+        max-width: 210mm;
+        margin: 0 auto;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .topic-heading {
+        font-size: 20pt;
+        color: var(--heading-blue);
+        font-weight: 700;
+        border-left: 6px solid var(--heading-blue);
+        background: linear-gradient(90deg, rgba(0,85,204,0.08) 0%, transparent 100%);
+        padding: 12px 0 12px 20px;
+        margin: 2em 0 1em 0;
+        page-break-after: avoid;
+      }
+      h2 {
+        font-size: 16pt;
+        color: #2c5aa0;
+        font-weight: 600;
+        margin: 1.8em 0 0.9em 0;
+        page-break-after: avoid;
+      }
+      h3 {
+        font-size: 14pt;
+        color: #3d6db5;
+        font-weight: 600;
+        margin: 1.5em 0 0.8em 0;
+        page-break-after: avoid;
+      }
+      h4 {
+        font-size: 13pt;
+        color: #4a7fc1;
+        font-weight: 600;
+        border-left: 3px solid #4a7fc1;
+        padding-left: 12px;
+        margin: 1.3em 0 0.7em 0;
+        page-break-after: avoid;
+      }
+      p {
+        margin: 0.8em 0;
+        text-align: justify;
+        word-spacing: 0.05em;
+      }
+      .important {
+        color: var(--important-red);
+        font-weight: 600;
+        background: rgba(212, 0, 0, 0.06);
+        padding: 2px 8px;
+        border-radius: 4px;
+        border-left: 3px solid var(--important-red);
+        display: inline-block;
+        margin: 2px 0;
+      }
+      .code-block {
+        background: var(--code-bg);
+        border: 1px solid #d1d5da;
+        border-left: 4px solid var(--heading-blue);
+        border-radius: 6px;
+        padding: 16px 18px;
+        margin: 1.2em 0;
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        font-size: 9pt;
+        line-height: 1.8;
+        page-break-inside: avoid;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      }
+      .code-block pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        word-break: break-all;
+        word-spacing: 0.1em;
+        letter-spacing: 0.02em;
+      }
+      .code-line {
+        display: block;
+        min-height: 1.8em;
+      }
+      .cmd-line {
+        background: #2d3748;
+        color: #e2e8f0;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-family: 'Consolas', 'Monaco', monospace;
+        font-size: 9.5pt;
+        margin: 0.8em 0;
+        border-left: 4px solid #4299e1;
+        display: block;
+        word-wrap: break-word;
+      }
+      .cmd-line::before {
+        content: '$ ';
+        color: #48bb78;
+        font-weight: bold;
+      }
+      code {
+        font-family: 'Consolas', 'Monaco', monospace;
+        color: #e83e8c;
+        background: #f8f9fa;
+        padding: 2px 7px;
+        border-radius: 4px;
+        font-size: 0.92em;
+        border: 1px solid #e1e4e8;
+      }
+      .keyword {
+        color: var(--keyword-color);
+        font-weight: 600;
+      }
+      .string {
+        color: var(--string-color);
+      }
+      .comment {
+        color: var(--comment-color);
+        font-style: italic;
+      }
+      .function {
+        color: var(--function-color);
+        font-weight: 600;
+      }
+      .import {
+        color: var(--import-color);
+        font-weight: 600;
+      }
+      .number {
+        color: var(--number-color);
+      }
+      .boolean {
+        color: var(--keyword-color);
+        font-weight: 600;
+      }
+      .tag {
+        color: var(--tag-color);
+        font-weight: 600;
+      }
+      .attr {
+        color: var(--attr-color);
+      }
+      ul,
+      ol {
+        margin: 0.8em 0 0.8em 2em;
+        line-height: 1.7;
+        display: block;
+      }
+      li {
+        margin: 0.7em 0;
+        display: list-item;
+      }
+      strong {
+        font-weight: bold;
+        color: #1a1a1a;
+      }
+      hr {
+        border: none;
+        border-top: 1px solid #ddd;
+        margin: 2em 0;
+      }
+      .separator-line {
+        text-align: center;
+        color: #999;
+        margin: 2em 0;
+        font-size: 10pt;
+        letter-spacing: 2px;
+      }
+      @media print {
+        body {
+          background: white;
+          padding: 15mm;
+        }
+        .code-block {
+          page-break-inside: avoid;
+        }
+        .topic-heading, h2, h3, h4 {
+          page-break-after: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main id="render-target">
+      <p style="color: #666; font-size: 11pt">
+        Loading formatted notes… (the page will fetch the original notes file in
+        the same folder and render them styled). If you open this file via
+        file:// and the notes don't appear, open both files via a simple local
+        server (e.g. python -m http.server) or copy both files to a web server.
+      </p>
+    </main>
+    <script>
+      (async function () {
+        const target = document.getElementById("render-target");
+        async function loadRaw() {
+          try {
+            const resp = await fetch("ReactNativeBasicsNotes.html");
+            if (!resp.ok) throw new Error("fetch failed");
+            const txt = await resp.text();
+            return txt;
+          } catch (e) {
+            try {
+              const obj = document.createElement("object");
+              obj.data = "ReactNativeBasicsNotes.html";
+              obj.type = "text/plain";
+              obj.style.display = "none";
+              document.body.appendChild(obj);
+              await new Promise((res) => {
+                obj.onload = () => res();
+                obj.onerror = () => res();
+                setTimeout(res, 800);
+              });
+              const doc = obj.contentDocument || obj.getSVGDocument();
+              if (doc) {
+                const body = doc.body || doc.documentElement;
+                const raw = body ? body.innerText : "";
+                document.body.removeChild(obj);
+                return raw;
+              }
+            } catch (_) {}
+            return null;
+          }
+        }
+
+        const raw = await loadRaw();
+        if (!raw) {
+          target.innerHTML =
+            '<p style="color:#a00">Could not load original notes file (ReactNativeBasicsNotes.html). Ensure both files are in the same folder and open via a local server.</p>';
+          return;
+        }
+        
+        function esc(s) {
+          return s
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+        }
+
+        const importantWords = [
+          "important", "yaad rakhna", "yaad", "dhayan", "dhyaan", "remember",
+          "must", "note", "Do not", "jaruri", "Kyun zaroori", "Agar na kiya",
+          "Agar", "Best practice", "Always", "Never", "Avoid", "fail", "crash",
+          "loss", "problem", "yaad rakhna chaiye",
+        ];
+
+        function markImportant(s) {
+          if (!s || typeof s !== "string") return s;
+          const sentences = s.split(/(?<=[\.\?\!\n])/);
+          for (let j = 0; j < sentences.length; j++) {
+            const sent = sentences[j];
+            const lowered = sent.toLowerCase();
+            for (const cue of importantWords) {
+              if (!cue) continue;
+              const cueLc = cue.toLowerCase();
+              if (lowered.indexOf(cueLc) !== -1) {
+                sentences[j] = '<span class="important">' + esc(sent) + "</span>";
+                break;
+              }
+            }
+            if (!/^<span class=\"important\">/.test(sentences[j])) {
+              let out = esc(sentences[j]);
+              const phrases = importantWords.slice().sort((a, b) => b.length - a.length);
+              for (const ph of phrases) {
+                if (!ph) continue;
+                const phEsc = ph.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
+                const re = new RegExp(phEsc, "gi");
+                out = out.replace(re, function (m) {
+                  return '<span class="important">' + m + "</span>";
+                });
+              }
+              sentences[j] = out;
+            }
+          }
+          return sentences.join("");
+        }
+
+        function highlightCode(code) {
+          let s = esc(code);
+          s = s.replace(/(\/\/.*?$)/gm, '<span class="comment">$1</span>');
+          s = s.replace(/(^|\n)(\s*#.*?$)/gm, function (m, p1, p2) {
+            return p1 + '<span class="comment">' + p2 + "</span>";
+          });
+          s = s.replace(/("[^"]*"|'[^']*')/g, '<span class="string">$1</span>');
+          s = s.replace(
+            /(&lt;\/?[A-Za-z0-9\-:\.]+)([^&]*?)(&gt;)/g,
+            function (m, p1, p2, p3) {
+              let attrs = p2.replace(
+                /([a-zA-Z_:][-a-zA-Z0-9_:.]*)=("[^"]*"|'[^']*')/g,
+                '<span class="attr">$1</span>=<span class="string">$2</span>'
+              );
+              return '<span class="tag">' + p1 + "</span>" + attrs + '<span class="tag">' + p3 + "</span>";
+            }
+          );
+          s = s.replace(/\b(\d+(?:\.\d+)?)\b/g, '<span class="number">$1</span>');
+          s = s.replace(/\b(true|false|null)\b/gi, '<span class="boolean">$1</span>');
+          const kw = [
+            "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char",
+            "class", "const", "continue", "default", "do", "double", "else", "enum",
+            "extends", "final", "finally", "float", "for", "goto", "if", "implements",
+            "import", "instanceof", "int", "interface", "long", "native", "new",
+            "package", "private", "protected", "public", "return", "short", "static",
+            "strictfp", "super", "switch", "synchronized", "this", "throw", "throws",
+            "transient", "try", "void", "volatile", "while", "cd", "ls", "mkdir",
+            "npm", "pip", "python", "java",
+          ];
+          s = s.replace(
+            new RegExp("\\b(" + kw.join("|") + ")\\b", "gi"),
+            '<span class="keyword">$1</span>'
+          );
+          s = s.replace(/(import\s+[\w\.\*]+)/g, '<span class="import">$1</span>');
+          s = s.replace(/([A-Za-z_][A-Za-z0-9_]*)\s*\(/g, '<span class="function">$1</span>(');
+          return s;
+        }
+
+        const lines = raw.replace(/\r/g, "").split("\n");
+        const frag = document.createDocumentFragment();
+        let i = 0, inCode = false, codeLang = "", codeBuf = [];
+        
+        function flushCode() {
+          if (!inCode) return;
+          const div = document.createElement("div");
+          div.className = "code-block";
+          const pre = document.createElement("pre");
+          const inner = highlightCode(codeBuf.join("\n"))
+            .split("\n")
+            .map((l) => '<span class="code-line">' + l + "</span>")
+            .join("\n");
+          pre.innerHTML = inner;
+          div.appendChild(pre);
+          frag.appendChild(div);
+          inCode = false;
+          codeBuf = [];
+          codeLang = "";
+        }
+
+        while (i < lines.length) {
+          const L = lines[i];
+          const mCode = L.match(/^```\s*(\w+)?/);
+          if (mCode) {
+            if (!inCode) {
+              inCode = true;
+              codeLang = mCode[1] || "";
+              codeBuf = [];
+            } else {
+              flushCode();
+            }
+            i++;
+            continue;
+          }
+          if (inCode) {
+            codeBuf.push(L);
+            i++;
+            continue;
+          }
+
+          if (/^=+\s*$/.test(L) || /^-+\s*$/.test(L)) {
+            const d = document.createElement("div");
+            d.className = "separator-line";
+            d.textContent = L.trim();
+            frag.appendChild(d);
+            i++;
+            continue;
+          }
+          if (/^#\s+/.test(L)) {
+            const h = document.createElement("h1");
+            h.className = "topic-heading";
+            h.innerHTML = markImportant(esc(L.replace(/^#\s+/, "")));
+            frag.appendChild(h);
+            i++;
+            continue;
+          }
+          if (/^##\s+/.test(L)) {
+            const h2 = document.createElement("h2");
+            h2.innerHTML = markImportant(esc(L.replace(/^##\s+/, "")));
+            frag.appendChild(h2);
+            i++;
+            continue;
+          }
+          if (/^###\s+/.test(L)) {
+            const h3 = document.createElement("h3");
+            h3.innerHTML = markImportant(esc(L.replace(/^###\s+/, "")));
+            frag.appendChild(h3);
+            i++;
+            continue;
+          }
+          if (/^\*\*\*\s*$/.test(L)) {
+            frag.appendChild(document.createElement("hr"));
+            i++;
+            continue;
+          }
+          if (/^\s*[-*]\s+/.test(L)) {
+            const ul = document.createElement("ul");
+            while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
+              const li = document.createElement("li");
+              li.innerHTML = markImportant(esc(lines[i].replace(/^\s*[-*]\s+/, "")));
+              ul.appendChild(li);
+              i++;
+            }
+            frag.appendChild(ul);
+            continue;
+          }
+          if (/^\s*\d+\.\s+/.test(L)) {
+            const ol = document.createElement("ol");
+            while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+              const li = document.createElement("li");
+              li.innerHTML = markImportant(esc(lines[i].replace(/^\s*\d+\.\s+/, "")));
+              ol.appendChild(li);
+              i++;
+            }
+            frag.appendChild(ol);
+            continue;
+          }
+          if (/^\s*$/.test(L)) {
+            i++;
+            continue;
+          }
+          if (/^(adb|frida|drozer|apktool|java|python|pip|npm|cd|ls|mkdir|grep|curl|wget|git|docker)\s+/.test(L)) {
+            const cmd = document.createElement("div");
+            cmd.className = "cmd-line";
+            cmd.textContent = L;
+            frag.appendChild(cmd);
+            i++;
+            continue;
+          }
+          let phtml = L;
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = phtml;
+          const decoded = tempDiv.textContent || tempDiv.innerText;
+          phtml = esc(decoded);
+          phtml = phtml.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+          phtml = phtml.replace(/`([^`]+)`/g, "<code>$1</code>");
+          phtml = markImportant(phtml);
+          const p = document.createElement("p");
+          p.innerHTML = phtml;
+          frag.appendChild(p);
+          i++;
+        }
+        flushCode();
+        target.innerHTML = "";
+        target.appendChild(frag);
+      })();
+    </script>
+  </body>
+</html>
