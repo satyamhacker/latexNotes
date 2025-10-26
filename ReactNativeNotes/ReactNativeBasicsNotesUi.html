@@ -3,20 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>React Native Complete Tutorial — Hinglish Guide</title>
+    <title>React Native Notes — Beautiful & Colorful</title>
     <style>
       :root {
         --heading-blue: #0055cc;
         --important-red: #d40000;
-        --code-bg: #f8f9fa;
-        --keyword-color: #0066cc;
-        --string-color: #22863a;
-        --comment-color: #6a737d;
-        --function-color: #6f42c1;
-        --import-color: #e36209;
-        --number-color: #005cc5;
-        --tag-color: #22863a;
-        --attr-color: #6f42c1;
+        --code-bg: #f7f7f7;
+        --keyword-color: #0074d9;
+        --string-color: #2ecc40;
+        --comment-color: #aaaaaa;
+        --function-color: #b10dc9;
+        --import-color: #ff851b;
       }
       * {
         margin: 0;
@@ -24,12 +21,12 @@
         box-sizing: border-box;
       }
       body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 11pt;
-        line-height: 1.65;
-        background: #ffffff;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 12pt;
+        line-height: 1.6;
+        background: #fafafa;
         color: #1a1a1a;
-        padding: 30px 50px;
+        padding: 25mm;
         max-width: 210mm;
         margin: 0 auto;
       }
@@ -42,107 +39,86 @@
         font-family: Arial, Helvetica, sans-serif;
       }
       .topic-heading {
-        font-size: 20pt;
+        font-size: 22pt;
         color: var(--heading-blue);
-        font-weight: 700;
-        border-left: 6px solid var(--heading-blue);
-        background: linear-gradient(90deg, rgba(0,85,204,0.08) 0%, transparent 100%);
-        padding: 12px 0 12px 20px;
-        margin: 2em 0 1em 0;
-        page-break-after: avoid;
+        font-weight: bold;
+        border-bottom: 3px solid var(--heading-blue);
+        padding: 15px 0 10px 0;
+        margin: 2.5em 0 0.8em 0;
+        text-shadow: 1px 1px 2px rgba(0, 85, 204, 0.1);
       }
-      h2 {
-        font-size: 16pt;
-        color: #2c5aa0;
-        font-weight: 600;
-        margin: 1.8em 0 0.9em 0;
-        page-break-after: avoid;
-      }
-      h3 {
-        font-size: 14pt;
-        color: #3d6db5;
-        font-weight: 600;
-        margin: 1.5em 0 0.8em 0;
-        page-break-after: avoid;
+      .separator {
+        color: #bbb;
+        font-family: "Courier New", monospace;
+        margin: 2.5em 0 0.8em 0;
+        font-size: 10pt;
+        letter-spacing: 0.5px;
       }
       h4 {
-        font-size: 13pt;
-        color: #4a7fc1;
-        font-weight: 600;
-        border-left: 3px solid #4a7fc1;
-        padding-left: 12px;
-        margin: 1.3em 0 0.7em 0;
-        page-break-after: avoid;
+        font-size: 15pt;
+        color: #2c5aa0;
+        border-left: 4px solid #2c5aa0;
+        padding-left: 10px;
+        margin: 1.5em 0 0.8em 0;
       }
       p {
-        margin: 0.8em 0;
+        margin: 0.6em 0;
         text-align: justify;
-        word-spacing: 0.05em;
       }
       .important {
         color: var(--important-red);
-        font-weight: 600;
-        background: rgba(212, 0, 0, 0.06);
-        padding: 2px 8px;
-        border-radius: 4px;
-        border-left: 3px solid var(--important-red);
-        display: inline-block;
-        margin: 2px 0;
+        font-weight: bold;
+        font-size: 1.08em;
+        background: rgba(212, 0, 0, 0.05);
+        padding: 2px 6px;
+        border-radius: 3px;
       }
       .code-block {
         background: var(--code-bg);
-        border: 1px solid #d1d5da;
-        border-left: 4px solid var(--heading-blue);
-        border-radius: 6px;
-        padding: 16px 18px;
-        margin: 1.2em 0;
-        font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-        font-size: 9pt;
-        line-height: 1.8;
-        page-break-inside: avoid;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 1em 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        font-family: "Courier New", monospace;
+        font-size: 10pt;
+        position: relative;
+        counter-reset: line;
       }
       .code-block pre {
         margin: 0;
         white-space: pre-wrap;
         word-wrap: break-word;
-        word-break: break-all;
-        word-spacing: 0.1em;
-        letter-spacing: 0.02em;
+        overflow-x: visible;
       }
       .code-line {
         display: block;
-        min-height: 1.8em;
+        padding-left: 3.5em;
+        position: relative;
       }
-      .cmd-line {
-        background: #2d3748;
-        color: #e2e8f0;
-        padding: 10px 15px;
-        border-radius: 5px;
-        font-family: 'Consolas', 'Monaco', monospace;
-        font-size: 9.5pt;
-        margin: 0.8em 0;
-        border-left: 4px solid #4299e1;
-        display: block;
-        word-wrap: break-word;
-      }
-      .cmd-line::before {
-        content: '$ ';
-        color: #48bb78;
-        font-weight: bold;
+      .code-line:before {
+        counter-increment: line;
+        content: counter(line);
+        position: absolute;
+        left: 0;
+        width: 2.5em;
+        text-align: right;
+        color: #999;
+        font-size: 9pt;
+        padding-right: 1em;
+        border-right: 1px solid #ddd;
       }
       code {
-        font-family: 'Consolas', 'Monaco', monospace;
-        color: #e83e8c;
-        background: #f8f9fa;
-        padding: 2px 7px;
-        border-radius: 4px;
-        font-size: 0.92em;
-        border: 1px solid #e1e4e8;
+        font-family: "Courier New", monospace;
+        color: #c7254e;
+        background: rgba(199, 37, 78, 0.08);
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 0.95em;
       }
       .keyword {
         color: var(--keyword-color);
-        font-weight: 600;
+        font-weight: bold;
       }
       .string {
         color: var(--string-color);
@@ -153,35 +129,32 @@
       }
       .function {
         color: var(--function-color);
-        font-weight: 600;
+        font-weight: bold;
       }
       .import {
         color: var(--import-color);
-        font-weight: 600;
-      }
-      .number {
-        color: var(--number-color);
-      }
-      .boolean {
-        color: var(--keyword-color);
-        font-weight: 600;
       }
       .tag {
-        color: var(--tag-color);
-        font-weight: 600;
+        color: #e67e22;
+        font-weight: bold;
       }
       .attr {
-        color: var(--attr-color);
+        color: #b10dc9;
+      }
+      .number {
+        color: #d63384;
+      }
+      .boolean {
+        color: #0074d9;
+        font-weight: bold;
       }
       ul,
       ol {
-        margin: 0.8em 0 0.8em 2em;
-        line-height: 1.7;
-        display: block;
+        margin: 0.6em 0 0.6em 2em;
+        line-height: 1.5;
       }
       li {
-        margin: 0.7em 0;
-        display: list-item;
+        margin: 0.6em 0;
       }
       strong {
         font-weight: bold;
@@ -192,13 +165,6 @@
         border-top: 1px solid #ddd;
         margin: 2em 0;
       }
-      .separator-line {
-        text-align: center;
-        color: #999;
-        margin: 2em 0;
-        font-size: 10pt;
-        letter-spacing: 2px;
-      }
       @media print {
         body {
           background: white;
@@ -206,20 +172,37 @@
         }
         .code-block {
           page-break-inside: avoid;
+          overflow: visible;
         }
-        .topic-heading, h2, h3, h4 {
+        .code-block pre {
+          white-space: pre-wrap;
+          word-wrap: break-word;
+        }
+        .topic-heading {
           page-break-after: avoid;
         }
+      }
+      .separator-line {
+        color: #bbb;
+        font-family: "Courier New", monospace;
+        margin: 2.5em 0 0.8em 0;
       }
     </style>
   </head>
   <body>
+    <header
+      style="
+        font-family: Arial, Helvetica, sans-serif;
+        color: #666;
+        font-size: 10pt;
+        margin-bottom: 8px;
+      "
+    >
+      📚 React Native Study Notes — Auto-Rendered with Beautiful UI
+    </header>
     <main id="render-target">
       <p style="color: #666; font-size: 11pt">
-        Loading formatted notes… (the page will fetch the original notes file in
-        the same folder and render them styled). If you open this file via
-        file:// and the notes don't appear, open both files via a simple local
-        server (e.g. python -m http.server) or copy both files to a web server.
+        ⏳ Loading formatted notes…
       </p>
     </main>
     <script>
@@ -232,25 +215,6 @@
             const txt = await resp.text();
             return txt;
           } catch (e) {
-            try {
-              const obj = document.createElement("object");
-              obj.data = "ReactNativeBasicsNotes.html";
-              obj.type = "text/plain";
-              obj.style.display = "none";
-              document.body.appendChild(obj);
-              await new Promise((res) => {
-                obj.onload = () => res();
-                obj.onerror = () => res();
-                setTimeout(res, 800);
-              });
-              const doc = obj.contentDocument || obj.getSVGDocument();
-              if (doc) {
-                const body = doc.body || doc.documentElement;
-                const raw = body ? body.innerText : "";
-                document.body.removeChild(obj);
-                return raw;
-              }
-            } catch (_) {}
             return null;
           }
         }
@@ -258,10 +222,10 @@
         const raw = await loadRaw();
         if (!raw) {
           target.innerHTML =
-            '<p style="color:#a00">Could not load original notes file (ReactNativeBasicsNotes.html). Ensure both files are in the same folder and open via a local server.</p>';
+            '<p style="color:#a00"><strong>❌ Error:</strong> Could not load ReactNativeBasicsNotes.html file.</p><p style="color:#666">Make sure:</p><ul style="color:#666"><li>File named <code>ReactNativeBasicsNotes.html</code> exists in same folder</li><li>Open with Live Server (VS Code)</li><li>Both files are in same directory</li></ul>';
           return;
         }
-        
+
         function esc(s) {
           return s
             .replace(/&/g, "&amp;")
@@ -270,10 +234,33 @@
         }
 
         const importantWords = [
-          "important", "yaad rakhna", "yaad", "dhayan", "dhyaan", "remember",
-          "must", "note", "Do not", "jaruri", "Kyun zaroori", "Agar na kiya",
-          "Agar", "Best practice", "Always", "Never", "Avoid", "fail", "crash",
-          "loss", "problem", "yaad rakhna chaiye",
+          "important",
+          "yaad rakhna",
+          "yaad",
+          "dhayan",
+          "dhyaan",
+          "remember",
+          "must",
+          "note",
+          "Do not",
+          "jaruri",
+          "Kyun zaroori",
+          "Agar na kiya",
+          "Agar",
+          "Best practice",
+          "Always",
+          "Never",
+          "Avoid",
+          "fail",
+          "crash",
+          "loss",
+          "problem",
+          "yaad rakhna chaiye",
+          "critical",
+          "essential",
+          "vital",
+          "key",
+          "crucial"
         ];
 
         function markImportant(s) {
@@ -286,13 +273,16 @@
               if (!cue) continue;
               const cueLc = cue.toLowerCase();
               if (lowered.indexOf(cueLc) !== -1) {
-                sentences[j] = '<span class="important">' + esc(sent) + "</span>";
+                sentences[j] =
+                  '<span class="important">' + esc(sent) + "</span>";
                 break;
               }
             }
             if (!/^<span class=\"important\">/.test(sentences[j])) {
               let out = esc(sentences[j]);
-              const phrases = importantWords.slice().sort((a, b) => b.length - a.length);
+              const phrases = importantWords
+                .slice()
+                .sort((a, b) => b.length - a.length);
               for (const ph of phrases) {
                 if (!ph) continue;
                 const phEsc = ph.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&");
@@ -313,42 +303,120 @@
           s = s.replace(/(^|\n)(\s*#.*?$)/gm, function (m, p1, p2) {
             return p1 + '<span class="comment">' + p2 + "</span>";
           });
-          s = s.replace(/("[^"]*"|'[^']*')/g, '<span class="string">$1</span>');
+          s = s.replace(/(\"[^\"]*\"|'[^']*')/g, '<span class="string">$1</span>');
           s = s.replace(
             /(&lt;\/?[A-Za-z0-9\-:\.]+)([^&]*?)(&gt;)/g,
             function (m, p1, p2, p3) {
               let attrs = p2.replace(
-                /([a-zA-Z_:][-a-zA-Z0-9_:.]*)=("[^"]*"|'[^']*')/g,
+                /([a-zA-Z_:][-a-zA-Z0-9_:.]*)=(\"[^\"]*\"|'[^']*')/g,
                 '<span class="attr">$1</span>=<span class="string">$2</span>'
               );
-              return '<span class="tag">' + p1 + "</span>" + attrs + '<span class="tag">' + p3 + "</span>";
+              return (
+                '<span class="tag">' +
+                p1 +
+                "</span>" +
+                attrs +
+                '<span class="tag">' +
+                p3 +
+                "</span>"
+              );
             }
           );
-          s = s.replace(/\b(\d+(?:\.\d+)?)\b/g, '<span class="number">$1</span>');
-          s = s.replace(/\b(true|false|null)\b/gi, '<span class="boolean">$1</span>');
+          s = s.replace(
+            /\b(\d+(?:\.\d+)?)\b/g,
+            '<span class="number">$1</span>'
+          );
+          s = s.replace(
+            /\b(true|false|null)\b/gi,
+            '<span class="boolean">$1</span>'
+          );
           const kw = [
-            "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char",
-            "class", "const", "continue", "default", "do", "double", "else", "enum",
-            "extends", "final", "finally", "float", "for", "goto", "if", "implements",
-            "import", "instanceof", "int", "interface", "long", "native", "new",
-            "package", "private", "protected", "public", "return", "short", "static",
-            "strictfp", "super", "switch", "synchronized", "this", "throw", "throws",
-            "transient", "try", "void", "volatile", "while", "cd", "ls", "mkdir",
-            "npm", "pip", "python", "java",
+            "abstract",
+            "assert",
+            "boolean",
+            "break",
+            "byte",
+            "case",
+            "catch",
+            "char",
+            "class",
+            "const",
+            "continue",
+            "default",
+            "do",
+            "double",
+            "else",
+            "enum",
+            "extends",
+            "final",
+            "finally",
+            "float",
+            "for",
+            "goto",
+            "if",
+            "implements",
+            "import",
+            "instanceof",
+            "int",
+            "interface",
+            "long",
+            "native",
+            "new",
+            "package",
+            "private",
+            "protected",
+            "public",
+            "return",
+            "short",
+            "static",
+            "strictfp",
+            "super",
+            "switch",
+            "synchronized",
+            "this",
+            "throw",
+            "throws",
+            "transient",
+            "try",
+            "void",
+            "volatile",
+            "while",
+            "cd",
+            "ls",
+            "mkdir",
+            "npm",
+            "pip",
+            "python",
+            "java",
+            "let",
+            "var",
+            "function",
+            "async",
+            "await",
+            "export",
+            "from",
           ];
           s = s.replace(
             new RegExp("\\b(" + kw.join("|") + ")\\b", "gi"),
             '<span class="keyword">$1</span>'
           );
-          s = s.replace(/(import\s+[\w\.\*]+)/g, '<span class="import">$1</span>');
-          s = s.replace(/([A-Za-z_][A-Za-z0-9_]*)\s*\(/g, '<span class="function">$1</span>(');
+          s = s.replace(
+            /(import\s+[\w\.\*]+)/g,
+            '<span class="import">$1</span>'
+          );
+          s = s.replace(
+            /([A-Za-z_][A-Za-z0-9_]*)\s*\(/g,
+            '<span class="function">$1</span>('
+          );
           return s;
         }
 
         const lines = raw.replace(/\r/g, "").split("\n");
         const frag = document.createDocumentFragment();
-        let i = 0, inCode = false, codeLang = "", codeBuf = [];
-        
+        let i = 0,
+          inCode = false,
+          codeLang = "",
+          codeBuf = [];
         function flushCode() {
           if (!inCode) return;
           const div = document.createElement("div");
@@ -372,7 +440,7 @@
           if (mCode) {
             if (!inCode) {
               inCode = true;
-              codeLang = mCode[1] || "";
+              codeLang = mCode || "";
               codeBuf = [];
             } else {
               flushCode();
@@ -425,7 +493,9 @@
             const ul = document.createElement("ul");
             while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
               const li = document.createElement("li");
-              li.innerHTML = markImportant(esc(lines[i].replace(/^\s*[-*]\s+/, "")));
+              li.innerHTML = markImportant(
+                esc(lines[i].replace(/^\s*[-*]\s+/, ""))
+              );
               ul.appendChild(li);
               i++;
             }
@@ -436,7 +506,9 @@
             const ol = document.createElement("ol");
             while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
               const li = document.createElement("li");
-              li.innerHTML = markImportant(esc(lines[i].replace(/^\s*\d+\.\s+/, "")));
+              li.innerHTML = markImportant(
+                esc(lines[i].replace(/^\s*\d+\.\s+/, ""))
+              );
               ol.appendChild(li);
               i++;
             }
@@ -447,19 +519,7 @@
             i++;
             continue;
           }
-          if (/^(adb|frida|drozer|apktool|java|python|pip|npm|cd|ls|mkdir|grep|curl|wget|git|docker)\s+/.test(L)) {
-            const cmd = document.createElement("div");
-            cmd.className = "cmd-line";
-            cmd.textContent = L;
-            frag.appendChild(cmd);
-            i++;
-            continue;
-          }
-          let phtml = L;
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = phtml;
-          const decoded = tempDiv.textContent || tempDiv.innerText;
-          phtml = esc(decoded);
+          let phtml = esc(L);
           phtml = phtml.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
           phtml = phtml.replace(/`([^`]+)`/g, "<code>$1</code>");
           phtml = markImportant(phtml);
@@ -473,5 +533,6 @@
         target.appendChild(frag);
       })();
     </script>
+
   </body>
 </html>
