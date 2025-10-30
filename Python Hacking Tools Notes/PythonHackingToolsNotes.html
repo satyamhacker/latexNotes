@@ -75,10 +75,14 @@ built-in module jo OS commands run kar sakta hai - **Line 2:**
 `subprocess.call()` - Command execute karta hai aur wait karta hai completion
 tak - **`ifconfig`** - Linux/Mac command (Windows mein `ipconfig` use hota hai)
 - **`shell=True`** - Command ko shell environment mein run karo - **Expected
-Output:** ``` eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>
-  mtu 1500 inet 10.0.2.15 netmask 255.255.255.0 ether 08:00:27:3f:4a:2b
-  txqueuelen 1000 (Ethernet) ``` Yahan `ether 08:00:27:3f:4a:2b` tumhara MAC
-  address hai. ### Hands-On Challenge: **Task:** 1. Terminal kholo 2. `ifconfig`
+Output:** 
+```
+eth0: flags=4163
+  mtu 1500
+  inet 10.0.2.15 netmask 255.255.255.0
+  ether 08:00:27:3f:4a:2b txqueuelen 1000 (Ethernet)
+```
+Yahan `ether 08:00:27:3f:4a:2b` tumhara MAC address hai. ### Hands-On Challenge: **Task:** 1. Terminal kholo 2. `ifconfig`
   (Linux/Mac) ya `ipconfig /all` (Windows) command run karo 3. Apne network
   interface ka MAC address note karo 4. Python script banao jo yeh MAC address
   print kare **Ethical Tip:** ⚠️ MAC address change karna legal hai apne device
@@ -113,9 +117,11 @@ Output:** ``` eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>
   **Kyun?** Taaki network connection wapas kaam kare - **Output:** Interface
   active ho jaata hai **Command 4:** `ifconfig eth0` - **Kya karta hai?**
   Current interface details dikhata hai - **Kyun?** Verify karne ke liye ki MAC
-  successfully change hua - **Expected Output:** ``` eth0:
-  flags=4163<UP,BROADCAST,RUNNING,MULTICAST>
-    ether 00:11:22:33:44:55 ← Yeh tumhara naya MAC hai ``` ### Hands-On
+  successfully change hua - **Expected Output:** 
+```
+eth0: flags=4163
+  ether 00:11:22:33:44:55 ← Yeh tumhara naya MAC hai
+``` ### Hands-On
     Challenge: **Task:** 1. Apna current MAC address note karo 2. Upar diye gaye
     commands use karke MAC change karo 3. Verify karo ki change hua 4. Original
     MAC wapas set karo (reboot karke ya manually) **Ethical Tip:** ⚠️ Yeh
@@ -246,9 +252,7 @@ Output:** ``` eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>
     practice karo ✅ Virtual machines use karo ✅ Bug bounty programs join karo
     ❌ Bina permission dusre systems par test mat karo ❌ Public networks par
     unauthorized testing mat karo
-    =============================================================</UP,BROADCAST,RUNNING,MULTICAST
-  ></UP,BROADCAST,RUNNING,MULTICAST
->
+    =============================================================
 
 # 🔐 Python & Ethical Hacking - Part 2 ## Modules 2-4: Advanced Python & Network
 Scanning --- ## 2.4 Getting Input from User **Source:** Page 8 **Original:** ✓
