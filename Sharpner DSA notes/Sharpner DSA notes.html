@@ -1,0 +1,1811 @@
+Haan ji, bilkul\! Main aapke DSA notes se saara text extract kar deta hoon, page by page, jaisa aapne kaha. Koi bhi text miss nahi hoga. Yeh rahe aapke notes, type karke:
+
+-----
+
+### **Page No: 2**
+
+**D.S.A in Javascript**
+
+**Some inbuilt and important function of javascript.**
+
+1)  `Array/String.includes(Array or string element)`
+
+      * **Output** -\> returns True/False
+      * **Syntax** -\> `Array.includes(arg)`
+      * **Eg** -\>
+        ```javascript
+        const fruits = ['apple', 'banana', 'orange'];
+        console.log(fruits.includes('Banana'));
+        ```
+      * **Output** -\> `true`
+
+2)  `indexOf('Array or string element')`
+
+      * **Output** -\> Index of that element in Array or string.
+      * **Eg** -\>
+        ```javascript
+        const fruits = ['apple', 'Banana', 'orange'];
+        console.log(fruits.indexOf('Banana'));
+        ```
+      * **Output** -\> `1`
+
+3)  `isNaN(value)` -\> Stand for 'IS NOT-a-Number'
+
+      * This function returns `true` if a value or argument is not a number and vice-versa.
+      * **Eg** -\>
+          * `isNaN(42)` -\> **Output** -\> 42 is a number -\> `false`
+          * `isNaN('42')` -\> **Output** -\> `false` -\> '42' can be converted to the number 42.
+          * `isNaN('hello')` -\> **Output** -\> `true` -\> hello is not a valid number.
+
+-----
+
+### **Page No: 3**
+
+4)  `repeat(digit)` -\> This function allows you to repeat a string on a given number of digits.
+
+      * **Eg** -\>
+        ```javascript
+        var str = 'abc';
+        str.repeat(3); // output -> abcabcabc {repeated 3 times}
+        ```
+
+5)  `parseInt('123')` -\> Convert String to Integer
+
+      * **Output** -\> `123`
+      * **Eg** -\> `parseInt('hello')` -\> **Output** -\> `NaN` (Not a number)
+
+**Math methods :-**
+
+6)  `Math.floor(x)` -\> Return `x` rounded down to its nearest integer.
+7)  `Math.pow(x, y)` -\> Returns the value of 'x' to the power of 'y'.
+8)  `Math.sqrt(x)` -\> Returns the square root of 'x'.
+9)  `Math.abs(x)` -\> Returns the absolute positive value of x.
+10) `Math.min(0, 1, 2, 3, ...)` -\> Return minimum among the given range i.e -\> 0 (zero)
+11) `Math.max(0, 1, 2, 3, ... -5)` -\> Return maximum among the given range i.e -\> 5
+
+-----
+
+### **Page No: 4**
+
+12) `substring()` -\> This method extracts characters, between two indices (position) from a string, and returns the substring.
+      * **Example:**
+        ```javascript
+        var text = "Hello world";
+        var result = text.substring(0, 4); // last index is excluded. 1st Index is included.
+        console.log(result); // Output -> Hell
+        ```
+      * **Note** -\> If you only give one index in a `substring` argument, from that index it will extract all string elements.
+
+<!-- end list -->
+
+  * **Use of `splice()` function to delete element from array from any Index**
+      * **Eg** -\>
+        ```javascript
+        let array = [1, 2, 3, 4, 5];
+        let indexToRemove = 2;
+        array.splice(indexToRemove, 1);
+        console.log(array); // output -> [1, 2, 4, 5]
+        ```
+      * In the example above `splice(indexToRemove, 1)` removes 1 (one) element from the array starting at the `indexToRemove`. The first argument to `splice()` is the index at which to start changing the array, and the second argument is the number of elements to remove.
+      * After `splice()` is called, the original array is modified, and the element at the specified index is removed. The array will then contain the remaining elements.
+
+-----
+
+### **Page No: 5**
+
+**Map & Set in Javascript**
+
+**Map**
+
+  * A map holds key-value pairs where keys can be of any data type.
+  * Map is a data structure.
+  * A map remembers the original insertion order of the keys.
+  * Map has a property that represents the size of the map (`map.size`).
+
+**Map methods :-**
+
+  * i) `set()` -\> set or add the value for a key in a map.
+
+  * ii) `get()` -\> get the value for a key in a map.
+
+  * iii) `delete()` -\> Remove a map element specified by a key.
+
+  * iv) `has()` -\> Return 'true' if a key exists in a map.
+
+  * v) `clear()` -\> To clear map element, all key-value pairs will be removed.
+
+  * **Note** -\> In map, everything works with the key.
+
+  * **Creates a map syntax:**
+
+    ```javascript
+    var fruits = new Map();
+    fruits.set('apple', 500);
+    fruits.set('banana', 300);
+    // map.set(key, value)
+    ```
+
+-----
+
+### **Page No: 6**
+
+**Set**
+
+  * In javascript, a `set` is a collection of unique values.
+  * `set` is a data structure.
+  * Each value can occur only once in a set.
+  * A set can hold any value of any data type.
+  * `var set = new Set()`
+  * `console.log(set.size)` -\> To get set size or get the length of the number of total elements in a set.
+
+**Set methods :-**
+
+  * i) `add()` -\> Add a new element to the set.
+
+  * ii) `delete()` -\> Remove an element from a set.
+
+  * iii) `has()` -\> return 'true' if a value exists.
+
+  * iv) `clear()` -\> clearing the set items.
+
+  * **Eg** -\>
+
+    ```javascript
+    var letters = new Set(['a', 'b']);
+    // OR
+    var letters = new Set();
+    letters.add("a");
+    letters.add("b");
+
+    letters.delete("a");
+    letters.has("a"); // returns false now
+    ```
+
+**Map Code Syntax**
+
+```javascript
+var map = new Map();
+if (map.has(key)) {
+    // whatever key value you want to give
+    map.set(key, value);
+} else {
+    // whatever value you want to give
+    map.set(key, value);
+}
+```
+
+-----
+
+### **Page No: 7**
+
+**In javascript -\> Difference between Double Equality `==` and Triple equality `===`**
+
+  * 1)  The `==` operator is known as the equality operator and checks for equality between two values.
+
+  * 2)  On the other hand, `===` is the triple operator known as the strict equality operator. It also checks for equality between two values.
+
+  * For the triple operator, its operands need to be of the same type and must have the same value, only then it returns 'true'.
+
+  * **Eg** -\>
+
+    ```javascript
+    console.log(5 == '5');  // output 'True'
+    console.log(5 === '5'); // output false
+    ```
+
+  * **Note** -\> `str = 123` -\> Here `str` is an Integer. To convert Integer to string
+
+      * `str.toString()` -\> It will convert the Integer to String.
+
+-----
+
+### **Page No: 8**
+
+**Palindrome** -\> A palindrome is a word, phrase, number, or other sequence of characters that reads the same from forward or backward.
+
+  * **Eg** -\> समय
+
+  * A palindrome remains unchanged when its characters are reversed.
+
+  * **Eg** -\> Madam, **Eg** -\> level
+
+  * **Note** -\> Algorithm to solve palindrome type question.
+
+  * **Question** -\> Given a string `str = "madam"` check whether on reversal it is same or not. return 'true' if yes otherwise return 'false'.
+
+  * **Code:**
+
+    ```javascript
+    function isPalindrome(str) {
+        let i = 0;
+        let j = str.length - 1;
+
+        while (i <= j) {
+            if (str[i] != str[j]) {
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+    ```
+
+-----
+
+### **Page No: 9**
+
+**Static keyword**
+
+  * By giving the `static` keyword to a variable, it means that the variable is based on the data segment area of the memory, and the same value is shared among every instance of that class.
+
+  * **Eg (Without static):**
+
+    ```javascript
+    class Count {
+        i = 0; // To define variable inside class we don't need var, let, const
+        constructor() {
+            this.i = this.i + 1;
+        }
+    }
+    ```
+
+  * Now, If you do:
+
+    ```javascript
+    var x = new Count();
+    console.log(x.i); // -> output is '1'
+    ```
+
+  * Now, again If you create an object:
+
+    ```javascript
+    var y = new Count();
+    console.log(y.i); // -> Again output is '1'
+    ```
+
+  * It means, every time you make an object, Variable `i` becomes zero again.
+
+-----
+
+### **Page No: 10**
+
+  * Use of `static` keyword: It will save the variable value on every object creation.
+  * **I.e -\>**
+    ```javascript
+    class Count {
+        static i = 0;
+        constructor() {
+            // To call static variable we use Classname.variablename
+            Count.i = Count.i + 1;
+        }
+    }
+    ```
+  * Now, If you create an object:
+    ```javascript
+    var x = new Count();
+    console.log(Count.i); // -> Output is 1
+    ```
+  * Again if you create an object:
+    ```javascript
+    var y = new Count();
+    console.log(Count.i); // -> Output is '2'
+    ```
+  * It means, if you create an object again, the static variable will keep on increasing.
+
+-----
+
+### **Page No: 11**
+
+**Difference between `let` and `var` in javascript**
+
+  * **`let`** -\> Eg -\> `let x = 5;` -\> Variables declared with `let` have Block scope and are not accessible outside the block of code where they are defined.
+
+  * **`var`** -\> Eg -\> `var x = 5;` -\> Variables defined by the 'var' keyword have function scope and can be accessed throughout the entire function where they are declared.
+
+  * **Eg -\> function example()**
+
+    ```javascript
+    if (true) {
+        let x = 1; // Variable 'x' declared with `let` is only accessible within the if block.
+        var y = 2;
+    }
+    console.log(x); // -> Output -> ReferenceError
+    console.log(y); // -> output -> 2
+    ```
+
+  * Variable 'y' declared with 'var' is accessible outside the `if` block because 'var' has function scope.
+
+-----
+
+Umeed hai isse aapki help hui hogi\! Agar aur kuch extract karna ho toh bataiyega.
+
+
+=============================================================
+
+
+Haanji, yeh rahe baaki ke pages ke notes. Maine sab kuch aaram se page number ke saath extract kar diya hai.
+
+-----
+
+### **Page No: 12**
+
+  * **`const` keyword for javascript** -\> 'const' keyword is used to declare a variable that has a constant value, once a variable is declared with 'const' its value cannot be reassigned or modified.
+
+      * `const x = 2;`
+
+  * **Note -\> `extends`** -\> `extends` keyword is used for javascript for inheritance of any class.
+
+  * **Note -\> `super`** -\> 'super' is a reference variable used to refer to the immediate parent class object, variable, method, constructor.
+
+-----
+
+### **Page No: 13**
+
+  * Whenever you create a constructor of a child class, and facing or you have to initialize your parent class attributes or variables. Inside your child class constructor and inside the `super` keyword.
+
+  * **Eg -\>** `Tiger` -\> And his child `ceek` -\> so, `ceek` will contain every property of his parent and this is called inheritance.
+
+      * On creation of cub, you have to give every property of 'Tiger'.
+
+  * **Eg -\>**
+
+    ```javascript
+    // parent class
+    class Tiger {
+        constructor(Name, Age, phone, Address, salary) {
+            this.Name = Name;
+            this.Age = Age;
+            this.phone = phone;
+            this.Address = Address;
+            this.salary = salary;
+        }
+
+        printSalary() {
+            console.log(this.salary);
+        }
+    }
+    ```
+
+-----
+
+### **Page No: 14**
+
+```javascript
+// Child Class
+class Ceek extends Tiger {
+    constructor(Name, Age, phone, Address, salary, specialization) {
+        // -> extra feature in cub class
+        super(Name, Age, phone, Address, salary);
+    }
+}
+```
+
+  * **`super` is inside constructor and no curly bracket is used for `super` keyword.** -\> By `super` keyword we are accessing all parent class constructor attributes provided to the child class.
+
+<!-- end list -->
+
+```javascript
+this.specialization = specialization; // specifying or getting extra feature in child class.
+
+print_child() {
+    console.log(this.specialization);
+    console.log(this.Name); // -> It will access the name from parent class.
+}
+```
+
+-----
+
+### **Page No: 15**
+
+**Classes And function for javascript**
+
+```javascript
+class Student {
+    // default values -> If any value is not passed to constructor then it will take its default values.
+    constructor(na = "john", a = 2) {
+        this.name = na;
+        this.roll_no = a;
+        // Note -> 'this' keyword is used to refer to the current class variable.
+    }
+
+    display() {
+        // Note -> 'this' keyword is always be used to access variable from constructor inside class.
+        console.log(this.name);
+        console.log(this.roll_no);
+    }
+}
+
+// passing argument inside constructor.
+var x = new Student("narayan", 10);
+
+x.display(); // Created instance of student class inside variable 'x'.
+// Here I called display() function inside student class.
+```
+
+  * **Note -\>** Constructor is a type of method. But constructor method gets called by default when the first class instance is created.
+
+  * **Note -\>** Instance is called Object in OOPS.
+
+-----
+
+### **Page No: 16**
+
+  * **Another method to make a class without a constructor**
+
+<!-- end list -->
+
+```javascript
+class Employee {
+    salary = 0; // variable default values
+    no_of_hours = 0;
+
+    getInfo(sal, no_of_hours) {
+        this.salary = sal; // 'this' keyword is used to access salary variable.
+        this.no_of_hours = no_of_hours;
+    }
+}
+```
+
+  * **Note -\>** A function inside a class is called a method.
+
+  * **Note -\>** Inside a class, to make a function, we don't use the `function` keyword before the function name.
+
+  * **Inheritance -\>** Inheritance is a concept that allows one class to inherit properties and methods from another class. It's like a parent-child relationship where the child class can access and use the feature (such as variables, functions, etc) of its parent class.
+
+-----
+
+### **Page No: 17**
+
+**Static & non-static in javascript :-**
+
+```javascript
+class Car {
+    static Company_name = "maruti";
+
+    // Syntax to call static variable in javascript is Classname.variablename
+    print_details() {
+        console.log(Car.Company_name); // -> Output is maruti
+    }
+}
+
+Car.Company_name = "hyundai"; // -> Syntax to override static variable
+// Classname.variablename
+
+var x = new Car();
+x.Company_name = "suzuki"; // -> Here I created a non-static variable called Company_name only for 'x' object.
+
+// -> Here 'x' is an object of the Car class.
+```
+
+-----
+
+### **Page No: 18**
+
+**Way to call a method of Parent class by Object of child class. By using `super` keyword.**
+
+```javascript
+class Ankit {
+    print() {
+        console.log("this is parent class");
+    }
+}
+
+class child extends Ankit {
+    print() {
+        // It will run parent class method in this case Ankit.
+        // And then child class print() method will be called.
+        console.log('this is child class');
+        super.print(); // So, output is -> This is parent class.
+    }
+}
+
+var obj_child = new child();
+obj_child.print();
+```
+
+  * **Output is:**
+
+      * This is child Class
+      * This is parent class
+
+  * This output is because of the `super` keyword which called the parent class `print()` method.
+
+-----
+
+### **Page No: 19**
+
+**Concept to solve any question of pattern**
+
+  * **Eg -\>**
+
+    ```
+    1 * (i=1) -> 1 star
+    2 * * (i=2) -> 2 stars
+    3 * * * (i=3) -> 3 stars
+    4 * * * * (i=4) -> 4 stars
+    5 * * * * * (i=5) -> 5 stars
+    ```
+
+  * Total number of stars in each line:
+
+      * **Eg -\>** for 1st line starting stars from 1 and total stars is 1.
+      * Similarly for 2nd line stars start from 1 and total stars is 2.
+
+  * This will be `i` value in loop.
+
+  * This is `j` value in loop.
+
+  * Total 5 lines.
+
+  * So, there will be two loops.
+
+  * **Code -\>**
+
+    ```javascript
+    for (var i = 1; i <= 5; i++) { // Outer loop
+        var str = "";
+        // This loop is for Total number of line. Because of i <= 5, loop will run 5 times.
+        for (var j = 1; j <= i; j++) {
+            str = str + "*";
+        }
+        console.log(str);
+        // This loop is for printing stars in that line.
+    }
+    ```
+
+-----
+
+### **Page No: 20**
+
+  * **Note -\>** for any value of `i` and any value of `j` relation between `i` and `j` will be:
+
+      * `j = mi + c`
+
+      * **Eg -\>**
+
+        ```
+        i=1 * j=1 star
+        i=2 * * j=2 stars
+        i=3 * * * j=3 stars
+        i=4 * * * * j=4 stars
+        i=5 * * * * * j=5 stars
+        ```
+
+          * i is decreasing (`i` ↓), j is increasing (`j` ↓)
+
+  * `y = mx + c`
+
+      * `j = y axis`
+      * `i = x axis`
+      * `m = slope`
+
+  * `slope = +1`
+
+  * Slope is `+ve` because as `i` value increases `j` value also increases. If `i` ↓ `j` value will fall, slope = `-ve`.
+
+  * In `j = mi + c`, to find the value of `c`, we will put the value of `j`, `m`, `i`.
+
+  * **NOTE -\>** Take `i` and `j` dependent value for the above case. as `i=1`, then `j=1`.
+
+  * If `i=1, j=1, m=1`
+
+      * `1 = 1*1 + c`
+      * `c = 0`
+
+-----
+
+### **Page No: 21**
+
+  * **Eg 2 -\>**
+
+      * **1st Pattern**
+        ```
+        * * * * *
+        * * * *
+        * * *
+        * *
+        *
+        ```
+      * **2nd Pattern**
+        ```
+          *
+         * *
+        * * *
+        * * * *
+        * * * * *
+        ```
+      * **3rd Pattern**
+        ```
+        * * * * *
+         * * * *
+          * * *
+           * *
+            *
+        ```
+
+  * So, to solve this type of pattern problem, divide the pattern into steps and then solve it one by one.
+
+  * **Eg -\>**
+
+    ```
+    i=1 * * * * * j=5
+    i=2 * * * * j=4
+    i=3 * * * j=3
+    i=4 * * j=2
+    i=5 * j=1
+    ```
+
+      * i is increasing (↑)
+      * j is decreasing (↓)
+
+  * As 'i' increases toward downward the value of 'j' decreases toward downward.
+
+  * `slope = -ve`
+
+  * `slope = 5-4 = 4-3 = 3-2 = 2-1 = 1`
+
+  * `slope = -1`
+
+-----
+
+Yeh lijiye, saare pages ho gaye\! Koi aur help chahiye ho to zaroor batana.
+
+=============================================================
+
+Zaroor, yeh rahe aapke baaki ke pages ke notes, text format mein.
+
+-----
+
+### **Page No: 22**
+
+`j = mi + c; j=5, i=1, m=-1`
+`5 = -1*1 + c => c = 6`
+
+General `j` is `j = -i + 6`
+
+  * **Code :-**
+    ```javascript
+    for (var i = 1; i <= 5; i++) {
+        var str = "";
+        for (var j = 1; j <= -i + 6; j++) {
+            str = str + "*";
+        }
+        console.log(str);
+    }
+    ```
+
+**Rotate Array** -\> Eg -\> `arr = [-1, -100, 3, 99]`
+
+  * **Question** -\> Given an Integer Array, arr rotate the array to the right by k steps. Solve it in `O(1)` time complexity and without using any extra space.
+  * Ques k=2, `arr = [3, 99, -1, -100]`
+
+<!-- end list -->
+
+```javascript
+for(i=0; i<arr.length; i++) {
+    // most imp
+    var new_index = (i+k) % arr.length;
+}
+```
+
+  * **Eg** -\> on k=1, means rotate Array element once toward right side.
+  * `new_index = (0+1) % 4 = 1`, means 0 index array element will be at first index on k=1.
+
+-----
+
+### **Page No: 23**
+
+**Way to convert for loop to while loop and vice-versa.**
+
+  * **Eg-\>**
+
+      * **For `while` loop:**
+
+        1.  `int i = 1;` -\> 1st this line gets compiled and run.
+        2.  `while (i <= 5)` -\> 2nd this condition is checked, and then compiled and run.
+        3.  `System.out.println(i);` -\> 3rd Code inside while loop is run.
+        4.  `i = i + 1;` -\> 4th this statement is run to increase `i` so that condition of `while` loop will be met.
+
+      * **For `for` loop:**
+        1\.  `for (int i=0;` -\> 1st this statement is run.
+        2\.  `i <= 5;` -\> 2nd this statement is run.
+        3\.  `{ System.out.println(i); }` -\> In 3rd step this code inside for loop is run.
+        4\.  `i++ )` -\> 4th & at last it gets run to increase index.
+
+  * **NOTE** -\> Inside a `switch` statement, you need to give the `break` keyword, otherwise, it will execute all cases inside the `switch` statement.
+
+-----
+
+### **Page No: 24**
+
+**Continue and Break statement for any loop.**
+
+```javascript
+int i = 1;
+while (i <= 10) {
+    if (i == 5) {
+        continue;
+    }
+    // In a loop if we met the condition for 'continue' statement, code after 'continue' statement will not get executed, and compiler will again go to check condition of loop.
+
+    System.out.println(i);
+    i = i + 1;
+}
+```
+
+  * `Break statement` -\> whenever you hit the break statement, it will break the loop in which the compiler is and it will exit the loop and come out of the loop and execute code present outside of the loop.
+
+  * **Note -\> For programming**
+
+      * If we do `x=9;` -\> means we are assigning value 9 (Nine) in `x`.
+      * If we do `x==9` -\> Here we are checking is x `9(Nine)` or not.
+
+-----
+
+### **Page No: 25**
+
+  * Whatever compiler we use, it takes 1 second to do `10^8` computation or operation.
+
+  * If code per second execution \> `10^8` -\> you get T.L.E -\> Time Limit Exceed error.
+
+  * If code takes more than `10^8` operation in one second you will get Time limit exceed error.
+
+  * If code \< `10^8` execution -\> Ok.
+
+  * **SubArray :-** Contiguous set of array is called SubArray. Eg-\> `Arr = [9, 8, 2, 7, 1]`
+
+      * Here -\> `9,8,2,7,1` is SubArray, `2,7,1` is SubArray...
+      * But `9,2,1` is not SubArray.
+      * SubArray is always in forward direction.
+
+  * `console.warn('Test')` -\> show 'Test' in yellow color in Console.
+
+  * `console.error('Test')` -\> show 'Test' in red color in Console.
+
+-----
+
+### **Page No: 26**
+
+  * **Note** -\> `n = 153` -\> To get a unit place digit
+
+      * we will do -\> `153 % 10 = 3` means...
+      * on dividing 153 with 10 Remainder is unit place digit.
+
+  * Similarly -\> If we want to find tens place digit for `n = 153`.
+
+    1.  divide `n` by 10 and take its `Math.floor()`
+          * i.e -\> `153 / 10 = 15.3` =\> `Math.floor(15.3) = 15`
+    2.  Now, Again find its last digit by `%`
+          * `15 % 10 = 5`
+          * So, tens place digit is `5`.
+
+  * **Note** -\> String is an Array of characters. But not all functions of an array are applied on a string. e.g-\> `pop()`, `push()`, `shift()` etc functions are not applied on a string. A very few characteristics are applied on a string.
+
+  * **Eg** -\> `x = "aabcde"`, `x.length = 5`
+    `console.log(x[1])` -\> output 'a' Because we used the first Index element.
+
+-----
+
+### **Page No: 27**
+
+**Time Complexity :-**
+
+1.  If we really get lucky, the first element of the array might turn out to be the element we are searching for. Hence we made just one comparison.
+
+      * **Best Case Complexity = `O(1)`**
+      * And if we are really unlucky the element we are searching might be the last one.
+      * **Worst Case Complexity = `O(n)`**
+
+2.  **Algo (2)**
+
+      * If we get really lucky the first element will be the only one which got compared.
+      * **Best Case Complexity `O(1)`**
+      * If we get unlucky we will have to keep dividing the array into halves until we get a single element (the array gets finished).
+      * **Worst Case Complexity `O(log n)`**
+
+-----
+
+### **Page No: 28**
+
+  * **what is log(n) ? what is that** (n is length of array)
+  * `log(n)` -\> Number of times you need to half the array of size 'n' before it gets exhausted.
+  * **Eg** -\> `log_2(8) = 3` =\> `8 -> 4 -> 2 -> 1`. Can't break anymore. `1+1+1 = 3`.
+  * **Eg** -\> `log_2(4) = 2` =\> `4 -> 2 -> 1`. Can't break anymore. `1+1=2`.
+  * `log n` simply means how many times I need to divide or work such that we cannot divide them (into halves) anymore.
+
+**Space Complexity :-**
+
+  * Time is not the only thing we worry about while analyzing algorithms, Space is equally important.
+  * Creating an array of size 'n' -\> `O(n)` space (n = size of input).
+  * If a function calls itself recursively 'n' times its space complexity is `O(n)`.
+
+-----
+
+### **Page No: 29**
+
+**Ternary operator**
+
+  * **Syntax** -\>
+
+    ```javascript
+    var a = 9;
+    var x = a > 10 ? console.log('true') : console.log('false');
+    //   Condition      (If true)                 (If false)
+    ```
+
+      * If condition is `true` then code after `?` (question mark) gets executed.
+      * If condition is `false` then code after `:` (double colon) gets executed.
+
+  * **Override variable**
+
+  * **Eg -\>**
+
+    ```javascript
+    var a = 3;
+    var b = 4;
+
+    var temp = a;
+    a = b;
+    b = temp;
+    ```
+
+  * Here, I override the value of variable 'a' to store the value of variable 'b'. Now 'a' becomes 4.
+
+  * To store variable 'a' value so that we will not lose variable 'a' value we make a `temp` variable. `a = b`.
+
+  * **Note** -\> We can override variables for all programming languages.
+
+-----
+
+### **Page No: 30**
+
+**Way to iterate on maps :-**
+
+`let nums = [4, 3, 2, 2]` -\> find the repeated number -\> i.e-\> 2
+
+```javascript
+let map = new Map();
+
+for (let i=0; i < nums.length; i++) {
+    if (map.has(nums[i])) {
+        map.set(nums[i], map.get(nums[i]) + 1);
+    } else {
+        map.set(nums[i], 1);
+    }
+}
+console.log(map);
+
+map.forEach((value, key) => {
+    if(value > 1) {
+        console.log(key, value);
+        // console.log(`key: ${key}, value: ${value}`);
+    }
+});
+```
+
+  * Syntax to iterate on map element using `forEach` as we iterate on array. Iterating on `map` is very useful when you want to decrease time complexity from `O(n^2)` to `O(n)`. We will loop elements for once and then iterate over the map.
+
+  * **`forEach` loop syntax to iterate on array :-**
+
+    ```javascript
+    const array = [1, 2, 3, 0];
+    array.forEach(element => console.log(element));
+    ```
+
+-----
+
+### **Page No: 31**
+
+**Technique to Calculate Time Complexity :-**
+
+  * Once we are able to write the runtime in terms of size of the input (n), we can find the Time Complexity.
+
+  * For example -\> `T(n) = n^2` -\> `O(n^2)`
+
+  * `T(n) = logn` -\> `O(logn)`
+
+  * **Some tricks to Calculate Complexity :-**
+
+    1.  **Drop the constants** -\> Any factor you neglect. `O(3n)` is `O(n)`. Better representation of `O(3n)` is `O(n)`.
+    2.  **Drop the non-dominant terms** -\> Anything you represent as `O(n^2 + n)` can be written as `O(n^2)`.
+
+-----
+
+Saare pages ke notes ho gaye hain. Kuch aur chahiye ho to bataiyega\!
+
+
+=============================================================
+
+Haanji, zaroor\! Yeh rahe aapke aage ke pages ke DSA notes, page number ke saath.
+
+-----
+
+### **Page No: 32**
+
+  * **Note** -\> 3 Divided by 7 then Remainder = 3.
+      * i.e -\> `7 / 3` -\> Quotient=0, Remainder=3. We can divide the number by zero also.
+
+**2D Array :-**
+
+  * **Eg** -\> `var arr = [[1,2,3], [1,4,5]]`
+      * `console.log(arr.length)` -\> output is '2' because this 2D Array length is 2.
+  * `console.log(arr[0][2])` -\> output `3`
+  * `console.log(arr[0].length)` -\> output is '3' because at '0' (zero index) the Array has '3' (three) elements.
+
+**To access objects from Array :-**
+
+```javascript
+var arr = [
+    { Name: 'sat', salary: 100 },
+    { Name: 'vinod', salary: 200 }
+];
+```
+
+  * **To access 'salary' variable value from array index.**
+      * `console.log(arr[0].salary)` -\> Output -\> 100
+      * `console.log(arr[0].Name)` -\> Output -\> sat
+      * `console.log(arr[1].salary)` -\> Output -\> 200
+      * `console.log(arr[1].Name)` -\> Output -\> vinod
+
+-----
+
+### **Page No: 33**
+
+**Sorting**
+
+  * Sorting means arranging an array in order (either Ascending or Descending).
+  * **Eg** -\> `[12, 7, 18, 1, 8]` (unsorted array) -\> `[1, 7, 8, 12, 18]` (sorted array)
+
+**Bubble Sort Algorithm** -\> It is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in the wrong order.
+
+  * **Eg** -\> `[6, 3, 0, 5]` -\> `[3, 6, 0, 5]` -\> Here algorithm compares the first two elements, and swaps it since 6 \> 3.
+  * Again `[3, 6, 0, 5]` -\> `[3, 0, 6, 5]` -\> swap since 6 \> 0.
+  * Again `[3, 0, 6, 5]` -\> `[3, 0, 5, 6]` -\> swap since 6 \> 5.
+  * Again following the same process Array will become sorted.
+  * i.e -\> `[0, 3, 5, 6]` sorted array.
+
+-----
+
+### **Page No: 34**
+
+**Selection Sort Algorithm :-**
+
+  * It works by repeatedly selecting the largest (or smallest) element from the unsorted position of the list and moving it to the sorted position of the list, by swapping.
+
+  * **Eg** -\> `arr = [8, 7, 1, 4, 2, 5, 3]`
+
+      * This array is divided into a sorted part (left) and an unsorted part (right).
+      * `[8]` (sorted part) | `[7, 1, 4, 2, 5, 3]` (unsorted part)
+      * `max_element` in unsorted array part is `7`. So, we will swap it with first element `8`.
+      * No, `max_element` in the unsorted array is `8`, so we will swap it with `4`? (Text is a bit unclear, but this is the general idea of Selection Sort).
+
+  * Again we will select `max_element` of the unsorted part, and swap it with the first element of the unsorted part, we will do this repeatedly.
+
+-----
+
+### **Page No: 35**
+
+**Linear vs Binary Search**
+
+  * **Linear Search** -\> Search for an element by visiting all the elements sequentially until the element is found.
+
+  * **Binary Search** -\> Searches for an element by breaking the search space into half in a sorted array.
+
+      * `[8, 9, 11, 18, 22, 26, 28]` (low, mid, high pointers)
+
+  * **NOTE** -\> Time complexity of Binary Search is `O(log n)`.
+
+  * The search continues towards either the right or left side of mid based on whether the element to be searched is lesser or greater than mid.
+
+  * **Binary Search :-** -\> Works only on Sorted arrays.
+
+  * **Note** -\> `n > log n`, Always. 'n' is number.
+
+      * Eg -\> `n=2`, `log 2 = 1`
+      * Eg -\> `n=4`, `log 4 = 2`
+
+-----
+
+### **Page No: 36**
+
+**Steps to do Binary Search :-**
+
+  * **Note** -\> Binary search Always works on Sorted Array.
+
+      * `arr = [-4, -1, 3, 7, 10, 11]` (Indices 0 to 5)
+      * `key = 7` -\> means we have to find '7' in this array.
+
+  * **Steps :-**
+
+    1.  Find Integer value of `mid_index`
+        `mid_index = Math.floor((lower_index + higher_index) / 2)`
+    2.  If `arr[mid_index] == key` -\> `Return mid_index`
+    3.  If `key > arr[mid_index]`
+          * Repeat -\> Take `lower_index = mid_index + 1`
+    4.  If `key < arr[mid_index]`
+          * Repeat -\> Take `higher_index = mid_index - 1`
+
+  * **Code**
+
+    ```javascript
+    var arr = [-1, 2, 3, 4];
+    var key = 3;
+    var lower_index = 0;
+    var higher_index = arr.length - 1;
+
+    while (lower_index <= higher_index) {
+        var mid_index = Math.floor((lower_index + higher_index) / 2);
+
+        if (key == arr[mid_index]) {
+            return mid_index;
+        } else if (key > arr[mid_index]) {
+            lower_index = mid_index + 1;
+        } else { // if (key < arr[mid_index])
+            higher_index = mid_index - 1;
+        }
+    }
+    ```
+
+-----
+
+### **Page No: 37**
+
+**Linked list :-**
+
+  * Linked lists are similar to arrays (linear data structures).
+
+  * `7 -> 10 -> 11 -> 1 -> NULL`
+
+      * (data | pointer to next element)
+
+  * **NOTE** -\> Starting or first node is called `head node` or `head`.
+
+  * **Why linked list?**
+
+      * Memory and the capacity of an array are fixed. In case of a linked list, we can keep adding and removing elements without any capacity constraints.
+
+  * **Drawbacks of linked lists :-**
+
+      * Extra memory space for pointers is required (for every node 1 pointer is needed).
+      * Random access is not allowed as elements are not stored in contiguous memory locations.
+
+-----
+
+### **Page No: 38**
+
+  * **Note** -\> Object of `ListNode` or `linkedlist` Class will give the address of the input node.
+  * **Eg** -\> `var node = new ListNode(1)`
+      * This is a variable class name. This name will be given in Question always.
+  * So, the `node` object will give the address of value 1 in the linked list here.
+
+-----
+
+### **Page No: 39**
+
+**Deletion in a linked list :-**
+
+  * Consider the following linked list:
+
+      * `head -> |8| -> |9| -> |11| -> |1| -> |7| -> |2| -> NULL`
+      * last node address points to NULL.
+
+  * Deleting a linked list node can be done in the following ways:
+
+    1.  Deleting the first node -\> a new linked list element is called Node.
+    2.  Deleting the node at any index.
+    3.  Deleting the last Node.
+    4.  Deleting the first node with a given value.
+
+  * The deletion just like insertion is done by revoking the pointer connections.
+
+  * **Case 1 :- Deleting the first node :-**
+
+      * `head -> |8| -> |9| -> ...`
+      * `head = head -> next`
+      * (The old head node is now disconnected)
+
+-----
+
+### **Page No: 40**
+
+  * **Case (2) :- Deleting the node at an index x**
+
+  * For deleting a given node, we first bring a temporary pointer `p` before the element to be deleted and `q` on the element being deleted.
+
+      * `... -> |11| (p) -> |6| (q, Node being deleted) -> |7| -> ...`
+      * `p -> next = q -> next`
+      * The node `q` is now disconnected.
+
+  * **NOTE** -\> In solving linked list problems, always first handle edge cases of given problems from your code. Otherwise, it will give null address errors.
+
+  * **Case (3) :- Deleting the last Node :-**
+
+      * Last node can be deleted just like case 2, by bringing `p` on the second last element and `q` on the last element.
+      * `... -> |7| (p) -> |2| (q) -> NULL`
+
+  * **Case (4) -\> Delete the first node with a given value**
+
+      * This can be done exactly like case 2 by bringing pointers `p` and `q` to appropriate positions.
+      * `... -> |11| -> |7| -> ...`
+      * `p -> next = q -> next`
+
+-----
+
+### **Page No: 41**
+
+  * **NOTE -\> Important facing of Linked list :-**
+
+  * **NOTE** -\> To get node address -\> `node` or `head`. If node is first.
+
+      * `head` -\> To get first node address.
+      * `head.next` -\> To get next node address.
+      * `head.val` -\> To get first node value.
+      * `head.next.val` -\> To get next node value.
+
+  * **NOTE** -\> If you `console.log(head)` or `return head` means you are returning the whole linked list, because the whole linked list is connected with `head` or the first element of the linked list.
+
+  * **NOTE** -\> whenever you are traversing in a linked list, you must store the head address in some temp variable. Otherwise, the linked list head address gets lost. So, the whole linked list gets lost.
+
+  * **NOTE** -\> `node.next.next` -\> will give next to next node address. Similarly by giving more 'next' we will get more node next addresses.
+
+-----
+
+Yeh lijiye, aapke saare notes ho gaye extract. Koi aur help chahiye ho to befikar hokar boliye\!
+
+=============================================================
+
+Haanji, bilkul\! Yeh rahe aapke agle pages ke notes, aaram se page number ke saath extract kar diye hain.
+
+-----
+
+### **Page No: 42**
+
+**Most Important Linked List Concept :-**
+
+  * **Note** -\> A node contains two parts
+
+    1.  Data or value of the node.
+    2.  Address of the next node.
+
+  * For the last node, the Address of the linked list is `null` or `undefined`.
+
+  * **Eg** -\>
+    \* Node 1: [Data | Next Node Address] -\> Node 2: [Data | Next Node Address] -\> `null`
+
+  * **Note** -\> While connecting two nodes, in the Node Address variable of the first node, give the address of the 2nd node.
+
+  * **For a node to get**
+
+    1.  **Data or Value of node** -\> `head.value`, or `head.data`
+        `console.log(head.value)`
+          * This is a variable name here, I defined a given variable name which is given in the question of the linked list class.
+    2.  **Address of first node** -\> `head.address`, or `head.next`
+        `console.log(head.address)` -\> variable name
+
+  * **Note** -\> `head.next` -\> will point to the next node address, to get the next node address we will use `head.next`.
+
+  * **Note** -\> `node.next.next.val` -\> value present in the next to next node address.
+
+-----
+
+### **Page No: 43**
+
+**Queue** -\> A queue works in FIFO (First In First Out) order.
+
+  * Queue performs two basic operations:
+
+    1.  Addition of an element at the end of the queue.
+    2.  Removal of an element from the front of the queue.
+
+  * Like a stack, a queue is also a linear data structure.
+
+  * `var array = [1, 2, 8, 7]`
+
+  * `array.shift()` -\> It removes the first element or zero index element from the array.
+
+      * then shifts all elements of the array forward and returns the shifted element.
+
+  * **Enqueue** -\> To add an element at the end of the queue.
+
+  * **Dequeue** -\> To remove an element from the front of the queue.
+
+  * **NOTE** -\> Queue is performed on an Array.
+
+-----
+
+### **Page No: 44**
+
+  * **ASCII value :-** of small alphabet `a`, `b`, ... `z`
+
+      * 'a' -\> Ascii Value -\> 97
+      * 'b' -\> Ascii Value -\> 98
+
+  * **Ascii Value of Numbers from 0 (zero) to (9)**
+
+      * 0 -\> Ascii value is 48
+      * 1 -\> Ascii value is 49
+      * 9 -\> Ascii value is 57
+
+  * **Ascii value of Capital Alphabet -\> 'A', 'B', 'C' ... 'Z'**
+
+      * 'A' -\> Ascii value is 65
+      * 'B' -\> Ascii value is 66
+
+  * **Accessing character code:**
+
+    ```javascript
+    let char = 'AB';
+    let asciiCode = char.charCodeAt(0); // Character code of 'A' (at index 0)
+    console.log(asciiCode); // output -> 65
+    // Character code of A is 65
+    ```
+
+  * **Converting Code to character from Ascii Code:**
+
+    ```javascript
+    let asciiCode = 65;
+    let char = String.fromCharCode(asciiCode);
+    console.log(char); // output -> 'A'
+    ```
+
+-----
+
+### **Page No: 45**
+
+**Stack :-** Stack is a linear data structure. Operation on stack is performed in LIFO (Last In First Out) order.
+
+  * Insertion/deletion can happen on this end.
+  * Item 2 which entered the basket last will be the first one to come out.
+  * **NOTE** -\> For javascript Array is Stack.
+  * **Eg** -\>
+    ```javascript
+    var stack = [];
+    stack.push("a"); // push() function
+    stack.pop();     // pop() function removes the last element from array, called here as a variable stack.
+    ```
+
+**Recursion :-** When a function calls itself from inside that function.
+
+  * **Eg** -\>
+    ```javascript
+    void printHello() {
+        printHello(); // -> calling the function from inside the same function
+    }
+    ```
+
+-----
+
+### **Page No: 46**
+
+**Recursion Example in Java :-**
+
+```java
+void main() {
+    printHello(5);
+}
+
+void printHello(int n) {
+    if (n == 0) {
+        return; // -> calling the function from inside the same function.
+    }
+    // This is called base case or condition.
+
+    print('Hello');
+    printHello(n - 1);
+}
+```
+
+  * **Output** -\> Hello, Hello, Hello, Hello, Hello -\> 5 times hello got printed.
+
+  * **Stack mein element push ho gaya:**
+
+      * Hello
+      * Hello
+      * ... (5 times)
+
+  * when `n==0` toh stack se element pop hona shuru ho jaata hai and stack dheere dheere khaali ho jaata hai.
+
+  * **NOTE** -\> Jab Recursion function start hota hai, element backward se stack mein jaana shuru ho jaate hain, jaise hi Base case hit ho jaata hai, toh stack se ek-ek karke element pop hona shuru ho jaate hain. And again stack khaali hoke back to normal ho jaata hai.
+
+  * **NOTE** -\> To stop recursion we should use the `return` keyword.
+
+-----
+
+### **Page No: 47**
+
+**Recursion**
+
+  * **Note** -\> In recursion at the time of pushing a function in the stack, all code before the recursive function gets executed.
+
+  * And when the base condition is met, because of the return statement, the function starts popping out from the stack. While popping a function out, code after the recursive function gets executed and code before the recursive function is stopped.
+
+  * **Code :-**
+
+    ```javascript
+    // Line numbers
+    1  var i = 1;
+    2  count(i);
+    3  function count() {
+    4      if (i == 6) {
+    5          return;
+    6      }
+    7      console.log(i); // This output is shown because of console.log in line number 7
+    8      count(i + 1);
+    9      console.log("satyam"); // Output because of line 9 & 10
+    10 }
+    ```
+
+  * Recursive function, because it is calling the same function again and again.
+
+  * Code after recursive function gets stopped, and when the base condition is met i=6, and then the function will start popping out from the stack and code after the recursive function will get executed.
+
+-----
+
+### **Page No: 48**
+
+  * So, in the Stack function will be pushed like this
+
+      * `count(6)` -\> This function will not print anything because when `count(6)` is executed it goes into `if` condition and because of `return` statement so `line 7` is not executed for `count(6)` function.
+      * `count(5)`
+      * `count(4)`
+      * `count(3)`
+      * `count(2)`
+      * `count(1)`
+
+  * So, when the function is pushed in Stack
+
+      * First `count(1)` is pushed in stack so print(1) because line 7 gets executed.
+      * Similarly `count(2)` -\> print(2), `count(3)` -\> print(3) ... `count(5)` -\> print(5).
+      * **Output** -\> 1, 2, 3, 4, 5
+
+  * **Note** -\> when the base condition is met i.e-\> `i==6`. Because of the `return` statement function from the stack function will get popped out.
+
+      * `count(6)` -\> Nothing will be printed because of base condition.
+      * `count(5)` -\> print("satyam")
+      * `count(4)` -\> print("satyam")
+      * `count(3)` -\> print("satyam")
+      * `count(2)` -\> print("satyam")
+      * `count(1)` -\> print("satyam")
+
+  * So, Output will be -\> 5 satyam, 4 satyam, 3 satyam, 2 satyam, 1 satyam.
+
+-----
+
+### **Page No: 49**
+
+**Syntax to create javascript Object :-**
+
+  * `var data = { key: value, ... }`
+
+  * `var data = { "firstname": "satyam", "email": "sa@gmail.com", ... }`
+
+  * Here we created a javascript object. In this type of Object creation syntax, javascript directly creates an object with key and value pairs.
+
+  * These data objects are not an instance of any specific class. It is simply a javascript object with properties and values.
+
+  * `console.log(data.firstname)` -\> Output -\> satyam (value of that key)
+
+  * `console.log(data.email)` -\> Output -\> sa@gmail.com
+
+  * **NOTE** -\> Character is enclosed in single quote `char saty = 'mcon'`.
+
+  * **NOTE** -\> String is enclosed in double quote `String saty = "mcon"`.
+
+  * **Note** -\> Time complexity of merge sort -\> `O(n log n)`
+
+  * Space complexity of merge sort -\> `O(n)`
+
+-----
+
+### **Page No: 50**
+
+**Sorting method :-**
+`var arr = [2500, 3, 90, 1]`
+
+  * **Note** -\> If you do `console.log(arr.sort())`
+
+      * output -\> `[1, 2500, 3, 90]`
+
+  * `arr.sort()` -\> This method sorts an array by changing array elements to its character code `ASCII`, so this method is not useful in sorting numbers.
+
+  * **NOTE** -\> So, to sort Array use this built in function.
+
+  * **Merge sort built-in function :-**
+
+    ```javascript
+    var arr = [2500, 3, 90, 1];
+    arr.sort((a, b) => {
+        if (a > b) {
+            return 1; // -> means swap array element in sorted way.
+        } else {
+            return -1; // -> means don't swap it because it is by default sorted.
+        }
+    });
+    ```
+
+      * This five is inbuilt function variable & don't change it.
+
+  * In the above case `a`, `b` is a variable you can modify it according to your need.
+
+  * `console.log(arr)` -\> output -\> `[1, 3, 90, 2500]`
+
+  * It works on the merge sort algorithm by breaking the Array in the smallest two parts and sorting it and then merging it.
+
+  * **NOTE** -\> merge sort Algorithm time complexity is `O(n log n)`.
+
+-----
+
+### **Page No: 51**
+
+  * **NOTE** -\> Array with only one element is always a sorted array.
+
+      * Eg -\> `[5]` -\> The only one element in array is always a sorted array.
+
+  * **Merge Sort Algorithm :-**
+
+  * Merge sort algorithm is one of the most popular algorithms and widely used.
+
+  * This is an unsorted array -\> `[12, 31, 25, 8, 32, 17, 40, 42]`
+
+  * According to merge sort, first divide the given array into two equal halves.
+
+  * Merge sort keeps dividing the array into two equal parts until it cannot be further divided.
+
+  * As there are eight elements in the given array, so, it is divided into two arrays of size 4.
+
+      * divided array -\> `[12, 31, 25, 8]` `[32, 17, 40, 42]`
+
+  * Now, again divide the above two arrays into halves. As they are of size 4, so, divide them into a new array of size 2.
+
+      * divided array into two -\> `[12, 31]` `[25, 8]` `[32, 17]` `[40, 42]`
+
+-----
+
+Yeh lijiye, aapke saare notes extract ho gaye hain\! Agar koi aur help chahiye ho toh bataiyega.
+
+=============================================================
+
+Haan ji, yeh rahe aapke aakhiri batch ke notes. Maine sab kuch aaram se page by page extract kar diya hai.
+
+---
+
+### **Page No: 52**
+
+* Now, again divide the array to get the atomic array that cannot be further divided.
+    * divided array -> `[12]` `[31]` `[25]` `[8]` `[32]` `[17]` `[40]` `[42]`
+
+* Now, we will combine them, but before combining, first compare the elements of each array and then combine them into other arrays in sorted order.
+
+* So, first compare 12 and 31. In this case, both are in sorted position. Then compare 25 and 8 and in the array of two values, put 8 first followed by 25.
+
+* Then compare 32 and 17, sort them and put 17 first followed by 32. After that compare 40 and 42 and place them sequentially.
+
+* Now, merge them -> `[12, 31]` `[8, 25]` `[17, 32]` `[40, 42]`
+
+* Now, Array becomes two size, Now, again we will follow the same process, that is -> compare the array with two data values and merge them into an array. For sorted order, After merging array will look like this.
+    * merge array -> `[8, 12, 25, 31]` `[17, 32, 40, 42]`
+
+* Now, we will do the final merging of the array. After the final merging of the above array, the array will look like -> `[8, 12, 17, 25, 31, 32, 40, 42]`
+    * Now, this array is completely sorted.
+
+---
+
+### **Page No: 53**
+
+**BIT Manipulation**
+
+* **BIT Manipulation :-**
+    1.  A bit is a basic unit of computation. It can be either `1` or `0` (zero).
+    2.  1 byte is equal to 8 Bits. `1MB = 8Mb`.
+    3.  The range of value of '3' bit message can store `(2^3) = 8` values.
+        * `^` -> symbol of power
+    * and 'n' bit message can store value ranging upto `2^n`.
+    4.  Size of int is 4 bytes. `*` -> symbol of multiply
+        * `int = 4 bytes = 4 * 8 Bits = 32 bits`
+    * Therefore the range of values int can store is `2^32` bits.
+
+* `signed int` can store value ranging from `-2,147,483,648` to `2,147,483,647`.
+* `unsigned int` can store value ranging from `0` to `4,294,967,295`.
+
+---
+
+### **Page No: 54**
+
+5.  Any numbers that we see in real life is a decimal number. i.e -> $55 = 5 \times 10^1 + 5 \times 10^0 = 50 + 5 = 55$.
+    * Eg -> 55 is a decimal number. It has base 10. Similarly -> $35 = 3 \times 10^1 + 5 \times 10^0 = 35$. Because decimal number has base 10.
+6.  Octal number has a `base 8`, means value ranging from `(0, 1, 2, 3, ... 7)` can only be there in octal numbers.
+7.  Binary number has `base '2'` -> means base will either be `0` or `1` -> `(0, 1)`.
+8.  Hexadecimal number has a base 16. that is value ranging from `(0, 1, 2, 3, 4, 5, ... 9, A, B, C, D, E, F)`.
+    * where -> A=10, B=11, C=12, D=13, E=14, F=15.
+9.  Convert hexadecimal `5C` to binary.
+    * $(5C)_{16} = 16^1 \times 5 + 16^0 \times 12 = 80 + 12 = 92$.
+    * (Because C=12) (Because base is 16).
+
+* 3 bit message is like this in compiler
+| A | B | C |
+| :---: | :---: | :---: |
+| 0 | 0 | 0 |
+| 0 | 0 | 1 |
+| 0 | 1 | 0 |
+| 0 | 1 | 1 |
+| 1 | 0 | 0 |
+| 1 | 0 | 1 |
+| 1 | 1 | 0 |
+| 1 | 1 | 1 |
+
+---
+
+### **Page No: 55**
+
+* **Converting any numbers into its decimal format.**
+    * **Convert this number from Decimal to decimal format.**
+        i.e -> $(3192)_{10} = 2 \times 10^0 + 9 \times 10^1 + 1 \times 10^2 + 3 \times 10^3 = 2 + 90 + 100 + 3000 = (3192)_{10}$
+    * **Convert Octal number to decimal number**
+        $(3172)_8 = 2 \times 8^0 + 7 \times 8^1 + 1 \times 8^2 + 3 \times 8^3 =$
+        $2 \times 1 + 7 \times 8 + 1 \times 64 + 3 \times 512 = (1658)_{10}$
+    * **Convert Binary number to decimal number**
+        $(1010)_2 = 0 \times 2^0 + 1 \times 2^1 + 0 \times 2^2 + 1 \times 2^3 =$
+        $0 + 2 + 0 + 8 = (10)_{10}$
+
+---
+
+### **Page No: 56**
+
+* **Converting a number from decimal to any other format, keep on dividing the number by the base of the other format, and remainder of the number will be the answer.**
+
+1.  **Eg ->** Decimal number -> 17 (Convert it to Binary number)
+    * Divide 17 with 2 because binary has Base 2.
+        * So, Decimal number 17 in Binary format is -> `10001`.
+    * (write remainder from bottom to top, this will be the answer)
+
+2.  **Eg ->** Convert 160 Decimal number to Binary number.
+    * `160 -> to Binary`
+        * Binary number of decimal number 160 is `10100000`.
+
+---
+
+### **Page No: 57**
+
+* **Decimal number to octal number**
+    * we will divide the number with '8' for octal.
+* **Eg -> Convert Decimal number 33 to octal number.**
+        * `8 | 33 | 1` (remainder)
+    * `8 | 4  | 4` (remainder)
+    * `  | 0  |`
+    * (read remainder upwards) -> `041`
+* So, Decimal number 33 in Octal format is written as -> `041` -> `41`.
+
+---
+
+### **Page No: 58**
+
+11. **What will be the length of numbers if an integer number is converted into hexadecimal format.**
+    * `Int = 4 bytes = 4 * 8 bits = 32 bits :-`
+    * In the binary representation int will be 32 bit long.
+    * **Example** -> Integer in binary bit will look like this.
+        `1111 1111 1111 1111 1111 1111 1111 1111` ($base_2$ means it is binary).
+        `1000 0000 0000 0000 0000 0000 0000 0000`
+        `0111 1111 1111 1111 1111 1111 1111 1111`
+
+    * Range of numbers we can have is $2^{32} = (2^4)^8 = (16)^8$ -> because hexadecimal has base 16.
+    * Therefore the maximum hexadecimal number will be of size '8' or '8' bit long.
+
+    * Ranging from -> 8 Bit
+        * `0000 0000` -> `0001` -> `0002`
+        * ...
+        * `FFFF FFFF`
+
+* **Convert hexadecimal `15C` to binary.**
+    * $(15C)_{16} = 16^2 \times 1 + 16^1 \times 5 + 16^0 \times 12 = 352$
+
+---
+
+### **Page No: 59**
+
+12. **property of right shift operation :- `(>>)` -> Symbol**
+    * How many bits are removed from the right for right shift operation.
+    * **Eg ->** `110101 >> 3 = 110` -> This is output.
+    * (right shift operation)
+    * This three last digit gets removed because of 3 here.
+
+    * **Property :-**
+        whenever we do a right shift we actually perform integer division the number by $2^n$ where 'n' is the number specified for right shift operation.
+    * In the above example right shift operand is '3' so, we removed last three digits from binary.
+
+    * **Example -> On Decimal digit -> on right shift.**
+        i) $15 >> 0 = 15 / (2^0) = 15$
+        ii) $15 >> 1 = 15 / (2^1) = 7$
+        iii) $15 >> 2 = 15 / (2^2) = 3$
+        iv) $100 >> 4 = 100 / (2^4) = 16$
+        * $a^n * m$ -> way of writing
+        (* Note -> division here is integer division)
+
+---
+
+### **Page No: 60**
+
+13. **property of left shift is multiply the number by $2^n$ or $2^n$ bits are added to the number.**
+    * `(<<)` -> left shift symbol.
+    * **Eg ->** `110101 << 3 = 110101000`
+    * (Symbol of left shift)
+
+    * **NOTE ->** whenever we do a left shift, we actually perform integer multiplication the number by $2^n$, where 'n' is number specified in right side.
+
+    * **Eg ->** `6 << 4` -> here n = 4
+    * we will do -> $6 << 4 = 6 * (2^4) = 96$
+
+    * **Example on decimal digit**
+        * $4 << 7 = 4 * (2^7) = 512$
+        * $6 << 4 = 6 * (2^4) = 96$
+
+---
+
+### **Page No: 61**
+
+14. **'OR' operation :-** `|` symbol
+        * `1 | 1 -> 1`
+    * `1 | 0 -> 1`
+    * `0 | 1 -> 1`
+    * `0 | 0 -> 0`
+
+    * **property**
+        whenever we do an 'OR' operation between 2 numbers A or B = R;
+        where 'R' is always greater than, or greatest between A and B.
+
+15. **AND operation** `&` symbol
+        * `1 & 1 -> 1`
+    * `1 & 0 -> 0`
+    * `0 & 1 -> 0`
+    * `0 & 0 -> 0`
+
+    * **property**
+        whenever we do an AND operation between 2 numbers A AND B = R;
+        where 'R' is always less than smallest between A and B.
+
+---
+
+Aapke saare notes ab complete ho gaye hain. Umeed hai isse aapki padhai mein kaafi help hogi! Best of luck!
+
+=============================================================
+
+Haanji, yeh rahe aapke aakhiri pages ke notes bhi. Maine sab kuch aaram se page number ke saath extract kar diya hai.
+
+---
+
+### **Page No: 62**
+
+16. **XOR operation :-** `^` symbol
+    * XOR between same bits gives 0 (zero)
+    * $(1 \oplus 1 = 0, 0 \oplus 0 = 0)$ -> symbol of XOR
+    * And XOR between different bits gives 1
+    * $(1 \oplus 0 = 1, 0 \oplus 1 = 1)$ -> symbol of XOR
+
+    * **property**
+        * whenever we do an XOR operation on two same numbers, the output is 0 (zero).
+        * whenever we do XOR between 'A' number and '0' (zero) we get the same number A.
+        * $A \oplus A = 0$ (zero)
+        * $A \oplus 0 = A$
+
+---
+
+### **Page No: 63**
+
+**Easy trick to convert Decimal number to Binary number :-**
+* **Example -> (13)**
+* **Note:-** set bit is `1` and unset bit is `0` (zero) in Binary.
+
+
+* **Eg ->** $5 \rightarrow 101_2$ -> Binary representation of decimal number 5.
+    * decimal number -> unset bit | set bit | set bit
+* So for decimal number five (5), There is two set bit i.e -> 1 and one unset bit i.e zero(0).
+
+* **Note:-** In binary format of any number, in front of the binary number we can put as many numbers of unset bit i.e -> zero(0) as we want. It will not affect the binary of that number, because zero is an unset bit.
+* **Eg ->** decimal number 5 = `101` in binary
+    * we can also write it like this:
+    * 5 = `...00000000101`
+    * So, here I can put as many numbers of zero as unset bit as we want before binary number.
+
+---
+
+### **Page No: 64**
+
+Date - 7/04/23
+
+**Converting Negative numbers to Binary :-**
+* **Eg -> (-20)**
+
+
+* **Steps :-**
+    1.  Calculate Binary representation of that positive number
+        * i.e -> +20 -> $(10100)_2$.
+    2.  Because Binary has base 2, so, we will find 2's complement.
+        * `2's Complement = 1's Complement + 1` -> Binary representation of negative of that number i.e -> `(-20)` for this case.
+    3.  `1's Complement` = subtracting one (1) from binary number from all bits.
+        * Invert the binary bit of positive number by inverting bit you will get 1's Complement.
+* **Note ->** Similarly In hexadecimal we need to find 16's complement.
+    * `16's Complement = 15's Complement + 1`
+* `15's Complement` = Subtracting fifteen (15) from every hexadecimal bit.
+
+---
+
+### **Page No: 65**
+
+* **Eg -> (-20) Convert (-20) to binary :**
+* By following the above three steps
+    1.  Binary representation of (+20) -> (10100)
+    2.  1's Complement = subtracting 1 (one) from that Binary.
+    3.  1's Complement = Invert the binary bit of (+20).
+        * means, change all one (1) to zero (0) and all zero(0) to 1 (one) for positive binary of that number. 1 -> 0, 0 -> 1 Replace it.
+* So, (+20) -> Binary representation -> (10100) -> Replace 0->1 and 1->0
+* So, 1's Complement = `...111...01011`
+* This extra 1 is because, positive (+20) binary number there is infinite number of zero before that positive binary. i.e -> (+20) = `00000...10100`.
+
+---
+
+### **Page No: 66**
+
+* 1's Complement = `...111...01010`
+* 2's complement = 1's Complement + 1
+* `...111...01011`
+* `+ 000...00001` (carry)
+* `...111...101100` -> **2's Complement**
+
+* **NOTE ->** In decimal `1+1=2`, But For Binary there is `0` & `1` only. So, binary can't go greater than '1'.
+* So, in binary if bit-sum is greater than 1 it goes to the next bit as carry.
+* For binary, sum greater than 1 is zero at the unit place with a carry of one (1).
+* Like in decimal sum greater than 9 is ten (10) so, that zero at unit place with a carry of one (1) go to tens place.
+* **Note ->** For binary `1+1=0` (with a carry of one (1) to the next element).
+* Similarly For hexadecimal `15+1` gives zero at the unit place with a carry, and that carry will get added to the next element.
+
+---
+
+### **Page No: 67**
+
+* **NOTE ->** In Binary 2's Complement = Binary Representation of negative of that number.
+* This is 2's Complement.
+* -20 (decimal number) -> Binary Representation -> `...111...101100`
+
+* **Same step to be used for finding -ve numbers binary representation**
+* **NOTE ->** For hexadecimal, we will find 16's Complement.
+* For Octa we will find 8's Complement.
+    * To find negative numbers, hexadecimal, Octal representation.
+
+* **NOTE:-** In decimal number, base is 10, so, to find the unit place digit for a decimal number, we will divide the number with 10 and the Remainder we get is the unit place digit.
+* Similarly for Binary, we will divide it with 2 (two) and remainder will be the unit place digit of that Binary number.
+* Similarly for hexadecimal, we will divide the given number with (16) and remainder will be the unit place digit.
+
+---
+
+### **Page No: 68**
+
+**Converting negative Decimal number to Hexadecimal :-**
+* **Eg -> (-93)**
+    1.  Calculate +93 hexadecimal representation
+        * +93 -> `000...5D`
+    2.  Because of hexadecimal, so base is (16), so, we will find 16's complement.
+        * `16's complement = 15's complement + 1`
+    * **NOTE ->** 16's complement = hexadecimal representation of that negative number, for our example it is `(-93)`.
+    3.  `15's complement` = subtracting fifteen (15) from every hexadecimal bit.
+        * `000...5D`
+        * `15 15 15...15 15`
+        * `  0  0... 5  D`
+        * `15 15 15...10  2`
+    * **Note ->** In hexadecimal fifteen(15) = f, ten(10) = A.
+    * i.e 15's complement = `fff...A2`
+
+---
+
+### **Page No: 69**
+
+* `16's complement = 15's complement + 1`
+* `= fff...A2 + 1 = fff...A3`
+* `∴ -93` in hexadecimal is `fff...A3`
+* Steps are :-
+    * `-93 -> +93 -> 16's complement -> 15's complement + 1`
+
+---
+
+Aapke saare notes ab complete ho gaye hain! Agar aur koi bhi help chahiye ho, toh befikar hokar poochiyega. All the best for your preparations!
+
+=============================================================
