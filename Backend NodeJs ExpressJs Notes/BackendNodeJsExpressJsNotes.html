@@ -3627,6 +3627,258 @@ const resetTokenHash = crypto.createHash('sha256').update(resetToken).digest('he
 - ✓ Password reset with token expiry
 - ✓ OAuth for social login options
 
+# Module 3: Authentication & Security 🔐
+
+## Topic 6: Advanced Input Validation with `express-validator`
+
+### 1\. Title / Short Summary (1 line)
+
+`express-validator` ek middleware library hai jo API inputs ko easily validate aur sanitize karti hai, taaki aapka app secure aur robust bane. 🛡️
+
+### 2\. What is it? (Kya hai?)
+
+`express-validator` Express.js ke liye ek wrapper hai jo powerful `validator.js` library par bana hai. Yeh aapko declarative tarike se validation rules (jaise "email valid hona chahiye" ya "password 8 characters ka hona chahiye") define karne deta hai.
+
+**Analogy:** `express-validator` aapke API ka bouncer hai. Har request (guest) jab aati hai, toh yeh bouncer uski ID (data) check karta hai ki woh rules ke hisaab se valid hai ya nahi. Agar nahi, toh usko entry nahi milti.
+
+### 3\. Why use it? (Kyu use karte hai?)
+
+  - **Security:** SQL Injection, Cross-Site Scripting (XSS), aur doosre "bad data" attacks se bachata hai.
+  - **Data Integrity:** Database mein hamesha clean aur expected format ka data jaata hai.
+  - **Clean Code:** Lambe-lambe `if-else` validation checks ki jagah, readable "chains" use hote hain.
+  - **User Experience:** Clear error messages bhej sakte hain taaki user ko pata chale kya galat hai.
+
+### 4\. When to use it? (Kab use karna chahiye?)
+
+  - **Use when:** Jab bhi user se input le rahe ho – `req.body`, `req.params`, `req.query`, ya `req.headers`.
+  - **Alternatives:** Joi (popular for object schema validation), ya manual validation (bohot repetitive aur error-prone).
+  - **Best fit:** Har route par jahan user data manipulation hota hai (registration, login, profile update, form submission).
+
+### 5\. If not used then what? (Agar use nahi kiya to kya hoga?)
+
+  - **Security Risks:** Malicious users aapke database mein galat script ya query daal sakte hain, jisse data leak ya corrupt ho sakta hai.
+  - **Bugs & Crashes:** Agar aap `number` expect kar rahe hain aur `string` aa gaya, toh aapka code crash ho sakta hai.
+  - **Messy Code:** Har route mein manual validation logic likhna padega, jisse code maintain karna mushkil ho jaayega.
+  - **Real-world impact:** Ek e-commerce site mein, bina validation ke user cart mein quantity `-5` daal sakta hai, jisse poora order calculation bigad jaayega.
+
+### 6\. How it works (Step-by-step working)
+
+1.  **Install:** `npm install express-validator`
+2.  **Import:** `check`, `body`, `param`, aur `validationResult` functions ko import karo.
+3.  **Define Rules:** Route ke middleware array mein validation rules (e.g., `body('email').isEmail()`) define karo.
+4.  **Process Request:** Jab request aati hai, `express-validator` rules ko run karta hai.
+5.  **Check Errors:** Route handler ke andar `validationResult(req)` se errors collect karo.
+6.  **Handle Errors:** Agar errors hain, toh 400 (Bad Request) status ke saath user ko error messages return karo. Agar nahi, toh normal logic continue karo.
+
+### 7\. Code Example (with Full Explanation)
+
+```javascript
+const express = require('express');
+// express-validator se zaroori functions import karo
+const { body, param, validationResult } = require('express-validator');
+
+const app = express();
+app.use(express.json());
+
+// ========== USER REGISTRATION ROUTE WITH VALIDATION ==========
+
+// Step 1: Validation rules ko ek array mein define karo
+const registerValidationRules = [
+  // Username validation
+  body('username')
+    .trim() // Faltu spaces hatao
+    .notEmpty().withMessage('Username is required') // Khali nahi hona chahiye
+    .isLength({ min: 5 }).withMessage('Username must be at least 5 characters long'), // Min length 5
+
+  // Email validation
+  body('email')
+    .isEmail().withMessage('Please provide a valid email') // Valid email format check
+    .normalizeEmail(), // Email ko lowercase aur standard format mein convert karo
+
+  // Password validation
+  body('password')
+    .isLength({ min: 8 }).withMessage('Password must be at least 8 characters long')
+    .matches(/\d/).withMessage('Password must contain a number'), // Kam se kam ek number hona chahiye
+
+  // Age validation (optional field)
+  body('age')
+    .optional() // Yeh field zaroori nahi hai
+    .isInt({ min: 18 }).withMessage('You must be at least 18 years old') // Agar hai, toh integer aur min 18
+];
+
+// Step 2: Route mein validation rules ko middleware ki tarah use karo
+app.post('/register', registerValidationRules, (req, res) => {
+  // Step 3: Route handler mein validation result check karo
+  const errors = validationResult(req);
+
+  // Agar validation errors hain
+  if (!errors.isEmpty()) {
+    // 400 Bad Request status ke saath errors return karo
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  // Agar koi error nahi hai, toh user create karo
+  const { username, email, age } = req.body;
+  // IMPORTANT: Hamesha validated data use karo
+  // express-validator sanitizers apply karne ke baad data ko req.body mein update kar deta hai
+
+  console.log('User data is valid:', { username, email, age });
+  // Yahan database mein user save karne ka logic aayega...
+
+  res.status(201).json({ message: 'User registered successfully!' });
+});
+
+// ========== ROUTE PARAM VALIDATION ==========
+app.get('/user/:id', [
+  // param() se URL parameter validate karo
+  param('id').isInt().withMessage('User ID must be an integer')
+], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    res.send(`Fetching data for user ID: ${req.params.id}`);
+});
+
+
+app.listen(3000, () => console.log('Server running on port 3000'));
+```
+
+**Line-by-Line Breakdown:**
+
+| Line | Code | Explanation |
+| :--- | :--- | :--- |
+| 1 | `const { body, ... } = require(...)` | `express-validator` se `body`, `param`, aur `validationResult` functions import kiye. |
+| 2 | `const registerValidationRules = [...]` | Saare validation rules ko ek alag array mein rakha. Yeh code ko clean rakhta hai. |
+| 3 | `body('username').trim().notEmpty()` | `username` field ko check kar rahe hain. `trim()` se whitespace hataya, `notEmpty()` check kiya ki khali na ho. |
+| 4 | `.withMessage('...')` | Har validation rule ke liye custom error message set kiya. |
+| 5 | `body('email').isEmail().normalizeEmail()` | Email ka format check kiya aur `normalizeEmail()` se use standard format (e.g., lowercase) mein laaya. |
+| 6 | `body('age').optional().isInt(...)` | `age` field ko optional banaya. Agar user dega, toh hi `isInt` validation run hoga. |
+| 7 | `app.post('/register', registerValidationRules, ...)` | Validation rules ko route ke middleware ke taur par pass kiya. |
+| 8 | `const errors = validationResult(req)` | Request object se saare validation errors ko collect kiya. |
+| 9 | `if (!errors.isEmpty()) { ... }` | Check kiya ki `errors` object khali hai ya nahi. Agar khali nahi, matlab validation fail hua hai. |
+| 10 | `return res.status(400).json(...)` | Validation fail hone par 400 status aur errors ka array response mein bheja. |
+
+**Expected Output (Validation Fail):**
+
+```json
+// Request: POST /register with body: { "username": "usr", "email": "test" }
+{
+  "errors": [
+    {
+      "type": "field",
+      "value": "usr",
+      "msg": "Username must be at least 5 characters long",
+      "path": "username",
+      "location": "body"
+    },
+    {
+      "type": "field",
+      "value": "test",
+      "msg": "Please provide a valid email",
+      "path": "email",
+      "location": "body"
+    },
+    {
+      "type": "field",
+      "msg": "Invalid value",
+      "path": "password",
+      "location": "body"
+    }
+  ]
+}
+```
+
+**Expected Output (Success):**
+
+```json
+// Request: POST /register with body: { "username": "testuser", "email": "test@user.com", "password": "password123" }
+{
+  "message": "User registered successfully!"
+}
+```
+
+### 8\. Common Beginner Mistakes
+
+  - ❌ `validationResult(req)` ko call karna bhool jaana. Bina iske aapko errors kabhi nahi milenge.
+  - ❌ Validation rules ko array mein wrap na karna. Multiple rules hain toh hamesha `[...]` use karo.
+  - ❌ Sanitizers (jaise `trim()`, `escape()`) use na karna. Sirf validation kaafi nahi, data ko clean karna bhi zaroori hai.
+  - ❌ Error response ko `return` karna bhool jaana, jisse neeche ka code bhi execute ho jaata hai.
+  - ❌ Sirf "happy path" (successful validation) sochna, error cases handle na karna.
+
+### 9\. Best Practices / Pro Tips
+
+  - ✅ **CRITICAL Security:** Hamesha sanitization pehle aur validation baad mein karo. `body('comment').trim().escape().isLength({max: 200})`. `escape()` XSS attacks se bachata hai.
+  - ✅ Reusable validation chains banao. Rules ko alag file mein export karke multiple routes mein import kar sakte ho.
+  - ✅ `.withMessage()` ka use karke user-friendly error messages do.
+  - ✅ Custom validators banao complex logic ke liye. Jaise, `body('username').custom(value => { return User.findOne({where: {username: value}}).then(user => { if(user) { return Promise.reject('Username already in use')} }) })`.
+  - ✅ Wildcard `*` use karke saare fields par generic sanitizer apply kar sakte ho: `body('*').trim().escape()`.
+
+### 10\. Real-World Example / Scenario
+
+**E-commerce Product Review:** Jab user kisi product par review submit karta hai, toh `express-validator` check karta hai: `rating` 1 se 5 ke beech ka number hai (`isInt({ min: 1, max: 5 })`), `comment` 10 se 500 characters ke beech hai (`isLength({ min: 10, max: 500 })`), aur comment mein koi harmful HTML na ho (`escape()`). Isse database mein hamesha valid aur safe review data hi jaata hai.
+
+### 11\. Checklist / Quick Recap (TL;DR)
+
+  - ✓ `npm install express-validator`.
+  - ✓ `body()`, `param()`, `query()` se target field select karo.
+  - ✓ Validation chains banao (e.g., `.isEmail().isLength()`).
+  - ✓ `.withMessage()` se custom errors do.
+  - ✓ `validationResult(req)` se errors check karo.
+  - ✓ `errors.isEmpty()` check karke 400 response bhejo agar validation fail ho.
+  - ✓ Sanitizers (`trim`, `escape`, `normalizeEmail`) zaroor use karo.
+
+### 12\. FAQs (Frequently Asked Questions)
+
+**Q1: Validation aur Sanitization mein kya fark hai?**
+A: Validation data ko check karta hai (e.g., kya yeh email hai?). Sanitization data ko modify/clean karta hai (e.g., faltu spaces hatana). Hamesha pehle sanitize, phir validate.
+
+**Q2: Nested objects (e.g., `user.address.city`) kaise validate karu?**
+A: Dot notation use karo: `body('user.address.city').notEmpty()`.
+
+**Q3: Custom validator kaise banau?**
+A: `.custom((value, { req }) => { ... })` use karo. Ismein aap database check ya complex logic likh sakte ho. True return karo agar valid hai, `throw new Error()` ya `Promise.reject()` karo agar invalid hai.
+
+**Q4: Saare error messages ek saath kaise dikhau?**
+A: `errors.array()` aapko saare validation errors ka ek array deta hai jisko aap frontend par easily display kar sakte ho.
+
+**Q5: File uploads kaise validate karu?**
+A: `express-validator` direct file content validate nahi karta. Uske liye aapko Multer ke `fileFilter` ke saath custom logic likhna padega file type/size check karne ke liye.
+
+### 13\. Practice Exercise / Task
+
+**Task:** Ek "Create Blog Post" API (`POST /posts`) banao. Ismein `title` aur `content` fields ko validate karo:
+
+  - `title`: Required, minimum 5 characters, maximum 100 characters.
+  - `content`: Required, minimum 20 characters.
+  - Dono fields se extra spaces (`trim`) aur HTML (`escape`) remove karo.
+  - Validation fail hone par proper error response bhejo.
+  - **Expected Output:** Success par `201 Created` aur fail par `400 Bad Request` with error details.
+
+### 14\. Additional / Advanced Notes (optional)
+
+  - **Schema Validation:** `checkSchema()` function use karke aap ek poora object schema define kar sakte ho, jo bohot bade forms ke liye clean rehta hai.
+  - **OneOf:** `oneOf()` se aap check kar sakte ho ki multiple validation chains mein se kam se kam ek pass ho (e.g., user ya toh 'email' de ya 'phone').
+  - **Error Formatting:** `validationResult(req).formatWith(...)` se aap error object ke structure ko customize kar sakte ho.
+
+### 15\. Short Final Summary (5 lines)
+
+  - `express-validator` aapke API ki pehli defense line hai.
+  - Yeh user input ko validate aur sanitize karke security aur data integrity ensure karta hai.
+  - Readable validation chains se code clean rehta hai.
+  - `validationResult` se errors ko handle karna bohot aasan hai.
+  - Hamesha user input ko validate karo, kabhi trust mat karo.
+
+**Remember this:**
+
+  - Sanitize first, then validate.
+  - Use `.withMessage()` for clear errors.
+  - `validationResult` is your best friend.
+
+-----
+
+
+
 **Next:** Module 4 mein Advanced Features seekhenge! 🚀
 
 
@@ -6689,6 +6941,222 @@ const users = await User.findAll({
 - ✓ Jobs: Background processing, retry logic, separate workers
 - ✓ Indexes: Foreign keys, WHERE columns, composite indexes
 - ✓ Queries: SELECT specific columns, eager loading, LIMIT results
+
+
+
+
+# Module 5: Testing, Monitoring & DevOps 🧪
+
+## Topic 5: Application Health & Performance Monitoring with Sentry
+
+### 1\. Title / Short Summary (1 line)
+
+Sentry ek real-time error tracking tool hai jo production errors ko automatically capture, report, aur alert karta hai, taaki aap bugs ko user ke batane se pehle fix kar sakein. 🚨
+
+### 2\. What is it? (Kya hai?)
+
+Sentry ek application monitoring platform hai jo aapke live application mein hone waale har error aur crash ko real-time mein track karta hai. Yeh aapko batata hai ki error kab, kahan, aur kyu hua, poori stack trace aur context ke saath.
+
+**Analogy:** Sentry aapke app ka "Black Box" (flight recorder) hai. Jab bhi app crash (plane crash) hota hai, Sentry saari details record kar leta hai taaki aap aasani se pata laga sakein ki galti kahan hui thi.
+
+### 3\. Why use it? (Kyu use karte hai?)
+
+  - **Proactive Debugging:** Users ke complain karne ka wait nahi karna padta, errors aate hi aapko pata chal jaata hai.
+  - **Rich Context:** Har error ke saath stack trace, request data, browser/OS version, aur user info milti hai.
+  - **Performance Monitoring:** Slow API endpoints aur database queries (N+1 problems) ko identify karta hai.
+  - **Alerting:** Critical errors aane par aapko Slack, email, ya PagerDuty par turant alert bhejta hai.
+
+### 4\. When to use it? (Kab use karna chahiye?)
+
+  - **Use when:** Koi bhi application jab staging ya production environment mein jaaye.
+  - **Alternatives:** Bugsnag, Rollbar, Datadog APM.
+  - **Best fit:** Har uss project ke liye jahan application stability aur user experience critical hai.
+
+### 5\. If not used then what? (Agar use nahi kiya to kya hoga?)
+
+  - **Blind Debugging:** Aapko pata hi nahi chalega ki production mein errors aa rahe hain, jab tak users aapse complain na karein.
+  - **Slow Response Time:** Error ko reproduce aur debug karne ke liye logs mein ghanto lag jaayenge.
+  - **Poor User Experience:** Users ko baar-baar "Something went wrong" jaise generic error messages milenge, jisse woh frustrated honge.
+  - **Real-world impact:** Ek e-commerce site par payment gateway mein ek rare bug hai jo sirf Safari browser par aata hai. Bina Sentry ke, aap isko kabhi track nahi kar paaoge aur sales ka nuksaan hota rahega.
+
+### 6\. How it works (Step-by-step working)
+
+1.  **Sign Up:** Sentry.io par account banao aur ek project create karo. Aapko ek "DSN" (Data Source Name) key milegi.
+2.  **Install SDK:** Apne Node.js app mein Sentry ka SDK install karo: `npm install @sentry/node @sentry/profiling-node`.
+3.  **Initialize Sentry:** Apni app ki entry file (`app.js` ya `server.js`) mein sabse upar Sentry ko DSN key ke saath initialize karo.
+4.  **Add Middleware:** Express app mein Sentry ke request handler aur error handler middleware ko add karo.
+5.  **Capture Errors:** Sentry ka middleware unhandled exceptions ko automatically capture kar lega.
+6.  **Monitor:** Errors Sentry ke dashboard par real-time mein dikhne lagenge.
+
+### 7\. Code Example (with Full Explanation)
+
+```javascript
+const express = require('express');
+const Sentry = require('@sentry/node');
+const { ProfilingIntegration } = require('@sentry/profiling-node');
+require('dotenv').config();
+
+const app = express();
+
+// ========== SENTRY INITIALIZATION ==========
+// IMPORTANT: Sentry ko sabse pehle initialize karna hai, doosre require/imports se bhi pehle.
+Sentry.init({
+  dsn: process.env.SENTRY_DSN, // .env file se DSN load karo
+  integrations: [
+    // Express integration enable karo
+    new Sentry.Integrations.Http({ tracing: true }),
+    // Automatic performance monitoring
+    new Sentry.Integrations.Express({ app }),
+    new ProfilingIntegration(),
+  ],
+  // Performance Monitoring
+  tracesSampleRate: 1.0, // Production mein isko kam rakho (e.g., 0.1)
+  // Profiling
+  profilesSampleRate: 1.0, // Production mein isko kam rakho (e.g., 0.1)
+});
+
+// ========== SENTRY MIDDLEWARE ==========
+// Request Handler - isko saare routes se pehle lagana hai
+app.use(Sentry.Handlers.requestHandler());
+// Tracing Handler - requestHandler ke baad aur routes se pehle
+app.use(Sentry.Handlers.tracingHandler());
+
+app.use(express.json());
+
+// ========== ROUTES ==========
+app.get('/', (req, res) => {
+  res.send('Hello! Sentry is watching.');
+});
+
+// A route that intentionally throws an error
+app.get('/debug-sentry', (req, res) => {
+  // Yeh error Sentry automatically capture kar lega
+  throw new Error('My first Sentry error!');
+});
+
+// Manually capturing an error
+app.post('/feedback', (req, res) => {
+    const { email, comment } = req.body;
+    if (!comment) {
+        // Manually koi issue capture karna ho
+        Sentry.captureMessage('User submitted feedback without a comment', 'warning');
+        return res.status(400).send('Comment is required');
+    }
+
+    // Add user context to Sentry
+    Sentry.setUser({ email: email });
+
+    // Yahan feedback save karne ka logic
+    res.send('Feedback received!');
+});
+
+// ========== SENTRY ERROR HANDLER ==========
+// Error Handler - isko saare routes ke baad aur default error handler se pehle lagana hai
+app.use(Sentry.Handlers.errorHandler());
+
+// Optional: Default Express error handler
+app.use(function onError(err, req, res, next) {
+  // The error id is attached to `res.sentry` to be returned
+  // to the user for correlation purposes.
+  res.statusCode = 500;
+  res.end(res.sentry + "\n");
+});
+
+app.listen(3000, () => console.log('Server with Sentry running on port 3000'));
+```
+
+**Line-by-Line Breakdown:**
+
+| Line | Code | Explanation |
+| :--- | :--- | :--- |
+| 1 | `Sentry.init({ dsn: ... })` | Sentry SDK ko initialize karta hai. `dsn` Sentry ko batata hai ki errors kahan bhejne hain. |
+| 2 | `tracesSampleRate: 1.0` | Performance monitoring ke liye 100% requests ko sample karega. Production mein isko `0.1` (10%) jaisa rakhein. |
+| 3 | `app.use(Sentry.Handlers.requestHandler())` | Yeh middleware aane waali request ka data capture karta hai taaki error ke saath context mil sake. **Hamesha routes se pehle aana chahiye.** |
+| 4 | `app.use(Sentry.Handlers.tracingHandler())` | Performance tracing ke liye headers create karta hai. |
+| 5 | `app.get('/debug-sentry', ...)` | Yeh route ek error throw karta hai. Kyunki humne Sentry ka error handler lagaya hai, yeh error automatically Sentry par report ho jaayega. |
+| 6 | `Sentry.captureMessage(...)` | Error nahi, lekin koi important event ya warning manually Sentry ko bhejne ke liye. |
+| 7 | `Sentry.setUser({ email: ... })` | Error ke saath user ki information attach karta hai. Isse debug karna aasan hota hai. |
+| 8 | `app.use(Sentry.Handlers.errorHandler())` | Yeh middleware unhandled errors ko catch karke Sentry ko bhejta hai. **Hamesha saare routes ke baad aana chahiye.** |
+
+**Expected Output:**
+
+  - Jab aap `http://localhost:3000/debug-sentry` par jaoge, browser mein `Internal Server Error` dikhega.
+  - Lekin aapke Sentry dashboard par, ek naya issue create ho jaayega jiska title hoga "Error: My first Sentry error\!".
+  - Us issue par click karne se aapko poori stack trace, request headers, OS/browser info, aur doosri useful details milengi.
+
+### 8\. Common Beginner Mistakes
+
+  - ❌ Sentry ko app mein sabse aakhir mein initialize karna. Yeh hamesha sabse upar hona chahiye.
+  - ❌ `Sentry.Handlers.errorHandler()` ko routes se pehle laga dena. Yeh hamesha aakhir mein hona chahiye.
+  - ❌ `.env` file mein `SENTRY_DSN` daalna bhool jaana.
+  - ❌ Production mein `tracesSampleRate` ko `1.0` chhod dena, jisse bohot saara data generate hota hai aur bill badh sakta hai.
+  - ❌ Error response mein sensitive user data bhej dena jo Sentry capture kar le.
+
+### 9\. Best Practices / Pro Tips
+
+  - ✅ **CRITICAL Fix:** Middleware ka order hamesha sahi rakho: `requestHandler` -\> `routes` -\> `errorHandler`.
+  - ✅ `release` version set karo Sentry `init` mein: `release: 'my-project-name@1.0.0'`. Isse aapko pata chalega ki kaunsa error kis deployment version mein aaya hai.
+  - ✅ Source Maps upload karo taaki aapko minified production code ki jagah original source code ka stack trace dikhe.
+  - ✅ Alerts configure karo. Jaise, agar koi naya error 10 baar se zyada aaye toh Slack par notification bhejo.
+  - ✅ User context (`Sentry.setUser`) aur custom tags (`Sentry.setTag`) ka use karke errors ko filter aur search karna aasan banao.
+
+### 10\. Real-World Example / Scenario
+
+Ek food delivery app mein, users order place karte waqt kabhi-kabhi ek "Payment Failed" error dekhte hain, lekin team usko reproduce nahi kar paa rahi. Sentry integrate karne ke baad, unko pata chalta hai ki yeh error sirf un users ke liye aa raha hai jinka network connection slow hai aur payment gateway se response 30 second se late aa raha hai. Sentry ne unko request timeout, user ka device, aur network type ka poora data diya, jisse bug 1 ghante mein fix ho gaya.
+
+### 11\. Checklist / Quick Recap (TL;DR)
+
+  - ✓ Sentry.io par project banao aur DSN copy karo.
+  - ✓ Sentry SDK install karo.
+  - ✓ `Sentry.init()` ko app mein sabse upar call karo.
+  - ✓ `requestHandler` aur `errorHandler` middleware aache se place karo.
+  - ✓ Ek test error throw karke integration verify karo.
+  - ✓ User context aur tags add karo better debugging ke liye.
+  - ✓ Production ke liye sample rates adjust karo.
+
+### 12\. FAQs (Frequently Asked Questions)
+
+**Q1: Kya Sentry free hai?**
+A: Haan, Sentry ka ek generous free tier hai jo small se medium projects ke liye kaafi hai. Uske baad paid plans hain.
+
+**Q2: Sentry app ki performance ko slow karta hai?**
+A: Sentry SDK bohot lightweight hai. Performance impact negligible hota hai, khaas kar jab aap production mein sample rates ko aache se configure karte hain.
+
+**Q3: Winston logging aur Sentry mein kya antar hai?**
+A: Winston generic logging ke liye hai (e.g., "User logged in"), jisko aap files mein save karte ho. Sentry specifically errors aur performance issues ko track karne ke liye hai, ek dedicated UI aur alerting system ke saath. Dono ko saath mein use karna best practice hai.
+
+**Q4: Frontend (React, Vue) ke liye bhi Sentry use kar sakte hain?**
+A: Bilkul\! Sentry ke paas
+JavaScript, React, Vue, Angular, etc. ke liye dedicated SDKs hain taaki aap full-stack error monitoring kar sakein.
+
+**Q5: Sensitive data ko Sentry par jaane se kaise roku?**
+A: Sentry `init` mein `beforeSend` function use karke aap error data ko Sentry par bhejne se pehle modify ya filter kar sakte ho.
+
+### 13\. Practice Exercise / Task
+
+**Task:** Apne Express app mein Sentry ko integrate karo. Ek naya route `/test-sentry-user` banao. Is route mein pehle `Sentry.setUser({ id: '123', email: 'test@example.com' })` se user context set karo aur phir ek error throw karo. Sentry dashboard par jaakar verify karo ki error ke saath user information attach hui hai ya nahi.
+
+### 14\. Additional / Advanced Notes (optional)
+
+  - **Performance Monitoring (APM):** Sentry aapko slow API calls, database queries, aur transaction bottlenecks ko track karne mein madad karta hai. Yeh "Distributed Tracing" support karta hai jisse aap microservices mein request flow dekh sakte ho.
+  - **Session Replay:** Frontend ke liye Sentry Session Replay feature user ke actions ko video ki tarah record karta hai, jisse error ko reproduce karna bohot aasan ho jaata hai.
+  - **Custom Instrumentation:** Aap Sentry ke custom spans use karke apne code ke specific parts ki performance measure kar sakte ho.
+
+### 15\. Short Final Summary (5 lines)
+
+  - Sentry production errors ko real-time mein find aur fix karne ke liye essential hai.
+  - Yeh aapko sirf "kya" error hua nahi, balki "kyu" aur "kahan" hua, yeh bhi batata hai.
+  - SDK integration simple hai, lekin middleware ka order critical hai.
+  - Rich context aur alerting se aap debugging time 90% tak kam kar sakte ho.
+  - Production app bina monitoring ke chalana, aankh band karke gaadi chalane jaisa hai.
+
+**Remember this:**
+
+  - `init()` first, `errorHandler` last.
+  - Set `release` and `user` context.
+  - Don't wait for users to report bugs.
+
+
 
 **Next:** Module 6 mein Deployment & Scaling seekhenge! 🚀
 
