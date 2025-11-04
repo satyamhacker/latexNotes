@@ -4095,7 +4095,247 @@ A: Ek baar initially, phir monthly.
 
 ---
 
-**Module 5 mein 2 topics aur hain. Kya main Module 6 par jaoon ya Module 5 complete karoon?** 🚀
+Topic 4: Parameters (Mandatory, Optional, -Switch) ⚙️
+1. Topic ka Naam / Ek Line Mein Summary 🚀
+PowerShell Parameters - Cmdlets ko customize karne ke liye arguments pass karna.
+
+2. Ye Kya Hai? (What is it?)
+Parameters cmdlets ko additional information dete hain. Teen types hain: Mandatory (zaroori), Optional (optional), aur Switch (true/false flag).
+
+Analogy: Restaurant mein order karte waqt - dish name mandatory hai, spice level optional hai, aur "extra cheese" ek switch hai (yes/no).
+
+3. Kyun Zaroori Hai? (Why is it important?)
+🎯 Customization: Commands ko specific banate hain.
+
+🔧 Flexibility: Different scenarios handle karte hain.
+
+🛡️ Pentesting: Precise control chahiye operations par.
+
+4. Ise Kab Use Karna Chahiye? (When to use it?)
+Cmdlet behavior customize karte waqt.
+
+Specific output chahiye.
+
+Conditional operations mein.
+
+5. Agar Ye Pata Nahi Hoga Toh Kya Hoga? (Risk?) 😟
+Commands properly use nahi kar paayenge.
+
+Default behavior se stuck rahoge.
+
+Advanced operations nahi kar paayenge.
+
+6. Syntax aur Common Options
+# Mandatory parameter
+Get-Process -Name chrome
+
+# Optional parameter
+Get-ChildItem -Path C:\ -Recurse
+
+# Switch parameter
+Get-Service -Name wuauserv | Stop-Service -Force
+
+Copy
+powershell
+7. Example 1 (Basic)
+# Mandatory
+Get-Process -Name notepad
+
+# Optional
+Get-ChildItem -Filter *.txt
+
+# Switch
+Remove-Item test.txt -Force
+
+Copy
+powershell
+8. Example 2 (Advanced/Script)
+# Multiple parameters
+Get-ChildItem -Path C:\Windows -Filter *.exe -Recurse -ErrorAction SilentlyContinue
+
+# Switch parameter example
+$services = Get-Service
+$services | Where-Object {$_.Status -eq "Running"} | Stop-Service -Force -WhatIf
+
+Copy
+powershell
+9. Beginners ki Aam Galtiyan (Common Mistakes)
+Parameter names galat likhna.
+
+Mandatory parameters miss karna.
+
+Switch parameters ko $true/$false dena (sirf -Switch likhna hai).
+
+10. Best Practices / Pro Tips 💡
+Tab completion use karo parameter names ke liye.
+
+Get-Help CmdletName -Full se parameters dekho.
+
+-WhatIf switch testing ke liye use karo.
+
+-ErrorAction SilentlyContinue errors suppress karne ke liye.
+
+11. Asli Duniya ka Scenario (Real-World Scenario)
+Pentester ko running processes mein "chrome" search karni thi. Get-Process -Name chrome se directly mil gayi. Phir -Force switch se kill ki without confirmation!
+
+12. Checklist / Chota Recap (TL;DR) ✅
+Mandatory parameters zaroori hain
+
+Optional parameters flexibility dete hain
+
+Switch parameters true/false flags hain
+
+Tab completion use karo
+
+13. Aksar Puche Jaane Wale Sawaal (FAQs) ❓
+Q1: Switch parameter ko false kaise karein?
+A: Mat likho parameter ko, ya -Switch:$false use karo.
+
+Q2: Parameters order matter karta hai?
+A: Nahi, named parameters ka order matter nahi karta.
+
+Q3: Kaise pata chalega parameter mandatory hai?
+A: Get-Help CmdletName -Full dekho, [Required] likha hoga.
+
+14. Practice ke liye Task 🎯
+Get-Help Get-ChildItem -Full run karo aur saare parameters identify karo (mandatory, optional, switch).
+
+15. Aakhri Choti Summary (5 lines) 📌
+Parameters cmdlets customize karte hain
+
+Mandatory (zaroori), Optional (choice), Switch (flag)
+
+Tab completion aur Get-Help use karo
+
+-Force, -Recurse, -WhatIf common switches
+
+Parameter understanding PowerShell mastery ki key hai
+
+⚠️ Ye Zaroor Yaad Rakhein: Switch parameters ko $true/$false mat do, sirf -SwitchName likho!
+
+Topic 5: Aliases (Get-Alias, New-Alias, cd, cat, ls) 🔤
+1. Topic ka Naam / Ek Line Mein Summary 🚀
+PowerShell Aliases - Cmdlets ke short names (shortcuts).
+
+2. Ye Kya Hai? (What is it?)
+Aliases cmdlets ke short names hain. ls actually Get-ChildItem hai, cd actually Set-Location hai. Linux/CMD users ke liye familiar feel.
+
+Analogy: Nicknames jaisa - "Robert" ko "Bob" bulate hain. Get-ChildItem ko ls bulate hain.
+
+3. Kyun Zaroori Hai? (Why is it important?)
+⚡ Speed: Typing fast hoti hai.
+
+🔄 Cross-Platform: Linux commands PowerShell mein bhi kaam karte hain.
+
+🎯 Productivity: Quick operations ke liye.
+
+4. Ise Kab Use Karna Chahiye? (When to use it?)
+Interactive shell mein quick commands ke liye.
+
+Linux/CMD background se aaye ho.
+
+Typing speed badhani hai.
+
+5. Agar Ye Pata Nahi Hoga Toh Kya Hoga? (Risk?) 😟
+Lambe cmdlet names type karne padenge.
+
+Productivity slow hogi.
+
+Linux commands PowerShell mein nahi samjhoge.
+
+6. Syntax aur Common Options
+Get-Alias
+Get-Alias ls
+New-Alias -Name np -Value notepad
+Set-Alias -Name edit -Value notepad.exe
+
+Copy
+7. Example 1 (Basic)
+# Common aliases
+ls          # Get-ChildItem
+cd C:\      # Set-Location
+cat file.txt # Get-Content
+pwd         # Get-Location
+rm file.txt  # Remove-Item
+
+Copy
+powershell
+8. Example 2 (Advanced/Script)
+# Check what alias points to
+Get-Alias ls
+Get-Alias | Where-Object {$_.Definition -eq "Get-ChildItem"}
+
+# Create custom alias
+New-Alias -Name np -Value notepad
+np  # Opens notepad
+
+# List all aliases
+Get-Alias | Sort-Object Name
+
+Copy
+pow
+9. Beginners ki Aam Galtiyan (Common Mistakes)
+Scripts mein aliases use karna (readability kam hoti hai).
+
+Custom aliases permanent samajhna (session end hone par delete ho jaate hain).
+
+Alias aur actual cmdlet confuse karna.
+
+10. Best Practices / Pro Tips 💡
+Interactive shell mein aliases use karo, scripts mein full cmdlet names.
+
+Get-Alias se explore karo available aliases.
+
+Profile mein custom aliases save karo ($PROFILE).
+
+Common Linux commands (ls, cat, grep) PowerShell mein kaam karte hain!
+
+11. Asli Duniya ka Scenario (Real-World Scenario)
+Linux admin PowerShell seekh raha tha. ls, cat, pwd use kiya aur sab kaam kar gaya! Aliases ki wajah se transition smooth tha. Phir Get-Alias se actual cmdlets bhi seekh liye!
+
+12. Checklist / Chota Recap (TL;DR) ✅
+Aliases cmdlets ke shortcuts hain
+
+ls, cd, cat, pwd common aliases
+
+Get-Alias se list dekho
+
+New-Alias se custom banao
+
+Scripts mein full names use karo
+
+13. Aksar Puche Jaane Wale Sawaal (FAQs) ❓
+Q1: Kya aliases permanent hain?
+A: Nahi, session end hone par delete. $PROFILE mein save karo permanent ke liye.
+
+Q2: Kya existing alias overwrite kar sakte hain?
+A: Haan, Set-Alias -Force use karo.
+
+Q3: Best practice kya hai?
+A: Interactive mein aliases, scripts mein full cmdlet names.
+
+14. Practice ke liye Task 🎯
+Get-Alias run karke saare aliases dekho
+
+Get-Alias ls se check karo ls kya hai
+
+New-Alias -Name edit -Value notepad se custom alias banao
+
+edit type karke test karo
+
+15. Aakhri Choti Summary (5 lines) 📌
+Aliases cmdlets ke short names
+
+Linux/CMD commands PowerShell mein kaam karte hain
+
+Get-Alias list dikhata hai, New-Alias create karta hai
+
+Interactive use ke liye best, scripts mein avoid karo
+
+Productivity booster for quick operations
+
+⚠️ Ye Zaroor Yaad Rakhein: Scripts mein hamesha full cmdlet names use karo, aliases nahi! Readability aur portability ke liye zaroori hai!
+
 
 
 =============================================================
