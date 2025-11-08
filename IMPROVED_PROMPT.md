@@ -29,20 +29,44 @@ Auto-highlight keywords in bright red (#d40000), bold, 1.08em:
 - "important", "yaad", "dhayan", "remember", "must", "note", "Do not", "jaruri"
 - "Kyun zaroori", "Best practice", "Always", "Never", "Avoid"
 - "fail", "crash", "loss", "problem", "critical", "essential", "vital"
-- Add light red background (rgba(212,0,0,0.05))
+- "zaroori", "GALAT", "WARNING", "DANGER", "RISKY", "Legal", "Illegal"
+- Add light red background (rgba(212,0,0,0.05)) with left border (3px solid)
 
 ## 💻 D — Code Blocks
 Code blocks with:
 - Background: #f7f7f7
 - Border: 1px solid #ddd, border-radius: 8px
 - Line numbers (CSS counters)
-- Syntax highlighting (keywords blue, strings green, comments gray)
+- Syntax highlighting:
+  - Flags (-sS, -sV, -p): Bold orange (#e67e22)
+  - Keywords: Blue (#0074d9)
+  - Strings: Green (#2ecc40)
+  - Comments: Gray (#aaaaaa)
+  - Numbers: Pink (#d63384)
 - **NO horizontal scrolling** - use `white-space: pre-wrap` and `word-wrap: break-word`
 
 ## 🎨 E — Color Palette
 ```css
-:root{--heading-blue:#0055cc;--important-red:#d40000;--code-bg:#f7f7f7;--keyword-color:#0074d9;--string-color:#2ecc40;--comment-color:#aaaaaa;--function-color:#b10dc9;--import-color:#ff851b}
+:root{--heading-blue:#0055cc;--important-red:#d40000;--code-bg:#f7f7f7;--keyword-color:#0074d9;--string-color:#2ecc40;--comment-color:#aaaaaa;--function-color:#b10dc9;--import-color:#ff851b;--pro-tip-bg:#d4edda;--pro-tip-border:#28a745;--mistake-bg:#f8d7da;--mistake-border:#dc3545}
 ```
+
+## 🎁 F — Special Boxes (NEW)
+**Pro Tips Box:**
+- Background: #d4edda (light green)
+- Border-left: 4px solid #28a745 (green)
+- Prefix: "💡 Pro Tip: " in bold green
+- Padding: 12px 15px, border-radius: 4px
+
+**Common Mistakes Box:**
+- Background: #f8d7da (light red)
+- Border-left: 4px solid #dc3545 (red)
+- Prefix: "⚠️ Common Mistake: " in bold red
+- Padding: 12px 15px, border-radius: 4px
+
+## 🎯 G — Emoji Support (NEW)
+- Auto-detect emojis in headings (🎯, 🤔, 🛡️, ⚙️, 👍, 👎, ⌨️, 💻, 💡)
+- Larger emoji size (1.2em) with proper spacing
+- Module emojis: 🌐, 🔍, 🥷, 🛡️, 🎯, 🔬, 💾, 🔧, 🎭, 🐍, 🚀
 
 ## 🚀 M — AUTO-RENDERER SYSTEM (MINIFIED & OPTIMIZED)
 
