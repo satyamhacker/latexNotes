@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>MicroPython ESP-32/8266 With MicroPython ESP-32/8266 With MicroPython Masterclass — Study Notes</title>
+<style>
+:root{--heading-blue:#0055cc;--important-red:#d40000;--code-bg:#2d2d2d;--keyword-color:#569cd6;--string-color:#ce9178;--comment-color:#6a9955;--function-color:#dcdcaa;--number-color:#b5cea8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,"Times New Roman",serif;font-size:12pt;line-height:1.8;background:linear-gradient(135deg,#e8f4f8 0%,#f5f5f5 50%,#fff8e1 100%);color:#1a1a1a;padding:25mm;max-width:210mm;margin:0 auto;box-shadow:0 0 60px rgba(0,85,204,.15);animation:fadeIn 0.8s ease}
+h1,h2,h3,h4,h5,h6{font-family:Arial,Helvetica,sans-serif}
+.module-heading{font-size:26pt;color:#fff;font-weight:bold;background:linear-gradient(135deg,#3776ab 0%,#4b8bbe 50%,#306998 100%);padding:25px 30px;margin:3em 0 1.5em 0;border-radius:15px;box-shadow:0 8px 25px rgba(55,118,171,.4),inset 0 -2px 10px rgba(0,0,0,.15);text-shadow:2px 2px 5px rgba(0,0,0,.4);border-left:10px solid #1e415e;position:relative;overflow:hidden}
+.topic-heading{font-size:20pt;color:#fff;font-weight:bold;background:linear-gradient(135deg,#0055cc 0%,#0077ff 50%,#00aaff 100%);padding:18px 25px;margin:2.5em 0 1em 0;border-radius:12px;box-shadow:0 6px 20px rgba(0,85,204,.35),inset 0 -2px 8px rgba(0,0,0,.1);text-shadow:2px 2px 4px rgba(0,0,0,.3);border-left:8px solid #003d99;position:relative}
+.section-heading{font-size:16pt;color:#0055cc;font-weight:bold;margin:1.8em 0 .8em 0;padding:12px 18px;background:linear-gradient(90deg,rgba(0,85,204,.12) 0%,rgba(0,85,204,.05) 100%);border-left:5px solid #0055cc;border-radius:8px;box-shadow:0 2px 8px rgba(0,85,204,.12)}
+.separator{color:#999;font-family:"Courier New",monospace;margin:2.5em 0 1em 0;text-align:center;font-size:9pt;letter-spacing:1px;opacity:.7}
+p{margin:.7em 0;text-align:justify}
+.important{color:var(--important-red);font-weight:bold;font-size:1.1em;background:linear-gradient(90deg,rgba(212,0,0,.18) 0%,rgba(212,0,0,.08) 100%);padding:8px 14px;border-radius:8px;border-left:5px solid var(--important-red);display:inline-block;box-shadow:0 3px 12px rgba(212,0,0,.25);margin:4px 0}
+.code-block{background:linear-gradient(135deg,#2d2d2d 0%,#1a1a1a 100%);border:3px solid #444;border-radius:12px;padding:20px;margin:1.5em 0;box-shadow:0 6px 18px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08);font-family:"Courier New",Consolas,monospace;font-size:10pt;position:relative;counter-reset:line;transition:all .3s ease}
+.code-block:hover{box-shadow:0 8px 25px rgba(0,85,204,.5),inset 0 1px 0 rgba(255,255,255,.1);border-color:#0055cc;transform:translateY(-2px)}
+.code-block pre{margin:0;white-space:pre-wrap;word-wrap:break-word;overflow-x:visible;color:#e0e0e0}
+.code-line{display:block;padding-left:3.5em;position:relative;color:#e0e0e0;line-height:1.6}
+.code-line:before{counter-increment:line;content:counter(line);position:absolute;left:0;width:2.5em;text-align:right;color:#666;font-size:9pt;padding-right:1em;border-right:2px solid #444;background:rgba(0,0,0,.3)}
+code{font-family:"Courier New",Consolas,monospace;color:#c7254e;background:linear-gradient(135deg,rgba(199,37,78,.15) 0%,rgba(199,37,78,.08) 100%);padding:4px 9px;border-radius:5px;font-size:.92em;border:1px solid rgba(199,37,78,.25);box-shadow:0 1px 3px rgba(199,37,78,.15)}
+.keyword{color:#569cd6;font-weight:bold}
+.string{color:#ce9178}
+.comment{color:#6a9955;font-style:italic}
+.function{color:#dcdcaa;font-weight:bold}
+.number{color:#b5cea8}
+ul,ol{margin:1em 0 1em 2.5em;line-height:1.9;background:rgba(255,255,255,.6);padding:18px 22px 18px 45px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.06);border-left:4px solid #3776ab}
+li{margin:.9em 0;padding:10px 14px;border-radius:6px;transition:all .2s ease}
+li:hover{background:linear-gradient(90deg,rgba(55,118,171,.15) 0%,rgba(55,118,171,.05) 100%);padding-left:22px;box-shadow:0 2px 8px rgba(55,118,171,.2);transform:translateX(5px)}
+strong{font-weight:bold;color:#0055cc;text-shadow:0 1px 2px rgba(0,85,204,.12)}
+hr{border:none;height:3px;background:linear-gradient(90deg,transparent 0%,#3776ab 50%,transparent 100%);margin:2.5em 0;border-radius:2px}
+@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}body{background:white;padding:15mm;box-shadow:none}.code-block{page-break-inside:avoid;background:#2d2d2d!important;border:2px solid #444!important}.code-line{color:#e0e0e0!important}.code-line:before{color:#888!important;border-right:1px solid #555!important;background:#1a1a1a!important}.keyword{color:#569cd6!important}.string{color:#ce9178!important}.comment{color:#6a9955!important}.function{color:#dcdcaa!important}.number{color:#b5cea8!important}.module-heading,.topic-heading{page-break-after:avoid;box-shadow:none}.module-heading{background:#3776ab!important}.topic-heading{background:#0055cc!important}ul,ol{background:transparent;box-shadow:none}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<header style="font-family:Arial,Helvetica,sans-serif;color:#666;font-size:10pt;margin-bottom:12px">📚 MicroPython ESP-32/8266 With MicroPython ESP-32/8266 With MicroPython Masterclass — Beginner to Job Ready</header>
+<main id="render-target"><p style="color:#666;font-size:11pt">⏳ Loading formatted notes…</p></main>
+<script>
+(async function(){const target=document.getElementById("render-target");async function loadRaw(){try{const resp=await fetch("ESP-32_With_MicroPython.md");if(!resp.ok)throw new Error("fetch failed");return await resp.text()}catch(e){return null}}
+const raw=await loadRaw();if(!raw){target.innerHTML='<p style="color:#a00"><strong>❌ Error:</strong> Could not load ESP-32_With_MicroPython.md file.</p><p style="color:#666">Make sure:</p><ul style="color:#666"><li>File named <code>ESP-32_With_MicroPython.md</code> exists in same folder</li><li>Open with Live Server (VS Code)</li><li>Both files are in same directory</li></ul>';return}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+const importantWords=["important","yaad","dhayan","remember","must","note","Do not","jaruri","Kyun zaroori","Best practice","Always","Never","Avoid","fail","crash","problem","critical","essential","vital","WARNING","DANGER","zaroori","REPL","Pin","GPIO","import","machine","network"];
+function markImportant(s){if(!s||typeof s!=="string")return s;const sentences=s.split(/(?<=[\.\?\!\n])/);for(let j=0;j<sentences.length;j++){const sent=sentences[j];const lowered=sent.toLowerCase();for(const cue of importantWords){if(!cue)continue;const cueLc=cue.toLowerCase();if(lowered.indexOf(cueLc)!==-1){sentences[j]='<span class="important">'+sent+"</span>";break}}}
+return sentences.join("")}
+function highlightCode(code){const kw=['import','from','def','class','if','elif','else','for','while','return','try','except','with','as','pass','break','continue','print','range','len','Pin','machine','network','time','sleep','sleep_ms','True','False','None'];const kwSet=new Set(kw.map(k=>k.toLowerCase()));let out='';let i=0;while(i<code.length){if(code[i]==='#'){let j=i;while(j<code.length&&code[j]!=='\n')j++;out+='<span class="comment">'+esc(code.substring(i,j))+'</span>';i=j;continue}if(code[i]==='"'||code[i]==="'"){const q=code[i];let j=i+1;while(j<code.length&&code[j]!==q){if(code[j]==='\\')j++;j++}if(j<code.length)j++;out+='<span class="string">'+esc(code.substring(i,j))+'</span>';i=j;continue}if(/[a-zA-Z_]/.test(code[i])){let j=i;while(j<code.length&&/[a-zA-Z0-9_]/.test(code[j]))j++;const word=code.substring(i,j);if(kwSet.has(word.toLowerCase())){out+='<span class="keyword">'+esc(word)+'</span>'}else{out+=esc(word)}i=j;continue}if(/\d/.test(code[i])){let j=i;while(j<code.length&&/[\d.]/.test(code[j]))j++;out+='<span class="number">'+esc(code.substring(i,j))+'</span>';i=j;continue}out+=esc(code[i]);i++}return out}
+const lines=raw.replace(/\r/g,"").split("\n");const frag=document.createDocumentFragment();let i=0,inCode=false,codeBuf=[];function flushCode(){if(!inCode)return;const div=document.createElement("div");div.className="code-block";const pre=document.createElement("pre");const inner=highlightCode(codeBuf.join("\n")).split("\n").map((l)=>'<span class="code-line">'+l+"</span>").join("\n");pre.innerHTML=inner;div.appendChild(pre);frag.appendChild(div);inCode=false;codeBuf=[]}
+while(i<lines.length){const L=lines[i];const mCode=L.match(/^\s*```/);if(mCode){if(!inCode){inCode=true;codeBuf=[]}else{flushCode()}i++;continue}
+if(inCode){codeBuf.push(L);i++;continue}
+if(/^=+\s*$/.test(L)||/^-{5,}\s*$/.test(L)){const d=document.createElement("div");d.className="separator";d.textContent="━".repeat(60);frag.appendChild(d);i++;continue}
+if(/^#\s+Module\s+\d+/i.test(L)||/Chalo bhai.*Module \d+/i.test(L)){const h=document.createElement("h1");h.className="module-heading";h.innerHTML=markImportant(esc(L.replace(/^#\s+/,"")));frag.appendChild(h);i++;continue}
+if(/^##\s+\d+\.\d+:/i.test(L)){const h=document.createElement("h2");h.className="topic-heading";h.innerHTML=markImportant(esc(L.replace(/^##\s+/,"")));frag.appendChild(h);i++;continue}
+if(/^#\s+/.test(L)){const h=document.createElement("h1");h.className="topic-heading";h.innerHTML=markImportant(esc(L.replace(/^#\s+/,"")));frag.appendChild(h);i++;continue}
+if(/^##\s+/.test(L)){const h2=document.createElement("h2");h2.className="topic-heading";h2.innerHTML=markImportant(esc(L.replace(/^##\s+/,"")));frag.appendChild(h2);i++;continue}
+if(/^###\s+/.test(L)){const h3=document.createElement("h3");h3.className="section-heading";h3.innerHTML=markImportant(esc(L.replace(/^###\s+/,"")));frag.appendChild(h3);i++;continue}
+if(/^\*\*\*\s*$/.test(L)){frag.appendChild(document.createElement("hr"));i++;continue}
+if(/^\s*[-*]\s+/.test(L)){const ul=document.createElement("ul");while(i<lines.length&&/^\s*[-*]\s+/.test(lines[i])){const li=document.createElement("li");let txt=lines[i].replace(/^\s*[-*]\s+/,"");txt=txt.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");txt=txt.replace(/`([^`]+)`/g,"<code>$1</code>");li.innerHTML=markImportant(esc(txt).replace(/&lt;strong&gt;(.*?)&lt;\/strong&gt;/g,"<strong>$1</strong>").replace(/&lt;code&gt;(.*?)&lt;\/code&gt;/g,"<code>$1</code>"));ul.appendChild(li);i++}frag.appendChild(ul);continue}
+if(/^\s*\d+\.\s+/.test(L)){const ol=document.createElement("ol");while(i<lines.length&&/^\s*\d+\.\s+/.test(lines[i])){const li=document.createElement("li");let txt=lines[i].replace(/^\s*\d+\.\s+/,"");txt=txt.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");txt=txt.replace(/`([^`]+)`/g,"<code>$1</code>");li.innerHTML=markImportant(esc(txt).replace(/&lt;strong&gt;(.*?)&lt;\/strong&gt;/g,"<strong>$1</strong>").replace(/&lt;code&gt;(.*?)&lt;\/code&gt;/g,"<code>$1</code>"));ol.appendChild(li);i++}frag.appendChild(ol);continue}
+if(/^\s*$/.test(L)){i++;continue}
+let phtml=esc(L);phtml=phtml.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");phtml=phtml.replace(/`([^`]+)`/g,"<code>$1</code>");phtml=markImportant(phtml);phtml=phtml.replace(/&lt;strong&gt;(.*?)&lt;\/strong&gt;/g,"<strong>$1</strong>");phtml=phtml.replace(/&lt;code&gt;(.*?)&lt;\/code&gt;/g,"<code>$1</code>");const p=document.createElement("p");p.innerHTML=phtml;frag.appendChild(p);i++}
+flushCode();target.innerHTML="";target.appendChild(frag)})();
+</script>
+</body>
+</html>
