@@ -52,7 +52,7 @@ table th{background:#f0f0f0;font-weight:bold;color:#333}
 <header style="font-family:Arial,Helvetica,sans-serif;color:#666;font-size:10pt;margin-bottom:8px">📚 JavaScript DSA Study Notes — Auto-Rendered Beautiful UI</header>
 <main id="render-target"><p style="color:#666;font-size:11pt">⏳ Loading formatted notes…</p></main>
 <script>
-(async function(){const target=document.getElementById("render-target");async function loadRaw(){try{const resp=await fetch("Sharpner DSA notes.md");if(!resp.ok)throw new Error("fetch failed");return await resp.text()}catch(e){return null}}
+(async function(){const target=document.getElementById("render-target");async function loadRaw(){try{const resp=await fetch("Sharpner_DSA_notes.md");if(!resp.ok)throw new Error("fetch failed");return await resp.text()}catch(e){return null}}
 const raw=await loadRaw();if(!raw){target.innerHTML='<p style="color:#a00"><strong>❌ Error:</strong> Could not load Sharpner DSA notes.md file.</p><p style="color:#666">Make sure:</p><ul style="color:#666"><li>File named <code>Sharpner DSA notes.md</code> exists in same folder</li><li>Open with Live Server (VS Code)</li><li>Both files are in same directory</li></ul>';return}
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 const importantWords=["important","yaad rakhna","yaad","dhayan","dhyaan","remember","must","note","Do not","jaruri","Kyun zaroori","Agar na kiya","Agar","Best practice","Always","Never","Avoid","fail","crash","loss","problem","yaad rakhna chaiye","critical","essential","vital","key","crucial","CRITICAL","IMPORTANT","dangerous","zaroori","Zaroor","Yaad Rakhein"];
