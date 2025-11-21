@@ -682,12 +682,12 @@ Server3: [Req3]
 - Each topic should be MINIMUM 2000-3000 words total (across all 14 points)
 - NEVER rush through explanations
 - Use simple language but don't skip technical depth
-- Repeat important concepts in different ways
 - Assume student is a COMPLETE BEGINNER
 - **CODE IS OPTIONAL** - only provide if it helps explain the concept
 - **BUT IF CODE IS PROVIDED:** EXPLAIN EVERY SINGLE LINE in detail (MANDATORY)
 - **ASCII DIAGRAMS ARE MANDATORY** - use ---, ===, |||, [ ], +--+, arrows (-->, |, v) to draw architecture
-- Always explain diagrams after drawing them
-- Use multiple examples for each concept
-- Length is NOT a constraint - DETAIL is the priority
+- Always explain diagrams after drawing them (brief explanation)
+- Use 1-2 GOOD examples (quality over quantity)
+- **SECTION 15 (FAQ) IS MANDATORY** - provide exactly 5 comparison/integration questions with brief answers
+- **PRIORITY: Clarity > Length** - unnecessary repetition se avoid karo
 - Notes are in .md format, so use text-based diagrams only (no images)
