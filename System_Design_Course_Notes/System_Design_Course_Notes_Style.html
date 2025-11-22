@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>System Design Course Notes — Beautiful Guide</title>
 <style>
-:root{--heading-blue:#0055cc;--important-red:#d40000;--code-bg:#f7f7f7;--keyword-color:#0074d9;--string-color:#2ecc40;--comment-color:#aaaaaa;--function-color:#b10dc9;--import-color:#ff851b}
+:root{--heading-blue:#0055cc;--important-red:#d40000;--code-bg:#f7f7f7;--keyword-color:#0074d9;--string-color:#2ecc40;--comment-color:#aaaaaa;--function-color:#b10dc9;--import-color:#ff851b;--pro-tip-bg:#d4edda;--pro-tip-border:#28a745;--mistake-bg:#f8d7da;--mistake-border:#dc3545}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:Georgia,"Times New Roman",serif;font-size:12pt;line-height:1.8;background:linear-gradient(135deg,#e8f4f8 0%,#f5f5f5 50%,#fff8e1 100%);color:#1a1a1a;padding:25mm;max-width:210mm;margin:0 auto;box-shadow:0 0 60px rgba(0,85,204,.15);animation:fadeIn 0.8s ease}
 h1,h2,h3,h4,h5,h6{font-family:Arial,Helvetica,sans-serif}
@@ -41,6 +41,12 @@ table{width:100%;border-collapse:collapse;margin:1.5em 0;background:#fff;border-
 th{background:linear-gradient(135deg,#0055cc 0%,#0077ff 100%);color:#fff;padding:12px;text-align:left;font-weight:bold}
 td{padding:10px 12px;border-bottom:1px solid #e0e0e0}
 tr:hover{background:rgba(0,85,204,.05)}
+
+/* New Special Boxes */
+.pro-tip{background:var(--pro-tip-bg);border-left:4px solid var(--pro-tip-border);padding:12px 15px;border-radius:4px;margin:1em 0}
+.common-mistake{background:var(--mistake-bg);border-left:4px solid var(--mistake-border);padding:12px 15px;border-radius:4px;margin:1em 0}
+.emoji{font-size:1.25em;margin-right:0.2em;vertical-align:-0.1em;display:inline-block}
+
 @media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}body{background:white;padding:15mm;box-shadow:none}.code-block{page-break-inside:avoid;overflow:visible;background:#2d2d2d!important;border:2px solid #444!important}.code-line{color:#e0e0e0!important}.code-line:before{color:#888!important;border-right:1px solid #555!important;background:#1a1a1a!important}.keyword{color:#569cd6!important}.string{color:#ce9178!important}.comment{color:#6a9955!important}.function{color:#dcdcaa!important}.import{color:#c586c0!important}.tag{color:#4ec9b0!important}.attr{color:#9cdcfe!important}.number{color:#b5cea8!important}.boolean{color:#569cd6!important}.topic-heading{page-break-after:avoid;background:#0055cc!important;color:#fff!important;box-shadow:none}ul,ol{background:transparent;box-shadow:none}}
 .separator-line{color:#bbb;font-family:"Courier New",monospace;margin:2.5em 0 .8em 0;text-align:center;font-size:8pt;opacity:.6}
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -56,13 +62,47 @@ tr:hover{background:rgba(0,85,204,.05)}
 const raw=await loadRaw();if(!raw){target.innerHTML='<p style="color:#a00"><strong>❌ Error:</strong> Could not load System_Design_Course_Notes.md file.</p><p style="color:#666">Make sure:</p><ul style="color:#666"><li>File named <code>System_Design_Course_Notes.md</code> exists in same folder</li><li>Open with Live Server (VS Code)</li><li>Both files are in same directory</li></ul>';return}
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 const importantWords=["important","yaad rakhna","yaad","dhayan","dhyaan","remember","must","note","Do not","jaruri","Kyun zaroori","Agar na kiya","Agar","Best practice","Always","Never","Avoid","fail","crash","loss","problem","yaad rakhna chaiye","critical","essential","vital","key","crucial","CRITICAL","IMPORTANT","zaroori","GALAT","WARNING","DANGER","RISKY","Legal","Illegal"];
-function markImportant(s){if(!s||typeof s!=="string")return s;const sentences=s.split(/(?<=[\.\?\!\n])/);for(let j=0;j<sentences.length;j++){const sent=sentences[j];const lowered=sent.toLowerCase();for(const cue of importantWords){if(!cue)continue;const cueLc=cue.toLowerCase();if(lowered.indexOf(cueLc)!==-1){sentences[j]='<span class="important">'+sent+"</span>";break}}
-if(!/^<span class=\"important\">/.test(sentences[j])){let out=sentences[j];const phrases=importantWords.slice().sort((a,b)=>b.length-a.length);for(const ph of phrases){if(!ph)continue;const phEsc=ph.replace(/[-/\\^$*+?.()|[\]{}]/g,"\\$&");const re=new RegExp(phEsc,"gi");out=out.replace(re,function(m){return'<span class="important">'+m+"</span>"})}
-sentences[j]=out}}
-return sentences.join("")}
+function formatText(s){
+    if(!s)return s;
+    // 1. Mark Important
+    let res = s;
+    const sentences=res.split(/(?<=[\.\?\!\n])/);
+    for(let j=0;j<sentences.length;j++){
+        const sent=sentences[j];
+        const lowered=sent.toLowerCase();
+        let matched = false;
+        for(const cue of importantWords){
+            if(!cue)continue;
+            if(lowered.indexOf(cue.toLowerCase())!==-1){
+                sentences[j]='<span class="important">'+sent+"</span>";
+                matched=true;
+                break;
+            }
+        }
+        if(!matched){
+             let out=sentences[j];
+             const phrases=importantWords.slice().sort((a,b)=>b.length-a.length);
+             for(const ph of phrases){
+                 if(!ph)continue;
+                 const phEsc=ph.replace(/[-/\\^$*+?.()|[\]{}]/g,"\\$&");
+                 const re=new RegExp(phEsc,"gi");
+                 out=out.replace(re,m=>'<span class="important">'+m+"</span>");
+             }
+             sentences[j]=out;
+        }
+    }
+    res = sentences.join("");
+    
+    // 2. Wrap Emojis
+    // Regex for common emojis and the ones listed in prompt
+    const emojiRegex = /([\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}])/gu;
+    res = res.replace(emojiRegex, '<span class="emoji">$1</span>');
+    
+    return res;
+}
 function highlightCode(code){const kw=['import','from','def','class','if','elif','else','for','while','return','try','except','with','as','pass','break','continue','cd','ls','mkdir','pip','python','java','django','manage','len','print','range','append','insert','remove','pop','sort','clear','split','join','strip','replace','upper','lower','get','keys','values','items','update','add','SELECT','FROM','WHERE','CREATE','TABLE','INSERT','UPDATE','DELETE','PRIMARY','KEY','FOREIGN'];const kwSet=new Set(kw.map(k=>k.toLowerCase()));let out='';let i=0;while(i<code.length){if(code[i]==='#'){let j=i;while(j<code.length&&code[j]!=='\n')j++;out+='<span class="comment">'+esc(code.substring(i,j))+'</span>';i=j;continue;}if(code[i]==='"'||code[i]==="'"){const q=code[i];let j=i+1;while(j<code.length&&code[j]!==q){if(code[j]==='\\')j++;j++;}if(j<code.length)j++;out+='<span class="string">'+esc(code.substring(i,j))+'</span>';i=j;continue;}if(/[a-zA-Z_]/.test(code[i])){let j=i;while(j<code.length&&/[a-zA-Z0-9_]/.test(code[j]))j++;const word=code.substring(i,j);const nextChar=j<code.length?code[j]:'';if(kwSet.has(word.toLowerCase())){out+='<span class="keyword">'+esc(word)+'</span>';}else if(nextChar==='('){out+='<span class="function">'+esc(word)+'</span>';}else if(/^(True|False|None|true|false|null)$/.test(word)){out+='<span class="boolean">'+esc(word)+'</span>';}else{out+=esc(word);}i=j;continue;}if(/\d/.test(code[i])){let j=i;while(j<code.length&&/[\d.]/.test(code[j]))j++;out+='<span class="number">'+esc(code.substring(i,j))+'</span>';i=j;continue;}out+=esc(code[i]);i++;}return out}
 const lines=raw.replace(/\r/g,"").split("\n");const frag=document.createDocumentFragment();let i=0,inCode=false,codeLang="",codeBuf=[],inTable=false,tableRows=[];function flushCode(){if(!inCode)return;const div=document.createElement("div");div.className="code-block";const pre=document.createElement("pre");const inner=highlightCode(codeBuf.join("\n")).split("\n").map((l)=>'<span class="code-line">'+l+"</span>").join("\n");pre.innerHTML=inner;div.appendChild(pre);frag.appendChild(div);inCode=false;codeBuf=[];codeLang=""}
-function flushTable(){if(!inTable||tableRows.length===0)return;const table=document.createElement("table");const thead=document.createElement("thead");const tbody=document.createElement("tbody");const headerRow=tableRows[0];const tr=document.createElement("tr");headerRow.forEach(cell=>{const th=document.createElement("th");th.innerHTML=markImportant(cell.trim());tr.appendChild(th)});thead.appendChild(tr);for(let r=2;r<tableRows.length;r++){const row=tableRows[r];const tr=document.createElement("tr");row.forEach(cell=>{const td=document.createElement("td");td.innerHTML=markImportant(cell.trim());tr.appendChild(td)});tbody.appendChild(tr)}
+function flushTable(){if(!inTable||tableRows.length===0)return;const table=document.createElement("table");const thead=document.createElement("thead");const tbody=document.createElement("tbody");const headerRow=tableRows[0];const tr=document.createElement("tr");headerRow.forEach(cell=>{const th=document.createElement("th");th.innerHTML=formatText(cell.trim());tr.appendChild(th)});thead.appendChild(tr);for(let r=2;r<tableRows.length;r++){const row=tableRows[r];const tr=document.createElement("tr");row.forEach(cell=>{const td=document.createElement("td");td.innerHTML=formatText(cell.trim());tr.appendChild(td)});tbody.appendChild(tr)}
 table.appendChild(thead);table.appendChild(tbody);frag.appendChild(table);inTable=false;tableRows=[]}
 while(i<lines.length){const L=lines[i];const mCode=L.match(/^\s*```\s*(\w+)?/);if(mCode){if(!inCode){flushTable();inCode=true;codeLang=mCode[1]||"";codeBuf=[]}else{flushCode()}
 i++;continue}
@@ -70,18 +110,23 @@ if(inCode){codeBuf.push(L);i++;continue}
 if(/^\|/.test(L)&&/\|/.test(L)){if(!inTable){inTable=true;tableRows=[]}
 const cells=L.split('|').filter(c=>c.trim()!=='');tableRows.push(cells);i++;continue}else{flushTable()}
 if(/^=+\s*$/.test(L)||/^-+\s*$/.test(L)){const d=document.createElement("div");d.className="separator-line";d.textContent=L.trim();frag.appendChild(d);i++;continue}
-if(/^#\s+/.test(L)){const h=document.createElement("h1");h.className="topic-heading";h.innerHTML=markImportant(esc(L.replace(/^#\s+/,"")));frag.appendChild(h);i++;continue}
-if(/^##\s+/.test(L)){const h2=document.createElement("h2");h2.innerHTML=markImportant(esc(L.replace(/^##\s+/,"")));frag.appendChild(h2);i++;continue}
-if(/^###\s+/.test(L)){const h3=document.createElement("h3");h3.innerHTML=markImportant(esc(L.replace(/^###\s+/,"")));frag.appendChild(h3);i++;continue}
-if(/^####\s+/.test(L)){const h4=document.createElement("h4");h4.innerHTML=markImportant(esc(L.replace(/^####\s+/,"")));frag.appendChild(h4);i++;continue}
+if(/^#\s+/.test(L)){const h=document.createElement("h1");h.className="topic-heading";h.innerHTML=formatText(esc(L.replace(/^#\s+/,"")));frag.appendChild(h);i++;continue}
+if(/^##\s+/.test(L)){const h2=document.createElement("h2");h2.innerHTML=formatText(esc(L.replace(/^##\s+/,"")));frag.appendChild(h2);i++;continue}
+if(/^###\s+/.test(L)){const h3=document.createElement("h3");h3.innerHTML=formatText(esc(L.replace(/^###\s+/,"")));frag.appendChild(h3);i++;continue}
+if(/^####\s+/.test(L)){const h4=document.createElement("h4");h4.innerHTML=formatText(esc(L.replace(/^####\s+/,"")));frag.appendChild(h4);i++;continue}
 if(/^\*\*\*\s*$/.test(L)){frag.appendChild(document.createElement("hr"));i++;continue}
-if(/^\s*[-*]\s+/.test(L)){const ul=document.createElement("ul");while(i<lines.length&&/^\s*[-*]\s+/.test(lines[i])){const li=document.createElement("li");li.innerHTML=markImportant(esc(lines[i].replace(/^\s*[-*]\s+/,"")));ul.appendChild(li);i++}
+if(/^\s*[-*]\s+/.test(L)){const ul=document.createElement("ul");while(i<lines.length&&/^\s*[-*]\s+/.test(lines[i])){const li=document.createElement("li");li.innerHTML=formatText(esc(lines[i].replace(/^\s*[-*]\s+/,"")));ul.appendChild(li);i++}
 frag.appendChild(ul);continue}
-if(/^\s*\d+\.\s+/.test(L)){const ol=document.createElement("ol");while(i<lines.length&&/^\s*\d+\.\s+/.test(lines[i])){const li=document.createElement("li");li.innerHTML=markImportant(esc(lines[i].replace(/^\s*\d+\.\s+/,"")));ol.appendChild(li);i++}
+if(/^\s*\d+\.\s+/.test(L)){const ol=document.createElement("ol");while(i<lines.length&&/^\s*\d+\.\s+/.test(lines[i])){const li=document.createElement("li");li.innerHTML=formatText(esc(lines[i].replace(/^\s*\d+\.\s+/,"")));ol.appendChild(li);i++}
 frag.appendChild(ol);continue}
 if(/^\s*$/.test(L)){i++;continue}
-if(/`[^`]+`/.test(L)&&(/^(Step|Command|Task|Usage|Example|Output):/i.test(L)||L.match(/`[a-z_]+\s+[^`]*`/)||L.match(/`[^`]{20,}`/))){let parts=L.split(/(`[^`]+`)/);for(let part of parts){if(/^`[^`]+`$/.test(part)){const code=part.slice(1,-1);const div=document.createElement("div");div.className="code-block";const pre=document.createElement("pre");pre.innerHTML='<span class="code-line">'+highlightCode(code)+"</span>";div.appendChild(pre);frag.appendChild(div)}else if(part.trim()){const p=document.createElement("p");p.innerHTML=markImportant(esc(part).replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>"));frag.appendChild(p)}}i++;continue}
-let phtml=esc(L);phtml=phtml.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");phtml=phtml.replace(/`([^`]+)`/g,"<code>$1</code>");phtml=markImportant(phtml);const p=document.createElement("p");p.innerHTML=phtml;frag.appendChild(p);i++}
+
+// New Special Boxes Logic
+if(/^(💡\s*Pro Tip:|Pro Tip:)/i.test(L)){const div=document.createElement("div");div.className="pro-tip";div.innerHTML='<strong style="color:#28a745">💡 Pro Tip: </strong>'+formatText(esc(L.replace(/^(💡\s*Pro Tip:|Pro Tip:)\s*/i,"")));frag.appendChild(div);i++;continue}
+if(/^(⚠️\s*Common Mistake:|Common Mistake:)/i.test(L)){const div=document.createElement("div");div.className="common-mistake";div.innerHTML='<strong style="color:#dc3545">⚠️ Common Mistake: </strong>'+formatText(esc(L.replace(/^(⚠️\s*Common Mistake:|Common Mistake:)\s*/i,"")));frag.appendChild(div);i++;continue}
+
+if(/`[^`]+`/.test(L)&&(/^(Step|Command|Task|Usage|Example|Output):/i.test(L)||L.match(/`[a-z_]+\s+[^`]*`/)||L.match(/`[^`]{20,}`/))){let parts=L.split(/(`[^`]+`)/);for(let part of parts){if(/^`[^`]+`$/.test(part)){const code=part.slice(1,-1);const div=document.createElement("div");div.className="code-block";const pre=document.createElement("pre");pre.innerHTML='<span class="code-line">'+highlightCode(code)+"</span>";div.appendChild(pre);frag.appendChild(div)}else if(part.trim()){const p=document.createElement("p");p.innerHTML=formatText(esc(part).replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>"));frag.appendChild(p)}}i++;continue}
+let phtml=esc(L);phtml=phtml.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");phtml=phtml.replace(/`([^`]+)`/g,"<code>$1</code>");phtml=formatText(phtml);const p=document.createElement("p");p.innerHTML=phtml;frag.appendChild(p);i++}
 flushCode();flushTable();target.innerHTML="";target.appendChild(frag)})();
 </script>
 </body>
