@@ -207,6 +207,99 @@ Cross-region DB query        500-1000 ms    ❌ Global app
 Recommendation: Cache data with >10ms fetch time
 ```
 
+**Read-Heavy vs Write-Heavy System (Caching Implications):**
+```
+READ-HEAVY SYSTEM (90% Reads, 10% Writes)
+==========================================
+Examples: News website, Product catalog, Blogs, Documentation
+
+Characteristics:
+- High read requests (millions/day)
+- Infrequent writes (few updates/hour)
+- Users mostly consume content
+
+Caching Strategy:
+✅ Aggressive caching (High TTL: 1 hour to 1 day)
+✅ High hit rate achievable (90-95%)
+✅ Cache-Aside or Read-Through pattern
+✅ Large cache size (cache everything hot)
+
+Example:
+News Article: Written once, read 100K times
+Cache TTL: 1 hour (stale data acceptable)
+Hit Rate: 95% (most reads from cache)
+Database Load: 5% (only cache misses)
+
+---
+
+WRITE-HEAVY SYSTEM (30% Reads, 70% Writes)
+===========================================
+Examples: Analytics, Logging, IoT sensors, Chat messages
+
+Characteristics:
+- High write requests (millions/day)
+- Moderate read requests
+- Data constantly changing
+
+Caching Strategy:
+✅ Write-Behind (Write-Back) pattern for performance
+✅ Short TTL or no caching for reads (1-10 sec)
+✅ Batch writes to reduce database load
+⚠️ Eventual consistency acceptable
+
+Example:
+IoT Temperature Sensor: 1000 writes/sec per device
+Write Pattern: Write-Behind (cache → async DB)
+Read Pattern: Short TTL (5 sec) or no cache
+Benefit: Fast writes (<1ms), Database protected (batch writes)
+
+---
+
+BALANCED SYSTEM (50% Reads, 50% Writes)
+========================================
+Examples: E-commerce, Social media, Collaboration tools
+
+Characteristics:
+- Equal read and write load
+- Consistency important
+
+Caching Strategy:
+✅ Hybrid approach (different patterns for different data)
+✅ Cache-Aside for reads
+✅ Explicit invalidation on writes
+✅ Medium TTL (5-30 min) with invalidation
+
+Example:
+E-commerce Product Inventory:
+- Product Details (Read-heavy): Cache-Aside, TTL=1 hour
+- Stock Count (Write-heavy): Write-Through (consistency critical)
+- Reviews (Balanced): Cache-Aside, TTL=5 min, invalidate on new review
+
+---
+
+DECISION TREE:
+--------------
+What's your read:write ratio?
+
+90:10 (Read-Heavy)
+└─> Aggressive caching
+    └─> Cache-Aside or Read-Through
+        └─> Long TTL (1 hour - 1 day)
+            └─> Example: News, Blogs, Product Catalog
+
+50:50 (Balanced)
+└─> Selective caching + Invalidation
+    └─> Cache-Aside + Explicit delete on write
+        └─> Medium TTL (5-30 min)
+            └─> Example: E-commerce, Social Media
+
+30:70 (Write-Heavy)
+└─> Write-optimized caching
+    └─> Write-Behind for writes
+        └─> Short/No TTL for reads
+            └─> Example: Analytics, Logging, IoT
+```
+
 ## 💻 11. Code / Flowchart:
 
 **Caching Flow (Flowchart):**
@@ -237,37 +330,48 @@ User Request: GET /user/123
     ⚠️ Slow path (first time only)
 ```
 
-**Redis Caching Example (Python):**
+**Redis Caching Example (Python with Detailed Comments):**
 ```python
-import redis
-import psycopg2
+import redis      # Redis client library for Python
+import psycopg2   # PostgreSQL database client
 
+# ===== SETUP CONNECTIONS =====
+# Redis connection: In-memory cache server (port 6379 is default)
 redis_client = redis.Redis(host='localhost', port=6379)
+
+# PostgreSQL connection: Database where actual data stored
 db_conn = psycopg2.connect("dbname=mydb user=postgres")
 
 def get_user(user_id):
+    # Cache key format: "user:123" (namespace:id pattern)
+    # Namespacing prevents key collision (user:123 vs product:123)
     cache_key = f"user:{user_id}"
     
-    # Check cache first
+    # STEP 1: Check cache first (always check cache before DB)
     cached_data = redis_client.get(cache_key)
-    if cached_data:
-        print("Cache HIT")
-        return cached_data  # <1ms
+    if cached_data:  # Data found in cache (Cache HIT)
+        print("Cache HIT")  # <1ms latency (100x faster than DB)
+        return cached_data  
     
-    # Cache miss - query database
-    print("Cache MISS - querying DB")
+    # STEP 2: Cache miss - data not in cache, must query database
+    print("Cache MISS - querying DB")  # First time or cache expired
     cursor = db_conn.cursor()
+    # SQL query to fetch user from database (10-100ms latency)
     cursor.execute("SELECT * FROM users WHERE id=%s", (user_id,))
-    data = cursor.fetchone()  # 10-100ms
+    data = cursor.fetchone()  # Fetch one row
     
-    # Store in cache (TTL = 5 minutes)
-    redis_client.setex(cache_key, 300, str(data))
+    # STEP 3: Store fetched data in cache for future requests
+    # setex = SET with EXpire time (atomic operation)
+    # Parameters: (key, TTL_in_seconds, value)
+    redis_client.setex(cache_key, 300, str(data))  # TTL = 300 sec = 5 min
+    # After 5 minutes, cache entry auto-deleted (fresh data on next request)
     
-    return data
+    return data  # Return to user
 
-# Usage
-user = get_user(123)  # First call: Cache MISS (100ms)
-user = get_user(123)  # Second call: Cache HIT (<1ms)
+# ===== USAGE DEMONSTRATION =====
+user = get_user(123)  # First call: Cache MISS → Query DB (100ms)
+user = get_user(123)  # Second call: Cache HIT → From cache (<1ms, 100x faster!)
+# After 5 minutes (300 sec), cache expires → Next call will be Cache MISS again
 ```
 
 ## 📈 12. Trade-offs:
@@ -316,6 +420,13 @@ A: Cache karo: (1) Frequently accessed data (user profiles, product catalogs), (
 
 **Q5: Cache memory full ho jaye toh kya hoga?**
 A: Eviction policies automatically purane data remove karte hain: (1) LRU (Least Recently Used) - Sabse purana accessed data remove (most common), (2) LFU (Least Frequently Used) - Sabse kam accessed data remove, (3) TTL-based - Expired entries remove first, (4) Random - Random entry remove (simple but ineffective). Redis default: LRU. Configure: maxmemory-policy=allkeys-lru. Monitor: Cache eviction rate (high rate = cache too small, increase size).
+
+**Q6: Kab caching NAHI use karni chahiye (Anti-patterns)?**
+A: Cache mat karo jab: (1) **Data highly dynamic hai** - Stock prices updating every second (cache stale immediately), (2) **Rarely accessed data** - Old archived orders (no benefit, wastes memory), (3) **Unique queries** - Every user has different filter combination (low hit rate, cache bloat), (4) **Small data, fast DB** - 10 rows table with index (DB query <5ms, cache overhead not worth it), (5) **Write-heavy with immediate read** - User posts comment, expects to see immediately (cache invalidation complexity). Rule: Cache jab read:write ratio >80:20 AND data access time >10ms AND access pattern predictable.
+
+**Q7: Cache failure ho jaye toh system kaise handle kare?**
+A: Strategies: (1) **Cache-Aside pattern** - Safe kyunki app DB se direct fetch kar sakta hai (cache optional layer), (2) **Circuit Breaker** - Cache down detect karo → Fallback to database (temporary), (3) **Monitoring + Alerts** - Cache downtime detect → Auto-restart or failover to replica, (4) **Read-Through with fallback** - Cache library automatically falls back to database on cache failure. Best practice: Never make cache a SPOF (Single Point of Failure) - Always have DB fallback path. Example: Reddit cache crash → App automatically switched to database (slow but working).
+
 
 ---
 
@@ -609,90 +720,140 @@ Write-Behind:     Analytics, Logs, High writes
 
 ## 💻 11. Code / Flowchart:
 
-**Cache-Aside Implementation:**
+**Cache-Aside Implementation (Most Common Pattern):**
 ```python
-import redis
-import psycopg2
+import redis      # Redis client for in-memory caching
+import psycopg2   # PostgreSQL database client
 
-redis_client = redis.Redis()
-db = psycopg2.connect("dbname=mydb")
+redis_client = redis.Redis()  # Connect to Redis cache server
+db = psycopg2.connect("dbname=mydb")  # Connect to PostgreSQL database
 
 def get_user(user_id):
-    # Cache-Aside READ
-    cache_key = f"user:{user_id}"
+    # ===== CACHE-ASIDE READ PATTERN =====
+    # Application manages cache (not automatic)
+    
+    # STEP 1: Build cache key (namespace pattern prevents collisions)
+    cache_key = f"user:{user_id}"  # Example: "user:123"
+    
+    # STEP 2: Check cache first (always check before DB)
     cached = redis_client.get(cache_key)
     
-    if cached:  # Cache hit
-        return cached
+    if cached:  # Cache HIT: Data found in cache
+        return cached  # Return immediately (<1ms, fast path)
     
-    # Cache miss - load from DB
+    # Cache MISS: Data not in cache, need to fetch from database
+    # STEP 3: Query database (slow path, 10-100ms)
     cursor = db.cursor()
     cursor.execute("SELECT * FROM users WHERE id=%s", (user_id,))
-    data = cursor.fetchone()
+    data = cursor.fetchone()  # Fetch user data from DB
     
-    # Update cache (TTL = 5 min)
+    # STEP 4: Update cache for future requests (write-back to cache)
+    # setex = SET with EXpire (TTL = 300 seconds = 5 minutes)
     redis_client.setex(cache_key, 300, str(data))
-    return data
+    # Next request for same user will be Cache HIT (fast!)
+    
+    return data  # Return to user
 
 def update_user(user_id, new_data):
-    # Cache-Aside WRITE
+    # ===== CACHE-ASIDE WRITE PATTERN =====
+    
+    # STEP 1: Write to database first (source of truth)
     cursor = db.cursor()
     cursor.execute("UPDATE users SET name=%s WHERE id=%s", 
                    (new_data, user_id))
-    db.commit()
+    db.commit()  # Commit transaction (data persisted)
     
-    # Invalidate cache
+    # STEP 2: Invalidate cache (delete cached entry)
+    # Why delete? Old data in cache is now stale (outdated)
     redis_client.delete(f"user:{user_id}")
-    # Next read will fetch fresh data
+    # Next read will be Cache MISS → Fetch fresh data from DB → Cache it
+    # This ensures data consistency (cache won't serve old data)
 ```
 
-**Write-Through Implementation:**
+**Write-Through Implementation (Consistency-Critical):**
 ```python
 def update_user_write_through(user_id, new_data):
+    # ===== WRITE-THROUGH PATTERN =====
+    # Write to BOTH cache and database synchronously (together)
+    # Ensures cache and DB always in sync (strong consistency)
+    
     cache_key = f"user:{user_id}"
     
-    # Write to cache first
+    # STEP 1: Write to cache first (update cached data)
     redis_client.set(cache_key, new_data)
+    # Cache now has new data
     
-    # Synchronously write to database
+    # STEP 2: Synchronously write to database (WAIT for DB write to complete)
+    # "Synchronously" = Don't return until DB write succeeds
     cursor = db.cursor()
     cursor.execute("UPDATE users SET name=%s WHERE id=%s", 
                    (new_data, user_id))
-    db.commit()
+    db.commit()  # Wait for DB write to complete (10-100ms)
     
-    # Both updated - consistent!
+    # RESULT: Both cache and DB updated together (consistent!)
+    # Trade-off: Slow write (must wait for DB) but always consistent
+    # Use case: Banking, inventory (consistency critical)
 ```
 
-**Write-Behind Implementation:**
+**Write-Behind Implementation (High Performance):**
 ```python
-import queue
-import threading
+import queue       # Queue for async task management
+import threading   # Background thread for async DB writes
 
+# ===== SETUP ASYNC WRITE QUEUE =====
+# Queue stores pending database writes (FIFO: First In First Out)
 write_queue = queue.Queue()
 
 def update_user_write_behind(user_id, new_data):
+    # ===== WRITE-BEHIND (WRITE-BACK) PATTERN =====
+    # Write to cache IMMEDIATELY, database write happens LATER (async)
+    # Fast writes (<1ms) but eventual consistency
+    
     cache_key = f"user:{user_id}"
     
-    # Write to cache (fast)
+    # STEP 1: Write to cache ONLY (fast, <1ms)
     redis_client.set(cache_key, new_data)
+    # Cache updated immediately
     
-    # Queue for async DB write
+    # STEP 2: Queue the database write for later (async)
+    # Put task in queue (non-blocking, returns immediately)
     write_queue.put((user_id, new_data))
+    # Database write will happen in background thread
     
-    # Return immediately (fast!)
-    return "Success"
+    # STEP 3: Return SUCCESS immediately (don't wait for DB!)
+    return "Success"  # User gets instant response (<1ms)
+    # Database write still pending in queue (eventually processed)
 
-# Background worker
+# ===== BACKGROUND WORKER THREAD =====
+# Runs continuously, processes queued database writes
 def db_writer():
-    while True:
+    while True:  # Infinite loop (runs forever)
+        # STEP 1: Get next write task from queue (BLOCKING: waits if queue empty)
         user_id, data = write_queue.get()
+        
+        # STEP 2: Write to database (async, happens in background)
         cursor = db.cursor()
         cursor.execute("UPDATE users SET name=%s WHERE id=%s", 
                        (data, user_id))
-        db.commit()
+        db.commit()  # Persist to database
+        # Database now updated (eventually, not immediately)
 
-# Start background thread
+# ===== START BACKGROUND THREAD ON APPLICATION STARTUP =====
+# daemon=True: Thread dies when main program exits
 threading.Thread(target=db_writer, daemon=True).start()
+# Now background worker is running, processing queued writes
+
+# ===== USAGE FLOW =====
+# User calls: update_user_write_behind(123, "New Name")
+# 1. Cache updated immediately (<1ms)
+# 2. Task added to queue
+# 3. Function returns "Success" (fast!)
+# 4. Background thread picks up task from queue
+# 5. Database written asynchronously (may be 1-2 seconds later)
+# 
+# RISK: If application crashes before background thread processes queue,
+#       pending writes are LOST (not persisted to database)
+# MITIGATION: Use persistent queue (Kafka/RabbitMQ) instead of in-memory queue
 ```
 
 ## 📈 12. Trade-offs:
@@ -1021,59 +1182,159 @@ def get_with_lock(key):
 
 ## 💻 11. Code / Flowchart:
 
-**LRU Cache Implementation (Python):**
+**LRU Cache Implementation (Python with Detailed Comments):**
 ```python
-from collections import OrderedDict
+from collections import OrderedDict  # Dict that remembers insertion order
 
 class LRUCache:
+    # ===== INITIALIZATION =====
     def __init__(self, capacity):
+        # OrderedDict: Maintains insertion order (newest at end, oldest at start)
+        # Perfect for LRU: Easy to identify least recently used (first item)
         self.cache = OrderedDict()
-        self.capacity = capacity
+        self.capacity = capacity  # Maximum cache size (e.g., 3 entries)
     
+    # ===== GET OPERATION (READ) =====
     def get(self, key):
+        # STEP 1: Check if key exists in cache
         if key not in self.cache:
-            return None
-        # Move to end (most recently used)
+            return None  # Cache MISS: Key not found
+        
+        # STEP 2: Key found (Cache HIT)
+        # Move to end = Mark as "most recently used"
+        # Why? LRU evicts from START (oldest), so recent items should be at END
         self.cache.move_to_end(key)
-        return self.cache[key]
+        # Now this key is at the end (most recently used position)
+        
+        return self.cache[key]  # Return cached value
     
+    # ===== PUT OPERATION (WRITE) =====
     def put(self, key, value):
+        # STEP 1: If key already exists, update it
         if key in self.cache:
+            # Move to end (mark as recently used)
             self.cache.move_to_end(key)
+        
+        # STEP 2: Add/Update key-value pair
         self.cache[key] = value
+        # New entry added at end (most recently used)
+        
+        # STEP 3: Check if cache exceeded capacity
         if len(self.cache) > self.capacity:
-            # Evict least recently used (first item)
+            # Cache FULL: Need to evict one entry
+            # Evict FIRST item (least recently used)
+            # last=False means remove from START of OrderedDict
             self.cache.popitem(last=False)
+            # Oldest (least recently used) entry removed
 
-# Usage
-cache = LRUCache(3)
-cache.put('A', 1)  # [A]
-cache.put('B', 2)  # [A, B]
-cache.put('C', 3)  # [A, B, C]
-cache.get('A')     # [B, C, A] (A moved to end)
-cache.put('D', 4)  # [C, A, D] (B evicted)
+# ===== USAGE DEMONSTRATION =====
+cache = LRUCache(3)  # Cache capacity = 3 entries
+
+cache.put('A', 1)  # Cache: [A] (A at end, most recent)
+cache.put('B', 2)  # Cache: [A, B] (B at end)
+cache.put('C', 3)  # Cache: [A, B, C] (C at end, A oldest)
+
+cache.get('A')     # Access A → Move to end: [B, C, A] (A now most recent)
+
+cache.put('D', 4)  # Cache full (3 entries), need to evict
+                   # Evict FIRST item (B, least recently used)
+                   # Result: [C, A, D]
+
+# VISUALIZATION:
+# Before get('A'):  [A, B, C] ← newest
+#                    ↑ oldest (would be evicted next)
+#
+# After get('A'):   [B, C, A] ← newest (A moved here)
+#                    ↑ oldest (B will be evicted next)
+#
+# After put('D'):   [C, A, D] ← newest (D added, B evicted)
+#                    ↑ oldest
 ```
 
-**Stampede Prevention with Locking:**
+**Stampede Prevention with Locking (Detailed Comments):**
 ```python
-import redis
-import time
+import redis  # Redis client
+import time   # For sleep and delays
 
-redis_client = redis.Redis()
+redis_client = redis.Redis()  # Connect to Redis server
 
 def get_with_stampede_prevention(key):
-    # Try cache first
+    # ===== PROBLEM =====
+    # When popular cache entry expires, 10K requests hit DB simultaneously
+    # DATABASE OVERLOAD → Slow queries → Timeout → 503 errors
+    #
+    # ===== SOLUTION =====
+    # Use DISTRIBUTED LOCK: Only 1 request regenerates cache, others WAIT
+    
+    # STEP 1: Try cache first (normal flow)
     value = redis_client.get(key)
     if value:
-        return value
+        return value  # Cache HIT: Return immediately (fast path)
     
-    # Cache miss - try to acquire lock
+    # STEP 2: Cache MISS - Multiple requests may arrive here simultaneously
+    # Need to prevent all of them from hitting database
+    
+    # STEP 3: Try to acquire DISTRIBUTED LOCK
+    # Lock key format: "lock:homepage" (different namespace from data key)
     lock_key = f"lock:{key}"
-    lock_acquired = redis_client.setnx(lock_key, 1)
-    redis_client.expire(lock_key, 10)  # Lock expires in 10 sec
     
+    # setnx = SET if Not eXists (atomic operation)
+    # Returns True if lock acquired (key didn't exist)
+    # Returns False if lock already held by another request
+    lock_acquired = redis_client.setnx(lock_key, 1)
+    
+    # STEP 4: Set lock expiration (CRITICAL: prevents deadlock)
+    # If request crashes while holding lock, lock auto-expires after 10 sec
+    redis_client.expire(lock_key, 10)  # TTL = 10 seconds
+    
+    # STEP 5: Check if THIS request acquired the lock
     if lock_acquired:
-        # This request regenerates cache
+        # ===== LOCK ACQUIRED: This request will regenerate cache =====
+        try:
+            # Expensive database query (10-100ms)
+            value = expensive_database_query()
+            
+            # Store in cache for 5 minutes
+            redis_client.setex(key, 300, value)
+            
+            return value  # Return data to THIS user
+        finally:
+            # ===== CRITICAL: Always release lock in finally block =====
+            # Even if query fails/crashes, lock gets released
+            redis_client.delete(lock_key)
+            # Lock released, other waiting requests can now proceed
+    else:
+        # ===== LOCK NOT ACQUIRED: Another request is regenerating cache =====
+        # This request should WAIT and RETRY (cache will be ready soon)
+        
+        # Sleep briefly (100ms) to let other request finish
+        time.sleep(0.1)
+        
+        # RETRY: Recursively call same function
+        # By now, lock holder should have updated cache
+        # Next call will be Cache HIT (fast!)
+        return get_with_stampede_prevention(key)
+        # Recursive call will check cache again → Likely HIT now
+
+def expensive_database_query():
+    # Simulate slow database query
+    time.sleep(2)  # 2 second query
+    return "data from database"
+
+# ===== FLOW EXAMPLE =====
+# Scenario: 10,000 requests arrive simultaneously, cache expired
+#
+# Request 1: Cache MISS → Acquire lock SUCCESS → Query DB → Update cache → Release lock
+# Request 2: Cache MISS → Acquire lock FAIL (held by R1) → Sleep 100ms → Retry → Cache HIT
+# Request 3: Cache MISS → Acquire lock FAIL (held by R1) → Sleep 100ms → Retry → Cache HIT
+# ...
+# Request 10000: Same as R2/R3
+#
+# RESULT:
+# - Only 1 database query (Request 1)
+# - 9,999 requests served from cache after brief wait
+# - Database protected from overload (no stampede!)
+```
         try:
             value = expensive_database_query()
             redis_client.setex(key, 300, value)  # Cache for 5 min

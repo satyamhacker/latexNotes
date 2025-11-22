@@ -734,27 +734,180 @@ def process_message(message):
 # No manual code needed for DLQ routing
 ```
 
-**Idempotency Check (Python + Redis):**
+**Idempotency Check (Python + Redis with Detailed Comments):**
 ```python
-import redis
-import hashlib
+# ============================================================================
+# IDEMPOTENCY IMPLEMENTATION FOR EXACTLY-ONCE PROCESSING
+# ============================================================================
+# Purpose: Prevent duplicate message processing (e.g., double charging customer)
+# Scenario: Payment message processed → Network failure → Message redelivered
+# Solution: Track processed messages using unique keys in Redis
 
+import redis      # Redis client library (in-memory key-value store)
+import hashlib    # For generating unique message fingerprints (SHA256 hash)
+
+# ===== CONNECT TO REDIS =====
+# Redis runs on localhost:6379 by default
+# Used for fast idempotency key lookup (<1ms)
 redis_client = redis.Redis()
+# Alternative with explicit connection params:
+# redis_client = redis.Redis(host='localhost', port=6379, db=0)
 
+# ===== IDEMPOTENT MESSAGE PROCESSING FUNCTION =====
 def process_with_idempotency(message):
-    # Generate unique key
+    """
+    Process message exactly once, even if delivered multiple times
+    
+    Args:
+        message: Dict with 'id', 'user_id', 'amount', etc.
+        Example: {"id": "msg_123", "user_id": "user_456", "amount": 1000}
+    
+    Returns:
+        str: Processing result or "Already processed" for duplicates
+    
+    How it works:
+    1. Generate unique key from message ID
+    2. Check if key exists in Redis (already processed?)
+    3. If yes: Skip (duplicate), If no: Process and store key
+    """
+    
+    # ===== STEP 1: GENERATE UNIQUE IDEMPOTENCY KEY =====
+    # Use SHA256 hash of message ID as unique identifier
+    # message['id'] = String like "msg_123"
+    # .encode() = Convert string to bytes (required for hashing)
+    # hashlib.sha256() = Create SHA256 hash object
+    # .hexdigest() = Convert hash to hexadecimal string
     key = hashlib.sha256(message['id'].encode()).hexdigest()
+    # Result: key = "a1b2c3d4..." (64-character hex string)
+    # Why SHA256? Collision-resistant (two different IDs won't create same hash)
     
-    # Check if already processed
-    if redis_client.exists(key):  # Duplicate message
-        return "Already processed"
+    # Alternative approach (more context-aware):
+    # key = hashlib.sha256(
+    #     f"{message['id']}{message['user_id']}{message['operation']}".encode()
+    # ).hexdigest()
+    # Includes user_id and operation type for uniqueness across users
     
-    # Process message
+    # ===== STEP 2: CHECK IF MESSAGE ALREADY PROCESSED =====
+    # Redis.exists(key) = Check if key exists in Redis
+    # Returns 1 if exists, 0 if not exists
+    if redis_client.exists(key):
+        # KEY EXISTS = This message was already processed before
+        # This is a DUPLICATE delivery (network retry, queue redelivery)
+        
+        # ===== EXAMPLE SCENARIO =====
+        # Original request: message['id'] = "msg_123", amount = ₹1000
+        # Processing: Bank charged ₹1000
+        # Network failure: ACK not sent to queue
+        # Queue redelivery: Same message delivered again
+        # This check: Key "msg_123" found in Redis
+        # Action: Skip processing (no double charge) ✅
+        
+        print(f"Duplicate message detected: {message['id']}")  # Log for monitoring
+        return "Already processed"  # Return immediately, don't process again
+        # User NOT charged twice, idempotency achieved! 🎉
+    
+    # ===== STEP 3: PROCESS MESSAGE (FIRST TIME) =====
+    # Key doesn't exist = This is the FIRST time we're seeing this message
+    # Safe to process business logic
+    
+    # business_logic(message) = Your actual processing function
+    # Examples:
+    # - Charge customer: payment_gateway.charge(message['amount'])
+    # - Update inventory: inventory.reduce(message['product_id'], quantity)
+    # - Send email: email_service.send(message['recipient'], message['template'])
     result = business_logic(message)
+    # Assume business_logic() returns: {"status": "success", "transaction_id": "txn_789"}
     
-    # Mark as processed (24 hour TTL)
+    # ===== STEP 4: MARK MESSAGE AS PROCESSED =====
+    # Store the idempotency key in Redis to prevent future duplicates
+    # redis_client.setex() = SET with EXpiration time
+    # Parameters:
+    #   key = Idempotency key (hash of message ID)
+    #   86400 = TTL (Time To Live) in seconds = 24 hours
+    #   "processed" = Value (simple marker, could store full result for caching)
     redis_client.setex(key, 86400, "processed")
-    return result
+    # After 24 hours, key auto-deleted (cleanup, saves memory)
+    # Why 24 hours? Balance between:
+    #   - Too short (1 hour): Duplicate possible if retry after expiry
+    #   - Too long (7 days): Memory waste, most retries happen within minutes
+    
+    # Alternative: Store full result for caching
+    # redis_client.setex(key, 86400, json.dumps(result))
+    # Next time: Return cached result instead of reprocessing
+    
+    # ===== STEP 5: RETURN RESULT =====
+    return result  # Return processing result to caller
+    # Example return: {"status": "success", "transaction_id": "txn_789"}
+
+# ============================================================================
+# USAGE EXAMPLE - PAYMENT PROCESSING
+# ============================================================================
+# Scenario: Process payment messages from queue
+
+# Message 1 (First delivery):
+message1 = {
+    "id": "payment_456",
+    "user_id": "user_123",
+    "amount": 1000,
+    "card": "**** 1234"
+}
+result1 = process_with_idempotency(message1)
+# Flow:
+# 1. Generate key: hash("payment_456") = "a1b2c3..."
+# 2. Check Redis: Key doesn't exist (first time)
+# 3. Process: Charge ₹1000 to card **** 1234
+# 4. Store key in Redis: setex("a1b2c3...", 86400, "processed")
+# 5. Return: {"status": "success", "transaction_id": "txn_789"}
+print(result1)  # Output: {"status": "success", ...}
+
+# ===== NETWORK FAILURE SCENARIO =====
+# Payment processed successfully BUT ACK to queue failed (network  timeout)
+# Queue thinks message not processed → Redelivers same message
+
+# Message 1 (Duplicate delivery - SAME ID):
+message1_duplicate = {
+    "id": "payment_456",  # SAME ID as before
+    "user_id": "user_123",
+    "amount": 1000,
+    "card": "**** 1234"
+}
+result2 = process_with_idempotency(message1_duplicate)
+# Flow:
+# 1. Generate key: hash("payment_456") = "a1b2c3..." (SAME hash)
+# 2. Check Redis: Key EXISTS (processed earlier)
+# 3. Skip processing: Don't charge again (idempotency check passed) ✅
+# 4. Return: "Already processed"
+print(result2)  # Output: "Already processed"
+# Customer charged only ONCE despite duplicate message delivery! 🎉
+
+# ============================================================================
+# BENEFITS OF IDEMPOTENCY
+# ============================================================================
+# 1. Safety: Network retries don't cause duplicate charges
+# 2. Reliability: Queue redelivery safe (at-least-once delivery OK)
+# 3. Simplicity: Application code doesn't need complex retry logic
+# 4. Performance: Redis lookup <1ms (minimal overhead)
+
+# ============================================================================
+# PRODUCTION CONSIDERATIONS
+# ============================================================================
+# 1. Key Design: Include user_id + operation for cross-user uniqueness
+# 2. TTL Selection: Based on business needs (1 hour - 7 days)
+# 3. Storage: Redis for speed, Database for durability (audit trail)
+# 4. Monitoring: Alert on high duplicate rate (may indicate queue issues)
+# 5. Cleanup: TTL ensures automatic memory cleanup (no manual intervention)
+
+# ============================================================================
+# ALTERNATIVE IMPLEMENTATIONS
+# ============================================================================
+# Database-based (durable but slower):
+# db.execute("INSERT INTO processed_messages (id, timestamp) VALUES (%s, NOW())")
+# Use UNIQUE constraint on 'id' column (database enforces)
+#
+# Hybrid (best of both):
+# - Redis for fast lookup (cache layer)
+# - Database for permanent audit trail
+# - Write to both: Redis (fast check) + DB (compliance/audit)
 ```
 
 ## 📈 12. Trade-offs:
@@ -1049,31 +1202,286 @@ After 3 retries → Task marked as failed → Alert sent
 
 ## 💻 11. Code / Flowchart:
 
-**Airflow DAG Example (Python):**
+**Airflow DAG Example (Python with Detailed Comments):**
 ```python
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-from datetime import datetime
+# ============================================================================
+# AIRFLOW DAG DEFINITION - ETL PIPELINE
+# ============================================================================
+# Purpose: Orchestrate complex workflow with dependencies and retries
+# Scenario: Daily ETL pipeline - Extract data from API → Transform → Load to warehouse
+# Benefits: Automatic scheduling, dependency management, failure handling
+
+# ===== IMPORT REQUIRED LIBRARIES =====
+from airflow import DAG  # Main DAG class for workflow definition
+from airflow.operators.python import PythonOperator  # Operator for Python functions
+from datetime import datetime, timedelta  # For dates and time calculations
+
+# ============================================================================
+# TASK FUNCTIONS (Business Logic)
+# ============================================================================
+# These are the actual functions that will be executed by Airflow workers
 
 def extract_data():
-    # Extract logic
-    return "data_extracted"
+    """
+    Task 1: Extract data from external API
+    
+    In real scenario:
+    - Fetch data from REST API (e.g., sales data from Shopify)
+    - Query database (e.g., customer data from PostgreSQL)
+    - Read files from S3 (e.g., CSV files)
+    
+    This runs FIRST in the workflow
+    """
+    # Simulated extraction logic
+    # In production: response = requests.get('https://api.example.com/sales')
+    # data = response.json()
+    
+    print("Extracting data from API...")  # Logs visible in Airflow UI
+    # Extract 1000 sales records from yesterday
+    data = "1000 sales records"  # Placeholder
+    
+    # Return value can be passed to next task using XCom (Airflow's inter-task communication)
+    return "data_extracted"  # Status message
 
 def transform_data():
-    # Transform logic
-    return "data_transformed"
+    """
+    Task 2: Transform extracted data
+    
+    In real scenario:
+    - Clean data (remove duplicates, handle nulls)
+    - Aggregate (calculate daily totals)
+    - Enrich (add customer demographics)
+    
+    This runs AFTER extract_data completes successfully
+    """
+    # Simulated transformation logic
+    # In production:
+    # - df = pandas.read_parquet('/tmp/extracted_data.parquet')
+    # - df_cleaned = df.dropna()
+    # - df_aggregated = df_cleaned.groupby('date').sum()
+    
+    print("Transforming data...")  # Logs visible in Airflow UI
+    # Transform 1000 records → 365 daily aggregates
+    transformed = "365 daily totals"  # Placeholder
+    
+    return "data_transformed"  # Status message
 
-# Define DAG
-dag = DAG('etl_pipeline', 
-          schedule_interval='0 2 * * *',  # Daily 2 AM
-          start_date=datetime(2024, 1, 1))
+def load_data():
+    """
+    Task 3: Load transformed data to warehouse
+    
+    In real scenario:
+    - Write to data warehouse (Snowflake, BigQuery, Redshift)
+    - Update dashboard (Tableau, Metabase)
+    
+    This runs AFTER transform_data completes successfully
+    """
+    print("Loading data to warehouse...")
+    # In production: warehouse.write(df_aggregated, table='sales_daily')
+    return "data_loaded"
 
-# Define tasks
-task_extract = PythonOperator(task_id='extract', python_callable=extract_data, dag=dag)
-task_transform = PythonOperator(task_id='transform', python_callable=transform_data, dag=dag)
+# ============================================================================
+# DAG CONFIGURATION (Workflow Definition)
+# ============================================================================
 
-# Set dependency
-task_extract >> task_transform  # Transform runs after Extract
+# ===== DEFAULT ARGUMENTS (Applied to ALL tasks) =====
+# These settings control retry behavior, email alerts, etc.
+default_args = {
+    # ===== OWNERSHIP & NOTIFICATIONS =====
+    'owner': 'data_team',  # Team responsible for this DAG
+    # 'email': ['data@company.com'],  # Alert email on failure
+    # 'email_on_failure': True,  # Send email if task fails
+    # 'email_on_retry': False,  # Don't spam on retries
+    
+    # ===== RETRY CONFIGURATION =====
+    # How many times to retry failed task before marking as failed
+    'retries': 3,  # Retry up to 3 times
+    # Wait time between retries (exponential backoff can be configured)
+    'retry_delay': timedelta(minutes=5),  # Wait 5 minutes between retries
+    # Example: Task fails at 2:00 AM → Retry at 2:05 AM → Retry at 2:10 AM → Retry at 2:15 AM
+    
+    # ===== TASK EXECUTION SETTINGS =====
+    # Maximum time a task can run before being killed
+    'execution_timeout': timedelta(hours=1),  # Kill if task runs >1 hour
+    # Prevents hung tasks from blocking workflow
+    
+    # 'depends_on_past': False,  # Don't wait for previous run to succeed
+    # 'wait_for_downstream': False,  # Don't wait for downstream tasks
+}
+
+# ===== CREATE DAG OBJECT =====
+# This is the main workflow container
+dag = DAG(
+    # ===== DAG IDENTIFICATION =====
+    # dag_id = Unique name for this workflow (visible in Airflow UI)
+    dag_id='etl_pipeline',  # Name shown in UI: "etl_pipeline"
+    # Use lowercase with underscores (Python convention)
+    
+    # ===== SCHEDULING =====
+    # schedule_interval = Cron expression or timedelta
+    # '0 2 * * *' = Cron syntax: "At 2:00 AM every day"
+    # Breakdown:
+    # ┌─── minute (0-59)
+    # │ ┌─── hour (0-23)
+    # │ │ ┌─── day of month (1-31)
+    # │ │ │ ┌─── month (1-12)
+    # │ │ │ │ ┌─── day of week (0-6, 0=Sunday)
+    # 0 2 * * *
+    # = Run at 2:00 AM every day
+    schedule_interval='0 2 * * *',  # Daily at 2 AM
+    
+    # Common cron examples:
+    # '*/15 * * * *' = Every 15 minutes
+    # '0 */6 * * *' = Every 6 hours
+    # '0 0 * * 0' = Every Sunday midnight
+    # '@daily' = Shortcut for '0 0 * * *'
+    # timedelta(hours=1) = Every 1 hour (Python timedelta)
+    
+    # ===== START DATE & CATCHUP =====
+    # start_date = When this DAG should start running
+    start_date=datetime(2024, 1, 1),  # Start from Jan 1, 2024
+    # Airflow will schedule runs from this date forward
+    
+    # catchup = Should Airflow run for missed dates?
+    # False = Don't backfill (only run for today onwards)
+    # True = Run for all dates between start_date and today (backfill)
+    catchup=False,  # Don't backfill historical dates
+    
+    # ===== APPLY DEFAULT ARGS =====
+    # All tasks in this DAG will inherit these settings
+    default_args=default_args,
+    
+    # ===== OPTIONAL SETTINGS =====
+    # description='Daily ETL pipeline for sales data',  # Shown in UI
+    # tags=['etl', 'sales', 'daily'],  # For filtering DAGs in UI
+    # max_active_runs=1,  # Only 1 instance of this DAG runs at a time
+)
+
+# ============================================================================
+# TASK DEFINITIONS (Nodes in the Workflow Graph)
+# ============================================================================
+
+# ===== TASK 1: EXTRACT DATA =====
+# PythonOperator = Executes a Python function
+task_extract = PythonOperator(
+    # task_id = Unique identifier for this task within the DAG
+    task_id='extract',  # Shown in UI as "extract"
+    # Use lowercase with underscores
+    
+    # python_callable = Function to execute (defined above)
+    # This is the actual work that Airflow will run
+    python_callable=extract_data,  # Function reference (no parentheses!)
+    # Airflow will call: extract_data() when task runs
+    
+    # dag = Parent DAG (links task to workflow)
+    dag=dag,  # Associates task with 'etl_pipeline' DAG
+    
+    # ===== OPTIONAL TASK-SPECIFIC SETTINGS =====
+    # retries=5,  # Override default retries for this task
+    # priority_weight=10,  # Higher priority tasks run first
+    # pool='api_pool',  # Limit concurrent API calls
+)
+
+# ===== TASK 2: TRANSFORM DATA =====
+task_transform = PythonOperator(
+    task_id='transform',  # Task name in UI
+    python_callable=transform_data,  # Function to execute
+    dag=dag,  # Link to DAG
+)
+
+# ===== TASK 3: LOAD DATA =====
+task_load = PythonOperator(
+    task_id='load',  # Task name in UI
+    python_callable=load_data,  # Function to execute
+    dag=dag,  # Link to DAG
+)
+
+# ============================================================================
+# TASK DEPENDENCIES (Edges in the Workflow Graph)
+# ============================================================================
+# Define execution order: Extract → Transform → Load
+
+# ===== METHOD 1: BITSHIFT OPERATOR (Recommended) =====
+# >> means "then" (left runs first, then right)
+# << means "after" (right runs first, then left)
+
+# Linear pipeline: extract → transform → load
+task_extract >> task_transform >> task_load
+
+# Equivalent to:
+# 1. extract runs first
+# 2. When extract succeeds, transform runs
+# 3. When transform succeeds, load runs
+
+# ===== OTHER DEPENDENCY PATTERNS =====
+# Fan-out (one task → multiple tasks in parallel):
+# task_extract >> [task_transform_1, task_transform_2, task_transform_3]
+# All 3 transform tasks run in PARALLEL after extract completes
+
+# Fan-in (multiple tasks → one task):
+# [task_fetch_api, task_fetch_db, task_fetch_file] >> task_merge
+# merge waits for ALL 3 fetch tasks to complete
+
+# Complex dependencies:
+# task_extract >> task_transform
+# task_extract >> task_validate
+# [task_transform, task_validate] >> task_load
+# Both transform AND validate must complete before load runs
+
+# ===== METHOD 2: set_upstream / set_downstream =====
+# task_transform.set_upstream(task_extract)  # transform depends on extract
+# task_load.set_downstream(task_transform)  # load runs after transform
+
+# ============================================================================
+# DAG EXECUTION FLOW (What Happens at 2:00 AM Daily)
+# ============================================================================
+# 1. 2:00 AM: Airflow Scheduler wakes up
+# 2. Check: Is it time to run 'etl_pipeline'? (schedule_interval='0 2 * * *')
+# 3. Yes → Create DAG Run instance (execution_date=2024-01-15 02:00:00)
+# 4. Check task dependencies for 'extract' task (no dependencies)
+# 5. Queue 'extract' task to Executor (Celery/Kubernetes/Local)
+# 6. Worker picks up 'extract' task and runs extract_data()
+# 7. Success? → Mark 'extract' as SUCCESS
+# 8. Check downstream: 'transform' task ready? (upstream 'extract' complete)
+# 9. Queue 'transform' task
+# 10. Worker runs transform_data()
+# 11. Success? → Mark 'transform' as SUCCESS
+# 12. Check downstream: 'load' task ready?
+# 13. Queue 'load' task
+# 14. Worker runs load_data()
+# 15. Success? → Mark 'load' as SUCCESS
+# 16. All tasks complete → Mark DAG Run as SUCCESS
+# 17. Send success notification (if configured)
+# 18. Wait for next schedule (tomorrow 2:00 AM)
+
+# ============================================================================
+# FAILURE & RETRY SCENARIO
+# ============================================================================
+# Scenario: 'transform' task fails (e.g., API timeout)
+# 
+# 1. Task fails at 2:05 AM
+# 2. Check retries: 0/3 (first failure)
+# 3. Wait retry_delay: 5 minutes
+# 4. Retry 1 at 2:10 AM → Fails again
+# 5. Retry 2 at 2:15 AM → Fails again
+# 6. Retry 3 at 2:20 AM → Fails again
+# 7. Max retries exhausted → Mark 'transform' as FAILED
+# 8. 'load' task: Upstream failed → Mark as UPSTREAM_FAILED (don't run)
+# 9. Mark DAG Run as FAILED
+# 10. Send failure email to data@company.com (if configured)
+# 11. Manual intervention required (fix API, clear task, re-run)
+
+# ============================================================================
+# AIRFLOW UI FEATURES (After deploying this DAG)
+# ============================================================================
+# 1. DAG Graph View: Visualize task dependencies (extract → transform → load)
+# 2. Tree View: See historical runs (success/fail for each day)
+# 3. Gantt Chart: Timeline of task execution durations
+# 4. Task Logs: View print statements and error messages
+# 5. Trigger DAG: Manual run (test without waiting for schedule)
+# 6. Clear Tasks: Reset failed tasks and re-run
+# 7. Mark Success: Skip failed task and continue downstream
+# 8. Task Instance Details: Logs, duration, retry count, worker host
 ```
 
 **Task Execution Flowchart:**

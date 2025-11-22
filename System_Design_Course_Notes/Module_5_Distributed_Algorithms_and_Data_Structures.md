@@ -293,36 +293,114 @@ Node starts as FOLLOWER
              [Start new election]
 ```
 
-**Zookeeper Range Assignment (Python concept):**
+**Zookeeper Range Assignment (Python with Detailed Comments):**
 ```python
+# ============================================================================
+# ZOOKEEPER RANGE ASSIGNMENT FOR UNIQUE ID GENERATION (TinyURL Use Case)
+# ============================================================================
+# Problem: Multiple servers generate short URLs simultaneously
+# Challenge: How to ensure IDs are UNIQUE across all servers (no collision)?
+# Solution: Zookeeper acts as coordinator, assigns non-overlapping ID ranges
+
 class ZookeeperRangeManager:
+    # ===== INITIALIZATION =====
     def __init__(self):
+        # Starting point for first range assignment
         self.current_range_start = 1
+        # Size of each range (typically 1000-10000)
         self.range_size = 1000
+        # Track which ranges assigned to which servers
+        # Format: {server_id: (start, end)}
         self.assigned_ranges = {}
     
+    # ===== ASSIGN UNIQUE RANGE TO SERVER =====
     def assign_range(self, server_id):
-        # Assign unique range to server
+        """
+        Assigns a unique, non-overlapping range of IDs to requesting server
+        
+        Args:
+            server_id: Unique identifier for requesting server (e.g., "server1")
+        
+        Returns:
+            tuple: (start, end) - Range boundaries for this server
+        """
+        # STEP 1: Calculate range boundaries
+        # Start from current available position
         start = self.current_range_start
+        # End is start + range_size - 1 (inclusive range)
+        # Example: start=1, range_size=1000 → end=1000 (1-1000 inclusive)
         end = start + self.range_size - 1
         
+        # STEP 2: Store assignment (for tracking/debugging)
+        # Server can now generate IDs from start to end (inclusive)
         self.assigned_ranges[server_id] = (start, end)
+        
+        # STEP 3: Move current_range_start forward for next server
+        # Next range starts immediately after current range ends
+        # Example: current end=1000 → next start=1001
         self.current_range_start = end + 1
         
+        # STEP 4: Return allocated range to server
         return start, end
 
-# Usage
+# ===== USAGE DEMONSTRATION =====
+# Zookeeper coordinator instance
 zk = ZookeeperRangeManager()
 
-# Server1 requests range
-start, end = zk.assign_range("server1")  # (1, 1000)
-# Server1 generates IDs: 1, 2, 3, ..., 1000
+# ===== SERVER 1 REQUESTS RANGE =====
+start, end = zk.assign_range("server1")  # Returns (1, 1000)
+# Server1 can now generate IDs: 1, 2, 3, ..., 1000
+# Internal counter: current_id = 1
+# On each request: short_url = base62(current_id), current_id++
+# When counter reaches 1000 → Request new range from Zookeeper
 
-# Server2 requests range
-start, end = zk.assign_range("server2")  # (1001, 2000)
+print(f"Server1 assigned range: {start}-{end}")  # Output: 1-1000
+
+# ===== SERVER 2 REQUESTS RANGE =====
+start, end = zk.assign_range("server2")  # Returns (1001, 2000)
 # Server2 generates IDs: 1001, 1002, ..., 2000
+# NO COLLISION with Server1 (different ranges)
 
-# No collision, each server has unique range
+print(f"Server2 assigned range: {start}-{end}")  # Output: 1001-2000
+
+# ===== SERVER 3 REQUESTS RANGE =====
+start, end = zk.assign_range("server3")  # Returns (2001, 3000)
+print(f"Server3 assigned range: {start}-{end}")  # Output: 2001-3000
+
+# ============================================================================
+# BENEFITS OF RANGE ASSIGNMENT
+# ============================================================================
+# ✅ NO COLLISION: Each server has unique range (no overlap)
+# ✅ NO COORDINATION: Servers work independently within their range
+# ✅ HIGH THROUGHPUT: Parallel ID generation (no lock contention)
+# ✅ SIMPLE: Server doesn't need to check if ID already used
+
+# ============================================================================
+# COMPLETE FLOW IN TINYURL SYSTEM
+# ============================================================================
+# 1. User requests: POST /api/shorten (long_url="https://google.com")
+# 2. Request hits Server1
+# 3. Server1 generates next ID from its range: id=5
+# 4. Server1 converts to Base62: base62(5) = "5" (short code)
+# 5. Server1 stores: DB.save(short_code="5", long_url="https://google.com")
+# 6. Server1 returns: short_url="https://tiny.url/5"
+# 7. Server1 increments counter: current_id = 6 (for next request)
+
+# ============================================================================
+# WHAT HAPPENS WHEN RANGE EXHAUSTED?
+# ============================================================================
+# Server1 used all IDs from 1-1000:
+# Server1 requests new range: zk.assign_range("server1")
+# Zookeeper assigns: (3001, 4000) - Next available range
+# Server1 continues with new range
+
+# ============================================================================
+# PERSISTENCE (IMPORTANT IN PRODUCTION)
+# ============================================================================
+# In real Zookeeper implementation:
+# - current_range_start persisted to disk/database
+# - If Zookeeper restarts, state recovers from persistence
+# - Prevents re-assigning already used ranges (data corruption)
 ```
 
 ## 📈 12. Trade-offs:
@@ -708,92 +786,344 @@ Example: "u4pruyd" and "u4pruyf" are close
 
 ## 💻 11. Code / Flowchart:
 
-**Bloom Filter (Python):**
+**Bloom Filter (Python with Detailed Comments):**
 ```python
-import mmh3  # MurmurHash3
-from bitarray import bitarray
+# ============================================================================
+# BLOOM FILTER IMPLEMENTATION FOR MEMBERSHIP TESTING
+# ============================================================================
+# Use Case: Website signup - Check if username already taken
+# Challenge: 1 billion usernames in database (10 GB in memory)
+# Solution: Bloom filter (100 MB, 100x less memory, <1ms lookup)
+
+import mmh3  # MurmurHash3 - Fast non-cryptographic hash function
+from bitarray import bitarray  # Efficient bit array implementation
 
 class BloomFilter:
+    # ===== INITIALIZATION =====
     def __init__(self, size, hash_count):
-        self.size = size
-        self.hash_count = hash_count
+        """
+        Create a Bloom Filter
+        
+        Args:
+            size: Number of bits in bit array (larger = fewer false positives)
+            hash_count: Number of hash functions to use (typically 3-7)
+        """
+        self.size = size  # Total bits in filter (e.g., 1000)
+        self.hash_count = hash_count  # Number of hash functions (e.g., 3)
+        
+        # Bit array: All bits initially 0 (nothing added yet)
         self.bit_array = bitarray(size)
-        self.bit_array.setall(0)
+        self.bit_array.setall(0)  # [0,0,0,0,0...] (1000 zeros)
     
+    # ===== ADD ITEM TO BLOOM FILTER =====
     def add(self, item):
-        for i in range(self.hash_count):
-            index = mmh3.hash(item, i) % self.size
+        """
+        Add an item to the Bloom Filter (e.g., add username "john")
+        
+        Process:
+        1. Hash the item multiple times (using different hash functions)
+        2. Set corresponding bits to 1 in the bit array
+        
+        Note: Cannot remove items (bits can only be set to 1, not back to 0)
+        """
+        # Apply each hash function and set corresponding bit to 1
+        for i in range(self.hash_count):  # i = 0, 1, 2 (if hash_count=3)
+            # STEP 1: Hash the item with seed 'i' (different hash each time)
+            # mmh3.hash(item, seed) → integer hash value
+            # Example: mmh3.hash("john", 0) = 12345678
+            hash_value = mmh3.hash(item, i)
+            
+            # STEP 2: Convert hash to valid bit array index (0 to size-1)
+            # Modulo ensures index stays within array bounds
+            # Example: 12345678 % 1000 = 678 (index in range 0-999)
+            index = hash_value % self.size
+            
+            # STEP 3: Set bit at this index to 1 (mark as "seen")
+            # Example: bit_array[678] = 1
             self.bit_array[index] = 1
+        
+        # Result: Multiple bits set to 1 (3 bits if hash_count=3)
+        # "john" now "fingerprinted" in the bloom filter
     
+    # ===== CHECK IF ITEM EXISTS (MEMBERSHIP TEST) =====
     def check(self, item):
-        for i in range(self.hash_count):
-            index = mmh3.hash(item, i) % self.size
+        """
+        Check if item MIGHT exist in the Bloom Filter
+        
+        Returns:
+            False: Item DEFINITELY NOT in filter (100% certain)
+            True: Item PROBABLY in filter (may be false positive)
+        
+        Process:
+        1. Hash the item multiple times (same functions as add)
+        2. Check if ALL corresponding bits are 1
+        3. If ANY bit is 0 → Definitely not exists
+        4. If ALL bits are 1 → Probably exists (could be false positive)
+        """
+        # Check all hash positions
+        for i in range(self.hash_count):  # i = 0, 1, 2
+            # STEP 1: Hash the item (same as add function)
+            hash_value = mmh3.hash(item, i)
+            
+            # STEP 2: Get index in bit array
+            index = hash_value % self.size
+            
+            # STEP 3: Check if bit at this index is 0
             if self.bit_array[index] == 0:
-                return False  # Definitely not exists
-        return True  # Probably exists
+                # If ANY bit is 0, item definitely NOT added before
+                # Can return immediately (early exit)
+                return False  # Definitely not exists ✅ (100% certain)
+        
+        # STEP 4: All bits are 1 → Item probably exists
+        # Could be false positive (bits set by other items coincidentally)
+        return True  # Probably exists ⚠️ (may be false positive)
 
-# Usage
+# ============================================================================
+# USAGE DEMONSTRATION
+# ============================================================================
+# Create Bloom Filter: 1000 bits, 3 hash functions
 bf = BloomFilter(size=1000, hash_count=3)
-bf.add("john")
-bf.add("jane")
 
-print(bf.check("john"))  # True (exists)
-print(bf.check("bob"))   # False (not exists) or True (false positive)
+# ===== ADD USERNAMES TO FILTER =====
+# Simulate existing usernames in database
+bf.add("john")    # Sets 3 bits to 1 (e.g., bits 3, 7, 12)
+bf.add("jane")    # Sets 3 bits to 1 (e.g., bits 5, 9, 15)
+bf.add("alice")   # Sets 3 bits to 1
+
+# Now bit_array looks like: [0,0,0,1,0,1,0,1,0,1,0,0,1,0,0,1,...]
+#                             Positions 3,5,7,9,12,15 are 1 (others 0)
+
+# ===== CHECK USERNAME AVAILABILITY =====
+# User tries to signup with username "john"
+exists = bf.check("john")  # Returns True (exists)
+if exists:
+    print("Username 'john' may be taken. Checking database...")
+    # False positive possible, verify with actual database query
+
+# User tries to signup with username "bob"
+exists = bf.check("bob")  # Returns False (not exists)
+if not exists:
+    print("Username 'bob' definitely available! No DB check needed.")
+    # 100% certain, no need to query database (saves time)
+
+# User tries to signup with username "charlie"
+exists = bf.check("charlie")  # May return True (FALSE POSITIVE)
+# Even though "charlie" never added, its hash positions might
+# coincidentally match bits set by "john", "jane", "alice"
+if exists:
+    print("Username 'charlie' may be taken. Checking database...")
+    # Database query reveals: "charlie" actually available (false positive)
+
+# ============================================================================
+# PERFORMANCE COMPARISON
+# ============================================================================
+# Traditional approach (Hash Set):
+# - 1 billion usernames = 10 GB memory (store all usernames)
+# - Lookup: Hash + search = 1-5ms
+# - 100% accurate (no false positives)
+#
+# Bloom Filter approach:
+# - 1 billion usernames = 100 MB memory (100x less!)
+# - Lookup: Multiple hashes + bit checks = <1ms (faster)
+# - 99% accurate (1% false positives acceptable)
+#
+# Trade-off: 100x memory savings, slightly faster, 1% false positives
+# Perfect for pre-filtering before expensive database queries
+
+# ============================================================================
+# REAL-WORLD FLOW (WEBSITE SIGNUP)
+# ============================================================================
+# 1. User enters username: "newuser123"
+# 2. Check Bloom Filter: bf.check("newuser123")
+# 3a. If False (definitely not exists):
+#     → Username available, proceed with signup (no DB query) ✅
+# 3b. If True (probably exists):
+#     → Query database to confirm (may be false positive)
+#     → If DB says available: Signup ✅ (was false positive)
+#     → If DB says taken: Show error ❌
+#
+# Result: 99% of checks answered instantly from memory (<1ms)
+#         Only 1% require database query (false positives)
+#         Database load reduced by 99%! 🎉
 ```
 
-**QuadTree (Conceptual):**
+**QuadTree (Conceptual with Detailed Comments):**
 ```python
+# ============================================================================
+# QUADTREE IM PLEMENTATION FOR SPATIAL SEARCH (UBER DRIVER MATCHING)
+# ============================================================================
+# Use Case: Find nearby drivers in real-time
+# Challenge: Linear search (O(n)) too slow for millions of drivers
+# Solution: QuadTree spatial indexing  (O(log n)) - search only relevant area
+
 class Point:
+    # ===== POINT REPRESENTATION =====
     def __init__(self, x, y, data):
+        """
+        Represents a point in 2D space (e.g., driver location)
+        
+        Args:
+            x: Longitude (horizontal position)
+            y: Latitude (vertical position)
+            data: Associated data (e.g., "Driver123", driver info)
+        """
         self.x, self.y, self.data = x, y, data
 
 class QuadTree:
+    # ===== QUADTREE NODE INITIALIZATION =====
     def __init__(self, boundary, capacity=4):
-        self.boundary = boundary  # (x, y, width, height)
-        self.capacity = capacity
-        self.points = []
-        self.divided = False
-        self.children = [None, None, None, None]  # NW, NE, SW, SE
+        """
+        Create a QuadTree node representing a rectangular area
+        
+        Args:
+            boundary: (x, y, width, height) - Area this node covers
+            capacity: Max points before subdivision (typically 4-8)
+        """
+        self.boundary = boundary  # (x, y, width, height) - Geographic area
+        self.capacity = capacity  # Max 4 points before splitting
+        self.points = []  # Points stored in this node (drivers)
+        self.divided = False  # Has this node been subdivided?
+        self.children = [None, None, None, None]  # NW, NE, SW, SE quadrants
     
+    # ===== INSERT POINT (DRIVER) INTO QUADTREE =====
     def insert(self, point):
+        """
+        Insert a point (driver location) into the QuadTree
+        
+        Process:
+        1. Check if point falls within this node's boundary
+        2. If node has capacity, add point here
+        3. If full, subdivide into 4 children and insert into appropriate child
+        
+        Returns:
+            bool: True if inserted successfully, False if outside boundary
+        """
+        # STEP 1: Check if point is within this node's boundary
         if not self.contains(point):
-            return False
+            return False  # Point outside this area, can't insert
         
+        # STEP 2: If this node has space, stor e point here
         if len(self.points) < self.capacity:
+            # Node not full yet, add point directly
             self.points.append(point)
-            return True
+            return True  # Successfully inserted
         
+        # STEP 3: Node is FULL (≥4 points), need to subdivide
         if not self.divided:
+            # First time exceeding capacity → Create 4 children
+            # Subdivide this area into 4 quadrants (NW, NE, SW, SE)
             self.subdivide()
         
-        # Try to insert in children
-        for child in self.children:
+        # STEP 4: Insert point into appropriate child quadrant
+        # Try each child until one accepts the point
+        for child in self.children:  # [NW, NE, SW, SE]
             if child.insert(point):
-                return True
+                return True  # Point inserted in one of the children
+        
+        # Should never reach here (point must fit in some child)
+        return False
     
+    # ===== QUERY RANGE (FIND NEARBY DRIVERS) =====
     def query_range(self, range_boundary):
-        # Return all points in range
+        """
+        Find all points (drivers) within a specified range
+        
+        This is the KEY operation for \"find nearby drivers\"
+        
+        Args:
+            range_boundary: Area to search (e.g., 5km radius around user)
+        
+        Returns:
+            list: All points found within the range
+        
+        Optimization: Only searches quadrants that intersect with range
+                     (doesn't search entire tree - that's why it's O(log n))
+        """
+        # List to accumulate found points
         found = []
+        
+        # STEP 1: Early exit - If range doesn't intersect this node, skip it
+        # Example: User in SE quadrant, searching NW quadrant = wasteful
         if not self.intersects(range_boundary):
-            return found
+            return found  # Empty list, no need to search this branch
         
+        # STEP 2: Check points in THIS node (if any)
         for point in self.points:
+            # Check if each point falls within the search range
             if range_boundary.contains(point):
-                found.append(point)
+                found.append(point)  # Driver within range, add to results
         
+        # STEP 3: If this node has children, recursively search them
         if self.divided:
+            # Search all 4 children (they'll early-exit if not relevant)
             for child in self.children:
+                # Recursive call - child will check its area
                 found.extend(child.query_range(range_boundary))
+                # extend = add all elements from child's results
         
+        # STEP 4: Return all points found in this node + children
         return found
 
-# Usage: Find nearby drivers
-tree = QuadTree(boundary=(0, 0, 100, 100))
-tree.insert(Point(10, 20, "Driver1"))
-tree.insert(Point(15, 25, "Driver2"))
+# ============================================================================
+# USAGE DEMONSTRATION (UBER DRIVER MATCHING)
+# ============================================================================
+# Create QuadTree for city area: 100km × 100km
+tree = QuadTree(boundary=(0, 0, 100, 100))  # (x, y, width, height)
 
-# Find drivers near user (12, 22) within 5 km radius
-nearby = tree.query_range(range=(12, 22, 5, 5))
+# ===== ADD DRIVERS TO QUADTREE =====
+# Each driver inserted with location (lat, long) and ID
+tree.insert(Point(10, 20, "Driver1"))  # Driver at (10km, 20km)
+tree.insert(Point(15, 25, "Driver2"))  # Driver at (15km, 25km)
+tree.insert(Point(50, 50, "Driver3"))  # Driver far away (different quadrant)
+tree.insert(Point(12, 22, "Driver4"))  # Driver near Driver1
+tree.insert(Point(14, 24, "Driver5"))  # Driver clustered with Driver1/2
+
+# After insertions, tree looks like:
+# - Root node divided into NW, NE, SW, SE quadrants
+# - Driver1, Driver2, Driver4, Driver5 in same quadrant (clustered)
+# - Driver3 in different quadrant (far away)
+
+# ===== USER REQUESTS RIDE =====
+user_location = (12, 22)  # User at (12km, 22km)
+search_radius = 5  # Search within 5km radius
+
+# Find drivers near user location
+nearby_drivers = tree.query_range(range=(12, 22, 5, 5))
+# Range=(x_center, y_center, x_radius, y_radius)
+# Searches rectangle: (12-5 to 12+5, 22-5 to 22+5) = (7-17 km, 17-27 km)
+
+# ===== RESULTS =====
+# QuadTree found drivers within range:
+# - Driver1 (10, 20): Distance ~2.8km ✅
+# - Driver2 (15, 25): Distance ~4.2km ✅
+# - Driver4 (12, 22): Distance ~0km (exact location) ✅
+# - Driver5 (14, 24): Distance ~2.8km ✅
+# - Driver3 (50, 50): NOT searched (different quadrant, early exit) ❌
+
+# ============================================================================
+# COMPLEXITY COMPARISON
+# ============================================================================
+# Linear Search (naive approach):
+# - Search ALL drivers: O(n) = O(1,000,000) for 1M drivers
+# - Time: ~100ms for 1 million drivers (too slow!)
+#
+# QuadTree Search:
+# - Search only relevant quadrant: O(log n) = O(log 1,000,000) ≈ O(20)
+# - Time: <1ms even for millions of drivers
+# - Speedup: 100x faster! 🚀
+
+# ============================================================================
+# REAL-WORLD FLOW (UBER RIDE REQUEST)
+# ============================================================================
+# 1. User opens app at location (12.9716° N, 77.5946° E)  [Bangalore]
+# 2. App sends request to server with user location
+# 3. Server queries QuadTree: tree.query_range(user_location, radius=2km)
+# 4. QuadTree returns nearby drivers (e.g., 5 drivers within 2km)
+# 5. Server calculates ETA for each driver (distance / speed)
+# 6. Server sends top 3 drivers to user's app
+# 7. User sees: "Driver arriving in 3 minutes" (real-time matching)
+#
+# All in <100ms! (Fast enough for real-time experience)
 ```
 
 ## 📈 12. Trade-offs:

@@ -292,36 +292,198 @@ base62_encode(1000000) = "eMJc"
 
 **Key Generation Service (Range-based):**
 
+**What is Zookeeper? (Beginner Explanation)**
+
+Zookeeper ek **Traffic Controller** hai distributed systems ke liye. Jaise airport mein Air Traffic Controller planes ko runway assign karta hai (Runway 1 to Flight A, Runway 2 to Flight B), waise Zookeeper different servers ko ID ranges assign karta hai (taaki collision na ho).
+
+**Core Functions:**
+1. **Coordination:** Multiple servers ko organize kare (who does what)
+2. **Configuration:** Settings centrally store (all servers read from one place)
+3. **Leadership Election:** Decide kaun leader hai (if master crashes, elect new)
+4. **Distributed Locking:** Ensure only one server edits data at a time
+
+**For TinyURL:** Zookeeper assigns non-overlapping ID ranges to each KGS server (no duplicate IDs possible).
+
 ```
-ZOOKEEPER COORDINATION:
+ZOOKEEPER COORDINATION (Detailed):
 
-+------------------+
-| Zookeeper        |
-| (Range Manager)  |
-+------------------+
-  |
-  | Assign ranges
-  v
-+------------------+------------------+------------------+
-| KGS Server-1     | KGS Server-2     | KGS Server-3     |
-| Range: 1-1M      | Range: 1M-2M     | Range: 2M-3M     |
-| Current: 500K    | Current: 1.5M    | Current: 2.2M    |
-+------------------+------------------+------------------+
-
-Flow:
-1. KGS Server-1 starts → Request range from Zookeeper
-2. Zookeeper assigns: 1 to 1,000,000
-3. KGS Server-1 pre-generates keys: base62(1), base62(2), ..., base62(1M)
-4. Store in memory queue (fast access)
-5. API Server requests key → KGS returns "b" (ID=1)
-6. When 80% consumed (800K used) → Request new range from Zookeeper
-7. Zookeeper assigns: 3M to 4M (next available)
-
-Benefits:
-- No collisions (each server has unique range)
-- Fast (pre-generated, no computation)
-- Scalable (add more KGS servers)
++---------------------------+
+|       Zookeeper           |
+|    (Range Manager)        |
+|                           |
+| Stored Data:              |
+| /ranges/allocated         |
+|   - 1 to 1M: Server-1     |
+|   - 1M to 2M: Server-2    |
+|   - 2M to 3M: Server-3    |
+| /ranges/next_available    |
+|   - 3M (next free range)  |
++---------------------------+
+        |       |       |
+     (1)|    (2)|    (3)| Assign non-overlapping ranges
+        v       v       v
++----------+----------+----------+
+| KGS      | KGS      | KGS      |
+| Server-1 | Server-2 | Server-3 |
+|          |          |          |
+| Range:   | Range:   | Range:   |
+| 1-1M     | 1M-2M    | 2M-3M    |
+|          |          |          |
+| Queue:   | Queue:   | Queue:   |
+| [b,c,d,  | [eMJc,   | [q5Kp,   |
+|  ...900K | ...800K  | ...1M    |
+|  keys]   | keys]    | keys]    |
+|          |          |          |
+| Current: | Current: | Current: |
+| 500K     | 1.5M     | 2.2M     |
++----------+----------+----------+
+     |          |          |
+     v          v          v
++----------------------------------+
+|     API Servers (Consumers)      |
+|  Request key from any KGS server |
++----------------------------------+
 ```
+
+**Step-by-Step Flow (Server Startup):**
+
+```
+STEP 1: KGS Server-1 Starts
+        |
+        v
+[Connect to Zookeeper]
+Request: "Give me an ID range"
+        |
+        v
+[Zookeeper Checks]
+/ranges/next_available = 1 (start from 1)
+        |
+        v
+[Zookeeper Assigns]
+Range: 1 to 1,000,000
+Update: /ranges/allocated → "1-1M: Server-1"
+Update: /ranges/next_available → 1,000,001
+        |
+        v
+[KGS Server-1 Receives]
+Range: 1 to 1M
+        |
+        v
+[Pre-Generate Keys]
+for id in range(1, 1000001):
+    key = base62_encode(id)  # "b", "c", "d", ...
+    memory_queue.push(key)   # Store in memory
+        |
+        v
+[Ready to Serve]
+Queue has 1M pre-generated keys
+Serving time: O(1) (just pop from queue)
+
+
+STEP 2: API Server Requests Key
+        |
+        v
+[API → KGS Server-1]
+Request: "Give me a unique key"
+        |
+        v
+[KGS Pops from Queue]
+key = memory_queue.pop()  # "b" (first key)
+current_position = 1
+        |
+        v
+[Return to API]
+Response: {"key": "b"}
+        |
+        v
+[API Creates Short URL]
+Short URL: tiny.url/b
+
+
+STEP 3: Range Exhaustion Check
+        |
+        v
+[KGS Monitors Usage]
+Used: 800,000 / 1,000,000 (80%)
+        |
+        v
+[Trigger: Request New Range]
+When 80% consumed (safety buffer)
+        |
+        v
+[Request to Zookeeper]
+"I'm running low, give me next range"
+        |
+        v
+[Zookeeper Assigns]
+New Range: 3M to 4M (next available)
+Update allocated ranges
+        |
+        v
+[KGS Pre-Generates]
+Pre-generate 1M more keys
+Add to queue (parallel to serving current range)
+        |
+        v
+[Seamless Continuation]
+No downtime, old range exhausts → new range ready
+```
+
+**Crash Recovery (What if KGS Server Dies?):**
+
+```
+Scenario: KGS Server-1 crashes at position 500K (used 500K, unused 500K)
+
+Problem: Unused IDs (500K to 1M) are LOST (in memory, not persisted)
+
+Solution 1: WASTAGE (Simple)
+- Zookeeper doesn't reassign lost range
+- 500K IDs wasted (acceptable - 62^7 = 3.5T total capacity)
+- New KGS server gets fresh range (3M-4M)
+
+Solution 2: RECOVERY (Complex)
+- Periodic checkpoints to disk (every 100K IDs)
+- On restart, read checkpoint (500K), resume from there
+- Minimal wastage (only since last checkpoint)
+
+Production (Bitly): Use Solution 1 (wastage acceptable, simplicity wins)
+
+Math: 1M IDs wasted per crash
+      62^7 total capacity = 3.5 trillion
+      Can afford 3.5 million crashes (unrealistic)
+```
+
+**Why Zookeeper vs Database?**
+
+| Feature | Zookeeper | Database (PostgreSQL) |
+|---------|-----------|----------------------|
+| **Latency** | <10ms | 50-100ms |
+| **Consistency** | Strong (consensus) | Depends on isolation level |
+| **Coordination** | Built-in (leader election) | Complex to implement |
+| **Failure Detection** | Automatic (heartbeat) | Manual (health checks) |
+| **Atomic Operations** | Yes (CAS - Compare-And-Swap) | Yes (Transactions) |
+| **Use Case** | Distributed coordination | Data persistence |
+
+**For KGS:** Zookeeper better (coordination is primary need, data is just ranges)
+
+**Benefits:**
+- **No Collisions:** Ranges non-overlapping (Server-1: 1-1M, Server-2: 1M-2M, never overlap)
+- **Fast:** Pre-generated (no computation on request)
+- **Scalable:** Add more KGS servers (Zookeeper assigns new ranges)
+- **Fault Tolerant:** One KGS down, others continue (Zookeeper tracks all)
+
+**Interview Tip:**
+
+Interviewer: "KGS server crash ho gaya, kya hoga?"
+
+Answer: "KGS crash → Unused IDs lost (in-memory queue). But:
+1. No data corruption (other KGS servers unaffected)
+2. New KGS starts → Gets fresh range from Zookeeper
+3. Wasted IDs acceptable (62^7 = 3.5T capacity)
+4. Zookeeper ensures no overlap (new range always unique)
+5. High availability: Multiple KGS servers running (load balanced)"
+
+---
 
 **Database Schema:**
 
@@ -412,78 +574,296 @@ END
 **Code (Simplified TinyURL Service):**
 
 ```python
-import hashlib
-import redis
-from typing import Optional
+import hashlib  # MD5 hash for URL deduplication (check if URL already shortened)
+import redis  # Redis for caching (fast lookup, TTL support)
+from typing import Optional  # Optional type hint (return value can be None)
 
 class TinyURL:
     def __init__(self):
-        self.redis = redis.Redis(host='localhost', port=6379)
+        # Redis connection for caching (in-memory, <1ms latency vs 50ms DB)
+        self.redis = redis.Redis(host='localhost', port=6379, decode_responses=True)
+        
+        # Base62 character set: [a-z, A-Z, 0-9] = 62 total characters
+        # Order: a=0, b=1, ..., z=25, A=26, ..., Z=51, 0=52, ..., 9=61
+        # Why 62? Compact (7 chars = 62^7 = 3.5T URLs), URL-safe (no special chars)
         self.base62_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        self.counter = 1000000  # Start from 1M (for demo)
+        
+        # Counter for auto-increment IDs (start from 1M for demo readability)
+        # Production: KGS (Key Generation Service) provides IDs from distributed ranges
+        # Thread safety: In production, use atomic Redis INCR or database AUTO_INCREMENT
+        self.counter = 1000000
     
     def base62_encode(self, num: int) -> str:
-        """Convert number to base62 string"""
+        """
+        Convert decimal number to Base62 string (like decimal to binary conversion)
+        Example: 125 → "cb" (c=2, b=1 in base62)
+        Logic: Repeatedly divide by 62, collect remainders bottom-up
+        """
+        # Edge case: 0 maps to first character 'a'
         if num == 0:
-            return self.base62_chars[0]
+            return self.base62_chars[0]  # Return 'a'
         
-        result = ""
+        result = ""  # Build result string character by character
+        
+        # Keep dividing by 62 until number becomes 0
         while num > 0:
-            remainder = num % 62
-            result = self.base62_chars[remainder] + result
-            num = num // 62
+            # Modulo 62 gives digit in base62 (0-61 maps to a-9)
+            remainder = num % 62  # e.g., 125 % 62 = 1
+            
+            # Prepend character (read bottom-up like decimal to binary)
+            # Example: 125 → [1, 2] remainders → 'b' + 'c' = "cb" (reversed)
+            result = self.base62_chars[remainder] + result  
+            
+            # Integer division (floor division) to get quotient for next iteration
+            num = num // 62  # e.g., 125 // 62 = 2, then 2 // 62 = 0 (stop)
         
-        return result
+        return result  # Return base62 string (e.g., "cb" for ID=125)
     
     def shorten(self, long_url: str) -> str:
-        """Shorten a long URL"""
-        # Check if already shortened
-        url_hash = hashlib.md5(long_url.encode()).hexdigest()
+        """
+        Shorten a long URL to short code
+        Flow: Check cache → Generate ID → Base62 encode → Store → Return
+        """
+        # STEP 1: Deduplication check (agar same URL pehle shortened hai toh wapas use karo)
+        # MD5 hash: 128-bit hash of URL (deterministic - same URL = same hash)
+        # Why MD5? Fast (not for security here), consistent hash for deduplication
+        url_hash = hashlib.md5(long_url.encode()).hexdigest()  # e.g., "5d41402abc4b2a76b9719d911017c592"
+        
+        # Redis key pattern: "url_hash:{hash_value}" → short_code
+        # Check if this URL was already shortened before
         cached = self.redis.get(f"url_hash:{url_hash}")
         
         if cached:
-            return f"https://tiny.url/{cached.decode()}"
+            # URL already shortened, return existing short URL (avoid duplicate entries)
+            # No need to decode since decode_responses=True in Redis connection
+            return f"https://tiny.url/{cached}"
         
-        # Generate short code
-        self.counter += 1
-        short_code = self.base62_encode(self.counter)
+        # STEP 2: Generate unique short code
+        # Increment counter (in production: KGS provides pre-generated IDs)
+        # Thread safety concern: Multiple servers → race condition
+        # Solution: Redis INCR (atomic) or database AUTO_INCREMENT
+        self.counter += 1  # e.g., 1000000 → 1000001
         
-        # Store mapping (in production: database)
-        self.redis.setex(f"short:{short_code}", 86400, long_url)  # 24h TTL
+        # Convert numeric ID to Base62 string (compact representation)
+        short_code = self.base62_encode(self.counter)  # e.g., 1000001 → "eMJd"
+        
+        # STEP 3: Store bidirectional mapping in Redis
+        # Mapping 1: short_code → long_url (for redirect flow)
+        # TTL = 86400 seconds (24 hours) - auto-expire temporary links
+        # Production: Store in database (PostgreSQL) + cache in Redis
+        self.redis.setex(f"short:{short_code}", 86400, long_url)
+        
+        # Mapping 2: url_hash → short_code (for deduplication check)
+        # Prevents same URL from getting multiple short codes
         self.redis.setex(f"url_hash:{url_hash}", 86400, short_code)
         
-        return f"https://tiny.url/{short_code}"
+        # Return complete short URL
+        return f"https://tiny.url/{short_code}"  # e.g., "https://tiny.url/eMJd"
     
     def redirect(self, short_code: str) -> Optional[str]:
-        """Get original URL from short code"""
-        # Check cache
+        """
+        Get original URL from short code (redirect flow)
+        Flow: Cache lookup → Return original URL → Log analytics
+        Returns None if short_code not found (404 case)
+        """
+        # STEP 1: Cache lookup (Redis key pattern: "short:{code}")
+        # 99% cache hit rate for popular URLs (no DB query needed)
         long_url = self.redis.get(f"short:{short_code}")
         
         if long_url:
-            # Log analytics (async in production)
+            # Cache HIT: Original URL found
+            # Log click asynchronously (don't block redirect)
+            # Production: Publish to Kafka, separate analytics service processes
             self._log_click(short_code)
-            return long_url.decode()
+            
+            # Return original URL (no need to decode with decode_responses=True)
+            return long_url  # e.g., "https://example.com/very/long/url"
         
-        return None  # Not found
+        # Cache MISS: URL not found (expired OR invalid short_code)
+        # Production: Query database as fallback, update cache if found
+        return None  # Return None → API returns 404 Not Found
     
     def _log_click(self, short_code: str):
-        """Log click for analytics"""
+        """
+        Log click event for analytics (async in production)
+        Tracks: click count, timestamp, IP, geography, referrer
+        """
+        # Redis INCR: Atomic increment (thread-safe counter)
+        # Key pattern: "clicks:{short_code}" → total click count
+        # Production: Also log to Cassandra (time-series DB) for detailed analytics
         self.redis.incr(f"clicks:{short_code}")
+        
+        # Production additional logging (not shown here):
+        # - Timestamp: datetime.now()
+        # - IP address: request.remote_addr
+        # - User agent: request.headers.get('User-Agent')
+        # - Referrer: request.headers.get('Referer')
+        # - Geography: IP geolocation lookup
+        # Store in Cassandra partition by (short_code, date) for fast queries
 
-# Usage
+# ============ USAGE EXAMPLES ============
+
 service = TinyURL()
 
-# Shorten URL
-long_url = "https://example.com/very/long/url/with/many/parameters"
+# Example 1: Shorten a long URL (e.g., Amazon product link)
+long_url = "https://example.com/very/long/url/with/many/parameters?utm_source=twitter&utm_campaign=sale"
 short_url = service.shorten(long_url)
-print(f"Short URL: {short_url}")  # https://tiny.url/eMJd
+print(f"✅ Short URL created: {short_url}")  
+# Output: ✅ Short URL created: https://tiny.url/eMJd
+# Space saved: 90 chars → 25 chars (72% reduction)
 
-# Redirect
-original = service.redirect("eMJd")
-print(f"Original URL: {original}")  # https://example.com/...
+# Example 2: Shorten same URL again (deduplication test)
+short_url_2 = service.shorten(long_url)  # Same URL as above
+print(f"🔄 Duplicate check: {short_url_2}")  
+# Output: 🔄 Duplicate check: https://tiny.url/eMJd (same short code)
+# No new entry created, cache hit on url_hash
+
+# Example 3: Redirect user (when they click short URL)
+clicked_code = "eMJd"  # Extract from URL path
+original_url = service.redirect(clicked_code)
+if original_url:
+    print(f"📍 Redirecting to: {original_url}")
+    # HTTP 302 redirect to original_url
+    # Analytics logged (click count incremented)
+else:
+    print(f"❌ Short URL not found (404)")
+    # Invalid or expired short code
+
+# Example 4: Check analytics
+click_count = service.redis.get(f"clicks:eMJd")
+print(f"📊 Total clicks: {click_count}")  
+# Output: 📊 Total clicks: 1 (from example 3)
 ```
 
 ---
+
+### **MD5 Collision Handling (Why Production Avoids It):**
+
+**Problem Statement:**  
+Agar hum MD5 hash ke first 7 characters use karte hain as short code, toh collision possible hai (2 different URLs → same short code).
+
+**Birthday Paradox (Math Behind Collisions):**
+
+```
+MD5 hash = 128 bits = 2^128 possible hashes
+First 7 chars (base62) = 62^7 = 3.5 trillion possibilities
+
+Birthday Paradox: Collision probability
+P(collision) ≈ n^2 / (2 × possible_values)
+
+For n = 1 million URLs, 62^7 possibilities:
+P(collision) = (10^6)^2 / (2 × 3.5 × 10^12)
+             = 10^12 / (7 × 10^12)
+             = 14.3% (HIGH RISK!)
+
+For n = 10K URLs:
+P(collision) = (10^4)^2 / (7 × 10^12)
+             = 10^8 / (7 × 10^12)
+             = 0.0014% (LOW RISK)
+
+Collision happens at √n (square root):
+√(3.5 × 10^12) ≈ 1.87 million URLs
+```
+
+**ASCII Diagram (Collision Scenario):**
+
+```
+URL 1: https://example.com/page1
+    ↓ MD5 hash
+"a1b2c3d4e5f6g7h8..."
+    ↓ Take first 7 chars
+Short code: "a1b2c3d"
+
+URL 2: https://different.com/page2
+    ↓ MD5 hash  
+"a1b2c3d9x8y7z6w5..."  (different hash)
+    ↓ Take first 7 chars
+Short code: "a1b2c3d"  ❌ COLLISION!
+
+Result: Two URLs → Same short code → Wrong redirect
+User clicks tiny.url/a1b2c3d → Which URL to return?
+```
+
+**Detection \u0026 Regeneration Strategy:**
+
+```python
+def generate_short_code_with_collision_handling(long_url: str, attempt: int = 0) -> str:
+    """
+    Generate short code with MD5, handle collisions by regeneration
+    attempt: Retry counter (0, 1, 2, ...)
+    """
+    # Generate MD5 hash with salt (attempt number) to vary hash
+    # Adding attempt ensures different hash on each retry
+    salted_url = f"{long_url}:{attempt}"  # e.g., "http://example.com:0", "http://example.com:1"
+    hash_value = hashlib.md5(salted_url.encode()).hexdigest()
+    
+    # Take first (7 + attempt) characters (longer code on collision)
+    # First attempt: 7 chars, Second: 8 chars, Third: 9 chars, etc.
+    code_length = 7 + attempt
+    short_code = hash_value[:code_length]
+    
+    # Check if short_code already exists in database
+    if database.exists(short_code):
+        # COLLISION DETECTED!
+        # Retry with next attempt (longer hash)
+        if attempt < 5:  # Max 5 retries (avoid infinite loop)
+            return generate_short_code_with_collision_handling(long_url, attempt + 1)
+        else:
+            # After 5 retries, fallback to guaranteed unique method
+            # Use auto-increment ID + Base62 (collision-free)
+            unique_id = database.get_next_id()
+            return base62_encode(unique_id)
+    
+    # No collision, return short code
+    return short_code
+
+# Example flow:
+# Attempt 0: "a1b2c3d" (7 chars) → Collision → Retry
+# Attempt 1: "a1b2c3d4" (8 chars) → Collision → Retry
+# Attempt 2: "a1b2c3d4e" (9 chars) → Available → Use this
+```
+
+**Why Production Avoids MD5 for Primary Keys:**
+
+1. **Collision Risk:** At 1.87M URLs, collision probability becomes significant (birthday paradox)
+2. **No Guarantee:** Hash functions don't guarantee uniqueness (pigeonhole principle - infinite URLs → finite hash space)
+3. **Detection Overhead:** Checking collision on every insert = extra DB query (latency)
+4. **Regeneration Cost:** Retry logic complex, multiple DB queries per collision
+5. **Unpredictable Length:** Collision → longer code → inconsistent UX (7 vs 9 chars)
+
+**Production Best Practice:**
+
+```
+✅ RECOMMENDED: Auto-increment ID + Base62 encoding
+   - Guaranteed unique (ID unique by definition)
+   - Fast (no collision check needed)
+   - Predictable length (7 chars consistent)
+   - Sequential (can be security issue, but solvable with KGS random ranges)
+
+✅ RECOMMENDED: Key Generation Service (KGS)
+   - Pre-generated unique keys
+   - Distributed ranges (Server1: 1-1M, Server2: 1M-2M)
+   - No collision (ranges non-overlapping)
+   - Fast (no computation, just pop from queue)
+
+❌ AVOID: MD5/SHA hash first N characters
+   - Collision possible (birthday paradox)
+   - Detection overhead (DB query per insert)
+   - Unpredictable (regeneration logic complex)
+```
+
+**Real-World Example:**
+
+**Bitly's Evolution:**
+- **2008-2010 (Early days):** MD5 hash with collision detection → Slow, complex
+- **2010-2015:** Switched to auto-increment ID + Base62 → Fast, simple, no collisions
+- **2015-Present:** KGS with Zookeeper → Distributed, scalable, 100K req/sec
+
+**Lesson:** Start simple (Auto-increment + Base62), scale to KGS when needed. Avoid hash-based approaches for production URL shorteners.
+
+---
+
+
 
 ## 📈 12. Trade-offs:
 
@@ -513,6 +893,161 @@ print(f"Original URL: {original}")  # https://example.com/...
   - **Why wrong:** Browser caches 301 → Analytics not tracked (subsequent clicks don't hit server)
   - **What happens:** Click count inaccurate, can't update destination URL
   - **Fix:** Use 302 (temporary) for analytics, 301 only for permanent URLs
+
+---
+
+### **HTTP 301 vs 302: Detailed Comparison for URL Shorteners**
+
+**Understanding Redirect Types:**
+
+HTTP redirects tell the browser "this URL has moved, go here instead." But there are 2 types with very different behaviors:
+
+| Feature | HTTP 301 (Permanent) | HTTP 302 (Temporary) |
+|---------|---------------------|---------------------|
+| **Meaning** | URL moved forever (never coming back) | URL moved temporarily (might change later) |
+| **Browser Caching** | ✅ YES - Browser remembers redirect | ❌ NO - Browser asks server every time |
+| **Server Hit** | First time only (then cached) | Every click (no cache) |
+| **Analytics** | ❌ BREAKS - Subsequent clicks invisible | ✅ WORKS - Every click logged |
+| **Update Destination** | ❌ IMPOSSIBLE - Cached in browser | ✅ POSSIBLE - Server controls |
+| **Performance** | Faster (no server request after first) | Slower (server round-trip every time) |
+| **SEO Impact** | Passes link juice to new URL | Doesn't pass link juice |
+| **Use Case** | Domain migration, permanent moves | Short URLs, A/B testing, tracking |
+| **HTTP Header** | `Status: 301 Moved Permanently` | `Status: 302 Found` |
+
+**Flow Comparison (ASCII Diagram):**
+
+```
+HTTP 301 (Permanent):
+
+First Click:
+[User] → [tiny.url/abc] → [Server: 301 → example.com] → [Browser: Cache this]
+                                                            ↓
+                                                    [Browser Cache]
+                                                    tiny.url/abc → example.com
+
+Second Click (NO SERVER HIT):
+[User] → [tiny.url/abc] → [Browser Cache: Go directly to example.com] → [example.com]
+                           ^
+                           |
+                      Server NOT contacted
+                      Analytics NOT logged ❌
+
+
+HTTP 302 (Temporary):
+
+First Click:
+[User] → [tiny.url/abc] → [Server: 302 → example.com] → [Browser: Don't cache]
+                                 |
+                                 v
+                          [Log Analytics ✅]
+
+Second Click (SERVER HIT EVERY TIME):
+[User] → [tiny.url/abc] → [Server: 302 → example.com] → [Browser loads example.com]
+                                 |
+                                 v
+                          [Log Analytics ✅]
+```
+
+**Real-World Scenario:**
+
+**Scenario 1: Marketing Campaign (302 Required)**
+```
+Marketing team: "Share this link: tiny.url/sale2024"
+Week 1: Points to: example.com/winter-sale
+Week 2: UPDATE to: example.com/summer-sale (destination changed)
+
+With 301: ❌ Users who clicked Week 1 still see winter-sale (cached)
+With 302: ✅ All users see current destination (summer-sale)
+```
+
+**Scenario 2: Click Analytics (302 Required)**
+```
+Marketer needs: "How many people clicked the link?"
+
+With 301: ❌ First click logged, repeat clicks invisible (browser cache)
+              10 actual clicks → Analytics show only 1 click
+With 302: ✅ Every click logged (server hit every time)
+              10 actual clicks → Analytics show 10 clicks
+```
+
+**Scenario 3: Permanent Website Move (301 Appropriate)**
+```
+Company changed domain: oldsite.com → newsite.com
+Redirect all old links permanently
+
+With 301: ✅ SEO preserved (Google shows newsite.com)
+              Performance good (browser caches)
+With 302: ❌ SEO not transferred (Google confused)
+              Performance poor (server hit every time)
+```
+
+**Best Practice for TinyURL:**
+
+```python
+def redirect_url(short_code: str, track_analytics: bool = True):
+    """
+    Redirect user to original URL
+    track_analytics: If True, use 302 (analytics), else 301 (performance)
+    """
+    long_url = get_url_from_database(short_code)
+    
+    if track_analytics:
+        # HTTP 302: Temporary redirect (analytics tracked)
+        # Browser won't cache, every click hits server
+        return redirect(long_url, code=302)
+    else:
+        # HTTP 301: Permanent redirect (performance)
+        # Browser caches, no analytics on repeat clicks
+        # Use only for permanent redirects (domain changes)
+        return redirect(long_url, code=301)
+
+# Default: Always use 302 for URL shorteners (analytics critical)
+redirect_url("abc123", track_analytics=True)  # 302
+```
+
+**Modern Approach (HTTP 307/308):**
+
+```
+HTTP 307: Temporary Redirect (like 302 but preserves HTTP method)
+HTTP 308: Permanent Redirect (like 301 but preserves HTTP method)
+
+For POST requests:
+302/301 might change POST → GET (browser behavior)
+307/308 guarantee method preservation
+
+URL shorteners: Use 302/307 (both work, 302 more common)
+```
+
+**Performance Impact:**
+
+```
+301 (First click): 100ms (server round-trip)
+301 (Repeat clicks): 0ms (browser cache - instant)
+
+302 (Every click): 100ms (server round-trip)
+
+At 1000 users, 10 clicks each:
+301: 1000 server requests (first click only)
+302: 10,000 server requests (every click)
+
+But: 302 gets analytics for all 10,000 clicks
+301 gets analytics for only 1,000 clicks (90% data loss!)
+```
+
+**Interview Tip:**
+
+Interviewer: "301 ya 302 use karoge TinyURL mein?"
+
+Answer: "302 (Temporary) because:
+1. Analytics critical hai - har click log karna zaroori
+2. Destination update kar sakte hain (marketing campaigns)
+3. A/B testing possible (change destination without users noticing)
+4. Performance impact minimal (100ms acceptable)
+5. 301 se analytics break ho jaati hai (browser caching)
+
+Lekin agar permanent redirect hai (domain change) toh 301 use karo (SEO benefits)."
+
+---
 
 - **Mistake:** No expiry for temporary links
   - **Why wrong:** Sensitive links (password reset) active forever → Security risk

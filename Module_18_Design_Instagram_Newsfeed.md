@@ -415,80 +415,297 @@ END
 **Code (Simplified Feed Service):**
 
 ```python
+# Import typing for type hints (helps with code clarity and IDE autocomplete)
 from typing import List
+
+# Import redis for feed caching and storage (fast in-memory data structure store)
+# Redis used for: Sorted sets (feed with timestamps), fast retrieval (<10ms)
 import redis
+
+# Import time for timestamp generation (Unix timestamp for post ordering)
 import time
 
 class FeedService:
     def __init__(self):
+        """
+        Initialize Feed Service
+        Sets up Redis connection and fanout threshold
+        """
+        # Redis client for feed storage and caching
+        # Why Redis? Fast sorted sets (ZADD, ZREVRANGE), in-memory (<10ms vs 500ms DB)
+        # Production: Use Redis Cluster for high availability (multiple nodes)
         self.redis = redis.Redis(host='localhost', port=6379)
+        
+        # Fanout threshold: Celebrity vs Normal user decision boundary
+        # 100K followers = 100,000 × 1ms insert = 100 seconds fanout time
+        # Above this: Too slow for Push (use Pull instead)
+        # Below this: Acceptable for Push (pre-compute feeds)
         self.fanout_threshold = 100000  # 100K followers
     
     def create_post(self, user_id: str, post_id: str):
-        """Handle new post creation"""
-        # Get followers
+        """
+        Handle new post creation and fanout to followers
+        Flow: Get followers → Check count → Push (normal) or Pull (celebrity)
+        
+        user_id: Who created the post (e.g., "alice")
+        post_id: Unique post identifier (e.g., "post123")
+        """
+        # STEP 1: Fetch followers list from social graph database
+        # Production: Query Neo4j/PostgreSQL graph table
+        # Query: SELECT follower_id FROM followers WHERE user_id = ?
+        # Returns: List of follower IDs (e.g., ["bob", "charlie", ...])
         followers = self.get_followers(user_id)
         
-        # Decide fanout strategy
+        # STEP 2: Decide fanout strategy based on follower count
+        # Decision logic: Celebrity (>100K) vs Normal user (<100K)
         if len(followers) > self.fanout_threshold:
-            # Celebrity: Fanout on Read (Pull)
+            # ===== CELEBRITY PATH (Fanout on Read - PULL) =====
+            # Problem: 1M followers × 1ms = 1000 seconds (16 minutes) to fanout
+            # Solution: Store post in user's timeline only, followers fetch on demand
+            # When follower opens app: Query celebrity's timeline, pull recent posts
+            # Benefit: Fast write (instant), slow read (acceptable for pull)
             self._store_in_timeline(user_id, post_id)
         else:
-            # Normal user: Fanout on Write (Push)
+            # ===== NORMAL USER PATH (Fanout on Write - PUSH) =====
+            # Acceptable: 10K followers × 1ms = 10 seconds (manageable)
+            # Strategy: Pre-compute feeds (push to all followers' feeds)
+            # When follower opens app: Feed already ready (<10ms retrieval)
+            # Benefit: Fast read (<100ms), slow write (10 sec, but async - user doesn't wait)
             self._fanout_to_followers(followers, post_id)
     
     def _fanout_to_followers(self, followers: List[str], post_id: str):
-        """Push post to all followers' feeds"""
-        # Batch processing (1000 followers per batch)
+        """
+        Push post to all followers' feeds (Fanout on Write)
+        Uses batch processing for parallel execution
+        
+        followers: List of follower user IDs (e.g., ["bob", "charlie", ...])
+        post_id: Post to insert into feeds (e.g., "post123")
+        """
+        # Batch size: Process 1000 followers at a time
+        # Why 1000? Balance between parallelism and memory usage
+        # Too small (100): Too many batches, overhead increases
+        # Too large (10K): High memory usage, slower per batch
+        # 1000 = sweet spot for most systems
         batch_size = 1000
+        
+        # Process followers in batches (parallel execution in production)
+        # range(start, stop, step): e.g., range(0, 10000, 1000) → [0, 1000, 2000, ...]
         for i in range(0, len(followers), batch_size):
+            # Extract batch: followers[0:1000], followers[1000:2000], etc.
+            # Python slice: list[start:end] (end is exclusive)
             batch = followers[i:i+batch_size]
             
-            # Parallel processing (simplified - use Celery/Kafka in production)
+            # Production: Use Celery/Kafka for parallel processing
+            # Celery: Distributed task queue (async workers)
+            # Kafka: Message queue (workers consume batches in parallel)
+            # Here: Simplified synchronous processing for demonstration
+            # In production: 10 workers process 10 batches simultaneously
+            # Time: 10K followers / 10 workers = 1K per worker × 1ms = 1 second
             for follower_id in batch:
+                # Insert post into each follower's feed
+                # This is the core "fanout" operation (1 post → N feeds)
                 self._insert_into_feed(follower_id, post_id)
     
     def _insert_into_feed(self, user_id: str, post_id: str):
-        """Insert post into user's feed"""
-        # Redis sorted set (score = timestamp)
+        """
+        Insert post into user's feed (Redis sorted set)
+        Feed structure: Sorted by timestamp (reverse chronological)
+        
+        user_id: Feed owner (e.g., "bob")
+        post_id: Post to add (e.g., "post123")
+        """
+        # Generate timestamp (score for sorted set)
+        # time.time() = Unix timestamp (seconds since Jan 1, 1970)
+        # Example: 1640000000.123456 (float with microseconds)
+        # Used as score in sorted set (higher timestamp = newer post = higher rank)
         timestamp = time.time()
+        
+        # Redis ZADD: Add member to sorted set with score
+        # Command: ZADD key score member
+        # Key: "feed:bob" (user's feed identifier)
+        # Score: timestamp (1640000000.123456)
+        # Member: post_id ("post123")
+        # Result: Sorted set with posts ordered by timestamp
+        # Why sorted set? Automatic sorting, O(log N) insert, range queries
         self.redis.zadd(f"feed:{user_id}", {post_id: timestamp})
         
-        # Keep only last 1000 posts
+        # Keep only last 1000 posts per user (memory management)
+        # ZREMRANGEBYRANK: Remove members by rank range
+        # Ranks: 0 (lowest score/oldest) to -1 (highest score/newest)
+        # Keep: Rank -1000 to -1 (last 1000 posts)
+        # Remove: Rank 0 to -1001 (all posts except last 1000)
+        # Why 1000? Most users scroll <100 posts, 1000 = safety buffer
+        # Storage: 1000 posts × 16 bytes (UUID) = 16 KB per user
+        # For 1B users: 16 TB (affordable)
         self.redis.zremrangebyrank(f"feed:{user_id}", 0, -1001)
     
     def get_feed(self, user_id: str, limit: int = 100) -> List[str]:
-        """Get user's feed"""
-        # Check cache
+        """
+        Get user's feed (cached or from database)
+        Flow: Check Redis cache → Return if hit → Fetch from DB if miss
+        
+        user_id: Feed owner (e.g., "bob")
+        limit: Number of posts to return (default 100)
+        Returns: List of post IDs in reverse chronological order
+        """
+        # STEP 1: Check Redis cache first (99% cache hit rate in production)
+        # ZREVRANGE: Get members in reverse order (newest first)
+        # Command: ZREVRANGE key start stop
+        # Start: 0 (highest rank/newest post)
+        # Stop: limit-1 (e.g., 99 for 100 posts)
+        # Returns: List of post_ids in bytes (e.g., [b'post123', b'post122', ...])
+        # Why reverse? Show newest posts first (Instagram, Twitter standard)
         cached = self.redis.zrevrange(f"feed:{user_id}", 0, limit-1)
         
         if cached:
+            # Cache HIT: Feed found in Redis
+            # Latency: <10ms (in-memory retrieval)
+            # Decode: Convert bytes to strings (b'post123' → 'post123')
+            # List comprehension: [x.decode() for x in cached]
+            # Returns: ["post123", "post122", ...] (sorted by timestamp, newest first)
             return [post_id.decode() for post_id in cached]
         
-        # Cache miss: Fetch from DB (Cassandra in production)
-        # For celebrities: Fanout on Read (fetch from following users)
+        # Cache MISS: Feed not in Redis (rare - 1% of requests)
+        # Reasons: User inactive (cache expired), new user, cache cleared
+        # Fallback: Fetch from database (Cassandra in production)
+        # For celebrities: This triggers Fanout on Read (pull from following users)
+        # Latency: 500ms (database query vs 10ms cache)
         return self._fetch_from_db(user_id, limit)
     
     def _fetch_from_db(self, user_id: str, limit: int) -> List[str]:
-        """Fetch feed from database (simplified)"""
-        # In production: Query Cassandra
-        # SELECT * FROM user_feed WHERE user_id = ? LIMIT ?
-        return []  # Mock
+        """
+        Fetch feed from database (Cassandra in production)
+        This is where Fanout on Read happens for celebrities
+        
+        user_id: Feed owner
+        limit: Number of posts to fetch
+        Returns: List of post IDs
+        """
+        # Production Cassandra query:
+        # SELECT post_id FROM user_feed 
+        # WHERE user_id = ? 
+        # ORDER BY timestamp DESC 
+        # LIMIT ?
+        # 
+        # For celebrities (Fanout on Read):
+        # 1. Get following list (e.g., 500 users)
+        # 2. Fetch recent posts from each following user
+        # 3. Merge and sort by timestamp
+        # 4. Apply ML ranking (engagement prediction)
+        # 5. Return top 100
+        # 
+        # Time: 500 users × 10ms = 5 seconds (acceptable for celebrities)
+        # Optimization: Parallel queries (10 workers × 50 users = 500ms)
+        
+        return []  # Mock implementation (empty list for demonstration)
     
     def get_followers(self, user_id: str) -> List[str]:
-        """Get user's followers (mock)"""
-        # In production: Query social graph DB
-        return [f"user{i}" for i in range(10000)]  # Mock 10K followers
+        """
+        Get user's followers from social graph database
+        Production: Query Neo4j/PostgreSQL graph table
+        
+        user_id: User whose followers to fetch
+        Returns: List of follower IDs
+        """
+        # Production query (PostgreSQL):
+        # SELECT follower_id FROM followers 
+        # WHERE user_id = ?
+        # 
+        # Or Neo4j (graph database):
+        # MATCH (u:User {id: ?})<-[:FOLLOWS]-(follower)
+        # RETURN follower.id
+        # 
+        # Result: ["bob", "charlie", "david", ...]
+        # Count determines fanout strategy (>100K → pull, <100K → push)
+        
+        # Mock: Return 10K followers for demonstration
+        # In production, this would be a real database query
+        return [f"user{i}" for i in range(10000)]  # 10K followers
 
-# Usage
+# ============ USAGE EXAMPLES ============
+
+# Initialize service
 service = FeedService()
 
-# User posts
+# Example 1: Normal user posts (10K followers - PUSH strategy)
 service.create_post(user_id="alice", post_id="post123")
+# Flow:
+# 1. Get alice's followers: 10K users
+# 2. Check: 10K < 100K → PUSH (Fanout on Write)
+# 3. Batch processing: 10 batches × 1K followers
+# 4. Insert post123 into 10K feeds (parallel workers in production)
+# 5. Time: 1 second (async, alice doesn't wait)
+# 6. Followers open app → Feed ready (<10ms Redis retrieval)
 
-# User gets feed
+# Example 2: Celebrity posts (1M followers - PULL strategy)
+# service.create_post(user_id="celebrity", post_id="post456")
+# Flow:
+# 1. Get celebrity's followers: 1M users
+# 2. Check: 1M > 100K → PULL (Fanout on Read)
+# 3. Store post456 in celebrity's timeline only
+# 4. Time: Instant (no fanout)
+# 5. Followers open app → Pull from celebrity's timeline on demand
+# 6. Time: 500ms (acceptable for pull)
+
+# Example 3: User gets feed (cached - FAST)
 feed = service.get_feed(user_id="bob", limit=100)
-print(f"Feed: {len(feed)} posts")
+print(f"Bob's feed: {len(feed)} posts")
+# Flow:
+# 1. Check Redis: "feed:bob"
+# 2. ZREVRANGE feed:bob 0 99
+# 3. Cache HIT: Return 100 post IDs
+# 4. Time: <10ms
+# Output: Bob's feed: 100 posts
+
+# Example 4: Cache miss scenario (new user - SLOW)
+# feed = service.get_feed(user_id="new_user", limit=100)
+# Flow:
+# 1. Check Redis: "feed:new_user"
+# 2. Cache MISS: Not found
+# 3. Fallback: Query Cassandra/Database
+# 4. For normal user: Fetch from user_feed table
+# 5. For celebrity follower: Fanout on Read (pull from following users)
+# 6. Time: 500ms (database query)
+
+
+# ============ PRODUCTION CONSIDERATIONS ============
+
+"""
+1. PARALLEL PROCESSING (Celery/Kafka):
+   - Current: Sequential batch processing
+   - Production: 10 workers process 10 batches simultaneously
+   - Time: 10K followers / 10 workers = 1K per worker × 1ms = 1 second
+
+2. DATABASE CHOICE:
+   - Feed storage: Cassandra (time-series optimized, petabyte scale)
+   - Post metadata: PostgreSQL (ACID, relational)
+   - Social graph: Neo4j (graph queries) or PostgreSQL (adjacency list)
+
+3. CACHING STRATEGY:
+   - Cache: Last 1000 posts per user (16 KB)
+   - TTL: 24 hours (refresh daily)
+   - Invalidation: New post → Append to cache (ZADD)
+   - Hit rate: 99% (most users see cached feed)
+
+4. ML RANKING:
+   - After fetching posts, apply ML model
+   - Features: Past likes, time spent, relationship score, recency
+   - Score = weighted sum of features
+   - Sort by score (highest first)
+   - Use TensorFlow/PyTorch for inference
+
+5. ASYNC FANOUT:
+   - User posts → Immediately return success
+   - Background workers (Celery) process fanout
+   - User doesn't wait for 10 sec fanout
+   - Better UX (instant post confirmation)
+
+6. MONITORING:
+   - Track: Fanout time, cache hit rate, feed load time
+   - Alerts: If fanout >30 sec, cache hit rate <95%
+   - Tools: Prometheus metrics, Grafana dashboards
+"""
+```
 ```
 
 ---
