@@ -1,9 +1,3 @@
-### 📄 Page 1: Introduction & Prerequisites (IMG_20251120_202734.jpg)
-
-**Header:**
-* **Course:** Udemy - DevOps Beginner to Advanced with Project Course.
-* **Date:** 6/09/25 (Future date likhi hai, shayad target date ho).
-
 **# Section 1 -> Introduction**
 
 1.  **About this Course:**
@@ -13,6 +7,8 @@
     * Agar hum DevOps use nahi karenge toh kya hoga? (If we will not use DevOps).
     * Ye asal mein kya hai, aur ye pehle kaunsi problems solve karta tha?
     * Aur aaj hamein iski zaroorat kyun hai? (Why we need it today).
+
+=============================================================
 
 **# Section 2 -> Prerequisites Info & Setup**
 
@@ -786,6 +782,8 @@ Tumhare notes ab **DevOps ke core implementation** phase mein enter kar rahe hai
 
 -----
 
+=============================================================
+
 ### 📄 Page 30: Project Setup Constraints (IMG\_20251120\_203107\_1.jpg)
 
 **\# Section 8 -\> Vprofile Project Setup (Manual & Automated)**
@@ -1175,6 +1173,10 @@ Tumhare notes bilkul sahi direction mein hain. **Docker** aur **Microservices** 
   * **Syntax:**
       * `scp filename user@remote_ip:/destination/path`
   * **Requirement:** Iske liye tumhare paas SSH access hona chahiye.
+
+
+=============================================================
+
 
 **Video 1 -\> Auto Complete (Section 12):**
 
@@ -1803,6 +1805,9 @@ Tumhare notes ab **Architecture** level par pahunch gaye hain. Yahan 3 cheezein 
 
 -----
 
+=============================================================
+
+
 ### 📄 Page 74: Maven Introduction (IMG\_20251120\_203502\_1.jpg)
 
 **\# Section 16 -\> Maven**
@@ -2091,19 +2096,7 @@ Tumhara Jenkins module strong start hua hai. Interview ke liye ye 2 baatein yaad
     * Jenkins khali dabba hai. Agar option nahi dikh raha (jaise Maven), toh 99% chance hai ki tumne uska **Plugin** install nahi kiya hai.
 
 
-**Next Step:** Ab humne Freestyle job dekh liya. Agla logical step hai **Master-Slave Architecture** (Distributed Builds) ya fir **Pipeline as Code (Jenkinsfile)**. Tumhare notes mein aage kya hai?
 
-=============================================================
-
-Hello\! CodeGuru here.
-
-Maine tumhare **Jenkins Advanced & Pipeline** wale **10 naye pages (Page 88 se 97)** ko analyze kiya hai.
-
-Ye section bohot hi exciting hai\! Ab hum "Button click" karne wale (Freestyle) method se hatkar **"Pipeline as Code" (Jenkinsfile)** ki taraf ja rahe hain. Yehi woh skill hai jo ek 10 LPA wale engineer ko 25 LPA wale engineer se alag karti hai. Hum **SonarQube (Code Quality)** aur **Nexus (Artifact Storage)** ko bhi integrate karenge.
-
-Niche maine in sabhi pages ko **step-by-step Hinglish** mein convert kiya hai.
-
------
 
 ### 📄 Page 88: Job Configuration Details (IMG\_20251120\_203610.jpg)
 
@@ -3152,9 +3145,6 @@ You have now covered the **Architecture** (Roles) and **Integration** (AWS) phas
 
 
 
-### **Topic 1: AWS VPC & Networking Basics**
-*(Source: IMG_20251120_203956_1.jpg & IMG_20251120_204003_1.jpg)*
-
 **Section 21: AWS Part 2**
 **Video 1: VPC Introduction**
 * **Definition:** VPC ka full form **Virtual Private Cloud** hai.
@@ -3275,10 +3265,6 @@ You are now bridging the gap between System Admin (Linux/Networking) and Cloud E
 =============================================================
 
 
-
-### **Part 1: AWS CI/CD Services**
-*(Source: IMG_20251120_204037.jpg & IMG_20251120_204043_1.jpg)*
-
 **Section 22: AWS CI/CD Project**
 
 **Video 2: Elastic Beanstalk**
@@ -3301,9 +3287,6 @@ You are now bridging the gap between System Admin (Linux/Networking) and Cloud E
 ---
 
 =============================================================
-
-### **Part 2: Introduction to Docker (The Game Changer)**
-*(Source: IMG_20251120_204047_1.jpg, IMG_20251120_204053.jpg, IMG_20251120_204058.jpg)*
 
 **Section 23: Docker Introduction**
 **Video 1: Why Docker? (The Problem with VMs)**
@@ -3523,10 +3506,7 @@ You have effectively covered the **entire Docker syllabus** required for a mid-l
 
 
 
-### **Page 1: Why Containerization? (The Strategy)**
-*(Source: IMG_20251120_204223_1.jpg)*
-
-**Section 23: Containerization**
+**Section 24: Containerization**
 **Video 1: Introduction & Use Cases**
 
 * **The Big Question:** Hamein application ko Containerize karne ki zaroorat kab padti hai? (When do we need it?)
@@ -3608,7 +3588,7 @@ You have now completed the **Containerization Module**.
 =============================================================
 
 
-**Section 24: Kubernetes**
+**Section 25: Kubernetes**
 **Video 1: Introduction**
 * **The Problem:** Docker is great, lekin agar **Docker Engine hi fail ho jaye toh?**
     * *Example:* Ek server par 100 containers chal rahe hain, aur woh server crash ho gaya. Kaun uthayega un containers ko dusre server par?
