@@ -1,7 +1,5 @@
 **# Section 1 -> Introduction**
 
-1.  **About this Course:**
-    * Isme likha hai "Not of use" (Shayad ye part skip kiya gaya hai).
 2.  **What is DevOps?** (Video 3)
     * DevOps kya hai?
     * Agar hum DevOps use nahi karenge toh kya hoga? (If we will not use DevOps).
@@ -15,7 +13,7 @@
 * **Video 2: Chocolatey for Windows**
     * Windows ke liye **Chocolatey** kya hai?
     * Isko kaise use karte hain?
-    * Ise use kyun karna chahiye aur baaki details.
+    * Ise use kyun karna chahiye aur baaki details. agar use nahi kiye then kya hoga
     * *(Niche likha hai P.T.O - Please Turn Over)*.
 
 ---
