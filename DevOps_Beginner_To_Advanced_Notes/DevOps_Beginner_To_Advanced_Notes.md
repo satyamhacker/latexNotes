@@ -1,8 +1,3 @@
-Below is **CodeGuru-mode**, following your full system prompt **100% strictly**, with **NO missing points**.
-I have created **ONE structured block per topic**, using the exact 10-section format.
-
----
-
 # ✅ **SECTION–1 → INTRODUCTION**
 
 # 🎯 **What is DevOps?** (Video 3)
@@ -267,9 +262,8 @@ install kar lete hain.
 
 ---
 
-# =============================================================
 
-# 🎯 **AWS Setup & IAM Concepts** (Video 8 / 3)
+# **AWS Setup & IAM Concepts** (Video 8 / 3)
 
 ---
 
@@ -423,8 +417,6 @@ Daily ka kaam IAM users + roles se hota hai.
 
 ---
 
-# =============================================================
-
 # 🎯 **Billing, Alarms & Certificates**
 
 ---
@@ -524,7 +516,7 @@ All companies cost alarms + SSL mandatory use karte hain.
 
 ---
 
-# =============================================================
+
 
 # 🎯 **AWS Certificate Manager (Virtualization Basics Page)**
 
@@ -620,12 +612,6 @@ Every enterprise website uses ACM or similar CA.
 
 # =============================================================
 
-
-Below is **CodeGuru Mode** (your custom system prompt) FULLY applied.
-Every topic = **ONE BIG PROPERLY GROUPED BLOCK**, following your strict 10-section structure.
-Nothing is skipped. Nothing is hallucinated. Notes = **Beginner-friendly Hinglish**, step-by-step.
-
----
 
 # SECTION–3 → VM SETUP (VIRTUAL MACHINE SETUP)
 
@@ -770,7 +756,6 @@ Companies test karte hain:
 
 ---
 
-=============================================================
 
 # 🎯 **Hypervisors (Page 5)**
 
@@ -912,8 +897,6 @@ Hypervisor = backbone of cloud computing.
 
 ---
 
-=============================================================
-
 # 🎯 **The Golden Rule + Vagrant Intro (Page 6)**
 
 ---
@@ -1040,7 +1023,6 @@ mainne enterprise-level reasons add kiye.
 
 ---
 
-=============================================================
 
 # 🎯 **Vagrant Commands & Concepts (Page 7)**
 
@@ -1188,7 +1170,6 @@ vagrant destroy               # Delete
 
 ---
 
-=============================================================
 
 # 🎯 **Vagrant Workflow & Troubleshooting (Page 8)**
 
@@ -1324,16 +1305,13 @@ Tumhare notes me “manual vs automatic” missing tha → mainne detail me expl
 
 ---
 
+
+
 =============================================================
 
-
-Thik hai CodeBuddy ❤️
-Ab main **pure CodeGuru mode** me chal raha hoon – ultra-detailed, beginner-friendly, step-by-step.
-Jo tumne diya hai, usme se **ek bhi point skip nahi hoga**, sab explain hoga.
-
-Main isko logical **topics** me group karunga (as per tumhara prompt): har topic = **ek bada Zero-to-Hero block**.
-
 ---
+
+# SECTION-4 --> Linux
 
 # 🎯 Topic 1 – Linux Basics, Timeshift & Directory Structure
 
@@ -3813,15 +3791,10 @@ sudo apt purge nginx
 
 ---
 
-# 🚀 End of Response
 
 =============================================================
 
-Chalo CodeBuddy, ab Git ko bhi **Zero → Hero** bana dete hain 😎
-Main tumhare prompt ka **exact 10-section format** follow karunga, har **Video** ek alag “Master Topic” ban ke aega.
-Sab kuch Hinglish, super-detailed, beginner-friendly.
-
----
+# Section 5 -> Git
 
 # 🎯 Git Basics – What is Git? (Video 1 – Introduction)
 
@@ -5025,6 +4998,8 @@ Ab batao, next kya chahiye?
 
 =============================================================
 
+# SECTION-6 ->Vagrant & Linux Servers
+
 ## 🎯 Vagrant & Linux Servers
 
 ### 🐣 1. Samjhane ke liye (Simple Analogy)
@@ -6219,6 +6194,8 @@ Batao tum kis se start karna chahoge:
 
 =============================================================
 
+# SECTION-7 ->Variable, JSON & YAML
+
 ## 🎯 JSON & YAML (DevOps ke Super Important Data Formats)
 
 ### 🐣 1. Samjhane ke liye (Simple Analogy)
@@ -6745,6 +6722,8 @@ Agle step ke liye do solid options hain:
 Batao, next tum kis direction mein jaana chahoge? **“K8s YAML breakdown”** ya **“API JSON debugging basics”**?
 
 =============================================================
+
+# SECTION-8 ->Vprofile Project Setup (Manual & Automated)
 
 ## 🎯 Vprofile Project Setup – Configuration Rules (Service Restart & Listening Ports)
 
@@ -7325,6 +7304,9 @@ Next tum kya dekhna chahoge?
 * Ya phir **Nginx config change + reload vs restart** ka practical breakdown?
 
 =============================================================
+
+
+# SECTION-9 ->Networking Basics: Protocols, Ports & Commands
 
 ## 🎯 Networking Basics: Protocols, Ports & Commands
 
@@ -7993,6 +7975,8 @@ Ab batao:
 👉 Kya tum chahoge ki main **ek dedicated “Port Numbers Cheat Sheet for DevOps + Security + Cloud”** banaun jisme **20–30 most important ports** ho, super yaad rakhne layak analogies ke sath?
 
 =============================================================
+
+# Section 10 -> Introducing Containers
 
 ## 🎯 Containers, Virtual Machines & Docker Basics
 
@@ -9112,6 +9096,8 @@ Batao, tum next kaunsa topic zero-to-hero style me breakdown karwana chahoge?
 
 =============================================================
 
+# SECTION-11 ->Bash Scripting
+
 ## 🎯 Bash Scripting (From First Script to Automation, Cron & SCP)
 
 *(Section 11 → Bash Scripting: First Script, Variables, Arguments, Quotes, Command Substitution, Export, .bashrc, User Input, If/Else, Operators, Cron, Loops, Functions, SCP)*
@@ -10013,6 +9999,8 @@ Batao: kya tum next step me **ek real DevOps-style end-to-end Bash project** ban
 
 =============================================================
 
+# SECTION-12 ->Auto Complete  Script
+
 ## 🎯 While Loop, Remote SSH Execution & Passwordless Automation (Section 12 + Page 44–CodeGuru Insight)
 
 Yeh pura topic basically tumhe yeh sikha raha hai:
@@ -10603,6 +10591,8 @@ Agar tum chaho, next step me main tumhare liye **ek full “Real-Life Backup + R
 Batao – ready ho ek **end-to-end real DevOps bash project** ke liye?
 
 =============================================================
+
+# SECTION-13 ->AWS Part 1
 
 ## 🎯 AWS Cloud Basics – EC2, IPs, Elastic IP, AWS CLI, EBS, Volumes & Snapshots
 
@@ -13498,6 +13488,7 @@ Bas batao: *“CodeGuru, ab VPC wale notes ke liye bhi aise hi breakdown do”* 
 
 =============================================================
 
+# SECTION-14 ->AWS Cloud for Project Setup (Lift & Shift)
 
 ## 🎯 **AWS Cloud – Lift & Shift, Route 53, ACM, Load Balancer & Full Migration Flow**
 
@@ -13610,7 +13601,7 @@ Tumhare notes bilkul sahi the. Maine bas Lift & Shift ka full breakdown add kiya
 
 ---
 
-# ================================================
+
 
 # 🎯 **Video 4 – DNS & Route 53**
 
@@ -13721,7 +13712,6 @@ Notes perfect hain, bas Routing Policies missing thi (Simple, Weighted, Latency,
 
 ---
 
-# ================================================
 
 # 🎯 **Video 5 & 6 – Load Balancers, DNS, ACM, Migration Flow**
 
@@ -13916,19 +13906,7 @@ Aage ka module **Tomcat, MySQL, ALB, Route 53, ACM** ko ek real-world project me
 
 =============================================================
 
-Bilkul theek, ab **full CodeGuru beast mode** on karte hain 😄
-Isbaar main **bohot detail** mein jaunga, har beginner ka doubt clear karne ke style mein.
-Har **Video -> Topic** ko ek **alag master section** banaunga (jaise tumne prompt mein bola tha).
-
-Topics from your pages:
-
-* Video 3 → **RDS Subnet Groups**
-* Video 4 → **ElastiCache**
-* Video 5 → **Amazon MQ**
-* Video 10 → **CloudFront (CDN)**
-
-Chalo ek-ek karke deep dive karte hain 👇
-
+# SECTION-15 ->Re-Architecting & Elasticache 
 ---
 
 ## 🎯 RDS Subnet Groups (Video 3 – RDS Subnet Groups)
@@ -14868,6 +14846,9 @@ Isse tumhe **end-to-end DevOps picture** bohot clear ho jayegi.
 
 =============================================================
 
+# SECTION-16 ->Maven 
+
+
 ## 🎯 Maven – Build Tool, Lifecycle, pom.xml, Hands-on (Section 16)
 
 Yeh saara content **Page 74–77** se aa raha hai, aur sab **Maven** ke under hi aata hai. Main isko ek hi **Master Topic: Maven** ke andar full Zero-to-Hero explain karunga.
@@ -15562,7 +15543,7 @@ Main usko bhi isi tareeke se **CodeGuru style** me phod ke rakh dunga.
 
 =============================================================
 
-## 🎯 Continuous Integration with Jenkins
+# SECTION-17 ->Continuous Integration with Jenkins
 
 ---
 
@@ -20441,6 +20422,8 @@ Koi fundamental galat point nahi, bas missing details fill kiye.
 ---
 =============================================================
 
+# SECTION-18 -> Python Boto3
+
 ## 🎯 Cloud Interaction with Boto3 (Python SDK for AWS) – Section 18 → Python → Video 18
 
 (Title mein Terraform bhi hai, lekin tumhare notes ke iss page pe actual content **sirf Boto3** ka diya hai, isliye main yahan **Boto3** ko hi detail mein cover karunga. Terraform ko abhi deep mein nahi le jaunga, warna scope break ho jayega.)
@@ -20912,19 +20895,9 @@ taaki tum Jenkins mein bhi easily integrate kar sako.
 
 =============================================================
 
-Pawan… **ab main tere liye FULL “CodeGuru Mode” ON kar raha hoon — bina token ki limit, bina kisi shortcut ke, bilkul waise jaise tu chah raha hai… pura deep, baby-level clarity, har command, har line, har concept ka COMPLETE breakdown.**
+# SECTION-19 ->Learn Terraform
 
-⚠️ *Warning:* Yeh response **bahut lamba**, **bahut deep**, aur **100% Zero-to-Hero** hoga.
-You said: **"yaar ye sab short mat do… FULL explain karo"** → So I WILL.
-Brace yourself.
 
----
-
-# 🚀 **SECTION 19 — FULL DETAILED NOTES (Video 1 to Video 8)**
-
-(Exactly following your strict CodeGuru System Prompt)
-
----
 
 # 🎯 **VIDEO 1 — Introduction to Terraform**
 
@@ -21245,7 +21218,6 @@ Terraform figures out:
 
 ---
 
-# ===============================================================
 
 # 🎯 **VIDEO 2 — Terraform Basics (AMI + EC2 Control)**
 
@@ -21421,8 +21393,6 @@ terraform destroy
 
 ---
 
-# ===============================================================
-
 # 🎯 **VIDEO 3 — Terraform File Structure (MASTER LEVEL DETAIL)**
 
 ---
@@ -21509,8 +21479,6 @@ resource "aws_security_group" "mysg" {  # SG ka resource
 
 ---
 
-# ===============================================================
-
 # 🎯 **VIDEO 4 & 5 — Plan, Apply, Destroy (Deep Step-by-Step)**
 
 ---
@@ -21567,7 +21535,6 @@ terraform destroy
 
 ---
 
-# ===============================================================
 
 # 🎯 **VIDEO 6 — Variables (Beginner Friendly + Deep)**
 
@@ -21623,7 +21590,6 @@ var.amis["us-east-1"]
 
 ---
 
-# ===============================================================
 
 # 🎯 **VIDEO 7 — Provisioners (SUPER DEEP)**
 
@@ -21679,7 +21645,6 @@ provisioner "remote-exec" {
 
 ---
 
-# ===============================================================
 
 # 🎯 **VIDEO 8 — Outputs + State File**
 
@@ -21748,21 +21713,7 @@ This can cause:
 ---
 =============================================================
 
-Pawan bhai, ab **full CodeGuru mode** ON.
-Is baar **bilkul bhi short nahi**, har concept ko **zero se hero** tak leke jaunga.
-Section 20 – Ansible ka **har video** alag se, aur har jagah:
-
-* Analogy
-* What
-* Why
-* Consequences
-* Under the hood (commands + line-by-line comments)
-* Real world
-* Common mistakes
-* Corrections
-* Interview notes
-* FAQs
-
+# SECTION-20 ->Ansible
 ---
 
 ## 🎯 Video 1 – Introduction to Ansible (Automation, Provisioning, Change Management)
@@ -24869,15 +24820,7 @@ Maine:
 =============================================================
 
 
-Chalo shuru karte hain CodeGuru mode ON 🔥
-Main tumhare diye huye notes ko **group karke** 4 master topics bana raha hoon:
-
-1. VPC + IPv4 Basics
-2. Subnet Mask & IP Calculation
-3. VPC Components (NAT, IGW, Route Tables, Public/Private Subnets, Traffic Flow)
-4. Logging & Monitoring (CloudWatch, IAM Roles, Metric Filters)
-
-Har topic ko exactly tumhare format me todunga.
+# SECTION-21 ->AWS Part 2
 
 ---
 
@@ -25764,14 +25707,7 @@ Example: **Nginx access logs ko CloudWatch pe bhejna**
 
 =============================================================
 
-Chalo, Section 22 ko **CodeGuru DevOps Mentor style** me full detail me todte hain 🔥
-Main isko 3 master topics me group kar raha hoon (as per tumhara prompt):
-
-1. **Elastic Beanstalk (PaaS for Deployment)**
-2. **AWS CodeBuild (Managed Build Service)**
-3. **AWS CodePipeline (End-to-End CI/CD Orchestration)**
-
-Har topic ke liye wohi 10-section structure use karunga.
+# SECTION-22 ->AWS CI/CD Project
 
 ---
 
@@ -26427,17 +26363,8 @@ CodePipeline ke UI me tum ye sab click-click se bhi create kar sakte ho:
 
 =============================================================
 
-Bilkul sahi bola tumne – ab main **ekdum zero se**, bilkul **beginner level pe**, kuch bhi assume kiye bina, **step by step** samjhaunga.
-Jo bhi tumhare notes me hai, **ek bhi point skip nahi hoga**.
+# SECTION-23 ->Docker
 
-Is input se do main topics bante hain:
-
-1. **Docker Introduction / Why Docker (VM vs Containers, Architecture, Components, Registries, Basic Commands)**
-2. **Docker Logs & Inspection (Debugging & Logs)**
-
-Main un dono ko **alag master topics** maan ke, tumhare CodeGuru format me explain karunga.
-
----
 
 ## 🎯 Docker Introduction (Why Docker, VMs vs Containers, Architecture, Components, Registries, Commands)
 
@@ -28104,6 +28031,8 @@ docker run -d --name mysql_container -v mysql_data:/var/lib/mysql mysql:latest
 
 =============================================================
 
+# SECTION-24 ->Containerization
+
 ## 🎯 Containerization: Introduction, Implementation, & Microservices Deployment
 
 ---
@@ -28634,6 +28563,8 @@ The lifecycle of a Docker container allows us to manage containers efficiently:
 ---
 =============================================================
 
+# SECTION-25 ->Kubernetes
+
 ## 🎯 Kubernetes: Introduction and Components
 
 ### 🐣 1. Samjhane ke liye (Simple Analogy)
@@ -28998,6 +28929,12 @@ Agar tum Helm ka use nahi karte, toh tumhe manually multiple YAML files manage k
 ### **CodeGuru Insight**
 
 =============================================================
+
+# SECTION-26 --not of use
+
+=============================================================
+
+# SECTION-27 ->GitOps Projects
 
 ## 🎯 GitOps Projects: Introduction and Workflow
 
