@@ -3372,9 +3372,11 @@ A: Gradual migration strategy: (1) Dual-write pattern - Write to both SQL and No
 ---
 
 
-## Topic 3.3: Modern Database Trends (Advanced)
+# Module 3: Databases (SQL, NoSQL & Modern Tech)
 
-## 🎯 1. Title / Topic: Modern Database Trends - Vector & Time-Series Databases
+## Topic 3.1: Relational Databases (SQL)
+
+## 🎯 1. Title / Topic: Relational Databases (SQL)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 **Vector Database:** Ek library hai jahan books ko content similarity se arrange kiya jata hai - "Machine Learning" book ke paas "AI" aur "Deep Learning" books rakhi hain, not alphabetically. Jab tum "neural networks" search karte ho, toh library tumhe similar topics ki books dikha deti hai, even if exact words match nahi karte. Waise hi Vector DB embeddings (numerical representations) store karta hai aur similarity search karta hai - perfect for AI/LLM applications!
