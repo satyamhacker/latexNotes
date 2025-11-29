@@ -913,3 +913,101 @@ Is section mein hum **Discord C2** ke final steps, uske through **Post-Exploitat
 How to use AIRAVAT (Advanced Internet Ransomware) with c2 for android its open source how to setup it and use it for ethical use and all ....
 
 ==================================================================================
+
+Professional Phishing Infrastructure
+Tumhare notes mein manual HTML page aur BeEF hai. Industry mein Mass Phishing Campaigns chalti hain.
+
+GoPhish Setup on Cloud:
+
+GoPhish tool ko AWS par setup karna.
+
+Email Deliverability: AWS SES (Simple Email Service) ya SendGrid ko integrate karna taaki emails Spam folder mein na jayein.
+
+SPF, DKIM, DMARC: Ye DNS records set karna taaki tumhari fake email asli company jaisi lage (Email Spoofing protection bypass).
+
+==================================================================================
+
+Pivoting & Tunneling (Cloud to Internal Network)
+Tumhare notes mein tumne Cloud Server (Kali) se Victim PC connect kiya. Lekin industry mein scenario ulta hota hai. Tum Cloud se Corporate Internal Network mein ghuste ho.
+
+Concept: Pivoting. Ek hacked machine ko "Bridge" banakar uske peeche chupe hue internal servers (Database, Internal HR portal) tak pahunchna.
+
+Tools to add:
+
+Chisel / Ligolo-ng: Modern tunneling tools jo firewall ko bypass karte hain.
+
+SSH Dynamic Port Forwarding (SOCKS Proxy): SSH ke through traffic tunnel karna.
+
+ProxyChains: Apne tools (Nmap, Metasploit) ko tunnel ke through chalana.
+
+Why needed: Job interview mein puchenge, "Agar tumne web server hack kar liya, toh Database tak kaise pahunchoge?" Uska jawab Pivoting hai.
+
+==================================================================================
+
+Cloud Persistence (Backdoor that never dies)
+Tumhare notes mein .exe file wala backdoor hai jo Antivirus pakad sakta hai. Cloud-native persistence alag hoti hai.
+
+Malicious Lambda Functions: Ek aisa Lambda function banana jo har bar trigger ho jab koi user login kare, aur uska password chura le.
+
+Backdooring AMIs: Ek malicious Amazon Machine Image (AMI) banana. Jab bhi company us image se naya server banayegi, tumhara access pehle se usme hoga.
+
+Shadow Admin Accounts: Aise hidden users create karna jinke paas Admin rights ho lekin wo dashboard par easily na dikhein.
+
+==================================================================================
+
+Data Exfiltration via Cloud Services (Stealing Data Stealthily)
+Agar tum 5GB data download karoge toh alarm baj jayega. Hackers Cloud services use karte hain data churane ke liye.
+
+Exfiltration via Google Drive/OneDrive API: Victim ke PC se data seedha Google Drive par upload karna. Firewall isse block nahi karega kyunki Google Drive trusted hai.
+
+Exfiltration via DNS Tunneling: Data ko DNS queries mein chupakar nikalna (Slow but very stealthy). Tool: dnscat2.
+
+==================================================================================
+
+Cloud WAF Bypassing (Web Application Firewall)
+Cloudflare, AWS WAF, ya Akamai websites ko protect karte hain. Inhe bypass kiye bina attacks (SQLi, XSS) nahi chalenge.
+
+IP Rotation: AWS API Gateway ka use karke har request alag IP se bhejna taaki WAF block na kar sake (Fireprox tool).
+
+Origin IP Disclosure: Cloudflare ko bypass karke seedha backend server ki IP dhundna (Censys/Shodan use karke).
+
+==================================================================================
+
+Specific Request: AIRAVAT (Android RAT) Setup for Ethical Use
+Tumne AIRAVAT ke baare mein poocha. Ye ek Android Remote Access Trojan (RAT) hai. Iska setup Distopia jaisa hi client-server model par chalta hai lekin ye Android phones ke liye hai.
+
+Setup Overview (For Lab/Ethical Testing Only):
+
+Requirement:
+
+Ek VPS (Virtual Private Server) ya tumhara AWS Kali instance.
+
+Java Development Kit (JDK) aur Node.js installed hona chahiye.
+
+Server Setup (The Panel):
+
+Airavat ka source code Github se clone karo.
+
+Server folder mein jakar dependencies install karo (npm install).
+
+Server start karo (node index.js). Ye tumhe ek Web Panel dega (usually port 80 ya 8080 par).
+
+Note: Is panel par tum saare hacked phones dekh paoge.
+
+Client Setup (The Virus - APK):
+
+Airavat builder use karke APK generate karo.
+
+Builder mein apni AWS IP Address daalni hogi taaki APK tumhare server se connect kare.
+
+APK build hone ke baad, ise target Android phone (Emulator ya Test Device) mein install karo.
+
+Permissions:
+
+Install hone par ye permissions maangega (Accessibility, Overlay, etc.). Ethical hacking mein humein dekhna hota hai ki kaise Social Engineering se user ye permissions allow karta hai.
+
+Ethical Use Case:
+
+Iska use Corporate MDM (Mobile Device Management) solutions ko test karne ke liye kiya jata hai. Kya company ka antivirus is APK ko detect kar pa raha hai?
+
+==================================================================================
