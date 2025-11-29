@@ -1011,3 +1011,80 @@ Ethical Use Case:
 Iska use Corporate MDM (Mobile Device Management) solutions ko test karne ke liye kiya jata hai. Kya company ka antivirus is APK ko detect kar pa raha hai?
 
 ==================================================================================
+
+1. Network Architecture & Pivoting (VPC Hacking)
+Abhi tum seedha Victim PC ko connect kar rahe ho. Real world mein companies VPC (Virtual Private Cloud) use karti hain.
+
+Concept:
+
+Public Subnet vs Private Subnet.
+
+Scenario: Tumne Web Server hack kiya (Public Subnet mein), ab wahan se Database (Private Subnet) tak kaise jaoge jo internet se connected hi nahi hai?
+
+Missing Tool/Topic:
+
+SSH Tunneling / Port Forwarding: ssh -D ya ssh -L commands.
+
+Chisel: Firewall bypass karne ke liye.
+
+Ligolo-ng: Modern pivoting tool jo poora network interface bana deta hai.
+
+AWS VPC Peering: Ek hacked AWS account se dusre AWS account mein ghusna.
+
+==================================================================================
+
+Managed Phishing Framework on Cloud (GoPhish Example)
+
+High-level points:
+
+GoPhish jaise tool ko cloud VM par deploy karna (commands detail mein mat likho).
+
+Concepts:
+
+Landing pages (login clones).
+
+Email templates.
+
+Campaigns + Result dashboards (open, click, submitted credentials).
+
+Ethical Use Case:
+
+Sirf organization ki permission ke saath – “Phishing Awareness Training”.
+
+==================================================================================
+
+Section 25 – Cloud Logging, Detection & Reporting (Blue Team Add-On)
+
+Itni saari offensive cheezein cover kar rahe ho, ek chhota defense module zaroor add karo – yeh interviews mein bohot strong point banega.
+
+Topic 17: CloudTrail, GuardDuty & SIEM Integration
+
+CloudTrail:
+
+Kaun sa user kis service ko kab call kar raha hai.
+
+Example suspicious patterns:
+
+Multiple failed AssumeRole.
+
+Unusual regions mein EC2 launch.
+
+GuardDuty (or equivalent):
+
+Anomalous API calls.
+
+Credential compromise detections.
+
+SIEM:
+
+Logs ko central place pe bhejna, alerts banana.
+
+Topic 18: Building a Simple Detection Playbook
+
+Example playbooks:
+
+“If: New access key created for IAM user → Then: Email + ticket”
+
+“If: SecurityGroup open to world on high-risk port → Then: auto-remediation script”
+
+==================================================================================
