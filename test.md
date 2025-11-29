@@ -59,6 +59,9 @@ Yeh tumhare course ka cover page hai.
 
 -----
 
+==================================================================================
+
+
 ### **Page 4: Phishing & Firewall Settings (Part 1)**
 
 *Original Image: Sticker 4*
@@ -255,6 +258,9 @@ Yeh tumhare course ka cover page hai.
 
 -----
 
+==================================================================================
+
+
 ### **Page 14: Accessing Cloud GUI (Desktop)**
 
 #Section-5 ->Accessing Cloud server Desktop
@@ -277,6 +283,9 @@ Yeh tumhare course ka cover page hai.
   * **Stopping Server:** Agar server rokna ho to: `tightvncserver -kill :1`
 
 -----
+
+==================================================================================
+
 
 ### **Page 16: Browser In The Browser (BITB) - Intro**
 
@@ -370,6 +379,9 @@ Yeh tumhare course ka cover page hai.
   * **Enhancement:** Ab subdomain (jaise `gmail.loginform.co`) banakar usse IP se link karo aur HTTPS install karo. Victim ko bilkul real Gmail experience milega.
 
 -----
+
+==================================================================================
+
 
 ### **Page 21: BeEF Framework**
 
@@ -472,6 +484,9 @@ Yeh raha tumhare next set of notes (Page 22 se Page 31) ka detailed breakdown Hi
 
 -----
 
+==================================================================================
+
+
 ### **Page 25: C2 Frameworks (Basics)**
 
 *Original Image: Sticker 25*
@@ -490,6 +505,9 @@ Yeh raha tumhare next set of notes (Page 22 se Page 31) ka detailed breakdown Hi
     2.  **Server:** Ye tumhara Cloud Computer (Kali) hai jo commands bhejta hai aur data receive karta hai.
 
 -----
+
+==================================================================================
+
 
 ### **Page 26: Empire & Starkiller**
 
@@ -568,6 +586,9 @@ Yeh raha tumhare next set of notes (Page 22 se Page 31) ka detailed breakdown Hi
       * Jaise hi wo isse run karega, tumhare Cloud Kali par connection aa jayega.
 
 -----
+
+==================================================================================
+
 
 ### **Page 30: Post Exploitation Basics**
 
@@ -648,6 +669,9 @@ Yeh raha tumhare next set of notes (Page 22 se Page 31) ka detailed breakdown Hi
 * **Tip:** Agar sure nahi ho ki module kya karta hai, to uski description padh lo.
 
 ---
+
+==================================================================================
+
 
 ### **Page 34: Discord as C2 (Introduction)**
 *Original Image: Sticker 34*
@@ -809,6 +833,9 @@ Is section mein hum **Discord C2** ke final steps, uske through **Post-Exploitat
 
 ---
 
+==================================================================================
+
+
 ### **Page 44: Interacting with Agents**
 *Original Image: Sticker 44*
 
@@ -845,6 +872,9 @@ Is section mein hum **Discord C2** ke final steps, uske through **Post-Exploitat
 
 ---
 
+==================================================================================
+
+
 ### **Page 46: File System Management**
 *Original Image: Sticker 46*
 
@@ -863,6 +893,9 @@ Is section mein hum **Discord C2** ke final steps, uske through **Post-Exploitat
       `C:\Users\<username>\.config\uploads`
 
 ---
+
+==================================================================================
+
 
 ### **Page 47: Keylogger & Self Hosting**
 *Original Image: Sticker 47*
