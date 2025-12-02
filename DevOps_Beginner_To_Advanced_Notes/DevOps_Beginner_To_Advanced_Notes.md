@@ -1,5 +1,6 @@
 # SECTION-16 ->Maven 
 
+maven is only for java or can be used with other like expree js, and django if not then what is alternative of maven for express js and django and all ...
 
 ## 🎯 Maven – Build Tool, Lifecycle, pom.xml, Hands-on (Section 16)
 
