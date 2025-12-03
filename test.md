@@ -908,6 +908,10 @@ Is section mein hum **Discord C2** ke final steps, uske through **Post-Exploitat
     * Start karne ke liye: `/keylog module start interval 10`
         * *Matlab:* Har 10 second mein typed keys ka data Discord ke `#keylogger` channel par aayega.
     * Stop karne ke liye: `/keylog mode stop interval 0`
+
+==================================================================================
+
+
 * **Section 17: Advanced Malware Delivery**
 * **Introduction to Self Hosting (PwnDrops):**
     * **Tool:** **PwnDrops**
