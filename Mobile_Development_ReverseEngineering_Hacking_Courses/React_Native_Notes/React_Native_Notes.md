@@ -187,13 +187,1273 @@
     * 14.2: Accessibility (Screen Readers, Contrast, Touch Targets) (Note 48)
 
 
-=============================================================
+==============================================================================
 
-Chalo bhai, shuru karte hain aapke React Native notes ka Module 2\!
+# MODULE-1 → React Native Introduction & Setup
 
-Is module mein hum React Native ke "Core Components" (building blocks) aur data pass karne ke tareeke (Props) seekhenge. Hum legacy (Class) aur modern (Functional) components ka fark bhi samjhenge. 🧑‍💻
+## 🎯 1. Title / Topic: 1.1 Introduction to React Native (Kya, Kyun, Kaise)
 
------
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Socho React Native ek magic kitchen ki tarah hai jahaan ek hi recipe book (JavaScript code) se tum Android aur iOS dono ke liye alag-alag taste wala khana (apps) bana sakte ho. Jaise ek dough se pizza banao American style mein (Android), aur naan banao Italian twist ke saath (iOS), bina do baar poori kitchen saaf kiye ya nayi ingredients laaye – bas ek baar code likho, test karo, aur apps ready! Yeh time bachata hai, aur khana (app) fresh aur native taste wala banta hai, web jaise flat nahi.
+
+## 📖 3. Technical Definition (Interview Answer):
+React Native is an open-source framework developed by Facebook (ab Meta) for building native mobile applications using JavaScript and React principles, allowing code reusability across Android and iOS platforms.  
+Breakdown in Hinglish: "Open-source framework" matlab free aur community-driven toolset jisme building blocks ready hote hain; "Native mobile applications" ka matlab real device features (jaise camera, GPS) use karne wale apps, jo web apps se alag feel dete hain; "JavaScript and React" matlab web programming language (JS) aur library (React for UI components) ko mobile pe apply karo, lekin output native code hota hai.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Traditional mobile development mein, Android ke liye Kotlin/Java aur iOS ke liye Swift/Objective-C alag-alag seekhna padta hai – ek app banane mein team ka double time lagta hai, bugs alag platforms pe alag aate hain, maintenance nightmare (code duplicate hota hai), aur cost sky-high (do teams chahiye). Agar sirf web tech jaante ho, toh mobile mein zero se shuru.  
+**Solution:** React Native se 70-90% code share hota hai ek codebase mein, development 2x fast, bugs kam (ek jagah fix karo), aur performance native jaise (kyunki actual native views use hote hain, na ki browser wrapper). Beginners ke liye easy entry, kyunki JS jaante ho toh mobile apps banao bina nayi language seekhe.
+
+## ⚙️ 5. Under the Hood (Technical Working):
+Yeh step-by-step samjho:  
+1. Tum React components likhte ho JS mein (jaise <View> for box, <Text> for labels – yeh JS objects hain).  
+2. Metro bundler (RN ka packager) code ko bundle karta hai – JS ko optimize karke native calls mein convert.  
+3. Shadow Tree (virtual DOM jaise) mein changes calculate hote hain.  
+4. Bridge (Yoga engine) JS thread se native thread ko message bhejta hai – JS events (jaise button press) ko native UI updates mein translate.  
+5. Native side pe (Android: Java/Kotlin views, iOS: UIKit components) actual rendering hota hai, isliye 60fps smooth.  
+Agar bridge overload ho, toh lag aata hai, lekin Hermes JS engine (default now) se faster.  
+ASCII Diagram:  
+```
+[Your JS Code: <App><View><Text>Hello</Text></View></App>] 
+       |
+[Metro Bundler: Bundle + Transpile JS] 
+       |
+[JS Thread: React Reconciliation (Diff changes)]
+       | 
+[Bridge: Serialize JS calls to Native (e.g., 'Update Text to "Hi"')]
+       |
+[Native Thread: Android LinearLayout / iOS UIView] --> Screen Render
+```
+
+## 💻 6. Hands-On: Commands & Syntax (CRITICAL SECTION):
+Yahaan pehla basic app ka full code snippet – assume tune project init kiya hai (next topic mein detail). Yeh App.js file mein daalo.  
+**Code Snippet:**  
+```jsx
+// Line 1: Import React core library – yeh sab components ka base hai, bina iske kuch nahi chalega.
+import React from 'react';
+// Line 2: Import RN core components – View jaise container (div ki tarah), Text jaise label (p/span ki tarah).
+import { Text, View, StyleSheet } from 'react-native';
+
+ // Line 3: Main App component define karo – arrow function se, functional component (class nahi, modern way).
+const App = () => {
+  // Line 4: Return JSX – yeh UI blueprint hai, RN mein JSX compile hokar native ban jaata hai.
+  return (
+    // Line 5: Outer View – flex:1 full screen occupy karega.
+    <View style={styles.container}>
+      // Line 6: Inner Text – simple string display.
+      <Text style={styles.text}>Hello, React Native World! Yeh mera pehla app hai.</Text>
+    </View>
+  );
+};
+
+// Line 7: Styles define – StyleSheet.create se, performance ke liye (inline se better).
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,  // Full height/width.
+    justifyContent: 'center',  // Vertical center.
+    alignItems: 'center',  // Horizontal center.
+    backgroundColor: 'lightblue'  // Background color.
+  },
+  text: {
+    fontSize: 18,  // Text size in dp (density points, auto-scale).
+    color: 'darkblue',  // Text color.
+    fontWeight: 'bold'  // Bold font.
+  }
+});
+
+// Line 8: Export – yeh component ko bahar use karne ke liye, index.js mein import hoga.
+export default App;
+```  
+**Expected Output:** App chalane pe (npx react-native run-android), emulator/device pe lightblue background wala screen dikhega, center mein bold darkblue text "Hello, React Native World! Yeh mera pehla app hai." – touch karo, smooth scroll/zoom nahi (static abhi), lekin native feel.
+
+## ⚖️ 7. Comparison (Ye vs Woh):
+**React Native vs Native Development (Kotlin/Swift):**  
+- **Code Reuse:** RN: 80% shared, Native: 0% (alag languages).  
+- **Development Speed:** RN: Fast (hot reload), Native: Slow (full rebuild).  
+- **Performance:** RN: Near-native (bridge overhead ~5-10%), Native: 100% but complex.  
+**React Native vs Ionic/Cordova (Hybrid):** RN native UI deta hai, hybrid webview mein web code chalata hai (slow, battery drain).
+
+## 🚫 8. Common Mistakes (Beginner Traps):
+**Mistake 1:** Sochna ki RN web jaise hai – <div> use karo, lekin yahaan View/Text only, CSS classes nahi (sirf inline objects). Error: "Invariant Violation: View config not found."  
+**Fix:** Hamesha RN docs se components check karo, jaise flexbox only layout ke liye (position: absolute limited).  
+**Mistake 2:** Bridge ko ignore karna – heavy JS loops lag cause karte hain.  
+**Fix:** Expensive computations native modules mein shift karo.
+
+## 🌍 9. Real-World Use Case:
+Facebook ka main app RN pe bana hai – news feed, stories jaise features fast update karne ke liye (ek code change se Android+iOS dono update). Instagram bhi RN use karta hai explore tab ke liye, jahaan millions users daily swipe karte hain, aur performance drop nahi hota.
+
+## 🎨 10. Visual Diagram (ASCII Art):
+```
+User Interaction (Tap) --> [JS Thread: Event Handler] --> Bridge Serialize
+                                             |
+                                             v
+[Native Thread: Update View] --> [Screen: Smooth 60fps Render]
+                           ^
+Bridge Deserialize <-- [Yoga Layout Engine: Calculate Positions]
+```
+
+## 🛠️ 11. Best Practices (Pro Tips):
+- Components chhote rakho (5-10 lines), reusable banao (jaise Button.js alag file). Naming: PascalCase for components (AppComponent).  
+- Hamesha flexbox use karo layout ke liye – row/column direction set.  
+- Debugging ke liye Flipper tool install karo (RN 0.62+ mein built-in), console + network inspect.
+
+## ⚠️ 12. Consequences of Failure (Agar nahi kiya toh?):
+Agar RN na use kiya aur native separate kiya, toh 6 months ka project 12 months mein badh jaayega, bugs 2x, aur team burnout. Bridge misuse se app laggy (user reviews mein "slow" complaints), battery drain 20% extra.
+
+## ❓ 13. FAQ (Interview Questions):
+1. **Q: React Native kya hai exactly?** A: JS/React se native mobile apps banane ka framework, cross-platform with bridge to native.  
+2. **Q: RN mein web skills kaise help?** A: JSX same, state management (useState) similar, lekin UI native.  
+3. **Q: Limitations?** A: Heavy native integrations (jaise AR) ke liye extra modules chahiye.  
+4. **Q: Future?** A: New Architecture (Fabric) se bridge overhead zero, even faster.
+
+## 📝 14. Summary (One Liner):
+React Native JS se ek code mein Android+iOS native apps banata hai bridge ke magic se – fast dev, shared code, real performance!
+
+---
+
+## 🎯 1. Title / Topic: 1.2 Comparison: Environment Setup (Expo vs React Native CLI)
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Expo jaise ready-to-cook meal kit hai supermarket se – sab ingredients (tools, libs) pre-mixed, bas microwave mein daalo (npx expo start), 2 minutes mein khana ready, lekin agar special spice (custom native code) chahiye toh eject karke khud banao. React Native CLI jaise full raw market se shopping – har cheez control mein (Android Studio install, Xcode setup), time lagta hai lekin exact recipe bana sakte ho, no limits.
+
+## 📖 3. Technical Definition (Interview Answer):
+Expo is a managed workflow toolchain built on React Native that abstracts complex native setups and provides over-the-air updates, whereas React Native CLI is the bare-metal command-line tool for direct access to native project structures and custom configurations.  
+Breakdown in Hinglish: "Managed workflow" matlab Expo sab hidden handle karta hai (no direct native folders touch); "Toolchain" ek set of commands/tools; "Bare-metal" CLI mein android/ios folders direct edit kar sakte ho; "Over-the-air updates" matlab app update bina store submit kiye.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** RN setup mein beginners ko Android SDK, Java JDK, Xcode (Mac only), emulators install karne mein 2-3 din lag jaate hain, errors jaise "SDK not found" ya "CocoaPods fail" – frustration high, learning curve steep. Custom features (jaise third-party native libs) add karna nightmare.  
+**Solution:** Expo zero-setup deta hai (sirf Node.js chahiye), quick prototypes banao; CLI full power deta hai advanced apps ke liye, jaise hardware integrations. Choose Expo for MVP (minimum viable product), CLI for production scale.
+
+## ⚙️ 5. Under the Hood (Technical Working):
+Expo:  
+1. `create-expo-app` template download, managed folder structure (no android/ios initially).  
+2. `expo start` local server + cloud build trigger, Expo Go app (phone pe install) se QR scan karke test.  
+3. Updates: EAS (Expo Application Services) se OTA push, native build cloud mein.  
+CLI:  
+1. `react-native init` full project with node_modules, android/ios folders.  
+2. `react-native start` Metro bundler local.  
+3. `run-android` local Gradle build, ADB install.  
+Agar Expo se eject, toh CLI jaise ban jaata hai.  
+ASCII Diagram:  
+```
+Expo: [JS Code] --> expo start --> [Local Dev Server + QR] --> Expo Go App (Phone Test)
+                                           |
+                                    [EAS Cloud: Build if needed] --> OTA Updates
+CLI:  [JS Code] --> rn init/start --> [Local Metro] --> rn run-android --> [Gradle Local Build] --> Emulator/Device
+```
+
+## 💻 6. Hands-On: Commands & Syntax (CRITICAL SECTION):
+**Expo Full Setup Commands:**  
+```bash
+# Command 1: Global install optional, lekin npx better (no version conflict).
+npx create-expo-app@latest MyExpoApp --template blank
+# Breakdown: npx (Node exec without global install), create-expo-app (Expo template generator), @latest (newest version), MyExpoApp (project name, kebab-case best), --template blank (minimal, no extras like tabs).
+cd MyExpoApp  # Folder enter karo.
+npx expo start  # Dev server shuru – i (iOS sim), a (Android emu), w (web).
+# Breakdown: expo start – Metro bundler + Expo dev tools, QR code generate.
+```  
+**Expected Output:**  
+```text
+✔ Using latest Expo CLI
+✔ Installed JavaScript dependencies for your project
+› Metro waiting on exp://192.168.x.x:19000
+› Scan QR with Expo Go app
+› Press a · opens Android emulator
+› Press i · opens iOS simulator
+› Press w · starts web
+Local:   exp://192.168.x.x:19000
+Tunnel:  https://u.expo.dev/...
+```
+
+**CLI Full Setup Commands:**  
+```bash
+# Pre-reqs: Android Studio (SDK 30+), Xcode (Mac), Node 18+.
+npx react-native@latest init MyCLIApp --version 0.72.6  # Specific version for stability.
+# Breakdown: init (create project), --version (pin to avoid breaking changes).
+cd MyCLIApp
+npx react-native start  # Metro bundler only.
+# New terminal: npx react-native run-android  # Full build + run.
+# Breakdown: run-android – clean build, install APK, launch.
+```  
+**Expected Output (start):**  
+```text
+Loading dependency graph, done.
+bundle: start
+tunnel: ready
+Metro ready.
+```  
+**Output (run-android):**  
+```text
+info Starting JS server. See "C:\...\metro.config.js" for info on how to customize it.
+info Launching Metro bundler.
+info Building and installing the app on the device (cd android && ./gradlew app:installDebug)...
+info Connecting to the development server... (e.g., 192.168.x.x:8081)
+info Launching on Android SDK built for x86.
+```
+
+## ⚖️ 7. Comparison (Ye vs Woh):
+| Aspect          | Expo (Managed)                          | RN CLI (Bare)                          |
+|-----------------|-----------------------------------------|----------------------------------------|
+| **Setup Time** | 5 mins (no SDK)                        | 1-2 hours (full env)                   |
+| **Customization** | Limited (eject for native)             | Full (direct edit android/ios)         |
+| **Builds**     | Cloud (EAS) or local after eject       | Local always (Gradle/Xcode)            |
+| **OTA Updates**| Yes, instant no store review           | No, full rebuild + submit              |
+| **Best For**   | Prototypes, small teams                 | Enterprise, custom libs                |
+
+## 🚫 8. Common Mistakes (Beginner Traps):
+**Mistake:** Expo mein native module (jaise react-native-camera) add karna bina check – "Unsupported" error.  
+**Fix:** Expo docs mein "managed compatible" search karo, ya eject karo (expo eject – CLI mein convert).  
+**Mistake:** CLI mein env vars miss (ANDROID_HOME not set) – "SDK not found".  
+**Fix:** .bash_profile mein export ANDROID_HOME=$HOME/Android/Sdk add, source file.
+
+## 🌍 9. Real-World Use Case:
+Duolingo Expo use karta hai daily features update ke liye (millions users, no downtime). Tesla CLI use karta hai car hardware integrations ke liye (Bluetooth, sensors – Expo limited).
+
+## 🎨 10. Visual Diagram (ASCII Art):
+```
+Expo: Code Edit --> expo start --> QR Scan --> Expo Go (Hot Reload)
+      ^                                       |
+      |                                       +-- Eject? --> CLI Structure
+CLI:  Code Edit --> rn start (Bg) + rn run-android --> Local Build --> Device (Full Rebuild)
+```
+
+## 🛠️ 11. Best Practices (Pro Tips):
+- Expo se shuru karo learning ke liye, production mein CLI prefer if custom needs.  
+- Project names: lowercase-with-hyphens (my-app).  
+- Version control: .gitignore mein node_modules, build folders add.
+
+## ⚠️ 12. Consequences of Failure (Agar nahi kiya toh?):
+Galat choice se: Expo mein advanced features block (eject pain, 1 day waste); CLI mein setup errors se week waste, motivation down. App crashes on device test.
+
+## ❓ 13. FAQ (Interview Questions):
+1. **Q: Expo kab use?** A: Quick start, no native setup.  
+2. **Q: Eject irreversible?** A: Haan, but backup le lo.  
+3. **Q: CLI advantages?** A: Custom pods, full control.  
+4. **Q: Cost?** A: Expo free basic, EAS paid for builds.
+
+## 📝 14. Summary (One Liner):
+Expo easy managed setup for fast prototypes, RN CLI bare control for custom power – beginners Expo, pros CLI!
+
+---
+
+## 🎯 1. Title / Topic: 1.3 Setting Up React Native Project (Pehla App)
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Yeh poora setup jaise naya business shuru karna hai – pehle shop register karo (init project), phir electricity on karo (start server), gas cylinder connect (run on device), aur agar mess ho gaya (errors from old junk) toh poora clean sweep (gradlew clean, cache clear). Bina iske shop sirf paper pe rahega, real mein khul hi nahi payega!
+
+## 📖 3. Technical Definition (Interview Answer):
+Setting up a React Native project entails initializing the app scaffold with CLI tools, configuring the bundler (Metro), running the development server, building and deploying to simulators/devices, and maintaining cleanliness through cache/build cleans to resolve common artifacts.  
+Breakdown in Hinglish: "Scaffold" matlab ready template files; "Bundler (Metro)" JS code ko pack karta hai; "Artifacts" matlab old build files jo errors cause karte hain.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Blank folder se shuru karo toh dependencies (libs) miss, configs galat, builds fail – pehla "Hello World" bhi nahi chalega. Errors jaise "Module not found" ya "Gradle sync failed" se stuck. Old cache se ghost bugs (app crash without reason).  
+**Solution:** Yeh commands boilerplate deta hai, dev cycle fast (hot reload), aur cleans se reliability – production ready banao without surprises.
+
+## ⚙️ 5. Under the Hood (Technical Working):
+1. `init`: Downloads template from npm, creates package.json (deps list), node_modules install (npm i). Generates android/ios folders with Gradle/Pods.  
+2. `start`: Metro watches files, bundles JS on change (transpile Babel se).  
+3. `run-android`: Triggers Gradle (Android build tool) for APK compile, ADB (Android Debug Bridge) se install + launch.  
+4. Cleans: gradlew clean old .class files delete; watchman/npx cache clear Metro cache; build clean full rebuild force.  
+Kab clean: Dependency update pe (libs conflict), random crashes pe (stale cache), build errors jaise "Duplicate class" ya "R8 fail".  
+ASCII Diagram:  
+```
+npx init --> [package.json + node_modules + android/ios folders] 
+       |
+npx start --> [Metro: Watch Files --> Bundle JS on Change] --> Port 8081
+       |                                                          
+npx run-android --> [Gradle Assemble] --> APK Generate --> ADB Install --> Launch
+       ^                                                          
+Cleans: gradlew clean / npx start --reset-cache (If Errors: "Manifest merger failed")
+```
+
+## 💻 6. Hands-On: Commands & Syntax (CRITICAL SECTION):
+Yahaan full sequence, with cleaning details. Assume Windows/Mac, Android focus (iOS Mac only).
+
+**Core Commands:**
+
+1. **Init Project:**  
+```bash
+npx react-native@latest init MyFirstApp --template react-native-template-typescript  # Optional TS for type safety.
+```  
+**Breakdown:**  
+* `npx`: Runs without global install, avoids version hell.  
+* `@latest`: Newest RN (check compatibility).  
+* `init MyFirstApp`: Folder create + files (App.js, index.js).  
+* `--template ...`: JS default, TS for beginners better (error catch early).  
+**Expected Output:**  
+```text
+✔ Downloading template (takes ~1 min)
+✔ Copying template to MyFirstApp
+✔ Processing template into MyFirstApp
+✔ Installing dependencies with npm (takes ~2 min)
+Run instructions:
+  - cd MyFirstApp
+  - npx react-native start
+  - In another terminal: npx react-native run-android
+Success! Created MyFirstApp.
+```
+
+2. **Start Metro Bundler:**  
+```bash
+cd MyFirstApp
+npx react-native start --reset-cache  # --reset-cache optional, first time clean.
+```  
+**Breakdown:**  
+* `start`: Launches Metro (Webpack-like for RN).  
+* `--reset-cache`: Clears old bundles (use if "stale" errors).  
+**Expected Output:**  
+```text
+Loading dependency graph... (5s)
+Metro bundler ready.
+To reload the app, press R or Cmd+R.
+Tunnel ready at http://localhost:8081.
+```
+
+3. **Run on Android:**  
+```bash
+npx react-native run-android --deviceId emulator-5554  # Specific device.
+```  
+**Breakdown:**  
+* `run-android`: Builds debug APK, installs via ADB, bundles JS.  
+* `--deviceId`: List with `adb devices`, emulator ya physical.  
+* `--variant release`: For release build (slow, optimized).  
+**Expected Output:**  
+```text
+info JS server already running.
+info Building the app (cd android && ./gradlew app:installDebug)...
+> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+info Installing the app...
+info Launching on emulator-5554.
+Starting: Intent { cmp=com.myfirstapp/.MainActivity }
+```
+
+**Cleaning Commands (Detailed – Yeh key hai doubts ke liye!):**
+
+Cleaning kab:  
+- **Gradlew Clean:** Build errors pe jaise "Duplicate resources", "Manifest merger failed", "R.java not generated", "Outdated Gradle cache". Dependency update ke baad (npm i new lib). Random crashes without log.  
+- **Cache Clean:** Metro errors jaise "Unable to resolve module", "Transform error", "Stale JS bundle". App not reloading changes.  
+- **Build Clean:** Full reset – gradlew + cache + node_modules reinstall. Heavy issues jaise "SDK version mismatch", after OS update.  
+Errors types:  
+- Build fail: "Execution failed for task ':app:mergeDebugResources'" – old resources conflict.  
+- Runtime: "Red screen: Unable to load bundle" – cache stale.  
+- Install fail: "INSTALL_FAILED_INVALID_APK" – corrupted build.
+
+4. **Gradlew Clean:**  
+```bash
+cd android
+./gradlew clean  # Windows: gradlew.bat clean
+cd ..  # Back to root.
+```  
+**Breakdown:**  
+* `./gradlew`: Gradle wrapper (no global Gradle need).  
+* `clean`: Deletes build/ folder (.class, .dex files). Force full rebuild next run.  
+Variations: `./gradlew cleanBuildCache` (only cache), `./gradlew assembleDebug --rerun-tasks` (clean + build).  
+**Expected Output:**  
+```text
+> Configure project :app
+> Task :clean
+BUILD SUCCESSFUL in 15s (daemon alive, reused)
+Deleted: /android/app/build/
+```
+
+5. **Cache Clean (Metro/Watchman):**  
+```bash
+npx react-native start --reset-cache  # Metro cache.
+# Or full: watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf node_modules/.cache
+npm start -- --reset-cache  # If using npm scripts.
+```  
+**Breakdown:**  
+* `--reset-cache`: Clears /tmp/react-native-cache.  
+* `watchman watch-del-all`: Facebook's file watcher reset (if installed, brew install watchman).  
+**Expected Output:**  
+```text
+Metro cache cleared.
+Loading graph... done (no cache hit).
+```
+
+6. **Full Build Clean:**  
+```bash
+cd android && ./gradlew clean && cd ..
+rm -rf node_modules  # Or Windows: rmdir /s node_modules
+npm install  # Reinstall deps.
+npx react-native run-android  # Fresh build.
+```  
+**Breakdown:** Full wipe – use if above nahi kaam.  
+**Expected Output:** Clean install, longer first run (~5 min).
+
+**ADB Reverse (Physical Device):**  
+```bash
+adb reverse tcp:8081 tcp:8081  # For JS bundle access.
+# List devices: adb devices
+# Kill server if stuck: adb kill-server && adb start-server
+```  
+**Breakdown:** `adb` (Android SDK tool), `reverse`: Localhost tunnel device pe. Kab: WiFi debug ya USB tether.  
+**Expected Output:** No text, but `adb devices` shows "device".
+
+**Config Files Example:**  
+metro.config.js (root):  
+```js
+// Line 1: Default config import – RN ka standard bundler setup.
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
+/** @type {import('metro-config').MetroConfig} */
+const config = {};
+module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+// Breakdown: __dirname (current folder), merge for custom (e.g., add resolver.sourceExts: ['ts', 'tsx'] for TS).
+```  
+babel.config.js:  
+```js
+module.exports = {
+  presets: ['module:@react-native/babel-preset'],  // Transpile JSX/TS.
+};
+// Breakdown: Babel RN ke liye ES6+ ko JS mein convert.
+```
+
+**NPM Commands for Health:**  
+```bash
+npm list --depth=0  # Top-level deps.
+npm outdated  # Update needed?
+npm audit  # Security issues.
+npm audit fix  # Auto-fix low risk.
+```  
+**Breakdown:** `list`: Tree view; `outdated`: Versions compare; `audit`: Vulnerabilities scan (e.g., "High: lodash 4.17.15").  
+**Expected Output (outdated):**  
+```text
+Package      Current  Wanted  Latest
+react-native 0.72.0   0.72.6  0.74.0
+```
+
+## ⚖️ 7. Comparison (Ye vs Woh):
+**npm start vs npx react-native run-android:**  
+- **npm start:** Sirf bundler (JS ready, hot reload), no build/install. Kab: Code edit karte hue, emulator already running. Fast (seconds).  
+- **run-android:** Full cycle (build APK, install, launch, connect to bundler). Kab: First run, after clean, device test. Slow (1-5 min first).  
+Agar start chal raha, run-android auto connect.
+
+## 🚫 8. Common Mistakes (Beginner Traps):
+**Mistake:** Emulator na start kiye run-android – "No devices found".  
+**Fix:** Android Studio > AVD Manager > Create/Start Virtual Device.  
+**Mistake:** USB debugging off physical device – "Unauthorized".  
+**Fix:** Settings > Developer Options > USB Debugging on, adb reverse.  
+**Mistake:** Cache na clean kiye "Module resolution failed" – ghost import.  
+**Fix:** --reset-cache flag hamesha try.
+
+## 🌍 9. Real-World Use Case:
+Netflix RN CLI use karta hai daily builds ke liye – gradlew clean after lib updates (jaise new video player), millions devices pe stable. Startups pehle app init + run se MVP launch karte hain week mein.
+
+## 🎨 10. Visual Diagram (ASCII Art):
+```
+Init --> cd Project --> start (Metro Bg) 
+                  |
+Clean? --> gradlew clean / reset-cache --> run-android --> ADB Install --> App Launch
+                  |                                     
+NPM: list/outdated/audit (Health Check) <------------------+
+```
+
+## 🛠️ 11. Best Practices (Pro Tips):
+- Scripts in package.json: "android": "react-native run-android", "clean": "cd android && ./gradlew clean && cd .. && npx react-native start --reset-cache".  
+- After npm i: Always clean + run.  
+- Multiple devices: adb -s deviceId run-android.
+
+## ⚠️ 12. Consequences of Failure (Agar nahi kiya toh?):
+No clean: Builds corrupt, app crash on launch ("FATAL EXCEPTION"), hours debug waste. No init proper: Missing files, "Cannot find App.js" – project unusable.
+
+## ❓ 13. FAQ (Interview Questions):
+1. **Q: gradlew clean kab?** A: Build errors like duplicate classes, after dep changes.  
+2. **Q: Cache clean ka error?** A: Module not resolve, stale bundle.  
+3. **Q: adb reverse kyun fail?** A: No USB/WiFi, check adb devices.  
+4. **Q: Full clean sequence?** A: gradlew clean + rm node_modules + npm i + reset-cache.
+
+## 📝 14. Summary (One Liner):
+RN setup init-start-run se pehla app ready, cleans (gradlew/cache/build) errors fix – smooth dev cycle guaranteed!
+
+---
+
+## 🎯 1. Title / Topic: 1.4 Styling (StyleSheet, Inline vs External)
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Styling in RN jaise bachche ko kapde pehnana hai – Inline style har baar naye kapde choose karna (quick lekin wardrobe mess), External StyleSheet jaise almari mein organized sets (reusable, fast change, no repeat). LinearGradient jaise rainbow shirt – colors fade effect ke saath fancy look!
+
+## 📖 3. Technical Definition (Interview Answer):
+Styling in React Native leverages the StyleSheet API to define declarative style objects that are resolved to native platform-specific properties, supporting inline direct props or external imported sheets for performance and maintainability, with extensions like LinearGradient for advanced gradients.  
+Breakdown in Hinglish: "Declarative" matlab describe karo kya chahiye (not how); "Resolved to native" – RN styles ko Android styles.xml ya iOS CALayer mein convert; "Imported sheets" – file se load for DRY code.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Bina styles ke UI plain text jaise (no colors, layout overlap), responsive nahi (different screens pe break). Inline heavy se perf drop (har render pe recalculate).  
+**Solution:** StyleSheet cached IDs deta hai (fast apply), external reusability (theme change ek jagah), gradients visual appeal (buttons, backgrounds).
+
+## ⚙️ 5. Under the Hood (Technical Working):
+1. StyleSheet.create({}) object ko internal ID array mein convert (hashing).  
+2. Render time: style prop mein ID pass, native Yoga engine lookup + apply (flexbox calc).  
+3. Inline: Har render pe deep copy + parse (slow for complex).  
+4. LinearGradient: Expo lib, native shader draw (CPU efficient).  
+Kab use: Complex apps mein external for theming (dark/light mode).  
+ASCII Diagram:  
+```
+StyleSheet.create({box: {color:'red'}}) --> Internal ID [0x123] (Cached)
+Render: <View style={styles.box} /> --> Lookup ID --> Yoga Apply: setBackgroundColor(red)
+Inline: <View style={{color:'red'}} /> --> Parse Object --> Slower Hash + Apply
+Gradient: <LinearGradient colors={['#f00','#00f']} /> --> Native Draw: Interpolate Colors
+```
+
+## 💻 6. Hands-On: Commands & Syntax (CRITICAL SECTION):
+**External StyleSheet Full Example (App.js):**  
+```jsx
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+const App = () => (
+  <View style={styles.mainContainer}>
+    <View style={styles.box}>
+      <Text style={styles.label}>External Style: Red Box</Text>
+    </View>
+  </View>
+);
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#f0f0f0',
+    padding: 20  // All sides padding 20dp.
+  },
+  box: {
+    backgroundColor: 'red',
+    padding: 10,
+    borderRadius: 5,  // Rounded corners.
+    shadowColor: 'black',  // iOS shadow (Android elevation use).
+    shadowOpacity: 0.5,
+    elevation: 3  // Android shadow.
+  },
+  label: {
+    color: 'white',
+    fontSize: 16,
+    textAlign: 'center'  // Horizontal align.
+  }
+});
+
+export default App;
+```  
+**Line-by-Line:**  
+* `StyleSheet.create({})`: Keys as style names, values objects (camelCase props like backgroundColor).  
+* `style={styles.box}`: Reference ID, not object (perf).  
+**Expected Output:** Gray bg pe red rounded box center, white text inside, shadow effect.
+
+**Inline Style Example:**  
+```jsx
+<View style={{ flex: 1, backgroundColor: 'green', padding: 15 }}>
+  <Text style={{ color: 'yellow', fontSize: 14 }}>Inline Green!</Text>
+</View>
+```  
+**Breakdown:** Direct {}, lekin avoid complex (perf hit).  
+**Expected Output:** Green box yellow text.
+
+**LinearGradient (Install: npx expo install expo-linear-gradient):**  
+```jsx
+import { LinearGradient } from 'expo-linear-gradient';
+
+<LinearGradient 
+  colors={['#ff0000', '#0000ff']}  // Red to blue.
+  style={{ flex: 1, justifyContent: 'center' }}
+  start={{ x: 0, y: 0 }}  // Top-left start.
+  end={{ x: 1, y: 1 }}  // Bottom-right end.
+>
+  <Text style={{ color: 'white' }}>Gradient Background!</Text>
+</LinearGradient>
+```  
+**Line-by-Line:** `colors`: Array strings/hex; `start/end`: Direction points (0-1 normalized).  
+**Expected Output:** Diagonal red-to-blue fade, white text center.
+
+## ⚖️ 7. Comparison (Ye vs Woh):
+**Inline vs External StyleSheet:**  
+- **Perf:** Inline: Recreate each render (10-20% slower complex apps), External: Cached once (fast).  
+- **Maintenance:** Inline: Repeat code, External: One change everywhere.  
+- **Debug:** Inline: Easy inline see, External: Styles file check.  
+
+**RN StyleSheet vs CSS:**  
+- **Selectors:** CSS: .class { }, RN: No, sirf prop objects.  
+- **Units:** CSS: px/rem, RN: Numbers (dp auto-scale, no % for width usually).  
+- **Animations:** CSS: @keyframes, RN: Animated API separate.
+
+## 🚫 8. Common Mistakes (Beginner Traps):
+**Mistake:** Hyphen props use (background-color) – "Invalid style".  
+**Fix:** CamelCase (backgroundColor).  
+**Mistake:** Inline nested deep objects – memory leak.  
+**Fix:** Flatten + external.  
+**Mistake:** Gradient without expo – "Module not found".  
+**Fix:** Expo managed ya link manually.
+
+## 🌍 9. Real-World Use Case:
+Airbnb RN mein external StyleSheets use karta hai listing cards ke liye (theme switch ek file change), LinearGradient search bar backgrounds pe for premium feel.
+
+## 🎨 10. Visual Diagram (ASCII Art):
+```
+External: styles.js --> create({id1: {prop:val}}) --> <View style={styles.id1} /> --> Cached Apply
+Inline:    <View style={{prop:val}} /> --> Parse + Apply (Slow)
+Gradient:  colors=['r','b'] --> start(0,0) end(1,1) --> Native Shader Render
+```
+
+## 🛠️ 11. Best Practices (Pro Tips):
+- Constants file banao: const COLORS = {primary: '#007bff'}; styles mein use.  
+- Platform specific: Platform.OS === 'ios' ? {shadow...} : {elevation...}.  
+- Avoid !important – RN no support, override nahi.
+
+## ⚠️ 12. Consequences of Failure (Agar nahi kiya toh?):
+No styles: UI broken (text overlap, no responsive). Heavy inline: App 15-30% slower scroll, battery drain. Inconsistent theme: User confusion.
+
+## ❓ 13. FAQ (Interview Questions):
+1. **Q: StyleSheet benefits?** A: Cached, typed, performant.  
+2. **Q: Flex properties?** A: direction, wrap, justify, align.  
+3. **Q: Gradient lib?** A: expo-linear-gradient or react-native-linear-gradient.  
+4. **Q: Shadow cross-platform?** A: iOS shadow, Android elevation.
+
+## 📝 14. Summary (One Liner):
+RN styling StyleSheet external se organized + fast rakho, inline quick ke liye, gradients visual pop – native look easy!
+
+---
+
+## 🎯 1. Title / Topic: 1.5 State Management (Introduction with useState Hook)
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+useState jaise ek magic notepad hai pocket mein – likho current score (value), change karo toh poora scoreboard (UI) auto update ho jaata hai, bina manually refresh kiye. Jaise cricket mein run badha, screen pe dikhe – simple, lekin powerful for dynamic apps!
+
+## 📖 3. Technical Definition (Interview Answer):
+useState is a built-in React Hook that enables functional components to manage local state by returning a tuple of the current state value and a setter function, triggering re-renders on updates for reactive UIs.  
+Breakdown in Hinglish: "Built-in Hook" matlab React ka ready function; "Tuple" array [value, setter]; "Reactive UIs" change pe auto refresh.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Functional components stateless hote hain default – user input (button press) ignore, UI static (no counter, form data). Class components complex (this.state).  
+**Solution:** Local data (jaise toggle, input value) handle karta hai simply, re-render efficient (only changed parts).
+
+## ⚙️ 5. Under the Hood (Technical Working):
+1. First render: useState(initial) state init, setter bind.  
+2. Setter call: setState(newVal) – batch update queue mein daal, no immediate change.  
+3. React scheduler: Next tick pe re-render trigger, fiber node mark dirty.  
+4. Reconciliation: Diff virtual DOM, update only changed (batched for perf).  
+Kab use: Local only; global ke liye Context/Redux.  
+ASCII Diagram:  
+```
+First Render: useState(0) --> State=0, Setter=fn --> Render <Text>{0}</Text>
+                                      
+User: onPress --> setState(1) --> Queue Batch Update
+                                      
+Re-render: State=1 --> Diff: Text changed --> Update Native View {1}
+```
+
+## 💻 6. Hands-On: Commands & Syntax (CRITICAL SECTION):
+**Full Counter App Example:**  
+```jsx
+import React, { useState } from 'react';  // Line 1: useState import – Hook rules: top level only.
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';  // Touchable for button.
+
+const App = () => {
+  // Line 2: Declare – [getter, setter] = useState(initial). Initial can be fn for lazy.
+  const [count, setCount] = useState(0);  // Number state.
+  const [name, setName] = useState('');  // String state.
+
+  // Line 3: Handler fn – Avoid inline for perf (memoize if complex).
+  const increment = () => setCount(prev => prev + 1);  // Callback to avoid stale closure.
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Count: {count}</Text>  // Line 4: Display state – interpolates.
+      <Text>Welcome, {name || 'Guest'}!</Text>
+      <TouchableOpacity 
+        style={styles.button} 
+        onPress={increment}  // Line 5: Event --> Setter.
+        onPressIn={() => setName('Pressed!')}  // Temp state.
+      >
+        <Text>Click Me!</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  text: { fontSize: 24, margin: 10 },
+  button: { backgroundColor: 'blue', padding: 10, borderRadius: 5 }
+});
+
+export default App;
+```  
+**Line-by-Line Extra:** `prev => prev +1`: Current value use, no count++ (stale).  
+**Expected Output:** Center text "Count: 0", button press pe 1,2,... update instant, name change on press.
+
+## ⚖️ 7. Comparison (Ye vs Woh):
+**useState vs react-hook-form:**  
+- **Scope:** useState: Any local state (counter, toggle), manual validation.  
+- **Forms:** react-hook-form: Optimized forms (register, errors auto), less re-renders.  
+Kab: Basic useState, forms >10 fields hook-form.
+
+## 🚫 8. Common Mistakes (Beginner Traps):
+**Mistake:** Setter mein old value use (setCount(count +1)) – infinite loop if in render.  
+**Fix:** Callback: setCount(c => c +1).  
+**Mistake:** Hooks conditional (if inside) – "Invalid hook call".  
+**Fix:** Top level always.
+
+## 🌍 9. Real-World Use Case:
+Discord RN mein useState message input aur unread count ke liye – real-time update without full refresh.
+
+## 🎨 10. Visual Diagram (ASCII Art):
+```
+useState(0) --> [count=0, setCount] --> Render UI {0}
+                  ^
+Event --> setCount(1) --> Re-render --> Diff --> Update {1}
+```
+
+## 🛠️ 11. Best Practices (Pro Tips):
+- Descriptive names: [userName, setUserName].  
+- Initial fn: useState(() => expensiveCalc()).  
+- useReducer for complex state (multiple related).
+
+## ⚠️ 12. Consequences of Failure (Agar nahi kiya toh?):
+No state: App static, no interaction – user bored, uninstall. Wrong use: Infinite re-renders, crash OOM.
+
+## ❓ 13. FAQ (Interview Questions):
+1. **Q: useState return?** A: [state, setState].  
+2. **Q: Why callback in setter?** A: Fresh value guarantee.  
+3. **Q: Re-render trigger?** A: Setter call only.  
+4. **Q: vs useEffect?** A: State data, Effect side-effects.
+
+## 📝 14. Summary (One Liner):
+useState local reactive state deta hai [value, setter] se – changes pe smart re-render, dynamic UI easy!
+
+---
+
+## 🎯 1. Title / Topic: 1.6 Additional Info: onPress vs onClick
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+onPress jaise mobile screen pe finger touch karna (quick tap, haptic feedback), onClick web pe mouse click (hover + click, cursor change) – jaise smartphone call button vs laptop email link, action same lekin interaction natural alag!
+
+## 📖 3. Technical Definition (Interview Answer):
+onPress is React Native's gesture handler for touch events on mobile components like Touchable, providing native feedback, while onClick is React's web-specific handler for mouse/keyboard interactions without native touch semantics.  
+Breakdown in Hinglish: "Gesture handler" touch detect + respond; "Native feedback" press pe opacity change.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Web code copy mein onClick mobile pe kaam nahi (no touch), buttons dull (no press effect).  
+**Solution:** onPress touch optimized, accessibility (VoiceOver support), visual feedback.
+
+## ⚙️ 5. Under the Hood (Technical Working):
+1. TouchResponder: Start (down), move, end (up) track.  
+2. If no long press/drag, onPress fire.  
+3. Native: Android ripple, iOS opacity.  
+Kab: All interactive elements.  
+ASCII Diagram:  
+```
+Touch Down --> Responder: Start Tracking
+  |  
+  +-- Move > Threshold? --> Cancel (No Press)
+  |
+Touch Up --> Valid (Short, No Move)? --> onPress(fn) --> State Update / Action
+```
+
+## 💻 6. Hands-On: Commands & Syntax (CRITICAL SECTION):
+**TouchableHighlight Example (with Feedback):**  
+```jsx
+import React, { useState } from 'react';
+import { View, Text, TouchableHighlight, Alert, StyleSheet } from 'react-native';
+
+const App = () => {
+  const [pressed, setPressed] = useState(false);
+
+  const handlePress = () => {
+    setPressed(true);
+    Alert.alert('onPress Fired!', 'You tapped the button.');  // Native popup.
+    setTimeout(() => setPressed(false), 500);  // Reset.
+  };
+
+  return (
+    <View style={styles.container}>
+      <TouchableHighlight 
+        style={[styles.button, pressed && styles.pressed]}  // Dynamic style.
+        onPress={handlePress}  // Core handler.
+        underlayColor="#ddd"  // Press color.
+        activeOpacity={0.7}  // Fade on touch.
+        onLongPress={() => Alert.alert('Long Press!')}  // 500ms hold.
+      >
+        <Text style={styles.text}>Tap for onPress</Text>
+      </TouchableHighlight>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  button: { backgroundColor: 'green', padding: 15, borderRadius: 8 },
+  pressed: { backgroundColor: 'darkgreen' },
+  text: { color: 'white', fontWeight: 'bold' }
+});
+
+export default App;
+```  
+**Line-by-Line:**  
+* `TouchableHighlight`: Wraps child, handles touch.  
+* `onPress={fn}`: Short tap.  
+* `underlayColor`: Background on press.  
+* `onLongPress`: Extra event.  
+**Expected Output:** Green button, tap pe gray underlay + alert, state change color.
+
+(onClick web only: <button onClick={fn}> – RN mein avoid.)
+
+## ⚖️ 7. Comparison (Ye vs Woh):
+**onPress vs onClick:**  
+- **Events:** onPress: touchstart/end, onClick: mousedown/up + key.  
+- **Feedback:** onPress: Native (ripple/opacity), onClick: CSS (hover).  
+- **Platform:** onPress: Mobile essential, onClick: Web default.
+
+## 🚫 8. Common Mistakes (Beginner Traps):
+**Mistake:** Direct View pe onPress – "No responder".  
+**Fix:** Touchable wrap.  
+**Mistake:** Heavy fn inline – perf drop.  
+**Fix:** Separate handler.
+
+## 🌍 9. Real-World Use Case:
+Shopify app mein cart buttons onPress se add/remove, touch feedback for e-commerce flow.
+
+## 🎨 10. Visual Diagram (ASCII Art):
+```
+[Touchable] --Touch Down--> Active Opacity/Underlay --> Track Move
+             --Touch Up (Valid)--> onPress(fn) --> Alert/State
+             --Long Hold--------> onLongPress(fn)
+```
+
+## 🛠️ 11. Best Practices (Pro Tips):
+- TouchableOpacity for fade, Highlight for color change.  
+- Debounce if rapid fires (lodash throttle).  
+- Accessibility: accessibilityLabel="Tap to increment".
+
+## ⚠️ 12. Consequences of Failure (Agar nahi kiya toh?):
+No handler: Dead buttons, poor UX. Wrong one: Cross-platform issues.
+
+## ❓ 13. FAQ (Interview Questions):
+1. **Q: Touchable types?** A: Opacity (fade), Highlight (color), NativeFeedback (ripple).  
+2. **Q: onClick in RN?** A: Not native, use Pressable (new unified).  
+3. **Q: Delay?** A: Default 0, activeOpacity control.  
+4. **Q: Multiple?** A: onPress + onLongPress.
+
+## 📝 14. Summary (One Liner):
+onPress RN touch events ke liye native feedback ke saath, onClick web mouse – Touchable se wrap for pro feel!
+
+---
+
+## 🎯 1. Title / Topic: 1.7 Additional Info: Console Methods (log, warn, error)
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Console methods jaise school notebook ke sections – log normal notes (daily progress), warn sticky notes (hey, check this!), error red pen marks (urgent fix!) – debug karte hue code ka flow trace karo bina app crash kiye.
+
+## 📖 3. Technical Definition (Interview Answer):
+Console methods are JavaScript's global debugging APIs in React Native for outputting messages to the development console: log for general info, warn for non-critical alerts, and error for exceptions with stack traces, viewable via Chrome DevTools or Flipper.  
+Breakdown in Hinglish: "Global APIs" browser/RN mein built-in; "Stack traces" error line numbers.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Code run karte hue kya ho raha invisible – bugs blind guess. No logs: Prod issues trace impossible.  
+**Solution:** Real-time insights (variables, flows), levels for priority (warn for deprecations).
+
+## ⚙️ 5. Under the Hood (Technical Working):
+1. console.xxx('msg') – V8 JS engine mein push to debug channel.  
+2. RN: Forward to Chrome debugger (remote-js-debug).  
+3. Levels: log (info), warn (yellow), error (red + stack).  
+Kab: Dev only, prod mein strip (__DEV__).  
+ASCII Diagram:  
+```
+Code: console.log('Var:', obj) --> JS Engine --> Serialize Msg + Obj
+                                           |
+Dev Tools: Chrome/Flipper <-- Network (ws://localhost:8097) --> Display with Icon
+Warn: Yellow ! , Error: Red X + Trace (file:line)
+```
+
+## 💻 6. Hands-On: Commands & Syntax (CRITICAL SECTION):
+**Example in Component:**  
+```jsx
+import React, { useEffect } from 'react';
+import { View, Text } from 'react-native';
+
+const App = () => {
+  useEffect(() => {
+    console.log('App mounted, initial state ready.');  // Info: Lifecycle.
+    console.warn('This is a warning: Check API key.');  // Caution: Yellow.
+    try {
+      throw new Error('Simulated crash');
+    } catch (e) {
+      console.error('Error caught:', e.message, e.stack);  // Critical: Red.
+    }
+    console.table({ user: 'John', age: 25 });  // Table format for objects.
+  }, []);
+
+  return <View><Text>Check Console!</Text></View>;
+};
+```  
+**Line-by-Line:**  
+* `log(msg, ...args)`: Print any, objects expandable.  
+* `warn`: Same + icon.  
+* `error`: + stack (Error: msg at App.js:10).  
+* `table(obj)`: Pretty table.  
+**Expected Output (Chrome Console: Cmd+D > Debug):**  
+```text
+App mounted, initial state ready.  // Black, expandable if obj.
+This is a warning: Check API key.  // Yellow triangle ⚠️
+Error caught: Simulated crash      // Red circle ❌
+    at App (App.js:12:15)
+┌─────────┬──────┐
+│ (index) │ John │
+├─────────┼──────┤
+│   age  │  25  │
+└─────────┴──────┘
+```
+
+## ⚖️ 7. Comparison (Ye vs Woh):
+**log vs warn vs error:**  
+- **Priority:** log: Debug/info, warn: Potential issue (no crash), error: Exception (stack).  
+- **Output:** log: Plain, warn: Icon + continue, error: Halt? No, but trace.  
+- **Use:** log: Values print, warn: Deprecated API, error: Try-catch.
+
+## 🚫 8. Common Mistakes (Beginner Traps):
+**Mistake:** Prod mein logs – sensitive data leak (console open).  
+**Fix:** if (__DEV__) console.log...  
+**Mistake:** Objects direct – [Object object].  
+**Fix:** JSON.stringify or console.dir.
+
+## 🌍 9. Real-World Use Case:
+Uber devs console.error API fails pe log karte hain, warn for low signal – crash reports mein trace.
+
+## 🎨 10. Visual Diagram (ASCII Art):
+```
+log('Hi') --> Console: Hi (Plain Text)
+warn('Hey') --> Console: ⚠️ Hey (Yellow)
+error('Oops') --> Console: ❌ Oops + Stack Trace (Red)
+table({a:1}) --> Console: ┌──┐ Table Format
+```
+
+## 🛠️ 11. Best Practices (Pro Tips):
+- Group: console.group('API Call') ... groupEnd().  
+- Time: console.time('fetch') ... timeEnd().  
+- Flipper integrate for RN-specific (logs + network).
+
+## ⚠️ 12. Consequences of Failure (Agar nahi kiya toh?):
+No logs: Bugs hours debug, prod crashes mystery. Overuse: Console flood, miss critical.
+
+## ❓ 13. FAQ (Interview Questions):
+1. **Q: Stack trace kya?** A: Call chain lines.  
+2. **Q: View in RN?** A: Shake device > Debug > Chrome.  
+3. **Q: Clear?** A: console.clear().  
+4. **Q: Prod safe?** A: __DEV__ guard.
+
+## 📝 14. Summary (One Liner):
+Console log/warn/error debug levels se code trace – info to critical, dev tools mein visual!
+
+---
+
+## 🎯 1. Title / Topic: 1.8 Additional Info: WebView Support
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+WebView jaise app mein ek portable TV embed karna – bahar ka channel (website) andar dikhao, remote control (JS bridge) se interact, bina app se bahar nikle – hybrid power!
+
+## 📖 3. Technical Definition (Interview Answer):
+WebView is a React Native component from react-native-webview that embeds a full web browser instance within the app, loading URIs or HTML strings and enabling bidirectional JS communication via postMessage.  
+Breakdown in Hinglish: "Embed" native view mein web engine; "Bidirectional" app se web aur web se app.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Poora native banana time-consuming, existing web dashboard reuse nahi. Offline web? No.  
+**Solution:** Web content integrate (terms page, payments), hybrid apps banao cost low.
+
+## ⚙️ 5. Under the Hood (Technical Working):
+1. Install: npm i react-native-webview.  
+2. <WebView source={{uri}} /> – Native WebView create (Android: WebView, iOS: WKWebView).  
+3. Load: URL fetch, render HTML/JS.  
+4. Bridge: injectedJS run, onMessage for comms.  
+Kab: Static pages, third-party web.  
+ASCII Diagram:  
+```
+<App> --> <WebView source={{uri:'https://example.com'}} /> --> Native Load + Render
+  |                                                     |
+injectedJavaScript="alert('Hi')" <--- JS Bridge ---> onMessage={e => console.log(e.nativeEvent.data)}
+```
+
+## 💻 6. Hands-On: Commands & Syntax (CRITICAL SECTION):
+**Basic WebView Example:**  
+```jsx
+import React from 'react';
+import { View, Dimensions } from 'react-native';
+import WebView from 'react-native-webview';  // Line 1: Install first.
+
+const { width, height } = Dimensions.get('window');  // Screen size.
+
+const App = () => (
+  <View style={{ flex: 1 }}>
+    <WebView 
+      source={{ uri: 'https://www.reactnative.dev/' }}  // Line 2: URL or {html: '<h1>Hi</h1>'}.
+      style={{ flex: 1 }}  // Full size.
+      onLoadStart={() => console.log('Loading...')}  // Events.
+      onLoadEnd={() => console.log('Loaded!')}
+      onError={(syntheticEvent) => {  // Error handle.
+        const { nativeEvent } = syntheticEvent;
+        console.warn('WebView error: ' + nativeEvent.code);
+      }}
+      javaScriptEnabled={true}  // Default true.
+      domStorageEnabled={true}  // LocalStorage.
+      startInLoadingState={true}  // Show activity indicator.
+      renderLoading={() => <Text>Loading Web...</Text>}  // Custom loader.
+      scalesPageToFit={true}  // Zoom fit.
+    />
+  </View>
+);
+
+export default App;
+```  
+**Line-by-Line:**  
+* `source={{ uri }}`: Load URL.  
+* `onLoad*`: Lifecycle logs.  
+* `injectedJavaScript`: Pre-load JS string.  
+**Expected Output:** RN docs site load app mein, scroll/zoom work, loading text first.
+
+**Communication Example:**  
+Web mein: window.postMessage('Hello from Web');  
+RN: onMessage={e => Alert.alert(e.nativeEvent.data)}
+
+## ⚖️ 7. Comparison (Ye vs Woh):
+**WebView vs Native Web (Browser):**  
+- **Perf:** WebView: Integrated (fast switch), Browser: External (slow launch).  
+- **Control:** WebView: JS bridge, Native: No app data.  
+- **Security:** WebView: Sandboxed, but careful JS.
+
+## 🚫 8. Common Mistakes (Beginner Traps):
+**Mistake:** No internet permission – blank.  
+**Fix:** Manifest: <uses-permission android:name="android.permission.INTERNET" />.  
+**Mistake:** HTTPS only? No, but secure better.
+
+## 🌍 9. Real-World Use Case:
+Reddit app WebView for web previews in posts – native speed + web content.
+
+## 🎨 10. Visual Diagram (ASCII Art):
+```
+[RN App] --<WebView uri="site.com">--> [Native Web Engine Load HTML/JS]
+                  |                           |
+Custom JS Inject <--> postMessage Bridge <--> onMessage Handler
+```
+
+## 🛠️ 11. Best Practices (Pro Tips):
+- setSupportMultipleWindows={false} popups avoid.  
+- User agent custom for web detect.  
+- Offline: source={{ html: localHTML }}.
+
+## ⚠️ 12. Consequences of Failure (Agar nahi kiya toh?):
+No bridge: Isolated web, no app data. Errors: Infinite load, security vuln.
+
+## ❓ 13. FAQ (Interview Questions):
+1. **Q: Install?** A: npm i react-native-webview + link if old RN.  
+2. **Q: Comms?** A: postMessage both ways.  
+3. **Q: Perf tip?** A: Lazy load, cache.  
+4. **Q: iOS diff?** A: WKWebView faster than UIWebView.
+
+## 📝 14. Summary (One Liner):
+WebView web content app mein embed karta hai URI se, bridge se interact – hybrid easy!
+
+---
+
+## 🎯 1. Title / Topic: 1.9 Additional Info: Comparison: Debug vs Release Builds
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Debug build jaise beta version movie – extra commentary (logs), slow motion scenes (dev tools), test ke liye. Release jaise final cut – crisp, fast, no extras, theater ready (store upload).
+
+## 📖 3. Technical Definition (Interview Answer):
+Debug builds are unoptimized with source maps, dev server dependency, and full symbols for easy debugging, contrasting release builds which are minified, bundled standalone, and optimized (e.g., ProGuard, Hermes) for production performance and size.  
+Breakdown in Hinglish: "Source maps" code lines trace; "Minified" code compress (short vars); "Standalone" no dev server need.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Dev mein easy debug, prod mein slow/crash (unoptimized). Size big (store reject).  
+**Solution:** Debug test, release deploy – switch for real perf.
+
+## ⚙️ 5. Under the Hood (Technical Working):
+Debug: JS dev server, no minify, logs on.  
+Release: Offline bundle, R8/ProGuard obfuscate, Hermes AOT compile.  
+Kab switch: Prod test pe release build run.  
+ASCII Diagram:  
+```
+Debug: Code --> Babel (No Minify) + Source Maps --> Dev Server (Hot Reload) --> Large APK
+Release: Code --> Babel Minify + ProGuard --> Hermes Compile --> Small Obfuscated APK (Standalone)
+```
+
+## 💻 6. Hands-On: Commands & Syntax (CRITICAL SECTION):
+**Debug (Default):**  
+```bash
+npx react-native run-android  # Debug variant.
+```  
+**Expected Output:** ~20MB APK, connected to Metro.
+
+**Release Build:**  
+```bash
+cd android
+./gradlew assembleRelease  # Or bundleRelease for JS bundle.
+# Sign: keytool -genkey -v -keystore my-release-key.keystore ... (First time).
+# Edit android/app/build.gradle: signingConfigs.release { storeFile ... }
+cd ..
+npx react-native run-android --variant=release  # Install release.
+```  
+**Breakdown:**  
+* `assembleRelease`: Optimized APK generate.  
+* Signing: Prod need keystore (password protect).  
+**Expected Output:**  
+```text
+> Task :app:processReleaseResources
+> Task :app:bundleReleaseJSAndAssets
+BUILD SUCCESSFUL in 2m
+/app/build/outputs/apk/release/app-release.apk (10MB)
+```
+
+## ⚖️ 7. Comparison (Ye vs Woh):
+**Debug vs Release:**  
+- **Size:** Debug: 15-30MB (symbols), Release: 8-15MB (minified).  
+- **Speed:** Debug: Slower startup (dev connect), Release: 2x faster (AOT).  
+- **Debugging:** Debug: Breakpoints work, Release: Obfuscated (hard trace).
+
+## 🚫 8. Common Mistakes (Beginner Traps):
+**Mistake:** Release mein logs on – leak.  
+**Fix:** __DEV__ checks.  
+**Mistake:** No signing – "INSTALL_PARSE_FAILED_NO_CERTIFICATES".  
+**Fix:** build.gradle config.
+
+## 🌍 9. Real-World Use Case:
+Spotify release builds Play Store pe – optimized for low-end devices, debug internal QA.
+
+## 🎨 10. Visual Diagram (ASCII Art):
+```
+Debug: Edit --> No Opt + Maps --> Run-Debug --> Dev Tools On
+Release: Final --> Minify + Sign --> AssembleRelease --> APK to Store
+```
+
+## 🛠️ 11. Best Practices (Pro Tips):
+- Test release on device (emulator slow).  
+- android/app/build.gradle mein minSdkVersion 21+ for Hermes.  
+- Use --no-packager for offline test.
+
+## ⚠️ 12. Consequences of Failure (Agar nahi kiya toh?):
+Release untested: Prod crashes (unoptimized), store reject (unsigned). Size big: Download slow.
+
+## ❓ 13. FAQ (Interview Questions):
+1. **Q: Diff main?** A: Opt + standalone vs dev tools.  
+2. **Q: Command?** A: assembleRelease.  
+3. **Q: Hermes?** A: Enable in gradle for speed.  
+4. **Q: iOS equiv?** A: Archive in Xcode.
+
+## 📝 14. Summary (One Liner):
+Debug tools wala test build, release optimized prod – assembleRelease se small fast APK!
+
+---
+
+## 🎯 1. Title / Topic: 1.10 Additional Info: Permissions (Android AndroidManifest.xml)
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Permissions jaise party invite – app ko camera room mein entry chahiye toh host (user) se permission lo, Manifest mein naam likho (guest list), runtime pe check (door pe ID). Bina iske gate crash!
+
+## 📖 3. Technical Definition (Interview Answer):
+Android permissions are security features declared in AndroidManifest.xml for app features and requested at runtime via PermissionsAndroid API to comply with scoped access, preventing unauthorized resource use.  
+Breakdown in Hinglish: "Scoped access" limited rights; "Runtime" Android 6+ mandatory for dangerous perms.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** No perm: Camera crash "Access denied". Privacy breach if auto-grant.  
+**Solution:** User control, Google Play compliance, graceful deny handle.
+
+## ⚙️ 5. Under the Hood (Technical Working):
+1. Manifest declare <uses-permission> – install time check.  
+2. Runtime: PermissionsAndroid.request(PERMS.CAMERA) – Promise dialog.  
+3. Results: GRANTED/DENIED/REVOKED – handle.  
+Kab: Dangerous perms (camera, location) runtime, normal (internet) manifest only.  
+ASCII Diagram:  
+```
+AndroidManifest.xml: <uses-permission name="CAMERA" />
+App: request(CAMERA) --> OS Dialog "Allow?" --> User Tap
+                                 |
+GRANTED --> Use Feature        DENIED --> Show Explain / Retry
+```
+
+## 💻 6. Hands-On: Commands & Syntax (CRITICAL SECTION):
+**Manifest Edit (android/app/src/main/AndroidManifest.xml):**  
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- Line 1: Normal perm – auto grant. -->
+  <uses-permission android:name="android.permission.INTERNET" />
+  <!-- Line 2: Dangerous – runtime. -->
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <application ... >
+    ...
+  </application>
+</manifest>
+```  
+**Line-by-Line:** `name="..."` exact string from docs.
+
+**Runtime Request Code:**  
+```jsx
+import { PermissionsAndroid, Platform, Alert } from 'react-native';
+
+const requestPermissions = async () => {
+  if (Platform.OS === 'android') {  // iOS separate.
+    try {
+      const permissions = [
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+      ];
+      const granted = await PermissionsAndroid.requestMultiple(permissions);  // Multi.
+      // Line: Check each.
+      if (granted['android.permission.CAMERA'] === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('Camera OK');
+        // Use camera.
+      } else {
+        Alert.alert('Permission Denied', 'Camera needed for photos.');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  }
+};
+
+// Call: <Button onPress={requestPermissions} title="Request" />
+```  
+**Breakdown:** `requestMultiple`: Batch, results object. RESULTS: GRANTED/'denied'/'never_ask'.  
+**Expected Output:** Dialogs pop, grant pe log, deny pe alert.
+
+## ⚖️ 7. Comparison (Ye vs Woh):
+**Android vs iOS:**  
+- **Declare:** Android: Manifest.xml, iOS: Info.plist (keys like NSCameraUsageDescription).  
+- **Request:** Android: Runtime dialog, iOS: Settings app post-prompt.  
+- **Revoke:** Both: Settings > Apps > Permissions.
+
+## 🚫 8. Common Mistakes (Beginner Traps):
+**Mistake:** Runtime bhool – "EACCES".  
+**Fix:** Always request before use.  
+**Mistake:** No explain string – user deny.  
+**Fix:** Alert why needed.
+
+## 🌍 9. Real-World Use Case:
+Pokemon GO location perms runtime maangta hai – explain "Catch 'em all!", deny pe limited mode.
+
+## 🎨 10. Visual Diagram (ASCII Art):
+```
+Manifest Declare --> Install OK
+App Start --> request() --> Dialog Multi? --> Grant All?
+                  |                   |
+Yes --> Feature On    No --> Alert + Retry / Fallback
+```
+
+## 🛠️ 11. Best Practices (Pro Tips):
+- Explain dialog: "Location for nearby stores."  
+- Lib: react-native-permissions cross-platform.  
+- Never ask again? Check + direct to settings.
+
+## ⚠️ 12. Consequences of Failure (Agar nahi kiya toh?):
+Crash on access, Play reject ("Missing perms"), privacy lawsuits.
+
+## ❓ 13. FAQ (Interview Questions):
+1. **Q: Dangerous perms?** A: Camera, contacts, location.  
+2. **Q: Normal?** A: Internet, vibrate – auto.  
+3. **Q: iOS?** A: Plist + requestAuthorization.  
+4. **Q: Multi request?** A: requestMultiple.
+
+
+---
+
+==================================================================================
+
+
+# MODULE-2 → Core Components & State (Legacy & Modern)
 
 ### 2.1: Class Components (Sirf samajhne ke liye)
 
@@ -751,11 +2011,7 @@ Jab aap taiyaar hon, toh **"Module 3 ke notes do"** bolna\! 🧑‍💻
 
 =============================================================
 
-Chalo bhai, shuru karte hain aapke React Native notes ka Module 3\!
-
-Yeh module bohot important hai. Hum seekhenge ki data ki lambi lists (jaise Instagram feed) kaise dikhayein, images kaise handle karein, aur popups (Modals) kaise banayein. 📱
-
------
+# MODULE-3 → Lists, Images & Modals
 
 ### 3.1: `FlatList` (Efficient scrollable lists)
 
@@ -1533,11 +2789,7 @@ Jab aap taiyaar hon, toh **"Module 4 ke notes do"** bolna\! 🧑‍💻
 
 =============================================================
 
-Chalo bhai, shuru karte hain aapke React Native notes ka Module 4\!
-
-Is module mein hum UI ke sabse zaroori controls (jaise Switch, TextInput, ScrollView) aur core APIs (jaise AppState, StatusBar) ko cover karenge. Yeh components aapke app ki "body" hain. 🧑‍💻
-
------
+# MODULE-4 → UI Controls & Core APIs
 
 ### 4.1: `Pressable` (Modern touch handling)
 
@@ -2787,18 +4039,7 @@ Jab aap taiyaar hon, toh **"Module 5 ke notes do"** bolna\! 🧑‍💻
 
 =============================================================
 
-Chalo bhai, shuru karte hain aapke React Native notes ka Module 5\!
-
-Yeh module bohot hi zyada important hai. Hum app ki "atma" (soul) ke baare mein seekhenge:
-
-1.  **React Navigation:** Ek screen se doosri screen par jaana.
-2.  **Image Picker:** User ke phone se photo (gallery/camera) uthana.
-3.  **Redux:** Poore app ka "global" state (jaise user login) manage karna.
-4.  **React Hook Form:** Complex forms (jaise signup) ko aasaani se banana.
-
-Poora focus yahaan\! 🚀
-
------
+# MODULE-5 → Advanced Features & State Management
 
 ### 5.1: `Image Picker` (Gallery/Camera se image lena)
 
@@ -3452,11 +4693,7 @@ Jab aap taiyaar hon, toh **"Module 6 ke notes do"** bolna\! 🧑‍💻
 
 =============================================================
 
-Chalo bhai, shuru karte hain aapke React Native notes ka Module 6\!
-
-Yeh module aapke app ko "dimaag" (data) aur "auzaar" (tools) dega. Hum API se data laana (Axios), app ko debug karna (Flipper), aur layout design karna (Flexbox) seekhenge. Yeh professional banne ke liye bohot zaroori hai. 🚀
-
------
+# MODULE-6 → Data, Tooling & Best Practices
 
 ### 6.1: HTTP Requests (Axios se API call karna)
 
@@ -4947,13 +6184,9 @@ Jab aap taiyaar hon, toh **"Module 7 ke notes do"** bolna\! 🧑‍💻
 
 =============================================================
 
-Chalo bhai, shuru karte hain aapke React Native notes ka Module 7\!
 
-Yeh module, Module 7, React Native mein naye aane waalon ke liye **sabse zaroori modules mein se ek** hai. Ismein hum "code" nahi, balki "errors" aur "cache hell" (cache ki samasya) ko solve karna seekhenge. Ek professional developer ki yahi pehchaan hai ki woh errors se darta nahi, unhe fix karta hai. 🐞
+# MODULE-7 → Troubleshooting & Practical Fixes (Beginner Problems)
 
-Chaliye, shuru karte hain\!
-
------
 
 ## 7.1: Build & Cache Hell (Part 1): `gradlew clean` vs `gradlew.bat`
 
@@ -5639,13 +6872,7 @@ Chaliye, shuru karte hain\!
 	  
 =============================================================
 
-Chalo bhai, shuru karte hain aapke React Native notes ka Module 8\!
-
-Pichle module tak humne "Beginner" level ki zaroori cheezein (Core Components, State, Navigation, aur Errors) cover kar li hain. Ab hum "Intermediate" se "Professional" level ki taraf badh rahe hain. 🚀
-
-Module 8 poora React Hooks ke baare mein hai. Yeh woh magic tools hain jo aapke simple Functional Components ko super-powerful banate hain. Chaliye, React ke in power-ups ko samajhte hain\!
-
------
+# MODULE-8 → Advanced React Hooks
 
 ## 8.1: `useEffect` (Side effects, API calls, component lifecycle)
 
@@ -6428,11 +7655,7 @@ Module 8 poora React Hooks ke baare mein hai. Yeh woh magic tools hain jo aapke 
 =============================================================
 	  
 
-Chalo bhai, shuru karte hain aapke React Native notes ka Module 9\!
-
-Module 8 mein humne Hooks ko master kar liya. Ab Module 9 mein, hum React Navigation ke "Professional" level features dekhenge. Hum seekhenge ki Instagram jaise (Tabs), Gmail jaise (Drawer), aur nested navigation (ek ke andar ek) kaise banate hain. Chaliye, app ka flow design karte hain\! 🚀
-
------
+# MODULE-9 → Advanced Navigation (React Navigation)
 
 ## 9.1: Tab Navigator (Bottom tabs)
 
@@ -7238,15 +8461,7 @@ Module 8 mein humne Hooks ko master kar liya. Ab Module 9 mein, hum React Naviga
 	  
 =============================================================
 
-Chalo bhai, shuru karte hain aapke React Native notes ka Module 10\!
-
-Module 9 mein humne navigation ko professional level par master kar liya. Ab Module 10 mein hum app ki "aatma" (soul) yaani **State Management** ki baat karenge. 🧠
-
-`useState` choti cheezon ke liye theek hai. `useContext` "prop drilling" solve karta hai. Lekin jab aapki app *badi* ho jaati hai, data complex ho jaata hai, aur data ko server se fetch/cache karna hota hai, tab aapko professional tools ki zaroorat padti hai.
-
-Yeh module aapko "Professional" developer banayega. Chaliye shuru karte hain\!
-
------
+# MODULE-10 → Professional State Management
 
 ## 10.1: Redux Toolkit (Modern Redux, `configureStore`, `createSlice`)
 
@@ -8036,13 +9251,7 @@ Yeh module aapko "Professional" developer banayega. Chaliye shuru karte hain\!
 	  
 =============================================================
 
-Chalo bhai, shuru karte hain aapke React Native notes ka Module 11\!
-
-Pichle module mein humne State Management (Redux, Zustand, React Query) ki gehri samundar mein goti lagayi. 🧠 Ab Module 11 mein, hum apni app ko "zinda" karna seekhenge. Humari app ab data handle kar sakti hai, par kya woh smooth (makhan) hai? Kya woh 60fps par chalti hai?
-
-Yeh module **Performance aur Animations** ke baare mein hai. Yeh woh skills hain jo ek 'achhe' developer ko ek 'professional' developer se alag karti hain. Chaliye, app ko fast aur beautiful banate hain\! 🚀
-
------
+# MODULE-11 → Performance & Animations
 
 ## 11.1: `Animated` API (React Native ki built-in animation)
 
@@ -8849,9 +10058,7 @@ Yeh module **Performance aur Animations** ke baare mein hai. Yeh woh skills hain
 	  
 =============================================================
 
-Chalo bhai, shuru karte hain aapke React Native notes ka Module 12\!
-
-Module 11 tak humne app ko fast (performance) aur sundar (animations) bana liya hai. Ab Module 12 mein hum "React Native" ke "Native" part ko explore karenge. Hum seekhenge ki app ko phone ke *असली hardware* se kaise connect karein. 📱
+# MODULE-12 → Interacting with Native Device
 
 Yeh module "Professional" level ka hai. Hum Camera, Location, Fingerprint sensor, Bluetooth, aur Push Notifications jaise advanced features ko handle karna seekhenge. Chaliye, phone ke device features ko unlock karte hain\!
 
@@ -10151,9 +11358,7 @@ Yeh module "Professional" level ka hai. Hum Camera, Location, Fingerprint sensor
 
 =============================================================
 
-Chalo bhai, shuru karte hain aapke React Native notes ka Module 13\!
-
-Yeh hamara "Professional" level ka aakhri main module hai. Ab tak humne app bana li, state manage kar liya, animations daal diye, aur device hardware bhi access kar liya.
+# MODULE-13 → Testing, Deployment & TypeScript
 
 Module 13 mein hum seekhenge ki app ko **release (launch)** kaise karte hain. Ismein hum app ko *Test* karna, *Deploy* (publish) karna, aur *Maintain* karna seekhenge. Yeh "Zero-to-Professional" guide ka "Professional" wala hissa hai. 🚀
 
@@ -11277,9 +12482,7 @@ Yeh poora process (Note 42) hai:
 	  
 =============================================================
 
-Chalo bhai, shuru karte hain aapke React Native notes ka Module 14\!
-
-Yeh hamara **aakhri module** hai. Humne app banana, state manage karna, hardware access karna, aur app ko publish karna (Module 1-13) seekh liya hai.
+# MODULE-14 → Professional Development & Ecosystem
 
 Module 14 aapko ek "Professional" se "Elite" developer banayega. Ismein hum seekhenge ki jab app *crash* ho toh use kaise sambhalein (Error Boundaries) aur app ko *sabke* liye (Accessibility) kaise banayein. Chaliye, is course ko finish line tak le jaate hain\! 🏁
 
