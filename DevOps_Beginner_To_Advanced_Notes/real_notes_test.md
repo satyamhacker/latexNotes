@@ -28754,7 +28754,7 @@ File kaafi lambi hai, toh main **pehle 1-2 sections ka full notes dunga**, baaki
 ==================================================================================
 
 
-# 🚀 **SECTION-13 → AWS Part 1 (EC2, IPs, Elastic IP, AWS CLI, EBS, Volumes & Snapshots)**
+# 🚀 SECTION-13 → AWS Part 1 (EC2, IPs, Elastic IP, AWS CLI, EBS, Volumes & Snapshots)
 
 ## 🎯 AWS Cloud Basics - EC2, IPs, Elastic IP, AWS CLI, EBS, Volumes & Snapshots
 
@@ -29531,7 +29531,7 @@ Main ekdum similarly **Section-14 (Advanced AWS topics)** pura detail me banaung
 
 
 
-### 🎯 **SECTION-14: AWS Cloud for Project Setup (Lift & Shift)**
+### 🎯 SECTION-14: AWS Cloud for Project Setup (Lift & Shift)
 
 ***
 
@@ -30010,7 +30010,7 @@ Tumhare notes ne bilkul sahi point pakda tha: **Bucket Policy > ACL**. Maine bas
 ==================================================================================
 
 
-### 🎯 **SECTION-15: Re-Architecting & ElastiCache**
+### 🎯 SECTION-15: Re-Architecting & ElastiCache
 ***
 
 ### ✅ **Topic 5 - RDS Subnet Groups**
@@ -30520,7 +30520,7 @@ Isse aapki understanding "CDN kya hai" se "CDN ke saath kaam kaise karte hain" t
 
 ==================================================================================
 
-# 🎯 **SECTION-16: Maven - Build Tool, Lifecycle, pom.xml & Complete Understanding**
+# 🎯 SECTION-16: Maven - Build Tool, Lifecycle, pom.xml & Complete Understanding
 
 
 
@@ -36640,7 +36640,7 @@ Dynamic Agents ke saath, humein naye servers khareedne ki zaroorat nahi. Kuberne
 
 =============================================================
 
-# 🎯 **SECTION-18: Python Boto3 - Cloud Interaction with AWS SDK**
+# 🎯 SECTION-18: Python Boto3 - Cloud Interaction with AWS SDK
 
 Bilkul sahi! Boto3 ka **full, comprehensive, zero-doubt explanation** de raha hoon. Chalo shuru! 🚀
 
@@ -37869,7 +37869,7 @@ Ab tumhare paas:
 =============================================================
 
 
-# 🎯 **SECTION-19: Learn Terraform 
+# 🎯 SECTION-19: Learn Terraform 
 
 Ye poori series Terraform par hai - jo Cloud infrastructure ko **code** ke through manage karne ka magic tool hai. Ek bhi beginner doubt ya gap chhodunga nahi. Har code line ka breakdown, har concept ka simple analogy, step-by-step sari commands, interviews/real-life galtiyan, FAQs… **sab kuch** full clarity me milega.
 
@@ -50251,7 +50251,7 @@ Advanced Questions:
 
 ==================================================================================
 
-# 🎯 **SECTION-24: Containerization **
+# 🎯 SECTION-24: Containerization 
 
 ***
 
@@ -52907,7 +52907,7 @@ Production Skills:
 
 
 
-# 🎯 **SECTION-25: Kubernetes **
+# 🎯 SECTION-25: Kubernetes
 
 ## 🐣 **1. Samjhane ke liye (Simple Analogy)**
 
@@ -56356,7 +56356,7 @@ kubectl get svc
 
 
 
-# 🎯 **SECTION-27: GitOps Projects – Complete DevOps Automation Guide**
+# 🎯 SECTION-27: GitOps Projects – Complete DevOps Automation Guide
 
 ## 🐣 **1. Samjhane ke liye (Simple Analogy)**
 
@@ -57687,7 +57687,7 @@ Multi-environment approach:
 ==================================================================================
 
 
-# 🎯 **SECTION-28: Prometheus & Grafana – Complete Monitoring & Observability Guide**
+# 🎯 SECTION-28: Prometheus & Grafana – Complete Monitoring & Observability Guide
 
 ## 🐣 **1. Samjhane ke liye (Simple Analogy)**
 
