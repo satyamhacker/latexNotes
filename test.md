@@ -3,16 +3,6 @@
 #### foundational (Beginner to Intermediate) ####
 
 
-
-* **Module 5: Advanced Features & State Management**
-    * 5.1: `Image Picker` (Gallery/Camera se image lena) (`react-native-image-picker`) (Note 34)
-    * 5.2: Navigation (React Navigation - Stack Navigator)
-        * `NavigationContainer` (Note 14)
-        * **Comparison:** Stack, Tab, & Drawer Navigators (Note 11, 36)
-        * Navigation Actions (`navigation.goBack()`) (Note 20)
-    * 5.3: Redux (Global State Management ka introduction) (Note 31)
-    * 5.4: Advanced Forms (`react-hook-form`) (Note 1)
-
 * **Module 6: Data, Tooling & Best Practices**
     * 6.1: HTTP Requests (Axios se API call karna)
         * `Axios` Interceptors & Retry (Note 26)
