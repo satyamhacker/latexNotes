@@ -2,62 +2,7 @@
 
 #### foundational (Beginner to Intermediate) ####
 
-* **Module 1: React Native Introduction & Setup**
-    * 1.1: Introduction to React Native (Kya, Kyun, Kaise) (Note 15)
-    * 1.2: **Comparison:** Environment Setup (Expo vs React Native CLI) (Note 22)
-    * 1.3: Setting Up React Native Project (Pehla App)
-        * React Native CLI Commands (`init`, `start`, `run-android`) (Note 15, 16)
-        * **Comparison:** `npm start` vs `npm run-android` (Kab Kya Chalaana Hai?) (Note 16)
-        * `gradlew clean` (Kab aur Kyun?) (Note 15)
-        * `adb reverse` (Note 16, 25)
-        * Config Files (`metro.config.js`, `babel.config.js`) (Note 17)
-        * NPM Commands (`list`, `outdated`, `audit`) (Note 18)
-    * 1.4: Styling (StyleSheet, Inline vs External)
-        * External StyleSheet (CSS vs RN `StyleSheet`) (Note 1)
-        * `LinearGradient` (Note 8)
-    * 1.5: State Management (Introduction with `useState` Hook)
-        * **Comparison:** `useState` vs `react-hook-form` (Note 1)
-    * 1.6: Additional Info: `onPress` vs `onClick`
-        * `TouchableHighlight` (as `onPress` example) (Note 9)
-    * 1.7: Additional Info: Console Methods (`log`, `warn`, `error`)
-    * 1.8: Additional Info: WebView Support
-    * 1.9: Additional Info: **Comparison:** Debug vs Release Builds (Note 42)
-    * 1.10: Additional Info: Permissions (Android `AndroidManifest.xml`) (Note 29, 38, 40)
 
-* **Module 2: Core Components & State (Legacy & Modern)**
-    * 2.1: Class Components (Sirf samajhne ke liye)
-    * 2.2: **Comparison:** Functional vs Class Components (Hum Functional kyun use karte hain)
-    * 2.3: Props (Data paas karna)
-    * 2.4: Activity Indicator (Loading spinner)
-        * *Advanced:* `Skeleton Loaders` (Note 35)
-    * 2.5: Buttons (Basic button)
-    * 2.6: `TouchableHighlight` & TouchableWithoutFeedback (Note 9)
-
-* **Module 3: Lists, Images & Modals**
-    * 3.1: `FlatList` (Efficient scrollable lists) (Note 33, 49)
-    * 3.2: SectionList (Grouped lists)
-    * 3.3: `Image` (Local vs Network images)
-        * `ImageBackground` (Note 14)
-        * Image Optimization: `FastImage` (Note 34)
-        * Image Caching (Note 34)
-    * 3.4: `Modal` (Popup windows) (Note 3)
-    * 3.5: `Alert` (Note 3)
-    * 3.6: `react-native-swiper` (Note 7)
-
-* **Module 4: UI Controls & Core APIs**
-    * 4.1: `Pressable` (Modern touch handling)
-    * 4.2: Switch (Toggle on/off)
-    * 4.3: `ScrollView` (Simple scrolling content)
-    * 4.4: `View` Component (The `div` of React Native)
-    * 4.5: `Text` Component (Saara text isme)
-    * 4.6: `TextInput` (User se input lena)
-        * `KeyboardAvoidingView` (Note 1)
-    * 4.7: DateTime Picker (Date/Time chunna)
-    * 4.8: `Picker` / `RNPickerSelect` (Note 14, 19)
-    * 4.9: `SafeAreaView` (Note 14, 19)
-    * 4.10: `StatusBar` (Note 14)
-    * 4.11: `Toast` (Note 14)
-    * 4.12: `AppState` (App Lifecycle) (Note 2, 28)
 
 * **Module 5: Advanced Features & State Management**
     * 5.1: `Image Picker` (Gallery/Camera se image lena) (`react-native-image-picker`) (Note 34)
