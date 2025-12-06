@@ -2,62 +2,10 @@
 
 #### foundational (Beginner to Intermediate) ####
 
-
-* **Module 6: Data, Tooling & Best Practices**
-    * 6.1: HTTP Requests (Axios se API call karna)
-        * `Axios` Interceptors & Retry (Note 26)
-        * Offline Handling (`NetInfo`, Caching) (Note 26)
-        * Security: `SSL Pinning` (Note 26, 27)
-    * 6.2: Development Environment Setup (VS Code extensions)
-    * 6.3: Debugging (Flipper & React DevTools)
-        * `Toggle Element Inspector` (Dev Menu) (Note 12, 20)
-        * `Reactotron` (Debugging & Network) (Note 13)
-        * **Comparison:** `Flipper` vs `React Native Debugger` (Note 23)
-        * Comprehensive Debugging Guide (Breakpoints, Copying Errors, etc.) (Note 5, 24)
-        * `ADB` commands (Note 16, 25)
-    * 6.4: Publishing (Expo Go se share karna)
-    * 6.5: Best Practices & Conventions (Folders, Naming) (Note 47)
-    * 6.6: Flexbox (Layout design ki neev) (Note 21)
-    * 6.7: Icons & Fonts (Custom icons aur fonts)
-        * `MaterialIcons` (`react-native-vector-icons`) (Note 10)
-    * 6.8: `AsyncStorage` (Phone par data store karna) (Note 30, 31)
-    * 6.9: JSON Server (Fake API banana)
-    * 6.10: `Secure Storage`
-        * **Comparison:** `AsyncStorage` vs `Secure Storage` (Note 30)
-    * 6.11: Local Databases (SQLite, WatermelonDB, Realm) (Note 32)
-    * 6.12: `Git` Commands (`revert`, `rebase`, `reset`, `delete branch`) (Note 51)
-    * 6.13: Networking Tools (`dig` command) (Note 25)
-
-* **Module 7: Troubleshooting & Practical Fixes (Beginner Problems)**
-    * 7.1: Build & Cache Hell (Part 1): `gradlew clean` vs `gradlew.bat` (Kab aur Kyun?)
-    * 7.2: Build & Cache Hell (Part 2): Manual Cache Cleaning (`rm -rf android/build`, `rm -rf android/app/.cxx`)
-    * 7.3: Build & Cache Hell (Part 3): `npm cache clean --force`
-    * 7.4: **Comparison:** Manual Cache vs. `npx react-native start --reset-cache` (Kaunsa cache kya solve karta hai?)
-    * 7.5: The `package-lock.json` Problem (Kab delete karna chahiye?)
-    * 7.6: Common Build Errors Explained (`build cmake`, `debug error`, `SDK location` etc.)
-    * 7.7: Navigation Deep Dive: `initialRouteName="Login"` (Yeh kya hai aur agar na dein toh kya hoga?)
-    * 7.8: Native Changes: `When to Rebuild` (Note 4)
-
----
 #### 🚀 Professional Level (Advanced) 🚀
 ---
 
-* **Module 8: Advanced React Hooks**
-    * 8.1: `useEffect` (Side effects, API calls, component lifecycle)
-    * 8.2: `useContext` (Prop drilling se bachna) (Note 31)
-    * 8.3: `useCallback` & `useMemo` (Performance optimization)
-        * `PureComponent` / `React.memo` (Note 49)
-    * 8.4: `useRef` (Elements/values ko reference karna)
-    * 8.5: Custom Hooks (Apna khud ka Hook banana)
-    * 8.6: `useFocusEffect` (Note 14)
 
-* **Module 9: Advanced Navigation (React Navigation)**
-    * 9.1: Tab Navigator (Bottom tabs) (Note 11, 36)
-    * 9.2: Drawer Navigator (Side menu) (Note 11)
-    * 9.3: Nested Navigation (Stack ke andar Tabs, etc.)
-    * 9.4: Authentication Flow (Login/Signup ke baad app flow)
-    * 9.5: Deep Linking (Link se app kholna)
-    * 9.6: Navigation Optimization (Keep-Alive Screens) (Note 36)
 
 * **Module 10: Professional State Management**
     * 10.1: Redux Toolkit (Modern Redux, `configureStore`, `createSlice`) (Note 31)
