@@ -5,39 +5,6 @@
 #### 🚀 Professional Level (Advanced) 🚀
 ---
 
-* **Module 11: Performance & Animations**
-    * 11.1: `Animated` API (React Native ki built-in animation)
-    * 11.2: `React Native Reanimated` (Best performance, 60fps animations) (Note 35)
-    * 11.3: `React Native Gesture Handler` (Complex gestures) (Note 14, 35)
-    * 11.4: `FlatList` & `SectionList` Optimization (High performance lists) (Note 33)
-    * 11.5: Performance Profiling (Flipper, Profiler, `memo`)
-        * `PureComponent` / `React.memo` (Note 49)
-        * `InteractionManager` (Note 49)
-        * `Lazy Loading` (Screens & Components) (Note 33, 49)
-        * **Comparison:** `Fast Refresh` vs `Hot Reloading` (Note 26)
-    * 11.6: Advanced Animations & UI
-        * `Lottie` Animations (Note 50)
-        * `Skeleton Loaders` (Note 35)
-        * `BottomSheet` (Note 35)
-        * `Swipeable Lists` (Note 35)
-
-* **Module 12: Interacting with Native Device**
-    * 12.1: Push Notifications (Firebase Cloud Messaging - FCM)
-        * `Push-Triggered Jobs` (Note 39)
-        * `Notification Channels` (Android) (Note 40)
-    * 12.2: `Advanced Camera (VisionCamera)` (Note 37)
-    * 12.3: `Geolocation` (Live location tracking) (Note 37)
-    * 12.4: `Local Authentication` (Fingerprint / Face ID) (Note 41)
-    * 12.5: Linking Native Modules (Custom Java/Swift code ko jodna)
-    * 12.6: `Device Sensors (Accelerometer)` (Note 37)
-    * 12.7: `Bluetooth (BLE)` (Note 37)
-    * 12.8: `Background Tasks`
-        * `BackgroundTimer` (Note 2)
-        * `BackgroundFetch` (Note 39)
-        * `BackgroundGeolocation` (Note 39)
-        * `Headless JS` (Note 39)
-    * 12.9: `Screenshot Prevention` (Note 43)
-
 * **Module 13: Testing, Deployment & TypeScript**
     * 13.1: TypeScript (React Native ke saath setup karna)
     * 13.2: Unit Testing (Jest & React Native Testing Library)
