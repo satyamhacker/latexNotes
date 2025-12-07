@@ -5,15 +5,6 @@
 #### 🚀 Professional Level (Advanced) 🚀
 ---
 
-
-
-* **Module 10: Professional State Management**
-    * 10.1: Redux Toolkit (Modern Redux, `configureStore`, `createSlice`) (Note 31)
-    * 10.2: React Query / TanStack Query (Server state, caching, fetching)
-    * 10.3: `Zustand` (Halka-phulka global state manager) (Note 31)
-    * 10.4: `Context API` (Advanced) (Note 31)
-    * 10.5: `Persistent State` (`redux-persist`) (Note 31)
-
 * **Module 11: Performance & Animations**
     * 11.1: `Animated` API (React Native ki built-in animation)
     * 11.2: `React Native Reanimated` (Best performance, 60fps animations) (Note 35)

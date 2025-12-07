@@ -50775,3 +50775,520 @@ export default React.memo(HomeScreen);
 **Golden Rule:** Navigation mein **"speed aur memory ka balance"** rakhna zaroori hai. Keep-alive use karo lekin memory monitor karo. Nested navigators use karo lekhin file structure organized rakho. Auth flow mein **security first** — tokens ko encrypted storage mein rakho.
 
 ==================================================================================
+
+
+# **Module 10: Professional State Management**
+
+Is module ka maqsad hai tumhe "Variable banake data pass karne" wale beginner mindset se nikal kar "Global Store Architecture" wale pro mindset par lana.
+
+***
+
+## **10.1: Redux Toolkit (Modern Redux, `configureStore`, `createSlice`)**
+
+### 🎯 1. Title / Topic
+**Module 10.1: Redux Toolkit (RTK) - The Industry Standard**
+
+### 🐣 2. Samjhane ke liye (Simple Analogy)
+Imagine karo tumhara App ek **Bada Bank** hai.
+*   **Store (`configureStore`):** Ye wo main Locker Room (Vault) hai jahan saara paisa (Data) rakha hai.
+*   **Slice (`createSlice`):** Ye alag-alag departments hain (Loans, Savings, Credit Card). Har department ka apna hisaab-kitaab hai.
+*   **Dispatch:** Ye wo form hai jo customer (Component) bharta hai jab use paise nikalne hain.
+*   **Reducer:** Ye wo Bank Manager hai jo form check karta hai aur actually locker se paise kam ya zyada karta hai.
+
+### 📖 3. Technical Definition (Interview Answer)
+**Redux Toolkit (RTK)** is the official, opinionated, batteries-included toolset for efficient Redux development. It abstracts away the complex boilerplate of "Legacy Redux" (like switch statements and manual immutability) by using `createSlice` and `configureStore`.
+
+*Hinglish breakdown:* Pehle Redux mein bahut code likhna padta tha. RTK ne usse simplify kar diya hai. Ye under-the-hood **Immer.js** use karta hai, jisse hum state ko direct mutate karne jaisa code likh sakte hain, par wo actually immutable rehta hai.
+
+### 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+**Problem:**
+Agar `ProfileScreen` par user ne naam change kiya, toh `SettingsScreen` aur `Header` par bhi turant naya naam dikhna chahiye. Props pass karte-karte (`props drilling`) pagal ho jaoge.
+
+**Solution:**
+Redux ek central jagah (Store) deta hai. Wahan change karo, poori app mein jadu ki tarah update ho jayega.
+
+### ⚙️ 5. Under the Hood & File Anatomy
+**Architecture Flow:**
+UI -> Dispatch Action -> Slice (Reducer) -> Update Store -> UI Re-renders automatically.
+
+**📂 File Structure Deep Dive (Special Rule 1)**
+
+**File 1: `src/redux/store.js`**
+*   **Ye file kyun hai?** Ye app ka "Single Source of Truth" hai. Saari state yahin register hoti hai.
+*   **Agar nahi rahegi toh?** Redux chalega hi nahi. App crash.
+*   **Developer ko kab change karna hai?** Jab koi naya feature (naya Slice) banate ho, tab use yahan `reducer: {}` ke andar add karna padta hai.
+
+**File 2: `src/redux/slices/counterSlice.js`**
+*   **Ye file kyun hai?** Ye batata hai ki data kaise badlega (Logic).
+*   **Under the hood:** `createSlice` automatically action creators aur action types generate kar deta hai.
+
+### 💻 6. Hands-On: Code (Line-by-Line Breakdown)
+
+Pehle libraries install karo.
+
+**Command:**
+```bash
+npm install @reduxjs/toolkit react-redux
+# react-redux: Ye Redux aur React Native components ko connect karta hai
+```
+
+**Step 1: Slice Banana (`src/features/counter/counterSlice.js`)**
+
+```javascript
+import { createSlice } from '@reduxjs/toolkit'; // RTK se slice banane ka function import kiya
+
+// Initial state define kiya (Shuruwat mein value kya hogi)
+const initialState = {
+  value: 0,
+};
+
+export const counterSlice = createSlice({
+  name: 'counter', // Is slice ka unique naam (Redux DevTools mein dikhega)
+  initialState, // Upar wala state pass kiya
+  reducers: {
+    // Action 1: Increment logic
+    increment: (state) => {
+      // Redux Toolkit hamein state ko direct modify karne deta hai
+      // Under the hood, Immer library isse safe immutable update mein convert kar degi
+      state.value += 1; 
+    },
+    // Action 2: Decrement logic
+    decrement: (state) => {
+      state.value -= 1;
+    },
+    // Action 3: Payload ke saath (e.g., +5 karna ho)
+    incrementByAmount: (state, action) => {
+      state.value += action.payload; // action.payload mein wo number hoga jo hum bhejenge
+    },
+  },
+});
+
+// Actions ko export karo taaki UI components inhe call kar sakein
+export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+
+// Reducer ko export karo taaki store.js ise apne paas register kar sake
+export default counterSlice.reducer;
+```
+
+**Step 2: Store Banana (`src/app/store.js`)**
+
+```javascript
+import { configureStore } from '@reduxjs/toolkit'; // Store setup function
+import counterReducer from '../features/counter/counterSlice'; // Hamara banaya hua reducer
+
+export const store = configureStore({
+  reducer: {
+    // Yahan hum batate hain ki 'counter' naam ka state, counterReducer sambhalega
+    counter: counterReducer, 
+  },
+});
+```
+
+**Step 3: App ko Provider dena (`App.js`)**
+
+```javascript
+import React from 'react';
+import { Provider } from 'react-redux'; // Ye component poori app ko store ka access deta hai
+import { store } from './src/app/store'; // Hamara banaya hua store
+import MainComponent from './MainComponent';
+
+export default function App() {
+  return (
+    // Provider ke andar jo bhi hoga, wo Redux store use kar payega
+    <Provider store={store}>
+      <MainComponent />
+    </Provider>
+  );
+}
+```
+
+**Step 4: UI mein Use karna (`MainComponent.js`)**
+
+```javascript
+import React from 'react';
+import { View, Text, Button } from 'react-native';
+// useSelector: Data nikalne ke liye (Reading)
+// useDispatch: Action perform karne ke liye (Writing)
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement } from './src/features/counter/counterSlice';
+
+export default function MainComponent() {
+  // Store se specific data nikala. 
+  // Agar 'value' change hogi, sirf ye component re-render hoga.
+  const count = useSelector((state) => state.counter.value);
+  
+  // Dispatch function banaya action bhejne ke liye
+  const dispatch = useDispatch();
+
+  return (
+    <View>
+      <Text>Count: {count}</Text>
+      
+      {/* Button dabane par dispatch call hoga, wo reducer ko bolega increment karne ko */}
+      <Button title="Increment" onPress={() => dispatch(increment())} />
+      
+      <Button title="Decrement" onPress={() => dispatch(decrement())} />
+    </View>
+  );
+}
+```
+
+### 🚫 8. Common Mistakes
+*   **Galti:** `state.value = state.value + 1` purane Redux mein likhna.
+    *   **Kyun:** Purane Redux mein ye allowed nahi tha (Mutation error), lekin Toolkit mein ye sahi hai. Log darte hain ise use karne se.
+*   **Galti:** `Provider` add karna bhool jana `App.js` mein.
+    *   **Result:** Error aayega "Could not find react-redux context value".
+
+***
+
+## **10.5: Persistent State (`redux-persist`)**
+*(Main isko 10.1 ke saath hi samjhata hu kyunki ye Redux ka best friend hai)*
+
+### 🎯 1. Title / Topic
+**Module 10.5: Redux Persist (Data Save Rakhna)**
+
+### 🐣 2. Samjhane ke liye
+Agar Redux "RAM" (Temporary Memory) hai, toh Redux Persist "Hard Disk" (Permanent Memory) hai.
+Agar tum game khel rahe ho aur beech mein phone band ho gaya, toh Persist ensure karega ki jab tum wapis aao, toh game wahi se shuru ho, level 1 se nahi.
+
+### ⚙️ 5. Under the Hood & File Anatomy
+**📂 File Deep Dive: `AsyncStorage` (Native Module)**
+Persist akela kaam nahi karta, use storage chahiye. React Native mein hum `AsyncStorage` use karte hain.
+
+*   **Ye file/library kyun hai?** Android mein SharedPreferences aur iOS mein UserDefaults/FileSystem use karne ke liye.
+*   **Native Safety Rule:** Is library ko install karne ke baad iOS folder mein `pod install` zaroori hai.
+
+### 💻 6. Hands-On: Code (Store ko Modify karna)
+
+Pehle install karo:
+```bash
+npm install redux-persist @react-native-async-storage/async-storage
+cd ios && pod install
+# Warning: iOS mein pod install nahi kiya toh app crash hogi!
+```
+
+**Modified `store.js`:**
+
+```javascript
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist'; // Import persist tools
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Storage engine
+import { combineReducers } from 'redux'; 
+import counterReducer from '../features/counter/counterSlice';
+
+// 1. Config Object
+const persistConfig = {
+  key: 'root', // Key ka naam jisse data save hoga
+  storage: AsyncStorage, // React Native wala storage use karo
+  whitelist: ['counter'], // Sirf 'counter' slice ko save karo. Baaki sab ignore karo.
+  // blacklist: ['navigation'] // Agar kuch save NAHI karna hai toh yahan daalo
+};
+
+// 2. Reducers combine karo
+const rootReducer = combineReducers({
+  counter: counterReducer,
+});
+
+// 3. Reducer ko 'Persisted Reducer' mein convert karo
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+// 4. Store banao
+export const store = configureStore({
+  reducer: persistedReducer, // Normal reducer ki jagah persisted wala pass kiya
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false, // Redux Persist non-serializable data bhejta hai, warning off karni padti hai
+    }),
+});
+
+// 5. Persistor export karo (App.js ke liye)
+export const persistor = persistStore(store);
+```
+
+**Modified `App.js`:**
+
+```javascript
+import { PersistGate } from 'redux-persist/integration/react'; // Gatekeeper component
+import { store, persistor } from './src/app/store';
+
+export default function App() {
+  return (
+    <Provider store={store}>
+      {/* PersistGate wait karega jab tak data storage se wapis load na ho jaye */}
+      {/* loading={null} ki jagah koi Spinner component bhi dikha sakte ho */}
+      <PersistGate loading={null} persistor={persistor}>
+        <MainComponent />
+      </PersistGate>
+    </Provider>
+  );
+}
+```
+
+***
+
+## **10.2: React Query / TanStack Query (Server State)**
+
+### 🎯 1. Title / Topic
+**Module 10.2: React Query - The Server State Manager**
+
+### 🐣 2. Samjhane ke liye
+Redux tumhara "Local Wallet" hai. React Query tumhara "Bank Account" hai.
+Bank Account (Server) ka balance change ho sakta hai bina tumhe bataye (agar kisi ne paise bhej diye). React Query bar-bar check karta rehta hai (Background Fetch) ki balance sahi hai ya nahi.
+
+### 📖 3. Technical Definition
+**React Query (TanStack Query)** is strictly for **asynchronous state management**. It handles fetching, caching, synchronizing and updating server state.
+Redux is for **Client State** (Theme, Modal Open/Close). React Query is for **Server State** (API Data).
+
+### 🧠 4. Zaroorat Kyun Hai?
+**Problem:**
+Redux mein API call karne ke liye `useEffect` lagao, fir `isLoading` true karo, fir data aane par `isLoading` false karo, `error` handle karo. Bahut code likhna padta hai.
+**Solution:**
+React Query ye sab khud karta hai. Caching bhi free milti hai.
+
+### 💻 6. Hands-On: Code
+
+**Command:**
+```bash
+npm install @tanstack/react-query
+```
+
+**Step 1: Setup (`App.js`)**
+
+```javascript
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+// Client initialize kiya
+const queryClient = new QueryClient();
+
+export default function App() {
+  return (
+    // Provider lagaya taaki hooks puri app mein chal sakein
+    <QueryClientProvider client={queryClient}>
+      <MyScreen />
+    </QueryClientProvider>
+  );
+}
+```
+
+**Step 2: Component mein Fetching (`MyScreen.js`)**
+
+```javascript
+import { View, Text, ActivityIndicator } from 'react-native';
+import { useQuery } from '@tanstack/react-query'; // Main hook
+
+// Normal fetch function (API call)
+const fetchUser = async () => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+};
+
+export default function MyScreen() {
+  // useQuery hook ka jaadu
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ['userProfile'], // Unique Key: Is data ko pehchanne ke liye
+    queryFn: fetchUser,        // Function jo call karna hai
+    staleTime: 5000,           // 5 second tak data ko "fresh" maano (API dubara call mat karo)
+  });
+
+  // Loading state khud handle ho gaya
+  if (isLoading) return <ActivityIndicator size="large" />;
+
+  // Error state khud handle ho gaya
+  if (isError) return <Text>Error: {error.message}</Text>;
+
+  // Data display
+  return (
+    <View>
+      <Text>Name: {data.name}</Text>
+      <Text>Email: {data.email}</Text>
+    </View>
+  );
+}
+```
+
+### ⚔️ 7. Comparison (Redux vs React Query)
+
+| Feature | Redux Toolkit (Thunk) | React Query |
+| :--- | :--- | :--- |
+| **Code Size** | High (Slice + Thunk + Dispatch) | Low (Only Hook) |
+| **Caching** | Manually logic likhna padega | Built-in (Automatic) |
+| **Focus Refetch** | Nahi hota (User wapis aaya toh purana data dikhega) | Automatic Refetch (User wapis aaya toh naya data layega) |
+| **Best For** | UI State (Theme, Form Data) | API Data (Server Data) |
+
+***
+
+## **10.3: Zustand (Halka-phulka Global State)**
+
+### 🎯 1. Title / Topic
+**Module 10.3: Zustand - The Minimalist**
+
+### 🐣 2. Samjhane ke liye
+Agar Redux "Office Building" hai, toh Zustand ek "Open Plan Desk" hai.
+Koi darwaza nahi, koi manager nahi. Jisko jo chahiye wo seedha desk se utha le. Bahut fast aur simple.
+
+### 📖 3. Technical Definition
+A small, fast, and scalable bearbones state-management solution using simplified flux principles. It has a comfy API based on hooks, and **doesn't wrap your app in providers**.
+
+### 💻 6. Hands-On: Code
+
+**Command:**
+```bash
+npm install zustand
+```
+
+**Step 1: Store Banana (`store.js`)**
+Notice karo: Koi provider nahi chahiye!
+
+```javascript
+import { create } from 'zustand';
+
+// create function store banata hai
+const useBearStore = create((set) => ({
+  bears: 0, // Initial variable
+  
+  // Actions seedha state ke andar hi define hote hain
+  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
+  
+  removeAllBears: () => set({ bears: 0 }),
+}));
+
+export default useBearStore;
+```
+
+**Step 2: Use karna**
+
+```javascript
+import { View, Text, Button } from 'react-native';
+import useBearStore from './store'; // Direct import
+
+export default function BearComponent() {
+  // Direct hook ki tarah use karo
+  const bears = useBearStore((state) => state.bears);
+  const increasePopulation = useBearStore((state) => state.increasePopulation);
+
+  return (
+    <View>
+      <Text>{bears} Bears around here...</Text>
+      <Button title="Add Bear" onPress={increasePopulation} />
+    </View>
+  );
+}
+```
+
+### 🧠 4. Zaroorat Kyun Hai?
+Jab tumhe Redux ka boilerplate (Store, Slice, Provider) setup karne ka man na ho, aur Context API ki performance issues (re-renders) se bachna ho, tab Zustand best hai. Choti se medium apps ke liye perfect hai.
+
+***
+
+## **10.4: Context API (Advanced & Performance Pitfalls)**
+
+### 🎯 1. Title / Topic
+**Module 10.4: Context API - Native Solution**
+
+### 🐣 2. Samjhane ke liye
+Context API ek "Broadcast System" hai.
+Principal (Provider) mic pe bolta hai, aur poore school (Children components) mein awaz jati hai.
+
+### 🚫 8. Common Mistakes (Performance Trap)
+**Sabse badi galti:**
+Agar Context ke Provider mein value update hoti hai, toh **uske andar ke SAARE components re-render hote hain**, chahe unhe us data ki zaroorat ho ya na ho.
+Isliye bade apps mein High-Frequency Updates (jaise Animation ya Typing) ke liye Context use mat karna.
+
+### 💻 6. Hands-On: Code (The Right Way)
+
+**Step 1: Context Create (`ThemeContext.js`)**
+
+```javascript
+import React, { createContext, useState, useContext } from 'react';
+
+// 1. Context banaya
+const ThemeContext = createContext();
+
+// 2. Provider Component banaya
+export const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
+
+  return (
+    // value prop mein jo pass karoge, wo sabko milega
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+// 3. Custom Hook (Best Practice)
+// Component mein bar bar useContext(ThemeContext) likhne se bachata hai
+export const useTheme = () => useContext(ThemeContext);
+```
+
+**Step 2: Wrap App (`App.js`)**
+
+```javascript
+import { ThemeProvider } from './ThemeContext';
+import HomeScreen from './HomeScreen';
+
+export default function App() {
+  return (
+    <ThemeProvider>
+       <HomeScreen />
+    </ThemeProvider>
+  );
+}
+```
+
+**Step 3: Consume (`HomeScreen.js`)**
+
+```javascript
+import { View, Text, Button } from 'react-native';
+import { useTheme } from './ThemeContext'; // Hamara custom hook
+
+export default function HomeScreen() {
+  const { theme, toggleTheme } = useTheme(); // Data nikala
+
+  return (
+    <View style={{ backgroundColor: theme === 'light' ? '#fff' : '#000' }}>
+      <Text style={{ color: theme === 'light' ? '#000' : '#fff' }}>
+        Current Theme: {theme}
+      </Text>
+      <Button title="Change Theme" onPress={toggleTheme} />
+    </View>
+  );
+}
+```
+
+***
+
+# ⚔️ The Ultimate Comparison (Kaunsa Kab Use Karein?)
+
+Ye table interview mein ratta maar ke jana:
+
+| Scenario | Use What? | Why? |
+| :--- | :--- | :--- |
+| **Dark/Light Mode Theme** | **Context API** | Theme rarely change hoti hai, performance issue nahi aayega. |
+| **User Login/Auth Token** | **Redux Toolkit + Persist** | Kyunki hum chahte hain user app band karke wapis aaye toh logged in rahe. |
+| **API Data (News Feed/Products)** | **React Query** | Caching, Loading, Error states free milti hain. Redux mat use karo iske liye. |
+| **Complex App (Uber/Zomato)** | **Redux Toolkit** | Kyunki bahut saare components ko data share karna padta hai. |
+| **Small App (To-Do List)** | **Zustand** | Setup fast hai, code kam hai. |
+
+***
+
+### ⚠️ 12. Consequences of Failure (Agar dhyan nahi diya toh?)
+1.  **Missing `pod install` (Redux Persist):**
+    *   Agar `AsyncStorage` add kiya aur pod install nahi kiya, toh app launch hote hi crash hogi: *"Invariant Violation: TurboModuleRegistry.getEnforcing(...): 'RNC_AsyncSQLiteDBStorage' could not be found"*.
+2.  **Over-using Context:**
+    *   Agar Context mein har keyboard press save karoge, toh typing lag karegi kyunki poori app bar-bar render ho rahi hai.
+
+### 📝 14. Summary (One Liner)
+"Professional Apps mein UI State ke liye **Redux/Zustand** use karo, Server API ke liye **React Query**, aur jo data permanent rakhna hai uske liye **Redux Persist**."
+
+Ab ye notes complete detailed hain. Koi code line ya concept bacha nahi hai. **Module 10 Done & Dusted!** 🚀
+
+
+==================================================================================
