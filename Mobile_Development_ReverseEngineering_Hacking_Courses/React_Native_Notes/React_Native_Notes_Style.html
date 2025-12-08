@@ -1,53 +1,483 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>React Native Notes</title>
-<style>
-:root{--heading-blue:#0055cc;--important-red:#d40000;--code-bg:#1e1e1e;--text-color:#222;--bg-color:#f9f9f9;}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;font-size:16px;line-height:1.6;background:var(--bg-color);color:var(--text-color);padding:40px;max-width:900px;margin:0 auto;}
-h1,h2,h3,h4{margin-top:1.5em;margin-bottom:0.5em;font-weight:700;line-height:1.3;}
-h1{font-size:2.5em;color:var(--heading-blue);border-bottom:2px solid #eee;padding-bottom:10px;}
-h2{font-size:2em;color:#333;border-left:5px solid var(--heading-blue);padding-left:15px;background:#f0f7ff;padding-top:10px;padding-bottom:10px;border-radius:0 5px 5px 0;}
-h3{font-size:1.5em;color:#444;margin-top:2em;}
-h4{font-size:1.2em;color:#555;font-weight:600;}
-p{margin-bottom:1em;}
-.code-block{background:var(--code-bg);color:#d4d4d4;padding:20px;border-radius:8px;overflow-x:visible;word-wrap:break-word;white-space:pre-wrap;margin:1.5em 0;font-family:"Fira Code","Consolas",monospace;font-size:14px;box-shadow:0 4px 6px rgba(0,0,0,0.1);}
-.code-line{display:block;min-height:1.2em;}
-.keyword{color:#569cd6}.string{color:#ce9178}.comment{color:#6a9955}.function{color:#dcdcaa}.number{color:#b5cea8}.boolean{color:#569cd6}
-ul,ol{margin:1em 0;padding-left:2em;}
-li{margin-bottom:0.5em;}
-li strong{color:#0055cc;}
-.diagram-box{background:#f0f4f8;border:1px solid #d1d9e6;color:#333;padding:15px;border-radius:6px;font-family:"Courier New",monospace;white-space:pre-wrap;word-wrap:break-word;overflow-x:visible;margin:1em 0;font-size:13px;line-height:1.4;}
-.table-box{overflow-x:visible;word-wrap:break-word;white-space:pre-wrap;margin:1.5em 0;}
-.info-box{background:#e8f4f8;border-left:4px solid #0055cc;padding:15px;margin:1em 0;border-radius:4px;}
-.important{color:var(--important-red);font-weight:bold;background:rgba(212,0,0,0.1);padding:0 4px;border-radius:3px;}
-hr{border:0;border-top:1px solid #ddd;margin:3em 0;}
-#file-picker-container{border:2px dashed #ccc;padding:40px;text-align:center;background:white;border-radius:10px;margin-top:20px;}
-.btn-select{background:#0055cc;color:white;padding:10px 20px;border-radius:5px;cursor:pointer;display:inline-block;margin-top:10px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Native Professional Notes</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Prism/HighlightJS Theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark-reasonable.min.css">
+
+    <style>
+        :root {
+            /* Color Palette */
+            --bg-primary: #0f1115; /* Very dark slate */
+            --bg-secondary: #161b22; /* Slightly lighter for cards */
+            --bg-tertiary: #21262d; /* Borders/Separators */
+            
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --text-accent: #58a6ff; /* React Blue-ish */
+            
+            --accent-color: #61dafb; /* React Native Blue */
+            --accent-gradient: linear-gradient(135deg, #61dafb 0%, #4facfe 100%);
+            
+            --border-color: #30363d;
+            
+            --mac-red: #ff5f56;
+            --mac-yellow: #ffbd2e;
+            --mac-green: #27c93f;
+            
+            --font-main: 'Inter', sans-serif;
+            --font-code: 'Fira Code', monospace;
+            --font-display: 'Outfit', sans-serif;
+        }
+
+        /* Basic Reset & Layout */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Layout Grid */
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* Sidebar TOC */
+        .sidebar {
+            width: 300px;
+            background: rgba(15, 17, 21, 0.95);
+            border-right: 1px solid var(--border-color);
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+            display: none; /* Hidden on small screens initially */
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) transparent;
+        }
+        .sidebar::-webkit-scrollbar { width: 6px; }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+
+        @media (min-width: 1024px) {
+            .sidebar { display: block; }
+        }
+
+        .toc-title {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        /* TOC Links */
+        .toc-link {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            padding-left: 10px;
+            border-left: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .toc-link:hover, .toc-link.active {
+            color: var(--accent-color);
+            border-left-color: var(--accent-color);
+        }
+        .toc-link.sub-item { margin-left: 15px; font-size: 0.85rem; }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 4rem 10% 8rem 5%;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        /* Typography Styles */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            color: var(--text-primary);
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.25;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-bottom: 3px solid #30363d;
+            padding-bottom: 1rem;
+            width: fit-content;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 4rem;
+        }
+
+        h3 { font-size: 1.5rem; color: var(--text-accent); margin-top: 2.5rem; }
+        
+        p, li { margin-bottom: 1rem; font-size: 1.05rem; color: #c9d1d9; }
+        
+        strong { color: #fff; font-weight: 600; }
+        em { color: var(--text-accent); font-style: italic; }
+
+        /* Blockquotes / Alerts */
+        blockquote {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-color);
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+        blockquote p { margin: 0; color: #e6edf3; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        th, td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th { background: #222933; color: var(--text-primary); font-weight: 600; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #262c36; }
+
+        /* Code Blocks (Mac Style) */
+        pre {
+            background: #0d1117; /* Darker bg for contrast */
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin: 2rem 0;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden; /* For header clipping */
+        }
+
+        /* Mac Window Header */
+        .code-header {
+            background: #161b22;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            justify-content: space-between;
+        }
+        .window-controls { display: flex; gap: 8px; }
+        .control { width: 12px; height: 12px; border-radius: 50%; }
+        .control.red { background: var(--mac-red); }
+        .control.yellow { background: var(--mac-yellow); }
+        .control.green { background: var(--mac-green); }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-main);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .copy-btn:hover {
+            background: #23282f;
+            color: white;
+            border-color: var(--text-secondary);
+        }
+
+        /* Actual Code Area */
+        code {
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+        }
+        /* Inline code */
+        p code, li code {
+            background: rgba(110, 118, 129, 0.3);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            color: #ff7b72;
+        }
+
+        pre code.hljs {
+            padding: 1.5rem;
+            display: block;
+            overflow-x: auto;
+            background: transparent; /* inherited from pre */
+        }
+        
+        /* Links in text */
+        a { color: var(--text-accent); text-decoration: none; border-bottom: 1px dashed var(--text-accent); }
+        a:hover { border-bottom-style: solid; }
+
+        /* Lists */
+        ul, ol { padding-left: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+        li::marker { color: var(--accent-color); }
+
+        /* Loading State */
+        #loader {
+            position: fixed; inset: 0; background: var(--bg-primary);
+            display: flex; justify-content: center; align-items: center; z-index: 1000;
+        }
+        .spinner {
+            width: 50px; height: 50px; border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: var(--accent-color); border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content { padding: 2rem 1.5rem; }
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.75rem; }
+            .sidebar { display: none; }
+        }
+        
+        /* Custom Scrollbar for page */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #484f58; }
+
+    </style>
 </head>
 <body>
-<main id="render-target">
-    <div style="text-align:center;padding:50px;">
-        <h2>Loading notes...</h2>
+
+    <!-- Loading Spinner -->
+    <div id="loader"><div class="spinner"></div></div>
+
+    <div class="layout">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="toc-title">Course Modules</div>
+            <div id="toc-container">
+                <!-- Javascript will populate this -->
+            </div>
+        </nav>
+
+        <!-- Main Document Area -->
+        <main class="main-content" id="content-area">
+            <!-- Rendered Markdown will go here -->
+        </main>
     </div>
-</main>
-<input type="file" id="file-input" style="display:none;" accept=".md,.txt">
-<script>
-(async function(){
-    const target=document.getElementById("render-target");
-    const fileInput=document.getElementById("file-input");
-    const importantWords=["important","yaad rakhna","yaad","dhayan","dhyaan","remember","must","note","Do not","jaruri","Kyun zaroori","Agar na kiya","Agar","Best practice","Always","Never","Avoid","fail","crash","loss","problem","yaad rakhna chaiye","critical","essential","vital","key","crucial","CRITICAL","IMPORTANT","zaroori","GALAT","WARNING","DANGER","RISKY","Legal","Illegal","anivarya","mandatory"];
-    function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
-    function markImportant(s){if(!s||typeof s!=="string")return s;const sentences=s.split(/(?<=[\.\?\!\n])/);for(let i=0;i<sentences.length;i++){let sent=sentences[i];const lowered=sent.toLowerCase();let found=false;for(let k=0;k<importantWords.length;k++){const cue=importantWords[k];if(!cue)continue;if(lowered.indexOf(cue.toLowerCase())!==-1){sentences[i]='<span class="important">'+sent+"</span>";found=true;break}}if(!found&&!/^<span class="important">/.test(sentences[i])){let out=sentences[i];const phrases=importantWords.slice().sort(function(a,b){return b.length-a.length;});for(let k=0;k<phrases.length;k++){const ph=phrases[k];if(!ph)continue;const phEsc=ph.replace(/[.*+?^${}()|\[\]\\]/g,"\\$&");const re=new RegExp(phEsc,"gi");out=out.replace(re,function(m){return'<span class="important">'+m+"</span>";})}sentences[i]=out}}return sentences.join("")}
-    function highlightCode(code){const kw=['import','from','const','let','var','function','return','if','else','for','while','await','async','export','default','cd','ls','mkdir','pip','python','java','django','len','print','range','append','insert','remove','pop','sort','clear','split','join','strip','replace','upper','lower','get','keys','values','items','update','add','useState','useEffect','useContext','useCallback','useMemo','useRef','React','View','Text','StyleSheet','Image','Button','TouchableOpacity','FlatList','ScrollView','Modal','Alert'];const kwSet=new Set(kw.map(k=>k.toLowerCase()));let out='';let i=0;while(i<code.length){if(code[i]==='#'){let j=i;while(j<code.length&&code[j]!=='\n')j++;out+='<span class="comment">'+esc(code.substring(i,j))+'</span>';i=j;continue}if(code.substring(i,2)==='//'){let j=i;while(j<code.length&&code[j]!=='\n')j++;out+='<span class="comment">'+esc(code.substring(i,j))+'</span>';i=j;continue}if(code[i]==='"'||code[i]==="'"||code[i]==='`'){const q=code[i];let j=i+1;while(j<code.length&&code[j]!==q){if(code[j]==='\\')j++;j++}if(j<code.length)j++;out+='<span class="string">'+esc(code.substring(i,j))+'</span>';i=j;continue}if(/[a-zA-Z_]/.test(code[i])){let j=i;while(j<code.length&&/[a-zA-Z0-9_]/.test(code[j]))j++;const word=code.substring(i,j);const nextChar=j<code.length?code[j]:'';if(kwSet.has(word.toLowerCase())){out+='<span class="keyword">'+esc(word)+'</span>'}else if(nextChar==='('){out+='<span class="function">'+esc(word)+'</span>'}else if(/^(True|False|None|true|false|null|undefined)$/.test(word)){out+='<span class="boolean">'+esc(word)+'</span>'}else{out+=esc(word)}i=j;continue}if(/\d/.test(code[i])){let j=i;while(j<code.length&&/[\d.]/.test(code[j]))j++;out+='<span class="number">'+esc(code.substring(i,j))+'</span>';i=j;continue}out+=esc(code[i]);i++}return out}
-    function parseAndRender(rawText){if(!rawText)return;const lines=rawText.replace(/\r/g,"").split("\n");const frag=document.createDocumentFragment();let i=0;while(i<lines.length){let line=lines[i];let trim=line.trim();if(trim.startsWith("```")){let codeLines=[];i++;while(i<lines.length&&!lines[i].trim().startsWith("```")){codeLines.push(lines[i]);i++}const div=document.createElement("div");div.className="code-block";const inner=highlightCode(codeLines.join("\n")).split("\n").map((l)=>'<span class="code-line">'+l+"</span>").join("\n");div.innerHTML=inner;frag.appendChild(div);i++;continue}if(trim.startsWith("#")){const match=trim.match(/^#+/);const level=match?match[0].length:1;const text=trim.replace(/^#+\s*/,"");const h=document.createElement("h"+(level>4?4:level));h.innerHTML=text.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");frag.appendChild(h);i++;continue}if(/^(-{3,}|\*{3,})$/.test(trim)){frag.appendChild(document.createElement("hr"));i++;continue}if(trim.match(/^[-*]\s/)||trim.match(/^\d+\.\s/)){const isOrdered=trim.match(/^\d+\.\s/);const list=document.createElement(isOrdered?"ol":"ul");while(i<lines.length){let liTrim=lines[i].trim();let isListItem=liTrim.match(/^[-*]\s/)||liTrim.match(/^\d+\.\s/);if(!isListItem){if(lines[i].startsWith("  ")||lines[i].startsWith("\t")||liTrim===""){if(liTrim===""){i++;continue}}else{break}}if(isListItem){const li=document.createElement("li");let content=liTrim.replace(/^([-*]|\d+\.)\s+/,"");content=content.replace(/`([^`]+)`/g,'<code style="background:#eee;padding:2px 4px;border-radius:3px;color:#c7254e">$1</code>').replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");li.innerHTML=markImportant(content);list.appendChild(li)}i++}frag.appendChild(list);continue}if(trim.startsWith("|")||trim.startsWith("+")||(trim.startsWith("[")||trim.includes("]"))){let diagLines=[];while(i<lines.length){let nextL=lines[i];let nextTrim=nextL.trim();if(nextTrim==="")break;if(nextTrim.startsWith("#"))break;if(nextTrim.startsWith("```"))break;if(nextTrim.match(/^[-*]\s/)||nextTrim.match(/^\d+\.\s/))break;diagLines.push(nextL);i++}const div=document.createElement("div");div.className=diagLines[0].includes("|")?"table-box diagram-box":"diagram-box";div.textContent=diagLines.join("\n");frag.appendChild(div);continue}if(/^\s*$/.test(line)){i++;continue}if(trim!==""){const p=document.createElement("p");let html=line.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>").replace(/`([^`]+)`/g,'<code style="background:#eee;padding:2px 4px;border-radius:3px;color:#c7254e">$1</code>');html=markImportant(html);if(trim.toLowerCase().startsWith("note")||trim.includes("⚠️")||trim.includes("💡")){p.className="info-box"}p.innerHTML=html;frag.appendChild(p)}i++}target.innerHTML="";target.appendChild(frag)}
-    try{const resp=await fetch("React_Native_Notes.md");if(resp.ok){const text=await resp.text();parseAndRender(text)}else{throw new Error("Not found")}}catch(e){target.innerHTML='<div id="file-picker-container"><h3 style="color:#d00">Couldnt Auto-Load Notes</h3><p>Browser security prevented automatic reading of the file.</p><p>Please click below to select <strong>React_Native_Notes.md</strong> manually:</p><label for="file-input" class="btn-select">Select Notes File</label></div>'}
-    fileInput.addEventListener('change',(e)=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=(e)=>parseAndRender(e.target.result);reader.readAsText(file)})
-})();
-</script>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const mdFile = 'React_Native_Notes.md';
+            const contentArea = document.getElementById('content-area');
+            const tocContainer = document.getElementById('toc-container');
+            const loader = document.getElementById('loader');
+
+            // Configure Marked.js
+            marked.setOptions({
+                highlight: function(code, lang) {
+                    const language = highlight.getLanguage(lang) ? lang : 'plaintext';
+                    return highlight.highlight(code, { language }).value;
+                },
+                langPrefix: 'hljs language-'
+            });
+
+            // 1. Fetch Markdown
+            fetch(mdFile)
+                .then(response => {
+                    if (!response.ok) throw new Error("Could not load markdown file. Make sure you are using a local server (Live Server).");
+                    return response.text();
+                })
+                .then(markdown => {
+                    
+                    // --- Pre-processing Step ---
+                    // Convert indented "Module X:" lines to actual H2 headers so they look bold/big
+                    // Regex looks for: Start of line, optional whitespace, "Module" followed by number, colon
+                    let processedMarkdown = markdown.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, '## $1');
+
+                    // Also convert "1.X:" style lines to bold or H3 if needed, or keep as list
+                    // Let's make "x.y:" lines bold at least if they are at start of line
+                    processedMarkdown = processedMarkdown.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
+
+
+                    // 2. Custom Renderer for Mac-style Code Blocks
+                    const renderer = new marked.Renderer();
+                    
+                    renderer.code = function(code, language) {
+                        const validLang = language || 'plaintext';
+                        let highlighted = '';
+                        
+                        // Safety check: ensure code is a string
+                        const codeString = code ? String(code) : '';
+
+                        try {
+                             // Check if language is valid, otherwise auto or plaintext
+                             if (hljs.getLanguage(validLang)) {
+                                highlighted = hljs.highlight(codeString, { language: validLang }).value;
+                             } else {
+                                highlighted = hljs.highlightAuto(codeString).value;
+                             }
+                        } catch (e) { 
+                            // Fallback to simple escaping
+                            highlighted = codeString.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                        }
+
+                        // Double safety: if highligher returned object/null
+                        if (typeof highlighted !== 'string') {
+                             highlighted = codeString.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                        }
+
+                        return `
+                        <pre class="mac-window">
+                            <div class="code-header">
+                                <div class="window-controls">
+                                    <div class="control red"></div>
+                                    <div class="control yellow"></div>
+                                    <div class="control green"></div>
+                                </div>
+                                <button class="copy-btn" onclick="copyToClipboard(this)">
+                                    <i class="fa-regular fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <code class="hljs language-${validLang}">${highlighted}</code>
+                        </pre>`;
+                    };
+
+                    renderer.heading = function(text, level) {
+                        const safeText = text ? String(text) : '';
+                        const escapedText = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+                        return `<h${level} id="${escapedText}">${safeText}</h${level}>`;
+                    };
+
+                    // 3. Render HTML
+                    // Use processedMarkdown instead of raw markdown
+                    const htmlContent = marked.parse(processedMarkdown, { renderer: renderer });
+                    contentArea.innerHTML = htmlContent;
+
+                    // 4. Post-Process: Generate TOC
+                    generateTOC();
+
+                    // 5. Hide Loader
+                    loader.style.display = 'none';
+                })
+                .catch(err => {
+                    loader.style.display = 'none';
+                    contentArea.innerHTML = `
+                        <div style="text-align:center; padding: 2rem; border:1px solid #ff5f56; border-radius:8px;">
+                            <h2 style="color:#ff5f56; margin-top:0;">Error Loading Notes</h2>
+                            <p>${err.message}</p>
+                            <p style="color: grey; font-size: 0.9rem;">
+                                Tip: Browsers block reading local files directly for security. <br>
+                                Please use the <strong>"Live Server"</strong> extension in VS Code to view this file.
+                            </p>
+                        </div>
+                    `;
+                    console.error(err);
+                });
+
+            // --- Helpers ---
+
+            function generateTOC() {
+                const headers = contentArea.querySelectorAll('h1, h2');
+                let tocHTML = '';
+                
+                headers.forEach(header => {
+                    const id = header.id;
+                    const text = header.textContent;
+                    const isH1 = header.tagName === 'H1';
+                    
+                    const cleanText = text.replace(/#/g, '').trim(); // Remove leading # if any exist in text
+                    
+                    const className = isH1 ? 'toc-link' : 'toc-link sub-item';
+                    
+                    if(id && text) {
+                       tocHTML += `<a href="#${id}" class="${className}">${cleanText}</a>`;
+                    }
+                });
+                
+                tocContainer.innerHTML = tocHTML;
+                
+                // Add scroll spy or active state logic? 
+                // Simple version: Intersection Observer
+                setupScrollSpy();
+            }
+
+            window.copyToClipboard = function(btn) {
+                // Find the code element sibling container
+                const pre = btn.closest('pre');
+                const codeBlock = pre.querySelector('code');
+                const text = codeBlock.innerText; // innerText handles newlines better than textContent for code
+                
+                navigator.clipboard.writeText(text).then(() => {
+                    const originalHtml = btn.innerHTML;
+                    btn.innerHTML = `<i class="fa-solid fa-check"></i> Copied`;
+                    btn.style.color = '#27c93f';
+                    btn.style.borderColor = '#27c93f';
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalHtml;
+                        btn.style.color = '';
+                        btn.style.borderColor = '';
+                    }, 2000);
+                });
+            };
+
+            function setupScrollSpy() {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        const id = entry.target.getAttribute('id');
+                        if (entry.isIntersecting) {
+                            document.querySelectorAll('.toc-link').forEach(link => link.classList.remove('active'));
+                            const activeLink = document.querySelector(`.toc-link[href="#${id}"]`);
+                            if(activeLink) activeLink.classList.add('active');
+                        }
+                    });
+                }, { rootMargin: '-10% 0px -80% 0px' }); // Highlight when it's near the top
+
+                document.querySelectorAll('h1, h2').forEach(h => observer.observe(h));
+            }
+        });
+    </script>
 </body>
 </html>
