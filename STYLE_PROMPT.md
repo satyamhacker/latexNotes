@@ -111,12 +111,39 @@ code {
         margin: 0; padding: 0;
     }
 
-    /* Force text white for contrast */
-    .main-content, p, li, h1, h2, h3, code, td, th {
+    /* Force specific TEXT elements to be white for contrast */
+    p, li, td, th {
         color: #ffffff !important;
-        -webkit-text-fill-color: #ffffff !important; /* Override gradients */
+        -webkit-text-fill-color: #ffffff !important;
         text-shadow: none !important;
     }
+    
+    h1, h2, h3, h4, h5, h6 {
+         -webkit-print-color-adjust: exact !important;
+         print-color-adjust: exact !important;
+    }
+
+    /* PRESERVE Code Colors - Explicitly force Highlight.js colors for Print */
+    .main-content pre, .main-content code, .hljs {
+        background-color: #0d1115 !important;
+        /* color: #e6edf3 !important; <-- REMOVED */
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    p code, li code {
+        color: #ff7b72 !important;
+        background-color: rgba(110, 118, 129, 0.3) !important; 
+    }
+    
+    /* Force specific syntax colors (Atom One Dark approximation) */
+    .hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name { color: #ff7b72 !important; }
+    .hljs-link { color: #61aeee !important; }
+    .hljs-built_in, .hljs-type { color: #e5c07b !important; }
+    .hljs-number, .hljs-class { color: #d19a66 !important; }
+    .hljs-string, .hljs-meta-string { color: #98c379 !important; }
+    .hljs-title, .hljs-params { color: #61aeee !important; }
+    .hljs-comment { color: #5c6370 !important; font-style: italic !important; }
 
     .sidebar, .copy-btn, .window-controls, #loader {
         display: none !important;

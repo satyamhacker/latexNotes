@@ -42,7 +42,7 @@
             margin: 0;
             padding: 0;
             background-color: var(--bg-primary);
-            color: var(--text-secondary);
+            color: var(--text-primary);
             font-family: var(--font-main);
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
@@ -294,12 +294,54 @@
                 margin: 0; padding: 0;
             }
 
-            /* Force text white for contrast */
-            .main-content, p, li, h1, h2, h3, code, td, th {
+            /* Force specific TEXT elements to be white for contrast */
+            /* REMOVED .main-content from here to avoid cascading to code blocks */
+            p, li, td, th {
                 color: #ffffff !important;
                 -webkit-text-fill-color: #ffffff !important;
                 text-shadow: none !important;
             }
+            
+            /* Explicitly handle Headings to allow keeping their color if wanted, otherwise white */
+            h1, h2, h3, h4, h5, h6 {
+                /* Optional: uncomment to force white headers if they look bad */
+                /* color: #ffffff !important; */ 
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            /* Ensure code highlighting colors are PRESERVED */
+            /* We use a specific selector to beat any inheritance */
+            .main-content pre, .main-content code, .hljs {
+                background-color: #0d1115 !important;
+                /* color: #e6edf3 !important;  <-- REMOVED to allow syntax highlighting */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            /* Inline code specific fix */
+            p code, li code, .main-content p code {
+                color: #ff7b72 !important; /* Red for inline commands */
+                background-color: rgba(110, 118, 129, 0.3) !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+            
+            /* Force Highlight.js spans to show correctly */
+            .hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name { color: #ff7b72 !important; }
+            .hljs-link { color: #61aeee !important; text-decoration: underline !important; }
+            .hljs-built_in, .hljs-type { color: #e5c07b !important; }
+            .hljs-number, .hljs-class { color: #d19a66 !important; }
+            .hljs-string, .hljs-meta-string { color: #98c379 !important; }
+            .hljs-regexp, .hljs-template-variable { color: #98c379 !important; }
+            .hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula { color: #61aeee !important; }
+            .hljs-comment, .hljs-quote { color: #5c6370 !important; font-style: italic !important; }
+            .hljs-doctag { color: #c678dd !important; }
+            .hljs-meta, .hljs-meta-keyword, .hljs-tag { color: #e06c75 !important; }
+            .hljs-variable, .hljs-template-variable { color: #e06c75 !important; }
+            .hljs-attr, .hljs-attribute { color: #d19a66 !important; }
+            .hljs-section { color: #e5c07b !important; }
+            .hljs-emphasis { font-style: italic !important; }
+            .hljs-strong { font-weight: bold !important; }
 
             .sidebar, .copy-btn, .window-controls, #loader { display: none !important; }
             
