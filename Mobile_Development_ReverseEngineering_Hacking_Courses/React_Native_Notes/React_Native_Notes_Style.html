@@ -275,11 +275,62 @@
             .sidebar { display: none; }
         }
         
+
         /* Custom Scrollbar for page */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--bg-primary); }
         ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 5px; }
         ::-webkit-scrollbar-thumb:hover { background: #484f58; }
+
+        /* Print Optimization */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            
+            /* Apply background to wrapper to encourage printing */
+            .print-wrapper {
+                background-color: #0f1115 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                min-height: 100vh;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Force white text for better contrast in print */
+            .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th {
+                color: #ffffff !important;
+            }
+            
+            /* Keep code blocks distinct */
+            pre {
+                border: 1px solid #444;
+                page-break-inside: avoid;
+            }
+
+            .sidebar, .copy-btn, .window-controls, #loader {
+                display: none !important;
+            }
+
+            .layout {
+                display: block;
+            }
+            
+            .main-content {
+                padding: 2rem !important; /* restoration of padding for print */
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            /* Links underline removal for cleaner print */
+            a { text-decoration: none !important; border-bottom: none !important; }
+        }
 
     </style>
 </head>
@@ -288,19 +339,21 @@
     <!-- Loading Spinner -->
     <div id="loader"><div class="spinner"></div></div>
 
-    <div class="layout">
-        <!-- Sidebar Navigation -->
-        <nav class="sidebar" id="sidebar">
-            <div class="toc-title">Course Modules</div>
-            <div id="toc-container">
-                <!-- Javascript will populate this -->
-            </div>
-        </nav>
+    <div class="print-wrapper">
+        <div class="layout">
+            <!-- Sidebar Navigation -->
+            <nav class="sidebar" id="sidebar">
+                <div class="toc-title">Course Modules</div>
+                <div id="toc-container">
+                    <!-- Javascript will populate this -->
+                </div>
+            </nav>
 
-        <!-- Main Document Area -->
-        <main class="main-content" id="content-area">
-            <!-- Rendered Markdown will go here -->
-        </main>
+            <!-- Main Document Area -->
+            <main class="main-content" id="content-area">
+                <!-- Rendered Markdown will go here -->
+            </main>
+        </div>
     </div>
 
     <!-- Scripts -->
