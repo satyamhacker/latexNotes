@@ -65,6 +65,31 @@ h1 {
     border-bottom: 3px solid var(--border-color);
 }
 
+h2 {
+    color: var(--text-primary);
+    font-size: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Topic Sections - Big Bold Blue */
+h2.topic-section {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #4facfe;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-left: 5px solid #4facfe;
+    padding-left: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+
 /* Mac-Style Code Blocks */
 pre.mac-window {
     background: #0d1115;
@@ -99,6 +124,12 @@ code {
 
 /* CRITICAL PRINT STYLES - DO NOT MODIFY */
 @media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
     body { margin: 0; padding: 0; }
     
     .print-wrapper {
@@ -111,47 +142,28 @@ code {
         margin: 0; padding: 0;
     }
 
-    /* Force specific TEXT elements to be white for contrast */
-    p, li, td, th {
+    /* Force white text for readability */
+    .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th {
         color: #ffffff !important;
-        -webkit-text-fill-color: #ffffff !important;
-        text-shadow: none !important;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-         -webkit-print-color-adjust: exact !important;
-         print-color-adjust: exact !important;
     }
 
-    /* PRESERVE Code Colors - Explicitly force Highlight.js colors for Print */
-    .main-content pre, .main-content code, .hljs {
-        background-color: #0d1115 !important;
-        /* color: #e6edf3 !important; <-- REMOVED */
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+    /* Keep code blocks distinct */
+    pre {
+        border: 1px solid #444;
+        page-break-inside: avoid;
     }
-    
-    p code, li code {
-        color: #ff7b72 !important;
-        background-color: rgba(110, 118, 129, 0.3) !important; 
-    }
-    
-    /* Force specific syntax colors (Atom One Dark approximation) */
-    .hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name { color: #ff7b72 !important; }
-    .hljs-link { color: #61aeee !important; }
-    .hljs-built_in, .hljs-type { color: #e5c07b !important; }
-    .hljs-number, .hljs-class { color: #d19a66 !important; }
-    .hljs-string, .hljs-meta-string { color: #98c379 !important; }
-    .hljs-title, .hljs-params { color: #61aeee !important; }
-    .hljs-comment { color: #5c6370 !important; font-style: italic !important; }
 
     .sidebar, .copy-btn, .window-controls, #loader {
         display: none !important;
     }
+
+    .layout {
+        display: block;
+    }
     
-    .main-content { padding: 2rem !important; margin: 0; max-width: 100%; }
+    .main-content { padding: 2rem !important; margin: 0 auto; max-width: 100%; }
     
-    a { text-decoration: none !important; border: none !important; }
+    a { text-decoration: none !important; border-bottom: none !important; }
 }
 ```
 
@@ -166,6 +178,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. Pre-process Markdown (Fix indented modules)
     // Converts "  Module 1:" to "## Module 1:"
     let processed = markdown.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, '## $1');
+    // Converts "Topic X.X:" to special heading
+    processed = processed.replace(/^##\s+(Topic\s+\d+\.\d+:.*)/gm, '## TOPIC_MARKER $1');
     // Converts "1.1:" to bold
     processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
 
@@ -200,6 +214,14 @@ document.addEventListener("DOMContentLoaded", () => {
     renderer.heading = function(text, level) {
          const safeText = text ? String(text) : '';
          const id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+         
+         // Check if this is a Topic section
+         if (safeText.startsWith('TOPIC_MARKER ')) {
+             const cleanText = safeText.replace('TOPIC_MARKER ', '');
+             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+             return `<h${level} class="topic-section" id="${cleanId}">${cleanText}</h${level}>`;
+         }
+         
          return `<h${level} id="${id}">${safeText}</h${level}>`;
     };
 
