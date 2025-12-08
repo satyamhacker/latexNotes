@@ -64331,4 +64331,7575 @@ xcode → Output console  # iOS
 ==================================================================================
 
 
+# 🎯 Module 13: Testing, Deployment & TypeScript - COMPLETE NOTES
+
+---
+
+# 🎯 Module 13.1: TypeScript (React Native ke saath setup karna)
+
+## 🎯 1. Title / Topic
+**Module 13.1: TypeScript in React Native - Zero to Professional**
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+**JavaScript vs TypeScript** = **Driving without helmet vs With helmet**
+
+Jab aap JavaScript likhte ho, toh aap kuch bhi likha sakte ho:
+```javascript
+const age = "25"; // String hai, but naam se lag raha number hai
+const result = age + 5; // "255" aayega, unexpected!
+```
+
+TypeScript aapko **compile-time pe hi warning de deta hai** — "Yaar, age ek string hai, number nahi! Aage crash hoga!"
+
+**Real analogy:** 
+- **JavaScript** = Ek shop jaha aap kuch bhi khareed lo, payment mein problem hote ho baad mein
+- **TypeScript** = Ek shop jaha till ke time hi cashier check kar le, "Aapke paas credit card ya cash hai?"
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**TypeScript kyaa hai?**
+
+TypeScript ek **superset of JavaScript** hai jo **static typing** add karta hai. Matlab:
+
+- JavaScript mein variables ko koi bhi type assign ho sakta tha
+- TypeScript mein aap explicitly define karte ho: "Iss variable ka type `number` hai, `string` nahi"
+- **Compile time** pe TypeScript ko JavaScript mein convert kiya jata hai (transpile)
+- Browser aur React Native engine ko actual mein JavaScript hi execute karte hain
+
+**Hinglish breakdown:**
+> TypeScript = JavaScript + Type Safety + Interface Support
+> 
+> Iska matlab: Likha toh hum JavaScript likha rahe hain, lekin compiler pehle hi batade deta hai "Aye, iss line mein galti hai!"
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+### Problem: Without TypeScript
+
+```javascript
+// Ye code chalta toh hai, lekin bugs create karta hai
+
+function calculateDiscount(price, discountPercent) {
+  return price * discountPercent / 100;
+}
+
+// Dev 1 ne assume kiya discountPercent ek number hai
+const result1 = calculateDiscount(1000, 10); // 100 ✅
+
+// Dev 2 ne string pass kiya
+const result2 = calculateDiscount(1000, "10"); // "100" ❌ (string!)
+
+// App production mein crash nahi hoga immediately, lekin:
+// - Payment calculation galat hogi
+// - Database mein wrong data jaaega
+// - Customer complaint aayega
+
+// Bug find karna difficult hoga kyunki runtime pe hi dikhega
+```
+
+### Solution: TypeScript ke saath
+
+```typescript
+// TypeScript immediately batade deta hai ki "Yaar galti ho gayi!"
+
+function calculateDiscount(price: number, discountPercent: number): number {
+  return price * discountPercent / 100;
+}
+
+const result1 = calculateDiscount(1000, 10); // ✅ Sahi
+const result2 = calculateDiscount(1000, "10"); 
+// ❌ ERROR at compile time (IDE mein dikhai degi):
+// Argument of type 'string' is not assignable to parameter of type 'number'
+
+// Fix karna padega pehle hi
+const result2 = calculateDiscount(1000, Number("10")); // ✅ Sahi
+```
+
+**Benefits:**
+
+| Benefit | Ye kya karata hai? |
+|---------|------------------|
+| **Early Error Detection** | Bug likha nahi, compiler pakda le |
+| **Better IDE Support** | Autocomplete, goto definition, rename refactoring—sab smooth |
+| **Self-documenting Code** | Code padho toh pata chalata hai ki konsa parameter kaun type expect kar raha hai |
+| **Refactoring Safe** | Badi refactoring karo, toh TypeScript check kar deta hai ki sab sahi hai |
+| **Team Collaboration** | Team members ko clear hota hai function signature kyaa expect karta hai |
+
+## ⚙️ 5. Under the Hood (Technical Working) & File Anatomy
+
+### Architecture: TypeScript in React Native
+
+```
+┌─────────────────────────────────────────────────────┐
+│  Developer writes .ts / .tsx files                  │
+│  (TypeScript Code with full type safety)            │
+└────────────────┬────────────────────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────────────────────┐
+│  TypeScript Compiler (tsc)                          │
+│  - Checks types                                     │
+│  - Validates syntax                                 │
+│  - Reports errors (if any)                          │
+└────────────────┬────────────────────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────────────────────┐
+│  .js files generated (type info stripped)           │
+│  (Pure JavaScript - Metro bundler ko samajh aayega) │
+└────────────────┬────────────────────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────────────────────┐
+│  Metro Bundler                                      │
+│  - JS files ko bundle karta hai                     │
+│  - React Native bridge ko pass karta hai            │
+└────────────────┬────────────────────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────────────────────┐
+│  Android/iOS Native Bridge                          │
+│  - Ye actual JavaScript engine mein execute hota    │
+│  - JSI (JavaScriptCore/Hermes)                      │
+└────────────────┬────────────────────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────────────────────┐
+│  React Native App Running                           │
+│  (Components render, state updates, etc.)           │
+└─────────────────────────────────────────────────────┘
+```
+
+### 📂 File Structure Deep Dive (TypeScript Setup)
+
+#### **File 1: `tsconfig.json`**
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    // Ye kya karta hai? JavaScript mein kaun sa version compile hoga
+    // 'ES2020' matlab modern JavaScript features use kar sakte ho (async/await, optional chaining, etc.)
+    
+    "module": "commonjs",
+    // Ye kya karta hai? Module system - kaise import/export hoga
+    // 'commonjs' = require() / module.exports (Node.js style)
+    
+    "lib": ["ES2020"],
+    // Ye kya karta hai? Global types (Array, Object, Promise types define karte hain)
+    // 'ES2020' = latest JavaScript APIs ke types
+    
+    "jsx": "react-native",
+    // Ye kya karta hai? JSX syntax ka support
+    // 'react-native' = React Native ke JSX rules ko follow kara
+    
+    "strict": true,
+    // Ye kya karta hai? Strictest type checking on kar de
+    // true = sab type errors catch karega
+    
+    "esModuleInterop": true,
+    // Ye kya karta hai? CommonJS aur ES modules ko compatible banata hai
+    // Agar kisi library ka .default nahi hai, toh bhi import hoga
+    
+    "skipLibCheck": true,
+    // Ye kya karta hai? Dependency files ke types ko skip kar de (faster compilation)
+    // true = external libraries ke type checking skip kar (zyada jaldi compile hoga)
+    
+    "forceConsistentCasingInFileNames": true,
+    // Ye kya karta hai? File names ka casing check kara
+    // true = App.js aur app.js ko different treat karega
+    
+    "resolveJsonModule": true,
+    // Ye kya karta hai? JSON files ko import kar sake
+    // true = import config from './config.json' possible
+    
+    "declaration": true,
+    // Ye kya karta hai? .d.ts files generate kara (type definitions ke liye)
+    // true = agr library bana rahe ho, toh types export ho jayenge
+    
+    "noUnusedLocals": true,
+    // Ye kya karta hai? Unused variables catch kara
+    // true = agr koi variable na use ho, error aayega
+    
+    "noUnusedParameters": true,
+    // Ye kya karta hai? Unused function parameters catch kara
+    // true = function params unused hon, error aayega
+    
+    "moduleResolution": "node"
+    // Ye kya karta hai? Node.js style path resolution
+    // 'node' = node_modules se import resolve hoga
+  },
+  "include": ["index.js", "**/*.ts", "**/*.tsx"],
+  // Ye kya karta hai? Kaun si files compile karni hain
+  // index.js + sab .ts/.tsx files compile hon
+  
+  "exclude": ["node_modules", "**/*.spec.ts"]
+  // Ye kya karta hai? Kaun si files skip karni hain
+  // node_modules aur test files skip kar
+}
+```
+
+#### **File 2: `babel.config.js`**
+
+```javascript
+// Babel configuration - TypeScript ko Babel ke saath integrate karna
+
+module.exports = {
+  presets: [
+    'react-native',
+    // Ye kya hai? Ek preset matlab pre-configured rules ka set
+    // 'react-native' = React Native ke liye optimized Babel setup
+    // Ye internally TypeScript support include karta hai
+  ],
+  plugins: [
+    ['@babel/plugin-proposal-decorators', { legacy: true }]
+  ]
+};
+```
+
+## 💻 6. Hands-On: Code (Setup aur Real Examples)
+
+### Step 1: TypeScript Setup Karna
+
+```bash
+# Project create karna TypeScript support ke saath
+npx react-native init MyTypedApp --template react-native-template-typescript
+# Ye kya karta hai? React Native project create karega jo pehle se TypeScript setup ke saath aayega
+# Template mein tsconfig.json, babel.config.js, sab ready hoga
+```
+
+### Step 2: Real-World Code Examples
+
+#### **Example 1: Basic Component with Types**
+
+```typescript
+// components/UserCard.tsx
+
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+// Step 1: Interface define karna - ye batata hai UserCard component ko kya props chahiye
+interface User {
+  id: number;
+  // Ye kya hai? User ki unique ID - number type ki honi chahiye
+  
+  name: string;
+  // Ye kya hai? User ka naam - string type ki honi chahiye
+  
+  email: string;
+  // Ye kya hai? User ka email - string type ki honi chahiye
+  
+  age?: number;
+  // Ye kya hai? Optional field - age ho sakta hai ya nahi bhi
+  // '?' matlab optional
+}
+
+// Step 2: Component Props interface
+interface UserCardProps {
+  user: User;
+  // Ye kya hai? Props mein user object pass hoga
+  
+  onPress?: () => void;
+  // Ye kya hai? Optional callback function - jab card press ho
+}
+
+// Step 3: Component definition
+export const UserCard: React.FC<UserCardProps> = ({ user, onPress }) => {
+  // React.FC = React Functional Component
+  // TypeScript ko pata chalata hai ye ek React component hai
+  // Generic type <UserCardProps> se TypeScript props ko validate karega
+  
+  return (
+    <View style={styles.container}>
+      <Text style={styles.name}>{user.name}</Text>
+      {/* Ye kya hai? User ka naam display karna */}
+      
+      <Text style={styles.email}>{user.email}</Text>
+      {/* Ye kya hai? User ka email display karna */}
+      
+      {user.age && <Text style={styles.age}>Age: {user.age}</Text>}
+      {/* Ye kya hai? Age display karna agar available ho */}
+      {/* && operator = agar user.age truthy ho, toh Text render kar */}
+    </View>
+  );
+};
+
+// Step 4: Styles
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+    marginVertical: 8,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+  name: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  email: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 4,
+  },
+  age: {
+    fontSize: 12,
+    color: '#999',
+    marginTop: 4,
+  },
+});
+```
+
+#### **Example 2: API Call with Types**
+
+```typescript
+// services/api.ts
+
+import axios from 'axios';
+
+// Step 1: Response types define karna
+interface ApiResponse<T> {
+  // <T> = Generic type - kisi bhi data type ke saath kaam kar sake
+  
+  success: boolean;
+  // Ye kya hai? API call successful tha ya nahi
+  
+  data: T;
+  // Ye kya hai? Actual response data - T type ka
+  // T kya hoga, ye function call karte time pata chalega
+  
+  message?: string;
+  // Ye kya hai? Optional message agr error ho
+}
+
+// Step 2: User list API response type
+interface UserListResponse {
+  users: Array<{
+    id: number;
+    name: string;
+    email: string;
+  }>;
+  total: number;
+}
+
+// Step 3: API call function with types
+export const fetchUsers = async (): Promise<ApiResponse<UserListResponse>> => {
+  // Promise<ApiResponse<UserListResponse>> = ye function Promise return karega
+  // Jab Promise resolve ho, toh ApiResponse<UserListResponse> type ka data aayega
+  
+  try {
+    const response = await axios.get('/api/users');
+    // await = server ka response aane tak wait kar
+    // response mein data aayega
+    
+    return {
+      success: true,
+      data: response.data,
+      // Ye kya hai? API se jo data aaya, ushe return kar
+      // TypeScript check karega ki response.data, UserListResponse type ka hai ya nahi
+    };
+  } catch (error) {
+    // Catch block - agar request fail ho
+    
+    return {
+      success: false,
+      data: { users: [], total: 0 },
+      // Ye kya hai? Error case mein empty data return kar
+      
+      message: error instanceof Error ? error.message : 'Unknown error',
+      // Ye kya hai? Error ka message return kar
+      // error instanceof Error check karta hai - agr actually Error object hai
+    };
+  }
+};
+```
+
+## ⚖️ 7. Comparison & Command Wars
+
+### ⚔️ Command Comparison
+
+| Command | Kab chalana hai? | Ye kya karta hai? | Warning |
+|---------|-----------------|-----------------|---------|
+| `npx tsc --noEmit` | Development mein, pre-commit hook mein | Sirf type-check karta hai, .js files generate nahi karta | Fast - koi files generate nahi |
+| `npx tsc` | Build process mein, production ke liye | Type-check ke baad .js files generate karta hai | Slow - files generate hoti hain disk pe |
+| `npm install @types/react` | TypeScript project mein | React ke liye type definitions install karta hai | Dev-only (devDependencies) |
+
+## 🚫 8. Common Mistakes
+
+### Mistake 1: Interface vs Type - Kaunsa use karna?
+
+```typescript
+// ✅ Sahi approach - clear rule follow karna
+
+// Rule: Objects/Components ke liye INTERFACE use karo
+interface ComponentProps {
+  label: string;
+  onPress: () => void;
+}
+
+// Rule: Union/Literal types ke liye TYPE use karo
+type Status = 'loading' | 'success' | 'error';
+type ID = string | number;
+```
+
+### Mistake 2: `Any` Type ka Overuse
+
+```typescript
+// ❌ Galat - 'any' type use karna (TypeScript purpose margaya)
+
+function processData(data: any): any {
+  return data.something.random.value; // TypeScript check nahi karega
+}
+
+// ✅ Sahi - Proper typing
+
+interface DataStructure {
+  something: {
+    random: {
+      value: number;
+    };
+  };
+}
+
+function processData(data: DataStructure): number {
+  return data.something.random.value; // TypeScript guarantee karta hai
+}
+```
+
+## 🌍 9. Real-World Use Case
+
+### Instagram-like App mein TypeScript
+
+```typescript
+// types/instagram.ts
+interface Post {
+  id: string;
+  author: {
+    id: string;
+    username: string;
+    avatar: string;
+  };
+  content: string;
+  imageUrl: string;
+  likes: number;
+  comments: Comment[];
+  createdAt: Date;
+}
+
+interface Comment {
+  id: string;
+  authorId: string;
+  text: string;
+  likes: number;
+}
+
+// services/postService.ts
+export const createPost = async (
+  content: string,
+  imageUrl: string
+): Promise<Post> => {
+  try {
+    const response = await fetch('https://api.instagram.com/posts', {
+      method: 'POST',
+      body: JSON.stringify({ content, imageUrl }),
+    });
+    
+    const data: Post = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error('Failed to create post');
+  }
+};
+```
+
+## 🎨 10. Visual Diagram
+
+```
+TypeScript Workflow:
+
+.ts/.tsx files → TypeScript Compiler → .js files → Metro Bundler → React Native Engine
+     (Types)      (Type checking)    (No types)   (Bundle JS)    (Execute)
+```
+
+## 🛠️ 11. Best Practices
+
+### Practice 1: Folder Structure with TypeScript
+
+```
+src/
+├── types/                    # Sab types/interfaces yahan
+│   ├── api.types.ts
+│   ├── user.types.ts
+│   └── index.ts
+├── components/               # React components
+│   ├── Button.tsx
+│   └── index.ts
+├── services/                 # Business logic
+│   ├── api.ts
+│   └── index.ts
+└── App.tsx
+```
+
+### Practice 2: Strict TypeScript Configuration
+
+```bash
+# tsconfig.json mein "strict": true set karna
+# Type safety maximum mile
+```
+
+## ⚠️ 12. Consequences of Failure
+
+| Scenario | Consequence |
+|----------|-------------|
+| **TypeScript setup skip kiya** | Sirf debugging speed margayegi |
+| **`strict: false` rakhna** | Type safety nahi milti |
+| **Props types define nahi kiye** | IDE mein autocomplete nahi milti |
+
+## ❓ 13. FAQ
+
+### Q1: TypeScript mein `type` aur `interface` mein kya difference hai?
+
+**A:** 
+- **Interface:** Objects, components ke liye. Extensible.
+- **Type:** Union types, tuples, literals ke liye.
+
+### Q2: TypeScript compile time pe work karta hai ya runtime pe?
+
+**A:** **Compile time pe.** Runtime pe pure JavaScript execute hota hai.
+
+### Q3: `any` vs `unknown` mein kya difference?
+
+**A:**
+- **`any`:** Safety nahi hai
+- **`unknown`:** Safe - type-guard ke baad use kar
+
+## 📝 14. Summary
+
+**TypeScript = JavaScript + Type Safety → Development time pe bugs catch ho jaate hain!** 🚀
+
+---
+
+# 🎯 Module 13.2: Unit Testing (Jest & React Native Testing Library)
+
+## 🎯 1. Title / Topic
+
+**Module 13.2: Unit Testing in React Native - Jest & React Native Testing Library**
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+**Unit Testing** = **Car ka inspection sheet**
+
+Jab factory se car nikalta hai, toh ya toh random customers ko dena padta hai (hope kar rahe honge sab theek hai), ya phir inspection mein:
+- Brakes test karte ho
+- Lights test karte ho
+- Engine test karte ho
+
+Unit Testing mein:
+- Individual functions test karte ho
+- Components separately test karte ho
+- Edge cases handle karte ho
+
+## 📖 3. Technical Definition
+
+**Unit Testing kyaa hai?**
+
+Unit test ek **individual function/component ka smallest piece test** karte hain.
+
+- **Unit** = ek smallest testable part
+- **Test** = input diye toh expected output aayega?
+- **Framework** = Jest (React Native ka default)
+
+## 🧠 4. Zaroorat Kyun Hai?
+
+### Problem: Without Unit Tests
+
+```javascript
+// Production mein crash hua
+// calculateOrderTotal ko undefined + undefined = NaN
+// Orders create nahi hue
+// Revenue loss!
+```
+
+### Solution: With Unit Tests
+
+```javascript
+// Test likhe the
+describe('calculateOrderTotal', () => {
+  test('should calculate sum', () => {
+    expect(calculateOrderTotal([{ price: 100 }])).toBe(100);
+  });
+});
+
+// Bug fix kiya, test pass hua
+// Confident deploy kiya
+// Production stable raha!
+```
+
+## ⚙️ 5. Under the Hood & File Anatomy
+
+### Architecture: Jest Testing Flow
+
+```
+Developer runs npm test
+         ↓
+Jest finds .test.ts files
+         ↓
+Setup (beforeAll, beforeEach)
+         ↓
+Run test cases
+         ↓
+Assert results
+         ↓
+Teardown (afterAll, afterEach)
+         ↓
+Test Results Report
+```
+
+### 📂 File Structure
+
+#### **File 1: `jest.config.js`**
+
+```javascript
+module.exports = {
+  preset: 'react-native',
+  // React Native ke liye pre-configured settings
+  
+  testEnvironment: 'node',
+  // Testing environment - Node.js
+  
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  // Test run hone se pehle setup file run kar
+  
+  collectCoverageFrom: ['src/**/*.{ts,tsx}'],
+  // Coverage report mein kaun se files include karo
+  
+  coverageThreshold: {
+    global: {
+      lines: 80,
+      functions: 80,
+      branches: 80,
+      statements: 80,
+    },
+  },
+};
+```
+
+#### **File 2: `jest.setup.js`**
+
+```javascript
+// Global mocks jo har test mein common hongi
+global.TextEncoder = TextEncoder;
+
+jest.mock('react-native', () => ({
+  View: 'MockedView',
+  Text: 'MockedText',
+  TouchableOpacity: 'MockedTouchable',
+}));
+```
+
+## 💻 6. Hands-On: Code
+
+### Step 1: Installation
+
+```bash
+npm install --save-dev jest @testing-library/react-native @testing-library/jest-native
+```
+
+### Step 2: Real-World Testing Examples
+
+#### **Example 1: Function Testing**
+
+```typescript
+// utils/math.ts
+
+export const add = (a: number, b: number): number => a + b;
+
+export const divide = (a: number, b: number): number => {
+  if (b === 0) throw new Error('Cannot divide by zero');
+  return a / b;
+};
+
+// __tests__/math.test.ts
+
+import { add, divide } from '../utils/math';
+
+describe('Math utility functions', () => {
+  test('should add two positive numbers', () => {
+    expect(add(5, 3)).toBe(8);
+  });
+  
+  test('should throw error on divide by zero', () => {
+    expect(() => divide(10, 0)).toThrow('Cannot divide by zero');
+  });
+});
+```
+
+#### **Example 2: Component Testing**
+
+```typescript
+// components/Button.tsx
+
+import React from 'react';
+import { TouchableOpacity, Text } from 'react-native';
+
+interface ButtonProps {
+  label: string;
+  onPress: () => void;
+  disabled?: boolean;
+}
+
+export const Button: React.FC<ButtonProps> = ({
+  label,
+  onPress,
+  disabled = false,
+}) => {
+  return (
+    <TouchableOpacity onPress={onPress} disabled={disabled}>
+      <Text>{label}</Text>
+    </TouchableOpacity>
+  );
+};
+
+// __tests__/Button.test.tsx
+
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react-native';
+import { Button } from '../components/Button';
+
+describe('Button Component', () => {
+  test('should render with label text', () => {
+    render(<Button label="Click me" onPress={() => {}} />);
+    expect(screen.getByText('Click me')).toBeTruthy();
+  });
+  
+  test('should call onPress when pressed', () => {
+    const mockOnPress = jest.fn();
+    render(<Button label="Press me" onPress={mockOnPress} />);
+    
+    const button = screen.getByRole('button');
+    fireEvent.press(button);
+    
+    expect(mockOnPress).toHaveBeenCalledTimes(1);
+  });
+});
+```
+
+#### **Example 3: Async Testing**
+
+```typescript
+// services/api.ts
+
+export const fetchUser = async (userId: number) => {
+  const response = await fetch(`/api/users/${userId}`);
+  if (!response.ok) throw new Error('Failed to fetch');
+  return response.json();
+};
+
+// __tests__/api.test.ts
+
+import { fetchUser } from '../services/api';
+
+global.fetch = jest.fn();
+
+describe('API functions', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+  
+  test('should fetch user data', async () => {
+    const mockUser = { id: 1, name: 'Raj' };
+    
+    (global.fetch as jest.Mock).mockResolvedValue({
+      ok: true,
+      json: async () => mockUser,
+    });
+    
+    const result = await fetchUser(1);
+    expect(result).toEqual(mockUser);
+  });
+  
+  test('should throw error on failed response', async () => {
+    (global.fetch as jest.Mock).mockResolvedValue({
+      ok: false,
+    });
+    
+    await expect(fetchUser(999)).rejects.toThrow('Failed to fetch');
+  });
+});
+```
+
+## ⚖️ 7. Comparison & Command Wars
+
+| Command | Kab chalana hai? | Ye kya karta hai? | Time |
+|---------|-----------------|-----------------|------|
+| `npm test` | Every commit | Sab tests run | 10-30s |
+| `npm test -- --watch` | Active development | Auto re-run on file change | Continuous |
+| `npm test -- --coverage` | Before commit/PR | Coverage report | 1-2 min |
+| `npm test -- Button.test.ts` | Specific component | Sirf is file ke tests | 5-10s |
+
+## 🚫 8. Common Mistakes
+
+### Mistake 1: Not Mocking External Dependencies
+
+```typescript
+// ❌ Galat - External API ko actual call kar rahe ho
+test('should fetch user', async () => {
+  const result = await fetchUser(1); // Actually network request!
+});
+
+// ✅ Sahi - Mock dependencies
+test('should fetch user', async () => {
+  global.fetch = jest.fn().mockResolvedValue({
+    ok: true,
+    json: async () => ({ id: 1, name: 'Raj' }),
+  });
+  
+  const result = await fetchUser(1);
+  expect(result.name).toBe('Raj');
+});
+```
+
+### Mistake 2: Async Tests mein Proper Waiting Nahi Karna
+
+```typescript
+// ❌ Galat - Wait nahi kiya
+test('should load data', async () => {
+  render(<UserList />);
+  expect(screen.getByText('Raj')).toBeTruthy(); // Race condition!
+});
+
+// ✅ Sahi - waitFor() use karo
+test('should load data', async () => {
+  render(<UserList />);
+  await waitFor(() => {
+    expect(screen.getByText('Raj')).toBeTruthy();
+  });
+});
+```
+
+### Mistake 3: test.only() Forget Karna
+
+```typescript
+// ❌ Galat - Production code mein test.only()
+test.only('This test', () => { expect(true).toBe(true); });
+test('Another test', () => { }); // Ye nahi run hoga!
+
+// ✅ Sahi - Remove test.only() before commit
+test('This test', () => { expect(true).toBe(true); });
+test('Another test', () => { expect(true).toBe(true); });
+```
+
+## 🌍 9. Real-World Use Case
+
+### Netflix-like App - Testing Episode List
+
+```typescript
+interface Episode {
+  id: number;
+  title: string;
+  watched: boolean;
+}
+
+// __tests__/EpisodeList.test.tsx
+
+describe('EpisodeList', () => {
+  const mockEpisodes = [
+    { id: 1, title: 'Pilot', watched: false },
+    { id: 2, title: 'First Steps', watched: true },
+  ];
+  
+  test('should render all episodes', () => {
+    render(
+      <EpisodeList
+        episodes={mockEpisodes}
+        onSelectEpisode={jest.fn()}
+      />
+    );
+    
+    expect(screen.getByText('Pilot')).toBeTruthy();
+    expect(screen.getByText('First Steps')).toBeTruthy();
+  });
+  
+  test('should show watched indicator', () => {
+    render(
+      <EpisodeList episodes={mockEpisodes} onSelectEpisode={jest.fn()} />
+    );
+    
+    expect(screen.getByText('✓ Watched')).toBeTruthy();
+  });
+});
+```
+
+## 🎨 10. Visual Diagram
+
+```
+Jest Testing Lifecycle:
+
+beforeAll() [runs once]
+    ↓
+┌─→ beforeEach() [every test]
+│       ↓
+│   Test execution
+│       ↓
+│   afterEach() [every test]
+└───────┘
+    ↓
+afterAll() [runs once]
+    ↓
+Test Results
+```
+
+## 🛠️ 11. Best Practices
+
+### Practice 1: AAA Pattern (Arrange-Act-Assert)
+
+```typescript
+test('should calculate total', () => {
+  // ARRANGE: Setup
+  const items = [{ price: 100 }, { price: 50 }];
+  
+  // ACT: Do the thing
+  const total = calculateTotal(items);
+  
+  // ASSERT: Check
+  expect(total).toBe(150);
+});
+```
+
+### Practice 2: Descriptive Test Names
+
+```typescript
+// ✅ Good
+test('should calculate total price including tax when items added', () => {});
+
+// ❌ Bad
+test('it works', () => {});
+```
+
+### Practice 3: Coverage Targets
+
+```
+Statements: 80%+
+Branches: 75%+
+Functions: 80%+
+Lines: 80%+
+```
+
+## ⚠️ 12. Consequences of Failure
+
+| Scenario | Consequence |
+|----------|-------------|
+| **Testing skip** | Production bugs silently aate hain |
+| **Mocks nahi kiya** | Tests slow + flaky |
+| **Coverage ignore** | Tech debt increase |
+
+## ❓ 13. FAQ
+
+### Q1: Coverage kitna chahiye?
+
+**A:** 80%+ statements (100% impractical)
+
+### Q2: Unit vs Integration vs E2E?
+
+**A:**
+- Unit (70%): Single functions - Fast
+- Integration (20%): Multiple units - Medium
+- E2E (10%): Full flows - Slow
+
+## 📝 14. Summary
+
+**Unit Testing = Har small piece ko test karna → Bugs jaldi catch hote hain!** ✅
+
+---
+
+# 🎯 Module 13.3: End-to-End Testing (Detox)
+
+## 🎯 1. Title / Topic
+
+**Module 13.3: End-to-End Testing with Detox - Real User Flows**
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+**E2E Testing** = **Restaurant mein quality check**
+
+- Unit Testing: Atta theek? Cheese theek? Tomato sauce theek?
+- E2E Testing: Pura pizza order → delivery → customer receive → quality check
+
+E2E mein **puri journey test hoti hai** exactly jaise real user!
+
+## 📖 3. Technical Definition
+
+**End-to-End (E2E) Testing kyaa hai?**
+
+E2E testing ek **full user workflow ko test** karna hai jaise real user use kar raha hai.
+
+| Aspect | Unit Test | E2E Test |
+|--------|-----------|----------|
+| **Scope** | Single function | Entire user flow |
+| **Mocks** | Heavy | No mocks |
+| **Speed** | ms | seconds/minutes |
+| **Environment** | Isolated | Real app on device |
+
+## 🧠 4. Zaroorat Kyun Hai?
+
+### Problem: Without E2E Testing
+
+```
+Unit tests pass ✅
+Integration tests pass ✅
+Code deploy ✅
+
+USER opens app...
+1. Splash screen ✓
+2. Login ✓
+3. App crash! 🔴
+   (But tests pass tha!)
+
+Problem: Real environment mein issue tha - AsyncStorage delay, Navigation timing, Device permissions
+```
+
+### Solution: With E2E Testing
+
+```
+// Detox E2E test - real app on real/emulated device
+
+test('Complete login flow', async () => {
+  await waitFor(element(by.text('Login'))).toBeVisible();
+  await element(by.id('username')).typeText('user@example.com');
+  await element(by.text('LOGIN')).tap();
+  await waitFor(element(by.text('Home'))).toBeVisible();
+  expect(element(by.text('Welcome'))).toBeVisible();
+});
+
+Result:
+✅ App actually loads
+✅ Login actually works
+✅ Navigation happens
+✅ Crash detected
+```
+
+## ⚙️ 5. Under the Hood & File Anatomy
+
+### Architecture: Detox Flow
+
+```
+Write E2E test
+    ↓
+Build app binary (APK/IPA)
+    ↓
+Launch device/emulator
+    ↓
+App running on device
+    ↓
+Execute test actions (find, tap, type, wait)
+    ↓
+Assert UI state
+    ↓
+Test pass/fail
+```
+
+### 📂 File Structure
+
+#### **File 1: `detox.config.js`**
+
+```javascript
+module.exports = {
+  testRunner: 'jest',
+  // Jest as test runner
+  
+  apps: {
+    ios: {
+      type: 'ios.app',
+      binaryPath: 'ios/build/Build/Products/Release-iphonesimulator/MyApp.app',
+      // Path to built iOS app binary
+      
+      build: 'xcodebuild -workspace ios/MyApp.xcworkspace -scheme MyApp -configuration Release',
+      // Command to build iOS app
+    },
+    
+    android: {
+      type: 'android.apk',
+      binaryPath: 'android/app/build/outputs/apk/release/app-release.apk',
+      // Path to APK
+      
+      build: 'cd android && ./gradlew assembleRelease assembleAndroidTest',
+      // Command to build Android
+    },
+  },
+  
+  configurations: {
+    ios: {
+      device: { type: 'iPhone14Pro' },
+      app: 'ios',
+    },
+    android: {
+      device: { type: 'Android11' },
+      app: 'android',
+    },
+  },
+  
+  artifacts: {
+    rootDir: '.artifacts',
+    // Output folder for screenshots, videos, logs
+    
+    plugins: {
+      screenshot: 'all',
+      video: 'failing',
+      log: 'all',
+    },
+  },
+};
+```
+
+## 💻 6. Hands-On: Code
+
+### Step 1: Installation
+
+```bash
+npm install -g detox-cli
+npm install --save-dev detox detox-cli
+detox init -r jest
+```
+
+### Step 2: Complete E-Commerce Purchase Flow Test
+
+```javascript
+// e2e/purchase.e2e.js
+
+describe('E-Commerce Purchase Flow', () => {
+  beforeAll(async () => {
+    await device.launchApp({
+      newInstance: true,
+      permissions: { notifications: 'YES' },
+    });
+  });
+  
+  test('Complete: Login → Browse → Add to Cart → Checkout', async () => {
+    // ============ STEP 1: LOGIN ============
+    
+    await waitFor(element(by.id('login-screen')))
+      .toBeVisible({ timeout: 5000 });
+    // Wait for login screen
+    
+    await element(by.id('email-input')).typeText('buyer@example.com');
+    // Type email
+    
+    await element(by.id('password-input')).typeText('password123');
+    // Type password
+    
+    await element(by.text('SIGN IN')).tap();
+    // Tap login button
+    
+    await waitFor(element(by.id('home-screen')))
+      .toBeVisible({ timeout: 5000 });
+    // Wait for home screen
+    
+    expect(element(by.text('Welcome, Buyer'))).toBeVisible();
+    // Assert user logged in
+    
+    // ============ STEP 2: BROWSE PRODUCTS ============
+    
+    await element(by.id('tab-products')).tap();
+    // Go to products tab
+    
+    await waitFor(element(by.id('products-list')))
+      .toBeVisible({ timeout: 3000 });
+    
+    await element(by.id('products-list')).scroll(500, 'down');
+    // Scroll to find product
+    
+    await element(by.text('iPhone 14 Pro')).tap();
+    // Tap product
+    
+    await waitFor(element(by.id('product-detail-screen')))
+      .toBeVisible({ timeout: 3000 });
+    
+    // ============ STEP 3: ADD TO CART ============
+    
+    await element(by.id('quantity-input')).clearText();
+    // Clear quantity field
+    
+    await element(by.id('quantity-input')).typeText('2');
+    // Type quantity
+    
+    await element(by.text('ADD TO CART')).tap();
+    // Add to cart
+    
+    await waitFor(element(by.text('Added to Cart!')))
+      .toBeVisible({ timeout: 2000 });
+    
+    // ============ STEP 4: CHECKOUT ============
+    
+    await element(by.id('cart-icon')).tap();
+    // Go to cart
+    
+    await waitFor(element(by.id('cart-screen')))
+      .toBeVisible({ timeout: 3000 });
+    
+    expect(element(by.text('iPhone 14 Pro'))).toBeVisible();
+    // Verify item in cart
+    
+    await element(by.id('cart-screen')).scroll(300, 'down');
+    
+    await element(by.text('PROCEED TO CHECKOUT')).tap();
+    // Checkout
+    
+    // ============ STEP 5: PAYMENT ============
+    
+    await waitFor(element(by.id('payment-screen')))
+      .toBeVisible({ timeout: 3000 });
+    
+    await element(by.id('card-number')).typeText('4111111111111111');
+    await element(by.id('expiry')).typeText('12/25');
+    await element(by.id('cvv')).typeText('123');
+    
+    await element(by.text('PLACE ORDER')).tap();
+    
+    // ============ STEP 6: CONFIRMATION ============
+    
+    await waitFor(element(by.id('order-confirmation')))
+      .toBeVisible({ timeout: 5000 });
+    
+    expect(element(by.text('Order Confirmed!'))).toBeVisible();
+    // Assert order confirmation
+    
+    expect(element(by.text('Items: 2'))).toBeVisible();
+    // Verify quantity
+  });
+});
+```
+
+### Step 3: Running Tests
+
+```bash
+# Build app for testing
+detox build-app --configuration ios
+
+# Run tests
+detox test e2e --configuration ios --cleanup
+
+# Debug mode
+detox test e2e/purchase.e2e.js --configuration ios --debug-synchronization=all
+
+# Record video
+detox test e2e --configuration ios --record
+```
+
+## ⚖️ 7. Comparison & Command Wars
+
+| Aspect | Unit | Integration | E2E |
+|--------|------|-------------|-----|
+| **Speed** | 1-10ms | 100-500ms | 30-120s |
+| **Cost** | Low | Medium | High |
+| **Coverage** | 70% | 20% | 10% |
+| **Environment** | Isolated | Semi-isolated | Real device |
+
+## 🚫 8. Common Mistakes
+
+### Mistake 1: No Synchronization
+
+```typescript
+// ❌ Galat
+test('Load data', async () => {
+  await element(by.id('load-button')).tap();
+  expect(element(by.text('Loaded'))).toBeVisible(); // Fail!
+});
+
+// ✅ Sahi
+test('Load data', async () => {
+  await element(by.id('load-button')).tap();
+  await waitFor(element(by.text('Loaded')))
+    .toBeVisible({ timeout: 5000 });
+});
+```
+
+### Mistake 2: No Cleanup Between Tests
+
+```typescript
+// ✅ Sahi
+beforeEach(async () => {
+  await device.reloadReactNative(); // Fresh state
+});
+```
+
+## 🌍 9. Real-World Use Case
+
+### Netflix-like: Watch Flow
+
+```javascript
+test('Browse → Select → Play → Resume', async () => {
+  // Login
+  // Browse shows
+  // Select episode
+  // Start playback
+  // Pause at 2:30
+  // Resume watching
+  // Verify position
+});
+```
+
+## 🎨 10. Visual Diagram
+
+```
+E2E Test Lifecycle:
+
+Write test → Build app → Launch device → Execute actions → Assert → Result
+```
+
+## 🛠️ 11. Best Practices
+
+### Practice 1: Test Critical Flows Only
+
+```
+✅ E2E test: Login, Purchase, Logout (critical)
+❌ E2E test: Every button click (too much)
+```
+
+### Practice 2: Use Synchronization
+
+```javascript
+await waitFor(element(by.text('Text')))
+  .toBeVisible({ timeout: 5000 });
+```
+
+## ⚠️ 12. Consequences of Failure
+
+| Scenario | Consequence |
+|----------|-------------|
+| **No E2E** | Production bugs from real devices |
+| **No sync** | Flaky tests |
+| **No cleanup** | Cross-test pollution |
+
+## ❓ 13. FAQ
+
+### Q1: E2E tests kitne chalane chahiye?
+
+**A:** Critical paths ke liye - login, purchase, checkout
+
+### Q2: E2E slow kyun hain?
+
+**A:** Real device par real app chalता hai, slow hote hain
+
+## 📝 14. Summary
+
+**E2E Testing = Puri user journey test karna → Real bugs catch hote hain!** 🎬
+
+---
+
+# 🎯 Module 13.4: CI/CD Pipeline (GitHub Actions / Fastlane)
+
+## 🎯 1. Title / Topic
+
+**Module 13.4: Continuous Integration/Continuous Deployment (CI/CD)**
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+**CI/CD Pipeline** = **Amazon ke warehouse automation**
+
+Amazon warehouse mein:
+- Package arrive → Automated sorting → Quality check → Packaging → Shipping label → Truck
+
+CI/CD mein:
+- Code commit → Automated tests → Build → Deploy
+
+Agar koi step fail ho:
+- Amazon: Package return ho jata hai
+- CI/CD: Build stop, notification jayega developer ko
+
+## 📖 3. Technical Definition
+
+**CI (Continuous Integration):**
+- Har commit par automated tests run hote hain
+- Code quality check hota hai
+- Agar tests fail, build stop
+
+**CD (Continuous Deployment):**
+- Agar sab tests pass, automatically deploy hota hai
+- Production mein latest version aata hai
+- No manual intervention
+
+## 🧠 4. Zaroorat Kyun Hai?
+
+### Problem: Without CI/CD
+
+```
+1. Dev A code likhta hai
+2. Dev A manually tests (maybe forget kare)
+3. Dev A production deploy karta hai
+4. Production crash!
+5. Downtime, revenue loss
+```
+
+### Solution: With CI/CD
+
+```
+1. Dev A code commit karta hai
+2. GitHub Actions automatically:
+   - Run tests ✅
+   - Build app ✅
+   - Check code quality ✅
+   - Deploy ✅
+3. Production stable
+```
+
+## ⚙️ 5. Under the Hood & File Anatomy
+
+### Architecture: CI/CD Flow
+
+```
+Developer commits code
+    ↓
+GitHub webhook triggered
+    ↓
+GitHub Actions runner starts
+    ↓
+Setup environment
+    ↓
+Install dependencies
+    ↓
+Run linters + tests
+    ↓
+Build app (APK/IPA)
+    ↓
+Generate release notes
+    ↓
+Upload to Play Store / App Store
+    ↓
+Notify team
+```
+
+### 📂 File Structure
+
+#### **File 1: `.github/workflows/ci.yml`**
+
+```yaml
+name: CI Pipeline
+# Ye kya hai? Workflow ka naam
+
+on:
+  # Kab run karna hai ye workflow
+  push:
+    branches: [ main, develop ]
+    # main aur develop branch pe commit hua = run kara
+  
+  pull_request:
+    branches: [ main ]
+    # PR create hua = run kara
+
+jobs:
+  test:
+    # Job name
+    runs-on: ubuntu-latest
+    # Ye kya karta hai? Ubuntu runner use kar (GitHub hosted)
+    
+    steps:
+      # Steps - ye ek sequence mein run honge
+      
+      - uses: actions/checkout@v3
+        # Ye kya karta hai? Repository clone kar
+      
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          # Ye kya karta hai? Node 18 install kar
+      
+      - name: Install dependencies
+        run: npm install
+        # Ye kya karta hai? npm install run kar
+      
+      - name: Run linter
+        run: npm run lint
+        # Ye kya karta hai? Code style check kar
+      
+      - name: Run tests
+        run: npm test -- --coverage
+        # Ye kya karta hai? Tests run kar coverage ke saath
+      
+      - name: Build app
+        run: npm run build
+        # Ye kya karta hai? Production build banao
+
+  deploy:
+    needs: test
+    # Ye job sirf test successful hone ke baad run hoga
+    
+    runs-on: ubuntu-latest
+    
+    if: github.ref == 'refs/heads/main'
+    # Ye kya karta hai? Sirf main branch par deploy kar
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Deploy to App Store
+        run: fastlane ios release
+        # Ye kya karta hai? iOS app release karna fastlane se
+```
+
+#### **File 2: `Fastfile` (Fastlane configuration)**
+
+```ruby
+# fastlane/Fastfile
+
+default_platform(:ios)
+
+platform :ios do
+  # iOS specific automation
+
+  desc "Build and upload iOS app"
+  lane :release do
+    # Step 1: Build app
+    build_app(
+      workspace: "ios/MyApp.xcworkspace",
+      scheme: "MyApp",
+      configuration: "Release",
+      export_method: "app-store",
+      output_directory: "build",
+      output_name: "MyApp.ipa"
+    )
+    
+    # Step 2: Upload to TestFlight
+    upload_to_testflight(
+      ipa: "build/MyApp.ipa",
+      skip_waiting_for_build_processing: true
+    )
+    
+    # Step 3: Notify team
+    slack(message: "✅ iOS app v#{version} uploaded to TestFlight!")
+  end
+  
+  desc "Build Android app"
+  lane :android_release do
+    build_android_app(
+      task: "bundleRelease",
+      project_dir: "android/",
+      properties: {
+        "android.injected.signing.store.file" => "keystore.jks",
+        "android.injected.signing.store.password" => ENV["KEYSTORE_PASSWORD"],
+        "android.injected.signing.key.alias" => ENV["KEY_ALIAS"],
+        "android.injected.signing.key.password" => ENV["KEY_PASSWORD"]
+      }
+    )
+  end
+end
+```
+
+## 💻 6. Hands-On: Code
+
+### Step 1: Setup GitHub Actions
+
+```bash
+# Create workflow directory
+mkdir -p .github/workflows
+
+# Create CI workflow file
+touch .github/workflows/ci.yml
+```
+
+### Step 2: Complete CI/CD Workflow
+
+```yaml
+# .github/workflows/ci-cd.yml
+
+name: Complete CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  # ============ JOB 1: LINT & TEST ============
+  lint-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          # npm cache use kar (faster)
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: TypeScript check
+        run: npx tsc --noEmit
+        # Ye kya karta hai? Type errors catch karna
+      
+      - name: ESLint
+        run: npm run lint
+        # Ye kya karta hai? Code style issues find karna
+      
+      - name: Unit tests
+        run: npm test -- --coverage --testTimeout=30000
+        # Ye kya karta hai? Tests run kar coverage generate kar
+      
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/lcov.info
+          # Ye kya karta hai? Coverage report Codecov ko send kar
+  
+  # ============ JOB 2: BUILD iOS ============
+  build-ios:
+    needs: lint-and-test
+    # Sirf lint-and-test pass hone ke baad
+    
+    runs-on: macos-latest
+    # Ye kya karta hai? macOS runner use kar (iOS build ke liye)
+    
+    if: github.ref == 'refs/heads/main'
+    # Sirf main branch
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Install Ruby (for Fastlane)
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+      
+      - name: Install pods
+        working-directory: ios
+        run: pod install
+        # Ye kya karta hai? iOS dependencies install karna
+      
+      - name: Build iOS app
+        working-directory: ios
+        run: |
+          xcodebuild \
+            -workspace MyApp.xcworkspace \
+            -scheme MyApp \
+            -configuration Release \
+            -derivedDataPath build
+        # Ye kya karta hai? iOS app build karna xcodebuild se
+      
+      - name: Upload to TestFlight
+        env:
+          FASTLANE_USER: ${{ secrets.APPLE_ID }}
+          # GitHub secrets se Apple ID
+          FASTLANE_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          # Ye kya hai? Production mein confidential data GitHub secrets mein store hota hai
+        run: |
+          cd ios
+          fastlane beta
+          # Ye kya karta hai? TestFlight upload (beta testing ke liye)
+  
+  # ============ JOB 3: BUILD ANDROID ============
+  build-android:
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          # Ye kya karta hai? Java 11 install kar (Android build ke liye)
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build Android
+        working-directory: android
+        run: ./gradlew bundleRelease
+        # Ye kya karta hai? Android bundle (AAB format) build karna
+      
+      - name: Sign Android bundle
+        working-directory: android/app/build/outputs/bundle/release
+        env:
+          SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
+          SIGNING_KEY_STORE_PASSWORD: ${{ secrets.SIGNING_KEY_STORE_PASSWORD }}
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        run: |
+          jarsigner \
+            -keystore $SIGNING_KEY_STORE_PATH \
+            -storepass $SIGNING_KEY_STORE_PASSWORD \
+            app-release.aab \
+            $SIGNING_KEY_ALIAS
+          # Ye kya karta hai? App ko sign karna (certificate se)
+      
+      - name: Upload to Play Store
+        run: |
+          npm install -g @react-native-firebase/cli
+          firebase-cli upload \
+            --project-id=${{ secrets.FIREBASE_PROJECT_ID }} \
+            --credentials=${{ secrets.PLAY_STORE_CREDENTIALS }}
+        # Ye kya karta hai? Play Store mein upload karna
+
+  # ============ JOB 4: NOTIFICATION ============
+  notify:
+    needs: [lint-and-test, build-ios, build-android]
+    runs-on: ubuntu-latest
+    if: always()
+    # always() = chahe success ho ya fail, notification dena
+    
+    steps:
+      - name: Send Slack notification
+        uses: slackapi/slack-github-action@v1
+        with:
+          webhook-url: ${{ secrets.SLACK_WEBHOOK }}
+          payload: |
+            {
+              "text": "CI/CD Pipeline Completed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Workflow Status*: ${{ job.status }}\n*Branch*: ${{ github.ref }}\n*Commit*: ${{ github.sha }}"
+                  }
+                }
+              ]
+            }
+        # Ye kya karta hai? Team ko Slack mein notification send karna
+```
+
+### Step 3: Environment Secrets Setup
+
+```bash
+# GitHub repo mein secrets add karna (Settings → Secrets)
+# Ye kya hain? Sensitive data jo code mein nahi likha jata
+
+# iOS ke liye:
+APPLE_ID="dev@example.com"
+APPLE_ID_PASSWORD="****"
+SIGNING_KEY_STORE_FILE="keystore.jks"
+
+# Android ke liye:
+SIGNING_KEY_STORE_PASSWORD="****"
+SIGNING_KEY_ALIAS="my_key"
+SIGNING_KEY_PASSWORD="****"
+
+# Notification:
+SLACK_WEBHOOK="https://hooks.slack.com/..."
+```
+
+## ⚖️ 7. Comparison & Command Wars
+
+| Approach | Setup | Cost | Time | Reliability |
+|----------|-------|------|------|-------------|
+| **Manual** | None | High | Hours | Low (error-prone) |
+| **GitHub Actions** | YAML file | Free (public) | Minutes | High |
+| **Jenkins** | Complex | Medium | Minutes | High |
+| **CircleCI** | Cloud | Paid | Minutes | High |
+
+## 🚫 8. Common Mistakes
+
+### Mistake 1: Hardcoding Secrets
+
+```yaml
+# ❌ GALAT - Secrets code mein
+env:
+  APPLE_ID: "dev@example.com"
+  APPLE_ID_PASSWORD: "mypassword123"
+
+# ✅ SAHI - GitHub secrets use karo
+env:
+  APPLE_ID: ${{ secrets.APPLE_ID }}
+  APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+```
+
+### Mistake 2: No Caching
+
+```yaml
+# ❌ GALAT - Dependencies har baar download
+- run: npm install
+
+# ✅ SAHI - Cache use karo
+- uses: actions/setup-node@v3
+  with:
+    node-version: '18'
+    cache: 'npm'
+```
+
+## 🌍 9. Real-World Use Case
+
+### Uber-like App Pipeline
+
+```yaml
+# Har commit par:
+# 1. Tests run (5 min)
+# 2. Build check (3 min)
+# 3. iOS build + TestFlight upload (15 min)
+# 4. Android build + Play Store upload (10 min)
+# 5. Slack notification (1 min)
+
+# Total: 30 minutes
+# Manual: 2 hours + errors
+```
+
+## 🎨 10. Visual Diagram
+
+```
+Code Commit
+    ↓
+GitHub Actions triggered
+    ↓
+┌─────────────────┬──────────────────┬──────────────────┐
+│  Lint + Test    │   Build iOS      │  Build Android   │
+│  (5 min)        │   (15 min)       │  (10 min)        │
+└────────┬────────┴────────┬─────────┴────────┬─────────┘
+         │                 │                  │
+         └─────────────────┼──────────────────┘
+                           ↓
+                    Deploy to stores
+                           ↓
+                  Slack notification
+```
+
+## 🛠️ 11. Best Practices
+
+### Practice 1: Test Before Deploy
+
+```yaml
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps: # tests
+
+  deploy:
+    needs: test
+    # Sirf test successful hone ke baad deploy
+```
+
+### Practice 2: Environment Separation
+
+```yaml
+# Dev environment
+if: github.ref == 'refs/heads/develop'
+
+# Production environment
+if: github.ref == 'refs/heads/main'
+```
+
+## ⚠️ 12. Consequences of Failure
+
+| Scenario | Consequence |
+|----------|-------------|
+| **Manual deployment** | Human errors, Slow, Inconsistent |
+| **No tests in CI** | Bugs deploy ho jaate hain |
+| **Hardcoded secrets** | Security breach |
+
+## ❓ 13. FAQ
+
+### Q1: GitHub Actions free hai?
+
+**A:** Haan, public repos ke liye unlimited, private repos ke liye 2000 minutes/month free
+
+### Q2: CI/CD setup kitna complex hai?
+
+**A:** 1-2 hours ek baar, phir automatic chalata hai
+
+## 📝 14. Summary
+
+**CI/CD = Har commit par automatic tests → deploy → production stable!** 🚀
+
+---
+
+# 🎯 Module 13.5: Publishing to App Store & Play Store
+
+## 🎯 1. Title / Topic
+
+**Module 13.5: Publishing to App Store & Play Store - Real Builds (AAB/IPA)**
+
+Subtopics:
+- Debug vs Release Builds
+- App Signing (Keystore)
+- ProGuard (Code Obfuscation)
+- Bundle Size Optimization
+- Crash Reports
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+**App Publishing** = **Car ko dealership mein launch karna**
+
+Steps:
+1. **Prototype (Debug Build)** = Test car - developer ka ghar
+2. **Final product (Release Build)** = Market ready - testing complete
+3. **Signing** = Quality certificate - car authorized
+4. **Optimization** = Remove unwanted parts - lightweight
+5. **Launch** = Showroom mein - customers ko available
+
+## 📖 3. Technical Definition
+
+**Debug vs Release Build:**
+
+- **Debug Build**: Development ke liye
+  - Logs verbose
+  - Optimization nahi
+  - Debugging info included
+  - Size zyada
+  - Slow execution
+
+- **Release Build**: Production ke liye
+  - Logs minimal
+  - Optimization maximum
+  - No debugging info
+  - Size kam
+  - Fast execution
+
+## 🧠 4. Zaroorat Kyun Hai?
+
+### Problem: Release Build Nahi
+
+```
+Debug app submit kiya Play Store mein:
+- Size 500MB (zyada!)
+- Slow performance
+- Debugging logs users ko visible
+- Security issues (decompile easily)
+- Rejection
+```
+
+### Solution: Proper Release Build
+
+```
+Release build:
+- Size 50MB (compressed!)
+- Fast performance
+- No debugging info
+- Obfuscated code (security)
+- Accepted!
+```
+
+## ⚙️ 5. Under the Hood & File Anatomy
+
+### Note 42: Detailed Publishing Guide
+
+#### **Section 1: Debug vs Release Builds**
+
+```
+┌─────────────────────────────────────┐
+│        DEBUG BUILD                  │
+├─────────────────────────────────────┤
+│ • Logs + Stack traces               │
+│ • Debugging symbols                 │
+│ • No obfuscation                    │
+│ • Size: 300-500MB                   │
+│ • Slow                              │
+│ • Dev ke liye                       │
+└─────────────────────────────────────┘
+
+         vs
+
+┌─────────────────────────────────────┐
+│        RELEASE BUILD                │
+├─────────────────────────────────────┤
+│ • Minimal logs                      │
+│ • No debugging symbols              │
+│ • Obfuscated code                   │
+│ • Size: 30-50MB                     │
+│ • Fast                              │
+│ • Production ke liye                │
+└─────────────────────────────────────┘
+```
+
+**Commands:**
+
+```bash
+# DEBUG BUILD
+npm run android
+# Ye kya karta hai? Debug APK banata hai + device mein install karata hai
+
+# RELEASE BUILD - Android
+cd android && ./gradlew assembleRelease
+# Ye kya karta hai? Optimized APK build karata hai
+# Output: android/app/build/outputs/apk/release/app-release.apk
+
+# RELEASE BUILD - iOS
+xcodebuild \
+  -workspace ios/MyApp.xcworkspace \
+  -scheme MyApp \
+  -configuration Release \
+  -archivePath build/MyApp.xcarchive \
+  archive
+# Ye kya karta hai? iOS archive banata hai
+
+# Archive se IPA export karna
+xcodebuild \
+  -exportArchive \
+  -archivePath build/MyApp.xcarchive \
+  -exportPath build/MyApp.ipa \
+  -exportOptionsPlist ExportOptions.plist
+# IPA file create hota hai
+```
+
+---
+
+#### **Section 2: App Signing (Keystore/Certificate)**
+
+**Android Signing Process:**
+
+```bash
+# Step 1: Keystore create karna (pehli baar)
+keytool -genkey -v \
+  -keystore my-release-key.keystore \
+  -keyalg RSA \
+  -keysize 2048 \
+  -validity 10000 \
+  -alias my-key-alias
+# Ye kya karta hai? 
+# - my-release-key.keystore = file create hota hai (private key + certificate)
+# - RSA encryption use hota hai
+# - 10000 days valid (27+ years)
+# - my-key-alias = unique identifier
+
+# Step 2: gradle.properties mein keystore details add karna
+# gradle.properties
+MYAPP_RELEASE_STORE_FILE=my-release-key.keystore
+MYAPP_RELEASE_STORE_PASSWORD=<password>
+MYAPP_RELEASE_KEY_ALIAS=my-key-alias
+MYAPP_RELEASE_KEY_PASSWORD=<password>
+
+# Step 3: android/app/build.gradle mein signing config
+signingConfigs {
+  release {
+    storeFile file(MYAPP_RELEASE_STORE_FILE)
+    storePassword MYAPP_RELEASE_STORE_PASSWORD
+    keyAlias MYAPP_RELEASE_KEY_ALIAS
+    keyPassword MYAPP_RELEASE_KEY_PASSWORD
+  }
+}
+
+buildTypes {
+  release {
+    signingConfig signingConfigs.release
+  }
+}
+
+# Step 4: Build karna
+cd android && ./gradlew assembleRelease
+# Ye kya karta hai? APK ko sign karata hai keystore se
+# Output: signed APK ready for Play Store
+```
+
+**iOS Signing Process:**
+
+```
+Xcode se:
+1. Team select karna (Apple Developer account)
+2. Bundle ID set karna
+3. Certificates + Provisioning Profiles manage karna
+4. Archive create karna
+5. App Store ka liye export karna
+
+Manual command:
+codesign -s "Apple Development" MyApp.app
+# Ye kya karta hai? App ko certificate se sign karna
+```
+
+**IMPORTANT: Backup Warning ⚠️**
+
+```
+Keystore file bohot important hai!
+- Ye file lose hua = app update nahi kar sakte!
+- Kabhi GitHub mein upload mat karo!
+- Secure location mein rakhna!
+
+# Backup command
+cp my-release-key.keystore backup/my-release-key.keystore.bak
+
+# .gitignore mein add karo
+echo "*.keystore" >> .gitignore
+```
+
+---
+
+#### **Section 3: ProGuard (Code Obfuscation)**
+
+**Ye kya hai:** Code ko unreadable format mein convert karna.
+
+```java
+// BEFORE (readable)
+public class PaymentProcessor {
+  private String apiKey = "sk_live_...";
+  public void processPayment(String cardNumber) {
+    // payment logic
+  }
+}
+
+// AFTER ProGuard (obfuscated)
+public class a {
+  private String b = "sk_live_...";
+  public void c(String d) {
+    // payment logic (variable names changed)
+  }
+}
+```
+
+**Android ProGuard Configuration:**
+
+```gradle
+// android/app/build.gradle
+
+buildTypes {
+  release {
+    minifyEnabled true
+    // Ye kya karta hai? ProGuard on kar
+    
+    shrinkResources true
+    // Ye kya karta hai? Unused resources remove kar
+    
+    proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                  'proguard-rules.pro'
+    // Ye kya karta hai? ProGuard rules apply kar
+  }
+}
+
+// proguard-rules.pro
+-keep public class com.example.myapp.MyClass {
+  public *;
+}
+# Ye kya hai? MyClass ko obfuscate mat kar
+
+-keepclassmembers class * {
+  *** *Listener(...);
+}
+# Event listeners ko preserve kar
+
+# Firebase rules
+-keep class com.google.firebase.** { *; }
+# Firebase library ko preserve kar (important!)
+```
+
+**iOS Equivalent (Bitcode):**
+
+```
+Xcode Settings:
+- Bitcode enabled
+- LLVM optimization level: Aggressive
+```
+
+---
+
+#### **Section 4: Bundle Size Optimization**
+
+**Issue:**
+- Large app = slow download = user abandon
+- Play Store limit: 100MB (older devices)
+
+**Optimization strategies:**
+
+```bash
+# 1. Remove unused dependencies
+npm ls
+# Ye kya karta hai? Dependency tree dikhata hai
+# Unused packages remove kar
+
+# 2. Image optimization
+# Original: logo.png = 2MB
+# Optimized: logo.webp = 200KB
+# Tool: ImageMagick, TinyPNG
+
+# 3. Code splitting
+# Instead of 1 big bundle, multiple chunks
+// webpack/metro config
+optimization: {
+  splitChunks: {
+    chunks: 'all',
+  }
+}
+
+# 4. Tree shaking (dead code removal)
+# Unused functions automatically remove hote hain
+
+# 5. Dynamic imports
+// Instead of:
+import PaymentModule from './payment';
+
+// Use:
+const PaymentModule = lazy(() => import('./payment'));
+// Payment module sirf jab use ho, load hoga
+
+# 6. Check bundle size
+npm run build --analyze
+# Ye kya karta hai? Bundle size breakdown dikhata hai
+
+# Typical sizes:
+Small app:  5-20MB
+Medium app: 20-50MB
+Large app:  50-100MB
+```
+
+---
+
+#### **Section 5: Crash Reports**
+
+**Issue:** App production mein crash hua, kaise debug karte ho?
+
+**Solution: Crash reporting service (Firebase Crashlytics)**
+
+```typescript
+// services/crashReporting.ts
+
+import crashlytics from '@react-native-firebase/crashlytics';
+
+export const setupCrashReporting = () => {
+  // Enable crash reporting
+  crashlytics().setCrashLoggingEnabled(true);
+  
+  // Global error handler
+  ErrorUtils.setGlobalHandler((error, isFatal) => {
+    crashlytics().recordError(error);
+    
+    if (isFatal) {
+      // Fatal crash - log important info
+      crashlytics().log('FATAL CRASH - App terminated');
+    }
+  });
+};
+
+// Breadcrumbs - crash se pehle kya action hua
+export const logBreadcrumb = (message: string, data?: any) => {
+  crashlytics().log(message);
+  
+  if (data) {
+    crashlytics().setAttribute('context', JSON.stringify(data));
+  }
+};
+
+// Crash manually trigger (testing)
+export const testCrash = () => {
+  crashlytics().crash(); // Intentional crash
+};
+
+// Usage in app
+export const handlePayment = async (amount: number) => {
+  try {
+    logBreadcrumb('Payment initiated', { amount });
+    
+    const result = await processPayment(amount);
+    
+    logBreadcrumb('Payment successful', { transactionId: result.id });
+  } catch (error) {
+    logBreadcrumb('Payment failed', { error: error.message });
+    crashlytics().recordError(error);
+    
+    throw error;
+  }
+};
+```
+
+**Crashlytics Dashboard:**
+
+```
+Shows:
+- Crash frequency
+- Affected users
+- Stack traces
+- Device info
+- OS version
+- Custom logs
+
+Developers can:
+- Filter by version
+- Priority by severity
+- Assign to team members
+- Set alerts
+```
+
+**Best practices:**
+
+```typescript
+// ✅ Good - meaningful error info
+crashlytics().setUserId('user_12345');
+crashlytics().setCustomKey('subscription_type', 'premium');
+crashlytics().setAttribute('payment_method', 'credit_card');
+
+// ❌ Avoid - PII (Personally Identifiable Info)
+crashlytics().log('User email: user@example.com'); // NAHI!
+crashlytics().log('Credit card: 4111...'); // NAHI!
+```
+
+## 💻 6. Hands-On: Complete Publishing Setup
+
+### Step 1: Android Release Build
+
+```bash
+# Step 1: Create signing key
+keytool -genkey -v \
+  -keystore my-app.keystore \
+  -keyalg RSA \
+  -keysize 2048 \
+  -validity 10000 \
+  -alias my-app-key
+
+# Step 2: Move keystore to secure location
+mkdir ~/keystores
+mv my-app.keystore ~/keystores/
+
+# Step 3: Configure gradle
+# gradle.properties (local, not in git)
+MYAPP_RELEASE_STORE_FILE=~/keystores/my-app.keystore
+MYAPP_RELEASE_STORE_PASSWORD=your_password
+MYAPP_RELEASE_KEY_ALIAS=my-app-key
+MYAPP_RELEASE_KEY_PASSWORD=your_password
+
+# Step 4: Build release APK
+cd android && ./gradlew bundleRelease
+
+# Step 5: Generate AAB (Android App Bundle - recommended)
+# Output: android/app/build/outputs/bundle/release/app-release.aab
+# AAB Upload to Play Store (Play Store automatically generates APKs)
+```
+
+### Step 2: iOS Release Build
+
+```bash
+# Step 1: Archive
+xcodebuild \
+  -workspace ios/MyApp.xcworkspace \
+  -scheme MyApp \
+  -configuration Release \
+  -archivePath build/MyApp.xcarchive \
+  archive
+
+# Step 2: Export to IPA
+xcodebuild \
+  -exportArchive \
+  -archivePath build/MyApp.xcarchive \
+  -exportPath build/ \
+  -exportOptionsPlist ExportOptions.plist
+
+# Step 3: Upload to TestFlight (beta testing)
+xcrun altool \
+  --upload-app \
+  --file build/MyApp.ipa \
+  --type ios \
+  --apple-id YOUR_APPLE_ID \
+  --password YOUR_APP_PASSWORD
+
+# Step 4: Submit to App Store
+# Use App Store Connect website or Xcode Organizer
+```
+
+### Step 3: Upload to Stores
+
+**Android Play Store:**
+
+```bash
+# Install play store uploader
+npm install -g bundletool
+
+# Upload AAB
+bundletool upload-bundle \
+  --bundle-path=android/app/build/outputs/bundle/release/app-release.aab \
+  --account-id=YOUR_GOOGLE_ACCOUNT
+
+# OR use Fastlane
+fastlane supply --aab android/app/build/outputs/bundle/release/app-release.aab
+```
+
+**iOS App Store:**
+
+```bash
+# Use Transporter (formerly Application Loader)
+xcrun altool --upload-app --file MyApp.ipa
+
+# OR use Fastlane
+fastlane deliver --ipa MyApp.ipa
+```
+
+### Step 4: Complete CI/CD for Release
+
+```yaml
+# .github/workflows/release.yml
+
+name: Release Build
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: macos-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Build iOS Release
+        working-directory: ios
+        run: |
+          xcodebuild \
+            -workspace MyApp.xcworkspace \
+            -scheme MyApp \
+            -configuration Release \
+            -archivePath ../build/MyApp.xcarchive \
+            archive
+      
+      - name: Export iOS IPA
+        run: |
+          xcodebuild \
+            -exportArchive \
+            -archivePath build/MyApp.xcarchive \
+            -exportPath build/ \
+            -exportOptionsPlist ios/ExportOptions.plist
+      
+      - name: Upload to App Store
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+        run: |
+          xcrun altool \
+            --upload-app \
+            --file build/MyApp.ipa \
+            --type ios \
+            --apple-id $APPLE_ID \
+            --password $APPLE_PASSWORD
+      
+      - name: Build Android Release
+        working-directory: android
+        run: ./gradlew bundleRelease
+      
+      - name: Upload to Play Store
+        env:
+          PLAY_STORE_CREDENTIALS: ${{ secrets.PLAY_STORE_CREDENTIALS }}
+        run: |
+          fastlane supply \
+            --aab android/app/build/outputs/bundle/release/app-release.aab
+      
+      - name: Create Release Notes
+        run: |
+          echo "🚀 Release v${{ github.ref_name }}" > RELEASE_NOTES.md
+          echo "Build Date: $(date)" >> RELEASE_NOTES.md
+      
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          body_path: RELEASE_NOTES.md
+```
+
+## ⚖️ 7. Comparison & Command Wars
+
+| Task | Debug | Release |
+|------|-------|---------|
+| **App size** | 300-500MB | 30-50MB |
+| **Performance** | Slow | Fast |
+| **Security** | Low | High |
+| **Logs** | Verbose | Minimal |
+| **Deployable** | ❌ | ✅ |
+
+## 🚫 8. Common Mistakes
+
+### Mistake 1: Publishing Debug Build
+
+```bash
+# ❌ GALAT
+npm run android
+# Ye debug APK banata hai - production nahi!
+
+# ✅ SAHI
+cd android && ./gradlew bundleRelease
+# Production-ready AAB
+```
+
+### Mistake 2: Forgetting App Signing
+
+```bash
+# ❌ GALAT
+./gradlew assembleRelease
+# Unsigned APK - Play Store reject karega
+
+# ✅ SAHI
+# Proper signing configured
+./gradlew bundleRelease
+# Signed AAB
+```
+
+### Mistake 3: Large Bundle Size
+
+```bash
+# ❌ GALAT - 150MB
+# Users: "Too large, uninstall karte hain"
+
+# ✅ SAHI - 50MB
+# Remove unused deps, optimize images, ProGuard enable
+```
+
+## 🌍 9. Real-World Use Case
+
+### Uber-like App Release Process
+
+```
+1. Dev completes feature
+2. Create tag: v2.5.0
+3. Git push tag
+4. GitHub Actions:
+   - Build release Android AAB
+   - Sign with keystore
+   - ProGuard obfuscation
+   - Size: 45MB ✅
+   - Upload to Play Store Internal Testing
+5. QA team tests
+6. Approval = promote to Production
+7. Users get update notification
+8. Crash reporting: Monitor for issues
+```
+
+## 🎨 10. Visual Diagram
+
+```
+Release Process:
+
+Code Complete
+    ↓
+Tag Version (v2.5.0)
+    ↓
+┌──────────────┬──────────────┐
+│  Build AAB   │  Build IPA   │
+│  (Android)   │  (iOS)       │
+└──────┬───────┴───────┬──────┘
+       │               │
+       ↓               ↓
+    Sign App        Sign App
+       │               │
+       ↓               ↓
+ Optimize Size   Upload to
+   ProGuard      App Store
+       │
+       ↓
+  Upload to
+  Play Store
+       ↓
+   Published ✅
+```
+
+## 🛠️ 11. Best Practices
+
+### Practice 1: Version Management
+
+```json
+// package.json
+{
+  "version": "2.5.0"
+  // Major.Minor.Patch
+  // Major = Breaking changes
+  // Minor = New features
+  // Patch = Bug fixes
+}
+```
+
+### Practice 2: Release Checklist
+
+```
+Before Release:
+☑ All tests pass
+☑ Code review complete
+☑ Crash reporting enabled
+☑ Analytics working
+☑ ProGuard rules correct
+☑ Keystore backed up
+☑ Release notes written
+☑ Screenshots updated
+```
+
+### Practice 3: Gradual Rollout
+
+```
+Play Store:
+1. Internal Testing (100% of testers)
+2. Closed Testing (selected users)
+3. Open Testing (public beta)
+4. Production (phased: 5% → 25% → 50% → 100%)
+
+App Store:
+1. TestFlight (beta testers)
+2. App Store (automatic review)
+3. Full rollout
+```
+
+## ⚠️ 12. Consequences of Failure
+
+| Scenario | Consequence |
+|----------|-------------|
+| **Debug build release** | App 500MB - users reject |
+| **No code signing** | App rejected from stores |
+| **Lost keystore** | Can't update app forever |
+| **No crash reporting** | Unknown bugs in production |
+| **Large size** | High uninstall rate |
+
+## ❓ 13. FAQ
+
+### Q1: Keystore file lose hua - ab kya?
+
+**A:** Naya app publish karna padega (same bundle ID nahi use kar sakte)
+
+### Q2: Debug vs Release build kaunsa bigger hai?
+
+**A:** Debug 300-500MB, Release 30-50MB (10x smaller!)
+
+### Q3: Crash report ka kya use hai?
+
+**A:** Real user devices par crashes detect hote hain, fix kar sakte ho
+
+## 📝 14. Summary
+
+**Proper Release Build = Optimized Code + Signed App + Crash Monitoring = Happy Users!** 📱
+
+---
+
+# 📊 COMPLETE MODULE 13 SUMMARY TABLE
+
+| Module | Topic | Key Concept | Time |
+|--------|-------|-------------|------|
+| 13.1 | TypeScript | Type Safety | Setup once |
+| 13.2 | Unit Testing | Jest | Continuous |
+| 13.3 | E2E Testing | Detox | 5-10 min |
+| 13.4 | CI/CD | GitHub Actions | Automatic |
+| 13.5 | Publishing | Release Build | Per release |
+
+---
+
+
+# 🎯 Module 13.6: Over-the-Air (OTA) Updates (CodePush / Expo Updates)
+
+## 🎯 1. Title / Topic
+
+**Module 13.6: Over-the-Air (OTA) Updates - CodePush & Expo Updates**
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+**OTA Updates vs Traditional Updates** = **Netflix update vs Windows update**
+
+**Traditional Update (App Store):**
+- 1. App Store mein naya version upload
+- 2. Apple/Google review karte hain (1-3 din)
+- 3. Users ko update notification aata hai
+- 4. User install karta hai manually
+- 5. App restart hota hai
+- 6. Full app download hota hai (50MB+)
+
+**Problems:**
+- Slow (review time)
+- User action required
+- Large download
+- App restart needed
+- Network dependent
+
+**OTA Update (CodePush):**
+- 1. Code change kiya
+- 2. CodePush mein push kiya (instant)
+- 3. Next app launch par check hota hai
+- 4. Sirf changes download hote hain (KB mein!)
+- 5. App restart nahi (hot reload ho sakta hai)
+- 6. Silent update (user ko pata bhi nahi)
+
+**Real life analogy:**
+- **Traditional:** Car ko dealership leni padti hai repair ke liye
+- **OTA:** Mechanic ghar par aata hai, fix kar jaata hai
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**OTA Updates kyaa hain?**
+
+OTA = **Over-The-Air** = App ko internet se directly update karna, App Store bypass karke.
+
+**Key points:**
+
+- **JavaScript Bundle Updates:** Sirf JS code update hota hai (Native code nahi)
+- **Instant Deployment:** Review process nahi
+- **Rollback Support:** Galat update hua toh wapas purana version kar sakte ho
+- **Targeted Updates:** Specific users ko specific version de sakte ho
+- **Usage:** Emergency bugs fix, feature toggles, A/B testing
+
+**Hinglish breakdown:**
+> OTA = App update karna bina App Store/Play Store ke
+> JavaScript update = JS bundle replace karna
+> Native code = Native stack (Java/Swift) update = App Store zaroor
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+### Problem: Without OTA Updates
+
+```
+Scenario: Login button crash hua production mein!
+
+Traditional approach:
+- 1. Bug fix kara code mein (1 hour)
+- 2. Build banaya release version (30 min)
+- 3. App Store submit kiya (5 min)
+- 4. Review waiting... 8 hours ⏳
+- 5. App Store approval (24-48 hours)
+- 6. Users get notification
+- 7. Users manually update
+- 8. Finally fix ho gaya (48+ hours later!)
+
+Meanwhile:
+❌ Users login nahi kar sakte
+❌ Revenue loss
+❌ Bad ratings
+❌ User complaints
+```
+
+### Solution: With OTA Updates
+
+```
+Scenario: Login button crash hua production mein!
+
+OTA approach:
+- 1. Bug fix kara code mein (1 hour)
+- 2. CodePush deploy kiya (5 minutes)
+- 3. Instant server par live
+- 4. Next user app open karta hai
+- 5. Update automatically download + apply (10 sec)
+- 6. App restart (2 sec)
+- 7. Bug fixed! ✅
+
+Result:
+✅ Users automatically fixed
+✅ No revenue loss
+✅ Instant deployment
+✅ Users happy
+```
+
+**Benefits:**
+
+| Benefit | Ye kya karata hai? |
+|---------|------------------|
+| **Speed** | Seconds mein update, hours nahi |
+| **No App Store Review** | Instant deploy |
+| **User Experience** | Seamless, automatic |
+| **Cost** | Manual updating ka labor nahi |
+| **Testing** | A/B testing possible |
+| **Rollback** | 1 click mein purana version |
+
+---
+
+## ⚙️ 5. Under the Hood (Technical Working) & File Anatomy
+
+### Architecture: How OTA Updates Work
+
+```
+┌────────────────────────────────────────────────────────┐
+│  Developer                                             │
+│  - Code change karta hai                              │
+│  - CodePush server ko push karta hai                  │
+└────────────────┬───────────────────────────────────────┘
+                 │
+                 ▼
+┌────────────────────────────────────────────────────────┐
+│  CodePush Server (Hosted on Azure/AWS)                │
+│  - New JS bundle store karta hai                      │
+│  - Version tracking                                   │
+│  - Release notes                                      │
+│  - Rollback support                                   │
+└────────────────┬───────────────────────────────────────┘
+                 │
+                 ▼
+┌────────────────────────────────────────────────────────┐
+│  User App (Background)                                │
+│  - Periodic check (hourly/daily/on launch)            │
+│  - Detect new update                                  │
+│  - Download JS bundle (silent)                        │
+└────────────────┬───────────────────────────────────────┘
+                 │
+                 ▼
+┌────────────────────────────────────────────────────────┐
+│  Native Bridge                                        │
+│  - Load new JS bundle                                 │
+│  - Metro bundler mein integrate                       │
+│  - Hot reload (optional)                              │
+└────────────────┬───────────────────────────────────────┘
+                 │
+                 ▼
+┌────────────────────────────────────────────────────────┐
+│  App Updated!                                         │
+│  - Next screen refresh par naya code chalega          │
+│  - Seamless experience                                │
+└────────────────────────────────────────────────────────┘
+```
+
+### Note 45: CodePush & VPS Setup
+
+#### **Section 1: What CodePush Can & Cannot Do**
+
+```
+✅ WHAT CODEPUSH CAN UPDATE:
+- JavaScript code (.js files)
+- React components
+- Images (bundled in JS)
+- Styles (CSS-in-JS)
+- Business logic
+- UI layouts
+
+❌ WHAT CODEPUSH CANNOT UPDATE:
+- Native code (Java/Swift)
+- AndroidManifest.xml
+- iOS Info.plist
+- Native modules
+- App permissions
+- Native dependencies
+```
+
+#### **Section 2: CodePush Installation & Setup**
+
+```bash
+# Step 1: CodePush CLI install karna
+npm install -g appcenter-cli
+# Ye kya karta hai? Microsoft AppCenter CLI install hota hai
+# CodePush AppCenter ka hissa hai
+
+# Step 2: React Native project mein CodePush add karna
+npm install react-native-code-push
+# Ye kya karta hai? CodePush library install hota hai
+
+# Step 3: Link library (auto-linking)
+react-native link react-native-code-push
+# Ye kya karta hai? Native code mein CodePush integrate hota hai
+
+# Alternative manual linking required hai (iOS, Android)
+
+# Step 4: AppCenter account create karna
+# https://appcenter.ms/ account banao
+# App create karo: "MyApp"
+
+# Step 5: Deployment keys generate karna
+appcenter codepush deployment list -a YOUR_USERNAME/MyApp
+# Ye kya karta hai? Deployment keys dikhata hai (dev, staging, production)
+
+# Step 6: Environment variable set karna
+# .env file
+CODEPUSH_KEY_PRODUCTION=YOUR_PRODUCTION_KEY
+CODEPUSH_KEY_STAGING=YOUR_STAGING_KEY
+```
+
+#### **Section 3: Android Setup**
+
+```
+// android/app/build.gradle
+
+buildscript {
+  repositories {
+    // CodePush dependencies ke liye
+    maven { url "https://maven.google.com" }
+    jcenter()
+  }
+}
+
+dependencies {
+  // CodePush library
+  implementation "com.microsoft.codepush:codepush:YOUR_VERSION"
+  // Ye kya hai? CodePush Android library
+}
+
+// android/app/src/main/AndroidManifest.xml
+
+<manifest>
+  <permissions>
+    <!-- CodePush ke liye permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- App ko internet access chahiye download ke liye -->
+    
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Network connectivity check karna -->
+  </permissions>
+</manifest>
+
+// android/app/src/main/java/com/myapp/MainApplication.java
+
+public class MainApplication extends Application implements ReactApplication {
+  
+  private final ReactNativeHost mReactNativeHost =
+    new ReactNativeHost(this) {
+      
+      @Override
+      protected String getJSBundleFile() {
+        // Ye kya karta hai? CodePush bundle location batana
+        return CodePush.getJSBundleFile();
+        // CodePush se bundle file path milta hai
+      }
+      
+      @Override
+      protected List<ReactPackage> getPackages() {
+        List<ReactPackage> packages = new PackageList(this).getPackages();
+        // CodePush package add karna
+        packages.add(new CodePushPackage());
+        return packages;
+      }
+    };
+}
+```
+
+#### **Section 4: iOS Setup**
+
+```swift
+// ios/MyApp/AppDelegate.m
+
+#import <CodePush/CodePush.h>
+
+@implementation AppDelegate
+
+- (NSURL *)sourceURLForBridge:(RCTBridge *)bridge {
+  // Ye kya karta hai? JS bundle ka source URL batana
+  
+#if DEBUG
+  // Development mein
+  return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" 
+                                                         fallbackResource:nil];
+#else
+  // Production mein CodePush se load karna
+  return [CodePush bundleURL];
+  // CodePush server se bundle download + load karta hai
+#endif
+}
+
+@end
+```
+
+#### **Section 5: Podfile Update (iOS Dependencies)**
+
+```ruby
+# ios/Podfile
+
+target 'MyApp' do
+  
+  # ... other pods ...
+  
+  # CodePush pod
+  pod 'CodePush', :podspec => '../node_modules/react-native-code-push/CodePush.podspec'
+  # Ye kya karta hai? CodePush pod iOS project mein add hota hai
+  
+end
+
+# Run pod install after this
+# pod install
+```
+
+---
+
+## 💻 6. Hands-On: Code (CodePush Implementation)
+
+### Step 1: Setup CodePush Service
+
+```bash
+# Step 1a: AppCenter CLI login
+appcenter login
+# Microsoft account login karte ho
+
+# Step 1b: App create karna AppCenter mein
+appcenter apps create -d MyApp -o iOS
+appcenter apps create -d MyApp -o Android
+# Ye kya karta hai? iOS aur Android apps register hote hain AppCenter mein
+
+# Step 1c: Deployments create karna
+appcenter codepush deployment add -a YOUR_USERNAME/MyApp Staging
+appcenter codepush deployment add -a YOUR_USERNAME/MyApp Production
+# Ye kya karta hai? Two environments create hote hain (testing + production)
+
+# Step 1d: Keys copy karna
+appcenter codepush deployment list -a YOUR_USERNAME/MyApp
+# Output dikhega:
+# Staging Key: z1kF...
+# Production Key: a2mX...
+```
+
+### Step 2: App mein CodePush Integration
+
+```typescript
+// App.tsx
+
+import React, { useEffect } from 'react';
+import { View, Text, Alert } from 'react-native';
+import codePush from 'react-native-code-push';
+
+// Step 1: CodePush configuration
+const codePushOptions = {
+  // Ye kya hai? CodePush behavior define karna
+  
+  checkFrequency: codePush.CheckFrequency.ON_APP_START,
+  // Ye kya karta hai? App start hone par update check karna
+  // Options: ON_APP_START, ON_APP_RESUME, MANUAL
+  
+  installMode: codePush.InstallMode.ON_NEXT_RESTART,
+  // Ye kya karta hai? Update kab apply karna
+  // Options:
+  // - IMMEDIATE: Instantly apply (app restart ho jayega)
+  // - ON_NEXT_RESTART: Next app restart par apply
+  // - ON_NEXT_RESUME: Jab user app resume kare
+  
+  mandatoryInstallMode: codePush.InstallMode.IMMEDIATE,
+  // Ye kya karta hai? Mandatory updates kab apply kare
+  // IMMEDIATE = User ko wait nahi karna padega
+  
+  updateDialog: {
+    // Ye kya hai? Update dialog UI customize karna
+    title: '🚀 New Update Available',
+    optionalUpdateMessage: 'A new version is available. Update now?',
+    optionalInstallButtonLabel: 'Install',
+    optionalIgnoreButtonLabel: 'Later',
+    mandatoryUpdateMessage: 'Critical update required. Installing now...',
+    mandatoryInstallButtonLabel: 'Update',
+  },
+  
+  minimumBackgroundDuration: 60,
+  // Ye kya karta hai? Background mein minimum 60 sec wait karna
+  // Agar user 60 sec update nahi kare, automatic install kara
+};
+
+// Step 2: App component
+const App: React.FC = () => {
+  useEffect(() => {
+    // CodePush sync karna manually (optional)
+    codePush.sync({
+      // Ye kya karta hai? Manually update check karna
+      updateDialog: true,
+      // Update dialog show karna
+      
+      installMode: codePush.InstallMode.ON_NEXT_RESTART,
+      // ON_NEXT_RESTART par install karna
+    },
+    (syncStatus) => {
+      // Update status callback
+      switch (syncStatus) {
+        case codePush.SyncStatus.CHECKING_FOR_UPDATE:
+          console.log('⏳ Checking for update...');
+          break;
+          
+        case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+          console.log('⬇️ Downloading update...');
+          break;
+          
+        case codePush.SyncStatus.INSTALLING_UPDATE:
+          console.log('⚙️ Installing update...');
+          break;
+          
+        case codePush.SyncStatus.UP_TO_DATE:
+          console.log('✅ App is up to date');
+          break;
+          
+        case codePush.SyncStatus.UPDATE_IGNORED:
+          console.log('⏭️ User skipped update');
+          break;
+          
+        case codePush.SyncStatus.UPDATE_INSTALLED:
+          console.log('✅ Update installed, will restart soon');
+          break;
+      }
+    },
+    (progress) => {
+      // Progress callback
+      const percent = (progress.receivedBytes / progress.totalBytes) * 100;
+      console.log(`Download progress: ${percent.toFixed(1)}%`);
+      // Ye kya karta hai? Download progress track karna
+    });
+  }, []);
+  
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>App Running on Latest Version</Text>
+    </View>
+  );
+};
+
+// Step 3: HOC wrap karna
+export default codePush(codePushOptions)(App);
+// Ye kya karta hai? App component ko CodePush se wrap karna
+// CodePush automatically background mein update check karega
+```
+
+### Step 3: Deploying Updates
+
+```bash
+# Step 1: JavaScript bundle prepare karna
+npm run build
+# Ye kya karta hai? Production bundle banata hai
+
+# Step 2: Update CodePush server mein push karna
+appcenter codepush release-react \
+  -a YOUR_USERNAME/MyApp \
+  -d Staging \
+  -t 1.0.0 \
+  --description "Bug fix for login screen"
+# Ye kya karta hai?
+# -a = App name
+# -d = Deployment (Staging)
+# -t = Target native version (1.0.0)
+# --description = Release notes
+
+# Step 3: Update ko mandatory banana (critical bug fix)
+appcenter codepush patch \
+  -a YOUR_USERNAME/MyApp \
+  -d Staging \
+  --mandatory
+# Ye kya karta hai? Update mandatory kar deta hai
+# Users ko "Later" option nahi dega
+
+# Step 4: Promote Staging se Production
+appcenter codepush promote \
+  -a YOUR_USERNAME/MyApp \
+  -s Staging \
+  -d Production
+# Ye kya karta hai? Staging ka tested update, Production mein promote karta hai
+
+# Step 5: Rollback karna (galat update hua)
+appcenter codepush rollback \
+  -a YOUR_USERNAME/MyApp \
+  -d Production
+# Ye kya karta hai? Previous stable version restore karata hai
+```
+
+### Step 4: Progress & Monitoring UI
+
+```typescript
+// screens/UpdateProgressScreen.tsx
+
+import React, { useState } from 'react';
+import { View, Text, ProgressBarAndroid, StyleSheet, Alert } from 'react-native';
+import codePush, { CodePushUpdateState } from 'react-native-code-push';
+
+interface UpdateProgress {
+  receivedBytes: number;
+  totalBytes: number;
+  percent: number;
+  status: string;
+}
+
+export const UpdateProgressScreen: React.FC = () => {
+  const [progress, setProgress] = useState<UpdateProgress | null>(null);
+  
+  const handleCodePushStatusDidChange = (syncStatus: number) => {
+    // Ye kya karta hai? CodePush status change par call hota hai
+    
+    switch (syncStatus) {
+      case codePush.SyncStatus.CHECKING_FOR_UPDATE:
+        setProgress({ receivedBytes: 0, totalBytes: 0, percent: 0, status: 'Checking...' });
+        break;
+        
+      case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+        setProgress(prev => ({ ...prev, status: 'Downloading...' }));
+        break;
+        
+      case codePush.SyncStatus.INSTALLING_UPDATE:
+        setProgress(prev => ({ ...prev, status: 'Installing...', percent: 100 }));
+        break;
+        
+      case codePush.SyncStatus.UP_TO_DATE:
+        setProgress(null); // Hide progress
+        Alert.alert('Success', 'App is up to date');
+        break;
+    }
+  };
+  
+  const handleCodePushDownloadDidProgress = (progressData: any) => {
+    // Ye kya karta hai? Download progress par call hota hai
+    
+    const percent = (progressData.receivedBytes / progressData.totalBytes) * 100;
+    setProgress({
+      receivedBytes: progressData.receivedBytes,
+      totalBytes: progressData.totalBytes,
+      percent,
+      status: 'Downloading...',
+    });
+  };
+  
+  if (!progress) return null;
+  
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>🔄 {progress.status}</Text>
+      
+      <ProgressBarAndroid
+        // Ye kya karta hai? Progress bar show karna
+        styleAttr="Horizontal"
+        indeterminate={false}
+        progress={progress.percent / 100}
+        color="#007AFF"
+        style={styles.progressBar}
+      />
+      
+      <Text style={styles.text}>
+        {progress.percent.toFixed(1)}% ({progress.receivedBytes} / {progress.totalBytes} bytes)
+      </Text>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+    backgroundColor: '#f5f5f5',
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  progressBar: {
+    height: 10,
+    marginBottom: 10,
+  },
+  text: {
+    fontSize: 14,
+    color: '#666',
+  },
+});
+```
+
+---
+
+## ⚖️ 7. Comparison (Ye vs Woh) & Command Wars
+
+### Concept Comparison
+
+| Feature | Traditional Update | OTA Update (CodePush) |
+|---------|-------------------|----------------------|
+| **Deployment Time** | 24-48 hours | 5 minutes |
+| **Review Process** | Required (Apple/Google) | None |
+| **Update Size** | 30-100MB | 100KB-5MB |
+| **User Action** | Manual install required | Automatic |
+| **Rollback** | Naya version submit karna | 1 click |
+| **Cost** | Free | Free (AppCenter) |
+| **JavaScript Only** | ❌ | ✅ |
+| **Native Code** | ✅ | ❌ |
+| **A/B Testing** | Difficult | Easy |
+
+### Note 46: OTA vs Complete Update (Detailed Comparison)
+
+#### **When to Use OTA (CodePush):**
+
+```
+✅ USE OTA when:
+- Bug fix urgent (login crash)
+- Small feature change
+- UI/UX improvement
+- Performance optimization
+- Business logic change
+- Feature flag toggle
+- AB testing variants
+
+Example: Login button text change
+- Original: "LOGIN"
+- New: "SIGN IN"
+→ Just JS change, no native code
+→ CodePush use karo (2 min deploy)
+```
+
+#### **When to Use Complete Update (App Store):**
+
+```
+✅ USE COMPLETE UPDATE when:
+- New native module added
+- Permissions change (AndroidManifest)
+- Native dependency update
+- iOS/Android version requirement change
+- App icon/name change
+- New API endpoint with breaking changes
+
+Example: Camera permission add karna
+- Need AndroidManifest.xml update
+- Native permissions setup
+- CodePush nahi kar sakta
+→ App Store submit karna padega (24+ hours)
+```
+
+#### **Hybrid Approach (Recommended):**
+
+```
+Production Issue Flow:
+
+1. Emergency Bug? → CodePush (instant fix)
+   └─ Works if sirf JS change hai
+
+2. Native Change? → App Store (proper channel)
+   └ Parallel mein CodePush hotfix de sakte ho
+
+3. Major Release? → App Store (full update)
+   └ CodePush bhi push kar sakte ho simultaneously
+
+Example: Login crash (Native issue)
+- Immediate: CodePush mein small JS workaround
+  (Disable login, show offline message)
+- Meanwhile: App Store submit native fix
+- Later: Both versions stable
+```
+
+#### **Decision Matrix:**
+
+```
+┌──────────────────────────────────────┬─────────────────────────┐
+│ Change Type                          │ Update Method           │
+├──────────────────────────────────────┼─────────────────────────┤
+│ JS/Component logic                   │ CodePush ✅             │
+│ Styles/Colors                        │ CodePush ✅             │
+│ Text/UI strings                      │ CodePush ✅             │
+│ API endpoints (backward compatible)  │ CodePush ✅             │
+│ Native module addition               │ App Store 🔴            │
+│ Permission change                    │ App Store 🔴            │
+│ Native library upgrade               │ App Store 🔴            │
+│ Database schema change               │ Both (sequence matter)  │
+└──────────────────────────────────────┴─────────────────────────┘
+```
+
+---
+
+## 🚫 8. Common Mistakes (Beginner Traps)
+
+### Mistake 1: Trying to Update Native Code with CodePush
+
+```typescript
+// ❌ GALAT - Native module add karane ke baad CodePush
+
+// react-native-camera added
+npm install react-native-camera
+// Ye native module hai!
+
+// Compiler error aayega:
+// "Native module not found"
+
+// ✅ SAHI - Native change ke liye App Store
+
+// Add native module
+npm install react-native-camera
+
+// Commit, build, submit App Store
+npm run build
+// App Store review...
+
+// Jab App Store update live ho, tab CodePush push kar sakte ho
+appcenter codepush release-react ...
+```
+
+### Mistake 2: Large Bundle Size with CodePush
+
+```typescript
+// ❌ GALAT - Heavy dependency add karna CodePush mein
+
+import * as XLSX from 'xlsx'; // 5MB!
+// CodePush se download hoga!
+
+// ✅ SAHI - Dynamic import use karna
+
+// On-demand load karna
+const XLSX = await import('xlsx');
+// Sirf jab user feature use kare, tab download
+
+// Or lazy component
+const ExcelExporter = lazy(() => import('./ExcelExporter'));
+```
+
+### Mistake 3: Not Testing on Staging
+
+```bash
+# ❌ GALAT - Directly Production mein deploy
+
+appcenter codepush release-react \
+  -a YOUR_USERNAME/MyApp \
+  -d Production
+# Agar bug ho toh directly users affected!
+
+# ✅ SAHI - Staging mein test pehle
+
+# Step 1: Staging mein push
+appcenter codepush release-react \
+  -a YOUR_USERNAME/MyApp \
+  -d Staging
+
+# Step 2: Internal testers test karte hain
+# Step 3: Approve + Promote to Production
+appcenter codepush promote \
+  -a YOUR_USERNAME/MyApp \
+  -s Staging \
+  -d Production
+```
+
+### Mistake 4: Mandatory Updates Without Testing
+
+```typescript
+// ❌ GALAT - Mandatory without proper testing
+
+appcenter codepush patch \
+  -a YOUR_USERNAME/MyApp \
+  -d Production \
+  --mandatory
+// Agar bug ho, sab users affected + no way back immediately!
+
+// ✅ SAHI - Gradual rollout
+
+// Step 1: Non-mandatory first
+appcenter codepush release-react \
+  -a YOUR_USERNAME/MyApp \
+  -d Production \
+  --description "Important update"
+
+// Step 2: Monitor crashes 24 hours
+// Check Crashlytics dashboard
+
+// Step 3: Agar stable, patch karo mandatory
+appcenter codepush patch \
+  -a YOUR_USERNAME/MyApp \
+  -d Production \
+  --mandatory
+
+// Step 4: Agar issue, rollback immediately
+appcenter codepush rollback -a YOUR_USERNAME/MyApp -d Production
+```
+
+---
+
+## 🌍 9. Real-World Use Case
+
+### Netflix-like App - OTA Update Flow
+
+```
+Timeline: Production mein login crash bug hua!
+
+00:00 - Bug report aaya
+       Team check karta hai - sirf JS issue
+
+00:05 - Fix kiya developer ne
+       Button text change + logic fix
+
+00:10 - CodePush deploy kiya
+       appcenter codepush release-react ...
+
+00:15 - Users ka app automatically update check karata hai
+       Naya JS bundle download hota hai (500KB)
+
+00:20 - Update applied, app restart
+       Users login kar sakte hain again!
+
+Result:
+✅ 20 minutes mein fix
+✅ 500,000 users affected
+✅ Revenue loss prevented
+✅ Users happy
+
+Compare with App Store:
+❌ 24-48 hours delay
+❌ Downtime = loss
+❌ Bad ratings
+❌ Customer complaints
+```
+
+---
+
+## 🎨 10. Visual Diagram
+
+```
+CodePush Flow:
+
+Developer
+    ↓
+Fix code
+    ↓
+appcenter codepush release-react
+    ↓
+CodePush Server (Azure)
+    ↓
+┌─────────────────┬──────────────────┬─────────────────┐
+│  Staging        │  Check           │  Approve        │
+│  (Test)         │  24 hours        │  or Rollback    │
+└────────┬────────┴──────────────────┴────────┬────────┘
+         │                                    │
+         └────────────────────────────────────┘
+                        ↓
+         appcenter codepush promote
+                        ↓
+              Production Server
+                        ↓
+            User App (Background)
+                        ↓
+              Check for update (ON_APP_START)
+                        ↓
+            Download new JS bundle
+                        ↓
+            Install + Apply
+                        ↓
+            Next App Launch = Updated!
+```
+
+---
+
+## 🛠️ 11. Best Practices
+
+### Practice 1: Versioning Strategy
+
+```bash
+# AppCenter deployments
+Staging:     Testing version
+Production:  Live version
+
+# Also track JS version separately
+// package.json
+{
+  "version": "1.0.0",
+  "reactNativeCodePushVersion": "1.0.0-hotfix1"
+}
+
+# Can deploy multiple hotfixes for same native version
+native: 1.0.0
+│
+├─ hotfix1 (bug fix A)
+├─ hotfix2 (bug fix B)
+├─ hotfix3 (feature C)
+└─ hotfix4 (performance D)
+```
+
+### Practice 2: Release Notes
+
+```bash
+# Always add meaningful release notes
+
+appcenter codepush release-react \
+  -a YOUR_USERNAME/MyApp \
+  -d Production \
+  --description "
+🐛 Fix: Login button crash on Android 10
+⚡ Performance: Optimized image loading
+✨ Feature: Dark mode support
+"
+```
+
+### Practice 3: Monitoring After Deploy
+
+```
+After CodePush deploy:
+
+1. Check Crashlytics dashboard
+   - Any new crashes?
+   - Any increase in crash rate?
+
+2. Monitor analytics
+   - Session start success rate?
+   - Screen navigation issues?
+
+3. User feedback
+   - Any complaints in reviews?
+   - App store ratings dropping?
+
+4. Metrics
+   - App load time
+   - Feature usage
+   - Performance indicators
+```
+
+---
+
+## ⚠️ 12. Consequences of Failure
+
+| Scenario | Consequence |
+|----------|-------------|
+| **Deploy without testing** | Bugs reach all users instantly |
+| **Mandatory update broken** | Users stuck, can't use app |
+| **Lost deployment keys** | Can't deploy future updates |
+| **Too large bundle** | Download fails on slow networks |
+| **No rollback plan** | Can't revert bad update |
+
+---
+
+## ❓ 13. FAQ
+
+### Q1: CodePush kya har update ke liye use kar sakte ho?
+
+**A:** Nahi, sirf JavaScript changes. Native code changes = App Store.
+
+### Q2: CodePush free hai kya?
+
+**A:** Haan, AppCenter free tier mein unlimited deployments.
+
+### Q3: Kya user update reject kar sakte hain?
+
+**A:** Haan, agr non-mandatory ho toh "Later" button hai. Mandatory = no option.
+
+### Q4: Network nahi hai toh kya hoga?
+
+**A:** Download fail, retry next launch par.
+
+---
+
+## 📝 14. Summary
+
+**CodePush = Instant JavaScript updates bina App Store ke! Emergency bugs fix karna seconds mein! 🚀**
+
+---
+
+---
+
+# 🎯 Module 13.7: Environment Variables (react-native-config)
+
+## 🎯 1. Title / Topic
+
+**Module 13.7: Environment Variables - Development vs Production Configuration**
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+**Environment Variables** = **Restaurant ke different shift managers**
+
+- **Development Manager:** "Testing karo, galti karni padti hai"
+  - Test API endpoints use kar sakte ho
+  - Debug logs allow
+  - Relaxed rules
+
+- **Production Manager:** "Strict rules, customers satisfied hone chahiye"
+  - Real API endpoints
+  - No debug logs
+  - Security important
+
+Same restaurant, different rules based on environment!
+
+## 📖 3. Technical Definition
+
+**Environment Variables kyaa hain?**
+
+Ye **configuration values** hain jo code mein hardcode nahi karte.
+
+```
+Example:
+❌ GALAT - Hardcoded
+const API_URL = "https://api.example.com";
+
+✅ SAHI - Environment variable
+const API_URL = process.env.API_URL;
+```
+
+### Note 44: Detailed Environment Configuration
+
+#### **Why Environment Variables Needed:**
+
+```
+Problem: Hardcoded values
+
+const API_URL = "https://prod-api.example.com";
+const DEBUG = false;
+const ANALYTICS_TOKEN = "sk_live_very_secret...";
+
+Issues:
+1. Same code different devices - ❌
+2. Secret keys visible in code - ❌
+3. Change karne ke liye code update - ❌
+4. Git mein sensitive data - ❌
+```
+
+---
+
+## ⚙️ 5. Under the Hood & File Anatomy
+
+### File 1: `.env.development` (Development Config)
+
+```
+# .env.development
+# Ye file development ke liye specific values
+
+API_BASE_URL=http://localhost:3000
+# Ye kya? Local development server (testing ke liye)
+
+API_TIMEOUT=10000
+# Ye kya? 10 second timeout (development mein relax)
+
+DEBUG_ENABLED=true
+# Ye kya? Debug logs enable (development info important)
+
+ANALYTICS_ENABLED=false
+# Ye kya? Analytics disable (development mein data accurate nahi)
+
+SENTRY_DSN=https://dev@sentry.io/dev_project
+# Ye kya? Sentry (error tracking) development version
+
+LOG_LEVEL=debug
+# Ye kya? Verbose logging
+
+FEATURE_NEW_UI=true
+# Feature flags - naya UI test karna
+
+STRIPE_PUBLISHABLE_KEY=pk_test_123456
+# Test keys (real money nahi lagta)
+
+IMAGE_RESIZE_ENABLED=false
+# Development mein image processing skip kar
+```
+
+### File 2: `.env.production` (Production Config)
+
+```
+# .env.production
+# Ye file production ke liye
+
+API_BASE_URL=https://api.example.com
+# Real production server
+
+API_TIMEOUT=30000
+# 30 second timeout (network slowness handle karna)
+
+DEBUG_ENABLED=false
+# Debug logs disable (security + performance)
+
+ANALYTICS_ENABLED=true
+# Analytics enable (user behavior tracking)
+
+SENTRY_DSN=https://prod@sentry.io/prod_project
+# Production error tracking
+
+LOG_LEVEL=error
+# Sirf errors log karna
+
+FEATURE_NEW_UI=false
+# Old UI use kar (tested + stable)
+
+STRIPE_PUBLISHABLE_KEY=pk_live_production_keys
+# Real keys (money transaction)
+
+IMAGE_RESIZE_ENABLED=true
+# Image optimization production mein important
+```
+
+### File 3: `.env.staging` (Staging/Testing Config)
+
+```
+# .env.staging
+# Beta testing environment
+
+API_BASE_URL=https://staging-api.example.com
+# Staging server (production-like but testing)
+
+DEBUG_ENABLED=false
+# No logs (production-like)
+
+ANALYTICS_ENABLED=true
+# Track behavior (testing data)
+
+LOG_LEVEL=warn
+# Warnings + errors only
+
+FEATURE_NEW_UI=true
+# Test new UI with real users
+
+STRIPE_PUBLISHABLE_KEY=pk_test_staging
+# Test keys (safe)
+```
+
+### File 4: `react-native.config.js` (react-native-config Integration)
+
+```javascript
+// react-native.config.js
+// react-native-config ko configure karna
+
+module.exports = {
+  project: {
+    ios: {},
+    android: {},
+  },
+  
+  // Ye kya hai? Environment file locations
+  dependencies: {
+    'react-native-config': {
+      platforms: {
+        ios: null,  // Auto-link
+        android: null,  // Auto-link
+      },
+    },
+  },
+};
+```
+
+---
+
+## 💻 6. Hands-On: Code
+
+### Step 1: Installation
+
+```bash
+# Install react-native-config
+npm install react-native-config
+# Ye kya karta hai? Environment variable library install hota hai
+
+# Link library
+react-native link react-native-config
+# Native code mein integrate hota hai
+
+# Create environment files
+touch .env.development .env.staging .env.production
+```
+
+### Step 2: Real Implementation
+
+```typescript
+// config/environment.ts
+// Environment configuration manage karna
+
+import { NativeModules } from 'react-native';
+import Config from 'react-native-config';
+
+// Ye kya hai? Config object mein sab environment variables available hote hain
+
+interface EnvironmentConfig {
+  apiBaseUrl: string;
+  apiTimeout: number;
+  debugEnabled: boolean;
+  analyticsEnabled: boolean;
+  logLevel: 'debug' | 'info' | 'warn' | 'error';
+  stripeKey: string;
+  sentryDsn: string;
+  featureNewUI: boolean;
+  imageResizeEnabled: boolean;
+}
+
+// Get current environment
+const getEnvironment = (): string => {
+  // __DEV__ = React Native global variable
+  // true agar development, false agar production
+  return __DEV__ ? 'development' : 'production';
+};
+
+// Create environment config object
+export const environment: EnvironmentConfig = {
+  // Ye kya hai? .env file se values read karna
+  
+  apiBaseUrl: Config.API_BASE_URL || 'http://localhost:3000',
+  // Config.API_BASE_URL = .env file se value
+  // || fallback value agr env variable missing
+  
+  apiTimeout: parseInt(Config.API_TIMEOUT || '10000', 10),
+  // parseInt = string ko number mein convert karna
+  
+  debugEnabled: Config.DEBUG_ENABLED === 'true',
+  // String 'true' ko boolean true mein convert
+  
+  analyticsEnabled: Config.ANALYTICS_ENABLED === 'true',
+  
+  logLevel: (Config.LOG_LEVEL || 'info') as 'debug' | 'info' | 'warn' | 'error',
+  
+  stripeKey: Config.STRIPE_PUBLISHABLE_KEY,
+  // Stripe public key (.env file se)
+  
+  sentryDsn: Config.SENTRY_DSN,
+  
+  featureNewUI: Config.FEATURE_NEW_UI === 'true',
+  
+  imageResizeEnabled: Config.IMAGE_RESIZE_ENABLED === 'true',
+};
+
+// Logger utility using environment config
+export const logger = {
+  // Ye kya hai? Environment based logging
+
+  debug: (message: string, data?: any) => {
+    // Debug log environment enabled hote hi print hota hai
+    if (environment.debugEnabled) {
+      console.log(`[DEBUG] ${message}`, data);
+    }
+  },
+  
+  info: (message: string, data?: any) => {
+    if (environment.logLevel !== 'error') {
+      console.log(`[INFO] ${message}`, data);
+    }
+  },
+  
+  error: (message: string, error?: any) => {
+    console.error(`[ERROR] ${message}`, error);
+  },
+};
+
+// API client using environment config
+export const createApiClient = () => {
+  // Ye kya hai? Environment specific API client
+
+  return {
+    baseURL: environment.apiBaseUrl,
+    // Production: https://api.example.com
+    // Development: http://localhost:3000
+    
+    timeout: environment.apiTimeout,
+    // Timeout based on environment
+    
+    headers: {
+      'Content-Type': 'application/json',
+      ...(environment.debugEnabled && { 'X-Debug': 'true' }),
+      // Debug header sirf development mein
+    },
+  };
+};
+
+// Analytics service using environment config
+export const initializeAnalytics = () => {
+  if (!environment.analyticsEnabled) {
+    logger.debug('Analytics disabled for this environment');
+    return;
+  }
+  
+  // Initialize analytics
+  // (Google Analytics, Mixpanel, etc.)
+  logger.info('Analytics initialized');
+};
+
+// Sentry error tracking
+export const initializeSentry = () => {
+  if (!environment.sentryDsn) {
+    logger.debug('Sentry not configured');
+    return;
+  }
+  
+  // Sentry.init({ dsn: environment.sentryDsn });
+  logger.info('Sentry initialized');
+};
+```
+
+### Step 3: Using Environment Variables in App
+
+```typescript
+// services/api.ts
+
+import axios from 'axios';
+import { environment, logger, createApiClient } from '../config/environment';
+
+// Create HTTP client
+const httpClient = axios.create(createApiClient());
+// Ye kya karta hai? Environment based config ke saath HTTP client
+
+// Add request interceptor
+httpClient.interceptors.request.use(
+  (config) => {
+    logger.debug('API Request', {
+      method: config.method,
+      url: config.url,
+      // Debug info environment enabled hote hi print hoga
+    });
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
+
+// Add response interceptor
+httpClient.interceptors.response.use(
+  (response) => {
+    logger.debug('API Response', { status: response.status });
+    return response;
+  },
+  (error) => {
+    logger.error('API Error', error.message);
+    return Promise.reject(error);
+  },
+);
+
+// API call function
+export const fetchUsers = async () => {
+  try {
+    logger.debug('Fetching users from', environment.apiBaseUrl);
+    
+    const response = await httpClient.get('/users');
+    // URL automatically baseURL prepend hota hai
+    // Production: https://api.example.com/users
+    // Development: http://localhost:3000/users
+    
+    return response.data;
+  } catch (error) {
+    logger.error('Failed to fetch users', error);
+    throw error;
+  }
+};
+```
+
+### Step 4: Feature Flags using Environment
+
+```typescript
+// components/UIVersion.tsx
+
+import React from 'react';
+import { View } from 'react-native';
+import { environment } from '../config/environment';
+import { NewUIComponent } from './NewUIComponent';
+import { OldUIComponent } from './OldUIComponent';
+
+export const UIComponent: React.FC = () => {
+  // Ye kya karta hai? Environment ke base par UI select karna
+  
+  if (environment.featureNewUI) {
+    // Production: false = purana UI stable
+    // Development: true = naya UI test kar
+    // Staging: true = naya UI with real data
+    return <NewUIComponent />;
+  }
+  
+  return <OldUIComponent />;
+};
+```
+
+### Step 5: Build ke saath Environment
+
+```bash
+# Development build with .env.development
+ENVFILE=.env.development npm run android
+# Ye kya karta hai?
+# - .env.development file use karata hai
+# - Config.API_BASE_URL = localhost:3000
+# - DEBUG logs enabled
+
+# Production build with .env.production
+ENVFILE=.env.production npm run android
+# Ye kya karta hai?
+# - .env.production file use karata hai
+# - Config.API_BASE_URL = https://api.example.com
+# - DEBUG logs disabled
+
+# iOS
+ENVFILE=.env.production npx react-native run-ios
+
+# CI/CD mein
+# GitHub Actions, Fastlane automatically set environment
+```
+
+### Step 6: Secrets Management (Important!)
+
+```bash
+# ❌ GALAT - Secrets .env file mein
+
+# .env.production (NEVER COMMIT)
+STRIPE_PUBLISHABLE_KEY=pk_live_...
+SENTRY_DSN=https://production_key@sentry.io/...
+API_SECRET=secret123...
+
+# Git mein jao toh security issue!
+
+# ✅ SAHI - CI/CD secrets use karna
+
+# .env.production (dummy keys only)
+STRIPE_PUBLISHABLE_KEY=PLACEHOLDER
+SENTRY_DSN=PLACEHOLDER
+
+# GitHub Secrets (Settings → Secrets)
+# PRODUCTION_STRIPE_KEY=pk_live_...
+# PRODUCTION_SENTRY_DSN=https://...
+
+# GitHub Actions mein
+- name: Create env file
+  run: |
+    echo "STRIPE_PUBLISHABLE_KEY=${{ secrets.PRODUCTION_STRIPE_KEY }}" > .env.production
+    echo "SENTRY_DSN=${{ secrets.PRODUCTION_SENTRY_DSN }}" >> .env.production
+
+# .gitignore
+echo ".env*" >> .gitignore
+# Koi bhi .env* file git mein nahi jayega
+```
+
+---
+
+## ⚖️ 7. Comparison & Commands
+
+| Aspect | Development | Production |
+|--------|-------------|-----------|
+| **API URL** | localhost:3000 | https://api.example.com |
+| **Debug Logs** | Enabled | Disabled |
+| **Analytics** | Disabled | Enabled |
+| **Error Tracking** | dev@sentry.io | prod@sentry.io |
+| **Feature Flags** | New features on | Stable features only |
+| **Timeout** | 10 seconds | 30 seconds |
+| **Keys** | Test keys | Live keys |
+
+---
+
+## 🚫 8. Common Mistakes
+
+### Mistake 1: Secrets in Code
+
+```typescript
+// ❌ GALAT
+const STRIPE_KEY = "pk_live_secret_key_123";
+// GitHub mein public ho jayega!
+
+// ✅ SAHI
+const STRIPE_KEY = Config.STRIPE_PUBLISHABLE_KEY;
+// Environment variable se (CI/CD secrets)
+```
+
+### Mistake 2: Wrong Environment File
+
+```bash
+# ❌ GALAT - Production app .env.development use kar raha hai
+ENVFILE=.env.development npm run build
+
+# ✅ SAHI
+ENVFILE=.env.production npm run build
+```
+
+---
+
+## 📝 14. Summary
+
+**Environment Variables = Different configs for different environments! Code same, configuration different!** ⚙️
+
+---
+
+---
+
+# 🎯 Module 13.8: Permissions Handling (Manifest vs Runtime)
+
+## 🎯 1. Title / Topic
+
+**Module 13.8: Android & iOS Permissions - Compile-time vs Runtime**
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+**Permissions** = **Home inspection checklist**
+
+**Android (Manifest - Compile Time):**
+- Builder ko pehle se declaration do: "Mera ghar mein kitchen hoga, bathroom hoga"
+- Ye list final inspection mein check hote hain
+- Building ke baad add nahi kar sakte
+
+**iOS (Runtime - User asks):**
+- Ghar ready hai
+- Jab user camera use karna chaye, app puchta hai
+- "Camera access de sakta ho?" - user allow/deny
+
+Different approach, same goal: User ki permission lena!
+
+## 📖 3. Technical Definition
+
+**Permissions kyaa hain?**
+
+App ko sensitive device features access karna padta hai:
+- Camera
+- Microphone
+- Location
+- Contact
+- Photo gallery
+- Calendar
+- Health data
+
+**Android (API 23+):** Dono - Manifest + Runtime
+**iOS:** Runtime hi (user ke paas control)
+
+### Note 29, 38, 40: Detailed Permission Handling
+
+---
+
+## ⚙️ 5. File Anatomy
+
+### Android: AndroidManifest.xml (Manifest Permissions)
+
+```xml
+<!-- AndroidManifest.xml -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- Ye kya hai? Root element -->
+
+  <uses-permission android:name="android.permission.CAMERA" />
+  <!-- Ye kya? Camera permission declare karna -->
+  <!-- Compile time pe app ko camera access chahiye ye declare hota hai -->
+
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <!-- GPS location -->
+
+  <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  <!-- Approximate location (cell tower based) -->
+
+  <uses-permission android:name="android.permission.READ_CONTACTS" />
+  <!-- Contacts read karna -->
+
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  <!-- Photos/files read karna -->
+
+  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+  <!-- Microphone -->
+
+  <uses-permission android:name="android.permission.INTERNET" />
+  <!-- Internet access (almost always needed) -->
+
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <!-- Files write karna -->
+
+  <!-- Permission groups (dangerous permissions - runtime ask karna padta hai) -->
+  <!-- Dangerous permissions: CAMERA, LOCATION, CONTACTS, STORAGE, etc. -->
+  <!-- Normal permissions: INTERNET, VIBRATE (automatically granted) -->
+
+  <application>
+    <activity android:name=".MainActivity" />
+  </application>
+
+</manifest>
+```
+
+### iOS: Info.plist (Manifest Permissions)
+
+```xml
+<!-- ios/MyApp/Info.plist -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+  <!-- Camera permission description -->
+  <key>NSCameraUsageDescription</key>
+  <string>We need camera access to take photos for your profile.</string>
+  <!-- Ye kya? Camera permission dialog mein ye message dikhaega -->
+
+  <!-- Location permission description -->
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>We need your location to show nearby restaurants.</string>
+
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>Background location needed for delivery tracking.</string>
+
+  <!-- Contacts permission description -->
+  <key>NSContactsUsageDescription</key>
+  <string>We need access to add friends from your contacts.</string>
+
+  <!-- Photo library permission -->
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>We need permission to access your photos.</string>
+
+  <!-- Microphone permission -->
+  <key>NSMicrophoneUsageDescription</key>
+  <string>We need microphone access for video calls.</string>
+
+  <!-- Health Kit permission (for fitness apps) -->
+  <key>NSHealthShareUsageDescription</key>
+  <string>We need access to your health data.</string>
+
+</dict>
+</plist>
+```
+
+---
+
+## 💻 6. Hands-On: Code
+
+### Step 1: React Native Permission Library Setup
+
+```bash
+# Install react-native-permissions
+npm install react-native-permissions
+# Ye kya karta hai? Cross-platform permission handling library
+
+# Link library
+react-native link react-native-permissions
+# Native code mein integrate hota hai
+```
+
+### Step 2: Permission Request Implementation
+
+```typescript
+// utils/permissions.ts
+
+import { 
+  PERMISSIONS, 
+  RESULTS, 
+  check, 
+  request,
+  checkMultiple,
+  requestMultiple 
+} from 'react-native-permissions';
+import { Platform, Alert } from 'react-native';
+
+// Ye kya hai? Permission names different hote hain iOS vs Android
+
+const CAMERA_PERMISSION = Platform.select({
+  ios: PERMISSIONS.IOS.CAMERA,
+  // iOS: "com.apple.health.camera"
+  
+  android: PERMISSIONS.ANDROID.CAMERA,
+  // Android: "android.permission.CAMERA"
+});
+
+const LOCATION_PERMISSION = Platform.select({
+  ios: PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
+  android: PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+});
+
+const PHOTO_LIBRARY_PERMISSION = Platform.select({
+  ios: PERMISSIONS.IOS.PHOTO_LIBRARY,
+  android: PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+});
+
+// Single permission check karna
+export const checkPermission = async (permissionType: string): Promise<boolean> => {
+  // Ye kya karta hai? Check karna ki permission already granted hai ya nahi
+
+  const permission = permissionType === 'camera' ? CAMERA_PERMISSION : LOCATION_PERMISSION;
+  // Permission type select karna
+
+  try {
+    const result = await check(permission);
+    // Check karna current status
+
+    switch (result) {
+      case RESULTS.GRANTED:
+        // Permission already allowed
+        console.log('✅ Permission granted');
+        return true;
+
+      case RESULTS.DENIED:
+        // First time ask, not yet denied
+        console.log('⚠️ Permission not yet requested');
+        return false;
+
+      case RESULTS.BLOCKED:
+        // User ne block kiya settings mein
+        console.log('🚫 Permission blocked - open settings');
+        return false;
+
+      case RESULTS.UNAVAILABLE:
+        // Device pe feature nahi hai
+        console.log('❌ Feature not available on this device');
+        return false;
+
+      default:
+        return false;
+    }
+  } catch (error) {
+    console.error('Permission check failed', error);
+    return false;
+  }
+};
+
+// Single permission request karna
+export const requestPermission = async (permissionType: string): Promise<boolean> => {
+  // Ye kya karta hai? User se permission maangna
+
+  const isGranted = await checkPermission(permissionType);
+  if (isGranted) return true;
+  // Pehle se granted hai toh nahi puchna
+
+  const permission = permissionType === 'camera' ? CAMERA_PERMISSION : LOCATION_PERMISSION;
+
+  try {
+    const result = await request(permission);
+    // User se dialog dikhaata hai
+    // User allow/deny karta hai
+
+    if (result === RESULTS.GRANTED) {
+      console.log('✅ Permission granted by user');
+      return true;
+    } else if (result === RESULTS.BLOCKED) {
+      // User ne permanently block kiya
+      showOpenSettingsAlert(permissionType);
+      return false;
+    } else {
+      console.log('⏭️ Permission denied');
+      return false;
+    }
+  } catch (error) {
+    console.error('Permission request failed', error);
+    return false;
+  }
+};
+
+// Multiple permissions request karna
+export const requestMultiplePermissions = async (
+  permissionTypes: string[]
+): Promise<Record<string, boolean>> => {
+  // Ye kya karta hai? Multiple permissions ek saath maangna
+
+  const permissions = permissionTypes.map(type => {
+    if (type === 'camera') return CAMERA_PERMISSION;
+    if (type === 'location') return LOCATION_PERMISSION;
+    if (type === 'photos') return PHOTO_LIBRARY_PERMISSION;
+    return null;
+  }).filter(Boolean) as string[];
+
+  try {
+    const result = await requestMultiple(permissions);
+    // Multiple permissions dialog dikhaata hai
+
+    // Result object: { [permission]: status }
+    const grantedPermissions: Record<string, boolean> = {};
+
+    Object.entries(result).forEach(([permission, status]) => {
+      grantedPermissions[permission] = status === RESULTS.GRANTED;
+      // True agr granted, false agr not granted
+    });
+
+    return grantedPermissions;
+  } catch (error) {
+    console.error('Multiple permission request failed', error);
+    return {};
+  }
+};
+
+// Settings khol di agr user ne permanently block kiya
+const showOpenSettingsAlert = (permissionType: string) => {
+  Alert.alert(
+    'Permission Required',
+    `${permissionType} permission is required. Please enable it in Settings.`,
+    [
+      { text: 'Cancel', onPress: () => {} },
+      {
+        text: 'Open Settings',
+        onPress: () => {
+          if (Platform.OS === 'ios') {
+            Linking.openURL('app-settings:');
+          } else {
+            // Android
+            import('react-native-android-open-settings').then(module => {
+              module.default.openSettings();
+            });
+          }
+        },
+      },
+    ],
+  );
+};
+```
+
+### Step 3: Using Permissions in Components
+
+```typescript
+// screens/CameraScreen.tsx
+
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { Camera } from 'react-native-camera';
+import { requestPermission } from '../utils/permissions';
+
+export const CameraScreen: React.FC = () => {
+  const [cameraGranted, setCameraGranted] = useState(false);
+
+  useEffect(() => {
+    // Component mount hote hi camera permission check karna
+    checkCameraPermission();
+  }, []);
+
+  const checkCameraPermission = async () => {
+    // Ye kya karta hai? Camera permission check + request karna
+
+    try {
+      const granted = await requestPermission('camera');
+      // requestPermission automatically puchta hai agr not granted
+
+      setCameraGranted(granted);
+
+      if (!granted) {
+        Alert.alert('Camera Permission', 'Camera access is required to use this feature');
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Failed to request camera permission');
+    }
+  };
+
+  const takePicture = async () => {
+    if (!cameraGranted) {
+      Alert.alert('Error', 'Camera permission not granted');
+      return;
+    }
+
+    try {
+      // Camera se photo lena
+      // const photo = await cameraRef.takePictureAsync();
+      console.log('Photo taken');
+    } catch (error) {
+      Alert.alert('Error', 'Failed to take picture');
+    }
+  };
+
+  if (!cameraGranted) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Camera permission is required</Text>
+        <TouchableOpacity onPress={checkCameraPermission}>
+          <Text>Request Permission</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Camera style={{ flex: 1 }} />
+      {/* Camera preview */}
+
+      <TouchableOpacity onPress={takePicture}>
+        <Text>📸 Take Picture</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+```
+
+### Step 4: Location Permission with Continuous Updates
+
+```typescript
+// services/location.ts
+
+import { requestPermission } from '../utils/permissions';
+import Geolocation from 'react-native-geolocation-service';
+
+interface Location {
+  latitude: number;
+  longitude: number;
+  accuracy: number;
+  timestamp: number;
+}
+
+export const LocationService = {
+  // Ye kya hai? Location tracking service
+
+  getCurrentLocation: async (): Promise<Location | null> => {
+    // Ye kya karta hai? Current location ek baar get karna
+
+    const granted = await requestPermission('location');
+    // Location permission maang na
+
+    if (!granted) {
+      console.log('Location permission denied');
+      return null;
+    }
+
+    return new Promise((resolve, reject) => {
+      Geolocation.getCurrentPosition(
+        // Success callback
+        (position) => {
+          const { latitude, longitude, accuracy } = position.coords;
+          // position.coords mein location data
+
+          resolve({
+            latitude,
+            longitude,
+            accuracy,
+            timestamp: Date.now(),
+          });
+        },
+
+        // Error callback
+        (error) => {
+          console.error('Failed to get location', error);
+          reject(error);
+        },
+
+        // Options
+        {
+          enableHighAccuracy: true,
+          // Ye kya karta hai? GPS use kar (battery fast use)
+          // false = network based (less accurate, battery save)
+
+          timeout: 10000,
+          // 10 second timeout
+
+          maximumAge: 0,
+          // Cache nahi, fresh location
+        }
+      );
+    });
+  },
+
+  watchLocation: (
+    onLocation: (location: Location) => void,
+    onError: (error: any) => void
+  ): number | null => {
+    // Ye kya karta hai? Continuous location updates (tracking)
+    // Like Uber driver tracking
+
+    Geolocation.watchPosition(
+      (position) => {
+        onLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          accuracy: position.coords.accuracy,
+          timestamp: Date.now(),
+        });
+      },
+
+      onError,
+
+      {
+        enableHighAccuracy: true,
+        distanceFilter: 10,
+        // 10 meters movement par callback
+        // Less updates = battery save
+
+        interval: 5000,
+        // 5 second interval check
+      }
+    );
+
+    // Return watch ID agr stop karna ho
+    // return watchId;
+  },
+
+  stopWatchingLocation: (watchId: number) => {
+    // Ye kya karta hai? Location tracking stop karna
+    Geolocation.clearWatch(watchId);
+  },
+};
+```
+
+### Step 5: Multiple Permissions Request
+
+```typescript
+// screens/ProfileSetupScreen.tsx
+
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Text } from 'react-native';
+import { requestMultiplePermissions } from '../utils/permissions';
+
+export const ProfileSetupScreen: React.FC = () => {
+  const [permissions, setPermissions] = useState<Record<string, boolean>>({});
+
+  const requestAllPermissions = async () => {
+    // Ye kya karta hai? Multiple permissions ek saath maangna
+
+    const granted = await requestMultiplePermissions([
+      'camera',
+      'photos',
+      'location',
+    ]);
+    // Dialog mein teeno permissions dikhai denga
+
+    setPermissions(granted);
+
+    // Check karo kaun granted hui
+    if (granted['camera']) {
+      console.log('✅ Camera granted');
+    }
+    if (granted['photos']) {
+      console.log('✅ Photos granted');
+    }
+    if (granted['location']) {
+      console.log('✅ Location granted');
+    }
+  };
+
+  return (
+    <View>
+      <TouchableOpacity onPress={requestAllPermissions}>
+        <Text>🔐 Request Permissions</Text>
+      </TouchableOpacity>
+
+      {Object.entries(permissions).map(([permission, granted]) => (
+        <Text key={permission}>
+          {permission}: {granted ? '✅' : '❌'}
+        </Text>
+      ))}
+    </View>
+  );
+};
+```
+
+---
+
+## ⚖️ 7. Comparison
+
+| Aspect | Android | iOS |
+|--------|---------|-----|
+| **Manifest** | AndroidManifest.xml | Info.plist |
+| **Runtime Request** | Needed (API 23+) | Always required |
+| **Permission Types** | Normal + Dangerous | User Facing |
+| **Dialog** | System dialog | System dialog |
+| **User Control** | Settings | Settings |
+
+---
+
+## 🚫 8. Common Mistakes
+
+### Mistake 1: Not Checking Permission
+
+```typescript
+// ❌ GALAT
+const takePicture = async () => {
+  const photo = await camera.takePictureAsync();
+  // Permission nahi check kiya = crash!
+};
+
+// ✅ SAHI
+const takePicture = async () => {
+  const granted = await requestPermission('camera');
+  if (!granted) return;
+
+  const photo = await camera.takePictureAsync();
+};
+```
+
+### Mistake 2: Forgotten Manifest Declaration
+
+```xml
+<!-- ❌ GALAT - AndroidManifest.xml mein nahi hai -->
+<!-- App needs camera but nahi declare kiya -->
+<!-- Play Store mein reject hoga -->
+
+<!-- ✅ SAHI -->
+<uses-permission android:name="android.permission.CAMERA" />
+```
+
+---
+
+## 📝 14. Summary
+
+**Permissions = Ask before using device features! Android: Manifest + Runtime, iOS: Runtime only!** 🔐
+
+---
+
+---
+
+# 🎯 Module 13.9: File Upload (Multipart)
+
+## 🎯 1. Title / Topic
+
+**Module 13.9: File Upload with Multipart/form-data**
+
+Note 34: Detailed File Upload Implementation
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+**File Upload** = **Package delivery with multiple items**
+
+**Normal message sending (JSON):**
+- Letter bhejte ho: "Hi, my name is Raj"
+- Text-based, simple
+
+**File upload (Multipart):**
+- Package bhejte ho: "Letter + Photo + Document"
+- Multiple items, different formats
+- Special packaging required
+
+## 📖 3. Technical Definition
+
+**Multipart Upload kyaa hai?**
+
+```
+Normal POST (JSON):
+{ "name": "Raj", "email": "raj@example.com" }
+
+Multipart POST:
+┌─────────────────────────────┐
+│ Field: name = "Raj"         │
+│ Field: email = raj@...      │
+│ File: photo.jpg (binary)    │
+│ File: document.pdf (binary) │
+└─────────────────────────────┘
+```
+
+---
+
+## 💻 6. Hands-On: Code
+
+### Step 1: Installation
+
+```bash
+# Install file handling library
+npm install react-native-document-picker react-native-image-picker
+# Ye kya karta hai? File + image picker libraries
+
+# Or universal solution
+npm install react-native-fs
+# File system access
+```
+
+### Step 2: File Selection Implementation
+
+```typescript
+// utils/fileUpload.ts
+
+import { DocumentPickerResponse } from 'react-native-document-picker';
+import DocumentPicker from 'react-native-document-picker';
+import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
+import RNFS from 'react-native-fs';
+
+export interface FileData {
+  uri: string;
+  // Ye kya? File ka local path
+  // Jaise: file:///data/user/0/com.myapp/cache/image.jpg
+  
+  name: string;
+  // File ka naam
+  
+  type: string;
+  // MIME type: image/jpeg, application/pdf, etc.
+  
+  size: number;
+  // File size in bytes
+}
+
+// Photo gallery se image select karna
+export const pickImageFromGallery = async (): Promise<FileData | null> => {
+  try {
+    const result = await launchImageLibrary(
+      {
+        mediaType: 'photo',
+        // Ye kya? Sirf photos select kar (videos nahi)
+        
+        quality: 0.8,
+        // Image quality - 0.8 = 80% quality (size optimize)
+        
+        maxWidth: 1024,
+        maxHeight: 1024,
+        // Ye kya? Large images automatically resize
+        // Storage optimize karna
+      },
+      (response) => {
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+          return null;
+        }
+
+        if (response.errorCode) {
+          console.error('Image picker error:', response.errorMessage);
+          return null;
+        }
+
+        if (!response.assets || response.assets.length === 0) {
+          return null;
+        }
+
+        const asset = response.assets[0];
+        // First selected image
+
+        return {
+          uri: asset.uri || '',
+          name: asset.fileName || 'image.jpg',
+          type: asset.type || 'image/jpeg',
+          size: asset.fileSize || 0,
+        };
+      }
+    );
+
+    return result;
+  } catch (error) {
+    console.error('Failed to pick image', error);
+    return null;
+  }
+};
+
+// Camera se photo lena
+export const takePhotoWithCamera = async (): Promise<FileData | null> => {
+  try {
+    const result = await launchCamera(
+      {
+        mediaType: 'photo',
+        quality: 0.9,
+        // Camera se high quality (user ne photo liya hai)
+      },
+      (response) => {
+        if (response.didCancel || !response.assets?.[0]) {
+          return null;
+        }
+
+        const asset = response.assets[0];
+
+        return {
+          uri: asset.uri || '',
+          name: asset.fileName || 'photo.jpg',
+          type: asset.type || 'image/jpeg',
+          size: asset.fileSize || 0,
+        };
+      }
+    );
+
+    return result;
+  } catch (error) {
+    console.error('Failed to take photo', error);
+    return null;
+  }
+};
+
+// Any file select karna (PDF, documents, etc.)
+export const pickFile = async (): Promise<FileData | null> => {
+  try {
+    const result = await DocumentPicker.pick({
+      type: [DocumentPicker.types.allFiles],
+      // Ye kya? Sab file types allow kar
+    });
+
+    if (!result || result.length === 0) return null;
+
+    const file = result[0];
+
+    return {
+      uri: file.uri,
+      name: file.name || 'file',
+      type: file.type || 'application/octet-stream',
+      size: file.size || 0,
+    };
+  } catch (error) {
+    if (DocumentPicker.isCancel(error)) {
+      console.log('User cancelled file picker');
+    } else {
+      console.error('File picker error:', error);
+    }
+    return null;
+  }
+};
+
+// File size check karna
+export const validateFileSize = (
+  fileSize: number,
+  maxSizeInMB: number = 10
+): boolean => {
+  // Ye kya karta hai? File size limit check karna
+
+  const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+  // MB ko bytes mein convert karna
+
+  if (fileSize > maxSizeInBytes) {
+    console.error(`File size exceeds ${maxSizeInMB}MB limit`);
+    return false;
+  }
+
+  return true;
+};
+
+// Image compress karna (upload se pehle)
+export const compressImage = async (fileUri: string): Promise<string> => {
+  try {
+    // Original file read karna
+    const fileSize = await RNFS.stat(fileUri);
+    console.log('Original size:', fileSize.size / 1024, 'KB');
+
+    // Compressed path
+    const compressedPath = fileUri.replace(/\.[^.]+$/, '_compressed.jpg');
+    // Ye kya karta hai? File extension ko _compressed.jpg banata hai
+
+    // Compress karna (simple approach - app se handle)
+    // Real compression ke liye native library use karna padta hai
+    // react-native-image-resizer library
+
+    return compressedPath;
+  } catch (error) {
+    console.error('Failed to compress image', error);
+    return fileUri;
+  }
+};
+```
+
+### Step 3: Multipart Upload Implementation
+
+```typescript
+// services/uploadService.ts
+
+import axios, { AxiosProgressEvent } from 'axios';
+import RNFS from 'react-native-fs';
+import { FileData } from '../utils/fileUpload';
+
+interface UploadOptions {
+  onProgress?: (progress: UploadProgress) => void;
+  headers?: Record<string, string>;
+}
+
+export interface UploadProgress {
+  percent: number;
+  // 0-100
+  
+  loaded: number;
+  // Uploaded bytes
+  
+  total: number;
+  // Total bytes
+}
+
+export const uploadFile = async (
+  file: FileData,
+  serverUrl: string,
+  options?: UploadOptions
+): Promise<any> => {
+  try {
+    // Step 1: FormData create karna
+    const formData = new FormData();
+    // FormData = special format for multipart
+
+    // Add file
+    formData.append('file', {
+      // Ye kya karta hai? File ko FormData mein add karna
+      
+      uri: file.uri,
+      // File ka local path
+      
+      type: file.type,
+      // MIME type: image/jpeg
+      
+      name: file.name,
+      // File ka naam
+    } as any);
+
+    // Add other fields
+    formData.append('userId', 'user123');
+    // Ye kya karta hai? User ID saath bhejna
+    
+    formData.append('description', 'User profile photo');
+    // Optional: File description
+
+    // Step 2: Upload request bhejна
+    const response = await axios.post(serverUrl, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        // Ye kya? Browser ko batata hai ye multipart data hai
+        ...options?.headers,
+      },
+      
+      // Progress tracking
+      onUploadProgress: (progressEvent: AxiosProgressEvent) => {
+        const { loaded, total } = progressEvent;
+        const percent = Math.round((loaded / (total || 1)) * 100);
+        // Percentage calculate karna
+
+        if (options?.onProgress) {
+          options.onProgress({
+            percent,
+            loaded,
+            total: total || 0,
+          });
+        }
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('File upload failed', error);
+    throw error;
+  }
+};
+
+// Multiple files upload karna
+export const uploadMultipleFiles = async (
+  files: FileData[],
+  serverUrl: string,
+  options?: UploadOptions
+): Promise<any> => {
+  try {
+    const formData = new FormData();
+
+    // Multiple files add karna
+    files.forEach((file, index) => {
+      formData.append(`files`, {
+        // Ye kya? Array format mein files add hote hain
+        // Server: files[0], files[1], files[2]
+        
+        uri: file.uri,
+        type: file.type,
+        name: file.name,
+      } as any);
+    });
+
+    const response = await axios.post(serverUrl, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      onUploadProgress: (progressEvent: AxiosProgressEvent) => {
+        const percent = Math.round((progressEvent.loaded / (progressEvent.total || 1)) * 100);
+        options?.onProgress?.({
+          percent,
+          loaded: progressEvent.loaded,
+          total: progressEvent.total || 0,
+        });
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Multiple file upload failed', error);
+    throw error;
+  }
+};
+
+// Resume upload (network interrupted)
+export const resumeUpload = async (
+  file: FileData,
+  serverUrl: string,
+  startByte: number = 0
+): Promise<any> => {
+  // Ye kya karta hai? Upload resume karna agr network fail ho
+
+  const fileSize = file.size;
+  const remainingSize = fileSize - startByte;
+
+  if (remainingSize <= 0) {
+    console.log('File already uploaded completely');
+    return;
+  }
+
+  // Remaining bytes upload karna
+  const formData = new FormData();
+
+  formData.append('file', {
+    uri: file.uri,
+    type: file.type,
+    name: file.name,
+  } as any);
+
+  const response = await axios.post(serverUrl, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      'Content-Range': `bytes ${startByte}-${fileSize - 1}/${fileSize}`,
+      // HTTP Content-Range header = resumable upload
+    },
+  });
+
+  return response.data;
+};
+```
+
+### Step 4: Upload UI Component
+
+```typescript
+// components/FileUploadComponent.tsx
+
+import React, { useState } from 'react';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  ProgressBarAndroid,
+  ActivityIndicator,
+  Alert,
+  StyleSheet,
+} from 'react-native';
+import { pickImageFromGallery, takePhotoWithCamera } from '../utils/fileUpload';
+import { uploadFile, UploadProgress } from '../services/uploadService';
+
+export const FileUploadComponent: React.FC = () => {
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState<UploadProgress>({
+    percent: 0,
+    loaded: 0,
+    total: 0,
+  });
+
+  const handleSelectImage = async () => {
+    // Ye kya karta hai? Gallery se image select + upload
+
+    try {
+      const file = await pickImageFromGallery();
+      // User ne gallery se image select kiya
+
+      if (!file) {
+        Alert.alert('Error', 'No image selected');
+        return;
+      }
+
+      await handleUpload(file);
+    } catch (error) {
+      Alert.alert('Error', 'Failed to select image');
+    }
+  };
+
+  const handleTakePhoto = async () => {
+    // Ye kya karta hai? Camera se photo + upload
+
+    try {
+      const file = await takePhotoWithCamera();
+      // User ne camera se photo liya
+
+      if (!file) {
+        return;
+      }
+
+      await handleUpload(file);
+    } catch (error) {
+      Alert.alert('Error', 'Failed to take photo');
+    }
+  };
+
+  const handleUpload = async (file: any) => {
+    try {
+      setUploading(true);
+      setProgress({ percent: 0, loaded: 0, total: 0 });
+
+      const result = await uploadFile(
+        file,
+        'https://api.example.com/upload',
+        {
+          onProgress: (newProgress) => {
+            setProgress(newProgress);
+            // Progress bar update hota hai
+          },
+        }
+      );
+
+      // Upload successful
+      Alert.alert('Success', 'File uploaded successfully');
+      console.log('Upload result:', result);
+    } catch (error) {
+      Alert.alert('Error', 'File upload failed');
+      console.error('Upload error:', error);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleSelectImage}
+        disabled={uploading}
+      >
+        <Text>📷 Select from Gallery</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleTakePhoto}
+        disabled={uploading}
+      >
+        <Text>📸 Take Photo</Text>
+      </TouchableOpacity>
+
+      {uploading && (
+        <View style={styles.progressContainer}>
+          <Text>Uploading... {progress.percent}%</Text>
+
+          <ProgressBarAndroid
+            progress={progress.percent / 100}
+            style={styles.progressBar}
+            color="#007AFF"
+          />
+
+          <Text style={styles.sizeText}>
+            {(progress.loaded / 1024 / 1024).toFixed(2)} MB /{' '}
+            {(progress.total / 1024 / 1024).toFixed(2)} MB
+          </Text>
+        </View>
+      )}
+
+      {uploading && <ActivityIndicator size="large" color="#007AFF" />}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+    gap: 10,
+  },
+  button: {
+    padding: 15,
+    backgroundColor: '#007AFF',
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  progressContainer: {
+    marginTop: 20,
+    gap: 10,
+  },
+  progressBar: {
+    height: 10,
+    borderRadius: 5,
+  },
+  sizeText: {
+    fontSize: 12,
+    color: '#666',
+  },
+});
+```
+
+### Step 5: Server-side Handling (Node.js Example)
+
+```javascript
+// backend/routes/upload.js
+// Server side file receive karna
+
+const express = require('express');
+const multer = require('multer');
+// Ye kya? Express mein multipart handling ke liye
+
+const router = express.Router();
+
+// Storage configuration
+const storage = multer.diskStorage({
+  // Ye kya karta hai? Files kahan save karengi
+
+  destination: (req, file, cb) => {
+    // Destination folder
+    cb(null, 'uploads/');
+  },
+
+  filename: (req, file, cb) => {
+    // File naming strategy
+    const uniqueName = Date.now() + '-' + file.originalname;
+    cb(null, uniqueName);
+  },
+});
+
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024,
+    // 10 MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    // File type validation
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type'));
+    }
+  },
+});
+
+// Upload endpoint
+router.post('/upload', upload.single('file'), (req, res) => {
+  // Ye kya karta hai? File receive + save + response
+
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file received' });
+  }
+
+  const fileData = {
+    originalName: req.file.originalname,
+    // Original file name
+    
+    filename: req.file.filename,
+    // Saved file name
+    
+    size: req.file.size,
+    // File size
+    
+    mimeType: req.file.mimetype,
+    // File type
+    
+    path: `/uploads/${req.file.filename}`,
+    // File URL
+  };
+
+  // Database mein save kar sakte ho
+  // await saveFileToDatabase(fileData);
+
+  res.json({
+    message: 'File uploaded successfully',
+    file: fileData,
+  });
+});
+
+// Multiple files upload
+router.post('/upload-multiple', upload.array('files', 10), (req, res) => {
+  // Ye kya karta hai? Multiple files handle karna
+  // array('files', 10) = 10 files tak
+
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).json({ error: 'No files received' });
+  }
+
+  const files = req.files.map(file => ({
+    filename: file.filename,
+    size: file.size,
+    path: `/uploads/${file.filename}`,
+  }));
+
+  res.json({
+    message: 'Files uploaded successfully',
+    files,
+  });
+});
+
+module.exports = router;
+```
+
+---
+
+## ⚖️ 7. Comparison
+
+| Approach | Size | Speed | Use Case |
+|----------|------|-------|----------|
+| **JSON** | Small | Fast | Text data |
+| **Multipart** | Large | Slower | Files + data |
+| **FormData** | Large | Slower | Form submission |
+
+---
+
+## 🚫 8. Common Mistakes
+
+### Mistake 1: Not Setting Content-Type
+
+```typescript
+// ❌ GALAT
+await axios.post(url, formData);
+// Content-Type header missing
+
+// ✅ SAHI
+await axios.post(url, formData, {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+});
+```
+
+### Mistake 2: Large Files Without Compression
+
+```typescript
+// ❌ GALAT
+const file = await pickImageFromGallery();
+// 5MB image directly upload
+
+// ✅ SAHI
+const file = await pickImageFromGallery();
+const compressed = await compressImage(file.uri);
+// 500KB compressed image
+```
+
+---
+
+## 📝 14. Summary
+
+**Multipart Upload = Files + Data ek saath! FormData use kar, Progress track kar!** 📁
+
+---
+==================================================================================
+
+# 🎯 Module 14: Professional Development & Ecosystem - COMPLETE NOTES
+
+---
+
+# 🎯 Module 14.1: Error Handling (Error Boundaries)
+
+## 🎯 1. Title / Topic
+
+**Module 14.1: Error Handling & Error Boundaries - Graceful Failure Management**
+
+Note 30: Comprehensive Error Handling in React Native
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+**Error Boundaries** = **Building mein fire alarm aur emergency exit**
+
+**Without Error Boundaries (No alarm):**
+- Ek floor mein fire
+- Puri building collapse
+- Sab affected
+- No escape route
+
+**With Error Boundaries (Alarm + Exit):**
+- Fire alarm baaj gaya
+- Woh floor evacuate
+- Baaki floors normal
+- Emergency exit se niklo
+
+Similarly:
+- **Without Error Boundary:** 1 component crash → Pura app white screen
+- **With Error Boundary:** 1 component crash → Sirf us component error show, baaki app normal
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**Error Boundaries kyaa hain?**
+
+Error Boundaries React components hain jo **child component errors catch karte hain** aur fallback UI dikhaate hain.
+
+```
+Purpose:
+- Child component errors catch karna
+- App completely crash hone se bachana
+- Graceful error handling
+- User experience maintain karna
+```
+
+**Scope:**
+```
+✅ CATCH KARTE HAIN:
+- Component render mein errors
+- Lifecycle methods mein errors
+- Constructor mein errors
+- State setter callbacks
+
+❌ CATCH NAHI KARTE:
+- Event handlers (onclick, etc.)
+- Async code (promises, etc.)
+- Server-side rendering
+- Error boundary ka apna error
+```
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+### Problem: Without Error Boundaries
+
+```typescript
+// App mein ek component crash ho gaya
+
+const UserList = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetchUsers().then(data => {
+      setUsers(data); // API returns different format sometimes
+    });
+  }, []);
+
+  return (
+    <View>
+      {users.map(user => (
+        <Text key={user.id}>{user.name}</Text>
+        // Agar user.name undefined ho, crash!
+      ))}
+    </View>
+  );
+};
+
+// Production mein:
+// - API change hogaya, format different aaya
+// - user.name undefined
+// - Component throw error
+// - PURA APP WHITE SCREEN!
+// - Users app nahi use kar sakte
+// - Revenue loss
+```
+
+### Solution: With Error Boundaries
+
+```typescript
+// Error Boundary component
+
+class ErrorBoundary extends React.Component {
+  // Ye component errors catch karata hai
+
+  state = { hasError: false, error: null };
+
+  static getDerivedStateFromError(error) {
+    // Error catch hone par state update
+    return { hasError: true, error };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // Fallback UI dikha
+      return (
+        <View>
+          <Text>❌ Something went wrong</Text>
+          <TouchableOpacity onPress={() => this.setState({ hasError: false })}>
+            <Text>🔄 Retry</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+// Usage
+
+<ErrorBoundary>
+  <UserList />
+  // Agar UserList crash ho, ErrorBoundary catch karega
+  // Fallback UI show karega
+  // App working rahega!
+</ErrorBoundary>
+```
+
+**Benefits:**
+
+| Benefit | Ye kya karata hai? |
+|---------|------------------|
+| **Graceful Degradation** | Pura app crash nahi hota, sirf component fail hota hai |
+| **User Experience** | Users ko white screen nahi dikhta |
+| **Logging** | Errors server par log kar sakte ho |
+| **Recovery** | User retry button press kar sakte ho |
+| **Partial Functionality** | App ka baaki part working rahta hai |
+
+---
+
+## ⚙️ 5. Under the Hood & File Anatomy
+
+### Note 30: Detailed Error Handling Strategy
+
+#### **Section 1: Error Types in React Native**
+
+```
+┌─────────────────────────────────────────────────────┐
+│           ERROR TYPES IN REACT NATIVE               │
+├─────────────────────────────────────────────────────┤
+│                                                     │
+│  1. RENDER ERRORS (Error Boundary catch karata hai)│
+│     - Component mein logic error                   │
+│     - JSX syntax error                             │
+│     - Return null/undefined issue                  │
+│                                                     │
+│  2. RUNTIME ERRORS (Global handler se catch)       │
+│     - Null pointer exception                       │
+│     - Function not found                           │
+│     - Type error                                   │
+│                                                     │
+│  3. ASYNC ERRORS (Promise rejection)               │
+│     - API call fail                                │
+│     - Network error                                │
+│     - Timeout                                      │
+│                                                     │
+│  4. NATIVE ERRORS (Native module error)            │
+│     - Native module crash                          │
+│     - Permission denied                            │
+│     - Device feature unavailable                   │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+```
+
+#### **Section 2: Error Boundary Architecture**
+
+```
+Component Lifecycle:
+
+render() → Error ❌
+    ↓
+getDerivedStateFromError() catches
+    ↓
+state update → hasError = true
+    ↓
+render() again → Fallback UI shows
+    ↓
+componentDidCatch() → Log to server
+    ↓
+User sees fallback UI (not white screen!)
+```
+
+---
+
+## 💻 6. Hands-On: Code
+
+### Step 1: Basic Error Boundary
+
+```typescript
+// components/ErrorBoundary.tsx
+
+import React, { ReactNode } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+
+interface Props {
+  children: ReactNode;
+  // Ye kya? Child components
+  
+  fallback?: (error: Error, retry: () => void) => ReactNode;
+  // Optional: Custom fallback UI
+}
+
+interface State {
+  hasError: boolean;
+  // Error hua ya nahi
+  
+  error: Error | null;
+  // Actual error object
+  
+  errorInfo: {
+    componentStack: string;
+    // Ye kya? Component stack trace
+  } | null;
+}
+
+export class ErrorBoundary extends React.Component<Props, State> {
+  // Ye kya hai? Class component (Error Boundaries functional nahi ho sakte)
+
+  constructor(props: Props) {
+    super(props);
+    
+    this.state = {
+      hasError: false,
+      error: null,
+      errorInfo: null,
+    };
+  }
+
+  static getDerivedStateFromError(error: Error): Partial<State> {
+    // Ye kya hai? Lifecycle method - error catch hone par automatically call hota hai
+    // Ye method render se pehle synchronously call hota hai
+    // State update karta hai
+
+    return {
+      hasError: true,
+      // Error flag set kar
+      
+      error,
+      // Error object save kar (message, stack, etc.)
+    };
+  }
+
+  componentDidCatch(error: Error, errorInfo: { componentStack: string }) {
+    // Ye kya hai? Lifecycle method - getDerivedStateFromError ke baad call hota hai
+    // Ye method render ke baad call hota hai
+    // Async operations kar sakte ho (logging, reporting)
+
+    console.error('Error caught by boundary:', error);
+    console.error('Component stack:', errorInfo.componentStack);
+
+    // Save error info to state for display
+    this.setState({
+      errorInfo,
+    });
+
+    // Log to error tracking service (Sentry, Bugsnag, etc.)
+    this.logErrorToService(error, errorInfo);
+  }
+
+  logErrorToService = (error: Error, errorInfo: { componentStack: string }) => {
+    // Ye kya karta hai? Error log karna server par
+
+    // Example: Sentry
+    // Sentry.captureException(error, { contexts: { react: { componentStack: errorInfo.componentStack } } });
+
+    // Example: Custom API
+    fetch('https://api.example.com/errors', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: error.message,
+        // Error ka message
+        
+        stack: error.stack,
+        // Stack trace - kaunsi line mein error hua
+        
+        componentStack: errorInfo.componentStack,
+        // Component mein kaun se level par error hua
+        
+        timestamp: new Date().toISOString(),
+        // Kab error hua
+        
+        userAgent: 'React Native App',
+        // Device info
+      }),
+    }).catch(err => console.error('Failed to log error', err));
+  };
+
+  handleReset = () => {
+    // Ye kya karta hai? Error state reset karna (retry)
+
+    this.setState({
+      hasError: false,
+      error: null,
+      errorInfo: null,
+    });
+  };
+
+  render() {
+    if (this.state.hasError) {
+      // Agar error hai, fallback UI show kar
+
+      if (this.props.fallback) {
+        // Custom fallback UI provided
+        return this.props.fallback(this.state.error!, this.handleReset);
+      }
+
+      // Default fallback UI
+      return (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorTitle}>❌ Oops! Something went wrong</Text>
+
+          <Text style={styles.errorMessage}>{this.state.error?.message}</Text>
+
+          {__DEV__ && this.state.errorInfo && (
+            // Development mein details dikha
+            <View style={styles.debugContainer}>
+              <Text style={styles.debugText}>
+                {this.state.errorInfo.componentStack}
+              </Text>
+            </View>
+          )}
+
+          <TouchableOpacity
+            style={styles.retryButton}
+            onPress={this.handleReset}
+          >
+            <Text style={styles.retryButtonText}>🔄 Try Again</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+
+    // Normal rendering - no error
+    return this.props.children;
+  }
+}
+
+const styles = StyleSheet.create({
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#f8f9fa',
+  },
+  errorTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#d32f2f',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  errorMessage: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  debugContainer: {
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 20,
+    maxHeight: 200,
+  },
+  debugText: {
+    fontSize: 12,
+    color: '#999',
+    fontFamily: 'monospace',
+  },
+  retryButton: {
+    backgroundColor: '#007AFF',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+  },
+  retryButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+});
+```
+
+**Line-by-Line Breakdown:**
+
+```typescript
+static getDerivedStateFromError(error: Error): Partial<State> {
+  // static = class method (instance method nahi)
+  // getDerivedStateFromError = React lifecycle method
+  // error: Error = jo error throw hua
+  // Partial<State> = state ka portion return karengi
+
+  return {
+    hasError: true,
+    // Ye state update hoga
+    
+    error,
+    // Error object save
+  };
+}
+
+// getDerivedStateFromError ke baad:
+componentDidCatch(error: Error, errorInfo: { componentStack: string }) {
+  // componentDidCatch = getDerivedStateFromError ke baad call hota hai
+  // errorInfo.componentStack = component hierarchy dikhata hai
+  // Example: "UserList (at App.js:10) > UserItem (at UserList.js:5)"
+
+  this.logErrorToService(error, errorInfo);
+  // Async operations yahan kar sakte ho
+}
+```
+
+### Step 2: Wrapping App with Error Boundary
+
+```typescript
+// App.tsx
+
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { HomeScreen } from './screens/HomeScreen';
+import { DetailsScreen } from './screens/DetailsScreen';
+
+const Stack = createNativeStackNavigator();
+
+const AppContent = () => {
+  // Ye kya hai? App ke actual content
+  
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+// App root
+const App = () => {
+  return (
+    <ErrorBoundary
+      // Ye kya karta hai? Puri app ko wrap kar errors catch karne ke liye
+      
+      fallback={(error, retry) => (
+        // Custom fallback UI
+        <View style={{ flex: 1, justifyContent: 'center', padding: 20 }}>
+          <Text style={{ fontSize: 18, marginBottom: 20 }}>
+            🚨 App Error
+          </Text>
+          <Text>{error.message}</Text>
+          <TouchableOpacity onPress={retry} style={{ marginTop: 20 }}>
+            <Text>Retry</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    >
+      <AppContent />
+      {/* Agar AppContent mein koi bhi error ho, ErrorBoundary catch karega */}
+    </ErrorBoundary>
+  );
+};
+
+export default App;
+```
+
+### Step 3: Granular Error Boundaries (Multiple boundaries)
+
+```typescript
+// screens/HomeScreen.tsx
+
+import React from 'react';
+import { View, ScrollView } from 'react-native';
+import { ErrorBoundary } from '../components/ErrorBoundary';
+import { UserList } from '../components/UserList';
+import { NewsSection } from '../components/NewsSection';
+import { RecommendationSection } from '../components/RecommendationSection';
+
+export const HomeScreen = () => {
+  // Multiple error boundaries = Granular error handling
+
+  return (
+    <ScrollView>
+      <View>
+        {/* Error Boundary 1 */}
+        <ErrorBoundary fallback={() => <Text>Failed to load users</Text>}>
+          <UserList />
+          {/* Agar UserList crash ho, sirf ye section fail */}
+          {/* News + Recommendations normal rahenge */}
+        </ErrorBoundary>
+
+        {/* Error Boundary 2 */}
+        <ErrorBoundary fallback={() => <Text>Failed to load news</Text>}>
+          <NewsSection />
+          {/* Agar NewsSection crash ho, sirf ye fail */}
+        </ErrorBoundary>
+
+        {/* Error Boundary 3 */}
+        <ErrorBoundary fallback={() => <Text>Failed to load recommendations</Text>}>
+          <RecommendationSection />
+          {/* Agar RecommendationSection crash ho, sirf ye fail */}
+        </ErrorBoundary>
+      </View>
+    </ScrollView>
+  );
+};
+
+// Benefit:
+// - UserList crash → News aur Recommendations still work
+// - News crash → Users aur Recommendations still work
+// - Granular, partial failures handle karte ho
+```
+
+### Step 4: Global Error Handler (Non-Render Errors)
+
+```typescript
+// utils/errorHandler.ts
+
+import crashlytics from '@react-native-firebase/crashlytics';
+
+export const setupGlobalErrorHandler = () => {
+  // Ye kya karta hai? Global errors catch karna (render errors ke alava)
+
+  // React Native global error handler
+  const errorHandler = (error: Error, isFatal: boolean) => {
+    // Ye kya hai? Unhandled promise rejections aur errors
+    
+    console.error('Global error:', error);
+
+    // Log to Crashlytics
+    crashlytics().recordError(error);
+
+    if (isFatal) {
+      // Fatal error - app crash hone wala hai
+      crashlytics().log('FATAL ERROR - App will crash');
+      
+      // Yahan recovery ka option nahi hai
+      // App restart hoga
+    }
+  };
+
+  ErrorUtils.setGlobalHandler(errorHandler);
+  // Ye kya karta hai? Global handler set karna
+};
+
+// Promise rejection handler
+export const setupUnhandledRejectionHandler = () => {
+  // Ye kya karta hai? Unhandled promise rejections catch karna
+
+  if (global.globalThis) {
+    global.globalThis.onunhandledrejection = ({ reason }: any) => {
+      // reason = rejection ka cause
+
+      console.error('Unhandled promise rejection:', reason);
+      crashlytics().recordError(reason);
+    };
+  }
+};
+
+// Setup karna (App.tsx mein)
+// useEffect(() => {
+//   setupGlobalErrorHandler();
+//   setupUnhandledRejectionHandler();
+// }, []);
+```
+
+### Step 5: Try-Catch for Async Code
+
+```typescript
+// services/api.ts
+
+export const fetchUsers = async () => {
+  try {
+    // Ye kya karta hai? Try block mein risky code
+
+    const response = await fetch('https://api.example.com/users');
+    // API call - fail ho sakta hai
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      // Ye kya karta hai? Status code check karna
+      // 4xx, 5xx errors throw karna
+    }
+
+    const data = await response.json();
+    // JSON parse - fail ho sakta hai (invalid JSON)
+
+    if (!Array.isArray(data)) {
+      throw new Error('Expected array of users');
+      // Ye kya karta hai? Response format validate karna
+    }
+
+    return data;
+  } catch (error) {
+    // Catch block mein error handle karna
+
+    if (error instanceof TypeError) {
+      // Network error
+      console.error('Network error:', error.message);
+      throw new Error('Failed to connect to server');
+    }
+
+    if (error instanceof SyntaxError) {
+      // Invalid JSON
+      console.error('Invalid response format:', error.message);
+      throw new Error('Server returned invalid data');
+    }
+
+    // Generic error
+    console.error('Failed to fetch users:', error);
+    throw error;
+  }
+};
+
+// Usage mein:
+const getUsersWithErrorHandling = async () => {
+  try {
+    const users = await fetchUsers();
+    // Ye kya karta hai? Users data dikhana
+    setUsers(users);
+  } catch (error) {
+    // Error catch ho gaya
+    showErrorAlert(error.message);
+    // User ko error message dikhana
+  }
+};
+```
+
+### Step 6: Error Retry Logic
+
+```typescript
+// hooks/useRetry.ts
+
+interface UseRetryOptions {
+  maxRetries?: number;
+  // Default retries
+  
+  delay?: number;
+  // Retry ke beech delay (ms)
+  
+  backoff?: boolean;
+  // Exponential backoff (delay gradually increase)
+}
+
+export const useRetry = <T,>(
+  asyncFunction: () => Promise<T>,
+  options: UseRetryOptions = {}
+) => {
+  // Ye kya hai? Hook joh retry logic provide karta hai
+
+  const { maxRetries = 3, delay = 1000, backoff = false } = options;
+
+  const [data, setData] = useState<T | null>(null);
+  const [error, setError] = useState<Error | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+
+  const execute = async () => {
+    // Ye kya karta hai? Function execute karna with retries
+
+    setLoading(true);
+    setError(null);
+
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        const result = await asyncFunction();
+        // Function execute kar
+
+        setData(result);
+        // Success - data set kar
+
+        setRetryCount(0);
+        return;
+      } catch (err) {
+        const error = err instanceof Error ? err : new Error(String(err));
+
+        if (attempt < maxRetries) {
+          // Retry karna hai
+
+          const waitTime = backoff
+            ? delay * Math.pow(2, attempt)
+            // Exponential: 1s, 2s, 4s, 8s
+            : delay;
+
+          console.log(`Retry attempt ${attempt + 1}/${maxRetries} after ${waitTime}ms`);
+
+          await new Promise(resolve => setTimeout(resolve, waitTime));
+          // Wait karna
+        } else {
+          // Max retries exceeded
+          setError(error);
+          setRetryCount(attempt + 1);
+        }
+      }
+    }
+
+    setLoading(false);
+  };
+
+  return { data, error, loading, retryCount, execute };
+};
+
+// Usage:
+const UserListWithRetry = () => {
+  const { data: users, error, loading, execute } = useRetry(
+    async () => {
+      const response = await fetch('https://api.example.com/users');
+      if (!response.ok) throw new Error('Failed');
+      return response.json();
+    },
+    { maxRetries: 3, backoff: true }
+  );
+
+  useEffect(() => {
+    execute();
+  }, []);
+
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error: {error.message}</Text>;
+
+  return (
+    <View>
+      {users?.map(user => (
+        <Text key={user.id}>{user.name}</Text>
+      ))}
+    </View>
+  );
+};
+```
+
+---
+
+## ⚖️ 7. Comparison & Command Wars
+
+### Error Handling Strategies Comparison
+
+| Strategy | Scope | Async | Use Case |
+|----------|-------|-------|----------|
+| **Error Boundary** | Render errors | ❌ | Component crashes |
+| **Try-Catch** | Any block | ✅ | API calls, parsing |
+| **Global Handler** | All errors | ✅ | Unhandled errors |
+| **Promise.catch()** | Specific promise | ✅ | Single async |
+
+---
+
+## 🚫 8. Common Mistakes
+
+### Mistake 1: Error Boundary nahi laga
+
+```typescript
+// ❌ GALAT - Error boundary nahi
+const App = () => {
+  return <NavigationContainer><AppStack /></NavigationContainer>;
+  // Agar component crash ho = white screen!
+};
+
+// ✅ SAHI - Error boundary wrap
+const App = () => {
+  return (
+    <ErrorBoundary>
+      <NavigationContainer><AppStack /></NavigationContainer>
+    </ErrorBoundary>
+  );
+  // Crash hote bhi app usable rahega
+};
+```
+
+### Mistake 2: Error Boundary async errors nahi catch karte
+
+```typescript
+// ❌ GALAT
+const UserList = () => {
+  useEffect(() => {
+    fetchUsers().then(setUsers);
+    // Error boundary ye error catch nahi karega!
+  }, []);
+
+  return users.map(u => <Text>{u.name}</Text>);
+};
+
+// ✅ SAHI
+const UserList = () => {
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchUsers()
+      .then(setUsers)
+      .catch(setError);
+    // Error catch kar state mein
+  }, []);
+
+  if (error) return <Text>Error: {error.message}</Text>;
+  return users.map(u => <Text>{u.name}</Text>);
+};
+```
+
+### Mistake 3: Silently swallowing errors
+
+```typescript
+// ❌ GALAT
+try {
+  await fetchUsers();
+} catch (error) {
+  console.log('error'); // Silent fail!
+}
+
+// ✅ SAHI
+try {
+  await fetchUsers();
+} catch (error) {
+  console.error('Failed to fetch users:', error);
+  // Proper logging
+  
+  throw error;
+  // Re-throw agr app ko handle nahi karna
+  
+  // OR handle locally
+  showErrorAlert(error.message);
+}
+```
+
+---
+
+## 🌍 9. Real-World Use Case
+
+### Netflix-like App Error Handling
+
+```typescript
+// Ye Netflix jaise app mein error handling
+
+const App = () => {
+  return (
+    <ErrorBoundary
+      fallback={() => (
+        <View style={styles.appError}>
+          <Text>Netflix is having issues</Text>
+          <Button title="Restart" />
+        </View>
+      )}
+    >
+      <NavigationContainer>
+        <Stack.Navigator>
+          {/* Home Screen */}
+          <Stack.Screen
+            name="Home"
+            options={{ title: 'Home' }}
+            component={() => (
+              <ScrollView>
+                {/* Featured Section */}
+                <ErrorBoundary fallback={() => <Text>Featured unavailable</Text>}>
+                  <FeaturedSection />
+                </ErrorBoundary>
+
+                {/* Trending Section */}
+                <ErrorBoundary fallback={() => <Text>Trending unavailable</Text>}>
+                  <TrendingSection />
+                </ErrorBoundary>
+
+                {/* My List Section */}
+                <ErrorBoundary fallback={() => <Text>My List unavailable</Text>}>
+                  <MyListSection />
+                </ErrorBoundary>
+              </ScrollView>
+            )}
+          />
+
+          {/* Detail Screen */}
+          <Stack.Screen
+            name="Detail"
+            options={{ title: 'Details' }}
+            component={DetailScreen}
+          />
+
+          {/* Player Screen */}
+          <Stack.Screen
+            name="Player"
+            options={{ title: 'Playing' }}
+            component={() => (
+              <ErrorBoundary
+                fallback={(error) => (
+                  <View style={styles.playerError}>
+                    <Text>Cannot play video</Text>
+                    <Button title="Go Back" />
+                  </View>
+                )}
+              >
+                <VideoPlayer />
+              </ErrorBoundary>
+            )}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ErrorBoundary>
+  );
+};
+
+// Real scenario: 1 section fails
+// - Featured crashes
+// - ErrorBoundary catches
+// - "Featured unavailable" shows
+// - User can still see Trending, MyList
+// - User can still navigate, play videos
+// - App fully functional!
+```
+
+---
+
+## 🎨 10. Visual Diagram
+
+```
+Error Flow in React Native:
+
+Component Error
+    ↓
+Render Fail
+    ↓
+getDerivedStateFromError()
+    ↓
+componentDidCatch()
+    ↓
+Log to Service
+    ↓
+Render Fallback UI
+    ↓
+Show to User
+    ↓
+User can Retry
+
+vs
+
+Async Error
+    ↓
+Promise Rejection
+    ↓
+Try-Catch / .catch()
+    ↓
+Show Error State
+    ↓
+User can Retry
+
+vs
+
+Unhandled Error
+    ↓
+Global Error Handler
+    ↓
+Log to Crashlytics
+    ↓
+App might crash
+    ↓
+Crash report sent
+```
+
+---
+
+## 🛠️ 11. Best Practices
+
+### Practice 1: Error Granularity
+
+```typescript
+// Good: Separate boundaries for different sections
+
+<ErrorBoundary>
+  <ScrollView>
+    <ErrorBoundary name="featured">
+      <FeaturedSection />
+    </ErrorBoundary>
+
+    <ErrorBoundary name="trending">
+      <TrendingSection />
+    </ErrorBoundary>
+
+    <ErrorBoundary name="recommendations">
+      <RecommendationsSection />
+    </ErrorBoundary>
+  </ScrollView>
+</ErrorBoundary>
+
+// Benefit: 1 section crash, others work
+```
+
+### Practice 2: Error Boundaries with Context
+
+```typescript
+// Combine Error Boundary with Context
+
+const ErrorContext = createContext(null);
+
+export const ErrorBoundaryWithContext: React.FC<{children}> = ({ children }) => {
+  const [errors, setErrors] = useState<Error[]>([]);
+
+  return (
+    <ErrorContext.Provider value={{ errors, setErrors }}>
+      <ErrorBoundary>
+        {children}
+      </ErrorBoundary>
+    </ErrorContext.Provider>
+  );
+};
+```
+
+### Practice 3: Error Recovery UI
+
+```typescript
+// Better fallback UI
+
+<ErrorBoundary
+  fallback={(error, retry) => (
+    <View style={styles.errorContainer}>
+      <LottieView source={require('./error.json')} autoPlay />
+      {/* Animation makes it better */}
+
+      <Text style={styles.title}>Oops!</Text>
+      <Text style={styles.message}>{error.message}</Text>
+
+      <View style={styles.actions}>
+        <Button title="Retry" onPress={retry} />
+        <Button title="Go Home" onPress={() => navigation.navigate('Home')} />
+        <Button title="Contact Support" />
+      </View>
+    </View>
+  )}
+>
+  <App />
+</ErrorBoundary>
+```
+
+---
+
+## ⚠️ 12. Consequences of Failure
+
+| Scenario | Consequence |
+|----------|-------------|
+| **No Error Boundaries** | One crash = white screen = users can't use app |
+| **No async error handling** | API errors silently fail = user confused |
+| **No global handler** | Unhandled errors = app crash + no logging |
+| **No error logging** | Crashes happen but you don't know why |
+
+---
+
+## ❓ 13. FAQ
+
+### Q1: Error Boundary sirf class components mein chalte hain?
+
+**A:** Haan, functional components mein Error Boundaries nahi bana sakte. React ab Error Boundary hook provide karta hai (future).
+
+### Q2: Error Boundary nested kar sakte hain?
+
+**A:** Haan, multiple nested boundaries best practice hai (granular error handling).
+
+### Q3: Event handler mein error ke liye kya karo?
+
+**A:** Error Boundary catch nahi karega, try-catch ya .catch() use karo.
+
+---
+
+## 📝 14. Summary
+
+**Error Boundaries = App nahi crash hota errors se! Graceful failures, happy users! 🛡️**
+
+---
+
+---
+
+# 🎯 Module 14.2: Accessibility (Screen Readers, Contrast, Touch Targets)
+
+## 🎯 1. Title / Topic
+
+**Module 14.2: Accessibility - Building Inclusive Apps**
+
+Note 48: Comprehensive Accessibility Guidelines
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+**Accessibility** = **Restaurant jo sab ke liye user-friendly**
+
+**Without Accessibility:**
+- Blind person nahi dekh sakte menu
+- Deaf person nahi sune services
+- Wheelchair user bahar nahi aa sakte
+- Text chota likha, weak eyes ko dikha nahi
+
+**With Accessibility:**
+- Braille menu (blind ke liye)
+- Sign language interpreter (deaf ke liye)
+- Wheelchair ramp (mobility ke liye)
+- Large menu text (vision impaired ke liye)
+
+Similarly:
+- **No Accessibility:** App sirf able-bodied people ke liye
+- **With Accessibility:** App sabke liye usable
+
+## 📖 3. Technical Definition
+
+**Accessibility kyaa hai?**
+
+Ye ensure karna ki app sabke liye usable hai:
+- Blind people (Screen readers)
+- Deaf people (Captions)
+- Motor disabilities (Large touch targets)
+- Color blindness (Good contrast)
+- Elderly people (Large text)
+
+**Standards:**
+- WCAG 2.1 (Web Content Accessibility Guidelines)
+- Section 508 (US law)
+- ADA (Americans with Disabilities Act)
+
+---
+
+## ⚙️ 5. File Anatomy & Implementation
+
+### Note 48: Detailed Accessibility Guidelines
+
+#### **Section 1: Screen Readers (TalkBack/VoiceOver)**
+
+```typescript
+// components/AccessibleButton.tsx
+
+import React from 'react';
+import { TouchableOpacity, Text, View, AccessibilityInfo } from 'react-native';
+
+interface AccessibleButtonProps {
+  label: string;
+  // Button ka text
+  
+  onPress: () => void;
+  // Button press handler
+  
+  accessibilityLabel?: string;
+  // Screen reader ke liye kya bolna hai
+  
+  accessibilityHint?: string;
+  // Extra info screen reader ko
+  
+  disabled?: boolean;
+}
+
+export const AccessibleButton: React.FC<AccessibleButtonProps> = ({
+  label,
+  onPress,
+  accessibilityLabel,
+  accessibilityHint,
+  disabled = false,
+}) => {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      disabled={disabled}
+      accessible={true}
+      // Ye kya? Element screen reader ko accessible banata hai
+      // true = ye element screen reader se announce hoga
+      
+      accessibilityLabel={accessibilityLabel || label}
+      // Ye kya? Screen reader ye label bolega jab user focus kare
+      // Example: "Submit button"
+      
+      accessibilityHint={accessibilityHint}
+      // Ye kya? Extra info - button ka purpose kya hai
+      // Example: "Submits the login form"
+      
+      accessibilityRole="button"
+      // Ye kya? Element ka role - screen reader ko batata hai
+      // Roles: button, checkbox, radio, switch, etc.
+      
+      accessibilityState={{ disabled }}
+      // Ye kya? Element ka state - disabled, checked, etc.
+    >
+      <Text>{label}</Text>
+    </TouchableOpacity>
+  );
+};
+
+// Hinglish explanation:
+// Screen readers (TalkBack - Android, VoiceOver - iOS):
+// - Ye accessibility tool hai blind users ke liye
+// - User screen ko touch karte hain
+// - Screen reader bolata hai kaun sa element hai
+// - "Button: Submit. Double tap to activate"
+
+// accessibilityLabel = What to say
+// accessibilityRole = What type of element
+// accessibilityHint = Why this element exists
+// accessibilityState = What's the state
+```
+
+#### **Section 2: Image Accessibility**
+
+```typescript
+// components/AccessibleImage.tsx
+
+import React from 'react';
+import { Image, View } from 'react-native';
+
+interface AccessibleImageProps {
+  source: any;
+  // Image source
+  
+  alt: string;
+  // Alternative text - screen reader ke liye
+  
+  isDecorative?: boolean;
+  // Ye kya? Agr sirf decoration hai, nahi accessible karna
+}
+
+export const AccessibleImage: React.FC<AccessibleImageProps> = ({
+  source,
+  alt,
+  isDecorative = false,
+}) => {
+  return (
+    <Image
+      source={source}
+      accessible={!isDecorative}
+      // Ye kya? isDecorative = false toh accessible banana
+      
+      accessibilityLabel={isDecorative ? undefined : alt}
+      // Ye kya? alt text screen reader bolega
+      // "Image of a sunset over mountains"
+      
+      accessibilityRole="image"
+      // Element ka role = image
+    />
+  );
+};
+
+// Good alt text:
+// ✅ "Woman wearing blue dress standing in park"
+// ❌ "Photo" (too vague)
+// ❌ "IMG_2023.jpg" (file name, not helpful)
+
+// Decorative images (like background):
+// <Image source={bg} accessible={false} />
+// Screen reader skip karega
+```
+
+#### **Section 3: Text Contrast & Font Size**
+
+```typescript
+// components/AccessibleText.tsx
+
+import React from 'react';
+import { Text, StyleSheet } from 'react-native';
+
+interface AccessibleTextProps {
+  children: string;
+  variant?: 'heading' | 'body' | 'caption';
+  // Text type
+}
+
+export const AccessibleText: React.FC<AccessibleTextProps> = ({
+  children,
+  variant = 'body',
+}) => {
+  return (
+    <Text
+      style={[
+        styles.base,
+        variant === 'heading' && styles.heading,
+        variant === 'body' && styles.body,
+        variant === 'caption' && styles.caption,
+      ]}
+      allowFontScaling={true}
+      // Ye kya? User ke device font size settings ko respect kare
+      // User ne phone settings mein font size increase kiya
+      // App bhi scale karega
+      
+      maxFontSizeMultiplier={1.5}
+      // Ye kya? Max 1.5x tak scale ho sakta hai
+      // Bilkul huge font prevent karna
+    >
+      {children}
+    </Text>
+  );
+};
+
+const styles = StyleSheet.create({
+  base: {
+    color: '#000000',
+    // Dark text - good contrast with white background
+    // Contrast ratio = 21:1 (exceeds WCAG AAA standard)
+  },
+
+  heading: {
+    fontSize: 24,
+    // Minimum 24pt heading
+    
+    fontWeight: 'bold',
+    // Bold = readable
+    
+    lineHeight: 32,
+    // Line height = 1.3x font size
+    // Spacing help readability
+  },
+
+  body: {
+    fontSize: 16,
+    // Minimum 16pt body text (important!)
+    // WCAG: minimum 14pt
+    
+    lineHeight: 24,
+    // 1.5x line height = better readability
+    
+    letterSpacing: 0.5,
+    // Letter spacing = more readable
+  },
+
+  caption: {
+    fontSize: 14,
+    // Captions thode chote
+    
+    color: '#666666',
+    // Gray color - still good contrast
+    // Contrast ratio vs white = 4.5:1 (meets WCAG AA)
+  },
+});
+
+// Contrast ratios:
+// 7:1 = WCAG AAA (best)
+// 4.5:1 = WCAG AA (minimum)
+// 3:1 = Large text
+// < 3:1 = Not accessible
+```
+
+#### **Section 4: Touch Targets**
+
+```typescript
+// components/AccessibleTouchable.tsx
+
+import React from 'react';
+import { TouchableOpacity, View, StyleSheet } from 'react-native';
+
+interface AccessibleTouchableProps {
+  onPress: () => void;
+  label: string;
+  children?: React.ReactNode;
+}
+
+export const AccessibleTouchable: React.FC<AccessibleTouchableProps> = ({
+  onPress,
+  label,
+  children,
+}) => {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+      // Ye kya? Touch area increase karna
+      // Ye padding sirf touch tracking ke liye (visually nahi dikhta)
+      // Motor disabilities wale user ko easy tap kar saken
+      
+      activeOpacity={0.7}
+      // Visual feedback - button thoda transparent ho jaye tap par
+      // Users ko pata chale button respond kar raha hai
+    >
+      <View style={styles.touchTarget}>
+        {/* Minimum 48x48dp touch target (WCAG guideline) */}
+        {children}
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+const styles = StyleSheet.create({
+  touchTarget: {
+    minWidth: 48,
+    minHeight: 48,
+    // Ye kya? Minimum 48x48 density pixels
+    // WCAG standard: 44x44dp (Apple), 48x48dp (Android)
+    
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+    padding: 12,
+    // Internal padding
+    
+    borderRadius: 8,
+    // Rounded corners - visually appealing
+  },
+});
+
+// Touch target guidelines:
+// ✅ 48x48dp minimum (Android)
+// ✅ 44x44pt minimum (iOS)
+// ✅ hitSlop add karna
+// ❌ 24x24dp buttons (too small, hard to tap)
+```
+
+---
+
+## 💻 6. Hands-On: Code
+
+### Step 1: Fully Accessible Form
+
+```typescript
+// screens/AccessibleLoginScreen.tsx
+
+import React, { useState, useRef } from 'react';
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  AccessibilityInfo,
+} from 'react-native';
+
+export const AccessibleLoginScreen: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const emailInputRef = useRef<TextInput>(null);
+  const passwordInputRef = useRef<TextInput>(null);
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      setError('All fields required');
+      
+      // Announce error to screen reader
+      AccessibilityInfo.announceForAccessibility(
+        // Ye kya? Screen reader ko bol ki error aaya
+        'Error: All fields are required'
+      );
+      return;
+    }
+
+    // Login logic
+    console.log('Logging in...');
+  };
+
+  const handleEmailSubmit = () => {
+    // Ye kya? Email done, next field fokus kar
+    passwordInputRef.current?.focus();
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text
+        style={styles.title}
+        allowFontScaling={true}
+        // Font size scale kar sakte ho
+        
+        accessibilityRole="header"
+        // Ye title hai, list nahi
+      >
+        Login
+      </Text>
+
+      {/* Email Field */}
+      <View
+        accessible={true}
+        accessibilityLabel="Email address field"
+        // Container accessible ho
+        
+        accessibilityRole="none"
+        // Container ka apna role nahi, sirf input hai
+      >
+        <Text
+          style={styles.label}
+          nativeID="emailLabel"
+          // Ye kya? Label ka unique ID
+        >
+          Email
+        </Text>
+
+        <TextInput
+          ref={emailInputRef}
+          style={styles.input}
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          returnKeyType="next"
+          onSubmitEditing={handleEmailSubmit}
+          accessible={true}
+          accessibilityLabel="Email address input"
+          // Screen reader: "Email address input, textbox"
+          
+          accessibilityHint="Enter your registered email address"
+          // Extra info - kya enter karna hai
+          
+          accessibilityLabelledBy={['emailLabel']}
+          // Ye input usse connected hai
+          
+          editable={true}
+          accessibilityState={{ disabled: false }}
+          // Input enabled hai
+        />
+      </View>
+
+      {/* Password Field */}
+      <View
+        accessible={true}
+        accessibilityLabel="Password field"
+        accessibilityRole="none"
+      >
+        <Text
+          style={styles.label}
+          nativeID="passwordLabel"
+        >
+          Password
+        </Text>
+
+        <TextInput
+          ref={passwordInputRef}
+          style={styles.input}
+          placeholder="Enter your password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={true}
+          // Ye kya? Password dots dikhay
+          
+          returnKeyType="done"
+          onSubmitEditing={handleLogin}
+          accessible={true}
+          accessibilityLabel="Password input"
+          accessibilityHint="Enter your password. Text will be hidden."
+          // Screen reader ko bolna chahiye text hidden hai
+          
+          accessibilityLabelledBy={['passwordLabel']}
+          accessibilityState={{ disabled: false }}
+        />
+      </View>
+
+      {/* Error Message */}
+      {error && (
+        <Text
+          style={styles.errorText}
+          accessibilityRole="alert"
+          // Ye kya? Alert = important, screen reader immediately announce kara
+          // User focus kare ya nahi, error announce hoga
+          
+          accessibilityLive="polite"
+          // Ye kya? Dynamic content - add hone par announce kara
+          // "polite" = wait kare, agar user typing ho
+          // "assertive" = immediately announce (urgent)
+        >
+          ❌ {error}
+        </Text>
+      )}
+
+      {/* Login Button */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleLogin}
+        accessible={true}
+        accessibilityLabel="Login button"
+        accessibilityHint="Logs you in with your email and password"
+        accessibilityRole="button"
+        accessibilityState={{ disabled: false }}
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        // Touch area expand karna
+      >
+        <Text style={styles.buttonText}>Log In</Text>
+      </TouchableOpacity>
+
+      {/* Help Link */}
+      <TouchableOpacity
+        accessible={true}
+        accessibilityLabel="Forgot password link"
+        accessibilityHint="Opens password recovery screen"
+        accessibilityRole="link"
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+      >
+        <Text style={styles.link}>Forgot Password?</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#ffffff',
+    // White background
+  },
+
+  title: {
+    fontSize: 28,
+    // Large heading
+    
+    fontWeight: 'bold',
+    color: '#000000',
+    // Dark text - 21:1 contrast ratio (AAA)
+    
+    marginBottom: 24,
+    lineHeight: 36,
+  },
+
+  label: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333333',
+    marginBottom: 8,
+    lineHeight: 20,
+  },
+
+  input: {
+    fontSize: 16,
+    // Readable size
+    
+    borderWidth: 2,
+    // Visible border
+    
+    borderColor: '#007AFF',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    marginBottom: 16,
+    minHeight: 44,
+    // Minimum touch target height
+    
+    color: '#000000',
+    backgroundColor: '#f9f9f9',
+  },
+
+  button: {
+    minHeight: 48,
+    // 48x48 minimum
+    
+    backgroundColor: '#007AFF',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 16,
+  },
+
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#ffffff',
+    // White text on blue = 4.5:1 contrast (AA)
+  },
+
+  errorText: {
+    fontSize: 14,
+    color: '#d32f2f',
+    // Red error - but maintain contrast
+    // Red #d32f2f on white = 5.3:1 (good)
+    
+    marginBottom: 16,
+    lineHeight: 20,
+  },
+
+  link: {
+    fontSize: 16,
+    color: '#007AFF',
+    // Blue link - underlined better
+    
+    textDecorationLine: 'underline',
+    marginTop: 16,
+    textAlign: 'center',
+  },
+});
+```
+
+**Line-by-Line Breakdown:**
+
+```typescript
+accessible={true}
+accessibilityLabel="Email address input"
+accessibilityRole="textbox"
+
+// Ye kya karta hai?
+// accessible = true → Screen reader ye element announce karega
+// accessibilityLabel = "Email address input" → Screen reader ye bolega
+// accessibilityRole = "textbox" → User ko pata chale ye input field hai
+
+// Screen reader: "Email address input, textbox, double-tap to edit"
+```
+
+### Step 2: Accessibility Testing Hook
+
+```typescript
+// hooks/useAccessibilityTesting.ts
+
+import { useEffect } from 'react';
+import { AccessibilityInfo } from 'react-native';
+
+export const useAccessibilityTesting = () => {
+  // Ye kya hai? Testing ke time accessibility check karna
+
+  useEffect(() => {
+    if (__DEV__) {
+      // Development mein only
+      
+      const checkAccessibility = async () => {
+        try {
+          // Bold text enabled check kar
+          const boldText = await AccessibilityInfo.boldTextEnabled();
+          console.log('Bold text enabled:', boldText);
+
+          // Screen reader enabled check kar
+          const screenReaderEnabled = await AccessibilityInfo.screenReaderEnabled();
+          console.log('Screen reader enabled:', screenReaderEnabled);
+
+          // Grayscale check kar (color blind mode)
+          const grayscaleEnabled = await AccessibilityInfo.reduceMotionEnabled();
+          console.log('Reduce motion enabled:', grayscaleEnabled);
+        } catch (error) {
+          console.error('Failed to check accessibility settings', error);
+        }
+      };
+
+      checkAccessibility();
+    }
+  }, []);
+};
+
+// Usage:
+// useAccessibilityTesting();
+// Development mein automatically check karega
+```
+
+### Step 3: Color Blind Friendly Palette
+
+```typescript
+// theme/colors.ts
+
+// Ye colors color-blind users ke liye safe hain
+
+export const colors = {
+  // Primary colors - WCAG compliant
+
+  primary: '#0173B2',
+  // Blue - universally visible
+
+  secondary: '#DE8F05',
+  // Orange - color-blind friendly
+
+  success: '#029E73',
+  // Green - avoid pure green (#00FF00)
+  // Pure green = color-blind users ko problem
+
+  error: '#CC78BC',
+  // Purple for errors - not just red
+
+  warning: '#D55E00',
+  // Red-orange - safer than pure red
+
+  // Grayscale - for highlights
+  light: '#E8E8E8',
+  dark: '#000000',
+  medium: '#757575',
+};
+
+// Color blindness types:
+// - Protanopia (Red-green, sees as brown)
+// - Deuteranopia (Red-green, sees as yellow)
+// - Tritanopia (Blue-yellow)
+// - Monochromacy (Grayscale)
+
+// Solution: Don't rely on color alone
+// Use patterns, icons, text labels also
+```
+
+### Step 4: Dynamic Type Support
+
+```typescript
+// components/ResponsiveText.tsx
+
+import React from 'react';
+import { Text, StyleSheet, useWindowDimensions } from 'react-native';
+
+interface ResponsiveTextProps {
+  children: string;
+  variant: 'h1' | 'h2' | 'body' | 'small';
+}
+
+export const ResponsiveText: React.FC<ResponsiveTextProps> = ({
+  children,
+  variant,
+}) => {
+  // Device width ko check kar (landscape vs portrait)
+  const { width } = useWindowDimensions();
+
+  const isSmallScreen = width < 350;
+
+  return (
+    <Text
+      style={[
+        styles.base,
+        variant === 'h1' && (isSmallScreen ? styles.h1Small : styles.h1),
+        variant === 'h2' && (isSmallScreen ? styles.h2Small : styles.h2),
+        variant === 'body' && (isSmallScreen ? styles.bodySmall : styles.body),
+        variant === 'small' && styles.small,
+      ]}
+      allowFontScaling={true}
+      // User ke device setting respect kara
+      
+      maxFontSizeMultiplier={1.5}
+      // Max 1.5x size
+    >
+      {children}
+    </Text>
+  );
+};
+
+const styles = StyleSheet.create({
+  base: {
+    color: '#000000',
+  },
+  h1: { fontSize: 28, fontWeight: 'bold', lineHeight: 36 },
+  h1Small: { fontSize: 24, fontWeight: 'bold', lineHeight: 32 },
+  h2: { fontSize: 22, fontWeight: '600', lineHeight: 28 },
+  h2Small: { fontSize: 18, fontWeight: '600', lineHeight: 24 },
+  body: { fontSize: 16, lineHeight: 24 },
+  bodySmall: { fontSize: 14, lineHeight: 20 },
+  small: { fontSize: 12, lineHeight: 16, color: '#666666' },
+});
+```
+
+---
+
+## ⚖️ 7. Comparison
+
+| Accessibility Feature | Purpose | User Benefit |
+|----------------------|---------|--------------|
+| **Screen Reader Support** | Blind users | Can use app via audio |
+| **High Contrast** | Low vision | Can read text |
+| **Large Touch Targets** | Motor disability | Can tap accurately |
+| **Captions** | Deaf users | Can understand videos |
+| **Haptic Feedback** | Multi-sensory | Better feedback |
+
+---
+
+## 🚫 8. Common Mistakes
+
+### Mistake 1: No Accessibility Labels
+
+```typescript
+// ❌ GALAT
+<TouchableOpacity onPress={handleSave}>
+  <Icon name="save" size={24} />
+  // Screen reader: "Button" - kya button hai, pata nahi!
+</TouchableOpacity>
+
+// ✅ SAHI
+<TouchableOpacity
+  onPress={handleSave}
+  accessible={true}
+  accessibilityLabel="Save changes"
+  accessibilityHint="Saves all changes you made"
+>
+  <Icon name="save" size={24} />
+  // Screen reader: "Save changes. Button. Double tap to activate"
+</TouchableOpacity>
+```
+
+### Mistake 2: Poor Contrast
+
+```typescript
+// ❌ GALAT
+<Text style={{ color: '#AAAAAA', backgroundColor: '#FFFFFF' }}>
+  Light gray text on white = unreadable
+  // Contrast ratio = 1.5:1 (below WCAG AA)
+</Text>
+
+// ✅ SAHI
+<Text style={{ color: '#333333', backgroundColor: '#FFFFFF' }}>
+  Dark gray on white = readable
+  // Contrast ratio = 12.6:1 (exceeds WCAG AAA)
+</Text>
+```
+
+### Mistake 3: Small Touch Targets
+
+```typescript
+// ❌ GALAT
+<TouchableOpacity style={{ width: 24, height: 24 }}>
+  <Text>X</Text>
+  // Too small, hard to tap
+</TouchableOpacity>
+
+// ✅ SAHI
+<TouchableOpacity
+  style={{ width: 48, height: 48, justifyContent: 'center' }}
+  hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+>
+  <Text>X</Text>
+  // 48x48 minimum + hitSlop
+</TouchableOpacity>
+```
+
+---
+
+## 🌍 9. Real-World Use Case
+
+### Uber-like App Accessibility
+
+```typescript
+// Fully accessible ride-booking interface
+
+const RideBookingScreen = () => {
+  return (
+    <View>
+      {/* Pickup Location */}
+      <View
+        accessible={true}
+        accessibilityLabel="Pickup location"
+        accessibilityRole="none"
+      >
+        <Text style={styles.label} nativeID="pickupLabel">
+          Pickup
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Where are you?"
+          accessible={true}
+          accessibilityLabel="Pickup location input"
+          accessibilityLabelledBy={['pickupLabel']}
+          accessibilityHint="Enter your pickup address"
+        />
+      </View>
+
+      {/* Destination Location */}
+      <View
+        accessible={true}
+        accessibilityLabel="Destination"
+        accessibilityRole="none"
+      >
+        <Text style={styles.label} nativeID="dropoffLabel">
+          Dropoff
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Where to?"
+          accessible={true}
+          accessibilityLabel="Destination input"
+          accessibilityLabelledBy={['dropoffLabel']}
+          accessibilityHint="Enter your destination address"
+        />
+      </View>
+
+      {/* Ride Type Selection */}
+      <View
+        accessible={true}
+        accessibilityRole="tablist"
+        // Multiple options - like tabs
+      >
+        {['UberX', 'UberXL', 'UberEats'].map(type => (
+          <TouchableOpacity
+            key={type}
+            accessibilityRole="radio"
+            // Radio button
+            
+            accessibilityLabel={type}
+            accessibilityHint={`Select ${type} ride type`}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Text>{type}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* Book Button */}
+      <TouchableOpacity
+        style={styles.button}
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        accessible={true}
+        accessibilityLabel="Book ride"
+        accessibilityHint="Books a ride with your selected options"
+        accessibilityRole="button"
+      >
+        <Text style={styles.buttonText}>Book Now</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+// Blind user experience:
+// 1. Screen reader: "Pickup location input. Enter your pickup address"
+// 2. User types pickup
+// 3. Screen reader: "Dropoff input"
+// 4. User types dropoff
+// 5. Screen reader: "UberX radio button. Select UberX"
+// 6. User navigates, selects UberXL
+// 7. Screen reader: "Book ride button. Books a ride with your selected options"
+// 8. User double-taps to book
+// All accessible! ✅
+```
+
+---
+
+## 🎨 10. Visual Diagram
+
+```
+Accessibility Layers:
+
+User
+  ↓
+┌─────────────────────────────────────┐
+│  Visual Layer                       │
+│  - Colors (contrast > 4.5:1)       │
+│  - Font size (minimum 14-16pt)     │
+│  - Touch targets (48x48dp)         │
+└─────────────┬───────────────────────┘
+              ↓
+┌─────────────────────────────────────┐
+│  Semantic Layer                     │
+│  - Accessibility labels             │
+│  - Accessibility roles              │
+│  - Accessibility hints              │
+└─────────────┬───────────────────────┘
+              ↓
+┌─────────────────────────────────────┐
+│  Screen Reader Layer                │
+│  - TalkBack (Android)               │
+│  - VoiceOver (iOS)                  │
+└─────────────┬───────────────────────┘
+              ↓
+        User hears app
+```
+
+---
+
+## 🛠️ 11. Best Practices
+
+### Practice 1: Accessibility Audit Checklist
+
+```
+□ All interactive elements > 48x48dp
+□ All text > 14pt (16pt recommended)
+□ Color contrast > 4.5:1 (WCAG AA)
+□ All images have alt text
+□ All buttons have labels
+□ Form fields have labels
+□ Error messages clear
+□ Screen reader tested
+□ Keyboard navigation works
+□ No moving/blinking content
+□ No content dependent on color alone
+```
+
+### Practice 2: Testing with Screen Readers
+
+```bash
+# Android (TalkBack)
+Settings > Accessibility > TalkBack > Enable
+Swipe right with 2 fingers to navigate
+Double-tap to activate
+
+# iOS (VoiceOver)
+Settings > Accessibility > VoiceOver > Enable
+Swipe right to navigate
+Double-tap to activate
+```
+
+### Practice 3: Accessible Components Library
+
+```typescript
+// Build reusable accessible components
+
+export const AccessibleComponents = {
+  Button: AccessibleButton,
+  TextInput: AccessibleTextInput,
+  Image: AccessibleImage,
+  Text: AccessibleText,
+  Checkbox: AccessibleCheckbox,
+  RadioButton: AccessibleRadio,
+  // etc.
+};
+
+// Use throughout app
+<AccessibleComponents.Button label="Login" onPress={handleLogin} />
+// Automatically accessible!
+```
+
+---
+
+## ⚠️ 12. Consequences of Failure
+
+| Scenario | Consequence |
+|----------|-------------|
+| **No screen reader support** | Blind users can't use app |
+| **Poor contrast** | Low vision users can't read |
+| **Small touch targets** | Motor disabilities users frustrated |
+| **No alt text** | Blind users miss important content |
+| **Color-only indication** | Color-blind users confused |
+
+---
+
+## ❓ 13. FAQ
+
+### Q1: Accessibility support kaise test karte hain?
+
+**A:** Physical devices mein TalkBack/VoiceOver enable kar, actual use simulate kar.
+
+### Q2: Agr sab users mobile devices use karte hain normal, kya accessibility zaroori hai?
+
+**A:** Haan! Law requirement (ADA, Section 508), + accessibility market 15-20% users reach karta hai.
+
+### Q3: Accessibility add karne mein performance impact?
+
+**A:** Negligible. Labels + roles minimal overhead.
+
+---
+
+## 📝 14. Summary
+
+**Accessibility = App sabke liye usable! Screen readers, contrast, touch targets—all matter! ♿**
+
+---
+
+## 🎉 MODULE 14 COMPLETE!
 
