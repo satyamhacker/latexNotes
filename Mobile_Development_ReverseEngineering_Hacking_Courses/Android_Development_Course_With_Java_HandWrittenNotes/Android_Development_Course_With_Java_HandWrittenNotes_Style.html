@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Mobile Penetration Testing</title>
+    <title>Android Development Course With Java HandWritten Notes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&family=Outfit:wght@700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&family=Outfit:wght@700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark-reasonable.min.css">
@@ -34,27 +34,19 @@
             background-color: var(--bg-primary);
             color: var(--text-primary);
             font-family: Inter, sans-serif;
-            line-height: 1.7;
-            overflow-x: hidden
+            line-height: 1.6
         }
 
         #loader {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             font-size: 1.5rem;
-            color: var(--accent-blue);
-            z-index: 9999
+            color: var(--accent-blue)
         }
 
         .print-wrapper {
-            background-color: var(--bg-primary);
             min-height: 100vh
         }
 
@@ -70,41 +62,44 @@
             position: fixed;
             height: 100vh;
             overflow-y: auto;
-            padding: 2rem 1rem;
-            z-index: 100
+            padding: 2rem 0
         }
 
         .sidebar h2 {
-            font-size: 1.2rem;
             color: var(--accent-blue);
-            margin-bottom: 1rem;
-            font-weight: 600
+            padding: 0 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem
         }
 
         .sidebar ul {
             list-style: none
         }
 
-        .sidebar li {
-            margin: .5rem 0
-        }
-
         .sidebar a {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: .9rem;
-            transition: color .2s
+            display: block;
+            padding: .6rem 1.5rem;
+            transition: all .2s;
+            border-left: 3px solid transparent;
+            font-size: .9rem
         }
 
         .sidebar a:hover {
-            color: var(--accent-blue)
+            background: rgba(88, 166, 255, .1);
+            border-left-color: var(--accent-blue);
+            color: var(--text-primary)
         }
 
         .main-content {
             margin-left: 280px;
-            padding: 3rem 4rem;
-            max-width: 1200px;
-            width: 100%
+            flex: 1;
+            padding: 3rem;
+            max-width: 1200px
         }
 
         h1 {
@@ -114,7 +109,6 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
             font-size: 3rem;
-            font-weight: 900;
             margin-bottom: 1.5rem;
             border-bottom: 3px solid var(--border-color);
             padding-bottom: 1rem
@@ -123,7 +117,6 @@
         h2 {
             color: var(--text-primary);
             font-size: 2rem;
-            font-weight: 700;
             margin-top: 2.5rem;
             margin-bottom: 1rem;
             border-bottom: 2px solid var(--border-color);
@@ -143,12 +136,11 @@
             border-left: 5px solid #4facfe;
             padding-left: 1rem;
             margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            border-bottom: none
+            margin-bottom: 1.5rem
         }
 
         h3 {
-            color: var(--text-secondary);
+            color: var(--accent-blue);
             font-size: 1.5rem;
             margin-top: 2rem;
             margin-bottom: .8rem
@@ -416,7 +408,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", () => { const e = document.getElementById("content-area"), t = document.getElementById("toc"), n = document.getElementById("loader"); fetch("Mobile_Penetration_Testing_And_Reverse_Engineering_Notes.md").then(e => e.ok ? e.text() : Promise.reject("Failed to load markdown file")).then(o => { let a = o.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, "## MODULE_MARKER $1"); a = a.replace(/^##\s+(Topic\s+\d+\.\d+:.*)/gm, "## TOPIC_MARKER $1"), a = a.replace(/^\s*(\d+\.\d+:)/gm, "**$1**"); const r = new marked.Renderer; r.code = function (e, t) { const n = e ? String(e) : ""; let o = n; if (t && hljs.getLanguage(t)) try { o = hljs.highlight(n, { language: t }).value } catch (e) { o = hljs.highlightAuto(n).value } else o = hljs.highlightAuto(n).value; const a = t || "plaintext", r = Math.random().toString(36).substr(2, 9); return `<pre class="mac-window"><div class="code-header"><div class="window-controls"><span class="control red"></span><span class="control yellow"></span><span class="control green"></span></div><button class="copy-btn" onclick="copyCode('${r}')"><i class="fas fa-copy"></i> Copy</button></div><code id="${r}" class="hljs language-${a}">${o}</code></pre>` }, r.heading = function (e, t) { const n = e ? String(e) : "", o = n.toLowerCase().replace(/[^\w]+/g, "-"); if (n.startsWith("MODULE_MARKER ")) { const e = n.replace("MODULE_MARKER ", ""), a = e.toLowerCase().replace(/[^\w]+/g, "-"); return `<h${t} class="module-section" id="${a}">${e}</h${t}>` } if (n.startsWith("TOPIC_MARKER ")) { const e = n.replace("TOPIC_MARKER ", ""), a = e.toLowerCase().replace(/[^\w]+/g, "-"); return `<h${t} class="topic-section" id="${a}">${e}</h${t}>` } return `<h${t} id="${o}">${n}</h${t}>` }, marked.setOptions({ renderer: r, breaks: !0, gfm: !0 }), e.innerHTML = marked.parse(a); const i = e.querySelectorAll("h1, h2, h3"); i.forEach(e => { const n = document.createElement("li"), o = document.createElement("a"); o.href = `#${e.id}`, o.textContent = e.textContent, o.style.paddingLeft = "h1" === e.tagName ? "0" : "h2" === e.tagName ? "1rem" : "2rem", n.appendChild(o), t.appendChild(n) }), n.style.display = "none" }).catch(e => { console.error(e), n.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes' }) }); function copyCode(e) { const t = document.getElementById(e); if (!t) return; const n = t.innerText; navigator.clipboard.writeText(n).then(() => { const t = event.target.closest(".copy-btn"); t.innerHTML = '<i class="fas fa-check"></i> Copied!', setTimeout(() => { t.innerHTML = '<i class="fas fa-copy"></i> Copy' }, 2e3) }).catch(e => console.error("Copy failed:", e)) }</script>
+    <script>document.addEventListener("DOMContentLoaded", () => { const e = document.getElementById("content-area"), t = document.getElementById("toc"), n = document.getElementById("loader"); fetch("Android_Development_Course_With_Java_HandWrittenNotes.md").then(e => e.ok ? e.text() : Promise.reject("Failed to load markdown file")).then(o => { let a = o.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, "## MODULE_MARKER $1"); a = a.replace(/^##\s+(Topic\s+\d+\.\d+:.*)/gm, "## TOPIC_MARKER $1"), a = a.replace(/^\s*(\d+\.\d+:)/gm, "**$1**"); const r = new marked.Renderer; r.code = function (e, t) { const n = e ? String(e) : ""; let o = n; if (t && hljs.getLanguage(t)) try { o = hljs.highlight(n, { language: t }).value } catch (e) { o = hljs.highlightAuto(n).value } else o = hljs.highlightAuto(n).value; const a = t || "plaintext", r = Math.random().toString(36).substr(2, 9); return `<pre class="mac-window"><div class="code-header"><div class="window-controls"><span class="control red"></span><span class="control yellow"></span><span class="control green"></span></div><button class="copy-btn" onclick="copyCode('${r}')"><i class="fas fa-copy"></i> Copy</button></div><code id="${r}" class="hljs language-${a}">${o}</code></pre>` }, r.heading = function (e, t) { const n = e ? String(e) : "", o = n.toLowerCase().replace(/[^\w]+/g, "-"); if (n.startsWith("MODULE_MARKER ")) { const e = n.replace("MODULE_MARKER ", ""), a = e.toLowerCase().replace(/[^\w]+/g, "-"); return `<h${t} class="module-section" id="${a}">${e}</h${t}>` } if (n.startsWith("TOPIC_MARKER ")) { const e = n.replace("TOPIC_MARKER ", ""), a = e.toLowerCase().replace(/[^\w]+/g, "-"); return `<h${t} class="topic-section" id="${a}">${e}</h${t}>` } return `<h${t} id="${o}">${n}</h${t}>` }, marked.setOptions({ renderer: r, breaks: !0, gfm: !0 }), e.innerHTML = marked.parse(a); const i = e.querySelectorAll("h1, h2, h3"); i.forEach(e => { const n = document.createElement("li"), o = document.createElement("a"); o.href = `#${e.id}`, o.textContent = e.textContent, o.style.paddingLeft = "h1" === e.tagName ? "0" : "h2" === e.tagName ? "1rem" : "2rem", n.appendChild(o), t.appendChild(n) }), n.style.display = "none" }).catch(e => { console.error(e), n.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes' }) }); function copyCode(e) { const t = document.getElementById(e); if (!t) return; const n = t.innerText; navigator.clipboard.writeText(n).then(() => { const t = event.target.closest(".copy-btn"); t.innerHTML = '<i class="fas fa-check"></i> Copied!', setTimeout(() => { t.innerHTML = '<i class="fas fa-copy"></i> Copy' }, 2e3) }).catch(e => console.error("Copy failed:", e)) }</script>
 </body>
 
 </html>
