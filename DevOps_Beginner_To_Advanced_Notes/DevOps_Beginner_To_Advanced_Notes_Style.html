@@ -18,11 +18,11 @@
 
     <style>
         :root {
-            /* Color Palette - Deep Dark Theme */
+            /* Color Palette - Deep Dark Theme (From STYLE_PROMPT) */
             --bg-primary: #0f1115;
             --bg-secondary: #161b22;
-            --text-primary: #ffffff; /* Pure white for better readability */
-            --text-secondary: #e6edf3; /* Much brighter grey */
+            --text-primary: #ffffff; /* Pure white */
+            --text-secondary: #e6edf3;
             --accent-blue: #58a6ff;
             --accent-gradient: linear-gradient(135deg, #61dafb 0%, #4facfe 100%);
             --border-color: #30363d;
@@ -114,7 +114,6 @@
 
         /* Typography Styles */
         h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-display);
             color: var(--text-primary);
             margin-top: 3rem;
             margin-bottom: 1.5rem;
@@ -122,24 +121,26 @@
         }
 
         h1 {
-            font-size: 3rem;
+            font-family: var(--font-display);
             background: var(--accent-gradient);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            border-bottom: 3px solid #30363d;
+            font-size: 3rem;
+            border-bottom: 3px solid var(--border-color);
             padding-bottom: 1rem;
             width: fit-content;
         }
 
         h2 {
+            font-family: var(--font-display);
             font-size: 2rem;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 0.5rem;
             margin-top: 4rem;
         }
 
-        h3 { font-size: 1.5rem; color: var(--accent-blue); margin-top: 2.5rem; }
+        h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--accent-blue); margin-top: 2.5rem; }
         
         p, li { margin-bottom: 1rem; font-size: 1.05rem; }
         
@@ -175,30 +176,30 @@
         tr:last-child td { border-bottom: none; }
         tr:hover td { background: #262c36; }
 
-        /* Code Blocks (Mac Style) */
-        pre {
-            background: #0d1115; /* Darker bg for contrast */
+        /* Code Blocks (Mac Style) - FROM STYLE_PROMPT */
+        pre.mac-window {
+            background: #0d1115;
             border: 1px solid var(--border-color);
             border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             margin: 2rem 0;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            overflow: hidden; /* For header clipping */
+            
+            /* STRICT WRAPPING FOR PDF */
             white-space: pre-wrap !important;
             word-break: break-word !important; 
+            overflow-x: hidden !important;
         }
 
-        /* Mac Window Header */
         .code-header {
             background: #161b22;
-            padding: 10px 15px;
-            display: flex;
-            align-items: center;
+            padding: 8px 15px;
             border-bottom: 1px solid var(--border-color);
-            justify-content: space-between;
+            display: flex; justify-content: space-between;
+            align-items: center;
         }
+
         .window-controls { display: flex; gap: 8px; }
-        .control { width: 12px; height: 12px; border-radius: 50%; }
+        .control { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
         .control.red { background: var(--mac-red); }
         .control.yellow { background: var(--mac-yellow); }
         .control.green { background: var(--mac-green); }
@@ -280,7 +281,7 @@
         ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 5px; }
         ::-webkit-scrollbar-thumb:hover { background: #484f58; }
 
-        /* Print Optimization */
+        /* Print Optimization - CRITICAL */
         @media print {
             body { margin: 0; padding: 0; }
             
@@ -295,62 +296,45 @@
             }
 
             /* Force specific TEXT elements to be white for contrast */
-            /* REMOVED .main-content from here to avoid cascading to code blocks */
             p, li, td, th {
                 color: #ffffff !important;
                 -webkit-text-fill-color: #ffffff !important;
                 text-shadow: none !important;
             }
             
-            /* Explicitly handle Headings to allow keeping their color if wanted, otherwise white */
             h1, h2, h3, h4, h5, h6 {
-                /* Optional: uncomment to force white headers if they look bad */
-                /* color: #ffffff !important; */ 
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+                 -webkit-print-color-adjust: exact !important;
+                 print-color-adjust: exact !important;
             }
-            
-            /* Ensure code highlighting colors are PRESERVED */
-            /* We use a specific selector to beat any inheritance */
+
+            /* PRESERVE Code Colors - Explicitly force Highlight.js colors for Print */
             .main-content pre, .main-content code, .hljs {
                 background-color: #0d1115 !important;
-                /* color: #e6edf3 !important;  <-- REMOVED to allow syntax highlighting */
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             
-            /* Inline code specific fix */
-            p code, li code, .main-content p code {
-                color: #ff7b72 !important; /* Red for inline commands */
-                background-color: rgba(110, 118, 129, 0.3) !important;
-                -webkit-print-color-adjust: exact !important;
+            p code, li code {
+                color: #ff7b72 !important;
+                background-color: rgba(110, 118, 129, 0.3) !important; 
             }
             
-            /* Force Highlight.js spans to show correctly */
+            /* Force specific syntax colors (Atom One Dark approximation) */
             .hljs-keyword, .hljs-literal, .hljs-symbol, .hljs-name { color: #ff7b72 !important; }
-            .hljs-link { color: #61aeee !important; text-decoration: underline !important; }
+            .hljs-link { color: #61aeee !important; }
             .hljs-built_in, .hljs-type { color: #e5c07b !important; }
             .hljs-number, .hljs-class { color: #d19a66 !important; }
             .hljs-string, .hljs-meta-string { color: #98c379 !important; }
-            .hljs-regexp, .hljs-template-variable { color: #98c379 !important; }
-            .hljs-subst, .hljs-function, .hljs-title, .hljs-params, .hljs-formula { color: #61aeee !important; }
-            .hljs-comment, .hljs-quote { color: #5c6370 !important; font-style: italic !important; }
-            .hljs-doctag { color: #c678dd !important; }
-            .hljs-meta, .hljs-meta-keyword, .hljs-tag { color: #e06c75 !important; }
-            .hljs-variable, .hljs-template-variable { color: #e06c75 !important; }
-            .hljs-attr, .hljs-attribute { color: #d19a66 !important; }
-            .hljs-section { color: #e5c07b !important; }
-            .hljs-emphasis { font-style: italic !important; }
-            .hljs-strong { font-weight: bold !important; }
+            .hljs-title, .hljs-params { color: #61aeee !important; }
+            .hljs-comment { color: #5c6370 !important; font-style: italic !important; }
 
-            .sidebar, .copy-btn, .window-controls, #loader { display: none !important; }
+            .sidebar, .copy-btn, .window-controls, #loader {
+                display: none !important;
+            }
             
             .main-content { padding: 2rem !important; margin: 0; max-width: 100%; }
             
             a { text-decoration: none !important; border: none !important; }
-
-             /* Keep code blocks distinct */
-            pre { border: 1px solid #444; page-break-inside: avoid; }
         }
 
     </style>
@@ -391,8 +375,13 @@
             // Configure Marked.js
             marked.setOptions({
                 highlight: function(code, lang) {
-                     // We handle this in the custom renderer mainly, but this is a fallback
-                    return code; 
+                     // Auto-detect if language is missing
+                     const language = (lang && hljs.getLanguage(lang)) ? lang : 'plaintext';
+                     try {
+                        return hljs.highlight(code, { language }).value;
+                     } catch(e) {
+                         return hljs.highlightAuto(code).value;
+                     }
                 },
                 langPrefix: 'hljs language-'
             });
@@ -416,16 +405,22 @@
                     
                     renderer.code = function(code, language) {
                         const safeCode = code ? String(code) : '';
-                        
-                        // Robust Auto-Highlighting
-                        let highlighted = safeCode;
-                        if (language && hljs.getLanguage(language)) {
-                            try {
-                                highlighted = hljs.highlight(safeCode, { language: language }).value;
-                            } catch (e) { highlighted = hljs.highlightAuto(safeCode).value; }
-                        } else {
-                            // Auto-detect if language is missing
-                            highlighted = hljs.highlightAuto(safeCode).value;
+                        const validLang = language || 'plaintext';
+                        let highlighted = '';
+
+                        try {
+                             if (validLang !== 'plaintext' && hljs.getLanguage(validLang)) {
+                                highlighted = hljs.highlight(safeCode, { language: validLang }).value;
+                             } else {
+                                highlighted = hljs.highlightAuto(safeCode).value;
+                             }
+                        } catch (e) { 
+                            highlighted = safeCode.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                        }
+
+                        // Double safety
+                        if (typeof highlighted !== 'string') {
+                             highlighted = safeCode.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
                         }
 
                         return `
@@ -440,7 +435,7 @@
                                     <i class="fa-regular fa-copy"></i> Copy
                                 </button>
                             </div>
-                            <code class="hljs language-${language || 'plaintext'}">${highlighted}</code>
+                            <code class="hljs language-${validLang}">${highlighted}</code>
                         </pre>`;
                     };
 
@@ -467,8 +462,8 @@
                             <h2 style="color:#ff5f56; margin-top:0;">Error Loading Notes</h2>
                             <p>${err.message}</p>
                             <p style="color: grey; font-size: 0.9rem;">
-                                Tip: Browsers block reading local files directly for security. <br>
-                                Please use the <strong>"Live Server"</strong> extension in VS Code to view this file.
+                                 Tip: Browsers block reading local files directly for security. <br>
+                                 Please use the <strong>"Live Server"</strong> extension in VS Code to view this file.
                             </p>
                         </div>
                     `;
