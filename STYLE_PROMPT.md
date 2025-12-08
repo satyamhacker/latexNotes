@@ -74,8 +74,8 @@ h2 {
     padding-bottom: 0.5rem;
 }
 
-/* Topic Sections - Big Bold Blue */
-h2.topic-section {
+/* Topic & Module Sections - Big Bold Blue */
+h2.topic-section, h2.module-section {
     font-family: 'Outfit', sans-serif;
     font-size: 2.5rem;
     font-weight: 800;
@@ -120,6 +120,31 @@ code {
     font-family: 'Fira Code', monospace;
     white-space: pre-wrap !important; 
     word-wrap: break-word !important;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid var(--border-color);
+}
+
+th {
+    background: #1c2128;
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+tr:hover {
+    background: rgba(88, 166, 255, 0.1);
 }
 
 /* CRITICAL PRINT STYLES - DO NOT MODIFY */
@@ -176,8 +201,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // ... Fetch MD logic ...
     
     // 1. Pre-process Markdown (Fix indented modules)
-    // Converts "  Module 1:" to "## Module 1:"
-    let processed = markdown.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, '## $1');
+    // Converts "  Module 1:" to "## MODULE_MARKER Module 1:"
+    let processed = markdown.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, '## MODULE_MARKER $1');
     // Converts "Topic X.X:" to special heading
     processed = processed.replace(/^##\s+(Topic\s+\d+\.\d+:.*)/gm, '## TOPIC_MARKER $1');
     // Converts "1.1:" to bold
@@ -214,6 +239,13 @@ document.addEventListener("DOMContentLoaded", () => {
     renderer.heading = function(text, level) {
          const safeText = text ? String(text) : '';
          const id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+         
+         // Check if this is a Module section
+         if (safeText.startsWith('MODULE_MARKER ')) {
+             const cleanText = safeText.replace('MODULE_MARKER ', '');
+             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+             return `<h${level} class="module-section" id="${cleanId}">${cleanText}</h${level}>`;
+         }
          
          // Check if this is a Topic section
          if (safeText.startsWith('TOPIC_MARKER ')) {
