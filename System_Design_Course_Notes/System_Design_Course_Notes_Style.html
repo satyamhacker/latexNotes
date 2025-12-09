@@ -1,133 +1,486 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>System Design Notes</title>
-<style>
-:root{--blue:#0055cc;--red:#d40000}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Georgia,serif;font-size:12pt;line-height:1.8;background:linear-gradient(135deg,#e8f4f8 0%,#f5f5f5 50%,#fff8e1 100%);color:#1a1a1a;padding:25mm;max-width:210mm;margin:0 auto}
-.module-heading{font-size:26pt;color:#fff;font-weight:bold;background:linear-gradient(135deg,#003d99 0%,#0055cc 50%,#0077ff 100%);padding:25px 30px;margin:3em 0 1.5em 0;border-radius:20px;box-shadow:0 8px 25px rgba(0,85,204,.4);border-left:10px solid #002966}
-.topic-heading{font-size:22pt;color:#fff;font-weight:bold;background:linear-gradient(135deg,#0055cc 0%,#0077ff 50%,#00aaff 100%);padding:20px 25px;margin:2.5em 0 1em 0;border-radius:15px;box-shadow:0 6px 20px rgba(0,85,204,.35);border-left:8px solid #003d99}
-h2{font-size:19pt;color:#0055cc;font-weight:bold;margin:2em 0 1em 0;padding:12px 20px;background:linear-gradient(90deg,rgba(0,85,204,.08) 0%,transparent 100%);border-left:6px solid #0055cc}
-h3{font-size:17pt;color:#2c5aa0;font-weight:bold;margin:1.8em 0 .8em 0;padding:10px 15px;border-left:5px solid #2c5aa0}
-p{margin:.6em 0;text-align:justify}
-.important{color:var(--red);font-weight:bold;background:rgba(212,0,0,.15);padding:6px 12px;border-radius:8px;border-left:5px solid var(--red)}
-.code-block{background:#2d2d2d;border:3px solid #444;border-radius:15px;padding:25px;margin:1.5em 0;font-family:"Courier New",monospace;font-size:10pt;color:#e0e0e0}
-ul,ol{margin:1em 0 1em 2.5em;line-height:1.8;background:rgba(255,255,255,.5);padding:15px 20px 15px 40px;border-radius:10px}
-li{margin:.8em 0;padding:8px 12px}
-strong{font-weight:bold;color:#0055cc}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Design Notes - Premium Dark Viewer</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark-reasonable.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&family=Outfit:wght@700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #0f1115;
+            --bg-secondary: #161b22;
+            --text-primary: #ffffff;
+            --text-secondary: #e6edf3;
+            --accent-blue: #58a6ff;
+            --accent-gradient: linear-gradient(135deg, #61dafb 0%, #4facfe 100%);
+            --border-color: #30363d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+        }
+
+        #loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+        }
+
+        .print-wrapper {
+            background-color: var(--bg-primary);
+            min-height: 100vh;
+        }
+
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 2rem 1rem;
+        }
+
+        .sidebar h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin: 0.5rem 0;
+        }
+
+        .sidebar a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .sidebar a:hover {
+            color: var(--accent-blue);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 3rem;
+            max-width: 900px;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3rem;
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--text-primary);
+            font-size: 2rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h2.topic-section,
+        h2.module-section {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4facfe;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-left: 5px solid #4facfe;
+            padding-left: 1rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        a:hover {
+            border-bottom-color: var(--accent-blue);
+        }
+
+        ul,
+        ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        pre.mac-window {
+            background: #0d1115;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin: 2rem 0;
+            white-space: pre-wrap !important;
+            word-break: break-word !important;
+            overflow-x: hidden !important;
+        }
+
+        .code-header {
+            background: #161b22;
+            padding: 8px 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .red {
+            background: #ff5f56;
+        }
+
+        .yellow {
+            background: #ffbd2e;
+        }
+
+        .green {
+            background: #27c93f;
+        }
+
+        .copy-btn {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: opacity 0.2s;
+        }
+
+        .copy-btn:hover {
+            opacity: 0.8;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            white-space: pre-wrap !important;
+            word-wrap: break-word !important;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        p code,
+        li code {
+            background: var(--bg-secondary);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background: #1c2128;
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        blockquote {
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid var(--border-color);
+            margin: 3rem 0;
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            .print-wrapper {
+                background-color: #0f1115 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                min-height: 100vh;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                margin: 0;
+                padding: 0;
+            }
+
+            .main-content,
+            p,
+            li,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6,
+            td,
+            th {
+                color: #ffffff !important;
+            }
+
+            pre {
+                border: 1px solid #444;
+                page-break-inside: avoid;
+            }
+
+            .sidebar,
+            .copy-btn,
+            .window-controls,
+            #loader {
+                display: none !important;
+            }
+
+            .layout {
+                display: block;
+            }
+
+            .main-content {
+                padding: 2rem !important;
+                margin: 0 auto;
+                max-width: 100%;
+            }
+
+            a {
+                text-decoration: none !important;
+                border-bottom: none !important;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<header style="font-family:Arial;color:#666;font-size:10pt;margin-bottom:8px">📚 System Design Course Notes</header>
-<main id="render-target"><p style="color:#666">⏳ Loading…</p></main>
-<script>
-(async function(){
-const target = document.getElementById("render-target");
-const resp = await fetch("System_Design_Course_Notes.md");
-if(!resp.ok){target.innerHTML='<p style="color:#a00">Error loading file</p>';return}
-const raw = await resp.text();
-const lines = raw.split("\n");
-const frag = document.createDocumentFragment();
-let i = 0;
+    <div id="loader">Loading System Design Notes...</div>
 
-function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+    <div class="print-wrapper">
+        <div class="layout">
+            <nav class="sidebar" id="sidebar">
+                <h3><i class="fas fa-sitemap"></i> Table of Contents</h3>
+                <ul id="toc"></ul>
+            </nav>
+            <main class="main-content" id="content-area"></main>
+        </div>
+    </div>
 
-while(i < lines.length){
-const L = lines[i];
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const loader = document.getElementById("loader");
+            const contentArea = document.getElementById("content-area");
+            const tocArea = document.getElementById("toc");
 
-// Check if Module heading (# Module 1:, # Module 2:, etc)
-if(L.startsWith("# Module ") && L.includes(":")){
-const h = document.createElement("h1");
-h.className = "module-heading";
-h.textContent = L.replace(/^# /,"");
-frag.appendChild(h);
-i++;
-continue;
-}
+            try {
+                const response = await fetch("System_Design_Course_Notes.md");
+                if (!response.ok) throw new Error("Failed to load markdown file");
 
-// Check if Topic heading (## Topic 1.1:, ## Topic 2.3:, etc)
-if(L.startsWith("## Topic ") && L.includes(":")){
-const h = document.createElement("h2");
-h.className = "topic-heading";
-h.textContent = L.replace(/^## /,"");
-frag.appendChild(h);
-i++;
-continue;
-}
+                let markdown = await response.text();
 
-// Check if regular h2 (## something)
-if(L.startsWith("## ")){
-const h2 = document.createElement("h2");
-h2.textContent = L.replace(/^## /,"");
-frag.appendChild(h2);
-i++;
-continue;
-}
+                let processed = markdown.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, '## MODULE_MARKER $1');
+                processed = processed.replace(/^##\s+(Topic\s+\d+\.\d+:.*)/gm, '## TOPIC_MARKER $1');
+                processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
 
-// Check if h1 (# something)
-if(L.startsWith("# ")){
-const h = document.createElement("h1");
-h.className = "topic-heading";
-h.textContent = L.replace(/^# /,"");
-frag.appendChild(h);
-i++;
-continue;
-}
+                const renderer = new marked.Renderer();
 
-// Check if h3 (### something)
-if(L.startsWith("### ")){
-const h3 = document.createElement("h3");
-h3.textContent = L.replace(/^### /,"");
-frag.appendChild(h3);
-i++;
-continue;
-}
+                renderer.code = function (code, language) {
+                    const safeCode = code ? String(code) : '';
+                    let highlighted = safeCode;
+                    let validLang = language || 'plaintext';
 
-// Check if empty line
-if(L.trim() === ""){
-i++;
-continue;
-}
+                    if (language && hljs.getLanguage(language)) {
+                        try {
+                            highlighted = hljs.highlight(safeCode, { language: language }).value;
+                        } catch (e) {
+                            highlighted = hljs.highlightAuto(safeCode).value;
+                        }
+                    } else {
+                        highlighted = hljs.highlightAuto(safeCode).value;
+                    }
 
-// Check if bullet list (- item)
-if(L.startsWith("- ")){
-const ul = document.createElement("ul");
-while(i < lines.length && lines[i].startsWith("- ")){
-const li = document.createElement("li");
-li.textContent = lines[i].replace(/^- /,"");
-ul.appendChild(li);
-i++;
-}
-frag.appendChild(ul);
-continue;
-}
+                    const codeId = 'code-' + Math.random().toString(36).substr(2, 9);
 
-// Check if numbered list (1. item)
-if(/^\d+\. /.test(L)){
-const ol = document.createElement("ol");
-while(i < lines.length && /^\d+\. /.test(lines[i])){
-const li = document.createElement("li");
-li.textContent = lines[i].replace(/^\d+\. /,"");
-ol.appendChild(li);
-i++;
-}
-frag.appendChild(ol);
-continue;
-}
+                    return `
+                    <pre class="mac-window">
+                        <div class="code-header">
+                            <div class="window-controls">
+                                <span class="control red"></span>
+                                <span class="control yellow"></span>
+                                <span class="control green"></span>
+                            </div>
+                            <button class="copy-btn" onclick="copyCode('${codeId}')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <code id="${codeId}" class="hljs language-${validLang}">${highlighted}</code>
+                    </pre>`;
+                };
 
-// Default: paragraph
-const p = document.createElement("p");
-p.textContent = L;
-frag.appendChild(p);
-i++;
-}
+                renderer.heading = function (text, level) {
+                    const safeText = text ? String(text) : '';
+                    const id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
 
-target.innerHTML = "";
-target.appendChild(frag);
-})();
-</script>
+                    if (safeText.startsWith('MODULE_MARKER ')) {
+                        const cleanText = safeText.replace('MODULE_MARKER ', '');
+                        const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                        return `<h${level} class="module-section" id="${cleanId}">${cleanText}</h${level}>`;
+                    }
+
+                    if (safeText.startsWith('TOPIC_MARKER ')) {
+                        const cleanText = safeText.replace('TOPIC_MARKER ', '');
+                        const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                        return `<h${level} class="topic-section" id="${cleanId}">${cleanText}</h${level}>`;
+                    }
+
+                    return `<h${level} id="${id}">${safeText}</h${level}>`;
+                };
+
+                contentArea.innerHTML = marked.parse(processed, { renderer: renderer });
+
+                const headings = contentArea.querySelectorAll('h2, h3');
+                headings.forEach(heading => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = '#' + heading.id;
+                    a.textContent = heading.textContent;
+                    if (heading.tagName === 'H3') {
+                        a.style.paddingLeft = '1rem';
+                        a.style.fontSize = '0.85rem';
+                    }
+                    li.appendChild(a);
+                    tocArea.appendChild(li);
+                });
+
+                loader.style.display = "none";
+
+            } catch (error) {
+                loader.textContent = "Error loading notes: " + error.message;
+                loader.style.color = "#ff5f56";
+            }
+        });
+
+        function copyCode(codeId) {
+            const codeBlock = document.getElementById(codeId);
+            const text = codeBlock.textContent;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target.closest('.copy-btn');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+    </script>
 </body>
+
 </html>

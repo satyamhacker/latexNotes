@@ -1,191 +1,263 @@
-# Prompt — Colorful Study Notes Converter (OPTIMIZED VERSION)
-## With Minified Auto-Renderer Code
+# Prompt — Premium Dark Mode Notes Viewer
 
-**Prompt Start (copy everything below):**
+**Prompt Start:**
 
-You are an expert HTML/CSS document designer and note formatter.
-Your task is to convert raw text notes into a visually stunning, colorful, and professional HTML study notebook.
+You are an expert Frontend Developer.
+Your task is to create a single-file `notes_viewer.html` that dynamically renders a Markdown file (e.g., `React_Native_Notes.md`) with a **Premium Dark UI**.
+The rendering must look identical to a high-end documentation site (like Stripe or Tailwind docs) and support **Print-to-PDF** with the dark theme preserved.
 
-## 🧩 A — Document Layout & Typography
-- Complete HTML file with embedded `<style>` (no external CSS)
-- Professional printed study notebook layout (A4 optimized)
-- Body Font: Georgia, "Times New Roman", serif
-- Headings Font: Arial, Helvetica, sans-serif
-- Base font size: 12pt
-- Margins: ~25mm all sides
-- Line-height: 1.6
-- Background: #fafafa
+## 🛠️ Required Dependencies
+- **Marked.js**: `https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js` (MUST be v4.3.0)
+- **Highlight.js**: `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js`
+- **Highlight CSS**: `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark-reasonable.min.css`
+- **Fonts**: Inter, Fira Code, Outfit.
+- **Icons**: FontAwesome 6.4.0.
 
-## 🎯 B — Topic Headings
-Topic headings (`# Topic Name`) render as:
-- Bold large blue font (#0055cc)
-- Font size: 22pt
-- Bottom border (3px solid blue)
-- Subtle text shadow
-- Proper spacing
+## 🎨 HTML Structure & CSS (Critical)
 
-## 🔴 C — Important Text Highlighting
-Auto-highlight keywords in bright red (#d40000), bold, 1.08em:
-- "important", "yaad", "dhayan", "remember", "must", "note", "Do not", "jaruri"
-- "Kyun zaroori", "Best practice", "Always", "Never", "Avoid"
-- "fail", "crash", "loss", "problem", "critical", "essential", "vital"
-- "zaroori", "GALAT", "WARNING", "DANGER", "RISKY", "Legal", "Illegal"
-- Add light red background (rgba(212,0,0,0.05)) with left border (3px solid)
-
-## 💻 D — Code Blocks
-Code blocks with:
-- Background: #f7f7f7
-- Border: 1px solid #ddd, border-radius: 8px
-- Line numbers (CSS counters)
-- Syntax highlighting:
-  - Flags (-sS, -sV, -p): Bold orange (#e67e22)
-  - Keywords: Blue (#0074d9)
-  - Strings: Green (#2ecc40)
-  - Comments: Gray (#aaaaaa)
-  - Numbers: Pink (#d63384)
-- **NO horizontal scrolling** - use `white-space: pre-wrap` and `word-wrap: break-word`
-
-## 🎨 E — Color Palette
-```css
-:root{--heading-blue:#0055cc;--important-red:#d40000;--code-bg:#f7f7f7;--keyword-color:#0074d9;--string-color:#2ecc40;--comment-color:#aaaaaa;--function-color:#b10dc9;--import-color:#ff851b;--pro-tip-bg:#d4edda;--pro-tip-border:#28a745;--mistake-bg:#f8d7da;--mistake-border:#dc3545}
-```
-
-## 🎁 F — Special Boxes (NEW)
-**Pro Tips Box:**
-- Background: #d4edda (light green)
-- Border-left: 4px solid #28a745 (green)
-- Prefix: "💡 Pro Tip: " in bold green
-- Padding: 12px 15px, border-radius: 4px
-
-**Common Mistakes Box:**
-- Background: #f8d7da (light red)
-- Border-left: 4px solid #dc3545 (red)
-- Prefix: "⚠️ Common Mistake: " in bold red
-- Padding: 12px 15px, border-radius: 4px
-
-## 🎯 G — Emoji Support (NEW)
-- Auto-detect emojis in headings (🎯, 🤔, 🛡️, ⚙️, 👍, 👎, ⌨️, 💻, 💡)
-- Larger emoji size (1.2em) with proper spacing
-- Module emojis: 🌐, 🔍, 🥷, 🛡️, 🎯, 🔬, 💾, 🔧, 🎭, 🐍, 🚀
-
-## 🚀 M — AUTO-RENDERER SYSTEM (MINIFIED & OPTIMIZED)
-
-**Setup Instructions:**
-1. Save code below as `NotesRenderer.html`
-2. Create `notes.html` with your raw notes (markdown format)
-3. Open folder with Live Server (VS Code)
-4. Print to PDF: Ctrl+P
-
-**Complete Minified HTML Code:**
+You MUST use this specific wrapper structure and print CSS to ensure the dark theme prints correctly.
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Study Notes — Beautiful Guide</title>
-<style>
-:root{--heading-blue:#0055cc;--important-red:#d40000;--code-bg:#f7f7f7;--keyword-color:#0074d9;--string-color:#2ecc40;--comment-color:#aaaaaa;--function-color:#b10dc9;--import-color:#ff851b}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Georgia,"Times New Roman",serif;font-size:12pt;line-height:1.8;background:linear-gradient(135deg,#e8f4f8 0%,#f5f5f5 50%,#fff8e1 100%);color:#1a1a1a;padding:25mm;max-width:210mm;margin:0 auto;box-shadow:0 0 60px rgba(0,85,204,.15);animation:fadeIn 0.8s ease}
-h1,h2,h3,h4,h5,h6{font-family:Arial,Helvetica,sans-serif}
-.topic-heading{font-size:24pt;color:#fff;font-weight:bold;background:linear-gradient(135deg,#0055cc 0%,#0077ff 50%,#00aaff 100%);padding:20px 25px;margin:2.5em 0 1em 0;border-radius:15px;box-shadow:0 6px 20px rgba(0,85,204,.35),inset 0 -2px 10px rgba(0,0,0,.1);text-shadow:2px 2px 4px rgba(0,0,0,.3);border-left:8px solid #003d99;position:relative;overflow:hidden}
-.topic-heading:before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,255,255,.1),transparent);transform:rotate(45deg);animation:shine 3s infinite}
-h2{font-size:19pt;color:#0055cc;font-weight:bold;margin:2em 0 1em 0;padding:12px 20px;background:linear-gradient(90deg,rgba(0,85,204,.08) 0%,transparent 100%);border-left:6px solid #0055cc;border-radius:8px;box-shadow:0 2px 8px rgba(0,85,204,.1)}
-h3{font-size:17pt;color:#2c5aa0;font-weight:bold;margin:1.8em 0 .8em 0;padding:10px 15px;background:linear-gradient(90deg,rgba(44,90,160,.06) 0%,transparent 100%);border-left:5px solid #2c5aa0;border-radius:6px}
-h4{font-size:15pt;color:#2c5aa0;background:linear-gradient(135deg,#f0f7ff 0%,#e3f2fd 100%);border-left:5px solid #0055cc;padding:12px 18px;margin:1.5em 0 .8em 0;border-radius:8px;box-shadow:0 2px 6px rgba(0,85,204,.08)}
-.separator{color:#bbb;font-family:"Courier New",monospace;margin:2.5em 0 .8em 0;font-size:10pt;letter-spacing:.5px}
-p{margin:.6em 0;text-align:justify}
-.important{color:var(--important-red);font-weight:bold;font-size:1.08em;background:linear-gradient(90deg,rgba(212,0,0,.15) 0%,rgba(212,0,0,.08) 100%);padding:6px 12px;border-radius:8px;border-left:5px solid var(--important-red);padding-left:15px;display:inline-block;box-shadow:0 3px 10px rgba(212,0,0,.2);animation:pulse 2s infinite}
-.code-block{background:linear-gradient(135deg,#2d2d2d 0%,#1a1a1a 100%);border:3px solid #444;border-radius:15px;padding:25px;margin:1.5em 0;box-shadow:0 6px 18px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.1);font-family:"Courier New",monospace;font-size:10pt;position:relative;counter-reset:line;transition:all .3s ease}
-.code-block:hover{box-shadow:0 8px 25px rgba(0,85,204,.4),inset 0 1px 0 rgba(255,255,255,.1);border-color:#0055cc;transform:translateY(-2px)}
-.code-block pre{margin:0;white-space:pre-wrap;word-wrap:break-word;overflow-x:visible}
-.code-line{display:block;padding-left:3.5em;position:relative;color:#e0e0e0}
-.code-line:before{counter-increment:line;content:counter(line);position:absolute;left:0;width:2.5em;text-align:right;color:#666;font-size:9pt;padding-right:1em;border-right:2px solid #444;background:rgba(0,0,0,.2)}
-code{font-family:"Courier New",monospace;color:#c7254e;background:linear-gradient(135deg,rgba(199,37,78,.12) 0%,rgba(199,37,78,.08) 100%);padding:3px 8px;border-radius:5px;font-size:.95em;border:1px solid rgba(199,37,78,.2);box-shadow:0 1px 3px rgba(199,37,78,.1)}
-.keyword{color:#569cd6;font-weight:bold}
-.string{color:#ce9178}
-.comment{color:#6a9955;font-style:italic}
-.function{color:#dcdcaa;font-weight:bold}
-.import{color:#c586c0}
-.tag{color:#4ec9b0;font-weight:bold}
-.attr{color:#9cdcfe}
-.number{color:#b5cea8}
-.boolean{color:#569cd6;font-weight:bold}
-ul,ol{margin:1em 0 1em 2.5em;line-height:1.8;background:rgba(255,255,255,.5);padding:15px 20px 15px 40px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-li{margin:.8em 0;padding:8px 12px;border-radius:6px;transition:all .2s ease}
-li:hover{background:linear-gradient(90deg,rgba(0,85,204,.12) 0%,rgba(0,85,204,.05) 100%);padding-left:20px;box-shadow:0 2px 6px rgba(0,85,204,.15);transform:translateX(5px)}
-strong{font-weight:bold;color:#0055cc;text-shadow:0 1px 2px rgba(0,85,204,.1)}
-hr{border:none;height:3px;background:linear-gradient(90deg,transparent 0%,#0055cc 50%,transparent 100%);margin:2em 0;border-radius:2px}
-@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}body{background:white;padding:15mm;box-shadow:none}.code-block{page-break-inside:avoid;overflow:visible;background:#2d2d2d!important;border:2px solid #444!important}.code-line{color:#e0e0e0!important}.code-line:before{color:#888!important;border-right:1px solid #555!important;background:#1a1a1a!important}.keyword{color:#569cd6!important}.string{color:#ce9178!important}.comment{color:#6a9955!important}.function{color:#dcdcaa!important}.import{color:#c586c0!important}.tag{color:#4ec9b0!important}.attr{color:#9cdcfe!important}.number{color:#b5cea8!important}.boolean{color:#569cd6!important}.topic-heading{page-break-after:avoid;background:#0055cc!important;color:#fff!important;box-shadow:none}ul,ol{background:transparent;box-shadow:none}}
-.separator-line{color:#bbb;font-family:"Courier New",monospace;margin:2.5em 0 .8em 0;text-align:center;font-size:8pt;opacity:.6}
-@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse{0%,100%{box-shadow:0 3px 10px rgba(212,0,0,.2)}50%{box-shadow:0 3px 15px rgba(212,0,0,.35)}}
-@keyframes shine{0%{transform:translateX(-100%) translateY(-100%) rotate(45deg)}100%{transform:translateX(100%) translateY(100%) rotate(45deg)}}
-</style>
-</head>
 <body>
-<header style="font-family:Arial,Helvetica,sans-serif;color:#666;font-size:10pt;margin-bottom:8px">📚 Study Notes — Auto-Rendered Beautiful UI</header>
-<main id="render-target"><p style="color:#666;font-size:11pt">⏳ Loading formatted notes…</p></main>
-<script>
-(async function(){const target=document.getElementById("render-target");async function loadRaw(){try{const resp=await fetch("notes.html");if(!resp.ok)throw new Error("fetch failed");return await resp.text()}catch(e){return null}}
-const raw=await loadRaw();if(!raw){target.innerHTML='<p style="color:#a00"><strong>❌ Error:</strong> Could not load notes.html file.</p><p style="color:#666">Make sure:</p><ul style="color:#666"><li>File named <code>notes.html</code> exists in same folder</li><li>Open with Live Server (VS Code)</li><li>Both files are in same directory</li></ul>';return}
-function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
-const importantWords=["important","yaad rakhna","yaad","dhayan","dhyaan","remember","must","note","Do not","jaruri","Kyun zaroori","Agar na kiya","Agar","Best practice","Always","Never","Avoid","fail","crash","loss","problem","yaad rakhna chaiye","critical","essential","vital","key","crucial","CRITICAL","IMPORTANT"];
-function markImportant(s){if(!s||typeof s!=="string")return s;const sentences=s.split(/(?<=[\.\?\!\n])/);for(let j=0;j<sentences.length;j++){const sent=sentences[j];const lowered=sent.toLowerCase();for(const cue of importantWords){if(!cue)continue;const cueLc=cue.toLowerCase();if(lowered.indexOf(cueLc)!==-1){sentences[j]='<span class="important">'+sent+"</span>";break}}
-if(!/^<span class=\"important\">/.test(sentences[j])){let out=sentences[j];const phrases=importantWords.slice().sort((a,b)=>b.length-a.length);for(const ph of phrases){if(!ph)continue;const phEsc=ph.replace(/[-/\\^$*+?.()|[\]{}]/g,"\\$&");const re=new RegExp(phEsc,"gi");out=out.replace(re,function(m){return'<span class="important">'+m+"</span>"})}
-sentences[j]=out}}
-return sentences.join("")}
-function highlightCode(code){const kw=['import','from','def','class','if','elif','else','for','while','return','try','except','with','as','pass','break','continue','cd','ls','mkdir','pip','python','java','django','manage','len','print','range','append','insert','remove','pop','sort','clear','split','join','strip','replace','upper','lower','get','keys','values','items','update','add'];const kwSet=new Set(kw.map(k=>k.toLowerCase()));let out='';let i=0;while(i<code.length){if(code[i]==='#'){let j=i;while(j<code.length&&code[j]!=='\n')j++;out+='<span class="comment">'+esc(code.substring(i,j))+'</span>';i=j;continue;}if(code[i]==='"'||code[i]==="'"){const q=code[i];let j=i+1;while(j<code.length&&code[j]!==q){if(code[j]==='\\')j++;j++;}if(j<code.length)j++;out+='<span class="string">'+esc(code.substring(i,j))+'</span>';i=j;continue;}if(/[a-zA-Z_]/.test(code[i])){let j=i;while(j<code.length&&/[a-zA-Z0-9_]/.test(code[j]))j++;const word=code.substring(i,j);const nextChar=j<code.length?code[j]:'';if(kwSet.has(word.toLowerCase())){out+='<span class="keyword">'+esc(word)+'</span>';}else if(nextChar==='('){out+='<span class="function">'+esc(word)+'</span>';}else if(/^(True|False|None|true|false|null)$/.test(word)){out+='<span class="boolean">'+esc(word)+'</span>';}else{out+=esc(word);}i=j;continue;}if(/\d/.test(code[i])){let j=i;while(j<code.length&&/[\d.]/.test(code[j]))j++;out+='<span class="number">'+esc(code.substring(i,j))+'</span>';i=j;continue;}out+=esc(code[i]);i++;}return out}
-const lines=raw.replace(/\r/g,"").split("\n");const frag=document.createDocumentFragment();let i=0,inCode=false,codeLang="",codeBuf=[];function flushCode(){if(!inCode)return;const div=document.createElement("div");div.className="code-block";const pre=document.createElement("pre");const inner=highlightCode(codeBuf.join("\n")).split("\n").map((l)=>'<span class="code-line">'+l+"</span>").join("\n");pre.innerHTML=inner;div.appendChild(pre);frag.appendChild(div);inCode=false;codeBuf=[];codeLang=""}
-while(i<lines.length){const L=lines[i];const mCode=L.match(/^\s*```\s*(\w+)?/);if(mCode){if(!inCode){inCode=true;codeLang=mCode[1]||"";codeBuf=[]}else{flushCode()}
-i++;continue}
-if(inCode){codeBuf.push(L);i++;continue}
-if(/^=+\s*$/.test(L)||/^-+\s*$/.test(L)){const d=document.createElement("div");d.className="separator-line";d.textContent=L.trim();frag.appendChild(d);i++;continue}
-if(/^#\s+/.test(L)){const h=document.createElement("h1");h.className="topic-heading";h.innerHTML=markImportant(esc(L.replace(/^#\s+/,"")));frag.appendChild(h);i++;continue}
-if(/^##\s+/.test(L)){const h2=document.createElement("h2");h2.innerHTML=markImportant(esc(L.replace(/^##\s+/,"")));frag.appendChild(h2);i++;continue}
-if(/^###\s+/.test(L)){const h3=document.createElement("h3");h3.innerHTML=markImportant(esc(L.replace(/^###\s+/,"")));frag.appendChild(h3);i++;continue}
-if(/^\*\*\*\s*$/.test(L)){frag.appendChild(document.createElement("hr"));i++;continue}
-if(/^\s*[-*]\s+/.test(L)){const ul=document.createElement("ul");while(i<lines.length&&/^\s*[-*]\s+/.test(lines[i])){const li=document.createElement("li");li.innerHTML=markImportant(esc(lines[i].replace(/^\s*[-*]\s+/,"")));ul.appendChild(li);i++}
-frag.appendChild(ul);continue}
-if(/^\s*\d+\.\s+/.test(L)){const ol=document.createElement("ol");while(i<lines.length&&/^\s*\d+\.\s+/.test(lines[i])){const li=document.createElement("li");li.innerHTML=markImportant(esc(lines[i].replace(/^\s*\d+\.\s+/,"")));ol.appendChild(li);i++}
-frag.appendChild(ol);continue}
-if(/^\s*$/.test(L)){i++;continue}
-if(/`[^`]+`/.test(L)&&(/^(Step|Command|Task|Usage|Example|Output):/i.test(L)||L.match(/`[a-z_]+\s+[^`]*`/)||L.match(/`[^`]{20,}`/))){let parts=L.split(/(`[^`]+`)/);for(let part of parts){if(/^`[^`]+`$/.test(part)){const code=part.slice(1,-1);const div=document.createElement("div");div.className="code-block";const pre=document.createElement("pre");pre.innerHTML='<span class="code-line">'+highlightCode(code)+"</span>";div.appendChild(pre);frag.appendChild(div)}else if(part.trim()){const p=document.createElement("p");p.innerHTML=markImportant(esc(part).replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>"));frag.appendChild(p)}}i++;continue}
-let phtml=esc(L);phtml=phtml.replace(/\*\*(.*?)\*\*/g,"<strong>$1</strong>");phtml=phtml.replace(/`([^`]+)`/g,"<code>$1</code>");phtml=markImportant(phtml);const p=document.createElement("p");p.innerHTML=phtml;frag.appendChild(p);i++}
-flushCode();target.innerHTML="";target.appendChild(frag)})();
-</script>
+    <div id="loader">Loading...</div>
+    
+    <!-- WRAPPER IS MANDATORY FOR PRINTING BACKGROUNDS -->
+    <div class="print-wrapper">
+        <div class="layout">
+            <nav class="sidebar" id="sidebar">
+                <!-- TOC goes here -->
+            </nav>
+            <main class="main-content" id="content-area">
+                <!-- Markdown content goes here -->
+            </main>
+        </div>
+    </div>
 </body>
-</html>
 ```
 
-## 🎯 WORKFLOW
-1. Save HTML code as `NotesRenderer.html`
-2. Create `notes.html` with markdown notes:
+**CSS Rules (Incude these exactly):**
+
+```css
+:root {
+    /* Color Palette - Deep Dark Theme */
+    --bg-primary: #0f1115;
+    --bg-secondary: #161b22;
+    --text-primary: #ffffff; /* Pure white for better readability */
+    --text-secondary: #e6edf3; /* Much brighter grey */
+    --accent-blue: #58a6ff;
+    --accent-gradient: linear-gradient(135deg, #61dafb 0%, #4facfe 100%);
+    --border-color: #30363d;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+}
+
+h1 {
+    font-family: 'Outfit', sans-serif;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3rem;
+    border-bottom: 3px solid var(--border-color);
+}
+
+h2 {
+    color: var(--text-primary);
+    font-size: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Topic & Module Sections - Big Bold Blue */
+h2.topic-section, h2.module-section {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #4facfe;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-left: 5px solid #4facfe;
+    padding-left: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Mac-Style Code Blocks */
+pre.mac-window {
+    background: #0d1115;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin: 2rem 0;
+    
+    /* STRICT WRAPPING FOR PDF */
+    white-space: pre-wrap !important;
+    word-break: break-word !important; 
+    overflow-x: hidden !important;
+}
+
+.code-header {
+    background: #161b22;
+    padding: 8px 15px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex; justify-content: space-between;
+    align-items: center;
+}
+
+/* Dots helper (add these classes too) */
+.control { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+.red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+
+code {
+    font-family: 'Fira Code', monospace;
+    white-space: pre-wrap !important; 
+    word-wrap: break-word !important;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid var(--border-color);
+}
+
+th {
+    background: #1c2128;
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+tr:hover {
+    background: rgba(88, 166, 255, 0.1);
+}
+
+/* CRITICAL PRINT STYLES - DO NOT MODIFY */
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    body { margin: 0; padding: 0; }
+    
+    .print-wrapper {
+        background-color: #0f1115 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        min-height: 100vh;
+        width: 100%;
+        position: absolute; top: 0; left: 0;
+        margin: 0; padding: 0;
+    }
+
+    /* Force white text for readability */
+    .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th {
+        color: #ffffff !important;
+    }
+
+    /* Keep code blocks distinct */
+    pre {
+        border: 1px solid #444;
+        page-break-inside: avoid;
+    }
+
+    .sidebar, .copy-btn, .window-controls, #loader {
+        display: none !important;
+    }
+
+    .layout {
+        display: block;
+    }
+    
+    .main-content { padding: 2rem !important; margin: 0 auto; max-width: 100%; }
+    
+    a { text-decoration: none !important; border-bottom: none !important; }
+}
 ```
-# Topic Name
-This is important concept.
-## Subtitle
-- List item 1
-\`\`\`python
-print("Hello")
-\`\`\`
+
+## 🧠 Javascript Logic (Copy this logic)
+
+Use this specific logic to handle the Markdown parsing. It fixes common bugs and handling specific indented headers.
+
+```javascript
+document.addEventListener("DOMContentLoaded", () => {
+    // ... Fetch MD logic ...
+    
+    // 1. Pre-process Markdown (Fix indented modules)
+    // Converts "  Module 1:" to "## MODULE_MARKER Module 1:"
+    let processed = markdown.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, '## MODULE_MARKER $1');
+    // Converts "Topic X.X:" to special heading
+    processed = processed.replace(/^##\s+(Topic\s+\d+\.\d+:.*)/gm, '## TOPIC_MARKER $1');
+    // Converts "1.1:" to bold
+    processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
+
+    // 2. Configure Renderer
+    const renderer = new marked.Renderer();
+    
+    // Safety check: Cast code to string to avoid [object Object] crash
+    renderer.code = function(code, language) {
+        const safeCode = code ? String(code) : '';
+        // Robust highlighting with Auto-detection
+        let highlighted = safeCode;
+        // If language is provided and valid, use it
+        if (language && hljs.getLanguage(language)) {
+            try {
+                highlighted = hljs.highlight(safeCode, { language: language }).value;
+            } catch (e) { highlighted = hljs.highlightAuto(safeCode).value; }
+        } else {
+            // Otherwise, or if 'plaintext', force auto-detection
+            highlighted = hljs.highlightAuto(safeCode).value;
+        }
+        
+        return `
+        <pre class="mac-window">
+            <div class="code-header">
+                <div class="window-controls">...</div>
+                <button onclick="copy(...)">Copy</button>
+            </div>
+            <code class="hljs language-${validLang}">${highlighted}</code>
+        </pre>`;
+    };
+    
+    renderer.heading = function(text, level) {
+         const safeText = text ? String(text) : '';
+         const id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+         
+         // Check if this is a Module section
+         if (safeText.startsWith('MODULE_MARKER ')) {
+             const cleanText = safeText.replace('MODULE_MARKER ', '');
+             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+             return `<h${level} class="module-section" id="${cleanId}">${cleanText}</h${level}>`;
+         }
+         
+         // Check if this is a Topic section
+         if (safeText.startsWith('TOPIC_MARKER ')) {
+             const cleanText = safeText.replace('TOPIC_MARKER ', '');
+             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+             return `<h${level} class="topic-section" id="${cleanId}">${cleanText}</h${level}>`;
+         }
+         
+         return `<h${level} id="${id}">${safeText}</h${level}>`;
+    };
+
+    // 3. Render
+    contentArea.innerHTML = marked.parse(processed, { renderer: renderer });
+});
 ```
-3. Open with Live Server
-4. Print to PDF (Ctrl+P)
-
-## ✅ Features
-- Minified for performance
-- Character-by-character parser (faster than regex)
-- Sentence-level important highlighting
-- Auto line numbers in code blocks
-- PDF-ready (no horizontal scrolling)
-- Live reload support
-
-## ⚠️ CRITICAL: Code Integrity Check
-**IMPORTANT**: After creating the HTML file, verify that:
-1. The `highlightCode` function is **complete** (check the string parsing section with backtick support)
-2. The closing `</script></body></html>` tags are present
-3. If code blocks don't display with dark background, the JavaScript is likely truncated
-
