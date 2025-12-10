@@ -2800,7 +2800,7 @@ Array define karo, `as const` lagao, aur `typeof ...[number]` se type muft mein 
 
 # 📦 Module 6: Narrowing & Type Guards
 
-## 🎯 1. Topic: Basics of Narrowing (`typeof`, `instanceof`, Truthiness)
+## 🎯 6.1. Topic: Basics of Narrowing (`typeof`, `instanceof`, Truthiness)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -3073,7 +3073,7 @@ Agar aap Discriminated Union use nahi karoge, toh aapko `response.transactionId`
 
 -----
 
-## 🎯 1. Topic: User-Defined Type Guards (`item is Type`)
+## 🎯 6.2 Topic: User-Defined Type Guards (`item is Type`)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -3199,7 +3199,7 @@ Agar aap normal `boolean` return karte, toh `if (isFish(pet))` ke andar bhi Type
 
 -----
 
-## 🎯 1. Topic: The `in` Operator
+## 🎯 6.3 Topic: The `in` Operator
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -3328,7 +3328,7 @@ Student, ye Module 6 bohot zaroori tha. TypeScript ka asli maza "Narrowing" mein
 
 # 📦 Module 7: Strict Safety, Errors & The "satisfies" Operator
 
-## 🎯 1. Topic: Handling `null` / `undefined` (Optional Chaining `?.` & Nullish Coalescing `??`)
+## 🎯 7.1 Topic: Handling `null` / `undefined` (Optional Chaining `?.` & Nullish Coalescing `??`)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -3453,7 +3453,7 @@ User City: Unknown City
 
 -----
 
-## 🎯 1. Topic: Typing Errors in try/catch (`unknown` error)
+## 🎯 7.2. Topic: Typing Errors in try/catch (`unknown` error)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -3575,7 +3575,7 @@ Agar error handling code mein hi error aa jaye (jaise `undefined.message`), toh 
 
 -----
 
-## 🎯 1. Topic: The `satisfies` Operator
+## 🎯 7.3 Topic: The `satisfies` Operator
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -3694,7 +3694,7 @@ Aapko baar-baar Type Assertion (`as`) use karna padega ya extra `if` checks laga
 
 -----
 
-## 🎯 1. Topic: Sanitizing User Inputs (Validation)
+## 🎯 7.4 Topic: Sanitizing User Inputs (Validation)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -3829,7 +3829,7 @@ Aaj aapne "Defensive Coding" seekhi hai. Matlab code aise likho ki wo khud ko ba
 
 # 📦 Module 8: Classes & OOP (Service Layer)
 
-## 🎯 1. Topic: Classes, Constructors & Access Modifiers (`public`, `private`, `protected`)
+## 🎯 8.1. Topic: Classes, Constructors & Access Modifiers (`public`, `private`, `protected`)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -3958,7 +3958,7 @@ Agar sab kuch `public` bana diya, toh aapka code "Spaghetti Code" ban jayega. Ko
 
 -----
 
-## 🎯 1. Topic: Abstract Classes vs Interfaces
+## 🎯 8.2. Topic: Abstract Classes vs Interfaces
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -4079,7 +4079,7 @@ Agar aapne code reuse nahi kiya (Abstract class use nahi ki), toh aap same logic
 
 -----
 
-## 🎯 1. Topic: Implementing Interfaces (`implements`)
+## 🎯 8.3. Topic: Implementing Interfaces (`implements`)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -4207,7 +4207,7 @@ Agar Standard Interface nahi hoga, toh Stripe hatake PayPal lagane mein poori we
 
 -----
 
-## 🎯 1. Topic: Composition vs Inheritance
+## 🎯 8.4. Topic: Composition vs Inheritance
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -4342,7 +4342,7 @@ Classes aur Interfaces ka sahi use hi "Clean Architecture" ki neev (foundation) 
 # 📦 Module 9: Advanced Generics
 
 
-## 🎯 1. Topic: Generic Functions & Interfaces (`<T>`)
+## 🎯 9.1. Topic: Generic Functions & Interfaces (`<T>`)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -4477,7 +4477,7 @@ Aapko har Type ke liye alag Interface banana padega (`UserResponse`, `ProductRes
 
 -----
 
-## 🎯 1. Topic: Generic Constraints (`extends`)
+## 🎯 9.2. Topic: Generic Constraints (`extends`)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -4588,7 +4588,7 @@ Agar constraint nahi lagaya aur `T.someProp` access kiya, toh Code Compile hi na
 
 -----
 
-## 🎯 1. Topic: Conditional Types (`T extends U ? X : Y`)
+## 🎯 9.3. Topic: Conditional Types (`T extends U ? X : Y`)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -4699,7 +4699,7 @@ Agar complex libraries bana rahe ho, toh bina conditional types ke aapko har com
 
 -----
 
-## 🎯 1. Topic: The `infer` Keyword
+## 🎯 9.4. Topic: The `infer` Keyword
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -4808,7 +4808,7 @@ Aapko manual types maintain karne padenge. Agar function return type change hua,
 
 -----
 
-## 🎯 1. Topic: Mapped Types & Key Remapping (`as`)
+## 🎯 9.5. Topic: Mapped Types & Key Remapping (`as`)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -4950,7 +4950,7 @@ Agar aap `infer` aur `Mapped Types` samajh gaye ho, toh aap ab **Top 10% TypeScr
 
 # 📦 Module 10: Utility Types
 
-## 🎯 1. Topic: `Partial`, `Required`, `Readonly`
+## 🎯 10.1. Topic: `Partial`, `Required`, `Readonly`
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -5070,7 +5070,7 @@ Agar `Partial` use nahi kiya, toh update function mein user ko zabardasti saara 
 
 -----
 
-## 🎯 1. Topic: `Pick` vs `Omit`
+## 🎯 10.2. Topic: `Pick` vs `Omit`
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -5196,7 +5196,7 @@ Agar aapne manually naya interface banaya (`interface ProductCard { name: string
 
 -----
 
-## 🎯 1. Topic: `Record` (Dynamic Objects)
+## 🎯 10.3. Topic: `Record` (Dynamic Objects)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -5311,7 +5311,7 @@ Agar Index Signature use kiya (`key: string`) specific keys ki jagah, toh aap ty
 
 -----
 
-## 🎯 1. Topic: `Awaited<T>` (Unwrapping Promises)
+## 🎯 10.4. Topic: `Awaited<T>` (Unwrapping Promises)
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy):
 
@@ -5436,7 +5436,7 @@ Student, ye Utility Types aapki coding speed 2x kar denge. Aapko naye types likh
 
 -----
 
-## 🎯 Topic 1: Typing Props & State
+## 🎯 Topic 11.1: Typing Props & State
 
 Is topic mein hum basic foundation set karenge ki React mein TypeScript ke saath Props aur State ko kaise define karte hain.
 
@@ -5550,7 +5550,7 @@ Agar typing nahi ki, toh **"undefined is not a function"** error production mein
 
 -----
 
-## 🎯 Topic 2: `React.FC` vs Functions
+## 🎯 Topic 11.2: `React.FC` vs Functions
 
 React mein component likhne ke 2 tareeke hain. Kaunsa use karein?
 
@@ -5632,7 +5632,7 @@ const ButtonNormal = ({ label }: ButtonProps) => {
 
 -----
 
-## 🎯 Topic 3: Typing `children` (`ReactNode`)
+## 🎯 Topic 11.3: Typing `children` (`ReactNode`)
 
 Components ke beech mein content pass karna.
 
@@ -5723,7 +5723,7 @@ Agar component strictly sirf text accept kare (jaise Button), toh `children: str
 
 -----
 
-## 🎯 Topic 4: Intrinsic Elements (HTML Attributes)
+## 🎯 Topic 11.4: Intrinsic Elements (HTML Attributes)
 
 Apne custom component mein standard HTML props (onClick, className, id) kaise allow karein?
 
@@ -5806,7 +5806,7 @@ Use `ComponentPropsWithoutRef` or `ComponentPropsWithRef`. Purana `HTMLProps` ma
 
 -----
 
-## 🎯 Topic 5: Polymorphic Components
+## 🎯 Topic 11.5: Polymorphic Components
 
 Ye Module ka Boss Level hai. Components jo apna roop badal sakte hain.
 
@@ -5949,7 +5949,7 @@ Agar Polymorphism type-safe nahi banaya, toh developer `<Text as="button" href="
 
 -----
 
-## 🎯 Topic 1: Typing Standard Hooks (`useState`, `useRef`, `useReducer`)
+## 🎯 Topic 12.1: Typing Standard Hooks (`useState`, `useRef`, `useReducer`)
 
 React ke built-in hooks ko TypeScript ke saath kaise control karein.
 
@@ -6045,7 +6045,7 @@ const HooksExample = () => {
 
 -----
 
-## 🎯 Topic 2: Form Events (`ChangeEvent`, `FormEvent`)
+## 🎯 Topic 12.2: Form Events (`ChangeEvent`, `FormEvent`)
 
 Forms handle karte waqt `e` (event) object ka type kya hota hai?
 
@@ -6136,7 +6136,7 @@ Agar handler inline likh rahe ho (`onChange={(e) => ...}`), toh TS aksar khud ty
 
 -----
 
-## 🎯 Topic 3: `useContext` (Global Store Types)
+## 🎯 Topic 12.3: `useContext` (Global Store Types)
 
 Puri app mein data share karna type-safety ke saath.
 
@@ -6230,7 +6230,7 @@ export const useTheme = () => {
 
 -----
 
-## 🎯 Topic 4: Runtime Validation (Zod + TypeScript)
+## 🎯 Topic 12.4: Runtime Validation (Zod + TypeScript)
 
 **This is the Hero Topic.** 🦸‍♂️
 TypeScript compile time pe chalta hai, Zod runtime pe chalta hai. Dono milkar unbreakable shield banate hain.
@@ -6351,7 +6351,7 @@ Ab tum **Zod** aur **useState** ko combine karke ek chhota sa form banao.
 
 -----
 
-## 🎯 Topic 1: Typing Promises & Async Functions
+## 🎯 Topic 13.1: Typing Promises & Async Functions
 
 Async functions se jo data aata hai, uska type kaise define karein?
 
@@ -6454,7 +6454,7 @@ Hamesha `try-catch` block use karo async functions ke andar errors handle karne 
 
 -----
 
-## 🎯 Topic 2: API Wrapper Types (`ApiSuccess`, `ApiError`)
+## 🎯 Topic 13.2: API Wrapper Types (`ApiSuccess`, `ApiError`)
 
 Backend se response kabhi success hota hai, kabhi fail. Isse "Smart Type" se kaise handle karein?
 
@@ -6567,7 +6567,7 @@ if (response.status === "success") {
 
 -----
 
-## 🎯 Topic 3: Pagination & Filter Types
+## 🎯 Topic 13.3: Pagination & Filter Types
 
 E-commerce mein hum hazaaron products ek saath nahi mangate. Hum "Pages" mein data mangate hain.
 
