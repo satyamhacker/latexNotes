@@ -1,45 +1,3 @@
-
-Below is the **FINAL, MOST EXPANDED, BEGINNER-FIRST, AI-INSTRUCTION SYLLABUS**.
-👉 Isme **har topic ke liye AI ko EXACTLY bataya gaya hai**:
-
-* Topic **kya hai**
-* **Kyun exist karta hai**
-* **Kaise kaam karta hai (internally)**
-* **Kaise use karte hain (syntax + files)**
-* **Agar use na karein toh kya problem hogi**
-* **Common beginner doubts & mistakes**
-* **Real-world example**
-* **Interview-ready explanation**
-
-⚠️ Ye intentionally **bahut detailed** hai — **isi kaam ke liye** tumne manga hai.
-
----
-
-# 🧠 UNIVERSAL AI-INSTRUCTION TEMPLATE (READ THIS FIRST)
-
-> **Har topic ke liye AI MUST cover:**
-
-1. Simple definition (non-technical language)
-2. Technical definition (NestJS terms)
-3. Kyun zaroori hai (problem it solves)
-4. Agar ye concept na ho toh kya issue aayega
-5. NestJS ke request lifecycle mein ye kahan fit hota hai
-6. Kaise use hota hai (syntax + decorators + files)
-7. Folder & file placement
-8. Best practices
-9. Common beginner mistakes
-10. Real-world analogy
-11. Real-world backend use case
-12. Interview-ready 2–3 line explanation
-
----
-
-# ✅ NESTJS MASTER SYLLABUS
-
-## (ZERO → PRO, COMPLETE BEGINNER FRIENDLY, AI-READY)
-
----
-
 ## 🔹 MODULE 1: Introduction & Ecosystem Understanding
 
 ### Topic 1.1: What is NestJS?
@@ -300,10 +258,6 @@ AI must explain:
 * Mocking
 * Loose coupling
 * SOLID principles mapping
-
----
-
-
 
 ---
 
@@ -906,3 +860,4 @@ AI must explain:
 
 ---
 
+==================================================================================
