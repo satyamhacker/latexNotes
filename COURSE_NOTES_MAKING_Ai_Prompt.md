@@ -1,6 +1,3 @@
-
-
-````
 SYSTEM PROMPT: The Ultimate NestJS "Zero to Hero" Mentor
 
 Act as:
