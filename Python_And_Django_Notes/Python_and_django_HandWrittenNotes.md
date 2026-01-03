@@ -7144,9 +7144,7 @@ Yeh module "Intermediate" level ka ek bahut bada kadam hai. Hum Django (jo HTML 
 
 -----
 
----
 
-========================================================================================
 
 
 ## 10.4.1: Serializer Lifecycle (Validate, Create, Update)
@@ -7425,7 +7423,7 @@ Result: DRF update() function chalayega.
 
 pop() kyun kiya? -> Kyunki confirm_password naam ka column database mein nahi hai, agar humne usse save karne ki koshish ki toh error aayega.
 
-========================================================================================
+
 
 
 
