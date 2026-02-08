@@ -9,38 +9,38 @@
 ## **Module 0: Electronics Foundation (Safety First)**
 
 *Hardware engineer banne ki pehli shart: Board Jalna Nahi Chahiye.*
-###  0.0: Lab Safety + Tools (first day)
+###Topic  0.0: Lab Safety + Tools (first day)
 Multimeter basics (V/I/continuity), polarity check
 Bench power supply: current limit set karna, safe power-up
 Common lab mistakes: reverse polarity, short circuits
 
-### 0.1: Electricity Basics & Component Selection
+###Topic 0.1: Electricity Basics & Component Selection
 
 * **Voltage, Current, Power:** The Water Analogy explained.
 * **Ohm’s Law ():** Calculating current limiting resistors for LEDs/Optocouplers.
 * **Power Ratings:** Why resistors burn (1/4W vs 1W selection guide).
 
-### 0.2: Logic Levels & Signal Conditioning
+###Topic 0.2: Logic Levels & Signal Conditioning
 
 * **3.3V vs 5V Logic:** Why 5V kills ESP32.
 * **Voltage Dividers:** Converting 12V/24V industrial signals to 3.3V.
 
 * **Bi-Directional Level Shifters:** Connecting 5V I2C/SPI sensors safely.
 
-### 0.3: Circuit Isolation & Protection (Hospital Standard)
+###Topic 0.3: Circuit Isolation & Protection (Hospital Standard)
 
 * **Galvanic Isolation:** Using Optocouplers (PC817) to separate High Voltage from MCU.
 * **Flyback Diodes:** Protecting ESP32 from motor/relay back-EMF spikes.
 * **Power Filtering:** Decoupling capacitors (100nF vs 100uF) logic.
 
-### 0.4: Active Components & Power Design (🆕 ADD)
+###Topic 0.4: Active Components & Power Design (🆕 ADD)
 * **MOSFET Switching:** N-Channel/P-Channel for load control
 * **ESD Protection:** TVS diodes placement
 * **Power Supply:** LDO vs Buck converter selection
 * **Current Sensing:** Shunt resistors, INA219
 ---
 
-### 0.5: Grounding & PCB Basics (🆕 ADD)
+###Topic 0.5: Grounding & PCB Basics (🆕 ADD)
 * **Grounding:** Star ground, Ground loops prevention
 * **Capacitor Types:** Ceramic vs Electrolytic vs Tantalum
 * **PCB Layout Intro:** Component placement basics
@@ -48,12 +48,12 @@ Common lab mistakes: reverse polarity, short circuits
 	Return current paths, ground planes vs star ground when/why
 	EMI basics in layout: loop area minimization, TVS placement, connector entry protection
 
-### 0.6: Prototyping & Wiring Basics
+###Topic 0.6: Prototyping & Wiring Basics
 Breadboard limitations (noise, loose contact), perfboard basics
 Wire gauge selection, connectors (JST/screw terminal), strain relief
 Soldering basics + cold joint identification
 
-### 0.7: Essential Protection (product reality)
+###Topic 0.7: Essential Protection (product reality)
 Reverse polarity protection (series diode vs ideal diode MOSFET)
 Fuse / PTC selection basics
 Inrush current + bulk capacitor sizing intuition
@@ -62,25 +62,25 @@ Inrush current + bulk capacitor sizing intuition
 
 *Professional tools setup.*
 
-### 1.1: VS Code & PlatformIO Setup
+###Topic 1.1: VS Code & PlatformIO Setup
 
 * **Why PlatformIO:** IntelliSense, Faster compilation, Multi-board management.
 * **Project Structure:** `src`, `lib`, `include`, `platformio.ini` explained.
 * **Dependency Management:** Locking library versions (`lib_deps`) to prevent updates from breaking code.
 
-### 1.2: Git & Version Control
+###Topic 1.2: Git & Version Control
 
 * **Git Basics:** `init`, `add`, `commit`, `push`.
 * **Branching Strategy:** Using `feature-branches` to test without breaking main code.
 * **Github Remote:** Pushing code to cloud for backup.
 
-### 1.3: Flashing / Boot / Serial Workflow
+###Topic 1.3: Flashing / Boot / Serial Workflow
 EN/BOOT behavior, download mode, common flashing errors
 Serial monitor boot logs (“Guru Meditation” first-level reading)
 esptool.py, COM port issues, USB-UART driver issues
 
 
-### 1.4: Build System Basics (PlatformIO)
+###Topic 1.4: Build System Basics (PlatformIO)
 environments, build flags, monitor_speed, upload_port
 sdkconfig basics (even if Arduino framework use kar rahe h
 
@@ -88,44 +88,44 @@ sdkconfig basics (even if Arduino framework use kar rahe h
 
 ## **Module 2: Advanced C++ & Bit Manipulation**
 
-### 2.0: C/C++ Embedded Basics Crash
+###Topic 2.0: C/C++ Embedded Basics Crash
 compilation/linking concept, .h/.cpp include model
 scope/lifetime, pass-by-value/reference
 classes basics (constructor/destructor basics) for drivers
 
 *Custom Driver likhne ke tools.*
 
-### 2.1: Data Types & Optimization
+###Topic 2.1: Data Types & Optimization
 
 * **Fixed Width Integers:** `int8_t`, `uint16_t`, `uint32_t` (Industry standard).
 * **Structures:** Packing sensor data efficiently (`struct PatientData`).
 * **Callbacks & Lambdas:** Asynchronous code handling (Essential for MQTT/WiFi).
 
-### 2.2: Bitwise Operators Masterclass (⚠️ The "Magic" Key)
+###Topic 2.2: Bitwise Operators Masterclass (⚠️ The "Magic" Key)
 
 * **Binary & Hex:** Reading Datasheet addresses (`0x48`, `0xFF`).
 * **Operators:** AND (`&`), OR (`|`), XOR (`^`), NOT (`~`), Shifts (`<<`, `>>`).
 * **Bit Masking:** Setting/Clearing specific bits in a Register.
 
-### 2.3: Pointers & Hardware Access
+###Topic 2.3: Pointers & Hardware Access
 
 * **Pointer Basics:** Memory addresses explained.
 * **Direct Register Access:** Bypassing libraries to control pins directly.
 
 
-### 2.4: State Machines & Control Flow (🆕 MUST ADD)
+###Topic 2.4: State Machines & Control Flow (🆕 MUST ADD)
 * **FSM Basics:** States, Transitions, Events
 * **Switch-Case Implementation**
 * **Table-Driven State Machines**
 * **Hierarchical State Machines (HSM)**
 
-### 2.5: C++ Keywords for Embedded (🆕 CRITICAL ADD)
+###Topic 2.5: C++ Keywords for Embedded (🆕 CRITICAL ADD)
 * **`volatile`:** ISR variables - Compiler optimization prevention
 * **`static`:** Persistent local variables, Private functions
 * **`const` & `constexpr`:** Flash storage, Compile-time constants
 * **`enum class`:** Type-safe enumerations for states
 
-### 2.6: Memory & Data Handling (🆕 ADD)
+###Topic 2.6: Memory & Data Handling (🆕 ADD)
 * **String Handling:** char[] vs String class (Memory trap!)
 * **Circular Buffer:** Ring buffer implementation
 * **Union:** Byte manipulation for protocols
@@ -140,14 +140,14 @@ void IRAM_ATTR buttonISR() {
 }
 
 
-### 2.7: Preprocessor & Advanced Types (🆕 ADD)
+###Topic 2.7: Preprocessor & Advanced Types (🆕 ADD)
 * **Preprocessor:** #ifdef, #define, #pragma once
 * **Function Pointers:** Callback mechanism core
 * **Bit Fields:** Struct-based register mapping
 * **Type Casting:** static_cast, reinterpret_cast
 * **sizeof():** Memory size calculations
 
-### 2.8: Coding Standards for Firmware
+###Topic 2.8: Coding Standards for Firmware
 naming, file structure for drivers, error codes pattern (enum class Error)
 non-blocking patterns baseline (millis-based scheduling) before FreeRTOS
 
@@ -156,7 +156,7 @@ non-blocking patterns baseline (millis-based scheduling) before FreeRTOS
 
 *Chip ke andar ka naksha.*
 
-### 3.1: ESP32 Internal Architecture
+###Topic 3.1: ESP32 Internal Architecture
 
 * **Dual Core:** Protocol CPU (Core 0) vs App CPU (Core 1).
 * **Memory Map:** Flash vs SRAM vs RTC Memory.
@@ -167,25 +167,25 @@ non-blocking patterns baseline (millis-based scheduling) before FreeRTOS
 
 ```
 
-### 3.2: GPIO & Interrupts
+###Topic 3.2: GPIO & Interrupts
 
 * **Input Modes:** Pull-up, Pull-down, High-Z.
 * **Interrupts (ISR):** `IRAM_ATTR` usage for handling buttons/sensors instantly.
 * **Debouncing:** Hardware (RC Filter) vs Software logic.
 
-### 3.3: Analog Interfaces
+###Topic 3.3: Analog Interfaces
 
 * **ADC Calibration:** Correcting non-linear readings.
 * **High-Speed Sampling:** Using Timers to capture ECG/Pulse waveforms.
 
 ---
 
-### 3.4: PWM & Timer Peripherals (🆕 MUST ADD)
+###Topic 3.4: PWM & Timer Peripherals (🆕 MUST ADD)
 * **LEDC:** LED/Motor speed control
 * **Hardware Timers:** Precise intervals
 * **Servo Control:** Using LEDC
 
-### 3.5: Advanced Peripherals (🆕 ADD)
+###Topic 3.5: Advanced Peripherals (🆕 ADD)
 * **DAC:** Audio output, Waveform generation
 * **Touch Sensors:** Capacitive touch buttons (Built-in)
 * **PCNT:** Hardware pulse counting (Encoders, Flow meters)
@@ -193,29 +193,29 @@ non-blocking patterns baseline (millis-based scheduling) before FreeRTOS
 * **ULP Coprocessor:** Ultra-low power background tasks
 
 
-### 3.6: ESP32 Pin Gotchas (🆕 CRITICAL - Beginner Traps!)
+###Topic 3.6: ESP32 Pin Gotchas (🆕 CRITICAL - Beginner Traps!)
 * **Input-Only Pins:** GPIO 34, 35, 36, 39 - NO OUTPUT!
 * **ADC2 + WiFi:** ADC2 channels blocked when WiFi active
 * **ADC Attenuation:** 0dB, 2.5dB, 6dB, 11dB selection
 * **Flash Pins:** GPIO 6-11 - DO NOT USE (Connected to flash)
 
-### 3.7: Specialized Peripherals (🆕 ADD)
+###Topic 3.7: Specialized Peripherals (🆕 ADD)
 * **MCPWM:** Motor Control PWM (H-Bridge, BLDC)
 * **I2S:** Audio streaming (Microphones, DAC)
 * **PSRAM:** External RAM usage
 * **GPIO Matrix:** Flexible pin remapping
 
-### 3.8: Boot Process + Partition/Flash Basics
+###Topic 3.8: Boot Process + Partition/Flash Basics
 ROM bootloader basics, boot log meaning
 partition table concept (already Module 8.6 me hai, but yahan “why it matters” intro)
 
 
-### 3.9: GPIO Electrical Limits
+###Topic 3.9: GPIO Electrical Limits
 max pin current, input leakage, internal pull-ups strength reality
 safe driving of LEDs/relays/modules (practical limits)
 
 
-### 3.10 (optional but valuable): RF/ADC Practical Notes
+###Topic 3.10 (optional but valuable): RF/ADC Practical Notes
 ADC noise, input impedance, recommended RC filter
 WiFi/BLE antenna placement basics (product-level awareness)
 
@@ -236,19 +236,19 @@ analogRead(GPIO_NUM_32);  // ADC1 - Works with WiFi
 
 *Jab Library na mile, toh khud banao.*
 
-### 4.1: Decoding the Datasheet 📖
+###Topic 4.1: Decoding the Datasheet 📖
 
 * **Navigation:** Pin Configuration, Electrical Characteristics, Register Map.
 * **Timing Diagrams:**  - Clock setup/hold times.
 * **Register Map:** Decoding configuration bytes.
 
-### 4.2: Writing Professional Drivers
+###Topic 4.2: Writing Professional Drivers
 
 * **Modular Code:** Separating `.h` (Header) and `.cpp` (Source).
 * **Constructor Logic:** Device initialization.
 * **Error Handling:** Non-blocking timeout logic (Sensor disconnect handling).
 
-### 4.3: Driver Patterns (production-grade)
+###Topic 4.3: Driver Patterns (production-grade)
 register read-modify-write safe masking
 init sequencing + "who owns the bus” rules
 bus recovery hooks (I2C stuck low handling belongs here or Module 5)
@@ -259,13 +259,13 @@ bus recovery hooks (I2C stuck low handling belongs here or Module 5)
 
 *Machines se baat karne ki bhasha.*
 
-### 5.1: I2C (Inter-Integrated Circuit)
+###Topic 5.1: I2C (Inter-Integrated Circuit)
 
 * **Master/Slave:** Addressing and Bus logic.
 * **Address Conflicts:** Using Multiplexers (TCA9548A).
 * **Troubleshooting:** I2C Scanners & Pull-up issues.
 
-### 5.2: SPI (Serial Peripheral Interface)
+###Topic 5.2: SPI (Serial Peripheral Interface)
 
 * **High Speed:** Displays & SD Cards.
 * **Modes:** CPOL (Polarity) & CPHA (Phase) matching.
