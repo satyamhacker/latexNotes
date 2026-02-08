@@ -270,25 +270,25 @@ bus recovery hooks (I2C stuck low handling belongs here or Module 5)
 * **High Speed:** Displays & SD Cards.
 * **Modes:** CPOL (Polarity) & CPHA (Phase) matching.
 
-### 5.3: UART & RS485 (Industrial/Long Range)
+###Topic 5.3: UART & RS485 (Industrial/Long Range)
 
 * **Modbus RTU:** Communicating with PLCs/VFDs.
 * **RS485 Hardware:** Differential signaling for 1km+ range.
 * **Serial Parsing:** Ring Buffers to prevent data loss.
 
-### 5.4: Extended Protocols (🆕 ADD)
+###Topic 5.4: Extended Protocols (🆕 ADD)
 * **CAN Bus:** Automotive/Industrial communication
 * **1-Wire:** DS18B20 temperature sensor protocol
 * **Ethernet:** LAN8720/W5500 wired connectivity
 * **LoRa:** Long-range IoT (LoRaWAN basics)
 ---
 
-### 5.5: Advanced Protocol Techniques (🆕 ADD)
+###Topic 5.5: Advanced Protocol Techniques (🆕 ADD)
 * **DMA Transfers:** CPU-free data movement
 * **Bit-Banging:** Software protocol implementation
 * **Error Recovery:** Retry logic, Bus reset
 
-### 5.6: Signal Integrity for Buses (beginner reality)
+###Topic 5.6: Signal Integrity for Buses (beginner reality)
 I2C pull-up sizing, bus capacitance, cable length limits
 SPI wiring pitfalls (CS handling, long wires)
 UART framing errors, baud mismatch symptoms
@@ -297,56 +297,56 @@ UART framing errors, baud mismatch symptoms
 
 *Data privacy matters.*
 
-### 6.1: WiFi & Provisioning
+###Topic 6.1: WiFi & Provisioning
 
 * **WiFi Manager:** No hardcoding passwords (Captive Portal).
 * **Reconnection Logic:** Auto-connect on router restart.
 
-### 6.2: MQTT & Secure IoT (AWS/Google)
+###Topic 6.2: MQTT & Secure IoT (AWS/Google)
 
 * **MQTTS (SSL/TLS):** Loading Root CA Certificates.
 * **QoS Levels:** Ensuring 100% data delivery.
 * **JSON Handling:** Using `ArduinoJson` efficiently.
 
-### 6.3: Bluetooth Low Energy (BLE)
+###Topic 6.3: Bluetooth Low Energy (BLE)
 
 * **GATT Server:** Services & Characteristics.
 * **Notifications:** Sending real-time data to mobile apps.
 
 
-### 6.4: HTTP & Web Services (🆕 MUST ADD)
+###Topic 6.4: HTTP & Web Services (🆕 MUST ADD)
 * **HTTP Client:** REST API calls
 * **Async WebServer:** Config portal
 * **NTP Sync:** Real-time clock sync
 * **ESP-NOW:** Router-less communication
 ---
-### 6.5: Network Services (🆕 ADD)
+###Topic 6.5: Network Services (🆕 ADD)
 * **mDNS:** Access device via hostname (device.local)
 * **WiFi AP Mode:** Access Point for provisioning
 * **Static IP:** Fixed IP configuration
 * **WiFi Events:** Connection state callbacks
 
-### 6.6: Advanced BLE (🆕 ADD)
+###Topic 6.6: Advanced BLE (🆕 ADD)
 * **BLE Scanning:** Device discovery
 * **BLE Pairing/Bonding:** Secure connections
 * **BLE Client Mode:** Connect to other BLE devices
 
-### 6.7: Real-Time Web (🆕 ADD)
+###Topic 6.7: Real-Time Web (🆕 ADD)
 * **WebSocket:** Bidirectional real-time data
 * **OTA via WebServer:** Browser-based firmware upload
 
-### 6.8: Enterprise & Reliability (🆕 ADD)
+###Topic 6.8: Enterprise & Reliability (🆕 ADD)
 * **WiFi Enterprise:** WPA2-Enterprise for corporate networks
 * **MQTT LWT:** Last Will Testament - Offline detection
 * **Exponential Backoff:** Smart reconnection strategy
 * **Multi-WiFi:** Fallback to secondary networks
 * **Certificate Management:** Expiry handling
 
-### 6.9: Networking Basics for IoT Debugging
+###Topic 6.9: Networking Basics for IoT Debugging
 DHCP/DNS, gateway/subnet basics (field issues yahi se solve hote hain)
 TCP vs UDP basics (MQTT/HTTP symptom
 
-### 6.10: TLS Fundamentals + Time Dependency
+###Topic 6.10: TLS Fundamentals + Time Dependency
 certificate chain, SNI, why NTP required for TLS validation
 cert rotation/expiry strategy (aapne “Certificate Management” bola hai—yahan fundamentals attach karo)
 Certificate expiry detection and handling
@@ -359,7 +359,7 @@ Certificate rotation strategies (products must survive cert expiry)
 
 OCSP stapling awareness
 
-### 6.11: Device Provisioning (production)
+###Topic 6.11: Device Provisioning (production)
 per-device credentials injection (factory)
 secure storage of keys (NVS encryption tie-in)
 
@@ -367,24 +367,24 @@ secure storage of keys (NVS encryption tie-in)
 
 *The heart of Professional Firmware.*
 
-### 7.1: Tasks & Scheduling
+###Topic 7.1: Tasks & Scheduling
 
 * **Task Creation:** `xTaskCreatePinnedToCore`.
 * **Priorities:** Ensuring Critical Tasks (Alarm) run first.
 
-### 7.2: Synchronization
+###Topic 7.2: Synchronization
 
 * **Queues:** Passing data between Core 0 and Core 1.
 * **Mutex:** Protecting shared resources (I2C Bus).
 * **Event Groups:** Synchronizing multiple events (Wait for WiFi + MQTT + Sensor). 🆕 *(Added)*
 
-### 7.3: Advanced Synchronization (🆕 CRITICAL ADD)
+###Topic 7.3: Advanced Synchronization (🆕 CRITICAL ADD)
 * **Binary Semaphore:** Event signaling (ISR to Task)
 * **Counting Semaphore:** Resource pool management
 * **Task Notifications:** Lightweight signaling
 * **Critical Sections:** Interrupt-safe code blocks
 
-### 7.4: Timing & Task Management (🆕 ADD)
+###Topic 7.4: Timing & Task Management (🆕 ADD)
 * **Software Timers:** Periodic callbacks
 * **vTaskDelayUntil:** Precise periodic timing
 * **Stack Monitoring:** Overflow detection
@@ -410,7 +410,7 @@ void sensorTask(void *param) {
 }
 
 
-### 7.5: FreeRTOS Internals (🆕 ADD)
+###Topic 7.5: FreeRTOS Internals (🆕 ADD)
 * **Task States:** Running → Ready → Blocked → Suspended
 * **Hooks:** Idle Hook, Tick Hook usage
 * **Priority Inversion:** Problem and solutions
@@ -419,7 +419,7 @@ void sensorTask(void *param) {
 * **Task Suspend/Resume:** Temporary pause
 
 
-### 7.6: ISR Rules & Real-time Constraints
+###Topic 7.6: ISR Rules & Real-time Constraints
 ISR me kya allowed/not allowed (malloc/Serial/WiFi not safe)
 interrupt latency + priority basics
 “Task design patterns”: producer-consumer, pipeline, watchdog-friendly loops
@@ -429,39 +429,39 @@ interrupt latency + priority basics
 
 *Zero-Hang Policy.*
 
-### 8.1: Watchdog Timers (WDT)
+###Topic 8.1: Watchdog Timers (WDT)
 
 * **Hardware WDT:** Auto-reset on system freeze.
 * **Task WDT:** Monitoring specific FreeRTOS tasks.
 
-### 8.2: Power Management
+###Topic 8.2: Power Management
 
 * **Deep Sleep:** Battery optimization strategies.
 * **Wake Stubs:** Fast wake-up logic.
 
-### 8.3: Storage
+###Topic 8.3: Storage
 
 * **NVS (Preferences):** Saving Settings/WiFi creds.
 * **SD Card:** Offline Logging.
 
-### 8.4: File Systems (🆕 MUST ADD)
+###Topic 8.4: File Systems (🆕 MUST ADD)
 * **SPIFFS vs LittleFS:** Comparison
 * **File Operations:** Read/Write/Delete
 * **JSON Config Files:** Storing settings
 
-### 8.5: Advanced Power Modes (🆕 ADD)
+###Topic 8.5: Advanced Power Modes (🆕 ADD)
 * **Light Sleep:** CPU pause, Peripherals active
 * **Modem Sleep:** WiFi power cycling
 * **RTC Memory:** Persist data across deep sleep
 
-### 8.6: System Integrity (🆕 ADD)
+###Topic 8.6: System Integrity (🆕 ADD)
 * **Partition Table:** Custom partition layouts
 * **Brown-out Detection:** Low voltage handling
 * **CRC/Checksum:** Data integrity verification
 * **Heap Monitoring:** Memory health check
 ---
 
-### 8.7: Recovery & Diagnostics (🆕 ADD)
+###Topic 8.7: Recovery & Diagnostics (🆕 ADD)
 * **Reset Reason:** esp_reset_reason() - Why did it restart?
 * **Panic Handler:** Custom crash handling
 * **Safe Boot Mode:** Recovery mechanism
@@ -470,12 +470,12 @@ interrupt latency + priority basics
 * **NVS Encryption:** Secure storage
 
 
-### 8.8: Wear/Write Strategy & Data Model
+###Topic 8.8: Wear/Write Strategy & Data Model
 NVS/Flash write frequency planning (settings vs logs)
 config versioning + migration strategy (field updates me critical)
 
 
-### 8.9 (optional): Battery & Charging Basics
+###Topic 8.9 (optional): Battery & Charging Basics
 Li-ion/LiPo charging IC basics, protection, fuel gauge overview
 
 
@@ -483,43 +483,43 @@ Li-ion/LiPo charging IC basics, protection, fuel gauge overview
 
 *Code likhna easy hai, fix karna hard.*
 
-### 9.1: JTAG Debugging
+###Topic 9.1: JTAG Debugging
 
 * **Breakpoints:** Pausing code to inspect variables.
 * **Backtrace Decoding:** Analyzing Crash Dumps.
 
-### 9.2: Unit Testing (Unity)
+###Topic 9.2: Unit Testing (Unity)
 
 * **TDD:** Writing tests before code.
 * **Mocking:** Simulating hardware inputs for testing logic.
 
-### 9.3: Logging
+###Topic 9.3: Logging
 
 * **ESP_LOG:** Tag-based logging system (Info/Error/Debug).
 
 ---
-### 9.4: Hardware Debugging (🆕 ADD)
+###Topic 9.4: Hardware Debugging (🆕 ADD)
 * **Logic Analyzer:** Protocol signal debugging
 * **Power Profiling:** Current measurement techniques
 
-### 9.5: Runtime Analysis (🆕 ADD)
+###Topic 9.5: Runtime Analysis (🆕 ADD)
 * **Memory Leak Detection:** Heap monitoring
 * **Core Dump:** Post-crash analysis
 * **Stress Testing:** 24/7 reliability testing
 
 
-### 9.6: Professional Practices (🆕 ADD)
+###Topic 9.6: Professional Practices (🆕 ADD)
 * **Oscilloscope:** Basic waveform analysis
 * **Assertions:** assert(), static_assert()
 * **CI/CD Intro:** GitHub Actions for ESP32
 * **Doxygen:** Code documentation generation
 
-### 9.7: “First-level Debug Playbook”
+###Topic 9.7: “First-level Debug Playbook”
 boot loop triage checklist
 interpreting Guru Meditation + backtrace basics (quick workflow)
 logging levels strategy + log to file/SD basics (tie-in)
 
-### 9.8: “Integration Testing & E2E Validation"
+###Topic 9.8: “Integration Testing & E2E Validation"
 Hardware-in-loop testing on actual boards
 
 End-to-end workflows: provisioning → WiFi → MQTT → Cloud
@@ -535,27 +535,27 @@ Test harness for automated daily validation
 
 *Final Product Stage.*
 
-### 10.1: Security Features
+###Topic 10.1: Security Features
 
 * **Flash Encryption:** Preventing Code Theft.
 * **Secure Boot:** Blocking unauthorized firmware.
 
-### 10.2: OTA (Over-The-Air) Updates
+###Topic 10.2: OTA (Over-The-Air) Updates
 
 * **Remote Updates:** Updating firmware via WiFi.
 * **Rollback:** Auto-revert on update failure.
 
-### 10.3: Manufacturing & Factory Flashing 🆕 *(Added)*
+###Topic 10.3: Manufacturing & Factory Flashing 🆕 *(Added)*
 
 * **Merging Binaries:** Combining Bootloader + Partitions + App into one `.bin` file.
 * **Production Flashing:** Guidelines for mass flashing.
 
-### 10.4: Final Case Study
+###Topic 10.4: Final Case Study
 
 * **Project:** "Smart Hospital Patient Monitor".
 * **Integration:** Full stack (Sensors + RTOS + Cloud + Security).
 
-### 10.5: Production Infrastructure (🆕 ADD)
+###Topic 10.5: Production Infrastructure (🆕 ADD)
 * **A/B OTA Partitions:** Safe update strategy
 * **Firmware Versioning:** Semantic versioning system
 * **Device Unique ID:** MAC-based identification
@@ -564,24 +564,24 @@ Test harness for automated daily validation
 ---
 
 
-### 10.6: Compliance & Certification (🆕 ADD)
+###Topic 10.6: Compliance & Certification (🆕 ADD)
 * **EMI/EMC Basics:** Shielding, Filtering
 * **Certifications:** CE, FCC, RoHS awareness
 * **Field Failure Analysis:** RMA debugging
 * **Documentation:** User manual, Technical specs
 
-### 10.7: Factory Provisioning & Key Injection
+###Topic 10.7: Factory Provisioning & Key Injection
 unique IDs, certs/keys injection flow
 manufacturing test jig basics (UART test menu, GPIO loopback tests)
 
-### 10.8 (optional but strong): RF/EMC Pre-compliance Practical
+###Topic 10.8 (optional but strong): RF/EMC Pre-compliance Practical
 antenna selection basics, enclosure impact
 simple pre-scan approach + common EMI sources (buck converter, long cables)
 
 
 ## **Module 11: Sensor & Actuator Integration (🆕 NEW MODULE)**
 
-### 11.1: Common Sensors
+###Topic 11.1: Common Sensors
 * **Temperature:** DS18B20 (1-Wire), DHT22, NTC Thermistor
 * **Environmental:** BME280 (Temp + Humidity + Pressure)
 * **Motion/IMU:** MPU6050, ICM20948 (Accelerometer + Gyro)
@@ -591,13 +591,13 @@ simple pre-scan approach + common EMI sources (buck converter, long cables)
 * **GPS:** NEO-6M (NMEA parsing)
 * **RFID:** RC522 (Mifare)
 
-### 11.2: Display Interfaces
+###Topic 11.2: Display Interfaces
 * **Character LCD:** I2C 16x2, 20x4
 * **OLED:** SSD1306 (128x64)
 * **TFT:** ILI9341, ST7789 (Color displays)
 * **E-Paper:** Low-power displays
 
-### 11.3: Actuator Control
+###Topic 11.3: Actuator Control
 * **Relay Modules:** Solid State vs Mechanical
 * **DC Motors:** PWM speed control, H-Bridge (L298N)
 * **Stepper Motors:** A4988, DRV8825 drivers
@@ -605,7 +605,7 @@ simple pre-scan approach + common EMI sources (buck converter, long cables)
 * **LED Strips:** WS2812B (Addressable RGB)
 * **Buzzer:** Tone generation
 
-### 11.4: Signal Conditioning
+###Topic 11.4: Signal Conditioning
 * **Sensor Calibration:** Offset, Gain adjustment
 * **Filtering:** Moving Average, Kalman basics
 * **Sensor Fusion:** Combining multiple sensors
@@ -624,18 +624,18 @@ Ab yeh structure **Perfect** hai. Jab aap AI se notes maangein, toh yeh prompt u
 > 
 > 
 
-### 11.5: Additional Sensors (🆕 ADD)
+###Topic 11.5: Additional Sensors (🆕 ADD)
 * **PIR Sensor:** Motion detection
 * **Gas Sensors:** MQ-2, MQ-135 (Air quality)
 * **Load Cell:** HX711 weight measurement
 * **Microphone:** INMP441 (I2S digital mic)
 
-### 11.6: User Input Devices (🆕 ADD)
+###Topic 11.6: User Input Devices (🆕 ADD)
 * **Keypad Matrix:** 4x4 keypad scanning
 * **Rotary Encoder:** With button, debouncing
 * **Touch TFT:** XPT2046 touch controller
 
-### 11.7: Control Systems (🆕 CRITICAL ADD)
+###Topic 11.7: Control Systems (🆕 CRITICAL ADD)
 * **PID Controller:** Proportional-Integral-Derivative basics
 * **Temperature Control:** Heater/Cooler PID
 * **Motor Speed Control:** RPM regulation
@@ -644,19 +644,19 @@ Ab yeh structure **Perfect** hai. Jab aap AI se notes maangein, toh yeh prompt u
 
 ## **Module 12: ESP32 Variants & Code Portability (🆕 NEW)**
 
-### 12.1: ESP32 Family
+###Topic 12.1: ESP32 Family
 * **ESP32 Classic:** Dual-core, WiFi + BLE
 * **ESP32-S2:** Single-core, Native USB, No BLE
 * **ESP32-S3:** Dual-core, AI acceleration, USB OTG
 * **ESP32-C3:** RISC-V, BLE 5.0, Low cost
 * **ESP32-C6:** WiFi 6, Thread/Zigbee, BLE 5.0
 
-### 12.2: Code Portability
+###Topic 12.2: Code Portability
 * **Conditional Compilation:** #ifdef CONFIG_IDF_TARGET_ESP32
 * **Peripheral Differences:** Pin mappings, Feature availability
 * **Library Compatibility:** Checking support
 
-### 12.3: Choosing the Right Variant
+###Topic 12.3: Choosing the Right Variant
 * **Selection Criteria:** Cost, Power, Features matrix
 * **Migration Guide:** Porting from ESP32 to S3/C3
 
@@ -670,29 +670,29 @@ Ye track aapke **existing Module 0–12 (ESP32 core course)** ke upar add hoga. 
 
 
 # **Module 13: Camera Board Ecosystem + Planning (Portability First)**
-### 13.1: ESP32 Camera Board Families (Compatibility Map)
+###Topic 13.1: ESP32 Camera Board Families (Compatibility Map)
 - **ESP32 Classic + OV2640 (AI‑Thinker)**: I2S “camera mode” based DVP capture
 - **ESP32‑S3 CAM**: LCD_CAM peripheral (better for camera + AI workloads)
 - **Other ecosystems** (awareness): MIPI CSI‑2 boards (not typical on classic ESP32), USB/UVC style (gateway approach)
 - Selection criteria: RAM/PSRAM, USB, WiFi/BLE needs, frame size target, cost, availability
 
-### 13.2: Sensor Options & Tradeoffs (board-independent)
+###Topic 13.2: Sensor Options & Tradeoffs (board-independent)
 - OV2640, OV3660, OV5640 etc (resolution/low‑light/frame rate)
 - JPEG output capability vs raw formats support
 - Lens type/focus mechanism availability
 
-### 13.3: Toolchain Strategy (Arduino vs ESP‑IDF) — PlatformIO Friendly
+###Topic 13.3: Toolchain Strategy (Arduino vs ESP‑IDF) — PlatformIO Friendly
 - PlatformIO multi‑env setup (one repo, multiple boards)
 - **Version locking**: esp32 core / esp32-camera component versions
 - Build flags for PSRAM, optimization, log levels
 
-### 13.4: Portability Layer Design (Must-have for future boards)
+###Topic 13.4: Portability Layer Design (Must-have for future boards)
 - `board_pins.h` per-board mapping
 - `camera_board_config_t` abstraction
 - Compile-time selection: `#ifdef` per target / PlatformIO env
 - “No magic GPIOs” policy: everything from config structs
 
-### 13.5: Camera Product Requirements (before coding)
+###Topic 13.5: Camera Product Requirements (before coding)
 - FPS target, resolution target, latency budget
 - Storage vs streaming vs event-based capture
 - Security/privacy requirements (auth by default)
@@ -700,27 +700,27 @@ Ye track aapke **existing Module 0–12 (ESP32 core course)** ke upar add hoga. 
 ---
 
 # **Module 14: ESP32‑CAM Hardware Bring‑Up (Power + Boot + Pins)**
-### 14.1: Power Architecture (Most common root-cause)
+###Topic 14.1: Power Architecture (Most common root-cause)
 - Peak current budgeting (WiFi TX + capture + flash LED)
 - LDO vs buck selection, cable losses, bulk/decoupling placement
 - Brownout causes, **brownout “disable” is not a fix** (product rule)
 
-### 14.2: Boot / Flash / Serial Workflows (Classic + S3)
+###Topic 14.2: Boot / Flash / Serial Workflows (Classic + S3)
 - ESP32‑CAM external USB‑UART wiring (U0T/U0R, GPIO0, EN)
 - ESP32‑S3 native USB flashing workflow (board dependent)
 - Reliable flashing checklist (baud, power, reset sequence)
 
-### 14.3: Pinout Constraints & Conflicts (Board-specific gotchas)
+###Topic 14.3: Pinout Constraints & Conflicts (Board-specific gotchas)
 - Camera DVP pin usage consumes many GPIOs
 - Strapping pins awareness + safe IO list per board
 - Input-only pins / boot-time behavior issues
 
-### 14.4: Camera Reset/PWDN + Power-Gating (Reliability feature)
+###Topic 14.4: Camera Reset/PWDN + Power-Gating (Reliability feature)
 - RESET/PWDN usage patterns
 - Load-switch/MOSFET based camera power-cycle for recovery
 - When to re-init vs full power-cycle
 
-### 14.5: SD Card + Flash LED Shared Pin Conflicts
+###Topic 14.5: SD Card + Flash LED Shared Pin Conflicts
 - SD_MMC 1-bit vs 4-bit mode tradeoffs
 - GPIO conflicts (common on AI‑Thinker) and mitigation strategies
 
@@ -732,48 +732,48 @@ Ye track aapke **existing Module 0–12 (ESP32 core course)** ke upar add hoga. 
 ---
 
 # **Module 15: Camera Sensor + Optics + Illumination Fundamentals**
-### 15.1: DVP/Parallel Camera Signals (portable concepts)
+###Topic 15.1: DVP/Parallel Camera Signals (portable concepts)
 - XCLK, PCLK, VSYNC, HREF basics
 - Sampling stability + timing implications
 
-### 15.2: Pixel Formats + Compression
+###Topic 15.2: Pixel Formats + Compression
 - JPEG vs RGB565 vs YUV422: when and why
 - JPEG quality factor vs latency/size
 
-### 15.3: Image Quality Controls (real meaning)
+###Topic 15.3: Image Quality Controls (real meaning)
 - AE/AGC, AWB, exposure time vs motion blur
 - Anti-flicker (50/60Hz lighting)
 
-### 15.4: Optics + Mechanics (product-level)
+###Topic 15.4: Optics + Mechanics (product-level)
 - Focus calibration, FOV selection, mounting, vibration
 - IR illumination, IR-cut filter considerations (if applicable)
 - Glare/reflective enclosure issues
 
-### 15.5: “Image Quality Validation” Basics
+###Topic 15.5: “Image Quality Validation” Basics
 - Blur detection intuition (focus issue)
 - Brightness/histogram sanity checks for QA
 
 ---
 
 # **Module 16: Camera Driver Stack (esp32-camera) + Customization**
-### 16.1: Driver Architecture Overview
+###Topic 16.1: Driver Architecture Overview
 - `camera_config_t` + init sequence
 - Typical failure points and error interpretation
 
-### 16.2: SCCB (Camera Control Bus) + Register Patterns
+###Topic 16.2: SCCB (Camera Control Bus) + Register Patterns
 - Register read/write, safe masking (RMW)
 - Bus recovery ideas (stuck lines, re-init sequence)
 
-### 16.3: DMA + Frame Buffers + Memory Caps
+###Topic 16.3: DMA + Frame Buffers + Memory Caps
 - `esp_camera_fb_get()` / `fb_return()` lifecycle
 - Double buffering, continuous capture pipeline
 - Internal RAM vs PSRAM allocation strategy, alignment constraints
 
-### 16.4: Sensor Driver Modularity
+###Topic 16.4: Sensor Driver Modularity
 - How sensor-specific settings map to the driver
 - Custom sensor init sequences (when boards differ)
 
-### 16.5: FreeRTOS Integration Rules
+###Topic 16.5: FreeRTOS Integration Rules
 - Capture task vs stream task separation
 - Queue-based pipeline (producer-consumer)
 - Avoid blocking loops → watchdog safe design
@@ -785,153 +785,153 @@ Ye track aapke **existing Module 0–12 (ESP32 core course)** ke upar add hoga. 
 ---
 
 # **Module 17: Performance Engineering (FPS/Latency/Memory)**
-### 17.1: Throughput Budgeting
+###Topic 17.1: Throughput Budgeting
 - Sensor → JPEG → WiFi/HTTP pipeline budget
 - When to downscale vs reduce JPEG quality vs reduce FPS
 
-### 17.2: Heap/PSRAM Health
+###Topic 17.2: Heap/PSRAM Health
 - fragmentation patterns
 - `heap_caps_*` usage strategy (where relevant)
 
-### 17.3: Backpressure + Rate Control
+###Topic 17.3: Backpressure + Rate Control
 - Client slow → don’t block capture forever
 - Drop-frame strategy vs queue growth strategy
 
-### 17.4: Thermal + Stability
+###Topic 17.4: Thermal + Stability
 - Heat impacts on sensor noise + stability
 - Continuous streaming soak considerations
 
 ---
 
 # **Module 18: Networking + Streaming Protocols (Secure by Default)**
-### 18.1: HTTP Snapshot Endpoint (Production patterns)
+###Topic 18.1: HTTP Snapshot Endpoint (Production patterns)
 - `/capture` design, correct headers, caching off
 - Authentication (basic/token), access control
 
-### 18.2: MJPEG Streaming
+###Topic 18.2: MJPEG Streaming
 - multipart boundary streaming format
 - browser/VLC compatibility, keep-alive, reconnect handling
 
-### 18.3: RTSP/RTP (Advanced / Optional)
+###Topic 18.3: RTSP/RTP (Advanced / Optional)
 - Where RTSP fits (NVR integration)
 - UDP vs TCP transport tradeoffs
 
-### 18.4: WebSocket Streaming (Real-time dashboards)
+###Topic 18.4: WebSocket Streaming (Real-time dashboards)
 - binary frames, flow control
 
-### 18.5: Cloud Upload Patterns
+###Topic 18.5: Cloud Upload Patterns
 - HTTPS upload (TLS time dependency via NTP)
 - Presigned URL uploads (S3 style), retry + backoff
 - MQTT events (image on event, not continuous)
 
-### 18.6: OTA for Camera Products
+###Topic 18.6: OTA for Camera Products
 - Partition sizing considerations (camera firmware grows fast)
 - Rollback/A-B OTA strategy
 
 ---
 
 # **Module 19: SD Card Storage + Offline Buffering**
-### 19.1: SD_MMC vs SPI SD
+###Topic 19.1: SD_MMC vs SPI SD
 - Speed, wiring sensitivity, CPU overhead
 
-### 19.2: File System + Naming + Metadata
+###Topic 19.2: File System + Naming + Metadata
 - FAT realities, directory strategy, max files per folder
 - Timestamping (NTP), metadata JSON sidecar patterns
 
-### 19.3: Power-fail Safe Writes
+###Topic 19.3: Power-fail Safe Writes
 - temp file → fsync/flush → rename pattern
 - corruption minimization strategy
 
-### 19.4: Store-and-Forward Sync Engine
+###Topic 19.4: Store-and-Forward Sync Engine
 - upload queue, resume logic, CRC checks
 
 ---
 
 # **Module 20: Edge Vision / Analytics (ESP32‑CAM Reality)**
-### 20.1: Lightweight Motion Detection
+###Topic 20.1: Lightweight Motion Detection
 - Frame differencing, ROI, downscale
 
-### 20.2: ESP-WHO Overview (Advanced)
+###Topic 20.2: ESP-WHO Overview (Advanced)
 - Face detect/recognition constraints (RAM/CPU)
 - When to do on-device vs gateway/cloud
 
-### 20.3: QR/Barcode/OCR (Hybrid approach)
+###Topic 20.3: QR/Barcode/OCR (Hybrid approach)
 - Preprocessing needs (grayscale, resolution)
 - Offload strategy (send JPEG to server)
 
-### 20.4: Privacy-by-design Techniques (awareness)
+###Topic 20.4: Privacy-by-design Techniques (awareness)
 - On-device masking / event-only capture policies
 
 ---
 
 # **Module 21: Low Power Camera Systems (Battery Products)**
-### 21.1: Duty-Cycled Capture Design
+###Topic 21.1: Duty-Cycled Capture Design
 - Capture burst → upload → deep sleep model
 
-### 21.2: Wake Sources
+###Topic 21.2: Wake Sources
 - PIR sensor, RTC timer, external GPIO, ULP concepts
 
-### 21.3: Modem Sleep / Light Sleep Tradeoffs
+###Topic 21.3: Modem Sleep / Light Sleep Tradeoffs
 - When streaming cannot be low power (truth)
 
-### 21.4: Power Gating Camera + SD
+###Topic 21.4: Power Gating Camera + SD
 - Load switch control, inrush handling, safe sequencing
 
 ---
 
 # **Module 22: Debugging + QA + Test Automation (Camera-Specific)**
-### 22.1: Failure Catalog + Triage Checklist
+###Topic 22.1: Failure Catalog + Triage Checklist
 - camera probe fail / init fail
 - brownout triggered
 - corrupted images / tearing / wrong colors
 - SD mount fail / file corruption
 - random reboot during stream
 
-### 22.2: Hardware Debug Toolkit
+###Topic 22.2: Hardware Debug Toolkit
 - current profiling during capture/flash/WiFi TX
 - oscilloscope: 3.3V dips, EN line, reset behavior
 - logic analyzer (advanced): SCCB / timing issues
 
-### 22.3: Firmware Debug
+###Topic 22.3: Firmware Debug
 - boot logs + Guru Meditation backtrace workflow
 - heap/PSRAM monitoring, stack sizing
 - WDT: root cause fix patterns (not just delay tweaks)
 
-### 22.4: Automated Reliability Tests
+###Topic 22.4: Automated Reliability Tests
 - 24/7 MJPEG soak
 - N captures + size/CRC validation
 - WiFi stress (AP reboot, weak signal), reconnect metrics
 - SD endurance test scripts
 
-### 22.5: Image Quality Tests (Production QA)
+###Topic 22.5: Image Quality Tests (Production QA)
 - focus check workflow, exposure sanity thresholds
 - golden-sample comparison (practical)
 
 ---
 
 # **Module 23: Production, Security, Manufacturing (Camera Product Launch)**
-### 23.1: Partitioning + Release Engineering
+###Topic 23.1: Partitioning + Release Engineering
 - OTA + filesystem sizing rules for camera apps
 - versioning strategy, build reproducibility
 
-### 23.2: Factory Flashing + Test Jig
+###Topic 23.2: Factory Flashing + Test Jig
 - merged binary flashing flow
 - camera capture test (golden image), SD test, LED test, WiFi scan test
 - serial/MAC-based labeling + traceability
 
-### 23.3: Provisioning + Key Injection
+###Topic 23.3: Provisioning + Key Injection
 - per-device credentials/certs injection
 - secure storage strategy (NVS encryption tie-in)
 
-### 23.4: Security Hardening (no open camera streams)
+###Topic 23.4: Security Hardening (no open camera streams)
 - auth everywhere, rate limiting, disable debug endpoints in release
 - secure boot/flash encryption feasibility notes
 
-### 23.5: EMC/ESD + Enclosure Considerations (practical)
+###Topic 23.5: EMC/ESD + Enclosure Considerations (practical)
 - antenna placement, buck noise, cable entry protection
 - thermal, condensation, ingress awareness
 
-### 23.6: Field Support + Recovery
+###Topic 23.6: Field Support + Recovery
 - safe mode boot (recovery AP)
 - factory reset policies, log extraction strategy, RMA workflow
 
