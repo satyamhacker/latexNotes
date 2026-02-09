@@ -129,6 +129,46 @@ include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(hello_world)
 ```
 
+###Topic 1.6: Custom Configuration Menus (Kconfig)
+
+*Professional build configuration - No hardcoding*
+
+```c
+// Kconfig.projbuild (in project root)
+menu "Motor Control Configuration"
+    config MOTOR_SPEED_DEFAULT
+        int "Default Motor Speed (RPM)"
+        default 1000
+        range 100 5000
+        help
+            Set the default motor speed in RPM.
+    
+    config ENABLE_DEBUG_LOGS
+        bool "Enable Debug Logging"
+        default n
+        help
+            Enable verbose debug logs for motor control.
+endmenu
+
+// main.c - Using Kconfig values
+#include "sdkconfig.h"
+
+void app_main(void) {
+    int motor_speed = CONFIG_MOTOR_SPEED_DEFAULT;
+    ESP_LOGI("MOTOR", "Speed: %d RPM", motor_speed);
+    
+    #ifdef CONFIG_ENABLE_DEBUG_LOGS
+        ESP_LOGD("MOTOR", "Debug mode enabled");
+    #endif
+}
+```
+
+**Why This Matters:**
+- Production vs Debug builds without code changes
+- Customer-specific configurations
+- Feature flags for different product variants
+- No hardcoded `#define` values
+
 ---
 
 ## **Module 2: Advanced C/C++ & Bit Manipulation**
@@ -248,6 +288,55 @@ ESP_LOGI("MEM", "Free heap: %d, Free PSRAM: %d", free_heap, free_psram);
 - Allocating large buffers (>4KB) on stack → Stack overflow
 - Not checking malloc() return value → NULL pointer crash
 - Memory leaks in loops → Gradual heap exhaustion
+
+###Topic 2.10: Mixing C and C++ (CPP Wrapper Pattern)
+
+*The "Modern" way - C++ classes with ESP-IDF*
+
+```cpp
+// sensor.hpp - C++ Class
+class BME280Sensor {
+private:
+    float temperature;
+public:
+    void init();
+    void read();
+    float getTemperature() { return temperature; }
+};
+
+// sensor.cpp
+extern "C" {
+    #include "driver/i2c.h"  // C header
+}
+
+void BME280Sensor::init() {
+    // I2C init using C functions
+}
+
+// The Trampoline Problem - FreeRTOS tasks need C function pointers
+class SensorTask {
+public:
+    void run() {
+        // Task logic
+    }
+    
+    // Static wrapper for FreeRTOS
+    static void taskWrapper(void* param) {
+        SensorTask* self = static_cast<SensorTask*>(param);
+        self->run();
+    }
+    
+    void start() {
+        xTaskCreate(taskWrapper, "sensor", 4096, this, 5, NULL);
+    }
+};
+```
+
+**Critical Rules:**
+- Use `extern "C"` when including C headers in C++ files
+- FreeRTOS tasks cannot directly call C++ member functions
+- Use static wrapper functions (trampoline pattern)
+- Pass `this` pointer as task parameter
 
 ---
 
@@ -477,6 +566,56 @@ esp_pm_configure(&pm_config);
 - APB (Peripherals): 80MHz
 - RTC: 150kHz (for deep sleep)
 
+###Topic 3.13: The ESP Event Loop (esp_event)
+
+*System architecture - Event-driven programming*
+
+```c
+// ESP-IDF EVENT LOOP ARCHITECTURE
+#include "esp_event.h"
+
+// System events (WiFi, IP) - Built-in
+void wifi_event_handler(void* arg, esp_event_base_t event_base,
+                        int32_t event_id, void* event_data) {
+    if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
+        esp_wifi_connect();
+    } else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP) {
+        ESP_LOGI("WIFI", "Got IP address");
+    }
+}
+
+// Register system event handler
+esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &wifi_event_handler, NULL);
+esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &wifi_event_handler, NULL);
+
+// Custom Event Loop (Task decoupling)
+ESP_EVENT_DEFINE_BASE(SENSOR_EVENTS);
+enum {
+    SENSOR_EVENT_DATA_READY,
+    SENSOR_EVENT_ERROR
+};
+
+esp_event_loop_handle_t sensor_loop;
+esp_event_loop_args_t loop_args = {
+    .queue_size = 5,
+    .task_name = "sensor_loop",
+    .task_priority = 10,
+    .task_stack_size = 3072,
+    .task_core_id = 0
+};
+esp_event_loop_create(&loop_args, &sensor_loop);
+
+// Post custom event
+esp_event_post_to(sensor_loop, SENSOR_EVENTS, SENSOR_EVENT_DATA_READY, 
+                  &data, sizeof(data), portMAX_DELAY);
+```
+
+**Why This Matters:**
+- WiFi, MQTT, Provisioning all use this
+- Decouples tasks (no direct function calls)
+- Better than FreeRTOS queues for system-wide events
+- Custom event loops for application logic
+
 ---
 
 ## **Module 4: Datasheet Decoding & Custom Drivers (ESP-IDF Components)**
@@ -663,6 +802,50 @@ uart_write_bytes(UART_NUM_1, data, strlen(data));
 uint8_t buffer[128];
 int len = uart_read_bytes(UART_NUM_1, buffer, sizeof(buffer), pdMS_TO_TICKS(100));
 ```
+
+###Topic 5.3.1: Modbus RTU/TCP (esp-modbus)
+
+*Industrial protocol - Official ESP-IDF component*
+
+```c
+// ESP-IDF MODBUS MASTER EXAMPLE
+#include "mbcontroller.h"
+
+// Initialize Modbus Master
+mb_communication_info_t comm_info = {
+    .mode = MB_MODE_RTU,
+    .port = UART_NUM_2,
+    .baudrate = 9600,
+    .parity = MB_PARITY_NONE
+};
+mbc_master_init(MB_PORT_SERIAL_MASTER, &comm_info);
+mbc_master_start();
+
+// Read Holding Registers from Slave
+uint16_t holding_reg[2];
+mb_param_request_t request = {
+    .slave_addr = 1,
+    .command = MB_FUNC_READ_HOLDING_REGISTER,
+    .reg_start = 0,
+    .reg_size = 2
+};
+mbc_master_send_request(&request, holding_reg);
+
+// Modbus Slave (PLC/VFD emulation)
+mb_register_area_descriptor_t reg_area = {
+    .type = MB_PARAM_HOLDING,
+    .start_offset = 0,
+    .address = (void*)&holding_registers[0],
+    .size = sizeof(holding_registers)
+};
+mbc_slave_set_descriptor(reg_area);
+```
+
+**Industrial Use Cases:**
+- Reading VFD (Variable Frequency Drive) speed
+- Controlling PLC outputs
+- Energy meter data acquisition
+- Building automation (HVAC, Lighting)
 
 ###Topic 5.4: Extended Protocols
 * **CAN Bus:** `driver/twai.h` (Two-Wire Automotive Interface)
@@ -959,6 +1142,49 @@ void sensor_task(void *param) {
 * Interrupt priority levels (ESP-IDF specific)
 * Task design patterns: producer-consumer, pipeline
 
+###Topic 7.7: Multi-Core Safety (SMP - Symmetric Multiprocessing)
+
+*Dual-core synchronization - Critical for ESP32*
+
+```c
+// ESP-IDF MULTI-CORE SYNCHRONIZATION
+#include "freertos/FreeRTOS.h"
+#include "esp_attr.h"
+
+// Problem: Normal mutex may fail on dual-core for hardware registers
+volatile uint32_t shared_counter = 0;
+
+// ❌ WRONG - Race condition on dual core
+void task_core0(void *param) {
+    shared_counter++;  // Core 0 and Core 1 both access
+}
+
+// ✅ CORRECT - Using Critical Section (Spinlock)
+portMUX_TYPE my_spinlock = portMUX_INITIALIZER_UNLOCKED;
+
+void task_core0(void *param) {
+    portENTER_CRITICAL(&my_spinlock);  // Blocks BOTH cores
+    shared_counter++;
+    portEXIT_CRITICAL(&my_spinlock);
+}
+
+// When to use what:
+// Mutex: Task-to-task (same or different core) - Can sleep
+// Spinlock: ISR or very short critical sections - Cannot sleep
+// Semaphore: Event signaling
+
+// Hardware register access (MUST use spinlock)
+portENTER_CRITICAL(&my_spinlock);
+GPIO.out_w1ts = (1 << GPIO_NUM_2);  // Direct register write
+portEXIT_CRITICAL(&my_spinlock);
+```
+
+**Critical Rules:**
+- Use `portENTER_CRITICAL()` for hardware register access
+- Spinlocks block BOTH cores (use sparingly)
+- Keep critical sections SHORT (<10 microseconds)
+- Mutex for longer operations (can context switch)
+
 ---
 
 ## **Module 8: Reliability & Protection (ESP-IDF System Features)**
@@ -1051,6 +1277,45 @@ void read_wifi_config(char* ssid, size_t len) {
     }
 }
 ```
+
+###Topic 8.3.1: Custom Partition Tables (Lab)
+
+*Practical resizing - Production apps need custom partitions*
+
+```csv
+# partitions.csv - Custom Partition Table
+# Name,   Type, SubType, Offset,  Size,    Flags
+nvs,      data, nvs,     0x9000,  0x6000,
+phy_init, data, phy,     0xf000,  0x1000,
+factory,  app,  factory, 0x10000, 2M,
+data,     data, spiffs,  ,        1M,
+certs,    data, 0x40,    ,        64K,
+```
+
+```c
+// Using custom partition
+#include "esp_partition.h"
+
+// Find custom partition
+const esp_partition_t* cert_partition = 
+    esp_partition_find_first(ESP_PARTITION_TYPE_DATA, 
+                             ESP_PARTITION_SUBTYPE_ANY, 
+                             "certs");
+
+// Read from partition
+uint8_t cert_buffer[4096];
+esp_partition_read(cert_partition, 0, cert_buffer, sizeof(cert_buffer));
+
+// Commands
+// idf.py partition-table        # View current table
+// idf.py partition-table-flash  # Flash custom table
+```
+
+**Why This Matters:**
+- Default factory app is only 1MB (too small for camera apps)
+- Need separate partition for certificates/assets
+- OTA requires 2x app size
+- Production: Factory app + OTA_0 + OTA_1 + Data
 
 ###Topic 8.4: File Systems
 * **SPIFFS:** `esp_spiffs.h` - Simple filesystem (deprecated, use LittleFS)
