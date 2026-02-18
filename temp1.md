@@ -8,6 +8,12 @@
 
 ### 🎯 1. Title / Topic: **Module 4.1 – JADX-GUI: The Source Code Unlocker**
 
+#### Beginner Clarification
+- Java check command: java -version.
+- Installed case me version lines dikhti hain, jaise openjdk version 11.x.
+- Not installed case me java is not recognized type error aata hai.
+- JADX run karne ke liye Java 8+ required hai.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 JADX-GUI ko ek "chef's recipe decoder" ki tarah samjho. Maan lo tumhare paas ek tasty dish (APK) hai, lekin uski recipe (source code) nahi pata. JADX-GUI wo magical machine hai jo dish ko chakh kar uski poori recipe – ingredients, steps, sab kuch – nikal deta hai. Ab tum dekh sakte ho ki dish mein kaunsa secret masala (hardcoded key) dala hai ya kaunsa step galat hai (vulnerability).
 
@@ -125,6 +131,15 @@ Kai bug bounty hunters pehle vulnerable apps practice karte hain phir real targe
 
 ### 🎯 1. Title / Topic: **Module 5.2 – Pulling APK from Device via ADB**
 
+#### Beginner Clarification
+- Agar adb devices empty aaye ya unauthorized aaye to USB driver issue ho sakta hai.
+- Windows me Device Manager se manufacturer USB driver update karo.
+- Package filter differences:
+  - Windows CMD: adb shell pm list packages | findstr injured
+  - Linux/Mac: adb shell pm list packages | grep injured
+  - PowerShell: adb shell pm list packages | Select-String injured
+- Split APK case me base.apk ke saath split files bhi aa sakti hain; full app folder pull karna better hota hai.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Maan lo tumhare paas ek locked box (device) hai jisme ek gift (app) hai. Tum gift ko nikal kar dekhna chahte ho. ADB wo chabi hai jo box kholti hai aur gift ko bahar nikal kar PC par rakh deti hai. Yahan gift APK file hai.
 
@@ -191,6 +206,13 @@ Pentester ko ek app mili jo store par available nahi thi (in-house app). Usne de
 
 ### 🎯 1. Title / Topic: **Module 5.3 – AndroidManifest.xml: The Blueprint of the App**
 
+#### Beginner Clarification
+- android:exported=true ka meaning component-wise alag risk deta hai.
+- Activity exported ho to direct launch possible.
+- Service exported ho to external start or bind abuse possible.
+- Receiver exported ho to malicious broadcast injection possible.
+- Provider exported ho to external read or write leak risk badhta hai.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 AndroidManifest.xml ek building ka "master plan" hota hai. Jaise blueprint mein pata hota hai ki building mein kitne kamre (Activities) hain, kaunsa darwaza bahar ki taraf khulta hai (exported), kaun si services (electricity, water) connected hain, waise hi manifest mein app ke components, permissions, aur entry points ki detail hoti hai.
 
@@ -252,6 +274,11 @@ Banking app mein ek exported activity tha jo bina auth ke user account details d
 ---
 
 ### 🎯 1. Title / Topic: **Module 5.4 – Hardcoded Strings: Secrets in Plain Sight**
+
+#### Beginner Clarification
+- Hardcoded secrets ke liye regex search use karo, sirf plain words nahi.
+- Useful patterns: long tokens, emails, IPv4, firebaseio URLs.
+- Regex search se hidden key-like strings detect karna easy hota hai.
 
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Jaise kabhi diary mein password likh kar rakh dete ho aur fir diary kho jaane par tension hoti hai, waise hi developers kabhi kabhi API keys, URLs, ya passwords seedhe source code mein likh dete hain. JADX-GUI se ye “diary” khol kar hum secrets padh sakte hain.
@@ -319,6 +346,12 @@ Uber breach 2016 mein hardcoded AWS keys ki wajah se hua tha, jo GitHub par acci
 ---
 
 ### 🎯 1. Title / Topic: **Module 5.5 – Network Security Configuration (NSC) Analysis**
+
+#### Beginner Clarification
+- Agar network_security_config file missing ho to platform defaults apply hote hain.
+- Android 9+ par cleartext defaults stricter hote hain.
+- User-installed CA trust app config par depend karta hai; by default limited hota hai.
+- Explicit pinning config na ho to default pinning enforce nahi hoti.
 🐣 2. Samjhane ke liye (Simple Analogy)
 Network Security Config ko app ka "gate security manual" samjho. Jaise kisi building mein guards ko manual milta hai ki "kaise ID check karni hai, kis tarah ke badges allow hain", waise hi NSC file mein app ko bataya jata hai ki kaunsa certificate trust karna hai, aur kya HTTP traffic allow karna hai. Agar manual galat likha ho, toh guard (app) bhi galati kar sakta hai – jaise bina ID ke andar aane de (HTTP traffic) ya fake ID accept kar le (user certificate).
 
@@ -411,6 +444,11 @@ Network Security Config – app ka “gatekeeper manual”, galat likha to hacke
 
 
 ### 🎯 1. Title / Topic: **Module 5.6 – Android Version Nuances & Scoped Storage (ADB Limitations)**
+
+#### Beginner Clarification
+- run-as sirf debuggable app par kaam karta hai.
+- Debuggable verify karne ke liye manifest flag ya dumpsys output check karo.
+- run-as fail ho to rooted device, patched app tooling, ya emulator fallback use karo.
 🐣 2. Samjhane ke liye (Simple Analogy)
 Android versions jaise ghar ke renovation hote hain – purane ghar mein jo darwaza tha, naye ghar mein band ho sakta hai. Android 10+ mein adb pull ka darwaza thoda band ho gaya hai. Ab naye keys ya permissions chahiye.
 
@@ -471,6 +509,11 @@ Android versions – naye ghar mein purani chabi kaam nahi karti, naye tareeke s
 ---
 
 ### 🎯 1. Title / Topic: **Module 6.1 – Exported Activities & ADB Intents (AndroidManifest.xml Deep Dive)**
+
+#### Beginner Clarification
+- adb am start me extras bhej sakte ho: es string, ei int, ez boolean, el long.
+- Useful activity flags: activity-clear-task, activity-new-task.
+- Exported activity testing me parameters bhejna real attack simulation ke liye important hai.
 
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Maan lo ek building mein kuch darwaje hain jo andar se khulte hain, kuch darwaje bahar se bhi khul sakte hain. `exported="true"` wali activity aisa darwaza hai jo bahar se koi bhi (dusra app ya ADB) khol sakta hai. Agar us darwaze ke andar sensitive cheezein rakhi hain (jaise user data, admin panel), toh koi bhi andar aa sakta hai bina permission ke.
@@ -533,6 +576,11 @@ Banking app mein ek exported activity tha jo bina auth ke user ka balance dikha 
 
 ### 🎯 1. Title / Topic: **Module 6.2 – Cyberchef: The Data Manipulation Swiss Army Knife**
 
+#### Beginner Clarification
+- CyberChef me operations chain hoti hain.
+- First operation ka output next operation ka input banta hai.
+- Example chain: From Hex then To Base64.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Cyberchef ek "digital kitchen" hai jahan tum raw data (jaise base64 string) ko leke uske "recipes" (operations) laga sakte ho – chop, fry, bake – jisse data readable form mein badal jata hai. Jaise hex to text, base64 decode, URL decode – sab kuch.
 
@@ -580,6 +628,11 @@ CTF challenge mein base64 encoded flag mila, Cyberchef se decode karke flag mil 
 ---
 
 ### 🎯 1. Title / Topic: **Module 6.3 – Automated Static Analysis with MobSF**
+
+#### Beginner Clarification
+- MobSF install se pehle virtual environment banana best practice hai.
+- Steps: virtualenv create, activate, requirements install, kaam ke baad deactivate.
+- Isse global Python dependency conflicts avoid hote hain.
 
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 MobSF ek "automated security guard" hai jo APK file ko scan karta hai. Jaise airport mein bag screen hoti hai, waise hi MobSF APK ke har component ko check karta hai – permissions, hardcoded secrets, insecure code patterns – aur ek detailed report deta hai.
@@ -680,6 +733,10 @@ Aapke notes mein Page 40 par **Content Providers** ka mention hai, lekin mere pr
 
 ### 🎯 1. Title / Topic: **Module 6.4 – SharedPreferences Insecure Data Storage Analysis**
 
+#### Beginner Clarification
+- run-as package not debuggable error par alternatives ready rakho.
+- Common options: rooted shell access, backup route where allowed, objection file download, emulator-based extraction.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 SharedPreferences app ki "chhoti diary" hoti hai jahan wo chhoti-moti baatein likhti hai – jaise username, password, ya token. Agar ye diary bina lock ke rakhi ho, to koi bhi (malware ya hacker) usse padh sakta hai.
 
@@ -746,6 +803,11 @@ Banking app ke shared_prefs mein session token plaintext mila. Hacker ne ADB bac
 
 ### 🎯 1. Title / Topic: **Module 6.5 – PIDCat: Focused Log Analysis**
 
+#### Beginner Clarification
+- PIDCat me log-level filtering available hai: verbose, debug, info, warning, error.
+- Crash triage ke liye error filter useful hota hai.
+- Multiple levels combine bhi kar sakte ho.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 `logcat` bahut saara clutter produce karta hai. PIDCat ek "filter" hai jo sirf ek specific app ke logs dikhata hai, aur colors se highlight bhi karta hai. Jaise TV mein sirf apna favorite channel dekho.
 
@@ -777,6 +839,11 @@ Real-time logs aane lagenge, sirf us app ke.
 ---
 
 ### 🎯 **1. Title / Topic: Module 6.6 – Content Providers: The Data Sharing Gateways**
+
+#### Beginner Clarification
+- Content URI format: content://authority/path/id.
+- Authority provider identifier hota hai, path resource type batata hai, id optional record selector hota hai.
+- SQLi safe code ke liye selectionArgs style parameterized query use karni chahiye.
 
 #### 🐣 **2. Samjhane ke liye (Simple Analogy)**
 Content Provider ko ek "library ki issue counter" ki tarah samjho. Jaise library mein books (data) rakhi hoti hain aur koi bhi member (app) proper procedure se book issue kar sakta hai. Par agar counter khula ho aur bina ID check ke book de di jaye, toh koi bhi andar ki sensitive books (user data) le ja sakta hai. Android mein Content Provider wahi "data counter" hai jo dusre apps ko app ka data serve karta hai.
@@ -936,6 +1003,11 @@ App A (Malicious)          Android System                App B (Victim)
 ---
 
 ### 🎯 1. Title / Topic: **Module 6.7 – WebView Vulnerabilities: The Silent Exploit Gateway**
+
+#### Beginner Clarification
+- addJavascriptInterface methods ko Android 4.2+ me JavascriptInterface annotation chahiye.
+- WebView file access defaults version and target SDK ke saath change hue hain.
+- Secure approach: file access only when truly needed.
 🐣 2. Samjhane ke liye (Simple Analogy)
 WebView ko app ke andar ka "chhota browser" samjho. Jaise browser mein koi bhi website open kar sakte ho, waise hi WebView app mein web content dikhata hai. Par agar ye browser galat tarah se configure ho, toh hacker uske through app ke andar ghus sakta hai – jaise browser ke address bar mein kuch daal kar sensitive files read kar lena.
 
@@ -1033,6 +1105,11 @@ For Pentesters: WebView hamesha check karo – ye sabse common RCE source hai.
 WebView – app ka “khidki” jahan se hacker andar aa sakta hai!
 
 ### 🎯 1. Title / Topic: **Module 6.8 – Deep Links & Intent Scheme Exploitation**
+
+#### Beginner Clarification
+- BROWSABLE category ka matlab activity browser or deep-link source se launch ho sakti hai.
+- Intent.parseUri intent string ko runtime intent object me convert karta hai.
+- Weak validation ho to intent redirection abuse possible ho sakta hai.
 🐣 2. Samjhane ke liye (Simple Analogy)
 Deep Links ko "magic words" ki tarah samjho. Jaise kisi locked room mein andaar jaane ke liye magic word bolna padta hai ("Khulja Sim Sim"), waise hi app mein kisi specific screen (activity) ko direct open karne ke liye deep link use hota hai – jaise myapp://reset_password. Agar ye magic word galat tarah se implement ho, toh koi bhi bahar wala (malicious app) use bolkar andar aa sakta hai.
 
@@ -1138,6 +1215,11 @@ Deep Links – app ke “magic words”, galat likhe to hacker ka ghar! 🪄
 
 
 ### 🎯 1. Title / Topic: **Module 6.9 – UI Data Leakage: Clipboard & Screenshot Protection**
+
+#### Beginner Clarification
+- Agar app FLAG_SECURE tampering detect kare to alternatives use karo.
+- Example: screenrecord, external camera capture, emulator host capture.
+- Authorized scope me hi sensitive UI capture methods use karo.
 🐣 2. Samjhane ke liye (Simple Analogy)
 Maan lo tum ATM mein PIN enter kar rahe ho, aur background mein koi photo le raha hai – problem. App ko sensitive screen par screenshot lene se rokna chahiye. Clipboard bhi aisa hi hai – agar tumne password copy kiya aur doosra app clipboard padh sake, to password leak ho jayega.
 
@@ -1330,6 +1412,11 @@ MobSF dynamic analysis feature app ko real device/emulator par run karta hai aur
 
 ### 🎯 1. Title / Topic: **Module 7.3 – Burp Suite Setup for Android Interception**
 
+#### Beginner Clarification
+- Android 7+ app trust model me user-installed proxy certificates by default trusted nahi hote.
+- NSC me user cert source explicitly allow ho tab behavior change hota hai.
+- Proxy setup ke liye host IP verify karo: Windows ipconfig, Linux or Mac ifconfig or hostname -I.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Burp Suite ek "telephone tap" hai jo app aur server ke beech ki baat (HTTP/HTTPS) record karta hai. Usse hum dekh sakte hain ki app kya data bhej rahi hai, aur usme change kar ke server ko fool bhi kar sakte hain. Par agar app SSL pinning use kar rahi hai, to pehle use bypass karna hoga (baad mein dekhenge).
 
@@ -1370,6 +1457,11 @@ Burp Suite ek "telephone tap" hai jo app aur server ke beech ki baat (HTTP/HTTPS
 ---
 
 ### 🎯 1. Title / Topic: **Module 7.4 – Patching Apps Automatically with Objection**
+
+#### Beginner Clarification
+- objection patchapk failures common hain.
+- Typical causes: missing apktool, missing Java, rebuild errors, wrong gadget architecture.
+- Verbose run se failure reason isolate karna easy hota hai.
 
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Objection ek "smart surgeon" hai jo app ka operation kar ke usme Frida ka "chip" laga deta hai (patch). Is chip ki madad se hum runtime mein app ke andar ghus kar SSL pinning disable kar sakte hain, data nikaal sakte hain, etc. Aur sab automatically!
@@ -1418,6 +1510,11 @@ Objection ek "smart surgeon" hai jo app ka operation kar ke usme Frida ka "chip"
 ---
 
 ### 🎯 1. Title / Topic: **Module 7.5 – Manual Patching with Frida Gadget**
+
+#### Beginner Clarification
+- Apktool install method OS-specific hoti hai: Windows manual jar plus bat, Linux apt, Mac brew.
+- Keytool prompt flow samajhna zaruri hai for keystore creation and signing.
+- Wrong signing steps se patched APK install fail karega.
 
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Jab automatic patch fail ho jaye (jaise objection kaam na kare), tab hum "manual surgery" karte hain. Hum app ko decompile karte hain, Frida gadget ki file usme daalte hain, aur manifest mein entry add karte hain. Phir rebuild karte hain. Ye thoda mushkil hai, but full control milta hai.
@@ -1483,6 +1580,11 @@ Jab automatic patch fail ho jaye (jaise objection kaam na kare), tab hum "manual
 
 ### 🎯 1. Title / Topic: **Module 7.6 – Dynamic Analysis with Objection Commands**
 
+#### Beginner Clarification
+- objection command not found error usually PATH issue hota hai.
+- Windows me Python Scripts path add karo.
+- Linux or Mac me local bin path add karo, fallback python module execution possible hai.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Jab app patch ho jaye aur objection attached ho, to humare paas remote control hai. Hum app ke andar jhaank sakte hain, uske secrets nikaal sakte hain, uske behavior change kar sakte hain. Objection commands woh remote control ke buttons hain.
 
@@ -1531,6 +1633,10 @@ $ objection explore
 
 ### 🎯 1. Title / Topic: **Module 7.7 – Frida Codeshare: Reusing Scripts**
 
+#### Beginner Clarification
+- curl unavailable ho to PowerShell download, manual script save, ya built-in curl alternative use karo.
+- Codeshare script ko local file me save karke frida load karna reliable fallback hai.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Frida Codeshare ek "script library" hai jahan log apne frida scripts share karte hain. Jaise StackOverflow par code milta hai, waise yahan directly frida scripts milti hain – SSL bypass, root bypass, etc. Bas ID copy karo, objection mein load karo, kaam ho jayega.
 
@@ -1575,6 +1681,10 @@ frida -U -f <package> -l <(curl -s https://codeshare.frida.re/api/scripts/run/?i
 
 ### 🎯 1. Title / Topic: **Module 7.8 – Alternative SSL Bypass Tools: APK-MITM & Androidunpinner**
 
+#### Beginner Clarification
+- npm command fail ho to pehle Node.js LTS install verify karo.
+- npm version check ke baad hi apk-mitm global install run karo.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Objection ke alawa bhi tools hain jo SSL pinning bypass kar dete hain. APK-MITM ek "automatic patcher" hai jo APK mein changes kar deta hai taaki Burp certificate accept ho. Androidunpinner bhi aisa hi hai.
 
@@ -1605,6 +1715,10 @@ Objection ke alawa bhi tools hain jo SSL pinning bypass kar dete hain. APK-MITM 
 ---
 
 ### 🎯 1. Title / Topic: **Module 7.9 – Bypassing Fingerprint Authentication**
+
+#### Beginner Clarification
+- FingerprintManager and BiometricPrompt API generation differences samajhna zaruri hai.
+- Frida bypass scripts me app ke actual callback path ke hisab se hooks adjust karo.
 
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Kuch apps fingerprint use karti hain login ke liye. Par fingerprint check ka result `false` ya `0` hota hai galat fingerprint ke liye. Hum Frida se response `true` kar sakte hain – jisse app sochegi fingerprint sahi hai, chahe galat ho.
@@ -1688,6 +1802,11 @@ Ya fir kuch specific topic chahiye to batao!
 
 ### 🎯 1. Title / Topic: **Module 8.1 – Mobexler: The All-in-One Mobile Pentesting Platform**
 
+#### Beginner Clarification
+- VM network mode choice important hai.
+- NAT me device to VM direct reachability issues aa sakte hain.
+- Bridged mode mobile proxy lab ke liye generally better hota hai.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Mobexler ek "Swiss Army knife" hai mobile pentesting ke liye. Jaise ek bag mein saare zaroori tools rakh lo – Burp, ADB, Frida, MobSF, sab pre-configured. Aap bas platform boot karo aur kaam shuru karo, alag se tool install karne ki tension nahi.
 
@@ -1737,6 +1856,10 @@ Bug bounty hunter ko ek naya device mila, usne turant Mobexler boot kiya, device
 ---
 
 ### 🎯 1. Title / Topic: **Module 8.2 – Root Detection & Bypass Techniques**
+
+#### Beginner Clarification
+- Magisk Hide legacy term hai; modern flows me Zygisk plus denylist approach use hoti hai.
+- Runtime bypass tools temporary help dete hain, persistent hide config alag cheez hai.
 
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Rooted device ko app "tampered" samajhti hai aur mana kar deti hai. Jaise ek shop par "No Shoes" ka board ho, to barefoot nahi ja sakte. Lekin hum mozze pehen kar (bypass techniques) andar ghus sakte hain.
@@ -1824,6 +1947,10 @@ Banking app rooted device par block ho raha tha. Hacker ne objection se bypass k
 
 ### 🎯 1. Title / Topic: **Module 8.3 – Writing Custom Frida Scripts for Android**
 
+#### Beginner Clarification
+- Overloaded methods hook karne ke liye exact overload signature dena padta hai.
+- Same method name ke int or string or double versions separately handle karne hote hain.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Objection ne pre-built commands diye, lekin kabhi kabhi specific functionality ke liye custom script likhni padti hai. Jaise "is particular button ko disable karo" ya "server response modify karo". Frida scripts wo tailor-made tools hain.
 
@@ -1897,6 +2024,10 @@ Hacker ne custom script likhi jo `onClick` listener hook karke "Buy" button ko b
 
 ### 🎯 1. Title / Topic: **Module 8.4 – Emulator Detection & Bypass**
 
+#### Beginner Clarification
+- Emulator bypass me Build class ke multiple fields and system properties spoof karne padte hain.
+- Sirf model change karna enough nahi hota; brand, fingerprint, hardware keys bhi check hoti hain.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 App ko pata chal jata hai ki wo emulator mein chal rahi hai (like Android Studio emulator), toh wo mana kar deti hai. Hacker chahta hai emulator mein bhi app chale, to detection bypass karna hoga.
 
@@ -1958,6 +2089,10 @@ Hacker ne emulator pe app run kiya, traffic capture kiya, aur vulnerable endpoin
 
 ### 🎯 1. Title / Topic: **Module 8.5 – Native Code Analysis with Ghidra (Intro)**
 
+#### Beginner Clarification
+- Java_ prefixed native symbols JNI mapping represent karte hain.
+- Format se package, class, method decode karke native path trace kiya ja sakta hai.
+
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Jab app ka sensitive logic C/C++ (native library) mein chhupa ho, to Java decompile karne se kuch nahi milega. Ghidra wo tool hai jo native library (`.so` file) ko disassemble karta hai aur C-like pseudo-code banata hai, taki hum samajh sakein ki native code kya kar raha hai.
 
@@ -2008,6 +2143,10 @@ Banking app ka encryption key native code mein hardcoded tha. Ghidra se key mil 
 ---
 
 ### 🎯 1. Title / Topic: **Module 8.6 – iOS Basics for Android Hackers**
+
+#### Beginner Clarification
+- Jailbreak types: tethered, untethered, semi-tethered, semi-untethered.
+- Reboot behavior difference pentest lab planning me directly impact karta hai.
 
 #### 🐣 2. Samjhane ke liye (Simple Analogy)
 Android seekh liya, ab iOS ki baari. iOS thoda zyada "bhadk" hai – locked system, sandbox strict, lekin wahan bhi pentesting possible hai. Samajh lo Android "khula bazaar" hai, iOS "mall" hai – rules alag, lekin andar ghusne ke raaste hain.
@@ -2089,6 +2228,11 @@ Phase 4: Professional & Advanced Topics
 
 
 ### 🎯 1. Title / Topic: **Module 9.1 – Writing Pentest Reports: The Final Weapon**
+
+#### Beginner Clarification
+- Official CVSS calculator use karo: first.org cvss 3.1 calculator.
+- Base metrics choose karte waqt AV, AC, PR, UI, S, C, I, A clearly map karo.
+- Report me sample vector include karna reproducibility improve karta hai.
 🐣 2. Samjhane ke liye (Simple Analogy)
 Pentesting ke baad report wo "school ki report card" hai jahan tum batate ho ki student (app) kaise perform kiya, kahan fail hua (vulnerabilities), aur kaise improve kare (remediation). Client ko sirf vulnerabilities nahi, balki unka business impact samajhna hota hai. Agar report weak hai, to poora pentest bekar.
 
@@ -2186,4 +2330,5 @@ A: Itni ki developer bina confusion ke fix kar paye.
 
 📝 14. Summary
 Pentest Report – tumhara “legal weapon”, jisse app secure banti hai! 📄
+
 
