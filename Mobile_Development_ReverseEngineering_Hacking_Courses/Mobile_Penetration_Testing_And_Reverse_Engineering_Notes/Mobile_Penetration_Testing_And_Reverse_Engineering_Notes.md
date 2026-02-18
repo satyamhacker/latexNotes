@@ -4498,12 +4498,10 @@ res/xml/ folder mein network_security_config.xml dhundho.
 
 Agar file nahi milti, toh default config hoti hai – AndroidManifest mein reference check karo:
 
-xml
-<application android:networkSecurityConfig="@xml/network_security_config" ...>
+```xml`r`n<application android:networkSecurityConfig="@xml/network_security_config" ...>
 File content dekho:
 
-xml
-<?xml version="1.0" encoding="utf-8"?>
+```xml`r`n<?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">example.com</domain>
@@ -4512,8 +4510,7 @@ xml
             <certificates src="system" />
         </trust-anchors>
     </domain-config>
-</network-security-config>
-Vulnerability check:
+</network-security-config>`r`n```\r`nVulnerability check:
 
 cleartextTrafficPermitted="true" + domain config nahi hai → pure app mein HTTP allowed.
 
@@ -5241,8 +5238,7 @@ File: AndroidManifest.xml mein <intent-filter>.
 
 Example:
 
-xml
-<activity android:name=".ResetPasswordActivity" android:exported="true">
+```xml`r`n<activity android:name=".ResetPasswordActivity" android:exported="true">
     <intent-filter>
         <action android:name="android.intent.action.VIEW" />
         <category android:name="android.intent.category.DEFAULT" />
@@ -5250,6 +5246,7 @@ xml
         <data android:scheme="myapp" android:host="reset" />
     </intent-filter>
 </activity>
+```
 Hacker kya dhundhta hai?
 
 Activities with VIEW action and BROWSABLE category.
@@ -6442,3 +6439,12 @@ Pentest Report – tumhara “legal weapon”, jisse app secure banti hai! 📄
 
 
 =====================================================================================
+
+
+
+
+
+
+
+
+
