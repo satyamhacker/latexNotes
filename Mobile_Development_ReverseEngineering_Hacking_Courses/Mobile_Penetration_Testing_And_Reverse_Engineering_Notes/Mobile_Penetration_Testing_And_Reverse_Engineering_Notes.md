@@ -1,9 +1,3 @@
-Chalo bhai, shuru karte hain aapke Complete Mobile Pentester notes ka Module 1\!
-
-Yeh module aapka base hai. Yahan hum apni "Hacking Lab" setup karenge 💻. Hum samjhenge ki Android aur iOS fundamentally kaise alag hain, phone ko 'root' ya 'jailbreak' kaise karna hai, aur apne zaroori hathiyaar (tools) kaise install karne hain. Ready? 🚀
-
------
-
 ## 1.1: Comparison: Android vs. iOS Security Models
 
 1.  **🎯 Title / Short Summary:** Android (Khula maidan) vs. iOS (Qila) 🛡️. Dono phones data ko kaise mehfooz rakhte hain, aur unki security philosophy mein kya fark hai.
