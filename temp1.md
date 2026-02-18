@@ -1,6 +1,6 @@
-**Arrey bhai, bilkul! Tune maanga hai Zero-to-Hero ka rasta, toh main ek ek kadam samjhaunga. Pehle phase mein hum cover karenge: Android Lab Setup aur Static Analysis ki shuruaat – specifically JADX-GUI, APK pull karna, AndroidManifest.xml samajhna, aur Hardcoded Strings dhundhna. Har topic ko 14-point strict structure mein pakka samjhaunga, commands clear karke, target anatomy ke saath, aur ethics ka dhyan rakhte hue. Chaliye shuru karte hain! 🚀**
+### TCM MOBILE APPLICATION PENETRATION TESTING COURSE
 
----
+
 
 ## Phase 1: Android Lab Setup & Static Analysis Basics
 
