@@ -1,32 +1,3 @@
-## **Module 17: Advanced Scanning & Automation**
-
-*Burp Professional ke scanning features ko optimize karo.*
-
-### Topic 17.1: Custom Scan Configurations
-- **Scan Speed vs Accuracy:**
-    - Fast Scan: Critical issues only (5-10 min).
-    - Deep Scan: All checks (1-2 hours).
-    - Stealth Scan: Low and slow (1 request/sec).
-- **Insertion Points:** Sab parameters, headers, cookies, JSON/XML nodes.
-
-### Topic 17.2: Application Login Configuration
-- **Recorded Login Sequences:** Manually login karte waqt Burp record kare, phir scan mein use kare.
-- **Credential Management:** Multiple usernames/passwords provide karo.
-- **2FA Handling:** OTP entry automation (advanced, but possible with macros).
-
-### Topic 17.3: Resource Pools for Scale
-- **Custom Pool Settings:** "WAF Bypass" – max concurrent 2, delay 2000ms, retries 3 with exponential backoff.
-- **Pool Assignment:** Intruder → Aggressive pool (50 concurrent). Scanner → Balanced pool (10 concurrent). Manual testing → Single-threaded pool.
-
-### Topic 17.4: Scheduled Scanning
-- Burp Professional mein scheduled scans feature hai.
-- Night scans schedule karo jab traffic kam ho.
-- Email notifications.
-
-> **Pro-Tip:** Scanner chala raha hai aur WAF block kar raha hai? Stealth mode use kar. Raat ko scan scheduled kar. Login sequence record kar ke de, scanner automatically login karega aur andar ke pages bhi scan karega.
-
----
-
 ## **Module 18: Professional Reporting & Remediation Verification**
 
 *Bug dhoondhna aadha kaam hai, report likhna aur fix verify karna baaki aadha.*

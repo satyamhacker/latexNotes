@@ -13564,3 +13564,567 @@ Is module mein humne seekha ki WAF/IPS ko kaise bypass karein:
 - **WAF Fingerprinting:** Pehle WAF ki pehchan karo, phir targeted bypass karo.
 
 ========================================================================================
+
+## Module 17: Advanced Scanning & Automation
+
+**Overview:**  
+Burp Suite Professional ka scanning feature automated vulnerability detection ke liye use hota hai. Lekin ek hi tarike ka scan sab jagah kaam nahi aata. Kabhi fast scan chahiye (sirf critical issues dhundhne), kabhi deep scan (sab kuch check), kabhi stealth scan (WAF se bachke). Is module mein hum seekhenge ki Burp ke scanner ko kaise customize karein, login sequences automate karein, resources manage karein, aur scheduled scans chalaayein.
+
+---
+
+## Topic 17.1: Custom Scan Configurations
+
+### 🐣 Samjhane ke liye (Simple Analogy)
+
+Socho tum ek doctor ho aur patients ki alag-alag tarah ki check-up karni hai. Kisi ko sirf blood pressure check karna hai (fast scan), kisi ko full body check-up (deep scan), aur kisi ko chupke se dekhna hai ki koi problem toh nahi (stealth scan). Har patient ke liye alag process. Burp ka scanner bhi aisa hai – tum bata sakte ho ki kaise scan karna hai: fast, deep, ya stealth.
+
+### 📖 Technical Definition (Interview Answer)
+
+**Custom Scan Configurations** Burp Scanner mein predefined ya user-defined settings hain jo scan ki speed, depth, aur insertion points ko control karti hain. Tum alag-alag scenarios ke liye different configs bana sakte ho – jaise fast scan for critical issues, deep scan for comprehensive coverage, stealth scan for WAF evasion.
+
+**Keywords Breakdown:**
+- **Scan Speed:** Kitni jaldi scan complete hoga.
+- **Accuracy:** Kitni gehrai se vulnerabilities check hongi.
+- **Insertion Points:** Kaunse parts of request mein payloads inject honge (parameters, headers, cookies, JSON nodes).
+- **Stealth Scan:** Slow aur low-profile scan jo WAF ko trigger na kare.
+
+### 🧠 Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**  
+Default scan settings sab jagah suitable nahi hote. Agar tum production site par fast scan karoge, to WAF block kar sakta hai. Agar tum development site par deep scan karoge to time waste hoga. Har situation ke hisaab se scanning strategy alag chahiye.
+
+**Solution:**  
+Custom scan configurations se tum speed aur depth control kar sakte ho. Tum insertion points bhi define kar sakte ho – ki sirf URL parameters scan karne hain ya headers bhi, ya JSON body bhi.
+
+### 🔍 Visual - Jab Screen Par Kya Dikhega
+
+**Location:**  
+Burp Professional mein **Dashboard** tab → **New Scan** → **Scan Configuration** section mein tum preset configs select kar sakte ho ya "New" button se apni config bana sakte ho.
+
+**Appearance:**  
+Scan configuration editor mein kuch aisa dikhega:
+- **Scan Speed/Accuracy:** Fast / Medium / Deep slider ya radio buttons.
+- **Insertion Points:** List of checkboxes – URL parameters, Body parameters, Cookies, Headers, JSON fields, etc.
+- **Advanced options:** Crawl strategy, Audit optimization, etc.
+
+### ⚙️ Under the Hood (Technical Working)
+
+1. **Fast Scan:** Burp sirf high-confidence aur critical issues check karta hai. Isme time-consuming checks skip hote hain (jaise blind SQLi, second-order vulnerabilities). Roughly 5-10 min lagte hain.
+2. **Deep Scan:** Saare checks active hote hain, including time-based, out-of-band, and multi-step attacks. 1-2 ghante lag sakte hain.
+3. **Stealth Scan:** Request frequency slow hoti hai (e.g., 1 request/sec), aur low-profile payloads use hote hain. Isse WAF trigger hone ka chance kam hota hai.
+4. **Insertion Points:** Jab scan chalta hai, Burp har selected insertion point par payloads try karta hai. Jaise agar tumne Cookies check kiya, to Burp cookie values change karke attack bhejega.
+
+### 💻 Hands-On: Step-by-Step Practical
+
+**Goal:** Ek custom scan configuration banana – "Stealth Scan" jo sirf critical issues check kare, request delay rakhe, aur sirf URL parameters mein payloads daale.
+
+**Step 1:** Burp Professional open karo. **Dashboard** tab par jao.
+**Step 2:** **New Scan** button click karo. Ek dialog khulega.
+**Step 3:** "Scan Configuration" ke saath ek gear icon ya dropdown hoga. Usko click karo aur "New" select karo.
+**Step 4:** Configuration editor khulega. Name daalo: "My Stealth Scan".
+**Step 5:** **Scan Speed/Accuracy** section mein "Fast" select karo (critical issues ke liye).
+**Step 6:** **Crawl Strategy** mein "Fast" ya "Normal" select kar sakte ho. Stealth ke liye "Fast" better hai.
+**Step 7:** **Insertion Points** mein sab unchecked karo, sirf "URL parameters" ko check karo. (Ya jitna chaho)
+**Step 8:** **Advanced** settings mein jao. Wahan "Request delay" ya "Throttle between requests" option hoga. Use enable karo aur delay set karo, e.g., 1000ms (1 second). Isse scan slow hoga.
+**Step 9:** **Save** karo. Ab ye config available hogi jab bhi naya scan banoge.
+
+**Step 10:** Naya scan banate waqt, is config ko select karo.
+
+### ⚖️ Comparison (Fast vs Deep vs Stealth)
+
+| Feature | Fast Scan | Deep Scan | Stealth Scan |
+|---------|-----------|-----------|--------------|
+| **Duration** | 5-10 min | 1-2 hours | Slow (customizable) |
+| **Checks performed** | Critical only (SQLi, XSS, etc.) | All checks (including blind) | Similar to Fast but with delays |
+| **WAF evasion** | Low (fast requests may trigger) | Very low (high request rate) | High (slow requests) |
+| **Insertion points** | Default all | Default all | Custom (only needed) |
+| **Use case** | Quick sanity check, CI/CD | Comprehensive pentest | Production sites with WAF |
+
+### 🚫 Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** Production site par deep scan chala dena, jisse WAF block kar de aur site slow ho jaye.  
+  **Fix:** Stealth scan use karo, ya scheduled scan raat mein.
+- **Mistake 2:** Insertion points mein sab kuch select kar lena, jisse scan lamba ho jaye.  
+  **Fix:** Sirf relevant insertion points select karo.
+- **Mistake 3:** Fast scan ko hamesha use karna aur low-confidence vulnerabilities miss kar dena.  
+  **Fix:** Deep scan bhi time-to-time chalao.
+
+### 🤔 Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+- **"Log sochte hain ki Fast scan mein sab vulnerabilities mil jayengi."**  
+  **Actually:** Fast scan sirf critical, easy-to-find vulnerabilities check karta hai. Blind SQLi, second-order, aur time-based vulnerabilities miss ho sakti hain.
+- **"Log sochte hain ki Stealth scan ka matlab sirf delay hai."**  
+  **Actually:** Stealth scan mein delay ke alawa payloads bhi aise choose hote hain jo less intrusive hote hain (e.g., no heavy fuzzing).
+
+### 🌍 Real-World Use Case (Bug Bounty / Pentesting)
+
+**Scenario:** Ek bug bounty hunter production website test kar raha hai jiske upar Cloudflare WAF hai. Usne deep scan chala diya to turant IP block ho gaya. Phir usne stealth scan config banayi – request delay 2 seconds, sirf URL parameters, aur fast scan checks. Scan raat ko chala, successfully WAF bypass kiya, aur kuch critical issues mile. Bounty $1000.
+
+### 🎨 Visual Diagram (ASCII Art)
+
+```
+[Custom Scan Config]
+    ├── Speed/Accuracy: Fast / Deep / Stealth
+    ├── Insertion Points: URL, Body, Cookies, Headers, JSON
+    └── Advanced: Delay, Retries, Throttle
+        ↓
+[Burp Scanner] uses config to launch scan
+```
+
+### 🛠️ Best Practices (Pro Tips)
+
+- **Tip 1:** Alag-alag configs banao – "Quick-Pentest" (fast, all insertion), "Stealth-Prod" (fast, URL only, delay), "Deep-Dive" (deep, all).
+- **Tip 2:** Insertion points mein JSON/XML nodes include karo agar API test kar rahe ho.
+- **Tip 3:** Scan ke pehle manual exploration karo, phir scan ko guided karo (target scope define karo).
+
+### ⚠️ Consequences of Failure (Agar galat kiya toh?)
+
+- **Scenario 1:** Fast scan se vulnerability miss ho gayi, client ke production mein breach ho gaya.
+- **Scenario 2:** Deep scan ne server overload kar diya, site down ho gayi, client upset.
+- **Scenario 3:** Stealth scan ke baad bhi WAF trigger ho gaya, IP block.
+
+### ❓ FAQ (Interview Questions)
+
+**Q1: Burp Scanner mein custom scan configuration kyun use karte hain?**  
+**A1:** Har target ki alag zaroorat hoti hai – kabhi speed chahiye, kabhi stealth, kabhi deep coverage. Custom configs se flexibility milti hai.
+
+**Q2: Insertion points kya hote hain?**  
+**A2:** Woh locations jahan scanner payloads inject karta hai, e.g., URL parameters, POST body, headers, cookies.
+
+**Q3: Fast scan mein kaunsi vulnerabilities miss ho sakti hain?**  
+**A3:** Blind SQL injection, time-based vulnerabilities, second-order vulnerabilities, aur chained attacks.
+
+**Q4: Stealth scan kaise kaam karta hai?**  
+**A4:** Request delay daal kar aur non-intrusive payloads use karke, taaki WAF rate limit trigger na ho.
+
+**Q5: Kya hum multiple configs ek saath use kar sakte hain?**  
+**A5:** Haan, tum ek base config bana kar usme modifications add kar sakte ho.
+
+### 📝 Ek Line Mein Yaad Rakhne Ko (Summary)
+
+"Custom scan config = scanner ka remote control – speed, depth, aur insertion points tumhari marzi."
+
+---
+
+## Topic 17.2: Application Login Configuration
+
+### 🐣 Samjhane ke liye (Simple Analogy)
+
+Socho tum kisi building mein andar jaana chahte ho, lekin gate par guard hai jo ID maangta hai. Tumhe guard ko ID dikhani padti hai har baar andar jaate waqt. Agar tum automated robot bhejoge andar, to robot ko bhi guard ke saamse se guzarna hoga. Robot ke paas tum pehle se ID de sakte ho, ya robot ko sikha sakte ho ki guard se kaise baat karni hai. Burp Scanner ko bhi agar tum logged-in sections scan karwana chaho, to use login karna sikhana padega – ya to credentials do, ya login sequence record karo.
+
+### 📖 Technical Definition (Interview Answer)
+
+**Application Login Configuration** Burp Scanner ki wo setting hai jo tumhe authenticated scanning karne deti hai. Tum scanner ko ya to static credentials provide kar sakte ho, ya ek recorded login sequence (macro) bana sakte ho jisse scanner automatically login kare, session maintain kare, aur site ke protected areas ko scan kare.
+
+**Keywords Breakdown:**
+- **Static credentials:** Fixed username/password pair.
+- **Recorded login sequence:** Burp macro jo login form submit karta hai, session cookies handle karta hai.
+- **2FA handling:** Advanced macro jisme OTP entry bhi automate ho sakti hai.
+- **Credential management:** Multiple credentials provide karna (e.g., different user roles).
+
+### 🧠 Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**  
+Zydaatar applications mein sensitive functionality login ke baad hi accessible hoti hai (e.g., dashboard, user profile, admin panel). Agar scanner sirf public pages scan karega, to bahut saari vulnerabilities miss ho jayengi.
+
+**Solution:**  
+Login configuration se scanner authenticated areas mein bhi ghus sakta hai, pages explore kar sakta hai, aur vulnerabilities dhundh sakta hai.
+
+### 🔍 Visual - Jab Screen Par Kya Dikhega
+
+**Location:**  
+Burp Professional mein **Dashboard** → **New Scan** → **Application Login** section (ya scan configuration wizard mein). Wahan tum "Login credentials" provide kar sakte ho ya "Recorded login sequences" select kar sakte ho.
+
+**Appearance:**  
+Ek dialog box hoga jisme tum fields bhar sakte ho:
+- **Login type:** Static credentials, Recorded login, etc.
+- **Credentials:** Username, password fields.
+- **Macro editor:** Jahan tum macro define kar sakte ho (steps record kar sakte ho).
+
+### ⚙️ Under the Hood (Technical Working)
+
+1. **Static credentials:** Scanner har session ke liye in credentials ka use karta hai. Pehle login request bhejta hai, response se cookies capture karta hai, phir un cookies ke saath subsequent requests bhejta hai. Agar session expire ho jaye, to phir se login karta hai.
+2. **Recorded login sequence:** Tum macro mein multiple steps record karte ho – login page visit, form submit, OTP entry, etc. Scanner macro execute karta hai, aur final response se session cookies nikaal leta hai.
+3. **Credential management:** Tum multiple credentials (e.g., admin, user, editor) provide kar sakte ho, scanner har role ke saath alag scan chalayega.
+
+### 💻 Hands-On: Step-by-Step Practical
+
+**Goal:** Scanner ke li ek recorded login sequence banana jo 2FA bypass na kare (sirf username/password). Maan lo website hai `example.com/login`.
+
+**Step 1:** Pehle manually login process complete karo Burp Proxy ke through, taaki Burp ko saari requests pata hon.
+**Step 2:** Burp mein **Project options** tab → **Sessions** sub-tab → **Macros** section mein jao. "Add" button click karo.
+**Step 3:** Macro editor khulega. "Add" button se naye macro step add karo.
+   - Pehla step: `GET /login` – login page load.
+   - Doosra step: `POST /login` with credentials (ye request tumne manually ki thi, wo history mein milegi). Select karo.
+   - Agar koi redirects hain, to unhe bhi add kar sakte ho.
+**Step 4:** Macro ko test karo – "Test macro" button. Agar sahi se login ho raha hai, to macro successful response dega.
+**Step 5:** Ab is macro ko scan configuration mein use karo. Jab naya scan banao, to **Application Login** section mein "Recorded login sequence" select karo aur macro choose karo.
+**Step 6:** Scanner ab jab bhi login zaroorat hogi, ye macro execute karega.
+
+**For 2FA handling:** Iske liye advanced macro banana padega jisme OTP field automate ho. Lekin OTP dynamic hota hai, to ya to OTP prediction possible ho, ya tum macro mein pause daal kar manual entry kar sakte ho (less automated). Better approach: Use Burp's session handling rules with a custom script.
+
+### ⚖️ Comparison (Static Credentials vs Recorded Login)
+
+| Feature | Static Credentials | Recorded Login Sequence |
+|---------|---------------------|--------------------------|
+| **Complexity** | Simple, just username/password | Complex, multiple steps handle |
+| **2FA support** | No | Yes (if OTP predictable or manual) |
+| **Session maintenance** | Automatic re-login | Automatic re-login (macro) |
+| **Multi-step forms** | No (only single login request) | Yes |
+| **Use case** | Simple login forms | Login with CSRF tokens, redirects, multi-page |
+
+### 🚫 Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** Macro banate waqt saare steps include na karna, jisse login fail ho jaye.  
+  **Fix:** Ensure karo ki macro mein login page GET, POST, aur redirects sab ho.
+- **Mistake 2:** Static credentials use karte waart ye sochna ki scanner session handle kar lega. Haan, karega, lekin agar site CSRF token use karti hai, to token bhi provide karna padega (macro better hai).
+- **Mistake 3:** Macro mein login response se cookies extract karna bhool jana. Burp automatically extract kar leta hai, lekin agar site cookie set karne ke alawa kuch aur mechanism use karti hai, to session handling rules chahiye.
+
+### 🤔 Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+- **"Log sochte hain ki macro banane se scanner automatically saare logged-in pages explore kar lega."**  
+  **Actually:** Macro sirf login process automate karta hai. Explore karne ke liye scanner crawl karta hai, lekin wo already login hai. Agar kuch pages sirf specific roles ke liye accessible hain, to tumhe multiple macros with different credentials provide karne honge.
+
+- **"Log sochte hain ki 2FA easily automate ho sakta hai."**  
+  **Actually:** 2FA automate karna mushkil hai kyunki OTP har baar change hota hai. Agar OTP time-based hai, to script likhni padegi jo OTP generate kare. Ya tum "manual intervention" mode use kar sakte ho jahan scan rukta hai aur tum OTP enter karte ho.
+
+### 🌍 Real-World Use Case (Bug Bounty / Pentesting)
+
+**Scenario:** Ek pentester ko ek web application test karna tha jisme login ke baad bahut saare features the. Usne recorded login sequence banaya jisme login form, dashboard redirect, sab steps the. Scanner ne 2 ghante mein authenticated scan complete kar liya aur kuch high-severity vulnerabilities nikaal di. Agar woh authenticated scan nahi karta, to ye vulnerabilities miss ho jati.
+
+### 🎨 Visual Diagram (ASCII Art)
+
+```
+[Macro]
+    Step1: GET /login
+    Step2: POST /login (credentials)
+    Step3: GET /dashboard (after redirect)
+        ↓
+[Scanner] uses macro to login
+        ↓
+[Scanner] crawls authenticated pages
+```
+
+### 🛠️ Best Practices (Pro Tips)
+
+- **Tip 1:** Macro mein login steps ke baad ek request daalo jo verify kare ki login successful hua (e.g., `GET /profile`). Agar ye request 200 de, to login success.
+- **Tip 2:** Multiple user roles ke liye alag-alag macro/config banao.
+- **Tip 3:** Agar site CSRF token use karti hai, to macro mein pehle token extract karna hoga. Iske liye session handling rules mein "Extract from response" use karo.
+
+### ⚠️ Consequences of Failure (Agar galat kiya toh?)
+
+- **Scenario 1:** Macro galat hai to scanner login nahi kar payega, aur sirf public pages scan honge.
+- **Scenario 2:** Agar scanner ne login kar liya lekin session expiry handle nahi kiya, to beech mein sab requests unauthenticated ho jayengi.
+- **Scenario 3:** 2FA handle na karne par scanner atak jayega ya login fail.
+
+### ❓ FAQ (Interview Questions)
+
+**Q1: Burp Scanner mein login configuration kyun zaroori hai?**  
+**A1:** Kyunki bahut saari vulnerabilities authenticated areas mein hoti hain. Unhe dhundhne ke liye scanner ko login karna padta hai.
+
+**Q2: Macro kya hota hai?**  
+**A2:** Macro ek pre-recorded sequence of HTTP requests hai jo Burp play back kar sakta hai, jaise login process.
+
+**Q3: Multiple credentials kaise use karein?**  
+**A3:** Tum ek credential list provide kar sakte ho, scanner har user role ke liye alag scan chalayega.
+
+**Q4: 2FA ko scanner kaise handle kare?**  
+**A4:** Ya to OTP predictable ho (jaise fixed OTP), ya tum manual intervention mode use karo, ya custom extension likho jo OTP generate kare.
+
+**Q5: Kya scanner session cookies automatically manage karta hai?**  
+**A5:** Haan, jab macro execute hota hai, to final response se cookies automatically capture ho jati hain aur subsequent requests mein use hoti hain.
+
+### 📝 Ek Line Mein Yaad Rakhne Ko (Summary)
+
+"Login configuration = scanner ko ID card dena, taaki andar ke confidential rooms bhi scan kar sake."
+
+---
+
+## Topic 17.3: Resource Pools for Scale
+
+### 🐣 Samjhane ke liye (Simple Analogy)
+
+Socho tum ek restaurant chalate ho jahan do types ke customers aate hain: ek jo fast khana chahte hain (Intruder attacks), ek jo aaram se khana chahte hain (Scanner), aur ek jo VIP hai (Manual testing). Tumhare paas limited waiters hain. Tum decide kar sakte ho ki fast customers ko 10 waiters dedo, aaram walo ko 5, aur VIP ko sirf 1 waiter. Isi tarah Burp mein Resource Pools manage karte hain ki kitne concurrent requests bhejni hain, kitna delay, aur retry policy.
+
+### 📖 Technical Definition (Interview Answer)
+
+**Resource Pools** Burp Suite ka ek feature hai jo tumhe different tasks (Scanner, Intruder, Repeater) ke liye network resource allocation control karne deta hai. Tum har pool ke liye max concurrent requests, delay between requests, aur retries with backoff define kar sakte ho. Isse tum ek saath multiple tasks efficiently manage kar sakte ho, aur WAF evasion ke liye slow pools bana sakte ho.
+
+**Keywords Breakdown:**
+- **Concurrent requests:** Ek time par kitni requests parallel bhejni hain.
+- **Delay:** Har request ke beech ka time gap.
+- **Retries with exponential backoff:** Agar request fail ho, to kitni baar retry karna hai, aur har retry mein delay badhana hai (backoff).
+- **Pool assignment:** Tum Intruder, Scanner, aur manual tasks ko alag pools assign kar sakte ho.
+
+### 🧠 Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**  
+Jab tum Intruder se 10,000 requests bhej rahe ho aur saath mein Scanner bhi chal raha hai, to dono ek hi network resources ke liye compete karte hain. Isse site slow ho sakti hai, ya WAF trigger ho sakta hai. Tumhe control chahiye ki kaunsa task kitni requests bheje.
+
+**Solution:**  
+Resource pools se tum har task ki request rate limit kar sakte ho. Jaise Intruder ke liye aggressive pool (50 concurrent, 0 delay), Scanner ke liye balanced pool (10 concurrent, 200ms delay), aur manual testing ke liye single-threaded pool (1 concurrent, 0 delay).
+
+### 🔍 Visual - Jab Screen Par Kya Dikhega
+
+**Location:**  
+Burp Suite mein **Project options** tab → **Connections** sub-tab → **Resource Pools** section. Yahan tum existing pools dekh sakte ho aur new bana sakte ho.
+
+**Appearance:**  
+Ek list hogi pools ki, jaise "Default", "Intruder", "Scanner". Har pool ke liye settings dikhengi:
+- **Name**
+- **Max concurrent requests**
+- **Delay between requests (ms)**
+- **Retries on failure**
+- **Use exponential backoff**
+
+Add button click karne par ek dialog khulega jahan tum ye values set kar sakte ho.
+
+### ⚙️ Under the Hood (Technical Working)
+
+1. **Pool creation:** Tum ek pool define karte ho with parameters.
+2. **Task assignment:** Jab tum Intruder attack chalaoge, to attack options mein pool select kar sakte ho. Scanner mein bhi scan configuration mein pool assign kar sakte ho.
+3. **Request throttling:** Burp jab request bhejta hai, to pool ke max concurrent requests ka dhyan rakhta hai. Agar limit exceed ho rahi hai, to requests queue mein chali jati hain. Har request ke baad specified delay apply hota hai.
+4. **Retry mechanism:** Agar request fail ho (timeout, network error), to Burp pool ke retry count ke hisaab se request dobara bhejta hai. Exponential backoff enable hai to har retry mein delay double hota jaata hai (e.g., 1s, 2s, 4s...).
+
+### 💻 Hands-On: Step-by-Step Practical
+
+**Goal:** Teen resource pools banana – "Aggressive" (Intruder), "Balanced" (Scanner), "Stealth" (WAF bypass).
+
+**Step 1:** Project options → Connections → Resource Pools mein jao.
+**Step 2:** "Add" click karo.
+**Step 3:** Pool details fill karo:
+   - **Name:** Aggressive-Intruder
+   - **Max concurrent requests:** 50
+   - **Delay between requests:** 0
+   - **Retries on failure:** 1
+   - **Use exponential backoff:** unchecked
+   - OK karo.
+**Step 4:** Phir ek aur pool:
+   - **Name:** Balanced-Scanner
+   - **Max concurrent requests:** 10
+   - **Delay:** 200 ms
+   - **Retries:** 2
+   - **Backoff:** checked
+   - OK.
+**Step 5:** Teesra pool:
+   - **Name:** Stealth-Manual
+   - **Max concurrent requests:** 1
+   - **Delay:** 1000 ms
+   - **Retries:** 3
+   - **Backoff:** checked
+   - OK.
+
+**Step 6:** Ab Intruder attack chalate waqt, **Attack Options** mein "Resource pool" dropdown se "Aggressive-Intruder" select karo.
+**Step 7:** Scanner ke li, jab scan banao, to "Scan Configuration" mein advanced options mein resource pool assign kar sakte ho (ya default pool mein).
+
+### ⚖️ Comparison (Pool Types)
+
+| Pool Type | Concurrent Requests | Delay | Retries | Use Case |
+|-----------|---------------------|-------|---------|----------|
+| **Aggressive** | High (50) | 0 | Low (1) | Intruder brute force, time-sensitive |
+| **Balanced** | Medium (10) | 200ms | Medium (2) | Automated scanning |
+| **Stealth** | Low (1) | 1000ms+ | High (3) | WAF bypass, manual testing |
+
+### 🚫 Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** Sab tasks ke liye same pool use karna, jisse ek slow task doosre fast task ko block kar de.  
+  **Fix:** Alag-alag pools assign karo.
+- **Mistake 2:** Stealth pool mein delay bahut kam rakhna (e.g., 100ms) jisse WAF still trigger ho.  
+  **Fix:** WAF rate limit research karo aur us hisaab se delay set karo.
+- **Mistake 3:** Retry bahut zyada rakhna (e.g., 10), jisse network issues par load badh jaye.  
+  **Fix:** 2-3 retries enough hain, exponential backoff ke saath.
+
+### 🤔 Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+- **"Log sochte hain ki pool sirf concurrent requests limit karta hai, delay nahi."**  
+  **Actually:** Pool mein delay bhi define kar sakte ho, jo har request ke beech mandatory wait hai.
+- **"Log sochte hain ki retry sirf failed requests ke liye hoti hai, successful ke liye nahi."**  
+  **Actually:** Haan, retry sirf failed (network error, timeout) par hoti hai. Application-level errors (e.g., 404) par nahi.
+
+### 🌍 Real-World Use Case (Bug Bounty / Pentesting)
+
+**Scenario:** Ek bug bounty hunter ko website ki rate limit bypass karni thi. Usne Intruder ke liye ek pool banaya jisme delay 2000ms (2 sec) tha, concurrent 1, taaki rate limit na lage. 1000 requests 2000 seconds mein complete hui, lekin IP block nahi hua. Usne password brute force kiya aur weak credentials mil gaye. Bounty $500.
+
+### 🎨 Visual Diagram (ASCII Art)
+
+```
+[Tasks]
+   Intruder --> Aggressive Pool (50 concurrent, 0 delay)
+   Scanner  --> Balanced Pool (10 concurrent, 200ms)
+   Repeater --> Stealth Pool (1 concurrent, 1s delay)
+```
+
+### 🛠️ Best Practices (Pro Tips)
+
+- **Tip 1:** Pool ka naam meaningful rakho, jaise "Intruder-Brute", "Scanner-LowAndSlow".
+- **Tip 2:** Jab WAF evasion karna ho, to pool mein delay itna rakho ki server rate limit ke under raho. Pehle server ki rate limit pata karo.
+- **Tip 3:** Exponential backoff enable rakho, taaki transient network issues resolve ho jayein.
+
+### ⚠️ Consequences of Failure (Agar galat kiya toh?)
+
+- **Scenario 1:** Agar aggressive pool se scanner chala diya, to server overload ho sakta hai ya WAF block kar dega.
+- **Scenario 2:** Agar stealth pool se Intruder chala diya (delay 1s), to 10000 requests mein 10000 seconds lagenge (2.7 ghante), bahut slow.
+- **Scenario 3:** Retry na rakhne par transient network failure ki wajah se request miss ho jayegi, aur attack incomplete.
+
+### ❓ FAQ (Interview Questions)
+
+**Q1: Resource pool kya hai?**  
+**A1:** Ek configuration jo control karti hai ki ek task kitni concurrent requests bhej sakta hai, kitna delay rakhna hai, aur retry policy kya hai.
+
+**Q2: Max concurrent requests ka kya matlab?**  
+**A2:** Ek time par kitni requests parallel bheji jayengi. 1 means sequentially.
+
+**Q3: Delay between requests se kya hota hai?**  
+**A3:** Har request ke beech utna time wait karega. Isse rate limit control hota hai.
+
+**Q4: Exponential backoff kya hai?**  
+**A4:** Retry ke dauraan har attempt ke saath delay badhta jata hai, jaise 1s, 2s, 4s. Isse network congestion kam hota hai.
+
+**Q5: Kya ek pool multiple tasks share kar sakte hain?**  
+**A5:** Haan, ek pool ko multiple tasks assign kar sakte ho, to wo pool ke resources share karenge.
+
+### 📝 Ek Line Mein Yaad Rakhne Ko (Summary)
+
+"Resource pool = traffic police jo har task ko limited requests bhejne ka hukm deta hai."
+
+---
+
+## Topic 17.4: Scheduled Scanning
+
+### 🐣 Samjhane ke liye (Simple Analogy)
+
+Socho tumhe apne ghar ki safai karni hai, lekin din mein kaam par jaate ho. Tum safai wale ko bata sakte ho ki raat 10 baje aana jab tum ghar par na ho. Woh automatically aayega, safai karega, aur tumhe message bhej dega ki kaam ho gaya. Burp ka scheduled scanning bhi aisa hai – tum scan ko schedule kar sakte ho raat ke time jab site par traffic kam ho, aur email notification paa sakte ho.
+
+### 📖 Technical Definition (Interview Answer)
+
+**Scheduled Scanning** Burp Professional ka ek feature hai jo tumhe scans ko specific time par automatically start karne ki suvidha deta hai. Tum recurring scans bhi schedule kar sakte ho (e.g., weekly). Scan complete hone par email notifications bheje ja sakte hain. Isse tum non-peak hours mein scanning kar sakte ho, jisse performance impact aur WAF trigger chances kam hote hain.
+
+**Keywords Breakdown:**
+- **Schedule:** Ek specific time aur date define karna.
+- **Recurring scan:** Repeat after some interval (daily, weekly).
+- **Email notifications:** Scan start, complete, ya find issues par email aana.
+- **Non-peak hours:** Jab site par users kam ho, jaise raat 2 baje.
+
+### 🧠 Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**  
+Din ke time jab site par real users active hote hain, scan chalane se site slow ho sakti hai, ya WAF trigger ho sakta hai. Tum khud raat ko jag kar scan start nahi kar sakte.
+
+**Solution:**  
+Scheduled scanning se tum scan ko raat ke time automatically start kar sakte ho. Subah uthte hi report dekh sakte ho. Recurring scans se continuous monitoring ho sakti hai.
+
+### 🔍 Visual - Jab Screen Par Kya Dikhega
+
+**Location:**  
+Burp Professional mein **Dashboard** tab → **Scheduled Scans** section (ya button). Wahan tum existing scheduled scans ki list dekhoge aur new schedule bana sakte ho.
+
+**Appearance:**  
+Scheduled scans page mein kuch aisa dikhega:
+- **Name, Status, Next Run, Last Run, Actions**
+- "Schedule a scan" button click karne par ek wizard khulega jahan tum target, config, schedule time, notifications set kar sakte ho.
+
+### ⚙️ Under the Hood (Technical Working)
+
+1. **Schedule creation:** Tum ek scan define karte ho jaise normal scan, but additionally start time select karte ho. Tum recurring pattern bhi define kar sakte ho.
+2. **Background job:** Burp background mein ek scheduler run karta hai jo system time check karta hai. Jab scheduled time aata hai, to scan automatically start ho jata hai.
+3. **Email notifications:** Tum Burp ke mail server settings configure kar sakte ho (Project options → Misc → Email) taaki scan events par email bheje.
+4. **Execution:** Scan background mein chalta hai, tum Burp use karte rah sakte ho (ya Burp band bhi kar sakte ho? Actually, Burp Professional must be running for scheduled scans to execute. It's not a cloud service; it runs on your machine. So scheduled scans require Burp to be open and running at that time. Some setups use Burp Collaborator or headless mode, but generally, scheduled scans run within the Burp GUI.)
+
+### 💻 Hands-On: Step-by-Step Practical
+
+**Goal:** Ek scan schedule karo jo har raat 2 AM chale, aur complete hone par email aaye.
+
+**Step 1:** Dashboard → Scheduled Scans → "Schedule a scan" button click karo.
+**Step 2:** Scan configuration wizard khulega. Pehle target specify karo (URLs).
+**Step 3:** Scan configuration select karo (e.g., "My Stealth Scan").
+**Step 4:** Application login agar zaroori ho to configure karo.
+**Step 5:** **Schedule** section mein jao. "Start at" select karo, aur time set karo (e.g., 02:00). "Repeat" mein "Daily" select karo. (Ya "None" for one-time)
+**Step 6:** **Notifications** section mein "Email me when this scan completes" check karo. Pehle email settings configure karni hogi. Project options → Misc → Email mein SMTP details daalo.
+**Step 7:** Scan ko naam do aur "Schedule" click karo.
+**Step 8:** Ab Scheduled Scans list mein ye dikhega, next run time ke saath.
+
+**Note:** Burp Professional ko us time computer par chalte rehna chahiye. Agar computer sleep mode mein chala jaye, to scan nahi chalega. Isliye power settings adjust karo.
+
+### ⚖️ Comparison (Scheduled vs On-demand Scans)
+
+| Feature | Scheduled Scan | On-demand Scan |
+|---------|----------------|----------------|
+| **Start time** | Predefined | Manual |
+| **Recurring** | Yes | No |
+| **Email notification** | Configurable | Manual check |
+| **Convenience** | High (automated) | Low (need presence) |
+| **Use case** | Regular monitoring, off-peak scanning | Immediate testing |
+
+### 🚫 Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** Computer ko sleep mode par rakh dena aur scan miss ho jana.  
+  **Fix:** Computer ko jaagte rehne ke liye settings karo, ya virtual machine use karo jo hamesha on rahe.
+- **Mistake 2:** Email notifications configure karna bhool jana, to pata nahi chalta scan complete hua ya nahi.  
+  **Fix:** Notification settings zaroor configure karo.
+- **Mistake 3:** Schedule karte waqt time zone galat set karna.  
+  **Fix:** Apne local time zone ke hisaab se set karo.
+
+### 🤔 Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+- **"Log sochte hain ki scheduled scan ke liye Burp cloud service hai."**  
+  **Actually:** Burp Professional desktop application hai. Scheduled scans tumhare local machine par chalte hain, isliye machine on rehni chahiye.
+- **"Log sochte hain ki scheduled scan ke dauran Burp use nahi kar sakte."**  
+  **Actually:** Kar sakte ho, scan background mein chalta hai, tum doosre tasks kar sakte ho. Lekin performance impact ho sakta hai.
+
+### 🌍 Real-World Use Case (Bug Bounty / Pentesting)
+
+**Scenario:** Ek company ko weekly security scans karne hote hain apne production environment par. Woh Burp Professional mein weekly scheduled scan set karte hain, har Sunday raat 3 AM. Scan complete hone par email report aati hai, jisse next day team review karti hai. Isse manual intervention ki zaroorat nahi hoti.
+
+### 🎨 Visual Diagram (ASCII Art)
+
+```
+[User] schedules scan at 2 AM daily
+    ↓
+[Burp Scheduler] waits until 2 AM
+    ↓
+[Scan starts automatically] in background
+    ↓
+[Scan completes] → Email notification
+```
+
+### 🛠️ Best Practices (Pro Tips)
+
+- **Tip 1:** Pehle test scan karo manually to ensure configuration sahi hai, phir schedule karo.
+- **Tip 2:** Scheduled scans ke liye dedicated machine use karo jo 24/7 on rahe (e.g., a VM in cloud).
+- **Tip 3:** Notification email mein report attach karne ke liye Burp ke settings mein report generation automate karo (Burp API use karke advanced hai).
+- **Tip 4:** Multiple schedules banao – ek daily for critical, weekly for deep scans.
+
+### ⚠️ Consequences of Failure (Agar galat kiya toh?)
+
+- **Scenario 1:** Agar computer off raha to scan miss ho jayega, aur vulnerabilities unchecked reh jayengi.
+- **Scenario 2:** Agar schedule time par site par high traffic ho, to performance degrade ho sakti hai.
+- **Scenario 3:** Agar email notifications configure nahi kiye, to pata nahi chalega scan fail hua ya complete.
+
+### ❓ FAQ (Interview Questions)
+
+**Q1: Scheduled scanning kya hai?**  
+**A1:** Ek feature hai jisse tum scans ko specific time par automatically start kar sakte ho.
+
+**Q2: Kya scheduled scan ke liye Burp Professional ka hona zaroori hai?**  
+**A2:** Haan, ye feature sirf Professional version mein hai.
+
+**Q3: Kya scheduled scan background mein chalta hai?**  
+**A3:** Haan, tum doosre tasks kar sakte ho jab scan chal raha ho.
+
+**Q4: Agar computer off ho to kya hoga?**  
+**A4:** Scan nahi chalega. Schedule miss ho jayega.
+
+**Q5: Kya recurring scans possible hain?**  
+**A5:** Haan, daily, weekly, etc.
+
+### 📝 Ek Line Mein Yaad Rakhne Ko (Summary)
+
+"Scheduled scanning = apna robot raat ko kaam par lagana, subah report ready."
+
+---
+
+## Module 17 Pro-Tip (Yad Rakho)
+
+> **Scanner chala raha hai aur WAF block kar raha hai? Stealth mode use kar. Raat ko scan scheduled kar. Login sequence record kar ke de, scanner automatically login karega aur andar ke pages bhi scan karega.**
+
+========================================================================================
