@@ -11761,3 +11761,901 @@ A5: Disable external entities in XML parser, use JSON instead.
 ---
 
 ========================================================================================
+
+## **Module 15: Mobile Pentesting with Burp – Complete Notes**
+
+**TechGuru Hinglish Breakdown** – Mobile app testing ko chhota bachcha bhi samajh jayega.
+
+---
+
+# **Topic 15.1: SSL Pinning Bypass**
+
+## 🎯 1. Title / Topic: SSL Pinning Bypass
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+Socho tum ek **VIP party** mein jaana chahte ho. Gate par bouncer hai. Tum apna **ID card** (Burp certificate) dikhate ho. Bouncer check karta hai – "Ye ID toh party ke andar walo ne issue nahi ki thi, ye toh outsider ka hai" – aur tumhe andar nahi jaane deta.
+
+**SSL Pinning** exactly yahi hai. Mobile app mein ek **fixed list** hoti hai ki kaun se certificates par trust karna hai. Sirf wohi certificates accept honge jo app ne pehle se "pin" kar rakhe hain. Burp ka certificate us list mein nahi hota, isliye app Burp se baat karne se mana kar deta hai.
+
+**Bypass** ka matlab hai bouncer ko confuse karna – jaise usko neend ki goli de do, ya uski jagah apne aadmi ko khada kar do – taaki woh Burp certificate ko bhi andar aa jaane de.
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**SSL Pinning** ek security mechanism hai jisme mobile app sirf specific SSL/TLS certificates ya public keys ko accept karta hai, chahe device ke trust store mein koi bhi CA certificate ho. Iska maksad hai **Man-in-the-Middle (MITM)** attacks ko rokna, kyunki attacker apna certificate use nahi kar sakta.
+
+**SSL Pinning Bypass** ka matlab hai app ke is defense ko neutralize karna, taaki Burp Suite jaise proxy tool se traffic intercept kiya ja sake. Yeh usually runtime instrumentation tools (Frida, Objection) ya app binary modify karke kiya jata hai.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**  
+Mobile apps test karte waqt hume saara traffic dekhna hota hai – ki app server se kya data bhej rahi hai, kya response aa raha hai. Burp proxy use karte hain jo apna certificate generate karta hai. Normally devices us certificate ko trust kar lete hain agar hum CA install kar dein. Lekin **SSL pinning wali apps** Burp certificate ko reject kar deti hain. Connection hi nahi banta, ya app crash ho jati hai. Matlab hum traffic nahi dekh sakte.
+
+**Solution:**  
+SSL pinning bypass karke hum app ko yakeen dilate hain ki Burp ka certificate bhi trusted hai. Ab saara traffic Burp se guzrega, hum request/responses dekh aur modify kar sakte hain.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega
+
+**Without bypass:**  
+Burp mein kuch nahi dikhega. App use karte waqt browser ki tarah proxy se connect hi nahi karegi. Ya fir app mein error aayega: "Network error", "Unable to connect", ya blank screen.
+
+**With bypass successful:**  
+Burp ke **HTTP history** mein saari requests dikhni shuru ho jayengi. Jaise:
+```
+GET /api/user/profile HTTP/1.1
+Host: api.targetapp.com
+Authorization: Bearer eyJhbGciOiJIUzI1...
+```
+Matlab ab app Burp se baat kar rahi hai, aur hum sab dekh rahe hain.
+
+## ⚙️ 6. Under the Hood (Technical Working)
+
+1. **Normal Flow (without pinning):**  
+   App server se connect karti hai → Server apna certificate bhejta hai → Device check karti hai ki certificate kisi trusted CA ne sign kiya hai (Burp ka CA agar install hai toh trust ho jayega) → Connection successful.
+
+2. **With Pinning:**  
+   App mein code mein hardcoded hota hai ki "mere server ka certificate public key yeh specific value honi chahiye". Jab server apna certificate bhejta hai (ya Burp ka), app uski public key nikalta hai aur compare karta hai. Agar match nahi kiya, toh connection drop.
+
+3. **Bypass Kaise Kaam Karta Hai:**  
+   - **Frida/Objection:** App ke memory mein ghus kar, certificate validation karne wale functions ko disable kar dete hain. Jaise app ne `checkServerTrusted()` function call kiya, hum us function ko replace kar dete hain with our own version jo hamesha "true" return kare.  
+   - **Re-patching APK:** App ki binary mein hi changes kar dete hain – network security config file modify karte hain ya pinning code remove karte hain – phir app ko resign karke install karte hain.
+
+## 💻 7. Hands-On: Step-by-Step Practical
+
+### Option A: Frida se Bypass (Sabse fast, recommended)
+
+**Step 1: Frida install karo**
+- Computer par:  
+  ```bash
+  pip install frida-tools
+  ```
+  - `pip`: Python package installer hai.  
+  - `install frida-tools`: Frida aur uske tools install karta hai.  
+- Android device par:  
+  - Download Frida server from https://github.com/frida/frida/releases (android architecture ke hisaab se).  
+  - Push to device:  
+    ```bash
+    adb push frida-server /data/local/tmp/
+    ```
+    - `adb`: Android Debug Bridge – device se baat karne ka tool.  
+    - `push`: File copy karta hai device par.  
+    - `/data/local/tmp/`: Android ka temporary folder jahan execute kar sakte hain.  
+  - Permissions do:  
+    ```bash
+    adb shell chmod 755 /data/local/tmp/frida-server
+    ```
+    - `chmod 755`: Execute permission deta hai.  
+  - Run Frida server:  
+    ```bash
+    adb shell /data/local/tmp/frida-server &
+    ```
+    - `&`: Background mein chalao.
+
+**Step 2: Frida script download karo**
+- Universal unpinning script: https://github.com/sensepost/objection/blob/master/agent/src/android/pinning.ts (ya ready-made `.js` file dhundho).  
+- Common script: `frida-multiple-unpinning.js` download karo.
+
+**Step 3: App launch karo with Frida**
+```bash
+frida -U -f com.target.app -l frida-multiple-unpinning.js --no-pause
+```
+- `-U`: USB device use karo.  
+- `-f com.target.app`: App ka package name – isse Frida app launch karega aur script attach karega.  
+- `-l script.js`: Load karo ye JavaScript file.  
+- `--no-pause`: Immediately start, bina pause kiye.
+
+**Expected Output:**
+```
+     ____
+    / _  |   Frida 16.1.4 - A world-class dynamic instrumentation toolkit
+   | (_| |
+    > _  |   Commands:
+   /_/ |_|       help      -> Displays the help system
+   . . . .       object?   -> Display information about 'object'
+   . . . .       exit/quit -> Exit
+   . . . .
+Spawned `com.target.app`. Resuming main thread!
+[Android Emulator 5554::com.target.app]-> [Pinning Bypass] Found OkHttpClient class
+[Pinning Bypass] Hooking checkServerTrusted methods...
+[Pinning Bypass] Bypass successful!
+```
+Matlab bypass ho gaya. Ab Burp mein traffic aana chahiye.
+
+**Step 4: iOS ke liye**
+```bash
+frida -U com.target.app -l ios-ssl-bypass.js
+```
+- iOS device jailbroken hona chahiye, ya debugger attached.
+
+### Option B: Objection se Bypass (Frida-based tool)
+
+**Step 1: Objection install karo**
+```bash
+pip install objection
+```
+
+**Step 2: Frida server chal raha hai ensure karo (jaise upar kiya).**
+
+**Step 3: Objection explore mode mein jao**
+```bash
+objection -g com.target.app explore
+```
+- `-g`: Package name.  
+- `explore`: Interactive shell open karta hai.
+
+**Step 4: SSL pinning disable karo**
+```
+android sslpinning disable
+```
+Ya iOS ke liye:
+```
+ios sslpinning disable
+```
+
+**Expected Output:**
+```
+Agent connected and ready!
+(com.target.app) android sslpinning disable
+Searching for SSL pinning bypass points...
+Patching TrustManagerImpl...
+Patching OkHttp3...
+Pinning bypassed!
+```
+Ab Burp traffic capture kar sakta hai.
+
+### Option C: Xposed Modules (Android only, need Xposed framework)
+
+**Step 1:** Xposed framework install karo (rooted device par).  
+**Step 2:** JustTrustMe ya SSLUnpinning module download karo.  
+**Step 3:** Module enable karo, reboot.  
+**Step 4:** App launch karo – automatically bypass ho jayega.
+
+### Option D: APK Re-patching (No root needed, but time-consuming)
+
+**Step 1:** APK decompile karo using `apktool`:
+```bash
+apktool d app.apk
+```
+- `d`: Decompile.
+
+**Step 2:** `res/xml/network_security_config.xml` file dhundho. Agar hai toh edit karo:
+```xml
+<network-security-config>
+    <debug-overrides>
+        <trust-anchors>
+            <certificates src="user" />   <!-- User installed certificates allow karo -->
+        </trust-anchors>
+    </debug-overrides>
+</network-security-config>
+```
+Ya file nahi hai toh bana do.
+
+**Step 3:** `AndroidManifest.xml` mein `android:networkSecurityConfig="@xml/network_security_config"` add karo (agar nahi hai).
+
+**Step 4:** Recompile:
+```bash
+apktool b app -o modified.apk
+```
+
+**Step 5:** Sign the APK:
+```bash
+keytool -genkey -v -keystore mykey.keystore -alias myalias -keyalg RSA -keysize 2048 -validity 10000
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore mykey.keystore modified.apk myalias
+```
+
+**Step 6:** Install modified APK on device.
+
+## ⚖️ 8. Comparison (Bypass Methods)
+
+| Method | Root Required? | Ease | Pros | Cons |
+|--------|----------------|------|------|------|
+| Frida | Yes (for Android) | Easy | Fast, no app modification | Device must be rooted/debuggable |
+| Objection | Yes | Easy | Built on Frida, simpler commands | Same as Frida |
+| Xposed | Yes | Moderate | Set once, works for many apps | Need Xposed framework, may not work on newer Android |
+| Re-patching | No | Hard | No root needed | Time-consuming, need to re-sign, app updates break it |
+
+## 🚫 9. Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** Frida server version aur client version mismatch.  
+  **Fix:** Check with `frida --version` aur device par `frida-server --version` same hone chahiye.  
+- **Mistake 2:** Package name galat likhna.  
+  **Fix:** `adb shell pm list packages` se exact package name dhundho.  
+- **Mistake 3:** Burp certificate device par install karna bhool jana.  
+  **Fix:** Settings → Security → Install from storage → Burp certificate select karo.  
+- **Mistake 4:** iOS mein certificate trust karna bhoolna.  
+  **Fix:** Settings → General → About → Certificate Trust Settings → Burp certificate enable karo.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+- **"Log sochte hain ki sirf certificate install kar lene se kaam ho jayega, pinning bypass ki zaroorat nahi."**  
+  **Actually:** Certificate install se sirf system-wide CAs mein add hota hai. Pinning wali app system CA ko ignore karti hai – uske liye bypass alag se karna padta hai.  
+- **"Log sochte hain ki Frida har app par kaam karega."**  
+  **Actually:** Frida ke liye app debuggable hona chahiye ya device rooted hona chahiye. Kuch apps anti-tampering checks bhi rakhti hain jo Frida detect kar ke exit ho jati hain. Unke liye advanced bypass chahiye.
+
+## 🌍 11. Real-World Use Case (Bug Bounty)
+
+**Scenario:** Ek popular banking app ka test ho raha tha. Burp certificate install karne ke baad bhi traffic nahi aa raha tha – SSL pinning thi. Researcher ne Frida script use kiya, 2 minute mein bypass kar diya. Phir usne dekha ki app login API par raw password bhej rahi thi bina hashing ke. Username/password brute force kar liya.  
+**Result:** Critical vulnerability, $5000 bounty.
+
+## 🎨 12. Visual Diagram (ASCII Art)
+
+```
+[App] -- tries to connect --> [Server]
+  |                               ^
+  | (SSL Pinning check)           |
+  | --> Rejects Burp Cert         |
+  |                               |
+[Frida] injects code              |
+  | --> Hooks certificate validation
+  | --> Returns "valid" always    |
+  v                               |
+[App] -- now accepts Burp Cert -->[Burp]
+                                    |
+                                    +--> [Server]
+```
+
+## 🛠️ 13. Best Practices (Pro Tips)
+
+- **Tip 1:** Pehle Frida script try karo – 90% apps ka kaam ho jata hai.  
+- **Tip 2:** Universal unpinning scripts use karo jo multiple libraries handle karti hain (OkHttp, TrustManager, etc.).  
+- **Tip 3:** Agar Frida detect ho raha hai, toh Frida Gadget use karo – app mein embed karo.  
+- **Tip 4:** iOS mein for jailbroken devices, `SSL Kill Switch 2` tweak bhi kaam aata hai.  
+- **Tip 5:** Bypass ke baad hamesha ek test request bhej kar confirm karo ki traffic aa raha hai.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?)
+
+- **Scenario 1:** Bypass nahi kiya toh app ka traffic kabhi dikhega hi nahi – testing adhoori rahegi, vulnerabilities miss ho jayengi.  
+- **Scenario 2:** Galat bypass technique se app crash ho sakti hai ya unstable ho sakti hai.  
+- **Scenario 3:** Re-patched APK mein signing sahi nahi ki toh app install nahi hogi.
+
+## ❓ 15. FAQ (Interview Questions)
+
+**Q1: SSL pinning kya hai?**  
+A1: App ka server certificate ki public key ko hardcode karna, taaki MITM na ho.  
+
+**Q2: SSL pinning bypass kaise karte hain?**  
+A2: Frida/Objection se runtime patching, Xposed modules, ya APK repatching.  
+
+**Q3: Frida kaise kaam karta hai?**  
+A3: App process mein JavaScript inject karta hai, jisse hum functions replace kar sakte hain.  
+
+**Q4: Bypass ke baad bhi traffic nahi aa raha – kya karoge?**  
+A4: Check karo ki Burp certificate device par trust hai ya nahi, aur proxy settings sahi hain.  
+
+**Q5: iOS mein SSL pinning bypass kaise karein?**  
+A5: Jailbroken device par Frida ya Objection use karo, ya `SSL Kill Switch 2` tweak.  
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary)
+
+**SSL Pinning Bypass = Bouncer ko neend ki goli dekar apne aadmi (Burp) ko VIP party mein ghusa dena.**
+
+---
+
+# **Topic 15.2: Invisible Proxying**
+
+## 🎯 1. Title / Topic: Invisible Proxying
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+Socho tum ek **chhupke se postman** ho. Tumhe letters padhne hain, lekin logo ko pata nahi chalna chahiye ki tum padh rahe ho. Tum unke ghar ke bahar ek **naqli post box** laga dete ho. Log apne letters uss box mein daalte hain, aur tum padh ke asli box mein daal dete ho. Unhe pata bhi nahi chalta.
+
+**Invisible Proxying** exactly yahi hai. Kuch mobile apps proxy settings ko ignore karti hain – woh direct server se connect hoti hain, browser ki tarah proxy nahi maanti. Tum unke traffic ko **transparently** apne Burp par redirect kar dete ho, bina app ko pata diye ki proxy use ho raha hai. App sochti hai ki direct server se baat kar rahi hai, lekin asli mein saara traffic Burp se guzar raha hai.
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**Invisible Proxying** (ya Transparent Proxy) ek mode hai jisme Burp Suite client ko bina proxy settings bataye traffic intercept karta hai. Client ko pata nahi hota ki proxy exist karta hai – uski saari requests transparently Burp ke through route hoti hain. Yeh tab use hota hai jab application system proxy settings ko ignore karti hai, ya jab hume non-HTTP protocols capture karne hote hain.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**  
+Mobile apps mein do tarah ki hoti hain:  
+- **Proxy-aware apps:** System proxy settings maanti hain (jaise browser, Twitter app).  
+- **Proxy-ignorant apps:** Proxy settings ko ignore karti hain, direct connection banati hain (jaise games, some custom apps).  
+
+Agar app proxy ignore karti hai, toh hum normal Burp setup mein uska traffic nahi dekh sakte. App server se direct connect karegi, Burp se nahi.
+
+**Solution:**  
+Invisible proxying enable karo aur network level par traffic redirect karo. Ab app ko pata bhi nahi chalega, lekin saara traffic Burp se hokar jayega.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega
+
+**Burp mein Invisible Proxy enable karna:**
+1. **Proxy → Options** tab par jao.
+2. **Add** button click karo (new listener).
+3. **Bind to port:** 8080 (koi bhi port).  
+   **Bind to address:** All interfaces.
+4. **Request Handling** tab par jao.
+5. **Support invisible proxying (enable only if needed)** checkbox tick karo.
+   - Neche **Redirect to host/port** bhi specify kar sakte ho agar traffic kisi aur server par forward karna ho (usually blank rakho).
+
+**Network redirect ke baad:**  
+Burp mein HTTP history mein requests dikhni shuru ho jayengi, exactly jaise normal proxy mode mein dikhti hain.
+
+## ⚙️ 6. Under the Hood (Technical Working)
+
+1. **Normal Proxy:** Client explicitly batata hai "mujhe proxy use karna hai" aur connection proxy se banata hai. Proxy request ko forward karta hai.
+2. **Invisible Proxy:** Client ko kuch pata nahi. Woh server ke IP par connection banata hai. Lekin network level par (OS ya router par) hum rules bana dete hain ki saara traffic jo specific port (80, 443) par jata hai, woh Burp ke port (8080) par redirect ho jaye.
+3. Burp par invisible mode enabled hai, toh woh aise connections accept karta hai jaise woh khud server ho. Phir request ko padh kar asli server par forward kar deta hai.
+4. Response vapis client tak pahunchta hai.
+
+## 💻 7. Hands-On: Step-by-Step Practical
+
+### Windows Setup
+
+**Step 1: Burp listener add karo with invisible mode**
+- Burp → Proxy → Options → Add.  
+- Bind to port: 8080, Bind to address: All interfaces.  
+- Request Handling → tick "Support invisible proxying".  
+- OK.
+
+**Step 2: Windows mein traffic redirect karo (using netsh)**
+Open Command Prompt as Administrator:
+```cmd
+netsh winhttp set proxy localhost:8080
+```
+- `netsh`: Network shell – Windows ka network configuration tool.  
+- `winhttp`: Windows HTTP services (many apps use this).  
+- `set proxy localhost:8080`: Saare HTTP/HTTPS traffic ko localhost:8080 (Burp) par bhej do.
+
+**Step 3: Verify**
+```cmd
+netsh winhttp show proxy
+```
+Output: `Proxy server(s) : localhost:8080` dikhna chahiye.
+
+**Step 4: App chalao**  
+Ab app ka traffic Burp mein aana chahiye.
+
+**Note:** Ye sirf un apps par kaam karega jo WinHTTP settings maanti hain. Kuch apps WinINet use karti hain – unke liye Internet Options mein proxy set karo.
+
+### Linux/Android (iptables) Setup (Rooted Android)
+
+**Step 1: Burp listener add karo invisible mode (jaise upar).**
+
+**Step 2: Android device ko computer se connect karo (adb).**
+
+**Step 3: iptables rules add karo**
+```bash
+adb shell
+su   # root access lo
+iptables -t nat -A OUTPUT -p tcp --dport 80 -j DNAT --to-destination 127.0.0.1:8080
+iptables -t nat -A OUTPUT -p tcp --dport 443 -j DNAT --to-destination 127.0.0.1:8080
+```
+- `iptables`: Linux firewall tool.  
+- `-t nat`: Network Address Translation table mein rule add kar rahe hain.  
+- `-A OUTPUT`: Output chain mein add karo (jo traffic device se bahar jaa raha hai).  
+- `-p tcp`: TCP protocol ke liye.  
+- `--dport 80`: Destination port 80 (HTTP) wale traffic ke liye.  
+- `-j DNAT`: Destination NAT – matlab destination address/port change karo.  
+- `--to-destination 127.0.0.1:8080`: Saara traffic localhost ke port 8080 (Burp) par bhejo.
+
+**Step 4: Burp ko allow karo external connections**
+- Burp listener par "Bind to address: All interfaces" hona chahiye.
+- Android device aur computer same network par hone chahiye (Wi-Fi).
+- Android device par Burp ke IP par route hona chahiye – iske liye tumhe ek additional rule chahiye jo traffic ko computer ke IP par forward kare, kyunki 127.0.0.1 device ka localhost hai.  
+  Better approach: Computer ka IP use karo (e.g., 192.168.1.10) aur device se computer par route karo.
+
+**Step 5: Forwarding rule for computer IP**
+Maan lo computer ka IP 192.168.1.10 hai:
+```bash
+iptables -t nat -A OUTPUT -p tcp --dport 80 -j DNAT --to-destination 192.168.1.10:8080
+iptables -t nat -A OUTPUT -p tcp --dport 443 -j DNAT --to-destination 192.168.1.10:8080
+```
+Isse saara HTTP/HTTPS traffic computer ke Burp par chala jayega.
+
+**Step 6: Test**
+App open karo – Burp mein requests aane lagengi.
+
+**Step 7: Rules hatao (baad mein)**
+```bash
+iptables -t nat -D OUTPUT -p tcp --dport 80 -j DNAT --to-destination 192.168.1.10:8080
+iptables -t nat -D OUTPUT -p tcp --dport 443 -j DNAT --to-destination 192.168.1.10:8080
+```
+
+## ⚖️ 8. Comparison (Normal Proxy vs Invisible Proxy)
+
+| Feature | Normal Proxy | Invisible Proxy |
+|---------|--------------|-----------------|
+| Client configuration | Proxy settings set karni padti hain | Kuch set nahi karna padta |
+| Client pata hai? | Haan, client ko pata hai proxy use ho raha | Client unaware |
+| Use case | Browser, proxy-aware apps | Proxy-ignorant apps, non-HTTP traffic |
+| Setup complexity | Easy | Complex (network redirect) |
+| Protocol support | HTTP/HTTPS | Any TCP (with proper setup) |
+
+## 🚫 9. Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** Burp listener par "Invisible mode" enable karna bhool jana.  
+  **Fix:** Proxy Options → listener → Request Handling → check box.  
+- **Mistake 2:** iptables rules galat lagana – destination IP galat.  
+  **Fix:** Computer ka IP sahi daalo, aur ensure karo ki device se computer ping ho raha hai.  
+- **Mistake 3:** Windows mein netsh ke baad bhi traffic nahi aa raha.  
+  **Fix:** Kuch apps WinHTTP use nahi karti. Unke liye Proxifier jaise tool use karo.  
+- **Mistake 4:** HTTPS traffic ke liye Burp certificate install karna bhoolna.  
+  **Fix:** Device par Burp CA install karo aur trust karo.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+- **"Log sochte hain ki invisible proxy se saara traffic apne aap capture ho jayega."**  
+  **Actually:** Invisible proxy sirf un connections ko capture karta hai jo us port par aate hain jahan tumne redirect kiya hai. Agar app non-standard port use karti hai (e.g., 8443), toh woh capture nahi hoga jab tak us port ko bhi redirect na karo.  
+- **"Log sochte hain ki iptables rules laga ke bhool jao, baad mein internet band ho jayega."**  
+  **Actually:** Rules tab tak active rahenge jab tak device reboot na karo ya manually delete na karo. Isliye testing ke baad hata dena chahiye.
+
+## 🌍 11. Real-World Use Case (Bug Bounty)
+
+**Scenario:** Ek game app thi jo custom TCP protocol use karti thi. Proxy settings ignore karti thi. Researcher ne invisible proxy mode enable kiya aur iptables se saara traffic Burp par redirect kar diya. Phir usne dekha ki app login ke time raw credentials bhej rahi thi bina encryption ke.  
+**Result:** Critical info disclosure, $3000 bounty.
+
+## 🎨 12. Visual Diagram (ASCII Art)
+
+```
+[App] thinks it's talking to [Server]
+  |                            ^
+  v                            |
+[Network Redirect (iptables)]  |
+  | (redirects to Burp)        |
+  v                            |
+[Burp (Invisible Mode)]        |
+  | (forwards to server)       |
+  +--------------------------->+
+```
+
+## 🛠️ 13. Best Practices (Pro Tips)
+
+- **Tip 1:** Pehle normal proxy try karo. Agar app ignore kare, tab invisible proxy setup karo.  
+- **Tip 2:** Android ke liye `iptables` command temporary hai. Reboot pe reset ho jayegi, ya manually delete karo.  
+- **Tip 3:** Windows mein Proxifier tool bhi use kar sakte ho – ye kisi bhi app ko proxy use karne force karta hai.  
+- **Tip 4:** Non-standard ports ke liye bhi iptables rules banao (e.g., --dport 5222 for XMPP).  
+- **Tip 5:** Testing ke baad redirect hata dena, nahi toh normal internet usage bhi Burp se hokar jayega.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?)
+
+- **Scenario 1:** Invisible proxy enable nahi kiya toh app connect hi nahi karegi – traffic zero.  
+- **Scenario 2:** iptables rules galat lagaye toh internet hi band ho sakta hai device par.  
+- **Scenario 3:** Windows mein netsh se proxy set kiya aur bhool gaye – baad mein saara traffic Burp se hokar jayega, aur agar Burp band hai toh internet band.
+
+## ❓ 15. FAQ (Interview Questions)
+
+**Q1: Invisible proxy kya hai?**  
+A1: Ek proxy jo client ko bina bataye traffic intercept karta hai, network redirect ke through.  
+
+**Q2: Kab use karte hain invisible proxy?**  
+A2: Jab app system proxy settings ignore karti hai.  
+
+**Q3: Windows mein invisible proxy kaise set karein?**  
+A3: Burp listener invisible mode enable karo, phir `netsh winhttp set proxy` command use karo.  
+
+**Q4: Android mein iptables se redirect kaise karein?**  
+A4: `iptables -t nat -A OUTPUT -p tcp --dport 80 -j DNAT --to-destination <burp-ip>:8080`  
+
+**Q5: Invisible proxy ke liye Burp mein kya setting karni padti hai?**  
+A5: Proxy listener mein "Support invisible proxying" checkbox tick karna hota hai.  
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary)
+
+**Invisible Proxy = Chhupke postman jo bina bataye letters padh leta hai, aur app ko pata bhi nahi chalta.**
+
+---
+
+# **Topic 15.3: Non-HTTP Traffic Interception**
+
+## 🎯 1. Title / Topic: Non-HTTP Traffic Interception
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+Socho tum ek **Jasoos** ho. Tumne socha tha ki villain sirf letters (HTTP) se baat karega. Lekin villain **walkie-talkie (custom protocol)** aur **wireless mic (MQTT)** bhi use kar raha hai. Tum sirf letters padh rahe ho, toh villain ki poori planning miss kar rahe ho.
+
+**Non-HTTP traffic** exactly yahi hai. Mobile apps sirf HTTP/HTTPS use nahi karti. Kuch apps use karti hain:  
+- **XMPP** – chat apps (WhatsApp type)  
+- **MQTT** – IoT devices (light bulb, smart watch)  
+- **Raw TCP** – games, custom APIs  
+
+Burp normally HTTP/HTTPS hi samajhta hai. Lekin invisible proxy + raw capture se tum inhe bhi intercept kar sakte ho.
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**Non-HTTP Traffic Interception** ka matlab hai un protocols ka traffic capture karna jo HTTP/HTTPS nahi hain, jaise XMPP (chat), MQTT (IoT), WebSocket (already covered), ya custom TCP protocols. Burp Suite inhe raw data ke roop mein capture kar sakta hai, aur hum manually analyze karte hain.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**  
+Aajkal ki mobile apps sirf REST APIs use nahi karti. Real-time features ke liye WebSocket, chat ke liye XMPP, IoT devices ke liye MQTT – ye sab common hain. Agar hum sirf HTTP history dekhenge, toh inka traffic miss ho jayega. Vulnerabilities inmein bhi ho sakti hain – jaise XMPP messages mein IDOR, MQTT mein topic enumeration, raw TCP mein command injection.
+
+**Solution:**  
+Burp ko aise setup karo ki woh saara TCP traffic capture kare (invisible proxy mode mein), phir manually analyze karo ki kis port par kaunsa protocol chal raha hai, aur us hisaab se test karo.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega
+
+Burp mein non-HTTP traffic capture karne ke liye:
+
+**Step 1:** Proxy listener add karo with invisible mode, aur bind to a specific port (e.g., 5222 for XMPP, 1883 for MQTT).  
+
+**Step 2:** Jab app connect karegi, Burp mein **Proxy → HTTP history** mein nahi, balki **Proxy → WebSockets history** mein nahi (kyunki ye WebSocket nahi hai), balki **alag se koi tab nahi hota raw TCP ke liye**. TUMHE **Event log** ya **Intercept** tab mein raw data dikhega.
+
+Actually, Burp raw TCP traffic ko **HTTP history** mein nahi dikhata. Lekin agar invisible proxy mode hai aur connection aata hai, toh tum **Proxy → Intercept** tab mein jaakar **"Intercept is on"** karoge, toh raw connection bhi intercept hoga. Tumhe kuch aisa dikhega:
+
+```
+Raw data from port 5222:
+<stream:stream to='example.com' version='1.0' xml:lang='en' ...>
+<message type='chat' to='user2'><body>Hello</body></message>
+```
+Yeh XMPP stream hai.
+
+Ya phir:
+```
+Binary data (hex):
+00 01 02 03 04 05 ...
+```
+
+## ⚙️ 6. Under the Hood (Technical Working)
+
+1. App server se connect karti hai, let's say port 5222 (XMPP).  
+2. Network redirect (iptables) se saara traffic jo 5222 par jata hai, Burp ke port (e.g., 8080) par bhej diya jata hai.  
+3. Burp par invisible proxy listener hai jo port 8080 par sun raha hai, aur "invisible mode" enabled hai.  
+4. Connection aate hi Burp usse accept karta hai. Ab dono taraf se jo bhi data aayega, Burp use **raw TCP stream** ki tarah handle karega.  
+5. Agar intercept on hai, toh data rok kar dikhayega. Tum modify kar ke forward kar sakte ho.  
+6. Agar intercept off hai, toh seedha destination server par forward kar dega.  
+7. Burp is raw data ko **kisi history mein save nahi karta** (sirf HTTP/WebSocket history hai). Isliye manually notes lene padte hain ya **Logger++** extension use karni padti hai jo saara traffic log kare.
+
+## 💻 7. Hands-On: Step-by-Step Practical
+
+### Scenario: XMPP Chat App (Port 5222)
+
+**Step 1: Burp listener add karo for port 5222**
+- Burp → Proxy → Options → Add.  
+- Bind to port: 5222 (XMPP default port).  
+- Bind to address: All interfaces.  
+- Request Handling → tick "Support invisible proxying".  
+- OK.
+
+**Step 2: Network redirect setup (Android)**
+```bash
+iptables -t nat -A OUTPUT -p tcp --dport 5222 -j DNAT --to-destination 192.168.1.10:5222
+```
+Yahan 192.168.1.10 computer ka IP hai jahan Burp chal raha hai, aur port 5222 wahi port hai jo Burp listener ne bind kiya hai.
+
+**Step 3: Burp mein intercept on karo**
+- Proxy → Intercept → **Intercept is on** (green).  
+- Ensure **WebSocket sub-tab** ke neeche koi option nahi, bas main Intercept on hai.
+
+**Step 4: App mein chat karo**
+- App open karo, kisi ko message bhejo.  
+- Burp mein ek naya connection dikhega aur XMPP stream ka data intercept hoga:
+
+```
+Raw: <stream:stream to='chat.server.com' version='1.0' ...>
+```
+
+**Step 5: Modify and forward**
+- Tum message body change kar sakte ho – XSS payload daalo, IDOR try karo (message recipient change karo).  
+- Forward button click karo.
+
+**Step 6: Response bhi intercept hoga**
+- Server se response aayega, woh bhi tum dekh sakte ho.
+
+**Step 7: Logging ke liye Logger++ use karo**
+- Extender → BApp Store → Logger++ install karo.  
+- Yeh saari requests/responses (raw TCP bhi) log karega. Baad mein analyze kar sakte ho.
+
+### Scenario: MQTT (IoT, Port 1883)
+
+**Step 1:** Burp listener port 1883 par, invisible mode.  
+**Step 2:** iptables redirect port 1883 → computer:1883.  
+**Step 3:** App connect karegi, Burp intercept karega MQTT packets.  
+MQTT packet structure:  
+- Fixed header (1 byte) – packet type, flags.  
+- Variable header (depending on packet).  
+- Payload.  
+
+Example CONNECT packet:
+```
+Raw hex: 10 0E 00 04 4D 51 54 54 04 C2 00 3C ... (MQTT connection request)
+```
+Tum ise modify kar ke `clientId` change kar sakte ho, ya `willMessage` mein injection try kar sakte ho.
+
+### Scenario: Custom TCP Protocol
+
+**Step 1:** Guess the port (maybe game uses 9999).  
+**Step 2:** Burp listener on that port, invisible mode.  
+**Step 3:** Redirect traffic.  
+**Step 4:** Intercept karo. Tumhe raw binary data dikhega.  
+- Pehle kuch bytes fixed hote hain (magic bytes), phir length, phir data.  
+- Tum pattern identify karo – jaise login packet mein username/password ho sakta hai.  
+- Hex editor ki tarah modify kar ke bhejo, dekho server ka response kya aata hai.
+
+## ⚖️ 8. Comparison (HTTP vs Non-HTTP)
+
+| Feature | HTTP/HTTPS | Non-HTTP (XMPP, MQTT, raw) |
+|---------|------------|-----------------------------|
+| Ports | 80, 443 | Variable (5222, 1883, custom) |
+| Interception | Easy, automatic | Manual, need port-specific listeners |
+| History | HTTP history tab | No automatic history (use Logger++) |
+| Modification | Structured (headers, body) | Raw bytes, need protocol knowledge |
+| Common vulnerabilities | SQLi, XSS, IDOR | Injection in custom fields, auth bypass |
+
+## 🚫 9. Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** Saare ports ke liye ek hi listener use karna.  
+  **Fix:** Har protocol ke liye alag listener banao, different ports par.  
+- **Mistake 2:** Invisible mode enable karna bhoolna.  
+  **Fix:** Har non-HTTP listener par "Support invisible proxying" tick karo.  
+- **Mistake 3:** iptables redirect mein port number galat.  
+  **Fix:** Burp listener ka port aur redirect destination port same rakho.  
+- **Mistake 4:** Raw data ko modify karte waqt length field update karna bhoolna.  
+  **Fix:** Agar protocol mein length field hai, toh data badalne ke baad length bhi update karo, nahi toh server reject kar dega.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+- **"Log sochte hain ki Burp non-HTTP traffic automatically parse kar lega."**  
+  **Actually:** Burp sirf HTTP aur WebSocket ko parse karta hai. Baaki protocols ke liye tumhe raw data manually analyze karna hoga.  
+- **"Log sochte hain ki invisible proxy se saara traffic HTTP history mein dikhega."**  
+  **Actually:** Nahi, non-HTTP traffic HTTP history mein nahi dikhta. Woh sirf intercept screen mein raw form mein dikhta hai, ya Logger++ mein.
+
+## 🌍 11. Real-World Use Case (Bug Bounty)
+
+**Scenario:** Ek IoT smart bulb app thi jo MQTT use karti thi. Researcher ne port 1883 par listener lagaya, invisible mode, aur iptables se redirect kiya. Usne dekha ki app "setColor" message bhejti hai bina authentication ke. Usne apna khud ka message bana kar "setColor" with "brightness" field mein command injection try kiya. Server ne execute kar liya.  
+**Result:** Remote code execution, $7000 bounty.
+
+## 🎨 12. Visual Diagram (ASCII Art)
+
+```
+[App (Port 5222)] ---> [Network Redirect] ---> [Burp Listener (Port 5222, Invisible)]
+                                              |
+                                              +---> [Intercept/Modify]
+                                              |
+                                              +---> [Forward to Real Server]
+```
+
+## 🛠️ 13. Best Practices (Pro Tips)
+
+- **Tip 1:** Pehle app ke used ports discover karo – `netstat` ya Wireshark use karo.  
+- **Tip 2:** Har protocol ke liye alag Burp listener banao, with descriptive names.  
+- **Tip 3:** Logger++ extension install karo – ye saara raw traffic log karega.  
+- **Tip 4:** Protocol specifications padho – XMPP, MQTT ki structure samjho tabhi modify kar paoge.  
+- **Tip 5:** Hex editor mode mein modify karte waqt, careful raho length fields ka.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?)
+
+- **Scenario 1:** Non-HTTP traffic intercept nahi kiya toh vulnerabilities miss ho jayengi jo sirf un protocols mein hain.  
+- **Scenario 2:** Galat modify karne se app crash ho sakti hai ya server connection drop kar sakta hai.  
+- **Scenario 3:** Logger++ nahi lagaya toh baad mein analysis ke liye kuch bhi save nahi hoga.
+
+## ❓ 15. FAQ (Interview Questions)
+
+**Q1: Non-HTTP traffic kaise intercept karte hain?**  
+A1: Burp listener specific port par invisible mode mein lagao, network redirect karo, aur manually intercept karo.  
+
+**Q2: Kaun se common non-HTTP protocols hain?**  
+A2: XMPP (5222), MQTT (1883), WebSocket (80/443 but already covered), custom TCP.  
+
+**Q3: Burp mein raw TCP traffic kahan dikhta hai?**  
+A3: Proxy → Intercept tab mein, jab connection intercept ho. History nahi hai.  
+
+**Q4: Logger++ kya hai?**  
+A4: Burp extension jo saare requests/responses log karta hai, including raw TCP.  
+
+**Q5: Raw data modify karte waqt kya dhyan rakhna?**  
+A5: Length fields update karna, protocol structure respect karna, nahi toh request corrupt ho jayegi.  
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary)
+
+**Non-HTTP Traffic Interception = Jasoos ka walkie-talkie bhi tap karna, sirf letters nahi.**
+
+---
+
+# **Topic 15.4: Burp Mobile Assistant**
+
+## 🎯 1. Title / Topic: Burp Mobile Assistant
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+Socho tum mobile app test kar rahe ho. Har baar:  
+- WiFi proxy settings mein jaana  
+- IP address aur port type karna  
+- Certificate download karna, install karna, trust karna  
+- Baar baar proxy on/off karna  
+
+Ye sab kaam **bore kar dete hain**, aur time waste hota hai.  
+
+**Burp Mobile Assistant** ek **remote control** ki tarah hai. Ek button se proxy set karo, ek click mein certificate install karo, QR code scan karo aur configuration automatically apply ho jaye. Jaise TV ka remote – ek click mein channel change.
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**Burp Mobile Assistant** ek Burp Suite extension hai (BApp) jo mobile device par proxy configuration aur certificate installation ko automate karta hai. Android ke liye ek dedicated app hota hai jo Burp se communicate karta hai. iOS mein manual thoda hai, lekin QR code scan se proxy config set ho jati hai.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**  
+Mobile testing mein baar-baar ye steps repeat karne padte hain:  
+- WiFi settings mein jaake proxy set karo (IP aur port daalo)  
+- Burp CA certificate download karo (http://burp)  
+- Android mein certificate install karo (Settings → Security → Install from storage)  
+- Android 7+ mein user certificates ko trust karne ke liye additional steps  
+- Testing ke baad proxy hatao  
+
+Har naye device, har naye test session mein ye time waste.
+
+**Solution:**  
+Burp Mobile Assistant (Android) ek app provide karta hai jo Burp se connect hota hai. Tum QR code scan karte ho, aur app automatically proxy set kar deta hai, certificate install kar deta hai. Ek click mein kaam ho jata hai.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega
+
+**Burp mein extension install karne ke baad:**
+- Extender → BApp Store → Burp Mobile Assistant → Install.  
+- Extension add ho jayegi. **Mobile Assistant** tab dikhega Burp mein.  
+
+**Mobile Assistant tab:**
+- **QR Code** dikhega – isme encoded hai Burp listener details (IP, port).  
+- **Status** – connected devices dikhenge.  
+- **Buttons** – Start/Stop proxy, Install certificate, etc.
+
+**Android app mein:**
+- App open karo → Scan QR code → Proxy automatically set ho jayega.  
+- "Install Certificate" button – ek click mein certificate install.
+
+## ⚙️ 6. Under the Hood (Technical Working)
+
+1. Burp extension local network par ek HTTP server chalata hai.  
+2. Ye server QR code generate karta hai jisme Burp listener ka IP aur port encoded hota hai.  
+3. Android app QR code scan karta hai, us IP/port ko read karta hai.  
+4. App Android ke **VpnService** API use karta hai ya WiFi proxy settings change karta hai (depending on Android version).  
+5. Certificate installation ke liye, app Burp se CA certificate download karta hai aur Android ke certificate store mein add karta hai (user ke interaction se, kyunki Android security allow nahi karta automatically). Lekin app user ko guided steps dikhata hai.  
+6. iOS mein QR code sirf proxy settings set karta hai, certificate manual install karna padta hai.
+
+## 💻 7. Hands-On: Step-by-Step Practical
+
+### Android Setup
+
+**Step 1: Burp Mobile Assistant install karo**
+- Burp open karo.  
+- **Extender → BApp Store** → Search "Mobile Assistant" → Install.  
+- Install hone ke baad, **Mobile Assistant** tab dikhega.
+
+**Step 2: Android device par app install karo**
+- Play Store se "Burp Suite Mobile Assistant" search karo (official PortSwigger app).  
+- Install karo.
+
+**Step 3: Burp mein QR code generate karo**
+- Mobile Assistant tab mein, ensure karo ki Burp listener chal raha hai (e.g., 8080 on all interfaces).  
+- Tab par ek QR code dikhega.  
+
+**Step 4: Android app se QR code scan karo**
+- Android app open karo.  
+- "Scan QR Code" button dabao.  
+- Phone camera se Burp screen ka QR code scan karo.  
+
+**Step 5: Proxy auto-configure ho jayega**
+- App automatically WiFi proxy settings set kar dega (ya VPN mode use karega).  
+- Status "Connected" dikhega.
+
+**Step 6: Certificate install karo**
+- Android app mein "Install Certificate" button dabao.  
+- App Burp se certificate download karega aur installation guide dekhaega.  
+- Android settings mein jaakar certificate install karo (ya app guided steps follow karo).  
+- Android 7+ ke liye, ho sakta hai additional steps chahiye (like adding certificate to system store, which needs root). Lekin user certificate kaam karega agar app targetSdkVersion < 24, ya agar app ke manifest mein `network_security_config` mein user certificates allowed hain.
+
+**Step 7: Verify**
+- Browser open karo, koi HTTP site kholo.  
+- Burp mein request aana chahiye.  
+- Agar certificate trust nahi ho raha, toh browser warning dega – us warning ko accept karo (test environment hai).
+
+**Step 8: Testing ke baad proxy disable karo**
+- Android app mein "Disable Proxy" button dabao.  
+- Ya QR code scan karo with "Disable" option.
+
+### iOS Setup
+
+**Step 1:** Burp Mobile Assistant extension install karo (same as above).  
+**Step 2:** iOS device par koi app nahi hai, lekin QR code scan kar sakte ho.  
+- iOS camera se QR code scan karo.  
+- Ye automatically WiFi proxy settings set kar dega (iOS ka feature).  
+**Step 3:** Certificate install karo manually:  
+- Safari mein `http://burp` open karo.  
+- "CA Certificate" download karo.  
+- Settings → Profile Downloaded → Install.  
+- Settings → General → About → Certificate Trust Settings → Burp certificate enable karo.  
+**Step 4:** Verify traffic.
+
+## ⚖️ 8. Comparison (Manual vs Assistant)
+
+| Feature | Manual | Mobile Assistant |
+|---------|--------|------------------|
+| Proxy setup | Type IP, port each time | QR code scan, auto-set |
+| Certificate install | Download, go to settings, install | Guided, one-click download |
+| Multiple devices | Repeat for each | Scan QR code for each |
+| Speed | 2-3 minutes per setup | 30 seconds |
+| Error prone | High (typo in IP) | Low |
+
+## 🚫 9. Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** Burp listener "All interfaces" par nahi bind kiya.  
+  **Fix:** Proxy → Options → Edit listener → Bind to address: All interfaces.  
+- **Mistake 2:** Android app mein QR code scan ke baad proxy set nahi ho raha.  
+  **Fix:** Check karo ki device aur computer same WiFi network par hain, aur firewall Burp port block toh nahi kar raha.  
+- **Mistake 3:** Certificate install karne ke baad bhi traffic nahi aa raha.  
+  **Fix:** Android 7+ ke liye, ho sakta hai app user certificates trust na kare. Is case mein Frida se bypass karo ya repatch karo.  
+- **Mistake 4:** iOS mein certificate trust karna bhoolna.  
+  **Fix:** Settings → General → About → Certificate Trust Settings mein enable karo.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+- **"Log sochte hain ki Mobile Assistant se certificate automatically install ho jayega bina user interaction ke."**  
+  **Actually:** Android security allow nahi karta ki koi app bina permission ke certificate install kare. Isliye app user ko guided steps dikhati hai, but installation still manual hai. Proxy automatic ho jata hai.  
+- **"Log sochte hain ki iOS ka bhi app hai."**  
+  **Actually:** iOS ka koi official app nahi hai. QR code sirf proxy set karta hai, certificate manual install karna padta hai.
+
+## 🌍 11. Real-World Use Case (Bug Bounty)
+
+**Scenario:** Ek pentester ko 10 different Android devices par ek app test karna tha. Har device par baar-baar proxy set karna, certificate install karna time-consuming tha. Usne Burp Mobile Assistant use kiya – har device par QR code scan kiya, 1 minute mein proxy set ho gaya. Certificate installation bhi guided steps se jaldi ho gaya. Time bacha, productivity badhi.  
+**Result:** Efficient testing, more time for actual bug hunting.
+
+## 🎨 12. Visual Diagram (ASCII Art)
+
+```
+[Burp] -- generates QR code (IP:Port) --> [Mobile Assistant Tab]
+  ^                                              |
+  | (scan)                                       v
+[Android App] -- auto-set proxy --> [Device]
+  |                                              |
+  +-- Install certificate (guided) ------------>+
+```
+
+## 🛠️ 13. Best Practices (Pro Tips)
+
+- **Tip 1:** Pehle Burp listener "All interfaces" par set karo.  
+- **Tip 2:** QR code scan karne se pehle ensure karo ki device aur computer same network par hain.  
+- **Tip 3:** Android app mein "Install Certificate" ke baad bhi agar traffic nahi aa raha, toh check karo ki app targetSdkVersion < 24 hai ya nahi. Agar >=24, toh user certificate trust nahi karega bina configuration change kiye.  
+- **Tip 4:** iOS mein certificate trust karna mat bhoolna – common mistake hai.  
+- **Tip 5:** Multiple devices ke liye ek hi QR code use kar sakte ho.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?)
+
+- **Scenario 1:** Mobile Assistant use nahi kiya toh setup time zyada lagega, boring repetitive tasks.  
+- **Scenario 2:** Agar listener "All interfaces" par nahi hai toh device connect nahi karega – time waste.  
+- **Scenario 3:** Certificate trust nahi kiya toh traffic toh aayega lekin app mein errors aayenge (SSL errors) – app functional nahi rahegi properly.
+
+## ❓ 15. FAQ (Interview Questions)
+
+**Q1: Burp Mobile Assistant kya karta hai?**  
+A1: Mobile device par proxy auto-configuration aur certificate installation help karta hai.  
+
+**Q2: Android mein kaise kaam karta hai?**  
+A2: QR code scan karte hi WiFi proxy set ho jati hai, aur certificate installation guided steps se hoti hai.  
+
+**Q3: iOS mein bhi hai kya?**  
+A3: iOS ke liye koi official app nahi, lekin QR code proxy set kar deta hai, certificate manual install karna padta hai.  
+
+**Q4: Kya Mobile Assistant se certificate automatically install ho jata hai?**  
+A4: Nahi, Android security ke karan user interaction required hai, but guided steps provide karta hai.  
+
+**Q5: Mobile Assistant use karne ke kya fayde hain?**  
+A5: Time save, setup errors kam, multiple devices easily configure.  
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary)
+
+**Burp Mobile Assistant = TV remote jaisa – ek click mein proxy on, doosre mein certificate install.**
+
+---
+
+**Module 15 complete!** Ab tu mobile app testing ke liye fully equipped hai – SSL pinning bypass, invisible proxy, non-HTTP traffic, aur Mobile Assistant. Koi bhi app aaye, tod sakta hai. 🔥
+
+========================================================================================
