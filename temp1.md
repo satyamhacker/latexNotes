@@ -1,31 +1,3 @@
-## **Module 2: Burp Suite Basics & HTTP Fundamentals**
-
-*Burp Suite ek tarah ka "Man-in-the-Middle" hai jo browser aur server ke beech mein baith ke sab dekh aur badal sakta hai. Pehle HTTP ko samjho, phir Burp ko.*
-
-### Topic 2.1: Get Burp Suite Community
-- Students ke liye Burp Suite Community edition best hai. Windows (64-bit) ke liye ise download karo.
-
-### Topic 2.2: HTTP Methods – GET vs POST
-| Method | Data Location | Use Case |
-|--------|---------------|----------|
-| **GET** | URL mein (parameters) | Data fetch karna, bookmarks, links |
-| **POST** | Request Body mein | Data submit karna, forms, login |
-
-### Topic 2.3: Understanding Request & Response
-Jab tum Burp mein Intercept on karte ho, kuch aisa dikhta hai:
-```
-POST /dvwa/login.php HTTP/1.1
-Host: localhost
-User-Agent: Mozilla/5.0
-...
-username=admin&password=password&login=Login
-```
-- **Request Line:** `POST /dvwa/login.php HTTP/1.1`
-- **Headers:** Host, User-Agent, etc.
-- **Body:** `username=admin&password=password`
-
----
-
 ## **Module 3: Burp Suite – 1000 Feet Overview**
 
 *Pehle poora battlefield dekh lo, phir weapon uthao. Burp ke tabs ka ek glance.*
