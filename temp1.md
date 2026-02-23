@@ -1,28 +1,3 @@
-## **Module 18: Professional Reporting & Remediation Verification**
-
-*Bug dhoondhna aadha kaam hai, report likhna aur fix verify karna baaki aadha.*
-
-### Topic 18.1: Client-Ready Reporting
-- **Executive Summary:** Non-technical overview for management – risk, impact, business context.
-- **Technical Findings:** Detailed steps, proof of concept (POC), screenshots, request/response.
-- **CVSS Scoring:** Correct severity calculation – Base, Temporal, Environmental.
-    - CVSS v3 calculator use karo. Impact aur Exploitability metrics samjho.
-
-### Topic 18.2: Remediation Verification
-- Client fix apply karega, tumhe re-test karna hoga.
-- **Proof of Fix:** Same POC run karo, confirm vulnerability resolved.
-- **False Positive Handling:** Scanner ki report mein false positives ho sakte hain. Manually verify karo aur report se hatao.
-
-### Topic 18.3: Generating Reports in Burp
-- **Target** tab → right-click on host → **Generate report**.
-- Choose report type: HTML, XML.
-- Select issues, include request/response, remediation.
-- Customize template (if Pro).
-
-> **Pro-Tip:** Report aisi banao ki CTO padh kar budget approve kare aur developer padh kar fix kar sake. Screenshots clear hon, steps reproducible hon.
-
----
-
 ## **Module 19: Custom BCheck Scripts**
 
 *Burp Professional mein custom scan checks likhne ki language hai – BCheck. Isse app-specific logic bugs scanner mein add kar sakte ho.*
