@@ -15355,3 +15355,853 @@ Ek pentester ne ek BCheck likhi jo GraphQL APIs mein "introspection" query bhejt
 BCheck tumhe Burp Scanner ko **custom intelligence** dene ka power deta hai. Tum specific bugs ke liye checks likh sakte ho, compliance check kar sakte ho, false positives hata sakte ho, aur apni scripts team aur community ke saath share kar sakte ho. Ye wo skill hai jo ek **pro pentester** ko beginner se alag karti hai.
 
 ========================================================================================
+
+# Module 20: Burp REST API & DevSecOps – Complete Zero-to-Hero Notes
+
+**TechGuru** yahan hai! Ab hum seekhenge **Burp REST API aur DevSecOps** – yani Burp ko command line se chalana, CI/CD pipelines mein integrate karna, aur automation ki duniya mein kadam rakhna. Ye module hai **20**, aur isme 4 topics hain. Main ek hi response mein saare topics cover karunga, bilkul **16-point structure** ke saath, har point ko **Hinglish** mein samjhaunga, aur **assume karunga ki tum ekdum beginner ho** (jaise 12 saal ka bachcha). Toh taiyaar ho jao, kyunki ab hum **DevSecOps** ki real power dekhenge!
+
+---
+
+## Topic 20.1: Burp REST API
+
+### 🎯 1. Title / Topic: **Burp REST API – Burp Ko Remote Control Se Chalana**
+
+### 🐣 2. Samjhane ke liye (Simple Analogy):
+Socho tumhare paas ek **robot** hai (Burp Suite) jo bohot saare kaam kar sakta hai – scan karna, report banana, etc. Lekin robot ko kaam karne ke liye tumhe uske paas jaakar buttons dabane padte hain (GUI). Ab tum chahte ho ki robot ko **dur se**, bina paas gaye, **command bhej kar** kaam karwao. Jaise mobile se ghar ka AC on karna.  
+**REST API** wahi remote control hai. Tum kisi bhi program ya script se Burp ko **HTTP requests** bhejkar usse scan start karwa sakte ho, results le sakte ho, report bana sakte ho – bina Burp ka UI khole.
+
+### 📖 3. Technical Definition (Interview Answer):
+**Burp REST API** Burp Suite Professional ka ek feature hai jo ek **HTTP-based interface** provide karta hai. Iske through tum externally (jaise script, CI/CD tool) se Burp instance ke saath communicate kar sakte ho. Default port hota hai **1337**, aur authentication ke liye **API key** use hoti hai. API **RESTful** hai, matlab standard HTTP methods (GET, POST, etc.) use karta hai aur data JSON format mein exchange hota hai.
+
+**Breakdown:**
+- **REST API** – Representational State Transfer Application Programming Interface. Ek tarika jisse do software aapas mein baat karte hain internet par.
+- **Port 1337** – Burp API sunne (listen) ke liye ye port use karta hai. (1337 = "leet" – hacker slang)
+- **API key** – Ek unique token jo tumhe Burp settings se milta hai. Ye prove karta hai ki tum authorized ho.
+- **JSON** – JavaScript Object Notation. Data ko key-value pairs mein represent karne ka ek format, jaise: `{"name": "TechGuru"}`.
+
+### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:**  
+GUI se Burp chalana manual hai. Har baar jab naya build aaye, tumhe manually Burp kholna, scan configure karna, report nikalna – ye time-consuming hai aur repeatable nahi. Agar tumhe roz 10 websites scan karne hain, to har baar same steps karte- karte thak jaoge.
+
+**Solution:**  
+REST API se tum **automate** kar sakte ho. Ek script likh do jo:
+- Burp ko start kare (headless mode mein)
+- Scan trigger kare
+- Results fetch kare
+- Report generate kare
+- Build ko fail kare agar critical issues mile
+
+Yahi **DevSecOps** ka foundation hai – security ko development pipeline mein integrate karna.
+
+### 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+
+**Location (Burp GUI mein API enable karte waqt):**
+- Burp Professional kholo.
+- **User options** tab (top right) par jao.
+- **REST API** sub-tab.
+- Yahan tum API enable kar sakte ho, port change kar sakte ho, aur API key dekh sakte ho.
+
+**Appearance:**
+- Ek checkbox: **"Enable REST API"**
+- Port field: default 1337
+- API key: ek long string, copy karne ka button
+- "Allow connections from" – optionally IP restrict kar sakte ho
+
+Jab API enable karo, to Burp background mein ek web server start kar deta hai jo API requests sunta hai.
+
+### ⚙️ 6. Under the Hood (Technical Working):
+1. Tum Burp GUI mein **Enable REST API** tick karte ho. Burp internally ek HTTP server start karta hai on port 1337 (configurable). Ye server **/v0.1/** base path par endpoints expose karta hai.
+2. Tum kisi bhi programming language (Python, bash, etc.) se HTTP request bhejte ho. Request mein **Authorization header** mein API key daalni hoti hai.
+3. Burp request ko authenticate karta hai. Agar API key valid hai to request process karta hai – jaise scan start karna, list karna, etc.
+4. Response JSON format mein aata hai, jisme data aur status codes hote hain.
+
+**ASCII Diagram:**
+```
++--------+          HTTP Request           +--------+
+| Script | ------------------------------> | Burp   |
+| (curl) |   POST /scan with API key       | Server |
++--------+          JSON data               +--------+
+      ^                                            |
+      |                                            |
+      +---------- JSON response (scan ID) <--------+
+```
+
+### 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
+
+**Step 1: Burp Mein API Enable Karna**
+- Burp Suite Professional kholo.
+- Top menu mein **User options** tab par click karo.
+- **REST API** sub-tab par click karo.
+- **"Enable REST API"** checkbox tick karo.
+- Port 1337 rahne do (ya apne hisaab se change karo).
+- **API key** copy karo (ye bahut important hai, isse secret rakhna).
+- (Optional) Agar tum sirf localhost se connect karoge to "Allow connections from" mein `127.0.0.1` daal sakte ho.
+
+**Step 2: API Key Verify Karna (Simple GET request)**
+- Terminal kholo (Linux/Mac) ya Command Prompt (Windows).
+- Likho:
+```bash
+curl -X GET "http://localhost:1337/v0.1/" -H "Authorization: Bearer YOUR_API_KEY"
+```
+- `-X GET` : HTTP GET method use karo (data lena).
+- `"http://localhost:1337/v0.1/"` : Burp API ka base URL. `v0.1` version hai.
+- `-H` : Header add karna.
+- `"Authorization: Bearer YOUR_API_KEY"` : Authentication header. Bearer ke baad tumhari API key (jo copy ki thi).
+
+**Expected Output:**
+```json
+{
+  "message": "Burp REST API is running",
+  "version": "0.1"
+}
+```
+Agar ye aaya to API enable hai aur key sahi hai.
+
+**Step 3: Scan Start Karna (POST request)**
+- Ab ek simple scan start karte hain.
+- Terminal mein:
+```bash
+curl -X POST "http://localhost:1337/v0.1/scan" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"urls": ["http://testphp.vulnweb.com"], "scan_configurations": ["ci_cd_scan"]}'
+```
+- `-X POST` : Data bhejna hai.
+- `-H "Content-Type: application/json"` : Hum JSON data bhej rahe hain.
+- `-d '{...}'` : Data (request body). JSON format mein.
+  - `"urls": ["http://testphp.vulnweb.com"]` : Array of target URLs.
+  - `"scan_configurations": ["ci_cd_scan"]` : Scan configuration ka naam (jo tumne Burp mein save kiya hoga). Agar nahi banaya to default use hoga.
+
+**Expected Output:**
+```json
+{
+  "scan_id": "123e4567-e89b-12d3-a456-426614174000"
+}
+```
+Ye **scan ID** hai. Isse tum scan status check karoge, issues fetch karoge.
+
+**Step 4: Scan Status Check**
+```bash
+curl -X GET "http://localhost:1337/v0.1/scan/123e4567-e89b-12d3-a456-426614174000" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+**Expected Output:**
+```json
+{
+  "scan_id": "...",
+  "status": "running",
+  "progress": 45
+}
+```
+Jab status "succeeded" ho jaye, tab issues fetch karo.
+
+**Step 5: Issues Fetch Karna**
+```bash
+curl -X GET "http://localhost:1337/v0.1/scan/123e4567-e89b-12d3-a456-426614174000/issues" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+**Expected Output:**
+```json
+{
+  "issues": [
+    {
+      "severity": "high",
+      "name": "SQL Injection",
+      "description": "..."
+    }
+  ]
+}
+```
+
+**Step 6: Report Generate Karna**
+```bash
+curl -X POST "http://localhost:1337/v0.1/report" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"scan_ids": ["123e4567-e89b-12d3-a456-426614174000"], "format": "html"}'
+```
+Isse Burp ek report banayega aur response mein report ID dega. Phir us report ko download kar sakte ho.
+
+### ⚖️ 8. Comparison (Ye vs Woh):
+
+| Feature | GUI Mode | REST API Mode |
+|---------|----------|---------------|
+| Interaction | Manual (click) | Automated (script) |
+| Best for | Ad-hoc testing, learning | CI/CD, repeated scans |
+| Speed | Slow, human-dependent | Fast, programmatic |
+| Use case | Deep manual analysis | Regression testing, nightly scans |
+
+### 🚫 9. Common Mistakes (Beginner Traps):
+
+- **Mistake 1:** API key copy karna bhoolna ya galat key use karna.  
+  **Fix:** Burp se exact key copy karo, spaces nahi hone chahiye.
+
+- **Mistake 2:** Port number galat dena (jaise 1337 ki jagah 8080).  
+  **Fix:** Burp mein port check karo, default 1337 hai.
+
+- **Mistake 3:** JSON format galat likhna (e.g., single quotes ki jagah double quotes na hona).  
+  **Fix:** JSON mein har string double quotes mein honi chahiye. Curl mein `-d` ke andar single quotes use kar sakte ho, but andar double quotes rakhna.
+
+- **Mistake 4:** `scan_configurations` mein aisa naam dena jo Burp mein exist nahi karta.  
+  **Fix:** Pehle Burp mein ek scan configuration bana lo (Project options → Scan → Scan configurations) aur wahi naam do.
+
+### 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
+
+- **"API key kahan se lau?"**  
+  Burp Professional mein **User options → REST API** mein API key dikhegi. Copy karo. Agar nahi dikh rahi to "Regenerate API key" button se naya bana lo.
+
+- **"Kya main Burp Community Edition mein bhi REST API use kar sakta hoon?"**  
+  Nahi, **REST API sirf Burp Professional** mein available hai. Community Edition mein ye feature nahi hai.
+
+- **"Kya mujhe Burp chalte rehna chahiye API use karne ke liye?"**  
+  Haan, Burp background mein chalna chahiye (GUI band kar sakte ho, par process running hona chahiye). Ya headless mode mein chalao (Topic 20.4).
+
+### 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
+
+**Scenario:**  
+Ek company apne staging environment par har raat 2 baje automatic scan karna chahti hai. Unke paas Jenkins CI/CD hai. Unhone ek script likhi jo:
+- Burp headless start karta hai.
+- REST API se scan trigger karta hai.
+- Scan complete hone par issues fetch karta hai.
+- Agar high severity issue milta hai to team ko Slack alert bhejta hai aur build ko "unstable" mark karta hai.
+
+Isse unhone **nightly security regression testing** automate kar liya, aur developers ko turant feedback milta hai.
+
+### 🎨 12. Visual Diagram (ASCII Art):
+```
++------------------+       +------------------+
+|  Your Script     |       |  Burp Suite Pro  |
+|  (Python/bash)   |       |  (REST API)      |
++------------------+       +------------------+
+         |                            |
+         | POST /scan                  |
+         |--------------------------->|
+         | (with API key + config)     |
+         |                             |
+         | 201 Created (scan_id)        |
+         |<---------------------------|
+         |                             |
+         | GET /scan/{id} (status)      |
+         |--------------------------->|
+         |                             |
+         | 200 OK (status: succeeded)  |
+         |<---------------------------|
+         |                             |
+         | GET /scan/{id}/issues        |
+         |--------------------------->|
+         |                             |
+         | 200 OK (issues list)         |
+         |<---------------------------|
+         |                             |
+         | POST /report                 |
+         |--------------------------->|
+         |                             |
+         | 200 OK (report URL)          |
+         |<---------------------------|
+```
+
+### 🛠️ 13. Best Practices (Pro Tips):
+
+- **API key ko environment variable mein rakho** – hardcode mat karo script mein. Jaise `$BURP_API_KEY`.
+- **Rate limiting:** Agar ek saath bohot saare scans trigger karoge to Burp slow ho sakta hai. Isliye queueing implement karo.
+- **Scan configurations** alag se bana lo – jaise "quick_scan", "full_scan", "ci_cd_scan" – jisse tum API call mein specify kar sako.
+- **Error handling:** Script mein check karo ki agar Burp down hai to kya karna hai.
+
+### ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
+
+- **Scenario 1:** API key leak ho gayi (e.g., code commit mein chhod di). Koi bhi tumhare Burp par scan chala sakta hai, resources waste kar sakta hai, ya tumhara license misuse ho sakta hai.  
+  **Fix:** API key turant regenerate karo Burp se.
+
+- **Scenario 2:** Port 1337 public network par expose kar diya bina firewall ke. Koi bhi attack kar sakta hai.  
+  **Fix:** Sirf localhost ya internal IPs se allow karo.
+
+### ❓ 15. FAQ (Interview Questions):
+
+- **Q1:** Burp REST API ka default port kya hai?  
+  **A1:** 1337.
+
+- **Q2:** Burp API ke saath authentication kaise hota hai?  
+  **A2:** HTTP header mein `Authorization: Bearer <API_KEY>` bhejna hota hai.
+
+- **Q3:** Kya main Burp API se multiple scans ek saath chala sakta hoon?  
+  **A3:** Haan, har scan ko alag scan_id milta hai. Tum parallel scans chala sakte ho, par system resources ke hisaab se limit ho sakti hai.
+
+- **Q4:** Burp API se scan results kaise export karein?  
+  **A4:** `/scan/{id}/issues` se issues fetch karo, ya `/report` se report generate karo.
+
+- **Q5:** Kya Burp API session handling support karta hai?  
+  **A5:** Haan, tum scan configuration mein login credentials etc. de sakte ho. API call mein configurations specify karte ho.
+
+### 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
+**"Burp REST API = Remote control for Burp – script se scan karo, results lo, automation ka maza lo."**
+
+---
+
+## Topic 20.2: Common API Endpoints
+
+### 🎯 1. Title / Topic: **Common API Endpoints – Kaunse URLs par kya milega**
+
+### 🐣 2. Samjhane ke liye (Simple Analogy):
+Ek **restaurant menu** ki tarah hai. Menu mein alag-alag dishes ke naam hote hain aur unke saath price. Tum waiter ko bula ke kehte ho "Mujhe dish #2 chahiye".  
+**API endpoints** bhi aise hi hain. Har endpoint ek specific kaam ke liye hai. Jaise `/scan` scan start karne ke liye, `/issues` findings lene ke liye. Tum API ko URL ke through batate ho ki kya kaam karna hai.
+
+### 📖 3. Technical Definition (Interview Answer):
+Burp REST API ke kuch **standard endpoints** hote hain jo common operations cover karte hain. Sabhi endpoints base path `/v0.1/` ke baad aate hain. Common endpoints hain:
+- `GET /` – API health check
+- `POST /scan` – Naya scan start karna
+- `GET /scans` – Saare scans ki list
+- `GET /scan/{scan_id}` – Specific scan ka status
+- `GET /scan/{scan_id}/issues` – Scan ke saare issues
+- `POST /report` – Report generate karna
+- `GET /report/{report_id}` – Report download karna
+
+### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+In endpoints ko jaan kar tum Burp ke saath effectively communicate kar sakte ho. Har endpoint ka specific purpose hai, aur tumhe pata hona chahiye ki kaunsa URL hit karna hai aur kaunsa HTTP method (GET/POST) use karna hai.
+
+### 🔍 5. Visual - Jab Screen Par Kya Dikhega (mentally imagine):
+- Tum ek endpoint hit karte ho curl se, aur response JSON format mein aata hai.
+- Jaise `GET /scans` karoge to ek list dikhegi:
+```json
+{
+  "scans": [
+    {"scan_id": "...", "status": "succeeded", "start_time": "..."},
+    {"scan_id": "...", "status": "running", "start_time": "..."}
+  ]
+}
+```
+
+### ⚙️ 6. Under the Hood (Technical Working):
+Jab tum kisi endpoint par request bhejte ho, Burp ka API router us URL ko decode karta hai, authentication check karta hai, phir associated function call karta hai. Jaise `/scan/{scan_id}` par GET request ka matlab hai "scan_id wala scan dhundho aur uska status do". Burp internal database se scan details nikaal kar JSON mein convert karta hai aur bhejta hai.
+
+### 💻 7. Hands-On: Step-by-Step Practical (with examples):
+
+**Prerequisite:** API enable aur API key ready.
+
+**1. Health Check**
+```bash
+curl -X GET "http://localhost:1337/v0.1/" -H "Authorization: Bearer YOUR_API_KEY"
+```
+**Response:** `{"message":"Burp REST API is running","version":"0.1"}`
+
+**2. Scan Start**
+```bash
+curl -X POST "http://localhost:1337/v0.1/scan" -H "Authorization: Bearer YOUR_API_KEY" -H "Content-Type: application/json" -d '{"urls":["http://testphp.vulnweb.com"]}'
+```
+**Response:** `{"scan_id":"abc123"}`
+
+**3. List All Scans**
+```bash
+curl -X GET "http://localhost:1337/v0.1/scans" -H "Authorization: Bearer YOUR_API_KEY"
+```
+**Response:** (array of scan objects)
+
+**4. Get Specific Scan Status**
+```bash
+curl -X GET "http://localhost:1337/v0.1/scan/abc123" -H "Authorization: Bearer YOUR_API_KEY"
+```
+**Response:** `{"scan_id":"abc123","status":"succeeded","total_issues":5}`
+
+**5. Get Scan Issues**
+```bash
+curl -X GET "http://localhost:1337/v0.1/scan/abc123/issues" -H "Authorization: Bearer YOUR_API_KEY"
+```
+**Response:** `{"issues":[{"severity":"high","name":"SQLi",...}]}`
+
+**6. Generate Report**
+```bash
+curl -X POST "http://localhost:1337/v0.1/report" -H "Authorization: Bearer YOUR_API_KEY" -H "Content-Type: application/json" -d '{"scan_ids":["abc123"],"format":"html"}'
+```
+**Response:** `{"report_id":"report_xyz"}`
+
+**7. Download Report**
+```bash
+curl -X GET "http://localhost:1337/v0.1/report/report_xyz" -H "Authorization: Bearer YOUR_API_KEY" --output report.html
+```
+Isse report.html file save hogi.
+
+### ⚖️ 8. Comparison (Endpoints):
+
+| Endpoint | Method | Input | Output |
+|----------|--------|-------|--------|
+| `/scan` | POST | URLs, config | scan_id |
+| `/scans` | GET | none | list of scans |
+| `/scan/{id}` | GET | scan_id | scan details |
+| `/scan/{id}/issues` | GET | scan_id | issues list |
+| `/report` | POST | scan_ids, format | report_id |
+
+### 🚫 9. Common Mistakes:
+
+- **Mistake 1:** URL mein `v0.1` bhoolna.  
+  **Fix:** Base path `/v0.1/` zaroori hai.
+
+- **Mistake 2:** `scan_id` ko URL mein galat jagah daalna.  
+  **Fix:** `/scan/scan_id` sahi hai, `/scan?id=scan_id` nahi.
+
+- **Mistake 3:** POST request mein data JSON format mein na bhejna.  
+  **Fix:** `-H "Content-Type: application/json"` daalo aur `-d` mein valid JSON do.
+
+### 🤔 10. Agar Dimag Ghoom Rahe Hai?:
+
+- **"Scan ID kahan se lau?"**  
+  Jab tum scan start karte ho, response mein `scan_id` milta hai. Use store kar lo.
+
+- **"Kya scan complete hone ka wait karna padta hai issues lane ke liye?"**  
+  Haan, agar scan abhi running hai to issues list mein sirf ab tak ke findings honge. Pura set lene ke liye status "succeeded" hona chahiye.
+
+### 🌍 11. Real-World Use Case:
+Ek CI/CD pipeline mein, build ke baad scan trigger kiya jata hai. Pipeline rukta hai jab tak scan complete na ho (polling). Phir issues fetch hote hain. Agar critical issue hai to build fail.
+
+### 🎨 12. ASCII Diagram:
+```
+[Client] -> GET /scans -> [Burp] returns scan list
+[Client] -> POST /scan (data) -> [Burp] creates scan, returns scan_id
+[Client] -> GET /scan/{id}/issues -> [Burp] returns issues
+```
+
+### 🛠️ 13. Best Practices:
+- Use `GET /scans` to monitor ongoing scans.
+- Poll every few seconds for scan status (avoid too frequent polling).
+- Use scan configurations to pre-define settings.
+
+### ⚠️ 14. Consequences:
+- Wrong endpoint use kiya to 404 error milega.
+- Bina authentication ke request bheji to 401 Unauthorized.
+
+### ❓ 15. FAQ:
+- **Q:** `/scan` endpoint mein `scan_configurations` kya hai?  
+  **A:** Burp mein predefined scan settings ka naam. Tum `default` bhi de sakte ho.
+
+- **Q:** Kya main multiple URLs ek saath de sakta hoon?  
+  **A:** Haan, `urls` array mein daalo.
+
+- **Q:** Report formats kaunsa support karta hai?  
+  **A:** HTML, XML, JSON etc.
+
+### 📝 16. Summary:
+**"Endpoints = menu card; sahi dish (URL) order karo, sahi JSON milega."**
+
+---
+
+## Topic 20.3: CI/CD Integration
+
+### 🎯 1. Title / Topic: **CI/CD Integration – Burp Ko Pipeline Mein Fit Karna**
+
+### 🐣 2. Samjhane ke liye (Simple Analogy):
+Maano tum ek **factory** ho jo roz naye products banaati hai (software builds). Har product ko quality check se guzarna padta hai. Quality check karne wala ek **inspector** hai (Burp). Tum chahte ho ki jaise hi product bane, inspector turant check kare aur report de.  
+**CI/CD integration** yahi hai. Jaise hi developer code push kare, automatic build trigger ho, aur build ke saath-saath Burp scan bhi chal jaaye. Agar scan mein koi dangerous bug mila, to product ko bazaar mein jaane se rok do (build fail).
+
+### 📖 3. Technical Definition (Interview Answer):
+**CI/CD (Continuous Integration/Continuous Deployment) integration** ka matlab hai ki Burp Suite Professional ko apni development pipeline mein shamil karna. Aisa karne ke liye hum Burp REST API ka use karte hain. Pipeline ke kisi stage (e.g., after deployment to staging) par ek script run hoti hai jo:
+- Burp headless instance start karti hai (ya already running instance se baat karti hai).
+- API se scan trigger karti hai.
+- Scan complete hone ka wait karti hai (polling).
+- Issues fetch karti hai.
+- Agar predefined threshold se zyada critical issues hain to build fail kar deti hai.
+
+Yeh **DevSecOps** ka ek important part hai – "shift left security" yani security ko development cycle ke starting stages mein laana.
+
+### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:**  
+Manual security testing baad mein hoti hai, jab application almost ready ho. Toh agar koi critical bug mile to fix karne mein late ho jata hai, cost badhti hai. Developers ko bhi turant feedback nahi milta.
+
+**Solution:**  
+Har code push ke saath automatic security scan. Bugs turant pakdo, fix karo, aur deploy karo. Isse security issues early phase mein hi catch ho jate hain.
+
+### 🔍 5. Visual - Jab Screen Par Kya Dikhega (CI/CD tool mein):
+**Jenkins example:**
+- Jenkins job run karta hai.
+- Console output mein dikhega:
+  ```
+  Starting Burp scan on https://staging.example.com
+  Scan ID: abc123
+  Waiting for scan to complete...
+  Scan completed. Found 3 issues: 2 high, 1 medium.
+  High severity issues exceed threshold. Failing build.
+  Build failed.
+  ```
+**GitHub Actions:**
+- Actions tab mein ek workflow run dikhega, jisme steps honge: "Checkout", "Run Burp Scan", "Parse Results", "Fail if critical".
+
+### ⚙️ 6. Under the Hood (Technical Working):
+1. Pipeline script (e.g., Jenkinsfile) mein ek stage hota hai "Security Scan".
+2. Ye stage ek Docker container start kar sakta hai jisme Burp headless install ho, ya phir kisi remote Burp instance se baat karta hai.
+3. Script Burp REST API ko call karta hai (`POST /scan`).
+4. Phir loop mein `GET /scan/{id}` call karta hai jab tak status "succeeded" na ho jaye (ya timeout).
+5. Phir `GET /scan/{id}/issues` se issues fetch karta hai.
+6. Script issues ko parse karta hai (count by severity).
+7. Agar high severity > 0 ya threshold cross, to script non-zero exit code return karta hai, jisse pipeline fail ho jati hai.
+
+### 💻 7. Hands-On: Step-by-Step Practical (Jenkins example):
+
+**Prerequisite:**
+- Jenkins server
+- Burp Professional installed (ya Docker image)
+- API key ready
+
+**Step 1: Jenkinsfile (Pipeline as Code)**
+Create a file `Jenkinsfile` in your repo:
+```groovy
+pipeline {
+    agent any
+    environment {
+        BURP_URL = 'http://localhost:1337/v0.1'
+        BURP_API_KEY = credentials('burp-api-key')  // Jenkins stored credential
+        TARGET_URL = 'https://staging.example.com'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building application...'
+                // build commands
+            }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                echo 'Deploying...'
+                // deploy commands
+            }
+        }
+        stage('Burp Security Scan') {
+            steps {
+                script {
+                    // 1. Start scan
+                    def scanId = startBurpScan(TARGET_URL)
+                    // 2. Wait for completion
+                    waitForScanCompletion(scanId)
+                    // 3. Get issues
+                    def issues = getScanIssues(scanId)
+                    // 4. Check thresholds
+                    def highCount = issues.count { it.severity == 'high' }
+                    if (highCount > 0) {
+                        error "Found ${highCount} high severity issues. Failing build."
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Helper functions using curl (or http request plugin)
+def startBurpScan(url) {
+    def response = sh(script: """
+        curl -s -X POST "${BURP_URL}/scan" \
+            -H "Authorization: Bearer ${BURP_API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d '{"urls": ["${url}"], "scan_configurations": ["ci_cd_scan"]}'
+    """, returnStdout: true).trim()
+    def json = readJSON text: response
+    return json.scan_id
+}
+
+def waitForScanCompletion(scanId) {
+    def status = 'running'
+    while (status != 'succeeded') {
+        sleep 10 // wait 10 seconds
+        def response = sh(script: """
+            curl -s -X GET "${BURP_URL}/scan/${scanId}" \
+                -H "Authorization: Bearer ${BURP_API_KEY}"
+        """, returnStdout: true).trim()
+        def json = readJSON text: response
+        status = json.status
+        echo "Scan status: ${status}"
+    }
+}
+
+def getScanIssues(scanId) {
+    def response = sh(script: """
+        curl -s -X GET "${BURP_URL}/scan/${scanId}/issues" \
+            -H "Authorization: Bearer ${BURP_API_KEY}"
+    """, returnStdout: true).trim()
+    def json = readJSON text: response
+    return json.issues
+}
+```
+
+**Step 2: Jenkins mein credential add karo**
+- Jenkins Dashboard → Manage Credentials → Add Credentials
+- Kind: Secret text, ID: `burp-api-key`, Secret: tumhari API key
+
+**Step 3: Pipeline run karo**
+- Jab code push hoga, pipeline automatically run hoga.
+- Agar high severity issue mila to build fail ho jayega.
+
+**GitHub Actions example (simplified):**
+```yaml
+name: Security Scan
+on: [push]
+jobs:
+  burp-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Burp Scan
+        env:
+          BURP_API_KEY: ${{ secrets.BURP_API_KEY }}
+        run: |
+          # Start scan
+          SCAN_ID=$(curl -s -X POST "http://localhost:1337/v0.1/scan" \
+            -H "Authorization: Bearer $BURP_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"urls":["https://staging.example.com"]}' | jq -r .scan_id)
+          # Wait for completion
+          while true; do
+            STATUS=$(curl -s -X GET "http://localhost:1337/v0.1/scan/$SCAN_ID" \
+              -H "Authorization: Bearer $BURP_API_KEY" | jq -r .status)
+            if [ "$STATUS" = "succeeded" ]; then break; fi
+            sleep 10
+          done
+          # Fetch issues
+          curl -s -X GET "http://localhost:1337/v0.1/scan/$SCAN_ID/issues" \
+            -H "Authorization: Bearer $BURP_API_KEY" > issues.json
+          # Check high severity count
+          HIGH_COUNT=$(jq '[.issues[] | select(.severity=="high")] | length' issues.json)
+          if [ $HIGH_COUNT -gt 0 ]; then
+            echo "Found $HIGH_COUNT high severity issues"
+            exit 1
+          fi
+```
+
+### ⚖️ 8. Comparison (CI/CD Tools):
+
+| Tool | Pros | Cons |
+|------|------|------|
+| Jenkins | Highly customizable, plugins | Complex setup |
+| GitLab CI | Integrated with GitLab | Limited to GitLab |
+| GitHub Actions | Easy for GitHub repos | Can be slow |
+
+### 🚫 9. Common Mistakes:
+
+- **Mistake 1:** Burp instance ka address sahi na dena (localhost vs docker network).  
+  **Fix:** Agar Burp Docker container mein hai to container name use karo.
+
+- **Mistake 2:** Scan completion wait karte time timeout na rakhna, jisse pipeline indefinitely hang ho.  
+  **Fix:** Loop mein max attempts ka logic daalo.
+
+- **Mistake 3:** Har build mein scan chala ke time waste karna (agar koi changes nahi hue).  
+  **Fix:** Caching ya incremental scans.
+
+### 🤔 10. Agar Dimag Ghoom Rahe Hai?:
+
+- **"Kya Burp scan karne mein der nahi lagti? Pipeline slow to nahi ho jayegi?"**  
+  Haan, full scan time-consuming ho sakta hai. Isliye tum "quick scan" configuration use kar sakte ho, jo sirf critical paths cover kare. Ya phir tum scan ko parallel chala sakte ho aur build ko fail mat karo, just notify.
+
+- **"Kya Burp ko production par chalana chahiye?"**  
+  Nahi, staging environment par chalao. Production par active scan harmful ho sakta hai.
+
+### 🌍 11. Real-World Use Case:
+Ek e-commerce company ne apne GitLab CI mein Burp scan integrate kiya. Har merge request ke baad, staging deploy hota hai, phir Burp scan chalta hai. Agar SQLi ya XSS milta hai to merge request block ho jata hai. Isse production mein critical vulnerabilities ka chance 90% kam ho gaya.
+
+### 🎨 12. ASCII Diagram:
+```
+[Developer Push Code] --> [CI/CD Trigger] --> [Deploy to Staging] --> [Call Burp API] --> [Burp Scan]
+                                                                                             |
+                                                                                             v
+[Build Success] <-- [No Critical] <-- [Check Issues] <-- [Wait for Completion] <-- [Scan Running]
+        |
+        +-- [Critical Found] --> [Build Fail] --> [Notify Team]
+```
+
+### 🛠️ 13. Best Practices:
+- Use dedicated scan configurations for CI/CD (lightweight).
+- Store API key securely in CI/CD secrets.
+- Implement timeouts and retries.
+- Parse issues and send summary to Slack/Email.
+- Consider rate limiting to avoid overloading staging.
+
+### ⚠️ 14. Consequences:
+- Agar integration galat hua to scan start hi nahi hoga, ya pipeline hamesha pass hoga (false sense of security).
+- Agar scan bahut heavy hua to staging server crash ho sakta hai.
+
+### ❓ 15. FAQ:
+- **Q:** CI/CD mein Burp scan ke liye agent kaise setup karein?  
+  **A:** Agent par Burp install karo, ya Docker image use karo.
+
+- **Q:** Kya main Burp headless mode mein REST API ke saath use kar sakta hoon?  
+  **A:** Haan, agle topic mein dekhenge.
+
+- **Q:** Build fail kaise karu agar medium severity issue ho?  
+  **A:** Threshold adjust karo: `if (mediumCount > 5) error`.
+
+### 📝 16. Summary:
+**"CI/CD + Burp = automatic security guard jo har code push par check karta hai."**
+
+---
+
+## Topic 20.4: Headless Burp (CLI)
+
+### 🎯 1. Title / Topic: **Headless Burp – Burp Bina UI Ke**
+
+### 🐣 2. Samjhane ke liye (Simple Analogy):
+Tumhare paas ek **car** hai. Normally tum car mein baith kar steering wheel se chalate ho (GUI). Lekin kai baar tumhe car ko remote control se chalana hota hai, jaise driverless car. Car mein koi nahi baitha, par wo apne aap chal rahi hai.  
+**Headless Burp** yahi hai – Burp Suite bina kisi graphical interface ke, background mein chalta hai, aur tum REST API se usse commands bhej kar use kar sakte ho. Ye server environment ke liye perfect hai, jahan display nahi hota.
+
+### 📖 3. Technical Definition (Interview Answer):
+**Headless mode** ka matlab hai Burp Suite Professional ko **command line** se start karna bina kisi GUI ke. Aisa karne ke liye hum `--headless` flag use karte hain. Is mode mein Burp background process ki tarah chalta hai, REST API enable hota hai, aur hum API ke through interaction kar sakte hain. Ye CI/CD environments, remote servers, ya automated workflows ke liye ideal hai.
+
+Command example:
+```bash
+java -jar burpsuite_pro.jar --headless --project-file=myproject.burp --config-file=config.json
+```
+
+### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+- **Server environment:** Jahan GUI nahi hai (e.g., Linux server without desktop).
+- **Automation:** CI/CD pipeline mein Burp automatically start ho aur scan kare.
+- **Resource efficiency:** Headless mode zyada lightweight hai (UI render nahi karna).
+- **Scheduling:** Tum cron job laga sakte ho jo raat ko Burp start kare, scan kare, aur band ho jaye.
+
+### 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+Terminal mein kuch aisa:
+```bash
+$ java -jar burpsuite_pro.jar --headless --project-file=test.burp
+Burp Suite Professional v2023.x started in headless mode.
+Project file: test.burp
+REST API enabled on port 1337
+Use API key: 7a8b9c0d...
+Headless mode: waiting for API commands. Press Ctrl+C to stop.
+```
+
+Phir tum curl commands bhej sakte ho.
+
+### ⚙️ 6. Under the Hood (Technical Working):
+- Java Virtual Machine (JVM) Burp application ko load karta hai.
+- `--headless` flag Burp ko batata hai ki UI modules mat load karo, sirf core engine aur API server start karo.
+- Burp API server start karta hai on port 1337 (configurable).
+- Tum API calls bhejte ho, Burp unhe process karta hai.
+- Jab tum process band karte ho (Ctrl+C), Burp project file save kar sakta hai.
+
+### 💻 7. Hands-On: Step-by-Step Practical:
+
+**Step 1: Command se Burp headless start karo**
+```bash
+java -jar /path/to/burpsuite_pro.jar --headless --project-file=myproject.burp --config-file=scan_config.json
+```
+- `java -jar` : Java ke saath jar file run karo.
+- `/path/to/burpsuite_pro.jar` : Burp Pro jar file ka location.
+- `--headless` : Headless mode enable.
+- `--project-file=myproject.burp` : Project file (optional) jisme settings save hongi.
+- `--config-file=scan_config.json` : Configuration file (JSON) jisme options hain (e.g., target scope, etc.)
+
+**Step 2: Check API is running (another terminal)**
+```bash
+curl http://localhost:1337/v0.1/ -H "Authorization: Bearer YOUR_API_KEY"
+```
+Agar aisa kuch dikhe to kaam shuru:
+```json
+{"message":"Burp REST API is running","version":"0.1"}
+```
+
+**Step 3: Scan start karo**
+```bash
+curl -X POST http://localhost:1337/v0.1/scan -H "Authorization: Bearer YOUR_API_KEY" -H "Content-Type: application/json" -d '{"urls":["http://example.com"]}'
+```
+
+**Step 4: Jab kaam ho jaye, Burp ko band karo (Ctrl+C) ya graceful shutdown ke liye API call karo (if available).**
+
+**Configuration file example (scan_config.json):**
+```json
+{
+  "scan": {
+    "scope": {
+      "include": ["http://example.com"]
+    },
+    "scan_configurations": ["ci_cd_scan"]
+  }
+}
+```
+
+### ⚖️ 8. Comparison (Headless vs GUI):
+
+| Feature | GUI Mode | Headless Mode |
+|---------|----------|---------------|
+| Display required | Haan | Nahi |
+| Best for | Manual testing | Automation, servers |
+| Resource usage | High (UI) | Low |
+| Interaction | Mouse/Keyboard | API |
+
+### 🚫 9. Common Mistakes:
+
+- **Mistake 1:** `--headless` flag bhoolna – GUI khul jayega aur server environment mein error dega.  
+  **Fix:** Flag yaad rakho.
+
+- **Mistake 2:** Config file ka path galat dena.  
+  **Fix:** Absolute path do ya relative path sahi se.
+
+- **Mistake 3:** API key note karna bhoolna – headless mode start hote hi terminal mein API key print hoti hai. Use copy karo.  
+  **Fix:** Output dekho, key copy karo.
+
+- **Mistake 4:** Background process ko kill nahi karna, multiple instances chal rahe honge.  
+  **Fix:** Process ID note karo aur baad mein kill karo.
+
+### 🤔 10. Agar Dimag Ghoom Rahe Hai?:
+
+- **"Kya headless mode mein Burp extensions chalenge?"**  
+  Haan, extensions chal sakte hain, lekin kuch UI-dependent extensions kaam nahi karengi.
+
+- **"Kya headless mode mein multiple scans ek saath chala sakta hoon?"**  
+  Haan, API se multiple scans trigger kar sakte ho, wo background mein chalenge.
+
+- **"Project file kyun use karein?"**  
+  Taaki scan results save ho jayein. Baad mein tum project file ko GUI mein khol kar manually bhi dekh sakte ho.
+
+### 🌍 11. Real-World Use Case:
+Ek security team ne ek AWS EC2 instance (Linux) par Burp headless install kiya. Cron job har raat 3 baje ek script run karta hai jo:
+- Burp headless start karta hai.
+- 5 target URLs ka scan trigger karta hai.
+- Scan complete hone par results fetch karta hai aur S3 bucket par upload karta hai.
+- Burp process band kar deta hai.
+
+Isse unhone bina kisi manual intervention ke daily scans automate kar liye.
+
+### 🎨 12. ASCII Diagram:
+```
+[Terminal] --> "java -jar burp.jar --headless" --> [Burp Headless Process]
+                                                          |
+                                                          v
+                                                   [REST API on :1337]
+                                                          ^
+                                                          |
+[Script/CI] --> curl commands ----------------------------+
+```
+
+### 🛠️ 13. Best Practices:
+- Headless mode mein Burp ko daemon ki tarah chalane ke liye `nohup` ya systemd service use karo.
+- Logs redirect karo: `java -jar ... > burp.log 2>&1 &`
+- API key ko env var mein store karo.
+- Graceful shutdown ke liye `kill -SIGTERM <pid>` use karo.
+
+### ⚠️ 14. Consequences:
+- Agar headless mode mein koi error aaya to pata karna mushkil ho sakta hai. Isliye logging important hai.
+- Agar tum project file save nahi karoge to scan results kho sakte ho.
+
+### ❓ 15. FAQ:
+
+- **Q:** Headless mode ke liye minimum system requirements kya hain?  
+  **A:** GUI nahi hai, to thoda kam RAM mein bhi chal sakta hai. Generally 4GB RAM recommend hai.
+
+- **Q:** Kya headless mode mein scan ke dauran Burp ka performance monitor kar sakte hoon?  
+  **A:** API se scan status le sakte ho, par detailed performance monitoring nahi.
+
+- **Q:** Headless mode mein Burp kitni der tak chalta hai?  
+  **A:** Jab tak tum process band nahi karte. Tum background mein chhod sakte ho.
+
+- **Q:** Kya headless mode mein multiple project files load kar sakte hain?  
+  **A:** Ek baar mein ek project file load hoti hai. Naya project file load karne ke liye Burp restart karna padega.
+
+- **Q:** Headless mode mein extension load kaise karein?  
+  **A:** `--extensions-dir` flag se extensions folder specify kar sakte ho.
+
+### 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
+**"Headless Burp = GUI bhoolo, command line se chalao, API se control karo – asli automation yahan se shuru hoti hai."**
+
+---
+
+## 📌 Module 20 ka Summary (Overall):
+Module 20 mein humne seekha:
+- **Burp REST API** – remote control se Burp ko command karna.
+- **Common API endpoints** – kaunsa URL kis kaam ke liye.
+- **CI/CD Integration** – pipeline mein Burp scan ko automatic trigger karna.
+- **Headless Burp** – bina UI ke server par Burp chalana.
+
+Ye sab **DevSecOps** ke important building blocks hain. Ab tum apne automated security scanning pipeline bana sakte ho, jisse tumhara time bachega aur vulnerabilities early stage mein pakdi jayengi.
+
+========================================================================================

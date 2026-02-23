@@ -1,39 +1,3 @@
-## **Module 20: Burp REST API & DevSecOps**
-
-*Burp ko command line se chalana, CI/CD mein integrate karna – ye next level automation hai.*
-
-### Topic 20.1: Burp REST API
-- Burp Professional mein REST API enable kar sakte ho. Port usually 1337, authentication via API key.
-
-### Topic 20.2: Common API Endpoints
-- `/scan` – Start a new scan.
-- `/scans` – List scans.
-- `/issues` – Get findings.
-- `/report` – Generate report.
-
-### Topic 20.3: CI/CD Integration
-**Jenkins / GitLab CI / GitHub Actions:**
-- Code push hote hi automatically Burp scan trigger karo.
-- API call bhejo scan start karne ke liye.
-- Scan complete hone par report fetch karo.
-- Build fail karo agar critical issues hain.
-
-**Example curl command:**
-```bash
-curl -X POST "http://localhost:1337/v0.1/scan" \
-  -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"urls": ["https://staging.example.com"], "scan_configurations": ["ci_cd_scan"]}'
-```
-
-### Topic 20.4: Headless Burp (CLI)
-- Burp Suite Pro command line se bhi chala sakte ho – headless mode.
-- Load project file, start scan, export results.
-
-> **Pro-Tip:** Bhai, sirf GUI pe depend mat reh. Seekh ki Burp REST API se scan kaise trigger karte hain. Jab developer code push kare, toh automatically Burp scan run hona chahiye. Ye hi asli DevSecOps hai.
-
----
-
 ## **Module 21: Cloud Security & Team Collaboration**
 
 ### Topic 21.1: Cloud Security Testing with Burp
