@@ -9191,3 +9191,1005 @@ Poll now karo – interactions tumhare apne server se aayenge.
 **"Private Collaborator = apna khud ka spy center – data sirf tumhare paas, kisi aur ki nazar nahi."**
 
 ---
+
+========================================================================================
+
+## Module 12: Macros & Session Handling Rules
+
+*Modern apps mein CSRF tokens aur session timeout automation ke bina test karna mushkil hai. Macros se ye problems solve hoti hain.*
+
+---
+
+### Topic 12.1: Macros Fundamentals
+
+## 🎯 1. Title / Topic: Macros Fundamentals
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Maano tum ek factory mein kaam karte ho jahan har ghante ek machine ko band karke phir se start karna padta hai. Tum khud baar-baar jaakar button dabate ho – switch off, wait, switch on. Ek din tum bore ho gaye. Tumne ek **robotic arm** laga diya jo exactly wahi sequence repeat karta hai – switch off, wait, switch on – har baar tumhare bina. Yahi hai **Macro**. Burp Suite mein Macro ek **pre-recorded sequence of HTTP requests** hai jo automatically execute hoti hai jab zaroorat padti hai. Jaise CSRF token lene ke liye ek request, ya login karne ke liye do request, sab kuch apne aap.
+
+## 📖 3. Technical Definition (Interview Answer):
+**Macro** Burp Suite ki ek feature hai jo user ko allow karta hai ki woh **multiple HTTP requests ki ek sequence record kare** (jaise login karna, token fetch karna, etc.) aur phir us sequence ko **automatically execute** karwaye jab bhi koi condition trigger ho (jaise session expired, ya har request se pehle token chahiye). Macros usually **Session Handling Rules** ke saath use hote hain taaki complex workflows automate ho sakein.
+
+**Breakdown:**
+- **Pre-recorded sequence:** Pehle tum manually requests capture karte ho (jaise Proxy history se select karte ho) aur unhe ek specific order mein save karte ho.
+- **Automatically execute:** Burp khud se ye requests bhejta hai, tumhe kuch nahi karna padta.
+- **Session Handling Rules:** Ye rules decide karte hain ki macro kab chalega – har request se pehle, jab session expire ho, etc.
+- **CSRF tokens:** Cross-Site Request Forgery tokens – web forms mein security ke liye unique codes jo har request mein change hote hain.
+- **Session maintenance:** Login session ko alive rakhna.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Modern web applications mein complex state management hoti hai. For example:
+- Har request ke saath ek **CSRF token** bhejna padta hai jo pehle ek alag request se fetch karna padta hai.
+- Session **timeout** ho jata hai, phir dubara login karna padta hai.
+- Agar Intruder se 1000 requests bhejni hain, to har request ke liye manually token fetch karna impossible hai.
+**Solution:** Macro in sab problems ko automate karta hai. Tum ek baar macro bana dete ho ki "pehle ye request bhej kar token lo, phir us token ko main request mein daalo, phir main request bhejo". Phir Intruder ya Scanner apne aap macro chala lega har baar jab zaroorat ho. Tum coffee pee sakte ho.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+Jab tum macro create karoge, to screen par kuch aisa dikhega:
+- **Location:** Burp Suite mein jaao **Project options** tab → **Sessions** sub-tab → **Macros** section ke neeche **Add** button.
+- **Appearance:** Ek naya window khulega jisme left side par available requests ki list hogi (Proxy history se). Tum requests select kar sakte ho. Phir **"Configure item"** button se har request ke liye parameter handling set kar sakte ho.
+- **Macro Editor:** Yahan tum selected requests ka order dekh sakte ho, aur har request ke baad response se value extract karne ke rules bana sakte ho (jaise regex).
+- **Example:** Macro window kuch aisa dikhega:
+  ```
+  Macro Editor: My CSRF Token Macro
+  [x] GET /csrf-token (extract: csrf parameter)
+  [x] POST /login
+  [x] GET /dashboard
+  ```
+  Har request ke neeche options honge: "Derive from first request", "Use custom location", etc.
+
+## ⚙️ 6. Under the Hood (Technical Working):
+**Macro Execution Flow:**
+1. **Macro creation:** Tum Proxy history se kuch requests select karte ho (e.g., GET /csrf-token, POST /login). Burp in requests ko store kar leta hai.
+2. **Parameter handling definition:** Tum batate ho ki response se kaunsa value extract karna hai aur kahan use karna hai. Jaise GET /csrf-token ke response mein CSRF token milega, use next request (POST /login) mein daalna hai.
+3. **Macro assigned to a rule:** Tum ek Session Handling Rule banate ho, aur usme action "Run a macro" select karte ho, aur ye macro choose karte ho.
+4. **Trigger condition:** Jab bhi woh rule apply hota hai (e.g., har request se pehle), Burp macro execute karta hai.
+5. **Macro execution:** Burp macro ki saari requests sequentially bhejta hai, har step par defined parameter handling apply karta hai (extracted values ko agle requests mein inject karta hai).
+6. **Final request modification:** Jab macro complete ho jata hai, Burp original request (jo rule trigger ki thi) mein macro se mili values inject karta hai (optional).
+7. **Response:** Modified request target ko bheji jaati hai.
+
+## 💻 7. Hands-On: Step-by-Step Practical (Basic Macro Creation):
+**Step 1: Proxy history se requests collect karo**
+```text
+Target application mein manually woh steps perform karo jinhe automate karna hai.
+Jaise:
+- Pehle /csrf-token page open karo (jahan se token milta hai)
+- Phir /login page par jaakar login karo
+- Phir /dashboard open karo
+Proxy tab mein in requests ka history dikhega.
+```
+**Step 2: Macro Add karo**
+```text
+Burp mein Project options tab par jao.
+Sessions sub-tab par click karo.
+Macros section mein "Add" button click karo.
+```
+**Step 3: Requests select karo**
+```text
+Ek window khulega jisme tumhe Proxy history se requests select karni hain.
+Woh requests select karo jo tum automate karna chahte ho – jaise GET /csrf-token, POST /login, etc.
+Multiple requests select karne ke liye Ctrl key press karo.
+Next click karo.
+```
+**Step 4: Macro configure karo**
+```text
+Ab tum ek window mein dekhe ge ki tumhari selected requests ek list mein hain.
+Har request ke liye tum "Configure item" click kar ke settings kar sakte ho.
+Jaise pehle request (GET /csrf-token) ke liye:
+- Tum bata sakte ho ki iske response se CSRF token extract karna hai.
+- "Add" button click karo → "Extract from response" select karo.
+- Regex daalo: name="csrf" value="([^"]*)" (ye CSRF token ki value capture karega).
+- OK karo.
+Dusri request (POST /login) ke liye:
+- Tum bata sakte ho ki isme CSRF token use karna hai jo pehli request se mila.
+- "Add" click karo → "Derive from first request" select karo, ya "Use custom location" mein regex se daalo.
+OK karo.
+```
+**Step 5: Macro ko naam do**
+```text
+Macro ko koi naam do, jaise "CSRF Refresh Macro".
+OK click karo. Ab macro create ho gaya.
+```
+**Step 6: Macro test karo (optional)**
+```text
+Macro list mein tumhara macro dikhega. "Test macro" button click kar ke dekh sakte ho ki sahi se kaam kar raha hai.
+```
+**Expected Screen:**
+```text
+Macro Editor: CSRF Refresh Macro
+
+Requests:
+1. GET /csrf-token
+   [Parameter handling: Extract: csrf_token = regex "name="csrf" value="([^"]*)"]
+2. POST /login
+   [Parameter handling: Update parameter "csrf" with value from step 1]
+
+Test result: Success. Extracted token: abc123xyz
+```
+
+## ⚖️ 8. Comparison (Macro vs Manual):
+| Feature | Macro | Manual |
+|---------|-------|--------|
+| **Speed** | Bahut tez, milliseconds mein | Dheere, seconds ya minutes |
+| **Accuracy** | Har baar same, no human error | Error ho sakta hai (copy-paste galat) |
+| **Scalability** | 1000 requests ke liye bhi kaam karega | 10 requests ke baad insaan thak jayega |
+| **Use case** | Automated attacks (Intruder), session handling | Manual testing, one-off requests |
+| **Setup time** | Pehle 5-10 minute lagenge | Immediate, but repeat karna padega |
+
+## 🚫 9. Common Mistakes:
+- **Mistake 1:** Macro mein saari requests select nahi karna jo chahiye.  
+  **Fix:** Workflow ko carefully analyze karo. Agar token fetch karna hai to woh request bhi macro mein honi chahiye.
+- **Mistake 2:** Parameter handling galat set karna – token extract nahi ho raha.  
+  **Fix:** Regex sahi likho. Pehle manually response dekh kar regex test karo. Burp mein "Test" button hai.
+- **Mistake 3:** Macro ke andar requests ka order galat rakhna (e.g., login pehle, token baad mein).  
+  **Fix:** Order waisa hi rakhna jaise manual process mein karte ho.
+- **Mistake 4:** Macro to bana liya, par rule assign karna bhool gaye.  
+  **Fix:** Macro sirf tab chalta hai jab koi Session Handling Rule use call kare. Topic 12.4 dekho.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai?
+- **"Log sochte hain ki macro sirf CSRF token ke liye hai."**  
+  Actually macro kisi bhi multi-step process ko automate kar sakta hai – login, logout, token refresh, profile update, kuch bhi.
+- **"Log sochte hain ki macro automatically chalega jab bhi request bhejoge."**  
+  Nahi, macro ko session handling rule ke through trigger karna padta hai. Ya phir manually "Run macro" option bhi hai, but mostly rules ke saath use hota hai.
+
+## 🌍 11. Real-World Use Case:
+**Scenario:** Ek bug bounty hunter ne ek banking site test kiya jahan har request ke saath ek CSRF token bhejna zaroori tha, aur token har request ke baad expire ho jata tha. Woh Intruder se 5000 requests bhejna chahta tha brute force ke liye. Agar manually token update karta to saal lag jate. Usne ek macro banaya jo har request se pehle /csrf-token se token fetch karta, aur Intruder ko rule assign kiya. 5000 requests 10 minute mein complete ho gaye, aur usko ek critical IDOR vulnerability mili. Bounty: $2000.
+
+## 🎨 12. Visual Diagram (ASCII Art):
+```
+[Macro Execution Flow]
+
+Start
+  |
+  v
+[Request 1: GET /csrf-token]  --> [Extract token from response]
+  |
+  v
+[Request 2: POST /login]       --> [Inject token into request]
+  |
+  v
+[Request 3: GET /dashboard]    --> [Use session cookie]
+  |
+  v
+End (Macro Complete)
+
+Then original request sent with new token.
+```
+
+## 🛠️ 13. Best Practices:
+- **Tip 1:** Macro ko meaningful naam do, jaise "Login + CSRF", taaki baad mein pata chale.
+- **Tip 2:** Har macro ke baad test zaroor karo "Test macro" button se.
+- **Tip 3:** Regex extract karne ke liye, pehle manually response copy karo aur regex101.com par test karo.
+- **Tip 4:** Agar multiple macros bana rahe ho, to unhe logically group karo.
+- **Tip 5:** Macro mein sensitive data (jaise password) hardcode mat karo. Use project options ya variables.
+
+## ⚠️ 14. Consequences of Failure:
+- Agar macro galat banaya, to token extract nahi hoga, request fail hogi, aur Intruder ke saare requests 403 error de sakte hain.
+- Agar macro mein login hai aur galat credentials daale, to sab requests invalid hongi.
+
+## ❓ 15. FAQ:
+- **Q1:** Macro mein kitni requests ho sakti hain?  
+  **A1:** Koi limit nahi, lekin zyada requests macro ko slow kar dengi. Usually 2-5 requests enough hain.
+- **Q2:** Kya macro mein POST data bhi handle hota hai?  
+  **A2:** Haan, macro har request ka full data store karta hai, aur tum parameter handling kar sakte ho.
+- **Q3:** Macro mein session cookies automatically handle hote hain?  
+  **A3:** Haan, Burp cookie jar automatically cookies store karta hai, aur macro execution mein woh cookies use hoti hain.
+- **Q4:** Kya macro mein redirects handle hote hain?  
+  **A4:** Haan, Burp automatically redirects follow karta hai jab tak configuration mein allow kiya ho.
+- **Q5:** Macro ko baad mein edit kaise karein?  
+  **A5:** Project options → Sessions → Macros mein jaake macro select karo aur Edit click karo.
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko:
+**"Macro = robot assistant jo tumhari tarah requests bhejta hai, baar-baar same kaam karne se bachata hai."**
+
+---
+
+### Topic 12.2: Macro Creation Steps
+
+## 🎯 1. Title / Topic: Macro Creation Steps
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Jaise tum kisi naye mobile app ko use karne se pehle uski **step-by-step guide** padhte ho, waise hi macro creation bhi ek step-by-step process hai. Pehle tum decide karte ho ki kaunsa kaam automate karna hai (e.g., token lena), phir tum Burp ko batate ho ki kaise woh kaam karega (konsi request, kya extract karna hai). Yeh steps follow karoge to macro perfect banega.
+
+## 📖 3. Technical Definition (Interview Answer):
+**Macro Creation Steps** woh systematic process hai jisme user Burp Suite ke GUI ke through ek macro define karta hai. Steps hain:
+1. **Access Macro Editor:** Project Options → Sessions → Macros → Add.
+2. **Select Requests:** Proxy history se un requests ko select karo jo macro mein include karni hain.
+3. **Configure Parameter Handling:** Har request ke liye define karo ki kaunse parameters dynamic hain (e.g., CSRF token) aur unhe kaise handle karna hai (extract from response, derive from previous request, etc.).
+4. **Name and Save:** Macro ko naam do aur save karo.
+5. **Test Macro:** Verify karo ki macro correctly execute ho raha hai.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Beginners ko macro banane mein confusion hoti hai ki kahan se shuru karein, kaise requests select karein, kaise parameters configure karein. Agar steps clear nahi honge to macro galat banega.
+**Solution:** In steps ko follow karoge to macro correctly banega, har parameter sahi se handle hoga, aur baad mein rules ke saath use ho payega. Steps structured hain taaki kuch na chuute.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+**Step-by-step visual:**
+1. **Project Options → Sessions:** Ek window jisme kai sections honge – Session Handling Rules, Macros, Cookie Jar, etc.
+2. **Macros section:** Neeche ek list hogi existing macros ki, aur "Add" button.
+3. **Add button click:** Ek naya dialog open hoga jisme left side par Proxy history ki requests list hogi, with checkboxes.
+4. **Requests select:** Tum requests select karoge, Next click karoge.
+5. **Macro Editor:** Ab tum requests ki list dekho ge jisme har request ke aage "Configure item" button hoga.
+6. **Configure item click:** Ek naya window "Macro Item Editor" khulega jisme options honge:
+   - Parameter handling rules (add, edit, delete)
+   - "Derive from first request", "Use custom location", etc.
+   - Response extraction rules (regex, XPath)
+7. **OK sab karo, macro save ho jayega.**
+
+## ⚙️ 6. Under the Hood (Technical Working):
+Jab tum macro create karte ho, Burp internally kya karta hai:
+1. **Request Serialization:** Burp selected requests ko serialize karta hai – matlab unka raw format store karta hai (method, path, headers, body) with placeholders for dynamic parameters.
+2. **Parameter Mapping:** Tum jo bhi parameter handling rules banate ho, unhe Burp internal variables mein map karta hai. Jaise `$token$` variable create hota hai jo pehle request se extract hoga.
+3. **Execution Plan:** Burp ek execution plan banata hai – order, dependencies (e.g., request 2 ko request 1 ka value chahiye).
+4. **Storage:** Macro Burp project file mein save ho jata hai (ya session config mein).
+
+## 💻 7. Hands-On: Step-by-Step Practical (Detailed Macro Creation with CSRF example):
+**Step 1: Target application mein CSRF token flow samjho**
+```text
+Maano ek site hai jahan login form hai. Pehle GET /csrf-token request bhejni padti hai jo JSON response mein token deti hai:
+{"csrf":"abc123"}
+Phir POST /login mein ye token "csrf" parameter mein bhejna hota hai.
+Phir session cookie milti hai.
+```
+**Step 2: Proxy history mein ye requests capture karo**
+```text
+Browser mein jaao, /csrf-token open karo, request copy karo.
+Phir login form submit karo, dono requests proxy mein dikhengi.
+```
+**Step 3: Macro add karo**
+```text
+Burp mein Project options -> Sessions -> Macros -> Add.
+Ek list khulegi Proxy history ki.
+Pehle /csrf-token ki request par checkbox lagao.
+Phir /login ki request par checkbox lagao.
+"Next" click karo.
+```
+**Step 4: Pehli request (GET /csrf-token) configure karo**
+```text
+Ab Macro Editor mein dono requests list mein hain.
+Pehli request (GET /csrf-token) ke saath "Configure item" click karo.
+Macro Item Editor khulega.
+Yahan tum bataoge ki response se token kaise extract karna hai.
+"Add" button click karo -> "Extract from response" select karo.
+A new window: "Response extraction rule".
+- Rule type: "Regex"
+- Regex: "csrf":"([^"]*)"   (ye token capture karega)
+- Variable name: CSRF_TOKEN (optional, Burp internally use karega)
+OK karo.
+Phir "OK" karo Macro Item Editor band karne ke liye.
+```
+**Step 5: Dusri request (POST /login) configure karo**
+```text
+Ab dusri request par "Configure item" click karo.
+Is request mein token use karna hai jo pehli request se extract hua.
+Yahan tum bata sakte ho ki "csrf" parameter ki value automatically update ho.
+"Add" click karo -> "Derive from first request" select karo.
+Ek window aayega jisme tum batate ho ki kaunsa value use karna hai.
+Usually Burp automatically detect karta hai, lekin manual bhi kar sakte ho.
+OK karo.
+Agar chahte ho ki exact regex se value lo, to "Use custom location" bhi select kar sakte ho, aur wahi regex daal do jo pehle use kiya tha.
+OK karo.
+```
+**Step 6: Macro test karo**
+```text
+Macro Editor ke neeche "Test macro" button click karo.
+Burp macro execute karega aur result dikhayega:
+- Step 1: GET /csrf-token -> Response: {"csrf":"abc123"} -> Extracted: abc123
+- Step 2: POST /login -> Request with token abc123 sent -> Response: 200 OK, Set-Cookie: session=xyz
+"Test completed successfully" dikhna chahiye.
+```
+**Step 7: Macro naam do aur save karo**
+```text
+Macro ko naam do "CSRF Login Macro".
+OK click karo. Ab macro list mein add ho gaya.
+```
+
+## ⚖️ 8. Comparison (Macro Creation Steps vs Other Automation):
+| Aspect | Macro Creation Steps | Writing Custom Script (e.g., Python) |
+|--------|----------------------|---------------------------------------|
+| **Difficulty** | Easy, GUI-based | Hard, coding required |
+| **Integration** | Built-in Burp features ke saath | Alag se integrate karna padta hai |
+| **Speed** | Fast to set up | Time-consuming |
+| **Flexibility** | Limited to Burp's features | Unlimited (can do anything) |
+| **Best for** | Quick automation within Burp | Complex custom logic |
+
+## 🚫 9. Common Mistakes:
+- **Mistake 1:** Galat requests select karna (e.g., sirf login liya, token wali request nahi li).  
+  **Fix:** Workflow diagram bana lo pehle ki kaun si requests zaroori hain.
+- **Mistake 2:** Regex galat likhna – token extract nahi ho raha.  
+  **Fix:** Response copy karo aur regex101.com par test karo. Ya Burp ke "Test" button se regex test karo.
+- **Mistake 3:** Parameter handling rule add karna bhool jana.  
+  **Fix:** Har request ke liye configure item karo, even if no parameter handling needed (skip kar sakte ho).
+- **Mistake 4:** Macro test nahi karna.  
+  **Fix:** Hamesha test karo, warna baad mein rule assign karoge to pata chalega ki macro kaam nahi kar raha.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai?
+- **"Log sochte hain ki macro banane ke liye har request ko manually edit karna padta hai."**  
+  Nahi, Burp automatically requests ka structure store kar leta hai. Tum sirf parameter handling add karte ho.
+- **"Log sochte hain ki macro mein saari requests ek saath select karni padti hain."**  
+  Actually, tum alag-alag bhi select kar sakte ho, aur baad mein order change kar sakte ho.
+
+## 🌍 11. Real-World Use Case:
+**Scenario:** Ek pentester ne ek e-commerce site test kiya jahan har request mein anti-CSRF token tha jo page load par milta tha. Usne macro banaya jo pehle home page request karta (jahan token embedded tha), token extract karta, phir us token ko target request mein daalta. Is macro ko usne Intruder ke saath use kiya aur 5000 requests successfully bheje bina kisi error ke.
+
+## 🎨 12. Visual Diagram (ASCII Art):
+```
+Macro Creation Flow:
+
+[Start] 
+   |
+   v
+[Proxy History] -> [Select Requests] -> [Configure Item 1] -> [Extract Token]
+   |
+   +-> [Configure Item 2] -> [Inject Token]
+   |
+   v
+[Test Macro] -> [Success?] -> [Name & Save]
+   |
+   v
+[End]
+```
+
+## 🛠️ 13. Best Practices:
+- **Tip 1:** Macro banate waqt, ek dummy project mein pehle test karo taaki real project ki history na bigde.
+- **Tip 2:** Regex banana ho to, pehle response mein search karo ki token kahan hai, phir regex likho.
+- **Tip 3:** Macro mein sensitive data (password) hardcode mat karo, balki project options mein define karo.
+- **Tip 4:** Macro ka naam aisa do ki pata chale kis kaam ke liye hai, e.g., "CSRF Refresh for Login".
+
+## ⚠️ 14. Consequences of Failure:
+- Agar macro galat banaya to jab bhi rule trigger hoga, macro fail hoga aur original request bhi fail ho sakti hai.
+- Debugging mushkil ho sakti hai agar steps sahi se follow nahi kiye.
+
+## ❓ 15. FAQ:
+- **Q1:** Macro mein request ka order change kaise karein?  
+  **A1:** Macro Editor mein requests ki list ke aage up-down arrows hote hain, unse order change kar sakte ho.
+- **Q2:** Kya macro mein ek request ko skip kar sakte hain conditionally?  
+  **A2:** Basic macro mein conditional skip nahi hai. Advanced ke liye Session Handling Rules mein conditions daal sakte ho.
+- **Q3:** Macro mein HTTPS requests handle hoti hain?  
+  **A3:** Haan, exactly as recorded.
+- **Q4:** Kya macro mein file upload handle ho sakta hai?  
+  **A4:** Haan, binary data bhi handle hota hai.
+- **Q5:** Macro ko delete kaise karein?  
+  **A5:** Macro list mein select karo aur "Remove" click karo.
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko:
+**"Macro creation = recipe likhna – kaunsa step, kaunsa ingredient, kitna mix karna."**
+
+---
+
+### Topic 12.3: Custom Parameter Handling in Macros
+
+## 🎯 1. Title / Topic: Custom Parameter Handling in Macros
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Jab tum koi recipe bana rahe ho, to har step par alag-alag tareeke se ingredients handle karne padte hain. Kabhi tum pehle step ki sabji ko second step mein daalte ho (**derive from first**). Kabhi tum akhir mein taste check karke namak adjust karte ho (**derive from last**). Kabhi tum exact amount measure karte ho weighing machine se (**custom location**). Waise hi macros mein parameters ko handle karne ke different tareeke hain.
+
+## 📖 3. Technical Definition (Interview Answer):
+**Custom Parameter Handling in Macros** ka matlab hai ki macro ke execution ke dauran, tum har request ke parameters ko dynamically control kar sakte ho – unki values pehle ki requests se le sakte ho, last request se le sakte ho, ya specific extraction rules (regex, XPath) se nikal sakte ho. Burp provides three main options:
+- **Derive from first request:** Pehli request se value lo.
+- **Derive from last request:** Akhri request se value lo.
+- **Use custom location:** Response mein se specific pattern se value extract karo (regex ya XPath).
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Macro mein multiple requests hote hain, aur har request ke parameters ek doosre par dependent hote hain. Jaise second request mein first request ka token chahiye, ya third request mein second ka cookie. Agar manually har baar value daalni pade to automation ka maza khatam.
+**Solution:** Custom parameter handling se tum define kar sakte ho ki kaunsa parameter kis source se lega. Burp automatically values fill karega. Isse macro fully automated ho jata hai, kisi bhi manual intervention ki zaroorat nahi.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+Jab tum Macro Item Editor mein kisi request ke liye parameter handling add karte ho, to screen par kuch aisa dikhega:
+- **Add button click:** Ek menu khulega jisme options:
+  - **Derive from first request**
+  - **Derive from last request**
+  - **Use custom location**
+  - **Use previous response's cookie** (automatically)
+- Agar "Derive from first/last" select kiya, to Burp automatically request ke parameters ki list dikhayega, aur tum select kar sakte ho ki kaunsa parameter update karna hai.
+- Agar "Use custom location" select kiya, to ek naya window khulega jisme tum extraction rule define karoge:
+  - **Type:** Regex ya XPath
+  - **Location:** Response body, header, ya cookie
+  - **Expression:** tumhara regex ya XPath
+  - **Variable name:** optional
+
+## ⚙️ 6. Under the Hood (Technical Working):
+**Derive from first request:**
+- Jab macro execute hota hai, Burp sabse pehle first request bhejta hai.
+- Phir jab second request ki baari aati hai, Burp first request ke response mein se value nikalta hai (jo pehle define kiya tha) aur usse second request ke corresponding parameter mein daal deta hai.
+- Example: First request response: `{"token":"xyz"}` → Second request parameter `csrf=xyz`.
+
+**Derive from last request:**
+- Similar, lekin value last request ke response se leta hai.
+- Useful jab last request mein kuch important generate ho (e.g., session cookie) jo aage use karna ho, lekin macro ke baad original request mein.
+
+**Use custom location:**
+- Tum exact location batate ho (regex/XPath). Burp response mein us location ko dhundhta hai, value extract karta hai, aur specified parameter mein daalta hai.
+- Example: Response mein `<input name="csrf" value="abc123">` → regex `name="csrf" value="([^"]*)"` se `abc123` milega.
+
+## 💻 7. Hands-On: Step-by-Step Practical (All three types):
+**Scenario:**
+- Request 1: GET /token – returns JSON: `{"token":"xyz"}`
+- Request 2: POST /action – needs token in body: `token=xyz`
+- Request 3: GET /result – needs token in URL: `/result?token=xyz`
+
+**Step 1: Macro create karo with all three requests**
+```text
+Project options -> Sessions -> Macros -> Add.
+Select all three requests from proxy history.
+Next.
+```
+**Step 2: Request 1 configure karo (Use custom location)**
+```text
+Request 1 ke saath "Configure item" click karo.
+Add -> "Use custom location".
+Window khulega:
+- Location: Response body
+- Type: Regex
+- Expression: "token":"([^"]*)"
+OK.
+Isse token extract ho jayega.
+OK.
+```
+**Step 3: Request 2 configure karo (Derive from first request)**
+```text
+Request 2 ke saath "Configure item" click karo.
+Add -> "Derive from first request".
+Ek list aayegi parameters ki, jisme "token" parameter hoga.
+Use select karo.
+OK.
+Ab second request mein token first request se aayega.
+```
+**Step 4: Request 3 configure karo (Derive from last request? Nahi, we want from first only)**
+```text
+Request 3 ke saath "Configure item" click karo.
+Isme bhi token chahiye. Agar tum chahte ho ki first request ka token yahan bhi aaye, to "Derive from first request" select karo.
+Ya agar second request ke response se lena hai (jo same token hai, but agar second request ne token modify kiya ho), to "Derive from last request" select kar sakte ho.
+Is example mein first request se lena hai.
+Add -> "Derive from first request" -> select token.
+OK.
+```
+**Step 5: Test macro**
+```text
+Test macro click karo. Sab requests sahi se execute honi chahiye, har step par token inject hota dikhna chahiye.
+```
+
+## ⚖️ 8. Comparison (Parameter Handling Types):
+| Type | Source | Use Case | Example |
+|------|--------|----------|---------|
+| **Derive from first request** | First request ka response | Jab ek hi token multiple requests mein use karna ho | CSRF token har request mein same |
+| **Derive from last request** | Last request ka response | Jab last request mein naya token generate ho | Session cookie after login |
+| **Use custom location** | Specific extraction rule | Jab token response mein specific format mein ho | JSON, HTML form, header |
+
+## 🚫 9. Common Mistakes:
+- **Mistake 1:** Derive from first request use karna jab token actually last request mein refresh ho raha ho.  
+  **Fix:** Understand the flow. Agar token har request mein change hota hai, to "Derive from last request" use karo (ya har request mein custom location).
+- **Mistake 2:** Custom location mein regex galat likhna.  
+  **Fix:** Regex test karo Burp ke "Test" button se ya external tool se.
+- **Mistake 3:** Parameter handling add karna bhool jana, aur macro mein value hardcode reh jana.  
+  **Fix:** Har request ko configure karo, even if no dynamic parameters.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai?
+- **"Log sochte hain ki Derive from first request ka matlab hai ki pehli request ka request body use karo."**  
+  Actually, iska matlab hai ki pehli request ke **response** se value lo, request body se nahi.
+- **"Log sochte hain ki Use custom location sirf response body ke liye hai."**  
+  Nahi, tum headers, cookies, ya kisi bhi part se extract kar sakte ho.
+
+## 🌍 11. Real-World Use Case:
+**Scenario:** Ek application mein CSRF token form ke HTML mein hidden field mein tha. Lekin token ka naam har baar change hota tha (`csrf_123`, `csrf_456`). Pentester ne "Use custom location" se regex `name="csrf_[0-9]+" value="([^"]*)"` use kiya, jo dynamic name handle kar gaya. Macro successfully token extract karta raha.
+
+## 🎨 12. Visual Diagram (ASCII Art):
+```
+[Request 1 Response] 
+   | (extract via custom regex)
+   v
+[Token Value] 
+   | (derive from first)
+   v
+[Request 2] -> [Request 3] -> [Original Request]
+   ^
+   | (derive from last, if needed)
+```
+
+## 🛠️ 13. Best Practices:
+- **Tip 1:** Jahan bhi possible, "Derive from first" use karo kyunki simple hai.
+- **Tip 2:** Complex extraction ke liye regex pehle test karo.
+- **Tip 3:** Agar multiple values extract karne hain, to multiple rules bana sakte ho ek hi request ke liye.
+- **Tip 4:** Variables ko meaningful naam do taaki debugging easy ho.
+
+## ⚠️ 14. Consequences of Failure:
+- Agar parameter handling galat hai, to macro execute to hoga but wrong values ke saath, jisse requests fail hongi.
+- Agar token na mila to macro fail ho jayega, aur original request bhi fail.
+
+## ❓ 15. FAQ:
+- **Q1:** Kya "Derive from first request" mein multiple values ek saath le sakte hain?  
+  **A1:** Haan, tum multiple parameters ke liye multiple rules bana sakte ho, sab first request se derive kar sakte ho.
+- **Q2:** "Use custom location" mein XPath kaise use karein?  
+  **A2:** Agar response XML/HTML hai, to XPath expression likho, e.g., `//input[@name='csrf']/@value`.
+- **Q3:** Kya main response header se value extract kar sakta hoon?  
+  **A3:** Haan, custom location mein "Location" dropdown mein "Response header" select karo, aur header name daalo, ya regex se specific header value nikaalo.
+- **Q4:** Kya "Derive from last request" aur "Derive from first request" mein difference kya hai agar sirf do requests hain?  
+  **A4:** Agar do requests hain, to first aur last same honge. Lekin agar teen hain, to first aur last alag honge. First ka matlab pehli request, last ka matlab aakhri request (jo macro mein defined hai).
+- **Q5:** Kya macro mein ek request ke response se do alag values extract kar sakte hain?  
+  **A5:** Haan, ek request ke liye multiple extraction rules add kar sakte ho.
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko:
+**"Custom parameter handling = macro ki intelligence – kaunsa data kahan se lena hai, ye batana."**
+
+---
+
+### Topic 12.4: Session Handling Rules
+
+## 🎯 1. Title / Topic: Session Handling Rules
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Tumne ek robot (macro) bana liya jo token la sakta hai. Ab tumhe robot ko ye batana hoga ki **kab kaam karna hai**. Jaise "har baar jab koi Intruder attack ho, token leke aana" ya "jab bhi server 302 redirect de (session expired), to login kar ke aana". Ye instructions hain **Session Handling Rules**. Ye rules decide karte hain ki kaun se tool (Intruder, Repeater, Scanner) ke liye, kis URL ke liye, aur kis condition mein macro chalega.
+
+## 📖 3. Technical Definition (Interview Answer):
+**Session Handling Rules** Burp Suite ki ek feature hai jo define karti hai ki **kis tarah se session management automate karna hai**. Ek rule mein do cheezein hoti hain:
+- **Scope:** Kis URL, kis tool (Intruder, Repeater, etc.), kis request type ke liye ye rule apply hoga.
+- **Action:** Kya karna hai jab rule trigger ho. Common action hai **"Run a macro"**. Doosre actions bhi hain jaise "Use cookies from jar", "Check session is valid", etc.
+
+Rules ko tum multiple bana sakte ho, aur unki priority set kar sakte ho.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Tumne macro bana liya, lekin woh apne aap nahi chalega. Tumhe batana hoga ki **kab chalna hai**. Agar har request se pehle macro chalana hai to kya? Sirf Intruder ke liye? Sirf specific domain ke liye? Ye sab define karna padta hai.
+**Solution:** Session Handling Rules ye kaam karte hain. Tum ek rule banate ho, usme scope define karte ho (e.g., domain: example.com, tool: Intruder), aur action select karte ho (Run a macro). Phir jab bhi Intruder example.com par request bhejega, Burp pehle macro chalayega, phir request bhejega.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+- **Location:** Project options → Sessions → Session Handling Rules section.
+- **Appearance:** Initially list empty hogi. "Add" button hai.
+- **Add click:** Ek naya window "Session handling rule editor" khulega.
+  - **Rule Description:** Rule ka naam do.
+  - **Rule Actions:** Yahan tum actions add karoge (e.g., Run a macro). "Add" button click kar ke action select karo.
+  - **Scope:** Doosra tab hai "Scope". Yahan tum define karoge ki rule kis par apply hoga:
+    - **Tools scope:** Kis tool ke liye (Intruder, Repeater, Scanner, etc.)
+    - **URL scope:** Kis domain/path ke liye (use suite scope ya custom)
+    - **Request type:** Any, or only if session is invalid, etc.
+
+## ⚙️ 6. Under the Hood (Technical Working):
+1. **Rule Definition:** Tum rule define karte ho jisme actions aur scope hote hain.
+2. **Request Interception:** Jab bhi Burp ka koi tool (e.g., Intruder) request bhejne wala hota hai, to Burp sabhi session handling rules check karta hai.
+3. **Scope Matching:** Har rule ke scope se compare karta hai ki kya ye request us rule ke scope mein aati hai (tool match, URL match, etc.).
+4. **Action Execution:** Jo rules match karte hain, unke actions execute hote hain (in order of priority). Agar action "Run a macro" hai to macro chalta hai.
+5. **Request Modification:** Macro se jo bhi modifications hote hain (e.g., token injection), woh original request par apply hote hain.
+6. **Final Request:** Modified request target ko bheji jaati hai.
+
+## 💻 7. Hands-On: Step-by-Step Practical (Rule to run macro for Intruder):
+**Step 1: Rule add karo**
+```text
+Project options -> Sessions -> Session Handling Rules -> "Add" button click karo.
+```
+**Step 2: Rule description do**
+```text
+"Rule Description" field mein likho: "CSRF Macro for Intruder"
+```
+**Step 3: Action add karo**
+```text
+"Rule Actions" section mein "Add" button click karo.
+Ek menu khulega: "Run a macro" select karo.
+Dusra window khulega jisme tumhe macro select karna hai jo pehle banaya tha (e.g., "CSRF Login Macro").
+Woh macro select karo.
+Options honge:
+- "Incorporate into original request" – check karo taaki macro ke baad original request mein token inject ho.
+- "Handle cookies" – usually leave default.
+OK karo.
+```
+**Step 4: Scope define karo**
+```text
+"Scope" tab par click karo.
+"Tools scope" mein "Intruder" checkbox tick karo. (Agar Scanner ke liye bhi chahiye to woh bhi tick kar do)
+"URL scope" mein:
+   - "Use suite scope" select kar sakte ho (jo Target tab mein set kiya hai), ya
+   - "Include in scope" mein manually URLs daal do, e.g., "example.com".
+"Request type" ko "Any" rahne do (ya "Only if session is invalid" agar advanced ho).
+```
+**Step 5: Rule save karo**
+```text
+OK click karo. Rule list mein aa jayega.
+```
+**Step 6: Rule order adjust karo (if multiple rules)**
+```text
+Agar multiple rules hain to "Up"/"Down" buttons se priority set kar sakte ho. Higher priority rules pehle execute hote hain.
+```
+**Step 7: Test karo**
+```text
+Intruder mein koi request bhejo target par. Debug karo ki macro chal raha hai ya nahi. (Response dekho, ya macro ke test se pata chalega.)
+```
+
+## ⚖️ 8. Comparison (Session Handling Rules vs Manual Macros):
+| Feature | Session Handling Rules | Manual Macro Execution |
+|---------|------------------------|------------------------|
+| **Automation** | Fully automatic, based on scope | Manual trigger (right-click -> Run macro) |
+| **Integration** | Intruder, Scanner, Repeater ke saath integrated | Sirf us request ke liye jo tum manually run karo |
+| **Scope control** | Granular control (tools, URLs) | Koi scope nahi |
+| **Use case** | Repeated automated attacks | One-off complex requests |
+
+## 🚫 9. Common Mistakes:
+- **Mistake 1:** Scope galat set karna – rule Intruder ke liye banaya, but usne Scanner ke requests bhi modify kar diye.  
+  **Fix:** Scope mein sirf wahi tools select karo jahan zaroorat ho.
+- **Mistake 2:** Macro assign karna bhool jana – action add kiya but macro select nahi kiya.  
+  **Fix:** Rule banate waqt macro select karna yaad rakho.
+- **Mistake 3:** Multiple rules conflicting – ek rule macro chalata hai, doosra cookies update karta hai, order galat hai.  
+  **Fix:** Priority set karo – jo action pehle hona chahiye use upar rakho.
+- **Mistake 4:** Rule enable karna bhool jana – rule banaya but checkbox tick nahi kiya.  
+  **Fix:** Rule list mein uske aage checkbox tick hona chahiye.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai?
+- **"Log sochte hain ki session handling rules sirf macros ke liye hain."**  
+  Actually, actions mein aur bhi options hain: "Check session is valid", "Use cookies from jar", "Run a macro", etc.
+- **"Log sochte hain ki rule scope sirf URL ke hisaab se hota hai."**  
+  Nahi, tool scope bhi hota hai, aur request type bhi.
+
+## 🌍 11. Real-World Use Case:
+**Scenario:** Ek pentester ne ek application test kiya jahan har request mein CSRF token chahiye tha, aur token 5 minute mein expire ho jata tha. Usne ek macro banaya jo token fetch karta tha. Phir usne ek session handling rule banaya jiska scope tha:
+- Tools: Intruder, Scanner
+- URL: target.com
+- Action: Run macro (token fetch)
+Isse jab bhi Intruder ya Scanner request bhejte, pehle token fetch hota, phir request bheji jaati. Bina kisi manual interruption ke 10,000 requests safely gaye.
+
+## 🎨 12. Visual Diagram (ASCII Art):
+```
+[Intruder Request] 
+       |
+       v
+[Session Handling Rules Check]
+       |
+       v (Rule matches)
+[Execute Action: Run Macro]
+       |
+       v
+[Macro executes (fetches token)]
+       |
+       v
+[Original Request Updated with Token]
+       |
+       v
+[Send to Target]
+```
+
+## 🛠️ 13. Best Practices:
+- **Tip 1:** Rule ko descriptive naam do, jaise "Intruder - CSRF Refresh".
+- **Tip 2:** Agar multiple rules hain, to unhe logically order karo. Pehle "Check session valid", phir "Run macro", phir "Use cookies" – is order mein.
+- **Tip 3:** Scope ko restrict rakho – sirf un tools/URLs tak jahan zaroorat ho, otherwise unwanted modifications ho sakte hain.
+- **Tip 4:** Rule banane ke baad, ek test request bhej kar debug karo (e.g., Repeater mein) ki rule sahi trigger ho raha hai.
+
+## ⚠️ 14. Consequences of Failure:
+- Agar rule galat banaya to har request unnecessarily macro chalayega, slow down hoga.
+- Agar rule nahi banaya to macro kabhi chalega hi nahi, aur CSRF token wali requests fail hoti rahengi.
+
+## ❓ 15. FAQ:
+- **Q1:** Ek hi request par multiple rules apply ho sakte hain?  
+  **A1:** Haan, agar multiple rules ka scope match karta hai, to sab execute honge order mein.
+- **Q2:** Rule ki priority kaise set karein?  
+  **A2:** Rule list mein up-down arrows se order change karo. Upar wala pehle execute hoga.
+- **Q3:** Kya rule mein condition daal sakte hain ki agar session valid hai to macro mat chalao?  
+  **A3:** Haan, action mein "Check session is valid" pehle daal sakte ho, phir macro. Ya "Only if session is invalid" type scope select kar sakte ho.
+- **Q4:** Rule ko temporarily disable kaise karein?  
+  **A4:** Rule list mein uske aage ka checkbox untick kar do.
+- **Q5:** Kya rule scope mein "All tools" select karna safe hai?  
+  **A5:** Generally nahi, kyunki Scanner, Extender bhi trigger ho sakte hain, jisse unwanted behavior ho sakta hai. Better specify.
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko:
+**"Session Handling Rules = robot ke liye instructions – kab kaam karna hai, kahan kaam karna hai."**
+
+---
+
+### Topic 12.5: Advanced Session Configurations
+
+## 🎯 1. Title / Topic: Advanced Session Configurations
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Basic rule to bana liya ki macro chalana hai. Lekin kab chalana hai? Agar session abhi bhi valid hai to macro chalana useless hai. Jaise agar tumhara mobile already on hai to usse dobara on karne ki zaroorat nahi. Isliye advanced configurations mein tum conditions daal sakte ho – **pehle check karo ki session valid hai ya nahi, agar nahi hai to hi login macro chalao**. Ya **CSRF token automatically handle karo** har request mein. Ya **pura login sequence automate karo** jab bhi naye scope mein jao. Ye sab advanced settings hain.
+
+## 📖 3. Technical Definition (Interview Answer):
+**Advanced Session Configurations** Burp Suite ki woh features hain jo basic session handling se aage jaakar complex logic implement karte hain. Inmein shamil hain:
+- **A. Check Session is Valid:** Pehle ek test request bhej kar check karo ki current session (cookies) valid hai ya nahi (e.g., agar 302 redirect aata hai login page par, to session expired). Agar invalid hai, tabhi macro chalao (e.g., login macro).
+- **B. Handle CSRF Tokens Automatically:** Macro token fetch karta hai, aur us token ko original request mein inject karta hai. Ye basic hai, but advanced mein tum multiple tokens bhi handle kar sakte ho.
+- **C. Login Sequence Automation:** Ek macro jo pura login process karta hai (username/password daalna, MFA, etc.), aur phir session cookies capture karta hai. Rule banate ho ki jab bhi session invalid ho, ye login macro chalao.
+
+Ye teeno configurations usually milake use hoti hain.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Simple macro rule banaya to har request se pehle macro chalega, chahe session valid ho ya nahi. Isse unnecessary load badega aur time waste hoga. Aur agar session expire ho gaya to manually phir se login karna padega.
+**Solution:** Advanced configurations se tum intelligent bana sakte ho:
+- **Check session valid:** Pehle check karo, agar valid hai to macro mat chalao. Isse performance improve hoti hai.
+- **Handle CSRF tokens automatically:** Har request ke liye token refresh hoga, bina kisi extra effort ke.
+- **Login automation:** Jab session expire ho, apne aap login ho jao, aur naye cookies ke saath request bhejo. Jaise hi Intruder chalta hai, wo login bhi apne aap ho jayega.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+**A. Check Session is Valid Action:**
+Jab tum session handling rule mein action add karte ho, to "Check session is valid" option hota hai. Use select karne par ek window khulega:
+- Tumhe ek request specify karni hogi jo check kare ki session valid hai ya nahi (e.g., GET /dashboard). Agar is request ka response 200 OK hai to session valid, agar 302 redirect to invalid.
+- Tum options de sakte ho ki kaunsa response code valid hai, ya response mein kya keyword hona chahiye.
+
+**B. Handle CSRF Tokens (part of macro configuration):**
+Macro editor mein hi tum parameter handling mein CSRF token handle kar rahe the. Advanced mein kuch nahi, bas yahi hai.
+
+**C. Login Sequence Automation:**
+Yeh bhi macro + rule combination hai. Macro mein login requests hain. Rule mein "Check session is valid" action + "Run a macro" action dono hain, sahi order mein.
+
+## ⚙️ 6. Under the Hood (Technical Working):
+**A. Check Session is Valid:**
+1. Rule execute hota hai. Pehla action "Check session is valid" hai.
+2. Burp specified "check request" bhejta hai (e.g., GET /dashboard) with current cookies.
+3. Response analyze karta hai based on defined conditions (e.g., status code 200 = valid, 302 = invalid).
+4. Agar invalid hai, to rule ke agle actions execute hote hain (e.g., Run macro). Agar valid hai, to rule yahin stop ho jata hai aur next rule par chala jata hai.
+
+**B. Login Sequence Automation:**
+1. Rule defined with two actions in order: first "Check session is valid", second "Run a macro (login)".
+2. Jab request aati hai, check hota hai session valid? Agar nahi, to login macro chalta hai, jo naye cookies set karta hai.
+3. Phir original request naye cookies ke saath bheji jaati hai.
+
+## 💻 7. Hands-On: Step-by-Step Practical (Login Automation with Session Check):
+**Step 1: Login macro banao**
+```text
+Pehle ek macro banao jo login karta hai:
+- Request 1: GET /login (maybe CSRF token fetch)
+- Request 2: POST /login (with username/password, token)
+- Request 3: GET /dashboard (to confirm login, capture cookies)
+Is macro ko test karo ki successfully login hota hai aur cookies milti hain.
+Is macro ka naam do "Login Macro".
+```
+**Step 2: Check session valid request identify karo**
+```text
+Koi aisi request dhoondo jo sirf logged-in users ke liye accessible ho, aur agar session expire ho to 302 redirect de (e.g., GET /profile). Is request ko "check request" banayenge.
+```
+**Step 3: Naya session handling rule banao**
+```text
+Project options -> Sessions -> Session Handling Rules -> Add.
+Rule description: "Auto Login with Session Check"
+```
+**Step 4: Pehla action add karo – Check session is valid**
+```text
+Rule Actions mein Add -> "Check session is valid".
+Ek window khulega:
+- "Send request" mein woh request select karo jo check karegi (e.g., GET /profile). Tum proxy history se select kar sakte ho.
+- "Determine validity" mein options:
+   - "If status code is 200" (ya any code) – select karo.
+   - Ya "If response contains" – agar specific text ho.
+OK karo.
+```
+**Step 5: Dusra action add karo – Run a macro**
+```text
+Add -> "Run a macro".
+"Login Macro" select karo.
+"Incorporate into original request" check karo (cookies automatically handle hongi).
+OK karo.
+```
+**Step 6: Scope define karo**
+```text
+Scope tab mein tools select karo (e.g., Intruder, Repeater) aur URL scope.
+OK karo.
+```
+**Step 7: Rule order check karo**
+```text
+Ensure actions sahi order mein hain: pehle check session, phir macro.
+```
+**Step 8: Test karo**
+```text
+Manually session expire karo (e.g., logout), phir Intruder se request bhejo. Dekho ki pehle check hota hai, session invalid milta hai, phir login macro chalta hai, phir request jaati hai.
+```
+
+## ⚖️ 8. Comparison (Basic vs Advanced Rules):
+| Feature | Basic Rule | Advanced Rule (with session check) |
+|---------|------------|-------------------------------------|
+| **Session check** | Nahi, har baar macro chalega | Pehle check, agar zaroorat ho to hi macro |
+| **Efficiency** | Kam, unnecessary macro execution | High, sirf jaroorat par macro |
+| **Login automation** | Manual login required | Automatic login on expiry |
+| **Complexity** | Simple | Moderate, more configuration |
+
+## 🚫 9. Common Mistakes:
+- **Mistake 1:** Check session valid request galat chunna – jo bina login ke bhi 200 de rahi ho.  
+  **Fix:** Aisi request chuno jo definitely protected ho, aur expired session par 302/401 de.
+- **Mistake 2:** Actions ka order galat – macro pehle chala diya, check baad mein.  
+  **Fix:** Check pehle, macro baad mein.
+- **Mistake 3:** Login macro mein cookies capture na ho rahi hon.  
+  **Fix:** Macro test karo aur dekho ki response mein Set-Cookie aa raha hai, aur Burp cookie jar mein store ho raha hai.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai?
+- **"Log sochte hain ki Check session is valid action automatically login macro trigger kar deta hai."**  
+  Nahi, ye sirf check karta hai. Macro trigger karne ke liye alag action chahiye.
+- **"Log sochte hain ki Login sequence automation ke liye CSRF token handling alag se karni padti hai."**  
+  Actually, login macro ke andar hi tum CSRF token handle kar sakte ho, jaise pehle topic mein seekha.
+
+## 🌍 11. Real-World Use Case:
+**Scenario:** Ek pentester ne ek application test ki jahan session 15 minute mein expire ho jata tha. Wo Intruder se long attack chal raha tha (hours). Usne advanced rule banaya: check session valid (GET /profile), agar 302 aaya to login macro chalao. Attack ke beech mein jab session expire hua, Burp ne automatically login kiya aur attack continue raha. Bina kisi interruption ke.
+
+## 🎨 12. Visual Diagram (ASCII Art):
+```
+[Request from Intruder]
+    |
+    v
+[Check Session Valid?] --> (Valid) --> [Send Request]
+    |
+    (Invalid)
+    v
+[Run Login Macro] --> [Get New Cookies]
+    |
+    v
+[Update Request with New Cookies]
+    |
+    v
+[Send Request]
+```
+
+## 🛠️ 13. Best Practices:
+- **Tip 1:** Check session valid ke liye lightweight request use karo (e.g., HEAD request if possible) taaki load na bade.
+- **Tip 2:** Login macro mein ensure karo ki sab steps hain – token fetch, login post, confirmation request.
+- **Tip 3:** Rule ko test karne ke liye, manually session expire karo (e.g., logout) aur phir Repeater se request bhejo dekhne ke liye ki auto login hota hai.
+- **Tip 4:** Agar MFA hai to macro mein handle karna mushkil hai, to alag se socho.
+
+## ⚠️ 14. Consequences of Failure:
+- Agar check session valid galat hai, to ya to har baar login hoga (waste), ya kabhi login nahi hoga (attack fail).
+- Agar login macro fail ho raha hai, to saari requests fail hongi.
+
+## ❓ 15. FAQ:
+- **Q1:** Check session valid ke liye kaunsi request use karein?  
+  **A1:** Koi bhi authenticated endpoint, jaise /dashboard, /profile, /account. Ensure karo ki bina login ke 302 ya 401 de.
+- **Q2:** Kya check session valid mein multiple conditions laga sakte hain?  
+  **A2:** Haan, tum status code aur response content dono check kar sakte ho.
+- **Q3:** Login macro mein MFA (OTP) kaise handle karein?  
+  **A3:** MFA automated handle karna mushkil hai. Agar OTP predictable hai to script kar sakte ho, otherwise manual intervention chahiye.
+- **Q4:** Kya cookies automatically update ho jati hain macro ke baad?  
+  **A4:** Haan, agar macro ke response mein Set-Cookie hai to Burp cookie jar update kar deta hai, aur original request mein bhi inject ho jati hai (agar incorporate option on hai).
+- **Q5:** Kya rule sirf tab chalega jab session invalid ho?  
+  **A5:** Scope mein "Only if session is invalid" select kar sakte ho, jisse pehle check ki zaroorat nahi. Lekin check action use karna zyada flexible hai.
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko:
+**"Advanced session config = smart robot jo pehle sochta hai ki kaam hai ya nahi, phir karta hai."**
+
+---
+
+### Topic 12.6: Cookie Jar Configuration
+
+## 🎯 1. Title / Topic: Cookie Jar Configuration
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Jab tum kisi website par login karte ho, to browser ek jar (cookie jar) mein cookies store karta hai. Har baar jab tum us site par request bhejte ho, browser jar se cookies nikaal kar request mein daal deta hai. Burp Suite ka **Cookie Jar** bhi kuch aisa hi hai – ek central repository jahan Burp automatically saari cookies store karta hai jo server se aati hain (Set-Cookie headers). Phir jab zaroorat hoti hai, Burp in cookies ko requests mein use karta hai. Tum scope-specific cookie jars bhi bana sakte ho.
+
+## 📖 3. Technical Definition (Interview Answer):
+**Cookie Jar** Burp Suite ka ek built-in component hai jo **automatically cookies ko store aur manage karta hai** jo server responses mein `Set-Cookie` headers ke through aati hain. Jab Burp koi request bhejta hai (ya macro ke through, ya tool ke through), to wo cookie jar se relevant cookies (domain, path, secure flag matching) nikaal kar request mein add kar deta hai. Isse session management easy ho jata hai.
+
+**Key features:**
+- **Use Cookies from Cookie Jar:** Session handling rule ka ek action hai jisse tum explicitly bata sakte ho ki cookies jar se lo.
+- **Scope-specific cookie jars:** Tum different projects ya scopes ke liye alag cookie jars maintain kar sakte ho (though usually global hi kaafi hai).
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:** Jab tum macros chala rahe ho, ya Intruder se requests bhej rahe ho, to cookies ko manually handle karna bahut mushkil hai. Cookies expire hoti hain, update hoti hain, different domains ke liye alag hoti hain.
+**Solution:** Cookie jar automatically sab kuch sambhal leta hai. Jab bhi koi response aata hai jisme `Set-Cookie` hota hai, Burp use jar mein daal deta hai. Jab bhi request bhejni hoti hai, Burp jar se matching cookies nikaal kar request mein daal deta hai. Tumhe kuch nahi karna padta.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+- **Location:** Project options → Sessions → Cookie Jar tab.
+- **Appearance:** Ek table jisme columns honge:
+  - **Domain:** Kis domain ke liye cookie hai
+  - **Path:** Kis path ke liye
+  - **Name:** Cookie ka naam
+  - **Value:** Cookie ki value
+  - **Expires:** Kab expire hogi
+  - **Secure, HttpOnly flags**
+- Yahan tum cookies manually bhi add/edit/delete kar sakte ho.
+- Neeche options hote hain jaise "Automatically update cookie jar" (by default on).
+
+## ⚙️ 6. Under the Hood (Technical Working):
+1. **Cookie Capture:** Jab bhi Burp se koi response guzarta hai (proxy, repeater, intruder, scanner, etc.), Burp `Set-Cookie` headers ko parse karta hai.
+2. **Cookie Storage:** In cookies ko Burp internal cookie jar mein store karta hai, domain, path, expiry ke saath.
+3. **Cookie Retrieval:** Jab Burp koi request bhejta hai (ya to manually, ya tool se, ya macro se), to wo current cookie jar se relevant cookies (matching domain, path, not expired) collect karta hai.
+4. **Cookie Injection:** In cookies ko request ke `Cookie` header mein add kar deta hai (agar pehle se koi cookie nahi thi to naya header banata hai, agar thi to merge karta hai).
+5. **Scope-specific:** Tum multiple projects mein alag cookie jars rakh sakte ho, kyunki project file mein save hota hai.
+
+## 💻 7. Hands-On: Step-by-Step Practical (Using Cookie Jar):
+**Step 1: Ensure cookie jar is enabled**
+```text
+Project options -> Sessions -> Cookie Jar tab.
+Check karo ki "Automatically update cookie jar" checkbox tick hai (usually by default).
+```
+**Step 2: Kuch requests bhejo jisse cookies aayen**
+```text
+Browser ya Repeater se kisi site par login karo.
+Response mein Set-Cookie headers aayenge.
+Burp automatically unhe cookie jar mein daal dega.
+```
+**Step 3: Cookie jar check karo**
+```text
+Cookie Jar tab mein jaa kar dekho ki cookies appear hui hain ya nahi.
+Domain column mein site ka domain dikhega, name/value columns mein cookie details.
+```
+**Step 4: Ek session handling rule banao jo cookies use kare**
+```text
+Session Handling Rules -> Add.
+Rule description: "Use Cookie Jar"
+Rule Actions -> Add -> "Use cookies from cookie jar" select karo.
+Scope define karo (e.g., Intruder, target domain).
+OK.
+```
+**Step 5: Ab Intruder ya Repeater mein request bhejo**
+```text
+Request mein ab automatically cookie jar se cookies add hongi.
+Agar pehle login kiya hai to session cookies mil jayenge, request authenticated hogi.
+```
+**Step 6: Manual cookie add/edit karo (optional)**
+```text
+Cookie Jar tab mein "Add" button click karo.
+Nayi cookie ka domain, path, name, value daalo.
+OK. Ye cookie ab se requests mein add hogi.
+```
+**Step 7: Cookie delete karo (agar expire ho gayi)**
+```text
+Cookie select karo, "Delete" click karo.
+
+```
+
+## ⚖️ 8. Comparison (Cookie Jar vs Manual Cookie Management):
+| Feature | Cookie Jar | Manual Cookie Management |
+|---------|------------|--------------------------|
+| **Automation** | Fully automatic | Manual copy-paste |
+| **Accuracy** | Hamesha latest cookies | Purani cookies use ho sakti hain |
+| **Scope handling** | Domain/path matching automatically | Khud check karna padta hai |
+| **Multiple domains** | Ek saath manage karta hai | Alag-alag handle karna padta hai |
+| **Integration** | Macros, rules ke saath integrated | Alag se manage |
+
+## 🚫 9. Common Mistakes:
+- **Mistake 1:** Cookie jar ke automatic update par bharosa karna, lekin "Use cookies from cookie jar" action rule mein add karna bhool jana.  
+  **Fix:** Rule mein action add karo. Agar nahi add karoge to cookies use nahi hongi.
+- **Mistake 2:** Scope galat set karna, jisse cookies galat domain par bheji jayen.  
+  **Fix:** Scope restrict karo.
+- **Mistake 3:** Manually cookies add karte waqt domain/path galat daalna, jisse cookie kabhi match nahi hogi.  
+  **Fix:** Exact domain daalo (e.g., .example.com for subdomains) aur path /.
+- **Mistake 4:** Cookie expiry ignore karna – jar mein purani cookies padi hain jo expire ho chuki hain.  
+  **Fix:** Time-to-time jar clean karo, ya Burp automatically expired cookies hata deta hai.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai?
+- **"Log sochte hain ki cookie jar apne aap saari requests mein cookies daal deta hai."**  
+  Nahi, cookie jar sirf store karta hai. Use karne ke liye ya to rule banana padega (Use cookies from cookie jar) ya macro ke through, ya Burp ke kuch tools (like Scanner) automatically use karte hain. Proxy ke through aane wali requests mein browser apni cookies daalta hai, Burp nahi daalta.
+- **"Log sochte hain ki cookie jar sirf ek hi domain ke liye hota hai."**  
+  Nahi, cookie jar multiple domains ki cookies store karta hai, aur jab request aati hai to matching domain ki cookies select karta hai.
+
+## 🌍 11. Real-World Use Case:
+**Scenario:** Ek pentester ne multiple subdomains (app1.example.com, app2.example.com) test kiye. Har subdomain ke apne cookies the. Usne cookie jar ka use kiya, aur session handling rule banaya jisme "Use cookies from cookie jar" action tha. Jab wo Intruder se app1 ko attack kar raha tha, to sirf app1 ki cookies use hui, app2 ki nahi. Lekin jab wo app2 par gaya, to automatically app2 ki cookies use hui. Manual intervention zero.
+
+## 🎨 12. Visual Diagram (ASCII Art):
+```
+[Response from Server]
+    |
+    v
+[Set-Cookie: session=abc; Domain=.example.com]
+    |
+    v
+[Burp Cookie Jar]
+    |
+    | (store)
+    v
+[Domain: .example.com, Name: session, Value: abc]
+
+[Next Request to app.example.com]
+    |
+    v
+[Burp checks Cookie Jar]
+    |
+    v (match domain .example.com)
+[Add Cookie: session=abc to request]
+```
+
+## 🛠️ 13. Best Practices:
+- **Tip 1:** Hamesha "Use cookies from cookie jar" action apne session handling rules mein add karo, especially agar macros use kar rahe ho.
+- **Tip 2:** Cookie jar ko monitor karte raho ki sahi cookies store ho rahi hain.
+- **Tip 3:** Agar multiple projects hain, to alag project files use karo, kyunki cookie jar project-specific hota hai.
+- **Tip 4:** Manual cookies add karte waqt, expiry distant future ki daalo taaki expire na hon.
+
+## ⚠️ 14. Consequences of Failure:
+- Agar cookie jar use nahi karoge to har baar manually cookies handle karni padegi, jo impractical hai.
+- Agar jar mein galat cookies hain to requests fail hongi.
+
+## ❓ 15. FAQ:
+- **Q1:** Kya cookie jar mein cookies persist karti hain Burp band karne ke baad?  
+  **A1:** Haan, project file mein save hoti hain. Jab project dubara khologe to cookies wapas aajayengi.
+- **Q2:** Kya cookie jar mein HttpOnly cookies bhi store hoti hain?  
+  **A2:** Haan, Burp unhe bhi store karta hai, but unhe JavaScript nahi padh sakta, Burp padh sakta hai.
+- **Q3:** Kya "Use cookies from cookie jar" action macro ke andar bhi kaam karta hai?  
+  **A3:** Haan, macro ki requests bhi cookie jar se cookies use karti hain agar rule mein action hai ya macro ke andar bhi rule trigger ho.
+- **Q4:** Kya cookie jar mein same domain ke liye multiple cookies ho sakti hain?  
+  **A4:** Haan, different names, paths, etc.
+- **Q5:** Cookie jar clear kaise karein?  
+  **A5:** Cookie Jar tab mein "Clear" button hai.
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko:
+**"Cookie jar = Burp ki pantry jahan saari cookies stored hain, aur jab bhoojh lagta hai to apne aap serve ho jati hain."**
+
+---
+
