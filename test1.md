@@ -1199,3 +1199,332 @@ A5: Kuch bhi – method, path, headers, body. Jaise parameter values change karn
 - Request aur response ka structure kya hota hai, aur Burp mein kaise dekhte hain.
 
 ========================================================================================
+
+**TechGuru here!**
+
+Bilkul! Ab hum **Module 3: Burp Suite – 1000 Feet Overview** karenge. Is module mein hum Burp Suite ke **saare tabs ka ek high-level tour** leinge. Ye woh "helicopter view" hai jisse tumhe pata chalega ki konsa tool kahan hai aur kab use karna hai. Module mein sirf ek topic hai, to usi ko 16-point structure mein detail mein samjha raha hoon.
+
+---
+
+# Module 3: Burp Suite – 1000 Feet Overview
+
+---
+
+## 🎯 1. Topic 3.1: Core Tabs Explained
+
+---
+
+### 🐣 2. Samjhane ke liye (Simple Analogy)
+
+**Analogy:** Maan lo tum ek **spy agency** mein kaam karte ho. Tumhare paas ek **mission control room** hai jisme alag-alag desks hain, har desk ka apna kaam:
+- **Dashboard:** Boss ka desk – overall mission status, alerts, kya ho raha hai sab.
+- **Target:** Map room – poori building ka naksha (sitemap) jahan tumhe jaana hai.
+- **Proxy:** Surveillance room – saare phone calls intercept karo, record karo, kabhi kabhi baatchein badlo bhi.
+- **Intruder:** Attack team – machine gun se ek saath hazaaro baar fire karo (brute force).
+- **Repeater:** Interrogation room – ek prisoner ko baar-baar same sawaal thoda modify karke pucho.
+- **Sequencer:** Code-breaking desk – random numbers ki randomness check karo (kya andaza laga sakte hain).
+- **Decoder:** Translator desk – secret messages ko decode/encode karo.
+- **Comparer:** Evidence comparison desk – do photos mein differences dhundho.
+- **Logger:** CCTV footage room – saari activities ka record.
+- **Extender:** Gadget shop – naye tools import karo (BApp store se).
+- **User Options:** Settings room – apni preferences set karo (theme, font, etc.).
+
+Burp Suite ke tabs bilkul yahi hain – har tab ek dedicated tool hai jo kisi na kisi specific kaam ke liye design kiya gaya hai.
+
+---
+
+### 📖 3. Technical Definition (Interview Answer)
+
+**Standard English Definition:**  
+Burp Suite is an integrated platform for web application security testing. Its interface is organized into tabs, each representing a core tool or module. These include Proxy (intercepting traffic), Target (site mapping), Intruder (automated customized attacks), Repeater (manual request manipulation), Sequencer (analyzing randomness), Decoder (transforming data), Comparer (visualizing differences), Logger (recording traffic), Extender (adding functionality), and User Options (configuring settings). The Dashboard provides an overview of automated tasks and issues.
+
+**Hinglish Breakdown:**
+- **Integrated platform:** Matlab saare tools ek hi software mein available hain, alag-alag software install karne ki zaroorat nahi.
+- **Tabs:** UI ke top par jo click karne yogya sections hain, har ek ek specific functionality provide karta hai.
+- **Community edition:** In sab tabs mein se kuch (jaise Scanner) available nahi hain, lekin majority tabs present hain.
+
+---
+
+### 🧠 4. Zaroorat Kyun Hai? (Why use it?)
+
+**Problem:**  
+Web application testing mein bahut saare alag-alag tasks karne padte hain – traffic dekhna, requests modify karna, brute force lagana, tokens check karna, data encode/decode karna, etc. Agar har task ke liye alag tool use karo, to time waste, compatibility issues, aur confusion badhegi.
+
+**Solution:**  
+Burp Suite sab tools ek hi jagah laata hai. Tabs organize kiye gaye hain taaki ek seamless workflow ho. Tum Proxy se request intercept karo, Intruder mein bhejo brute force ke liye, response Repeater mein verify karo, aur Decoder mein data encode karo – sab ek hi window mein, bina kisi hassle ke.
+
+---
+
+### 🔍 5. Visual - Jab Screen Par Kya Dikhega
+
+**Location:** Burp Suite open karne ke baad, top par ek row of tabs dikhegi. Sequence kuch aisa hoga (depending on version):
+
+```
+[Dashboard] [Target] [Proxy] [Intruder] [Repeater] [Sequencer] [Decoder] [Comparer] [Logger] [Extender] [User Options]
+```
+
+- **Har tab par click karte hi** us tool ka interface khul jata hai, jisme further sub-tabs ya options hote hain.
+- **Example:** Proxy tab par click karoge to andar "Intercept", "HTTP history", "WebSockets history", "Options" jaise sub-tabs dikhenge.
+- **Community edition mein** Intruder ke aage ek (rate limited) hint ho sakti hai, ya Scanner tab nahi dikhta.
+
+**Appearance:** Modern, clean UI, dark theme default (change kar sakte ho). Har tab ke andar data tables, buttons, aur input fields hote hain.
+
+---
+
+### ⚙️ 6. Under the Hood (Technical Working)
+
+Har tab internally Burp Suite ke core engine se juda hai:
+- **Proxy:** Local server socket (127.0.0.1:8080) par listen karta hai, browser se aane wale TCP connections accept karta hai, HTTP messages parse karta hai, aur user ko display karta hai.
+- **Target:** Proxy se guzre requests ka tree structure build karta hai (sitemap). Scope settings maintain karta hai.
+- **Intruder:** User-defined payload lists aur attack types ke hisaab se multiple HTTP requests generate karta hai, thread pool manage karta hai.
+- **Repeater:** Ek request ko manually edit kar ke bhejta hai, response dikhata hai, aur history maintain karta hai.
+- **Sequencer:** Tokens collect karta hai, statistical analysis karta hai (chi-square, etc.) to check randomness.
+- **Decoder:** Various encoding/decoding algorithms apply karta hai (Base64, URL, HTML, etc.).
+- **Comparer:** Two strings ya byte arrays ko side-by-side dikhata hai, differences highlight karta hai.
+- **Logger:** Burp ke through hone wale saare HTTP traffic ka log rakhta hai (internal).
+- **Extender:** Java API provide karta hai, jisse third-party extensions load aur run ho sakte hain (Python, Ruby, etc. via Jython/JRuby).
+- **User Options:** Configuration files read/write karta hai, settings persist karta hai.
+
+---
+
+### 💻 7. Hands-On: Step-by-Step Practical
+
+**Step 1: Burp Suite open karo**
+- Burp Suite Community launch karo, temporary project banao, use Burp defaults.
+
+**Step 2: Dashboard tab explore karo**
+- Dashboard par click karo.
+- **Screen:** Do main sections – "Tasks" aur "Event Log". Community edition mein tasks limited hain (manual tasks). "Issue Activity" mein manually发现的 vulnerabilities note kar sakte ho.
+- Kuch click karo, explore karo.
+
+**Step 3: Target tab explore karo**
+- Target tab par click karo.
+- **Screen:** "Site map" sub-tab – yahan kuch nahi dikhega abhi kyunki koi traffic nahi kiya. "Scope" sub-tab – yahan define kar sakte ho ki kis site par test karna hai.
+
+**Step 4: Proxy tab explore karo**
+- Proxy tab par click karo.
+- **Screen:** "Intercept" sub-tab – yahan "Intercept is on" button hoga. Iske neeche ek blank area jahan intercepted requests dikhengi. "HTTP history" – baad mein requests ka log dikhega. "Options" – proxy settings (port, etc.).
+
+**Step 5: Intruder tab explore karo**
+- Intruder tab par click karo.
+- **Screen:** Chaar sub-tabs: "Target", "Positions", "Payloads", "Options". Abhi sab blank hoga kyunki koi attack configure nahi kiya. Bas dekh lo layout.
+
+**Step 6: Repeater tab explore karo**
+- Repeater tab par click karo.
+- **Screen:** Left side request pane, right side response pane. Upar "Send" button. Neeche history. Abhi blank.
+
+**Step 7: Sequencer tab explore karo**
+- Sequencer tab par click karo.
+- **Screen:** "Live capture" aur "Manual load" options. Token randomness check karne ke liye.
+
+**Step 8: Decoder tab explore karo**
+- Decoder tab par click karo.
+- **Screen:** Ek input area, "Encode as..." aur "Decode as..." dropdowns. Smart decode bhi hai. Kuch type karo jaise "Hello", phir "Encode as" → "Base64" select karo – encoded value dikhegi. Phir "Decode as" → "Base64" select karo – wapas "Hello" aayega.
+
+**Step 9: Comparer tab explore karo**
+- Comparer tab par click karo.
+- **Screen:** Do boxes – "Load..." buttons se text load kar sakte ho. Phir "Compare" button se differences dekh sakte ho.
+
+**Step 10: Logger tab explore karo**
+- Logger tab par click karo.
+- **Screen:** Ek table jisme saare requests/responses ka log hoga (jo Burp ke through hue). Abhi kuch nahi dikhega.
+
+**Step 11: Extender tab explore karo**
+- Extender tab par click karo.
+- **Screen:** "BApp Store" sub-tab – yahan se extensions install kar sakte ho (Python, etc.). "APIs" aur "Options" bhi hain.
+
+**Step 12: User Options tab explore karo**
+- User Options tab par click karo.
+- **Screen:** Connections, SSL, Display (theme change kar sakte ho), Misc settings. Theme change kar ke dekho (e.g., Light mode).
+
+---
+
+### ⚖️ 8. Comparison: Community vs Professional (Tab-wise)
+
+| Tab/Feature | Community Edition | Professional Edition |
+|-------------|-------------------|----------------------|
+| **Dashboard** | Manual tasks only, no live scanning | Automated scan tasks, live tasks |
+| **Target** | Same (site map, scope) | Same + automated spidering |
+| **Proxy** | Full functionality | Full functionality |
+| **Intruder** | Available but rate-limited (slow) | Unlimited speed |
+| **Repeater** | Full functionality | Full functionality |
+| **Sequencer** | Full functionality | Full functionality |
+| **Decoder** | Full functionality | Full functionality |
+| **Comparer** | Full functionality | Full functionality |
+| **Logger** | Full functionality | Full functionality |
+| **Extender** | Can install extensions, but some require Pro | Full access |
+| **User Options** | Same | Same |
+| **Scanner** | ❌ Not present | ✅ Present (active/passive) |
+| **Clickbandit** | ❌ Not present | ✅ Present |
+| **WebSockets** | Partial | Full |
+
+**Note:** Community edition mein Scanner tab nahi hota. Intruder slow hai lekin kaam karta hai.
+
+---
+
+### 🚫 9. Common Mistakes (Beginner Traps)
+
+- **Mistake 1:** Dashboard ko ignore karna.  
+  **Fix:** Dashboard tumhe issues track karne deta hai. Manual testing ke baad yahan notes add kar sakte ho.
+
+- **Mistake 2:** Target tab ka scope set nahi karna, jiski wajah se unwanted sites bhi log ho jati hain.  
+  **Fix:** Target → Scope mein "Add" kar ke sirf apni target domain daalo. Phir Proxy options mein "Force use of TLS" waghera set karo.
+
+- **Mistake 3:** Proxy history clear na karna, bahut saari requests accumulate ho jati hain.  
+  **Fix:** Baar-baar clear karo ya filter use karo.
+
+- **Mistake 4:** Extender se extensions install karte waqt Java version mismatch.  
+  **Fix:** Ensure tumhari Java version compatible hai. Burp apna Java bundle karta hai, to generally theek hai.
+
+- **Mistake 5:** Decoder mein smart decode par depend rehna, jabki manual decode bhi seekhna chahiye.  
+  **Fix:** Smart decode helpful hai, lekin manual encoding/decoding samjho.
+
+- **Mistake 6:** Logger tab ko overlook karna.  
+  **Fix:** Logger internal traffic dikhata hai jo HTTP history mein nahi aata (e.g., Burp Extender ke calls). Useful for debugging.
+
+- **Mistake 7:** Comparer ka use na karna.  
+  **Fix:** Do similar responses mein differences dhundhne ke liye Comparer best hai.
+
+---
+
+### 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
+
+- **"Log sochte hain ki saare tabs ek saath use karne padte hain."**  
+  **Actually:** Nahin, tumhe jaroorat ke hisaab se tab use karna hai. Jaise sirf traffic dekhna hai to Proxy kaafi hai. Brute force karna hai to Intruder. Manual modify karna hai to Repeater. Ek time par ek ya do tabs active rahte hain.
+
+- **"Log sochte hain ki Community edition mein kuch nahi kar sakte."**  
+  **Actually:** Community edition mein bhi proxy, repeater, intruder (slow), sequencer, decoder, comparer, logger, extender – sab kuch hai. Tum manual testing ke through vulnerabilities dhundh sakte ho. Scanner nahi hai, lekin manual testing sikhne ke liye ye best hai.
+
+- **"Log sochte hain ki Extender sirf Professional ke liye hai."**  
+  **Actually:** Community edition mein bhi Extender hai, aur BApp store se bahut saare free extensions install kar sakte ho (jaise JSON Beautifier, Hackvector, etc.). Kuch extensions Pro features maangte hain, lekin kaafi free hain.
+
+- **"Log sochte hain ki Decoder sirf Base64 ke liye hai."**  
+  **Actually:** Decoder multiple formats handle karta hai – URL, HTML, Base64, ASCII hex, etc. Smart decode bhi hai jo automatically detect karne ki koshish karta hai.
+
+---
+
+### 🌍 11. Real-World Use Case (Bug Bounty / Pentesting)
+
+**Scenario:** Ek bug bounty hunter ne ek website test kiya. Usne **Proxy** se traffic intercept kiya aur dekha ki login request POST mein ja rahi thi. Usne request ko **Repeater** mein bheja aur parameter values change karke dekhna shuru kiya. Phir usne **Intruder** mein bheja (slow speed mein) common passwords ki list lagai. Kuch attempts ke baad response mein error message aaya jo SQL Injection ka hint de raha tha. Usne **Decoder** mein payload encode kiya aur wapas Repeater mein try kiya. Finally SQL Injection confirm hua. Usne **Comparer** mein do responses compare kiye (valid vs invalid) to confirm.  
+**Result:** Report likhi, bounty $750 mila.  
+**Lesson:** Ek vulnerability find karne ke liye multiple tabs ka combination use karna padta hai.
+
+---
+
+### 🎨 12. Visual Diagram (ASCII Art)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  Burp Suite Tabs (Top Panel)                                │
+├───────┬────────┬────────┬──────────┬──────────┬───────────┤
+│Dashboard Target Proxy Intruder Repeater Sequencer Decoder  │
+│Comparer Logger Extender User Options                        │
+└───────┴────────┴────────┴──────────┴──────────┴───────────┘
+                           │
+              ┌────────────┴────────────┐
+              │                          │
+         Proxy Tab                  Intruder Tab
+         ┌──────────────┐           ┌──────────────┐
+         │Intercept     │           │Target        │
+         │HTTP history  │           │Positions     │
+         │WebSockets    │           │Payloads      │
+         │Options       │           │Options       │
+         └──────────────┘           └──────────────┘
+```
+
+**Workflow diagram:**
+```
+[Browser] --> [Proxy Intercept] --> [Repeater/Intruder] --> [Server]
+       |              |                    |
+       +-- [History]--+                    +--> [Response] --> [Comparer/Decoder]
+```
+
+---
+
+### 🛠️ 13. Best Practices (Pro Tips)
+
+- **Shortcuts yaad rakho:**
+    - `Ctrl+R` – Send current request to Repeater
+    - `Ctrl+I` – Send to Intruder
+    - `Ctrl+Shift+R` – Send to Repeater (new tab)
+    - `Ctrl+F` – Search in current tab
+    - `Ctrl+Tab` – Switch tabs
+
+- **Target scope set karo:** Target → Scope mein apni target domain add karo. Phir Proxy options mein "Force use of TLS" aur "Don't send items to scope" jaise settings set kar sakte ho.
+
+- **Filters use karo:** Proxy history mein filter laga kar sirf scope ki requests dekh sakte ho, images/CSS hide kar sakte ho.
+
+- **Extensions install karo:** Extender → BApp Store mein jao aur useful extensions install karo:
+    - **JSON Beautifier:** JSON response ko readable banata hai.
+    - **Hackvector:** Intruder payloads mein help karta hai.
+    - **Turbo Intruder:** Python-based fast intruder (advanced).
+
+- **Dark theme use karo:** User Options → Display mein theme Dark rakho – aankhon ko sukoon milta hai.
+
+- **Project save karo:** Agar long testing kar rahe ho to "New project on disk" select karo, taaki baad mein wapas open kar sako.
+
+---
+
+### ⚠️ 14. Consequences of Failure (Agar galat kiya toh?)
+
+- **Agar tabs ka use nahi samjhe:** Tum Burp Suite ka 10% bhi use nahi kar paoge. Sirf proxy use karoge, baaki features waste.
+
+- **Agar target scope set nahi kiya:** Tumhari history mein bahut saari irrelevant requests (ads, trackers, etc.) aa jayengi, important requests dhundhna mushkil ho jayega.
+
+- **Agar Intruder ka misuse kiya:** Slow speed ke bawajood agar bahut heavy payload list daal di to Burp hang ho sakta hai. Community edition mein to aur bhi slow hai, patience rakho.
+
+- **Agar Decoder galat use kiya:** Data corrupt ho sakta hai. Jaise URL encode ki jagah Base64 kar diya to server samajh nahi payega.
+
+- **Agar Extender mein malicious extension install kar liya:** BApp store safe hai, lekin third-party extensions se cautious raho. Un trusted source se hi install karo.
+
+- **Agar Logger ignore kiya:** Kuch internal issues debug nahi kar paoge, todo troubleshooting mein time waste hoga.
+
+---
+
+### ❓ 15. FAQ (Interview Questions)
+
+**Q1: Burp Suite ke kitne core tabs hote hain?**  
+A1: Main tabs hain – Dashboard, Target, Proxy, Intruder, Repeater, Sequencer, Decoder, Comparer, Logger, Extender, User Options. Community edition mein Scanner nahi hai.
+
+**Q2: Proxy tab ka kya use hai?**  
+A2: Browser aur server ke beech mein traffic intercept karna, dekhna, modify karna, aur history record karna.
+
+**Q3: Intruder aur Repeater mein kya antar hai?**  
+A3: Repeater manual single request modify kar ke bhejne ke liye, Intruder automated multiple requests (brute force, fuzzing) ke liye.
+
+**Q4: Decoder tab mein kaunsa encoding/decoding available hai?**  
+A4: URL, HTML, Base64, ASCII hex, ASCII octal, Gzip, etc. Smart decode bhi hai.
+
+**Q5: Extender tab kya hai?**  
+A5: Burp Suite mein functionality add karne ke liye. BApp store se extensions install kar sakte ho (Python, Ruby, etc. through Jython/JRuby).
+
+**Q6: Logger aur HTTP history mein kya antar hai?**  
+A6: HTTP history Proxy ke through aane wale traffic ka log hai. Logger Burp ke internal traffic ka bhi log rakhta hai (jaise Extender ke calls). Logger more comprehensive hai.
+
+**Q7: Community edition mein Intruder slow kyun hai?**  
+A7: PortSwigger intentionally rate-limit karta hai Community edition mein taaki log Professional edition kharidne ke liye motivate hon. Lekin manual testing ke liye chal jata hai.
+
+**Q8: Target tab mein scope kya hota hai?**  
+A8: Scope define karta hai ki tum kis domain/site par test kar rahe ho. Iski madad se irrelevant traffic filter kar sakte ho.
+
+---
+
+### 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary)
+
+**"Burp Suite ke 11 tabs – jaise ek spy agency ke 11 departments – har ek ka apna kaam, aur milke banate hain ek powerful testing machine."**
+
+---
+
+## ==================== Topic 3.1 Khatam ====================
+
+---
+
+## ✅ Module 3 Complete!
+
+**Ab tumhe Burp Suite ka poora layout yaad ho gaya hoga:**  
+- Kaunsa tab kahan hai  
+- Har tab roughly kya karta hai  
+- Community mein kya available hai  
+- Shortcuts aur best practices
+
+========================================================================================

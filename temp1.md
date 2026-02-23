@@ -1,26 +1,3 @@
-## **Module 3: Burp Suite – 1000 Feet Overview**
-
-*Pehle poora battlefield dekh lo, phir weapon uthao. Burp ke tabs ka ek glance.*
-
-### Topic 3.1: Core Tabs Explained
-| Tab | Function |
-|-----|----------|
-| **Dashboard** | Automated activities ko control karo, Event Log aur Issue Activity yahan dikhti hai. |
-| **Target** | Website ka structure (sitemap) dikhta hai, Spidering ke through. |
-| **Proxy** | **Heart of Burp.** Traffic intercept, history, options. |
-| **Intruder** | Brute force attacks, fuzzing. |
-| **Repeater** | Manual request modification aur replay. |
-| **Sequencer** | Tokens (Session IDs, Cookies) ki randomness check. |
-| **Decoder** | Encode/decode data (Base64, URL, etc.). |
-| **Comparer** | Do requests/responses ko compare karo. |
-| **Logger** | Burp ke internal HTTP traffic ka log. |
-| **Extender** | BApp Store se extensions load karo. |
-| **User Options** | Global settings (font, theme, connections). |
-
-> **Note:** Professional version mein extra features hain (Scan, Live Tasks), Community edition mein limited.
-
----
-
 ## **Module 4: Proxy Tab Deep Dive**
 
 *Proxy woh darwaza hai jisse saara traffic guzarta hai. Iska sahi istemal seekho.*
