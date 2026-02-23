@@ -2154,3 +2154,1202 @@ Us page ka source code dekho (right-click → View Page Source).
 ---
 
 ========================================================================================
+
+
+Namaste, beta! 👋 **TechGuru** ek baar phir haazir hai!
+
+Aapne maanga **Module 5: Burp Suite Professional – Scanning & Live Tasks**. Ye woh **paid features** hain jo sirf **Professional version** mein aati hain. Maango toh main aapko ye bhi **zero se hero** bana dunga!
+
+Yaad rakho: **"Crawl" matlab ghoom ke map banana, "Audit" matlab check karna ki darwaze kitne majboot hain.**
+
+Chalo, Module 5 ke saare topics (5.1, 5.2, 5.3) ek saath, **16-Point Structure** mein, bilkul detail mein samajhte hain. Ek line bhi nahi chhodega main! 🚀
+
+---
+
+## Topic 5.1: New Scan (Crawl aur Audit)
+
+## 🎯 1. Title / Topic: New Scan – Crawl vs Audit
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Socho tumhe ek **bade school building** ki security check karni hai.
+- **Crawl:** Pehle tum **pure school mein ghumoge**. Har classroom, har lab, har bathroom, har store room – sab jagah jaaoge. Dekhoge ki kitne darwaze hain, kitni khidkiyan hain, kaun si jagah locked hai, kaun si khuli hai. TUM NE EK MAP BANA LIYA. Ye hai **Crawl**.
+- **Audit:** Ab tum **har darwaze ki taali check karoge**. Darwaza kitna majboot hai? Lock kaunsi company ka hai? Kya use todna easy hai? Koi khidki khol kar andar aa sakte hain? Ye hai **Audit** – **vulnerabilities dhundhna**.
+- **New Scan:** Jab tum ek button dabake **dono kaam ek saath karoge** – pehle pure school ka map banaoge, aur phir har jagah ki security check karoge.
+
+## 📖 3. Technical Definition (Interview Answer):
+**New Scan** Burp Suite Professional ka feature hai jo **automated web vulnerability scanning** provide karta hai. Jab tum "New Scan" click karte ho, to tum do cheezein schedule kar sakte ho:
+1.  **Crawl (Spidering):** Burp target website ke root URL se shuru hota hai, saare links follow karta hai, forms submit karta hai, aur application ka ek complete **map** (site tree) banata hai. Isme wo saare pages, directories, parameters, aur endpoints dhundhta hai jo publicly accessible hain.
+2.  **Audit (Vulnerability Scanning):** Crawl ke dauran ya baad mein, Burp dhundhe gaye har endpoint par **hundreds of pre-defined vulnerability checks** chalaata hai. Ye checks SQL Injection, Cross-Site Scripting (XSS), Command Injection, insecure configurations jaise vulnerabilities ko dhundhte hain.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+- **Problem:** Manual testing mein, ek website ke saare pages tak pahunchna aur har page par har type ki vulnerability check karna **ghanton ya dinon ka kaam** ho sakta hai. Koi page chhoot bhi sakta hai. Ek vulnerability miss hone ka matlab hai ki hack ho sakte ho.
+- **Solution:** New Scan **automates** is dono process ko. Ye **fast, comprehensive, aur consistent** hai. Burp machine hai, thakta nahi, har possible path par jaata hai aur har known attack try karta hai. Tum ise raat ko chala do aur subah tak report ready.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+- **Location:** Burp Suite Professional ke top menu mein **"Dashboard"** tab hota hai. Wahan jaao. Ya phir **Target** tab mein kisi bhi URL par right-click karo → **"Scan"** → **"New Scan..."** .
+- **Appearance:**
+    1.  Pehle ek **"New Scan" wizard** khulega. Iska apna ek window hoga.
+    2.  Pehle screen par ek field hogi **"URLs to scan"** . Yahan target URL dalna hota hai.
+    3.  Neeche do checkbox honge:
+        - [x] **Crawl** (usually by default ticked)
+        - [x] **Audit** (usually by default ticked)
+    4.  "Next" button hoga aage badhne ke liye.
+
+## ⚙️ 6. Under the Hood (Technical Working):
+1.  **Crawl ka kaam:**
+    - Step 1: Burp diye gaye URL par request bhejta hai (`GET /`).
+    - Step 2: Response mein jo HTML aata hai, Burp usko parse karta hai. Saare `<a href="...">` tags (links) nikaal leta hai.
+    - Step 3: In naye links par bhi same process repeat karta hai (recursive).
+    - Step 4: Forms milti hain to unhe bhi default values bhar kar submit karta hai.
+    - Step 5: Robots.txt file check karta hai ki hidden directories hain kya.
+    - Step 6: JavaScript files ko parse karke unmein chhupe endpoints (jaise `/api/user/{id}`) dhundhta hai.
+
+2.  **Audit ka kaam:**
+    - Step 1: Crawl se mile har unique request ko le leta hai.
+    - Step 2: Har vulnerability check ke hisaab se original request mein **payloads insert** karta hai. SQL Injection ke liye `'` , `"` , `OR 1=1--` ; XSS ke liye `<script>alert(1)</script>` ; etc.
+    - Step 3: Server ke response ko analyze karta hai. Agar response mein SQL error aaya, to SQL injection vulnerable. Agar script wapas aayi aur execute hui, to XSS vulnerable.
+    - Step 4: Saare findings ko ek report mein compile karta hai.
+
+## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
+**Note:** Ye steps Burp Suite Professional mein hain. Community Edition mein ye feature nahi hai, lekin concept samajh lo, interview kaam aayega.
+
+**Step 1: Scan start karo**
+```text
+Burp Dashboard tab par jao.
+Left sidebar mein "Scans" ke neeche "+" (plus) button hoga, ya "New Scan" likha hoga.
+Use CLICK karo.
+```
+**Expected Screen:** Ek naya "New Scan" dialog box khulega.
+
+**Step 2: URL and scan type select karo**
+```text
+"URLs to scan" field mein target ka URL likho, e.g., https://example.com
+
+Ensure karo ki neeche "Crawl" aur "Audit" dono checkboxes tick hain.
+```
+**Step 3: Next par click karo**
+```text
+"Next" button dabao.
+```
+**Expected Screen:** Ab "Scan Details" screen khulegi. Yahan tumhe **Scope** aur **Settings** dikhenge. Isse hum agle topic mein detail mein dekhenge. Filhal "Next" dabate jao.
+
+**Step 4: Review aur Launch**
+```text
+Aakhri screen par tum apni settings ka summary dekh sakte ho.
+"Run scan" button par CLICK karo.
+```
+**Expected Screen:** Tum wapas Dashboard par aa jaoge. Scans list mein ek naya scan entry dikhega jiska status "Pending" ya "Running" hoga. Tum us par click karke real-time progress dekh sakte ho, kaun se requests bhej raha hai, kaun si vulnerabilities mil rahi hain.
+
+## ⚖️ 8. Comparison (Ye vs Woh):
+| Feature | **Crawl** | **Audit** |
+| :--- | :--- | :--- |
+| **Main Kaam** | Website ka structure aur content discover karna. | Discovered content mein vulnerabilities dhundhna. |
+| **Output** | Site tree, list of URLs, forms, parameters. | List of vulnerabilities (SQLi, XSS, etc.) with evidence. |
+| **Process** | Links follow karna, forms submit karna. | Payloads inject karna, responses analyze karna. |
+| **Analogy** | School mein ghoom kar map banana. | Har darwaze ki taali check karna. |
+
+## 🚫 9. Common Mistakes (Beginner Traps):
+- **Mistake 1: Sirf crawl kiya, audit nahi.**
+    - **Scenario:** Tumne "Crawl only" select kiya. Burp ne poora map to bana diya, lekin vulnerabilities check nahi ki. Tum sochoge ki scan complete ho gaya, lekin tumhe koi vulnerability nahi mili.
+    - **Fix:** Ensure karo ki dono "Crawl" aur "Audit" ticked hain jab tak ki tumhe sirf mapping ki zaroorat na ho.
+- **Mistake 2: Bina login ke scan.**
+    - **Scenario:** Tumne ek site scan ki jisme user login karna padta hai. Burp sirf public pages (login page, about us) tak ghooma, andar ke protected pages (dashboard, profile) nahi. Vulnerabilities miss ho gayi.
+    - **Fix:** Scan settings mein application login details do (Topic 5.3 mein dekhenge).
+- **Mistake 3: Out-of-scope URLs par scan.**
+    - **Scenario:** Tumne `example.com` scan kiya. Burp ne wahan se `example.com/blog` aur phir `blog.example.com` discover kiya. Agar tumne scope restrict nahi kiya, to Burp `blog.example.com` ko bhi scan karega, jo tumhara target nahi tha aur legal issues ho sakte hain.
+    - **Fix:** Scan scope mein sirf "include" URLs define karo (Topic 5.2).
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
+- **"Log sochte hain ki... Crawl sirf links follow karta hai, forms ke saath interaction nahi karta."**
+    - **Actually, aisa nahi hai...** Modern Burp Crawler intelligent hai. Ye forms ko detect karta hai aur unhe default values (jaise input fields mein "1" ya "test") bhar kar submit bhi karta hai, taaki form submission ke baad wale pages bhi discover kar sake.
+- **"Log sochte hain ki... Audit karne se site crash ho sakti hai."**
+    - **Actually, aisa ho sakta hai...** Agar site unstable hai ya kuch payloads server ko overload kar den, to site crash ya slow ho sakti hai. Isliye production environment mein scan karne se pehle permission lena aur **Resource Pool** mein delay set karna zaroori hai (Topic 5.3).
+
+## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
+- **Scenario:** Ek pentester ko ek large e-commerce site test karni thi jisme hundreds of products aur categories the.
+- **How they used it:** Usne Burp Pro mein ek "New Scan" start kiya. Pehle Crawl ne site ka full map bana liya, saari categories, products, search functionality, aur user profile pages discover kar liye. Phir Audit ne har page par SQL injection aur XSS ke payloads try kiye.
+- **Result:** Audit ne ek product page par **blind SQL injection** discover kiya jo manual testing mein bahut mushkil se milta. Pentester ne is vulnerability ko report kiya aur client ne turant fix kiya. Burp ki automation se time bacha aur koi page miss nahi hua.
+
+## 🎨 12. Visual Diagram (ASCII Art):
+````
+[Start Scan: https://example.com]
+          |
+          |-----> [CRAWL PHASE]
+          |           |
+          |           |--> GET / (Home)
+          |           |     |--> Parse HTML -> Found: /about, /products, /login
+          |           |--> GET /about
+          |           |--> GET /products
+          |           |     |--> Parse HTML -> Found: /product?id=1, /product?id=2
+          |           |--> GET /product?id=1
+          |           |     |--> POST /cart (Form submit kiya)
+          |           |--> ... (Crawl complete)
+          |
+          |-----> [AUDIT PHASE]
+                    |
+                    |--> For each discovered request:
+                    |     |--> Original Request: GET /product?id=1
+                    |     |--> Test 1: Inject ' --> GET /product?id=1' (SQLi)
+                    |     |     |--> Response contains SQL error? [YES] --> VULN FOUND
+                    |     |--> Test 2: Inject <script> --> GET /product?id=1<script> (XSS)
+                    |     |     |--> Response contains <script>? [NO]
+                    |     |--> ... (Aur bhi tests)
+                    |
+[Scan Complete: Report Generated]
+````
+
+## 🛠️ 13. Best Practices (Pro Tips):
+- **Tip 1 (Staged Scan):** Pehle sirf "Crawl only" karo. Phir crawl complete hone ke baad, site tree ko manually dekh lo ki koi aur interesting area reh gaya to nahi. Phir "Audit only" scan chalao specific interesting areas par. Isse zyada control milega.
+- **Tip 2 (Scope Set Karo):** Scan shuru karne se pehle hamesha scope set karo. Sirf wahi URLs add karo jo tum test karna chahte ho, taaki time waste na ho aur legal issues na aaye.
+- **Tip 3 (Use Configurations):** Scan library mein predefined configurations hoti hain, jaise "Crawl and Audit - Fast" ya "Audit - Critical severity only". Inka use karo.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
+- **Scenario 1 (No Scope):** Tumne bina scope set kiye scan chala diya. Burp ne `example.com` se start kiya aur wahan se `ads.google.com`, `facebook.com/tracker` jaise third-party links bhi discover kar liye. Tum galti se kisi aur ki site scan kar rahe ho, jo illegal hai.
+- **Scenario 2 (No Login):** Tumne login-required site ko bina credentials diye scan kiya. Report aayi ki "No Critical Vulnerabilities Found". Client khush. Lekin hacker ne andar ke pages mein SQL injection se saara data chura liya. Teri reputation khatam.
+
+## ❓ 15. FAQ (Interview Questions):
+- **Q1: Burp Suite Professional ke "New Scan" mein Crawl aur Audit mein kya antar hai?**
+    - **A1:** Crawl website ka content discover karta hai (pages, links). Audit un pages par vulnerabilities check karta hai.
+- **Q2: Tum ek aisi site ko kaise scan karoge jiske liye login zaroori hai?**
+    - **A2:** Scan configuration mein "Application Login" section mein jaake Burp ko login credentials de dunga, ya "Recorded login sequence" provide karunga (Topic 5.3).
+- **Q3: Kya Burp ka automated scan manual testing ki jagah le sakta hai?**
+    - **A3:** Nahi. Automated scan bahut saari common vulnerabilities dhundhne mein fast hai, lekin complex business logic vulnerabilities, race conditions, ya authorization flaws ke liye manual testing zaroori hai.
+- **Q4: Scan ke dauran site slow ho jaye to kya karna chahiye?**
+    - **A4:** Resource Pool mein "Max Concurrent Requests" kam kar do aur "Delay between requests" badha do. Isse load kam padega.
+- **Q5: Scan configuration library kya hai?**
+    - **A5:** Ye predefined scan settings ka ek set hai, jaise "Crawl only", "Audit only", "Crawl and Audit - Thorough", etc. Tum apni custom settings bhi save kar sakte ho.
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
+"New Scan do kaam kare, pehle ghoome (Crawl) phir mare (Audit), automation ke chamatkar se vulnerabilities dhundhe har jagah."
+
+---
+
+## Topic 5.2: Detailed Scope & Scan Configuration
+
+## 🎯 1. Title / Topic: Scope Setting aur Scan Configuration
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Socho tumhe ek **big hospital** ki security check karni hai. Hospital ke andar bahut saare wards hain: OPD, ICU, Operation Theatre, Cafeteria, Admin Block.
+- **Include URL Prefixes:** Tum management se kehte ho, "Sirf **OPD, ICU, aur Admin Block** check karne hain. Cafeteria aur Parking area ko mat chhedo." Ye hai **include**.
+- **Exclude URL Prefixes:** Tum kehte ho, "ICU ke andar jo **staff-only restricted area** hai, wahan mat jaana." Ye hai **exclude**.
+- **Scan Configuration:** Tum ek plan banate ho. "Kaise check karna hai?" Tum kehte ho, "Pehle bahut tezi se poora ghoom lo (fast crawl), phir sirf high-risk cheezein check karo (audit critical only)". Ye configuration hai.
+
+## 📖 3. Technical Definition (Interview Answer):
+**Detailed Scope** aur **Scan Configuration** scan ko control karne ke advanced settings hain.
+- **Include URL Prefixes:** Tum specific URLs ya directories define karte ho jinhe scan mein **shamil karna hai**. Burp sirf inhi prefixes ke andar ghoomega aur audit karega.
+- **Exclude URL Prefixes:** Tum wo URLs define karte ho jinhe scan se **bahar rakhna hai**, chahe woh include scope mein kyun na aate hon.
+- **Scan Configuration:** Tum Burp ki scan library mein se ek configuration select kar sakte ho ya apni custom bana sakte ho. Jaise "Audit checks - all except JavaScript analysis" ka matlab hai ki JavaScript file analysis ke alawa saari checks chalao.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+- **Problem:** Agar tumne sirf `https://example.com` diya, to Burp us site ke andar har cheez par jaayega, chahe woh tumhara target ho ya na ho (e.g., logout links, third-party trackers). Isse time waste hota hai, aur tum unintentionally kisi aur ki site scan kar sakte ho.
+- **Solution (Scope):** Include/Exclude rules use karke tum **pinpoint accuracy** se sirf relevant areas ko scan kar sakte ho. Isse scan fast hota hai, aur legal boundaries safe rehti hain.
+- **Problem:** Sab vulnerabilities check karne mein time lagta hai. Kabhi tumhe sirf specific vulnerabilities (jaise SQL injection) check karni hoti hain. Kabhi tumhe fast scan chahiye.
+- **Solution (Scan Configuration):** Library se relevant configuration choose karo. Jaise "Crawl and Audit - Fast" for quick overview, "Audit - All checks" for deep analysis.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+- **Location:** New Scan wizard mein "Scan Details" screen par.
+- **Appearance:**
+    - Left side mein ek section hoga **"Scope"** . Uske andar do fields:
+        - **Include in crawl/audit (URL prefixes)** : Ek box jisme URLs add kar sakte ho. Saath mein "Add" button.
+        - **Exclude from crawl/audit (URL prefixes)** : Ek aur box jisme excluded URLs add kar sakte ho.
+    - Right side mein **"Scan Configuration"** hoga. Ek dropdown hoga jisme se configuration select karna hai. Jaise:
+        - Crawl only
+        - Audit only
+        - Crawl and Audit - Fast
+        - Crawl and Audit - Thorough
+        - Audit - All checks
+        - ... etc.
+
+## ⚙️ 6. Under the Hood (Technical Working):
+1.  **Scope Inclusion:**
+    - Jab Burp koi naya URL discover karta hai (`/products/123`), to wo pehle check karta hai ki ye URL kisi "Include" rule se match karta hai ya nahi.
+    - Agar match karta hai, to wo aage process hota hai (crawl/audit).
+    - Agar nahi karta, to wo URL turant discard kar diya jata hai.
+
+2.  **Scope Exclusion:**
+    - Agar URL pehle include ho chuka hai, to Burp ek second check karta hai ki ye kisi "Exclude" rule se match to nahi karta.
+    - Agar exclude rule match ho jata hai, to use bhi discard kar diya jata hai.
+    - Exclude rule ko include rule par precedence hoti hai. Matlab agar URL dono mein aata hai, to exclude maana jayega.
+
+3.  **Scan Configuration:**
+    - Tum jab koi configuration select karte ho, to Burp internally bahut saari settings ka ek group load kar leta hai. Jaise:
+        - Crawl strategy (depth, speed)
+        - Audit checks (ki SQLi check karna hai? XSS check karna hai? Critical, High, Medium severity?)
+        - Insertion points (request ke kaun se parts mein payloads daalne hain? headers? body? parameters?)
+
+## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
+
+**Step 1: Scan wizard mein "Scan Details" par pahunchna**
+```text
+Jaise hi tum "New Scan" shuru karte ho, aur "Next" dabate ho, tum "Scan Details" screen par aa jaoge.
+```
+**Expected Screen:** Scope aur Configuration options.
+
+**Step 2: Scope set karo (Include URLs)**
+```text
+"Scope" section mein "Include in crawl/audit (URL prefixes)" ke neeche "Add" button click karo.
+Ek naya dialog aayega.
+URL prefix likho: https://example.com/
+Agar tum sirf specific directory scan karna chahte ho to: https://example.com/products/
+"OK" karo.
+```
+**Expected Screen:** Include list mein tumhara URL aa jayega.
+
+**Step 3: Scope set karo (Exclude URLs)**
+```text
+"Exclude from crawl/audit (URL prefixes)" ke neeche "Add" click karo.
+URL prefix likho: https://example.com/logout  (Logout page ko scan karna risky hai, session khatam ho sakta hai)
+Ya: https://example.com/admin  (Agar sensitive area hai)
+"OK" karo.
+```
+**Expected Screen:** Exclude list mein URL aa jayega.
+
+**Step 4: Scan Configuration select karo**
+```text
+Right side "Scan Configuration" ke dropdown par click karo.
+List mein se "Crawl and Audit - Thorough" select karo (for deep testing) ya "Crawl and Audit - Fast" (for quick testing).
+```
+**Step 5: Aage badho aur scan run karo.**
+```text
+"Next" aur phir "Run scan".
+```
+## ⚖️ 8. Comparison (Ye vs Woh):
+| Feature | **Include** | **Exclude** |
+| :--- | :--- | :--- |
+| **Kaam** | Batata hai ki scan kahan karna hai. | Batata hai ki scan kahan nahi karna hai. |
+| **Effect** | Jo URLs include hain, sirf unhi par jaayega. | Agar URL include mein bhi ho, to bhi exclude wale ko skip karega. |
+| **Use Case** | Target boundaries define karna. | Dangerous/logout/third-party URLs hata dena. |
+
+## 🚫 9. Common Mistakes (Beginner Traps):
+- **Mistake 1: Sirf Include diya, Exclude nahi diya.**
+    - **Scenario:** Tumne `https://example.com/` include kiya. Site ke andar ek link tha `https://example.com/logout?redirect=https://google.com`. Burp ne logout request bhej di aur tumhara session khatam ho gaya. Scan fail ho gaya.
+    - **Fix:** Sensitive actions wale URLs (logout, delete account) ko Exclude list mein zaroor daalo.
+- **Mistake 2: Prefix galat diya (trailing slash bhoolna).**
+    - **Scenario:** Tumne include kiya `https://example.com` (bina slash ke). Burp ise match karega, lekin subdirectories ke saath hamesha consistent rahna achha hai. Best practice hai slash ke saath dena: `https://example.com/`.
+    - **Fix:** Hamesha `https://domain.com/` format use karo.
+- **Mistake 3: Configuration select karna bhoolna.**
+    - **Scenario:** Tumne default configuration chhod di. Default "Crawl and Audit - Fast" ho sakta hai, jisme kuch checks skip ho sakte hain. Tumhe "Thorough" karna tha.
+    - **Fix:** Scan shuru karne se pehle hamesha configuration review karo aur apni requirement ke hisaab se select karo.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
+- **"Log sochte hain ki... Include aur Exclude sirf URLs ke liye hai, parameters ke liye nahi."**
+    - **Actually, aisa nahi hai...** Tum advanced scope rules mein parameters bhi specify kar sakte ho, lekin basic UI mein URL prefixes hi dikhte hain. Parameters ke liye tum "Advanced Scope Configuration" use kar sakte ho.
+- **"Log sochte hain ki... Scan Configuration select karne se sirf audit ki speed change hoti hai, crawl ki nahi."**
+    - **Actually, aisa nahi hai...** Different configurations crawl ki depth, linking strategy, form submission behavior ko bhi affect karte hain. "Thorough" crawl zyada links follow karega aur forms zyada deeply interact karega.
+
+## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
+- **Scenario:** Ek pentester ko `https://example.com/app/` directory test karni thi. Lekin application ka logout link tha `https://example.com/app/logout`. Aur ek admin panel tha `https://internal-admin.example.com/` jo same domain ka subdomain tha lekin target mein nahi aata tha.
+- **How they used it:**
+    - Usne Include kiya: `https://example.com/app/`
+    - Usne Exclude kiya: `https://example.com/app/logout`
+    - Usne configuration select ki: "Crawl and Audit - Thorough (but exclude JavaScript analysis)" kyunki JS analysis se time waste hota tha.
+- **Result:** Scan safely chala, logout ki wajah se session terminate nahi hua, aur sirf target area scan hua. Time bhi bacha.
+
+## 🎨 12. Visual Diagram (ASCII Art):
+````
+[Target Scope: https://example.com/app/]
+          |
+          |----> Burp discovers new URL: /app/products
+          |           |--> Check Include Rule (https://example.com/app/)? [YES] --> Process
+          |
+          |----> Burp discovers new URL: /app/logout
+          |           |--> Check Include Rule (https://example.com/app/)? [YES]
+          |           |--> Check Exclude Rule (https://example.com/app/logout)? [YES] --> DISCARD
+          |
+          |----> Burp discovers new URL: https://internal-admin.example.com/dashboard
+          |           |--> Check Include Rule (https://example.com/app/)? [NO] --> DISCARD
+````
+
+## 🛠️ 13. Best Practices (Pro Tips):
+- **Tip 1 (Granular Scope):** Include rules ko jitna specific kar sakte ho karo. Jaise `https://example.com/app/v2/` agar sirf v2 test karna hai to.
+- **Tip 2 (Use Macros for Logout):** Agar logout ko exclude nahi kar sakte (kyunki wo har jagah link hai), to ek "macro" banao jo scan ke baad automatically re-login kar de. Ye advanced hai, but useful.
+- **Tip 3 (Custom Configurations):** Library mein apni khud ki configuration save kar sakte ho. Jaise "My Project - Deep Scan" jisme saare checks on ho aur crawl speed moderate ho.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
+- **Scenario 1 (Include bhoolna):** Tumne sirf root URL diya, lekin application ka important part `/api` par tha. Burp ne `/api` discover kiya lekin woh root prefix ke andar nahi aata tha? Depend karta hai. Agar relative link `/api` tha to aayega. Lekin agar absolute link `https://api.example.com` tha to nahi aayega. Scope define na karne se tum miss kar doge.
+- **Scenario 2 (Exclude bhoolna):** Logout ya delete account wali request chali gayi. Scan beech mein fail ho gaya, time waste hua.
+
+## ❓ 15. FAQ (Interview Questions):
+- **Q1: Scope mein Include aur Exclude kyun use karte hain?**
+    - **A1:** Scan ko focus rakhne, unwanted aur dangerous areas se bachne, aur legal boundaries maintain karne ke liye.
+- **Q2: Kya scope mein wildcards use kar sakte hain? Jaise `*.example.com`?**
+    - **A2:** Haan, Burp regex aur wildcards ko support karta hai. Tum `.*\.example\.com` use kar sakte ho (regex mode mein).
+- **Q3: Scan Configuration library se ek configuration select karne ka kya fayda?**
+    - **A3:** Time bachta hai, kyunki tumhe har baar saari settings manually set nahi karni padti. Experience ke hisaab se optimized settings ready rehti hain.
+- **Q4: "Crawl and Audit - Thorough" aur "Fast" mein kya antar hai?**
+    - **A4:** Thorough zyada links follow karega, forms zyada deeply submit karega, aur saari audit checks chalaega. Fast kam links follow karega aur sirf high-priority audit checks chalaega.
+- **Q5: Tum ek scan kaise configure karoge jisme sirf SQL injection dhundhni hai?**
+    - **A5:** Main "Audit only" configuration select karunga, phir audit settings mein jaake sirf "SQL injection" check enable karunga, baaki sab disable.
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
+"Scope set karo include-exclude se, configuration library se le lo, scan ko control mein rakho."
+
+---
+
+## Topic 5.3: Auditing, Login & Resource Pool
+
+## 🎯 1. Title / Topic: Audit Settings, Application Login, aur Resource Pool
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Socho tum ek **secret agent** ho aur tumhe ek **dushman ke safe house** ki surveillance karni hai.
+- **Auditing Settings:** Tum decide karte ho ki tum **kitni tezi se** surveillance karoge? Har 5 second mein photo lo, ya har 1 second mein? (Speed). Aur tum kitni **accuracy** se report karoge? Har chhoti movement report karo, ya sirf weapons dikhe to report karo? (Accuracy)
+- **Application Login:** Tumhe pata hai ki safe house mein ghusne ke liye **password** chahiye. Tum apne handlers se password leke aate ho aur surveillance team ko de dete ho ki "Jab bhi guard password maange, ye bol dena". Ye hai login details dena.
+- **Resource Pool:** Tumhare paas limited number of agents hain (Resources). Tum decide karte ho ki ek saath **kitne agents** ko surveillance par bhejna hai (Max Concurrent Requests). Aur agar police ko suspicion na ho, to do agents ke beech mein **kitna gap** rakhna hai (Delay between requests).
+
+## 📖 3. Technical Definition (Interview Answer):
+Ye teen advanced settings hain jo scan ke behavior ko fine-tune karti hain.
+- **Auditing Settings:** Yahan tum **audit ki speed aur accuracy** ko control kar sakte ho.
+    - **Audit Speed:** Fast, Normal, or Slow. Fast matlab jaldi jaldi requests bhejna, Slow matlab dheere dheere (WAF se bachne ke liye).
+    - **Audit Accuracy:** Tum ye decide kar sakte ho ki Burp kitni thoroughness se checks karega. Zyada accuracy ka matlab zyada requests, zyada time.
+- **Application Login:** Agar tumhari target application mein authentication (login) hai, to tum Burp ko **credentials (username/password)** de sakte ho. Burp inka use karke automatically login karega aur authenticated pages ko bhi scan karega.
+- **Resource Pool:** Ye **system resources (CPU, network) ko manage** karne ka tareeka hai.
+    - **Max Concurrent Requests:** Ek time par kitni parallel requests bhejni hain. High number ka matlab fast scan, lekin server par load bhi zyada.
+    - **Delay between requests:** Do requests ke beech mein kitna time gap (milliseconds mein). Ye useful hai **WAF (Web Application Firewall) ko bypass** karne ke liye, jo ki tezi se aane wali requests ko block kar deta hai.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+- **Problem (Auditing):** Default speed aur accuracy se scan karne par kabhi kabhi site slow ho jati hai, ya WAF block kar deta hai. Kabhi kabhi tumhe bahut deep analysis chahiye, kabhi sirf overview.
+- **Solution (Auditing):** Speed aur accuracy adjust karke tum scan ko apni zaroorat ke hisaab se **customize** kar sakte ho.
+- **Problem (Login):** Bina login diye, authenticated pages (dashboard, profile settings) scan nahi honge. Tum vulnerable areas miss kar doge.
+- **Solution (Login):** Credentials dekar, Burp ko **site ke andar tak bhejo**. Use wahi pages scan karne do jo ek normal logged-in user dekhta hai.
+- **Problem (Resources):** Agar tumne ek saath 50 requests bhej di, to target server crash ho sakta hai, ya tumhara internet slow ho sakta hai, ya tumhara IP block ho sakta hai.
+- **Solution (Resource Pool):** Max requests aur delay set karke tum **load ko control** karte ho. Safe aur stable scan.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+- **Location:** New Scan wizard mein "Scan Details" screen ke baad (ya kuch versions mein same screen par) "Application Login" aur "Resource Pool" sections hote hain. Auditing settings kuch wizard mein advanced section mein milti hain.
+- **Appearance:**
+    - **Application Login:** Ek checkbox hogi **"Use application login"**. Us par click karne par options khulte hain:
+        - **"Add login sequence..."** : Yahan tum macro record kar sakte ho (advanced).
+        - **"Add login credentials..."** : Yahan simple username/password dal sakte ho.
+    - **Resource Pool:** Ek dropdown hoga **"Resource pool"** . Isme se "Default" ya "Create new" select kar sakte ho. "Create new" karne par ek naya window khulega jisme "Max concurrent requests" aur "Delay between requests" set kar sakte ho.
+    - **Auditing Settings:** Ye kuch versions mein "Scan Configuration" ke andar detail mein milti hain. Ya wizard mein "Audit" section mein.
+
+## ⚙️ 6. Under the Hood (Technical Working):
+1.  **Application Login (Simple Credentials):**
+    - Step 1: Tum username `admin` aur password `password123` dete ho.
+    - Step 2: Scan ke dauran jab Burp kisi page par login form detect karta hai (e.g., `/login` with `input name="user"` and `"pass"`), to wo automatically in credentials ko use karta hai.
+    - Step 3: Burp form submit karta hai, response check karta hai (e.g., `302 redirect` to `/dashboard`, ya cookie set hui) ki login successful hua ya nahi.
+    - Step 4: Agar successful hua, to wo naye session cookies ke saath aage ki requests bhejta hai.
+
+2.  **Resource Pool:**
+    - Step 1: Tum pool banate ho jisme max concurrent requests = 5 aur delay = 200 ms set karte ho.
+    - Step 2: Scan shuru hota hai. Burp ek saath sirf 5 requests bhejega.
+    - Step 3: Jaise hi ek request complete hoti hai, Burp uski jagah nayi request bhejega, lekin usse pehle 200 ms ka delay rakhega.
+    - Step 4: Ye process repeat hota hai.
+
+## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
+
+**Part A: Application Login Dena (Simple Credentials)**
+
+**Step 1: Scan wizard mein "Application Login" section dhundho**
+```text
+New Scan wizard mein jab tum "Scan Details" par ho, to kuch version mein "Application Login" section neeche hota hai.
+Ya "Next" dabao to kisi screen par milega.
+```
+**Step 2: Login enable karo**
+```text
+"Use application login" checkbox par TICK karo.
+```
+**Step 3: Credentials add karo**
+```text
+"Add login credentials" button par CLICK karo.
+Ek chhota window khulega.
+"Username" field mein likho: admin
+"Password" field mein likho: password123
+(Optional) "Confirm password" field.
+"OK" karo.
+```
+**Expected Screen:** Credentials list mein add ho jayenge.
+
+**Part B: Resource Pool Banana**
+
+**Step 1: "Resource pool" section dhundho**
+```text
+Scan wizard mein "Resource pool" dropdown dikhega.
+```
+**Step 2: Naya pool banaye**
+```text
+Dropdown mein "Create new resource pool..." select karo.
+Ek naya "Resource pool configuration" window khulega.
+```
+**Step 3: Pool ko naam do aur settings set karo**
+```text
+"Pool name" likho: My_Slow_Scan (kuch bhi)
+"Maximum concurrent requests" set karo: 5 (matlab ek saath sirf 5 requests)
+"Delay between requests (milliseconds)" set karo: 500 (matlab 0.5 second ka gap)
+```
+**Step 4: Pool save karo**
+```text
+"OK" button dabao.
+```
+**Expected Screen:** Tum wapas wizard mein aaoge. Resource pool dropdown mein ab "My_Slow_Scan" select ho jayega.
+
+**Step 5: Scan run karo.**
+
+## ⚖️ 8. Comparison (Ye vs Woh):
+| Feature | **Simple Login Credentials** | **Recorded Login Sequence (Macro)** |
+| :--- | :--- | :--- |
+| **Kaise Kaam** | Sirf username/password dete ho, Burp automatically form dhundh ke bharta hai. | Tum khud browser mein login karte ho, Burp us sequence ko record karta hai (macro) aur scan mein use karta hai. |
+| **Complexity** | Simple. Sirf basic forms ke liye kaam karega. | Complex. Multi-page login, 2FA, custom JS logic handle kar sakta hai. |
+| **Use Case** | Simple login forms (e.g., DVWA, standard apps). | Complex modern applications (e.g., OAuth, login with CAPTCHA). |
+
+## 🚫 9. Common Mistakes (Beginner Traps):
+- **Mistake 1: Login diya, lekin form ka structure match nahi kiya.**
+    - **Scenario:** Tumne username/password diya. Lekin site ke login form mein field names "userid" aur "passwd" the. Burp ne "username" aur "password" dhundha aur mila nahi, to login fail ho gaya.
+    - **Fix:** Advanced option mein jaake tum field names bhi specify kar sakte ho. Ya better, "Recorded login sequence" use karo.
+- **Mistake 2: Resource pool mein bahut zyada delay.**
+    - **Scenario:** Tumne 5000 ms (5 sec) delay set kar diya. Scan complete hone mein 10 ghante lag gaye.
+    - **Fix:** Requirement ke hisaab se delay set karo. WAF bypass ke liye 100-500 ms kaafi hai. Production server ke liye 1000-2000 ms safe hai.
+- **Mistake 3: Resource pool mein bahut kam delay aur high concurrent requests.**
+    - **Scenario:** Tumne 0 delay aur 50 concurrent requests set kar di. Server ne tumhe DoS attack samajh kar IP block kar diya.
+    - **Fix:** Hamesha respectful raho. Pehle normal settings se start karo, phir dheere dheere increase karo agar zaroorat ho.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
+- **"Log sochte hain ki... Application login dene se Burp har request ke saath login karega."**
+    - **Actually, aisa nahi hai...** Burp ek baar login karta hai, session cookie store kar leta hai, aur phir baaki saari requests wahi cookie use karti hain. Har request ke saath login nahi karta. Login tab hota hai jab cookie expire ho jaye ya session khatam ho jaye.
+- **"Log sochte hain ki... Resource pool sirf scan ki speed kam karne ke liye hai."**
+    - **Actually, aisa nahi hai...** Ye tumhare local system resources (CPU, memory) ko bhi manage karta hai. Agar tum bahut zyada concurrent requests doge, to tumhara apna system slow ho sakta hai ya Burp crash ho sakta hai. Resource pool ise balance karta hai.
+
+## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
+- **Scenario:** Ek bug bounty hunter ne ek site scan karni thi jisme login tha aur WAF bhi tha jo tezi se aane wali requests ko block kar deta tha.
+- **How they used it:**
+    1.  Usne **Application Login** mein apni credentials di.
+    2.  Usne ek naya **Resource Pool** banaya jisme `Max concurrent requests = 3` aur `Delay between requests = 300 ms` rakha, taaki WAF trigger na ho.
+    3.  Usne **Audit Settings** (agar available thi) mein speed "Normal" rakhi.
+- **Result:** Scan successfully complete hua bina WAF block kiye. Usne authenticated area mein ek **Privilege Escalation** vulnerability discover ki, jisse woh normal user se admin ban sakta tha. Bounty $2500 mili.
+
+## 🎨 12. Visual Diagram (ASCII Art):
+````
+[Burp Scanner]
+       |
+       |--> [Application Login Module] --> (Step 1: POST /login user=admin&pass=pass)
+       |                                       |--> (Step 2: Receive Cookie: session=abc123)
+       |--> [Main Scan Engine] --> (Uses Cookie: session=abc123 for all subsequent requests)
+       |
+       |--> [Resource Pool Controller]
+            |--> Request Queue: [Req1] [Req2] [Req3] [Req4] [Req5]
+            |--> Max Concurrent: 3
+            |--> Send Req1, Req2, Req3 simultaneously.
+            |--> Wait for any one to finish.
+            |--> Apply 500ms delay.
+            |--> Send Req4.
+            |--> ... (and so on)
+````
+
+## 🛠️ 13. Best Practices (Pro Tips):
+- **Tip 1 (Test Login First):** Scan shuru karne se pehle, manually apne credentials se login karo aur dekh lo ki sab sahi hai. Phir Burp mein do.
+- **Tip 2 (Use Recorded Sequence for Complex Apps):** Agar site mein 2FA (2-factor authentication) hai, ya login ke baad kuch steps hain, to "Recorded login sequence" (macro) use karo. Ye advanced hai, lekin bahut powerful hai.
+- **Tip 3 (Monitor Resource Pool):** Scan ke dauran Dashboard par jaake dekhte raho ki tumhara resource pool kaise perform kar raha hai. Kitni requests pending hain, kitni fail ho rahi hain. Agar zyada fail ho rahi hain, to delay badhao ya concurrent requests kam karo.
+- **Tip 4 (Start Slow, Then Increase):** Pehle slow settings se scan chalao (e.g., 2 concurrent, 1000ms delay). Phir dheere dheere speed badhao jab tak site stable response de.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
+- **Scenario 1 (Login Fail):** Tumne galat credentials diye. Scan to chalega, lekin sirf public pages tak limited rahega. Tum sochoge ki site secure hai, lekin andar sab vulnerable hai. Client ko hack kar diya gaya. Tumaari naak kat gayi.
+- **Scenario 2 (Too Fast Scan):** Tumne aggressive resource pool use kiya. Server par high load aaya, site crash ho gayi. Client ka production site down ho gaya. Tum par case ho sakta hai.
+- **Scenario 3 (Too Slow Scan):** Tumne itna slow scan set kar diya ki report banne mein 1 week lag gaya. Client ko deadline miss ho gayi.
+
+## ❓ 15. FAQ (Interview Questions):
+- **Q1: Application Login ki setting kyun zaroori hai?**
+    - **A1:** Kyunki bahut saari vulnerabilities authenticated areas mein hoti hain. Bina login diye wo areas scan hi nahi honge.
+- **Q2: Resource Pool mein "Max concurrent requests" ka kya matlab hai?**
+    - **A2:** Ye batata hai ki Burp ek saath kitni parallel requests target server ko bhej sakta hai.
+- **Q3: Tum WAF ko bypass karne ke liye kaun si setting adjust karoge?**
+    - **A3:** Resource Pool mein "Delay between requests" badha dunga, taaki request rate slow ho aur WAF trigger na ho.
+- **Q4: "Recorded login sequence" simple credentials se better kyun hai?**
+    - **A4:** Kyunki ye complex login flows ko handle kar sakta hai jisme multiple steps, redirects, ya JavaScript execution involve ho.
+- **Q5: Tum kaise decide karoge ki kitna delay aur concurrent requests set karna hai?**
+    - **A5:** Target server ki capacity, WAF ki sensitivity, aur apne network speed par depend karta hai. Pehle manual testing karke dekh leta hoon ki kitni speed safe hai, phir us hisaab se set karta hoon.
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
+"Audit speed, login de, resource pool se load manage kare, safe scan ka ye funda hai."
+
+---
+
+## Topic 5.4: New Live Task
+
+## 🎯 1. Title / Topic: New Live Task (Background Scanning)
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Socho tumhare ghar ke **gate par ek chowkidaar (guard)** hai. Tum use kuch special instructions de sakte ho:
+- **Ek baar ka kaam (Scan):** Tum chowkidaar se kehte ho, "Jaakar pure ghar ka ek baar inspection kar ke aa." Ye hai **New Scan**.
+- **Live Task:** Tum chowkidaar se kehte ho, "Ab tu **24x7 yahi gate par baitha reh**. Jo bhi andar aaye, uski nikalne tak 24 ghante record kar aur koi suspicious ho to turant bata." Ye hai **Live Task** – background mein continuously chalne wala process.
+
+## 📖 3. Technical Definition (Interview Answer):
+**New Live Task** Burp Suite Professional ka ek feature hai jo **background mein continuously chalta rehta hai**. Jab tum browsing kar rahe ho, Proxy ke through jo bhi traffic guzarta hai, Live Task usko real-time monitor karta hai aur naye discover hue content par automatically scan chala deta hai.
+- **Tool Scope:** Tum specify kar sakte ho ki **kis tool ke traffic ko** Live Task monitor karega. Jaise sirf **Proxy** ka traffic, ya sirf **Repeater** ka, ya sabka.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+- **Problem:** Tum ek website manual test kar rahe ho. Tum proxy mein kuch requests intercept kar rahe ho, kuch Repeater mein bhej rahe ho. Tumhe lagta hai ki tumne saare areas cover kar liye. Lekin ho sakta hai ki tumhari manual interaction ke dauran koi naya endpoint discover ho (jaise koi link click kiya to ` /api/user/profile ` dikha). Agar tumne wahan manually scan nahi kiya, to vulnerability miss ho sakti hai.
+- **Solution:** Live Task enable karo. Ab jab bhi tum kisi naye URL par jaaoge (proxy se), ya Repeater mein koi nayi request bhejoge, Burp automatically us naye content ko **background mein scan karna shuru kar dega**. Tumhe alag se scan start karne ki zaroorat nahi.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+- **Location:** **Dashboard** tab par jao. Left sidebar mein **"Live Tasks"** ka section hoga.
+- **Appearance:**
+    - Yahan pehle se kuch default Live Tasks ho sakte hain (jaise "Live Audit - from Proxy").
+    - Ek "+" ya "New Live Task" button hoga.
+    - Click karne par ek configuration window khulegi jisme do main cheezein hain:
+        - **Tool Scope:** Kis tool se aane wali requests ko scan karna hai? (Proxy, Repeater, Intruder, etc.)
+        - **Scan Configuration:** Kaunsa scan chalaana hai? (Jaise "Crawl and Audit - Fast")
+
+## ⚙️ 6. Under the Hood (Technical Working):
+1.  **Task Creation:** Tum ek Live Task banate ho aur usme tool scope define karte ho (e.g., Proxy).
+2.  **Continuous Monitoring:** Burp background mein continuously monitor karta hai ki selected tools se koi naya request/response toh nahi aa raha.
+3.  **Scope Extraction:** Jab koi naya request aata hai (e.g., `GET /api/user/123` from Proxy), Burp us request se URL nikaal kar task ke scope mein daal deta hai.
+4.  **Automated Scan:** Ab ye naya URL background scan ke queue mein chala jaata hai. Live Task apni defined scan configuration (e.g., "Crawl and Audit - Fast") use karke us URL ko scan karna shuru kar deta hai.
+5.  **Reporting:** Jo bhi vulnerabilities milti hain, wo Dashboard par "Task" ke under dikhti hain.
+
+## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
+
+**Step 1: Live Task banayein**
+```text
+Burp Suite Professional mein Dashboard tab par jao.
+Left sidebar mein "Live Tasks" ke neeche "+" button ya "New Live Task" par CLICK karo.
+```
+**Expected Screen:** "New Live Task" configuration window khulega.
+
+**Step 2: Tool Scope set karo**
+```text
+Is window mein ek section hoga "Tool Scope".
+Yahan tum checkboxes dekhoge: [ ] Proxy, [ ] Repeater, [ ] Intruder, [ ] Scanner, etc.
+Sirf "Proxy" ke aage ka checkbox TICK karo.
+(Isska matlab: sirf Proxy se aane wale traffic ko monitor karo)
+```
+**Step 3: Scan Configuration set karo**
+```text
+"Scan Configuration" dropdown par click karo.
+Select karo: "Crawl and Audit - Fast" (ya jo tumhe suitable lage)
+```
+**Step 4: Task ko naam do aur save karo**
+```text
+"Task name" field mein kuch likho, jaise: "My Background Proxy Scanner"
+"OK" button par CLICK karo.
+```
+**Expected Screen:** Dashboard ke "Live Tasks" section mein tumhara naya task add ho jayega aur uska status "Running" dikhega.
+
+**Step 5: Task ko test karo**
+```text
+Ab Firefox mein koi bhi website kholo jise tum test karna chahte ho.
+Kuch pages navigate karo, forms click karo.
+Phir wapas Dashboard par jao aur apne "My Background Proxy Scanner" task par click karo.
+```
+**Expected Screen:** Tumhe task ke andar "Scans" dikhenge ki kis kis URL ko scan kiya ja raha hai. Aur "Issues" section mein koi vulnerability mili to wo bhi dikhegi.
+
+## ⚖️ 8. Comparison (Ye vs Woh):
+| Feature | **New Scan** | **New Live Task** |
+| :--- | :--- | :--- |
+| **Timing** | Ek baar ka kaam. Tum start karo, complete ho, band ho jaye. | Continuously background mein chalta rahe. |
+| **Trigger** | Tum manually start karte ho. | Jab bhi selected tool se naya traffic aata hai, automatically trigger hota hai. |
+| **Use Case** | Deep dive, scheduled scan. | Passive monitoring, manual testing ke saath-saath real-time scanning. |
+
+## 🚫 9. Common Mistakes (Beginner Traps):
+- **Mistake 1: Tool scope galat set karna.**
+    - **Scenario:** Tumne Live Task mein sirf "Proxy" tick kiya, lekin tum Repeater mein bahut requests bhej rahe ho. Unpar scan nahi hoga.
+    - **Fix:** Socho ki tum kis tool se zyada kaam kar rahe ho. Agar sab tool se karte ho, to "All tools" tick kar do.
+- **Mistake 2: Live Task ko band karna bhoolna.**
+    - **Scenario:** Tumne ek project complete kar liya. Lekin Live Task abhi bhi background mein chal raha hai. Jab tum koi aur site browse karoge, to uska bhi scan ho sakta hai jo tum nahi chahte.
+    - **Fix:** Jab kaam khatam ho jaye, to Dashboard mein jaa kar Live Task ko "Pause" ya "Stop" kar do.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
+- **"Log sochte hain ki... Live Task se mujhe manual testing karne ki zaroorat nahi."**
+    - **Actually, aisa nahi hai...** Live Task sirf ek background assistant hai jo tumhari manual testing ko supplement karta hai. Ye automated scan chala ke common vulnerabilities dhundh sakta hai, lekin complex business logic ke liye manual testing zaroori hai.
+- **"Log sochte hain ki... Live Task sirf Crawl karta hai, Audit nahi."**
+    - **Actually, aisa nahi hai...** Live task mein tum scan configuration select karte ho. Agar tumne "Crawl and Audit" wali config di, to wo dono karega. Agar sirf "Crawl only" di, to sirf crawl karega.
+
+## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
+- **Scenario:** Ek bug bounty hunter ek large site test kar raha tha. Wo manually site ke har feature ko explore kar raha tha – signup, login, profile update, product search, etc.
+- **How they used it:** Usne ek Live Task banaya jisme tool scope = "Proxy" aur scan configuration = "Crawl and Audit - Fast" rakha. Jab bhi wo manually kisi naye page par jaata (proxy se), Burp background mein turant us page ko scan karna shuru kar deta.
+- **Result:** Jab wo manual testing complete kar raha tha, tabhi background scan ne ek **Blind SQL Injection** report kar di jo uske manual testing ke dauran discover nahi hui thi. Time bacha aur vulnerability bhi mil gayi.
+
+## 🎨 12. Visual Diagram (ASCII Art):
+````
+[Manual Testing]
+    | (via Browser)
+    v
+[Burp Proxy]  <------------------+
+    |                           |
+    | (Traffic)                  | (Live Task monitors)
+    v                           |
+[Live Task Engine] -------------+
+    | (Automated Scan)
+    v
+[New Vulnerabilities Found] --> [Dashboard Report]
+````
+
+## 🛠️ 13. Best Practices (Pro Tips):
+- **Tip 1 (Use Specific Tool Scope):** Agar tum sirf Proxy se kaam kar rahe ho to sirf Proxy tick karo. Isse unnecessary scans nahi honge.
+- **Tip 2 (Monitor Resource Usage):** Live Task bhi resources use karta hai. Agar tumhara system slow ho raha hai, to Live Task ko pause kar do ya uski speed kam kar do (Resource Pool se).
+- **Tip 3 (Combine with Scope):** Live Task ke settings mein scope bhi set kar sakte ho (jaise sirf in-scope items ko scan karo). Isse unwanted domains scan hone se bachoge.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
+- **Scenario 1 (Live Task bhoolna):** Tumne manual testing complete kiya aur report bhej di ki koi vulnerability nahi hai. Lekin tum bhool gaye ki tumne ek critical endpoint manually explore kiya tha jiska background scan nahi hua. Baad mein hacker ne wahi endpoint hack kar liya. Tumaari reputation khatam.
+- **Scenario 2 (Wrong Tool Scope):** Tumne Live Task mein "All tools" tick kiya. Tum Intruder mein kuch brute-force testing kar rahe the. Live Task ne un requests ko bhi scan karna shuru kar diya, jisse load double ho gaya aur target server slow ho gaya.
+
+## ❓ 15. FAQ (Interview Questions):
+- **Q1: Live Task aur New Scan mein kya antar hai?**
+    - **A1:** New Scan ek baar ka manual process hai. Live Task background mein continuously chalta hai aur manual testing ke dauran naye discover hue content ko automatically scan karta hai.
+- **Q2: Tum Live Task mein Tool Scope kyun set karte ho?**
+    - **A2:** Taaki sirf relevant tools ke traffic ko monitor kiya jaye aur unnecessary scans se bacha ja sake.
+- **Q3: Kya Live Task ko pause kar sakte hain?**
+    - **A3:** Haan, Dashboard mein jaa kar Live Task ke saamne pause button hota hai. Use click karo.
+- **Q4: Live Task se kya fayda hai manual testing mein?**
+    - **A4:** Isse time bachta hai aur koi bhi naya discovered endpoint background mein scan ho jata hai, jisse vulnerability miss hone ka chance kam ho jata hai.
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
+"Live Task background ka hero, jo bhi naya mile, usko scan kare bina dero."
+
+---
+
+## Topic 5.5: Target Tab - Site Maps
+
+## 🎯 1. Title / Topic: Target Tab aur Site Maps (Website Ka Naksha)
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Socho tum kisi **sheher (city) ka map** bana rahe ho.
+- **Target Tab:** Ye tumhari **navigation app** hai (jaise Google Maps). Isme tum dekhte ho ki tum kis sheher mein ho, kaunsi galiyan (directories) hain, kaun se makaan (pages) hain.
+- **Site Map:** Ye sheher ka **actual map** hai. Isme tum dekhte ho:
+    - Har gali ka naam (URL structure)
+    - Har makaan ki photo (HTML, CSS, JS files)
+    - Makaan ka address number (status code 200 OK, 404 Not Found)
+    - Makaan mein kaun kaun se kaam ho rahe hain (GET/POST methods)
+- **Filter Option:** Tum map mein sirf "Lal rang ke makaan" (JS files) dekhna chahte ho. To filter lagaoge. Ye hai filter.
+
+## 📖 3. Technical Definition (Interview Answer):
+**Target Tab** Burp Suite ka central hub hai jo target application ke baare mein saari information ko organize karta hai. Iska main component hai **Site Map**.
+- **Site Map:** Left side panel mein ek tree structure hota hai jo saari crawled/spidered websites ko **hierarchical format** mein dikhata hai. Ye URLs, directories, files, parameters sab kuch include karta hai.
+- **Request/Response Details:** Jab tum site map mein kisi bhi URL par click karte ho, to right side panel mein us URL ke corresponding **request** (browser ne kya bheja) aur **response** (server ne kya wapas bheja) dikhta hai. Saath mein **method** (GET/POST) aur **status code** (200 OK, 404 Not Found, 302 Redirect) bhi dikhte hain.
+- **Filter Option:** Site map ke top par ek **filter bar** hota hai. Yahan tum status code, MIME type (HTML, JS, CSS), folder, ya search term ke hisaab se filter laga sakte ho. Jaise sirf "JavaScript files" dikhao.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+- **Problem:** Tum ek website par kaam kar rahe ho. Tumne spider chalaaya, manual browsing ki, kuch requests intercept ki. Ab tumhare paas **hundreds of URLs** ka data hai. Tumhe samajh nahi aa raha ki kis URL par kya hai. Kis URL ne 404 diya? Kis URL mein POST method use hua? Kaun si JS files load hui?
+- **Solution (Site Map):** Site Map tumhe **visual representation** deta hai. Tum ek glance mein dekh sakte ho ki site ka structure kya hai, kaun se directories hain, kaun si files hain.
+- **Solution (Filter):** Tum filter laga ke sirf wahi URLs dikha sakte ho jo tumhe chahiye. Jaise sirf "404" status wale URLs dikhao (missing pages dhundhne ke liye) ya sirf "JS" files dikhao.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+- **Location:** Burp Suite ke top tabs mein **"Target"** tab par click karo.
+- **Appearance:**
+    - **Left Side (Site Map):** Ek tree structure dikhega jisme root pe domain name hoga (e.g., `example.com`). Uske neeche expandable folders honge (`/`, `/admin`, `/api`, `/assets`). Aur unke andar files (`index.html`, `style.css`, `script.js`, `login.php`). Saare URLs yahan organize hain.
+    - **Right Side (Details):** Jab tum left side se koi URL select karte ho, to right side mein do tabs hote hain:
+        - **Request:** Browser ne server ko kya bheja.
+        - **Response:** Server ne kya wapas bheja.
+    - **Top (Filter Bar):** Ek search box jaisa area hoga jisme filter options hain. Jaise "Filter by MIME type" ka dropdown (HTML, CSS, JS, etc.) aur "Filter by status code" ka checkbox (2xx, 3xx, 4xx, 5xx).
+
+## ⚙️ 6. Under the Hood (Technical Working):
+1.  **Data Collection:** Jab bhi tum kisi bhi tool se (Proxy, Spider, Scanner) kisi URL ka request/response handle karte ho, Burp automatically us information ko Target tab ke Site Map mein add kar deta hai.
+2.  **Tree Building:** Burp URLs ko parse karta hai aur unhe tree structure mein organize karta hai. Jaise `https://example.com/admin/users/edit` ko tree mein `/admin` ke andar `/users` ke andar `/edit` file ki tarah dikhata hai.
+3.  **Metadata Storage:** Har URL ke saath associated metadata store hota hai: method (GET/POST), status code (200, 404), MIME type (HTML, JS), response length, etc.
+4.  **Filtering:** Jab tum filter apply karte ho, to Burp sirf unhi URLs ko display karta hai jo filter criteria se match karte hain. Baaki URLs hide ho jate hain, lekin delete nahi hote.
+
+## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
+
+**Step 1: Target Tab kholo**
+```text
+Burp Suite mein "Target" tab par CLICK karo.
+```
+**Expected Screen:** Left side site map, right side empty (jab tak koi URL select nahi kiya).
+
+**Step 2: Site map browse karo**
+```text
+Left side tree structure mein kisi domain ke aage ">" ya "+" arrow par click karo.
+Folders expand honge. Kisi bhi file par CLICK karo.
+```
+**Expected Screen:**
+- Left side: URL highlighted ho jayega.
+- Right side: "Request" tab mein browser ki original request dikhegi. "Response" tab mein server ka raw response dikhega.
+
+**Step 3: Status code dekho**
+```text
+Site map mein columns hote hain. Tumhe "Status" ka column dikhega.
+Yahan har URL ke saath 200, 404, 302 jaise numbers dikhenge.
+```
+**Expected Screen:** Jaise `GET /index.html` ke saath `200` dikhega (OK). `GET /oldpage.php` ke saath `404` dikhega (Not Found).
+
+**Step 4: Filter laga ke sirf JS files dekho**
+```text
+Site map ke top par filter bar mein "Filter by MIME type" ka dropdown hoga.
+Dropdown mein se "JavaScript" select karo. (Ya sirf "JS" checkbox tick karo)
+```
+**Expected Screen:** Ab site map mein sirf `.js` files (JavaScript files) dikhengi. Saari HTML, CSS files hide ho jayengi. Filter bar ke paas ek "Filter applied" ka message bhi aa sakta hai.
+
+**Step 5: Filter hatao**
+```text
+Filter bar ke right side mein ek "X" ya "Reset" button hoga. Use click karo.
+Ya filter dropdown se "All" select karo.
+```
+**Expected Screen:** Saari files wapas dikhni shuru ho jayengi.
+
+## ⚖️ 8. Comparison (Ye vs Woh):
+| Feature | **Site Map (Target Tab)** | **HTTP History (Proxy Tab)** |
+| :--- | :--- | :--- |
+| **Organization** | Tree structure (hierarchical) jaise folders/files. | Flat list (chronological) jaise table. |
+| **View** | Website ka structure samajhne ke liye. | Real-time traffic flow dekhne ke liye. |
+| **Data Source** | Saare tools ka aggregate data (Proxy, Spider, Scanner). | Sirf Proxy se aaya traffic. |
+| **Use Case** | Site ka map banana, resources identify karna. | Recent requests track karna, sequence samajhna. |
+
+## 🚫 9. Common Mistakes (Beginner Traps):
+- **Mistake 1: Site map aur HTTP history ko confuse karna.**
+    - **Scenario:** Tum site map mein request dhundh rahe ho jo tumne abhi abhi bheji thi, lekin dikh nahi rahi. Tum ghabra gaye.
+    - **Fix:** Site map organized hai, recent history nahi. Recent requests ke liye **Proxy → HTTP History** mein jao. Site map overall picture hai.
+- **Mistake 2: Filter lagana bhool jana.**
+    - **Scenario:** Tumhe sirf 404 pages dekhne hain. Tum site map mein hazaaron URLs scroll kar rahe ho. Time waste.
+    - **Fix:** Filter bar mein "Status code" ke hisaab se filter lagao. Sirf 4xx select karo. Sirf 404 wale dikhenge.
+- **Mistake 3: Response mein raw data dekh ke dar jana.**
+    - **Scenario:** Tumne response tab khola to saara HTML code dikha. Samajh nahi aaya.
+    - **Fix:** Response tab ke neeche "Render" tab hota hai. Use click karo to browser ki tarah rendered page dikhega.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
+- **"Log sochte hain ki... Site map mein jo URLs dikhte hain, wahi target ki poori site hai."**
+    - **Actually, aisa nahi hai...** Site map mein sirf wahi URLs dikhte hain jinse Burp ne kabhi interaction ki hai (ya spider kiya hai). Ho sakta hai ki site mein aur bhi hidden pages hon jo Burp tak nahi pahunche. Isliye content discovery aur manual exploration zaroori hai.
+- **"Log sochte hain ki... Site map mein kuch delete kar do to wo site se hat jayega."**
+    - **Actually, aisa nahi hai...** Site map sirf Burp ka local record hai. Yahan se kuch delete karne se actual website par koi asar nahi hota. Sirf tumhara view clear hota hai.
+
+## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
+- **Scenario:** Ek pentester ne ek site ka spider kiya. Use lagaa ki site mein bahut saari files hain. Use dekhna tha ki kaun si directories interesting hain aur kaun si files 404 de rahi hain (missing pages jo shayad pehle exist karti thi).
+- **How they used it:** Usne Target → Site Map khola. Filter bar mein "Status code" → "4xx" select kiya. Turant saari 404 wali URLs list ho gayi. Usne notice kiya ki `/admin/old-panel.php` 404 de raha hai. Usne `/admin/` directory check ki, wahan `/admin/new-panel.php` mila jo vulnerable tha.
+- **Result:** 404 filter ne uski bahut time bachaya aur ek potentially vulnerable admin panel discover karne mein madad ki.
+
+## 🎨 12. Visual Diagram (ASCII Art):
+````
+[Target Tab]
+    |
+    +-- [Site Map (Tree View)]
+    |       |
+    |       +-- example.com
+    |           |
+    |           +-- / (root)
+    |           |   +-- index.html (200, HTML)
+    |           |   +-- style.css (200, CSS)
+    |           |   +-- script.js (200, JS)
+    |           |
+    |           +-- /admin
+    |           |   +-- login.php (200, HTML)
+    |           |   +-- old.php (404, HTML)
+    |           |
+    |           +-- /api
+    |               +-- users (200, JSON)
+    |
+    +-- [Filter Bar] (e.g., MIME=JS)
+    |
+    +-- [Request/Response Pane]
+        (Selected URL ka detail)
+````
+
+## 🛠️ 13. Best Practices (Pro Tips):
+- **Tip 1 (Use Filter Heavily):** Filter tumhara best friend hai. Sirf 2xx (success) dekho to working pages milein. Sirf 4xx (client error) dekho to broken links milein. Sirf JS dekho to client-side code mile.
+- **Tip 2 (Comment Interesting URLs):** Site map mein kisi URL par right-click karo → "Add Comment". Jaise "ye parameter vulnerable lag raha hai" likh do. Baad mein yaad rahega.
+- **Tip 3 (Compare Site Maps):** Agar tum site ka new version test kar rahe ho, to purane scan ki site map export karo, naye se compare karo ki kya change hua.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
+- **Scenario 1 (Site Map ignore karna):** Tum spider chala kar seedha Intruder mein chale gaye. Site map nahi dekha. Baad mein pata chala ki tumne ek important directory (`/api/v2`) miss kar diya tha, jahan vulnerabilities thi.
+- **Scenario 2 (Filter galat lagana):** Tum filter laga ke sirf HTML files dekhe. Socha ki JS files hain hi nahi. Lekin asli mein JS files thi, lekin tumne filter ki wajah se nahi dekhi. Unmein hidden endpoints chhupe the jo tum miss kar gaye.
+
+## ❓ 15. FAQ (Interview Questions):
+- **Q1: Target Tab mein Site Map kya hai?**
+    - **A1:** Website ka ek hierarchical map jo saare discovered URLs ko tree structure mein dikhata hai.
+- **Q2: Site Map mein filter kaise use karte ho?**
+    - **A2:** Filter bar mein status code, MIME type, ya search term ke hisaab se filter laga kar sirf relevant URLs dekh sakte hain.
+- **Q3: Site Map aur HTTP History mein antar batao.**
+    - **A3:** Site Map structure dikhata hai (website ka naksha), HTTP History time ke hisaab se traffic dikhata hai (CCTV footage).
+- **Q4: Tum site map mein kisi URL par click karoge to kya dikhega?**
+    - **A4:** Right side mein us URL ka raw HTTP request aur response dikhega.
+- **Q5: Site Map mein "Status Code 404" ka kya matlab hai?**
+    - **A5:** Matlab server par wo page nahi mila. Ye broken link hai. Kabhi-kabhi ye bata sakta hai ki pehle tha ab nahi hai, jo interesting ho sakta hai.
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
+"Target tab ka site map, website ka naksha, filter laga ke dekho, mile hidden raaz sa."
+
+---
+
+## Topic 5.6: Scope & Issue Definition
+
+## 🎯 1. Title / Topic: Scope Setting aur Issue Definition
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Socho tum ek **detective** ho jo ek specific case (e.g., `demo.testfire.net` bank) investigate kar raha ho.
+- **Scope:** Tum apni investigation ki **boundaries** set karte ho. Tum decide karte ho ki "Mujhe sirf is bank ke andar ki baatein investigate karni hain. Bank ke bahar ki duniya (jaise Google, Facebook) se koi lena-dena nahi." Iska matlab tumne `demo.testfire.net` ko **include** kiya. Aur agar bank ke andar bhi koi **vault** hai jahan tumhe jaane ki permission nahi, to tum use **exclude** kar doge.
+- **Right-Click Options:** Jab tum kisi bhi document (request) par right-click karte ho, to tumhe options milte hain jaise "Is document ko Repeater mein bhejo" (dubara check karne ke liye) ya "Intruder mein bhejo" (brute-force ke liye). Ye shortcuts hain.
+- **Issue Definition:** Ye ek **encyclopedia** hai jisme har type ke security issue (vulnerability) ki detail mein definition, cause, aur remediation (solution) likhi hoti hai. Jaise "SQL Injection kya hai? Kaise hota hai? Isse kaise theek karein?".
+
+## 📖 3. Technical Definition (Interview Answer):
+- **Scope (Target Tab):** Scope ka matlab hai **current testing project ki boundaries define karna**. Tum Target tab mein kisi bhi host ya URL par right-click karke "Add to scope" kar sakte ho. Scope set karne se tum Burp ko bata dete ho ki kis site par kaam karna hai aur kis par nahi. Ye saare tools (Proxy, Spider, Scanner) ke behavior ko affect karta hai.
+    - **Include in scope:** Jis URL ya domain par attack/test karna hai.
+    - **Exclude from scope:** Jis directory ya URL ko test se bahar rakhna hai (e.g., logout links, third-party domains).
+- **Right-Click Options (Send to...):** Target tab ke site map mein kisi bhi URL/request par right-click karne se ek context menu khulta hai jisme tum use **Repeater, Intruder, Sequencer, Comparer** jaise tools mein bhej sakte ho for further manual testing.
+- **Issue Definition:** Target tab ke andar ek sub-tab hota hai **"Issue definition"** . Ye Burp Suite ka built-in vulnerability reference library hai. Yahan tum kisi bhi vulnerability ke baare mein padh sakte ho, uski severity, reliability, aur remediation ke baare mein jaankari le sakte ho.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+- **Problem (No Scope):** Agar tum scope define nahi karte, to Burp har us URL ko process karega jo use milega, chahe wo tumhari target site ho ya nahi. Isse tum galti se kisi aur ki site scan kar sakte ho (legal issue) aur tumhara system bhi slow ho sakta hai.
+- **Solution (Scope):** Scope define karke tum Burp ko focus karte ho. Sirf in-scope items ko spider karo, sirf in-scope items ko intercept karo, etc.
+- **Problem (Manual Workflow):** Tum site map mein koi interesting request dekh rahe ho. Use Intruder mein bhejne ke liye turant wahan jaana padta hai.
+- **Solution (Right-Click):** Right-click → Send to Intruder se request ek click mein Intruder tab mein copy ho jati hai. Time bachta hai.
+- **Problem (Unclear Vulnerability):** Scanner ne koi vulnerability report ki, lekin tumhe samajh nahi aa raha ki ye vulnerability asli mein kya hai aur isse kaise theek karein.
+- **Solution (Issue Definition):** Issue Definition tab mein jaakar us vulnerability ke baare mein detail mein padho. Samjho ki kya problem hai aur client ko kya remediation recommend karni hai.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+- **Location:** **Target** tab par jao.
+- **Appearance:**
+    - **Site Map:** Left side tree structure.
+    - **Right-Click:** Kisi bhi URL par right-click karo to menu dikhega:
+        ```
+        Send to Repeater    (Ctrl+R)
+        Send to Intruder    (Ctrl+I)
+        Send to Sequencer   (Ctrl+S)
+        Send to Comparer    (Ctrl+C)
+        Add to scope
+        Remove from scope
+        ...
+        ```
+    - **Scope Settings:** Target tab ke andar ek sub-tab hota hai **"Scope"** . Yahan tum manually bhi URLs add/remove kar sakte ho.
+    - **Issue Definition:** Target tab ke andar ek aur sub-tab hota hai **"Issue definitions"** . Yahan ek list hogi vulnerabilities ki (e.g., SQL Injection, XSS, Path Traversal). Kisi par click karo to definition dikhegi.
+
+## ⚙️ 6. Under the Hood (Technical Working):
+1.  **Scope Working:**
+    - Jab tum kisi URL ko "Add to scope" karte ho, to Burp us URL ko apni internal scope list mein add kar deta hai.
+    - Ab har tool (Proxy, Spider, Scanner) jab bhi koi request process karta hai, to pehle check karta hai ki ye request in-scope hai ya nahi.
+    - Proxy mein tum "Intercept in-scope only" rule laga sakte ho.
+    - Spider mein tum "Scope" option tick kar sakte ho taaki wo sirf in-scope URLs follow kare.
+
+2.  **Right-Click Working:**
+    - Jab tum "Send to Intruder" click karte ho, to Burp current request ka raw format copy karta hai aur Intruder tab ke Positions section mein paste kar deta hai.
+
+3.  **Issue Definition Working:**
+    - Ye ek static HTML page collection hai jo Burp ke saath install aati hai. Jab tum kisi issue par click karte ho, to Burp uss issue ka pre-written documentation display karta hai.
+
+## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
+
+**Part A: Scope Add Karna (Site Map se)**
+
+**Step 1: Target Tab mein site map kholo**
+```text
+Target → Site Map mein jao.
+Kisi domain ke aage arrow click karke expand karo.
+Kisi bhi URL ko SELECT karo (e.g., http://demo.testfire.net).
+```
+**Step 2: Right-click karo**
+```text
+Selected URL par RIGHT-CLICK karo.
+Menu khulega.
+```
+**Step 3: "Add to scope" select karo**
+```text
+Menu mein "Add to scope" par CLICK karo.
+```
+**Expected Screen:** Ek confirmation dialog aa sakta hai ki "Is URL ko scope mein add kar rahe ho?" "Yes" karo.
+Ab wo URL scope mein add ho gaya.
+
+**Step 4: Scope verify karo**
+```text
+Target tab ke andar "Scope" sub-tab par CLICK karo.
+```
+**Expected Screen:** Yahan tumhe list dikhegi ki kaun se URLs scope mein hain. Tumhara `http://demo.testfire.net` yahan hona chahiye.
+
+**Part B: Right-Click se Request Intruder mein Bhejna**
+
+**Step 1: Site map mein koi request select karo**
+```text
+Site map mein kisi bhi URL par CLICK karo (e.g., /login.php).
+```
+**Step 2: Right-click → Send to Intruder**
+```text
+Right-click karo.
+Menu mein "Send to Intruder" par CLICK karo. (Shortcut Ctrl+I)
+```
+**Step 3: Intruder tab check karo**
+```text
+Ab Intruder tab par CLICK karo.
+```
+**Expected Screen:** Intruder ke "Positions" sub-tab mein tumhari request load ho chuki hogi, positions ke saath.
+
+**Part C: Issue Definition Padhna**
+
+**Step 1: Target → Issue definitions mein jao**
+```text
+Target tab mein "Issue definitions" sub-tab par CLICK karo.
+```
+**Expected Screen:** Left side mein vulnerabilities ki list. Right side mein introduction.
+
+**Step 2: Koi issue select karo**
+```text
+Left side list mein "SQL Injection" par CLICK karo.
+```
+**Expected Screen:** Right side mein SQL Injection ki detail load ho jayegi:
+- Definition: Kya hai.
+- Cause: Kyun hota hai.
+- Remediation: Kaise theek karein.
+- References: Aur padhne ke liye links.
+
+## ⚖️ 8. Comparison (Ye vs Woh):
+| Feature | **Scope (Include)** | **Scope (Exclude)** |
+| :--- | :--- | :--- |
+| **Kaam** | Batata hai ki test kahan karna hai. | Batata hai ki test kahan nahi karna hai. |
+| **Effect on Proxy** | "Intercept in-scope only" rule se sirf in-scope requests rok sakte ho. | Out-of-scope requests ko auto-forward karo. |
+| **Effect on Spider** | Sirf in-scope URLs ko follow karega. | Exclude URLs ko skip karega. |
+
+## 🚫 9. Common Mistakes (Beginner Traps):
+- **Mistake 1: Sirf root domain scope mein daala, subdomains nahi.**
+    - **Scenario:** Tumne `example.com` scope mein daala. Site ne `api.example.com` use kiya. Burp ne `api.example.com` ko out-of-scope samajh kar ignore kar diya. Tum API vulnerabilities miss kar gaye.
+    - **Fix:** Agar subdomains bhi test karne hain to `*.example.com` ya `https://example.com` ke saath `https://api.example.com` bhi scope mein daalo.
+- **Mistake 2: Exclude list mein logout daalna bhoolna.**
+    - **Scenario:** Scope mein `example.com` daala. Spider ne `example.com/logout` follow kiya aur session khatam kar diya. Baaki ka spider fail.
+    - **Fix:** Logout, delete account jaise sensitive URLs ko Exclude list mein daalo.
+- **Mistake 3: Issue Definition ko ignore karna.**
+    - **Scenario:** Scanner ne "Reflected XSS" report kiya. Tumhe pata nahi tha ki ye kya hai. Tumne client ko bata diya "XSS hai". Client ne poocha "Isse kaise theek karein?" Tum jawab nahi de paye.
+    - **Fix:** Issue Definition padho, samjho, aur client ko proper remediation do.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
+- **"Log sochte hain ki... Scope set karne se saari requests block ho jati hain jo out-of-scope hain."**
+    - **Actually, aisa nahi hai...** Scope set karne se automatically kuch block nahi hota. Tumhe tools mein batana padta hai ki scope kaise use karna hai. Jaise Proxy mein tum "Intercept in-scope only" rule laga sakte ho. Scope sirf ek boundary hai, enforcement alag se karni padti hai.
+- **"Log sochte hain ki... Issue Definition mein jo likha hai, wahi final hai."**
+    - **Actually, aisa nahi hai...** Issue Definition Burp ki understanding hai. Ye achhi reference hai, lekin actual vulnerability ke context ke hisaab se tumhe apne findings ko customize karna padta hai.
+
+## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
+- **Scenario (Scope):** Ek pentester ko `https://example.com` test karna tha, lekin site bahut saari third-party CDNs use kar rahi thi (`cdn.example-cdn.com`). Usne scope mein sirf `https://example.com` daala. Spider sirf in-scope URLs follow kiya, third-party traffic ignore hui. Scan fast hua aur out-of-scope domains par galti se request nahi gayi.
+- **Scenario (Right-Click):** Site map mein usne ek interesting POST request dekhi `/api/update-profile`. Usne right-click kiya, Send to Repeater kiya, aur manually payloads try kiye. Ek vulnerability mil gayi.
+- **Scenario (Issue Definition):** Scanner ne "Blind SQL Injection" report ki. Wo Issue Definition mein gaya, uski remediation padhi, aur client ko bataya ki "Prepared statements use karo". Client impressed.
+
+## 🎨 12. Visual Diagram (ASCII Art):
+````
+[Target Tab]
+    |
+    +-- [Site Map]
+    |       |
+    |       +-- example.com (Right-Click)
+    |               |
+    |               +-- Add to Scope
+    |               +-- Send to Repeater
+    |               +-- Send to Intruder
+    |
+    +-- [Scope Sub-Tab]
+    |       |
+    |       +-- Include: https://example.com/
+    |       +-- Exclude: https://example.com/logout
+    |
+    +-- [Issue Definitions Sub-Tab]
+            |
+            +-- SQL Injection: [Definition, Remediation]
+            +-- XSS: [Definition, Remediation]
+````
+
+## 🛠️ 13. Best Practices (Pro Tips):
+- **Tip 1 (Use Scope in Proxy):** Proxy → Options → "Intercept Client Requests" mein jaake ek rule banao "In-scope items only" taaki sirf target site ki requests ruke, baaki auto-forward ho jaye.
+- **Tip 2 (Color Code Scope):** Scope mein URLs ka color set kar sakte ho. Jaise in-scope ko green, out-of-scope ko red. Site map mein ye colors dikhenge, jisse pahchan asaan hogi.
+- **Tip 3 (Bookmark Issue Definitions):** Jo vulnerabilities tumhe commonly milti hain, unki Issue Definition bookmark kar lo ya notes bana lo. Interview aur reporting mein kaam aayega.
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
+- **Scenario 1 (Scope galat):** Tumne `example.com` ko scope mein daala. Site ne request bheji `https://accounts.google.com/o/oauth2/auth` (Google login). Ye out-of-scope tha, lekin tumne proxy mein "intercept all" rakha hua tha. Tum galti se Google ki request rok ke modify kar diye. Legal trouble.
+- **Scenario 2 (Right-Click na aana):** Tum site map mein ho aur Intruder mein bhejne ke liye tum manually request copy karke Intruder mein paste kar rahe ho. Time waste.
+- **Scenario 3 (Issue Definition na padhna):** Tumne client ko galat remediation bata di (jaise "SQL Injection ke liye input encode karo"), jabki sahi remediation "Parameterized queries" thi. Client ka code fir bhi vulnerable raha.
+
+## ❓ 15. FAQ (Interview Questions):
+- **Q1: Burp Suite mein scope kya hai aur kyun use karte hain?**
+    - **A1:** Scope target application ki boundary define karta hai. Isse hum focus rakhte hain aur out-of-scope domains par galti se request bhejne se bachte hain.
+- **Q2: Tum Target tab ke site map mein kisi request par right-click karke kya kar sakte ho?**
+    - **A2:** Use Repeater, Intruder, Sequencer, Comparer mein bhej sakte hain, aur scope mein add/remove kar sakte hain.
+- **Q3: Issue Definition tab ka kya use hai?**
+    - **A3:** Ye Burp ki built-in vulnerability encyclopedia hai. Yahan kisi bvulnerability ki definition, cause, aur remediation padh sakte hain.
+- **Q4: Scope mein Include aur Exclude mein kya antar hai?**
+    - **A4:** Include batata hai ki test kahan karna hai, Exclude batata hai ki test kahan nahi karna hai. Exclude ko Include par precedence hoti hai.
+- **Q5: Tum ek complex site mein scope kaise manage karoge jisme bahut saare subdomains hain?**
+    - **A5:** Main `*.example.com` wildcard use karunga ya saare relevant subdomains manually include karunga. Aur sensitive endpoints (jaise logout) ko exclude list mein daalunga.
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
+"Scope se boundary, right-click se send, issue definition se gyaan, teeno se kaam band."
+
+---
+
+## Topic 5.7: Content Discovery (Burp Pro)
+
+## 🎯 1. Title / Topic: Content Discovery (Hidden Files Dhundo)
+
+## 🐣 2. Samjhane ke liye (Simple Analogy):
+Socho tumhe kisi **purane school building** mein chhupi hui cheezein dhundhni hain.
+- **Crawling/Spidering:** Tum school ke **andar ghumte ho**. Jo darwaze khule hain, unmein jaate ho. Jo links (raste) tumhe dikh rahe hain (jaise sign boards), un par chale jaate ho. Jo dikh raha hai, wahi milta hai. Ye hai **Crawling**.
+- **Content Discovery:** Tumhare paas ek **purani school ki map (list)** hai jisme likha hai: "Basement ka secret room", "Roof par water tank ke peeche", "Library ki chhupi hui almari". Tum in cheezo ko **deliberately dhundhne** nikalte ho, chahe wahan jaane ka sign board ho ya na ho. Ye hai **Content Discovery** – hidden files/folders dhundhna.
+
+## 📖 3. Technical Definition (Interview Answer):
+**Content Discovery** Burp Suite Professional ka ek feature hai jo **hidden directories aur files** ko dhundhne ke liye ek automated trial scan chalaata hai. Ye kaam karne ke liye ye ek **pre-defined wordlist** (common files aur directories ki list) use karta hai aur unhe target URL ke saath join karta hai. Jaise:
+- Wordlist mein "admin" hai → try karo `https://example.com/admin`
+- Wordlist mein "backup.zip" hai → try karo `https://example.com/backup.zip`
+- Wordlist mein "phpinfo.php" hai → try karo `https://example.com/phpinfo.php`
+
+Jo bhi request successful (e.g., 200 OK) hoti hai, use content ke roop mein discover kar liya jaata hai.
+
+**Difference (Crawling vs Content Discovery):**
+- **Crawling/Spidering:** Sirf unhi links ko follow karta hai jo page par pehle se **maujood** hain (jaise `<a href="...">` tags).
+- **Content Discovery:** Hidden content ko dhundhne ke liye **potential files aur folders ki list** use karta hai jo page par mention nahi hain.
+
+## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+- **Problem:** Crawling se tum sirf wahi pages dekhoge jo website ne intentionally publicly accessible rakhe hain. Lekin hacker ki nazar un **hidden pages** par hoti hai jo developer ne accidentally chhod diye – jaise `/backup/`, `/old/`, `/admin-panel/`, `.git/`, `config.php.bak`. Ye pages kisi link se connected nahi hote, isliye crawler unhe kabhi discover nahi kar payega.
+- **Solution:** Content Discovery **brute-force** ki tarah kaam karta hai. Ye common file/directory names ki list lekar har possible combination try karta hai. Isse woh hidden treasures mil jate hain jo crawler ki pahunch se bahar the.
+
+## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+- **Location:** Ye feature Burp Pro mein multiple jagah se accessible hai:
+    1.  **Target tab** mein kisi bhi directory par right-click → **"Engagement tools"** → **"Discover content"** .
+    2.  **Dashboard** mein **"New Scan"** wizard ke dauran bhi option milta hai.
+- **Appearance (Engagement Tools se):**
+    - Ek naya window khulega jiska naam hoga **"Content discovery"** .
+    - Isme kuch tabs honge:
+        - **Control:** Start, stop, pause buttons.
+        - **Site map:** Jo content discover hoga, wo yahan tree mein dikhega.
+        - **Config:** Yahan settings set kar sakte ho – wordlist, file extensions, threads, etc.
+        - **Output:** Live log of requests being made.
+
+## ⚙️ 6. Under the Hood (Technical Working):
+1.  **Wordlist Loading:** Tum content discovery start karte ho. Burp apni built-in wordlist load karta hai (ya tum custom de sakte ho). Is list mein common names hote hain: `admin`, `backup`, `test`, `old`, `temp`, `images`, `css`, `js`, `php`, `asp`, etc.
+2.  **Base URL:** Tumne jo base URL diya hai (e.g., `https://example.com/`), Burp uske saath wordlist ke har item ko join karta hai.
+3.  **Request Generation:** Har item ke liye ek HTTP request generate hoti hai:
+    - `GET /admin`
+    - `GET /backup`
+    - `GET /test`
+    - `GET /images`
+    - ...aur bhi hazaaron requests.
+4.  **Response Analysis:** Har request ka response aata hai. Burp status code check karta hai:
+    - `200 OK` → Mil gaya! Content discover hua.
+    - `301/302 Redirect` → Shayad mil gaya, redirect ho raha hai, bhi consider hota hai.
+    - `403 Forbidden` → Directory exist karti hai lekin access nahi, bhi useful information hai.
+    - `404 Not Found` → Nahi mila.
+5.  **Nested Discovery:** Agar koi directory mil jati hai (e.g., `/admin/`), to Burp us directory ke andar bhi content discovery kar sakta hai (recursive).
+6.  **Result Update:** Jo bhi successful responses aate hain, unhe "Site map" tab mein display kar diya jata hai.
+
+## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
+
+**Step 1: Content Discovery start karo**
+```text
+Target → Site Map mein jao.
+Kisi bhi directory par RIGHT-CLICK karo (e.g., https://example.com/).
+Menu mein "Engagement tools" → "Discover content" par CLICK karo.
+```
+**Expected Screen:** Ek naya "Content discovery" window khulega.
+
+**Step 2: Configurations set karo (Optional)**
+```text
+Window ke top par "Config" tab par CLICK karo.
+Yahan tum settings dekh sakte ho:
+- "File extensions": .php, .asp, .txt, .bak add kar sakte ho.
+- "Discover nested paths": Checkbox tick rakho (directory milne par andar bhi search karega).
+- "Number of threads": Kitni parallel requests bhejni hain. Default 5 achha hai.
+```
+Tumhe kuch change nahi karna to seedha "Control" tab par jao.
+
+**Step 3: Scan start karo**
+```text
+"Control" tab par CLICK karo.
+"Start" button par CLICK karo.
+```
+**Expected Screen:**
+- "Output" tab mein requests ki live stream dikhegi:
+    ```
+    GET /admin
+    GET /backup
+    GET /test
+    GET /images
+    GET /css
+    ...
+    ```
+- "Site map" tab mein dheere dheere naye URLs appear honge jo successful hain.
+
+**Step 4: Results dekho**
+```text
+Jab scan chal raha ho ya complete ho jaye, "Site map" tab par CLICK karo.
+```
+**Expected Screen:** Yahan tumhe tree structure mein naye discover hue URLs dikhenge, jaise:
+```
+https://example.com/
+    ├── admin/ (200 OK)
+    ├── backup.zip (200 OK)
+    ├── phpinfo.php (200 OK)
+    └── secret/ (403 Forbidden)
+```
+
+**Step 5: Scan stop/pause karo**
+```text
+"Control" tab mein "Stop" ya "Pause" button hai. Zaroorat padne par use karo.
+```
+
+## ⚖️ 8. Comparison (Ye vs Woh):
+| Feature | **Crawling/Spidering** | **Content Discovery** |
+| :--- | :--- | :--- |
+| **Method** | Page ke andar maujood links follow karna. | Common names ki wordlist se brute-force karna. |
+| **Discovery Type** | Known, linked content. | Hidden, unlinked content. |
+| **Speed** | Typically faster (kam requests). | Typically slower (bahut saari requests). |
+| **Use Case** | Site ka structure samajhna. | Backup files, admin panels, hidden directories dhundhna. |
+| **Analogy** | Sign boards follow karna. | Har darwaza khol kar dekhna. |
+
+## 🚫 9. Common Mistakes (Beginner Traps):
+- **Mistake 1: Threads bahut zyada rakhna.**
+    - **Scenario:** Tumne 50 threads set kar diye. Content discovery ne ek saath 50 requests bhejni shuru kar di. Server overwhelmed ho gaya aur slow ho gaya, ya tumhara IP block ho gaya.
+    - **Fix:** Threads kam rakho (5-10). Agar server slow lag raha hai, to aur kam karo.
+- **Mistake 2: File extensions add karna bhoolna.**
+    - **Scenario:** Tumne sirf directory names ki wordlist use ki. Site ne `backup.zip` rakha hua tha. Ye directory nahi, file hai. Isliye discovery nahi hua.
+    - **Fix:** Config mein common file extensions add karo: `.zip`, `.tar.gz`, `.bak`, `.old`, `.php`, `.asp`, `.txt`, `.sql`, `.json`.
+- **Mistake 3: Recursive discovery ka limit na lagana.**
+    - **Scenario:** Tumne `/admin/` discover kiya. Recursive discovery ne `/admin/` ke andar aur directories dhundhni shuru kar di. Wahan se `/admin/images/`, `/admin/css/`, etc. Ye kar sakta hai ki tumhari disk space aur time waste ho.
+    - **Fix:** Recursive depth limit set karo (e.g., 2 levels). Ya manually decide karo ki kaun si directory mein recursive karna hai.
+
+## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
+- **"Log sochte hain ki... Content discovery se website ki saari files mil jayengi."**
+    - **Actually, aisa nahi hai...** Content discovery sirf unhi files/folders ko dhundh sakta hai jo common wordlist mein hain. Agar kisi ka naam `my-super-secret-2023-backup.zip` hai, to shayad nahi milega, kyunki wo list mein nahi hai. Isliye custom wordlist (jaise SecLists) use karna better hai.
+- **"Log sochte hain ki... Content discovery crawler ka hi advanced version hai."**
+    - **Actually, aisa nahi hai...** Dono completely different techniques hain. Crawler links follow karta hai, content discovery names guess karta hai. Ek site ko pura cover karne ke liye dono ki zaroorat hoti hai.
+
+## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
+- **Scenario:** Ek bug bounty hunter ne ek target site test karni thi. Usne spider chalaaya, kuch interesting mila, lekin kuch khaas nahi.
+- **How they used it:** Usne Target tab mein right-click kiya aur "Discover content" run kiya. Use default wordlist aur file extensions di.
+- **Result:** Thodi der mein content discovery ne `/backups/` directory discover ki. Us directory mein `database_backup_2022.sql` file thi jisme usernames aur hashed passwords the. Ye ek **sensitive data exposure** vulnerability thi. Bounty $1500 mili. Agar sirf spider hota to ye kabhi nahi milta.
+
+## 🎨 12. Visual Diagram (ASCII Art):
+````
+[Content Discovery Start]
+    |
+    |--[Wordlist Load]--> [admin, backup, test, images, css, js, .zip, .bak, ...]
+    |
+    |--[Base URL: https://example.com/]
+    |
+    |--[Generate Requests]-->
+    |   GET /admin
+    |   GET /backup
+    |   GET /test
+    |   GET /images
+    |   GET /css
+    |   GET /admin.zip
+    |   GET /backup.zip
+    |   GET /config.php
+    |   ...
+    |
+    |--[Check Responses]-->
+    |   200 OK: /admin/ (Add to results)
+    |   200 OK: /backup.zip (Add to results)
+    |   403: /secret/ (Add as forbidden)
+    |   404: /test (Ignore)
+    |
+    |--[Recursive on /admin/]--> GET /admin/index.php, GET /admin/login, ...
+    |
+[Content Discovery Complete]
+````
+
+## 🛠️ 13. Best Practices (Pro Tips):
+- **Tip 1 (Use Good Wordlists):** Burp ki default wordlist achhi hai, lekin tum **custom wordlists** use kar sakte ho. GitHub par **SecLists** bahut famous hai. Usme har tarah ki list hai – directories, files, extensions, parameters, etc.
+- **Tip 2 (Filter Results):** Scan ke dauran ya baad mein, results mein `200 OK` wale sabse important hote hain. Phir `403` aur `302` bhi dekhne layak hote hain (existence indicate karte hain).
+- **Tip 3 (Combine with Crawler):** Pehle spider chalao site ka structure samajhne ke liye. Phir content discovery chalao un areas mein jahan tumhe hidden cheezein milne ki ummeed ho (jaise `/admin/`, `/backup/`, root directory).
+
+## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
+- **Scenario 1 (Content Discovery nahi kiya):** Tumne spider chalaaya, kuch nahi mila. Report di "No vulnerabilities". Baad mein hacker ne content discovery se `/backup.zip` nikal liya aur saara data chura liya. Client ne tumhe blame kiya.
+- **Scenario 2 (Too aggressive discovery):** Tumne 100 threads ke saath content discovery chala di. Server par itna load pad gaya ki wo crash ho gaya. Client ka production site down. Tum par case ho sakta hai.
+
+## ❓ 15. FAQ (Interview Questions):
+- **Q1: Burp Pro mein Content Discovery ka kya matlab hai?**
+    - **A1:** Ye hidden files aur directories ko dhundhne ka automated trial scan hai jo common names ki wordlist use karta hai.
+- **Q2: Content Discovery aur Crawling mein kya antar hai?**
+    - **A2:** Crawling page ke andar maujood links follow karta hai. Content Discovery un cheezo ko guess karta hai jo page par maujood nahi hain.
+- **Q3: Tum Content Discovery ke liye wordlist kahan se la sakte ho?**
+    - **A3:** Burp built-in list deta hai. Tum custom bhi use kar sakte ho, jaise GitHub ka SecLists.
+- **Q4: Content Discovery mein "threads" setting ka kya matlab hai?**
+    - **A4:** Threads batata hai ki ek saath kitni parallel requests bhejni hain. Zyada threads = fast scan, lekin server par load zyada.
+- **Q5: Tum 403 Forbidden response ko kyun important maanoge?**
+    - **A5:** Kyunki 403 ka matlab hai ki file/directory exist karti hai, lekin access nahi hai. Ye future attacks ke liye useful information ho sakti hai.
+
+## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
+"Content discovery, hidden ka pita, jo crawler ko na dikhe, use la ke dikhata."
+
+---
+
+**Bas, beta!** Ye raha **Module 5 ka complete notes** – 5.1 se 5.7 tak, saare topics ek saath, 16-point structure mein, Hinglish mein, bilkul waise jaise tune chaha tha.
+
+Koi aur module? **Module 6: Intruder?** **Module 7: Repeater?** Jo bolo, main haazir hoon! 💪
