@@ -1,31 +1,3 @@
-## **Module 4: Proxy Tab Deep Dive**
-
-*Proxy woh darwaza hai jisse saara traffic guzarta hai. Iska sahi istemal seekho.*
-
-### Topic 4.1: Proxy Sections
-- **Intercept:** Requests ko rokna aur modify karna.
-- **HTTP History:** Saari visited sites ka data.
-- **WebSockets History:** WebSocket messages.
-- **Options:** Listeners, Match/Replace, SSL pass through, etc.
-
-### Topic 4.2: Firefox Setup for Burp
-Firefox mein localhost traffic proxy nahi hota by default. Fix:
-1. `about:config` mein jao.
-2. Search `network.proxy.allow_hijacking_localhost`
-3. Double-click karke **True** kar do.
-
-### Topic 4.3: Match and Replace – On-the-fly Modification
-Ye feature bahut powerful hai. Aap traffic ko real-time badal sakte ho.
-- **Example:** User-Agent ko 'Mozilla' se 'Chrome' kar do.
-- **Use Case:** WAF bypass, header injection.
-
-### Topic 4.4: Advanced Proxy Settings
-- **Intercept Rules:** Aap rules set kar sakte hain ki sirf GET ya POST methods hi intercept hon.
-- **Response Modification:** Jaise input length limits ko remove karna.
-
-> **Pro-Tip:** Match/Replace se tum har request mein apna custom header bhi daal sakte ho, jaise `X-Forwarded-For: 127.0.0.1` – IP spoofing ke liye.
-
----
 
 ## **Module 5: Burp Suite Professional – Scanning & Live Tasks**
 
