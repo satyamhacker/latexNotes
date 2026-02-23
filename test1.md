@@ -14578,3 +14578,780 @@ Ek dialog box khulega jisme options honge:
 > **Report aisi banao ki CTO padh kar budget approve kare aur developer padh kar fix kar sake. Screenshots clear hon, steps reproducible hon.**
 
 ========================================================================================
+
+# Module 19: Custom BCheck Scripts – Complete Zero-to-Hero Notes
+
+**TechGuru** yahan hai! Ab hum seekhenge **BCheck Scripts** – Burp Professional ki scripting language jo tumhe apne custom scanner checks likhne ki power deti hai. Yeh module hai **19**, aur isme 4 topics hain. Main ek hi response mein saare topics cover karunga, bilkul **16-point structure** ke saath, har point ko **Hinglish** mein samjhaunga, aur **assume karunga ki tum ekdum beginner ho** (jaise 12 saal ka bachcha). Toh chai pee lo, aaram se baitho, aur duniya ka sabse easy BCheck tutorial shuru karte hain.
+
+---
+
+## Topic 19.1: What is BCheck?
+
+### 🎯 1. Title / Topic: **BCheck – Burp Ki Scripting Language**
+
+### 🐣 2. Samjhane ke liye (Simple Analogy):
+Maano tum ek **restaurant** mein chef ho. Restaurant ka **menu** fixed hai (jaise Burp ka default scanner). Lekin tumhara ek **special customer** aaya jise **doodh mein mirchi** wali dish chahiye, jo menu mein nahi hai. Toh tum kya karoge? Ek **chitthi (recipe)** likhoge jisme bataoge ki kaise ye dish banani hai – kaunsa masala, kitna time, etc. Yani tumne apni **custom recipe** bana di.  
+**BCheck** exactly yahi hai – tum Burp scanner ko **custom recipe** (script) likhkar dete ho ki "jab bhi kisi website par scan karna, ye special check bhi chalana". Toh scanner sirf default checks nahi, tumhari bhi checks chalayega.
+
+### 📖 3. Technical Definition (Interview Answer):
+**BCheck** Burp Suite Professional ki ek **domain-specific scripting language** hai jo pentesters ko **custom active/passive scan checks** banane ki suvidha deti hai. Ye scripts `.bcheck` extension waali files mein likhi jaati hain aur Burp ke scanner engine mein integrate ho jaati hain, jisse tum **application-specific logic**, **compliance checks**, aur **false positive reduction** ke liye apne checks bana sakte ho.
+
+**Breakdown:**
+- **Domain-specific scripting language** – matlab ye koi general purpose language nahi jaise Python, balki sirf ek specific kaam (web scanning) ke liye bani hai.
+- **Custom active/passive scan checks** – active checks woh hain jo requests bhejkar vulnerabilities dhundhti hain (jaise SQLi payload bhejna); passive checks sirf response ko dekhti hain bina request modify kiye.
+- **.bcheck files** – file extension, jaise `.txt` ya `.jpg`.
+- **Application-specific logic** – agar tumhe pata hai ki kis app mein ek special header vulnerable hai, toh uska check bana sakte ho.
+
+### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+**Problem:**  
+Burp ka built-in scanner bahut powerful hai, par wo **general purpose** hai. Har website ka alag logic hota hai. Maano ek website mein login parameter ka naam "user_name" nahi balki "txtUsr" hai aur usme SQLi hoti hai. Default scanner use dhundh sakta hai ya nahi, ho sakta hai miss kar de. Aur agar tumhe pata hai ki is site mein ek special header "X-Custom-Auth" vulnerable hai, toh default scanner wo check nahi karega.
+
+**Solution:**  
+BCheck tumhe **control** deta hai. Tum **exactly wahi check** likh sakte ho jo tumhe chahiye. Tum kaho ki "har request mein ye header add karo aur dekho ki response mein 'error' aata hai kya". Isse tumhara scanning **targeted** ho jata hai, jisse **time bachta hai** aur **important bugs nahi chhutte**.
+
+### 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+**Location:**  
+Burp Suite Professional mein top par ek **"Extensions"** tab hota hai. Uske andar **"BChecks"** sub-tab hota hai. Wahan tum apni .bcheck files load kar sakte ho.
+
+**Appearance:**  
+- **BChecks tab** open karoge to do pane dikhenge:
+  - Left side: **List of loaded BChecks** – jitni bhi .bcheck files load ki hain, unke naam.
+  - Right side: **Editor** – kisi bhi BCheck ko click karoge to uska code yahan dikhega aur tum edit kar sakte ho.
+- **Load button** – "Load" button hai jisse file system se .bcheck file select kar sakte ho.
+- **Enable/Disable checkbox** – har BCheck ke aage ek checkbox hai jisse tum use scan mein include kar sakte ho ya hata sakte ho.
+
+### ⚙️ 6. Under the Hood (Technical Working):
+1. Tum ek `.bcheck` file likhte ho jo BCheck syntax mein hoti hai.
+2. Burp mein us file ko **load** karte ho (Extensions → BChecks → Load).
+3. Jab tum koi **scan start** karte ho (active scan ya passive scan), Burp scanner har request/response ko in BChecks ke against check karta hai.
+4. Har BCheck ki **given** condition check hoti hai (jaise "given host", "given response", etc.). Agar condition match hoti hai, to BCheck ke andar likhe steps execute hote hain – jaise naya request bhejna, response check karna, issue report karna.
+5. Agar koi **issue** mile, to Burp ke **Issue Activity** panel mein wo vulnerability show hoti hai.
+
+**ASCII Diagram:**
+```
+[ Tum .bcheck file likho ]
+        |
+        v
+[ Burp mein load karo ]
+        |
+        v
+[ Scan start ]
+        |
+        v
+[ Scanner har request/response ke saath BCheck check karta hai ]
+        |
+        +--> Agar condition match hui to custom request bheji
+        |
+        +--> Response mein pattern mila to issue report
+```
+
+### 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
+
+**Step 1: Pehli .bcheck file banana**
+- Apne computer par ek folder banao: `C:\MyBChecks` (ya kahi bhi).
+- Notepad (ya koi text editor) kholo. Visual Studio Code better hai.
+
+**Step 2: Basic syntax likho**
+```text
+metadata:
+  language: v1-beta
+  name: "My First BCheck"
+  description: "This is a test check"
+  author: "TechGuru"
+```
+Ye **metadata** section hai – isme basic info dete ho. `language: v1-beta` matlab ye BCheck version 1-beta mein likhi gayi hai. (Burp automatically samajh jayega).
+
+**Step 3: File save karo**
+- File → Save As → `my_first.bcheck` (`.bcheck` extension dena zaroori hai).
+- Location: `C:\MyBChecks\my_first.bcheck`
+
+**Step 4: Burp mein load karo**
+- Burp Suite Professional kholo.
+- **Extensions** tab par jao (top mein).
+- **BChecks** sub-tab par jao.
+- **Load** button click karo.
+- Apni `my_first.bcheck` file select karo.
+- Ab left list mein "My First BCheck" dikhega. Uske aage checkbox tick hai, matlab enabled hai.
+
+**Step 5: Verify load hua ya nahi**
+- Right side editor mein tum code dekh sakte ho.
+- Agar koi syntax error hai to Burp error dikhayega. (Abhi error nahi aayega kyunki code mein kuch kaam nahi hai, sirf metadata hai).
+
+**Expected Screen:**
+```
+Extensions tab ke andar:
+[BChecks] [APIs] [Installed] ...
+Left panel:
+  ☑ My First BCheck
+Right panel:
+metadata:
+  language: v1-beta
+  name: "My First BCheck"
+  description: "This is a test check"
+  author: "TechGuru"
+```
+(Checkbox ticked hai, matlab enabled)
+
+**Step 6: Scan mein include karo**
+- Jab tum koi active scan chalaoge, to automatically ye BCheck bhi chalegi (agar enabled hai). Passive scan mein bhi chalegi.
+
+### ⚖️ 8. Comparison (Ye vs Woh):
+
+| Feature | BCheck Scripts | Burp Extensions (e.g., Python) |
+|---------|----------------|--------------------------------|
+| **Language** | BCheck (specialized) | Java, Python (via Jython), Ruby |
+| **Complexity** | Bahut simple, limited scope | Complex, full programming power |
+| **Performance** | Halka, integrated | Bhaari, alag process |
+| **Use case** | Quick custom scan checks | Full-fledged tools, UI changes |
+| **Learning curve** | 1-2 ghante | Hafton lag sakte hain |
+
+### 🚫 9. Common Mistakes (Beginner Traps):
+
+- **Mistake 1:** File extension `.bcheck` nahi dena.  
+  **Fix:** Hamesha `.bcheck` lagao. Agar `.txt` rakha to Burp load nahi karega.
+
+- **Mistake 2:** `language: v1-beta` line miss karna.  
+  **Fix:** Metadata mein ye line hona chahiye, warna Burp samjhega nahi.
+
+- **Mistake 3:** Check ko enable karna bhoolna.  
+  **Fix:** BChecks list mein checkbox tick hona chahiye.
+
+- **Mistake 4:** Bohot saare BChecks load karna aur sab enable rakhna, jisse scan slow ho.  
+  **Fix:** Sirf relevant checks enable rakho, baaki disable.
+
+### 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
+
+- **"Log sochte hain ki BCheck Python ki tarah hai aur complex programming karni padegi."**  
+  **Actually, aisa nahi hai.** BCheck ek **declarative** language hai – tum bas batate ho ki "kya check karna hai", "kaise check karna hai" nahi. Isme loops, variables thoda simple hain, par complex logic nahi likhni padti.
+
+- **"Kya BCheck sirf Professional mein kaam karta hai?"**  
+  **Haan.** BCheck sirf Burp Suite Professional mein available hai. Community Edition mein nahi hai.
+
+### 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
+
+**Scenario:**  
+Ek bug bounty program mein target website thi jo ek custom header `X-Debug` use karti thi. Agar ye header `true` set kiya jaye to response mein **stack trace** dikh jata tha, jisse sensitive info leak hoti thi. Default scanner ko is header ka pata nahi tha.
+
+**How they used it:**  
+Ek tester ne ek simple BCheck likhi:
+- Har request mein `X-Debug: true` header add karo.
+- Agar response mein "Exception" ya "Stack trace" aaye to report karo.
+
+**Result:**  
+Is check se **information disclosure** ka bug mila, jisse tester ko **$500** ka bounty mila.
+
+### 🎨 12. Visual Diagram (ASCII Art):
+```
++-------------------+      +-------------------+
+|  Tum BCheck likho |----->| Burp mein load    |
++-------------------+      +-------------------+
+                                   |
+                                   v
++-------------------+      +-------------------+
+| Scan shuru karo   |----->| Scanner har request|
++-------------------+      | ke saath BCheck    |
+                           | apply karta hai    |
+                           +-------------------+
+                                   |
+                                   v
++-------------------+      +-------------------+
+| Condition match?  |--No->| Kuch nahi karna   |
++-------------------+      +-------------------+
+        |
+       Yes
+        v
++-------------------+
+| Custom action     |
+| (request bhejna,  |
+| response check)   |
++-------------------+
+        |
+        v
++-------------------+
+| Issue mila?       |--Yes->| Report in Issues |
++-------------------+      +-------------------+
+        |
+       No
+        v
++-------------------+
+| End               |
++-------------------+
+```
+
+### 🛠️ 13. Best Practices (Pro Tips):
+
+- **Naming convention:** BCheck file ka naam meaningful rakho, jaise `sql_injection_id_param.bcheck`.
+- **Comments:** BCheck mein `#` se comments likh sakte ho. Use karo.
+- **Enable only needed:** Sirf wahi checks enable rakho jo current target ke liye relevant hain.
+- **Test locally:** Pehle kisi test site par BCheck try karo, phir live target par.
+- **Version control:** Saari BCheck files Git mein rakhna taaki team share kar sake.
+
+### ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
+
+- **Scenario 1:** Agar BCheck syntax galat hai to Burp load karte waqt error dega, aur check nahi chalega. Isse tumhara scan incomplete ho sakta hai, important bugs miss ho sakte hain.
+- **Scenario 2:** Agar BCheck bohot broad hai (jaise har request par 100 requests bhejna), to scan bahut slow ho jayega, ya target server par heavy load padega (DoS ho sakta hai). Isse tum banned ho sakte ho bug bounty mein.
+
+### ❓ 15. FAQ (Interview Questions):
+
+- **Q1:** BCheck kya hai?  
+  **A1:** Burp Suite Professional ki ek scripting language hai jo custom scan checks banane ke liye use hoti hai.
+
+- **Q2:** BCheck file extension kya hoti hai?  
+  **A2:** `.bcheck`
+
+- **Q3:** BCheck mein metadata section kyun zaroori hai?  
+  **A3:** Kyunki isse Burp ko pata chalta hai ki language version kya hai, check ka naam kya hai, author kaun hai, etc. Iske bina check load nahi hota.
+
+- **Q4:** Kya BCheck active aur passive dono tarah ke checks likh sakta hai?  
+  **A4:** Haan. Active checks ke liye `send request` use karte ho, passive ke liye `given response` se condition check karte ho.
+
+- **Q5:** BCheck aur Burp Extender mein kya antar hai?  
+  **A5:** BCheck simple, specific, aur integrated hai. Extender full programming flexibility deta hai par complex hai.
+
+### 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
+**"BCheck woh magic recipe hai jo tum Burp scanner ko dekar use tumhari marzi ka khas pakwan banane ko kehte ho."**
+
+---
+
+## Topic 19.2: Basic BCheck Structure
+
+### 🎯 1. Title / Topic: **BCheck Structure – Kaise likhte hain script**
+
+### 🐣 2. Samjhane ke liye (Simple Analogy):
+Socho tum ek **form** bhar rahe ho. Form mein kuch sections hote hain:
+- **Top mein** tum apna naam, pata likhte ho (metadata).
+- Phir ek section hota hai **"Condition"** – jaare "agar barish ho rahi hai tabhi" (given).
+- Phir **"Action"** – "to chhatri lekar bahar jao" (send request, check response).
+- Agar kuch milta hai to **"Report"** karo (report issue).
+
+BCheck ka structure bilkul aisa hi hai. Pehle metadata, phir condition, phir actions, aur ant mein report.
+
+### 📖 3. Technical Definition (Interview Answer):
+BCheck script ka basic structure teen major parts mein banta hai:
+1. **Metadata block** – script ke baare mein jaankari.
+2. **Given block** – condition define karta hai ki kab ye check chalna chahiye (e.g., "given host", "given response").
+3. **Action block** – actual steps: request bhejna, response check karna, aur issue report karna.
+
+Har block YAML-like syntax mein likha jata hai (indentation important hai).
+
+### 🔍 4. Zaroorat Kyun Hai? (Why use it?):
+Agar structure na hota to scripts bekar ho jaati – Burp ko pata nahi hota ki kab check karna hai, kya karna hai. Structure se script readable, predictable, aur error-free rehti hai. Metadata se hum scripts organize kar sakte hain.
+
+### 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+Jab tum kisi BCheck file ko editor mein khologe, to kuch aisa dikhega (colors syntax highlighting ke saath):
+```yaml
+metadata:
+  language: v1-beta
+  name: "Example Check"
+  description: "Demo"
+  author: "Me"
+
+given host then
+  send request:
+    method: GET
+    path: "/test"
+  if response.status == 200 then
+    report issue:
+      severity: info
+```
+Yahan:
+- **Metadata** ek block hai jisme indentation dikhti hai (spaces se).
+- **given host then** ke baad indentation aur badhti hai.
+- Har action ke baad colon aur naye line par indentation.
+
+### ⚙️ 6. Under the Hood (Technical Working):
+1. Burp parser script ko line by line padhta hai.
+2. Pehle metadata parse karta hai – agar language version mismatch hui to error dega.
+3. Phir `given` condition check karta hai – ye condition scan ke context par depend karti hai. `given host` matlab jab bhi koi host scan ho raha ho, ye check applicable hai.
+4. Andar ke steps execute hote hain – jaise `send request` se Burp ek naya HTTP request bhejta hai.
+5. `if` condition mein response check hota hai.
+6. `report issue` se Burp ke database mein vulnerability entry add hoti hai.
+
+### 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
+
+**Step 1: Ek simple BCheck likho jo kare ki kisi bhi host par ek test request bheje aur status 200 report kare**
+- Notepad kholo.
+- Likho:
+```yaml
+metadata:
+  language: v1-beta
+  name: "Status 200 Check"
+  description: "Sends GET / and reports if status is 200"
+  author: "TechGuru"
+
+given host then
+  send request:
+    method: GET
+    path: "/"
+    follow-redirects: false
+
+  if response.status == 200 then
+    report issue:
+      severity: info
+      confidence: firm
+      detail: "Root path returned 200 OK"
+```
+**Breakdown:**
+- `metadata:` – block start.
+  - `language: v1-beta` – version.
+  - `name:` – check ka naam.
+  - `description:` – kya karta hai.
+  - `author:` – tumhara naam.
+- `given host then` – ye check tab chalega jab koi bhi host scan ho raha ho. `then` ke baad indentation zaroori.
+- `send request:` – ek request bhejni hai.
+  - `method: GET` – HTTP method.
+  - `path: "/"` – root path.
+  - `follow-redirects: false` – redirect follow mat karo.
+- `if response.status == 200 then` – agar response ka status code 200 hai to.
+  - `report issue:` – issue report karo.
+    - `severity: info` – severity level (info, low, medium, high).
+    - `confidence: firm` – confidence (tentative, firm, certain).
+    - `detail:` – description.
+
+**Step 2: Save as `status_check.bcheck`**
+
+**Step 3: Burp mein load karo**
+- Extensions → BChecks → Load → file select.
+- Left list mein "Status 200 Check" dikhega.
+
+**Step 4: Scan karo**
+- Kisi bhi target par active scan chalao (ya passive scan bhi chal sakta hai). Ye check automatically chalega.
+- Jab bhi target ke root par GET request jayegi (ya alag se request bhejega), to response 200 aane par issue report hoga.
+
+**Expected Output in Issue Activity:**
+- Ek naya issue dikhega: "Status 200 Check" ya jo name diya hai, with severity info, detail "Root path returned 200 OK".
+
+### ⚖️ 8. Comparison (Ye vs Woh):
+
+| Section | Role | Analogy |
+|---------|------|---------|
+| `metadata` | Script ki identity | Aadhar card |
+| `given ... then` | Condition / Trigger | Agar bhukh lagi ho |
+| `send request` | Action | Khana banana |
+| `if response...` | Decision | Check karna ki khana ready hai ya nahi |
+| `report issue` | Output | Family ko batana |
+
+### 🚫 9. Common Mistakes (Beginner Traps):
+
+- **Mistake 1:** Indentation galat karna (spaces ki jagah tabs use karna).  
+  **Fix:** BCheck **spaces** maangta hai, tabs nahi. Har block ke liye 2 spaces ka indent use karo. (Better hai ek hi editor mein setting kar lo ki Tab = 2 spaces).
+
+- **Mistake 2:** `given host then` ke baad colon bhoolna ya extra colon.  
+  **Fix:** Syntax exactly as shown – `given host then` ke baad new line aur indentation, colon nahi lagta.
+
+- **Mistake 3:** `send request` ke andar `method:` aur `path:` ke beech mein comma lagana.  
+  **Fix:** YAML mein comma nahi lagte, bas new line aur colon.
+
+- **Mistake 4:** `if` condition mein `==` ki jagah `=` likh dena.  
+  **Fix:** Equality check ke liye `==` use hota hai, assignment nahi hai yahan.
+
+### 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
+
+- **"given host then" ka matlab kya hai? Kya ye har request ke liye chalega?"**  
+  `given host` ek **scope** define karta hai. Iska matlab ye check tab chalega jab bhi kisi host (target) ke against scan ho raha ho. Lekin actual execution tabhi hoga jab `send request` wala step aayega. Toh ek baar host scan start hua, to ye check apni request bhejega. Har request par nahi, balki ek baar (ya jaise defined hai). Agar tum chahte ho ki har request par kuch check karo, to `given request` use karoge (jo aage modules mein aayega).
+
+- **"Kya mein `given host` ke andar multiple requests bhej sakta hoon?"**  
+  Haan, ek ke baad ek `send request` likh sakte ho. Har request alag se bheji jayegi.
+
+### 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
+
+**Scenario:**  
+Ek website thi jisme `/admin` page sirf specific IP se accessible tha. Tester ne ek BCheck likhi jisme `given host` ke andar ek request `/admin` par bheji with a spoofed header `X-Forwarded-For: 127.0.0.1`. Agar response 200 aata to issue report karta. Isse **admin panel exposure** ka bug mila.
+
+### 🎨 12. Visual Diagram (ASCII Art):
+```
++-------------------+
+| metadata          |
+| (naam, author)    |
++-------------------+
+         |
+         v
++-------------------+
+| given host then   |
++-------------------+
+         |
+         v
++-------------------+
+| send request      |
+| (method, path)    |
++-------------------+
+         |
+         v
++-------------------+
+| if condition      |
+| response.status==200
++-------------------+
+         |
+        Yes
+         v
++-------------------+
+| report issue      |
++-------------------+
+```
+
+### 🛠️ 13. Best Practices (Pro Tips):
+
+- **Indentation consistent rakho:** 2 spaces ka use karo, har jagah.
+- **Metadata mein description meaningful likho** taaki baad mein yaad rahe.
+- **Check ko test karo:** Pehle kisi lab environment mein try karo.
+- **Comments daalo:** `#` se line comment karo, jaise `# ye check root page ke liye hai`.
+
+### ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
+
+- Agar `given` block galat hai to check kabhi chalega hi nahi.
+- Agar `send request` mein path galat hai to kuch interesting milega nahi.
+- Agar `if` condition galat hai to false positives ya false negatives aayenge.
+
+### ❓ 15. FAQ (Interview Questions):
+
+- **Q1:** BCheck mein `given host then` aur `given response then` mein kya antar hai?  
+  **A1:** `given host` tab chalega jab scan start hoga (ek baar). `given response` tab chalega jab har response aayega (passive scanning).
+
+- **Q2:** Kya BCheck mein variables define kar sakte hain?  
+  **A2:** Haan, `let` keyword se define kar sakte ho, lekin basic version mein limited hai. (Advanced topics mein aayega.)
+
+- **Q3:** BCheck mein multiple conditions kaise lagaye?  
+  **A3:** `if` ke andar `and` / `or` use kar sakte ho? Haan, jaise `if response.status == 200 and response.body contains "admin"`.
+
+- **Q4:** `report issue` mein kaunsi fields zaroori hain?  
+  **A4:** `severity` aur `detail` mandatory hain. `confidence` optional hai, lekin recommended hai.
+
+- **Q5:** Kya BCheck mein loops hote hain?  
+  **A5:** Basic version mein loops nahi hain, lekin `for` jaisa kuch advanced version mein ho sakta hai. Filhaal repeated actions ke liye multiple `send request` likh sakte ho.
+
+### 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
+**"BCheck structure = Metadata (pehchaan) + Given (shart) + Action (kaam) + Report (natija)."**
+
+---
+
+## Topic 19.3: Use Cases of BCheck
+
+### 🎯 1. Title / Topic: **BCheck Use Cases – Kab aur kyun use karein**
+
+### 🐣 2. Samjhane ke liye (Simple Analogy):
+Maano tumhare paas ek **toolkit** hai jisme bahut saare general purpose tools hain (hammer, screwdriver). Lekin tumhe ek **special shape ka screw** khoolna hai jiske liye general screwdriver kaam nahi karta. Toh tum ek **custom screwdriver** banwaoge jo exactly us screw ke liye bana ho.  
+BCheck woh custom screwdriver hai – tum **specific problems** ke liye specific checks bana sakte ho jo default scanner mein nahi hain.
+
+### 📖 3. Technical Definition (Interview Answer):
+BCheck ke use cases teen broad categories mein aate hain:
+1. **Application-specific logic checks** – Un vulnerabilities ko dhundhna jo sirf us particular application ki architecture mein hain (jaise custom headers, parameter names).
+2. **Compliance and best practices checks** – Check karna ki application certain security headers follow karti hai ya nahi (jaise `X-Frame-Options`, `CSP`).
+3. **False positive reduction** – Default scanner ke alerts mein se un checks ko hatana jo is application mein false positive hain, aur unki jagah specific checks lana.
+
+### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+- **Problem:** Default scanner general hai, isliye wo specific bugs miss kar deta hai. Jaise kisi app mein SQLi sirf `debug` parameter mein hoti hai, default scanner wo nahi dhundhega.
+- **Solution:** BCheck se tum woh specific parameter ke liye check likh sakte ho.
+- **Problem:** Manual testing time-consuming hai.
+- **Solution:** BCheck automate kar deta hai.
+
+### 🔍 5. Visual - Jab Screen Par Kya Dikhega (for each use case):
+**Use Case 1: App-specific logic check**
+- Tum ek BCheck likhte ho jo har request mein `X-Forwarded-For: 127.0.0.1` header add karta hai aur response mein "Internal" string dhundhta hai.
+- Jab scan chalega, to tumhe Issues list mein "Internal IP Disclosure" dikhega.
+
+**Use Case 2: Compliance check**
+- Tum ek passive check likhte ho jo har response mein `X-Frame-Options` header check karta hai. Agar nahi hai to "Missing X-Frame-Options" issue report karta hai.
+
+**Use Case 3: False positive reduction**
+- Maano default scanner ne kuch alerts diye hain jo is app mein false positive hain (jaise SQLi alerts jo actually database errors nahi hain). Tum ek BCheck likh sakte ho jo un alerts ko verify kare aur confirm kare.
+
+### ⚙️ 6. Under the Hood (Technical Working):
+- **App-specific logic check:** Burp har incoming request/response ko check karta hai. BCheck ka `given request` block use karke tum request mein modifications kar sakte ho (jaise header add) aur naya request bhej kar response analyze kar sakte ho.
+- **Compliance check:** Passive scan ke dauran `given response` block use karte ho, jisme tum response ke headers check karte ho.
+- **False positive reduction:** Tum ek BCheck likh sakte ho jo default scanner ke alert ko trigger karne wali request ko lekar ek extra validation request bheje aur confirm kare ki vulnerability real hai.
+
+### 💻 7. Hands-On: Step-by-Step Practical (for each use case):
+
+**Use Case 1: App-specific logic – Custom Header Check**
+- Scenario: Maano ek website `X-Internal: true` header daalne par internal info leak karti hai.
+- BCheck:
+```yaml
+metadata:
+  language: v1-beta
+  name: "Internal Header Leak"
+  description: "Checks if X-Internal header causes info leak"
+  author: "TechGuru"
+
+given request then
+  send request:
+    method: original.method
+    path: original.path
+    headers: original.headers + ["X-Internal: true"]
+    body: original.body
+
+  if response.body contains "Internal" then
+    report issue:
+      severity: medium
+      confidence: firm
+      detail: "X-Internal header caused internal info leak"
+```
+Breakdown:
+- `given request then` – ye check har incoming request par chalega.
+- `send request` – hum original request ki copy bhejte hain, lekin usme ek extra header add karte hain.
+- `headers: original.headers + ["X-Internal: true"]` – original headers mein ye header add karo.
+- Agar response body mein "Internal" string milti hai to report karo.
+
+**Use Case 2: Compliance – Missing Security Header**
+```yaml
+metadata:
+  language: v1-beta
+  name: "Missing X-Frame-Options"
+  description: "Checks if response lacks X-Frame-Options header"
+  author: "TechGuru"
+
+given response then
+  if not response.has_header("X-Frame-Options") then
+    report issue:
+      severity: low
+      confidence: certain
+      detail: "X-Frame-Options header is missing, clickjacking possible"
+```
+Breakdown:
+- `given response then` – har response par chalega.
+- `if not response.has_header("X-Frame-Options")` – agar header missing hai to report.
+
+**Use Case 3: False Positive Reduction (Advanced)**
+- Default scanner ne kuch alerts diye hain. Tum un alerts ko BCheck se verify kar sakte ho. Par ye thoda complex hai kyunki BCheck directly default scanner ke alerts access nahi kar sakta. Tum manual bhi kar sakte ho, ya ek BCheck likh kar un alerts ke payloads ko re-test kar sakte ho. (Iske liye Burp's session handling use karna padega, but basic idea hai ki tum same request dobara bhej kar confirm karo.)
+
+### ⚖️ 8. Comparison (Use Cases):
+
+| Use Case | Approach | Example |
+|----------|----------|---------|
+| App-specific | Active modification | Custom header injection |
+| Compliance | Passive header check | Missing security headers |
+| False positive reduction | Re-testing | Verify SQLi alert with different payload |
+
+### 🚫 9. Common Mistakes (Beginner Traps):
+
+- **Mistake 1:** App-specific check ko bohot broad bana dena (har request par heavy modification) jisse server slow ho jaye.
+  **Fix:** Limited requests ke liye check likho, ya conditions lagao ki kabhi kabhi hi bhejo.
+
+- **Mistake 2:** Compliance check mein `given response` ki jagah `given host` use karna, jisse check ek baar hi chale.
+  **Fix:** Compliance check har response ke liye chahiye, isliye `given response` use karo.
+
+- **Mistake 3:** False positive reduction ke chakkar mein khud hi naye false positives create kar dena.
+  **Fix:** Carefully verify karo ki confirmatory check accurate ho.
+
+### 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
+
+- **"App-specific logic ka matlab kya hai? Kya har app ki alag logic hoti hai?"**  
+  Haan, har web application different tarike se bani hoti hai. Kisi mein parameter name `id` hai, kisi mein `itemId`. Koi custom header `X-User` use karta hai. Isliye tumhe wahi check banana chahiye jo us app ke structure ke hisaab se ho.
+
+- **"Kya compliance checks default scanner mein nahi hote?"**  
+  Default scanner mein kuch compliance checks hote hain (jaise passive scanner), lekin tum specific compliance requirements ke liye custom checks bana sakte ho. Jaise tumhari company chaahti hai ki har response mein `X-Content-Type-Options: nosniff` ho, toh tum wo check likh sakte ho.
+
+### 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
+
+**Scenario:**  
+Ek banking application tha jisme user login ke baad ek `sessionId` cookie aati thi. Tester ne notice kiya ki agar cookie mein `%00` null byte daal di jaye to session handling toot jaati thi aur user logout ho jata tha. Isse DoS type vulnerability thi. Default scanner ye check nahi karta. Tester ne ek BCheck likhi ki har response mein cookie value mein null byte insert karke request bheje aur dekhe ki response 500 aata hai ya kuch. Isse **medium severity** bug mila.
+
+### 🎨 12. Visual Diagram (ASCII Art):
+```
++---------------------+
+| App-Specific Check  |
+| (e.g., custom header)|
++---------------------+
+         |
+         v
++---------------------+
+| Request with header |
++---------------------+
+         |
+         v
++---------------------+
+| Response contains   |
+| "secret" ?          |
++---------------------+
+         |
+        Yes
+         v
++---------------------+
+| Report Issue        |
++---------------------+
+
++---------------------+
+| Compliance Check    |
+| (passive)           |
++---------------------+
+         |
+         v
++---------------------+
+| Response has header?|
++---------------------+
+         |
+        No
+         v
++---------------------+
+| Report Missing      |
++---------------------+
+```
+
+### 🛠️ 13. Best Practices (Pro Tips):
+
+- **Start with passive checks** – ye safe hain, koi request modify nahi karte.
+- **Active checks ke liye rate limiting** – agar tum bohot requests bhejoge to target par load badh sakta hai. Isliye conditions laga sakte ho jaise `if random() < 0.1` to sirf 10% requests par hi check chale.
+- **Use meaningful severity** – info wale checks ko info do, high severity tabhi do jab pakka vulnerability ho.
+- **Test on a lab first** – pehle vulnerable lab par check validate karo.
+
+### ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
+
+- **Agar app-specific check galat likha** to vulnerability miss ho sakti hai.
+- **Agar compliance check galat likha** to false positives aayenge, jisse tumhara report bharosa khone lagega.
+- **Agar false positive reduction galat kiya** to tum original bug ko bhi ignore kar doge.
+
+### ❓ 15. FAQ (Interview Questions):
+
+- **Q1:** BCheck se kaunsi vulnerabilities dhundh sakte ho?  
+  **A1:** Almost koi bhi vulnerability jo tum manually test kar sakte ho, like SQLi, XSS, IDOR, header injection, etc.
+
+- **Q2:** Kya BCheck se IDOR (Insecure Direct Object Reference) dhundh sakte ho?  
+  **A2:** Haan, tum ek check likh sakte ho jo kisi object ID ko change karke try kare ki dusre user ka data access ho raha hai ya nahi.
+
+- **Q3:** BCheck mein `given request` aur `given response` alag kyun hain?  
+  **A3:** `given request` active scanning ke liye (requests modify karna), `given response` passive scanning ke liye (sirf dekho, change mat karo).
+
+- **Q4:** Kya BCheck se blind SQLi dhundh sakte ho?  
+  **A4:** Haan, time-based payloads bhej kar response time measure kar sakte ho. (Lekin thoda advanced hai, time-based checks ke liye sleep commands use karni padti hain.)
+
+- **Q5:** Kya BCheck mein external APIs call kar sakte ho?  
+  **A5:** Nahi, BCheck sirf HTTP requests bhej sakta hai, external libraries nahi.
+
+### 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
+**"BCheck ke teen superpowers – app-specific logic, compliance check, aur false positive hataana."**
+
+---
+
+## Topic 19.4: Sharing BCheck Scripts
+
+### 🎯 1. Title / Topic: **Sharing BCheck Scripts – Doosron ke saath baantna**
+
+### 🐣 2. Samjhane ke liye (Simple Analogy):
+Maano tumne ek **secret recipe** banayi hai – "Gajar ka Halwa with a twist". Toh tum chahte ho ki tumhare dost bhi ye recipe use karein. Tum kya karoge? Recipe likh kar unhe de doge. Agar recipe bahut achhi hai to tum use **cookbook** mein bhi publish kar sakte ho.  
+BCheck scripts bhi aisi recipes hain. Tum apni team ke saath share kar sakte ho, ya Burp ke **BApp Store** mein publish kar sakte ho taaki duniya bhar ke pentesters use kar sakein.
+
+### 📖 3. Technical Definition (Interview Answer):
+BCheck scripts ko share karne ke do mukhya tareeke hain:
+1. **Direct file sharing** – `.bcheck` files ko team members ko bhejna, jo Burp mein load kar lenge.
+2. **BApp Store contribution** – Burp Suite Professional ke built-in BApp Store mein apne BCheck scripts ko submit karna, jahan se koi bhi download kar sakta hai.
+
+### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
+- **Team collaboration** – agar tumne koi specific check likhi jo tumhari team ke project mein kaam aati hai, to usse share karke sabka time bachao.
+- **Community contribution** – tumhari check se doosre pentesters ko bhi fayda ho sakta hai. BApp Store par publish karoge to tumhe recognition milega.
+- **Standardization** – team mein sab ek jaisi checks use karein, to reporting consistent hogi.
+
+### 🔍 5. Visual - Jab Screen Par Kya Dikhega:
+
+**Direct File Sharing:**
+- Tum file bhejte ho (email, Slack, etc.). Receiver Burp mein Extensions → BChecks → Load → file select karta hai. File list mein aa jayegi.
+
+**BApp Store:**
+- Burp mein **BApp Store** tab hota hai (Extensions → BApp Store). Wahan "BChecks" category hoti hai. Tum apna check wahan list dekh sakte ho. Kisi par click karoge to description, author, download option dikhega.
+
+### ⚙️ 6. Under the Hood (Technical Working):
+- **Direct file sharing:** Burp simply file ko read karta hai aur uske content ko internal scanner engine mein register kar deta hai. File system par koi change nahi hota.
+- **BApp Store contribution:** Tum apni BCheck file ko PortSwigger (Burp banane wali company) ke review ke liye bhejte ho. Approved hone par wo BApp Store mein add ho jati hai. Jab koi user download karta hai, to Burp automatically file ko appropriate directory mein save karta hai aur load kar leta hai.
+
+### 💻 7. Hands-On: Step-by-Step Practical:
+
+**Sharing via file:**
+1. Apni `.bcheck` file dhundho (jaise `my_check.bcheck`).
+2. Use apne dost ko email / Slack / WhatsApp par bhejo.
+3. Dost Burp mein Extensions → BChecks → Load karega aur file select karega. Check enable ho jayega.
+
+**Importing from BApp Store:**
+1. Burp mein **Extensions** tab → **BApp Store** sub-tab.
+2. Search box mein "BCheck" type karo ya category scroll karo.
+3. Kisi bhi BCheck par click karo, description padho.
+4. Agar pasand aaye to **Install** button click karo.
+5. Install hone ke baad automatically **BChecks** tab mein load ho jayega (checkbox ticked hoga).
+
+**Contributing to BApp Store (advanced):**
+- PortSwigger ki website par jaakar developer section mein submit karna hota hai. (Filhaal beginner ke liye itna kaafi hai.)
+
+### ⚖️ 8. Comparison (Sharing Methods):
+
+| Method | Ease | Reach | Quality Check |
+|--------|------|-------|---------------|
+| Direct file | Bahut easy, file bhejo | Sirf team tak | Koi nahi, khud verify karo |
+| BApp Store | Thoda process | Worldwide | PortSwigger review karta hai |
+
+### 🚫 9. Common Mistakes (Beginner Traps):
+
+- **Mistake 1:** BCheck file bhejna lekin usme sensitive info (jaise internal IPs) chhod dena.  
+  **Fix:** Share karne se pehle file mein koi sensitive data toh nahi? Check karo.
+
+- **Mistake 2:** BApp Store par check publish karna bina properly test kiye.  
+  **Fix:** Pehle apni team mein test karo, phir public karo.
+
+- **Mistake 3:** File bhejkar ye maan lena ki receiver automatically load karega.  
+  **Fix:** Unhe batana ki Burp mein load karna hoga.
+
+### 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
+
+- **"Kya BApp Store par BCheck publish karne se paisa milta hai?"**  
+  Nahi, ye free contribution hai. Tumhe recognition milta hai, paisa nahi. (Lekin isse tumhara naam ban sakta hai.)
+
+- **"Kya main BCheck script ko private rakh sakta hoon?"**  
+  Haan, direct file sharing private hai. BApp Store public hai.
+
+### 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
+
+**Scenario:**  
+Ek pentester ne ek BCheck likhi jo GraphQL APIs mein "introspection" query bhejti hai aur sensitive schema info leak check karti hai. Usne ye check BApp Store par publish kar di. Ab hazaaron pentesters ye check use karte hain, aur jab kisi ko bug milta hai to wo tester ka naam bhi dekhte hain (author field mein). Isse uski reputation badhi.
+
+### 🎨 12. Visual Diagram (ASCII Art):
+```
+[Tum apni BCheck likho]
+        |
+        +--(file share)--> [Team Member]
+        |                       |
+        |                       v
+        |                  [Load in Burp]
+        |
+        +--(BApp Store)--> [PortSwigger Review]
+                                |
+                                v
+                           [BApp Store Live]
+                                |
+                                v
+                           [Worldwide Users download]
+```
+
+### 🛠️ 13. Best Practices (Pro Tips):
+
+- **Version control:** Agar team mein share kar rahe ho, to Git repository banao jisme saari BCheck files ho.
+- **Documentation:** Har BCheck ke saath ek README file bhi do jisme batao ki check kya karta hai, kaise use karna hai.
+- **Metadata mein apna naam/contact daalo** taaki log feedback de sakein.
+- **BApp Store par publish karte waqt description achhi likho**, example do.
+
+### ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
+
+- **Agar galat check share kiya** to team members false positives se pareshan honge, aur tumhari credibility giregi.
+- **Agar BApp Store par galat check publish kiya** to PortSwigger reject kar dega, ya agar approve ho gaya aur galat hai to log complain karenge.
+
+### ❓ 15. FAQ (Interview Questions):
+
+- **Q1:** BCheck script kaise share karte hain?  
+  **A1:** Direct file share karke, ya BApp Store par publish karke.
+
+- **Q2:** Kya BApp Store par BCheck publish karne ke liye koi fee lagti hai?  
+  **A2:** Nahi, free hai.
+
+- **Q3:** Mera dost BCheck load karega to kya uski settings affect hongi?  
+  **A3:** Nahi, check enable/disable wo khud kar sakta hai. Koi automatic change nahi hota.
+
+- **Q4:** Kya main BCheck script ko password protect kar sakta hoon?  
+  **A4:** Nahi, .bcheck plain text file hai. Agar private rakhni hai to file share mat karo.
+
+- **Q5:** BApp Store se download ki gayi BCheck automatically update hoti hai?  
+  **A5:** Haan, agar author update karega to Burp mein update notification aayega.
+
+### 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
+**"Apni BCheck recipes ko baanto – yaar-doston mein file se, ya duniya mein BApp Store se."**
+
+---
+
+## 📌 Module 19 ka Summary (Overall):
+BCheck tumhe Burp Scanner ko **custom intelligence** dene ka power deta hai. Tum specific bugs ke liye checks likh sakte ho, compliance check kar sakte ho, false positives hata sakte ho, aur apni scripts team aur community ke saath share kar sakte ho. Ye wo skill hai jo ek **pro pentester** ko beginner se alag karti hai.
+
+========================================================================================
