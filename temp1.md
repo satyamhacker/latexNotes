@@ -758,3 +758,67 @@ Corporate reporting ke liye manual testing ke saath-saath ye automation tools mi
 
 ---
 
+Bhai, main samajh gaya aapne kya kiya hai. Aapne mere pichle response wali **"Missing Topics" ki list** ko apne notes ke end mein as a checklist append kar diya hai. Technically, ab aapke paas un topics ke *naam* toh hain, lekin unke **practical notes, payloads, aur exploitation methodology** abhi bhi missing hain.
+
+Ek **Senior Security Researcher** sirf headings nahi rakhta, uske paas unka "How-to" hona chahiye. Agar main un checklists ko hata doon aur sirf aapke actual handwritten-style notes (Page 1-19) ko analyze karun, toh **industry-standard depth** ke hisaab se ye specific sub-topics abhi bhi missing hain:
+
+---
+
+## 1. Advanced Injection Vectors (Beyond SQL/NoSQL)
+
+Aapne database injections toh cover kiye hain, lekin API parameters ke through hone wale ye attacks missing hain:
+
+* **XXE (XML External Entity) in APIs:** Kai APIs `application/json` ke saath-saath `application/xml` bhi accept karti hain. Content-Type switch karke local files read karna (`/etc/passwd`) ya internal ports scan karna missing hai.
+* **SSTI (Server-Side Template Injection):** Agar API response mein user input ko template engine (Jinja2, Handlebars) ke through render karti hai, toh RCE (Remote Code Execution) kaise lena hai?
+* **OS Command Injection:** API parameters (like `?image=test.jpg`) ke piche agar system commands chal rahi hain, toh `; sleep 10` ya `| id` jaise payloads ka use.
+
+## 2. Protocol Specific Hacking
+
+Duniya sirf REST APIs par nahi chalti. Modern apps mein ye protocols use ho rahe hain jo aapke notes mein nahi hain:
+
+* **WebSocket Security:** Real-time APIs (chat, trading) WebSockets use karti hain. Inmein **CSWSH (Cross-Site WebSocket Hijacking)** aur lack of authorization kaise check karte hain?
+* **gRPC Pentesting:** High-performance microservices gRPC use karti hain. Iska proto-file dhoondna aur **Burp Suite's gRPC extension** se calls intercept karna missing hai.
+
+## 3. BOLA/IDOR (The "Deep" Part)
+
+Aapne Page 7 par simple manipulation likha hai, lekin corporate level par ye scenarios missing hain:
+
+* **BOLA via API Versioning:** `/v2/user/my-info` secure hai, lekin kya `/v1/user/other-id` vulnerable hai? Version downgrade attacks missing hain.
+* **BOLA in Password Reset:** Reset link mein `user_id` ya `email` change karke kisi aur ka password reset kar dena.
+
+---
+
+## 4. Bypassing API Gateways & WAFs
+
+Real corporate environments mein API Gateway (like Apigee, AWS API Gateway) hota hai. Use bypass karne ki techniques:
+
+* **HTTP Parameter Pollution (HPP):** Same parameter do baar bhejna (`?id=123&id=456`) taaki WAF confuse ho jaye.
+* **Method Override:** Agar `DELETE` blocked hai, toh `POST` request mein `X-HTTP-Method-Override: DELETE` header use karna.
+* **IP Rotation:** Rate limit bypass karne ke liye `X-Forwarded-For` header mein random IPs rotate karna.
+
+## 5. Modern JWT Attacks (The "Hard" Part)
+
+Aapke notes mein simple brute-force hai, lekin ye exploits missing hain:
+
+| Attack Type | Technique |
+| --- | --- |
+| **JTI Replay** | `jti` claim ka check na hona, jiski wajah se purana token baar-baar use kiya ja sake. |
+| **KID Path Traversal** | `kid` header mein `../../dev/null` dalkar signature bypass karna. |
+| **JWT Heartbleed-style** | `alg: none` ke saath token modify karna (modern libraries mein abhi bhi kahin-kahin milta hai). |
+
+---
+
+## 6. Business Logic: Financial & Multi-step Flaws
+
+Aapke notes mein Clickjacking hai, lekin ye business-critical attacks missing hain:
+
+* **Race Conditions in Wallets:** Ek hi second mein 100 requests bhej kar (Turbo Intruder se) balance zero hone se pehle multiple transactions kar lena.
+* **Negative Quantities:** E-commerce API mein `quantity: -1` dalkar total price kam karna.
+* **Step Skipping:** Signup process mein `verify-otp` step ko skip karke seedha `account-success` endpoint call karna.
+
+---
+
+### My Verdict
+
+Bhai, aapka base solid hai, lekin aapke notes abhi **"Web-focused"** zyada hain aur **"Pure API-focused"** kam. Aapne jo checklist niche add ki hai, usmein se har topic ke liye aapko **kam se kam 2-3 practical payloads** aur **Burp Suite steps** add karne chahiye tab jaakar aapka notebook "Master" notebook banega.
+
