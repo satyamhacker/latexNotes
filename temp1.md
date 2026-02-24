@@ -572,3 +572,115 @@ Sirf JWT kafi nahi hai, login flows bhi test karne hote hain:
 - **CVSS Scoring** for discovered vulnerabilities
 - **Proof of Concept (PoC)** writing
 - **Remediation Guidance** tailored to API frameworks (e.g., Spring Boot, Express, Django REST)
+
+### 1. Reconnaissance & Discovery (Advanced)
+*   **API Documentation Mining**
+    *   Swagger/OpenAPI Specification files (`swagger.json`, `openapi.yaml`) analysis.
+    *   Postman Collection exports hidden in JS files.
+    *   GraphQL Playground/Introspection endpoint discovery.
+*   **Automated Content Discovery**
+    *   **Kiterunner:** Context-aware API route fuzzing (better than generic dirbuster).
+    *   **Arjun/Param Miner:** Hidden parameter discovery (headers, JSON body, cookies).
+    *   **Subdomain Enumeration:** Finding `api.*, dev.*, staging.*` endpoints.
+*   **Version Control & Leak Search**
+    *   GitHub/GitLab dorks for API keys, secrets, and internal docs.
+    *   **JS File Analysis:** Using tools like **LinkFinder** or **SubJS** to extract endpoints from minified JS.
+
+### 2. Authentication & Session Management (Advanced)
+*   **OAuth 2.0 & OIDC Flaws**
+    *   **Redirect URI Manipulation:** Open redirect leading to Auth Code interception.
+    *   **State Parameter Missing:** CSRF attacks on login flows.
+    *   **Implicit Flow Risks:** Token leakage in URL fragments/browser history.
+    *   **PKCE Implementation Errors:** Authorization Code interception without PKCE.
+*   **JWT Advanced Attacks**
+    *   **Algorithm Confusion:** RS256 to HS256 switch (using public key as secret).
+    *   **Key Injection (`kid`):** Path traversal (`../../dev/null`) or SQLi in Key ID.
+    *   **JWK/JWKS Injection:** Hosting own key set and forcing server to use it (`jku` header).
+    *   **None Algorithm:** Removing signature verification entirely.
+*   **Session Security**
+    *   **Session Fixation:** Forcing a known session ID upon login.
+    *   **Refresh Token Rotation:** Checking if old refresh tokens are invalidated after use.
+    *   **Concurrent Session Control:** Testing limits on multiple active sessions.
+
+### 3. Authorization (OWASP API Top 10 2023 Focus)
+*   **Broken Object Level Authorization (BOLA/IDOR)**
+    *   **Chained BOLA:** Using one IDOR to leak an ID for a second exploit.
+    *   **Bulk/Batch BOLA:** Sending arrays of IDs in JSON to dump multiple records.
+    *   **Non-Resource IDOR:** Manipulating IDs in actions like `delete`, `update`, `password_reset`.
+*   **Broken Property Level Authorization (BPLA)**
+    *   **Mass Assignment (Advanced):** Injecting `role: admin`, `is_verified: true`, `balance: 999`.
+    *   **Nested JSON Manipulation:** Modifying deeply nested objects to bypass validation.
+    *   **Excessive Data Exposure:** Filtering responses to find sensitive fields (PII, keys) returned but not shown in UI.
+*   **Broken Function Level Authorization**
+    *   **Admin Endpoint Access:** Accessing `/api/admin/*` endpoints as a low-privilege user.
+    *   **HTTP Verb Tampering:** Changing `GET` to `PUT/DELETE` to bypass ACLs.
+
+### 4. Injection & Input Validation (Beyond SQL/NoSQL)
+*   **Server-Side Request Forgery (SSRF)**
+    *   **Cloud Metadata Access:** Fetching `169.254.169.254` (AWS/Azure/GCP) via API parameters.
+    *   **Webhook SSRF:** Providing attacker-controlled URL in webhook configuration.
+    *   **Blind SSRF:** Using DNS/HTTP callbacks (Burp Collaborator) to detect out-of-band hits.
+*   **XML External Entity (XXE)**
+    *   Testing `Content-Type: application/xml` endpoints for entity expansion.
+    *   Error-based vs. Blind XXE in API payloads.
+*   **Command Injection**
+    *   OS command injection via parameters (e.g., `ping`, `nslookup` in diagnostic APIs).
+    *   Template Injection (SSTI) in dynamic response fields.
+*   **GraphQL Specifics**
+    *   **Introspection Query:** Dumping full schema to understand types/mutations.
+    *   **Deep Recursion/DoS:** Nested queries causing server resource exhaustion.
+    *   **Batching Attacks:** Sending hundreds of operations in one request to bypass rate limits.
+
+### 5. Business Logic & Rate Limiting
+*   **Race Conditions**
+    *   **Turbo Intruder:** Testing concurrent requests for coupon abuse, money transfer, or voting.
+    *   **Time-of-Check to Time-of-Use (TOCTOU):** Exploiting delays between validation and execution.
+*   **Workflow Bypass**
+    *   Skipping steps in multi-step processes (e.g., going directly to "Payment Success" API).
+    *   Force browsing to next stage endpoints without completing previous validation.
+*   **Rate Limiting Bypass**
+    *   **IP Rotation:** Using X-Forwarded-For headers or proxy chains.
+    *   **Parameter Pollution:** Adding random parameters to bypass fingerprinting.
+    *   **Endpoint Swapping:** Finding alternative endpoints that perform the same action without limits.
+*   **Financial Logic**
+    *   **Negative Values:** Testing quantities or prices with negative numbers.
+    *   **Currency Manipulation:** Changing currency codes without converting amounts.
+    *   **Decimal Precision:** Using excessive decimals to confuse calculation logic.
+
+### 6. Infrastructure & Misconfiguration
+*   **CORS Misconfiguration**
+    *   `Access-Control-Allow-Origin: *` with `Allow-Credentials: true`.
+    *   Reflecting arbitrary origins without whitelist validation.
+    *   Bypassing null origin restrictions.
+*   **HTTP Security Headers**
+    *   Missing `Strict-Transport-Security (HSTS)`, `Content-Security-Policy (CSP)`.
+    *   Verbose Error Messages leaking stack traces or DB versions.
+*   **API Versioning Risks**
+    *   Accessing deprecated versions (`/v1/`) that lack new security controls.
+    *   Debug/Beta endpoints left enabled in production (`/api/debug`, `/api/test`).
+*   **Content-Type Smuggling**
+    *   Changing `application/json` to `application/x-www-form-urlencoded` to bypass parsers.
+    *   Mixing content types to confuse WAF or backend logic.
+
+### 7. Modern Architecture (Cloud & Serverless)
+*   **Serverless API Risks**
+    *   **Event Injection:** Manipulating JSON events triggering Lambda/Cloud Functions.
+    *   **Denial of Wallet:** Triggering expensive operations to inflate cloud costs.
+    *   **Cold Start Exploitation:** Timing attacks during function initialization.
+*   **Webhook Security**
+    *   Lack of Signature Verification (HMAC) on incoming webhooks.
+    *   Replay Attacks due to missing timestamps/nonces.
+*   **Microservices Communication**
+    *   Service-to-Service Auth bypass (missing mTLS or internal API keys).
+    *   Internal API exposure via misconfigured Service Mesh (Istio/Linkerd).
+
+### 8. Professional Tooling & Automation
+*   **Burp Suite Extensions**
+    *   **Autorize/AuthMatrix:** Automated privilege escalation testing.
+    *   **Logger++:** Advanced traffic logging and filtering.
+    *   **JSON Web Tokens:** Built-in decoding and editing within Burp.
+    *   **HTTP Request Smuggler:** Detecting CL.TE / TE.CL vulnerabilities.
+*   **CLI & Scripting**
+    *   **Postman/Newman:** Automating collection runs for regression testing.
+    *   **Python Requests:** Custom scripts for complex logic attacks (Race conditions).
+    *   **Nuclei:** Using API-specific templates for quick vulnerability scanning.
