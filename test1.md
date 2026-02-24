@@ -3428,3 +3428,702 @@ Attacker --[serialized malicious object]--> API
 ---
 
 ========================================================================================
+
+Bilkul bhai! 🌟 Ab main "TechGuru" aapko **GraphQL Security** ka pura Module 5 de raha hoon. Aapne kaha ki aapko GraphQL ke baare mein kuch nahi pata, toh main **zero se hero** banane wala hoon. Chai-wali analogy se lekar, payload ki character-by-character breakdown tak, sab kuch milega. Taiyaar ho jaiye!
+
+---
+
+## 🚀 Module 5: GraphQL Security (Modern APIs)
+
+### 🔰 GraphQL ka Parichay (For Absolute Beginners)
+
+**GraphQL kya hai?**
+- Ye ek **query language** hai jo APIs ke liye bani hai. Traditional REST APIs mein alag-alag endpoints hote hain (e.g., `/users`, `/posts`). GraphQL mein sirf **ek endpoint** hota hai (e.g., `/graphql`) aur client decide karta hai ki usse kya data chahiye.
+- **Analogy:** REST buffet ki tarah hai – har dish ke liye alag counter. GraphQL à la carte restaurant ki tarah – ek waiter ke paas baith kar jo dish chahte ho order karo, aur waiter sirf wahi laata hai.
+
+**Key Terms:**
+- **Query:** Data lene ke liye (GET jaisa).
+- **Mutation:** Data change karne ke liye (POST/PUT/DELETE jaisa).
+- **Schema:** API ka blueprint – bataata hai ki kaunse queries available hain, kaunse objects, aur unke fields.
+- **Resolver:** Function jo actual data fetch karta hai (database se, etc.).
+- **Introspection:** Schema ko puchne ka tareeka – API khud apna schema bata deti hai.
+
+Ab chaliye security topics par.
+
+---
+
+### Topic 5.1: GraphQL Discovery
+
+#### 1. 🎯 Title: GraphQL Discovery – API Ka Naksha Kaise Nikale
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Maano tum kisi **new city** mein gaye ho aur tumhe kisi imarat ka naksha (blueprint) chahiye. Tum wahan ke municipal office mein jakar puchte ho, "Mujhe is imarat ka plan chahiye." Agar office tumhe plan de de, toh tumhara kaam easy ho jata hai. Yahan **municipal office** GraphQL endpoint hai, aur **introspection query** wo form hai jisse tum poora schema (naksha) nikal sakte ho. Agar office ne plan dene se mana kar diya (introspection off), toh tum **construction site ke signs** (field suggestions) se andaza laga sakte ho ki imarat mein kya kya ho sakta hai.
+
+#### 3. 📖 Technical Definition
+GraphQL Discovery ka matlab hai GraphQL endpoint ke baare mein jaankari ikattha karna – jaise ki kaunse queries, mutations, objects, fields available hain. Yeh mostly **introspection queries** ke through kiya jaata hai. Agar introspection band ho, toh **field suggestions** (error messages mein correct field name suggest hona) se bhi schema ki partial jaankari mil sakti hai.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+- Attack ke liye pehla step hai **reconnaissance**. Agar aapko pata nahi ki API mein kaunse queries hain, toh aap kaise attack karenge?
+- Schema se aap sensitive fields dhundh sakte ho (jaise `password`, `ssn`, `creditCard`).
+- Authentication bypass ke liye mutations identify kar sakte ho.
+- Depth of nesting pata karke DoS attacks plan kar sakte ho.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+- **Common endpoints:** `/graphql`, `/graphiql`, `/playground`, `/v1/graphql`, `/api/graphql`.
+- Burp ya browser mein jab aap karte ho `GET /graphql?query={__schema{types{name}}}`.
+- Agar introspection on hai, toh response mein JSON schema dikhega.
+- Agar introspection off, toh error aayega jaise `"Field '__schema' is not allowed"` ya `"GraphQL introspection is not allowed"`.
+
+#### 6. ⚙️ Under the Hood
+GraphQL specification ke according har GraphQL server mein ek `__schema` field hota hai jo schema ka metadata return karta hai. Ye field query root par available hota hai. Server is query ko process karta hai aur schema ka poora structure JSON mein bhej deta hai. Agar server ne introspection disable kiya hai, toh wo `__schema` field ko block kar deta hai, ya to error throw karta hai ya null return karta hai.
+
+#### 7. 💻 Hands-On Step-by-Step
+
+**Step 1: Endpoint Discovery**
+- Pehle GraphQL endpoint ka pata lagao. Common paths ko fuzz karo:
+  ```
+  /graphql
+  /graphiql
+  /playground
+  /v1/graphql
+  /api/graphql
+  /query
+  ```
+- Burp Suite mein Intruder se in paths ko hit karo aur response dekho. Agar `200 OK` aaye aur response mein `"data"` ho ya GraphQL error, toh endpoint mil gaya.
+
+**Step 2: Test Introspection**
+- Simple introspection query bhejo:
+  ```graphql
+  query {
+    __schema {
+      types {
+        name
+      }
+    }
+  }
+  ```
+- Isse saare types ke names mil jayenge.
+- Response agar kuch aisa aaye:
+  ```json
+  {
+    "data": {
+      "__schema": {
+        "types": [
+          { "name": "Query" },
+          { "name": "User" },
+          ...
+        ]
+      }
+    }
+  }
+  ```
+  Toh introspection ON hai. Agar error aaye `"Field '__schema' is not allowed"` toh OFF hai.
+
+**Step 3: Full Schema Dump (if introspection on)**
+- Poora schema dump karne ke liye ye query bhejo:
+  ```graphql
+  query {
+    __schema {
+      types {
+        name
+        kind
+        description
+        fields {
+          name
+          type {
+            name
+            kind
+            ofType {
+              name
+              kind
+            }
+          }
+        }
+      }
+    }
+  }
+  ```
+- Isse har type ke fields bhi mil jayenge. Ye bahut bada response ho sakta hai, isliye aap tool use kar sakte ho (jaise GraphQL Voyager, InQL Scanner).
+
+**Step 4: Field Suggestions (if introspection off)**
+- Agar introspection off hai, toh field suggestions try karo. Kisi existing query mein ek **wrong field name** daalo, jaise:
+  ```graphql
+  query {
+    user {
+      id
+      wrongField
+    }
+  }
+  ```
+- Agar server ne field suggestions di hain, toh error message mein kuch aisa aayega:
+  `"Cannot query field 'wrongField' on type 'User'. Did you mean 'username', 'email'?"`
+- Is tarah se aap valid field names infer kar sakte ho.
+
+**Step 5: Automated Tools**
+- Burp Suite ka **InQL Scanner** extension use karo. Ye introspection query automatically bhejta hai aur schema ka structure dikhata hai.
+- `graphqlmap` tool bhi hai jo enumeration mein help karta hai.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success (Introspection on):** Response mein `__schema` ke andar types ka array milega.
+- **Failure (Introspection off):** Error aayega ki introspection allowed nahi hai. Field suggestions bhi na hon toh andhera hi andhera.
+
+#### 9. ⚖️ Comparison: Introspection vs Field Suggestions
+| Introspection | Field Suggestions |
+|---------------|-------------------|
+| Poore schema ka blueprint milta hai | Sirf hints milte hain (partial info) |
+| Single query se kaam ho jata hai | Multiple queries bhejni padti hain |
+| Production mein ideally band hona chahiye | Kabhi kabhi galat error handling ki wajah se leak hota hai |
+| Risk: High (sensitive info leak) | Risk: Medium (thoda data leak) |
+
+#### 10. 🚫 Common Mistakes
+- Sirf `/graphql` try karke chhod dena. Endpoints alag bhi ho sakte hain.
+- Introspection query galat format mein bhejna (e.g., missing `query` keyword).
+- Introspection off hone par frustrate ho jana. Field suggestions bhi kaam aati hain.
+- Burp Scanner pe blindly bharosa karna – manual testing bhi zaroori hai.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"GraphQL endpoint ka pata kaise chalega agar wo hidden hai?"**
+  Fuzzing karo common paths se. Headers mein `X-GraphQL-Endpoint` bhi ho sakta hai.
+- **"Introspection query mein `__schema` ke baad `types` kyun likha?"**
+  `__schema` object ke andar `types` ek array hai jo saari types ki list return karta hai. Aap chahe toh sirf `queryType`, `mutationType` bhi nikaal sakte ho.
+- **"Kya introspection query hamesha `POST` mein bhejni chahiye?"**
+  GraphQL dono `GET` aur `POST` support karta hai. `GET` mein query URL parameter mein bhej sakte ho. Lekin introspection query badi ho sakti hai, isliye `POST` better hai.
+
+#### 12. 🌍 Real-World Use Case
+**Example:** Ek baar ek bug bounty hunter ne `api.example.com/graphql` endpoint paya. Usne introspection query bheji to schema mil gaya. Schema mein ek mutation `resetPassword` tha jo bina old password ke kaam kar raha tha. Isse wo kisi bhi user ka password reset kar sakta tha. Ye critical vulnerability thi aur $3000 ka bounty mila.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Attacker --[Introspection Query]--> /graphql
+                                   |
+                                   v
+                            GraphQL Server
+                                   |
+                                   v
+                         Schema JSON Response
+                                   |
+                                   v
+                        Attacker ko mila blueprint
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Burp Suite + InQL:** Extension install karo aur "InQL Scanner" se endpoint scan karo. Ye introspection query automatically bhejta hai aur tree view mein dikhata hai.
+- **GraphQL Voyager:** Introspection on ho to is tool mein paste karo aur visual schema dekho – complex relationships samajhne mein aasan hota hai.
+- **Field Suggestions ka fayda uthao:** Agar introspection off ho, toh ek script likho jo random field names bhej kar error messages parse kare aur valid fields nikaale.
+- **Check for mutations:** Sirf queries mat dekho, mutations bhi dekho – wahi attack vectors hote hain.
+
+#### 15. ❓ FAQ (Interview-Style)
+1. **Q: GraphQL discovery ke liye pehla step kya hai?**
+   A: GraphQL endpoint dhundhna, phir introspection query try karna.
+2. **Q: Introspection query ka default naam kya hai?**
+   A: `__schema` (double underscore ke saath).
+3. **Q: Agar introspection off hai toh bhi schema ka kuch pata chal sakta hai?**
+   A: Haan, field suggestions se hints mil sakte hain. Jaise galat field name likhne par error mein correct field suggest ho sakta hai.
+4. **Q: GraphQL endpoint par GET request kaise bhejein?**
+   A: `GET /graphql?query={__schema{types{name}}}`. URL encode karna mat bhoolna.
+5. **Q: Discovery ke baad sabse important kya check karna chahiye?**
+   A: Sensitive fields (password, token, etc.) aur mutations jo bina authorization ke kaam kar rahe hon.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"GraphQL ka raaz: pehle endpoint dhundo, phir introspection se schema uthao, nahi toh field suggestions se kaam chalao."**
+
+---
+
+### Topic 5.2: GraphQL Attacks
+
+Yeh topic GraphQL-specific attacks ka pitara hai. Hum cover karenge:
+- **Batching Attack** (Rate limit bypass + DoS)
+- **Deep Recursion (Cyclical Queries)** (Resource exhaustion)
+- **Directive-based Attacks** (`@include`/`@skip` manipulation)
+- **GraphQL IDOR** (Predictable Global IDs)
+
+---
+
+#### 5.2.1 Batching Attack
+
+#### 1. 🎯 Title: Batching Attack – Ek Request Mein 100 Queries, Rate Limit Ki Dhar Pe
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Ek **school canteen** mein ek hi banda khana serve kar raha hai. Usne rule banaya hai ki ek student ek plate le sakta hai. Lekin ek student aaya aur usne ek saath 10 plates utha li. Canteen wala sochta hai ki ek hi request hai, toh mana kyun kare? Is tarah wo rate limit bypass kar ke zyada khana le gaya. GraphQL mein bhi hum ek request mein multiple queries bhej sakte hain (batching) – agar server ne limit nahi lagayi, toh hum rate limit ko bypass kar ke bahut saara data le sakte hain ya server ko thaka sakte hain.
+
+#### 3. 📖 Technical Definition
+Batching Attack mein attacker ek hi HTTP request mein multiple GraphQL queries bhejta hai. GraphQL specification allows multiple operations in a single request by naming them. Server un sabko execute karta hai aur ek combined response deta hai. Isse attacker rate limiting mechanisms ko bypass kar sakta hai (kyunki server ek request count karega, lekin usme multiple queries hain) aur resource exhaustion (DoS) bhi kar sakta hai.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+- **Rate Limit Bypass:** Agar server ne 10 requests per minute ki limit rakhi hai, lekin ek request mein 100 queries bhej do, toh effectively 100 operations ho gaye par sirf 1 request count hui.
+- **Resource Exhaustion:** Server ko ek saath bahut saare database queries execute karne padte hain, jisse CPU/memory pressure badh jaata hai aur DoS ho sakti hai.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+Request body kuch aisi dikhegi:
+```graphql
+query q1 { user(id:1) { name } }
+query q2 { user(id:2) { name } }
+query q3 { user(id:3) { name } }
+# ... up to 100 queries
+```
+Ya ek hi query mein multiple fields ka use:
+```graphql
+query {
+  u1: user(id:1) { name }
+  u2: user(id:2) { name }
+  # ... aliases
+}
+```
+
+#### 6. ⚙️ Under the Hood
+GraphQL server ek request mein multiple operations ko parse karta hai, unki validity check karta hai, phir ek ek karke resolve karta hai. Agar server ne koi depth limit ya cost analysis implement nahi kiya, toh wo saari queries execute karega. Isse database connections, CPU cycles, memory sab consume hoga.
+
+#### 7. 💻 Hands-On Step-by-Step
+
+**Step 1: Identify vulnerable endpoint**
+- Koi bhi GraphQL endpoint jahan aap multiple queries bhej kar dekhen.
+
+**Step 2: Craft batch query**
+- Use aliases to send multiple queries of the same type:
+  ```graphql
+  query {
+    user1: user(id:1) { name email }
+    user2: user(id:2) { name email }
+    user3: user(id:3) { name email }
+    # ...
+  }
+  ```
+- Ya named operations use karo:
+  ```graphql
+  query q1 { user(id:1) { name } }
+  query q2 { post(id:10) { title } }
+  ```
+
+**Step 3: Send request and measure response time**
+- 10 queries bhejo, phir 50, phir 100. Response time note karo. Agar time linearly badhe, toh vulnerable hai.
+
+**Step 4: Test rate limit bypass**
+- Pehle normal requests bhej kar rate limit pata karo (e.g., 10 requests ke baad block ho jaata hai).
+- Ab ek request mein 20 queries bhejo. Agar sab successful ho jaayein, toh rate limit bypass ho gaya.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Saari queries ka data response mein mile, aur rate limit na lage. Response time zyada ho.
+- **Failure:** Server error de ki "Too many queries" ya "Batch limit exceeded". Ya response mein sirf kuch queries ka data aaye.
+
+#### 9. ⚖️ Comparison: Batching vs Aliases
+| Batching | Aliases |
+|----------|---------|
+| Multiple named operations | Single operation with multiple field aliases |
+| Each query can be of different type | All fields must be from same root type (Query, Mutation) |
+| Response mein alag-alag keys hote hain | Response mein aliases keys hote hain |
+| Useful for mixing queries and mutations | Useful for multiple similar queries |
+
+#### 10. 🚫 Common Mistakes
+- Sirf aliases use karna, jabki mutations ko batch karne ke liye named operations chahiye.
+- Bohot zyada queries bhej kar server crash kar dena (unintentional DoS) – responsible disclosure mein avoid karo.
+- Rate limit bypass ka proof-of-concept mein yeh dikhana ki tumne 100 queries bheji aur wo sab successful rahin.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"Kya ek request mein 100 queries bhejna illegal hai?"**
+  Bug bounty mein generally allowed hai jab tak tum DoS na karo. Controlled testing karo.
+- **"Mutations ko bhi batch kar sakte hain?"**
+  Haan, mutations ko bhi named operations se batch kar sakte ho. Lekin mutations generally order-sensitive hote hain, isliye sequential execute honge.
+- **"Batch limit kya honi chahiye?"**
+  Ideally 5-10 queries per request se zyada nahi honi chahiye. Agar unlimited hai, toh vulnerable.
+
+#### 12. 🌍 Real-World Use Case
+**Example:** Shopify ke GraphQL API mein batching attack se rate limit bypass ho raha tha. Attacker ek request mein 100 queries bhej kar unlimited data fetch kar raha tha. Shopify ne ise fix kiya aur bounty diya.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Attacker --[1 HTTP request with 100 queries]--> GraphQL Server
+                                               |
+                                               v
+                                  Execute 100 resolvers sequentially
+                                               |
+                                               v
+                                      Database hits × 100
+                                               |
+                                               v
+                                   High CPU/Memory → Slow response
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Automation:** Burp Intruder mein payload position rakh kar query count variable bana sakte ho.
+- **Check for cost analysis:** Kuch servers query cost analyze karte hain – agar cost zyada hui toh reject kar dete hain.
+- **Aliases se batching:** `u1: user(id:1) { ... } u2: user(id:2) { ... }` ye simple hai.
+
+#### 15. ❓ FAQ
+1. **Q: Batching attack se rate limit bypass kaise hota hai?**
+   A: Server ek request count karta hai, lekin usme multiple queries hoti hain. Isliye effectively zyada operations ho jaate hain.
+2. **Q: Aliases aur named operations mein kya farak hai?**
+   A: Aliases ek hi query block mein multiple fields ke liye hote hain; named operations alag-alag query blocks hote hain.
+3. **Q: Batching attack se DoS kaise karein?**
+   A: 1000+ queries bhej kar server ko overload kar do. Lekin responsible disclosure mein mat karo.
+4. **Q: Kya server batch queries ko parallel execute karta hai?**
+   A: Generally sequential, but kuch implementations parallel bhi kar sakte hain, jisse aur zyada resource consumption.
+5. **Q: Batching attack se bachne ke upaye?**
+   A: Max queries per request limit lagao, cost analysis implement karo, rate limit ko operations per minute basis par lagao.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"Batching se ek me multiple, rate limit ki fikar chhodo, server ko thakao."**
+
+---
+
+#### 5.2.2 Deep Recursion (Cyclical Queries)
+
+#### 1. 🎯 Title: Deep Recursion – GraphQL Ki Bhagam Bhag Query Se Server Thakao
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Ek **mirror room** mein do aaine ek dusre ke saamne rakh do – image infinite baar reflect hoti hai. Agar tum us room mein khade ho kar dekho, toh tumhe apne aap ki anant pratibimb dikhenge. GraphQL mein bhi agar schema mein cyclical relationships hain (jaise User ke friends jo khud User hain), toh tum aisi query bana sakte ho jo friends ke friends ke friends... ko recursively maangti rahe. Server har level par data fetch karta jaayega aur eventually memory exhaust ho jayegi.
+
+#### 3. 📖 Technical Definition
+Deep Recursion attack (cyclical query) mein attacker schema ke cyclical relationships ka fayda uthate hue ek deeply nested query bhejta hai. Har level par server naye database calls karta hai, jisse resource consumption badhta hai aur DoS ho sakti hai. GraphQL queries inherently nested ho sakti hain, isliye depth limit na ho to khatarnak.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+- **DoS:** Server ko itna deep query bhejo ki wo process nahi kar paaye aur crash ho jaye.
+- **Data exposure:** Kabhi kabhi deep nesting mein sensitive data leak ho sakta hai jo normally surface level par nahi dikhta.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+Query kuch aisi:
+```graphql
+query {
+  user(id:1) {
+    name
+    friends {
+      user {
+        name
+        friends {
+          user {
+            name
+            friends {
+              user {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+Response time bahut high ho sakta hai ya server error de.
+
+#### 6. ⚙️ Under the Hood
+GraphQL resolver har field ke liye ek function hota hai. Agar query mein `friends` field recursively call ho rahi hai, to har level par resolver fir se call hoga, aur database se data fetch karega. Agar depth limit nahi hai, to ye chain bahut lambi ho sakti hai. Example: `friends` field resolve karne ke liye user ka data chahiye, aur us user ke friends ke liye fir se user resolve hoga, aage badhta jayega. Isse N+1 queries problem bhi trigger ho sakti hai.
+
+#### 7. 💻 Hands-On Step-by-Step
+
+**Step 1: Schema analysis**
+- Pehle schema dekh kar cyclical relationships dhundho. Jaise `User` type ke andar `friends` field jo `[User]` return karta ho. Ya `Post` ke andar `author` jo `User` ho aur `User` ke andar `posts` ho.
+
+**Step 2: Craft recursive query**
+- Ek aisi query banao jisme nesting 5-10 levels tak ho.
+- Example:
+  ```graphql
+  query {
+    user(id:1) {
+      friends {
+        friends {
+          friends {
+            friends {
+              friends {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ```
+
+**Step 3: Send query and monitor**
+- Response time aur server behavior dekho. Agar response aane mein 10+ seconds lag rahe hain ya 500 error aaye, toh vulnerable.
+
+**Step 4: Increase depth**
+- Dheere-dheere depth badhao (10, 20, 50 levels). Lekin cautious raho ki server crash na ho jaye.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Response time abnormally high ho, ya server timeout/error de (e.g., `504 Gateway Timeout`, `500 Internal Server Error`, `Memory quota exceeded`).
+- **Failure:** Server query execute kar de normal time mein, ya depth limit exceed hone par error de `"Query depth limit exceeded"`.
+
+#### 9. ⚖️ Comparison: Depth Attack vs Batching
+| Depth Attack | Batching Attack |
+|--------------|-----------------|
+| Ek query mein nesting | Ek request mein multiple queries |
+| Target: Recursive resolvers | Target: Rate limiting & parallel execution |
+| Resource consumption per query level | Resource consumption per query count |
+| Schema structure par dependent | Independent of schema |
+
+#### 10. 🚫 Common Mistakes
+- Sirf nesting try karna, lekin cyclical relationships ki pehchaan na karna. Agar schema mein cycle nahi hai to deep query ka asar nahi hoga.
+- Bohot deep query bhej kar server crash kar dena – responsible testing mein dheere-dheere depth badhao aur impact document karo.
+- Response time ki jagah sirf error dekh kar conclusion nikal lena – kabhi kabhi server gracefully error de sakta hai.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"Kya har schema mein cycle hoti hai?"**
+  Nahi, but common patterns like `User -> friends -> User` ya `Post -> comments -> Post` mein cycle ho sakti hai.
+- **"Agar depth limit 10 hai toh kya 11 level ki query bhejni chahiye?"**
+  Haan, agar limit exceed ho to error aayega. Isse pata chalega ki limit hai aur kitni hai.
+- **"Deep recursion se data leak kaise ho sakta hai?"**
+  Agar koi field normally restricted hai (e.g., `email` sirf friends ko dikhti hai), to deep nesting mein authorization check miss ho sakta hai.
+
+#### 12. 🌍 Real-World Use Case
+**Example:** Facebook ki API mein ek bug tha jahan `friends` field recursively call kar sakte the. Attacker ne 10 levels deep query bheji to server slow ho gaya. Facebook ne depth limit implement ki.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Query: user -> friends -> user -> friends -> ...
+          |        |         |        |
+          v        v         v        v
+        Resolver Resolver  Resolver Resolver
+          |        |         |        |
+          v        v         v        v
+        DB call  DB call   DB call  DB call   → CPU/Memory ↑↑
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Check schema for cycles:** Introspection se cycles identify karo.
+- **Gradual depth increase:** 5, 10, 15 levels bhejo aur response time graph banao.
+- **Use timeout:** Agar request bahut slow ho, to Burp mein timeout setting adjust karo.
+- **Automation:** GraphQLmap jaise tools mein depth fuzzing hoti hai.
+
+#### 15. ❓ FAQ
+1. **Q: Deep recursion attack ka pata kaise chalega?**
+   A: Response time abnormal ho ya server crash ho.
+2. **Q: Cyclical relationship ka matlab kya hai?**
+   A: Type A ke andar field ho jo type A ko hi refer kare.
+3. **Q: Kya depth limit hamesha hoti hai?**
+   A: Production servers mein usually hoti hai, lekin ho sakta hai ki limit bahut high ho (e.g., 100).
+4. **Q: Deep recursion se bachne ke upaye?**
+   A: Depth limit lagao (e.g., max 10), query complexity analysis karo, pagination use karo.
+5. **Q: Kya mutation mein bhi deep recursion possible hai?**
+   A: Haan, agar mutation bhi objects return karta hai jo further nesting allow karte hain.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"Cycle ho to recursion se khel, deep jaakar server ko dhele."**
+
+---
+
+#### 5.2.3 Directive-based Attacks (@include / @skip)
+
+#### 1. 🎯 Title: Directive Attacks – Condition Check Ko Bypass Karke Data Uthao
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Tum ek **online form** bhar rahe ho jisme ek question hai: "Kya tumhe newsletter chahiye?" Agar tum "haan" check karte ho to ek extra field dikhti hai "Email". Agar tum "nahi" check karte ho to wo field chhup jaati hai. Ab agar tum form ki URL mein kuch aise parameters change kar do ki wo field hamesha dikhe, chahe tumne "nahi" hi kyun na check kiya ho, to tum newsletter field ko force kar sakte ho. GraphQL mein `@include` aur `@skip` directives aise hi kaam karte hain – unke condition variables ko manipulate karke aap normally hidden fields ko dekh sakte ho.
+
+#### 3. 📖 Technical Definition
+GraphQL directives (`@include`, `@skip`) allow conditional inclusion/exclusion of fields based on variables. Attacker in variables ko manipulate karke aise fields ko access kar sakta hai jo normally kisi condition (jaise user role) ke basis par hide kiye jaate hain. Isse authorization bypass ho sakta hai.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+- **Authorization Bypass:** Agar koi field sirf admin ke liye visible hai, lekin us field par `@include(if: $isAdmin)` lagaa hai aur `$isAdmin` variable client se aata hai, to attacker `$isAdmin: true` bhej kar admin field access kar sakta hai.
+- **Data Exfiltration:** Normally hidden sensitive data ko force display karna.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+Query mein directives dikhenge:
+```graphql
+query($showEmail: Boolean!) {
+  user {
+    name
+    email @include(if: $showEmail)
+  }
+}
+```
+Variables:
+```json
+{ "showEmail": false }
+```
+Response mein email nahi hoga. Attacker variable change karega `true` to email aa jayega.
+
+#### 6. ⚙️ Under the Hood
+GraphQL server query parse karte waqt directives ko evaluate karta hai. Agar `@include(if: $variable)` hai to server `$variable` ki value check karta hai. Agar true hai to field include karta hai, otherwise skip. Ye evaluation server-side hota hai, lekin variable ki value client se aati hai. Agar server ne variable ki value ko validate nahi kiya (jaise ki user ke permissions ke hisaab se), to attacker arbitrarily true/false set kar sakta hai.
+
+#### 7. 💻 Hands-On Step-by-Step
+
+**Step 1: Identify directives in schema**
+- Introspection se pata karo ki kaunsi fields par directives use ho rahe hain. Fields ke definition mein directives mention ho sakte hain.
+- Ya fir traffic mein koi aisi query dekho jisme `@include` ya `@skip` ho.
+
+**Step 2: Understand the condition variable**
+- Query mein variable define hoga, jaise `($showEmail: Boolean!)`.
+- Normal request mein variable false ho sakta hai.
+
+**Step 3: Manipulate the variable**
+- Request bhejo with variable value `true`.
+- Agar response mein wo field aa jaye, toh vulnerability hai.
+
+**Step 4: Test other conditions**
+- Agar variable kisi object se related ho (e.g., `$userRole`), to uski value change karke role-based fields access karo.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Field jo normally nahi aati thi, ab response mein aaye.
+- **Failure:** Field nahi aati, ya server error de ki invalid variable.
+
+#### 9. ⚖️ Comparison: @include vs @skip
+| @include | @skip |
+|----------|-------|
+| Agar condition true ho to field include karo | Agar condition true ho to field skip karo |
+| `@include(if: $var)` | `@skip(if: $var)` |
+| var true -> field aayega | var true -> field nahi aayega |
+| var false -> field nahi aayega | var false -> field aayega |
+
+Dono ek hi cheez ke do opposite hain.
+
+#### 10. 🚫 Common Mistakes
+- Sirf `@include` ka sochna, `@skip` ko bhoolna.
+- Variable manipulation ke baad bhi field na aaye to ignore kar dena – ho sakta hai server ne koi aur check lagaya ho.
+- Yakeen na karna ki variable manipulation se kuch hoga, lekin kabhi kabhi server variable ki value par poora bharosa kar leta hai.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"Kya directives sirf queries mein hote hain?"**
+  Nahi, mutations mein bhi ho sakte hain.
+- **"Agar variable boolean nahi hai, to kya kar sakte hain?"**
+  Variable string, integer kuch bhi ho sakta hai. Us hisaab se values try karo.
+- **"Directive attack se server-side code execution?"**
+  Nahi, sirf data access hota hai. Lekin RCE nahi.
+
+#### 12. 🌍 Real-World Use Case
+**Example:** Ek social media API mein `user` query thi jisme `email` field par `@include(if: $isFriend)` lagaa tha. Attacker ne variable `isFriend: true` bhej kar kisi bhi user ka email nikal liya, bina friend hue.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Normal: query($isFriend:false) { user { email @include(if:$isFriend) } } → email missing
+Attacker: query($isFriend:true) { user { email @include(if:$isFriend) } } → email included
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Burp Repeater:** Request capture karo, variables section mein values change karo.
+- **Brute force variables:** Agar variable enum ho (jaise role: USER, ADMIN), to sab try karo.
+- **Check for default values:** Query mein variable ka default value ho sakta hai – use bhi manipulate karo.
+
+#### 15. ❓ FAQ
+1. **Q: Directives ka use kis liye hota hai?**
+   A: Client-side par conditional fields ke liye.
+2. **Q: Directive attack se kaunsi vulnerability exploit hoti hai?**
+   A: Authorization bypass, information disclosure.
+3. **Q: Kya `@skip` ko bhi manipulate kar sakte hain?**
+   A: Haan, agar condition true karo to field skip ho jayega. Kuch cases mein useful ho sakta hai.
+4. **Q: Directive attack se bachne ke upaye?**
+   A: Server-side par bhi authorization check karo, client ke variables par bharosa mat karo.
+5. **Q: Kya directives schema mein defined hote hain?**
+   A: Haan, schema mein directives define hote hain, but `@include`/`@skip` built-in hain.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"Directive mein variable ki maari maar, true kar ke dekh le jo field thi bekaar."**
+
+---
+
+#### 5.2.4 GraphQL IDOR
+
+#### 1. 🎯 Title: GraphQL IDOR – Global IDs Se Dusron Ka Data Churao
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Tumhare society mein har ghar ka ek **unique number** hai (e.g., A-101, A-102). Tum apne ghar ka number dekar apna data le sakte ho. Lekin agar tum doosre ghar ka number de do aur server check nahi karta ki tum wahan ke rehne wale ho, to tum unka data le sakte ho. GraphQL mein often objects ke paas **global IDs** hote hain (jaise `VXNlcjox` base64 encoded). Agar authorization theek nahi hai, to tum kisi aur ka ID daal kar uska data le sakte ho. Yani IDOR.
+
+#### 3. 📖 Technical Definition
+GraphQL IDOR (Insecure Direct Object Reference) tab hota hai jab API kisi object ko access karne ke liye client se ID leta hai aur ye check nahi karta ki client us object ka authorized hai ya nahi. GraphQL mein often global unique identifiers use hote hain (e.g., base64 encoded strings), jo predictable ho sakte hain, jisse attacker dusre objects ke data access kar sakta hai.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+- **Horizontal privilege escalation:** Doosre users ka data dekhna.
+- **Vertical privilege escalation:** Admin level objects access karna.
+- **Data breach:** Sensitive information nikalna.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+Query kuch aisi:
+```graphql
+query {
+  user(id: "VXNlcjox") {
+    name
+    email
+  }
+}
+```
+Yahan `id` parameter hai. Attacker is ID ko change karke doosre users ki IDs daal sakta hai.
+
+#### 6. ⚙️ Under the Hood
+GraphQL resolvers mein developer aksar ID ko directly database query mein use kar leta hai bina authorization check ke. Jaise:
+```javascript
+resolve(parent, args, context) {
+  return db.users.findById(args.id);  // No check if current user owns this id
+}
+```
+Isse IDOR ho jata hai.
+
+#### 7. 💻 Hands-On Step-by-Step
+
+**Step 1: Identify ID parameters**
+- Queries/mutations mein koi parameter jo object ki ID lega, jaise `id`, `userId`, `postId`.
+
+**Step 2: Understand ID format**
+- GraphQL often uses **global IDs** (specification ke hisaab se base64 encoded string, jaise `VXNlcjox` = `User:1`).
+- Decode karo base64 se: `echo VXNlcjox | base64 -d` → `User:1`. Isme type aur database ID hota hai.
+- Ya ho sakta hai integer ID ho directly.
+
+**Step 3: Test with your own ID**
+- Apna ID bhej kar normal response lo.
+
+**Step 4: Change ID to another user's ID**
+- Doosre user ka ID guess karo. Agar pattern `User:2` hai to `VXNlcjoy` banao.
+- Agar integer ID hai to increment karo (1,2,3...).
+- Request bhejo aur response dekho.
+
+**Step 5: Check authorization**
+- Agar doosre user ka data mil gaya, toh IDOR confirmed.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Doosre user ka data response mein aaye.
+- **Failure:** Sirf apna data aaye, ya error aaye `"Unauthorized"` ya `"Not found"` (par not found bhi data leak kar sakta hai ki ID exist karti hai).
+
+#### 9. ⚖️ Comparison: GraphQL IDOR vs REST IDOR
+| GraphQL IDOR | REST IDOR |
+|--------------|-----------|
+| ID parameter in query/mutation | URL parameter (e.g., /api/users/1) |
+| Global IDs often base64 encoded | Usually integer IDs |
+| Single endpoint, multiple object types | Different endpoints for different objects |
+| Complex nested queries can fetch related objects in one go | Multiple requests needed |
+
+#### 10. 🚫 Common Mistakes
+- Sirf integer IDs increment karna, base64 encoded IDs ko decode/encode karna bhoolna.
+- Apni ID ke alawa doosre ki ID try karte waqt bina login kiye (if required) attempt karna – ho sakta hai authentication pehle ho.
+- Response mein "not found" aane par sochna ki IDOR nahi hai – kabhi kabhi server 404 de sakta hai taaki existence na pata chale.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"GraphQL mein global IDs kyun use hote hain?"**
+  Taaki client ko object type aur ID ek saath mil jaye, aur caching aasan ho.
+- **"Kya global IDs predictable hote hain?"**
+  Usually base64 encoded, lekin underlying ID integer hai to predictable ho sakta hai. Agar UUID use ho raha hai to guess karna mushkil.
+- **"IDOR ke liye sirf ID change karna kaafi hai?"**
+  Nahi, authorization check bypass hona chahiye. Agar server check kar raha hai ki tum us user ke ho, to IDOR nahi hoga.
+
+#### 12. 🌍 Real-World Use Case
+**Example:** Facebook Graph API mein ek time par `user_id` parameter tha bina proper authorization ke. Attacker kisi aur ka ID daal kar unki photos dekh sakta tha. Facebook ne ise fix kiya.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Attacker: query { user(id: "VXNlcjoy") } → server checks db.findById(2) → returns data of user 2
+Server should have checked: is requester allowed to see user 2?
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Decode global IDs:** Base64 decode karo aur pattern samjho. Agar `User:1` hai to `User:2` try karo.
+- **Use Burp Intruder:** IDs ki range bhej kar fuzzing karo.
+- **Check for indirect IDOR:** Kuch queries mein arguments nested objects mein ho sakte hain, jaise `posts(userId: 1)`.
+- **Automation:** GraphQLmap mein IDOR detection module hai.
+
+#### 15. ❓ FAQ
+1. **Q: GraphQL IDOR detect karne ka sabse simple tareeka?**
+   A: Apni ID se data le lo, phir doosre user ki ID (increment/decode) daal kar dekho.
+2. **Q: Global ID decode kaise karein?**
+   A: Base64 decode karo. Online tool ya command line: `echo "VXNlcjox" | base64 -d`.
+3. **Q: Kya GraphQL mutations mein bhi IDOR ho sakta hai?**
+   A: Haan, jaise `deletePost(id: "UG9zdDox")` – agar authorization check nahi hai to kisi aur ka post delete kar sakte ho.
+4. **Q: Agar global ID UUID hai to kya karein?**
+   A: Agar UUID random hai, toh guess karna mushkil. Lekin kabhi kabhi UUID bhi predictable ho sakta hai (e.g., version 1).
+5. **Q: IDOR se bachne ke upaye?**
+   A: Har request mein authorization check karo ki current user us resource ka owner hai ya us par permission hai.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"IDOR ka khel, ID badal ke dekh, doosre ka data le le re."**
+
+---
+
+Ye raha **Module 5: GraphQL Security** ka complete, zero-confusion notes. Har topic ko 16-point structure mein tod-tod ke samjhaya gaya, bilkul aapki demand ke mutabik. Umeed hai ab GraphQL aapke liye koi raaz nahi rakhta.
+
+========================================================================================
