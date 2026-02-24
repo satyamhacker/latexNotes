@@ -4127,3 +4127,509 @@ Server should have checked: is requester allowed to see user 2?
 Ye raha **Module 5: GraphQL Security** ka complete, zero-confusion notes. Har topic ko 16-point structure mein tod-tod ke samjhaya gaya, bilkul aapki demand ke mutabik. Umeed hai ab GraphQL aapke liye koi raaz nahi rakhta.
 
 ========================================================================================
+
+## 🔄 Module 6: Business Logic & Rate Limiting
+
+Yeh module business logic mein chhupi hui vulnerabilities aur rate limiting ko bypass karne ke advanced techniques ke baare mein hai. Business logic flaws wo loopholes hote hain jo developers ne socha nahi tha, jaise step skip karna, ek hi coupon baar baar use karna, ya price negative karna. Rate limiting bypass se hum unlimited requests bhej sakte hain. Chaliye har topic ko detail mein samajhte hain.
+
+---
+
+### 🎯 Topic 6.1: Workflow Bypass (Step Skipping)
+
+#### 1. 🎯 Title
+**Workflow Bypass (Step Skipping)**
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Sochiye aap ek bank mein loan lene gaye hain. Normal process: (1) Form bharo, (2) Document verify karo, (3) Manager se milo, (4) Loan mil jaye. Ab agar aap form bharne ke baad seedha Manager ke cabin mein ghus jao aur "Loan de do" bolo, aur woh de de—toh bank ka process flawed hai. Yahan pe **step 2 (document verification) skip** ho gaya. Waise hi API mein, agar signup process ke step 1 ke baad step 3 ka endpoint call karke success le li, toh vulnerability hai.
+
+#### 3. 📖 Technical Definition
+Workflow Bypass ek vulnerability hai jahan application ka intended multi-step process (jaise signup, payment, password reset) ko attacker bypass karke kisi intermediate step ko skip kar deta hai aur directly final step execute kar leta hai. Yeh aksar tab hota hai jab server properly state maintain nahi karta (e.g., session mein step completion flag nahi check karta) aur client-side logic par bharosa karta hai.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+Ye vulnerability business logic mein sabse common hai. Isse attacker unauthorized access ya privileges achieve kar sakta hai. Jaise:
+- Signup mein OTP verify kiye bina account activate.
+- Payment gateway skip karke product free mein le lena.
+- Password reset ke final step par seedha pahunch kar password change.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+- **Burp Suite** mein aap requests ko intercept karte hain.
+- Signup process ke steps:
+  - `POST /api/register` → (step 1) → response 200 OK.
+  - `POST /api/verify-otp` → (step 2) → normally yahan jana chahiye.
+  - `POST /api/success` → (step 3) → final step.
+- Visual: Step 1 complete karne ke baad, aap **Repeater** mein seedha `/api/success` endpoint call karte hain.
+- Agar response aaya `200 OK` with `{"message":"Welcome"}` toh vulnerable hai.
+
+#### 6. ⚙️ Under the Hood
+Server ko track karna chahiye ki user kis step par hai. Usually session ya JWT mein `step_completed` flag store hota hai. Har step ke endpoint par yeh flag check hota hai. Agar developer sirf frontend routing par rely karta hai aur backend par proper check nahi karta, toh step 3 ka endpoint direct accessible ho jata hai. Example code (vulnerable):
+```python
+@app.route('/api/success', methods=['POST'])
+def success():
+    # No check if user completed step2
+    create_user_account()
+    return {"message":"Success"}
+```
+
+#### 7. 💻 Hands-On Step-by-Step
+Maano ek website hai: `https://target.com`
+
+**Step 1:** Signup form fill karo (email, password) aur request intercept karo:
+```
+POST /api/register HTTP/1.1
+Host: target.com
+...
+{"email":"test@test.com","password":"Test@123"}
+```
+Response: `{"status":"registered","user_id":123}`
+
+**Step 2:** Ab normally OTP page aata hai. Lekin hum OTP page ko ignore karte hain.
+
+**Step 3:** Directly success endpoint call karte hain. Agar URL guess karna ho toh common patterns:
+- `/api/success`
+- `/api/complete`
+- `/api/finish`
+- `/api/activate`
+- `/signup/step3`
+
+Burp Repeater mein bhejo:
+```
+POST /api/success HTTP/1.1
+Host: target.com
+Cookie: session=...
+```
+Ya body mein user_id bhej sakte hain:
+```
+{"user_id":123}
+```
+
+**Step 4:** Agar response `200 OK` aur account activate ho jaye, toh vulnerable hai.
+
+**Force Browsing variant:** Step 2 ka endpoint `/api/verify-otp` par OTP maang raha hai. Lekin aap try karo `/api/verify-otp` ko bina OTP bheje? Ya step 3 ka URL seedha browser mein type karo.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success Response:**
+  `HTTP/1.1 200 OK` with `{"message":"Account activated","redirect":"/dashboard"}`
+  Ya `302 Found` redirect to dashboard.
+- **Failure Response:**
+  `403 Forbidden` ya `401 Unauthorized` with `{"error":"OTP verification pending"}`
+  Ya `302 redirect` back to OTP page.
+
+#### 9. ⚖️ Comparison (Workflow Bypass vs IDOR)
+| Workflow Bypass | IDOR |
+|-----------------|------|
+| Steps skip karna | Direct object reference (jaise user_id change) |
+| Multi-step process ka flaw | Single endpoint par authorization flaw |
+| Example: Signup step 3 direct access | Example: /api/user/123 mein 124 dalna |
+
+#### 10. 🚫 Common Mistakes
+- **Mistake:** Sirf ek step ka endpoint try karna. **Fix:** Saare steps ke URLs enumerate karo (directory brute-force).
+- **Mistake:** Response par dhyan nahi dena. Kabhi `200 OK` aata hai but actual mein success nahi hota. Check karo ki account activate hua ya nahi (e.g., login try karo).
+- **Mistake:** Session cookie ignore karna. Step skip ke baad bhi same session maintain karo.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **Q:** Agar step 2 mein OTP verify karna mandatory hai, toh step 3 ka direct access kyun allowed ho sakta hai?
+  **A:** Kyunki developer ne sirf frontend routing ko hide kiya, backend par har endpoint independent hai. Step 2 ke endpoint ne user ko mark kiya "verified", but step 3 woh flag check karna bhool gaya.
+- **Q:** Agar step 3 ka URL unknown hai toh kaise pata chalega?
+  **A:** JavaScript files mein search karo (`/static/main.js`) ya common patterns guess karo. Tools like `Dirb` se directory brute-force kar sakte ho.
+
+#### 12. 🌍 Real-World Use Case
+**Bug Bounty Example:** Ek famous password reset bypass case: Password reset flow mein 3 steps the: (1) Email submit, (2) OTP verify, (3) New password set. Attacker ne step 1 complete kiya, OTP verify kiye bina seedha step 3 ka endpoint `/reset-password/confirm` call kiya with new password. Server ne bina OTP check kiye password change kar diya. Severity: Critical.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+User -> POST /register (step1) -> Server (stores user pending)
+User -> (skip step2) -> POST /success (step3) -> Server (check? no) -> Account activated
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Pro Tip 1:** Workflow enumeration ke liye Burp Intruder use karo with common step names (`/complete`, `/done`, `/final`).
+- **Pro Tip 2:** Signup ya password reset ke baad server ka response carefully dekho. Kabhi hidden step URL response mein milta hai.
+- **Pro Tip 3:** Agar API GraphQL hai toh introspection query se saare mutations pata karo.
+
+#### 15. ❓ FAQ (Interview Questions)
+- **Q1:** Workflow bypass vulnerability ka root cause kya hai?
+  **A:** Server-side state validation ki kami. Developer sirf client-side flow par rely karta hai.
+- **Q2:** Is vulnerability ko kaise prevent karein?
+  **A:** Har step ke endpoint par check karo ki user ne previous step complete kiya hai ya nahi, using session or token.
+- **Q3:** Workflow bypass aur privilege escalation mein kya antar hai?
+  **A:** Workflow bypass steps skip karna, privilege escalation user level badalna (e.g., user to admin).
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"Process ke step skip kar ke final destination par pahunch jao—agar server rokega nahi toh account mil gaya."**
+
+---
+
+### 🎯 Topic 6.2: Race Conditions (Turbo Intruder)
+
+#### 1. 🎯 Title
+**Race Conditions (Turbo Intruder)**
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Sochiye ek ladka ek ladki ko propose karta hai. Ladki ke paas do dost hain. Ek saath dono dost ladki se puchte hain: "Kya tumne haan kar di?" Ladki sochti hai "maine toh abhi haan nahi kiya" lekin dono ko separately "haan" bol deti hai. Baad mein pata chalta hai ki dono ne haan maan li. Yeh race condition hai: ek hi resource (ladki ka reply) par ek saath multiple requests ne overlapping condition create kar di.
+
+API mein, jab do ya zyada concurrent requests ek hi resource (jaise coupon, balance) ko modify karne ki koshish karte hain, aur server proper locking nahi karta, toh "race" hoti hai.
+
+#### 3. 📖 Technical Definition
+Race Condition ek vulnerability hai jahan ek system ki behavior timing par depend karta hai. Multiple threads ya processes ek shared resource ko access karte hain bina proper synchronization ke. Iski wajah se unexpected state aati hai—jaise ek coupon multiple baar apply ho jana, ya ek account se double withdrawal.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+Is vulnerability se financial loss ho sakta hai. Jaise:
+- Ek limited-use coupon baar baar use karke heavy discount.
+- Bank account se ek saath multiple withdrawals karke zyada paisa nikalna.
+- Voting system mein ek user multiple votes daal de.
+- E-commerce mein ek product ki quantity se zyada order kar lena.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+Burp Suite mein **Turbo Intruder** extension install karna hoga. Jab aap request bhejte hain:
+- Normal request: `POST /apply-coupon` with `coupon=SAVE50` → response: `{"success":true,"new_total":50}`
+- Race condition test: Turbo Intruder se 50 concurrent requests bhejo same coupon ke saath.
+- Agar response mein multiple `success:true` aaye, ya total bill 50 se kam ho jaye, toh vulnerable.
+
+#### 6. ⚙️ Under the Hood
+Server code kuch aisa hota hai (vulnerable):
+```python
+def apply_coupon(user_id, coupon):
+    coupon_data = db.query("SELECT * FROM coupons WHERE code=? AND used_by IS NULL", coupon)
+    if coupon_data:
+        # Step 1: check if coupon available
+        # Step 2: apply discount
+        # Step 3: mark coupon as used
+        db.execute("UPDATE coupons SET used_by=? WHERE code=?", user_id, coupon)
+```
+Race condition tab hoti hai jab do requests ek saath step 1 par pahunchti hain, dono dekhti hain coupon available hai, phir dono step 2 apply karti hain, phir step 3 update karti hain. Par step 3 ke time tak coupon do baar use ho chuka.
+
+#### 7. 💻 Hands-On Step-by-Step
+**Prerequisite:** Burp Suite Community/Pro, Turbo Intruder extension installed.
+
+**Step 1:** Target endpoint identify karo jahan limited-use coupon ya ek baar ka action ho raha ho. Example: `POST /cart/apply-coupon`.
+
+**Step 2:** Normal request capture karo aur send to Turbo Intruder (right-click → Extensions → Turbo Intruder → Send to Turbo Intruder).
+
+**Step 3:** Python script edit karo. Default script hai:
+```python
+def queueRequests(target, wordlists):
+    engine = RequestEngine(endpoint=target.endpoint,
+                           concurrentConnections=5,
+                           requestsPerConnection=100,
+                           pipeline=False
+                           )
+    for i in range(50):   # 50 concurrent requests
+        engine.queue(target.req)
+```
+ConcurrentConnections badha sakte hain (e.g., 20) for more race.
+
+**Step 4:** Attack run karo. Response tab mein multiple responses aayenge.
+
+**Step 5:** Analyze karo. Agar kisi bhi response mein `success:true` multiple baar aaya, toh coupon multiple baar apply hua. Check karo ki final cart total kitna hai (cart total endpoint call karke).
+
+**Turbo Intruder script with custom headers:** Agar request mein CSRF token ho toh usse handle karna padega. Use `target.req` as base and modify.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Multiple requests par `200 OK` with `{"success":true}`. Ya final total unexpectedly low.
+- **Failure:** Sirf pehli request success, baaki sab `400 Bad Request` with `{"error":"Coupon already used"}`.
+
+#### 9. ⚖️ Comparison (Race Condition vs Replay Attack)
+| Race Condition | Replay Attack |
+|----------------|---------------|
+| Concurrent requests ek saath bhejna | Same request baad mein dubara bhejna |
+| Timing vulnerability | Storage vulnerability (nonce missing) |
+| Coupon ek hi time pe multiple baar use | Already used coupon dubara bhejna |
+
+#### 10. 🚫 Common Mistakes
+- **Mistake:** Sirf 2-3 requests bhejna. **Fix:** Kam se kam 50-100 concurrent requests bhejo, kyunki server thoda slow ho sakta hai.
+- **Mistake:** CSRF token na handle karna. **Fix:** Har request ke liye alag token lena padega, ya token ko disable karne ka tareeka dhoondo.
+- **Mistake:** Network latency ki wajah se requests truly concurrent nahi hoti. **Fix:** Turbo Intruder mein `concurrentConnections` badhao aur `requestsPerConnection` bhi. Local network se test karo.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **Q:** Turbo Intruder mein `pipeline=False` kyun rakha?
+  **A:** HTTP pipelining se requests ek ke baad ek jaati hain, truly concurrent nahi. Isliye `pipeline=False` rakhte hain taake multiple connections khul sakein.
+- **Q:** Agar server rate limit laga de toh?
+  **A:** Race condition ke liye rate limit bhi bypass karna padega (Topic 6.3 dekho). Lekin agar rate limit strict hai toh race condition test mushkil ho jayega.
+
+#### 12. 🌍 Real-World Use Case
+**Bug Bounty Example:** Uber me ek coupon race condition thi. Attacker ne `PROMO50` coupon ko 50 concurrent requests bheji, aur sab successful aayi. Result: 50 baar $50 discount, yaani $2500 ka discount free ride ke liye. Uber ne severe rating di.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Request 1 ----------> Check coupon (available) -> Apply -> Mark used
+Request 2 -------->
+  (simultaneously) -> Check coupon (still available) -> Apply -> Mark used
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Pro Tip 1:** Turbo Intruder script mein `engine.start()` ke baad thoda sleep do taake requests truly overlap ho.
+- **Pro Tip 2:** Agar endpoint slow response deta ho toh `concurrentConnections` badhao.
+- **Pro Tip 3:** Race condition sirf coupons mein nahi, balki voting, likes, wallet withdrawal, inventory management mein bhi check karo.
+
+#### 15. ❓ FAQ (Interview Questions)
+- **Q1:** Race condition aur TOCTOU (Time-of-check to time-of-use) mein kya farak hai?
+  **A:** TOCTOU race condition ka hi ek type hai, jahan check aur use ke beech time gap mein resource change ho jata hai.
+- **Q2:** Race condition ko kaise prevent karein?
+  **A:** Database-level locking (SELECT FOR UPDATE), atomic operations, ya queue system use karo.
+- **Q3:** Turbo Intruder ke alawa aur kaunsa tool use kar sakte hain?
+  **A:** Burp Intruder (gadhe se), custom Python script with threading, ya `race-the-web` tool.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"Ek coupon ek second mein 50 baar lagao—agar server ne rok nahi, toh race condition paao."**
+
+---
+
+### 🎯 Topic 6.3: Rate Limiting Bypass
+
+#### 1. 🎯 Title
+**Rate Limiting Bypass**
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Maan lo ek chai ki tapri hai. Tapri wala ek customer ko sirf ek cup chai deta hai, phir use rok deta hai. Ab ek banda baar baar aata hai, lekin har baar apna muh bandh kar ke naye kapde pehen ke aata hai (IP change karke). Ya apne saath apne 20 dost laata hai (different IPs). Is tarah woh limit bypass kar ke 20 cup chai pee leta hai. Yahan rate limit hai, lekin IP rotate karke bypass ho gayi.
+
+#### 3. 📖 Technical Definition
+Rate limiting ek mechanism hai jo ek specific time frame mein ek client (IP, user, etc.) se hone wali requests ki frequency control karta hai. Rate limiting bypass wo technique hai jisse attacker is limit ko exceed kar leta hai, jaise IP rotate karke, headers manipulate karke, ya different endpoints use karke.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+Rate limiting bypass ki zaroorat tab hoti hai jab humein brute-force attacks (login, OTP), resource exhaustion, ya race condition test ke liye zyada requests bhejni hoti hain. Agar rate limit effectively implemented hai, toh hum 100 requests nahi bhej sakte. Bypass karke hum unlimited requests bhej sakte hain.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+- **Login endpoint:** `POST /api/login`
+- Normal attempt: 5 baar wrong password → `429 Too Many Requests` with `{"error":"Rate limit exceeded"}`
+- Bypass attempt: Har request mein `X-Forwarded-For: <random IP>` header add karo.
+- Burp Intruder mein payload position `X-Forwarded-For` par rakh kar random IPs bhejo.
+- Agar `429` na aaye aur login attempt continue ho, toh bypass successful.
+
+#### 6. ⚙️ Under the Hood
+Server rate limit implement karta hai usually client IP address ke basis par. Example code:
+```python
+def is_rate_limited(ip):
+    count = redis.get(f"rate:{ip}")
+    if count > 5:
+        return True
+    redis.incr(f"rate:{ip}")
+```
+Agar server `X-Forwarded-For` header ko IP ke tor par use karta hai (kyunki reverse proxy ke peeche hai), toh hum is header ko spoof kar sakte hain. Har request me naya IP dalenge, toh server alag client samajh lega.
+
+#### 7. 💻 Hands-On Step-by-Step
+**Method 1: IP Rotation via Headers**
+
+**Step 1:** Burp Suite mein request capture karo (e.g., login).
+
+**Step 2:** Right-click → Send to Intruder.
+
+**Step 3:** Positions tab mein `X-Forwarded-For: 127.0.0.1` header add karo, aur value ko highlight karke Add § lagao:
+```
+X-Forwarded-For: §127.0.0.1§
+```
+
+**Step 4:** Payloads tab mein payload type "Numbers" select karo, from 1 to 255, step 1. Format as IP: `192.168.1.§1§` ya custom iterator.
+
+Ya better: Payload type "Custom iterator" with position 1: 1-255, position 2: 1-255, position 3: 1-255, aur "." join karo. Simple ke liye "Simple list" mein random IPs ki list daal do.
+
+**Step 5:** Start attack. Agar sab requests par `200 OK` aaye aur koi `429` na aaye, toh bypass ho gaya.
+
+**Method 2: VPN/Proxy Chains**
+Manually VPN ya proxy rotate karo (e.g., using FoxyProxy with list of proxies). Burp Suite mein Proxy listener ke through requests bhejo aur proxy switch karte jao.
+
+**Method 3: Parameter Pollution**
+Har request mein ek extra parameter add karo jiska value random ho, jaise `&rand=123`, `&rand=456`. Isse server ki fingerprinting (jaise request hash based rate limit) fail ho sakti hai. Example:
+```
+POST /api/login?rand=123
+POST /api/login?rand=456
+```
+Agar server URL ke saath rate limit calculate karta hai toh different URLs samjhega.
+
+**Method 4: Endpoint Swapping**
+Agar `/api/login` par rate limit hai, toh versioning check karo:
+- `/api/v2/login`
+- `/api/auth/login`
+- `/api/user/login`
+- `/login.php`
+- `/mobile/login`
+
+Kabhi server different endpoints par alag rate limit rakhta hai. Try karte raho.
+
+**Method 5: Slow down**
+Agar threshold 5 requests per minute hai, toh 4 requests per minute bhejo. Isse bypass nahi, but compliant hai. Lekin agar humein zyada requests bhejni hain toh IP rotate better hai.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** 100 requests bhejne par bhi `200 OK` mil raha hai, koi `429` nahi.
+- **Failure:** 5-6 requests ke baad `429` ya block aa jata hai.
+
+#### 9. ⚖️ Comparison (IP Rotation vs Endpoint Swapping)
+| IP Rotation | Endpoint Swapping |
+|-------------|-------------------|
+| Har request ka IP badalna | Har request ka endpoint badalna |
+| Headers modify (`X-Forwarded-For`) | URLs enumerate |
+| Proxy/VPN use karna | Common endpoint patterns try |
+
+#### 10. 🚫 Common Mistakes
+- **Mistake:** Sirf `X-Forwarded-For` header dalna aur original IP bhi bhejna (kuch servers dono check karte hain). **Fix:** `X-Forwarded-For` ke saath `X-Real-IP` aur `X-Originating-IP` bhi try karo.
+- **Mistake:** Random IP generate karte waqt private IP ranges (192.168.x.x) use karna. **Fix:** Public IP ranges use karo (1.0.0.0 to 223.255.255.255) taaki realistic lage.
+- **Mistake:** Endpoint swapping mein sirf ek do try karna. **Fix:** Directory brute-force tools se saare possible auth endpoints nikaalo.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **Q:** Kya `X-Forwarded-For` header hamesha kaam karega?
+  **A:** Jab tak server us header par trust karta hai. Agar server directly client IP le raha hai (connection IP), toh yeh kaam nahi karega. Phir proxy chain use karo.
+- **Q:** Agar server ke paas CAPTCHA hai toh rate limit bypass kaise karein?
+  **A:** CAPTCHA solving services ya machine learning use karo, lekin yeh advanced hai. Rate limit bypass ke liye CAPTCHA solve karna alag challenge hai.
+- **Q:** Kya rate limit bypass illegal hai?
+  **A:** Testing with permission ethical hai, otherwise illegal. Bug bounty programs allow rate limit testing.
+
+#### 12. 🌍 Real-World Use Case
+**Bug Bounty Example:** Instagram ke login endpoint par rate limit thi (5 attempts per IP). Attacker ne `X-Forwarded-For` header rotate karke unlimited login attempts kiye, jisse wo kisi bhi user ka password brute-force kar sakta tha. Instagram ne isko critical mark kiya.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Attacker -> Request 1 (X-Forwarded-For: 1.1.1.1) -> Server -> OK
+Attacker -> Request 2 (X-Forwarded-For: 2.2.2.2) -> Server -> OK (different IP)
+Attacker -> Request 3 (X-Forwarded-For: 3.3.3.3) -> Server -> OK
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Pro Tip 1:** Burp Suite mein "Payload processing" mein "Add from list" mein random IPs ki list bana lo (e.g., from 1.0.0.0 to 223.255.255.255).
+- **Pro Tip 2:** Auto-rate-limit-bypass ke liye extensions hain jaise "Rate Limit Bypasser".
+- **Pro Tip 3:** Kabhi kabhi server `X-Forwarded-For` comma-separated list leta hai. Pehle wala IP trusted hota hai. Toh `X-Forwarded-For: <random>, <real_ip>` bhejna padega.
+
+#### 15. ❓ FAQ (Interview Questions)
+- **Q1:** Rate limiting bypass ke alag alag techniques kya hain?
+  **A:** IP rotation (headers/proxy), parameter pollution, endpoint swapping, slow down, distributed attacks.
+- **Q2:** Server ko rate limit bypass se kaise bachayen?
+  **A:** Multiple factors use karo: IP + User-Agent + session + behavior analysis. CAPTCHA use karo.
+- **Q3:** Agar server IP rate limit ke saath user rate limit bhi laga raha hai toh?
+  **A:** Toh combination bypass mushkil hai. Phir distributed attack (different users) try karo.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"Limit lage to IP badal, header ghumake nikal ja."**
+
+---
+
+### 🎯 Topic 6.4: Financial Logic Flaws
+
+#### 1. 🎯 Title
+**Financial Logic Flaws (Negative Values, Currency Manipulation, Decimal Precision)**
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Sochiye aap ek dukan se 10 rupaye ki chocolate khareed rahe hain. Bill pe aap dekhte ho "Quantity: -1" likh kar total -10 rupaye ho gaya. Matlab dukan aapko 10 rupaye de rahi hai. Yeh possible nahi, lekin agar software mein negative value allow ho toh aise ho sakta hai. Ya phir aap dukan wale se kehte ho "Yeh to dollar mein 10 hai, lekin main rupees mein 10 dunga" aur woh maan jaye. Ya decimal ki precision ka fayda uthake 0.9999999 se 1 karwa lo.
+
+#### 3. 📖 Technical Definition
+Financial logic flaws wo vulnerabilities hain jo financial transactions (e-commerce, wallet, payments) mein mathematical ya logical errors exploit karti hain. Common types:
+- **Negative Values:** Quantity, price, ya amount negative bhejna.
+- **Currency Manipulation:** Currency code change karke price manipulation.
+- **Decimal Precision:** Floating-point rounding errors se fayda uthana.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+In flaws se attacker ko free products mil sakte hain, balance badh sakta hai, ya money steal kar sakta hai. E-commerce sites par yeh direct financial loss cause karta hai.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+- **Add to cart request:** `POST /cart/add` with body: `{"product_id":123, "quantity": 2}`
+- **Negative value test:** `{"quantity": -1}`
+- **Response:** Cart total negative ho sakta hai. Check `GET /cart` response.
+
+- **Currency manipulation:** Request mein `"currency": "USD"` change to `"currency": "INR"` with same price 10. Agar server conversion nahi karta toh 10 INR me 10 USD ka product mil gaya.
+
+- **Decimal precision:** `"price": 10.9999999999` bhej kar dekho ki final amount kya aata hai.
+
+#### 6. ⚙️ Under the Hood
+**Negative Values:** Server pe validation nahi hai ki quantity positive honi chahiye. Direct database mein insert ho jata hai. Phir total calculation mein negative quantity negative total dega.
+
+**Currency Manipulation:** Server product price ko base currency (USD) mein store karta hai. Jab user request karta hai, toh currency conversion apply honi chahiye. Agar server sirf price le leta hai aur currency ko ignore karta hai, toh user foreign currency mein kam price de sakta hai.
+
+**Decimal Precision:** Floating-point arithmetic mein rounding errors hoti hain. Jaise `10.9999999999 + 0.0000000001 = 11.0` but `10.9999999999 * 1 = 10.9999999999`. Agar server total ko integer mein convert karta hai without rounding, toh thoda sa fayda ho sakta hai.
+
+#### 7. 💻 Hands-On Step-by-Step
+**Negative Values:**
+
+**Step 1:** Add to cart request intercept karo:
+```
+POST /api/cart/add
+Host: target.com
+...
+{"product_id": 5, "quantity": 1}
+```
+Response: `{"cart_total": 100}`
+
+**Step 2:** Quantity ko -1 karo:
+```
+{"product_id": 5, "quantity": -1}
+```
+**Step 3:** Response dekho. Agar total 100 se kam ho jaaye (e.g., 0 ya -100) toh vulnerable. Phir `POST /checkout` karke negative total ke saath order place kar sakte ho? Agar server negative amount charge karta hai toh merchant ko paisa dena hoga.
+
+**Currency Manipulation:**
+
+**Step 1:** Add to cart request mein currency field add karo (ya existing ko change karo). Agar request mein currency nahi hai, toh POST mein extra parameter try karo:
+```
+{"product_id":5, "quantity":1, "currency":"USD"}
+```
+Response total 100 USD.
+
+**Step 2:** Currency change to INR:
+```
+{"currency":"INR"}
+```
+Agar response total same 100 raha (100 INR) toh vulnerable, kyunki 100 INR < 100 USD.
+
+**Decimal Precision:**
+
+**Step 1:** Check karo ki site floating-point amounts allow karti hai ya nahi. Quantity decimal allow? Price decimal?
+
+**Step 2:** Try extreme values: `{"quantity": 0.9999999999}` ya `{"price": 10.9999999999}`. Payload mein maximum precision do.
+
+**Step 3:** Dekho total calculate hokar round down hota hai ya up. Jaise agar total 10.9999999999 aata hai aur order place karte waqt 11 charge ho jata hai toh kuch fayda nahi. Agar 10.99 charge ho aur 0.01 bach jaye toh chota fayda.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Negative Success:** Cart total negative aaya, ya zero.
+- **Negative Failure:** Server error `400` with `{"error":"Invalid quantity"}`.
+- **Currency Success:** 100 USD ka product 100 INR mein mil gaya (approx 1.2 USD).
+- **Currency Failure:** Server price convert karta hai (e.g., 100 USD = 7500 INR), ya error "Currency not supported".
+- **Decimal Success:** Final amount thoda kam charge hua (rounding error).
+- **Decimal Failure:** Server decimal allow hi nahi karta (integer required).
+
+#### 9. ⚖️ Comparison (Negative Value vs Integer Overflow)
+| Negative Value | Integer Overflow |
+|----------------|------------------|
+| Quantity negative bhejna | Quantity bada integer bhejna (e.g., 99999999) |
+| Server side validation missing | Server storage overflow se wraparound |
+| Total negative ho jata | Total overflow ho kar chota ho jata |
+
+#### 10. 🚫 Common Mistakes
+- **Mistake:** Sirf quantity negative try karna. **Fix:** Price field bhi negative try karo, shipping charges negative, discount negative etc.
+- **Mistake:** Currency manipulation mein sirf INR/USD try karke chhod dena. **Fix:** Saari currencies try karo jinki value kam ho (Venezuelan Bolivar, Indonesian Rupiah).
+- **Mistake:** Decimal precision mein `0.1` type karna. **Fix:** `0.9999999999999999` jaisi values do with maximum digits (JSON specification allows up to 15-17 decimal digits).
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **Q:** Kya negative total ke saath order place kar sakte hain?
+  **A:** Agar place order endpoint bhi vulnerable hai toh haan, negative amount charge hoga ya account mein paisa aa jayega. Payment gateway normally negative amount reject karega, lekin agar internal wallet use ho raha ho toh ho sakta hai.
+- **Q:** Currency manipulation mein server conversion kaise implement karta hai?
+  **A:** Ideally server product price in base currency store karta hai, aur currency code ke hisaab se real-time exchange rate apply karta hai. Agar aisa nahi karta, toh vulnerable.
+- **Q:** Decimal precision se kitna fayda ho sakta hai?
+  **A:** Bahut chhoti amount, lekin large scale par automate kar ke fayda uthaya ja sakta hai, jaise 1 lakh transactions mein 0.01 paisa har transaction se 1000 rupaye.
+
+#### 12. 🌍 Real-World Use Case
+**Negative Value Bug Bounty:** HackerOne report mein ek user ne e-commerce site par `quantity: -100` bhej kar total -$5000 kar diya. Phir checkout kiya, aur site ne uske credit card ko -$5000 charge kar diya (refund). Site ko loss hua.
+
+**Currency Manipulation:** Ek site par product price USD 10 tha, lekin currency parameter change karke `ZWL` (Zimbabwe dollar) kar diya, aur 10 ZWL me le liya (~2 cents).
+
+**Decimal Precision:** Shopify me ek bug tha jahan price mein 0.000000001 ki precision se product free le sakte the? (Hypothetical)
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Negative Quantity:
+User -> {"quantity": -1} -> Server -> total = price * -1 -> Negative total -> Checkout -> Negative charge
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Pro Tip 1:** Burp Intruder mein payload type "Numbers" se negative values ka range bhejo (e.g., -1 to -100).
+- **Pro Tip 2:** Currency manipulation ke liye common weak currencies ki list bana lo: `VEF, IRR, IDR, ZWL, SYP` etc.
+- **Pro Tip 3:** Decimal precision ke liye API mein `float` type allow hai ya nahi check karo. JSON mein numbers as strings bhej kar bhi try karo taaki precision preserve ho.
+
+#### 15. ❓ FAQ (Interview Questions)
+- **Q1:** Financial logic flaws ko prevent karne ke liye kaise validation karein?
+  **A:** Negative values pe strict check, quantity positive integer hona chahiye. Price should be positive decimal. Currency conversion mandatory ho. Use integers for smallest unit (paise/cents) to avoid floating errors.
+- **Q2:** Currency manipulation se bachne ka tarika?
+  **A:** Server-side pe hamesha base currency mein price store karo aur conversion fixed rates se karo. Client-side currency sirf display ke liye use karo, calculation ke liye nahi.
+- **Q3:** Decimal precision rounding errors se bachne ka tarika?
+  **A:** Floating-point na use karo; use integer (e.g., amount in cents). Har transaction mein round to nearest integer after calculation.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"Price mein minus lagao, currency badlo, decimal ka khel karo—financially flawed API se free shopping karo."**
+
+---
+
+========================================================================================

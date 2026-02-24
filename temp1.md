@@ -1,31 +1,3 @@
-## 🔄 Module 6: Business Logic & Rate Limiting
-
-### Topic 6.1: Workflow Bypass
-* **Scenario:** Signup process -> (1) Register (2) Verify OTP (3) Success.
-* **Attack:** Step 1 complete karne ke baad, seedha Step 3 ka endpoint call karo (`/api/success`). Agar skip kar diya, vulnerable hai.
-* **Force Browsing:** Step 2 ke baad Step 3 ka URL guess karo.
-
-### Topic 6.2: Race Conditions (Turbo Intruder)
-* **Scenario:** Coupon code ek baar use ho sakta hai. Ek hi second mein 50 requests bhej do us coupon ke saath. Agar 2 baar apply ho gaya, Race Condition hai.
-* **Scenario:** Wallet mein se paisa nikalna. Balance check hone aur deduct hone ke beech mein multiple requests bhejo.
-* **Tool:** Burp Suite ka **Turbo Intruder** extension.
-    * Python script likho jo 50+ concurrent requests bheje.
-
-### Topic 6.3: Rate Limiting Bypass
-* **IP Rotation:**
-    * `X-Forwarded-For: <random IP>` header rotate karo. Burp mein `FoxyProxy` ya custom script use karo.
-    * VPN ya proxy chains use karo.
-* **Parameter Pollution:** Har request mein ek extra random parameter daal do (`&rand=123`, `&rand=456`). Isse server ki fingerprinting fail ho sakti hai.
-* **Endpoint Swapping:** Agar `/api/login` par rate limit hai, toh `/api/v2/login` ya `/api/auth/login` try karo.
-* **Slow down:** Thoda slow request bhejo, threshold ke neeche raho.
-
-### Topic 6.4: Financial Logic Flaws
-* **Negative Values:** `quantity: -1` ya `price: -100` bhej kar dekho. Total negative ho sakta hai.
-* **Currency Manipulation:** Product price USD 10 hai. Currency code change karo INR 10 par. Agar conversion nahi hua, toh sasta mil gaya.
-* **Decimal Precision:** `price: 10.9999999999` bhej kar rounding errors exploit karo.
-
----
-
 ## 🌐 Module 7: Infrastructure & Misconfiguration (Mobile & Cloud)
 
 ### Topic 7.1: Mobile API Interception (SSL Pinning Bypass)
