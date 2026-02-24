@@ -238,6 +238,30 @@
 * **Array Overflow:** JSON array mein 1 lakh objects bhej do `[{"id":1}, {"id":2}, ...]`.
 * **Rate Limit Bypass:** (Iska detail **Module 5** mein hai, par yahan bhi mention kar do ki resource consumption se bhi DoS ho sakta hai).
 
+### Topic 4.8: Prototype Pollution (Node.js Special)
+Kaha dhoondo: Node.js/Express APIs mein jahan JSON objects merge ya clone ho rahe hon.
+
+Method: Attacker base object (prototype) ko "pollute" karta hai taaki poore application ka behavior change ho jaye.
+
+Payload:
+
+JSON
+{
+  "__proto__": {
+    "isAdmin": true
+  }
+}
+Impact: Isse aap bina admin rights ke unauthorized actions kar sakte ho ya server crash (DoS) kar sakte ho.
+
+### Topic 4.9: Insecure Deserialization (Java/C# Focus)
+Kaha dhoondo: APIs jo binary serialized data ya complex objects accept karti hain.
+
+Scenario: Server jab data ko wapas object banata hai (Deserialize), toh wo usmein chhupa malicious code execute kar deta hai.
+
+Attack: ysoserial tool use karke payload generate karo aur request mein bhej do.
+
+Impact: Seedha RCE (Remote Code Execution)—matlab server aapke kabze mein.
+
 ---
 
 ## 🚀 Module 5: GraphQL Security (Modern APIs)
@@ -350,6 +374,13 @@
 * Check karo: `Strict-Transport-Security` (HSTS), `Content-Security-Policy` (CSP), `X-Content-Type-Options` present hain ya nahi.
 * **Verbose Error Messages:** Galat input daal kar dekho. Stack trace, DB version, internal paths leak ho rahe hain?
 
+### Topic 7.6: API Cache Poisoning
+  Kaha dhoondo: APIs jo CDNs (Cloudflare) ya Caching Layers (Redis/Varnish) use karti hain.
+
+  Method: Aisi request bhejo jisme "Unkeyed Headers" (jaise X-Forwarded-Host) malicious ho. Agar server us malicious response ko cache kar leta hai, toh har user ko wahi dikhega.
+
+  Example: Attacker cache mein apni malicious JS file path save karwa deta hai, aur legitimate users ko wo file serve hone lagti hai.
+
 ---
 
 ## 🔗 Module 8: Webhook Security & Microservices
@@ -394,6 +425,17 @@
 * **CVSS Score:** Vulnerbility ki severity nikalne ke liye (Base Score: 3.0 - Low, 7.0+ High). Use `https://www.first.org/cvss/calculator/`.
 * **PoC Writing:** Steps clearly likho, screenshot do, impact batao, fix suggestion do.
 * **Remediation Guidance:** Framework-specific fix suggestions (e.g., Spring Boot mein `@PreAuthorize`, Express mein middleware).
+
+### Topic 9.5: Remediation Timelines (Industry Standards)
+  Note: Professional report mein sirf bug batana kaafi nahi hai, fix karne ka time bhi dena hota hai:
+
+  Critical (P1): Fix within 7 Days (e.g., RCE, BOLA).
+
+  High (P2): Fix within 30 Days (e.g., Stored XSS, Broken Auth).
+
+  Medium (P3): Fix within 90 Days (e.g., CSRF, Misconfigurations).
+
+  Low (P4): Best effort (e.g., Missing security headers).
 
 ---
 
