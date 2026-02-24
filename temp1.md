@@ -1,37 +1,3 @@
-## 🔍 Module 1: Reconnaissance & Advanced Discovery
-*Target ki "Jaikaashi" karna. Jitna jaayega jaanoge, utna deep jaayega exploit.*
-
-### Topic 1.1: Passive Recon (Bina Touch Kiye)
-* **Technology Stack Detection:**
-    * **Tool 1: Wappalyzer** (Browser Extension) -> Bataega ki website kis pe bani hai (PHP, Node.js, React, etc.). Isse pata chalega ki SQLi try karna hai ki NoSQLi.
-    * **Tool 2: BuiltWith** (Online Tool) -> Detailed tech profile. (Reference: **Page 12**)
-* **Source Code Analysis (JS Mining):**
-    * Website par right-click -> **Inspect Element (Debugger)** . (Reference: **Page 6**)
-    * Saari JavaScript files (`.js`) scroll karo. Minified (read nahi aa raha) code ho, toh use **"JavaScript JS Formatter"** (online tool) mein daal kar beautify karo. (Reference: **Page 6**)
-    * **Dhoondo kya dhoondo:**
-        * `/api/`, `/v1/`, `/graphql`, `/swagger` jaise paths.
-        * Hardcoded API keys, secrets, ya endpoints comments mein.
-        * **Pro Tip:** `LinkFinder` ya `JSScanner` jaise tools automate kar dete hain JS se endpoints nikalna.
-
-### Topic 1.2: Active Recon (Mapping the Territory)
-* **Directory/File Fuzzing (Basic):** `gobuster` ya `ffuf` use karo.
-* **API-Specific Fuzzing (Advanced):** Normal wordlists API ke liye kaam nahi karti. **Kiterunner** (context-aware fuzzer) use karo jo API routes (`/api/users/export`) aur common API wordlists ke saath aata hai. (Reference: **Page 6 - Fuzzing APIs**)
-* **Hidden Parameter Discovery:** **Arjun** ya Burp ka **Param Miner** use karke hidden headers (jaise `X-Forwarded-For`, `X-Admin-User`, `X-Original-URL`) dhoondna.
-* **Documentation Mining (Sone ki chidiya):**
-    * Ye endpoints dhoondo: `/swagger-ui.html`, `/swagger.json`, `/v2/api-docs`, `/openapi.json`, `/redoc`, `/graphql?introspection`. (Reference: **Missing Topics**)
-    * Agar mil gaya, toh poora API ka map (endpoints, parameters, authentication) mil jayega.
-* **Improper Assets Management (OWASP API 9:2023) Deep Dive:**
-    * **Shadow APIs:** Wo endpoints jo production mein hain par developer bhool gaye (e.g., `/api/v1.1/` jab `/v2/` chal raha ho). Inhe dhoondo fuzzing se.
-    * **Environment Leakage:** Production API ke parameters use karke `dev`, `staging`, ya `test` environment ka data access karna (e.g., changing `origin=prod` to `origin=dev`). Try karo `Host: dev-api.target.com` header change karke.
-    * **Unauthenticated Docs:** Kya Swagger/Redoc UI bina login ke accessible hai? Isse poora map mil jata hai.
-    * **Host Header Injection:** Request mein `Host` header change karke dekho (`Host: evil.com`). Kya server internal redirect kar raha hai ya cache poison ho raha hai?
-
-### Topic 1.3: Version Control & Leak Search
-* **GitHub/GitLab Dorks:** "target.com API key", "target.com secret", "target.com token" search karo. Internal docs bhi mil sakte hain.
-* **Mobile App Decompilation:** APK download karo, `apktool` ya `jadx` se decompile karo. `strings.xml` aur source code mein hardcoded API keys dhoondo.
-
----
-
 ## 🔐 Module 2: Authentication & Session Management Deep-Dive
 *Andar ka raasta (gateway) kitna strong hai?*
 
