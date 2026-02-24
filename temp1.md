@@ -1,17 +1,3 @@
-## 🔗 Module 8: Webhook Security & Microservices
-
-### Topic 8.1: Webhook Security
-* **Scenario:** Tumhari app kisi third-party service ko webhook bhejti hai (e.g., payment success par).
-* **Lack of Signature Verification:** Agar incoming webhook (dusri service se tumhari app par aane wala) verify nahi hota, toh attacker fake webhook bhej kar event trigger kar sakta hai (e.g., "payment success").
-* **Replay Attacks:** Webhook request mein `timestamp` aur `nonce` missing hai? Attacker same request baar-baar bhej sakta hai.
-* **SSRF via Webhook:** Webhook URL field mein internal IP daal kar server ko request karwado.
-
-### Topic 8.2: Microservices Communication
-* **Service-to-Service Auth:** Internal APIs bina authentication ke accessible hain? Try karo `service-a.internal` ya `service-b:8080` ko.
-* **mTLS Misconfig:** Agar mutual TLS hai, toh certificate check bypass ho sakta hai?
-
----
-
 ## ⚙️ Module 9: Professional Tooling & Automation
 
 ### Topic 9.1: Burp Suite Mastery
