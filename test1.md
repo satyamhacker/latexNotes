@@ -1,11 +1,3 @@
-**TechGuru here!**
-
-Chalo shuru karte hain **Module 1: Setting Up the Laboratory** – kyunki jab tak practice ka mahaul nahi hoga, tab tak Burp Suite ki taakat bekaar hai. Pehle apna **testing kitchen** taiyar karte hain!
-
-Yeh raha Module 1 ke **dono topics (1.1 aur 1.2)** ek hi response mein – poora 16-point structure ke saath.
-
----
-
 # Module 1: Setting Up the Laboratory
 
 ---
