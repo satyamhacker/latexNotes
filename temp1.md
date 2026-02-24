@@ -437,3 +437,138 @@ Sirf JWT kafi nahi hai, login flows bhi test karne hote hain:
 ---
 
 **Next Step:** Kya aap chahte hain ki main **BOLA (Broken Object Level Authorization)** se shuru karun aur aapko iska ek practical industry-standard roadmap aur lab setup samjhaun?
+
+### Missing Topics & Sub-Topics
+
+#### 1. OWASP API Security Top 10 – 2023 Coverage
+- **Broken Object Level Authorization (BOLA / IDOR)**
+  - Chained BOLA (e.g., using one IDOR to leak another ID)
+  - Bulk BOLA (array/JSON object injection with multiple IDs)
+  - BOLA in non‑CRUD operations (e.g., state transitions)
+- **Broken Property Level Authorization (BPLA)**
+  - Mass assignment of hidden properties (e.g., `isAdmin`, `role`, `balance`)
+  - Excessive data exposure via over-fetching (e.g., responses containing sensitive fields not needed by frontend)
+  - Property tampering in deeply nested JSON objects
+- **Unrestricted Resource Consumption**
+  - Rate limiting bypass techniques (e.g., IP rotation, using different endpoints)
+  - Resource‑based DoS (e.g., sending large payloads, complex queries)
+  - Pagination abuse (requesting large `limit` values)
+- **Server-Side Request Forgery (SSRF)**
+  - SSRF via URL parameters, webhooks, or file uploads
+  - Exploiting cloud metadata endpoints (`169.254.169.254`, `metadata.google.internal`)
+  - Blind SSRF detection techniques (out‑of‑band, time‑based)
+- **Security Misconfiguration**
+  - CORS wildcard (`*`) with credentials allowed
+  - Verbose error messages leaking stack traces or internal paths
+  - HTTP method override headers (`X-HTTP-Method-Override`) leading to bypasses
+  - API versioning issues (exposed deprecated, debug, or beta endpoints)
+- **Unsafe Consumption of APIs**
+  - Third‑party API integration flaws (e.g., leaking tokens, insufficient validation of responses)
+
+#### 2. Advanced JWT Attacks
+- **Algorithm Confusion Attacks**
+  - RS256 → HS256 key confusion (using public key as HMAC secret)
+  - ES256 → HS256 confusion (if public key is known or guessable)
+- **Header Injection / Parameter Manipulation**
+  - `alg: none` attack (if signature verification is skipped)
+  - `kid` (Key ID) injection leading to path traversal or SQLi
+  - `jku` / `x5u` header manipulation to point to attacker‑controlled keys
+- **Weaknesses in JWT Validation**
+  - Missing signature verification on the server
+  - Accepting tokens with incorrect or mismatched algorithms
+  - Timing attacks on signature verification
+
+#### 3. GraphQL Specific Attacks
+- **Introspection Queries** – extracting full schema, queries, mutations, and subscriptions
+- **GraphQL Batching / Depth Attacks**
+  - Circular queries / alias‑based resource exhaustion
+  - Deeply nested queries causing database or compute overload
+- **Directive‑based Attacks**
+  - Abuse of custom directives (e.g., `@include`, `@skip` with user‑controlled variables)
+- **Field Suggestions** – leaking field names when introspection is disabled
+- **GraphQL IDOR** – accessing objects across types using predictable global IDs
+
+#### 4. OAuth 2.0 / OIDC Vulnerabilities
+- **Redirect URI Manipulation** – open redirect leading to authorization code interception
+- **CSRF in OAuth Flow** – missing or weak `state` parameter
+- **Authorization Code Interception** – code leakage via referer headers or browser history
+- **Token Leakage in Logs / URLs** – access tokens passed in query strings
+- **Improper Scope Validation** – upgrading privileges by modifying the `scope` parameter
+- **Refresh Token Weaknesses** – infinite lifetime, no rotation, no binding to client
+
+#### 5. Microservices, Serverless, and Webhooks
+- **Microservice‑specific Threats**
+  - Service‑to‑service authentication bypass (e.g., hardcoded API keys, mTLS misconfig)
+  - Internal API exposure via misconfigured service mesh
+- **Serverless API Risks**
+  - Event injection (e.g., manipulating event data to alter function logic)
+  - Denial of wallet (resource exhaustion leading to high costs)
+- **Webhook Security**
+  - Lack of signature verification (attacker can replay or forge webhook calls)
+  - SSRF via webhook URL parameters
+  - Replay attacks due to missing nonce / timestamp checks
+
+#### 6. Business Logic Flaws
+- **Race Conditions** – exploiting concurrency in e‑commerce, coupon usage, voting, etc.
+- **Currency / Unit Manipulation** – changing price, quantity, or discount parameters
+- **Workflow Bypass** – skipping steps in multi‑step processes (e.g., payment verification)
+- **Functionality Abuse** – using intended features maliciously (e.g., using support ticket system to spam)
+- **Time‑based Logic Flaws** – manipulating timestamps to gain unfair advantages
+
+#### 7. Advanced Reconnaissance & Discovery
+- **Documentation Mining**
+  - Swagger/OpenAPI, Postman collections, GraphQL playgrounds
+  - Extracting endpoints from comments, examples, and `deprecated` fields
+- **Active Discovery Tools**
+  - Kiterunner (context‑aware API fuzzing)
+  - Arjun / Param Miner (discovering hidden parameters)
+  - ffuf / gobuster for directory and file enumeration
+- **Passive Reconnaissance**
+  - GitHub dorks for API keys, tokens, or internal documentation
+  - JS file analysis using tools like **LinkFinder**, **JSScanner**
+  - Mobile app decompilation to extract API endpoints and secrets
+
+#### 8. Advanced Tooling & Burp Extensions
+- **Burp Suite Extensions**
+  - **Autorize** – automated authorization testing
+  - **Authz** – privilege escalation checks
+  - **JSON Web Tokens** (by d3adc0de) – JWT manipulation
+  - **GraphQL Raider** – GraphQL testing
+  - **Backslash Powered Scanner** – advanced parameter parsing
+- **Postman / Newman** – scripting API tests, collection‑based automation
+- **Custom Automation** – writing Python scripts with `requests` for large‑scale testing
+
+#### 9. Modern Security Misconfigurations
+- **CORS (Cross‑Origin Resource Sharing)**
+  - Overly permissive `Access-Control-Allow-Origin` reflecting arbitrary origins
+  - Preflight request bypass via `null` origin
+- **HTTP Parameter Pollution (HPP)**
+  - Duplicate parameters leading to WAF bypass or logic confusion
+- **Cache Poisoning / Cacheable Sensitive Data**
+  - Leaking authenticated responses via shared caches
+- **Insecure Direct Object References for Files** – path traversal in file download/upload APIs
+- **Verbose Stack Traces** in production error responses
+
+#### 10. Advanced Injection Techniques
+- **Second‑order SQL Injection**
+- **Blind NoSQL Injection** – time‑based or conditional responses
+- **LDAP, XXE, and XPath Injection** in APIs
+- **Command Injection** in API parameters (e.g., `ping`, `nslookup`)
+
+#### 11. Rate Limiting & Throttling Testing
+- **Bypassing Rate Limits**
+  - IP rotation (VPN, proxies, IPv6)
+  - Using different endpoints that share the same resource
+  - Adding junk parameters to fingerprint
+  - Slowing down request rate to stay under threshold
+- **Testing for Lack of Rate Limits** – on authentication, password reset, OTP, and high‑value actions
+
+#### 12. API Versioning & Deprecation
+- **Exposed Alpha / Beta / Debug Endpoints**
+- **Version Rollback Attacks** – forcing downgrade to a vulnerable version
+- **Deprecated API Testing** – finding unmaintained endpoints with known flaws
+
+#### 13. Compliance & Reporting
+- **CVSS Scoring** for discovered vulnerabilities
+- **Proof of Concept (PoC)** writing
+- **Remediation Guidance** tailored to API frameworks (e.g., Spring Boot, Express, Django REST)
