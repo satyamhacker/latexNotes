@@ -1,20 +1,3 @@
-# 📘 The Ultimate Industry-Standard API Hacking Playbook (100% Complete)
-**Author:** Senior API Security Researcher & Pentesting Mentor (10+ Yrs Exp)
-**Language:** Hinglish (Roman) for explanations, English for Tech
-**Target:** OWASP API Top 10 2023 | Real-world Corporate Pentesting | Bug Bounty
-
----
-
-## 🧩 Module 0: API Hacking Mindset & Methodology
-*Sabse pehle, mindset theek karo. API testing sirf "click next" nahi hai, ye ek game of logic hai.*
-
-* **API vs Web App:** Web apps user interactions ke liye banti hain (UI ke saath), APIs sirf machine-to-machine communication ke liye (JSON/XML). Isliye APIs mein UI nahi hota, sirf logic hota hai.
-* **Attack Surface Samjho:** Ek API endpoint ek function ki tarah hai. Har function (GET, POST, PUT, DELETE) alag behavior dikha sakta hai.
-* **Rule #1:** Kabhi bhi server ke response par bharosa mat karo. Frontend jo dikha raha hai, wo alag ho sakta hai, backend jo bhej raha hai wo alag.
-* **Rule #2:** API testing = Logic testing. Har flow ko todne ki koshish karo.
-
----
-
 ## 🔍 Module 1: Reconnaissance & Advanced Discovery
 *Target ki "Jaikaashi" karna. Jitna jaayega jaanoge, utna deep jaayega exploit.*
 
