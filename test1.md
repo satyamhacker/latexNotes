@@ -1579,4 +1579,449 @@ JWT Token:
 | OAuth State Missing | CSRF | Account linking |
 | OAuth Token Leakage | Referer header | Token theft |
 
-Agla module chahiye toh batao – **Module 3: Authorization Bypass (BOLA/IDOR, BPLA, BFLA)**? 🚀
+========================================================================================
+
+## 🔑 Module 3: Authorization (BOLA, BPLA, BFLA)
+*Andar aane ke baad, kya kya kar sakte ho?*
+
+---
+
+### Topic 3.1: BOLA / IDOR (Broken Object Level Authorization)
+
+---
+
+#### 1. 🎯 Title
+**Broken Object Level Authorization (BOLA) / IDOR**
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Maan lo ek school mein har student ke paas ek **locker** hai jisme wo apni books aur copy rakhta hai. Locker par ek **number** likha hai (e.g., locker 123). Jab kisi student ko apna locker kholna hota hai, wo guard ko apna **ID card** (authentication token) aur locker number batata hai. Guard sirf ye check karta hai ki **ID card valid hai ya nahi** (authentication), lekin ye nahi check karta ki **ye locker is student ka hai ya nahi** (authorization). Ab ek student, Aman (locker 123), apne dost ke locker 456 ko kholne ki koshish karta hai. Guard dekhta hai ID card valid hai, to locker khol deta hai – bina ye dekhe ki Aman ka locker 456 se koi lena-dena nahi. Yahi BOLA vulnerability hai.
+
+#### 3. 📖 Technical Definition
+BOLA (ya IDOR) tab hota hai jab API kisi **object** (jaise user, file, order, etc.) ko access karne ke liye client se ek **identifier** (ID, number, UUID) leta hai, par server **authorization check** karna bhool jata hai. Matlab, server sirf authentication check karta hai – “kya aap valid user ho?” – lekin ye verify nahi karta ki **current authenticated user ko is specific object ko access karne ka permission hai ya nahi**. Iski vajah se ek user doosre user ke data ko dekh, badal, ya delete kar sakta hai.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+Ye vulnerability OWASP API Security Top 10 mein **#1** position par hai, kyunki iska **impact bahut high** hota hai – attackers seedha doosron ka private data chura sakte hain (PII, financial details, medical records), ya unke resources ko modify/delete kar sakte hain. Bug bounty programs mein sabse zyada reports BOLA/IDOR ki hoti hain aur inka bounty bhi highest hota hai.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+Burp Suite ya kisi bhi proxy tool mein jab aap kisi API request ko intercept karte ho, toh kuch aisa dikhega:
+
+**Request:**
+```
+GET /api/v1/users/123 HTTP/1.1
+Host: target.com
+Authorization: Bearer <attacker_token>
+```
+Yahan `123` object ID hai. Isko badalkar `456` karte ho:
+```
+GET /api/v1/users/456 HTTP/1.1
+...
+```
+Agar response mein user 456 ka data aata hai (jaise name, email, etc.), to ye **success** hai – BOLA mil gaya. Agar error aata hai (403, 401, 404) to failure.
+
+#### 6. ⚙️ Under the Hood
+Server ka backend code kuch is tarah ho sakta hai (dummy example):
+```python
+@app.route('/api/users/<user_id>')
+def get_user(user_id):
+    # Sirf authentication check
+    if not is_authenticated(request.headers['Authorization']):
+        return {"error": "Unauthorized"}, 401
+
+    # Database se user fetch karo
+    user = db.query("SELECT * FROM users WHERE id = ?", user_id)
+    return user, 200
+```
+Yahan `is_authenticated` to check ho raha hai, lekin ye nahi dekha gaya ki currently logged-in user ka ID `user_id` ke barabar hai ya nahi. Isliye koi bhi authenticated user kisi bhi user ka data le sakta hai.
+
+#### 7. 💻 Hands-On Step-by-Step
+1. **Login** karo ek normal user account se (e.g., user A).
+2. **Intercept** karo koi bhi request jisme object ID ho – jaise profile view, order details, file download. Common patterns:
+   - `GET /api/profile?id=123`
+   - `GET /api/orders/ORD-456`
+   - `DELETE /api/posts/789`
+3. Request ko **Burp Repeater** mein bhejo (right click → Send to Repeater).
+4. ID ko modify karo:
+   - Numeric IDs: `123` → `124`, `125`, `0`, `-1` (negative IDs se error messages mein DB info leak ho sakta hai).
+   - UUIDs: Agar IDs `user-abc123` jaisi predictable nahi hain, to unhe kisi aur jagah se leak karne ki koshish karo (JS files, referrer header, other API responses). Fuzzing ke liye Burp Intruder mein payload set karo.
+   - Strings: Agar IDs `ORD-2025-001` jaisi hain, to pattern guess karo.
+5. Request forward karo aur response dekho. Agar doosre user ka data mil raha hai, to BOLA hai.
+6. **Bulk BOLA**: Agar API multiple IDs ek saath accept karti ho (jaise POST request mein JSON array), to try karo:
+   ```json
+   POST /api/users/batch
+   {
+     "ids": [123,124,125]
+   }
+   ```
+   Agar saare users ka data dump mil gaya, to wo massive BOLA hai.
+7. **Chained BOLA**: Pehle kisi IDOR se doosre user ki ID leak karo (e.g., kisi public profile se), fir us ID se private data access karo.
+8. **Non-CRUD operations**: Sirf GET/POST nahi, balki `DELETE /api/user/123`, `PUT /api/user/123/password` jaise endpoints par bhi try karo.
+9. **API versioning**: Agar `/v2/user/me` secure hai, to `/v1/user/123` try karo (version downgrade attack).
+10. **Password Reset**: Reset link mein `user_id` ya `email` parameter change karke kisi aur ka password reset karne ki koshish karo.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+| **Situation** | **Response** |
+|---------------|--------------|
+| **Success** (BOLA present) | `200 OK` ke saath JSON mein victim ka data. Jaise: `{"id":456,"name":"Victim","email":"victim@example.com"}` |
+| **Failure** (BOLA not present / patched) | `403 Forbidden` / `401 Unauthorized` / `404 Not Found` (agar ID exist nahi karti) ya phir `200 OK` but same user ka data aaye (current user ka hi data aaye, kyunki server ne enforce kiya ki current user hi access kar sakta hai) |
+
+#### 9. ⚖️ Comparison (IDOR vs BOLA)
+| **IDOR (Insecure Direct Object Reference)** | **BOLA (Broken Object Level Authorization)** |
+|----------------------------------------------|-----------------------------------------------|
+| Old term, mostly used in web apps. | Modern term, OWASP API Security Top 10 mein use hota hai. |
+| Focuses on direct reference to object (like file path, DB key). | Focuses on missing authorization check at object level. |
+| Basically same vulnerability. | Basically same vulnerability. |
+
+#### 10. 🚫 Common Mistakes
+- Sirf numeric IDs try karna, UUIDs ko ignore karna (par UUIDs bhi leak ho sakte hain).
+- Sirf GET requests par focus karna; DELETE, PUT, POST ko bhool jana.
+- Positive IDs par atakna; negative IDs na try karna (negative IDs se SQL injection ya error leaks mil sakte hain).
+- Error messages ignore karna – jaise "User not found for ID 456" se confirm ho jata hai ki 456 exist karta hai, jisse brute force mein madad milti hai.
+- Automated tools par depend rehna; manual fuzzing nahi karna.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"Mere API mein UUID use ho raha hai, to safe hoon na?"**
+  Nahi, UUID sirf guess karna mushkil banata hai, lekin agar authorization check missing hai to vulnerability abhi bhi maujood hai. Agar UUIDs kisi aur jagah leak ho rahe hain (JS files, other API responses, referrer header), to attacker unhe collect kar sakta hai aur access kar sakta hai.
+- **"Mere paas /me endpoint hai, to sab safe hai?"**
+  `/me` usually current user ki details deta hai, lekin doosre endpoints ho sakte hain jaise `/user?id=` jahan check missing ho. Isliye sab endpoints test karo.
+- **"Agar IDOR mil gaya to kya wo humesha critical hota hai?"**
+  Impact par depend karta hai. Agar kisi user ka public data mil raha hai (jo anyway public hai), to severity low ho sakti hai. Lekin agar private data (email, phone, address) ya sensitive actions (delete, update) ho rahe hain, to critical hai.
+
+#### 12. 🌍 Real-World Use Case
+Ek bug bounty hunter ne Facebook mein GraphQL API ke through IDOR paya. Usne ek request mein `user_id` parameter change kiya aur doosre user ki private photos dekh li. Facebook ne usko $10,000+ ka bounty diya. Is tarah ke BOLA bugs aaj bhi regularly report hote hain.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+[Attacker] --> GET /api/user/456 (with attacker's session token)
+   |
+   v
+[Server] --> Token verify? OK (attacker is user 123)
+   |
+   v
+[Database] --> SELECT * FROM users WHERE id = 456;  (No check: user 123 can access 456?)
+   |
+   v
+[Server] --> Returns data of user 456
+   |
+   v
+[Attacker] gets Victim's private data
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Burp Intruder** ka use karo: payload positions set karo aur numbers, common patterns, UUID lists daalo.
+- **Param Miner** extension se hidden parameters dhoondo.
+- **Always test with two different accounts**: Ek low-privilege user se doosre user ke resources access karne ki koshish karo.
+- **Check HTTP methods** – `GET`, `POST`, `PUT`, `DELETE` sab try karo.
+- **API versioning** – `/v1`, `/v2`, `/v3` sab check karo.
+- **Error messages analyse karo** – kahi ID exist karti hai ya nahi, iska clue milta hai.
+- **Automated scanners** ki blind trust mat karo; manual testing essential hai.
+
+#### 15. ❓ FAQ (Interview Q&A)
+1. **Q:** BOLA aur IDOR mein kya antar hai?
+   **A:** Dono same vulnerability hai. IDOR purana term hai, BOLA modern OWASP API Top 10 ka term hai jo authorization check missing par focus karta hai.
+2. **Q:** Agar UUID use kar rahe hain, to kya BOLA possible hai?
+   **A:** Haan, possible hai. UUID sirf enumeration mushkil banata hai, lekin agar authorization check missing hai to vulnerable hai. Agar UUID leak ho jaye (jaise kisi response mein), to attacker access kar sakta hai.
+3. **Q:** BOLA sirf GET requests mein hota hai?
+   **A:** Nahi, kisi bhi method (POST, PUT, DELETE) mein ho sakta hai. Jaise `DELETE /api/post/123` se kisi aur ka post delete karna.
+4. **Q:** Bulk BOLA kya hai?
+   **A:** Jab API ek saath multiple objects ki IDs accept karti hai (jaise array) aur server bina authorization check ke saare ka data return kar deta hai.
+5. **Q:** BOLA ko kaise prevent karein?
+   **A:** Har object access request mein check karo ki current user ke paas us object par access ka permission hai ya nahi. Jaise `if current_user.id == requested_user_id` ya role-based permissions.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"BOLA matlab server ne sirf token check kiya, par ye nahi dekha ki token wala banda is ID ka malik hai ya nahi."**
+
+---
+
+### Topic 3.2: BPLA / Mass Assignment (Broken Property Level Authorization)
+
+---
+
+#### 1. 🎯 Title
+**Broken Property Level Authorization (BPLA) / Mass Assignment**
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Maano tum ek online form bhar rahe ho koi naya account banane ke liye. Form mein sirf **naam** aur **email** ke fields hain. Tum form bhar kar submit kar dete ho. Par peeche server pe jo code hai, wo tumhare bheje gaye saare data ko seedha database mein daal deta hai bina check kiye ki tumhe konsi fields bharne ki permission thi. Ab tum socho, form mein to sirf do fields the, lekin agar tum ek extra field bhej do, jaise `"isAdmin": true`, to server maan lega ki tum admin ban gaya. Isi tarah, **Mass Assignment** vulnerability mein attacker extra properties bhej kar un fields ko modify kar sakta hai jinhe modify karne ka uske paas authority nahi hai.
+
+#### 3. 📖 Technical Definition
+BPLA (ya Mass Assignment) tab hota hai jab API server client se aaye hue data ko **directly** internal objects (jaise database models) mein bind kar leta hai, bina **allowlist** ke ki kaunse properties ko update karne ki anumati hai. Iski vajah se attacker hidden ya sensitive fields (jaise `isAdmin`, `balance`, `role`) ko request mein bhej kar unki value badal sakta hai.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+Ye vulnerability bahut common hai, khaas kar un frameworks mein jo auto-binding karte hain (jaise Spring, Rails, Django REST Framework). Iska impact high ho sakta hai – attacker khud ko admin bana sakta hai, apna balance badha sakta hai, kisi aur ka password change kar sakta hai, etc.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+Aap ek normal request dekhte hain:
+```
+POST /api/user/update
+{
+  "name": "Aman",
+  "email": "aman@example.com"
+}
+```
+Aap isme extra properties add karte hain:
+```
+{
+  "name": "Aman",
+  "email": "aman@example.com",
+  "isAdmin": true,
+  "balance": 99999,
+  "role": "superuser"
+}
+```
+Agar response mein kuch nahi badla, ya fir updated user ka data aaye jisme `isAdmin: true` dikhe, to mass assignment vulnerable hai.
+
+#### 6. ⚙️ Under the Hood
+Framework ka code kuch is tarah ho sakta hai:
+```python
+class User(models.Model):
+    name = models.CharField()
+    email = models.EmailField()
+    is_admin = models.BooleanField(default=False)
+
+@app.route('/api/user/update', methods=['POST'])
+def update_user():
+    user = get_current_user(request)
+    data = request.json
+    # Directly update user object with request data - MASS ASSIGNMENT VULNERABLE!
+    for key, value in data.items():
+        setattr(user, key, value)
+    user.save()
+    return user
+```
+Yahan saari incoming properties ko blindly user object par set kar diya gaya. Agar attacker `is_admin: true` bhej de, to wo admin ban jayega.
+
+#### 7. 💻 Hands-On Step-by-Step
+1. Kisi bhi request ko intercept karo jisme data bheja ja raha ho (POST, PUT, PATCH).
+2. Request body mein **extra properties** add karo jo sensitive ho sakti hain. Common fields:
+   - `isAdmin`, `admin`, `role`, `user_type`, `permissions`
+   - `balance`, `credit`, `wallet`
+   - `verified`, `email_verified`, `phone_verified`
+   - `password`, `pass`, `pwd` (agar password change ho sakta hai to)
+   - `status`, `active`
+   - `group`, `team`
+   - `owner_id`, `user_id` (agar kisi aur ka data claim kar sakte ho)
+3. **Nested JSON** bhi try karo:
+   ```json
+   {
+     "user": {
+       "name": "Aman",
+       "settings": {
+         "isAdmin": true
+       }
+     }
+   }
+   ```
+4. **HTTP Verb Tampering**: Check karo ki kaunse methods allowed hain. Jaise agar `POST` par update hota hai, to `PUT`, `PATCH` bhi try karo.
+5. Response dekho – agar 200 OK aata hai, aur server ne extra properties accept kar li, to vulnerable hai. Agar error aata hai jaise "Unknown field", to probably safe hai (par pura confirm nahi).
+6. **Excessive Data Exposure** bhi check karo: response mein koi sensitive field aa raha hai jo UI mein nahi dikh raha? Jaise server bhej raha hai `"mobile": "9876543210"` lekin UI mein sirf last 4 digits dikha raha hai. Iska matlab data leak ho raha hai aur mass assignment ke liye bhi field exist karti hai.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success**: Request accepted (200 OK) aur property update ho gayi. Agar `isAdmin` true kiya to ab admin access milna chahiye.
+- **Failure**: 400 Bad Request – "Unknown field", "Invalid parameter", "isAdmin not allowed". Ya phir server ignore kar de aur property update na ho (jaise response mein `isAdmin` false hi rahe).
+
+#### 9. ⚖️ Comparison (Mass Assignment vs Excessive Data Exposure)
+| **Mass Assignment** | **Excessive Data Exposure** |
+|----------------------|-----------------------------|
+| Attacker *sends* extra properties to modify them. | Server *returns* extra properties in response, jo client ko nahi dikhni chahiye. |
+| Active attack – attacker changes data. | Passive leak – server unintentionally exposes data. |
+| Fix: whitelist allowed fields. | Fix: filter response fields. |
+
+#### 10. 🚫 Common Mistakes
+- Sirf JSON mein top-level properties try karna, nested JSON ignore karna.
+- Sirf boolean fields (`isAdmin`) try karna, numeric fields (`balance`) na try karna.
+- Sirf `POST` par try karna, `PUT/PATCH` bhool jana.
+- Excessive data exposure ko mass assignment ka sign na samajhna – agar response mein sensitive field aa raha hai, to wo mass assignment ke liye bhi candidate ho sakta hai.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"Mere framework mein mass assignment protection hai, to safe hoon?"**
+  Kya wo protection by default enabled hai? Kya aapne `protected_attributes` ya `attr_accessible` sahi set kiye hain? Manual testing karo – koi na koi field ho sakti hai jo unprotected reh gayi.
+- **"Response mein extra fields aa rahe hain, to mass assignment bhi ho sakta hai?"**
+  Hamesha nahi, lekin possibility hai. Response mein fields ka matlab hai ki wo model mein exist karte hain, to agar request mein bhejo to server accept kar sakta hai. Isliye try karna chahiye.
+
+#### 12. 🌍 Real-World Use Case
+Github par ek bug aaya tha jahan users apne profile mein `plan` field bhej kar apne account ko free se paid me upgrade kar sakte the. `plan` field normally UI mein nahi tha, lekin API request mein bhejne par server ne maan liya. Isse kisi ko bhi free me private repos mil gaye.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+[Attacker] --> POST /api/user/update { "name":"Aman", "isAdmin":true }
+   |
+   v
+[Server] --> Gets data, loops over all keys
+   |
+   v
+[Database] --> UPDATE users SET name='Aman', isAdmin=true WHERE id=123;
+   |
+   v
+[Attacker] now has isAdmin=true
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Burp Intruder** se common field names ki wordlist fuzz karo (`mass-assignment-wordlist`).
+- **Param Miner** extension bhi useful hai.
+- Pehle server ke response mein dekho ki kaunse fields aa rahe hain (excessive data exposure). Un fields ko request mein bhej kar dekho.
+- JSON mein nesting ko explore karo – kai baar `user[isAdmin]` ya `settings.isAdmin` kaam karta hai.
+- **Different HTTP methods** – kai baar `PATCH` vulnerable hota hai jab `POST` secure ho.
+- **Automated tools** ki madad lo, par manual fuzzing bhi karo.
+
+#### 15. ❓ FAQ (Interview Q&A)
+1. **Q:** Mass Assignment se kaise bacha ja sakta hai?
+   **A:** Whitelist approach use karo – explicitly define konse fields update karne ki anumati hai. Blacklist mat karo, kyunki naye fields add hote rahenge.
+2. **Q:** Kya mass assignment sirf JSON mein hota hai?
+   **A:** Nahi, XML, form-data, kisi bhi format mein ho sakta hai agar server data ko directly bind kar raha ho.
+3. **Q:** `isAdmin` field try kiya to 400 aaya, lekin `role` try kiya to 200 aaya – ye kaise possible hai?
+   **A:** Server ne `isAdmin` ko protected kar rakha hai, lekin `role` ko whitelist mein include kar liya. Isliye alag-alag fields alag response de sakte hain.
+4. **Q:** Excessive data exposure ka mass assignment se kya relation hai?
+   **A:** Agar server response mein sensitive fields bhej raha hai, to wo fields model mein exist karte hain. Unhe request mein bhej kar mass assignment try karna chahiye.
+5. **Q:** Kya mass assignment GET requests mein ho sakta hai?
+   **A:** GET mein body nahi hoti, to mass assignment generally POST/PUT/PATCH mein hota hai. Lekin agar server query parameters ko bhi bind kar raha ho, to ho sakta hai (rare).
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"Mass Assignment matlab server ne client ki bheji hui saari cheezein bina check kiye maan li, chahe wo fields sensitive kyun na hon."**
+
+---
+
+### Topic 3.3: BFLA (Broken Function Level Authorization)
+
+---
+
+#### 1. 🎯 Title
+**Broken Function Level Authorization (BFLA)**
+
+#### 2. 🐣 Samjhane ke liye (Analogy)
+Ek office mein do tarah ke employees hain: **normal employees** aur **admins**. Admins ke paas special powers hain – wo kisi bhi employee ki file delete kar sakte hain, naye employees add kar sakte hain, etc. Office ka door normal employees ke liye sirf office area mein khulta hai, lekin admin ke room ka door alag hai. Ab agar kisi normal employee ko admin room ka door mil jaye (ya pata chal jaye ki wo bhi khul sakta hai), to wo andar ghus kar admin jaisa kaam kar sakta hai. BFLA yahi hai – ek low-privilege user un functions (endpoints) ko access kar leta hai jo sirf high-privilege users (jaise admin) ke liye hone chahiye.
+
+#### 3. 📖 Technical Definition
+BFLA tab hota hai jab API ke kuch endpoints (functions) sirf specific roles (jaise admin, manager) ke liye intended hote hain, par server ye verify nahi karta ki current user ke paas us function ko call karne ka permission hai ya nahi. Iski vajah se ek normal user admin-level actions perform kar sakta hai – jaise users ko delete karna, system settings change karna, etc.
+
+#### 4. 🧠 Zaroorat Kyun Hai?
+Ye vulnerability bhi OWASP API Top 10 mein #5 par aati hai (Broken Function Level Authorization). Iska impact critical ho sakta hai kyunki attacker poora system control kar sakta hai.
+
+#### 5. 🔍 Visual - Screen Par Kya Dikhega
+Maan lo aap normal user se login hain. Aap koshish karte hain:
+```
+GET /api/admin/users
+```
+Response:
+```
+401 Unauthorized
+```
+Ab aap method tamper karte hain:
+```
+POST /api/admin/users
+```
+Agar response 200 OK aata hai aur users ki list milti hai, to BFLA hai.
+
+#### 6. ⚙️ Under the Hood
+Server ka code kuch aisa ho sakta hai:
+```python
+@app.route('/api/admin/users')
+def get_all_users():
+    # Sirf authentication check, role check missing
+    if not is_authenticated(request.headers['Authorization']):
+        return 401
+    users = db.query("SELECT * FROM users")
+    return users
+```
+Yahan sirf authenticate check kiya, role nahi dekha ki user admin hai ya nahi. Isliye koi bhi authenticated user is endpoint ko call kar sakta hai.
+
+Ya phir:
+```python
+@app.route('/api/admin/users', methods=['GET'])
+def get_all_users():
+    # GET ke liye role check hai
+    check_admin()
+    ...
+
+@app.route('/api/admin/users', methods=['POST'])
+def create_user():
+    # POST ke liye role check karna bhool gaye
+    # Sirf authenticate check
+    ...
+```
+Is case mein method tampering se BFLA possible hai.
+
+#### 7. 💻 Hands-On Step-by-Step
+1. Sabse pehle, **API documentation** ya reconnaissance se admin endpoints ki list banao. Common patterns:
+   - `/admin`, `/api/admin`, `/v1/admin`
+   - `/internal`, `/private`, `/management`
+   - `/users/delete`, `/users/create` jaisi actions jo sensitive hon.
+2. Ek low-privilege user se login karo (jo admin na ho).
+3. In endpoints par request bhejo different HTTP methods ke saath:
+   - `GET /api/admin/users`
+   - `POST /api/admin/users` (kuch data ke saath)
+   - `PUT /api/admin/users/123`
+   - `DELETE /api/admin/users/123`
+   - `PATCH /api/admin/users/123`
+   - `OPTIONS /api/admin/users` (dekhne ke liye kaunse methods allowed hain)
+4. Har method ke response dekho. Agar 200 OK aata hai, to BFLA mil gaya.
+5. Agar 403/401 aata hai, toh koshish karo ki kya koi parameter change kar sakte ho? Jaise:
+   - `GET /api/admin/getUser?id=123` – yahan `admin` path mein nahi hai, par function admin level ka ho sakta hai.
+   - `POST /api/user/delete` – bina admin prefix ke, par delete ka action admin level ka ho sakta hai.
+6. **Method tampering** ke alawa, **parameter tampering** bhi karo – jaise `role=admin` bhej kar dekh lo ki kya server role-based access allow karta hai.
+7. **Forced browsing** – directly admin URLs hit karo jo hidden hon.
+
+#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success**: 200 OK ke saath admin-level response (e.g., all users list) ya successful action (e.g., user deleted).
+- **Failure**: 401 Unauthorized, 403 Forbidden, 404 Not Found (agar endpoint hi exist na karta ho).
+
+#### 9. ⚖️ Comparison (BOLA vs BFLA)
+| **BOLA** | **BFLA** |
+|----------|----------|
+| Object level – ek specific resource (user, file) ko unauthorized access. | Function level – ek entire functionality (admin panel) ko unauthorized access. |
+| "Mere ko doosre ka data de do." | "Mujhe admin wala button dabane do." |
+| Impact: data leak/modification of specific object. | Impact: full system compromise, privilege escalation. |
+
+#### 10. 🚫 Common Mistakes
+- Sirf GET methods par focus karna, POST/PUT/DELETE ko ignore karna.
+- Sirf obvious admin paths (`/admin`) try karna, non-standard paths miss karna.
+- Authentication ke baare mein sochna par authorization bhool jana.
+- Role-based access sirf UI mein implement karna, API par nahi.
+
+#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+- **"Mere API mein role-based access hai, to sab safe hai?"**
+  Kya tumne har endpoint par role check kiya hai? Kya koi endpoint aisa hai jo sirf isLiye safe hai kyunki uska naam admin jaisa nahi lagta, par wo admin-level kaam karta hai? Jaise `/api/users/deleteAll` – ye bhi BFLA ka candidate hai.
+- **"Admin endpoints hidden hain, to attacker ko kaise pata chalega?"**
+  Attacker API documentation padh sakta hai, ya JS files mein URLs search kar sakta hai, ya common patterns fuzz kar sakta hai. Hidden ka matlab secure nahi.
+
+#### 12. 🌍 Real-World Use Case
+Tesla ke bug bounty program mein ek researcher ne BFLA paya. Usne dekha ki `/api/vehicle/config` endpoint normal user se bhi accessible tha, jo ki vehicle ki advanced configuration change kar sakta tha (jo sirf service center ko karna chahiye). Isse wo kisi bhi Tesla car ki settings change kar sakta tha. Tesla ne turant fix kiya aur researcher ko bounty diya.
+
+#### 13. 🎨 Visual Diagram (ASCII Art)
+```
+[Attacker (normal user)] --> POST /api/admin/deleteUser?id=456
+   |
+   v
+[Server] --> Check token? Valid (user 123). Role check? Missing.
+   |
+   v
+[Database] --> DELETE FROM users WHERE id=456;
+   |
+   v
+[Attacker] --> User 456 deleted successfully.
+```
+
+#### 14. 🛠️ Best Practices (Pro Tips)
+- **Directory brute forcing** karo common admin paths ke liye (use tools like dirsearch, ffuf, Burp Intruder).
+- **HTTP methods** ka pura set test karo – har endpoint ke liye `GET, POST, PUT, DELETE, PATCH, OPTIONS` try karo.
+- **Parameter pollution** – agar `/api/admin/users` blocked hai, to try `/api/admin/users?` ya `/api//admin/users` (path normalization).
+- **Role headers** – kabhi kabhi server `X-Role: admin` header check karta hai. Use bhi modify karo.
+- **Check for IDOR in functions** – jaise `POST /api/user/delete` bina role check ke, lekin body mein `user_id` daal kar kisi aur ko delete karna – wo BOLA + BFLA mix ho sakta hai.
+
+#### 15. ❓ FAQ (Interview Q&A)
+1. **Q:** BFLA aur BOLA mein kya antar hai?
+   **A:** BOLA object-level authorization hai – ek specific resource par unauthorized access. BFLA function-level authorization hai – ek poori functionality par unauthorized access, jo aksar role-based hoti hai.
+2. **Q:** BFLA ko kaise prevent karein?
+   **A:** Har endpoint par role-based access control (RBAC) implement karo. Sirf UI hide karna kaafi nahi, har API request mein check karo ki user ke paas required role hai ya nahi.
+3. **Q:** Method tampering se BFLA kaise hota hai?
+   **A:** Agar admin endpoint sirf GET ke liye protected ho, par POST ke liye role check bhool gaye hain, to attacker POST request bhej kar admin action perform kar sakta hai.
+4. **Q:** Kya BFLA sirf admin endpoints tak limited hai?
+   **A:** Nahi, koi bhi function jo higher privilege require karta hai, BFLA ka candidate hai. Jaise manager level functions, support team functions, etc.
+5. **Q:** BFLA testing ke liye kaunse tools use kar sakte hain?
+   **A:** Burp Suite (Intruder, Repeater), OWASP ZAP, ffuf for directory brute force, Postman for manual testing.
+
+#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+**"BFLA matlab low-privilege user ne high-privilege wala button daba diya, kyunki server ne role check karna bhool gaya."**
+
+---
+
+========================================================================================
+
