@@ -379,3 +379,61 @@ Clickjacking ek aisa attack hai jahan hacker aapko kisi aisi cheez par click kar
 
 ---
 
+Bhai, aapke notes base clear karne ke liye bohot solid hain, khaas karke **JWT** aur **NoSQLi** wala part aapne kaafi detail mein cover kiya hai. Lekin agar hum "Industry Standards" aur "Senior Pentester" ke point of view se dekhen, toh kaafi saare critical topics abhi missing hain jo modern API security testing mein must-have hote hain.
+
+Yahan missing topics ki structured list hai jo aapko apne notes mein add karni chahiye:
+
+### 1. Broken Object Level Authorization (BOLA / IDOR)
+
+Aapne "Attacking Authorization" mein ID manipulation touch kiya hai, lekin BOLA industry ka **#1 API Risk** hai. Ismein aapko ye sub-topics missing lag rahe hain:
+
+* **Massive BOLA:** Multi-tenancy environment mein ek organization ka user dusri organization ka data kaise access karta hai.
+* **BOLA in Delete/Update:** Sirf GET requests nahi, balki `DELETE /api/user/123` jaisi requests test karna.
+* **UUID/GUID Brute-forcing:** Agar ID predictable nahi hai (like UUID), toh use leak karne ke methods (Search results, Logs, etc.).
+
+### 2. Broken Property Level Authorization (BPLA)
+
+Ye OWASP 2023 ki naye category hai jo aapke notes mein nahi hai:
+
+* **Mass Assignment (Advanced):** Aapne method brute-forcing likha hai, lekin "Hidden Properties" dhoondna (jaise `is_admin: true` ya `role: superuser`) missing hai.
+* **Excessive Data Exposure:** Server response mein aisi properties aana jo frontend ko nahi chahiye (jaise user ka mobile number ya internal ID).
+
+### 3. Server-Side Request Forgery (SSRF) in APIs
+
+Modern APIs aksar dusre internal services se communicate karti hain.
+
+* **Exploiting via Webhooks:** API parameters mein apna URL dalkar server se request karwana.
+* **Cloud Metadata Exploitation:** API ke zariye AWS/Azure ke internal metadata (169.254.169.254) ka access lena.
+
+### 4. GraphQL Specific Attacks
+
+Aapne REST APIs cover ki hain, lekin modern apps **GraphQL** use karti hain jiske attacks bilkul alag hote hain:
+
+* **Introspection Queries:** Poora database schema (queries/mutations) extract karna.
+* **Circular Queries (DoS):** Aisi query bhejna jo server ko infinite loop mein daal de.
+* **Direct Object Injection:** GraphQL queries mein nested objects manipulate karna.
+
+### 5. Advanced Recon & Tooling
+
+Professional level par discovery manual nahi hoti:
+
+* **Documentation Analysis:** Swagger (OpenAPI) ya Postman collections se hidden endpoints dhoondna.
+* **Active Recon Tools:** **Kiterunner** (context-aware fuzzing) aur **Arjun** (parameter discovery) ka use.
+* **Passive Recon:** GitHub dorks ya JS files se hidden API keys aur secrets nikalna.
+
+### 6. OAuth 2.0 & OIDC Vulnerabilities
+
+Sirf JWT kafi nahi hai, login flows bhi test karne hote hain:
+
+* **Redirect URI Manipulation:** Authorization code ko apne server par redirect karwana.
+* **State Parameter Missing:** CSRF attacks in OAuth flow.
+* **Token Leakage:** Referer headers ke zariye access token churaana.
+
+### 7. Security Misconfigurations (Modern)
+
+* **CORS (Cross-Origin Resource Sharing):** `Access-Control-Allow-Origin: *` ki wajah se sensitive data leak hona.
+* **HPP (HTTP Parameter Pollution):** Same name ke do parameters bhejna (e.g., `?id=1&id=2`) taaki security filter bypass ho sake.
+
+---
+
+**Next Step:** Kya aap chahte hain ki main **BOLA (Broken Object Level Authorization)** se shuru karun aur aapko iska ek practical industry-standard roadmap aur lab setup samjhaun?
