@@ -684,3 +684,77 @@ Sirf JWT kafi nahi hai, login flows bhi test karne hote hain:
     *   **Postman/Newman:** Automating collection runs for regression testing.
     *   **Python Requests:** Custom scripts for complex logic attacks (Race conditions).
     *   **Nuclei:** Using API-specific templates for quick vulnerability scanning.
+
+    Bhai, maine aapke notes (Page 1 se Page 19 tak) ko fir se **bohot deeply analyze** kiya hai.
+
+Aapko lag raha hai ki saare topics hain kyunki aapne mere pichle response wali "Missing Topics" ki list ko hi apne notes ke end mein paste kar diya hai. Lekin agar hum aapke **actual handwritten/study notes (Page 1-19)** ki baat karein, toh wahan sirf unka zikr (mention) hai, unki **exploitation techniques, practical steps, aur deep-dive methods** missing hain.
+
+Ek **Senior Security Researcher** ke taur par, "Yes", abhi bhi kaafi crucial cheezein missing hain jo real-world corporate pentesting mein zaruri hoti hain.
+
+Niche un missing items ki structured list di gayi hai:
+
+---
+
+## 1. Advanced Reconnaissance & Discovery
+
+Aapne fuzzing aur JS files touch kiya hai, lekin professional setup mein ye missing hai:
+
+* **Documentation Mining:** Swagger UI (`/swagger-ui.html`), OpenAPI (`/v2/api-docs`), aur Postman collections ko hidden JS paths se extract karna.
+* **Contextual Fuzzing:** **Kiterunner** ka use (generic wordlists API routes ke liye kaam nahi karti, context-aware fuzzing chahiye).
+* **Hidden Parameter Discovery:** **Arjun** ya Burp ka **Param Miner** use karke hidden headers (jaise `X-Forwarded-For`, `X-Admin-User`) dhoondna.
+
+## 2. Broken Authorization (BOLA & BPLA)
+
+Aapne Page 7 par simple `vehicleId` manipulation (IDOR) likha hai, lekin industry-standard BOLA attacks missing hain:
+
+* **Bulk BOLA:** JSON array injection (e.g., `{"ids": [123, 124, 125]}`) se multiple users ka data ek saath nikalna.
+* **UUID/GUID Brute-forcing:** Jab IDs predictable nahi hoti, tab unhe leak karne ke sources dhoondna (Logs, Analytics, Referer headers).
+* **BPLA (Broken Property Level Authorization):** * **Excessive Data Exposure:** Response mein PII (Sensitive info) dhoondna jo frontend ko nahi chahiye par server bhej raha hai.
+* **Advanced Mass Assignment:** Sirf request method nahi, balki hidden parameters (e.g., `"is_admin": true`) ko POST/PUT requests mein inject karna.
+
+
+
+---
+
+## 3. Advanced JWT Exploitation
+
+Aapne HMAC (HS256) brute-force aur `jwt.io` cover kiya hai, lekin ye critical attacks missing hain:
+
+* **Algorithm Confusion (RS256 to HS256):** Asymmetric public key ko as a symmetric secret use karke token sign karna.
+* **Header Injection:** * `kid` (Key ID) injection: Iske andar SQLi ya Directory Traversal (`../../dev/null`) try karna.
+* `jku`/`x5u` manipulation: Server ko force karna ki wo aapke malicious server se public key uthaye.
+
+
+* **None Algorithm Attack:** Signature part ko completely blank karke logic bypass karna.
+
+## 4. Modern Architecture & Specialty APIs
+
+Aapke notes mostly REST APIs par hain. Modern apps mein ye missing hai:
+
+* **GraphQL Specific Attacks:**
+* **Introspection Queries:** Poora database schema dump karna.
+* **Circular Queries:** DoS attack ke liye nested queries bhejna.
+
+
+* **SSRF (Server-Side Request Forgery):** API parameters ke zariye server se internal metadata (`169.254.169.254`) ya internal services ko hit karwana.
+* **Webhook Security:** Missing signature verification aur replay attacks in incoming webhooks.
+
+---
+
+## 5. Complex Business Logic & Race Conditions
+
+Aapne Clickjacking aur OTP spam (No-Rate limit) cover kiya hai, lekin professional level par ye missing hai:
+
+* **Race Conditions:** **Turbo Intruder** use karke ek hi second mein multiple requests bhejna taaki "Double Spending" ya "Coupon Abuse" ho sake.
+* **Workflow Bypass:** Multi-step transactions mein beech ke verification steps skip karna (e.g., skipping `verify-otp` path and calling `update-password` directly).
+
+## 6. Professional Tooling (Burp Extensions)
+
+Corporate reporting ke liye manual testing ke saath-saath ye automation tools missing hain:
+
+* **Autorize:** Automated authorization testing (BOLA detect karne ka sabse fast tareeka).
+* **AuthMatrix:** Complex role-based access control (RBAC) test karne ke liye.
+* **Nuclei:** API-specific templates se vulnerability scan karna.
+
+---
+
