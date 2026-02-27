@@ -6,6 +6,8 @@ Oye! Notes Guru is here. Hum aaj AI ki duniya ka "Swiss Army Knife" yaani **Lang
 
 Chalo, shuru karte hain Part 1.
 
+### Section 1: Introduction to LangChain
+
 ---
 
 ### 🎯 1. Subtopic Title
@@ -650,4 +652,6 @@ LangGraph "Stateful" hai, iska matlab hai ki agar 1000 users chat kar rahe hain,
 * [x] Industry use-cases mentioned?
 
 --- 🛑 **PART 5 FINISHED. Humne Ecosystem aur tools ka logic samajh liya hai. Agla stop: Ollama setup aur Local LLM interaction! Type 'CONTINUE' for Video 4 preparation.** ---
+
+========================================================================================
 
