@@ -1,29 +1,3 @@
-## Topics & Subtopics (human-readable, original order)
-
-### video-1 — Course overview and LangChain introduction
-
-1. Course scope: building/testing AI agents, RAGs, chatbots with LangChain, Olama, and local LLMs. (00:06.320-00:11.180)
-2. Course depth and testing to prevent hallucination. (00:27.500-00:33.530)
-3. What is LangChain (framework for LLM applications). (00:45.710-00:52.220)
-4. LangChain architecture components: library, LangGraph, integration components, platforms. (01:04.380-01:17.940)
-5. LangSmith: role — debugging, playground, prompt management, annotation, testing, monitoring. (01:48.540-01:54.090)
-6. Use case — chatbots, FAQs, customer support apps. (02:21.650-02:29.750)
-7. Use case — RAG (retrieval-augmented generation) explanation. (02:33.740-02:40.820)
-8. Use case — AI agents (plan, reason, execute). (02:49.940-02:54.740)
-9. Use case — AI-powered search (embeddings + vector DB). (02:54.770-03:04.050)
-10. Use case — text summarization, content generation, data extraction & processing. (03:04.080-03:11.970)
-11. Use case — AI-powered code generation and automated tests (Playwright/Selenium/langchain). (03:11.970-03:18.210)
-12. Browser / web data extraction uses LangChain. (03:25.770-03:34.260)
-13. Course flow: learn building blocks → create chains → implement chatbots/RAGs/agents → testing. (04:12.620-04:45.410)
-14. Local LLM models referenced (llama three R2, Dbsk R1, Qn 2.5) and machine support. (05:01.530-05:05.250)
-15. Model parameter guidance and instructor preference wording ('llama 3.28 billion parameter' phrasing) — larger models → better responses. (05:27.780-05:37.710)
-16. Prerequisites — OS (Windows or Mac) and Python. (05:51.960-06:12.950)
-17. Machine config recommendations — Apple M1 or GPUs (2080 / 3080 / 4090). (06:20.030-06:33.950)
-18. Tools required — Visual Studio Code and Olama. (06:36.200-06:46.520)
-19. Next lecture: why LangSmith. (06:50.450-06:55.820)
-
----
-
 ###Video--2 In this lecture — Why LangChain
 
 1. LangChain standardizes component interfaces. (00:04.130-00:08.480)
