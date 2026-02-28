@@ -1735,3 +1735,5 @@ Jab `serve` chal raha ho, toh Postman se `/api/generate` par ye JSON POST reques
 > **--- 🛑 PART 6 FINISHED. (End of Ollama Base Section - Point 7). You are now a pro at managing local models! Type 'CONTINUE' to start the exciting part: Coding with LangChain! ---**
 
 ========================================================================================
+
+### section 4: Understanding and working LangChain Basics
