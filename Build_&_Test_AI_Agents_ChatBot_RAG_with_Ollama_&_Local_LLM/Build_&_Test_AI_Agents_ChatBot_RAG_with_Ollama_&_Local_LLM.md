@@ -1438,7 +1438,6 @@ Jab aap kisi GUI (Misty.app) mein login karte hain, toh background mein data flo
 
 > **--- 🛑 PART 4 FINISHED. Type 'CONTINUE' for the next subtopic (Deeper Ollama Tooling & LangChain Integration) ---**
 
-========================================================================================
 
 ### 🎯 1. Subtopic Title
 
@@ -1582,7 +1581,6 @@ Chaliye in 4 essential commands ko dissect karte hain jo lecture mein highlight 
 
 > **--- 🛑 PART 5 FINISHED. Environment is fully prepped! Type 'CONTINUE' to start the actual Python coding: "Connecting Ollama LLMs with LangChain" (Point 6) ---**
 
-========================================================================================
 
 ### 🎯 1. Subtopic Title
 
