@@ -1,4 +1,4 @@
-### Section--1  - Introduction to LangChain & Its Architecture
+### Section 1:  Introduction to LangChain & Its Architecture
 
 ### 🎯 1. Subtopic Title
 
@@ -882,5 +882,9 @@ print(response)
 > ✅ **Verified by Notes Guru.**
 
 ---
+
+========================================================================================
+
+### section 2: Not of use
 
 ========================================================================================
