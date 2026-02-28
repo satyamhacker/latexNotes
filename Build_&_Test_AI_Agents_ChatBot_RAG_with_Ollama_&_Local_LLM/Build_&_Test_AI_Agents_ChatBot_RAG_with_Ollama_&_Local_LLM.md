@@ -1173,3 +1173,151 @@ Ollama mein model download karte waqt specific sizes (tags) kaise chunein:
 **🛑 PART 2 FINISHED.** Hardware and model selection logic is fully baked into your brain. Next up, we can dive into the actual LangChain integration or whatever is next on the syllabus. Type **CONTINUE** for the next subtopic!
 
 ========================================================================================
+
+### 🎯 1. Subtopic Title
+
+**Video 3 Lecture — Running models via Ollama CLI (Terminal Demo)**
+
+### 🐣 2. Simple Analogy (Hinglish)
+
+Terminal (jaise Hyper, iTerm, ya Command Prompt) aapke aur AI ke beech ka direct "Walkie-Talkie" hai.
+Jab aap `ollama run` likhte hain, toh ye bilkul **Zomato** order karne jaisa hota hai: Agar model aapke local "kitchen" (computer) mein nahi hai, toh wo use internet se "deliver" (download) karwa lega. Aur ek baar aa gaya, toh aap use bina internet (**offline**) kitni baar bhi use kar sakte hain!
+
+### 📖 3. Technical Definition
+
+* **Precise English:** The Ollama CLI acts as an interactive REPL (Read-Eval-Print Loop) interface, utilizing a Docker-style manifest system to pull, manage, and infer local LLMs completely offline directly from the host terminal.
+* **Hinglish Simplification:** Ek command-line tool jisse aap chat window ke bina sidha terminal se AI models ko download, check, aur run kar sakte hain.
+
+### 🧠 4. Why This Matters
+
+* **Problem:** Heavy GUI applications (like LM Studio) consume extra RAM. Developer environments (like headless Linux servers or Docker containers) don't have screens for GUIs.
+* **Solution:** CLI lightweight hota hai, fast hota hai, aur scripts/automation ke liye perfect hai. Plus, **Offline execution** ka matlab hai zero tracking and zero latency.
+* **What breaks if we don't use it?** Aap automated scripts ya CI/CD pipelines mein local AI models ko test nahi kar payenge. Secure, internet-restricted (air-gapped) environments mein dev work rukk jayega.
+
+### ⚙️ 5. Under the Hood (Deep Dive)
+
+Jab aap terminal mein command daalte hain, system mein ye data flow hota hai:
+
+1. **(User Input)** -> `ollama run <model>`
+2. **(Registry Check)** -> Ollama Daemon local disk check karta hai. If NOT found -> remote server (ollama.com) se Docker-ki-tarah **Manifest** aur **Layers** (model weights) pull karta hai.
+3. **(Memory Load)** -> Model ko SSD se utha kar RAM/VRAM (GPU) mein dalta hai.
+4. **(REPL Ready)** -> Ek interactive prompt `>>>` start hota hai, jo offline inference ke liye ready hai.
+
+---
+
+### 💻 6. Hands-On — Runnable Example
+
+Terminal mein basic model interaction ka workflow:
+
+#### 🖥️ COMMAND CLARITY RULE: Listing Local Models
+
+* **Command:** `ollama list`
+* **Anatomy:**
+* `ollama`: The main tool.
+* `list`: Ye locally downloaded models ki list, unka size, aur kab modify huye thay wo dikhata hai.
+
+
+* **The "What If":** Agar ye command na hoti, toh aapko locally storage folders mein jaakar cryptic file names dhoondhne padte ye check karne ke liye ki konsa model available hai.
+
+#### 🖥️ COMMAND CLARITY RULE: The Run & Pull Command
+
+* **Command:** `ollama run QN1:1.8B` *(Note: Assuming Qwen 1.8B or similar lightweight model as per lecture)*
+* **Anatomy:**
+* `run`: Model ko start karne ki command. (Agar downloaded nahi hai, toh pehle pull karega, just like `docker run`).
+* `QN1:1.8B`: Model ka naam aur uska tag/size. `1.8B` is an extremely small model.
+
+
+* **Exit Codes:** Successful start gives you `>>>`. Failure (e.g., port in use) gives `Error: could not connect to ollama app`.
+
+#### 🖥️ COMMAND CLARITY RULE: Exiting the Matrix
+
+* **Command:** `/bye` (ya `/by` as typed casually)
+* **Anatomy:**
+* `/`: Ollama interactive prompt ke andar special commands trigger karne ka prefix hai (just like Slack or Discord).
+* `bye`: Session ko cleanly close karke model ko memory se unload karta hai.
+
+
+* **The "What If":** Agar aap seedha terminal close kar denge (Ctrl+C sometimes), model thodi der RAM mein loaded reh sakta hai (keep-alive feature), jisse memory block ho jayegi.
+
+---
+
+### 🔒 7. Security-First Check
+
+* **The Hack (Prompt History Leak):** Terminal commands OS ke history file (jaise `~/.bash_history` ya `~/.zsh_history`) mein save hote hain. Agar aap Ollama REPL mein sensitive company code, passwords, ya API keys paste karte hain testing ke liye, wo terminal logs mein capture ho sakte hain.
+* **How to Secure:** Terminal sessions clear karein (`history -c`) ya interactive prompts ki jagah LangChain scripts use karein jo environment variables se secrets uthate hain.
+
+### 🏗️ 8. Scalability & Industry Context
+
+* **1 User vs 1 Million Users:** Ye terminal CLI purely ek **single developer tool** hai. Scale karne ke liye hum CLI use nahi karte; hum Ollama ka REST API (`http://localhost:11434`) use karte hain jise Docker/Kubernetes ke through scale kiya jata hai.
+* **Docker-like Manifest Pull:** Industry standard isliye maintain ho raha hai kyunki container images ki tarah models bhi layers mein aate hain. Agar kal ko model ka naya version aaye, toh Ollama sirf updated layer download karega, poora model nahi!
+
+### ⚠️ 9. Industry Anti-Patterns (Real Incidents)
+
+* **Incident (As seen in the lecture demo):** Asking a tiny 1.8B model to write Selenium C# automation code.
+* **❌ Mistake:** Expecting complex coding/reasoning from a low-parameter, older model. The model hallucinated and gave incorrect syntax.
+* **🤦 Why:** Small models (under 3B) mein enough "brain capacity" nahi hoti syntax nuances (C# vs Java) yaad rakhne ki. Wo basic chat ke liye hote hain.
+* **✅ The 'Pro' Way:** Hamesha task ke hisaab se model choose karein. Coding aur logical tasks ke liye **DeepSeek R1 8B** ya Llama 3 (reasoning models) use karein, jo precise aur accurate code generate karte hain.
+
+### 🛠️ 10. Troubleshooting Flowchart (Mental Model)
+
+If your terminal interaction fails, check:
+
+1. `Error: pull model manifest: file does not exist` -> `Check: Kya spelling sahi hai? (e.g., Llama vs Llama3) Registry check karein.`
+2. `Error: Model generates completely garbage/wrong C# code` -> `Action: Shift to a larger reasoning model (e.g., DeepSeek R1 8B).`
+3. `Error: Stuck loading` -> `Check: Internet connection off hai kya first run par? Download ke baad hi offline chalega.`
+
+### ⚖️ 11. Comparison (Small Models vs Reasoning Models)
+
+| Feature | Small Models (e.g., 1.8B) | Reasoning Models (e.g., DeepSeek R1 8B) |
+| --- | --- | --- |
+| **Best For** | Basic chatting, spelling checks, tiny devices. | Coding (C# Selenium), Logic, Math, LangChain apps. |
+| **Accuracy (Coding)** | Low (Often hallucinates fake libraries). | High (Understands syntax and architecture). |
+| **Hardware** | Runs on literally anything (even old phones). | Needs decent RAM (8GB-16GB) and ideally a GPU. |
+
+### ❓ 12. Interview Q&A (Rapid Fire)
+
+1. **Q: If I turn off my WiFi, can I still chat with `ollama run llama3`?**
+* *A:* Yes, absolutely. Once the model manifest and weights are downloaded, Ollama inferences 100% locally and offline on your machine's hardware.
+
+
+2. **Q: How is Ollama's download mechanism similar to Docker?**
+* *A:* It uses a manifest file to track dependencies and downloads model weights in "layers". If a base model is shared between two different tags, it doesn't re-download the shared layers.
+
+
+3. **Q: How do you gracefully exit the Ollama interactive terminal prompt?**
+* *A:* By typing `/bye`.
+
+
+4. **Q: What is the purpose of the `ollama list` command?**
+* *A:* To view all locally available models that have already been pulled to your machine, ensuring you know what can be run offline.
+
+
+5. **Q: Why would a developer choose DeepSeek R1 8B over a 1.8B model for Selenium automation scripts?**
+* *A:* 1.8B models lack the parameter density to accurately map complex API structures like Selenium in C# and will hallucinate. An 8B reasoning model has enough capacity for accurate syntax generation.
+
+
+
+### 📝 13. One-Line Memory Hook
+
+> **"`ollama run` dabao, offline AI jagao, aur chote model se C# likhwa ke time na gavao!"**
+
+### ✅ 14. Completeness Checklist
+
+* [x] Point 1: Terminal (Hyper) interaction? (Covered in 2 & 6).
+* [x] Point 2: `ollama list` explained? (Covered in 6).
+* [x] Point 3: `ollama run` & Docker-like manifest? (Covered in 5 & 8).
+* [x] Point 4: Demo run `QN1:1.8B` interactive prompt? (Covered in 6).
+* [x] Point 5: Small models produce incorrect C# Selenium code? (Covered in 9).
+* [x] Point 6: DeepSeek R1 8B for accurate code? (Covered in 9 & 11).
+* [x] Point 7: `/bye` to quit? (Covered in 6).
+* [x] Point 8: Offline capability? (Covered in 3, 4, & 12).
+* [x] Line-by-line / Command anatomy done? Yes.
+* [x] Security/Scalability covered? Yes.
+
+> ✅ **Verified by Notes Guru.**
+
+---
+
+> **--- 🛑 PART 3 FINISHED. Type 'CONTINUE' for the next subtopic (Connecting APIs / LangChain) ---**
+
+========================================================================================
