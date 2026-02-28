@@ -3878,3 +3878,7 @@ print(result.content) # Output: "bonjour le monde"
 > ✅ **Verified by Notes Guru. Masterclass Complete.**
 
 ========================================================================================
+
+### section 6: Chat Message History With LangChain
+
+
