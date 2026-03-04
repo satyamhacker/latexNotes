@@ -268,7 +268,11 @@
                 color-adjust: exact !important;
             }
 
-            body { margin: 0; padding: 0; }
+            body { 
+                margin: 0; 
+                padding: 0;
+                background-color: #0f1115 !important;
+            }
 
             .print-wrapper {
                 background-color: #0f1115 !important;
@@ -283,13 +287,80 @@
                 padding: 0;
             }
 
-            .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th {
+            .main-content {
+                padding: 2rem !important;
+                margin: 0 auto;
+                max-width: 100%;
+                background-color: #0f1115 !important;
+            }
+
+            p, li {
+                color: #e6edf3 !important;
+            }
+
+            h1 {
+                background: none !important;
+                -webkit-text-fill-color: #61dafb !important;
+                color: #61dafb !important;
+                border-bottom: 3px solid #30363d !important;
+            }
+
+            h2 {
+                color: #ffffff !important;
+                border-bottom: 2px solid #30363d !important;
+            }
+
+            h2.topic-section, h2.module-section {
+                background: none !important;
+                -webkit-text-fill-color: #4facfe !important;
+                color: #4facfe !important;
+                border-left: 5px solid #4facfe !important;
+            }
+
+            h3 {
+                color: #58a6ff !important;
+            }
+
+            h4 {
+                color: #e6edf3 !important;
+            }
+
+            strong {
                 color: #ffffff !important;
             }
 
-            pre {
-                border: 1px solid #444;
+            code {
+                background: #161b22 !important;
+                color: #ff7b72 !important;
+            }
+
+            pre, pre.mac-window {
+                background: #0d1115 !important;
+                border: 1px solid #30363d !important;
                 page-break-inside: avoid;
+            }
+
+            table {
+                background: #161b22 !important;
+            }
+
+            th {
+                background: #1c2128 !important;
+                color: #58a6ff !important;
+            }
+
+            td {
+                color: #e6edf3 !important;
+                border: 1px solid #30363d !important;
+            }
+
+            blockquote {
+                border-left: 4px solid #58a6ff !important;
+                color: #e6edf3 !important;
+            }
+
+            hr {
+                border-top: 2px solid #30363d !important;
             }
 
             .sidebar, .copy-btn, .window-controls, #loader {
@@ -300,13 +371,8 @@
                 display: block;
             }
 
-            .main-content {
-                padding: 2rem !important;
-                margin: 0 auto;
-                max-width: 100%;
-            }
-
             a {
+                color: #58a6ff !important;
                 text-decoration: none !important;
                 border-bottom: none !important;
             }
