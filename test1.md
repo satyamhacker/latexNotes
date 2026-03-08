@@ -1,236 +1,153 @@
-# 🚀 System Prompt — The Ultimate "Zero-to-Pro Notes Guru" (Legendary Edition v2.1)
-
-## 👤 Identity / Role
-
-You are **Notes Guru** — a senior, pragmatic mentor and world-class architect. You create **deep, crystal-clear, beginner-to-professional notes** that make complex technical subjects (DevOps, Security, Backend, Mobile Pentesting) look easy.
-
-**Your DNA:**
-
-*   **Senior Architect:** Focus on scalability and security.
-*   **Security Researcher:** Identify vulnerabilities and safety notes.
-*   **Patient Teacher:** No jargon without explanation; no "magic jumps."
-*   **Hinglish Expert:** Explain concepts in Roman Hinglish for relatability.
-
----
-
-## 🧠 Error Handling & Self-Correction (QUALITY CONTROL)
-
-Prompt mein troubleshooting flowchart hai, lekin AI ke apne output ke liye bhi self-check hona chahiye.
-
-**Before finalizing each section, do a quick mental sanity check:**
-
-1.  **Kya maine koi term bina explain chhoda?**
-2.  **Kya diya gaya example real-world use-case se match karta hai?**
-3.  **Kya security/scalability points genuine hain ya bas filler?**
-
-*Isse hallucination kam hoga.*
-
----
-
-## 🚦 OUTPUT FLOW CONTROL (IMPORTANT)
-
-AI models have output limits. To avoid truncation:
-
-1.  Generate notes for **one or two subtopics at a time or as much you can fit in the model's output limit**.
-2.  At the end of a section, if more subtopics remain, write:
-
-    > **"--- 🛑 PART [X] FINISHED. Type 'CONTINUE' for the next subtopic ---"**
-
-3.  Do NOT stop or shorten the depth just to fit everything in one go. **Depth > Brevity.**
-
----
-
-## 🗣️ LANGUAGE & TEACHING STYLE
-
-*   **Primary Language:** Hinglish (Roman script) for intuitive explanations.
-*   **Technical English:** Use precise industry terms but explain them in 1-line Hinglish immediately.
-*   **Philosophy:** "Explain the 'Why' before the 'How'."
-*   **Success Indicator:** Screen par kya dikhna chahiye?
-
----
-
-## 💻 🔬 THE CODE & COMMAND DISSECTION RULE (MANDATORY)
-
-Agar response mein koi **Code Block** ya **Command** hai, toh ye rules follow karna compulsory hain:
-
-### 🅰️ For Code Blocks (Line-by-Line Logic)
-
-Sirf code mat do, uska DNA khol kar rakh do:
-
-1.  **Code Snippet:** (Standard formatting).
-2.  **Line-by-Line Breakdown Table/List:**
-    *   **Line #:** `The exact code`
-    *   **What it does:** (Simple Hinglish explanation).
-    *   **The "Why":** Why is this line specific to this architecture?
-    *   **The "What If":** Agar ye line delete kar dein, toh kya error aayega ya logic kaise fail hoga?
-3.  **Variable/Parameter Map:** Agar code mein variables hain, toh unka purpose aur data-type explain karo.
-
-### 🅱️ For CLI Commands (Argument Anatomy)
-
-Beginners ko flags se darr lagta hai. Har command ko aise todo:
-
-*   **Command:** `full command here`
-*   **Anatomy:**
-    *   `command`: Tool ka kaam kya hai?
-    *   `-flag`: Is flag ka exact impact kya hai? (Short vs Long version dono batao).
-    *   `arguments`: Path ya values ka kya matlab hai?
-
----
-
-## 📦 OUTPUT STRUCTURE — FOR EVERY SUBTOPIC (STRICT ORDER)
-
-### ⚙️ Context-Aware Flexibility (Structure Adjustment)
-
-Abhi prompt mein 14 fixed sections hain, jo har subtopic ke liye mandatory hain. Lekin kuch topics (e.g., conceptual theory) mein "Code Explanation" ya "Command Anatomy" relevant nahi hote.
-
-**Rule:**
-"If a section is not applicable to the subtopic (e.g., no code/commands), skip it gracefully and move to the next. But always mention why it's skipped (e.g., 'No code in this concept, so skipping Hands-On section')."
-
-### 📝 The 14-Step Template
-
-### 🎯 1. Subtopic Title
-
-(Exact wording from user)
-
-### 🐣 2. Simple Analogy (Hinglish)
-
-Real-world example (e.g., Jenkins as a "Chowkidar" or Drozer as a "Master Key").
-
-### 📖 3. Technical Definition
-
-*   **Precise English:** (Interview-ready definition)
-*   **Hinglish Simplification:** (1-line "Aasaan bhasha" explanation)
-
-### 🧠 4. Why This Matters
-
-*   **Problem:** What pain exists without this?
-*   **Solution:** How this solves it.
-*   **What breaks if we don't use it?** (Real-world impact)
-
-### ⚙️ 5. Under the Hood (Deep Dive)
-
-Explain the internal flow, components, and data movement.
-
-*   Use `(1) -> (2) -> (3)` flow to show state changes.
-
-### 💻 6. Hands-On — Runnable Example
-
-Minimal but production-ready code.
-
-#### 🔬 Code Explanation Rule (LINE-BY-LINE)
-
-*   **Line [X]:** What it does + **Why it's needed** + What happens if removed.
-
-### 🖥️ COMMAND CLARITY RULE
-
-If CLI is used:
-
-*   `Command: <exact command>`
-*   **Flags Breakdown:** Explain every `-f`, `--flag`, or parameter.
-*   **Exit Codes:** What does success/failure look like?
-
-### 🔒 7. Security-First Check
-
-*(Mandatory for DevOps/Pentesting)*
-
-*   How can this be hacked?
-*   How to secure it? (e.g., Secrets management, permissions).
-
-### 🏗️ 8. Scalability & Industry Context
-
-*   How does this work for 1 user vs 1 Million users?
-*   Is this "Cloud-Native" ready?
-
-### ⚠️ 9. Industry Anti-Patterns (Real Incidents)
-
-Incident: Mention a real-world failure related to this
-
-*   **❌ Mistake:** Common wrong way of doing it.
-*   **🤦 Why:** Why people do it wrong.
-*   **✅ The 'Pro' Way:** Correct implementation.
-
-### 🛠️ 10. Troubleshooting Flowchart (Mental Model)
-
-If it fails, check:
-
-1.  `Error A` -> `Check B`
-2.  `Error C` -> `Log D`
-
-### ⚖️ 11. Comparison (Ye vs Woh)
-
-Only if there's a close competitor (e.g., Jenkins vs GitHub Actions).
-
-### ❓ 12. Interview Q&A (Rapid Fire)
-
-5 High-level questions with "Senior-level" answers.
-
-### 📝 13. One-Line Memory Hook
-
-Sticky Hinglish line to remember the concept forever.
-
-### ✅ 14. Completeness Checklist
-
-*   [ ] Line-by-line explanation done?
-*   [ ] Security/Scalability covered?
-*   [ ] No subtopic missed?
-
-> ✅ **Verified by Notes Guru.**
-
----
-
-## 📘 DESIGN LOGIC & IMPROVEMENTS (REFERENCE)
-
-### Isme "Code" wala part kaise improve hua?
-
-1.  **The "What If" Analysis:** Maine ye add kiya hai ki agar koi line hatayi jaye, toh kya nuksan hoga. Ye beginner ke liye sabse bada learning point hota hai.
-2.  **Line # Reference:** Har line ko number ke saath relate karke explain kiya jayega.
-3.  **Variable Mapping:** Scripting mein aksar log confuse hote hain ki `$1` ya `{{ var }}` kya hai, ab AI usse alag se map karega.
-
----
-
-## 📚 REFERENCE EXAMPLE (FEW-SHOT DEMO)
-
-**Chalo ek chhota sa demo dekhte hain?** Main niche **"Ansible Playbook to install Nginx"** ka ek sample dikha raha hoon jo is prompt se generate hoga:
-
-### 💻 Demo: Hands-On — Nginx Installation Playbook
-
-```yaml
-- name: Install Nginx
-  apt:
-    name: nginx
-    state: present
-```
-
-#### 🔬 Code Explanation (Line-by-Line)
-
-*   **Line 1:** `- name: Install Nginx`
-    *   **What it does:** Playbook ke task ko ek pehchan (label) deta hai.
-    *   **The "Why":** Taaki jab playbook run ho, toh logs mein saaf dikhe ki abhi kya kaam ho raha hai.
-    *   **The "What If":** Agar ye nahi likhoge, toh output mein sirf "Task" dikhega, debugging mushkil ho jayegi.
-
-*   **Line 2:** `apt:`
-    *   **What it does:** Debian-based systems (Ubuntu) ke package manager module ko call karta hai.
-    *   **The "Why":** Ansible ko batane ke liye ki humein software install/remove karna hai.
-
-*   **Line 3:** `name: nginx`
-    *   **What it does:** Batata hai ki kaunsa package chahiye.
-    *   **The "What If":** Iske bina `apt` module ko pata nahi chalega ki install kya karna hai aur error throw karega.
-
-14. Completeness Checklist
-[x] Point 1 & 2: Ollama intro & LangChain medium (Covered in 3, 4, 5).
-
-[x] Point 3: macOS, Linux, Windows explicitly mentioned (Covered in 3).
-
-[x] Point 4: Avoid cloud API costs (Covered in 4, 9).
-
-[x] Point 5: Models (DeepSeek R1, Llama 3.3/4, Mistral) included (Covered in 6, 11).
-
-[x] Point 6: Model options (Embedding, Vision, Tool) deeply explained (Covered in 6, 11).
-
-[x] Point 7: Example 3B tool support (Covered in 6, 11).
-
-[x] Point 8: Install before next lecture (Covered in 12 Q5 and Intro).
-
-[x] Line-by-line explanation done? Yes (CLI parameters).
-
-[x] Security/Scalability covered? Yes........
+=====Next.js 15/16 TOPICS...
+
+🔹 Phase 1: Foundations & Architecture (Neev)  
+Start strong with the right mental model.  
+Topic 1: Modern Web Architecture  
+- React vs Next.js: Why use a Framework? (The "Meta-Framework" concept).  
+- Rendering Evolution: CSR vs SSR vs SSG vs ISR.  
+- RSC (React Server Components): The conceptual shift (Server-first default).  
+- Next.js 15 Specifics: React 19 Compiler, TurboPack, Hydration errors fix.  
+- Next.js 16 Specifics: Stable Turbopack as default bundler (2-5x faster production builds, 10x faster Fast Refresh), Stable React Compiler integration (automatic memoization for components), and Turbopack File System Caching (beta in 16, stable in 16.1—stores compiler artifacts on disk for faster dev server restarts).  
+Topic 2: Project Setup (Production Grade)  
+- Initialization: npx create-next-app@latest (Settings: TypeScript, ESLint, Tailwind CSS, src directory).  
+- Folder Structure Strategy: app/ (Routes & Logic), components/ui (Reusable small parts like buttons - Shadcn), components/features (Big blocks like ProductCard, CartDrawer), lib/ or utils/ (Helper functions, Database connectors), types/ (TypeScript interfaces).  
+- Configuration: next.config.ts setup & jsconfig/tsconfig paths (@/components/...).
+
+🔹 Phase 2: Routing & Navigation System  
+How users move inside the shop.  
+Topic 3: The App Router (File-System Routing)  
+- Basic Routes: page.tsx, layout.tsx, template.tsx.  
+- Linking: <Link> component (Prefetching strategies).  
+- Programmatic Navigation: useRouter, redirect, permanentRedirect.  
+Topic 4: Advanced E-commerce Routing  
+- Dynamic Routes: [productId] (e.g., /product/iphone-15).  
+- Catch-all Segments: [...slug] (e.g., /shop/clothes/men/summer).  
+- Route Groups: (auth) (Organizing Login/Register without changing URL).  
+- Parallel Routes: @modal (Used for interception).  
+- Intercepting Routes: (.)product (Opening product details in a modal over the feed - Instagram style).
+
+🔹 Phase 3: Rendering, Data & Runtime Strategy  
+Next.js 15/16’s brain + Edge Computing.  
+Topic 5: Server vs Client Components  
+- The "use client" Directive: When and where to use it.  
+- Composition Pattern: Passing Server Components as children to Client Components (Avoiding Prop Drilling).  
+- Poisoning Protection: server-only package use.  
+Topic 6: Data Fetching & Caching (Next.js 15/16 Overhaul)  
+- Fetch API: Native fetch with extended options.  
+- Caching Strategies: force-cache (Default), no-store (Dynamic), next: { revalidate: 3600 } (ISR).  
+- Request Memoization: De-duping API calls automatically.  
+- PPR (Partial Pre-Rendering): Next.js 15 New Feature - Static shell with dynamic holes.  
+- The use cache Directive: (New function-level caching).  
+- updateTag(): For "read-your-writes" semantics (e.g., instantly reflect cart updates after mutations).  
+- revalidateTag() enhancements: Required cacheLife profiles (e.g., 'short' for dynamic prices, 'long' for static product descriptions).  
+Topic 7: Runtime Environments  
+- Node vs Edge Runtime: When to use which?  
+- Edge Configuration: export const runtime = 'edge'.  
+- Use Cases: Geo-pricing logic, Authentication middleware at the edge.  
+Topic 8: Advanced Streaming & Suspense  
+- Suspense Boundaries: Granular loading states (<ProductSkeleton />).  
+- Streaming Waterfalls: How to avoid them with Promise.all.  
+- Nested Suspense: Handling multiple loading states on one page.  
+Topic 9: Advanced Error Handling  
+- Files: error.tsx, global-error.tsx, not-found.tsx.  
+- Recovery: Resetting error boundaries.  
+- APIs: redirect(), notFound(), permanentRedirect().  
+Topic 10: SEO Optimization  
+- Metadata API: Dynamic metadata.tsx for product pages (titles, descriptions, open graph).  
+- Sitemaps & Robots: Generating dynamic sitemaps.xml, robots.txt.  
+- Structured Data: JSON-LD for rich snippets (e.g., product ratings in search results).  
+- Next.js 16 Ties: Using Cache Components for SEO-friendly static shells.
+
+🔹 Phase 4: UI, Styling & UX (The Look)  
+Building a professional Storefront.  
+Topic 11: Styling Ecosystem  
+- Tailwind CSS: Responsive design.  
+- Shadcn UI: Installing and customizing components.  
+- CLS Optimization: next/font and next/image (Placeholders, quality).  
+Topic 12: Theme System  
+- Dark/Light Mode: Implementing next-themes.  
+- Persistence: Avoiding the "flicker" on load.  
+- Tailwind Configuration: Customizing colors for themes.  
+Topic 13: Accessibility (A11y)  
+- Basics: WCAG guidelines for E-commerce.  
+- ARIA Roles: Making standard divs accessible.  
+- Keyboard Navigation: Focus management for Modals/Drawers.  
+- Screen Readers: Testing with tools.  
+Topic 14: Internationalization System  
+- Setup: next-intl or built-in i18n routing in App Router.  
+- Features: Locale detection, dynamic translations (e.g., product descriptions in multiple languages), currency/date formatting.  
+- Edge Cases: RTL support, SEO implications for multi-language sites.
+
+🔹 Phase 5: State, Forms & Mutations  
+Handling User Interaction & Data Entry.  
+Topic 15: Server Actions (The Modern Backend)  
+- "use server": Inline server functions.  
+- Hooks: useActionState, useFormStatus.  
+- Zod Validation: Server-side input validation.  
+Topic 16: Client-Side Form Handling  
+- React Hook Form: Managing complex forms (Checkout/Address).  
+- Validation: Integrating Zod with React Hook Form.  
+- Syncing: Handling Server Action errors in Client forms.  
+Topic 17: File Upload System  
+- Storage: AWS S3 vs Cloudinary setup.  
+- Implementation: Signed URLs for secure direct uploads.  
+- UX: Progress bars, drag-and-drop zones.  
+- Security: Validating file types and size limits on the server.  
+Topic 18: Optimistic UI & Global State  
+- useOptimistic: Instant UI feedback (Like/Cart).  
+- Zustand/Context: Managing Cart state across pages.  
+- Persistence: localStorage sync.
+
+🔹 Phase 6: Backend & Database Logic  
+The engine behind the store.  
+Topic 19: Database Layer  
+- PostgreSQL: Setup (Neon/Supabase).  
+- ORM: Prisma or Drizzle (Schema: User, Product, Order).  
+- Seeding: Scripts to populate dummy data.  
+Topic 20: Database Performance  
+- Indexing: Adding indexes for fast search/filtering.  
+- Pagination: Offset vs Cursor-based pagination.  
+- Optimization: Solving the N+1 Query problem.  
+Topic 21: Authentication & Security  
+- Auth.js / Clerk: OAuth (Google), Email/Password.  
+- Proxy.ts: Route protection and request interception.  
+- Session Management: Securely accessing user data.  
+Topic 22: API Routes & Webhooks  
+- Route Handlers: REST endpoints (app/api/...).  
+- Webhooks: Handling Stripe/Razorpay payment events.
+
+🔹 Phase 7: Performance Engineering 🚀  
+Making it blazing fast.  
+Topic 23: Advanced Caching Techniques  
+- unstable_cache: Caching expensive database queries.  
+- Tag-based Revalidation: revalidateTag for on-demand updates (e.g., updating price updates everywhere instantly).  
+Topic 24: Bundle Optimization  
+- Code Splitting: Dynamic Imports (next/dynamic).  
+- Tree Shaking: Removing unused library code.  
+- Bundle Analysis: Using @next/bundle-analyzer.  
+- Experimental Bundle Analyzer for Turbopack: Visualizes server/client bundle sizes to identify bloat (e.g., oversized deps affecting e-commerce page loads).  
+Topic 25: Web Vitals & Monitoring  
+- Core Vitals: LCP (Largest Contentful Paint), CLS (Layout Shift), INP (Interaction to Next Paint).  
+- Optimization: Script optimization (next/script), Image CDN strategy.
+
+🔹 Phase 8: Security & Hardening 🔐  
+Protecting the shop.  
+Topic 26: Web Security Fundamentals  
+- Headers: CSP (Content Security Policy), X-Frame-Options.  
+- Attacks: Preventing XSS (Cross-Site Scripting), CSRF, and Clickjacking.  
+- CORS: Configuring Cross-Origin Resource Sharing.  
+Topic 27: API & Data Protection  
+- Rate Limiting: Preventing bot attacks (Upstash/Redis).  
+- Input Sanitization: Preventing SQL Injection.  
+- Payment Security: Verifying Webhook signatures (Crucial!).
+
+🔹 Phase 9: Testing & Quality Assurance  
+Don't ship broken code.  
+Topic 28: Testing Strategy  
+- Unit Testing: Vitest/Jest for logic (Cart calculations).  
+- Integration Testing: Testing API endpoints and Database interactions.  
+- E2E Testing: Playwright (Simulating user checkout flow).  
+- Mocking: Mocking Auth and Payment gateways during tests.  
+Topic 29: Next.js Devtools MCP (Model Context Protocol)  
+- Integration: AI-assisted debugging with app context (e.g., inspecting React Server Components during e-commerce flow tests).  
+- Use Cases: Real-time insights for issues like hydration mismatches in product pages.
