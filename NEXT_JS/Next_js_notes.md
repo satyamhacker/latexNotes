@@ -97,7 +97,7 @@ Topic 18: Optimistic UI & Global State
 - useOptimistic: Instant UI feedback (Like/Cart).  
 - Zustand/Context: Managing Cart state across pages.  
 - Persistence: localStorage sync.
-
+- URL State Management: E-commerce filters (size, color, price) must live in the URL (?color=red&size=M) so users can share product links and refresh the page without losing their selection. Managing this via Next.js searchParams or libraries like nuqs (next-usequerystate) is a major missing topic.
 🔹 Phase 6: Backend & Database Logic  
 The engine behind the store.  
 Topic 19: Database Layer  
@@ -115,6 +115,8 @@ Topic 21: Authentication & Security
 Topic 22: API Routes & Webhooks  
 - Route Handlers: REST endpoints (app/api/...).  
 - Webhooks: Handling Stripe/Razorpay payment events.
+- Background Jobs & Message Queues: Next.js Server Actions and APIs have strict timeouts. For e-commerce, tasks like sending order confirmation emails, generating PDF invoices, or processing bulk inventory updates shouldn't block the UI. You need topics on asynchronous job processing using tools like Inngest, Trigger.dev, or Upstash QStash.
+- The after() API: Next.js 15 introduced unstable_after (and stabilized it further), which lets you execute non-blocking server tasks after the response has finished streaming back to the client (perfect for analytics or logging without slowing down the user).
 
 🔹 Phase 7: Performance Engineering 🚀  
 Making it blazing fast.  
