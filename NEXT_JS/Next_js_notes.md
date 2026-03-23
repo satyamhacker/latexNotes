@@ -1,6 +1,6 @@
 =====Next.js 15/16 TOPICS...
 
-🔹 Phase 1: Foundations & Architecture (Neev)  
+## Phase 1: Foundations & Architecture (Neev)  
 Start strong with the right mental model.  
 Topic 1: Modern Web Architecture  
 - React vs Next.js: Why use a Framework? (The "Meta-Framework" concept).  
@@ -13,7 +13,7 @@ Topic 2: Project Setup (Production Grade)
 - Folder Structure Strategy: app/ (Routes & Logic), components/ui (Reusable small parts like buttons - Shadcn), components/features (Big blocks like ProductCard, CartDrawer), lib/ or utils/ (Helper functions, Database connectors), types/ (TypeScript interfaces).  
 - Configuration: next.config.ts setup & jsconfig/tsconfig paths (@/components/...).
 
-🔹 Phase 2: Routing & Navigation System  
+## Phase 2: Routing & Navigation System  
 How users move inside the shop.  
 Topic 3: The App Router (File-System Routing)  
 - Basic Routes: page.tsx, layout.tsx, template.tsx.  
@@ -26,7 +26,7 @@ Topic 4: Advanced E-commerce Routing
 - Parallel Routes: @modal (Used for interception).  
 - Intercepting Routes: (.)product (Opening product details in a modal over the feed - Instagram style).
 
-🔹 Phase 3: Rendering, Data & Runtime Strategy  
+## Phase 3: Rendering, Data & Runtime Strategy  
 Next.js 15/16’s brain + Edge Computing.  
 Topic 5: Server vs Client Components  
 - The "use client" Directive: When and where to use it.  
@@ -58,7 +58,7 @@ Topic 10: SEO Optimization
 - Structured Data: JSON-LD for rich snippets (e.g., product ratings in search results).  
 - Next.js 16 Ties: Using Cache Components for SEO-friendly static shells.
 
-🔹 Phase 4: UI, Styling & UX (The Look)  
+## Phase 4: UI, Styling & UX (The Look)  
 Building a professional Storefront.  
 Topic 11: Styling Ecosystem  
 - Tailwind CSS: Responsive design.  
@@ -78,7 +78,7 @@ Topic 14: Internationalization System
 - Features: Locale detection, dynamic translations (e.g., product descriptions in multiple languages), currency/date formatting.  
 - Edge Cases: RTL support, SEO implications for multi-language sites.
 
-🔹 Phase 5: State, Forms & Mutations  
+## Phase 5: State, Forms & Mutations  
 Handling User Interaction & Data Entry.  
 Topic 15: Server Actions (The Modern Backend)  
 - "use server": Inline server functions.  
@@ -98,7 +98,8 @@ Topic 18: Optimistic UI & Global State
 - Zustand/Context: Managing Cart state across pages.  
 - Persistence: localStorage sync.
 - URL State Management: E-commerce filters (size, color, price) must live in the URL (?color=red&size=M) so users can share product links and refresh the page without losing their selection. Managing this via Next.js searchParams or libraries like nuqs (next-usequerystate) is a major missing topic.
-🔹 Phase 6: Backend & Database Logic  
+
+## Phase 6: Backend & Database Logic  
 The engine behind the store.  
 Topic 19: Database Layer  
 - PostgreSQL: Setup (Neon/Supabase).  
@@ -118,7 +119,7 @@ Topic 22: API Routes & Webhooks
 - Background Jobs & Message Queues: Next.js Server Actions and APIs have strict timeouts. For e-commerce, tasks like sending order confirmation emails, generating PDF invoices, or processing bulk inventory updates shouldn't block the UI. You need topics on asynchronous job processing using tools like Inngest, Trigger.dev, or Upstash QStash.
 - The after() API: Next.js 15 introduced unstable_after (and stabilized it further), which lets you execute non-blocking server tasks after the response has finished streaming back to the client (perfect for analytics or logging without slowing down the user).
 
-🔹 Phase 7: Performance Engineering 🚀  
+## Phase 7: Performance Engineering 🚀  
 Making it blazing fast.  
 Topic 23: Advanced Caching Techniques  
 - unstable_cache: Caching expensive database queries.  
@@ -132,7 +133,7 @@ Topic 25: Web Vitals & Monitoring
 - Core Vitals: LCP (Largest Contentful Paint), CLS (Layout Shift), INP (Interaction to Next Paint).  
 - Optimization: Script optimization (next/script), Image CDN strategy.
 
-🔹 Phase 8: Security & Hardening 🔐  
+## Phase 8: Security & Hardening 🔐  
 Protecting the shop.  
 Topic 26: Web Security Fundamentals  
 - Headers: CSP (Content Security Policy), X-Frame-Options.  
@@ -143,7 +144,7 @@ Topic 27: API & Data Protection
 - Input Sanitization: Preventing SQL Injection.  
 - Payment Security: Verifying Webhook signatures (Crucial!).
 
-🔹 Phase 9: Testing & Quality Assurance  
+## Phase 9: Testing & Quality Assurance  
 Don't ship broken code.  
 Topic 28: Testing Strategy  
 - Unit Testing: Vitest/Jest for logic (Cart calculations).  
@@ -1210,13 +1211,6 @@ Agar config files mein ek comma `,` ya bracket `}` ki galti ho gayi, toh Next.js
 
 ========================================================================================
 
-Hello mere dost! 👋 TechGuru aagaya hai wapas, tumhara personal Senior Staff Engineer. 
-
-Aaj se hum **Next.js 15/16** ke ekdum core, engine room mein ghusne wale hain. Yeh **Phase 2** hai. Jaise ek naya ghar banate waqt sabse pehle deewarein aur raste banaye jaate hain ki kaunse kamre mein kaise jana hai, waise hi Next.js mein hum "Routing" seekhenge.
-
-Kyunki Next.js ke routing concepts (App Router) kaafi deep hain, main tumhare **Chunking Protocol** aur **16-point strict structure** ko follow kar raha hoon. 
-
-Is message mein hum **Topic 3 ka Subtopic 1: Basic Routes (`page.tsx`, `layout.tsx`, `template.tsx`)** cover karenge with maximum depth. Aaram se padho, ekdum basic se samjhaunga!
 
 ---
 
