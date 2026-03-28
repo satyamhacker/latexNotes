@@ -36,14 +36,15 @@ The transcript will be pasted between ### START TRANSCRIPT ### and ### END TRANS
 
 3. TOKEN LIMIT & CHUNKING PROTOCOL
 VTT files can be very long. To avoid silent truncation:
-- Process and output topics one or two at a time based on how much fits in the model's output limit.
-- At the end of each chunk, if more topics remain, write EXACTLY this:
-
-> **"--- 🛑 PART [X] FINISHED. Type 'CONTINUE' for the next topics ---"**
-> ✅ **Topics Covered in this message:** [List topic headers you just extracted]
-> ⏳ **Remaining Topics (estimated):** [List remaining video sections or topic cues still to be processed]
-
-- When user types "CONTINUE" — resume from exactly where you left off. Write: "Resuming from: [last timestamp or topic cue]" then continue extraction.
+- Tu khud apni output limit jaanta hai. Jaise hi output limit aane wali ho — ek complete topic ke baad ruk ja. Kabhi bhi kisi topic ke beech mein mat ruk.
+- Rukne par EXACTLY yeh likho:
+```
+--- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
+✅ Completed so far : [list of topic headers fully extracted in this response]
+⏳ Remaining       : [list of remaining video sections or topic cues still to be processed]
+📊 Progress        : [X] topics done / [Y] topics total (estimated)
+```
+- When user types "CONTINUE" — pehli line mein likho: `▶️ Resuming from: [last topic/timestamp cue]` phir seedha wahi se extraction continue karo.
 - NEVER silently stop or truncate. Agar output limit aa rahi hai toh clearly batao aur CONTINUE protocol use karo.
 
 

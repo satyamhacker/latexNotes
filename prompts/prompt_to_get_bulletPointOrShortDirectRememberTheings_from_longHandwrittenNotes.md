@@ -22,11 +22,15 @@ THE GOLDEN RULE OF LENGTH
 
 🚦 CHUNKING PROTOCOL (IMPORTANT — MANDATORY FOR LARGE NOTES)
 Agar notes bahut bade hain (multiple major topics ya very long content) — ek section ya topic at a time process karo. Silently truncate karna strictly forbidden hai.
-- Har section ke end mein likho EXACTLY:
-  > ⏳ **PART [X] DONE. Type 'CONTINUE' for the next section.**
-  > ✅ **Covered in this message:** [section/topic name]
-  > ⏳ **Remaining:** [list of remaining sections/topics]
-- Jab user "CONTINUE" type kare — resume karo exactly wahin se jahan chhoote the. Fresh introduction mat dena.
+- Tu khud apni output limit jaanta hai. Jaise hi output limit aane wali ho — ek complete section ke baad ruk ja. Kabhi bhi kisi section ke beech mein mat ruk.
+- Rukne par EXACTLY yeh likho:
+  ```
+  --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
+  ✅ Completed so far : [list of fully completed sections/topics in this response]
+  ⏳ Remaining       : [list of all sections/topics still to be covered]
+  📊 Progress        : [X] sections done / [Y] sections total
+  ```
+- Jab user "CONTINUE" type kare — pehli line mein likho: `▶️ Resuming from: [exact section name]` phir seedha wahi se shuru karo. Fresh introduction mat dena.
 - Agar notes ek hi topic ke hain lekin bahut long hain — sections (1-8) ko bhi part-wise generate karo.
 
 
