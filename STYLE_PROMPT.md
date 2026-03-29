@@ -35,7 +35,7 @@ You MUST use this specific wrapper structure and print CSS to ensure the dark th
 </body>
 ```
 
-**CSS Rules (Incude these exactly):**
+**CSS Rules (Include these exactly):**
 
 ```css
 :root {
@@ -147,6 +147,57 @@ tr:hover {
     background: rgba(88, 166, 255, 0.1);
 }
 
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    padding: 2rem 1rem;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+.sidebar a {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.sidebar a:hover {
+    background: rgba(88, 166, 255, 0.12);
+    color: var(--accent-blue);
+}
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    padding: 3rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Blockquote */
+blockquote {
+    border-left: 4px solid var(--accent-blue);
+    background: rgba(88, 166, 255, 0.06);
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
 /* CRITICAL PRINT STYLES - DO NOT MODIFY */
 @media print {
     * {
@@ -232,7 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="window-controls">...</div>
                 <button onclick="copy(...)">Copy</button>
             </div>
-            <code class="hljs language-${validLang}">${highlighted}</code>
+            <code class="hljs language-${language || 'plaintext'}">${highlighted}</code>
         </pre>`;
     };
     
