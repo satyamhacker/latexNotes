@@ -97,7 +97,7 @@ LangChain aur local LLMs ke saath hallucination-free AI apps banane ka foundatio
 
 
   Topic 7: Local LLMs and Olama
-    Subtopics: Taxi vs Own Car Analogy, Ollama Platform Definition, Free Inferencing Benefit, Data Privacy, Ollama Execution Flow, ollama run Command Anatomy, Ollama LangChain Integration Code, Code Explanation, Air-gapping Security, Hardware Parameter Rules, VRAM Requirements Anti-Pattern, Troubleshooting Flowchart, Ollama vs LM Studio Comparison, DeepSeek R1 Support
+    Subtopics: Taxi vs Own Car Analogy, Ollama Platform Definition, Free Inferencing Benefit, Data Privacy, Ollama Execution Flow, ollama run Command Anatomy, Ollama LangChain Integration Code, Code Explanation, Air-gapping Security, Hardware Parameter Rules, VRAM Requirements Anti-Pattern, Troubleshooting Flowchart, Ollama vs LM Studio Comparison, DeepSeek R1 Support, ⚠️[ADDED] Ollama 0.5+ Features (Multi-GPU, New Models)
 
   [📊 SCOPE SIGNAL for Topic 7:
   - Depth Level: Deep
@@ -109,6 +109,20 @@ LangChain aur local LLMs ke saath hallucination-free AI apps banane ka foundatio
 
   🔑 KEYWORDS DUMP for Topic 7:
   [OpenAI, ChatGPT, Ollama, open-weight, Llama 3.2, DeepSeek R1, Qwen 2.5, REST API, GDPR, HIPAA, GGUF format, RAM, VRAM, `localhost:11434`, `ollama run llama3.2`, `langchain_community.llms.Ollama`, `llm.invoke`, ⭐Air-gapping potential, 2 Billion, 2B, 8 Billion, 8B, 70B, GPT-4, quantization, CPU inference, LM Studio, Graphical User Interface, GUI, parameters]
+
+  ⚠️ [ADDED — 2026 Best Practice] Ollama 0.5+ Features (Multi-GPU, New Models)
+    Subtopics: Multi-GPU Inference Support, Gemma 3 Model Support, Phi-4 Model Support, Ollama CLI Improvements, Concurrent Model Loading, NUMA Architecture Support
+
+  [📊 SCOPE SIGNAL for Added Subtopic:
+  - Depth Level: Moderate
+  - Coverage Angle: Both
+  - Notes mein content volume: Short paragraph with CLI commands
+  - Key terms: Multi-GPU, Gemma 3, Phi-4, ollama ps, concurrent requests, NUMA
+  - Why added: Ollama rapidly evolves; 0.5+ introduced multi-GPU splitting and new SOTA models not covered in original notes
+  ]
+
+  🔑 KEYWORDS DUMP for Added Subtopic:
+  [Ollama 0.5+, Multi-GPU inference, GPU splitting, Gemma 3, Phi-4, Microsoft, Google DeepMind, `ollama ps`, concurrent model loading, NUMA, Non-Uniform Memory Access, `OLLAMA_NUM_GPU`, `OLLAMA_MAX_LOADED_MODELS`, flash attention, KV cache offloading]
 
 
   Topic 8: Course Prerequisites
@@ -264,7 +278,7 @@ Core library se aage badhkar production-grade tracing aur agent routing ka ecosy
 
 
   Topic 2: LangSmith in Depth
-    Subtopics: Quality Inspector Analogy, Observability Platform Definition, Non-deterministic Evaluation Need, Dataset Evaluation Flow, LangSmith Dataset Creation Code, Code Explanation, PII Data Masking Security, CI/CD Regression Tests Scalability, Basic Unit Test Anti-Pattern, Prompt Trace Troubleshooting, Tracing vs Evaluating Comparison, LLM-as-a-judge Concept, Golden Dataset
+    Subtopics: Quality Inspector Analogy, Observability Platform Definition, Non-deterministic Evaluation Need, Dataset Evaluation Flow, LangSmith Dataset Creation Code, Code Explanation, PII Data Masking Security, CI/CD Regression Tests Scalability, Basic Unit Test Anti-Pattern, Prompt Trace Troubleshooting, Tracing vs Evaluating Comparison, LLM-as-a-judge Concept, Golden Dataset, ⚠️[ADDED] LangSmith Playground & Datasets
 
   [📊 SCOPE SIGNAL for Topic 2:
   - Depth Level: Deep
@@ -276,6 +290,20 @@ Core library se aage badhkar production-grade tracing aur agent routing ka ecosy
 
   🔑 KEYWORDS DUMP for Topic 2:
   [Quality Inspector, observability platform, tracing, evaluating, ⭐"move your prototype to production", LLM-as-a-judge, langsmith, Client, `create_dataset`, `create_example`, ground truth, Data Masking, PII, Personally Identifiable Information, CI/CD pipelines, automated regression tests, Unit Tests, `assert output == "Yes"`, semantic evaluations, Golden Dataset]
+
+  ⚠️ [ADDED — 2026 Best Practice] LangSmith Playground & Datasets
+    Subtopics: Interactive Prompt Playground, Dataset Management UI, Annotation Queues, Human Feedback Collection, Experiment Comparison View, Prompt Versioning
+
+  [📊 SCOPE SIGNAL for Added Subtopic:
+  - Depth Level: Moderate
+  - Coverage Angle: Both
+  - Notes mein content volume: Short UI walkthrough
+  - Key terms: Playground, Datasets tab, annotation, human feedback, experiment runs, prompt versioning
+  - Why added: LangSmith now includes hands-on interactive tools beyond tracing; original notes only cover conceptual evaluation
+  ]
+
+  🔑 KEYWORDS DUMP for Added Subtopic:
+  [LangSmith Playground, interactive prompt testing, Datasets tab, annotation queues, human feedback loop, RLHF, experiment comparison, A/B prompt testing, prompt versioning, commit hash, regression baseline, `run_on_dataset`, evaluator functions, `evaluate`, feedback scores]
 
 
   Topic 3: LangGraph in Depth
@@ -291,6 +319,21 @@ Core library se aage badhkar production-grade tracing aur agent routing ka ecosy
 
   🔑 KEYWORDS DUMP for Topic 3:
   [Roundabout, Golchakkar, ⭐"stateful, multi-actor applications", agents, multi-agent workflows, cyclic execution paths, Directed Acyclic Graphs, DAGs, State Machine architecture, State object, Nodes, Edges, `langgraph.graph`, `StateGraph`, `END`, `TypedDict`, `AgentState`, `add_node`, `set_entry_point`, `add_edge`, `compile`, Fortune 500, `AgentExecutor`, recursion limit, SequentialChain, Conditional edges]
+
+
+  ⚠️ [ADDED — 2026 Best Practice] Topic 3A: LangGraph Cloud & Production Deployment
+    Subtopics: Cloud Deployment Platform Analogy, LangGraph Cloud Definition, Managed Stateful Agent Hosting, Persistent Checkpointing, Horizontal Scaling of Agents, LangGraph Studio IDE, Deployment vs Local Dev Comparison, API Endpoint Generation, Auth & Rate Limiting
+
+  [📊 SCOPE SIGNAL for Added Topic:
+  - Depth Level: Deep
+  - Coverage Angle: Both
+  - Notes mein content volume: Conceptual + practical (deployment config)
+  - Key terms: LangGraph Cloud, checkpointing, LangGraph Studio, managed hosting, persistent state, horizontal scaling
+  - Why added: Original notes cover LangGraph locally but miss its production-ready cloud offering — essential for deploying stateful agents at scale in 2026
+  ]
+
+  🔑 KEYWORDS DUMP for Added Topic:
+  [LangGraph Cloud, managed hosting, persistent checkpointing, Postgres checkpointer, `SqliteSaver`, `PostgresSaver`, LangGraph Studio, visual graph debugger, horizontal scaling, stateful agent pods, API endpoint auto-generation, `langgraph deploy`, `langgraph.json`, Auth middleware, rate limiting, `LANGGRAPH_CLOUD_API_KEY`, self-hosted option, Docker Compose, Kubernetes operator]
 
 
   Topic 4: LangSmith Website Tour & Dashboard
@@ -3899,6 +3942,21 @@ Langchain ke pre-built tools se poori RAG pipeline ko automate karna. [⚠️ De
   [RetrievalQA, Manual LCEL, Finer Control, Output Formatting, JSON format, Security Guardrail variables, XML tags, summarize the results]
 
 
+  ⚠️ [ADDED — 2026 Best Practice] Topic 7: Advanced RAG Techniques (HyDE, RAG-Fusion, Self-RAG)
+    Subtopics: HyDE Hypothetical Document Embeddings, RAG-Fusion Multi-Query Retrieval, Self-RAG Adaptive Retrieval, Corrective RAG (CRAG), Reranking with Cross-Encoders, Query Decomposition, Step-Back Prompting, Contextual Compression Retriever
+
+  [📊 SCOPE SIGNAL for Added Topic:
+  - Depth Level: Deep
+  - Coverage Angle: Both
+  - Notes mein content volume: Conceptual + code examples for each technique
+  - Key terms: HyDE, RAG-Fusion, Self-RAG, CRAG, reranking, cross-encoder, query decomposition
+  - Why added: Original notes cover basic RAG pipeline but miss modern retrieval enhancements that significantly improve accuracy and reduce hallucination in 2026
+  ]
+
+  🔑 KEYWORDS DUMP for Added Topic:
+  [HyDE, Hypothetical Document Embeddings, fake document generation, RAG-Fusion, multi-query retrieval, Reciprocal Rank Fusion, RRF, Self-RAG, adaptive retrieval, reflection tokens, ISREL, ISSUP, ISUSE, Corrective RAG, CRAG, web search fallback, reranking, cross-encoder, `CrossEncoder`, `sentence-transformers`, query decomposition, sub-questions, step-back prompting, abstraction, ContextualCompressionRetriever, `LLMChainExtractor`, `EmbeddingsFilter`, hallucination reduction, retrieval accuracy]
+
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
@@ -5118,6 +5176,21 @@ LLM ko live internet aur JavaScript-heavy pages padhne ka jadui chashma dena. [�
 =====Section 5: Integrating Playwright Tool with the Agent [⚠️ Derived]=====
 LLM agent ko live DOM padhne aur real-time data extract karne ke kabil banana. [⚠️ Derived]
 
+⚠️ [ADDED — 2026 Best Practice] Multi-Agent Systems & Orchestration
+    Subtopics: Multi-Agent Architecture Definition, Supervisor Agent Pattern, Worker Agent Pattern, LangGraph Multi-Agent Workflows, Agent Communication Protocols, Shared State Management, Inter-Agent Tool Calling, Parallel Agent Execution, Human-in-the-Loop in Multi-Agent, Failure Isolation Between Agents
+
+  [📊 SCOPE SIGNAL for Added Topic:
+  - Depth Level: Deep
+  - Coverage Angle: Both
+  - Notes mein content volume: Conceptual + code (LangGraph StateGraph with multiple agents)
+  - Key terms: Multi-agent, Supervisor, Worker, LangGraph, shared state, inter-agent communication
+  - Why added: Original notes focus on single agents; multi-agent patterns are now industry standard for complex tasks in 2026
+  ]
+
+  🔑 KEYWORDS DUMP for Added Topic:
+  [Multi-Agent Systems, Supervisor Agent, Worker Agent, LangGraph, `StateGraph`, shared state, `AgentState`, inter-agent tool calling, parallel agent execution, `send()` API, conditional routing, Human-in-the-Loop, HITL, agent handoff, `Command` object, subgraph, `add_node`, `add_edge`, AutoGen, CrewAI, agent isolation, blast radius, Denial of Wallet, max_iterations per agent]
+
+
 --5--Integrating Playwright Tool with the Agent--
   Topic 1: Goal of the Web Extraction Agent
     Subtopics: Web Extraction Agent Goal, Real-time External Interaction, Live DOM Parsing, Karthik's Salary
@@ -5623,6 +5696,23 @@ LLM evaluation ka foundation, traditional software testing se iska difference, a
 
   🔑 KEYWORDS DUMP for Topic 1:
   [LLM Evaluation, systematic process, performance, capabilities, safety, standardized datasets, text summarization, open-book QA, code generation, language understanding, benchmark, fair and competitive analysis, hallucinate, apples-to-apples, ground truth, evaluator, Safety & Alignment, prompt injections, toxic prompts, gracefully deny, LLMOps, cloud-native AI architectures, MMLU dataset, HELM, HumanEval, Vibe Check, manual chatting, overfitting, ⭐"Pro Way", Data Flywheel]
+
+
+  [ADDED_UPTRAIN_PLACEHOLDER]
+
+  ⚠️ [ADDED — 2026 Best Practice] UpTrain, Phoenix, Arize – Alternative Evaluation Platforms
+    Subtopics: UpTrain Framework Overview, Phoenix by Arize AI Overview, Arize AI Platform Overview, Open-Source vs Enterprise Evaluation, LLM Tracing Integration, Hallucination Detection Dashboards, Comparison with Ragas and DeepEval
+
+  [📊 SCOPE SIGNAL for Added Subtopic:
+  - Depth Level: Moderate
+  - Coverage Angle: Conceptual only
+  - Notes mein content volume: Short comparison paragraph
+  - Key terms: UpTrain, Phoenix, Arize, open-source evaluation, LLM observability, hallucination dashboards
+  - Why added: Original notes focus exclusively on Ragas and DeepEval; UpTrain and Phoenix are widely adopted in 2026 and offer complementary capabilities
+  ]
+
+  🔑 KEYWORDS DUMP for Added Subtopic:
+  [UpTrain, Phoenix, Arize AI, open-source LLM evaluation, hallucination detection, LLM observability, `uptrain.evaluate()`, `px.launch_app()`, OpenInference tracing, OTEL, OpenTelemetry, embedding drift, data quality metrics, Ragas alternative, DeepEval alternative, self-hosted, cloud-hosted, LLM guardrails, span-level tracing]
 
 
   Topic 2: Differences from Traditional Software Testing
@@ -8442,6 +8532,20 @@ Sections: 4 | Topics: 15 | Subtopics: 74
 ==================================================================================
 
 ### Section 17: Building MCP Server with FastMCP
+
+  ⚠️ [ADDED — 2026 Best Practice] MCP Server Security & Hosting
+    Subtopics: MCP Server Security Fundamentals, Environment Variable Secrets Management, Sandboxing MCP Tool Execution, HTTP/SSE Transport Hosting, Cursor IDE Integration Pattern, VS Code MCP Extension Integration, Remote MCP Server Deployment, Auth Middleware for MCP, Rate Limiting MCP Endpoints, Zero-Trust MCP Architecture
+
+  [📊 SCOPE SIGNAL for Added Topic:
+  - Depth Level: Deep
+  - Coverage Angle: Both
+  - Notes mein content volume: Conceptual + config examples
+  - Key terms: MCP security, HTTP/SSE hosting, environment variables, sandboxing, Cursor, VS Code, remote deployment
+  - Why added: Original notes touch security briefly but miss modern deployment patterns — hosting MCP as HTTP/SSE services and integrating with Cursor/VS Code are critical 2026 production patterns
+  ]
+
+  🔑 KEYWORDS DUMP for Added Topic:
+  [MCP Server Security, environment variables, `.env`, secrets management, AWS Secrets Manager, sandboxing, Docker container isolation, HTTP/SSE transport, `mcp.run(transport="sse")`, `uvicorn`, FastAPI hosting, Cursor IDE `mcp.json`, VS Code `settings.json` MCP config, remote MCP server, `ALLOWED_ORIGINS`, Auth middleware, Bearer token, rate limiting, `slowapi`, Zero-Trust, `--allow-origins`, TLS/HTTPS, reverse proxy, Nginx, Cloudflare Tunnel]
 
 
 📦 Processing: Phase 1 — Introduction to Building an MCP Server & Installation
