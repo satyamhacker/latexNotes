@@ -97,9 +97,9 @@ AI models have output limits. To avoid truncation:
 1. **17-point structure at TOPIC level.** Har point ke andar, saare relevant subtopics ko natural tarike se include karo — koi subtopic chhutna nahi chahiye.
 2. **Per-subtopic depth maintained within each point:**
    - **Point 7 (Hands-On):** EVERY code/command line comment se explain karo, har flag/argument ka matlab Hinglish mein batao. Har code block ke baad **📤 Expected Output** block zaroor do — koi shortcut nahi.
-   - **Point 11 (Comparison):** Agar koi subtopic comparison maangta hai, woh table yahin aayega.
-   - **Point 9 (Anti-Patterns):** Saare subtopics ke common mistakes ek saath list karo.
-   - **Point 16 (Interview Q&A):** Minimum 5 deep questions jo saare subtopics ke angles cover karein.
+   - **Point 13 (Comparison):** Agar koi subtopic comparison maangta hai, woh table yahin aayega.
+   - **Point 10 (Anti-Patterns):** Saare subtopics ke common mistakes ek saath list karo.
+   - **Point 17 (Interview Q&A):** Minimum 5 deep questions jo saare subtopics ke angles cover karein.
 3. **Keywords Coverage:** Topic ke end mein subtopic-wise coverage table do (neeche "Keywords Coverage Verification" section dekho). Har subtopic ke keywords individually verify karo.
 4. **Token management:** Agar topic bohot bada ho (15+ subtopics), ek response mein compress karne ki koshish mat karo. **CONTINUE protocol at subtopic-group level** use karo (e.g., 5 subtopics in one response, consolidated style ke saath).
 5. **Code/Command Rule NON-NEGOTIABLE:** Is mode mein bhi, jab bhi code ya command aaye — har line explain karo, har flag explain karo, exact output dikhao. No shortcuts allowed.
@@ -176,9 +176,9 @@ Beginners ko flags se darr lagta hai. Har command ko aise todo:
 
 Kuch topics (e.g., conceptual theory) mein "Code Explanation" ya "Command Anatomy" relevant nahi hote.
 
-**THEORY-ONLY TOPIC RULE:** Agar subtopic purely conceptual hai aur koi hands-on code/command possible nahi hai (e.g., "What is OSI Model", "History of Internet") — toh Step 6 (Hands-On) ko replace karo with:
+**THEORY-ONLY TOPIC RULE:** Agar subtopic purely conceptual hai aur koi hands-on code/command possible nahi hai (e.g., "What is OSI Model", "History of Internet") — toh **Point 7 (Hands-On)** ko replace karo with:
 
-> **💡 6. Concept Visualization (Theory Topic ke liye):**
+> **💡 7. Concept Visualization (Theory Topic ke liye):**
 > - ASCII diagram ya step-by-step flow diagram se concept visually explain karo.
 > - Real-world mein yeh concept kaise "behave" karta hai woh numbered steps mein likho.
 > - Koi forced/fake code mat likho — clarity zyada important hai.
@@ -530,6 +530,16 @@ age = 25  (Python code)
 
 ### 📝 18. One-Line Memory Hook
 "Variable ek label wala dibba hai — naam fixed, andar ka saamaan kabhi bhi badal do."
+
+
+### 🔑 19. Keywords Coverage Verification
+```
+🔑 Keywords Coverage Check — What is a variable?
+✅ Covered   : labeled box, age, 25, named storage location, dynamic, memory, changeable
+⚠️ Mentioned but needs more depth : (none)
+❌ MISSED    : (none — all keywords covered)
+```
+> ✅ Verified: 100% keyword coverage. Proceeding to next subtopic (or CONTINUE).
 
 
 ---
