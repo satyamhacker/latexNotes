@@ -2,7 +2,7 @@
 
 ### Section 1: Introduction to LangChain
 
-=====Section 1: Introduction to LangChain=====
+=====Video 1: Introduction to LangChain=====
 LangChain aur local LLMs ke saath hallucination-free AI apps banane ka foundation. [⚠️ Derived]
 
 --1--Introduction to LangChain--
@@ -141,15 +141,15 @@ LangChain aur local LLMs ke saath hallucination-free AI apps banane ka foundatio
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (Topics 1 to 8)
-⏳ Remaining       : Section 2 (Topics 1 to 7), Section 3 (Topics 1 to 6)
+✅ Completed so far : Video 1 (Topics 1 to 8)
+⏳ Remaining       : Video 2 (Topics 1 to 7), Video 3 (Topics 1 to 6)
 📊 Progress        : 1 sections done / 3 sections total | 8 topics done / 21 topics total | 102 subtopics done / 240+ subtopics total
 
 *(Internal Check: Sab strict Hinglish rules, subtopic naming rules aur Scope/Keywords formatting perfectly follow ho rahi hain. Just type 'CONTINUE' to proceed!)*
 
-▶️ Resuming from: Section 2 (Topic 1: The Core Purpose of LangChain)
+▶️ Resuming from: Video 2 (Topic 1: The Core Purpose of LangChain)
 
-=====Section 2: Why LangChain? [⚠️ Derived]=====
+=====Video 2: Why LangChain? [⚠️ Derived]=====
 Bohot saare AI models ke beech API fragmentation se bachne ka solid solution. [⚠️ Derived]
 
 --2--Why LangChain?--
@@ -258,7 +258,7 @@ Bohot saare AI models ke beech API fragmentation se bachne ka solid solution. [�
   [TV Remote, `.invoke()`, `.stream()`, `llm.generate()`, `llm.predict()`, `llm.call()`, `llm.run()`, LCEL, LangChain Expression Language, `ainvoke`, `astream`, `abatch`, `langchain_community.llms`, Python generator, FastAPI, Dependency Inversion Principle, Polymorphism, Runnable]
 
 
-=====Section 3: LangChain's Ecosystem=====
+=====Video 3: LangChain's Ecosystem=====
 Core library se aage badhkar production-grade tracing aur agent routing ka ecosystem.
 
 --3--LangChain's Ecosystem--
@@ -383,11 +383,11 @@ Core library se aage badhkar production-grade tracing aur agent routing ka ecosy
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 📋 COMPLETE SKELETON INDEX
 
-Section 1: Introduction to LangChain
+Video 1: Introduction to LangChain
   Topic 1: Course Heading and Goal
   Topic 2: What is LangChain?
   Topic 3: LangChain Architecture Components
@@ -397,7 +397,7 @@ Section 1: Introduction to LangChain
   Topic 7: Local LLMs and Olama
   Topic 8: Course Prerequisites
 
-Section 2: Why LangChain? [⚠️ Derived]
+Video 2: Why LangChain? [⚠️ Derived]
   Topic 1: The Core Purpose of LangChain
   Topic 2: The Challenge of Growing AI Models
   Topic 3: The Solution - Standard Interfaces
@@ -406,7 +406,7 @@ Section 2: Why LangChain? [⚠️ Derived]
   Topic 6: Advanced Programming Support
   Topic 7: Interface Execution Methods
 
-Section 3: LangChain's Ecosystem
+Video 3: LangChain's Ecosystem
   Topic 1: The Core Ecosystem Components
   Topic 2: LangSmith in Depth
   Topic 3: LangGraph in Depth
@@ -415,7 +415,7 @@ Section 3: LangChain's Ecosystem
   Topic 6: Next Steps
 
 📊 SUMMARY:
-Total Sections: 3 | Total Topics: 21 | Total Subtopics: 200+
+Total Videos: 3 | Total Topics: 21 | Total Subtopics: 200+
 
 --- 🛑 ALL PHASES SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -428,7 +428,7 @@ Total Sections: 3 | Total Topics: 21 | Total Subtopics: 200+
 
 📦 Processing: Phase 1 — Ollama Foundation & Hardware Requirements
 
-=====Section 1: Introduction to Ollama and Local LLMs [⚠️ Derived]=====
+=====Video 1: Introduction to Ollama and Local LLMs [⚠️ Derived]=====
 Local AI models ko apne machine par run karne ka foundational setup aur benefits. [⚠️ Derived]
 
 --1--Introduction to Ollama and Local LLMs [⚠️ Derived]--
@@ -523,7 +523,7 @@ Local AI models ko apne machine par run karne ka foundational setup aur benefits
 
 
 
-=====Section 2: Choosing Models and Hardware Requirements [⚠️ Derived]=====
+=====Video 2: Choosing Models and Hardware Requirements [⚠️ Derived]=====
 Hardware constraints aur AI models ke parameters ka mathematical relationship. [⚠️ Derived]
 
 --2--Choosing Models and Hardware Requirements [⚠️ Derived]--
@@ -618,13 +618,13 @@ Hardware constraints aur AI models ke parameters ka mathematical relationship. [
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (Introduction to Ollama and Local LLMs) [Topics 1 to 6], Section 2 (Choosing Models and Hardware Requirements) [Topics 1 to 6]
-⏳ Remaining        : Section 3 (Running Ollama Models via Terminal), Section 4 (GUI Interfaces for Local LLMs), Section 5 (Advanced Ollama Terminal Commands), Section 6 (Using Ollama as an API Server)
+✅ Completed so far : Video 1 (Introduction to Ollama and Local LLMs) [Topics 1 to 6], Video 2 (Choosing Models and Hardware Requirements) [Topics 1 to 6]
+⏳ Remaining        : Video 3 (Running Ollama Models via Terminal), Video 4 (GUI Interfaces for Local LLMs), Video 5 (Advanced Ollama Terminal Commands), Video 6 (Using Ollama as an API Server)
 📊 Progress         : 2 sections done / 6 sections total | 12 topics done / 35 topics total | 124 subtopics done / ~300 subtopics total
 
-▶️ Resuming from: Section 3: Running Ollama Models via Terminal
+▶️ Resuming from: Video 3: Running Ollama Models via Terminal
 
-=====Section 3: Running Ollama Models via Terminal [⚠️ Derived]=====
+=====Video 3: Running Ollama Models via Terminal [⚠️ Derived]=====
 Terminal commands ka direct use karke local models ko interact aur manage karna. [⚠️ Derived]
 
 --3--Running Ollama Models via Terminal [⚠️ Derived]--
@@ -734,7 +734,7 @@ Terminal commands ka direct use karke local models ko interact aur manage karna.
 
 
 
-=====Section 4: GUI Interfaces for Local LLMs [⚠️ Derived]=====
+=====Video 4: GUI Interfaces for Local LLMs [⚠️ Derived]=====
 Terminal ki complexity chupa kar ChatGPT-like visual tools (Msty, GPT4All) use karna. [⚠️ Derived]
 
 --4--GUI Interfaces for Local LLMs [⚠️ Derived]--
@@ -799,7 +799,7 @@ Terminal ki complexity chupa kar ChatGPT-like visual tools (Msty, GPT4All) use k
 
 
 
-=====Section 5: Advanced Ollama Terminal Commands [⚠️ Derived]=====
+=====Video 5: Advanced Ollama Terminal Commands [⚠️ Derived]=====
 Model lifecycle aur metadata extract karne wali essential CLI commands. [⚠️ Derived]
 
 --5--Advanced Ollama Terminal Commands [⚠️ Derived]--
@@ -864,7 +864,7 @@ Model lifecycle aur metadata extract karne wali essential CLI commands. [⚠️ 
 
 
 
-=====Section 6: Using Ollama as an API Server [⚠️ Derived]=====
+=====Video 6: Using Ollama as an API Server [⚠️ Derived]=====
 Ollama ko REST API server banakar LangChain jaisi third-party scripts ke liye ready karna. [⚠️ Derived]
 
 --6--Using Ollama as an API Server [⚠️ Derived]--
@@ -960,11 +960,11 @@ Ollama ko REST API server banakar LangChain jaisi third-party scripts ke liye re
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 3: Running Ollama Models via Terminal
+Video 3: Running Ollama Models via Terminal
   Topic 1: Using the Terminal
   Topic 2: Listing Downloaded Models
   Topic 3: Downloading and Running a Small Model
@@ -973,19 +973,19 @@ Section 3: Running Ollama Models via Terminal
   Topic 6: Quitting the Prompt
   Topic 7: Running a Reasoning Model (DeepSeek R1)
 
-Section 4: GUI Interfaces for Local LLMs
+Video 4: GUI Interfaces for Local LLMs
   Topic 1: The Need for a GUI
   Topic 2: Tool 1 - Msty
   Topic 3: Tool 2 - GPT4All
   Topic 4: Testing DeepSeek R1 locally in Msty
 
-Section 5: Advanced Ollama Terminal Commands
+Video 5: Advanced Ollama Terminal Commands
   Topic 1: Exploring Available Commands
   Topic 2: Removing a Model
   Topic 3: Showing Model Information
   Topic 4: The Docker Analogy
 
-Section 6: Using Ollama as an API Server
+Video 6: Using Ollama as an API Server
   Topic 1: Starting the Server with serve
   Topic 2: Port and Localhost Verification
   Topic 3: API Documentation
@@ -994,7 +994,7 @@ Section 6: Using Ollama as an API Server
   Topic 6: Conclusion for Next Steps
 
 📊 PHASE SUMMARY:
-Sections: 4 | Topics: 21 | Subtopics: 147
+Videos: 4 | Topics: 21 | Subtopics: 147
 
 **--- 🛑 PHASE [ALL] SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.**
 
@@ -1003,9 +1003,9 @@ Sections: 4 | Topics: 21 | Subtopics: 147
 ### Section 4: Understanding and working LangChain Basics
 
 
-📦 Processing: Phase 1 — LangChain Basics (Sections 1 to 2)
+📦 Processing: Phase 1 — LangChain Basics (Videos 1 to 2)
 
-=====Section 1: Setting Up the Environment and Dependencies=====
+=====Video 1: Setting Up the Environment and Dependencies=====
 Development environment ko isolate aur configure karne ke foundational steps. [⚠️ Derived]
 
 --1--Setting Up the Environment and Dependencies--
@@ -1084,7 +1084,7 @@ Development environment ko isolate aur configure karne ke foundational steps. [�
   [python-dotenv, .env, API keys, OpenAI, LangSmith, os.environ, !pip install python-dotenv, import os, load_dotenv(), os.getenv, .gitignore, Secret Managers, AWS Secrets Manager, Azure Key Vault, credentials.env, ⭐"THE GOLDEN RULE"[emphasized in notes]]
 
 
-=====Section 2: Interacting with the Local LLM=====
+=====Video 2: Interacting with the Local LLM=====
 Local Ollama model ko connect, invoke aur uske metadata ko analyze karne ka process. [⚠️ Derived]
 
 --2--Interacting with the Local LLM--
@@ -1149,13 +1149,13 @@ Local Ollama model ko connect, invoke aur uske metadata ko analyze karne ka proc
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (Setting Up the Environment and Dependencies), Section 2 (Interacting with the Local LLM)
-⏳ Remaining        : Section 3 (Configuring LangSmith for Observability), Section 4 (Prompt and Chat Templates), Section 5 (Message Placeholders and Streaming)
+✅ Completed so far : Video 1 (Setting Up the Environment and Dependencies), Video 2 (Interacting with the Local LLM)
+⏳ Remaining        : Video 3 (Configuring LangSmith for Observability), Video 4 (Prompt and Chat Templates), Video 5 (Message Placeholders and Streaming)
 📊 Progress         : 2 sections done / 5 sections total | 9 topics done / 23 topics total | 69 subtopics done / 165 subtopics total
 
-▶️ Resuming from: Section 3 (Configuring LangSmith for Observability)
+▶️ Resuming from: Video 3 (Configuring LangSmith for Observability)
 
-=====Section 3: Configuring LangSmith for Observability [⚠️ Derived]=====
+=====Video 3: Configuring LangSmith for Observability [⚠️ Derived]=====
 Cloud TV dashboard setup aur `.env` secrets management ka poora pipeline. [⚠️ Derived]
 
 --3--Configuring LangSmith for Observability--
@@ -1219,7 +1219,7 @@ Cloud TV dashboard setup aur `.env` secrets management ka poora pipeline. [⚠�
   [X-Ray machine, GUI, telemetry payload, Latency, 82 tokens, asynchronous, api.smith.langchain.com, JSON payload, Trace Row, Data Retention, PII, VPC, GDPR/HIPAA, Span, Tree, Fail-safe mechanism]
 
 
-=====Section 4: Prompt and Chat Templates [⚠️ Derived]=====
+=====Video 4: Prompt and Chat Templates [⚠️ Derived]=====
 Hardcoded strings se aage badh kar dynamic aur reusable prompts banana. [⚠️ Derived]
 
 --4--Prompt and Chat Templates--
@@ -1313,7 +1313,7 @@ Hardcoded strings se aage badh kar dynamic aur reusable prompts banana. [⚠️ 
   [Shorthand syntax, List of Tuples, ("system", "You are an LLM expert"), ("user", "What is the advantage..."), Factory Pattern, Developer Experience, DX, ("ai", ...), Tuple Parsing, boilerplate]
 
 
-=====Section 5: Message Placeholders and Streaming [⚠️ Derived]=====
+=====Video 5: Message Placeholders and Streaming [⚠️ Derived]=====
 Advanced chat history injection aur real-time chunking UX ke liye. [⚠️ Derived]
 
 --5--Message Placeholders and Streaming--
@@ -1379,30 +1379,30 @@ Advanced chat history injection aur real-time chunking UX ke liye. [⚠️ Deriv
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 📋 COMPLETE SKELETON INDEX (ALL PHASES)
 
-Section 1: Setting Up the Environment and Dependencies
+Video 1: Setting Up the Environment and Dependencies
   Topic 1: Virtual Environment Setup
   Topic 2: Jupyter Notebook Configuration
   Topic 3: Installing LangChain and Dependencies
   Topic 4: Installing Ollama Integration
   Topic 5: Installing Python Dotenv
 
-Section 2: Interacting with the Local LLM
+Video 2: Interacting with the Local LLM
   Topic 1: Importing and Initializing ChatOllama
   Topic 2: Invoking the LLM
   Topic 3: Analyzing the Response and Metadata
   Topic 4: The Need for Observability
 
-Section 3: Configuring LangSmith for Observability
+Video 3: Configuring LangSmith for Observability
   Topic 1: Creating a LangSmith Project
   Topic 2: Setting up the .env File
   Topic 3: Loading the Environment Variables
   Topic 4: Viewing Traces in the GUI
 
-Section 4: Prompt and Chat Templates
+Video 4: Prompt and Chat Templates
   Topic 1: Introduction to Prompt Templates
   Topic 2: Creating a Basic Prompt Template
   Topic 3: Invoking the Prompt Template
@@ -1410,14 +1410,14 @@ Section 4: Prompt and Chat Templates
   Topic 5: Setting System Roles with ChatPromptTemplate
   Topic 6: Shorthand ChatPromptTemplate Syntax
 
-Section 5: Message Placeholders and Streaming
+Video 5: Message Placeholders and Streaming
   Topic 1: Using Message Placeholders
   Topic 2: Importing and Passing HumanMessage
   Topic 3: Streaming Output Chunk by Chunk
   Topic 4: Implementing the Stream Loop
 
 📊 SUMMARY:
-Total Sections: 5 | Total Topics: 23 | Total Subtopics: 111
+Total Videos: 5 | Total Topics: 23 | Total Subtopics: 111
 
 --- 🛑 ALL NOTES EXTRACTED SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -1428,7 +1428,7 @@ Total Sections: 5 | Total Topics: 23 | Total Subtopics: 111
 
 📦 Processing: Phase 1 — LangChain Core Concepts, LCEL & Parsing
 
-=====Section 1: LangChain Chains and Runnables=====
+=====Video 1: LangChain Chains and Runnables=====
 LangChain ka foundational unit aur components ko jodne ka tareeqa. [⚠️ Derived]
 
 --1--LangChain Chains and Runnables--
@@ -1477,7 +1477,7 @@ LangChain ka foundational unit aur components ko jodne ka tareeqa. [⚠️ Deriv
   [Relay Race, baton, Pipeline, Chaining, RunnableSequence, pipe operator, `|`, __or__ dunder method, State Init, Transformation, Handoff, ChatPromptTemplate, StrOutputParser, dummy_llm, PII, Personally Identifiable Information, PIISanitizerRunnable, LangServe, REST APIs, Global state, large dictionaries, token usage, RunnablePassthrough, itemgetter, dictionary lookups, ValueError, Input Schema, Output Schema, Nested Functions, UNIX pipes, STDOUT, STDIN, ⭐"left-to-right sequence"]
 
 
-=====Section 2: LangChain Expression Language (LCEL)=====
+=====Video 2: LangChain Expression Language (LCEL)=====
 Declarative orchestration aur pipeline execution ka modern syntax. [⚠️ Derived]
 
 --2--LangChain Expression Language (LCEL)--
@@ -1556,7 +1556,7 @@ Declarative orchestration aur pipeline execution ka modern syntax. [⚠️ Deriv
   [Factory line, Main Power Button, LangSmith, CCTV camera, initial input dictionary, payload, invoke(), Single Entry Point, Sequential Flow, Tracing, Trace ID, RunnableSequence, export LANGCHAIN_TRACING_V2=true, LANGCHAIN_API_KEY, PII, SSN, data masking, LLMOps, parent-child traces, dictionary keys, KeyError, visual graph]
 
 
-=====Section 3: String Parsing=====
+=====Video 3: String Parsing=====
 Raw LLM objects se clean aur usable data nikalna. [⚠️ Derived]
 
 --3--String Parsing--
@@ -1605,15 +1605,15 @@ Raw LLM objects se clean aur usable data nikalna. [⚠️ Derived]
   [Lego blocks, Execution, Expansion, CSV block, JSON Parser, CommaSeparatedListOutputParser, Regex, Regular Expressions, json.loads(), PydanticOutputParser, prototype pollution vectors, OutputFixingParser, strict JSON, markdown block, backticks, API standard, string manipulation, UI update, Arrays, Lists, key-value pair, schema]
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (LangChain Chains and Runnables), Section 2 (LangChain Expression Language), Section 3 (String Parsing)
-⏳ Remaining        : Section 4 (Chaining Multiple Chains), Section 5 (Running Chains in Parallel), Section 6 (Runnable Lambdas), Section 7 (Using the @chain Decorator)
+✅ Completed so far : Video 1 (LangChain Chains and Runnables), Video 2 (LangChain Expression Language), Video 3 (String Parsing)
+⏳ Remaining        : Video 4 (Chaining Multiple Chains), Video 5 (Running Chains in Parallel), Video 6 (Runnable Lambdas), Video 7 (Using the @chain Decorator)
 📊 Progress         : 3 sections done / 7 sections total | 11 topics done / 25 topics total | 11 subtopics done / 25 subtopics total
 
-▶️ Resuming from: Section 4 (Chaining Multiple Chains)
+▶️ Resuming from: Video 4 (Chaining Multiple Chains)
 
 📦 Processing: Phase 2 — Multi-Chains, Parallel Execution, Lambdas & Decorators
 
-=====Section 4: Chaining Multiple Chains=====
+=====Video 4: Chaining Multiple Chains=====
 Complex tasks ko chhote, manageable hisson mein tod kar execute karna. [⚠️ Derived]
 
 --4--Chaining Multiple Chains--
@@ -1677,7 +1677,7 @@ Complex tasks ko chhote, manageable hisson mein tod kar execute karna. [⚠️ D
   [Dominos, initial input, overarching chain, invoke(), LangSmith, Trace ID, State Passing, First Generation, Hand-off, Second Generation, Final Parse, Timeout Vulnerability, 30s limit, Nginx, Gunicorn, Celery, Agentic Systems, Research Assistant Agent, RunnableSequence, API rate limits, ainvoke(), Async, Sync, Exception, fallbacks, retry]
 
 
-=====Section 5: Running Chains in Parallel=====
+=====Video 5: Running Chains in Parallel=====
 Latency kam karne ke liye ek saath multiple LLMs ko execute karna. [⚠️ Derived]
 
 --5--Running Chains in Parallel--
@@ -1741,7 +1741,7 @@ Latency kam karne ke liye ek saath multiple LLMs ko execute karna. [⚠️ Deriv
   [Race cars, Green Flag, keyword arguments, kwargs, multi-threading, latency, Thread Pool Creation, Simultaneous Dispatch, Time Math, Output Packing, parallel_orchestrator, final_results, Single Point of Failure, fallbacks, Large Scale RAG, Vector DB, Celery, Uvicorn, FastAPI, ainvoke]
 
 
-=====Section 6: Runnable Lambdas=====
+=====Video 6: Runnable Lambdas=====
 Custom Python logic ko LangChain pipeline ka hissa banana. [⚠️ Derived]
 
 --6--Runnable Lambdas--
@@ -1805,7 +1805,7 @@ Custom Python logic ko LangChain pipeline ka hissa banana. [⚠️ Derived]
   [Railway track, points switch, llm_selector, dynamic routing, LangSmith, DAG, ChatOpenAI, Qwen, ChatOllama, Llama 3.2, routing_chain, short_input, long_input, Boundary Values, LLM Cascading, Llama-3-8B, GPT-4o, Unit Testing, End-to-End Trace Testing]
 
 
-=====Section 7: Using the @chain Decorator=====
+=====Video 7: Using the @chain Decorator=====
 RunnableLambda ka cleaner, modern, aur pythonic syntax. [⚠️ Derived]
 
 --7--Using the @chain Decorator--
@@ -1858,50 +1858,50 @@ RunnableLambda ka cleaner, modern, aur pythonic syntax. [⚠️ Derived]
 
 📋 COMPLETE SKELETON INDEX
 
-Section 1: LangChain Chains and Runnables
+Video 1: LangChain Chains and Runnables
   Topic 1: The Concept of Runnables
   Topic 2: The Runnable Interface
   Topic 3: The Mechanism of Chaining
 
-Section 2: LangChain Expression Language (LCEL)
+Video 2: LangChain Expression Language (LCEL)
   Topic 1: What is LCEL?
   Topic 2: Chains as Runnables
   Topic 3: When to Use LCEL
   Topic 4: Implementing LCEL Syntax
   Topic 5: Invoking the LCEL Chain
 
-Section 3: String Parsing
+Video 3: String Parsing
   Topic 1: The Need for Output Parsers
   Topic 2: Adding a String Output Parser to the Chain
   Topic 3: Execution and Expansion
 
-Section 4: Chaining Multiple Chains
+Video 4: Chaining Multiple Chains
   Topic 1: Use Case for Multiple Chains
   Topic 2: Creating the Second Chain
   Topic 3: Wiring the Chains Together
   Topic 4: Execution and Result
 
-Section 5: Running Chains in Parallel
+Video 5: Running Chains in Parallel
   Topic 1: The Purpose of Runnable Parallel
   Topic 2: Removing Dependencies
   Topic 3: Setting Up Independent Chains
   Topic 4: Executing Runnable Parallel
 
-Section 6: Runnable Lambdas
+Video 6: Runnable Lambdas
   Topic 1: Conditional Logic in Pipelines
   Topic 2: Writing the Python Function
   Topic 3: Implementing Runnable Lambda
   Topic 4: Testing the Dynamic Routing
 
-Section 7: Using the @chain Decorator
+Video 7: Using the @chain Decorator
   Topic 1: Shorthand for Runnable Lambda
   Topic 2: Applying the Decorator
   Topic 3: Execution and Next Steps
 
 📊 SUMMARY:
-Total Sections: 7 | Total Topics: 25 | Total Subtopics: 161
+Total Videos: 7 | Total Topics: 25 | Total Subtopics: 161
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 ==================================================================================
 
@@ -1910,7 +1910,7 @@ Total Sections: 7 | Total Topics: 25 | Total Subtopics: 161
 
 📦 Processing: Phase 1 — LangChain Chat Message History Foundations [⚠️ Derived]
 
-=====Section 1: Context & Statelessness Fundamentals [⚠️ Derived]=====
+=====Video 1: Context & Statelessness Fundamentals [⚠️ Derived]=====
 AI aur LLMs ko past baatein yaad rakhne ki zaroorat aur unke default amnesia behavior ka core mechanism. [⚠️ Derived]
 
 --1--Context & Statelessness Fundamentals--
@@ -1975,7 +1975,7 @@ AI aur LLMs ko past baatein yaad rakhne ki zaroorat aur unke default amnesia beh
 
 
 
-=====Section 2: Project Setup & LCEL Core Integrations [⚠️ Derived]=====
+=====Video 2: Project Setup & LCEL Core Integrations [⚠️ Derived]=====
 Development environment aur LangChain community modules ka strict initialization. [⚠️ Derived]
 
 --2--Project Setup & LCEL Core Integrations--
@@ -2040,15 +2040,15 @@ Development environment aur LangChain community modules ka strict initialization
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (Topics 1-4), Section 2 (Topics 5-8)
+✅ Completed so far : Video 1 (Topics 1-4), Video 2 (Topics 5-8)
 ⏳ Remaining        : Implementing RunnableWithMessageHistory (Topics 9-17), Invoking History & Managing Sessions (Topics 18-24), SQL Chat Message History Integration (Topics 25-31)
 📊 Progress         : 2 sections done / 5 sections total | 8 topics done / 31 topics total | ~85 subtopics done / ~300 subtopics total
 
-▶️ Resuming from: Section 3 (Implementing RunnableWithMessageHistory)
+▶️ Resuming from: Video 3 (Implementing RunnableWithMessageHistory)
 
 📦 Processing: Phase 2 — Core LCEL History Implementation & Execution [⚠️ Derived]
 
-=====Section 3: Implementing RunnableWithMessageHistory [⚠️ Derived]=====
+=====Video 3: Implementing RunnableWithMessageHistory [⚠️ Derived]=====
 LangChain mein actual memory wrappers aur components ko ek sath link karne ka architecture. [⚠️ Derived]
 
 --3--Implementing RunnableWithMessageHistory--
@@ -2188,7 +2188,7 @@ LangChain mein actual memory wrappers aur components ko ek sath link karne ka ar
 
 
 
-=====Section 4: Invoking History and Managing Session IDs [⚠️ Derived]=====
+=====Video 4: Invoking History and Managing Session IDs [⚠️ Derived]=====
 Session IDs ka secure usage aur follow-up questions ke through history testing. [⚠️ Derived]
 
 --4--Invoking History and Managing Session IDs--
@@ -2298,7 +2298,7 @@ Session IDs ka secure usage aur follow-up questions ke through history testing. 
 
 
 
-=====Section 5: SQL Chat Message History and Database Storage [⚠️ Derived]=====
+=====Video 5: SQL Chat Message History and Database Storage [⚠️ Derived]=====
 Memory se disk-based persistent SQL database par shift hone ka process aur tracing. [⚠️ Derived]
 
 --5--SQL Chat Message History and Database Storage--
@@ -2410,7 +2410,7 @@ Memory se disk-based persistent SQL database par shift hone ka process aur traci
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 3: Implementing RunnableWithMessageHistory [⚠️ Derived]
+Video 3: Implementing RunnableWithMessageHistory [⚠️ Derived]
   Topic 9: Runnable with Message History
   Topic 10: Invoking History and Configuration
   Topic 11: Three Flavors of Conversation History
@@ -2421,7 +2421,7 @@ Section 3: Implementing RunnableWithMessageHistory [⚠️ Derived]
   Topic 16: Input and History Variables
   Topic 17: Executing the Invocation
 
-Section 4: Invoking History and Managing Session IDs [⚠️ Derived]
+Video 4: Invoking History and Managing Session IDs [⚠️ Derived]
   Topic 18: Creating a Session ID
   Topic 19: Writing the Invoke Code
   Topic 20: Passing the Prompt and Config
@@ -2430,7 +2430,7 @@ Section 4: Invoking History and Managing Session IDs [⚠️ Derived]
   Topic 23: Earth and Sun Example
   Topic 24: Clearing the Session History
 
-Section 5: SQL Chat Message History and Database Storage [⚠️ Derived]
+Video 5: SQL Chat Message History and Database Storage [⚠️ Derived]
   Topic 25: Introduction to SQL Chat Message History
   Topic 26: Community Chat Histories
   Topic 27: Modifying the Code for SQL
@@ -2441,9 +2441,9 @@ Section 5: SQL Chat Message History and Database Storage [⚠️ Derived]
 
 
 📊 PHASE SUMMARY:
-Sections: 3 | Topics: 23 | Subtopics: 201
+Videos: 3 | Topics: 23 | Subtopics: 201
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 --- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -2454,11 +2454,11 @@ Sections: 3 | Topics: 23 | Subtopics: 201
 
 📦 Processing: Phase 1 — Chatbots Overview & Streamlit Setup
 
-=====Section 1: Introduction to Building Chatbots with Streamlit=====
+=====Video 1: Introduction to Building Chatbots with Streamlit=====
 Basics of Local LLM integration and Streamlit UI architecture. [⚠️ Derived]
 
 --1--Introduction to Building Chatbots with Streamlit--
-  Topic 1: Course Section Overview
+  Topic 1: Course Video Overview
     Subtopics: Local LLM Integration, Langchain Memory, RunnableWithMessageHistory, Contextual Awareness, Goldfish Problem, Data Flow Architecture, Security-First Check, Scalability, Industry Anti-Patterns, Local vs Cloud LLM
 
   [📊 SCOPE SIGNAL for Topic 1:
@@ -2529,7 +2529,7 @@ Basics of Local LLM integration and Streamlit UI architecture. [⚠️ Derived]
   [Contextual dependencies, anaphora resolution, RunnableWithMessageHistory, implicit references, REST API, stateless, stateful chat, HumanMessage, AIMessage, final_prompt_to_llm, Prompt Injection, History Poisoning, Context Window Limit, Token Cost, OpenAI API bill, ConversationSummaryMemory, ConversationBufferWindowMemory, TokenLimitExceeded, ⭐Context Window Limit]
 
 
-=====Section 2: Understanding Streamlit and Setting up the Project=====
+=====Video 2: Understanding Streamlit and Setting up the Project=====
 Streamlit basics, project setup, and backend wiring. [⚠️ Derived]
 
 --2--Understanding Streamlit and Setting up the Project--
@@ -2661,13 +2661,13 @@ Streamlit basics, project setup, and backend wiring. [⚠️ Derived]
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (Topics 1-5), Section 2 (Topics 6-14)
-⏳ Remaining        : Section 3 (Integrating Chat History), Section 4 (Fixing Message Overrides), Section 5 (Starting a New Conversation), Section 6 (Streaming Responses), Section 7 (Applying Cosmetic UI Changes)
+✅ Completed so far : Video 1 (Topics 1-5), Video 2 (Topics 6-14)
+⏳ Remaining        : Video 3 (Integrating Chat History), Video 4 (Fixing Message Overrides), Video 5 (Starting a New Conversation), Video 6 (Streaming Responses), Video 7 (Applying Cosmetic UI Changes)
 📊 Progress         : 2 sections done / 7 sections total | 14 topics done / 43 topics total | 142 subtopics done / approx 450 subtopics total
 
-▶️ Resuming from: Section 3 (Integrating Chat History)
+▶️ Resuming from: Video 3 (Integrating Chat History)
 
-=====Section 3: Integrating Chat History=====
+=====Video 3: Integrating Chat History=====
 UI aur backend memory ko ek saath jodna taaki chatbot pichli baatein yaad rakhe. [⚠️ Derived]
 
 --3--Integrating Chat History--
@@ -2770,7 +2770,7 @@ UI aur backend memory ko ek saath jodna taaki chatbot pichli baatein yaad rakhe.
   [State management, architectural limitations, DOM overriding, multi-tenant capabilities, statically hardcoded, session_id, IDOR, Insecure Direct Object Reference, State Rendering Bugs, Redux, State syncing, Stacking vs Overriding]
 
 
-=====Section 4: Fixing Message Overrides and Dynamic Session IDs=====
+=====Video 4: Fixing Message Overrides and Dynamic Session IDs=====
 Screen se purane messages gayab hone ka ilaaj aur naye users ke liye alag session. [⚠️ Derived]
 
 --4--Fixing Message Overrides and Dynamic Session IDs--
@@ -2845,7 +2845,7 @@ Screen se purane messages gayab hone ka ilaaj aur naye users ke liye alag sessio
   [Dynamic Session IDs, runtime-captured inputs, st.text_input, Multi-tenancy, conversational isolation, IDOR, Privacy Breach, UUID, OAuth, Login with Google, Session Token, deterministic identifier, Hardcoded ID, Variable scope]
 
 
-=====Section 5: Starting a New Conversation=====
+=====Video 5: Starting a New Conversation=====
 Ek click me chat reset karna aur code ko saaf-suthra banana. [⚠️ Derived]
 
 --5--Starting a New Conversation--
@@ -2920,7 +2920,7 @@ Ek click me chat reset karna aur code ko saaf-suthra banana. [⚠️ Derived]
   [Chunking Problem, synchronous blocking, LLM inference, Time-To-First-Token, TTFT, perceived UI latency, .invoke(), Timeout Drops, 504 Gateway Timeout, HTTP chunks, Server-Sent Events, WebSockets, st.spinner, ⭐Always stream tokens]
 
 
-=====Section 6: Streaming Responses=====
+=====Video 6: Streaming Responses=====
 ChatGPT jaisa live typing effect (streaming) lana. [⚠️ Derived]
 
 --6--Streaming Responses--
@@ -3009,7 +3009,7 @@ ChatGPT jaisa live typing effect (streaming) lana. [⚠️ Derived]
   [TTFT latency, contextual follow-ups, Markdown parsing, tabular format, live stream, Amnesia, E2E validation, ⭐Test a formatting follow-up]
 
 
-=====Section 7: Applying Cosmetic UI Changes=====
+=====Video 7: Applying Cosmetic UI Changes=====
 Naya paint, sidebar, logo aur final professional ChatGPT UI. [⚠️ Derived]
 
 --7--Applying Cosmetic UI Changes--
@@ -3098,11 +3098,11 @@ Naya paint, sidebar, logo aur final professional ChatGPT UI. [⚠️ Derived]
   [E2E validation, CSS layout rendering, multi-turn queries, Markdown parsing, C-level responses, PhD level, Role-based, RBAC, forward-looking, End-to-End, CEO, CTO, executive level, ⭐State changes in prompts are forward-looking only]
 
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 3: Integrating Chat History
+Video 3: Integrating Chat History
   Topic 15: Defining the Interaction Flow
   Topic 16: Invoking the History
   Topic 17: Introduction to Streamlit Session State
@@ -3111,21 +3111,21 @@ Section 3: Integrating Chat History
   Topic 20: Beautifying with Streamlit Chat Messages
   Topic 21: Identifying Current Glitches
 
-Section 4: Fixing Message Overrides and Dynamic Session IDs
+Video 4: Fixing Message Overrides and Dynamic Session IDs
   Topic 22: Addressing the Override Glitch
   Topic 23: Preserving Existing Session State
   Topic 24: Rendering the Chat History
   Topic 25: Testing the History Loop
   Topic 26: Implementing Dynamic Session IDs
 
-Section 5: Starting a New Conversation
+Video 5: Starting a New Conversation
   Topic 27: Adding a Start Button
   Topic 28: Clearing the Langchain Session History
   Topic 29: Code Organization
   Topic 30: Testing the Clear Functionality
   Topic 31: Identifying the Chunking Problem
 
-Section 6: Streaming Responses
+Video 6: Streaming Responses
   Topic 32: The Need for Streaming
   Topic 33: Creating the Invoke History Method
   Topic 34: Implementing the Stream Method and Yield
@@ -3133,7 +3133,7 @@ Section 6: Streaming Responses
   Topic 36: Appending Streamed Content to History
   Topic 37: Testing the Streaming Output
 
-Section 7: Applying Cosmetic UI Changes
+Video 7: Applying Cosmetic UI Changes
   Topic 38: Creating the Cosmetic File
   Topic 39: Adding a Sidebar and Logo
   Topic 40: Moving Inputs to Sidebar
@@ -3142,7 +3142,7 @@ Section 7: Applying Cosmetic UI Changes
   Topic 43: Testing the Final Cosmetic UI
 
 📊 PHASE SUMMARY:
-Sections: 5 | Topics: 29 | Subtopics: 137
+Videos: 5 | Topics: 29 | Subtopics: 137
 
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -3153,7 +3153,7 @@ Sections: 5 | Topics: 29 | Subtopics: 137
 
 📦 Processing: Phase 1 — RAG Architecture & Implementation Notes
 
-=====Section 1: Introduction to Retrieval Augmented Generation (RAG) [⚠️ Derived]=====
+=====Video 1: Introduction to Retrieval Augmented Generation (RAG) [⚠️ Derived]=====
 RAG ka basic architecture aur uske core components ko samajhna. [⚠️ Derived]
 
 --1--Introduction to Retrieval Augmented Generation (RAG) [⚠️ Derived]--
@@ -3247,7 +3247,7 @@ RAG ka basic architecture aur uske core components ko samajhna. [⚠️ Derived]
   [Retriever, Generator, real-time inference phase, Query Embedding, System Prompt, Context window, local large language model, Ollama, langchain.chains, create_retrieval_chain, create_stuff_documents_chain, ChatPromptTemplate, langchain_community.llms, llama3.2, Prompt Injection, PII scrub, Personally Identifiable Information, vLLM, TGI, Stuffing, k=5, parametric memory]
 
 
-=====Section 2: Extracting Data from PDF Files [⚠️ Derived]=====
+=====Video 2: Extracting Data from PDF Files [⚠️ Derived]=====
 Data ingestion ki shuruwat — PDFs ko AI ke padhne laayak format mein convert karna. [⚠️ Derived]
 
 --2--Extracting Data from PDF Files [⚠️ Derived]--
@@ -3326,7 +3326,7 @@ Data ingestion ki shuruwat — PDFs ko AI ke padhne laayak format mein convert k
   [page_content, metadata, len(documents), 253, source, page, total_pages, Citations, PII Leakage, Data Loss Prevention, DLP filters, Out of Memory, OOM kill, lazy_load(), Streaming, Text Cleaning pipeline, OCR, Optical Character Recognition]
 
 
-=====Section 3: Splitting Text into Chunks [⚠️ Derived]=====
+=====Video 3: Splitting Text into Chunks [⚠️ Derived]=====
 Context window limits ko handle karne ke liye text ko optimize karna. [⚠️ Derived]
 
 --3--Splitting Text into Chunks [⚠️ Derived]--
@@ -3406,13 +3406,13 @@ Context window limits ko handle karne ke liye text ko optimize karna. [⚠️ De
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (Topics 1-6), Section 2 (Topics 1-5), Section 3 (Topics 1-5)
-⏳ Remaining        : Section 4 (Embedding the Text Data), Section 5 (Storing Vectors in Chroma Database), Section 6 (Retrieving from the Persistent Data Store), Section 7 (Using Retrievers in Langchain), Section 8 (Manual Document Retrieval and Prompting), Section 9 (Using Langchain Hub for Prompts), Section 10 (Using RetrievalQA Chain)
+✅ Completed so far : Video 1 (Topics 1-6), Video 2 (Topics 1-5), Video 3 (Topics 1-5)
+⏳ Remaining        : Video 4 (Embedding the Text Data), Video 5 (Storing Vectors in Chroma Database), Video 6 (Retrieving from the Persistent Data Store), Video 7 (Using Retrievers in Langchain), Video 8 (Manual Document Retrieval and Prompting), Video 9 (Using Langchain Hub for Prompts), Video 10 (Using RetrievalQA Chain)
 📊 Progress         : 3 sections done / 10 sections total | 16 topics done / 52 topics total | 74 subtopics done / 250+ subtopics total
 
-▶️ Resuming from: Section 4: Embedding the Text Data [⚠️ Derived]
+▶️ Resuming from: Video 4: Embedding the Text Data [⚠️ Derived]
 
-=====Section 4: Embedding the Text Data [⚠️ Derived]=====
+=====Video 4: Embedding the Text Data [⚠️ Derived]=====
 Text chunks ko mathematical vectors mein convert karna taaki database samajh sake. [⚠️ Derived]
 
 --4--Embedding the Text Data [⚠️ Derived]--
@@ -3461,7 +3461,7 @@ Text chunks ko mathematical vectors mein convert karna taaki database samajh sak
   [Python assert, fixed-size, standardized high-dimensional vector representations, len(vector_1), Euclidean distance, Cosine similarity, Schema Validation, HNSW, dot products, 3072 dimensions, AssertionError]
 
 
-=====Section 5: Storing Vectors in Chroma Database [⚠️ Derived]=====
+=====Video 5: Storing Vectors in Chroma Database [⚠️ Derived]=====
 Vectors ko fast similarity search ke liye optimize karke disk par save karna. [⚠️ Derived]
 
 --5--Storing Vectors in Chroma Database [⚠️ Derived]--
@@ -3525,7 +3525,7 @@ Vectors ko fast similarity search ke liye optimize karke disk par save karna. [�
   [API implementation failure, unexpected keyword argument, Chroma.from_documents(), documents, embedding, embedding_function, Pylance, VSCode, Type-hinting, __init__]
 
 
-=====Section 6: Retrieving from the Persistent Data Store [⚠️ Derived]=====
+=====Video 6: Retrieving from the Persistent Data Store [⚠️ Derived]=====
 Saved vectors se semantic search karke context nikalna aur system architecture refine karna. [⚠️ Derived]
 
 --6--Retrieving from the Persistent Data Store [⚠️ Derived]--
@@ -3634,7 +3634,7 @@ Saved vectors se semantic search karke context nikalna aur system architecture r
   [similarity_search_with_score(), L2 distance, Cosine distance, Confidence Score, False Positives, Tuple, Inference Attack, Thresholding, Model Inversion, ⭐"LOWER score is BETTER"[emphasized in notes]]
 
 
-=====Section 7: Using Retrievers in Langchain [⚠️ Derived]=====
+=====Video 7: Using Retrievers in Langchain [⚠️ Derived]=====
 Data sources aur Langchain chains ke beech ek universal bridge (Retriever) set up karna. [⚠️ Derived]
 
 --7--Using Retrievers in Langchain [⚠️ Derived]--
@@ -3698,7 +3698,7 @@ Data sources aur Langchain chains ke beech ek universal bridge (Retriever) set u
   [batch(), questions_array, ThreadPoolExecutor, SIMD, Single Instruction Multiple Data, Runnable methods, invoke(), latency reduction]
 
 
-=====Section 8: Manual Document Retrieval and Prompting [⚠️ Derived]=====
+=====Video 8: Manual Document Retrieval and Prompting [⚠️ Derived]=====
 Pre-built chains ke bina, raw LCEL use karke custom RAG pipeline banana taaki full control mile. [⚠️ Derived]
 
 --8--Manual Document Retrieval and Prompting [⚠️ Derived]--
@@ -3793,13 +3793,13 @@ Pre-built chains ke bina, raw LCEL use karke custom RAG pipeline banana taaki fu
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 to 8 (Topics 1-42)
-⏳ Remaining        : Section 9 (Using Langchain Hub for Prompts), Section 10 (Using RetrievalQA Chain)
+✅ Completed so far : Video 1 to 8 (Topics 1-42)
+⏳ Remaining        : Video 9 (Using Langchain Hub for Prompts), Video 10 (Using RetrievalQA Chain)
 📊 Progress         : 8 sections done / 10 sections total | 42 topics done / 52 topics total | 185 subtopics done / 250+ subtopics total
 
-▶️ Resuming from: Section 9: Using Langchain Hub for Prompts [⚠️ Derived]
+▶️ Resuming from: Video 9: Using Langchain Hub for Prompts [⚠️ Derived]
 
-=====Section 9: Using Langchain Hub for Prompts [⚠️ Derived]=====
+=====Video 9: Using Langchain Hub for Prompts [⚠️ Derived]=====
 Community-vetted prompts ko use karke time bachana aur AI quality improve karna. [⚠️ Derived]
 
 --9--Using Langchain Hub for Prompts [⚠️ Derived]--
@@ -3848,7 +3848,7 @@ Community-vetted prompts ko use karke time bachana aur AI quality improve karna.
   [hub.pull("rlm/rag-prompt"), {context}, {question}, rlm, rag-prompt, ChatPromptTemplate, Version Mutability, Commit Hash, hub.pull("rlm/rag-prompt:50442af1"), prompt.messages]
 
 
-=====Section 10: Using RetrievalQA Chain [⚠️ Derived]=====
+=====Video 10: Using RetrievalQA Chain [⚠️ Derived]=====
 Langchain ke pre-built tools se poori RAG pipeline ko automate karna. [⚠️ Derived]
 
 --10--Using RetrievalQA Chain [⚠️ Derived]--
@@ -3959,16 +3959,16 @@ Langchain ke pre-built tools se poori RAG pipeline ko automate karna. [⚠️ De
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 9: Using Langchain Hub for Prompts [⚠️ Derived]
+Video 9: Using Langchain Hub for Prompts [⚠️ Derived]
   Topic 1: Introduction to Langchain Hub
   Topic 2: Pulling a RAG Prompt
   Topic 3: Implementing the Hub Prompt
 
-Section 10: Using RetrievalQA Chain [⚠️ Derived]
+Video 10: Using RetrievalQA Chain [⚠️ Derived]
   Topic 1: Introduction to RetrievalQA
   Topic 2: Setting up the QA Chain
   Topic 3: Fixing a Typo
@@ -3977,12 +3977,12 @@ Section 10: Using RetrievalQA Chain [⚠️ Derived]
   Topic 6: Manual vs. Chain Approaches
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 9 | Subtopics: 39
+Videos: 2 | Topics: 9 | Subtopics: 39
 
 ---
 📋 COMPLETE SKELETON INDEX
 
-Section 1: Introduction to Retrieval Augmented Generation (RAG) [⚠️ Derived]
+Video 1: Introduction to Retrieval Augmented Generation (RAG) [⚠️ Derived]
   Topic 1: What are RAG Applications?
   Topic 2: Two Main Parts of RAG
   Topic 3: Extraction and Indexing Process
@@ -3990,32 +3990,32 @@ Section 1: Introduction to Retrieval Augmented Generation (RAG) [⚠️ Derived]
   Topic 5: Storing in a Database
   Topic 6: Retrieval and Generation Process
 
-Section 2: Extracting Data from PDF Files [⚠️ Derived]
+Video 2: Extracting Data from PDF Files [⚠️ Derived]
   Topic 1: Document Sources
   Topic 2: Document Loaders in Langchain
   Topic 3: Setting up the PyPDF Loader
   Topic 4: Coding the Extraction
   Topic 5: Extraction Results
 
-Section 3: Splitting Text into Chunks [⚠️ Derived]
+Video 3: Splitting Text into Chunks [⚠️ Derived]
   Topic 1: Using Text Splitters
   Topic 2: Configuring the Splitter
   Topic 3: The Purpose of Chunk Overlap
   Topic 4: Splitting the Documents
   Topic 5: Split Results
 
-Section 4: Embedding the Text Data [⚠️ Derived]
+Video 4: Embedding the Text Data [⚠️ Derived]
   Topic 1: Embedding Configuration
   Topic 2: Testing the Embeddings
   Topic 3: Asserting Vector Lengths
 
-Section 5: Storing Vectors in Chroma Database [⚠️ Derived]
+Video 5: Storing Vectors in Chroma Database [⚠️ Derived]
   Topic 1: Vector Stores Overview
   Topic 2: Installing and Setting Up Chroma
   Topic 3: Configuring Persistent Storage
   Topic 4: Fixing the Loading Error
 
-Section 6: Retrieving from the Persistent Data Store [⚠️ Derived]
+Video 6: Retrieving from the Persistent Data Store [⚠️ Derived]
   Topic 1: Understanding Similarity Search
   Topic 2: Loading the Persistent Database
   Topic 3: Performing a Similarity Search
@@ -4024,13 +4024,13 @@ Section 6: Retrieving from the Persistent Data Store [⚠️ Derived]
   Topic 6: Updating the Architectural Diagram
   Topic 7: Checking Similarity Scores
 
-Section 7: Using Retrievers in Langchain [⚠️ Derived]
+Video 7: Using Retrievers in Langchain [⚠️ Derived]
   Topic 1: What is a Retriever?
   Topic 2: The Purpose of Retrievers
   Topic 3: Creating the Retriever
   Topic 4: Batch Retrieving
 
-Section 8: Manual Document Retrieval and Prompting [⚠️ Derived]
+Video 8: Manual Document Retrieval and Prompting [⚠️ Derived]
   Topic 1: Goal of Manual Retrieval
   Topic 2: Retrieving and Formatting Documents
   Topic 3: Creating the Prompt Template
@@ -4038,12 +4038,12 @@ Section 8: Manual Document Retrieval and Prompting [⚠️ Derived]
   Topic 5: Fixing a Prompt Error
   Topic 6: Testing Model Responses
 
-Section 9: Using Langchain Hub for Prompts [⚠️ Derived]
+Video 9: Using Langchain Hub for Prompts [⚠️ Derived]
   Topic 1: Introduction to Langchain Hub
   Topic 2: Pulling a RAG Prompt
   Topic 3: Implementing the Hub Prompt
 
-Section 10: Using RetrievalQA Chain [⚠️ Derived]
+Video 10: Using RetrievalQA Chain [⚠️ Derived]
   Topic 1: Introduction to RetrievalQA
   Topic 2: Setting up the QA Chain
   Topic 3: Fixing a Typo
@@ -4052,7 +4052,7 @@ Section 10: Using RetrievalQA Chain [⚠️ Derived]
   Topic 6: Manual vs. Chain Approaches
 
 📊 COMPLETE SUMMARY:
-Total Sections: 10 | Total Topics: 52 | Total Subtopics: 224
+Total Videos: 10 | Total Topics: 52 | Total Subtopics: 224
 
 **--- 🛑 ALL NOTES FULLY EXTRACTED. Skeleton pipeline process is complete!**
 
@@ -4065,11 +4065,11 @@ Total Sections: 10 | Total Topics: 52 | Total Subtopics: 224
 
 Main aapke diye gaye notes ka structure samajh gaya hoon. Notes kaafi detailed aur multi-sectioned hain. Memory aur token limits ko dhyan mein rakhte hue, main is extraction ko chunks mein process karunga taaki ek bhi keyword ya concept miss na ho. 
 
-Neeche pehle **2 Major Sections** ka complete skeleton diya gaya hai.
+Neeche pehle **2 Major Videos** ka complete skeleton diya gaya hai.
 
 ---
 
-=====Section 1: Tools and Function Calling with LLMs [⚠️ Derived]=====
+=====Video 1: Tools and Function Calling with LLMs [⚠️ Derived]=====
 LLMs ko external duniya se connect karna aur unki memory limitations ko overcome karna. [⚠️ Derived]
 
 --1--Tools and Function Calling with LLMs--
@@ -4179,7 +4179,7 @@ LLMs ko external duniya se connect karna aur unki memory limitations ko overcome
 
 
 
-=====Section 2: Transitioning to Agents and Setting Up the Wikipedia Tool=====
+=====Video 2: Transitioning to Agents and Setting Up the Wikipedia Tool=====
 Static documents se nikal kar dynamic "Agents" ki duniya mein entry.
 
 --2--Transitioning to Agents and Setting Up the Wikipedia Tool--
@@ -4289,13 +4289,13 @@ Static documents se nikal kar dynamic "Agents" ki duniya mein entry.
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ **Completed so far :** Section 1 (Tools and Function Calling with LLMs) & Section 2 (Transitioning to Agents and Setting Up the Wikipedia Tool) fully extracted.
-⏳ **Remaining        :** Section 3 (Building Custom Tools), Section 4 (Binding Tools), Section 5 (Writing Execution Logic), Section 6 (Finalizing Execution)
+✅ **Completed so far :** Video 1 (Tools and Function Calling with LLMs) & Video 2 (Transitioning to Agents and Setting Up the Wikipedia Tool) fully extracted.
+⏳ **Remaining        :** Video 3 (Building Custom Tools), Video 4 (Binding Tools), Video 5 (Writing Execution Logic), Video 6 (Finalizing Execution)
 📊 **Progress         :** 2 sections done / 6 sections total | 14 topics done / 43 topics total
 
-▶️ Resuming from: Section 3 (Building Custom Tools)
+▶️ Resuming from: Video 3 (Building Custom Tools)
 
-=====Section 3: Building Custom Tools [⚠️ Derived]=====
+=====Video 3: Building Custom Tools [⚠️ Derived]=====
 Custom tools LangChain ka dil hain — inke bina LLM real-world actions nahi le sakta. [⚠️ Derived]
 
 --3--Building Custom Tools--
@@ -4420,7 +4420,7 @@ Custom tools LangChain ka dil hain — inke bina LLM real-world actions nahi le 
 
 
 
-=====Section 4: Binding Tools to the Large Language Model [⚠️ Derived]=====
+=====Video 4: Binding Tools to the Large Language Model [⚠️ Derived]=====
 Tools aur LLM ko aapas mein connect karna taaki external execution ho sake. [⚠️ Derived]
 
 --4--Binding Tools to the Large Language Model--
@@ -4560,7 +4560,7 @@ Tools aur LLM ko aapas mein connect karna taaki external execution ho sake. [⚠
 
 
 
-=====Section 5: Writing the Execution Logic for Custom Tools [⚠️ Derived]=====
+=====Video 5: Writing the Execution Logic for Custom Tools [⚠️ Derived]=====
 Agent loop build karna jo actually tool ko run kare aur answer wapas laaye. [⚠️ Derived]
 
 --5--Writing the Execution Logic for Custom Tools--
@@ -4685,7 +4685,7 @@ Agent loop build karna jo actually tool ko run kare aur answer wapas laaye. [⚠
 
 
 
-=====Section 6: Finalizing Execution and Generating LLM Responses [⚠️ Derived]=====
+=====Video 6: Finalizing Execution and Generating LLM Responses [⚠️ Derived]=====
 Data aane ke baad usko insaani bhasha mein synthesize aur format karna. [⚠️ Derived]
 
 --6--Finalizing Execution and Generating LLM Responses--
@@ -4765,11 +4765,11 @@ Data aane ke baad usko insaani bhasha mein synthesize aur format karna. [⚠️ 
 
 
 ---
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 3: Building Custom Tools
+Video 3: Building Custom Tools
   Topic 1: LangChain Guidelines for Custom Tools
   Topic 2: Three Methods to Create Tools
   Topic 3: Using the @tool Decorator
@@ -4779,7 +4779,7 @@ Section 3: Building Custom Tools
   Topic 7: Structuring the List of Tools
   Topic 8: Reviewing Tool Metadata
 
-Section 4: Binding Tools to the Large Language Model
+Video 4: Binding Tools to the Large Language Model
   Topic 1: The Objective of Binding
   Topic 2: Testing the Unbound Model
   Topic 3: Tool Compatibility Limitations
@@ -4790,7 +4790,7 @@ Section 4: Binding Tools to the Large Language Model
   Topic 8: Testing Inference Capabilities
   Topic 9: The Missing Execution Step
 
-Section 5: Writing the Execution Logic for Custom Tools
+Video 5: Writing the Execution Logic for Custom Tools
   Topic 1: The Execution Workflow
   Topic 2: The Three-Message Prompt Structure
   Topic 3: Appending the Human Message
@@ -4800,7 +4800,7 @@ Section 5: Writing the Execution Logic for Custom Tools
   Topic 7: Appending the Tool Message
   Topic 8: Reviewing the Contextual Array
 
-Section 6: Finalizing Execution and Generating LLM Responses
+Video 6: Finalizing Execution and Generating LLM Responses
   Topic 1: Passing the Complete Message Array
   Topic 2: Evaluating the Wikipedia Response
   Topic 3: Executing the Custom Addition Tool
@@ -4808,7 +4808,7 @@ Section 6: Finalizing Execution and Generating LLM Responses
   Topic 5: Final Takeaways
 
 📊 PHASE SUMMARY:
-Sections: 4 | Topics: 30 | Subtopics: 104
+Videos: 4 | Topics: 30 | Subtopics: 104
 
 ==================================================================================
 
@@ -4817,7 +4817,7 @@ Sections: 4 | Topics: 30 | Subtopics: 104
 
 📦 Processing: Phase 1 — Building AI Agents with LangChain (Part 1)
 
-=====Section 1: Introduction to Agents [⚠️ Derived]=====
+=====Video 1: Introduction to Agents [⚠️ Derived]=====
 Agentic workflows aur unke core concepts ka foundational breakdown.
 
 --1--Introduction to Agents--
@@ -4892,7 +4892,7 @@ Agentic workflows aur unke core concepts ka foundational breakdown.
   [Standard LLM, Agent Workflow, Single-turn inference, Iterative, multi-step process, relentlessly works for you, Think, Act, Observe, Memory Update, standard_llm, llm.generate, agent_workflow, while True, llm.plan, thought_and_action.is_final_answer, execute, tool_result, Denial of Wallet, max_steps, token limits, stateless, asynchronous processing, Celery, Kafka, Router Patterns]
 
 
-=====Section 2: Implementing the Agent Code [⚠️ Derived]=====
+=====Video 2: Implementing the Agent Code [⚠️ Derived]=====
 Custom tool logic ko replace karke actual LangChain agent environment setup aur execute karna.
 
 --2--Implementing the Agent Code--
@@ -4922,7 +4922,7 @@ Custom tool logic ko replace karke actual LangChain agent environment setup aur 
   ]
 
   🔑 KEYWORDS DUMP for Topic 2:
-  [Environment Setup, Workspace, Section 7 - agents, Jupyter notebook, Code Migration, add_numbers, multiply_numbers, Wikipedia, project_root, Section_6_tools, manual_tools.ipynb, agent_implementation.ipynb, mkdir, python-dotenv, .env, API keys, LangSmith keys, __init__.py, DRY principle, tools.py]
+  [Environment Setup, Workspace, Video 7 - agents, Jupyter notebook, Code Migration, add_numbers, multiply_numbers, Wikipedia, project_root, Video_6_tools, manual_tools.ipynb, agent_implementation.ipynb, mkdir, python-dotenv, .env, API keys, LangSmith keys, __init__.py, DRY principle, tools.py]
 
   Topic 3: Importing Agent Classes
     Subtopics: Importing Agent Classes, initialize_agent Constructor, AgentType Enumerator
@@ -5024,13 +5024,13 @@ Custom tool logic ko replace karke actual LangChain agent environment setup aur 
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (Introduction to Agents), Section 2 (Implementing the Agent Code)
-⏳ Remaining        : Section 3 (Using Prompt Templates to Guide the Agent), Section 4 (Introduction to the Playwright Browser Tool), Section 5 (Integrating Playwright Tool with the Agent)
+✅ Completed so far : Video 1 (Introduction to Agents), Video 2 (Implementing the Agent Code)
+⏳ Remaining        : Video 3 (Using Prompt Templates to Guide the Agent), Video 4 (Introduction to the Playwright Browser Tool), Video 5 (Integrating Playwright Tool with the Agent)
 📊 Progress        : 2 sections done / 5 sections total | 14 topics done / 30 topics total | 85 subtopics done / 180 subtopics total
 
-▶️ Resuming from: Section 3 (Using Prompt Templates to Guide the Agent)
+▶️ Resuming from: Video 3 (Using Prompt Templates to Guide the Agent)
 
-=====Section 3: Using Prompt Templates to Guide the Agent [⚠️ Derived]=====
+=====Video 3: Using Prompt Templates to Guide the Agent [⚠️ Derived]=====
 Agent ki "craziness" ko control karne aur usko ek proper direction dene ki engineering. [⚠️ Derived]
 
 --3--Using Prompt Templates--
@@ -5079,7 +5079,7 @@ Agent ki "craziness" ko control karne aur usko ek proper direction dene ki engin
   [Alternative Query, Simultaneous Tool Invocation, Framework Error, Data Source Limitation, Top Gun Maverick, LangSmith observability, alt_query, agent.invoke, Garbage In Garbage Out, GIGO, SSRF, Parallel execution, async logic, Observation block, LLM Hallucination, Tool Data limitation, ⭐"Top Gun Maverick", ⭐"simultaneous tool invocation"]
 
 
-=====Section 4: Introduction to the Playwright Browser Tool [⚠️ Derived]=====
+=====Video 4: Introduction to the Playwright Browser Tool [⚠️ Derived]=====
 LLM ko live internet aur JavaScript-heavy pages padhne ka jadui chashma dena. [⚠️ Derived]
 
 --4--Introduction to the Playwright Browser Tool--
@@ -5173,7 +5173,7 @@ LLM ko live internet aur JavaScript-heavy pages padhne ka jadui chashma dena. [�
   [Running Locally, Asynchronous run method, .arun(), Navigation, DOM elements, CSS selectors, inner text, navigate_tool.arun, url, get_element_tool.arun, selector, attributes, innerText, asyncio.run, SSRF, Server-Side Request Forgery, Crawler bots, XPATHs, eapp.swami.com]
 
 
-=====Section 5: Integrating Playwright Tool with the Agent [⚠️ Derived]=====
+=====Video 5: Integrating Playwright Tool with the Agent [⚠️ Derived]=====
 LLM agent ko live DOM padhne aur real-time data extract karne ke kabil banana. [⚠️ Derived]
 
 ⚠️ [ADDED — 2026 Best Practice] Multi-Agent Systems & Orchestration
@@ -5284,18 +5284,18 @@ LLM agent ko live DOM padhne aur real-time data extract karne ke kabil banana. [
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Introduction to Agents [⚠️ Derived]
+Video 1: Introduction to Agents [⚠️ Derived]
   Topic 1: What is an Agent?
   Topic 2: The Feedback Loop
   Topic 3: Hugging Face's smolagents
   Topic 4: LLM Agency
   Topic 5: Agent Workflow vs Standard LLM
 
-Section 2: Implementing the Agent Code [⚠️ Derived]
+Video 2: Implementing the Agent Code [⚠️ Derived]
   Topic 1: Replacing Custom Tool Logic
   Topic 2: Setting Up the Agent Environment
   Topic 3: Importing Agent Classes
@@ -5306,12 +5306,12 @@ Section 2: Implementing the Agent Code [⚠️ Derived]
   Topic 8: Token Consumption Analysis in LangSmith
   Topic 9: Testing a Multi-Tool Query & Hallucination
 
-Section 3: Using Prompt Templates to Guide the Agent [⚠️ Derived]
+Video 3: Using Prompt Templates to Guide the Agent [⚠️ Derived]
   Topic 1: Applying a Chat Prompt Template
   Topic 2: Running the Prompt Template
   Topic 3: Testing an Alternative Query
 
-Section 4: Introduction to the Playwright Browser Tool [⚠️ Derived]
+Video 4: Introduction to the Playwright Browser Tool [⚠️ Derived]
   Topic 1: Real-Time Data Extraction
   Topic 2: Playwright Toolkit Bundle
   Topic 3: Installation and Setup
@@ -5319,7 +5319,7 @@ Section 4: Introduction to the Playwright Browser Tool [⚠️ Derived]
   Topic 5: Extracting Specific Tools
   Topic 6: Running Playwright Locally
 
-Section 5: Integrating Playwright Tool with the Agent [⚠️ Derived]
+Video 5: Integrating Playwright Tool with the Agent [⚠️ Derived]
   Topic 1: Goal of the Web Extraction Agent
   Topic 2: Setting Up the Agent for Web Extraction
   Topic 3: Extracting Hyperlinks
@@ -5328,7 +5328,7 @@ Section 5: Integrating Playwright Tool with the Agent [⚠️ Derived]
   Topic 6: Local LLM Performance Caveat
 
 📊 PHASE SUMMARY:
-Sections: 5 | Topics: 29 | Subtopics: 145
+Videos: 5 | Topics: 29 | Subtopics: 145
 
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -5339,7 +5339,7 @@ Sections: 5 | Topics: 29 | Subtopics: 145
 
 📦 Processing: Phase 1 — Building AI Agent with RAG and Tooling support
 
-=====Section 11: Building AI Agent with RAG and Tooling support (Project)=====
+=====Video 11: Building AI Agent with RAG and Tooling support (Project)=====
 Agent architecture, RAG integration, aur multi-tool workflows ka complete practical implementation. [⚠️ Derived]
 
 --11--Building AI Agent with RAG and Tooling support--
@@ -5403,13 +5403,13 @@ Agent architecture, RAG integration, aur multi-tool workflows ka complete practi
   [Multi-step agent workflow, Bias, Playwright tool, RAG vector store, testing_and_evaluation_llm.pdf, rulebook, User Request, Agent Thought, Tool Execution, Agent Verification, target_url, query, methodologies for evaluating social bias, page 127, ⭐Indirect Prompt Injection, guardrails, Automated Compliance Auditing, Celery, RabbitMQ, query expansion, Client-Side Rendering, React, wait timer, Sentiment Analysis, Vader, TextBlob, Agentic Bias Detection, early exit, delimiting brackets]
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ **Completed so far:** Section 11 (Topics 1, 2, 3, 4)
+✅ **Completed so far:** Video 11 (Topics 1, 2, 3, 4)
 ⏳ **Remaining:** Codebase Setup, Persistent DB, Retriever, Tool Creation, Agent Execution, LangSmith Tracing, and more.
 📊 **Progress:** 1 sections done / 1 sections total | 4 topics done / 12+ topics total | 42 subtopics done / ? subtopics total
 
-▶️ Resuming from: Section 11, Topic 4: Example Scenario - Bias Detection
+▶️ Resuming from: Video 11, Topic 4: Example Scenario - Bias Detection
 
-=====Section 12: Codebase & Database Initialization [⚠️ Derived]=====
+=====Video 12: Codebase & Database Initialization [⚠️ Derived]=====
 Purane tools aur persistent database ko load karna taaki setup fast-track ho sake. [⚠️ Derived]
 
 --12--Codebase & Database Initialization--
@@ -5458,7 +5458,7 @@ Purane tools aur persistent database ko load karna taaki setup fast-track ho sak
   [Ollama embeddings, Llama 3.2, Vector Store, similarity search, retriever, Cosine Similarity, langchain_community.embeddings, OllamaEmbeddings, embedding_function, as_retriever, Dimension mismatch error, GDPR compliance, TEI - Text Embeddings Inference, text-embedding-ada-002, 1536, 3072, ollama serve, Vector StoreRetriever, ⭐"THIS IS THE CRITICAL LINK"[emphasized in notes]]
 
 
-=====Section 13: Retriever & Tool Creation [⚠️ Derived]=====
+=====Video 13: Retriever & Tool Creation [⚠️ Derived]=====
 Agent ke liye documents dhoondhne wala retriever banana aur usko ek proper "Tool" mein convert karna. [⚠️ Derived]
 
 --13--Retriever & Tool Creation--
@@ -5522,7 +5522,7 @@ Agent ke liye documents dhoondhne wala retriever banana aur usko ek proper "Tool
   [@tool, langchain.tools, bias_detection, query: str, docstring, retriever.invoke, page_content, JSON Schema, validation, Query sanitization, BaseTool, _run, _arun, Pydantic ValidationError, ReAct loop, Observation]
 
 
-=====Section 14: Agent Assembly & Execution [⚠️ Derived]=====
+=====Video 14: Agent Assembly & Execution [⚠️ Derived]=====
 Saare tools ko combine karke Agent initialize karna, scenario design karna, aur execute karke errors fix karna. [⚠️ Derived]
 
 --14--Agent Assembly & Execution--
@@ -5601,7 +5601,7 @@ Saare tools ko combine karke Agent initialize karna, scenario design karna, aur 
   [Maps_browser, extract_text, bias_detection, Source Credibility Check, Content Analysis, Positive bias direction, Confidence Score, Hallucinate, Evidence-based reasoning, ⭐magic]
 
 
-=====Section 15: Observability & Evaluation [⚠️ Derived]=====
+=====Video 15: Observability & Evaluation [⚠️ Derived]=====
 LangSmith ka use karke Agent ke dimaag (traces) ko visualize karna aur retrieval accuracy verify karna. [⚠️ Derived]
 
 --15--Observability & Evaluation--
@@ -5639,47 +5639,47 @@ LangSmith ka use karke Agent ke dimaag (traces) ko visualize karna aur retrieval
 
 📋 COMPLETE SKELETON INDEX
 
-Section 11: Building AI Agent with RAG and Tooling support (Project)
+Video 11: Building AI Agent with RAG and Tooling support (Project)
   Topic 1: Review of Previous Agent Usage
   Topic 2: Creating a RAG Tool
   Topic 3: Combining Playwright and RAG
   Topic 4: Example Scenario - Bias Detection
 
-Section 12: Codebase & Database Initialization [⚠️ Derived]
+Video 12: Codebase & Database Initialization [⚠️ Derived]
   Topic 5: Setting Up the Codebase
   Topic 6: Reusing the Existing Chroma Database
   Topic 7: Initializing Vector and Retriever with Embedding
 
-Section 13: Retriever & Tool Creation [⚠️ Derived]
+Video 13: Retriever & Tool Creation [⚠️ Derived]
   Topic 8: Loading the Persistent Vector Data Store
   Topic 9: Testing Vector Store Connectivity
   Topic 10: Creating the LangChain Retriever
   Topic 11: Creating the Bias Detection Tool & Configuring Logic
 
-Section 14: Agent Assembly & Execution [⚠️ Derived]
+Video 14: Agent Assembly & Execution [⚠️ Derived]
   Topic 12: Appending the Bias Detection Tool
   Topic 13: Creating the Agent Code
   Topic 14: Setting up the Bias Test Scenario
   Topic 15: Executing the Agent and Troubleshooting
   Topic 16: Successful Execution
 
-Section 15: Observability & Evaluation [⚠️ Derived]
+Video 15: Observability & Evaluation [⚠️ Derived]
   Topic 17: Observability with LangSmith
   Topic 18: Verifying RAG Accuracy & Conclusion on LangSmith's Power
 
 📊 SUMMARY:
-Total Sections: 5 | Total Topics: 18 | Total Subtopics: 84
+Total Videos: 5 | Total Topics: 18 | Total Subtopics: 84
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 ==================================================================================
 
 
 ### Section 12: Understanding EvaluatingTesting of LLM Application
 
-📦 Processing: Phase 1 — Section 1 & 2 (LLM Evaluation Foundations & Deep Dive)
+📦 Processing: Phase 1 — Video 1 & 2 (LLM Evaluation Foundations & Deep Dive)
 
-=====Section 1: Understanding EvaluatingTesting of LLM Application=====
+=====Video 1: Understanding EvaluatingTesting of LLM Application=====
 LLM evaluation ka foundation, traditional software testing se iska difference, aur core metrics ka overview.
 
 --1--Understanding EvaluatingTesting of LLM Application--
@@ -5821,7 +5821,7 @@ LLM evaluation ka foundation, traditional software testing se iska difference, a
 
 
 
-=====Section 2: Deep Dive into LLM Evaluation Metrics [⚠️ Derived]=====
+=====Video 2: Deep Dive into LLM Evaluation Metrics [⚠️ Derived]=====
 Embedding similarities, perplexity, aur LLM-based scoring techniques ki gahrai mein analysis.
 
 --2--Deep Dive into LLM Evaluation Metrics--
@@ -5915,13 +5915,13 @@ Embedding similarities, perplexity, aur LLM-based scoring techniques ki gahrai m
   [Teacher LLM, foundational model, objective evaluator, primary model, student model, confirmation bias, Llama 3 8B, DeepSeek R1, Llama 3.1 405B, Qwen 2.5 72B, Data Privacy risk, OpenAI API, asynchronous pipelines, Analytics Dashboard]
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (8 Topics), Section 2 (6 Topics)
-⏳ Remaining        : Section 3 (Ragas Libraries), Section 4 (Understanding Ragas Metrics), Section 5 (Setting Up Ragas), Section 6 (Multi-turn Samples)
+✅ Completed so far : Video 1 (8 Topics), Video 2 (6 Topics)
+⏳ Remaining        : Video 3 (Ragas Libraries), Video 4 (Understanding Ragas Metrics), Video 5 (Setting Up Ragas), Video 6 (Multi-turn Samples)
 📊 Progress         : 2 sections done / 6 sections total | 14 topics done / 37 topics total | ~100 subtopics done / ~300 subtopics total
 
-▶️ Resuming from: Section 2 (Topic 6: The Teacher LLM)
+▶️ Resuming from: Video 2 (Topic 6: The Teacher LLM)
 
-=====Section 3: LLMs Evaluation Libraries [⚠️ Derived]=====
+=====Video 3: LLMs Evaluation Libraries [⚠️ Derived]=====
 OpenAI Evals aur Ragas framework ka comparison aur unka setup process.
 
 --3--LLMs Evaluation Libraries--
@@ -5956,7 +5956,7 @@ OpenAI Evals aur Ragas framework ka comparison aur unka setup process.
 
 
 
-=====Section 4: Understanding Ragas Metrics [⚠️ Derived]=====
+=====Video 4: Understanding Ragas Metrics [⚠️ Derived]=====
 Ragas library ke core metrics, precision, recall, aur hallucinations check karne ka deep dive.
 
 --4--Understanding Ragas Metrics--
@@ -6066,7 +6066,7 @@ Ragas library ke core metrics, precision, recall, aur hallucinations check karne
 
 
 
-=====Section 5: Singleton Sample Testing with Ragas [⚠️ Derived]=====
+=====Video 5: Singleton Sample Testing with Ragas [⚠️ Derived]=====
 Environment setup aur standalone, stateless LLM tests configure karna.
 
 --5--Singleton Sample Testing with Ragas--
@@ -6176,7 +6176,7 @@ Environment setup aur standalone, stateless LLM tests configure karna.
 
 
 
-=====Section 6: Multi-turn Sample in Ragas [⚠️ Derived]=====
+=====Video 6: Multi-turn Sample in Ragas [⚠️ Derived]=====
 Stateful, tool-augmented AI agents ki complex evaluation process.
 
 --6--Multi-turn Sample in Ragas--
@@ -6285,15 +6285,15 @@ Stateful, tool-augmented AI agents ki complex evaluation process.
   [Conclusion, transition, advanced Ragas concepts, custom engineered AI agents, RAG applications, real-world constraints, Unit Testing, Integration/System Testing, DevOps pipelines, Tutorial Hell]
 
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 3: LLMs Evaluation Libraries [⚠️ Derived]
+Video 3: LLMs Evaluation Libraries [⚠️ Derived]
   Topic 1: Why Ragas over OpenAI Evals
   Topic 2: Installing Ragas
 
-Section 4: Understanding Ragas Metrics [⚠️ Derived]
+Video 4: Understanding Ragas Metrics [⚠️ Derived]
   Topic 1: Defining Ragas and its Purpose
   Topic 2: Key Metrics Checked by Ragas
   Topic 3: Context Precision
@@ -6302,7 +6302,7 @@ Section 4: Understanding Ragas Metrics [⚠️ Derived]
   Topic 6: Faithfulness
   Topic 7: Practical Application
 
-Section 5: Singleton Sample Testing with Ragas [⚠️ Derived]
+Video 5: Singleton Sample Testing with Ragas [⚠️ Derived]
   Topic 1: Setting Up the Environment
   Topic 2: Addressing Ragas Documentation Gaps
   Topic 3: Configuring the Local LLM Instance
@@ -6311,7 +6311,7 @@ Section 5: Singleton Sample Testing with Ragas [⚠️ Derived]
   Topic 6: Definition of a Singleton Sample
   Topic 7: Introduction to Multi-turn Samples
 
-Section 6: Multi-turn Sample in Ragas [⚠️ Derived]
+Video 6: Multi-turn Sample in Ragas [⚠️ Derived]
   Topic 1: Singleton vs. Multi-turn Samples
   Topic 2: Components of a Multi-turn Conversation
   Topic 3: Step-by-Step Multi-turn Example
@@ -6321,7 +6321,7 @@ Section 6: Multi-turn Sample in Ragas [⚠️ Derived]
   Topic 7: Conclusion
 
 📊 PHASE SUMMARY:
-Sections: 4 | Topics: 23 | Subtopics: ~130
+Videos: 4 | Topics: 23 | Subtopics: ~130
 
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -6329,7 +6329,7 @@ Sections: 4 | Topics: 23 | Subtopics: ~130
 
 ### Section 13: Evaluating RAG Systems built with LangChain and RAGAs
 
-📦 Processing: Phase 1 — Evaluating RAG Systems (Section 13)
+📦 Processing: Phase 1 — Evaluating RAG Systems (Video 13)
 
 **Pre-Extraction Checklist Run Silently:**
 - Notes completely read.
@@ -6342,7 +6342,7 @@ Sections: 4 | Topics: 23 | Subtopics: ~130
 
 ---
 
-=====Section 1: Introduction to Testing RAG Systems with Ragas [⚠️ Derived]=====
+=====Video 1: Introduction to Testing RAG Systems with Ragas [⚠️ Derived]=====
 RAG pipeline ki testing aur evaluation concepts ka foundational overview. [⚠️ Derived]
 
 --1--Introduction to Testing RAG Systems with Ragas--
@@ -6406,7 +6406,7 @@ RAG pipeline ki testing aur evaluation concepts ka foundational overview. [⚠�
   [School Marksheet, Context Recall, Memory, Faithfulness, Imaandari, Factual Correctness, Sahi Jawab, Prompt Structure, Expected Outcome, Retrieved Context, Generated Response, Ground Truth, ragas.metrics, context_recall, faithfulness, answer_correctness, ragas evaluate, datasets Dataset, Dataset.from_dict, Data Leakage, PII, Enterprise API endpoints, CI/CD checks, Internal memory, Hallucination, ⭐"Faithfulness aur Context Recall dono ko 1st priority do"]
 
 
-  Topic 5: Prerequisites for this Section
+  Topic 5: Prerequisites for this Video
     Subtopics: Building Foundation Analogy, Functional RAG Pipeline, Populated Chroma DB, Configured Embedding Model, Data Retrieval Mechanism, Executable LLM Chain, DB Directory Check, Environment File Check, Version Control Security, Docker Compose Reproducibility, Terraform Script, Stage 1 Ingest vs Stage 3 Evaluate, Testing vs Production Pipeline
 
   [📊 SCOPE SIGNAL for Topic 5:
@@ -6421,7 +6421,7 @@ RAG pipeline ki testing aur evaluation concepts ka foundational overview. [⚠�
   [Building Foundation, Functional RAG Pipeline, Populated Chroma DB, Configured embedding model, Data retrieval mechanism, Executable LLM chain, ls -la, ./chroma_db_directory, cat .env | grep OPENAI_API_KEY, .gitignore, Version control, Docker Compose, Terraform script, CI/CD, Synchronous script, Stage 1 Ingest, Stage 2 Serve, Stage 3 Evaluate, Prompt Template, Output Parser, MiniLM, text-embedding-3-large, Health-check scripts]
 
 
-=====Section 2: Setting Up the Document Store and Vector Database [⚠️ Derived]=====
+=====Video 2: Setting Up the Document Store and Vector Database [⚠️ Derived]=====
 Local testing environment ka baseline setup aur vector database initialization. [⚠️ Derived]
 
 --2--Setting Up the Document Store and Vector Database--
@@ -6532,13 +6532,13 @@ Local testing environment ka baseline setup aur vector database initialization. 
 ---
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (Topics 1 to 5), Section 2 (Topics 1 to 7)
-⏳ Remaining        : Section 3, Section 4, Section 5, Section 6
+✅ Completed so far : Video 1 (Topics 1 to 5), Video 2 (Topics 1 to 7)
+⏳ Remaining        : Video 3, Video 4, Video 5, Video 6
 📊 Progress         : 2 sections done / 6 sections total | 12 topics done / 33 topics total | ~60 subtopics done / ~160 subtopics total
 
-▶️ Resuming from: Section 2 completion. Yahan se Section 3 shuru ho raha hai.
+▶️ Resuming from: Video 2 completion. Yahan se Video 3 shuru ho raha hai.
 
-=====Section 3: Implementing Retrieval QA [⚠️ Derived]=====
+=====Video 3: Implementing Retrieval QA [⚠️ Derived]=====
 Apne Vector DB aur LLM ko connect karke ek complete testing pipeline banana. [⚠️ Derived]
 
 --3--Implementing Retrieval QA--
@@ -6602,11 +6602,11 @@ Apne Vector DB aur LLM ko connect karke ek complete testing pipeline banana. [�
   [Positional parameter error, Explicit declarations, kwargs, Output Synthesis, Playwright, Network Interception, Headless execution, Browser support, Try-Except, Exception, Hallucination Auditing, Faithfulness, LangSmith, DataDog, CI/CD, mypy, pylint, ⭐"Hamesha Python keyword arguments use karein"]
 
 
-=====Section 4: Constructing the Evaluation Dataset [⚠️ Derived]=====
+=====Video 4: Constructing the Evaluation Dataset [⚠️ Derived]=====
 Ragas framework ke liye perfect dictionary format mein multi-shot data tayyar karna. [⚠️ Derived]
 
 --4--Constructing the Evaluation Dataset--
-  Topic 1: Iterating and Appending Data [⚠️ Derived Topic Name from Notes Section 4.4]
+  Topic 1: Iterating and Appending Data [⚠️ Derived Topic Name from Notes Video 4.4]
     Subtopics: Factory Line Analogy, Parallel zip Loop, Dynamic Evaluation Payload, Input Intake, Retrieval Call, LLM Generation, Dictionary Construct, dataset.append, List Comprehension, Try-Except Error Handling, Asynchronous asyncio.gather, Overwrite Anti-Pattern
 
   [📊 SCOPE SIGNAL for Topic 1:
@@ -6621,7 +6621,7 @@ Ragas framework ke liye perfect dictionary format mein multi-shot data tayyar ka
   [Factory line, zip loop, Dynamic evaluation payload, get_relevant_documents, List Comprehension, dataset.append, user_inputs, retrieved_context, response, reference, Try-except, Asynchronous execution, asyncio.gather, Overwrite, extend]
 
 
-  Topic 2: Executing the Dataset Generation [⚠️ Derived Topic Name from Notes Section 4.5]
+  Topic 2: Executing the Dataset Generation [⚠️ Derived Topic Name from Notes Video 4.5]
     Subtopics: Baking Cake Analogy, Execution Latency Footprint, Chroma DB Latency, LLM API Latency, Network Payload, Timer Logic time.time, JSON Pretty Printing, Log Injection PII Leakage Risk, Langchain abatch Async Batch, Background Worker Queues Celery Redis
 
   [📊 SCOPE SIGNAL for Topic 2:
@@ -6636,7 +6636,7 @@ Ragas framework ke liye perfect dictionary format mein multi-shot data tayyar ka
   [Baking Cake, Execution Latency footprint, 21 seconds, Chroma DB Latency, LLM API Latency, Network Payload, time.time, json.dumps, indent=4, Log Injection, PII leakage, abatch, Async Batch, Celery, Redis, Synchronous execution, Asynchronous execution, 504 Gateway Timeout]
 
 
-=====Section 5: Executing Ragas Evaluation with a Local LLM [⚠️ Derived]=====
+=====Video 5: Executing Ragas Evaluation with a Local LLM [⚠️ Derived]=====
 Local 70B model ke sath testing metrics run karke system ke bottlenecks identify karna. [⚠️ Derived]
 
 --5--Executing Ragas Evaluation with a Local LLM--
@@ -6730,7 +6730,7 @@ Local 70B model ke sath testing metrics run karke system ke bottlenecks identify
   [X-Ray Machine, LangSmith, Observability, Token Consumption, 53,702 tokens, JSON Parsing Failure, JSONDecodeError, LANGCHAIN_TRACING_V2, LANGCHAIN_API_KEY, LANGCHAIN_PROJECT, Data Privacy, Print Debugging, GPT-4o, JSON Mode]
 
 
-=====Section 6: Switching to OpenAI for Stable Ragas Evaluation [⚠️ Derived]=====
+=====Video 6: Switching to OpenAI for Stable Ragas Evaluation [⚠️ Derived]=====
 Local failures ke baad GPT-4o cloud model pe shift karke stable, error-free testing achieve karna. [⚠️ Derived]
 
 --6--Switching to OpenAI for Stable Ragas Evaluation--
@@ -6828,17 +6828,17 @@ Local failures ke baad GPT-4o cloud model pe shift karke stable, error-free test
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 3: Implementing Retrieval QA [⚠️ Derived]
+Video 3: Implementing Retrieval QA [⚠️ Derived]
   Topic 1: Setting up the Retriever
   Topic 2: Initializing the QA Chain
   Topic 3: Executing a Test Query
   Topic 4: Analyzing the Output
 
-Section 4: Constructing the Evaluation Dataset [⚠️ Derived]
+Video 4: Constructing the Evaluation Dataset [⚠️ Derived]
   Topic 1: Iterating and Appending Data
   Topic 2: Executing the Dataset Generation
 
-Section 5: Executing Ragas Evaluation with a Local LLM [⚠️ Derived]
+Video 5: Executing Ragas Evaluation with a Local LLM [⚠️ Derived]
   Topic 1: Setting up the Evaluation Dataset
   Topic 2: Configuring the LLM Wrapper
   Topic 3: Selecting Ragas Metrics
@@ -6846,7 +6846,7 @@ Section 5: Executing Ragas Evaluation with a Local LLM [⚠️ Derived]
   Topic 5: Running the Evaluation and Timeouts
   Topic 6: Investigating Failures with LangSmith
 
-Section 6: Switching to OpenAI for Stable Ragas Evaluation [⚠️ Derived]
+Video 6: Switching to OpenAI for Stable Ragas Evaluation [⚠️ Derived]
   Topic 1: Integrating ChatOpenAI
   Topic 2: Re-adding Answer Relevance
   Topic 3: Cloud-Based Execution Results
@@ -6855,9 +6855,9 @@ Section 6: Switching to OpenAI for Stable Ragas Evaluation [⚠️ Derived]
   Topic 6: Analyzing a Low-Scoring Row
 
 📊 PHASE SUMMARY:
-Sections: 4 | Topics: 18 | Subtopics: ~180
+Videos: 4 | Topics: 18 | Subtopics: ~180
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 --- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -6868,11 +6868,11 @@ Sections: 4 | Topics: 18 | Subtopics: ~180
 
 📦 Processing: Phase 1 — Comprehensive RAG & Agent Evaluation Module
 
-=====Section 1: Introduction to Agent and RAG Testing [⚠️ Derived]=====
+=====Video 1: Introduction to Agent and RAG Testing [⚠️ Derived]=====
 RAG foundation par AI agent ko test karne ka base setup aur testing goals. [⚠️ Derived]
 
 --1--Introduction to Agent and RAG Testing--
-  Topic 1: Course Section Overview
+  Topic 1: Course Video Overview
     Subtopics: RAG Foundation, Vector Stores, Ragas Quality Inspector, AI Agent Manager, Agentic Workflows, Data Reliability, Hallucination Prevention, Vector Store Data Source, Ragas Evaluation, AI Agent Context, Prompt Injection Risk, Stored Prompt Injection, Security Sanitization, Microservices Architecture, Cost-Optimization, Ragas Metrics, Faithfulness, Answer Relevancy, RAG Pipeline vs Agentic Flow, RAG Assessment, Parametric Memory
 
   [📊 SCOPE SIGNAL for Topic 1:
@@ -6917,8 +6917,8 @@ RAG foundation par AI agent ko test karne ka base setup aur testing goals. [⚠�
   [Execution flow, LangChain, LLM, tool bindings, User Prompt, JSON schema, Agent Decision, Code Execution, ChatOpenAI, gpt-4, @tool, calculate_tax, ⭐bind_tools[emphasized in notes], invoke, response.tool_calls, Prompt Injection, Sandboxed Environment, Human-in-the-Loop, LangGraph, async, regex, function signatures]
 
 
-  Topic 4: Section Scope
-    Subtopics: Section Scope, Existing Vector Store Reuse, LLM Research Papers, Agentic Bias Evaluation, Retrieval Performance, Compute Optimization, Modular Testing, ChromaDB Connection, OpenAIEmbeddings, persist_directory, AI Safety, Bias Testing, Persistent Local Stores, Unit Testing vs Bias Testing
+  Topic 4: Video Scope
+    Subtopics: Video Scope, Existing Vector Store Reuse, LLM Research Papers, Agentic Bias Evaluation, Retrieval Performance, Compute Optimization, Modular Testing, ChromaDB Connection, OpenAIEmbeddings, persist_directory, AI Safety, Bias Testing, Persistent Local Stores, Unit Testing vs Bias Testing
 
   [📊 SCOPE SIGNAL for Topic 4:
   - Depth Level: Moderate
@@ -6932,7 +6932,7 @@ RAG foundation par AI agent ko test karne ka base setup aur testing goals. [⚠�
   [Vector store reuse, LLM research papers, agentic bias, retrieval performance, persist_directory, Chroma, OpenAIEmbeddings, _collection.count, AI Safety, Modular Testing, Airflow, ETL, Pinecone, Milvus, Vector DB persistence, Unit Testing, Bias Testing]
 
 
-=====Section 2: Setting Up the Dataset and Environment [⚠️ Derived]=====
+=====Video 2: Setting Up the Dataset and Environment [⚠️ Derived]=====
 Automated testing ke liye pehle se queries aur vector database ka environment tayyar karna. [⚠️ Derived]
 
 --2--Setting Up the Dataset and Environment--
@@ -7042,13 +7042,13 @@ Automated testing ke liye pehle se queries aur vector database ka environment ta
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (Topic 1-4), Section 2 (Topic 5-11)
-⏳ Remaining        : Section 3 (Creating the Custom Bias Detection Tool), Section 4 (Invoking the LLM Agent), Section 5 (Creating the Final Dataset Structure), Section 6 (Fixing Dataset Evaluation Errors), Section 7 (Final Evaluation and Ragas Metrics)
+✅ Completed so far : Video 1 (Topic 1-4), Video 2 (Topic 5-11)
+⏳ Remaining        : Video 3 (Creating the Custom Bias Detection Tool), Video 4 (Invoking the LLM Agent), Video 5 (Creating the Final Dataset Structure), Video 6 (Fixing Dataset Evaluation Errors), Video 7 (Final Evaluation and Ragas Metrics)
 📊 Progress         : 2 sections done / 7 sections total | 11 topics done / 37 topics total | 11 subtopics lists done / 37 subtopics lists total
 
-▶️ Resuming from: Section 2 (Topic 11)
+▶️ Resuming from: Video 2 (Topic 11)
 
-=====Section 3: Creating the Custom Bias Detection Tool [⚠️ Derived]=====
+=====Video 3: Creating the Custom Bias Detection Tool [⚠️ Derived]=====
 Testing pipeline ko kahani nahi, sirf headline chahiye—isliye custom tool banana padta hai. [⚠️ Derived]
 
 --3--Creating the Custom Bias Detection Tool--
@@ -7142,7 +7142,7 @@ Testing pipeline ko kahani nahi, sirf headline chahiye—isliye custom tool bana
   [final_prompt, local_llm.invoke, response.content, AIMessage, Local LLM privacy, Tenacity, Rate limits, timeouts, Cloud LLM, OpenAI, ⭐extract and summarize, inference engine, hallucinate]
 
 
-=====Section 4: Invoking the LLM Agent [⚠️ Derived]=====
+=====Video 4: Invoking the LLM Agent [⚠️ Derived]=====
 Agent ko utne hi hathiyar do jitni badi jung ho, aur slow local machine se hata kar Cloud grid par shift karo. [⚠️ Derived]
 
 --4--Invoking the LLM Agent--
@@ -7206,7 +7206,7 @@ Agent ko utne hi hathiyar do jitni badi jung ho, aur slow local machine se hata 
   [gpt-4o-mini, llm2, cheaper_agent, AgentExecutor, Token economics, Time-to-First-Token, TTFT, Model Routing, LLM Cascading, JSON extraction, quantized, distilled, API inference costs]
 
 
-=====Section 5: Creating the Final Dataset Structure [⚠️ Derived]=====
+=====Video 5: Creating the Final Dataset Structure [⚠️ Derived]=====
 Ragas wahi data khata hai, jo uske nakhre (schema structure) uthata hai. [⚠️ Derived]
 
 --5--Creating the Final Dataset Structure--
@@ -7301,13 +7301,13 @@ Ragas wahi data khata hai, jo uske nakhre (schema structure) uthata hai. [⚠️
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1-2 (Done), Section 3 (Topic 12-17), Section 4 (Topic 18-21), Section 5 (Topic 22-27)
-⏳ Remaining        : Section 6 (Fixing Dataset Evaluation Errors), Section 7 (Final Evaluation and Ragas Metrics)
+✅ Completed so far : Video 1-2 (Done), Video 3 (Topic 12-17), Video 4 (Topic 18-21), Video 5 (Topic 22-27)
+⏳ Remaining        : Video 6 (Fixing Dataset Evaluation Errors), Video 7 (Final Evaluation and Ragas Metrics)
 📊 Progress         : 5 sections done / 7 sections total | 27 topics done / 37 topics total | 27 subtopics lists done / 37 subtopics lists total
 
-▶️ Resuming from: Section 2 (Topic 11)
+▶️ Resuming from: Video 2 (Topic 11)
 
-=====Section 6: Fixing Dataset Evaluation Errors [⚠️ Derived]=====
+=====Video 6: Fixing Dataset Evaluation Errors [⚠️ Derived]=====
 Data Type Mismatch error ka post-mortem aur debugging flow. [⚠️ Derived]
 
 --6--Fixing Dataset Evaluation Errors--
@@ -7371,7 +7371,7 @@ Data Type Mismatch error ka post-mortem aur debugging flow. [⚠️ Derived]
   [evaluation_data[0], type(), <class 'list'>, Visual Inspection, Schema Compliance, Data Quality Assertion, assert isinstance, CI/CD logs, Memory buffers, df.head(1), Jupyter kernels]
 
 
-=====Section 7: Final Evaluation and Ragas Metrics [⚠️ Derived]=====
+=====Video 7: Final Evaluation and Ragas Metrics [⚠️ Derived]=====
 System execution vs logical failure samajhna aur final report card analyze karna. [⚠️ Derived]
 
 --7--Final Evaluation and Ragas Metrics--
@@ -7467,17 +7467,17 @@ System execution vs logical failure samajhna aur final report card analyze karna
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 📋 COMPLETE SKELETON INDEX
 
-Section 1: Introduction to Agent and RAG Testing [⚠️ Derived]
-  Topic 1: Course Section Overview
+Video 1: Introduction to Agent and RAG Testing [⚠️ Derived]
+  Topic 1: Course Video Overview
   Topic 2: Agent Testing Goals
   Topic 3: Execution Flow
-  Topic 4: Section Scope
+  Topic 4: Video Scope
 
-Section 2: Setting Up the Dataset and Environment [⚠️ Derived]
+Video 2: Setting Up the Dataset and Environment [⚠️ Derived]
   Topic 5: Dataset Preparation
   Topic 6: Example Query and Response
   Topic 7: Dataset Creation Method
@@ -7486,7 +7486,7 @@ Section 2: Setting Up the Dataset and Environment [⚠️ Derived]
   Topic 10: Importing the Vector Database
   Topic 11: Loading the CSV Data
 
-Section 3: Creating the Custom Bias Detection Tool [⚠️ Derived]
+Video 3: Creating the Custom Bias Detection Tool [⚠️ Derived]
   Topic 12: Why a New Tool is Needed
   Topic 13: Updating the Tool Prompt
   Topic 14: Tool Arguments and Returns
@@ -7494,13 +7494,13 @@ Section 3: Creating the Custom Bias Detection Tool [⚠️ Derived]
   Topic 16: Retrieving and Joining Context
   Topic 17: LLM Summarization Step
 
-Section 4: Invoking the LLM Agent [⚠️ Derived]
+Video 4: Invoking the LLM Agent [⚠️ Derived]
   Topic 18: Agent Initialization
   Topic 19: Model Overload Concern
   Topic 20: Switching to OpenAI
   Topic 21: Selecting GPT-4 Mini
 
-Section 5: Creating the Final Dataset Structure [⚠️ Derived]
+Video 5: Creating the Final Dataset Structure [⚠️ Derived]
   Topic 22: Dataset Structure Goal
   Topic 23: Looping Through Data
   Topic 24: Fetching Docs and Agent Responses
@@ -7508,13 +7508,13 @@ Section 5: Creating the Final Dataset Structure [⚠️ Derived]
   Topic 26: Execution Run
   Topic 27: Observing the Run
 
-Section 6: Fixing Dataset Evaluation Errors [⚠️ Derived]
+Video 6: Fixing Dataset Evaluation Errors [⚠️ Derived]
   Topic 28: Evaluation Error Encountered
   Topic 29: Root Cause of the Error
   Topic 30: Fixing the Context Array
   Topic 31: Successful Re-run
 
-Section 7: Final Evaluation and Ragas Metrics [⚠️ Derived]
+Video 7: Final Evaluation and Ragas Metrics [⚠️ Derived]
   Topic 32: Running the Ragas Evaluation
   Topic 33: Analyzing the Scores
   Topic 34: Why the Scores are Low
@@ -7523,7 +7523,7 @@ Section 7: Final Evaluation and Ragas Metrics [⚠️ Derived]
   Topic 37: Conclusion and Next Steps
 
 📊 SUMMARY:
-Total Sections: 7 | Total Topics: 37 | Total Subtopics: 300+
+Total Videos: 7 | Total Topics: 37 | Total Subtopics: 300+
 
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -7534,7 +7534,7 @@ Total Sections: 7 | Total Topics: 37 | Total Subtopics: 300+
 
 📦 Processing: Phase 1 — DeepEval Core & Setup [⚠️ Derived]
 
-=====Section 1: DeepEval Fundamentals & Web Portal [⚠️ Derived]=====
+=====Video 1: DeepEval Fundamentals & Web Portal [⚠️ Derived]=====
 DeepEval framework ki core understanding, metrics, aur web observability ka foundation. [⚠️ Derived]
 
 --1--DeepEval Fundamentals & Web Portal--
@@ -7609,7 +7609,7 @@ DeepEval framework ki core understanding, metrics, aur web observability ka foun
   [LLM-as-a-Judge, OpenAI, GPT-4, o1, Prompt Construction, API Call, JSON output, export OPENAI_API_KEY, set OPENAI_API_KEY, Data Privacy, Azure OpenAI, Zero Data Retention, Rate Limits, HTTP 429, Batch testing, ⭐"Llama-3 8B", Gemini]
 
 
-=====Section 2: Setup & Evaluation Workflow [⚠️ Derived]=====
+=====Video 2: Setup & Evaluation Workflow [⚠️ Derived]=====
 DeepEval ko locally set up karna aur 4-step testing loop establish karna. [⚠️ Derived]
 
 --2--Setup & Evaluation Workflow--
@@ -7657,13 +7657,13 @@ DeepEval ko locally set up karna aur 4-step testing loop establish karna. [⚠�
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (Topic 1 to 5), Section 2 (Topic 6 to 8)
-⏳ Remaining        : Sections on Creating Golden Datasets, RAG Retrieval, Missing Data, Fusing Context, Executing, and Reviewing Failures (Topics 9 to 28)
+✅ Completed so far : Video 1 (Topic 1 to 5), Video 2 (Topic 6 to 8)
+⏳ Remaining        : Videos on Creating Golden Datasets, RAG Retrieval, Missing Data, Fusing Context, Executing, and Reviewing Failures (Topics 9 to 28)
 📊 Progress         : 2 sections done / 6 sections total | 8 topics done / 28 topics total | 74 subtopics done / approx 250 subtopics total
 
-▶️ Resuming from: Section 3: Creating and Pushing Golden Datasets [⚠️ Derived]
+▶️ Resuming from: Video 3: Creating and Pushing Golden Datasets [⚠️ Derived]
 
-=====Section 3: Creating and Pushing Golden Datasets [⚠️ Derived]=====
+=====Video 3: Creating and Pushing Golden Datasets [⚠️ Derived]=====
 DeepEval portal par dataset banana aur code ke through push karna. [⚠️ Derived]
 
 --3--Creating and Pushing Golden Datasets--
@@ -7738,7 +7738,7 @@ DeepEval portal par dataset banana aur code ke through push karna. [⚠️ Deriv
   [EvaluationDataset, .push(), HTTP POST request, api.confident-ai.com, Auth Injection, Bearer token, Cloud Write, alias, testing tools dataset, HTTPS, TLS 1.2, Proxy, CI/CD, GitHub actions, Timeout errors, chunking, Data overwrite, Versioning]
 
 
-=====Section 4: Retrieving RAG Context and Actual Output [⚠️ Derived]=====
+=====Video 4: Retrieving RAG Context and Actual Output [⚠️ Derived]=====
 RAG pipeline setup aur missing runtime data ka extraction. [⚠️ Derived]
 
 --4--Retrieving RAG Context and Actual Output--
@@ -7785,7 +7785,7 @@ RAG pipeline setup aur missing runtime data ka extraction. [⚠️ Derived]
   [query_with_context, Wrapper Function, Retrieval Phase, retriever.get_relevant_documents, Document objects, doc.page_content, list comprehension, Generation Phase, rag_chain.invoke, Tuple, retrieved_contexts, response["result"], Input sanitizer, regex, async def, await, Serialization error]
 
 
-=====Section 5: Constructing LLM Test Cases and Pulling Datasets [⚠️ Derived]=====
+=====Video 5: Constructing LLM Test Cases and Pulling Datasets [⚠️ Derived]=====
 Static Golden data aur dynamic RAG output ko fuse karke executable test cases banana. [⚠️ Derived]
 
 --5--Constructing LLM Test Cases and Pulling Datasets--
@@ -7846,7 +7846,7 @@ Static Golden data aur dynamic RAG output ko fuse karke executable test cases ba
   [Execution trigger, Iteration, convert_golden_to_test_case, LLMTestCase object, Validation Print, stdout, dataset.goldens, dataset.test_cases.append, Log Leakage, PII, CI/CD logs, Observability tools, Datadog, ELK stack, LangSmith, End-to-end test, E2E]
 
 
-=====Section 6: Running the Evaluation and Analyzing Results [⚠️ Derived]=====
+=====Video 6: Running the Evaluation and Analyzing Results [⚠️ Derived]=====
 Metrics run karna, fail cases identify karna aur OpenAI integration. [⚠️ Derived]
 
 --6--Running the Evaluation and Analyzing Results--
@@ -7907,7 +7907,7 @@ Metrics run karna, fail cases identify karna aur OpenAI integration. [⚠️ Der
   [Diagnostic phase, Root Cause Analysis, RCA, Generative failures, Retrieval failures, Hallucinations, Pass/Fail Scan, Playwright, native test runner, retrieval_context, Poisoned Context, Data Poisoning, Anomalous data, Contextual Recall = 0, Prompt engineering, Data Ingestion pipeline]
 
 
-=====Section 7: Fixing Data and Final Re-evaluation [⚠️ Derived]=====
+=====Video 7: Fixing Data and Final Re-evaluation [⚠️ Derived]=====
 Missing knowledge inject karke system ko theek karna aur final UI trends dekhna. [⚠️ Derived]
 
 --7--Fixing Data and Final Re-evaluation--
@@ -7968,43 +7968,43 @@ Missing knowledge inject karke system ko theek karna aur final UI trends dekhna.
   [Pass Rate Calculation, 85.71%, Trend Analysis, Confident AI dashboard, 4/7 vs 6/7, RAGAS, Telemetry Push, Time-Series Graphing, Outlier, SSO, Single Sign-On, Workspace permissions, Observability Blindness, Observability tools, Return on Investment, ROI]
 
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 3: Creating and Pushing Golden Datasets
+Video 3: Creating and Pushing Golden Datasets
   Topic 9: Methods for Creating Datasets
   Topic 10: Understanding Golden Datasets
   Topic 11: Drafting the Dataset in Code
   Topic 12: Formatting and Uploading the Dataset
   Topic 13: Pushing to the Cloud
 
-Section 4: Retrieving RAG Context and Actual Output
+Video 4: Retrieving RAG Context and Actual Output
   Topic 14: Setting Up the RAG Application
   Topic 15: The Missing Data Problem
   Topic 16: Creating the Query Method
 
-Section 5: Constructing LLM Test Cases and Pulling Datasets
+Video 5: Constructing LLM Test Cases and Pulling Datasets
   Topic 17: Importing Test Case Classes
   Topic 18: Fusing Golden Data with RAG Output
   Topic 19: Pulling the Dataset from Cloud
   Topic 20: Triggering the Execution
 
-Section 6: Running the Evaluation and Analyzing Results
+Video 6: Running the Evaluation and Analyzing Results
   Topic 21: Verifying the Retrieved Data
   Topic 22: Executing the DeepEval Evaluation
   Topic 23: The OpenAI API Key Requirement
   Topic 24: Reviewing Evaluation Failures
 
-Section 7: Fixing Data and Final Re-evaluation
+Video 7: Fixing Data and Final Re-evaluation
   Topic 25: Training the Data to Fix Failures
   Topic 26: Injecting Missing Context
   Topic 27: Re-running the Evaluation
   Topic 28: Final Results and Trend Analysis
 
 📊 PHASE SUMMARY:
-Sections: 5 (in this resume) | Topics: 20 | Subtopics: ~85
-*(Total Complete Document: Sections: 7 | Topics: 28 | Subtopics: ~160+)*
+Videos: 5 (in this resume) | Topics: 20 | Subtopics: ~85
+*(Total Complete Document: Videos: 7 | Topics: 28 | Subtopics: ~160+)*
 
 ==================================================================================
 
@@ -8018,7 +8018,7 @@ Pehle 4 sections ka perfect skeleton neeche taiyaar hai:
 
 ---
 
-=====Section 1: Introduction to Testing Tool Callings [⚠️ Derived]=====
+=====Video 1: Introduction to Testing Tool Callings [⚠️ Derived]=====
 AI agent apne input ke hisaab se exactly wahi tool call kare jo required hai, is process ki fundamental verification. [⚠️ Derived]
 
 --1--Introduction to Testing Tool Callings--
@@ -8112,7 +8112,7 @@ AI agent apne input ke hisaab se exactly wahi tool call kare jo required hai, is
   [ToolCall class, name, input, output, calculator_tool, equation, LLMTestCase, tools_called, expected_tools, JSON, dictionary, Strongly typed, hallucination, ⭐"ToolCall"]
 
 
-=====Section 2: Setting Up the Code and Custom Tools [⚠️ Derived]=====
+=====Video 2: Setting Up the Code and Custom Tools [⚠️ Derived]=====
 Apne RAG testing wale puraane code structure ko reuse karna aur Langchain ki madad se naye AI tools create karna. [⚠️ Derived]
 
 --2--Setting Up the Code and Custom Tools--
@@ -8161,7 +8161,7 @@ Apne RAG testing wale puraane code structure ko reuse karna aur Langchain ki mad
   [AgentExecutor, initialize_agent, AgentType, OpenAI, temperature=0, ZERO_SHOT_REACT_DESCRIPTION, invoke, response, ReAct loop, OpenAI Functions, max_iterations, Persona LLM, ⭐"Temperature 0"]
 
 
-=====Section 3: Preparing the Golden Dataset [⚠️ Derived]=====
+=====Video 3: Preparing the Golden Dataset [⚠️ Derived]=====
 AI agents ke evaluation ke liye ground truth scenarios (Master Answer Key) ko define karna. [⚠️ Derived]
 
 --3--Preparing the Golden Dataset--
@@ -8210,7 +8210,7 @@ AI agents ke evaluation ke liye ground truth scenarios (Master Answer Key) ko de
   [ToolCall, expected_tools, name, input, add_numbers, multiply_numbers, hallucination, mock directory, Synthetic Generation, JSON schemas, Data types, Deep Testing, Shallow Testing, ⭐"expected_tools"]
 
 
-=====Section 4: Pushing and Pulling the Dataset [⚠️ Derived]=====
+=====Video 4: Pushing and Pulling the Dataset [⚠️ Derived]=====
 Local golden dataset ko DeepEval cloud ecosystem mein sync karke LLM test cases generate karna. [⚠️ Derived]
 
 --4--Pushing and Pulling the Dataset--
@@ -8246,15 +8246,15 @@ Local golden dataset ko DeepEval cloud ecosystem mein sync karke LLM test cases 
 ---
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1, Section 2, Section 3, Section 4 (Up to 'Pushing and Pulling the Dataset')
-⏳ Remaining        : Section 5 (Invoking AI Agent), Section 6 (Formulating Tool Data), Section 7 (Creating and Running Test Case), Section 8 (Advanced Parameters)
+✅ Completed so far : Video 1, Video 2, Video 3, Video 4 (Up to 'Pushing and Pulling the Dataset')
+⏳ Remaining        : Video 5 (Invoking AI Agent), Video 6 (Formulating Tool Data), Video 7 (Creating and Running Test Case), Video 8 (Advanced Parameters)
 📊 Progress         : 4 sections done / 8 sections total | 14 topics done / 29 topics total
 
-▶️ Resuming from: Section 5 — Invoking the AI Agent and Getting Intermediate Steps
+▶️ Resuming from: Video 5 — Invoking the AI Agent and Getting Intermediate Steps
 
 ---
 
-=====Section 5: Invoking the AI Agent and Getting Intermediate Steps [⚠️ Derived]=====
+=====Video 5: Invoking the AI Agent and Getting Intermediate Steps [⚠️ Derived]=====
 RAG testing wala logic chhoro aur AI agent ko direct custom method se query karne ka pipeline set karo. [⚠️ Derived]
 
 --5--Invoking the AI Agent and Getting Intermediate Steps--
@@ -8318,7 +8318,7 @@ RAG testing wala logic chhoro aur AI agent ko direct custom method se query karn
   [AgentAction, intermediate_steps, Tuple, Object Extraction, action.tool, action.tool_input, ToolCall, actual_tools_called, LLMTestCase, Data Parsing Safety, try-except, json.loads(), Schema Mismatch, ⭐"AgentAction"]
 
 
-=====Section 6: Formulating Tool Data for the Test Case [⚠️ Derived]=====
+=====Video 6: Formulating Tool Data for the Test Case [⚠️ Derived]=====
 Agent ke raw intermediate steps array ko parse karke metric ke format mein convert karna. [⚠️ Derived]
 
 --6--Formulating Tool Data for the Test Case--
@@ -8367,7 +8367,7 @@ Agent ke raw intermediate steps array ko parse karke metric ke format mein conve
   [Return statement, Execution Scope, Return Tuple, Variable Assignment, actual_tool, actual_inputs, actual_out, Fallback return, None, Separation of Concerns, Global variables collision, Functional programming, ⭐"Return Tuple"]
 
 
-=====Section 7: Creating and Running the LLM Test Case [⚠️ Derived]=====
+=====Video 7: Creating and Running the LLM Test Case [⚠️ Derived]=====
 Extracted dynamic data aur baseline expected data ko assemble karke strictly test case run aur debug karna. [⚠️ Derived]
 
 --7--Creating and Running the LLM Test Case--
@@ -8431,7 +8431,7 @@ Extracted dynamic data aur baseline expected data ko assemble karke strictly tes
   [String Mismatch, False negative, Exact Match, Typo, multiply_numbers, RecursionError, Magic Strings, Constants.py, ENUM classes, CamelCase, snake_case, Prompt engineering tweaks, ⭐"Exact string match"]
 
 
-=====Section 8: Exploring Advanced Tool Correctness Parameters [⚠️ Derived]=====
+=====Video 8: Exploring Advanced Tool Correctness Parameters [⚠️ Derived]=====
 DeepEval metric class ke hidden constructor arguments ko samajhna aur unhe fine-tune karna. [⚠️ Derived]
 
 --8--Exploring Advanced Tool Correctness Parameters--
@@ -8497,35 +8497,35 @@ DeepEval metric class ke hidden constructor arguments ko samajhna aur unhe fine-
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 5: Invoking the AI Agent and Getting Intermediate Steps
+Video 5: Invoking the AI Agent and Getting Intermediate Steps
   Topic 1: Creating the LLM Test Case
   Topic 2: The Problem with the Standard Invoke Response
   Topic 3: Using return_intermediate_steps
   Topic 4: Extracting Agent Actions
 
-Section 6: Formulating Tool Data for the Test Case
+Video 6: Formulating Tool Data for the Test Case
   Topic 1: Parsing the Intermediate Steps
   Topic 2: Extracting Tool Name, Input, and Output
   Topic 3: Returning Values for the Caller
 
-Section 7: Creating and Running the LLM Test Case
+Video 7: Creating and Running the LLM Test Case
   Topic 1: Assembling the Test Case Data
   Topic 2: Fixing the Missing Golden Dataset Tool Call
   Topic 3: Running the For-Loop Evaluation
   Topic 4: Debugging a Failed Test
 
-Section 8: Exploring Advanced Tool Correctness Parameters
+Video 8: Exploring Advanced Tool Correctness Parameters
   Topic 1: Digging into Metric Parameters
   Topic 2: Threshold and Evaluation Parameters
   Topic 3: Sequential Tool Ordering
   Topic 4: Additional Flags and the Verbose Bug
 
 📊 PHASE SUMMARY:
-Sections: 4 | Topics: 15 | Subtopics: 74
+Videos: 4 | Topics: 15 | Subtopics: 74
 
 --- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -8550,12 +8550,12 @@ Sections: 4 | Topics: 15 | Subtopics: 74
 
 📦 Processing: Phase 1 — Introduction to Building an MCP Server & Installation
 
-=====Section 1: Introduction to Building an MCP Server [⚠️ Derived]=====
+=====Video 1: Introduction to Building an MCP Server [⚠️ Derived]=====
 Model Context Protocol (MCP) ke fundamentals, architecture aur mental model ka base setup. [⚠️ Derived]
 
 --1--Introduction to Building an MCP Server--
-  Topic 1: Course Section Introduction
-    Subtopics: Course Section Introduction, Bhoomi Pujan Concept, Problem Statement, System Kickoff, Protocol Lifecycle
+  Topic 1: Course Video Introduction
+    Subtopics: Course Video Introduction, Bhoomi Pujan Concept, Problem Statement, System Kickoff, Protocol Lifecycle
 
   [📊 SCOPE SIGNAL for Topic 1:
   - Depth Level: Moderate
@@ -8709,7 +8709,7 @@ Model Context Protocol (MCP) ke fundamentals, architecture aur mental model ka b
   [Clean workspace, Decouple, isolated directory structure, Dependency conflicts, Virtual Environment, venv, `mkdir mcp_servers_project && cd mcp_servers_project`, `python -m venv venv`, .env, .gitignore, Micro-repos, Docker container, Monolith LangChain repo, POC, Proof of Concept, .vscode/settings.json]
 
 
-=====Section 2: Installation of FastMCP [⚠️ Derived]=====
+=====Video 2: Installation of FastMCP [⚠️ Derived]=====
 Workspace preparation aur core dependencies ka environment setup. [⚠️ Derived]
 
 --2--Installation of FastMCP--
@@ -8785,14 +8785,14 @@ Workspace preparation aur core dependencies ka environment setup. [⚠️ Derive
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (Intro to MCP), Section 2 (Installation of FastMCP)
-⏳ Remaining        : Section 3 (Writing Basic Code), Section 4 (Adding Toolings), Section 5 (Configuring), Section 6 (File System Intro), Section 7 (Running File System)
+✅ Completed so far : Video 1 (Intro to MCP), Video 2 (Installation of FastMCP)
+⏳ Remaining        : Video 3 (Writing Basic Code), Video 4 (Adding Toolings), Video 5 (Configuring), Video 6 (File System Intro), Video 7 (Running File System)
 📊 Progress         : 2 sections done / 7 sections total | 16 topics done / 45 topics total | 82 subtopics done / 220 subtopics total
 
 
-▶️ Resuming from: Section 3: Writing the Basic FastMCP Code
+▶️ Resuming from: Video 3: Writing the Basic FastMCP Code
 
-=====Section 3: Writing the Basic FastMCP Code [⚠️ Derived]=====
+=====Video 3: Writing the Basic FastMCP Code [⚠️ Derived]=====
 Python vs Node.js showdown aur pehle MCP server ka codebase initialization. [⚠️ Derived]
 
 --3--Writing the Basic FastMCP Code--
@@ -8909,7 +8909,7 @@ Python vs Node.js showdown aur pehle MCP server ka codebase initialization. [⚠
   [Node.js SDK, Boilerplate code, StdioServerTransport, CallToolRequestSchema, ListToolsRequestSchema, Manual schema validation, Zod, switch-case, Developer Experience, DX, Spaghetti Code, Cognitive Load]
 
 
-=====Section 4: Adding Toolings to the FastMCP Server [⚠️ Derived]=====
+=====Video 4: Adding Toolings to the FastMCP Server [⚠️ Derived]=====
 Actual math logic ko MCP protocol ke format mein tools mein convert karna. [⚠️ Derived]
 
 --4--Adding Toolings to the FastMCP Server--
@@ -8970,7 +8970,7 @@ Actual math logic ko MCP protocol ke format mein tools mein convert karna. [⚠�
   [Traffic jam analogy, Monolithic routing, CallToolRequestSchema, switch-case blocks, Fallthrough Vulnerability, Cyclomatic Complexity, Dictionary Lookup Routing, O(1) time complexity, Git merge conflicts]
 
 
-=====Section 5: Configuring and Invoking the Server in Claude Desktop [⚠️ Derived]=====
+=====Video 5: Configuring and Invoking the Server in Claude Desktop [⚠️ Derived]=====
 Host application aur local MCP server ka final handshake aur testing. [⚠️ Derived]
 
 --5--Configuring and Invoking the Server--
@@ -9060,13 +9060,13 @@ Host application aur local MCP server ka final handshake aur testing. [⚠️ De
 
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : Section 1 (Intro), Section 2 (Install), Section 3 (Basic Code), Section 4 (Toolings), Section 5 (Configuring)
-⏳ Remaining        : Section 6 (File System Reader Server), Section 7 (Running File System Server)
+✅ Completed so far : Video 1 (Intro), Video 2 (Install), Video 3 (Basic Code), Video 4 (Toolings), Video 5 (Configuring)
+⏳ Remaining        : Video 6 (File System Reader Server), Video 7 (Running File System Server)
 📊 Progress         : 5 sections done / 7 sections total | 35 topics done / 45 topics total | 165 subtopics done / 220 subtopics total
 
-▶️ Resuming from: Section 6: Building a File System Reader MCP Server
+▶️ Resuming from: Video 6: Building a File System Reader MCP Server
 
-=====Section 6: Building a File System Reader MCP Server [⚠️ Derived]=====
+=====Video 6: Building a File System Reader MCP Server [⚠️ Derived]=====
 Calculator se aage badhkar I/O operations aur local file reading with strict security constraints. [⚠️ Derived]
 
 --6--Building a File System Reader MCP Server--
@@ -9155,7 +9155,7 @@ Calculator se aage badhkar I/O operations aur local file reading with strict sec
   [`list_files()`, Secondary Discovery Capability, OS Directory Iteration, `os.listdir`, `pathlib.Path.iterdir()`, API Discoverability, HATEOAS, Agentic Sensing, Chain of Thought, Pagination, Context window overflow, `.is_file()`]
 
 
-=====Section 7: Running and Testing the File System Reader [⚠️ Derived]=====
+=====Video 7: Running and Testing the File System Reader [⚠️ Derived]=====
 Code, configuration, aur security integration ka final testing Claude Desktop ke sath. [⚠️ Derived]
 
 --7--Running and Testing the File System Reader--
@@ -9260,11 +9260,11 @@ Code, configuration, aur security integration ka final testing Claude Desktop ke
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 6: Building a File System Reader MCP Server [⚠️ Derived]
+Video 6: Building a File System Reader MCP Server [⚠️ Derived]
   Topic 1: Introduction to the File System Reader
   Topic 2: Setting up the File System Server
   Topic 3: Writing the read_file Tool & Using Environment Variables for Security
@@ -9272,7 +9272,7 @@ Section 6: Building a File System Reader MCP Server [⚠️ Derived]
   Topic 5: Reading and Returning Text
   Topic 6: Adding the list_files Tool
 
-Section 7: Running and Testing the File System Reader [⚠️ Derived]
+Video 7: Running and Testing the File System Reader [⚠️ Derived]
   Topic 1: Adding the Run Invocation
   Topic 2: Creating the Fallback Directory
   Topic 3: Configuring Claude Desktop with Env Variables & Setting Target Directory
@@ -9282,14 +9282,14 @@ Section 7: Running and Testing the File System Reader [⚠️ Derived]
   Topic 7: Reading Specific Files
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 13 | Subtopics: 66
+Videos: 2 | Topics: 13 | Subtopics: 66
 
 ---
 
 ✅ **FINAL CHECKLIST COMPLETED (Internal silent run):**
 - [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko Sections mein group kiya.
-- [x] Har Section ka tagline/context line add kiya.
+- [x] Notes ko Videos mein group kiya.
+- [x] Har Video ka tagline/context line add kiya.
 - [x] Sequential numbering di.
 - [x] Subtopics sirf comma-separated names hain.
 - [x] Exact code aur commands preserve kiye (Keywords dump mein).
@@ -9306,7 +9306,7 @@ Sections: 2 | Topics: 13 | Subtopics: 66
 
 📦 Processing: Phase 3 — Building Custom Playwright MCP Server with FastMCP
 
-=====Section 1: Introduction to the Custom Playwright MCP Server [⚠️ Derived]=====
+=====Video 1: Introduction to the Custom Playwright MCP Server [⚠️ Derived]=====
 Heavy community servers se hatkar apna khud ka lightweight, custom Playwright server banane ka architectural context aur zaroorat. [⚠️ Derived]
 
 --1--Introduction to the Custom Playwright MCP Server--
@@ -9339,7 +9339,7 @@ Heavy community servers se hatkar apna khud ka lightweight, custom Playwright se
   [Hands-on ability, Playwright, Selenium, Cypress, WebDriver IO, automation lifecycle, Blackbox, Zero-trust network configurations, CI/CD pipelines, Internal Developer Platforms, IDP, Microsoft tooling, custom commands]
 
 
-=====Section 2: Setting Up Playwright and the Ensure Browser Method [⚠️ Derived]=====
+=====Video 2: Setting Up Playwright and the Ensure Browser Method [⚠️ Derived]=====
 Playwright async API ki hierarchy samajhna aur server ka initial event loop aur browser state initialize karna. [⚠️ Derived]
 
 --2--Setting Up Playwright and the Ensure Browser Method--
@@ -9400,7 +9400,7 @@ Playwright async API ki hierarchy samajhna aur server ka initial event loop aur 
   [Headful, `headless=False`, `playwright_instance = await async_playwright().start()`, `browser = await playwright_instance.chromium.launch(headless=False)`, `page = await browser.new_page()`, GUI, Graphical User Interface, IPC, Inter-Process Communication, `about:blank`, Xvfb, CI/CD pipelines, Docker, `headless=True`, Out of Memory, OOM]
 
 
-=====Section 3: Building the Navigate and Click Tools [⚠️ Derived]=====
+=====Video 3: Building the Navigate and Click Tools [⚠️ Derived]=====
 AI agent ko browser me navigate karne aur UI elements click karne ki actions expose karna. [⚠️ Derived]
 
 --3--Building the Navigate and Click Tools--
@@ -9461,7 +9461,7 @@ AI agent ko browser me navigate karne aur UI elements click karne ki actions exp
   [`if __name__ == "__main__":`, `try`, `mcp.run()`, `finally`, Deterministic teardown, Zombie Processes, Memory Leak, KeyboardInterrupt, `asyncio.run(browser.close())`, `asyncio.run(playwright_instance.stop())`, DevOps pipelines, Out of Memory, OOM, Context managers]
 
 
-=====Section 5: Configuring and Testing in Claude Desktop [⚠️ Derived]=====
+=====Video 5: Configuring and Testing in Claude Desktop [⚠️ Derived]=====
 Desktop client me naye server ko link karna aur first execution test perform karna. [⚠️ Derived]
 
 --5--Configuring and Testing in Claude Desktop--
@@ -9508,7 +9508,7 @@ Desktop client me naye server ko link karna aur first execution test perform kar
   [Empirical observation, Brute-forces DOM locators, Architectural iteration, Evaluate JavaScript tool, `document.querySelectorAll()`, Blind Automation, Context-Aware Automation, Accessibility Trees]
 
 
-=====Section 6: Adding Fill and Evaluate JavaScript Tools [⚠️ Derived]=====
+=====Video 6: Adding Fill and Evaluate JavaScript Tools [⚠️ Derived]=====
 Forms submit karne aur complex DOM manipulation/discovery ke liye naye tools add karna. [⚠️ Derived]
 
 --6--Adding Fill and Evaluate JavaScript Tools--
@@ -9541,7 +9541,7 @@ Forms submit karne aur complex DOM manipulation/discovery ke liye naye tools add
   [`evaluate_js`, Chrome DevTools Protocol, CDP, Arbitrary JavaScript, Serialized string, `javascript_result`, `await page.evaluate(script)`, Arbitrary Code Execution, ACE, XSS, Content Security Policies, CSP, Abstract Syntax Tree, AST, Bulk data extraction, IPC overhead, Anti-bot systems]
 
 
-=====Section 7: Adding Get Text and Page Utility Tools [⚠️ Derived]=====
+=====Video 7: Adding Get Text and Page Utility Tools [⚠️ Derived]=====
 Agent ko screen ka text padhna sikhana aur tool bloat ko rokne ki architectural philosophy. [⚠️ Derived]
 
 --7--Adding Get Text and Page Utility Tools--
@@ -9588,7 +9588,7 @@ Agent ko screen ka text padhna sikhana aur tool bloat ko rokne ki architectural 
   [Minimalist tool registry, `get_page_title()`, `get_current_url()`, `evaluate_js` fallback, Schema bloat, KISS, Keep it simple stupid, Analysis Paralysis, Tool Bloat, Object-Oriented Programming, OOP, Master Utility Approach]
 
 
-=====Section 8: Python FastMCP vs Node.js Boilerplate [⚠️ Derived]=====
+=====Video 8: Python FastMCP vs Node.js Boilerplate [⚠️ Derived]=====
 Dono frameworks me likhe gaye servers ka side-by-side metric aur structure comparison. [⚠️ Derived]
 
 --8--Python FastMCP vs Node.js Boilerplate--
@@ -9635,7 +9635,7 @@ Dono frameworks me likhe gaye servers ka side-by-side metric aur structure compa
   [Boilerplate Problem, Manual JSON schema definitions, Explicit type descriptions, Switch-case request handlers, 263 lines, `ListToolsRequestSchema`, `CallToolRequestSchema`, `inputSchema`, Schema mismatch vulnerability, No-SQL injection style, Zod, Joi]
 
 
-=====Section 9: Final End-to-End Scenario Demonstration [⚠️ Derived]=====
+=====Video 9: Final End-to-End Scenario Demonstration [⚠️ Derived]=====
 Saare naye tools ko reload karke ek complete AI-driven test execute karna. [⚠️ Derived]
 
 --9--Final End-to-End Scenario Demonstration--
@@ -9698,60 +9698,60 @@ Saare naye tools ko reload karke ek complete AI-driven test execute karna. [⚠�
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Video, har Topic, har keyword captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Introduction to the Custom Playwright MCP Server [⚠️ Derived]
+Video 1: Introduction to the Custom Playwright MCP Server [⚠️ Derived]
   Topic 1: Building a Lightweight Server
   Topic 2: Purpose of the Custom Build
 
-Section 2: Setting Up Playwright and the Ensure Browser Method [⚠️ Derived]
+Video 2: Setting Up Playwright and the Ensure Browser Method [⚠️ Derived]
   Topic 1: Understanding Playwright API
   Topic 2: Initial Script Setup
   Topic 3: The ensure_browser Method
   Topic 4: Initializing Instances
 
-Section 3: Building the Navigate and Click Tools [⚠️ Derived]
+Video 3: Building the Navigate and Click Tools [⚠️ Derived]
   Topic 1: The Navigate Tool
   Topic 2: Decorating the Tool
   Topic 3: The Click Tool
   Topic 4: Running and Cleaning Up
 
-Section 5: Configuring and Testing in Claude Desktop [⚠️ Derived]
+Video 5: Configuring and Testing in Claude Desktop [⚠️ Derived]
   Topic 1: Configuring the Desktop Client
   Topic 2: First Execution Test
   Topic 3: Observing the Run
 
-Section 6: Adding Fill and Evaluate JavaScript Tools [⚠️ Derived]
+Video 6: Adding Fill and Evaluate JavaScript Tools [⚠️ Derived]
   Topic 1: The Fill Tool
   Topic 2: The Evaluate JS Tool
 
-Section 7: Adding Get Text and Page Utility Tools [⚠️ Derived]
+Video 7: Adding Get Text and Page Utility Tools [⚠️ Derived]
   Topic 1: The Get Text Tool
   Topic 2: Handling Context Window Limits
   Topic 3: Limiting Tool Creation
 
-Section 8: Python FastMCP vs Node.js Boilerplate [⚠️ Derived]
+Video 8: Python FastMCP vs Node.js Boilerplate [⚠️ Derived]
   Topic 1: Code Size Comparison
   Topic 2: Generating the Node Equivalent
   Topic 3: The Node.js Boilerplate Problem
 
-Section 9: Final End-to-End Scenario Demonstration [⚠️ Derived]
+Video 9: Final End-to-End Scenario Demonstration [⚠️ Derived]
   Topic 1: Restarting for the Final Test
   Topic 2: The Complex Prompt
   Topic 3: Execution and JS Fallback
   Topic 4: Successful Completion
 
 📊 PHASE SUMMARY:
-Sections: 8 | Topics: 26 | Subtopics: 110
+Videos: 8 | Topics: 26 | Subtopics: 110
 
 ---
 
 📋 COMPLETE SKELETON INDEX
 
-Section 1: Introduction to Building an MCP Server [⚠️ Derived]
-  Topic 1: Course Section Introduction
+Video 1: Introduction to Building an MCP Server [⚠️ Derived]
+  Topic 1: Course Video Introduction
   Topic 2: What is Model Context Protocol?
   Topic 3: The USB-C Analogy
   Topic 4: Connecting to the World
@@ -9763,14 +9763,14 @@ Section 1: Introduction to Building an MCP Server [⚠️ Derived]
   Topic 10: Simple Calculator Code Preview
   Topic 11: Setting up a New Project
 
-Section 2: Installation of FastMCP [⚠️ Derived]
+Video 2: Installation of FastMCP [⚠️ Derived]
   Topic 1: Separating the Codebase
   Topic 2: FastMCP Documentation
   Topic 3: Creating a Virtual Environment
   Topic 4: Installing FastMCP via Pip
   Topic 5: Installing Playwright and Chromium
 
-Section 3: Writing the Basic FastMCP Code [⚠️ Derived]
+Video 3: Writing the Basic FastMCP Code [⚠️ Derived]
   Topic 1: Client-Server Connection Overview
   Topic 2: Cloud Desktop Existing Configurations
   Topic 3: Creating the Python File
@@ -9780,13 +9780,13 @@ Section 3: Writing the Basic FastMCP Code [⚠️ Derived]
   Topic 7: Testing the Server locally
   Topic 8: Converting FastMCP to Node.js & Boilerplate Complexity
 
-Section 4: Adding Toolings to the FastMCP Server [⚠️ Derived]
+Video 4: Adding Toolings to the FastMCP Server [⚠️ Derived]
   Topic 1: Writing the Calculator Functions
   Topic 2: The @mcp.tool() Decorator
   Topic 3: Node.js Tooling Complexity Comparison
   Topic 4: The Node.js Switch Statement Nightmare
 
-Section 5: Configuring and Invoking the Server in Claude Desktop [⚠️ Derived]
+Video 5: Configuring and Invoking the Server in Claude Desktop [⚠️ Derived]
   Topic 1: Opening Claude Desktop Settings
   Topic 2: Configuring the Simple Calculator
   Topic 3: Restarting Claude Desktop
@@ -9794,7 +9794,7 @@ Section 5: Configuring and Invoking the Server in Claude Desktop [⚠️ Derived
   Topic 5: Testing the MCP Server via Prompts
   Topic 6: Testing Subtraction
 
-Section 6: Building a File System Reader MCP Server [⚠️ Derived]
+Video 6: Building a File System Reader MCP Server [⚠️ Derived]
   Topic 1: Introduction to the File System Reader
   Topic 2: Setting up the File System Server
   Topic 3: Writing the read_file Tool & Using Environment Variables for Security
@@ -9802,7 +9802,7 @@ Section 6: Building a File System Reader MCP Server [⚠️ Derived]
   Topic 5: Reading and Returning Text
   Topic 6: Adding the list_files Tool
 
-Section 7: Running and Testing the File System Reader [⚠️ Derived]
+Video 7: Running and Testing the File System Reader [⚠️ Derived]
   Topic 1: Adding the Run Invocation
   Topic 2: Creating the Fallback Directory
   Topic 3: Configuring Claude Desktop with Env Variables & Setting Target Directory
@@ -9811,48 +9811,48 @@ Section 7: Running and Testing the File System Reader [⚠️ Derived]
   Topic 6: Listing Directories
   Topic 7: Reading Specific Files
 
-Section 8: Introduction to the Custom Playwright MCP Server [⚠️ Derived]
+Video 8: Introduction to the Custom Playwright MCP Server [⚠️ Derived]
   Topic 1: Building a Lightweight Server
   Topic 2: Purpose of the Custom Build
 
-Section 9: Setting Up Playwright and the Ensure Browser Method [⚠️ Derived]
+Video 9: Setting Up Playwright and the Ensure Browser Method [⚠️ Derived]
   Topic 1: Understanding Playwright API
   Topic 2: Initial Script Setup
   Topic 3: The ensure_browser Method
   Topic 4: Initializing Instances
 
-Section 10: Building the Navigate and Click Tools [⚠️ Derived]
+Video 10: Building the Navigate and Click Tools [⚠️ Derived]
   Topic 1: The Navigate Tool
   Topic 2: Decorating the Tool
   Topic 3: The Click Tool
   Topic 4: Running and Cleaning Up
 
-Section 11: Configuring and Testing in Claude Desktop [⚠️ Derived]
+Video 11: Configuring and Testing in Claude Desktop [⚠️ Derived]
   Topic 1: Configuring the Desktop Client
   Topic 2: First Execution Test
   Topic 3: Observing the Run
 
-Section 12: Adding Fill and Evaluate JavaScript Tools [⚠️ Derived]
+Video 12: Adding Fill and Evaluate JavaScript Tools [⚠️ Derived]
   Topic 1: The Fill Tool
   Topic 2: The Evaluate JS Tool
 
-Section 13: Adding Get Text and Page Utility Tools [⚠️ Derived]
+Video 13: Adding Get Text and Page Utility Tools [⚠️ Derived]
   Topic 1: The Get Text Tool
   Topic 2: Handling Context Window Limits
   Topic 3: Limiting Tool Creation
 
-Section 14: Python FastMCP vs Node.js Boilerplate [⚠️ Derived]
+Video 14: Python FastMCP vs Node.js Boilerplate [⚠️ Derived]
   Topic 1: Code Size Comparison
   Topic 2: Generating the Node Equivalent
   Topic 3: The Node.js Boilerplate Problem
 
-Section 15: Final End-to-End Scenario Demonstration [⚠️ Derived]
+Video 15: Final End-to-End Scenario Demonstration [⚠️ Derived]
   Topic 1: Restarting for the Final Test
   Topic 2: The Complex Prompt
   Topic 3: Execution and JS Fallback
   Topic 4: Successful Completion
 
 📊 SUMMARY:
-Total Sections: 15 | Total Topics: 71 | Total Subtopics: 330
+Total Videos: 15 | Total Topics: 71 | Total Subtopics: 330
 
 ==================================================================================
