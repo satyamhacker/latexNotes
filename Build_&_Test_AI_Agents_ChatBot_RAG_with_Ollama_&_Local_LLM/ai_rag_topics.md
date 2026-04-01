@@ -929,7 +929,7 @@ Declarative orchestration aur pipeline execution ka modern syntax. [⚠️ Deriv
 
 
 
-=====Video 3: String Parsing=====
+=====Video 3:chaining with StrOutputParser-- String Parsing=====
 Raw LLM objects se clean aur usable data nikalna. [⚠️ Derived]
 
 --3--String Parsing--
@@ -1186,7 +1186,7 @@ LangChain mein LLMs ke inherent stateless behavior (amnesia) ko overcome karke m
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ```
-=====Video 2: Project Setup & LCEL Core Integrations=====
+ Project Setup & LCEL Core Integrations=====
 Development environment ka secure setup, LangChain community modules ki installation, aur LCEL architecture ke through history pipe initialize karne ka practical workflow.
 
 --Video 2--Project Setup & LCEL Core Integrations--
@@ -2105,7 +2105,7 @@ Vectors ko fast similarity search ke liye optimize karke disk par save karna.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-### ===== Video 6: Retrieving from the Persistent Data Store [⚠️ Derived] =====
+Video 6: Retrieving from the Persistent Data Store [⚠️ Derived] =====
 
 **Overview:** Saved vectors se semantic search karke context nikalna aur system architecture refine karna.
 
@@ -2183,7 +2183,7 @@ Vectors ko fast similarity search ke liye optimize karke disk par save karna.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-### ===== Video 7: Using Retrievers in Langchain [⚠️ Derived] =====
+Video 7: Using Retrievers in Langchain [⚠️ Derived] =====
 
 **Overview:** Data sources aur Langchain chains ke beech ek universal bridge (Retriever) set up karna. [⚠️ Derived]
 
@@ -2306,7 +2306,6 @@ Pre-built chains ke bina, raw LCEL use karke custom RAG pipeline banana taaki fu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
-▶️ Resuming from: Video 9: Using Langchain Hub for Prompts [⚠️ Derived]
 
 =====Video 9: Using Langchain Hub for Prompts [⚠️ Derived]=====
 Community-vetted prompts ko use karke time bachana aur AI quality improve karna. [⚠️ Derived]
@@ -2337,7 +2336,6 @@ Community-vetted prompts ko use karke time bachana aur AI quality improve karna.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-▶️ Resuming from: Video 10: Using RetrievalQA Chain [⚠️ Derived]
 
 =====Video 10: Using RetrievalQA Chain [⚠️ Derived]=====
 Langchain ke pre-built tools se poori RAG pipeline ko automate karna. [⚠️ Derived]
@@ -2679,7 +2677,7 @@ Custom tools LangChain ka dil hain — inke bina LLM real-world actions nahi le 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-=====Video 4: Binding Tools to the Large Language Model [⚠️ Derived]=====
+=====Video 4: Binding custom Tools to the Large Language Model [⚠️ Derived]=====
 Tools aur LLM ko aapas mein connect karna taaki external execution ho sake. [⚠️ Derived]
 
 --4--Binding Tools to the Large Language Model--
@@ -2847,7 +2845,7 @@ Agent loop build karna jo actually tool ko run kare aur answer wapas laaye. [⚠
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-=====Video 6: Finalizing Execution and Generating LLM Responses [⚠️ Derived]=====
+=====Video 6: invoking all tolls from llm [⚠️ Derived]=====
 Data aane ke baad usko insaani bhasha mein synthesize aur format karna. [⚠️ Derived]
 
 --6--Finalizing Execution and Generating LLM Responses--
