@@ -204,7 +204,7 @@ Agar current topic mein koi concept aa raha hai jo pehle kisi aur topic/section 
 
 
 **Rules for this mode:**
-1. **17-point structure at TOPIC level.** Har point ke andar, saare relevant subtopics ko natural tarike se include karo — koi subtopic chhutna nahi chahiye.
+1. **19-point structure at TOPIC level.** Har point ke andar, saare relevant subtopics ko natural tarike se include karo — koi subtopic chhutna nahi chahiye.
 2. **Per-subtopic depth maintained within each point:**
    - **Point 7 (Hands-On):** EVERY code/command line comment se explain karo, har flag/argument ka matlab Hinglish mein batao. Har code block ke baad **📤 Expected Output** block zaroor do — koi shortcut nahi.
    - **Point 13 (Comparison):** Agar koi subtopic comparison maangta hai, woh table yahin aayega.
