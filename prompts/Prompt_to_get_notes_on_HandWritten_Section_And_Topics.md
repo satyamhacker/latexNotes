@@ -202,6 +202,10 @@ Agar current topic mein koi concept aa raha hai jo pehle kisi aur topic/section 
 
 **Activation:** Jab user ek **topic** deta hai jiske andar multiple subtopics hain, aur tumhe **ek hi comprehensive notes** banana hai (not separate per-subtopic chunks) — yeh mode apply karo. Is mode mein tum **19-point structure ko TOPIC level pe apply** karoge, aur saare subtopics ko relevant points ke andar naturally weave karoge.
 
+**❌ STRICTLY FORBIDDEN:** Consolidation Mode mein bhi — aur kisi bhi mode mein — output mein yeh line kabhi mat likho:
+`*(Consolidated Topic covering: SubtopicA, SubtopicB, SubtopicC, ...)*`
+Ya koi bhi aisi line jo subtopics ki list parentheses/italics mein dikhaye. Yeh internal processing detail hai — reader ke notes mein nahi aani chahiye. Seedha Point 1 (Subtopic Title) se shuru karo.
+
 
 **Rules for this mode:**
 1. **19-point structure at TOPIC level.** Har point ke andar, saare relevant subtopics ko natural tarike se include karo — koi subtopic chhutna nahi chahiye.
