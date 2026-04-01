@@ -319,8 +319,7 @@ Only if there's a close competitor or commonly confused concept (e.g., Jenkins v
 - **Fixing/Iteration Phase:** Us phase ke output ko dekh kar developer kya action leta hai — kya fix karta hai, kya tune karta hai.
 - **Live Production Phase:** Jab real user app use karta hai — tab is concept ka kya role hai?
 
-*(Agar concept ke liye yeh three-phase flow applicable nahi — toh jo bhi phases relevant hain woh dikhao, ya likho: `(N/A — is concept mein distinct offline/online phases nahi hoti)`)*
-
+*(CRITICAL RULE: Agar skeleton mein `REAL-WORLD FLOW SIGNAL` N/A hai ya missing hai, toh N/A mat likho! Context aur keywords ko use karke ek logical 3-phase real-world flow INFER karo aur likho. Har tech concept ka ek dev-to-prod lifecycle hota hi hai.)*
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 **Instruction:** Text-based architecture ya flow diagram — concept ka visual flow dikhao.
