@@ -226,6 +226,13 @@ Agar current topic mein koi concept aa raha hai jo pehle kisi aur topic/section 
 - **Philosophy:** "Explain the 'Why' before the 'How'."
 - **Success Indicator:** Screen par kya dikhna chahiye?
 
+**Nothing Assumed — ABSOLUTELY NOTHING:** Assume reader doesn't know ANYTHING. Not even basic terms like Server, Client, Variable, Port, API, ya Token.
+- Har naya technical word **pehli baar** aane pe IMMEDIATELY explain karna hai — inline, us hi line mein.
+- Example: Agar likho "It runs on the Server" — toh turant explain karo: `(Server matlab ek powerful computer jo 24/7 internet se connected rehta hai)`
+- **First-Time Term Rule:** Jab koi technical term pehli baar aaye — usse **bold** karo aur us ke baad parentheses mein 1-line Hinglish explanation do. Baad mein wahi term dobara aaye toh explain karne ki zaroorat nahi.
+
+**Special Characters Clarity:** Jab bhi code ya commands mein special characters aayein (`$`, `{}`, `[]`, `=>`, `|`, `&&`, `...`, `**`, `::`) — clearly batao inka naam aur kaam Hinglish mein. Beginners ko in symbols se darr lagta hai.\r\n- Example: `${PORT}` → \"Dollar-curly-braces — yeh environment variable ka value inject karta hai\"
+
 
 ---
 
