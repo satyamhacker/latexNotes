@@ -167,7 +167,7 @@ video--2--Why LangChain?--
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
- Video 3: LangChain's Ecosystem=====
+ Video 3:understanding LangChain's Ecosystem=====
 Core library se aage badhkar production-grade tracing aur agent routing ka ecosystem.
 
 video--3--LangChain's Ecosystem--
@@ -247,7 +247,7 @@ video--3--LangChain's Ecosystem--
 
 =====Section 3: Running Local Large Language Model (LLM) in local Machine with Ollama=====
 
-video 1---
+video 1---introduction--
 Local machine par open-source AI models ko securely host aur run karne ka foundational setup, hardware scaling, aur cost benefits.
 
 --3--Running Local Large Language Model (LLM) in local Machine with Ollama--
@@ -322,7 +322,7 @@ Local machine par open-source AI models ko securely host aur run karne ka founda
 =====Section 2: Choosing Models and Hardware Requirements=====
 Hardware constraints aur AI models ke parameters ka mathematical relationship aur architectural requirements.
 
-video--2--Choosing Models and Hardware Requirements--
+video--2---understanding llms to run in ollama--Choosing Models and Hardware Requirements--
 
   Topic 1: Model Parameters, Storage Sizing & Attention Architecture
     Subtopics: 100cc vs 5000cc Engine, Neural Network Weights, Biases, Parameter Counts, Hardware Capabilities Constraint, Reasoning Complexity, Matrix Multiplication, Ollama Run Specific Tag, 480p vs 4K Video, Storage Footprint Correlation, Unquantized FP16 Base Size, 4-bit Quantization Math, Disk Size Overhead, Ollama List Command, Disk Exhaustion Attack Risk, NVMe SSD Arrays, Event Management Analogy, Transformer Multi-Head Attention, Attention Heads, Key-Value Heads, Contextual Classifications, QKV Calculation, Tokenization, Grouped-Query Attention, Multi-Query Attention, Model Configuration Verification, Big Truck Analogy, Llama 3.1 405B vs DeepSeek, KV Cache Management, Tensor Parallelism
