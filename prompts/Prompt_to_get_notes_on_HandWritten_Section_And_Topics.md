@@ -236,12 +236,56 @@ Agar current topic mein koi concept aa raha hai jo pehle kisi aur topic/section 
 Agar response mein koi **Code Block** ya **Command** hai, toh ye rules follow karna compulsory hain:
 
 
+### 🔴 RULE ZERO — INLINE COMMENT FIRST (SABSE IMPORTANT RULE)
+
+**Yeh sabse critical rule hai — isse kabhi skip mat karo:**
+
+Har code block mein **har line ke saath inline comment** lagao jo us line ka har parameter, argument, flag, aur value explain kare. Reader ko code padhte waqt hi **turat** samajh aa jaana chahiye ki kya ho raha hai — neeche scroll karne ki zaroorat nahi honi chahiye.
+
+**Rules:**
+1. **Short explanation (1 line mein fit ho)** → Inline comment (`#`) ke through seedha us line ke bagal mein likho.
+2. **Long explanation (1 line mein fit na ho)** → Chhota sa inline comment lagao (jaise `# explained below ↓`) aur full explanation neeche **🔬 Code Explanation Rule (LINE-BY-LINE)** section mein do.
+3. **Har parameter/argument** explain hona chahiye — chahe woh `llm=`, `chain_type=`, `k=`, `temperature=`, ya koi bhi keyword argument ho.
+4. **Kabhi bhi ek bhi line bina comment ke mat chhodo** — even simple lines like `import os` ko `# OS module — file paths aur env variables ke liye` se tag karo.
+
+**❌ WRONG — Code bina inline comments ke (Beginner ko kuch samajh nahi aayega):**
+```python
+qa_bot = RetrievalQA.from_chain_type(
+    llm=llm,
+    chain_type="stuff",
+    retriever=retriever
+)
+```
+
+**✅ CORRECT — Har parameter inline explain ho raha hai:**
+```python
+qa_bot = RetrievalQA.from_chain_type(  # QA chain banao — retriever + LLM ko connect karta hai
+    llm=llm,                           # Kaunsa LLM use hoga (e.g., Ollama/GPT-4) — yeh answer generate karega
+    chain_type="stuff",                 # "stuff" = saare retrieved docs ek saath prompt mein daal do (simple, small docs ke liye best)
+    retriever=retriever                 # Vector DB se relevant docs search karne wala component — yeh context laata hai
+)
+```
+
+**✅ CORRECT — Jab explanation long ho (inline mein fit na ho):**
+```python
+agent = initialize_agent(              # Agent banao — explained below ↓
+    tools=tools,                       # Tools list — agent in tools mein se choose karega
+    llm=llm,                           # LLM brain — reasoning engine
+    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,  # Agent type — explained below ↓
+    verbose=True                       # Debug mode ON — har reasoning step console pe dikhega
+)
+```
+> **↓ Detailed Explanation (jo inline mein fit nahi hua):**
+> - `initialize_agent`: LangChain ka factory function — tools + LLM ko combine karke ek executable agent chain banata hai.
+> - `AgentType.ZERO_SHOT_REACT_DESCRIPTION`: ReAct pattern use karta hai — Thought → Action → Observation loop. "Zero-shot" matlab agent ko examples (few-shot) ki zaroorat nahi, sirf tool descriptions se kaam chalata hai.
+
+
 ### 🅰️ For Code Blocks (Line-by-Line Logic)
 
 Sirf code mat do, uska DNA khol kar rakh do:
 
-1. **Code Snippet:** (Standard formatting).
-2. **Line-by-Line Breakdown:**
+1. **Code Snippet:** Har line par inline comments ke saath (RULE ZERO follow karo — upar dekho).
+2. **Line-by-Line Breakdown (for complex lines):**
    - **Line #:** `The exact code`
    - **What it does:** (Simple Hinglish explanation).
    - **The "Why":** Why is this line specific to this architecture?
@@ -344,6 +388,8 @@ Use `(1) -> (2) -> (3)` flow to show state changes.
 #### 💻 7. Hands-On — Runnable Example
 Minimal but production-ready code. If the skeleton includes an example, incorporate it here.
 
+**🔴 INLINE COMMENT RULE (MOST IMPORTANT):** Har code line ke saath inline comment lagao jo us line ka har parameter, argument, aur value explain kare. Reader ko code padhte hi turat samajh aa jaye. (Full rule upar "RULE ZERO" mein hai — strictly follow karo.)
+
 **MANDATORY OUTPUT RULE:** Har code block, command, ya `print()` statement ke baad EXACTLY ye format mein expected output dikhao:
 ```
 # 📤 Expected Output:
@@ -355,9 +401,11 @@ Agar output nahi hai → `# 📤 Expected Output: (koi output nahi — successfu
 *(Agar purely theory topic hai — upar wala "Theory-Only Topic Rule" follow karo aur yeh section replace karo)*
 
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
-If code is present, break it down:
+##### 🔬 Code Explanation Rule (LINE-BY-LINE — For Complex Lines)
+Agar koi line ka explanation inline comment mein fit nahi hua (RULE ZERO ke point 2 ke mutabiq) — toh yahan detail mein explain karo:
 - **Line [X]:** What it does + **Why it's needed** + What happens if removed.
+- **Parameters:** Har parameter ka naam, type, possible values, aur default value explain karo.
+- **Return Value:** Function kya return karta hai — type aur meaning dono batao.
 
 
 #### 🖥️ Command Clarity Rule
