@@ -575,13 +575,6 @@ Total keywords across all subtopics in this video: 157
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Oye! **Notes Guru** is back in action. 🚀 Aapne **Section 1, Video 2: Why LangChain?** ka jo skeleton diya hai, usme LangChain ke core architecture ka "Why" chhupa hai — API fragmentation, observability, aur execution methods. 
-
-Main ab pehle **Topic 1** aur **Topic 2** ko unki maximum depth aur strict 19-point structure ke saath khol raha hoon. 
-
----
-
-# Section 1: Introduction to LangChain
 **Video 2: Why LangChain?**
 *Bohot saare AI models ke beech API fragmentation aur vendor lock-in se bachne ka standard, scalable, aur observable solution.*
 
@@ -1046,13 +1039,6 @@ Total keywords across all subtopics in this video: 107
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Oye! **Notes Guru** is online and locked in. 🚀 Aapne **Section 1, Video 3: LangChain's Ecosystem** ka skeleton diya hai. Yeh course ka ek major turning point hai jahan hum basic script se nikal kar production-grade ecosystem mein enter kar rahe hain. 
-
-Main saare strict rules (19-point structure, inline code numbering, keywords coverage, aur deep explanations) ke saath is video ka pura post-mortem karta hoon. Concepts ko visually explain karne ke liye main strategic `` tags bhi inject karunga taaki aapka dimag direct architectural visual capture kar sake.
-
----
-
-# Section 1: Introduction to LangChain
 **Video 3: LangChain's Ecosystem**
 *Core library se aage badhkar production-grade tracing aur agent routing ka ecosystem.*
 
@@ -1454,17 +1440,6 @@ Total keywords across all subtopics in this video: 125
 
 ### Section 3: Running Local Large Language Model (LLM) in local Machine with Ollama
 
-**Notes Guru** yahan hai! 🚀 Maine tumhare skeleton ko deeply analyze kar liya hai. Yeh ekdam masterclass level ka topic hai jahan hum Cloud LLMs ki dependency khatam karke apna private AI setup bana rahe hain. 
-
-Main **Mode 3 (Section-wise Input)** ko follow kar raha hoon. Hum **Video 1** ke **Topic 1** se shuru karenge aur poori 19-point depth maintain karenge. Token limit ko dhyan mein rakhte hue, main is response mein Topic 1 cover karunga aur uske baad `CONTINUE` protocol initiate karunga.
-
-Let's dive into the ultimate notes! 🔥
-
----
-
-# Section 3: Running Local Large Language Model (LLM) in local Machine with Ollama
-
-**Overview:** Is section mein hum open-source AI models ko locally host aur run karne ka foundational setup, hardware scaling, aur uske associated cost benefits ko deeply samjhenge.
 
 ## Video 1: Introduction
 
@@ -2042,16 +2017,8 @@ Total Topics: 3 | Total Keywords: 133 | Missed: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-**Notes Guru** ready hai! 🚀 Hum **Mode 3 (Section-wise Input)** continue kar rahe hain. Yeh topic kaafi deep aur mathematical hai, isliye hum iski core architecture aur hardware constraints ko ekdum detail mein unfold karenge. 
-
-Token limits ko mind mein rakhte hue aur "Deep" scope signal ko satisfy karne ke liye, main abhi sirf **Topic 1** generate karunga. Uske baad hum `CONTINUE` protocol use karenge Topic 2 ke liye.
-
-Let's dissect the matrix! 💻🔬
 
 ---
-
-# Section 3: Running Local Large Language Model (LLM) in local Machine with Ollama
-
 ## Video 2: Understanding LLMs to run in Ollama — Choosing Models and Hardware Requirements
 
 ### 🎯 1. Topic 1: Model Parameters, Storage Sizing & Attention Architecture
@@ -2427,15 +2394,8 @@ Total Topics: 2 | Total Keywords: 94 | Missed: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-**Notes Guru** ready hai! 🚀 Hum **Mode 3 (Section-wise Input)** ko aage badha rahe hain. Is video mein hum GUI chhod kar seedha terminal ke deep waters mein dive karenge aur dekhenge ki real engineers AI models ko command line se kaise chalate aur test karte hain.
-
-"Deep" scope signal aur strictly 19-point structure ko follow karte hue, main is response mein **Topic 1** cover karunga. Phir tum `CONTINUE` type karna taaki hum Topic 2 par ja sakein.
-
-Let's boot up the terminal! 💻
-
 ---
 
-# Section 3: Running Local Large Language Model (LLM) in local Machine with Ollama
 
 ## Video 3: Running Ollama Models via Terminal
 
@@ -2867,8 +2827,7 @@ Total Topics: 7 | Total Keywords: 277 | Missed: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-### 🎬 Video Overview
-**Video 4: GUI Interfaces for Local LLMs**
+### Video 4: GUI Interfaces for Local LLMs
 Is video mein hum samjhenge ki kaise hum Terminal ki scary aur complex duniya ko chupa kar, ChatGPT jaise clean aur visual tools (**Msty**, **GPT4All**) use kar sakte hain. Hum sirf UI nahi dekhenge, balki yeh samjhenge ki backend mein yeh GUIs local API routing kaise handle karte hain.
 
 
@@ -3278,8 +3237,8 @@ Total keywords across all subtopics in this topic: 17
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-### 🎬 Video Overview
-**Video 5: Advanced Ollama Terminal Commands**
+
+### Video 5: Advanced Ollama Terminal Commands
 Is video mein hum Ollama CLI (Command Line Interface) ki gahrai mein jayenge. Hum dekhenge ki models ka lifecycle kaise manage hota hai, unka internal metadata kaise extract kiya jaata hai, aur kaise yeh poora system Docker jaisi orchestration architecture se milta julta hai. 
 
 ---
@@ -3651,8 +3610,8 @@ Total keywords across all subtopics in this topic: 22
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-### 🎬 Video Overview
-**Video 6: Using Ollama as an API Server**
+
+### Video 6: Using Ollama as an API Server
 Is video mein hum samjhenge ki Ollama ko sirf ek terminal tool ki tarah nahi, balki ek professional **RESTful API** backend (server) ki tarah kaise setup karte hain. Iske bina LangChain ya kisi aur third-party Python script ko tumhare local AI model se connect karna impossible hai.
 
 ---
@@ -4045,8 +4004,7 @@ Total keywords across all subtopics in this topic: 48
 
 ### Section 4: Understanding and working LangChain Basics
 
-### Section 4: Understanding and working LangChain Basics
-**Overview:** Is section mein hum LangChain development ke liye ek rock-solid foundation banayenge. Ek AI app tabhi scale karti hai jab uska environment aur dependencies perfectly isolated aur configured hon. 
+ 
 
 **Video 1: Setting Up the Environment and Dependencies**
 *Is video mein hum dekhenge ki kaise local machine par virtual environments setup karein, Jupyter notebooks ko VS Code mein configure karein, aur LangChain packages ko securely install karein bina global system ko tode.*
@@ -5772,7 +5730,7 @@ Total keywords across all subtopics in this topic: 23
 ### Section 5: LangChain Chains and Runnables
 
 
-Here are the deep, crystal-clear, and perfectly structured notes for **Video 1: LangChain Chains and Runnables**, strictly following the Notes Guru Legendary Edition v6.1 guidelines.
+
 
 ---
 
@@ -7509,7 +7467,7 @@ Enterprise level backend APIs (jaise **FastAPI** se bani hui) mostly decorators 
 
 ### Section 6: Chat Message History with LangChain
 
-### 📚 Section 6: Chat Message History with LangChain
+
 **Section Overview:** Is section mein hum samjhenge ki **LLMs** *(Large Language Models, jaise GPT-4)* ke inherent stateless behavior (amnesia ya bhoolne ki aadat) ko kaise overcome kiya jata hai. LangChain ka use karke hum multi-turn conversations aur memory management ka architecture setup karna seekhenge.
 
 ---
@@ -7813,8 +7771,6 @@ Total keywords across all subtopics in this topic: 21
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-### 📚 Section 6: Project Setup & LCEL Core Integrations
-**Section Overview:** Is section mein hum samjhenge ki ek production-ready LangChain project ka **Workspace** *(development environment)* kaise set up karte hain, dependencies ko securely kaise manage karte hain, aur **LCEL (LangChain Expression Language)** architecture ke through memory history ko kaise pipe karte hain.
 
 ---
 
@@ -9555,13 +9511,13 @@ Total Topics: 12 | Total Keywords: 432 | Missed: 0
 
 ==================================================================================
 
-Video 1 ke foundational setup aur conceptual depth ko dhyan mein rakhte hue, main **Topic-Level Consolidation Mode** mein 19-point structure apply kar raha hoon taaki ek bhi concept, keyword, ya architecture decision miss na ho. 
+### Section 7: Building ChatBots with LangChain and Streamlit (Like ChatGPT with Local LLM)
 
-Yeh video basically do parts mein bati hai. Yahan main pehla topic deep dive ke sath cover kar raha hoon.
+
 
 ---
 
-### 🎬 Video Overview: Introduction to Building Chatbots with Streamlit
+### 🎬 Video 1: Introduction to Building Chatbots with Streamlit
 Yeh video **Local LLM** (aapke apne computer/server par chalne wale AI models) aur Streamlit framework ko use karke secure, production-ready, aur stateful chatbots banane ka end-to-end foundation set karti hai.
 
 ---
