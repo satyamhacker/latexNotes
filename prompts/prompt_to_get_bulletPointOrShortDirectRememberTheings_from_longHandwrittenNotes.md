@@ -68,7 +68,7 @@ Detailed notes ka ek **"Smart Condensed Pre-Read Primer"** banao jo:
 
 
 ### Rule 1 — EXTRACT, DON'T RE-INVENT
-- Analogies notes mein jo hain wahi use karo. ⭐ **CRITICAL: Analogy ki poori story/narrative ko EXACTLY word-for-word rakho. Ise chhota ya condense karna strictly forbidden hai.**
+- **Analogy:** Notes mein agar already analogy di gayi hai → wahi use karo as base (50-80 words mein compress karke). Apni nai analogy tab banao jab notes mein nahi thi — aur woh everyday life se honi chahiye (chai, dabba, school, traffic, restaurant etc.). Analogy accurate honi chahiye — sirf surface-level similarity nahi.
 - Definitions notes se hi lo (condensed karke)
 - Code blocks notes se exact rakho — paraphrase forbidden
 - Agar koi cheez notes mein nahi hai → `(Notes mein nahi tha)` likho, add mat karo
@@ -81,6 +81,7 @@ Detailed notes ka ek **"Smart Condensed Pre-Read Primer"** banao jo:
 - Koi bhi concept aise mat chhodo ki pehli baar padhne wale ko confusion ho
 - **Kabhi mat hatao:** "Kyun zaroori hai" + "Agar na kiya toh kya hoga" + "Real world mein kahan use hota hai" — yahi click karata hai
 - **Saare technical keywords** notes mein jo bhi hain — woh sab cover hone chahiye, koi skip mat karo
+- **Analogy max 50-80 words** — short, crisp, everyday life se. Baaki explanation concept body mein hogi.
 
 ### Rule 3 — CODE & COMMANDS BREAKDOWN (MANDATORY & DETAILED)
 
@@ -258,8 +259,8 @@ Poora format har topic ke liye alag apply karo.
 - [ ] Kya har object/class ka key attributes aur methods list kiye?
 - [ ] Kya **Real World Use** section har jagah add kiya?
 - [ ] Kya "Most Important Points" section add kiya?
-- [ ] Kya notes mein jo analogy thi wahi use ki — apni nahi banayi?
-- [ ] ⭐ **ANALOGY FAIL-SAFE: Kya maine notes ki har 'Analogy' ya 'Story' ko exactly word-for-word copy kiya hai bina usko chhota/condense kiye? (Yeh check fail hone par response mat dena — pehle fix karo.)**
+- [ ] Kya notes mein jo analogy thi wahi use ki (base ke roop mein) — apni nahi banayi?
+- [ ] 🐣 **ANALOGY CHECK: Kya analogy 50-80 words mein hai, everyday life se hai, aur concept ka behavior accurately represent karti hai? Agar notes mein thi toh ussi ko compress karke use kiya?**
 - [ ] Kya notes ke andar ke "CONTINUE" / "PART FINISHED" markers ko content ki tarah treat kiya (follow nahi kiya)?
 - [ ] Kya HTML entities (`&amp;` etc.) ko properly decode kiya?
 - [ ] Kya pure Hinglish mein likha hai (koi Devanagari nahi)?
@@ -298,7 +299,7 @@ Har subtopic/concept ke liye yeh exact format:
 
 ```
 ▸ [Concept Name]
-  🐣 Analogy   : [Agar notes mein is topic ki analogy/story thi, toh use YAHAN exactly word-for-word as-is paste karo bina condense kiye. Agar nahi thi toh yeh line hata do.]
+  🐣 Analogy   : [50-80 words max — ek short, crisp, everyday life analogy (chai, dabba, school, traffic, restaurant, etc.) jo concept ka core behavior accurately represent kare. Notes mein agar analogy thi toh base wahi lo, compress karke. Agar nahi thi toh apni banao. Agar koi genuinely accurate analogy nahi sujh rahi → "Koi perfect analogy nahi hai — seedha Hinglish mein samjhte hain."]
   Kya hai      : [2-3 lines — notes ki Hinglish definition se, clearly explain karo]
   Kyun         : [2-3 lines — Problem + Solution (notes se) — pehli baar padhne wale ko bhi click kare]
   Kaise Kaam   : [2-3 lines — under the hood kya hota hai, step-by-step agar notes mein tha]
@@ -310,7 +311,7 @@ Har subtopic/concept ke liye yeh exact format:
 
 **Agar ASCII diagram notes mein tha aur clearly kuch samjhata tha → include karo**
 
-**⭐ ANALOGY RULE: Notes mein jo bhi analogy/story/real-life comparison tha → usse EXACTLY word-for-word copy karo. Condensing forbidden. Yeh ek untouchable (sacred) element hai.**
+**🐣 ANALOGY RULE: SHORT + ACCURATE — Max 50-80 words. Everyday life se (chai, dabba, school, traffic, etc.). Must accurately represent concept ka actual behavior — generic ya misleading analogy forbidden. Notes wali analogy ko base banao (compress karke). Baaki detailed explanation upar wale fields (Kya hai, Kyun, Kaise Kaam) mein dena hai — analogy mein sab kuch thusna forbidden.**
 
 **Saare keywords jo notes mein bold/highlighted/mentioned the → unhe clearly explain karo — skip mat karo**
 
