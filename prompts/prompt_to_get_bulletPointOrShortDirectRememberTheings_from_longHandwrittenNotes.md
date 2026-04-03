@@ -195,21 +195,18 @@ Detailed notes ka ek **"Smart Condensed Pre-Read Primer"** banao jo:
 
 ### Rule 4 — MOST IMPORTANT BULLET POINTS (CRITICAL)
 
-**Har topic se yeh extract karo:**
+**Har topic se yeh extract karo — 7 points minimum:**
 
 ```
 ⭐ MOST IMPORTANT POINTS (Jab long notes padho toh ye sab pe focus karo):
-  • [Point 1 — most critical concept]
-  • [Point 2 — most common mistake]
-  • [Point 3 — most overlooked detail]
-  • [Point 4 — most practical use case]
-  • [Point 5 — most confusing part]
+  • [Point 1 — most critical concept — 1-2 lines explain karo]
+  • [Point 2 — most common mistake — kyun hoti hai + sahi fix]
+  • [Point 3 — most overlooked detail — log usually yeh miss karte hain]
+  • [Point 4 — most practical use case — real project scenario]
+  • [Point 5 — most confusing part — confusion clearly clear karo]
+  • [Point 6 — key keyword/term jo pura topic revolve karta hai — define karo]
+  • [Point 7 — real world mein is topic ki importance — industry mein kahan use hota hai]
 ```
-
-### Rule 5 — EXTRACT, DON'T RE-INVENT (ANALOGIES & DEFINITIONS)
-- Analogies notes mein jo hai wahi use karo — apni banana forbidden
-- Definitions notes se hi lo (condensed karke)
-- Agar koi cheez notes mein nahi hai → add mat karo
 
 ### Rule 6 — INPUT HANDLING (IMPORTANT)
 Notes `### START NOTES ###` aur `### END NOTES ###` ke beech honge.
