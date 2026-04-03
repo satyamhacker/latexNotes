@@ -88,6 +88,7 @@ Notes Guru / TechGuru notes mein already sab kuch hai. Tumhara kaam **best parts
 
 - Agar notes mein CLI commands hain → summary table mein capture karo
 - Agar notes mein code nahi tha → `(Is topic mein koi code nahi tha)` likho
+- **Section 3C mandatory:** Topic ke **saare important functions, objects, classes** ka ek scannable overview table banana hai — sirf ek snippet pe mat rukna. Yeh table practical karte time instant recognition ke liye hai.
 
 ### Rule 4 — SOURCE-AWARE EXTRACTION
 Notes Guru / TechGuru notes mein specific numbered sections hote hain. In sections se extract karo:
@@ -227,6 +228,21 @@ Har subtopic/concept ke liye yeh exact format:
 | 🔴/🟡 | `[command]` | `[flags]` | [1-line Hinglish] | [consequence] |
 
 *(Agar code/commands notes mein nahi the: `(Is topic mein koi code/command nahi tha)`)*
+
+---
+
+**3C — Key Functions / Objects / Classes at a Glance** *(Topic ke saare important elements — instant recognition ke liye)*
+
+> **Kyun zaruri hai yeh table:** Jab practical karoge ya koi aur code dekhoge — yeh table dekh ke turant pata chal jayega ki yeh cheez kya karti hai aur main kab use karunga.
+
+| Name | Type | Kya karta hai (1 line Hinglish) | Practical mein kab milega |
+|------|----|-------------------------------|---------------------------|
+| `[FunctionName]` | Function | [notes se — 1 line kya karta hai] | [kab call/use hoga] |
+| `[ClassName]` | Class/Object | [notes se — 1 line kya represent karta hai] | [kab banoga/use hoga] |
+| `[MethodName]` | Method | [notes se — 1 line] | [kis object pe call hoga] |
+| `[ConstantOrKey]` | Constant/Key | [notes se — 1 line] | [kahan pass hoga] |
+
+*(Agar notes mein sirf ek function/object tha → woh bhi table mein daal do. Table skip karna forbidden.)*
 
 ---
 
