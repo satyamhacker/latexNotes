@@ -19648,3 +19648,1623 @@ to be doing in our next section.
 section 7. Using Self Healing Locator in Page Object Model code of Selenium
 
 
+video 1.introduction
+
+1
+00:00:02,560 --> 00:00:04,520
+Welcome to the next section of our course.
+
+2
+00:00:04,520 --> 00:00:10,680
+And in this section we are going to talk about how we can build a page object model code with the self-healing
+
+3
+00:00:10,720 --> 00:00:11,280
+approach.
+
+4
+00:00:11,760 --> 00:00:16,200
+This particular section is going to be very, very small section in this entire course, because we
+
+5
+00:00:16,240 --> 00:00:23,160
+are just going to reuse the existing logics and approaches that we have already built in our existing
+
+6
+00:00:23,160 --> 00:00:23,480
+code.
+
+7
+00:00:23,520 --> 00:00:25,680
+That's what we are going to be doing over here.
+
+8
+00:00:25,800 --> 00:00:28,120
+So let's see how we can start doing it.
+
+9
+00:00:28,560 --> 00:00:34,960
+Well, as I said, you know that we have already written our page object model code, something like
+
+10
+00:00:34,960 --> 00:00:38,520
+this earlier for the home page, for the login page.
+
+11
+00:00:38,520 --> 00:00:45,800
+And we have got everything over here and we already have tested the same with the self-healing approach
+
+12
+00:00:45,800 --> 00:00:47,800
+in the enhanced test already.
+
+13
+00:00:47,800 --> 00:00:49,760
+And it's just working fine.
+
+14
+00:00:50,160 --> 00:00:52,000
+So everything is just going to work.
+
+15
+00:00:52,000 --> 00:00:59,240
+Only thing is, now we need to replace our existing page object model code with the new code that we
+
+16
+00:00:59,240 --> 00:01:02,040
+have written, which is the self-healing locator code.
+
+17
+00:01:02,300 --> 00:01:04,060
+So how can I actually do it?
+
+18
+00:01:04,100 --> 00:01:04,980
+Well guess what?
+
+19
+00:01:04,980 --> 00:01:13,460
+You can use a dirty way of doing it where you can just call the self-healing class over here and then
+
+20
+00:01:13,460 --> 00:01:17,100
+perform this operation, which is kind of pain in the butt.
+
+21
+00:01:17,420 --> 00:01:22,820
+Instead, you can write what is called as an extension method in C sharp dotnet to do it.
+
+22
+00:01:23,580 --> 00:01:31,140
+Well, extension method in C sharp are a way where you can extend a type without recompiling your existing
+
+23
+00:01:31,180 --> 00:01:31,700
+type.
+
+24
+00:01:31,940 --> 00:01:38,780
+What I really mean about that is if you see the driver is nothing, but the web driver type has got
+
+25
+00:01:38,780 --> 00:01:41,620
+a finite element method right?
+
+26
+00:01:41,780 --> 00:01:48,900
+I wanted to create a similar finite element method, but just that it is going to be for our customized
+
+27
+00:01:48,900 --> 00:01:58,300
+version of it, which is going to in turn call the, uh, the enhanced AI based finite element that
+
+28
+00:01:58,300 --> 00:01:59,860
+we have got just this guy.
+
+29
+00:01:59,860 --> 00:02:01,140
+This is what it's going to be calling.
+
+30
+00:02:01,140 --> 00:02:05,090
+If I'm going to call the extension method, I'll tell you what I really mean about that.
+
+31
+00:02:05,250 --> 00:02:15,090
+So I'm going to go in the utilities over here, and I'm going to create a class as web driver extensions,
+
+32
+00:02:15,250 --> 00:02:16,210
+something like that.
+
+33
+00:02:20,330 --> 00:02:25,530
+And in this particular web driver extension I want to make this particular class as static.
+
+34
+00:02:25,810 --> 00:02:31,450
+And I'm going to make a method which is also going to be a static.
+
+35
+00:02:31,650 --> 00:02:39,770
+And it is going to return me an async of task of I web element over here.
+
+36
+00:02:39,970 --> 00:02:40,210
+Right.
+
+37
+00:02:40,210 --> 00:02:41,650
+That is what it is going to be returning.
+
+38
+00:02:42,010 --> 00:02:50,730
+And it's also called as find element method, where in this find element method you are going to be
+
+39
+00:02:50,730 --> 00:02:51,410
+passing.
+
+40
+00:02:51,890 --> 00:03:00,250
+And this of I web element sorry web driver, because you are going to be extending the existing I web
+
+41
+00:03:00,250 --> 00:03:04,130
+driver type over here as web driver.
+
+42
+00:03:04,670 --> 00:03:12,150
+and you are going to be passing the by type over here, which is going to be off by.
+
+43
+00:03:12,310 --> 00:03:13,070
+Which is fine.
+
+44
+00:03:14,110 --> 00:03:14,390
+Right.
+
+45
+00:03:14,390 --> 00:03:17,790
+This is what this particular method is going to do over here.
+
+46
+00:03:18,230 --> 00:03:24,110
+And while this method does exist for us over here, uh, you can now perform the rest of the operation
+
+47
+00:03:24,110 --> 00:03:27,830
+that we have already written in the enhanced test.
+
+48
+00:03:27,870 --> 00:03:30,910
+This one, you remember the same exact operation.
+
+49
+00:03:30,910 --> 00:03:35,150
+I'm going to copy this particular code and paste it over here.
+
+50
+00:03:35,550 --> 00:03:40,270
+And instead of the driver, I'm going to say, uh, web driver.
+
+51
+00:03:40,630 --> 00:03:45,390
+And instead of the element over here I can just pass the by type there.
+
+52
+00:03:45,950 --> 00:03:46,670
+That's it.
+
+53
+00:03:46,670 --> 00:03:51,470
+This is all I have to pass for the self-healing locator class, because that is what it is actually
+
+54
+00:03:51,470 --> 00:03:53,950
+looking for as well for us over here.
+
+55
+00:03:54,550 --> 00:03:55,070
+Right?
+
+56
+00:03:55,230 --> 00:03:57,110
+So we have passed that.
+
+57
+00:03:57,550 --> 00:04:00,470
+And then I am going to find the element.
+
+58
+00:04:00,470 --> 00:04:07,500
+I'm going to return that particular element that I have found using the AI that we have done.
+
+59
+00:04:07,500 --> 00:04:14,620
+So this is going to be in turn calling the find element async method, which we have already built earlier
+
+60
+00:04:14,620 --> 00:04:16,020
+in our last section.
+
+61
+00:04:16,260 --> 00:04:18,220
+That's what we are doing over here.
+
+62
+00:04:19,140 --> 00:04:25,180
+I know I'm just running very, very quickly, but this is just very, very simple way of how you can
+
+63
+00:04:25,180 --> 00:04:26,220
+actually do that.
+
+64
+00:04:26,660 --> 00:04:33,460
+See, you have got everything over here this time because now this particular element extension is going
+
+65
+00:04:33,460 --> 00:04:36,740
+to do things for you, which is quite fabulous.
+
+66
+00:04:37,420 --> 00:04:44,140
+And once you have this approach over here, then you can use this find element and then start using
+
+67
+00:04:44,140 --> 00:04:46,660
+it in the page object model code and start doing it.
+
+68
+00:04:46,660 --> 00:04:51,820
+But before I actually do that, I also noticed that this particular utilities over here is kind of very,
+
+69
+00:04:51,820 --> 00:04:52,900
+very confusing.
+
+70
+00:04:53,100 --> 00:04:58,820
+We will first of all, fix this utilities in such a way that it can make more sense while we read it
+
+71
+00:04:58,820 --> 00:05:01,020
+through in a folder structure.
+
+72
+00:05:01,020 --> 00:05:07,820
+And then we can use this find element within our page object model code in our next lectures.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 2. Organizing code as Framework folder structure
+
+1
+00:00:00,160 --> 00:00:00,880
+All right.
+
+2
+00:00:00,880 --> 00:00:06,280
+As I told you, we are going to first organize the folder structure a bit in the utilities because it
+
+3
+00:00:06,280 --> 00:00:08,360
+goes way beyond out of control.
+
+4
+00:00:08,560 --> 00:00:11,320
+So I'm going to add a directory over here.
+
+5
+00:00:11,320 --> 00:00:18,920
+And I'm going to call this as uh extensions, which is basically like the web driver extensions.
+
+6
+00:00:18,920 --> 00:00:24,360
+And this extension is going to have the web driver, uh, element extension or whatever.
+
+7
+00:00:24,360 --> 00:00:26,720
+So this is what this particular guy is going to be.
+
+8
+00:00:26,960 --> 00:00:30,600
+And I'm going to move the namespace to this particular folder.
+
+9
+00:00:30,880 --> 00:00:33,840
+That's what this particular extensions folder is going to have.
+
+10
+00:00:34,440 --> 00:00:42,440
+And all of these as you are seeing over here are related to the large language model, uh, itself,
+
+11
+00:00:42,800 --> 00:00:47,160
+which is these as you are going to see over here, because this is dealing with the client, which is
+
+12
+00:00:47,160 --> 00:00:51,000
+specifically doing the, uh, LMS operation.
+
+13
+00:00:51,000 --> 00:00:54,720
+And the LMS configuration is the configuration model that we have.
+
+14
+00:00:54,920 --> 00:00:58,520
+And the locator suggestion is also a locator model that we have.
+
+15
+00:00:58,520 --> 00:01:00,960
+So these two are essentially a model.
+
+16
+00:01:00,960 --> 00:01:05,280
+So we can now create a directory called as models.
+
+17
+00:01:05,520 --> 00:01:12,840
+And we can move the config and the LMS suggestion on that particular model for us over there.
+
+18
+00:01:13,200 --> 00:01:19,320
+And the moment we do it see now it is getting more and more meaningful for us over there, because now
+
+19
+00:01:19,320 --> 00:01:25,630
+they're all sitting, uh, under the models because these both are essentially models.
+
+20
+00:01:25,630 --> 00:01:32,830
+So we can move there and there may be an error somewhere here if they have not figured out automatically.
+
+21
+00:01:32,870 --> 00:01:34,470
+Yeah, there is no error, which is great.
+
+22
+00:01:35,030 --> 00:01:40,230
+And the last one is the, uh, get locator from the LMS.
+
+23
+00:01:40,270 --> 00:01:43,430
+And the LMS client and the self-healing locator.
+
+24
+00:01:43,470 --> 00:01:48,430
+These are all related to the, uh, the AI as well as the LMS.
+
+25
+00:01:48,590 --> 00:01:55,870
+So I'm just going to say, uh, LMS over here so that we can have all of these on that particular folder.
+
+26
+00:01:55,870 --> 00:01:58,230
+So I'm going to go and put that over there.
+
+27
+00:01:58,430 --> 00:02:03,830
+And you see that now this naming conventions are going to be uh, more and more better.
+
+28
+00:02:03,870 --> 00:02:09,430
+It is also going to be more readable this time because they're all sitting on a specific folder.
+
+29
+00:02:09,430 --> 00:02:13,710
+So it's going to be easy for us to read through as well, which is quite amazing.
+
+30
+00:02:13,750 --> 00:02:16,270
+So let me just go and fix this particular namespace.
+
+31
+00:02:16,910 --> 00:02:17,790
+That's pretty good.
+
+32
+00:02:17,990 --> 00:02:19,030
+So everything moved.
+
+33
+00:02:19,230 --> 00:02:22,110
+See now these are all quite better organized.
+
+34
+00:02:22,150 --> 00:02:25,070
+So extensions we're going to have it here an LMS.
+
+35
+00:02:25,070 --> 00:02:26,190
+We're going to have it here.
+
+36
+00:02:26,310 --> 00:02:26,990
+Models.
+
+37
+00:02:26,990 --> 00:02:28,270
+We're going to have it here.
+
+38
+00:02:28,270 --> 00:02:30,670
+So this is better structure to be honest.
+
+39
+00:02:30,670 --> 00:02:33,630
+So we have done this structure as well right now.
+
+40
+00:02:33,790 --> 00:02:41,030
+And the last operation is to see how we can use this particular uh element extension that we have built,
+
+41
+00:02:41,030 --> 00:02:47,390
+which is the find element method within our home page, and see how that can be modified.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 3. Using Extension method to use the AIFindElement
+
+1
+00:00:00,160 --> 00:00:01,080
+All right.
+
+2
+00:00:01,440 --> 00:00:06,840
+The last operation that we have to do right now is to use this finite element method within our home
+
+3
+00:00:06,840 --> 00:00:07,320
+page.
+
+4
+00:00:07,320 --> 00:00:10,920
+We have a lot of things to get to this particular point.
+
+5
+00:00:10,920 --> 00:00:12,880
+So let's see how we could able to achieve it.
+
+6
+00:00:12,920 --> 00:00:19,120
+Well, in order to achieve this particular operation you are going to make certain changes to your code.
+
+7
+00:00:19,160 --> 00:00:19,840
+Well guess what?
+
+8
+00:00:20,240 --> 00:00:26,920
+Instead of the eye web element type that you have got, you need to use the task of eye web element
+
+9
+00:00:26,920 --> 00:00:27,800
+moving forward.
+
+10
+00:00:27,800 --> 00:00:28,480
+You know why?
+
+11
+00:00:28,720 --> 00:00:35,200
+Because you see that we have got this element extension, uh, with the find element, which is returning
+
+12
+00:00:35,240 --> 00:00:37,560
+a task of eye web element.
+
+13
+00:00:37,880 --> 00:00:40,000
+That's what we need to return as well.
+
+14
+00:00:40,000 --> 00:00:43,000
+So that's going to change for us in the home page.
+
+15
+00:00:43,000 --> 00:00:45,120
+So we're going to change it something like this.
+
+16
+00:00:45,320 --> 00:00:52,600
+And instead of the find element method that we have got over here, we are going to be uh using the
+
+17
+00:00:52,600 --> 00:00:59,080
+similar find element, but not from here but from this guy.
+
+18
+00:00:59,320 --> 00:01:00,120
+But now what.
+
+19
+00:01:00,120 --> 00:01:04,440
+I try to use this particular find element from this particular extension.
+
+20
+00:01:04,680 --> 00:01:06,160
+This is still not going to work.
+
+21
+00:01:06,200 --> 00:01:11,790
+You see that while I tried to go and click this, uh, to go to the implementation of this particular
+
+22
+00:01:11,790 --> 00:01:12,590
+find element.
+
+23
+00:01:12,590 --> 00:01:20,190
+It is going to go and take me to the I search context of the find element of the selenium code itself.
+
+24
+00:01:20,190 --> 00:01:26,670
+So it's not really going to work there because this extension method is not going to take into precedence.
+
+25
+00:01:27,110 --> 00:01:29,190
+So how do we resolve this particular problem?
+
+26
+00:01:29,230 --> 00:01:29,950
+Well guess what.
+
+27
+00:01:29,990 --> 00:01:35,030
+Because they both the names of both of them has got the same definition.
+
+28
+00:01:35,070 --> 00:01:35,590
+See it.
+
+29
+00:01:35,590 --> 00:01:38,150
+Both take the same parameter like by type.
+
+30
+00:01:38,670 --> 00:01:43,670
+And the one that we wrote also takes the byte type as the parameter.
+
+31
+00:01:43,910 --> 00:01:45,910
+This code is not going to work.
+
+32
+00:01:45,910 --> 00:01:47,510
+So you have two options.
+
+33
+00:01:47,510 --> 00:01:54,870
+One is add additional parameter to make it happen, or you try to change the name of the find element
+
+34
+00:01:54,870 --> 00:01:56,830
+to the way that you wanted to use it.
+
+35
+00:01:56,830 --> 00:02:03,710
+So you can just say driver dot find element to make that even more better if you wanted to keep that
+
+36
+00:02:03,710 --> 00:02:04,110
+way.
+
+37
+00:02:04,230 --> 00:02:06,590
+So that way it could be even more easier.
+
+38
+00:02:06,590 --> 00:02:11,350
+So you can just say AI find element.
+
+39
+00:02:11,350 --> 00:02:17,730
+So this method will now be identified using an AI find element instead of the find element that you
+
+40
+00:02:17,730 --> 00:02:18,330
+have got.
+
+41
+00:02:18,370 --> 00:02:20,890
+See, this code is just going to work.
+
+42
+00:02:21,090 --> 00:02:26,890
+So the reason why this is not working is because if your method name, as well as the extension name
+
+43
+00:02:26,890 --> 00:02:34,050
+that you have got, are of same signature as the compiled version of the find element over here, it
+
+44
+00:02:34,050 --> 00:02:35,450
+is not going to work.
+
+45
+00:02:35,570 --> 00:02:40,810
+I just want to prove the point that you can't have the same name over there, and that's the reason
+
+46
+00:02:40,810 --> 00:02:43,290
+why you can't do it over here as well.
+
+47
+00:02:44,050 --> 00:02:50,930
+So you just need to modify the code in such a way that the name of the method is different.
+
+48
+00:02:51,090 --> 00:02:57,570
+So the way you can do it, as I told you, is go and change the name of the method, or have an additional
+
+49
+00:02:57,570 --> 00:03:03,970
+parameter so that it's different from the signature of the original find element in the eye search context
+
+50
+00:03:03,970 --> 00:03:04,770
+over here.
+
+51
+00:03:04,890 --> 00:03:09,450
+So I'm not going to go to the later approach, but I'm going to go with the first approach which is
+
+52
+00:03:09,450 --> 00:03:10,690
+changing the name.
+
+53
+00:03:10,690 --> 00:03:17,650
+So I'm going to say I find element here, and I'm going to do the exact same thing here as well.
+
+54
+00:03:17,650 --> 00:03:20,690
+Like I find element, which is going to be better.
+
+55
+00:03:20,930 --> 00:03:24,880
+And I think I've just change that locator name there.
+
+56
+00:03:24,920 --> 00:03:26,840
+Yeah that's the AI find element.
+
+57
+00:03:26,840 --> 00:03:33,080
+And I'm going to do the exact same thing for the rest of the locators as well.
+
+58
+00:03:33,120 --> 00:03:35,720
+Something like this over here.
+
+59
+00:03:36,400 --> 00:03:37,240
+Look at that.
+
+60
+00:03:37,240 --> 00:03:43,400
+And we need to modify all of these element to this particular locator.
+
+61
+00:03:43,560 --> 00:03:45,000
+And this will change.
+
+62
+00:03:45,040 --> 00:03:45,640
+Look at that.
+
+63
+00:03:45,640 --> 00:03:48,480
+Now you have got an AI find element.
+
+64
+00:03:48,480 --> 00:03:51,720
+And this could work even with the existing find elements that you have.
+
+65
+00:03:51,960 --> 00:03:58,400
+Or if you have a modified or jeopardized a locator will also work for that.
+
+66
+00:03:58,400 --> 00:04:04,680
+And because we have made them all as task type, this code is not going to work.
+
+67
+00:04:04,720 --> 00:04:08,640
+You need to use an await keyword to make this work.
+
+68
+00:04:08,680 --> 00:04:14,440
+I mean, I'm going to let you guys to do it by adding a await keyword and see how this particular code
+
+69
+00:04:14,440 --> 00:04:15,400
+is going to work.
+
+70
+00:04:15,920 --> 00:04:21,640
+But if not, we are going to do the exact same thing in our next lecture, and we are going to fix all
+
+71
+00:04:21,680 --> 00:04:28,120
+the code from the home page through the login page, by modifying all of them with the AI find element,
+
+72
+00:04:28,120 --> 00:04:30,960
+and then we'll see how the code execution happens.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 4. Updating existing POM Selenium code to AiFindElement Code
+
+1
+00:00:00,200 --> 00:00:05,760
+All right, so now that we have got a problem with the click method over here.
+
+2
+00:00:05,920 --> 00:00:11,400
+And the reason why this is happening is because it is basically an asynchronous operation that we are
+
+3
+00:00:11,400 --> 00:00:13,600
+trying to do over here, as you can see.
+
+4
+00:00:13,600 --> 00:00:16,680
+So we are calling the driver dot eight find element.
+
+5
+00:00:16,680 --> 00:00:20,800
+And this I find element is basically an asynchronous method.
+
+6
+00:00:20,800 --> 00:00:28,440
+So because this is being an asynchronous method you can't really able to use the the code something
+
+7
+00:00:28,440 --> 00:00:28,880
+like this.
+
+8
+00:00:28,880 --> 00:00:34,200
+You need to either use an await keyword here to make this work, or use the await keyword in this place.
+
+9
+00:00:34,200 --> 00:00:38,000
+Essentially you need to write this code something like this over here.
+
+10
+00:00:38,000 --> 00:00:46,880
+So you're gonna do something like this, uh, and you're gonna say var locator is equal to await of
+
+11
+00:00:46,880 --> 00:00:48,440
+login link, something like this.
+
+12
+00:00:48,440 --> 00:00:54,680
+And then you need to do locator um dot click something like this.
+
+13
+00:00:54,680 --> 00:00:57,600
+And this will actually work the way you are expecting.
+
+14
+00:00:57,600 --> 00:00:59,080
+So this is what you should do.
+
+15
+00:00:59,120 --> 00:01:03,530
+And all your existing code will not work unless until you change it this way.
+
+16
+00:01:03,530 --> 00:01:09,330
+But if you really wanted to still keep it like the simpler way, like something like this, instead
+
+17
+00:01:09,330 --> 00:01:16,810
+of writing in a method format, the way you can do it is now you're gonna go back again to the extensions
+
+18
+00:01:16,810 --> 00:01:17,570
+over here.
+
+19
+00:01:18,010 --> 00:01:23,810
+And in this extensions, you can write one more custom extensions over here.
+
+20
+00:01:24,010 --> 00:01:31,130
+And the custom extensions is nothing, but you can be writing like an async of task for the click operation
+
+21
+00:01:31,530 --> 00:01:33,850
+that we have got essentially over here.
+
+22
+00:01:34,170 --> 00:01:38,930
+And I'm going to create for a task of I web element.
+
+23
+00:01:38,930 --> 00:01:39,770
+Look at that.
+
+24
+00:01:40,090 --> 00:01:46,210
+So this way I can now able to perform a click operation for that element as well.
+
+25
+00:01:46,210 --> 00:01:49,610
+So I'm going to say var element as a weight.
+
+26
+00:01:49,810 --> 00:01:55,530
+Or maybe I'm just going to say uh this particular element that we have got I'm just going to say var
+
+27
+00:01:55,770 --> 00:01:57,490
+element task or something like that.
+
+28
+00:01:57,490 --> 00:02:01,490
+And then I'm going to say await element task, something like this.
+
+29
+00:02:01,890 --> 00:02:08,980
+And then I can just do an element dot click like how I just showed you on the other method.
+
+30
+00:02:09,220 --> 00:02:13,220
+We can do that over here and this way this will work.
+
+31
+00:02:13,260 --> 00:02:17,780
+See I am extending this of the task of I web element.
+
+32
+00:02:17,780 --> 00:02:21,620
+That's the reason why this particular click element can now work.
+
+33
+00:02:21,660 --> 00:02:25,700
+See, now that the usage has turned into four usages here automatically.
+
+34
+00:02:26,060 --> 00:02:28,220
+So all these issues are already gone.
+
+35
+00:02:28,540 --> 00:02:33,140
+Now all you have to do is just use an await keyword, something like this.
+
+36
+00:02:33,380 --> 00:02:37,460
+And because using await, you need to use async task here instead of void.
+
+37
+00:02:38,780 --> 00:02:42,300
+And just use await and await over here.
+
+38
+00:02:42,460 --> 00:02:43,620
+And you look at that.
+
+39
+00:02:43,620 --> 00:02:45,740
+The entire code is now pretty fine.
+
+40
+00:02:45,740 --> 00:02:49,020
+So this is this is how things are going to work over here.
+
+41
+00:02:49,340 --> 00:02:55,180
+Uh, and you may also, uh, fix this particular error with this nullable, uh, that you are getting
+
+42
+00:02:55,340 --> 00:02:59,220
+as an error, uh, by just going through the.
+
+43
+00:03:01,340 --> 00:03:05,150
+Uh, AI find element which you have got over here.
+
+44
+00:03:05,150 --> 00:03:06,150
+So I'm going to remove that.
+
+45
+00:03:06,190 --> 00:03:08,510
+See now everything is going to be fine.
+
+46
+00:03:08,790 --> 00:03:10,950
+I'm just going to remove that nullable.
+
+47
+00:03:11,150 --> 00:03:11,870
+Operator.
+
+48
+00:03:12,190 --> 00:03:16,670
+But you can still keep the nullable operator but it's up to you like how we wanted to do it.
+
+49
+00:03:16,670 --> 00:03:17,510
+But look at that.
+
+50
+00:03:17,510 --> 00:03:22,030
+This code is now going to be changed to the way you can write it, something like this.
+
+51
+00:03:22,030 --> 00:03:27,910
+So this is the only change that you have to do within your existing code to make this happen.
+
+52
+00:03:27,910 --> 00:03:33,230
+But again, if you don't want to write all of them as asynchronous and you want to write everything
+
+53
+00:03:33,230 --> 00:03:36,870
+as synchronous, you can still do that as well.
+
+54
+00:03:36,870 --> 00:03:44,190
+But in order for you to do that, you have to go and modify all the way in the heel locator method that
+
+55
+00:03:44,190 --> 00:03:45,070
+we have got.
+
+56
+00:03:45,230 --> 00:03:51,510
+Because in the heel locator, we are actually using the Get Healed locator, which is using an asynchronous
+
+57
+00:03:51,510 --> 00:03:58,390
+operation of the get completion async, which is this one which is actually using an asynchronous way
+
+58
+00:03:58,390 --> 00:04:04,510
+of doing it, which is this guy, see that the call open AI async and the call local async, which is
+
+59
+00:04:04,510 --> 00:04:05,110
+this one.
+
+60
+00:04:05,560 --> 00:04:11,840
+Uh, so if you go and modify from async to asynchronous operation, which is this one, as you are seeing
+
+61
+00:04:11,840 --> 00:04:16,560
+over here instead of the post async, if you are using a post operation then it will work.
+
+62
+00:04:16,560 --> 00:04:22,480
+But unfortunately in the HTTP client we don't even have a post without an async operation.
+
+63
+00:04:22,760 --> 00:04:26,160
+That's the reason why this whole thing needs to be changed to async.
+
+64
+00:04:26,440 --> 00:04:31,000
+But if you are using Rest sharp or something like that, we will not even need to have an asynchronous
+
+65
+00:04:31,040 --> 00:04:31,400
+operation.
+
+66
+00:04:31,400 --> 00:04:35,240
+We can just use everything as synchronous directly and make this work.
+
+67
+00:04:35,240 --> 00:04:37,560
+But yeah, that's that's the way we're going to do.
+
+68
+00:04:37,560 --> 00:04:42,000
+But again, because we are going to be discussing the similar kind of approach, even in playwright,
+
+69
+00:04:42,040 --> 00:04:45,320
+this code will remain exactly the same over there as well.
+
+70
+00:04:45,720 --> 00:04:50,760
+But now you can see that we have already modified things and it looks pretty good already.
+
+71
+00:04:51,200 --> 00:04:55,200
+And the last operation that we have to do it is to modify the login page as well.
+
+72
+00:04:55,400 --> 00:04:58,000
+So I'm going to quickly do that over here.
+
+73
+00:04:58,000 --> 00:05:02,720
+So I'm going to just use the similar code uh in the login page.
+
+74
+00:05:03,160 --> 00:05:04,040
+Look at that.
+
+75
+00:05:04,080 --> 00:05:12,570
+It's the same thing I'm going to do it Um, and I'm also going to add the missing reference.
+
+76
+00:05:12,570 --> 00:05:18,810
+And this one is going to be task of I web element.
+
+77
+00:05:18,970 --> 00:05:20,690
+Something like this.
+
+78
+00:05:21,330 --> 00:05:26,810
+The same thing goes for this one and this over here.
+
+79
+00:05:27,010 --> 00:05:30,730
+And I'm going to just go modify the rest of the things over here.
+
+80
+00:05:31,130 --> 00:05:36,650
+Um, and for this particular code we again need to modify the send keys as well because look at that.
+
+81
+00:05:36,650 --> 00:05:41,690
+The send keys uh, is not going to work unless until you're going to have an await keyword.
+
+82
+00:05:41,850 --> 00:05:47,650
+So just go to the web Element extensions and create one for send keys as well.
+
+83
+00:05:47,930 --> 00:05:50,650
+So I'm just going to go copy paste that here.
+
+84
+00:05:51,250 --> 00:05:53,890
+And I'm going to say send keys.
+
+85
+00:05:54,330 --> 00:06:01,370
+Uh and I'm also going to pass the, the text or the value whatever that you want to do.
+
+86
+00:06:01,810 --> 00:06:04,730
+And just do a send keys of the text.
+
+87
+00:06:05,770 --> 00:06:11,020
+So this way you can see that we have got two usage which is already modified, and I'm just going to
+
+88
+00:06:11,020 --> 00:06:13,660
+use await keyword there for both of them.
+
+89
+00:06:13,900 --> 00:06:15,420
+And of course this one as well.
+
+90
+00:06:16,180 --> 00:06:19,500
+And this one is going to be async of task.
+
+91
+00:06:19,900 --> 00:06:20,580
+Look at that.
+
+92
+00:06:20,580 --> 00:06:23,460
+So now everything is modified which looks pretty good.
+
+93
+00:06:23,900 --> 00:06:30,700
+The last operation is to modify the test as well, which is this one where we have used the page object
+
+94
+00:06:30,700 --> 00:06:31,580
+model code.
+
+95
+00:06:31,580 --> 00:06:33,460
+So I'm just going to use await.
+
+96
+00:06:34,020 --> 00:06:35,020
+Uh over here.
+
+97
+00:06:35,060 --> 00:06:35,300
+Oops.
+
+98
+00:06:35,340 --> 00:06:40,340
+This is going to be an async task because this is an asynchronous code as well.
+
+99
+00:06:40,820 --> 00:06:42,020
+So async of task.
+
+100
+00:06:42,180 --> 00:06:44,980
+Uh, this is await this await as well.
+
+101
+00:06:45,500 --> 00:06:52,940
+Uh, and this is await, await and await C is all asynchronous there.
+
+102
+00:06:53,540 --> 00:06:59,020
+So now I have modified everything to an asynchronous operation for my traditional test code.
+
+103
+00:06:59,180 --> 00:07:05,580
+So if I try to run this particular code you will notice that this test is just going to work even if
+
+104
+00:07:05,580 --> 00:07:07,180
+the locators are wrong.
+
+105
+00:07:07,220 --> 00:07:07,540
+See?
+
+106
+00:07:07,580 --> 00:07:08,300
+Look at that.
+
+107
+00:07:08,300 --> 00:07:11,430
+It is just going to work there, which is fast.
+
+108
+00:07:12,550 --> 00:07:14,750
+Great because there is no locator change.
+
+109
+00:07:14,950 --> 00:07:20,070
+And now if I'm going to go to the home page over here, uh, sorry, let's say login page over here.
+
+110
+00:07:20,070 --> 00:07:22,710
+And I'm going to change the username to usernames.
+
+111
+00:07:22,750 --> 00:07:24,310
+Password to passwords.
+
+112
+00:07:24,470 --> 00:07:25,910
+Submit to something else.
+
+113
+00:07:25,910 --> 00:07:30,230
+Something like this I have fully, uh, scrambled this entire thing over there.
+
+114
+00:07:30,590 --> 00:07:37,750
+And now if I'm going to run this test, this test should still work, because now we have got the auto
+
+115
+00:07:37,790 --> 00:07:39,470
+healing mechanism in place.
+
+116
+00:07:39,470 --> 00:07:46,070
+So this should take care of all the data entry even right now, because as the locator has changed.
+
+117
+00:07:46,110 --> 00:07:46,830
+Look at that.
+
+118
+00:07:46,870 --> 00:07:50,150
+Even now the code is just working fine, which is amazing.
+
+119
+00:07:50,190 --> 00:07:54,750
+And it took 15 seconds to execute the same code, which is way faster.
+
+120
+00:07:55,110 --> 00:08:03,070
+See, this is how we can write the self-healing Selenium's Intelligent test automation code using the
+
+121
+00:08:03,070 --> 00:08:09,910
+power of large language models and all the learnings that we have done with context engineering and
+
+122
+00:08:09,910 --> 00:08:11,270
+prompt engineering.
+
+
+==================================================================================
+
+section 8. Building Intelligence Test Automation Code for Playwright
+
+video 1.introduction
+
+1
+00:00:00,160 --> 00:00:02,160
+Welcome to the next section of our course.
+
+2
+00:00:02,160 --> 00:00:06,920
+And in this section we're going to talk about how we can build an intelligent playwright automation
+
+3
+00:00:06,920 --> 00:00:11,640
+using self-healing approach with our large language model that we have been talking about.
+
+4
+00:00:12,000 --> 00:00:12,720
+So guess what?
+
+5
+00:00:12,920 --> 00:00:19,200
+Now that we have seen how we can able to build all of these operations using selenium.
+
+6
+00:00:19,200 --> 00:00:24,760
+So until our last section, we saw we could able to format the prompt talk with the large language models
+
+7
+00:00:24,760 --> 00:00:28,240
+using cloud as well as on the local realm using Ola.
+
+8
+00:00:28,680 --> 00:00:31,480
+And then we also deserialize the JSON elements.
+
+9
+00:00:31,480 --> 00:00:36,440
+And then we did the local selection strategies and use those.
+
+10
+00:00:36,480 --> 00:00:40,400
+Select our strategy for mapping it with the AI locators.
+
+11
+00:00:40,400 --> 00:00:43,840
+And finally we ran the test using the Page Object model code.
+
+12
+00:00:43,840 --> 00:00:48,320
+So we did all of these operation in our earlier sections of this course.
+
+13
+00:00:48,320 --> 00:00:54,680
+And we saw how amazing it was to get all of these operations done with self-healing mechanism in selenium,
+
+14
+00:00:54,680 --> 00:00:55,680
+which was awesome.
+
+15
+00:00:56,040 --> 00:01:00,560
+And now we are going to take this a level further using playwright.
+
+16
+00:01:00,980 --> 00:01:01,820
+And guess what?
+
+17
+00:01:01,820 --> 00:01:05,540
+I'm telling you every single thing is going to change right now.
+
+18
+00:01:07,100 --> 00:01:08,500
+No, I was just joking.
+
+19
+00:01:09,020 --> 00:01:11,540
+Everything just remains exactly the same thing.
+
+20
+00:01:11,580 --> 00:01:12,420
+Good news.
+
+21
+00:01:12,460 --> 00:01:13,180
+Look at that.
+
+22
+00:01:13,860 --> 00:01:17,180
+You have got all of these things that you have seen so far.
+
+23
+00:01:17,380 --> 00:01:20,060
+Going to remain exactly the same.
+
+24
+00:01:20,660 --> 00:01:26,660
+Not even a single change in the strategy or the approach that we are going to be doing for playwright.
+
+25
+00:01:27,220 --> 00:01:28,980
+The only thing which is going to change.
+
+26
+00:01:29,100 --> 00:01:30,340
+I will show you what they are.
+
+27
+00:01:30,500 --> 00:01:37,260
+But the rest of the things that we did before for the self-healing mechanism remain exactly the same,
+
+28
+00:01:37,620 --> 00:01:38,900
+even for playwright.
+
+29
+00:01:38,900 --> 00:01:43,460
+So the phase one that we saw over there remains exactly the same.
+
+30
+00:01:43,500 --> 00:01:45,380
+You are going to do the locator strategy.
+
+31
+00:01:45,540 --> 00:01:49,380
+You are going to find the locators in the page object model code of playwright.
+
+32
+00:01:49,420 --> 00:01:54,740
+If it is there, if it is working, if it is valid, it's going to run the test on the playwright.
+
+33
+00:01:54,740 --> 00:01:58,500
+And if it is not, then it's going to go and check the alternative locators.
+
+34
+00:01:58,500 --> 00:02:04,070
+And the alternative will go and check on the dictionary, which is the locator strategies dictionary.
+
+35
+00:02:04,070 --> 00:02:08,350
+And if that dictionary is empty, of course it is going to be empty for the very first time.
+
+36
+00:02:08,350 --> 00:02:13,870
+So it is going to go and call the healing process, which is the AI healing process, which is going
+
+37
+00:02:13,870 --> 00:02:17,590
+to store all the different kinds of locator strategy in the dictionary.
+
+38
+00:02:17,870 --> 00:02:20,470
+And then again send it back to the strategy.
+
+39
+00:02:20,470 --> 00:02:27,270
+And this guy is going to, uh, check the locators again, and you will have the element in the dictionaries.
+
+40
+00:02:27,310 --> 00:02:33,270
+You're going to perform the operation using the locators, and the playwright is going to run the test
+
+41
+00:02:33,270 --> 00:02:33,830
+for you.
+
+42
+00:02:34,310 --> 00:02:38,110
+This remains exactly the same for both the phases.
+
+43
+00:02:38,110 --> 00:02:40,470
+There is zero change on that.
+
+44
+00:02:41,270 --> 00:02:42,070
+And guess what?
+
+45
+00:02:42,430 --> 00:02:49,550
+The only thing which is going to change comparing to selenium versus playwright, is that we know that
+
+46
+00:02:49,590 --> 00:02:56,870
+in playwright there are going to be not just XPath CSS ID locators available in in playwright, where
+
+47
+00:02:56,870 --> 00:03:05,690
+you also have got few more locator strategies like roles, text or test ID placeholders and things,
+
+48
+00:03:05,690 --> 00:03:07,010
+and there are even more available.
+
+49
+00:03:07,010 --> 00:03:11,770
+I have not really included, and I don't want to make this thing over complicated, so I'm just going
+
+50
+00:03:11,810 --> 00:03:16,970
+to stick it as simple as possible so that you can easily relate what you have done for selenium, and
+
+51
+00:03:16,970 --> 00:03:21,250
+how you can extend the exact same thing for playwright over here.
+
+52
+00:03:21,250 --> 00:03:22,410
+That's what I have done.
+
+53
+00:03:22,410 --> 00:03:25,050
+So I want to keep things as simple as possible.
+
+54
+00:03:25,090 --> 00:03:25,810
+Look at that.
+
+55
+00:03:25,810 --> 00:03:33,530
+This code remains exactly the same, like how we did for selenium code, where we used to find the element
+
+56
+00:03:33,530 --> 00:03:35,770
+something like this using the switch case statement.
+
+57
+00:03:35,770 --> 00:03:42,170
+If you remember the same exact thing that we are doing over here, as you can see, this is the same,
+
+58
+00:03:42,410 --> 00:03:44,570
+uh, selector that we are trying to do.
+
+59
+00:03:44,570 --> 00:03:47,090
+And the other change is going to look something like this.
+
+60
+00:03:47,090 --> 00:03:52,410
+As you can see over here, where we're going to have, uh, the if the selector is going to start with
+
+61
+00:03:52,410 --> 00:03:54,330
+the hash, then it's going to be the ID.
+
+62
+00:03:54,570 --> 00:03:58,410
+If it is going to be the class, then it is going to be this uh, locator.
+
+63
+00:03:58,530 --> 00:04:02,830
+Uh, and then if it is going to be slash then it is XPath and if it is text is equal to, then it is
+
+64
+00:04:02,830 --> 00:04:03,590
+going to be text.
+
+65
+00:04:03,590 --> 00:04:08,590
+And then roll test ID and then name as well as the placeholder.
+
+66
+00:04:08,790 --> 00:04:10,790
+This is the only change that I have to do.
+
+67
+00:04:10,790 --> 00:04:16,430
+And because I have to add a few more properties, then I have to go and update the locator suggestion
+
+68
+00:04:16,430 --> 00:04:24,710
+class that we were using earlier in our selenium test over here, where we have only 123456 elements.
+
+69
+00:04:24,710 --> 00:04:29,670
+But here in this time we're going to have just a bit more compared to that.
+
+70
+00:04:29,670 --> 00:04:32,150
+Like I think it's like around 8 or 9.
+
+71
+00:04:32,510 --> 00:04:34,390
+So that's the only change that you're going to have.
+
+72
+00:04:34,430 --> 00:04:37,310
+But other than that there is no big change on the code.
+
+73
+00:04:37,310 --> 00:04:39,870
+This is the only change that we're talking about.
+
+74
+00:04:39,870 --> 00:04:43,590
+While we are going to use with playwright as compared to selenium.
+
+75
+00:04:43,750 --> 00:04:48,910
+But other than that entire operation that we were doing, like the three tier validation that we were
+
+76
+00:04:48,910 --> 00:04:52,230
+doing before with the selenium is going to still remain the same.
+
+77
+00:04:52,590 --> 00:04:58,110
+So we are going to do the exact same thing we're going to find with the current locator strategy, and
+
+78
+00:04:58,110 --> 00:04:59,870
+then an alternative strategy.
+
+79
+00:04:59,870 --> 00:05:03,360
+And then we we're going to do the healing using artificial intelligence.
+
+80
+00:05:03,360 --> 00:05:05,680
+So everything remains exactly the same.
+
+81
+00:05:05,680 --> 00:05:07,600
+There is no code change at all.
+
+82
+00:05:07,760 --> 00:05:13,320
+And of course, because we are using playwright, the prompt will change a bit as well, which is nothing.
+
+83
+00:05:13,320 --> 00:05:21,440
+But the prompt we are going to be using is going to be changed from what we have said over here, which
+
+84
+00:05:21,440 --> 00:05:25,840
+is like this, to the prompt which we wanted for the playwright.
+
+85
+00:05:25,840 --> 00:05:28,880
+So I will show you how we are going to make those changes as well.
+
+86
+00:05:28,920 --> 00:05:33,880
+But yes, this is the only change that we are going to be making and the changes are super minimal.
+
+87
+00:05:33,880 --> 00:05:39,520
+So if you have already paid attention until our last section of this course, this section is going
+
+88
+00:05:39,560 --> 00:05:44,600
+to be really a cakewalk for you because we're just going to modify here and there a bit and then do
+
+89
+00:05:44,600 --> 00:05:47,040
+our existing code is just going to work.
+
+90
+00:05:47,040 --> 00:05:52,480
+We'll see how we are going to achieve every single operation in this particular section with playwright,
+
+91
+00:05:52,640 --> 00:06:01,040
+and how we can start automating every single approach using self-healing playwright automation mechanism.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 
