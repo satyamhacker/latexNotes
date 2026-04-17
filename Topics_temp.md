@@ -1,7 +1,3 @@
-Chal bhai, haath pair jod, terminal khol! Aaj real knowledge ki aag lagate hain. Theory ho gayi, ab practically haath gande karne ka time hai!
-
-Tere notes itne massive hain ki ek baar mein sab process kiya toh API token limit ka dhuaan nikal jayega. Par Guru-ji rukenge nahi. Main ek-ek karke Modules faad raha hoon. Dhyan se dekh aur execute kar!
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🧩 Module 1: The AI Agent & Testing Foundation → Level 1.1: RAG Foundations & Agent Testing Strategies [🟡 Intermediate]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
