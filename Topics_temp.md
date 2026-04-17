@@ -6191,3 +6191,8383 @@ Starting our next section of the course.
 
 section 4. Understanding the Current Automation Test Problem and Solution with AI and LLMs
 
+video 1. Introduction
+
+1
+00:00:00,160 --> 00:00:02,160
+Welcome to the next section of our course.
+
+2
+00:00:02,160 --> 00:00:08,480
+And in this section we are going to talk about why AI first versus AI assisted testing.
+
+3
+00:00:09,000 --> 00:00:15,720
+If you remember, until our last section, we were talking about the AI first testing, meaning we tried
+
+4
+00:00:15,720 --> 00:00:22,160
+writing a test code using the cloud desktop, and then we did a wipe coding using Visual Studio code
+
+5
+00:00:22,280 --> 00:00:25,120
+for generating the test cases manually.
+
+6
+00:00:25,120 --> 00:00:31,920
+And also we use the same MD file or the markdown file for generating the automated test cases.
+
+7
+00:00:31,920 --> 00:00:35,560
+And we also saw how we can of course add BDD test on that.
+
+8
+00:00:35,560 --> 00:00:37,520
+So we saw how everything was working.
+
+9
+00:00:37,640 --> 00:00:42,800
+That approach that we discussed in the last section is called as the AI first testing, because we used
+
+10
+00:00:42,800 --> 00:00:48,760
+everything using the artificial intelligence, using the AI agents and the toolings like playwright
+
+11
+00:00:48,800 --> 00:00:50,040
+MCP servers and stuff.
+
+12
+00:00:50,040 --> 00:00:52,880
+That's how it was all just working for us over there.
+
+13
+00:00:52,880 --> 00:01:00,000
+But using this approach, we know that there are so many advantages, but there are also a list of disadvantages
+
+14
+00:01:00,070 --> 00:01:07,070
+using the wipe coding approach, which almost every single company and every single person on the planet
+
+15
+00:01:07,110 --> 00:01:07,950
+appreciate.
+
+16
+00:01:07,950 --> 00:01:14,470
+But we also need to see the downside of using that particular approach, especially if you're going
+
+17
+00:01:14,470 --> 00:01:20,230
+to see if you're going to use this approach within your organization, you will have to think about
+
+18
+00:01:20,270 --> 00:01:28,630
+these problems as you know that using the AI first approach, you are always on, meaning you always
+
+19
+00:01:28,630 --> 00:01:33,710
+need to rely on an automation test to generate the code for you.
+
+20
+00:01:33,910 --> 00:01:40,070
+And of course, you can generate code for one time and then start customizing your test from there.
+
+21
+00:01:40,070 --> 00:01:45,630
+But what happens if the code, which is generated using the artificial intelligence or the large language
+
+22
+00:01:45,630 --> 00:01:50,910
+model is way too much, and if you want to customize it, it is going to take a long time.
+
+23
+00:01:51,030 --> 00:01:57,870
+If you know the recent report from community, it said that the code generated from the AI takes the
+
+24
+00:01:57,870 --> 00:02:03,780
+less time, but maintaining them is going to take a long time, which is another problem that we have.
+
+25
+00:02:03,820 --> 00:02:07,900
+And that is going to be same thing applicable for the automation test cases as well.
+
+26
+00:02:08,100 --> 00:02:15,380
+So not always on is going to be making you always 100% efficient, but you are going to end up paying
+
+27
+00:02:15,380 --> 00:02:20,700
+even more cost for the high token usage due to the always on.
+
+28
+00:02:20,700 --> 00:02:26,140
+Because the moment you start talking with your large language model, you will notice that there are
+
+29
+00:02:26,140 --> 00:02:32,100
+going to be a long list of usage which is going to happen within your large language model.
+
+30
+00:02:32,140 --> 00:02:37,300
+For example, if you see, in my case, I was trying to generate the entire test cases until here in
+
+31
+00:02:37,300 --> 00:02:41,820
+our last section, and you notice that we have got this usage over here.
+
+32
+00:02:41,820 --> 00:02:47,660
+The premium request was spiked up to 42%, and it was just 20% before.
+
+33
+00:02:47,860 --> 00:02:50,820
+And you see that the number of usage has just increased over there.
+
+34
+00:02:50,900 --> 00:02:55,140
+You may now defend saying, Karthik, if I don't want to use my premium request, I can probably use
+
+35
+00:02:55,180 --> 00:03:01,090
+like the other model which are not the premium models, then you will still end up paying a lot of money,
+
+36
+00:03:01,090 --> 00:03:03,530
+because you are these models that are free.
+
+37
+00:03:03,570 --> 00:03:04,850
+Models that are available over.
+
+38
+00:03:04,850 --> 00:03:11,250
+There may not be as efficient as what you are going to get with the cloud 4.5 model, so you are going
+
+39
+00:03:11,290 --> 00:03:15,370
+to end up paying a lot of money for the premium request usage.
+
+40
+00:03:15,370 --> 00:03:18,690
+That is going to be a high token usage that you're going to be doing.
+
+41
+00:03:18,690 --> 00:03:26,170
+And also you are now fully dependent on the AI generated code, because now you don't have the control
+
+42
+00:03:26,170 --> 00:03:28,210
+of how the codes are being generated.
+
+43
+00:03:28,210 --> 00:03:33,290
+And most importantly, I've heard from students asking this question, if you're going to be relying
+
+44
+00:03:33,290 --> 00:03:40,290
+on too much of AI over here, then we are starting to forget how this code is even being written, because
+
+45
+00:03:40,290 --> 00:03:46,730
+even the code which we write is starting to get more obsolete, or maybe completely new or alien.
+
+46
+00:03:46,730 --> 00:03:49,770
+If you're going to look at the same code after some time.
+
+47
+00:03:49,770 --> 00:03:55,690
+Or maybe if you come back from holiday, we don't even recognize our own code that we have written.
+
+48
+00:03:55,690 --> 00:03:59,720
+But if you're going to give all the control to the large language model and AI.
+
+49
+00:03:59,760 --> 00:04:04,640
+In this case, then we don't even know what exactly these codes are being generated, because it's too
+
+50
+00:04:04,640 --> 00:04:10,040
+much of code over here, and we don't even know whether these codes are boilerplate code, or even necessary
+
+51
+00:04:10,040 --> 00:04:12,040
+code, or even an unnecessary code.
+
+52
+00:04:12,280 --> 00:04:14,720
+So these are the problem that we have over here.
+
+53
+00:04:14,720 --> 00:04:20,200
+So that's the full dependency problem that we have got over the AI first approach.
+
+54
+00:04:20,400 --> 00:04:22,120
+And then of course the cost.
+
+55
+00:04:22,120 --> 00:04:25,000
+Because the more and more usage of token happens.
+
+56
+00:04:25,000 --> 00:04:30,240
+And always on that you are, you are going to end up more and more cost which is being spent for that.
+
+57
+00:04:30,280 --> 00:04:34,400
+Well, as that said, it's all going to be the problem that you are going to end up.
+
+58
+00:04:34,400 --> 00:04:39,120
+But the good thing is, if you are going to be starting this project for the first time, like an initial
+
+59
+00:04:39,120 --> 00:04:42,800
+startup, like how we did in our last section, it is going to be good.
+
+60
+00:04:42,840 --> 00:04:48,680
+But if you are going to start relying on the AI for long run, then you are going to end up paying these
+
+61
+00:04:48,680 --> 00:04:49,600
+massive cost.
+
+62
+00:04:49,600 --> 00:04:55,760
+And not every single company is also going to allow you to use the latest and greatest models, because
+
+63
+00:04:55,760 --> 00:05:01,630
+the companies will have an agreement with the companies to only use certain models in this case.
+
+64
+00:05:01,630 --> 00:05:07,230
+And those are the problem that we are going to have, and these are the problems with the AI first approach.
+
+65
+00:05:07,510 --> 00:05:14,790
+Well, as that said, let's quickly do a cost comparison of the AI first approach versus the AI assisted
+
+66
+00:05:14,790 --> 00:05:15,350
+approach.
+
+67
+00:05:15,350 --> 00:05:21,910
+So you will notice over here for one test, if you're going to be doing a 50 actions, then the cost
+
+68
+00:05:21,910 --> 00:05:26,070
+of let's say the model is 0.003 per call, which is highly unlikely.
+
+69
+00:05:26,630 --> 00:05:32,110
+Then you are going to be paying $0.15 for one test that you're executing.
+
+70
+00:05:32,390 --> 00:05:35,070
+Let's assume that you're going to be executing 1000 tests per day.
+
+71
+00:05:35,110 --> 00:05:39,310
+It's not just you, but in your whole team within your company who is going to be executing it.
+
+72
+00:05:39,310 --> 00:05:45,630
+So you'll be paying $150 per day for the test execution, like 1000 test, which is being executed.
+
+73
+00:05:45,870 --> 00:05:50,710
+And if you think of the same in per month, it's going to be around 4500 freaking dollars.
+
+74
+00:05:51,110 --> 00:05:54,270
+And it is going to work all the time, which is no doubt.
+
+75
+00:05:54,270 --> 00:05:59,460
+But the problem is you are going to end up a lot of money, so you're just going to burn the whole money
+
+76
+00:05:59,460 --> 00:06:01,180
+just for executing the test cases.
+
+77
+00:06:01,540 --> 00:06:07,300
+In turn, the company is already paying you the salary to build these automation test, and you're also
+
+78
+00:06:07,300 --> 00:06:10,420
+going to burn the money because of the AI usage.
+
+79
+00:06:10,420 --> 00:06:13,460
+These are the problems that we have with the AI first approach.
+
+80
+00:06:13,460 --> 00:06:21,700
+But if you see the same with the AI assisted approach, you are going to use the one healing test for
+
+81
+00:06:21,700 --> 00:06:23,420
+your test, for that matter.
+
+82
+00:06:23,420 --> 00:06:27,700
+And let's say your cost is 0.3003 for that.
+
+83
+00:06:27,700 --> 00:06:31,700
+The same cost that I have put over here and 1000 tests you're going to be running.
+
+84
+00:06:31,700 --> 00:06:34,780
+So you're going to be essentially calling 50 healing test per day.
+
+85
+00:06:35,180 --> 00:06:38,300
+And then the per month cost is going to be just 4.5.
+
+86
+00:06:38,340 --> 00:06:40,740
+See the amount that you have reduced over here.
+
+87
+00:06:41,020 --> 00:06:45,020
+And finally it is 1000 times cheaper than compared to this car.
+
+88
+00:06:45,020 --> 00:06:49,020
+So this is like a picture that I have painted over here.
+
+89
+00:06:49,020 --> 00:06:52,380
+As if that the one healing test is going to happen for one single test.
+
+90
+00:06:52,380 --> 00:06:56,570
+But what if there are going to be multiple healing going to happen, like multiple locators change at
+
+91
+00:06:56,570 --> 00:06:57,490
+the same time.
+
+92
+00:06:57,490 --> 00:07:03,010
+Then of course the cost may increase, but it is still cheaper than what you can do it with the fully
+
+93
+00:07:03,050 --> 00:07:04,690
+AI dependent approach.
+
+94
+00:07:05,050 --> 00:07:12,890
+That is one way you can see how the AI first versus the AI assisted approach is going to help you differentiate
+
+95
+00:07:12,890 --> 00:07:14,730
+with the cost over there.
+
+96
+00:07:15,050 --> 00:07:21,290
+But again, even in this case, I have actually used the AI assisted with the models which are running
+
+97
+00:07:21,290 --> 00:07:22,490
+on the cloud.
+
+98
+00:07:22,490 --> 00:07:28,130
+But what if you're going to be running the same approach using the local large language model, which
+
+99
+00:07:28,130 --> 00:07:32,930
+are going to be running fully offline, and you don't even have to pay a single penny for that.
+
+100
+00:07:33,810 --> 00:07:40,050
+So using local large language models, as we already discussed in our earlier section of this course,
+
+101
+00:07:40,490 --> 00:07:44,930
+the local large language model, which is running within the olama within your local machine, will
+
+102
+00:07:44,930 --> 00:07:51,690
+have zero request cost that you are going to be spending, and you can run unlimited healing tests no
+
+103
+00:07:51,690 --> 00:07:52,410
+matter what.
+
+104
+00:07:52,810 --> 00:07:58,200
+And you don't even need an internet dependency because it just runs without any problem.
+
+105
+00:07:58,200 --> 00:08:03,960
+And you can have your model running within your own premises, and then you can work on the CI CD behind
+
+106
+00:08:03,960 --> 00:08:04,760
+the firewall.
+
+107
+00:08:04,760 --> 00:08:07,040
+It is not going to be of any problem as well.
+
+108
+00:08:07,040 --> 00:08:14,240
+It is 100% data privacy for a company, especially on insurance, healthcare, banking, and even for
+
+109
+00:08:14,240 --> 00:08:21,080
+the company which don't want to expose the details to the third party companies like OpenAI, they can
+
+110
+00:08:21,080 --> 00:08:25,280
+fully use the power of local large language model within their own premises.
+
+111
+00:08:25,280 --> 00:08:27,880
+So it is 100% is data privacy as well.
+
+112
+00:08:27,920 --> 00:08:34,440
+It also has got lower latency if you are using no network round trip, if you are using a model which
+
+113
+00:08:34,440 --> 00:08:39,120
+is very close to your own organization, which is also going to happen, and also it is a very, very
+
+114
+00:08:39,120 --> 00:08:43,720
+predictable cost because it's going to be one time hardware setup that you are going to be doing.
+
+115
+00:08:43,720 --> 00:08:48,120
+But the moment you do it fully run up and running, then you don't really have to spend a lot of cost.
+
+116
+00:08:48,120 --> 00:08:53,480
+Maybe just a hardware upgrade is going to happen, but your local large language model is going to run
+
+117
+00:08:53,480 --> 00:08:58,160
+for you all the time, and you can run unlimited healing tests for that matter.
+
+118
+00:08:58,160 --> 00:09:02,880
+And you may ask, hey Karthik, this sounds very good on the paper, but how do we even run if you are
+
+119
+00:09:02,880 --> 00:09:05,080
+running within our own machine?
+
+120
+00:09:05,080 --> 00:09:10,720
+Because what if I want to really try out within my machine before I even propose this to my company?
+
+121
+00:09:10,720 --> 00:09:17,120
+Well guess what, you can run models like GPT Oasis 20 billion parameter or three quarter 30 billion
+
+122
+00:09:17,120 --> 00:09:22,760
+parameter, which works quite well for coding and working with the Dom based testing, which we are
+
+123
+00:09:22,760 --> 00:09:25,800
+probably going to be doing entirely in this course.
+
+124
+00:09:25,800 --> 00:09:30,760
+We're going to be using these two models while we work with the coding approach, using self-healing
+
+125
+00:09:30,760 --> 00:09:33,120
+coatings and stuff in this particular course.
+
+126
+00:09:33,120 --> 00:09:41,640
+And if you have a powerful GPU like 40, 90 or 50, uh, 90, uh, or 5080 for that matter, you can
+
+127
+00:09:41,640 --> 00:09:48,280
+also run even more hyper parameters, uh, models within your own machine, like 70 billion parameter
+
+128
+00:09:48,280 --> 00:09:54,790
+can be easily executed these days, uh, using those GPUs, and also using the devices like the Nvidia
+
+129
+00:09:54,790 --> 00:09:58,830
+Spark DGX or AMD Ryzen AI Max.
+
+130
+00:09:58,830 --> 00:10:03,550
+As you are seeing over here, the GM tech model and also the MacBook Pro Max.
+
+131
+00:10:03,590 --> 00:10:08,550
+If you're using M1 like me or M5, which is going to be coming pretty soon.
+
+132
+00:10:08,910 --> 00:10:14,510
+So you can see those models can be easily executed in these machines without any problem.
+
+133
+00:10:14,510 --> 00:10:19,030
+So these are the way that you can run your local large language model on machine.
+
+134
+00:10:19,030 --> 00:10:24,070
+But let's say you have purchased this course and you don't have even any of these machine at the moment.
+
+135
+00:10:24,110 --> 00:10:27,950
+You may ask Karthik, you know what, we have wrongly purchased this course because we don't even have
+
+136
+00:10:27,950 --> 00:10:29,830
+these hardware requirement over there.
+
+137
+00:10:30,030 --> 00:10:30,830
+Guess what?
+
+138
+00:10:30,830 --> 00:10:38,550
+You can still run the lower version of the models with an own machine to do that and see how that works.
+
+139
+00:10:38,550 --> 00:10:46,390
+If not, there are also cloud alternative of running these language models using Lama as well as well
+
+140
+00:10:46,390 --> 00:10:52,580
+as the OpenAI model to complete this course because you don't even need to purchase a costly hardware
+
+141
+00:10:52,580 --> 00:10:57,060
+for that matter, because the moment you get the idea, like how things are working, it is so much
+
+142
+00:10:57,060 --> 00:11:03,020
+easier for you to fuse these workflow within your testing, and then you don't even need to spend so
+
+143
+00:11:03,020 --> 00:11:08,860
+much of money to purchase this course, because the idea is not to just use your local large language
+
+144
+00:11:08,860 --> 00:11:15,820
+model within your company, but the idea is to use the local large language model at scale within your
+
+145
+00:11:15,820 --> 00:11:19,980
+organization, especially if your company has AWS SageMaker.
+
+146
+00:11:20,020 --> 00:11:27,100
+It supports latest open source model, including Meta's Llama four, Google three, Alibaba model,
+
+147
+00:11:27,140 --> 00:11:29,220
+Mistral AI, and Deep Seek R model.
+
+148
+00:11:29,220 --> 00:11:34,740
+So everything runs on this AWS SageMaker, so you can go and propose them that these are the way that
+
+149
+00:11:34,740 --> 00:11:36,220
+you can run these models.
+
+150
+00:11:36,220 --> 00:11:38,780
+If not, you can also use AWS bedrock.
+
+151
+00:11:38,780 --> 00:11:42,180
+But again this provides access to the latest model though.
+
+152
+00:11:42,220 --> 00:11:47,980
+But you will have limited customization, uh, because your company has to do all those customization
+
+153
+00:11:47,980 --> 00:11:49,780
+with the AWS bedrock.
+
+154
+00:11:49,780 --> 00:11:57,490
+But if you want to go full scale with a self-managed models within your AWS EC2 SKUs, then you can
+
+155
+00:11:57,490 --> 00:11:58,370
+also do that.
+
+156
+00:11:58,370 --> 00:12:01,370
+But again, this is going to be very, very costly approach.
+
+157
+00:12:01,410 --> 00:12:06,970
+Even you can just go and buy an open AI models license for that to do it.
+
+158
+00:12:06,970 --> 00:12:12,010
+But the problem is you will still lose the privacy and all those stuffs over there.
+
+159
+00:12:12,010 --> 00:12:18,010
+But in here you have full control of the privacy and also you have full control of the cost as well.
+
+160
+00:12:18,050 --> 00:12:24,450
+That's how you can use these local large language models to run on the cloud based system.
+
+161
+00:12:24,450 --> 00:12:25,210
+Something like this.
+
+162
+00:12:25,210 --> 00:12:31,370
+So this is what really happens if you're going to be using the local large language model at scale within
+
+163
+00:12:31,370 --> 00:12:38,770
+the cloud premises, and finally using these model just to picture it out, you can give the entire
+
+164
+00:12:38,770 --> 00:12:45,330
+page context, like a secure page that you have got within your organization, like banking or insurance
+
+165
+00:12:45,330 --> 00:12:50,720
+or something, which is related to client sensitive information like healthcare for that matter.
+
+166
+00:12:50,720 --> 00:12:57,920
+You can pass those secure page to your 100% secure local large language model, and then you can ask
+
+167
+00:12:57,920 --> 00:13:01,680
+the model to go and figure out how to heal the page.
+
+168
+00:13:01,800 --> 00:13:07,560
+Get the code that you need to write for while you do the inferencing, and then you can generate the
+
+169
+00:13:07,560 --> 00:13:14,000
+selenium test code out from it and see everything is going to happen for you within your local machine,
+
+170
+00:13:14,000 --> 00:13:17,080
+without you even sending any data to the cloud.
+
+171
+00:13:17,080 --> 00:13:21,360
+And that's how things are going to happen if you're going to be using these models, which is quite
+
+172
+00:13:21,360 --> 00:13:22,040
+amazing.
+
+173
+00:13:22,040 --> 00:13:29,440
+Well, as that said, in this course we are going to be building a self-healing page object model selenium
+
+174
+00:13:29,440 --> 00:13:35,320
+code, where you are going to be passing a full UI page along with your page object model code.
+
+175
+00:13:35,320 --> 00:13:41,720
+And then you are going to ask the large language model to go and analyze the, uh, the page object
+
+176
+00:13:41,720 --> 00:13:47,960
+model against the UI page that you have got and see if there is any change and if the locators are still
+
+177
+00:13:47,960 --> 00:13:52,030
+matching with the page object model code that you have with a UI page.
+
+178
+00:13:52,190 --> 00:13:56,710
+Then yes, it is going to run the test for you in selenium and then it's going to get passed.
+
+179
+00:13:56,870 --> 00:14:05,230
+But if, let's say there is a change in the UI object and the page object model code has got an obsolete
+
+180
+00:14:05,230 --> 00:14:10,790
+locator, then it is going to go and update the test code for you and rerun the test.
+
+181
+00:14:10,790 --> 00:14:12,750
+And then it is going to go from there.
+
+182
+00:14:12,910 --> 00:14:15,710
+You may have a question now here saying hey Karthik, you know what?
+
+183
+00:14:15,710 --> 00:14:22,190
+This seems to be wrong because if you are going to be automatically healing the test code, even if
+
+184
+00:14:22,190 --> 00:14:27,110
+there is a problem in the application's UI locator, how are we going to identify?
+
+185
+00:14:27,150 --> 00:14:29,830
+Well, guess what, we are going to be talking about that as well.
+
+186
+00:14:29,830 --> 00:14:34,870
+We're going to be addressing that issue in a way that if there is going to be any mismatch in the locator,
+
+187
+00:14:34,870 --> 00:14:40,310
+it is going to tell you these are the locators which has got changed and this caused the test to fail.
+
+188
+00:14:40,470 --> 00:14:42,550
+But then it went and fixed that issue.
+
+189
+00:14:42,550 --> 00:14:47,430
+And now you have a report which you can get to your developer and then say that these are located which
+
+190
+00:14:47,430 --> 00:14:53,460
+has been changed, but still the test has got passed because these are the places where the locator
+
+191
+00:14:53,460 --> 00:14:54,020
+has changed.
+
+192
+00:14:54,020 --> 00:14:54,740
+But guess what?
+
+193
+00:14:54,740 --> 00:15:00,340
+In order to make all of these to happen, it's a long process to go through and I'm sure you are going
+
+194
+00:15:00,340 --> 00:15:04,900
+to be coming up in the background where you have worked in automation testing before, but not really
+
+195
+00:15:04,900 --> 00:15:07,020
+building a smart system like these.
+
+196
+00:15:07,020 --> 00:15:12,940
+So it is going to take a long journey before we get to this particular point, and I will ensure that
+
+197
+00:15:12,940 --> 00:15:19,180
+I am not going to talk faster, and I'm not going to make you bored on this whole journey, and I'm
+
+198
+00:15:19,180 --> 00:15:25,340
+not going to make you uncomfortable in any sense, saying this is what is the code, just copy paste
+
+199
+00:15:25,340 --> 00:15:26,220
+it and work.
+
+200
+00:15:26,220 --> 00:15:28,100
+No, that's not the way we are going to deal with.
+
+201
+00:15:28,140 --> 00:15:31,980
+We are going to write every single code and we'll see how we can achieve this point.
+
+202
+00:15:32,020 --> 00:15:37,420
+Well, as that said, in our next lecture, we'll first talk about what are the components that we are
+
+203
+00:15:37,420 --> 00:15:40,380
+going to be building in this particular course.
+
+204
+00:15:40,740 --> 00:15:45,500
+And following that, we are going to do all of these operations manually, and then we are going to
+
+205
+00:15:45,540 --> 00:15:47,700
+start writing the code one by one.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 2. Understanding the Components to build for Self Healing Intelligent AI Test Code
+
+1
+00:00:00,040 --> 00:00:05,080
+In this lecture, we can talk about the components which are needed to build the solution that we just
+
+2
+00:00:05,080 --> 00:00:06,880
+talked in our last lecture.
+
+3
+00:00:07,080 --> 00:00:12,520
+So essentially, in order to build this entire component, we have to break down the code in such a
+
+4
+00:00:12,520 --> 00:00:19,880
+way that you can talk with your code as well as with your large language model in a more sensible manner.
+
+5
+00:00:20,000 --> 00:00:22,480
+So we are going to build the code something like this.
+
+6
+00:00:22,520 --> 00:00:26,240
+We are going to see how we can talk with the large language model.
+
+7
+00:00:26,360 --> 00:00:32,320
+Essentially, there can be an HTTP way of talking with the large language model, because you know that
+
+8
+00:00:32,320 --> 00:00:36,080
+we can access the local large language model using the API.
+
+9
+00:00:36,240 --> 00:00:42,280
+We can do the exact same thing to talk with the cloud large language models as well.
+
+10
+00:00:42,280 --> 00:00:47,520
+So you can talk with the local large language model with an HTTP request and cloud large language model
+
+11
+00:00:47,520 --> 00:00:49,760
+using some other libraries for that matter.
+
+12
+00:00:49,800 --> 00:00:56,040
+Let's say we're going to talk with the OpenAI model, so we can just use the OpenAI NuGet package for
+
+13
+00:00:56,040 --> 00:00:56,720
+that matter.
+
+14
+00:00:56,720 --> 00:01:02,920
+And similarly, we are going to be formatting the prompt in such a way that we get the response like
+
+15
+00:01:02,960 --> 00:01:04,280
+what we are looking for.
+
+16
+00:01:04,320 --> 00:01:08,670
+Remember the prompt engineering and the context engineering that we were talking earlier.
+
+17
+00:01:08,830 --> 00:01:11,270
+It's all going to come up right now.
+
+18
+00:01:11,350 --> 00:01:17,550
+So that's where we are going to implement all the logics and the ideas that we were talking in our last
+
+19
+00:01:17,550 --> 00:01:22,390
+section, and bring it to life, and we'll see how we can format those prompts over here.
+
+20
+00:01:22,390 --> 00:01:26,870
+So we need to prompt in such a way that we get the response of what we are looking for.
+
+21
+00:01:27,750 --> 00:01:34,710
+And then we are going to write some logic of how we can do self-healing of the code, which we got out
+
+22
+00:01:34,710 --> 00:01:39,070
+from the formatted prompts response from the large language model.
+
+23
+00:01:39,070 --> 00:01:43,670
+And that's what we are going to be doing over here in this particular place.
+
+24
+00:01:43,670 --> 00:01:49,910
+And finally, we are going to be updating our existing code in such a way that it gets all the self-healing
+
+25
+00:01:49,910 --> 00:01:51,270
+locator updated.
+
+26
+00:01:51,270 --> 00:01:54,230
+So these are things which are going to happen for us over here.
+
+27
+00:01:54,230 --> 00:01:57,470
+And the entire code is going to look something like this.
+
+28
+00:01:57,470 --> 00:02:03,990
+I know this diagram makes no sense right now, so I'm just going to ignore this for now because it is
+
+29
+00:02:03,990 --> 00:02:06,030
+going to surely confuse you a lot.
+
+30
+00:02:06,150 --> 00:02:11,510
+But as I said, let's see what are the technologies and libraries that we are going to be using in this
+
+31
+00:02:11,650 --> 00:02:12,730
+entire course.
+
+32
+00:02:12,730 --> 00:02:17,090
+Well we are going to be using C sharp DotNet as the programming language.
+
+33
+00:02:17,250 --> 00:02:24,610
+And we are going to be building the test using the selenium with dotnet core or playwright with c dotnet
+
+34
+00:02:24,610 --> 00:02:25,010
+code.
+
+35
+00:02:25,090 --> 00:02:29,930
+And also we'll be using Ides like Visual Studio or Writer IDE.
+
+36
+00:02:29,970 --> 00:02:30,650
+It doesn't matter.
+
+37
+00:02:30,650 --> 00:02:33,890
+You can use any of the IDE of your choice.
+
+38
+00:02:33,930 --> 00:02:37,570
+You can also use Ola and Ola cloud models.
+
+39
+00:02:37,570 --> 00:02:39,970
+While we use the local large language models.
+
+40
+00:02:40,610 --> 00:02:47,170
+We can also use the OpenAI models if we wanted because it could be super fast if you have those models,
+
+41
+00:02:47,370 --> 00:02:48,370
+API keys.
+
+42
+00:02:48,610 --> 00:02:52,650
+And also we are going to be using Selenium and Playwright as the testing tool.
+
+43
+00:02:52,690 --> 00:02:56,210
+Of course, while we do these self-healing tests.
+
+44
+00:02:56,330 --> 00:03:01,650
+Well, as I said, this is going to be an extensive list of libraries that we are going to be using.
+
+45
+00:03:01,810 --> 00:03:07,570
+And I'm telling you, this particular course is going to be so much fun because while I'm building this
+
+46
+00:03:07,570 --> 00:03:10,650
+entire code, it was really, really awesome.
+
+47
+00:03:10,690 --> 00:03:14,890
+In our next lecture, I'm going to quickly show you a demo of how all of these are going to work, so
+
+48
+00:03:14,890 --> 00:03:17,970
+that you can get a feel of what you are going to be building.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 3. Traditional Automation Test and its Problems
+
+1
+00:00:00,200 --> 00:00:05,960
+In this lecture, I'm going to show you a traditional test, which you can actually execute without
+
+2
+00:00:05,960 --> 00:00:08,480
+any of the AI source in it.
+
+3
+00:00:08,720 --> 00:00:16,200
+And in our next test, I'm going to show you how you can run the same test using a artificial intelligence
+
+4
+00:00:16,200 --> 00:00:18,120
+based self-healing approach.
+
+5
+00:00:18,400 --> 00:00:24,760
+So you can see that this particular code over here is essentially a traditional test, which has got
+
+6
+00:00:24,800 --> 00:00:25,960
+no AI in it.
+
+7
+00:00:26,000 --> 00:00:31,640
+It's been written using selenium, C-sharp, dotnet, and I am using a writer IDE for that matter.
+
+8
+00:00:31,640 --> 00:00:36,520
+So if you're just going to go to the writer ID over here and if you hit about JetBrains IDE over here,
+
+9
+00:00:36,520 --> 00:00:43,480
+you can see that I'm using a non-commercial use only license over here, which means this particular
+
+10
+00:00:43,480 --> 00:00:50,760
+license is a free version of the IDE, which you can use in Mac, Windows and Linux operating system.
+
+11
+00:00:50,760 --> 00:00:56,000
+So if you have never used the writer IDE before, I highly recommend you to do so because it's a super
+
+12
+00:00:56,000 --> 00:01:01,000
+awesome IDE, and it is far more better than Visual Studio itself.
+
+13
+00:01:01,040 --> 00:01:06,880
+Well, as I said, because I'm using Mac operating system, I am inclined towards using this particular
+
+14
+00:01:06,880 --> 00:01:12,660
+IDE ID because it is better than the VS code, because you don't have all the features that you can
+
+15
+00:01:12,660 --> 00:01:13,980
+get it from this particular IDE.
+
+16
+00:01:14,300 --> 00:01:19,380
+So this is the ID that I'm currently using, and I'm going to quickly show you what code I have written
+
+17
+00:01:19,380 --> 00:01:20,220
+over here.
+
+18
+00:01:20,260 --> 00:01:22,540
+You see that I'm just setting the Chrome options.
+
+19
+00:01:22,540 --> 00:01:23,940
+Nothing fancy there.
+
+20
+00:01:23,940 --> 00:01:31,380
+And I'm also passing the chrome driver over here in the selenium, which is going to invoke the browser
+
+21
+00:01:31,380 --> 00:01:32,140
+driver.
+
+22
+00:01:32,140 --> 00:01:37,740
+And then I'm going to navigate to this particular website over here, which is the app.com.
+
+23
+00:01:37,940 --> 00:01:44,460
+And I have written a simple page object model code for the home page, which has got the login link
+
+24
+00:01:44,860 --> 00:01:51,300
+and the employee details link, manage user link and the log of link over here is all sitting on the
+
+25
+00:01:51,340 --> 00:01:52,100
+home page.
+
+26
+00:01:52,220 --> 00:01:55,420
+And the only operation which I'm performing over here is clicking them.
+
+27
+00:01:55,700 --> 00:01:58,260
+That's all the other thing that I'm doing over here.
+
+28
+00:01:58,460 --> 00:02:05,500
+And for the login page, all I have done over here is selecting a username password, clicking the submit
+
+29
+00:02:05,500 --> 00:02:11,100
+button and then Remember Me checkbox, which I'm currently not using so I can even get rid of that so
+
+30
+00:02:11,100 --> 00:02:12,940
+that I can reduce the number of lines of code.
+
+31
+00:02:13,140 --> 00:02:18,000
+And you see that it is just doing a simple constructor operation over here, which I can essentially
+
+32
+00:02:18,000 --> 00:02:19,200
+put it on the top.
+
+33
+00:02:19,600 --> 00:02:25,080
+Uh, and then it is clicking uh, is entering the username and password for me over here.
+
+34
+00:02:25,120 --> 00:02:25,800
+That's all.
+
+35
+00:02:25,800 --> 00:02:27,680
+This is the super simple code.
+
+36
+00:02:27,880 --> 00:02:29,480
+Two classes over here.
+
+37
+00:02:29,480 --> 00:02:33,000
+And there is an enhanced tests which has got a traditional test in it.
+
+38
+00:02:33,000 --> 00:02:34,560
+It's really not enhanced, to be honest.
+
+39
+00:02:34,840 --> 00:02:38,080
+And if I'm going to run this test, you know what is going to happen, right?
+
+40
+00:02:38,120 --> 00:02:42,400
+It is just going to execute like any other selenium test.
+
+41
+00:02:42,440 --> 00:02:48,240
+It's going to open the application logs in, and then it's going to perform all the operations that
+
+42
+00:02:48,240 --> 00:02:49,120
+I have specified.
+
+43
+00:02:49,120 --> 00:02:54,280
+And the test has got passed over here, which we know how it works in selenium.
+
+44
+00:02:54,280 --> 00:02:59,280
+If you really have not worked in selenium before, I highly recommend you to watch my other videos where
+
+45
+00:02:59,280 --> 00:03:05,720
+I've talked about the selenium v dotnet from Complete Basics, so that course will help you how you
+
+46
+00:03:05,720 --> 00:03:08,040
+can get up and running with selenium.
+
+47
+00:03:08,680 --> 00:03:13,160
+And now coming back to the traditional tests problems.
+
+48
+00:03:13,400 --> 00:03:16,880
+So what exactly is the problem that we have got with the traditional tests.
+
+49
+00:03:17,080 --> 00:03:23,540
+Well let's say in the login page over here or maybe in the home page over here if I'm going to go and
+
+50
+00:03:23,540 --> 00:03:30,580
+change the locator, maybe the UI of the locator has changed from like a login link to maybe login link
+
+51
+00:03:30,580 --> 00:03:31,260
+or something like that.
+
+52
+00:03:31,260 --> 00:03:37,060
+I know it's never going to happen, but just for the hypothetical case over here, I've made it to logins
+
+53
+00:03:37,100 --> 00:03:39,140
+for some reason, right?
+
+54
+00:03:39,180 --> 00:03:43,340
+And that's what has changed in the UI of the application for that matter.
+
+55
+00:03:43,340 --> 00:03:50,380
+Or maybe your test code has got an obsolete locator and it has changed, uh, in the application.
+
+56
+00:03:50,380 --> 00:03:53,420
+And you may need to now go and fix your test code.
+
+57
+00:03:53,420 --> 00:03:54,620
+It can happen either way.
+
+58
+00:03:54,980 --> 00:03:57,820
+But let's say this is changing over here.
+
+59
+00:03:57,980 --> 00:04:02,340
+And now if we're going to run this particular traditional test, guess what's going to happen?
+
+60
+00:04:02,340 --> 00:04:05,060
+Just think about it before you answer it.
+
+61
+00:04:06,540 --> 00:04:07,380
+That's right.
+
+62
+00:04:07,380 --> 00:04:09,740
+The test is eventually going to fail.
+
+63
+00:04:09,940 --> 00:04:13,420
+So the the moment I run this test over here look at that.
+
+64
+00:04:13,460 --> 00:04:14,940
+It's not going to click the login.
+
+65
+00:04:14,940 --> 00:04:17,620
+And immediately the selenium is going to give up.
+
+66
+00:04:17,620 --> 00:04:25,180
+And saying no element found or unable to locate the element logins because it doesn't exist.
+
+67
+00:04:25,420 --> 00:04:26,060
+Amazing.
+
+68
+00:04:26,380 --> 00:04:27,580
+So what is the solution.
+
+69
+00:04:27,890 --> 00:04:28,610
+Me?
+
+70
+00:04:28,650 --> 00:04:29,890
+Are you as a test engineer?
+
+71
+00:04:29,970 --> 00:04:33,650
+Go and do we go and change the locator?
+
+72
+00:04:34,090 --> 00:04:38,010
+Or we just go and see that the locator has something gone wrong?
+
+73
+00:04:38,010 --> 00:04:44,490
+So we go to the Chrome browser and then we figure out the locator link has changed from login to logins.
+
+74
+00:04:44,490 --> 00:04:48,450
+So we go and inspect the element something like this from Chrome dev tool.
+
+75
+00:04:48,730 --> 00:04:52,730
+We see that oh I guess what we can use an ID for that matter to make it work.
+
+76
+00:04:52,730 --> 00:04:55,810
+If not, this is just going to fail, right?
+
+77
+00:04:56,250 --> 00:05:01,570
+But what if we have an more elegant approach to take care of?
+
+78
+00:05:01,570 --> 00:05:03,770
+The locator changes automatically.
+
+79
+00:05:04,690 --> 00:05:05,810
+Is it even possible?
+
+80
+00:05:06,130 --> 00:05:11,410
+Well guess what, there were many tool came out to fix this particular problem.
+
+81
+00:05:11,450 --> 00:05:14,850
+One of the tool which I worked previously was the test projects.
+
+82
+00:05:14,850 --> 00:05:18,570
+I'm not sure whether you have heard about the tool or not.
+
+83
+00:05:18,610 --> 00:05:24,410
+That tool really had an option to go and self-heal the locators automatically.
+
+84
+00:05:24,570 --> 00:05:31,410
+The way they do it is they store all the different combinations of locators for one single locator.
+
+85
+00:05:31,450 --> 00:05:38,070
+For example, the login link can be identified using the link text as login, or they can also be identified
+
+86
+00:05:38,070 --> 00:05:41,790
+using the ID as login link.
+
+87
+00:05:41,830 --> 00:05:47,270
+They can also be identified using the CSS locator or using the XPath and using name.
+
+88
+00:05:47,270 --> 00:05:53,150
+If there is any right, you can identify the same using four combinations of locator.
+
+89
+00:05:53,310 --> 00:05:58,950
+The same thing goes for the text box as well, where you can identify using its ID, its name, its
+
+90
+00:05:58,950 --> 00:06:01,670
+CSS, its XPath, something like that.
+
+91
+00:06:01,990 --> 00:06:05,830
+So these are the four ways you can control this particular.
+
+92
+00:06:05,870 --> 00:06:07,790
+You can locate this particular element.
+
+93
+00:06:07,790 --> 00:06:12,430
+And then you can store all of them into a collection and iterate through all the elements in the collection
+
+94
+00:06:12,430 --> 00:06:14,230
+and find which one is working.
+
+95
+00:06:15,190 --> 00:06:17,310
+That's one possible way of doing it.
+
+96
+00:06:17,310 --> 00:06:19,150
+That's a classical approach.
+
+97
+00:06:19,590 --> 00:06:26,630
+But now we are going to see how we can actually enhance the entire test with the power of large language
+
+98
+00:06:26,630 --> 00:06:31,270
+model, the Overlord, which is going to do all these operation for you.
+
+99
+00:06:31,270 --> 00:06:36,630
+And I'm going to show you how everything is going to happen with super minimal code change with the
+
+100
+00:06:36,630 --> 00:06:42,230
+power of large language model, and we will see how the same test can be enhanced from there.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 4. How AI will do Self Healing of Locators in Selenium with the Power of AI
+
+1
+00:00:00,160 --> 00:00:02,920
+All right, so now it's magic time.
+
+2
+00:00:02,920 --> 00:00:07,400
+We are gonna see how a simple locator change actually failed.
+
+3
+00:00:07,400 --> 00:00:14,280
+Our entire test with a traditional test approach can be fixed using the self-healing approach that I
+
+4
+00:00:14,280 --> 00:00:15,160
+have built.
+
+5
+00:00:15,160 --> 00:00:20,440
+And we are going to build this together in the course of time in this course.
+
+6
+00:00:20,680 --> 00:00:22,560
+So you can see that this is the code.
+
+7
+00:00:22,560 --> 00:00:25,680
+I'm not going to get into the utilities section over here.
+
+8
+00:00:25,680 --> 00:00:28,880
+It's going to be super confusing if I'm going to show you right now.
+
+9
+00:00:29,000 --> 00:00:34,760
+But there is an app settings which is going to give you some context already, and you can see that
+
+10
+00:00:34,760 --> 00:00:40,680
+this particular app settings over here is going to tell you that we are using a provider as local large
+
+11
+00:00:40,680 --> 00:00:41,800
+language model.
+
+12
+00:00:41,800 --> 00:00:46,160
+And because we are using local large language model, we don't need to have an API key for that matter.
+
+13
+00:00:46,160 --> 00:00:47,320
+So it's just empty.
+
+14
+00:00:47,720 --> 00:00:54,120
+And we also have a base URL of our olama that we is that is currently running within our local machine.
+
+15
+00:00:54,120 --> 00:00:57,560
+You remember the Olama serve that you do the same exact thing.
+
+16
+00:00:57,600 --> 00:01:03,400
+And I'm using a model which is actually a combination of the model running on the cloud.
+
+17
+00:01:03,400 --> 00:01:08,000
+So I'm using a Q1 three quarter model with a 480 billion parameter.
+
+18
+00:01:08,040 --> 00:01:12,160
+You may ask, hey Karthik, you know what you just told about the privacy and all those things, but
+
+19
+00:01:12,160 --> 00:01:13,800
+now you're using the cloud model.
+
+20
+00:01:13,800 --> 00:01:15,840
+So where is your privacy thing that is gone?
+
+21
+00:01:15,880 --> 00:01:17,720
+Guess what I totally understand.
+
+22
+00:01:17,760 --> 00:01:27,520
+We can change this model to the GPT Oasis 20 billion parameter and the three quarter with just 30 billion
+
+23
+00:01:27,520 --> 00:01:28,320
+parameter as well.
+
+24
+00:01:28,360 --> 00:01:29,880
+We are going to do that in this course.
+
+25
+00:01:29,880 --> 00:01:34,440
+But for now, for this demonstration, I'm just going to use this particular model over here.
+
+26
+00:01:34,640 --> 00:01:37,920
+And I'm setting the temperature and the max tokens over here.
+
+27
+00:01:38,200 --> 00:01:43,520
+And I'm not going to let more tokens to be flown to burn my cars there.
+
+28
+00:01:44,640 --> 00:01:47,000
+But as I said, how about the coding part?
+
+29
+00:01:47,040 --> 00:01:49,000
+This is exactly the same code you remember.
+
+30
+00:01:49,240 --> 00:01:50,480
+Same code.
+
+31
+00:01:50,640 --> 00:01:51,680
+No change.
+
+32
+00:01:51,800 --> 00:01:56,840
+But the only change which has happened is in the utilities, which we are going to be building anyways.
+
+33
+00:01:57,160 --> 00:01:58,920
+And look at the home page.
+
+34
+00:01:58,920 --> 00:02:01,240
+This time a bit changed.
+
+35
+00:02:01,280 --> 00:02:03,040
+It is definitely a bit changed.
+
+36
+00:02:03,080 --> 00:02:08,080
+You see, we are using a task of web element, pretty much like if you're using playwright before,
+
+37
+00:02:08,360 --> 00:02:12,880
+you might have seen that every single code is asynchronous in playwright.
+
+38
+00:02:12,880 --> 00:02:17,520
+And that's exactly we are going to be implementing in selenium for the first time.
+
+39
+00:02:17,760 --> 00:02:18,360
+There we go.
+
+40
+00:02:18,800 --> 00:02:20,080
+And look at that.
+
+41
+00:02:20,080 --> 00:02:24,840
+We have got the same find element, but you have got a friendly name there.
+
+42
+00:02:25,240 --> 00:02:28,840
+Look at the the locator there logins.
+
+43
+00:02:29,440 --> 00:02:31,280
+It's two three years now.
+
+44
+00:02:31,760 --> 00:02:34,280
+So we are going to see how that is going to work.
+
+45
+00:02:34,280 --> 00:02:35,120
+And guess what.
+
+46
+00:02:35,520 --> 00:02:38,440
+The code of the rest of thing remains exactly the same.
+
+47
+00:02:38,440 --> 00:02:43,520
+But only thing is because we're using an asynchronous coding, it is going to be async of task.
+
+48
+00:02:43,800 --> 00:02:50,120
+That is the only change has happened over here and login page.
+
+49
+00:02:50,680 --> 00:02:51,640
+Look at that.
+
+50
+00:02:51,680 --> 00:02:53,720
+How bad the locators can be.
+
+51
+00:02:53,760 --> 00:02:55,320
+You can just imagine it.
+
+52
+00:02:55,320 --> 00:02:58,800
+But they are all just going to work because we have got a friendly name.
+
+53
+00:02:58,800 --> 00:03:03,600
+It's going to say that username field, password field and you can even give like use.
+
+54
+00:03:03,640 --> 00:03:06,240
+It is a username field, something like that.
+
+55
+00:03:06,280 --> 00:03:08,760
+It will still going to go and identify for you.
+
+56
+00:03:08,960 --> 00:03:11,040
+That's how this system is being designed.
+
+57
+00:03:12,240 --> 00:03:16,640
+And the code remains exactly the same for both of them.
+
+58
+00:03:16,640 --> 00:03:17,880
+No change on that.
+
+59
+00:03:18,160 --> 00:03:20,440
+And let's go to the enhanced test over here.
+
+60
+00:03:20,440 --> 00:03:24,760
+It is still the exact same code that we just executed over here.
+
+61
+00:03:24,800 --> 00:03:28,800
+If you just see this is the same code, no change on that.
+
+62
+00:03:29,000 --> 00:03:35,200
+The only change which we did is on the locator side and of course on the utilities over here.
+
+63
+00:03:36,120 --> 00:03:38,840
+Now let's try to run this code and see what is going to happen.
+
+64
+00:03:39,120 --> 00:03:44,240
+So I'm going to run this code and you will notice that the locators are all super bad.
+
+65
+00:03:44,280 --> 00:03:50,110
+It is all just like username passwords, some thing over there.
+
+66
+00:03:50,110 --> 00:03:54,670
+And look at the at the logins over there, which is quite bad as well.
+
+67
+00:03:54,950 --> 00:04:00,790
+So if I'm going to run this particular test this time, you will notice that it is going to open the
+
+68
+00:04:00,790 --> 00:04:01,510
+application.
+
+69
+00:04:01,510 --> 00:04:06,950
+But the login is going to take some time before it clicks, because there is some process going on there.
+
+70
+00:04:07,430 --> 00:04:14,030
+And the admin username and password has took some time as well before it performs an operation and see
+
+71
+00:04:14,190 --> 00:04:16,950
+the login button is also been clicked this time.
+
+72
+00:04:17,470 --> 00:04:17,910
+Boom!
+
+73
+00:04:18,310 --> 00:04:25,670
+It took 18 seconds 953 milliseconds to perform this operation, as opposed to just for a second while
+
+74
+00:04:25,670 --> 00:04:28,030
+we were executing with a failing test.
+
+75
+00:04:28,070 --> 00:04:32,470
+Of course, go and fix this particular test and see what's going to happen if I'm going to run the working
+
+76
+00:04:32,510 --> 00:04:35,710
+test, uh, which is of no self-healing.
+
+77
+00:04:35,950 --> 00:04:40,190
+It was running, I think, quite faster because it has got all the locators.
+
+78
+00:04:40,710 --> 00:04:47,310
+Boom, It took seven seconds, but with the AI it took 18.9 seconds.
+
+79
+00:04:47,510 --> 00:04:47,950
+Hmm.
+
+80
+00:04:48,630 --> 00:04:55,990
+I know there is a delay, but it has actually managed to run the test without any issue.
+
+81
+00:04:56,030 --> 00:05:01,870
+It is not really going to update your page object model code there, but it is trying to run the test
+
+82
+00:05:01,910 --> 00:05:05,270
+even with a sensible locator strategy.
+
+83
+00:05:05,310 --> 00:05:07,510
+So that's how it is really going to work.
+
+84
+00:05:07,710 --> 00:05:08,510
+And look at that.
+
+85
+00:05:08,550 --> 00:05:09,670
+How fast it is.
+
+86
+00:05:09,670 --> 00:05:14,990
+14 seconds just double the amount of execution, but it's still going to work.
+
+87
+00:05:15,630 --> 00:05:17,350
+This is the power of AI guys.
+
+88
+00:05:17,350 --> 00:05:20,990
+It's all running with a local large language model over there.
+
+89
+00:05:21,230 --> 00:05:26,910
+I know it is not truly local large language model, but we can change the model and see how that works.
+
+90
+00:05:26,910 --> 00:05:34,510
+So I'm going to open a terminal over here, and I'm going to see if I'm going to use the Q1 quarter
+
+91
+00:05:34,510 --> 00:05:38,910
+330 billion parameter model instead of the cloud model that we were using.
+
+92
+00:05:38,910 --> 00:05:46,790
+So I go to the app settings over here, and I'm going to change this model to 30 billion parameter model.
+
+93
+00:05:46,790 --> 00:05:48,230
+And now I'm going to run.
+
+94
+00:05:48,510 --> 00:05:54,870
+I know it is going to take some time because it is not really using the cloud model.
+
+95
+00:05:55,030 --> 00:06:01,350
+Uh, so it is going to be slower as opposed to the 18 milliseconds which was working before.
+
+96
+00:06:01,590 --> 00:06:06,470
+It is going to take some time because it depends on the machine's performance as well.
+
+97
+00:06:07,310 --> 00:06:08,310
+And there we go.
+
+98
+00:06:08,350 --> 00:06:10,870
+It took 45 seconds this time.
+
+99
+00:06:10,950 --> 00:06:16,950
+Um, I know this is going to happen because my machine is of course M1 Max.
+
+100
+00:06:16,950 --> 00:06:24,830
+It still can pull out the speed, but it is not as great model because M1 Max was introduced way back
+
+101
+00:06:24,830 --> 00:06:32,950
+in 2021, and during that time, the large language model was not even a thing because the large language
+
+102
+00:06:32,950 --> 00:06:42,590
+model was started to introduce only in 2021, where the ChatGPT was released, and then people started
+
+103
+00:06:42,590 --> 00:06:44,470
+getting crazy during that time.
+
+104
+00:06:44,470 --> 00:06:47,470
+So Apple didn't even know that these things are going to happen.
+
+105
+00:06:47,470 --> 00:06:53,310
+That's the reason why these machines, like M1 machines, don't have the capability to run a bigger
+
+106
+00:06:53,310 --> 00:06:53,830
+model.
+
+107
+00:06:53,830 --> 00:07:00,510
+But of course, as I told you, if you're using the latest generation of the Nvidia spark machine or
+
+108
+00:07:00,630 --> 00:07:07,510
+maybe the upcoming M5 machines, those machines are very better in the NPU processing, so you will
+
+109
+00:07:07,510 --> 00:07:11,310
+see a better performance during that time using these models.
+
+110
+00:07:11,310 --> 00:07:12,470
+But hey, what?
+
+111
+00:07:12,710 --> 00:07:15,030
+The self-healing is already happening.
+
+112
+00:07:15,070 --> 00:07:23,390
+It's running even for an completely scrambled, jeopardized locator without any issue.
+
+113
+00:07:23,630 --> 00:07:25,710
+That's the power that we are talking about.
+
+114
+00:07:25,710 --> 00:07:29,070
+This is what we are going to be building in this entire course.
+
+115
+00:07:29,070 --> 00:07:30,710
+And you have already seen the.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 5. Prompting LLMs to get Self Healed Alternative Locators
+
+1
+00:00:00,360 --> 00:00:01,640
+All right.
+
+2
+00:00:01,640 --> 00:00:09,040
+So now that you have seen a demo of how the AI self-healing code really works, and now we are going
+
+3
+00:00:09,040 --> 00:00:12,680
+to see how we can achieve the same thing manually.
+
+4
+00:00:12,880 --> 00:00:16,720
+And then we will try to start optimizing it from there on.
+
+5
+00:00:16,920 --> 00:00:23,800
+So the way we are going to do it manually is we need to now pass a page to the large language model,
+
+6
+00:00:23,800 --> 00:00:29,680
+and then we need to get the page locators from the large language model.
+
+7
+00:00:29,680 --> 00:00:33,960
+So for instance I'm going to go to my page over here for that matter.
+
+8
+00:00:34,080 --> 00:00:41,120
+And I wanted to pass this page to the large language model, which is nothing but the sonnet 4.5 model
+
+9
+00:00:41,440 --> 00:00:45,440
+using the cloud desktop, and then get the locators out from it.
+
+10
+00:00:45,960 --> 00:00:46,960
+How can I do it?
+
+11
+00:00:47,000 --> 00:00:54,000
+Well guess what, you can either paste this page over here and then ask, because nowadays these large
+
+12
+00:00:54,000 --> 00:00:59,640
+language model comes with the web search feature or even the playwright MCP server.
+
+13
+00:00:59,680 --> 00:01:03,560
+You remember these were the things that we were discussing in our last section of this course.
+
+14
+00:01:03,560 --> 00:01:06,220
+So you can get those information out from there.
+
+15
+00:01:06,660 --> 00:01:10,940
+Or you can also pass the entire source code of the page.
+
+16
+00:01:10,980 --> 00:01:12,340
+You know why we are doing it?
+
+17
+00:01:12,340 --> 00:01:19,900
+Because the local large language model may not have internet access, so you can't really pass the URL
+
+18
+00:01:19,940 --> 00:01:25,700
+something like this and get the locators out from the local large language models.
+
+19
+00:01:26,220 --> 00:01:31,060
+There is still a way to do a web search in Olama, which I'm not going to talk about.
+
+20
+00:01:31,060 --> 00:01:37,620
+You can do a web search and web fetch operation using Olama using local large language models.
+
+21
+00:01:37,620 --> 00:01:47,780
+So if you go and search for Olama web search and web fetch tool and you see that they have got a way
+
+22
+00:01:47,780 --> 00:01:53,860
+you can do it, and I have already talked about that as well in my YouTube channel before, which you
+
+23
+00:01:53,860 --> 00:02:01,740
+can actually do it as well over here, uh, using this search operation, which guess what?
+
+24
+00:02:01,780 --> 00:02:06,140
+Because we have told and I have promised you that we are going to be working with a local large language
+
+25
+00:02:06,140 --> 00:02:06,780
+model.
+
+26
+00:02:06,780 --> 00:02:09,840
+I'm not going gonna incline toward those operations.
+
+27
+00:02:10,200 --> 00:02:14,320
+So what we're going to do is we are going to pass the entire page source itself.
+
+28
+00:02:14,320 --> 00:02:16,320
+So I'm going to do an inspect over here.
+
+29
+00:02:16,640 --> 00:02:19,240
+And let's say I'm going to pass the entire page source.
+
+30
+00:02:19,280 --> 00:02:19,480
+Right.
+
+31
+00:02:19,520 --> 00:02:20,560
+So view page source.
+
+32
+00:02:20,560 --> 00:02:22,320
+This is the page source that I have got.
+
+33
+00:02:22,480 --> 00:02:26,080
+I'm going to copy this whole page source by just doing copy.
+
+34
+00:02:26,480 --> 00:02:30,440
+And I'm going to go to the cloud desktop over here.
+
+35
+00:02:30,760 --> 00:02:35,480
+And I'm going to ask it to um get me the locators.
+
+36
+00:02:35,480 --> 00:02:43,880
+So I'm going to say, can you get me the locators for the page source.
+
+37
+00:02:43,920 --> 00:02:53,400
+And I'm going to paste that over here, and I'm going to say I want the locators for uh ID, XPath,
+
+38
+00:02:53,800 --> 00:03:02,920
+uh, CSS and name, uh, and whatever that you have even link text for that matter, whatever that you
+
+39
+00:03:02,920 --> 00:03:10,720
+think that you need to get it so you can just pass them all over here and then you can, uh, say that
+
+40
+00:03:10,760 --> 00:03:19,700
+I get them all in a JSON object or JSON format, whatever that you want to name it.
+
+41
+00:03:20,020 --> 00:03:22,900
+And I'm going to hit run over here.
+
+42
+00:03:22,900 --> 00:03:29,380
+And the moment I do this, uh, you are going to see that, uh, it is going to get the locators for
+
+43
+00:03:29,380 --> 00:03:30,340
+you over here.
+
+44
+00:03:30,380 --> 00:03:31,540
+Oh look at that.
+
+45
+00:03:31,580 --> 00:03:33,660
+It's going to say navigation link.
+
+46
+00:03:33,860 --> 00:03:35,180
+And then there is this home.
+
+47
+00:03:35,180 --> 00:03:42,180
+And within the home you have got the locators which can be identified using link text, XPath and CSS.
+
+48
+00:03:42,220 --> 00:03:49,060
+Similarly, the about can be identified using link text as about an XPath and CSS and the employee list,
+
+49
+00:03:49,380 --> 00:03:52,380
+which is this particular URL that we're talking about.
+
+50
+00:03:52,420 --> 00:03:55,100
+The employee list can be identified using this.
+
+51
+00:03:55,380 --> 00:03:58,100
+And the register, which is this one.
+
+52
+00:03:58,100 --> 00:04:03,460
+I think the register link and login link can be identified using these and the login form you can identify
+
+53
+00:04:03,460 --> 00:04:04,900
+using this particular locators.
+
+54
+00:04:05,260 --> 00:04:09,540
+And the username can be identified using these uh and look at that.
+
+55
+00:04:09,580 --> 00:04:14,440
+It's also identify using some CSS alt and CSS type which is?
+
+56
+00:04:14,840 --> 00:04:15,440
+Guess what?
+
+57
+00:04:15,480 --> 00:04:18,200
+Are not the locators which selenium can support.
+
+58
+00:04:18,200 --> 00:04:23,440
+So these locators are kind of something that you don't even care while you work with selenium.
+
+59
+00:04:23,440 --> 00:04:30,840
+So you only thing which works is probably the ID name XPath, uh, CSS and class name for that matter.
+
+60
+00:04:30,840 --> 00:04:34,000
+So not the XPath alt which is being supported.
+
+61
+00:04:34,280 --> 00:04:39,200
+And similarly, uh, you can see that other locators are also going to come up over there.
+
+62
+00:04:39,360 --> 00:04:42,840
+So these are the ways that you can get the locators.
+
+63
+00:04:42,840 --> 00:04:44,080
+But guess what.
+
+64
+00:04:44,120 --> 00:04:50,240
+Now you may think Karthik, this particular prompt that we have got can be improved because it is giving
+
+65
+00:04:50,240 --> 00:04:51,800
+me a lot of information.
+
+66
+00:04:51,800 --> 00:04:53,800
+How can I improve this particular prompt?
+
+67
+00:04:53,840 --> 00:04:59,040
+You know what, I'm going to ask this to the large language model itself so that we can get what we
+
+68
+00:04:59,080 --> 00:04:59,840
+are looking for.
+
+69
+00:05:00,080 --> 00:05:13,280
+So I'm going to say can you write me a prompt which I can use to get the locators, uh, from the given
+
+70
+00:05:13,320 --> 00:05:14,400
+page source.
+
+71
+00:05:15,360 --> 00:05:28,930
+And I'm also going to say get me the locators for ID name, XPath, CSS selector and maybe class name
+
+72
+00:05:29,250 --> 00:05:30,330
+and link.
+
+73
+00:05:30,370 --> 00:05:32,130
+Text only these right?
+
+74
+00:05:32,170 --> 00:05:42,690
+And I'm also going to say format uh as a, a proper uh JSON with probably double quotes if possible,
+
+75
+00:05:42,730 --> 00:05:45,170
+because that's what it has done already.
+
+76
+00:05:45,170 --> 00:05:49,970
+But still make sure that you say all of these and I'm going to hit enter.
+
+77
+00:05:50,090 --> 00:05:52,370
+And now guess what is going to happen.
+
+78
+00:05:52,530 --> 00:05:57,810
+This particular large language model is going to start writing a prompt for you.
+
+79
+00:05:58,010 --> 00:05:59,690
+Ooh look at that.
+
+80
+00:05:59,730 --> 00:06:06,130
+Saying analyze the provided HTML page source and extract all the locators for the interactive elements
+
+81
+00:06:06,130 --> 00:06:07,090
+like all of these.
+
+82
+00:06:07,090 --> 00:06:09,050
+So it's adding some more ideas for me.
+
+83
+00:06:09,090 --> 00:06:14,410
+It's also saying that for each element provide the following locator types where applicable like ID
+
+84
+00:06:14,450 --> 00:06:15,730
+name, XPath.
+
+85
+00:06:15,770 --> 00:06:20,170
+It's also saying provide multiple variations by ID name attributes by text.
+
+86
+00:06:20,210 --> 00:06:20,750
+Ooh Oof!
+
+87
+00:06:21,070 --> 00:06:22,430
+That I don't think we need it.
+
+88
+00:06:22,630 --> 00:06:27,070
+And CSS selector class name link text for the anchor tags.
+
+89
+00:06:27,470 --> 00:06:33,630
+And it also says that output the locators in a well structured JSON format with a proper double quotes.
+
+90
+00:06:33,830 --> 00:06:36,310
+Organize the element logically by their purpose.
+
+91
+00:06:36,310 --> 00:06:36,790
+Example.
+
+92
+00:06:36,790 --> 00:06:37,630
+Navigation.
+
+93
+00:06:37,790 --> 00:06:40,910
+I think these things are not even required, but still it is adding it.
+
+94
+00:06:41,230 --> 00:06:42,870
+And it's also saying uh.
+
+95
+00:06:42,870 --> 00:06:43,430
+Requirement.
+
+96
+00:06:43,430 --> 00:06:45,350
+Use the proper JSON syntax.
+
+97
+00:06:45,350 --> 00:06:48,350
+Include all the interactive elements, provide multiple locators.
+
+98
+00:06:48,470 --> 00:06:50,910
+Ooh, just pretty cool right?
+
+99
+00:06:51,230 --> 00:06:53,550
+This is already amazing.
+
+100
+00:06:54,430 --> 00:06:55,270
+And look at that.
+
+101
+00:06:55,270 --> 00:06:56,310
+There is a page source.
+
+102
+00:06:56,310 --> 00:06:57,910
+It's also adding it over here.
+
+103
+00:06:57,910 --> 00:07:00,110
+So we can use this prompt now.
+
+104
+00:07:00,310 --> 00:07:03,710
+And we can ask the question and see how that works.
+
+105
+00:07:03,710 --> 00:07:08,590
+So I'm going to go and paste this over here, this particular uh prompt.
+
+106
+00:07:08,790 --> 00:07:13,590
+And I'm going to get the page source one more time, which is this one.
+
+107
+00:07:13,870 --> 00:07:19,190
+And I'm going to paste it, and I'm going to run the same prompt that we have got.
+
+108
+00:07:19,190 --> 00:07:22,030
+And let's see what we are going to get this time.
+
+109
+00:07:22,190 --> 00:07:23,350
+And look at that.
+
+110
+00:07:23,390 --> 00:07:24,690
+It's immediate.
+
+111
+00:07:25,050 --> 00:07:28,930
+We have got it perfectly over here like XPath.
+
+112
+00:07:29,130 --> 00:07:31,050
+These are the locator CSS.
+
+113
+00:07:31,090 --> 00:07:34,250
+These are the locators and ID and the link text is this one.
+
+114
+00:07:34,970 --> 00:07:36,290
+This is for the home link.
+
+115
+00:07:36,730 --> 00:07:45,650
+Similarly for the about link employee list link, register link login links and all of these.
+
+116
+00:07:45,930 --> 00:07:49,850
+So this is how you can write a prompt to get this happen.
+
+117
+00:07:49,970 --> 00:07:53,210
+And you see that this is going to be always consistent.
+
+118
+00:07:53,210 --> 00:07:57,010
+Every single time you are going to be asking that question.
+
+119
+00:07:57,410 --> 00:07:58,850
+It is never going to change.
+
+120
+00:07:58,970 --> 00:08:04,250
+I think we just missed out the prompt with one thing that while we were copying that, you remember
+
+121
+00:08:04,610 --> 00:08:07,370
+that we don't need a variations of the XPath.
+
+122
+00:08:07,570 --> 00:08:12,610
+Uh, I think that's the reason why it is just bringing up this time, which we can probably change this
+
+123
+00:08:12,610 --> 00:08:13,250
+over here.
+
+124
+00:08:13,330 --> 00:08:19,130
+So let me go and copy one more time, and I'm going to paste that over here.
+
+125
+00:08:19,370 --> 00:08:23,210
+And I'm just going to say just provide the XPath with multiple variations.
+
+126
+00:08:23,210 --> 00:08:24,370
+We don't need it.
+
+127
+00:08:25,010 --> 00:08:32,630
+And similarly for the class name, which is fine, and also for CSS, don't provide the multiple variations.
+
+128
+00:08:32,630 --> 00:08:33,350
+We don't need it.
+
+129
+00:08:33,350 --> 00:08:39,150
+Just give the CSS class and do not organize the element locator by their purpose.
+
+130
+00:08:39,150 --> 00:08:41,070
+We don't need that over here.
+
+131
+00:08:41,390 --> 00:08:45,910
+Uh, and I think the remaining things looks pretty much exactly the same.
+
+132
+00:08:46,110 --> 00:08:48,670
+And I think the structure is also fine.
+
+133
+00:08:48,870 --> 00:08:53,830
+It has given a structure like how it should be, uh, generated as well.
+
+134
+00:08:53,830 --> 00:08:59,630
+So this is proving to the point that it is always going to be the same for us every single time.
+
+135
+00:08:59,910 --> 00:09:07,990
+And now I'm going to run this code and you will see that this code is just going to work over here.
+
+136
+00:09:08,510 --> 00:09:09,270
+Look at that.
+
+137
+00:09:09,590 --> 00:09:15,950
+So this is the way that we can actually fine tune our prompts and we can get how we are looking for
+
+138
+00:09:15,990 --> 00:09:16,910
+which is amazing.
+
+139
+00:09:17,630 --> 00:09:23,350
+So hope you got the idea of how we can start doing the prompt and how we are getting the locators that
+
+140
+00:09:23,350 --> 00:09:24,230
+we're looking for.
+
+141
+00:09:24,230 --> 00:09:31,250
+So even if the locators in the UI changes dynamically for some reason, we can go and prompt the large
+
+142
+00:09:31,250 --> 00:09:35,890
+language model and get the output that we are looking for immediately over here.
+
+143
+00:09:35,890 --> 00:09:44,010
+And this way we can start aligning our current test approach or current locator finding approach with
+
+144
+00:09:44,010 --> 00:09:50,170
+the latest locator that we have got over here, and then start using them while performing the operation.
+
+145
+00:09:50,570 --> 00:09:57,410
+These are the things we are going to be doing starting our next lecture of this particular course.
+
+146
+00:09:57,410 --> 00:10:04,370
+But before that, we'll first need to figure out how we can talk with the large language model using
+
+147
+00:10:04,490 --> 00:10:05,650
+C sharp code.
+
+148
+00:10:05,770 --> 00:10:11,250
+And that is what is going to be the starting point to work with large language model, which we are
+
+149
+00:10:11,250 --> 00:10:15,050
+going to be doing everything starting our next section.
+
+150
+00:10:15,050 --> 00:10:19,530
+So this is the foundation element that you have learned so far in this particular section.
+
+151
+00:10:19,530 --> 00:10:23,330
+In our next section, we are going to start writing the actual code.
+
+152
+00:10:23,330 --> 00:10:29,690
+So get ready and put your developer hats right now while you are still doing testing, because right
+
+153
+00:10:29,690 --> 00:10:35,250
+now you are going to be writing quite some code to achieve the operation that we just saw as a demo.
+
+
+==================================================================================
+
+
+section 5. Building Foundational Component Talking with Local LLMs and Cloud AI LLMs
+
+video 1. introduction
+
+1
+00:00:00,160 --> 00:00:02,120
+Welcome to the next section of our course.
+
+2
+00:00:02,120 --> 00:00:07,080
+And in this section we are going to start talking about building AI driven, self-healing, intelligent
+
+3
+00:00:07,120 --> 00:00:08,400
+test automation code.
+
+4
+00:00:08,600 --> 00:00:13,440
+So starting this section is where we are going to start fusing all the knowledge that we have gained
+
+5
+00:00:13,440 --> 00:00:15,560
+in our earlier sections of this course.
+
+6
+00:00:15,760 --> 00:00:22,360
+So we have been talking about how the prompt works and how the context engineering works, and how you
+
+7
+00:00:22,360 --> 00:00:29,960
+can do WIP coding and how AI agents are involved on giving the large language model the ability to go
+
+8
+00:00:29,960 --> 00:00:31,320
+and generate the code.
+
+9
+00:00:31,320 --> 00:00:39,400
+And then we also saw how we can do a prompt, and then we can perform a code execution like automatic
+
+10
+00:00:39,400 --> 00:00:43,920
+self-healing code using the power of local large language models.
+
+11
+00:00:44,000 --> 00:00:47,280
+So with that, we have understood how things are going to work.
+
+12
+00:00:47,320 --> 00:00:51,280
+At least we now know the context of how exactly we are going to start building it.
+
+13
+00:00:51,280 --> 00:00:57,920
+But now we wanted to see how that we are going to put all of the learnings into action.
+
+14
+00:00:58,080 --> 00:01:04,880
+Well, as I said in our last section, we saw how the prompting of a large language model works by giving
+
+15
+00:01:04,920 --> 00:01:08,130
+a fine tuned prompt and we got the response.
+
+16
+00:01:08,130 --> 00:01:10,370
+Something like this, as you can see over here.
+
+17
+00:01:10,370 --> 00:01:15,170
+So we saw how things were working at least until our last section.
+
+18
+00:01:15,170 --> 00:01:22,130
+So with this knowledge in place now, we know that if we pass a full blown, uh, source code of the
+
+19
+00:01:22,170 --> 00:01:29,450
+page, we can get the response something like this from a large language model, this is going to be
+
+20
+00:01:29,450 --> 00:01:33,010
+the same, even if you are going to try with our local large language model as well.
+
+21
+00:01:33,010 --> 00:01:39,610
+So if you are going to have the Ola client, you can do the exact same prompt and then you can get the
+
+22
+00:01:39,610 --> 00:01:41,210
+same response as well.
+
+23
+00:01:41,210 --> 00:01:43,250
+And there is no difference on that.
+
+24
+00:01:43,250 --> 00:01:50,650
+Just to show you an example of how this works, I'm going to go and copy this entire prompt from here,
+
+25
+00:01:50,810 --> 00:01:53,410
+and I'm going to open the Ola client.
+
+26
+00:01:53,410 --> 00:01:55,650
+And then I'm going to paste this over here.
+
+27
+00:01:55,650 --> 00:02:02,570
+And I'm going to be using the uh, 30 billion parameter, the quarter 30 billion parameter over here.
+
+28
+00:02:02,770 --> 00:02:07,530
+And I'm going to pass the source code of the page, which is this one as you remember.
+
+29
+00:02:07,530 --> 00:02:13,610
+So I'm going to pass exactly the same thing like how I did pass to the cloud desktop.
+
+30
+00:02:13,770 --> 00:02:19,460
+I'm going to go and copy this one over here, and I'm going to paste this and I'm going to run.
+
+31
+00:02:19,460 --> 00:02:26,020
+So the moment I do this now you see that I'm actually using the local large language model, which is
+
+32
+00:02:26,020 --> 00:02:29,500
+running within my own machine in the olama over here.
+
+33
+00:02:29,700 --> 00:02:35,740
+And we are going to get the similar kind of responses where we are not even using the internet over
+
+34
+00:02:35,740 --> 00:02:42,340
+here, and you see that it's getting the same exact response, like how we were getting even from the
+
+35
+00:02:42,740 --> 00:02:43,620
+cloud desktop.
+
+36
+00:02:43,660 --> 00:02:47,940
+See that now it is actually giving us this pretty much exactly the same response.
+
+37
+00:02:48,100 --> 00:02:54,060
+This is the power that we are talking about, where we don't have to worry about whether this large
+
+38
+00:02:54,060 --> 00:02:59,260
+language model is running on the cloud or within our local machine, we are going to get the similar
+
+39
+00:02:59,260 --> 00:03:04,700
+responses, and you can see that it is still in the JSON format, and it has the details like register
+
+40
+00:03:04,700 --> 00:03:08,980
+link has got the ID of register link name as register, it is the XPath.
+
+41
+00:03:09,020 --> 00:03:10,940
+This is the hyperlink it contains.
+
+42
+00:03:10,940 --> 00:03:13,260
+And this is how you can identify using its XPath.
+
+43
+00:03:13,260 --> 00:03:15,780
+And similarly it goes for the rest of things as well.
+
+44
+00:03:15,980 --> 00:03:22,270
+So the same thing we could achieve like how we did in the cloud desktop over here, which is pretty
+
+45
+00:03:22,270 --> 00:03:22,670
+cool.
+
+46
+00:03:23,230 --> 00:03:27,550
+So we now know how we can prompt the large language model and get the response.
+
+47
+00:03:27,710 --> 00:03:34,910
+But next we need to see how we can build this entire system where we are going to pass the complete
+
+48
+00:03:34,910 --> 00:03:41,190
+source code of the page, or the complete source of the page, and the page object model code that we
+
+49
+00:03:41,190 --> 00:03:43,150
+have to the large language model.
+
+50
+00:03:43,150 --> 00:03:47,510
+And then we are going to see how we can match whether there is an obsolete locator.
+
+51
+00:03:47,670 --> 00:03:52,310
+If there is no obsolete locator, then the selenium test is going to run, but if not, it is going
+
+52
+00:03:52,310 --> 00:03:59,070
+to go and start updating the latest version of the code from the code logic that we're going to write.
+
+53
+00:03:59,070 --> 00:04:01,470
+And then we're going to start seeing how things are going to work.
+
+54
+00:04:01,470 --> 00:04:04,070
+That is how things are going to work over here.
+
+55
+00:04:04,070 --> 00:04:09,230
+But now, to build this from the complete ground up, we are going to do these operation.
+
+56
+00:04:09,430 --> 00:04:15,590
+So we are going to start formatting the prompt like how we wanted the local large language model or
+
+57
+00:04:15,630 --> 00:04:18,350
+the cloud large language model to respond.
+
+58
+00:04:18,350 --> 00:04:22,110
+And the formatting of the prompt is nothing but this one, as you can see over here.
+
+59
+00:04:22,110 --> 00:04:28,800
+So we can do the exact similar syntax which we can pass in to our local large language model.
+
+60
+00:04:28,800 --> 00:04:33,120
+Or we can also use the cloud based large language model systems.
+
+61
+00:04:33,240 --> 00:04:39,200
+And once we pass to any one of these, we can then see that this large language model is going to return
+
+62
+00:04:39,200 --> 00:04:40,840
+as a JSON response.
+
+63
+00:04:40,880 --> 00:04:45,120
+Of course, we need to do some sort of deserialization over here because this is JSON.
+
+64
+00:04:45,120 --> 00:04:50,680
+So we need to do a JSON serialization over here because that is something very very important.
+
+65
+00:04:50,680 --> 00:04:52,480
+So we need to do it over here.
+
+66
+00:04:52,640 --> 00:04:59,960
+And based on the deserialized response from this particular JSON, we are then going to perform a locator
+
+67
+00:04:59,960 --> 00:05:01,640
+selection strategy.
+
+68
+00:05:01,920 --> 00:05:05,680
+This is the piece of code that we may need to end up writing bit more.
+
+69
+00:05:05,680 --> 00:05:10,720
+Because once you write this, this is never going to change because the locators in selenium are not
+
+70
+00:05:10,720 --> 00:05:11,480
+too much.
+
+71
+00:05:11,480 --> 00:05:16,080
+So we can just use the same similar locator strategy all the time.
+
+72
+00:05:16,120 --> 00:05:18,280
+It's regardless like how you're going to do it.
+
+73
+00:05:18,280 --> 00:05:20,880
+So that's something we are going to build over here.
+
+74
+00:05:21,000 --> 00:05:27,160
+And once we find the locator, for example, if the ID has changed and we get from the large language
+
+75
+00:05:27,160 --> 00:05:33,440
+model that you can use something like maybe the name or the CSS or the XPath, something like that.
+
+76
+00:05:33,440 --> 00:05:39,090
+So then we are going to see whether this strategy can be used, let's say name for that matter.
+
+77
+00:05:39,330 --> 00:05:48,210
+And then we are going to use that strategy to perform the location of that particular element to run
+
+78
+00:05:48,210 --> 00:05:49,450
+the test over here.
+
+79
+00:05:49,450 --> 00:05:51,330
+That is how things are going to flow.
+
+80
+00:05:51,330 --> 00:05:53,210
+So we're going to find the locate our strategy.
+
+81
+00:05:53,210 --> 00:05:56,850
+And then we're going to use that particular location within our page object model code.
+
+82
+00:05:56,850 --> 00:05:59,050
+And finally we are going to run the test.
+
+83
+00:05:59,050 --> 00:06:01,130
+That is what we are going to be doing over here.
+
+84
+00:06:01,130 --> 00:06:07,490
+So this is the entire operation that we are going to be doing in this section and upcoming section of
+
+85
+00:06:07,490 --> 00:06:08,850
+this particular course.
+
+86
+00:06:08,850 --> 00:06:12,010
+But for now, this is what it's going to look like.
+
+87
+00:06:12,170 --> 00:06:16,930
+And once we have everything, we are going to see how complex the system is going to be, like something
+
+88
+00:06:16,930 --> 00:06:17,410
+like this.
+
+89
+00:06:17,410 --> 00:06:19,330
+And we are going to start building everything.
+
+90
+00:06:19,330 --> 00:06:24,650
+And once again, just to remind you one more time, we are going to be using these libraries over here.
+
+91
+00:06:24,650 --> 00:06:32,170
+So make sure you have C sharp Dot net, Visual Studio or Writer ID in my case, and Ola, Ola cloud,
+
+92
+00:06:32,170 --> 00:06:34,490
+OpenAI, selenium and playwright.
+
+93
+00:06:34,490 --> 00:06:39,490
+Everything available with you because we are now going to start writing everything from the complete
+
+94
+00:06:39,490 --> 00:06:42,290
+ground up, starting our next lecture.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 2. Accessing Local LLMs with APIs using Ollama
+
+1
+00:00:00,200 --> 00:00:01,240
+All right.
+
+2
+00:00:01,240 --> 00:00:04,120
+So now we are going to see how we can start.
+
+3
+00:00:04,120 --> 00:00:11,160
+First of all building the way to talk with the large language model, which is nothing but by creating
+
+4
+00:00:11,200 --> 00:00:18,960
+a C-sharp code within our test automation code, which can go and talk with the large language model.
+
+5
+00:00:18,960 --> 00:00:23,080
+But now you may have a question that hey Karthik, why are we even doing this?
+
+6
+00:00:23,320 --> 00:00:28,200
+Aren't there any library which can do that for us directly to talk with the large language model?
+
+7
+00:00:28,480 --> 00:00:31,040
+Well guess what, you are 100 percentage, right?
+
+8
+00:00:31,080 --> 00:00:33,320
+There are tons of libraries available.
+
+9
+00:00:33,320 --> 00:00:39,760
+In fact, you can just use the HTTP client to do the same operation as well because as you know, you
+
+10
+00:00:39,760 --> 00:00:48,000
+can talk with the local large language model as well as the OpenAI models using the HTTP request itself,
+
+11
+00:00:48,000 --> 00:00:50,560
+which is nothing but an HTTP client of C.
+
+12
+00:00:51,040 --> 00:00:53,320
+Net you can use to perform this operation.
+
+13
+00:00:53,320 --> 00:00:56,240
+But why are we even just building everything from the scratch?
+
+14
+00:00:56,240 --> 00:00:57,240
+But guess what?
+
+15
+00:00:57,480 --> 00:01:04,360
+In order to just streamline the process of how you can access the models using these clients.
+
+16
+00:01:04,360 --> 00:01:09,320
+We are going to be building the code because once you build this code, pretty much like how you build
+
+17
+00:01:09,320 --> 00:01:15,120
+and test automation framework, you don't necessarily need to worry about how they are going to be working.
+
+18
+00:01:15,120 --> 00:01:17,320
+That's what we are going to be doing over here.
+
+19
+00:01:17,320 --> 00:01:22,880
+So the first thing that we are going to be doing this time is going to be building the method, which
+
+20
+00:01:22,880 --> 00:01:30,080
+can actually talk with the OpenAI large language model as well as the local large language model, as
+
+21
+00:01:30,080 --> 00:01:31,640
+we can see over here.
+
+22
+00:01:31,920 --> 00:01:37,720
+Actually, if you are talking with the cloud based large language model, then you can use some libraries
+
+23
+00:01:37,720 --> 00:01:39,840
+which the company has built as well.
+
+24
+00:01:39,840 --> 00:01:43,920
+For example, if you're going to be working with the OpenAI model, then you can just go and search
+
+25
+00:01:43,920 --> 00:01:49,800
+for the OpenAI dotnet NuGet package, which is this one, and where here you can see that this particular
+
+26
+00:01:49,800 --> 00:01:57,360
+library provides all the details and ways that you can work with the OpenAI models, like the GPT 4.5
+
+27
+00:01:57,360 --> 00:02:02,080
+or GPT five Pde5 model or GPT 5.5 model or six model that you have.
+
+28
+00:02:02,080 --> 00:02:05,240
+So you can do any of these model while you really use them.
+
+29
+00:02:05,240 --> 00:02:12,080
+But if you wanted to go a level further, and if you wanted to just streamline even the process, not
+
+30
+00:02:12,080 --> 00:02:17,800
+just relying on the OpenAI model, but you wanted to access it with any model for that matter, then
+
+31
+00:02:17,840 --> 00:02:20,200
+why not just use the HTTP client?
+
+32
+00:02:20,240 --> 00:02:26,560
+As I told you before, you can access all these models just using the HTTP clients itself.
+
+33
+00:02:26,760 --> 00:02:33,000
+You don't necessarily need to use any of these library, because all these model can be accessed using
+
+34
+00:02:33,120 --> 00:02:36,640
+the HTTP client of the C net itself.
+
+35
+00:02:36,640 --> 00:02:40,320
+So we're just going to go and search for HTTP client C sharp.
+
+36
+00:02:40,360 --> 00:02:46,480
+Over here you can see that this is the class which is available in the system dot net dot HTTP which
+
+37
+00:02:46,480 --> 00:02:48,520
+can really help you do all these operations.
+
+38
+00:02:48,520 --> 00:02:50,280
+It's so straightforward.
+
+39
+00:02:50,280 --> 00:02:52,160
+So we are going to stick with this approach.
+
+40
+00:02:52,160 --> 00:02:54,600
+This is going to keep our life more simpler.
+
+41
+00:02:54,600 --> 00:03:01,520
+And we can do the exact same approach to access the models on the cloud as well as in our local machine.
+
+42
+00:03:01,520 --> 00:03:06,560
+At the same time, we can also see that it is so much easier while we write the code, because we would
+
+43
+00:03:06,560 --> 00:03:12,200
+have already been exposed writing these kind of code in automation testing while trying to do the automation
+
+44
+00:03:12,200 --> 00:03:14,520
+test with an API for that matter.
+
+45
+00:03:14,520 --> 00:03:18,120
+That's why I wanted to keep things as simple as possible.
+
+46
+00:03:18,440 --> 00:03:22,080
+Well, as that said, we are going to see how we can really do that.
+
+47
+00:03:22,280 --> 00:03:28,320
+In order to achieve this operation, I'm going to go and create a simple method in our existing code
+
+48
+00:03:28,320 --> 00:03:33,760
+that I was just showing you in our last section, where this code is like a selenium test code, which
+
+49
+00:03:33,760 --> 00:03:35,480
+has got zero intelligence.
+
+50
+00:03:35,480 --> 00:03:39,760
+So if we go and change any of the locator, the test is eventually going to fail.
+
+51
+00:03:39,920 --> 00:03:42,600
+But we are going to add intelligence to this test.
+
+52
+00:03:42,600 --> 00:03:46,240
+From the traditional test to an self-healing test.
+
+53
+00:03:46,280 --> 00:03:47,600
+You will see how that goes.
+
+54
+00:03:48,400 --> 00:03:52,560
+So what I'm going to do is I'm going to go and create a folder here.
+
+55
+00:03:52,720 --> 00:03:55,160
+I'm going to call this as utilities.
+
+56
+00:03:55,440 --> 00:03:56,800
+And this particular folder.
+
+57
+00:03:56,800 --> 00:03:59,360
+I'm going to go and create a class file.
+
+58
+00:03:59,360 --> 00:04:05,600
+And I'm going to name this as LM client or the large language model client.
+
+59
+00:04:05,840 --> 00:04:12,240
+So this particular class file is responsible for talking with the local large language model as well
+
+60
+00:04:12,240 --> 00:04:14,680
+as the cloud based language model.
+
+61
+00:04:14,680 --> 00:04:17,840
+So it can be of anything that you are going to be talking with.
+
+62
+00:04:18,120 --> 00:04:24,200
+So in order to first talk with the, uh, open AI model or the local large language model, you don't
+
+63
+00:04:24,200 --> 00:04:28,240
+necessarily have to do anything very, very, uh, amazing over there.
+
+64
+00:04:28,400 --> 00:04:33,040
+All you have to do it is we just need to streamline the process, like how you're going to be talking
+
+65
+00:04:33,040 --> 00:04:37,960
+with your large language model, and then you're going to see how you can work with them.
+
+66
+00:04:38,080 --> 00:04:43,080
+But in order to demonstrate how you can talk with the local large language model using API, like how
+
+67
+00:04:43,080 --> 00:04:48,680
+we did in our last section, you can just use the postman to do the exact same operation, but again,
+
+68
+00:04:48,720 --> 00:04:54,480
+in order to do the same with the code, all you have to do it is you just need to formulate the body
+
+69
+00:04:54,480 --> 00:04:56,160
+that you wanted to pass in.
+
+70
+00:04:56,160 --> 00:05:02,240
+And once again, you just need to use the endpoints of the llama to make this happen.
+
+71
+00:05:02,240 --> 00:05:07,200
+So if I'm just going to go to the llama over here one more time, oh llama.
+
+72
+00:05:07,880 --> 00:05:12,920
+And then API endpoints, which kind of give you all the ideas that you need.
+
+73
+00:05:12,920 --> 00:05:18,480
+So if you just go to the API reference over here, you can see that there is a generate a completion
+
+74
+00:05:18,480 --> 00:05:18,960
+endpoint.
+
+75
+00:05:18,960 --> 00:05:27,120
+So you just need to call this slash API slash generate endpoint in the post operation which is going
+
+76
+00:05:27,120 --> 00:05:29,440
+to perform the operation for you.
+
+77
+00:05:29,440 --> 00:05:33,080
+So let's say I'm going to open the postman client over here.
+
+78
+00:05:33,240 --> 00:05:40,000
+And I'm going to use the URL, which is nothing but the http localhost colon 11434, which is going
+
+79
+00:05:40,040 --> 00:05:44,920
+to be the port number that you need to access for the local large language model.
+
+80
+00:05:45,120 --> 00:05:53,040
+And then I'm going to use the endpoint that the company has given from the slash API slash generate.
+
+81
+00:05:53,040 --> 00:05:56,160
+So I'm going to go and copy that, and I'm going to paste it over here.
+
+82
+00:05:56,520 --> 00:05:57,480
+And guess what?
+
+83
+00:05:57,480 --> 00:05:59,800
+You need to pass the post operation.
+
+84
+00:05:59,800 --> 00:06:01,920
+So I'm going to pass the post over here.
+
+85
+00:06:02,200 --> 00:06:07,960
+And the parameter that you need to pass in order to get the details over there, in order to get the
+
+86
+00:06:07,960 --> 00:06:14,120
+generation for this is you need to pass the model, you need to pass the prompt, and then you need
+
+87
+00:06:14,120 --> 00:06:18,160
+to pass the, uh, the image if you really wanted to.
+
+88
+00:06:18,200 --> 00:06:22,960
+And if you want, you can also pass the stream, which is going to get you the stream of the responses.
+
+89
+00:06:23,160 --> 00:06:27,520
+And then you can also pass the optional, uh, options and things of that nature.
+
+90
+00:06:27,520 --> 00:06:33,720
+So let me go and just pass the body over here, which is going to be a raw body JSON.
+
+91
+00:06:34,440 --> 00:06:39,320
+And over here I'm going to say uh, sorry, I'm just going to be model.
+
+92
+00:06:39,320 --> 00:06:44,640
+And the model which I wanted to use, which is sitting in my local machine, uh, is going to be this
+
+93
+00:06:44,640 --> 00:06:49,320
+guy, the three, uh, model, which is this one.
+
+94
+00:06:49,320 --> 00:06:53,400
+So I'm going to pass that in a double quotes as well because remember this is a JSON.
+
+95
+00:06:53,800 --> 00:07:04,480
+And then I'm going to pass the stream, uh, as probably true, which is going to be like a stream response
+
+96
+00:07:04,480 --> 00:07:05,440
+that I want to get.
+
+97
+00:07:05,760 --> 00:07:08,720
+And then I can pass the prompt over here.
+
+98
+00:07:08,720 --> 00:07:10,280
+So I'm going to say prompt.
+
+99
+00:07:10,520 --> 00:07:20,800
+And in the prompt I'm just going to say, uh, write a selenium with C-sharp dotnet code for google.com
+
+100
+00:07:20,800 --> 00:07:23,320
+search operation alone.
+
+101
+00:07:23,520 --> 00:07:24,200
+Something like that.
+
+102
+00:07:24,200 --> 00:07:24,400
+Right.
+
+103
+00:07:24,400 --> 00:07:26,000
+This is what I wanted to do.
+
+104
+00:07:26,360 --> 00:07:29,280
+And now I'm going to do a send operation over here.
+
+105
+00:07:29,720 --> 00:07:36,720
+The moment I send this, you will notice that it is going to go and send this particular prompt to the
+
+106
+00:07:36,760 --> 00:07:42,160
+local large language model, which is currently running within my machine.
+
+107
+00:07:42,320 --> 00:07:44,640
+And then it is going to get you the responses.
+
+108
+00:07:44,640 --> 00:07:48,640
+Just wait and see what is going to happen over here.
+
+109
+00:07:48,640 --> 00:07:53,560
+This is pretty much exactly the same thing that we discussed in our earlier sections of this course,
+
+110
+00:07:53,560 --> 00:07:56,560
+and you will notice that it is getting us the response over here.
+
+111
+00:07:56,560 --> 00:08:02,040
+So you see that it is getting us the response here saying here is a selenium code.
+
+112
+00:08:02,080 --> 00:08:05,800
+I know that the response is going to be super big over here.
+
+113
+00:08:05,840 --> 00:08:10,480
+See how much detail that it has put through in order to get this particular response.
+
+114
+00:08:10,480 --> 00:08:16,040
+But once you set the stream as false over here, and then if you try to send this, you will see that
+
+115
+00:08:16,040 --> 00:08:19,920
+the response is going to be different from what we just got over here.
+
+116
+00:08:19,920 --> 00:08:23,560
+And as you can see that it has generated the code because I've just set the stream as false.
+
+117
+00:08:23,560 --> 00:08:28,000
+So here is the complete selenium C code for performing search operation in Google.
+
+118
+00:08:28,000 --> 00:08:30,280
+And has written some code for us over here.
+
+119
+00:08:30,320 --> 00:08:30,800
+Right.
+
+120
+00:08:30,840 --> 00:08:37,800
+So this is exactly what we are going to be doing from this particular, uh, normal manual operation
+
+121
+00:08:37,800 --> 00:08:39,640
+to a C sharp dotnet code.
+
+122
+00:08:39,640 --> 00:08:44,160
+And we can achieve the exact same thing using the HTTP client itself.
+
+123
+00:08:44,160 --> 00:08:46,720
+I don't need any special library to do that.
+
+124
+00:08:46,720 --> 00:08:51,840
+So we will see how we could able to achieve this operation in our next lecture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 3. Building Code to access Local LLMs via Ollama using API Endpoints
+
+1
+00:00:00,120 --> 00:00:00,680
+All right.
+
+2
+00:00:00,680 --> 00:00:06,200
+So now that we have seen how we can call the local large language model using this particular endpoint,
+
+3
+00:00:06,200 --> 00:00:08,480
+and we get the response that we're looking for.
+
+4
+00:00:08,800 --> 00:00:14,400
+Now we're going to do the exact similar operation and see how we can able to achieve this.
+
+5
+00:00:14,440 --> 00:00:17,200
+Just note closely over here on the response.
+
+6
+00:00:17,200 --> 00:00:23,440
+You can see that the moment we ask this question or the prompt over here to write the code for this
+
+7
+00:00:23,440 --> 00:00:28,760
+particular website, which is google.com, in here you see that we are getting the response with the
+
+8
+00:00:29,440 --> 00:00:32,440
+the model created at response.
+
+9
+00:00:32,440 --> 00:00:37,680
+And then you will see there is a dun dun reason contexts over here.
+
+10
+00:00:37,880 --> 00:00:44,400
+And then we have total duration load duration, prompt valve count, prompt eval duration, eval count
+
+11
+00:00:44,400 --> 00:00:45,640
+and eval duration.
+
+12
+00:00:45,840 --> 00:00:51,160
+So these are the response that we are actually getting out from the large language model itself.
+
+13
+00:00:51,200 --> 00:00:53,760
+The one that we are looking for are not these.
+
+14
+00:00:53,760 --> 00:00:56,200
+Rather we are looking for the response from here.
+
+15
+00:00:56,200 --> 00:01:02,720
+This is exactly what we need to get out from this particular response of a local large language model.
+
+16
+00:01:03,120 --> 00:01:04,840
+And that is exactly going to be similar.
+
+17
+00:01:04,840 --> 00:01:10,160
+While we even try to do with the OpenAI model as well, which we will discussing pretty soon once we
+
+18
+00:01:10,160 --> 00:01:10,840
+get there.
+
+19
+00:01:10,840 --> 00:01:16,920
+But for now, just focus on how this response is coming up from this particular model while we try to
+
+20
+00:01:16,960 --> 00:01:18,120
+call from the API.
+
+21
+00:01:18,320 --> 00:01:23,720
+So we are going to see how we can get this response that we are getting out from the large language
+
+22
+00:01:23,720 --> 00:01:26,000
+model with our C sharp dotnet code.
+
+23
+00:01:26,040 --> 00:01:28,160
+So let's see how we can able to achieve that.
+
+24
+00:01:28,280 --> 00:01:32,000
+So in order to do that, you remember the class that we created in our last lecture.
+
+25
+00:01:32,040 --> 00:01:34,920
+We're going to do the exact similar operation over here.
+
+26
+00:01:34,920 --> 00:01:37,880
+And we then start writing the code itself.
+
+27
+00:01:38,200 --> 00:01:42,120
+So in order to do that, I'm going to create a method over here.
+
+28
+00:01:42,360 --> 00:01:46,280
+And I'm going to call this as public async of task.
+
+29
+00:01:46,280 --> 00:01:49,880
+So basically I'm going to write everything in an asynchronous fashion this time.
+
+30
+00:01:49,880 --> 00:01:58,120
+Because the way you start writing code as asynchronous, you are going to see a lot of benefit, especially
+
+31
+00:01:58,320 --> 00:02:02,960
+while you are going to be aligning the code with your playwright code.
+
+32
+00:02:03,000 --> 00:02:07,650
+Maybe in future if you're going to be dealing with the playwright code, which we are going to do in
+
+33
+00:02:07,650 --> 00:02:08,610
+this course anyway.
+
+34
+00:02:08,610 --> 00:02:12,850
+So that's why I am writing everything as an asynchronous code.
+
+35
+00:02:12,850 --> 00:02:16,610
+So you see that I have written an asynchronous method over here.
+
+36
+00:02:16,770 --> 00:02:20,490
+And now I'm going to start doing things from here itself.
+
+37
+00:02:20,730 --> 00:02:27,010
+So what I'm going to do in here, if you remember in this particular code I have passed the the body
+
+38
+00:02:27,050 --> 00:02:28,290
+over here as this.
+
+39
+00:02:28,290 --> 00:02:31,090
+So I'm going to do the exact similar thing in C sharp dotnet.
+
+40
+00:02:31,330 --> 00:02:35,090
+The way you can do it is just say var request body.
+
+41
+00:02:35,490 --> 00:02:39,930
+And in the request body I'm just going to create an anonymous class as new.
+
+42
+00:02:39,930 --> 00:02:42,730
+So this is an anonymous type as you can see over here.
+
+43
+00:02:43,050 --> 00:02:46,690
+And I am going to pass the model name.
+
+44
+00:02:46,850 --> 00:02:50,330
+So the model name is going to be the same thing that we have got.
+
+45
+00:02:50,330 --> 00:02:55,050
+So I'm just going to say quarter 3.3 billion parameters is this one.
+
+46
+00:02:55,370 --> 00:03:01,330
+And I'm going to pass the uh the prompt which is going to be the prompt we are going to get from the
+
+47
+00:03:01,330 --> 00:03:01,930
+method.
+
+48
+00:03:02,290 --> 00:03:07,010
+And then we are going to uh, stream as false over there.
+
+49
+00:03:07,010 --> 00:03:09,730
+So I'm just going to say stream as false.
+
+50
+00:03:10,210 --> 00:03:14,490
+And finally we are going to pass some option if you really wanted to.
+
+51
+00:03:14,530 --> 00:03:17,610
+So this is going to set the temperatures if you really wanted to as well.
+
+52
+00:03:17,610 --> 00:03:24,810
+So we can just say the temperature is equal to something like 0.1 or something like that.
+
+53
+00:03:24,810 --> 00:03:27,450
+So you can set whatever that you wanted to write.
+
+54
+00:03:27,450 --> 00:03:30,450
+So once you set all of these, you are pretty much good to go.
+
+55
+00:03:30,450 --> 00:03:36,250
+And then you are you can pass this entire operation to your large language model.
+
+56
+00:03:36,250 --> 00:03:38,650
+So this is the body that we have got over here.
+
+57
+00:03:38,650 --> 00:03:42,410
+This is the same body that I'm passing in this time over here.
+
+58
+00:03:42,690 --> 00:03:48,690
+And once I pass it, I then need to serialize this to a, uh, like a string.
+
+59
+00:03:48,810 --> 00:03:50,530
+If not, this is not going to work.
+
+60
+00:03:50,530 --> 00:03:54,010
+So in order to do that, I'm just going to say var JSON.
+
+61
+00:03:54,010 --> 00:04:00,610
+And then I'm going to use a uh, JSON serializer which is from the system dot txt over here.
+
+62
+00:04:00,970 --> 00:04:06,410
+And I'm going to call the serialize method with the request body that I have got, which is this one.
+
+63
+00:04:06,410 --> 00:04:10,540
+And finally I'm going to pass this to an HTTP client.
+
+64
+00:04:10,580 --> 00:04:14,780
+You remember the one that we were expecting to use for this particular demonstration.
+
+65
+00:04:14,780 --> 00:04:16,380
+So I'm going to do that as well.
+
+66
+00:04:16,380 --> 00:04:21,980
+So HTTP client is something that you'll always get as a part of any of the dotnet code.
+
+67
+00:04:22,020 --> 00:04:25,700
+So you are going to create an HTTP client over here.
+
+68
+00:04:25,860 --> 00:04:30,460
+And because I wanted to make use of the HTTP client even further methods later on.
+
+69
+00:04:30,460 --> 00:04:38,060
+So I'm just going to create a private read only HTTP client over here.
+
+70
+00:04:38,060 --> 00:04:39,740
+So I'm just going to say HTTP client.
+
+71
+00:04:39,980 --> 00:04:43,300
+So I can just use the same HTTP client here as well.
+
+72
+00:04:43,340 --> 00:04:44,980
+So I'm going to say HTTP client.
+
+73
+00:04:44,980 --> 00:04:48,900
+And because remember we are doing a post operation which is this one.
+
+74
+00:04:48,900 --> 00:04:56,060
+As you can see over here for this particular API call I'm going to call the post async operation over
+
+75
+00:04:56,060 --> 00:04:56,260
+here.
+
+76
+00:04:56,260 --> 00:05:02,220
+So this way it's going to do a post operation for me for the call which I am going to make.
+
+77
+00:05:02,220 --> 00:05:03,780
+So it's going to be post async.
+
+78
+00:05:04,180 --> 00:05:09,980
+And finally we need to get the local large language models base URL.
+
+79
+00:05:10,020 --> 00:05:11,580
+Remember this is the same thing.
+
+80
+00:05:11,580 --> 00:05:17,100
+I'm just going to copy that, paste it over here, and then you can see that we need to pass an HTTP
+
+81
+00:05:17,100 --> 00:05:19,900
+content over here for the post operation.
+
+82
+00:05:19,900 --> 00:05:27,060
+So because the next parameter expects us to pass HTTP content, this particular JSON, we cannot directly
+
+83
+00:05:27,060 --> 00:05:28,060
+pass over here.
+
+84
+00:05:28,060 --> 00:05:29,060
+Let's say like this.
+
+85
+00:05:29,060 --> 00:05:32,380
+So if I try to pass this this code is not going to really work.
+
+86
+00:05:32,620 --> 00:05:38,260
+So in order to make this code to really work, we are going to create a content over here.
+
+87
+00:05:38,260 --> 00:05:39,380
+And the content is nothing.
+
+88
+00:05:39,380 --> 00:05:45,700
+But I'm going to create something called as string content because this will return you an HTTP content
+
+89
+00:05:45,700 --> 00:05:47,100
+return type over there.
+
+90
+00:05:47,100 --> 00:05:51,300
+So I'm going to call this one and I'm going to pass a JSON.
+
+91
+00:05:51,620 --> 00:05:55,300
+And I'm going to create an encoding as UTF eight.
+
+92
+00:05:55,620 --> 00:06:02,140
+And I'm going to make this as application JSON because that is what I'm trying to pass it over here.
+
+93
+00:06:02,540 --> 00:06:05,700
+So this is something that we need to follow for the HTTP client.
+
+94
+00:06:05,740 --> 00:06:10,540
+This is not kind of new or anything like that, but I'm just doing it because this is what is the requirement
+
+95
+00:06:10,540 --> 00:06:15,390
+that we have to Ensure that we need to pass in while we try to do it.
+
+96
+00:06:15,430 --> 00:06:21,830
+If you are familiar with, let's say, Rest Sharp or even playwright, you can also do that as well.
+
+97
+00:06:21,870 --> 00:06:23,350
+Instead of the HTTP client.
+
+98
+00:06:23,350 --> 00:06:27,070
+But I stick with HTTP client because this is very, very straightforward library.
+
+99
+00:06:27,270 --> 00:06:29,630
+That is why I'm using this one over here.
+
+100
+00:06:29,910 --> 00:06:34,230
+And once I do that over here now I will get a response.
+
+101
+00:06:34,230 --> 00:06:39,390
+So I can even verify the response whether it is going to be working or not using the ensure status code
+
+102
+00:06:39,550 --> 00:06:40,110
+method.
+
+103
+00:06:40,310 --> 00:06:48,150
+And finally, I can read the content and return that particular value as a JSON element.
+
+104
+00:06:48,270 --> 00:06:56,670
+So I'm just going to show you how this is going to look like by just saying, uh, return var of the
+
+105
+00:06:57,150 --> 00:06:59,150
+response text or something like that.
+
+106
+00:06:59,150 --> 00:07:03,510
+And then I'm going to say await of the response dot.
+
+107
+00:07:03,670 --> 00:07:05,350
+There is something called as content.
+
+108
+00:07:05,350 --> 00:07:12,510
+And then you can use this read as string async method, which is going to basically return you the string
+
+109
+00:07:12,510 --> 00:07:13,750
+of that particular text.
+
+110
+00:07:13,950 --> 00:07:16,470
+So I'm just going to hold this for now.
+
+111
+00:07:16,510 --> 00:07:22,070
+Maybe I can even return this one so I can just say return the response text over here so that this method
+
+112
+00:07:22,070 --> 00:07:23,150
+will be fully done.
+
+113
+00:07:23,310 --> 00:07:27,230
+So now we will see whether this method is really going to work or not.
+
+114
+00:07:27,510 --> 00:07:32,590
+So in order to do that, I'm going to go to our test over here somewhere like this.
+
+115
+00:07:32,590 --> 00:07:39,470
+And I'm just going to create a simple test to see if the large language model can be the methods can
+
+116
+00:07:39,470 --> 00:07:40,350
+be called or not.
+
+117
+00:07:40,350 --> 00:07:45,710
+So I'm going to say calling or LMS client something like that.
+
+118
+00:07:45,710 --> 00:07:56,550
+And I'm going to create a a client something like this as client is equal to new LM client.
+
+119
+00:07:56,830 --> 00:08:00,710
+And then I'm going to call the call local LM.
+
+120
+00:08:00,870 --> 00:08:03,990
+And here I'm going to pass the prompt that we just passed.
+
+121
+00:08:04,030 --> 00:08:04,870
+Just this guy.
+
+122
+00:08:05,230 --> 00:08:05,550
+Right.
+
+123
+00:08:05,550 --> 00:08:08,190
+So I'm going to do the exact same thing over here.
+
+124
+00:08:08,670 --> 00:08:12,150
+And we will see if we could able to get the response.
+
+125
+00:08:12,150 --> 00:08:17,190
+And because this is an async method, you need to call an async of task in your test code.
+
+126
+00:08:17,190 --> 00:08:19,110
+If not, it is not going to work.
+
+127
+00:08:19,390 --> 00:08:26,910
+So I'm going to use the await keyword and I'm gonna say result because I want to see what is the result
+
+128
+00:08:26,910 --> 00:08:27,870
+of this call.
+
+129
+00:08:27,870 --> 00:08:34,310
+Local method I want to really print this kind of operation that we are getting as a string there.
+
+130
+00:08:34,630 --> 00:08:41,950
+And I can just say console, dot, write, line, or maybe write whatever.
+
+131
+00:08:42,150 --> 00:08:43,870
+And then I'm going to put a result there.
+
+132
+00:08:43,870 --> 00:08:47,310
+So I'm going to save this and I'm going to put a breakpoint here.
+
+133
+00:08:47,310 --> 00:08:50,870
+And let's try to debug this code and see if that really works or not.
+
+134
+00:08:51,190 --> 00:08:58,870
+Uh, so if we just go to the call local method as well, and I'm going to put a breakpoint here and
+
+135
+00:08:58,870 --> 00:09:01,270
+I'm going to resume the execution.
+
+136
+00:09:01,270 --> 00:09:06,790
+So you'll notice that now this time it is going to go to the local large language model.
+
+137
+00:09:06,790 --> 00:09:11,790
+Because we have did the post operation in this particular operation over here.
+
+138
+00:09:12,030 --> 00:09:17,030
+So we should hopefully see that this code should be executed for us.
+
+139
+00:09:17,430 --> 00:09:20,280
+Uh, and let's wait for the execution to happen.
+
+140
+00:09:20,480 --> 00:09:25,320
+And oops, I think we I forgot to do one more thing while I was trying to do that, because we're getting
+
+141
+00:09:25,320 --> 00:09:30,720
+an object reference exception, uh, for the HTTP client, because as you see, I have just created
+
+142
+00:09:30,720 --> 00:09:33,840
+the HTTP client, but I have really not initialized that so far.
+
+143
+00:09:34,200 --> 00:09:37,320
+Uh, which I would was expecting to do it on the constructor.
+
+144
+00:09:37,320 --> 00:09:39,160
+And I completely missed that part.
+
+145
+00:09:39,160 --> 00:09:40,720
+So let's try to do that.
+
+146
+00:09:40,720 --> 00:09:42,920
+If not, this code is just going to fail.
+
+147
+00:09:42,920 --> 00:09:46,680
+So I was just saying that new of the HTTP client.
+
+148
+00:09:46,680 --> 00:09:47,000
+Yes.
+
+149
+00:09:47,000 --> 00:09:50,080
+That is something that I need to do and I completely missed that part.
+
+150
+00:09:50,080 --> 00:09:53,600
+I apologize for that and let me try to debug it one more time.
+
+151
+00:09:53,640 --> 00:09:55,440
+And hopefully this time it is going to work.
+
+152
+00:09:55,720 --> 00:09:58,920
+Uh, and let me try to resume the execution.
+
+153
+00:09:59,440 --> 00:10:06,040
+And now if you just go to this particular code, we should see the code execution to happen.
+
+154
+00:10:06,040 --> 00:10:06,720
+And there we go.
+
+155
+00:10:06,760 --> 00:10:08,920
+You see that we got a response over here.
+
+156
+00:10:08,920 --> 00:10:14,840
+And this response actually has got response from the large language model.
+
+157
+00:10:15,080 --> 00:10:20,880
+And if you just want to see what is the content over there, you see that we have got the entire content,
+
+158
+00:10:20,880 --> 00:10:21,760
+which is fine.
+
+159
+00:10:21,760 --> 00:10:24,960
+We are going to see what content is going to be over here.
+
+160
+00:10:24,960 --> 00:10:29,480
+So if I'm going to do a read as string async, we should get an entire response.
+
+161
+00:10:29,480 --> 00:10:30,240
+Look at that.
+
+162
+00:10:30,280 --> 00:10:32,720
+See, we get the entire response this time.
+
+163
+00:10:32,960 --> 00:10:36,360
+This is the same response that we were getting in the postman.
+
+164
+00:10:36,360 --> 00:10:39,720
+If you remember this one, the model created that response.
+
+165
+00:10:39,720 --> 00:10:42,560
+The same thing we were actually getting over here as well.
+
+166
+00:10:42,800 --> 00:10:49,320
+Uh, if you just look closely the same thing and here is the response coming out for us over here,
+
+167
+00:10:49,920 --> 00:10:50,920
+which is great.
+
+168
+00:10:50,920 --> 00:10:57,200
+So we are already seeing that we could able to talk to the large language model using this simple code
+
+169
+00:10:57,200 --> 00:10:59,360
+that we have written, which is pretty amazing.
+
+170
+00:10:59,360 --> 00:11:02,600
+So this is already working for us, which is pretty cool.
+
+171
+00:11:02,600 --> 00:11:07,520
+So now that we have did this entire thing and it is working fine for us, the last operation that I
+
+172
+00:11:07,520 --> 00:11:14,920
+wanted to make sure that I do it before I complete this particular lecture, is to read just the specific
+
+173
+00:11:14,920 --> 00:11:21,200
+operation, which is nothing but the response from this particular response that we are getting in,
+
+174
+00:11:21,200 --> 00:11:26,570
+because now we're getting the entire response like the model created at response over here.
+
+175
+00:11:26,570 --> 00:11:28,490
+I want to just get the response.
+
+176
+00:11:28,890 --> 00:11:35,130
+And you can actually do that very, very simply in C sharp because you can just say var of the JSON
+
+177
+00:11:35,130 --> 00:11:37,490
+response over here, something like this.
+
+178
+00:11:37,770 --> 00:11:42,210
+And then you can just use the class called as JSON serializer.
+
+179
+00:11:42,410 --> 00:11:50,850
+And you can deserialize this particular object using a JSON element class which is also part of the
+
+180
+00:11:51,010 --> 00:11:52,290
+system dot txt.
+
+181
+00:11:52,290 --> 00:11:55,170
+And then you can pass the response text over there.
+
+182
+00:11:55,410 --> 00:11:59,410
+This will actually pass the entire response over there.
+
+183
+00:11:59,650 --> 00:12:03,610
+And with this you can get a specific response if you wanted to.
+
+184
+00:12:03,650 --> 00:12:10,010
+For example, you can just say return the JSON response and get the property.
+
+185
+00:12:10,050 --> 00:12:13,930
+So this property method will actually choose which property that you wanted to choose.
+
+186
+00:12:14,250 --> 00:12:19,330
+And because you are going to get a different properties over here and one of the property is nothing
+
+187
+00:12:19,330 --> 00:12:22,690
+but the response property from this particular thing.
+
+188
+00:12:22,690 --> 00:12:24,210
+You can also get that.
+
+189
+00:12:24,210 --> 00:12:29,410
+And there is a method called as get string, which can actually get the string.
+
+190
+00:12:29,450 --> 00:12:33,530
+If you're not really getting that response string, then return the empty over there.
+
+191
+00:12:33,810 --> 00:12:35,450
+See, this is pretty cool.
+
+192
+00:12:35,770 --> 00:12:38,730
+Let me try to run this code and show you what this really does.
+
+193
+00:12:38,770 --> 00:12:45,170
+So if I'm going to go here and debug this particular code, I know I'm running this quite faster this
+
+194
+00:12:45,170 --> 00:12:51,770
+time, but you will eventually understand how easy it is while you try to run the code every single
+
+195
+00:12:51,770 --> 00:12:52,290
+time.
+
+196
+00:12:52,450 --> 00:12:57,530
+And then once you start debugging this code, you will start to get this more and more familiar.
+
+197
+00:12:57,570 --> 00:12:57,930
+See that?
+
+198
+00:12:57,930 --> 00:12:59,490
+Now the code has reached here.
+
+199
+00:12:59,770 --> 00:13:02,050
+And if I'm going to go look at that.
+
+200
+00:13:02,050 --> 00:13:06,890
+So we have got the entire response like the one that we saw in the postman.
+
+201
+00:13:07,250 --> 00:13:15,170
+And now if I try to deserialize this with JSON element, you will notice that we have got this entire
+
+202
+00:13:15,170 --> 00:13:22,690
+response as the JSON elements, where you will see all of these operations will now be holding like
+
+203
+00:13:22,730 --> 00:13:27,220
+a value keys for the model created at and the response.
+
+204
+00:13:27,220 --> 00:13:33,140
+And if I want to just get this particular response, I can just do this JSON dot getproperty of response
+
+205
+00:13:33,420 --> 00:13:36,940
+and get string, which will get me just that particular response.
+
+206
+00:13:36,940 --> 00:13:42,340
+If I want to go and inspect or evaluate this expression, something like this.
+
+207
+00:13:42,380 --> 00:13:47,900
+See, you just get that response alone instead of getting the full operation.
+
+208
+00:13:47,900 --> 00:13:48,700
+Look at that now.
+
+209
+00:13:48,700 --> 00:13:50,980
+It is so much formatted code.
+
+210
+00:13:51,020 --> 00:13:53,060
+It's on the markdown file that we have got.
+
+211
+00:13:53,460 --> 00:13:59,180
+And now I'm going to see what is the output of this particular method over here.
+
+212
+00:13:59,220 --> 00:13:59,980
+Look at that.
+
+213
+00:13:59,980 --> 00:14:02,140
+We have just got the response alone.
+
+214
+00:14:02,180 --> 00:14:04,020
+This was our quest to get it.
+
+215
+00:14:04,020 --> 00:14:07,540
+And now we have got that already which is pretty cool.
+
+216
+00:14:07,540 --> 00:14:15,820
+So this is how you can actually get the response from the local large language model using C-sharp dotnet
+
+217
+00:14:15,820 --> 00:14:18,220
+code with the HTTP client.
+
+218
+00:14:18,220 --> 00:14:22,020
+That is what we have done all these time so far over here.
+
+219
+00:14:22,140 --> 00:14:28,860
+It is so much easier and we are going to do the exact similar operation for the OpenAI as well.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 4. Accessing Cloud LLMs (OpenAI GPT Models) with APIs
+
+1
+00:00:00,120 --> 00:00:06,520
+So now that hopefully you have got the idea of how this code has been written, I know it's not easy
+
+2
+00:00:06,520 --> 00:00:11,040
+if you're writing this code or similar kind of code for the very first time.
+
+3
+00:00:11,640 --> 00:00:17,560
+But if you have really worked with the API testing with Rest Sharp, you know this is the same exact
+
+4
+00:00:17,560 --> 00:00:24,040
+kind of code which you do it, you do a post operation, you also create a body, uh, which is going
+
+5
+00:00:24,040 --> 00:00:29,080
+to be holding the body that you're passing in, and then you're going to get the response, which you're
+
+6
+00:00:29,080 --> 00:00:34,760
+going to do the read as string async or maybe the content, and then you deserialize it based on what
+
+7
+00:00:34,760 --> 00:00:35,360
+you're looking for.
+
+8
+00:00:35,400 --> 00:00:37,480
+That is how you usually do it.
+
+9
+00:00:37,520 --> 00:00:43,560
+If you are using the rest sharp client, you can also deserialize it directly in the post async.
+
+10
+00:00:43,560 --> 00:00:47,280
+But because we are not using rest sharp, we are just using the HTTP client.
+
+11
+00:00:47,320 --> 00:00:52,880
+You just have to deserialize it over here for the first time, which is fine because that is also very
+
+12
+00:00:52,880 --> 00:00:54,200
+straightforward over here.
+
+13
+00:00:54,200 --> 00:00:59,950
+And once you have understood this particular code that we have got over here now, it is going to be
+
+14
+00:00:59,950 --> 00:01:05,830
+even more simpler while we try to do that with our open AI client.
+
+15
+00:01:05,830 --> 00:01:08,030
+So I'm going to show you how we can actually do it.
+
+16
+00:01:08,030 --> 00:01:13,790
+So the way we're going to do it is we are going to go to the open AI portal over here, and then we
+
+17
+00:01:13,830 --> 00:01:16,230
+are going to start writing the code again.
+
+18
+00:01:16,230 --> 00:01:19,790
+You need to have an open AI account to do that.
+
+19
+00:01:20,030 --> 00:01:24,710
+This is because we are using the paid version of the open AI platform.
+
+20
+00:01:24,950 --> 00:01:28,070
+So make sure that you have access to it.
+
+21
+00:01:28,230 --> 00:01:35,230
+And I'm really showing you this because you may be using the GPT models or the cloud model or Gemini
+
+22
+00:01:35,270 --> 00:01:37,790
+model, or it can be even deep seek model.
+
+23
+00:01:37,790 --> 00:01:44,910
+You can use any of the model, but the underlying way to access these model remains exactly the same.
+
+24
+00:01:44,910 --> 00:01:46,870
+Like how I'm going to show you right now.
+
+25
+00:01:47,070 --> 00:01:52,350
+And because I already have some money in the open AI account, I'm going to show you over here.
+
+26
+00:01:52,590 --> 00:01:54,910
+Okay, so how did I get to this particular point?
+
+27
+00:01:54,910 --> 00:01:58,260
+Well, you just have to go to OpenAI.
+
+28
+00:01:58,300 --> 00:01:59,100
+Com.
+
+29
+00:01:59,140 --> 00:02:05,420
+This particular website over here, you might have used the ChatGPT before, but now you are a developer
+
+30
+00:02:05,420 --> 00:02:11,700
+kind of guy who is going to use the API to access the models using OpenAI.
+
+31
+00:02:11,860 --> 00:02:20,780
+Remember how we actually did access the model using the llama client, which is this one from this particular
+
+32
+00:02:20,820 --> 00:02:21,260
+UI?
+
+33
+00:02:21,740 --> 00:02:28,780
+Or you can also access the same using the API, like how we just saw with this code, as well as from
+
+34
+00:02:28,780 --> 00:02:32,140
+the postman code over here using the API.
+
+35
+00:02:32,380 --> 00:02:37,620
+The similar thing is going to happen where we are going to access the OpenAI using its API.
+
+36
+00:02:37,660 --> 00:02:40,060
+So I'll show you how we can able to access it.
+
+37
+00:02:40,180 --> 00:02:44,140
+So you just have to log in over here like how I have already did.
+
+38
+00:02:44,180 --> 00:02:47,940
+I'm going to go to the API platform there and it's going to take me there.
+
+39
+00:02:47,980 --> 00:02:48,940
+See I have already logged in.
+
+40
+00:02:48,940 --> 00:02:50,420
+That's the reason why I'm getting it.
+
+41
+00:02:50,420 --> 00:02:53,660
+But if you have really not signed up, you need to sign up for the first time.
+
+42
+00:02:53,660 --> 00:02:54,820
+It is totally free.
+
+43
+00:02:55,020 --> 00:03:01,440
+But once you sign up there, you need to pay the money, which you need to go to the settings over there.
+
+44
+00:03:01,560 --> 00:03:07,920
+You will see that you are going to have, uh, like how much of the billings that you have got currently.
+
+45
+00:03:07,920 --> 00:03:12,720
+I think I have a credit of 7.33 over here, but you need to recharge it.
+
+46
+00:03:12,720 --> 00:03:17,160
+So you need to add the credit card balance over here to have money.
+
+47
+00:03:17,200 --> 00:03:20,920
+I mean, this is the amount that I have topped up in my account.
+
+48
+00:03:20,920 --> 00:03:24,880
+But if you don't really have topped up, you're just going to see 0.00 there.
+
+49
+00:03:24,880 --> 00:03:26,440
+So that is how it is going to be.
+
+50
+00:03:26,440 --> 00:03:29,400
+So make sure that you top up for this particular demonstration.
+
+51
+00:03:29,400 --> 00:03:32,800
+But if you still think that hey Karthik, I don't even need OpenAI.
+
+52
+00:03:32,800 --> 00:03:35,200
+I'm just going to work with local large language model.
+
+53
+00:03:35,200 --> 00:03:36,360
+I'm totally fine with that.
+
+54
+00:03:36,360 --> 00:03:42,040
+You can completely skip this particular part, but I'm just going to cover this because this local large
+
+55
+00:03:42,040 --> 00:03:47,800
+language model, even though you are going to be access it within your local machine while you start
+
+56
+00:03:47,800 --> 00:03:55,670
+deploying the local large language model on the cloud, like the AWS SageMaker or Bedrock, then you
+
+57
+00:03:55,670 --> 00:03:57,390
+may need to access it from there.
+
+58
+00:03:57,390 --> 00:04:02,310
+So this part is going to be pretty much related to that part, which I'm talking about.
+
+59
+00:04:02,310 --> 00:04:04,550
+So that's why I'm going to still cover it over here.
+
+60
+00:04:04,550 --> 00:04:10,870
+So it's totally fine for you to whether to watch this lecture or not, but I will be happy for you to
+
+61
+00:04:10,910 --> 00:04:14,070
+watch it for the first time because it is super important.
+
+62
+00:04:14,310 --> 00:04:18,950
+Well, as I said, I already have the money over there and I'm going to access this particular API.
+
+63
+00:04:19,190 --> 00:04:21,670
+So how do we access this particular API there?
+
+64
+00:04:21,670 --> 00:04:28,110
+Well, you need to first of all create an API key over here, which you can just go create a new secret
+
+65
+00:04:28,150 --> 00:04:28,470
+key.
+
+66
+00:04:28,630 --> 00:04:34,070
+And then I'm going to say uh, the course API key, uh, something like that.
+
+67
+00:04:34,070 --> 00:04:36,390
+And I'm going to select the default project.
+
+68
+00:04:36,390 --> 00:04:39,470
+And I'm going to create a uh API key.
+
+69
+00:04:39,470 --> 00:04:41,950
+So that's going to create an API key for me.
+
+70
+00:04:42,110 --> 00:04:47,230
+And I can just go over here uh, and have that API key somewhere.
+
+71
+00:04:47,230 --> 00:04:51,270
+So I'm going to put an API key um somewhere here.
+
+72
+00:04:51,270 --> 00:05:02,300
+So I'm going to say uh, Private read only, uh, string of the open AI API key.
+
+73
+00:05:02,340 --> 00:05:02,900
+This is something.
+
+74
+00:05:02,900 --> 00:05:07,780
+I'm just putting it over here, but we are going to be replacing that quite sooner the moment we are
+
+75
+00:05:07,780 --> 00:05:09,260
+going to introduce configuration.
+
+76
+00:05:09,260 --> 00:05:13,260
+So all of these hard coded values will be replaced with the configurations later.
+
+77
+00:05:13,260 --> 00:05:15,740
+But for now I'm just going to hard code it over here.
+
+78
+00:05:15,780 --> 00:05:16,340
+Right.
+
+79
+00:05:16,380 --> 00:05:19,740
+And once I have this particular key uh, just done.
+
+80
+00:05:19,860 --> 00:05:23,500
+And then we are going to access this particular open AI as well.
+
+81
+00:05:23,500 --> 00:05:25,780
+So how do we actually access the open AI.
+
+82
+00:05:26,020 --> 00:05:26,500
+Guess what.
+
+83
+00:05:26,500 --> 00:05:27,700
+It's very straightforward.
+
+84
+00:05:27,900 --> 00:05:34,140
+All you have to do it uh, is you just go to the API reference, uh, over here, this particular page,
+
+85
+00:05:34,620 --> 00:05:38,580
+uh, you see that they will give you an idea of how you can access them.
+
+86
+00:05:38,580 --> 00:05:46,460
+You just have to use this particular URL like, uh, open AI uh, dot com slash v1 slash model, which
+
+87
+00:05:46,460 --> 00:05:48,500
+will give you the models which are available.
+
+88
+00:05:48,500 --> 00:05:51,060
+And there is something called as chat completion as well.
+
+89
+00:05:51,060 --> 00:05:54,050
+So if I'm just going to go and search for the chat completion, look at that.
+
+90
+00:05:54,050 --> 00:05:58,490
+So this is going to be the one that we are going to be using this particular endpoint, which is going
+
+91
+00:05:58,530 --> 00:06:00,410
+to perform the chat completion for us.
+
+92
+00:06:00,410 --> 00:06:05,930
+And this is something which you can use to perform the operation that we are going to be using.
+
+93
+00:06:05,930 --> 00:06:09,370
+So that is the endpoint that we are going to use to see how that works.
+
+94
+00:06:09,370 --> 00:06:12,530
+So I'll quickly show you how we can do that with the postman.
+
+95
+00:06:12,530 --> 00:06:15,290
+And then we will see how we could able to achieve it.
+
+96
+00:06:15,290 --> 00:06:23,930
+So in order to do that I'm just going to say http colon double slash uh over here and I'm going to say
+
+97
+00:06:24,090 --> 00:06:26,410
+API dot open
+
+98
+00:06:27,010 --> 00:06:34,050
+api.com/v1/chat/completion.
+
+99
+00:06:34,050 --> 00:06:38,170
+So this is going to be the key that we are going to be using over here.
+
+100
+00:06:38,490 --> 00:06:41,210
+So this is going to be the endpoint that we are going to be using over here.
+
+101
+00:06:41,570 --> 00:06:44,290
+And I need to pass the authorization.
+
+102
+00:06:44,290 --> 00:06:47,490
+You remember the the token that we have actually passed in.
+
+103
+00:06:47,490 --> 00:06:48,970
+So I'm going to pass that as well.
+
+104
+00:06:49,130 --> 00:06:55,920
+So I'm going to say authorization, and it's going to be basically a bearer token with the token that
+
+105
+00:06:55,920 --> 00:06:57,200
+I have got over here.
+
+106
+00:06:57,200 --> 00:06:58,560
+So I'm going to pass that.
+
+107
+00:06:58,840 --> 00:07:07,200
+And in the body I'm actually going to do a pass the similar body that we were trying to pass for the
+
+108
+00:07:07,200 --> 00:07:08,720
+local large language models.
+
+109
+00:07:08,720 --> 00:07:12,320
+Do you remember the same thing I'm going to do over here as well?
+
+110
+00:07:12,440 --> 00:07:19,400
+Let's say I'm going to use the model as maybe the GPT four or mini model that I wanted to.
+
+111
+00:07:19,440 --> 00:07:22,280
+And then I need to pass the prompt over here.
+
+112
+00:07:22,280 --> 00:07:28,880
+And the way I can pass the prompt over here is using what is called as messages.
+
+113
+00:07:28,880 --> 00:07:32,160
+So this is how you actually pass the message over here.
+
+114
+00:07:32,200 --> 00:07:36,520
+This is how the prompts are basically passed over here.
+
+115
+00:07:36,640 --> 00:07:38,880
+And then I'm going to say an array.
+
+116
+00:07:38,880 --> 00:07:45,160
+Because somehow this is going to be an array because it says messages over here and over here, I'm
+
+117
+00:07:45,160 --> 00:07:48,360
+just going to pass the role.
+
+118
+00:07:48,360 --> 00:07:53,940
+And here we need to pass the role as the user, because this is a user who is going to be prompting.
+
+119
+00:07:54,140 --> 00:07:57,980
+So that is what that is how it is done in the OpenAI way.
+
+120
+00:07:58,260 --> 00:08:00,140
+So that's what I'm trying to do over here.
+
+121
+00:08:00,340 --> 00:08:02,940
+Uh, and I need to pass the thing over there.
+
+122
+00:08:02,940 --> 00:08:03,220
+So.
+
+123
+00:08:03,220 --> 00:08:03,740
+Right.
+
+124
+00:08:04,100 --> 00:08:05,500
+Uh, a selenium.
+
+125
+00:08:07,540 --> 00:08:13,540
+Uh, with C-sharp dotnet code for google.com, just for search.
+
+126
+00:08:13,740 --> 00:08:14,420
+That's it.
+
+127
+00:08:14,620 --> 00:08:16,940
+And now I'm going to perform a send operation.
+
+128
+00:08:16,940 --> 00:08:19,420
+So this is the only thing that is changing over there.
+
+129
+00:08:19,420 --> 00:08:22,700
+Because in local large language model we just pass the prompt directly.
+
+130
+00:08:22,700 --> 00:08:25,700
+But over here I'm just going to pass it something like this.
+
+131
+00:08:26,100 --> 00:08:29,340
+And now I'm going to do a send operation over here.
+
+132
+00:08:29,540 --> 00:08:36,260
+So you will see that the moment I try to send this particular operation over here, it says an error
+
+133
+00:08:36,260 --> 00:08:40,220
+because I have just forgot to change it to a post.
+
+134
+00:08:40,220 --> 00:08:41,980
+And now I'm going to send it again.
+
+135
+00:08:42,220 --> 00:08:47,970
+And now this time it is actually going to the OpenAI to get the response over there.
+
+136
+00:08:48,010 --> 00:08:53,930
+So it's taking a bit of a time because it definitely have to pass it to the model and then get the response
+
+137
+00:08:53,930 --> 00:08:55,170
+and look at that.
+
+138
+00:08:55,450 --> 00:09:01,730
+We are getting the response this time from the OpenAI's GPT four mini model.
+
+139
+00:09:02,370 --> 00:09:03,250
+Look at that.
+
+140
+00:09:03,290 --> 00:09:09,770
+It has got pretty much exactly the similar kind of content as well over here, just that it has got
+
+141
+00:09:09,770 --> 00:09:11,810
+a different response object.
+
+142
+00:09:11,850 --> 00:09:19,530
+See, it has got an ID object created at model choices, and within the choice it has got uh, the index
+
+143
+00:09:19,530 --> 00:09:20,090
+as zero.
+
+144
+00:09:20,090 --> 00:09:22,050
+And there is a message over there.
+
+145
+00:09:22,250 --> 00:09:24,850
+This is what is the response that we are looking for.
+
+146
+00:09:25,130 --> 00:09:27,290
+The content within the message.
+
+147
+00:09:27,770 --> 00:09:29,370
+That's what we need.
+
+148
+00:09:29,370 --> 00:09:33,530
+So unfortunately we have to go a bit deep to get this particular response.
+
+149
+00:09:33,530 --> 00:09:34,650
+But hey there we go.
+
+150
+00:09:34,690 --> 00:09:37,770
+We already got the response, this time from the OpenAI model.
+
+151
+00:09:38,170 --> 00:09:42,210
+Now the question is how can we get this response from the C.
+
+152
+00:09:42,730 --> 00:09:43,410
+Net code?
+
+153
+00:09:43,850 --> 00:09:46,610
+We are going to do that in our next lecture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 5. Building Code to access Cloud LLMs via OpenAI using API Endp
+oints
+
+1
+00:00:00,120 --> 00:00:06,520
+All right, so hope you have tried doing all of these yourself before you start this big journey of
+
+2
+00:00:06,520 --> 00:00:13,520
+how you can write the C dotnet code to perform the similar operation, like how we did for the local
+
+3
+00:00:13,520 --> 00:00:14,680
+large language model.
+
+4
+00:00:14,960 --> 00:00:19,960
+I highly recommend you to do it manually before you start writing the code, because that is going to
+
+5
+00:00:19,960 --> 00:00:22,760
+give you an idea of how these things are really working.
+
+6
+00:00:22,800 --> 00:00:29,760
+And again, as I told you in our last lecture, using OpenAI model for your test is completely optional.
+
+7
+00:00:29,760 --> 00:00:31,120
+You can use it.
+
+8
+00:00:31,120 --> 00:00:33,600
+Or if you don't want, you can just ignore it completely.
+
+9
+00:00:33,600 --> 00:00:40,320
+But I recommend you to do it because you may need to access these kinds of model later from your, uh,
+
+10
+00:00:40,320 --> 00:00:46,000
+from your Azure, uh, or your AWS bedrock or SageMaker.
+
+11
+00:00:46,000 --> 00:00:50,400
+So in those times, you may need to write the code like how I am doing it over here.
+
+12
+00:00:50,400 --> 00:00:52,760
+That's how I'm just trying to replicate this time.
+
+13
+00:00:53,320 --> 00:00:58,360
+Well that's great, but you may have a question here saying, hey Karthik, you know what?
+
+14
+00:00:58,400 --> 00:01:02,920
+Last time while we tried doing with the local large language model, the response did not had so much
+
+15
+00:01:02,920 --> 00:01:03,760
+of complexity.
+
+16
+00:01:03,890 --> 00:01:09,330
+We got the response, which was the output of the large language model using this response property
+
+17
+00:01:09,530 --> 00:01:16,290
+of this particular response object over here, even though it's bigger, the the, the way that we got
+
+18
+00:01:16,290 --> 00:01:18,330
+this particular response was straightforward.
+
+19
+00:01:18,330 --> 00:01:21,330
+We just used this get property of response.
+
+20
+00:01:21,570 --> 00:01:22,130
+There we go.
+
+21
+00:01:22,130 --> 00:01:23,170
+And we got it.
+
+22
+00:01:23,170 --> 00:01:28,810
+But now how can I do the exact similar thing for the, uh, OpenAI model?
+
+23
+00:01:28,850 --> 00:01:34,810
+Because we also need to pass like the header with the authorization and the body, we have to pass it
+
+24
+00:01:34,810 --> 00:01:35,770
+a different way.
+
+25
+00:01:35,770 --> 00:01:41,570
+At the same time, we we are getting this particular message content, uh, very deep inside, like
+
+26
+00:01:41,610 --> 00:01:42,250
+choice.
+
+27
+00:01:42,490 --> 00:01:47,250
+Then we need to get an array of the message, and then we need to get the content inside it.
+
+28
+00:01:47,250 --> 00:01:48,890
+So choice message content.
+
+29
+00:01:48,890 --> 00:01:52,250
+So we need to go three levels deep to get this particular content.
+
+30
+00:01:52,250 --> 00:01:54,050
+So how can I write this particular code.
+
+31
+00:01:54,090 --> 00:01:56,770
+I can actually give you a trick of how you can do it.
+
+32
+00:01:56,770 --> 00:01:58,130
+But just stick with me.
+
+33
+00:01:58,170 --> 00:02:02,450
+Before we get there, let's start to write the code in first place.
+
+34
+00:02:02,690 --> 00:02:07,740
+So what I'm going to do is I'm going to copy this entire code that we have written before, And I'm
+
+35
+00:02:07,740 --> 00:02:13,180
+going to paste that over here because the coding is going to be pretty much exactly the similar for
+
+36
+00:02:13,180 --> 00:02:20,940
+the OpenAI as well, just that I'm going to name this as call, uh, OpenAI, uh, async, something
+
+37
+00:02:20,940 --> 00:02:21,500
+like that.
+
+38
+00:02:21,500 --> 00:02:24,300
+And the request body has changed a bit as well.
+
+39
+00:02:24,300 --> 00:02:30,020
+So the model which we are using, uh, is basically, uh, this guy, the GPT four or mini model.
+
+40
+00:02:30,060 --> 00:02:33,820
+So we are going to move all of these, uh, in the configuration later.
+
+41
+00:02:34,060 --> 00:02:36,340
+But for now, just hard code all of these.
+
+42
+00:02:36,900 --> 00:02:40,740
+And then we have got the message instead of the prompt.
+
+43
+00:02:40,740 --> 00:02:45,980
+So I'm just going to say uh, messages as an array.
+
+44
+00:02:45,980 --> 00:02:47,860
+So I'm going to say a new array.
+
+45
+00:02:47,900 --> 00:02:49,700
+This is how you write in the C sharp world.
+
+46
+00:02:50,020 --> 00:02:55,900
+And then you say new uh of role is equal to user.
+
+47
+00:02:56,220 --> 00:03:01,460
+And then you have something called as content, which is going to be the prompt that you are passing
+
+48
+00:03:01,460 --> 00:03:01,860
+in.
+
+49
+00:03:01,860 --> 00:03:03,420
+That's going to be your message.
+
+50
+00:03:03,900 --> 00:03:07,940
+And you can pass the temperature, uh, if you want as well.
+
+51
+00:03:08,100 --> 00:03:16,800
+So I'm going to say the temperature as probably 0.1, like how we passed over there, 0.1.
+
+52
+00:03:17,120 --> 00:03:22,960
+And you can also configure the, um, the max token if you really wanted to, but I'm just going to
+
+53
+00:03:23,000 --> 00:03:24,040
+ignore it for now.
+
+54
+00:03:24,360 --> 00:03:26,640
+Uh, so just put a comma there.
+
+55
+00:03:26,720 --> 00:03:29,000
+That's going to be the request body we have got.
+
+56
+00:03:29,360 --> 00:03:33,280
+And the URL also changes here because that's not the URL that we used.
+
+57
+00:03:33,280 --> 00:03:34,880
+So I'm going to copy this URL.
+
+58
+00:03:35,120 --> 00:03:37,760
+And I'm going to paste this particular URL over here.
+
+59
+00:03:37,920 --> 00:03:40,680
+So these things are going to remain exactly the same.
+
+60
+00:03:40,920 --> 00:03:41,440
+Right.
+
+61
+00:03:41,920 --> 00:03:50,160
+And you remember we actually passed what is called as the uh the authorization header as well, which
+
+62
+00:03:50,160 --> 00:03:52,720
+we need to pass it as well, which is this header.
+
+63
+00:03:52,760 --> 00:03:53,960
+Remember this one.
+
+64
+00:03:54,320 --> 00:03:55,000
+We need to do that.
+
+65
+00:03:55,000 --> 00:03:59,240
+So how can we do that in the C-sharp dotnet HTTP code.
+
+66
+00:03:59,280 --> 00:04:00,080
+Well guess what.
+
+67
+00:04:00,160 --> 00:04:06,760
+There is a way you can pass it using what is called as HTTP of default request headers.
+
+68
+00:04:07,000 --> 00:04:14,970
+Oh this particular uh this particular class uh has got something called as add method, which is where
+
+69
+00:04:14,970 --> 00:04:19,890
+you can actually add the, uh, the authorization.
+
+70
+00:04:19,890 --> 00:04:27,010
+So I'm going to say authorize and I'm going to pass the bearer token.
+
+71
+00:04:27,010 --> 00:04:29,610
+And you remember we were actually passing the bearer token.
+
+72
+00:04:29,610 --> 00:04:33,930
+We stored the bearer token somewhere on the top of this particular code, just this one.
+
+73
+00:04:34,450 --> 00:04:36,690
+So I'm going to go grab that.
+
+74
+00:04:36,890 --> 00:04:41,490
+And I'm just doing a string interpolation here where I can copy paste this particular code.
+
+75
+00:04:41,530 --> 00:04:43,770
+See that's how the authorization really works.
+
+76
+00:04:43,770 --> 00:04:57,530
+So this is where you add the authorization header with the open AI key, which is nothing but the API
+
+77
+00:04:57,530 --> 00:04:57,890
+key.
+
+78
+00:04:58,010 --> 00:04:58,370
+Right.
+
+79
+00:04:58,370 --> 00:05:00,290
+That's what we have did over here.
+
+80
+00:05:00,450 --> 00:05:03,930
+And the rest of the things is just going to remain exactly the same.
+
+81
+00:05:03,930 --> 00:05:04,730
+And guess what?
+
+82
+00:05:04,770 --> 00:05:07,850
+In here is where things will get a bit more messy.
+
+83
+00:05:07,850 --> 00:05:10,410
+So because we're not going to do this way over here, right.
+
+84
+00:05:10,410 --> 00:05:13,610
+We're going to not get the response, but the property will change.
+
+85
+00:05:13,770 --> 00:05:18,500
+So how do we deserialize Serialize the response to get this particular content.
+
+86
+00:05:18,500 --> 00:05:23,740
+So what I'm going to do is I'm going to copy this particular, um, particular response.
+
+87
+00:05:23,940 --> 00:05:28,620
+And I'm going to go to the alama, which is even the local large language model can do it.
+
+88
+00:05:28,620 --> 00:05:39,820
+I'm going to say, can you help me deserialize, uh, in HTTP client code or maybe not HTTP client code
+
+89
+00:05:39,980 --> 00:05:50,700
+in JSON serializer of system dot text class for this response.
+
+90
+00:05:51,220 --> 00:05:52,860
+And I'm going to put this over here.
+
+91
+00:05:53,260 --> 00:06:00,980
+I want it to get the the one that we are looking for is this particular, uh, big gigantic content.
+
+92
+00:06:00,980 --> 00:06:01,340
+Right.
+
+93
+00:06:01,340 --> 00:06:11,340
+So I'm going to say can you get the content which is inside the I'm going to say inside the choice and
+
+94
+00:06:11,340 --> 00:06:19,910
+message choice and message C, I'm going to give all the information to the large language model so
+
+95
+00:06:19,910 --> 00:06:21,510
+that it can write things for me.
+
+96
+00:06:22,030 --> 00:06:23,310
+And I'm going to hit enter.
+
+97
+00:06:23,310 --> 00:06:28,430
+So let's wait for the large language model to return me how to deserialize it.
+
+98
+00:06:28,590 --> 00:06:32,510
+Um, and I think it will deserialize it very fast.
+
+99
+00:06:32,510 --> 00:06:33,950
+It's not that harder.
+
+100
+00:06:33,990 --> 00:06:34,390
+There we go.
+
+101
+00:06:34,430 --> 00:06:36,430
+It has given me the class over here.
+
+102
+00:06:36,470 --> 00:06:39,790
+Oh, it's writing a choice class as well, which is great.
+
+103
+00:06:39,790 --> 00:06:41,230
+And writing a message class.
+
+104
+00:06:41,550 --> 00:06:49,230
+Writing an usage class is writing an entire class for me, which I can do the deserialization, which
+
+105
+00:06:49,230 --> 00:06:49,990
+is great.
+
+106
+00:06:50,350 --> 00:06:56,110
+Or we can directly extract the content, uh, from this particular code.
+
+107
+00:06:56,150 --> 00:07:01,830
+Ah, this code looks pretty neat because I don't even need to create all these classes because it could
+
+108
+00:07:01,990 --> 00:07:03,150
+eventually change.
+
+109
+00:07:03,190 --> 00:07:06,230
+Maybe if the OpenAI decided to change it.
+
+110
+00:07:06,230 --> 00:07:11,190
+So rather I can just do this way because this is quite straightforward.
+
+111
+00:07:11,190 --> 00:07:13,150
+If I wanted to, uh, do it.
+
+112
+00:07:13,150 --> 00:07:20,030
+So I'm going to say don't create the class, but just try to get it, uh, using JSON element.
+
+113
+00:07:20,070 --> 00:07:20,550
+Yeah.
+
+114
+00:07:20,910 --> 00:07:28,640
+I want to say don't create the class, just use the JSON element to do it.
+
+115
+00:07:29,680 --> 00:07:32,880
+Which is nothing but the way that we tried doing it last time.
+
+116
+00:07:33,000 --> 00:07:36,680
+Using the JSON element, you remember we just got the property directly.
+
+117
+00:07:36,920 --> 00:07:37,440
+The same thing.
+
+118
+00:07:37,440 --> 00:07:42,240
+I wanted up the large language model to do it as well.
+
+119
+00:07:42,560 --> 00:07:48,360
+Okay, now it says okay, so you can use JSON element to parse the JSON and extract the content without
+
+120
+00:07:48,360 --> 00:07:49,840
+defining the classes.
+
+121
+00:07:50,120 --> 00:07:51,680
+And here is how you do it.
+
+122
+00:07:51,720 --> 00:07:56,840
+See now it's doing this particular code which is quite awesome.
+
+123
+00:07:57,160 --> 00:07:59,280
+This is exactly what I was looking for.
+
+124
+00:07:59,840 --> 00:08:00,880
+Oh look at that.
+
+125
+00:08:00,880 --> 00:08:02,200
+It's saying enumerate array.
+
+126
+00:08:02,480 --> 00:08:04,440
+And then it is going to get the property.
+
+127
+00:08:04,720 --> 00:08:08,960
+Um it's going to get the first value which is going to be the message.
+
+128
+00:08:09,120 --> 00:08:10,480
+Uh, and then the string.
+
+129
+00:08:10,520 --> 00:08:12,760
+Um, this is what I really needed.
+
+130
+00:08:13,440 --> 00:08:14,280
+Fabulous.
+
+131
+00:08:14,560 --> 00:08:16,680
+Uh, so let's try doing it this time.
+
+132
+00:08:16,800 --> 00:08:22,920
+So it has got the JSON document dot parse, but I'm going to leave everything there.
+
+133
+00:08:22,920 --> 00:08:28,250
+But I'm just going to Gonna get this part, which is what I really needed to do it.
+
+134
+00:08:28,250 --> 00:08:31,930
+So this is the idea that I really wanted to see how this actually works.
+
+135
+00:08:31,930 --> 00:08:36,810
+So I'm just gonna copy this whole thing and I'm going to go to my code.
+
+136
+00:08:37,050 --> 00:08:39,970
+So this is going to be the response text over here.
+
+137
+00:08:40,330 --> 00:08:46,250
+Uh, and in the JSON, I'm just going to say paste this particular code.
+
+138
+00:08:46,610 --> 00:08:47,250
+Look at that.
+
+139
+00:08:47,530 --> 00:08:55,330
+So I'm going to say get the property uh for the choice uh and then enumerate the array.
+
+140
+00:08:55,690 --> 00:08:59,050
+First I'm going to stop this execution I think it's running.
+
+141
+00:08:59,370 --> 00:09:01,370
+And then it's going to get that particular string.
+
+142
+00:09:01,690 --> 00:09:07,130
+If it doesn't get the string then just return string dot empty for that matter.
+
+143
+00:09:07,690 --> 00:09:08,330
+There we go.
+
+144
+00:09:08,370 --> 00:09:10,370
+I think that's the code that I need to add.
+
+145
+00:09:10,610 --> 00:09:11,210
+That's it.
+
+146
+00:09:11,210 --> 00:09:15,730
+You can see that this is the very, very super simple code that I have to paste over here.
+
+147
+00:09:15,730 --> 00:09:22,090
+I also got the idea from the, uh, local large language model itself, because it gave me how we can
+
+148
+00:09:22,090 --> 00:09:23,490
+actually do it as well.
+
+149
+00:09:23,490 --> 00:09:25,050
+So I just copy pasted it.
+
+150
+00:09:25,050 --> 00:09:28,710
+So get property of choice enumerate array First message content.
+
+151
+00:09:28,710 --> 00:09:29,310
+And this.
+
+152
+00:09:29,470 --> 00:09:29,950
+Cool.
+
+153
+00:09:30,310 --> 00:09:33,910
+And now let me call this method and see how this works.
+
+154
+00:09:33,910 --> 00:09:36,310
+So I'm going to go to the enhanced test.
+
+155
+00:09:37,430 --> 00:09:46,310
+And instead of the local elements that I was calling in before I'm going to say result is equal to await
+
+156
+00:09:46,590 --> 00:09:50,110
+client dot call open async.
+
+157
+00:09:50,470 --> 00:09:54,030
+And I'm going to do the exact similar prompt.
+
+158
+00:09:54,190 --> 00:09:56,990
+I'll try to run this code and let's see what's going to happen.
+
+159
+00:09:57,870 --> 00:10:02,430
+So it's going to get to this point and we're going to run it.
+
+160
+00:10:04,830 --> 00:10:07,110
+Oops I think I should have put a breakpoint here.
+
+161
+00:10:07,470 --> 00:10:09,590
+So this time it's actually running on the open AI.
+
+162
+00:10:09,630 --> 00:10:13,510
+So it's pretty faster as opposed to the local large language model.
+
+163
+00:10:14,030 --> 00:10:16,430
+Uh and hopefully it just works.
+
+164
+00:10:16,430 --> 00:10:17,510
+And we got a result.
+
+165
+00:10:17,830 --> 00:10:18,630
+Look at that.
+
+166
+00:10:18,630 --> 00:10:20,230
+Here is the result.
+
+167
+00:10:20,670 --> 00:10:26,390
+Certainly below is the simple example of how to use selenium with C sharp to perform the search operation.
+
+168
+00:10:26,510 --> 00:10:31,440
+And it has given me all the code Fabulous.
+
+169
+00:10:31,880 --> 00:10:37,720
+It's already deserialized perfectly like how I was looking for to get directly from the content of the
+
+170
+00:10:37,720 --> 00:10:38,440
+choices.
+
+171
+00:10:39,200 --> 00:10:40,080
+Pretty cool.
+
+172
+00:10:40,360 --> 00:10:41,200
+That worked.
+
+173
+00:10:41,640 --> 00:10:48,880
+This is how we can actually access the large language model, which is sitting on the OpenAI with the
+
+174
+00:10:48,880 --> 00:10:53,080
+GPT models way more easily using this particular code.
+
+175
+00:10:53,080 --> 00:11:00,280
+So now you have got the idea of how you can prompt your local large language model as well as the OpenAI
+
+176
+00:11:00,320 --> 00:11:06,120
+model and then talk with it, get the response that you're looking for, which is quite amazing.
+
+177
+00:11:06,520 --> 00:11:14,840
+Now, the last operation that I wanted to do it is I wanted to, uh, move all of these into a configuration
+
+178
+00:11:14,840 --> 00:11:20,040
+because that is something very, very important, because all of these values are hard coded.
+
+179
+00:11:20,040 --> 00:11:25,880
+I want them all to be moved to a configuration so that I can access it way more easily, just from the
+
+180
+00:11:25,880 --> 00:11:28,200
+configuration and change in one single place.
+
+181
+00:11:28,200 --> 00:11:34,120
+I don't really have to, uh, go and switch this knob by commenting them out.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 6. Creating Configurations to control Models, URLs, Temperatures from one place
+
+1
+00:00:00,080 --> 00:00:00,920
+All right.
+
+2
+00:00:00,920 --> 00:00:07,960
+So now we are going to see how we can read the configurations from the JSON file instead of just holding
+
+3
+00:00:07,960 --> 00:00:09,360
+everything over here.
+
+4
+00:00:09,400 --> 00:00:12,840
+Remember you can see that we have got so many things hardcoded.
+
+5
+00:00:12,880 --> 00:00:15,280
+The one is the open API key is hard coded.
+
+6
+00:00:15,280 --> 00:00:18,240
+And we also have got the models as hardcoded.
+
+7
+00:00:18,400 --> 00:00:21,240
+We have got the temperatures hardcoded.
+
+8
+00:00:21,280 --> 00:00:25,840
+We also have got the base URLs hardcoded over here.
+
+9
+00:00:26,000 --> 00:00:33,120
+And we also have got uh some other details hardcoded for example the max tokens and something like that.
+
+10
+00:00:33,120 --> 00:00:37,960
+So if you want to hard code any of these over here, it's going to be trouble to be honest, because
+
+11
+00:00:37,960 --> 00:00:40,840
+we need to manage all of them from one single place.
+
+12
+00:00:41,040 --> 00:00:43,400
+So how can we get rid of this particular problem?
+
+13
+00:00:43,520 --> 00:00:50,480
+Well, we need to create a class called as LM config over here where this class is going to represent
+
+14
+00:00:50,520 --> 00:00:53,120
+what exactly that we are looking for.
+
+15
+00:00:53,280 --> 00:00:57,400
+So for instance I'm going to be looking for um, the provider.
+
+16
+00:00:57,440 --> 00:00:57,680
+Right.
+
+17
+00:00:57,720 --> 00:01:03,950
+The provider is going to be uh, like a local large language model or the OpenAI model.
+
+18
+00:01:04,190 --> 00:01:07,230
+Whatever that you are going to be using, you can do that as well.
+
+19
+00:01:07,350 --> 00:01:14,390
+So you can by default set it to local, but you can actually set it to, uh, to OpenAI.
+
+20
+00:01:14,630 --> 00:01:15,990
+For the OpenAI model.
+
+21
+00:01:15,990 --> 00:01:20,350
+Or you can just say local uh, for the local large language model.
+
+22
+00:01:20,590 --> 00:01:22,470
+That's the provider that we're talking about.
+
+23
+00:01:22,590 --> 00:01:26,790
+And similarly, uh, you can set the API key.
+
+24
+00:01:26,830 --> 00:01:32,750
+If you really wanted to I mean, the API key is going to be there for the OpenAI model.
+
+25
+00:01:32,830 --> 00:01:39,430
+But for the normal local large language model, it is just going to be an empty over there.
+
+26
+00:01:39,750 --> 00:01:46,670
+And similarly, you can also set uh, the base URL over here, which is going to be string as well.
+
+27
+00:01:46,750 --> 00:01:53,790
+Uh, so you can just say base URL, uh, and then the base URL string for the local large language model
+
+28
+00:01:53,790 --> 00:01:56,950
+is going to be obviously, uh, you know what it is.
+
+29
+00:01:56,990 --> 00:01:58,590
+Let me just go copy that.
+
+30
+00:01:58,630 --> 00:02:00,830
+Which is going to be this one.
+
+31
+00:02:00,870 --> 00:02:02,750
+This is the base URL that we have got.
+
+32
+00:02:02,750 --> 00:02:06,950
+So I'm going to go copy that over here and I'm going to paste it.
+
+33
+00:02:07,150 --> 00:02:10,390
+But it's going to change for the OpenAI model.
+
+34
+00:02:10,790 --> 00:02:17,750
+And similarly you can set the models as well uh, over here uh, which is also going to be kind of interesting.
+
+35
+00:02:18,030 --> 00:02:19,750
+So I'm going to do that.
+
+36
+00:02:19,750 --> 00:02:24,110
+And because I've already written that particular code, I'm just going to paste it to save some time
+
+37
+00:02:24,110 --> 00:02:24,830
+over there.
+
+38
+00:02:24,990 --> 00:02:25,870
+And look at that.
+
+39
+00:02:25,870 --> 00:02:27,870
+We have got the entire class over here.
+
+40
+00:02:27,870 --> 00:02:31,310
+So this is the, uh, this is the configuration that I'm talking about.
+
+41
+00:02:31,550 --> 00:02:37,310
+Once we have this particular configuration, then we can create a JSON file which represents pretty
+
+42
+00:02:37,310 --> 00:02:39,470
+much exactly the similar structure.
+
+43
+00:02:39,750 --> 00:02:46,230
+So for instance, uh, you can create a JSON file over here, uh something like this.
+
+44
+00:02:46,550 --> 00:02:49,550
+And you can name it uh, like probably.
+
+45
+00:02:49,830 --> 00:02:50,030
+Yeah.
+
+46
+00:02:50,030 --> 00:02:54,150
+You can just say app settings if you really wanted to, but it can be of anything to be honest.
+
+47
+00:02:54,430 --> 00:02:57,710
+So I'm just going to say app settings dot JSON file.
+
+48
+00:02:57,990 --> 00:03:05,060
+And in that app settings we can put all of these, uh, over here that I just represented in the configuration
+
+49
+00:03:05,060 --> 00:03:10,100
+like provider, API key, base URL model and whatnot.
+
+50
+00:03:10,100 --> 00:03:15,140
+So because you just saw me before, like how I was doing it in the demonstration.
+
+51
+00:03:15,420 --> 00:03:16,940
+So I'm going to do the exact same thing.
+
+52
+00:03:16,940 --> 00:03:19,100
+I'm just going to copy paste that over here.
+
+53
+00:03:19,100 --> 00:03:20,500
+So it's going to be provided as local.
+
+54
+00:03:20,900 --> 00:03:22,020
+This is the base URL.
+
+55
+00:03:22,220 --> 00:03:23,860
+And I'm going to do it all here.
+
+56
+00:03:24,340 --> 00:03:25,100
+Pretty cool.
+
+57
+00:03:25,340 --> 00:03:31,060
+But how do we read this particular uh uh app settings file.
+
+58
+00:03:31,340 --> 00:03:37,540
+The first thing is I wanted to do it is I need to go to the properties over here, make sure that you
+
+59
+00:03:37,820 --> 00:03:40,580
+say copy if newer over here.
+
+60
+00:03:40,580 --> 00:03:44,620
+If not, this particular app settings file is not going to be copied into a bin folder.
+
+61
+00:03:45,260 --> 00:03:46,820
+If you really not did that before.
+
+62
+00:03:46,980 --> 00:03:49,140
+I will try to explain you what I really mean about that.
+
+63
+00:03:49,500 --> 00:03:52,020
+Let's say I want to build this particular solution.
+
+64
+00:03:52,300 --> 00:03:58,660
+And now if I'm going to go to the bin directory, which is going to be on the finder, and if I'm going
+
+65
+00:03:58,700 --> 00:04:00,540
+to go to the bin debug.
+
+66
+00:04:00,780 --> 00:04:04,940
+Net nine, you see that we don't really have the app settings here.
+
+67
+00:04:04,940 --> 00:04:07,010
+Even if you search it, it won't be there.
+
+68
+00:04:07,330 --> 00:04:13,010
+The reason why is because it has not been copied to the bin folder and all your test is going to run
+
+69
+00:04:13,010 --> 00:04:18,970
+from the bin folder, because that's where the dynamically linked library or DLLs are sitting, which
+
+70
+00:04:18,970 --> 00:04:25,130
+is the one which is executing while you run the test or while you run the application in dotnet world.
+
+71
+00:04:25,890 --> 00:04:32,810
+And now, because this app setting has not been copied, you need to force the dotnet to be copied to
+
+72
+00:04:33,490 --> 00:04:37,650
+the output directory every single time while you build the application.
+
+73
+00:04:37,770 --> 00:04:40,090
+So I have just changed that over here.
+
+74
+00:04:40,090 --> 00:04:42,890
+This is going to be the same thing even in Visual Studio as well.
+
+75
+00:04:43,170 --> 00:04:44,570
+And hit okay.
+
+76
+00:04:45,010 --> 00:04:52,250
+And if I'm going to build the solution this time, and if I'm going to go to this particular project,
+
+77
+00:04:52,250 --> 00:04:57,210
+which is going to be open in finder, you will go to the bin debug.
+
+78
+00:04:57,210 --> 00:04:58,050
+Net nine.
+
+79
+00:04:58,250 --> 00:05:01,930
+And you will also see that there's going to be appsettings.json file this time.
+
+80
+00:05:02,210 --> 00:05:03,730
+This is coming over here.
+
+81
+00:05:03,730 --> 00:05:08,530
+Because now that we have copied it over here, this is a is similar thing in Visual Studio.
+
+82
+00:05:08,530 --> 00:05:13,890
+Just go to the properties and there is something called as just go and right click on the properties.
+
+83
+00:05:13,890 --> 00:05:20,530
+In Visual Studio 2022, you will see similar kind of window where you can do a copy to output directory.
+
+84
+00:05:20,570 --> 00:05:22,050
+Just make sure that you do that.
+
+85
+00:05:22,610 --> 00:05:23,450
+All right.
+
+86
+00:05:23,450 --> 00:05:31,290
+And once you have copied that, the next quest is to read from this particular app settings file and
+
+87
+00:05:32,210 --> 00:05:42,090
+do a Deserialization to the LM configuration class file, and then call the LM configuration, uh,
+
+88
+00:05:42,290 --> 00:05:50,170
+within your LM client class, uh, so that you can change all the hard coded value to the LM client
+
+89
+00:05:50,170 --> 00:05:50,570
+class.
+
+90
+00:05:50,570 --> 00:05:57,210
+That is the entire idea that we are going to be doing, which we are going to do in our next lecture.
+
+91
+00:05:57,210 --> 00:06:03,610
+But if you want to try doing this, uh, see how that goes, try to do it yourself and see if you could
+
+92
+00:06:03,650 --> 00:06:04,730
+able to achieve that.
+
+93
+00:06:04,850 --> 00:06:06,690
+If you couldn't able to achieve that.
+
+94
+00:06:06,690 --> 00:06:07,650
+Not a problem.
+
+95
+00:06:07,650 --> 00:06:09,570
+We are going to do that in our next lecture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 7. Reading Configuration from appSetting and deserializing it to LLMConfig
+
+1
+00:00:00,080 --> 00:00:01,120
+All right.
+
+2
+00:00:01,120 --> 00:00:06,480
+So now we are going to see how we can read the configuration from the Appsettings.json file.
+
+3
+00:00:06,800 --> 00:00:08,640
+And then we created over here.
+
+4
+00:00:08,640 --> 00:00:11,000
+There are many different ways available in C-sharp.
+
+5
+00:00:11,000 --> 00:00:11,520
+To do it.
+
+6
+00:00:11,520 --> 00:00:17,640
+You can directly read the JSON file from the file dot read all text method.
+
+7
+00:00:17,640 --> 00:00:23,360
+Or you can also use the configuration extensions of Microsoft to do it.
+
+8
+00:00:23,400 --> 00:00:27,960
+I mean, using the Microsoft's configuration extensions, the code will be very, very streamlined and
+
+9
+00:00:27,960 --> 00:00:28,760
+straightforward.
+
+10
+00:00:28,760 --> 00:00:35,240
+So the first thing which I'm going to do it over here is I'm going to create a super simple method within
+
+11
+00:00:35,240 --> 00:00:41,200
+the configuration client class, so that you can see how you can read that configuration.
+
+12
+00:00:41,400 --> 00:00:41,800
+Right.
+
+13
+00:00:41,800 --> 00:00:45,440
+So I'm going to go over here I'm going to create a method.
+
+14
+00:00:45,480 --> 00:00:48,960
+Maybe I'm just going to say public LM config.
+
+15
+00:00:49,520 --> 00:00:52,920
+And then I'm going to say read JSON file.
+
+16
+00:00:53,240 --> 00:00:53,520
+Right.
+
+17
+00:00:53,520 --> 00:00:57,680
+So basically it's going to return me the config uh type.
+
+18
+00:00:57,680 --> 00:00:59,600
+Once it reads that right.
+
+19
+00:00:59,600 --> 00:01:02,040
+And once it's read that it is going to have all these value.
+
+20
+00:01:02,080 --> 00:01:04,440
+That is the whole idea for this particular method.
+
+21
+00:01:04,440 --> 00:01:06,800
+So how do we actually read the JSON file.
+
+22
+00:01:06,840 --> 00:01:14,430
+You remember the JSON file is now sitting within the bin folder, which means you can do something like
+
+23
+00:01:14,430 --> 00:01:16,030
+this in C sharp dotnet.
+
+24
+00:01:16,030 --> 00:01:22,310
+And I'm not going to talk about that because these are something very, very uh, straightforward code
+
+25
+00:01:22,310 --> 00:01:25,430
+that how you do it uh, in the dotnet world.
+
+26
+00:01:25,590 --> 00:01:28,910
+So I'm just going to read the base directory which is the bin folder.
+
+27
+00:01:29,110 --> 00:01:36,310
+And within this bin folder, uh, we have got what is called as a app settings dot JSON, which is going
+
+28
+00:01:36,310 --> 00:01:37,870
+to have that JSON value.
+
+29
+00:01:38,230 --> 00:01:42,750
+That's the path of our JSON file that we have got.
+
+30
+00:01:42,870 --> 00:01:43,470
+Right.
+
+31
+00:01:43,470 --> 00:01:47,150
+And once I read it I can then try to do this.
+
+32
+00:01:47,150 --> 00:01:52,950
+I can just say string JSON data is equal to file.
+
+33
+00:01:53,070 --> 00:01:56,270
+This is the class file in C sharp to read the file.
+
+34
+00:01:56,270 --> 00:01:58,510
+And I'm going to say read all text.
+
+35
+00:01:58,710 --> 00:02:01,910
+And I'm going to pass the JSON file path.
+
+36
+00:02:02,670 --> 00:02:11,230
+And once I read it now I need to convert the app settings dot JSON file this particular properties from
+
+37
+00:02:11,230 --> 00:02:21,900
+the JSON file into This configuration properties, because these are all matching the same name in the
+
+38
+00:02:21,940 --> 00:02:23,140
+app settings as well.
+
+39
+00:02:23,180 --> 00:02:32,780
+Look at that same case, same spellings and same, uh, properties that can be deserialized so much
+
+40
+00:02:32,780 --> 00:02:33,460
+easily.
+
+41
+00:02:33,660 --> 00:02:37,780
+Uh, in the uh, C sharp as we just did over here as well.
+
+42
+00:02:37,820 --> 00:02:42,220
+Like deserialization the same thing I'm going to do, uh, over here as well.
+
+43
+00:02:42,220 --> 00:02:45,260
+So once I read the entire text, I want to deserialize it.
+
+44
+00:02:45,260 --> 00:02:50,860
+And the way I'm going to do it is I'm just going to say JSON serializer, dot deserialize.
+
+45
+00:02:50,900 --> 00:02:55,540
+See, I'm going to pass the type here last time we passed JSON element.
+
+46
+00:02:55,540 --> 00:03:03,820
+But I'm going to pass the LM configuration which is going to do the serialization for this particular
+
+47
+00:03:03,820 --> 00:03:04,980
+JSON data.
+
+48
+00:03:05,540 --> 00:03:06,860
+Oh that's easy.
+
+49
+00:03:07,460 --> 00:03:11,940
+That's all three lines of code made this whole thing happen.
+
+50
+00:03:12,340 --> 00:03:17,300
+And once you read this, you can now call this particular method anywhere that you wanted to.
+
+51
+00:03:17,340 --> 00:03:18,900
+And then you can start using it.
+
+52
+00:03:19,500 --> 00:03:21,020
+I'll tell you how you can do that.
+
+53
+00:03:21,420 --> 00:03:23,980
+Let's go to the constructor of this particular class file.
+
+54
+00:03:24,140 --> 00:03:27,540
+And I'm going to probably read the configuration over here.
+
+55
+00:03:27,580 --> 00:03:29,660
+Let's assume that's what my plan is.
+
+56
+00:03:29,940 --> 00:03:36,980
+So I'm just going to say uh, private read only because I'm just going to read it through.
+
+57
+00:03:37,380 --> 00:03:41,820
+Uh, and I'm going to read the uh LM configuration.
+
+58
+00:03:41,820 --> 00:03:48,580
+So LM configuration, uh, and I'm going to say LM configuration, something like that.
+
+59
+00:03:49,020 --> 00:03:55,340
+So within this LM configuration so lm configuration I'm going to call the read JSON.
+
+60
+00:03:55,460 --> 00:03:56,020
+That's it.
+
+61
+00:03:56,420 --> 00:04:02,180
+If I call this method over here this is going to read the Appsettings file.
+
+62
+00:04:02,340 --> 00:04:06,420
+And then it's going to get me the value from the app settings file.
+
+63
+00:04:06,580 --> 00:04:13,100
+And it is going to store that with the LM configurations property over here.
+
+64
+00:04:14,300 --> 00:04:16,980
+Hope you got the idea what I'm trying to do over here.
+
+65
+00:04:16,980 --> 00:04:17,220
+Right.
+
+66
+00:04:17,220 --> 00:04:18,940
+So this is very straightforward.
+
+67
+00:04:19,220 --> 00:04:25,460
+If I call the constructor because you know that in C sharp or even Java, the moment you call the LM
+
+68
+00:04:25,620 --> 00:04:30,650
+client class, it is going to initialize the HTTP client, and similarly is going to initialize the
+
+69
+00:04:30,650 --> 00:04:33,290
+read JSON file method as well.
+
+70
+00:04:33,330 --> 00:04:35,050
+I'm going to initialize this particular value.
+
+71
+00:04:35,090 --> 00:04:39,730
+I'm going to put a break point here, and let me run this test so that you will understand what I'm
+
+72
+00:04:39,730 --> 00:04:40,770
+really talking about.
+
+73
+00:04:41,210 --> 00:04:44,290
+See the moment I run this particular code over here.
+
+74
+00:04:44,330 --> 00:04:50,450
+See, it's going to invoke the client which is going to call the constructor, which is going to be
+
+75
+00:04:50,450 --> 00:04:51,410
+coming over here.
+
+76
+00:04:51,570 --> 00:04:54,570
+See now it's going to read the JSON for me.
+
+77
+00:04:54,570 --> 00:04:56,130
+I'm going to put a break point here.
+
+78
+00:04:56,810 --> 00:04:57,730
+Let's do that.
+
+79
+00:04:58,250 --> 00:05:02,330
+Um and hopefully we have read that particular value.
+
+80
+00:05:02,730 --> 00:05:10,050
+Um so maybe it's not let me do it one more time because we have to see how that reading is happening.
+
+81
+00:05:11,570 --> 00:05:12,930
+So I'm going to put a break point.
+
+82
+00:05:12,970 --> 00:05:14,450
+Yeah in this place.
+
+83
+00:05:14,890 --> 00:05:23,130
+And let's try to debug this again just here and look at that.
+
+84
+00:05:23,130 --> 00:05:24,970
+Now it's calling the read configuration.
+
+85
+00:05:25,010 --> 00:05:26,450
+So it's going to read that value.
+
+86
+00:05:26,690 --> 00:05:29,010
+And looks like this is failing at the moment.
+
+87
+00:05:29,050 --> 00:05:29,890
+Ah look at that.
+
+88
+00:05:29,890 --> 00:05:31,970
+It says Appsettings.json.
+
+89
+00:05:31,970 --> 00:05:36,040
+But what I have got the file name is app setting which is wrong.
+
+90
+00:05:36,280 --> 00:05:41,840
+So I should either change the file name or on the test code over there.
+
+91
+00:05:42,080 --> 00:05:48,840
+Uh, let me go and modify the, uh, modify the code over here so it's not appsettings.
+
+92
+00:05:48,840 --> 00:05:49,240
+Sorry.
+
+93
+00:05:49,280 --> 00:05:50,280
+It's upsetting.
+
+94
+00:05:50,800 --> 00:05:53,120
+Uh, hopefully that time this will work.
+
+95
+00:05:53,360 --> 00:05:54,480
+Let me debug it again.
+
+96
+00:05:56,240 --> 00:05:57,720
+Just added a plural there.
+
+97
+00:05:57,880 --> 00:06:00,480
+That's how it's going to be in the dotnet world anyways.
+
+98
+00:06:00,520 --> 00:06:01,880
+Oh look at that now it worked.
+
+99
+00:06:02,320 --> 00:06:04,800
+Now it's going to deserialize this particular value.
+
+100
+00:06:05,600 --> 00:06:11,680
+And now if you go to the configuration you should see we have got all the values which is amazing.
+
+101
+00:06:11,920 --> 00:06:17,400
+Now I can use these values within my code and see how that works.
+
+102
+00:06:17,640 --> 00:06:20,320
+So hope you got the idea how we are doing this.
+
+103
+00:06:20,880 --> 00:06:24,040
+Now next lecture I'm just going to replace all the value.
+
+104
+00:06:24,200 --> 00:06:30,720
+And that way we will have a configuration for all of these, uh, code that we have written as a hard
+
+105
+00:06:30,760 --> 00:06:31,560
+coded value.
+
+106
+00:06:31,680 --> 00:06:35,000
+I will let you to do it yourself and see how that goes.
+
+107
+00:06:35,200 --> 00:06:39,200
+Uh, but if not, we are going to do that exact same thing in our next lecture.
+
+108
+00:06:39,200 --> 00:06:39,880
+But guess what?
+
+109
+00:06:39,920 --> 00:06:41,360
+This is very, very straightforward.
+
+110
+00:06:41,640 --> 00:06:42,960
+I will let you do it.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 8. Replacing hardcoded values in LLMClient in favor of Configuration
+
+1
+00:00:00,120 --> 00:00:01,000
+All right.
+
+2
+00:00:01,240 --> 00:00:04,640
+The last operation, as I told you, was to read from the configuration.
+
+3
+00:00:04,640 --> 00:00:06,440
+I hope you have modified that.
+
+4
+00:00:06,440 --> 00:00:09,280
+If not, I'm just going to go and modify it over here.
+
+5
+00:00:09,280 --> 00:00:14,440
+So I'm just going to say LM configuration dot and then just pass the model.
+
+6
+00:00:14,440 --> 00:00:17,160
+So that's where it's going to get the model for me.
+
+7
+00:00:17,160 --> 00:00:22,760
+And if you're going to change the temperature then you're going to just say LM configuration dot.
+
+8
+00:00:22,880 --> 00:00:29,720
+And then you can say the model that's going to get the sorry the temperature that's going to get the
+
+9
+00:00:29,720 --> 00:00:30,840
+temperature over here.
+
+10
+00:00:30,880 --> 00:00:33,680
+So now we are not really hard coding any of these.
+
+11
+00:00:34,040 --> 00:00:39,640
+And the same thing goes for uh the base URL as well which is over here.
+
+12
+00:00:39,640 --> 00:00:49,560
+So just put a string interpolation uh and just replace that from this to uh a braces over here and say
+
+13
+00:00:49,600 --> 00:00:52,680
+lm configuration dot base URL.
+
+14
+00:00:52,680 --> 00:00:55,560
+That's going to get the base URL for this particular API.
+
+15
+00:00:56,200 --> 00:01:02,960
+And you can also replace the same thing over here with a model.
+
+16
+00:01:03,320 --> 00:01:10,380
+Uh, and the temperature you can just say the LM configuration temperature, which is pretty cool.
+
+17
+00:01:10,540 --> 00:01:16,300
+And you can also pass the max token if you really wanted to, because we have really not passed the
+
+18
+00:01:16,740 --> 00:01:18,060
+Max token over here.
+
+19
+00:01:18,060 --> 00:01:27,180
+I can also set that max tokens is equal to LM configuration dot max tokens, which is going to be the
+
+20
+00:01:27,180 --> 00:01:29,940
+number of tokens that you wanted to spend.
+
+21
+00:01:29,940 --> 00:01:33,500
+And this is especially useful while you're using a paid version of the model.
+
+22
+00:01:33,500 --> 00:01:35,380
+That's why this is very important.
+
+23
+00:01:35,700 --> 00:01:39,540
+Uh, and now this particular base URL will change as well.
+
+24
+00:01:40,020 --> 00:01:41,340
+So I'm just going to say.
+
+25
+00:01:43,420 --> 00:01:44,220
+Like this.
+
+26
+00:01:44,700 --> 00:01:47,260
+And we need to make a string interpolation.
+
+27
+00:01:47,260 --> 00:01:52,100
+So configuration dot base URL something like this.
+
+28
+00:01:52,660 --> 00:02:01,140
+Uh and finally we have to modify the OpenAI key as well which is going to be LM configuration dot API
+
+29
+00:02:01,140 --> 00:02:01,460
+key.
+
+30
+00:02:01,780 --> 00:02:02,020
+Right.
+
+31
+00:02:02,020 --> 00:02:03,300
+Because this requires an API key.
+
+32
+00:02:03,300 --> 00:02:09,060
+So this API key that you have got over here can be completely moved out because this is going to come
+
+33
+00:02:09,060 --> 00:02:10,620
+from the configuration now.
+
+34
+00:02:10,780 --> 00:02:12,930
+So we don't even need this guy anymore.
+
+35
+00:02:13,130 --> 00:02:17,650
+So I can just have this in my app setting file.
+
+36
+00:02:18,090 --> 00:02:23,970
+So let me go copy this whole thing, cut this out, and I'm going to delete this because we don't need
+
+37
+00:02:23,970 --> 00:02:24,650
+this anymore.
+
+38
+00:02:25,210 --> 00:02:28,130
+And I'm going to put this over here.
+
+39
+00:02:28,690 --> 00:02:33,490
+But this is only required if it is going to be on the OpenAI.
+
+40
+00:02:33,650 --> 00:02:37,650
+Not for the local model.
+
+41
+00:02:37,890 --> 00:02:41,210
+So I'm going to save this particular code and done.
+
+42
+00:02:41,250 --> 00:02:41,850
+Look at that.
+
+43
+00:02:41,850 --> 00:02:47,490
+Now we already have everything moved to a configuration which is pretty cool.
+
+44
+00:02:47,490 --> 00:02:53,770
+So the client is already so much mature and it has got everything configured.
+
+45
+00:02:53,930 --> 00:02:56,730
+Uh, all of them are coming from a configuration.
+
+46
+00:02:56,930 --> 00:03:02,130
+But now you may have a question saying, hey Karthik, we are still trying to hard code the value like
+
+47
+00:03:02,130 --> 00:03:06,650
+column message, uh, async or the call OpenAI async.
+
+48
+00:03:06,810 --> 00:03:13,970
+Is there a method where I can control both of them in one single place, like based on the the configuration,
+
+49
+00:03:14,010 --> 00:03:15,530
+like what provider that I'm passing in?
+
+50
+00:03:15,530 --> 00:03:19,910
+Because we also have got a property called as provider.
+
+51
+00:03:19,910 --> 00:03:21,590
+We have not really even used that.
+
+52
+00:03:21,590 --> 00:03:24,310
+So how are we going to use that particular code?
+
+53
+00:03:24,470 --> 00:03:30,310
+Well guess what, we are going to write one more method over here which does that operation.
+
+54
+00:03:30,310 --> 00:03:34,270
+For me, the way that particular method is going to look like is going to be like this.
+
+55
+00:03:34,270 --> 00:03:42,710
+I'm going to say public async task, and I'm going to just say, uh, probably, uh, just going to
+
+56
+00:03:42,710 --> 00:03:43,630
+be a task for now.
+
+57
+00:03:43,670 --> 00:03:45,990
+It's not going to return you anything at the moment.
+
+58
+00:03:45,990 --> 00:03:47,910
+And then I'm going to just say string.
+
+59
+00:03:47,950 --> 00:03:53,390
+Of course, it needs to return something and then I'm going to say get completion async, something
+
+60
+00:03:53,390 --> 00:03:53,950
+like that.
+
+61
+00:03:54,190 --> 00:03:56,630
+And here I'm going to pass the prompt.
+
+62
+00:03:56,750 --> 00:04:07,190
+So basically what this method is going to do is based on your uh, your actual configurations with a
+
+63
+00:04:07,190 --> 00:04:11,950
+provider, it is going to choose the method for you.
+
+64
+00:04:12,390 --> 00:04:13,750
+Ooh, look at that.
+
+65
+00:04:13,750 --> 00:04:17,750
+That's why we have that particular, uh, code over there.
+
+66
+00:04:17,750 --> 00:04:21,990
+So I'm going to use a switch expression of the C sharp dotnet over here.
+
+67
+00:04:22,300 --> 00:04:24,580
+and I will show you how you can actually write that.
+
+68
+00:04:24,940 --> 00:04:35,540
+So the way you can do it is if you see it is going to be an open AI model, then you return me a call
+
+69
+00:04:35,580 --> 00:04:46,980
+to open AI async method and pass the prompt, or else if it is local that you're passing in in the provider
+
+70
+00:04:47,020 --> 00:04:56,860
+code over here, then you need to use the method, call local LMS and then call this particular method.
+
+71
+00:04:57,380 --> 00:05:01,540
+If nothing is there, uh, then you can actually put a comma there.
+
+72
+00:05:02,100 --> 00:05:09,460
+If nothing is going to be there, then you are going to throw a new, uh, not supported exception,
+
+73
+00:05:09,460 --> 00:05:10,340
+something like that.
+
+74
+00:05:10,380 --> 00:05:11,460
+Uh, it can be anything.
+
+75
+00:05:11,780 --> 00:05:19,860
+And over here you can just say the provider, uh, and uh, you can just say underscore lm config dot
+
+76
+00:05:20,140 --> 00:05:23,900
+provider, uh, is not supported something like that.
+
+77
+00:05:26,740 --> 00:05:32,320
+See this is what is this particular get completion async method is going to do for you.
+
+78
+00:05:32,640 --> 00:05:38,920
+So if you use this method now it is going to go and choose based on what you're going to pass in.
+
+79
+00:05:38,920 --> 00:05:44,440
+So if I'm going to say local then it will automatically go and choose the local method.
+
+80
+00:05:44,440 --> 00:05:46,000
+And then it's going to run for you.
+
+81
+00:05:46,000 --> 00:05:48,480
+And you don't necessarily have to do it over here.
+
+82
+00:05:48,480 --> 00:05:53,200
+All you have to do it in your test code is just called that get completion.
+
+83
+00:05:53,200 --> 00:05:54,800
+You don't even have to comment the code.
+
+84
+00:05:54,800 --> 00:05:56,440
+Something like how we did over here.
+
+85
+00:05:56,480 --> 00:05:58,800
+See, this code will completely go away.
+
+86
+00:05:59,080 --> 00:06:03,120
+And rather I'm just going to say get completion async.
+
+87
+00:06:03,160 --> 00:06:05,600
+See, this is what I have to pass over here.
+
+88
+00:06:06,040 --> 00:06:11,720
+And I don't even need another line which is commented right now because based on what I have passed
+
+89
+00:06:11,720 --> 00:06:14,920
+over here, it is going to choose things for you.
+
+90
+00:06:14,920 --> 00:06:22,800
+So because now I have chosen local over here, it is going to automatically run the test using the local
+
+91
+00:06:22,800 --> 00:06:27,440
+large language model instead of using the open AI language model.
+
+92
+00:06:27,440 --> 00:06:28,400
+So I'm running it.
+
+93
+00:06:28,400 --> 00:06:30,520
+You will notice that it is a bit slower.
+
+94
+00:06:31,040 --> 00:06:37,030
+The reason why is because it is using the local large language model right now, not the OpenAI model.
+
+95
+00:06:37,350 --> 00:06:37,790
+Right?
+
+96
+00:06:37,830 --> 00:06:43,590
+So this is how things are going to work with that small, uh, method that we have written, which is
+
+97
+00:06:43,590 --> 00:06:46,230
+nothing but the get completion async method.
+
+98
+00:06:46,430 --> 00:06:53,750
+But now, hey, we have used all the configurations, uh, element that we have got, which is these,
+
+99
+00:06:54,030 --> 00:07:04,550
+uh, and we have also seen how we have replaced our existing hardcoded values, uh, into a configuration,
+
+100
+00:07:05,270 --> 00:07:13,670
+uh, method so that now this can be act as a stepping stone for you to perform all the operation that
+
+101
+00:07:13,670 --> 00:07:16,910
+you can do to talk with your large language model.
+
+102
+00:07:17,190 --> 00:07:19,870
+But now we have few more things to do as well.
+
+103
+00:07:19,870 --> 00:07:27,190
+We now need to see how the responses are going to come out from the large language model, and how we
+
+104
+00:07:27,190 --> 00:07:35,790
+need to massage the message, which can always be always similar and always same all the time, regardless
+
+105
+00:07:36,030 --> 00:07:39,310
+which we are going to be doing in our next lecture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 9. Understanding the Problem statement to use Self Healing Strategies
+
+1
+00:00:00,160 --> 00:00:01,080
+All right.
+
+2
+00:00:01,400 --> 00:00:08,240
+Now that we have seen how we can talk with the local large language models as well as the cloud based
+
+3
+00:00:08,240 --> 00:00:11,160
+large language model using the C sharp.
+
+4
+00:00:11,400 --> 00:00:14,600
+Net code with just the HTTP client.
+
+5
+00:00:14,920 --> 00:00:23,240
+And we have also seen how easy it is to customize all of these operations, get the Deserialized responses,
+
+6
+00:00:23,520 --> 00:00:30,760
+and we can also set the configurations like app settings to control these large language model settings
+
+7
+00:00:30,760 --> 00:00:35,360
+like different models as well as weights and temperature that we wanted to.
+
+8
+00:00:35,600 --> 00:00:36,840
+So we have seen everything.
+
+9
+00:00:36,840 --> 00:00:40,960
+How we can do that until our last lecture of this section.
+
+10
+00:00:40,960 --> 00:00:49,080
+But now we are going to see how we can fine tune our prompt a bit, so that we can make use of what
+
+11
+00:00:49,080 --> 00:00:52,560
+we are going to achieve with the self-healing of the locator.
+
+12
+00:00:53,400 --> 00:00:58,680
+But again, we still have to see there are so many places which are still pending over here.
+
+13
+00:00:58,680 --> 00:01:04,500
+This is going to be a long journey before we achieve this particular point, but at least now we are
+
+14
+00:01:04,500 --> 00:01:09,460
+going to talk about the formatting of the prompt before we wind up this particular section.
+
+15
+00:01:09,700 --> 00:01:12,380
+So let's see how we are going to format the prompt.
+
+16
+00:01:12,380 --> 00:01:16,340
+But before that, let's first of all understand the problem statement a bit.
+
+17
+00:01:17,300 --> 00:01:23,700
+We know that these locators that we write in the page object model code in selenium may get brittle
+
+18
+00:01:23,700 --> 00:01:24,980
+over the period of time.
+
+19
+00:01:24,980 --> 00:01:31,500
+If there is any change in the application's user interface, maybe the locator type could change, the
+
+20
+00:01:31,500 --> 00:01:37,660
+locator itself could change, or maybe the element could completely be disappeared from the UI.
+
+21
+00:01:38,180 --> 00:01:45,500
+We need to ensure that any of these locator if it changes for any reason, we also self heal them,
+
+22
+00:01:45,500 --> 00:01:50,540
+which we can do by finding an alternative locators of this particular element.
+
+23
+00:01:50,740 --> 00:01:54,900
+But when and how are we going to find the alternative locators?
+
+24
+00:01:54,900 --> 00:02:01,870
+Well guess what, we can do this by supplying the complete page of our application, along with the
+
+25
+00:02:01,870 --> 00:02:05,750
+Page Object model code that we have got to the large language model.
+
+26
+00:02:05,750 --> 00:02:08,510
+It can be even the local large language model.
+
+27
+00:02:08,510 --> 00:02:14,310
+And based on that, we can ask the large language model to tell us if there is any alternative locators
+
+28
+00:02:14,310 --> 00:02:17,230
+available for this particular element.
+
+29
+00:02:17,630 --> 00:02:24,670
+This is the only way that we can self-heal the locators within our code that we have got.
+
+30
+00:02:24,830 --> 00:02:32,390
+So what if this login link text doesn't work, but it has got an ID as we saw earlier for our application.
+
+31
+00:02:32,630 --> 00:02:41,390
+So if we pass the page and the page object model code over here, we can now get the ID because the
+
+32
+00:02:41,390 --> 00:02:44,910
+large language model knows what is the locator for that.
+
+33
+00:02:44,910 --> 00:02:47,310
+And then it will give you the alternative locator.
+
+34
+00:02:47,310 --> 00:02:53,350
+And then your code will start working with the alternative locator instead of the locator which is there
+
+35
+00:02:53,350 --> 00:02:54,430
+in your code.
+
+36
+00:02:54,550 --> 00:02:59,450
+That is what we are going to be building over the period of time, but at least now we need to first
+
+37
+00:02:59,450 --> 00:03:00,250
+of all, battle.
+
+38
+00:03:00,290 --> 00:03:02,410
+How do we do this operation?
+
+39
+00:03:02,610 --> 00:03:08,570
+But then next question naturally comes is how are we going to pass the page object model locators and
+
+40
+00:03:08,570 --> 00:03:12,130
+the page to the large language model itself?
+
+41
+00:03:12,810 --> 00:03:13,730
+Well guess what?
+
+42
+00:03:13,770 --> 00:03:21,850
+We can pass the entire page source from our selenium code using the driver dot page source property.
+
+43
+00:03:21,850 --> 00:03:23,330
+That is very, very straightforward.
+
+44
+00:03:23,330 --> 00:03:24,370
+We can do that.
+
+45
+00:03:24,370 --> 00:03:30,450
+But how are we going to pass the page object model locators to the large language model.
+
+46
+00:03:30,730 --> 00:03:35,890
+Are we going to pass the entire C sharp class file to make that happen?
+
+47
+00:03:36,930 --> 00:03:37,850
+Well guess what.
+
+48
+00:03:38,010 --> 00:03:39,610
+We are not going to do that.
+
+49
+00:03:39,890 --> 00:03:47,650
+We are actually going to pass the locator along with the locator type and the page source, and ask
+
+50
+00:03:47,650 --> 00:03:52,290
+the large language model to return the alternative locator for the failing locators.
+
+51
+00:03:52,890 --> 00:04:04,030
+So essentially if you see here we have got the locator type, which is this one, as you can see over
+
+52
+00:04:04,030 --> 00:04:04,630
+here.
+
+53
+00:04:04,990 --> 00:04:15,030
+And the locator itself, which is this one, we are going to pass both of them along with the page source
+
+54
+00:04:15,070 --> 00:04:19,830
+of our application, which is this one to the large language model.
+
+55
+00:04:19,830 --> 00:04:25,910
+So basically we are going to pass one, two and three items to the large language model.
+
+56
+00:04:26,270 --> 00:04:32,670
+And then we are going to get an alternative locator if this locator fails for some reason.
+
+57
+00:04:33,310 --> 00:04:41,470
+So if this guy fails for some reason, then we are going to invoke the large language model to get as
+
+58
+00:04:41,470 --> 00:04:44,230
+an alternative locator, which is this one.
+
+59
+00:04:44,710 --> 00:04:46,310
+That is, what is the expectation.
+
+60
+00:04:46,310 --> 00:04:51,270
+That is the way that we can self-heal our entire code.
+
+61
+00:04:51,990 --> 00:04:55,590
+That's the crux that we are going to be seeing how we are going to achieve it.
+
+62
+00:04:55,670 --> 00:05:02,680
+So in order to achieve this way better, we are going to make use of a trick to make this happen.
+
+63
+00:05:02,680 --> 00:05:08,760
+We know how we can get the page source from using driver dot page source property, but how are we going
+
+64
+00:05:08,800 --> 00:05:12,360
+to pass the locator and the locator type?
+
+65
+00:05:12,760 --> 00:05:18,160
+Well, there is a very, very simple trick which is available in selenium with C dot net where you can
+
+66
+00:05:18,160 --> 00:05:27,480
+actually use the two string method of the locator to get the locator type and the locator itself.
+
+67
+00:05:27,480 --> 00:05:33,560
+You can get both of them separately, and you need to do a bit of a massage to get these things out.
+
+68
+00:05:33,760 --> 00:05:38,680
+I'm going to quickly show you how that's going to happen in our next lecture, and I will also show
+
+69
+00:05:38,680 --> 00:05:45,760
+you how we can format our prompt to get the alternative locators from a large language model.
+
+70
+00:05:46,000 --> 00:05:51,560
+If you get that idea, I'm telling you, the rest of the lectures are going to be like a cakewalk for
+
+71
+00:05:51,560 --> 00:05:56,720
+you because you have already got the crux of what we are going to be achieving pretty soon.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 10. Getting LocatorType and LocatorValue from POM Code of Selenium using ToString()
+
+1
+00:00:00,280 --> 00:00:03,800
+All right, now, let's get back to our code over here.
+
+2
+00:00:03,880 --> 00:00:06,760
+I'm going to quickly show you the trick of what I was talking about.
+
+3
+00:00:06,760 --> 00:00:14,400
+To get the locator type, as well as the locator value and the page source that we can pass to the large
+
+4
+00:00:14,400 --> 00:00:15,440
+language model.
+
+5
+00:00:15,760 --> 00:00:20,560
+So in order to do that, I'm going to go back to our enhanced test over here one more time.
+
+6
+00:00:20,720 --> 00:00:24,440
+But before that I'm going to go and copy this particular locator that I have got.
+
+7
+00:00:24,800 --> 00:00:27,640
+And then I'm going to go to the enhanced test over here.
+
+8
+00:00:28,000 --> 00:00:32,680
+And I'm going to uh, just uh, pass the locator over here.
+
+9
+00:00:32,680 --> 00:00:40,520
+So I'm going to say, uh, the locator, uh, and over here I'm going to pass this.
+
+10
+00:00:41,280 --> 00:00:41,920
+Right.
+
+11
+00:00:41,920 --> 00:00:44,280
+And now I need to get the page source.
+
+12
+00:00:44,280 --> 00:00:49,360
+And the way I can get the page source is by using selenium, as you already know.
+
+13
+00:00:49,480 --> 00:00:54,040
+So I'm going to go and copy the code which is invoking the selenium code.
+
+14
+00:00:54,040 --> 00:00:57,200
+So no shame just copying this particular code.
+
+15
+00:00:57,480 --> 00:00:59,960
+And I'm going to paste that over here.
+
+16
+00:01:00,000 --> 00:01:05,000
+You don't need a try catch block, because we know that this is going to just work, and that's going
+
+17
+00:01:05,000 --> 00:01:08,120
+to go and identify the page for me.
+
+18
+00:01:08,760 --> 00:01:16,520
+And I'm just going to say, maybe I'm just going to cut this code and paste it over here.
+
+19
+00:01:17,040 --> 00:01:21,160
+Uh, and I'm going to get the page source as well, the page source I can get.
+
+20
+00:01:21,160 --> 00:01:25,560
+So I'm going to say page source I'm going to get using the driver dot.
+
+21
+00:01:25,760 --> 00:01:27,640
+And then there is something called as page source.
+
+22
+00:01:27,640 --> 00:01:30,960
+This is going to get the entire page source of our application.
+
+23
+00:01:31,000 --> 00:01:33,720
+So this is going to get the source code of our page.
+
+24
+00:01:34,040 --> 00:01:39,240
+And this is the locator that we are going to be identifying as an alternative locator.
+
+25
+00:01:39,280 --> 00:01:39,760
+Right.
+
+26
+00:01:39,800 --> 00:01:41,920
+I want to see if I can able to get that.
+
+27
+00:01:41,920 --> 00:01:47,520
+So if I going to go to the Google Chrome and if I'm going to go to the login, this is what I'm trying
+
+28
+00:01:47,520 --> 00:01:49,440
+to see if there is any alternative locator.
+
+29
+00:01:49,520 --> 00:01:54,960
+If I'm going to do an inspect, you can see that there is an alternative locator of ID as the login
+
+30
+00:01:54,960 --> 00:01:55,320
+link.
+
+31
+00:01:55,320 --> 00:01:59,750
+And that is what I want to identify if the large language model can go and identify for me.
+
+32
+00:02:00,150 --> 00:02:00,870
+Right.
+
+33
+00:02:00,870 --> 00:02:03,110
+So I have got both of them over here.
+
+34
+00:02:03,310 --> 00:02:09,550
+But now we need to pass what is the current locator type and the locator value.
+
+35
+00:02:09,750 --> 00:02:16,190
+Only then the large language model can go and identify what is the alternative locators for that.
+
+36
+00:02:16,190 --> 00:02:23,710
+So in order to get the locator type and locator value, you can actually do a small C sharp dotnet code
+
+37
+00:02:23,710 --> 00:02:24,390
+over here.
+
+38
+00:02:24,710 --> 00:02:28,670
+As I told you, just use what is called as two string.
+
+39
+00:02:28,670 --> 00:02:35,790
+So I'm going to say var as strategy is called as strategy string.
+
+40
+00:02:35,830 --> 00:02:39,590
+Probably because I'm going to identify the strategy using that.
+
+41
+00:02:39,630 --> 00:02:47,270
+So I'm going to say um this guy the locator that we have the locator dot two string.
+
+42
+00:02:47,270 --> 00:02:48,910
+So if I'm going to do a two string.
+
+43
+00:02:48,950 --> 00:02:51,190
+So this is essentially like this guy dot two string.
+
+44
+00:02:51,230 --> 00:02:52,070
+It's not big deal.
+
+45
+00:02:52,070 --> 00:02:57,230
+I'm just saying uh this as two string or located at it can be of anything.
+
+46
+00:02:57,270 --> 00:02:57,830
+Right.
+
+47
+00:02:57,830 --> 00:02:59,310
+So I'm going to say two string.
+
+48
+00:02:59,670 --> 00:03:02,950
+When I do this I'll tell you how this code is going to be.
+
+49
+00:03:02,950 --> 00:03:04,630
+Let me put a break point here.
+
+50
+00:03:04,950 --> 00:03:10,550
+Uh, and let me try to, uh, run this particular code.
+
+51
+00:03:10,550 --> 00:03:17,990
+So if I'm going to say debug this unit test, of course, this is going to open the application and
+
+52
+00:03:17,990 --> 00:03:19,510
+navigate to the page for now.
+
+53
+00:03:19,510 --> 00:03:21,470
+And I'm just going to let that happen.
+
+54
+00:03:22,990 --> 00:03:23,830
+All right.
+
+55
+00:03:24,190 --> 00:03:29,190
+And you can see that now it has got to this strategy string I'm going to put a breakpoint here as well.
+
+56
+00:03:29,190 --> 00:03:38,230
+And if I try to uh just select this and evaluate the expression, you will notice that how this particular
+
+57
+00:03:38,510 --> 00:03:40,510
+locator is getting us.
+
+58
+00:03:41,470 --> 00:03:49,430
+So this buy dot link text is the locator type and login is the locator value.
+
+59
+00:03:50,750 --> 00:03:51,230
+See.
+
+60
+00:03:51,790 --> 00:03:56,380
+So now we can pass this as a locator type and then the locator value.
+
+61
+00:03:56,380 --> 00:04:04,060
+If we pass both of them over here, then we could just identify things so much easily.
+
+62
+00:04:04,380 --> 00:04:06,820
+So that is what we are going to be passing in over here.
+
+63
+00:04:06,820 --> 00:04:09,300
+This is the strategy string that we have got.
+
+64
+00:04:09,500 --> 00:04:17,700
+So what I'm going to say is I want to get the locator value as well as the locator type.
+
+65
+00:04:17,700 --> 00:04:25,700
+So the way I can actually get out is I can first get the index of the uh, the separator that we have
+
+66
+00:04:25,740 --> 00:04:26,020
+got.
+
+67
+00:04:26,020 --> 00:04:32,820
+So int uh separator uh index something like this separator I think the spelling is wrong.
+
+68
+00:04:33,020 --> 00:04:40,260
+So I'm going to just say separator index as the strategy string uh dot index of and we know that the
+
+69
+00:04:40,260 --> 00:04:42,860
+separator is an a colon there.
+
+70
+00:04:42,860 --> 00:04:44,980
+So I'm going to get that particular colon there.
+
+71
+00:04:45,220 --> 00:04:48,380
+That's going to get the, the the index.
+
+72
+00:04:48,540 --> 00:04:54,100
+And now I'm going to get the uh, the type as well as the values is the type.
+
+73
+00:04:54,100 --> 00:05:01,900
+So I'm going to say locator type, which is going to be the strategy string dot.
+
+74
+00:05:01,940 --> 00:05:08,100
+And there is a method called as substring or which can get you the string that you are looking for.
+
+75
+00:05:08,140 --> 00:05:10,180
+So I'm going to say separator index.
+
+76
+00:05:10,180 --> 00:05:12,940
+So that's going to get you the locator type.
+
+77
+00:05:12,940 --> 00:05:15,500
+And I also need to get the locator value.
+
+78
+00:05:15,780 --> 00:05:19,580
+So I'm just going to say strategy string dot substring.
+
+79
+00:05:19,900 --> 00:05:29,420
+And I'm going to say the separator index plus one uh with um I think that should be good enough to get
+
+80
+00:05:29,420 --> 00:05:31,380
+that particular value.
+
+81
+00:05:33,180 --> 00:05:36,940
+I know this kind of codes are kind of a logic in C sharp dot net that you have to do.
+
+82
+00:05:36,980 --> 00:05:41,900
+It's nothing to do with the automation itself, but this is how you can write the logics very clearly.
+
+83
+00:05:41,940 --> 00:05:42,460
+Right.
+
+84
+00:05:42,500 --> 00:05:44,780
+So that is what's going to happen over here.
+
+85
+00:05:44,780 --> 00:05:48,220
+So we are going to get the page source locator type and look at our value.
+
+86
+00:05:48,220 --> 00:05:52,770
+All of them this time so that our prompt is going to be ready.
+
+87
+00:05:52,770 --> 00:05:58,570
+But for now, just let's try to execute this code and see what is the output of this particular code
+
+88
+00:05:58,810 --> 00:06:00,810
+so that you can understand how things are working.
+
+89
+00:06:01,330 --> 00:06:02,410
+Uh pretty cool.
+
+90
+00:06:02,410 --> 00:06:06,210
+So we have got that and look at that.
+
+91
+00:06:06,210 --> 00:06:11,690
+So we have got the locator type as by dot link text and the locator value as login.
+
+92
+00:06:11,690 --> 00:06:17,330
+So we have got all of these and we have of course got the page source as well as you can see the entire
+
+93
+00:06:17,330 --> 00:06:18,050
+page source.
+
+94
+00:06:18,290 --> 00:06:21,010
+And now I'm going to pass the page source.
+
+95
+00:06:21,290 --> 00:06:27,730
+And then I'm going to ask the large language model that I have got a locator type as this with its locator
+
+96
+00:06:27,730 --> 00:06:29,050
+value as this one.
+
+97
+00:06:29,610 --> 00:06:37,850
+But can you go and identify me an alternative locator, uh, using this particular page source, if
+
+98
+00:06:37,850 --> 00:06:43,170
+I'm going to ask this question to the large language model, then it is going to get me the alternative
+
+99
+00:06:43,170 --> 00:06:44,770
+locators hopefully.
+
+100
+00:06:45,210 --> 00:06:49,570
+So we'll see how that is going to be working in our next lecture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 11. Passing PageSource and Locator Context to LLMs to get Alternative Locators
+
+1
+00:00:00,040 --> 00:00:00,840
+All right.
+
+2
+00:00:00,840 --> 00:00:06,120
+So now is the prime time for us to see how our large language model is going to respond to us.
+
+3
+00:00:06,400 --> 00:00:12,840
+So the way I'm going to do it is I'm going to get the page source and then the locator type and the
+
+4
+00:00:12,880 --> 00:00:17,120
+locator value, and then I'm going to pass it to the large language model.
+
+5
+00:00:17,120 --> 00:00:21,920
+And then I'm going to ask the question to give me an alternative locator.
+
+6
+00:00:22,120 --> 00:00:26,280
+So let's go and try first with the cloud desktop and see how that works.
+
+7
+00:00:26,280 --> 00:00:28,520
+So this is the thing that we did already.
+
+8
+00:00:28,960 --> 00:00:32,200
+And now let's go and see how we can do it.
+
+9
+00:00:32,320 --> 00:00:37,160
+So what I'm going to do it is I'm going to tell it the large language model over here.
+
+10
+00:00:37,160 --> 00:00:47,720
+Is that the web element uh, with maybe uh, locator type and locator type is going to be by dot.
+
+11
+00:00:48,080 --> 00:00:58,200
+Um, I think we got it like by dot link text locator value, which is going to be uh login.
+
+12
+00:00:59,000 --> 00:01:05,630
+And I'm going to say cannot be found in the page source.
+
+13
+00:01:06,150 --> 00:01:10,230
+Um, I'm going to say which is attached.
+
+14
+00:01:11,390 --> 00:01:13,350
+So we need to attach that over there.
+
+15
+00:01:13,670 --> 00:01:19,030
+And I'm going to say based on the page source.
+
+16
+00:01:19,190 --> 00:01:25,270
+Can you suggest me an alternative locator that could really work.
+
+17
+00:01:25,430 --> 00:01:27,750
+Oops I have actually pressed the enter there.
+
+18
+00:01:27,750 --> 00:01:28,630
+Sorry about that.
+
+19
+00:01:28,630 --> 00:01:30,390
+I'm going to copy it one more time.
+
+20
+00:01:30,390 --> 00:01:31,910
+I'm going to paste it over here.
+
+21
+00:01:32,310 --> 00:01:43,070
+Uh, and I'm also going to say that important because I want to only return the, um, uh, valid JSON
+
+22
+00:01:43,230 --> 00:01:43,830
+as well.
+
+23
+00:01:43,830 --> 00:01:53,070
+So I'm going to say return only a valid JSON object for, for the keys.
+
+24
+00:01:53,830 --> 00:02:03,700
+Um, and I'm going to say the key is going to be ID uh name, uh XPath uh CSS selector and then class
+
+25
+00:02:03,700 --> 00:02:06,500
+name uh and link text.
+
+26
+00:02:06,500 --> 00:02:08,060
+That is what I wanted to return.
+
+27
+00:02:08,340 --> 00:02:20,140
+And I'm also going to say format as uh, proper uh JSON with uh, double quotes because I wanted to
+
+28
+00:02:20,140 --> 00:02:22,140
+get the double quotes of the JSON.
+
+29
+00:02:22,380 --> 00:02:25,420
+And I'm also going to say one more thing, which is very, very important.
+
+30
+00:02:25,580 --> 00:02:36,220
+Do not include explanations or commons, just return the JSON object.
+
+31
+00:02:36,220 --> 00:02:41,300
+The reason why I wanted to say this is because you might have seen many times when you try to ask the
+
+32
+00:02:41,300 --> 00:02:47,580
+large language model for any of these suggestions, it will start giving you the explanations and comments
+
+33
+00:02:47,580 --> 00:02:50,180
+and reasons for that which we don't even need.
+
+34
+00:02:50,420 --> 00:02:52,340
+We just need the JSON object.
+
+35
+00:02:52,340 --> 00:02:54,740
+So make sure that you do that over here as well.
+
+36
+00:02:54,740 --> 00:02:56,260
+This is very, very important.
+
+37
+00:02:56,260 --> 00:03:02,210
+And I'm also telling that return only the valid JSON object for the keys, which is id name, XPath,
+
+38
+00:03:02,250 --> 00:03:05,250
+CSS, and something like that because we don't need anything else as well.
+
+39
+00:03:05,690 --> 00:03:09,130
+And as that said, I'm also going to pass the page source.
+
+40
+00:03:09,130 --> 00:03:18,090
+So I need to go to our app which is this one, and let's go and inspect the page source which is this
+
+41
+00:03:18,090 --> 00:03:18,450
+guy.
+
+42
+00:03:18,490 --> 00:03:20,210
+So I'm going to copy this page source.
+
+43
+00:03:20,530 --> 00:03:23,450
+And I'm going to attach it over here.
+
+44
+00:03:23,650 --> 00:03:26,450
+And I'm going to send it to the large language model.
+
+45
+00:03:26,490 --> 00:03:30,130
+And we'll see what we are going to get the result out from this.
+
+46
+00:03:30,450 --> 00:03:31,490
+Look at that.
+
+47
+00:03:31,930 --> 00:03:41,290
+We are just getting the locators alternative for this particular locator type over there like ID name,
+
+48
+00:03:42,210 --> 00:03:49,730
+XPath, CSS selector class name, as well as the link text login, which was fantastic.
+
+49
+00:03:50,130 --> 00:03:52,410
+See, this is what we wanted.
+
+50
+00:03:52,610 --> 00:04:00,190
+And now we have already found out that there is a way that we can find an alternative locator or alternative
+
+51
+00:04:00,190 --> 00:04:06,310
+locators for this particular locator that we have got, which is this one.
+
+52
+00:04:06,550 --> 00:04:14,390
+So if we have this kind of ability, we have already completed like 90 percentage of our self-healing
+
+53
+00:04:14,390 --> 00:04:20,710
+operation, because just with the locator type and locator value and the page source that we have attached,
+
+54
+00:04:20,870 --> 00:04:24,790
+we could able to obtain the alternative locators already.
+
+55
+00:04:25,110 --> 00:04:31,110
+Now all we have to do it is we need to somehow massage the large language model response in such a way
+
+56
+00:04:31,270 --> 00:04:39,550
+that we get the locators, and then we pass this locator to the locator strategy identifier, or somebody
+
+57
+00:04:39,550 --> 00:04:45,070
+which can go and get the locator and then perform the rest of the operation in selenium.
+
+58
+00:04:45,430 --> 00:04:47,990
+This is the idea of self-healing.
+
+59
+00:04:48,270 --> 00:04:50,950
+We are not really updating the test code.
+
+60
+00:04:50,990 --> 00:04:57,020
+Rather we are actually identifying an alternative locator to self-heal our test execution.
+
+61
+00:04:57,300 --> 00:04:58,380
+This is the power.
+
+62
+00:04:58,420 --> 00:05:01,580
+Guys, this is how we are going to achieve it over here.
+
+63
+00:05:01,580 --> 00:05:04,980
+And hope you already got the idea of what we are trying to achieve.
+
+64
+00:05:05,140 --> 00:05:11,300
+This is really interesting to be honest, because we have found the very amazing way of doing this,
+
+65
+00:05:11,300 --> 00:05:12,500
+which is pretty cool.
+
+66
+00:05:12,540 --> 00:05:17,860
+I'm still intrigued that to see whether this is going to work with our local large language model as
+
+67
+00:05:17,860 --> 00:05:18,420
+well.
+
+68
+00:05:18,420 --> 00:05:21,660
+So I'm going to go and open my O llama here.
+
+69
+00:05:21,900 --> 00:05:24,180
+And remember this is something which we are doing earlier.
+
+70
+00:05:24,380 --> 00:05:26,540
+So I'm just still on the same screen.
+
+71
+00:05:26,540 --> 00:05:28,980
+And over here I'm going to paste this guy.
+
+72
+00:05:29,340 --> 00:05:34,860
+And I'm also going to copy paste this page source as well, uh, which is this one.
+
+73
+00:05:35,220 --> 00:05:43,460
+And I'm going to run and let's see if this large language model also returns how the cloud desktop return.
+
+74
+00:05:43,460 --> 00:05:50,820
+And I'm sure this is going to return as well, because that's exactly how I use this model to perform
+
+75
+00:05:50,860 --> 00:05:53,930
+the login operations and selection operation.
+
+76
+00:05:53,970 --> 00:05:54,690
+Look at that.
+
+77
+00:05:55,130 --> 00:05:56,090
+There you go.
+
+78
+00:05:56,130 --> 00:05:57,250
+We got the alternative.
+
+79
+00:05:57,250 --> 00:05:57,850
+Look here.
+
+80
+00:05:58,330 --> 00:05:59,370
+This is fabulous.
+
+81
+00:05:59,570 --> 00:06:05,170
+And now, regardless of whichever language model that you use, the output is always going to be consistent
+
+82
+00:06:05,170 --> 00:06:10,850
+and same because that's how we have formulated our prompt over here.
+
+83
+00:06:11,650 --> 00:06:18,210
+So prompt engineering context engineering is really really important while we do all of these operations.
+
+84
+00:06:18,490 --> 00:06:24,730
+So once we have all of these ready now, the last operation that we have to do to end this section is
+
+85
+00:06:24,730 --> 00:06:32,770
+to write a simple prompt and pass it to our large language model and see how the response is going to
+
+86
+00:06:32,770 --> 00:06:35,330
+come up, like how we are seeing over here.
+
+87
+00:06:35,570 --> 00:06:40,970
+We are going to face some issue in terms of getting the responses, which I am sure which is going to
+
+88
+00:06:40,970 --> 00:06:43,290
+happen, but I'm expecting that to happen.
+
+89
+00:06:43,290 --> 00:06:46,810
+But I will show you how it is going to happen in our next lecture.
+
+90
+00:06:46,810 --> 00:06:52,010
+And with that, we are going to end this section and then we are going to deal fixing them in our next
+
+91
+00:06:52,010 --> 00:06:53,450
+section of this course.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 12. Getting Alternative Locators in JSON Format (which can be used for Self Healing)
+
+1
+00:00:00,120 --> 00:00:00,920
+All right.
+
+2
+00:00:00,920 --> 00:00:05,600
+So now that we are going to write the prompt and we'll see how we could able to achieve that.
+
+3
+00:00:05,840 --> 00:00:09,640
+So in order to do that I'm going to go to my writer ID one more time.
+
+4
+00:00:09,840 --> 00:00:13,560
+And this is the same place the execution is currently stopped.
+
+5
+00:00:13,560 --> 00:00:15,600
+So I'm just going to continue from there.
+
+6
+00:00:15,720 --> 00:00:18,000
+So I'm going to write a simple prompt.
+
+7
+00:00:18,000 --> 00:00:18,560
+Right.
+
+8
+00:00:18,640 --> 00:00:23,080
+So let's write a small method over here so that it makes more sense.
+
+9
+00:00:23,360 --> 00:00:26,520
+And then I'm going to see how we could able to achieve that.
+
+10
+00:00:26,520 --> 00:00:36,160
+So I'm just going to say uh maybe get healed uh locator or something like that.
+
+11
+00:00:36,160 --> 00:00:41,000
+And I'm going to pass the string of the page source.
+
+12
+00:00:41,360 --> 00:00:50,320
+And then I'm also going to pass the string, uh, locator type and then string, uh, the original locator
+
+13
+00:00:50,320 --> 00:00:53,080
+itself right over here.
+
+14
+00:00:53,080 --> 00:00:54,800
+So I'm going to pass all of these.
+
+15
+00:00:54,840 --> 00:00:57,440
+And now I'm going to write the prompt over here.
+
+16
+00:00:57,680 --> 00:01:03,920
+And the way I'm going to write the prompt itself is I'm going to use the here symbol.
+
+17
+00:01:04,360 --> 00:01:06,120
+Uh over here.
+
+18
+00:01:06,400 --> 00:01:08,440
+This way in C sharp dotnet.
+
+19
+00:01:08,440 --> 00:01:16,360
+You can write like a multi line strings as well, which is going to be way more easier in, in selenium.
+
+20
+00:01:16,360 --> 00:01:18,280
+Like this is how you should do it.
+
+21
+00:01:18,320 --> 00:01:27,400
+And over here uh I'm going to do this the web element with and I'm going to pass the locator type.
+
+22
+00:01:27,560 --> 00:01:38,400
+And I'm going to say with locator type and it's locator which is going to be the original locator that
+
+23
+00:01:38,400 --> 00:01:45,080
+we have got cannot be found in the page, something like this.
+
+24
+00:01:45,280 --> 00:01:54,680
+And I want to say, uh, over here based on the current page source such as the alternative locator.
+
+25
+00:01:54,680 --> 00:01:58,640
+So I'm just going to copy some of the code that I have already written.
+
+26
+00:01:58,720 --> 00:02:00,560
+This is the prompt that I have already written.
+
+27
+00:02:00,560 --> 00:02:03,200
+So I'm just going to do that over here.
+
+28
+00:02:03,200 --> 00:02:07,920
+So I don't really need to retype it over here and see that this is the exact same thing that we were
+
+29
+00:02:07,920 --> 00:02:14,200
+trying to do that before, but I have just formatted a bit over there and this is the prompt that we
+
+30
+00:02:14,200 --> 00:02:14,800
+have got.
+
+31
+00:02:14,800 --> 00:02:15,320
+Right.
+
+32
+00:02:15,560 --> 00:02:24,000
+And now I'm just going to return this prompt so that it is going to be used within our code over here.
+
+33
+00:02:24,360 --> 00:02:28,960
+So now I'm just going to maybe this is not even an asynchronous code.
+
+34
+00:02:28,960 --> 00:02:35,960
+So maybe this is just an um string because this is just going to return, uh, not really an asynchronous
+
+35
+00:02:36,000 --> 00:02:36,840
+operation there.
+
+36
+00:02:37,040 --> 00:02:41,440
+So I'm just going to get the healed locator and we'll see how that actually works.
+
+37
+00:02:41,440 --> 00:02:48,880
+So I'm just going to call this particular method over here var prompt is equal to and I'm going to say
+
+38
+00:02:48,880 --> 00:02:50,320
+get healed locators.
+
+39
+00:02:50,480 --> 00:02:55,040
+And I need to pass the page source which is going to be the page source that we have got which is this
+
+40
+00:02:55,040 --> 00:02:56,440
+page source as you can see.
+
+41
+00:02:56,680 --> 00:02:59,960
+And then I'm going to pass locator type and the locator.
+
+42
+00:02:59,960 --> 00:03:01,360
+So I'm going to pass locator type.
+
+43
+00:03:01,800 --> 00:03:05,520
+and the original error is going to be the locator value.
+
+44
+00:03:05,840 --> 00:03:10,560
+So the moment I pass all of these, we are going to get the formulated prompt over here.
+
+45
+00:03:10,560 --> 00:03:14,560
+And I will show you how it's going to look like, uh, which is this one.
+
+46
+00:03:15,480 --> 00:03:18,840
+And let's get to this particular method.
+
+47
+00:03:19,320 --> 00:03:23,320
+And hopefully oh, maybe this code is not even executed.
+
+48
+00:03:23,320 --> 00:03:23,720
+Sorry.
+
+49
+00:03:23,720 --> 00:03:28,680
+I'm going to stop all of these and rerun that because we have made the code change there.
+
+50
+00:03:28,920 --> 00:03:30,920
+So definitely it is going to be different.
+
+51
+00:03:32,120 --> 00:03:36,440
+And also we need to pass the prompt to our large language model.
+
+52
+00:03:36,440 --> 00:03:42,640
+So I'm going to just say prompt over here and we'll see what is going to be the response.
+
+53
+00:03:43,400 --> 00:03:45,320
+So let's try to debug it again.
+
+54
+00:03:47,400 --> 00:03:52,920
+So this is the prompt that we are trying to formulate this time and see what response that we're going
+
+55
+00:03:52,960 --> 00:03:53,640
+to get in.
+
+56
+00:03:54,720 --> 00:03:55,360
+There we go.
+
+57
+00:03:56,240 --> 00:03:59,760
+And we're going to remove the breakpoint from there because we have seen it working.
+
+58
+00:04:01,320 --> 00:04:02,440
+And look at that.
+
+59
+00:04:02,480 --> 00:04:04,480
+See this is the prompt that we are passing in.
+
+60
+00:04:04,480 --> 00:04:06,640
+So if I'm going to expand this whole prompt.
+
+61
+00:04:06,760 --> 00:04:08,360
+See it has prompt.
+
+62
+00:04:08,480 --> 00:04:16,080
+It has passed the locator type as by dot link text and it's locator as login and cannot be found in
+
+63
+00:04:16,080 --> 00:04:19,000
+the page based on the current page source.
+
+64
+00:04:19,200 --> 00:04:23,000
+See that that's what we are going to pass in, which is amazing.
+
+65
+00:04:23,240 --> 00:04:30,600
+And the page source, uh, is not being passed for some reason, which I'm expecting it to be passed
+
+66
+00:04:30,600 --> 00:04:31,040
+there.
+
+67
+00:04:31,760 --> 00:04:32,840
+Oh, look at that.
+
+68
+00:04:32,840 --> 00:04:35,520
+There are two, uh, square brackets.
+
+69
+00:04:35,520 --> 00:04:37,800
+That's the reason why the page source is not there.
+
+70
+00:04:38,280 --> 00:04:39,400
+I think that's my bad.
+
+71
+00:04:39,440 --> 00:04:41,600
+I should have passed the page source correctly.
+
+72
+00:04:42,440 --> 00:04:46,400
+Let me save it and let me try to debug it again.
+
+73
+00:04:46,440 --> 00:04:48,720
+Maybe it's because of the copy paste I missed.
+
+74
+00:04:49,080 --> 00:04:54,080
+I see there are two braces there which is not going to work out in C sharp.
+
+75
+00:04:54,080 --> 00:04:56,000
+And let me try doing it again.
+
+76
+00:04:56,520 --> 00:04:58,920
+And I'm expecting the page source to be there.
+
+77
+00:04:58,960 --> 00:04:59,800
+Ah look at that.
+
+78
+00:04:59,800 --> 00:05:03,160
+Now I have got the full page source, which means it's correct.
+
+79
+00:05:03,480 --> 00:05:10,520
+Now I'm going to pass this to our large language model, and I'm expecting the local large language
+
+80
+00:05:10,520 --> 00:05:11,880
+model to be executed.
+
+81
+00:05:12,080 --> 00:05:15,160
+And we'll see what response that we're going to get out of it.
+
+82
+00:05:15,200 --> 00:05:17,040
+So let me try to run that.
+
+83
+00:05:17,560 --> 00:05:18,200
+There we go.
+
+84
+00:05:18,520 --> 00:05:22,120
+And we are going to get some response if I'm not wrong.
+
+85
+00:05:22,240 --> 00:05:22,560
+There we go.
+
+86
+00:05:22,600 --> 00:05:24,360
+We got a response text there.
+
+87
+00:05:24,560 --> 00:05:26,960
+And if I'm going to view that look at that.
+
+88
+00:05:26,960 --> 00:05:32,320
+We are going to get a response over here and see that this is the same exact response.
+
+89
+00:05:32,320 --> 00:05:32,800
+Guys.
+
+90
+00:05:32,800 --> 00:05:39,920
+You can see that we have got the ID, the name of the locator and the XPath to identify that login link.
+
+91
+00:05:40,200 --> 00:05:47,280
+The CSS selector is this one and the class name is nothing and the link text is login perfect.
+
+92
+00:05:47,720 --> 00:05:53,360
+So our prompt that we wrote is working as expected which is fabulous.
+
+93
+00:05:53,760 --> 00:05:58,840
+And let's see if the Deserialization is going to happen over there and looks like it is.
+
+94
+00:05:59,040 --> 00:06:06,600
+And we're going to get a response which is great, and we are going to get the response out from the
+
+95
+00:06:06,600 --> 00:06:07,040
+result.
+
+96
+00:06:07,040 --> 00:06:16,160
+And you see that we have got the same JSON, which we are actually getting out from the, uh, olama
+
+97
+00:06:16,160 --> 00:06:16,880
+over here.
+
+98
+00:06:17,200 --> 00:06:19,720
+And we're running the local large language model as well.
+
+99
+00:06:19,720 --> 00:06:21,440
+So we got the same response.
+
+100
+00:06:21,440 --> 00:06:26,240
+And if I'm going to print the console right line, it is going to be the same thing as well as you can
+
+101
+00:06:26,240 --> 00:06:28,520
+see, which is pretty great.
+
+102
+00:06:28,560 --> 00:06:32,720
+We did not see any failure as such, but it is working as expected.
+
+103
+00:06:32,720 --> 00:06:39,960
+So this proves the point that we could able to prompt and we could able to chat, and we could get an
+
+104
+00:06:39,960 --> 00:06:45,160
+alternative locator out from our large language model by passing the page source.
+
+105
+00:06:45,160 --> 00:06:47,480
+So with this, this section ends.
+
+106
+00:06:47,480 --> 00:06:54,800
+And now we are going to see how we can customize this alternative locator and create a self-healing
+
+107
+00:06:54,800 --> 00:06:55,560
+element.
+
+108
+00:06:55,560 --> 00:07:02,520
+If there happens, any failure in the locator which we are going to be doing starting our next section.
+
+
+==================================================================================
+
+
+section 6. Building Intelligent Locator Strategy using AI for Selenium
+
+
