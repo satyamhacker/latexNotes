@@ -112,6 +112,7 @@ Section X: [Section Title]
 6. **Prerequisite Order Check:** Subtopics ko prerequisites-first order mein generate karo. Jo concept baad wale subtopics ke liye zaroori ho — woh pehle explain karo. Agar order change kiya toh response ke start mein likho: `⚠️ Maine subtopics ka order thoda adjust kiya hai taaki concepts build-on-each-other karein: [new order list]`
 7. **SCOPE SIGNAL Calibration Check:** Kya maine har subtopic ke liye skeleton ka SCOPE SIGNAL padha? Depth level, coverage angle, aur emphasis ke according explanation adjust ki?
 8. **🔑 Keywords Coverage Check (MANDATORY):** Har subtopic generate karne ke baad, us subtopic ka `🔑 KEYWORDS DUMP` uthao aur ek ek keyword check karo — kya woh keyword tumhare generated notes mein explain hua? Agar koi bhi keyword miss hua — woh section dobara likho aur us keyword ko cover karo. Koi bhi keyword miss hona = incomplete notes. `⭐` se marked keywords (emphasized in original notes) ko especially priority do — yeh most important terms hain.
+9. **🔗 Contextual Terms Check (MANDATORY):** Kya maine koi external tool/library/framework/concept mention kiya bina explain kiye? Har proper noun (capitalized tech term ya domain-specific term) ko inline explain karo — assume reader ne pehli baar suna hai. Yeh rule har domain ke liye apply hota hai (AI, Data Science, Cybersecurity, Web Dev, etc.).
 
 *Isse hallucination kam hoga, skeleton ka 100% coverage guarantee hoga, aur original notes ka har ek word final notes mein zaroor aayega.*
 
@@ -235,7 +236,121 @@ Ya koi bhi aisi line jo subtopics ki list parentheses/italics mein dikhaye. Yeh 
 - Example: Agar likho "It runs on the Server" — toh turant explain karo: `(Server matlab ek powerful computer jo 24/7 internet se connected rehta hai)`
 - **First-Time Term Rule:** Jab koi technical term pehli baar aaye — usse **bold** karo aur us ke baad parentheses mein 1-line Hinglish explanation do. Baad mein wahi term dobara aaye toh explain karne ki zaroorat nahi.
 
-**Special Characters Clarity:** Jab bhi code ya commands mein special characters aayein (`$`, `{}`, `[]`, `=>`, `|`, `&&`, `...`, `**`, `::`) — clearly batao inka naam aur kaam Hinglish mein. Beginners ko in symbols se darr lagta hai.\r\n- Example: `${PORT}` → \"Dollar-curly-braces — yeh environment variable ka value inject karta hai\"
+**Special Characters Clarity:** Jab bhi code ya commands mein special characters aayein (`$`, `{}`, `[]`, `=>`, `|`, `&&`, `...`, `**`, `::`) — clearly batao inka naam aur kaam Hinglish mein. Beginners ko in symbols se darr lagta hai.
+- Example: `${PORT}` → "Dollar-curly-braces — yeh environment variable ka value inject karta hai"
+
+
+---
+
+
+## 🔗 CONTEXTUAL TERM EXPLANATION RULE (MANDATORY)
+
+**CRITICAL RULE:** Jab bhi tum explanation mein koi **external tool, library, framework, technology, concept, or domain-specific term** ka naam lo (jo current subtopic ka main focus NAHI hai, but example/context/comparison mein use ho raha hai) — usse **immediately explain karo** inline.
+
+**Yeh rule UNIVERSAL hai — har domain ke liye apply hota hai:**
+- **AI/ML Course:** Selenium, Playwright, Docker, LangChain, Ollama, Claude, GPT-4, XPath, Postman
+- **Data Science Course:** Pandas, NumPy, Scikit-learn, Jupyter, Matplotlib, Seaborn, SQL, NoSQL
+- **Cybersecurity Course:** Metasploit, Wireshark, Nmap, Burp Suite, OWASP, CVE, SQL Injection, XSS
+- **Web Development Course:** React, Angular, Node.js, Express, MongoDB, REST API, GraphQL
+- **DevOps Course:** Kubernetes, Jenkins, Terraform, Ansible, CI/CD, AWS, Azure, GCP
+
+### 📋 The Inline Explanation Format
+
+**Format:** `[Term] (1-line Hinglish explanation in parentheses)`
+
+**✅ CORRECT Examples (Domain-Agnostic):**
+
+```markdown
+"Yeh test Selenium (browser automation tool — Chrome/Firefox ko code se control karta hai) use karke run hota hai."
+
+"Data ko Pandas (Python library — tabular data manipulation ke liye, jaise Excel but code mein) mein load karo."
+
+"Wireshark (network packet analyzer — network traffic ko real-time capture aur analyze karta hai) se traffic monitor karo."
+
+"API ko Postman (API testing tool — HTTP requests manually test karne ke liye) mein verify karo."
+
+"XPath (XML path language — HTML elements ko tree structure mein locate karne ka tarika) use karo."
+
+"Model ko TensorFlow (Google ka ML framework — neural networks train karne ke liye) mein train karo."
+```
+
+**❌ WRONG Examples (NO explanation):**
+
+```markdown
+"Yeh test Selenium use karke run hota hai." ← WRONG! Selenium kya hai?
+
+"Data ko Pandas mein load karo." ← WRONG! Pandas kya hai?
+
+"Wireshark se traffic monitor karo." ← WRONG! Wireshark kya hai?
+```
+
+### 🎯 When to Apply This Rule
+
+**Apply in ALL these scenarios:**
+
+1. **Point 2 (Analogy):** Agar analogy mein koi tech term use kiya
+2. **Point 6 (Under the Hood):** Jab internal working explain karte waqt external tools mention ho
+3. **Point 7 (Hands-On):** Code examples mein jo bhi library/tool import ho
+4. **Point 10 (Anti-Patterns):** Jab alternatives mention karo
+5. **Point 13 (Comparison):** Comparison table mein jo bhi terms aayein
+6. **Point 14 (Real-World Use Case):** Company examples mein jo tech stack mention ho
+7. **Point 17 (Interview Q&A):** Answers mein jo bhi external concepts reference ho
+
+### 🔍 Detection Rule (Self-Check)
+
+**Before finalizing each Point, ask yourself:**
+- "Kya maine koi proper noun (capitalized name) use kiya jo ek tool/library/framework/concept hai?"
+- "Agar reader ne yeh term pehli baar suna hai — kya woh samajh jayega?"
+- "Kya yeh term current subtopic ka main focus hai? (Agar NAHI — toh explain karo inline)"
+
+**Exception:** Agar woh term **same skeleton mein pehle kisi aur subtopic mein already detail mein cover ho chuka hai** — toh sirf reference do:
+```markdown
+"Selenium (detail: Section 1, Video 2 mein dekho) use karke..."
+```
+
+### 📊 Explanation Depth Guidelines
+
+| Term Type | Explanation Length | Example |
+|-----------|-------------------|---------||
+| **Popular tool** (e.g., Docker, Git, Wireshark) | 1 line — core function | `Docker (containers banane ka tool — app ko isolated environment mein run karta hai)` |
+| **Library/Framework** (e.g., React, Pandas, Metasploit) | 1 line — primary use case | `Pandas (Python library — tabular data manipulation ke liye, jaise Excel but code mein)` |
+| **Concept** (e.g., API, Cache, Firewall) | 1 line — simple definition | `Cache (temporary storage — frequently used data ko fast access ke liye store karta hai)` |
+| **Protocol** (e.g., HTTP, WebSocket, SSH) | 1 line — communication purpose | `WebSocket (real-time two-way communication protocol — chat apps mein use hota hai)` |
+| **Domain term** (e.g., XPath, SQL Injection, Gradient Descent) | 1 line — what it does | `XPath (XML path language — HTML elements ko tree structure mein locate karne ka tarika)` |
+
+### ⚠️ Common Mistakes to Avoid
+
+**❌ WRONG — Assuming reader knows common tools:**
+```markdown
+"Is code ko GitHub Actions mein deploy karo."
+"Data ko Jupyter Notebook mein analyze karo."
+"Nmap se port scan karo."
+```
+
+**✅ CORRECT — Explain inline:**
+```markdown
+"Is code ko GitHub Actions (GitHub ka built-in CI/CD tool — code push karne par automatically test aur deploy karta hai) mein deploy karo."
+
+"Data ko Jupyter Notebook (interactive coding environment — code, output aur notes ek saath rakh sakte ho) mein analyze karo."
+
+"Nmap (network scanner — open ports aur services discover karne ke liye) se port scan karo."
+```
+
+**❌ WRONG — Over-explaining the main topic:**
+```markdown
+"Selenium (Selenium ek browser automation tool hai jo 2004 mein Jason Huggins ne banaya tha. Yeh Java, Python, C# support karta hai...) use karte hain."
+```
+
+**✅ CORRECT — Brief inline explanation:**
+```markdown
+"Selenium (browser automation tool — web testing ke liye) use karte hain."
+```
+
+### 🔑 Integration with Keywords Coverage
+
+**Important:** Agar koi external term explain kiya hai inline — usse Keywords Coverage Check mein **separately track mat karo**. Sirf skeleton ke KEYWORDS DUMP wale terms track karo.
+
+**Why?** Kyunki yeh contextual terms "bonus explanations" hain — skeleton ka mandatory content nahi.
 
 
 ---
