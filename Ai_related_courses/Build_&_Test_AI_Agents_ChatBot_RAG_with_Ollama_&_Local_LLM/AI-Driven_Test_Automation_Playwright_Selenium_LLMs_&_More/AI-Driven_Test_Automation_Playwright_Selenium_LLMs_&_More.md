@@ -10714,7 +10714,7 @@ Hum video-by-video (segment-by-segment) aage badhenge.
 
 ---
 
-## 🎥 ===== 1: Visual Testing Fundamentals & Workflow =====
+## 🎥 video 1: Visual Testing Fundamentals & Workflow =====
 *Is video mein speaker visual testing ka core importance, existing tools, aur AI vision models ke through logical screenshot comparison ka workflow explain karta hai.*
 
 ### 🎯 1. Introduction to Visual Testing
@@ -10975,7 +10975,7 @@ Total keywords across all subtopics in this topic: 33
 
 ---
 
-## 🎥 ===== 2: Vision LLM Client Implementation (Selenium: Python, Playwright: JavaScript) =====
+## 🎥 video 2: Vision LLM Client Implementation (Selenium: Python, Playwright: JavaScript) =====
 *Is section mein hum ek custom client class banayenge jo image processing aur AI model ko call karne ka actual low-level network logic handle karegi.*
 
 ### 🎯 1. Building the Vision Client Class
@@ -11156,7 +11156,7 @@ Large scale platforms (jaise BrowserStack) jab cloud pe devices run karte hain, 
 
 ---
 
-## 🎥 ===== 3: Response Deserialization & Comparison Execution (Selenium: Python, Playwright: JavaScript) =====
+## 🎥 video 3: Response Deserialization & Comparison Execution (Selenium: Python, Playwright: JavaScript) =====
 *Is section mein hum samjhenge ki LLM se jo text aayega, usko actually code mein object ki tarah kaise use karna hai taaki test framework easily result assert kar sake.*
 
 ### 🎯 1. Result Model & Execution Logic
@@ -11353,7 +11353,7 @@ Enterprise test automation frameworks (jaise WebdriverIO ya custom Selenium grid
 
 ---
 
-## 🎥 ===== 4: Selenium Test Integration & Local Vision Execution (Selenium: Python) =====
+## 🎥 video 4: Selenium Test Integration & Local Vision Execution (Selenium: Python) =====
 *Is section mein hum pehle se likhe gaye client aur prompt logic ko actual Selenium test ke saath jodenge. Hum local vision models (Qwen, LLaVA) ko test karke unki visual regression limitations ko bhi samjhenge.*
 
 ### 🎯 1. Capturing & Passing Screenshots in Selenium
@@ -11685,7 +11685,7 @@ Total keywords across all subtopics in this topic: 43
 
 ---
 
-## 🎥 ===== 5: OpenAI Integration & JSON Cleaning (Selenium: Python, Playwright: JavaScript) =====
+## 🎥 video 5: OpenAI Integration & JSON Cleaning (Selenium: Python, Playwright: JavaScript) =====
 *Is section mein hum local models ki failure (false positives) ke baad apne architecture ko OpenAI par switch karenge aur dekhenge ki kaise LLMs se aane wale extra markdown text ko clean karke framework ko robust banaya jata hai.*
 
 ### 🎯 1. OpenAI Provider Setup & Logical Comparison
