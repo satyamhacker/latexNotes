@@ -21267,4 +21267,11805 @@ and how we can start automating every single approach using self-healing playwri
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-video 
+video 2. Modifying Page Object Model Code of Playwright With AI Locators
+
+1
+00:00:00,160 --> 00:00:01,080
+All right.
+
+2
+00:00:01,080 --> 00:00:06,800
+So now we are going to use the exact same solution that we have got over here.
+
+3
+00:00:06,800 --> 00:00:11,200
+And we are going to start implementing it for the playwright self-healing tests.
+
+4
+00:00:11,200 --> 00:00:13,600
+So we'll see how we can able to achieve that.
+
+5
+00:00:13,600 --> 00:00:16,680
+So what I'm going to do is I'm just going to close all the tabs.
+
+6
+00:00:16,680 --> 00:00:20,080
+I'm going to start as if like a fresh project over here.
+
+7
+00:00:20,080 --> 00:00:24,080
+So I'm going to go and add a new project in the same solution.
+
+8
+00:00:24,080 --> 00:00:30,720
+So essentially this is exactly the same project that we have been working until our last section, but
+
+9
+00:00:30,720 --> 00:00:37,760
+just that I'm going to be introducing the playwright self-healing tests over here.
+
+10
+00:00:38,080 --> 00:00:38,600
+That's all.
+
+11
+00:00:38,600 --> 00:00:41,280
+This is the only change that I have did.
+
+12
+00:00:41,440 --> 00:00:43,800
+And things remains pretty much exactly the same.
+
+13
+00:00:44,000 --> 00:00:44,440
+Right.
+
+14
+00:00:44,680 --> 00:00:50,640
+And because we are using playwright, we need to add the reference for the playwright over here instead
+
+15
+00:00:50,640 --> 00:00:52,320
+of the selenium.
+
+16
+00:00:52,320 --> 00:00:55,640
+So I'm going to go and search for Microsoft's playwright.
+
+17
+00:00:56,040 --> 00:00:59,000
+And I'm going to install that guy over here.
+
+18
+00:00:59,320 --> 00:01:01,440
+And we of course need other dependencies.
+
+19
+00:01:01,440 --> 00:01:06,400
+So what I'm going to do is I'm going to go and steal those dependencies from here.
+
+20
+00:01:06,400 --> 00:01:07,860
+So I'm going to go and edit it.
+
+21
+00:01:08,300 --> 00:01:12,380
+Uh, so you see that I need the X Visual Studio, uh, runners and things.
+
+22
+00:01:12,380 --> 00:01:16,580
+So I'm going to probably take those items from here.
+
+23
+00:01:17,020 --> 00:01:18,140
+I'm going to copy it.
+
+24
+00:01:18,380 --> 00:01:23,300
+Uh, and I'm gonna go edit this particular project over here.
+
+25
+00:01:23,460 --> 00:01:24,100
+Oh, look at that.
+
+26
+00:01:24,100 --> 00:01:26,140
+It is, uh, x unit there.
+
+27
+00:01:26,140 --> 00:01:28,860
+So I think I don't need to steal anything, so I'm fine with that.
+
+28
+00:01:29,060 --> 00:01:29,820
+Pretty cool.
+
+29
+00:01:29,820 --> 00:01:36,500
+So we have got everything over here, and now we are going to copy some of the code that we have already
+
+30
+00:01:36,500 --> 00:01:38,580
+written over here.
+
+31
+00:01:38,620 --> 00:01:39,140
+Right.
+
+32
+00:01:39,180 --> 00:01:40,700
+But the thing is, you know what?
+
+33
+00:01:40,860 --> 00:01:49,700
+In playwright we don't have what is called as event driver we use what is called as I page to locate
+
+34
+00:01:49,700 --> 00:01:53,300
+the element, uh, in the playwright.
+
+35
+00:01:53,300 --> 00:01:58,140
+And for identifying the locator we use I locator interface.
+
+36
+00:01:58,140 --> 00:02:01,820
+So if you are very familiar with playwright, you understand what I'm really talking about.
+
+37
+00:02:01,820 --> 00:02:08,220
+So if I'm going to go to the playwright.dev, which is this one, uh, and I'm going to choose the dotnet
+
+38
+00:02:08,220 --> 00:02:14,400
+language and I'm going to go get started, uh, you will see that in order for you to write the test,
+
+39
+00:02:14,760 --> 00:02:19,480
+you will see that you need to have a page, which is sort of a I page type.
+
+40
+00:02:19,480 --> 00:02:23,520
+And in order to work with the locators, you need to have the I locator.
+
+41
+00:02:23,520 --> 00:02:29,240
+So if you're just going to go and search for uh locators, you should see that all the locators can
+
+42
+00:02:29,240 --> 00:02:33,440
+be found using I locators locator.
+
+43
+00:02:33,480 --> 00:02:37,560
+You see that it is all identified using the locators over here.
+
+44
+00:02:37,560 --> 00:02:42,080
+So you need to have the interface for the locator to perform all these operations.
+
+45
+00:02:42,440 --> 00:02:48,920
+So what I'm going to do is in here I'm going to copy the code from the pages, which is going to be
+
+46
+00:02:48,920 --> 00:02:50,840
+this entire page that we have.
+
+47
+00:02:51,240 --> 00:02:56,920
+Uh, and I'm going to paste this over here, but the test is eventually going to fail.
+
+48
+00:02:56,960 --> 00:03:04,440
+So let me go on first, uh, rename the namespace to playwright self-healing test dot pages, uh, namespace.
+
+49
+00:03:04,440 --> 00:03:07,360
+If I'm going to do that, you see that this is how I'm going to do.
+
+50
+00:03:07,560 --> 00:03:13,120
+Similarly for the login page, I'm going to do it for this as well, which is great.
+
+51
+00:03:13,560 --> 00:03:15,520
+And these are all looking pretty good right now.
+
+52
+00:03:15,880 --> 00:03:21,150
+And what I'm going to do this time is instead of I webdriver as I told you.
+
+53
+00:03:21,190 --> 00:03:27,430
+We need to have what is called as I page, because that is what is going to be helpful for you to identify
+
+54
+00:03:27,470 --> 00:03:31,470
+things, and that is what you need to use for the constructor as well.
+
+55
+00:03:31,830 --> 00:03:36,910
+Um, so I'm going to go cut this code over here, uh, for the home page.
+
+56
+00:03:37,230 --> 00:03:41,270
+And instead of I driver, I'm going to use the I page.
+
+57
+00:03:41,270 --> 00:03:45,110
+This is from Microsoft Playwright as you as you can see.
+
+58
+00:03:45,470 --> 00:03:47,390
+And I'm going to pass that over here.
+
+59
+00:03:47,790 --> 00:03:53,430
+And this is going to be page uh, this is going to be underscore page.
+
+60
+00:03:53,630 --> 00:03:58,470
+And I'm just going to say underscore page, which is going to be of this page.
+
+61
+00:03:59,310 --> 00:04:02,710
+This is what we need to do over here in playwright world.
+
+62
+00:04:02,910 --> 00:04:09,630
+And similarly if you want to work with the locators over here, we can't really use the I element.
+
+63
+00:04:09,910 --> 00:04:15,510
+Rather we have to use something like I locator to get that operation right.
+
+64
+00:04:15,550 --> 00:04:18,310
+So this is really not going to work over here.
+
+65
+00:04:18,310 --> 00:04:23,470
+So the code is going to be something like this which we have really not implemented that yet.
+
+66
+00:04:23,470 --> 00:04:27,410
+But I'm just writing it like a pseudocode like how the code is going to be.
+
+67
+00:04:27,410 --> 00:04:30,570
+So this is how we are expecting the code to be.
+
+68
+00:04:30,570 --> 00:04:34,930
+So it is going to be like I locator instead of the I web element.
+
+69
+00:04:35,370 --> 00:04:39,290
+And instead of the page driver it is going to be page.
+
+70
+00:04:39,290 --> 00:04:40,970
+So this is what we're expecting.
+
+71
+00:04:40,970 --> 00:04:46,170
+And we don't have any of the extension methods to support this particular operation.
+
+72
+00:04:46,170 --> 00:04:47,730
+We have to do that as well.
+
+73
+00:04:47,890 --> 00:04:53,050
+And similarly the selectors are not going to be like by of the link text.
+
+74
+00:04:53,050 --> 00:04:54,730
+We don't even have to do all of these.
+
+75
+00:04:54,730 --> 00:04:58,330
+You can just pass the root locators here.
+
+76
+00:04:58,330 --> 00:05:06,850
+So in order to identify the link, uh, login text, you can just pass the uh the text as login.
+
+77
+00:05:06,850 --> 00:05:08,890
+This is just going to work as well.
+
+78
+00:05:08,890 --> 00:05:16,490
+And similarly in order to identify the employee details, uh, you can just use the, uh, text, uh,
+
+79
+00:05:17,130 --> 00:05:18,490
+the employee details.
+
+80
+00:05:18,490 --> 00:05:20,650
+This code is just going to work.
+
+81
+00:05:20,690 --> 00:05:27,050
+See, this is how easy it is in the playwright world where you work with the locators.
+
+82
+00:05:27,090 --> 00:05:28,490
+This is so much easier.
+
+83
+00:05:29,050 --> 00:05:35,350
+See, I'm just going to say, uh, double quotes of text is equal to manage user and this is going to
+
+84
+00:05:35,350 --> 00:05:35,830
+work.
+
+85
+00:05:35,830 --> 00:05:42,710
+And similarly this guy is going to be text is equal to log off.
+
+86
+00:05:43,030 --> 00:05:46,470
+So this is how we are going to pass the locators.
+
+87
+00:05:46,470 --> 00:05:47,310
+And there.
+
+88
+00:05:47,310 --> 00:05:49,390
+And it is just going to work for you there.
+
+89
+00:05:50,030 --> 00:05:55,710
+Uh but again you need to have a clear understanding of how the playwright works, like how the locator
+
+90
+00:05:55,710 --> 00:06:02,030
+works, because we are not going to talk about how you can write the automation test for the playwright
+
+91
+00:06:02,030 --> 00:06:06,270
+and how you can work with different locator types in playwright, because that is not the scope of this
+
+92
+00:06:06,270 --> 00:06:06,870
+course.
+
+93
+00:06:06,910 --> 00:06:14,190
+This course is to talk how you can use them for, uh, making your existing playwright test more intelligent.
+
+94
+00:06:14,230 --> 00:06:18,270
+That's the reason why I'm really not talking how you're going to deal with this locators.
+
+95
+00:06:18,470 --> 00:06:22,790
+So now you see that we have got this text is equal to login.
+
+96
+00:06:22,790 --> 00:06:24,590
+Text is equal to employee details.
+
+97
+00:06:24,590 --> 00:06:25,470
+Something like that.
+
+98
+00:06:25,670 --> 00:06:31,550
+Uh, we just need to implement this, uh, AI find element, uh, method, like an extension method
+
+99
+00:06:31,550 --> 00:06:34,110
+to make our support this particular operation.
+
+100
+00:06:34,110 --> 00:06:35,590
+So how can we do that?
+
+101
+00:06:35,590 --> 00:06:37,230
+It is so much easier.
+
+102
+00:06:37,270 --> 00:06:40,190
+We are going to cover that in our next lecture.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 3. Modifying POM of Playwright With AI Locators + Extension Method
+
+1
+00:00:00,120 --> 00:00:01,000
+All right.
+
+2
+00:00:01,280 --> 00:00:04,640
+So now we have already modified the home page locator.
+
+3
+00:00:05,040 --> 00:00:08,960
+Uh, we also need to modify the login page locator, which I completely forgot.
+
+4
+00:00:09,000 --> 00:00:10,360
+Like how we need to do it.
+
+5
+00:00:10,360 --> 00:00:15,800
+So I'm going to quickly do it one more time in front of you so that you can understand how easy it is
+
+6
+00:00:15,800 --> 00:00:16,480
+to do it.
+
+7
+00:00:16,640 --> 00:00:20,960
+All you have to do it is you need to have the page, which is this one.
+
+8
+00:00:21,200 --> 00:00:24,720
+And instead of the driver we have got over here.
+
+9
+00:00:25,000 --> 00:00:30,800
+Uh, you need to be using the page, which is going to be of I page something like this.
+
+10
+00:00:30,800 --> 00:00:34,280
+And the look the variable is going to be I page.
+
+11
+00:00:34,600 --> 00:00:36,960
+And I'm going to pass that over here.
+
+12
+00:00:37,160 --> 00:00:37,560
+Right.
+
+13
+00:00:37,560 --> 00:00:39,320
+That is the only change that we have to do.
+
+14
+00:00:39,360 --> 00:00:46,480
+You can also use the uh the expression bodied member, uh, over here or the primary constructor to
+
+15
+00:00:46,520 --> 00:00:47,080
+move this.
+
+16
+00:00:47,120 --> 00:00:48,520
+That doesn't matter as well.
+
+17
+00:00:48,520 --> 00:00:50,520
+You can write it in one line if you wanted to.
+
+18
+00:00:50,800 --> 00:00:52,160
+This is also highly possible.
+
+19
+00:00:52,560 --> 00:00:55,040
+And now we need to change these locators.
+
+20
+00:00:55,080 --> 00:01:00,380
+Ouf locators are completely, um, from the eye locator type.
+
+21
+00:01:00,420 --> 00:01:04,860
+Let me just go and update for the rest of them as well.
+
+22
+00:01:05,220 --> 00:01:07,580
+And over here it's going to be of eye page.
+
+23
+00:01:07,700 --> 00:01:09,340
+Let's go and modify that.
+
+24
+00:01:09,700 --> 00:01:16,660
+And the eye find element you cannot identify using the ID uh over here.
+
+25
+00:01:16,940 --> 00:01:20,260
+Uh rather you can just use the hash.
+
+26
+00:01:20,300 --> 00:01:23,100
+I'm just going to put the hash for the username.
+
+27
+00:01:23,780 --> 00:01:24,540
+Look at that.
+
+28
+00:01:24,940 --> 00:01:32,380
+Uh, and I'm going to use hash for the password because there is an ID password, something like that.
+
+29
+00:01:32,380 --> 00:01:38,580
+I'm still making keeping that locator as wrong because I want to see, uh, how that really works.
+
+30
+00:01:38,820 --> 00:01:43,860
+Uh, and for the CSS selector, I'm just going to leave that guy as it is, uh, because we are going
+
+31
+00:01:43,900 --> 00:01:48,020
+to see how that is going to be handled by the AI for us automatically.
+
+32
+00:01:48,060 --> 00:01:48,460
+Right.
+
+33
+00:01:48,700 --> 00:01:50,660
+So I'm going to have all of these locator.
+
+34
+00:01:50,700 --> 00:01:56,020
+Now I need to write the extension methods for the AI find element to see how I can able to do that.
+
+35
+00:01:56,060 --> 00:02:00,680
+You remember in our last, uh, selenium code that we wrote.
+
+36
+00:02:00,680 --> 00:02:08,000
+The extension method to identify this operation was done for the I WebDriver over here.
+
+37
+00:02:08,280 --> 00:02:08,760
+Right.
+
+38
+00:02:08,960 --> 00:02:16,120
+But because we are now dealing with I page type, that is the type that we wanted to extend.
+
+39
+00:02:16,320 --> 00:02:20,840
+And so we need to write the extension method pretty much like this over here.
+
+40
+00:02:21,160 --> 00:02:27,080
+So what I'm going to do is from the utilities, uh, I'm just going to copy this whole thing.
+
+41
+00:02:27,120 --> 00:02:29,280
+Maybe I'm just going to copy the entire utilities.
+
+42
+00:02:29,320 --> 00:02:30,080
+No shame.
+
+43
+00:02:30,400 --> 00:02:32,760
+And paste it over here.
+
+44
+00:02:33,440 --> 00:02:37,080
+Uh, and I know everything is going to throw an error, so let me go.
+
+45
+00:02:37,080 --> 00:02:39,680
+And first of all, move the namespace.
+
+46
+00:02:39,680 --> 00:02:41,560
+That is the first thing I need to do.
+
+47
+00:02:41,800 --> 00:02:48,960
+And instead of the I element of the web page extension, uh, I'm just going to change this to I locator
+
+48
+00:02:49,000 --> 00:02:51,800
+because it is going to return me the locator type.
+
+49
+00:02:51,960 --> 00:03:00,180
+And over here the thing that I'm going to be extending is I page only then it is going to work and the
+
+50
+00:03:00,460 --> 00:03:05,900
+locator I'm going to identify using the string which is selector.
+
+51
+00:03:05,900 --> 00:03:09,140
+So see basically the locator in here is not of a type.
+
+52
+00:03:09,460 --> 00:03:10,980
+Rather it is a string type.
+
+53
+00:03:10,980 --> 00:03:12,380
+So that is what I am passing in.
+
+54
+00:03:12,380 --> 00:03:15,140
+So the string is selector over here.
+
+55
+00:03:15,340 --> 00:03:15,980
+That's it.
+
+56
+00:03:16,140 --> 00:03:17,940
+That's the only thing which I'm going to be doing.
+
+57
+00:03:18,260 --> 00:03:26,060
+So I'm going to be passing this uh I page to the self-healing locator over here.
+
+58
+00:03:26,100 --> 00:03:26,420
+Oops.
+
+59
+00:03:26,460 --> 00:03:27,580
+So this is the page.
+
+60
+00:03:28,180 --> 00:03:30,060
+So I'm going to pass the page here.
+
+61
+00:03:30,380 --> 00:03:35,980
+And the locator is going to be the selector that I'm going to pass in.
+
+62
+00:03:36,460 --> 00:03:38,260
+This is what I'm going to pass over there.
+
+63
+00:03:38,740 --> 00:03:41,900
+And the rest are things we need to modify as well of course.
+
+64
+00:03:41,900 --> 00:03:46,340
+Because now every single thing has been changed to playwright world.
+
+65
+00:03:46,340 --> 00:03:48,500
+So I need to go and modify that a bit.
+
+66
+00:03:48,540 --> 00:03:52,700
+See, the remaining logics exactly remains exactly the same.
+
+67
+00:03:52,940 --> 00:03:56,080
+That is really not going to be any change there.
+
+68
+00:03:56,120 --> 00:04:02,560
+The only thing which has changed here is the eye patch and the eye locator in the entire code.
+
+69
+00:04:02,840 --> 00:04:06,320
+The rest of the things remained so far pretty much exactly the same.
+
+70
+00:04:06,680 --> 00:04:13,800
+And for the click operation that you are seeing over here, I am going to use the same eye locator,
+
+71
+00:04:14,160 --> 00:04:15,240
+which is this one.
+
+72
+00:04:15,240 --> 00:04:19,920
+And this is going to be locator because now we are not saying elements rather locators.
+
+73
+00:04:19,920 --> 00:04:22,560
+So I'm going to say locator over here.
+
+74
+00:04:22,840 --> 00:04:30,360
+And within this particular uh locator element I'm just going to perform uh a click async operation.
+
+75
+00:04:30,360 --> 00:04:32,920
+So this is from the playwright which I'm invoking.
+
+76
+00:04:32,920 --> 00:04:39,920
+So it is not from uh, the custom method that I'm calling, but this is called from the playwright itself.
+
+77
+00:04:39,920 --> 00:04:47,200
+And because these are async, it's also better that I make this as async as well so that it looks better
+
+78
+00:04:47,200 --> 00:04:48,640
+and reads better.
+
+79
+00:04:48,640 --> 00:04:51,520
+So I think I'm just going to make all of them as async here.
+
+80
+00:04:51,760 --> 00:04:54,870
+So it aligns that this is an async operation, which I'm doing.
+
+81
+00:04:54,870 --> 00:04:57,150
+So this is a I find element async.
+
+82
+00:04:57,350 --> 00:04:59,630
+Similarly click async we have got.
+
+83
+00:04:59,990 --> 00:05:02,350
+And for the send keys.
+
+84
+00:05:02,390 --> 00:05:07,110
+This is the place where you need to change a bit like the terminologies.
+
+85
+00:05:07,110 --> 00:05:09,550
+Because in playwright we don't have send keys.
+
+86
+00:05:09,550 --> 00:05:12,150
+Rather we have something called as fill async.
+
+87
+00:05:12,150 --> 00:05:16,830
+So if you just go here you're just going to have an A locator like fill async.
+
+88
+00:05:16,830 --> 00:05:19,670
+So if I'm just going to go and search for fill look at that.
+
+89
+00:05:19,670 --> 00:05:26,390
+So this is the fill async method which is mainly used for uh doing a send keys kind of operation.
+
+90
+00:05:26,390 --> 00:05:27,830
+So we are going to do that as well.
+
+91
+00:05:27,830 --> 00:05:32,110
+So this is going to be fill async something like that.
+
+92
+00:05:32,110 --> 00:05:37,670
+And over here I'm just going to use I locator uh and this is going to be locator.
+
+93
+00:05:37,670 --> 00:05:39,430
+And then I'm going to pass the text.
+
+94
+00:05:39,430 --> 00:05:41,230
+So I'm going to say locator.
+
+95
+00:05:41,590 --> 00:05:48,990
+Uh and I'm going to say fill uh async uh because this is an async I need to use await over there.
+
+96
+00:05:49,750 --> 00:05:50,810
+That's what I'm doing.
+
+97
+00:05:50,970 --> 00:05:54,010
+So this is going to be the full async operation.
+
+98
+00:05:54,010 --> 00:05:55,970
+And we are looking pretty good so far.
+
+99
+00:05:56,570 --> 00:06:01,610
+And now if I'm going to go to the home page this time uh you should see that.
+
+100
+00:06:01,730 --> 00:06:02,490
+Uh oh yeah.
+
+101
+00:06:02,530 --> 00:06:04,570
+We just modified it to async there.
+
+102
+00:06:04,610 --> 00:06:07,330
+See, the locators are now happy.
+
+103
+00:06:07,650 --> 00:06:10,290
+We can just go and modify all of them.
+
+104
+00:06:10,450 --> 00:06:12,210
+And these things are just working.
+
+105
+00:06:12,410 --> 00:06:15,770
+And instead of the click just use click async over here.
+
+106
+00:06:15,770 --> 00:06:18,730
+And they are going to work for you as well.
+
+107
+00:06:18,770 --> 00:06:19,730
+Something like this.
+
+108
+00:06:20,250 --> 00:06:21,370
+And look at that.
+
+109
+00:06:21,370 --> 00:06:27,050
+The page object model code is already looking great, even though it is really not going to work under
+
+110
+00:06:27,050 --> 00:06:29,730
+the hood because we still have to change the logics a bit.
+
+111
+00:06:29,770 --> 00:06:30,570
+But look at that.
+
+112
+00:06:30,610 --> 00:06:35,770
+We have already started fixing the errors while we were doing the migrations.
+
+113
+00:06:35,770 --> 00:06:43,290
+And if you have seen the other uh, sections, you easily know, like how I am modifying everything
+
+114
+00:06:43,290 --> 00:06:43,810
+over here.
+
+115
+00:06:43,810 --> 00:06:50,830
+They are, uh, so much easy to migrate from selenium to playwright because the core remains pretty
+
+116
+00:06:50,830 --> 00:06:52,070
+much exactly the same.
+
+117
+00:06:52,550 --> 00:06:53,430
+Look at that.
+
+118
+00:06:53,830 --> 00:06:54,990
+This is pretty cool.
+
+119
+00:06:55,270 --> 00:07:00,110
+So now this is working, and we have also completed the web driver extension.
+
+120
+00:07:00,150 --> 00:07:00,430
+Oops.
+
+121
+00:07:00,430 --> 00:07:02,950
+I don't call this as web driver extension.
+
+122
+00:07:02,950 --> 00:07:04,630
+I have to modify this as well.
+
+123
+00:07:04,670 --> 00:07:07,350
+This should be playwright extensions or something like that.
+
+124
+00:07:07,350 --> 00:07:14,590
+So let me go and rename this as well from WebDriver extensions to Playwright extensions.
+
+125
+00:07:14,830 --> 00:07:19,350
+And if I enter this is going to be like a playwright extension class, which is amazing.
+
+126
+00:07:19,550 --> 00:07:26,030
+But we still have a failure in the Self Healing locator dot find element async, which we actually need
+
+127
+00:07:26,030 --> 00:07:28,550
+to go and fix in first place.
+
+128
+00:07:28,550 --> 00:07:34,750
+We are going to do that in our next lecture, but for now, I highly recommend you to go through all
+
+129
+00:07:34,790 --> 00:07:40,270
+the changes that we have made because the changes, it looks pretty straightforward, but while you
+
+130
+00:07:40,270 --> 00:07:42,870
+do it yourself, you will find some difficulties.
+
+131
+00:07:42,870 --> 00:07:47,990
+So I will recommend you to do it yourself before you start the next lecture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 4. Fixing Self Healing Locator Class with Playwright Changes
+
+1
+00:00:00,080 --> 00:00:00,800
+All right.
+
+2
+00:00:00,800 --> 00:00:05,080
+Welcome back and hope you have gone through the code that we have written.
+
+3
+00:00:05,080 --> 00:00:11,720
+In our last lecture, while I was doing the entire code change, I just felt like I'm doing it way faster.
+
+4
+00:00:11,720 --> 00:00:18,200
+But I'm also thinking and looking back that how much time we spent while writing all these methods before
+
+5
+00:00:18,440 --> 00:00:20,280
+while we were working with selenium.
+
+6
+00:00:20,280 --> 00:00:27,320
+So if you have already figured out how these things were working until our last sections of this course,
+
+7
+00:00:27,320 --> 00:00:29,320
+you know how we have built this.
+
+8
+00:00:29,320 --> 00:00:33,960
+Every single bits and pieces, like nuts and bolts of this particular code.
+
+9
+00:00:33,960 --> 00:00:38,880
+So it is now way more easier while I am migrating all by myself.
+
+10
+00:00:38,880 --> 00:00:43,760
+And the same thing is going to go to you as well, because if you have followed all of these until the
+
+11
+00:00:43,760 --> 00:00:49,200
+last section, it is so much easier for you to migrate as well, because all of the things that I have
+
+12
+00:00:49,200 --> 00:00:55,280
+changed so far is instead of the I WebDriver, I changed to I page, and from I web element I changed
+
+13
+00:00:55,280 --> 00:00:56,240
+to I locator.
+
+14
+00:00:56,480 --> 00:01:00,440
+And obviously for the playwright the locators will change a bit.
+
+15
+00:01:00,440 --> 00:01:02,920
+That's why I'm changing the locators over here.
+
+16
+00:01:02,920 --> 00:01:05,320
+That's the only thing I have made the change.
+
+17
+00:01:05,570 --> 00:01:08,850
+Other than that, everything remains pretty much exactly the same.
+
+18
+00:01:08,850 --> 00:01:11,690
+There is no change and the extension methods.
+
+19
+00:01:11,690 --> 00:01:14,010
+It also remains exactly the same.
+
+20
+00:01:14,010 --> 00:01:19,930
+Just that I made all the suffixes async, which probably I have to do for selenium as well, which we
+
+21
+00:01:19,930 --> 00:01:23,570
+missed doing it while we were building the extension.
+
+22
+00:01:23,730 --> 00:01:24,570
+Uh, elements.
+
+23
+00:01:24,610 --> 00:01:26,690
+See these should be async as well.
+
+24
+00:01:26,730 --> 00:01:31,530
+I completely missed that, but we should have used async there as a suffix.
+
+25
+00:01:31,730 --> 00:01:33,770
+Uh, but anyways, it's too late.
+
+26
+00:01:33,770 --> 00:01:36,250
+But but yeah, at least for playwright, we can do that.
+
+27
+00:01:36,250 --> 00:01:38,330
+That's the only thing we have did over here.
+
+28
+00:01:38,330 --> 00:01:43,530
+And we are using the async method of playwright fill async method of playwright over here.
+
+29
+00:01:43,530 --> 00:01:45,130
+That's the only thing that we have done.
+
+30
+00:01:45,250 --> 00:01:48,290
+So other than that, everything remains pretty much exactly the same.
+
+31
+00:01:48,610 --> 00:01:53,810
+But now we are going to go and modify the Self Healing locator.
+
+32
+00:01:53,930 --> 00:01:57,930
+This is the beast, you know, because it has got so many selenium things.
+
+33
+00:01:58,170 --> 00:02:05,330
+And if I'm just going to go and show you to keep you a bit more soothing, uh, is that if you see the
+
+34
+00:02:05,330 --> 00:02:11,700
+LMS side, uh, over here, the LMS client, there is not even a single error, because this code is
+
+35
+00:02:11,700 --> 00:02:13,860
+pretty much remaining exactly the same.
+
+36
+00:02:13,860 --> 00:02:19,860
+There is no change required on the LMS side, so we are just going to keep this thing same, except
+
+37
+00:02:19,860 --> 00:02:25,180
+that the namespace needs to be aligned with playwright self-healing and everything remains pretty much
+
+38
+00:02:25,180 --> 00:02:32,420
+exactly the same, so you can keep yourself calm, happy, uh, at least on that particular side.
+
+39
+00:02:32,420 --> 00:02:33,940
+So I'm going to close this guy.
+
+40
+00:02:34,140 --> 00:02:34,660
+Thank you.
+
+41
+00:02:34,660 --> 00:02:35,140
+Bye bye.
+
+42
+00:02:35,460 --> 00:02:39,660
+But of course, the self-healing is the biggest one that we need to modify.
+
+43
+00:02:39,860 --> 00:02:44,660
+And we also need to change the prompt over here, which will get through later.
+
+44
+00:02:44,660 --> 00:02:48,180
+But for now, let's go and fix the self-healing locator.
+
+45
+00:02:48,180 --> 00:02:53,500
+So let's go and move the namespace to playwright self-healing text over there.
+
+46
+00:02:54,380 --> 00:03:01,420
+And then over here instead of the I webdriver I'm going to use I page.
+
+47
+00:03:02,060 --> 00:03:03,580
+That is something that we need to do.
+
+48
+00:03:03,900 --> 00:03:08,540
+And instead of the, uh, driver we are going to use the page.
+
+49
+00:03:09,100 --> 00:03:09,660
+Right.
+
+50
+00:03:09,820 --> 00:03:13,620
+And the current strategy we are using the by type earlier.
+
+51
+00:03:13,620 --> 00:03:14,830
+But now guess what?
+
+52
+00:03:14,830 --> 00:03:19,910
+We can just use the string type in playwright, because we don't even need to worry about how the elements
+
+53
+00:03:19,910 --> 00:03:26,230
+are going to be stored, because this is a string type for instead of by type in selenium, this is
+
+54
+00:03:26,230 --> 00:03:32,070
+also going to be string for the location strategy, and the rest of the things remains pretty much exactly
+
+55
+00:03:32,070 --> 00:03:32,630
+the same.
+
+56
+00:03:33,150 --> 00:03:40,030
+And for the selenium locator for the constructor instead of the driver, we should use the page obviously.
+
+57
+00:03:40,190 --> 00:03:46,350
+So I page and this is going to be page and primary locator is going to be string.
+
+58
+00:03:47,070 --> 00:03:47,790
+Look at that.
+
+59
+00:03:48,310 --> 00:03:51,910
+Now we are pretty good with that.
+
+60
+00:03:51,910 --> 00:03:55,710
+So if I'm going to go to the playwright extension see this error is gone.
+
+61
+00:03:55,990 --> 00:04:02,830
+And the last error is the find element async method which is returning I element which should ideally
+
+62
+00:04:03,350 --> 00:04:04,990
+return as the I locator.
+
+63
+00:04:05,070 --> 00:04:06,630
+See if I'm going to return that.
+
+64
+00:04:06,670 --> 00:04:08,150
+See your playwright element.
+
+65
+00:04:08,190 --> 00:04:11,750
+Uh, playwright extension is now without any error.
+
+66
+00:04:12,070 --> 00:04:14,870
+So everything looks pretty cool this time.
+
+67
+00:04:15,070 --> 00:04:16,790
+So everything is working as well.
+
+68
+00:04:16,790 --> 00:04:20,280
+So we have resolved three classes without any errors.
+
+69
+00:04:20,720 --> 00:04:25,000
+Now let's get to the self-healing locator and start fixing them as well.
+
+70
+00:04:25,040 --> 00:04:30,640
+See, the remaining logics of the entire operation is going to be the exact same thing.
+
+71
+00:04:30,640 --> 00:04:36,760
+There is no change on that, which means we don't have to sweat on how the logic is going to work,
+
+72
+00:04:36,760 --> 00:04:39,440
+because those things are going to remain exactly the same.
+
+73
+00:04:39,440 --> 00:04:42,840
+So I'm going to keep all of them pretty much happy there.
+
+74
+00:04:43,880 --> 00:04:44,480
+Right?
+
+75
+00:04:44,560 --> 00:04:52,080
+And now over here, jumping back to the try find with current strategy, we need to go and fix this
+
+76
+00:04:52,080 --> 00:04:56,640
+particular code because see we have a lot of implement being used there.
+
+77
+00:04:56,880 --> 00:04:59,720
+We are going to replace that with playwright code.
+
+78
+00:04:59,720 --> 00:05:01,000
+So how are we going to do that.
+
+79
+00:05:01,320 --> 00:05:03,360
+We are going to do that in our next lecture.
+
+80
+00:05:03,360 --> 00:05:10,400
+But I will let you to try out and see if you can figure out a way, like how you can fix this particular
+
+81
+00:05:10,400 --> 00:05:12,000
+code by yourself.
+
+82
+00:05:12,000 --> 00:05:14,800
+This way, it is going to make your life even more easier.
+
+83
+00:05:14,800 --> 00:05:20,120
+While I am going to tell you how you are going to be doing it, let's fix this 20 error one by one,
+
+84
+00:05:20,120 --> 00:05:24,760
+so that we can all be in the same page without rushing, to be honest.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 5. Fixing TryFindWithCurrentStrategy Method to Playwright
+
+1
+00:00:00,080 --> 00:00:06,640
+All right, so hopefully you'd have tried fixing this particular try find with current locator strategy
+
+2
+00:00:06,680 --> 00:00:07,440
+method.
+
+3
+00:00:07,600 --> 00:00:09,080
+If you have not done that.
+
+4
+00:00:09,120 --> 00:00:10,240
+Not a problem.
+
+5
+00:00:10,280 --> 00:00:11,760
+We are going to fix that.
+
+6
+00:00:11,760 --> 00:00:16,840
+As I told you earlier while we were building this selenium code, if you remember, I told you that
+
+7
+00:00:16,880 --> 00:00:20,800
+we built this every single thing to keep the playwright in mind.
+
+8
+00:00:20,800 --> 00:00:24,160
+That's the reason why we are making this entire code as asynchronous.
+
+9
+00:00:24,160 --> 00:00:30,840
+Even in our last, uh, sections where we made all of these as asynchronous for the code while we were
+
+10
+00:00:30,840 --> 00:00:31,920
+trying to do that.
+
+11
+00:00:32,160 --> 00:00:39,360
+The reason why we wanted to do it is because playwright by itself is a asynchronous tool, so we are
+
+12
+00:00:39,360 --> 00:00:41,760
+going to make them asynchronous anyways.
+
+13
+00:00:41,760 --> 00:00:47,200
+So that's the reason why, as you see over here, it is going to be way more easier while we migrate
+
+14
+00:00:47,200 --> 00:00:54,160
+the code to playwright from selenium logic, because we have already built the code in an asynchronous
+
+15
+00:00:54,200 --> 00:00:54,640
+way.
+
+16
+00:00:54,640 --> 00:00:57,360
+So that's why it is going to be way more easier.
+
+17
+00:00:57,400 --> 00:01:02,720
+Now see, the only thing which is going to change, uh, this time in the try find with current uh,
+
+18
+00:01:02,760 --> 00:01:11,120
+strategy is that instead of iweb element, I'm going to use what is called as the, uh, I locator over
+
+19
+00:01:11,120 --> 00:01:11,720
+here.
+
+20
+00:01:11,960 --> 00:01:17,940
+Uh, and then instead of the driver dot find element that we are trying to do over here, uh, we are
+
+21
+00:01:17,940 --> 00:01:21,780
+going to use uh, page dot locator operation.
+
+22
+00:01:21,780 --> 00:01:28,660
+So I'm just going to do this var locator is equal to underscore page dot locator.
+
+23
+00:01:28,700 --> 00:01:35,020
+Because essentially we are going to identify the element from the locator that we are getting in.
+
+24
+00:01:35,060 --> 00:01:38,180
+The locator is sitting in the current strategy.
+
+25
+00:01:38,180 --> 00:01:45,660
+You remember this is the exact similar code that we were doing uh in the selenium as well.
+
+26
+00:01:45,660 --> 00:01:52,620
+So if I'm just going to go to the cell locator over here, uh, you see that we are getting the driver
+
+27
+00:01:52,660 --> 00:01:55,140
+dot find element of the current strategy.
+
+28
+00:01:55,500 --> 00:01:59,340
+The same thing I'm doing over here as well for this guy.
+
+29
+00:01:59,860 --> 00:02:02,860
+Uh, like page dot locator of the current strategy.
+
+30
+00:02:03,020 --> 00:02:04,980
+That's exactly remain the same.
+
+31
+00:02:04,980 --> 00:02:07,260
+There is zero change on that.
+
+32
+00:02:07,260 --> 00:02:08,860
+So we are doing it over here.
+
+33
+00:02:08,860 --> 00:02:16,220
+But additionally, what we can do is we can do a bit of a waiting, uh, by ourself to see if the locator,
+
+34
+00:02:16,460 --> 00:02:18,140
+uh, is available there or not.
+
+35
+00:02:18,380 --> 00:02:21,260
+Uh, we can do using the await keyword over there.
+
+36
+00:02:22,060 --> 00:02:23,300
+So this way it can work.
+
+37
+00:02:23,300 --> 00:02:28,790
+So in order to make you to work with the await keyword, you need to make this as asynchronous.
+
+38
+00:02:29,230 --> 00:02:34,670
+See, that's why we are saying that we need to have the asynchronous operation over there.
+
+39
+00:02:34,710 --> 00:02:35,150
+See.
+
+40
+00:02:35,870 --> 00:02:41,430
+And I'm going to say locator dot wait for async.
+
+41
+00:02:41,430 --> 00:02:43,150
+So you can do that over here.
+
+42
+00:02:43,590 --> 00:02:47,990
+And in the new locator await options.
+
+43
+00:02:48,230 --> 00:02:53,830
+What you can do is you can pass the waiting mechanism which is the state.
+
+44
+00:02:54,150 --> 00:03:02,190
+Um, so I'm going to say the state is going to be, uh, attached the wait for state to be attached.
+
+45
+00:03:02,550 --> 00:03:10,110
+And then you can set the timeout, uh, to maybe 3000 or 2000 seconds, which is two seconds or maybe
+
+46
+00:03:10,110 --> 00:03:10,790
+three seconds.
+
+47
+00:03:10,790 --> 00:03:12,510
+Depends like how you want it to do it.
+
+48
+00:03:12,830 --> 00:03:14,750
+So you can set the timeout over here.
+
+49
+00:03:14,990 --> 00:03:17,830
+So this is how you can wait for the element.
+
+50
+00:03:18,190 --> 00:03:26,710
+And if there is no element uh appears if there is a timeout happens then you can just say timeout exceptions
+
+51
+00:03:26,710 --> 00:03:27,430
+over here.
+
+52
+00:03:27,750 --> 00:03:30,110
+And then you can return null.
+
+53
+00:03:30,110 --> 00:03:32,150
+So this is what you're going to be doing right.
+
+54
+00:03:32,190 --> 00:03:35,530
+So I forgot that I need to return the locator.
+
+55
+00:03:35,570 --> 00:03:38,090
+Once you wait for the element right.
+
+56
+00:03:38,090 --> 00:03:44,610
+So this is the try find with current strategy that we are going to be doing over here.
+
+57
+00:03:44,610 --> 00:03:51,250
+And because I have made this as asynchronous, now I'm going to make this as async as well.
+
+58
+00:03:51,250 --> 00:03:57,690
+The method name is bit changed this time from is without async to async.
+
+59
+00:03:58,010 --> 00:04:02,770
+And I'm going to use an await keyword because this is an asynchronous operation.
+
+60
+00:04:03,370 --> 00:04:04,450
+Look at that.
+
+61
+00:04:04,810 --> 00:04:08,410
+This is the change that we are going to be doing over here.
+
+62
+00:04:08,650 --> 00:04:10,090
+This is the only change.
+
+63
+00:04:10,090 --> 00:04:15,690
+So essentially we're replacing all the drivers dot find element to page dot locator.
+
+64
+00:04:15,850 --> 00:04:21,170
+And we are additionally waiting for 3000 milliseconds timeout to see if the locator really exists on
+
+65
+00:04:21,170 --> 00:04:21,650
+the UI.
+
+66
+00:04:21,690 --> 00:04:23,410
+If it doesn't then no problem.
+
+67
+00:04:23,410 --> 00:04:25,450
+You can just keep going on.
+
+68
+00:04:25,770 --> 00:04:26,210
+Right.
+
+69
+00:04:26,610 --> 00:04:32,450
+So that is what we have done over here for the try find with current strategy async, the next thing
+
+70
+00:04:32,450 --> 00:04:37,090
+we need to do is to change the try alternative strategies async method.
+
+71
+00:04:37,090 --> 00:04:39,210
+Because this is also going to be async pretty soon.
+
+72
+00:04:39,410 --> 00:04:44,450
+So I will let you to do it again and see if you can able to replace this particular code.
+
+73
+00:04:44,610 --> 00:04:47,410
+If not, we're going to do it in our next lecture anyways.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 6. Fixing Alternative Strategy Method to Playwright
+
+1
+00:00:00,120 --> 00:00:00,960
+All right.
+
+2
+00:00:01,000 --> 00:00:06,880
+So now we are going to see how we can start fixing the try alternative strategies method.
+
+3
+00:00:06,880 --> 00:00:09,360
+And again as I told you this is going to be async.
+
+4
+00:00:09,360 --> 00:00:11,400
+So I'm just going to change the name regardless.
+
+5
+00:00:11,720 --> 00:00:19,880
+And over here this is going to be async of tasks of the I locator that we need to pass in.
+
+6
+00:00:19,880 --> 00:00:23,520
+So I'm going to keep that way pretty much like how we did over here.
+
+7
+00:00:23,520 --> 00:00:24,920
+I'm going to do that as well.
+
+8
+00:00:25,160 --> 00:00:28,160
+These logics remain exactly the same.
+
+9
+00:00:28,200 --> 00:00:30,920
+There is zero change on that.
+
+10
+00:00:30,920 --> 00:00:32,680
+Just that instead of the find element.
+
+11
+00:00:32,680 --> 00:00:38,720
+With the strategy that I have put over here, I'm going to be using this guy, uh, to see if this works.
+
+12
+00:00:38,720 --> 00:00:44,960
+I'm going to go copy this entire code and I'm gonna paste that over here.
+
+13
+00:00:45,400 --> 00:00:53,480
+Uh, and instead of the current strategy, I'm going to pass the name, uh, over here.
+
+14
+00:00:53,680 --> 00:00:58,000
+That is the strategy that I wanted, uh, over here to be passed in.
+
+15
+00:00:58,320 --> 00:00:58,880
+Right.
+
+16
+00:00:58,920 --> 00:01:05,120
+And I'm getting that, uh, thing over there, and I'm returning the locator, and if I don't find it,
+
+17
+00:01:05,120 --> 00:01:08,560
+then I'm going to say, uh, timeout exception.
+
+18
+00:01:09,320 --> 00:01:09,800
+Right.
+
+19
+00:01:10,000 --> 00:01:14,440
+And then I'm going to return probably null over here.
+
+20
+00:01:14,480 --> 00:01:17,120
+And of course we need to keep this thing as well.
+
+21
+00:01:17,120 --> 00:01:18,800
+So yeah there we go.
+
+22
+00:01:19,040 --> 00:01:21,760
+That's the try alternative strategy async.
+
+23
+00:01:22,000 --> 00:01:25,930
+Now I'm going to call that over here something like this.
+
+24
+00:01:25,930 --> 00:01:30,210
+And I'm going to use the await keyword to make that happen.
+
+25
+00:01:31,290 --> 00:01:32,130
+Look at that.
+
+26
+00:01:32,250 --> 00:01:36,970
+That's how you do the try alternative strategies async as well.
+
+27
+00:01:36,970 --> 00:01:40,210
+And this code is super easy to migrate to be honest.
+
+28
+00:01:40,210 --> 00:01:43,130
+And we don't even have to worry about how this is going to work.
+
+29
+00:01:43,490 --> 00:01:44,570
+This is faster.
+
+30
+00:01:45,010 --> 00:01:49,410
+So I have migrated almost two methods right now.
+
+31
+00:01:49,690 --> 00:01:54,050
+And now the last thing we need to migrate is the heal using AI.
+
+32
+00:01:54,410 --> 00:02:04,130
+Um, this is not as straightforward as you think, because it needs to do a bit of change in a way that
+
+33
+00:02:04,130 --> 00:02:06,290
+we can perform the operation.
+
+34
+00:02:06,290 --> 00:02:13,690
+Because you remember, uh, over here in this code, the way we identified it is by using the by dot
+
+35
+00:02:13,730 --> 00:02:17,370
+link text, or by dot name or by dot CSS class.
+
+36
+00:02:17,490 --> 00:02:23,810
+And then we did the two string method, which was like a, like a, like a hack that we used to get
+
+37
+00:02:23,810 --> 00:02:26,890
+the locator type and the locator value.
+
+38
+00:02:26,930 --> 00:02:30,490
+It was so straightforward while we were doing it in selenium.
+
+39
+00:02:30,730 --> 00:02:35,090
+But over here in playwright this strategy is not going to work.
+
+40
+00:02:35,090 --> 00:02:36,690
+It has to be changed.
+
+41
+00:02:36,690 --> 00:02:43,850
+So we need to make sure that this particular code can be written in an even more elegant way, so that
+
+42
+00:02:43,850 --> 00:02:46,130
+it can get you the response that you are looking for.
+
+43
+00:02:46,130 --> 00:02:51,370
+And that needs to be changed, which we are going to be doing in our next lecture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 7. Understanding how to get different Locator Types and Values in Playwright
+
+
+1
+00:00:00,200 --> 00:00:07,320
+All right, so as I told you in our last lecture, this locator strategy is not as similar to how we
+
+2
+00:00:07,320 --> 00:00:09,480
+did with selenium, if you remember.
+
+3
+00:00:09,760 --> 00:00:17,360
+So if you remember in selenium, while we were trying to get this strategies over here, we try to do
+
+4
+00:00:17,400 --> 00:00:23,280
+did a two string for the current strategy because we know that for the current strategy we are using
+
+5
+00:00:23,280 --> 00:00:30,800
+the BI type, where if you make a two string for the BI type, you are going to get something like bi
+
+6
+00:00:30,840 --> 00:00:39,000
+dot, link, text colon and then the locator value, which is what we did over there using the substring
+
+7
+00:00:39,000 --> 00:00:43,640
+with the colon, we just did a split and then we got the locator type and locator value.
+
+8
+00:00:43,680 --> 00:00:46,280
+This is how we did in the selenium world.
+
+9
+00:00:46,480 --> 00:00:53,280
+But in playwright world, as I told you there is not just one locator or there is not just alone like
+
+10
+00:00:53,320 --> 00:00:56,280
+six locators available that you have got over here.
+
+11
+00:00:56,280 --> 00:00:58,040
+So like one, two, three, four, five, six.
+
+12
+00:00:58,040 --> 00:01:05,410
+There are six locator strategies available in selenium, but in playwright you have got a tons of different
+
+13
+00:01:05,410 --> 00:01:06,330
+locator strategies.
+
+14
+00:01:06,330 --> 00:01:13,890
+So if you go and go and search the locators, um, like other locators, uh, in playwright you can
+
+15
+00:01:13,890 --> 00:01:19,410
+see that, uh, for the CSS selection you can just use CSS equal to.
+
+16
+00:01:19,490 --> 00:01:20,970
+We're just going to select the CSS.
+
+17
+00:01:21,210 --> 00:01:26,770
+And for the XPath if you're going to go and search for XPath over there like XPath locator, you can
+
+18
+00:01:26,770 --> 00:01:29,650
+do something like double slash for the XPath.
+
+19
+00:01:29,650 --> 00:01:30,930
+That is how it works.
+
+20
+00:01:31,130 --> 00:01:36,130
+And similarly uh, if you're going to be identifying using that text is equal to.
+
+21
+00:01:36,410 --> 00:01:42,290
+So let's say text is equal to over here, uh, you see that you can identify the text something like
+
+22
+00:01:42,290 --> 00:01:42,570
+this.
+
+23
+00:01:42,570 --> 00:01:46,170
+Or you can just put text is equal to to identify that particular element.
+
+24
+00:01:46,170 --> 00:01:50,290
+And similarly you can identify using the role as well.
+
+25
+00:01:50,290 --> 00:01:55,090
+So you can locate by role you see that you can do uh role as well.
+
+26
+00:01:55,290 --> 00:02:00,150
+And you can also identify using its test ID if you wanted to.
+
+27
+00:02:00,790 --> 00:02:01,790
+Something like this.
+
+28
+00:02:01,830 --> 00:02:06,550
+See, you have got the way to identify using a data test and then using the IDs.
+
+29
+00:02:06,550 --> 00:02:07,510
+Something like this.
+
+30
+00:02:07,910 --> 00:02:12,350
+Uh, and you can also identify using its name something like this as well.
+
+31
+00:02:12,350 --> 00:02:17,030
+So you can do whatever that you wanted to and you can identify in many different ways.
+
+32
+00:02:17,230 --> 00:02:23,550
+So because the locator way of identifying playwright has tremendously changed and you know how this
+
+33
+00:02:23,550 --> 00:02:28,750
+has changed, the locator suggestion is also going to change a lot.
+
+34
+00:02:29,030 --> 00:02:31,430
+So what I'm going to do is I'm going to copy this model.
+
+35
+00:02:31,430 --> 00:02:33,950
+Of course we need it uh, over here.
+
+36
+00:02:33,950 --> 00:02:42,510
+And I'm going to paste this particular model and let's go and change the, uh, the namespace to the
+
+37
+00:02:42,510 --> 00:02:47,750
+playwright and also the namespace to playwright for this suggestion as well.
+
+38
+00:02:48,190 --> 00:02:55,230
+Just that over here for the locator suggestion, instead of just with the, uh, name, the ID name,
+
+39
+00:02:55,230 --> 00:03:04,000
+XPath and CSS selector that we have got over here, We are also going to identify using a role a test
+
+40
+00:03:04,040 --> 00:03:07,480
+ID placeholders and text.
+
+41
+00:03:07,480 --> 00:03:12,400
+So we're going to identify with a few more locator types something like this.
+
+42
+00:03:12,400 --> 00:03:17,320
+So these are the additional way that you can identify the elements over there.
+
+43
+00:03:17,320 --> 00:03:22,160
+So I'm going to have all of these locate our suggestion like updated locator suggestions over here.
+
+44
+00:03:22,560 --> 00:03:28,680
+And coming back to the way that we can identify the locator type and locator value.
+
+45
+00:03:28,880 --> 00:03:30,760
+It's going to be a bit different as well.
+
+46
+00:03:30,760 --> 00:03:35,280
+It is not going to be something like this like how we have identified before.
+
+47
+00:03:35,560 --> 00:03:42,400
+Instead, I'm going to write a method here, which is a bit different as opposed to how we did before.
+
+48
+00:03:42,400 --> 00:03:44,320
+So I'm going to write that method.
+
+49
+00:03:44,640 --> 00:03:53,880
+I'm going to say private and I'm going to return tuple like type and value, like how we we did earlier
+
+50
+00:03:54,080 --> 00:04:01,180
+while we were trying to do the tuple, uh, in the array while we were trying to find the strategy,
+
+51
+00:04:01,180 --> 00:04:04,580
+name and strategies, uh, value that we were doing before.
+
+52
+00:04:04,780 --> 00:04:07,100
+The same thing I'm doing over here as well.
+
+53
+00:04:07,300 --> 00:04:11,420
+And I'm going to say parse, locate our strategy.
+
+54
+00:04:11,740 --> 00:04:17,580
+And as I told you, the locators can be identified, uh, using different strategies.
+
+55
+00:04:17,580 --> 00:04:21,140
+So I'm just going to say select star over here.
+
+56
+00:04:21,420 --> 00:04:27,020
+And the locators are all in a string type, which is very good for us because we don't have any strongly
+
+57
+00:04:27,060 --> 00:04:28,900
+typed class to do that.
+
+58
+00:04:28,900 --> 00:04:31,900
+So it's all string in playwright world.
+
+59
+00:04:31,900 --> 00:04:33,620
+So you can do that over here.
+
+60
+00:04:33,620 --> 00:04:43,820
+So I'm going to say if the selector which starts with maybe uh, a hash, which means we know that it
+
+61
+00:04:43,820 --> 00:04:47,100
+is basically an ID that we are dealing with.
+
+62
+00:04:47,100 --> 00:04:56,140
+So I'm going to just say ID and the selector dot substring which I need to return, uh, is going to
+
+63
+00:04:56,140 --> 00:05:01,390
+be one, which means it is going to return all the elements from there on.
+
+64
+00:05:01,710 --> 00:05:03,430
+That's what this particular code is doing.
+
+65
+00:05:03,910 --> 00:05:12,150
+And similarly, if I want to write another code where I want to verify if it's tasked with maybe dot
+
+66
+00:05:12,150 --> 00:05:16,990
+for that matter, then it is basically a class, right?
+
+67
+00:05:17,590 --> 00:05:24,830
+And similarly, if it starts with maybe uh double slash, then it is an XPath that we have got.
+
+68
+00:05:25,110 --> 00:05:32,870
+And if it starts with, uh, maybe the text, then we just have to put text over here like text is equal
+
+69
+00:05:32,870 --> 00:05:37,870
+to, then it is going to be starting with the text, uh for us over there.
+
+70
+00:05:37,870 --> 00:05:41,790
+So let's say this is going to be with the text.
+
+71
+00:05:42,030 --> 00:05:45,630
+Uh, and then we are going to copy this particular code.
+
+72
+00:05:45,790 --> 00:05:53,710
+And if it starts with role is equal to then it is going to be of a role type that we have got.
+
+73
+00:05:53,710 --> 00:05:55,550
+So I'm going to do that as well.
+
+74
+00:05:55,610 --> 00:06:05,530
+but because the text will have like that value starting from 101234, maybe like fifth element.
+
+75
+00:06:05,530 --> 00:06:08,930
+So I'm going to say five as a substring.
+
+76
+00:06:08,970 --> 00:06:12,450
+And similarly for the role it's going to be four plus one five.
+
+77
+00:06:12,450 --> 00:06:14,210
+So I'm going to be saying five.
+
+78
+00:06:14,210 --> 00:06:17,050
+That's when the substring needs to be started.
+
+79
+00:06:17,050 --> 00:06:20,210
+I need to make sure that it is also done correctly over there.
+
+80
+00:06:20,490 --> 00:06:28,090
+And finally I also need to do for the uh, data test ID name and the placeholder.
+
+81
+00:06:28,090 --> 00:06:29,930
+So I'm going to do all of these.
+
+82
+00:06:29,930 --> 00:06:34,010
+But for that I need to create another special method to do it.
+
+83
+00:06:34,010 --> 00:06:39,130
+I know it's kind of cumbersome, but I am going to explain you very lightly this time because I have
+
+84
+00:06:39,130 --> 00:06:44,610
+already implemented the code, but I wanted to include that coding changes as well, so that you can
+
+85
+00:06:44,610 --> 00:06:50,930
+see how you can start expanding it for your project while you are going to be doing it, uh, for different
+
+86
+00:06:50,970 --> 00:06:55,850
+types of strategies later on, which we'll be talking in our next lecture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 8. Getting Locator Type and Locator Value in Playwright (Contd.)
+
+
+1
+00:00:00,200 --> 00:00:00,960
+Okay.
+
+2
+00:00:01,000 --> 00:00:08,160
+And now we need to identify what is called as the data test ID name and placeholder.
+
+3
+00:00:08,360 --> 00:00:11,400
+And they are not as straightforward as you can think.
+
+4
+00:00:12,000 --> 00:00:20,080
+For example, if you're going to be doing for the name, maybe data test ID for that matter.
+
+5
+00:00:20,120 --> 00:00:28,360
+So I'm just going to say data test ID is equal to you can't do something like data test ID there because
+
+6
+00:00:28,360 --> 00:00:31,200
+it's going to be of the test ID.
+
+7
+00:00:31,600 --> 00:00:36,000
+And the test ID is going to be bit different for the locator if you can think of.
+
+8
+00:00:36,000 --> 00:00:44,560
+So if you just go to the uh Chrome browser over here, just search for test uh or data test ID just
+
+9
+00:00:44,560 --> 00:00:45,200
+this one.
+
+10
+00:00:45,480 --> 00:00:52,320
+You see that the locator can be identified something like this with the ID or with the data test ID
+
+11
+00:00:52,400 --> 00:00:53,160
+something like this.
+
+12
+00:00:53,160 --> 00:00:57,800
+So this locator is a bit different from how it is identified.
+
+13
+00:00:57,960 --> 00:01:04,790
+Uh, for the rest of the things you need to do the same for the name as well as for the placeholder.
+
+14
+00:01:04,790 --> 00:01:09,790
+So we have to skip certain attributes and quotations if we have one.
+
+15
+00:01:09,790 --> 00:01:16,430
+So in order to do that, I have to end up writing an additional method called as uh, extract attribute
+
+16
+00:01:16,430 --> 00:01:18,710
+value, which does that for me.
+
+17
+00:01:18,750 --> 00:01:25,870
+I'm going to just go copy that method and paste it over here, because this is going to be self-explanatory.
+
+18
+00:01:25,870 --> 00:01:28,270
+So you pass the selector and the attribute.
+
+19
+00:01:28,430 --> 00:01:33,070
+So you see that you're going to choose the index for this particular attribute which is from here.
+
+20
+00:01:33,310 --> 00:01:36,110
+Because now see there is this attribute.
+
+21
+00:01:36,110 --> 00:01:37,790
+And then that is equal to.
+
+22
+00:01:37,830 --> 00:01:44,550
+So I need to choose exactly from which index that I need to uh, to select and skip from what value.
+
+23
+00:01:44,550 --> 00:01:49,030
+So I'm getting all of these over here and then I'm selecting that particular index.
+
+24
+00:01:49,030 --> 00:01:51,230
+This is what I'm trying to do over here.
+
+25
+00:01:51,230 --> 00:01:56,390
+So this way it is going to be easier for me because now I have just counted while I was doing for the
+
+26
+00:01:56,390 --> 00:01:59,510
+text as well as for the row like five five each.
+
+27
+00:01:59,710 --> 00:02:02,030
+But this one it is going to be keep changing.
+
+28
+00:02:02,230 --> 00:02:08,390
+So I'm going to just streamline that approach a bit so that it's going to be easier and more straightforward
+
+29
+00:02:08,750 --> 00:02:09,630
+at this time.
+
+30
+00:02:09,630 --> 00:02:16,790
+So I'm just going to say, uh, extract attribute value, uh, of the selector.
+
+31
+00:02:17,110 --> 00:02:23,510
+And I'm going to pass the data, uh, test ID something like that.
+
+32
+00:02:24,670 --> 00:02:25,270
+Right.
+
+33
+00:02:25,270 --> 00:02:29,070
+That's for the data test ID that I wanted to do.
+
+34
+00:02:29,230 --> 00:02:32,790
+And I'm also going to do for the placeholder.
+
+35
+00:02:32,790 --> 00:02:34,390
+So I'm going to say placeholder.
+
+36
+00:02:34,950 --> 00:02:42,990
+Uh, and for the placeholder, the locator that you identify is uh, nothing but the placeholder itself.
+
+37
+00:02:43,030 --> 00:02:43,510
+Right.
+
+38
+00:02:44,470 --> 00:02:45,430
+Something like this.
+
+39
+00:02:45,950 --> 00:02:51,470
+Uh, and the same thing goes for this as well over here.
+
+40
+00:02:51,870 --> 00:02:58,270
+And finally, I'm also going to identify using, uh, its name, something like this.
+
+41
+00:02:58,270 --> 00:03:02,350
+If it starts with name then it is going to be name.
+
+42
+00:03:02,790 --> 00:03:06,870
+And the attribute is going to be name as well.
+
+43
+00:03:07,230 --> 00:03:07,550
+Right.
+
+44
+00:03:07,590 --> 00:03:13,710
+It's going to be so much easier and straightforward if it doesn't match any one of them.
+
+45
+00:03:13,710 --> 00:03:22,190
+You can just say, uh, written uh with the CSS selector, something like this, which is like a default
+
+46
+00:03:22,190 --> 00:03:23,750
+selector that I want to go with.
+
+47
+00:03:24,030 --> 00:03:28,310
+If none of the, uh, locator strategy match over there.
+
+48
+00:03:28,550 --> 00:03:33,510
+I know this is kind of cumbersome for the first time when you see it, but this is going to be like
+
+49
+00:03:33,550 --> 00:03:39,030
+future proof for you while you are going to be doing automation just by, you know, using this particular
+
+50
+00:03:39,030 --> 00:03:40,350
+code in your project.
+
+51
+00:03:40,350 --> 00:03:42,670
+So that's why I'm building all the locator strategy.
+
+52
+00:03:42,670 --> 00:03:48,310
+I'm not just keeping it like very simple code, but I wanted to even bring the complex code so that
+
+53
+00:03:48,310 --> 00:03:51,590
+you can even know, like how you can extend the code from here.
+
+54
+00:03:51,950 --> 00:03:52,430
+Right?
+
+55
+00:03:52,470 --> 00:03:54,750
+So I have got this path locator strategy.
+
+56
+00:03:54,950 --> 00:04:03,710
+Now we can just replace this entire code to get the locator type and the locator value so much easily
+
+57
+00:04:03,910 --> 00:04:06,870
+with just with that method that we have got.
+
+58
+00:04:06,870 --> 00:04:11,060
+So I'm just going to say delete this entire code.
+
+59
+00:04:11,380 --> 00:04:22,100
+And over here I'm going to say, uh, locate our type and locate our value, uh, which I can get from
+
+60
+00:04:22,100 --> 00:04:23,780
+the path locator strategy.
+
+61
+00:04:23,780 --> 00:04:29,580
+And I can pass the current strategy, which is the current locator, to get both the locator type and
+
+62
+00:04:29,580 --> 00:04:30,700
+the locator value.
+
+63
+00:04:31,140 --> 00:04:31,900
+Look at that.
+
+64
+00:04:32,500 --> 00:04:35,660
+This is pretty neat, which is cool.
+
+65
+00:04:36,020 --> 00:04:38,340
+And now the page source that we need to modify.
+
+66
+00:04:38,340 --> 00:04:40,380
+And you know where the page source is going to come from.
+
+67
+00:04:40,420 --> 00:04:44,340
+It's going to be from the page of the playwright.
+
+68
+00:04:44,340 --> 00:04:45,700
+So I'm going to say page.
+
+69
+00:04:45,980 --> 00:04:48,220
+And there is something called as page source.
+
+70
+00:04:48,220 --> 00:04:54,300
+Here we have something called as content async, which is going to get you the content of the page,
+
+71
+00:04:54,340 --> 00:04:56,020
+like the full content of the page.
+
+72
+00:04:56,020 --> 00:04:57,260
+That is how you really do it.
+
+73
+00:04:58,340 --> 00:04:58,620
+All right.
+
+74
+00:04:58,620 --> 00:05:04,420
+So we modified that as well over here and see the codes are now looking pretty good.
+
+75
+00:05:04,420 --> 00:05:09,980
+All the errors have gone except this one which is not no uh, element exception.
+
+76
+00:05:10,180 --> 00:05:15,730
+Uh, this is going to be uh, maybe playwright exception, something like this.
+
+77
+00:05:15,730 --> 00:05:16,810
+And then we can say that.
+
+78
+00:05:16,810 --> 00:05:18,210
+Fail to locate the element.
+
+79
+00:05:18,730 --> 00:05:18,930
+Uh.
+
+80
+00:05:18,930 --> 00:05:19,610
+Pretty cool.
+
+81
+00:05:19,810 --> 00:05:20,250
+Yeah.
+
+82
+00:05:21,130 --> 00:05:25,610
+So yeah, we have reduced from 20 errors to ten so far.
+
+83
+00:05:25,850 --> 00:05:27,530
+Uh, and it looks so good.
+
+84
+00:05:27,570 --> 00:05:29,970
+I know, what are the other errors that we need to fix?
+
+85
+00:05:30,010 --> 00:05:33,570
+The main error is this guy the try create locator strategy.
+
+86
+00:05:33,810 --> 00:05:35,810
+We need to go and fix this one.
+
+87
+00:05:36,010 --> 00:05:42,970
+Uh, and then we also need to update the, uh, get healed locator, the prompt which needs to be changed
+
+88
+00:05:42,970 --> 00:05:43,610
+as well.
+
+89
+00:05:43,730 --> 00:05:49,450
+So those are the two remaining things that we need to fix, uh, before we start running the code and
+
+90
+00:05:49,450 --> 00:05:50,570
+see how it works.
+
+91
+00:05:50,690 --> 00:05:52,170
+So let's see how it goes.
+
+92
+00:05:52,170 --> 00:05:53,370
+But cross my finger.
+
+93
+00:05:53,530 --> 00:05:57,610
+You can see that we have already did quite a good progress so far.
+
+94
+00:05:57,810 --> 00:06:05,090
+Uh, to make the code more aligned for playwright and the every logic that we have written in order
+
+95
+00:06:05,090 --> 00:06:09,850
+to make this self-healing mechanism, it's remaining exactly the same.
+
+96
+00:06:09,890 --> 00:06:16,250
+There is no change on that except the syntaxes of how you find the locators and how you pass the page.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 9. Creating Complete Dynamic Locator based on the Input from LLMs
+
+
+1
+00:00:00,080 --> 00:00:00,920
+All right.
+
+2
+00:00:01,120 --> 00:00:04,200
+Now we are going to see how we can update this.
+
+3
+00:00:04,240 --> 00:00:06,720
+Try create locator strategy method.
+
+4
+00:00:06,960 --> 00:00:08,120
+Well guess what.
+
+5
+00:00:08,160 --> 00:00:16,360
+In order to fix this particular code that we have got because we don't have uh, like by type, uh,
+
+6
+00:00:16,800 --> 00:00:23,080
+like how we did in the selenium, at least for the playwright world, the things are going to change
+
+7
+00:00:23,240 --> 00:00:25,240
+at completely over here.
+
+8
+00:00:25,400 --> 00:00:31,040
+So all you have to do in here is that just remove this entire code that you have got, because this
+
+9
+00:00:31,040 --> 00:00:37,800
+is not going to make any sense, uh, over here, because we don't even have the, uh, like, many
+
+10
+00:00:37,800 --> 00:00:43,120
+of the, like, by type, uh, for the selenium.
+
+11
+00:00:43,120 --> 00:00:45,640
+So I'm going to get rid of that over there.
+
+12
+00:00:45,640 --> 00:00:51,480
+And now we're going to add the logic over here, as I showed you in the screenshot in this first lecture
+
+13
+00:00:51,480 --> 00:00:59,040
+of this particular section, you are going to be using all the, uh, playwright selectors, pretty
+
+14
+00:00:59,040 --> 00:01:01,760
+much like, uh, the string format.
+
+15
+00:01:01,760 --> 00:01:02,080
+Right.
+
+16
+00:01:02,080 --> 00:01:05,240
+So this is going to be like playwright, uh, sector.
+
+17
+00:01:05,600 --> 00:01:08,320
+And I'm gonna get the locator type.
+
+18
+00:01:08,320 --> 00:01:14,840
+And you know that the locator type that we get from this locator strategy is going to be of a string
+
+19
+00:01:14,880 --> 00:01:17,760
+type, because, you know, see, these are all just string, right?
+
+20
+00:01:17,760 --> 00:01:22,560
+Like string of text is equal to login text is equal to employee detail.
+
+21
+00:01:22,600 --> 00:01:26,160
+Text is equal to manage user log of something like that.
+
+22
+00:01:26,160 --> 00:01:28,160
+So it's all just text there.
+
+23
+00:01:28,200 --> 00:01:30,680
+There is no other type that we have got.
+
+24
+00:01:30,960 --> 00:01:38,360
+So if you're going to be parsing the text option for the playwright there, then all we're going to
+
+25
+00:01:38,360 --> 00:01:45,520
+do it over here is I'm going to do a super simple, um, switch operation.
+
+26
+00:01:45,920 --> 00:01:48,160
+So this is what I'm going to do over here.
+
+27
+00:01:48,520 --> 00:01:57,600
+So in the switch operation I'm just going to say if you have got locator type as ID, right.
+
+28
+00:01:57,600 --> 00:02:05,800
+So if the locator type that you are getting, you're passing it to me is going to be an ID type over
+
+29
+00:02:05,800 --> 00:02:06,120
+here.
+
+30
+00:02:06,160 --> 00:02:07,840
+See this is the method that we're passing ID.
+
+31
+00:02:08,120 --> 00:02:11,150
+So if you are getting an ID 80 type there.
+
+32
+00:02:11,670 --> 00:02:20,990
+Then the ID locator is going to be something like this hash and then the locator value.
+
+33
+00:02:21,830 --> 00:02:24,830
+Oh I see we're just formulating that.
+
+34
+00:02:25,110 --> 00:02:34,670
+And then if it is going to be of a name then the locator is going to be of uh hash or not hash.
+
+35
+00:02:34,670 --> 00:02:35,110
+Sorry.
+
+36
+00:02:35,470 --> 00:02:39,070
+Is going to be of name is equal to.
+
+37
+00:02:39,750 --> 00:02:42,470
+And then the locator value.
+
+38
+00:02:42,670 --> 00:02:47,070
+That's how the name locator type will be.
+
+39
+00:02:47,350 --> 00:02:47,790
+Right.
+
+40
+00:02:47,830 --> 00:02:51,590
+I think we need a single quote as well because that is important.
+
+41
+00:02:52,310 --> 00:02:55,030
+Uh, over here while we pass the name.
+
+42
+00:02:55,190 --> 00:03:03,670
+And similarly, uh, we need to do for the class as well for the class, if you want to work out with
+
+43
+00:03:04,070 --> 00:03:06,670
+the locator, uh, you know what it is?
+
+44
+00:03:06,670 --> 00:03:15,980
+You just have to put a dot there, which is like dot, uh, and then the locator value Live and I need
+
+45
+00:03:15,980 --> 00:03:21,260
+to split the locator value if there are going to be any, um.
+
+46
+00:03:21,660 --> 00:03:25,860
+Any other spaces between those locators.
+
+47
+00:03:25,860 --> 00:03:29,700
+So I'm just going to get the first element out of it.
+
+48
+00:03:29,700 --> 00:03:30,140
+Right?
+
+49
+00:03:30,140 --> 00:03:34,780
+If there are going to be like multiple class which has been found from the AI model, then I need to
+
+50
+00:03:34,820 --> 00:03:35,340
+do that.
+
+51
+00:03:35,620 --> 00:03:40,020
+And similarly, if you're going to be using the CSS selector, I think it's just going to be the same
+
+52
+00:03:40,060 --> 00:03:47,140
+CSS letter, because that is what is by default returned by this particular method like CSS selector.
+
+53
+00:03:47,340 --> 00:03:51,780
+So I can just say the locator value there.
+
+54
+00:03:52,100 --> 00:03:55,420
+So I'm just going to say locator value something like this.
+
+55
+00:03:55,460 --> 00:03:57,860
+Yeah just very straightforward.
+
+56
+00:03:58,220 --> 00:04:00,140
+Or we don't even need a double quotes for that.
+
+57
+00:04:00,140 --> 00:04:02,620
+We can just say locator value.
+
+58
+00:04:03,300 --> 00:04:04,020
+Pretty cool.
+
+59
+00:04:04,420 --> 00:04:10,180
+And then for the XPath text and everything going to remain pretty much exactly the same.
+
+60
+00:04:10,580 --> 00:04:14,180
+So I'm just going to copy paste the code that I have already written.
+
+61
+00:04:14,220 --> 00:04:15,980
+The XPath is this text.
+
+62
+00:04:16,020 --> 00:04:21,460
+Is this role test id placeholder.
+
+63
+00:04:21,980 --> 00:04:22,500
+Boom.
+
+64
+00:04:22,860 --> 00:04:29,580
+And if you have more and more data that you need to add for this particular playwright selector, you
+
+65
+00:04:29,580 --> 00:04:31,460
+can go ahead and update it over here.
+
+66
+00:04:31,460 --> 00:04:33,940
+And then you can keep expanding from there on.
+
+67
+00:04:33,940 --> 00:04:38,700
+I cannot just write all the locators, which is available in playwright for this particular course,
+
+68
+00:04:38,700 --> 00:04:43,580
+because that's going to wipe out my entire time, because we still need to focus on something more amazing
+
+69
+00:04:43,620 --> 00:04:44,780
+in this particular course.
+
+70
+00:04:44,780 --> 00:04:48,140
+So I'm just going to limit myself with these locators that we have got.
+
+71
+00:04:50,220 --> 00:04:51,140
+All right.
+
+72
+00:04:51,140 --> 00:04:58,940
+So once we have all of these over here, I'm going to write a condition here saying if the playwright
+
+73
+00:04:58,980 --> 00:05:08,540
+selector is not equal to null, I mean if it is completely not null, but it has got some star there,
+
+74
+00:05:09,020 --> 00:05:14,460
+then you move this code over here.
+
+75
+00:05:15,380 --> 00:05:23,940
+So you just have this locator for me there, which is going to be the playwright selector.
+
+76
+00:05:24,180 --> 00:05:29,620
+And then you return one for me, right?
+
+77
+00:05:29,660 --> 00:05:32,500
+If not, return zero.
+
+78
+00:05:34,220 --> 00:05:34,980
+Look at that.
+
+79
+00:05:35,580 --> 00:05:38,540
+So this is what is going to happen over there.
+
+80
+00:05:38,580 --> 00:05:44,540
+This is what is the code that I wanted to implement for the try create locator strategy.
+
+81
+00:05:45,980 --> 00:05:52,020
+This is the only changed code like these are the changed code that we have in playwright way.
+
+82
+00:05:52,180 --> 00:05:53,860
+One is this one method.
+
+83
+00:05:53,900 --> 00:05:56,860
+This is second method and this is the third method.
+
+84
+00:05:57,340 --> 00:05:57,940
+That's all.
+
+85
+00:05:58,620 --> 00:06:02,260
+Once you have this, the other code remains exactly the same.
+
+86
+00:06:02,260 --> 00:06:04,060
+And we have got zero error this time.
+
+87
+00:06:04,060 --> 00:06:04,740
+Congratulation.
+
+88
+00:06:04,780 --> 00:06:08,580
+You have also fixed the self-healing locator code this time.
+
+89
+00:06:08,580 --> 00:06:10,940
+And everything looks pretty fabulous.
+
+90
+00:06:11,460 --> 00:06:19,700
+The last change that we have to write now is to update the get locators from LM, which is this guy.
+
+91
+00:06:19,940 --> 00:06:22,820
+If we modify this, then we are pretty good to go.
+
+92
+00:06:23,060 --> 00:06:29,380
+And then we can start running the code and see how it works, which we are going to be doing in our
+
+93
+00:06:29,580 --> 00:06:30,700
+next lecture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 10. Modifying Prompt for Playwright Instead of Selenium Prompt to send LLMs
+
+
+
+1
+00:00:00,160 --> 00:00:01,000
+All right.
+
+2
+00:00:01,360 --> 00:00:08,480
+The last piece of the puzzle to complete this entire self-healing operation is the prompt.
+
+3
+00:00:08,480 --> 00:00:15,000
+I told you, prompt engineering and the context engineering are the heart and core of this entire course.
+
+4
+00:00:15,280 --> 00:00:22,760
+Even though we write a lot of code there, the prompt are the one which actually made us get the locators
+
+5
+00:00:22,760 --> 00:00:25,840
+that we are looking for in a format that we were asking.
+
+6
+00:00:25,840 --> 00:00:27,440
+So that's very important.
+
+7
+00:00:27,600 --> 00:00:32,200
+If you remember, in our last selenium code, we try to do something like this.
+
+8
+00:00:32,240 --> 00:00:37,400
+We passed these elements to find the locators and then we got it out, which was all pretty good.
+
+9
+00:00:37,440 --> 00:00:38,920
+We got that back.
+
+10
+00:00:38,920 --> 00:00:46,920
+But over here I'm going to make that a bit further, uh, to add some more element, because now we
+
+11
+00:00:46,920 --> 00:00:51,440
+don't just have the six locator, but we also have got few more.
+
+12
+00:00:51,680 --> 00:00:59,720
+So I'm going to ask a bit more with an formatting example as well, so that it can return as that particular,
+
+13
+00:00:59,880 --> 00:01:01,840
+uh, value for me over there.
+
+14
+00:01:01,840 --> 00:01:04,200
+So that is what I'm going to be doing over here.
+
+15
+00:01:04,200 --> 00:01:11,960
+So essentially I'm going to just replace this particular code, something like this over here.
+
+16
+00:01:12,360 --> 00:01:15,320
+And it's not really a big thing to be honest.
+
+17
+00:01:15,320 --> 00:01:22,840
+I have even did that from the cloud desktop to get the refined version of the prompt that I passed in,
+
+18
+00:01:22,840 --> 00:01:27,280
+and it gave me this particular prompt over here, and this was looking pretty good.
+
+19
+00:01:27,280 --> 00:01:33,720
+So now you can see that the prompt is exactly the similar prompt, only that I have told that id if
+
+20
+00:01:33,760 --> 00:01:36,560
+the ID value is available, name is this.
+
+21
+00:01:36,720 --> 00:01:42,640
+And then for role is the aria role attribute which the playwright roles like for example button, text
+
+22
+00:01:42,680 --> 00:01:49,160
+box and link and test id for these, placeholder for these and text for these.
+
+23
+00:01:49,200 --> 00:01:56,080
+See, I'm giving a lot of information this time, and I'm also asking the example format to be of this
+
+24
+00:01:56,080 --> 00:01:59,320
+so that it can go and identify things for me in a better way.
+
+25
+00:01:59,640 --> 00:02:06,320
+This is what I really wanted to get done this time so that it can returns me things clearly.
+
+26
+00:02:06,520 --> 00:02:11,760
+And now I'm going to save this particular code and we will see how this actually works.
+
+27
+00:02:11,760 --> 00:02:14,880
+Because now we have got the declarations uh, as well.
+
+28
+00:02:15,080 --> 00:02:16,080
+Uh, but guess what.
+
+29
+00:02:16,120 --> 00:02:18,600
+See it's taking me to the selenium that's problem.
+
+30
+00:02:18,760 --> 00:02:28,400
+Uh, I think we need to, uh, refer this to, uh, not the selenium, uh, model, but we need to locate
+
+31
+00:02:28,600 --> 00:02:34,320
+the playwright self-healing locator, which is pretty cool, this one.
+
+32
+00:02:34,320 --> 00:02:34,640
+Right.
+
+33
+00:02:34,680 --> 00:02:40,080
+So we need to use this particular model to deserialize while we get that, which is awesome.
+
+34
+00:02:40,080 --> 00:02:43,760
+So we have made all those changes and everything is looking good.
+
+35
+00:02:43,800 --> 00:02:48,920
+The final operation right now is to run this code and see how it works, which we are going to be doing
+
+36
+00:02:49,040 --> 00:02:51,040
+in our next lecture.
+
+37
+00:02:51,040 --> 00:02:53,320
+But before that, I also forgot that I.
+
+38
+00:02:53,440 --> 00:02:55,960
+I missed this appsettings.json file.
+
+39
+00:02:55,960 --> 00:02:58,440
+So let me go and copy that over here.
+
+40
+00:02:58,880 --> 00:03:04,880
+And I'm going to make sure in the properties that there is this copy if newer which is correct.
+
+41
+00:03:04,880 --> 00:03:07,680
+So everything is there uh, which is awesome.
+
+42
+00:03:07,680 --> 00:03:10,560
+And let's try to run this code and see how it works.
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
+video 11. Running entire test with Self Healing in Playwright with LLMs
+
+
+1
+00:00:00,080 --> 00:00:01,000
+All right.
+
+2
+00:00:01,040 --> 00:00:09,120
+Now we are going to see how we can use the changes that we have made over here and start building the
+
+3
+00:00:09,120 --> 00:00:13,080
+test and see if the auto healing is really going to work.
+
+4
+00:00:13,200 --> 00:00:17,760
+So if I'm going to build this little project, you can see that we have got zero error this time.
+
+5
+00:00:17,760 --> 00:00:24,960
+So we have successfully migrated all our code from selenium to playwright self-healing, which is awesome.
+
+6
+00:00:25,280 --> 00:00:29,680
+But we need to add the tests still to see how this operation works.
+
+7
+00:00:29,680 --> 00:00:36,120
+This is the place where the actual reality is going to turn and tell us whether this is really going
+
+8
+00:00:36,160 --> 00:00:37,200
+to work or not.
+
+9
+00:00:37,200 --> 00:00:39,760
+So I'm going to go and copy the code over here.
+
+10
+00:00:39,760 --> 00:00:40,640
+But guess what?
+
+11
+00:00:40,680 --> 00:00:49,520
+For the selenium code you have got what is called as I webdriver chrome driver initialization.
+
+12
+00:00:49,520 --> 00:00:52,080
+But in playwright things are a bit different.
+
+13
+00:00:52,120 --> 00:00:53,880
+We need to do that as well.
+
+14
+00:00:53,880 --> 00:00:58,520
+So I'm probably going to copy paste that particular code pretty soon over here.
+
+15
+00:00:58,520 --> 00:01:03,480
+But I'm just going to change the method over here as task, which is great.
+
+16
+00:01:03,720 --> 00:01:08,000
+Uh, and let's try to import the things that we want to pass in.
+
+17
+00:01:08,000 --> 00:01:15,330
+And here we need to pass the playwright's page instead of the driver that we have got.
+
+18
+00:01:15,330 --> 00:01:18,810
+So I'm going to go paste the code for the playwright.
+
+19
+00:01:18,810 --> 00:01:23,850
+This is how you initialize the playwright, as you know, and this is the page which I have to pass
+
+20
+00:01:23,850 --> 00:01:27,210
+in for both the home page as well as the login page.
+
+21
+00:01:27,370 --> 00:01:28,130
+That's all.
+
+22
+00:01:28,410 --> 00:01:31,890
+That's the only thing that I have to do to make the test to execute.
+
+23
+00:01:33,250 --> 00:01:37,570
+And now you see that we have got the locator for the login, which is perfect.
+
+24
+00:01:37,570 --> 00:01:39,090
+So there is no error on it.
+
+25
+00:01:39,090 --> 00:01:44,250
+But for the login page all the locators are completely wrong.
+
+26
+00:01:44,250 --> 00:01:47,210
+So this should ideally not work at all.
+
+27
+00:01:47,650 --> 00:01:50,690
+But we wanted to see how this is going to work right.
+
+28
+00:01:50,730 --> 00:01:53,730
+So let's try to run this and see what's going to happen.
+
+29
+00:01:53,730 --> 00:01:55,890
+Now it's the moment of truth.
+
+30
+00:01:55,890 --> 00:01:59,130
+We are going to see how this is going to work.
+
+31
+00:01:59,210 --> 00:01:59,770
+There we go.
+
+32
+00:01:59,810 --> 00:02:01,210
+The playwright is working.
+
+33
+00:02:01,250 --> 00:02:03,570
+It is spawning uh, the browser.
+
+34
+00:02:03,890 --> 00:02:09,010
+Ah, I think I know what I just missed one thing on in the test completely.
+
+35
+00:02:09,050 --> 00:02:10,570
+Let me just stop this test.
+
+36
+00:02:10,570 --> 00:02:13,650
+I have not navigated to the to the website.
+
+37
+00:02:13,890 --> 00:02:14,730
+That's bummer.
+
+38
+00:02:14,930 --> 00:02:17,010
+So let me get that as well.
+
+39
+00:02:17,690 --> 00:02:19,980
+So that is the problem in the copy pasting code.
+
+40
+00:02:20,020 --> 00:02:23,060
+I don't rely on that to be honest, because I forget something.
+
+41
+00:02:23,100 --> 00:02:24,860
+To be copy pasted.
+
+42
+00:02:24,860 --> 00:02:27,500
+So I'm going to say await page dot.
+
+43
+00:02:27,660 --> 00:02:37,860
+Uh go to async and I'm going to pass the website dot com over here, which is pretty cool.
+
+44
+00:02:37,860 --> 00:02:41,860
+And once I get there yeah I can do the rest of the operation, which is great.
+
+45
+00:02:41,860 --> 00:02:43,260
+So let's try to run it again.
+
+46
+00:02:44,180 --> 00:02:44,860
+Take two.
+
+47
+00:02:46,020 --> 00:02:48,020
+So yeah, it's navigating this time.
+
+48
+00:02:48,700 --> 00:02:50,300
+Login is clicked immediately.
+
+49
+00:02:50,300 --> 00:02:52,980
+And you know what the username, password and login button.
+
+50
+00:02:52,980 --> 00:02:56,580
+All the controls are completely wrong with its locator.
+
+51
+00:02:56,820 --> 00:02:58,100
+So look at that.
+
+52
+00:02:58,100 --> 00:02:59,620
+The AI is kicking in.
+
+53
+00:02:59,660 --> 00:03:01,140
+It's doing the self-healing.
+
+54
+00:03:01,300 --> 00:03:07,700
+It is identifying the locators and it is getting the locator for us it is a bit slower.
+
+55
+00:03:07,740 --> 00:03:08,300
+You know what.
+
+56
+00:03:08,340 --> 00:03:13,340
+Because we have different locator strategies for playwright as opposed to selenium.
+
+57
+00:03:13,340 --> 00:03:20,620
+But I see that it is working see with zero logic change but a lot of code change.
+
+58
+00:03:20,660 --> 00:03:24,260
+Obviously we can see that this is working as expected.
+
+59
+00:03:24,260 --> 00:03:31,480
+And it took 38 seconds to perform the similar operation which we usually take like 15 seconds while
+
+60
+00:03:31,480 --> 00:03:33,120
+we do it in selenium.
+
+61
+00:03:33,120 --> 00:03:37,040
+Yeah, it's like more than double the time that it is taking at the moment.
+
+62
+00:03:37,040 --> 00:03:39,680
+But hey, look at that, it is already working.
+
+63
+00:03:39,680 --> 00:03:50,280
+We have migrated our code from selenium to playwright, and we have also built a playwright self-healing
+
+64
+00:03:50,280 --> 00:03:53,400
+code with minimal code change.
+
+65
+00:03:53,520 --> 00:03:55,240
+And this is awesome.
+
+66
+00:03:55,400 --> 00:04:01,160
+This is really cool to see how the page object model codes are really working, which is super, really
+
+67
+00:04:01,160 --> 00:04:01,600
+good.
+
+68
+00:04:01,960 --> 00:04:09,960
+And this is how you can actually build a self-healing playwright code as well, using the power of large
+
+69
+00:04:09,960 --> 00:04:17,040
+language model, prompt engineering, context engineering, and of course with the local large language
+
+70
+00:04:17,040 --> 00:04:18,240
+model that you have got.
+
+71
+00:04:18,360 --> 00:04:25,160
+With this, we can confidently say that we have successfully completed all of these operations for playwright
+
+72
+00:04:25,160 --> 00:04:28,680
+as well, and we could able to run the test until here.
+
+73
+00:04:28,680 --> 00:04:31,040
+And all of them are working as expected.
+
+74
+00:04:31,040 --> 00:04:38,360
+This is how we can do the self-healing testing for the playwright using C-sharp dotnet.
+
+
+==================================================================================
+
+
+section 9. Building Persistence Cache for Healed Locator for Observability and Retrieval
+
+
+video 1.introduction
+
+1
+00:00:00,200 --> 00:00:02,120
+Welcome to the next section of our course.
+
+2
+00:00:02,120 --> 00:00:08,560
+And in this section we're going to talk about self-healing locator with local cache system for persistence.
+
+3
+00:00:08,560 --> 00:00:13,720
+I know this is going to be something very, very magical, but this is going to make our life very much
+
+4
+00:00:13,880 --> 00:00:14,520
+easier.
+
+5
+00:00:14,760 --> 00:00:21,760
+While we say self-healing locator with local cache system for persistence, what we really mean is that
+
+6
+00:00:21,760 --> 00:00:27,320
+we are going to somehow persist some of the locators for reusability.
+
+7
+00:00:27,320 --> 00:00:29,400
+That is the major power.
+
+8
+00:00:30,040 --> 00:00:33,240
+That is the entire crux of this particular section.
+
+9
+00:00:33,240 --> 00:00:36,360
+So why do we need the local caching in first place?
+
+10
+00:00:36,360 --> 00:00:40,400
+But before we go there, let's first understand the current implementation that we have.
+
+11
+00:00:40,920 --> 00:00:46,760
+We know that we have got the locator strategy, which is going to go and find the locators in from the
+
+12
+00:00:46,800 --> 00:00:51,680
+page object model, and if it works, then it is going to go and perform the operation using selenium.
+
+13
+00:00:52,240 --> 00:00:56,720
+And if it doesn't work, then it's going to go and check the alternative locators, which in turn is
+
+14
+00:00:56,720 --> 00:01:03,480
+going to go and check the dictionary to see if there is any locator in here, and if it is there, which
+
+15
+00:01:03,620 --> 00:01:05,460
+is not going to be there for the very first time.
+
+16
+00:01:05,460 --> 00:01:10,860
+So every single time, while you run the test for the first time, this guy is going to be empty.
+
+17
+00:01:11,220 --> 00:01:18,140
+So the alternate locator is going to invoke the AI healing process to find the locator.
+
+18
+00:01:18,140 --> 00:01:23,420
+And this guy is going to invoke the LMS, which is running within your local machine or on the cloud.
+
+19
+00:01:23,780 --> 00:01:30,260
+And it is going to go and find the locators or the alternative locators for you from the page that you
+
+20
+00:01:30,260 --> 00:01:31,180
+have supplied.
+
+21
+00:01:31,180 --> 00:01:34,820
+And then it is going to go and store them into the dictionaries.
+
+22
+00:01:34,820 --> 00:01:39,300
+And once saved, it is then going to invoke the locator strategy one more time, and then it's going
+
+23
+00:01:39,300 --> 00:01:41,300
+to do the same exact operation.
+
+24
+00:01:41,300 --> 00:01:46,740
+And this time it is going to have the alternative locators in here, and it is going to perform the
+
+25
+00:01:46,740 --> 00:01:47,900
+operation over there.
+
+26
+00:01:47,900 --> 00:01:50,500
+So that is how we saw the current implementation.
+
+27
+00:01:50,500 --> 00:01:53,540
+And it's very evident that there are some challenges in here.
+
+28
+00:01:53,580 --> 00:01:56,860
+I'll talk about those disadvantages with the current implementation.
+
+29
+00:01:57,620 --> 00:02:03,060
+We are calling the large language model all the time to heal the locator every single time while the
+
+30
+00:02:03,060 --> 00:02:04,780
+test runs right.
+
+31
+00:02:04,820 --> 00:02:10,510
+Because if your test is stopped and if you're going to be running it one more time, maybe after half
+
+32
+00:02:10,510 --> 00:02:12,510
+an hour or maybe next minute.
+
+33
+00:02:13,070 --> 00:02:19,150
+This particular collection is going to be empty, because it is going to be just persistent in memory
+
+34
+00:02:19,150 --> 00:02:20,910
+for that particular test execution.
+
+35
+00:02:20,910 --> 00:02:24,350
+And once the execution is done, this memory is going to be wiped away.
+
+36
+00:02:24,990 --> 00:02:26,510
+So it's not persistent.
+
+37
+00:02:26,510 --> 00:02:33,470
+So every single time you need to call the large language model, which in turn is going to be having
+
+38
+00:02:33,670 --> 00:02:40,710
+a high token usage, and you are going to be spending quite some money for doing that, which is a disadvantage.
+
+39
+00:02:40,870 --> 00:02:41,390
+Right?
+
+40
+00:02:41,390 --> 00:02:45,790
+So you are, first of all, calling the large language model every single time to heal the locator.
+
+41
+00:02:46,310 --> 00:02:52,190
+And if you're not persisting it, you are going to do the same exact thing next time, which in turn
+
+42
+00:02:52,190 --> 00:02:57,030
+is going to increase the token usage and it is going to cost you a lot.
+
+43
+00:02:57,630 --> 00:03:00,870
+And the next problem we have is of course slower execution.
+
+44
+00:03:01,070 --> 00:03:07,550
+We know while we run the test using selenium, the test execution is like four seconds max.
+
+45
+00:03:07,550 --> 00:03:13,330
+But if we run the same test with the auto healing mechanism, while the locator is of course not quite
+
+46
+00:03:13,330 --> 00:03:18,130
+right, so it is going to take 15 seconds to do the same operation.
+
+47
+00:03:18,130 --> 00:03:24,530
+So five seconds work is taking 15 to 20s with large language model and kind of model that you are using
+
+48
+00:03:24,530 --> 00:03:27,370
+as well, which is slower execution to be honest.
+
+49
+00:03:27,890 --> 00:03:34,410
+And the next problem we have is the less visibility on which locator is being healed.
+
+50
+00:03:34,850 --> 00:03:35,330
+Right?
+
+51
+00:03:35,370 --> 00:03:42,610
+Because we know that the AI is going to go and get the alternative locators and then it's going to heal
+
+52
+00:03:42,610 --> 00:03:42,930
+it.
+
+53
+00:03:42,930 --> 00:03:50,290
+But what if there is an imminent problem in our application and this AI is going to hide that?
+
+54
+00:03:50,490 --> 00:03:56,130
+This could be a chance that the ID with the developer would have missed from the UI.
+
+55
+00:03:56,330 --> 00:04:02,610
+And your AI has figured out to use the alternative, let's say XPath or CSS.
+
+56
+00:04:03,330 --> 00:04:06,050
+But the problem is the ID is missing from the UI.
+
+57
+00:04:06,290 --> 00:04:13,510
+It needs to be addressed, and this is somehow being covered up by your AI test code, which is also
+
+58
+00:04:13,510 --> 00:04:14,430
+a disadvantage.
+
+59
+00:04:15,070 --> 00:04:20,990
+So in order to overcome all these problem, we need to find a common ground solution for that.
+
+60
+00:04:20,990 --> 00:04:26,670
+And that's what exactly is going to be with the power of the caching with persistency.
+
+61
+00:04:26,670 --> 00:04:30,590
+So the new solution that we are going to be doing is going to look something like this.
+
+62
+00:04:30,590 --> 00:04:36,590
+And once again guys, this implementation is a bit more complex than the existing implementation.
+
+63
+00:04:36,790 --> 00:04:42,750
+The reason why is because you are going to see there are acquired some more code change going to happen.
+
+64
+00:04:43,070 --> 00:04:48,910
+So again you can completely ignore this particular section if you think that you are already fine with
+
+65
+00:04:48,910 --> 00:04:55,070
+whatever implementation that you have provided, you are going to take all these disadvantages in mind
+
+66
+00:04:55,070 --> 00:04:57,830
+and you think that you know what, Karthik, we are fine with that.
+
+67
+00:04:57,870 --> 00:05:01,350
+We're still okay to call the locator healing all the time.
+
+68
+00:05:01,390 --> 00:05:08,670
+I mean, we don't have this locator problem all the time, so it may not be calling the uh the LMS all
+
+69
+00:05:08,670 --> 00:05:09,230
+the time.
+
+70
+00:05:09,230 --> 00:05:10,430
+So it is still fine.
+
+71
+00:05:10,430 --> 00:05:15,930
+If you think all of these, then you can stop until your last section of this course.
+
+72
+00:05:15,930 --> 00:05:23,450
+But if you think that there is always a way to improve, like what we are suggesting right now and you
+
+73
+00:05:23,450 --> 00:05:28,250
+want to improve your code, then you should watch this particular section.
+
+74
+00:05:28,250 --> 00:05:34,130
+And this particular section I would say is an optional section, unless until you want to take a mile
+
+75
+00:05:34,130 --> 00:05:37,810
+further to understand how you can do all of these operations.
+
+76
+00:05:38,090 --> 00:05:44,730
+But this is something that I wanted to deliver in my course so that you can get all the benefit, uh,
+
+77
+00:05:44,730 --> 00:05:49,250
+and how, uh, these questions are going to be like a general questions, which is going to come to
+
+78
+00:05:49,250 --> 00:05:53,890
+you the moment you start implementing the framework, like what we just proposed right now.
+
+79
+00:05:54,050 --> 00:05:57,010
+So make sure that you are ready to answer these questions.
+
+80
+00:05:57,010 --> 00:06:00,410
+That's the reason why I have this covered for you in this course.
+
+81
+00:06:00,410 --> 00:06:00,930
+Anyways.
+
+82
+00:06:00,930 --> 00:06:05,250
+So we have the entire source code at the end of this particular section, you will have everything in
+
+83
+00:06:05,250 --> 00:06:05,730
+place.
+
+84
+00:06:05,730 --> 00:06:08,570
+You can directly go and take the source code and start using it.
+
+85
+00:06:08,570 --> 00:06:12,970
+But how did we implemented that and what are the other rooms to improve that?
+
+86
+00:06:13,010 --> 00:06:15,170
+We are going to be discussing about that as well.
+
+87
+00:06:15,170 --> 00:06:20,340
+But in order for you to get there, you first of all need to understand how we have implemented the
+
+88
+00:06:20,380 --> 00:06:21,260
+persistency.
+
+89
+00:06:21,260 --> 00:06:26,500
+That's the reason why I highly recommend you to still watch this section, even if you're not going
+
+90
+00:06:26,500 --> 00:06:27,500
+to be implementing it.
+
+91
+00:06:27,540 --> 00:06:32,100
+Well, as that said, we are going to see how we are going to do the cache implementation.
+
+92
+00:06:32,780 --> 00:06:38,860
+So in here, when I say cache implementation, the cache itself is not like a database as such.
+
+93
+00:06:38,860 --> 00:06:44,300
+So I'm not going to use any, uh, like a SQL server database or MongoDB or something like that.
+
+94
+00:06:44,300 --> 00:06:48,980
+I'm going to use the cache as a JSON file to be honest.
+
+95
+00:06:48,980 --> 00:06:51,300
+So that is going to store all the locators.
+
+96
+00:06:51,300 --> 00:06:53,340
+And I will show you how this flow really works.
+
+97
+00:06:53,340 --> 00:06:57,500
+So this flow is going to be pretty much exactly the same thing like how it was doing before.
+
+98
+00:06:57,540 --> 00:07:02,660
+You remember in our existing code that while we were doing we used to find the locators.
+
+99
+00:07:02,660 --> 00:07:07,460
+And if the locator fails, then it will go to the locator checking.
+
+100
+00:07:07,460 --> 00:07:10,140
+And of course for the first time it is going to be empty.
+
+101
+00:07:10,300 --> 00:07:15,860
+So it's going to go and invoke the AI healing process to perform the operation.
+
+102
+00:07:15,860 --> 00:07:16,460
+Right.
+
+103
+00:07:16,500 --> 00:07:20,480
+But over here what's going to happen is this particular find.
+
+104
+00:07:20,520 --> 00:07:22,080
+Look at our in page object model.
+
+105
+00:07:22,080 --> 00:07:26,520
+This particular step it's not going to invoke the alternative error if it fails.
+
+106
+00:07:26,880 --> 00:07:30,600
+And instead it is going to perform the step over here itself.
+
+107
+00:07:30,600 --> 00:07:32,040
+So in this particular step itself.
+
+108
+00:07:32,040 --> 00:07:33,720
+So this is like first step.
+
+109
+00:07:33,880 --> 00:07:35,560
+And this was the second step.
+
+110
+00:07:35,560 --> 00:07:38,440
+And this was the third step in our current implementation.
+
+111
+00:07:38,440 --> 00:07:42,360
+But with this new implementation this step is going to be like a 1.5 step.
+
+112
+00:07:42,360 --> 00:07:43,720
+So it's like in the middle.
+
+113
+00:07:43,720 --> 00:07:47,160
+There is going to be one more step which is going to take care of these operation.
+
+114
+00:07:47,160 --> 00:07:48,600
+So we're going to check the cache.
+
+115
+00:07:48,600 --> 00:07:53,320
+And if there is a working element in this particular cache then we're going to perform the operation
+
+116
+00:07:53,320 --> 00:07:54,360
+over here.
+
+117
+00:07:54,480 --> 00:08:00,440
+Instead of going to the alternative locator one more time to go and fetch the record from the large
+
+118
+00:08:00,440 --> 00:08:01,760
+language models usage.
+
+119
+00:08:01,760 --> 00:08:05,880
+So this reduces tremendous amount of our time in executing.
+
+120
+00:08:06,200 --> 00:08:11,440
+But you may ask, Karthik, where exactly is this cache going to get the locators from?
+
+121
+00:08:11,640 --> 00:08:13,280
+See, the process is going to still same.
+
+122
+00:08:13,280 --> 00:08:18,400
+For example, for the very first time while you execute while the cache is empty, this particular check
+
+123
+00:08:18,400 --> 00:08:20,320
+cache is going to eventually fail.
+
+124
+00:08:20,320 --> 00:08:22,340
+So it is going to go over here.
+
+125
+00:08:22,380 --> 00:08:23,860
+The alternative locators.
+
+126
+00:08:24,020 --> 00:08:25,940
+And then it is going to fail in this step.
+
+127
+00:08:25,940 --> 00:08:28,540
+Rather it's going to go and call the large language model.
+
+128
+00:08:28,540 --> 00:08:30,300
+So this is going to give you the locator.
+
+129
+00:08:30,380 --> 00:08:32,660
+It's going to do the same exact operation one more time.
+
+130
+00:08:32,660 --> 00:08:33,860
+It's going to go here.
+
+131
+00:08:33,860 --> 00:08:37,580
+We are going to have some locators in the cache which is the dictionary.
+
+132
+00:08:37,900 --> 00:08:42,860
+And then it is going to perform the operation in the alternative locator.
+
+133
+00:08:43,060 --> 00:08:49,420
+And if the locator passes then it is also going to go and update the cache over here.
+
+134
+00:08:49,460 --> 00:08:50,340
+Look at that.
+
+135
+00:08:50,580 --> 00:08:52,740
+This was something which was missing earlier.
+
+136
+00:08:52,740 --> 00:08:58,020
+If you remember it won't go and update anywhere, rather it going to just go and perform the operation.
+
+137
+00:08:58,020 --> 00:09:08,340
+But in here we are going to also store the updated or working locator in here in the cache.
+
+138
+00:09:08,780 --> 00:09:13,220
+This is how it actually gets the locator stored in the cache.
+
+139
+00:09:13,620 --> 00:09:14,540
+Hope you got the idea.
+
+140
+00:09:14,580 --> 00:09:15,900
+Like how this is going to work.
+
+141
+00:09:15,900 --> 00:09:17,380
+This is super simplified guys.
+
+142
+00:09:17,380 --> 00:09:23,100
+I have made it as simple as possible for you to understand, and I think this implementation can be
+
+143
+00:09:23,100 --> 00:09:26,480
+even more expanded even further, like how you wanted to expand.
+
+144
+00:09:26,480 --> 00:09:27,760
+But you know what?
+
+145
+00:09:27,760 --> 00:09:29,360
+This is way better for now.
+
+146
+00:09:30,160 --> 00:09:35,480
+Well, as that said, we are going to see how the cash is going to even look like.
+
+147
+00:09:36,160 --> 00:09:39,080
+The persistence cash is going to look something like this.
+
+148
+00:09:39,240 --> 00:09:44,000
+We are going to have another class or a model called as healed locator.
+
+149
+00:09:44,680 --> 00:09:49,480
+And this healed locator is going to hold original locator, which is like this.
+
+150
+00:09:49,520 --> 00:09:52,160
+You remember, this original locator seems pretty familiar.
+
+151
+00:09:52,600 --> 00:09:55,840
+This is the uh, like the by.id.
+
+152
+00:09:55,920 --> 00:09:59,280
+And then you're going to have like user names or whatever.
+
+153
+00:09:59,280 --> 00:10:05,320
+And this is coming because you have did the buy dot link text or by.id the username.
+
+154
+00:10:05,320 --> 00:10:09,240
+If you just use dot two string you are going to get this particular format over here.
+
+155
+00:10:09,240 --> 00:10:15,400
+So this is the key uh, which is going to be used while you go and check if this particular locator
+
+156
+00:10:15,400 --> 00:10:16,560
+does exist there or not.
+
+157
+00:10:16,560 --> 00:10:19,920
+So this is going to be stored as the original locator.
+
+158
+00:10:20,040 --> 00:10:22,000
+And then we're going to have a working locator type.
+
+159
+00:10:22,000 --> 00:10:25,000
+So this is the locator type which is going to be like a working locator.
+
+160
+00:10:25,040 --> 00:10:30,930
+So we're going to store the working locator type and the working locator value, which is ID and the
+
+161
+00:10:30,930 --> 00:10:31,370
+username.
+
+162
+00:10:31,370 --> 00:10:34,850
+So this is the working locator instead of the user names.
+
+163
+00:10:34,850 --> 00:10:37,810
+Rather, this is the correct one which is being stored in here.
+
+164
+00:10:38,290 --> 00:10:45,730
+And we also have got a ISO type data date and time over here, which is going to say that this is healed
+
+165
+00:10:45,730 --> 00:10:47,410
+at this particular time frame.
+
+166
+00:10:47,970 --> 00:10:49,410
+So you're also going to store there.
+
+167
+00:10:49,410 --> 00:10:54,730
+So if we can add a logic there that if the locator is something beyond this particular time frame,
+
+168
+00:10:54,730 --> 00:10:58,330
+then we can go and read fetch the record or something like that.
+
+169
+00:10:58,330 --> 00:11:02,210
+We can have all those logics, but I'm not going to over complicate those things.
+
+170
+00:11:02,210 --> 00:11:06,570
+So these are the information which are stored currently in the cache implementation.
+
+171
+00:11:06,570 --> 00:11:10,050
+That is what exactly is happening behind the scene.
+
+172
+00:11:10,050 --> 00:11:16,730
+And this particular JSON that you are seeing over here is actually going to be created for you in your
+
+173
+00:11:16,730 --> 00:11:19,330
+bin directory of this project.
+
+174
+00:11:19,650 --> 00:11:21,130
+That is how it is going to work.
+
+175
+00:11:21,530 --> 00:11:27,210
+So hope you got the idea, like how we are going to do this implementation and this is the new implementation
+
+176
+00:11:27,210 --> 00:11:29,810
+that we are going to be doing in this particular section.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 2. Creating Healed Locator Model and Cache Structure
+
+
+1
+00:00:00,240 --> 00:00:01,120
+All right.
+
+2
+00:00:01,120 --> 00:00:06,000
+So now we're going to start implementing the cache implementation with persistency.
+
+3
+00:00:06,400 --> 00:00:07,320
+In this particular lecture.
+
+4
+00:00:07,320 --> 00:00:09,480
+So we'll see how we can start doing it.
+
+5
+00:00:09,480 --> 00:00:14,680
+And for this particular section I have taken an approach to do it a bit faster because I don't want
+
+6
+00:00:14,720 --> 00:00:16,760
+to write every single line of code.
+
+7
+00:00:16,800 --> 00:00:22,160
+Rather, I will tell you what exactly is the idea while implementing it, so that I save a lot of time
+
+8
+00:00:22,160 --> 00:00:24,680
+while doing the same thing over and over again.
+
+9
+00:00:24,680 --> 00:00:29,280
+So I'm going to copy paste some of the code that I have already written, and I will show you how the
+
+10
+00:00:29,280 --> 00:00:31,240
+execution is going to happen as well.
+
+11
+00:00:31,600 --> 00:00:35,800
+So for doing that, I'm going to go back to our project over here.
+
+12
+00:00:36,200 --> 00:00:41,440
+And you can see that we were working on the playwright self-healing test in our last section.
+
+13
+00:00:41,440 --> 00:00:43,960
+So I'm not going to work on this one today.
+
+14
+00:00:44,200 --> 00:00:47,600
+Rather, we are going to just focus on the selenium self-healing test.
+
+15
+00:00:47,600 --> 00:00:54,200
+So this is the only project which we are going to be adding the persistency and caching support.
+
+16
+00:00:54,200 --> 00:00:58,480
+So for doing that, the first thing which I'm going to do, as I told you, is the model that we need
+
+17
+00:00:58,480 --> 00:01:02,470
+to implement because this is the first thing that we can easily implement right now.
+
+18
+00:01:02,590 --> 00:01:04,550
+So I'm going to go and start doing that.
+
+19
+00:01:04,550 --> 00:01:09,830
+So I'm going to add a class over here called as Healed Locator.
+
+20
+00:01:09,830 --> 00:01:14,590
+So this is going to be like a class which is going to hold all the properties for the healed locator
+
+21
+00:01:14,590 --> 00:01:20,470
+for us like locator working locator types a working locator values and healed at.
+
+22
+00:01:20,470 --> 00:01:23,550
+So this is what, uh, this particular class is going to be.
+
+23
+00:01:23,830 --> 00:01:29,430
+And we are going to use this particular class quite a lot because it is going to hold things for me
+
+24
+00:01:29,430 --> 00:01:30,070
+over there.
+
+25
+00:01:30,590 --> 00:01:38,030
+And the next thing which I'm going to do it is I'm going to, uh, go and first create a locator cache
+
+26
+00:01:38,030 --> 00:01:41,550
+class, uh, in the LMS folder over here.
+
+27
+00:01:41,790 --> 00:01:45,190
+So I'm going to go create this as locator cache.
+
+28
+00:01:45,190 --> 00:01:49,590
+So this is the class which is responsible for doing following operations.
+
+29
+00:01:49,590 --> 00:02:00,500
+So it is going to uh, maybe uh store the locators in the cache and it is going to get the locators
+
+30
+00:02:00,900 --> 00:02:02,260
+from the cache.
+
+31
+00:02:02,500 --> 00:02:10,780
+And also it is going to load the locator from the file, which is nothing but the JSON file.
+
+32
+00:02:10,820 --> 00:02:11,020
+Right.
+
+33
+00:02:11,020 --> 00:02:14,220
+So these are the operation this particular class is going to do.
+
+34
+00:02:14,300 --> 00:02:17,340
+So we will see how we can do one by one over here.
+
+35
+00:02:17,340 --> 00:02:22,260
+So let's just go and put this in the header over here.
+
+36
+00:02:22,260 --> 00:02:24,500
+Like this is the purpose of this particular class.
+
+37
+00:02:24,500 --> 00:02:26,060
+So I'm going to do that over here.
+
+38
+00:02:26,380 --> 00:02:28,300
+And let's start building it up.
+
+39
+00:02:28,300 --> 00:02:35,740
+So the first thing which I'm going to do over here is I'm going to specify the cache path where this
+
+40
+00:02:35,740 --> 00:02:38,060
+particular cache is going to be saved.
+
+41
+00:02:38,060 --> 00:02:43,620
+So this cache is going to be saved uh, in the bin folder as I told you.
+
+42
+00:02:43,820 --> 00:02:53,220
+So I'm going to create a public read only string of the cache path.
+
+43
+00:02:53,340 --> 00:03:01,610
+And I'm also going to, uh, use a collection of the healed locator because the healed locator can have
+
+44
+00:03:01,850 --> 00:03:02,930
+any number of locators.
+
+45
+00:03:02,930 --> 00:03:07,730
+So I'm going to say heal locator, which is going to be the cache that we're going to have.
+
+46
+00:03:07,730 --> 00:03:10,970
+And I'm going to create a constructor over here.
+
+47
+00:03:10,970 --> 00:03:14,770
+And I'm going to first initialize the cache file path and the file path.
+
+48
+00:03:14,890 --> 00:03:20,450
+Uh, as you know I'm going to just use the same thing like while we were loading the app setting file,
+
+49
+00:03:20,650 --> 00:03:22,890
+the same thing I'm doing over here as well.
+
+50
+00:03:23,050 --> 00:03:31,610
+Like app domain, dot current domain, dot base directory, uh, and the file name I'm going to name
+
+51
+00:03:31,610 --> 00:03:35,090
+it as healed locator dot JSON.
+
+52
+00:03:35,330 --> 00:03:39,250
+So this is the first skeleton of the code that we are going to be doing.
+
+53
+00:03:39,530 --> 00:03:44,210
+And next what we'll do is let's go to the LM client class over here.
+
+54
+00:03:44,450 --> 00:03:49,410
+And we are going to store the locator in the cache.
+
+55
+00:03:49,730 --> 00:03:51,530
+And then we will see how we can load it.
+
+56
+00:03:51,530 --> 00:03:55,330
+That is what we are going to be doing next which we'll be doing in our next lecture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 3. Saving Locator in Cache from Alternative Strategies
+
+
+1
+00:00:00,120 --> 00:00:00,880
+All right.
+
+2
+00:00:00,920 --> 00:00:07,440
+Now we're going to see how we can store the working locator in the cache, which is nothing but in the
+
+3
+00:00:07,440 --> 00:00:09,040
+locator cache over here.
+
+4
+00:00:09,040 --> 00:00:11,640
+So we need to do the implementations over here.
+
+5
+00:00:11,640 --> 00:00:14,120
+So let's see how we can do that in this particular lecture.
+
+6
+00:00:14,160 --> 00:00:19,000
+At the moment we don't have any of the implementation, but we are going to see how we can do that.
+
+7
+00:00:19,320 --> 00:00:23,080
+So where exactly are we going to store working locator.
+
+8
+00:00:23,200 --> 00:00:28,880
+Well you know that while we do the alternative locator, while it thinks that the locator really works,
+
+9
+00:00:28,880 --> 00:00:34,680
+it is going to go and perform the operation and is also going to store the working locators in the cache
+
+10
+00:00:34,680 --> 00:00:35,240
+over here.
+
+11
+00:00:35,240 --> 00:00:39,200
+So this path, this is the place where we need to do the implementation.
+
+12
+00:00:39,200 --> 00:00:44,800
+So I need to somehow create a method which is going to store the locators for me over there.
+
+13
+00:00:44,960 --> 00:00:47,800
+And the locators, you're going to see that how it's going to be stored.
+
+14
+00:00:47,800 --> 00:00:54,560
+It's going to be holding the locator, working locator type, working locator value and the healed at.
+
+15
+00:00:54,560 --> 00:00:59,920
+So these are the things that we need to pass in as a parameter somehow to make this particular code
+
+16
+00:00:59,920 --> 00:01:00,560
+to work.
+
+17
+00:01:00,560 --> 00:01:05,040
+So in order to do that, I'm going to go to the self-healing locator over here.
+
+18
+00:01:05,040 --> 00:01:09,160
+And this is the place which I'm talking about, the try alternative strategies.
+
+19
+00:01:09,520 --> 00:01:15,000
+This method is the one which is going to actually perform this operation over here.
+
+20
+00:01:15,040 --> 00:01:15,280
+Right.
+
+21
+00:01:15,280 --> 00:01:18,480
+Like once it finds the locator it's going to do that operation.
+
+22
+00:01:18,480 --> 00:01:22,720
+So I'm going to go and update this particular place over here.
+
+23
+00:01:22,720 --> 00:01:31,120
+So here I need to create a method, uh, probably to store the successful locator in the cache.
+
+24
+00:01:31,320 --> 00:01:35,040
+So what I'm going to do is I'm going to create a method over here.
+
+25
+00:01:35,280 --> 00:01:36,800
+Let me just do it here.
+
+26
+00:01:37,240 --> 00:01:38,160
+It's not a problem.
+
+27
+00:01:39,640 --> 00:01:50,000
+So I'm going to say public void save successful locator to cache something like that.
+
+28
+00:01:50,520 --> 00:01:55,400
+And over here I need to pass the um pass three things.
+
+29
+00:01:55,400 --> 00:01:57,240
+One is the original locator.
+
+30
+00:01:57,440 --> 00:02:02,440
+Uh, because as you know that you need to pass the locator and the working locator type and the working
+
+31
+00:02:02,440 --> 00:02:03,480
+locator value.
+
+32
+00:02:03,720 --> 00:02:08,960
+So I'm going to say the locator is going to be the original locator.
+
+33
+00:02:09,160 --> 00:02:12,400
+Um, the strategy or maybe the locator strategy.
+
+34
+00:02:12,400 --> 00:02:18,520
+So which is going to be the locator strategy which could be a new locator strategy which it has found.
+
+35
+00:02:18,520 --> 00:02:21,760
+So we need to pass both the original locator and the locator strategy.
+
+36
+00:02:21,760 --> 00:02:29,400
+Because that is what I'm going to be passing in uh, to uh or from the alternative locator is there.
+
+37
+00:02:29,400 --> 00:02:36,080
+So if we just go to the alternative locators that we have got, which is this one, and over here I'm
+
+38
+00:02:36,120 --> 00:02:41,280
+going to just call that, but I need to pass the, uh, the original locator and the strategy.
+
+39
+00:02:41,280 --> 00:02:44,040
+But you may think like Karthik, where is the locator here?
+
+40
+00:02:44,040 --> 00:02:45,960
+Because we don't have the locator.
+
+41
+00:02:46,200 --> 00:02:50,200
+The original locator could be the current strategy that we have.
+
+42
+00:02:50,240 --> 00:02:54,680
+Because if we go to the current strategy, this is the primary locator that we have.
+
+43
+00:02:54,720 --> 00:02:55,280
+Right.
+
+44
+00:02:55,320 --> 00:02:58,840
+So this could be the thing that we can pass in as well.
+
+45
+00:02:58,840 --> 00:03:03,800
+So I can pass the current strategy in here, like current strategy.
+
+46
+00:03:04,320 --> 00:03:09,080
+Uh, and then, uh, locate our strategy, which is going to be this particular strategy.
+
+47
+00:03:09,120 --> 00:03:09,480
+Right.
+
+48
+00:03:09,520 --> 00:03:14,280
+So if I pass this one over here, this is what is going to be stored.
+
+49
+00:03:14,280 --> 00:03:16,160
+So we definitely need the current strategy.
+
+50
+00:03:16,160 --> 00:03:19,360
+And then the, uh, the, the strategy over here.
+
+51
+00:03:19,360 --> 00:03:24,440
+But the naming could be bit different here if I'm going to say current strategy and the strategy.
+
+52
+00:03:24,440 --> 00:03:29,120
+So in order to avoid this while reading through, because while I was writing the code, I was feeling
+
+53
+00:03:29,120 --> 00:03:32,280
+like this is not that great as well.
+
+54
+00:03:32,280 --> 00:03:37,080
+So instead, what I'm going to do is I'm going to create a string over here.
+
+55
+00:03:37,120 --> 00:03:38,920
+So I'll tell you what I really mean about that.
+
+56
+00:03:38,920 --> 00:03:39,880
+Just bear with me.
+
+57
+00:03:39,880 --> 00:03:47,640
+So I'm going to say public read only string of uh, original locator string.
+
+58
+00:03:47,680 --> 00:03:53,400
+So which is going to hold the locator for us, which I'm going to pass it over here.
+
+59
+00:03:53,800 --> 00:03:57,360
+And then I'm going to say primary locator dot two string.
+
+60
+00:03:57,400 --> 00:04:03,400
+You remember if I just do that two string over here, um, this particular string is going to have the
+
+61
+00:04:03,440 --> 00:04:08,440
+buy dot, find element, colon name or login, something like that.
+
+62
+00:04:08,440 --> 00:04:10,000
+That is what this is going to hold right.
+
+63
+00:04:10,000 --> 00:04:11,840
+So I can use this one.
+
+64
+00:04:11,840 --> 00:04:15,560
+So if I'm going to do that then I don't even need this original locator buy now.
+
+65
+00:04:15,600 --> 00:04:16,840
+So I'm just going to get rid of that.
+
+66
+00:04:16,840 --> 00:04:19,040
+I just need the locator strategy.
+
+67
+00:04:19,200 --> 00:04:25,440
+I know it's confusing now because I'm writing the code, but the moment I write it down, I'll show
+
+68
+00:04:25,440 --> 00:04:26,720
+you how it's going to look like.
+
+69
+00:04:27,040 --> 00:04:32,320
+And now in this particular method, what I'm going to do is I'm going to do the implementation for storing
+
+70
+00:04:32,360 --> 00:04:34,600
+or saving the the locators.
+
+71
+00:04:34,640 --> 00:04:35,120
+Right.
+
+72
+00:04:35,160 --> 00:04:41,680
+So the idea in here is I wanted to save the records like original locator, which is going to be a string
+
+73
+00:04:41,720 --> 00:04:42,520
+as you can see.
+
+74
+00:04:42,520 --> 00:04:48,160
+So I can get it by the original locator that I have created over here.
+
+75
+00:04:48,400 --> 00:04:50,560
+So that is going to work.
+
+76
+00:04:50,920 --> 00:04:52,840
+So original locator.
+
+77
+00:04:54,800 --> 00:04:55,200
+Cool.
+
+78
+00:04:55,200 --> 00:04:58,160
+So I can use this particular uh object there.
+
+79
+00:04:58,160 --> 00:05:01,320
+And then working locator types and working locator value.
+
+80
+00:05:01,320 --> 00:05:07,240
+So these two I need which I can actually do from the code that we have written earlier as well?
+
+81
+00:05:07,280 --> 00:05:12,320
+If you just scroll down a bit, you see where this particular code which gets you the locator type and
+
+82
+00:05:12,320 --> 00:05:13,360
+the locator value.
+
+83
+00:05:13,800 --> 00:05:18,520
+We can use this code, uh, over here to make that happen.
+
+84
+00:05:18,560 --> 00:05:20,440
+See this is the locator strategy that I have.
+
+85
+00:05:20,440 --> 00:05:27,920
+I'm just going to go and pass that, uh, locator strategy dot two string here, which is this one which
+
+86
+00:05:27,920 --> 00:05:29,840
+is going to give you the strategy string.
+
+87
+00:05:29,960 --> 00:05:33,480
+And then from here I can get the locator type and the locator value.
+
+88
+00:05:34,200 --> 00:05:35,040
+That's easy.
+
+89
+00:05:35,360 --> 00:05:37,400
+So I have got everything right now.
+
+90
+00:05:37,520 --> 00:05:42,920
+And I need to go and pass to a method which is going to go and create this operation.
+
+91
+00:05:42,920 --> 00:05:52,720
+So essentially my idea is to save all of these into that JSON value in the healed locator, uh, class
+
+92
+00:05:52,720 --> 00:05:53,480
+over here.
+
+93
+00:05:53,720 --> 00:05:56,360
+So how do I actually, uh, do that?
+
+94
+00:05:56,400 --> 00:05:57,360
+Well guess what?
+
+95
+00:05:57,400 --> 00:06:06,410
+I'm going to create a method in the locator class over here, which is essentially going to save the
+
+96
+00:06:06,410 --> 00:06:07,370
+healed locator.
+
+97
+00:06:07,490 --> 00:06:09,890
+So the method is going to be looking like this.
+
+98
+00:06:09,890 --> 00:06:14,090
+So save healed locator.
+
+99
+00:06:14,650 --> 00:06:19,170
+And this guy is going to take string original locator.
+
+100
+00:06:19,330 --> 00:06:24,170
+And then string working locator type.
+
+101
+00:06:24,170 --> 00:06:28,170
+And then string working locator value.
+
+102
+00:06:28,170 --> 00:06:32,130
+So these are things that this method is going to take as an input.
+
+103
+00:06:32,130 --> 00:06:37,730
+And then it is going to go and store in the uh in the cache.
+
+104
+00:06:37,730 --> 00:06:39,250
+So I'm going to say var existing.
+
+105
+00:06:39,250 --> 00:06:43,570
+So I'm going to go and check if there is any locator already in place.
+
+106
+00:06:43,570 --> 00:06:44,050
+Right.
+
+107
+00:06:44,450 --> 00:06:52,490
+So I'm going to go and check in the cache first uh by doing a first or default over here that if there
+
+108
+00:06:52,490 --> 00:07:02,370
+is any uh, locator with the original locator because you know that the oops forgot the L.
+
+109
+00:07:02,650 --> 00:07:03,810
+How did I missed it.
+
+110
+00:07:04,210 --> 00:07:11,650
+L if it is equal to the original locator that I'm passing in, which is this one.
+
+111
+00:07:11,650 --> 00:07:13,090
+So if it is there.
+
+112
+00:07:13,450 --> 00:07:15,410
+So I can go and check that over here.
+
+113
+00:07:15,410 --> 00:07:23,330
+So if the existing value is not equal to null which means the locator does exist there, right.
+
+114
+00:07:23,370 --> 00:07:25,970
+So I can just go and update if I wanted to.
+
+115
+00:07:26,010 --> 00:07:34,930
+But if the locator doesn't exist at all, in that case we are going to add a new element to the cache.
+
+116
+00:07:34,930 --> 00:07:36,890
+So this is what we are going to be doing over here.
+
+117
+00:07:36,890 --> 00:07:39,130
+So this is the place where we're going to write this code.
+
+118
+00:07:39,130 --> 00:07:41,210
+So so this is what is going to happen.
+
+119
+00:07:41,210 --> 00:07:44,370
+So the saved healed locator we are going to do this.
+
+120
+00:07:44,410 --> 00:07:50,970
+We are going to first go and check the cache if there is any, uh any element in the locator in the
+
+121
+00:07:50,970 --> 00:07:53,410
+JSON file which is something like this.
+
+122
+00:07:53,690 --> 00:07:57,170
+If it is already there then it's going to go and update here.
+
+123
+00:07:57,170 --> 00:07:59,730
+So this is the place where we're going to do the updation.
+
+124
+00:07:59,890 --> 00:08:05,930
+If not we are going to do an addition over here which is going to be like adding a new element altogether.
+
+125
+00:08:05,970 --> 00:08:07,370
+That's what we are going to be doing.
+
+126
+00:08:07,770 --> 00:08:10,170
+So underscore cash dot add.
+
+127
+00:08:10,370 --> 00:08:16,370
+And then I'm going to add a new field locator something like this.
+
+128
+00:08:17,050 --> 00:08:21,810
+And over here I'm going to add the original locator is equal to the original locator.
+
+129
+00:08:22,290 --> 00:08:26,690
+And the working locator type is equal to the working locator type.
+
+130
+00:08:27,170 --> 00:08:32,410
+And the working locator value is equal to the working locator value.
+
+131
+00:08:32,410 --> 00:08:35,530
+So this is how I add things there.
+
+132
+00:08:35,850 --> 00:08:42,730
+And I can also add the date time which is going to be the date time dot now which means I'm going to
+
+133
+00:08:42,730 --> 00:08:44,330
+add the current date over here.
+
+134
+00:08:44,770 --> 00:08:45,490
+And guess what?
+
+135
+00:08:45,490 --> 00:08:47,810
+If I want to update anything there.
+
+136
+00:08:47,970 --> 00:08:51,930
+So all I have to do is I don't really need to update the original locator, but the rest of the things
+
+137
+00:08:51,930 --> 00:08:53,170
+I need to update as well.
+
+138
+00:08:53,170 --> 00:08:55,010
+So I'm going to go and paste that over here.
+
+139
+00:08:55,290 --> 00:08:58,250
+I'm just going to go and update things for me.
+
+140
+00:08:58,290 --> 00:09:05,290
+But this I need to do using the existing uh, dot Working locator.
+
+141
+00:09:05,490 --> 00:09:12,290
+Existing dart working locator type and then existing dart healed at right.
+
+142
+00:09:12,290 --> 00:09:16,330
+So this is what I really wanted to do over here to make this work.
+
+143
+00:09:17,330 --> 00:09:19,490
+So this is going to be semicolon there.
+
+144
+00:09:19,530 --> 00:09:21,170
+Just copy paste it this way.
+
+145
+00:09:21,610 --> 00:09:22,130
+Cool.
+
+146
+00:09:22,570 --> 00:09:23,610
+So hope you got the idea.
+
+147
+00:09:23,650 --> 00:09:27,690
+Like how I'm actually going to do this updation as well as the adhesion.
+
+148
+00:09:27,690 --> 00:09:35,210
+And once everything is done then we need to, uh, save this data into a file over here, which I will
+
+149
+00:09:35,210 --> 00:09:37,370
+do it pretty soon.
+
+150
+00:09:37,450 --> 00:09:42,810
+Save to a file, because at the moment we're just storing it in the in the class, but not into any
+
+151
+00:09:42,810 --> 00:09:44,130
+JSON file yet.
+
+152
+00:09:44,370 --> 00:09:48,970
+We still need to do that part, but I'm just going to hold that thought right now.
+
+153
+00:09:49,250 --> 00:09:54,810
+And this method is what is going to be used in here as well.
+
+154
+00:09:54,810 --> 00:10:00,490
+While we are going to be saving the successful locator, because at the moment, the data for this particular
+
+155
+00:10:00,690 --> 00:10:04,370
+locator class is going to be coming from here.
+
+156
+00:10:05,210 --> 00:10:10,490
+I know it's a lot of head around here and there that because I'm moving to this self-healing class and
+
+157
+00:10:10,490 --> 00:10:13,050
+then I'm going to the locator cache class.
+
+158
+00:10:13,290 --> 00:10:18,210
+I would have just wrote the method first, and then I would have just called the method over here.
+
+159
+00:10:18,210 --> 00:10:19,570
+But it doesn't make any sense.
+
+160
+00:10:19,570 --> 00:10:20,450
+That's the reason why.
+
+161
+00:10:20,730 --> 00:10:28,290
+First, I started off with here and how we are going to store into the into the cache, which is this
+
+162
+00:10:28,570 --> 00:10:34,650
+this particular method, which is the reason why I want to first write here and then show this particular
+
+163
+00:10:34,650 --> 00:10:38,490
+part so that it knows, you know, the relationship, why we are doing it here.
+
+164
+00:10:38,730 --> 00:10:39,330
+All right.
+
+165
+00:10:39,330 --> 00:10:44,970
+So the next operation we need to do is to call this save heal locator class method in this particular
+
+166
+00:10:44,970 --> 00:10:45,370
+method.
+
+167
+00:10:45,370 --> 00:10:47,570
+And then I will show you how we can use it.
+
+168
+00:10:47,570 --> 00:10:55,290
+And we also need to create another method which is going to save the cache to a file, which is another
+
+169
+00:10:55,290 --> 00:10:56,410
+thing that we need to do.
+
+170
+00:10:56,450 --> 00:10:58,170
+I will do that as well.
+
+171
+00:10:58,330 --> 00:11:03,010
+And then we can call it over here so that you will know that how the datas are going to be saved in
+
+172
+00:11:03,050 --> 00:11:03,730
+the file.
+
+173
+00:11:03,930 --> 00:11:05,890
+We're doing that in our next lecture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 4. Building Logic to Save Locators in JSON Cache file
+
+
+1
+00:00:00,200 --> 00:00:01,160
+All right.
+
+2
+00:00:01,160 --> 00:00:07,680
+So now we're going to see how we can save this particular healed locators in the file.
+
+3
+00:00:07,880 --> 00:00:12,760
+You know that we have this cache file path in this particular path over here.
+
+4
+00:00:12,760 --> 00:00:17,120
+So we are going to store like a healed locator our JSON file something like that.
+
+5
+00:00:17,120 --> 00:00:19,040
+This is how we are going to be doing.
+
+6
+00:00:19,040 --> 00:00:22,840
+So I will show you how we are going to be saving over there.
+
+7
+00:00:23,120 --> 00:00:31,480
+So in order to do that, we are going to go and create a method over here, and I'm going to name that
+
+8
+00:00:31,480 --> 00:00:37,040
+as um, we can just make this as private because it's just going to be within this particular class
+
+9
+00:00:37,040 --> 00:00:37,480
+alone.
+
+10
+00:00:37,720 --> 00:00:42,160
+So I'm going to say save cache to file something like that.
+
+11
+00:00:42,200 --> 00:00:48,720
+Uh, and then over here I'm gonna create a try catch block, because every time when you do any file
+
+12
+00:00:48,760 --> 00:00:54,880
+system operation, make sure that you do it on the, um, try catch block.
+
+13
+00:00:54,880 --> 00:00:56,880
+If not, it's not going to work for you.
+
+14
+00:00:56,880 --> 00:01:01,760
+As expected, you can also write a console dot write line.
+
+15
+00:01:01,960 --> 00:01:10,570
+Um, that file saving failed and you can save an exception.
+
+16
+00:01:10,570 --> 00:01:10,970
+Right.
+
+17
+00:01:10,970 --> 00:01:13,410
+So this is the first thing that you have to do over there.
+
+18
+00:01:13,610 --> 00:01:18,610
+And now I'm going to save that JSON value that I'm going to be passing in.
+
+19
+00:01:18,730 --> 00:01:21,130
+So how are we going to store it here.
+
+20
+00:01:21,170 --> 00:01:26,570
+And because we are going to add in the cache that we have, which is this particular cache that we have
+
+21
+00:01:26,570 --> 00:01:27,290
+over here.
+
+22
+00:01:27,610 --> 00:01:31,410
+So I'm going to save directly from the cache file.
+
+23
+00:01:31,450 --> 00:01:31,970
+Right.
+
+24
+00:01:32,010 --> 00:01:34,330
+So I'm going to say var JSON.
+
+25
+00:01:34,970 --> 00:01:41,170
+Uh I'm going to do a JSON serializer which is from the system dot txt.
+
+26
+00:01:41,570 --> 00:01:44,410
+And then I'm going to say serialize.
+
+27
+00:01:44,570 --> 00:01:48,250
+And I'm going to serialize this cache that we have got.
+
+28
+00:01:48,250 --> 00:01:55,090
+So this is going to serialize things for me I'm going to make this because this is all in the capital
+
+29
+00:01:55,090 --> 00:01:55,970
+letter over here.
+
+30
+00:01:55,970 --> 00:02:05,130
+Like the original string and all of this I can also make a new JSON serializer option, uh, which can,
+
+31
+00:02:05,530 --> 00:02:08,970
+uh, make the right intended to.
+
+32
+00:02:09,100 --> 00:02:12,860
+true so that it looks very readable while we do it actually.
+
+33
+00:02:12,860 --> 00:02:14,660
+So that is what I'm doing over here.
+
+34
+00:02:14,660 --> 00:02:17,900
+So this is the JSON that I have got after I serialized.
+
+35
+00:02:17,940 --> 00:02:24,060
+Now, this particular cache that we are trying to add over here from the class is going to be now serialized
+
+36
+00:02:24,060 --> 00:02:25,060
+into a JSON.
+
+37
+00:02:25,460 --> 00:02:35,140
+All I have to do right now is to write all the text into the file path, which is nothing but the cache
+
+38
+00:02:35,140 --> 00:02:36,420
+file path that I have got.
+
+39
+00:02:36,820 --> 00:02:40,500
+And this is the content that I wanted to write.
+
+40
+00:02:40,860 --> 00:02:45,580
+That's all this is going to write things for me over there because I've added this this.
+
+41
+00:02:45,580 --> 00:02:46,540
+Console.WriteLine.
+
+42
+00:02:46,580 --> 00:02:58,580
+I can also add it here saying uh, saved the cache to the file path, something like that I don't know
+
+43
+00:02:59,140 --> 00:03:00,580
+we can say this over here.
+
+44
+00:03:01,460 --> 00:03:04,780
+So this is going to be saving the cache to the file.
+
+45
+00:03:04,780 --> 00:03:12,620
+So this is what I wanted to do over here, which is going to really save the cache to the file either
+
+46
+00:03:12,660 --> 00:03:16,820
+after the ablation or during the adhesion process.
+
+47
+00:03:17,100 --> 00:03:18,620
+That's what is going to happen over here.
+
+48
+00:03:18,620 --> 00:03:20,300
+So this is going to happen all the time.
+
+49
+00:03:20,300 --> 00:03:25,180
+Every time you're going to do the ablation, uh, to the same location locator.
+
+50
+00:03:25,420 --> 00:03:32,980
+Now I'm going to call this save heal locator, uh, in the uh, place over here.
+
+51
+00:03:32,980 --> 00:03:40,740
+And the way I can actually do it is by creating a class, uh, which is nothing but the cash class.
+
+52
+00:03:40,900 --> 00:03:44,220
+So let's go in the constructor over here.
+
+53
+00:03:44,940 --> 00:03:47,100
+Uh, I'm also going to do a cash.
+
+54
+00:03:47,100 --> 00:03:47,660
+Something like that.
+
+55
+00:03:47,660 --> 00:03:53,900
+So private read only locator, uh, cash, something like that.
+
+56
+00:03:53,900 --> 00:03:57,540
+And then I'm going to just say cash, which is pretty cool.
+
+57
+00:03:57,540 --> 00:03:59,780
+And now I need to initialize this particular class as well.
+
+58
+00:03:59,780 --> 00:04:05,700
+So I'm going to say cash is equal to new of locator cash.
+
+59
+00:04:06,660 --> 00:04:07,260
+Awesome.
+
+60
+00:04:07,660 --> 00:04:15,140
+And let's go and uh, call this cash class, uh, over here.
+
+61
+00:04:15,660 --> 00:04:17,750
+And I'm going to call the save safe healed.
+
+62
+00:04:18,870 --> 00:04:19,350
+Right.
+
+63
+00:04:19,390 --> 00:04:22,510
+So this is going to store the original locator.
+
+64
+00:04:22,550 --> 00:04:26,150
+You remember the original locator was this original string that I have got.
+
+65
+00:04:26,670 --> 00:04:29,470
+And the locator type is going to be the locator type.
+
+66
+00:04:29,630 --> 00:04:32,230
+And the locator value is going to be locator value that I have got.
+
+67
+00:04:32,230 --> 00:04:37,510
+So all of these are going to be injected along with the original locator string.
+
+68
+00:04:37,630 --> 00:04:45,470
+So now once we pass all of these over here the saved file should have all of these that you are seeing
+
+69
+00:04:45,470 --> 00:04:46,070
+over here.
+
+70
+00:04:46,070 --> 00:04:51,670
+This is the reason why we are building the Save Successful locator to cache itself.
+
+71
+00:04:51,830 --> 00:04:57,910
+So the moment this guy is going to be called, you are going to see a file being created.
+
+72
+00:04:57,910 --> 00:05:00,550
+Let's try to run this code and see if this really works or not.
+
+73
+00:05:00,870 --> 00:05:03,750
+So I'm going to run this particular code over here.
+
+74
+00:05:03,750 --> 00:05:09,070
+So in order to run that let me put a breakpoint to the new code that we have written so that we don't
+
+75
+00:05:09,070 --> 00:05:11,590
+know whether this code is going to work or not.
+
+76
+00:05:11,590 --> 00:05:17,550
+So I'm going to put a breakpoint here, uh, and I'm going to go this place and let's try to run this
+
+77
+00:05:17,550 --> 00:05:19,190
+code and see what is going to happen.
+
+78
+00:05:21,030 --> 00:05:21,470
+All right.
+
+79
+00:05:21,520 --> 00:05:22,400
+Login worked.
+
+80
+00:05:22,800 --> 00:05:25,000
+And we're gonna see how this is going to work.
+
+81
+00:05:25,000 --> 00:05:25,440
+All right.
+
+82
+00:05:25,440 --> 00:05:27,280
+So we are getting this particular location.
+
+83
+00:05:27,640 --> 00:05:28,920
+Uh, so working locator.
+
+84
+00:05:28,920 --> 00:05:30,960
+You see that the username is going to be coming.
+
+85
+00:05:30,960 --> 00:05:34,200
+So this is the working locator type and the original locator.
+
+86
+00:05:34,240 --> 00:05:34,720
+Look at that.
+
+87
+00:05:34,720 --> 00:05:42,760
+The locator is by usernames but the work the working locator is ID uh with username which means it's
+
+88
+00:05:42,760 --> 00:05:43,280
+correct.
+
+89
+00:05:43,640 --> 00:05:45,960
+Uh and the cache is null.
+
+90
+00:05:46,120 --> 00:05:51,640
+Oh I think this is null because we still have to initialize the cache because we, we have not really
+
+91
+00:05:51,640 --> 00:05:53,440
+initialized the cache yet.
+
+92
+00:05:53,760 --> 00:05:56,280
+So let me go and first initialize the cache here.
+
+93
+00:05:56,320 --> 00:06:04,560
+So cache is equal to new uh locator over here we are going to do that initialization from a different
+
+94
+00:06:04,560 --> 00:06:04,880
+way.
+
+95
+00:06:04,880 --> 00:06:07,800
+But for now let's just uh ignore it.
+
+96
+00:06:08,080 --> 00:06:10,320
+And I'm going to initialize the cache over there.
+
+97
+00:06:10,320 --> 00:06:11,640
+So let's see how that works.
+
+98
+00:06:12,200 --> 00:06:14,440
+Um okay.
+
+99
+00:06:14,680 --> 00:06:16,000
+We're getting to the username.
+
+100
+00:06:16,840 --> 00:06:17,320
+Cool.
+
+101
+00:06:17,680 --> 00:06:18,600
+How about the cache now.
+
+102
+00:06:18,640 --> 00:06:20,440
+Yeah that's perfect.
+
+103
+00:06:20,440 --> 00:06:22,040
+So there is no issue on that.
+
+104
+00:06:22,440 --> 00:06:24,480
+And it's going to check if there is any existing value.
+
+105
+00:06:24,480 --> 00:06:30,560
+So you see that the existing value is null there, which means it's going to go and add this time to
+
+106
+00:06:31,120 --> 00:06:33,680
+the like a like a new value.
+
+107
+00:06:34,200 --> 00:06:34,800
+Pretty cool.
+
+108
+00:06:34,800 --> 00:06:39,840
+And now it's going to go and save to the file that we have got, which is this one that we just created.
+
+109
+00:06:40,360 --> 00:06:42,760
+And it's going to save pretty well.
+
+110
+00:06:43,000 --> 00:06:46,240
+And then I'm going to just let the execution to happen.
+
+111
+00:06:46,520 --> 00:06:48,280
+So it's going to add one more look here as well.
+
+112
+00:06:48,280 --> 00:06:55,120
+Because the password field is also uh like something which we need to uh save it as well.
+
+113
+00:06:55,160 --> 00:06:59,080
+So it's going to be saving that password as well because that is also wrong.
+
+114
+00:06:59,400 --> 00:07:03,440
+Uh, we gave and I think the submit button is also wrong.
+
+115
+00:07:03,600 --> 00:07:05,200
+So it is going to save that as well.
+
+116
+00:07:05,200 --> 00:07:07,840
+So it's going to save three locators if I'm not wrong.
+
+117
+00:07:08,160 --> 00:07:10,600
+And the rest of thing is going to be completed successfully.
+
+118
+00:07:10,640 --> 00:07:11,440
+See it's done.
+
+119
+00:07:11,720 --> 00:07:21,920
+And now if you go to your selenium self-healing test and if you try to, uh, go to the, uh, finder
+
+120
+00:07:21,960 --> 00:07:27,360
+of this particular project, and if you go to the bin folder debug and net nine, you see that there
+
+121
+00:07:27,360 --> 00:07:33,690
+is something called as healed locator or Jason, if I'm going to just double click that, you will see
+
+122
+00:07:33,690 --> 00:07:37,130
+that we are going to have a locator over here.
+
+123
+00:07:37,170 --> 00:07:37,650
+Look at that.
+
+124
+00:07:37,650 --> 00:07:42,130
+The CSS that we gave as submits like XSD like that.
+
+125
+00:07:42,130 --> 00:07:46,650
+But it is going to be using that by ID of login.
+
+126
+00:07:46,850 --> 00:07:47,730
+Uh over there.
+
+127
+00:07:47,730 --> 00:07:49,330
+And then it is trying to do it.
+
+128
+00:07:49,330 --> 00:07:50,650
+But there is one more issue.
+
+129
+00:07:50,690 --> 00:07:53,530
+Like the rest of the three, like two controls are missing.
+
+130
+00:07:53,530 --> 00:07:59,010
+The username and password are also wrong, but it is overriding that we are going to fix that issue.
+
+131
+00:07:59,010 --> 00:08:04,290
+But at least now you can see that it is already starting to do this operation for us.
+
+132
+00:08:04,290 --> 00:08:10,770
+So it is storing the healed locator for us from the bin file, and then it is holding it over there,
+
+133
+00:08:10,770 --> 00:08:13,290
+which means it's working already, which is amazing.
+
+134
+00:08:13,290 --> 00:08:17,250
+So at least we saw first success of locator being saved.
+
+135
+00:08:17,250 --> 00:08:23,210
+But we still have to say see how it is not really saving all the locators that we were trying to save.
+
+136
+00:08:23,210 --> 00:08:30,490
+So every time it is trying to do like a new, uh, writing but not like a appending operation, we'll
+
+137
+00:08:30,490 --> 00:08:32,850
+see how we can fix that particular problem.
+
+138
+00:08:32,850 --> 00:08:35,250
+But at least now we know that this is working already.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 5. Load Healed Locator from JSON Cache
+
+
+1
+00:00:00,120 --> 00:00:00,960
+All right.
+
+2
+00:00:01,000 --> 00:00:07,640
+In our last lecture, we saw that we only have one control, which is like the original control being
+
+3
+00:00:07,640 --> 00:00:08,040
+saved.
+
+4
+00:00:08,440 --> 00:00:13,400
+Instead of having all the three controls which are failing because we know that in our page object model
+
+5
+00:00:13,400 --> 00:00:21,760
+code that we have for the login page, all these three elements are failing are not correct, but only
+
+6
+00:00:21,760 --> 00:00:22,960
+the last one was saved.
+
+7
+00:00:23,160 --> 00:00:30,080
+If you remember, in our last lecture while we were trying to initialize the cache over here, we just
+
+8
+00:00:30,080 --> 00:00:33,640
+tried initialize using the new list of healed locator.
+
+9
+00:00:33,920 --> 00:00:35,880
+This is the reason why this actually failing.
+
+10
+00:00:35,880 --> 00:00:41,760
+So if you put a breakpoint over here, you will notice that this guy is going to be called every single
+
+11
+00:00:41,760 --> 00:00:42,000
+time.
+
+12
+00:00:42,000 --> 00:00:46,320
+So every single time, if it is going to be called then it's going to be like a new cache.
+
+13
+00:00:46,720 --> 00:00:50,800
+And then it's going to be creating a new element all the time.
+
+14
+00:00:51,600 --> 00:00:52,280
+You know what I mean?
+
+15
+00:00:52,280 --> 00:00:54,360
+So this is not going to work.
+
+16
+00:00:54,360 --> 00:01:01,320
+So we need to somehow, um, load this cache from a file before we modify that, because this is going
+
+17
+00:01:01,360 --> 00:01:04,100
+to create a new file all the time regardless.
+
+18
+00:01:04,500 --> 00:01:06,740
+So how do we actually fix this?
+
+19
+00:01:06,740 --> 00:01:13,340
+Particular problem is we can create a method called as load from file, because at the moment we have
+
+20
+00:01:13,340 --> 00:01:15,460
+only saved the cache to the file.
+
+21
+00:01:15,580 --> 00:01:20,420
+We also need to load from the file as well, which we have not did it.
+
+22
+00:01:20,420 --> 00:01:27,940
+So I'm going to say load from the file, which is nothing but the healed locator that we have got.
+
+23
+00:01:28,340 --> 00:01:36,540
+Uh, and I'm going to say load from file something like this.
+
+24
+00:01:36,860 --> 00:01:41,060
+And of course I need to write a try catch block all the time for that.
+
+25
+00:01:41,060 --> 00:01:50,460
+And over here I'm going to say if the file exists, which is going to be in this particular path that
+
+26
+00:01:50,460 --> 00:01:57,900
+we have, if you have a file in that particular path, then read that file, you know how to read that.
+
+27
+00:01:57,940 --> 00:01:59,620
+Of course we have did this many times.
+
+28
+00:01:59,620 --> 00:02:09,080
+We just do, uh, read all, uh, text from the cache file path that we have got, and then we deserialize
+
+29
+00:02:09,080 --> 00:02:09,760
+that as well.
+
+30
+00:02:09,760 --> 00:02:16,440
+So we're going to say cache is equal to JSON serializer dot deserialize.
+
+31
+00:02:16,720 --> 00:02:20,760
+And we deserialize it to of course the healed locator.
+
+32
+00:02:20,800 --> 00:02:21,360
+Right.
+
+33
+00:02:21,680 --> 00:02:25,880
+We do that over here just the JSON that we have got.
+
+34
+00:02:26,960 --> 00:02:30,120
+And then we return the cache.
+
+35
+00:02:30,560 --> 00:02:34,920
+Uh, if not just create a new healed locator.
+
+36
+00:02:34,920 --> 00:02:37,200
+Because what if that locator doesn't exist?
+
+37
+00:02:37,200 --> 00:02:38,160
+Something like that.
+
+38
+00:02:38,160 --> 00:02:40,280
+So that is what we are going to be doing over here.
+
+39
+00:02:40,280 --> 00:02:45,400
+So this is this is the thing, uh, that we have to do over here.
+
+40
+00:02:45,440 --> 00:02:50,360
+Uh, sorry, I think the deserialization is wrong because I need to deserialize using a list of, uh,
+
+41
+00:02:50,400 --> 00:02:52,600
+healed locator, something like this.
+
+42
+00:02:52,640 --> 00:02:53,080
+Yeah.
+
+43
+00:02:53,760 --> 00:02:57,520
+Uh, and if this doesn't work, then I'm going to write a console line.
+
+44
+00:02:57,560 --> 00:02:57,880
+Right.
+
+45
+00:02:57,880 --> 00:03:02,920
+Line over here that failed to load the file or something like that.
+
+46
+00:03:03,770 --> 00:03:04,610
+Failed.
+
+47
+00:03:04,610 --> 00:03:05,530
+Loading.
+
+48
+00:03:06,410 --> 00:03:08,250
+File loading failed, something like that.
+
+49
+00:03:08,250 --> 00:03:10,810
+And then this is going to be X for exception.
+
+50
+00:03:10,810 --> 00:03:11,290
+Cool.
+
+51
+00:03:11,890 --> 00:03:12,850
+That's what we're going to do.
+
+52
+00:03:13,090 --> 00:03:22,330
+So this load cache from the file should be the, the actual uh method that we should be calling over
+
+53
+00:03:22,330 --> 00:03:24,410
+here something like this.
+
+54
+00:03:24,410 --> 00:03:29,570
+So this way it won't always go and create a new file for us.
+
+55
+00:03:29,610 --> 00:03:34,450
+Rather, it is going to go and check if the file already exists, and then it's going to read from that
+
+56
+00:03:34,450 --> 00:03:35,330
+particular file.
+
+57
+00:03:35,330 --> 00:03:37,010
+So this is how it is going to work.
+
+58
+00:03:37,250 --> 00:03:40,330
+And now if you try to run this particular test.
+
+59
+00:03:40,330 --> 00:03:46,730
+So now you will see that we are going to have three locators saved in that particular JSON file.
+
+60
+00:03:46,770 --> 00:03:50,250
+Because earlier we did not had uh but now look at that.
+
+61
+00:03:50,250 --> 00:03:55,930
+We have got three uh locators over here which is working amazing.
+
+62
+00:03:55,970 --> 00:04:01,410
+See the original locator, the working locator type and the locator value and the healed at.
+
+63
+00:04:01,410 --> 00:04:05,330
+So we have got all of them over here, which is quite amazing.
+
+64
+00:04:05,710 --> 00:04:08,870
+So this is what exactly that we wanted to achieve.
+
+65
+00:04:08,910 --> 00:04:11,270
+Like how we have shown in this particular diagram.
+
+66
+00:04:11,270 --> 00:04:18,990
+So we are already persisting this particular locator in the cache, which is great success already.
+
+67
+00:04:18,990 --> 00:04:26,870
+So we have made it through until here where we can store the data into the locator cache.
+
+68
+00:04:26,870 --> 00:04:30,990
+So we are we have written a few of the method to do it.
+
+69
+00:04:30,990 --> 00:04:38,870
+The last operation that I need to do right now is once we have saved over here, we also need to load
+
+70
+00:04:38,870 --> 00:04:43,110
+it so that we can use it for our testing operation.
+
+71
+00:04:43,110 --> 00:04:51,350
+So all we have done right now is just to save, which is this operation, this part, we have completed
+
+72
+00:04:51,350 --> 00:04:56,910
+it, but now we need to complete this part, which is going to go and check if there is an element in
+
+73
+00:04:56,910 --> 00:05:03,590
+the cache, and then use this locator to perform the operation that we have over here.
+
+74
+00:05:03,590 --> 00:05:07,590
+So this is the one that we need to be still doing in our next lecture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 6. Read Locator from Cache and Create By Type dynamically for Selenium
+
+
+1
+00:00:00,160 --> 00:00:01,080
+All right.
+
+2
+00:00:01,080 --> 00:00:05,960
+So now that we have saved the locators in the JSON file, something like this.
+
+3
+00:00:06,280 --> 00:00:14,080
+Now it's time for us to read these values from the JSON file for our caching operation.
+
+4
+00:00:14,080 --> 00:00:16,240
+So we are going to see how we can do that.
+
+5
+00:00:16,240 --> 00:00:19,920
+But there is a problem with this particular approach, right.
+
+6
+00:00:19,920 --> 00:00:26,600
+Because you see that we can at least get the locator using this key, which is this value.
+
+7
+00:00:26,640 --> 00:00:27,600
+We can get that.
+
+8
+00:00:27,880 --> 00:00:36,600
+But the value that we're getting is actually in a in a string like this, like by.id and then the locator
+
+9
+00:00:36,600 --> 00:00:37,120
+value.
+
+10
+00:00:37,400 --> 00:00:40,400
+So we need to match if we're going to get an ID.
+
+11
+00:00:41,200 --> 00:00:48,280
+And then we are going to pass that particular value so that we can formulate a by locator type.
+
+12
+00:00:48,720 --> 00:00:50,680
+If you got what I really mean about that.
+
+13
+00:00:50,880 --> 00:00:58,040
+Uh, if you see, we did the exact similar operation while we were doing the, uh, self-healing locator
+
+14
+00:00:58,080 --> 00:01:00,430
+somewhere here, if you remember.
+
+15
+00:01:01,030 --> 00:01:02,910
+See locator type and locator value.
+
+16
+00:01:02,910 --> 00:01:10,910
+While we try to pass this string of locator type and locator value, we used to create an actual element
+
+17
+00:01:11,070 --> 00:01:13,150
+which we can return from here.
+
+18
+00:01:13,190 --> 00:01:20,430
+See this locator value and locator type that if we pass it over there it creates a selenium locator
+
+19
+00:01:20,430 --> 00:01:21,030
+for us.
+
+20
+00:01:21,030 --> 00:01:22,190
+Something like this.
+
+21
+00:01:22,830 --> 00:01:31,310
+This code that you are seeing over here does the exact similar operation, but it was actually storing
+
+22
+00:01:31,310 --> 00:01:34,750
+the value in the locator strategies over here.
+
+23
+00:01:34,870 --> 00:01:36,830
+And that is what this particular method was doing.
+
+24
+00:01:36,870 --> 00:01:39,510
+And it was used for a different purpose before.
+
+25
+00:01:39,750 --> 00:01:43,710
+But now we need to somehow make or reuse this particular code as well.
+
+26
+00:01:43,710 --> 00:01:47,830
+So we need to modify this particular code a bit to accommodate those changes.
+
+27
+00:01:47,870 --> 00:01:49,870
+And I'll tell you what I really mean about that.
+
+28
+00:01:50,150 --> 00:01:59,130
+But for now, just in a high level, we are going to get the working locators, uh, from the cache,
+
+29
+00:01:59,530 --> 00:02:02,130
+which is persistent in a JSON file right now.
+
+30
+00:02:02,410 --> 00:02:07,250
+And then we are going to use them for our operation.
+
+31
+00:02:07,250 --> 00:02:09,290
+That is what is the entire idea right now.
+
+32
+00:02:09,290 --> 00:02:12,570
+So we are going to see this particular operation over here.
+
+33
+00:02:12,570 --> 00:02:14,970
+So let's see how we could able to achieve that.
+
+34
+00:02:14,970 --> 00:02:21,690
+So in order to do that I'm going to go back to our locator cache over here in order to get the working
+
+35
+00:02:21,690 --> 00:02:22,210
+locator.
+
+36
+00:02:22,290 --> 00:02:26,090
+You remember we used to save the locator or something like this.
+
+37
+00:02:26,130 --> 00:02:29,290
+And we also got if the locator already exists or not.
+
+38
+00:02:29,330 --> 00:02:40,090
+Using this particular line of code we can use the exact similar code to load uh or try get the the locator.
+
+39
+00:02:40,090 --> 00:02:43,370
+So I'm going to just write a method over here something like public.
+
+40
+00:02:43,610 --> 00:02:45,130
+And I'm going to say boolean.
+
+41
+00:02:45,130 --> 00:02:49,690
+And I'm going to say try get healed locator.
+
+42
+00:02:50,090 --> 00:02:50,930
+And guess what.
+
+43
+00:02:50,930 --> 00:03:02,040
+This time I'm going to use an out variable Better out heeled locator as heeled locator.
+
+44
+00:03:02,600 --> 00:03:07,680
+Something like this I'm going to paste the exact similar code that we were, uh, doing before.
+
+45
+00:03:07,920 --> 00:03:13,040
+So I can just say heel locator because I'm using a out type there.
+
+46
+00:03:13,320 --> 00:03:22,720
+So heel locator uh, and then I'm going to return the locator is not equal to something like that.
+
+47
+00:03:22,720 --> 00:03:29,680
+This code will does that operation for me right now this try get heel locator is what I'm going to be
+
+48
+00:03:29,680 --> 00:03:33,520
+using within my self healing locator.
+
+49
+00:03:33,520 --> 00:03:36,400
+Over here I'll tell you how we can actually use it.
+
+50
+00:03:36,440 --> 00:03:42,200
+So as I told you the first time, it is going to go and get the current strategy and it is not going
+
+51
+00:03:42,240 --> 00:03:45,240
+to go to the alternative strategy, rather it is going to read.
+
+52
+00:03:45,480 --> 00:03:57,270
+So there is going to be a step 1.5 in here, which is going to try get the locator From the cache.
+
+53
+00:03:58,270 --> 00:03:59,470
+That's the entire idea.
+
+54
+00:04:05,470 --> 00:04:12,910
+And we can do it by creating one more final method to end this entire discussion.
+
+55
+00:04:12,910 --> 00:04:19,670
+Probably not final method, but we have to do one more as well because yeah, the code is bit, uh,
+
+56
+00:04:21,190 --> 00:04:26,630
+bigger this time, but we have to do that in order to make sure that we could able to achieve it.
+
+57
+00:04:26,790 --> 00:04:38,550
+So I'm going to create a web element over here and I'm going to say try bind with cached locator something
+
+58
+00:04:38,550 --> 00:04:39,390
+like this.
+
+59
+00:04:39,870 --> 00:04:46,150
+And over here I'm going to uh, check if our healed locator does exist or not.
+
+60
+00:04:46,470 --> 00:04:50,910
+So this I can actually do using the cache dot try get healed locator.
+
+61
+00:04:50,990 --> 00:04:54,070
+Remember this particular method that we just wrote over there?
+
+62
+00:04:54,370 --> 00:04:55,890
+That's exactly what I'm going to do.
+
+63
+00:04:55,890 --> 00:05:02,090
+So I'm going to say try get healed locator and I'm going to pass the original locator string.
+
+64
+00:05:02,130 --> 00:05:09,930
+See I'm going to get this is the key that I'm going to pass in over there so that I can get the the
+
+65
+00:05:09,970 --> 00:05:11,370
+heel locator as well.
+
+66
+00:05:11,370 --> 00:05:16,770
+So I'm going to say var healed locator something like this.
+
+67
+00:05:17,250 --> 00:05:25,770
+And I'm also going to check if the healed locator is not equal to null.
+
+68
+00:05:26,330 --> 00:05:27,570
+So I'm going to check that over here.
+
+69
+00:05:27,570 --> 00:05:31,090
+So this is how I can get the healed locator over there.
+
+70
+00:05:31,090 --> 00:05:34,010
+So now see that I can just go and get the healed locator.
+
+71
+00:05:34,090 --> 00:05:36,770
+And I can get the working locator type.
+
+72
+00:05:36,770 --> 00:05:39,210
+And I can get the working locator value.
+
+73
+00:05:39,490 --> 00:05:44,130
+So this is how I can actually get these two elements over here.
+
+74
+00:05:44,130 --> 00:05:48,410
+But as I told you this locator type is basically a string.
+
+75
+00:05:48,410 --> 00:05:51,530
+And the locator value is also a string.
+
+76
+00:05:51,690 --> 00:06:04,800
+So I can get the var working locator type, which is going to be working locator type, and then var
+
+77
+00:06:04,840 --> 00:06:12,760
+working locator value, which is going to be he locator dot working locator value.
+
+78
+00:06:13,280 --> 00:06:13,600
+Right.
+
+79
+00:06:13,600 --> 00:06:19,240
+So we are going to have these two over here something like this.
+
+80
+00:06:19,520 --> 00:06:25,720
+Now because this type is basically going to be uh the identification type.
+
+81
+00:06:25,720 --> 00:06:28,560
+And the value is going to be the locator value itself.
+
+82
+00:06:28,840 --> 00:06:36,440
+If I want to use these two to formulate a by type, which I can perform any action, I can use this
+
+83
+00:06:36,440 --> 00:06:37,240
+particular method.
+
+84
+00:06:37,240 --> 00:06:39,880
+Remember the one that we were using before.
+
+85
+00:06:40,000 --> 00:06:45,880
+But here actually we are using this for storing the locator strategy for our earlier discussions that
+
+86
+00:06:45,880 --> 00:06:46,680
+we were doing.
+
+87
+00:06:47,080 --> 00:06:53,470
+Instead, we can actually create another method which is going to do the similar operation.
+
+88
+00:06:53,470 --> 00:07:01,270
+Just something like this, as you can see over here, uh, which is going to create by from the type
+
+89
+00:07:01,270 --> 00:07:02,150
+and value.
+
+90
+00:07:02,150 --> 00:07:08,350
+So essentially we are going to pass the type which is of string over here, and the value to this particular
+
+91
+00:07:08,350 --> 00:07:08,950
+method.
+
+92
+00:07:09,510 --> 00:07:13,230
+And it is going to create a byte type for us over here.
+
+93
+00:07:13,390 --> 00:07:16,430
+This code is also doing exactly the similar thing.
+
+94
+00:07:16,470 --> 00:07:20,630
+See the moment you pass the locator type and the locator value, uh, it is going to return you the
+
+95
+00:07:20,670 --> 00:07:24,910
+byte type which you are actually storing it in the locator strategies earlier.
+
+96
+00:07:25,350 --> 00:07:30,950
+That's what we were doing earlier while we were trying to use this particular locator strategies.
+
+97
+00:07:31,110 --> 00:07:38,470
+Uh, within the uh, alternative strategies, before you remember, that's what we were doing now,
+
+98
+00:07:38,470 --> 00:07:39,590
+the exact similar thing.
+
+99
+00:07:39,590 --> 00:07:41,470
+I wanted to do it as well.
+
+100
+00:07:41,470 --> 00:07:45,390
+So what we can do is I'm just going to create a method, something like this, which is going to do
+
+101
+00:07:45,390 --> 00:07:46,830
+the exact similar thing as well.
+
+102
+00:07:46,830 --> 00:07:52,890
+So I'm just using a switch expression here, uh, to make this happen, and it's working that way.
+
+103
+00:07:53,210 --> 00:07:59,050
+And now I can use this same method if I wanted to, to replace this test as well, so that so many lines
+
+104
+00:07:59,050 --> 00:08:08,850
+of code that we have over here can be easily replaced from here, all the way up here to this line of
+
+105
+00:08:08,850 --> 00:08:09,170
+code.
+
+106
+00:08:09,210 --> 00:08:12,050
+See, this is going to be the exact similar thing as well.
+
+107
+00:08:12,530 --> 00:08:15,170
+I don't even need a try catch block for that.
+
+108
+00:08:15,210 --> 00:08:19,650
+I'm just going to leave that guy as it is completely something like this.
+
+109
+00:08:19,650 --> 00:08:21,490
+So this code is still going to be legal.
+
+110
+00:08:21,490 --> 00:08:24,530
+So the same code, but just I have modified a bit over here.
+
+111
+00:08:24,530 --> 00:08:27,250
+So this is how uh we can make that changes.
+
+112
+00:08:27,250 --> 00:08:30,530
+So it's a bit of a refactor as well that we have done which is amazing.
+
+113
+00:08:30,970 --> 00:08:39,210
+And now I can use this create by type over here and create a type, uh, this particular place.
+
+114
+00:08:39,210 --> 00:08:46,530
+So I'm going to say var by is equal to I'm going to say create by type from this particular value.
+
+115
+00:08:46,530 --> 00:08:49,880
+And I need to pass the allocator type and locate our value.
+
+116
+00:08:49,920 --> 00:08:55,120
+I can either pass it like this, or I can directly pass the locator type.
+
+117
+00:08:55,120 --> 00:09:01,600
+And then the healed locator dot locator value here.
+
+118
+00:09:01,600 --> 00:09:03,440
+So that's going to do the exact same thing.
+
+119
+00:09:03,440 --> 00:09:05,640
+So I don't even need these two lines of code.
+
+120
+00:09:05,680 --> 00:09:07,280
+It's a bit more refactored this time.
+
+121
+00:09:07,720 --> 00:09:08,080
+Um.
+
+122
+00:09:09,120 --> 00:09:16,080
+And now once I have this particular by I can go and check if the by is not equal to null, and if it
+
+123
+00:09:16,080 --> 00:09:24,000
+is not equal to null for us over there, then you try to perform the operation for me.
+
+124
+00:09:24,400 --> 00:09:25,680
+Uh, and guess what?
+
+125
+00:09:25,680 --> 00:09:30,280
+This particular part, at least I can, uh, wrap inside a try catch block.
+
+126
+00:09:30,280 --> 00:09:33,000
+Because it's better to do that.
+
+127
+00:09:33,600 --> 00:09:34,440
+Try catch.
+
+128
+00:09:35,120 --> 00:09:38,000
+Uh, no such element exception.
+
+129
+00:09:39,000 --> 00:09:39,880
+Something like this.
+
+130
+00:09:40,160 --> 00:09:54,710
+And I can just write a console dot write line saying Cast healed locator no longer works.
+
+131
+00:09:54,710 --> 00:09:55,550
+Something like that.
+
+132
+00:09:56,990 --> 00:09:57,390
+Uh.
+
+133
+00:09:57,830 --> 00:09:58,630
+Save this.
+
+134
+00:09:58,870 --> 00:10:07,390
+And over here, I'm just going to say var element is equal to, uh, you remember the driver that we
+
+135
+00:10:07,390 --> 00:10:08,070
+have before.
+
+136
+00:10:08,110 --> 00:10:11,230
+So I'm just going to use the same driver find element.
+
+137
+00:10:11,230 --> 00:10:18,990
+And I can pass this particular by that I have found from the cast file, which is amazing.
+
+138
+00:10:18,990 --> 00:10:23,750
+So this is what I'm trying to do over here, because now I'm using the healed locator from the from
+
+139
+00:10:23,750 --> 00:10:24,670
+the cache file.
+
+140
+00:10:24,870 --> 00:10:26,790
+And then I'm going to operate using that.
+
+141
+00:10:26,790 --> 00:10:31,990
+Let me also update the current strategy uh, as the by over here.
+
+142
+00:10:32,550 --> 00:10:36,430
+Uh, and I'm going to return this particular element.
+
+143
+00:10:38,950 --> 00:10:46,030
+Now if this element is being returned for me from the strike, uh, find with cache locator, I can
+
+144
+00:10:46,170 --> 00:10:56,290
+then go and update this particular 1.5 over here saying var element is equal to this guy.
+
+145
+00:10:57,050 --> 00:11:00,610
+It's not the var but element like this guy right?
+
+146
+00:11:00,770 --> 00:11:06,450
+And I'm going to say if the element is not equal to null then return the element.
+
+147
+00:11:06,450 --> 00:11:08,210
+So the same operation over here.
+
+148
+00:11:08,210 --> 00:11:13,490
+So this is the additional step that we have got which is this additional step that we're talking about
+
+149
+00:11:14,330 --> 00:11:14,850
+right.
+
+150
+00:11:15,490 --> 00:11:16,050
+There you go.
+
+151
+00:11:16,050 --> 00:11:20,530
+So we have got one more step over here which is going to do it from the cache.
+
+152
+00:11:21,490 --> 00:11:23,330
+I know this is a lot of code guys.
+
+153
+00:11:23,330 --> 00:11:29,250
+I know this is a bit complex than how it was before, but I'm telling you, the moment you're going
+
+154
+00:11:29,250 --> 00:11:34,530
+to run this code and see how the results are going to be is absolutely mind blowing.
+
+155
+00:11:34,570 --> 00:11:35,970
+But at least now we have did that.
+
+156
+00:11:35,970 --> 00:11:38,130
+But I'm not sure how this code is going to work.
+
+157
+00:11:38,130 --> 00:11:42,810
+I'm going to put a breakpoint and show you the entire workflow, and then we'll try to run this code
+
+158
+00:11:42,810 --> 00:11:45,930
+and see how it works, which we'll be doing in our next lecture.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 7. Running complete code with Caching and Persistence
+
+
+1
+00:00:00,280 --> 00:00:01,400
+All right.
+
+2
+00:00:01,440 --> 00:00:07,120
+Now it's the prime time to run this entire code and see how this is going to work.
+
+3
+00:00:07,400 --> 00:00:16,240
+So in order for us to execute this code, you can see that earlier we used to take like 12.755 seconds.
+
+4
+00:00:16,640 --> 00:00:19,520
+But now we're going to see how this is going to work.
+
+5
+00:00:19,640 --> 00:00:25,120
+So instead of me just doing the execution I'm just going to debug this code along with you.
+
+6
+00:00:25,120 --> 00:00:27,800
+And I will see how this entire execution is going to happen.
+
+7
+00:00:27,840 --> 00:00:33,640
+I know that there is a small glitch we have during the execution during the coding part, which I will
+
+8
+00:00:33,640 --> 00:00:37,760
+explain you what that really is, but I'm going to put a breakpoint here.
+
+9
+00:00:38,040 --> 00:00:44,240
+And also I'm going to put a breakpoint in this, uh, in this location and to see how this every code
+
+10
+00:00:44,240 --> 00:00:46,480
+is going to work and see how this is going to happen.
+
+11
+00:00:46,480 --> 00:00:47,000
+Right.
+
+12
+00:00:47,000 --> 00:00:49,800
+So I'm going to go and debug this particular code right now.
+
+13
+00:00:50,160 --> 00:00:55,360
+So for the very first time it is going to get to the code over here.
+
+14
+00:00:55,360 --> 00:01:01,120
+So it's going to load from the cache I think we had three locators which is correct.
+
+15
+00:01:01,120 --> 00:01:06,040
+You see that all the three locators are coming up for us over here, which is not wrong.
+
+16
+00:01:06,480 --> 00:01:11,000
+So I'm going to go over here and I'm going to let the execution to happen.
+
+17
+00:01:11,200 --> 00:01:13,320
+So it's going to load again just fine.
+
+18
+00:01:13,640 --> 00:01:13,920
+Okay.
+
+19
+00:01:13,920 --> 00:01:14,480
+There we go.
+
+20
+00:01:14,560 --> 00:01:21,640
+So now we're getting into the, uh, 1.5 over here I think, which means we are hitting to the wrong
+
+21
+00:01:21,640 --> 00:01:22,480
+locator at this time.
+
+22
+00:01:22,480 --> 00:01:25,480
+So it's looking the cache to see if there is any locator.
+
+23
+00:01:25,520 --> 00:01:27,800
+Let's see, what is the original locator that we're looking for?
+
+24
+00:01:27,840 --> 00:01:33,320
+It's for the user names that we have, which is cool because we know that there is a locator for that
+
+25
+00:01:33,320 --> 00:01:35,160
+as well, which is the user name.
+
+26
+00:01:35,440 --> 00:01:39,120
+So if you see the locator, uh, which is this one, look at that.
+
+27
+00:01:39,120 --> 00:01:43,840
+For the user names we have the by.id with the user name, which is correct.
+
+28
+00:01:43,840 --> 00:01:46,800
+That is the uh, this is the one that we're looking for.
+
+29
+00:01:47,000 --> 00:01:51,680
+And this is part this is the part that I'm talking about is wrong over here.
+
+30
+00:01:51,680 --> 00:01:55,800
+Because now it shows that the working locator type is by.id.
+
+31
+00:01:57,160 --> 00:02:04,080
+This is kind of going to be an issue for us because ideally this working type, the working locator
+
+32
+00:02:04,120 --> 00:02:08,290
+type should be an ID instead of the b.i.d.
+
+33
+00:02:08,330 --> 00:02:12,730
+I think that is the issue that I did not see it quite right.
+
+34
+00:02:12,850 --> 00:02:14,130
+Uh, while I was writing the code.
+
+35
+00:02:14,130 --> 00:02:19,490
+And this is going to create a problem with this method that we have, which is the create by, uh,
+
+36
+00:02:19,530 --> 00:02:20,290
+type over there.
+
+37
+00:02:20,290 --> 00:02:22,090
+I will show you what I really mean about that.
+
+38
+00:02:22,170 --> 00:02:26,450
+So if I'm going to go and execute this code, it's going to go and hit there.
+
+39
+00:02:26,490 --> 00:02:33,290
+See, the type is by.id which we are getting in, which is essentially going to create the by from the
+
+40
+00:02:33,290 --> 00:02:34,250
+type and the value.
+
+41
+00:02:34,250 --> 00:02:36,050
+So this is the type that we are passing in.
+
+42
+00:02:36,050 --> 00:02:42,250
+And the value look at the type is by.id and we don't have a by.id in the text here.
+
+43
+00:02:42,250 --> 00:02:45,330
+It's all ID name class name, something like that.
+
+44
+00:02:45,330 --> 00:02:49,410
+So this uh switch expression is not going to match.
+
+45
+00:02:49,410 --> 00:02:51,610
+And it's going to throw me a null there.
+
+46
+00:02:52,130 --> 00:02:54,330
+And see the by is always going to be null.
+
+47
+00:02:54,330 --> 00:02:58,170
+And this code is not going to execute, which is wrong.
+
+48
+00:02:58,650 --> 00:03:02,050
+And this we actually need to fix it.
+
+49
+00:03:02,250 --> 00:03:05,130
+And the way we can fix it is very, very straightforward.
+
+50
+00:03:05,450 --> 00:03:11,810
+Uh, instead of me creating, uh, the sale Successful locator.
+
+51
+00:03:11,970 --> 00:03:16,770
+The locator strategy that I was doing before, which is all correct.
+
+52
+00:03:16,810 --> 00:03:23,570
+The except the only thing which is wrong over here is the locator type, which I have passed the locator
+
+53
+00:03:23,570 --> 00:03:23,850
+type.
+
+54
+00:03:23,890 --> 00:03:30,490
+I can actually get from the same method over here, which is from the strategy name you remember, which
+
+55
+00:03:30,490 --> 00:03:33,730
+is basically a locator type you can pass in as well.
+
+56
+00:03:34,450 --> 00:03:36,970
+So I'm going to pass that over here.
+
+57
+00:03:37,250 --> 00:03:43,970
+And this method I'm going to say string of locator type something like this.
+
+58
+00:03:44,330 --> 00:03:46,490
+So that act as locator type for me.
+
+59
+00:03:46,930 --> 00:03:53,010
+And now I can get this type and I can get rid of this guy which I have, which is not required anymore.
+
+60
+00:03:53,530 --> 00:03:58,130
+Um, and now you see that this time it is going to store it correctly.
+
+61
+00:03:58,490 --> 00:04:07,450
+Uh, so what I'm going to do, I'm going to go to my earlier, uh, like the JSON file that I had to
+
+62
+00:04:07,490 --> 00:04:10,490
+save this fully because now I'm going to remove everything.
+
+63
+00:04:10,890 --> 00:04:17,380
+And now if I'm going to try debugging it this time, you will notice that the way it is going to store
+
+64
+00:04:17,380 --> 00:04:21,940
+the locator type and the locator value is going to be different this time.
+
+65
+00:04:21,940 --> 00:04:26,460
+So see, now it's going to load the cache which is going to be empty because we don't have anything
+
+66
+00:04:26,460 --> 00:04:29,020
+at the moment, which is understandable.
+
+67
+00:04:29,780 --> 00:04:32,900
+Uh, and I'm going to get there.
+
+68
+00:04:34,620 --> 00:04:37,940
+So it's not going to find anything which is correct.
+
+69
+00:04:38,540 --> 00:04:39,820
+Uh, and look at that.
+
+70
+00:04:39,820 --> 00:04:41,300
+Look at our ID this time.
+
+71
+00:04:41,420 --> 00:04:43,100
+Locator type is ID this time.
+
+72
+00:04:43,100 --> 00:04:43,980
+And look at our value.
+
+73
+00:04:43,980 --> 00:04:44,380
+Is this.
+
+74
+00:04:44,380 --> 00:04:47,500
+So it's going to go and match the ID for me.
+
+75
+00:04:47,540 --> 00:04:51,740
+See it's going to create the ID type which is correct.
+
+76
+00:04:52,380 --> 00:04:59,660
+Uh and now I'm going to get the value over here over there which is correct.
+
+77
+00:05:00,220 --> 00:05:01,940
+And the same thing is going to happen.
+
+78
+00:05:02,140 --> 00:05:07,060
+And the next time I think there is no next time here as well.
+
+79
+00:05:08,100 --> 00:05:09,900
+See, it's always going to be the case.
+
+80
+00:05:09,900 --> 00:05:12,500
+I'm going to let the entire execution to happen this time.
+
+81
+00:05:12,980 --> 00:05:20,340
+Let me fully just ignore all these things, let the execution to complete because it's doing for the
+
+82
+00:05:20,340 --> 00:05:20,940
+very first time.
+
+83
+00:05:20,940 --> 00:05:23,740
+So there is nothing in the cache, so it's just going to work.
+
+84
+00:05:23,940 --> 00:05:28,900
+But you see that the save successful locator in the cache, it is always going to have ID this time
+
+85
+00:05:29,260 --> 00:05:30,660
+instead of by.id.
+
+86
+00:05:31,060 --> 00:05:32,740
+That's the fix that I was talking about.
+
+87
+00:05:32,740 --> 00:05:34,860
+So we have made that fix right now.
+
+88
+00:05:34,860 --> 00:05:39,100
+So this code is just going to work and let the execution to complete.
+
+89
+00:05:39,140 --> 00:05:39,900
+Pretty cool.
+
+90
+00:05:40,220 --> 00:05:44,380
+It's taking like one minutes 32 seconds right now because I was debugging it.
+
+91
+00:05:44,620 --> 00:05:51,060
+But the next time if I'm going to execute it right now, it is just going to run from the cache.
+
+92
+00:05:51,340 --> 00:05:51,820
+Look at that.
+
+93
+00:05:51,860 --> 00:05:52,620
+How fast it is.
+
+94
+00:05:52,860 --> 00:05:53,700
+Six seconds.
+
+95
+00:05:53,940 --> 00:05:58,140
+This time it did not even called the large language model.
+
+96
+00:05:58,380 --> 00:06:02,140
+Rather it is doing it from the cache, uh, directly.
+
+97
+00:06:02,140 --> 00:06:07,020
+So it's not even going through the large language model call.
+
+98
+00:06:07,060 --> 00:06:08,380
+See, it is so fast.
+
+99
+00:06:08,700 --> 00:06:13,220
+This is happening because of the, uh, because of the way that it is calling it.
+
+100
+00:06:13,260 --> 00:06:17,020
+I'll put a break point one more time here to explain you how this works.
+
+101
+00:06:17,020 --> 00:06:24,870
+So if I'm going to go to the self-healing locator, uh, and if I'm going to go to this part, which
+
+102
+00:06:24,870 --> 00:06:29,750
+is going to invoke the locator for us over here.
+
+103
+00:06:29,790 --> 00:06:34,830
+Yeah, this one, which is the 1.5 step.
+
+104
+00:06:35,190 --> 00:06:41,590
+So if I'm going to debug it, you'll notice that it's going to go and hit this part for us over here.
+
+105
+00:06:43,070 --> 00:06:47,190
+See the working locator type is ID and this is a username.
+
+106
+00:06:47,190 --> 00:06:53,110
+So it's going to get from the from this particular cache directory.
+
+107
+00:06:53,630 --> 00:06:55,670
+And then it is performing the operation.
+
+108
+00:06:55,950 --> 00:06:58,510
+And it is not even going to run the rest of them.
+
+109
+00:06:58,510 --> 00:07:04,670
+So these things are not even going to be executed because now it is just executing it directly from
+
+110
+00:07:04,710 --> 00:07:07,190
+the from the cache.
+
+111
+00:07:07,510 --> 00:07:10,950
+And no need to hit the API call there.
+
+112
+00:07:11,550 --> 00:07:13,110
+That's the reason why it is so fast.
+
+113
+00:07:13,110 --> 00:07:16,750
+So if I'm going to remove this thing over here, I'm going to save it one more time.
+
+114
+00:07:17,710 --> 00:07:22,990
+Uh, and if I'm going to run this test over here, you'll notice that the time taken is going to be
+
+115
+00:07:22,990 --> 00:07:31,880
+around 13 seconds or maybe around 17 seconds depends upon the performance of the large language model.
+
+116
+00:07:32,800 --> 00:07:33,200
+There we go.
+
+117
+00:07:33,240 --> 00:07:33,440
+Yeah.
+
+118
+00:07:33,480 --> 00:07:34,360
+12 seconds.
+
+119
+00:07:34,760 --> 00:07:36,720
+And now I'm going to run the same code again.
+
+120
+00:07:37,160 --> 00:07:41,360
+This time it is saved in the cache over here in the persistent storage.
+
+121
+00:07:41,600 --> 00:07:42,880
+If I'm going to run this again.
+
+122
+00:07:44,440 --> 00:07:44,880
+Yeah.
+
+123
+00:07:45,120 --> 00:07:46,560
+See seven seconds.
+
+124
+00:07:46,560 --> 00:07:49,520
+So instead of 13 seconds it's taking seven seconds this time.
+
+125
+00:07:49,520 --> 00:07:52,040
+And there is no LM called being happened.
+
+126
+00:07:52,280 --> 00:07:58,040
+So you are going to get all the advantages, whichever is disadvantageous over here.
+
+127
+00:07:58,040 --> 00:08:05,480
+And now we have all the advantages of no LM calls, zero token usage, faster execution and more visibility.
+
+128
+00:08:05,520 --> 00:08:12,840
+Because now you have got the, the, the way that you can go and see what is changed in the locator.
+
+129
+00:08:12,840 --> 00:08:15,680
+And what is the working locator which has been used over here.
+
+130
+00:08:17,480 --> 00:08:25,000
+So I hope you got the idea of how we can use the persistent cached storage to get the locators, instead
+
+131
+00:08:25,000 --> 00:08:28,200
+of invoking the API call every single time.
+
+
+==================================================================================
+
+
+section 10. Building Visual Testing using Vision Models (Locally and OpenAI)
+
+
+
+video 1.introduction 
+
+
+1
+00:00:00,080 --> 00:00:02,000
+Welcome to the next section of our course.
+
+2
+00:00:02,040 --> 00:00:08,000
+And in this section we're going to talk about visual testing with visual models of large language models.
+
+3
+00:00:08,000 --> 00:00:14,480
+So this is one of the most important and more interesting yet simpler approach to do the visual testing
+
+4
+00:00:14,480 --> 00:00:16,000
+of your application.
+
+5
+00:00:16,000 --> 00:00:21,080
+So what exactly is visual testing and why do we need visual testing in first place?
+
+6
+00:00:21,080 --> 00:00:26,520
+Well, if you know that visual testing and functional testing are going to go hand in hand most of the
+
+7
+00:00:26,520 --> 00:00:32,280
+time, but there are some cases where the functional testing that you do using the test cases that we
+
+8
+00:00:32,280 --> 00:00:39,360
+have got less visibility for the large language model than compared to the visual testing itself.
+
+9
+00:00:39,360 --> 00:00:47,080
+So in functional tests, the large language model cannot check whether there is a color change happening
+
+10
+00:00:47,080 --> 00:00:54,160
+or whether there is a change in the button being placed from one location to another location, or whether
+
+11
+00:00:54,200 --> 00:00:58,200
+the button that you have got has got a different alignment or something like that.
+
+12
+00:00:58,200 --> 00:01:02,420
+So those things you cannot do the testing in functional testing of your application.
+
+13
+00:01:02,420 --> 00:01:06,020
+But if you do the visual testing, you can do all those checks.
+
+14
+00:01:06,020 --> 00:01:07,340
+This is quite amazing.
+
+15
+00:01:07,340 --> 00:01:12,380
+And if you have worked with the tools like Eggplant or Apple tools, these tools already have got these
+
+16
+00:01:12,380 --> 00:01:14,140
+functionalities baked in.
+
+17
+00:01:14,140 --> 00:01:19,420
+But now we're going to see how we can build our own apply tools with the power of large language model.
+
+18
+00:01:19,420 --> 00:01:25,780
+So this is another use case of how you can actually use the power of large language model to do your
+
+19
+00:01:25,780 --> 00:01:26,900
+application testing.
+
+20
+00:01:27,660 --> 00:01:34,580
+And the next one is the CSS breaks instantly, which you can easily catch with your visual testing.
+
+21
+00:01:34,580 --> 00:01:41,020
+So for instance, if there is a style sheet change happen, your entire functionality remains same.
+
+22
+00:01:41,020 --> 00:01:44,460
+But the only thing is your UI will be completely broken.
+
+23
+00:01:44,460 --> 00:01:49,860
+So for those kind of changes, you can use visual testing to check whether the style sheet has broken.
+
+24
+00:01:49,860 --> 00:01:55,460
+Similarly, cross-browser testing can also be done much easily because you can see the comparison,
+
+25
+00:01:55,460 --> 00:01:58,220
+and also user pixels can also be tested.
+
+26
+00:01:58,220 --> 00:02:03,850
+Even if there is a slight change in the pixel, you can identify them with the power of the large language
+
+27
+00:02:03,850 --> 00:02:05,490
+model using the visual testing.
+
+28
+00:02:05,490 --> 00:02:08,250
+That's what we are going to be doing in this particular section.
+
+29
+00:02:08,250 --> 00:02:13,490
+So how do we achieve this visual testing with the power of artificial intelligence?
+
+30
+00:02:13,650 --> 00:02:20,410
+Well, we are going to use the vision models of large language model to achieve those operations.
+
+31
+00:02:20,450 --> 00:02:25,890
+And if you really not heard about the vision models, if you go to my website and you can see that there
+
+32
+00:02:25,890 --> 00:02:31,370
+is an option called as vision, and if you choose this vision option, you can choose different vision
+
+33
+00:02:31,370 --> 00:02:31,970
+models.
+
+34
+00:02:31,970 --> 00:02:38,490
+And this Q three VL is a powerful vision language model created by Q and a model family.
+
+35
+00:02:38,530 --> 00:02:41,330
+It's very, very powerful to date and this is amazing.
+
+36
+00:02:41,370 --> 00:02:43,010
+Similarly you can use gamma three.
+
+37
+00:02:43,050 --> 00:02:49,650
+And if you're using the lava model, which I'm using for my local large language model machines, and
+
+38
+00:02:49,650 --> 00:02:54,730
+I will show you how amazing this one itself, because you see that how many times it's been pulled 10.9
+
+39
+00:02:54,730 --> 00:02:57,090
+million times, which is amazing.
+
+40
+00:02:57,090 --> 00:02:58,890
+So you can do this one as well.
+
+41
+00:02:58,890 --> 00:03:04,870
+So you can use these famous model to perform all of these operations if you really wanted to use them.
+
+42
+00:03:04,870 --> 00:03:07,350
+So that is what we are going to be doing as well.
+
+43
+00:03:07,350 --> 00:03:13,310
+With the power of vision models for doing the visual comparison of your applications.
+
+44
+00:03:13,310 --> 00:03:18,430
+Well, as I said, we are going to see how we can do the vision implementation within our test code.
+
+45
+00:03:18,470 --> 00:03:19,230
+Well guess what?
+
+46
+00:03:19,270 --> 00:03:23,990
+As you can see, this diagram we have now oversimplified the entire solution like how it was before
+
+47
+00:03:23,990 --> 00:03:25,070
+and now how it is.
+
+48
+00:03:25,070 --> 00:03:26,630
+It is very simpler.
+
+49
+00:03:26,950 --> 00:03:31,590
+The way it's working is that you are going to be running the test for the first time.
+
+50
+00:03:31,750 --> 00:03:36,070
+It's going to first check for a baseline screenshot within your application.
+
+51
+00:03:36,070 --> 00:03:42,310
+So basically, while we say vision testing over here, we are going to check if the application has
+
+52
+00:03:42,310 --> 00:03:45,950
+got the correct visual for the very first time.
+
+53
+00:03:45,950 --> 00:03:49,910
+For instance, if you're going to go to our application over here.
+
+54
+00:03:49,910 --> 00:03:53,950
+So the for the first time, it is going to take a screenshot of this particular application, which
+
+55
+00:03:53,950 --> 00:03:58,710
+is going to be the baseline of your application.
+
+56
+00:03:58,870 --> 00:04:05,250
+And let's say due to some reason the developer has went and changed something in this particular UI
+
+57
+00:04:05,450 --> 00:04:11,810
+and your UI has broken, then the baseline with the current code is going to go and match and check
+
+58
+00:04:11,810 --> 00:04:12,970
+if there is any change.
+
+59
+00:04:13,010 --> 00:04:16,890
+Of course there is a change because the UI has broken and then your test is going to fail.
+
+60
+00:04:16,890 --> 00:04:18,410
+That is how the visual testing works.
+
+61
+00:04:18,450 --> 00:04:20,930
+The same idea goes in here as well.
+
+62
+00:04:20,970 --> 00:04:24,170
+When you run the test, it is going to go and check the baseline screenshot.
+
+63
+00:04:24,450 --> 00:04:28,450
+And for the very first time there is not going to be any screenshot.
+
+64
+00:04:28,450 --> 00:04:33,450
+So it is going to take the screenshot of the baseline from the selenium.
+
+65
+00:04:33,450 --> 00:04:35,170
+And then it's going to run the test for you.
+
+66
+00:04:35,810 --> 00:04:40,370
+So the test is not going to fail for the very first time because there is no baseline screenshot for
+
+67
+00:04:40,370 --> 00:04:40,970
+that matter.
+
+68
+00:04:41,210 --> 00:04:45,930
+But the second time when you run the same test, it is going to go and check the baseline screenshot
+
+69
+00:04:45,970 --> 00:04:47,490
+which is sitting in the bin folder.
+
+70
+00:04:47,490 --> 00:04:54,010
+In our case it is going to see that oh yeah, there is a screenshot because it's taken in the previous
+
+71
+00:04:54,290 --> 00:04:54,930
+run.
+
+72
+00:04:54,930 --> 00:04:58,850
+So it is going to see that particular screenshot, uh that it has.
+
+73
+00:04:58,890 --> 00:05:04,240
+And then it is going to take one more screenshot of the application for the current state.
+
+74
+00:05:04,240 --> 00:05:08,680
+So this is the baseline screenshot that it has before in the in this folder.
+
+75
+00:05:08,680 --> 00:05:12,360
+And then it is going to do take another screenshot of the application.
+
+76
+00:05:12,720 --> 00:05:17,680
+Once there is a change in the UI probably then it's going to take that current state of the application
+
+77
+00:05:17,680 --> 00:05:18,440
+screenshot.
+
+78
+00:05:18,560 --> 00:05:25,240
+And then it is going to do the comparison of the baseline screenshot with the screenshot that it has
+
+79
+00:05:25,240 --> 00:05:26,400
+taken right now.
+
+80
+00:05:26,840 --> 00:05:29,360
+So this is how it really works.
+
+81
+00:05:29,360 --> 00:05:31,000
+It's going to take two screenshots.
+
+82
+00:05:31,000 --> 00:05:34,440
+And now it's going to do a screenshot to screenshot comparison.
+
+83
+00:05:34,760 --> 00:05:35,520
+Guess what.
+
+84
+00:05:35,600 --> 00:05:41,600
+In playwright there is already an inbuilt screenshot comparison available in place.
+
+85
+00:05:41,600 --> 00:05:51,520
+So if we go to the playwright.dev over there and if you search for screenshots, you see that there
+
+86
+00:05:51,520 --> 00:05:56,720
+is something called as visual comparison in uh, in playwright where you can see that you can generate
+
+87
+00:05:56,720 --> 00:06:02,880
+the screenshot over here and you can save it, and then you can run it again by running the screenshot
+
+88
+00:06:02,920 --> 00:06:07,700
+option, uh, which is going to go and check every single pixels over here.
+
+89
+00:06:07,700 --> 00:06:08,060
+Look at that.
+
+90
+00:06:08,060 --> 00:06:12,540
+There is a pixel diff, uh, match uh, for the playwright over here.
+
+91
+00:06:12,540 --> 00:06:17,220
+So these are all things which is there in the playwright, but unfortunately this is not available in
+
+92
+00:06:17,220 --> 00:06:18,060
+selenium.
+
+93
+00:06:18,060 --> 00:06:23,060
+And similarly, even in this particular screenshot matching that you are doing over here, let's say
+
+94
+00:06:23,060 --> 00:06:28,420
+you wanted to do a logical comparison instead of doing just the pixel match comparison.
+
+95
+00:06:28,420 --> 00:06:34,020
+You can't do with playwright as well, because the visual comparison over here only matches with every
+
+96
+00:06:34,020 --> 00:06:35,140
+single pixels.
+
+97
+00:06:35,140 --> 00:06:40,620
+But if you want to do something like a logical comparison, then you can't really do that because it's
+
+98
+00:06:40,620 --> 00:06:44,980
+always going to fail, even if there is a single pixel change happens.
+
+99
+00:06:44,980 --> 00:06:50,500
+But in this case, we can control those things because we have the power of large language model the
+
+100
+00:06:50,500 --> 00:06:52,540
+Overlord, which is going to do things for us.
+
+101
+00:06:52,540 --> 00:06:56,580
+So you know what, we can do that customizations as well within our prompt.
+
+102
+00:06:56,820 --> 00:06:58,700
+So that is how things are going to work.
+
+103
+00:06:58,700 --> 00:07:04,420
+And we are going to be implementing this this vision implementation in the selenium test, not on the
+
+104
+00:07:04,440 --> 00:07:08,360
+playwright test this time, but you can extend the same capability for playwright as well.
+
+105
+00:07:08,400 --> 00:07:09,160
+Doesn't matter.
+
+106
+00:07:09,280 --> 00:07:13,200
+So over here, this particular step is going to go and compare both of them.
+
+107
+00:07:13,200 --> 00:07:17,640
+And this comparison is going to be done by our large language model.
+
+108
+00:07:17,640 --> 00:07:22,280
+And if it sees there is any difference then it is going to say the test is fail.
+
+109
+00:07:22,280 --> 00:07:29,400
+But if there is no failure, if there is no change, if it feels that there is no change between the
+
+110
+00:07:29,400 --> 00:07:33,960
+baseline as well as the current screenshot, then it's going to say the test is passed and then it's
+
+111
+00:07:33,960 --> 00:07:35,200
+going to run the test for you.
+
+112
+00:07:35,240 --> 00:07:38,280
+That is how things are going to work in the vision implementation.
+
+113
+00:07:38,320 --> 00:07:41,120
+And that is what we are going to be implementing in this particular section.
+
+114
+00:07:41,320 --> 00:07:44,760
+The code change over here is also very, very straightforward.
+
+115
+00:07:44,920 --> 00:07:50,720
+The pattern remains exactly the same, like how we have been doing for past few sections of this course.
+
+116
+00:07:50,760 --> 00:07:56,200
+Like we are going to create a model because this is going to be the response which is going to be generated
+
+117
+00:07:56,200 --> 00:07:57,960
+from your large language model.
+
+118
+00:07:57,960 --> 00:08:06,110
+So we need to have a vision comparison result model which is going to say r equals similarity scores,
+
+119
+00:08:06,150 --> 00:08:10,270
+differences, analysis, issues identified, and raw response.
+
+120
+00:08:10,310 --> 00:08:17,350
+See, any of these cannot be possible even with playwright for you over here, because playwrights visual
+
+121
+00:08:17,350 --> 00:08:21,470
+comparison only does a pixel by pixel comparison.
+
+122
+00:08:21,470 --> 00:08:28,710
+It won't tell you that if there is any change, uh, in the, um, in the in the application logic and
+
+123
+00:08:28,710 --> 00:08:30,390
+what is the reason for the failure?
+
+124
+00:08:30,670 --> 00:08:33,670
+So those things are not going to be there in this visual comparison.
+
+125
+00:08:33,670 --> 00:08:36,910
+But in here we can say that there is a similarity score.
+
+126
+00:08:37,190 --> 00:08:41,710
+So it will tell you that if there is anything changing you can have a similarity score there.
+
+127
+00:08:41,750 --> 00:08:45,870
+You can also tell what difference has happened with your current application.
+
+128
+00:08:45,870 --> 00:08:50,670
+With a modified application, those things is not possible with the playwrights visual comparison.
+
+129
+00:08:50,910 --> 00:08:54,630
+And similarly it is going to even analyze, uh, and give you a brief analysis.
+
+130
+00:08:54,670 --> 00:08:59,750
+You see that this is the prompt that I have given over here for the analysis that I'm telling it to
+
+131
+00:08:59,750 --> 00:09:00,030
+do it.
+
+132
+00:09:00,030 --> 00:09:02,190
+So that is what is going to be coming over here.
+
+133
+00:09:02,190 --> 00:09:03,830
+And then the issues identified.
+
+134
+00:09:03,830 --> 00:09:08,770
+So if there is any issue is going to go and tell, uh, the issues very, very clearly over there.
+
+135
+00:09:08,930 --> 00:09:11,370
+And then it's going to give you the raw response as well.
+
+136
+00:09:11,370 --> 00:09:15,530
+So all of these is going to be stored in this particular collection.
+
+137
+00:09:15,530 --> 00:09:19,570
+Once we deserialize the response coming from the large language model.
+
+138
+00:09:19,730 --> 00:09:25,770
+Same like how we did even earlier while we were trying to work with the large language model in the
+
+139
+00:09:25,810 --> 00:09:31,450
+get locator from the large language model, this guy where we deserialize things, look at our suggestion,
+
+140
+00:09:31,490 --> 00:09:35,370
+the same thing we are going to do with the vision comparison result as well.
+
+141
+00:09:35,530 --> 00:09:40,370
+So the idea is same, but just that you see that the prompt has changed a bit where we're going to see
+
+142
+00:09:40,410 --> 00:09:44,650
+compared to screenshot and tell whether it's identical or different.
+
+143
+00:09:44,650 --> 00:09:47,610
+And this is the baseline and there is a current screenshot.
+
+144
+00:09:47,610 --> 00:09:50,330
+And then first carefully examine both the image.
+
+145
+00:09:50,610 --> 00:09:53,850
+Uh, be very conservative, only report differences.
+
+146
+00:09:54,010 --> 00:09:59,570
+Uh, if you have uh, if you can clearly see them, see, the reason how this particular thing is structured
+
+147
+00:09:59,570 --> 00:10:07,750
+is because I actually asked the cloud desktop to generate a better prompt because I gave a prompt,
+
+148
+00:10:07,750 --> 00:10:10,670
+and then the cloud desktop generated a beautiful prompt for me.
+
+149
+00:10:10,670 --> 00:10:11,190
+Like this.
+
+150
+00:10:11,190 --> 00:10:13,070
+This is how I just copy pasted from there.
+
+151
+00:10:13,070 --> 00:10:18,310
+And it looks pretty good because I gave the idea to the cloud desktop and it generated a pretty amazing
+
+152
+00:10:18,310 --> 00:10:19,510
+prompt for me over here.
+
+153
+00:10:19,510 --> 00:10:22,750
+That's the reason why I just copy pasted from them, and it looks quite good.
+
+154
+00:10:23,030 --> 00:10:25,710
+And it also tells you that there is a similarity score.
+
+155
+00:10:25,710 --> 00:10:33,590
+So I'm going to tell to set, uh, similarity score to 95 to 100 if the image looks identical or nearly
+
+156
+00:10:33,630 --> 00:10:38,270
+identical, that's where the similarity scores is going to come in.
+
+157
+00:10:38,590 --> 00:10:44,350
+And then I'm telling that only report difference if there is any actual difference and be honest and
+
+158
+00:10:44,350 --> 00:10:48,870
+conservative, provide only JSON response and no additional text responses.
+
+159
+00:10:49,550 --> 00:10:52,670
+Pretty much exactly the same idea like how we were doing earlier.
+
+160
+00:10:52,870 --> 00:10:54,590
+So again, same thing.
+
+161
+00:10:54,590 --> 00:11:00,470
+I'm going to tell prompt engineering and context engineering are quite important.
+
+162
+00:11:00,470 --> 00:11:02,470
+So in here the prompt engineering is this.
+
+163
+00:11:02,510 --> 00:11:06,940
+The prompt is nothing but the screenshot that I'm going to pass in to this guy.
+
+164
+00:11:07,300 --> 00:11:13,060
+And finally, I'm also going to make some changes in the call to the local vision models, because the
+
+165
+00:11:13,060 --> 00:11:17,020
+way I'm going to call the vision model is nothing, but I need to pass the images.
+
+166
+00:11:17,020 --> 00:11:19,620
+So that is going to be a bit of a parameter change in here.
+
+167
+00:11:19,660 --> 00:11:21,540
+Like image is equal to new, something like that.
+
+168
+00:11:21,820 --> 00:11:24,620
+Uh, and also I need to pass both the images.
+
+169
+00:11:24,620 --> 00:11:25,900
+I can pass it like an array.
+
+170
+00:11:26,180 --> 00:11:29,820
+And the rest of the code remains pretty much exactly the same, like how we did before.
+
+171
+00:11:30,180 --> 00:11:34,700
+So let's start implementing everything one by one and we'll see how things work.
+
+172
+00:11:34,740 --> 00:11:40,180
+So let's first start with the low hanging fruit, with the, uh, with the vision model creation with
+
+173
+00:11:40,180 --> 00:11:43,180
+our, um, LM client that we have got.
+
+174
+00:11:43,220 --> 00:11:45,420
+Because this is very, very straightforward code.
+
+175
+00:11:45,460 --> 00:11:47,300
+And I'm going to implement that over there.
+
+176
+00:11:47,420 --> 00:11:52,100
+I think that is going to be a bit of a code change in terms of how we are going to call the OpenAI model
+
+177
+00:11:52,100 --> 00:11:52,780
+as well.
+
+178
+00:11:52,780 --> 00:11:57,060
+That is going to be a bit different, but other than that, everything looks pretty much exactly the
+
+179
+00:11:57,060 --> 00:11:57,420
+same.
+
+180
+00:11:58,140 --> 00:12:03,620
+Catch you in our next lecture, but hope you got the idea of how we are going to be doing the vision
+
+181
+00:12:03,660 --> 00:12:07,940
+testing using the vision model of a large language model.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 2. Creating Vision LLMs Client to invoke Vision Large Language models
+
+
+1
+00:00:00,240 --> 00:00:01,040
+All right.
+
+2
+00:00:01,040 --> 00:00:06,040
+So now that we're going to start implementing the code for the visual testing.
+
+3
+00:00:06,040 --> 00:00:11,280
+So the way I'm going to do it is the first thing I'm going to attack is the client class over here.
+
+4
+00:00:11,280 --> 00:00:17,280
+Because as you know, all these days we have been passing the, uh, the message with the prompt over
+
+5
+00:00:17,280 --> 00:00:24,400
+here, but this time we are going to be passing, uh, not just the prompt, but we also need to pass
+
+6
+00:00:24,400 --> 00:00:26,560
+the images in the message.
+
+7
+00:00:26,560 --> 00:00:29,400
+That is how things are going to work there.
+
+8
+00:00:29,400 --> 00:00:32,560
+So we will see how we could able to achieve that over here.
+
+9
+00:00:32,560 --> 00:00:37,200
+So the way I'm going to do it is probably instead of disturbing the existing class over here, I'm going
+
+10
+00:00:37,200 --> 00:00:39,080
+to just create a new class.
+
+11
+00:00:39,200 --> 00:00:42,600
+It's going to keep things more cleaner as well.
+
+12
+00:00:43,600 --> 00:00:50,680
+Uh, and I'm going to say probably vision, uh, client, which looks pretty good, uh, over here on
+
+13
+00:00:50,680 --> 00:00:51,160
+paper.
+
+14
+00:00:51,400 --> 00:00:51,560
+What?
+
+15
+00:00:51,560 --> 00:00:52,480
+I read it as well.
+
+16
+00:00:52,480 --> 00:00:54,600
+So I'm just keep this over here.
+
+17
+00:00:54,600 --> 00:01:01,600
+So vision client, uh, and over here, this particular client is going to say call Elm or call local,
+
+18
+00:01:01,840 --> 00:01:03,320
+uh, vision.
+
+19
+00:01:04,040 --> 00:01:08,280
+Uh, LM, uh, async over here, which is looking pretty good.
+
+20
+00:01:08,560 --> 00:01:15,640
+And similarly I'm going to say call uh vision uh AI async something like that.
+
+21
+00:01:15,640 --> 00:01:20,480
+That's going to be the vision models, which I'm going to call, as I told you, in order to work with
+
+22
+00:01:20,480 --> 00:01:25,560
+the uh, with this particular large language model, you need to pass the images.
+
+23
+00:01:25,560 --> 00:01:38,240
+So I'm going to say, uh, image, uh, or images is equal to, uh, new of the uh, of the base image
+
+24
+00:01:38,240 --> 00:01:41,160
+one and the, and the actual image.
+
+25
+00:01:41,160 --> 00:01:44,720
+So we can, we can just say whatever image that we wanted to say over here.
+
+26
+00:01:45,000 --> 00:01:49,400
+So essentially, uh, I'm going to say here as prompt, which is fine.
+
+27
+00:01:49,400 --> 00:01:55,120
+And I'm going to say string of the uh, base 64 image one.
+
+28
+00:01:55,160 --> 00:01:58,800
+So basically we are not going to pass the screenshot directly.
+
+29
+00:01:58,800 --> 00:02:02,320
+Rather we're going to pass them as a base 64 image.
+
+30
+00:02:02,480 --> 00:02:05,480
+And that is how things are going to work over here.
+
+31
+00:02:05,480 --> 00:02:09,520
+Even the large language model accepts the base 64 images as well.
+
+32
+00:02:09,520 --> 00:02:14,130
+So it is easy for us to pass the base Base64 string there.
+
+33
+00:02:14,130 --> 00:02:20,370
+So that is what I'm passing in over here, which is pretty neat because, uh, we know that in selenium
+
+34
+00:02:20,370 --> 00:02:23,810
+we can take a screenshot and we can convert the image to base64.
+
+35
+00:02:23,970 --> 00:02:26,930
+So that's exactly what I'm doing over here as well.
+
+36
+00:02:26,930 --> 00:02:31,290
+So I'm going to say base64 image one and the base64 image two.
+
+37
+00:02:31,570 --> 00:02:32,130
+That's all.
+
+38
+00:02:32,650 --> 00:02:34,890
+This is all I have to do over here.
+
+39
+00:02:34,890 --> 00:02:38,050
+And the rest of things remains pretty much exactly the same.
+
+40
+00:02:38,250 --> 00:02:40,410
+And there is zero code change on that.
+
+41
+00:02:40,410 --> 00:02:46,490
+So I'm going to just leave everything as it is for the local vision async over there.
+
+42
+00:02:46,890 --> 00:02:50,610
+And this guy called Vision open AI async over here.
+
+43
+00:02:50,610 --> 00:02:53,610
+It also needs the same two prompt that I have passed in.
+
+44
+00:02:53,610 --> 00:02:59,410
+So I'm going to go uh, copy them and I'm going to paste that over here.
+
+45
+00:02:59,890 --> 00:03:03,610
+And I need to pass in the uh, messages over there.
+
+46
+00:03:03,610 --> 00:03:04,450
+But guess what?
+
+47
+00:03:04,490 --> 00:03:11,210
+In the message in the open AI, the way you do it is you need to pass the new of role as user and the
+
+48
+00:03:11,210 --> 00:03:13,970
+content as, uh, prompt.
+
+49
+00:03:15,530 --> 00:03:18,530
+But you also need to make some more changes.
+
+50
+00:03:18,530 --> 00:03:23,930
+I think I will just copy paste the code because that's a bit of a confusing part.
+
+51
+00:03:23,930 --> 00:03:28,930
+This time it's going to change a bit, like the structure needs to be changed, and this is the structure
+
+52
+00:03:28,930 --> 00:03:31,930
+that the OpenAI uh, needs to have.
+
+53
+00:03:31,970 --> 00:03:35,610
+See, I'm going to set the new as role as user.
+
+54
+00:03:36,050 --> 00:03:38,970
+And I'm going to pass the content as new object.
+
+55
+00:03:39,170 --> 00:03:43,290
+And I'm going to say new type as text, which is going to be the prompt.
+
+56
+00:03:43,290 --> 00:03:47,770
+And then I'm also going to create one more new type where I'm going to say image URL.
+
+57
+00:03:48,410 --> 00:03:49,450
+See this is new.
+
+58
+00:03:49,970 --> 00:03:55,450
+This is how you do that in the OpenAI world.
+
+59
+00:03:55,450 --> 00:04:00,930
+So it is not as straightforward as how you did for the local large language model in the OpenAI.
+
+60
+00:04:00,970 --> 00:04:05,930
+This is how the OpenAI team expects you to pass the images.
+
+61
+00:04:05,930 --> 00:04:12,010
+See, this is how I pass two images over here as a content of object array.
+
+62
+00:04:12,410 --> 00:04:13,410
+And then I'm passing in.
+
+63
+00:04:13,890 --> 00:04:14,250
+Right.
+
+64
+00:04:14,290 --> 00:04:16,170
+And the rest of the code remains exactly the same.
+
+65
+00:04:16,170 --> 00:04:18,930
+And there is no change on that either.
+
+66
+00:04:19,330 --> 00:04:21,330
+So everything just remains the same.
+
+67
+00:04:21,810 --> 00:04:22,250
+Right.
+
+68
+00:04:22,690 --> 00:04:27,290
+And next one is I'm going to go change the get completion async.
+
+69
+00:04:27,290 --> 00:04:30,730
+I'm just going to say get completion async method.
+
+70
+00:04:31,170 --> 00:04:40,810
+Uh, and I'm going to change the name as call uh vision OpenAI and call uh oh.
+
+71
+00:04:40,930 --> 00:04:50,610
+Why did I say like that call vision OpenAI maybe call OpenAI vision something like that.
+
+72
+00:04:50,610 --> 00:04:52,450
+Because I need to just keep things aligned.
+
+73
+00:04:53,050 --> 00:04:55,930
+Um, I'm just going to go change it.
+
+74
+00:04:56,050 --> 00:05:00,490
+Call OpenAI vision async or whatever.
+
+75
+00:05:01,490 --> 00:05:02,010
+Cool.
+
+76
+00:05:02,250 --> 00:05:04,650
+Uh, and yeah, that looks good.
+
+77
+00:05:04,650 --> 00:05:10,490
+And similarly call uh, local, uh, vision, uh, async.
+
+78
+00:05:10,530 --> 00:05:11,850
+Yeah, that looks good.
+
+79
+00:05:13,250 --> 00:05:13,730
+Awesome.
+
+80
+00:05:14,170 --> 00:05:16,290
+And not just the prompt we need to pass.
+
+81
+00:05:16,290 --> 00:05:24,050
+We also need to pass the, uh, these two things, as you remember, the string of the base64 image
+
+82
+00:05:24,050 --> 00:05:25,730
+one and the image two.
+
+83
+00:05:25,770 --> 00:05:35,100
+So I'm going to pass both of them as well over here and let's pass both of them as base64 image one
+
+84
+00:05:35,100 --> 00:05:36,900
+and the base64 image two.
+
+85
+00:05:37,620 --> 00:05:44,540
+Same goes for the open the local model as well, so the rest of things remains pretty much exactly the
+
+86
+00:05:44,540 --> 00:05:44,940
+same.
+
+87
+00:05:45,300 --> 00:05:46,620
+See, the code changes.
+
+88
+00:05:46,660 --> 00:05:49,180
+I know it's I'm just running this very, very fast.
+
+89
+00:05:49,220 --> 00:05:53,940
+The reason why I'm running this very fast is because we have seen this many times.
+
+90
+00:05:53,940 --> 00:05:59,460
+We have thoroughly went through the LM client class in our earlier section of the course, like how
+
+91
+00:05:59,460 --> 00:06:00,740
+we built this all.
+
+92
+00:06:01,100 --> 00:06:05,060
+That's the reason why vision LM client is so much easier to be honest.
+
+93
+00:06:05,100 --> 00:06:09,300
+We have already made this entire code change so faster this time.
+
+94
+00:06:09,580 --> 00:06:14,820
+The reason is because we have already went through this many times before, and we have also debugged
+
+95
+00:06:14,820 --> 00:06:15,660
+this many times.
+
+96
+00:06:16,100 --> 00:06:16,660
+So that's it guys.
+
+97
+00:06:16,660 --> 00:06:19,100
+This is how the vision LM client is going to look like.
+
+98
+00:06:19,300 --> 00:06:28,220
+The next thing is we need to create the the prompt as well as the vision comparison result model so
+
+99
+00:06:28,220 --> 00:06:32,900
+that we can start using them by calling the Get vision completion async.
+
+100
+00:06:33,260 --> 00:06:36,260
+We'll be doing that in our next lecture of this course.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 3. Building LLMs Prompt to compare Images for Visual testing
+
+
+1
+00:00:00,160 --> 00:00:01,120
+All right.
+
+2
+00:00:01,200 --> 00:00:07,880
+Now we're going to see how we can start implementing the prompt, which I was showing you in our last
+
+3
+00:00:07,880 --> 00:00:08,760
+lecture.
+
+4
+00:00:08,960 --> 00:00:18,040
+Um, of the course, which is going to look exclusively for the, uh, for the image comparison.
+
+5
+00:00:18,040 --> 00:00:23,760
+So for doing that, I'm going to, uh, first of all, create a model, because that is the place where
+
+6
+00:00:23,760 --> 00:00:27,800
+we're going to deserialize the response coming from the, uh, large language model.
+
+7
+00:00:27,800 --> 00:00:32,800
+You remember, like how we did the deserialization over here to get the locate our suggestions.
+
+8
+00:00:32,920 --> 00:00:38,960
+Similarly, I need to get the suggestions on how the response from the large language model is going
+
+9
+00:00:38,960 --> 00:00:42,760
+to come, whether there is going to be any match or whether there is any difference.
+
+10
+00:00:42,760 --> 00:00:46,160
+What is the reason for the difference and what is the suggestion or something like that.
+
+11
+00:00:46,160 --> 00:00:51,320
+So for doing that, I'm going to go and create a class in the model over here.
+
+12
+00:00:51,560 --> 00:00:57,320
+I'm going to call this as a vision uh comparison result, something like that.
+
+13
+00:00:57,640 --> 00:01:00,720
+And I'm going to paste the properties over here.
+
+14
+00:01:00,720 --> 00:01:05,580
+This is pretty much exactly the same thing that I was showing you in the screenshots earlier in the
+
+15
+00:01:05,580 --> 00:01:11,180
+first lecture of this section, and I'm going to go and create another class over here.
+
+16
+00:01:11,180 --> 00:01:14,980
+You remember that I'm just following the same exact pattern, like how we were doing before.
+
+17
+00:01:15,260 --> 00:01:17,340
+This is the get locator from LM.
+
+18
+00:01:17,820 --> 00:01:21,060
+But now I'm going to create another class over here.
+
+19
+00:01:21,140 --> 00:01:28,660
+I'm going to say get screenshot comparison from LM right.
+
+20
+00:01:28,660 --> 00:01:31,340
+So this is going to go and get things for me.
+
+21
+00:01:31,340 --> 00:01:36,340
+And in this class I'm just going to make this as probably a static class, like how we were doing before.
+
+22
+00:01:36,620 --> 00:01:40,340
+Uh, and I'm going to create a static method over here.
+
+23
+00:01:40,620 --> 00:01:47,660
+Uh, and I'm gonna name this as task of vision comparison result, because this is what I'm going to
+
+24
+00:01:47,660 --> 00:01:57,580
+be getting once I do the comparison, uh, or compare screenshot async screenshots, async, something
+
+25
+00:01:57,580 --> 00:01:58,060
+like that.
+
+26
+00:01:58,420 --> 00:01:59,020
+Right.
+
+27
+00:01:59,060 --> 00:02:02,460
+And here I need to pass the, uh, two things.
+
+28
+00:02:02,580 --> 00:02:06,410
+One is the vision LM client, which is going to be the client.
+
+29
+00:02:06,530 --> 00:02:17,210
+And I also need to pass, of course, the string of the base64, uh, image one and the base64 uh,
+
+30
+00:02:17,210 --> 00:02:18,250
+image two.
+
+31
+00:02:18,930 --> 00:02:22,410
+Remember the same thing that we were passing, uh, in our LM client?
+
+32
+00:02:22,450 --> 00:02:25,290
+The same thing I need over here as well.
+
+33
+00:02:25,530 --> 00:02:29,410
+And this is the prompt that I need to pass in for this guy.
+
+34
+00:02:29,890 --> 00:02:30,330
+Right.
+
+35
+00:02:30,370 --> 00:02:33,690
+So we have got everything, uh, for this particular method.
+
+36
+00:02:34,130 --> 00:02:42,810
+And now let's call the, uh, class, which is responsible for, uh, for performing the operation by
+
+37
+00:02:42,810 --> 00:02:44,450
+calling the large language model.
+
+38
+00:02:44,490 --> 00:02:51,130
+Remember, in our last library, we did this one to call the, uh, large language models in the get
+
+39
+00:02:51,130 --> 00:02:52,970
+completion async over here.
+
+40
+00:02:53,010 --> 00:02:57,570
+You remember which one we have, which calls the large language model, which is this one, the get
+
+41
+00:02:57,610 --> 00:03:03,570
+vision completion async method, which is going to call either OpenAI or local Llms based on the app
+
+42
+00:03:03,570 --> 00:03:08,510
+settings that you have got over here, so I need to do that as well.
+
+43
+00:03:08,910 --> 00:03:20,910
+Um, so I'm going to say VAR of response probably is going to be a wait of um vision LM client dot get
+
+44
+00:03:20,950 --> 00:03:22,750
+vision completion async.
+
+45
+00:03:22,870 --> 00:03:27,830
+I think you know what, I need to make these as private because I'm never going to call them from outside.
+
+46
+00:03:27,830 --> 00:03:33,630
+So I'm going to call this as private, uh, and the local thing as well.
+
+47
+00:03:33,630 --> 00:03:34,350
+Private.
+
+48
+00:03:35,990 --> 00:03:36,550
+Cool.
+
+49
+00:03:36,790 --> 00:03:38,750
+So this way it's never going to be called.
+
+50
+00:03:40,150 --> 00:03:41,430
+The only thing I need is this one.
+
+51
+00:03:41,430 --> 00:03:43,270
+So I'm going to make this as private as well.
+
+52
+00:03:43,790 --> 00:03:44,550
+Pretty cool.
+
+53
+00:03:44,950 --> 00:03:48,990
+Uh, and you see that the moment I hit Dot, I only get one method because I was confused.
+
+54
+00:03:49,030 --> 00:03:50,150
+Like which method to call?
+
+55
+00:03:50,710 --> 00:03:51,190
+Cool.
+
+56
+00:03:51,350 --> 00:03:58,110
+And now I'm going to pass the prompt and the base64 image one and the base64 image two, which is eventually
+
+57
+00:03:58,110 --> 00:04:01,430
+going to go to the large language model anyways.
+
+58
+00:04:01,670 --> 00:04:04,230
+And now I need to return the response.
+
+59
+00:04:04,230 --> 00:04:10,050
+But even before I return it, uh, I need to do the, uh, JSON deserialization.
+
+60
+00:04:10,050 --> 00:04:11,410
+So I just forgot that.
+
+61
+00:04:11,610 --> 00:04:22,770
+So I'm going to say var result is equal to JSON serialization, uh, using the deserialize method of
+
+62
+00:04:23,130 --> 00:04:29,290
+the uh vision comparison result model that we have created, which is this one.
+
+63
+00:04:29,970 --> 00:04:36,770
+And I'm going to get the pass the response to this guy, which is going to do the deserialization for
+
+64
+00:04:36,770 --> 00:04:40,490
+me, and I'm going to return this particular result now.
+
+65
+00:04:40,490 --> 00:04:44,250
+So I'm going to say return the result over here.
+
+66
+00:04:45,810 --> 00:04:49,090
+And you will notice that this is the method that we have got, which is amazing.
+
+67
+00:04:49,090 --> 00:04:56,250
+So everything is neatly done this time and you will see that we have got two get locator from LMS,
+
+68
+00:04:56,290 --> 00:04:58,050
+get screenshot comparison from LMS.
+
+69
+00:04:58,050 --> 00:04:59,890
+And this guy is going to keep on expanding.
+
+70
+00:04:59,890 --> 00:05:04,530
+If you're going to be talking with multiple different way with your large language model, you can keep
+
+71
+00:05:04,530 --> 00:05:05,770
+on expanding this particular class.
+
+72
+00:05:05,770 --> 00:05:10,520
+So this is like a pattern that you can create while you're going to start building it like a framework,
+
+73
+00:05:11,000 --> 00:05:13,400
+which is going to make your life even more easier.
+
+74
+00:05:13,400 --> 00:05:15,160
+But now we already have this, guys.
+
+75
+00:05:15,160 --> 00:05:16,280
+Now this is pretty cool.
+
+76
+00:05:16,440 --> 00:05:24,760
+We'll see how we can start expanding the next level of code, which is parsing the, uh, the images
+
+77
+00:05:24,760 --> 00:05:30,880
+to this particular model, which is the compare screenshot model, uh, from the selenium, uh, like
+
+78
+00:05:30,880 --> 00:05:33,240
+the current image as well as the base image.
+
+79
+00:05:33,240 --> 00:05:37,640
+That's the thing that we need to build right now, and we'll see how we can get the responses.
+
+80
+00:05:37,640 --> 00:05:40,360
+That is the next level of operation that I have to do.
+
+81
+00:05:40,400 --> 00:05:44,920
+And we'll see how we could able to achieve that which we'll be doing in our next lecture.
+
+82
+00:05:44,920 --> 00:05:45,840
+But guess what?
+
+83
+00:05:45,880 --> 00:05:48,840
+This is the this is the only code change that we have to make.
+
+84
+00:05:48,880 --> 00:05:53,560
+We can now do some massage, like how we can pass the images and things, which you can probably figure
+
+85
+00:05:53,600 --> 00:05:54,680
+out how we can do it.
+
+86
+00:05:54,680 --> 00:06:02,440
+I will let you to do these operation from now on and see how you could able to, um, pass those images
+
+87
+00:06:02,440 --> 00:06:09,560
+and get the responses deserialized and verify if the response is exactly what you are looking for from
+
+88
+00:06:09,560 --> 00:06:10,440
+the application.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 4. Using Visual Comparison in Testing by supplying what LLMs needs in Prompts
+
+
+1
+00:00:00,160 --> 00:00:00,920
+All right.
+
+2
+00:00:00,920 --> 00:00:06,680
+So now we are going to see how we can make use of the code that we have written in our last lecture.
+
+3
+00:00:06,680 --> 00:00:12,520
+So you can see that until our last lecture we created the vision client which is going to go and talk
+
+4
+00:00:12,520 --> 00:00:15,360
+with the large language model with the vision models.
+
+5
+00:00:15,360 --> 00:00:20,960
+And we also created the get screenshot comparison from LM, which is the prompt which is going to pass
+
+6
+00:00:20,960 --> 00:00:26,000
+the uh, the base64 image for the baseline image versus the current image.
+
+7
+00:00:26,000 --> 00:00:27,760
+And then we can get the response out.
+
+8
+00:00:27,760 --> 00:00:30,480
+So we also have got that particular logic sitting there.
+
+9
+00:00:30,800 --> 00:00:35,800
+All we have to do right now is to write the test to pass these images and see how that works.
+
+10
+00:00:35,800 --> 00:00:38,160
+So it's going to be very, very straightforward if you ask me.
+
+11
+00:00:38,360 --> 00:00:43,880
+All you have to do right now is, uh, going to go and copy the same code that we have been doing over
+
+12
+00:00:43,920 --> 00:00:51,480
+here earlier, and I'm going to paste that, and I'm going to say this is going to be a vision or maybe
+
+13
+00:00:51,480 --> 00:00:55,320
+a visual, uh, testing using selenium, something like that.
+
+14
+00:00:55,600 --> 00:00:58,320
+Uh, and I'm going to start working with it.
+
+15
+00:00:58,320 --> 00:01:04,200
+So you know, that in order to take a screenshot in selenium, all you have to do it is just use the
+
+16
+00:01:04,240 --> 00:01:09,590
+get screenshots method which also help you save the screenshot.
+
+17
+00:01:09,630 --> 00:01:13,750
+Um, as a as a file if you wanted to, you can do that.
+
+18
+00:01:14,110 --> 00:01:19,710
+And you can also see, uh, you can also get the particular file if you really wanted to using C sharp
+
+19
+00:01:19,710 --> 00:01:19,950
+code.
+
+20
+00:01:19,950 --> 00:01:22,950
+So that is not a big deal at all that you can do it.
+
+21
+00:01:23,670 --> 00:01:29,910
+So all I'm going to do right now is the moment I'm going to go to the, uh, to the to the, to the
+
+22
+00:01:29,910 --> 00:01:31,390
+home page of the application.
+
+23
+00:01:31,830 --> 00:01:34,110
+I am going to take a screenshot over here.
+
+24
+00:01:34,110 --> 00:01:35,790
+Let's say this is my idea.
+
+25
+00:01:36,070 --> 00:01:42,550
+And then, uh, once I take the screenshot, I'm just going to save it to a, uh, to a bin folder or
+
+26
+00:01:42,550 --> 00:01:43,350
+something like that.
+
+27
+00:01:43,350 --> 00:01:50,990
+And then I'm going to use that as a base, uh, location, uh, moving forward to see if that image
+
+28
+00:01:50,990 --> 00:01:54,830
+exists, then if it does exist, then it's going to go and compare the image.
+
+29
+00:01:54,830 --> 00:01:56,030
+That is the entire idea.
+
+30
+00:01:56,270 --> 00:01:58,350
+So in order for me to save the image.
+
+31
+00:01:58,390 --> 00:02:01,830
+So first of all I'm going to just set a folder path over here.
+
+32
+00:02:01,870 --> 00:02:10,820
+Remember the same code that we always do uh path dot combine and app or domain I think we now are quite
+
+33
+00:02:10,820 --> 00:02:14,180
+familiar with this kind of code because we did this so many times already.
+
+34
+00:02:14,700 --> 00:02:18,060
+And I'm also going to pass the folder here.
+
+35
+00:02:18,060 --> 00:02:21,260
+So I'm going to just name this as screenshots or whatever.
+
+36
+00:02:21,540 --> 00:02:21,980
+Right.
+
+37
+00:02:22,020 --> 00:02:27,580
+So once I have this particular screenshot folder over there, and then I'm going to go and save that
+
+38
+00:02:27,580 --> 00:02:29,860
+particular file to that particular directory.
+
+39
+00:02:29,860 --> 00:02:30,420
+But guess what.
+
+40
+00:02:30,460 --> 00:02:35,100
+Because this is a folder that I'm creating like a directory that I'm creating I need to go and create
+
+41
+00:02:35,100 --> 00:02:36,380
+a directory as well.
+
+42
+00:02:36,380 --> 00:02:43,980
+So I'm going to say if the directory uh does not exist in this particular folder path that we have got,
+
+43
+00:02:44,220 --> 00:02:50,780
+then try to create that particular directory for me, uh, in that particular folder path.
+
+44
+00:02:51,060 --> 00:02:51,540
+Right.
+
+45
+00:02:51,660 --> 00:02:53,660
+That's going to be the directory that I'm going to create.
+
+46
+00:02:53,780 --> 00:02:58,460
+Uh, and then now I'm going to, uh, get the file path that I have.
+
+47
+00:02:58,460 --> 00:03:01,300
+So var file path, uh, something like this.
+
+48
+00:03:01,580 --> 00:03:03,940
+And you remember how you can do it in C sharp.
+
+49
+00:03:03,940 --> 00:03:05,020
+It is very straightforward.
+
+50
+00:03:05,020 --> 00:03:08,220
+All you have to do is just do a path dot combine.
+
+51
+00:03:08,580 --> 00:03:10,700
+And then you can say folder path.
+
+52
+00:03:10,700 --> 00:03:18,940
+And uh the file name, which probably is going to be let's say I'm going to just name this for now,
+
+53
+00:03:18,980 --> 00:03:26,180
+like a hard coded value, like, uh, oops, like a visual, uh, regression testing, visual testing
+
+54
+00:03:26,180 --> 00:03:29,220
+using selenium or whatever dot png file.
+
+55
+00:03:29,220 --> 00:03:31,620
+So that is the file name that I have got.
+
+56
+00:03:31,660 --> 00:03:33,700
+And now I have got the folder path.
+
+57
+00:03:34,100 --> 00:03:36,100
+And now I have got the file path over here.
+
+58
+00:03:36,100 --> 00:03:39,780
+Now all I have to do is take the screenshot and save it over there.
+
+59
+00:03:39,980 --> 00:03:47,220
+So the way I can do it in selenium, as I told you, is you can just say screenshot is equal to uh,
+
+60
+00:03:47,260 --> 00:03:58,460
+you just can do I, uh, take a screenshot which can be then uh, casted with the, uh, driver that
+
+61
+00:03:58,460 --> 00:04:02,900
+we have got and then I can just say take screenshot method.
+
+62
+00:04:03,420 --> 00:04:05,260
+Sorry, get screenshot method.
+
+63
+00:04:05,300 --> 00:04:06,140
+Just missed that.
+
+64
+00:04:06,340 --> 00:04:06,900
+Cool.
+
+65
+00:04:07,140 --> 00:04:08,340
+That's going to get the screenshot.
+
+66
+00:04:08,340 --> 00:04:13,980
+And then I'm going to save it to uh a location which is going to be like save as file.
+
+67
+00:04:13,980 --> 00:04:17,100
+You can also save as the base64 encoded string.
+
+68
+00:04:17,140 --> 00:04:17,620
+Look at that.
+
+69
+00:04:17,620 --> 00:04:24,650
+This is even more straightforward, but I actually need to save it to a file because I can retrieve
+
+70
+00:04:24,650 --> 00:04:25,210
+it later on.
+
+71
+00:04:25,210 --> 00:04:27,650
+That's the reason why I wanted to do it that way.
+
+72
+00:04:27,770 --> 00:04:33,290
+So now that this particular code is especially to take the screenshot and save it to a file, which
+
+73
+00:04:33,290 --> 00:04:38,570
+is going to be the bin folder under the screenshots directory, that's what this is going to do.
+
+74
+00:04:38,810 --> 00:04:44,530
+Now all I have to do over here is once I have this particular file being saved, I'm just going to do
+
+75
+00:04:44,570 --> 00:04:45,290
+two operations.
+
+76
+00:04:45,290 --> 00:04:51,530
+So let's say um, I'm going to take this particular screenshot, uh, which is going to be our base
+
+77
+00:04:51,690 --> 00:04:53,170
+uh, image.
+
+78
+00:04:53,170 --> 00:04:56,290
+Something like that is equal to a file dot.
+
+79
+00:04:56,490 --> 00:05:03,010
+Uh, I'm going to say read all bytes, which is going to read the read the entire files for me.
+
+80
+00:05:03,050 --> 00:05:05,170
+And I'm going to pass the file path over there.
+
+81
+00:05:05,170 --> 00:05:09,690
+That's going to be my, uh, let's say this is going to be my base image.
+
+82
+00:05:09,890 --> 00:05:20,130
+And now I am going to take a var, the actual image, which is going to be uh, like file, uh, which
+
+83
+00:05:20,130 --> 00:05:24,840
+is going to be like, uh, the, the actual image that I'm going to be taking as a screenshot over there.
+
+84
+00:05:24,840 --> 00:05:29,720
+So I'm going to say the same thing over here, which is going to take the screenshots for me, which
+
+85
+00:05:29,720 --> 00:05:30,440
+is this one.
+
+86
+00:05:30,440 --> 00:05:32,600
+So I'm going to go copy that over here.
+
+87
+00:05:33,080 --> 00:05:36,960
+And I'm going to say as base string something like that.
+
+88
+00:05:36,960 --> 00:05:37,400
+Right.
+
+89
+00:05:37,400 --> 00:05:39,840
+So this is going to capture the base64 encoded string.
+
+90
+00:05:39,840 --> 00:05:43,800
+And this guy is anyways going to give us as the byte array.
+
+91
+00:05:43,800 --> 00:05:45,880
+I'm sorry I think I need to convert this as well.
+
+92
+00:05:45,880 --> 00:05:48,240
+So I need to just say this is the base image.
+
+93
+00:05:48,240 --> 00:05:53,960
+But I need to say uh var uh base uh image.
+
+94
+00:05:54,720 --> 00:05:57,920
+Uh this is going to be base image byte, something like that.
+
+95
+00:05:58,600 --> 00:06:06,200
+Uh, and I'm going to say over here I need to call a class called as convert dot two base 64 string,
+
+96
+00:06:06,200 --> 00:06:06,960
+something like that.
+
+97
+00:06:06,960 --> 00:06:12,040
+This is going to convert that to the base 64 format for me over there.
+
+98
+00:06:12,040 --> 00:06:15,440
+So I'm just going to say base byte okay cool.
+
+99
+00:06:15,440 --> 00:06:16,840
+So this is going to be the base image.
+
+100
+00:06:16,840 --> 00:06:19,120
+And this is going to be the actual image that I have got.
+
+101
+00:06:19,400 --> 00:06:25,960
+And now then I'm going to pass these two to our large language model code, which is nothing but the
+
+102
+00:06:26,080 --> 00:06:28,000
+uh Um, which is this guy?
+
+103
+00:06:28,120 --> 00:06:31,520
+The I get screenshot comparison from local elements.
+
+104
+00:06:31,520 --> 00:06:31,960
+Right.
+
+105
+00:06:31,960 --> 00:06:35,920
+So I will try to pass this, and I will show you how this is actually going to work.
+
+106
+00:06:35,920 --> 00:06:42,320
+So I'm going to say get screenshot comparison dot compare uh, screenshot async over there.
+
+107
+00:06:42,520 --> 00:06:47,440
+And I'm going to of course create a vision client because it is not there.
+
+108
+00:06:47,640 --> 00:06:51,040
+So I'm going to say vision element client.
+
+109
+00:06:51,040 --> 00:06:54,640
+Client is equal to new or vision elements client.
+
+110
+00:06:55,160 --> 00:06:59,000
+Uh and I'm going to pass the client object over here.
+
+111
+00:06:59,400 --> 00:07:06,960
+And I'm going to pass the base image, which is the image that we already have taken and stored in the
+
+112
+00:07:06,960 --> 00:07:13,200
+file over there, and the actual image, which is something that I need to compare now.
+
+113
+00:07:13,200 --> 00:07:19,440
+I need to see whether they are going to be returned for us from the large language model or not.
+
+114
+00:07:19,520 --> 00:07:21,440
+So I'm just going to say put a result there.
+
+115
+00:07:21,480 --> 00:07:26,320
+See, this is going to be always same, I'm telling you, because you are just running it by taking
+
+116
+00:07:26,320 --> 00:07:30,680
+a screenshot here and then you are doing the immediately you're taking one more screenshot here.
+
+117
+00:07:30,680 --> 00:07:32,230
+So they are going to be same.
+
+118
+00:07:32,230 --> 00:07:37,990
+But what I will do is I will also flip the coin a bit, and then I will try to run it again with a different
+
+119
+00:07:38,310 --> 00:07:43,030
+screen, and I will show you how that particular test is eventually going to fail.
+
+120
+00:07:43,030 --> 00:07:47,270
+So but let's, let's try to run this and see what is going to happen right now.
+
+121
+00:07:47,270 --> 00:07:53,590
+So it's going to open the, uh, the code for us over here.
+
+122
+00:07:53,590 --> 00:07:59,550
+I think this code is just going to fail because I forgot to update the app settings to the, uh, to
+
+123
+00:07:59,590 --> 00:08:00,670
+the vision model.
+
+124
+00:08:00,670 --> 00:08:05,710
+So I may expect some failure, but let's see if this is going to even work or not.
+
+125
+00:08:06,390 --> 00:08:09,910
+Uh, for us over there, I'm going to put a breakpoint there just in case.
+
+126
+00:08:10,550 --> 00:08:11,070
+There we go.
+
+127
+00:08:11,070 --> 00:08:12,830
+And we got the result this time.
+
+128
+00:08:13,230 --> 00:08:14,110
+And look at that.
+
+129
+00:08:14,110 --> 00:08:16,470
+We have got no response coming up over here.
+
+130
+00:08:16,470 --> 00:08:21,390
+I think the reason why this is not coming up there, because it's not a vision model and it is not going
+
+131
+00:08:21,390 --> 00:08:22,190
+to be supported.
+
+132
+00:08:22,190 --> 00:08:27,030
+So I need to add the vision model and see how that goes.
+
+133
+00:08:27,030 --> 00:08:30,430
+So I will quickly add the vision model in our next lecture.
+
+134
+00:08:30,470 --> 00:08:31,710
+And I will run this code.
+
+135
+00:08:31,710 --> 00:08:36,430
+And then we'll refactor this code a bit for you to clearly use it like a framework.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 5. Running Vision comparison using Qwen 3 VL (Vision Language Model)
+
+
+1
+00:00:00,120 --> 00:00:00,800
+All right.
+
+2
+00:00:00,800 --> 00:00:05,640
+So now we're going to see how we can update our app settings file to use the vision model.
+
+3
+00:00:05,640 --> 00:00:12,800
+And for the vision model, uh I am going to go and choose a model which does support it.
+
+4
+00:00:12,800 --> 00:00:15,360
+So which is going to be the Ole AMA website.
+
+5
+00:00:15,360 --> 00:00:17,560
+We're just going to go there in the Ole AMA.
+
+6
+00:00:17,560 --> 00:00:21,280
+If you go to the models over there, you can see that there is this vision models.
+
+7
+00:00:21,280 --> 00:00:27,400
+And this Q three VL is one of the popular model which you can use for the cloud operation as well.
+
+8
+00:00:27,440 --> 00:00:32,760
+It is very powerful model which can only run in the cloud unfortunately because it's 235 billion parameter
+
+9
+00:00:32,760 --> 00:00:33,400
+model.
+
+10
+00:00:33,400 --> 00:00:38,440
+So you can't just run this within your, uh machine unless until you have that kind of potential to
+
+11
+00:00:38,440 --> 00:00:38,840
+do it.
+
+12
+00:00:38,840 --> 00:00:40,640
+So it is not going to work out there.
+
+13
+00:00:40,640 --> 00:00:42,600
+So I'm going to just use this model.
+
+14
+00:00:42,600 --> 00:00:49,280
+And I have already downloaded that within my local, which means I have already invoked that, uh,
+
+15
+00:00:49,280 --> 00:00:54,640
+within my local using this, uh, olama run V3 cloud over there.
+
+16
+00:00:54,680 --> 00:00:58,720
+That's the reason why I can just happily use that one over here.
+
+17
+00:00:58,840 --> 00:01:04,370
+And now I'm going to debug this code and see if this code is going to work for us or not.
+
+18
+00:01:04,370 --> 00:01:07,370
+So let's try to see if this code is going to work.
+
+19
+00:01:07,370 --> 00:01:10,610
+So it's going to open the things for us over here.
+
+20
+00:01:10,730 --> 00:01:13,410
+Oh sorry I think I'm running the wrong test this time.
+
+21
+00:01:13,410 --> 00:01:15,530
+I'm running this playwright test for some reason.
+
+22
+00:01:15,810 --> 00:01:17,170
+Let me go and run this test.
+
+23
+00:01:17,210 --> 00:01:18,970
+I don't know why I chose the playwright test.
+
+24
+00:01:18,970 --> 00:01:21,290
+I think I need to check the visual test over there.
+
+25
+00:01:21,330 --> 00:01:23,090
+I'm going to put a breakpoint there anyways.
+
+26
+00:01:23,090 --> 00:01:23,810
+Just great.
+
+27
+00:01:23,850 --> 00:01:26,450
+And now let's try to run this code and see how it works.
+
+28
+00:01:26,450 --> 00:01:30,810
+I'm going to go and debug this particular unit test and see how that works.
+
+29
+00:01:31,210 --> 00:01:37,930
+So this time I'm hoping that it is going to, um, do the comparison for us.
+
+30
+00:01:38,170 --> 00:01:44,930
+Maybe I'm going to go and see if the large language model is working as expected or not as well.
+
+31
+00:01:45,330 --> 00:01:50,210
+Let's see what is the response we're going to get from the Get vision completion over there.
+
+32
+00:01:51,090 --> 00:01:51,530
+Oh yeah.
+
+33
+00:01:51,570 --> 00:01:52,130
+Look at that.
+
+34
+00:01:52,130 --> 00:01:53,970
+This time it is doing the comparison.
+
+35
+00:01:54,010 --> 00:01:54,930
+Look at that.
+
+36
+00:01:54,970 --> 00:01:57,370
+Now the JSON is looking pretty great.
+
+37
+00:01:57,410 --> 00:02:01,770
+Says R equals as true similarity score is 98 percentage difference.
+
+38
+00:02:01,770 --> 00:02:06,620
+There is no significant difference analysis the two image appears to be identical upon careful visual
+
+39
+00:02:06,620 --> 00:02:11,620
+inspection, and no visual discrepancies in layout text element were found.
+
+40
+00:02:11,780 --> 00:02:13,220
+All of them are looking correct.
+
+41
+00:02:13,220 --> 00:02:15,140
+So which means it is working as expected.
+
+42
+00:02:15,140 --> 00:02:16,900
+So it's going to do the dieselisation.
+
+43
+00:02:16,900 --> 00:02:20,460
+And this time I'm expecting to have some value there if it's not there.
+
+44
+00:02:20,780 --> 00:02:22,180
+Oh I know why.
+
+45
+00:02:22,220 --> 00:02:24,540
+Because you see that it is in capital letter.
+
+46
+00:02:24,780 --> 00:02:30,300
+But the response which is coming up from the JSON is R in small letters.
+
+47
+00:02:30,340 --> 00:02:35,460
+Oh, I think I need to go and fix that particular part, which I will do it and I will fix that particular
+
+48
+00:02:35,460 --> 00:02:35,660
+code.
+
+49
+00:02:35,660 --> 00:02:42,700
+But at least now you see that already the code is working as expected, and we could able to see the
+
+50
+00:02:42,700 --> 00:02:47,220
+responses so we can fix this particular small letter capital letter issues there.
+
+51
+00:02:47,220 --> 00:02:49,060
+I think this is the right time to do it.
+
+52
+00:02:49,060 --> 00:02:55,780
+So if I'm going to go here, uh, because this visual comparison result class has got all of them in
+
+53
+00:02:55,780 --> 00:03:01,940
+capital letter, you can either make this as a small letter, or you can make the response which is
+
+54
+00:03:01,940 --> 00:03:05,300
+generated from the large language model as capital letter.
+
+55
+00:03:05,420 --> 00:03:06,950
+If not, this is not going to work.
+
+56
+00:03:06,950 --> 00:03:11,830
+So if I make this as capital letter here like this, I think I just missed that part.
+
+57
+00:03:12,390 --> 00:03:14,830
+Uh, it is going to just work.
+
+58
+00:03:14,830 --> 00:03:19,430
+But if I don't do it, uh, it is not going to, uh, work out for us.
+
+59
+00:03:19,470 --> 00:03:20,150
+Let's see.
+
+60
+00:03:20,990 --> 00:03:22,070
+Uh, yeah.
+
+61
+00:03:22,110 --> 00:03:23,270
+That's perfect.
+
+62
+00:03:23,350 --> 00:03:29,230
+So I'm just going to save this whole thing, and let's try to run this one more time and see how that
+
+63
+00:03:29,230 --> 00:03:29,790
+works.
+
+64
+00:03:30,430 --> 00:03:34,550
+So let's just go here and debug this particular unit test.
+
+65
+00:03:34,590 --> 00:03:35,270
+Okay.
+
+66
+00:03:35,310 --> 00:03:37,670
+Now let's see what is going to be the result.
+
+67
+00:03:38,110 --> 00:03:40,630
+I think this time it should deserialize perfectly.
+
+68
+00:03:41,270 --> 00:03:43,070
+Uh over here.
+
+69
+00:03:44,510 --> 00:03:45,630
+Uh, let's see the result.
+
+70
+00:03:46,190 --> 00:03:46,990
+And look at that.
+
+71
+00:03:46,990 --> 00:03:49,830
+We have got the results being deserialized correctly.
+
+72
+00:03:49,830 --> 00:03:56,510
+So you need to have either, uh, the response, uh, the, the one that you're looking for from the
+
+73
+00:03:56,510 --> 00:04:00,790
+JSON as capital letter or you need to make this guy as a small letter.
+
+74
+00:04:00,790 --> 00:04:01,830
+So anything should be.
+
+75
+00:04:01,830 --> 00:04:03,430
+They both should be matching.
+
+76
+00:04:03,470 --> 00:04:09,470
+If not, you need to probably use the JSON serializer Laser option to set the property name.
+
+77
+00:04:09,670 --> 00:04:11,950
+Case insensitive as true.
+
+78
+00:04:11,950 --> 00:04:12,630
+Like that.
+
+79
+00:04:12,750 --> 00:04:14,830
+That way it makes things more easier.
+
+80
+00:04:15,030 --> 00:04:17,630
+Uh, but yeah, I just wanted to keep things simple.
+
+81
+00:04:17,630 --> 00:04:19,870
+That's why I'm just going to keep that guy as it is over here.
+
+82
+00:04:20,150 --> 00:04:20,550
+All right.
+
+83
+00:04:20,550 --> 00:04:20,910
+Cool.
+
+84
+00:04:20,990 --> 00:04:26,110
+So that is working for us over here, and we can see that it's, uh, it's working as expected, which
+
+85
+00:04:26,110 --> 00:04:26,630
+is amazing.
+
+86
+00:04:26,630 --> 00:04:27,790
+So we could do the comparison.
+
+87
+00:04:27,790 --> 00:04:33,710
+So the happy path always works, which is fine, because now what we have done over here is that we
+
+88
+00:04:33,750 --> 00:04:39,190
+tried doing the, uh, screenshot taking operation after we went to the home page.
+
+89
+00:04:39,430 --> 00:04:45,830
+Uh, and then we took the screenshot immediately within the home page itself, in the actual image over
+
+90
+00:04:45,830 --> 00:04:46,430
+here.
+
+91
+00:04:46,550 --> 00:04:48,950
+And that's the reason why the comparison just got passed.
+
+92
+00:04:48,950 --> 00:04:54,190
+But what I wanted to do this time is the moment I perform a login operation.
+
+93
+00:04:54,190 --> 00:04:58,390
+I wanted to see if that particular screenshot is same or not.
+
+94
+00:04:58,390 --> 00:05:02,830
+So the way I can demonstrate this is let's say I'm going to go to this application over here.
+
+95
+00:05:02,830 --> 00:05:10,080
+And if I'm going to do a login operation, uh, right now, uh, see that currently the home page has
+
+96
+00:05:10,080 --> 00:05:13,920
+got the home about employee list, register and login.
+
+97
+00:05:13,920 --> 00:05:18,800
+But the moment I log in you will see there are going to be couple more menus coming up and there is
+
+98
+00:05:18,800 --> 00:05:20,600
+also hello admin and log off.
+
+99
+00:05:20,600 --> 00:05:22,400
+So these are this is completely wrong right.
+
+100
+00:05:22,400 --> 00:05:23,600
+Because they're not same right.
+
+101
+00:05:23,600 --> 00:05:28,520
+Now I want to see if the screenshots can do the comparison there or not.
+
+102
+00:05:28,560 --> 00:05:34,120
+I'm telling you that the model which I use with the O llama, which is this one over here, is not really
+
+103
+00:05:34,120 --> 00:05:41,000
+working for me as expected for some reason, and I will show you how it actually worked out.
+
+104
+00:05:41,000 --> 00:05:43,240
+So the testing over here is this.
+
+105
+00:05:43,240 --> 00:05:47,400
+So I wanted to take a screenshot for the first time over here.
+
+106
+00:05:47,400 --> 00:05:50,880
+It's the actual image is the base image that I have got.
+
+107
+00:05:51,080 --> 00:05:56,880
+And now this thing which is going to be the screenshot comparison which I'm doing over here, the actual
+
+108
+00:05:56,880 --> 00:05:57,480
+image.
+
+109
+00:05:57,600 --> 00:06:03,480
+I want to cut this code and I wanted to do it after the login operation which is over here.
+
+110
+00:06:03,480 --> 00:06:08,520
+This is the place where I wanted to take the, uh, actual screenshot.
+
+111
+00:06:08,920 --> 00:06:11,770
+And this is the code which I'm doing over here.
+
+112
+00:06:11,770 --> 00:06:16,170
+As you can see, this particular part is the base image that I have got.
+
+113
+00:06:16,170 --> 00:06:20,090
+So this is the screenshot for a base image, right?
+
+114
+00:06:20,090 --> 00:06:20,850
+That's what I have.
+
+115
+00:06:20,890 --> 00:06:22,530
+So this is the base image part.
+
+116
+00:06:22,770 --> 00:06:25,370
+And this is the actual image part that I have got.
+
+117
+00:06:25,770 --> 00:06:32,890
+And I'm taking the actual image screenshot only after I perform a login operation.
+
+118
+00:06:32,890 --> 00:06:36,010
+I wanted to see if that comparison passes or not.
+
+119
+00:06:36,050 --> 00:06:40,210
+I'm telling you what, this operation is just going to fail.
+
+120
+00:06:40,210 --> 00:06:43,770
+I'm just going to say, um, the result.
+
+121
+00:06:43,810 --> 00:06:44,090
+Sorry.
+
+122
+00:06:44,130 --> 00:06:47,330
+Result dot uh, differences.
+
+123
+00:06:47,770 --> 00:06:50,650
+Uh, I'm going to say this particular difference, it is going to be wrong.
+
+124
+00:06:50,650 --> 00:06:52,650
+So I'm going to put a just a breakpoint here.
+
+125
+00:06:52,690 --> 00:06:53,090
+Right.
+
+126
+00:06:53,410 --> 00:06:59,010
+Uh, and if I'm going to do a debug this time, you'll notice that the application is just going to
+
+127
+00:06:59,010 --> 00:07:02,250
+open, it's going to perform the login operation.
+
+128
+00:07:02,250 --> 00:07:04,890
+And I'm just going to let that login to happen.
+
+129
+00:07:05,250 --> 00:07:06,890
+Uh, because we already have a breakpoint here.
+
+130
+00:07:06,890 --> 00:07:12,700
+Let me just remove this, uh, over here and resume the Resumed execution.
+
+131
+00:07:13,180 --> 00:07:18,860
+It's going to log in and it's going to come here to the large language model.
+
+132
+00:07:19,380 --> 00:07:26,660
+Uh, so now it's going to do the actual versus the, um, the base versus the actual, uh, image comparison
+
+133
+00:07:26,660 --> 00:07:27,220
+right now.
+
+134
+00:07:27,220 --> 00:07:28,740
+So we'll see what's going to happen.
+
+135
+00:07:28,740 --> 00:07:33,140
+And if I go to the response over here, you see that the r equals is true this time.
+
+136
+00:07:33,180 --> 00:07:34,860
+And the similarity score is 98.
+
+137
+00:07:34,900 --> 00:07:38,100
+And it says there is no significant difference detected.
+
+138
+00:07:38,260 --> 00:07:43,580
+I found the same problem even while I was trying with the, uh, the lava model.
+
+139
+00:07:43,580 --> 00:07:48,220
+And they both worked pretty much exactly the wrong way, which I was not expecting it to happen.
+
+140
+00:07:48,220 --> 00:07:51,620
+I think it's for some reason it's not working as expected.
+
+141
+00:07:51,620 --> 00:07:55,340
+So I tried using the OpenAI model and it was just working fine.
+
+142
+00:07:55,660 --> 00:08:01,660
+I will show you how to do that in our next lecture, but this is what I had observed and I will let
+
+143
+00:08:01,660 --> 00:08:06,420
+you to try it out yourself with the different models that you have access to and see how that works.
+
+144
+00:08:06,420 --> 00:08:12,540
+But unfortunately, in my case, I couldn't able to make this code work with the llama models as well
+
+145
+00:08:12,540 --> 00:08:15,060
+as the lava model that I have got.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 6. Running Vision Comparison using Open AI - GPT Models
+
+
+1
+00:00:00,160 --> 00:00:01,240
+All right.
+
+2
+00:00:01,240 --> 00:00:09,640
+So now I'm going to show you how we can use a different model instead of the three VL model that we
+
+3
+00:00:09,640 --> 00:00:10,360
+have got.
+
+4
+00:00:10,360 --> 00:00:12,120
+So this is a visual language model.
+
+5
+00:00:12,120 --> 00:00:16,680
+But for some reason the visual language model is not working for us as expected.
+
+6
+00:00:16,680 --> 00:00:24,800
+So I'm gonna get rid of this and I'm going to use a GPT four mini model, which is kind of very stable
+
+7
+00:00:24,800 --> 00:00:25,280
+all the time.
+
+8
+00:00:25,280 --> 00:00:28,040
+And I have used that and it works just fine.
+
+9
+00:00:28,280 --> 00:00:33,040
+So in order for you to use the OpenAI, you remember you need to use the provider as OpenAI.
+
+10
+00:00:33,280 --> 00:00:35,800
+That's what we are doing over here.
+
+11
+00:00:35,800 --> 00:00:42,680
+So if the provider is going to be OpenAI, then it's going to call the OpenAI vision async method this
+
+12
+00:00:42,680 --> 00:00:43,200
+one.
+
+13
+00:00:43,200 --> 00:00:44,960
+So make sure you do that over there.
+
+14
+00:00:44,960 --> 00:00:48,280
+So that's what I am doing here like OpenAI.
+
+15
+00:00:48,720 --> 00:00:51,600
+And of course the URL will change as well.
+
+16
+00:00:51,600 --> 00:00:53,000
+It is not the localhost.
+
+17
+00:00:53,160 --> 00:00:56,760
+Rather it is a API that openai.com.
+
+18
+00:00:56,840 --> 00:01:01,960
+This is one of the limitation that I found while I tried using it for the vision comparison, which
+
+19
+00:01:02,070 --> 00:01:06,070
+it could be a limitation for now, but but hopefully it should work.
+
+20
+00:01:06,070 --> 00:01:10,270
+I don't know, for some reason it's not really doing the comparison part, like every single part comparison
+
+21
+00:01:10,270 --> 00:01:11,230
+very clearly.
+
+22
+00:01:11,230 --> 00:01:13,870
+So that's why I'm going to use the OpenAI model this time.
+
+23
+00:01:14,230 --> 00:01:16,430
+So I'm going to save this over here.
+
+24
+00:01:16,790 --> 00:01:22,750
+And I'm going to go to the test code which we have, which is this one, the enhanced test that we have.
+
+25
+00:01:23,070 --> 00:01:27,070
+Uh, and our code is pretty much exactly the same thing that we were using before.
+
+26
+00:01:28,510 --> 00:01:33,390
+And I'm going to run this and we are going to get one more error, I'm telling you even beforehand,
+
+27
+00:01:33,430 --> 00:01:35,630
+which is going to be on the deserialization part.
+
+28
+00:01:35,790 --> 00:01:37,830
+Uh, I will explain you what that error is.
+
+29
+00:01:37,830 --> 00:01:46,670
+Uh, but I'm going to put a breakpoint, uh, in the, uh, vision LMS, uh, which is the, uh, this
+
+30
+00:01:46,670 --> 00:01:52,270
+guy over here, uh, and I'm going to run this test because I want to test whether this guy is returning
+
+31
+00:01:52,310 --> 00:01:56,870
+as correctly or not as well, like how it did for the local LMS.
+
+32
+00:01:57,270 --> 00:01:59,430
+And now I'm going to do a debug.
+
+33
+00:01:59,710 --> 00:02:00,390
+All right.
+
+34
+00:02:00,710 --> 00:02:03,620
+Hopefully it took the screenshot for the second time.
+
+35
+00:02:03,620 --> 00:02:05,180
+Now it's gonna get here.
+
+36
+00:02:05,700 --> 00:02:09,900
+Uh, and we are passing the GPT four or mini model.
+
+37
+00:02:09,940 --> 00:02:12,180
+The message is this one, which is perfect.
+
+38
+00:02:12,540 --> 00:02:15,180
+Uh, and let's see, we are going to get things correctly.
+
+39
+00:02:15,180 --> 00:02:20,900
+So I'm going to do a post operation and see the base URL is also changed for us this time because it's
+
+40
+00:02:20,900 --> 00:02:21,980
+OpenAI model.
+
+41
+00:02:22,140 --> 00:02:24,260
+See the base URL is changed.
+
+42
+00:02:24,300 --> 00:02:27,460
+Now we got a response and it's 200 which is correct.
+
+43
+00:02:27,460 --> 00:02:29,460
+So I think that's perfect.
+
+44
+00:02:29,780 --> 00:02:31,780
+And what is the response.
+
+45
+00:02:32,220 --> 00:02:34,020
+Uh over here.
+
+46
+00:02:34,020 --> 00:02:34,580
+Look at that.
+
+47
+00:02:34,580 --> 00:02:36,220
+We got a response this time.
+
+48
+00:02:36,220 --> 00:02:40,500
+And I'm going to open this particular, uh, response text over here.
+
+49
+00:02:40,660 --> 00:02:44,420
+You see that we got a content as this JSON.
+
+50
+00:02:44,420 --> 00:02:52,820
+So if I'm going to do this guy, um, if I go to the next line over here, probably the color, uh,
+
+51
+00:02:52,940 --> 00:02:54,980
+you see that the response we have got.
+
+52
+00:02:55,180 --> 00:03:02,340
+But see the response we have got a JSON, uh, like a, like a formatting over here, which is basically
+
+53
+00:03:02,340 --> 00:03:08,570
+like a format that is being used especially to do the formatting while it gets the responses out.
+
+54
+00:03:08,610 --> 00:03:11,890
+Yeah, it's basically like a JSON response over here.
+
+55
+00:03:11,890 --> 00:03:12,690
+This is wrong.
+
+56
+00:03:12,730 --> 00:03:18,970
+And also you see that, uh, we are getting the response correctly, but there is this extra, uh,
+
+57
+00:03:19,410 --> 00:03:20,930
+single three tick.
+
+58
+00:03:21,090 --> 00:03:24,090
+The JSON could be a problem while you try to deserialize.
+
+59
+00:03:24,090 --> 00:03:26,570
+So it is not going to work out quite well.
+
+60
+00:03:26,570 --> 00:03:29,970
+So the moment if I'm going to run this thing, it is going to throw an error.
+
+61
+00:03:29,970 --> 00:03:32,530
+But at least now you see that there is a difference.
+
+62
+00:03:32,970 --> 00:03:36,010
+So r equals is false similarity score is 90.
+
+63
+00:03:36,250 --> 00:03:41,770
+And it says that the second image contains an additional navigation item like employee list employee
+
+64
+00:03:41,810 --> 00:03:43,290
+details manage user.
+
+65
+00:03:43,290 --> 00:03:47,050
+And also greeted with the hello admin on the top right corner.
+
+66
+00:03:47,050 --> 00:03:53,250
+You see that now it sees the difference correctly, which unfortunately our, uh, local large language
+
+67
+00:03:53,250 --> 00:03:59,290
+model, as well as the uh three uh vision language model was not able to see for some reason.
+
+68
+00:03:59,290 --> 00:04:02,890
+I don't know why, but but yeah, that's the that's the error that we're getting.
+
+69
+00:04:02,890 --> 00:04:04,690
+The difference also is the analysis.
+
+70
+00:04:04,690 --> 00:04:08,720
+The two images are not identical due to additional element present in the second image that are not
+
+71
+00:04:08,720 --> 00:04:09,840
+found in the first.
+
+72
+00:04:09,840 --> 00:04:11,720
+So this is the thing that it's telling.
+
+73
+00:04:11,960 --> 00:04:12,640
+Perfect.
+
+74
+00:04:12,640 --> 00:04:15,800
+It sees the error at least, which is good.
+
+75
+00:04:15,880 --> 00:04:19,200
+But uh, the local large language model did not see it.
+
+76
+00:04:19,200 --> 00:04:24,000
+But there is an additional error that the JSON over here, the additional JSON over here, it's going
+
+77
+00:04:24,000 --> 00:04:24,800
+to create a problem.
+
+78
+00:04:24,800 --> 00:04:29,600
+While we do the deserialization, we need to somehow remove that string and then pass it to deserialize.
+
+79
+00:04:29,600 --> 00:04:30,920
+If not, it's going to throw an error.
+
+80
+00:04:31,200 --> 00:04:34,920
+So the moment I run this see we're going to get an exception here like this.
+
+81
+00:04:35,480 --> 00:04:41,360
+And it says that the JSON could not be deserialized because it starts with an a single tick there that's
+
+82
+00:04:41,360 --> 00:04:42,400
+going to throw an error.
+
+83
+00:04:42,440 --> 00:04:48,720
+This is a common response which we get from the large language model, and we need to fix that particular
+
+84
+00:04:48,720 --> 00:04:49,240
+problem.
+
+85
+00:04:49,240 --> 00:04:55,960
+But at least now we got the response as the uh, difference response there, which is correct.
+
+86
+00:04:55,960 --> 00:05:02,400
+So we can fix the error that we are actually getting, uh, from the deserialization part pretty soon.
+
+87
+00:05:02,400 --> 00:05:07,080
+But at least now the vision model is working for us over here, which is amazing.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 7. Running Vision Comparison using Open AI - GPT Models (Contd.)
+
+
+1
+00:00:00,120 --> 00:00:00,800
+All right.
+
+2
+00:00:00,840 --> 00:00:06,600
+And in this lecture we are going to see how we can, uh, fix the deserialization problem that we were
+
+3
+00:00:06,600 --> 00:00:12,520
+getting while we were trying to use, uh, the response from the large language model, which is especially
+
+4
+00:00:12,520 --> 00:00:14,040
+the OpenAI model.
+
+5
+00:00:14,120 --> 00:00:21,320
+So the way we can actually fix this particular error is that we can just have a so the moment we get
+
+6
+00:00:21,320 --> 00:00:24,160
+the response over here, we can just do some cleaning operation.
+
+7
+00:00:24,640 --> 00:00:31,320
+So the cleaning operation, what I really mean is that we can just say VAR cleaned response or something
+
+8
+00:00:31,320 --> 00:00:31,840
+like that.
+
+9
+00:00:31,840 --> 00:00:38,240
+And then we're going to say get the response and trim that so that you get the trimmed response there.
+
+10
+00:00:38,360 --> 00:00:42,480
+And then we can remove the uh the tick tick tick there.
+
+11
+00:00:42,520 --> 00:00:44,080
+So that is what we need to remove.
+
+12
+00:00:44,120 --> 00:00:44,560
+Right.
+
+13
+00:00:44,600 --> 00:00:48,200
+So this this this is the thing that we need to remove, uh, with the JSON.
+
+14
+00:00:48,440 --> 00:00:55,720
+Uh, so in order to do that, I'm going to say if the cleaned response dot starts with C, this is what
+
+15
+00:00:55,720 --> 00:00:59,760
+we have to do right with this tick there like JSON.
+
+16
+00:01:00,160 --> 00:01:03,580
+And I'm also going to do a string comparison.
+
+17
+00:01:05,780 --> 00:01:09,860
+Dot ordinal ignorecase something like that.
+
+18
+00:01:09,860 --> 00:01:19,420
+So if you get this particular string as the starting, uh, then you can just do a clean response dot
+
+19
+00:01:19,980 --> 00:01:20,940
+remove.
+
+20
+00:01:21,100 --> 00:01:29,140
+And I'm going to fully remove the clean response is equal to uh clean response dot substring.
+
+21
+00:01:29,420 --> 00:01:31,820
+And I know there is a substring of seven letters there.
+
+22
+00:01:31,820 --> 00:01:35,140
+So I'm going to put the substring as seven.
+
+23
+00:01:35,700 --> 00:01:41,500
+And I'm going to say if it starts with for some reason, if it's the the clean response is going to
+
+24
+00:01:41,500 --> 00:01:51,140
+starts with the uh tick tick tick for some reason like starts with uh, these three ticks, uh, over
+
+25
+00:01:51,140 --> 00:01:51,580
+there.
+
+26
+00:01:52,260 --> 00:01:55,940
+Then you, you do a substring of three or something like that.
+
+27
+00:01:55,940 --> 00:01:59,820
+So I'll just put that over here as substring of three.
+
+28
+00:02:01,740 --> 00:02:10,080
+And if the cleaned response because you saw that the the response was also ends with three tick there
+
+29
+00:02:10,480 --> 00:02:21,840
+just like this, then do a clean response is equal to clean response dot substring of three their substrings
+
+30
+00:02:21,840 --> 00:02:24,640
+of zero, because that is going to be the starting.
+
+31
+00:02:24,800 --> 00:02:28,840
+And then the clean response dot length minus three.
+
+32
+00:02:29,160 --> 00:02:34,120
+That is what we need to do in order to remove the last part of this particular response there.
+
+33
+00:02:34,440 --> 00:02:41,800
+So once we have it then I'm going to do a clean response dot trim, which is going to be the clean response
+
+34
+00:02:42,120 --> 00:02:43,000
+something like that.
+
+35
+00:02:43,000 --> 00:02:49,040
+And we're going to pass this clean response to the deserialization part so that it can do the cleaning
+
+36
+00:02:49,040 --> 00:02:54,480
+operation for me over there, so it can do the initialization part for me over there.
+
+37
+00:02:54,520 --> 00:02:55,640
+Hope you got the idea right.
+
+38
+00:02:55,640 --> 00:02:58,160
+This is what we're getting it from this particular model.
+
+39
+00:02:58,160 --> 00:03:01,360
+And this could happen even with your local large language model as well.
+
+40
+00:03:01,360 --> 00:03:06,370
+Sometimes, because sometimes you are, your, uh, your large language model will start returning you
+
+41
+00:03:06,370 --> 00:03:07,210
+the response.
+
+42
+00:03:07,210 --> 00:03:11,890
+Even though it returns in a JSON, it returns with a markdown format as well.
+
+43
+00:03:11,890 --> 00:03:14,570
+That's what we are trying to remove over here, right?
+
+44
+00:03:14,610 --> 00:03:20,010
+It's like a syntax markdown format, which it returns, uh, some time with few models.
+
+45
+00:03:20,170 --> 00:03:24,570
+Uh, so it's better to also remove that markdown as well.
+
+46
+00:03:24,770 --> 00:03:25,970
+Uh, from the text.
+
+47
+00:03:26,330 --> 00:03:26,810
+There we go.
+
+48
+00:03:26,850 --> 00:03:32,090
+Now it's working and I'm going to go and get the response.
+
+49
+00:03:32,530 --> 00:03:39,650
+Uh, let's put a breakpoint over here this time and I'm gonna run it.
+
+50
+00:03:40,450 --> 00:03:44,130
+Let's ignore these part because we know that this is going to work.
+
+51
+00:03:44,730 --> 00:03:47,490
+So I'm just gonna let this code to execute.
+
+52
+00:03:47,890 --> 00:03:49,050
+It's taking a bit of time.
+
+53
+00:03:49,050 --> 00:03:50,210
+And we got the response.
+
+54
+00:03:50,250 --> 00:03:50,930
+Look at that.
+
+55
+00:03:51,210 --> 00:03:56,650
+This time the response contains only the JSON instead of containing many things there.
+
+56
+00:03:56,850 --> 00:03:58,970
+And do you see that it says the difference.
+
+57
+00:03:59,010 --> 00:04:03,970
+The top navigation menu image to includes employee details manage users, which is not present in image
+
+58
+00:04:03,970 --> 00:04:04,410
+one.
+
+59
+00:04:04,550 --> 00:04:09,750
+Additionally, the image two has a greeting hello admin on the top, which is not there as well, which
+
+60
+00:04:09,750 --> 00:04:13,070
+is pretty cool, so it could see the difference, uh, in the image.
+
+61
+00:04:13,430 --> 00:04:18,110
+Uh, and we, we can see that there is a result coming up over there.
+
+62
+00:04:18,110 --> 00:04:21,550
+So if the result is false, then which means our test is failed.
+
+63
+00:04:21,550 --> 00:04:32,390
+So we can just say, uh, assert over here, assert true if the result, uh, dot r equals right.
+
+64
+00:04:32,430 --> 00:04:37,750
+But now the result is not going to be true because the r equals is not true is false basically.
+
+65
+00:04:37,750 --> 00:04:41,110
+So the test is eventually going to fail for us over here.
+
+66
+00:04:41,110 --> 00:04:47,590
+So this is something that we can do over here, uh, with the power of the OpenAI model that we have
+
+67
+00:04:47,590 --> 00:04:47,950
+got.
+
+68
+00:04:47,950 --> 00:04:50,590
+And it is working for us as expected.
+
+69
+00:04:51,030 --> 00:04:56,870
+The last thing that we have to do, actually, is instead of taking the screenshots for the base image
+
+70
+00:04:56,870 --> 00:05:03,510
+all the times, we can store it over here, and we can write a condition saying if the file path is
+
+71
+00:05:03,550 --> 00:05:07,450
+not empty or something like that, Then don't take the screenshot.
+
+72
+00:05:07,570 --> 00:05:12,210
+Uh, and then only take the screenshot if you need to take it for the very first time.
+
+73
+00:05:12,210 --> 00:05:17,410
+So you can write the condition over here for the base image to be taken.
+
+74
+00:05:17,690 --> 00:05:24,410
+And also you can call this method more elegantly by creating an extension method or something like that
+
+75
+00:05:24,410 --> 00:05:26,490
+within your driver, and then call it.
+
+76
+00:05:26,490 --> 00:05:30,690
+So those things I will let you to do, because there is a lot of improvement that you can do this code
+
+77
+00:05:30,730 --> 00:05:35,850
+to do the refactorings and things, uh, which could probably make this code look even more elegant
+
+78
+00:05:35,850 --> 00:05:36,930
+and more better.
+
+79
+00:05:36,930 --> 00:05:44,970
+But at least now you got the idea of how you can really use the vision models in your test to make the
+
+80
+00:05:44,970 --> 00:05:47,490
+image comparison and see how things works.
+
+81
+00:05:47,930 --> 00:05:48,690
+So that's it guys.
+
+82
+00:05:48,690 --> 00:05:55,490
+This is all about how we can work with the visual testing using the vision models of large language
+
+83
+00:05:55,490 --> 00:06:01,890
+model and make your test more intelligent with the vision comparison as well, which you cannot do with
+
+84
+00:06:01,890 --> 00:06:07,290
+selenium and playwright with their inbuilt feature, which is kind of very crap to be honest.
+
+
+==================================================================================
+
+
+
+section 11. Passing Semantic Context for Locator to make LLMs more intelligent for Self Heal
+
+
+video 1.introduction 
+
+
+1
+00:00:00,120 --> 00:00:01,960
+Welcome to the next section of our course.
+
+2
+00:00:01,960 --> 00:00:07,200
+And in this section we're going to talk about the enhancement and improvements we can do to our existing
+
+3
+00:00:07,200 --> 00:00:08,920
+code that we have written and so forth.
+
+4
+00:00:08,960 --> 00:00:14,360
+Well, before we start talking about it, let's start to understand about the current state of our project.
+
+5
+00:00:14,880 --> 00:00:21,680
+As you know that every single time while we try to do an AI find element method call over here, it
+
+6
+00:00:21,680 --> 00:00:26,520
+is going to do a set of operation like bunch of operation behind the scene.
+
+7
+00:00:26,760 --> 00:00:30,120
+And then it is going to go and call the selenium.
+
+8
+00:00:30,600 --> 00:00:34,280
+If it is failed, it's going to call the large language model and get the locator.
+
+9
+00:00:34,280 --> 00:00:38,680
+If it is already cached, then it's going to go and use that and then perform the operation on the UI.
+
+10
+00:00:38,720 --> 00:00:41,320
+That's how everything is working all these days.
+
+11
+00:00:41,320 --> 00:00:42,760
+And we have seen it many times.
+
+12
+00:00:42,760 --> 00:00:44,400
+We have discussed about it many times.
+
+13
+00:00:44,800 --> 00:00:49,520
+But let's talk about the room of improvement to the current code that we have got.
+
+14
+00:00:49,520 --> 00:00:50,960
+So we know the current state.
+
+15
+00:00:51,000 --> 00:00:52,920
+We are going to talk about the improvement side.
+
+16
+00:00:53,280 --> 00:00:57,440
+Well, the first improvement that I want to talk about is caching to database.
+
+17
+00:00:57,600 --> 00:01:03,160
+See, at the moment all our locators are stored in a JSON file.
+
+18
+00:01:03,160 --> 00:01:07,800
+What if we try to improve the way that we store these into a database?
+
+19
+00:01:07,800 --> 00:01:08,400
+Something like that.
+
+20
+00:01:08,440 --> 00:01:12,040
+This way it can also be helpful for reporting purpose for that matter.
+
+21
+00:01:12,040 --> 00:01:17,280
+For instance, if you're going to hold everything in a JSON file, then you will not know what is the
+
+22
+00:01:17,280 --> 00:01:20,080
+locator change during the CI CD pipeline.
+
+23
+00:01:20,320 --> 00:01:24,520
+And also, you will not know how every single test are failing.
+
+24
+00:01:24,520 --> 00:01:31,320
+And if you want to have a centralized dashboard of reporting to see how the locator has changed or the
+
+25
+00:01:31,320 --> 00:01:36,280
+period of time and how many times it has changed, and what is the reason for the failure and how the
+
+26
+00:01:36,280 --> 00:01:40,280
+automation test has coped up with the healing operation for you.
+
+27
+00:01:40,280 --> 00:01:46,240
+So those things you can have all reported in a dashboard for you over there, instead of you doing it
+
+28
+00:01:46,240 --> 00:01:48,240
+from a JSON file, something like this.
+
+29
+00:01:48,240 --> 00:01:50,240
+So this is one of the improvement that you can do.
+
+30
+00:01:50,240 --> 00:01:52,520
+You can think of how you can do it this way.
+
+31
+00:01:52,520 --> 00:01:58,800
+It actually helps you and your development team to understand how the locator has changed and also caused
+
+32
+00:01:58,800 --> 00:01:59,400
+the error.
+
+33
+00:01:59,400 --> 00:02:04,880
+So this improvement, I am not really going to be telling you how you need to do the implementation.
+
+34
+00:02:04,880 --> 00:02:06,680
+It is actually quite straightforward.
+
+35
+00:02:06,720 --> 00:02:12,920
+Instead of storing it in the JSON file, you are essentially going to be storing it in the database
+
+36
+00:02:12,920 --> 00:02:19,310
+like SQL server or MongoDB or SQLite database, wherever that you think, and then you're going to be
+
+37
+00:02:19,310 --> 00:02:26,790
+using the database as the back end to call, uh, an API or something, which can then be consumed in
+
+38
+00:02:26,790 --> 00:02:30,230
+an UI to render and show how the locator has changed.
+
+39
+00:02:30,230 --> 00:02:31,750
+So you can do all sorts of things.
+
+40
+00:02:31,750 --> 00:02:33,270
+So it is quite straightforward.
+
+41
+00:02:33,310 --> 00:02:38,390
+It will actually leverage your automation test to be even more centralized, viewable, and everybody
+
+42
+00:02:38,390 --> 00:02:42,510
+can, uh, know and understand how things are moving in your automation space.
+
+43
+00:02:42,510 --> 00:02:44,190
+That is one way of doing it.
+
+44
+00:02:44,430 --> 00:02:48,270
+And the next improvement that we talk about is going to be the semantic context.
+
+45
+00:02:48,550 --> 00:02:53,190
+This is quite an important concept that I'm going to be covering, and we are going to be working on
+
+46
+00:02:53,190 --> 00:02:54,390
+it in this particular section.
+
+47
+00:02:55,430 --> 00:02:57,550
+So what exactly is the semantic context?
+
+48
+00:02:57,910 --> 00:03:04,190
+If you think of our current implementation, which is something like this, you will notice that we
+
+49
+00:03:04,190 --> 00:03:10,110
+have got a locator like usernames or passwords, names whatever.
+
+50
+00:03:10,150 --> 00:03:10,590
+Right.
+
+51
+00:03:10,630 --> 00:03:12,630
+So this is the locator change that we have got.
+
+52
+00:03:12,670 --> 00:03:17,270
+The moment you pass this kind of locator to large language model, the large language model figures
+
+53
+00:03:17,270 --> 00:03:17,910
+out okay.
+
+54
+00:03:17,950 --> 00:03:24,110
+So basically you are trying to check the um, get the username locator, uh, from this particular UI.
+
+55
+00:03:24,190 --> 00:03:29,510
+And because you have given the page source code, it goes and find if it matches the username somewhere,
+
+56
+00:03:29,510 --> 00:03:35,630
+and then it assumes that you are trying to get the username locator from the UI to perform an operation,
+
+57
+00:03:35,630 --> 00:03:37,510
+and it returns you that locator.
+
+58
+00:03:37,710 --> 00:03:39,950
+That's how currently the system is working.
+
+59
+00:03:39,950 --> 00:03:41,910
+You have already figured out that how it's working.
+
+60
+00:03:42,190 --> 00:03:46,750
+But what if that username itself has completely been changed?
+
+61
+00:03:46,750 --> 00:03:53,430
+The ID is fully changed to client ID, and what if the password is fully changed to maybe auth details
+
+62
+00:03:53,430 --> 00:03:58,310
+or something like that, completely irrelevant of how it is over there.
+
+63
+00:03:58,310 --> 00:03:59,110
+As you can see.
+
+64
+00:03:59,150 --> 00:04:00,710
+See, it's completely irrelevant.
+
+65
+00:04:01,150 --> 00:04:03,790
+This kind of irrelevant locator.
+
+66
+00:04:03,990 --> 00:04:08,870
+If you try to pass to your current large language model, it will not work.
+
+67
+00:04:08,870 --> 00:04:14,070
+Rather, that code will work in a very, very unpredictable manner instead of how it should suppose
+
+68
+00:04:14,070 --> 00:04:14,550
+to work.
+
+69
+00:04:14,550 --> 00:04:18,590
+So I will show you the semantic context failure in our demo in our next lecture.
+
+70
+00:04:18,590 --> 00:04:20,910
+But this is the problem that we have got.
+
+71
+00:04:20,950 --> 00:04:25,750
+If you are not going to be passing a semantic context, so what exactly is the semantic context in the
+
+72
+00:04:25,750 --> 00:04:26,390
+first place?
+
+73
+00:04:26,630 --> 00:04:34,870
+Well, semantic context is a meaning and purpose of the UI elements rather than their technical implementations
+
+74
+00:04:34,870 --> 00:04:37,980
+like locator ID and classes for instance.
+
+75
+00:04:38,380 --> 00:04:46,660
+This is the technical element that you have got like for example, the UI id locator, uh, or name
+
+76
+00:04:46,660 --> 00:04:48,340
+or CSS, whatever that you're passing in.
+
+77
+00:04:48,340 --> 00:04:50,100
+These are the technical implementations.
+
+78
+00:04:51,100 --> 00:04:57,580
+But you need to give the context which is going to provide a meaning and purpose of this particular
+
+79
+00:04:57,580 --> 00:04:58,180
+locator.
+
+80
+00:04:58,340 --> 00:04:59,220
+Something like this.
+
+81
+00:04:59,220 --> 00:05:02,100
+For example, this client name is basically like a username.
+
+82
+00:05:02,700 --> 00:05:06,860
+And similarly the auth detail is basically a password input field.
+
+83
+00:05:06,860 --> 00:05:13,820
+So even if this thing changes let's say the ID changes or the name changes, whatever the context for
+
+84
+00:05:13,820 --> 00:05:17,580
+the large language model comes from the semantic context.
+
+85
+00:05:17,620 --> 00:05:23,380
+That's how you will notice that the large language model is going to understand okay, this particular
+
+86
+00:05:23,380 --> 00:05:25,460
+error has failed because of this reason.
+
+87
+00:05:25,460 --> 00:05:27,780
+But what exactly is the locator?
+
+88
+00:05:27,820 --> 00:05:29,380
+It will go and figure out for you.
+
+89
+00:05:29,380 --> 00:05:30,860
+That's what is the semantic context.
+
+90
+00:05:30,860 --> 00:05:36,180
+So in order to make this change of course we need to make very, very few changes in this entire section.
+
+91
+00:05:36,220 --> 00:05:37,980
+I'll tell you what those changes are.
+
+92
+00:05:38,020 --> 00:05:40,660
+And it's going to be super easy for you to follow along.
+
+93
+00:05:40,660 --> 00:05:41,500
+But you know what?
+
+94
+00:05:41,540 --> 00:05:47,060
+With this section, we are going to see how improved our test automation code is than before.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+video 2. Understanding Problem Statement without Semantic Context
+
+
+1
+00:00:00,240 --> 00:00:01,080
+All right.
+
+2
+00:00:01,080 --> 00:00:06,480
+So now we are going to see a quick demo of how the current code implementation is working.
+
+3
+00:00:06,480 --> 00:00:08,280
+And we have seen this many times.
+
+4
+00:00:08,280 --> 00:00:11,240
+So I'm really not going to run this code and show you how this works.
+
+5
+00:00:11,600 --> 00:00:18,880
+Rather, I am going to see how we can go and modify the locator in such a way that there is no way that
+
+6
+00:00:18,880 --> 00:00:21,280
+the large language model can really understand.
+
+7
+00:00:21,440 --> 00:00:29,080
+So I'm just going to say instead of the user name field over here, I'm going to say new text, something
+
+8
+00:00:29,080 --> 00:00:29,640
+like that.
+
+9
+00:00:29,640 --> 00:00:35,280
+And over here I'm going to say some text, something like that.
+
+10
+00:00:35,280 --> 00:00:39,840
+So this is really not going to give any of the information to the large language model to go and figure
+
+11
+00:00:39,840 --> 00:00:42,680
+out what this particular locator are, right?
+
+12
+00:00:42,720 --> 00:00:45,160
+It's not really a username, it's really not a password.
+
+13
+00:00:45,160 --> 00:00:51,120
+But now, because this large language model will have no idea of what exactly is this new text and some
+
+14
+00:00:51,120 --> 00:00:53,840
+text is for, it is just going to fail.
+
+15
+00:00:53,960 --> 00:00:57,440
+So I'm going to run the same test which was passing before.
+
+16
+00:00:57,760 --> 00:01:02,960
+And now what's going to happen is you will notice that it is going to go perform the login link.
+
+17
+00:01:02,960 --> 00:01:05,160
+Click but see for the username.
+
+18
+00:01:05,160 --> 00:01:09,880
+It will not know how to enter the username in the text box there.
+
+19
+00:01:10,040 --> 00:01:16,080
+Similarly for the password like password over there, see it just entered some password in a, in the
+
+20
+00:01:16,440 --> 00:01:19,960
+in the login username and it just did something.
+
+21
+00:01:19,960 --> 00:01:21,880
+And the test is eventually going to fail there.
+
+22
+00:01:22,200 --> 00:01:27,480
+So this is happening because it has no context or semantic context or relationship.
+
+23
+00:01:27,920 --> 00:01:34,800
+To tell that this particular locator is ideally a locator which is responsible for the username.
+
+24
+00:01:34,920 --> 00:01:37,040
+And this is responsible for the password.
+
+25
+00:01:37,040 --> 00:01:39,680
+So there is no way and the test is just going to fail.
+
+26
+00:01:40,160 --> 00:01:42,560
+So the attempt has completely failed this time.
+
+27
+00:01:42,960 --> 00:01:49,440
+So how do we actually fix this particular problem that we have got over here is by parsing the semantic
+
+28
+00:01:49,440 --> 00:01:51,480
+context to the large language model.
+
+29
+00:01:51,480 --> 00:01:53,120
+Essentially we're going to say that okay.
+
+30
+00:01:53,160 --> 00:01:57,720
+So this particular field, even though whatever the ID or the XPath or the name or the class name,
+
+31
+00:01:57,720 --> 00:02:05,040
+whatever it changes, you still tell in a natural language saying this locator is basically for us,
+
+32
+00:02:05,400 --> 00:02:11,440
+the user name field or something like that, right?
+
+33
+00:02:11,480 --> 00:02:19,360
+And this field is going to be uh, something like for the password field, something like that.
+
+34
+00:02:19,360 --> 00:02:19,800
+Right.
+
+35
+00:02:19,840 --> 00:02:27,720
+And similarly this this guy is basically for maybe uh, let's say for login button.
+
+36
+00:02:29,810 --> 00:02:32,090
+Uh, button there or something like that.
+
+37
+00:02:32,090 --> 00:02:33,090
+Login button.
+
+38
+00:02:33,130 --> 00:02:35,370
+Field login.
+
+39
+00:02:36,570 --> 00:02:36,970
+Button.
+
+40
+00:02:36,970 --> 00:02:38,010
+Field or something like that.
+
+41
+00:02:38,010 --> 00:02:39,730
+You can just say whatever that you want to do.
+
+42
+00:02:39,730 --> 00:02:42,730
+So because this is like a natural language of where you are.
+
+43
+00:02:42,770 --> 00:02:44,290
+You're going to write it over here.
+
+44
+00:02:44,290 --> 00:02:48,890
+So this way, uh, now the large language model will have a context of what exactly?
+
+45
+00:02:48,930 --> 00:02:52,090
+Like a semantic context of what exactly this particular locator is all about.
+
+46
+00:02:52,130 --> 00:02:52,530
+Right.
+
+47
+00:02:52,570 --> 00:02:55,130
+So that is what we are going to be giving it over here.
+
+48
+00:02:55,250 --> 00:02:55,810
+This way.
+
+49
+00:02:56,170 --> 00:02:59,050
+Now your large language model will have more information.
+
+50
+00:02:59,050 --> 00:03:05,490
+But because we have made this change, we of course need to make a lot of change, uh, in our existing
+
+51
+00:03:05,490 --> 00:03:05,930
+code.
+
+52
+00:03:06,330 --> 00:03:12,610
+While I say a lot of changes, the major change is going to happen, especially the way we're gonna
+
+53
+00:03:12,650 --> 00:03:19,770
+be calling the, uh, the self-healing approach, which is from our, uh, what is called as the heal
+
+54
+00:03:19,810 --> 00:03:21,050
+using AI.
+
+55
+00:03:21,250 --> 00:03:21,810
+This guy.
+
+56
+00:03:21,970 --> 00:03:27,850
+So this is the place where we call our get Healed locator, which is this one, this particular, uh,
+
+57
+00:03:28,210 --> 00:03:30,530
+prompt which needs to be modified.
+
+58
+00:03:30,530 --> 00:03:33,970
+And the way we need to modify is what we're going to be discussing in our next lecture.
+
+59
+00:03:33,970 --> 00:03:36,930
+But this is the place that we need to modify.
+
+60
+00:03:36,930 --> 00:03:41,890
+And the moment we modify this guy, everything is going to start changing.
+
+61
+00:03:42,170 --> 00:03:44,290
+That's what we're going to be discussing in our next lecture.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 3. Updating LLM Prompt to accept Semantic Contexts and update relevant methods
+
+
+1
+00:00:00,320 --> 00:00:01,080
+All right.
+
+2
+00:00:01,080 --> 00:00:07,200
+As I told you, this is the place which we are going to be modifying the prompt in such a way that it
+
+3
+00:00:07,200 --> 00:00:13,040
+can go and figure out how exactly it can work with that particular change.
+
+4
+00:00:13,200 --> 00:00:19,800
+So essentially, what I'm going to do in here is that I'm going to pass in what is called a string as
+
+5
+00:00:19,960 --> 00:00:23,320
+semantic context, right?
+
+6
+00:00:23,480 --> 00:00:30,760
+This is the context which I wanted to pass in for this particular, um, for this particular method.
+
+7
+00:00:31,040 --> 00:00:34,160
+And this can be there or this cannot be there.
+
+8
+00:00:34,160 --> 00:00:39,600
+So we can just make this semantic context to be, um, like a null acceptable.
+
+9
+00:00:39,600 --> 00:00:42,720
+So that's why I'm passing a default parameter there.
+
+10
+00:00:42,960 --> 00:00:47,000
+And I'm going to give a element, uh description this time.
+
+11
+00:00:47,200 --> 00:00:50,520
+And the element description is going to be something that I wanted to formulate.
+
+12
+00:00:50,520 --> 00:00:57,480
+If, uh, this particular string is going to be null or whitespace, whatever the semantic context that
+
+13
+00:00:57,480 --> 00:00:58,240
+I'm talking about.
+
+14
+00:00:58,600 --> 00:01:09,290
+If it is going to be null, then I'm going to say the element with locator type probably.
+
+15
+00:01:10,010 --> 00:01:18,490
+And then I'm going to say locator type and locate our UL, which is going to be basically like a value
+
+16
+00:01:18,490 --> 00:01:19,090
+or whatever.
+
+17
+00:01:19,130 --> 00:01:19,450
+Right.
+
+18
+00:01:19,450 --> 00:01:20,970
+That's what I'm going to pass in there.
+
+19
+00:01:20,970 --> 00:01:22,770
+So that's going to be the original locator.
+
+20
+00:01:22,770 --> 00:01:28,250
+So original locator you choose this one else.
+
+21
+00:01:28,810 --> 00:01:33,130
+So I'm just going to be writing pretty much like this over here.
+
+22
+00:01:33,130 --> 00:01:41,810
+So else you are going to say uh over here that dollar double quotes.
+
+23
+00:01:45,490 --> 00:01:47,570
+Like semantic context.
+
+24
+00:01:48,090 --> 00:01:51,530
+Uh and I'm going to say original.
+
+25
+00:01:54,490 --> 00:02:04,330
+Uh locator which is going to be essentially locator type, which is equal to the original locator.
+
+26
+00:02:04,490 --> 00:02:05,250
+Something like this.
+
+27
+00:02:05,250 --> 00:02:07,730
+So this is what I really wanted to pass in over here.
+
+28
+00:02:07,730 --> 00:02:14,130
+So why I'm doing this part over here is because now I'm trying to formulate what I need to pass as an
+
+29
+00:02:14,170 --> 00:02:17,450
+element description to the prompt that I'm going to pass in.
+
+30
+00:02:17,650 --> 00:02:19,450
+And I have already written the prompt.
+
+31
+00:02:19,450 --> 00:02:22,930
+So as usual, I'm just going to go and copy paste the code.
+
+32
+00:02:22,930 --> 00:02:29,130
+I don't really want to write that, so I'm just going to go paste that over here.
+
+33
+00:02:29,130 --> 00:02:31,490
+And you see that this is the prompt that I'm passing in.
+
+34
+00:02:31,530 --> 00:02:35,690
+So essentially I'm saying that you are helping to locate a web element that cannot be found with the
+
+35
+00:02:35,690 --> 00:02:40,170
+original locator element you are looking for is this element description.
+
+36
+00:02:40,170 --> 00:02:42,250
+This is the element description that I'm going to get in.
+
+37
+00:02:42,290 --> 00:02:45,010
+And I'm going to say the original locator is no longer working.
+
+38
+00:02:45,010 --> 00:02:47,570
+This could be because the locator value has changed.
+
+39
+00:02:47,610 --> 00:02:50,770
+Let's say I'd renamed class modified or something like that.
+
+40
+00:02:50,810 --> 00:02:52,330
+And the element structure has changed.
+
+41
+00:02:52,330 --> 00:02:55,810
+The element has been moved into the Dom or something like that.
+
+42
+00:02:55,810 --> 00:03:02,260
+And your task is to analyze the page source below and find the element that matches the purpose described
+
+43
+00:03:02,260 --> 00:03:02,700
+above.
+
+44
+00:03:02,940 --> 00:03:06,940
+Write all of these and this is the critical instruction that I'm giving in as well.
+
+45
+00:03:06,940 --> 00:03:10,860
+Use the friendly name description to understand what element you're looking for.
+
+46
+00:03:11,140 --> 00:03:13,780
+Look for the element that serves the same purpose.
+
+47
+00:03:13,780 --> 00:03:21,060
+Even if the ID classes are completely different, and return only a valid JSON object for these key
+
+48
+00:03:21,100 --> 00:03:30,100
+like ID name, XPath, CSS class name, and link text that we have got and prefer robust locators um,
+
+49
+00:03:30,420 --> 00:03:31,740
+over the fragile ones.
+
+50
+00:03:31,980 --> 00:03:38,180
+Uh, do not include any of the, uh, any of the text before, so I'm going to say the robust locator
+
+51
+00:03:38,180 --> 00:03:44,580
+XPath CSS selector ID and name because these are the robust locator for sure, and do not include the
+
+52
+00:03:44,580 --> 00:03:45,940
+explanations or the comments.
+
+53
+00:03:45,940 --> 00:03:49,780
+And this is the expected JSON value and this is the page source.
+
+54
+00:03:49,780 --> 00:03:55,580
+So these are the things that I'm going to pass in as the get healed locator over here.
+
+55
+00:03:55,660 --> 00:04:02,180
+And because now I have added an optional semantic context over here, we now need to go and modify the
+
+56
+00:04:02,180 --> 00:04:05,020
+place where we have called this Get Healed locator.
+
+57
+00:04:05,020 --> 00:04:12,580
+So if we go and click the one usage that we have, this is the place that I need to pass the uh, the
+
+58
+00:04:12,580 --> 00:04:14,180
+semantic context as well.
+
+59
+00:04:14,180 --> 00:04:15,580
+So how do I actually pass it?
+
+60
+00:04:15,620 --> 00:04:16,420
+Well guess what.
+
+61
+00:04:16,420 --> 00:04:21,300
+This heal using the AI method needs to have the semantic context.
+
+62
+00:04:21,300 --> 00:04:26,820
+So I'm going to say string of the semantic context.
+
+63
+00:04:26,820 --> 00:04:35,140
+And then I'm going to paste this semantic context to our this method over here.
+
+64
+00:04:35,140 --> 00:04:35,620
+Right.
+
+65
+00:04:35,620 --> 00:04:38,660
+And this can again be a null as well.
+
+66
+00:04:38,660 --> 00:04:42,260
+So you necessarily doesn't have to be like 100% is there.
+
+67
+00:04:42,260 --> 00:04:47,660
+So it can be nullable type as well which you can do something like this, as you can see over here.
+
+68
+00:04:47,660 --> 00:04:55,110
+And I'm going to go and do the exact same thing for this parameter as well over here, which is pretty
+
+69
+00:04:55,110 --> 00:04:55,510
+cool.
+
+70
+00:04:55,630 --> 00:05:00,870
+And then I also need to modify the self-healing locator side, which is this part where I have called
+
+71
+00:05:00,870 --> 00:05:06,710
+the healing, uh, heal using the, uh, using AI thing over here.
+
+72
+00:05:06,710 --> 00:05:11,430
+I think I need to go and rename this to async, because I don't know why I just left it as it is, like,
+
+73
+00:05:11,470 --> 00:05:14,790
+because this is an async method, so this should be an async.
+
+74
+00:05:14,830 --> 00:05:21,790
+Ideally, uh, and I'm gonna go and modify that over here heal using async, which is a good way of
+
+75
+00:05:21,790 --> 00:05:22,390
+doing it.
+
+76
+00:05:22,630 --> 00:05:27,110
+And I need to pass the, uh, semantic context over here as well.
+
+77
+00:05:27,110 --> 00:05:30,550
+So let's go and modify the semantic context.
+
+78
+00:05:30,550 --> 00:05:34,310
+So wherever I need the semantic context to be passed in I need to do that.
+
+79
+00:05:34,630 --> 00:05:39,510
+I will let you to do that because I know I have already given you all the context to how of how you
+
+80
+00:05:39,510 --> 00:05:40,670
+can go and modify it.
+
+81
+00:05:40,710 --> 00:05:45,950
+I'm sure you can do that, but for now, this is the change that we have to do, and then we can see
+
+82
+00:05:45,950 --> 00:05:51,070
+how it needs to be executed, which I will do it in our next lecture, but I will let you to do it as
+
+83
+00:05:51,070 --> 00:05:53,790
+well in the meantime, so that you know how to do it as well.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+video 4. Execute POM Code with Semantic Context, giving more context to LLMs
+
+
+1
+00:00:00,040 --> 00:00:04,520
+All right, so now I'm gonna go and modify the rest of the code, and I'm sure you would have already
+
+2
+00:00:04,560 --> 00:00:04,960
+did that.
+
+3
+00:00:04,960 --> 00:00:06,760
+But if not, just follow along.
+
+4
+00:00:06,800 --> 00:00:08,720
+This is what the changes that you have to do.
+
+5
+00:00:08,800 --> 00:00:13,160
+So essentially if you go to this particular method, this is what I'm trying to pass in everywhere.
+
+6
+00:00:13,160 --> 00:00:16,840
+So I'm going to do the same exact thing wherever that I'm passing in.
+
+7
+00:00:16,840 --> 00:00:21,600
+So I'm just going to copy and I'm going to go to the find element async over here.
+
+8
+00:00:21,600 --> 00:00:22,880
+This is what I'm passing in.
+
+9
+00:00:23,080 --> 00:00:29,520
+And this is the semantic context that I wanted to pass in to our heal using AI async method as well,
+
+10
+00:00:29,560 --> 00:00:30,520
+which is this one.
+
+11
+00:00:30,720 --> 00:00:32,640
+And you see that now the method has been passed.
+
+12
+00:00:32,840 --> 00:00:39,440
+And because this find element async is being called somewhere, which is this one, as you can see here,
+
+13
+00:00:39,640 --> 00:00:43,400
+here I can pass the semantic context, which is this one.
+
+14
+00:00:43,440 --> 00:00:46,920
+Oops I think I need to copy that again, which is this guy.
+
+15
+00:00:47,440 --> 00:00:48,400
+Go copy that.
+
+16
+00:00:48,760 --> 00:00:56,480
+And if you go to three usages, you see that this is the place that I have called the find element async.
+
+17
+00:00:57,040 --> 00:01:01,140
+So you don't really have to pass it there like forcibly.
+
+18
+00:01:01,140 --> 00:01:05,980
+But, um, I think in the web driver extension, this is the place that we need to pass in.
+
+19
+00:01:06,220 --> 00:01:10,420
+And I'm going to pass the semantic context anywhere over here.
+
+20
+00:01:10,660 --> 00:01:15,300
+And because you can see that the find element actually has got an int, uh, retry attempt as two as
+
+21
+00:01:15,300 --> 00:01:15,460
+well.
+
+22
+00:01:15,460 --> 00:01:17,620
+There is another default value.
+
+23
+00:01:17,860 --> 00:01:23,620
+The way you can do it in the C sharp is you can just say, uh, semantic context, something like this.
+
+24
+00:01:23,620 --> 00:01:25,380
+And then you pass the semantic context.
+
+25
+00:01:25,380 --> 00:01:33,380
+This way you can pass the element or the parameter without, uh, without just following along, like
+
+26
+00:01:33,420 --> 00:01:34,580
+put a null or something like that.
+
+27
+00:01:34,580 --> 00:01:36,980
+So you can do that in the C sharp world, something like this.
+
+28
+00:01:36,980 --> 00:01:38,340
+So this is how you should do it.
+
+29
+00:01:38,740 --> 00:01:42,420
+Uh, and I think we are pretty good with this one.
+
+30
+00:01:42,420 --> 00:01:47,500
+This is the only change that I have to make overall, uh, in order to get the semantic context.
+
+31
+00:01:47,780 --> 00:01:54,100
+And now in the code over here in the login page, you see that this is all just working fine right now.
+
+32
+00:01:54,100 --> 00:01:58,100
+So it's automatically taken care of that particular locator for us.
+
+33
+00:01:58,140 --> 00:02:03,280
+Now let's try to run the same exact code and see how this code is going to work.
+
+34
+00:02:03,320 --> 00:02:05,000
+So I'm just going to run that right now.
+
+35
+00:02:07,120 --> 00:02:13,600
+And because now we have got the semantic context for the large language model, I think the reason why
+
+36
+00:02:13,600 --> 00:02:18,360
+this is not working is because we have just tried using the same locator there with like new text.
+
+37
+00:02:18,360 --> 00:02:24,240
+So I'm going to go and delete the healed locator that we have got which is somehow sitting over here
+
+38
+00:02:24,400 --> 00:02:25,760
+in the bin folder.
+
+39
+00:02:25,800 --> 00:02:32,880
+I'm just gonna go remove this guy because it has healed wrongly in our last execution, if you remember.
+
+40
+00:02:32,880 --> 00:02:35,760
+So I'm going to just open it and show you what I really mean about that.
+
+41
+00:02:35,760 --> 00:02:46,200
+So if you see here the new text, uh, is somehow, uh, been identified, uh, wrongly before see login
+
+42
+00:02:46,200 --> 00:02:52,040
+in login and like username somehow it's completely wrongly identified for that over here which is not
+
+43
+00:02:52,040 --> 00:02:52,480
+correct.
+
+44
+00:02:52,480 --> 00:02:55,280
+So we need to go and delete that fully.
+
+45
+00:02:55,280 --> 00:02:59,040
+So now I'm going to run the same test one more time to see how that works.
+
+46
+00:02:59,040 --> 00:03:04,420
+So you can see that I get in here to the try find element in the cache which won't be there.
+
+47
+00:03:04,700 --> 00:03:05,580
+Which is fine.
+
+48
+00:03:05,900 --> 00:03:10,300
+And I'm going to get to the heal using the AI, which is correct.
+
+49
+00:03:10,500 --> 00:03:13,220
+And I'm going to see if I get the response this time.
+
+50
+00:03:13,220 --> 00:03:14,860
+So I'm going to put a breakpoint here.
+
+51
+00:03:15,220 --> 00:03:20,020
+Because this is the place where I have to get through uh which is correct.
+
+52
+00:03:20,060 --> 00:03:20,420
+Okay.
+
+53
+00:03:20,460 --> 00:03:22,060
+So let's see the prompt.
+
+54
+00:03:22,060 --> 00:03:27,340
+So you see that this time the prompt is going to be like you're you're helping to locate a web element
+
+55
+00:03:27,340 --> 00:03:29,380
+that cannot be found in this original.
+
+56
+00:03:29,500 --> 00:03:35,740
+Uh, and let's see the prompt one more time, I'm going to say element you're looking for is for user
+
+57
+00:03:35,780 --> 00:03:39,060
+fee username field locator of by text.
+
+58
+00:03:39,100 --> 00:03:40,780
+And the original locator is no longer working.
+
+59
+00:03:40,780 --> 00:03:44,460
+This could be because the locator value has changed something like that.
+
+60
+00:03:44,460 --> 00:03:46,140
+And this is the page source.
+
+61
+00:03:46,140 --> 00:03:52,300
+So now let's see if the model can go and figure out what we are telling it to find out.
+
+62
+00:03:52,580 --> 00:03:57,580
+And you will see that this is the time we're going to get the response, uh, over here, let's see
+
+63
+00:03:57,580 --> 00:03:59,580
+if the response is correct or not.
+
+64
+00:03:59,980 --> 00:04:05,680
+So if I'm going to go to the response, do you see that we have got the user name this time?
+
+65
+00:04:05,680 --> 00:04:12,640
+So it could figure out that this is basically an user name field, even though it is like some text
+
+66
+00:04:12,640 --> 00:04:13,880
+or name text, something like that.
+
+67
+00:04:13,920 --> 00:04:15,040
+It's like new text.
+
+68
+00:04:15,040 --> 00:04:20,640
+It's still could able to figure that out, which means the semantic context is working.
+
+69
+00:04:20,640 --> 00:04:22,240
+So it could able to find that out.
+
+70
+00:04:22,440 --> 00:04:24,760
+And it is working for us as expected.
+
+71
+00:04:25,200 --> 00:04:31,000
+So you will notice that it is going to go and type that value for us over there, which is going to
+
+72
+00:04:31,000 --> 00:04:38,200
+be this one, this element is that, see that the admin is working, which is great.
+
+73
+00:04:38,200 --> 00:04:41,680
+And I'm going to go with the second, uh, operation that is going to do.
+
+74
+00:04:42,080 --> 00:04:43,800
+And I'm going to put a breakpoint here.
+
+75
+00:04:43,800 --> 00:04:46,560
+I'm not going to go through the whole drill one more time.
+
+76
+00:04:47,120 --> 00:04:47,560
+Oops.
+
+77
+00:04:49,200 --> 00:04:55,160
+And I think this time it's going to get me the response correctly for the password as well.
+
+78
+00:04:55,160 --> 00:04:58,160
+Well, I'm just going to use some random there.
+
+79
+00:04:58,240 --> 00:04:59,000
+Look at that.
+
+80
+00:04:59,040 --> 00:05:03,340
+It says the password there so it could able to find out the password as well.
+
+81
+00:05:03,860 --> 00:05:04,900
+Which is correct.
+
+82
+00:05:05,300 --> 00:05:06,060
+Which is awesome.
+
+83
+00:05:06,500 --> 00:05:08,180
+So we could able to work out.
+
+84
+00:05:08,180 --> 00:05:10,940
+So I'm just going to leave that whole thing there.
+
+85
+00:05:10,980 --> 00:05:15,140
+I'm just going to let the entire execution to happen instead of having a breakpoints everywhere.
+
+86
+00:05:15,660 --> 00:05:17,300
+Um, which is cool.
+
+87
+00:05:17,900 --> 00:05:20,980
+And we should able to click the login button as well.
+
+88
+00:05:21,260 --> 00:05:21,900
+Just this one.
+
+89
+00:05:21,940 --> 00:05:23,300
+You see that now it worked.
+
+90
+00:05:23,580 --> 00:05:25,700
+So this time the test is passing.
+
+91
+00:05:26,020 --> 00:05:35,780
+So with the context you can pass whatever that you wanted to maybe like this see completely um a nonsense
+
+92
+00:05:35,820 --> 00:05:36,820
+locator there.
+
+93
+00:05:36,820 --> 00:05:38,540
+But still it is going to work.
+
+94
+00:05:38,580 --> 00:05:42,620
+The reason why this is working is because now you have got the semantic context.
+
+95
+00:05:42,620 --> 00:05:45,820
+So I'm just making the locators looking quite bad here.
+
+96
+00:05:45,860 --> 00:05:50,900
+The reason why I'm making this is because I want to prove the point that even if the locator is completely
+
+97
+00:05:50,900 --> 00:05:57,660
+changing, your semantic context is going to give the idea to the large language model that you can
+
+98
+00:05:57,700 --> 00:06:00,240
+actually find the locator using that.
+
+99
+00:06:00,240 --> 00:06:05,960
+So this is the same idea which has been used in many of the testing tools, where you can even pass
+
+100
+00:06:05,960 --> 00:06:11,480
+the text like go and click the username, go and enter the password, something like that.
+
+101
+00:06:11,520 --> 00:06:13,600
+Just you just try to enter those kind of details.
+
+102
+00:06:13,600 --> 00:06:14,400
+It is working.
+
+103
+00:06:14,400 --> 00:06:19,800
+The reason why this is working is because this is all just happening, because of these kind of, um,
+
+104
+00:06:20,000 --> 00:06:23,000
+uh, context that is being given to the large language model.
+
+105
+00:06:23,040 --> 00:06:30,480
+See, now with all these changes as well, your code is still working and we have got all of them self
+
+106
+00:06:30,520 --> 00:06:32,000
+healed for us over here.
+
+107
+00:06:32,160 --> 00:06:37,720
+And even this time, because we have the caching mechanism in place, the test that took 40s to execute
+
+108
+00:06:37,720 --> 00:06:42,680
+last time, it is going to take the same seven seconds this time as well to execute.
+
+109
+00:06:42,680 --> 00:06:43,520
+Look at that.
+
+110
+00:06:43,600 --> 00:06:44,640
+This is pretty amazing.
+
+111
+00:06:45,040 --> 00:06:51,720
+This is how we can use, uh, the power of semantic context in our code to make our testing code even
+
+112
+00:06:51,720 --> 00:06:55,880
+more intelligent, not just prone to failure like how it was before.
+
+113
+00:06:55,920 --> 00:07:00,760
+And this is one of the huge improvement that we can make in to ensure that our code still works.
+
+
+==================================================================================
+
+
