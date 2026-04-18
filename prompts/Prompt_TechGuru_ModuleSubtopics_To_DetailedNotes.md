@@ -47,6 +47,7 @@
 5. **Analogy Quality Check:** Har analogy generate karne se pehle check karo — kya yeh analogy is specific concept ke behavior ko accurately represent karti hai? Generic ya misleading analogies mat dena. Agar koi genuinely good analogy nahi sujh rahi — likho: "Is concept ke liye koi perfect real-life analogy nahi hai — seedha example se samjhte hain."
 6. **Code Accuracy Check:** Kya code blocks latest stable version ke hain? Deprecated APIs ya outdated syntax toh nahi use ho raha? Agar uncertain ho toh likho: `⚠️ Yeh code current understanding ke basis par hai — exact syntax official docs se verify karo.`
 7. **Security/Scalability Check:** Kya security aur scalability points genuine hain ya bas filler? Filler content = FAIL.
+8. **🔗 Contextual Terms Check (MANDATORY):** Kya maine koi external tool/library/framework/concept mention kiya bina explain kiye? Har proper noun (capitalized tech term ya domain-specific term) ko inline explain karo — assume reader ne pehli baar suna hai. Yeh rule har domain ke liye apply hota hai (AI, Data Science, Cybersecurity, Web Dev, etc.).
 
 
 ---
@@ -103,6 +104,113 @@ Quality and depth are our #1 priority. **NEVER compromise on the detail, length,
 
 
 **4. Show Special Characters Clearly** — Jab bhi kuch type karna ho (`$`, `{}`, `[]`, `=>`, `|`), clearly batao inka naam aur kaam Hinglish mein.
+
+
+---
+
+
+## 🔗 CONTEXTUAL TERM EXPLANATION RULE (MANDATORY)
+
+**CRITICAL RULE:** Jab bhi tum explanation mein koi **external tool, library, framework, technology, concept, or domain-specific term** ka naam lo (jo current subtopic ka main focus NAHI hai, but example/context/comparison mein use ho raha hai) — usse **immediately explain karo** inline.
+
+**Yeh rule UNIVERSAL hai — har domain ke liye apply hota hai:**
+- **AI/ML Course:** Selenium, Playwright, Docker, LangChain, Ollama, Claude, GPT-4, XPath, Postman
+- **Data Science Course:** Pandas, NumPy, Scikit-learn, Jupyter, Matplotlib, Seaborn, SQL, NoSQL
+- **Cybersecurity Course:** Metasploit, Wireshark, Nmap, Burp Suite, OWASP, CVE, SQL Injection, XSS
+- **Web Development Course:** React, Angular, Node.js, Express, MongoDB, REST API, GraphQL
+- **DevOps Course:** Kubernetes, Jenkins, Terraform, Ansible, CI/CD, AWS, Azure, GCP
+
+### 📋 The Inline Explanation Format
+
+**Format:** `[Term] (1-line Hinglish explanation in parentheses)`
+
+**✅ CORRECT Examples (Domain-Agnostic):**
+
+```markdown
+"Yeh test Selenium (browser automation tool — Chrome/Firefox ko code se control karta hai) use karke run hota hai."
+
+"Data ko Pandas (Python library — tabular data manipulation ke liye, jaise Excel but code mein) mein load karo."
+
+"Wireshark (network packet analyzer — network traffic ko real-time capture aur analyze karta hai) se traffic monitor karo."
+
+"API ko Postman (API testing tool — HTTP requests manually test karne ke liye) mein verify karo."
+
+"XPath (XML path language — HTML elements ko tree structure mein locate karne ka tarika) use karo."
+
+"Model ko TensorFlow (Google ka ML framework — neural networks train karne ke liye) mein train karo."
+```
+
+**❌ WRONG Examples (NO explanation):**
+
+```markdown
+"Yeh test Selenium use karke run hota hai." ← WRONG! Selenium kya hai?
+
+"Data ko Pandas mein load karo." ← WRONG! Pandas kya hai?
+
+"Wireshark se traffic monitor karo." ← WRONG! Wireshark kya hai?
+```
+
+### 🎯 When to Apply This Rule
+
+**Apply in ALL these scenarios:**
+
+1. **Point 2 (Analogy):** Agar analogy mein koi tech term use kiya
+2. **Point 6 (Under the Hood):** Jab internal working explain karte waqt external tools mention ho
+3. **Point 7 (Hands-On):** Code examples mein jo bhi library/tool import ho
+4. **Point 9 (Anti-Patterns):** Jab alternatives mention karo
+5. **Point 8 (Comparison):** Comparison table mein jo bhi terms aayein
+6. **Point 12 (Real-World Use Case):** Company examples mein jo tech stack mention ho
+7. **Point 17 (Interview Q&A):** Answers mein jo bhi external concepts reference ho
+
+### 🔍 Detection Rule (Self-Check)
+
+**Before finalizing each Point, ask yourself:**
+- "Kya maine koi proper noun (capitalized name) use kiya jo ek tool/library/framework/concept hai?"
+- "Agar reader ne yeh term pehli baar suna hai — kya woh samajh jayega?"
+- "Kya yeh term current subtopic ka main focus hai? (Agar NAHI — toh explain karo inline)"
+
+**Exception:** Agar woh term **same module mein pehle kisi aur subtopic mein already detail mein cover ho chuka hai** — toh sirf reference do:
+```markdown
+"Selenium (detail: Subtopic 2 mein dekho) use karke..."
+```
+
+### 📊 Explanation Depth Guidelines
+
+| Term Type | Explanation Length | Example |
+|-----------|-------------------|---------||
+| **Popular tool** (e.g., Docker, Git, Wireshark) | 1 line — core function | `Docker (containers banane ka tool — app ko isolated environment mein run karta hai)` |
+| **Library/Framework** (e.g., React, Pandas, Metasploit) | 1 line — primary use case | `Pandas (Python library — tabular data manipulation ke liye, jaise Excel but code mein)` |
+| **Concept** (e.g., API, Cache, Firewall) | 1 line — simple definition | `Cache (temporary storage — frequently used data ko fast access ke liye store karta hai)` |
+| **Protocol** (e.g., HTTP, WebSocket, SSH) | 1 line — communication purpose | `WebSocket (real-time two-way communication protocol — chat apps mein use hota hai)` |
+| **Domain term** (e.g., XPath, SQL Injection, Gradient Descent) | 1 line — what it does | `XPath (XML path language — HTML elements ko tree structure mein locate karne ka tarika)` |
+
+### ⚠️ Common Mistakes to Avoid
+
+**❌ WRONG — Assuming reader knows common tools:**
+```markdown
+"Is code ko GitHub Actions mein deploy karo."
+"Data ko Jupyter Notebook mein analyze karo."
+"Nmap se port scan karo."
+```
+
+**✅ CORRECT — Explain inline:**
+```markdown
+"Is code ko GitHub Actions (GitHub ka built-in CI/CD tool — code push karne par automatically test aur deploy karta hai) mein deploy karo."
+
+"Data ko Jupyter Notebook (interactive coding environment — code, output aur notes ek saath rakh sakte ho) mein analyze karo."
+
+"Nmap (network scanner — open ports aur services discover karne ke liye) se port scan karo."
+```
+
+**❌ WRONG — Over-explaining the main topic:**
+```markdown
+"Selenium (Selenium ek browser automation tool hai jo 2004 mein Jason Huggins ne banaya tha. Yeh Java, Python, C# support karta hai...) use karte hain."
+```
+
+**✅ CORRECT — Brief inline explanation:**
+```markdown
+"Selenium (browser automation tool — web testing ke liye) use karte hain."
+```
 
 
 ---
