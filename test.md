@@ -70,19 +70,7 @@ Speaker is section mein self-healing UI tests ka logic samjhata hai aur ek live 
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
-📋 EXTRACTED IN THIS PHASE:
-
- 1: Course Overview & Scope
-  Topic 1: AI Test Automation & Course Focus
-
- 2: AI Core Concepts & Live Demo
-  Topic 1: Self-Healing Mechanism & Execution Demo
-  Topic 2: Visual Testing Preview
-
-📊 PHASE SUMMARY:
-s: 2 | Topics: 3 | Subtopics: 13
 
 ==================================================================================
 
@@ -348,25 +336,7 @@ section 3. Fundamentals Understanding Prompt Engineering, Context Engineering & 
 
 ---
 
-**Double-check steps performed:**
-- [x] Poora transcript completely padha bina kuch skip kiye.
-- [x] Transcript ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-- [x] Messy/unstructured transcript ko logically group kiya.
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Unclear/missing subtopic names `[⚠️]` se flag kiye (Not needed here).
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Diagrams/tables reproduced ya flagged (None present).
-- [x] Timestamps aur noise tokens skip kiye.
-- [x] Corrupted VTT sections flagged (None present).
-- [x] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon?
+
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -381,14 +351,6 @@ section 3. Fundamentals Understanding Prompt Engineering, Context Engineering & 
 📊 PHASE SUMMARY:
 s: 1 | Topics: 4 | Subtopics: 27
 
-**PRE-EXTRACTION CHECKLIST (Run Silently):**
-- [x] Transcript properly read? Yes.
-- [x] Grouped into logical sections/topics? Yes, combining small concepts.
-- [x] Natural Hinglish used for descriptions, English for titles? Yes.
-- [x] Subtopics = ONLY 2-5 word names, comma-separated? Yes. No descriptions/brackets.
-- [x] SCOPE SIGNAL block included per topic? Yes.
-- [x] KEYWORDS DUMP block included per topic? Yes.
-- [x] REAL-WORLD FLOW SIGNAL included per topic? Yes.
 
 ***
 
@@ -530,24 +492,6 @@ s: 1 | Topics: 4 | Subtopics: 27
 
 ---
 
-**Double-check steps performed:**
-- [x] Poora transcript completely padha bina kuch skip kiye.
-- [x] Transcript ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-- [x] Messy/unstructured transcript ko logically group kiya.
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Unclear/missing subtopic names `[⚠️]` se flag kiye (Not needed here).
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Timestamps aur noise tokens skip kiye.
-- [x] Phase tracking follow kiya.
-- [x] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon? Yes.
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -564,14 +508,7 @@ s: 1 | Topics: 4 | Subtopics: 27
 📊 PHASE SUMMARY:
 s: 1 | Topics: 6 | Subtopics: 25
 
-**PRE-EXTRACTION CHECKLIST (Run Silently):**
-- [x] Transcript properly read? Yes.
-- [x] Grouped into logical sections/topics? Yes, combining small concepts properly.
-- [x] Natural Hinglish used for descriptions, English for titles? Yes.
-- [x] Subtopics = ONLY 2-5 word names, comma-separated? Yes. No descriptions/brackets.
-- [x] SCOPE SIGNAL block included per topic? Yes.
-- [x] KEYWORDS DUMP block included per topic? Yes.
-- [x] REAL-WORLD FLOW SIGNAL included per topic? Yes.
+
 
 ***
 
@@ -691,24 +628,7 @@ s: 1 | Topics: 6 | Subtopics: 25
 
 ---
 
-**Double-check steps performed:**
-- [x] Poora transcript completely padha bina kuch skip kiye.
-- [x] Transcript ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-- [x] Messy/unstructured transcript ko logically group kiya.
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Unclear/missing subtopic names `[⚠️]` se flag kiye (Not needed here).
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Timestamps aur noise tokens skip kiye.
-- [x] Phase tracking follow kiya.
-- [x] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon? Yes.
+
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -838,7 +758,6 @@ section 4. Understanding the Current Automation Test Problem and Solution with A
 s: 1 | Topics: 4 | Subtopics: 23
 
 --- 
-*(Since the full transcript provided has been successfully completed in this single response, no "CONTINUE" chunking is required. Extraction is 100% complete for the provided text!)*
 
 ===== 5: AI Self-Healing Implementation & Prompt Engineering [⚠️ Derived]=====
 [Speaker is section mein AI self-healing code ka live demo dikhata hai, execution times compare karta hai, aur manually LLMs ko prompt karke valid page locators extract karne ka foundation process sikhata hai.]
@@ -990,14 +909,6 @@ Is section mein speaker local aur cloud LLMs ko C# code ke through integrate kar
 📊 PHASE SUMMARY:
 s: 1 | Topics: 3 | Subtopics: 16
 
-> **Self-Correction/Verification Checklist (Passed Silently):**
-> - Transcript read completely.
-> - s grouped logically with Hinglish context lines.
-> - Sequential numbering applied.
-> - Subtopics are names only (no descriptions/brackets).
-> - Code preserved accurately.
-> - Required blocks (SCOPE, KEYWORDS, FLOW) fully populated in Natural Hinglish per topic.
-> - Final summary block added.
 
 
 ===== 1: Accessing Cloud LLMs (OpenAI GPT Models) via API=====
