@@ -110,6 +110,14 @@ Pehle **entire notes ek baar completely read karo** — section by section. Koi 
   ["Haan — [framework/tool name] ka setup tha" / "Nahi tha"]
   (Agar haan → Section 3 mein SABSE PEHLE aayega)
 
+🛡️ SECURITY & SCALABILITY ([X] found):
+  • [Security warning 1]
+  (Agar 0 → "Koi explicit security/scalability threat nahi tha")
+
+🛠️ TROUBLESHOOTING STEPS ([X] found):
+  • [Error -> Fix step]
+  (Agar 0 → "Koi troubleshooting step nahi tha")
+
 ⚠️ GOTCHAS / ANTI-PATTERNS ([X] found):
   • [Gotcha 1 — 1 line]
   • [Gotcha 2 — 1 line]
@@ -237,7 +245,7 @@ Agar kisi concept ki detail notes mein nahi hai — use invent MAT karo.
 [Yeh code real projects mein kahan/kaise use hota hai — 1-2 lines]
 ```
 
-#### 3B — Functions / Methods Breakdown (DETAILED)
+#### 3C — Functions / Methods Breakdown (DETAILED)
 
 **Har function/method ke liye yeh sab extract karo:**
 
@@ -265,7 +273,7 @@ Agar kisi concept ki detail notes mein nahi hai — use invent MAT karo.
    When to Use   : Chat applications mein user input lena
 ```
 
-#### 3C — Objects / Classes Breakdown (DETAILED)
+#### 3D — Objects / Classes Breakdown (DETAILED)
 
 ```
 🏗️ Object/Class Name: [exact name from notes]
@@ -279,7 +287,7 @@ Agar kisi concept ki detail notes mein nahi hai — use invent MAT karo.
    When to Use   : [practical scenario]
 ```
 
-#### 3D — CLI Commands Breakdown (DETAILED)
+#### 3E — CLI Commands Breakdown (DETAILED)
 
 ```
 ⌨️ Command: [exact command from notes]
@@ -309,14 +317,14 @@ Agar kisi concept ki detail notes mein nahi hai — use invent MAT karo.
    Real World  : Teams apne internal dashboards aur ML model demos Streamlit se serve karte hain
 ```
 
-#### 3E — Arguments / Parameters Quick-Reference Table
+#### 3F — Arguments / Parameters Quick-Reference Table
 
 | Argument | Type | Kya Pass Karna Hai | Miss Kiya / Galat Diya Toh | Default Value |
 |----------|------|-------------------|---------------------------|---------------|
 | `arg1` | string | [from notes] | [consequence from notes] | [agar the] |
 | `arg2` | boolean | [from notes] | [consequence from notes] | [agar the] |
 
-#### 3F — Return Values / Output Breakdown
+#### 3G — Return Values / Output Breakdown
 
 ```
 📤 Return Value / Output:
@@ -541,7 +549,7 @@ Force mat karo — ek weak/generic analogy no analogy se zyada harmful hai.
 
 ---
 
-**3B — Functions / Methods (Detailed Breakdown)**
+**3C — Functions / Methods (Detailed Breakdown)**
 
 ```
 🔧 Function Name: [exact name]
@@ -559,7 +567,7 @@ Force mat karo — ek weak/generic analogy no analogy se zyada harmful hai.
 
 ---
 
-**3C — Objects / Classes (Detailed Breakdown)**
+**3D — Objects / Classes (Detailed Breakdown)**
 
 ```
 🏗️ Object/Class Name: [exact name]
@@ -577,7 +585,7 @@ Force mat karo — ek weak/generic analogy no analogy se zyada harmful hai.
 
 ---
 
-**3D — CLI Commands (Detailed Breakdown)**
+**3E — CLI Commands (Detailed Breakdown)**
 
 ```
 ⌨️ Command: [exact command]
@@ -596,7 +604,7 @@ Force mat karo — ek weak/generic analogy no analogy se zyada harmful hai.
 
 ---
 
-**3E — Arguments / Parameters Quick-Reference**
+**3F — Arguments / Parameters Quick-Reference**
 
 | Argument | Type | Kya Pass Karna Hai | Miss Kiya / Galat Diya Toh | Default |
 |----------|------|-------------------|---------------------------|---------|
@@ -604,7 +612,7 @@ Force mat karo — ek weak/generic analogy no analogy se zyada harmful hai.
 
 ---
 
-**3F — Return Values / Output**
+**3G — Return Values / Output**
 
 ```
 📤 Return Value / Output:
@@ -635,16 +643,26 @@ Force mat karo — ek weak/generic analogy no analogy se zyada harmful hai.
 
 ---
 
-### ⚠️ Section 5: Gotchas — Yeh Mat Karna!
+### ⚠️ Section 5: Gotchas, Security & Troubleshooting
 
 ```
-❌ [Galat cheez — exactly notes se]
+❌ ANTI-PATTERN: [Galat cheez — exactly notes se]
    → Kyun galat: [1 line]
    → Sahi tarika: [1 line]
 ```
 
 ```
-😕 Confusion: "[Notes ka confusion clarifier question]"
+🛡️ SECURITY / RISK: [Agar notes mein point 8/9 tha]
+   → Bachav: [Sahi tarika notes se]
+```
+
+```
+🛠️ TROUBLESHOOTING: [Error from notes]
+   → Fix: [Troubleshooting / Check step]
+```
+
+```
+😕 CONFUSION: "[Notes ka confusion clarifier question]"
    → Actually: [1-2 line clear answer — notes se]
 ```
 

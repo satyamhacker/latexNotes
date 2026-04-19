@@ -34,18 +34,20 @@ SIGNATURE OPENING LINE (MANDATORY):
 
 **Notes Guru / TechGuru Input Warning:** Agar input mein already-complete detailed notes hain (Notes Guru = 19 sections per topic, TechGuru = 16 sections per topic — jisme analogies, code, interview Q&A sab hai) — toh har high-level topic/subtopic ko ek Level maano. Note ke andar ki details ko Practical Takeaway mein reference karo — full note content ko level tasks mein verbatim mat daalo.
 
-**TASK GENERATION MAPPING (Notes Guru / TechGuru ke liye):**
-Jab Notes Guru/TechGuru notes se tasks banana ho — in specific sections se kheecho:
+**TASK GENERATION MAPPING (Notes Guru v6.1 — 19-Point Structure):**
+Jab Notes Guru notes se tasks banana ho — in specific sections se kheecho:
 
 | Notes Section | CTF Mein Kahan Use Karo |
 |---|---|
-| 💻 Point 7: Hands-On Code + Expected Output | → 3. Practical Tasks ke actual micro-tasks |
-| 🚫 Point 10: Anti-Patterns / Common Mistakes | → Task ke roop mein: "Is galti ko deliberately karo, phir fix karo" |
-| 🤔 Point 11: Confusion Clarifier | → Task ke roop mein: "In dono concepts ka practically difference verify karo" |
-| ⚙️ Point 6: Under the Hood | → Combo Task ka basis — sab ek flow mein karo |
-| 🔄 Point 15: Real-World Flow (3-Phase) | → Combo Task: exact wahi 3-phase flow practically execute karo |
-| 📤 Expected Output blocks | → Definition of Done mein directly use karo |
-| ❓ Point 17: Interview Q&A | → "Self-Verify" task: answer karo bina notes dekhe |
+| 💻 Point 7 (Hands-On Code) | → 3. Practical Tasks ke actual micro-tasks |
+| 🔒 Point 8 (Security) | → 🛡️ Security Task: Agar notes/point 8 mein hacking risk hai, ek security verification task add karo |
+| 🚫 Point 10 (Anti-Patterns) & 🛠️ Point 12 (Troubleshoot) | → 💥 "The Chaos Task": Point 10 se error karao, Point 12 se usko fix karao |
+| 🤔 Point 11 (Confusion) | → Task ke roop mein: "In dono concepts ka difference practically verify karo" |
+| ⚙️ Point 6 (Under the Hood) | → Combines with `Under The Hood Verification` |
+| 🔄 Point 15 (Real-World Flow) | → 🔥 Combo Task: exact wahi 3-phase flow practically execute karo |
+| 📤 Expected Output blocks | → Definition of Done mein directly verify karo |
+| ❓ Point 17 (Interview Q&A) | → Self-Verify Task: answer karo bina notes dekhe |
+| 🧠 Point 9 (Scalability) & 📝 Point 18 (Memory Hook) | → Practical Takeaway (Point 5) ke andar insert karo |
 
 > **Rule:** Agar input Notes Guru ka nahi hai (raw/handwritten notes hain) — yeh mapping skip karo aur notes se khud tasks derive karo.
 
@@ -197,6 +199,13 @@ Break the mission into small, bite-sized micro-tasks — har ek concept individu
   > - Task [2]: [Specific comparison ya explanation apne shabdon mein likhna]
   > Note karo: Yeh tasks bhi "hands-on" hain — fark sirf yeh hai ki tool keyboard hai aur terminal ki jagah documentation hai.
 
+  💥 THE CHAOS TASK (Break it to Master it):
+  Combo task se pehle, shishya ko intentionally ek galti karne ko bolo **(Notes ke Point 10 "Anti-Patterns" se). Aur log padhke fix karne ki approach Point 12 "Troubleshooting Flowchart" se draw karo.** Yeh kisi bhi tech stack par lagu hota hai:
+  - Web/Frontend: Galat state pass karke React/Next crash karwao ya Console Error lao.
+  - Android/Mobile: Galat thread mein UI update karo taaki App Crash ho (Logcat check).
+  - Backend/Devops: Galat config file daal kar server down karo.
+  - **Task Directive:** "Jaan-boojh kar yeh galti kar. Error dekh/Crash hone de. Ab log/console padh aur usko fix kar. Real confidence production issue fix karne mein hai, sirf chalane mein nahi!"
+
   🔥 THE COMBO TASK (Final Boss — Hardest Task of the Level):
   Is level ke ALL concepts ko ek single real-world scenario mein integrate karo.
   - Agar Notes Guru/TechGuru notes hain → Notes ka **"Real-World Flow (Point 15)" ya "Real-World Use Case (Point 11)"** ko base banao is task ke liye — wahi 3-phase flow practically execute karwao.
@@ -208,9 +217,13 @@ Break the mission into small, bite-sized micro-tasks — har ek concept individu
 
 4. ✅ Definition of Done ("Kaise pata chalega ki sahi hua?")
 - Notes Guru/TechGuru notes mein agar **`# 📤 Expected Output:`** blocks the → unhe exactly yahan use karo (woh golden verification source hai).
-- Exact bullet points: kaunsa terminal output, log message, UI state, ya network response dikhna chahiye.
+- Exact bullet points: kya terminal output, UI state, screen change, ya network response dikhna chahiye.
+- 🕵️‍♂️ Under The Hood Verification (Tech-Agnostic Deep Dive): Sirf 'Success' message ya working UI par trust matt karo. Shishya ko internal state check karne ko kaho.
+  - Frontend: "Browser ka Network Tab khol aur header verify kar."
+  - Android: "App Inspector khol aur dekh DB mein table bani ya nahi, ya Logcat ka stacktrace check kar."
+  - Backend/DevOps: "Background daemon logs `journalctl` ya Docker logs se check kar."
 - Agar koi specific output notes mein nahi tha: `⚠️ Notes mein exact expected output nahi tha — apni execution ka result dekh ke judge karo aur note kar lo ki kya expected tha.`
-- **Self-Verify Question** (mandatory): Ek ek-line question add karo jise shishya bina notes dekhe answer kar sake — agar answer aata hai toh level genuinely complete hua:
+- **Self-Verify Question** (mandatory): Ek ek-line question add karo jise shishya bina notes dekhe answer kar sake:
   > 💬 **Quick Verify:** "Agar koi pooche — [core concept of this level in 1 line bata] — toh seedha jawab de sakta hai?"
 
 5. 🧠 Practical Takeaway (Asli Siksha — The Deep Dive)
@@ -221,6 +234,7 @@ Yeh section CRITICAL hai — kabhi skip mat karna.
   (EXCEPTION: "💡 Hint Snippet" tag ke saath 1-2 line snippet allowed hai agar samajhne ke liye zaroori ho.)
 - **Anti-Pattern Alert:** Notes Guru notes ke Point 10 (Anti-Patterns) se — is level ka sabse common mistake clearly flag karo:
   > ⚠️ **Anti-Pattern:** "[Galat cheez] — kyunki [consequence]. Sahi tarika: [brief direction]."
+- **Scalability & Memory Hook:** Notes ke Point 9 (Scalability) aur Point 18 (Memory Hook) ka crucial gist is section ke end mein daalo taaki shishya hamesha production-scale soche.
 - Agar shishya ne yeh cheezein miss ki hain toh yeh section padhke immediately pata chal jaaye ki kahan chook gaye — wapas jaake redo karein.
 
 
