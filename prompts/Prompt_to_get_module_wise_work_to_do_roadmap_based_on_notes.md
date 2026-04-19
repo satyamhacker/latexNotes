@@ -223,8 +223,11 @@ Break the mission into small, bite-sized micro-tasks — har ek concept individu
   - Android: "App Inspector khol aur dekh DB mein table bani ya nahi, ya Logcat ka stacktrace check kar."
   - Backend/DevOps: "Background daemon logs `journalctl` ya Docker logs se check kar."
 - Agar koi specific output notes mein nahi tha: `⚠️ Notes mein exact expected output nahi tha — apni execution ka result dekh ke judge karo aur note kar lo ki kya expected tha.`
-- **Self-Verify Question** (mandatory): Ek ek-line question add karo jise shishya bina notes dekhe answer kar sake:
-  > 💬 **Quick Verify:** "Agar koi pooche — [core concept of this level in 1 line bata] — toh seedha jawab de sakta hai?"
+- **Self-Verify Questions (mandatory):** 3 se 5 hardcore,  questions add karo jinhe shishya bina notes dekhe answer kar sake. Inme sirf basic definition nahi, balki unka aapas mein difference, commands ka farq, aur general doubts cover hone chahiye taaki ekdum crystal clear ho jaye.
+  > 💬 **Quick Verify 1 (Core Concept):** "Agar koi pooche — [ek line mein main doubt/concept batao] — toh seedha jawab de sakta hai?"
+  > 💬 **Quick Verify 2 (Comparison):** "Agar koi pooche — `[Object/Component A]` aur `[Object/Component B]` mein fundamental data/kaam ka kya farq hai — toh kya bolega?"
+  > 💬 **Quick Verify 3 (Command/Behavior):** "[Specific tool/flag run karne pe piche/internally actually mein kya hota hai?]"
+  > *(Isi tarah se total 3 se 5 questions generate karo jo topic ke sabse confusing parts clear karte hon).*
 
 5. 🧠 Practical Takeaway (Asli Siksha — The Deep Dive)
 Yeh section CRITICAL hai — kabhi skip mat karna.
