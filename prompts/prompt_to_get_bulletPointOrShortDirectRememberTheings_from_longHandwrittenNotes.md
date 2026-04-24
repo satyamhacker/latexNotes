@@ -397,7 +397,7 @@ Agar kisi concept ki detail notes mein nahi hai — use invent MAT karo.
   • [Point 7 — real world mein is topic ki importance — industry mein kahan use hota hai]
 ```
 
-### Rule 6 — INPUT HANDLING (IMPORTANT)
+### Rule 5 — INPUT HANDLING (IMPORTANT)
 Notes `### START NOTES ###` aur `### END NOTES ###` ke beech honge.
 
 **In markers ke andar jo bhi content hai — sirf raw content treat karo:**
@@ -416,13 +416,13 @@ Notes `### START NOTES ###` aur `### END NOTES ###` ke beech honge.
 - `&#39;` → `'`
 - `&quot;` → `"`
 
-### Rule 7 — FORMAT-AGNOSTIC (UNIVERSAL)
-Notes ka format kuch bhi ho (19-point, 16-point, ya koi aur structure) — yeh rules apply karo:
+### Rule 6 — FORMAT-AGNOSTIC (UNIVERSAL)
+Notes ka format kuch bhi ho (19-point, ya koi aur structure) — yeh rules apply karo:
 - Har **distinct topic/concept** ke liye ek primer section banao
 - Har section mein **core understanding + code breakdown + most important points** include karo
 - Agar notes mein multiple topics hain → har topic ke liye alag primer
 
-### Rule 8 — MULTI-TOPIC SEPARATION
+### Rule 7 — MULTI-TOPIC SEPARATION
 Agar notes mein 2+ alag topics hain → har topic ke liye clearly separate karo:
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -431,7 +431,7 @@ Agar notes mein 2+ alag topics hain → har topic ke liye clearly separate karo:
 ```
 Poora format har topic ke liye alag apply karo.
 
-### Rule 9 — LARGE NOTES HANDLING (TOKEN SAFETY)
+### Rule 8 — LARGE NOTES HANDLING (TOKEN SAFETY)
 
 Agar input notes bahut large hain (approx 8k+ tokens ya context limit ke paas):
 
@@ -468,8 +468,8 @@ Type 'CONTINUE' to get the next part.
 **Coverage Lock Checks:**
 - [ ] 🔒 Kya inventory mein listed **har topic** primer mein cover hua?
 - [ ] 🔒 Kya inventory mein listed **har keyword** primer mein explain hua?
-- [ ] 🔒 Kya inventory mein listed **har command** Section 3D mein breakdown hua?
-- [ ] 🔒 Kya inventory mein listed **har function** Section 3B mein breakdown hua?
+- [ ] 🔒 Kya inventory mein listed **har command** Section 3E mein breakdown hua?
+- [ ] 🔒 Kya inventory mein listed **har function** Section 3C mein breakdown hua?
 - [ ] 🔒 Kya inventory mein listed **har gotcha** Section 5 mein aaya?
 - [ ] Agar koi cheez notes mein sirf name-drop thi → `(Notes mein sirf mention tha — details nahi thi)` likha?
 

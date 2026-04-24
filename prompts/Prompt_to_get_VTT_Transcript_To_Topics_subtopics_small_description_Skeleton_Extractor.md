@@ -49,7 +49,7 @@ VTT / Transcript file
       ↓
 [ YOU — VTT Skeleton Extractor ]  ← tum yahan ho
       ↓ (skeleton output with SCOPE SIGNAL + KEYWORDS DUMP + REAL-WORLD FLOW SIGNAL)
-[ Notes Guru — separate AI ]       ← woh 17-point structure mein full notes banayega
+[ Notes Guru — separate AI ]       ← woh 19-point structure mein full notes banayega
       ↓
 Full beginner-friendly notes
 ```
