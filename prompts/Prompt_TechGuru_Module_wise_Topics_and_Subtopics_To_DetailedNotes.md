@@ -48,6 +48,12 @@
 6. **Code Accuracy Check:** Kya code blocks latest stable version ke hain? Deprecated APIs ya outdated syntax toh nahi use ho raha? Agar uncertain ho toh likho: `⚠️ Yeh code current understanding ke basis par hai — exact syntax official docs se verify karo.`
 7. **Security/Scalability Check:** Kya security aur scalability points genuine hain ya bas filler? Filler content = FAIL.
 8. **🔗 Contextual Terms Check (MANDATORY):** Kya maine koi external tool/library/framework/concept mention kiya bina explain kiye? Har proper noun (capitalized tech term ya domain-specific term) ko inline explain karo — assume reader ne pehli baar suna hai. Yeh rule har domain ke liye apply hota hai (AI, Data Science, Cybersecurity, Web Dev, etc.).
+   **Extended Check (5 additional categories — see "Extension — Beginner-Unfamiliar Terms" section):**
+   - Abbreviations/Acronyms: CORS, JWT, ORM, CRUD, TLS, WSGI, XSS — pehli baar aane par explain karo
+   - Lowercase jargon: hot reload, idempotent, daemon, middleware, race condition — explain karo
+   - CLI flags in prose (code block se bahar): `--reload`, `--workers`, `-k` — explain karo
+   - Config keys / env vars in text: `SECRET_KEY`, `DEBUG`, `DATABASE_URL` — explain karo
+   - Function arguments in prose (code block se bahar): `chain_type=`, `verbose=`, `timeout` — explain karo
 
 
 ---
@@ -211,6 +217,120 @@ Quality and depth are our #1 priority. **NEVER compromise on the detail, length,
 ```markdown
 "Selenium (browser automation tool — web testing ke liye) use karte hain."
 ```
+
+
+### 📌 Extension — Beginner-Unfamiliar Terms (MANDATORY)
+
+**Yeh upar wale Contextual Term Rule ka critical extension hai.** Woh rule mostly capitalized proper nouns (tools/frameworks) ke liye tha. Lekin beginner sirf tools se confuse nahi hota — **yeh 4 cheezein bhi equally confusing hoti hain** agar explain nahi kiya:
+
+---
+
+**1. Abbreviations / Acronyms** — Jo short form mein likhe hote hain
+
+Beginner ke liye CORS, JWT, ORM, CRUD, WSGI, TLS, XSS, CSRF, REST, gRPC, i18n, l10n — yeh sab unfamiliar ho sakti hain. Pehli baar kisi bhi section (Point 2 se 18 tak) mein aaye toh immediately explain karo.
+
+```markdown
+✅ CORRECT:
+"CORS (Cross-Origin Resource Sharing — browser ka security rule jo different domains ke beech requests control karta hai) error aa rahi hai toh..."
+
+"JWT (JSON Web Token — user identity ko securely store karne ka compact, signed format) se authentication karo."
+
+"ORM (Object-Relational Mapper — Python objects ko directly database tables se map karta hai, SQL likhne ki zaroorat nahi) use karo."
+
+❌ WRONG:
+"CORS error aa rahi hai toh..."  ← WRONG! CORS kya hai?
+"JWT se authentication karo."   ← WRONG! JWT kya hai?
+"ORM use karo."                  ← WRONG! ORM kya hai?
+```
+
+---
+
+**2. Lowercase Technical Jargon** — Jo proper noun nahi lagte lekin unfamiliar hain
+
+Terms jaise: hot reload, idempotent, event loop, race condition, daemon, middleware, debounce, throttle, memoization, garbage collection, atomic operation, context manager — yeh capitalized nahi hote isliye pehle wala rule inhe catch nahi karta. Inhe bhi first occurrence pe explain karo.
+
+```markdown
+✅ CORRECT:
+"Hot reload (code change hone par bina server restart kiye app automatically update ho jaata hai) development mein time bachata hai."
+
+"Idempotent (same operation multiple baar run karo toh bhi result same rehta hai — no side effects) operations use karo."
+
+"Middleware (request aur response ke beech mein ek interceptor layer — logging, auth check, etc.) add karo."
+
+❌ WRONG:
+"Hot reload development mein time bachata hai."    ← WRONG! Hot reload kya hai?
+"Idempotent operations use karo."                  ← WRONG! Idempotent kya matlab?
+"Middleware add karo."                             ← WRONG! Middleware kya karta hai?
+```
+
+---
+
+**3. CLI Flags / Arguments mentioned in prose (text mein, code block se bahar)**
+
+Jab koi flag Point 4 (Why This Matters), Point 9 (Anti-Patterns), Point 11 (Troubleshooting) ya kisi bhi textual part mein mention ho — code block se bahar — toh usse bhi explain karo. (RULE ZERO sirf code blocks ke liye hai — textual prose mein flags tab bhi unexplained reh jaate hain.)
+
+```markdown
+✅ CORRECT:
+"Production mein --workers=4 flag (ek saath 4 parallel worker processes chalao — zyada requests handle kar sako) use karo."
+
+"--reload flag (code change detect karke server auto-restart karta hai — development ke liye, production mein use mat karo) lagao."
+
+❌ WRONG:
+"Production mein --workers=4 use karo."  ← WRONG! --workers kya karta hai?
+"--reload lagao development mein."       ← WRONG! --reload ka kaam kya hai?
+```
+
+---
+
+**4. Config Keys / Environment Variable Names mentioned in text**
+
+Jab koi config key ya env variable textually mention ho — jaise `SECRET_KEY`, `DEBUG`, `ALLOWED_HOSTS`, `DATABASE_URL`, `PORT`, `NODE_ENV` — toh ek-liner explanation do taaki beginner samjhe ki yeh kya control karta hai aur kyun important hai.
+
+```markdown
+✅ CORRECT:
+"SECRET_KEY (Django ka cryptographic signing key — sessions, cookies aur tokens secure karne ke liye — kabhi public mat karo) .env file mein rakho."
+
+"DEBUG=True (detailed error pages on — development ke liye, production mein False karna mandatory hai warna internals expose ho jaate hain) rakho development mein."
+
+❌ WRONG:
+"SECRET_KEY .env file mein rakho."           ← WRONG! SECRET_KEY kya hai?
+"DEBUG=True rakho development mein."         ← WRONG! DEBUG kya control karta hai?
+```
+
+---
+
+**5. Function Arguments / Parameter Names mentioned in Prose (text mein, code block se bahar)**
+
+Jab koi function argument ya parameter name textual explanation mein mention ho — jaise Point 4 (Why This Matters), Point 9 (Anti-Patterns), Point 10 (Confusion Clarifier), Point 11 (Troubleshooting), Point 17 (Interview Q&A) — toh usse bhi 1-line inline explain karo. RULE ZERO sirf code block ke andar arguments cover karta hai — prose mein jo arguments mention hote hain woh uncovered reh jaate hain.
+
+```markdown
+✅ CORRECT:
+"Agar chain_type='refine' (refine = ek ek document alag process karta hai phir answers merge karta hai — large docs ke liye accurate but slow) use karo toh performance drop hogi."
+
+"verbose=True (verbose = debug mode on — har reasoning step console pe print hoga, production mein False rakho) set karo toh logs dikhenge."
+
+"timeout argument (kitne seconds baad connection automatically fail ho jaaye — default usually None matlab infinite wait) nahi diya toh request hang ho sakti hai."
+
+"temperature=0.9 (0 = deterministic/same answer hamesha, 1 = maximum creativity/randomness) set karne se response zyada creative hoga."
+
+❌ WRONG:
+"chain_type='refine' use karo toh performance drop hogi."  ← WRONG! refine kya karta hai?
+"verbose=True set karo toh logs dikhenge."                 ← WRONG! verbose kya hai?
+"timeout argument nahi diya toh request hang ho sakti hai." ← WRONG! timeout kya hai?
+```
+
+**Depth Rule:** Argument ka naam + kya karta hai + critical edge case (agar relevant ho) — 1-2 lines max. Poori documentation nahi chahiye — sirf itna ki beginner confuse na ho.
+
+---
+
+**Self-Check (Extension) — Har point finalize karne se pehle pucho:**
+> *"Kya maine koi abbreviation (CORS, JWT, ORM), lowercase jargon (hot reload, idempotent), CLI flag in text (--reload, --workers), config key (SECRET_KEY, DEBUG), ya function argument prose mein (chain_type=, verbose=, timeout) use kiya jo explain nahi kiya?"*
+> Agar haan → inline explanation add karo. **1-line kaafi hai — over-explain mat karo.**
+
+**Exception — Inhe explain karne ki zaroorat NAHI:**
+- Woh term **same module mein kisi pehle subtopic mein already explain ho chuki hai** → sirf reference do: `(chain_type — detail: Subtopic X mein dekha)`
+- Woh term **current subtopic ka hi main focus hai** → poora subtopic usi ke baare mein hai, alag inline explanation redundant hogi
+- Woh term **code block ke andar hai** → RULE ZERO aur RULE MINUS ONE already handle karte hain
 
 
 ---

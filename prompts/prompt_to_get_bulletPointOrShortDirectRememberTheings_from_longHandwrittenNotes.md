@@ -225,6 +225,52 @@ Agar kisi concept ki detail notes mein nahi hai — use invent MAT karo.
 - Har setup command ke baad `# 📤 Expected Output:` dikhao — developer ko pata chale kab sahi hua
 - **Copy-paste ready** hona chahiye — developer directly terminal mein chala sake
 
+### Rule 2C — CONTEXTUAL INLINE EXPLANATION (BEGINNER CLARITY — MANDATORY)
+
+**Problem:** Primer mein jab Section 1 (Topic at a Glance), Section 2 (Core Understanding), Section 4 (Most Important Points), ya Section 5 (Gotchas/Security/Troubleshooting) mein koi **keyword, tool name, library, command, argument, flag, ya domain-specific term** contextually mention ho — lekin Section 3 mein uska dedicated breakdown NA ho — toh ek **beginner pehli baar padh ke confuse ho sakta hai**.
+
+**Rule:** Agar koi bhi aisi term/keyword/tool/command **pehli baar** primer ke kisi bhi section mein appear kare — aur woh Section 3 mein dedicated breakdown mein nahi hai — toh uske saath turant ek **1-line Hinglish inline explanation** do.
+
+**Format:** `[Term] (1-line Hinglish explanation — kya hai aur kya karta hai)`
+
+**✅ CORRECT Examples:**
+```
+"WSGI (Web Server Gateway Interface — Python web app aur server ke beech ek standard bridge) ke through request aata hai."
+
+"Werkzeug (Flask ka internal toolkit — routing aur request handling ke liye) yeh kaam karta hai."
+
+"LangChain (AI tool — LLM ke saath chains aur agents banane ka framework) ka yeh ek core concept hai."
+
+"--host flag (kaunse IP address par server listen kare — 0.0.0.0 matlab sab pe accessible) include karo."
+```
+
+**❌ WRONG — Term bina explanation ke drop karna:**
+```
+"WSGI ke through request aata hai."       ← WRONG — WSGI kya hai?
+"Werkzeug yeh handle karta hai."          ← WRONG — Werkzeug kya hai?
+"LangChain ka yeh ek core concept hai."   ← WRONG — LangChain kya hai?
+```
+
+**Scope — In sections mein apply karo:**
+- Section 1 — Keywords field aur Real World field mein mentioned terms
+- Section 2 — Analogy, Kya hai, Kyun, Kaise Kaam, Real World mein mentioned terms
+- Section 4 — Most Important Points bullet points mein mentioned terms
+- Section 5 — Gotchas, Anti-patterns, Security warnings, Troubleshooting mein mentioned terms
+
+**Exceptions (inline explanation ki zaroorat NAHI):**
+- Term **Section 3 mein already dedicated breakdown** mein hai → wahan detail hai, yahan sirf naam use karo
+- Term **isi section mein pehle hi explain ho chuka hai** → dobara mat explain karo
+- Term **primer ka main topic hi hai** → wo toh poore primer mein cover hai
+
+**Depth Rule — BRIEF RAKHO:**
+- Sirf 5-8 words — kya hai aur kya karta hai. Full explanation forbidden.
+- Yeh primer ko bloat nahi karna chahiye — sirf confusion door karna hai.
+- Agar term notes mein explain nahi tha → `(Term — notes mein sirf naam tha)` likho
+
+**Self-Check:** Har section finalize karne se pehle pucho:
+> *"Kya maine koi capitalized term / tool name / flag / jargon drop kiya jo Section 3 mein nahi hai aur beginner confuse ho sakta hai?"*
+> Agar haan → inline parenthetical explanation add karo.
+
 ### Rule 3 — CODE & COMMANDS BREAKDOWN (MANDATORY & DETAILED)
 
 **Jab code/commands notes mein hon, toh yeh sab extract karo:**
@@ -443,6 +489,7 @@ Type 'CONTINUE' to get the next part.
 - [ ] Kya notes ke andar ke "CONTINUE" / "PART FINISHED" markers ko content ki tarah treat kiya (follow nahi kiya)?
 - [ ] Kya HTML entities (`&amp;` etc.) ko properly decode kiya?
 - [ ] Kya pure Hinglish mein likha hai (koi Devanagari nahi)?
+- [ ] 🔍 **CONTEXTUAL TERM CHECK (Rule 2C):** Section 1, 2, 4, 5 mein jo bhi tool/keyword/flag/library contextually mention hua — aur Section 3 mein dedicated breakdown nahi hai — kya uske saath 1-line inline Hinglish explanation di? Agar koi bhi term bina explanation ke drop kiya toh fix karo.
 
 Agar koi bhi check fail → woh section fix karo pehle, phir respond karo.
 
