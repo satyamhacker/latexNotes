@@ -1,25 +1,3 @@
-Here is the extraction for **Section 3: Fundamentals Understanding Prompt Engineering, Context Engineering & Vibe Code**. 
-
-Since this section covers massive architectural shifts and detailed tool configurations, I have identified **12 Core Concepts**. To keep the output manageable and ensure deep focus, I will provide this in chunks. Here is **Batch 1 (Concepts 1-6)**.
-
----
-
-### STEP 1 — THE DEPENDENCY MAP
-
-1. **Core AI Automation Paradigms (Prompt/Context/Vibe)** → no dependencies (start here)
-2. **Context Implementation (RAG & Files)** → needs Concept 1
-3. **Tool Invocation & JSON Formatting** → needs Concept 1
-4. **Manual HTML Context (Offline Mode)** → needs Concept 3
-5. **MCP Architecture Fundamentals** → needs Concept 1
-6. **MCP Extended Connectors & Agents** → needs Concept 5
-7. **MCP Playwright Configuration** → needs Concept 5
-8. **Autonomous Browser Execution** → needs Concept 6 + Concept 7
-9. **Vibe Coding IDE Setup (VS Code/Copilot)** → needs Concept 1 + Concept 5
-10. **Autonomous Test Exploration (Monkey Testing)** → needs Concept 8 + Concept 9
-11. **AI-Scaffolded POM Frameworks** → needs Concept 10
-12. **Pytest-BDD Refactoring & Local LLMs** → needs Concept 11
-
----
 
 ### STEP 2 — BATCH 1: PROMPT, CONTEXT & MCP FOUNDATIONS (CONCEPTS 1-6)
 
