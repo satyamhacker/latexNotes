@@ -557,9 +557,13 @@ Compare with the closest confusing topic using a markdown table.
 
 
 #### 🤔 10. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-**Instruction:** Top 2 confusions jo beginners typically is concept ke baare mein karte hain — clearly resolve karo.
-- Confusion 1: [Common misconception] → [Clear correction with example]
-- Confusion 2: [Another common confusion] → [Clear correction with example]
+**Minimum 2 confusions** — agar subtopic mein zyada the toh sab include karo. Sirf abstract correction nahi chalegi — quick proof ya test do.
+
+Har confusion ke liye yeh exact format follow karo:
+- **Confusion [N] — "[Galat belief jo beginner ke mann mein hota hai]"**
+  - **Galat soch:** [Jo woh sochte hain — 1 line]
+  - **Actually:** [Jo sach hai — 1-2 lines, clearly explain karo]
+  - **Prove karo:** [Ek chhota test, example, ya comparison jisse beginner khud verify kar sake]
 
 
 #### 🛠️ 11. Troubleshooting Flowchart (Mental Model)
@@ -592,9 +596,11 @@ If it fails, check:
 
 
 #### 🏗️ 15. Scalability & Industry Context
-- How does this work for 1 user vs 1 Million users?
-- Is this "Cloud-Native" ready?
-- Best practices that Senior Engineers follow (naming conventions, performance tips, what to avoid).
+**Adaptive Rule — Topic type ke hisaab se angle choose karo:**
+- **Agar concept infrastructure/service/tool hai** (e.g., Docker, Redis, API Gateway, LangChain): 1 user vs 1 Million users mein kya fark padta hai? Cloud-Native ready hai? Senior Engineers kya karte hain?
+- **Agar concept algorithmic/mathematical/theoretical hai** (e.g., Binary Search, SQL JOIN, Gradient Descent, Big-O, Transformer attention): Time complexity + Space complexity discuss karo. Dataset size badhne par performance kaisi degrade hoti hai? Real-world data par kaunse bottlenecks aate hain?
+- **Har case mein:** Best practices jo senior engineers follow karte hain — naming conventions, performance tips, kya avoid karein.
+*("1 user vs 1M users" framing purely theoretical/algorithmic concepts pe mat thopo — complexity aur memory tradeoffs zyada relevant hain wahan.)*
 
 
 #### ⚠️ 16. Consequences of Failure (Agar Galat Kiya Toh?)
