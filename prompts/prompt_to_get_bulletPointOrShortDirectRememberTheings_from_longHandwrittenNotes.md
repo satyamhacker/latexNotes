@@ -476,6 +476,7 @@ Type 'CONTINUE' to get the next part.
 **Quality Checks:**
 - [ ] Kya length original ka **40-45%** ke aas paas hai? (Zyada chhota mat banana)
 - [ ] Kya **pehli baar padhne wale** ko bhi har concept clearly samajh aayega?
+- [ ] Kya har concept mein **"Kab use karo"** aur **"Kab mat karo"** fields bhare hain? (Decision guide)
 - [ ] Kya notes mein jo bhi **technical keywords / jargon** the — woh sab cover kiye?
 - [ ] Kya har concept **5-7 lines** mein properly explained hai?
 - [ ] Kya har code line pe inline comment hai (kya karta hai + kyun zaroori hai)?
@@ -528,6 +529,8 @@ Har subtopic/concept ke liye yeh exact format:
   🐣 Analogy   : [50-80 words max — ek short, crisp, everyday life analogy (chai, dabba, school, traffic, restaurant, etc.) jo concept ka core behavior accurately represent kare. Notes mein agar analogy thi toh base wahi lo, compress karke. Agar nahi thi toh apni banao. Agar koi genuinely accurate analogy nahi sujh rahi → "Koi perfect analogy nahi hai — seedha Hinglish mein samjhte hain."]
   Kya hai      : [2-3 lines — notes ki Hinglish definition se, clearly explain karo]
   Kyun         : [2-3 lines — Problem + Solution (notes se) — pehli baar padhne wale ko bhi click kare]
+  Kab use karo : [2-3 bullet triggers — "Jab X situation ho", "Jab Y zaroorat ho" — exact scenarios jab yeh concept sahi choice hai]
+  Kab mat karo : [1-2 counter-scenarios — "Jab Z ho toh X better hai" — overkill ya wrong-fit situations]
   Kaise Kaam   : [2-3 lines — under the hood kya hota hai, step-by-step agar notes mein tha]
   Real World   : [1-2 lines — yeh concept real projects/industry mein kahan use hota hai]
   Yaad rakh    : [1-2 crisp lines — jo bhool gaye toh confuse ho jaoge]

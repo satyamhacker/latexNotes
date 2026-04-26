@@ -119,6 +119,7 @@ Section X: [Section Title]
    - CLI flags in prose (code block se bahar): `--reload`, `--workers`, `-k` — explain karo
    - Config keys / env vars in text: `SECRET_KEY`, `DEBUG`, `DATABASE_URL` — explain karo
    - Function arguments in prose (code block se bahar): `chain_type=`, `verbose=`, `timeout` — explain karo
+10. **✅❌ Decision Guide Check (MANDATORY):** Kya maine Point 4 mein **"Kab use karo"** aur **"Kab mat karo / Alternative prefer karo"** dono fields fill kiye? Agar concept clearly situational applicability rakhta hai — yeh fields BLANK ya generic nahi honi chahiye. Specific trigger scenarios + specific counter-scenarios do. Agar concept truly universal hai (no alternative ever makes sense) — toh note karo: `(Yeh concept har situation mein applicable hai — koi genuine avoid-scenario nahi hai)`
 
 *Isse hallucination kam hoga, skeleton ka 100% coverage guarantee hoga, aur original notes ka har ek word final notes mein zaroor aayega.*
 
@@ -653,6 +654,8 @@ ONE accurate real-life analogy (50-80 words) that makes the concept intuitive.
 - **Problem:** What pain exists without this?
 - **Solution:** How this solves it.
 - **What breaks if we don't use it?** (Real-world impact — specific, not vague)
+- **✅ Kab use karo (Use this when):** 2-3 specific trigger situations — jab yeh concept/tool clearly sahi choice hai. (e.g., "Jab multiple services alag-alag machines pe hain", "Jab stateless auth chahiye", "Jab input size predict nahi hota")
+- **❌ Kab mat karo / Alternative prefer karo (Avoid when):** 1-2 counter-scenarios — jab yeh overkill ya wrong fit hai, aur phir konsa alternative better hoga. (e.g., "Simple single-server app mein — plain sessions kaafi hain", "Jab data structure change hona guaranteed ho — toh X se Y better hai")
 
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -714,8 +717,11 @@ Agar subtopic purely mathematical/theoretical hai aur koi direct security surfac
 
 
 #### 🏗️ 9. Scalability & Industry Context
-- How does this work for 1 user vs 1 Million users?
-- Is this "Cloud-Native" ready?
+**Adaptive Rule — Topic type ke hisaab se angle choose karo:**
+- **Agar concept infrastructure/service/tool hai** (e.g., Docker, Redis, API Gateway): 1 user vs 1 Million users mein kya fark padta hai? Cloud-Native ready hai? Senior Engineers kya karte hain?
+- **Agar concept algorithmic/mathematical/theoretical hai** (e.g., Binary Search, SQL JOIN, Gradient Descent, Big-O): Time complexity + Space complexity discuss karo. Dataset size badhne par performance kaisi degrade hoti hai? Real-world data par kaunse bottlenecks aate hain?
+- **Har case mein:** Best practices jo senior engineers follow karte hain — naming conventions, performance tips, kya avoid karein.
+*("1 user vs 1M users" framing purely theoretical/algorithmic concepts pe mat thopo — complexity aur memory tradeoffs zyada relevant hain wahan.)*
 
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)

@@ -54,6 +54,7 @@
    - CLI flags in prose (code block se bahar): `--reload`, `--workers`, `-k` — explain karo
    - Config keys / env vars in text: `SECRET_KEY`, `DEBUG`, `DATABASE_URL` — explain karo
    - Function arguments in prose (code block se bahar): `chain_type=`, `verbose=`, `timeout` — explain karo
+9. **✅❌ Decision Guide Check (MANDATORY):** Kya maine Point 4 mein **"Kab use karo"** aur **"Kab mat karo / Alternative prefer karo"** dono fields fill kiye? Specific trigger scenarios + specific counter-scenarios do — generic ya blank mat rakhna. Agar concept truly universal hai — note karo: `(Yeh concept har situation mein applicable hai — koi genuine avoid-scenario nahi hai)`
 
 
 ---
@@ -491,6 +492,8 @@ ONE accurate real-life analogy (50-80 words) that makes the concept intuitive.
 - **Problem:** What pain exists without this?
 - **Solution:** How this solves it.
 - **What breaks if we don't use it?** (Real-world impact — specific, not vague)
+- **✅ Kab use karo (Use this when):** 2-3 specific trigger situations — jab yeh concept/tool clearly sahi choice hai. (e.g., "Jab multiple services alag-alag machines pe hain", "Jab stateless auth chahiye", "Jab input size predict nahi hota")
+- **❌ Kab mat karo / Alternative prefer karo (Avoid when):** 1-2 counter-scenarios — jab yeh overkill ya wrong fit hai, aur phir konsa alternative better hoga. (e.g., "Simple single-server app mein — plain sessions kaafi hain", "Jab data structure change hona guaranteed ho — toh X se Y better hai")
 
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -580,7 +583,7 @@ If it fails, check:
 > - Fixing Phase: Tum us report ko dekh kar apna Chunk Size ya Vector DB theek karte ho.
 > - Live Production: Jab real user app use karta hai, tab KOI RAGAS nahi chalta. Sirf tumhara Vector DB aur ek single Student AI chalta hai.
 
-*(Agar concept ke liye yeh three-phase flow applicable nahi — toh jo bhi phases relevant hain woh dikhao, ya likho: `(N/A — is concept mein distinct offline/online phases nahi hoti)`)*
+*(CRITICAL RULE: N/A likhna FORBIDDEN hai. Agar concept ke liye teen-phase flow exactly applicable nahi — toh keywords aur context se ek logical real-world flow INFER karo. Har tech concept ka koi na koi dev-to-production lifecycle hota hai. Jo phases relevant hain woh dikhao, baaki adapt karo.)*
 
 
 #### 🎨 14. Visual Diagram (ASCII Art)
