@@ -567,9 +567,14 @@ Har confusion ke liye yeh exact format follow karo:
 
 
 #### 🛠️ 11. Troubleshooting Flowchart (Mental Model)
-If it fails, check:
-1. `Error A` -> `Check B`
-2. `Error C` -> `Log D`
+**Minimum 3 common errors** jo beginner actually face karta hai. Har entry ke liye yeh format:
+
+- **`[Exact error message ya symptom]`**
+  - **Root Cause:** [Kyun hota hai — 1-2 lines, specific]
+  - **Fix:** [Exact step jo lena hai — "check karo" ya "dekho" likhna FORBIDDEN. Seedha action do: "Line X mein Y karo", "Flag --Z add karo", "Config file mein A = B set karo"]
+
+*(Agar exact error message pata nahi — behavior describe karo: e.g., "Server starts but requests timeout silently", "API returns 200 but response body empty")*
+
 
 
 #### 🌍 12. Real-World Use Case (Production Application)
