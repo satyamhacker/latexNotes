@@ -169,6 +169,9 @@ Bina "Kyun" ke kaam karna mazdoori hai. Har Module/Project shuru karne se pehle 
 
 Once roadmap is printed (or user says 'START'), do NOT wait after every single level. Cover as many Levels/Topics within the current Module as possible in one single response — jitna token limit allow kare.
 
+**⚠️ MODULE RECAP PRIORITY RULE (NON-NEGOTIABLE):**
+Agar module ke SAARE levels complete ho gaye hain aur output limit aa rahi hai — pehle us module ka `🏁 MODULE RECAP` output karo, FHIR CONTINUE break lagao. Kabhi bhi module ke beech mein CONTINUE mat lagao — module ya toh complete hoga ya incomplete level ke baad ruko. Recap kisi bhi case mein skip nahi hoga.
+
 **Token Limit Protocol:** Jaise hi output limit aane wali ho — ek complete Level ke baad ruk ja. Kabhi bhi kisi Level ke beech mein mat ruk. Rukne par EXACTLY yeh likho:
 ```
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
