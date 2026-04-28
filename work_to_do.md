@@ -535,213 +535,161 @@ Step 1.5: Checking JSON Cache... -> Found!
 
 --- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
 ✅ Completed so far : Module 1 & Module 2 (Enterprise Self-Healing Pipeline completely built in Python!)
-⏳ Remaining       : Module 3 (The JavaScript Evolution - Playwright Migration)
-📊 Progress        : 6 Levels done / 8 Levels total | Module 2 of 3
+⏳ Remaining       : Module 3 (The AI Brain - Advanced Self-Healing)
+📊 Progress        : 6 Levels done / 9 Levels total | Module 2 of 3
 
 > "Chal bhai, haath pair jod, terminal khol! Aaj real knowledge ki aag lagate hain. Theory ho gayi, ab practically haath gande karne ka time hai!"
 
-Bhai, Python aur Selenium ka chapter close. Ab hum ghus rahe hain modern web automation ke hardcore engine mein — **Playwright with JavaScript**. Dhyan se dekh, language badlegi, syntax badlega, par tera First Principles wala 'Architect' dimaag wahi rahega. Asli Maal ab shuru hota hai!
-
+Bhai, basic cache aur AI prompt lagana toh bacche bhi kar lete hain. Ab hum is gaadi me V8 engine lagane wale hain. **The AI Brain in Selenium**. AI ko andha nahi chhodenge; usko poora DOM ka x-ray denge, ek ki jagah teen locators mangenge, aur auto-select karenge!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🏗️ MODULE 3 — PROJECT VISION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🖥️ The Machine (What):
-   Hum apne `saucedemo.com` ke self-healing framework ko Selenium (Python) se utha kar Playwright (JavaScript) par migrate kar rahe hain. Ek aisi machine jo natively async hai aur modern locators (Test ID, Roles) support karti hai.
+   Hum apne Selenium self-healing framework ko "God Mode" me le jayenge. AI ab sirf ek locator nahi, multiple strategies generate karega with Confidence Scores. Hum DOM elements ka fingerprint nikalenge taaki LLM hallucinate na kare.
 
 💢 The Pain (Why):
-   Selenium ka architecture synchronous (blocking) tha. Playwright fast hai, par agar isme humne purane Selenium `By` locators aur `sendKeys` use karne ki koshish ki, toh pura system kachra code ban jayega aur crash hoga.
+   Sirf ek alternative locator maangne par agar AI ne galti se galat div pakad liya (Hallucination), toh test false positive ho jayega ya wapas fail hoga. LLM ko context (DOM snippet) na dene se wo andhe teer chalata hai.
 
 🎯 The Strategy (How):
-   Hum apne core AI engine ("The Beast") ko refactor karenge. `WebDriver` ko hata kar [Page] (Playwright ka browser tab controller) lagayenge. AI se JSON mein naye Playwright-specific locators mangwayenge, aur JS Promises ko handle karne ke liye async wrappers banayenge.
+   Hum pehle prompt engineering ko advance karenge taaki JSON response me ek array of objects aaye (Multi-Strategy). Phir hum DOM tree ka ek chhota snippet (fingerprint) extract karke AI ko bhejenge. Aur finally, in sabko apne Selenium pipeline me tight integrate karenge.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🧩 Module 3: The JavaScript Evolution → Level 3.1: Native Locators & Beast Refactoring [🔴 Advanced]
+🧩 Module 3: The AI Brain → Level 3.1: Multi-Strategy Healing & Confidence Scoring [🔴 Advanced]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ### 0. 📌 Prerequisites (Before You Start This Level)
-- **Tools/Environment Required:** Node.js 18+ installed, VS Code.
-- **Assumed Knowledge:** Basic JavaScript (ES6+), Promises, NPM.
-- 🔗 **Project Fit:** Yeh level hamare existing AI healing engine ko JS environment mein zinda karega, taaki Playwright natively API se baat kar sake.
+- **Previous Levels Required:** Module 2 ka Cache Engine properly working hona chahiye.
+- 🔗 **Project Fit:** Ab humara "Beast" AI sirf ek tukka nahi marega, balki backup plans bhi dega.
 
 ---
 
 ### 1. ⚡ The Concept (Ultra-Short)
-Playwright mein `WebDriver` aur `By` class exist nahi karte. Inki jagah `Page` object aur direct string locators (`text="Login"`, `test id`) ko apne AI dictionary aur "Beast" class (core healer) mein map karna hai.
+AI ko bolna ki "Mujhe 1 nahi, 3 alag-alag locator strategies (CSS, XPath, ID) do, aur har ek ko ek 'Confidence Score' do (1 to 100)." Python script un locators ko score ke hisaab se sort karke ek-ek karke try karegi.
 
 ---
 
 ### 2. 💥 Why? (Production Impact — First Principles)
-- Agar tune apne AI prompt mein Playwright specific locators (like `getByTestId` ya `getByRole`) nahi daale, toh AI purane complex XPaths dega jo Playwright ki speed ko barbaad kar denge.
-- TypeScript/JavaScript purane Selenium types (`driver`) ko pehchanta nahi hai. Refactor nahi kiya toh script compile hi nahi hogi.
+- AI hamesha 100% sahi nahi hota. Agar usne pehla locator galat diya, toh test turant fail ho jayega.
+- Multi-strategy se humara retry mechanism robust banta hai. AI bolega "Mujhe 90% lagta hai ye ID chalega, aur 60% lagta hai ye XPath chalega."
 
 ---
 
 ### 3. 🎯 The Mission — Step-by-Step Practical Tasks
 
-**Step 1: Project Init & NPM Dependencies**
-- ⚡ **The Task (What):** Ek naya folder bana `playwright-sauce-healer`. Terminal khol aur Playwright ka latest setup run kar (`npm init playwright@latest`).
-- ❓ **The Logic (Kyun):** Yeh command base `package.json` aur test runner automatically scaffold kar degi.
-- ✅ **Definition of Done (DoD):** Tere folder mein `tests` directory aur `playwright.config.js` generate ho jana chahiye.
+**Step 1: Upgrading the Prompt**
+- ⚡ **The Task (What):** Apne `build_healing_prompt` (Level 1.2) me jao. JSON schema ko update karke Array of objects banao.
+- ❓ **The Logic (Kyun):** Hame JSON structure strict rakhna hai.
+- 💡 **Real-World Learning:** LLM Array/List extraction.
 
-**Step 2: Upgrading the AI Dictionary (The Switch Case)**
-- ⚡ **The Task (What):** Ek file bana `utils/locatorStrategy.js`. Isme ek switch-case function likh jo AI ke diye hue string ko Playwright native commands mein map kare. Pehle 5 the, ab kam se kam 8 hone chahiye.
-- ❓ **The Logic (Kyun):** Playwright accessibility-first hai. Usko `roles`, `placeholder`, aur `test id` zyada pasand hai.
-- 💡 **Real-World Learning:** AI outputs ko modern JS API functions mein map karna.
-
-  ```javascript
-  💡 Hint Snippet (sirf samajhne ke liye — khud type karna, copy-paste forbidden!):
-  case 'test id': 
-      return page.getByTestId(locatorValue);
-  case 'roles': 
-      return page.getByRole(locatorValue);
+  ```python
+  💡 Hint Schema:
+  [
+    {"strategy": "ID", "value": "new-id", "confidence": 95},
+    {"strategy": "XPATH", "value": "//div[@id='new']", "confidence": 80}
+  ]
   ```
 
-**Step 3: The "Beast" Refactoring**
-- ⚡ **The Task (What):** Apna `SelfHealingLocator` class (The Beast) JS mein likh. Constructor mein ab `driver` ki jagah `page` pass kar. Aur `primaryLocator` mein object ki jagah simply ek string accept kar (e.g., `'#user-name'`).
-- ❓ **The Logic (Kyun):** Framework ko Playwright ke architecture ke hisaab se align karna, bina underlying AI logic tode.
+**Step 2: Sorting by Confidence**
+- ⚡ **The Task (What):** `AIfind_element` me jab JSON wapas aaye (jo ab ek list hai), us list ko Python ke `sort(key=lambda x: x['confidence'], reverse=True)` function se sort karo.
+- ❓ **The Logic (Kyun):** Hamesha sabse high confidence wala locator pehle try hona chahiye.
+
+**Step 3: The Fallback Loop**
+- ⚡ **The Task (What):** Sorted list par `for loop` lagao. Har locator ko `create_by_type` me pass karke `driver.find_element` try karo. Agar chal jaye, toh loop break kar do aur cache me save kar lo. Agar fail ho, toh `continue` karke next element (lower confidence) try karo.
 
 ---
 
 ### 4. 💥 THE ELON MUSK CHALLENGES (The Drills)
 
-#### 💥 CHALLENGE 1 — THE CHAOS TASK (Break it to Master it)
-- **Task Directive:** Jaan-boojh kar apne switch-case mein `case 'test id':` na dal. AI ko bol "Saucedemo login button ka Test ID dhoondho".
-- **Kya sikhega:** AI sahi answer dega (Saucedemo login button ka test-id `login-button` hai), par tera switch-case usko pehchaan nahi payega aur default error ("Unknown locator strategy") phek dega. Bheja fry hoga, phir tu seekhega ki AI prompt aur Switch-case ka sync kitna zaroori hai.
-
-#### 🕵️ CHALLENGE 3 — UNDER THE HOOD VERIFICATION (Deep Dive)
-- Apne Node terminal mein console log laga ke dekh ki kya `page` object sahi se constructor mein inject ho raha hai. Agar output `undefined` hai, toh tu test runner se page object sahi pass nahi kar raha.
+#### 💥 CHALLENGE 1 — THE CHAOS TASK
+- **Task Directive:** AI ke prompt me JSON example se `[ ]` (array brackets) hata do. Dekho Python parser kaise kachra khata hai jab list ke bajaye object return ho. Error fix karo.
 
 ---
 
 ### 5. ✅ Definition of Done ("Kaise pata chalega ki sahi hua?")
 
-- 📤 **Expected Output (Terminal Console):**
+- 📤 **Expected Output (Terminal):**
 ```text
-Beast Initialized for Saucedemo!
-Page object injected successfully.
-Locator mapped to: page.getByTestId('username')
+Received 3 strategies from AI.
+Strategy 1 (XPATH) Confidence 95: Trying... Failed.
+Strategy 2 (ID) Confidence 85: Trying... Success!
+Element healed.
 ```
-
-💬 **Quick Verify 1 (Core Concept):** Selenium ka `By.ID("user")` Playwright JS mein kaise likha jayega?
-💬 **Quick Verify 2 (Comparison):** Playwright mein `WebDriver` instantiate kyu nahi karna padta?
 
 ---
 
 ### 6. 🧠 Practical Takeaway (Asli Siksha — The Deep Dive)
-
-- **The Paradigm Shift:** Tune dekha ki kaise humne engine ka logic wahi rakha, bas connector pins (`driver` -> `page`) badal diye.
-- **Accessibility Locators:** Playwright mein `getByRole` aur `getByTestId` sabse stable (non-brittle) locators hote hain.
-
-⚠️ **Anti-Pattern:** Naye tool pe aakar self-healing logic ko scratch se wapas likhna. Sahi tarika: "Not even a single change in the strategy" — sirf mappings update kar.
-🧠 **Memory Hook:** "Driver ko tata bol, Page ko hello! Switch-case mein naye locators daalo!"
-
+- Tune ek Fail-Safe Retry pattern banaya hai. Yeh enterprise systems ki backbone hai.
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🧩 Module 3: The JavaScript Evolution → Level 3.2: Async Wrappers & Production Execution [🔴 Advanced]
+🧩 Module 3: The AI Brain → Level 3.2: DOM Fingerprinting & Smart Context [🔴 Advanced]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-### 0. 📌 Prerequisites (Before You Start This Level)
-- **Previous Levels Required:** Level 3.1 complete (Beast refactored).
-- 🔗 **Project Fit:** Ab hum finally SauceDemo pe galat locator daalkar usko Playwright framework mein auto-heal hote hue practically dekhenge.
+### 0. 📌 Prerequisites
+- Basic Beautiful Soup (bs4) ya lxml ki knowledge for HTML parsing.
 
 ---
 
 ### 1. ⚡ The Concept (Ultra-Short)
-Playwright fully [Asynchronous] (event-driven, non-blocking) hai. Isliye hume AI se aaye hue Coroutine/Promise objects ke upar native `click()` ya `fill()` lagane se pehle custom `async` wrappers banane padenge.
+AI ko poora 5MB ka `page_source` bhejne ke bajaye, sirf toote hue element ka aaspas ka HTML (parent aur siblings) bhejenge. Isko **DOM Fingerprinting** kehte hain.
 
 ---
 
-### 2. 💥 Why? (Production Impact — First Principles)
-- Playwright mein `sendKeys` exist nahi karta. Agar tu purana naam use karega, test seedha crash hoga.
-- Agar tune AI ke promise ko `await` kiye bina `.click()` maara, toh JS engine bolega "Cannot read properties of undefined", kyunki element abhi memory mein aaya hi nahi hai.
+### 2. 💥 Why?
+- Poora page bhejoge toh token limit (Context Window) exceed ho jayegi (costly and slow).
+- Sirf as-pas ka DOM (Context) bhejne se AI 10x zyada accurate aur fast jawab deta hai.
 
 ---
 
-### 3. 🎯 The Mission — Step-by-Step Practical Tasks
+### 3. 🎯 The Mission
 
-**Step 1: Build the Async Helpers**
-- ⚡ **The Task (What):** Ek nayi class bana `PlaywrightHelpers.js`. Isme 2 static methods bana: `async clickAsync(locatorPromise)` aur `async fillAsync(locatorPromise, text)`. Inke andar pehle promise ko `await` kar, phir uspar native Playwright action chala.
-- ❓ **The Logic (Kyun):** Promises ko resolve kiye bina action perform karna JS mein illegal hai.
-- ✅ **Definition of Done (DoD):** Tere pass do clean, reusable async wrapper functions ready hain.
+**Step 1: Context Extraction**
+- ⚡ **The Task:** Jab `NoSuchElementException` aaye, toh poora page source padhne ke bajaye, Python (e.g., BeautifulSoup) use karke page ki body ya specific form tag ka inner HTML nikalo.
+- ❓ **The Logic:** AI ko sirf wahi area dikhao jahan action hona tha.
 
-**Step 2: Setup the POM for Saucedemo**
-- ⚡ **The Task (What):** `SauceLoginPage.js` bana. Constructor mein `this.page` set kar. Ek login function likh jahan tu intentionally username input ko galat data-test tag se dhoondhe (e.g., `'[data-test="username-scrambled"]'`).
-- ❓ **The Logic (Kyun):** Real-world fail scenario create karna taaki humara AI-healer jaag sake.
-
-**Step 3: The Final Execution (Combo)**
-- ⚡ **The Task (What):** Apni test script run kar. Tera framework pehle galat locator pe fail hoga. Try-catch usko pakdega, DOM ka snapshot banayega, HTTP client ke through API ko hit karega (with strict JSON prompt), aur wapas aakar naya `getByPlaceholder('Username')` ya `getByTestId('username')` chalayega.
-- 💡 **Real-World Learning:** End-to-end self-healing in a modern JS stack.
+**Step 2: Injecting Fingerprint into Prompt**
+- ⚡ **The Task:** Prompt me ek naya section add karo: `Current DOM Context: {short_dom_string}`.
 
 ---
 
-### 4. 💥 THE ELON MUSK CHALLENGES (The Drills)
-
-#### 💥 CHALLENGE 1 — THE CHAOS TASK (Break it to Master it)
-- **Task Directive:** Apne `fillAsync` helper mein `fill()` ki jagah purane Selenium wala `sendKeys()` type kar. Test run kar.
-- **Kya sikhega:** `TypeError: locatorType.sendKeys is not a function`. Yeh tera dimaag set karega ki Playwright mein text enter karne ka ek hi bhagwan hai: `fill()`.
-
-#### 🔥 CHALLENGE 2 — THE COMBO TASK (Level Boss — Hardest)
-Apne `saucedemo.com` login test mein username, password, aur login button teeno ke locators tod de.
-- Framework ko chalne de.
-- Check kar kya tera cache engine (jo Module 2 me banaya tha) JavaScript environment me properly `healed-locator.json` file generate/update kar raha hai?
-- **Challenge Twist:** Ensure kar ki execution ke baad teri terminal log dikhaye: `Filled standard_user in Username` aur login successful ho jaye!
+### 4. ✅ Definition of Done
+AI ka response time 15 seconds se ghat kar 4-5 seconds par aa jana chahiye kyunki ab usko chhota text read karna pad raha hai.
 
 ---
 
-### 5. ✅ Definition of Done ("Kaise pata chalega ki sahi hua?")
 
-- 📤 **Expected Output (Terminal using Playwright Test Runner):**
-```text
-[chromium] › tests/sauce-login.spec.js:5:1 › Saucedemo Auto-Healing Test
-Attempting primary locator: [data-test="username-scrambled"]
-Primary failed. Extracting DOM...
-Calling LLM API...
-Received JSON: {"type": "test id", "value": "username"}
-Wrapper executed: Filled standard_user
-✅ 1 passed (16.2s)
-```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🧩 Module 3: The AI Brain → Level 3.3: Full Pipeline Integration & Production Hardening [🔴 Advanced]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-💬 **Quick Verify 1 (Core Concept):** Helper function mein `await` lagana kyu zaroori tha action perform karne se pehle?
-💬 **Quick Verify 2 (Behavior):** Agar AI API 10 seconds leti hai, toh Playwright timeout (default 30s) test ko fail toh nahi kar dega? (Dhyan rakhna timeout limits ka).
+### 1. ⚡ The Concept (Ultra-Short)
+Saare purane purzo ko jod kar ek final, unbreakable execution pipeline banana jo CI/CD me bina human intervention ke chal sake.
+
+### 2. 🎯 The Mission
+- **Clean Logging:** Print statements hata kar Python ka `logging` module use karo (`logging.info`, `logging.warning`).
+- **Headless Execution:** Selenium ko Headless mode me run karo (Kyunki Jenkins pe UI nahi hota).
+- **The Boss Test:** SauceDemo ke teeno (Username, Password, Login Btn) ke locators tod do. Run the script. Script khud cache check karni chahiye, agar cache na mile toh AI ko DOM fingerprint bhejni chahiye, 3 strategies leni chahiye, best strategy pick karke cache update karna chahiye, aur login ho jana chahiye!
 
 ---
-
-### 6. 🧠 Practical Takeaway (Asli Siksha — The Deep Dive)
-
-- **The Async Paradigm:** Tune JS mein event-loop aur Promises ke saath khelna seekha. Coroutines ko bina await kiye chhedna maut hai.
-- **The Modern Automation Machine:** Ab tere paas ek aisa framework hai jo fast hai (Playwright), intelligent hai (LLM), aur cost-effective hai (Persistent Caching).
-
-⚠️ **Anti-Pattern:** Helper methods ke bahar tests mein baar-baar try-catch bharna. Sahi tarika: Abstract the healing logic entirely into the wrapper.
-🧠 **Memory Hook:** "Promise ko karo await, sendKeys ko karo fill, Playwright ke saath AI karega saare locators kill!"
-
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🏁 MODULE 3 RECAP — Tera Status Report
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🔓 Siksha Summary (Skills Unlocked):
-  • Playwright Migration Strategies
-  • ES6 Modules & Async/Await execution
-  • Mapping AI Prompts to modern Locators (Test ID, Roles)
-  • Wrapper Pattern for Promise resolution
+  • Multi-Strategy prompt engineering with Confidence Scoring
+  • Advanced DOM Context extraction for cost reduction
+  • Unbreakable Retry-Fallback loops in Selenium
+  • Python Logging for Enterprise observabillity
 
 🏗️ Real Output Built:
-  "Is module ke end mein tere paas ek deployed, runnable e-commerce test (saucedemo.com) hona chahiye jo Playwright (JavaScript) pe chalta hai, aur intentional UI breakdowns (scrambled locators) ko live heal karta hai."
-   Agar yeh output nahi bana — wapas ja aur fix kar. Aage mat badh.
+  "Tere paas ab ek aisi Selenium script hai jisko todna lagbhag namumkin hai. UI badlegi, script rukaawat mehsoos karegi, AI se baat karegi, options evaluate karegi, theek karegi, yaad rakhegi (cache), aur aage badh jayegi."
 
-⚠️ Guru-ji's Warning:
-  "Check kar le bhai! Kya tujhe yeh sab bina cheat sheet ke karna aa gaya hai?
-   Agar inme se ek bhi cheez mein doubt hai ya confuse hai, toh chup chaap
-   peeche ja aur wapas execute kar. Aage badhne ka koi fayda nahi agar basics hile hue hain!"
-
-Congratulations bhai! Pipeline complete. Tune legacy automation ko tod kar modern, self-healing, AI-driven enterprise architecture khada kar diya hai. Ab real production project pe lagao.
+Congratulations bhai! Pipeline complete. Tune legacy automation ko tod kar modern, self-healing, AI-driven enterprise architecture khada kar diya hai. Ab isey real production project (jaise Smart Library CRM) pe lagao.
 
 ⚡ GURUDAKSHINA (The Checkpoint):
   "Sare Levels clear hue? Real output build hua? Screenshots taiyar rakh!
    Tera system ab 'Guru' level pe hai. Take a bow!"
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
