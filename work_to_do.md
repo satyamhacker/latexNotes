@@ -5,7 +5,7 @@ Tune saare 9 sections ki theory digest kar li hai. Ab hum is e-commerce site (`s
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🗺️ GURU-JI'S MASTER ROADMAP: THE SAUCEDEMO HEALER
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Total Modules: 3 | Total Levels: 8 | Estimated Completion Time: 5-7 hours
+Total Modules: 3 | Total Levels: 9 | Estimated Completion Time: 7-10 hours
 (Time estimate: 🔴 Advanced = 60-90 min per level)
 Difficulty: 🔴 Advanced
 
@@ -19,9 +19,10 @@ Difficulty: 🔴 Advanced
    ├── Level 2.2 — JSON R/W & Upsert Logic (No Wipe Coding) [🔴]
    └── Level 2.3 — Dynamic 'By' Type Casting & Speed Test [🔴]
 
-📦 Module 3: The JavaScript Evolution (Playwright: JS)
-   ├── Level 3.1 — Native Locators & Beast Refactoring [🔴]
-   └── Level 3.2 — Async Wrappers & Production Execution [🔴]
+📦 Module 3: The AI Brain — Advanced Self-Healing (Selenium: Python)
+   ├── Level 3.1 — Multi-Strategy Healing & Confidence Scoring [🔴]
+   ├── Level 3.2 — DOM Fingerprinting & Smart Prompt Engineering [🔴]
+   └── Level 3.3 — Full Pipeline Integration & Production Hardening [🔴]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -524,7 +525,7 @@ Step 1.5: Checking JSON Cache... -> Found!
   "Check kar le bhai! Kya tune file path hardcode toh nahi chhoda? Agar kal ko yeh repository kisi aur server pe deploy hui, toh cache system chalega ya hilega? Basics pakke rakh!"
 
 🚀 Next Module Teaser:
-  "Agla Module [The JavaScript Evolution] mein hum is purani gaadi (Selenium) ko modern rocket (Playwright) se replace karenge. Syntax badlega, par tera dimaag aur architect logic same rahega."
+  "Agla Module [The AI Brain] mein hum is healing engine ko steroids pe le jayenge — Multi-Strategy AI locator ranking, DOM Fingerprinting, aur Confidence Scoring. Ek nahin, ek saath TEEN alternative locators AI generate karega aur best wala automatically pick hoga!"
 
 ⚡ GURUDAKSHINA (The Checkpoint):
   "Sare Levels clear hue? Real output build hua? Screenshots taiyar rakh!
