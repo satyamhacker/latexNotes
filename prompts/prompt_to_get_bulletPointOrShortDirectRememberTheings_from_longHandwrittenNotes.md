@@ -271,7 +271,39 @@ Agar kisi concept ki detail notes mein nahi hai — use invent MAT karo.
 > *"Kya maine koi capitalized term / tool name / flag / jargon drop kiya jo Section 3 mein nahi hai aur beginner confuse ho sakta hai?"*
 > Agar haan → inline parenthetical explanation add karo.
 
-### Rule 3 — CODE & COMMANDS BREAKDOWN (MANDATORY & DETAILED)
+### Rule 2D — NEW TERM INTERRUPTION RULE (NON-NEGOTIABLE)
+
+**Core Idea:** Primer mein jab kisi concept X ki explanation chal rahi ho aur beech mein suddenly koi **naya term, function, command, argument, ya symbol** aa jaaye — wahan explanation ruk jaayegi aur woh nayi cheez **pehle inline explain hogi**, phir aage badhegi.
+
+**Yeh rule un categories pe apply hota hai:**
+
+| Category | Examples | Action |
+|----------|----------|--------|
+| Naya concept / term | "tokenization", "embedding", "backpressure" | Inline 1-line explanation |
+| Nayi function / method | `.fit()`, `.invoke()`, `.transform()` | Function ka kaam + key params |
+| Naya CLI flag | `--workers`, `--reload`, `-v` | Flag ka exact matlab |
+| Naya argument/param | `temperature=0.7`, `max_tokens=512` | Kya control karta hai |
+| Nayi library/import | `import torch`, `from sklearn import ...` | Library ka 1-line purpose |
+| Naya symbol/operator | `\|>`, `=>`, `::`, `??` | Naam aur kaam |
+| Naya abbreviation | ONNX, FAISS, BLEU, RLHF | Full form + meaning |
+| Naya config/env var | `OPENAI_API_KEY`, `DEBUG` | Kya control karta hai |
+
+**✅ CORRECT — Mid-explanation mein nayi cheez aate hi explain karo:**
+```
+"Ab hum `.fit()` (yeh method model ko training data pe train karta hai — weights adjust hote hain)
+call karke pipeline complete kar lete hain."
+```
+
+**❌ WRONG — Nayi cheez bina explanation ke:**
+```
+"Ab hum `.fit()` call karke pipeline complete kar lete hain."  ← .fit() kya karta hai?
+```
+
+> **Golden Rule:** Agar reader ko ek bhi baar ruk ke sochna pade — *"yeh kya hai?"* — toh primer ne apna kaam galat kiya.
+
+**Exception:** Agar woh term Section 3 mein already fully breakdown hua hai — toh sirf uska naam use karo (inline explanation ki zaroorat nahi, detail wahan hai).
+
+### Rule 3 — CODE \& COMMANDS BREAKDOWN (MANDATORY \& DETAILED)
 
 **Jab code/commands notes mein hon, toh yeh sab extract karo:**
 
@@ -491,6 +523,7 @@ Type 'CONTINUE' to get the next part.
 - [ ] Kya HTML entities (`&amp;` etc.) ko properly decode kiya?
 - [ ] Kya pure Hinglish mein likha hai (koi Devanagari nahi)?
 - [ ] 🔍 **CONTEXTUAL TERM CHECK (Rule 2C):** Section 1, 2, 4, 5 mein jo bhi tool/keyword/flag/library contextually mention hua — aur Section 3 mein dedicated breakdown nahi hai — kya uske saath 1-line inline Hinglish explanation di? Agar koi bhi term bina explanation ke drop kiya toh fix karo.
+- [ ] 🆕 **NEW TERM INTERRUPTION CHECK (Rule 2D):** Primer mein concept X ki explanation chalte waqt jab koi nayi term/function/command/argument/symbol suddenly aaya — kya maine wahan RUKKE usse inline explain kiya? Agar koi bhi nayi cheez bina explanation ke pass-by mein gayi — fix karo.
 
 Agar koi bhi check fail → woh section fix karo pehle, phir respond karo.
 

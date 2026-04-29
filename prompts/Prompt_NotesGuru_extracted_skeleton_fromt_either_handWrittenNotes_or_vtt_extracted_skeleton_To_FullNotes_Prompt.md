@@ -120,6 +120,14 @@ Section X: [Section Title]
    - Config keys / env vars in text: `SECRET_KEY`, `DEBUG`, `DATABASE_URL` — explain karo
    - Function arguments in prose (code block se bahar): `chain_type=`, `verbose=`, `timeout` — explain karo
 10. **✅❌ Decision Guide Check (MANDATORY):** Kya maine Point 4 mein **"Kab use karo"** aur **"Kab mat karo / Alternative prefer karo"** dono fields fill kiye? Agar concept clearly situational applicability rakhta hai — yeh fields BLANK ya generic nahi honi chahiye. Specific trigger scenarios + specific counter-scenarios do. Agar concept truly universal hai (no alternative ever makes sense) — toh note karo: `(Yeh concept har situation mein applicable hai — koi genuine avoid-scenario nahi hai)`
+11. **🆕 Mid-Explanation New Term Check (MANDATORY):** Poore response mein kisi bhi point par — jab bhi koi NEW cheez achanak aaye jab topic X pe explanation chal rahi ho — kya maine wahan RUKKE usse explain kiya? Yeh "new cheez" ho sakti hai:
+   - Ek naya term/concept jo pehle note mein nahi tha
+   - Ek nayi function call jo suddenly code mein use hui
+   - Ek naya command ya flag jo passing mein mention hua
+   - Ek nayi argument/parameter jo bina context ke aaya
+   - Koi bhi syntax ya symbol jo reader ne pehli baar dekha ho
+   
+   **Rule:** Is tarah ki har nayi cheez ke aate hi — seedha wahan INLINE explain karo. Reader ko scroll nahi karna chahiye, assume nahi karna chahiye — explanation khud-ba-khud unke saath chalni chahiye. "Main baad mein explain karunga" FORBIDDEN hai.
 
 *Isse hallucination kam hoga, skeleton ka 100% coverage guarantee hoga, aur original notes ka har ek word final notes mein zaroor aayega.*
 
@@ -245,6 +253,64 @@ Ya koi bhi aisi line jo subtopics ki list parentheses/italics mein dikhaye. Yeh 
 
 **Special Characters Clarity:** Jab bhi code ya commands mein special characters aayein (`$`, `{}`, `[]`, `=>`, `|`, `&&`, `...`, `**`, `::`) — clearly batao inka naam aur kaam Hinglish mein. Beginners ko in symbols se darr lagta hai.
 - Example: `${PORT}` → "Dollar-curly-braces — yeh environment variable ka value inject karta hai"
+
+
+---
+
+
+## 🆕 NEW TERM INTERRUPTION RULE (NON-NEGOTIABLE)
+
+
+**Core Idea:** Jab explanation topic X ke baare mein chal rahi ho, aur beech mein suddenly koi **naya term, function, command, argument, concept, syntax, ya symbol** aa jaaye — toh explanation wahan **ruk jaayegi** aur woh nayi cheez **pehle inline explain hogi**, phir aage badhegi.
+
+**Yeh rule tab apply hota hai jab naya element:**
+- Is skeleton mein pehle kisi aur jagah DETAIL mein explain nahi hua (warna cross-reference do)
+- Current subtopic ka MAIN focus nahi hai (warna poora subtopic usi ke baare mein hai)
+- Reader ke liye PEHLI BAAR aaya ho
+
+### 🔍 Covered Categories (Yeh sabhi "new" mein aate hain)
+
+| Category | Examples | Action |
+|----------|----------|--------|
+| **Naya concept / term** | "OAuth flow", "tokenization", "embedding" | Inline 1-line explanation |
+| **Nayi function / method call** | `.fit()`, `.transform()`, `chain.invoke()` | Function ka kaam + parameters explain karo |
+| **Nayi command / CLI flag** | `--host 0.0.0.0`, `-v`, `--detach` | Flag ka exact matlab batao |
+| **Naya argument / parameter** | `temperature=0.7`, `max_tokens=512` | Kya control karta hai + default/range batao |
+| **Nayi library / import** | `from sklearn import ...`, `import torch` | 1-line mein library ka purpose |
+| **Naya symbol / operator** | `|>`, `=>`, `::`, `??`, `@decorator` | Naam aur kaam batao |
+| **Naya abbreviation / acronym** | ONNX, FAISS, BLEU, RLHF | Full form + 1-line meaning |
+| **Naya config / env var** | `OPENAI_API_KEY`, `CHROMA_HOST` | Kya control karta hai explain karo |
+
+### ✅ Sahi Tarika (Mid-Explanation Interruption)
+
+```markdown
+❌ WRONG — Naya term bina explanation ke:
+"Ab hum retriever ko `.as_retriever()` se banayenge aur usse `RetrievalQA` mein pass kar denge."
+
+✅ CORRECT — Nayi cheez aate hi inline explain karo:
+"Ab hum retriever ko `.as_retriever()` (yeh method vector store ko ek searchable retriever object mein convert karta hai — jab bhi query aaye, yeh relevant chunks dhundhta hai) se banayenge aur usse `RetrievalQA` (LangChain ka Question-Answering chain — retriever + LLM ko combine karke answer generate karta hai) mein pass kar denge."
+```
+
+```markdown
+❌ WRONG — New function suddenly code mein aaya bina explanation ke:
+"Phir hum `model.fit(X_train, y_train)` call karenge."
+
+✅ CORRECT — Function ka kaam bhi batao:
+"Phir hum `model.fit(X_train, y_train)` call karenge — `fit()` matlab model ko training data pe train karna; `X_train` = input features, `y_train` = correct labels jisse model seekhega."
+```
+
+### ⚠️ Golden Rule
+
+> **"Agar reader ko explanation padhte waqt ek baar bhi ruk ke sochna pade — 'yeh kya hai?' — toh AI ne apna kaam galat kiya hai."**
+
+Notes ki reading ek smooth, uninterrupted flow honi chahiye. Har nayi cheez khud explain karni chahiye jaise ek patient teacher ek student ke saath baith ke padha raha ho — koi bhi word pass-by mein nahi chhutna chahiye.
+
+### 🔗 Exception (Repeat Explanation Mat Karo)
+
+Agar woh term/function/command **isi skeleton mein pehle kisi point ya subtopic mein already detail mein cover ho chuki hai** — toh dobara explain mat karo. Sirf cross-reference do:
+```markdown
+"`.as_retriever()` (detail: is hi topic ka Point 7 mein dekho) se retriever banao."
+```
 
 
 ---
