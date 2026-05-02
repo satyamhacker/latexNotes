@@ -235,6 +235,13 @@ Yeh block kyun zaroori hai:
 - Coverage angle se Notes Guru decide karega ki code dena hai ya sirf theory
 - Key terms se Notes Guru exact vocabulary use karega jo original notes mein thi
 
+🚨 **SCOPE SIGNAL HALLUCINATION GUARD:** Har field mein sirf wahi likho jo notes mein literally tha.
+- `Key terms from notes` — sirf woh exact words/phrases jo notes mein likhe the. Apni taraf se "related" terms mat add karo.
+- `Explicit emphasis in notes` — sirf woh jo actually underlined/starred/repeated tha. Agar kuch nahi tha — "None" likho. Guess mat karo.
+- `Notes mein jo analogies/examples the` — sirf woh jo notes mein explicitly tha. Agar nahi tha — "None" likho. Apni analogy mat banana.
+- `Depth Level` — notes mein actual content volume dekh ke decide karo, topic ki importance se nahi.
+- **Koi bhi field mein "typically", "usually", "generally" jaisi language = hallucination signal. Agar notes mein nahi tha — mat likho.**
+
 Example:
 ```
 [📊 SCOPE SIGNAL for Topic 1:
@@ -357,6 +364,13 @@ Har **Topic** ke KEYWORDS DUMP ke baad ek `🔄 REAL-WORLD FLOW SIGNAL` block ad
   - **Mastery Phase:** Expert level pe kaise use hota hai.
 - Agar notes mein is topic ke liye koi real-world flow nahi tha — likho: `(N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)`
 
+🚨 **REAL-WORLD FLOW HALLUCINATION GUARD — SABSE IMPORTANT:**
+- **Apni knowledge se koi bhi phase INVENT mat karo.** Agar notes mein Testing Phase describe nahi tha — toh `(N/A)` likho, apna version mat banana.
+- **Har phase mein sirf wahi likho jo notes mein literally tha** — exact words/context preserve karo.
+- **"Typically this would be used for..." ya "Usually in production..." jaisi lines = hallucination.** Yeh tumhari knowledge hai, notes ki nahi — FORBIDDEN.
+- Agar notes mein sirf ek phase describe tha — sirf wahi phase fill karo, baaki `(N/A)` rakho.
+- **N/A likhna correct hai. Invented flow likhna incorrect hai.**
+
 **Format:**
 ```
 🔄 REAL-WORLD FLOW SIGNAL for Topic [X]:
@@ -402,6 +416,7 @@ Hardware engineer banne ki pehli shart: Board Jalna Nahi Chahiye.
 ```
 - Agar notes mein explicit section/module naam hai — wahi use karo.
 - Agar nahi hai — related topics ko group karke logical section naam derive karo aur `[⚠️ Derived]` tag lagao.
+- **Tagline bhi agar notes se directly nahi aayi — `[⚠️ Derived]` tag lagao. Apni creative tagline mat banana bina flag ke.**
 
 
 ### Topic + Subtopic Format:

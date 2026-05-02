@@ -204,6 +204,13 @@ Har **Topic** ke subtopics list ke baad ek mandatory `📊 SCOPE SIGNAL` block a
 
 🚨 **IMPORTANT:** Yeh block **per topic** hai — **per subtopic NAHI**. Ek topic ke andar 5 subtopics hain toh bhi ek hi SCOPE SIGNAL block hoga.
 
+🚨 **SCOPE SIGNAL HALLUCINATION GUARD:** Har field mein sirf wahi likho jo transcript mein literally tha.
+- `Key terms from transcript` — sirf woh exact words/phrases jo speaker ne bole. Apni taraf se "related" terms mat add karo.
+- `Explicit emphasis by speaker` — sirf woh jo speaker ne actually "important", "remember this", "this is key" bol ke highlight kiya. Agar nahi kiya — "None" likho. Guess mat karo.
+- `Speaker ne jo analogies/examples use kiye` — sirf woh jo speaker ne explicitly diye. Agar nahi diye — "None" likho. Apni analogy mat banana.
+- `Depth Level` — transcript mein actual content volume dekh ke decide karo, topic ki importance se nahi.
+- **Koi bhi field mein "typically", "usually", "generally" jaisi language = hallucination signal. Agar transcript mein nahi tha — mat likho.**
+
 Format:
 ```
 [📊 SCOPE SIGNAL for Topic [X]:
@@ -262,6 +269,13 @@ Har **Topic** ke KEYWORDS DUMP ke baad ek mandatory `🔄 REAL-WORLD FLOW SIGNAL
   - **Mastery Phase:** Expert level pe kaise use hota hai.
 - Agar transcript mein is topic ke liye koi real-world flow nahi bataya gaya — likho: `(N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)`
 
+🚨 **REAL-WORLD FLOW HALLUCINATION GUARD — SABSE IMPORTANT:**
+- **Apni knowledge se koi bhi phase INVENT mat karo.** Agar speaker ne Testing Phase describe nahi kiya — toh `(N/A)` likho, apna version mat banana.
+- **Har phase mein sirf wahi likho jo speaker ne literally kaha** — exact words/context preserve karo.
+- **"Typically this would be used for..." ya "Usually in production..." jaisi lines = hallucination.** Yeh tumhari knowledge hai, transcript ki nahi — FORBIDDEN.
+- Agar speaker ne sirf ek phase describe kiya — sirf wahi phase fill karo, baaki `(N/A)` rakho.
+- **N/A likhna correct hai. Invented flow likhna incorrect hai.**
+
 **Format:**
 ```
 🔄 REAL-WORLD FLOW SIGNAL for Topic [X]:
@@ -316,6 +330,7 @@ Har **Topic** ke KEYWORDS DUMP ke baad ek mandatory `🔄 REAL-WORLD FLOW SIGNAL
 - Agar transcript mein explicit video breaks hain — unhe Section boundaries maano.
 - Agar nahi hain lekin content 45+ minutes ka hai — major theme shifts pe artificial Section breaks banao aur `[⚠️ Manually split]` tag lagao.
 - Agar transcript plain hai aur 45 min se kam ka hai — treat as single Section.
+- **Tagline bhi agar transcript se directly nahi aayi — `[⚠️ Derived]` tag lagao. Apni creative tagline mat banana bina flag ke.**
 
 
 ### Topic + Subtopic Format:
