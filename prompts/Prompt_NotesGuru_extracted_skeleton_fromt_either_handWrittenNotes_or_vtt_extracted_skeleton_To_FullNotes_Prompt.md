@@ -673,6 +673,31 @@ Beginners ko flags se darr lagta hai. Har command ko aise todo:
 
 
 **⚠️ CODE ACCURACY RULE:** Agar skeleton mein exact code snippet diya hai — wahi use karo, agar code outdated hai then update karo . Agar skeleton mein sirf concept hai aur code nahi diya — toh best-effort code likho 
+
+**🏷️ VERSION TAG RULE (MANDATORY):** Har code block ki **pehli line** pe ek version comment lagao jo bataye ki yeh code kis version pe tested/valid hai.
+
+- **Format (Python/backend):** `# Python 3.11+ | Django 5.x` ya `# Python 3.10+ | FastAPI 0.110+`
+- **Format (JS/frontend):** `// Node.js 20+ | React 18` ya `// TypeScript 5.x | Next.js 14+`
+- **Agar skeleton mein version explicitly diya hai** → wahi use karo exactly.
+- **Agar skeleton mein version nahi diya** → best guess lagao based on syntax/APIs used, aur ⚠️ mark karo:
+  `# ⚠️ Version verify karo — yeh Python 3.11+ pe tested hai, aapke environment mein confirm karo`
+- **Yeh comment code block ki line 1 hogi** — line numbering (RULE MINUS ONE) iske baad line 2 se shuru hogi, ya alternatively version comment ko line 0 treat karo aur actual code 1 se number karo.
+- **Kabhi bhi version comment skip mat karo** — chahe code 1 line ka hi kyun na ho.
+
+```python
+# ✅ CORRECT format:
+# Python 3.11+ | requests 2.31+
+1  import requests                        # requests library — HTTP calls karne ke liye
+2  response = requests.get("https://...") # .get() = HTTP GET request bhejo, response object milta hai
+```
+
+```python
+# ✅ CORRECT — version unknown, best guess with warning:
+# ⚠️ Version verify karo — yeh Python 3.10+ pe tested hai
+1  match command:                         # match-case = Python 3.10+ ka structural pattern matching
+2      case "quit": exit()               # agar command == "quit" toh program band karo
+```
+
 ---
 
 
