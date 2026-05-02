@@ -65,7 +65,7 @@ Section X: [Section Title]
 - `Depth Level: Moderate` → Standard 19-point structure follow karo with medium-length explanations (~500-800 words total). Balanced depth.
 - `Depth Level: Deep` → Maximum detail, all points fully expanded (~1000-1500+ words). Yeh topic core hai — leave nothing unexplained.
 - `Coverage Angle: Conceptual only` → Point 7 (Hands-On) skip/minimize karo. ASCII diagram aur flow prefer karo.
-- `Coverage Angle: Practical only` → Seedha Point 7 pe focus karo. Theory ke sections brief rakho.
+- `Coverage Angle: Practical only` → Seedha Point 7 pe focus karo. Theory ke sections brief rakho. **⚠️ Why-Before-How Enforcement: Even when Coverage Angle = Practical only — Point 4 (Why This Matters) ka minimum 2-line problem statement MANDATORY hai. Seedha code pe jump karna FORBIDDEN — pehle problem batao, phir code dikhao.**
 - `Coverage Angle: Both` → Full 19-point structure — equally theory + code.
 - `Key terms from notes` → In exact terms ko tumhare notes mein exactly use karo — replace mat karna synonyms se.
 - `Explicit emphasis in notes` → Jo bhi emphasized tha (starred, underlined, repeated) — usse Point 10 (Anti-Patterns) ya Point 18 (Memory Hook) mein specially highlight karo.
@@ -74,6 +74,8 @@ Section X: [Section Title]
 **🔄 How to USE the REAL-WORLD FLOW SIGNAL:** Agar skeleton mein `🔄 REAL-WORLD FLOW SIGNAL` block hai — usse directly Point 15 (Real-World Flow, End-to-End 3-Phase Picture) mein use karo. Skeleton ka flow preserve karo — apna naya flow mat banana.
 
 **🔑 KEYWORDS DUMP — How to use it:** Each subtopic in the skeleton now contains a `🔑 KEYWORDS DUMP` block — a flat list of every single word, phrase, command, term, and value that appeared in the original handwritten notes for that subtopic. This is your **mandatory coverage checklist**. After generating notes for each subtopic, you MUST cross-check every keyword from that subtopic's KEYWORDS DUMP against your generated notes. If any keyword is not explained or mentioned in your notes — your notes are incomplete. Go back and add it before moving on.
+
+**⚠️ Empty KEYWORDS DUMP Fallback:** Agar skeleton mein kisi subtopic ka `🔑 KEYWORDS DUMP` section missing ya empty hai — AI khud us subtopic ke key terms, concepts, commands, aur values extract karke ek temporary keywords list banaye aur usse Point 19 mein verify kare. Is self-extracted list ko clearly mark karo: `⚠️ Keywords Dump missing tha — yeh terms maine khud is subtopic se extract kiye hain.` Fir normal Point 19 verification process follow karo.
 
 **Skeleton Input Validation:** Agar skeleton ka format expected se alag lage (missing `###` headers, subtopics without descriptions, etc.) — apna best guess lagao aur response ke top mein ek warning likho: `⚠️ Skeleton format mein kuch inconsistency mili — [describe what]`. Fir bhi proceed karo — incomplete skeleton se bhi notes bana sakte ho.
 
@@ -229,7 +231,7 @@ Ya koi bhi aisi line jo subtopics ki list parentheses/italics mein dikhaye. Yeh 
    - **Point 7 (Hands-On):** EVERY code/command line comment se explain karo, har flag/argument ka matlab Hinglish mein batao. Har code block ke baad **📤 Expected Output** block zaroor do — koi shortcut nahi.
    - **Point 13 (Comparison):** Agar koi subtopic comparison maangta hai, woh table yahin aayega.
    - **Point 10 (Anti-Patterns):** Saare subtopics ke common mistakes ek saath list karo.
-   - **Point 17 (Interview Q&A):** Minimum 5 deep questions jo saare subtopics ke angles cover karein.
+   - **Point 17 (Interview Q&A):** Minimum 5 deep questions jo saare subtopics ke angles cover karein (SCOPE SIGNAL Deep = 7-8, Surface = 3-4).
 3. **Keywords Coverage:** Topic ke end mein subtopic-wise coverage table do (neeche "Keywords Coverage Verification" section dekho). Har subtopic ke keywords individually verify karo.
 4. **Token management:** Agar topic bohot bada ho (15+ subtopics), ek response mein compress karne ki koshish mat karo. **CONTINUE protocol at subtopic-group level** use karo (e.g., 5 subtopics in one response, consolidated style ke saath).
 5. **Code/Command Rule NON-NEGOTIABLE:** Is mode mein bhi, jab bhi code ya command aaye — har line explain karo, har flag explain karo, exact output dikhao. No shortcuts allowed.
@@ -826,12 +828,19 @@ Only if there's a close competitor or commonly confused concept (e.g., Jenkins v
 
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
-**Instruction:** Is concept ka real-world mein step-by-step flow dikhao — jaise yeh actually production mein kaam karta hai. Teen phases mein tod ke dikhao:
+**Instruction:** Is concept ka real-world mein step-by-step flow dikhao — jaise yeh actually production mein kaam karta hai. Teen phases mein tod ke dikhao.
+
+**⚠️ Phase Adaptation Rule:** Default 3-phase structure yeh hai:
 - **Testing/Offline Phase:** Developer ya system kab aur kaise is tool/concept ko use karta hai.
 - **Fixing/Iteration Phase:** Us phase ke output ko dekh kar developer kya action leta hai — kya fix karta hai, kya tune karta hai.
 - **Live Production Phase:** Jab real user app use karta hai — tab is concept ka kya role hai?
 
-*(CRITICAL RULE: Agar skeleton mein `REAL-WORLD FLOW SIGNAL` N/A hai ya missing hai, toh N/A mat likho! Context aur keywords ko use karke ek logical 3-phase real-world flow INFER karo aur likho. Har tech concept ka ek dev-to-prod lifecycle hota hi hai.)*
+Lekin agar concept purely theoretical/foundational hai (e.g., Ohm's Law, Big-O notation, OSI Model, mathematical formulas...etc its just example) — toh phases ko is tarah adapt karo:
+- **Learning Phase:** Concept pehli baar kaise samjha jaata hai — definition, formula, mental model.
+- **Application Phase:** Is concept ko real problems pe kaise apply karte hain — examples, exercises, pattern recognition.
+- **Mastery/Production Phase:** Expert level pe yeh concept kaise use hota hai — optimization, edge cases, interview-level depth.
+
+*(CRITICAL RULE: Agar skeleton mein `REAL-WORLD FLOW SIGNAL` N/A hai ya missing hai, toh N/A mat likho! Context aur keywords ko use karke ek logical flow INFER karo aur likho. Har concept ka ek lifecycle hota hi hai — chahe practical ho ya theoretical.)*
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 **Instruction:** Text-based architecture ya flow diagram — concept ka visual flow dikhao.
@@ -839,7 +848,12 @@ Only if there's a close competitor or commonly confused concept (e.g., Jenkins v
 
 
 #### ❓ 17. Interview Q&A (FAQ)
-**Exactly 5 questions** with detailed answers related to this subtopic.
+**Question count — SCOPE SIGNAL ke hisaab se decide karo:**
+- `Depth Level: Surface` → 3-4 questions sufficient
+- `Depth Level: Moderate` → 5-6 questions
+- `Depth Level: Deep` → 7-8 questions
+- SCOPE SIGNAL missing ya default → minimum 5, maximum 8 — topic complexity ke hisaab se judge karo
+- **Minimum 5, Maximum 8 — kabhi 5 se kam mat karo (Surface ke alawa), kabhi 8 se zyada mat karo**
 - **Answer depth rule:** Har answer minimum 3-4 lines ka hona chahiye — sirf 1-line answers nahi chalenge.
 - Har answer mein yeh cover karo: definition + kaise kaam karta hai + ek real example.
 - **Deep understanding questions likhna — factual nahi.** Examples:
