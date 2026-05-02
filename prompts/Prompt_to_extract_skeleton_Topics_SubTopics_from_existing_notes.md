@@ -342,7 +342,7 @@ Har **Topic** ke SCOPE SIGNAL block ke baad ek mandatory `🔑 KEYWORDS DUMP` bl
 ```
 
 
-### Rule 11 — REAL-WORLD FLOW SIGNAL (PER TOPIC)
+### Rule 12 — REAL-WORLD FLOW SIGNAL (PER TOPIC)
 Har **Topic** ke KEYWORDS DUMP ke baad ek `🔄 REAL-WORLD FLOW SIGNAL` block add karo.
 
 **Yeh block kya capture karta hai:**
