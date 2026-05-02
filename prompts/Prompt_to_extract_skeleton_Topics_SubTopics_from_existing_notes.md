@@ -224,6 +224,7 @@ Format (har Topic ke subtopics list ke baad):
 - Notes mein content volume: [Sirf 1-2 keywords / 1-2 lines / Short paragraph / Long explanation / Multiple examples + code]
 - Key terms from notes: [comma separated exact words/phrases jo notes mein the]
 - Explicit emphasis in notes: [koi specific warning, tip, underline, star, ya repeated point jo notes mein tha — agar kuch nahi tha toh: "None"]
+- Notes mein jo analogies/examples the: [exact analogies ya real-world examples jo notes mein likhe the — agar koi nahi toh: "None"]
 ]
 ```
 
@@ -242,6 +243,7 @@ Example:
 - Notes mein content volume: Short paragraph with 1 code example
 - Key terms from notes: labeled box, age=25, store value, changeable, rigid
 - Explicit emphasis in notes: "without variables code rigid hota hai" — underlined in notes
+- Notes mein jo analogies/examples the: "labeled box" analogy — variable ko ek box ki tarah describe kiya gaya tha
 ]
 ```
 
@@ -324,6 +326,7 @@ Har **Topic** ke SCOPE SIGNAL block ke baad ek mandatory `🔑 KEYWORDS DUMP` bl
 - Har code snippet jo notes mein tha — include karo (e.g., `RecursiveCharacterTextSplitter`, `chunk_size=500`).
 - Har emphasized word (underlined, starred, circled, ALL CAPS in notes) — include karo aur `⭐` prefix lagao.
 - Agar notes mein koi word unclear tha — include karo aur `[unclear]` tag lagao.
+- **Version numbers jo notes mein explicitly mention hue hain** (e.g., Python 3.11, Django 5.x, React 18, Node.js 20) — inhe `⭐` prefix ke saath capture karo aur `[version]` tag lagao taaki Notes Guru Version Tag Rule ke liye inhe identify kar sake. Example: `⭐Python 3.11[version]`, `⭐Django 5.x[version]`
 - Bahar se koi keyword mat add karo — sirf notes ka content.
 
 **Format:**
@@ -336,6 +339,31 @@ Har **Topic** ke SCOPE SIGNAL block ke baad ek mandatory `🔑 KEYWORDS DUMP` bl
 ```
 🔑 KEYWORDS DUMP for Topic 1:
 [variable, labeled box, age=25, store value, changeable, rigid, hardcode, memory, assignment operator, ⭐"without variables code rigid"[emphasized in notes]]
+```
+
+
+### Rule 11 — REAL-WORLD FLOW SIGNAL (PER TOPIC)
+Har **Topic** ke KEYWORDS DUMP ke baad ek `🔄 REAL-WORLD FLOW SIGNAL` block add karo.
+
+**Yeh block kya capture karta hai:**
+- Notes mein jo bhi real-world workflow, phases, ya production context likha tha — woh exactly yahan preserve karo.
+- Teen phases identify karo (agar notes mein hain):
+  - **Testing/Offline Phase:** Developer ya system kab aur kaise is tool/concept ko use karta hai.
+  - **Fixing/Iteration Phase:** Us phase ke output ko dekh kar developer kya action leta hai.
+  - **Live Production Phase:** Jab real user app use karta hai — tab is concept ka kya role hai?
+- **Theoretical/Foundational topics ke liye** (e.g., Ohm's Law, Big-O, mathematical formulas) — phases ko adapt karo:
+  - **Learning Phase:** Concept kaise seekha jaata hai.
+  - **Application Phase:** Real problems pe kaise apply hota hai.
+  - **Mastery Phase:** Expert level pe kaise use hota hai.
+- Agar notes mein is topic ke liye koi real-world flow nahi tha — likho: `(N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)`
+
+**Format:**
+```
+🔄 REAL-WORLD FLOW SIGNAL for Topic [X]:
+- Testing/Offline Phase: [notes mein kya tha — exact context]
+- Fixing/Iteration Phase: [notes mein kya tha — exact context]
+- Live Production Phase: [notes mein kya tha — exact context]
+- Additional context: [koi bhi extra real-world detail jo notes mein thi]
 ```
 
 
@@ -408,10 +436,17 @@ Har Topic ke subtopics list ke baad ek combined block:
   - Notes mein content volume: [Sirf 1-2 keywords / 1-2 lines / Short paragraph / Long explanation / Multiple examples + code]
   - Key terms from notes: [exact words/phrases from notes]
   - Explicit emphasis in notes: [warning/tip/underline/star ya "None"]
+  - Notes mein jo analogies/examples the: [exact analogies ya "None"]
   ]
 
   🔑 KEYWORDS DUMP for Topic [X]:
-  [every single word/phrase/command/term/value from notes for this topic — comma separated — add ⭐ for emphasized, [unclear] for illegible]
+  [every single word/phrase/command/term/value from notes for this topic — comma separated — add ⭐ for emphasized, [unclear] for illegible, ⭐X.x[version] for version numbers]
+
+  🔄 REAL-WORLD FLOW SIGNAL for Topic [X]:
+  - Testing/Offline Phase: ...
+  - Fixing/Iteration Phase: ...
+  - Live Production Phase: ...
+  - Additional context: ...
 ```
 
 
@@ -513,7 +548,8 @@ How users move inside the shop.
 - [ ] Chronological order preserved.
 - [ ] Unclear/missing subtopic names `[⚠️]` se flag kiye.
 - [ ] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya — depth level, coverage angle, content volume, key terms, emphasis sab filled hain (per topic, not per subtopic).
-- [ ] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya — notes mein aaya har ek word/phrase/command/term/code capture kiya, emphasized terms ⭐ se mark kiye, unclear terms [unclear] se flag kiye (per topic, not per subtopic).
+- [ ] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya — notes mein aaya har ek word/phrase/command/term/code capture kiya, emphasized terms ⭐ se mark kiye, unclear terms [unclear] se flag kiye, version numbers ⭐X.x[version] se mark kiye (per topic, not per subtopic).
+- [ ] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya — notes mein jo bhi real-world flow tha woh capture kiya. Agar N/A toh clearly likha. Theoretical topics ke liye Learning/Application/Mastery phases use kiye.
 - [ ] Diagrams/tables reproduced ya flagged — koi silently skip nahi ki.
 - [ ] OCR quality warning di agar 20%+ content unclear tha.
 - [ ] Phase tracking aur CONTINUE protocol follow kiya.
@@ -521,7 +557,7 @@ How users move inside the shop.
 - [ ] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon?
 
 Phir yeh line add karo:
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 Phir end mein yeh summary print karo:
 ```
@@ -569,13 +605,20 @@ Hardware basics se shuru karte hain — yeh foundation hai baaki sab ke liye. [�
   - Notes mein content volume: 1-2 lines with 1 code example
   - Key terms from notes: labeled box, age=25, store value, can change later, code rigid
   - Explicit emphasis in notes: "without it code rigid" — separately written as important point
+  - Notes mein jo analogies/examples the: "labeled box" analogy — variable ko ek box ki tarah describe kiya gaya tha
   ]
 
   🔑 KEYWORDS DUMP for Topic 1:
   [variable, labeled box, age=25, store value, can change later, hardcode, rigid, flexible, memory, assignment, ⭐"without it code rigid"[emphasized in notes]]
+
+  🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+  - Testing/Offline Phase: (N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+  - Fixing/Iteration Phase: (N/A)
+  - Live Production Phase: (N/A)
+  - Additional context: (N/A)
 ```
 
-Notice: Section → Topic → Subtopics (flat comma list) hierarchy clearly maintained. Messy notes → structured Section/Topic grouping with `[⚠️ Derived]` flags + SCOPE SIGNAL + KEYWORDS DUMP per topic.
+Notice: Section → Topic → Subtopics (flat comma list) hierarchy clearly maintained. Messy notes → structured Section/Topic grouping with `[⚠️ Derived]` flags + SCOPE SIGNAL + KEYWORDS DUMP + REAL-WORLD FLOW SIGNAL per topic.
 
 
 ---

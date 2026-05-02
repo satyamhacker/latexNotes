@@ -235,6 +235,7 @@ Har **Topic** ke SCOPE SIGNAL block ke baad ek mandatory `🔑 KEYWORDS DUMP` bl
 - Har code snippet jo transcript mein tha — include karo (e.g., `RecursiveCharacterTextSplitter`, `chunk_size=500`).
 - Har emphasized word (speaker ne "important", "remember this", "this is key" kaha) — include karo aur `⭐` prefix lagao.
 - Agar transcript mein koi word unclear tha — include karo aur `[unclear]` tag lagao.
+- **Version numbers jo speaker ne explicitly mention kiye hain** (e.g., Python 3.11, Django 5.x, React 18, Node.js 20) — inhe `⭐` prefix ke saath capture karo aur `[version]` tag lagao taaki Notes Guru Version Tag Rule ke liye inhe identify kar sake. Example: `⭐Python 3.11[version]`, `⭐React 18[version]`
 - Bahar se koi keyword mat add karo — sirf transcript ka content.
 
 **Format:**
@@ -255,7 +256,10 @@ Har **Topic** ke KEYWORDS DUMP ke baad ek mandatory `🔄 REAL-WORLD FLOW SIGNAL
   - **Testing/Offline Phase:** Developer ya system kab aur kaise is tool/concept ko use karta hai.
   - **Fixing/Iteration Phase:** Us phase ke output ko dekh kar developer kya action leta hai.
   - **Live Production Phase:** Jab real user app use karta hai — tab is concept ka kya role hai?
-- Agar speaker ne explicitly yeh phases nahi bataye lekin real-world context diya — woh bhi yahan capture karo.
+- **Theoretical/Foundational topics ke liye** (e.g., Ohm's Law, Big-O notation, mathematical formulas, OSI Model) — agar speaker ne production flow nahi bataya toh phases ko adapt karo:
+  - **Learning Phase:** Concept kaise seekha/samjhaya jaata hai.
+  - **Application Phase:** Real problems pe kaise apply hota hai.
+  - **Mastery Phase:** Expert level pe kaise use hota hai.
 - Agar transcript mein is topic ke liye koi real-world flow nahi bataya gaya — likho: `(N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)`
 
 **Format:**
@@ -341,7 +345,7 @@ Har Topic ke subtopics list ke baad ek combined block:
   ]
 
   🔑 KEYWORDS DUMP for Topic [X]:
-  [every single word/phrase/command/term/value from transcript for this topic — comma separated — add ⭐ for emphasized, [unclear] for inaudible]
+  [every single word/phrase/command/term/value from transcript for this topic — comma separated — add ⭐ for emphasized, [unclear] for inaudible, ⭐X.x[version] for version numbers]
 
   🔄 REAL-WORLD FLOW SIGNAL for Topic [X]:
   - Testing/Offline Phase: ...
@@ -409,8 +413,8 @@ Speaker is topic mein RAG pipeline ko evaluate karne ke tools aur workflow expla
 - [ ] Chronological order preserved.
 - [ ] Unclear/missing subtopic names `[⚠️]` se flag kiye.
 - [ ] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya — depth level, coverage angle, content volume, key terms, speaker emphasis, analogies sab filled hain (per topic, not per subtopic).
-- [ ] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya — transcript mein aaya har ek word/phrase/command/term/code capture kiya, emphasized terms ⭐ se mark kiye, unclear terms [unclear] se flag kiye (per topic, not per subtopic).
-- [ ] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya — teen phases (Testing / Fixing / Production) mein speaker ka real-world context capture kiya. Agar N/A toh clearly likha.
+- [ ] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya — transcript mein aaya har ek word/phrase/command/term/code capture kiya, emphasized terms ⭐ se mark kiye, unclear terms [unclear] se flag kiye, version numbers ⭐X.x[version] se mark kiye (per topic, not per subtopic).
+- [ ] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya — teen phases (Testing / Fixing / Production) mein speaker ka real-world context capture kiya. Theoretical topics ke liye Learning/Application/Mastery phases use kiye. Agar N/A toh clearly likha.
 - [ ] Diagrams/tables reproduced ya flagged — koi silently skip nahi ki.
 - [ ] Timestamps aur noise tokens ([Music], [Applause]) skip kiye.
 - [ ] Corrupted VTT sections flagged.
