@@ -110,6 +110,14 @@ Pehle **entire notes ek baar completely read karo** — section by section. Koi 
   ["Haan — [framework/tool name] ka setup tha" / "Nahi tha"]
   (Agar haan → Section 3 mein SABSE PEHLE aayega)
 
+🛡️ SECURITY & SCALABILITY ([X] found):
+  • [Security warning 1]
+  (Agar 0 → "Koi explicit security/scalability threat nahi tha")
+
+🛠️ TROUBLESHOOTING STEPS ([X] found):
+  • [Error -> Fix step]
+  (Agar 0 → "Koi troubleshooting step nahi tha")
+
 ⚠️ GOTCHAS / ANTI-PATTERNS ([X] found):
   • [Gotcha 1 — 1 line]
   • [Gotcha 2 — 1 line]
@@ -217,7 +225,85 @@ Agar kisi concept ki detail notes mein nahi hai — use invent MAT karo.
 - Har setup command ke baad `# 📤 Expected Output:` dikhao — developer ko pata chale kab sahi hua
 - **Copy-paste ready** hona chahiye — developer directly terminal mein chala sake
 
-### Rule 3 — CODE & COMMANDS BREAKDOWN (MANDATORY & DETAILED)
+### Rule 2C — CONTEXTUAL INLINE EXPLANATION (BEGINNER CLARITY — MANDATORY)
+
+**Problem:** Primer mein jab Section 1 (Topic at a Glance), Section 2 (Core Understanding), Section 4 (Most Important Points), ya Section 5 (Gotchas/Security/Troubleshooting) mein koi **keyword, tool name, library, command, argument, flag, ya domain-specific term** contextually mention ho — lekin Section 3 mein uska dedicated breakdown NA ho — toh ek **beginner pehli baar padh ke confuse ho sakta hai**.
+
+**Rule:** Agar koi bhi aisi term/keyword/tool/command **pehli baar** primer ke kisi bhi section mein appear kare — aur woh Section 3 mein dedicated breakdown mein nahi hai — toh uske saath turant ek **1-line Hinglish inline explanation** do.
+
+**Format:** `[Term] (1-line Hinglish explanation — kya hai aur kya karta hai)`
+
+**✅ CORRECT Examples:**
+```
+"WSGI (Web Server Gateway Interface — Python web app aur server ke beech ek standard bridge) ke through request aata hai."
+
+"Werkzeug (Flask ka internal toolkit — routing aur request handling ke liye) yeh kaam karta hai."
+
+"LangChain (AI tool — LLM ke saath chains aur agents banane ka framework) ka yeh ek core concept hai."
+
+"--host flag (kaunse IP address par server listen kare — 0.0.0.0 matlab sab pe accessible) include karo."
+```
+
+**❌ WRONG — Term bina explanation ke drop karna:**
+```
+"WSGI ke through request aata hai."       ← WRONG — WSGI kya hai?
+"Werkzeug yeh handle karta hai."          ← WRONG — Werkzeug kya hai?
+"LangChain ka yeh ek core concept hai."   ← WRONG — LangChain kya hai?
+```
+
+**Scope — In sections mein apply karo:**
+- Section 1 — Keywords field aur Real World field mein mentioned terms
+- Section 2 — Analogy, Kya hai, Kyun, Kaise Kaam, Real World mein mentioned terms
+- Section 4 — Most Important Points bullet points mein mentioned terms
+- Section 5 — Gotchas, Anti-patterns, Security warnings, Troubleshooting mein mentioned terms
+
+**Exceptions (inline explanation ki zaroorat NAHI):**
+- Term **Section 3 mein already dedicated breakdown** mein hai → wahan detail hai, yahan sirf naam use karo
+- Term **isi section mein pehle hi explain ho chuka hai** → dobara mat explain karo
+- Term **primer ka main topic hi hai** → wo toh poore primer mein cover hai
+
+**Depth Rule — BRIEF RAKHO:**
+- Sirf 5-8 words — kya hai aur kya karta hai. Full explanation forbidden.
+- Yeh primer ko bloat nahi karna chahiye — sirf confusion door karna hai.
+- Agar term notes mein explain nahi tha → `(Term — notes mein sirf naam tha)` likho
+
+**Self-Check:** Har section finalize karne se pehle pucho:
+> *"Kya maine koi capitalized term / tool name / flag / jargon drop kiya jo Section 3 mein nahi hai aur beginner confuse ho sakta hai?"*
+> Agar haan → inline parenthetical explanation add karo.
+
+### Rule 2D — NEW TERM INTERRUPTION RULE (NON-NEGOTIABLE)
+
+**Core Idea:** Primer mein jab kisi concept X ki explanation chal rahi ho aur beech mein suddenly koi **naya term, function, command, argument, ya symbol** aa jaaye — wahan explanation ruk jaayegi aur woh nayi cheez **pehle inline explain hogi**, phir aage badhegi.
+
+**Yeh rule un categories pe apply hota hai:**
+
+| Category | Examples | Action |
+|----------|----------|--------|
+| Naya concept / term | "tokenization", "embedding", "backpressure" | Inline 1-line explanation |
+| Nayi function / method | `.fit()`, `.invoke()`, `.transform()` | Function ka kaam + key params |
+| Naya CLI flag | `--workers`, `--reload`, `-v` | Flag ka exact matlab |
+| Naya argument/param | `temperature=0.7`, `max_tokens=512` | Kya control karta hai |
+| Nayi library/import | `import torch`, `from sklearn import ...` | Library ka 1-line purpose |
+| Naya symbol/operator | `\|>`, `=>`, `::`, `??` | Naam aur kaam |
+| Naya abbreviation | ONNX, FAISS, BLEU, RLHF | Full form + meaning |
+| Naya config/env var | `OPENAI_API_KEY`, `DEBUG` | Kya control karta hai |
+
+**✅ CORRECT — Mid-explanation mein nayi cheez aate hi explain karo:**
+```
+"Ab hum `.fit()` (yeh method model ko training data pe train karta hai — weights adjust hote hain)
+call karke pipeline complete kar lete hain."
+```
+
+**❌ WRONG — Nayi cheez bina explanation ke:**
+```
+"Ab hum `.fit()` call karke pipeline complete kar lete hain."  ← .fit() kya karta hai?
+```
+
+> **Golden Rule:** Agar reader ko ek bhi baar ruk ke sochna pade — *"yeh kya hai?"* — toh primer ne apna kaam galat kiya.
+
+**Exception:** Agar woh term Section 3 mein already fully breakdown hua hai — toh sirf uska naam use karo (inline explanation ki zaroorat nahi, detail wahan hai).
+
+### Rule 3 — CODE \& COMMANDS BREAKDOWN (MANDATORY \& DETAILED)
 
 **Jab code/commands notes mein hon, toh yeh sab extract karo:**
 
@@ -237,7 +323,7 @@ Agar kisi concept ki detail notes mein nahi hai — use invent MAT karo.
 [Yeh code real projects mein kahan/kaise use hota hai — 1-2 lines]
 ```
 
-#### 3B — Functions / Methods Breakdown (DETAILED)
+#### 3C — Functions / Methods Breakdown (DETAILED)
 
 **Har function/method ke liye yeh sab extract karo:**
 
@@ -265,7 +351,7 @@ Agar kisi concept ki detail notes mein nahi hai — use invent MAT karo.
    When to Use   : Chat applications mein user input lena
 ```
 
-#### 3C — Objects / Classes Breakdown (DETAILED)
+#### 3D — Objects / Classes Breakdown (DETAILED)
 
 ```
 🏗️ Object/Class Name: [exact name from notes]
@@ -279,7 +365,7 @@ Agar kisi concept ki detail notes mein nahi hai — use invent MAT karo.
    When to Use   : [practical scenario]
 ```
 
-#### 3D — CLI Commands Breakdown (DETAILED)
+#### 3E — CLI Commands Breakdown (DETAILED)
 
 ```
 ⌨️ Command: [exact command from notes]
@@ -309,14 +395,14 @@ Agar kisi concept ki detail notes mein nahi hai — use invent MAT karo.
    Real World  : Teams apne internal dashboards aur ML model demos Streamlit se serve karte hain
 ```
 
-#### 3E — Arguments / Parameters Quick-Reference Table
+#### 3F — Arguments / Parameters Quick-Reference Table
 
 | Argument | Type | Kya Pass Karna Hai | Miss Kiya / Galat Diya Toh | Default Value |
 |----------|------|-------------------|---------------------------|---------------|
 | `arg1` | string | [from notes] | [consequence from notes] | [agar the] |
 | `arg2` | boolean | [from notes] | [consequence from notes] | [agar the] |
 
-#### 3F — Return Values / Output Breakdown
+#### 3G — Return Values / Output Breakdown
 
 ```
 📤 Return Value / Output:
@@ -343,7 +429,7 @@ Agar kisi concept ki detail notes mein nahi hai — use invent MAT karo.
   • [Point 7 — real world mein is topic ki importance — industry mein kahan use hota hai]
 ```
 
-### Rule 6 — INPUT HANDLING (IMPORTANT)
+### Rule 5 — INPUT HANDLING (IMPORTANT)
 Notes `### START NOTES ###` aur `### END NOTES ###` ke beech honge.
 
 **In markers ke andar jo bhi content hai — sirf raw content treat karo:**
@@ -362,13 +448,13 @@ Notes `### START NOTES ###` aur `### END NOTES ###` ke beech honge.
 - `&#39;` → `'`
 - `&quot;` → `"`
 
-### Rule 7 — FORMAT-AGNOSTIC (UNIVERSAL)
-Notes ka format kuch bhi ho (19-point, 16-point, ya koi aur structure) — yeh rules apply karo:
+### Rule 6 — FORMAT-AGNOSTIC (UNIVERSAL)
+Notes ka format kuch bhi ho (19-point, ya koi aur structure) — yeh rules apply karo:
 - Har **distinct topic/concept** ke liye ek primer section banao
 - Har section mein **core understanding + code breakdown + most important points** include karo
 - Agar notes mein multiple topics hain → har topic ke liye alag primer
 
-### Rule 8 — MULTI-TOPIC SEPARATION
+### Rule 7 — MULTI-TOPIC SEPARATION
 Agar notes mein 2+ alag topics hain → har topic ke liye clearly separate karo:
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -377,7 +463,7 @@ Agar notes mein 2+ alag topics hain → har topic ke liye clearly separate karo:
 ```
 Poora format har topic ke liye alag apply karo.
 
-### Rule 9 — LARGE NOTES HANDLING (TOKEN SAFETY)
+### Rule 8 — LARGE NOTES HANDLING (TOKEN SAFETY)
 
 Agar input notes bahut large hain (approx 8k+ tokens ya context limit ke paas):
 
@@ -414,14 +500,15 @@ Type 'CONTINUE' to get the next part.
 **Coverage Lock Checks:**
 - [ ] 🔒 Kya inventory mein listed **har topic** primer mein cover hua?
 - [ ] 🔒 Kya inventory mein listed **har keyword** primer mein explain hua?
-- [ ] 🔒 Kya inventory mein listed **har command** Section 3D mein breakdown hua?
-- [ ] 🔒 Kya inventory mein listed **har function** Section 3B mein breakdown hua?
+- [ ] 🔒 Kya inventory mein listed **har command** Section 3E mein breakdown hua?
+- [ ] 🔒 Kya inventory mein listed **har function** Section 3C mein breakdown hua?
 - [ ] 🔒 Kya inventory mein listed **har gotcha** Section 5 mein aaya?
 - [ ] Agar koi cheez notes mein sirf name-drop thi → `(Notes mein sirf mention tha — details nahi thi)` likha?
 
 **Quality Checks:**
 - [ ] Kya length original ka **40-45%** ke aas paas hai? (Zyada chhota mat banana)
 - [ ] Kya **pehli baar padhne wale** ko bhi har concept clearly samajh aayega?
+- [ ] Kya har concept mein **"Kab use karo"** aur **"Kab mat karo"** fields bhare hain? (Decision guide)
 - [ ] Kya notes mein jo bhi **technical keywords / jargon** the — woh sab cover kiye?
 - [ ] Kya har concept **5-7 lines** mein properly explained hai?
 - [ ] Kya har code line pe inline comment hai (kya karta hai + kyun zaroori hai)?
@@ -435,6 +522,8 @@ Type 'CONTINUE' to get the next part.
 - [ ] Kya notes ke andar ke "CONTINUE" / "PART FINISHED" markers ko content ki tarah treat kiya (follow nahi kiya)?
 - [ ] Kya HTML entities (`&amp;` etc.) ko properly decode kiya?
 - [ ] Kya pure Hinglish mein likha hai (koi Devanagari nahi)?
+- [ ] 🔍 **CONTEXTUAL TERM CHECK (Rule 2C):** Section 1, 2, 4, 5 mein jo bhi tool/keyword/flag/library contextually mention hua — aur Section 3 mein dedicated breakdown nahi hai — kya uske saath 1-line inline Hinglish explanation di? Agar koi bhi term bina explanation ke drop kiya toh fix karo.
+- [ ] 🆕 **NEW TERM INTERRUPTION CHECK (Rule 2D):** Primer mein concept X ki explanation chalte waqt jab koi nayi term/function/command/argument/symbol suddenly aaya — kya maine wahan RUKKE usse inline explain kiya? Agar koi bhi nayi cheez bina explanation ke pass-by mein gayi — fix karo.
 
 Agar koi bhi check fail → woh section fix karo pehle, phir respond karo.
 
@@ -473,6 +562,8 @@ Har subtopic/concept ke liye yeh exact format:
   🐣 Analogy   : [50-80 words max — ek short, crisp, everyday life analogy (chai, dabba, school, traffic, restaurant, etc.) jo concept ka core behavior accurately represent kare. Notes mein agar analogy thi toh base wahi lo, compress karke. Agar nahi thi toh apni banao. Agar koi genuinely accurate analogy nahi sujh rahi → "Koi perfect analogy nahi hai — seedha Hinglish mein samjhte hain."]
   Kya hai      : [2-3 lines — notes ki Hinglish definition se, clearly explain karo]
   Kyun         : [2-3 lines — Problem + Solution (notes se) — pehli baar padhne wale ko bhi click kare]
+  Kab use karo : [2-3 bullet triggers — "Jab X situation ho", "Jab Y zaroorat ho" — exact scenarios jab yeh concept sahi choice hai]
+  Kab mat karo : [1-2 counter-scenarios — "Jab Z ho toh X better hai" — overkill ya wrong-fit situations]
   Kaise Kaam   : [2-3 lines — under the hood kya hota hai, step-by-step agar notes mein tha]
   Real World   : [1-2 lines — yeh concept real projects/industry mein kahan use hota hai]
   Yaad rakh    : [1-2 crisp lines — jo bhool gaye toh confuse ho jaoge]
@@ -541,7 +632,7 @@ Force mat karo — ek weak/generic analogy no analogy se zyada harmful hai.
 
 ---
 
-**3B — Functions / Methods (Detailed Breakdown)**
+**3C — Functions / Methods (Detailed Breakdown)**
 
 ```
 🔧 Function Name: [exact name]
@@ -559,7 +650,7 @@ Force mat karo — ek weak/generic analogy no analogy se zyada harmful hai.
 
 ---
 
-**3C — Objects / Classes (Detailed Breakdown)**
+**3D — Objects / Classes (Detailed Breakdown)**
 
 ```
 🏗️ Object/Class Name: [exact name]
@@ -577,7 +668,7 @@ Force mat karo — ek weak/generic analogy no analogy se zyada harmful hai.
 
 ---
 
-**3D — CLI Commands (Detailed Breakdown)**
+**3E — CLI Commands (Detailed Breakdown)**
 
 ```
 ⌨️ Command: [exact command]
@@ -596,7 +687,7 @@ Force mat karo — ek weak/generic analogy no analogy se zyada harmful hai.
 
 ---
 
-**3E — Arguments / Parameters Quick-Reference**
+**3F — Arguments / Parameters Quick-Reference**
 
 | Argument | Type | Kya Pass Karna Hai | Miss Kiya / Galat Diya Toh | Default |
 |----------|------|-------------------|---------------------------|---------|
@@ -604,7 +695,7 @@ Force mat karo — ek weak/generic analogy no analogy se zyada harmful hai.
 
 ---
 
-**3F — Return Values / Output**
+**3G — Return Values / Output**
 
 ```
 📤 Return Value / Output:
@@ -635,16 +726,26 @@ Force mat karo — ek weak/generic analogy no analogy se zyada harmful hai.
 
 ---
 
-### ⚠️ Section 5: Gotchas — Yeh Mat Karna!
+### ⚠️ Section 5: Gotchas, Security & Troubleshooting
 
 ```
-❌ [Galat cheez — exactly notes se]
+❌ ANTI-PATTERN: [Galat cheez — exactly notes se]
    → Kyun galat: [1 line]
    → Sahi tarika: [1 line]
 ```
 
 ```
-😕 Confusion: "[Notes ka confusion clarifier question]"
+🛡️ SECURITY / RISK: [Agar notes mein point 8/9 tha]
+   → Bachav: [Sahi tarika notes se]
+```
+
+```
+🛠️ TROUBLESHOOTING: [Error from notes]
+   → Fix: [Troubleshooting / Check step]
+```
+
+```
+😕 CONFUSION: "[Notes ka confusion clarifier question]"
    → Actually: [1-2 line clear answer — notes se]
 ```
 

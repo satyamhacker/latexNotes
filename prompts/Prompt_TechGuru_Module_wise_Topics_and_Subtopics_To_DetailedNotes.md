@@ -48,6 +48,21 @@
 6. **Code Accuracy Check:** Kya code blocks latest stable version ke hain? Deprecated APIs ya outdated syntax toh nahi use ho raha? Agar uncertain ho toh likho: `⚠️ Yeh code current understanding ke basis par hai — exact syntax official docs se verify karo.`
 7. **Security/Scalability Check:** Kya security aur scalability points genuine hain ya bas filler? Filler content = FAIL.
 8. **🔗 Contextual Terms Check (MANDATORY):** Kya maine koi external tool/library/framework/concept mention kiya bina explain kiye? Har proper noun (capitalized tech term ya domain-specific term) ko inline explain karo — assume reader ne pehli baar suna hai. Yeh rule har domain ke liye apply hota hai (AI, Data Science, Cybersecurity, Web Dev, etc.).
+   **Extended Check (5 additional categories — see "Extension — Beginner-Unfamiliar Terms" section):**
+   - Abbreviations/Acronyms: CORS, JWT, ORM, CRUD, TLS, WSGI, XSS — pehli baar aane par explain karo
+   - Lowercase jargon: hot reload, idempotent, daemon, middleware, race condition — explain karo
+   - CLI flags in prose (code block se bahar): `--reload`, `--workers`, `-k` — explain karo
+   - Config keys / env vars in text: `SECRET_KEY`, `DEBUG`, `DATABASE_URL` — explain karo
+   - Function arguments in prose (code block se bahar): `chain_type=`, `verbose=`, `timeout` — explain karo
+9. **✅❌ Decision Guide Check (MANDATORY):** Kya maine Point 4 mein **"Kab use karo"** aur **"Kab mat karo / Alternative prefer karo"** dono fields fill kiye? Specific trigger scenarios + specific counter-scenarios do — generic ya blank mat rakhna. Agar concept truly universal hai — note karo: `(Yeh concept har situation mein applicable hai — koi genuine avoid-scenario nahi hai)`
+10. **🆕 Mid-Explanation New Term Check (MANDATORY):** Poore response mein kisi bhi point par — jab bhi koi NEW cheez achanak aaye jab subtopic X pe explanation chal rahi ho — kya maine wahan RUKKE usse explain kiya? Yeh "new cheez" ho sakti hai:
+   - Ek naya term/concept jo pehle is module mein nahi tha
+   - Ek nayi function call jo suddenly code mein use hui
+   - Ek naya command ya flag jo passing mein mention hua
+   - Ek nayi argument/parameter jo bina context ke aaya
+   - Koi bhi syntax ya symbol jo reader ne pehli baar dekha ho
+   
+   **Rule:** Is tarah ki har nayi cheez ke aate hi — seedha wahan INLINE explain karo. Reader ko scroll nahi karna chahiye, assume nahi karna chahiye — explanation khud-ba-khud unke saath chalni chahiye. "Main baad mein explain karunga" FORBIDDEN hai.
 
 
 ---
@@ -104,6 +119,64 @@ Quality and depth are our #1 priority. **NEVER compromise on the detail, length,
 
 
 **4. Show Special Characters Clearly** — Jab bhi kuch type karna ho (`$`, `{}`, `[]`, `=>`, `|`), clearly batao inka naam aur kaam Hinglish mein.
+
+
+---
+
+
+## 🆕 NEW TERM INTERRUPTION RULE (NON-NEGOTIABLE)
+
+
+**Core Idea:** Jab explanation subtopic X ke baare mein chal rahi ho, aur beech mein suddenly koi **naya term, function, command, argument, concept, syntax, ya symbol** aa jaaye — toh explanation wahan **ruk jaayegi** aur woh nayi cheez **pehle inline explain hogi**, phir aage badhegi.
+
+**Yeh rule tab apply hota hai jab naya element:**
+- Is module mein pehle kisi aur subtopic mein DETAIL mein explain nahi hua (warna cross-reference do)
+- Current subtopic ka MAIN focus nahi hai (warna poora subtopic usi ke baare mein hai)
+- Reader ke liye PEHLI BAAR aaya ho
+
+### 🔍 Covered Categories (Yeh sabhi "new" mein aate hain)
+
+| Category | Examples | Action |
+|----------|----------|--------|
+| **Naya concept / term** | "OAuth flow", "tokenization", "embedding" | Inline 1-line explanation |
+| **Nayi function / method call** | `.fit()`, `.transform()`, `chain.invoke()` | Function ka kaam + parameters explain karo |
+| **Nayi command / CLI flag** | `--host 0.0.0.0`, `-v`, `--detach` | Flag ka exact matlab batao |
+| **Naya argument / parameter** | `temperature=0.7`, `max_tokens=512` | Kya control karta hai + default/range batao |
+| **Nayi library / import** | `from sklearn import ...`, `import torch` | 1-line mein library ka purpose |
+| **Naya symbol / operator** | `\|>`, `=>`, `::`, `??`, `@decorator` | Naam aur kaam batao |
+| **Naya abbreviation / acronym** | ONNX, FAISS, BLEU, RLHF | Full form + 1-line meaning |
+| **Naya config / env var** | `OPENAI_API_KEY`, `CHROMA_HOST` | Kya control karta hai explain karo |
+
+### ✅ Sahi Tarika (Mid-Explanation Interruption)
+
+```markdown
+❌ WRONG — Naya term bina explanation ke:
+"Ab hum retriever ko `.as_retriever()` se banayenge aur usse `RetrievalQA` mein pass kar denge."
+
+✅ CORRECT — Nayi cheez aate hi inline explain karo:
+"Ab hum retriever ko `.as_retriever()` (yeh method vector store ko ek searchable retriever object mein convert karta hai — jab bhi query aaye, yeh relevant chunks dhundhta hai) se banayenge aur usse `RetrievalQA` (LangChain ka Question-Answering chain — retriever + LLM ko combine karke answer generate karta hai) mein pass kar denge."
+```
+
+```markdown
+❌ WRONG — New function suddenly code mein aaya bina explanation ke:
+"Phir hum `model.fit(X_train, y_train)` call karenge."
+
+✅ CORRECT — Function ka kaam bhi batao:
+"Phir hum `model.fit(X_train, y_train)` call karenge — `fit()` matlab model ko training data pe train karna; `X_train` = input features, `y_train` = correct labels jisse model seekhega."
+```
+
+### ⚠️ Golden Rule
+
+> **"Agar reader ko explanation padhte waqt ek baar bhi ruk ke sochna pade — 'yeh kya hai?' — toh AI ne apna kaam galat kiya hai."**
+
+Notes ki reading ek smooth, uninterrupted flow honi chahiye. Har nayi cheez khud explain karni chahiye jaise ek patient teacher ek student ke saath baith ke padha raha ho — koi bhi word pass-by mein nahi chhutna chahiye.
+
+### 🔗 Exception (Repeat Explanation Mat Karo)
+
+Agar woh term/function/command **isi module mein pehle kisi subtopic mein already detail mein cover ho chuki hai** — toh dobara explain mat karo. Sirf cross-reference do:
+```markdown
+"`.as_retriever()` (detail: is module ka Subtopic 3 mein dekho) se retriever banao."
+```
 
 
 ---
@@ -211,6 +284,120 @@ Quality and depth are our #1 priority. **NEVER compromise on the detail, length,
 ```markdown
 "Selenium (browser automation tool — web testing ke liye) use karte hain."
 ```
+
+
+### 📌 Extension — Beginner-Unfamiliar Terms (MANDATORY)
+
+**Yeh upar wale Contextual Term Rule ka critical extension hai.** Woh rule mostly capitalized proper nouns (tools/frameworks) ke liye tha. Lekin beginner sirf tools se confuse nahi hota — **yeh 4 cheezein bhi equally confusing hoti hain** agar explain nahi kiya:
+
+---
+
+**1. Abbreviations / Acronyms** — Jo short form mein likhe hote hain
+
+Beginner ke liye CORS, JWT, ORM, CRUD, WSGI, TLS, XSS, CSRF, REST, gRPC, i18n, l10n — yeh sab unfamiliar ho sakti hain. Pehli baar kisi bhi section (Point 2 se 18 tak) mein aaye toh immediately explain karo.
+
+```markdown
+✅ CORRECT:
+"CORS (Cross-Origin Resource Sharing — browser ka security rule jo different domains ke beech requests control karta hai) error aa rahi hai toh..."
+
+"JWT (JSON Web Token — user identity ko securely store karne ka compact, signed format) se authentication karo."
+
+"ORM (Object-Relational Mapper — Python objects ko directly database tables se map karta hai, SQL likhne ki zaroorat nahi) use karo."
+
+❌ WRONG:
+"CORS error aa rahi hai toh..."  ← WRONG! CORS kya hai?
+"JWT se authentication karo."   ← WRONG! JWT kya hai?
+"ORM use karo."                  ← WRONG! ORM kya hai?
+```
+
+---
+
+**2. Lowercase Technical Jargon** — Jo proper noun nahi lagte lekin unfamiliar hain
+
+Terms jaise: hot reload, idempotent, event loop, race condition, daemon, middleware, debounce, throttle, memoization, garbage collection, atomic operation, context manager — yeh capitalized nahi hote isliye pehle wala rule inhe catch nahi karta. Inhe bhi first occurrence pe explain karo.
+
+```markdown
+✅ CORRECT:
+"Hot reload (code change hone par bina server restart kiye app automatically update ho jaata hai) development mein time bachata hai."
+
+"Idempotent (same operation multiple baar run karo toh bhi result same rehta hai — no side effects) operations use karo."
+
+"Middleware (request aur response ke beech mein ek interceptor layer — logging, auth check, etc.) add karo."
+
+❌ WRONG:
+"Hot reload development mein time bachata hai."    ← WRONG! Hot reload kya hai?
+"Idempotent operations use karo."                  ← WRONG! Idempotent kya matlab?
+"Middleware add karo."                             ← WRONG! Middleware kya karta hai?
+```
+
+---
+
+**3. CLI Flags / Arguments mentioned in prose (text mein, code block se bahar)**
+
+Jab koi flag Point 4 (Why This Matters), Point 9 (Anti-Patterns), Point 11 (Troubleshooting) ya kisi bhi textual part mein mention ho — code block se bahar — toh usse bhi explain karo. (RULE ZERO sirf code blocks ke liye hai — textual prose mein flags tab bhi unexplained reh jaate hain.)
+
+```markdown
+✅ CORRECT:
+"Production mein --workers=4 flag (ek saath 4 parallel worker processes chalao — zyada requests handle kar sako) use karo."
+
+"--reload flag (code change detect karke server auto-restart karta hai — development ke liye, production mein use mat karo) lagao."
+
+❌ WRONG:
+"Production mein --workers=4 use karo."  ← WRONG! --workers kya karta hai?
+"--reload lagao development mein."       ← WRONG! --reload ka kaam kya hai?
+```
+
+---
+
+**4. Config Keys / Environment Variable Names mentioned in text**
+
+Jab koi config key ya env variable textually mention ho — jaise `SECRET_KEY`, `DEBUG`, `ALLOWED_HOSTS`, `DATABASE_URL`, `PORT`, `NODE_ENV` — toh ek-liner explanation do taaki beginner samjhe ki yeh kya control karta hai aur kyun important hai.
+
+```markdown
+✅ CORRECT:
+"SECRET_KEY (Django ka cryptographic signing key — sessions, cookies aur tokens secure karne ke liye — kabhi public mat karo) .env file mein rakho."
+
+"DEBUG=True (detailed error pages on — development ke liye, production mein False karna mandatory hai warna internals expose ho jaate hain) rakho development mein."
+
+❌ WRONG:
+"SECRET_KEY .env file mein rakho."           ← WRONG! SECRET_KEY kya hai?
+"DEBUG=True rakho development mein."         ← WRONG! DEBUG kya control karta hai?
+```
+
+---
+
+**5. Function Arguments / Parameter Names mentioned in Prose (text mein, code block se bahar)**
+
+Jab koi function argument ya parameter name textual explanation mein mention ho — jaise Point 4 (Why This Matters), Point 9 (Anti-Patterns), Point 10 (Confusion Clarifier), Point 11 (Troubleshooting), Point 17 (Interview Q&A) — toh usse bhi 1-line inline explain karo. RULE ZERO sirf code block ke andar arguments cover karta hai — prose mein jo arguments mention hote hain woh uncovered reh jaate hain.
+
+```markdown
+✅ CORRECT:
+"Agar chain_type='refine' (refine = ek ek document alag process karta hai phir answers merge karta hai — large docs ke liye accurate but slow) use karo toh performance drop hogi."
+
+"verbose=True (verbose = debug mode on — har reasoning step console pe print hoga, production mein False rakho) set karo toh logs dikhenge."
+
+"timeout argument (kitne seconds baad connection automatically fail ho jaaye — default usually None matlab infinite wait) nahi diya toh request hang ho sakti hai."
+
+"temperature=0.9 (0 = deterministic/same answer hamesha, 1 = maximum creativity/randomness) set karne se response zyada creative hoga."
+
+❌ WRONG:
+"chain_type='refine' use karo toh performance drop hogi."  ← WRONG! refine kya karta hai?
+"verbose=True set karo toh logs dikhenge."                 ← WRONG! verbose kya hai?
+"timeout argument nahi diya toh request hang ho sakti hai." ← WRONG! timeout kya hai?
+```
+
+**Depth Rule:** Argument ka naam + kya karta hai + critical edge case (agar relevant ho) — 1-2 lines max. Poori documentation nahi chahiye — sirf itna ki beginner confuse na ho.
+
+---
+
+**Self-Check (Extension) — Har point finalize karne se pehle pucho:**
+> *"Kya maine koi abbreviation (CORS, JWT, ORM), lowercase jargon (hot reload, idempotent), CLI flag in text (--reload, --workers), config key (SECRET_KEY, DEBUG), ya function argument prose mein (chain_type=, verbose=, timeout) use kiya jo explain nahi kiya?"*
+> Agar haan → inline explanation add karo. **1-line kaafi hai — over-explain mat karo.**
+
+**Exception — Inhe explain karne ki zaroorat NAHI:**
+- Woh term **same module mein kisi pehle subtopic mein already explain ho chuki hai** → sirf reference do: `(chain_type — detail: Subtopic X mein dekha)`
+- Woh term **current subtopic ka hi main focus hai** → poora subtopic usi ke baare mein hai, alag inline explanation redundant hogi
+- Woh term **code block ke andar hai** → RULE ZERO aur RULE MINUS ONE already handle karte hain
 
 
 ---
@@ -371,6 +558,8 @@ ONE accurate real-life analogy (50-80 words) that makes the concept intuitive.
 - **Problem:** What pain exists without this?
 - **Solution:** How this solves it.
 - **What breaks if we don't use it?** (Real-world impact — specific, not vague)
+- **✅ Kab use karo (Use this when):** 2-3 specific trigger situations — jab yeh concept/tool clearly sahi choice hai. (e.g., "Jab multiple services alag-alag machines pe hain", "Jab stateless auth chahiye", "Jab input size predict nahi hota")
+- **❌ Kab mat karo / Alternative prefer karo (Avoid when):** 1-2 counter-scenarios — jab yeh overkill ya wrong fit hai, aur phir konsa alternative better hoga. (e.g., "Simple single-server app mein — plain sessions kaafi hain", "Jab data structure change hona guaranteed ho — toh X se Y better hai")
 
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -434,15 +623,24 @@ Compare with the closest confusing topic using a markdown table.
 
 
 #### 🤔 10. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-**Instruction:** Top 2 confusions jo beginners typically is concept ke baare mein karte hain — clearly resolve karo.
-- Confusion 1: [Common misconception] → [Clear correction with example]
-- Confusion 2: [Another common confusion] → [Clear correction with example]
+**Minimum 2 confusions** — agar subtopic mein zyada the toh sab include karo. Sirf abstract correction nahi chalegi — quick proof ya test do.
+
+Har confusion ke liye yeh exact format follow karo:
+- **Confusion [N] — "[Galat belief jo beginner ke mann mein hota hai]"**
+  - **Galat soch:** [Jo woh sochte hain — 1 line]
+  - **Actually:** [Jo sach hai — 1-2 lines, clearly explain karo]
+  - **Prove karo:** [Ek chhota test, example, ya comparison jisse beginner khud verify kar sake]
 
 
 #### 🛠️ 11. Troubleshooting Flowchart (Mental Model)
-If it fails, check:
-1. `Error A` -> `Check B`
-2. `Error C` -> `Log D`
+**Minimum 3 common errors** jo beginner actually face karta hai. Har entry ke liye yeh format:
+
+- **`[Exact error message ya symptom]`**
+  - **Root Cause:** [Kyun hota hai — 1-2 lines, specific]
+  - **Fix:** [Exact step jo lena hai — "check karo" ya "dekho" likhna FORBIDDEN. Seedha action do: "Line X mein Y karo", "Flag --Z add karo", "Config file mein A = B set karo"]
+
+*(Agar exact error message pata nahi — behavior describe karo: e.g., "Server starts but requests timeout silently", "API returns 200 but response body empty")*
+
 
 
 #### 🌍 12. Real-World Use Case (Production Application)
@@ -460,7 +658,7 @@ If it fails, check:
 > - Fixing Phase: Tum us report ko dekh kar apna Chunk Size ya Vector DB theek karte ho.
 > - Live Production: Jab real user app use karta hai, tab KOI RAGAS nahi chalta. Sirf tumhara Vector DB aur ek single Student AI chalta hai.
 
-*(Agar concept ke liye yeh three-phase flow applicable nahi — toh jo bhi phases relevant hain woh dikhao, ya likho: `(N/A — is concept mein distinct offline/online phases nahi hoti)`)*
+*(CRITICAL RULE: N/A likhna FORBIDDEN hai. Agar concept ke liye teen-phase flow exactly applicable nahi — toh keywords aur context se ek logical real-world flow INFER karo. Har tech concept ka koi na koi dev-to-production lifecycle hota hai. Jo phases relevant hain woh dikhao, baaki adapt karo.)*
 
 
 #### 🎨 14. Visual Diagram (ASCII Art)
@@ -469,9 +667,11 @@ If it fails, check:
 
 
 #### 🏗️ 15. Scalability & Industry Context
-- How does this work for 1 user vs 1 Million users?
-- Is this "Cloud-Native" ready?
-- Best practices that Senior Engineers follow (naming conventions, performance tips, what to avoid).
+**Adaptive Rule — Topic type ke hisaab se angle choose karo:**
+- **Agar concept infrastructure/service/tool hai** (e.g., Docker, Redis, API Gateway, LangChain): 1 user vs 1 Million users mein kya fark padta hai? Cloud-Native ready hai? Senior Engineers kya karte hain?
+- **Agar concept algorithmic/mathematical/theoretical hai** (e.g., Binary Search, SQL JOIN, Gradient Descent, Big-O, Transformer attention): Time complexity + Space complexity discuss karo. Dataset size badhne par performance kaisi degrade hoti hai? Real-world data par kaunse bottlenecks aate hain?
+- **Har case mein:** Best practices jo senior engineers follow karte hain — naming conventions, performance tips, kya avoid karein.
+*("1 user vs 1M users" framing purely theoretical/algorithmic concepts pe mat thopo — complexity aur memory tradeoffs zyada relevant hain wahan.)*
 
 
 #### ⚠️ 16. Consequences of Failure (Agar Galat Kiya Toh?)

@@ -76,6 +76,8 @@ Skeleton paste hone ke baad, respond karne se PEHLE yeh checklist silently run k
 - [ ] Kya maine har topic ke subtopics, keywords, scope signal, aur real-world flow carefully note kiye?
 - [ ] Kya maine identify kiya ki kaunse topics merge ho sakte hain — same phase, same tool, ya same workflow?
 - [ ] Kya mere merge plan mein koi bhi keyword ya subtopic choot toh nahi raha?
+- [ ] Kya maine SCOPE SIGNAL fields mein sirf original skeleton ka content use kiya — apni knowledge se kuch add toh nahi kiya? (hallucination check)
+- [ ] Kya maine REAL-WORLD FLOW SIGNAL mein sirf original phases preserve kiye — koi phase invent toh nahi kiya? (hallucination check)
 - [ ] Kya main kisi topic ko itna bada toh nahi bana raha ki woh 10+ distinct major concepts cover kare?
 - [ ] Kya chronological order preserve ho rahi hai — earliest original topic ke hisaab se?
 - [ ] Kya maine ek final mental scan kiya — merged output mein original ka 100% data hai?
@@ -106,7 +108,7 @@ Agar koi bhi check fail ho — dobara skeleton padho aur plan fix karo. Tabhi re
 - Jab multiple topics ko 1 mein merge karo — **sab ke KEYWORDS DUMP combine** karke ek massive unified list banao.
 - **Duplicates:** Agar same keyword multiple merged topics mein tha — sirf ek instance rakho (list clean ho), lekin information zero drop honi chahiye.
 - **DO NOT** summarize, rewrite, or drop any keyword. Command koi bhi ho, code snippet koi bhi ho, flag koi bhi ho — exact same form mein survive karna chahiye.
-- `⭐` marked keywords (emphasized in original) ko preserve karo — yeh Notes Guru ke liye priority markers hain.
+- **`[version]` tagged keywords preserve karo:** Agar original skeleton mein koi keyword `⭐Python 3.11[version]` ya `⭐React 18[version]` jaisi form mein tha — merged KEYWORDS DUMP mein exactly wahi form preserve karo. Deduplication ke dauran `[version]` tag strip mat karo — yeh Notes Guru ke Version Tag Rule ke liye critical marker hai.
 
 
 ### Rule 3: Subtopic Formatting (Names Only)
@@ -128,11 +130,13 @@ Agar koi bhi check fail ho — dobara skeleton padho aur plan fix karo. Tabhi re
   - `Explicit emphasis` → Sab merged topics ke emphasis points combine karo.
   - `Analogies/examples` → Sab analogies combine karo.
   - **Agar kisi field ka data kisi merged topic mein nahi tha** → `— (not specified in that source)` likho. Invent mat karo.
+  - 🚨 **SCOPE SIGNAL HALLUCINATION GUARD:** Har field mein sirf wahi likho jo original skeleton ke SCOPE SIGNAL blocks mein literally tha. "Logically related" terms apni knowledge se mat add karo. `Key terms`, `Explicit emphasis`, `Analogies` — sirf original content, zero invention.
 
 - **🔄 REAL-WORLD FLOW SIGNAL:** Merged topics ke flows ko padhkar **ek unified, cohesive story** banao:
   - Teen phases mein: Testing/Offline Phase → Fixing/Iteration Phase → Live Production Phase
   - Sab merged topics ka real-world context is story mein naturally include karo.
   - Agar kisi phase ka data nahi tha — `(N/A — merged topics mein yeh phase describe nahi tha)` likho.
+  - 🚨 **REAL-WORLD FLOW HALLUCINATION GUARD:** Sirf wahi likho jo original skeleton ke REAL-WORLD FLOW SIGNAL blocks mein literally tha. Apni knowledge se koi bhi phase INVENT mat karo. Agar kisi merged topic ka ek phase N/A tha — woh N/A hi rahega, "cohesive story" ke naam pe fill mat karo. **N/A likhna correct hai. Invented flow likhna incorrect hai.**
 
 
 ### Rule 5: Output Language
@@ -195,7 +199,7 @@ For each section, output the merged structure EXACTLY like this:
   [📊 SCOPE SIGNAL for Topic [1]:
   - Depth Level: [Combined Depth — e.g., "Deep — dono merged topics mein detailed explanation tha"]
   - Coverage Angle: [Combined Angle — e.g., "Both — ek mein sirf theory thi, dusre mein code bhi tha"]
-  - Notes mein content volume: [Combined description in Hinglish]
+  - Notes mein content volume: [Combined description in Hinglish — source notes/transcript dono ke liye applicable]
   - Key terms from notes: [all combined unique key terms from all merged topics]
   - Explicit emphasis by speaker/notes: [all combined emphasis points — ya "None" agar kuch nahi tha]
   - Speaker ne jo analogies/examples use kiye: [all combined analogies — ya "None"]
