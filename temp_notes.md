@@ -1,3 +1,6 @@
+section 1--introduction 
+
+
 =====Section 1: Introduction=====
 Speaker is section mein computer program ki definition, embedded systems ki leading languages, aur C language ki standardization history explain karta hai.
 
@@ -86,6 +89,8 @@ Sections: 1 | Topics: 2 | Subtopics: 8
 
 ==================================================================================
 
+
+section 2--IDE installation
 
 =====Section 2: IDE Installation=====
 Speaker is section mein STM32CubeIDE ki downloading, host compilers ki installation (Windows/Linux/Mac), workspace setup, aur STM32F407 target hardware ke features explain karta hai.
@@ -238,6 +243,7 @@ Sections: 1 | Topics: 6 | Subtopics: 33
 
 ==================================================================================
 
+section 3--your first c program
 
 =====Section 3: Your First C Program=====
 Speaker is section mein C programming ke basics, IDE usage, printf function, escape sequences, aur compiler ke intermediate files explain karta hai.
@@ -366,6 +372,7 @@ Sections: 1 | Topics: 5 | Subtopics: 26
 
 ==================================================================================
 
+section 4---data types and variables
 
 =====Section 4: Data Types and Variables=====
 Speaker is section mein C programming ke fundamental data types, unke storage sizes, compiler dependency, memory organization, aur variable scopes ko detail mein explain karta hai.
@@ -564,6 +571,7 @@ Sections: 1 | Topics: 8 | Subtopics: 48
 
 ==================================================================================
 
+section 5---Address of variables
 
 =====Section 5: Address of Variables=====
 Speaker is section mein variables ke memory addresses retrieve karne, unhe format specifiers ke through print karne, aur pointers ko integers mein typecast karne ke concept ko explain karta hai.
@@ -626,6 +634,7 @@ Sections: 1 | Topics: 2 | Subtopics: 14
 
 ==================================================================================
 
+section 6---storage classes
 
 =====Section 6: Storage Classes & Static Keyword=====
 Speaker yahan C mein storage classes (scope, visibility, lifetime) aur specifically static keyword ke different use cases explain karta hai. [⚠️ Derived]
@@ -815,6 +824,8 @@ Section 3: ASCII Codes & Characters
 Sections: 3 | Topics: 7 | Subtopics: 26
 
 ==================================================================================
+
+section 7--functions
 
 
 =====Section 7: Functions in C=====
@@ -1092,6 +1103,9 @@ Sections: 3 | Topics: 11 | Subtopics: 46
 
 ==================================================================================
 
+section 8---microcontroller and hello world
+
+
 =====Section 8: STM32 Project Setup & SWV Trace=====
 Speaker yahan nayi STM32 project ban banane aur bina external display ke SWV aur ITM ka use karke ARM Cortex processors par printf trace dekhne ka setup explain karta hai.
 
@@ -1359,6 +1373,8 @@ Sections: 5 | Topics: 10 | Subtopics: 51
 
 ==================================================================================
 
+section 9---Build process
+
 
 =====Section 9: The Build Process & IDE Demonstration=====
 Speaker is section mein 'C' program ke build process ke sabhi stages explain karta hai aur IDE mein practically dikhata hai ki background files ko kaise access kiya jaye.
@@ -1422,6 +1438,9 @@ Sections: 1 | Topics: 2 | Subtopics: 11
 
 
 ==================================================================================
+
+section 10---Analyzing Embedded C code
+
 
 
 =====Section 10: Analyzing Embedded C code=====
@@ -1651,6 +1670,8 @@ Sections: 1 | Topics: 2 | Subtopics: 11
 
 ==================================================================================
 
+section 12--Taking input from the user using scanf()
+
 
 
 =====Section 12: Taking input from the user using scanf()=====
@@ -1766,6 +1787,8 @@ Sections: 1 | Topics: 4 | Subtopics: 17
 
 
 ==================================================================================
+
+section 13--pointers
 
 
 =====Section 13: Introduction to Pointers & Memory Basics [⚠️ Derived]=====
@@ -1933,6 +1956,8 @@ Sections: 2 | Topics: 6 | Subtopics: 24
 
 ==================================================================================
 
+section 14---importance of stdint.h
+
 
 =====Section 14: Importance of stdint.h=====
 Speaker is section mein standard data types ke portability issues aur stdint.h ke fixed-width integer aliases ka importance aur toolchain locations explain karta hai.
@@ -2022,6 +2047,8 @@ Sections: 1 | Topics: 3 | Subtopics: 9
 
 
 ==================================================================================
+
+section 15---operators
 
 
 =====Section 15: Operators in C=====
@@ -2152,6 +2179,8 @@ Sections: 1 | Topics: 5 | Subtopics: 22
 
 ==================================================================================
 
+section 16---Decision Making
+
 
 =====Section 16: Decision Making=====
 Speaker yahan 'C' programming mein conditional execution aur decision making statements ko explain karta hai, jisme basic `if` se lekar `switch/case` aur user input validation shamil hai.
@@ -2280,6 +2309,8 @@ Sections: 1 | Topics: 5 | Subtopics: 30
 
 
 ==================================================================================
+
+section 17---Bitwise Operators
 
 
 =====Section 17: Bitwise Operators Introduction & Basics=====
@@ -2443,6 +2474,8 @@ Sections: 2 | Topics: 6 | Subtopics: 25
 
 ==================================================================================
 
+section 18---Embedding C coding exercise for LED
+
 
 =====Section 18: Embedding C coding exercise for LED=====
 Speaker yahan actual hardware pe LED turn on karne ka poora process explain karta hai — schematic reading se lekar memory maps aur registers samajhne tak.
@@ -2529,6 +2562,8 @@ Sections: 1 | Topics: 3 | Subtopics: 24
 
 
 ==================================================================================
+
+section 19--Bitwise Shift Operations
 
 
 =====Section 19: Bitwise Shift Operators Basics=====
@@ -2622,6 +2657,9 @@ Sections: 2 | Topics: 3 | Subtopics: 17
 
 
 ==================================================================================
+
+
+section 20---looping
 
 
 =====Section 20: Looping=====
@@ -2802,6 +2840,8 @@ Sections: 1 | Topics: 7 | Subtopics: 38
 
 ==================================================================================
 
+section 21---Type qualifier 'const'
+
 
 =====Section 21: Type Qualifier 'const'=====
 Speaker yahan 'const' type qualifier ka deep explanation deta hai — basic syntax aur safety features se lekar memory placement aur pointer ke saath uske 4 complex combinations tak.
@@ -2888,6 +2928,8 @@ Sections: 1 | Topics: 3 | Subtopics: 21
 
 
 ==================================================================================
+
+section 22---pin-read
 
 
 =====Section 22: Pin Read Exercise Concept & Validation=====
@@ -3044,6 +3086,8 @@ Sections: 2 | Topics: 6 | Subtopics: 22
 
 ==================================================================================
 
+section 23---optimization
+
 
 =====Section 23: Optimization=====
 Speaker is section mein compiler optimization ke concepts, GCC flags, IDE configuration, aur optimization se code break hone ka root cause disassembly ke through explain karta hai.
@@ -3150,6 +3194,8 @@ Section 23: Optimization
 Sections: 1 | Topics: 3 | Subtopics: 19
 
 ==================================================================================
+
+section 24---'volatile' type qualifier
 
 
 =====Section 24: 'volatile' type qualifier=====
@@ -3281,6 +3327,8 @@ Sections: 1 | Topics: 5 | Subtopics: 22
 
 ==================================================================================
 
+section 25--Structures and Bit fields
+
 
 =====Section 25: Structures and Bit fields=====
 Speaker yahan C programming mein structures, memory alignment, padding, pointers, aur bit fields ke through memory optimization explain karta hai. 
@@ -3391,6 +3439,8 @@ Sections: 1 | Topics: 4 | Subtopics: 31
 
 ==================================================================================
 
+section 26---unions
+
 
 =====Section 26: Unions=====
 Speaker explains the concept of unions in C, memory allocation differences compared to structures, mutually exclusive access, and real-world embedded use cases like bit extraction.
@@ -3478,6 +3528,9 @@ Sections: 1 | Topics: 3 | Subtopics: 13
 
 ==================================================================================
 
+section 27---Usage of bit-fields in embedded code
+
+
 
 =====Section 27: Usage of bit-fields in embedded code=====
 Speaker bit-fields aur structures ka use karke embedded programming (specifically peripheral register manipulation) mein abstraction laane ka concept explain karta hai. 
@@ -3564,6 +3617,8 @@ Sections: 1 | Topics: 3 | Subtopics: 14
 
 
 ==================================================================================
+
+section 28--Keypad interfacing
 
 
 =====Section 28: Keypad interfacing=====
@@ -3696,6 +3751,8 @@ Sections: 1 | Topics: 5 | Subtopics: 29
 
 ==================================================================================
 
+section 29---Arrays
+
 
 =====Section 29: Arrays=====
 Speaker is section mein 'C' programming mein arrays ka concept, unki memory storage, initialization, variable length arrays, pointer arithmetic ke through read/write operations, aur arrays ko functions mein pass karne ka tareeqa explain karta hai, along with a swap program exercise.
@@ -3826,6 +3883,8 @@ Sections: 1 | Topics: 5 | Subtopics: 28
 
 ==================================================================================
 
+section 30---Strings
+
 
 =====Section 30: Strings=====
 Speaker is section mein strings ka memory structure, string literals vs character arrays, ROM/RAM memory mapping, scanf ke scan sets, aur structure arrays ke through student record management system ka practical exercise explain karta hai.
@@ -3934,6 +3993,9 @@ Sections: 1 | Topics: 4 | Subtopics: 25
 
 
 ==================================================================================
+
+section 31----Pre-Processor directives in 'C'
+
 
 
 =====Section 31: Pre-Processor directives in 'C'=====
