@@ -1,7 +1,7 @@
 section 1--introduction 
 
 
-=====Section 1: Introduction=====
+===== 1: Introduction=====
 Speaker is section mein computer program ki definition, embedded systems ki leading languages, aur C language ki standardization history explain karta hai.
 
 --1--Introduction--
@@ -51,24 +51,24 @@ Speaker is section mein computer program ki definition, embedded systems ki lead
 ---
 
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Introduction
+ 1: Introduction
   Topic 1: Embedded Programming Languages
   Topic 2: C Standardization History
 
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 8
+s: 1 | Topics: 2 | Subtopics: 8
 
 ---
 **Double-check steps performed (INTERNAL CHECKLIST):**
 - [x] Poora transcript completely padha bina kuch skip kiye.
-- [x] Transcript ko Sections mein group kiya — related topics ek Section mein hain.
-- [x] Har Section ka tagline/context line add kiya.
+- [x] Transcript ko s mein group kiya — related topics ek  mein hain.
+- [x] Har  ka tagline/context line add kiya.
 - [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
 - [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
 - [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi.
@@ -92,7 +92,7 @@ Sections: 1 | Topics: 2 | Subtopics: 8
 
 section 2--IDE installation
 
-=====Section 2: IDE Installation=====
+===== 2: IDE Installation=====
 Speaker is section mein STM32CubeIDE ki downloading, host compilers ki installation (Windows/Linux/Mac), workspace setup, aur STM32F407 target hardware ke features explain karta hai.
 
 --2--IDE Installation--
@@ -225,11 +225,11 @@ Speaker is section mein STM32CubeIDE ki downloading, host compilers ki installat
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 2: IDE Installation
+ 2: IDE Installation
   Topic 1: IDE Introduction & Download
   Topic 2: STM32CubeIDE Installation Process
   Topic 3: Host Compiler Setup (Windows, Linux, Mac)
@@ -238,14 +238,14 @@ Section 2: IDE Installation
   Topic 6: Target Hardware Overview (STM32F407 Discovery)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 33
+s: 1 | Topics: 6 | Subtopics: 33
 
 
 ==================================================================================
 
 section 3--your first c program
 
-=====Section 3: Your First C Program=====
+===== 3: Your First C Program=====
 Speaker is section mein C programming ke basics, IDE usage, printf function, escape sequences, aur compiler ke intermediate files explain karta hai.
 
 --3--Your First C Program--
@@ -355,11 +355,11 @@ Speaker is section mein C programming ke basics, IDE usage, printf function, esc
   - Additional context: (N/A)
 
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 3: Your First C Program
+ 3: Your First C Program
   Topic 1: Writing the First C Program
   Topic 2: Escape Sequences and New Lines
   Topic 3: Advanced Escape Sequences
@@ -367,14 +367,14 @@ Section 3: Your First C Program
   Topic 5: Code Commenting
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 26
+s: 1 | Topics: 5 | Subtopics: 26
 
 
 ==================================================================================
 
 section 4---data types and variables
 
-=====Section 4: Data Types and Variables=====
+===== 4: Data Types and Variables=====
 Speaker is section mein C programming ke fundamental data types, unke storage sizes, compiler dependency, memory organization, aur variable scopes ko detail mein explain karta hai.
 
 --4--Data Types and Variables--
@@ -551,11 +551,11 @@ Speaker is section mein C programming ke fundamental data types, unke storage si
   - Additional context: (N/A)
 
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 4: Data Types and Variables
+ 4: Data Types and Variables
   Topic 1: Data Types Introduction
   Topic 2: Storage Sizes & Compiler Dependency
   Topic 3: Char Data Type & Range Calculation
@@ -566,14 +566,14 @@ Section 4: Data Types and Variables
   Topic 8: Variable Scopes & Lifetimes
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 8 | Subtopics: 48
+s: 1 | Topics: 8 | Subtopics: 48
 
 
 ==================================================================================
 
 section 5---Address of variables
 
-=====Section 5: Address of Variables=====
+===== 5: Address of Variables=====
 Speaker is section mein variables ke memory addresses retrieve karne, unhe format specifiers ke through print karne, aur pointers ko integers mein typecast karne ke concept ko explain karta hai.
 
 --5--Address of Variables--
@@ -620,23 +620,23 @@ Speaker is section mein variables ke memory addresses retrieve karne, unhe forma
   - Additional context: Speaker ne mention kiya ki MinGW compiler pe I64 use hota hai, jabki Linux/Ubuntu pe `llx` ya `llu` use karna padta hai.
 
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 5: Address of Variables
+ 5: Address of Variables
   Topic 1: Variable Memory Addresses
   Topic 2: Storing Pointers & Typecasting
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 14
+s: 1 | Topics: 2 | Subtopics: 14
 
 
 ==================================================================================
 
 section 6---storage classes
 
-=====Section 6: Storage Classes & Static Keyword=====
+===== 6: Storage Classes & Static Keyword=====
 Speaker yahan C mein storage classes (scope, visibility, lifetime) aur specifically static keyword ke different use cases explain karta hai. [⚠️ Derived]
 
 --1--Storage Classes & Static Keyword--
@@ -725,7 +725,7 @@ Speaker yahan C mein storage classes (scope, visibility, lifetime) aur specifica
   - Additional context: None
 
 
-=====Section 2: Extern Keyword=====
+===== 2: Extern Keyword=====
 Speaker yahan extern keyword ka core purpose aur multi-file projects mein uski importance summarize karta hai. [⚠️ Derived]
 
 --2--Extern Keyword--
@@ -751,7 +751,7 @@ Speaker yahan extern keyword ka core purpose aur multi-file projects mein uski i
   - Additional context: None
 
 
-=====Section 3: ASCII Codes & Characters=====
+===== 3: ASCII Codes & Characters=====
 Speaker yahan ASCII standards aur C program mein characters ko memory mein store aur print karne ka tareeqa batata hai. [⚠️ Derived]
 
 --3--ASCII Codes & Characters--
@@ -803,32 +803,32 @@ Speaker yahan ASCII standards aur C program mein characters ko memory mein store
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Storage Classes & Static Keyword
+ 1: Storage Classes & Static Keyword
   Topic 1: Intro to Storage Classes
   Topic 2: Static Local Variables
   Topic 3: Static Global Variables
   Topic 4: Static Functions
 
-Section 2: Extern Keyword
+ 2: Extern Keyword
   Topic 1: Extern Keyword Usage
 
-Section 3: ASCII Codes & Characters
+ 3: ASCII Codes & Characters
   Topic 1: Introduction to ASCII
   Topic 2: Printing Characters in C
 
 📊 PHASE SUMMARY:
-Sections: 3 | Topics: 7 | Subtopics: 26
+s: 3 | Topics: 7 | Subtopics: 26
 
 ==================================================================================
 
 section 7--functions
 
 
-=====Section 7: Functions in C=====
+===== 7: Functions in C=====
 Speaker is section mein functions ka concept, execution flow, general syntax aur return values explain karta hai. [⚠️ Derived]
 
 --1--Functions in C--
@@ -938,7 +938,7 @@ Speaker is section mein functions ka concept, execution flow, general syntax aur
   - Additional context: None
 
 
-=====Section 2: Multi-file Projects & Math Operations=====
+===== 2: Multi-file Projects & Math Operations=====
 Speaker is section mein ek mathematical project ke through multi-file structure (main.c, math.c, math.h) aur uske components explain karta hai. [⚠️ Derived]
 
 --2--Multi-file Projects & Math Operations--
@@ -1006,7 +1006,7 @@ Speaker is section mein ek mathematical project ke through multi-file structure 
   - Additional context: None
 
 
-=====Section 3: Typecasting=====
+===== 3: Typecasting=====
 Speaker yahan implicit aur explicit typecasting ke rules, truncation warnings, aur overflow fix karne ki practical techniques explain karta hai. [⚠️ Derived]
 
 --3--Typecasting--
@@ -1076,29 +1076,29 @@ Speaker yahan implicit aur explicit typecasting ke rules, truncation warnings, a
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Functions in C
+ 1: Functions in C
   Topic 1: Introduction to Functions
   Topic 2: The main() Function
   Topic 3: Writing & Calling Functions
   Topic 4: Function Prototypes
   Topic 5: Returning Values
 
-Section 2: Multi-file Projects & Math Operations
+ 2: Multi-file Projects & Math Operations
   Topic 1: Multi-file Project Architecture
   Topic 2: Header Files & Include Guards
   Topic 3: Math Operations Implementation & Output
 
-Section 3: Typecasting
+ 3: Typecasting
   Topic 1: Introduction to Typecasting
   Topic 2: Truncation Warnings & Fixing (Implicit vs Explicit)
   Topic 3: Real Numbers & Large Data Casting
 
 📊 PHASE SUMMARY:
-Sections: 3 | Topics: 11 | Subtopics: 46
+s: 3 | Topics: 11 | Subtopics: 46
 
 
 ==================================================================================
@@ -1106,7 +1106,7 @@ Sections: 3 | Topics: 11 | Subtopics: 46
 section 8---microcontroller and hello world
 
 
-=====Section 8: STM32 Project Setup & SWV Trace=====
+===== 8: STM32 Project Setup & SWV Trace=====
 Speaker yahan nayi STM32 project ban banane aur bina external display ke SWV aur ITM ka use karke ARM Cortex processors par printf trace dekhne ka setup explain karta hai.
 
 --1--STM32 Project Setup & SWV Trace--
@@ -1216,7 +1216,7 @@ Speaker yahan nayi STM32 project ban banane aur bina external display ke SWV aur
   - Additional context: N/A
 
 
-=====Section 2: IDE Debug Termination Bug=====
+===== 2: IDE Debug Termination Bug=====
 Speaker STM32CubeIDE mein ek specific debug termination bug aur uska workaround batata hai.
 
 --2--IDE Debug Termination Bug--
@@ -1242,7 +1242,7 @@ Speaker STM32CubeIDE mein ek specific debug termination bug aur uska workaround 
   - Additional context: N/A
 
 
-=====Section 3: OpenOCD Semihosting for Cortex M0=====
+===== 3: OpenOCD Semihosting for Cortex M0=====
 Speaker Cortex M0 based boards ke liye openOCD debugger aur semihosting ka setup explain karta hai kyunki unme SWO pin support nahi hota.
 
 --3--OpenOCD Semihosting for Cortex M0--
@@ -1289,7 +1289,7 @@ Speaker Cortex M0 based boards ke liye openOCD debugger aur semihosting ka setup
   - Additional context: N/A
 
 
-=====Section 4: Sizeof Operator on Embedded Target=====
+===== 4: Sizeof Operator on Embedded Target=====
 Speaker target hardware pe 'C' data types ke sizes evaluate karne ke liye sizeof operator ka experiment karta hai.
 
 --4--Sizeof Operator on Embedded Target--
@@ -1315,7 +1315,7 @@ Speaker target hardware pe 'C' data types ke sizes evaluate karne ke liye sizeof
   - Additional context: Speaker ne mention kiya ki Channel 0 default printf ke liye hota hai, jabki RTOS ya dusre diagnostic events ke liye Channel 1 ya 2 use kiye ja sakte hain.
 
 
-=====Section 5: IDE Compiler & Toolchain Settings=====
+===== 5: IDE Compiler & Toolchain Settings=====
 Speaker STM32CubeIDE mein maujood different compiler settings, C standards, aur libraries ke baare mein explain karta hai.
 
 --5--IDE Compiler & Toolchain Settings--
@@ -1343,32 +1343,32 @@ Speaker STM32CubeIDE mein maujood different compiler settings, C standards, aur 
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: STM32 Project Setup & SWV Trace
+ 1: STM32 Project Setup & SWV Trace
   Topic 1: Project Creation & File Structure
   Topic 2: SWD Interface & ITM Trace
   Topic 3: Printf Redirection Implementation
   Topic 4: Compilation Processes & Executable Types
   Topic 5: Debug Configuration & SWV Setup
 
-Section 2: IDE Debug Termination Bug
+ 2: IDE Debug Termination Bug
   Topic 1: Debug Session Termination Issue
 
-Section 3: OpenOCD Semihosting for Cortex M0
+ 3: OpenOCD Semihosting for Cortex M0
   Topic 1: OpenOCD Debugger & Linker Setup
   Topic 2: Semihosting Code Configuration
 
-Section 4: Sizeof Operator on Embedded Target
+ 4: Sizeof Operator on Embedded Target
   Topic 1: Sizeof Experiment & Implementation
 
-Section 5: IDE Compiler & Toolchain Settings
+ 5: IDE Compiler & Toolchain Settings
   Topic 1: IDE Compiler & Toolchain Setup
 
 📊 PHASE SUMMARY:
-Sections: 5 | Topics: 10 | Subtopics: 51
+s: 5 | Topics: 10 | Subtopics: 51
 
 
 ==================================================================================
@@ -1376,7 +1376,7 @@ Sections: 5 | Topics: 10 | Subtopics: 51
 section 9---Build process
 
 
-=====Section 9: The Build Process & IDE Demonstration=====
+===== 9: The Build Process & IDE Demonstration=====
 Speaker is section mein 'C' program ke build process ke sabhi stages explain karta hai aur IDE mein practically dikhata hai ki background files ko kaise access kiya jaye.
 
 --1--The Build Process & IDE Demonstration--
@@ -1425,16 +1425,16 @@ Speaker is section mein 'C' program ke build process ke sabhi stages explain kar
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: The Build Process & IDE Demonstration
+ 1: The Build Process & IDE Demonstration
   Topic 1: Build Process Stages
   Topic 2: IDE Build Demonstration & Intermediate Files
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 11
+s: 1 | Topics: 2 | Subtopics: 11
 
 
 ==================================================================================
@@ -1443,7 +1443,7 @@ section 10---Analyzing Embedded C code
 
 
 
-=====Section 10: Analyzing Embedded C code=====
+===== 10: Analyzing Embedded C code=====
 Speaker is section mein microcontroller ki internal anatomy, memory types, aur ek basic Embedded C program ko compile karke uske `.elf` file aur memory placement ko debugger aur GNU tools se analyze karna sikhata hai.
 
 --10--Analyzing Embedded C code--
@@ -1540,7 +1540,7 @@ Speaker is section mein microcontroller ki internal anatomy, memory types, aur e
 ---
 
   Topic 5: Startup Code and Data Copying
-    Subtopics: Object Dump Tool, ELF Sections, LMA vs VMA, Reset Handler Routine, Data Copying
+    Subtopics: Object Dump Tool, ELF s, LMA vs VMA, Reset Handler Routine, Data Copying
 
   [📊 SCOPE SIGNAL for Topic 5:
   - Depth Level: Deep
@@ -1585,11 +1585,11 @@ Speaker is section mein microcontroller ki internal anatomy, memory types, aur e
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 10: Analyzing Embedded C code
+ 10: Analyzing Embedded C code
   Topic 1: Microcontroller Anatomy
   Topic 2: Real-World MCU Architectures
   Topic 3: Types of Code Memories
@@ -1598,7 +1598,7 @@ Section 10: Analyzing Embedded C code
   Topic 6: Disassembly and Instruction Debugging
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 28
+s: 1 | Topics: 6 | Subtopics: 28
 
 
 ==================================================================================
@@ -1606,7 +1606,7 @@ Sections: 1 | Topics: 6 | Subtopics: 28
 section 11---Data types to manipulate floating point data
 
 
-=====Section 11: Data types to manipulate floating point data=====
+===== 11: Data types to manipulate floating point data=====
 Speaker is section mein real aur decimal numbers ko memory mein store karne ka IEEE-754 standard aur 'C' mein float aur double data types ke practical uses aur precision limits explain karta hai.
 
 --11--Data types to manipulate floating point data--
@@ -1656,16 +1656,16 @@ Speaker is section mein real aur decimal numbers ko memory mein store karne ka I
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 11: Data types to manipulate floating point data
+ 11: Data types to manipulate floating point data
   Topic 1: Floating-Point Representation Basics
   Topic 2: C Programming with Float and Double
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 11
+s: 1 | Topics: 2 | Subtopics: 11
 
 
 ==================================================================================
@@ -1674,7 +1674,7 @@ section 12--Taking input from the user using scanf()
 
 
 
-=====Section 12: Taking input from the user using scanf()=====
+===== 12: Taking input from the user using scanf()=====
 Speaker is section mein `scanf` aur `getchar` ke through user input lene, console buffering issues solve karne, aur input buffer ke internal mechanics ko explain karta hai.
 
 --12--Taking input from the user using scanf()--
@@ -1772,18 +1772,18 @@ Speaker is section mein `scanf` aur `getchar` ke through user input lene, consol
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 12: Taking input from the user using scanf()
+ 12: Taking input from the user using scanf()
   Topic 1: Introduction to scanf and getchar
   Topic 2: Input Output Buffering and fflush
   Topic 3: Multi-Input scanf and Double Precision
   Topic 4: Practical Exercises: ASCII and Scientific Notation
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 17
+s: 1 | Topics: 4 | Subtopics: 17
 
 
 ==================================================================================
@@ -1791,7 +1791,7 @@ Sections: 1 | Topics: 4 | Subtopics: 17
 section 13--pointers
 
 
-=====Section 13: Introduction to Pointers & Memory Basics [⚠️ Derived]=====
+===== 13: Introduction to Pointers & Memory Basics [⚠️ Derived]=====
 Speaker is section mein pointers ka core concept, memory organization, pointer variables ka definition aur unka memory footprint explain karta hai.
 
 --1--Introduction to Pointers & Memory Basics [⚠️ Derived]--
@@ -1863,7 +1863,7 @@ Speaker is section mein pointers ka core concept, memory organization, pointer v
   - Additional context: None
 
 
-=====Section 2: Pointer Operations, Dereferencing & Arithmetic [⚠️ Derived]=====
+===== 2: Pointer Operations, Dereferencing & Arithmetic [⚠️ Derived]=====
 Speaker is section mein dereferencing operator ka use, read/write operations aur pointer arithmetic ke actual code examples explain karta hai.
 
 --2--Pointer Operations, Dereferencing & Arithmetic [⚠️ Derived]--
@@ -1937,29 +1937,29 @@ Speaker is section mein dereferencing operator ka use, read/write operations aur
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Introduction to Pointers & Memory Basics [⚠️ Derived]
+ 1: Introduction to Pointers & Memory Basics [⚠️ Derived]
   Topic 1: Pointer Definition & Memory Organization [⚠️ Derived]
   Topic 2: Pointer Variables & Explicit Casting [⚠️ Derived]
   Topic 3: Pointer Memory Size vs Data Type Behavior [⚠️ Derived]
 
-Section 2: Pointer Operations, Dereferencing & Arithmetic [⚠️ Derived]
+ 2: Pointer Operations, Dereferencing & Arithmetic [⚠️ Derived]
   Topic 4: Dereferencing & Read/Write Operations [⚠️ Derived]
   Topic 5: Pointer Arithmetic & Type Offsets [⚠️ Derived]
   Topic 6: Pointers in Embedded C Programming [⚠️ Derived]
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 6 | Subtopics: 24
+s: 2 | Topics: 6 | Subtopics: 24
 
 ==================================================================================
 
 section 14---importance of stdint.h
 
 
-=====Section 14: Importance of stdint.h=====
+===== 14: Importance of stdint.h=====
 Speaker is section mein standard data types ke portability issues aur stdint.h ke fixed-width integer aliases ka importance aur toolchain locations explain karta hai.
 
 --14--Importance of stdint.h--
@@ -2033,17 +2033,17 @@ Speaker is section mein standard data types ke portability issues aur stdint.h k
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 14: Importance of stdint.h
+ 14: Importance of stdint.h
   Topic 1: Portability Issues & Data Type Sizes
   Topic 2: stdint.h & Fixed-Width Integers
   Topic 3: Advanced stdint.h Aliases
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 9
+s: 1 | Topics: 3 | Subtopics: 9
 
 
 ==================================================================================
@@ -2051,7 +2051,7 @@ Sections: 1 | Topics: 3 | Subtopics: 9
 section 15---operators
 
 
-=====Section 15: Operators in C=====
+===== 15: Operators in C=====
 Speaker yahan 'C' programming ke different operators, precedence rules, aur logical evaluations ko explain karta hai.
 
 --15--Operators in C--
@@ -2162,11 +2162,11 @@ Speaker yahan 'C' programming ke different operators, precedence rules, aur logi
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 15: Operators in C
+ 15: Operators in C
   Topic 1: Operator Types and Arithmetic Operations
   Topic 2: Operator Precedence and Associativity
   Topic 3: Unary Increment and Decrement Operators
@@ -2174,7 +2174,7 @@ Section 15: Operators in C
   Topic 5: Logical Operators and Evaluation Rules
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 22
+s: 1 | Topics: 5 | Subtopics: 22
 
 
 ==================================================================================
@@ -2182,7 +2182,7 @@ Sections: 1 | Topics: 5 | Subtopics: 22
 section 16---Decision Making
 
 
-=====Section 16: Decision Making=====
+===== 16: Decision Making=====
 Speaker yahan 'C' programming mein conditional execution aur decision making statements ko explain karta hai, jisme basic `if` se lekar `switch/case` aur user input validation shamil hai.
 
 --16--Decision Making--
@@ -2293,11 +2293,11 @@ Speaker yahan 'C' programming mein conditional execution aur decision making sta
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 16: Decision Making
+ 16: Decision Making
   Topic 1: The 'if' Statement and Conditionals
   Topic 2: The 'if-else' Statement and Input Handling
   Topic 3: The 'if-else-if' Ladder
@@ -2305,7 +2305,7 @@ Section 16: Decision Making
   Topic 5: The 'switch/case' Statement
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 30
+s: 1 | Topics: 5 | Subtopics: 30
 
 
 ==================================================================================
@@ -2313,7 +2313,7 @@ Sections: 1 | Topics: 5 | Subtopics: 30
 section 17---Bitwise Operators
 
 
-=====Section 17: Bitwise Operators Introduction & Basics=====
+===== 17: Bitwise Operators Introduction & Basics=====
 Speaker yahan bitwise operators ka introduction deta hai aur unhe logical operators se compare karke basic calculations samjhata hai.
 
 --1--Bitwise Operators Introduction & Basics--
@@ -2361,7 +2361,7 @@ Speaker yahan bitwise operators ka introduction deta hai aur unhe logical operat
   - Additional context: Speaker ne negative numbers ke saath bhi program test karne ko kaha.
 
 
-=====Section 2: Bit Manipulation Techniques in Embedded C=====
+===== 2: Bit Manipulation Techniques in Embedded C=====
 Is section mein speaker specific bit operations—Testing, Setting, Clearing, aur Toggling—ki internal logic aur code techniques explain karta hai.
 
 --2--Bit Manipulation Techniques in Embedded C--
@@ -2454,22 +2454,22 @@ Is section mein speaker specific bit operations—Testing, Setting, Clearing, au
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Bitwise Operators Introduction & Basics
+ 1: Bitwise Operators Introduction & Basics
   Topic 1: Basics of Bitwise Operators
   Topic 2: Basic Bitwise Calculator Exercise
 
-Section 2: Bit Manipulation Techniques in Embedded C
+ 2: Bit Manipulation Techniques in Embedded C
   Topic 1: Testing of Bits & Bit Masking
   Topic 2: Setting of Bits
   Topic 3: Clearing of Bits
   Topic 4: Toggling of Bits & Target Board Prep
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 6 | Subtopics: 25
+s: 2 | Topics: 6 | Subtopics: 25
 
 
 ==================================================================================
@@ -2477,7 +2477,7 @@ Sections: 2 | Topics: 6 | Subtopics: 25
 section 18---Embedding C coding exercise for LED
 
 
-=====Section 18: Embedding C coding exercise for LED=====
+===== 18: Embedding C coding exercise for LED=====
 Speaker yahan actual hardware pe LED turn on karne ka poora process explain karta hai — schematic reading se lekar memory maps aur registers samajhne tak.
 
 --18--Embedding C coding exercise for LED--
@@ -2548,17 +2548,17 @@ Speaker yahan actual hardware pe LED turn on karne ka poora process explain kart
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 18: Embedding C coding exercise for LED
+ 18: Embedding C coding exercise for LED
   Topic 1: Hardware Connections & Memory Mapped I/O
   Topic 2: Peripheral Registers & LED Turn-ON Procedure
   Topic 3: Coding the LED Exercise & Hardware Debugging
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 24
+s: 1 | Topics: 3 | Subtopics: 24
 
 
 ==================================================================================
@@ -2566,7 +2566,7 @@ Sections: 1 | Topics: 3 | Subtopics: 24
 section 19--Bitwise Shift Operations
 
 
-=====Section 19: Bitwise Shift Operators Basics=====
+===== 19: Bitwise Shift Operators Basics=====
 Speaker yahan bitwise right shift aur left shift operators ki mechanics, unka syntax, aur mathematical weightage pe unka impact samjhata hai.
 
 --1--Bitwise Shift Operators Basics--
@@ -2592,7 +2592,7 @@ Speaker yahan bitwise right shift aur left shift operators ki mechanics, unka sy
   - Additional context: None
 
 
-=====Section 2: Advanced Bit Manipulation in Embedded C=====
+===== 2: Advanced Bit Manipulation in Embedded C=====
 Is section mein speaker shift operators ka real-world embedded programming use case batata hai — jaise mask generation ke shortcuts aur specific bit ranges ko extract karna.
 
 --2--Advanced Bit Manipulation in Embedded C--
@@ -2641,19 +2641,19 @@ Is section mein speaker shift operators ka real-world embedded programming use c
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Bitwise Shift Operators Basics
+ 1: Bitwise Shift Operators Basics
   Topic 1: Shift Operators Mechanics & Mathematics
 
-Section 2: Advanced Bit Manipulation in Embedded C
+ 2: Advanced Bit Manipulation in Embedded C
   Topic 1: Shortcut Masking for Setting & Clearing [⚠️ Derived]
   Topic 2: Bit Extraction Technique
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 3 | Subtopics: 17
+s: 2 | Topics: 3 | Subtopics: 17
 
 
 ==================================================================================
@@ -2662,7 +2662,7 @@ Sections: 2 | Topics: 3 | Subtopics: 17
 section 20---looping
 
 
-=====Section 20: Looping=====
+===== 20: Looping=====
 Speaker yahan 'C' programming mein looping statements (while, do-while, for) ka introduction deta hai aur unhe embedded systems ke real-world use-cases (jaise super loops aur software delays) ke saath implement karke dikhata hai.
 
 --20--Looping--
@@ -2821,11 +2821,11 @@ Speaker yahan 'C' programming mein looping statements (while, do-while, for) ka 
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 20: Looping
+ 20: Looping
   Topic 1: Looping Basics & While Loop Concept
   Topic 2: While Loop Semicolon Trap & Super Loop
   Topic 3: Coding Exercise — Even Number Counter
@@ -2835,7 +2835,7 @@ Section 20: Looping
   Topic 7: LED Toggling with Software Delay
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 38
+s: 1 | Topics: 7 | Subtopics: 38
 
 
 ==================================================================================
@@ -2843,7 +2843,7 @@ Sections: 1 | Topics: 7 | Subtopics: 38
 section 21---Type qualifier 'const'
 
 
-=====Section 21: Type Qualifier 'const'=====
+===== 21: Type Qualifier 'const'=====
 Speaker yahan 'const' type qualifier ka deep explanation deta hai — basic syntax aur safety features se lekar memory placement aur pointer ke saath uske 4 complex combinations tak.
 
 --21--Type Qualifier 'const'--
@@ -2914,17 +2914,17 @@ Speaker yahan 'const' type qualifier ka deep explanation deta hai — basic synt
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 21: Type Qualifier 'const'
+ 21: Type Qualifier 'const'
   Topic 1: Const Qualifier Basics & Syntax
   Topic 2: Const Memory Placement & Behavior
   Topic 3: Const with Pointers (4 Use Cases)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 21
+s: 1 | Topics: 3 | Subtopics: 21
 
 
 ==================================================================================
@@ -2932,7 +2932,7 @@ Sections: 1 | Topics: 3 | Subtopics: 21
 section 22---pin-read
 
 
-=====Section 22: Pin Read Exercise Concept & Validation=====
+===== 22: Pin Read Exercise Concept & Validation=====
 Speaker is section mein pin read exercise ka logic, hardware connections, aur pin availability verify karne ka process explain karta hai.
 
 --1--Pin Read Exercise Concept & Validation--
@@ -2973,13 +2973,13 @@ Speaker is section mein pin read exercise ka logic, hardware connections, aur pi
   [free IO, discovery board, user manual, STM32F4 discovery, section 6.11, Extension connectors, PA0, PA4, general purpose I/O functionality, PD12, input mode, input data register, ⭐"explore the user manual"]
 
   🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-  - Testing/Offline Phase: Developer code likhne se pehle board ka user manual kholta hai (Section 6.11 Extension connectors) yeh verify karne ke liye ki jo pin woh use kar raha hai (PA0) woh as a free I/O available hai ya kisi aur internal circuit dwara used hai.
+  - Testing/Offline Phase: Developer code likhne se pehle board ka user manual kholta hai ( 6.11 Extension connectors) yeh verify karne ke liye ki jo pin woh use kar raha hai (PA0) woh as a free I/O available hai ya kisi aur internal circuit dwara used hai.
   - Fixing/Iteration Phase: (N/A)
   - Live Production Phase: (N/A)
   - Additional context: Agar user manual mein free I/O ka column blank ho (jaise PA4 ke liye), toh developer us pin ko general purpose I/O ke liye use nahi kar sakta.
 
 
-=====Section 2: Code Implementation & Register Configuration=====
+===== 2: Code Implementation & Register Configuration=====
 Speaker is section mein clock enable karne, input mode configure karne, data padhne aur loop mein execute karne ka C code implement karta hai.
 
 --2--Code Implementation & Register Configuration--
@@ -3071,25 +3071,25 @@ Speaker is section mein clock enable karne, input mode configure karne, data pad
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Pin Read Exercise Concept & Validation
+ 1: Pin Read Exercise Concept & Validation
   Topic 1: Exercise Objective & Hardware Logic
   Topic 2: Free I/O Validation
 
-Section 2: Code Implementation & Register Configuration
+ 2: Code Implementation & Register Configuration
   Topic 1: Enabling GPIOA Peripheral Clock
   Topic 2: Configuring PA0 as Input Mode
   Topic 3: Reading GPIOA Input Data Register
   Topic 4: Super Loop Execution & Debugging
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 6 | Subtopics: 22
+s: 2 | Topics: 6 | Subtopics: 22
 
 ==================================================================================
 
 section 23---optimization
 
 
-=====Section 23: Optimization=====
+===== 23: Optimization=====
 Speaker is section mein compiler optimization ke concepts, GCC flags, IDE configuration, aur optimization se code break hone ka root cause disassembly ke through explain karta hai.
 
 --23--Optimization--
@@ -3116,7 +3116,7 @@ Speaker is section mein compiler optimization ke concepts, GCC flags, IDE config
 
 
   Topic 2: IDE Optimization Configuration & Size Analysis
-    Subtopics: IDE Project Properties, MCU GCC Compiler Settings, Text Section Size, Code Space Reduction, O2 Execution Break
+    Subtopics: IDE Project Properties, MCU GCC Compiler Settings, Text  Size, Code Space Reduction, O2 Execution Break
 
   [📊 SCOPE SIGNAL for Topic 2:
   - Depth Level: Moderate
@@ -3163,8 +3163,8 @@ Speaker is section mein compiler optimization ke concepts, GCC flags, IDE config
 
 **🧠 PRE-EXTRACTION CHECKLIST & FINAL CHECKS PERFORMED:**
 - [x] Poora transcript completely padha bina kuch skip kiye.
-- [x] Transcript ko Sections mein group kiya — related topics ek Section mein hain (Section 23).
-- [x] Har Section ka tagline/context line add kiya.
+- [x] Transcript ko s mein group kiya — related topics ek  mein hain ( 23).
+- [x] Har  ka tagline/context line add kiya.
 - [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
 - [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
 - [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi.
@@ -3185,20 +3185,20 @@ Speaker is section mein compiler optimization ke concepts, GCC flags, IDE config
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 23: Optimization
+ 23: Optimization
   Topic 1: Compiler Optimization Concepts & GCC Flags
   Topic 2: IDE Optimization Configuration & Size Analysis
   Topic 3: Disassembly Analysis & The Volatile Fix
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 19
+s: 1 | Topics: 3 | Subtopics: 19
 
 ==================================================================================
 
 section 24---'volatile' type qualifier
 
 
-=====Section 24: 'volatile' type qualifier=====
+===== 24: 'volatile' type qualifier=====
 Speaker yahan 'volatile' type qualifier ka compiler optimization par effect aur uske real-world embedded use cases explain karta hai.
 
 --24--'volatile' type qualifier--
@@ -3309,12 +3309,12 @@ Speaker yahan 'volatile' type qualifier ka compiler optimization par effect aur 
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 ```
 📋 EXTRACTED IN THIS PHASE:
 
-Section 24: 'volatile' type qualifier
+ 24: 'volatile' type qualifier
   Topic 1: Introduction to Volatile & Compiler Optimization
   Topic 2: When to use Volatile & Syntax Cases
   Topic 3: Fixing Pin Read Application
@@ -3322,7 +3322,7 @@ Section 24: 'volatile' type qualifier
   Topic 5: Using Const and Volatile Together
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 22
+s: 1 | Topics: 5 | Subtopics: 22
 ```
 
 ==================================================================================
@@ -3330,7 +3330,7 @@ Sections: 1 | Topics: 5 | Subtopics: 22
 section 25--Structures and Bit fields
 
 
-=====Section 25: Structures and Bit fields=====
+===== 25: Structures and Bit fields=====
 Speaker yahan C programming mein structures, memory alignment, padding, pointers, aur bit fields ke through memory optimization explain karta hai. 
 
 --25--Structures and Bit fields--
@@ -3422,19 +3422,19 @@ Speaker yahan C programming mein structures, memory alignment, padding, pointers
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 ```
 📋 EXTRACTED IN THIS PHASE:
 
-Section 25: Structures and Bit fields
+ 25: Structures and Bit fields
   Topic 1: Structure Basics and Initialization
   Topic 2: Structure Padding and Aligned Data Access
   Topic 3: Typedef, Nested Structures, and Structure Pointers
   Topic 4: Packet Decoding and Bit Fields
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 31
+s: 1 | Topics: 4 | Subtopics: 31
 ```
 
 ==================================================================================
@@ -3442,7 +3442,7 @@ Sections: 1 | Topics: 4 | Subtopics: 31
 section 26---unions
 
 
-=====Section 26: Unions=====
+===== 26: Unions=====
 Speaker explains the concept of unions in C, memory allocation differences compared to structures, mutually exclusive access, and real-world embedded use cases like bit extraction.
 
 --26--Unions--
@@ -3511,18 +3511,18 @@ Speaker explains the concept of unions in C, memory allocation differences compa
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 ```
 📋 EXTRACTED IN THIS PHASE:
 
-Section 26: Unions
+ 26: Unions
   Topic 1: Introduction to Unions & Memory Allocation
   Topic 2: Overwriting Union Data & Programming Example
   Topic 3: Embedded Use Cases: Bit Extraction with Nested Unions & Structs
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 13
+s: 1 | Topics: 3 | Subtopics: 13
 ```
 
 
@@ -3532,7 +3532,7 @@ section 27---Usage of bit-fields in embedded code
 
 
 
-=====Section 27: Usage of bit-fields in embedded code=====
+===== 27: Usage of bit-fields in embedded code=====
 Speaker bit-fields aur structures ka use karke embedded programming (specifically peripheral register manipulation) mein abstraction laane ka concept explain karta hai. 
 
 --27--Usage of bit-fields in embedded code--
@@ -3601,18 +3601,18 @@ Speaker bit-fields aur structures ka use karke embedded programming (specificall
 
 ---
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 ```
 📋 EXTRACTED IN THIS PHASE:
 
-Section 27: Usage of bit-fields in embedded code
+ 27: Usage of bit-fields in embedded code
   Topic 1: Abstraction in Embedded Code
   Topic 2: Creating Bit-Field Structures for Peripheral Registers
   Topic 3: Configuring Peripheral Registers using Structure Pointers
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 14
+s: 1 | Topics: 3 | Subtopics: 14
 ```
 
 
@@ -3621,7 +3621,7 @@ Sections: 1 | Topics: 3 | Subtopics: 14
 section 28--Keypad interfacing
 
 
-=====Section 28: Keypad interfacing=====
+===== 28: Keypad interfacing=====
 Speaker is section mein 4x4 matrix keypad ka hardware structure, internal pull-up resistors ka concept, aur bare-metal bit-manipulation ke through key press detect karne ka C code explain karta hai, along with button debouncing logic.
 
 --28--Keypad interfacing--
@@ -3734,11 +3734,11 @@ Speaker is section mein 4x4 matrix keypad ka hardware structure, internal pull-u
 ---
 
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 28: Keypad interfacing
+ 28: Keypad interfacing
   Topic 1: 4x4 Keypad Hardware & Connections
   Topic 2: Floating State & Pull-up Resistors
   Topic 3: Key Detection Logic & Button Debouncing
@@ -3746,7 +3746,7 @@ Section 28: Keypad interfacing
   Topic 5: Delay Calculation & Execution
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 29
+s: 1 | Topics: 5 | Subtopics: 29
 
 
 ==================================================================================
@@ -3754,7 +3754,7 @@ Sections: 1 | Topics: 5 | Subtopics: 29
 section 29---Arrays
 
 
-=====Section 29: Arrays=====
+===== 29: Arrays=====
 Speaker is section mein 'C' programming mein arrays ka concept, unki memory storage, initialization, variable length arrays, pointer arithmetic ke through read/write operations, aur arrays ko functions mein pass karne ka tareeqa explain karta hai, along with a swap program exercise.
 
 --29--Arrays--
@@ -3867,11 +3867,11 @@ Speaker is section mein 'C' programming mein arrays ka concept, unki memory stor
 ---
 
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 29: Arrays
+ 29: Arrays
   Topic 1: Introduction to Arrays & Memory Storage
   Topic 2: Array Initialization & Variable Length Arrays (VLA)
   Topic 3: Array Read/Write & Indexing Logic
@@ -3879,14 +3879,14 @@ Section 29: Arrays
   Topic 5: Array Swap Exercise Implementation
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 28
+s: 1 | Topics: 5 | Subtopics: 28
 
 ==================================================================================
 
 section 30---Strings
 
 
-=====Section 30: Strings=====
+===== 30: Strings=====
 Speaker is section mein strings ka memory structure, string literals vs character arrays, ROM/RAM memory mapping, scanf ke scan sets, aur structure arrays ke through student record management system ka practical exercise explain karta hai.
 
 --30--Strings--
@@ -3978,18 +3978,18 @@ Speaker is section mein strings ka memory structure, string literals vs characte
 ---
 
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 30: Strings
+ 30: Strings
   Topic 1: Introduction to Strings & Memory Storage
   Topic 2: String Literals & Memory Architecture
   Topic 3: String Input/Output & Scan Sets
   Topic 4: Student Record Management (Struct Arrays Exercise)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 25
+s: 1 | Topics: 4 | Subtopics: 25
 
 
 ==================================================================================
@@ -3998,7 +3998,7 @@ section 31----Pre-Processor directives in 'C'
 
 
 
-=====Section 31: Pre-Processor directives in 'C'=====
+===== 31: Pre-Processor directives in 'C'=====
 Speaker is section mein 'C' programming ke pre-processor directives, macro definition aur textual replacement, conditional compilation, aur unka real-world embedded systems mein practical use explain karta hai.
 
 --31--Pre-Processor directives in 'C'--
@@ -4110,11 +4110,11 @@ Speaker is section mein 'C' programming ke pre-processor directives, macro defin
 ---
 
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 31: Pre-Processor directives in 'C'
+ 31: Pre-Processor directives in 'C'
   Topic 1: Intro to Pre-Processor Directives & Macros
   Topic 2: Function-Like Macros & Safety Rules
   Topic 3: Conditional Compilation Directives
@@ -4122,7 +4122,7 @@ Section 31: Pre-Processor directives in 'C'
   Topic 5: Practical Application: LED Toggle Refactoring
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 28
+s: 1 | Topics: 5 | Subtopics: 28
 
 
 ==================================================================================
