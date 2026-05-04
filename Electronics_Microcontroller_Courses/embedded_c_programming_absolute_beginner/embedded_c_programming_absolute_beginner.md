@@ -2020,7 +2020,7 @@ Total keywords across all subtopics in this topic: 61
 ==================================================================================
 
 
-### 📚 Section Overview: 4 — Data Types and Variables
+### Section 4: Data Types and Variables
 Is section mein hum C programming ke foundational building blocks ko deeply samjhenge. Speaker ne real-world data mapping, memory sizes, compiler dependency, memory organization, aur variable scopes par heavy focus kiya hai. Hum is guide mein har ek concept ko step-by-step decode karenge.
 
 ---
@@ -4816,7 +4816,7 @@ Console-based tools (jaise Linux ka `top` command ya vim editor) terminal par bo
 ==================================================================================
 
 
-### 🌐 Overview: Section 7 — Functions
+### Section 7: Functions
 Is section mein hum C programming ke sabse foundational blocks — **Functions**, **Multi-file Projects**, aur **Typecasting** ko deeply master karenge. Hum **Section 1: Functions in C** se shuru kar rahe hain. 
 
 ---
@@ -8410,7 +8410,7 @@ Space probe ke microcontroller software ko fix karna. Developer ne `#define SPEE
 
 ---
 
-### 🌐 Section Overview: Section 10 — Analyzing Embedded C code
+### Section 10: Analyzing Embedded C code
 Is section mein hum microcontroller ke "andar ki duniya" explore karenge. Hum sirf theory nahi padhenge, balki ek C program ko compile karke uski `.elf` file (executable linkable format) ka operation, flash/SRAM memory addresses, aur internal debugging tools (jaise Object Dump) ko manually analyse karenge. 
 
 ---
@@ -9250,7 +9250,7 @@ Industry mein performance tuning ke waqt senior developers assembly padhte hain 
 
 ---
 
-### 🌐 Section Overview: Section 11 — Data types to manipulate floating point data
+### Section 11: Data types to manipulate floating point data
 Is section mein hum samjhenge ki computer **decimal number** aur **real number** ko memory mein kaise store karta hai. Pura khel approximation aur precision ka hai. Hum **IEEE standard 754** ki theory dekhenge, aur C programming mein `float` aur `double` ka actual behavior test karenge.
 
 ---
@@ -9554,7 +9554,7 @@ Total keywords across all subtopics in this topic: 46
 
 ---
 
-### 🌐 Section Overview: 12 - Taking input from the user using scanf()
+# Section 12: Taking input from the user using scanf()
 Is section mein hum samjhenge ki C program user se baat kaise karta hai. `scanf` aur `getchar` ke through input lena, OS (Operating System) ke buffers ko samajhna, aur console/terminal ke hidden bugs (jaise extra Enter key) ko fix karna seekhenge.
 
 ---
@@ -10195,7 +10195,7 @@ Memory Address 0xAA (Contains binary: 01000010)
 ==================================================================================
 
 
-### 📚 Section Overview: Section 13 — Pointers
+### Section 13: Pointers
 Is section mein hum pointers ka absolute foundational aur advanced level cover karenge. Pointers C programming aur embedded systems ki jaan hain. Hum memory organization se lekar dereferencing, arithmetic aur hardware peripheral registers tak sab kuch practically samjhenge.
 
 ---
@@ -14394,7 +14394,7 @@ Total keywords across all subtopics in this topic: 122
 
 ---
 
-### 🌐 Section 19: Bitwise Shift Operators Basics
+### Section 19: Bitwise Shift Operators Basics
 *(Is section mein hum shift operators ki mathematical mechanics aur memory level behavior samjhenge.)*
 
 ### 🎯 1. Shift Operators Mechanics & Mathematics
@@ -14907,7 +14907,7 @@ Total keywords across all subtopics in this topic: 20
 
 ---
 
-### 🌐 Section 20: Looping
+### Section 20: Looping
 *(Is section mein hum looping statements ki mechanics aur embedded systems mein unke critical use-cases, jaise "Super Loops" aur delays, explore karenge.)*
 
 ---
@@ -16085,7 +16085,7 @@ Total keywords across all subtopics in this topic: 28
 ==================================================================================
 
 
-### 🗂️ Section 21: Overview: Type Qualifier 'const'
+### Section 21: Type Qualifier 'const'
 Is section mein hum `const` keyword ka deep dive karenge — basic syntax se lekar memory (RAM/ROM) architecture aur pointers ke saath uske complex combinations tak. Yeh embedded systems (jaise STM32) aur C programming ka sabse critical safety feature hai.
 
 ---
@@ -16619,7 +16619,7 @@ Total keywords across all subtopics in this topic: 23
 ==================================================================================
 
 
-### 🌐 Section Overview: 22 - Pin Read Exercise Concept & Validation
+### Section 22: Pin Read Exercise Concept & Validation
 Is section mein hum samjhenge ki ek microcontroller pin ki digital value (HIGH/LOW) ko manually kaise read kiya jaata hai, hardware logic kaise test karte hain, aur code likhne se pehle official documentation use karke pin ki availability (Free I/O) verify karna kyun zaroori hai.
 
 ---
@@ -17481,7 +17481,7 @@ Total keywords across all subtopics in this topic: 54
 ==================================================================================
 
 
-### 🌐 Section Overview: 23 - Optimization
+### Section 23: Optimization
 Is section mein hum samjhenge ki compiler code ko "optimize" (fast aur chhota) kaise karta hai, GCC compiler ke alag-alag optimization levels kya hote hain, IDE mein inko kaise set karein, aur sabse important: zyada optimization se humara code achanak chalna kyun band ho jata hai (aur usse `volatile` keyword se kaise fix karte hain).
 
 ---
@@ -17915,7 +17915,7 @@ Total keywords across all subtopics in this topic: 56
 ==================================================================================
 
 
-### 📘 Section Overview: 24 — 'volatile' type qualifier
+### 📘 Section 24: 'volatile' type qualifier
 Is section mein hum Embedded 'C' (hardware-level programming language) ka ek sabse critical concept — **volatile** type qualifier samajhne wale hain. Hum dekhenge ki kaise compiler (code ko machine language mein convert karne wala program) aggressive optimization karke aapka code tod sakta hai, aur kaise `volatile` use karke hum compiler ko control karte hain.
 
 Chalo ek-ek karke saare topics ko deep dive karte hain!
@@ -21183,7 +21183,7 @@ Total Time Calculation:
 ==================================================================================
 
 
-### 📚 Section Overview: Section 29 — Arrays
+### Section 29: Arrays
 Is section mein hum 'C' programming ke sabse important foundational concepts mein se ek — **Arrays** — ko deep dive karenge. Hum samjhenge ki arrays memory mein kaise store hote hain, initialization ke tareeqe, Variable Length Arrays (VLA), pointer arithmetic ke through read/write, aur finally arrays ko functions mein pass karne ka real-world tareeqa, ending with a complete swap program.
 
 Chalo Topic-by-Topic isko master karte hain!
@@ -22103,7 +22103,7 @@ Total keywords across all subtopics in this topic: 106
 ==================================================================================
 
 
-### 📚 Section Overview: Section 30 — Strings
+### Section 30: Strings
 Is section mein hum 'C' programming ke sabse tricky aur important topic ko cover karenge: **Strings**. 'C' mein strings doosri languages (jaise Python ya Java) ki tarah simple nahi hote; yahan strings directly memory (RAM aur ROM) aur arrays se jude hote hain. Hum memory structure, string literals, scan sets, aur end mein ek real-world Student Record Management system ko master karenge.
 
 ---
@@ -22817,7 +22817,7 @@ Total keywords across all subtopics in this topic: 105
 ==================================================================================
 
 
-### 🌟 Section Overview: 31 — Pre-Processor directives in 'C'
+### 🌟 Section 31: Pre-Processor directives in 'C'
 Is section mein hum 'C' programming ke ek bohot important phase — **Pre-processing** — ko samjhenge. Speaker detail mein batata hai ki pre-processor directives kya hote hain, macro definition aur textual replacement kaise kaam karta hai, conditional compilation se code blocks ko on/off kaise karte hain, aur embedded system programming mein inka real-world practical use kya hai.
 
 Chalo ek-ek karke in deep topics ko kholte hain!
