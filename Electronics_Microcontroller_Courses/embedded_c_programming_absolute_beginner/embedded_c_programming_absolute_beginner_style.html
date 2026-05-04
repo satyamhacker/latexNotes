@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded C Programming Absolute Beginner</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Highlight CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark-reasonable.min.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Color Palette - Deep Dark Theme */
+            --bg-primary: #0f1115;
+            --bg-secondary: #161b22;
+            --text-primary: #ffffff; /* Pure white for better readability */
+            --text-secondary: #e6edf3; /* Much brighter grey */
+            --accent-blue: #58a6ff;
+            --accent-gradient: linear-gradient(135deg, #61dafb 0%, #4facfe 100%);
+            --border-color: #30363d;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3rem;
+            border-bottom: 3px solid var(--border-color);
+        }
+
+        h2 {
+            color: var(--text-primary);
+            font-size: 2rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Topic & Module Sections - Big Bold Blue */
+        h2.topic-section, h2.module-section {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4facfe;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-left: 5px solid #4facfe;
+            padding-left: 1rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Mac-Style Code Blocks */
+        pre.mac-window {
+            background: #0d1115;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin: 2rem 0;
+            
+            /* STRICT WRAPPING FOR PDF */
+            white-space: pre-wrap !important;
+            word-break: break-word !important; 
+            overflow-x: hidden !important;
+        }
+
+        .code-header {
+            background: #161b22;
+            padding: 8px 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Dots helper */
+        .control { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            white-space: pre-wrap !important; 
+            word-wrap: break-word !important;
+        }
+        
+        pre > code {
+            display: block;
+            padding: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background: #1c2128;
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1rem;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+            flex-shrink: 0;
+            box-sizing: border-box;
+        }
+
+        .sidebar a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            transition: background 0.2s, color 0.2s;
+            margin-bottom: 0.2rem;
+            line-height: 1.4;
+        }
+
+        .sidebar a.h2-link {
+            padding-left: 1.5rem;
+        }
+        .sidebar a.h3-link {
+            padding-left: 2.5rem;
+        }
+
+        .sidebar a:hover {
+            background: rgba(88, 166, 255, 0.12);
+            color: var(--accent-blue);
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        /* Blockquote */
+        blockquote {
+            border-left: 4px solid var(--accent-blue);
+            background: rgba(88, 166, 255, 0.06);
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        #loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            z-index: 1000;
+        }
+
+        /* CRITICAL PRINT STYLES - DO NOT MODIFY */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            body { margin: 0; padding: 0; }
+            
+            .print-wrapper {
+                background-color: #0f1115 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                min-height: 100vh;
+                width: 100%;
+                position: absolute; top: 0; left: 0;
+                margin: 0; padding: 0;
+            }
+
+            /* Force white text for readability */
+            .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th {
+                color: #ffffff !important;
+            }
+
+            /* Keep code blocks distinct */
+            pre {
+                border: 1px solid #444;
+                page-break-inside: avoid;
+            }
+
+            .sidebar, .copy-btn, .window-controls, #loader {
+                display: none !important;
+            }
+
+            .layout {
+                display: block;
+            }
+            
+            .main-content { padding: 2rem !important; margin: 0 auto; max-width: 100%; }
+            
+            a { text-decoration: none !important; border-bottom: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div id="loader">Loading...</div>
+    
+    <!-- WRAPPER IS MANDATORY FOR PRINTING BACKGROUNDS -->
+    <div class="print-wrapper" style="display: none;" id="print-wrapper">
+        <div class="layout">
+            <nav class="sidebar" id="sidebar">
+                <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem; color: var(--accent-blue);">Contents</div>
+                <!-- TOC goes here -->
+            </nav>
+            <main class="main-content" id="content-area">
+                <!-- Markdown content goes here -->
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+    <script>
+        function copyCode(btn, codeToCopy) {
+            navigator.clipboard.writeText(decodeURIComponent(codeToCopy)).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                }, 2000);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const contentArea = document.getElementById('content-area');
+            const sidebar = document.getElementById('sidebar');
+            const loader = document.getElementById('loader');
+            const wrapper = document.getElementById('print-wrapper');
+
+            // Fetch the markdown file
+            fetch('embedded_c_programming_absolute_beginner.md')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Could not fetch the markdown file.");
+                    }
+                    return response.text();
+                })
+                .then(markdown => {
+                    let processed = markdown;
+                    
+                    // Convert "# Section X:" to "## MODULE_MARKER Section X:"
+                    processed = processed.replace(/^#\s+(Section\s+\d+.*)/gm, '## MODULE_MARKER $1');
+                    
+                    // Convert "### 🎯 X. Topic Y:" to "## TOPIC_MARKER 🎯 X. Topic Y:"
+                    processed = processed.replace(/^###\s+(🎯.*)/gm, '## TOPIC_MARKER $1');
+                    
+                    // Convert "1.1:" to bold
+                    processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
+
+                    const renderer = new marked.Renderer();
+                    
+                    renderer.code = function(code, language) {
+                        const safeCode = code ? String(code) : '';
+                        let highlighted = safeCode;
+                        if (language && hljs.getLanguage(language)) {
+                            try {
+                                highlighted = hljs.highlight(safeCode, { language: language }).value;
+                            } catch (e) { highlighted = hljs.highlightAuto(safeCode).value; }
+                        } else {
+                            highlighted = hljs.highlightAuto(safeCode).value;
+                        }
+                        
+                        const encodedCode = encodeURIComponent(safeCode);
+
+                        return `
+                        <pre class="mac-window">
+                            <div class="code-header">
+                                <div class="window-controls">
+                                    <span class="control red"></span>
+                                    <span class="control yellow"></span>
+                                    <span class="control green"></span>
+                                </div>
+                                <button class="copy-btn" onclick="copyCode(this, '${encodedCode}')">Copy</button>
+                            </div>
+                            <code class="hljs language-${language || 'plaintext'}">${highlighted}</code>
+                        </pre>`;
+                    };
+                    
+                    const toc = [];
+
+                    renderer.heading = function(text, level) {
+                         const safeText = text ? String(text) : '';
+                         const id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+                         
+                         let finalHtml = '';
+                         let cleanText = safeText;
+
+                         if (safeText.startsWith('MODULE_MARKER ')) {
+                             cleanText = safeText.replace('MODULE_MARKER ', '');
+                             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                             finalHtml = `<h${level} class="module-section" id="${cleanId}">${cleanText}</h${level}>`;
+                             toc.push({ text: cleanText, id: cleanId, level: level });
+                         }
+                         else if (safeText.startsWith('TOPIC_MARKER ')) {
+                             cleanText = safeText.replace('TOPIC_MARKER ', '');
+                             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                             finalHtml = `<h${level} class="topic-section" id="${cleanId}">${cleanText}</h${level}>`;
+                             toc.push({ text: cleanText, id: cleanId, level: level });
+                         }
+                         else {
+                             finalHtml = `<h${level} id="${id}">${safeText}</h${level}>`;
+                             if (level <= 3 && !safeText.includes('MODULE_MARKER') && !safeText.includes('TOPIC_MARKER')) {
+                                 toc.push({ text: safeText, id: id, level: level });
+                             }
+                         }
+
+                         return finalHtml;
+                    };
+
+                    contentArea.innerHTML = marked.parse(processed, { renderer: renderer });
+
+                    let tocHtml = '';
+                    toc.forEach(item => {
+                        let linkClass = '';
+                        if(item.level === 2) linkClass = 'h2-link';
+                        if(item.level === 3) linkClass = 'h3-link';
+                        
+                        tocHtml += `<a href="#${item.id}" class="${linkClass}">${item.text}</a>`;
+                    });
+                    
+                    sidebar.innerHTML += tocHtml;
+
+                    loader.style.display = 'none';
+                    wrapper.style.display = 'block';
+                })
+                .catch(err => {
+                    loader.innerText = 'Error loading markdown: ' + err.message;
+                    console.error(err);
+                });
+        });
+    </script>
+</body>
+</html>
