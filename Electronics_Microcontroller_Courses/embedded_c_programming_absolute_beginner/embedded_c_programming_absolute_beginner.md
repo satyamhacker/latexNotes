@@ -3338,7 +3338,7 @@ Total keywords across all subtopics in this response: 53
 ==================================================================================
 
 
-### 📚 Section 5: Address of Variables (Overview)
+### Section 5: Address of Variables (Overview)
 Is section mein hum C programming ke hardware-level concepts mein dive karenge. Hum dekhenge ki variables memory mein physically kahan store hote hain, unka memory address kaise nikalte hain, aur pointers ke basics kya hain. Yeh section architecture-specific behavior (jaise 32-bit vs 64-bit) aur compiler warnings ko bhi deep mein cover karta hai.
 
 ---
@@ -17915,7 +17915,7 @@ Total keywords across all subtopics in this topic: 56
 ==================================================================================
 
 
-### 📘 Section 24: 'volatile' type qualifier
+### Section 24: 'volatile' type qualifier
 Is section mein hum Embedded 'C' (hardware-level programming language) ka ek sabse critical concept — **volatile** type qualifier samajhne wale hain. Hum dekhenge ki kaise compiler (code ko machine language mein convert karne wala program) aggressive optimization karke aapka code tod sakta hai, aur kaise `volatile` use karke hum compiler ko control karte hain.
 
 Chalo ek-ek karke saare topics ko deep dive karte hain!
@@ -18746,7 +18746,7 @@ Defensive Qualifier Impact Matrix
 
 ***
 
-# 📂 Section 25: Structures and Bit fields (Part 1)
+# Section 25: Structures and Bit fields (Part 1)
 
 Is section mein hum C programming ke us feature ko explore karenge jo scattered data ko ek single packet mein baandhta hai, aur kaise processor us data ko memory mein arrange aur access karta hai (Memory Alignment & Padding).
 
@@ -19451,7 +19451,7 @@ Fields:       |             Payload (12 bits)       | Status (1 bit)| CRC (2)|..
 
 ***
 
-# 📂 Section 26: Unions
+# Section 26: Unions
 
 Is section mein hum samjhenge ki kaise 'C' programming hume restricted memory environment (jaise microcontrollers) mein ek hi memory space ko alag-alag variables ke liye share karne ki azaadi deti hai using Unions.
 
@@ -22817,7 +22817,7 @@ Total keywords across all subtopics in this topic: 105
 ==================================================================================
 
 
-### 🌟 Section 31: Pre-Processor directives in 'C'
+### Section 31: Pre-Processor directives in 'C'
 Is section mein hum 'C' programming ke ek bohot important phase — **Pre-processing** — ko samjhenge. Speaker detail mein batata hai ki pre-processor directives kya hote hain, macro definition aur textual replacement kaise kaam karta hai, conditional compilation se code blocks ko on/off kaise karte hain, aur embedded system programming mein inka real-world practical use kya hai.
 
 Chalo ek-ek karke in deep topics ko kholte hain!
