@@ -1,28 +1,3 @@
-I have deeply internalized your prompt. The material you provided covers **13 distinct concepts** across three sections (Introduction, IDE Installation, First C Program). Because the total number of concepts exceeds 12, I will output in **chunks**.
-
-Below is the **DEPENDENCY MAP** followed by **CHUNK 1** (Concepts 1–7).  
-Reply **CONTINUE** for the next chunk (Concepts 8–13).
-
----
-
-## DEPENDENCY MAP (Strict Study Order)
-
-```
-Concept 1: Embedded Programming Languages       → no dependencies (start here)
-Concept 2: C Standardization History            → needs Concept 1 (understanding of C language)
-Concept 3: IDE Introduction & Download          → needs Concept 1, Concept 2 (why C, what standards)
-Concept 4: STM32CubeIDE Installation Process    → needs Concept 3
-Concept 5: Host Compiler Setup (Windows/Linux/Mac) → needs Concept 3 (understanding of compiler role)
-Concept 6: Workspace Architecture & Project Import → needs Concept 4, Concept 5
-Concept 7: Creating Host and Target Projects    → needs Concept 6, Concept 5
-Concept 8: Target Hardware Overview (STM32F407) → no dependencies (can learn anytime, but practical after Concept 7)
-Concept 9: Writing the First C Program          → needs Concept 5, Concept 7 (host compiler and project setup)
-Concept 10: Escape Sequences and New Lines      → needs Concept 9
-Concept 11: Advanced Escape Sequences           → needs Concept 10
-Concept 12: Printing Special Characters         → needs Concept 10, Concept 11
-Concept 13: Code Commenting                     → needs Concept 9 (can be learned anytime after writing code)
-```
-
 ---
 
 # CHUNK 1 — Concepts 1 to 7
