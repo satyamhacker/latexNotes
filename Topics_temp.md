@@ -603,9 +603,7 @@ Terminal manipulation, searching, aur text processing ke tools. [⚠️ Derived]
    Topic 7: Text Processing & Log Analysis [⚠️ Derived]
 ```
 
-⏳ **Waiting for:** Next part of the audit or 'CONTINUE' command.
 
-▶️ Resuming from: Topic 7: Text Processing & Log Analysis
 
 ===== 3: System Administration & Security Foundations [⚠️ Derived]=====
 User identities, permissions, and service management ka core admin layer. [⚠️ Derived]
@@ -1683,8 +1681,6 @@ Monolithic aur Microservices architectures ka comparison, unke pros/cons, aur re
 📊 PHASE SUMMARY:
 s: 2 | Topics: 5 | Subtopics: 50
 
-
-▶️ Resuming from:  10 — Software Architecture Models
 
   Topic 6: Microservices Architecture
     Subtopics: Independent Services Concept, Decentralized Data, Service Communication Patterns, Tech Stack Diversity, Independent Scaling, Resilience & Isolation
@@ -3411,7 +3407,7 @@ Terraform project ko organized aur repeatable banane ka tarika. [⚠️ Derived]
 s: 3 | Topics: 6 | Subtopics: 62
 
 
-▶️ Resuming from:  4: Provisioners, Outputs & State [⚠️ Derived]
+
 
 ===== 4: Provisioners, Outputs & State [⚠️ Derived]=====
 Server banne ke baad ki automation aur Terraform ki memory (state) ka management. [⚠️ Derived]
@@ -3568,7 +3564,7 @@ s: 3 | Topics: 6 | Subtopics: 56
 
 **Waiting for:** Type 'CONTINUE' to get the next part.
 
-▶️ Resuming from:  7: State Migration & Disaster Recovery [⚠️ Derived]
+
 
 ===== 7: State Migration & Disaster Recovery [⚠️ Derived]=====
 Existing infrastructure ko state mein lana aur corruption se bachne ke advanced commands. [⚠️ Derived]
@@ -3729,7 +3725,6 @@ s: 3 | Topics: 6 | Subtopics: 24
 
 **Waiting for:** Type 'CONTINUE' to get the next part.
 
-▶️ Resuming from:  10: Zero-Downtime & Optimization [⚠️ Derived]
 
 ===== 10: Zero-Downtime & Optimization [⚠️ Derived]=====
 High-availability aur efficiency ke liye advanced Terraform tuning aur troubleshooting. [⚠️ Derived]
@@ -4099,7 +4094,6 @@ Conditionals, loops, templates, and modular structure. [⚠️ Derived]
 s: 3 | Topics: 10 | Subtopics: 45
 
 
-▶️ Resuming from:  4: Security, Cloud & Multi-Platform [⚠️ Derived]
 
 ===== 4: Security, Cloud & Multi-Platform [⚠️ Derived]=====
 AWS automation setup, system security controls, aur multi-platform management secrets. [⚠️ Derived]
@@ -4241,7 +4235,7 @@ Error handling, idempotency verification, testing frameworks, aur async operatio
 s: 2 | Topics: 5 | Subtopics: 25
 
 
-▶️ Resuming from:  6: Scaling, Performance & Architect Ops [⚠️ Derived]
+
 
 ===== 6: Scaling, Performance & Architect Ops [⚠️ Derived]=====
 Enterprise-level tuning, rolling updates, modern containerized execution, aur multi-stack management. [⚠️ Derived]
@@ -4463,9 +4457,7 @@ Cloud infrastructure ka base aur uski monitoring — Bina sahi network aur logs 
    Topic 2: Subnet Masking & IP Math
 ```
 
-⏳ **Waiting for:** Next phase/module notes (or type CONTINUE for Topic 3 & 4)
 
-▶️ Resuming from: Overlap Prevention
 
 --21--AWS Networking & Monitoring--
   Topic 3: VPC Components: NAT, IGW, Route Tables & Traffic Flow
@@ -5506,12 +5498,7 @@ K8s ki smallest unit se lekar complex controllers tak ka safar. [⚠️ Derived]
   - Live Production Phase: Traffic spike mein HPA automatically pods badhata hai (e.g. 5 se 50 pods).
   - Additional context: Netflix video streaming scenario mein autoscaling ka use.
 
---- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far :  1 (Topic 1, 2),  2 (Topic 3, 4)
-⏳ Remaining        :  3 (Networking),  4 (Config),  5 (Advanced),  6 (Storage),  7 (Resilience),  8 (Observability),  9 (Patterns)
-📊 Progress         : 2 sections done / 9 sections total | 4 topics done / 22 topics total | 18 subtopics done / 95 subtopics total
 
-▶️ Resuming from: Topic 5 — Services & Network Endpoints [⚠️ Derived]
 
 ===== 3: Networking & Traffic Management [⚠️ Derived]=====
 Cluster ke andar aur bahar traffic ko sahi rasta dikhane ka system. [⚠️ Derived]
@@ -5602,12 +5589,7 @@ Stateful apps aur dynamic configurations ko manage karne ke advanced tarike. [�
   - Live Production Phase: AWS Secrets Manager se ESO ke through secrets sync karna cluster mein.
   - Additional context: Production mein sensitive data ke liye `etcd encryption` mandatory bataya gaya hai.
 
---- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far :  1, 2, 3, 4 (up to Topic 8)
-⏳ Remaining        :  5 (Advanced Scheduling),  6 (RBAC & Helm),  7 (Health & Resiliency),  8 (Storage),  9 (Observability & Backups)
-📊 Progress         : 4 sections done / 9 sections total | 8 topics done / 22 topics total | 33 subtopics done / 95 subtopics total
 
-▶️ Resuming from:  5 — Advanced Scheduling & Resource Governance [⚠️ Derived]
 
 ===== 5: Advanced Scheduling & Resource Governance [⚠️ Derived]=====
 Nodes par pods ki placement control karna aur namespace level par boundary set karna. [⚠️ Derived]
@@ -5701,12 +5683,7 @@ Permissions ka "who, what, where" aur complex deployments ko simplify karne ka s
   - Live Production Phase: Multiple environments (Dev/Prod) ke liye different values files use karke same chart deploy karna.
   - Additional context: Revision history dekh kar purane version par wapas jana (`helm rollback`).
 
---- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far :  1, 2, 3, 4, 5, 6
-⏳ Remaining        :  7 (Lifecycle & Health),  8 (Networking Phase 2),  9 (Security & Policy),  10 (Resilience & DR),  11 (Observability),  12 (Patterns)
-📊 Progress         : 6 sections done / 12 sections total | 12 topics done / 35 topics total | 50 subtopics done / 150 subtopics total
 
-▶️ Resuming from:  7 — Lifecycle, Health & Graceful Shutdown [⚠️ Derived]
 
 ===== 7: Lifecycle, Health & Graceful Shutdown [⚠️ Derived]=====
 Pod ki sehat monitor karna aur usey tameez se band karne ka tareeka. [⚠️ Derived]
@@ -5800,12 +5777,7 @@ Cluster networking ke internals aur traffic security ke rules. [⚠️ Derived]
   - Live Production Phase: Three-tier app mein Backend ko sirf Frontend se baat karne ki permission dena.
   - Additional context: Security audits aur lateral movement rokne ke liye best practice.
 
---- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far :  1, 2, 3, 4, 5, 6, 7, 8
-⏳ Remaining        :  9 (Security & Policy),  10 (Storage & CSI),  11 (Resilience & DR),  12 (Observability),  13 (Advanced Patterns)
-📊 Progress         : 8 sections done / 13 sections total | 16 topics done / 35 topics total | 68 subtopics done / 150 subtopics total
 
-▶️ Resuming from:  9 — Security Governance & Policy Enforcement [⚠️ Derived]
 
 ===== 9: Security Governance & Policy Enforcement [⚠️ Derived]=====
 Pod levels par security context set karna aur cluster-wide rules enforce karna. [⚠️ Derived]
@@ -5899,12 +5871,7 @@ Stateless cluster mein data ko permanently save karne ka mechanism. [⚠️ Deri
   - Live Production Phase: Shared storage (RWX) use karke multiple pods mein logs/configs share karna.
   - Additional context: Database pods ke liye RWO (single-writer) ka usage scenario.
 
---- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far :  1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-⏳ Remaining        :  11 (Resilience & Scaling),  12 (Backup & DR),  13 (Observability),  14 (Advanced Patterns)
-📊 Progress         : 10 sections done / 14 sections total | 20 topics done / 35 topics total | 87 subtopics done / 150 subtopics total
 
-▶️ Resuming from:  11 — Advanced Resilience & Scaling [⚠️ Derived]
 
 ===== 11: Advanced Resilience & Scaling [⚠️ Derived]=====
 Cluster ko workload ke hisaab se dynamic banana aur nodes/pods ko automatically manage karna. [⚠️ Derived]
@@ -5998,12 +5965,7 @@ Cluster state aur application data ko safe rakhne aur restore karne ki strategy.
   - Live Production Phase: Quarterly restore drills perform karke RTO/RPO metrics verify karna.
   - Additional context: Ransomware protection aur cluster migration scenarios.
 
---- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far :  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
-⏳ Remaining        :  13 (Observability),  14 (Advanced Patterns & Cost)
-📊 Progress         : 12 sections done / 14 sections total | 24 topics done / 33 topics total | 102 subtopics done / 130 subtopics total
 
-▶️ Resuming from:  13 — Observability & Cluster Insights [⚠️ Derived]
 
 ===== 13: Observability & Cluster Insights [⚠️ Derived]=====
 Cluster ki health track karna aur metrics/logs ke through "black box" ke andar dekhna. [⚠️ Derived]
