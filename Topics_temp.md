@@ -94,28 +94,6 @@ DevOps ka core concept, uski zaroorat, aur industry mein uska role samajhna.
 
 ---
 
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-- [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya — depth level, coverage angle, content volume, key terms, emphasis sab filled hain (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya — notes mein aaya har ek word/phrase/command/term/code capture kiya, emphasized terms ⭐ se mark kiye, unclear terms [unclear] se flag kiye, version numbers ⭐X.x[version] se mark kiye (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya — notes mein jo bhi real-world flow tha woh capture kiya. Agar N/A toh clearly likha. Theoretical topics ke liye Learning/Application/Mastery phases use kiye.
-- [x] Diagrams/tables reproduced ya flagged — koi silently skip nahi ki.
-- [x] OCR quality warning di agar 20%+ content unclear tha.
-- [x] Phase tracking aur CONTINUE protocol follow kiya.
-- [x] Output limit aane se pehle ruka — ek complete Topic ke baad — aur CONTINUE message mein completed + remaining list + progress stats print kiye.
-- [x] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon?
-
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
@@ -125,12 +103,6 @@ DevOps ka core concept, uski zaroorat, aur industry mein uska role samajhna.
   Topic 3: DevOps Lifecycle & Tooling Ecosystem [⚠️ Derived]
   Topic 4: Industry Context & Interview Preparation [⚠️ Derived]
 
-📊 PHASE SUMMARY:
-s: 1 | Topics: 4 | Subtopics: 32
-
-**--- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.**
-
-⏳ **Waiting for:** Next phase/module notes
 
 
 ==================================================================================
@@ -229,21 +201,6 @@ Tooling installation aur cloud environment ko secure tarike se configure karna.
   - Additional context: Wildcard certs covering subdomains like api.company.com and app.company.com.
 
 ---
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 5, Topic 6...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-- [x] Subtopics flat comma-separated list mein hain.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya.
-- [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL, 🔑 KEYWORDS DUMP, aur 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] "P.T.O" and region-specific questions ko logic ke saath merge kiya.
-- [x] Chhote concepts (like analalogies/mistakes/FAQs) ko broad Topics mein merge kiya taaki skeleton compact rahe.
-
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
@@ -442,26 +399,6 @@ Zero-to-Hero level tak VM setup aur automation seekhne ka complete guide. [⚠�
 
 ---
 
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-- [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Diagrams/tables (pyramid, manual vs vagrant comparison) ko capture kiya.
-- [x] Phase tracking follow kiya.
-- [x] Chhote concepts ko broad Topics mein merge kiya (Topic count: 8).
-
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
@@ -1117,25 +1054,6 @@ Code management aur version control ka ultimate system — jo collaboration aur 
    Topic 7: Git Tags & Semantic Versioning
 ```
 
-⏳ **Waiting for:** Next phase/module notes
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko sequential numbering di.
-- [x] Har concept subtopic naam ki list mein add kiya (short names only).
-- [x] Subtopics flat comma-separated list mein hain.
-- [x] Koi bhi code/command paraphrase nahi kiya — KEYWORDS DUMP mein preserve kiya.
-- [x] Messy notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Zero hallucination.
-- [x] Chronological order preserved.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Diagrams/tables flagged.
-- [x] Output limit check kiya — complete response delivered.
-
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
@@ -1308,29 +1226,6 @@ Multiple servers ka coordination aur Linux services ki deep management. [⚠️ 
    Topic 5: Multi-VM Architecture & Systemd
 ```
 
-⏳ **Waiting for:** Next phase/module notes
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-- [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya — depth level, coverage angle, content volume, key terms, emphasis sab filled hain (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya — notes mein aaya har ek word/phrase/command/term/code capture kiya, emphasized terms ⭐ se mark kiye, unclear terms [unclear] se flag kiye, version numbers ⭐X.x[version] se mark kiye (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya — notes mein jo bhi real-world flow tha woh capture kiya. Agar N/A toh clearly likha. Theoretical topics ke liye Learning/Application/Mastery phases use kiye.
-- [x] Diagrams/tables reproduced ya flagged — koi silently skip nahi ki.
-- [x] OCR quality warning di agar 20%+ content unclear tha.
-- [x] Phase tracking aur CONTINUE protocol follow kiya.
-- [x] Output limit aane se pehle ruka — ek complete Topic ke baad — aur CONTINUE message mein completed + remaining list + progress stats print kiye.
-- [x] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon?
-
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
@@ -1465,29 +1360,6 @@ Data ko organize, store, aur transmit karne ke formats — DevOps aur Developmen
 ```
 
 ⏳ **Waiting for:** Next phase/module notes
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-- [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya — depth level, coverage angle, content volume, key terms, emphasis sab filled hain (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya — notes mein aaya har ek word/phrase/command/term/code capture kiya, emphasized terms ⭐ se mark kiye, unclear terms [unclear] se flag kiye, version numbers ⭐X.x[version] se mark kiye (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya — notes mein jo bhi real-world flow tha woh capture kiya. Agar N/A toh clearly likha. Theoretical topics ke liye Learning/Application/Mastery phases use kiye.
-- [x] Diagrams/tables reproduced ya flagged — koi silently skip nahi ki.
-- [x] OCR quality warning di agar 20%+ content unclear tha.
-- [x] Phase tracking aur CONTINUE protocol follow kiya.
-- [x] Output limit aane se pehle ruka — ek complete Topic ke baad — aur CONTINUE message mein completed + remaining list + progress stats print kiye.
-- [x] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon?
-
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
@@ -1638,27 +1510,6 @@ System ko refresh karna aur network darwaze sahi kholna DevOps ka basic usool ha
   - Live Production: Restricting DB access to specific subnets (e.g., 10.0.3.0/24) to prevent unauthorized internet access.
   - Additional context: Failing to restart leads to "Config vs Reality" mismatch where `SHOW VARIABLES` shows old values despite file edits.
 
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-- [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya — depth level, coverage angle, content volume, key terms, emphasis sab filled hain (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya — notes mein aaya har ek word/phrase/command/term/code capture kiya, emphasized terms ⭐ se mark kiye, unclear terms [unclear] se flag kiye, version numbers ⭐X.x[version] se mark kiye (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya — notes mein jo bhi real-world flow tha woh capture kiya. Agar N/A toh clearly likha. Theoretical topics ke liye Learning/Application/Mastery phases use kiye.
-- [x] Diagrams/tables reproduced ya flagged — koi silently skip nahi ki.
-- [x] OCR quality warning di agar 20%+ content unclear tha.
-- [x] Phase tracking aur CONTINUE protocol follow kiya.
-- [x] Output limit aane se pehle ruka — ek complete Topic ke baad — aur CONTINUE message mein completed + remaining list + progress stats print kiye.
-- [x] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon?
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -1816,19 +1667,6 @@ Monolithic aur Microservices architectures ka comparison, unke pros/cons, aur re
   - Additional context: MVP ke liye Monolith hi best hai.
 
 
---- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far :  9 (Topic 1, 2, 3, 4 fully extracted),  10 (Topic 5 fully extracted)
-⏳ Remaining        : Topic 6: Microservices Architecture, Topic 7: Architectural Strategy & Migration
-📊 Progress         : 2 sections done / 2 sections total | 5 topics done / 7 topics total | 50 subtopics done / 65 subtopics total
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL aur 🔑 KEYWORDS DUMP add kiya.
-- [x] Subtopics sirf short names hain.
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Grouping relentlessly applied (merged small commands and scenarios).
-
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
@@ -1845,7 +1683,6 @@ Monolithic aur Microservices architectures ka comparison, unke pros/cons, aur re
 📊 PHASE SUMMARY:
 s: 2 | Topics: 5 | Subtopics: 50
 
-⏳ **Waiting for:** 'CONTINUE' to finish remaining topics.
 
 ▶️ Resuming from:  10 — Software Architecture Models
 
@@ -1909,11 +1746,7 @@ s: 2 | Topics: 5 | Subtopics: 50
    Topic 7: Architectural Strategy & Migration
 ```
 
-**Double-check steps performed:**
-- [x] Har concept subtopic list mein added hai (names only).
-- [x] Code snippets aur commands KEYWORDS DUMP mein preserve kiye gaye hain.
-- [x] "HackerGuru Feedback" aur "FAQ" sections se key terms extract kiye gaye hain.
-- [x] Ruthless grouping applied (Merged additional commands and production scenarios into relevant topics).
+
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -2171,21 +2004,6 @@ Manual repetitive tasks ko "Chotu Robot" yani Bash scripts aur Cron jobs se auto
    Topic 10: Production Scripts & Best Practices
 ```
 
-⏳ **Waiting for:** Next phase/module notes
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di.
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya.
-- [x] Subtopics flat comma-separated list mein hain — no descriptions.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Output limit aane se pehle ruka — ek complete Topic ke baad.
-- [x] Chhote aur related concepts ko broad Topic mein merge kiya.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -2426,22 +2244,6 @@ Real DevOps scenarios, multi-server scripts, aur common pitfalls.
   Topic 8: Error Handling, Best Practices & Pitfalls
 ```
 
-⏳ **Waiting for:** Next phase/module notes
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-- [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya (N/A here as notes were structured).
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL, 🔑 KEYWORDS DUMP, aur 🔄 REAL-WORLD FLOW SIGNAL block add kiya.
-- [x] Diagrams/tables flagged — koi silently skip nahi ki.
-- [x] Phase tracking follow kiya.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -2583,21 +2385,7 @@ Persistent storage manage karna, command line tools, aur professional workflows.
 
 ---
 
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di.
-- [x] Har concept subtopic naam ki list mein add kiya (sirf short name).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — KEYWORDS DUMP mein preserve kiya.
-- [x] Messy notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Zero hallucination — koi bahari knowledge add nahi ki.
-- [x] Chronological order preserved.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Phase tracking follow kiya.
+
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -2721,25 +2509,7 @@ Legacy systems ko cloud infrastructure par fast aur secure tareeke se move karna
    Topic 4: S3 Security & Bucket Policies
 ```
 
-⏳ **Waiting for:** Next phase/module notes
 
----
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko sequential numbering di.
-- [x] Har concept subtopic list mein add kiya (short name only).
-- [x] Subtopics flat comma-separated list mein hain.
-- [x] Koi bhi code/command paraphrase nahi kiya — KEYWORDS DUMP mein preserve kiya.
-- [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Zero hallucination.
-- [x] Chronological order preserved.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Phase tracking aur CONTINUE protocol follow kiya.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -2861,26 +2631,6 @@ Application performance improve karne aur services ko decouple karne ke advanced
   Topic 7: Amazon MQ
   Topic 8: CloudFront (CDN)
 ```
-
-⏳ **Waiting for:** Next phase/module notes
-
----
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di.
-- [x] Har concept subtopic naam ki list mein add kiya (sirf short name).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya.
-- [x] Messy notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Zero hallucination.
-- [x] Chronological order preserved.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Phase tracking aur CONTINUE protocol follow kiya.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -3069,25 +2819,6 @@ Java ecosystem ka raja jo build process automate aur dependencies manage karta h
    Topic 7: Jenkins CI/CD Pipeline & Operational Practices
 ```
 
-⏳ **Waiting for:** Next phase/module notes
-
----
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko sequential numbering di.
-- [x] Har concept subtopic list mein add kiya (short name only).
-- [x] Subtopics flat comma-separated list mein hain.
-- [x] Koi bhi code/command paraphrase nahi kiya — KEYWORDS DUMP mein preserve kiya.
-- [x] Messy notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Zero hallucination.
-- [x] Chronological order preserved.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Phase tracking aur CONTINUE protocol follow kiya.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -3496,28 +3227,6 @@ Python script se AWS resources ko remotely control aur automate karne ka officia
   - Additional context: (N/A)
 
 
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-- [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya — depth level, coverage angle, content volume, key terms, emphasis sab filled hain (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya — notes mein aaya har ek word/phrase/command/term/code capture kiya, emphasized terms ⭐ se mark kiye, unclear terms [unclear] se flag kiye, version numbers ⭐X.x[version] se mark kiye (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya — notes mein jo bhi real-world flow tha woh capture kiya. Agar N/A toh clearly likha. Theoretical topics ke liye Learning/Application/Mastery phases use kiye.
-- [x] Diagrams/tables reproduced ya flagged — koi silently skip nahi ki.
-- [x] OCR quality warning di (Not needed - notes were clear).
-- [x] Phase tracking aur CONTINUE protocol follow kiya.
-- [x] Output limit aane se pehle ruka (Not needed - entire section fits).
-- [x] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon?
-
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
@@ -3678,24 +3387,9 @@ Terraform project ko organized aur repeatable banane ka tarika. [⚠️ Derived]
   - Fixing/Iteration Phase: Data sources use karke hamesha latest Ubuntu/Amazon Linux images fetch karna bina manually ID update kiye.
   - Live Production Phase: Dynamic mapping use karna taaki same code multiple regions (US-East vs Mumbai) mein bina modification ke chale.
 
---- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : [ 1: Terraform Introduction & Core Concepts (Topic 1, 2),  2: Terraform Workflow & CLI Essentials (Topic 3, 4),  3: File Structure & Variable Management (Topic 5, 6)]
-⏳ Remaining       : [ 4: Provisioners, Outputs & State (Topic 7, 8),  5: Advanced State & Security (Topic 9, 10),  6: Module Design & Testing (Topic 11, 12),  7: CI/CD & Policy as Code (Topic 13, 14),  8: Zero-Downtime & Optimization (Topic 15, 16)]
-📊 Progress        : 3 sections done / 8 sections total | 6 topics done / 16 topics total | 62 subtopics done / 150+ subtopics total
 
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di.
-- [x] Har concept subtopic naam ki list mein add kiya (sirf short name).
-- [x] Subtopics flat comma-separated list mein hain.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya.
-- [x] Messy/unstructured notes ko logically group kiya aur [⚠️ Derived] flag lagaya.
-- [x] Koi bhi bahari knowledge add nahi ki.
-- [x] Chronological order preserved.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL, 🔑 KEYWORDS DUMP, 🔄 REAL-WORLD FLOW SIGNAL blocks add kiye.
-- [x] Output limit aane se pehle ruka — ek complete Topic ke baad.
+
+
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -3716,7 +3410,6 @@ Terraform project ko organized aur repeatable banane ka tarika. [⚠️ Derived]
 📊 PHASE SUMMARY:
 s: 3 | Topics: 6 | Subtopics: 62
 
-**Waiting for:** Type 'CONTINUE' to get the next part.
 
 ▶️ Resuming from:  4: Provisioners, Outputs & State [⚠️ Derived]
 
@@ -3852,16 +3545,7 @@ Professional directory structure aur variable quality checks. [⚠️ Derived]
   - Application Phase: `validation` block add karna taaki user sirf allowed `instance_type` (e.g., t2.micro) hi select kar sake.
   - Mastery Phase: Complex `object` types aur `optional` attributes use karke production-grade configuration schema banana.
 
---- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : [ 1-3 (Prev response),  4: Provisioners, Outputs & State (Topic 7, 8),  5: Advanced State & Security (Topic 9, 10),  6: Code Organization & Variable Validation (Topic 11, 12)]
-⏳ Remaining       : [ 7: State Migration & Disaster Recovery (Topic 13, 14),  8: Module Design & Testing (Topic 15, 16),  9: CI/CD & Automation (Topic 17, 18),  10: Zero-Downtime & Optimization (Topic 19, 20)]
-📊 Progress        : 6 sections done / 10 sections total | 12 topics done / 20 topics total | 118 subtopics done / 150+ subtopics total
 
-**Double-check steps performed:**
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL, 🔑 KEYWORDS DUMP, 🔄 REAL-WORLD FLOW SIGNAL blocks add kiye.
-- [x] Subtopics flat comma-separated list mein hain (names only).
-- [x] Hinglish Policy follow ki.
-- [x] Output limit aane se pehle ruka — ek complete Topic ke baad.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai.**
 
@@ -4023,12 +3707,6 @@ Pipeline integration, approval gates, aur cost/policy checking. [⚠️ Derived]
 ⏳ Remaining       : [ 10: Zero-Downtime & Optimization (Topic 19, 20)]
 📊 Progress        : 9 sections done / 10 sections total | 18 topics done / 20 topics total | 142 subtopics done / 160+ subtopics total
 
-**Double-check steps performed:**
-- [x] Poore notes padhe aur logical s mein group kiya.
-- [x] Subtopics sirf short names hain (comma-separated list).
-- [x] 📊 SCOPE SIGNAL, 🔑 KEYWORDS DUMP, aur 🔄 REAL-WORLD FLOW SIGNAL blocks added (per topic).
-- [x] Code snippets preserve kiye KEYWORDS DUMP mein (exactly as notes).
-- [x] Output limit control: Complete Topic ke baad ruka.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai.**
 
@@ -5040,28 +4718,6 @@ Heavy Virtual Machines ko chhodo aur lightweight containers ki duniya mein aao. 
 
 ---
 
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-- [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya — depth level, coverage angle, content volume, key terms, emphasis sab filled hain (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya — notes mein aaya har ek word/phrase/command/term/code capture kiya, emphasized terms ⭐ se mark kiye, unclear terms [unclear] se flag kiye, version numbers ⭐X.x[version] se mark kiye (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya — notes mein jo bhi real-world flow tha woh capture kiya. Agar N/A toh clearly likha. Theoretical topics ke liye Learning/Application/Mastery phases use kiye.
-- [x] Diagrams/tables reproduced ya flagged — koi silently skip nahi ki.
-- [x] OCR quality warning di agar 20%+ content unclear tha.
-- [x] Phase tracking aur CONTINUE protocol follow kiya.
-- [x] Output limit aane se pehle ruka — ek complete Topic ke baad — aur CONTINUE message mein completed + remaining list + progress stats print kiye.
-- [x] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon?
-
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📊 PHASE SUMMARY:
 s: 2 | Topics: 7 | Subtopics: 58
@@ -5270,25 +4926,6 @@ Infrastructure ka evolution: Bungalow (VM) se Hotel Rooms (Containers) tak ka sa
    Topic 8: Deployment Strategies, Pitfalls & Interview Prep
 ```
 
-⏳ **Waiting for:** Next phase/module notes
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko sequential numbering di.
-- [x] Har concept subtopic list mein add kiya (names only).
-- [x] Subtopics flat comma-separated list mein hain (no descriptions).
-- [x] Code/command paraphrase nahi kiya (KEYWORDS DUMP mein).
-- [x] Zerohallucination policy followed.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya (⭐ prefix for emphasis).
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Diagrams/tables text format mein represent ya describe kiye.
-- [x] Output limit check kiya (Complete phase output).
-- [x] Related small concepts ko broad topics mein merge kiya.
-
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
@@ -5483,25 +5120,6 @@ Infrastructure ko isolate karne aur "Works on my machine" problem ko khatam karn
    Topic 7: Docker Compose (Orchestration)
 ```
 
-⏳ **Waiting for:** Next phase/module notes
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko sequential numbering di.
-- [x] Har concept subtopic list mein add kiya (names only).
-- [x] Subtopics flat comma-separated list mein hain (no descriptions).
-- [x] Code/command paraphrase nahi kiya (KEYWORDS DUMP mein).
-- [x] Zerohallucination policy followed.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya (⭐ prefix for emphasis).
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Diagrams/tables text format mein represent ya describe kiye.
-- [x] Output limit check kiya (Complete phase output).
-- [x] Related small concepts ko broad topics mein merge kiya.
-
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
@@ -5765,23 +5383,6 @@ Traditional server management se move karke isolated, lightweight, aur secure co
    Topic 10: Advanced Networking & Isolation
 ```
 
-⏳ **Waiting for:** Next phase/module notes
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko sequential numbering di.
-- [x] Har concept subtopic list mein add kiya (names only).
-- [x] Subtopics flat comma-separated list mein hain (no descriptions).
-- [x] Code/command paraphrase nahi kiya (KEYWORDS DUMP mein).
-- [x] Zerohallucination policy followed.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya (⭐ prefix for emphasis).
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Diagrams/tables text format mein represent ya describe kiye.
-- [x] Output limit check kiya (Phase fully extracted).
-- [x] Related small concepts ko broad topics mein merge kiya.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -6792,26 +6393,6 @@ DevOps experts ki tarah common galtiyon se bachna aur interview ke liye key poin
 ---
 
 ## ✅ FINAL CHECKLIST
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya.
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya.
-- [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Diagrams/tables flagged or summarized.
-- [x] Phase tracking aur CONTINUE protocol follow kiya.
-
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
-
 📋 EXTRACTED IN THIS PHASE:
 
  1: GitOps Fundamentals & Security Architecture [⚠️ Derived]
@@ -7024,24 +6605,6 @@ Dashboards banana aur production mistakes se bachna. [⚠️ Derived]
 
 ---
 
-## ✅ FINAL CHECKLIST
-
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko s mein group kiya — related topics ek  mein hain.
-- [x] Har  ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya.
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya.
-- [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-- [x] Diagrams/tables summarizes in descriptions or keywords.
-- [x] Phase tracking aur CONTINUE protocol follow kiya.
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har , har Topic, har keyword, aur har real-world flow signal captured hai.**
 
