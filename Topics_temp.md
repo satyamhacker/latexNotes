@@ -2792,3 +2792,58 @@ Production Phase: Kubernetes ya AWS Load Balancer har 30 second mein is endpoint
 
 
 ==================================================================================
+
+
+# section 21: Enterprise Auth with JWT & Passport
+
+=====Section 21: Enterprise Auth with JWT & Passport=====
+Is section mein industry-standard JSON Web Tokens (JWT) aur Passport.js library ka use karke secure stateless authentication seekhenge.
+
+--21--Enterprise Auth with JWT & Passport--
+  Topic 1: JWT Implementation & Strategies
+    Subtopics: JWT vs Sessions, @nestjs/jwt Installation, Sign and Verify, Payload Structure, Expiry (TTL) Settings, AuthGuard Extension
+
+[📊 SCOPE SIGNAL for Topic 1:
+  - Depth Level: Deep
+  - Coverage Angle: Both
+  - Context: Stateless authentication setup for Web and Mobile clients.
+  - Key terms: JWT, Bearer Token, Passport, Strategy, Guard.
+  - Speaker Emphasis: JWT use karne se server ko session store karne ki zaroorat nahi padti, jo scalability ke liye best hai.
+  ]
+
+🔑 KEYWORDS DUMP for Topic 1:
+  [⭐@nestjs/passport, ⭐passport-jwt, JwtModule.register(), ⭐SecretKey, sign(), ⭐AuthGuard('jwt'), Bearer Token, Authorization Header, ExtractJwt, Payload, Stateless]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+  - Testing Phase: Developer Login route hit karta hai aur response mein ek lambi "Token" string receive karta hai.
+  - Fixing Phase: Agar token expire ho jaye toh "401 Unauthorized" error ko handle kiya jata hai.
+  - Production Phase: Mobile app har request ke header mein ye token bhejti hai, aur server bina DB query kiye user ko identify kar leta hai.
+
+==================================================================================
+
+# section 22: Microservices Architecture
+
+
+=====Section 22: Microservices Architecture=====
+Is section mein hum Monolith app ko alag-alag services mein todne aur unke beech communication (Message Brokers) setup karna seekhenge.
+
+--22--Microservices Architecture--
+  Topic 1: Transporters & Distributed Systems
+    Subtopics: Microservice Patterns, TCP Transporter, Redis/RabbitMQ/Kafka Brokers, MessagePattern Decorator, EventPattern, ClientProxy
+
+[📊 SCOPE SIGNAL for Topic 1:
+  - Depth Level: Deep
+  - Coverage Angle: Conceptual + Practical
+  - Context: Badi applications ko multiple servers par distribute karna.
+  ]
+
+🔑 KEYWORDS DUMP for Topic 1:
+  [⭐Transport.TCP, ⭐ClientProxy, MicroserviceOptions, ⭐@MessagePattern(), ⭐@EventPattern(), emit() vs send(), RabbitMQ, Broker, Hybrid Apps, Scaling]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+  - Application Phase: Jab user sign up karta hai, "Auth Service" ek event emit karti hai jise "Email Service" pakad kar welcome mail bhejti hai.
+  - Mastery Phase: Enterprise level par agar traffic badhta hai, toh hum sirf "Order Service" ke naye instances deploy karte hain bina baaki app ko touch kiye.
+
+==================================================================================
+
+
