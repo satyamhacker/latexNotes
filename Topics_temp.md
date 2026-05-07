@@ -1387,200 +1387,187 @@ Sections: 1 | Topics: 5 | Subtopics: 35
 
 
 =====Section 11: Authentication From Scratch=====
-Speaker basic CRUD operations se aage badhkar application mein ek robust authentication system build karna sikhata hai.
+Speaker yahan NestJS mein authentication system ko zero se build karne ka poora workflow, security practices (hashing, salting), aur session management (cookies) explain karta hai.
 
---11--Authentication From Scratch--
-  Topic 1: Auth Flow & Architecture Strategy
-    Subtopics: Initial Take Review, Diversion Explanation, Signup Intent, Signin Logic, Email Uniqueness, Password Encryption, Database Storage, Cookie Response, Cookie Management, Follow-up Requests, Service Separation Strategy, Option One vs Two, Feature Scalability, Dependency Hierarchy
+--11--Authentication Architecture & Service Setup--
+  Topic 1: Authentication Flow & Service Design
+    Subtopics: Client Server Interaction, Auth Flow Diagram, Unique Email Rule, Service Design Options, Option 2 Auth Service, Dependency Injection Hierarchy
 
   [📊 SCOPE SIGNAL for Topic 1:
   - Depth Level: Moderate
-  - Coverage Angle: Both
-  - Transcript mein content volume: Long explanation about architectural decisions and the conceptual flow between client and server.
-  - Key terms from transcript: Authentication flow, signup, signin, email uniqueness, encryption, cookies, user service, auth service, dependency injection.
-  - Explicit emphasis by speaker: Speaker ne unique email address aur password encryption ki importance highlight ki hai. Option 2 (separate Auth Service) ko larger applications ke liye better bataya hai.
-  - Speaker ne jo analogies/examples use kiye: "Ping pong" analogy client aur server ke beech ke communication ke liye use ki gayi hai.
+  - Coverage Angle: Conceptual + Architecture
+  - Transcript mein content volume: Long explanation with diagrams comparison.
+  - Key terms from transcript: Ping pong flow, Post request, unique email, Auth Service, User Service, Repository.
+  - Explicit emphasis by speaker: "Option 2 is better for larger apps" — speaker ne scalability pe focus kiya.
+  - Speaker ne jo analogies/examples use kiye: "ID of 50" example for cookie representation.
   ]
 
   🔑 KEYWORDS DUMP for Topic 1:
-  [initial take, controller, service, typeorm, records, signup, signin, auth slash signup, email, password, uniqueness, ⭐encrypt, database, cookie, ID, browser, mobile device, follow-up request, fetch user, standard flow, infrastructure, query, users service, authentication service, scalable, preferences, password reset, bad pattern, split services]
+  [ping pong flow, client, server, post request, `/auth/signup`, email, password, unique email address, encrypt password, ⭐cookie, ID 50, standard authentication flow, Option 1, Option 2, ⭐Auth Service, User Service, User Repository, dependency injection, hierarchy, injectable, providers]
 
   🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-  - Testing/Offline Phase: Developer shuruat mein basic CRUD operations (get, update, delete) test karta hai. Phir signup aur signin ke liye routes define karta hai.
-  - Fixing/Iteration Phase: Agar user duplicate email use kare toh server error return karta hai. Developer architecture decide karta hai ki separate auth service banani hai ya existing service mein logic daalna hai.
-  - Live Production Phase: Production mein application client ko cookie bhejti hai jisse future requests automatically authenticate ho jaati hain.
-  - Additional context: Speaker ne larger apps ke liye "Option 2" suggest kiya hai taaki user service bohot badi aur messy na ho jaye.
+  - Testing/Offline Phase: Developer design decide karta hai ki Auth logic User service mein daalna hai ya alag service banani hai. Initial setup mein DTOs aur routes define hote hain.
+  - Fixing/Iteration Phase: Agar application grow karti hai toh "Option 2" use karke code split kiya jaata hai taaki service file bahut badi na ho jaye.
+  - Live Production Phase: Production mein client (mobile/web) requests bhejta hai aur server unique email check karke flow aage badhata hai.
+  - Additional context: Speaker ne mention kiya ki yeh flow NestJS specific nahi hai, balki general web industry standard hai.
 
---11--Authentication From Scratch--
-  Topic 2: Auth Service Setup & Signup Logic
-    Subtopics: Dependency Hierarchy, Injectable Decorator, Module Providers, Constructor Injection, Async Logic, Find Method Usage, Bad Request Exception, User Validation
+--11--Password Security & Hashing--
+  Topic 2: Hashing, Salting & Rainbow Attacks
+    Subtopics: Plain Text Risks, Hashing Function Properties, One-way Process, Deterministic Output, Rainbow Table Attack, Salting Mechanism
 
   [📊 SCOPE SIGNAL for Topic 2:
-  - Depth Level: Moderate
-  - Coverage Angle: Practical only
-  - Transcript mein content volume: Short explanation with code setup and dependency injection wiring.
-  - Key terms from transcript: Injectable, providers, constructor, async, find, promise, Bad Request Exception.
-  - Explicit emphasis by speaker: Dependency injection ka use modules ke beech classes connect karne ke liye zaroori hai.
-  - Speaker ne jo analogies/examples use kiye: None
+  - Depth Level: Deep
+  - Coverage Angle: Conceptual & Security
+  - Transcript mein content volume: Very long conceptual explanation on why and how hashing works.
+  - Key terms from transcript: Hashing function, digital fingerprint, one-way, deterministic, rainbow table, salt.
+  - Explicit emphasis by speaker: "Never store passwords in plain text" — yeh rule non-negotiable bataya gaya hai.
+  - Speaker ne jo analogies/examples use kiye: Digital fingerprint analogy — input change toh output change.
   ]
 
   🔑 KEYWORDS DUMP for Topic 2:
-  [dependency hierarchy, injectable, providers, constructor, auth.service.ts, users module, wire up, find method, async, await, promise, users.length, ⭐Bad Request Exception, "email in use", import, validation]
+  [plain text, security threat, online presence, ⭐hashing function, digital fingerprint, deterministic, one-way process, non-reversible, ⭐rainbow table attack, pre-calculated hashes, ⭐salt, random characters, hashed and salted password, hex string]
 
   🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-  - Testing/Offline Phase: Developer `AuthService` create karta hai aur use `UsersModule` ke providers list mein add karta hai. Signup method mein email check karne ke liye `UsersService` ka use hota hai.
-  - Fixing/Iteration Phase: Agar email pehle se database mein hai, toh developer code mein check lagata hai jo `Bad Request Exception` throw karta hai.
-  - Live Production Phase: Application production mein naye users ko register karne se pehle check karti hai ki email available hai ya nahi.
-  - Additional context: (N/A)
+  - Testing/Offline Phase: Developer hashing algorithm (jaise scrypt) select karta hai aur salt length decide karta hai (e.g., 8 bytes).
+  - Fixing/Iteration Phase: Rainbow table attacks se bachne ke liye salt ko password ke saath join karke re-hash kiya jaata hai.
+  - Live Production Phase: DB mein sirf `hash.salt` format mein data save hota hai. Malicious user ko DB access mil bhi jaye toh woh plain password nahi nikaal sakta.
+  - Additional context: Node standard library ke `crypto` package ka use mention kiya gaya hai.
 
---11--Authentication From Scratch--
-  Topic 3: Password Security & Hashing Theory
-    Subtopics: Plain Text Risks, Hashing Functions, Digital Fingerprints, Change Sensitivity, One-way Property, Verification Process, Rainbow Table Attack, Salt Concept, Salted Hashing
+--11--Implementing Auth Logic--
+  Topic 3: Coding Signup & Signin Logic
+    Subtopics: Crypto Library Imports, Promisify Scrypt, Salt Generation, Buffer to Hex, Password Comparison Logic, Exception Handling
 
   [📊 SCOPE SIGNAL for Topic 3:
   - Depth Level: Deep
-  - Coverage Angle: Conceptual only
-  - Transcript mein content volume: Very long conceptual deep-dive into security practices, hacking risks, and crypto theory.
-  - Key terms from transcript: Plain text, malicious person, hashing function, digital fingerprint, one-way process, rainbow attack, pre-calculated hashes, salt.
-  - Explicit emphasis by speaker: "Very long video" warning di gayi hai. Plain text mein password store karna "very, very bad practice" hai.
-  - Speaker ne jo analogies/examples use kiye: Digital fingerprint analogy hashing ke liye use ki gayi hai. "I love you" as a common password example. Rainbow table as a dictionary of pre-calculated hashes.
-  ]
-
-  🔑 KEYWORDS DUMP for Topic 3:
-  [plain text, malicious person, security, threat, online presence, ⭐hashing function, Node standard library, input, calculate hash, digital fingerprint, output, 47720, my password, capitalization, my password 1, one-way property, reverse, rainbow attack, pre-calculated, dictionary, popular passwords, match, ⭐salt, random numbers, A1D01, join string, separator character, hashed and salted]
-
-  🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-  - Learning Phase: Developer seekhta hai ki plain text passwords store karna unsafe hai aur hashing function kaise fingerprints create karta hai.
-  - Application Phase: Rainbow attacks se bachne ke liye passwords mein random "salt" add kiya jaata hai jisse pre-calculated tables useless ho jaati hain.
-  - Mastery Phase: Expert level par developer hashed aur salted results ko compare karke user verify karta hai bina original password jaane.
-  - Additional context: (N/A)
-
---11--Authentication From Scratch--
-  Topic 4: Crypto Implementation & Hashing Code
-    Subtopics: Crypto Package, Random Bytes, Scrypt Function, Callback Handling, Promisify Utility, Buffer Handling, Hex Conversion, TypeScript Type Casting
-
-  [📊 SCOPE SIGNAL for Topic 4:
-  - Depth Level: Moderate
-  - Coverage Angle: Practical only
-  - Transcript mein content volume: Detailed code implementation using Node standard library tools.
-  - Key terms from transcript: Crypto, randomBytes, scrypt, promisify, util, buffer, hex, type unknown.
-  - Explicit emphasis by speaker: Scrypt by default callbacks use karta hai, isliye ise `promisify` karna modern practice ke liye zaroori hai. TypeScript ko `as Buffer` cast karke help karni padti hai.
+  - Coverage Angle: Both (Practical Code + Logic)
+  - Transcript mein content volume: Multiple code-heavy segments covering signup and signin implementation.
+  - Key terms from transcript: randomBytes, scrypt, promisify, hex string, BadRequestException, NotFoundException, destructuring.
+  - Explicit emphasis by speaker: "TypeScript gets confused with promisify" — yahan `as Buffer` casting zaroori hai.
   - Speaker ne jo analogies/examples use kiye: None
   ]
 
+  🔑 KEYWORDS DUMP for Topic 3:
+  [⭐crypto, randomBytes, scrypt, ⭐promisify, util, callback, async, await, buffer, hexadecimal, `randomBytes(8)`, ⭐`scrypt(password, salt, 32)`, as Buffer, separator character, BadRequestException, ⭐NotFoundException, destructuring, `user.password.split('.')`, re-hash, valid credentials]
+
+  🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+  - Testing/Offline Phase: `randomBytes` use karke unique salt generate karna aur `scrypt` se password hash karke DB (SQLite) mein check karna.
+  - Fixing/Iteration Phase: Signin ke waqt DB se salt nikaal kar user input ke saath compare karna. Agar match nahi hota toh 400 ya 404 throw karna.
+  - Live Production Phase: Server user ko identify karta hai aur incorrect password par access block kar deta hai.
+  - Additional context: Speaker ne `cookie-session` library install karne ka instruction diya.
+
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 11: Authentication From Scratch
+  Topic 1: Authentication Flow & Service Design
+  Topic 2: Hashing, Salting & Rainbow Attacks
+  Topic 3: Coding Signup & Signin Logic
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 3 | Subtopics: 18
+
+▶️ Resuming from: Topic 4: Session Persistence with Cookies
+
+--11--Authentication Architecture & Service Setup--
+  Topic 4: Session Persistence with Cookies
+    Subtopics: cookie-session Installation, Middleware Configuration, Main.ts Setup, Encryption Keys, Storing User ID, Set-Cookie Header, Request Object Augmentation
+
+  [📊 SCOPE SIGNAL for Topic 4:
+  - Depth Level: Moderate
+  - Coverage Angle: Practical + Conceptual
+  - Transcript mein content volume: Short explanation of library setup and cookie lifecycle.
+  - Key terms from transcript: cookie-session, main.ts, encryption keys, user ID, request, response.
+  - Explicit emphasis by speaker: "Compatibility mismatch" — cookie-session ke liye `require` use karna padega instead of `import`.
+  - Speaker ne jo analogies/examples use kiye: "Color: Red/Blue" example for session object property changes.
+  ]
+
   🔑 KEYWORDS DUMP for Topic 4:
-  [randomBytes, scrypt, crypto, Node standard library, heavy lifting, async, callbacks, ⭐promisify, util, underscore script, randomBytes(8), buffer, binary, ⭐hexadecimal, hexadecimal string, 16 character long, script(password, salt, 32), type unknown, ⭐as Buffer, salt plus dot, separator character]
+  [⭐cookie-session, @types/cookie-session, npm install, require vs import, main.ts, ⭐app.use(), keys array, encryption string, ⭐session object, Set-Cookie, request header, response header, user ID persistence, development environment]
 
   🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
-  - Testing/Offline Phase: Developer Node.js `crypto` module se random salt generate karta hai aur password ko hash karta hai. `promisify` ka use karke async/await flow maintain hota hai.
-  - Fixing/Iteration Phase: TypeScript `unknown` type error throw karta hai script output par, jise developer `as Buffer` likh kar fix karta hai.
-  - Live Production Phase: Production mein password aur salt ek hi string mein (dot separator ke saath) store hote hain.
-  - Additional context: (N/A)
+  - Testing/Offline Phase: Localhost pe cookie headers monitor karna (Network tab) taaki verify ho sake ki encrypted string pass ho rahi hai.
+  - Fixing/Iteration Phase: `main.ts` mein encryption keys badal kar session security adjust karna.
+  - Live Production Phase: Real browser cookie automatically manage karta hai, developer ko har request mein ID bhejne ki zaroori nahi hoti.
+  - Additional context: (N/A — transcript mein production specific detail nahi thi)
 
---11--Authentication From Scratch--
-  Topic 5: Controller Integration & DB Verification
-    Subtopics: Controller Injection, Auth Service Call, Create User DTO, SQLite Explorer, Hashed Password Storage, Signin Logic, Array Destructuring, NotFound Exception
+--11--Account Management Routes--
+  Topic 5: Auth Implementation & Fixes
+    Subtopics: WhoAmI Route, Sign Out Logic, Nullifying Session, SQLite findOne Bug, Falsy ID Handling, 403 Forbidden Response
 
   [📊 SCOPE SIGNAL for Topic 5:
   - Depth Level: Moderate
-  - Coverage Angle: Practical only
-  - Transcript mein content volume: Multi-video coverage from wiring to database inspection and signin logic.
-  - Key terms from transcript: SQLite Explorer, salt, hashed password, signin, findOne, array destructuring, NotFound Exception, rehash.
-  - Explicit emphasis by speaker: Signup and signin use common DTO for email and password validation. Signup creates a record, signin verifies it.
+  - Coverage Angle: Practical Only
+  - Transcript mein content volume: Step-by-step implementation of basic auth utilities and a critical bug fix.
+  - Key terms from transcript: WhoAmI, sign out, user ID null, SQLite findOne bug, status code.
+  - Explicit emphasis by speaker: "SQLite oddity" — `findOne(null)` pe pehla user return hota hai, isse fix karna zaroori hai.
   - Speaker ne jo analogies/examples use kiye: None
   ]
 
   🔑 KEYWORDS DUMP for Topic 5:
-  [users controller, wire up, auth service, signup, email, password, SQLite Explorer, user table, period, salted and hashed, signin, findOne, email lookup, ⭐array destructuring, const [user], ⭐NotFound Exception, split, period, rehash, comparison, hexadecimal string, 400, 404]
+  [⭐WhoAmI, @Get(), session.userId, ⭐SignOut, @Post(), session.userId = null, SQLite oddity, ⭐findOne(id), falsy ID check, return null, empty response, 403 Forbidden, 404 User Not Found]
 
   🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
-  - Testing/Offline Phase: Developer signup route hit karta hai aur SQLite Explorer mein check karta hai ki password hashed form mein store hua hai ya nahi.
-  - Fixing/Iteration Phase: Signin mein agar email galat ho toh code `NotFound Exception` throw karta hai. Password comparison ke liye stored salt pull karke naya hash banaya jaata hai.
-  - Live Production Phase: Valid credentials par server user entity return karta hai.
+  - Testing/Offline Phase: Sign-out ke baad WhoAmI call karke confirm karna ki response empty/null aa raha hai.
+  - Fixing/Iteration Phase: `UsersService` mein `findOne` ko update karna taaki null/undefined IDs handle ho sakein bina DB query kiye.
+  - Live Production Phase: User Logout button click karta hai, server session clear karta hai, aur client user ko login page pe redirect karta hai.
   - Additional context: (N/A)
 
---11--Authentication From Scratch--
-  Topic 6: Cookie Session & Middleware Setup
-    Subtopics: Cookie Session Library, Header Management, Session Object, Middleware Wiring, Main.ts Configuration, Encryption Keys, Set-Cookie Header, Compatibility Fix
+--11--Advanced Auth Tools--
+  Topic 6: Custom Decorators & Guards
+    Subtopics: CurrentUser Decorator, Execution Context, DI Limitation, Interceptor Bridge Pattern, Global Scoped Interceptor, APP_INTERCEPTOR Provider, AuthGuard Implementation, canActivate Method
 
   [📊 SCOPE SIGNAL for Topic 6:
-  - Depth Level: Moderate
+  - Depth Level: Deep
   - Coverage Angle: Both
-  - Transcript mein content volume: Detailed explanation of how cookies and session middleware interact with the server.
-  - Key terms from transcript: cookie-session, headers, encrypted string, session object, Main.ts, require, encryption keys.
-  - Explicit emphasis by speaker: `cookie-session` ko import ke bajaye `require` karna padta hai TSConfig compatibility issues ki wajah se. Encryption key ka zaroori hona.
-  - Speaker ne jo analogies/examples use kiye: None
+  - Transcript mein content volume: Detailed logic on why decorators can't use DI and how interceptors solve it.
+  - Key terms from transcript: custom decorator, interceptor, execution context, DI, APP_INTERCEPTOR, Guard, canActivate.
+  - Explicit emphasis by speaker: "Decorators cannot make use of dependency injection" — yeh core reason hai interceptor bridge use karne ka.
+  - Speaker ne jo analogies/examples use kiye: "Guard" analogy — route ko access se forbid karna.
   ]
 
   🔑 KEYWORDS DUMP for Topic 6:
-  [cookie-session, @types/cookie-session, header, Cookie, encrypted string, session object, color: red, color: blue, Set-Cookie, Main.ts, ⭐require, app.use, keys, ⭐encryption, development environment, compatibility mismatch]
+  [⭐@CurrentUser, createParamDecorator, execution context, Http, gRPC, WebSocket, GraphQL, ⭐Dependency Injection limitation, ⭐CurrentUserInterceptor, request.currentUser, bridge pattern, ⭐APP_INTERCEPTOR, useClass, global scope, over-fetching data, ⭐AuthGuard, canActivate, truthy vs falsy, @UseGuards, 403 status]
 
   🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
-  - Testing/Offline Phase: Developer middleware install karta hai aur `Main.ts` mein configure karta hai. Ek temporary "color" route se session storage test kiya jaata hai.
-  - Fixing/Iteration Phase: TypeScript import errors ko fix karne ke liye `require` statement ka use hota hai.
-  - Live Production Phase: Production mein users ke IDs cookies mein encrypted form mein save hote hain jisse state maintain rehti hai.
-  - Additional context: Speaker ne mention kiya ki development mein keys as string chalengi par production mein better management chahiye.
+  - Testing/Offline Phase: Custom decorator run karke console log check karna ki user entity interceptor se bridge ho kar aa rahi hai ya nahi.
+  - Fixing/Iteration Phase: Agar performance issue hai toh global interceptor ki jagah controller scope use karna to avoid over-fetching.
+  - Live Production Phase: Secure routes pe `AuthGuard` laga kar unauthorized access rokna, server automatically 403 error handle karta hai.
+  - Additional context: Speaker ne mention kiya ki global interceptor approach development easy banata hai par resource management ka dhyan rakhna chahiye.
 
---11--Authentication From Scratch--
-  Topic 7: Identity Management & Signout
-    Subtopics: User ID Storage, Session Persistence, WhoAmI Handler, Signout Logic, Property Nulling, SQLite Bug Fix, Falsy ID Check
 
-  [📊 SCOPE SIGNAL for Topic 7:
-  - Depth Level: Moderate
-  - Coverage Angle: Both
-  - Transcript mein content volume: Step-by-step implementation of session state and debugging unexpected SQLite behavior.
-  - Key terms from transcript: user ID, session.userId, WhoAmI, signout, null, SQLite oddity, falsy.
-  - Explicit emphasis by speaker: Session mein sirf ID store karna efficient hai. Signout ke liye property ko `null` set karna kafi hai, par SQLite mein iska side-effect check karna padta hai.
-  - Speaker ne jo analogies/examples use kiye: None
-  ]
+---
 
-  🔑 KEYWORDS DUMP for Topic 7:
-  [user ID, session.userId, user.id, persistence, WhoAmI, undefined, ⭐signout, session.userId = null, post request, SQLite oddity, findOne(null), first user, bug fix, falsy ID, if(!id), return null, status code, 403, 404]
 
-  🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
-  - Testing/Offline Phase: Developer signup/signin ke baad session mein ID assign karta hai. `WhoAmI` route se current user details fetch hoti hain.
-  - Fixing/Iteration Phase: Signout ke baad `WhoAmI` galat user return karta hai (SQLite behavior). Developer `findOne` method mein check daalta hai ki agar ID null hai toh turant return null kare.
-  - Live Production Phase: Production mein users securely sign out kar sakte hain aur unka access revoke ho jaata hai.
-  - Additional context: (N/A)
-
---- ⏸️ OUTPUT LIMIT APPROACHING. Type 'CONTINUE' to get the next part.
-✅ Completed so far : [Section 11 (Topics 1-7)]
-⏳ Remaining        : [Section 11 (Topics 8-12): Custom Decorators, Interceptors, Global Scoping, Auth Guards, Testing Intro]
-📊 Progress          : 7 topics done / 12 topics total (estimated)
+## ✅ FINAL CHECKLIST
 
 **Double-check steps performed:**
 - [x] Poora transcript completely padha bina kuch skip kiye.
 - [x] Transcript ko Sections mein group kiya — related topics ek Section mein hain.
 - [x] Har Section ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di.
+- [x] Har Topic ko correct sequential numbering di (Topic 4, Topic 5...).
 - [x] Har concept subtopic naam ki list mein add kiya (sirf short name).
-- [x] Subtopics flat comma-separated list mein hain.
-- [x] Code/command exactly preserve kiya (KEYWORDS DUMP mein).
-- [x] Messy transcript ko logically group kiya.
-- [x] Zero hallucination.
+- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi.
+- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya.
+- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
 - [x] Chronological order preserved.
 - [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya (with ⭐ and [version]).
+- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya (⭐ emphasized).
 - [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
 - [x] Timestamps aur noise tokens skip kiye.
-- [x] Output limit aane se pehle ruka aur CONTINUE protocol follow kiya.
-- [x] Chhote related concepts ko broad Topics mein merge kiya.
+- [x] Chhote concepts ko broad Topics mein merge kiya (e.g., WhoAmI, SignOut, SQLite fix in one topic).
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
 Section 11: Authentication From Scratch
-  Topic 1: Auth Flow & Architecture Strategy
-  Topic 2: Auth Service Setup & Signup Logic
-  Topic 3: Password Hashing & Security Theory
-  Topic 4: Crypto Implementation & Hashing Code
-  Topic 5: Controller Integration & DB Verification
-  Topic 6: Cookie Session & Middleware Setup
-  Topic 7: Identity Management & Signout
+  Topic 4: Session Persistence with Cookies
+  Topic 5: Account Management Routes
+  Topic 6: Custom Auth Tools (Decorators & Guards)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 74 (approx)
+Sections: 1 | Topics: 3 | Subtopics: 20
+
 
 ==================================================================================
 
