@@ -2285,6 +2285,34 @@ Sections: 2 | Topics: 6 | Subtopics: 34
   - Mastery Phase: Large datasets par queries optimize karne ke liye filters aur sorting order set kiya jaata hai.
   - Additional context: (N/A)
 
+  --16--Task Scheduling (Background Jobs)--
+Topic 6: Task Scheduling with Nest Schedule
+Subtopics: @nestjs/schedule Installation, Cron Jobs, Interval Tasks, Timeout Decorators, Cron Expressions, Background Email Processing
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+Depth Level: Moderate
+
+Coverage Angle: Practical only
+
+Context: Application mein background tasks run karne ke liye automated scheduling setup.
+
+Key terms: Cron, Interval, Timeout, ScheduleModule, background tasks.
+
+Speaker Emphasis: Background jobs user request-response cycle ko block nahi karte, isliye performance ke liye ye zaroori hain.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[⭐@nestjs/schedule, ScheduleModule.forRoot(), ⭐@Cron(), cron expression, * * * * *, ⭐@Interval(), milliseconds, ⭐@Timeout(), dynamic scheduling, task registry, background processing, email queue, DB cleanup]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+Testing/Offline Phase: Developer @Interval(5000) use karke check karta hai ki function har 5 second mein console log kar raha hai ya nahi.
+
+Fixing/Iteration Phase: Cron expressions (e.g., 45 * * * *) ko online tools se verify kiya jata hai taaki task exact time par chale.
+
+Live Production Phase: Production mein server automatic daily reports generate karta hai aur midnight ko purana temp data delete karta hai.
+
 ---
 
 **Double-check steps performed:**
@@ -2311,6 +2339,9 @@ Section 16: A Basic Permissions System
   Topic 3: Middleware Refactoring & Global Config
   Topic 4: Query String Validation & Transformation
   Topic 5: Car Estimate Query Logic
+  Topic 6: Task Scheduling with Nest Schedule
+
+  
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 5 | Subtopics: 28
@@ -2401,6 +2432,40 @@ Section 17: Query Builders with TypeORM
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 3 | Subtopics: 19
 
+
+==================================================================================
+
+# section 17.5: Performance Optimization with Caching
+=====Section 17.5: Performance Optimization with Caching=====
+Is section mein database load kam karne aur response time fast karne ke liye Redis aur Cache-manager ka setup explain kiya gaya hai.
+
+--17.5--Performance Optimization with Caching--
+Topic 1: Caching Strategy & Redis Integration
+Subtopics: Cache-manager Installation, CacheModule Configuration, In-memory vs Redis, TTL (Time To Live), CacheInterceptor, Manual Cache Access
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+Depth Level: Deep
+
+Coverage Angle: Both
+
+Context: Frequent database queries ko cache karke performance boost karna.
+
+Key terms: Redis, TTL, CacheInterceptor, store.
+
+Speaker Emphasis: Enterprise apps mein Redis ko as a separate store use karna scalability ke liye best practice hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[⭐cache-manager, ⭐CacheModule, isGlobal: true, ⭐TTL, maximum cache size, ⭐CacheInterceptor, @UseInterceptors(CacheInterceptor), this.cacheManager.set(), this.cacheManager.get(), ⭐Redis, memory consumption]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+Testing/Offline Phase: Developer local memory store use karke /estimate route ko cache karta hai aur second request ka fast response verify karta hai.
+
+Fixing/Iteration Phase: TTL settings adjust ki jati hain taaki user ko bohot purana data (stale data) na dikhe.
+
+Live Production Phase: Distributed system mein multiple server instances ek hi Redis store ko share karte hain for consistent caching.
 
 ==================================================================================
 
@@ -2535,3 +2600,86 @@ Sections: 1 | Topics: 5 | Subtopics: 22
 
 
 
+# section 19: Real-time Communication with WebSockets
+
+=====Section 19: Real-time Communication with WebSockets=====
+Is section mein Socket.io ke through bi-directional communication aur live features setup karna seekhenge.
+
+--19--Real-time Communication with WebSockets--
+Topic 1: WebSocket Gateways & Socket.io
+Subtopics: WebSockets vs HTTP, Gateway Decorator, SubscribeMessage, MessageBody, ConnectedSocket, Event-based Communication, Postman WS Testing
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+Depth Level: Deep
+
+Coverage Angle: Both
+
+Context: Live notifications aur real-time data updates ka implementation.
+
+Key terms: Gateway, Socket.io, Handshake, Events, Room.
+
+Speaker Emphasis: Gateways controllers ki tarah hi hote hain par ye request-response ke bajaye persistent connection handle karte hain.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[⭐@WebSocketGateway(), ⭐@SubscribeMessage(), ⭐@MessageBody(), ⭐@ConnectedSocket(), server.emit(), broadcast, event name, onModuleInit, Socket.io client, handshake, CORS in WS]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+Testing/Offline Phase: Postman ya Firecamp use karke WebSocket connection open kiya jata hai aur messages "emit" karke check kiye jate hain.
+
+Fixing/Iteration Phase: Web-browser mein CORS errors fix karne ke liye gateway configuration mein origins allow kiye jate hain.
+
+Live Production Phase: Live app mein admin jaise hi car report approve karta hai, user ko instant "Approved" notification milta hai via socket.
+
+==================================================================================
+
+
+# section 20: Advanced Security & DevOps
+
+
+=====Section 20: Advanced Security & DevOps=====
+Enterprise standards ke hisaab se application ko secure aur monitorable banane ka process.
+
+--20--Advanced Security & DevOps--
+Topic 1: Security Hardening (Helmet & Rate Limiting)
+Subtopics: Helmet Integration, CORS Policy, Rate Limiting Setup, ThrottlerModule, DDoS Protection, Security Headers
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+Depth Level: Moderate
+
+Coverage Angle: Practical only
+
+Key terms: Helmet, CORS, Throttler, Rate Limit.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[⭐app.use(helmet()), ⭐app.enableCors(), ⭐ThrottlerModule, @SkipThrottle(), @Throttle(), 429 Too Many Requests, brute force protection, XSS protection]
+
+Topic 2: Professional Logging & File Uploads
+Subtopics: Winston/Pino Setup, LoggerService, Multer Integration, FileInterceptor, Local vs S3 Storage, DTO with Files
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+Depth Level: Moderate
+
+Coverage Angle: Both
+
+Key terms: Winston, Multer, S3, Logging levels.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[⭐LoggerService, Winston, transport, rotation logs, ⭐Multer, ⭐@FileInterceptor(), upload.single(), diskStorage, destination, filename, Amazon S3, buffer]
+
+🔄 REAL-WORLD FLOW SIGNAL (Section 20):
+
+Testing Phase: Developer local uploads folder mein car images save karke check karta hai.
+
+Fixing Phase: Winston use karke errors ko error.log file mein store kiya jata hai taaki production bugs ko debug kiya ja sake.
+
+Production Phase: File uploads ko AWS S3 bucket mein move kiya jata hai scalability ke liye, aur rate limiting active hoti hai taaki koi API abuse na kare.
+
+
+==================================================================================
