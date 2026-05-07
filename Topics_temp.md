@@ -1405,6 +1405,29 @@ Application Phase: Developer Postman ki jagah Swagger UI se hi endpoints test ka
 
 Mastery Phase: Frontend team ko documentation link share ki jati hai taaki unhe API ka exact structure (request/response) bina pooche pata chal jaye.
 
+
+--10--Advanced Response Handling--
+Topic 7: Global Exception Filters (Error Standardization)
+Subtopics: BaseExceptionFilter, Catch Decorator, ArgumentsHost, HttpAdapterHost, Custom Error Response Format, Global Scoped Filters
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+Depth Level: Deep
+
+Coverage Angle: Practical only
+
+Context: Poori application ke errors ko ek standard format mein convert karna frontend ke liye.
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[⭐@Catch(), ExceptionFilter, ⭐ArgumentsHost, HttpAdapterHost, ⭐response.json(), timestamp, path, custom-error-code, main.ts global filter]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+Fixing Phase: Frontend team jab shikayat karti hai ki errors har baar alag format mein hain, toh developer ek Global Filter likhta hai jo har error ko { success: false, error: message } format mein convert karta hai.
+
+Production Phase: Security ke liye, filter production mein "Internal Server Error" (500) ke real details hide kar deta hai aur user-friendly message dikhata hai.
+
 ---
 
 **Double-check steps performed:**
@@ -1429,6 +1452,7 @@ Section 10: Custom Data Serialization
   Topic 4: Data Transformation with UserDto and class-transformer
   Topic 5: Refactoring for Reusability and Custom Decorator
   Topic 6: API Documentation with Swagger
+  Topic 7: Global Exception Filters (Error Standardization)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 5 | Subtopics: 35
@@ -2819,6 +2843,26 @@ Is section mein industry-standard JSON Web Tokens (JWT) aur Passport.js library 
   - Fixing Phase: Agar token expire ho jaye toh "401 Unauthorized" error ko handle kiya jata hai.
   - Production Phase: Mobile app har request ke header mein ye token bhejti hai, aur server bina DB query kiye user ko identify kar leta hai.
 
+--21--Advanced Auth Strategies--
+Topic 2: OAuth2 & Social Login (Passport)
+Subtopics: Passport-Google-OAuth2, Google Strategy Setup, ClientID/Secret Management, Callback Handler, Profile Normalization, User Creation Flow
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+Depth Level: Moderate
+
+Coverage Angle: Practical only
+
+Context: Google ya GitHub login ko app mein integrate karna.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[⭐passport-google-oauth20, GoogleStrategy, ⭐validate(), callbackURL, ⭐clientID, clientSecret, Profile scope, JWT mapping after OAuth]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+Production Phase: User "Login with Google" par click karta hai, Google use verify karke server ko profile bhejta hai, aur server us profile se database mein user create karke JWT token return karta hai.
+
 ==================================================================================
 
 # section 22: Microservices Architecture
@@ -2843,6 +2887,30 @@ Is section mein hum Monolith app ko alag-alag services mein todne aur unke beech
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
   - Application Phase: Jab user sign up karta hai, "Auth Service" ek event emit karti hai jise "Email Service" pakad kar welcome mail bhejti hai.
   - Mastery Phase: Enterprise level par agar traffic badhta hai, toh hum sirf "Order Service" ke naye instances deploy karte hain bina baaki app ko touch kiye.
+
+--22--Enterprise Architecture Patterns--
+Topic 2: NestJS Monorepo (Workspaces)
+Subtopics: Monorepo vs Monolith, nest-cli.json config, Library Generation, Internal Shared Libraries, Workspace Apps Management
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+Depth Level: Deep
+
+Coverage Angle: Both
+
+Context: Ek hi repository mein multiple services aur shared code manage karna.
+
+Key terms: Workspace, Library, Project, Monorepo.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[⭐nest generate lib, ⭐nest-cli.json, projects object, shared-code, ⭐workspace-apps, libs directory, monorepo strategy]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+Application Phase: Developer ek "Common Library" banata hai jismein saare DTOs aur database entities hote hain, jise Auth service aur Report service dono use karti hain.
+
+Mastery Phase: Badi company mein developer 10 microservices ko ek hi repo se manage karta hai, jisse dependency conflicts kam ho jate hain.
 
 ==================================================================================
 
