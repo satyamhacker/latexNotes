@@ -3059,3 +3059,63 @@ Fixing Phase: Agar WebSocket connection costly pad raha hai sirf notifications k
 Production Phase: Developer compression middleware active karta hai jisse 1MB ka JSON response shrink hokar sirf 100KB ka reh jata hai, loading speed badhane ke liye.
 
 ==================================================================================
+
+
+---
+
+# Section 26: Advanced Enterprise Patterns
+
+=====Section 26: Advanced Enterprise Patterns=====
+Is section mein hum NestJS ke woh advanced concepts cover karenge jo application ko scalable, memory-efficient aur industry-standard authorization framework provide karte hain.
+
+--26--Advanced Enterprise Patterns--
+  Topic 1: Injection Scopes (Provider Lifecycles)
+    Subtopics: Singleton vs Request vs Transient, Scope Property, Performance Overhead, Provider Bubble-up, Durable Providers, Memory Management
+
+  [📊 SCOPE SIGNAL for Topic 1:
+  - Depth Level: Deep
+  - Coverage Angle: Both (Conceptual + Performance Tuning)
+  - Context: Application memory aur instance creation logic ko control karna.
+  - Key terms from transcript: Singleton, Request Scope, Transient Scope, Bubble-up, Durable Providers.
+  - Explicit emphasis by speaker: "Request scope providers performance hit de sakte hain" — inka use tabhi karein jab absolute necessity ho.
+  ]
+
+  
+
+  🔑 KEYWORDS DUMP for Topic 1:
+  [⭐Scope.DEFAULT, ⭐Scope.REQUEST, ⭐Scope.TRANSIENT, @Injectable({ scope: Scope.REQUEST }), provider lifecycles, ⭐bubble-up effect, memory footprint, performance overhead, garbage collection, ⭐Durable Providers, multi-tenancy, request-tracking]
+
+  🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+  - **Learning Phase:** Developer constructor mein `console.log` daal kar verify karta hai ki Singleton (ek baar) vs Request (har request pe) instance kab-kab generate ho raha hai.
+  - **Fixing Phase:** Agar poori app request-scoped ho gayi hai (due to bubble-up), toh developer dependencies ko optimize karta hai taaki unnecessary memory pressure na bane.
+  - **Production Phase:** Multi-tenant systems (jahan har client ka alag data ho) mein "Durable Providers" use kiye jate hain taaki tenants ke beech data isolate rahe bina performance compromise kiye.
+
+---
+
+--26--Advanced Enterprise Patterns--
+  Topic 2: Professional Auth (Reflector & Metadata)
+    Subtopics: SetMetadata Decorator, Custom Decorators, Reflector Class, Metadata Discovery, Method vs Class Level Metadata, RBAC (Role Based Access Control)
+
+  [📊 SCOPE SIGNAL for Topic 2:
+  - Depth Level: Deep
+  - Coverage Angle: Architectural Standard
+  - Context: Hardcoded authorization ko hatakar dynamic, metadata-driven system banana.
+  - Key terms from transcript: Reflector, Metadata, getAllAndOverride, custom decorators, Roles Guard.
+  - Explicit emphasis by speaker: "Reflector is the professional way to read metadata in guards" — isse code DRY aur reusable rehta hai.
+  ]
+
+  
+
+  🔑 KEYWORDS DUMP for Topic 2:
+  [⭐@SetMetadata(), ⭐Reflector, ⭐Reflector.getAllAndOverride(), Reflector.getAllAndMerge(), ExecutionContext, ⭐Custom Decorators, RolesGuard, RBAC, metadata key-value, decorator composition, method-level vs class-level]
+
+  🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+  - **Learning Phase:** Developer seekhta hai ki guards ke andar manual logic likhne ke bajaye decorators se "Hint" (Metadata) kaise pass ki jati hai.
+  - **Application Phase:** Ek `@Roles('admin')` decorator banaya jata hai jo Reflector ke through Guard mein check hota hai, jisse controller code clean aur readable ho jata hai.
+  - **Mastery Phase:** Complex permission systems mein developer Reflector use karke check karta hai ki Method-level metadata Class-level ko override karega ya merge (e.g., Public access on specific route in a Private controller).
+
+---
+
+==================================================================================
+
+
