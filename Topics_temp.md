@@ -3035,3 +3035,27 @@ Is section mein hum reusable modules banana seekhenge jo forRoot ya register met
 ==================================================================================
 
 
+# section 25: Performance & Real-time Edge Cases
+--26--Optimization & Alternative Communication--
+Topic 1: SSE & Compression
+Subtopics: Server-Sent Events (SSE), @Sse Decorator, Observable streams, Compression middleware, Brotli/Gzip, Serving Static Assets
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+Depth Level: Moderate
+
+Coverage Angle: Practical only
+
+Context: WebSockets ke bajaye unidirectional live data (like stock prices ya progress bars) aur API response size kam karna.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[⭐@Sse(), MessageEvent, Observable, interval, ⭐compression, gzip, brotli, nest-static-assets, JoinColumn for performance]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+Fixing Phase: Agar WebSocket connection costly pad raha hai sirf notifications ke liye, toh developer SSE use karke server-to-client updates setup karta hai.
+
+Production Phase: Developer compression middleware active karta hai jisse 1MB ka JSON response shrink hokar sirf 100KB ka reh jata hai, loading speed badhane ke liye.
+
+==================================================================================
