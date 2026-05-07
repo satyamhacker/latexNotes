@@ -1381,6 +1381,30 @@ Speaker is section mein outgoing responses se sensitive data (jaise password) hi
   - Live Production Phase: Production-ready clean code jise team ke baaki members easily use kar sakein.
   - Additional context: Individual handler formatting vs Controller level formatting options available.
 
+--10--Custom Data Serialization & Documentation--
+Topic 6: API Documentation with Swagger
+Subtopics: OpenAPI Setup, SwaggerModule, @ApiProperty, @ApiResponse, Documentation UI, DTO Integration
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+Depth Level: Moderate
+
+Coverage Angle: Practical only
+
+Context: Backend endpoints ki automatic graphical documentation generate karna.
+
+Key terms: OpenAPI, Swagger, SwaggerUI.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[⭐@nestjs/swagger, SwaggerModule.createDocument(), DocumentBuilder, ⭐@ApiProperty(), ⭐@ApiTags(), ⭐@ApiOperation(), localhost:3000/api, JSON schema, documentation-sync]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+Application Phase: Developer Postman ki jagah Swagger UI se hi endpoints test karta hai.
+
+Mastery Phase: Frontend team ko documentation link share ki jati hai taaki unhe API ka exact structure (request/response) bina pooche pata chal jaye.
+
 ---
 
 **Double-check steps performed:**
@@ -1404,6 +1428,7 @@ Section 10: Custom Data Serialization
   Topic 3: Building the Serialize Interceptor
   Topic 4: Data Transformation with UserDto and class-transformer
   Topic 5: Refactoring for Reusability and Custom Decorator
+  Topic 6: API Documentation with Swagger
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 5 | Subtopics: 35
@@ -2449,6 +2474,32 @@ Speaker is section mein TypeORM ke Query Builder ko use karke complex database q
   - Live Production Phase: App admin-approved reports ka average nikal kar user ko car ki estimated value return karta hai.
   - Additional context: Speaker ne mention kiya ki yeh logical query SQL knowledge par base hai aur TypeORM documentation complex queries ke liye refer karni chahiye.
 
+  --17--Query Builders & Advanced DB Patterns--
+Topic 4: Database Transactions (Data Integrity)
+Subtopics: ACID Properties, DataSource Object, Transaction Decorator vs Manual, Rollback Logic, Concurrency Issues
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+Depth Level: Deep
+
+Coverage Angle: Both
+
+Context: Multiple database operations ko "all or nothing" logic mein wrap karna.
+
+Key terms: Transaction, Rollback, Commit, DataSource.
+
+Speaker Emphasis: Transactions ke bina financial applications ya inventory management mein data corrupt ho sakta hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[⭐dataSource.transaction(), ⭐queryRunner, manager, commitTransaction, ⭐rollbackTransaction, release(), ACID, atomic operations, data consistency, isolation levels]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+Testing Phase: Developer ek transaction ke beech mein error throw karke check karta hai ki kya database purani state mein wapas gaya (Rollback) ya nahi.
+
+Live Production Phase: Car purchase request mein user ka balance deduct karna aur car status change karna ek hi transaction mein hota hai, taaki beech mein failure hone par paise na katein.
+
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
@@ -2457,6 +2508,7 @@ Section 17: Query Builders with TypeORM
   Topic 1: Introduction to Query Builders
   Topic 2: Advanced Filtering with Where & AndWhere
   Topic 3: Ordering, Aggregation & Final Estimate
+  Topic 4: Database Transactions (Data Integrity)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 3 | Subtopics: 19
