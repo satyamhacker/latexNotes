@@ -2847,3 +2847,58 @@ Is section mein hum Monolith app ko alag-alag services mein todne aur unke beech
 ==================================================================================
 
 
+# section 23: Background Tasks with Bull Queues
+
+=====Section 23: Background Tasks with Bull Queues=====
+Is section mein hum asynchronous tasks ko manage karne ke liye Redis-based Bull queues ka setup aur workers implementation seekhenge.
+
+--23--Background Tasks with Bull Queues--
+  Topic 1: Queue Management & Job Processing
+    Subtopics: @nestjs/bull Installation, BullModule Config, Producers vs Consumers, Job Processors, @Process Decorator, Job Events (Completed/Failed)
+
+[📊 SCOPE SIGNAL for Topic 1:
+  - Depth Level: Deep
+  - Coverage Angle: Both
+  - Context: Long-running tasks ko background mein move karna taaki API responsive rahe.
+  - Key terms: Redis, Queue, Job, Producer, Worker.
+  - Speaker Emphasis: Queues error handling aur automatic retries ke liye enterprise level par best hain.
+  ]
+
+🔑 KEYWORDS DUMP for Topic 1:
+  [⭐@nestjs/bull, BullModule.registerQueue(), ⭐InjectQueue(), Queue, Job, ⭐@Processor(), ⭐@Process(), job.progress(), OnQueueActive, OnQueueCompleted, Redis connection, concurrency, backoff strategy]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+  - Application Phase: User jab Car Report submit karta hai, toh "PDF Generation" ka job queue mein daal diya jata hai taaki user ko wait na karna pade.
+  - Fixing Phase: Agar email service down hai, toh Bull automatically retry logic execute karta hai based on backoff settings.
+  - Mastery Phase: Distributed systems mein multiple workers ek hi queue se jobs pick karke load balance karte hain.
+
+==================================================================================
+
+
+# section 24: Enterprise Pattern: Dynamic Modules
+
+=====Section 24: Enterprise Pattern: Dynamic Modules=====
+Is section mein hum reusable modules banana seekhenge jo forRoot ya register methods ke through dynamic configuration accept karte hain.
+
+--24--Enterprise Pattern: Dynamic Modules--
+  Topic 1: Factory Providers & forRoot Pattern
+    Subtopics: Static vs Dynamic Modules, DynamicModule Interface, forRoot Implementation, Factory Providers, useFactory, Injection Tokens
+
+[📊 SCOPE SIGNAL for Topic 1:
+  - Depth Level: Deep
+  - Coverage Angle: Theory + Implementation
+  - Context: Library building aur reusable configurations setup karna.
+  ]
+
+🔑 KEYWORDS DUMP for Topic 1:
+  [⭐forRoot(), register(), DynamicModule, ⭐useFactory, inject, ⭐Injection Token, module definition, provider factories, async configuration]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+  - Learning Phase: Developer seekhta hai ki kaise ConfigModule ya TypeOrmModule kaam karte hain internally.
+  - Application Phase: Ek naya LoggerModule banaya jata hai jise har project mein install karke LoggerModule.forRoot({ level: 'debug' }) se use kiya ja sake.
+  - Mastery Phase: Complex DI setups mein async factory functions use karke database connections ya external API keys load kiye jate hain.
+
+
+==================================================================================
+
+
