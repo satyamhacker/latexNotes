@@ -1041,6 +1041,28 @@ Speaker is section mein NestJS ke saath TypeORM integration, SQLite setup, Entit
   - Live Production Phase: `whitelist: true` production mein security ensure karta hai ki koi malicious data (e.g. admin:true) system mein na ghuse.
   - Additional context: DTOs incoming request bodies ko validate karte hain application mein enter hone se pehle.
 
+  --8--Advanced TypeORM Patterns--
+Topic 8: Database Seeding & Subscribers
+Subtopics: Initial Data Seeding, Seed Scripts, TypeORM Subscribers, Decoupled Event Handling, Transactional Subscribers
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+Depth Level: Moderate
+
+Coverage Angle: Practical only
+
+Context: Naye developers ke liye local database mein dummy data bharne aur entities par decoupled logging lagane ka logic.
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[⭐Seeding, TypeORM Seeding, dummy data, ⭐EntitySubscriberInterface, ⭐@EventSubscriber(), beforeInsert, afterLoad, decoupled logic, audit logs]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+Application Phase: Developer ek seed.ts script likhta hai jo 100 users aur 500 reports database mein insert kar deti hai local testing ke liye.
+
+Mastery Phase: Subscriber use karke bina entity file ko touch kiye har database update ka audit trail (Log) maintain kiya jata hai.
+
 ---
 
 **Double-check steps performed:**
@@ -1070,6 +1092,7 @@ Section 8: Persisting Data with TypeORM
   Topic 5: Database Synchronization and Migrations
   Topic 6: Repository API and Service Layer
   Topic 7: Request Validation and DTOs
+  Topic 8: Database Seeding & Subscribers
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 7 | Subtopics: 42
@@ -1763,6 +1786,47 @@ Speaker is section mein NestJS ke andar automated testing, specifically unit tes
   - Live Production Phase: N/A
   - Additional context: N/A
 
+  --12--Professional Testing Standards--
+Topic 6: Test Coverage & Quality Gates
+Subtopics: Generating Coverage Reports, LCOV, Statements/Branches/Functions/Lines Metrics, Setting Minimum Thresholds, Code Climate Integration
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+Depth Level: Moderate
+
+Coverage Angle: Practical only
+
+Context: Enterprise apps mein PR (Pull Request) merge karne se pehle "Test Coverage" check karna mandatory hota hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[⭐npm run test:cov, ⭐coverage folder, index.html, Coverage Threshold, ⭐Statements/Branches/Lines, Jest configuration, code quality]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+Production Phase: CI/CD pipeline check karti hai ki agar test coverage 80% se kam hai, toh deployment automatically fail ho jaye.
+
+Section 20: Advanced DevOps (Final Polish)
+--20--Standard Enterprise Interceptors--
+Topic 6: Operational Interceptors (Logging & Timeouts)
+Subtopics: LoggingInterceptor implementation, Request Execution Time, TimeoutInterceptor, RxJS timeout operator, handling 408 Request Timeout
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+Depth Level: Moderate
+
+Coverage Angle: Practical only
+
+Context: Production mein har request kitna time le rahi hai monitor karna aur hang requests ko kill karna.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[⭐TimeoutInterceptor, RxJS timeout(), ⭐LoggingInterceptor, Date.now(), ms, Execution time, ⭐408 Request Timeout]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+Fixing Phase: Agar koi database query 5 second se zyada le rahi hai, toh TimeoutInterceptor use terminate kar deta hai taaki server resources free rahein.
+
 ---
 
 **Double-check steps performed:**
@@ -1785,6 +1849,7 @@ Section 12: Getting Started with Unit Testing
   Topic 3: Refactoring & Advanced Test Cases
   Topic 4: Realistic In-Memory Mocking
   Topic 5: Controller Unit Testing Strategy
+  Topic 6: Operational Interceptors (Logging & Timeouts)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 5 | Subtopics: 28</UsersService>
