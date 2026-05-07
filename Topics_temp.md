@@ -217,6 +217,34 @@ Speaker is section mein Nest CLI installation, project scaffolding, architecture
   - Live Production Phase: Version-controlled `request.http` file team members ke liye as documentation serve karti hai.
   - Additional context: REST client mein header aur body ke beech **ek empty line** hona mandatory hai.
 
+  --3--API Versioning Strategies--
+Topic 5: API Versioning (The Maintenance Pillar)
+Subtopics: URI Versioning, Header Versioning, Media Type Versioning, Global Versioning Config, Version Decorator, Evolution Management
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+Depth Level: Moderate
+
+Coverage Angle: Both (Theory + Implementation)
+
+Context: Purane clients (Mobile apps) ko support karne ke liye multiple API versions handle karna.
+
+Key terms: VersioningType, URI, Header, @Version.
+
+Speaker Emphasis: Enterprise apps mein URI versioning (v1, v2) sabse common aur readable approach hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[⭐VersioningType.URI, ⭐enableVersioning(), defaultVersion, ⭐@Version('1'), v1/v2 prefix, Header versioning, X-API-Version, Media Type versioning, evolution, backward compatibility]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+Learning Phase: Developer main.ts mein versioning enable karta hai taaki routes automatically /v1/ se start hon.
+
+Application Phase: Naya feature aane par developer naye controller pe @Version('2') lagata hai bina purane version ko distrub kiye.
+
+Mastery Phase: Mobile app users ko force update kiye bina backend logic upgrade kiya jata hai versioning ke through.
+
 ---
 
 **Double-check steps performed:**
@@ -236,6 +264,7 @@ Section 3: Generating Projects with the Nest CLI
   Topic 2: Project Cleanup & Module Generation
   Topic 3: Controller Generation & Routing Logic
   Topic 4: Testing Infrastructure & API Clients
+  Topic 5: API Versioning (The Maintenance Pillar)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 4 | Subtopics: 24
@@ -2680,6 +2709,34 @@ Testing Phase: Developer local uploads folder mein car images save karke check k
 Fixing Phase: Winston use karke errors ko error.log file mein store kiya jata hai taaki production bugs ko debug kiya ja sake.
 
 Production Phase: File uploads ko AWS S3 bucket mein move kiya jata hai scalability ke liye, aur rate limiting active hoti hai taaki koi API abuse na kare.
+
+--20--Health Checks & Monitoring--
+Topic 3: Health Monitoring with Terminus (The Reliability Pillar)
+Subtopics: @nestjs/terminus Installation, HealthCheckController, TypeOrmHealthIndicator, Memory & Disk Check, Probes Setup, Uptime Alerts
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+Depth Level: Moderate
+
+Coverage Angle: Both
+
+Context: Production mein server aur database ki "Sehat" check karne ke liye automated probes.
+
+Key terms: Terminus, HealthCheck, Indicators, Probes.
+
+Speaker Emphasis: Agar database down hai, toh app ko "Unhealthy" mark karna zaroori hai taaki load balancers traffic rok sakein.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[⭐@nestjs/terminus, ⭐HealthCheckService, TypeOrmHealthIndicator, ⭐DNSHealthIndicator, MemoryHealthIndicator, DiskHealthIndicator, /health endpoint, JSON status up/down, Probes, Liveness, Readiness]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+Testing Phase: Developer /health endpoint hit karke check karta hai ki database status: up dikha raha hai ya nahi.
+
+Fixing Phase: Agar memory usage limit cross karti hai, toh terminus automatically crash hone se pehle alert ya warning trigger karta hai.
+
+Production Phase: Kubernetes ya AWS Load Balancer har 30 second mein is endpoint ko check karte hain. Agar status "down" hua, toh naya server instance auto-start ho jata hai.
 
 
 ==================================================================================
