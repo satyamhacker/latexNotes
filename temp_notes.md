@@ -9412,7 +9412,6 @@ Jira, GitHub, ya kisi bhi Dashboard app mein lagbhag har route authenticated hot
 # section 12: Getting Started with Unit Testing
 
 
-Yeh raha Section 12 ka pehla part! Isme hum **Topic 1** aur **Topic 2** ko deep dive karenge with 100% adherence to the legendary 19-point framework.
 
 ---
 
@@ -17337,9 +17336,7 @@ Total keywords across all subtopics in this topic: 11
 # section 21: Enterprise Auth with JWT & Passport
 
 
-Here is the deep, highly detailed, and complete expansion of your skeleton following the strict 19-point **Notes Guru Legendary Edition v6.1** protocol.
 
-Main isko chunk-by-chunk de raha hoon taaki depth aur quality 100% maintain rahe (koi truncation na ho). Pehle hum **Topic 1** ko deeply cover karenge.
 
 ***
 
