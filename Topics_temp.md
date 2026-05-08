@@ -1296,7 +1296,7 @@ I have deeply rechecked and confirm this matches the provided transcript exactly
 
 -----------vps mern notes--------------
 
-# Module 1 JavaScript & Git Basics
+# Module 8 JavaScript & Git Basics
 
 📦 Processing: Phase/Module 1 — JavaScript & Git Basics
 
@@ -1460,7 +1460,7 @@ Sections: 2 | Topics: 5 | Subtopics: 42
 
 ==================================================================================
 
-# Module 2 Express.js, PM2, Debugging & Logging
+# Module 9 Express.js, PM2, Debugging & Logging
 
 📦 Processing: Phase/Module 2 — Express.js, PM2, Debugging & Logging
 
@@ -1715,7 +1715,7 @@ Sections: 2 | Topics: 9 | Subtopics: 58
 
 ==================================================================================
 
-# Module 3: Debugging & Logging
+# Module 10: Debugging & Logging
 
 =====Section 3: Express.js Debugging & Logging (Professional Workflow)=====
 Server crash ho ya galat kaam kare, use theek karne ki kala aur record rakhne ka tareeka.
@@ -1872,7 +1872,7 @@ Sections: 1 | Topics: 5 | Subtopics: 34
 
 ==================================================================================
 
-# Module 4 React Setup, Debugging & Core Concepts
+# Module 11 React Setup, Debugging & Core Concepts
 
 
 
@@ -1990,7 +1990,7 @@ Sections: 1 | Topics: 3 | Subtopics: 29
 ==================================================================================
 
 
-# Module  5 — React Routing & Hooks (Advanced)
+# Module  12 — React Routing & Hooks (Advanced)
 
 📦 Processing: Phase/Module 5 — React Routing & Hooks (Advanced)
 
@@ -2149,7 +2149,7 @@ Sections: 1 | Topics: 5 | Subtopics: 40
 ==================================================================================
 
 
-# Module 6 Advanced React UI & State Management
+# Module 13 Advanced React UI & State Management
 
 
 📦 Processing: Phase/Module 6 — Advanced React UI & State Management
@@ -2262,7 +2262,7 @@ Sections: 1 | Topics: 3 | Subtopics: 25
 ==================================================================================
 
 
-# Module 7 File Uploads & Optimization
+# Module 14 File Uploads & Optimization
 
 📦 Processing: Phase/Module 7 — File Uploads & Optimization
 
@@ -2398,7 +2398,7 @@ Sections: 1 | Topics: 4 | Subtopics: 35
 ==================================================================================
 
 
-# Module 8: Full-Stack MERN & DevOps (MySQL via Sequelize)
+# Module 15: Full-Stack MERN & DevOps (MySQL via Sequelize)
 
 
 
@@ -2764,7 +2764,7 @@ Total Sections: 5 | Total Topics: 12 | Total Subtopics: ~110
 ==================================================================================
 
 
-# Module 9 Full-Stack MERN Testing & DevOps
+# Module 16 Full-Stack MERN Testing & DevOps
 
 📦 Processing: Phase/Module [9] — Full-Stack MERN Testing & DevOps
 
@@ -2953,7 +2953,7 @@ Sections: 1 | Topics: 6 | Subtopics: 58
 
 ==================================================================================
 
-# Module 10 VPS Management & Security
+# Module 17 VPS Management & Security
 
 📦 Processing: Phase/Module [10] — VPS Management & Security
 
@@ -3119,7 +3119,7 @@ Sections: 1 | Topics: 5 | Subtopics: 46
 ==================================================================================
 
 
-# Module 11 Nginx Web Server & Production Deployment
+# Module 18 Nginx Web Server & Production Deployment
 
 
 📦 Processing: Phase/Module [11] — Nginx Web Server & Production Deployment
@@ -3337,7 +3337,7 @@ Sections: 1 | Topics: 7 | Subtopics: 66
 ==================================================================================
 
 
-# Module 12 Performance (Raftaar)
+# Module 19 Performance (Raftaar)
 
 📦 Processing: Phase/Module 12 — Performance (Raftaar)
 
@@ -3456,7 +3456,7 @@ Sections: 1 | Topics: 3 | Subtopics: 25
 ==================================================================================
 
 
-# Module 13 Automation (Kaam ko Automatic Karna)
+# Module 20 Automation (Kaam ko Automatic Karna)
 
 📦 Processing: Phase/Module 13 — Automation (Kaam ko Automatic Karna)
 
@@ -3599,7 +3599,7 @@ Sections: 1 | Topics: 4 | Subtopics: 34
 ==================================================================================
 
 
-# Module 14 Advanced Deployment & Architecture
+# Module 21 Advanced Deployment & Architecture
 
 📦 Processing: Phase/Module 14 — Advanced Deployment & Architecture
 
