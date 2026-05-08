@@ -610,6 +610,8 @@ Minimal but production-ready code.
 
 **🔴 INLINE COMMENT RULE (MOST IMPORTANT):** Har code line ke saath inline comment lagao jo us line ka har parameter, argument, function call, aur value explain kare — function khud kya karta hai woh bhi batao. Reader ko code padhte hi turat samajh aa jaye. (Full rule upar "RULE ZERO" mein hai — strictly follow karo.)
 
+**🏷️ VERSION TAG RULE (MANDATORY):** Har code block ki **pehli line** pe version comment lagao — e.g., `# Python 3.11+ | FastAPI 0.110+`. (Full rule upar "VERSION TAG RULE" mein hai.)
+
 **MANDATORY OUTPUT RULE:** Har code block, command, ya `print()` statement ke baad EXACTLY ye format mein expected output dikhao:
 ```
 # 📤 Expected Output:

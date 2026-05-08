@@ -769,6 +769,8 @@ Minimal but production-ready code. If the skeleton includes an example, incorpor
 
 **🔴 INLINE COMMENT RULE (MOST IMPORTANT):** Har code line ke saath inline comment lagao jo us line ka har parameter, argument, function call, aur value explain kare — function khud kya karta hai woh bhi batao. Reader ko code padhte hi turat samajh aa jaye. (Full rule upar "RULE ZERO" mein hai — strictly follow karo.)
 
+**🏷️ VERSION TAG RULE (MANDATORY):** Har code block ki **pehli line** pe version comment lagao — e.g., `# Python 3.11+ | FastAPI 0.110+`. (Full rule upar "VERSION TAG RULE" mein hai.)
+
 **MANDATORY OUTPUT RULE:** Har code block, command, ya `print()` statement ke baad EXACTLY ye format mein expected output dikhao:
 ```
 # 📤 Expected Output:
@@ -1057,6 +1059,7 @@ Large codebases mein meaningful variable names rakhna critical hai taaki code re
 - **❌ Mistake:** `a = 10` jaise meaningless variable names use karna.
 - **🤦 Why:** Code quickly samajhna mushkil ho jata hai, especially team mein.
 - **✅ The 'Pro' Way:** `user_age = 10` — descriptive snake_case names use karo.
+- **⚡ Consequences:** Production mein random variable names se debugging mein ghante lag jaate hain — bug fix karna almost impossible ho jaata hai team setting mein.
 
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
