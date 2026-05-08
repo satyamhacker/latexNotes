@@ -230,9 +230,9 @@ Agar woh term/function/command **isi module mein pehle kisi subtopic mein alread
 1. **Point 2 (Analogy):** Agar analogy mein koi tech term use kiya
 2. **Point 6 (Under the Hood):** Jab internal working explain karte waqt external tools mention ho
 3. **Point 7 (Hands-On):** Code examples mein jo bhi library/tool import ho
-4. **Point 9 (Anti-Patterns):** Jab alternatives mention karo
-5. **Point 8 (Comparison):** Comparison table mein jo bhi terms aayein
-6. **Point 12 (Real-World Use Case):** Company examples mein jo tech stack mention ho
+4. **Point 10 (Anti-Patterns):** Jab alternatives mention karo
+5. **Point 13 (Comparison):** Comparison table mein jo bhi terms aayein
+6. **Point 14 (Real-World Use Case):** Company examples mein jo tech stack mention ho
 7. **Point 17 (Interview Q&A):** Answers mein jo bhi external concepts reference ho
 
 ### 🔍 Detection Rule (Self-Check)
@@ -334,7 +334,7 @@ Terms jaise: hot reload, idempotent, event loop, race condition, daemon, middlew
 
 **3. CLI Flags / Arguments mentioned in prose (text mein, code block se bahar)**
 
-Jab koi flag Point 4 (Why This Matters), Point 9 (Anti-Patterns), Point 11 (Troubleshooting) ya kisi bhi textual part mein mention ho — code block se bahar — toh usse bhi explain karo. (RULE ZERO sirf code blocks ke liye hai — textual prose mein flags tab bhi unexplained reh jaate hain.)
+Jab koi flag Point 4 (Why This Matters), Point 10 (Anti-Patterns), Point 12 (Troubleshooting) ya kisi bhi textual part mein mention ho — code block se bahar — toh usse bhi explain karo. (RULE ZERO sirf code blocks ke liye hai — textual prose mein flags tab bhi unexplained reh jaate hain.)
 
 ```markdown
 ✅ CORRECT:
@@ -368,7 +368,7 @@ Jab koi config key ya env variable textually mention ho — jaise `SECRET_KEY`, 
 
 **5. Function Arguments / Parameter Names mentioned in Prose (text mein, code block se bahar)**
 
-Jab koi function argument ya parameter name textual explanation mein mention ho — jaise Point 4 (Why This Matters), Point 9 (Anti-Patterns), Point 10 (Confusion Clarifier), Point 11 (Troubleshooting), Point 17 (Interview Q&A) — toh usse bhi 1-line inline explain karo. RULE ZERO sirf code block ke andar arguments cover karta hai — prose mein jo arguments mention hote hain woh uncovered reh jaate hain.
+Jab koi function argument ya parameter name textual explanation mein mention ho — jaise Point 4 (Why This Matters), Point 10 (Anti-Patterns), Point 11 (Confusion Clarifier), Point 12 (Troubleshooting), Point 17 (Interview Q&A) — toh usse bhi 1-line inline explain karo. RULE ZERO sirf code block ke andar arguments cover karta hai — prose mein jo arguments mention hote hain woh uncovered reh jaate hain.
 
 ```markdown
 ✅ CORRECT:
@@ -483,6 +483,37 @@ Har code block mein **har line ke saath inline comment** lagao jo us line ka har
 ```
 
 
+---
+
+
+**🏷️ VERSION TAG RULE (MANDATORY):** Har code block ki **pehli line** pe ek version comment lagao jo bataye ki yeh code kis version pe tested/valid hai.
+
+- **Format (Python/backend):** `# Python 3.11+ | Django 5.x` ya `# Python 3.10+ | FastAPI 0.110+`
+- **Format (JS/frontend):** `// Node.js 20+ | React 18` ya `// TypeScript 5.x | Next.js 14+`
+- **Agar user ne version specify kiya hai** → wahi use karo exactly.
+- **Agar version specify nahi kiya** → best guess lagao based on syntax/APIs used, aur ⚠️ mark karo:
+  `# ⚠️ Version verify karo — yeh Python 3.11+ pe tested hai, aapke environment mein confirm karo`
+- **Yeh comment code block ki line 1 hogi** — line numbering (RULE MINUS ONE) iske baad line 2 se shuru hogi, ya alternatively version comment ko line 0 treat karo aur actual code 1 se number karo.
+- **Kabhi bhi version comment skip mat karo** — chahe code 1 line ka hi kyun na ho.
+
+```python
+# ✅ CORRECT format:
+# Python 3.11+ | requests 2.31+
+1  import requests                        # requests library — HTTP calls karne ke liye
+2  response = requests.get("https://...") # .get() = HTTP GET request bhejo, response object milta hai
+```
+
+```python
+# ✅ CORRECT — version unknown, best guess with warning:
+# ⚠️ Version verify karo — yeh Python 3.10+ pe tested hai
+1  match command:                         # match-case = Python 3.10+ ka structural pattern matching
+2      case "quit": exit()               # agar command == "quit" toh program band karo
+```
+
+
+---
+
+
 ### 🅰️ For Code Blocks (Line-by-Line Logic)
 
 Sirf code mat do, uska DNA khol kar rakh do:
@@ -521,7 +552,7 @@ Beginners ko flags se darr lagta hai. Har command ko aise todo:
 ## 📦 OUTPUT STRUCTURE — THE STRICT 19-POINT TEMPLATE
 
 
-> **Note:** This was historically called "17-Point Structure" but now contains **19 points** (Point 18: Memory Hook + Point 19: Security). Follow pura 19-point template — kabhi Point 17 par mat ruko.
+> **Note:** This was historically called "17-Point Structure" but now contains **19 points** (Point 18: Memory Hook + Point 19: Subtopic Self-Verification Checklist). Follow pura 19-point template — kabhi Point 17 par mat ruko.
 
 
 For **EVERY SUBTOPIC**, use this exact format. Do not skip any point.
@@ -610,19 +641,31 @@ If CLI is used:
 ```
 
 
-#### ⚖️ 8. Comparison (Ye vs Woh)
-Compare with the closest confusing topic using a markdown table.
-*(Skip karo agar koi genuine competitor/confusing alternative nahi hai — forced comparison mat do)*
+#### 🔒 8. Security-First Check
+Agar subtopic security-relevant hai (credentials, network, file permissions, input handling, tokens) — mandatory hai:
+- How can this be hacked?
+- How to secure it? (e.g., Secrets management, permissions, input validation).
+
+Agar subtopic purely mathematical/theoretical hai aur koi direct security surface nahi — likho: `(N/A — is concept mein direct security surface nahi hai)`. Kabhi silently skip mat karo.
 
 
-#### ⚠️ 9. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
+#### 🏗️ 9. Scalability & Industry Context
+**Adaptive Rule — Topic type ke hisaab se angle choose karo:**
+- **Agar concept infrastructure/service/tool hai** (e.g., Docker, Redis, API Gateway, LangChain): 1 user vs 1 Million users mein kya fark padta hai? Cloud-Native ready hai? Senior Engineers kya karte hain?
+- **Agar concept algorithmic/mathematical/theoretical hai** (e.g., Binary Search, SQL JOIN, Gradient Descent, Big-O, Transformer attention): Time complexity + Space complexity discuss karo. Dataset size badhne par performance kaisi degrade hoti hai? Real-world data par kaunse bottlenecks aate hain?
+- **Har case mein:** Best practices jo senior engineers follow karte hain — naming conventions, performance tips, kya avoid karein.
+*("1 user vs 1M users" framing purely theoretical/algorithmic concepts pe mat thopo — complexity aur memory tradeoffs zyada relevant hain wahan.)*
+
+
+#### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 - **❌ Mistake:** Common wrong way of doing it.
 - **🤦 Why:** Why people do it wrong.
 - **✅ The 'Pro' Way:** Correct implementation.
-(3-4 mistakes minimum cover karo)
+- **⚡ Consequences:** Agar yeh galat tarika use kiya toh real-world mein kya toot sakta hai? Specific batao — vague mat raho (e.g., "Data leak hoga", "Server crash karega under load", "Race condition hogi concurrent requests mein").
+(3-4 mistakes minimum cover karo — har mistake ke saath uski consequence MANDATORY hai)
 
 
-#### 🤔 10. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 **Minimum 3 confusions, recommended 4-6, maximum 8.** Sirf subtopic ke content se mat lo — **apne knowledge base se bhi woh GENERAL beginner-level confusions proactively add karo** jo is topic mein commonly hoti hain (Stack Overflow, Reddit, teaching forums, classroom experiences pe frequently asked doubts). Goal yeh hai ki beginner ko **KISI BHI angle se confusion na rahe** — notes padhne ke baad uske mann mein ek bhi "lekin yeh kya?" ya "yeh aise kyun?" nahi aana chahiye.
 
 Subtopic mein agar confusions naturally dikh rahe hain toh sab include karo + apne se bhi add karo. Upper limit 8 rakho (isse zyada hone par top 8 most impactful choose karo).
@@ -650,7 +693,7 @@ Har confusion ke liye yeh exact format follow karo:
 - Confusions beginner ke ACTUAL perspective se likho — jaise woh actually sochta hai, textbook language mein nahi
 
 
-#### 🛠️ 11. Troubleshooting Flowchart (Mental Model)
+#### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 **Minimum 3 common errors** jo beginner actually face karta hai. Har entry ke liye yeh format:
 
 - **`[Exact error message ya symptom]`**
@@ -660,44 +703,45 @@ Har confusion ke liye yeh exact format follow karo:
 *(Agar exact error message pata nahi — behavior describe karo: e.g., "Server starts but requests timeout silently", "API returns 200 but response body empty")*
 
 
+#### ⚖️ 13. Comparison (Ye vs Woh)
+Compare with the closest confusing topic using a markdown table.
+*(Skip karo agar koi genuine competitor/confusing alternative nahi hai — forced comparison mat do)*
 
-#### 🌍 12. Real-World Use Case (Production Application)
+
+#### 🌍 14. Real-World Use Case (Production Application)
 **Instruction:** Where is this used in real tech companies? Give a specific scenario with company/product name if possible.
 
 
-#### 🔄 13. Real-World Flow (End-to-End 3-Phase Picture)
+#### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 **Instruction:** Is concept ka real-world mein step-by-step flow dikhao — jaise yeh actually production mein kaam karta hai. Teen phases mein tod ke dikhao:
 - **Testing/Offline Phase:** Developer ya system kab aur kaise is tool/concept ko use karta hai.
 - **Fixing/Iteration Phase:** Us phase ke output ko dekh kar developer kya action leta hai — kya fix karta hai, kya tune karta hai.
 - **Live Production Phase:** Jab real user app use karta hai — tab is concept ka kya role hai?
+
+**⚠️ Phase Adaptation Rule:** Agar concept purely theoretical/foundational hai (e.g., Ohm's Law, Big-O notation, OSI Model, mathematical formulas) — toh phases ko is tarah adapt karo:
+- **Learning Phase:** Concept pehli baar kaise samjha jaata hai — definition, formula, mental model.
+- **Application Phase:** Is concept ko real problems pe kaise apply karte hain — examples, exercises, pattern recognition.
+- **Mastery/Production Phase:** Expert level pe yeh concept kaise use hota hai — optimization, edge cases, interview-level depth.
 
 > 💡 Example format (RAGAS ke liye):
 > - Testing Phase (Weekend/Night): Tum RAGAS ko hafte mein ek baar chalate ho apne 100 test questions pe. Teacher AI (GPT-4) judge karke report card deta hai.
 > - Fixing Phase: Tum us report ko dekh kar apna Chunk Size ya Vector DB theek karte ho.
 > - Live Production: Jab real user app use karta hai, tab KOI RAGAS nahi chalta. Sirf tumhara Vector DB aur ek single Student AI chalta hai.
 
-*(CRITICAL RULE: N/A likhna FORBIDDEN hai. Agar concept ke liye teen-phase flow exactly applicable nahi — toh keywords aur context se ek logical real-world flow INFER karo. Har tech concept ka koi na koi dev-to-production lifecycle hota hai. Jo phases relevant hain woh dikhao, baaki adapt karo.)*
+*(CRITICAL RULE: N/A likhna FORBIDDEN hai. Agar concept ke liye teen-phase flow exactly applicable nahi — toh keywords aur context se ek logical real-world flow INFER karo aur likho. Har concept ka ek lifecycle hota hi hai — chahe practical ho ya theoretical.)*
 
 
-#### 🎨 14. Visual Diagram (ASCII Art)
+#### 🎨 16. Visual Diagram (ASCII Art)
 **Instruction:** Text-based architecture ya flow diagram — concept ka visual flow dikhao.
 *(Sirf tab banao jab concept mein clear flow ya hierarchy ho. Agar concept purely mathematical ya abstract hai — skip karo aur likho: `(N/A — koi diagrammatic flow applicable nahi hai)`)*
 
 
-#### 🏗️ 15. Scalability & Industry Context
-**Adaptive Rule — Topic type ke hisaab se angle choose karo:**
-- **Agar concept infrastructure/service/tool hai** (e.g., Docker, Redis, API Gateway, LangChain): 1 user vs 1 Million users mein kya fark padta hai? Cloud-Native ready hai? Senior Engineers kya karte hain?
-- **Agar concept algorithmic/mathematical/theoretical hai** (e.g., Binary Search, SQL JOIN, Gradient Descent, Big-O, Transformer attention): Time complexity + Space complexity discuss karo. Dataset size badhne par performance kaisi degrade hoti hai? Real-world data par kaunse bottlenecks aate hain?
-- **Har case mein:** Best practices jo senior engineers follow karte hain — naming conventions, performance tips, kya avoid karein.
-*("1 user vs 1M users" framing purely theoretical/algorithmic concepts pe mat thopo — complexity aur memory tradeoffs zyada relevant hain wahan.)*
-
-
-#### ⚠️ 16. Consequences of Failure (Agar Galat Kiya Toh?)
-What breaks if we don't code/configure this correctly? Specific consequences batao — vague mat raho.
-
-
 #### ❓ 17. Interview Q&A (FAQ)
-**Exactly 5 questions** with detailed answers related to this subtopic.
+**Minimum 5 questions, Maximum 8 — topic complexity ke hisaab se judge karo:**
+- Simple/foundational subtopic → 5 questions
+- Moderate complexity → 6-7 questions
+- Deep/complex subtopic → 8 questions
+- **Kabhi 5 se kam mat karo, kabhi 8 se zyada mat karo.**
 - **Answer depth rule:** Har answer minimum 3-4 lines ka hona chahiye — sirf 1-line answers nahi chalenge.
 - Har answer mein yeh cover karo: definition + kaise kaam karta hai + ek real example.
 - **Deep understanding questions likhna — factual nahi.** Examples:
@@ -712,12 +756,34 @@ What breaks if we don't code/configure this correctly? Specific consequences bat
 Sticky Hinglish line to remember the concept forever.
 
 
-#### 🔒 19. Security-First Check
-Agar subtopic security-relevant hai (credentials, network, file permissions, input handling, tokens) — mandatory hai:
-- How can this be hacked?
-- How to secure it? (e.g., Secrets management, permissions, input validation).
+#### 📋 19. Subtopic Self-Verification Checklist
+Agle subtopic pe jaane se pehle — yeh checklist silently verify karo aur print karo:
 
-Agar subtopic purely mathematical/theoretical hai aur koi direct security surface nahi — likho: `(N/A — is concept mein direct security surface nahi hai)`. Kabhi silently skip mat karo.
+```
+📋 Subtopic Complete Check — [Subtopic Name]
+✅ Point 2  — Analogy given (accurate, everyday life, not misleading)
+✅ Point 3  — Technical definition (English) + Hinglish simplification
+✅ Point 4  — Problem + Solution + Kab use karo + Kab mat karo (specific, not generic)
+✅ Point 5  — Visual/Editor state described (or N/A stated)
+✅ Point 6  — Under the Hood flow (numbered steps)
+✅ Point 7  — Runnable code + VERSION TAG + inline comments on every line + expected output block
+✅ Point 8  — Security check done (or N/A explicitly stated)
+✅ Point 9  — Scalability / complexity context given
+✅ Point 10 — Anti-patterns (3-4 minimum), each with consequence
+✅ Point 11 — Confusion Clarifier (min 3, max 8, each with "Prove karo")
+✅ Point 12 — Troubleshooting (min 3 errors, each with exact Fix action)
+✅ Point 13 — Comparison table (or N/A explicitly stated)
+✅ Point 14 — Real-world use case (company/product name included)
+✅ Point 15 — 3-Phase flow (or adapted phases for theory topics)
+✅ Point 16 — Visual diagram (or N/A explicitly stated)
+✅ Point 17 — Interview Q&A (5-8 questions, each answer 3-4 lines minimum)
+✅ Point 18 — Memory Hook (1 sticky Hinglish line)
+⚠️ Koi bhi point actually complete nahi hua? → Wapas jaao, complete karo, PHIR aage badho.
+```
+
+
+
+
 
 
 ---

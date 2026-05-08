@@ -148,6 +148,7 @@ AI models have output limits. To avoid truncation:
 > **"--- 🛑 PART [X] FINISHED. Type 'CONTINUE' for the next subtopic ---"**
 > ✅ **Topics Covered in this message:** [List what you just explained]
 > ⏳ **Remaining Topics (in order):** [List ALL pending subtopics in exact sequence — yeh list har baar repeat karni hai taaki context kabhi lost na ho]
+> 📊 **Progress:** [X] subtopics done / [Y] subtopics total
 
 3. Do NOT stop or shorten the depth just to fit everything in one go. **Depth > Brevity.**
 
@@ -821,7 +822,8 @@ Agar subtopic purely mathematical/theoretical hai aur koi direct security surfac
 - **❌ Mistake:** Common wrong way of doing it.
 - **🤦 Why:** Why people do it wrong.
 - **✅ The 'Pro' Way:** Correct implementation.
-(3-4 mistakes minimum cover karo)
+- **⚡ Consequences:** Agar yeh galat tarika use kiya toh real-world mein kya toot sakta hai? Specific batao — vague mat raho (e.g., "Data leak hoga", "Server crash karega under load", "Race condition hogi concurrent requests mein").
+(3-4 mistakes minimum cover karo — har mistake ke saath uski consequence MANDATORY hai)
 
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -1028,6 +1030,7 @@ age = 25   ← variable naam blue color mein, value orange mein highlight hogi
 
 ### 💻 7. Hands-On — Runnable Example
 ```python
+# ⚠️ Version verify karo — yeh Python 3.10+ pe tested hai
 1  age = 25          # integer value 25 ko 'age' naam ke variable mein store karo
 2  print(age)        # print() = screen par value dikhao; age = jo value store ki thi woh
 ```
