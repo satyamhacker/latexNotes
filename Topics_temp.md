@@ -23,6 +23,7 @@
      1.8: Additional Info: WebView Support
      1.9: Additional Info: Comparison: Debug vs Release Builds (Note 42)
      1.10: Additional Info: Permissions (Android `AndroidManifest.xml`) (Note 29, 38, 40)
+     1.11: Continuous Native Generation (CNG) (app.json & Config Plugins se android/ios manage karna - no manual native edits)
 
  Module 2: Core Components & State (Legacy & Modern)
      2.1: Class Components (Sirf samajhne ke liye)
@@ -96,6 +97,8 @@
      6.14: Responsive Design & Scaling (Tablets & Foldables) (`react-native-responsive-screen`)
      6.15: Design Systems (NativeWind / Tailwind CSS for React Native)
      6.16: Monitoring & Error Tracking (`Sentry` / `Bugsnag` setup for live crash reporting)
+     6.17: Monorepo Management (Turborepo / Nx) (Multiple apps & shared libraries in one repo)
+     6.18: MSW (Mock Service Worker) (Networking layer ko mock karna for API testing)
 
  Module 7: Troubleshooting & Practical Fixes (Beginner Problems)
      7.1: Build & Cache Hell (Part 1): `gradlew clean` vs `gradlew.bat` (Kab aur Kyun?)
@@ -154,6 +157,8 @@
          `Swipeable Lists` (Note 35)
      11.7: `Hermes Engine & Memory Leaks` (How Hermes works, detecting leaks with LeakCanary / Chrome DevTools)
      11.8: `New Architecture (Fabric & TurboModules)` (Bridgeless mode - theoretical knowledge)
+     11.9: `React Native Skia` (High-end graphics, filters, complex charts - Shopify standard)
+     11.10: New Architecture - Bridgeless Migration (Bridge deprecated 2026, app migrate karna)
 
  Module 12: Interacting with Native Device
      12.1: Push Notifications (Firebase Cloud Messaging - FCM)
@@ -197,3 +202,4 @@
      14.2: Accessibility (Screen Readers, Contrast, Touch Targets) (Note 48)
      14.3: Project Architecture (Atomic Design / Feature-based folders) (`src/features`, `src/components/atoms`)
      14.4: Code Quality Tools (`ESLint` + `Prettier` + `Husky` pre-commit hooks setup)
+     14.5: On-Device AI (MediaPipe / CoreML / TensorFlow Lite) (Local AI models on phone - 2026 standard)
