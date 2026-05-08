@@ -43,6 +43,7 @@
      3.4: `Modal` (Popup windows) (Note 3)
      3.5: `Alert` (Note 3)
      3.6: `react-native-swiper` (Note 7)
+     3.7: `@shopify/flash-list` (Enterprise-grade list, FlatList replacement for 1000s of items)
 
  Module 4: UI Controls & Core APIs
      4.1: `Pressable` (Modern touch handling)
@@ -92,6 +93,9 @@
      6.11: Local Databases (SQLite, WatermelonDB, Realm) (Note 32)
      6.12: `Git` Commands (`revert`, `rebase`, `reset`, `delete branch`) (Note 51)
      6.13: Networking Tools (`dig` command) (Note 25)
+     6.14: Responsive Design & Scaling (Tablets & Foldables) (`react-native-responsive-screen`)
+     6.15: Design Systems (NativeWind / Tailwind CSS for React Native)
+     6.16: Monitoring & Error Tracking (`Sentry` / `Bugsnag` setup for live crash reporting)
 
  Module 7: Troubleshooting & Practical Fixes (Beginner Problems)
      7.1: Build & Cache Hell (Part 1): `gradlew clean` vs `gradlew.bat` (Kab aur Kyun?)
@@ -130,6 +134,8 @@
      10.3: `Zustand` (Halka-phulka global state manager) (Note 31)
      10.4: `Context API` (Advanced) (Note 31)
      10.5: `Persistent State` (`redux-persist`) (Note 31)
+     10.6: `RTK Query` (Redux Toolkit Query - caching, auto loading states, replaces manual Axios)
+     10.7: `GraphQL & Apollo Client` (Enterprise alternative to REST, used by Facebook/Shopify)
 
  Module 11: Performance & Animations
      11.1: `Animated` API (React Native ki built-in animation)
@@ -146,6 +152,8 @@
          `Skeleton Loaders` (Note 35)
          `BottomSheet` (Note 35)
          `Swipeable Lists` (Note 35)
+     11.7: `Hermes Engine & Memory Leaks` (How Hermes works, detecting leaks with LeakCanary / Chrome DevTools)
+     11.8: `New Architecture (Fabric & TurboModules)` (Bridgeless mode - theoretical knowledge)
 
  Module 12: Interacting with Native Device
      12.1: Push Notifications (Firebase Cloud Messaging - FCM)
@@ -181,7 +189,11 @@
      13.7: `Environment Variables` (`react-native-config`) (Note 44)
      13.8: `Permissions Handling` (Manifest vs Runtime) (Note 29, 38, 40)
      13.9: `File Upload (Multipart)` (Note 34)
+     13.10: `Deep Security` (Jailbreak/Root Detection, Sensitive Info Masking on multitasking screen)
+     13.11: `App Store Optimization (ASO) Basics` (Metadata, icons, screenshots optimization)
 
  Module 14: Professional Development & Ecosystem
      14.1: Error Handling (`Error Boundaries`) (Note 30)
      14.2: Accessibility (Screen Readers, Contrast, Touch Targets) (Note 48)
+     14.3: Project Architecture (Atomic Design / Feature-based folders) (`src/features`, `src/components/atoms`)
+     14.4: Code Quality Tools (`ESLint` + `Prettier` + `Husky` pre-commit hooks setup)
