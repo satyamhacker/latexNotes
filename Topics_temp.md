@@ -60,6 +60,7 @@
      4.10: `StatusBar` (Note 14)
      4.11: `Toast` (Note 14)
      4.12: `AppState` (App Lifecycle) (Note 2, 28)
+     4.13: Dynamic Theming (Dark Mode / Light Mode, Design Tokens, Figma-sync colors/spacing)
 
  Module 5: Advanced Features & State Management
      5.1: `Image Picker` (Gallery/Camera se image lena) (`react-native-image-picker`) (Note 34)
@@ -69,6 +70,7 @@
          Navigation Actions (`navigation.goBack()`) (Note 20)
      5.3: Redux (Global State Management ka introduction) (Note 31)
      5.4: Advanced Forms (`react-hook-form`) (Note 1)
+     5.5: Schema Validation (`Zod` / `Yup` integrated with React Hook Form & TypeScript - 2026 standard)
 
  Module 6: Data, Tooling & Best Practices
      6.1: HTTP Requests (Axios se API call karna)
@@ -99,6 +101,7 @@
      6.16: Monitoring & Error Tracking (`Sentry` / `Bugsnag` setup for live crash reporting)
      6.17: Monorepo Management (Turborepo / Nx) (Multiple apps & shared libraries in one repo)
      6.18: MSW (Mock Service Worker) (Networking layer ko mock karna for API testing)
+     6.19: Internationalization (i18n) (`react-i18next` / `expo-localization`, RTL support for Arabic etc.)
 
  Module 7: Troubleshooting & Practical Fixes (Beginner Problems)
      7.1: Build & Cache Hell (Part 1): `gradlew clean` vs `gradlew.bat` (Kab aur Kyun?)
@@ -159,6 +162,7 @@
      11.8: `New Architecture (Fabric & TurboModules)` (Bridgeless mode - theoretical knowledge)
      11.9: `React Native Skia` (High-end graphics, filters, complex charts - Shopify standard)
      11.10: New Architecture - Bridgeless Migration (Bridge deprecated 2026, app migrate karna)
+     11.11: Codegen & C++ Specs (Writing TurboModule specs for JSI - direct native-to-JS without Bridge)
 
  Module 12: Interacting with Native Device
      12.1: Push Notifications (Firebase Cloud Messaging - FCM)
@@ -196,6 +200,8 @@
      13.9: `File Upload (Multipart)` (Note 34)
      13.10: `Deep Security` (Jailbreak/Root Detection, Sensitive Info Masking on multitasking screen)
      13.11: `App Store Optimization (ASO) Basics` (Metadata, icons, screenshots optimization)
+     13.12: Bundle Analysis (`react-native-bundle-visualizer` - fighting KB bloat, Senior skill)
+     13.13: Snapshot Testing (UI regression prevention during large refactors)
 
  Module 14: Professional Development & Ecosystem
      14.1: Error Handling (`Error Boundaries`) (Note 30)
@@ -203,3 +209,5 @@
      14.3: Project Architecture (Atomic Design / Feature-based folders) (`src/features`, `src/components/atoms`)
      14.4: Code Quality Tools (`ESLint` + `Prettier` + `Husky` pre-commit hooks setup)
      14.5: On-Device AI (MediaPipe / CoreML / TensorFlow Lite) (Local AI models on phone - 2026 standard)
+     14.6: Analytics & Event Tracking (Firebase Analytics / Mixpanel / Amplitude integration)
+     14.7: App Store Review Guidelines (Rejection reasons, Privacy Manifests, 4.2 Minimum Functionality)
