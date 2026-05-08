@@ -255,8 +255,9 @@ Data Loss Check:
   ✅ All REAL-WORLD FLOW phases accounted for
 
 📋 MERGED MASTER TOPICS:
+(🚨 Print ONLY ONE format below based on section count. Do NOT print the "Format A / Format B" labels or any IF instruction lines in your actual output.)
 
-⬇️ IF multiple sections exist — group by section:
+Format A — use this if multiple sections exist:
 Section [X]: [Section Name]
   Master Topic [N]: [Master Topic Name]
   Master Topic [N]: [Master Topic Name]
@@ -267,7 +268,7 @@ Section [X]: [Section Name]
   Master Topic [N]: [Master Topic Name]
   ...
 
-⬇️ IF only 1 section OR original skeleton had no sections — list all Master Topics flat (no section header):
+Format B — use this if only 1 section OR original skeleton had no sections (list flat, no section header):
   Master Topic [N]: [Master Topic Name]
   Master Topic [N]: [Master Topic Name]
   Master Topic [N]: [Master Topic Name]
