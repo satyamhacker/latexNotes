@@ -254,6 +254,28 @@ Data Loss Check:
   ✅ All SCOPE SIGNAL fields accounted for
   ✅ All REAL-WORLD FLOW phases accounted for
 
+📋 MERGED MASTER TOPICS:
+
+⬇️ IF multiple sections exist — group by section:
+Section [X]: [Section Name]
+  Master Topic [N]: [Master Topic Name]
+  Master Topic [N]: [Master Topic Name]
+  ...
+
+Section [X]: [Section Name]
+  Master Topic [N]: [Master Topic Name]
+  Master Topic [N]: [Master Topic Name]
+  ...
+
+⬇️ IF only 1 section OR original skeleton had no sections — list all Master Topics flat (no section header):
+  Master Topic [N]: [Master Topic Name]
+  Master Topic [N]: [Master Topic Name]
+  Master Topic [N]: [Master Topic Name]
+  ...
+
+📊 MERGE SUMMARY:
+Sections: [X] | Master Topics: [A] (from [Y] original) | Subtopics: [B] (deduplicated)
+
 > ✅ Notes Guru ke liye optimized skeleton ready hai. Yeh skeleton original fragmented skeleton ka 100% data preserve karta hai — sirf structure ko compact aur logical banaya gaya hai.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
