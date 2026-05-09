@@ -3,165 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>React Native Professional Notes</title>
-    
+    <title>React Native — Zero to Professional Notes</title>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-    
+
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Prism/HighlightJS Theme -->
+    <!-- Highlight.js Theme -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark-reasonable.min.css">
 
     <style>
+        /* ===== DESIGN TOKENS ===== */
         :root {
-            /* Color Palette */
-            --bg-primary: #0f1115; /* Very dark slate */
-            --bg-secondary: #161b22; /* Slightly lighter for cards */
-            --bg-tertiary: #21262d; /* Borders/Separators */
-            
-            --text-primary: #f0f6fc;
-            --text-secondary: #8b949e;
-            --text-accent: #58a6ff; /* React Blue-ish */
-            
-            --accent-color: #61dafb; /* React Native Blue */
+            --bg-primary:    #0f1115;
+            --bg-secondary:  #161b22;
+            --bg-tertiary:   #21262d;
+            --text-primary:  #ffffff;
+            --text-secondary:#e6edf3;
+            --text-muted:    #8b949e;
+            --accent-blue:   #58a6ff;
+            --accent-cyan:   #61dafb;
             --accent-gradient: linear-gradient(135deg, #61dafb 0%, #4facfe 100%);
-            
-            --border-color: #30363d;
-            
-            --mac-red: #ff5f56;
-            --mac-yellow: #ffbd2e;
-            --mac-green: #27c93f;
-            
-            --font-main: 'Inter', sans-serif;
-            --font-code: 'Fira Code', monospace;
-            --font-display: 'Outfit', sans-serif;
+            --module-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --border-color:  #30363d;
+            --mac-red:       #ff5f56;
+            --mac-yellow:    #ffbd2e;
+            --mac-green:     #27c93f;
+            --font-main:     'Inter', sans-serif;
+            --font-code:     'Fira Code', monospace;
+            --font-display:  'Outfit', sans-serif;
+            --sidebar-width: 290px;
         }
 
-        /* Basic Reset & Layout */
-        * { box-sizing: border-box; }
+        /* ===== RESET ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            margin: 0;
-            padding: 0;
             background-color: var(--bg-primary);
             color: var(--text-primary);
             font-family: var(--font-main);
-            line-height: 1.7;
+            line-height: 1.75;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Layout Grid */
+        /* ===== LOADER ===== */
+        #loader {
+            position: fixed; inset: 0;
+            background: var(--bg-primary);
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 9999; gap: 1.5rem;
+        }
+        #loader .loader-label {
+            font-family: var(--font-display);
+            font-size: 1rem; color: var(--text-muted);
+            letter-spacing: 2px; text-transform: uppercase;
+        }
+        .spinner {
+            width: 52px; height: 52px;
+            border: 3px solid rgba(255,255,255,0.08);
+            border-top-color: var(--accent-cyan);
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ===== LAYOUT ===== */
+        .print-wrapper { min-height: 100vh; }
+
         .layout {
             display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
             min-height: 100vh;
         }
 
-        /* Sidebar TOC */
+        /* ===== SIDEBAR ===== */
         .sidebar {
-            width: 300px;
-            background: rgba(15, 17, 21, 0.95);
+            width: var(--sidebar-width);
+            background: rgba(15, 17, 21, 0.97);
             border-right: 1px solid var(--border-color);
             height: 100vh;
             position: sticky;
             top: 0;
             overflow-y: auto;
-            padding: 2rem 1.5rem;
-            display: none; /* Hidden on small screens initially */
+            padding: 2rem 1.25rem;
+            flex-shrink: 0;
             scrollbar-width: thin;
             scrollbar-color: var(--border-color) transparent;
+            display: none;
         }
-        .sidebar::-webkit-scrollbar { width: 6px; }
-        .sidebar::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+        @media (min-width: 1024px) { .sidebar { display: block; } }
 
-        @media (min-width: 1024px) {
-            .sidebar { display: block; }
-        }
+        .sidebar::-webkit-scrollbar { width: 5px; }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+        .sidebar::-webkit-scrollbar-thumb:hover { background: #484f58; }
 
         .toc-title {
             font-family: var(--font-display);
-            font-size: 0.9rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
             font-weight: 800;
+            padding-left: 0.5rem;
         }
 
-        /* TOC Links */
         .toc-link {
             display: block;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 0.75rem;
-            padding-left: 10px;
+            font-size: 0.82rem;
+            padding: 0.32rem 0.6rem;
             border-left: 2px solid transparent;
-            transition: all 0.2s ease;
+            border-radius: 0 4px 4px 0;
+            transition: color 0.18s, border-color 0.18s, background 0.18s;
+            line-height: 1.4;
+            margin-bottom: 0.18rem;
         }
         .toc-link:hover, .toc-link.active {
-            color: var(--accent-color);
-            border-left-color: var(--accent-color);
+            color: var(--accent-cyan);
+            border-left-color: var(--accent-cyan);
+            background: rgba(97, 218, 251, 0.07);
         }
-        .toc-link.sub-item { margin-left: 15px; font-size: 0.85rem; }
+        .toc-link.level-h1 { font-weight: 700; color: var(--text-secondary); font-size: 0.85rem; }
+        .toc-link.level-h2 { padding-left: 1rem; }
+        .toc-link.level-h2.module { color: #4facfe; font-weight: 600; }
+        .toc-link.level-h3 { padding-left: 1.75rem; font-size: 0.78rem; }
 
-        /* Main Content */
+        /* ===== MAIN CONTENT ===== */
         .main-content {
             flex: 1;
-            padding: 4rem 10% 8rem 5%;
-            width: 100%;
-            max-width: 100%;
+            padding: 3.5rem 6% 8rem 5%;
+            min-width: 0;
+            max-width: 980px;
         }
 
-        /* Typography Styles */
+        /* ===== TYPOGRAPHY ===== */
         h1, h2, h3, h4, h5, h6 {
             font-family: var(--font-display);
             color: var(--text-primary);
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.25;
+            line-height: 1.3;
         }
 
         h1 {
             font-size: 3rem;
             background: var(--accent-gradient);
-            background-clip: text;
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
-            border-bottom: 3px solid #30363d;
+            border-bottom: 3px solid var(--border-color);
             padding-bottom: 1rem;
-            width: fit-content;
+            margin-top: 0;
+            margin-bottom: 2rem;
         }
 
         h2 {
             font-size: 2rem;
-            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--border-color);
             padding-bottom: 0.5rem;
-            margin-top: 4rem;
+            margin-top: 3.5rem;
+            margin-bottom: 1.25rem;
         }
 
-        h3 { font-size: 1.5rem; color: var(--text-accent); margin-top: 2.5rem; }
-        
-        p, li { margin-bottom: 1rem; font-size: 1.05rem; color: #c9d1d9; }
-        
-        strong { color: #fff; font-weight: 600; }
-        em { color: var(--text-accent); font-style: italic; }
+        /* Module & Topic Section Headings — Big Bold Blue Gradient */
+        h2.module-section, h2.topic-section {
+            font-family: var(--font-display);
+            font-size: 2.1rem;
+            font-weight: 800;
+            background: var(--module-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-left: 5px solid #4facfe;
+            border-bottom: none;
+            padding-left: 1rem;
+            margin-top: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
 
-        /* Blockquotes / Alerts */
+        h3 {
+            font-size: 1.4rem;
+            color: var(--accent-blue);
+            margin-top: 2.5rem;
+            margin-bottom: 0.9rem;
+        }
+
+        /* h4 — Section label badges (🎯 1. Subtopic Title, 🐣 2. Analogy…) */
+        h4 {
+            font-family: var(--font-display);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            color: var(--text-muted);
+            background: var(--bg-tertiary);
+            display: inline-block;
+            padding: 0.3rem 0.85rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            margin-top: 2.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Subtopic title lines — 1.2: Comparison… */
+        h5.subtopic-title {
+            font-family: var(--font-display);
+            font-size: 1.55rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-left: 4px solid #a78bfa;
+            padding-left: 0.85rem;
+            margin-top: 0.25rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        p, li {
+            font-size: 1.02rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.85rem;
+        }
+
+        strong { color: #ffffff; font-weight: 700; }
+        em     { color: var(--accent-blue); font-style: italic; }
+
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--accent-blue);
+            transition: color 0.15s, border-color 0.15s;
+        }
+        a:hover { color: var(--accent-cyan); border-bottom-color: var(--accent-cyan); }
+
+        ul, ol { padding-left: 1.6rem; }
+        li { margin-bottom: 0.45rem; }
+        li::marker { color: var(--accent-cyan); }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 3rem 0;
+        }
+
+        /* ===== BLOCKQUOTE ===== */
         blockquote {
-            background: rgba(56, 189, 248, 0.1);
-            border-left: 4px solid var(--accent-color);
-            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent-blue);
+            background: rgba(88, 166, 255, 0.07);
+            margin: 1.75rem 0;
             padding: 1rem 1.5rem;
             border-radius: 0 8px 8px 0;
+            color: var(--text-secondary);
+            font-style: italic;
         }
-        blockquote p { margin: 0; color: #e6edf3; }
+        blockquote p { margin: 0; color: var(--text-secondary); }
 
-        /* Tables */
+        /* ===== TABLES ===== */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -169,50 +273,69 @@
             background: var(--bg-secondary);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.35);
         }
         th, td {
             text-align: left;
-            padding: 1rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        th { background: #222933; color: var(--text-primary); font-weight: 600; }
-        tr:last-child td { border-bottom: none; }
-        tr:hover td { background: #262c36; }
-
-        /* Code Blocks (Mac Style) */
-        pre {
-            background: #0d1117; /* Darker bg for contrast */
+            padding: 0.85rem 1rem;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+        }
+        th {
+            background: #1c2128;
+            color: var(--accent-blue);
+            font-weight: 600;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+        }
+        tr:hover td { background: rgba(88, 166, 255, 0.08); }
+        tr:last-child td { border-bottom: none; }
+
+        /* ===== CODE BLOCKS — MAC WINDOW STYLE ===== */
+        pre.mac-window {
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
             margin: 2rem 0;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            overflow: hidden; /* For header clipping */
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            white-space: pre-wrap !important;
+            word-break: break-word !important;
         }
 
-        /* Mac Window Header */
         .code-header {
             background: #161b22;
-            padding: 10px 15px;
+            padding: 9px 14px;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid var(--border-color);
             justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
         }
-        .window-controls { display: flex; gap: 8px; }
-        .control { width: 12px; height: 12px; border-radius: 50%; }
-        .control.red { background: var(--mac-red); }
+
+        .window-controls { display: flex; gap: 7px; align-items: center; }
+        .control {
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .control.red    { background: var(--mac-red); }
         .control.yellow { background: var(--mac-yellow); }
-        .control.green { background: var(--mac-green); }
+        .control.green  { background: var(--mac-green); }
+
+        .code-lang {
+            font-family: var(--font-code);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
 
         .copy-btn {
             background: transparent;
             border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: 4px 8px;
-            font-size: 0.75rem;
-            border-radius: 4px;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            font-size: 0.72rem;
+            border-radius: 5px;
             cursor: pointer;
             transition: all 0.2s;
             font-family: var(--font-main);
@@ -222,74 +345,58 @@
         }
         .copy-btn:hover {
             background: #23282f;
-            color: white;
-            border-color: var(--text-secondary);
+            color: #fff;
+            border-color: var(--text-muted);
+        }
+        .copy-btn.copied {
+            color: var(--mac-green);
+            border-color: var(--mac-green);
         }
 
-        /* Actual Code Area */
-        code {
+        pre.mac-window code.hljs {
+            padding: 1.4rem 1.6rem;
+            display: block;
+            background: transparent;
             font-family: var(--font-code);
-            font-size: 0.9rem;
+            font-size: 0.875rem;
+            line-height: 1.65;
+            white-space: pre-wrap !important;
+            word-break: break-word !important;
         }
+
         /* Inline code */
-        p code, li code {
-            background: rgba(110, 118, 129, 0.3);
-            padding: 0.2rem 0.4rem;
+        p code, li code, td code {
+            font-family: var(--font-code);
+            background: rgba(110, 118, 129, 0.28);
+            padding: 0.15rem 0.4rem;
             border-radius: 4px;
             color: #ff7b72;
+            font-size: 0.88em;
         }
 
-        pre code.hljs {
-            padding: 1.5rem;
-            display: block;
-            overflow-x: auto;
-            background: transparent; /* inherited from pre */
-        }
-        
-        /* Links in text */
-        a { color: var(--text-accent); text-decoration: none; border-bottom: 1px dashed var(--text-accent); }
-        a:hover { border-bottom-style: solid; }
-
-        /* Lists */
-        ul, ol { padding-left: 1.5rem; }
-        li { margin-bottom: 0.5rem; }
-        li::marker { color: var(--accent-color); }
-
-        /* Loading State */
-        #loader {
-            position: fixed; inset: 0; background: var(--bg-primary);
-            display: flex; justify-content: center; align-items: center; z-index: 1000;
-        }
-        .spinner {
-            width: 50px; height: 50px; border: 3px solid rgba(255,255,255,0.1);
-            border-top-color: var(--accent-color); border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main-content { padding: 2rem 1.5rem; }
-            h1 { font-size: 2.2rem; }
-            h2 { font-size: 1.75rem; }
-            .sidebar { display: none; }
-        }
-        
-
-        /* Custom Scrollbar for page */
-        ::-webkit-scrollbar { width: 10px; }
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 9px; }
         ::-webkit-scrollbar-track { background: var(--bg-primary); }
         ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 5px; }
         ::-webkit-scrollbar-thumb:hover { background: #484f58; }
 
-        /* Print Optimization */
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .main-content { padding: 2rem 1.5rem 5rem; }
+            h1  { font-size: 2.2rem; }
+            h2  { font-size: 1.6rem; }
+            h2.module-section, h2.topic-section { font-size: 1.7rem; }
+        }
+
+        /* ===== PRINT STYLES — CRITICAL ===== */
         @media print {
-            body {
-                margin: 0;
-                padding: 0;
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
             }
-            
-            /* Apply background to wrapper to encourage printing */
+            body { margin: 0; padding: 0; }
+
             .print-wrapper {
                 background-color: #0f1115 !important;
                 -webkit-print-color-adjust: exact !important;
@@ -297,240 +404,250 @@
                 min-height: 100vh;
                 width: 100%;
                 position: absolute;
-                top: 0;
-                left: 0;
-                margin: 0;
-                padding: 0;
+                top: 0; left: 0;
+                margin: 0; padding: 0;
             }
 
-            /* Force white text for better contrast in print */
             .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th {
                 color: #ffffff !important;
             }
-            
-            /* Keep code blocks distinct */
-            pre {
-                border: 1px solid #444;
-                page-break-inside: avoid;
-            }
+
+            pre { border: 1px solid #444; page-break-inside: avoid; }
 
             .sidebar, .copy-btn, .window-controls, #loader {
                 display: none !important;
             }
 
-            .layout {
-                display: block;
-            }
-            
-            .main-content {
-                padding: 2rem !important; /* restoration of padding for print */
-                margin: 0 auto;
-                max-width: 100%;
-            }
-
-            /* Links underline removal for cleaner print */
+            .layout { display: block; }
+            .main-content { padding: 2rem !important; margin: 0 auto; max-width: 100%; }
             a { text-decoration: none !important; border-bottom: none !important; }
         }
-
     </style>
 </head>
 <body>
 
     <!-- Loading Spinner -->
-    <div id="loader"><div class="spinner"></div></div>
+    <div id="loader">
+        <div class="spinner"></div>
+        <div class="loader-label">Loading Notes…</div>
+    </div>
 
+    <!-- WRAPPER IS MANDATORY FOR PRINTING BACKGROUNDS -->
     <div class="print-wrapper">
         <div class="layout">
-            <!-- Sidebar Navigation -->
+
+            <!-- Sidebar TOC -->
             <nav class="sidebar" id="sidebar">
                 <div class="toc-title">Course Modules</div>
-                <div id="toc-container">
-                    <!-- Javascript will populate this -->
-                </div>
+                <div id="toc-container"></div>
             </nav>
 
-            <!-- Main Document Area -->
-            <main class="main-content" id="content-area">
-                <!-- Rendered Markdown will go here -->
-            </main>
+            <!-- Main Content -->
+            <main class="main-content" id="content-area"></main>
+
         </div>
     </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const mdFile = 'React_Native_Notes.md';
-            const contentArea = document.getElementById('content-area');
-            const tocContainer = document.getElementById('toc-container');
-            const loader = document.getElementById('loader');
 
-            // Configure Marked.js
-            marked.setOptions({
-                highlight: function(code, lang) {
-                    const language = highlight.getLanguage(lang) ? lang : 'plaintext';
-                    return highlight.highlight(code, { language }).value;
-                },
-                langPrefix: 'hljs language-'
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const mdFile      = 'React_Native_Notes.md';
+        const contentArea = document.getElementById('content-area');
+        const tocContainer= document.getElementById('toc-container');
+        const loader      = document.getElementById('loader');
+
+        fetch(mdFile)
+            .then(res => {
+                if (!res.ok) throw new Error(
+                    "Could not load markdown. Please open via Live Server in VS Code (not file://)."
+                );
+                return res.text();
+            })
+            .then(markdown => {
+
+                // ── 1. PRE-PROCESSING ─────────────────────────────────────────
+                let processed = markdown;
+
+                // "  Module X:" → ## MODULE_MARKER Module X:
+                processed = processed.replace(
+                    /^\s*(Module\s+\d+(\.\d+)?:?[^\n]*)/gm,
+                    '## MODULE_MARKER $1'
+                );
+
+                // "## Topic X.X:" → ## TOPIC_MARKER Topic X.X:
+                processed = processed.replace(
+                    /^##\s+(Topic\s+\d+\.\d+:[^\n]*)/gm,
+                    '## TOPIC_MARKER $1'
+                );
+
+                // "**1.2: Full Title Line**" → ##### SUBTOPIC_MARKER 1.2: Full Title
+                // Match bold lines like **1.2: Some title here** standing alone
+                processed = processed.replace(
+                    /^\*\*(\d+\.\d+:[^*\n]+)\*\*\s*$/gm,
+                    '##### SUBTOPIC_MARKER $1'
+                );
+
+                // Remaining bare "  1.2:" at line start → **1.2:**
+                processed = processed.replace(
+                    /^\s*(\d+\.\d+:)(?!\*)/gm,
+                    '**$1**'
+                );
+
+                // ── 2. CUSTOM RENDERER ────────────────────────────────────────
+                const renderer = new marked.Renderer();
+
+                // Code blocks → Mac-window style
+                renderer.code = function(code, language) {
+                    const safeCode = code ? String(code) : '';
+                    const lang     = language || 'plaintext';
+
+                    let highlighted = safeCode;
+                    try {
+                        if (hljs.getLanguage(lang)) {
+                            highlighted = hljs.highlight(safeCode, { language: lang }).value;
+                        } else {
+                            highlighted = hljs.highlightAuto(safeCode).value;
+                        }
+                    } catch(e) {
+                        highlighted = safeCode
+                            .replace(/&/g, '&amp;')
+                            .replace(/</g, '&lt;')
+                            .replace(/>/g, '&gt;');
+                    }
+
+                    if (typeof highlighted !== 'string') {
+                        highlighted = safeCode
+                            .replace(/&/g, '&amp;')
+                            .replace(/</g, '&lt;')
+                            .replace(/>/g, '&gt;');
+                    }
+
+                    return `
+<pre class="mac-window">
+  <div class="code-header">
+    <div class="window-controls">
+      <span class="control red"></span>
+      <span class="control yellow"></span>
+      <span class="control green"></span>
+    </div>
+    <span class="code-lang">${lang}</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <i class="fa-regular fa-copy"></i> Copy
+    </button>
+  </div>
+  <code class="hljs language-${lang}">${highlighted}</code>
+</pre>`;
+                };
+
+                // Headings → handle MODULE_MARKER / TOPIC_MARKER
+                renderer.heading = function(text, level) {
+                    const safeText = text ? String(text) : '';
+                    const baseId   = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+
+                    if (safeText.startsWith('MODULE_MARKER ')) {
+                        const clean = safeText.replace('MODULE_MARKER ', '').trim();
+                        const id    = clean.toLowerCase().replace(/[^\w]+/g, '-');
+                        return `<h${level} class="module-section" id="${id}">${clean}</h${level}>\n`;
+                    }
+
+                    if (safeText.startsWith('TOPIC_MARKER ')) {
+                        const clean = safeText.replace('TOPIC_MARKER ', '').trim();
+                        const id    = clean.toLowerCase().replace(/[^\w]+/g, '-');
+                        return `<h${level} class="topic-section" id="${id}">${clean}</h${level}>\n`;
+                    }
+
+                    if (safeText.startsWith('SUBTOPIC_MARKER ')) {
+                        const clean = safeText.replace('SUBTOPIC_MARKER ', '').trim();
+                        const id    = clean.toLowerCase().replace(/[^\w]+/g, '-');
+                        return `<h5 class="subtopic-title" id="${id}">${clean}</h5>\n`;
+                    }
+
+                    return `<h${level} id="${baseId}">${safeText}</h${level}>\n`;
+                };
+
+                // ── 3. RENDER ─────────────────────────────────────────────────
+                contentArea.innerHTML = marked.parse(processed, { renderer });
+
+                // ── 4. TOC ────────────────────────────────────────────────────
+                buildTOC();
+
+                // ── 5. HIDE LOADER ────────────────────────────────────────────
+                loader.style.display = 'none';
+            })
+            .catch(err => {
+                loader.style.display = 'none';
+                contentArea.innerHTML = `
+                    <div style="text-align:center;padding:3rem;border:1px solid #ff5f56;border-radius:10px;margin-top:4rem;">
+                        <h2 style="color:#ff5f56;margin-top:0;font-family:'Outfit',sans-serif;">
+                            ⚠️ Error Loading Notes
+                        </h2>
+                        <p style="color:#e6edf3;">${err.message}</p>
+                        <p style="color:#8b949e;font-size:0.9rem;">
+                            Browsers block local file access for security.<br>
+                            Open this with the <strong style="color:#fff;">Live Server</strong>
+                            extension in VS Code.
+                        </p>
+                    </div>`;
+                console.error(err);
             });
 
-            // 1. Fetch Markdown
-            fetch(mdFile)
-                .then(response => {
-                    if (!response.ok) throw new Error("Could not load markdown file. Make sure you are using a local server (Live Server).");
-                    return response.text();
-                })
-                .then(markdown => {
-                    
-                    // --- Pre-processing Step ---
-                    // Convert indented "Module X:" lines to actual H2 headers so they look bold/big
-                    // Regex looks for: Start of line, optional whitespace, "Module" followed by number, colon
-                    let processedMarkdown = markdown.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, '## $1');
+        // ── BUILD TOC ─────────────────────────────────────────────────────────
+        function buildTOC() {
+            const headers = contentArea.querySelectorAll('h1, h2, h3');
+            let html = '';
 
-                    // Also convert "1.X:" style lines to bold or H3 if needed, or keep as list
-                    // Let's make "x.y:" lines bold at least if they are at start of line
-                    processedMarkdown = processedMarkdown.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
+            headers.forEach(h => {
+                if (!h.id) return;
+                const tag  = h.tagName;
+                const text = h.textContent.trim();
 
+                if (tag === 'H1') {
+                    html += `<a href="#${h.id}" class="toc-link level-h1">${text}</a>`;
+                } else if (tag === 'H2') {
+                    const isModule = h.classList.contains('module-section') ||
+                                     h.classList.contains('topic-section');
+                    html += `<a href="#${h.id}" class="toc-link level-h2${isModule ? ' module' : ''}">${text}</a>`;
+                } else {
+                    html += `<a href="#${h.id}" class="toc-link level-h3">${text}</a>`;
+                }
+            });
 
-                    // 2. Custom Renderer for Mac-style Code Blocks
-                    const renderer = new marked.Renderer();
-                    
-                    renderer.code = function(code, language) {
-                        const validLang = language || 'plaintext';
-                        let highlighted = '';
-                        
-                        // Safety check: ensure code is a string
-                        const codeString = code ? String(code) : '';
+            tocContainer.innerHTML = html;
+            setupScrollSpy();
+        }
 
-                        try {
-                             // Check if language is valid, otherwise auto or plaintext
-                             if (hljs.getLanguage(validLang)) {
-                                highlighted = hljs.highlight(codeString, { language: validLang }).value;
-                             } else {
-                                highlighted = hljs.highlightAuto(codeString).value;
-                             }
-                        } catch (e) { 
-                            // Fallback to simple escaping
-                            highlighted = codeString.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                        }
-
-                        // Double safety: if highligher returned object/null
-                        if (typeof highlighted !== 'string') {
-                             highlighted = codeString.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                        }
-
-                        return `
-                        <pre class="mac-window">
-                            <div class="code-header">
-                                <div class="window-controls">
-                                    <div class="control red"></div>
-                                    <div class="control yellow"></div>
-                                    <div class="control green"></div>
-                                </div>
-                                <button class="copy-btn" onclick="copyToClipboard(this)">
-                                    <i class="fa-regular fa-copy"></i> Copy
-                                </button>
-                            </div>
-                            <code class="hljs language-${validLang}">${highlighted}</code>
-                        </pre>`;
-                    };
-
-                    renderer.heading = function(text, level) {
-                        const safeText = text ? String(text) : '';
-                        const escapedText = safeText.toLowerCase().replace(/[^\w]+/g, '-');
-                        return `<h${level} id="${escapedText}">${safeText}</h${level}>`;
-                    };
-
-                    // 3. Render HTML
-                    // Use processedMarkdown instead of raw markdown
-                    const htmlContent = marked.parse(processedMarkdown, { renderer: renderer });
-                    contentArea.innerHTML = htmlContent;
-
-                    // 4. Post-Process: Generate TOC
-                    generateTOC();
-
-                    // 5. Hide Loader
-                    loader.style.display = 'none';
-                })
-                .catch(err => {
-                    loader.style.display = 'none';
-                    contentArea.innerHTML = `
-                        <div style="text-align:center; padding: 2rem; border:1px solid #ff5f56; border-radius:8px;">
-                            <h2 style="color:#ff5f56; margin-top:0;">Error Loading Notes</h2>
-                            <p>${err.message}</p>
-                            <p style="color: grey; font-size: 0.9rem;">
-                                Tip: Browsers block reading local files directly for security. <br>
-                                Please use the <strong>"Live Server"</strong> extension in VS Code to view this file.
-                            </p>
-                        </div>
-                    `;
-                    console.error(err);
-                });
-
-            // --- Helpers ---
-
-            function generateTOC() {
-                const headers = contentArea.querySelectorAll('h1, h2');
-                let tocHTML = '';
-                
-                headers.forEach(header => {
-                    const id = header.id;
-                    const text = header.textContent;
-                    const isH1 = header.tagName === 'H1';
-                    
-                    const cleanText = text.replace(/#/g, '').trim(); // Remove leading # if any exist in text
-                    
-                    const className = isH1 ? 'toc-link' : 'toc-link sub-item';
-                    
-                    if(id && text) {
-                       tocHTML += `<a href="#${id}" class="${className}">${cleanText}</a>`;
+        // ── SCROLL SPY ────────────────────────────────────────────────────────
+        function setupScrollSpy() {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+                        const link = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+                        if (link) link.classList.add('active');
                     }
                 });
-                
-                tocContainer.innerHTML = tocHTML;
-                
-                // Add scroll spy or active state logic? 
-                // Simple version: Intersection Observer
-                setupScrollSpy();
-            }
+            }, { rootMargin: '-8% 0px -82% 0px' });
 
-            window.copyToClipboard = function(btn) {
-                // Find the code element sibling container
-                const pre = btn.closest('pre');
-                const codeBlock = pre.querySelector('code');
-                const text = codeBlock.innerText; // innerText handles newlines better than textContent for code
-                
-                navigator.clipboard.writeText(text).then(() => {
-                    const originalHtml = btn.innerHTML;
-                    btn.innerHTML = `<i class="fa-solid fa-check"></i> Copied`;
-                    btn.style.color = '#27c93f';
-                    btn.style.borderColor = '#27c93f';
-                    
-                    setTimeout(() => {
-                        btn.innerHTML = originalHtml;
-                        btn.style.color = '';
-                        btn.style.borderColor = '';
-                    }, 2000);
-                });
-            };
+            contentArea.querySelectorAll('h1, h2, h3').forEach(h => observer.observe(h));
+        }
 
-            function setupScrollSpy() {
-                const observer = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        const id = entry.target.getAttribute('id');
-                        if (entry.isIntersecting) {
-                            document.querySelectorAll('.toc-link').forEach(link => link.classList.remove('active'));
-                            const activeLink = document.querySelector(`.toc-link[href="#${id}"]`);
-                            if(activeLink) activeLink.classList.add('active');
-                        }
-                    });
-                }, { rootMargin: '-10% 0px -80% 0px' }); // Highlight when it's near the top
-
-                document.querySelectorAll('h1, h2').forEach(h => observer.observe(h));
-            }
-        });
+        // ── COPY BUTTON ───────────────────────────────────────────────────────
+        window.copyCode = function(btn) {
+            const code = btn.closest('pre').querySelector('code');
+            navigator.clipboard.writeText(code.innerText).then(() => {
+                const orig = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerHTML = orig;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {});
+        };
+    });
     </script>
 </body>
 </html>
