@@ -211,3 +211,90 @@
      14.5: On-Device AI (MediaPipe / CoreML / TensorFlow Lite) (Local AI models on phone - 2026 standard)
      14.6: Analytics & Event Tracking (Firebase Analytics / Mixpanel / Amplitude integration)
      14.7: App Store Review Guidelines (Rejection reasons, Privacy Manifests, 4.2 Minimum Functionality)
+
+Module 15: Native Device APIs — Enterprise CLI Edition
+     (CLI-only libraries — no Expo. Libraries used in real production React Native projects.)
+
+     15.1: `@react-native-community/netinfo` (Network & WiFi State)
+         Network type detection (WiFi, Cellular, Ethernet, None)
+         `isInternetReachable` (actual internet vs just connected to router)
+         Listener-based subscription on network change
+         Comparison: NetInfo listener vs Ping-based strategy
+
+     15.2: `react-native-audio-recorder-player` (Microphone & Audio Recording)
+         Recording audio to local file (mp4/m4a)
+         Playback of recorded file
+         Real-time recording duration & audio meter
+         Permission: `RECORD_AUDIO` (Android), `NSMicrophoneUsageDescription` (iOS)
+
+     15.3: `react-native-contacts` (Phone Contacts)
+         Fetch all contacts from device
+         Search & filter contacts
+         Add, update, delete a contact
+         Permission: `READ_CONTACTS`, `WRITE_CONTACTS`
+
+     15.4: `@react-native-camera-roll/camera-roll` (Gallery & Media Library)
+         Fetch photos and videos from device gallery
+         Save image / video to gallery
+         Filter by media type (photo, video, all)
+         Permission: `READ_MEDIA_IMAGES` (Android 13+), `NSPhotoLibraryUsageDescription` (iOS)
+
+     15.5: `@react-native-clipboard/clipboard` (Clipboard)
+         Copy string to clipboard
+         Read current clipboard string
+         `addListener` for clipboard change events (iOS 14+)
+
+     15.6: `Vibration` API + `react-native-haptic-feedback` (Haptics)
+         Built-in `Vibration.vibrate()` with custom patterns (Android)
+         iOS haptic types: Impact, Notification, Selection
+         `react-native-haptic-feedback` for cross-platform haptics
+         UX rule: when to use haptics vs vibration
+
+     15.7: `react-native-device-info` (Device Metadata)
+         Device model, manufacturer, OS version, app version/build
+         `getBatteryLevel()`, `isBatteryCharging()`, `getPowerState()`
+         `getTotalMemory()`, `getFreeDiskStorage()`
+         `getUniqueId()` — device fingerprint for enterprise auth flows
+         Carrier, phone number, device locale
+
+     15.8: `@react-native-voice/voice` (Speech Recognition)
+         Start / stop speech listening session
+         Partial results vs final recognized text events
+         Multi-language locale support
+         Error handling (`onSpeechError` events)
+         Permission: `RECORD_AUDIO` (Android), `NSSpeechRecognitionUsageDescription` (iOS)
+
+     15.9: `react-native-sms` (Send SMS)
+         Send SMS via system chooser (no special permission)
+         Direct send (requires `SEND_SMS` permission — Android only)
+         Comparison: direct send vs intent-based
+
+     15.10: `react-native-phone-call` + `Linking` (Phone Calls)
+         Initiate call via `react-native-phone-call` (`CALL_PHONE` permission)
+         Fallback: `Linking.openURL('tel:+91...')` (no permission needed)
+         Comparison: `react-native-phone-call` vs `Linking.openURL('tel:')`
+
+     15.11: `react-native-torch` (Flashlight / Torch)
+         Toggle torch on / off
+         `isAvailable()` check before using
+         Error handling on devices without flash
+
+     15.12: `react-native-calendar-events` (Calendar)
+         Fetch events with date range filter
+         Create, update, delete events
+         Recurring event support (RRULE)
+         Permission: `READ_CALENDAR`, `WRITE_CALENDAR`
+
+     15.13: `react-native-fs` (RNFS — File System)
+         Read / write text and binary files
+         Download file from URL to local path (`downloadFile`)
+         File metadata (size, modified date, exists)
+         Directory management (`mkdir`, `readdir`, `unlink`, `moveFile`)
+         Key paths: `DocumentDirectoryPath`, `CachesDirectoryPath`, `DownloadDirectoryPath`
+
+     15.14: `react-native-sensors` (Device Motion & Orientation)
+         Accelerometer (x, y, z axes — shake detection, tilt-based UI)
+         Gyroscope (rotation rate — AR, gaming)
+         Magnetometer (compass heading)
+         Barometer (pressure — altitude estimation)
+         Subscription model + `updateInterval` performance control
