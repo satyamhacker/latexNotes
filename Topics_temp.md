@@ -364,6 +364,29 @@ Subtopics: Ollama Serve Command, Port 11434, API Server Binding, Generating Resp
 
 ---
 
+Topic 6: Model Quantization & BitNet (1.58-bit)
+Subtopics: GGUF, EXL2, BitNet 1.58-bit, CPU inference, Q4_K_M, RAM optimization, Quantization tradeoffs
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Technical & Performance
+* Transcript mein content volume: Detailed explanation of quantization formats and RAM trade-offs.
+* Key terms from transcript: GGUF, EXL2, BitNet 1.58-bit, CPU inference, Q4_K_M, RAM optimization, quantization tradeoffs.
+* Explicit emphasis by speaker: Local laptop (8GB/16GB RAM) par heavy models (32B+) chalane ke liye quantization ki samajh mandatory hai.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[Model Quantization, ⭐GGUF format, EXL2, ⭐BitNet 1.58-bit, 1-bit LLMs, weight compression, precision loss vs speed, RAM optimization, K-Quants (Q4_K_M, Q8_0), perplexity, CPU-only inference, neural network matrix multiplication efficiency, quantization tradeoffs]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Developer 70B model ka GGUF version download karta hai aur check karta hai ki kya 16GB RAM mein "offloading" sahi ho rahi hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: BitNet 1.58-bit models use kiye jaate hain taaki GPU ki zaroorat hi na pade aur sirf CPU par fast inference mile.
+* Additional context: Ye Section 3 ke hardware/RAM discussion ka natural continuation hai.
+
 **Double-check steps performed:**
 
 * [x] Poora transcript completely padha bina kuch skip kiye.
@@ -391,6 +414,7 @@ Topic 2: Model Complexity, Parameters & Hardware Constraints
 Topic 3: Practical CLI Usage & Reasoning Models
 Topic 4: GUI Interfaces & Model Management
 Topic 5: Ollama API Server Implementation
+Topic 6: Model Quantization & BitNet (1.58-bit)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 5 | Subtopics: 38
@@ -405,34 +429,10 @@ Sections: 1 | Topics: 5 | Subtopics: 38
 Speaker is section mein LangChain ke core basics, local environment setup, Ollama integration, LangSmith observability, aur different prompt templates ko practical hands-on ke saath explain karta hai.
 
 --4--Understanding and Working with LangChain Basics--
-Topic 1: Environment Setup and Dependencies
-Subtopics: VS Code Setup, Python Virtual Environment, venv Activation, Jupyter Notebook Extension, LangChain Installation, Ipykernel Requirement, LangChain Ollama Integration, Python Dotenv, API Key Management
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Moderate
-* Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation with step-by-step terminal commands and installation flow.
-* Key terms from transcript: Visual Studio Code, Python 3.12, venv, terminal, pip, Jupyter Notebook, .env, API keys.
-* Explicit emphasis by speaker: Python installation prerequisite hai aur virtual environment create karna recommended hai.
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Visual Studio Code, ⭐Python 3.12[version], `python -m venv`, myenv312, `source bin/activate`, Jupyter Notebook Extension, `!pip install langchain`, ipykernel, `pip install langchain-ollama`, `pip install python-dotenv`, .env file, OpenAI API keys, LangSmith API keys]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer apne local machine par VS Code open karta hai, ek dedicated virtual environment (myenv312) create karta hai taaki dependencies clash na karein, aur Jupyter Notebook plugin install karta hai for interactive coding.
-* Fixing/Iteration Phase: Agar code execute nahi hota toh `ipykernel` install kiya jaata hai notebook support ke liye. API keys ko safely store karne ke liye `.env` file setup ki jaati hai.
-* Live Production Phase: (N/A — Transcript mein sirf setup phase describe kiya gaya hai)
-* Additional context: Speaker ne mention kiya ki local LLMs ke liye setup crucial hai taaki configuration environment-specific rahe.
-
---4--Understanding and Working with LangChain Basics--
-Topic 2: Interacting with Local LLM
+Topic 1: Interacting with Local LLM
 Subtopics: ChatOllama Class, LLM Initialization, Base URL Configuration, Model Selection, Temperature Setting, Max Tokens, Unified Interface, Invoke Method, Response Metadata, Token Usage Tracking
 
-[📊 SCOPE SIGNAL for Topic 2:
+[📊 SCOPE SIGNAL for Topic 1:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -442,10 +442,10 @@ Subtopics: ChatOllama Class, LLM Initialization, Base URL Configuration, Model S
 * Speaker ne jo analogies/examples use kiye: Ollama terminal run vs Python code interaction comparison.
 ]
 
-🔑 KEYWORDS DUMP for Topic 2:
+🔑 KEYWORDS DUMP for Topic 1:
 [ChatOllama, `from langchain_ollama import ChatOllama`, base_url, `http://localhost:11434`, ⭐qwen2.5[version], ⭐llama3.1[version], temperature=0.5, max_tokens=250, ⭐invoke(), unified interface, response_metadata, usage_metadata, input_tokens, output_tokens, total_tokens, role: assistant]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
 * Testing/Offline Phase: Developer ChatOllama class ko initialize karta hai port 11434 aur local model (qwen2.5) ke saath. `invoke()` call karke response check kiya jaata hai.
 * Fixing/Iteration Phase: Response ki quality adjust karne ke liye `temperature` parameter change kiya jaata hai aur token limits set ki jaati hain.
@@ -453,10 +453,10 @@ Subtopics: ChatOllama Class, LLM Initialization, Base URL Configuration, Model S
 * Additional context: Speaker ne dikhaya ki har execution par token count change ho sakta hai depending on response length.
 
 --4--Understanding and Working with LangChain Basics--
-Topic 3: Observability with LangSmith
+Topic 2: Observability with LangSmith
 Subtopics: LangSmith Setup, Tracing and Telemetry, API Key Generation, Project Creation, Environment Variable Loading, Trace Visualization, Human vs AI Message Tracing, Latency Monitoring
 
-[📊 SCOPE SIGNAL for Topic 3:
+[📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Moderate
 * Coverage Angle: Practical only
@@ -466,10 +466,10 @@ Subtopics: LangSmith Setup, Tracing and Telemetry, API Key Generation, Project C
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 3:
+🔑 KEYWORDS DUMP for Topic 2:
 [LangSmith, observability, telemetry, setup tracing, LANGCHAIN_TRACING_V2, LANGCHAIN_ENDPOINT, LANGCHAIN_API_KEY, LANGCHAIN_PROJECT, `load_dotenv()`, `os.getenv()`, GUI interface, Graphical User Interface, latency, execution time]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
 * Testing/Offline Phase: Developer LangSmith portal par sign up karta hai, ek project (langchain-training) banata hai aur API keys generate karta hai.
 * Fixing/Iteration Phase: `.env` file mein tracing enabled karke code run kiya jaata hai. GUI mein jaakar dekha jaata hai ki kaunsa model use hua, kitne tokens kharch hue, aur response time kya tha.
@@ -477,10 +477,10 @@ Subtopics: LangSmith Setup, Tracing and Telemetry, API Key Generation, Project C
 * Additional context: Speaker ne emphasize kiya ki GUI interface se debugging bahut easy ho jaati hai.
 
 --4--Understanding and Working with LangChain Basics--
-Topic 4: Prompt Templates and Variables
+Topic 3: Prompt Templates and Variables
 Subtopics: PromptTemplate Concept, Structured Prompts, Input Variables, Reusability, from_template Method, Dictionary Mapping, StringPromptValue
 
-[📊 SCOPE SIGNAL for Topic 4:
+[📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -490,10 +490,10 @@ Subtopics: PromptTemplate Concept, Structured Prompts, Input Variables, Reusabil
 * Speaker ne jo analogies/examples use kiye: Local machine vs Cloud machine input variables example.
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 3:
 [PromptTemplate, `from langchain_core.prompts import PromptTemplate`, `from_template()`, input_variables, curly braces {}, prompt reusability, dictionary mapping, `prompt.invoke({"env": "local machine"})`, StringPromptValue, text formatting]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
 * Testing/Offline Phase: Developer ek common base query likhta hai aur placeholders `{env}` use karta hai. Run time par dictionary ke through values pass ki jaati hain.
 * Fixing/Iteration Phase: Agar prompt format galat hai, toh `StringPromptValue` print karke final text check kiya jaata hai before sending to LLM.
@@ -501,10 +501,10 @@ Subtopics: PromptTemplate Concept, Structured Prompts, Input Variables, Reusabil
 * Additional context: Speaker ne dikhaya ki template object mein internal metadata (input types) automatic manage hota hai.
 
 --4--Understanding and Working with LangChain Basics--
-Topic 5: Chat Prompt Templates and Roles
+Topic 4: Chat Prompt Templates and Roles
 Subtopics: ChatPromptTemplate Class, Role Assignment, System Message, Human Message, AI Message, Expert Persona Setup, Shorthand vs Explicit Implementation, SystemMessagePromptTemplate
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 4:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -514,10 +514,10 @@ Subtopics: ChatPromptTemplate Class, Role Assignment, System Message, Human Mess
 * Speaker ne jo analogies/examples use kiye: Financial Expert analogy — ChatGPT ko system role dene se response ka detail aur focus badh gaya.
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 4:
 [ChatPromptTemplate, ⭐System Message, ⭐Human Message, ⭐AI Message, role: expert, expert persona, NZ economy example, `("system", "...")`, `("human", "...")`, sequence of messages, array of information, SystemMessagePromptTemplate, HumanMessagePromptTemplate, shorthand way]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
 * Testing/Offline Phase: Developer ChatPromptTemplate define karta hai jahan first message "system" role (e.g., "You are an LLM expert") aur second "human" query hoti hai.
 * Fixing/Iteration Phase: Persona tweak karke dekha jaata hai ki output behavior kaise change ho raha hai. Shorthand notation (tuples) use kiya jaata hai code ko clean rakhne ke liye.
@@ -525,10 +525,10 @@ Subtopics: ChatPromptTemplate Class, Role Assignment, System Message, Human Mess
 * Additional context: Speaker ne mention kiya ki system messages base behavior set karte hain.
 
 --4--Understanding and Working with LangChain Basics--
-Topic 6: Message Placeholders and Streaming
+Topic 5: Message Placeholders and Streaming
 Subtopics: MessagesPlaceholder, Dynamic Message Lists, HumanMessage Class, Stream Method, Real-time Text Generation, For Loop Processing, Chatbot UX
 
-[📊 SCOPE SIGNAL for Topic 6:
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -538,10 +538,10 @@ Subtopics: MessagesPlaceholder, Dynamic Message Lists, HumanMessage Class, Strea
 * Speaker ne jo analogies/examples use kiye: ChatGPT-like typing effect.
 ]
 
-🔑 KEYWORDS DUMP for Topic 6:
+🔑 KEYWORDS DUMP for Topic 5:
 [MessagesPlaceholder, `from langchain_core.messages import HumanMessage`, dynamic placeholder, hardcoded vs dynamic, ⭐stream(), text generation, `for stream in llm.stream(...)`, chunk.content, instant generation, typing effect, real-time UX]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Developer `invoke()` ki jagah `stream()` call karta hai aur loop ke through chunks print karta hai.
 * Fixing/Iteration Phase: Placeholder use karke poora message object bahar se pass kiya jaata hai for more control.
@@ -574,15 +574,14 @@ Subtopics: MessagesPlaceholder, Dynamic Message Lists, HumanMessage Class, Strea
 📋 EXTRACTED IN THIS PHASE:
 
 Section 4: Understanding and Working with LangChain Basics
-Topic 1: Environment Setup and Dependencies
-Topic 2: Interacting with Local LLM
-Topic 3: Observability with LangSmith
-Topic 4: Prompt Templates and Variables
-Topic 5: Chat Prompt Templates and Roles
-Topic 6: Message Placeholders and Streaming
+Topic 1: Interacting with Local LLM
+Topic 2: Observability with LangSmith
+Topic 3: Prompt Templates and Variables
+Topic 4: Chat Prompt Templates and Roles
+Topic 5: Message Placeholders and Streaming
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 54
+Sections: 1 | Topics: 5 | Subtopics: 40
 
 
 ==================================================================================
@@ -716,6 +715,52 @@ Subtopics: RunnableLambda Class, Custom Python Functions, If-Else Logic, Model S
 
 ---
 
+Topic 6: Structured Outputs with Pydantic (Forcing JSON)
+Subtopics: Pydantic v2, BaseModel, JSON validation, Output Parsers, Retry Logic
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Robustness
+* Transcript mein content volume: Detailed implementation of output validation.
+* Key terms from transcript: with_structured_output, Pydantic v2, BaseModel, JSON Schema, output validation.
+* Explicit emphasis by speaker: Local small models (8B) aksar JSON format tod dete hain. Pydantic isse "force" aur validate karta hai.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[⭐with_structured_output, ⭐Pydantic v2, BaseModel, JSON Schema, output validation, field descriptions, retry logic, parsing errors, type safety, tool-calling schemas]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Model run kiya jata hai aur check kiya jata hai ki output expected schema ke saath match kar raha hai ya nahi.
+* Fixing/Iteration Phase: Agar 8B model galat JSON bhejta hai, toh Pydantic error trigger karta hai aur LangChain automatically model ko "fix it" prompt bhejta hai.
+* Live Production Phase: (N/A)
+* Additional context: Ye step LCEL and Dynamic logic ke baad natural progression hai JSON validate karne ke liye.
+
+Topic 7: Retry Logic & Fault Tolerance
+Subtopics: Retry Parser, Output Fixing, Exception Handling, Timeouts, Fallback Chains, Guardrails, Failure Recovery
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Moderate
+* Coverage Angle: Production Robustness
+* Transcript mein content volume: [⚠️ Derived] Ye topic production-grade chain resilience ke liye add kiya gaya hai. Structured outputs aur tool calling ke baad retry/recovery natural next step hai.
+* Key terms from transcript: retry, fallback, exception handling, timeout, guardrails.
+* Explicit emphasis by speaker: Production mein LLM calls fail ho sakti hain — retry aur fallback chains ke bina system fragile rehta hai.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[⭐RetryOutputParser, ⭐OutputFixingParser, ⭐RunnableWithFallbacks, exception handling, try-except, ⭐timeout configuration, max_retries, retry_chain, ⭐fallback LLM, graceful degradation, error recovery, RunnableRetry, invoke_with_retry, rate limiting]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Testing/Offline Phase: Developer chain ko deliberately galat input dekar test karta hai ki retry parser kaam kar raha hai ya nahi. Timeout settings verify ki jaati hain slow models ke liye.
+* Fixing/Iteration Phase: Agar primary LLM (e.g., local 8B model) baar-baar fail ho raha hai, toh fallback chain mein ek stronger model (e.g., cloud GPT-4) set kiya jaata hai.
+* Live Production Phase: Production mein RunnableWithFallbacks ensure karta hai ki agar ek model down ho toh doosra automatically take over kare. Guardrails infinite loops aur excessive retries ko prevent karte hain.
+* Additional context: Ye topic Structured Outputs ke baad natural hai kyunki JSON parsing failures ke liye retry logic pehla defense hai.
+
 **Double-check steps performed:**
 
 * [x] Poora transcript completely padha bina kuch skip kiye.
@@ -739,9 +784,11 @@ Topic 2: LCEL and Basic Chaining
 Topic 3: Output Parsers & Multiple Chain Coordination
 Topic 4: Parallel Execution with RunnableParallel
 Topic 5: Dynamic Logic with RunnableLambdas & Decorators
+Topic 6: Structured Outputs with Pydantic (Forcing JSON)
+Topic 7: Retry Logic & Fault Tolerance
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 28
+Sections: 1 | Topics: 7 | Subtopics: 35
 
 ---
 
@@ -1272,10 +1319,33 @@ Subtopics: Text Splitting Importance, Context Window Support, Llama 3.2 Tokens, 
 * Live Production Phase: Long inputs ko manageable pieces mein divide karke similarity search ke liye ready kiya jata hai.
 * Additional context: (N/A)
 
-Topic 4: Ollama Embeddings & Vector Stores
-Subtopics: Text to Vector Conversion, Ollama Embeddings, Llama 3.2 Embedding Model, Vector Dimension Assertion, FAISS Library, Chroma Database, Persistent Storage
+Topic 4: Data Privacy & PII Handling
+Subtopics: PII Masking, Data Redaction, Sensitive Document Filtering, Compliance Basics, Secure Embeddings
 
 [📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Moderate
+* Coverage Angle: Enterprise & Security
+* Transcript mein content volume: [⚠️ Derived] Ye topic enterprise RAG ke liye add kiya gaya hai. Original transcript mein privacy explicitly cover nahi hua, lekin production-grade RAG ke liye ye critical gap hai.
+* Key terms from transcript: PII, privacy, masking, redaction, compliance.
+* Explicit emphasis by speaker: Production RAG mein sensitive data (names, emails, SSN) vector DB mein store hone se pehle mask hona chahiye.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[⭐PII (Personally Identifiable Information), ⭐data masking, ⭐redaction, sensitive document filtering, ⭐GDPR, HIPAA, compliance, secure embeddings, anonymization, tokenization, regex-based masking, named entity recognition (NER), presidio library, data governance]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Developer PDF load karne ke baad aur chunking se pehle ek PII detection layer lagata hai (e.g., Microsoft Presidio ya custom NER) jo names, emails, phone numbers detect karke mask karta hai.
+* Fixing/Iteration Phase: Agar masked data se retrieval quality drop ho rahi hai, toh masking strategy adjust ki jaati hai (full redaction vs partial masking).
+* Live Production Phase: Enterprise applications mein GDPR/HIPAA compliance ke liye PII filtering mandatory hai. Vector DB mein sirf sanitized data store hota hai.
+* Additional context: Ye topic chunking ke baad aur embedding se pehle aata hai kyunki data clean hona chahiye vector store mein jaane se pehle.
+
+Topic 5: Ollama Embeddings & Vector Stores
+Subtopics: Text to Vector Conversion, Ollama Embeddings, Llama 3.2 Embedding Model, Vector Dimension Assertion, FAISS Library, Chroma Database, Persistent Storage
+
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -1285,20 +1355,20 @@ Subtopics: Text to Vector Conversion, Ollama Embeddings, Llama 3.2 Embedding Mod
 * Speaker ne jo analogies/examples use kiye: Vector length check karne ke liye assertion use kiya (length of vector1 == vector2).
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 5:
 [embeddings, vectorization, ⭐OllamaEmbeddings, ⭐Llama 3.2[version], vector_one, embed_query, ⭐FAISS, Facebook AI Similarity Search, ⭐Chroma, ⭐langchain-chroma, vector_store, collection_name, persist_directory, from_documents, embedding_function]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Chunks ko numerical vectors mein convert kiya jata hai. Phir Chroma DB mein `persist_directory` specify karke data save karte hain taaki har baar embedding na karni pade.
 * Fixing/Iteration Phase: Agar embeddings slow hain, toh hardware check karna (speaker ka Max fan blow hua tha heavy processing ki wajah se).
 * Live Production Phase: Local persistent DB (chroma_langchain_db) se data retrieve hota hai production queries ke liye.
 * Additional context: Chroma free hai (Apache 2.0), jabki FAISS similarities search aur clustering ke liye efficient hai.
 
-Topic 5: Retrieval Logic & Similarity Search
+Topic 6: Retrieval Logic & Similarity Search
 Subtopics: Retrieval Interface, Cosine Similarity, Similarity Search Score, Retriever Properties, Search Type, Search K-Value
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1308,20 +1378,89 @@ Subtopics: Retrieval Interface, Cosine Similarity, Similarity Search Score, Retr
 * Speaker ne jo analogies/examples use kiye: "Bias testing" aur "LLM testing" query karke sources verify kiye.
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [similarity_search, ⭐cosine search, similarity_search_with_score, ⭐retriever, as_retriever(), search_type="similarity", search_kwargs={"k": 3}, doc.metadata, confidence score]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: User query ko vector mein badal kar DB mein similarity search kiya jata hai. K=3 set karke top 3 matching documents nikale jate hain.
 * Fixing/Iteration Phase: Similarity score check karke confidence measure kiya jata hai.
 * Live Production Phase: Retriever interface use hota hai taaki agar future mein Vector DB change ho, toh retrieval code same rahe.
 * Additional context: (N/A)
 
-Topic 6: Manual RAG & LangChain Hub
+Topic 7: Lightweight Reranking (FlashRank)
+Subtopics: FlashRank, Cross Encoders, Top-k refinement, CPU reranking, Accuracy vs speed
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Moderate
+* Coverage Angle: Accuracy & Efficiency
+* Transcript mein content volume: FlashRank reranking workflow implementation.
+* Key terms from transcript: FlashRank, Cross Encoders, Top-k refinement, CPU reranking, Accuracy vs speed.
+* Explicit emphasis by speaker: Vector search 10 chunks dega, par unmein "noise" ho sakta hai. Reranker local CPU par unhe re-score karke sirf best top-3 LLM ko bhejta hai.
+* Speaker ne jo analogies/examples use kiye: Vector retrieval ke immediately baad reranking aata hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[⭐FlashRank, Cross-Encoders, Bi-Encoders, ⭐Re-ranking, CPU-optimized, Top-K filtering, noise reduction, precision improvement, ⭐local-first RAG optimization]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Testing/Offline Phase: Vector DB 15 "similar" results deta hai.
+* Fixing/Iteration Phase: FlashRank un 15 results ko analyze karta hai aur check karta hai ki query ke liye sabse "relevant" kaunsa hai.
+* Live Production Phase: Result: LLM ko lamba kachra context bhejne ke bajaye sirf 3 super-accurate lines bheji jaati hain. Isse local machine fast chalti hai aur answer "perfect" aata hai.
+* Additional context: Vector retrieval ke turant baad implement kiya jata hai.
+
+Topic 8: Semantic Caching (Local CPU-based)
+Subtopics: RedisCache, SQLiteCache, Similarity threshold, Cache hit/miss, Latency reduction
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Moderate
+* Coverage Angle: Efficiency
+* Transcript mein content volume: Detailed mechanism of Semantic Cache.
+* Key terms from transcript: RedisCache, SQLiteCache, Similarity threshold, Cache hit/miss, latency reduction.
+* Explicit emphasis by speaker: Baar-baar same queries ke liye LLM hit na karna pade, jisse battery aur compute bache.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[⭐Semantic Cache, RedisCache, ⭐SQLiteCache, Similarity Threshold, vector-based lookup, redundant query elimination, cache hit vs miss, latency reduction, local storage, persistent cache]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Testing/Offline Phase: User "What is AI?" puchta hai (LLM hits). Phir 2 min baad "Explain AI" puchta hai (Semantic cache similarity detect karke purana answer turant de deta hai).
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Latency reduction achieve kiya jaata hai production load mein.
+* Additional context: Prompt template evaluation ke baad best apply kiya jaata hai.
+
+Topic 9: Context Caching (Long Context Management)
+Subtopics: Prefix caching, DeepSeek cache, Anthropic prompt caching, KV cache, TTL, Static vs dynamic context
+
+[📊 SCOPE SIGNAL for Topic 9:
+
+* Depth Level: Deep
+* Coverage Angle: Cost & Speed
+* Transcript mein content volume: Managing long context optimization.
+* Key terms from transcript: Prefix caching, DeepSeek cache, Anthropic prompt caching, KV cache, TTL, Static vs dynamic context.
+* Explicit emphasis by speaker: 1M+ token windows mein har bar poora PDF bhejni ki jagah static part ko cache karna 90% latency kam karta hai.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[⭐Context Caching, DeepSeek Cache, Anthropic Prompt Caching, prefix caching, 1M+ token window, static vs dynamic context, TTL (Time to Live), breakpoint management, KV Cache]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+
+* Testing/Offline Phase: (N/A)
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Agar aap ek 500-page ki book par chat kar rahe hain, toh book ka text "cached" rehta hai. LLM sirf naya sawal process karta hai, poori book nahi.
+* Additional context: Token optimization aur streaming ke saath logically connected hai.
+
+Topic 10: Manual RAG & LangChain Hub
 Subtopics: Manual Document Retrieval, Context Joining, ChatPromptTemplate, System Prompt Engineering, LangChain Hub, Client Migration
 
-[📊 SCOPE SIGNAL for Topic 6:
+[📊 SCOPE SIGNAL for Topic 10:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1331,20 +1470,20 @@ Subtopics: Manual Document Retrieval, Context Joining, ChatPromptTemplate, Syste
 * Speaker ne jo analogies/examples use kiye: "You are an AI assistant" system prompt ka structure samjhaya.
 ]
 
-🔑 KEYWORDS DUMP for Topic 6:
+🔑 KEYWORDS DUMP for Topic 10:
 [manual retrieval, ⭐invoke(), get_relevant_documents[obsolete], context_text, "\n\n".join, ⭐ChatPromptTemplate, system prompt, human message, ⭐LangChain Hub, hub.pull(), langchainhub, Client()]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
 
 * Testing/Offline Phase: Retrieved documents ko join karke ek single context string banaya jata hai. Phir prompt template mein fill karke LLM ko bhejte hain.
 * Fixing/Iteration Phase: Prompt mein instructions add karna (e.g., "Summarize the results" ya "Say I don't know").
 * Live Production Phase: Custom chain run karke structured response generate kiya jata hai.
 * Additional context: (N/A)
 
-Topic 7: LangChain v1.0 Breaking Changes & Migration
+Topic 11: LangChain v1.0 Breaking Changes & Migration
 Subtopics: Breaking Change Overview, Namespace Updates, RetrievalQA Deprecation, Custom Runnable Chains, JSON Deserialization, Invoke vs GetRelevant
 
-[📊 SCOPE SIGNAL for Topic 7:
+[📊 SCOPE SIGNAL for Topic 11:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -1354,10 +1493,10 @@ Subtopics: Breaking Change Overview, Namespace Updates, RetrievalQA Deprecation,
 * Speaker ne jo analogies/examples use kiye: Comparison between old `get_relevant_documents` and new `invoke()` method.
 ]
 
-🔑 KEYWORDS DUMP for Topic 7:
+🔑 KEYWORDS DUMP for Topic 11:
 [⭐breaking changes, ⭐langchain_core[version], ⭐RetrievalQA[obsolete], custom chain, ⭐RunnablePassthrough, format_docs, ⭐invoke(), hub.pull() JSON error, JSON.load, client.pull(), langchain-hub client]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
 
 * Testing/Offline Phase: Purane `RetrievalQA` code ko naye LCEL (LangChain Expression Language) format mein migrate karna.
 * Fixing/Iteration Phase: `langchain.prompts` ki jagah `langchain_core.prompts` use karna aur `invoke()` method apply karna.
@@ -1365,6 +1504,54 @@ Subtopics: Breaking Change Overview, Namespace Updates, RetrievalQA Deprecation,
 * Additional context: (N/A)
 
 ---
+
+Topic 12: Graph Database Fundamentals
+Subtopics: Nodes, Edges, Relationships, Knowledge Graphs, Triples, Neo4j Basics, Graph Traversal, Entity Linking
+
+[📊 SCOPE SIGNAL for Topic 12:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual
+* Transcript mein content volume: [⚠️ Derived] Ye topic GraphRAG ke prerequisite ke taur par add kiya gaya hai. Original transcript mein graph concepts GraphRAG ke andar briefly cover hue the, lekin separate foundational topic zaroori hai.
+* Key terms from transcript: Knowledge graphs, Neo4j, Entities, Relationships, Triples, Subject-Predicate-Object.
+* Explicit emphasis by speaker: GraphRAG samajhne ke liye graph fundamentals pehle aane chahiye.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 12:
+[⭐Nodes, ⭐Edges, ⭐Relationships, ⭐Knowledge Graphs, ⭐Triples (Subject-Predicate-Object), ⭐Neo4j, graph database, graph traversal, entity linking, property graph, directed graph, labeled edges, Cypher query language, graph schema]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 12:
+
+* Testing/Offline Phase: Developer Neo4j sandbox ya local instance setup karta hai. Simple nodes (Person, Organization) aur relationships (WORKS_AT, KNOWS) create karke graph structure samajhta hai.
+* Fixing/Iteration Phase: Triples (Subject-Predicate-Object) format mein data model kiya jaata hai taaki GraphRAG ke liye structured input ready ho.
+* Live Production Phase: Knowledge graph production mein entities aur unke relationships ko store karta hai jo traditional vector search se nahi mil paate.
+* Additional context: Ye topic GraphRAG ka prerequisite bridge hai — bina graph fundamentals ke GraphRAG sirf buzzword ban jaata hai.
+
+---
+
+Topic 13: GraphRAG (Knowledge Graphs)
+Subtopics: Knowledge graphs, Entity relationships, Global insights, Hybrid retrieval
+
+[📊 SCOPE SIGNAL for Topic 13:
+
+* Depth Level: Deep
+* Coverage Angle: Advanced Retrieval Logic
+* Transcript mein content volume: Graph retrieval for global insights.
+* Key terms from transcript: Knowledge graphs, Entity relationships, Global insights, Hybrid retrieval.
+* Explicit emphasis by speaker: 2026 standard. Jab context bohot bada ho aur humein poore dataset ki "Global Summary" chahiye ho jo vector search nahi kar paata.
+* Speaker ne jo analogies/examples use kiye: Traditional RAG samajhne ke baad hi GraphRAG meaningful lagega isliye isko end mein rakha gaya hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 13:
+[⭐GraphRAG, Knowledge Graphs, ⭐Neo4j, Entities, Relationships, ⭐Subject-Predicate-Object (Triples), Global Summarization, community detection, local vs global search, structured knowledge retrieval]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 13:
+
+* Testing/Offline Phase: Analysis Phase: System 100 PDFs se "People", "Organizations", aur unke "Connections" (links) nikaalta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: User puchta hai, "Identify all indirect links between Entity A and Entity B." GraphRAG pura graph traverse karke ek detailed analysis report deta hai.
+* Additional context: End of section concept.
 
 ## ✅ FINAL CHECKLIST
 
@@ -1391,13 +1578,19 @@ Section 9: Building RAG Application with PDF File, Vector Stores & Embedding wit
 Topic 1: Introduction to RAG Architecture
 Topic 2: PDF Document Loading & Extraction
 Topic 3: Text Splitting & Recursive Character Splitter
-Topic 4: Embedding & Vector Storage
-Topic 5: Retrieval Logic & Similarity Search
-Topic 6: Manual RAG Pipeline Construction
-Topic 7: LangChain v1.0 Breaking Changes & Migration
+Topic 4: Data Privacy & PII Handling
+Topic 5: Embedding & Vector Storage
+Topic 6: Retrieval Logic & Similarity Search
+Topic 7: Lightweight Reranking (FlashRank)
+Topic 8: Semantic Caching (Local CPU-based)
+Topic 9: Context Caching (Long Context Management)
+Topic 10: Manual RAG Pipeline Construction
+Topic 11: LangChain v1.0 Breaking Changes & Migration
+Topic 12: Graph Database Fundamentals
+Topic 13: GraphRAG (Knowledge Graphs)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 48
+Sections: 1 | Topics: 13 | Subtopics: 72
 
 ==================================================================================
 
@@ -1753,7 +1946,73 @@ Subtopics: Tool Call Limit Middleware, Summarization Middleware, LLM Call Limit,
 * Live Production Phase: Production mein middleware runtime safety net ki tarah kaam karta hai jo LLM ko overload hone se rokta hai.
 * Additional context: Summarization middleware use hota hai long conversations ko compact rakhne ke liye.
 
----
+Topic 9: Agentic Guardrails (Self-Correction)
+
+[📊 SCOPE SIGNAL for Topic 9:
+
+* Depth Level: Moderate
+* Coverage Angle: Stability
+* Transcript mein content volume: Managing infinite loops.
+* Key terms from transcript: Output Parser Guardrails, input/output filtering.
+* Explicit emphasis by speaker: Local models ko "Infinite Loops" mein phasne se rokne ke liye.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[Self-correction loops, ⭐Output Parser Guardrails, input/output filtering, max_iterations, halluncination check, log analyzer]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+
+* Testing/Offline Phase: Model test run loops check.
+* Fixing/Iteration Phase: Guardrails implement kiye jaate hain.
+* Live Production Phase: Agent safe rehta hai runtime par.
+* Additional context: Guardrails set limits.
+
+Topic 10: Human-in-the-loop (HITL) Workflows
+Subtopics: Interrupts, Approval flow, Critical action pause, Human approval checkpoints
+
+[📊 SCOPE SIGNAL for Topic 10:
+
+* Depth Level: Moderate
+* Coverage Angle: Safety
+* Transcript mein content volume: Understanding when and how to pause an agent.
+* Key terms from transcript: Interrupts, Approval flow, Critical action pause, Human approval checkpoints.
+* Explicit emphasis by speaker: Critical actions (delete/pay) se pehle human approval zaroori hai.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 10:
+[⭐HITL, Human-in-the-loop, Interrupts, Breakpoints, Approval UI, manual override, sensitive tools, safety guardrails, agent pause, resume state]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+
+* Testing/Offline Phase: (N/A)
+* Fixing/Iteration Phase: Agent file delete karne ka decision leta hai, par execution ruk jaata hai. User UI par "Approve" button dabata hai tabhi agent aage badhta hai.
+* Live Production Phase: Agent critical actions execute karta hai.
+* Additional context: WHY human approval needed - explained here.
+
+Topic 11: LangGraph State Machines (State Management)
+Subtopics: StateGraph, Checkpointers, SQLite persistence, Resume execution, Stateful agents
+
+[📊 SCOPE SIGNAL for Topic 11:
+
+* Depth Level: Deep
+* Coverage Angle: Architectural
+* Transcript mein content volume: Implementing the HOW of state machines after understanding HITL.
+* Key terms from transcript: StateGraph, Checkpointers, SQLite persistence, Resume execution, Stateful agents.
+* Explicit emphasis by speaker: AgentExecutor legacy ho chuka hai. 2026 mein complex agents "States" aur "Nodes" ke flow se bante hain.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 11:
+[⭐LangGraph, Nodes, Edges, ⭐StateGraph, Checkpointers, SQLite Saver, persistence, cycles, conditional edges, graph visualization]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
+
+* Testing/Offline Phase: Checkpoints configuration setup.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Agent ka state SQLite mein save hota hai. Agar laptop crash ho jaye, toh agent wahi se resume karega jahan choda tha.
+* Additional context: HOW LangGraph implements the states, naturally following the HITL concepts.
 
 ## ✅ FINAL CHECKLIST
 
@@ -1780,15 +2039,18 @@ Subtopics: Tool Call Limit Middleware, Summarization Middleware, LLM Call Limit,
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 4: Advanced Agent Features
+Section 11: Building AI Agents with LangChain
 Topic 7: Understanding Content Blocks
 Topic 8: Agent Middlewares
+Topic 9: Agentic Guardrails (Self-Correction)
+Topic 10: Human-in-the-loop (HITL) Workflows
+Topic 11: LangGraph State Machines (State Management)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 10
+Sections: 1 | Topics: 5 | Subtopics: 28
 
 **TOTAL SKELETON SUMMARY:**
-Sections: 4 | Topics: 8 | Subtopics: 38
+Sections: 4 | Topics: 12 | Subtopics: 50
 
 ==================================================================================
 
