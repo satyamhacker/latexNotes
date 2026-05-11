@@ -2317,7 +2317,7 @@ Total keywords across all subtopics in this response: 26
 # Section 4: Understanding and working LangChain Basics
 
 
-### 🌐 Section 4 Overview: Understanding and Working with LangChain Basics
+### 🌐 Section  Overview: Understanding and Working with LangChain Basics
 
 Is section mein hum LangChain ke core engine ko samjhenge. Hum dekhenge ki ek local LLM (Large Language Model) ke saath kaise interact karte hain, apne code ki performance ko LangSmith se kaise monitor (observe) karte hain, aur prompts ko dynamically handle karne ke liye templates aur roles ka use kaise karte hain.
 
@@ -7376,9 +7376,7 @@ The Unified Execution Flow (LCEL in v1.0)
 
 Section 9 ka overview samajh gaya! Is section mein hum RAG (Retrieval-Augmented Generation) ka poora lifecycle — PDF load karne se lekar vector embedding, retrieval aur LangChain ke core components tak — detail mein cover karenge.
 
-Kyunki topics kaafi detailed hain, main inhe chunks mein generate karunga taaki depth compromise na ho. Main **Topic-Level Consolidation Mode** use kar raha hoon.
 
-Yahan pehle **Topic 1 aur Topic 2** ke complete 19-point notes hain.
 
 ---
 
@@ -9916,7 +9914,7 @@ Bhai, tumhara "Building RAG Application with PDF File, Vector Stores & Embedding
 # Section 10: Tools and Function Calling with LLMs
 
 
-### 🌐 Section 1 Overview: Tools and Function Calling with LLMs
+### 🌐 Section Overview: Tools and Function Calling with LLMs
 
 Is section mein hum samjhenge ki ek Large Language Model (LLM) jo apni training ke baad duniya se disconnect ho chuka hai, usse external internet, APIs aur tools ki power kaise di jati hai. Taki woh sirf apni purani memory par depend na kare, balki real-world action le sake!
 
@@ -10555,7 +10553,7 @@ Total keywords across all subtopics in this topic: 65
 
 
 
-▶️ Resuming from: Topic 7: Understanding Content Blocks — Remaining after this: [Topic 8, Topic 9, Topic 10, Topic 11]
+
 
 Overview: Is section mein hum LangChain 1.0 ke advanced features dekhenge, specifically ki ek modern AI agent ka dimaag (reasoning) kaise padha jaye aur uski harkaton (tool calls) ko control kaise kiya jaye.
 
@@ -11547,7 +11545,7 @@ START ->|  LLM Node   |-- (Conditional Edge: Requires Tool?)
 
 
 
-### 🏁 Section 12 Overview: Building AI Agent with RAG and Tooling support (Project)
+### 🏁 Section Overview: Building AI Agent with RAG and Tooling support (Project)
 
 Is section mein hum ek real-world project banayenge jahan ek local LLM agent ko **RAG** (Retrieval-Augmented Generation — apna custom data search karne ki technique) aur **Tooling** (external scripts jaise web scraper) ke saath power-up kiya jayega. Speaker ek aisi system banayega jo Playwright (browser automation tool) se web pages read karega aur phir custom Vector Database (data store karne ka format) se data nikaal kar us page ka "bias" (pakshpaat) check karega.
 
@@ -14799,7 +14797,7 @@ Total keywords across all subtopics in this topic: 69
 
 
 
-### 🌐 Section 15 Overview: Evaluating AI Agent + Tooling + RAG system
+### 🌐 Section  Overview: Evaluating AI Agent + Tooling + RAG system
 
 Is section mein hum ek AI Agent (ek smart system jo khud decide karta hai kaunsa tool use karna hai), uske Custom Tools, aur RAG (Retrieval-Augmented Generation — jahan AI external data se context le kar answer deta hai) system ki **integrated testing aur evaluation workflow** ko samjhenge. Hum dekhenge ki kaise ek dataset prepare hota hai, bias (bhedbhav) detect karne ke liye custom tools kaise bante hain, aur Ragas framework se evaluation kaise hoti hai.
 
@@ -18683,7 +18681,7 @@ Total keywords across all subtopics in this section: 85
 # Section 19: Building Custom Playwright MCP Server with FastMCP
 
 
-### 📝 Section 19 Overview: Building Custom Playwright MCP Server with FastMCP
+### 📝 Section Overview: Building Custom Playwright MCP Server with FastMCP
 
 Is section mein hum scratch se ek custom Playwright MCP (Model Context Protocol) server banayenge using FastMCP (Python framework — MCP servers jaldi banane ke liye). Hum ground up se setup karenge, JavaScript execution sikhenge, aur ek end-to-end automation test run karenge.
 
