@@ -569,8 +569,9 @@ For **EVERY SUBTOPIC**, use this exact format. Do not skip any point.
 ---
 
 
-#### 🎯 1. Subtopic Title
+#### 🎯 Topic: 1. Subtopic Title
 (Exact wording from the user's subtopic list)
+**Followed by a 1-2 line brief explanation of what we will learn in this topic** — yeh line reader ko turant bataye ki is topic mein kya cover hoga, kya seekhenge, kya samjhenge. Jaise section ke baad uska description aata hai, waise hi har topic ke title ke baad ek chhoti si overview line aani chahiye.
 
 
 #### 🐣 2. Simple Analogy (Hinglish)

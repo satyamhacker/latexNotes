@@ -734,8 +734,9 @@ Kuch topics (e.g., conceptual theory) mein "Code Explanation" ya "Command Anatom
 **Important:** For each subtopic, use the **Subtopic Title** and the **rich description from the skeleton** as your starting point. Weave that description into the sections below, expanding with analogies, deeper explanations, and practical details as needed. The skeleton's description already contains definitions, examples, and exact phrasing from the source — preserve all of it.
 
 
-#### 🎯 1. Subtopic Title
+#### 🎯 Topic: 1. Subtopic Title
 (Exact wording from the skeleton)
+**Followed by a 1-2 line brief explanation of what we will learn in this topic** — yeh line reader ko turant bataye ki is topic mein kya cover hoga, kya seekhenge, kya samjhenge. Jaise section ke baad uska description aata hai, waise hi har topic ke title ke baad ek chhoti si overview line aani chahiye.
 
 
 #### 🐣 2. Simple Analogy (Hinglish)
