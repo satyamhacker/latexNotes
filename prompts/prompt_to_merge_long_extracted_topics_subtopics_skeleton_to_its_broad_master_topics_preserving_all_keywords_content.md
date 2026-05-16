@@ -221,7 +221,38 @@ For each section, output the merged structure EXACTLY like this:
 ---
 
 
+## ✅ FINAL MERGE CHECKLIST (Print at the very end — before Summary — MANDATORY)
+
+**Double-check steps performed:**
+- [ ] Poora skeleton completely padha bina kuch skip kiye.
+- [ ] Original skeleton mein total topics count kiya — before merge count note kiya.
+- [ ] Har topic ke subtopics, keywords, scope signal, aur real-world flow carefully note kiye.
+- [ ] Identify kiya ki kaunse topics genuinely merge ho sakte hain — same phase, same tool, ya same workflow ke basis par.
+- [ ] Koi bhi topic forcefully merge nahi kiya — sirf genuinely related topics merged kiye.
+- [ ] Koi bhi topic unnecessarily alag nahi rakha — jo genuinely ek saath belong karte the unhe merge kiya.
+- [ ] Har Master Topic ke KEYWORDS DUMP mein saare source topics ke keywords combine kiye — zero drop.
+- [ ] Duplicate keywords deduplicate kiye — lekin information zero drop ke saath.
+- [ ] `⭐` emphasized keywords preserve kiye — merge ke dauran strip nahi kiye.
+- [ ] `⭐X.x[version]` tagged keywords exact form mein preserve kiye — Notes Guru ke Version Tag Rule ke liye critical.
+- [ ] Subtopics flat comma-separated list mein hain — sirf 2-5 word names, koi descriptions nahi, koi brackets mein details nahi.
+- [ ] Duplicate subtopic names hataaye — ek hi naam ek baar.
+- [ ] SCOPE SIGNAL: Highest depth level preserve kiya. Coverage Angle combine kiya. Sab fields filled hain. Koi field silently drop nahi kiya.
+- [ ] REAL-WORLD FLOW SIGNAL: Sirf original skeleton ke phases preserve kiye — koi phase invent nahi kiya. Agar N/A tha — N/A hi rakha, "cohesive story" ke naam pe fill nahi kiya.
+- [ ] Koi bhi bahari knowledge add nahi ki — zero hallucination in SCOPE SIGNAL aur REAL-WORLD FLOW fields.
+- [ ] Chronological order preserve kiya — earliest original topic ki position ke hisaab se Master Topics ka order set kiya.
+- [ ] Har Master Topic ke liye Data Loss Validation mentally run kiya — sab subtopics aur keywords accounted hain.
+- [ ] CONTINUE protocol follow kiya — kabhi bhi kisi Master Topic ke beech mein nahi ruka.
+- [ ] Output limit aane se pehle ruka — ek complete Master Topic ke baad — aur CONTINUE message mein completed + remaining list + progress stats print kiye.
+
+Phir yeh line add karo:
+> ✅ **Notes Guru ke liye merged skeleton ready hai. Yeh merged skeleton original fragmented skeleton ka 100% data preserve karta hai — sirf structure ko compact aur logical banaya gaya hai.**
+
+
+---
+
+
 ## ✅ FINAL MERGE SUMMARY (Print at the very end — MANDATORY)
+
 
 After all Master Topics have been output, print this MANDATORY summary:
 
@@ -253,6 +284,29 @@ Data Loss Check:
   ✅ All original keywords preserved (deduped where duplicate)
   ✅ All SCOPE SIGNAL fields accounted for
   ✅ All REAL-WORLD FLOW phases accounted for
+
+📋 MERGED MASTER TOPICS:
+(🚨 Print ONLY ONE format below based on section count. Do NOT print the "Format A / Format B" labels or any IF instruction lines in your actual output.)
+
+Format A — use this if multiple sections exist:
+Section [X]: [Section Name]
+  Master Topic [N]: [Master Topic Name]
+  Master Topic [N]: [Master Topic Name]
+  ...
+
+Section [X]: [Section Name]
+  Master Topic [N]: [Master Topic Name]
+  Master Topic [N]: [Master Topic Name]
+  ...
+
+Format B — use this if only 1 section OR original skeleton had no sections (list flat, no section header):
+  Master Topic [N]: [Master Topic Name]
+  Master Topic [N]: [Master Topic Name]
+  Master Topic [N]: [Master Topic Name]
+  ...
+
+📊 MERGE SUMMARY:
+Sections: [X] | Master Topics: [A] (from [Y] original) | Subtopics: [B] (deduplicated)
 
 > ✅ Notes Guru ke liye optimized skeleton ready hai. Yeh skeleton original fragmented skeleton ka 100% data preserve karta hai — sirf structure ko compact aur logical banaya gaya hai.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
