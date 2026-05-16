@@ -1,12 +1,6 @@
 # Section 9: The Build Process
 
 
-### DEPENDENCY MAP
-
-**Concept 1: The Build Process Pipeline (Engines)** → no dependencies (start here)
-**Concept 2: Build Pipeline Artifacts (File Types)** → needs Concept 1
-**Concept 3: Executable Memory Sections (Layout)** → needs Concept 2
-**Concept 4: IDE Build Control & CLI Tools (Flags & Analysis)** → needs Concept 3
 
 ---
 
