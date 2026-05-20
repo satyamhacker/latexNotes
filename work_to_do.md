@@ -1,6 +1,5 @@
 # section 16: Decision Making
 
-Here is the DEPENDENCY MAP and the first batch of your curriculum. I have designed these questions strictly for a production-engineering mindset—focusing on memory, compiler behavior, and exact syntactical requirements.
 
 ### DEPENDENCY MAP
 
