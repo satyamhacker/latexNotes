@@ -2,7 +2,6 @@
 # Section 17: Bitwise Operators
 
 
-Here is the Dependency Map and the first batch of your structured curriculum. Because bitwise operations involve exact parameter passing, memory constraints, and high-risk hardware bugs, I have extracted every operator, mask strategy, and precedence rule into rigorous questions.
 
 ### 🗺️ DEPENDENCY MAP
 
