@@ -4,17 +4,23 @@
 
 ### 🗺️ DEPENDENCY MAP
 
-* **Standard I/O (scanf / printf)** → no dependencies (start here)
-* **Fixed-Width Integers (stdint.h)** → no dependencies
-* **Modulus Operator (%)** → no dependencies
-* **while Statement** → needs Standard I/O
-* **Super Loop (while(1)) & Null StatementTrap** → needs while Statement
-* **do-while Statement** → needs while Statement
-* **for Statement** → needs while Statement
-* **Nested Loop Architecture** → needs for Statement
-* **volatile Keyword** → no dependencies (hardware prerequisite)
-* **Software Delay Loop Pattern** → needs for Statement + volatile Keyword
+Concept 1: Standard I/O (scanf & printf)
 
+Concept 2: Modulus Operator (%)
+
+Concept 3: while Statement
+
+Concept 4: Super Loop (while(1)) & Semicolon Trap
+
+Concept 5: do-while Statement
+
+Concept 6: for Statement
+
+Concept 7: Nested Loop Architecture
+
+Concept 8: volatile Keyword
+
+Concept 9: Software Delay Loop Pattern
 ---
 
 ### CONCEPT 1 — Standard I/O (scanf & printf Format Specifiers) [Beginner]
