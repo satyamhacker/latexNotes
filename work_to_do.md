@@ -130,3 +130,155 @@
 **→ Chunk 1 Complete.**
 Reply **CONTINUE** for the next batch covering Concepts 5 through 8 (Ragas Framework, Ragas Metrics, Local Ollama Wrappers, and Multi-turn Sample Tool calls).
 
+Here is Batch 2, covering the remaining concepts to complete your dependency map and curriculum.
+
+---
+
+### CONCEPT 5 — Evaluation Frameworks (OpenAI Evals vs Ragas) [Intermediate]
+
+📌 Prerequisites: Concept 4
+
+── PART A: CONCEPT-LEVEL QUESTIONS ──
+
+[WHAT] 🟢 What is the Ragas Library? Define it in simple words and explain what "SOTA LLM assisted method" means in this context.
+[STRUCTURE] 🟢 What are the mandatory components (like Registry of Evals) required to run Ragas? What goes inside the Ragas execution flow? Show the minimal conceptual architecture.
+[WHEN] 🟡 When should I use Ragas over OpenAI Evals? Give 3 real-world situations/triggers. Also tell me: when should I NOT use Ragas and stick to proprietary evals?
+[COMPARE] 🟡 How is an open-source framework like Ragas different from a proprietary framework like OpenAI Evals? Make a clear side-by-side comparison table covering: ecosystem lock-in, data format requirements, and custom model flexibility.
+[PURPOSE] 🟡 If frameworks with automated metrics didn't exist, what exact problem would I face regarding "annotated evaluation datasets"? Why was the SOTA-assisted method created?
+[ANTI-PATTERN] 🔴 What is the wrong way to evaluate a multi-model pipeline (e.g., Llama Index + Ollama)? What common ecosystem lock-in mistake do beginners make? What is the correct approach instead?
+[REAL EXAMPLE] 🟡 Give a real-world enterprise RAG app scenario where Ragas is integrated into a CI/CD pipeline to track "pipeline performance". Show exactly how it gates a production deployment.
+[BREAK IT] 🔴 What can go wrong if I don't use environment variables securely? What exact `AuthenticationError` will I see in Ragas? What is the root cause and fix?
+
+── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
+
+**Parameter 1: `OPENAI_API_KEY` (Environment Variable)**
+[PARAM-WHAT] 🟢 What is the `OPENAI_API_KEY` environment variable in the context of Ragas? What does it do internally? What happens if I don't set it?
+[PARAM-VALUES] 🟡 What exact string format must this key hold? What is the default fallback if any? Show an example of exporting it via the terminal.
+[PARAM-MISTAKE] 🔴 What is the most common and dangerous security mistake with this API key? What exact financial or access breach will I face?
+[PARAM-REALCODE] 🟡 Show exactly how this parameter is set programmatically using Python's `os.environ`. Why is this preferred over hardcoding?
+
+---
+
+### CONCEPT 6 — Ragas Core Metrics [Intermediate]
+
+📌 Prerequisites: Concept 5
+
+── PART A: CONCEPT-LEVEL QUESTIONS ──
+
+[WHAT] 🟢 What are the 4 core Ragas metrics (Context Precision, Context Recall, Faithfulness, Response Relevance)? Define each in simple words.
+[STRUCTURE] 🟢 What are the mandatory logical steps Ragas uses to calculate the final Retrieval Augmented Generation Assurance Score (RAGAS score)? What goes inside the Retriever evaluation vs the Generator evaluation?
+[WHEN] 🟡 When should I prioritize optimizing the "Faithfulness" metric? Give 3 real-world situations/triggers (e.g., medical/legal bots). Also tell me: when do Context Precision/Recall NOT matter?
+[COMPARE] 🟡 How is Context Precision different from Context Recall? Make a clear side-by-side comparison table covering: signal-to-noise ratio, coverage, and how to fix each when they fail.
+[PURPOSE] 🟡 If Ragas core metrics didn't separate retrieval from generation, what exact debugging problem would I face when a RAG bot gives a wrong answer?
+[ANTI-PATTERN] 🔴 What is the wrong way to analyze a RAGAS score? What common mistake do beginners make when looking only at the overall average? What is the correct approach instead?
+[REAL EXAMPLE] 🟡 Give a real-world scenario (like BloombergGPT) where "factually grounded truth" is critical. Show exactly how the Faithfulness metric safeguards the system.
+[BREAK IT] 🔴 What can go wrong if Context Precision is very low (e.g., 0.2) but the LLM is highly creative? What exact type of hallucinated response will I see? What is the root cause (Vector DB tuning) and fix?
+
+── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
+*(This is a conceptual metric breakdown; code parameters for running these are covered in Concept 7).*
+
+---
+
+### CONCEPT 7 — Ragas Implementation with Local LLM (Ollama) [Advanced]
+
+📌 Prerequisites: Concept 5, Concept 6
+
+── PART A: CONCEPT-LEVEL QUESTIONS ──
+
+[WHAT] 🟢 What is a LangChain LLM Wrapper in the context of Ragas? Define it in simple words.
+[STRUCTURE] 🟢 What are the mandatory classes (`ChatOllama`, `LangchainLLMWrapper`, `evaluate`) required to run Ragas locally? What goes inside each one? Show the minimal working VS Code Python skeleton.
+[WHEN] 🟡 When should I use Local Large Language Models (via Ollama) for evaluation? Give 3 real-world situations/triggers. Also tell me: when should I NOT use local models and stick to Cloud APIs?
+[COMPARE] 🟡 How does a local `ChatOllama` evaluation compare to native `Chat OpenAI` evaluation? Make a clear side-by-side comparison table covering: cost, data privacy, speed, and integration steps.
+[PURPOSE] 🟡 If the `LangchainLLMWrapper` didn't exist, what exact problem would I face when trying to pass a LangChain model into Ragas? Why was this adapter created?
+[ANTI-PATTERN] 🔴 What is the wrong way to pass an Ollama model to the Ragas `evaluate` function? What common `TypeError` do beginners get? What is the correct approach instead?
+[REAL EXAMPLE] 🟡 Give a real-world scenario (like a legal-tech startup) where LangSmith traces are used alongside local Ragas evaluation. Show exactly how it provides observability.
+[BREAK IT] 🔴 What can go wrong if the local Ollama server isn't running in the background? What exact `ConnectionRefusedError` will I see? What is the root cause and terminal fix?
+
+── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
+
+**Parameter 1: `model` (inside `ChatOllama`)**
+[PARAM-WHAT] 🟢 What is the `model` parameter? What does it do? What happens if I don't pass it?
+[PARAM-VALUES] 🟡 What values can this parameter accept? What is the default value if any? [🔍 Verify from docs: default ChatOllama model]. Show an example of a valid local model string.
+[PARAM-MISTAKE] 🔴 What is the most common mistake with this parameter? What exact error will I get if the model isn't pulled locally?
+[PARAM-REALCODE] 🟡 Show exactly how this parameter is used in `ChatOllama(model="llama3")`. Why must this exactly match the model pulled via CLI?
+
+**Parameter 2 & 3: `LANGCHAIN_TRACING_V2` & `LANGCHAIN_API_KEY` (Environment Flags)**
+[PARAM-WHAT] 🟢 What are these environment variables? What do they enable in the backend (LangSmith)? What happens if I skip them?
+[PARAM-VALUES] 🟡 What exact string value must `LANGCHAIN_TRACING_V2` be set to? Show an example.
+[PARAM-MISTAKE] 🔴 What is the most common mistake when setting these up in a `.env` file? What exact silent failure (missing traces) will I get?
+[PARAM-REALCODE] 🟡 Show exactly how these are loaded into the script. Why is observability critical for complex Ragas metrics?
+
+**Parameter 4: `question`, `answer`, `ground_truth` (Keys in Singleton Sample Data)**
+[PARAM-WHAT] 🟢 What are these specific dictionary keys? What data do they represent in a Ragas dataset? What happens if I misspell one?
+[PARAM-VALUES] 🟡 What exact data types must be passed as values for these keys in Ragas (e.g., lists of strings)? Show a valid example.
+[PARAM-MISTAKE] 🔴 What is the most common mistake regarding the `answer` vs `ground_truth` keys? What exact evaluation logic error will I get?
+[PARAM-REALCODE] 🟡 Show exactly how a "singleton sample" dictionary is structured using these keys. Why are lists used instead of raw strings?
+
+---
+
+### CONCEPT 8 — Multi-turn Samples & Tool Messages [Advanced]
+
+📌 Prerequisites: Concept 7
+
+── PART A: CONCEPT-LEVEL QUESTIONS ──
+
+[WHAT] 🟢 What is a Multi-turn Sample in evaluation? Define it and explain how it differs from a singleton sample.
+[STRUCTURE] 🟢 What are the mandatory message classes (`HumanMessage`, `AIMessage`, `ToolMessage`) required to build a multi-turn history? What goes inside each one? Show the minimal working code skeleton.
+[WHEN] 🟡 When should I evaluate using multi-turn samples? Give 3 real-world situations/triggers (e.g., AI Agents, API calling bots). Also tell me: when should I NOT use multi-turn and stick to singleton?
+[COMPARE] 🟡 How is an `AIMessage` containing a tool call different from a standard text `AIMessage`? Make a clear side-by-side comparison table covering: structure, execution intent, and next step in the pipeline.
+[PURPOSE] 🟡 If `ToolMessage` didn't exist, what exact problem would I face when an LLM tries to read the output of a Weather API? Why was this specific message class created?
+[ANTI-PATTERN] 🔴 What is the wrong way to test an AI agent's memory? What common mistake do beginners make by only sending the last two messages to the evaluator? What is the correct approach instead?
+[REAL EXAMPLE] 🟡 Give a real-world scenario (like an Expedia flight booking bot) where multi-turn evaluation is critical. Show exactly how the "reference response" and "multi score" validate the conversation logic.
+[BREAK IT] 🔴 What can go wrong if I grant an AI agent tool access to a Read/Write database without strict boundaries? What exact security vulnerability (Prompt Injection) will I see? What is the root cause and fix?
+
+── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
+
+**Parameter 1: `content` (inside `HumanMessage`, `AIMessage`, `ToolMessage`)**
+[PARAM-WHAT] 🟢 What is the `content` parameter? What does it store? What happens if it is left empty in a standard text message?
+[PARAM-VALUES] 🟡 What values can this accept? [🔍 Verify from docs: Can content be a list of dictionaries for multimodal data?]. Show an example of JSON stringified content in a `ToolMessage`.
+[PARAM-MISTAKE] 🔴 What is the most common mistake when populating `content` for an `AIMessage` that is meant to call a tool? What silent bug will I get?
+[PARAM-REALCODE] 🟡 Show exactly how `content` is used across all three message types. Why is it often left as an empty string `""` when a tool is being called?
+
+**Parameter 2: `tool_calls` (inside `AIMessage`)**
+[PARAM-WHAT] 🟢 What is the `tool_calls` parameter? What does it instruct the underlying system to do? What happens if I don't include it in an agent flow?
+[PARAM-VALUES] 🟡 What is the exact list-of-dictionaries structure required here? What keys (`name`, `args`, `id`) must exist inside it? Show a valid JSON/dict example.
+[PARAM-MISTAKE] 🔴 What is the most common mistake when formatting the `args` within `tool_calls`? What exact parsing error will I get?
+[PARAM-REALCODE] 🟡 Show exactly how `tool_calls` is defined in an `AIMessage`. Why is the `id` field absolutely critical?
+
+**Parameter 3: `tool_call_id` (inside `ToolMessage`)**
+[PARAM-WHAT] 🟢 What is the `tool_call_id` parameter? What does it map to? What happens if I don't pass it?
+[PARAM-VALUES] 🟡 What values can this accept? Show an example of how it connects to the previous step.
+[PARAM-MISTAKE] 🔴 What is the most common mistake regarding `tool_call_id`? What exact `ValidationError` will I get from the LLM?
+[PARAM-REALCODE] 🟡 Show exactly how `tool_call_id` in a `ToolMessage` matches the ID generated in the preceding `AIMessage`. Why does the LLM completely lose context if these don't match?
+
+---
+
+### 📊 CURRICULUM SUMMARY & SCORING SYSTEM
+
+**→ Total Concept Count:** 8
+**→ Total Parameter Deep-Dives:** 11 parameters/keys mapped across code boundaries.
+**→ Total Question Count:** 64 Concept Questions + 44 Parameter Questions = 108 Questions.
+
+**📚 Recommended Study Order:**
+
+1. LLM Evaluation Fundamentals
+2. Traditional NLP Metrics
+3. Non-Traditional Metrics & BERTScore
+4. LLM-Based Scoring (Teacher-Student)
+5. Evaluation Frameworks (OpenAI Evals vs Ragas)
+6. Ragas Core Metrics
+7. Ragas Implementation with Local LLM (Ollama)
+8. Multi-turn Samples & Tool Messages
+
+**🏆 Scoring System for Self-Study:**
+
+* 🟢 **Beginner Questions:** 1 pt each (43 questions) = 43 pts
+* 🟡 **Intermediate Questions:** 2 pts each (43 questions) = 86 pts
+* 🔴 **Advanced/Anti-pattern Questions:** 3 pts each (22 questions) = 66 pts
+* **Total Possible Points:** 195 pts
+* **Mastery Threshold (85%):** 165 pts
+
+**How to self-check:**
+Write the code and theoretical answers for every question above. Compare your code against the official LangChain/Ragas documentation. If your code compiles, handles the errors described, and correctly uses the hidden parameters, award yourself the points! If a parameter behaves differently than expected, look up the `[🔍 Verify from docs]` tags.
+
+==================================================================================
