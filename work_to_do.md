@@ -2,7 +2,6 @@
 
 
 
----
 
 # 🧠 QUICK REVISION CHEAT SHEET: C Unions & Embedded Memory
 
@@ -82,8 +81,6 @@ union SmartPacket {
 packet.full_data = ntohl(raw_network_data); 
 // Ab aaram se bit-fields read karo!
 
-```
 
----
 
 ==================================================================================
