@@ -2,7 +2,7 @@
 
 # section 28: Keypad interfacing
 
-Here is the strict dependency map and the first batch of your deep-dive question set. I have thoroughly analyzed the bare-metal keypad interfacing notes to extract every concept, hardware mechanic, register operation, and hidden parameter.
+
 
 ### 🗺️ DEPENDENCY MAP
 
