@@ -85,7 +85,7 @@
 * `useReducer` (Strictly typing Action payloads using Discriminated Unions).
 * `useContext` (Handling `undefined` initial states safely).
 * **Advanced Ref Typing:** `useRef` for Mutable values vs DOM Nodes vs RN Elements.
-* **The `forwardRef` Nightmare:** Typing `React.forwardRef` correctly.
+* **The `forwardRef` Nightmare:** Typing `React.forwardRef` correctly (Passing refs to custom inputs).
 
 
 * **🛍️ E-commerce Use Case:**
@@ -110,11 +110,12 @@
 **Module 8: React Native-Specific Types (Mobile)**
 
 * **Topics:**
-* Typing Core Components: `ViewProps`, `TextProps`, `TextInputProps`.
+* Typing Core Components: `ViewProps`, `TextProps`, `TouchableOpacityProps`, `TextInputProps`.
 * Typing Stylesheets: `StyleSheet.create`, `ViewStyle`, `TextStyle`, `ImageStyle`.
 * Typing Lists: `FlatList`'s `ListRenderItem<T>`.
 * Typing Media: `ImageSourcePropType`.
 * Custom Layout Events and Device Orientation types.
+* Web Events (`onClick`, `onChange`) vs Mobile Events (`onPress`, `onChangeText`).
 
 
 * **🛍️ E-commerce Use Case:**
@@ -128,7 +129,7 @@
 
 * **Topics:**
 * **Web Routing (React Router):** Typing `useParams`, `useLocation`, and dynamic routes.
-* **Mobile Routing (React Navigation):** Defining `RootStackParamList`.
+* **Mobile Routing (React Navigation):** Defining `RootStackParamList`, `NativeStackScreenProps`.
 * Typing `Stack.Screen`, `useNavigation`, and `useRoute` (Passing parameters between screens).
 
 
@@ -140,7 +141,7 @@
 **Module 10: State Management & Forms (Industry Standard)**
 
 * **Topics:**
-* **Redux Toolkit / Zustand:** Typing the global store, Slices, and Actions.
+* **Redux Toolkit / Zustand:** Typing the global store, Redux Toolkit Slices, and strongly typing Zustand stores.
 * **TanStack Query (React Query):** Typing `useQuery` and `useMutation` for async data.
 * **Forms:** Runtime validation with **Zod** + inferring TS types + React Hook Form.
 
