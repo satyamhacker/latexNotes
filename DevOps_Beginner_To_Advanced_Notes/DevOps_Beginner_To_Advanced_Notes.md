@@ -29607,8 +29607,6 @@ Total keywords across all subtopics in this topic: 25
 
 # SECTION-20 ->Ansible
 
-# SECTION-20 ->Ansible
-
 
 
 **Overview:** Welcome to the world of Ansible. Yeh ek aisi technology hai jo DevOps aur System Administration ki duniya mein revolution laayi hai. Yahan hum infrastructure ko manually configure karna chhod kar, code ke through automated aur scalable banayenge. 
