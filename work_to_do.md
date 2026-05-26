@@ -3,8 +3,6 @@
 
 
 
-📦 Processing: Phase 2 — Jenkins CI Foundation & Advanced Pipelines
-
 =====Section 1: Continuous Integration & Jenkins Fundamentals [⚠️ Derived]=====
 Integration Hell se bachne aur automation laane ka solid raasta. [⚠️ Derived]
 
