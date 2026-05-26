@@ -15769,7 +15769,7 @@ Woh **Origin Access Identity (OAI)** create karte hain. Phir S3 bucket policy me
 ### 🎯 SECTION-15: Re-Architecting & ElastiCache
 
 
-### 🎯 SECTION-15: Re-Architecting & ElastiCache
+
 
 Is section mein hum samjhenge ki ek application ki performance ko kaise improve kiya jaata hai aur services ko loosely couple (decouple) karke architecture ko highly available aur scalable kaise banaya jaata hai.
 
