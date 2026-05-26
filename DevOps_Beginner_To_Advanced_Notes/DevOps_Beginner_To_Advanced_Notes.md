@@ -48081,7 +48081,6 @@ Agle module ya naye skeleton ke liye command dijiye!
 
 # 🎯 SECTION-26: GitOps Projects – Complete DevOps Automation Guide
 
-# 🎯 SECTION-26/27: GitOps Projects – Complete DevOps Automation Guide
 
 Yeh section GitOps ki duniya ka masterclass hai. Yahan hum infrastructure ko code ki tarah treat karna, credentials manage karna, aur ArgoCD jaise tools se production-grade deployments karna seekhenge.
 
