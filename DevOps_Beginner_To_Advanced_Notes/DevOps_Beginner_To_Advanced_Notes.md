@@ -7312,7 +7312,7 @@ Section overview: Is section mein hum DevOps aur software development ke sabse f
 
 ---
 
-## Section-7: Variable, JSON & YAML
+## 🎯 SECTION-7: Variable, JSON & YAML
 
 ### 🎯 1. Data Formats & Core Comparisons
 
