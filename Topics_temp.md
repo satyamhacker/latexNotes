@@ -86,6 +86,7 @@
 * `useContext` (Handling `undefined` initial states safely).
 * **Advanced Ref Typing:** `useRef` for Mutable values vs DOM Nodes vs RN Elements.
 * **The `forwardRef` Nightmare:** Typing `React.forwardRef` correctly (Passing refs to custom inputs).
+* **Typing Custom Hooks:** Returning Tuples (`[T, setter]`) using `as const` vs Object returns.
 
 
 * **🛍️ E-commerce Use Case:**
@@ -100,6 +101,7 @@
 * Typing Inline Styles: `React.CSSProperties`.
 * Extending Native HTML Attributes (`ComponentPropsWithoutRef<'button'>`).
 * **Next.js Specific Types:** Server vs Client Components, `PageProps`, and `LayoutProps`.
+* Typing Web Accessibility (WAI-ARIA attributes).
 * **Angular Context:** Understanding Decorators (`@Component`, `@Injectable`), typing RxJS Observables (`Observable<User>`), `@Input()`/`@Output()` with `EventEmitter<T>`, and Typed Reactive Forms (`FormControl<T>`, `FormGroup`).
 
 
@@ -117,6 +119,7 @@
 * Typing Media: `ImageSourcePropType`.
 * Custom Layout Events and Device Orientation types.
 * Web Events (`onClick`, `onChange`) vs Mobile Events (`onPress`, `onChangeText`).
+* Typing RN Accessibility (`AccessibilityProps`, `accessibilityRole`, `accessibilityState`).
 * **Typing Animations:** `Animated.Value` (Core) and `SharedValue` (React Native Reanimated).
 
 
@@ -162,6 +165,7 @@
 * Generic React Components (e.g., `<Dropdown<T>>`).
 * Built-in Utilities: `Partial`, `Pick`, `Omit`, `Record`, `ReturnType`, `Awaited<T>`.
 * Conditional Types & `infer` keyword.
+* **The `keyof` Operator & Mapped Types:** Iterating over object keys (e.g., `{[K in keyof Theme]: string}`) for Design Systems.
 
 
 * **🛍️ E-commerce Use Case:**
