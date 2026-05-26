@@ -14396,6 +14396,10 @@ Jab Google Cloud ya AWS mein cloud functions retry karte hain failures par, woh 
 
 ==================================================================================
 
+# SECTION-13,14,15,16---AWS PART REMOVED BECAUSE THIS COURSE IS FOCUSED ON GENERAL DEVOPS
+
+==================================================================================
+
 
 # SECTION-17 ->Continuous Integration with Jenkins
 
@@ -31992,6 +31996,8 @@ Total keywords across all subtopics in this topic: 21
 > ✅ **Notes Guru confirms:** Yeh notes original handwritten notes ka 100% content cover karti hain — har topic, har subtopic, har keyword, aur Ansible architecture ka ek-ek detail beginner-friendly Hinglish flow ke saath perfectly complete ho gaya hai. 🚀
 
 
+==================================================================================
+# SECTION-21,22--AWS PART REMOVED BECAUSE THIS COURSE IS FOCUSED ON GENERAL DEVOPS
 ==================================================================================
 
 
