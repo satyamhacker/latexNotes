@@ -1,216 +1,326 @@
-# Section 31: Pre-Processor directives in 'C'
+# SECTION-17 ->Continuous Integration with Jenkins
 
-Here is the structured dependency map and the first batch of deep-dive questions based on your notes.
 
 ### DEPENDENCY MAP
 
-Concept 1 — Basic Pre-Processor Directives & Macros (`#define`) → no dependencies (start here)
-Concept 2 — Function-Like Macros & Safety Rules → needs Concept 1
-Concept 3 — Conditional Compilation Directives (`#if`, `#ifdef`) → needs Concept 1
-Concept 4 — The `defined` Operator & Error Directives → needs Concept 1 + Concept 3
-Concept 5 — Hardware Refactoring & Header Organization (`.h`) → needs Concept 1 + Concept 2 + Concept 3
+* **CONCEPT 1 (Continuous Integration Mental Model)** → no dependencies (start here)
+* **CONCEPT 2 (Jenkins Architecture & Internals)** → needs CONCEPT 1
+* **CONCEPT 3 (Freestyle Jobs & First Build Setup)** → needs CONCEPT 2
+* **CONCEPT 4 (SCM, Credentials & Triggers)** → needs CONCEPT 3
+* **CONCEPT 5 (Plugin Lifecycle & System Optimization)** → needs CONCEPT 2 + CONCEPT 3
 
 ---
 
-### CONCEPT 1 — Basic Pre-Processor Directives & Macros [Beginner]
+### CONCEPT 1 — Continuous Integration (CI) Mental Model [Beginner]
 
 📌 Prerequisites: None (start here)
 
 #### ── PART A: CONCEPT-LEVEL QUESTIONS ──
 
-[WHAT] 🟢 What exactly is a pre-processor directive and what role does textual replacement play before compilation?
-[STRUCTURE] 🟢 What is the mandatory syntax to define a macro? What goes inside each part, and what is the minimal working code skeleton?
-[WHEN] 🟡 When should I use macros instead of standard variables, especially in embedded systems? When should I strictly NOT use them?
-[COMPARE] 🟡 How does a `#define` macro compare side-by-side with a `const` variable in terms of type checking, memory usage (RAM/ROM), and evaluation stage?
-[PURPOSE] 🟡 If macros didn't exist, what exact problem would I face when managing configuration values (like `MIN_AGE` or hardware addresses) across a large codebase?
-[ANTI-PATTERN] 🔴 What is the wrong way to end a macro definition? What common mistake do beginners make with characters like `=` or `;`?
-[REAL EXAMPLE] 🟡 Give a real-world scenario in embedded system programming where macros are mapped to peripheral addresses. How does it fit into the system?
-[BREAK IT] 🔴 What exact error or bug will I see if I attempt to get the memory address of a macro (e.g., `&MIN_AGE`)? What is the root cause?
+[WHAT] 🟢
+What is Continuous Integration (CI)? Define it in simple words.
+
+[STRUCTURE] 🟢
+What are the mandatory stages/steps in a basic CI pipeline? What goes inside each one? Show the minimal conceptual flow (e.g., Push -> ? -> ?).
+
+[WHEN] 🟡
+When should I use Continuous Integration? Give 3 real-world situations/triggers. Also tell me: when should I NOT use CI?
+
+[COMPARE] 🟡
+How is Continuous Integration different from Manual Integration (Big Bang Integration)? Make a clear side-by-side comparison table covering: merge frequency, testing method, and feedback loop speed.
+
+[PURPOSE] 🟡
+If Continuous Integration didn't exist, what exact problem would I face? Why was CI created in the first place?
+
+[ANTI-PATTERN] 🔴
+What is the wrong way to implement Continuous Integration? What common mistake do beginners make regarding "merging vs integrating"? What is the correct approach instead?
+
+[REAL EXAMPLE] 🟡
+Give a real-world scenario (like a large tech company) where CI is used. Show exactly how it prevents broken code from reaching production.
+
+[BREAK IT] 🔴
+What can go wrong when relying on CI? What exact error/behavior will I see if a developer suffers from the "Works on my machine" syndrome? What is the root cause and fix?
 
 #### ── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
 
-**Parameter: `identifier` (The Macro Name)**
-[PARAM-WHAT] 🟢 What is the identifier parameter in a macro definition? What happens if I don't provide it?
-[PARAM-VALUES] 🟡 What naming conventions and values can this parameter accept? What is the industry standard for casing?
-[PARAM-MISTAKE] 🔴 What is the most common mistake with macro identifiers? What silent bug or error will occur if I use a reserved keyword?
-[PARAM-REALCODE] 🟡 Show exactly how a macro identifier is used in a real working code snippet. Why is this specific casing chosen here?
-
-**Parameter: `replacement_value**`
-[PARAM-WHAT] 🟢 What is the replacement value in a macro? What happens if I leave this blank or don't pass it?
-[PARAM-VALUES] 🟡 What types of text/values can this accept (numbers, strings, code snippets)?
-[PARAM-MISTAKE] 🔴 What exact error will I get if I put an equal sign (`=`) before the replacement value?
-[PARAM-REALCODE] 🟡 Show exactly how a replacement value is used in a working snippet.
-
-**Parameter: `UL` / `ul` (Unsigned Long Suffix)**
-[PARAM-WHAT] 🟢 What is the `UL` suffix parameter attached to numeric replacement values? What exact compiler behavior does it control?
-[PARAM-VALUES] 🟡 What exact values/formats can this suffix take? Does case (`UL` vs `ul`) matter? [🔍 Verify from docs]
-[PARAM-MISTAKE] 🔴 What exact memory range error or warning will I get if I forget to append `UL` to a 32-bit hardware register address?
-[PARAM-REALCODE] 🟡 Show a real working snippet mapping an embedded memory address using the `UL` suffix. Why is this specific suffix necessary here?
+*(Note: As this is a purely theoretical mental model without specific code execution, there are no code-level parameters to deep-dive into for this specific concept. We will move to Concept 2 for parameter deep-dives).*
 
 ---
 
-### CONCEPT 2 — Function-Like Macros & Safety Rules [Intermediate]
+### CONCEPT 2 — Jenkins Architecture & Internals [Intermediate]
 
 📌 Prerequisites: Concept 1
 
 #### ── PART A: CONCEPT-LEVEL QUESTIONS ──
 
-[WHAT] 🟢 What is a function-like macro? Define it in simple terms emphasizing its textual replacement nature.
-[STRUCTURE] 🟢 What are the mandatory syntax elements to create a function-like macro? Show the minimal working code skeleton.
-[WHEN] 🟡 When should I use a function-like macro instead of a standard C function? Give 3 real-world embedded triggers. When should I NOT use it?
-[COMPARE] 🟡 Create a side-by-side comparison table between Function-Like Macros and C Functions covering: Speed, Binary Size (Code Bloat), Type Safety, and Debugging capabilities.
-[PURPOSE] 🟡 If function-like macros didn't exist, what performance penalty (overhead) would I face in extreme real-time systems?
-[ANTI-PATTERN] 🔴 What is the completely wrong way to define a function-like macro regarding parameter wrapping? What common precedence mistake do beginners make?
-[REAL EXAMPLE] 🟡 Give a real-world scenario (like an embedded Linux driver bitwise operation) where function-like macros are utilized.
-[BREAK IT] 🔴 What happens if I pass an argument with an increment operator (e.g., `SQUARE(x++)`) into a macro? What exact undefined behavior is caused, and how do I fix it?
+[WHAT] 🟢
+What is Jenkins and what is its core architecture? Define it in simple words.
+
+[STRUCTURE] 🟢
+What are the mandatory directories and files that make up Jenkins' state? What goes inside each one? Show the minimal directory skeleton.
+
+[WHEN] 🟡
+When should I self-host a Jenkins server? Give 3 real-world situations/triggers. Also tell me: when should I NOT use Jenkins and prefer a managed alternative like GitHub Actions?
+
+[COMPARE] 🟡
+How is Core Jenkins (without plugins) different from Jenkins + Plugins? Make a clear side-by-side comparison table covering: capabilities, use cases, and extensibility.
+
+[PURPOSE] 🟡
+If the `/var/lib/jenkins` directory structure didn't exist and Jenkins used a heavy database instead, what exact problem would I face during backups and migrations?
+
+[ANTI-PATTERN] 🔴
+What is the wrong way to backup a Jenkins server? What common mistake do beginners make while Jenkins is still running? What is the correct approach instead?
+
+[REAL EXAMPLE] 🟡
+Give a real-world scenario (like a cloud migration) where backing up Jenkins internals is required. Show exactly how the core files are transferred to replicate the exact state.
+
+[BREAK IT] 🔴
+What can go wrong when migrating Jenkins to a new server? What exact error will I see if `secret.key` is missing? What is the root cause and fix?
 
 #### ── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
 
-**Parameter: `macro_arguments` (e.g., `x, y`)**
-[PARAM-WHAT] 🟢 What are the arguments passed into a function-like macro? What happens if the count doesn't match the definition?
-[PARAM-VALUES] 🟡 What values/expressions can these arguments accept? Can I define C data types (like `int`) here?
-[PARAM-MISTAKE] 🔴 What silent mathematical bug will I get if I pass a compound expression like `1 + 1` into an argument?
-[PARAM-REALCODE] 🟡 Show exactly how arguments are passed into a function-like macro in real code.
+**Parameter 1: `/var/lib/jenkins/config.xml**`
+[PARAM-WHAT] 🟢
+What is this file? What does it do? What happens if it gets deleted?
+[PARAM-VALUES] 🟡
+What values/formats can this file accept? What is the default structure? Show an example of what is stored inside.
+[PARAM-MISTAKE] 🔴
+What is the most common mistake with handling this file during a migration? What silent bug will I get?
+[PARAM-REALCODE] 🟡
+Show exactly how this file fits into the backup archive command snippet. Why is it critical here?
 
-**Parameter: `()` (Parentheses Guarding)**
-[PARAM-WHAT] 🟢 What is the purpose of generously wrapping macro parameters and the full expression in parentheses? What happens if I omit them?
-[PARAM-VALUES] 🟡 Where exactly must these parentheses be placed to ensure complete safety?
-[PARAM-MISTAKE] 🔴 What exact math precedence error occurs if I only wrap the outer expression but leave the inner operands unprotected?
-[PARAM-REALCODE] 🟡 Show a real working code snippet demonstrating "generously parenthesized" function-like macros. Why are they placed exactly where they are?
+**Parameter 2: `/var/lib/jenkins/credentials.xml` & `secret.key**`
+[PARAM-WHAT] 🟢
+What are these parameters/files? What do they do together? What happens if I copy one without the other?
+[PARAM-VALUES] 🟡
+What values are stored here? Are they plain text? [🔍 Verify from docs]
+[PARAM-MISTAKE] 🔴
+What is the most common security mistake with this parameter? What exact vulnerability will I expose?
+[PARAM-REALCODE] 🟡
+Show exactly how permissions for these files should be configured in a real working bash snippet.
+
+**Parameter 3: `tar -czvf` (Flags: `-c`, `-z`, `-v`, `-f`)**
+[PARAM-WHAT] 🟢
+What are these command-line flags? What does each one specifically do? What happens if I don't pass `-z`?
+[PARAM-VALUES] 🟡
+What alternative flags can `tar` accept for extraction? Show an example of the extraction values.
+[PARAM-MISTAKE] 🔴
+What is the most common mistake with the `-f` parameter? What exact error will I get?
+[PARAM-REALCODE] 🟡
+Show exactly how these parameters are used in a real working Jenkins backup script. Why are these specific flags chosen here?
+
+**Parameter 4: `chown -R` (Recursive Flag)**
+[PARAM-WHAT] 🟢
+What is the `-R` parameter in `chown`? What does it do? What happens if I skip it after a migration?
+[PARAM-VALUES] 🟡
+What user:group values must this parameter accept for Jenkins?
+[PARAM-MISTAKE] 🔴
+What is the most common mistake when restoring a tar backup as `root` without using this parameter? What exact error will Jenkins throw?
+[PARAM-REALCODE] 🟡
+Show exactly how this parameter is used in a real post-migration setup script.
 
 ---
 
-### CONCEPT 3 — Conditional Compilation Directives [Intermediate]
+### CONCEPT 3 — Freestyle Jobs & First Build Setup [Beginner]
 
-📌 Prerequisites: Concept 1
+📌 Prerequisites: Concept 2
 
 #### ── PART A: CONCEPT-LEVEL QUESTIONS ──
 
-[WHAT] 🟢 What is conditional compilation, and how does it dynamically include or exclude code blocks?
-[STRUCTURE] 🟢 What are the mandatory directives (`#if`, `#ifdef`, `#endif`) to create a conditional block? Show the minimal working skeleton.
-[WHEN] 🟡 When should I use conditional compilation? Give 3 real-world situations (e.g., cross-platform builds). When should I stick to standard runtime `if` statements?
-[COMPARE] 🟡 How does excluding code with `#if 0 ... #endif` compare to multiline comments `/* ... */` in terms of nesting and safety?
-[PURPOSE] 🟡 If conditional compilation didn't exist, what exact problem would I face when compiling a unified codebase for both Windows and Linux?
-[ANTI-PATTERN] 🔴 What is the wrong way to close a conditional block? What happens if I leave the block open?
-[REAL EXAMPLE] 🟡 Give a real-world scenario (like the Android OS kernel) where `#ifdef` is used to manage different hardware architectures (Qualcomm vs MediaTek).
-[BREAK IT] 🔴 What exact error will I see if I trigger an `unterminated #if` error? What is the root cause and fix?
+[WHAT] 🟢
+What is a Freestyle Job in Jenkins? Define it in simple words.
+
+[STRUCTURE] 🟢
+What are the mandatory configuration sections (SCM, Triggers, Steps, Actions) for a job? What goes inside each one? Show the minimal working UI/configuration flow.
+
+[WHEN] 🟡
+When should I use a Freestyle Job? Give 3 real-world situations/triggers. Also tell me: when should I NOT use a Freestyle Job and use a Pipeline instead?
+
+[COMPARE] 🟡
+How is a Jenkins Job different from a Jenkins Build? Make a clear side-by-side comparison table covering: definition, cardinality (1-to-many), and purpose.
+
+[PURPOSE] 🟡
+If Post-build Actions (like archiving artifacts) didn't exist, what exact problem would I face?
+
+[ANTI-PATTERN] 🔴
+What is the wrong way to handle build outputs in a Freestyle Job? What common mistake do beginners make regarding the workspace? What is the correct approach instead?
+
+[REAL EXAMPLE] 🟡
+Give a real-world scenario (like building a Java web app) where a Freestyle job is used. Show exactly how it transforms source code into a deployable artifact.
+
+[BREAK IT] 🔴
+What can go wrong when executing shell commands in a build step? What exact error will I see if a tool is missing? What is the root cause and fix?
 
 #### ── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
 
-**Parameter: `constant_expression` (for `#if`)**
-[PARAM-WHAT] 🟢 What is the constant expression parameter evaluated by `#if`? What happens if I pass a runtime variable here?
-[PARAM-VALUES] 🟡 What exact values evaluate to True (include) and False (exclude) in the C pre-processor engine?
-[PARAM-MISTAKE] 🔴 What is the most common mistake when relying on empty macros to evaluate mathematically in an `#if` block?
-[PARAM-REALCODE] 🟡 Show exactly how a constant expression is used in a real code snippet to temporarily disable a block of code during debugging.
+**Parameter 1: `mvn clean` (Maven build flag)**
+[PARAM-WHAT] 🟢
+What is this parameter? What does it do? What happens if I don't pass it before building?
+[PARAM-VALUES] 🟡
+What other lifecycle values can Maven accept here? What is the default behavior?
+[PARAM-MISTAKE] 🔴
+What is the most common mistake with omitting this parameter on a persistent Jenkins workspace? What silent bug will I get?
+[PARAM-REALCODE] 🟡
+Show exactly how this parameter is used in a real Execute Shell step snippet. Why is it chosen here?
 
-**Parameter: `macro_identifier` (for `#ifdef` / `#ifndef`)**
-[PARAM-WHAT] 🟢 What is the identifier checked by `#ifdef`? Does its underlying numerical value matter?
-[PARAM-VALUES] 🟡 What exact identifiers can this accept? What happens if the macro was previously destroyed using `#undef`?
-[PARAM-MISTAKE] 🔴 What error or logical flaw occurs if I confuse `#ifdef X` with `#if X` when `X` is defined but has no explicit numeric value?
-[PARAM-REALCODE] 🟡 Show a real snippet where `#ifndef` acts as a guard. Why is this specific logic chosen?
+**Parameter 2: `mvn install` (Maven build flag)**
+[PARAM-WHAT] 🟢
+What is this parameter? What does it do to the codebase?
+[PARAM-VALUES] 🟡
+What alternative values can be used instead of `install` (e.g., `package`)? [🔍 Verify from docs]
+[PARAM-MISTAKE] 🔴
+What is the most common mistake with this parameter failing? What exact output will I see in the Console Output?
+[PARAM-REALCODE] 🟡
+Show exactly how this parameter is chained with others in real working code.
 
-**Parameter: `-D` (Compiler Flag Parameter)**
-[PARAM-WHAT] 🟢 What does the `-D` flag do when passed to GCC via the command line? What happens if I compile without passing a required flag?
-[PARAM-VALUES] 🟡 What syntax format does this parameter accept (e.g., `-D MACRO_NAME` or `-D MACRO=1`)? [🔍 Verify from docs]
-[PARAM-MISTAKE] 🔴 What silent exclusion bug occurs if I misspell the definition flag in my build command?
-[PARAM-REALCODE] 🟡 Show exactly how the `-D` flag is used in a real terminal build command. Why is this external injection preferred over hardcoding `#define`?
+**Parameter 3: `/*.war` (Archive Artifacts Path Pattern)**
+[PARAM-WHAT] 🟢
+What is this path parameter? What does the `` syntax do? What happens if I pass an absolute path instead?
+[PARAM-VALUES] 🟡
+What other pattern values can this parameter accept? Show an example of excluding certain files. [🔍 Verify from docs]
+[PARAM-MISTAKE] 🔴
+What is the most common mistake with this parameter path? What exact "No files found" error will I get?
+[PARAM-REALCODE] 🟡
+Show exactly how this parameter is configured in a Post-build step. Why is this specific wildcard value chosen?
 
 ---
 
-*Note: We have reached 56 questions. To strictly adhere to the prompt's chunking rules (Max 80 questions), I have paused here.*
+### CONCEPT 4 — SCM, Credentials & Triggers [Intermediate]
 
-Reply **CONTINUE** for the next batch (Concepts 4 & 5, followed by the final scoring summary).
-
-### CONCEPT 4 — The 'defined' Operator & Error Directives [Advanced]
-
-📌 Prerequisites: Concept 1, Concept 3
+📌 Prerequisites: Concept 3
 
 #### ── PART A: CONCEPT-LEVEL QUESTIONS ──
 
-[WHAT] 🟢 What is the `defined` operator in the C pre-processor, and what roles do the `#error` and `#warning` diagnostic directives play?
-[STRUCTURE] 🟢 What is the mandatory syntax to check multiple macros simultaneously using `defined()`? Show the minimal working code skeleton that includes an `#error` fallback.
-[WHEN] 🟡 When should I specifically use the `defined()` operator with logical expressions instead of standard `#ifdef`? When should I strictly trigger an `#error`?
-[COMPARE] 🟡 Compare `#error` vs `#warning` side-by-side covering: impact on compilation, binary/executable output generation, and primary use cases.
-[PURPOSE] 🟡 If the `defined` operator didn't exist, what exact architectural and maintainability problem would I face when configuring a module requiring three separate hardware macros to be active?
-[ANTI-PATTERN] 🔴 What is the wrong way to structure multi-condition macro checks? What "spaghetti code" (nested `ifdef`) mistake do beginners frequently make?
-[REAL EXAMPLE] 🟡 Give a real-world scenario (like third-party C library distribution or OpenSSL) where the `#error` directive is heavily utilized for version control.
-[BREAK IT] 🔴 What exact GCC terminal error will I see if my build script misses a mandatory configuration flag that is guarded by an `#error` directive? What is the root cause?
+[WHAT] 🟢
+What are SCM Triggers and Webhooks in Jenkins? Define them in simple words.
+
+[STRUCTURE] 🟢
+What are the mandatory fields to set up a Git SCM connection? What goes inside the Repository URL, Credentials, and Branch Specifier?
+
+[WHEN] 🟡
+When should I use a Webhook? Give 3 real-world situations. Also tell me: when should I NOT use a Webhook and fallback to Poll SCM?
+
+[COMPARE] 🟡
+How is Poll SCM different from a GitHub Webhook? Make a clear side-by-side comparison table covering: initiator, CPU overhead, and network requirements.
+
+[PURPOSE] 🟡
+If Personal Access Tokens (PAT) didn't exist, what exact problem would I face when trying to clone private repositories?
+
+[ANTI-PATTERN] 🔴
+What is the wrong way to authenticate Jenkins with GitHub? What common mistake do beginners make with passwords? What is the correct approach instead?
+
+[REAL EXAMPLE] 🟡
+Give a real-world scenario (like an auto-deployment pipeline) where Webhooks are used. Show exactly how the event flows from developer push to Jenkins build.
+
+[BREAK IT] 🔴
+What can go wrong when using Poll SCM with standard cron syntax? What exact performance issue will I see on the server? What is the root cause and fix?
 
 #### ── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
 
-**Parameter: `macro_name` (inside `defined(X)`)**
-[PARAM-WHAT] 🟢 What is the `macro_name` parameter passed into the `defined()` function? What exact boolean-like values does the pre-processor return based on it?
-[PARAM-VALUES] 🟡 What exact values/identifiers can be passed here? Can this parameter evaluate standard C runtime variables?
-[PARAM-MISTAKE] 🔴 What logical flaw occurs if I mistakenly assume `defined(MACRO_NAME)` evaluates the *numeric value* of the macro rather than just its existence in the lookup table?
-[PARAM-REALCODE] 🟡 Show exactly how the `macro_name` parameter is used inside the `defined()` operator in a real working configuration snippet.
+**Parameter 1: `H/5 * * * *` (Cron Polling Syntax / H-Flag)**
+[PARAM-WHAT] 🟢
+What is the `H` parameter in Jenkins cron syntax? What does it do? What happens if I use `*/5` instead?
+[PARAM-VALUES] 🟡
+What values can this parameter accept? What does each asterisk represent? Show an example of running something only at midnight.
+[PARAM-MISTAKE] 🔴
+What is the most common mistake with this syntax when managing 100+ jobs? What exact bottleneck will occur?
+[PARAM-REALCODE] 🟡
+Show exactly how this parameter is used in the Poll SCM field. Why is the `H` specifically chosen here?
 
-**Parameter: Logical Operators (`&&`, `||`, `!`)**
-[PARAM-WHAT] 🟢 What role do logical operator parameters play when used alongside the `defined()` function in a `#if` directive?
-[PARAM-VALUES] 🟡 Which exact logical operators are supported by the C pre-processor engine for these evaluations?
-[PARAM-MISTAKE] 🔴 What exact syntax parse error will I get if I try to attach the NOT parameter directly to an ifdef keyword (e.g., `#!ifdef MACRO`) instead of formatting it properly?
-[PARAM-REALCODE] 🟡 Show a real code snippet combining three different macros using both `&&` and `!` parameters. Why is this explicit logic grouping chosen?
+**Parameter 2: Branch Specifier (`*/main` vs `*/master`)**
+[PARAM-WHAT] 🟢
+What is this parameter? What does it do? What happens if I leave it blank?
+[PARAM-VALUES] 🟡
+What values can this accept? Can it accept regex or tags? [🔍 Verify from docs]
+[PARAM-MISTAKE] 🔴
+What is the most common mistake regarding modern GitHub repositories and this parameter? What exact "No branch matching" error will I get?
+[PARAM-REALCODE] 🟡
+Show exactly how this parameter is configured in a working SCM block. Why is `*/main` explicitly chosen today?
 
-**Parameter: `"Message String"` (for `#error` / `#warning`)**
-[PARAM-WHAT] 🟢 What is the string parameter passed to diagnostic directives like `#error` or `#warning`? What happens if I leave this parameter blank? [🔍 Verify from docs]
-[PARAM-VALUES] 🟡 What characters can this string parameter accept? Can it accept standard C format specifiers (like `%d` or `%s`) to evaluate and print runtime variables?
-[PARAM-MISTAKE] 🔴 What is the most common misconception beginners make regarding variable interpolation inside this string parameter?
-[PARAM-REALCODE] 🟡 Show a real working code snippet of an `#error` string parameter used as a fallback for missing IP mapping macros.
+**Parameter 3: GitHub hook trigger for GITScm polling (Checkbox Flag)**
+[PARAM-WHAT] 🟢
+What is this boolean flag? What does it do? What happens if I configure GitHub but don't check this?
+[PARAM-VALUES] 🟡
+What are the dependent configurations required for this flag to work (e.g., Jenkins public IP)?
+[PARAM-MISTAKE] 🔴
+What is the most common network mistake that prevents this flag from working? What silent failure will happen?
+[PARAM-REALCODE] 🟡
+Show the architectural flow of how this flag interacts with the HTTP POST payload from GitHub.
 
 ---
 
-### CONCEPT 5 — Practical Application: LED Toggle Refactoring [Advanced]
+### CONCEPT 5 — Plugin Lifecycle & System Optimization [Intermediate]
 
-📌 Prerequisites: Concept 1, Concept 2, Concept 3
+📌 Prerequisites: Concept 2, Concept 3
 
 #### ── PART A: CONCEPT-LEVEL QUESTIONS ──
 
-[WHAT] 🟢 What is code readability refactoring in embedded systems, specifically regarding the extraction of "magic numbers" into header (`.h`) files?
-[STRUCTURE] 🟢 What is the mandatory file structure and include syntax to separate macro configurations from execution logic? Show the minimal working code skeleton showing both `main.c` and `main.h`.
-[WHEN] 🟡 When should I extract values into a header mapping file? Give 3 real-world embedded scenarios (e.g., bit-states, hardware registers). When should I NOT extract values to a header?
-[COMPARE] 🟡 Create a side-by-side comparison table of "Magic Numbers Code Pattern" vs "Macro Header Map Pattern" covering: Readability Output, File Configuration Management, and Code Modification Scope.
-[PURPOSE] 🟡 If header-based macro mapping didn't exist, what exact problem would an engineering team face when migrating firmware to a newer microcontroller revision with different memory addresses?
-[ANTI-PATTERN] 🔴 What is the completely wrong way to organize 50+ hardware macro definitions in a C project? Why is putting them at the top of the `.c` file considered an anti-pattern?
-[REAL EXAMPLE] 🟡 Give a real-world scenario (like Cortex-M `stm32f4.h` hardware abstraction layers) where this refactoring pattern is strictly implemented.
-[BREAK IT] 🔴 What exact compiler error (`undeclared identifier`) will I see if I attempt to use a hardware macro but fail to properly link the header file? What is the fix?
+[WHAT] 🟢
+What is the Jenkins Plugin Lifecycle and System Optimization? Define it in simple words.
+
+[STRUCTURE] 🟢
+What are the mandatory tabs/methods for managing plugins (Available, Installed, Advanced)? What goes inside each one?
+
+[WHEN] 🟡
+When should I manually upload a plugin via the Advanced tab? Give 3 real-world situations/triggers. Also tell me: when should I avoid installing plugins?
+
+[COMPARE] 🟡
+How is the Available Tab different from the Updates Tab? Make a clear side-by-side comparison table covering: plugin state, purpose, and network behavior.
+
+[PURPOSE] 🟡
+If the "Discard old builds" configuration didn't exist, what exact problem would I face on the Jenkins master node?
+
+[ANTI-PATTERN] 🔴
+What is the wrong way to manage Jenkins plugins? What common mistake do beginners make regarding the "App Store" mentality? What is the correct approach instead?
+
+[REAL EXAMPLE] 🟡
+Give a real-world scenario (like an air-gapped banking network) where offline plugin installation is used. Show exactly how `.hpi` files are manually loaded.
+
+[BREAK IT] 🔴
+What can go wrong when Jenkins runs out of storage? What exact `java.io.IOException` error will I see? What is the root cause and fix?
 
 #### ── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
 
-**Parameter: `"filename.h"` (Include Directive Path)**
-[PARAM-WHAT] 🟢 What is the `"filename.h"` parameter passed to the `#include` directive? How does the pre-processor engine process this specific string?
-[PARAM-VALUES] 🟡 What is the exact technical difference in lookup behavior between passing this parameter in double quotes `" "` versus angle brackets `< >`?
-[PARAM-MISTAKE] 🔴 What common directory linking mistake do beginners make that causes a fatal "No such file or directory" error when passing this string parameter?
-[PARAM-REALCODE] 🟡 Show exactly how the `"main.h"` parameter is used at the top of a `.c` execution pipeline in real code.
+**Parameter 1: `.hpi` / `.jpi` (Plugin File Extensions)**
+[PARAM-WHAT] 🟢
+What are these file parameters? What do they contain? What happens if I try to upload a `.zip` instead?
+[PARAM-VALUES] 🟡
+What is the historical difference between the two extensions? Do they function differently today?
+[PARAM-MISTAKE] 🔴
+What is the most common mistake regarding file permissions when moving an `.hpi` manually via terminal? What exact failure will occur on restart?
+[PARAM-REALCODE] 🟡
+Show exactly how this parameter is manipulated using `wget` and `chown` in a real offline setup script.
 
-**Parameter: Bitwise Operands (e.g., `(MACRO_A << MACRO_B)`)**
-[PARAM-WHAT] 🟢 What are the bitwise shift parameters used inside refactored hardware assignment macros?
-[PARAM-VALUES] 🟡 What exact macro values typically replace the left operand (state) and right operand (shift position) in an embedded register configuration?
-[PARAM-MISTAKE] 🔴 What catastrophic hardware configuration bug occurs if the shift parameter evaluates to the wrong integer size limit because the developer forgot the `UL` suffix in the header file?
-[PARAM-REALCODE] 🟡 Show a real working snippet executing a register bitwise shift (like `CLOCK_ENABLE << GPIOD_MODE`) using purely refactored macro parameters. Why is this specific syntax chosen over `1 << 3`?
+**Parameter 2: `Max # of builds to keep` (Discard Old Builds Parameter)**
+[PARAM-WHAT] 🟢
+What is this integer parameter? What does it do? What happens if I don't pass it or leave it empty?
+[PARAM-VALUES] 🟡
+What numeric values can this accept? Can I define retention by *days* instead of *count*? [🔍 Verify from docs]
+[PARAM-MISTAKE] 🔴
+What is the most common mistake when ignoring this parameter in a Freestyle Job? What silent disk accumulation will occur?
+[PARAM-REALCODE] 🟡
+Show exactly how this parameter fits into a stable production job configuration. Why is a specific value like 10 or 20 chosen here?
 
 ---
 
-### 📊 STUDY PLAN & METRICS SUMMARY
+### 📊 SUMMARY & SCORING SYSTEM
 
-→ **Total Concept Count:** 5
-→ **Total Parameter Count Covered:** 13 (identifier, replacement_value, UL/ul, macro_arguments, parentheses, constant_expression, macro_identifier, -D flag, macro_name, logical operators, message string, filename.h, bitwise operands)
-→ **Total Question Count:** 92
+* **Total Concept Count:** 5
+* **Total Parameter Count Covered:** 12
+* **Total Question Count:** 88
+* **Recommended Study Order:**
+1. CI Mental Model
+2. Jenkins Architecture & Internals
+3. Freestyle Jobs & First Build Setup
+4. SCM, Credentials & Triggers
+5. Plugin Lifecycle & System Optimization
 
-**Recommended Study Order:**
 
-1. Concept 1: Basic Pre-Processor Directives & Macros (`#define`)
-2. Concept 2: Function-Like Macros & Safety Rules
-3. Concept 3: Conditional Compilation Directives (`#if`, `#ifdef`)
-4. Concept 4: The `defined` Operator & Error Directives
-5. Concept 5: Practical Application: LED Toggle Refactoring
-
-**Scoring System:**
-
-* 🟢 Beginner = 1 pt (30 questions = 30 pts)
-* 🟡 Intermediate = 2 pts (46 questions = 92 pts)
-* 🔴 Advanced = 3 pts (16 questions = 48 pts)
-* **Total Possible Points:** 170 pts
-* **Mastery Threshold (85%):** 144 pts
-
-**Self-Check Method:** Attempt all questions in the recommended order. Compare your answers strictly with official C documentation (or GCC compiler documentation). Add points for every fully verified correct understanding. If you guess, score it 0 until verified.
+* **Scoring System:**
+* 🟢 Beginner = 1 pt
+* 🟡 Intermediate = 2 pts
+* 🔴 Advanced = 3 pts
+* **Mastery Threshold:** 85% of total points.
+* **Self-check method:** Attempt all questions → compare with official docs → add points per verified correct understanding.
 
 ==================================================================================
