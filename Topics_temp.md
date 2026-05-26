@@ -99,7 +99,8 @@
 * Typing DOM Events: `React.MouseEvent`, `React.ChangeEvent`, `React.FormEvent`.
 * Typing Inline Styles: `React.CSSProperties`.
 * Extending Native HTML Attributes (`ComponentPropsWithoutRef<'button'>`).
-* **Angular Context:** Understanding Decorators (`@Component`, `@Injectable`) and typing RxJS Observables (`Observable<User>`).
+* **Next.js Specific Types:** Server vs Client Components, `PageProps`, and `LayoutProps`.
+* **Angular Context:** Understanding Decorators (`@Component`, `@Injectable`), typing RxJS Observables (`Observable<User>`), `@Input()`/`@Output()` with `EventEmitter<T>`, and Typed Reactive Forms (`FormControl<T>`, `FormGroup`).
 
 
 * **🛍️ E-commerce Use Case:**
@@ -116,6 +117,7 @@
 * Typing Media: `ImageSourcePropType`.
 * Custom Layout Events and Device Orientation types.
 * Web Events (`onClick`, `onChange`) vs Mobile Events (`onPress`, `onChangeText`).
+* **Typing Animations:** `Animated.Value` (Core) and `SharedValue` (React Native Reanimated).
 
 
 * **🛍️ E-commerce Use Case:**
@@ -173,6 +175,7 @@
 * Typing Promises and custom API Wrappers (`ApiResponse<T>`).
 * Typing `try/catch` errors (narrowing `unknown` errors).
 * Error Boundaries typing in React.
+* **End-to-End Type Safety:** Concept of tRPC or GraphQL Type Codegen (Syncing frontend types with backend).
 
 
 * **🛍️ E-commerce Use Case:**
@@ -182,13 +185,14 @@
 
 #### **PART 6: BUNDLING & ECOSYSTEM (Ship It!)**
 
-**Module 13: Module Systems & Optimizations**
+**Module 13: Module Systems, Optimizations & Testing**
 
 * **Topics:**
 * Type-Only Imports (`import type { User }`) for bundle optimization.
 * Tree-Shaking, ESM vs CommonJS.
 * Handling missing types for old libraries (`declare module 'legacy-lib'`).
 * Typing Environment Variables (`import.meta.env` vs `process.env`).
+* **Typing Tests:** Jest Mock Functions (`jest.MockedFunction`) and React Testing Library event types.
 
 
 * **🛍️ E-commerce Use Case:**
