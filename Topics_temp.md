@@ -35,7 +35,7 @@ Module 2: LOGIC, FUNCTIONS & CONTROL FLOW ✅
     ├── Parameters, Arguments & Default values
     ├── Callbacks & Higher-Order Functions
     ├── Pure vs Impure Functions
-    └── IIFE & Function Composition
+    └── IIFE, Function Composition & Memoization
 
 Module 3: THE PILLARS OF JS (DATA STRUCTURES) ✅
 ├── Objects
@@ -67,9 +67,10 @@ Module 4: INTERACTING WITH THE BROWSER (DOM) ✅
 │   ├── Styling & Classes (style.cssText, classList add/remove/toggle)
 │   └── DocumentFragment for Batch Operations
 ├── Event Handling
-│   ├── Event Listeners (addEventListener)
+│   ├── Event Listeners (addEventListener & removeEventListener)
 │   ├── Event Object, Bubbling & Delegation
 │   ├── Event Types (click, keydown, submit, mouseenter)
+│   ├── Window/Document Lifecycle (DOMContentLoaded, load, scroll)
 │   ├── preventDefault() & stopPropagation()
 │   └── Debouncing for Performance Optimization
 ├── Local & Session Storage
