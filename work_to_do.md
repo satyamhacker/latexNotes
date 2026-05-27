@@ -1,6 +1,4 @@
-Here is the curriculum extracted from your comprehensive **Module 1: Cross-Platform Environment Setup** notes. I have structured this into a deep-dive, inquiry-based study guide designed for a senior engineer.
 
-Because of the depth of the parameters and flags extracted, the total question count exceeds 80. I will provide this in **Chunks**. This is **Chunk 1**.
 
 ---
 
