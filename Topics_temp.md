@@ -11,6 +11,7 @@
 - Primitives (String, Number, Boolean, Null, Undefined, Symbol)
 - Type Coercion & typeof operator
 - Template Literals (``) & String Concatenation
+- Pass by Value vs Pass by Reference (Memory Mapping)
 
 ### 3. Scope & Hoisting
 - Global, Function, and Block Scopes
@@ -48,6 +49,7 @@
 - Creation, Properties & Methods
 - Dot vs Bracket Notation
 - Nested Objects & `this` keyword basics
+- Explicit Binding (call, apply, bind)
 - Object utilities (keys, values, entries, freeze, seal)
 
 ### 2. Arrays
@@ -62,8 +64,20 @@
 - Boolean Checks (some, every) & Chaining
 
 ### 4. Spread & Rest Operators (...)
-- Spread: Unpacking/Expanding Arrays & Objects (Shallow copy)
+- Spread: Unpacking/Expanding Arrays & Objects
 - Rest: Collecting/Packing function parameters & destructuring
+- Shallow Copy vs Deep Copy (structuredClone)
+
+### 5. Classes & Object-Oriented Programming (OOP)
+- Prototypes & Prototypal Inheritance
+- ES6 Classes (class, constructor)
+- Inheritance (extends, super)
+- Static methods & Private properties (#)
+
+### 6. Advanced ES6 Data Structures
+- Set (Handling unique values)
+- Map (Advanced key-value pairs)
+- WeakMap & WeakSet basics
 
 ## Module 4: INTERACTING WITH THE BROWSER (DOM) ✅
 
@@ -140,3 +154,8 @@
 - NPM: package.json vs package-lock.json, scripts, local vs global
 - npm install vs npm ci
 - Git: init, add, commit, branch, merge, push/pull & .gitignore
+
+### 5. Regular Expressions (Regex)
+- Basic Patterns & Flags
+- .test() and .match() methods
+- Form Validation & String Searching
