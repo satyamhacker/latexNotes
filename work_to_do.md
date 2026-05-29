@@ -1,474 +1,170 @@
-## Module 4: Unions, Literals & Type Narrowing
+
+==================================================================================
+
+## Module 5: Typing React Components (Web & Mobile Shared)
+
 
 ### DEPENDENCY MAP
 
-* **Concept 1: Union Type (`|`)** → no dependencies (start here)
-* **Concept 2: Intersection Type (`&`)** → no dependencies (can learn anytime)
-* **Concept 3: Literal Types** → needs Concept 1
-* **Concept 4: `as const` Assertion** → needs Concept 3
-* **Concept 5: `typeof` Type Guard** → needs Concept 1
-* **Concept 6: `in` Type Guard** → needs Concept 1
-* **Concept 7: User-Defined Type Guard (`is` keyword)** → needs Concept 1 + Concept 5/6
-* **Concept 8: Discriminated Unions** → needs Concept 1 + Concept 3 + Concept 5/6
+* **CONCEPT 1 — Component Props Typing & `ReactNode**` → no dependencies (start here)
+* **CONCEPT 2 — Standard Typed Functions vs `React.FC**` → needs Concept 1
+* **CONCEPT 3 — Polymorphic Components (`as` prop pattern)** → needs Concept 1 + Concept 2
+* **CONCEPT 4 — Component as Props (Slot Pattern)** → needs Concept 1
 
 ---
 
-### CONCEPT 1 — Union Type (`|`) [Beginner]
+### CONCEPT 1 — Component Props Typing & `ReactNode` [Beginner]
 
 📌 Prerequisites: None (start here)
 
-── PART A: CONCEPT-LEVEL QUESTIONS ──
+#### ── PART A: CONCEPT-LEVEL QUESTIONS ──
 
-1. [WHAT] 🟢
-What is a Union Type (`|`) in TypeScript? Define it in simple words.
-2. [STRUCTURE] 🟢
-What is the mandatory syntax to define a Union Type?
-What goes on either side of the `|` operator?
-Show the minimal working code skeleton of a function accepting a union of a string and a number.
-3. [WHEN] 🟡
-When should I use a Union Type?
-Give 3 real-world situations/triggers where a variable will predictably take multiple shapes.
-Also tell me: when should I NOT use a Union Type?
-4. [COMPARE] 🟡
-How is a Union Type (`|`) different from an Intersection Type (`&`)?
-Make a clear side-by-side comparison table covering: logical meaning (OR vs AND), behavior with primitive types, behavior with object properties, and an everyday analogy.
-5. [PURPOSE] 🟡
-If Union Types didn't exist in TypeScript, what exact problem would I face when dealing with dynamic API data like user IDs that can be numbers or UUID strings? Why was this feature created?
-6. [ANTI-PATTERN] 🔴
-What is the wrong way to handle multiple possible types in TypeScript?
-What common mistake do beginners make to bypass type errors when multiple values are expected?
-What is the correct approach instead, and what runtime consequences happen if I use the beginner anti-pattern?
-7. [REAL EXAMPLE] 🟡
-Give a real-world scenario (like a Shopify API response) where a Union Type is used.
-Show exactly how it fits into the frontend rendering system to prevent unhandled error states.
-8. [BREAK IT] 🔴
-What can go wrong when using a Union Type on objects?
-If `A` has `name` and `B` has `age`, what exact error will I see if I try to access `age` on a variable typed as `A | B` without checking?
-What is the root cause and fix?
+[WHAT] 🟢 What is component prop typing and `ReactNode`? Define it in simple words.
+[STRUCTURE] 🟢 What are the mandatory fields and syntax for typing a React component interface? What goes inside each one? Show the minimal working code skeleton for a typed component.
+[WHEN] 🟡 When should I use strict interface typing for my component props? Give 3 real-world situations/triggers. When should I NOT use explicit prop typing (if ever)?
+[COMPARE] 🟡 How is `type` (Type Alias) different from `interface` for defining React props? Make a clear side-by-side comparison table covering: extensibility, IDE hover behavior, and when to use which.
+[PURPOSE] 🟡 If strict TypeScript typing for props didn't exist, what exact problem would I face in a production app? Why was it adopted over plain JavaScript?
+[ANTI-PATTERN] 🔴 What is the wrong way to type props (e.g., using `any` or typing `children` as `JSX.Element`)? What common mistake do beginners make when facing TS errors? What is the correct approach instead?
+[REAL EXAMPLE] 🟡 Give a real-world scenario (like the Shopify Polaris design system) where strict prop interfaces are used. Show exactly how it fits into the design system's architecture.
+[BREAK IT] 🔴 What can go wrong when rendering user-provided strings via props using `dangerouslySetInnerHTML`? What exact XSS vulnerability can occur, and how do you fix it using libraries like DOMPurify? `[🔍 Verify from docs]`
 
-── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
+#### ── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
 
-For the **Operands (Types)** passed to the `|` operator (e.g., `TypeA | TypeB`):
+**Parameter: `title**`
+[PARAM-WHAT] 🟢 What is the `title` parameter in the `CardProps` interface? What does it do? What happens if I don't pass it from the parent component?
+[PARAM-VALUES] 🟡 What values can the `title` parameter accept based on its type? What is the default value if any? Show an example of a valid value.
+[PARAM-MISTAKE] 🔴 What is the most common mistake with the `title` parameter? What exact error or silent bug will I get if I pass a number instead of a string?
+[PARAM-REALCODE] 🟡 Show exactly how the `title` parameter is destructured and used in a real working React code snippet. Why is the string type specifically chosen here?
 
-[PARAM-WHAT] 🟢
-What do the left and right operands represent in a union definition? What happens if you define a union with only one type, or leave a trailing `|`?
+**Parameter: `isActive**`
+[PARAM-WHAT] 🟢 What is the `isActive` parameter? What does the `?` symbol next to it indicate? What happens if I don't pass it?
+[PARAM-VALUES] 🟡 What values can `isActive` accept? What is its default fallback value inside the component parameters? Show examples of passing true, false, and nothing.
+[PARAM-MISTAKE] 🔴 What is the most common mistake with optional boolean parameters like `isActive`? What exact error or UI bug will I get if I don't provide a default value and try to use it in a template literal?
+[PARAM-REALCODE] 🟡 Show exactly how `isActive` is used in a real working code snippet to toggle a CSS class. Why is `false` chosen as the specific default value here?
 
-[PARAM-VALUES] 🟡
-What values (type declarations) can these operands accept? Can I union primitives, custom objects, arrays, and literal strings together?
-Show an example of combining wildly different type values in one union.
-
-[PARAM-MISTAKE] 🔴
-What is the most common mental mistake developers make regarding property access on the resulting union type?
-What exact silent bug or compiler error will I get if I assume a union merges all properties?
-
-[PARAM-REALCODE] 🟡
-Show exactly how multiple type operands are used in a real working code snippet for a React Component prop (like `size`).
-Why is this specific union of values chosen here instead of `string`?
+**Parameter: `children**`
+[PARAM-WHAT] 🟢 What is the `children` parameter? What does it represent in React? What happens if I don't pass it when it is marked as required in the interface?
+[PARAM-VALUES] 🟡 What values can the `children` parameter accept when typed as `ReactNode`? Show an example of each possible value (string, valid React element, null).
+[PARAM-MISTAKE] 🔴 What is the most common mistake when typing the `children` parameter (e.g., using `JSX.Element` instead of `ReactNode`)? What exact error will I get if I try to pass a plain text string to a `JSX.Element`?
+[PARAM-REALCODE] 🟡 Show exactly how the `children` parameter is passed between opening and closing tags in a parent component, and how it is rendered in the child component snippet.
 
 ---
 
-### CONCEPT 2 — Intersection Type (`&`) [Beginner]
-
-📌 Prerequisites: None (start here)
-
-── PART A: CONCEPT-LEVEL QUESTIONS ──
-
-1. [WHAT] 🟢
-What is an Intersection Type (`&`)? Define it in simple words.
-2. [STRUCTURE] 🟢
-What is the syntax for creating an Intersection Type?
-What elements go on either side of the `&` operator?
-Show the minimal working code skeleton merging two object types.
-3. [WHEN] 🟡
-When should I use an Intersection Type?
-Give 3 real-world situations/triggers for merging types.
-Also tell me: when should I NOT use an Intersection Type?
-4. [COMPARE] 🟡
-How is using an Intersection Type (`&`) different from extending an `interface` (`interface A extends B`)?
-Make a clear side-by-side comparison table covering: syntax, readability in errors, and when to use which.
-5. [PURPOSE] 🟡
-If Intersection Types didn't exist, what exact problem would I face when trying to build highly modular UI components with overlapping properties?
-6. [ANTI-PATTERN] 🔴
-What is the wrong way to use an Intersection Type?
-What common mistake do beginners make when intersecting conflicting primitive types (like `string & number`)?
-What is the correct approach instead?
-7. [REAL EXAMPLE] 🟡
-Give a real-world scenario (like building a custom React Button component) where an Intersection Type is used.
-Show exactly how it merges default HTML properties with custom variant props.
-8. [BREAK IT] 🔴
-What can go wrong when assigning a value to an intersected type variable?
-What exact error will I see if I miss a property that belongs to only one of the underlying types?
-What is the root cause and fix?
-
-── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
-
-For the **Operands (Types)** passed to the `&` operator (e.g., `TypeA & TypeB`):
-
-[PARAM-WHAT] 🟢
-What do the type operands in an intersection do? What happens if I attempt to intersect a type with `any` or `unknown`? [🔍 Verify from docs]
-
-[PARAM-VALUES] 🟡
-What kinds of types can safely be intersected?
-What happens if you intersect two object types that share a property name, but one expects a `string` and the other expects a `number`? [🔍 Verify from docs]
-
-[PARAM-MISTAKE] 🔴
-What is the most common mistake with intersecting primitive types?
-What exact error or resulting "impossible" type will I get?
-
-[PARAM-REALCODE] 🟡
-Show exactly how intersection operands are used in a real working code snippet for combining an `AdminRights` type with a `BasicUser` type.
-Why is this exact intersection structure chosen here?
-
----
-
-### CONCEPT 3 — Literal Types [Intermediate]
+### CONCEPT 2 — Standard Typed Functions vs `React.FC` [Beginner]
 
 📌 Prerequisites: Concept 1
 
-── PART A: CONCEPT-LEVEL QUESTIONS ──
+#### ── PART A: CONCEPT-LEVEL QUESTIONS ──
 
-1. [WHAT] 🟢
-What is a Literal Type? Define it in simple words.
-2. [STRUCTURE] 🟢
-What is the mandatory syntax to assign a literal type to a variable or type alias?
-Show the minimal working code skeleton.
-3. [WHEN] 🟡
-When should I use Literal Types instead of generic types like `string` or `number`?
-Give 3 real-world situations/triggers (e.g., UI variants, HTTP methods).
-Also tell me: when should I NOT use Literal Types?
-4. [COMPARE] 🟡
-How are Literal Types different from traditional `Enums` in TypeScript?
-Make a clear side-by-side comparison table covering: bundle size footprint, syntax, and when to use.
-5. [PURPOSE] 🟡
-If Literal Types didn't exist, what exact problem would I face when passing configuration strings to third-party libraries (like `"POST"` vs `"posst"`)?
-6. [ANTI-PATTERN] 🔴
-What is the wrong way to use Literal Types?
-What common mistake do beginners make regarding dynamic user inputs?
-What is the correct approach instead?
-7. [REAL EXAMPLE] 🟡
-Give a real-world scenario (like the GitHub API or Stripe SDK) where Literal Types are strictly used.
-Show exactly how it prevents invalid state queries.
-8. [BREAK IT] 🔴
-What can go wrong when assigning variables to a literal type parameter?
-What exact error will I see if I pass a `let method = "GET"` string variable into a function expecting the literal `"GET" | "POST"`?
-What is the root cause (Type Widening) and fix?
+[WHAT] 🟢 What is `React.FC` (FunctionComponent) and why is it now deprecated/discouraged by the React team? Define it in simple words.
+[STRUCTURE] 🟢 What is the mandatory syntax for defining a standard functional component without using `React.FC`? Show the minimal working code skeleton typing the props directly.
+[WHEN] 🟡 When should I use standard typed functions? Give 3 real-world situations. When should I NOT use `React.FC`?
+[COMPARE] 🟡 How does a Standard Typed Function compare to `React.FC`? Make a clear side-by-side comparison table covering: implicit children behavior, Generics support (`<T>`), readability, and future-proofing.
+[PURPOSE] 🟡 If standard functional components hadn't replaced `React.FC`, what exact problem would I face when building dynamic/generic components in modern React 18+ codebases?
+[ANTI-PATTERN] 🔴 What is the wrong way to define a component in new projects? What common mistake do beginners make regarding `defaultProps` or generics when using `React.FC`? What is the correct approach instead?
+[REAL EXAMPLE] 🟡 Give a real-world scenario (like Meta's React 18 codebase migration) where `React.FC` was mass-removed via codemods. Show exactly how this cleans up the system.
+[BREAK IT] 🔴 What could go wrong in React 17 when relying on the implicit `children` of `React.FC`? What exact silent bug occurs on the UI? What is the root cause and fix?
 
-── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
+#### ── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
 
-For the **Exact Value** acting as the literal type (e.g., `"GET"` or `404`):
+**Parameter: `P` (Generic Props in `React.FC<P>`)**
+[PARAM-WHAT] 🟢 What is the generic parameter `P` in `React.FC<P>`? What does it represent? What happens if I don't pass it?
+[PARAM-VALUES] 🟡 What values/types can `P` accept? What is the default type (`{}`) if omitted? Show an example of passing a custom interface to it.
+[PARAM-MISTAKE] 🔴 What is the most common mistake with the `P` parameter when trying to build a Generic component (like `<Table<User>>`)? What exact syntax error will I get?
+[PARAM-REALCODE] 🟡 Show exactly how the generic `P` parameter pattern is discarded and replaced by direct prop typing in a real working modern functional component snippet.
 
-[PARAM-WHAT] 🟢
-What constitutes a valid exact value for a literal type? What happens if I try to make a literal type out of a dynamically evaluated expression (like `2 + 2`)? [🔍 Verify from docs]
-
-[PARAM-VALUES] 🟡
-What primitive data types can be used as literal types? Can I use booleans and numbers in addition to strings?
-Show an example of a numeric literal union.
-
-[PARAM-MISTAKE] 🔴
-What is the most common mistake regarding case sensitivity with string literal values?
-What exact error will I get if my API returns `"success"` but my literal type expects `"Success"`?
-
-[PARAM-REALCODE] 🟡
-Show exactly how literal values are used in a real working code snippet for a Redux action type.
-Why is this specific literal value chosen here?
+**Parameter: implicit `children` (Legacy `React.FC` behavior)**
+[PARAM-WHAT] 🟢 What is the implicit `children` property that used to exist inside `React.FC`? What happens if I don't explicitly define it in my interface but use `React.FC` in React 17?
+[PARAM-VALUES] 🟡 What values could this implicit `children` accept? Show examples of what the TS compiler allowed to be passed.
+[PARAM-MISTAKE] 🔴 What is the most common mistake when migrating away from `React.FC` regarding the `children` parameter? What exact error (`Binding element 'children' implicitly has an 'any' type`) will I get?
+[PARAM-REALCODE] 🟡 Show exactly how the `children` parameter must now be explicitly typed and destructured in a real working standard function component.
 
 ---
 
-### CONCEPT 4 — The `as const` Assertion [Intermediate]
+### CONCEPT 3 — Polymorphic Components (`as` prop pattern) [Intermediate]
 
-📌 Prerequisites: Concept 3
+📌 Prerequisites: Concept 1, Concept 2
 
-── PART A: CONCEPT-LEVEL QUESTIONS ──
+#### ── PART A: CONCEPT-LEVEL QUESTIONS ──
 
-1. [WHAT] 🟢
-What is the `as const` assertion? Define it in simple words.
-2. [STRUCTURE] 🟢
-Where exactly do you place the `as const` keyword in a statement?
-What goes inside the variable it modifies?
-Show the minimal working code skeleton for freezing an object.
-3. [WHEN] 🟡
-When should I use `as const`?
-Give 3 real-world situations/triggers (e.g., Redux constants, global themes).
-Also tell me: when should I NOT use `as const`?
-4. [COMPARE] 🟡
-How is `as const` different from JavaScript's `Object.freeze()` or the `const` variable declaration?
-Make a clear side-by-side comparison table covering: execution time (compile vs runtime), deep vs shallow immutability, and type inference behaviors.
-5. [PURPOSE] 🟡
-If `as const` didn't exist, what exact problem would I face when deriving union types directly from configuration objects or arrays?
-6. [ANTI-PATTERN] 🔴
-What is the wrong way to declare application-wide constants?
-What common mistake do beginners make assuming the `const` keyword alone protects object properties?
-What runtime bugs can occur if `as const` is omitted?
-7. [REAL EXAMPLE] 🟡
-Give a real-world scenario (like managing app routes or API keys) where `as const` is used to create a single source of truth without bloating the JS bundle.
-Show exactly how it fits into the system.
-8. [BREAK IT] 🔴
-What can go wrong when interacting with an object asserted with `as const`?
-What exact error will I see if I try to push a new item to an array that was defined with `as const`?
-What is the root cause and the fix?
+[WHAT] 🟢 What is a Polymorphic Component? Define it in simple words.
+[STRUCTURE] 🟢 What are the mandatory fields, utility types, and syntax to create a polymorphic component? What goes inside each one? Show the minimal working code skeleton (including `ElementType`).
+[WHEN] 🟡 When should I use the Polymorphic Component pattern? Give 3 real-world situations/triggers (e.g., SEO requirements). When should I NOT use it?
+[COMPARE] 🟡 How does a Polymorphic Component compare to Hardcoded Wrapper Components (e.g., `<H1Text>`, `<PText>`)? Make a clear side-by-side comparison table covering: maintenance overhead, flexibility, and TypeScript complexity.
+[PURPOSE] 🟡 If Polymorphic components didn't exist, what exact problem would I face regarding semantic HTML, SEO, and CSS duplication? Why was this pattern created?
+[ANTI-PATTERN] 🔴 What is the wrong way to implement dynamic tags (e.g., using massive switch-cases or failing to capitalize the dynamic tag variable)? What common beginner trap causes invalid HTML tags like `<as>` to render? What is the correct approach instead?
+[REAL EXAMPLE] 🟡 Give a real-world scenario (like Material UI/MUI or a shared Web/Mobile Typography component) where polymorphic components are used. Show exactly how it fits into the design system.
+[BREAK IT] 🔴 What can go wrong when passing un-sanitized, user-provided string data to the `as` prop? What exact security vulnerability (injection) will occur, and how do you fix it with an allowlist?
 
-── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
+#### ── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
 
-For the **Target Data Structure** (the object/array) being modified by `as const`:
+**Parameter: `variant**`
+[PARAM-WHAT] 🟢 What is the `variant` parameter in a design system component? What does it control? What happens if I don't pass it?
+[PARAM-VALUES] 🟡 What values can the `variant` parameter accept in the Typography example? What is the default fallback value if any? Show an example of each possible value.
+[PARAM-MISTAKE] 🔴 What is the most common mistake with the `variant` parameter? What exact TypeScript error will I get if I pass an undocumented string?
+[PARAM-REALCODE] 🟡 Show exactly how the `variant` parameter is mapped to specific CSS classes dynamically in a real working code snippet.
 
-[PARAM-WHAT] 🟢
-What does the target data structure represent? What happens to deeply nested properties inside an object when `as const` is applied at the root?
+**Parameter: `as` (or `component`)**
+[PARAM-WHAT] 🟢 What is the `as` parameter typed as `ElementType`? What does it dictate to the React rendering engine? What happens if I don't pass it?
+[PARAM-VALUES] 🟡 What values can the `as` parameter accept? Show an example of passing a standard HTML string tag vs passing a React Router `Link` component.
+[PARAM-MISTAKE] 🔴 What is the most common mistake with the `as` parameter when creating the JSX tag (e.g., `<as>{children}</as>`)? What exact DOM error or rendering bug will I get?
+[PARAM-REALCODE] 🟡 Show exactly how the `as` parameter is safely aliased with a capital letter (e.g., `const Component = as || variant`) and rendered in a real working code snippet. Why is this capital letter capitalization strictly required by React?
 
-[PARAM-VALUES] 🟡
-What data structures can `as const` be applied to? Can it be applied to arrays, primitives, and complex nested objects?
-Show an example of what an array type transforms into when `as const` is applied.
-
-[PARAM-MISTAKE] 🔴
-What is the most common mistake when trying to update a state object that was accidentally initialized with `as const`?
-What exact silent bug or TypeScript `readonly` error will I get?
-
-[PARAM-REALCODE] 🟡
-Show exactly how a target configuration object is structurally defined and asserted with `as const` in a real working code snippet for a theme provider.
-Why is this specific deep object shape chosen here?
+**Parameter: `...restProps` (HTMLAttributes)**
+[PARAM-WHAT] 🟢 What is the `...restProps` spread parameter? What does it do by inheriting `HTMLAttributes<HTMLElement>`? What happens to standard HTML props if I don't spread it onto the final element?
+[PARAM-VALUES] 🟡 What values/keys does `...restProps` capture? Show examples of HTML attributes it safely absorbs (like `className`, `id`, `onClick`).
+[PARAM-MISTAKE] 🔴 What is the most common mistake when using `...restProps` alongside the `as` prop? What exact error (`React does not recognize the 'as' prop on a DOM element`) will I get if I don't destructure `as` out of the props first?
+[PARAM-REALCODE] 🟡 Show exactly how `...restProps` is correctly destructured and spread onto the dynamic element in a real working code snippet. `[🔍 Verify from docs how Omit is used to prevent prop clashing here]`.
 
 ---
 
-⚠️ **Chunk 1 Limit Reached.**
-To proceed to the next batch (Type Guards, `typeof`, `in`, `is`, and Discriminated Unions), please reply: **CONTINUE**
-
-### CONCEPT 5 — `typeof` Type Guard [Intermediate]
+### CONCEPT 4 — Component as Props (Slot Pattern) [Advanced]
 
 📌 Prerequisites: Concept 1
 
-── PART A: CONCEPT-LEVEL QUESTIONS ──
+#### ── PART A: CONCEPT-LEVEL QUESTIONS ──
 
-1. [WHAT] 🟢
-What is the `typeof` Type Guard in TypeScript? Define it in simple words using the concept of Control Flow Analysis (CFA).
-2. [STRUCTURE] 🟢
-What is the mandatory syntax to use a `typeof` guard inside a conditional block?
-Show the minimal working code skeleton that narrows a `string | number` union type.
-3. [WHEN] 🟡
-When should I use a `typeof` Type Guard?
-Give 3 real-world situations/triggers (e.g., handling mixed function parameters).
-Also tell me: when should I NOT use `typeof` for narrowing?
-4. [COMPARE] 🟡
-How is `typeof` different from `instanceof`?
-Make a clear side-by-side comparison table covering: use cases (primitives vs. classes), syntax, and when to use which.
-5. [PURPOSE] 🟡
-If the `typeof` Type Guard didn't exist (and TS didn't support CFA), what exact problem would I face when trying to safely call `.toUpperCase()` on a union variable?
-6. [ANTI-PATTERN] 🔴
-What is the wrong way to bypass type checking when dealing with primitives?
-What common mistake do beginners make using the `as` assertion instead of a runtime guard?
-What is the correct approach instead, and what runtime crash happens if the `as` assumption is wrong?
-7. [REAL EXAMPLE] 🟡
-Give a real-world scenario (like parsing unknown values from an API payload) where `typeof` is used.
-Show exactly how it fits into the data formatting pipeline.
-8. [BREAK IT] 🔴
-What can go wrong when using `typeof` to check for arrays or objects?
-Why does `typeof myVar === "object"` fail to safely narrow an array or a `null` value?
-What is the root cause (JavaScript's historical bugs) and the fix?
+[WHAT] 🟢 What is the "Passing components as props" (Slot Pattern / Render Props) technique? Define it in simple words using the Inversion of Control concept.
+[STRUCTURE] 🟢 What are the mandatory types and syntax for accepting components as props in an interface? What goes inside each one? Show the minimal working code skeleton using `ReactNode` and `ComponentType`.
+[WHEN] 🟡 When should I use the Slot Pattern? Give 3 real-world situations/triggers (e.g., Page Layouts). When should I NOT use it and stick to the standard `children` prop?
+[COMPARE] 🟡 How does Passing Components as Props compare to Passing State/Props Down (Prop Drilling)? Make a clear side-by-side comparison table covering: data flow direction, component coupling, and best use cases.
+[PURPOSE] 🟡 If the Slot Pattern didn't exist, what exact problem would I face in large applications regarding reusable wrapper components? How does this solve the "bloated if-else inside Modals" issue?
+[ANTI-PATTERN] 🔴 What is the wrong way to pass components as props (e.g., overusing `React.cloneElement` to force props down, or turning simple text into component props)? What is the correct approach instead?
+[REAL EXAMPLE] 🟡 Give a real-world scenario (like building Headers in React Navigation for Mobile) where components are passed as props. Show exactly how it fits into the layout engine.
+[BREAK IT] 🔴 What can go wrong when mixing up `ReactNode` and `ComponentType` typings? What exact error (`Functions are not valid as a React child` or `Type '() => Element' is not assignable to type 'ReactNode'`) will I see, and how do I fix it?
 
-── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
+#### ── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
 
-For the **Operand/Value** being checked (e.g., the `val` in `typeof val === "string"`):
+**Parameter: `header` (typed as `ReactNode`)**
+[PARAM-WHAT] 🟢 What is the `header` parameter when strictly typed as `ReactNode`? What role does it play in the layout? What happens if I don't pass it?
+[PARAM-VALUES] 🟡 What values can the `header` parameter accept? Show an example of an instantiated JSX element being passed to it from the parent.
+[PARAM-MISTAKE] 🔴 What is the most common mistake with a `ReactNode` typed slot parameter? What exact runtime error will I get if I pass a function reference `() => <Header />` instead of an instantiated element?
+[PARAM-REALCODE] 🟡 Show exactly how the `header` parameter is passed down and rendered directly inside a `div` wrapper in a real working layout snippet.
 
-[PARAM-WHAT] 🟢
-What is this operand? What happens if I try to use `typeof` on a custom TypeScript interface or type alias?
-
-[PARAM-VALUES] 🟡
-What exact string literal values can the `typeof` check validly evaluate against to narrow types in TypeScript?
-Show an example of narrowing a boolean type.
-
-[PARAM-MISTAKE] 🔴
-What is the most common mistake when trying to narrow an array using `typeof`?
-What exact silent bug will occur if I rely on `typeof val === "array"`?
-
-[PARAM-REALCODE] 🟡
-Show exactly how the checked value is used in a real working code snippet for a formatting utility function.
-Why is this specific narrowing logic chosen here?
+**Parameter: `SidebarComponent` (typed as `ComponentType`)**
+[PARAM-WHAT] 🟢 What is the `SidebarComponent` parameter when typed as `ComponentType`? How does it differ fundamentally from `ReactNode`? What happens if I don't pass it?
+[PARAM-VALUES] 🟡 What values can `SidebarComponent` accept? Show an example of passing a component reference (un-instantiated function name) to it.
+[PARAM-MISTAKE] 🔴 What is the most common mistake when rendering a `ComponentType` parameter inside the parent layout? What exact silent failure or error will I get if I forget to mount it with JSX brackets (e.g., writing `{SidebarComponent}` instead of `<SidebarComponent />`)?
+[PARAM-REALCODE] 🟡 Show exactly how `SidebarComponent` is executed/mounted dynamically inside a real working layout snippet, demonstrating how the parent layout retains control of rendering it.
 
 ---
 
-### CONCEPT 6 — `in` Type Guard [Intermediate]
+### 📊 STUDY SET SUMMARY
 
-📌 Prerequisites: Concept 1
+→ **Total concept count:** 4
+→ **Total parameter count covered:** 9
+→ **Total question count:** 68
+→ **Recommended study order:** 1. Component Props Typing & `ReactNode`
+2. Standard Typed Functions vs `React.FC`
+3. Polymorphic Components (`as` prop pattern)
+4. Component as Props (Slot Pattern)
 
-── PART A: CONCEPT-LEVEL QUESTIONS ──
+**🏆 Scoring System:**
 
-1. [WHAT] 🟢
-What is the `in` Type Guard? Define it in simple words.
-2. [STRUCTURE] 🟢
-What is the mandatory syntax to use the `in` operator as a guard?
-What goes on the left and right side of the `in` keyword?
-Show the minimal working code skeleton differentiating a `Cat` object from a `Dog` object.
-3. [WHEN] 🟡
-When should I use the `in` Type Guard?
-Give 3 real-world situations/triggers.
-Also tell me: when should I NOT use the `in` operator (e.g., Discriminated Unions being a better alternative)?
-4. [COMPARE] 🟡
-How does using the `in` operator for narrowing compare to using the old-school `.hasOwnProperty()` method?
-Make a clear side-by-side comparison table covering: TypeScript compiler support, inheritance chain behavior, and safety.
-5. [PURPOSE] 🟡
-If the `in` Type Guard didn't exist, what exact problem would I face when trying to differentiate between two plain, un-tagged objects in a union?
-6. [ANTI-PATTERN] 🔴
-What is the wrong way to access properties on a union of objects?
-What common mistake do beginners make when assuming an object is of a specific type based on external context?
-What is the correct approach instead?
-7. [REAL EXAMPLE] 🟡
-Give a real-world scenario (like parsing real-time WebSocket events in Slack or Discord) where the `in` Type Guard is used to safely parse packets.
-Show exactly how it fits into the event listener.
-8. [BREAK IT] 🔴
-What can go wrong when reading properties directly off a union type?
-What exact error will I see if I attempt to call `animal.bark()` without first checking if the property exists?
-What is the root cause and fix?
-
-── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
-
-For the **Property Key** parameter (the string literal on the left of `in`):
-
-[PARAM-WHAT] 🟢
-What is this property key? What does it do?
-What happens if I pass a dynamic, non-literal string variable here instead?
-
-[PARAM-VALUES] 🟡
-What values can this key accept? Can it only check for methods, or can it check for standard properties and nested keys? [🔍 Verify from docs regarding nested keys]
-Show an example of checking for a boolean property.
-
-[PARAM-MISTAKE] 🔴
-What is the most common mistake developers make when choosing which property key to check?
-What happens to type narrowing if I check for a property key that exists in *both* types of the union?
-
-[PARAM-REALCODE] 🟡
-Show exactly how a unique property key is chosen and used in a real working code snippet for a user authentication check.
-Why is this specific string key chosen here?
-
----
-
-### CONCEPT 7 — User-Defined Type Guard (`is` keyword) [Advanced]
-
-📌 Prerequisites: Concept 1, Concept 5, Concept 6
-
-── PART A: CONCEPT-LEVEL QUESTIONS ──
-
-1. [WHAT] 🟢
-What is a User-Defined Type Guard (Type Predicate)? Define it in simple words.
-2. [STRUCTURE] 🟢
-What is the mandatory syntax to define a function as a type guard?
-Where exactly does the `is` keyword go?
-Show the minimal working code skeleton of a custom `isFish` validation function.
-3. [WHEN] 🟡
-When should I build a User-Defined Type Guard?
-Give 3 real-world situations/triggers (e.g., highly nested validations, centralized team utilities).
-Also tell me: when should I NOT use a custom type guard?
-4. [COMPARE] 🟡
-How does a Type Predicate return (`arg is Type`) differ from a standard `boolean` return type?
-Make a clear side-by-side comparison table covering: compiler awareness, developer experience, and code safety inside the `if` block.
-5. [PURPOSE] 🟡
-If the `is` keyword didn't exist, what exact problem would I face when abstracting complex narrowing logic into external helper functions?
-6. [ANTI-PATTERN] 🔴
-What is the wrong way to write custom validation functions in TypeScript?
-What common mistake do beginners make with the return type of their helpers?
-What is the correct approach instead, and what happens to the narrowed block if they make this mistake?
-7. [REAL EXAMPLE] 🟡
-Give a real-world scenario (like building a strict `isValidAPIResponse` middleware checker for an enterprise app) where custom type guards are used.
-Show exactly how it creates a 100% type-safe environment for the rest of the app.
-8. [BREAK IT] 🔴
-What can go wrong when writing the signature for a type predicate?
-What exact compiler error will I see if I write `data is string` but my function accepts `data: number`?
-What is the root cause ("assignability") and the fix?
-
-── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
-
-For the **Target Type** in the predicate (the `Type` in `param is Type`):
-
-[PARAM-WHAT] 🟢
-What is this target type parameter? What is its relationship to the function's argument?
-
-[PARAM-VALUES] 🟡
-What values can this target type take? Can it be a primitive, a complex interface, or a literal type?
-Show an example of a type predicate targeting a discriminated union member.
-
-[PARAM-MISTAKE] 🔴
-What is the most dangerous, silent logic mistake a developer can make when writing the boolean logic *inside* the custom type guard?
-How does this completely break TypeScript's trust model at runtime?
-
-[PARAM-REALCODE] 🟡
-Show exactly how the target type is used in a real working code snippet for an `isAdminUser` check.
-Why is the specific target interface chosen here?
-
----
-
-### CONCEPT 8 — Discriminated Unions [Advanced]
-
-📌 Prerequisites: Concept 1, Concept 3, Concept 5, Concept 6
-
-── PART A: CONCEPT-LEVEL QUESTIONS ──
-
-1. [WHAT] 🟢
-What is a Discriminated Union (Tagged Union)? Define it in simple words using the concept of a shared tag.
-2. [STRUCTURE] 🟢
-What is the mandatory shape for objects inside a Discriminated Union?
-What must they all share?
-Show the minimal working code skeleton combining `Loading`, `Success`, and `Error` states.
-3. [WHEN] 🟡
-When should I use Discriminated Unions?
-Give 3 real-world situations/triggers (e.g., Redux actions, API fetching states, complex forms).
-Also tell me: when should I NOT use a Discriminated Union?
-4. [COMPARE] 🟡
-How is a Discriminated Union different from a single object with optional properties (Optional Property Hell)?
-Make a clear side-by-side comparison table covering: possibility of impossible states, TS editor autocomplete support, and code scalability.
-5. [PURPOSE] 🟡
-If Discriminated Unions didn't exist, what exact problem ("Impossible States") would I face when a UI component renders an API response?
-6. [ANTI-PATTERN] 🔴
-What is the wrong way to model mutually exclusive app states?
-What common mistake do beginners make by merging `isLoading`, `error`, and `data` into one single interface?
-What is the correct approach instead, and what UI bugs happen if they use the anti-pattern?
-7. [REAL EXAMPLE] 🟡
-Give a real-world scenario (like Redux Toolkit Actions or TanStack Query states) where Discriminated Unions are strictly enforced.
-Show exactly how a `switch` statement elegantly routes the logic based on the tag.
-8. [BREAK IT] 🔴
-What can go wrong when attempting to access state-specific data without checking the discriminator?
-What exact error will I see if I try to map over `state.data` without confirming the state is `"success"`?
-What is the root cause and fix?
-
-── PART B: PARAMETER DEEP-DIVE QUESTIONS ──
-
-For the **Discriminator Property** (e.g., the `status` or `type` key inside the objects):
-
-[PARAM-WHAT] 🟢
-What is this discriminator parameter? Does its key name have to be exactly `"type"`, or can it be anything?
-
-[PARAM-VALUES] 🟡
-What values can the discriminator accept? Why should they specifically be literal strings or numbers instead of booleans?
-Show an example of a discriminator using HTTP status codes (numbers).
-
-[PARAM-MISTAKE] 🔴
-What is the most common architectural mistake developers make when expanding a Discriminated Union in the future?
-What is "Exhaustive Checking" (using the `never` type), and what exact error does it trigger to save you from this mistake?
-
-[PARAM-REALCODE] 🟡
-Show exactly how the discriminator is checked in a real working code snippet inside a `switch` statement with an exhaustive `never` default case.
-Why is this exact flow completely bulletproof?
-
----
-
-### 📊 SUMMARY & STUDY METRICS
-
-→ **Total concept count:** 8 (across both chunks)
-→ **Total parameter count covered:** 8 (Deep-dives completed for Operands, Literal values, Assertions targets, Typeof targets, in keys, Type predicates, and Discriminators)
-→ **Total question count:** 96 (64 Concept-Level + 32 Parameter Deep-Dive)
-→ **Recommended study order:**
-
-1. Union Type (`|`)
-2. Intersection Type (`&`)
-3. Literal Types
-4. The `as const` Assertion
-5. `typeof` Type Guard
-6. `in` Type Guard
-7. User-Defined Type Guard (`is` keyword)
-8. Discriminated Unions
-
-🏆 **SCORING SYSTEM:**
-
-* 🟢 **Beginner Questions:** 1 pt each
-* 🟡 **Intermediate Questions:** 2 pts each
-* 🔴 **Advanced Questions:** 3 pts each
-* **Mastery Threshold:** 85% of total possible points.
-* **Self-check method:** Research and attempt to answer every single question in your code editor. Compare your findings directly with the official TypeScript documentation. Add points for every verified, correctly understood answer. If you get stuck on any parameter or error question, build a sandbox and break the code intentionally to see the error yourself!
+* 🟢 Beginner = 1 pt
+* 🟡 Intermediate = 2 pts
+* 🔴 Advanced = 3 pts
+* **Mastery Threshold:** 85% of total points
+* **Self-check method:** Attempt all → compare with official docs → add 1 pt per verified correct understanding.
 
 ==================================================================================
