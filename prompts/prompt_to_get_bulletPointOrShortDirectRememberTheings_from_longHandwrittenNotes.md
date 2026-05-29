@@ -35,11 +35,9 @@ You must adapt your terminology, real-world analogies, and focus perfectly to th
 
 ## TWO-TIER KNOWLEDGE MODEL
 
-### A) UNDERSTAND (Concept, Clarity & Troubleshooting)
+### A) UNDERSTAND (Concept & Clarity)
 - Core theory, flow, edge cases, and why/how.
 - **💻 Concept-Clearing Code:** Code that makes theory practical. **CRITICAL:** You must break down and explain the syntax/blocks used in the code (e.g., if it's a Jenkins pipeline, explain exactly what `parameters`, `stages`, `options` do).
-- **💡 Doubt Clearance:** Real-time confusions where concepts overlap.
-- **🚨 Common Errors:** Classic beginner mistakes and "gotchas".
 
 ### B) REMEMBER BEFORE PRACTICAL (The 95% Highlights)
 Items used repeatedly in ~95% of practical usage. This includes exact UI buttons, pipeline block names, and daily commands.
@@ -72,12 +70,9 @@ Notes will be pasted between:
 
 ### 2) Core Understanding (Future-Proof Logic)
 - **Kaise kaam karta hai:** (Crisp bullet points explaining the logic).
-- **✅ Kab use karo / ❌ Kab mat karo:** (Decision Guide).
+- **✅ Kab use karo:** (Decision Guide).
 - **💻 Concept-Clearing Code:** (Exact code + Version + Expected Output).
   - **Code Breakdown:** (Explain the blocks/syntax like `parameters`, `when`, `sh` used in the code and what they specifically do).
-- **💡 DOUBT CLEARANCE:** (With "Prove karo").
-- **🚨 COMMON ERROR:** (With ⚡ Consequence).
-- **🛠️ TROUBLESHOOTING:** (Error + Fix).
 
 ### 3) 🔥 POINTS TO REMEMBER (The 95% Real-Time Usage)
 *(Extract only the things from this topic that a developer must remember for daily practical use. If none, say N/A).*
@@ -85,10 +80,7 @@ Notes will be pasted between:
 - **Pipeline Syntax/Keywords:** (e.g., `cleanWs()`, `agent any`, `withCredentials`)
 - **Daily Commands:** (e.g., `kubectl apply`, `mvn clean package`)
 
-### 4) Interview Questions
-- Direct interview questions from notes. (Min 2-3 lines per answer: definition + how it works + example).
-
-### 5) 📝 One-Line Memory Hook
+### 4) 📝 One-Line Memory Hook
 - A sticky Hinglish line to remember the core concept forever.
 
 ====================================================================================================
