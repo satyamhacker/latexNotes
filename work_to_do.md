@@ -1,4 +1,4 @@
-## Module 6: Typing Hooks & Component State
+## Module 6 and 7:
 
 I love the energy! You’ve put together an incredibly detailed and well-structured curriculum spanning React state management, web-specific DOM typings, Next.js, and Angular. As a senior engineer and your curriculum designer, I completely agree: building deep, production-ready intuition requires questioning every single parameter, generic, and edge case.
 
