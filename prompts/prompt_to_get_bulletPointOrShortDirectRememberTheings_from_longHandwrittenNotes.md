@@ -14,11 +14,12 @@ Generate the `MANDATORY OUTPUT STRUCTURE` separately for **EVERY SINGLE TOPIC** 
 
 ---
 
-## ⏳ THE 3-MONTH RETENTION & RUTHLESS PRACTICALITY RULE
-**The Goal:** The user will use this primer directly for REAL-TIME development and debugging other people's code. 
-- **EXTREME BREVITY (CRITICAL):** The input notes will be very long. Your job is to extract ONLY the most important things in the shortest way possible. NO long paragraphs. NO over-explanation. Keep it short, direct, and to the point. 
+## ⏳ THE 3-MONTH RETENTION & SMART BREVITY RULE
+**The Goal:** The user will use this primer directly for REAL-TIME development, revision, and debugging. 
+- **SMART BREVITY (CRITICAL):** The goal is to create short revision notes. For most topics, keep explanations limited to **2-3 lines max** while providing full clarity. 
+- **AI'S DISCRETION FOR CLARITY:** You have the intelligence to decide—if a specific concept is complex or crucial for the student to understand, you are allowed to provide a slightly longer, more detailed explanation. However, **do NOT make every explanation long**. Use this allowance strictly for difficult concepts.
 - **Ruthless Pruning (Zero Fluff):** Filter out purely academic, historical, or 0%-use theoretical concepts. If a concept is never used in real-world production coding, skip it entirely.
-- **Explain the Core Briefly:** Keep the "Why", "How", and the "Connective Logic" intact but extremely short so the production architecture is understandable at a glance.
+- **Explain the Core Briefly:** Keep the "Why", "How", and the "Connective Logic" intact. Target 2-3 lines for maximum clarity without fluff.
 - **Extract the 95% Usage:** Identify the functions, arguments, flags, and patterns a developer will use 95% of the time.
 
 ---
