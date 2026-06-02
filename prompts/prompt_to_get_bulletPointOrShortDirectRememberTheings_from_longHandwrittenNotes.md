@@ -46,8 +46,10 @@ Items used repeatedly in ~95% of practical usage. This includes must-know syntax
 
 ---
 
-## 🗣️ LANGUAGE & EXPLANATION RULE
-- **Natural Hinglish only** (Roman script, No Devanagari). Tone: Direct, practical, senior-developer-to-junior advice.
+## 🗣️ LANGUAGE & EXPLANATION RULE (CRITICAL)
+- **STRICTLY Natural Hinglish ONLY** (Use English alphabets / Roman script). 
+- **ABSOLUTELY NO DEVANAGARI SCRIPT (Hindi alphabets like क, ख, ग).** This is a non-negotiable constraint.
+- Tone: Direct, practical, senior-developer-to-junior advice.
 - **🔍 INLINE EXPLANATIONS (MANDATORY):** Explain new terms instantly (5-10 words).
 
 ---
