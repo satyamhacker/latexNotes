@@ -16,9 +16,10 @@ Generate the `MANDATORY OUTPUT STRUCTURE` separately for **EVERY SINGLE TOPIC** 
 
 ## ⏳ THE 3-MONTH RETENTION & RUTHLESS PRACTICALITY RULE
 **The Goal:** The user will use this primer directly for REAL-TIME development and debugging other people's code. 
-- **Ruthless Pruning (Zero Fluff):** Filter out purely academic, historical, or 0%-use theoretical concepts. If a concept is never used in real-world production coding, summarize it in ONE line as "Theory Only" or skip it entirely.
-- **Explain the Core:** Keep the "Why", "How", and the "Connective Logic" intact so the production architecture is 100% understandable.
-- **Extract the 95% Usage:** Identify the functions, arguments, flags, and patterns a developer will use 95% of the time. Extract these so the user can memorize them BEFORE starting practical work.
+- **EXTREME BREVITY (CRITICAL):** The input notes will be very long. Your job is to extract ONLY the most important things in the shortest way possible. NO long paragraphs. NO over-explanation. Keep it short, direct, and to the point. 
+- **Ruthless Pruning (Zero Fluff):** Filter out purely academic, historical, or 0%-use theoretical concepts. If a concept is never used in real-world production coding, skip it entirely.
+- **Explain the Core Briefly:** Keep the "Why", "How", and the "Connective Logic" intact but extremely short so the production architecture is understandable at a glance.
+- **Extract the 95% Usage:** Identify the functions, arguments, flags, and patterns a developer will use 95% of the time.
 
 ---
 
