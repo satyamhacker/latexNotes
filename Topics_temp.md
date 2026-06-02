@@ -1854,6 +1854,317 @@ So let's continue to the next lesson and set up the project template.
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1
+00:00:06,980 --> 00:00:09,470
+OK, so let's start the SPDR eclipse.
+
+2
+00:00:11,430 --> 00:00:15,810
+And launch from the workspace we'd previously chosen, by the way.
+
+3
+00:00:15,840 --> 00:00:20,250
+Now you can connect your dev kit and turn it on, give you clips a moment to start.
+
+4
+00:00:21,180 --> 00:00:22,530
+And now let's maximize.
+
+5
+00:00:24,270 --> 00:00:27,120
+And close this welcome tab and go to file.
+
+6
+00:00:28,410 --> 00:00:28,830
+New.
+
+7
+00:00:30,200 --> 00:00:36,770
+Impressive IDF project in so-called the project, you, Demi, underscore ESP 32.
+
+8
+00:00:37,830 --> 00:00:38,760
+And click finish.
+
+9
+00:00:43,520 --> 00:00:48,200
+Now, close out the read me, and for the launch target, choose ESP 32.
+
+10
+00:00:48,950 --> 00:00:50,660
+And while we're here, let's set the computer.
+
+11
+00:00:52,060 --> 00:00:56,650
+And I have the rover Typekit connected, so I have two components here, and I'll just choose the higher
+
+12
+00:00:56,650 --> 00:00:57,010
+number.
+
+13
+00:00:57,640 --> 00:01:02,350
+If you don't have the rover kit, just choose the single port shown and then click finish.
+
+14
+00:01:04,940 --> 00:01:08,630
+Expand the project files and go into the see make lists here.
+
+15
+00:01:09,730 --> 00:01:11,380
+And change the project name to.
+
+16
+00:01:12,460 --> 00:01:16,390
+You, Demi, underscore SPF 30 to underscore at.
+
+17
+00:01:17,830 --> 00:01:20,920
+And this will be the name of the application binary produced by the build.
+
+18
+00:01:22,210 --> 00:01:26,320
+Next, let's expand the main folder and go to this see make list file.
+
+19
+00:01:27,430 --> 00:01:28,780
+And let's get rid of all of this.
+
+20
+00:01:30,470 --> 00:01:33,800
+And dead IDF component register.
+
+21
+00:01:35,780 --> 00:01:36,920
+And then add sources.
+
+22
+00:01:39,520 --> 00:01:40,450
+I mean, that scene.
+
+23
+00:01:42,630 --> 00:01:46,440
+And let's also Ed include underscore deer's.
+
+24
+00:01:47,770 --> 00:01:51,400
+With the period between quotations and close parentheses.
+
+25
+00:01:54,210 --> 00:01:55,530
+Now, let's go to mean that sea.
+
+26
+00:01:57,920 --> 00:01:59,000
+And let's clean this up.
+
+27
+00:01:59,840 --> 00:02:01,010
+Let's just delete this.
+
+28
+00:02:02,950 --> 00:02:04,510
+And all of this here as well.
+
+29
+00:02:09,870 --> 00:02:11,010
+And delete this as well.
+
+30
+00:02:13,400 --> 00:02:14,810
+And we can leave it like this for now.
+
+31
+00:02:16,410 --> 00:02:17,430
+Now go to project.
+
+32
+00:02:19,530 --> 00:02:22,920
+And build all, you can also use control, be as shown.
+
+33
+00:02:24,890 --> 00:02:29,300
+And by building the project, we're going to generate what's called an SDK config file.
+
+34
+00:02:29,870 --> 00:02:34,880
+The SDK config contains the project configuration that will need to adjust based on the project needs.
+
+35
+00:02:35,940 --> 00:02:41,340
+Also, there is one error that may arise depending on your version of the SPF that will need to resolve
+
+36
+00:02:41,340 --> 00:02:43,260
+by adjusting the SDK config file.
+
+37
+00:02:44,890 --> 00:02:50,260
+So just give the build a moment to finish, and I'll point out this air here regarding the invalid certificate.
+
+38
+00:02:58,540 --> 00:03:01,090
+So here's the error, and we'll resolve it shortly.
+
+39
+00:03:01,780 --> 00:03:04,810
+For now, let's just open up the SDK config.
+
+40
+00:03:13,490 --> 00:03:18,860
+And the first thing we'll need to do is go to serial flasher config and change the flash size to four
+
+41
+00:03:18,860 --> 00:03:19,460
+megabytes.
+
+42
+00:03:21,700 --> 00:03:23,290
+Next, go to Partition Table.
+
+43
+00:03:25,590 --> 00:03:31,650
+And change it to factory up to 0.8 definitions, and that's to enable OTA updates.
+
+44
+00:03:32,400 --> 00:03:34,860
+And then let's go down to HTP Server.
+
+45
+00:03:36,210 --> 00:03:40,860
+And change, the MAX http request had a link to one thousand twenty four.
+
+46
+00:03:42,520 --> 00:03:44,140
+As well as the Max, your length.
+
+47
+00:03:46,410 --> 00:03:49,950
+Next, let's solve the certificate issue by going to embed tools.
+
+48
+00:03:51,960 --> 00:03:52,680
+And choose.
+
+49
+00:03:53,830 --> 00:03:55,900
+Use only the most common certificates.
+
+50
+00:03:59,320 --> 00:04:01,060
+Now we'll do controls to save.
+
+51
+00:04:02,300 --> 00:04:03,470
+And go to build the project.
+
+52
+00:04:08,550 --> 00:04:10,260
+Just give the project a minute to build.
+
+53
+00:04:18,520 --> 00:04:20,260
+And we can ignore this warning here.
+
+54
+00:04:22,180 --> 00:04:22,990
+And it looks good.
+
+55
+00:04:23,140 --> 00:04:23,530
+Great.
+
+56
+00:04:23,890 --> 00:04:27,550
+So now let's flash the deficit by hitting the green arrow in the top left corner.
+
+57
+00:04:31,380 --> 00:04:33,400
+And now the image is being written to the deficit.
+
+58
+00:04:35,690 --> 00:04:36,470
+And all looks good.
+
+59
+00:04:38,490 --> 00:04:42,000
+So I've updated the project configuration lesson to include one more step.
+
+60
+00:04:43,130 --> 00:04:47,930
+After progressing into the development of this application, I noticed that the ESP log information
+
+61
+00:04:47,930 --> 00:04:52,010
+macro wasn't recognized by the IEEE, and these red squiggly lines appeared.
+
+62
+00:04:52,610 --> 00:04:54,380
+The application itself isn't affected.
+
+63
+00:04:54,710 --> 00:04:56,000
+However, I wanted to get rid of them.
+
+64
+00:04:56,900 --> 00:04:57,920
+So let's do that now.
+
+65
+00:04:58,580 --> 00:04:59,630
+Let's go to project.
+
+66
+00:05:00,580 --> 00:05:01,300
+Properties.
+
+67
+00:05:03,160 --> 00:05:06,190
+And under C C++ general go to indexer.
+
+68
+00:05:09,220 --> 00:05:16,180
+And to change, the default options will check enable project specific settings and then Check Index
+
+69
+00:05:16,180 --> 00:05:17,260
+all had a variance.
+
+70
+00:05:20,040 --> 00:05:23,990
+And also check index source and --'s opened in the editor.
+
+71
+00:05:24,960 --> 00:05:25,560
+And that's it.
+
+72
+00:05:26,190 --> 00:05:27,360
+So let's apply in close.
+
+73
+00:05:28,880 --> 00:05:29,720
+And if we build.
+
+74
+00:05:33,880 --> 00:05:34,480
+They go away.
+
+75
+00:05:35,540 --> 00:05:35,850
+Great.
+
+76
+00:05:35,870 --> 00:05:36,770
+That looks much better.
+
+77
+00:05:38,920 --> 00:05:40,660
+All right, so I'll see you in the upcoming lessons.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ==================================================================================
 
 # Section 4: Supplemental Lessons
