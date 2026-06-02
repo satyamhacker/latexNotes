@@ -1,4 +1,4 @@
-Section 1: Introduction
+# Section 1: Introduction
 
 1
 00:00:00,540 --> 00:00:00,900
