@@ -1732,11 +1732,6 @@ Sections: 1 | Topics: 5 | Subtopics: 21
 # Section 12: WiFi Connect Implementation
 
 
-Maine tumhara transcript wapas ekdum deep level par analyze kiya hai. Is baar maine transcript ke explicit visual breaks (`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`) ko as distinct Sections treat kiya hai aur ek-ek variable, API call, aur frontend logic flow ko thoroughly extract kiya hai taaki kuch bhi miss na ho.
-
-Galti ke liye maafi chahunga, yeh raha tumhara **Ultimate Deep-Extracted Skeleton**:
-
-==================================================================================
 
 =====Section 1: WiFi Connect Implementation Overview=====
 Speaker is pehle segment mein ESP32 ko access point se connect karne ka high-level web page flow aur specific Espressif APIs ka overview deta hai.
@@ -2118,7 +2113,6 @@ Sections: 2 | Topics: 5 | Subtopics: 34
 
 
 
-==================================================================================
 
 =====Section 1: WiFi Disconnect Implementation=====
 Speaker is section mein WiFi disconnect button ka frontend (AJAX) aur backend (C Server) logic implement karke system ko test karta hai taaki user explicitly connection drop kar sake bina auto-reconnect hue.
@@ -3413,6 +3407,8 @@ Sections: 4 | Topics: 11 | Subtopics: 58
 
 ==================================================================================
 
+# Section 20: Production Security (Secure Boot & Flash Encryption)
+
 
 =====Section 20 (NEW): Production Security (Secure Boot & Flash Encryption)=====
 Speaker yahan industrial-grade security implement karna sikhata hai taaki device ki flash memory aur firmware ko physical aur remote IP theft se completely lock kiya ja sake.
@@ -3461,6 +3457,10 @@ Subtopics: Public/Private Key Generation, Bootloader Signature, Firmware Signing
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+==================================================================================
+
+# Section 21: Industrial Reliability (Watchdogs & Core Dumps)
+
 =====Section 21 (NEW): Industrial Reliability (Watchdogs & Core Dumps)=====
 Speaker industrial applications ke liye fault tolerance, auto-recovery aur crash debugging mechanics setup karna sikhata hai.
 
@@ -3507,6 +3507,11 @@ Subtopics: Core Dump Configuration, Flash Partition Setup, espcoredump.py, GDB D
 * Live Production Phase: Crash hone ke baad jab device wapas online aata hai, developer remote command se us core dump ko read kar leta hai aur `espcoredump.py` / GDB se exact line number aur variable values dekh pata hai jahan crash hua tha.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 22: Bluetooth Low Energy (BLE) & Provisioning
+
 
 =====Section 22 (NEW): Bluetooth Low Energy (BLE) & Provisioning=====
 Speaker IoT connectivity ke doosre pillar (Bluetooth) ko implement karta hai aur usey Wi-Fi credentials set karne (Blufi/Provisioning) ke liye use karta hai.
@@ -3555,6 +3560,10 @@ Subtopics: Provmgr Configuration, BLE Provisioning Endpoint, Mobile App Integrat
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+==================================================================================
+
+# Section 23: Advanced Power Management & Deep Sleep
+
 =====Section 23 (NEW): Advanced Power Management & Deep Sleep=====
 Speaker power optimize karna sikhata hai taaki device battery ya solar power pe maheeno tak chal sake bina drain hue.
 
@@ -3601,6 +3610,11 @@ Subtopics: ULP Architecture, FSM vs RISC-V, Sensor Polling in Sleep
 * Live Production Phase: Jab tak temperature/water level threshold ke neeche hai, sirf ULP (drawing 1µA) chalta hai. Threshold cross hote hi ULP main ESP32 CPU ko jaga deta hai emergency alert Wi-Fi/MQTT pe bhejne ke liye.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+==================================================================================
+
+# Section 23A: Production Power Budgeting 
 
 
 =====Section 23A (NEW): Production Power Budgeting=====
