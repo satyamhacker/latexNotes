@@ -3556,3 +3556,146 @@ Subtopics: Frame Injection API, Deauthentication Frames, BSSID Spoofing, Beacon 
 * Testing/Offline Phase: Developer ek custom C byte-array banata hai jisme 802.11 Deauth packet ka exact hexadecimal structure hota hai. `esp_wifi_80211_tx` API use karke packet inject karta hai.
 * Fixing/Iteration Phase: (Ethical Use Only) Developer apne khud ke network ka stress-test karta hai Deauth packets fire karke, verifying if the router has PMF (Protected Management Frames / WPA3) enabled to resist the attack.
 * Live Production Phase: Advanced auditing scenarios mein, ESP32 target device ko asli router se disconnect (Deauth) karwata hai, aur same naam ka ek fake "Rogue AP" (Evil Twin) khada kar deta hai with a captive portal to test employee security awareness (phishing simulation).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=====Section 26 (NEW): TinyML (Edge Computing & Edge Intelligence)=====
+Speaker is section mein ESP32 ko ek "Smart Edge Device" banane ke concepts cover karta hai, jahan cloud par raw data bhejney ke bajaye device khud locally Machine Learning (ML) models run karke decision leta hai.
+
+--26--TinyML (Edge Computing & Edge Intelligence)--
+Topic 1: TinyML Frameworks & Model Optimization
+Subtopics: Edge AI Architecture, TensorFlow Lite for Microcontrollers, Neural Network Basics, Model Quantization, FlatBuffer Conversion
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Simulated content volume: High-level overview of ML pipeline to embedded C array
+* Key terms from transcript (Simulated): TensorFlow Lite, TFLite Micro, Keras, Model Quantization, INT8, weights and biases, FlatBuffer, xxd tool, ESP-NN
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Edge AI, TinyML, TensorFlow Lite for Microcontrollers, TFLite Micro, Keras model, Python, Model Quantization, 32-bit float, 8-bit integer, INT8, memory footprint, RAM constraints, FlatBuffer, xxd tool, C-byte array, ESP-NN, hardware acceleration, vector math]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer pehle apne PC (Python/TensorFlow) par ek chota Neural Network model train karta hai, usko "Quantize" (compress) karta hai taaki woh ESP32 ki limited RAM (approx 520KB) mein fit ho sake, aur usey C-header file (`model.h`) mein convert karta hai.
+* Fixing/Iteration Phase: Agar model ESP32 par out-of-memory error deta hai, toh developer Tensor Arena size ko code mein manually adjust karta hai.
+* Live Production Phase: Cloud compute aur internet bandwidth bachane ke liye, ESP32 raw data cloud pe upload nahi karta. Woh offline model load karta hai aur locally inferences run karta hai.
+
+--26--TinyML (Edge Computing & Edge Intelligence)--
+Topic 2: Sensor Anomaly Detection & Predictive Maintenance
+Subtopics: IMU Sensor Interfacing, Feature Extraction, Inference Execution, Triggering MQTT Alerts
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Simulated content volume: Coding the inference loop with accelerometer data
+* Key terms from transcript (Simulated): MPU6050, accelerometer, vibration data, feature extraction, tf.lite.MicroInterpreter, Invoke(), predictive maintenance
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[MPU6050, IMU, accelerometer, SPI/I2C, vibration analysis, DSP, feature extraction, tensor arena, tf.lite.MicroInterpreter, model initialization, input tensor, output tensor, interpreter->Invoke(), inference time, anomaly detection, predictive maintenance, MQTT alert]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer ESP32 ko ek vibration sensor (MPU6050) ke saath connect karta hai aur TFLite interpreter setup karta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Industrial motor ke upar laga ESP32 continuously vibrations read karta hai. TFLite model locally data analyze karta hai. Jaise hi usko lagta hai ki motor ka bearing kharab hone wala hai (anomaly detected), woh cloud ko ek chota MQTT alert bhej deta hai—saving gigabytes of raw data transfer!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=====Section 27 (NEW): Advanced Industrial Networking (LoRaWAN & CAN Bus)=====
+Speaker Wi-Fi aur BLE ki range/industry limitations ko overcome karne ke liye LPWAN (LoRaWAN) aur automotive standard (CAN Bus / TWAI) ka implementation dikhata hai.
+
+--27--Advanced Industrial Networking (LoRaWAN & CAN Bus)--
+Topic 1: LoRaWAN Integration (Long-Range IoT)
+Subtopics: SX1276 SPI Interfacing, LoRa vs LoRaWAN, The Things Network (TTN), OTAA vs ABP Provisioning, Payload Uplink
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Simulated content volume: Setting up ESP32 with an external LoRa radio and TTN
+* Key terms from transcript (Simulated): SX1276, SPI bus, LoRa modulation, LoRaWAN protocol, LMIC library, The Things Network, OTAA, AppEUI, DevEUI, AppKey, Uplink
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[SX1276, SX1262, SPI interface, LoRa modulation, Chirp Spread Spectrum, LoRaWAN MAC layer, LPWAN, ESP-IDF LMIC library, The Things Network, TTN console, Device provisioning, Over-The-Air Activation, OTAA, Activation by Personalization, ABP, AppEUI, DevEUI, AppKey, Join Request, Join Accept, Uplink payload, Duty cycle]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer ESP32 ko SX1276 LoRa transceiver ke saath SPI ke through jodata hai. 'The Things Network' (TTN) pe account banakar Device EUI, App EUI aur App Key generate karta hai.
+* Fixing/Iteration Phase: Agar join request fail hoti hai, toh developer SPI pins aur regional frequency band (e.g., EU868, US915, IN865) cross-check karta hai.
+* Live Production Phase: Smart Agriculture ya Smart City project mein jahan Wi-Fi nahi hota, ESP32 milon (miles) door ek LoRa gateway ko apna sensor data (Uplink) secure OTAA handshake ke through wirelessly bhejta hai.
+
+--27--Advanced Industrial Networking (LoRaWAN & CAN Bus)--
+Topic 2: TWAI (CAN Bus) Interfacing for Automotive/Heavy Machinery
+Subtopics: ESP32 Built-in TWAI Controller, CAN Transceiver Hardware, Message Frames, Bit Timing Configuration, OBD-II Interfacing
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Simulated content volume: Configuring ESP32's native CAN controller
+* Key terms from transcript (Simulated): TWAI, Two-Wire Automotive Interface, CAN 2.0B, SN65HVD230 transceiver, bit timing, message ID, standard frame, extended frame
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[TWAI, Two-Wire Automotive Interface, CAN bus, Controller Area Network, CAN 2.0B, SN65HVD230 transceiver, Differential signaling, RX pin, TX pin, twai_general_config_t, twai_timing_config_t, twai_filter_config_t, twai_driver_install, twai_start, twai_message_t, standard frame, extended frame, identifier, data length code, DLC, OBD-II PID polling]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer ESP32 ke internal TWAI controller ko external CAN Transceiver chip (SN65HVD230) ke through physical CAN Bus se jodata hai. Speed (e.g., 500kbps) aur filters configure karta hai.
+* Fixing/Iteration Phase: Bus par data aane mein issue ho toh developer termination resistor (120 ohms) physical wires pe check karta hai.
+* Live Production Phase: ESP32 ek industrial forklift ya car ke OBD-II port pe connected hota hai. Woh noisy environment mein CAN frames securely read karta hai (jaise engine RPM, vehicle speed) aur us data ko Wi-Fi/LoRaWAN ke through server pe bhejta hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=====Section 28 (NEW): Enterprise Industrial Protocols (OPC UA)=====
+Speaker Modern Industry 4.0 factories ke liye SCADA aur PLC systems se securely baat karne ke liye OPC UA protocol ko ESP32 par implement karna sikhata hai.
+
+--28--Enterprise Industrial Protocols (OPC UA)--
+Topic 1: OPC UA Architecture & open62541 Porting
+Subtopics: OPC UA vs Modbus, Client/Server Architecture, Nodes and Namespaces, open62541 Library Implementation, FreeRTOS Integration
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Simulated content volume: Porting a heavy industrial stack to ESP-IDF
+* Key terms from transcript (Simulated): OPC UA, Industry 4.0, SCADA, PLC, NodeID, Namespace, open62541, porting, FreeRTOS task, TCP socket
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[OPC UA, Open Platform Communications Unified Architecture, Industry 4.0, Modbus alternative, SCADA systems, PLC, Client-Server model, Information Model, NodeClass, NodeID, Namespace, open62541 stack, ESP-IDF porting, TCP IP stack, FreeRTOS wrapper, UA_Server, UA_ServerConfig]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Modbus se aage badhkar open-source `open62541` C-library ko ESP-IDF ke andar port karta hai aur CMakeLists modify karta hai.
+* Fixing/Iteration Phase: Library bohot heavy hoti hai, isliye developer FreeRTOS task ka stack size aur LWIP socket timeouts carefully tune karta hai taaki stack overflow na ho.
+* Live Production Phase: (N/A)
+
+--28--Enterprise Industrial Protocols (OPC UA)--
+Topic 2: Building the ESP32 OPC UA Server
+Subtopics: Server Initialization, Variable Node Creation, Real-time Sensor Data Binding, UaExpert Client Testing
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Simulated content volume: Writing server logic and creating data nodes
+* Key terms from transcript (Simulated): UA_Server_new, UA_VariableAttributes, UA_Server_addVariableNode, UA_Server_run_iterate, UaExpert
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[UA_Server_new, UA_ServerConfig_setDefault, UA_VariableAttributes_default, UA_Variant_setScalar, UA_NODEID_STRING, UA_QUALIFIEDNAME, UA_Server_addVariableNode, DataSource binding, sensor reading update, UA_Server_run_iterate, infinite server loop, UaExpert desktop client, endpoint URL, opc.tcp://:4840]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer C code mein ek "Variable Node" banata hai (e.g., "Pump_Temperature") aur DHT22 sensor ke C-variables ko us node ke saath bind kar deta hai. Server loop `UA_Server_run_iterate` ko ek dedicated FreeRTOS task mein dalta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: ESP32 ek full-fledged OPC UA Server ban jata hai port 4840 par. Factory manager apne computer par SCADA software ya "UaExpert" client open karta hai, ESP32 ki IP IP par connect karta hai, aur structured object-oriented data browse karta hai bina kisi custom backend API ke.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
