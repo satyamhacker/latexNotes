@@ -3600,6 +3600,104 @@ Subtopics: ULP Architecture, FSM vs RISC-V, Sensor Polling in Sleep
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+
+=====Section 23A (NEW): Production Power Budgeting=====
+Speaker industry-level power estimation, current profiling, aur hardware regulator selection ke baare mein sikhata hai jo har production IoT device ke liye zaroori hai.
+
+--23A--Production Power Budgeting--
+Topic 1: Current Consumption Analysis
+Subtopics: Active Current, Idle Current, Sleep Current, Peak Current, Peripheral Current, WiFi Current, BLE Current, Sensor Current, Current Budget
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Production
+* Industry Importance: Extremely High
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[mA, uA, Current Draw, Peak Current, Average Current, Active State, Idle State, Deep Sleep, Peripheral Load, Current Budget]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer each state ka current profile karta hai.
+* Fixing/Iteration Phase: Peak current ko handle karne ke liye decoupling capacitors ya delay optimization karta hai.
+* Live Production Phase: WiFi ON -> 240mA. Sensor Read -> 15mA. BLE Advertising -> 30mA. Deep Sleep -> 10uA. In sabse overall Average Current aur Battery Life Calculate hoti hai.
+
+--23A--Production Power Budgeting--
+Topic 2: Battery Life Estimation
+Subtopics: Battery Capacity, mAh Calculation, Duty Cycle, Average Current, Battery Runtime, Derating, Battery Aging, Safety Margin
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Production
+* Industry Importance: Extremely High
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Battery Capacity, mAh Calculation, Duty Cycle, Average Current, Battery Runtime, Derating, Battery Aging, Safety Margin]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: Battery = 3000mAh. Average Current = 10mA. Runtime = 3000/10 = 300 Hours = 12.5 Days. Industry mein exactly isi tarah estimate hota hai.
+
+--23A--Production Power Budgeting--
+Topic 3: Current Profiling
+Subtopics: Power Analyzer, Current Waveforms, Startup Current, Peak Current Analysis, Sleep Verification, Runtime Profiling
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Production
+* Industry Importance: Extremely High
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Nordic PPK2, Otii Arc, Current Probe, Oscilloscope, Power Monitor, Energy Profile]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer Nordic PPK2 ya Otii Arc use karke microsecond level par current waveforms aur energy profile analyze karta hai.
+
+--23A--Production Power Budgeting--
+Topic 4: Regulator Selection
+Subtopics: LDO, Buck Converter, Boost Converter, Buck Boost, Efficiency, Dropout Voltage, Quiescent Current, Thermal Losses
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Production
+* Industry Importance: Extremely High
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[LDO, Buck Converter, Boost Converter, Buck Boost, Efficiency, Dropout Voltage, Quiescent Current, Thermal Losses]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Hardware/Firmware Co-design Phase: Wrong Regulator -> Heat -> Battery Drain. Correct Regulator -> Long Runtime. Efficiency curves ko analyze karke MCU ke hisaab se power components choose hote hain.
+
+--23A--Production Power Budgeting--
+Topic 5: Power Tree Architecture
+Subtopics: Power Domains, Always-On Domain, Switchable Domain, Sensor Power Control, Load Switching, MOSFET Control, Power Sequencing
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Production
+* Industry Importance: Extremely High
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Power Domains, Always-On Domain, Switchable Domain, Sensor Power Control, Load Switching, MOSFET Control, Power Sequencing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Live Production Phase: MCU sleep mein jaane se pehle firmware MOSFET/Load switch ke through heavy peripherals (like SD card, displays, heavy sensors) ka power domain completely cutoff kar deta hai taaki leakage zero ho jaye.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 =====Section 24 (NEW): ESP32-CAM Module & Video Streaming=====
 Speaker popular ESP32-CAM (AI-Thinker) hardware board introduce karta hai aur vision capabilities, I2S camera interface, aur web-based video streaming implement karta hai.
 
