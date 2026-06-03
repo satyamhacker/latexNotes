@@ -694,6 +694,54 @@ Sections: 1 | Topics: 5 | Subtopics: 22
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+=====Section 6 (NEW): Advanced Industrial Protocols (UART, SPI, RS-485)=====
+Speaker is section mein real-world industrial hardware communication ke liye UART (for GSM/GPS/RS-485) aur SPI (for high-speed data/displays) ka deep implementation explain karta hai.
+
+--6--Advanced Industrial Protocols (UART, SPI, RS-485)--
+Topic 1: UART Communication & RS-485 Integration
+Subtopics: UART Driver Config, TX/RX Pin Mapping, UART Event Queues, DMA Allocation, RS-485 Modbus Basics
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Simulated content volume: Long coding session for UART queues
+* Key terms from transcript (Simulated): uart_driver_install, uart_param_config, uart_set_pin, UART_NUM_1, RX, TX, event queue, UART_PATTERN_DET, RS-485 transceiver, Modbus RTU
+* Explicit emphasis by speaker: "Do not use UART 0 for your peripherals as it is strictly reserved for serial console debugging."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[uart_config_t, baud_rate, 115200, data_bits, parity, stop_bits, flow_ctrl, uart_driver_install, uart_param_config, uart_set_pin, UART_NUM_1, RX pin, TX pin, event queue, freertos task, DMA, RS-485 transceiver, half-duplex, Modbus RTU, hardware flow control]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer UART 1 ko configure karta hai aur loopback test likhta hai jahan TX pin ka data RX pin par receive hota hai using FreeRTOS event queues.
+* Fixing/Iteration Phase: RS-485 module connect karne par noise issue fix karne ke liye developer hardware flow control aur read timeout adjust karta hai.
+* Live Production Phase: Industrial environment mein ESP32 UART ke through PLC (Programmable Logic Controller) ya GPS module se reliably continuous data read/write karta hai.
+
+--6--Advanced Industrial Protocols (UART, SPI, RS-485)--
+Topic 2: SPI Master Setup & High-Speed Data
+Subtopics: SPI Bus Initialization, Device Handle Configuration, MOSI/MISO/CLK Pins, DMA Setup, Polling vs Interrupt Transactions
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Simulated content volume: Complex SPI API mapping
+* Key terms from transcript (Simulated): spi_bus_initialize, spi_bus_config_t, spi_device_interface_config_t, spi_bus_add_device, MOSI, MISO, SCLK, CS pin, spi_transaction_t, DMA channel
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[spi_bus_initialize, spi_host_device_t, VSPI_HOST, HSPI_HOST, spi_bus_config_t, MOSI, MISO, SCLK, DMA_channel, spi_device_interface_config_t, clock_speed_hz, mode, spics_io_num, spi_bus_add_device, spi_transaction_t, length, tx_buffer, rx_buffer, spi_device_polling_transmit, spi_device_transmit]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer SPI bus (VSPI/HSPI) initialize karta hai aur ek SD card ya TFT display ko connect karne ke liye Chip Select (CS) logic configure karta hai.
+* Fixing/Iteration Phase: Large data transfer mein bottleneck aane par developer default transfer ko hata kar DMA (Direct Memory Access) enable karta hai.
+* Live Production Phase: Production mein ESP32 bina CPU block kiye SPI DMA ke through high-speed sensor data directly RAM mein push karta hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 ==================================================================================
 
 # Section 6: Course Source Code---NOt of use 
@@ -3177,6 +3225,27 @@ Subtopics: cPayload Variable Formatting, RSSI Append, Temperature Append, Humidi
 * Live Production Phase: Device successfully mTLS negotiate karke nayi updated library ke through AWS se baat karta hai. Developer browser me test client se device ka telemetry dekhta hai, aur cloud se device ki taraf ek test message bhej kar bidirectional MQTT traffic verify karta hai.
 * Additional context: None
 
+--19--AWS IoT--
+Topic 5: Cloud-Based Over-The-Air (HTTPS OTA)
+Subtopics: ESP HTTPS OTA API, AWS S3 Bucket Setup, Pre-signed URLs, Certificate Validation, Version Checking
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Simulated content volume: Full cloud firmware update flow
+* Key terms from transcript (Simulated): esp_https_ota, AWS S3, pre-signed URL, server certificate, esp_http_client_config_t, versioning, rollback, firmware fleet
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[esp_https_ota, esp_http_client_config_t, AWS S3 bucket, pre-signed URL, URL endpoint, cert_pem, server root certificate, fleet management, firmware versioning, esp_ota_get_running_partition, rollback mechanism, esp_ota_mark_app_valid_cancel_rollback]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Developer naya `.bin` compile karke AWS S3 bucket par upload karta hai aur ek pre-signed HTTPS URL generate karta hai.
+* Fixing/Iteration Phase: Agar OTA download ke dauran connection toot jaye, toh system automatically abort karta hai aur purane firmware pe revert (rollback) karta hai.
+* Live Production Phase: Production fleet (1000+ devices) MQTT ke through "update available" trigger receive karti hai. Devices secure HTTPS (mTLS/Cert validation) ke through AWS S3 se directly naya firmware download karke flash karte hain bina kisi human interference ke.
+
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
@@ -3206,3 +3275,284 @@ Sections: 4 | Topics: 11 | Subtopics: 58
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
+
+
+=====Section 20 (NEW): Production Security (Secure Boot & Flash Encryption)=====
+Speaker yahan industrial-grade security implement karna sikhata hai taaki device ki flash memory aur firmware ko physical aur remote IP theft se completely lock kiya ja sake.
+
+--20--Production Security (Secure Boot & Flash Encryption)--
+Topic 1: Hardware Flash Encryption (AES)
+Subtopics: eFuse Architecture, AES-256 Encryption, Partition Table Security, Development vs Release Mode
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & Practical
+* Simulated content volume: Security configuration via menuconfig
+* Key terms from transcript (Simulated): eFuse, Flash encryption, AES-256, plaintext, ciphertext, menuconfig security, development mode, release mode
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[eFuse, one-time programmable memory, hardware crypto, Flash encryption, AES-256, ciphertext, plaintext, menuconfig, Security features, Enable flash encryption on boot, Development mode, Release mode, esp_flash_encryption_enabled]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer menuconfig mein jaakar Flash Encryption ko "Development Mode" mein on karta hai jisse initial keys generate hoti hain.
+* Fixing/Iteration Phase: Developer verify karta hai ki serial monitor se flash read karne par sirf garbage (ciphertext) dikhai de, plaintext nahi.
+* Live Production Phase: Release hone par device "Release Mode" mein flash hota hai. Ab agar koi hardware hacker chip nikal kar flash dump karne ki koshish kare, toh use firmware ka code ya NVS credentials nahi milenge kyunki sab encrypt ho chuka hai.
+
+--20--Production Security (Secure Boot & Flash Encryption)--
+Topic 2: Secure Boot V2 & Signed Firmware
+Subtopics: Public/Private Key Generation, Bootloader Signature, Firmware Signing, Anti-rollback
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Simulated content volume: Cryptographic signing of binaries
+* Key terms from transcript (Simulated): Secure Boot V2, RSA-3072, ECDSA, private key, firmware signing, espsecure.py, hardware root of trust, anti-rollback
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Secure Boot V2, hardware root of trust, RSA-3072, ECDSA, public key, private key, signature, espsecure.py, sign_data, bootloader signature, verify signature, Anti-rollback, eFuse block]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer `espsecure.py` use karke private keys generate karta hai aur bootloader + firmware `.bin` files ko sign karta hai.
+* Fixing/Iteration Phase: Agar koi modified/fake firmware device mein flash kiya jaye, toh hardware bootloader signature fail kar deta hai aur chip boot nahi hoti.
+* Live Production Phase: OTA updates ke dauran ESP32 pehle downloaded file ki cryptographic signature check karta hai. Valid hone par hi partition table usko execute karne ki permission deta hai, ensuring 100% protection against malware injection.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=====Section 21 (NEW): Industrial Reliability (Watchdogs & Core Dumps)=====
+Speaker industrial applications ke liye fault tolerance, auto-recovery aur crash debugging mechanics setup karna sikhata hai.
+
+--21--Industrial Reliability (Watchdogs & Core Dumps)--
+Topic 1: Watchdog Timers (TWDT & IWDT)
+Subtopics: Task Watchdog Timer, Interrupt Watchdog Timer, Feeding the Watchdog, Panic Handlers
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Simulated content volume: RTOS Watchdog configuration
+* Key terms from transcript (Simulated): Task Watchdog Timer, TWDT, Interrupt Watchdog, IWDT, esp_task_wdt_init, esp_task_wdt_add, esp_task_wdt_reset, panic, auto-reboot
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Task Watchdog Timer, TWDT, Interrupt Watchdog, IWDT, esp_task_wdt_init, esp_task_wdt_add, esp_task_wdt_reset, feeding the dog, infinite loop hang, panic handler, hardware reset, system crash, auto-reboot, menuconfig watchdog settings]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer important FreeRTOS tasks (jaise Wi-Fi ya Sensor task) ko `esp_task_wdt_add` karke watchdog registry mein add karta hai. Har loop ke end mein `esp_task_wdt_reset` call karta hai ("feeding the dog").
+* Fixing/Iteration Phase: Developer purposely ek task mein infinite `while(1)` lagata hai. Watchdog timeout trigger hota hai aur terminal pe alert dekar ESP32 ko reboot kar deta hai.
+* Live Production Phase: Remote industrial site par agar interference ya bug ki wajah se software hang ho jaye, toh Watchdog automatically detect karke device ko fresh reboot kar deta hai, physical maintenance visit ki zarurat khatam.
+
+--21--Industrial Reliability (Watchdogs & Core Dumps)--
+Topic 2: Core Dump to Flash & Post-Crash Debugging
+Subtopics: Core Dump Configuration, Flash Partition Setup, espcoredump.py, GDB Debugging
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Simulated content volume: Debugging a crashed system from flash logs
+* Key terms from transcript (Simulated): Core dump, flash partition, coredump CSV, base64, espcoredump.py, GDB, stack trace, register states
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Core dump, core dump to flash, partition table, coredump partition, menuconfig, panic handler behavior, base64, espcoredump.py, GDB, GNU Debugger, stack trace, CPU registers, memory state, fatal exception, crash analysis]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer partition table mein ek special "coredump" slot banata hai aur menuconfig se "Core Dump to Flash" enable karta hai.
+* Fixing/Iteration Phase: Jab code production mein crash hota hai (e.g., Null pointer dereference), panic handler poori RAM aur CPU registers ki state flash partition mein likh deta hai.
+* Live Production Phase: Crash hone ke baad jab device wapas online aata hai, developer remote command se us core dump ko read kar leta hai aur `espcoredump.py` / GDB se exact line number aur variable values dekh pata hai jahan crash hua tha.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=====Section 22 (NEW): Bluetooth Low Energy (BLE) & Provisioning=====
+Speaker IoT connectivity ke doosre pillar (Bluetooth) ko implement karta hai aur usey Wi-Fi credentials set karne (Blufi/Provisioning) ke liye use karta hai.
+
+--22--Bluetooth Low Energy (BLE) & Provisioning--
+Topic 1: BLE Architecture & GATT Server
+Subtopics: GAP vs GATT, Profiles and Services, Characteristics, Bluedroid vs NimBLE, Callbacks
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Simulated content volume: Huge codebase for BLE initialization
+* Key terms from transcript (Simulated): Bluetooth Low Energy, GAP, GATT, UUID, Profile, Service, Characteristic, NimBLE stack, Read/Write permissions, notify
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Bluetooth Low Energy, BLE, GAP, Generic Access Profile, advertising, GATT, Generic Attribute Profile, UUID, 16-bit, 128-bit, BLE Service, BLE Characteristic, Read permissions, Write permissions, Notify, Bluedroid, NimBLE stack, esp_bt_controller_init, esp_bt_controller_enable, esp_bluedroid_init]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer NimBLE stack use karke ESP32 par ek GATT Server banata hai jisme specific UUIDs wali services aur characteristics define karta hai.
+* Fixing/Iteration Phase: Developer nRF Connect mobile app se ESP32 ko scan karta hai aur characteristic mein data read/write karke test karta hai.
+* Live Production Phase: Mobile app directly BLE ke through ESP32 se interact karta hai (e.g., locking/unlocking a smart door) without needing any Wi-Fi network.
+
+--22--Bluetooth Low Energy (BLE) & Provisioning--
+Topic 2: Wi-Fi Provisioning via BLE (Smart Config / Blufi)
+Subtopics: Provmgr Configuration, BLE Provisioning Endpoint, Mobile App Integration, Security Verification
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Simulated content volume: Code for secure Wi-Fi credential transfer
+* Key terms from transcript (Simulated): Wi-Fi Provisioning, wifi_prov_mgr, BLE endpoint, Proof of Possession (PoP), Espressif mobile app
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Wi-Fi Provisioning, wifi_prov_mgr, BLE provisioning, SoftAP provisioning, Proof of Possession, PoP, QR code, endpoints, esp_wifi_prov_mgr_start_provisioning, Espressif mobile app, BLE security, secure credential transfer]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer code mein `wifi_prov_mgr` initialize karta hai aur ek Proof of Possession (PoP) password set karta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Naya user device box se nikalta hai. Device pehle Wi-Fi AP banne ki jagah BLE se broadcast karta hai. User official Espressif App (ya custom app) se BLE ke through secure PoP pin daal kar apne ghar ke Wi-Fi credentials device ko bhej deta hai. Seamless IoT onboarding experience!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=====Section 23 (NEW): Advanced Power Management & Deep Sleep=====
+Speaker power optimize karna sikhata hai taaki device battery ya solar power pe maheeno tak chal sake bina drain hue.
+
+--23--Advanced Power Management & Deep Sleep--
+Topic 1: Deep Sleep Modes & RTC Memory
+Subtopics: Sleep Modes Overview, RTC Fast Memory, RTC Slow Memory, Wake-up Sources, Current Draw
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Simulated content volume: Power config APIs
+* Key terms from transcript (Simulated): Deep sleep, light sleep, RTC memory, RTC_DATA_ATTR, esp_sleep_enable_timer_wakeup, esp_deep_sleep_start, microamps
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Deep sleep, light sleep, power consumption, microamps, RTC_DATA_ATTR, RTC Fast Memory, RTC Slow Memory, wake-up sources, esp_sleep_enable_timer_wakeup, esp_sleep_enable_ext0_wakeup, esp_sleep_enable_ext1_wakeup, GPIO wakeup, esp_deep_sleep_start, bootloader bypass]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer important variables (jaise retry count) ke aage `RTC_DATA_ATTR` tag lagata hai taaki deep sleep mein RAM off hone ke baad bhi data save rahe.
+* Fixing/Iteration Phase: Developer multimeter use karke current draw measure karta hai aur verify karta hai ki device sleep mein 10µA ke paas draw kar raha hai.
+* Live Production Phase: Sensor data publish karne ke baad device turant `esp_deep_sleep_start` call kar deta hai. 30 minute baad internal RTC timer device ko wake karta hai, data bhejta hai, aur wapas so jata hai. Battery life jumps from 2 days to 6 months.
+
+--23--Advanced Power Management & Deep Sleep--
+Topic 2: ULP (Ultra Low Power) Coprocessor Basics
+Subtopics: ULP Architecture, FSM vs RISC-V, Sensor Polling in Sleep
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Surface
+* Coverage Angle: Conceptual & Practical
+* Simulated content volume: High-level overview of ULP programming
+* Key terms from transcript (Simulated): Ultra Low Power coprocessor, ULP, FSM, RISC-V, deep sleep polling, threshold wakeup
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Ultra Low Power coprocessor, ULP, FSM, Finite State Machine, RISC-V, deep sleep polling, threshold wakeup, ADC readings, wake stub, assembly code, C language for ULP]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer ULP coprocessor ke liye ek chota program likhta hai jo main CPU ke deep sleep mein hone par bhi continuously ADC se sensor check karta rahe.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Jab tak temperature/water level threshold ke neeche hai, sirf ULP (drawing 1µA) chalta hai. Threshold cross hote hi ULP main ESP32 CPU ko jaga deta hai emergency alert Wi-Fi/MQTT pe bhejne ke liye.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=====Section 24 (NEW): ESP32-CAM Module & Video Streaming=====
+Speaker popular ESP32-CAM (AI-Thinker) hardware board introduce karta hai aur vision capabilities, I2S camera interface, aur web-based video streaming implement karta hai.
+
+--24--ESP32-CAM Module & Video Streaming--
+Topic 1: OV2640 Hardware Setup & I2S Interface
+Subtopics: ESP32-CAM Pins Mapping, OV2640 Sensor, PSRAM Setup, I2S Protocol, Camera Driver Initialization
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Simulated content volume: Pin mapping and heavy configuration structs
+* Key terms from transcript (Simulated): AI-Thinker board, OV2640, PSRAM, I2S, esp_camera.h, camera_config_t, frame size, jpeg quality
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[AI-Thinker board, OV2640 sensor, PSRAM, Pseudo SRAM, menuconfig enable PSRAM, I2S, esp_camera.h, camera_config_t, pin_pwdn, pin_reset, pin_xclk, pin_sscb_sda, pin_sscb_scl, pin_d7, pin_vsync, pin_href, pin_pclk, xclk_freq_hz, ledc_timer, ledc_channel, pixel_format, PIXFORMAT_JPEG, frame_size, FRAMESIZE_UXGA, jpeg_quality, fb_count, esp_camera_init]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer menuconfig mein "PSRAM" enable karta hai (kyunki UXGA images RAM mein fit nahi hoti). Phir camera driver struct mein 10+ specific GPIO pins map karta hai AI-Thinker board schematics ke according.
+* Fixing/Iteration Phase: Agar `esp_camera_init` fail hota hai, toh developer wire connections ya power supply (needs solid 5V) check karta hai.
+* Live Production Phase: Hardware properly initialize hokar OV2640 se directly compressed JPEG format mein images capture karta hai internal PSRAM buffers ke andar.
+
+--24--ESP32-CAM Module & Video Streaming--
+Topic 2: HTTP Video Streaming & Web Server
+Subtopics: MJPEG Format, Multipart HTTP Response, URI Handler Setup, Frame Buffer Capture
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Simulated content volume: Writing a continuous HTTP stream handler
+* Key terms from transcript (Simulated): MJPEG stream, multipart/x-mixed-replace, boundary, esp_camera_fb_get, esp_camera_fb_return, httpd_resp_send_chunk
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[MJPEG stream, Motion JPEG, HTTP GET, multipart/x-mixed-replace, boundary, stream_content_type, camera_fb_t, esp_camera_fb_get, esp_camera_fb_return, httpd_resp_send_chunk, chunked encoding, infinite loop streaming, vTaskDelay, face detection, esp-who framework]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer ek special URI handler banata hai jiska response type `multipart/x-mixed-replace` hota hai. Yeh browser ko batata hai ki naye chunks aate rahenge.
+* Fixing/Iteration Phase: Developer infinite loop likhta hai jo `esp_camera_fb_get` se frame uthata hai, `httpd_resp_send_chunk` se bhejta hai, aur turant `esp_camera_fb_return` karke memory free karta hai.
+* Live Production Phase: User IP address open karta hai aur use real-time smooth video (MJPEG stream) dikhai deti hai. Optional integration mein ESP-WHO framework use karke frames par on-the-fly face detection bounding boxes draw kiye jaate hain.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=====Section 25 (NEW): ESP32 Wi-Fi Pentesting & Ethical Hacking=====
+Speaker ESP32 ke Wi-Fi radio ka low-level access use karke network auditing, packet sniffing aur 802.11 frame manipulation explain karta hai.
+
+--25--ESP32 Wi-Fi Pentesting & Ethical Hacking--
+Topic 1: Promiscuous Mode & Packet Sniffing
+Subtopics: 802.11 Frame Structure, Promiscuous Mode API, Management Frames, Beacon Sniffing, Probe Requests
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Simulated content volume: Raw Wi-Fi frame dissection
+* Key terms from transcript (Simulated): 802.11 frames, promiscuous mode, esp_wifi_set_promiscuous, callback handler, management frames, beacon, MAC address, probe request
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[802.11 frames, MAC header, payload, Frame Control, promiscuous mode, esp_wifi_set_promiscuous, esp_wifi_set_promiscuous_rx_cb, wifi_promiscuous_pkt_t, Management frames, Data frames, Control frames, Beacon frames, Probe requests, MAC address spoofing, RSSI mapping, packet sniffer, Wireshark integration, pcap format]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer ESP32 ko Station/AP mode se hatakar `esp_wifi_set_promiscuous(true)` call karta hai.
+* Fixing/Iteration Phase: Callback function har raw packet (encrypted ya unencrypted) capture karta hai. Developer frame bytes ko parse karke sirf "Probe Requests" filter karta hai taaki aas-paas ke mobile phones track ho sakein.
+* Live Production Phase: Penetration tester ESP32 ko as a covert packet sniffer deploy karta hai jo network traffic intercept karke SD card par `.pcap` format mein save karta hai for offline Wireshark auditing.
+
+--25--ESP32 Wi-Fi Pentesting & Ethical Hacking--
+Topic 2: Deauth Attacks & Beacon Spamming (Evil Twin Base)
+Subtopics: Frame Injection API, Deauthentication Frames, BSSID Spoofing, Beacon Spamming, Rogue AP Setup
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Simulated content volume: Code for crafting and sending raw 802.11 frames
+* Key terms from transcript (Simulated): esp_wifi_80211_tx, Deauth attack, beacon frame injection, BSSID spoofing, Evil Twin, Rogue AP, captive portal
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[frame injection, esp_wifi_80211_tx, raw packet injection, Deauthentication frames, Reason code, Client disconnect, BSSID spoofing, target MAC, Beacon spamming, SSID flooding, Rickroll SSIDs, Rogue Access Point, Evil Twin attack, Captive portal, DNS spoofing, credential harvesting]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer ek custom C byte-array banata hai jisme 802.11 Deauth packet ka exact hexadecimal structure hota hai. `esp_wifi_80211_tx` API use karke packet inject karta hai.
+* Fixing/Iteration Phase: (Ethical Use Only) Developer apne khud ke network ka stress-test karta hai Deauth packets fire karke, verifying if the router has PMF (Protected Management Frames / WPA3) enabled to resist the attack.
+* Live Production Phase: Advanced auditing scenarios mein, ESP32 target device ko asli router se disconnect (Deauth) karwata hai, aur same naam ka ek fake "Rogue AP" (Evil Twin) khada kar deta hai with a captive portal to test employee security awareness (phishing simulation).
