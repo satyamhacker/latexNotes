@@ -51,6 +51,28 @@ Subtopics: AWS IoT Core Processes, Device Authentication, Telemetry Publishing, 
 * Live Production Phase: ESP32 live production mein temperature, humidity aur Wi-Fi RSSI (signal strength) directly AWS IoT dashboard par bhejta hai.
 * Additional context: (N/A — transcript mein is topic ke liye koi additional real-world flow describe nahi kiya gaya)
 
+--1--AWS IoT Fleet Management & Device Provisioning--
+Topic 2A: Fleet Provisioning & Device Lifecycle
+Subtopics:
+Fleet Provisioning, Device Identity Management, Manufacturing Provisioning, Device Certificates, Certificate Rotation, Certificate Revocation, Secure Device Onboarding, Factory Flashing Workflow, Production Credentials Management, Thing Groups, Device Lifecycle Management, Remote Fleet Updates
+
+[📊 SCOPE SIGNAL for Topic 2A:
+
+* Depth Level: Deep
+* Coverage Angle: Production Only
+* Transcript mein content volume: Industrial Addition
+* Industry Importance: Very High
+]
+
+🔑 KEYWORDS DUMP for Topic 2A:
+[Fleet Provisioning, JITP, JITR, Device Certificates, Root CA, CSR, Thing Groups, Production Line, Secure Identity, Certificate Rotation, Certificate Revocation, Device Lifecycle, Manufacturing, Provisioning Server, AWS Fleet Provisioning]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2A:
+
+* Testing/Offline Phase: Developer test keys aur CSR generate karke JITP (Just-in-Time Provisioning) template verify karta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Manufacturing Factory mein har device ko ek unique Device Certificate milta hai. Device securely provision hokar AWS Thing Registration complete karta hai. Fleet Monitoring se le kar Certificate Rotation aur finally Device Retirement tak poori life cycle manage hoti hai.
+
 --1--Course Content & Application Architecture--
 Topic 3: ESP-IDF Framework & FreeRTOS
 Subtopics: ESP-IDF Features, FreeRTOS Kernel, Inter-Task Communication, Programming Languages, Framework Advantages
@@ -422,12 +444,105 @@ Sections: 1 | Topics: 5 | Subtopics: 29
 --- ⏸️ **WAITING FOR NEXT PART.** Transcript ka agla hissa (agar hai toh) paste karo. Main perfectly extract karta rahunga!
 
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 
 ==================================================================================
 
+=====Section 3A (NEW): Professional Embedded Development Workflow=====
+Speaker industry-standard workflow, source control, aur testing strategies explain karta hai jo real-world teams use karti hain.
 
+--3A--Professional Embedded Development Workflow--
+Topic 1: Version Control & Code Collaboration
+Subtopics: Git Workflow, Branch Strategy, Code Reviews, Pull Requests
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Production
+* Industry Importance: Very High
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Git, GitHub, GitLab, Git Workflow, Branch Strategy, Code Reviews, Pull Requests]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Live Production Phase: Developer Code likhta hai -> Git Commit -> Pull Request -> Code Review -> Merge.
+
+--3A--Professional Embedded Development Workflow--
+Topic 2: Static Analysis & Code Quality
+Subtopics: Static Analysis, Cppcheck, Clang-Tidy, MISRA Checking, Coding Standards
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Production
+* Industry Importance: Very High
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Static Analysis, Cppcheck, Clang-Tidy, MISRA Checking, Coding Standards]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: CI pipeline static analysis (MISRA) run karti hai to enforce strict embedded coding standards before any code is merged.
+
+--3A--Professional Embedded Development Workflow--
+Topic 3: Automated Testing & Mocking
+Subtopics: Unit Testing, Unity Framework, Mock Drivers, Integration Testing, Regression Testing
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Production
+* Industry Importance: Very High
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Unit Testing, Unit Tests, Integration Tests, Unity Framework, Mock Drivers, Regression Testing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Live Production Phase: Hardware-independent logic (parsers, state machines) ki host machine par mock drivers ke saath rigorous unit testing hoti hai.
+
+--3A--Professional Embedded Development Workflow--
+Topic 4: CI/CD Pipeline Configuration
+Subtopics: Automated Build, Automated Testing, Release Pipeline, Firmware Packaging
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Production
+* Industry Importance: Very High
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[CI/CD, Jenkins, GitHub Actions, Automated Build, Automated Testing, Release Pipeline, Firmware Packaging]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Live Production Phase: Push to main triggers automated CI/CD build, testing, aur final firmware artifact packaging for deployment.
+
+--3A--Professional Embedded Development Workflow--
+Topic 5: Release Engineering & Deployment
+Subtopics: Release Engineering, Semantic Versioning, Release Notes, Rollback Strategy, Firmware Signing
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Production
+* Industry Importance: Very High
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Release Engineering, Semantic Versioning, Versioning, Release Notes, Rollback Strategy, Firmware Signing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Live Production Phase: Firmware semantic version tag ke saath release hoti hai aur OTA deployment pipeline ke through remotely devices par push ki jaati hai (with fail-safe rollback strategy).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
 
 # Section 4: Supplemental Lessons
 
@@ -507,6 +622,26 @@ Subtopics: Recoverable vs Fatal Errors, Error Codes, Error to Name Conversion, E
 * Fixing/Iteration Phase: Agar fatal error ya CPU exception aaye, toh developer panic handler ke backtrace logs (file names aur line numbers) ko read karke code ko debug karta hai.
 * Live Production Phase: Production-ready firmware mein developer macros pe blindly depend nahi karta, balki recoverable errors ke liye explicit retry, peripheral reset, ya propagation strategies implement karta hai.
 * Additional context: Speaker batata hai ki example codes mein macros aam taur pe code ko chhota dikhane ke liye use hote hain, par real-world mein proper handling chahiye.
+
+--4--Supplemental Lessons--
+Topic 3A: Production Debugging & Device Observability
+Subtopics: Structured Logging, Remote Diagnostics, Crash Reporting, Core Dumps, Memory Leak Detection, Heap Analysis, Performance Profiling, Latency Analysis, Watchdog Analysis, Field Failure Investigation, Device Telemetry Monitoring, Runtime Metrics
+
+[📊 SCOPE SIGNAL for Topic 3A:
+
+* Depth Level: Deep
+* Coverage Angle: Production
+* Industry Importance: Extremely High
+]
+
+🔑 KEYWORDS DUMP for Topic 3A:
+[ESP_LOG, Core Dump, Heap Trace, Heap Caps, Runtime Metrics, Latency, Watchdog, Performance Counters, Memory Leak, Field Diagnostics, Remote Logging, Crash Dump]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3A:
+
+* Testing/Offline Phase: Developer `ESP_LOG` aur Heap analysis tools se memory leaks ko detect aur isolate karta hai.
+* Fixing/Iteration Phase: Debugging tools (Watchdog analysis, Core dumps) use karke firmware crash ka exact root cause dhoonda jata hai.
+* Live Production Phase: Customer bug report karta hai -> Device remotely logs bhejta hai -> Core Dump generate hota hai -> Crash Analysis -> Root Cause Found -> OTA Patch Released.
 
 --4--Supplemental Lessons--
 Topic 4: C Coding Style Guidelines
