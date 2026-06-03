@@ -447,6 +447,8 @@ Sections: 1 | Topics: 5 | Subtopics: 29
 
 ==================================================================================
 
+# Section 3A: Professional Embedded Development Workflow (Eclipse)
+
 =====Section 3A (NEW): Professional Embedded Development Workflow=====
 Speaker industry-standard workflow, source control, aur testing strategies explain karta hai jo real-world teams use karti hain.
 
@@ -829,6 +831,10 @@ Sections: 1 | Topics: 5 | Subtopics: 22
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+==================================================================================
+
+# Section 6: Advanced Industrial Protocols (UART, SPI, RS-485)
+
 =====Section 6 (NEW): Advanced Industrial Protocols (UART, SPI, RS-485)=====
 Speaker is section mein real-world industrial hardware communication ke liye UART (for GSM/GPS/RS-485) aur SPI (for high-speed data/displays) ka deep implementation explain karta hai.
 
@@ -879,11 +885,7 @@ Subtopics: SPI Bus Initialization, Device Handle Configuration, MOSI/MISO/CLK Pi
 
 ==================================================================================
 
-# Section 6: Course Source Code---NOt of use 
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
 
 # Section 7: RGB Application Status LED
 
@@ -3698,6 +3700,10 @@ Subtopics: Power Domains, Always-On Domain, Switchable Domain, Sensor Power Cont
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+==================================================================================
+
+# Section 24: (NEW): ESP32-CAM Module & Video Streaming
+
 =====Section 24 (NEW): ESP32-CAM Module & Video Streaming=====
 Speaker popular ESP32-CAM (AI-Thinker) hardware board introduce karta hai aur vision capabilities, I2S camera interface, aur web-based video streaming implement karta hai.
 
@@ -3744,6 +3750,10 @@ Subtopics: MJPEG Format, Multipart HTTP Response, URI Handler Setup, Frame Buffe
 * Live Production Phase: User IP address open karta hai aur use real-time smooth video (MJPEG stream) dikhai deti hai. Optional integration mein ESP-WHO framework use karke frames par on-the-fly face detection bounding boxes draw kiye jaate hain.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 25: (NEW): ESP32 Wi-Fi Pentesting & Ethical Hacking
 
 =====Section 25 (NEW): ESP32 Wi-Fi Pentesting & Ethical Hacking=====
 Speaker ESP32 ke Wi-Fi radio ka low-level access use karke network auditing, packet sniffing aur 802.11 frame manipulation explain karta hai.
@@ -3792,6 +3802,10 @@ Subtopics: Frame Injection API, Deauthentication Frames, BSSID Spoofing, Beacon 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+==================================================================================
+
+# Section 26: (NEW): TinyML (Edge Computing & Edge Intelligence)
+
 =====Section 26 (NEW): TinyML (Edge Computing & Edge Intelligence)=====
 Speaker is section mein ESP32 ko ek "Smart Edge Device" banane ke concepts cover karta hai, jahan cloud par raw data bhejney ke bajaye device khud locally Machine Learning (ML) models run karke decision leta hai.
 
@@ -3838,6 +3852,10 @@ Subtopics: IMU Sensor Interfacing, Feature Extraction, Inference Execution, Trig
 * Live Production Phase: Industrial motor ke upar laga ESP32 continuously vibrations read karta hai. TFLite model locally data analyze karta hai. Jaise hi usko lagta hai ki motor ka bearing kharab hone wala hai (anomaly detected), woh cloud ko ek chota MQTT alert bhej deta hai—saving gigabytes of raw data transfer!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 27: (NEW): Advanced Industrial Networking (LoRaWAN & CAN Bus)
 
 =====Section 27 (NEW): Advanced Industrial Networking (LoRaWAN & CAN Bus)=====
 Speaker Wi-Fi aur BLE ki range/industry limitations ko overcome karne ke liye LPWAN (LoRaWAN) aur automotive standard (CAN Bus / TWAI) ka implementation dikhata hai.
@@ -3886,6 +3904,10 @@ Subtopics: ESP32 Built-in TWAI Controller, CAN Transceiver Hardware, Message Fra
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+==================================================================================
+
+# Section 28: (NEW): Enterprise Industrial Protocols (OPC UA)
+
 =====Section 28 (NEW): Enterprise Industrial Protocols (OPC UA)=====
 Speaker Modern Industry 4.0 factories ke liye SCADA aur PLC systems se securely baat karne ke liye OPC UA protocol ko ESP32 par implement karna sikhata hai.
 
@@ -3932,3 +3954,5 @@ Subtopics: Server Initialization, Variable Node Creation, Real-time Sensor Data 
 * Live Production Phase: ESP32 ek full-fledged OPC UA Server ban jata hai port 4840 par. Factory manager apne computer par SCADA software ya "UaExpert" client open karta hai, ESP32 ki IP IP par connect karta hai, aur structured object-oriented data browse karta hai bina kisi custom backend API ke.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
