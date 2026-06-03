@@ -253,7 +253,6 @@
                 print-color-adjust: exact !important;
                 min-height: 100vh;
                 width: 100%;
-                position: absolute; top: 0; left: 0;
                 margin: 0; padding: 0;
             }
 
@@ -343,7 +342,7 @@
                             highlighted = hljs.highlightAuto(safeCode).value;
                         }
                         
-                        return \`
+                        return `
                         <pre class="mac-window">
                             <div class="code-header">
                                 <div class="window-controls">
@@ -353,8 +352,8 @@
                                 </div>
                                 <button class="copy-btn">Copy</button>
                             </div>
-                            <code class="hljs language-\${language || 'plaintext'}">\${highlighted}</code>
-                        </pre>\`;
+                            <code class="hljs language-${language || 'plaintext'}">${highlighted}</code>
+                        </pre>`;
                     };
                     
                     const tocItems = [];
@@ -389,14 +388,14 @@
                          }
                          
                          if (isModule) {
-                             return \`<h\${level} class="module-section" id="\${id}">\${cleanText}</h\${level}>\`;
+                             return `<h${level} class="module-section" id="${id}">${cleanText}</h${level}>`;
                          }
                          
                          if (isTopic) {
-                             return \`<h2 class="topic-section" id="\${id}">\${cleanText}</h2>\`;
+                             return `<h2 class="topic-section" id="${id}">${cleanText}</h2>`;
                          }
                          
-                         return \`<h\${level} id="\${id}">\${cleanText}</h\${level}>\`;
+                         return `<h${level} id="${id}">${cleanText}</h${level}>`;
                     };
 
                     // 3. Render
@@ -405,7 +404,7 @@
                     // Render TOC
                     toc.innerHTML = tocItems.map(item => {
                         const padding = (item.level - 1) * 1;
-                        return \`<a href="#\${item.id}" style="padding-left: \${padding}rem">\${item.text}</a>\`;
+                        return `<a href="#${item.id}" style="padding-left: ${padding}rem">${item.text}</a>`;
                     }).join('');
                     
                     // Add copy functionality

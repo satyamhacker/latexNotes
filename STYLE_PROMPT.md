@@ -214,7 +214,6 @@ blockquote {
         print-color-adjust: exact !important;
         min-height: 100vh;
         width: 100%;
-        position: absolute; top: 0; left: 0;
         margin: 0; padding: 0;
     }
 
