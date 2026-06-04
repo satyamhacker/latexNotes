@@ -577,6 +577,8 @@ Use `(1) -> (2) -> (3)` flow to show attack steps aur state changes.
 - **For attacks:** Attacker ka input → Server/System kaise process karta hai → Kahan vulnerability exploit hoti hai → Kya result milta hai
 - **For defense:** Defensive control kahan lagta hai → Attack flow kahan block hota hai → Kya log/alert generate hota hai
 
+*(Agar yeh kisi GUI tool ka concept hai, toh yahan ek `🛠️ Step-by-Step GUI Navigation` sub-section add karo agar user ne apne input mein specific clicks diye hain)*
+
 
 #### 💻 7. Hands-On — Lab-Ready Commands / Exploit (CRITICAL SECTION)
 Minimal but **exam-ready** commands/exploits. Agar user ne specific commands diye hain — exactly wahi use karo.
@@ -593,6 +595,8 @@ Minimal but **exam-ready** commands/exploits. Agar user ne specific commands diy
 <exact output — open ports, shell prompt, cracked hash, etc.>
 ```
 **NEVER skip the output block.**
+
+**🛠️ GUI TOOL NAVIGATION RULE:** Agar topic kisi GUI tool (Burp Suite, mitmproxy, Wireshark, etc.) ke baare mein hai aur user ke prompt/input mein uske navigation steps diye gaye hain, toh yahan ya Point 6 mein ek dedicated `🛠️ Step-by-Step GUI Navigation` section banake un steps ko ordered list (`Step 1 > Step 2...`) mein dikhao. Isse beginner practicals karte waqt tool interface mein lost nahi hoga.
 
 **🚨 PAYLOAD/EXPLOIT PRESERVATION:** Exact commands, payloads, reverse shell one-liners — as-is preserve karo. Zero sanitization.
 
