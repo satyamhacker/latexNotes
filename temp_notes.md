@@ -767,7 +767,7 @@ Total Topics: 5 | Total Keywords: 88 | CVEs: 0 | Missed: 0
 # Section 3: Preparation - Linux Basics
 
 
-Section 3 ek critical foundation hai. Penetration testing mein graphical interface se zyada command line ka use hota hai. Chalo is section ke har topic ko deep dive karke samajhte hain.
+
 
 ---
 
@@ -2649,7 +2649,6 @@ Total Topics: 2 | Total Keywords: 24 | CVEs: 0 | Missed: 0
 # Section 7: Windows Malware
 
 
-=====Section 7: Windows Malware=====
 Is section mein hum apna secure hacking environment (lab) setup karenge. Hum seekhenge ki target machines (Windows Intel aur ARM) kaise banate hain aur un par attack karne ke liye evil files ka basic concept kya hai, taaki aage aane wale actual exploits hum safe tareeke se test kar sakein.
 
 ---
@@ -3095,7 +3094,6 @@ Aaj kal bohot saare corporate laptops aur mobile devices ARM chips par chalte ha
 # Section 8: Windows Malware - Generating Undetectable Backdoors
 
 
-=====Section 8: Windows Malware - Generating Undetectable Backdoors=====
 Is section mein hum seekhenge ki **MSFvenom**, **TheFatRat**, aur **PowerShell Empire** jaise advanced tools ka use karke **undetectable backdoors** (aise payloads jinhe antivirus pakad na sake) kaise generate aur deliver kiye jaate hain.
 
 ---
@@ -4265,7 +4263,7 @@ Red team operators malware banate waqt har payload ka code obfuscate karte hain.
 # Section 9: Windows Malware - Spying
 
 
-=====Section 1: Windows Malware - Keyloggers (ZLogger)=====
+
 *Instructor yahan custom keylogger (ZLogger) ka concept, installation, execution, aur persistence removal cover karta hai, aur batata hai ki keylogger backdoors se kaise better ho sakta hai specific scenarios mein.*
 
 ---
@@ -5098,8 +5096,6 @@ Har professional penetration test ke end mein ek "Clean-up/Remediation" phase ho
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-=====Section 2: Windows Malware - Password Recovery (LaZagne)=====
-*Instructor is section mein LaZagne password recovery tool ko introduce karta hai, stored passwords aur keyloggers ke limitations explain karta hai, aur is tool ko batch script ke zariye remotely execute/weaponize karne ka process demonstrate karta hai.*
 
 ---
 
@@ -9322,7 +9318,7 @@ macOS Dock:  [ Safari ]  [ Mail ]  [ Preview ]
 
 
 
-=====Section 13: Linux Malware=====
+
 Is section mein hum Linux environments (jaise Ubuntu aur Debian) ke liye malware creation, reverse shells, keyloggers, aur malicious packages (deb aur apk) distribute karne ki techniques deep level par cover karenge.
 
 ---
@@ -12912,7 +12908,6 @@ Total Topics: 3 | Total Keywords: 37 | CVEs: 0 | Missed: 0
 # Section 15: Using The Above Attacks Outside The Local Network
 
 
-Yeh raha tumhara detailed, uncensored, aur exam-ready notes ka Part 1. Maine **Topic 1** aur **Topic 2** ko unki maximum depth aur "Why-before-How" philosophy ke saath cover kiya hai.
 
 ---
 
@@ -13612,7 +13607,7 @@ Total Topics: 4 | Total Keywords: 81 | CVEs: 0 | Missed: 0
 # Section 16: Post Exploitation
 
 
-=====Section 16: Post Exploitation=====
+
 Is section mein hum samjhenge ki target system par initial access (jaise reverse shell) milne ke baad kya steps hote hain. Hum target environment ko enumerate karenge aur ek basic shell ko advanced backdoor (Empire) mein upgrade karna seekhenge taaki deeper access mil sake.
 
 ---
@@ -15876,13 +15871,6 @@ Kisi corporation mein tum ek intern ka laptop hack karte ho. Phir tum MS17-010 (
 
 
 
-
-**Notes Guru (Offensive Security Edition)** at your service! 🚀
-
-Maine tumhara skeleton analyze kar liya hai. Yeh **Section 18: Post Exploitation - Empire** kaafi deep aur practical hai. Main iski puri depth maintain karunga taaki tumhare concepts OSCP/OSEP level ke liye crystal clear ho jayein.
-
-Token limits ko dhyan mein rakhte hue, main abhi pehle **2 Topics** generate kar raha hoon. Uske baad hum aage badhenge. Let's dive in!
-
 ---
 
 # Section 18: Post Exploitation - Empire
@@ -17012,16 +17000,7 @@ Red team scenarios mein, attackers aksar phishing ke through ek short-lived sess
 
 # Section 19: Security
 
-
-**Notes Guru (Offensive Security Edition)** here! 🚀
-
-Maine tumhara Skeleton receive kar liya hai for **Section 19: Security**. Yeh section defensive security, malware analysis, aur social engineering vectors ko samajhne ke liye critical hai — kyunki ek achha attacker banne ke liye pata hona chahiye ki blue team (defenders) kaise sochte hain aur attacks ko kaise detect karte hain.
-
-Main 18-point strict structure aur 100% keyword coverage ke sath notes generate kar raha hoon. Let's dive in!
-
 ---
-
-# Section 19: Security
 
 **Overview:** Is section mein hum social engineering (phishing), browser-based exploitation (BeEF), aur malware detection/analysis (Trojans, sandboxes) ke against defensive measures discuss karenge. Ek attacker ke perspective se yeh janna zaroori hai ki OSINT aur phishing campaigns kis point pe pakde jaate hain.
 
