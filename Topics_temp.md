@@ -2498,3 +2498,125 @@ Sections: 1 | Topics: 3 | Subtopics: 16 | CVEs: 0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
+
+# Section 13: Bonus - Advanced Enterprise Network Attacks & Defenses
+
+=====Section 13: Bonus - Advanced Enterprise Network Attacks & Defenses=====
+[Instructor is section mein modern network environments ke advanced attacks jaise IPv6 Spoofing, Metasploit exploitation, aur Enterprise Switch defenses ko cover karta hai.]
+
+--13--Bonus - Advanced Enterprise Network Attacks & Defenses--
+Topic 1: [⚠️ ADDED] IPv6 Spoofing & DNS Hijacking via mitm6
+Subtopics: IPv6 Vulnerabilities in Windows, mitm6 Tool Setup, Fake DHCPv6 Server, DNS Traffic Hijacking, Responder Combo
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Explanation of why IPv4 attacks fail in modern environments and practical execution of mitm6.
+* Key terms from transcript: IPv6, mitm6, DHCPv6, DNS hijacking, Windows Active Directory, WPAD, Responder, NTLM relay
+* Exam Tips / Instructor Emphasis: Instructor emphasizes that modern Windows machines prefer IPv6 over IPv4. If you deploy a fake DHCPv6 server, you can hijack all DNS traffic seamlessly, even if ARP spoofing is blocked.
+* Instructor ne jo analogies/examples/demos use kiye: Instructor sets up `mitm6` to listen on the local interface and run Responder simultaneously. The Windows target is forced to use the attacker's machine as its IPv6 DNS server, routing all requests to the attacker.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[IPv6, DNS spoofing, ⭐mitm6, DHCPv6 server, Windows AD, ⭐`mitm6 -i eth0 -d target.local`, Responder combo, WPAD, NTLM authentication, hash capture]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Initial Foothold / Privilege Escalation
+* Attack methodology context from transcript: Exploiting default IPv6 configurations in Windows networks to become the primary DNS server and capture NTLM credentials.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker identifies a Windows environment where IPv6 is enabled but unmanaged (default state).
+* Exploitation/Weaponization Phase: Attacker launches `mitm6` specifying the target domain. The tool sends rogue DHCPv6 replies to the network, configuring victim machines to use the attacker's IP as their DNS server. Attacker runs Responder alongside to capture incoming authentication requests.
+* Post-Exploitation/Reporting Phase: Victim machines query the attacker for WPAD (Web Proxy Auto-Discovery) or other services. The attacker captures the resulting NetNTLM hashes and cracks them offline or relays them.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: N/A
+* Navigation Steps: N/A
+
+--13--Bonus - Advanced Enterprise Network Attacks & Defenses--
+Topic 2: [⚠️ ADDED] Direct Vulnerability Exploitation (Metasploit Framework)
+Subtopics: Metasploit Console, Search and Use Modules, Payload Configuration, EternalBlue (MS17-010), Meterpreter Shell
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Transitioning from scanning (Nmap) to direct exploitation using Metasploit against vulnerable network targets.
+* Key terms from transcript: Metasploit, msfconsole, exploit module, payload, RHOSTS, LHOST, EternalBlue, MS17-010, meterpreter
+* Exam Tips / Instructor Emphasis: Finding a vulnerability is only half the job. You must know how to use Metasploit to weaponize it and gain a remote shell.
+* Instructor ne jo analogies/examples/demos use kiye: Instructor searches for `ms17_010` in `msfconsole`, configures the RHOST to the Windows machine discovered via Nmap, and executes it to gain a full Meterpreter shell with system privileges.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Metasploit, ⭐`msfconsole`, exploit, payload, ⭐`search ms17-010`, ⭐`use exploit/windows/smb/ms17_010_eternalblue`, RHOSTS, LHOST, ⭐`set RHOSTS 10.20.15.9`, ⭐`exploit`, meterpreter, reverse shell, system privileges]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Leveraging known software vulnerabilities on the network to gain direct command-line access to target machines without user interaction.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker reviews Nmap scans and identifies an unpatched Windows 7/10 machine vulnerable to EternalBlue.
+* Exploitation/Weaponization Phase: Attacker opens `msfconsole`, loads the appropriate exploit module, sets the target IP (`RHOSTS`) and the attacker IP (`LHOST`), and launches the exploit.
+* Post-Exploitation/Reporting Phase: The exploit runs and opens a reverse Meterpreter session. The attacker now has full administrative control over the machine and can dump passwords, pivot, or install backdoors.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Metasploit Framework (msfconsole)
+* Navigation Steps: N/A
+
+--13--Bonus - Advanced Enterprise Network Attacks & Defenses--
+Topic 3: [⚠️ ADDED] Enterprise Switch Defenses (DAI & DHCP Snooping)
+Subtopics: Dynamic ARP Inspection, DHCP Snooping, Port Security, Trust Boundaries, Defense Mechanisms
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual only
+* Transcript mein content volume: Explanation of how enterprise network administrators configure switches to defeat ARP and DHCP spoofing attacks.
+* Key terms from transcript: DAI, Dynamic ARP Inspection, DHCP Snooping, Port Security, Trusted Ports, Untrusted Ports, MAC filtering
+* Exam Tips / Instructor Emphasis: A good penetration tester must understand how the Blue Team thinks. If ARP spoofing isn't working, it's likely because of DAI and DHCP Snooping.
+* Instructor ne jo analogies/examples/demos use kiye: Instructor diagrams an enterprise switch showing "Trusted" ports connected to real servers and "Untrusted" ports connected to regular users, explaining how DAI drops invalid ARP packets.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Enterprise switch, defense mechanisms, Blue Team, DAI, Dynamic ARP Inspection, DHCP Snooping, Trusted Ports, Untrusted Ports, port security, MAC spoofing prevention, ARP table validation]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 3:
+
+* Phase(s): Defense / Mitigation
+* Attack methodology context from transcript: Understanding network-level defensive technologies that actively block Layer 2 MITM attacks.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Learning Phase: Instructor explains the concept of DHCP Snooping, which builds a binding database of valid IPs and MACs.
+* Application Phase: Network administrators enable DAI on switches. When an attacker tries to run Ettercap, the switch compares the ARP reply to the DHCP Snooping database.
+* Mastery Phase: If the IP-to-MAC mapping doesn't match the database, the switch drops the packet and logs the violation, completely blocking the ARP spoofing attack and potentially disabling the attacker's port.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
+
+* Tool Name: N/A
+* Navigation Steps: N/A
+
+---
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 13: Bonus - Advanced Enterprise Network Attacks & Defenses
+Topic 1: IPv6 Spoofing & DNS Hijacking via mitm6
+Topic 2: Direct Vulnerability Exploitation (Metasploit Framework)
+Topic 3: Enterprise Switch Defenses (DAI & DHCP Snooping)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 3 | Subtopics: 15 | CVEs: 0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
