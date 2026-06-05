@@ -336,9 +336,6 @@
                 print-color-adjust: exact !important;
                 min-height: 100vh;
                 width: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
                 margin: 0;
                 padding: 0
             }
@@ -357,14 +354,16 @@
                 color: #fff !important
             }
 
-            pre {
+            pre, pre.mac-window {
                 border: 1px solid #444;
-                page-break-inside: avoid
+                page-break-inside: avoid;
+                overflow: visible !important;
             }
 
             .sidebar,
             .copy-btn,
             .window-controls,
+            .code-header,
             #loader {
                 display: none !important
             }
