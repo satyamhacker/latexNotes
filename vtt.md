@@ -2920,7 +2920,7 @@ And like I said, don't worry about how to use Kali.
 00:09:19,980 --> 00:09:24,210
 I will cover that in details step by step as we go through the course.
 
-
+--vmware key --4J492-4AJ4J-480QC-081HK-A8KN4
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
