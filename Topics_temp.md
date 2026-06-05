@@ -862,6 +862,40 @@ Subtopics: Authentication DDoS Concept, MDK3 Tool, Fake Client Flooding, Forced 
 * Tool Name: (N/A)
 * Navigation Steps: (N/A)
 
+--5--Gaining Access - WPA & WPA2 Cracking - Exploiting WPS--
+Topic 6: [⚠️ ADDED] Offline WPS Cracking via Pixie Dust Attack
+Subtopics: Pixie Dust Concept, PRNG Flaws, Offline Brute Force, Pixiewps Tool, Reaver Integration
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Explanation of PRNG vulnerability + live practical execution
+* Key terms from transcript: Pixie dust, offline attack, PRNG, pseudo-random number generator, pixiewps, hashes, nonces, Reaver -K 1
+* Exam Tips / Instructor Emphasis: Instructor emphasizes that if a router is vulnerable to Pixie Dust, you do not need to wait hours for a 11,000 PIN brute-force. It computes the PIN offline in seconds.
+* Instructor ne jo analogies/examples/demos use kiye: Live demo using Reaver with the `-K 1` flag to capture the hashes and automatically pass them to `pixiewps` to crack the PIN in 2 seconds.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[Pixie dust attack, offline brute force, PRNG flaw, Ralink, Broadcom, Realtek, hashes, nonces, E-Hash1, E-Hash2, ⭐`pixiewps`, ⭐`reaver -i wlan0mon -b [BSSID] -K 1 -vvv`, instant cracking, WPS PIN]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 6:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Taking advantage of poor cryptographic implementations in router chipsets to calculate the WPS PIN offline instead of sending thousands of requests over the air.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Recon/Discovery Phase: Attacker uses `wash -i wlan0mon` to find WPS enabled networks.
+* Exploitation/Weaponization Phase: Attacker runs Reaver with the `-K 1` (Pixie loop) flag. Reaver initiates the transaction, captures the cryptographic hashes (E-Hash1, E-Hash2, E-Nonce, etc.) from the router, and then stops interacting with the router. It feeds this data locally to `pixiewps`, which cracks the PRNG locally on the CPU.
+* Post-Exploitation/Reporting Phase: The PIN is calculated instantly. Reaver then uses this correct PIN to ask the router for the plaintext WPA2 password.
+* Additional context: This completely bypasses the WPS lockouts discussed in earlier topics because only one attempt is sent to the router.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 6:
+
+* Tool Name: (N/A — CLI tool focus)
+* Navigation Steps: (N/A)
+
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
 
 📋 EXTRACTED IN THIS PHASE:
@@ -886,6 +920,40 @@ Sections: 1 | Topics: 5 | Subtopics: 23 | CVEs: 0
 
 =====Section 6: Gaining Access - WPA & WPA2 Cracking - Advanced Wordlist Attack=====
 [Instructor is section mein advanced WPA/WPA2 cracking techniques, piping commands, aur GPU-based Hashcat exploitation cover karta hai.]
+
+--6--Gaining Access - WPA & WPA2 Cracking - Advanced Wordlist Attack--
+Topic 0: [⚠️ ADDED] PMKID Attack (Clientless Network Cracking)
+Subtopics: PMKID Vulnerability, RSN IE, Clientless Handshake, hcxdumptool Capture, Format Conversion, Hashcat Module 22000
+
+[📊 SCOPE SIGNAL for Topic 0:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: New methodology replacing traditional deauth handshake capture
+* Key terms from transcript: PMKID, Roaming, RSN IE, Robust Security Network, hcxdumptool, hcxpcapngtool, Hashcat 22000, clientless
+* Exam Tips / Instructor Emphasis: This is the most modern Wi-Fi attack. You do NOT need a connected client to deauthenticate. You request the PMKID directly from the Access Point.
+* Instructor ne jo analogies/examples/demos use kiye: Instructor targets a completely empty WPA2 network, uses `hcxdumptool` to request the PMKID, converts it, and cracks it on GPU.
+]
+
+🔑 KEYWORDS DUMP for Topic 0:
+[PMKID, clientless attack, RSN IE, roaming features, 802.11i, ⭐`hcxdumptool -i wlan0mon -o pmkid.pcapng --enable_status=1`, ⭐`hcxpcapngtool -o hash.hc22000 pmkid.pcapng`, Hashcat, hash mode 22000, ⭐`hashcat -m 22000 hash.hc22000 wordlist.txt`]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 0:
+
+* Phase(s): Initial Foothold / Exploitation
+* Attack methodology context from transcript: A modern alternative to standard 4-way handshake capture that exploits the AP's roaming features.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 0:
+
+* Recon/Discovery Phase: Attacker identifies a WPA2/WPA3 network using modern roaming features. No connected clients are found.
+* Exploitation/Weaponization Phase: Attacker uses `hcxdumptool` to actively request the Robust Security Network Information Element (RSN IE) from the router. The router replies with a frame containing the PMKID (which is derived from the Wi-Fi password and MAC addresses).
+* Post-Exploitation/Reporting Phase: The captured `.pcapng` file is converted using `hcxpcapngtool` into a Hashcat readable format (`.hc22000`). The attacker then runs Hashcat (`-m 22000`) with a wordlist to crack the password offline.
+* Additional context: Extremely stealthy as it doesn't require sending deauth packets to legitimate users.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 0:
+
+* Tool Name: (N/A)
+* Navigation Steps: (N/A)
 
 --6--Gaining Access - WPA & WPA2 Cracking - Advanced Wordlist Attack--
 Topic 1: Session Management with John the Ripper
@@ -1438,6 +1506,40 @@ Subtopics: Post Connection Attacks, Wired vs Wireless Targets, Manual Attack Exe
 * Tool Name: N/A
 * Navigation Steps: (N/A — transcript mein koi GUI tool navigation nahi tha)
 
+--9--Post Connection Attacks--
+Topic 1.5: [⚠️ ADDED] Internal Network Reconnaissance via Nmap
+Subtopics: Subnet Identification, Ping Sweeping, Port Scanning, Service Version Detection, OS Fingerprinting
+
+[📊 SCOPE SIGNAL for Topic 1.5:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Command line execution of Nmap phases on the local subnet
+* Key terms from transcript: Nmap, network mapper, ping sweep, port scanning, service enumeration, OS detection, subnet mask, CIDR
+* Exam Tips / Instructor Emphasis: Never start attacking blindly. Always build a map of your target network first to know where the vulnerable devices (like servers or unpatched Windows machines) are located.
+* Instructor ne jo analogies/examples/demos use kiye: Instructor uses `ip route` to find the subnet (`10.20.15.0/24`), runs a fast ping sweep, and then runs an aggressive scan on a discovered Windows IP to find an open SMB port.
+]
+
+🔑 KEYWORDS DUMP for Topic 1.5:
+[Nmap, network reconnaissance, subnet, CIDR, `/24`, ping sweep, ⭐`nmap -sn 10.20.15.0/24`, open ports, service version, OS fingerprinting, aggressive scan, ⭐`nmap -A -p- 10.20.15.9`, default scripts, ⭐`nmap -sC -sV 10.20.15.9`, SMB, port 445, port 80, stealth scan]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1.5:
+
+* Phase(s): Reconnaissance / Scanning & Enumeration
+* Attack methodology context from transcript: The critical bridge between gaining Wi-Fi access and launching attacks against internal network computers.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1.5:
+
+* Recon/Discovery Phase: Attacker connects to the network, checks their IP and subnet mask.
+* Exploitation/Weaponization Phase: Attacker runs `nmap -sn [subnet]` to list all live hosts without port scanning (fast discovery). Then, the attacker selects a high-value target (like a server or workstation) and runs `nmap -sC -sV [IP]` to enumerate exact software versions and open ports.
+* Post-Exploitation/Reporting Phase: (N/A)
+* Additional context: This maps the attack surface before deciding whether to use ARP spoofing or direct exploitation.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1.5:
+
+* Tool Name: (N/A)
+* Navigation Steps: (N/A)
+
 Topic 2: Ettercap Introduction & Configuration File
 Subtopics: Ettercap Framework, Ettercap vs MITMf, etter.conf Modification, IP Tables Configuration, Privilege Variables
 
@@ -1635,6 +1737,40 @@ Subtopics: Traditional ARP Spoofing Flow, ARP Table Monitoring, ARP Watch Bypass
 
 * Tool Name: Wireshark
 * Navigation Steps: Click on Eth0 to start sniffing > Set filter to http > Scroll down to look for a POST request > Click the POST request > Go to the HTML form section > Extract captured username and password
+
+--9--Post Connection Attacks--
+Topic 8: [⚠️ ADDED] Enterprise MITM: LLMNR/NBT-NS Poisoning via Responder
+Subtopics: LLMNR/NBT-NS Protocols, Windows Name Resolution Flaws, Responder Tool Configuration, Capturing NetNTLMv2 Hashes
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Explanation of Windows broadcast protocols and practical hash capture on a local network
+* Key terms from transcript: LLMNR, NBT-NS, Windows Active Directory, Responder, Python, NetNTLMv2, SMB, Hashcat
+* Exam Tips / Instructor Emphasis: In corporate Windows environments, ARP spoofing is often blocked. LLMNR poisoning is the most reliable way to get initial credentials on an internal network.
+* Instructor ne jo analogies/examples/demos use kiye: Instructor starts Responder on `eth0`. A Windows victim types a wrong network share address (e.g., `\\fileservr`). Responder intercepts the broadcast, claims to be `fileservr`, and forces the Windows machine to send its NetNTLMv2 hash, which is captured in Kali.
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[LLMNR, Link-Local Multicast Name Resolution, NBT-NS, NetBIOS, broadcast traffic, typo resolution, ⭐Responder, `Responder.py`, ⭐`responder -I eth0 -dwv`, SMB server, NetNTLMv2, hash capture, offline cracking, Hashcat, mode 5600, ⭐`hashcat -m 5600 hash.txt rockyou.txt`]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 8:
+
+* Phase(s): Initial Foothold / Privilege Escalation
+* Attack methodology context from transcript: Exploiting legacy Windows name resolution protocols to steal user hashes passively without needing to aggressively ARP spoof the router.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Recon/Discovery Phase: Attacker connects to a Windows-heavy network (e.g., Active Directory environment).
+* Exploitation/Weaponization Phase: Attacker starts `Responder` on their network interface. It listens for LLMNR/NBT-NS broadcast requests (which happen when a user mistypes a server name or a script tries to reach a missing host).
+* Post-Exploitation/Reporting Phase: Responder replies to the broadcast, spoofing the requested server, and prompts the victim machine for authentication. The victim automatically sends its NetNTLMv2 hash. The attacker saves this hash and cracks it offline using Hashcat to obtain the plain-text Active Directory password.
+* Additional context: Unlike ARP spoofing, this does not disrupt network traffic or cause DoS, making it incredibly stealthy.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 8:
+
+* Tool Name: (N/A)
+* Navigation Steps: (N/A)
 
 ---
 
