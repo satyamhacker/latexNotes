@@ -3126,6 +3126,40 @@ Subtopics: Vishing Scenarios, Caller ID Spoofing, SMiShing, Impersonating IT Sup
 * Tool Name: (N/A)
 * Navigation Steps: (N/A)
 
+--14.2--Physical Delivery Methods & Hardware Payloads--
+Topic 3: AI-Driven Vishing & Identity Cloning (Deepfakes)
+Subtopics: AI Voice Cloning Frameworks, ElevenLabs API, Generative Pretexting, Real-Time Audio Deepfakes, Financial Wire-Transfer Fraud Scenarios
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Strategic Overview
+* Transcript mein content volume: [Modern Elite Extension] Real-world case study focus
+* Key terms from transcript: AI voice cloning, generative phishing, deepfake, audio synthesis, pretexting, emergency authority, biometric impersonation
+* Exam Tips / Instructor Emphasis: Instructor heavily emphasizes that biometric trust (voice/face) is psychological gold. "People will question an email, but they rarely question their father's or CEO's actual voice on a live call."
+* Instructor ne jo analogies/examples/demos use kiye: Ek corporate scenario jahan target employee ko fake supplier email (Section 14) bheja gaya, aur turant baad CEO ki cloned voice ka phone call aaya validation ke liye, jisse validation bypass ho gayi.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[AI Voice Cloning, Deepfakes, Audio Synthesis, Impersonation, ElevenLabs, Generative AI, Pretexting, Urgent Mandate, Social Engineering Framework, Wire Fraud, Identity Theft, Human Firewall Bypass]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 3:
+
+* Phase(s): Delivery / Human Exploitation
+* Attack methodology context from transcript: Audio-visual deception ka use karke targets ke emotional triggers (fear, urgency) ko exploit karna taaki multi-layered validation checks fail ho sakein.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Recon/Discovery Phase: Attacker target company ke executives ka social media (YouTube/LinkedIn videos) se 1-minute ka clean audio sample extract karta hai data source ke liye.
+* Exploitation/Weaponization Phase: Attacker voice cloning model training tool se executive ki exact voice profile compile karta hai. Spoofed VOIP setup se employee ko call kiya jata hai audio streams playback ke through.
+* Post-Exploitation/Reporting Phase: (N/A)
+* Additional context: Traditional authorization procedures (like dual-signature overrides) are easily bypassed when the manager "orally" commands execution.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
+
+* Tool Name: AI Voice Cloning Suite (Conceptual interface)
+* Navigation Steps: Step 1: Upload 60-second executive audio sample > Step 2: Generate test strings to verify pitch and baseline jitter > Step 3: Input the custom emergency text script > Step 4: Export high-fidelity malicious `.wav` payload for phone execution.
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
@@ -3696,6 +3730,40 @@ Subtopics: OS X Meterpreter Access, OS X Local Persistence Module, Persistence M
 
 🛠️ TOOL NAVIGATION SIGNAL for Topic 8:
 (N/A — transcript mein koi GUI tool navigation nahi tha)
+
+--17--Post Exploitation - Meterpreter--
+Topic 9: Windows Local Credential Dumping & Hash Extraction
+Subtopics: LSASS Process Architecture, Security Account Manager (SAM) Registry, Meterpreter Kiwi Extension, Mimikatz Commands, Dumping Plaintext Credentials, Extracting Password Hashes
+
+[📊 SCOPE SIGNAL for Topic 9:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Live Windows memory manipulation demo
+* Key terms from transcript: LSASS memory dump, SAM registry, Kiwi extension, Mimikatz, lsa_dump, creds_all, password hashes, NTLM hash, local administrator
+* Exam Tips / Instructor Emphasis: Instructor strongly stresses ki modern Windows default mein plaintext password store nahi karta, isliye LSASS process memory space ko read karne ke liye high-privilege (SYSTEM) access mandatory hai.
+* Instructor ne jo analogies/examples/demos use kiye: Windows 10 VM pe meterpreter session ko `getsystem` kiya, `load kiwi` command run ki, aur memory se directly local user ke plain-text credentials aur NTLM hashes live screen par extract karke dikhaye.
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[LSASS process, `lsass.exe`, SAM database, registry hive, NTLM hash, ⭐Kiwi, ⭐Mimikatz, `creds_all`, `lsa_dump_secrets`, local secrets, cleartext passwords, SYSTEM privileges, password extraction, credential harvesting]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 9:
+
+* Phase(s): Post-Exploitation & Lateral Movement / Credential Dumping
+* Attack methodology context from transcript: Remote system ke OS memory and persistent registry spaces se stored validation assets (hashes/passwords) dump karna taaki infrastructure mein internal lateral movement ki ja sake.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+
+* Recon/Discovery Phase: (N/A)
+* Exploitation/Weaponization Phase: (N/A)
+* Post-Exploitation/Reporting Phase: Low-privilege shell aane ke baad attacker local exploits use karke local admin ya local SYSTEM privileges gain karta hai. SYSTEM level par aakar Meterpreter console mein Kiwi tool activate kiya jata hai memory manipulation rules trigger karne ke liye. Pure credentials report text format mein exfiltrate kar li jaati hai domain dominance architecture exploit karne ke liye.
+* Additional context: None.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 9:
+
+* Tool Name: Metasploit Framework (Meterpreter interface)
+* Navigation Steps: Step 1: Open active high-privilege Windows session > Step 2: Run `getsystem` command > Step 3: Type `load kiwi` > Step 4: Run `creds_all` to dump memory strings > Step 5: Run `lsa_dump_sam` to extract persistent hashes.
 
 ---
 
