@@ -1,422 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Network Hacking Continued</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&family=Outfit:wght@700;800;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark-reasonable.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Highlight.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark-reasonable.min.css">
+    
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
+            /* Color Palette - Deep Dark Theme */
             --bg-primary: #0f1115;
             --bg-secondary: #161b22;
-            --text-primary: #fff;
+            --text-primary: #ffffff;
             --text-secondary: #e6edf3;
             --accent-blue: #58a6ff;
             --accent-gradient: linear-gradient(135deg, #61dafb 0%, #4facfe 100%);
-            --border-color: #30363d
+            --border-color: #30363d;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-primary);
             color: var(--text-primary);
-            font-family: Inter, sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.7;
-            overflow-x: hidden
+            overflow-x: hidden;
         }
 
         #loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--accent-blue);
-            z-index: 9999
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-primary); display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: var(--accent-blue); z-index: 9999;
         }
 
-        .print-wrapper {
-            background-color: var(--bg-primary);
-            min-height: 100vh
-        }
-
-        .layout {
-            display: flex;
-            min-height: 100vh
-        }
+        .print-wrapper { background-color: var(--bg-primary); min-height: 100vh; }
+        .layout { display: flex; min-height: 100vh; }
 
         .sidebar {
-            width: 280px;
-            background: var(--bg-secondary);
-            border-right: 1px solid var(--border-color);
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            padding: 2rem 1rem;
-            z-index: 100
+            width: 280px; background: var(--bg-secondary); border-right: 1px solid var(--border-color);
+            position: fixed; height: 100vh; overflow-y: auto; padding: 2rem 1rem; z-index: 100;
         }
-
-        .sidebar h2 {
-            font-size: 1.2rem;
-            color: var(--accent-blue);
-            margin-bottom: 1rem;
-            font-weight: 600
-        }
-
-        .sidebar ul {
-            list-style: none
-        }
-
-        .sidebar li {
-            margin: .5rem 0
-        }
-
+        .sidebar h2 { font-size: 1.2rem; color: var(--accent-blue); margin-bottom: 1rem; font-weight: 600; }
+        .sidebar ul { list-style: none; }
+        .sidebar li { margin: .5rem 0; }
         .sidebar a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: .9rem;
-            transition: color .2s
+            color: var(--text-secondary); text-decoration: none; font-size: .9rem; transition: color .2s;
+            display: block; padding: 0.4rem 0.75rem; border-radius: 6px;
         }
+        .sidebar a:hover { background: rgba(88, 166, 255, 0.12); color: var(--accent-blue); }
 
-        .sidebar a:hover {
-            color: var(--accent-blue)
-        }
-
-        .main-content {
-            margin-left: 280px;
-            padding: 3rem 4rem;
-            max-width: 1200px;
-            width: 100%
-        }
+        .main-content { margin-left: 280px; padding: 3rem 4rem; max-width: 1200px; width: 100%; }
 
         h1 {
-            font-family: Outfit, sans-serif;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            border-bottom: 3px solid var(--border-color);
-            padding-bottom: 1rem
+            font-family: 'Outfit', sans-serif; background: var(--accent-gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            font-size: 3rem; font-weight: 900; margin-bottom: 1.5rem; border-bottom: 3px solid var(--border-color); padding-bottom: 1rem;
         }
-
+        
         h2 {
-            color: var(--text-primary);
-            font-size: 2rem;
-            font-weight: 700;
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: .5rem
+            color: var(--text-primary); font-size: 2rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color); padding-bottom: .5rem;
+        }
+        
+        /* Topic & Module Sections - Big Bold Blue */
+        h1.module-section, h3.topic-section {
+            font-family: 'Outfit', sans-serif; font-size: 2.5rem; font-weight: 800; color: #4facfe;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            border-left: 5px solid #4facfe; padding-left: 1rem; margin-top: 3rem; margin-bottom: 1.5rem; border-bottom: none;
         }
 
-        h2.topic-section,
-        h2.module-section {
-            font-family: Outfit, sans-serif;
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #4facfe;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            border-left: 5px solid #4facfe;
-            padding-left: 1rem;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            border-bottom: none
-        }
+        h3 { color: var(--text-secondary); font-size: 1.5rem; margin-top: 2rem; margin-bottom: .8rem; }
+        h4 { color: var(--text-secondary); font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: .6rem; }
+        p { margin: 1rem 0; color: var(--text-secondary); }
+        ul, ol { margin: 1rem 0 1rem 2rem; color: var(--text-secondary); }
+        li { margin: .5rem 0; }
+        
+        a { color: var(--accent-blue); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
+        a:hover { border-bottom-color: var(--accent-blue); }
 
-        h3 {
-            color: var(--text-secondary);
-            font-size: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: .8rem
-        }
-
-        h4 {
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            margin-top: 1.5rem;
-            margin-bottom: .6rem
-        }
-
-        p {
-            margin: 1rem 0;
-            color: var(--text-secondary)
-        }
-
-        ul,
-        ol {
-            margin: 1rem 0 1rem 2rem;
-            color: var(--text-secondary)
-        }
-
-        li {
-            margin: .5rem 0
-        }
-
-        a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color .2s
-        }
-
-        a:hover {
-            border-bottom-color: var(--accent-blue)
-        }
-
+        /* Mac-Style Code Blocks */
         pre.mac-window {
-            background: #0d1115;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
-            margin: 2rem 0;
-            overflow: hidden;
-            white-space: pre-wrap !important;
-            word-break: break-word !important;
-            overflow-x: hidden !important
+            background: #0d1115; border: 1px solid var(--border-color); border-radius: 8px; box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+            margin: 2rem 0; overflow: hidden; white-space: pre-wrap !important; word-break: break-word !important; overflow-x: hidden !important;
         }
-
         .code-header {
-            background: #161b22;
-            padding: 8px 15px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center
+            background: #161b22; padding: 8px 15px; border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between; align-items: center;
         }
-
-        .window-controls {
-            display: flex;
-            gap: 6px
-        }
-
-        .control {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: inline-block
-        }
-
-        .red {
-            background: #ff5f56
-        }
-
-        .yellow {
-            background: #ffbd2e
-        }
-
-        .green {
-            background: #27c93f
-        }
-
+        .window-controls { display: flex; gap: 6px; }
+        .control { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+        
         .copy-btn {
-            background: var(--accent-blue);
-            color: #fff;
-            border: none;
-            padding: 5px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: .85rem;
-            transition: opacity .2s
+            background: var(--accent-blue); color: #fff; border: none; padding: 5px 12px; border-radius: 5px; cursor: pointer; font-size: .85rem; transition: opacity .2s;
         }
+        .copy-btn:hover { opacity: .8; }
 
-        .copy-btn:hover {
-            opacity: .8
-        }
+        pre code { font-family: 'Fira Code', monospace; font-size: .9rem; display: block; padding: 1.5rem; overflow-x: auto; white-space: pre-wrap !important; word-wrap: break-word !important; background: 0 0; }
+        code { font-family: 'Fira Code', monospace; background: var(--bg-secondary); padding: .2rem .4rem; border-radius: 4px; font-size: .9em; color: #61dafb; }
 
-        pre code {
-            font-family: 'Fira Code', monospace;
-            font-size: .9rem;
-            display: block;
-            padding: 1.5rem;
-            overflow-x: auto;
-            white-space: pre-wrap !important;
-            word-wrap: break-word !important
-        }
-
-        code {
-            font-family: 'Fira Code', monospace;
-            background: var(--bg-secondary);
-            padding: .2rem .4rem;
-            border-radius: 4px;
-            font-size: .9em;
-            color: #61dafb
-        }
-
-        pre code {
-            background: 0 0;
-            padding: 0
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            overflow: hidden
-        }
-
-        th,
-        td {
-            padding: 1rem;
-            text-align: left;
-            border: 1px solid var(--border-color)
-        }
-
-        th {
-            background: #1c2128;
-            color: var(--accent-blue);
-            font-weight: 600
-        }
-
-        tr:hover {
-            background: rgba(88, 166, 255, .1)
-        }
+        table { width: 100%; border-collapse: collapse; margin: 2rem 0; background: var(--bg-secondary); border-radius: 8px; overflow: hidden; }
+        th, td { padding: 1rem; text-align: left; border: 1px solid var(--border-color); }
+        th { background: #1c2128; color: var(--accent-blue); font-weight: 600; }
+        tr:hover { background: rgba(88, 166, 255, .1); }
 
         blockquote {
-            border-left: 4px solid var(--accent-blue);
-            padding-left: 1rem;
-            margin: 1.5rem 0;
-            color: var(--text-secondary);
-            font-style: italic
+            border-left: 4px solid var(--accent-blue); background: rgba(88, 166, 255, 0.06); padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0; margin: 1.5rem 0; color: var(--text-secondary); font-style: italic;
         }
+        img { max-width: 100%; height: auto; border-radius: 8px; margin: 1.5rem 0; }
+        hr { border: none; border-top: 1px solid var(--border-color); margin: 2rem 0; }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin: 1.5rem 0
-        }
+        /* Print TOC styles (Hidden in browser) */
+        #print-toc-container { display: none; }
 
-        hr {
-            border: none;
-            border-top: 1px solid var(--border-color);
-            margin: 2rem 0
-        }
-
+        /* CRITICAL PRINT STYLES */
         @media print {
-            * {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                color-adjust: exact !important
-            }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+            body { margin: 0; padding: 0; background-color: #0f1115 !important; }
+            
+            .print-wrapper { background-color: #0f1115 !important; min-height: 100vh; width: 100%; margin: 0; padding: 0; }
+            
+            /* Force white text for readability */
+            .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th, blockquote { color: #ffffff !important; }
+            
+            /* Keep code blocks distinct & prevent breaking */
+            pre { border: 1px solid #444; page-break-inside: avoid; }
+            blockquote, table, img { page-break-inside: avoid; }
+            h1, h2, h3, h4, h5 { page-break-after: avoid; }
+            
+            /* Page breaks for major sections */
+            h1.module-section { page-break-before: always; }
+            
+            .sidebar, .copy-btn, .window-controls, #loader { display: none !important; }
+            .layout { display: block; }
+            .main-content { padding: 0 !important; margin: 0 auto; max-width: 100%; margin-left: 0 !important; }
+            
+            a { text-decoration: none !important; border-bottom: none !important; color: #58a6ff !important; }
 
-            body {
-                margin: 0;
-                padding: 0
-            }
-
-            .print-wrapper {
-                background-color: #0f1115 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                min-height: 100vh;
-                width: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                margin: 0;
-                padding: 0
-            }
-
-            .main-content,
-            p,
-            li,
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6,
-            td,
-            th {
-                color: #fff !important
-            }
-
-            pre {
-                border: 1px solid #444;
-                page-break-inside: avoid
-            }
-
-            .sidebar,
-            .copy-btn,
-            .window-controls,
-            #loader {
-                display: none !important
-            }
-
-            .layout {
-                display: block
-            }
-
-            .main-content {
-                padding: 2rem !important;
-                margin: 0 auto;
-                max-width: 100%
-            }
-
-            a {
-                text-decoration: none !important;
-                border-bottom: none !important
-            }
+            /* Show TOC only when printing */
+            #print-toc-container { display: block; page-break-after: always; margin-bottom: 2rem; padding: 2rem; }
+            #print-toc-container h1 { font-size: 2.5rem; margin-bottom: 1rem; border-bottom: 2px solid #30363d; padding-bottom: 0.5rem; }
+            #print-toc-container ul { list-style: none; margin: 0; padding: 0; }
+            #print-toc-container li { margin: 0.5rem 0; }
+            #print-toc-container a { color: #e6edf3 !important; font-size: 1.1rem; }
+            #print-toc-container .toc-h1 { margin-left: 0; font-weight: bold; margin-top: 1rem; }
+            #print-toc-container .toc-h2 { margin-left: 1.5rem; }
+            #print-toc-container .toc-h3 { margin-left: 3rem; font-size: 1rem; opacity: 0.9; }
+            
+            #content-area { padding: 2rem; }
         }
 
         @media(max-width:768px) {
-            .sidebar {
-                transform: translateX(-100%);
-                transition: transform .3s
-            }
-
-            .sidebar.active {
-                transform: translateX(0)
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 2rem 1rem
-            }
+            .sidebar { transform: translateX(-100%); transition: transform .3s; }
+            .sidebar.active { transform: translateX(0); }
+            .main-content { margin-left: 0; padding: 2rem 1rem; }
         }
     </style>
 </head>
-
 <body>
     <div id="loader"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+    
+    <!-- WRAPPER IS MANDATORY FOR PRINTING BACKGROUNDS -->
     <div class="print-wrapper">
         <div class="layout">
             <nav class="sidebar" id="sidebar">
                 <h2><i class="fas fa-list"></i> Contents</h2>
                 <ul id="toc"></ul>
             </nav>
-            <main class="main-content" id="content-area"></main>
+            <main class="main-content">
+                <!-- This TOC is strictly for Print to PDF so it's interactive and readable -->
+                <div id="print-toc-container">
+                    <h1>Table of Contents</h1>
+                    <ul id="print-toc"></ul>
+                </div>
+                
+                <div id="content-area"></div>
+            </main>
         </div>
     </div>
+
+    <!-- Required Dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <script>document.addEventListener("DOMContentLoaded", () => { const e = document.getElementById("content-area"), t = document.getElementById("toc"), n = document.getElementById("loader"); fetch("Network_Hacking_Continued_Zaidh_sabih.md").then(e => e.ok ? e.text() : Promise.reject("Failed to load markdown file")).then(o => { let a = o.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, "## MODULE_MARKER $1"); a = a.replace(/^##\s+(Topic\s+\d+\.\d+:.*)/gm, "## TOPIC_MARKER $1"), a = a.replace(/^\s*(\d+\.\d+:)/gm, "**$1**"); const r = new marked.Renderer; r.code = function (e, t) { const n = e ? String(e) : ""; let o = n; if (t && hljs.getLanguage(t)) try { o = hljs.highlight(n, { language: t }).value } catch (e) { o = hljs.highlightAuto(n).value } else o = hljs.highlightAuto(n).value; const a = t || "plaintext", r = Math.random().toString(36).substr(2, 9); return `<pre class="mac-window"><div class="code-header"><div class="window-controls"><span class="control red"></span><span class="control yellow"></span><span class="control green"></span></div><button class="copy-btn" onclick="copyCode('${r}')"><i class="fas fa-copy"></i> Copy</button></div><code id="${r}" class="hljs language-${a}">${o}</code></pre>` }, r.heading = function (e, t) { const n = e ? String(e) : "", o = n.toLowerCase().replace(/[^\w]+/g, "-"); if (n.startsWith("MODULE_MARKER ")) { const e = n.replace("MODULE_MARKER ", ""), a = e.toLowerCase().replace(/[^\w]+/g, "-"); return `<h${t} class="module-section" id="${a}">${e}</h${t}>` } if (n.startsWith("TOPIC_MARKER ")) { const e = n.replace("TOPIC_MARKER ", ""), a = e.toLowerCase().replace(/[^\w]+/g, "-"); return `<h${t} class="topic-section" id="${a}">${e}</h${t}>` } return `<h${t} id="${o}">${n}</h${t}>` }, marked.setOptions({ renderer: r, breaks: !0, gfm: !0 }), e.innerHTML = marked.parse(a); const i = e.querySelectorAll("h1, h2, h3"); i.forEach(e => { const n = document.createElement("li"), o = document.createElement("a"); o.href = `#${e.id}`, o.textContent = e.textContent, o.style.paddingLeft = "h1" === e.tagName ? "0" : "h2" === e.tagName ? "1rem" : "2rem", n.appendChild(o), t.appendChild(n) }), n.style.display = "none" }).catch(e => { console.error(e), n.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes' }) }); function copyCode(e) { const t = document.getElementById(e); if (!t) return; const n = t.innerText; navigator.clipboard.writeText(n).then(() => { const t = event.target.closest(".copy-btn"); t.innerHTML = '<i class="fas fa-check"></i> Copied!', setTimeout(() => { t.innerHTML = '<i class="fas fa-copy"></i> Copy' }, 2e3) }).catch(e => console.error("Copy failed:", e)) }</script>
-</body>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const contentArea = document.getElementById("content-area");
+            const toc = document.getElementById("toc");
+            const printToc = document.getElementById("print-toc");
+            const loader = document.getElementById("loader");
 
+            fetch("Network_Hacking_Continued_Zaidh_sabih.md")
+                .then(res => res.ok ? res.text() : Promise.reject("Failed to load markdown file"))
+                .then(markdown => {
+                    const renderer = new marked.Renderer();
+                    
+                    renderer.code = function(code, language) {
+                        const safeCode = code ? String(code) : '';
+                        let highlighted = safeCode;
+                        
+                        if (language && hljs.getLanguage(language)) {
+                            try { 
+                                highlighted = hljs.highlight(safeCode, { language: language }).value; 
+                            } catch (e) { 
+                                highlighted = hljs.highlightAuto(safeCode).value; 
+                            }
+                        } else {
+                            highlighted = hljs.highlightAuto(safeCode).value;
+                        }
+                        
+                        const rId = Math.random().toString(36).substr(2, 9);
+                        return `<pre class="mac-window">
+                                    <div class="code-header">
+                                        <div class="window-controls">
+                                            <span class="control red"></span>
+                                            <span class="control yellow"></span>
+                                            <span class="control green"></span>
+                                        </div>
+                                        <button class="copy-btn" onclick="copyCode('${rId}', this)">
+                                            <i class="fas fa-copy"></i> Copy
+                                        </button>
+                                    </div>
+                                    <code id="${rId}" class="hljs language-${language || 'plaintext'}">${highlighted}</code>
+                                </pre>`;
+                    };
+
+                    renderer.heading = function(text, level) {
+                        const safeText = text ? String(text) : '';
+                        const id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+                        
+                        // Treat H1s as Modules (e.g., Section 1: Introduction)
+                        if (level === 1) {
+                            return `<h${level} class="module-section" id="${id}">${safeText}</h${level}>`;
+                        }
+                        
+                        // Treat H3s that have an emoji as Topic sections (e.g., 🎯 1. Manual MAC Address Spoofing)
+                        if (level === 3 && safeText.match(/^[^\w\s]/)) {
+                            return `<h${level} class="topic-section" id="${id}">${safeText}</h${level}>`;
+                        }
+
+                        return `<h${level} id="${id}">${safeText}</h${level}>`;
+                    };
+
+                    marked.setOptions({ renderer: renderer, breaks: true, gfm: true });
+                    contentArea.innerHTML = marked.parse(markdown);
+
+                    // Build TOC for both Sidebar and Print
+                    const headers = contentArea.querySelectorAll("h1, h2, h3");
+                    headers.forEach(h => {
+                        // Sidebar TOC
+                        const li = document.createElement("li");
+                        const a = document.createElement("a");
+                        a.href = `#${h.id}`;
+                        a.textContent = h.textContent;
+                        
+                        if (h.tagName === "H1") a.style.paddingLeft = "0";
+                        else if (h.tagName === "H2") a.style.paddingLeft = "1rem";
+                        else a.style.paddingLeft = "2rem";
+                        
+                        li.appendChild(a);
+                        toc.appendChild(li);
+
+                        // Print TOC
+                        const printLi = document.createElement("li");
+                        const printA = document.createElement("a");
+                        printA.href = `#${h.id}`;
+                        printA.textContent = h.textContent;
+                        printLi.className = "toc-" + h.tagName.toLowerCase();
+                        printLi.appendChild(printA);
+                        printToc.appendChild(printLi);
+                    });
+
+                    loader.style.display = "none";
+                })
+                .catch(err => {
+                    console.error(err);
+                    loader.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes';
+                });
+        });
+
+        function copyCode(id, btn) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            navigator.clipboard.writeText(el.innerText).then(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; }, 2000);
+            }).catch(e => console.error("Copy failed:", e));
+        }
+    </script>
+</body>
 </html>
