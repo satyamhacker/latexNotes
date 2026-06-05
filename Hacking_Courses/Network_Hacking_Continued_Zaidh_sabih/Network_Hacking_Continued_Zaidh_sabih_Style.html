@@ -121,9 +121,6 @@
         img { max-width: 100%; height: auto; border-radius: 8px; margin: 1.5rem 0; }
         hr { border: none; border-top: 1px solid var(--border-color); margin: 2rem 0; }
 
-        /* Print TOC styles (Hidden in browser) */
-        #print-toc-container { display: none; }
-
         /* CRITICAL PRINT STYLES */
         @media print {
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
@@ -147,16 +144,6 @@
             .main-content { padding: 0 !important; margin: 0 auto; max-width: 100%; margin-left: 0 !important; }
             
             a { text-decoration: none !important; border-bottom: none !important; color: #58a6ff !important; }
-
-            /* Show TOC only when printing */
-            #print-toc-container { display: block; page-break-after: always; margin-bottom: 2rem; padding: 2rem; }
-            #print-toc-container h1 { font-size: 2.5rem; margin-bottom: 1rem; border-bottom: 2px solid #30363d; padding-bottom: 0.5rem; }
-            #print-toc-container ul { list-style: none; margin: 0; padding: 0; }
-            #print-toc-container li { margin: 0.5rem 0; }
-            #print-toc-container a { color: #e6edf3 !important; font-size: 1.1rem; }
-            #print-toc-container .toc-h1 { margin-left: 0; font-weight: bold; margin-top: 1rem; }
-            #print-toc-container .toc-h2 { margin-left: 1.5rem; }
-            #print-toc-container .toc-h3 { margin-left: 3rem; font-size: 1rem; opacity: 0.9; }
             
             #content-area { padding: 2rem; }
         }
@@ -179,12 +166,6 @@
                 <ul id="toc"></ul>
             </nav>
             <main class="main-content">
-                <!-- This TOC is strictly for Print to PDF so it's interactive and readable -->
-                <div id="print-toc-container">
-                    <h1>Table of Contents</h1>
-                    <ul id="print-toc"></ul>
-                </div>
-                
                 <div id="content-area"></div>
             </main>
         </div>
@@ -198,7 +179,6 @@
         document.addEventListener("DOMContentLoaded", () => {
             const contentArea = document.getElementById("content-area");
             const toc = document.getElementById("toc");
-            const printToc = document.getElementById("print-toc");
             const loader = document.getElementById("loader");
 
             fetch("Network_Hacking_Continued_Zaidh_sabih.md")
@@ -256,10 +236,9 @@
                     marked.setOptions({ renderer: renderer, breaks: true, gfm: true });
                     contentArea.innerHTML = marked.parse(markdown);
 
-                    // Build TOC for both Sidebar and Print
+                    // Build TOC for Sidebar
                     const headers = contentArea.querySelectorAll("h1, h2, h3");
                     headers.forEach(h => {
-                        // Sidebar TOC
                         const li = document.createElement("li");
                         const a = document.createElement("a");
                         a.href = `#${h.id}`;
@@ -271,15 +250,6 @@
                         
                         li.appendChild(a);
                         toc.appendChild(li);
-
-                        // Print TOC
-                        const printLi = document.createElement("li");
-                        const printA = document.createElement("a");
-                        printA.href = `#${h.id}`;
-                        printA.textContent = h.textContent;
-                        printLi.className = "toc-" + h.tagName.toLowerCase();
-                        printLi.appendChild(printA);
-                        printToc.appendChild(printLi);
                     });
 
                     loader.style.display = "none";
