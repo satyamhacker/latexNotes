@@ -2658,6 +2658,87 @@ Sections: 1 | Topics: 2 | Subtopics: 17 | CVEs: 0
 
 ==================================================================================
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Section 11.5: Wireless Network Hacking (802.11 Frame Manipulation)
+
+
+=====Section 11.5: Wireless Network Hacking (802.11 Frame Manipulation)=====
+
+--11.5--Wireless Network Hacking (802.11 Frame Manipulation)--
+Topic 1: Monitor Mode Architecture & Scapy Packet Sniffing
+Subtopics: Wireless Card Chipsets, Monitor Mode vs Managed Mode, Air Packet Sniffing, 802.11 Layer Dissection, Beacon Frames Parsing
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Context Volume: Hardware requirements introduction + live scapy script parsing raw air waves
+* Key terms: monitor mode, iwconfig, airmon-ng, 802.11 layer, RadioTap, Beacon frames, SSID extraction
+* Instructor Emphasis: Virtual machines internally wireless cards access nahi karti, external USB adapter with packet injection support (Alfa/Atheros chipsets) mandatory hai hardware execution ke liye.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[monitor mode, managed mode, ⭐`iwconfig`, `airmon-ng start wlan0`, wlan0mon, packet injection, Alfa wireless card, Atheros AR9271, Scapy air sniffing, RadioTap layer, Dot11 layer, Dot11Elt, ⭐Beacon frames, BSSID, SSID parsing, network enumeration]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Reconnaissance / Scanning & Enumeration
+* Methodology Context: Bina kisi target AP (Access Point) se connect hue, pure air frequency range pe packets intercept karke aas-paas ke routers aur unse connected clients ka network map taiyar karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon Phase: Attacker interface ko monitor mode pe shift karta hai, Scapy tool use karke raw 802.11 frames listen karta hai, aur real-time mein hidden SSIDs (unbroadcasted wifi networks) unke raw beacon layers decode karke identify karta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: (N/A)
+* Navigation Steps: (N/A)
+
+--11.5--Wireless Network Hacking (802.11 Frame Manipulation)--
+Topic 2: Deauthentication Attacks & WPA Handshake Capture
+Subtopics: Forging Dot11Deauth Frames, Target Client Disconnection, Automating WPA/WPA2 4-Way Handshake Harvesting, EAPOL Packets Filtering
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Context Volume: Live scripting session building a custom deauth payload tool + automated handshake grabber
+* Key terms: Deauthentication frame, reason code, EAPOL, 4-Way handshake, scapy.sendp()
+* Instructor Emphasis: Deauth packet forge karte waqt target ka MAC address target client destination banega aur router ka MAC address source frame banega tabhi client connection drop karega.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[⭐Dot11Deauth, forge frame, source MAC, destination MAC, `reason=7`, broadcast deauth, ⭐`scapy.sendp()`, layer 2 wireless frames, loop execution, disconnect client, WPA/WPA2 authentication, ⭐4-Way handshake, ⭐EAPOL packets, packet filtering, `haslayer(scapy.EAPOL)`, `.pcap` storage]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Exploitation / Initial Foothold
+* Methodology Context: Network access control break karne ke liye legitimate connected user ko kick out karna taaki login processing credentials (handshake hashes) grab kiye ja sakein.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Exploitation Phase: Custom python script automated constant deauth frames stream karti hai target device pe. User disconnect hota hai, system auto-reconnect trigger karta hai router ke sath. Script frame capture framework start rakhti hai aur reconnect process ke raw crypto packets (EAPOL Handshake) intercept karke disk pe dump kar leti hai cracking pipeline ke liye.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: (N/A)
+* Navigation Steps: (N/A)
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 11.5: Wireless Network Hacking (802.11 Frame Manipulation)
+Topic 1: Monitor Mode Architecture & Scapy Packet Sniffing
+Topic 2: Deauthentication Attacks & WPA Handshake Capture
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 9 | CVEs: 0
+
 # Section 12: Writing Malware
 
 
@@ -3301,6 +3382,56 @@ Sections: 1 | Topics: 8 | Subtopics: 39 | CVEs: 0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Section 13.5: Writing Malware - Ransomware Architecture & Cryptography
+
+
+=====Section 13.5: Writing Malware - Ransomware Architecture & Cryptography=====
+
+--13.5--Writing Malware - Ransomware Architecture & Cryptography--
+Topic 1: Symmetric Encryption Engines (AES-256)
+Subtopics: Cryptography Libraries, Initialization Vectors (IV), Directory Infiltration, Byte Stream Encryption, In-Place File Deletion
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Context Volume: Symmetric crypto models math explanations + production level folder recursive locking python loops
+* Key terms: AES encryption, PyCryptodome, cipher block chaining (CBC), padding data, os.walk structural search
+* Instructor Emphasis: File stream process handle karte waqt original bytes read hone ke baad encrypted data sequence disk safe commit buffer parameters match hone chahiye warna system files permanently corrupt ho sakti hain block size mismatch error ke wajah se.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[ransomware, crypto framework, `from Crypto.Cipher import AES`, Advanced Encryption Standard, block cipher, AES-256 key, initialization vector, IV padding, PKCS7 padding, `os.walk()`, file system traversal, recursive folder searching, binary write stream, in-place overwriting, data destruction, recovery mechanism]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Exploitation / Action on Objectives
+* Methodology Context: Network access control post-compromise state ke andar local targets operations files system storage completely freeze map data operations leverage target control protocols finalize karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Action Phase: Payload targeted directory configuration systems evaluate variables call trigger karta hai. Background recursive threads arrays trigger hoten hain execution arrays launch map target folders loop evaluate files stream blocks loading. Symmetric AES payload keys generate context initialization locks sequence write parameters system files securely locked arrays files updates metadata extension conversion trace finalize updates execution indicators dashboard drop warnings.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: (N/A)
+* Navigation Steps: (N/A)
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 13.5: Writing Malware - Ransomware Architecture & Cryptography
+Topic 1: Symmetric Encryption Engines (AES-256)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 1 | Subtopics: 5 | CVEs: 0
 
 # Section 14: Writing Malware - Backdoors
 
@@ -3963,6 +4094,56 @@ Sections: 1 | Topics: 8 | Subtopics: 33 | CVEs: 0
 ==================================================================================
 
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Section 15.5: Advanced AV Evasion (In-Memory Execution via Shellcode)
+
+
+=====Section 15.5: Advanced AV Evasion (In-Memory Execution via Shellcode)=====
+
+--15.5--Advanced AV Evasion (In-Memory Execution via Shellcode)--
+Topic 1: Windows API Access via ctypes Module
+Subtopics: Dynamic Link Libraries (DLLs), Kernel32 Execution, VirtualAlloc Memory Mapping, RtlMoveMemory Buffers, CreateThread Execution Vectors
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Context Volume: Highly technical Windows operating system memory layout tutorial + low-level python scripting using pointers
+* Key terms: ctypes, Windows API, shellcode, VirtualAlloc, MEM_COMMIT, PAGE_EXECUTE_READWRITE, memory pointer, thread allocation
+* Instructor Emphasis: Binary payload disk pe drop hote hi static signature analyzer triggers hote hain. True bypass ke liye payload process storage state (RAM blocks) mein call dynamically allocate hona mandatory asset execution hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[⭐`import ctypes`, foreign function interface, Windows DLLs, `kernel32.dll`, Windows API, ⭐`VirtualAlloc`, memory allocation, memory pointer, `MEM_COMMIT`, `MEM_RESERVE`, ⭐`PAGE_EXECUTE_READWRITE`, write process memory, ⭐`RtlMoveMemory`, byte buffer injection, payload bytearray, msfvenom raw shellcode, ⭐`CreateThread`, in-memory execution, process space bypass]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Weaponization / Evasion Defense Bypass
+* Methodology Context: Disk management telemetry monitoring hooks (antivirus engines scanning physical storage logs) ko completely step-over karke binary payload payload raw volatile virtual memory blocks mein runtime load karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Evasion Phase: Custom compiled payload execute hota hai, koi storage read instructions deploy nahi hoten. Tool direct Windows internal systems functions parameters call karta hai (`VirtualAlloc`). Virtual space block lock hota hai explicit execute flags ke sath. Raw system instructions buffers loop directly write hoten hain, execution context separate parallel execution thread state mein shift hota hai bypass confirming status ke sath.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: (N/A)
+* Navigation Steps: (N/A)
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 15.5: Advanced AV Evasion (In-Memory Execution via Shellcode)
+Topic 1: Windows API Access via ctypes Module
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 1 | Subtopics: 5 | CVEs: 0
+
 # Section 16: Website  Web Application Hacking
 
 
@@ -4118,6 +4299,87 @@ Sections: 1 | Topics: 4 | Subtopics: 33 | CVEs: 0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Section 16.5: Advanced Passive OSINT & Browser Automation (Playwright)
+
+
+=====Section 16.5: Advanced Passive OSINT & Browser Automation (Playwright)=====
+
+--16.5--Advanced Passive OSINT & Browser Automation (Playwright)--
+Topic 1: Headless Browser Scraping vs Static Requests
+Subtopics: Synchronous vs Asynchronous Playwright, Headless Browser Context, Dynamic DOM Rendering, User-Agent Spoofing, Fingerprint Randomization, Handling Infinite Scroll
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Context Volume: Long explanation + live python async code structure
+* Key terms: Playwright, headless mode, async/await, user-agent, DOM rendering, infinite scroll
+* Instructor Emphasis: Async architecture fast speed aur low footprint execution ke liye critical hai jab multi-target scraping karni ho. Real browsers ki tarah human behavior mimic karna zaroori hai anti-bot blocks avoid karne ke liye.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[playwright, async library, `asyncio`, `async with async_playwright()`, headless=True, chromium, proxy rotation, user-agent spoofing, page context, `page.goto()`, `page.wait_for_selector()`, dynamic content, DOM content loaded, element handles, infinite scroll automation, `page.evaluate()`, scroll height, fingerprint evasion]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Reconnaissance / Passive Information Gathering
+* Methodology Context: Target application ko actively scan karne se pehle unke corporate dynamic apps, leaked credential dashboards, ya employee directories ko bina server logs mein trigger kiye scrape karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon Phase: Attacker script headless browser background mein launch karti hai, anti-bot scripts ko confuse karne ke liye randomized user-agents inject karti hai, aur target JS page ko completely execute karwake rendered HTML tree se sensitive parameters extract karti hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Playwright Python Package
+* Execution Steps: `pip install playwright` > `playwright install` > Import `async_playwright` in IDE > Script automation loop launch matching proxy backend.
+
+--16.5--Advanced Passive OSINT & Browser Automation (Playwright)--
+Topic 2: API Interception & Network Sniffing via Automation
+Subtopics: Network Response Event Listeners, JSON Payload Extraction, Exposing Hidden API Endpoints, Token Harvesting
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Context Volume: Detailed coding tutorial on capturing web traffic programmatically
+* Key terms: response listener, network intercept, API endpoint, bearer token, JSON parsing
+* Instructor Emphasis: Front-end UI badalta rehta hai par APIs stable hoti hain. Frontend application browser mein kis api se baat kar raha hai, usko capture karna code extraction se faster aur more reliable hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[`page.on("response", callback)`, network interception, API endpoints, microservices, auth headers, Bearer tokens, JWT tokens, `response.json()`, status code validation, XHR requests, fetch events, capturing traffic programmatically]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Scanning & Enumeration / Reconnaissance
+* Methodology Context: Browser session ke underlying background traffic ko parse karke authorization keys aur private endpoints harvest karna jo code variables mein hidden the.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon Phase: Attacker automation tool target portal pe fake navigation triggers karta hai. Background mein target's frontend API server ko request bhejta hai. Playwright network hook use karke un incoming HTTP responses ko parse karta hai aur proprietary APIs ka structure map kar leta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Playwright Python Package
+* Navigation Steps: (N/A)
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 16.5: Advanced Passive OSINT & Browser Automation (Playwright)
+Topic 1: Headless Browser Scraping vs Static Requests
+Topic 2: API Interception & Network Sniffing via Automation
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 10 | CVEs: 0
 
 # Section 17: Website Hacking - Writing a Crawler
 
@@ -4776,3 +5038,58 @@ Sections: 1 | Topics: 8 | Subtopics: 42 | CVEs: 0
 
 
 
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Section 19.5: Advanced Web Vulnerability Automation (SQL Injection)
+
+
+=====Section 19.5: Advanced Web Vulnerability Automation (SQL Injection)=====
+
+--19.5--Advanced Web Vulnerability Automation (SQL Injection)--
+Topic 1: Automated Error-Based SQLi Fuzzing
+Subtopics: SQL Syntax Quote Injections, Error Signature Mapping, Database Architecture Fingerprinting, Extracting Vulnerable Form Elements
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Context Volume: Long database architecture mapping explanation + script development using regex for DBMS error messages
+* Key terms: SQL injection, error-based SQLi, input fuzzing, syntax error strings, MySQL, PostgreSQL
+* Instructor Emphasis: Input data manipulate karte waqt quotes (`'`) aur brackets (`)`) ke alag combinations iterate karne hote hain, kyunki custom queries backend development ke time alag tarike se handled ho sakti hain.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[SQL Injection, SQLi, database management system, DBMS, error-based vulnerability, single quote injection, `' OR 1=1 --`, database syntax error, MySQL signatures, PostgreSQL errors, automated fuzzing, payload array, form submission parsing, `response.content` scanning, information leak]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Scanning & Enumeration / Exploitation
+* Methodology Context: Inputs handle karne wale endpoints ko automated query manipulation payloads bhej kar force karna ki server production level database design details ya system credentials clear-text syntax errors mein print kare.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Exploitation Phase: Scanner code crawler se forms list leta hai. Har text box input variable pe generic SQL database breakpoints drop karta hai. Server response check karta hai agar backend crash return code ya explicit engine database exceptions throw kar raha ho. Database model instantly flag ho jata hai exploit execution mapping ke liye.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: (N/A)
+* Navigation Steps: (N/A)
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 19.5: Advanced Web Vulnerability Automation (SQL Injection)
+Topic 1: Automated Error-Based SQLi Fuzzing
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 1 | Subtopics: 4 | CVEs: 0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
