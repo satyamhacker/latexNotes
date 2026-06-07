@@ -1,6 +1,6 @@
 # Section 1: Introduction
 
-### =====Section 1: Course Introduction & Teaser=====
+
 
 Is section mein instructor hacking ka ek practical teaser deta hai — bina deep theory mein gaye, seedha real-world hacking tools aur unke results dikhata hai.
 
@@ -190,7 +190,7 @@ Total Topics: 1 | Total Keywords: 31 | CVEs: 0 | Missed: 0
 
 ---
 
-### =====Section 2: Ethical Hacking Terminology & Concepts=====
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Is section mein hum hacking ki foundational definitions, hacker categorizations (White, Black, Grey), aur hacking field mein programming (Python) ki importance discuss karenge.
 
@@ -439,9 +439,7 @@ Total Topics: 2 | Total Keywords: 35 | CVEs: 0 | Missed: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-▶️ Resuming from: Section 3, Topic 1: Virtualization Concepts & Architecture — Remaining after this: [Section 3 (T2, T3), Section 4 (T1, T2, T3), Section 5 (T1, T2, T3)]
 
-### =====Section 3: Penetration Testing Lab Setup (Virtualization)=====
 
 Hacking real targets bina permission ke illegal hai. Isliye, hum apna ek safe, controlled, aur isolated **lab** (practice environment) banayenge using virtualization technologies.
 
@@ -798,7 +796,7 @@ Total Topics: 3 | Total Keywords: 66 | CVEs: 0 | Missed: 0
 
 ---
 
-### =====Section 4: Kali Linux Fundamentals=====
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Kali Linux GUI overview aur command-line terminal ka detailed introduction, jo ki real-world hacking ka primary interface hai.
 
@@ -912,9 +910,6 @@ Pentesting exams (like OSCP) mein time management critical hota hai. Pentesters 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-▶️ Resuming from: Section 4, Topic 1: Kali Linux GUI & Environment Overview — Remaining after this: [Section 4 (T2, T3), Section 5 (T1, T2, T3)]
-
-### =====Section 4: Kali Linux Fundamentals (Continued)=====
 
 ---
 
@@ -1207,7 +1202,7 @@ Total Topics: 3 | Total Keywords: 69 | CVEs: 0 | Missed: 0
 
 ---
 
-### =====Section 5: Python Programming Setup=====
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Kyunki hum basic terminal command use se aage badhna chahte hain, hum custom hacking scripts likhne ke liye Python environment setup karenge.
 
@@ -5772,9 +5767,7 @@ Total keywords across all subtopics: 42
 
 # Section 6: Writing a Packet Sniffer
 
-Is authorized educational context aur offensive security syllabus ko dhyan mein rakhte hue, main **Notes Guru** tumhare liye premium, exam-ready notes generate kar raha hoon.
 
-Tera skeleton maine lock kar liya hai. Kyunki yeh ek detailed 7-topic module hai (aur model limit cross na ho taaki quality compromise na ho), main pehle **Topic 1 aur Topic 2** ko full 18-point depth mein dissect karunga. Phir hum `CONTINUE` protocol se aage badhenge.
 
 ---
 
@@ -8789,7 +8782,7 @@ Red team scenarios mein, attackers internal network mein "Fake Update" campaigns
 # Section 9: Writing a Code Injector
 
 
-=====Section 1: Writing a Code Injector=====
+
 Is section mein hum network-level attacks seekhenge jahan HTTP (Hypertext Transfer Protocol — web traffic bhejne ka standard) requests aur responses ke raw layer (data ka sabse basic, unformatted roop) ko modify karke custom JavaScript (client-side programming language) code inject kiya jayega. Yeh man-in-the-middle attacks ka core foundation hai.
 
 ---
@@ -17857,7 +17850,7 @@ desktop-abc\user
 
 # Section 16: Website  Web Application Hacking
 
-**===== Section 1: Website & Web Application Hacking =====**
+
 Is section mein hum web application hacking ka foundation set karenge, custom Python tools banane ka overview lenge, aur safely practice karne ke liye Metasploitable lab setup karna seekhenge.
 
 ---
