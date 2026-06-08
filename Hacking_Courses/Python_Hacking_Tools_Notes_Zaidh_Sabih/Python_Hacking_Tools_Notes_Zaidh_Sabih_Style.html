@@ -424,7 +424,7 @@
                         
                         const id = Math.random().toString(36).substr(2, 9);
                         
-                        return \`
+                        return `
                         <pre class="mac-window">
                             <div class="code-header">
                                 <div class="window-controls">
@@ -432,31 +432,31 @@
                                     <span class="control yellow"></span>
                                     <span class="control green"></span>
                                 </div>
-                                <button class="copy-btn" onclick="copyCode('\${id}', this)"><i class="fas fa-copy"></i> Copy</button>
+                                <button class="copy-btn" onclick="copyCode('${id}', this)"><i class="fas fa-copy"></i> Copy</button>
                             </div>
-                            <code id="\${id}" class="hljs language-\${language || 'plaintext'}">\${highlighted}</code>
-                        </pre>\`;
+                            <code id="${id}" class="hljs language-${language || 'plaintext'}">${highlighted}</code>
+                        </pre>`;
                     };
                     
                     renderer.heading = function(text, level) {
                          const safeText = text ? String(text) : '';
-                         const id = safeText.toLowerCase().replace(/[^\\w]+/g, '-');
+                         const id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
                          
                          // Check if this is a Module section
                          if (safeText.startsWith('MODULE_MARKER ')) {
                              const cleanText = safeText.replace('MODULE_MARKER ', '');
-                             const cleanId = cleanText.toLowerCase().replace(/[^\\w]+/g, '-');
-                             return \`<h\${level} class="module-section" id="\${cleanId}">\${cleanText}</h\${level}>\`;
+                             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                             return `<h${level} class="module-section" id="${cleanId}">${cleanText}</h${level}>`;
                          }
                          
                          // Check if this is a Topic section
                          if (safeText.startsWith('TOPIC_MARKER ')) {
                              const cleanText = safeText.replace('TOPIC_MARKER ', '');
-                             const cleanId = cleanText.toLowerCase().replace(/[^\\w]+/g, '-');
-                             return \`<h\${level} class="topic-section" id="\${cleanId}">\${cleanText}</h\${level}>\`;
+                             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                             return `<h${level} class="topic-section" id="${cleanId}">${cleanText}</h${level}>`;
                          }
                          
-                         return \`<h\${level} id="\${id}">\${safeText}</h\${level}>\`;
+                         return `<h${level} id="${id}">${safeText}</h${level}>`;
                     };
 
                     marked.setOptions({ renderer: renderer, breaks: true, gfm: true });
@@ -469,7 +469,7 @@
                     headings.forEach(heading => {
                         const li = document.createElement("li");
                         const a = document.createElement("a");
-                        a.href = \`#\${heading.id}\`;
+                        a.href = `#${heading.id}`;
                         a.textContent = heading.textContent;
                         a.style.paddingLeft = heading.tagName === "H1" ? "0" : heading.tagName === "H2" ? "1rem" : "2rem";
                         li.appendChild(a);
