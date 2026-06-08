@@ -329,11 +329,34 @@
                 color: #ffffff !important;
             }
 
+            /* Ensure Inline Code keeps its color */
+            code:not(.hljs) {
+                color: #61dafb !important;
+                background-color: #161b22 !important;
+            }
+
             /* Keep code blocks distinct */
-            pre {
-                border: 1px solid #444;
+            pre.mac-window {
+                background-color: #0d1115 !important;
+                border: 1px solid #444 !important;
                 page-break-inside: avoid;
             }
+
+            /* GUARANTEE SYNTAX HIGHLIGHTING IN PRINT (Vibrant Dark Theme) */
+            pre code.hljs, pre .hljs, pre .hljs * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .hljs-comment, .hljs-quote { color: #8b949e !important; font-style: italic !important; }
+            .hljs-doctag, .hljs-keyword, .hljs-formula { color: #ff7b72 !important; }
+            .hljs-section, .hljs-name, .hljs-selector-tag, .hljs-deletion, .hljs-subst { color: #79c0ff !important; }
+            .hljs-literal { color: #79c0ff !important; }
+            .hljs-string, .hljs-regexp, .hljs-addition, .hljs-attribute, .hljs-meta-string { color: #a5d6ff !important; }
+            .hljs-built_in, .hljs-class .hljs-title { color: #ffa657 !important; }
+            .hljs-attr, .hljs-variable, .hljs-template-variable, .hljs-type, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-number { color: #79c0ff !important; }
+            .hljs-symbol, .hljs-bullet, .hljs-link, .hljs-meta, .hljs-selector-id, .hljs-title { color: #d2a8ff !important; }
+            .hljs-emphasis { font-style: italic !important; }
+            .hljs-strong { font-weight: bold !important; }
 
             .sidebar, .copy-btn, .window-controls, #loader {
                 display: none !important;
