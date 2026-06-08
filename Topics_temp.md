@@ -1,3 +1,5 @@
+# Section 1: Course Introduction & Fundamentals
+
 =====Section 1: Course Introduction & Fundamentals=====
 [Instructor privacy aur anonymity ke concepts, unke beech ka difference, aur poore course ka roadmap explain karta hai.]
 
