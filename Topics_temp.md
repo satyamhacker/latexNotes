@@ -3084,12 +3084,12 @@ Subtopics: Dread Sub-communities, Peer-to-Peer Mega Links, Malware Risks in Pira
 
 ==================================================================================
 
-# Section 15: Black Hat OPSEC & Offensive Darknet Infrastructure [⚠️ AI Derived]
+# Section 14: Black Hat OPSEC & Offensive Darknet Infrastructure [⚠️ AI Derived]
 
-=====Section 15: Black Hat OPSEC & Offensive Darknet Infrastructure=====
+=====Section 14: Black Hat OPSEC & Offensive Darknet Infrastructure=====
 [Yeh custom AI-derived module Red Teaming aur Black Hat threat actors ke perspective se banaya gaya hai. Isme attacker ke apne infrastructure (C2 servers, phishing sites) ko darknet pe securely host karne, malware traffic ko Tor ke through route karne, aur stolen logs ko weaponize karne ka practical execution cover kiya gaya hai.]
 
---15--Black Hat OPSEC & Offensive Darknet Infrastructure--
+--14--Black Hat OPSEC & Offensive Darknet Infrastructure--
 Topic 1: Bulletproof Hosting & Hidden C2 Infrastructure
 Subtopics: Bulletproof VPS, Offshore Hosting, Nginx/Apache Onion Config, Backend IP Leaks, SSH over Tor, OPSEC for Server Operators
 
@@ -3123,7 +3123,7 @@ Subtopics: Bulletproof VPS, Offshore Hosting, Nginx/Apache Onion Config, Backend
 * Tool Name: Linux Terminal (Tor Configuration)
 * Navigation Steps: Edit torrc: `sudo nano /etc/tor/torrc` > Uncomment `HiddenServiceDir` and `HiddenServicePort 80 127.0.0.1:80` > Save > Run `sudo systemctl restart tor` > Read generated address: `sudo cat /var/lib/tor/hidden_service/hostname`.
 
---15--Black Hat OPSEC & Offensive Darknet Infrastructure--
+--14--Black Hat OPSEC & Offensive Darknet Infrastructure--
 Topic 2: Tor-Routed Command & Control (C2 Comms)
 Subtopics: Covert C2 Channels, Local Tor Proxy Injection, SOCKS5 Egress Routing, Bypassing Network Firewalls, Evasion Tactics
 
@@ -3157,7 +3157,7 @@ Subtopics: Covert C2 Channels, Local Tor Proxy Injection, SOCKS5 Egress Routing,
 * Tool Name: (N/A — execution handled via malware configuration/code)
 * Navigation Steps: (N/A)
 
---15--Black Hat OPSEC & Offensive Darknet Infrastructure--
+--14--Black Hat OPSEC & Offensive Darknet Infrastructure--
 Topic 3: Weaponizing Infostealer Logs & Antidetect Browsers
 Subtopics: Genesis/Russian Market Dynamics, Infostealer Logs, Session Hijacking, Antidetect Browsers, 2FA/MFA Bypass, Device Fingerprint Spoofing
 
@@ -3191,7 +3191,7 @@ Subtopics: Genesis/Russian Market Dynamics, Infostealer Logs, Session Hijacking,
 * Tool Name: Antidetect Browser (e.g., Dolphin Anty)
 * Navigation Steps: Create New Profile > Import Cookies (Drag and drop `.txt` log file) > Set custom User Agent/Proxy based on log data > Launch Browser > Navigate directly to target URL (already authenticated).
 
---15--Black Hat OPSEC & Offensive Darknet Infrastructure--
+--14--Black Hat OPSEC & Offensive Darknet Infrastructure--
 Topic 4: Ransomware Dedicated Leak Sites (DLS) & Double Extortion
 Subtopics: Double Extortion Mechanics, DLS Hosting, Data Exfiltration Operations, Tor Negotiation Portals, Cryptocurrency Mixing (Attacker Side)
 
