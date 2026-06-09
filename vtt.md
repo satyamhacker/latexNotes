@@ -6155,7 +6155,7 @@ chances of discovering bugs and vulnerabilities in your target.
 
 ==================================================================================
 
-# Secction 3: Broken Access Control Vulnerabilities
+# Section 3: Broken Access Control Vulnerabilities
 
 0
 1
