@@ -164,3 +164,5 @@ Sections: 2 | Topics: 4 | Subtopics: 18 | CVEs: 0
 
 ==================================================================================
 
+# Section 2: Information Disclosure vulnerabilities
+
