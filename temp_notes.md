@@ -200,9 +200,9 @@ Total Topics: 2 | Total Keywords: 47 | CVEs: 0 | Missed: 0
 
 > ✅ Notes Guru confirms: Poora Section 1 complete ho gaya.
 
-===================================================================
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-=====Section 2: Tor Network Architecture & Operations=====
+===== Tor Network Architecture & Operations=====
 Is section mein hum samjhenge ki Tor network mathematically aur technically kaise kaam karta hai, iske hidden services kya hain, aur exit node ki vulnerability ko kaise bypass karein.
 
 ---
