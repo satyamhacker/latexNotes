@@ -5053,7 +5053,7 @@ Total keywords across all subtopics: 26
 # Section 5: CSRF - Cross-Site Request Forgery
 
 
-Yeh raha Section 5 ka pehla part! Humne **Topic 1** aur **Topic 2** ko deep, exam-ready Hinglish format mein expand kiya hai. Model limit cross na ho aur depth maintain rahe, isliye maine ishe do parts mein split kiya hai.
+
 
 ---
 
