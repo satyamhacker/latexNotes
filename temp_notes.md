@@ -15154,6 +15154,11 @@ Total Topics: 3 | Total Keywords: 51 | CVEs: 0 | Missed: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+==================================================================================
+
+
+# Section 20.5: Business Logic Vulnerabilities & Race Conditions
+
 =====Section 20.5: Business Logic Vulnerabilities & Race Conditions=====
 *(Is section mein hum samjhenge ki business logic flaws (jo scanners nahi pakad sakte) aur Single-Packet HTTP/2 Race Conditions kaise e-commerce aur banking apps ko destroy karte hain.)*
 
@@ -15487,13 +15492,6 @@ Total Topics: 2 | Total Keywords: 25 | CVEs: 0 | Missed: 0
 
 
 
-**Notes Guru (Offensive Security Edition)** ready. Main aapke provide kiye gaye skeleton ko process kar raha hoon. Yeh notes strictly educational purpose aur bug bounty/certification preparation (like CEH, OSCP, eWPT) ke liye design kiye gaye hain.
-
-Is response mein main **Topic 1** aur **Topic 2** cover karunga taaki depth maintain rahe. Uske baad hum `CONTINUE` protocol use karenge.
-
----
-
-### 🏁 Section 21: 2 Hour Live Bug Hunting !
 
 *Instructor is section mein ek real-life simulated website "Fast Food Hackings" pe end-to-end bug bounty methodology aur exploitation demonstrate karta hai.*
 

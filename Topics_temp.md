@@ -4512,6 +4512,9 @@ Subtopics: Request Poisoning, Admin Access Bypass, Capturing User Requests, HTTP
 * Tool Name: Burp Suite (HTTP Request Smuggler Extension)
 * Navigation Steps: Install HTTP Request Smuggler from BApp Store > Right-click request > Extensions > HTTP Request Smuggler > Smuggle request > Modify smuggled body in the generated tab > Send
 
+==================================================================================
+
+
 # Section 26: AI & LLM Vulnerabilities (The 2026 Frontier)
 
 =====Section 26: AI & LLM Vulnerabilities (The 2026 Frontier)=====
