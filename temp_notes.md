@@ -847,6 +847,86 @@ Sections: 1 | Topics: 6 | Subtopics: 22 | CVEs: 0
 
 ==================================================================================
 
+
+
+# Section 4.5: Insecure File Upload Vulnerabilities
+
+=====Section 4.5: Insecure File Upload Vulnerabilities=====
+[Instructor is section mein sikhata hai ki profile picture ya document upload features ko exploit karke malicious files (web shells) kaise upload kiye jaate hain, aur extension/MIME filters ko kaise bypass karna hai.] [⚠️ Derived]
+
+--4.5--Insecure File Upload Vulnerabilities--
+Topic 1: File Upload Fundamentals & Basic Bypass [⚠️ Derived]
+Subtopics: Unrestricted File Upload, Web Shell Concept, Content-Type Spoofing, Extension Blacklisting, Developer Console
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: Concept explanation + basic proxy manipulation
+* Key terms from transcript: file upload, profile picture, web shell, PHP execution, Content-Type, image/jpeg, bypass blacklists
+* Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki file upload sabse high-impact bugs mein se ek hai kyunki yeh directly server pe RCE (Remote Code Execution) de sakta hai.
+* Instructor ne jo analogies/examples/demos use kiye: Ek simple `.php` file ko upload karne ka demo jahan server ne `application/x-php` block kar diya, par Burp Suite mein Content-Type ko `image/jpeg` karke bypass kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[unrestricted file upload, avatar upload, web shell, reverse shell, RCE, server execution, `.php` extension, MIME type, Content-Type, `image/jpeg`, `application/x-php`, proxy intercept, basic bypass]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Exploitation / Initial Foothold
+* Attack methodology context from transcript: Target pe file upload functionality dhoondhna aur basic front-end/MIME type validations ko proxy ke through manipulate karke executable code upload karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker profile picture upload feature test karta hai aur ek legitimate `.jpg` file upload karke Burp mein request capture karta hai.
+* Exploitation/Weaponization Phase: Attacker wahi request Repeater mein bhejta hai, file ka naam `shell.php` karta hai aur PHP code inject karta hai. Agar server block kare, toh attacker request mein `Content-Type` ko `image/jpeg` spoof karke wapas bhejta hai.
+* Post-Exploitation/Reporting Phase: File successfully upload hone ke baad, attacker us file ke path (e.g., `/uploads/shell.php`) pe navigate karta hai taaki server pe commands execute ho sakein.
+* Additional context: Bug bounties mein web shell upload ko critical severity maana jaata hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Burp Suite
+* Navigation Steps: Proxy > Intercept file upload POST request > Send to Repeater > Modify filename parameter > Modify Content-Type header > Click Send
+
+--4.5--Insecure File Upload Vulnerabilities--
+Topic 2: Advanced Bypasses & Magic Bytes Spoofing [⚠️ Derived]
+Subtopics: Double Extensions, Null Byte Bypass, Magic Bytes, Exiftool, Obfuscation
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Live evasion techniques against strict back-end filters
+* Key terms from transcript: double extensions, `.php.jpg`, null byte `%00`, magic bytes, hex signatures, Exiftool, embedded payload
+* Exam Tips / Instructor Emphasis: "When the server checks the actual content of the file, you have to trick it by forging the file's binary signature."
+* Instructor ne jo analogies/examples/demos use kiye: Ek real image ke andar Exiftool se PHP payload embed kiya aur usko server pe upload karke parse karwaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[strict filters, double extension, `shell.php.jpg`, `shell.php%00.jpg`, magic bytes, file signature, `GIF89a`, hex editor, Exiftool, image metadata, embedded payload, execution mapping, backend validation bypass]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Exploitation / Weaponization
+* Attack methodology context from transcript: Jab basic extension aur MIME spoofing fail ho jaye, toh file ke andar deep hex level ya metadata mein payload chhupana (steganography/magic bytes).
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker notice karta hai ki server file ke content ko strongly validate kar raha hai (e.g., checking for real image signatures).
+* Exploitation/Weaponization Phase: Attacker file ke top pe `GIF89a` (magic bytes) add kar deta hai ya Exiftool use karke ek valid image ke Comment metadata section mein `<?php system($_GET['cmd']); ?>` dalta hai.
+* Post-Exploitation/Reporting Phase: Server usko valid image samajh kar upload kar leta hai. Agar target directory PHP execute karti hai, toh image load hone par backend command run kar deta hai.
+* Additional context: None.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Exiftool (Terminal)
+* Navigation Steps: Terminal open karein > type `exiftool -Comment="<?php system($_GET['cmd']); ?>" image.jpg` > Upload modified image via browser.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+==================================================================================
+
 # Section 5: CSRF - Cross-Site Request Forgery
 
 
@@ -971,6 +1051,43 @@ Sections: 1 | Topics: 3 | Subtopics: 15 | CVEs: 0
 # Section 6: OAUTH 2.0 Vulnerabilities
 
 
+
+
+--5--CSRF - Cross-Site Request Forgery--
+Topic 4: CORS Misconfigurations & Data Theft [⚠️ Derived]
+Subtopics: Cross-Origin Resource Sharing, Same-Origin Policy (SOP), Origin Header, Access-Control-Allow-Origin, Null Origin Bypass, Authenticated Data Extraction
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Detailed explanation of SOP/CORS and practical exploitation via malicious HTML
+* Key terms from transcript: CORS, SOP, Same Origin Policy, Origin header, Access-Control-Allow-Origin, Access-Control-Allow-Credentials, wildcard, null origin, XMLHttpRequest
+* Exam Tips / Instructor Emphasis: Instructor ne emphasize kiya ki CORS vulnerabilities CSRF ki tarah action perform nahi karti, balki sensitive data (jaise API keys, personal info) "read" aur "steal" karne ke kaam aati hain.
+* Instructor ne jo analogies/examples/demos use kiye: Burp mein `Origin: [https://evil.com](https://evil.com)` bhej kar dekha ki response mein `Access-Control-Allow-Origin: [https://evil.com](https://evil.com)` reflect ho raha hai. Phir ek malicious JavaScript payload banaya jo logged-in user ka API key fetch karke attacker ko bhej de.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Cross-Origin Resource Sharing, CORS, Same Origin Policy, SOP, Origin header, wildcard `*`, `Access-Control-Allow-Origin`, `Access-Control-Allow-Credentials: true`, reflection, null origin, `Origin: null`, iframe sandbox, XMLHttpRequest, fetch API, data exfiltration, JSON response, steal data]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 4:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Target application ke CORS policy headers mein misconfiguration dhundhna taaki ek malicious website se target user ka authenticated data read kiya ja sake.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Recon/Discovery Phase: Attacker target API ki requests ko Repeater mein bhejta hai aur explicitly `Origin: [https://attacker.com](https://attacker.com)` ya `Origin: null` header add karta hai.
+* Exploitation/Weaponization Phase: Agar response mein `Access-Control-Allow-Origin: [https://attacker.com](https://attacker.com)` aur `Access-Control-Allow-Credentials: true` dikhe, toh vulnerability confirm hoti hai. Attacker ek malicious webpage banata hai jisme JavaScript (`XMLHttpRequest`) code hota hai.
+* Post-Exploitation/Reporting Phase: Attacker link victim ko bhejta hai. Victim click karta hai toh attacker ka script victim ke browser se target API ko request karta hai, sensitive data (like emails, private messages) fetch karta hai, aur attacker ke server pe log kar deta hai.
+* Additional context: Bug bounties mein CORS pe bahut dhyan diya jata hai kyunki modern apps APIs pe heavily dependent hain.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 4:
+
+* Tool Name: Burp Suite
+* Navigation Steps: Repeater > Highlight Request Headers > Add new line `Origin: [https://evil-domain.com](https://evil-domain.com)` > Send > Check Response headers for `Access-Control-Allow-Origin`
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 =====Section 6: OAuth 2.0 Vulnerabilities=====
 Instructor is section mein OAuth 2.0 ke basics aur uske real-world exploitations cover karta hai, jisme Broken Access Control, Account Linking mein CSRF, aur Redirect URI Hijacking ke live practicals shamil hain.
@@ -3068,6 +3185,84 @@ Sections: 1 | Topics: 3 | Subtopics: 20 | CVEs: 0
 ==================================================================================
 
 
+
+
+# Section 20.5: Business Logic Vulnerabilities & Race Conditions
+
+=====Section 20.5: Business Logic Vulnerabilities & Race Conditions=====
+[Instructor is section mein business logic flaws aur HTTP/2 single-packet race conditions explain karta hai, jo automated scanners detect nahi kar sakte aur bug bounties mein sabse high payouts dete hain.] [⚠️ Derived]
+
+--20.5--Business Logic Vulnerabilities & Race Conditions--
+Topic 1: Business Logic Flaws & Parameter Tampering [⚠️ Derived]
+Subtopics: Logic Flaws Concept, Negative Pricing, Cart Manipulation, Order Workflow Bypass, Boundary Conditions
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: Conceptual explanation + practical demo
+* Key terms from transcript: business logic, workflow bypass, automated scanners, negative value, shopping cart, price tampering
+* Exam Tips / Instructor Emphasis: "Scanners don't understand how a business works, only humans do. That's why these bugs pay the highest."
+* Instructor ne jo analogies/examples/demos use kiye: Cart mein ek product quantity ko negative (`-1`) kar diya jisse total bill minus mein chala gaya, aur system ne check-out allow kar diya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[business logic flaws, workflow bypass, price tampering, negative quantity, shopping cart, e-commerce, automated scanners, human intelligence, order completion, boundary condition, logic error]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Application ke rules aur workflow ko manipulate karna (like skipping payment phase ya unexpected values daalna).
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Hacker e-commerce checkout flow step-by-step observe karta hai aur process mapping karta hai.
+* Exploitation/Weaponization Phase: Intercept karke items ki quantity/price mein negative numbers ya extreme decimals inject karta hai, ya payment gateway redirection ko manually skip karke `/success.php` hit karta hai.
+* Post-Exploitation/Reporting Phase: Free mein products order karna ya account mein unlimited credits add karna. Bug bounty mein isey Critical P1 maana jata hai.
+* Additional context: In bugs ko dhoondhne ke liye programming nahi, sirf application ki flow ko deeply samajhna zaroori hota hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+(N/A — manual parameter manipulation via Proxy/Repeater)
+
+--20.5--Business Logic Vulnerabilities & Race Conditions--
+Topic 2: Single-Packet HTTP/2 Race Conditions [⚠️ Derived]
+Subtopics: Race Conditions, HTTP/2 Protocol, Single-Packet Attack, Concurrent Requests, Discount Code Duplication, Limit Bypassing
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Technical explanation of HTTP/2 timing + live execution using Burp Turbo Intruder
+* Key terms from transcript: race condition, concurrent requests, HTTP/2, single-packet attack, network latency, discount code, Turbo Intruder
+* Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki purane race conditions network lag ki wajah se unpredictable the, par HTTP/2 single-packet attack 100% reliable hai kyunki saari requests server par exactly ek hi millisecond par pahunchti hain.
+* Instructor ne jo analogies/examples/demos use kiye: Ek 20% discount code ko (jo sirf 1 baar allow tha) ek hi millisecond mein 5 baar apply kiya, jisse total cart value 100% discount (free) ho gayi.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[race condition, concurrent requests, HTTP/2, single-packet attack, network latency, synchronization, time-of-check to time-of-use, TOCTOU, discount code, coupon duplication, limit bypass, ⭐Burp Turbo Intruder, parallel execution, API endpoints]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Ek hi action (e.g., apply coupon, withdraw money, vote) ko parallelly shoot karke database verification lock-timing ko exploit karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker aisi functionality dhoondhta hai jahan resources limit kiye gaye hon (jaise "1 coupon per user" ya "transfer funds").
+* Exploitation/Weaponization Phase: Attacker Burp Repeater se request group banata hai aur HTTP/2 single-packet sync use karke 20 requests exact ek sath server pe bhejta hai.
+* Post-Exploitation/Reporting Phase: Server lock mechanism activate karne se pehle saari requests process kar leta hai. Attacker ko limit se zyada resources/discounts mil jate hain. Financial/banking apps mein yeh sabse lethal logic flaw hota hai.
+* Additional context: None.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Burp Suite (Repeater)
+* Navigation Steps: Send target request to Repeater > Duplicate request tab 10-20 times > Click the `+` icon to add all to a new Group > Click the Dropdown next to the Send button > Select 'Send group in parallel (single-packet attack)' > Check responses for multiple HTTP 200 OK successes.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
 # Section 21: 2 Hour Live Bug Hunting !
 
 
@@ -3669,85 +3864,6 @@ Subtopics: Alg None Misconfiguration, Signature Stripping, Privilege Escalation,
 
 * Tool Name: Burp Suite (Repeater & JWT Editor)
 * Navigation Steps: Send request to Repeater > Go to JSON Web Token tab > Change `alg` to `none` > Modify payload > Click Attack > Select 'None Signing' > Send request
-
----
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-# Section 24: Business Logic Vulnerabilities & Race Conditions
-
-=====Section 24: Business Logic Vulnerabilities & Race Conditions=====
-[Instructor is section mein business logic flaws aur HTTP/2 single-packet race conditions explain karta hai, jo automated scanners detect nahi kar sakte.] [⚠️ Derived]
-
---24--Business Logic Vulnerabilities & Race Conditions--
-Topic 1: Business Logic Flaws & Parameter Tampering [⚠️ Derived]
-Subtopics: Logic Flaws Concept, Negative Pricing, Cart Manipulation, Order Workflow Bypass
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Moderate
-* Coverage Angle: Both
-* Transcript mein content volume: Conceptual explanation + practical demo
-* Key terms from transcript: business logic, workflow bypass, automated scanners, negative value, shopping cart, price tampering
-* Exam Tips / Instructor Emphasis: "Scanners don't understand how a business works, only humans do. That's why these bugs pay the highest."
-* Instructor ne jo analogies/examples/demos use kiye: Cart mein ek product quantity ko negative (`-1`) kar diya jisse total bill minus mein chala gaya, aur system ne check-out allow kar diya.
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[business logic flaws, workflow bypass, price tampering, negative quantity, shopping cart, e-commerce, automated scanners, human intelligence, order completion, boundary condition, logic error]
-
-⚔️ ATTACK PHASE SIGNAL for Topic 1:
-
-* Phase(s): Exploitation
-* Attack methodology context from transcript: Application ke rules aur workflow ko manipulate karna (like skipping payment phase ya unexpected values daalna).
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Recon/Discovery Phase: Hacker e-commerce checkout flow step-by-step observe karta hai.
-* Exploitation/Weaponization Phase: Intercept karke items ki quantity/price mein negative numbers ya extreme decimals inject karta hai, ya payment gateway redirection ko manually skip karke `/success.php` hit karta hai.
-* Post-Exploitation/Reporting Phase: Free mein products order karna ya dusre items ka price negate karna.
-* Additional context: Bug bounties mein inka scope bahut wide hota hai.
-
-🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
-(N/A — manual parameter manipulation via proxy)
-
----
-
---24--Business Logic Vulnerabilities & Race Conditions--
-Topic 2: Single-Packet HTTP/2 Race Conditions [⚠️ Derived]
-Subtopics: Race Conditions, HTTP/2 Protocol, Single-Packet Attack, Concurrent Requests, Discount Code Duplication
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Technical explanation of HTTP/2 timing + live execution using Burp Turbo Intruder
-* Key terms from transcript: race condition, concurrent requests, HTTP/2, single-packet attack, network latency, discount code, Turbo Intruder
-* Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki purane race conditions network lag ki wajah se fail ho jate the, par HTTP/2 single-packet attack 100% reliable hai.
-* Instructor ne jo analogies/examples/demos use kiye: Ek 20% discount code ko ek hi millisecond mein 5 baar apply kiya, jisse total cart value 100% discount (free) ho gayi.
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[race condition, concurrent requests, HTTP/2, single-packet attack, network latency, synchronization, time-of-check to time-of-use, TOCTOU, discount code, coupon duplication, ⭐Burp Turbo Intruder, python script, race.py, parallel execution]
-
-⚔️ ATTACK PHASE SIGNAL for Topic 2:
-
-* Phase(s): Exploitation
-* Attack methodology context from transcript: Ek hi action (e.g., apply coupon, withdraw money) ko ek exact millisecond mein multiple times bhej kar database verification delay ko exploit karna.
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Recon/Discovery Phase: Aisi functionality dhoondhna jahan limit lagayi gayi ho (jaise "1 coupon per user").
-* Exploitation/Weaponization Phase: Burp Repeater se request group banana aur HTTP/2 single-packet sync use karke 20 requests ek sath server pe bhejna.
-* Post-Exploitation/Reporting Phase: Server lock lagane se pehle saari requests process kar leta hai, aur user ko limit se zyada resources/discounts mil jate hain.
-* Additional context: Extremely high severity bug in financial/banking apps (e.g., withdrawing $100 five times when balance is only $100).
-
-🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
-
-* Tool Name: Burp Suite
-* Navigation Steps: Send request to Repeater > Duplicate request 10 times > Add all to a new Group > Click the Dropdown next to Send > Select 'Send group in parallel (single-packet attack)' > Check responses for multiple successes
 
 ---
 
