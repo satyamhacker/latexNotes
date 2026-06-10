@@ -264,6 +264,41 @@ Subtopics: Directory Brute-Forcing, Feroxbuster Installation, Windows Subsystem 
 
 🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
 (N/A — transcript mein koi GUI tool navigation nahi tha)
+--5--CSRF - Cross-Site Request Forgery--
+Topic 4: CORS Misconfigurations & Data Theft [⚠️ Derived]
+Subtopics: Cross-Origin Resource Sharing, Same-Origin Policy (SOP), Origin Header, Access-Control-Allow-Origin, Null Origin Bypass, Authenticated Data Extraction
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Detailed explanation of SOP/CORS and practical exploitation via malicious HTML
+* Key terms from transcript: CORS, SOP, Same Origin Policy, Origin header, Access-Control-Allow-Origin, Access-Control-Allow-Credentials, wildcard, null origin, XMLHttpRequest
+* Exam Tips / Instructor Emphasis: Instructor ne emphasize kiya ki CORS vulnerabilities CSRF ki tarah action perform nahi karti, balki sensitive data (jaise API keys, personal info) "read" aur "steal" karne ke kaam aati hain.
+* Instructor ne jo analogies/examples/demos use kiye: Burp mein `Origin: https://evil.com` bhej kar dekha ki response mein `Access-Control-Allow-Origin: https://evil.com` reflect ho raha hai. Phir ek malicious JavaScript payload banaya jo logged-in user ka API key fetch karke attacker ko bhej de.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Cross-Origin Resource Sharing, CORS, Same Origin Policy, SOP, Origin header, wildcard `*`, `Access-Control-Allow-Origin`, `Access-Control-Allow-Credentials: true`, reflection, null origin, `Origin: null`, iframe sandbox, XMLHttpRequest, fetch API, data exfiltration, JSON response, steal data]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 4:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Target application ke CORS policy headers mein misconfiguration dhundhna taaki ek malicious website se target user ka authenticated data read kiya ja sake.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Recon/Discovery Phase: Attacker target API ki requests ko Repeater mein bhejta hai aur explicitly `Origin: https://attacker.com` ya `Origin: null` header add karta hai.
+* Exploitation/Weaponization Phase: Agar response mein `Access-Control-Allow-Origin: https://attacker.com` aur `Access-Control-Allow-Credentials: true` dikhe, toh vulnerability confirm hoti hai. Attacker ek malicious webpage banata hai jisme JavaScript (`XMLHttpRequest`) code hota hai.
+* Post-Exploitation/Reporting Phase: Attacker link victim ko bhejta hai. Victim click karta hai toh attacker ka script victim ke browser se target API ko request karta hai, sensitive data (like emails, private messages) fetch karta hai, aur attacker ke server pe log kar deta hai.
+* Additional context: Bug bounties mein CORS pe bahut dhyan diya jata hai kyunki modern apps APIs pe heavily dependent hain.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 4:
+
+* Tool Name: Burp Suite
+* Navigation Steps: Repeater > Highlight Request Headers > Add new line `Origin: https://evil-domain.com` > Send > Check Response headers for `Access-Control-Allow-Origin`
+
+
 
 --2--Information Disclosure vulnerabilities--
 Topic 4: Source Code Recovery via Exposed .git Directory
@@ -1041,9 +1076,11 @@ Topic 2: Live Exploitation Demo (Email Change)
 Topic 3: Real-World Execution, Reporting & Token Bypasses
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 15 | CVEs: 0
+Sections: 1 | Topics: 4 | Subtopics: 21 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
 
 ==================================================================================
 
@@ -1051,43 +1088,6 @@ Sections: 1 | Topics: 3 | Subtopics: 15 | CVEs: 0
 # Section 6: OAUTH 2.0 Vulnerabilities
 
 
-
-
---5--CSRF - Cross-Site Request Forgery--
-Topic 4: CORS Misconfigurations & Data Theft [⚠️ Derived]
-Subtopics: Cross-Origin Resource Sharing, Same-Origin Policy (SOP), Origin Header, Access-Control-Allow-Origin, Null Origin Bypass, Authenticated Data Extraction
-
-[📊 SCOPE SIGNAL for Topic 4:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Detailed explanation of SOP/CORS and practical exploitation via malicious HTML
-* Key terms from transcript: CORS, SOP, Same Origin Policy, Origin header, Access-Control-Allow-Origin, Access-Control-Allow-Credentials, wildcard, null origin, XMLHttpRequest
-* Exam Tips / Instructor Emphasis: Instructor ne emphasize kiya ki CORS vulnerabilities CSRF ki tarah action perform nahi karti, balki sensitive data (jaise API keys, personal info) "read" aur "steal" karne ke kaam aati hain.
-* Instructor ne jo analogies/examples/demos use kiye: Burp mein `Origin: [https://evil.com](https://evil.com)` bhej kar dekha ki response mein `Access-Control-Allow-Origin: [https://evil.com](https://evil.com)` reflect ho raha hai. Phir ek malicious JavaScript payload banaya jo logged-in user ka API key fetch karke attacker ko bhej de.
-]
-
-🔑 KEYWORDS DUMP for Topic 4:
-[Cross-Origin Resource Sharing, CORS, Same Origin Policy, SOP, Origin header, wildcard `*`, `Access-Control-Allow-Origin`, `Access-Control-Allow-Credentials: true`, reflection, null origin, `Origin: null`, iframe sandbox, XMLHttpRequest, fetch API, data exfiltration, JSON response, steal data]
-
-⚔️ ATTACK PHASE SIGNAL for Topic 4:
-
-* Phase(s): Exploitation
-* Attack methodology context from transcript: Target application ke CORS policy headers mein misconfiguration dhundhna taaki ek malicious website se target user ka authenticated data read kiya ja sake.
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
-
-* Recon/Discovery Phase: Attacker target API ki requests ko Repeater mein bhejta hai aur explicitly `Origin: [https://attacker.com](https://attacker.com)` ya `Origin: null` header add karta hai.
-* Exploitation/Weaponization Phase: Agar response mein `Access-Control-Allow-Origin: [https://attacker.com](https://attacker.com)` aur `Access-Control-Allow-Credentials: true` dikhe, toh vulnerability confirm hoti hai. Attacker ek malicious webpage banata hai jisme JavaScript (`XMLHttpRequest`) code hota hai.
-* Post-Exploitation/Reporting Phase: Attacker link victim ko bhejta hai. Victim click karta hai toh attacker ka script victim ke browser se target API ko request karta hai, sensitive data (like emails, private messages) fetch karta hai, aur attacker ke server pe log kar deta hai.
-* Additional context: Bug bounties mein CORS pe bahut dhyan diya jata hai kyunki modern apps APIs pe heavily dependent hain.
-
-🛠️ TOOL NAVIGATION SIGNAL for Topic 4:
-
-* Tool Name: Burp Suite
-* Navigation Steps: Repeater > Highlight Request Headers > Add new line `Origin: [https://evil-domain.com](https://evil-domain.com)` > Send > Check Response headers for `Access-Control-Allow-Origin`
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 =====Section 6: OAuth 2.0 Vulnerabilities=====
 Instructor is section mein OAuth 2.0 ke basics aur uske real-world exploitations cover karta hai, jisme Broken Access Control, Account Linking mein CSRF, aur Redirect URI Hijacking ke live practicals shamil hain.
@@ -3871,12 +3871,12 @@ Subtopics: Alg None Misconfiguration, Signature Stripping, Privilege Escalation,
 
 ==================================================================================
 
-# Section 25: Server-Side Template Injection (SSTI)
+# Section 24: Server-Side Template Injection (SSTI)
 
-=====Section 25: Server-Side Template Injection (SSTI)=====
+=====Section 24: Server-Side Template Injection (SSTI)=====
 [Instructor is section mein Server-Side Template Injection (SSTI) explain karta hai aur sikhata hai ki kaise template engines ko manipulate karke Remote Code Execution (RCE) obtain kiya jata hai.] [⚠️ Derived]
 
---25--Server-Side Template Injection (SSTI)--
+--24--Server-Side Template Injection (SSTI)--
 Topic 1: SSTI Fundamentals & Detection [⚠️ Derived]
 Subtopics: Template Engines, SSTI Concept, Mathematical Payloads, Jinja2, Twig, Context Breakout
 
@@ -3910,7 +3910,7 @@ Subtopics: Template Engines, SSTI Concept, Mathematical Payloads, Jinja2, Twig, 
 
 ---
 
---25--Server-Side Template Injection (SSTI)--
+--24--Server-Side Template Injection (SSTI)--
 Topic 2: Escalating SSTI to RCE [⚠️ Derived]
 Subtopics: Template Exploitation, MRO (Method Resolution Order), Python Payloads, OS Module Execution, Remote Code Execution
 
@@ -3948,12 +3948,12 @@ Subtopics: Template Exploitation, MRO (Method Resolution Order), Python Payloads
 
 ==================================================================================
 
-# Section 26: HTTP Request Smuggling
+# Section 25: HTTP Request Smuggling
 
-=====Section 26: HTTP Request Smuggling=====
+=====Section 25: HTTP Request Smuggling=====
 [Instructor is section mein advanced HTTP architecture flaws explain karta hai jahan Front-End load balancers aur Back-End servers ke beech HTTP parsing mismatch ko exploit kiya jata hai.] [⚠️ Derived]
 
---26--HTTP Request Smuggling--
+--25--HTTP Request Smuggling--
 Topic 1: Request Smuggling Fundamentals [⚠️ Derived]
 Subtopics: Front-End Proxy, Back-End Server, Content-Length Header, Transfer-Encoding Header, CL.TE, TE.CL
 
@@ -3989,7 +3989,7 @@ Subtopics: Front-End Proxy, Back-End Server, Content-Length Header, Transfer-Enc
 
 ---
 
---26--HTTP Request Smuggling--
+--25--HTTP Request Smuggling--
 Topic 2: Exploitation & Impact (Bypassing Controls) [⚠️ Derived]
 Subtopics: Request Poisoning, Admin Access Bypass, Capturing User Requests, HTTP Smuggler Extension
 
@@ -4029,7 +4029,7 @@ Subtopics: Request Poisoning, Admin Access Bypass, Capturing User Requests, HTTP
 
 * [x] Poora content requested topics ke according generate kiya.
 * [x] Exactly "Notes Guru" skeleton format maintain rakha (Headers, Topic titles, Scope, Keywords, Attack Phase, Real-World Flow, Tool Navigation).
-* [x] Naye Sections ko specifically **23, 24, 25 aur 26** number assign kiya.
+* [x] Naye Sections ko specifically **20.5, 23, 24 aur 25** number assign kiya.
 * [x] Offensive terms (Payload, RCE, bypass, smuggling, etc.) bina censor kiye extract/generate kiye.
 * [x] Instructor tone aur Hinglish mix maintain rakha.
 
@@ -4040,15 +4040,12 @@ Section 23: Modern Authentication & JWT Exploitation
   Topic 1: JWT Fundamentals & Token Structure
   Topic 2: The "None" Algorithm Bypass
 
-Section 24: Business Logic Vulnerabilities & Race Conditions
-  Topic 1: Business Logic Flaws & Parameter Tampering
-  Topic 2: Single-Packet HTTP/2 Race Conditions
 
-Section 25: Server-Side Template Injection (SSTI)
+Section 24: Server-Side Template Injection (SSTI)
   Topic 1: SSTI Fundamentals & Detection
   Topic 2: Escalating SSTI to RCE
 
-Section 26: HTTP Request Smuggling
+Section 25: HTTP Request Smuggling
   Topic 1: Request Smuggling Fundamentals
   Topic 2: Exploitation & Impact (Bypassing Controls)
 
