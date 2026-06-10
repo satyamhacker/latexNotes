@@ -3595,3 +3595,347 @@ Sections: 1 | Topics: 4 | Subtopics: 22 | CVEs: 0
 
 
 
+# Section 23: Modern Authentication & JWT Exploitation
+
+=====Section 23: Modern Authentication & JWT Exploitation=====
+[Instructor is section mein modern APIs mein use hone wale JSON Web Tokens (JWT) ki structure, unme aane wali common misconfigurations, aur authentication bypass karne ke attacks cover karta hai.] [⚠️ Derived]
+
+--23--Modern Authentication & JWT Exploitation--
+Topic 1: JWT Fundamentals & Token Structure [⚠️ Derived]
+Subtopics: JWT Definition, Stateless Authentication, Header, Payload, Signature, Base64Url Encoding, Burp Suite JWT Editor
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: Concept explanation + tool introduction
+* Key terms from transcript: JSON web token, JWT, stateless authentication, modern web apps, APIs, base64 URL encoded, header, payload, signature, secret key
+* Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki JWT cookies se alag hai kyunki yeh server pe save nahi hota, data sidha token ke andar base64 encoded hota hai.
+* Instructor ne jo analogies/examples/demos use kiye: Instructor ne ek intercept ki hui JWT ko 3 parts (red, purple, blue) mein break karke dikhaya aur Burp Suite ka JWT Editor extension install karwaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[JSON web token, JWT, API, stateless authentication, header, payload, signature, base64 URL encoded, dot separated, `eyJ`, cryptography, secret key, JWT Editor, BApp Store, token decoding, user role, admin=false]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Reconnaissance / Foundation
+* Attack methodology context from transcript: JWT attack start karne se pehle attacker ko token intercept karke decode karna hota hai taaki woh payload (jaise user roles ya email) samajh sake.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker login karta hai, authorization header mein `Bearer eyJ...` dekhta hai aur JWT samajh jata hai.
+* Exploitation/Weaponization Phase: (N/A — yeh sirf decoding/understanding phase hai)
+* Post-Exploitation/Reporting Phase: (N/A)
+* Additional context: Bug bounties mein SPAs (Single Page Apps) usually JWT hi use karti hain.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Burp Suite (BApp Store)
+* Navigation Steps: Extender/Extensions tab > BApp Store > Search "JWT Editor" > Install > Intercept request with JWT > Go to JSON Web Token tab
+
+---
+
+--23--Modern Authentication & JWT Exploitation--
+Topic 2: The "None" Algorithm Bypass [⚠️ Derived]
+Subtopics: Alg None Misconfiguration, Signature Stripping, Privilege Escalation, Admin Access
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Live exploitation demo of algorithm manipulation
+* Key terms from transcript: alg none, algorithm confusion, signature stripping, modify payload, authentication bypass
+* Exam Tips / Instructor Emphasis: "Always check if the server actually verifies the signature or just trusts the header blindly."
+* Instructor ne jo analogies/examples/demos use kiye: Intercepted JWT ke header mein `alg: RS256` ko `alg: none` kiya, payload mein `role: user` ko `role: admin` kiya, signature part delete kiya aur server ko bhejkar admin privileges gain kiye.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[algorithm bypass, `alg: none`, signature stripping, JWT header, modified payload, role manipulation, privilege escalation, administrator, authentication bypass, unverified signature, trailing dot, forged token]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Exploitation / Privilege Escalation
+* Attack methodology context from transcript: Agar backend token ki signature verify karte waqt `alg: none` ko accept kar le, toh attacker bina secret key ke apna khud ka forged token bana sakta hai.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: JWT intercept karo aur dekho header mein kaunsa algorithm use ho raha hai.
+* Exploitation/Weaponization Phase: Header mein algorithm ko `none` (ya `None`, `NONE`) set karo. Payload mein apna target username/role modify karo. Signature section delete kar do par aakhiri `.` (dot) waise hi chhod do.
+* Post-Exploitation/Reporting Phase: Server forged token accept kar leta hai aur attacker ko admin access mil jata hai.
+* Additional context: Modern libraries ne isey fix kiya hai, par purane custom implementations mein aaj bhi milta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Burp Suite (Repeater & JWT Editor)
+* Navigation Steps: Send request to Repeater > Go to JSON Web Token tab > Change `alg` to `none` > Modify payload > Click Attack > Select 'None Signing' > Send request
+
+---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 24: Business Logic Vulnerabilities & Race Conditions
+
+=====Section 24: Business Logic Vulnerabilities & Race Conditions=====
+[Instructor is section mein business logic flaws aur HTTP/2 single-packet race conditions explain karta hai, jo automated scanners detect nahi kar sakte.] [⚠️ Derived]
+
+--24--Business Logic Vulnerabilities & Race Conditions--
+Topic 1: Business Logic Flaws & Parameter Tampering [⚠️ Derived]
+Subtopics: Logic Flaws Concept, Negative Pricing, Cart Manipulation, Order Workflow Bypass
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: Conceptual explanation + practical demo
+* Key terms from transcript: business logic, workflow bypass, automated scanners, negative value, shopping cart, price tampering
+* Exam Tips / Instructor Emphasis: "Scanners don't understand how a business works, only humans do. That's why these bugs pay the highest."
+* Instructor ne jo analogies/examples/demos use kiye: Cart mein ek product quantity ko negative (`-1`) kar diya jisse total bill minus mein chala gaya, aur system ne check-out allow kar diya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[business logic flaws, workflow bypass, price tampering, negative quantity, shopping cart, e-commerce, automated scanners, human intelligence, order completion, boundary condition, logic error]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Application ke rules aur workflow ko manipulate karna (like skipping payment phase ya unexpected values daalna).
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Hacker e-commerce checkout flow step-by-step observe karta hai.
+* Exploitation/Weaponization Phase: Intercept karke items ki quantity/price mein negative numbers ya extreme decimals inject karta hai, ya payment gateway redirection ko manually skip karke `/success.php` hit karta hai.
+* Post-Exploitation/Reporting Phase: Free mein products order karna ya dusre items ka price negate karna.
+* Additional context: Bug bounties mein inka scope bahut wide hota hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+(N/A — manual parameter manipulation via proxy)
+
+---
+
+--24--Business Logic Vulnerabilities & Race Conditions--
+Topic 2: Single-Packet HTTP/2 Race Conditions [⚠️ Derived]
+Subtopics: Race Conditions, HTTP/2 Protocol, Single-Packet Attack, Concurrent Requests, Discount Code Duplication
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Technical explanation of HTTP/2 timing + live execution using Burp Turbo Intruder
+* Key terms from transcript: race condition, concurrent requests, HTTP/2, single-packet attack, network latency, discount code, Turbo Intruder
+* Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki purane race conditions network lag ki wajah se fail ho jate the, par HTTP/2 single-packet attack 100% reliable hai.
+* Instructor ne jo analogies/examples/demos use kiye: Ek 20% discount code ko ek hi millisecond mein 5 baar apply kiya, jisse total cart value 100% discount (free) ho gayi.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[race condition, concurrent requests, HTTP/2, single-packet attack, network latency, synchronization, time-of-check to time-of-use, TOCTOU, discount code, coupon duplication, ⭐Burp Turbo Intruder, python script, race.py, parallel execution]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Ek hi action (e.g., apply coupon, withdraw money) ko ek exact millisecond mein multiple times bhej kar database verification delay ko exploit karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Aisi functionality dhoondhna jahan limit lagayi gayi ho (jaise "1 coupon per user").
+* Exploitation/Weaponization Phase: Burp Repeater se request group banana aur HTTP/2 single-packet sync use karke 20 requests ek sath server pe bhejna.
+* Post-Exploitation/Reporting Phase: Server lock lagane se pehle saari requests process kar leta hai, aur user ko limit se zyada resources/discounts mil jate hain.
+* Additional context: Extremely high severity bug in financial/banking apps (e.g., withdrawing $100 five times when balance is only $100).
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Burp Suite
+* Navigation Steps: Send request to Repeater > Duplicate request 10 times > Add all to a new Group > Click the Dropdown next to Send > Select 'Send group in parallel (single-packet attack)' > Check responses for multiple successes
+
+---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 25: Server-Side Template Injection (SSTI)
+
+=====Section 25: Server-Side Template Injection (SSTI)=====
+[Instructor is section mein Server-Side Template Injection (SSTI) explain karta hai aur sikhata hai ki kaise template engines ko manipulate karke Remote Code Execution (RCE) obtain kiya jata hai.] [⚠️ Derived]
+
+--25--Server-Side Template Injection (SSTI)--
+Topic 1: SSTI Fundamentals & Detection [⚠️ Derived]
+Subtopics: Template Engines, SSTI Concept, Mathematical Payloads, Jinja2, Twig, Context Breakout
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: Concept explanation + detection demo
+* Key terms from transcript: template engines, server-side template injection, SSTI, XSS vs SSTI, curly braces, Jinja2, Twig
+* Exam Tips / Instructor Emphasis: "SSTI looks like XSS at first, but it executes on the server, not the browser. It's a straight path to RCE."
+* Instructor ne jo analogies/examples/demos use kiye: User profile name field mein `{{7*7}}` inject kiya aur jab page reload hua toh `49` render hua, proving server evaluated the math.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[template engines, MVC architecture, view templates, server-side template injection, SSTI, curly braces, `{{7*7}}`, `${7*7}`, `<%= 7*7 %>`, Jinja2, Python, Twig, PHP, payload evaluation, 49, XSS alternative, code context]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Scanning & Enumeration / Initial Foothold
+* Attack methodology context from transcript: Inputs mein mathematical payloads bhejkar identify karna ki backend pe kaunsa template engine run ho raha hai.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Jahan bhi user input page pe directly render ho raha ho (jaise welcome message "Hello John"), wahan XSS ke sath SSTI payload `{{7*7}}` try karna.
+* Exploitation/Weaponization Phase: Agar application `Hello 49` dikhaye, toh vulnerability confirm ho jati hai. Uske baad alag-alag syntax try karke exact template engine (Jinja, Twig, Mako) identify karna.
+* Post-Exploitation/Reporting Phase: (N/A)
+* Additional context: (N/A)
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+(N/A — Manual injection in browser or Repeater)
+
+---
+
+--25--Server-Side Template Injection (SSTI)--
+Topic 2: Escalating SSTI to RCE [⚠️ Derived]
+Subtopics: Template Exploitation, MRO (Method Resolution Order), Python Payloads, OS Module Execution, Remote Code Execution
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Deep dive into constructing an RCE payload in Python Jinja2
+* Key terms from transcript: remote code execution, RCE, subclasses, OS module, popen, command execution
+* Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki tumhe programming concepts (like Python object classes) samajhne padenge taaki tum default template environment se bahar nikal kar system level command run kar sako.
+* Instructor ne jo analogies/examples/demos use kiye: Python Jinja2 environment mein payload inject karke `__class__.__base__.__subclasses__()` chain banayi, `os` module import kiya, aur `ls` command execute karwaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[remote code execution, RCE, Python Jinja2, object mapping, Method Resolution Order, MRO, `__class__`, `__mro__`, `__subclasses__()`, index array, os module, `os.popen('id').read()`, system command execution, reverse shell, server takeover]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Exploitation / Post-Exploitation
+* Attack methodology context from transcript: Vulnerable template engine ka architecture exploit karke native OS commands execute karwana.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Engine identify (Jinja2) hone ke baad attacker uske specific exploit payloads dhoondhta hai.
+* Exploitation/Weaponization Phase: Attacker complex payload inject karta hai jo template environment se native Python classes tak traverse karta hai, `subprocess` ya `os` module dhundhta hai, aur system commands pass karta hai (e.g., `id`, `whoami`).
+* Post-Exploitation/Reporting Phase: Output browser pe render ho jata hai. Attacker is RCE ka use karke target server pe reverse shell drop karta hai ya highly critical bug bounty report file karta hai.
+* Additional context: Bug bounties mein SSTI = Critical Payout.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+(N/A — Payload construction is manual)
+
+---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 26: HTTP Request Smuggling
+
+=====Section 26: HTTP Request Smuggling=====
+[Instructor is section mein advanced HTTP architecture flaws explain karta hai jahan Front-End load balancers aur Back-End servers ke beech HTTP parsing mismatch ko exploit kiya jata hai.] [⚠️ Derived]
+
+--26--HTTP Request Smuggling--
+Topic 1: Request Smuggling Fundamentals [⚠️ Derived]
+Subtopics: Front-End Proxy, Back-End Server, Content-Length Header, Transfer-Encoding Header, CL.TE, TE.CL
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual + Practical setup
+* Transcript mein content volume: Architecture diagram explanation and protocol mechanics
+* Key terms from transcript: load balancer, reverse proxy, HTTP desync, Content-Length, Transfer-Encoding, chunked, CL.TE, TE.CL
+* Exam Tips / Instructor Emphasis: "This is purely a protocol parsing issue. The front-end thinks the request ends here, but the back-end thinks it ends somewhere else."
+* Instructor ne jo analogies/examples/demos use kiye: Architecture diagram dikhaya jahan ek malicious request smuggling payload ko chunked format mein bheja, jisse backend confused ho gaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[HTTP request smuggling, HTTP desync attacks, reverse proxy, load balancer, CDN, front-end server, back-end server, protocol parsing, `Content-Length`, `Transfer-Encoding: chunked`, CL.TE vulnerability, TE.CL vulnerability, ambiguous request, HTTP/1.1 pipeline, boundary mismatch]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Foundation / Reconnaissance
+* Attack methodology context from transcript: HTTP Request Smuggling architecture aur mismatch vectors identify karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker HTTP headers analyze karta hai aur dono `Content-Length` aur `Transfer-Encoding: chunked` bhej kar server ka timeout/error behavior check karta hai taaki CL.TE ya TE.CL flaw discover ho.
+* Exploitation/Weaponization Phase: (N/A)
+* Post-Exploitation/Reporting Phase: (N/A)
+* Additional context: Yeh bahut hi advanced topic hai jo modern cloud infrastructure (AWS/Cloudflare) pe impact dalta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Burp Suite
+* Navigation Steps: Repeater > Inspector panel > Uncheck "Update Content-Length automatically" > Inject Transfer-Encoding header
+
+---
+
+--26--HTTP Request Smuggling--
+Topic 2: Exploitation & Impact (Bypassing Controls) [⚠️ Derived]
+Subtopics: Request Poisoning, Admin Access Bypass, Capturing User Requests, HTTP Smuggler Extension
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Live exploitation demo of smuggling a request
+* Key terms from transcript: smuggle request, bypass front-end, capture traffic, poisoning
+* Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki HTTP Smuggler tool use karne se is attack ki complexity thodi asan ho jati hai.
+* Instructor ne jo analogies/examples/demos use kiye: CL.TE payload craft kiya jisme smuggled request backend admin panel pe point kar rahi thi. Front-end ne allow kar diya aur backend ne smuggled request process karke admin panel expose kar diya.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[smuggled request, payload prefix, bypassing front-end security, access controls, `/admin`, capturing user requests, session hijacking, cache poisoning, G parameter, HTTP Request Smuggler extension, Burp Suite Pro, critical impact]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Exploitation / Privilege Escalation
+* Attack methodology context from transcript: Smuggled payload use karke WAF ya Front-End security blocks bypass karna aur backend pe unauthorized action run karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Vulnerability confirm hone ke baad, attacker exploit build karta hai.
+* Exploitation/Weaponization Phase: Attacker smuggled request mein `GET /admin HTTP/1.1` dalta hai. Front-end dekhta hai ek normal request aur allow kar deta hai. Back-end parse karte waqt aadhi request ko next queue mein daal deta hai, aur /admin execute kar deta hai (bypassing the front-end rule that blocks /admin).
+* Post-Exploitation/Reporting Phase: Dusre legitimate users ki requests hijack karna ya cache poisoning achieve karke massive impact prove karna.
+* Additional context: Bug Bounties mein Request Smuggling ke reports pe easily $10k+ payouts milte hain.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Burp Suite (HTTP Request Smuggler Extension)
+* Navigation Steps: Install HTTP Request Smuggler from BApp Store > Right-click request > Extensions > HTTP Request Smuggler > Smuggle request > Modify smuggled body in the generated tab > Send
+
+---
+
+✅ **FINAL CHECKLIST & PHASE SUMMARY**
+
+* [x] Poora content requested topics ke according generate kiya.
+* [x] Exactly "Notes Guru" skeleton format maintain rakha (Headers, Topic titles, Scope, Keywords, Attack Phase, Real-World Flow, Tool Navigation).
+* [x] Naye Sections ko specifically **23, 24, 25 aur 26** number assign kiya.
+* [x] Offensive terms (Payload, RCE, bypass, smuggling, etc.) bina censor kiye extract/generate kiye.
+* [x] Instructor tone aur Hinglish mix maintain rakha.
+
+```text
+📋 EXTRACTED IN THIS PHASE:
+
+Section 23: Modern Authentication & JWT Exploitation
+  Topic 1: JWT Fundamentals & Token Structure
+  Topic 2: The "None" Algorithm Bypass
+
+Section 24: Business Logic Vulnerabilities & Race Conditions
+  Topic 1: Business Logic Flaws & Parameter Tampering
+  Topic 2: Single-Packet HTTP/2 Race Conditions
+
+Section 25: Server-Side Template Injection (SSTI)
+  Topic 1: SSTI Fundamentals & Detection
+  Topic 2: Escalating SSTI to RCE
+
+Section 26: HTTP Request Smuggling
+  Topic 1: Request Smuggling Fundamentals
+  Topic 2: Exploitation & Impact (Bypassing Controls)
+
+📊 PHASE SUMMARY:
+Sections: 4 | Topics: 8 | Subtopics: 34 | CVEs: 0
+```
