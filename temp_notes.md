@@ -264,6 +264,9 @@ Subtopics: Directory Brute-Forcing, Feroxbuster Installation, Windows Subsystem 
 
 🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
 (N/A — transcript mein koi GUI tool navigation nahi tha)
+
+
+
 --2--Information Disclosure vulnerabilities--
 Topic 4: Source Code Recovery via Exposed .git Directory
 Subtopics: Exposed .git Directory, Git Version Control, Recursive Wget Download, Git GUI Analysis, Commit History Analysis, Password Recovery
@@ -1028,6 +1031,41 @@ Subtopics: Auto-Submit Forms, Bug Bounty PoC Delivery, Hidden Inputs, CSRF Token
 🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
 (N/A — transcript mein koi GUI tool navigation nahi tha)
 
+--5--CSRF - Cross-Site Request Forgery--
+Topic 4: CORS Misconfigurations & Data Theft [⚠️ Derived]
+Subtopics: Cross-Origin Resource Sharing, Same-Origin Policy (SOP), Origin Header, Access-Control-Allow-Origin, Null Origin Bypass, Authenticated Data Extraction
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Detailed explanation of SOP/CORS and practical exploitation via malicious HTML
+* Key terms from transcript: CORS, SOP, Same Origin Policy, Origin header, Access-Control-Allow-Origin, Access-Control-Allow-Credentials, wildcard, null origin, XMLHttpRequest
+* Exam Tips / Instructor Emphasis: Instructor ne emphasize kiya ki CORS vulnerabilities CSRF ki tarah action perform nahi karti, balki sensitive data (jaise API keys, personal info) "read" aur "steal" karne ke kaam aati hain.
+* Instructor ne jo analogies/examples/demos use kiye: Burp mein `Origin: https://evil.com` bhej kar dekha ki response mein `Access-Control-Allow-Origin: https://evil.com` reflect ho raha hai. Phir ek malicious JavaScript payload banaya jo logged-in user ka API key fetch karke attacker ko bhej de.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Cross-Origin Resource Sharing, CORS, Same Origin Policy, SOP, Origin header, wildcard `*`, `Access-Control-Allow-Origin`, `Access-Control-Allow-Credentials: true`, reflection, null origin, `Origin: null`, iframe sandbox, XMLHttpRequest, fetch API, data exfiltration, JSON response, steal data]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 4:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Target application ke CORS policy headers mein misconfiguration dhundhna taaki ek malicious website se target user ka authenticated data read kiya ja sake.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Recon/Discovery Phase: Attacker target API ki requests ko Repeater mein bhejta hai aur explicitly `Origin: https://attacker.com` ya `Origin: null` header add karta hai.
+* Exploitation/Weaponization Phase: Agar response mein `Access-Control-Allow-Origin: https://attacker.com` aur `Access-Control-Allow-Credentials: true` dikhe, toh vulnerability confirm hoti hai. Attacker ek malicious webpage banata hai jisme JavaScript (`XMLHttpRequest`) code hota hai.
+* Post-Exploitation/Reporting Phase: Attacker link victim ko bhejta hai. Victim click karta hai toh attacker ka script victim ke browser se target API ko request karta hai, sensitive data (like emails, private messages) fetch karta hai, aur attacker ke server pe log kar deta hai.
+* Additional context: Bug bounties mein CORS pe bahut dhyan diya jata hai kyunki modern apps APIs pe heavily dependent hain.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 4:
+
+* Tool Name: Burp Suite
+* Navigation Steps: Repeater > Highlight Request Headers > Add new line `Origin: https://evil-domain.com` > Send > Check Response headers for `Access-Control-Allow-Origin`
+
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -1038,6 +1076,7 @@ Section 5: CSRF - Cross-Site Request Forgery
 Topic 1: CSRF Fundamentals & Testing Methodology
 Topic 2: Live Exploitation Demo (Email Change)
 Topic 3: Real-World Execution, Reporting & Token Bypasses
+Topic 4: CORS Misconfigurations & Data Theft
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 4 | Subtopics: 21 | CVEs: 0
