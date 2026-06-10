@@ -264,42 +264,6 @@ Subtopics: Directory Brute-Forcing, Feroxbuster Installation, Windows Subsystem 
 
 🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
 (N/A — transcript mein koi GUI tool navigation nahi tha)
---5--CSRF - Cross-Site Request Forgery--
-Topic 4: CORS Misconfigurations & Data Theft [⚠️ Derived]
-Subtopics: Cross-Origin Resource Sharing, Same-Origin Policy (SOP), Origin Header, Access-Control-Allow-Origin, Null Origin Bypass, Authenticated Data Extraction
-
-[📊 SCOPE SIGNAL for Topic 4:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Detailed explanation of SOP/CORS and practical exploitation via malicious HTML
-* Key terms from transcript: CORS, SOP, Same Origin Policy, Origin header, Access-Control-Allow-Origin, Access-Control-Allow-Credentials, wildcard, null origin, XMLHttpRequest
-* Exam Tips / Instructor Emphasis: Instructor ne emphasize kiya ki CORS vulnerabilities CSRF ki tarah action perform nahi karti, balki sensitive data (jaise API keys, personal info) "read" aur "steal" karne ke kaam aati hain.
-* Instructor ne jo analogies/examples/demos use kiye: Burp mein `Origin: https://evil.com` bhej kar dekha ki response mein `Access-Control-Allow-Origin: https://evil.com` reflect ho raha hai. Phir ek malicious JavaScript payload banaya jo logged-in user ka API key fetch karke attacker ko bhej de.
-]
-
-🔑 KEYWORDS DUMP for Topic 4:
-[Cross-Origin Resource Sharing, CORS, Same Origin Policy, SOP, Origin header, wildcard `*`, `Access-Control-Allow-Origin`, `Access-Control-Allow-Credentials: true`, reflection, null origin, `Origin: null`, iframe sandbox, XMLHttpRequest, fetch API, data exfiltration, JSON response, steal data]
-
-⚔️ ATTACK PHASE SIGNAL for Topic 4:
-
-* Phase(s): Exploitation
-* Attack methodology context from transcript: Target application ke CORS policy headers mein misconfiguration dhundhna taaki ek malicious website se target user ka authenticated data read kiya ja sake.
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
-
-* Recon/Discovery Phase: Attacker target API ki requests ko Repeater mein bhejta hai aur explicitly `Origin: https://attacker.com` ya `Origin: null` header add karta hai.
-* Exploitation/Weaponization Phase: Agar response mein `Access-Control-Allow-Origin: https://attacker.com` aur `Access-Control-Allow-Credentials: true` dikhe, toh vulnerability confirm hoti hai. Attacker ek malicious webpage banata hai jisme JavaScript (`XMLHttpRequest`) code hota hai.
-* Post-Exploitation/Reporting Phase: Attacker link victim ko bhejta hai. Victim click karta hai toh attacker ka script victim ke browser se target API ko request karta hai, sensitive data (like emails, private messages) fetch karta hai, aur attacker ke server pe log kar deta hai.
-* Additional context: Bug bounties mein CORS pe bahut dhyan diya jata hai kyunki modern apps APIs pe heavily dependent hain.
-
-🛠️ TOOL NAVIGATION SIGNAL for Topic 4:
-
-* Tool Name: Burp Suite
-* Navigation Steps: Repeater > Highlight Request Headers > Add new line `Origin: https://evil-domain.com` > Send > Check Response headers for `Access-Control-Allow-Origin`
-
-
-
 --2--Information Disclosure vulnerabilities--
 Topic 4: Source Code Recovery via Exposed .git Directory
 Subtopics: Exposed .git Directory, Git Version Control, Recursive Wget Download, Git GUI Analysis, Commit History Analysis, Password Recovery
@@ -2355,10 +2319,10 @@ Sections: 1 | Topics: 4 | Subtopics: 19 | CVEs: 0
 # Section 15: Time-Based Blind SQL Injection
 
 
-=====Section 1: Time-Based Blind SQL Injection=====
+=====Section 15: Time-Based Blind SQL Injection=====
 Instructor is section mein Time-Based Blind SQL Injection ko discover karne se lekar Burp Suite Intruder ke through database se data (password) brute-force extract karne tak ka complete practical demo deta hai.
 
---1--Time-Based Blind SQL Injection--
+--15--Time-Based Blind SQL Injection--
 Topic 1: Time-Based Blind SQLi Fundamentals & Discovery
 Subtopics: Time-Based Blind SQLi, Target Identification, Boolean vs Time-Based Differences, Database Engine Fingerprinting, Cheat Sheets Usage, Time Delay Payloads, Payload Construction, Injection Testing
 
@@ -2392,7 +2356,7 @@ Subtopics: Time-Based Blind SQLi, Target Identification, Boolean vs Time-Based D
 * Tool Name: Burp Suite
 * Navigation Steps: Interceptor turn on > Reload page > Send request to Repeater > Modify request cookie with payload > Send > Monitor response time
 
---1--Time-Based Blind SQL Injection--
+--15--Time-Based Blind SQL Injection--
 Topic 2: Conditional Time Delays & Data Extraction
 Subtopics: Conditional Time Delays, PostgreSQL CASE Statement, Table Enumeration, True/False Condition Testing, Username Enumeration, Password Length Extraction
 
@@ -2426,7 +2390,7 @@ Subtopics: Conditional Time Delays, PostgreSQL CASE Statement, Table Enumeration
 * Tool Name: Burp Suite
 * Navigation Steps: Repeater tab > Inject conditional payload > Send > Observe response time > Modify condition for false statement > Send > Observe instant response
 
---1--Time-Based Blind SQL Injection--
+--15--Time-Based Blind SQL Injection--
 Topic 3: Password Brute-Forcing via Burp Suite Intruder
 Subtopics: Substring Function, Character Enumeration, Burp Suite Intruder, Cluster Bomb Attack, Payload Positions, Resource Pool Configuration, Response Time Monitoring, Data Extraction
 
@@ -2603,10 +2567,10 @@ Sections: 1 | Topics: 3 | Subtopics: 20 | CVEs: 0
 # Section 17: SSRF - Advanced Exploitation
 
 
-=====Section 1: Advanced SSRF Exploitation & Internal Network Discovery=====
+=====Section 17: Advanced SSRF Exploitation & Internal Network Discovery=====
 [Instructor yahan Burp Suite Intruder use karke SSRF vulnerability ke through internal network scanning aur admin panel exploitation demonstrate karta hai.]
 
---1--Advanced SSRF Exploitation & Internal Network Discovery--
+--17--Advanced SSRF Exploitation & Internal Network Discovery--
 Topic 1: SSRF Vulnerability Identification
 Subtopics: Stock Check Functionality, Internal IP Leak, SSRF Verification, Error Response Analysis
 
