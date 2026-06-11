@@ -2501,10 +2501,42 @@ Subtopics: Standard User Limitations, WinPEAS Enumeration, UAC Bypass Concept, E
 - Navigation Steps: Left Menu > Modules > Search "bypassuac" > Select `privesc/bypassuac_eventvwr` > Select Target Agent > Select Listener (same as original) > Submit > Wait for new Agent to appear in Agents tab with `(*)` indicator
 
 --12--Post Exploitation With StarKiller--
-Topic 4: Empire Modules Overview & Structure
-Subtopics: Empire Modules Library, Module Search, Module Parameters, OpSec Safe, MITRE ATT&CK Mapping
+Topic 4: Internal Network Pivoting & SOCKS Proxies [⚠️ Derived]
+Subtopics: Pivoting Concept, Internal Network Discovery, Empire SOCKS Proxy Setup, Proxychains Configuration, External Tool Routing
 
 [📊 SCOPE SIGNAL for Topic 4:
+- Depth Level: Deep
+- Coverage Angle: Practical only
+- Transcript mein content volume: Live configuration of Empire proxy and executing external tools via proxychains
+- Key terms from transcript: pivoting, lateral movement, SOCKS proxy, internal network, proxychains, routing, Nmap, private IP address
+- Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki "Aapka cloud C2 server direct internal network (like 192.168.x.x) se baat nahi kar sakta. Pivoting is mandatory to scan the internal corporate network from the outside."
+- Instructor ne jo analogies/examples/demos use kiye: Target Windows machine ka internal IP check kiya. Phir StarKiller mein ek SOCKS server start kiya. Apne Kali Linux terminal mein `proxychains.conf` edit karke proxy port add kiya, aur uske baad `proxychains nmap -sT` run karke target ke internal network pe live port scan demonstrate kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[pivoting, lateral movement, internal network, private IP, `192.168.0.0/24`, SOCKS4, SOCKS5, proxychains, `cat /etc/proxychains.conf`, `nano /etc/proxychains.conf`, `socks4 127.0.0.1 1080`, Empire proxy module, management/socks_server, routing traffic, proxychains Nmap, ⭐`proxychains nmap -sT -Pn -p 445 192.168.0.0/24`, stealth scanning, TCP connect scan, bypassed firewall, jump box]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 4:
+- Phase(s): Post-Exploitation & Lateral Movement
+- Attack methodology context from transcript: Initial shell aur Admin privileges aane ke baad, compromised machine ko ek "Jump Box" (bridge) ki tarah use karna taaki bache hue internal network devices pe attack kiya ja sake.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+- Recon/Discovery Phase: Target system pe `ipconfig` run karke internal subnets (e.g., 10.x.x.x ya 192.168.x.x) enumerate karna.
+- Exploitation/Weaponization Phase: Attacker StarKiller/Empire agent ke through target pe ek SOCKS proxy server bind karta hai. Apni attacking Kali machine par `proxychains.conf` mein us SOCKS proxy ka port specify karta hai.
+- Post-Exploitation/Reporting Phase: Attacker ab apni Kali machine ke external tools (jaise Nmap, CrackMapExec, ya Burp Suite) ke aage `proxychains` laga kar run karta hai. Yeh traffic cloud C2 se hote hue target PC se nikalta hai, jisse attacker internal corporate servers ko directly scan aur exploit kar pata hai.
+- Additional context: Instructor warn karta hai ki Nmap ka default stealth scan (`-sS`) proxychains ke through kaam nahi karta, isliye fully establish TCP connect scan (`-sT`) use karna zaroori hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 4:
+- Tool Name: StarKiller & Terminal
+- Navigation Steps: 
+  1. StarKiller: Modules > Search "socks" > Select `management/socks_server` > Set Target Agent > Set Port (e.g., 1080) > Submit. 
+  2. Kali Terminal: Run `sudo nano /etc/proxychains.conf` > Scroll to bottom > Add `socks4 127.0.0.1 1080` > Save and close > Run `proxychains nmap -sT [Internal-IP]`.
+
+--12--Post Exploitation With StarKiller--
+Topic 5: Empire Modules Overview & Structure
+Subtopics: Empire Modules Library, Module Search, Module Parameters, OpSec Safe, MITRE ATT&CK Mapping
+
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Deep
 * Coverage Angle: Conceptual only
@@ -2514,31 +2546,31 @@ Subtopics: Empire Modules Library, Module Search, Module Parameters, OpSec Safe,
 * Instructor ne jo analogies/examples/demos use kiye: Search box mein "restart", "logoff", aur "troll" modules search karke module fields explain kiye.
 ]
 
-🔑 KEYWORDS DUMP for Topic 3:
+🔑 KEYWORDS DUMP for Topic 5:
 [Post-exploitation modules, troll exploit, PowerShell, background true/false, ⭐OpSec safe, needs admin, ⭐MITRE ATT&CK, command and control frameworks, ignore admin check]
 
-⚔️ ATTACK PHASE SIGNAL for Topic 3:
+⚔️ ATTACK PHASE SIGNAL for Topic 5:
 
 * Phase(s): Post-Exploitation & Lateral Movement
 * Attack methodology context from transcript: Modules automation provide karte hain jisse attacker target pe safe tarike se privilege escalation, persistence, ya spying perform kar sake bina alarms trigger kiye (OpSec safe).
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Recon/Discovery Phase: (N/A)
 * Exploitation/Weaponization Phase: (N/A)
 * Post-Exploitation/Reporting Phase: Red teamer carefully selects modules mapped to MITRE ATT&CK frameworks, prioritizing OpSec Safe modules to leave zero traces and bypass EDR alerts.
 * Additional context: Corporate environments usually track specific MITRE ATT&CK IDs, making this mapping critical for reporting.
 
-🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
+🛠️ TOOL NAVIGATION SIGNAL for Topic 5:
 
 * Tool Name: StarKiller
 * Navigation Steps: Agent View > Interact > Form > Modules Search > Select Module > Read Description and Fields
 
 --12--Post Exploitation With StarKiller--
-Topic 5: Executing Simple Modules (Screenshot)
+Topic 6: Executing Simple Modules (Screenshot)
 Subtopics: Screenshot Module Execution, Task Tracking, Viewing Image
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -2548,31 +2580,31 @@ Subtopics: Screenshot Module Execution, Task Tracking, Viewing Image
 * Instructor ne jo analogies/examples/demos use kiye: PowerShell screenshot module run karke target Windows 11 machine ki desktop image capture aur view ki.
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 6:
 [screenshot, PowerShell module, aspect ratio, queued for execution, View Image]
 
-⚔️ ATTACK PHASE SIGNAL for Topic 4:
+⚔️ ATTACK PHASE SIGNAL for Topic 6:
 
 * Phase(s): Post-Exploitation & Lateral Movement
 * Attack methodology context from transcript: Target desktop ki visual monitoring capture karne ke liye module execution.
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Recon/Discovery Phase: (N/A)
 * Exploitation/Weaponization Phase: (N/A)
 * Post-Exploitation/Reporting Phase: Running a screenshot payload to spy on user activity and exfiltrate the image to the C2 server.
 * Additional context: None
 
-🛠️ TOOL NAVIGATION SIGNAL for Topic 4:
+🛠️ TOOL NAVIGATION SIGNAL for Topic 6:
 
 * Tool Name: StarKiller
 * Navigation Steps: Search "screenshot" > Select PowerShell module > Click Submit > Tasks > Expand Task > Click View Image
 
 --12--Post Exploitation With StarKiller--
-Topic 6: Global Modules View & Advanced Filtering
+Topic 7: Global Modules View & Advanced Filtering
 Subtopics: Global Modules View, Filtering by Language, Filtering by OpSec Safe, Multi-Agent Execution, Find Module
 
-[📊 SCOPE SIGNAL for Topic 6:
+[📊 SCOPE SIGNAL for Topic 7:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -2582,31 +2614,31 @@ Subtopics: Global Modules View, Filtering by Language, Filtering by OpSec Safe, 
 * Instructor ne jo analogies/examples/demos use kiye: Filters apply kiye (PowerShell + OpSec Safe = True). `find` module search kiya aur usse `C:\Users\John` path par run karke Chrome login data aur passwords file dhundi.
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 7:
 [global modules view, filtering options, PowerShell, Python, ⭐OpSec safe, multi-agent execution, ⭐botnet, `find`, Chrome login data, credentials]
 
-⚔️ ATTACK PHASE SIGNAL for Topic 5:
+⚔️ ATTACK PHASE SIGNAL for Topic 7:
 
 * Phase(s): Post-Exploitation & Lateral Movement
 * Attack methodology context from transcript: Mass execution aur safe enumeration ke liye global view se safe PowerShell modules run karna target environment mein sensitive files dhoondhne ke liye.
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
 
 * Recon/Discovery Phase: Filtering safe modules and executing them across multiple compromised endpoints simultaneously.
 * Exploitation/Weaponization Phase: (N/A)
 * Post-Exploitation/Reporting Phase: Using the `find` module to discover sensitive files (Chrome login data, password files) for further credential harvesting across a botnet.
 * Additional context: Instructor mentioned this feature is highly useful when operating a large network of 50+ compromised machines.
 
-🛠️ TOOL NAVIGATION SIGNAL for Topic 5:
+🛠️ TOOL NAVIGATION SIGNAL for Topic 7:
 
 * Tool Name: StarKiller
 * Navigation Steps: Left menu > Modules > Language drop-down > Select PowerShell > OpSec Safe > True > Search "find" > Select module > Agents drop-down > Select target agent > Set path `C:\Users\John` > Submit > Go to Agent > Tasks > Check Results
 
 --12--Post Exploitation With StarKiller--
-Topic 7: Credential Collection via UI Prompts
+Topic 8: Credential Collection via UI Prompts
 Subtopics: Collection Modules, Windows UI Prompting, Credential Verification
 
-[📊 SCOPE SIGNAL for Topic 7:
+[📊 SCOPE SIGNAL for Topic 8:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -2616,31 +2648,31 @@ Subtopics: Collection Modules, Windows UI Prompting, Credential Verification
 * Instructor ne jo analogies/examples/demos use kiye: Fake Windows update restart prompt spawn kiya. Target machine pe pehle galat password dala (prompt wapas aaya), phir sahi password dala (prompt gaya), aur Empire me cleartext password capture hua.
 ]
 
-🔑 KEYWORDS DUMP for Topic 6:
+🔑 KEYWORDS DUMP for Topic 8:
 [collection modules, PowerShell wiretap, toasted module, prompt, social engineering, windows notification, restart to install updates, credential verification, system notification]
 
-⚔️ ATTACK PHASE SIGNAL for Topic 6:
+⚔️ ATTACK PHASE SIGNAL for Topic 8:
 
 * Phase(s): Post-Exploitation & Lateral Movement
 * Attack methodology context from transcript: User se legitimately credentials steal karne ke liye social engineering aur native UI abuse ka use.
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
 
 * Recon/Discovery Phase: (N/A)
 * Exploitation/Weaponization Phase: Configuring a localized fake Windows notification payload (Prompt module) with believable text.
 * Post-Exploitation/Reporting Phase: Tricking the target user into authenticating to bypass a fake restart warning, allowing the attacker to capture their cleartext password in the C2.
 * Additional context: None
 
-🛠️ TOOL NAVIGATION SIGNAL for Topic 6:
+🛠️ TOOL NAVIGATION SIGNAL for Topic 8:
 
 * Tool Name: StarKiller
 * Navigation Steps: Search "collection" > Select prompt module > Set Title (Restart update) > Set Message > Notification Type: System > Enable credential verification (True) > Submit
 
 --12--Post Exploitation With StarKiller--
-Topic 8: Keylogging & Clipboard Monitoring
+Topic 9: Keylogging & Clipboard Monitoring
 Subtopics: Keylogger Module, Clipboard Monitor Module, Simultaneous Module Execution
 
-[📊 SCOPE SIGNAL for Topic 8:
+[📊 SCOPE SIGNAL for Topic 9:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -2650,31 +2682,31 @@ Subtopics: Keylogger Module, Clipboard Monitor Module, Simultaneous Module Execu
 * Instructor ne jo analogies/examples/demos use kiye: Keylogger aur clipboard module ek saath run kiye. Target machine pe Mozilla Firefox me Gmail log in karte hue keystrokes capture kiye aur copy/paste kiya hua password clipboard se extract kiya.
 ]
 
-🔑 KEYWORDS DUMP for Topic 7:
+🔑 KEYWORDS DUMP for Topic 9:
 [keylogger, keystrokes, clipboard monitor, ⭐password manager, Mozilla Firefox, `gmail.com`]
 
-⚔️ ATTACK PHASE SIGNAL for Topic 7:
+⚔️ ATTACK PHASE SIGNAL for Topic 9:
 
 * Phase(s): Post-Exploitation & Lateral Movement
 * Attack methodology context from transcript: Continuous credential harvesting by monitoring both physical input and OS clipboard buffer.
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
 
 * Recon/Discovery Phase: (N/A)
 * Exploitation/Weaponization Phase: (N/A)
 * Post-Exploitation/Reporting Phase: Running keylogging and clipboard monitoring concurrently to defeat users relying on password managers.
 * Additional context: None
 
-🛠️ TOOL NAVIGATION SIGNAL for Topic 7:
+🛠️ TOOL NAVIGATION SIGNAL for Topic 9:
 
 * Tool Name: StarKiller
 * Navigation Steps: Search "keylog" > Select module > Submit > Search "clipboard" > Select PowerShell module > Submit > View output in Tasks
 
 --12--Post Exploitation With StarKiller--
-Topic 9: Establishing Windows Persistence [⚠️ Derived]
+Topic 10: Establishing Windows Persistence [⚠️ Derived]
 Subtopics: Persistence Concept, Reboot Survival, Registry Run Keys, Scheduled Tasks Execution, Startup Folder, Removing Persistence
 
-[📊 SCOPE SIGNAL for Topic 9:
+[📊 SCOPE SIGNAL for Topic 10:
 - Depth Level: Deep
 - Coverage Angle: Practical only
 - Transcript mein content volume: Live configuration of registry-based persistence and system reboot verification
@@ -2683,28 +2715,28 @@ Subtopics: Persistence Concept, Reboot Survival, Registry Run Keys, Scheduled Ta
 - Instructor ne jo analogies/examples/demos use kiye: StarKiller mein `persistence/userland/registry` module execute kiya. Target Windows 11 machine ko manually restart kiya. Restart ke baad bina target ke file click kiye naya agent automatically Empire mein check-in ho gaya.
 ]
 
-🔑 KEYWORDS DUMP for Topic 9:
+🔑 KEYWORDS DUMP for Topic 10:
 [persistence, maintaining access, reboot survival, machine restart, lose connection, Empire persistence modules, `persistence/userland/registry`, HKCU, `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run`, registry run keys, Scheduled Tasks, startup folder, automatic check-in, beacon, backdoor installation, cleanup module, remove persistence]
 
-⚔️ ATTACK PHASE SIGNAL for Topic 9:
+⚔️ ATTACK PHASE SIGNAL for Topic 10:
 - Phase(s): Post-Exploitation & Lateral Movement
 - Attack methodology context from transcript: Target hack hone ke baad machine restart ya user logoff hone par access maintain rakhne ke liye auto-start execution set karna.
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
 - Recon/Discovery Phase: (N/A)
 - Exploitation/Weaponization Phase: Admin/SYSTEM access milne ke baad, attacker target machine ki Registry (`HKCU\...\Run`) ya Scheduled Tasks mein malicious stager command inject kar deta hai.
 - Post-Exploitation/Reporting Phase: Target jab bhi apna computer on karta hai ya login karta hai, Windows background mein silently payload execute kar deta hai. C2 server par naya agent auto-connect ho jata hai. Engagement ke end mein, attacker cleanup modules use karke in keys ko delete karta hai.
 - Additional context: None
 
-🛠️ TOOL NAVIGATION SIGNAL for Topic 9:
+🛠️ TOOL NAVIGATION SIGNAL for Topic 10:
 - Tool Name: StarKiller
 - Navigation Steps: Modules > Search "persistence" > Select `persistence/userland/registry` > Select Target Agent > Select Listener > Set ExtName (e.g., "WindowsUpdate") > Submit > (To verify) Restart Target Machine > Wait for new agent connection
 
 --12--Post Exploitation With StarKiller--
-Topic 10: Ransomware Attack Simulation & Recovery
+Topic 11: Ransomware Attack Simulation & Recovery
 Subtopics: Ransomware Concepts, Ransomware Module Configuration, Demo Mode, Encryption Phase, Decryption & Recovery
 
-[📊 SCOPE SIGNAL for Topic 10:
+[📊 SCOPE SIGNAL for Topic 11:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -2714,22 +2746,22 @@ Subtopics: Ransomware Concepts, Ransomware Module Configuration, Demo Mode, Encr
 * Instructor ne jo analogies/examples/demos use kiye: `C:\Users\John\Documents` ko encrypt kiya using ransomware module with `demo` mode enabled (red screen, notification). Files read karne pe gibberish mili. Phir mode ko `decrypt` pe set karke `recovery key` se files wapas restore ki.
 ]
 
-🔑 KEYWORDS DUMP for Topic 8:
+🔑 KEYWORDS DUMP for Topic 11:
 [ransomware malware, encrypt, encryption key, ransom, ⭐disaster scenarios, incident response team, red teamer, pentester, demo option, exfiltrate, command and control server, recovery key, `test test`, decrypt]
 
-⚔️ ATTACK PHASE SIGNAL for Topic 8:
+⚔️ ATTACK PHASE SIGNAL for Topic 11:
 
 * Phase(s): Post-Exploitation & Lateral Movement
 * Attack methodology context from transcript: Network lockdown aur disaster recovery testing ke liye local files ka encryption aur ransom simulation perform karna.
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
 
 * Recon/Discovery Phase: Identifying critical target directories (e.g., Documents containing client files).
 * Exploitation/Weaponization Phase: Weaponizing the built-in ransomware module to encrypt specific paths with a recovery key.
 * Post-Exploitation/Reporting Phase: Simulating a ransomware attack (red screen, warning) to test incident response teams, and then using the recovery key to decrypt the files to restore order.
 * Additional context: Enterprise red teaming often demands this to assess the readiness of a company's disaster response and backup procedures.
 
-🛠️ TOOL NAVIGATION SIGNAL for Topic 8:
+🛠️ TOOL NAVIGATION SIGNAL for Topic 11:
 
 * Tool Name: StarKiller
 * Navigation Steps: Search "ransomware" > Select module > Enable demo (True) > Set mode: encrypt > Set directory `C:\Users\John\Documents` > Set recovery key `test test` > Submit > (To Decrypt): Set mode: decrypt > Set same directory > Input recovery key > Submit
@@ -2744,16 +2776,17 @@ Section 12: Post Exploitation With StarKiller
 Topic 1: Starkiller GUI & File Browser Navigation
 Topic 2: Terminal Interface & Shell Execution
 Topic 3: Windows Privilege Escalation & UAC Bypass [⚠️ Derived]
-Topic 4: Empire Modules Overview & Structure
-Topic 5: Executing Simple Modules (Screenshot)
-Topic 6: Global Modules View & Advanced Filtering
-Topic 7: Credential Collection via UI Prompts
-Topic 8: Keylogging & Clipboard Monitoring
-Topic 9: Establishing Windows Persistence [⚠️ Derived]
-Topic 10: Ransomware Attack Simulation & Recovery
+Topic 4: Internal Network Pivoting & SOCKS Proxies [⚠️ Derived]
+Topic 5: Empire Modules Overview & Structure
+Topic 6: Executing Simple Modules (Screenshot)
+Topic 7: Global Modules View & Advanced Filtering
+Topic 8: Credential Collection via UI Prompts
+Topic 9: Keylogging & Clipboard Monitoring
+Topic 10: Establishing Windows Persistence [⚠️ Derived]
+Topic 11: Ransomware Attack Simulation & Recovery
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 10 | Subtopics: 53 | CVEs: 0
+Sections: 1 | Topics: 11 | Subtopics: 58 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
