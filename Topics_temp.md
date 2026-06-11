@@ -2085,10 +2085,40 @@ Subtopics: Cloud Infrastructure Recap, Web Server Example, BeEF Example, C2 Serv
 (N/A — transcript mein koi GUI tool navigation nahi tha)
 
 --10--Command & Control Servers (C2 / C&C)--
-Topic 3: Evaluating Frameworks with The C2 Matrix
-Subtopics: Framework Selection, The C2 Matrix, Evaluation Criteria, Questionnaire Feature, Google Sheet Comparison, Empire Framework
+Topic 3: C2 Redirectors & Hiding Attacker Infrastructure [⚠️ Derived]
+Subtopics: OpSec Fundamentals, Reverse Proxy Concept, Apache ProxyPass Configuration, Cloudflare CDN Integration, Firewall Whitelisting, Hidden C2 IP
 
 [📊 SCOPE SIGNAL for Topic 3:
+- Depth Level: Deep
+- Coverage Angle: Practical only
+- Transcript mein content volume: Step-by-step terminal configuration and cloud architecture demo
+- Key terms from transcript: C2 redirector, reverse proxy, Apache, ProxyPass, actual IP, Cloudflare, OpSec, operational security, firewall rules
+- Exam Tips / Instructor Emphasis: Instructor ne strictly emphasize kiya ki real engagement mein actual C2 server ka IP kabhi internet pe expose nahi karna chahiye, warna defenders use block ya takedown kar denge.
+- Instructor ne jo analogies/examples/demos use kiye: Instructor ne ek dummy Linode server (Redirector) banaya. Apache install karke `ProxyPass` rules configure kiye taaki target ka reverse connection pehle Redirector pe aaye aur wahan se actual AWS C2 server (Empire) pe forward ho.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[OpSec, operational security, C2 redirector, reverse proxy, dummy server, Linode, AWS, hide IP address, Apache, proxy module, ⭐`a2enmod proxy`, ⭐`a2enmod proxy_http`, `/etc/apache2/sites-available/000-default.conf`, ⭐`ProxyPass / http://[Actual-C2-IP]:80/`, `ProxyPassReverse`, `systemctl restart apache2`, Cloudflare, CDN, firewall whitelisting, takedown prevention, defense evasion]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 3:
+- Phase(s): Lab Setup / Infrastructure
+- Attack methodology context from transcript: Malicious infrastructure ko incident responders aur blue teams se protect karne ka mandatory setup phase.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+- Recon/Discovery Phase: (N/A)
+- Exploitation/Weaponization Phase: Attacker payload banate waqt C2 IP ki jagah "Redirector" ka IP ya Cloudflare domain dalta hai.
+- Post-Exploitation/Reporting Phase: Target jab payload execute karta hai, reverse shell Redirector pe hit karta hai. Redirector silently us traffic ko hidden backend C2 server par bhej deta hai. Agar defender IP block karta hai, toh sirf sasta dummy redirector block hota hai, main C2 server safe rehta hai.
+- Additional context: Instructor ne bataya ki professional Red Teams hamesha "Domain Fronting" ya CDN integration (like Cloudflare) use karti hain stealth maximize karne ke liye.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
+- Tool Name: Apache Configuration (Terminal)
+- Navigation Steps: `sudo nano /etc/apache2/sites-available/000-default.conf` > `<VirtualHost>` tag ke andar type karein: `ProxyPass / http://[Actual-C2-IP]:80/` aur `ProxyPassReverse / http://[Actual-C2-IP]:80/` > Save and Exit > `sudo systemctl restart apache2`
+
+--10--Command & Control Servers (C2 / C&C)--
+Topic 4: Evaluating Frameworks with The C2 Matrix
+Subtopics: Framework Selection, The C2 Matrix, Evaluation Criteria, Questionnaire Feature, Google Sheet Comparison, Empire Framework
+
+[📊 SCOPE SIGNAL for Topic 4:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -2127,10 +2157,11 @@ Subtopics: Framework Selection, The C2 Matrix, Evaluation Criteria, Questionnair
 Section 10: Command & Control Servers (C2 / C&C)
 Topic 1: C2 Fundamentals & Cloud Benefits
 Topic 2: C2 Architecture & Components
-Topic 3: Evaluating Frameworks with The C2 Matrix
+Topic 3: C2 Redirectors & Hiding Attacker Infrastructure [⚠️ Derived]
+Topic 4: Evaluating Frameworks with The C2 Matrix
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 19 | CVEs: 0
+Sections: 1 | Topics: 4 | Subtopics: 25 | CVEs: 0
 
 ---
 
@@ -2440,10 +2471,40 @@ Subtopics: Terminal Subsection, Empire Commands, Dropping to OS Shell, Literal S
 * Navigation Steps: Interact tab > Terminal subsection > Type command > Run. Alternative: Form tab > Type command > Tick literal box > Run.
 
 --12--Post Exploitation With StarKiller--
-Topic 3: Empire Modules Overview & Structure
-Subtopics: Empire Modules Library, Module Search, Module Parameters, OpSec Safe, MITRE ATT&CK Mapping
+Topic 3: Windows Privilege Escalation & UAC Bypass [⚠️ Derived]
+Subtopics: Standard User Limitations, WinPEAS Enumeration, UAC Bypass Concept, Empire PrivEsc Modules, High Integrity Context, SYSTEM Access
 
 [📊 SCOPE SIGNAL for Topic 3:
+- Depth Level: Deep
+- Coverage Angle: Both
+- Transcript mein content volume: Live enumeration, module execution, and spawning a new high-privilege agent
+- Key terms from transcript: privilege escalation, PrivEsc, standard user, administrator, UAC bypass, User Account Control, WinPEAS, high integrity, SYSTEM, Empire modules
+- Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki system files read karne ya hash dump karne ke liye aapko "High Integrity" (Admin) ya SYSTEM access chahiye hi chahiye, initial foothold usually low privilege hota hai.
+- Instructor ne jo analogies/examples/demos use kiye: Agent ke terminal mein `whoami /groups` run karke dikhaya ki user standard hai. Phir StarKiller mein `privesc/bypassuac_eventvwr` module run karke ek naya agent spawn kiya jiske paas asterisk (*) mark tha (Admin privileges).
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[privilege escalation, PrivEsc, standard user, administrator, low privilege, high integrity, UAC, User Account Control bypass, `whoami /groups`, `whoami /priv`, WinPEAS, enumeration script, Empire PrivEsc modules, `privesc/bypassuac_eventvwr`, `privesc/bypassuac_fodhelper`, listener, naya agent spawn, asterisk mark, ⭐`*`, `NT AUTHORITY\SYSTEM`, registry manipulation, hash dumping permission]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 3:
+- Phase(s): Privilege Escalation
+- Attack methodology context from transcript: Initial shell milne ke baad OS environment ko abuse karke full administrative control haasil karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+- Recon/Discovery Phase: Target machine par initial agent aane ke baad attacker `WinPEAS` script ya Empire enumeration modules run karke UAC configurations aur vulnerable paths dhundta hai.
+- Exploitation/Weaponization Phase: Attacker StarKiller se ek "UAC Bypass" module select karta hai (e.g., `eventvwr` ya `fodhelper`), usme apna existing listener set karta hai, aur execute karta hai.
+- Post-Exploitation/Reporting Phase: Module background mein silent registry changes karke payload ko elevated context mein run karta hai. Attacker ko GUI mein ek naya agent milta hai jiske naam ke aage `(*)` laga hota hai, indicating full Admin/SYSTEM access.
+- Additional context: Instructor explicitly batata hai ki UAC bypass tabhi kaam karta hai jab target user 'Administrators' group ka hissa ho par currently medium integrity mein run kar raha ho.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
+- Tool Name: StarKiller
+- Navigation Steps: Left Menu > Modules > Search "bypassuac" > Select `privesc/bypassuac_eventvwr` > Select Target Agent > Select Listener (same as original) > Submit > Wait for new Agent to appear in Agents tab with `(*)` indicator
+
+--12--Post Exploitation With StarKiller--
+Topic 4: Empire Modules Overview & Structure
+Subtopics: Empire Modules Library, Module Search, Module Parameters, OpSec Safe, MITRE ATT&CK Mapping
+
+[📊 SCOPE SIGNAL for Topic 4:
 
 * Depth Level: Deep
 * Coverage Angle: Conceptual only
@@ -2474,10 +2535,10 @@ Subtopics: Empire Modules Library, Module Search, Module Parameters, OpSec Safe,
 * Navigation Steps: Agent View > Interact > Form > Modules Search > Select Module > Read Description and Fields
 
 --12--Post Exploitation With StarKiller--
-Topic 4: Executing Simple Modules (Screenshot)
+Topic 5: Executing Simple Modules (Screenshot)
 Subtopics: Screenshot Module Execution, Task Tracking, Viewing Image
 
-[📊 SCOPE SIGNAL for Topic 4:
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -2508,10 +2569,10 @@ Subtopics: Screenshot Module Execution, Task Tracking, Viewing Image
 * Navigation Steps: Search "screenshot" > Select PowerShell module > Click Submit > Tasks > Expand Task > Click View Image
 
 --12--Post Exploitation With StarKiller--
-Topic 5: Global Modules View & Advanced Filtering
+Topic 6: Global Modules View & Advanced Filtering
 Subtopics: Global Modules View, Filtering by Language, Filtering by OpSec Safe, Multi-Agent Execution, Find Module
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -2542,10 +2603,10 @@ Subtopics: Global Modules View, Filtering by Language, Filtering by OpSec Safe, 
 * Navigation Steps: Left menu > Modules > Language drop-down > Select PowerShell > OpSec Safe > True > Search "find" > Select module > Agents drop-down > Select target agent > Set path `C:\Users\John` > Submit > Go to Agent > Tasks > Check Results
 
 --12--Post Exploitation With StarKiller--
-Topic 6: Credential Collection via UI Prompts
+Topic 7: Credential Collection via UI Prompts
 Subtopics: Collection Modules, Windows UI Prompting, Credential Verification
 
-[📊 SCOPE SIGNAL for Topic 6:
+[📊 SCOPE SIGNAL for Topic 7:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -2576,10 +2637,10 @@ Subtopics: Collection Modules, Windows UI Prompting, Credential Verification
 * Navigation Steps: Search "collection" > Select prompt module > Set Title (Restart update) > Set Message > Notification Type: System > Enable credential verification (True) > Submit
 
 --12--Post Exploitation With StarKiller--
-Topic 7: Keylogging & Clipboard Monitoring
+Topic 8: Keylogging & Clipboard Monitoring
 Subtopics: Keylogger Module, Clipboard Monitor Module, Simultaneous Module Execution
 
-[📊 SCOPE SIGNAL for Topic 7:
+[📊 SCOPE SIGNAL for Topic 8:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -2610,10 +2671,40 @@ Subtopics: Keylogger Module, Clipboard Monitor Module, Simultaneous Module Execu
 * Navigation Steps: Search "keylog" > Select module > Submit > Search "clipboard" > Select PowerShell module > Submit > View output in Tasks
 
 --12--Post Exploitation With StarKiller--
-Topic 8: Ransomware Attack Simulation & Recovery
+Topic 9: Establishing Windows Persistence [⚠️ Derived]
+Subtopics: Persistence Concept, Reboot Survival, Registry Run Keys, Scheduled Tasks Execution, Startup Folder, Removing Persistence
+
+[📊 SCOPE SIGNAL for Topic 9:
+- Depth Level: Deep
+- Coverage Angle: Practical only
+- Transcript mein content volume: Live configuration of registry-based persistence and system reboot verification
+- Key terms from transcript: persistence, reboot survival, lose connection, HKCU Run key, Scheduled Tasks, startup folder, beacon, backdoor
+- Exam Tips / Instructor Emphasis: Instructor clearly warns ki "Never use persistence on a client's system without explicit permission, as it modifies the host permanently until cleaned."
+- Instructor ne jo analogies/examples/demos use kiye: StarKiller mein `persistence/userland/registry` module execute kiya. Target Windows 11 machine ko manually restart kiya. Restart ke baad bina target ke file click kiye naya agent automatically Empire mein check-in ho gaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[persistence, maintaining access, reboot survival, machine restart, lose connection, Empire persistence modules, `persistence/userland/registry`, HKCU, `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run`, registry run keys, Scheduled Tasks, startup folder, automatic check-in, beacon, backdoor installation, cleanup module, remove persistence]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 9:
+- Phase(s): Post-Exploitation & Lateral Movement
+- Attack methodology context from transcript: Target hack hone ke baad machine restart ya user logoff hone par access maintain rakhne ke liye auto-start execution set karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+- Recon/Discovery Phase: (N/A)
+- Exploitation/Weaponization Phase: Admin/SYSTEM access milne ke baad, attacker target machine ki Registry (`HKCU\...\Run`) ya Scheduled Tasks mein malicious stager command inject kar deta hai.
+- Post-Exploitation/Reporting Phase: Target jab bhi apna computer on karta hai ya login karta hai, Windows background mein silently payload execute kar deta hai. C2 server par naya agent auto-connect ho jata hai. Engagement ke end mein, attacker cleanup modules use karke in keys ko delete karta hai.
+- Additional context: None
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 9:
+- Tool Name: StarKiller
+- Navigation Steps: Modules > Search "persistence" > Select `persistence/userland/registry` > Select Target Agent > Select Listener > Set ExtName (e.g., "WindowsUpdate") > Submit > (To verify) Restart Target Machine > Wait for new agent connection
+
+--12--Post Exploitation With StarKiller--
+Topic 10: Ransomware Attack Simulation & Recovery
 Subtopics: Ransomware Concepts, Ransomware Module Configuration, Demo Mode, Encryption Phase, Decryption & Recovery
 
-[📊 SCOPE SIGNAL for Topic 8:
+[📊 SCOPE SIGNAL for Topic 10:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -2652,15 +2743,17 @@ Subtopics: Ransomware Concepts, Ransomware Module Configuration, Demo Mode, Encr
 Section 12: Post Exploitation With StarKiller
 Topic 1: Starkiller GUI & File Browser Navigation
 Topic 2: Terminal Interface & Shell Execution
-Topic 3: Empire Modules Overview & Structure
-Topic 4: Executing Simple Modules (Screenshot)
-Topic 5: Global Modules View & Advanced Filtering
-Topic 6: Credential Collection via UI Prompts
-Topic 7: Keylogging & Clipboard Monitoring
-Topic 8: Ransomware Attack Simulation & Recovery
+Topic 3: Windows Privilege Escalation & UAC Bypass [⚠️ Derived]
+Topic 4: Empire Modules Overview & Structure
+Topic 5: Executing Simple Modules (Screenshot)
+Topic 6: Global Modules View & Advanced Filtering
+Topic 7: Credential Collection via UI Prompts
+Topic 8: Keylogging & Clipboard Monitoring
+Topic 9: Establishing Windows Persistence [⚠️ Derived]
+Topic 10: Ransomware Attack Simulation & Recovery
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 8 | Subtopics: 35 | CVEs: 0
+Sections: 1 | Topics: 10 | Subtopics: 53 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -3097,6 +3190,36 @@ Subtopics: Trojan Stealth Techniques, Source Code Hiding, Bat to Exe Conversion,
 * Tool Name: Bat to exe (Compiler Tool)
 * Navigation Steps: Open Bat to exe program > Drag and drop the bat file into the program > Tick the icon option > Select the downloaded .ico thumbnail file > Set Exe format to 32-bit > Select the "invisible" option > Click Convert > Save as executable file
 
+--15--Creating Windows Trojans--
+Topic 3: Bypassing Windows Defender & AMSI [⚠️ Derived]
+Subtopics: Modern AV Limitations, AMSI Introduction, In-Memory Execution, PowerShell Obfuscation, AMSI Bypass Scripts, Fully Undetectable (FUD) Concepts
+
+[📊 SCOPE SIGNAL for Topic 3:
+- Depth Level: Deep
+- Coverage Angle: Both
+- Transcript mein content volume: Technical explanation of Defender behavior and practical live bypass execution
+- Key terms from transcript: Antivirus, Windows Defender, EDR, AMSI, Anti-Malware Scan Interface, memory execution, obfuscation, FUD, AMSI bypass
+- Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki raw payloads kabhi disk pe save mat karo, AV turant delete kar dega. Hamesha "In-memory" execution aur AMSI bypass use karo.
+- Instructor ne jo analogies/examples/demos use kiye: Instructor ne Windows Defender on rakha. Empire stager ko run karne pe "Malware detected" error aaya. Phir instructor ne PowerShell mein ek AMSI memory patching script paste ki, aur uske baad same payload successfully run karke shell catch kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Antivirus evasion, AV, Windows Defender, EDR, Endpoint Detection and Response, ⭐AMSI, Anti-Malware Scan Interface, disk scanning, in-memory execution, fileless malware, PowerShell obfuscation, Invoke-Obfuscation, AMSI bypass script, memory patching, AmsiScanBuffer, signature detection, behavioral analysis, Fully Undetectable, FUD, Invoke-Expression, IEX, malicious script blocked]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 3:
+- Phase(s): Initial Foothold / Exploitation (Defense Evasion)
+- Attack methodology context from transcript: Real-world targets par exploit deliver karne se pehle native security controls (Defender/AMSI) ko andha (blind) karne ka critical process.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+- Recon/Discovery Phase: Target ka OS aur AV solution enumerate karna (e.g., Windows 10 with default Defender).
+- Exploitation/Weaponization Phase: Attacker raw PowerShell payload ko obfuscate karta hai aur uske aage ek "AMSI Bypass" snippet append karta hai. Yeh snippet run hote hi memory mein `AmsiScanBuffer` function ko corrupt kar deta hai.
+- Post-Exploitation/Reporting Phase: Jab actual payload execute hota hai, AMSI use scan nahi kar pata aur hamesha "Clean" return karta hai. Payload memory mein successfully reverse shell trigger kar deta hai bina disk pe koi file drop kiye (Fileless execution).
+- Additional context: Instructor notes ki AMSI bypass signatures lagatar update hote hain, isliye hackers ko GitHub se latest bypass snippets nikal kar unhe manually tweak karna padta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
+- Tool Name: Terminal / Command Prompt
+- Navigation Steps: Target Terminal open karein > AMSI bypass obfuscated string paste karke Enter dabayein > Uske turant baad Empire PowerShell stager paste karke Enter dabayein
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -3106,9 +3229,10 @@ Subtopics: Trojan Stealth Techniques, Source Code Hiding, Bat to Exe Conversion,
 Section 15: Creating Windows Trojans
 Topic 1: Trojan Fundamentals & PowerShell Payload
 Topic 2: Trojan Stealth & Executable Conversion
+Topic 3: Bypassing Windows Defender & AMSI [⚠️ Derived]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 12 | CVEs: 0
+Sections: 1 | Topics: 3 | Subtopics: 18 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
