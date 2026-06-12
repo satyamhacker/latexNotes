@@ -34631,3 +34631,30439 @@ Thank you.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
+
+# Section 10: Subdomain Takeovers
+
+
+0
+1
+00:00:01,320 --> 00:00:04,020
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,860 --> 00:00:14,010
+So in this video, we are going to understand the importance of subdomains in our reconnaissance or
+2
+
+3
+00:00:14,220 --> 00:00:19,870
+increasing the scope of our asset into any bug bounty program.
+3
+
+4
+00:00:21,150 --> 00:00:23,670
+So the first question, why subdomains?
+4
+
+5
+00:00:24,120 --> 00:00:32,040
+Because subdomains are the high value target, which will increase our success rate whenever we are
+5
+
+6
+00:00:32,040 --> 00:00:35,400
+performing bug bounty or penetration testing.
+6
+
+7
+00:00:36,480 --> 00:00:44,690
+So now we are going to consider the target as evil corp dot com to take further, more examples.
+7
+
+8
+00:00:45,420 --> 00:00:51,570
+So enumerating the scope of a program which is evil corp dot com from now is very, very important
+8
+
+9
+00:00:51,570 --> 00:00:52,050
+for us.
+9
+
+10
+00:00:52,800 --> 00:00:56,400
+why, because we are going to increase the scope.
+10
+
+11
+00:00:56,640 --> 00:01:04,980
+The chances are that your success rate is going to increase because there are high chances that many
+11
+
+12
+00:01:04,980 --> 00:01:13,830
+of the subdomains must not be tested by other security researchers or not even properly protected by
+12
+
+13
+00:01:13,830 --> 00:01:17,460
+the developers of that particular organization.
+13
+
+14
+00:01:18,450 --> 00:01:26,220
+There have been many examples in which there are critical findings on subdomains through which the security
+14
+
+15
+00:01:26,220 --> 00:01:30,840
+researcher is able to get access to the main domain as well.
+15
+
+16
+00:01:32,010 --> 00:01:40,050
+There have been chances wherein developers have deployed outdated software versions or content management
+16
+
+17
+00:01:40,050 --> 00:01:48,420
+systems on subdomains, and there are publicly available exploit for those targeted softwares.
+17
+
+18
+00:01:49,380 --> 00:01:58,170
+Now it becomes very, very easy to identify these types of low hanging subdomains to easily target them
+18
+
+19
+00:01:58,380 --> 00:01:59,870
+and get a reward.
+19
+
+20
+00:02:00,960 --> 00:02:08,880
+That way, you should always start with identification of subdomains that can be hidden over there and
+20
+
+21
+00:02:08,880 --> 00:02:09,660
+be vulnerable.
+21
+
+22
+00:02:11,010 --> 00:02:14,880
+Now, what exactly is a subdomain that we are talking about?
+22
+
+23
+00:02:15,340 --> 00:02:23,880
+If you see into this figure over here as our target is evil corp dot com, it is known as the top level
+23
+
+24
+00:02:23,880 --> 00:02:28,620
+domain for any bug bounty program or any organization.
+24
+
+25
+00:02:29,250 --> 00:02:33,200
+No beta dot evil corp dot com is the subdomain.
+25
+
+26
+00:02:33,540 --> 00:02:43,530
+Remember, each and every subdomain start before the top level domain and start before the dot, as
+26
+
+27
+00:02:43,530 --> 00:02:45,090
+you can see over here.
+27
+
+28
+00:02:47,800 --> 00:02:58,720
+Now, alpha.beta.evilcorp.com is also called the sub sub domain or also known as vertical
+28
+
+29
+00:02:58,720 --> 00:02:59,710
+co-relation.
+29
+
+30
+00:03:00,310 --> 00:03:07,090
+This basically is an example of multiple subdomains under the top level domain.
+30
+
+31
+00:03:07,450 --> 00:03:15,520
+And yes, there have been many, many examples of many bug bounty programs wherein there are multiple
+31
+
+32
+00:03:15,520 --> 00:03:21,880
+sub subdomains which are hidden and which are vulnerable to multiple vulnerabilities.
+32
+
+33
+00:03:22,750 --> 00:03:28,570
+So, yes, identification of subdomain and sub subdomain is very, very important.
+33
+
+34
+00:03:28,910 --> 00:03:32,140
+And in the upcoming videos, we're going to see that.
+34
+
+35
+00:03:32,140 --> 00:03:39,100
+How can you identify the subdomains or the hidden sub subdomains, which are not known by other security
+35
+
+36
+00:03:39,100 --> 00:03:44,080
+researchers, and you can easily identify issues of flaws into them.
+36
+
+37
+00:03:44,950 --> 00:03:50,030
+So I hope you guys understood the importance of subdomains and what is a subdomain.
+37
+
+38
+00:03:50,410 --> 00:03:51,010
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:02,130 --> 00:00:05,310
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:06,270 --> 00:00:13,800
+So in this video, we're going to understand about a subdomain enumeration, as in the previous video,
+2
+
+3
+00:00:14,310 --> 00:00:17,530
+we have already understood about what is a subdomain.
+3
+
+4
+00:00:18,360 --> 00:00:22,410
+Now we will see how you can enumerate a subdomains.
+4
+
+5
+00:00:22,770 --> 00:00:29,590
+What is the difference between a vertical domain correlation and horizontal domain correlation?
+5
+
+6
+00:00:30,540 --> 00:00:36,690
+So there is something which is also known as a sub subdomain that we discussed about in the previous
+6
+
+7
+00:00:36,690 --> 00:00:37,100
+video.
+7
+
+8
+00:00:38,280 --> 00:00:43,190
+So let's quickly understand about vertical domain correlation.
+8
+
+9
+00:00:43,890 --> 00:00:48,640
+So all the subdomains of domain, for example, let's say Google dot com.
+9
+
+10
+00:00:49,290 --> 00:00:54,850
+So one of the sub domain of Google dot com would be maps.google.com.
+10
+
+11
+00:00:55,680 --> 00:01:03,270
+This is an example of vertical domain correlation, which means any sub domain of a particular base
+11
+
+12
+00:01:03,330 --> 00:01:12,330
+domain or top level domain, whereas in horizontal domain correlation it contains the acquisitions of
+12
+
+13
+00:01:12,330 --> 00:01:14,920
+the top level domain or the base domain.
+13
+
+14
+00:01:15,540 --> 00:01:21,000
+For example, Google.cz, YouTube dot com, Blogger dot com.
+14
+
+15
+00:01:21,420 --> 00:01:29,610
+All of these are the products of Google, which means they are some of the another way connected to
+15
+
+16
+00:01:29,610 --> 00:01:37,350
+the base domain or the top level domain or the organization, which basically means anything that is
+16
+
+17
+00:01:37,350 --> 00:01:43,440
+acquired by Google as an entity is considered to be horizontal domain correlation.
+17
+
+18
+00:01:44,080 --> 00:01:53,220
+Now, is it really important or would it to identify security flaws into the acquisitions by any parent
+18
+
+19
+00:01:53,220 --> 00:01:54,180
+organization?
+19
+
+20
+00:01:55,380 --> 00:02:03,330
+Yes, there are many examples of bug bounty programs wherein acquisitions are also considered to be
+20
+
+21
+00:02:03,330 --> 00:02:03,980
+in scope.
+21
+
+22
+00:02:04,410 --> 00:02:08,310
+For instance, Facebook is runs a bug bounty program.
+22
+
+23
+00:02:09,720 --> 00:02:15,610
+Facebook runs a bug bounty program, which also includes all of its acquisitions.
+23
+
+24
+00:02:16,020 --> 00:02:22,050
+Similarly, Google also includes all of its acquisitions into the bug bounty program.
+24
+
+25
+00:02:22,510 --> 00:02:28,790
+Similarly, Apple also includes all the acquisitions under its bug bounty program and so on.
+25
+
+26
+00:02:29,400 --> 00:02:36,740
+So as of now, we have understood about vertical domain coordination, horizontal domain correlation.
+26
+
+27
+00:02:37,470 --> 00:02:43,070
+So how do we actually identify these types of domains or subdomains?
+27
+
+28
+00:02:43,860 --> 00:02:50,670
+So there are some of the open source tools that can be used to identify this, and we are going to use
+28
+
+29
+00:02:50,970 --> 00:02:53,990
+most of them into the next upcoming videos.
+29
+
+30
+00:02:55,470 --> 00:03:03,540
+So I like to use a sub finder because it is written in go lang and because of speed and concurrency,
+30
+
+31
+00:03:03,750 --> 00:03:10,490
+it is considered to be one of the fastest tool to identify subdomains for any given target.
+31
+
+32
+00:03:11,070 --> 00:03:18,210
+There are multiple tools that can be used to identify some domains like Amass, Sublister or Aquatone or
+32
+
+33
+00:03:18,210 --> 00:03:24,520
+Knockpy, but at the end they're going to get the same results from all of them.
+33
+
+34
+00:03:24,990 --> 00:03:28,340
+So we basically want to save our time.
+34
+
+35
+00:03:28,530 --> 00:03:35,790
+So we are going to use some finder into the upcoming videos wherein we will identify multiple subdomains
+35
+
+36
+00:03:35,940 --> 00:03:37,750
+in a lesser span of time.
+36
+
+37
+00:03:39,840 --> 00:03:47,550
+So in addition to the finder, I also like to find subdomains manually because that is the time.
+37
+
+38
+00:03:47,550 --> 00:03:51,770
+Then we may get a new subdomain for any target.
+38
+
+39
+00:03:52,230 --> 00:04:00,570
+For that, we are going to use crst.sh, which basically is the certificate transparency log in which
+39
+
+40
+00:04:00,570 --> 00:04:08,340
+if any new certificate has been assigned to a top level domain or its subdomain, they are going to know about
+40
+
+41
+00:04:08,340 --> 00:04:08,720
+that.
+41
+
+42
+00:04:10,440 --> 00:04:18,390
+Second is censys.io, which is an IOT connected search engine from where we can also identify
+42
+
+43
+00:04:18,630 --> 00:04:25,950
+given subdomains for any target similar to censys is Shodan, which is again an Internet connected
+43
+
+44
+00:04:25,950 --> 00:04:34,770
+search engine where we can identify about multiple targets and the subdomains Google certificate transparency
+44
+
+45
+00:04:34,770 --> 00:04:43,050
+logs is again the certificate logs from which we can identify the subdomains for any given target, Facebook
+45
+
+46
+00:04:43,050 --> 00:04:43,550
+certificate.
+46
+
+47
+00:04:43,560 --> 00:04:47,460
+Transparency is similar, like Google certificate transparency.
+47
+
+48
+00:04:47,720 --> 00:04:51,990
+Then we can identify subdomains based on the certificate logs.
+48
+
+49
+00:04:52,560 --> 00:04:56,130
+We can also identify subdomains using CSP header.
+49
+
+50
+00:04:56,520 --> 00:04:59,670
+We can also identify some domain based on the DNS records.
+50
+
+51
+00:05:00,380 --> 00:05:07,270
+By using viewdns.info website, dnsdumpster.com, as well as virustotal.com.
+51
+
+52
+00:05:08,180 --> 00:05:09,860
+So I hope you guys understood this.
+52
+
+53
+00:05:10,070 --> 00:05:10,670
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:02,130 --> 00:00:02,880
+Hello, everyone.
+1
+
+2
+00:00:03,510 --> 00:00:08,880
+So in this video, we're going to see how do we find a website on the Internet?
+2
+
+3
+00:00:09,930 --> 00:00:11,430
+So we are going to take an example.
+3
+
+4
+00:00:12,480 --> 00:00:15,340
+Let's say Rohit wants to use a Facebook.
+4
+
+5
+00:00:15,990 --> 00:00:21,670
+So how does Rohit's computer identify the Facebook server?
+5
+
+6
+00:00:21,960 --> 00:00:22,950
+How the system.
+6
+
+7
+00:00:23,850 --> 00:00:26,760
+So DNS comes to the help.
+7
+
+8
+00:00:29,290 --> 00:00:37,760
+DNA stands for domain name service or sometimes referred as domain name server or domain name system.
+8
+
+9
+00:00:39,910 --> 00:00:47,850
+So with the help of DNS only any client is able to reach to a particular server.
+9
+
+10
+00:00:48,550 --> 00:00:58,000
+For instance, Rohit is able to reach to the Facebook server and is able to serve the content into his
+10
+
+11
+00:00:58,180 --> 00:01:01,960
+browser and the client side and is able to use the application.
+11
+
+12
+00:01:03,310 --> 00:01:05,570
+So how does this actually work?
+12
+
+13
+00:01:06,100 --> 00:01:07,150
+So we are going to see.
+13
+
+14
+00:01:08,770 --> 00:01:16,390
+I highly recommend coming onto this particular website, which is how DNS works, which is beautifully
+14
+
+15
+00:01:16,390 --> 00:01:21,890
+illustrated, the functioning of DNS in a cartoonist manner.
+15
+
+16
+00:01:22,900 --> 00:01:28,080
+So let us start this and see over here.
+16
+
+17
+00:01:28,360 --> 00:01:31,340
+Episode one, the website is unknown.
+17
+
+18
+00:01:31,540 --> 00:01:37,220
+So we do not know how are we going to reach to that particular Web site.
+18
+
+19
+00:01:38,110 --> 00:01:45,940
+So this is Rohit and he's going to type dnssimple.com into his browser and it's going to hit enter
+19
+
+20
+00:01:47,320 --> 00:01:53,980
+Freeze computers and other devices, communicate using IP addresses to identify each other on the Internet.
+20
+
+21
+00:01:54,190 --> 00:01:59,920
+And we know this, but humans can't remember IP addresses, so they use words.
+21
+
+22
+00:02:01,360 --> 00:02:08,230
+So in case I asked you guys, can you tell me 10 shopping websites name?
+22
+
+23
+00:02:08,620 --> 00:02:14,880
+You will quickly tell me Amazon, Flipkart, Jabong, Myntra and so on.
+23
+
+24
+00:02:15,910 --> 00:02:25,600
+But if I ask you 10 website IP address, which contains a shopping or I can buy some electronics from
+24
+
+25
+00:02:25,600 --> 00:02:28,350
+there, you won't be able to tell me the IP address.
+25
+
+26
+00:02:28,960 --> 00:02:29,380
+Why?
+26
+
+27
+00:02:29,830 --> 00:02:35,610
+Because we cannot remember numbers, but we can easily remember names.
+27
+
+28
+00:02:36,310 --> 00:02:40,660
+So for our help there is DNS.
+28
+
+29
+00:02:41,140 --> 00:02:44,790
+DNS brings together both of them.
+29
+
+30
+00:02:45,100 --> 00:02:53,410
+That is the name and the number, but is the domain name and the IP address and gets us to our destination.
+30
+
+31
+00:02:53,770 --> 00:02:56,290
+So this is how DNS works.
+31
+
+32
+00:02:56,510 --> 00:03:01,610
+It was very simple, but let us understand something in more depth.
+32
+
+33
+00:03:02,920 --> 00:03:12,400
+So whenever you type any particular address into your browser, for example, Rohit wants to use Facebook
+33
+
+34
+00:03:12,400 --> 00:03:15,290
+and he will type Facebook dot com into his browser.
+34
+
+35
+00:03:16,090 --> 00:03:24,970
+The first thing that will happen is the first request that has been checked is into the browsers.
+35
+
+36
+00:03:25,210 --> 00:03:25,710
+cache.
+36
+
+37
+00:03:26,590 --> 00:03:35,400
+So once the browsers cache is checked and if the website is not open earlier into the browser ever or
+37
+
+38
+00:03:35,440 --> 00:03:40,030
+saved into the cache, then the request goes to the OS.
+38
+
+39
+00:03:40,840 --> 00:03:43,750
+And OS also has its own cache.
+39
+
+40
+00:03:44,710 --> 00:03:56,950
+Once it is not able to find into the browser or the OS cache, then the request will now go to a round
+40
+
+41
+00:03:56,950 --> 00:04:08,260
+trip as the request will move or will leave the computer and now it is going to start its round trip.
+41
+
+42
+00:04:09,370 --> 00:04:20,250
+All right, let's go to the next episode and see ,so the request moves out of arrowheads, computer and Rohit
+42
+
+43
+00:04:20,260 --> 00:04:22,020
+house and goes out.
+43
+
+44
+00:04:22,840 --> 00:04:26,890
+Now the request reaches to the resolvers inbox.
+44
+
+45
+00:04:27,490 --> 00:04:28,630
+Who is the resolver?
+45
+
+46
+00:04:29,140 --> 00:04:36,760
+Resolver is none other than your ISP, which is your Internet service provider that gives you Internet
+46
+
+47
+00:04:36,760 --> 00:04:37,260
+service.
+47
+
+48
+00:04:37,930 --> 00:04:45,890
+So once your request reaches to the ISP, that is because you want to open Facebook dot com ,sure Rohit
+48
+
+49
+00:04:46,120 --> 00:04:46,960
+you can open it.
+49
+
+50
+00:04:47,620 --> 00:04:52,930
+So the ISP is going to check its own cache first again.
+50
+
+51
+00:04:53,890 --> 00:05:00,490
+And if he is not able to identify the website, then we are going to ask the Root!
+51
+
+52
+00:05:01,030 --> 00:05:08,710
+So a road trip is going to get continued because even the resolver, which is our ISP, does not know
+52
+
+53
+00:05:09,220 --> 00:05:10,710
+where is Facebook dot com.
+53
+
+54
+00:05:12,100 --> 00:05:16,000
+So there is always a server is usually your ISP and we know that now.
+54
+
+55
+00:05:16,730 --> 00:05:24,040
+Now our request is going to the route server the route server knows where to locate the dot com
+55
+
+56
+00:05:24,040 --> 00:05:24,670
+TLD.
+56
+
+57
+00:05:25,330 --> 00:05:28,300
+So dot com is basically what is added.
+57
+
+58
+00:05:28,930 --> 00:05:40,360
+Behind our website, for example, Google dot com, Facebook dot com, and there are more such top-level
+58
+
+59
+00:05:40,360 --> 00:05:45,970
+domains like edu.gov.in etc
+59
+
+60
+00:05:48,440 --> 00:06:00,340
+Now, next, when the request reaches to the root servers, then the root server ask, what do you want?
+60
+
+61
+00:06:01,130 --> 00:06:07,090
+And we are going to say here what we want to open Facebook dot com.
+61
+
+62
+00:06:08,870 --> 00:06:10,640
+Do you know where can I find it?
+62
+
+63
+00:06:11,510 --> 00:06:13,830
+So the root says "sorry" resolver.
+63
+
+64
+00:06:13,850 --> 00:06:19,180
+I do not know where to find Facebook dot com, but I can tell you where to find them.
+64
+
+65
+00:06:19,190 --> 00:06:21,620
+Dot com, top level domain server.
+65
+
+66
+00:06:22,160 --> 00:06:26,390
+So now a request is going to the dot com TLD server.
+66
+
+67
+00:06:27,320 --> 00:06:34,910
+So a route has different different DNS hierarchies of TLD's.
+67
+
+68
+00:06:35,330 --> 00:06:42,230
+For example, as you can see a little zoom out a little bit .com , .org, .net.
+68
+
+69
+00:06:42,230 --> 00:06:44,840
+And there are many such like that.
+69
+
+70
+00:06:45,710 --> 00:06:53,810
+So root checks for whatever the request has came of the client, for example, as it wants to see
+70
+
+71
+00:06:53,990 --> 00:06:55,090
+Facebook dot com.
+71
+
+72
+00:06:55,910 --> 00:06:58,940
+So the route is only going to check the TLD.
+72
+
+73
+00:06:59,120 --> 00:07:03,680
+That is the top level domain in the dot com hierarchy.
+73
+
+74
+00:07:04,460 --> 00:07:08,530
+And here the route will be able to find it.
+74
+
+75
+00:07:08,820 --> 00:07:09,230
+Why?
+75
+
+76
+00:07:09,830 --> 00:07:20,380
+Because all the domain names which are registered has all its database saved to the root server.
+76
+
+77
+00:07:20,930 --> 00:07:29,900
+So anytime you buy any domain from GoDaddy, Namecheap or anywhere in this world, always a small fee has
+77
+
+78
+00:07:29,900 --> 00:07:35,060
+been taken from you, which we generally call it, as I can fee.
+78
+
+79
+00:07:36,290 --> 00:07:45,920
+So your particular domain name or your particular website name are added into the root servers
+79
+
+80
+00:07:45,920 --> 00:07:50,190
+hierarchy this is compulsory and that has to happen.
+80
+
+81
+00:07:50,210 --> 00:07:58,130
+So basically the root root knows if any website has been made or deployed with any particular domain
+81
+
+82
+00:07:58,130 --> 00:07:58,460
+name.
+82
+
+83
+00:07:59,180 --> 00:08:08,600
+And finally we are able to see the particular website how once route is able to identify.
+83
+
+84
+00:08:08,630 --> 00:08:17,060
+OK, Facebook dot com lies and the dot com tlt and it is pointing to IP address, let's say it points
+84
+
+85
+00:08:17,060 --> 00:08:23,570
+to the IP address 10.10.10, and then route is going to say, Ok Rohit,this
+85
+
+86
+00:08:23,750 --> 00:08:25,940
+I have identified Facebook.
+86
+
+87
+00:08:25,940 --> 00:08:28,040
+Dot com is pointing to this IP address.
+87
+
+88
+00:08:28,190 --> 00:08:30,290
+Now you can fetch Facebook.
+88
+
+89
+00:08:30,950 --> 00:08:40,040
+So now Rohit is going to come back, which is taking the request or the response back to his computer.
+89
+
+90
+00:08:40,910 --> 00:08:47,450
+Once he is coming back, he will keep on saving the particular response that he have got from the root
+90
+
+91
+00:08:47,450 --> 00:08:47,960
+server.
+91
+
+92
+00:08:48,140 --> 00:08:55,460
+In all the cases, for example, that resolver is going to say it into its cache first, then the browser
+92
+
+93
+00:08:55,460 --> 00:09:03,770
+will save it as well as the OS will save it into its cache why so that the whole process or the
+93
+
+94
+00:09:03,770 --> 00:09:06,890
+whole round trip does not happen again.
+94
+
+95
+00:09:07,550 --> 00:09:10,640
+So I hope you guys understood how actually DNS works.
+95
+
+96
+00:09:11,060 --> 00:09:19,370
+And whenever you type anything into your browser, how the request goes from your browser cache to your
+96
+
+97
+00:09:19,370 --> 00:09:24,530
+OS cache, then to your resolver, then to the root and then to the server.
+97
+
+98
+00:09:25,280 --> 00:09:25,820
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,420 --> 00:00:02,230
+Hello, everyone.
+1
+
+2
+00:00:03,220 --> 00:00:11,290
+So when we are doing subdomain takeover the first and the foremost important step that we have to do
+2
+
+3
+00:00:11,290 --> 00:00:19,810
+is a subdomain enumeration, and obviously when we are doing subdomain enumeration, we want two things
+3
+
+4
+00:00:19,960 --> 00:00:21,970
+that are very important for us.
+4
+
+5
+00:00:22,390 --> 00:00:31,420
+The first thing is more number of results, which contains a lot of subdomains of that specific target,
+5
+
+6
+00:00:31,840 --> 00:00:38,720
+because we do not want to miss any of the subdomain which may be vulnerable to subdomain takeover attacks.
+6
+
+7
+00:00:39,250 --> 00:00:47,200
+So the first thing that we want is the maximum number of results or subdomains into our output.
+7
+
+8
+00:00:47,860 --> 00:00:49,780
+Now, what is the second thing that we want?
+8
+
+9
+00:00:50,380 --> 00:00:58,300
+Second thing is the fastest subdomain resolvers, which basically means in simple word, we
+9
+
+10
+00:00:58,300 --> 00:01:06,040
+want the maximum number of subdomains in output with the minimum amount spend, which is very important
+10
+
+11
+00:01:06,130 --> 00:01:07,220
+for every one of us.
+11
+
+12
+00:01:07,660 --> 00:01:17,630
+We just cannot sit there waiting for long hours, waiting to get the results of a subdomain enumeration.
+12
+
+13
+00:01:17,650 --> 00:01:25,270
+So what we need to do, I have already done the comparisons for the fastest, fastest subdomain resolvers
+13
+
+14
+00:01:25,720 --> 00:01:34,060
+that can help you in quickly processing the subdomain enumeration part so you can focus more on the
+14
+
+15
+00:01:34,060 --> 00:01:37,790
+subdomain takeovers of the of those particular targets.
+15
+
+16
+00:01:39,130 --> 00:01:42,670
+So let's quickly see how you can do this.
+16
+
+17
+00:01:42,970 --> 00:01:51,280
+So it is a practical time and let's see the fastest subdomain enumeration, resolver or tool with better
+17
+
+18
+00:01:51,280 --> 00:01:52,930
+and accurate results.
+18
+
+19
+00:01:56,110 --> 00:02:02,650
+All right, so the first thing that we are going to see is the usual sublister tool that everyone
+19
+
+20
+00:02:02,650 --> 00:02:08,070
+uses for identifying the subdomains or doing the subdomain enumeration.
+20
+
+21
+00:02:08,350 --> 00:02:11,920
+So I'm just going to hit, enter and wait for this to complete.
+21
+
+22
+00:02:12,190 --> 00:02:14,000
+As you can see, it has successfully started.
+22
+
+23
+00:02:14,260 --> 00:02:21,190
+Let me also run one instance of find domain and let's see what results do we get.
+23
+
+24
+00:02:21,670 --> 00:02:30,130
+I'm just going to run find domain and I'm going to type hyphen D, which stands for Target and I'm going
+24
+
+25
+00:02:30,130 --> 00:02:32,740
+to run this as soon as I run this.
+25
+
+26
+00:02:32,920 --> 00:02:34,600
+It is going to give me the results.
+26
+
+27
+00:02:35,050 --> 00:02:42,670
+And you can see I have got the results in four seconds, which was a very, very quick sublister has
+27
+
+28
+00:02:42,670 --> 00:02:44,950
+not even started before this.
+28
+
+29
+00:02:44,950 --> 00:02:52,900
+I got the results in simply three seconds and this time it took one more second to give me the results,
+29
+
+30
+00:02:52,900 --> 00:02:55,240
+which is a very, very awesome.
+30
+
+31
+00:02:56,110 --> 00:03:06,730
+Now let's see if we get the subdomain that we want over here and let's see the results of do we get
+31
+
+32
+00:03:06,790 --> 00:03:10,630
+the subdomains that we want from this specific target.
+32
+
+33
+00:03:11,740 --> 00:03:16,380
+Let me just scroll the results and you can see here, which is perfect.
+33
+
+34
+00:03:16,810 --> 00:03:24,040
+We are able to see the subdomain that we wanted, which have been hosted recently, which is Shifa
+34
+
+35
+00:03:24,190 --> 00:03:27,880
+.shopify.srsecure.xyz.
+35
+
+36
+00:03:28,240 --> 00:03:35,350
+And we have already taken over this subdomain, which was a vulnerable to Shopify subdomain takeover.
+36
+
+37
+00:03:36,040 --> 00:03:40,720
+Now let's get back to our sublister and see how much it has done until now.
+37
+
+38
+00:03:41,740 --> 00:03:48,250
+And again, see, it has also completed the subdomain enumeration part and it has identified the subdomains
+38
+
+39
+00:03:48,250 --> 00:03:48,700
+as well.
+39
+
+40
+00:03:49,120 --> 00:03:56,830
+And you can see it has also identified the subdomain that we want, which is shifa.shopify.srsecure
+40
+
+41
+00:03:56,830 --> 00:04:02,080
+but in the race of identifying subdomains.
+41
+
+42
+00:04:02,080 --> 00:04:08,020
+It has identified these subdomains by taking a lot of time.
+42
+
+43
+00:04:08,050 --> 00:04:12,430
+But the number of subdomains you can see are more than find domain.
+43
+
+44
+00:04:12,430 --> 00:04:19,990
+As we can see, it only got 47 subdomains and here we have 57 subdomains.
+44
+
+45
+00:04:21,460 --> 00:04:25,000
+I believe that many of the subdomains are repeated over here.
+45
+
+46
+00:04:25,000 --> 00:04:33,580
+For example, the www is added again for each subdomain because of which the number of results that
+46
+
+47
+00:04:33,580 --> 00:04:38,670
+we have got has doubled over here, as you can see over here.
+47
+
+48
+00:04:39,700 --> 00:04:46,960
+And if you see the output for this, there are again, www which have been added over here.
+48
+
+49
+00:04:47,260 --> 00:04:53,490
+But when I did the comparison for both the number of URL, it were exactly the same.
+49
+
+50
+00:04:53,530 --> 00:05:03,430
+So this produces a big count, but exactly those URL which resolve and are running or live
+50
+
+51
+00:05:03,700 --> 00:05:05,980
+is exactly the same for both the tools.
+51
+
+52
+00:05:06,610 --> 00:05:14,740
+Now, if comparing that time, then the time, obviously, as we have seen of find domain is very,
+52
+
+53
+00:05:14,740 --> 00:05:15,430
+very good.
+53
+
+54
+00:05:15,640 --> 00:05:22,300
+In just mere four seconds, it was able to identify all of the subdomains.
+54
+
+55
+00:05:22,510 --> 00:05:24,910
+So we are saving our time onto that.
+55
+
+56
+00:05:25,900 --> 00:05:32,950
+So I hope you guys understood this comparison video of identifying the subdomains for enumeration so
+56
+
+57
+00:05:32,950 --> 00:05:36,160
+that you can use this later on for your target.
+57
+
+58
+00:05:36,940 --> 00:05:41,710
+Now, before closing this video, let me show you one more thing as well.
+58
+
+59
+00:05:42,100 --> 00:05:46,530
+Now, if you want to save the results of find domain, you can save that as well.
+59
+
+60
+00:05:47,110 --> 00:05:52,080
+You can use this particular symbol and give the name of the file that you want to save.
+60
+
+61
+00:05:52,510 --> 00:06:01,540
+So let's say I want to save this into this file, which is the name srsecure_sub.txt
+61
+
+62
+00:06:03,580 --> 00:06:08,230
+Now, let me just hit enter and it will save the output into this file.
+62
+
+63
+00:06:08,650 --> 00:06:10,420
+And you can see it has completed.
+63
+
+64
+00:06:10,750 --> 00:06:11,620
+Let's verify.
+64
+
+65
+00:06:13,800 --> 00:06:19,220
+And you can see this as the result, and now it was able to identify the subdomains and three seconds
+65
+
+66
+00:06:19,770 --> 00:06:26,970
+what you can see into this output, we are able to see a lot of more thing, a lot of messages over
+66
+
+67
+00:06:26,970 --> 00:06:27,330
+here.
+67
+
+68
+00:06:28,140 --> 00:06:36,880
+And the target and searching in virustotal, sublister, Facebook ,bufferover API.
+68
+
+69
+00:06:37,440 --> 00:06:40,210
+So we do not want this clutter over here.
+69
+
+70
+00:06:40,230 --> 00:06:49,470
+So what we are going to do is we are going to run the command, which is hyphen, hyphen, quiet and
+70
+
+71
+00:06:49,650 --> 00:06:50,070
+enter.
+71
+
+72
+00:06:51,210 --> 00:06:59,200
+What this will do is it will quiet the find domain output and it will not print any banner.
+72
+
+73
+00:06:59,220 --> 00:07:06,090
+So let me show you the output now and you can see a clear output with only the subdomains.
+73
+
+74
+00:07:06,370 --> 00:07:10,620
+There is no extra clutter or noise into this output.
+74
+
+75
+00:07:10,950 --> 00:07:13,820
+And now you can utilize this output as well.
+75
+
+76
+00:07:13,830 --> 00:07:22,110
+You can save it and you and you will be able to make a clear distinguish and clearly identify what are
+76
+
+77
+00:07:22,110 --> 00:07:22,830
+the subdomains.
+77
+
+78
+00:07:22,830 --> 00:07:29,370
+And you can also feed the subdomains to any other tools if you want to move ahead with this target.
+78
+
+79
+00:07:30,330 --> 00:07:31,710
+So this is it for this video.
+79
+
+80
+00:07:31,710 --> 00:07:38,070
+And I hope you guys understood how you can quickly identify subdomains for any specific target.
+80
+
+81
+00:07:38,100 --> 00:07:38,580
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,960 --> 00:00:08,280
+Hello, everyone, and welcome to this video and this video we are going to understand about what is
+1
+
+2
+00:00:08,280 --> 00:00:08,910
+DNS.
+2
+
+3
+00:00:10,050 --> 00:00:18,270
+Why are we going to learn about DNS, DNS is a very, very important to understand how the communication
+3
+
+4
+00:00:18,270 --> 00:00:25,450
+is happening between the client and the server or how the client is actually able to reach to the server.
+4
+
+5
+00:00:26,280 --> 00:00:30,870
+There are many different records that are listed into a DNS.
+5
+
+6
+00:00:32,090 --> 00:00:40,460
+And for subdomain take-over types of attack, we need to understand actually how DNS works, because
+6
+
+7
+00:00:40,460 --> 00:00:47,320
+that will make this process much more simpler to understand subdomain tekoa when liabilities.
+7
+
+8
+00:00:48,650 --> 00:00:51,020
+So first, clearing the basics about DNS.
+8
+
+9
+00:00:51,950 --> 00:00:55,660
+DNS stands for domain name system or domain name service.
+9
+
+10
+00:00:56,390 --> 00:01:05,010
+It runs on port number 53 and DNS itself has multiple records, as you can see on the screen.
+10
+
+11
+00:01:05,720 --> 00:01:10,610
+So let's start with the first record, which is the A record, as you can see here.
+11
+
+12
+00:01:11,300 --> 00:01:17,190
+So A record means the hostname will point to an IP address.
+12
+
+13
+00:01:17,780 --> 00:01:19,370
+What does this mean actually?
+13
+
+14
+00:01:20,090 --> 00:01:22,050
+So into any server.
+14
+
+15
+00:01:22,160 --> 00:01:28,280
+So let's say the server is srsecure.xyz.
+15
+
+16
+00:01:28,850 --> 00:01:34,830
+So into this server there will be A record and that A record will tell.
+16
+
+17
+00:01:35,180 --> 00:01:35,670
+All right.
+17
+
+18
+00:01:35,960 --> 00:01:43,640
+So this hostname should be pointed to this specific IP address, for example, srsecure should
+18
+
+19
+00:01:43,640 --> 00:01:51,050
+be pointed to IP address, which is let's say 192.168.1.100.
+19
+
+20
+00:01:51,740 --> 00:01:56,240
+So now whenever a client like Rohit or you.
+20
+
+21
+00:01:57,850 --> 00:02:04,480
+Try to point srsecure.xyz into your browser, or when you try to open this into your 
+21
+
+22
+00:02:04,480 --> 00:02:11,800
+URL bar of your Chrome browser or Firefox browser, you are automatically pointing to this IP address
+22
+
+23
+00:02:11,800 --> 00:02:16,660
+or you are able to open the website, which is hosted under this particular IP address.
+23
+
+24
+00:02:17,290 --> 00:02:26,080
+How this works, this is working because of the A record when we are sending a request to srsecure.xyz
+24
+
+25
+00:02:26,080 --> 00:02:35,260
+then from its DNS records, a record checks that this hostname actually points to this IP
+25
+
+26
+00:02:35,260 --> 00:02:35,710
+address.
+26
+
+27
+00:02:36,010 --> 00:02:41,550
+And remember, machine does not understand names, machine understand numbers.
+27
+
+28
+00:02:41,890 --> 00:02:49,840
+So each server has its own unique IP address and by default we are pointing to this IP address and hence
+28
+
+29
+00:02:49,840 --> 00:02:53,100
+we are able to connect it to this IP address.
+29
+
+30
+00:02:53,440 --> 00:02:57,580
+Now, for example, if you want to see this practical, let me open up a new window.
+30
+
+31
+00:02:58,480 --> 00:03:07,360
+And here, here, let me try to ping Google dot com and you can see I'm getting a reply from Google
+31
+
+32
+00:03:07,360 --> 00:03:09,460
+dot com 64 bytes reply.
+32
+
+33
+00:03:09,790 --> 00:03:13,660
+And here you can see IP address from where I'm getting a reply from.
+33
+
+34
+00:03:14,240 --> 00:03:17,440
+Now, if I try to open Google dot com.
+34
+
+35
+00:03:17,920 --> 00:03:20,230
+So let me try to open Google dot com.
+35
+
+36
+00:03:22,040 --> 00:03:29,520
+over here and you can see I'm able to open it now if I give the IP address over here and hit enter.
+36
+
+37
+00:03:29,890 --> 00:03:32,670
+And let's see if I'm able to open it and it gets opened.
+37
+
+38
+00:03:33,320 --> 00:03:41,000
+Now, this means that I can open Google dot com with the help of the  URL or the name, as well as with
+38
+
+39
+00:03:41,000 --> 00:03:42,680
+the help of the IP address.
+39
+
+40
+00:03:43,340 --> 00:03:52,160
+This is basically happening because the name itself is pointing to Google dot com and this happens due
+40
+
+41
+00:03:52,160 --> 00:03:53,390
+to  A record.
+41
+
+42
+00:03:54,650 --> 00:03:55,190
+All right.
+42
+
+43
+00:03:55,520 --> 00:03:58,870
+Let's move ahead to the next record, which is the CName record.
+43
+
+44
+00:03:59,420 --> 00:04:05,770
+Now, CName itself, the name is C, which stands for canonical.
+44
+
+45
+00:04:06,350 --> 00:04:09,020
+Now, this points hostname to hostname name.
+45
+
+46
+00:04:09,590 --> 00:04:10,430
+What does this mean?
+46
+
+47
+00:04:10,880 --> 00:04:13,670
+This means that, for example.
+47
+
+48
+00:04:16,100 --> 00:04:18,530
+srsecure.xyz.
+48
+
+49
+00:04:19,040 --> 00:04:26,780
+Now, if I write over here, let's say, www.srsecure.xyz this means if anyone
+49
+
+50
+00:04:26,780 --> 00:04:35,240
+types this into their browsers, then they should automatically get redirected to a srsecure.xyz
+50
+
+51
+00:04:35,240 --> 00:04:38,360
+and not get redirected to any other Web site.
+51
+
+52
+00:04:38,930 --> 00:04:43,460
+Now, here's what we have done, is we are pointing a hostname to a hostname.
+52
+
+53
+00:04:44,000 --> 00:04:47,200
+Now this relationship is called CName
+53
+
+54
+00:04:47,660 --> 00:04:51,560
+So let's see the practical quickly and understand how this actually works.
+54
+
+55
+00:04:53,000 --> 00:04:58,550
+So let me just quickly login into my C Panel server and let's quickly see this.
+55
+
+56
+00:05:00,440 --> 00:05:06,290
+So as you can see over here, I have logged in successfully into my server and here I am into my zone
+56
+
+57
+00:05:06,290 --> 00:05:09,960
+record, which is basically the DNS, as you can see over here.
+57
+
+58
+00:05:10,490 --> 00:05:10,940
+All right.
+58
+
+59
+00:05:11,240 --> 00:05:15,110
+Now, let me quickly show you A record, which is this button.
+59
+
+60
+00:05:15,110 --> 00:05:19,270
+You can see a hostname is pointing to an IP address.
+60
+
+61
+00:05:19,610 --> 00:05:23,350
+So this is the IP address of the server of srsecure.xyz.
+61
+
+62
+00:05:23,900 --> 00:05:30,890
+And if I show you if I try to remove this and if I tried to type a hostname, it's a Google dot com,
+62
+
+63
+00:05:30,980 --> 00:05:37,610
+then it will throw error and it would say you must specify a valid IP before address, which means I
+63
+
+64
+00:05:37,610 --> 00:05:40,580
+cannot point a hostname into a record.
+64
+
+65
+00:05:40,820 --> 00:05:42,280
+And we already learned that.
+65
+
+66
+00:05:43,100 --> 00:05:44,700
+So I'm just going to cancel this.
+66
+
+67
+00:05:45,110 --> 00:05:45,590
+All right.
+67
+
+68
+00:05:45,980 --> 00:05:47,820
+Now let's see a CName record.
+68
+
+69
+00:05:48,080 --> 00:05:54,980
+So for CName record as you can see over here a host name, which is www.srsecure.xyz
+69
+
+70
+00:05:54,980 --> 00:06:00,320
+is pointing to srsecure.xyz through a CName.
+70
+
+71
+00:06:00,620 --> 00:06:06,150
+And if I tried to modify this and let's say I put an IP address, then it is going to throw error,
+71
+
+72
+00:06:06,150 --> 00:06:13,820
+which says you must specify a valid CName record because this is not a canonical name, it is an IP
+72
+
+73
+00:06:13,820 --> 00:06:19,700
+address and we have seen in Cname record we point host names to host name.
+73
+
+74
+00:06:20,300 --> 00:06:27,650
+And if I try to write Google dot com over here, then anyone who visits the www.srsecure.xyz
+74
+
+75
+00:06:27,650 --> 00:06:30,610
+is going to get redirected to Google dot com.
+75
+
+76
+00:06:31,220 --> 00:06:42,230
+So let's do this simple experiment when I'm going to redirect www to srsecure.xyz to GitHub
+76
+
+77
+00:06:42,230 --> 00:06:42,770
+dot com.
+77
+
+78
+00:06:43,130 --> 00:06:49,890
+So I have just created this new CName right now and let's see if this works or not.
+78
+
+79
+00:06:50,210 --> 00:06:51,920
+So let me first copy this.
+79
+
+80
+00:06:54,600 --> 00:07:01,920
+let me open my terminal, and let's see if we are able to see if this is working or not.
+80
+
+81
+00:07:02,370 --> 00:07:06,890
+So let me just try to ping this first and you can see I'm getting a reply.
+81
+
+82
+00:07:07,260 --> 00:07:07,710
+All right.
+82
+
+83
+00:07:07,980 --> 00:07:12,750
+So I'm getting a reply from this IP address and let's see, which is this IP address from where I'm
+83
+
+84
+00:07:12,750 --> 00:07:13,530
+getting reply.
+84
+
+85
+00:07:14,520 --> 00:07:20,780
+And you can see I'm getting an IP address from I'm getting a ping reply from Amazon AWS.
+85
+
+86
+00:07:21,240 --> 00:07:21,870
+All right.
+86
+
+87
+00:07:22,260 --> 00:07:23,760
+Now, let's see.
+87
+
+88
+00:07:24,150 --> 00:07:25,860
+This IP address belongs to whom?
+88
+
+89
+00:07:26,430 --> 00:07:31,310
+So let me just try to open this into my browser and let's see what happens.
+89
+
+90
+00:07:32,950 --> 00:07:41,470
+And you can see I'm able to redirect to GitHub dot com, because this is where I actually pointed this
+90
+
+91
+00:07:42,400 --> 00:07:45,300
+CName record to github dot com.
+91
+
+92
+00:07:45,700 --> 00:07:48,810
+Therefore, I'm successfully getting redirected over here.
+92
+
+93
+00:07:49,150 --> 00:07:52,480
+And this is how actually CName record Works.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,580 --> 00:00:02,510
+Hello, everyone.
+1
+
+2
+00:00:03,290 --> 00:00:11,090
+So in this video, we are going to see how we are going to perform a subdomain takeover onto Shopify
+2
+
+3
+00:00:11,090 --> 00:00:12,480
+hosted domain.
+3
+
+4
+00:00:13,190 --> 00:00:23,480
+So as of now, you must be aware that there are many services, cloud providers like AWS and GitHub,
+4
+
+5
+00:00:23,840 --> 00:00:28,750
+Shopify, Tumblr, Zendesk, Fastly, etc..
+5
+
+6
+00:00:29,600 --> 00:00:37,340
+So for this specific video, we are going to see, first of all, how you can identify the subdomains
+6
+
+7
+00:00:37,340 --> 00:00:43,250
+of any particular target after enumeration of the subdomains.
+7
+
+8
+00:00:43,580 --> 00:00:52,700
+You are going to identify if any of the subdomain is vulnerable to a subdomain take-over and if any of
+8
+
+9
+00:00:52,700 --> 00:01:02,480
+that domain is pointing to Shopify  IP or is never been claimed onto the Shopify cloud environment,
+9
+
+10
+00:01:02,910 --> 00:01:09,080
+then we are going to claim it and successfully perform a subdomain take over.
+10
+
+11
+00:01:10,520 --> 00:01:19,220
+So let's quickly see the practical of how you can take over if any of the subdomains or IP addresses
+11
+
+12
+00:01:19,220 --> 00:01:23,210
+are pointing to Shopify and are not being claimed.
+12
+
+13
+00:01:26,450 --> 00:01:34,970
+All right, so for this video, I am logged into my control panel of the website, which is srsecure
+13
+
+14
+00:01:34,970 --> 00:01:36,130
+.xyz
+14
+
+15
+00:01:36,740 --> 00:01:47,930
+So to show a simulated environment of taking over Shopify subdomain, I have myself created a subdomain
+15
+
+16
+00:01:47,930 --> 00:01:49,600
+onto this website.
+16
+
+17
+00:01:50,180 --> 00:01:58,160
+Now I will just move ahead to my DNS settings, and I have created a subdomain which you can see over
+17
+
+18
+00:01:58,160 --> 00:01:58,520
+here.
+18
+
+19
+00:01:59,090 --> 00:02:08,210
+So the subdomain is shifashopify.srsecure.xyz and I have created this domain
+19
+
+20
+00:02:08,210 --> 00:02:13,040
+and pointed this particular domain to this specific IP address.
+20
+
+21
+00:02:13,640 --> 00:02:22,750
+Now to verify to whom this IP address points, we can just do a whois and put the IP address and hit
+21
+
+22
+00:02:22,790 --> 00:02:27,880
+enter and you will come to know this IP address points to Shopify.
+22
+
+23
+00:02:29,180 --> 00:02:36,840
+Now you may ask that we are able to see this into the DNS settings of the particular server.
+23
+
+24
+00:02:37,250 --> 00:02:40,860
+This is only is visible to the admin.
+24
+
+25
+00:02:41,270 --> 00:02:49,910
+Now, how is this visible to a user or a security researcher so far that we are going to enumerate all
+25
+
+26
+00:02:49,910 --> 00:02:57,140
+the subdomains of srsecure.xyz, and from there we are going to identify one of the domain
+26
+
+27
+00:02:57,140 --> 00:03:00,740
+which is pointed to Shopify, as you can see, or here.
+27
+
+28
+00:03:01,250 --> 00:03:05,930
+So for this, we are going to download this tool, which is a sublister.
+28
+
+29
+00:03:06,290 --> 00:03:14,680
+This tool is a fast subdomain enumeration tool for penetration testers, one of the most used tool into
+29
+
+30
+00:03:14,690 --> 00:03:15,950
+the infosec industry.
+30
+
+31
+00:03:16,860 --> 00:03:24,080
+Remember, this tool is written in Python and it will only work once you have Python installed into
+31
+
+32
+00:03:24,080 --> 00:03:24,780
+your computer.
+32
+
+33
+00:03:25,490 --> 00:03:30,520
+So this tool is compatible with Python two and Python three both.
+33
+
+34
+00:03:30,530 --> 00:03:36,990
+So in case you have any specific version of Python installed into a computer, then you're good to go.
+34
+
+35
+00:03:37,640 --> 00:03:38,080
+All right.
+35
+
+36
+00:03:38,210 --> 00:03:40,100
+So the first step is the installation.
+36
+
+37
+00:03:40,110 --> 00:03:44,330
+So we are going to copy this and paste it into your terminal.
+37
+
+38
+00:03:44,640 --> 00:03:50,840
+Basically, we are doing the git clone and we are downloading all the resources required, which you
+38
+
+39
+00:03:50,840 --> 00:03:53,720
+can see or hear into our computer.
+39
+
+40
+00:03:55,390 --> 00:04:00,250
+So I'm just going to copy this, go to my terminal and I'm going to paste it.
+40
+
+41
+00:04:01,620 --> 00:04:04,900
+So let me just clear the screen and I'm going to paste over here.
+41
+
+42
+00:04:05,370 --> 00:04:12,780
+What does this do as it is going to download the sublister repository and all the necessary tools into
+42
+
+43
+00:04:12,780 --> 00:04:15,370
+my computer as I already have it?
+43
+
+44
+00:04:15,450 --> 00:04:17,550
+I'm not going to download it again.
+44
+
+45
+00:04:17,820 --> 00:04:20,060
+And let me show you how does it looks like?
+45
+
+46
+00:04:20,970 --> 00:04:25,860
+As you can see, these are the files which will come into your computer.
+46
+
+47
+00:04:26,600 --> 00:04:33,000
+Now, the first and the most important thing that you have to do is you have to install the requirements
+47
+
+48
+00:04:33,000 --> 00:04:34,330
+dot txt file.
+48
+
+49
+00:04:34,680 --> 00:04:43,590
+So far, this you simply need to type pip install hyphen R, which means read the file, which is requirements for txt.
+49
+
+50
+00:04:45,000 --> 00:04:50,660
+Now, remember, when we are doing any installation, we need some privileges.
+50
+
+51
+00:04:50,700 --> 00:04:54,810
+So we are going to run this command as pseudo and hit enter.
+51
+
+52
+00:04:55,200 --> 00:05:03,540
+It may ask you for the password supplied the right password and it will install all the necessary dependencies
+52
+
+53
+00:05:03,810 --> 00:05:04,890
+which are required.
+53
+
+54
+00:05:05,220 --> 00:05:11,880
+As you can see, it has installed already the dependencies into my computer, so it did not take time.
+54
+
+55
+00:05:12,180 --> 00:05:15,210
+It may take some few seconds for you to install.
+55
+
+56
+00:05:15,900 --> 00:05:17,870
+Now let me clear the screen again.
+56
+
+57
+00:05:18,540 --> 00:05:25,020
+And after we have successfully installed all the dependencies, we are going to run this particular
+57
+
+58
+00:05:25,020 --> 00:05:26,190
+tool, which is sublister.
+58
+
+59
+00:05:26,670 --> 00:05:34,700
+So let's quickly take Python and the tool name and hit enter to see if this works fine or not.
+59
+
+60
+00:05:35,190 --> 00:05:41,220
+And you can see it has started successfully and we are able to see the banner for this particular tool,
+60
+
+61
+00:05:41,520 --> 00:05:49,140
+which shows that there is no error into the installation and we have correctly set it up, this particular
+61
+
+62
+00:05:49,260 --> 00:05:53,290
+tool now how to use this tool.
+62
+
+63
+00:05:53,310 --> 00:05:59,580
+We are going to see it into the next video and identify the subdomains for that specific target.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:02,230 --> 00:00:09,930
+Hello, everyone, and welcome to this video and this video, we are going to see the fastest subdomain
+1
+
+2
+00:00:09,940 --> 00:00:17,260
+enumeration tool, which is going to save over a lot of time because obviously we do not want to waste
+2
+
+3
+00:00:17,260 --> 00:00:25,990
+our much time on subdomain enumeration because we want to utilize our time in doing the take over for
+3
+
+4
+00:00:25,990 --> 00:00:29,760
+any specific target and earn rewards and bounties.
+4
+
+5
+00:00:30,250 --> 00:00:37,060
+So for this, you can utilize this tool, which is one of the fastest tool and which gives you very
+5
+
+6
+00:00:37,060 --> 00:00:38,240
+quick output.
+6
+
+7
+00:00:38,770 --> 00:00:43,740
+So let's quickly see how you can do the installation of find domain into your computer.
+7
+
+8
+00:00:44,260 --> 00:00:50,780
+So you just need to come to this particular repository and you can scroll down to the installation part.
+8
+
+9
+00:00:51,490 --> 00:01:00,280
+So let me come to the installation and you can see they offer Binary for all different platforms like
+9
+
+10
+00:01:00,280 --> 00:01:06,330
+Linux, Windows, MacOS,Arch 64 ,NixOS or Docker's.
+10
+
+11
+00:01:06,610 --> 00:01:08,530
+Now I have a Mac OS.
+11
+
+12
+00:01:08,530 --> 00:01:10,330
+I'm going to click on Mac OS.
+12
+
+13
+00:01:10,690 --> 00:01:15,190
+You can accordingly for your operating system, download the binaries.
+13
+
+14
+00:01:15,580 --> 00:01:21,490
+For instance, most of the Windows users can download the binary from here and then you can run this
+14
+
+15
+00:01:21,490 --> 00:01:24,200
+particular tool from your command prompt.
+15
+
+16
+00:01:25,300 --> 00:01:30,360
+Now as I'm using MacOS, so I'm going to go ahead with the MacOS installation.
+16
+
+17
+00:01:30,640 --> 00:01:32,530
+So it is again, very pretty simple.
+17
+
+18
+00:01:32,530 --> 00:01:36,070
+You just need to type through, install and find domain.
+18
+
+19
+00:01:36,440 --> 00:01:40,510
+Remember, you should also have Brew install for Mac OS users.
+19
+
+20
+00:01:40,900 --> 00:01:46,340
+Brew is one of the package managers that you can install into your computer.
+20
+
+21
+00:01:46,990 --> 00:01:48,220
+So let me show you.
+21
+
+22
+00:01:48,730 --> 00:01:50,560
+The installation is pretty simple.
+22
+
+23
+00:01:50,560 --> 00:01:53,920
+You just need to type brew install finddomain and hit enter.
+23
+
+24
+00:01:54,460 --> 00:02:00,960
+It is just going to take a couple of seconds and it will install finddomain into your computer.
+24
+
+25
+00:02:02,250 --> 00:02:03,850
+The installation is happening.
+25
+
+26
+00:02:04,210 --> 00:02:06,340
+Let me go back over here.
+26
+
+27
+00:02:06,970 --> 00:02:14,860
+Once you have done this, you can just run find domain and this will start your tool in case you
+27
+
+28
+00:02:14,860 --> 00:02:21,050
+want to manually run the tool from the repository and do not want brew install it.
+28
+
+29
+00:02:21,370 --> 00:02:22,480
+You can also do that.
+29
+
+30
+00:02:22,900 --> 00:02:29,350
+Just download this using the wget and then give the executable permissions to finddomain tool.
+30
+
+31
+00:02:29,350 --> 00:02:35,270
+And then you can run the finddomain- OSX version, which is the Mac OS version.
+31
+
+32
+00:02:36,460 --> 00:02:43,930
+Let me go over here and you can see a message over here finddomain 2.1.1
+32
+
+33
+00:02:43,930 --> 00:02:49,070
+is already installed and I believe this is the latest version of FindDomain.
+33
+
+34
+00:02:49,300 --> 00:02:54,180
+Let's go over here to back to find Domain and let's see the version.
+34
+
+35
+00:02:54,190 --> 00:03:00,240
+And you can see 2.1.3 is the latest version which is installed.
+35
+
+36
+00:03:01,390 --> 00:03:01,900
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,410 --> 00:00:04,860
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:05,760 --> 00:00:11,670
+So in this video, we are going to see how can we install a sub finder.
+2
+
+3
+00:00:12,390 --> 00:00:20,310
+So subfinder is one of the most interesting tool that has been released by Project Discovery team, which
+3
+
+4
+00:00:20,310 --> 00:00:26,550
+is used for identification of a subdomains for bug bounty programs.
+4
+
+5
+00:00:27,690 --> 00:00:30,630
+Now, the installation is very, very simple.
+5
+
+6
+00:00:31,110 --> 00:00:38,730
+And the best thing about this tool, as it is written in golang because of which it has much more faster
+6
+
+7
+00:00:38,730 --> 00:00:47,310
+speed as well as concurrency, which means you can run multiple threads of this particular tool to identify
+7
+
+8
+00:00:47,310 --> 00:00:50,070
+subdomains for multiple targets at once.
+8
+
+9
+00:00:51,240 --> 00:00:51,770
+All right.
+9
+
+10
+00:00:51,780 --> 00:00:59,430
+So how to do installation of this and how can we run this to identify subdomains very, very quickly?
+10
+
+11
+00:01:00,490 --> 00:01:03,910
+So you need to come to this particular GitHub repository.
+11
+
+12
+00:01:04,320 --> 00:01:07,890
+I'm going to give the link for this repository in the description.
+12
+
+13
+00:01:08,920 --> 00:01:12,230
+Now, there are multiple ways that you can install it.
+13
+
+14
+00:01:12,840 --> 00:01:19,620
+You can always compile it from the source code by copying this GitHub repository link and running this
+14
+
+15
+00:01:19,770 --> 00:01:20,520
+manually.
+15
+
+16
+00:01:21,330 --> 00:01:28,710
+Also, if you go into the releases tab, you will be able to identify the versions that are released
+16
+
+17
+00:01:28,920 --> 00:01:30,810
+for each distribution.
+17
+
+18
+00:01:31,380 --> 00:01:37,890
+For example, if you see over here, these are all the Linux versions that have been released for your
+18
+
+19
+00:01:37,890 --> 00:01:44,700
+current distribution, you can download anyone that works perfectly fine for you, here it is MacOS
+19
+
+20
+00:01:44,700 --> 00:01:46,590
+version, as well as Windows version.
+20
+
+21
+00:01:47,820 --> 00:01:53,920
+So for me, I have downloaded the Mac OS AMD 64 version, as you can see over here.
+21
+
+22
+00:01:55,200 --> 00:01:57,160
+So this is my version.
+22
+
+23
+00:01:57,180 --> 00:02:05,880
+So let me just file this to show you that this is a Mac OS executable file, which can be seen over
+23
+
+24
+00:02:05,880 --> 00:02:06,240
+here.
+24
+
+25
+00:02:07,020 --> 00:02:07,550
+All right.
+25
+
+26
+00:02:07,920 --> 00:02:15,420
+So now we are going to run this tool and let's see what kind of output do we get.
+26
+
+27
+00:02:16,200 --> 00:02:21,360
+So before starting the tool, let's quickly see the documentation and the help guide.
+27
+
+28
+00:02:22,260 --> 00:02:30,390
+So the first thing that need to be noticed over here is if you want to give any domain to identify it,
+28
+
+29
+00:02:30,390 --> 00:02:34,080
+subdomains, you need to give the -d flag.
+29
+
+30
+00:02:34,500 --> 00:02:38,740
+So Hyphen stands for that domain to find subdomains for.
+30
+
+31
+00:02:38,970 --> 00:02:39,930
+So let's see this.
+31
+
+32
+00:02:41,010 --> 00:02:48,660
+For instance, let's say we are going to identify the subdomains for a program which is Bugcrowd dot com
+32
+
+33
+00:02:49,590 --> 00:02:50,710
+and hit enter.
+33
+
+34
+00:02:51,390 --> 00:02:58,950
+Let's see how much time does it takes to identify the subdomains for bugcrowd and how many subdomains
+34
+
+35
+00:02:58,950 --> 00:03:00,600
+it total identifies.
+35
+
+36
+00:03:01,410 --> 00:03:09,510
+And you can see the scan is completed successfully and it has identified 31 subdomains for bugcrowd
+36
+
+37
+00:03:09,510 --> 00:03:10,800
+in eight seconds.
+37
+
+38
+00:03:11,340 --> 00:03:19,890
+This is pretty fast and we are getting a good result and output now in case you want to save
+38
+
+39
+00:03:19,890 --> 00:03:21,030
+this into a file.
+39
+
+40
+00:03:21,300 --> 00:03:22,520
+We can also do that.
+40
+
+41
+00:03:22,980 --> 00:03:31,050
+There is a flag which is given over here, which is hyphen O to save the output or to write the output
+41
+
+42
+00:03:31,050 --> 00:03:33,190
+into a file as can be seen over here.
+42
+
+43
+00:03:34,020 --> 00:03:43,570
+So hyphe O and the file name, let's say we give the file name as bugcrowdsubs.txt and hit enter.
+43
+
+44
+00:03:44,320 --> 00:03:52,590
+Now the output will be automatically saved into the file, which you can use later on for identification
+44
+
+45
+00:03:52,860 --> 00:03:56,750
+or give it to any tool for further inspection or scanning.
+45
+
+46
+00:03:57,990 --> 00:04:01,320
+So let us see if the file has been successfully created or not.
+46
+
+47
+00:04:01,800 --> 00:04:04,830
+And you can see it has successfully created over here.
+47
+
+48
+00:04:05,250 --> 00:04:05,730
+All right.
+48
+
+49
+00:04:06,570 --> 00:04:15,540
+Now, let's say if you want to identify multiple subdomains for multiple target, not only one, in
+49
+
+50
+00:04:15,540 --> 00:04:26,400
+that case, you can use the hyphen dL flag, which will enumerate the subdomains for all your target.
+50
+
+51
+00:04:27,000 --> 00:04:27,860
+So let's see this.
+51
+
+52
+00:04:28,260 --> 00:04:38,490
+So let's quickly make a file and let's call it as bounty target dot txt let's say our first target,
+52
+
+53
+00:04:38,490 --> 00:04:40,800
+be hackerone and second target.
+53
+
+54
+00:04:40,800 --> 00:04:43,350
+be bugcrowd dot com.
+54
+
+55
+00:04:43,860 --> 00:04:45,030
+Let's save this quickly.
+55
+
+56
+00:04:45,460 --> 00:04:53,320
+And now once we have saved this target, we are going to identify the subdomains for both the target.
+56
+
+57
+00:04:53,820 --> 00:04:59,220
+So for that, we are going to write a sub finder hyphen small D Capital L.
+57
+
+58
+00:04:59,880 --> 00:05:05,280
+As you can see over here, and bounty target
+58
+
+59
+00:05:09,120 --> 00:05:16,220
+and hit enter ,when I will hit enter, you can see it, I started enumerating subdomains for hackerone.
+59
+
+60
+00:05:16,590 --> 00:05:24,150
+So it has done enumerating the subdomains for Hackerone and it will start enumerating the subdomains for
+60
+
+61
+00:05:24,450 --> 00:05:25,740
+bugcrowd as well.
+61
+
+62
+00:05:26,670 --> 00:05:33,810
+Now you can see over here as we did a spell error and is not able to identify any subdomain for Hackerone
+62
+
+63
+00:05:34,020 --> 00:05:36,960
+because we did not add dot com at the end.
+63
+
+64
+00:05:37,680 --> 00:05:41,880
+So let's fix this quickly and write dot com over here.
+64
+
+65
+00:05:42,270 --> 00:05:48,150
+And again, run this and let's see if we are able to identify this time more subdomains.
+65
+
+66
+00:05:48,360 --> 00:05:55,200
+And you can see we are perfectly getting all the subdomains for the target as it has successfully identified
+66
+
+67
+00:05:55,380 --> 00:05:56,940
+16 subdomains.
+67
+
+68
+00:05:56,940 --> 00:06:01,070
+And previously, as we did a spell error, it was not able to identify it.
+68
+
+69
+00:06:01,740 --> 00:06:07,920
+So you should also make note of this, that you also do not do similar kind of mistakes when you are
+69
+
+70
+00:06:07,920 --> 00:06:14,550
+doing your bug bounty hunting or subdomain enumeration because you may get a false positive result which
+70
+
+71
+00:06:14,550 --> 00:06:16,530
+will affect your hunting process.
+71
+
+72
+00:06:17,260 --> 00:06:24,120
+So I hope you guys understood how you can use a subfinder to identify subdomains quickly, which you can
+72
+
+73
+00:06:24,120 --> 00:06:26,280
+use later on for your hunting part.
+73
+
+74
+00:06:26,580 --> 00:06:27,120
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,990 --> 00:00:03,810
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,920 --> 00:00:13,020
+So in this video, we are going to see one of the interesting features of a sub finders, which is going
+2
+
+3
+00:00:13,020 --> 00:00:22,410
+to help us a lot in identification of many of the sub subdomains or vertical correlation domains or
+3
+
+4
+00:00:22,410 --> 00:00:24,090
+the hidden subdomains.
+4
+
+5
+00:00:25,170 --> 00:00:32,070
+Now, this feature is called as the Recursive Enumerations SubDomains feature, which is given into
+5
+
+6
+00:00:32,070 --> 00:00:33,170
+the sub finder tool.
+6
+
+7
+00:00:33,750 --> 00:00:36,080
+And let's quickly see the example of this.
+7
+
+8
+00:00:37,080 --> 00:00:45,090
+So let's say I was able to identify one of the subdomain for a target program, uber dot com.
+8
+
+9
+00:00:45,900 --> 00:00:51,090
+So the subdomain that I have identified is dev dot uber dot com.
+9
+
+10
+00:00:52,140 --> 00:01:01,500
+Now if I'm going to use sub finder on dev.uber.com and I'm going to do a recursive enumeration
+10
+
+11
+00:01:01,710 --> 00:01:03,720
+or analysis of subdomains.
+11
+
+12
+00:01:04,050 --> 00:01:09,370
+Let's see if I'm able to identify multiple sub subdomains here or no.
+12
+
+13
+00:01:11,130 --> 00:01:21,600
+As you can see over here, I am able to identify in total 128 recursive subdomains of dev.uber.com.
+13
+
+14
+00:01:22,320 --> 00:01:30,540
+Now this gives you a variety of assets which may be missed by other security researchers, wherein
+14
+
+15
+00:01:30,720 --> 00:01:37,090
+you have done the recursive enumeration and you are getting a lot of subdomains over here.
+15
+
+16
+00:01:37,710 --> 00:01:45,870
+Now you can simply identify if any of the subdomain, if it is running a sensitive panel that can be
+16
+
+17
+00:01:45,870 --> 00:01:54,630
+bypassed easily, or if there is any sensitive information that has been exposed by mistake or any software
+17
+
+18
+00:01:54,630 --> 00:02:01,680
+version or cms that is running outdated software, which has a publicly available exploit.
+18
+
+19
+00:02:03,720 --> 00:02:11,100
+Also, apart from the recursive analysis, there is a feature of hyphen t, which is basically the
+19
+
+20
+00:02:11,100 --> 00:02:15,660
+concurrent threads that you can give to sub finder.
+20
+
+21
+00:02:16,140 --> 00:02:24,480
+Now this increases the efficiency of your scan and gives you multiple threads to run on your multiple
+21
+
+22
+00:02:24,480 --> 00:02:29,550
+target domains, which basically makes the scans much more faster.
+22
+
+23
+00:02:30,750 --> 00:02:37,740
+Even if you want to hide these Banner, which is coming into your scans when you're saving this output.
+23
+
+24
+00:02:37,950 --> 00:02:41,900
+You can also do that using the silent feature.
+24
+
+25
+00:02:42,540 --> 00:02:49,380
+So when you run the silent feature or the flag, you will not be able to see the banner of sub Finder
+25
+
+26
+00:02:49,560 --> 00:02:54,780
+and only get a clean version of the output, as you can see over here.
+26
+
+27
+00:02:55,650 --> 00:03:02,490
+So these were some of the features that you may find to be very, very helpful while you are doing subdomain
+27
+
+28
+00:03:02,490 --> 00:03:04,590
+enumeration using sub finder.
+28
+
+29
+00:03:05,190 --> 00:03:06,690
+So I hope you guys understood.
+29
+
+30
+00:03:06,930 --> 00:03:07,500
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:02,080 --> 00:00:04,930
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:05,650 --> 00:00:11,620
+So in this video, we are going to discuss about a very, very awesome resource, which is can I takeover
+2
+
+3
+00:00:11,620 --> 00:00:13,320
+XYZ now
+3
+
+4
+00:00:13,330 --> 00:00:13,920
+What is this?
+4
+
+5
+00:00:14,470 --> 00:00:21,130
+So it is a complete comprehensive guide for the subdomain because they are very, very useful resource
+5
+
+6
+00:00:21,190 --> 00:00:28,090
+which has been available and which has been used by many security researchers to identify some domain
+6
+
+7
+00:00:28,100 --> 00:00:29,930
+takeover based vulnerabilities.
+7
+
+8
+00:00:30,310 --> 00:00:37,330
+So what exactly is can I take over xyz it contains a list of services and how you can claim
+8
+
+9
+00:00:37,330 --> 00:00:44,650
+the domains as well as the subdomains with dangling DNS records, which basically means the DNS records,
+9
+
+10
+00:00:44,650 --> 00:00:47,620
+which are being pointed to these cloud platforms.
+10
+
+11
+00:00:47,620 --> 00:00:55,540
+But are never claimed and we as security researchers can easily claim those subdomains or the dangling
+11
+
+12
+00:00:55,540 --> 00:00:58,470
+DNS record and claim the subdomain as well.
+12
+
+13
+00:00:59,580 --> 00:01:06,600
+So this comprehensive guide of subdomain takeover's contained in 58 fingerprints of different cloud
+13
+
+14
+00:01:06,600 --> 00:01:13,500
+services, which you can easily take over and prove subdomain takeover based vulnerabilities or flaws.
+14
+
+15
+00:01:14,130 --> 00:01:18,770
+Now, there are few points to know and remember about this.
+15
+
+16
+00:01:18,780 --> 00:01:21,920
+Can I take over XYZ comprehensive guide.
+16
+
+17
+00:01:22,110 --> 00:01:30,450
+The first one is it contains the rich and refined list of services that are running on cloud platforms.
+17
+
+18
+00:01:30,840 --> 00:01:34,850
+The second point is identification of dangling CName.
+18
+
+19
+00:01:34,890 --> 00:01:42,570
+So we are going to identify the vulnerable DNS records that have been written and has been pointed to
+19
+
+20
+00:01:42,570 --> 00:01:43,790
+these cloud services.
+20
+
+21
+00:01:44,970 --> 00:01:51,020
+And the third one is the list of fingerprints and the status of takeover that we are going to perform.
+21
+
+22
+00:01:51,240 --> 00:01:58,200
+So we are going to utilize the fingerprint from this resource and we are going to match and identify
+22
+
+23
+00:01:58,410 --> 00:01:59,730
+on many subdomains.
+23
+
+24
+00:01:59,730 --> 00:02:05,340
+If these fingerprints match, then we can successfully claim a subdomain takeover over their.
+24
+
+25
+00:02:06,880 --> 00:02:13,390
+So now it is a practical time and let's see, how does this look like and how can we utilize it for
+25
+
+26
+00:02:13,390 --> 00:02:14,950
+our benefit of subdomain
+26
+
+27
+00:02:14,960 --> 00:02:17,480
+Takeover's.As you can see over here
+27
+
+28
+00:02:17,710 --> 00:02:23,620
+This is a repository by Edoverflow in which you can see over here, can it takeover xyz
+28
+
+29
+00:02:23,810 --> 00:02:27,190
+Now, first of all, what is subdomain take-over?
+29
+
+30
+00:02:27,250 --> 00:02:31,430
+You guys are already aware about subdomain take over based vulnerability.
+30
+
+31
+00:02:31,510 --> 00:02:38,440
+So let me just come to all entries, which contains the fingerprint of all the cloud services.
+31
+
+32
+00:02:38,920 --> 00:02:47,170
+As you can see here, the engine, the engine stands for the type of subdomain or the type of cloud
+32
+
+33
+00:02:47,170 --> 00:02:54,430
+service, the status, if it is venerable or not, the fingerprint that you need to check into the response
+33
+
+34
+00:02:54,430 --> 00:02:55,960
+for that particular subdomain.
+34
+
+35
+00:02:56,380 --> 00:03:02,020
+That discussion contains the discussion of the issues that have been opened by other security researchers,
+35
+
+36
+00:03:02,380 --> 00:03:06,750
+which also contains sometimes the steps of taking over any subdomain.
+36
+
+37
+00:03:07,000 --> 00:03:13,200
+And if it is not possible to take over the subdomain, it is also mentioned into the ISSUES section.
+37
+
+38
+00:03:13,750 --> 00:03:20,140
+The documentation contains the documentation about the cloud platform and how the subdomain takeover's
+38
+
+39
+00:03:20,140 --> 00:03:21,190
+can be possible.
+39
+
+40
+00:03:22,480 --> 00:03:22,950
+All right.
+40
+
+41
+00:03:22,960 --> 00:03:28,510
+So starting with the first one, as you can see, the first one is Acquia, which is not vulnerable,
+41
+
+42
+00:03:28,990 --> 00:03:31,010
+and the fingerprint is a website not found.
+42
+
+43
+00:03:31,450 --> 00:03:38,110
+Now, if the status is not vulnerable that means that particular cloud service provider cannot
+43
+
+44
+00:03:38,110 --> 00:03:38,650
+be done.
+44
+
+45
+00:03:38,650 --> 00:03:44,980
+A subdomain takeover, which means you cannot takeover those subdomains which are being hosted by this
+45
+
+46
+00:03:44,980 --> 00:03:46,380
+platform, which is Acquia.
+46
+
+47
+00:03:46,960 --> 00:03:52,570
+But if you see the second one, which is agile CRM, then it is vulnerable and you will be able to see
+47
+
+48
+00:03:52,570 --> 00:03:59,000
+a message which says, sorry, this page is no longer available into the response of that subdomain.
+48
+
+49
+00:03:59,140 --> 00:03:59,650
+All right.
+49
+
+50
+00:03:59,920 --> 00:04:04,340
+So let me show you one of the example for one of the cloud service provider.
+50
+
+51
+00:04:04,720 --> 00:04:11,800
+So let's say we see for Heroku and you you can see the cloud service provider is Heroku.
+51
+
+52
+00:04:12,130 --> 00:04:15,670
+It is an edge case and the fingerprint is no such app.
+52
+
+53
+00:04:15,850 --> 00:04:17,110
+Now, what is Edge case?
+53
+
+54
+00:04:17,350 --> 00:04:19,270
+It should be vulnerable or not vulnerable.
+54
+
+55
+00:04:19,870 --> 00:04:26,950
+Now, edge case means that sometimes you will be able to claim those subdomains and it becomes vulnerable
+55
+
+56
+00:04:27,160 --> 00:04:29,270
+and sometimes you are not able to do it.
+56
+
+57
+00:04:29,770 --> 00:04:30,700
+Now, why this?
+57
+
+58
+00:04:30,910 --> 00:04:38,290
+Because the cloud service providers have put on some medications or some settings in which a few of
+58
+
+59
+00:04:38,290 --> 00:04:44,490
+the subdomains are not able to successfully get claimed by us, and in some cases we can claim it.
+59
+
+60
+00:04:44,920 --> 00:04:48,850
+So it is considered as an edge case for all the edge cases.
+60
+
+61
+00:04:48,850 --> 00:04:55,630
+You should at least try once to claim the subdomain, and if you are able to do it, then it can be
+61
+
+62
+00:04:55,630 --> 00:04:56,680
+a vulnerable subdomain.
+62
+
+63
+00:04:56,680 --> 00:05:01,570
+Take over and you can report to the target organization for this.
+63
+
+64
+00:05:01,570 --> 00:05:03,730
+We are going to utilize censys.
+64
+
+65
+00:05:03,940 --> 00:05:07,930
+So as soon as I come on Censys, you can see a search box over here.
+65
+
+66
+00:05:08,440 --> 00:05:10,420
+You just need to type the fingerprint name.
+66
+
+67
+00:05:10,420 --> 00:05:14,200
+The fingerprint name, as we saw, was no such app.
+67
+
+68
+00:05:14,200 --> 00:05:16,720
+So I need to copy and paste it over here and.
+68
+
+69
+00:05:16,720 --> 00:05:17,140
+Right.
+69
+
+70
+00:05:17,140 --> 00:05:18,630
+Heroku in front of it.
+70
+
+71
+00:05:19,080 --> 00:05:27,040
+Now, what this basically means is Censys has already crawled all the target addresses, Web servers
+71
+
+72
+00:05:27,310 --> 00:05:31,350
+and has its fingerprint saved into its database.
+72
+
+73
+00:05:31,750 --> 00:05:38,290
+So we are quering the database from the Censys to all the Web servers, which contains these fingerprints
+73
+
+74
+00:05:38,500 --> 00:05:42,110
+to match a subdomain takeover vulnerability of Heroku.
+74
+
+75
+00:05:42,670 --> 00:05:49,540
+So this becomes very, very simple and easy for us to identify those target domains or subdomain which are
+75
+
+76
+00:05:49,540 --> 00:05:53,200
+Hosted on Heroku but never claimed on Heroku all right.
+76
+
+77
+00:05:53,410 --> 00:05:57,070
+So you can see there are a couple of IP addresses that we have identified.
+77
+
+78
+00:05:57,080 --> 00:06:03,880
+So by opening each one by way, you can see over here, these are the targets that I have identified
+78
+
+79
+00:06:03,880 --> 00:06:04,720
+from Censys.
+79
+
+80
+00:06:04,930 --> 00:06:12,490
+And you can see a message which says, no, such a app over here, as you can see, and this is being
+80
+
+81
+00:06:12,490 --> 00:06:13,660
+served by Heroku.
+81
+
+82
+00:06:13,780 --> 00:06:20,380
+Now, this domains are these subdomains becomes automatically vulnerable to subdomain takeover's.
+82
+
+83
+00:06:20,920 --> 00:06:23,960
+Oh, you can report it to the target organisation.
+83
+
+84
+00:06:24,250 --> 00:06:30,490
+So this was one of the easiest way of using can I takeover XYZ to identify the fingerprint
+84
+
+85
+00:06:30,490 --> 00:06:37,870
+And also, you can use Censys to just identify if any targets are vulnerable to subdomains takeovers.
+85
+
+86
+00:06:38,260 --> 00:06:44,520
+And in a similar way, you can use different methods for like subdomain enumeration and from those of
+86
+
+87
+00:06:44,530 --> 00:06:51,190
+domain enumeration assets or targets that you have identified, you can test subdomains takeover based
+87
+
+88
+00:06:51,190 --> 00:06:51,960
+vulnerabilities.
+88
+
+89
+00:06:52,240 --> 00:06:53,490
+So I hope you guys understood.
+89
+
+90
+00:06:53,500 --> 00:06:54,010
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,400 --> 00:00:03,860
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,490 --> 00:00:11,330
+So in this video, I'm going to show you a new resource that we have created and we have given it the
+2
+
+3
+00:00:11,330 --> 00:00:11,790
+names.
+3
+
+4
+00:00:11,810 --> 00:00:16,280
+Can I take over all XYZ now before this video
+4
+
+5
+00:00:16,310 --> 00:00:23,300
+You must have seen about can I take over XYZ which was the Edoverflow repository, which contained
+5
+
+6
+00:00:23,300 --> 00:00:27,270
+all the fingerprints for subdomain takeover based vulnerabilities.
+6
+
+7
+00:00:27,920 --> 00:00:35,750
+Now, we identified that particular repository was not updated since two years and there were several
+7
+
+8
+00:00:35,750 --> 00:00:40,920
+inconsistencies into those fingerprints, into that repository.
+8
+
+9
+00:00:41,270 --> 00:00:42,830
+So we tried to fix it.
+9
+
+10
+00:00:42,830 --> 00:00:50,540
+And we have added more awesome fingerprints into this repository to make your subdomain takeover based
+10
+
+11
+00:00:50,720 --> 00:00:54,170
+hunting more comprehensive and more awesome.
+11
+
+12
+00:00:55,130 --> 00:00:57,340
+So what is going to take over all X, Y, Z?
+12
+
+13
+00:00:57,680 --> 00:01:05,210
+So it is a list of fingerprints which are actually updated for your subdomain because and we have classified
+13
+
+14
+00:01:05,210 --> 00:01:10,810
+this into 2 fingerprints basically, which are old fingerprint and a new fingerprint.
+14
+
+15
+00:01:11,240 --> 00:01:15,620
+So it contains 75 fingerprints, as I already said.
+15
+
+16
+00:01:15,890 --> 00:01:23,090
+And the point you should know is, first of all, there are 75 list of cloud based services that we
+16
+
+17
+00:01:23,090 --> 00:01:25,220
+have added, which is up to date.
+17
+
+18
+00:01:25,790 --> 00:01:32,360
+Based on that, we are going to do identification of dangling CName records and we are going to use those
+18
+
+19
+00:01:32,360 --> 00:01:38,340
+lists of fingerprints and identify the status of takeover of any of the domain or subdomain.
+19
+
+20
+00:01:39,230 --> 00:01:40,730
+So it is the practical time.
+20
+
+21
+00:01:40,730 --> 00:01:44,000
+And let's see, how can we utilize this new repository?
+21
+
+22
+00:01:44,160 --> 00:01:50,630
+If I and you can find this, can I take over all X, Y, Z on my GitHub report on Shifa one, two,
+22
+
+23
+00:01:50,630 --> 00:01:52,730
+three by the name of all subdomains takeover
+23
+
+24
+00:01:52,730 --> 00:01:59,210
+all right now, when we come over here, if you scroll down, then you can see all entries over
+24
+
+25
+00:01:59,210 --> 00:01:59,510
+here.
+25
+
+26
+00:01:59,510 --> 00:02:02,240
+And these are all the entries that we have created.
+26
+
+27
+00:02:02,240 --> 00:02:09,130
+And they are around more than 75 new entries with the updated cloud service providers.
+27
+
+28
+00:02:09,140 --> 00:02:15,980
+And if you go back to here and you can see these are some of the old entries which are updated and can
+28
+
+29
+00:02:15,980 --> 00:02:17,060
+I takeover XYZ?
+29
+
+30
+00:02:17,060 --> 00:02:26,480
+And as we have already discussed about it, now, just to show you the proof of concept about the inconsistency
+30
+
+31
+00:02:26,480 --> 00:02:33,260
+that were present in can I takeover XYZ you can come over here and search for Heroku and you can
+31
+
+32
+00:02:33,260 --> 00:02:38,180
+see into Heroku for the old can I take over X, Y, Z.
+32
+
+33
+00:02:38,450 --> 00:02:43,230
+I have added an old fingerprint, if you can see over here and the new fingerprint over here.
+33
+
+34
+00:02:43,670 --> 00:02:44,020
+All right.
+34
+
+35
+00:02:44,030 --> 00:02:44,600
+So let's see.
+35
+
+36
+00:02:44,600 --> 00:02:49,640
+The old fingerprint for Heroku and the old fingerprint was no such app.
+36
+
+37
+00:02:49,940 --> 00:02:53,480
+And we have added a new fingerprint which says there's nothing here at.
+37
+
+38
+00:02:53,930 --> 00:02:55,880
+And let me show you over here.
+38
+
+39
+00:02:55,880 --> 00:03:02,360
+And you can see this is a Heroku subdomain or Heroku domain that we have identified from Censys which
+39
+
+40
+00:03:02,360 --> 00:03:05,740
+have already shown you and here you can see there's nothing here.
+40
+
+41
+00:03:05,760 --> 00:03:09,700
+That is the message that we are getting into the response.
+41
+
+42
+00:03:10,220 --> 00:03:17,840
+So through this way, we are also getting those targets which should not be missed and are vulnerable
+42
+
+43
+00:03:17,840 --> 00:03:19,760
+to Heroku based subdomain.
+43
+
+44
+00:03:19,770 --> 00:03:22,580
+takeover let me show you one more example.
+44
+
+45
+00:03:23,870 --> 00:03:33,800
+To make it more clear and more understandable so you can see Shopify and the old case for Shopify was.
+45
+
+46
+00:03:35,180 --> 00:03:39,950
+If I if I search shopify you can see Edgecase, which means sometimes it is vulnerable
+46
+
+47
+00:03:40,260 --> 00:03:46,160
+Sometimes it is not vulnerable and sometimes only the security researchers are able to take over the
+47
+
+48
+00:03:46,160 --> 00:03:47,450
+Shopify subdomains.
+48
+
+49
+00:03:47,840 --> 00:03:49,660
+And you can see the fingerprint is sorry.
+49
+
+50
+00:03:50,000 --> 00:03:52,290
+This shop is currently unavailable.
+50
+
+51
+00:03:52,760 --> 00:03:59,330
+We have modified the fingerprint and the new fingerprint, which has been added, is only one step left.
+51
+
+52
+00:03:59,360 --> 00:04:05,440
+And let me show you the target, which are vulnerable to Shopify subdomains record.
+52
+
+53
+00:04:05,450 --> 00:04:09,440
+And we have written over here as a vulnerable instance of Atkiss.
+53
+
+54
+00:04:09,620 --> 00:04:14,720
+So let me show you over here a life target which is vulnerable to Shopify takeover.
+54
+
+55
+00:04:17,710 --> 00:04:25,060
+Let's wait for this to complete, and you can see we have got some quick target, so let me go on any
+55
+
+56
+00:04:25,060 --> 00:04:33,400
+of the target on board 80 just to load the application and let's see if we are able to identify one
+56
+
+57
+00:04:33,400 --> 00:04:35,140
+of the Shopify supplement.
+57
+
+58
+00:04:36,070 --> 00:04:40,390
+And you can see what here it's dude dispensary dot com.
+58
+
+59
+00:04:40,420 --> 00:04:40,840
+All right.
+59
+
+60
+00:04:40,840 --> 00:04:44,650
+So we have a target which is vulnerable to Shopify takeover.
+60
+
+61
+00:04:44,650 --> 00:04:49,330
+And the new fingerprint that we have added is only one step left.
+61
+
+62
+00:04:49,510 --> 00:04:56,920
+Similarly, we have more targets that you can identify from sensors which will be vulnerable to Shopify
+62
+
+63
+00:04:56,920 --> 00:05:04,600
+subdomain because so like this, we identified what were the previous issues into the repository and
+63
+
+64
+00:05:04,600 --> 00:05:12,580
+we have tried to fix it with multiple new fingerprints as well as we have added new target as well,
+64
+
+65
+00:05:12,580 --> 00:05:18,020
+which are evolved recently and are not added to the old repository.
+65
+
+66
+00:05:19,060 --> 00:05:25,600
+So I hope you find this very, very useful for talking about subdomain take over responsibilities.
+66
+
+67
+00:05:26,020 --> 00:05:33,040
+And yes, we are going to constantly update this with more and more fingerprints of new and new cloud
+67
+
+68
+00:05:33,040 --> 00:05:35,180
+service platforms that we identify.
+68
+
+69
+00:05:35,410 --> 00:05:42,040
+And in case we see if any of the target subdomains or the target cloud service providers are not vulnerable,
+69
+
+70
+00:05:42,040 --> 00:05:43,950
+we will update the status over here.
+70
+
+71
+00:05:44,410 --> 00:05:50,440
+Also, we will be updating the new fingerprints in case we identify any new fingerprint while doing
+71
+
+72
+00:05:50,440 --> 00:05:51,170
+our research.
+72
+
+73
+00:05:51,610 --> 00:05:58,300
+So I hope this turns out to be very, very helpful for every one of you in identifying of subdomain
+73
+
+74
+00:05:58,340 --> 00:05:59,890
+takeover based on liabilities.
+74
+
+75
+00:06:00,610 --> 00:06:01,480
+One last thing.
+75
+
+76
+00:06:01,960 --> 00:06:03,730
+You can also contribute over here.
+76
+
+77
+00:06:03,730 --> 00:06:10,000
+If you identify that any of the new fingerprint while doing your research or you are doing subdomains
+77
+
+78
+00:06:10,000 --> 00:06:16,420
+because you can just submit a new entry over here, or if you find a new cloud service provider that
+78
+
+79
+00:06:16,420 --> 00:06:21,310
+involves and is vulnerable to subdomain takeovers based on your research, you can add it over here.
+79
+
+80
+00:06:21,550 --> 00:06:24,900
+You can just add the title and leave the comment and submit other issue.
+80
+
+81
+00:06:25,180 --> 00:06:27,520
+We will verify that at our end.
+81
+
+82
+00:06:27,910 --> 00:06:34,020
+And if it is valid, we will add it to the new list of can I take over all X, Y, Z?
+82
+
+83
+00:06:34,660 --> 00:06:36,280
+So I hope you guys understood.
+83
+
+84
+00:06:36,490 --> 00:06:37,060
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,530 --> 00:00:04,290
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:05,100 --> 00:00:14,070
+In this video, we are going to see a subdomain takeover for a very, very famous online cloud platform,
+2
+
+3
+00:00:14,400 --> 00:00:21,660
+which is a A.W.S. for those of you who does not know what it stands for.
+3
+
+4
+00:00:21,690 --> 00:00:31,410
+It is Amazon Web Services, one of the biggest platforms that has taken over multiple cloud platforms.
+4
+
+5
+00:00:31,410 --> 00:00:35,640
+Then Azure and Google hosted cloud platforms as well.
+5
+
+6
+00:00:36,450 --> 00:00:46,410
+Now, as people have increased and shifted to these cloud platforms to a majority of percentage, the
+6
+
+7
+00:00:46,410 --> 00:00:52,770
+chances are that they may arise some of the security configurations.
+7
+
+8
+00:00:53,850 --> 00:01:03,090
+So a higher number of people migrating to these particular cloud platforms, the higher number of chances
+8
+
+9
+00:01:03,120 --> 00:01:12,480
+of some of the security issues that attacker can compromise, or for bug bounty hunters like us, we
+9
+
+10
+00:01:12,480 --> 00:01:20,760
+can at least take benefit of that in identifying the vulnerability and helping the company to fix it
+10
+
+11
+00:01:20,760 --> 00:01:22,630
+and getting a reward in return.
+11
+
+12
+00:01:24,170 --> 00:01:33,260
+All right, so here we are going to identify those particular subdomains, which are pointing to AWS
+12
+
+13
+00:01:33,410 --> 00:01:41,210
+platform, and we are going to identify that once we have identified, we're going to take over those
+13
+
+14
+00:01:41,210 --> 00:01:48,170
+particular subdomains by creating A.W.S. account and then taking up that particular bucket.
+14
+
+15
+00:01:48,890 --> 00:01:49,490
+All right.
+15
+
+16
+00:01:49,880 --> 00:01:50,930
+Enough of talking.
+16
+
+17
+00:01:51,080 --> 00:01:58,490
+Let's quickly see how can we do this attack and take over A.W.S. based subdomains.
+17
+
+18
+00:01:59,270 --> 00:02:03,500
+So it is the practical name and let's see how to do this.
+18
+
+19
+00:02:05,570 --> 00:02:12,810
+So, for example, over here, I have taken over one of the subdomain of kippt dot com.
+19
+
+20
+00:02:13,400 --> 00:02:20,290
+This particular program is an acquisition of Krunch Base.
+20
+
+21
+00:02:20,810 --> 00:02:22,400
+I'm sorry, it's Coinbase.
+21
+
+22
+00:02:23,270 --> 00:02:28,100
+So this particular program is an acquisition of Coinbase.
+22
+
+23
+00:02:28,640 --> 00:02:35,630
+I have identified all the subdomains for this particular target program and there is a subdomain which
+23
+
+24
+00:02:35,630 --> 00:02:40,430
+is uploads, dot kippt dot com, which I have seen.
+24
+
+25
+00:02:40,430 --> 00:02:44,150
+Is something wrong with this particular subdomain
+25
+
+26
+00:02:45,380 --> 00:02:50,120
+As you can see, you would hear the fingerprint is no such Bucket.
+26
+
+27
+00:02:50,690 --> 00:02:56,240
+This is the fingerprint for AWS types of subdomain takeover's.
+27
+
+28
+00:02:56,780 --> 00:03:04,340
+Do you remember in the previous videos for Shopify we have seen the subdomain take our fingerprint and
+28
+
+29
+00:03:04,400 --> 00:03:07,790
+fingerprint was only one step left.
+29
+
+30
+00:03:08,270 --> 00:03:15,710
+But for AWS based fingerprints or AWS based subdomain takeover's, you need to see the fingerprint,
+30
+
+31
+00:03:15,710 --> 00:03:17,480
+which is no such bucket.
+31
+
+32
+00:03:17,870 --> 00:03:20,870
+The specified bucket does not exist.
+32
+
+33
+00:03:21,770 --> 00:03:22,280
+All right.
+33
+
+34
+00:03:22,520 --> 00:03:30,170
+So we have completed the first step that is identifying a venerable subdomain after this subdomain enumeration.
+34
+
+35
+00:03:30,170 --> 00:03:39,140
+But now, as we have identified this subdomain to be vulnerable, we are going to do a successful takeover.
+35
+
+36
+00:03:39,620 --> 00:03:45,830
+As you can see, I have shown over the here that keppt is acquired by Coinbase.
+36
+
+37
+00:03:45,830 --> 00:03:53,600
+For this, I am using the platform, which is crunchbase to identify the acquisitions for target organizations.
+37
+
+38
+00:03:54,410 --> 00:03:54,860
+All right.
+38
+
+39
+00:03:55,340 --> 00:04:03,740
+Now, the first step that we have to do is we have to go on to AWS and create a free account.
+39
+
+40
+00:04:04,160 --> 00:04:12,350
+So whenever you create account on AWS you have the complimentary free access for one year until
+40
+
+41
+00:04:12,350 --> 00:04:15,080
+that you are not going to get charged for anything.
+41
+
+42
+00:04:15,830 --> 00:04:22,010
+But when you are making an account on AWS is just for their security reasons, they ask your card.
+42
+
+43
+00:04:22,010 --> 00:04:28,490
+So you need to add your credit card with them and after verification, your account will be activated.
+43
+
+44
+00:04:28,490 --> 00:04:30,230
+It may take a few hours.
+44
+
+45
+00:04:30,410 --> 00:04:38,570
+It took me six to seven hours for verification of my account and after that I was able to use my account
+45
+
+46
+00:04:38,570 --> 00:04:39,500
+with no issues.
+46
+
+47
+00:04:40,070 --> 00:04:45,590
+All right, so once you have created your AWS account, you will get one year of free membership to
+47
+
+48
+00:04:45,590 --> 00:04:46,820
+use this particular account.
+48
+
+49
+00:04:47,570 --> 00:04:54,110
+After you have verified you need to login into your account and over there you will be able to see your
+49
+
+50
+00:04:54,110 --> 00:04:56,420
+option, which is S3 bucket.
+50
+
+51
+00:04:56,480 --> 00:04:58,580
+So you just need to click on S3 Bucket.
+51
+
+52
+00:04:58,880 --> 00:05:04,670
+And as you can see over here, you will come to the bucket section over there.
+52
+
+53
+00:05:05,330 --> 00:05:09,560
+You need to click on this particular blue button, which is create bucket.
+53
+
+54
+00:05:09,560 --> 00:05:16,190
+As you can see over here, once you click on Create Bucket, it will give you a pop up like this where
+54
+
+55
+00:05:16,190 --> 00:05:19,430
+it is going to ask you to fill some of the details.
+55
+
+56
+00:05:19,610 --> 00:05:26,300
+And you need to complete this mandatory four steps, which is name and region configure options, permissions
+56
+
+57
+00:05:26,480 --> 00:05:32,630
+and finally review your settings that what you have done to make it much more simple.
+57
+
+58
+00:05:32,780 --> 00:05:39,290
+Let's quickly see what you need to do and which are some of the configurations which can be left blank.
+58
+
+59
+00:05:40,160 --> 00:05:40,640
+All right.
+59
+
+60
+00:05:40,760 --> 00:05:44,900
+So here you need to put the bucket name, which is the subdomain.
+60
+
+61
+00:05:44,900 --> 00:05:46,730
+You want to perform the takeover.
+61
+
+62
+00:05:46,730 --> 00:05:47,900
+It's pretty simple.
+62
+
+63
+00:05:48,680 --> 00:05:52,880
+Now, the most important thing is to choose the region.
+63
+
+64
+00:05:54,210 --> 00:06:03,250
+Now, you should know that on a AWS, the bucket which are made are independent of a region.
+64
+
+65
+00:06:03,290 --> 00:06:05,010
+OK, why am I telling this?
+65
+
+66
+00:06:05,010 --> 00:06:12,600
+Because this is going to get handy and you should know this because whenever you make any bucket so
+66
+
+67
+00:06:12,600 --> 00:06:18,570
+let's say I'm going to take this particular bucket, which is upload dot keppt dot com and I have to
+67
+
+68
+00:06:18,570 --> 00:06:20,430
+choose the right region.
+68
+
+69
+00:06:20,670 --> 00:06:28,530
+If I do not choose the right region, then I will get the error that the bucket is hosted, but it is
+69
+
+70
+00:06:28,530 --> 00:06:30,810
+hosted at the incorrect end point.
+70
+
+71
+00:06:31,110 --> 00:06:38,430
+Hence we cannot run the website or basically whatever you put onto this subdomain will not be visible
+71
+
+72
+00:06:38,430 --> 00:06:39,030
+to public.
+72
+
+73
+00:06:39,690 --> 00:06:46,260
+So for that, you need to choose a right region, which is a very, very important and mandatory step.
+73
+
+74
+00:06:46,770 --> 00:06:51,330
+Now, you may ask, how are we going to know the region for this particular subdomain?
+74
+
+75
+00:06:52,020 --> 00:06:52,900
+It's pretty simple.
+75
+
+76
+00:06:53,640 --> 00:06:57,020
+So for that, you just need to go to your terminal.
+76
+
+77
+00:06:58,890 --> 00:07:03,000
+And over here you have to type the command, which is Dig.
+77
+
+78
+00:07:04,770 --> 00:07:11,460
+And you need to check the name of your subdomain, as you can see, the C name of this particular subdomain
+78
+
+79
+00:07:11,460 --> 00:07:15,780
+is S3 dot Amazon AWS dot com.
+79
+
+80
+00:07:16,260 --> 00:07:24,910
+This basically means the particular subdomain is pointing to AWS account or AWS platform.
+80
+
+81
+00:07:25,920 --> 00:07:26,390
+All right.
+81
+
+82
+00:07:26,400 --> 00:07:30,470
+So we know it is pointing to Amazon AWSand S3 bucket.
+82
+
+83
+00:07:30,750 --> 00:07:34,570
+Now, what are the next steps that we should do in the next steps?
+83
+
+84
+00:07:35,700 --> 00:07:41,160
+We are going to identify the region for that particular subdomain.
+84
+
+85
+00:07:41,700 --> 00:07:48,180
+So now what I'm going to do is I'm going to type the command  nslook up and I'm going to type.
+85
+
+86
+00:07:49,190 --> 00:07:56,210
+Uploads.kippt.com, and here you can verify the Cname is again, s3.amazonaws.com.
+86
+
+87
+00:07:56,840 --> 00:08:02,900
+All right, so we know it is hosted in S3 Amazon AWS but still we have not got the correct
+87
+
+88
+00:08:02,900 --> 00:08:03,300
+region.
+88
+
+89
+00:08:04,200 --> 00:08:07,780
+Now, what should we do to get the region?
+89
+
+90
+00:08:07,970 --> 00:08:14,770
+So we are going to again hit Dig for any other subdomain of that target organization.
+90
+
+91
+00:08:15,080 --> 00:08:18,020
+So I'm going to hit Dig Cname for an addons.kippt.com.
+91
+
+92
+00:08:18,020 --> 00:08:22,010
+and let's see if we get the region, perfect.
+92
+
+93
+00:08:22,280 --> 00:08:29,570
+As you can see, we have got the region for this particular subdomain and you can see it is keppt addons
+93
+
+94
+00:08:29,570 --> 00:08:38,150
+dot s3 website hyphen us, hyphen east hyphen one dot Amazon AWS as dot com.
+94
+
+95
+00:08:38,420 --> 00:08:42,320
+So one thing to notice over here, the region is US east-1.
+95
+
+96
+00:08:42,350 --> 00:08:51,920
+Well let's go over here and identify us east one now and then you will choose us east one you should
+96
+
+97
+00:08:51,920 --> 00:08:57,000
+know what is the region name because region name will not be shown over there.
+97
+
+98
+00:08:57,800 --> 00:09:01,450
+So the code is this the region name is this.
+98
+
+99
+00:09:01,460 --> 00:09:03,870
+So you have to choose North Virginia.
+99
+
+100
+00:09:04,250 --> 00:09:05,660
+Now, how will you know this?
+100
+
+101
+00:09:05,930 --> 00:09:10,160
+This is from the AWB Official Documentation Guide.
+101
+
+102
+00:09:10,430 --> 00:09:13,740
+You will come to know that what is the code for which region?
+102
+
+103
+00:09:14,000 --> 00:09:20,570
+So from this guide, we have identified that southeast US E1 is North Virginia.
+103
+
+104
+00:09:21,530 --> 00:09:26,570
+Now you can copy settings from what the market if you have already hosted in your pocket, if you have
+104
+
+105
+00:09:26,570 --> 00:09:32,510
+not hosted any bucket, just leave this option blank and hit next and you will be able to create your
+105
+
+106
+00:09:32,510 --> 00:09:32,900
+bucket.
+106
+
+107
+00:09:33,930 --> 00:09:43,020
+Now, as you can see over here, you need to disable or block all public access may result in pocket
+107
+
+108
+00:09:43,020 --> 00:09:45,700
+and objects within within becoming public.
+108
+
+109
+00:09:45,990 --> 00:09:54,720
+So basically, you want to disable this block all public access and we want to make our buckets publicly
+109
+
+110
+00:09:54,720 --> 00:09:55,410
+accessible.
+110
+
+111
+00:09:56,580 --> 00:09:57,030
+All right.
+111
+
+112
+00:09:57,300 --> 00:09:59,680
+So just hit next and create a bucket.
+112
+
+113
+00:09:59,790 --> 00:10:02,240
+And we are done with creating a bucket.
+113
+
+114
+00:10:02,610 --> 00:10:09,210
+If you do not get any error and you're able to successfully make a bucket, which means your work is
+114
+
+115
+00:10:09,210 --> 00:10:09,570
+done.
+115
+
+116
+00:10:10,990 --> 00:10:16,420
+Now, over here, you can see when you will click on your bucket name, it is uploads that Kim Dotcom,
+116
+
+117
+00:10:16,420 --> 00:10:22,470
+you just need to come on properties and you need to click on stetting website hosting.
+117
+
+118
+00:10:23,050 --> 00:10:29,590
+So once you have clicked on Statik, a website hosting there, you need to give a redirect, which we
+118
+
+119
+00:10:29,590 --> 00:10:31,340
+are going to see in the next steps.
+119
+
+120
+00:10:31,750 --> 00:10:34,590
+First, let's upload a file over here.
+120
+
+121
+00:10:35,080 --> 00:10:40,480
+So let's say I'm going to upload RBOC file, which says Subdomain takeover by.
+121
+
+122
+00:10:41,500 --> 00:10:49,420
+So I'm going to upload this file and you just need to click next and give permission, which is grand
+122
+
+123
+00:10:49,420 --> 00:10:55,960
+public read access to the objects once they have done this trip next and hit upload.
+123
+
+124
+00:10:57,270 --> 00:11:04,560
+It will take a few seconds and you can notice all your success and the file has been successfully uploaded.
+124
+
+125
+00:11:05,220 --> 00:11:08,720
+Now you need to click that file and you have to click make public.
+125
+
+126
+00:11:09,000 --> 00:11:12,750
+So once you again do that public, it will become publicly accessible.
+126
+
+127
+00:11:13,860 --> 00:11:16,860
+Now, what you can do is you can rename this file as well.
+127
+
+128
+00:11:16,860 --> 00:11:23,730
+So I'm going to rename this file as Index Ratman, which is basically a good thing to do.
+128
+
+129
+00:11:24,000 --> 00:11:26,520
+Do not try to make custom names.
+129
+
+130
+00:11:26,640 --> 00:11:29,070
+Just give the name as in next.
+130
+
+131
+00:11:29,710 --> 00:11:32,370
+So I'm going to give that name and save this file.
+131
+
+132
+00:11:33,000 --> 00:11:41,580
+Once I have saved this file, I'm going to again second make public and get on make public so the file
+132
+
+133
+00:11:41,580 --> 00:11:43,320
+becomes publicly accessible.
+133
+
+134
+00:11:43,950 --> 00:11:46,440
+Now let's go to Statik website hosting.
+134
+
+135
+00:11:46,770 --> 00:11:53,840
+And over here, we want to host our website through the bucket that we have created.
+135
+
+136
+00:11:54,210 --> 00:12:00,870
+So you need to choose the option number two, which is a redirect request, and you need to type the
+136
+
+137
+00:12:00,880 --> 00:12:02,970
+target bucket or domain name.
+137
+
+138
+00:12:03,360 --> 00:12:10,800
+So the domain name that we want as uploads, not kept dot com, just put the domain name and the protocol,
+138
+
+139
+00:12:11,280 --> 00:12:12,100
+whatever you want.
+139
+
+140
+00:12:12,120 --> 00:12:18,600
+So we are going to use HDB obviously, because there is no SSL certificate installed over there and
+140
+
+141
+00:12:18,600 --> 00:12:22,200
+I'm going to click on SAVE once we have done this.
+141
+
+142
+00:12:22,290 --> 00:12:27,350
+Let's go back to overview and you can see there are no changes over here.
+142
+
+143
+00:12:27,570 --> 00:12:30,510
+So this was the most important change that you need to do.
+143
+
+144
+00:12:31,140 --> 00:12:32,900
+That is a static website hosting.
+144
+
+145
+00:12:33,480 --> 00:12:36,940
+Once I click over here, then you will see the object you are.
+145
+
+146
+00:12:36,940 --> 00:12:38,790
+Well, let me click on the object.
+146
+
+147
+00:12:38,790 --> 00:12:47,000
+You all object your shows S3 Amazon, Arabella's dot com slash the bucket name, which is upload that
+147
+
+148
+00:12:47,010 --> 00:12:47,760
+Kim Dotcom.
+148
+
+149
+00:12:48,060 --> 00:12:54,780
+And there is a file into this bucket, which is Index Dot XHTML which says this is a subdomain take
+149
+
+150
+00:12:54,780 --> 00:12:55,710
+over post.
+150
+
+151
+00:12:56,940 --> 00:12:57,450
+All right.
+151
+
+152
+00:12:57,450 --> 00:13:03,180
+But we don't want our you order something like this because this is an object.
+152
+
+153
+00:13:03,180 --> 00:13:04,170
+You are a bucket.
+153
+
+154
+00:13:04,170 --> 00:13:04,440
+You are.
+154
+
+155
+00:13:04,920 --> 00:13:10,410
+But we need to show the policy of taking over, upload, start, give dot com.
+155
+
+156
+00:13:10,920 --> 00:13:17,880
+So what you need to do is you need to come back to this page and you just need to give the reference
+156
+
+157
+00:13:17,880 --> 00:13:19,710
+of the file that you have uploaded.
+157
+
+158
+00:13:20,130 --> 00:13:22,980
+So file that we uploaded was indexed at XHTML.
+158
+
+159
+00:13:23,220 --> 00:13:30,540
+So let's give the name of that file and try to fetch it and let's see if we have the full control over
+159
+
+160
+00:13:30,540 --> 00:13:36,090
+the subdomain or not or we were able to successfully take over the subdomain or not.
+160
+
+161
+00:13:37,560 --> 00:13:43,000
+So let me give the name and hit enter and you can see this is a subdomain take-over PEOC.
+161
+
+162
+00:13:43,080 --> 00:13:49,170
+Let me just reload it again and you can confirm that we are able to successfully take over this particular
+162
+
+163
+00:13:49,170 --> 00:13:49,570
+domain.
+163
+
+164
+00:13:50,520 --> 00:13:50,910
+Yes.
+164
+
+165
+00:13:50,940 --> 00:13:51,740
+So this was it.
+165
+
+166
+00:13:52,050 --> 00:13:56,490
+It looks a little bit tricky, but the steps are very, very simple.
+166
+
+167
+00:13:56,490 --> 00:14:01,270
+And once you do it, it will become very, very simple for you to do it next time.
+167
+
+168
+00:14:02,190 --> 00:14:08,850
+Now, I hope you guys understood how you can do subdomain takeover's for NWS involvement.
+168
+
+169
+00:14:09,240 --> 00:14:15,600
+And through this process, you can take over multiple subdomains and you can create multiple buckets.
+169
+
+170
+00:14:15,990 --> 00:14:21,440
+Remember, there is no restriction on making bucket into a free one year plan.
+170
+
+171
+00:14:21,450 --> 00:14:29,880
+You can make as many as buckets you want, which means you can make as many as proof of concept that
+171
+
+172
+00:14:29,880 --> 00:14:31,860
+you want for multiple targets.
+172
+
+173
+00:14:32,910 --> 00:14:35,130
+I hope you guys understood how to do this.
+173
+
+174
+00:14:35,160 --> 00:14:35,760
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:02,250 --> 00:00:04,830
+Hello, everyone, welcome to this video.
+1
+
+2
+00:00:05,460 --> 00:00:13,740
+In this video, we are going to see one more AWS subdomain take-over just to make sure that we have
+2
+
+3
+00:00:13,740 --> 00:00:15,440
+understood how to do this.
+3
+
+4
+00:00:15,780 --> 00:00:22,800
+We are going to see one more target and we are going to repeat the steps very quickly of how to do this.
+4
+
+5
+00:00:23,400 --> 00:00:25,580
+So the process remains exactly the same.
+5
+
+6
+00:00:25,770 --> 00:00:33,810
+But for those who want to see once again how to do the steps, they can see this other can skip because
+6
+
+7
+00:00:34,080 --> 00:00:35,790
+the process is somewhat the same.
+7
+
+8
+00:00:37,020 --> 00:00:37,520
+All right.
+8
+
+9
+00:00:37,680 --> 00:00:46,660
+So now once you have logged in over here, this is how the AWS management console looks like over here.
+9
+
+10
+00:00:46,680 --> 00:00:48,350
+You have to search for S3.
+10
+
+11
+00:00:48,870 --> 00:00:50,880
+I have already visited S3.
+11
+
+12
+00:00:50,880 --> 00:00:55,680
+So it is going to show me recently visited services for you.
+12
+
+13
+00:00:56,310 --> 00:01:02,580
+If you are logged in for the first time, you just need to search S3 over here and you will be get you
+13
+
+14
+00:01:02,580 --> 00:01:06,900
+will be able to get it, as can see, storage S3 as shown over here.
+14
+
+15
+00:01:08,010 --> 00:01:10,800
+So you can alternatively click over here as well.
+15
+
+16
+00:01:11,430 --> 00:01:11,870
+All right.
+16
+
+17
+00:01:12,210 --> 00:01:20,220
+So I have identified a subdomain which you can see over here, which is Add-Ons dot keppt dot com, and
+17
+
+18
+00:01:20,220 --> 00:01:25,740
+you can see the error message, which we call our fingerprint, which is no such bucket.
+18
+
+19
+00:01:26,070 --> 00:01:28,410
+The specified bucket does not exist.
+19
+
+20
+00:01:29,100 --> 00:01:36,420
+Now, you can notice over here the message is exactly the same, but it is looking different because
+20
+
+21
+00:01:36,420 --> 00:01:44,680
+in the previous video, the message was in XML version format and here it is not ,this is only the difference.
+21
+
+22
+00:01:44,820 --> 00:01:49,100
+That is why I said you need to focus on to the fingerprint.
+22
+
+23
+00:01:49,350 --> 00:01:52,410
+So the fingerprint is exactly the same, which is no such bucket.
+23
+
+24
+00:01:52,440 --> 00:01:54,960
+The specified bucket does not exist.
+24
+
+25
+00:01:55,410 --> 00:02:02,220
+And through this we can confirm that this particular subdomain is of one subdomain and it is pointing
+25
+
+26
+00:02:02,220 --> 00:02:03,200
+to A.W.S..
+26
+
+27
+00:02:03,720 --> 00:02:04,130
+All right.
+27
+
+28
+00:02:04,380 --> 00:02:06,780
+So I'm going to create a bucket.
+28
+
+29
+00:02:07,080 --> 00:02:14,940
+Remember, whenever you're going to create bucket A.W.S is bucket creation process does not like special
+29
+
+30
+00:02:14,940 --> 00:02:19,430
+characters like HTTP colon slash slash
+30
+
+31
+00:02:19,440 --> 00:02:23,670
+So you have to remove that and you have to give your bucket name now.
+31
+
+32
+00:02:24,710 --> 00:02:27,260
+Choosing the region is very, very important.
+32
+
+33
+00:02:27,590 --> 00:02:33,290
+So, again, how to choose a region, you just need to open up your terminal.
+33
+
+34
+00:02:33,470 --> 00:02:39,760
+You need to type the command dig Cname because we want to see the name of that particular subdomain.
+34
+
+35
+00:02:40,100 --> 00:02:49,910
+And you can see from here we have identified the Cname of this subdomain is S3 website hyphen us hyphen
+35
+
+36
+00:02:49,910 --> 00:02:54,410
+East hyphen one dot Amazon A.W.S dot com.
+36
+
+37
+00:02:54,800 --> 00:02:58,240
+So the region is basically US east one.
+37
+
+38
+00:02:58,910 --> 00:02:59,420
+All right.
+38
+
+39
+00:02:59,450 --> 00:03:04,700
+So once we have identified the correct region, we have to choose the bucket.
+39
+
+40
+00:03:05,090 --> 00:03:07,820
+So let me go to US east.
+40
+
+41
+00:03:07,820 --> 00:03:13,470
+As you can see, there is U.S. east North Virginia and U.S. East Ohio.
+41
+
+42
+00:03:13,880 --> 00:03:20,960
+So from both of them, we can choose one of the region, but we do not know which is the right region.
+42
+
+43
+00:03:22,700 --> 00:03:23,150
+So.
+43
+
+44
+00:03:25,380 --> 00:03:35,280
+We will take help of a A.W.S. documentation, so let's go to A.W. documentation, so I'm going to go to
+44
+
+45
+00:03:35,280 --> 00:03:43,050
+A.W.S Documentation and from here I am going to see that which region points to which code.
+45
+
+46
+00:03:43,530 --> 00:03:47,510
+As we have seen, the code for us was U.S east 1.
+46
+
+47
+00:03:49,880 --> 00:03:59,390
+Now, over here, let's search for US east one, and you can see that US East one code is for north
+47
+
+48
+00:03:59,390 --> 00:04:00,140
+of Virginia.
+48
+
+49
+00:04:00,530 --> 00:04:01,010
+All right.
+49
+
+50
+00:04:01,310 --> 00:04:05,670
+So we have identified the correct region name according to the code.
+50
+
+51
+00:04:06,050 --> 00:04:09,560
+So let me choose that and hit next.
+51
+
+52
+00:04:09,740 --> 00:04:17,200
+Once I will hit next, I will go to the next option I have done versioning ON, it is optional.
+52
+
+53
+00:04:17,210 --> 00:04:20,670
+If you do not want to turn it ON, then you can leave it blank.
+53
+
+54
+00:04:20,690 --> 00:04:28,070
+That is only for taking all the versioning logs of whatever activities that is happening into your bucket.
+54
+
+55
+00:04:28,730 --> 00:04:35,960
+Now you have to uncheck this block all public access, which makes our bucket publicily accessible and
+55
+
+56
+00:04:35,960 --> 00:04:38,600
+available for everyone to view.
+56
+
+57
+00:04:39,200 --> 00:04:43,640
+Now, once you have done that, you need to go to add ons dot keppt dot com.
+57
+
+58
+00:04:43,670 --> 00:04:44,920
+That is your bucket name.
+58
+
+59
+00:04:45,380 --> 00:04:47,470
+Then you have to upload a file.
+59
+
+60
+00:04:47,480 --> 00:04:50,660
+So I'm going to upload a file quickly over here and hit.
+60
+
+61
+00:04:51,860 --> 00:04:57,380
+Upload, so once you do this, the file will get uploaded, as you can see, it is in progress right
+61
+
+62
+00:04:57,380 --> 00:04:57,660
+now.
+62
+
+63
+00:04:57,950 --> 00:05:01,940
+Once that is done, you will be able to see your message, which is success.
+63
+
+64
+00:05:02,690 --> 00:05:07,130
+Let's wait for this to get uploaded and you can see it is successfully uploaded.
+64
+
+65
+00:05:07,910 --> 00:05:14,570
+Now, I need to make this file public, so I will click on it and click on Make Public.
+65
+
+66
+00:05:15,170 --> 00:05:17,090
+Now I will go in.
+66
+
+67
+00:05:18,210 --> 00:05:26,640
+Overview and go back to the bucket, the main thing to do over here is to perform static website hosting.
+67
+
+68
+00:05:27,010 --> 00:05:33,750
+So let me just click on static website hosting and let me do the next steps again.
+68
+
+69
+00:05:33,760 --> 00:05:41,520
+Remember, this server access logging option is purely optional and I will not recommend to do this
+69
+
+70
+00:05:41,520 --> 00:05:46,380
+because it is going to create a lot of logs into your bucket.
+70
+
+71
+00:05:48,440 --> 00:05:54,560
+I just wanted to see what are the logs that are being created into my bucket so I choose that particular
+71
+
+72
+00:05:54,560 --> 00:05:57,210
+option that is optional, you can skip it as well.
+72
+
+73
+00:05:57,710 --> 00:06:03,650
+Now, after going to the static website hosting, I'm going to choose the redirect request and I'm going
+73
+
+74
+00:06:03,650 --> 00:06:06,790
+to give the sub domain name, as you can see over here.
+74
+
+75
+00:06:07,730 --> 00:06:14,940
+Now, after I have given the sub domain name, you need to choose the protocol that is HTTP and hit,
+75
+
+76
+00:06:14,960 --> 00:06:15,330
+OK?
+76
+
+77
+00:06:16,740 --> 00:06:19,410
+Now, these are only the steps that you need to do.
+77
+
+78
+00:06:20,660 --> 00:06:27,110
+Now, also, we have given the public access to this, let me create or let me click on this particular
+78
+
+79
+00:06:27,110 --> 00:06:31,910
+link and you can see we are able to see the bucket. Now
+79
+
+80
+00:06:31,910 --> 00:06:39,260
+You can see over here we are able to see error, which is too many redirect, maybe because it is redirecting
+80
+
+81
+00:06:40,190 --> 00:06:42,270
+internally to our bucket.
+81
+
+82
+00:06:42,650 --> 00:06:50,510
+So if you see a case like this, then you just have to wait for some time and again, try to open that
+82
+
+83
+00:06:50,510 --> 00:06:53,700
+particular subdomain, which would fix the issue for you.
+83
+
+84
+00:06:54,530 --> 00:07:02,630
+So I tried this after some time and I was able to successfully see that the subdomain was pointing correctly
+84
+
+85
+00:07:02,870 --> 00:07:06,610
+and I was able to see the content that I hosted over there.
+85
+
+86
+00:07:08,090 --> 00:07:13,050
+So I hope you guys understood how to do subdomain takeover's for A.W.S..
+86
+
+87
+00:07:13,420 --> 00:07:13,970
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,350 --> 00:00:02,170
+Hello, everyone.
+1
+
+2
+00:00:02,790 --> 00:00:09,330
+So in this video, we are going to discuss about a report which was submitted on background four months
+2
+
+3
+00:00:09,330 --> 00:00:16,240
+ago, as you can see, this report was a subdomain take over on ads.sendgrid.com
+3
+
+4
+00:00:17,070 --> 00:00:19,740
+Now, why are we discussing this report?
+4
+
+5
+00:00:19,740 --> 00:00:24,270
+Because there is a very important takeaway from this report.
+5
+
+6
+00:00:24,960 --> 00:00:25,530
+All right.
+6
+
+7
+00:00:25,530 --> 00:00:32,640
+So the first thing to understand over here is, according to Bugcrowd, Subdomain Takeover's are considered
+7
+
+8
+00:00:32,640 --> 00:00:35,120
+to be on a priority P three.
+8
+
+9
+00:00:35,400 --> 00:00:36,140
+Remember this
+9
+
+10
+00:00:36,970 --> 00:00:38,870
+This is because of the VRT.
+10
+
+11
+00:00:39,270 --> 00:00:44,060
+So let me just open up the VRT for you and we can search the table.
+11
+
+12
+00:00:44,370 --> 00:00:46,560
+Wait here for subdomains.
+12
+
+13
+00:00:46,560 --> 00:00:47,080
+Take over.
+13
+
+14
+00:00:47,670 --> 00:00:56,190
+Now, you get notice over here if your subdomain is considered to be a basic one, then you can see
+14
+
+15
+00:00:56,400 --> 00:00:57,600
+it will go to P3.
+15
+
+16
+00:00:57,900 --> 00:01:02,640
+And if subdomain is high impact subdomain, then it goes to P2.
+16
+
+17
+00:01:03,150 --> 00:01:10,440
+We do not know how this is being judged by the programs that which subdomain to be considered as a high
+17
+
+18
+00:01:10,440 --> 00:01:12,720
+impact subdomain or a basic subdomain.
+18
+
+19
+00:01:12,990 --> 00:01:19,710
+But the subdomain take over vulnerabilities goes under P2 or P3 type of category.
+19
+
+20
+00:01:20,970 --> 00:01:21,510
+All right.
+20
+
+21
+00:01:21,810 --> 00:01:23,390
+Now let's get back over here.
+21
+
+22
+00:01:23,490 --> 00:01:28,530
+So the subdomains that I reported on was on ads.sendgrid.com
+22
+
+23
+00:01:29,160 --> 00:01:29,560
+Perfect.
+23
+
+24
+00:01:30,090 --> 00:01:33,030
+Now you can see over here the priority is P3.
+24
+
+25
+00:01:33,030 --> 00:01:34,230
+And here is the report.
+25
+
+26
+00:01:34,240 --> 00:01:36,210
+So let's quickly see the report.
+26
+
+27
+00:01:37,710 --> 00:01:38,100
+Now.
+27
+
+28
+00:01:39,160 --> 00:01:46,240
+Steps to reproduce as I visited the domain before the takeover, the status was no such bucket and we
+28
+
+29
+00:01:46,240 --> 00:01:49,760
+already know that this is the fingerprint that we get.
+29
+
+30
+00:01:50,110 --> 00:01:54,840
+So I got a same fingerprint over here, which is no such bucket.
+30
+
+31
+00:01:54,850 --> 00:01:57,570
+The specified bucket does not exist.
+31
+
+32
+00:01:57,970 --> 00:01:58,450
+Perfect.
+32
+
+33
+00:01:58,720 --> 00:02:03,830
+Now, being very excited, we are going to claim this into our bucket.
+33
+
+34
+00:02:04,240 --> 00:02:11,840
+So I created my bucket on the AWS account and the status changed to incorrect.
+34
+
+35
+00:02:12,340 --> 00:02:17,710
+Let me show you how does it looks like ,as you can see incorrect end point.
+35
+
+36
+00:02:17,740 --> 00:02:21,600
+The specified bucket exist but into another region.
+36
+
+37
+00:02:21,910 --> 00:02:29,520
+This has happened because I have reported the bucket or claimed that bucket into a wrong region.
+37
+
+38
+00:02:30,010 --> 00:02:33,810
+Now it says please redirect the request to the specified end point.
+38
+
+39
+00:02:34,180 --> 00:02:41,010
+So I have made this bucket into ap-south-1, which is Asia Pacific South-1.
+39
+
+40
+00:02:41,350 --> 00:02:49,960
+That's why I'm getting the error, wherein the ad.sendgrid.com domain has the bucket pointed somewhere
+40
+
+41
+00:02:49,960 --> 00:02:50,290
+else.
+41
+
+42
+00:02:51,160 --> 00:02:55,540
+So this is one of the important takeaway that you should take.
+42
+
+43
+00:02:55,750 --> 00:03:03,760
+Whenever you host a wrong region, then you will get a bad request four zero zero bad request and a message
+43
+
+44
+00:03:03,760 --> 00:03:05,090
+like incorrect endpoint.
+44
+
+45
+00:03:05,650 --> 00:03:06,160
+All right.
+45
+
+46
+00:03:06,160 --> 00:03:07,980
+So what is the change that we have observed?
+46
+
+47
+00:03:08,350 --> 00:03:11,380
+The change was from four zero four to 400.
+47
+
+48
+00:03:11,380 --> 00:03:13,020
+We still do not have a 200.
+48
+
+49
+00:03:13,030 --> 00:03:14,650
+OK, all right.
+49
+
+50
+00:03:15,010 --> 00:03:18,750
+Let's scroll down and I'm going to put the IP address.
+50
+
+51
+00:03:18,760 --> 00:03:25,960
+So this IP address belongs to ads dot sendgrid dot com from where I'm going to find the region of
+51
+
+52
+00:03:25,960 --> 00:03:27,100
+the bucket of it.
+52
+
+53
+00:03:27,100 --> 00:03:30,850
+It is hosted as can be seen into the screenshot attached.
+53
+
+54
+00:03:31,660 --> 00:03:39,430
+As you can see over here, I have done a reverse DNS lookup and from here I was able to identify that
+54
+
+55
+00:03:39,760 --> 00:03:44,710
+the domain name points to S3 website US East one.
+55
+
+56
+00:03:44,920 --> 00:03:45,430
+All right.
+56
+
+57
+00:03:45,460 --> 00:03:49,030
+So I know the bucket name and the bucket region.
+57
+
+58
+00:03:49,030 --> 00:03:56,110
+The bucket region is us e one now deleted the bucket, made it to the new region again.
+58
+
+59
+00:03:56,110 --> 00:03:57,550
+So I deleted the bucket.
+59
+
+60
+00:03:57,550 --> 00:04:04,300
+Remember, this is a very, very critical part because when you delete the bucket, if in that particular
+60
+
+61
+00:04:04,300 --> 00:04:09,850
+period someone else claims that bucket, then he becomes the owner of that particular bucket.
+61
+
+62
+00:04:10,300 --> 00:04:15,340
+And one more important thing that I want to discuss is whenever you delete a bucket, you cannot claim
+62
+
+63
+00:04:15,340 --> 00:04:16,540
+it back immediately.
+63
+
+64
+00:04:16,540 --> 00:04:21,340
+It takes around one hour at least for you to claim that bucket.
+64
+
+65
+00:04:21,670 --> 00:04:26,590
+So remember, try to take over the bucket regions correctly.
+65
+
+66
+00:04:26,590 --> 00:04:35,530
+Do not do it in a very, very quick or do not do it very fast so that you miss this specific thing that
+66
+
+67
+00:04:35,530 --> 00:04:36,190
+is the region.
+67
+
+68
+00:04:37,150 --> 00:04:41,020
+Now, as you can see, the new bucket has been created and the bucket is this.
+68
+
+69
+00:04:41,140 --> 00:04:47,740
+So the fixe is kindly delete the dangling entry from your DNS or wait for me to release the bucket so
+69
+
+70
+00:04:47,740 --> 00:04:48,760
+you can further claim it.
+70
+
+71
+00:04:48,760 --> 00:04:55,840
+I reported this and these are the logs which are generated into my S3 all right.
+71
+
+72
+00:04:55,840 --> 00:05:02,560
+After quite of talking, they said in order to be accepted, please provide a PoC demonstrating that
+72
+
+73
+00:05:02,560 --> 00:05:06,970
+you are able to serve content on subdomains which is ads.sendgrid
+73
+
+74
+00:05:07,270 --> 00:05:07,600
+Com.
+74
+
+75
+00:05:07,630 --> 00:05:09,400
+This is pretty a valid answer.
+75
+
+76
+00:05:09,400 --> 00:05:16,060
+When I was not able to upload content on the sub domain because it was pointed to a wrong region.
+76
+
+77
+00:05:16,720 --> 00:05:24,300
+Now I fixed this quickly and I was successfully submitted the content on the website ads.sendgrid.com
+77
+
+78
+00:05:24,310 --> 00:05:28,960
+because I knew the only the region was giving the issue.
+78
+
+79
+00:05:28,960 --> 00:05:37,270
+I quickly fixed the region and you can see it was serving the content from ads.sendgrid.com.
+79
+
+80
+00:05:38,080 --> 00:05:46,120
+So I hope you guys understood and how you may not do the same mistake of choosing the wrong region,
+80
+
+81
+00:05:46,390 --> 00:05:54,160
+which may take your one or two hours of time to fixing it again onto the AWS platform.
+81
+
+82
+00:05:54,520 --> 00:06:00,100
+So these are some of the key takeaways from this particular report that I have shown over here.
+82
+
+83
+00:06:01,300 --> 00:06:04,780
+So I hope you guys understood how you can do subdomain.
+83
+
+84
+00:06:04,780 --> 00:06:09,520
+Takeover's on a A>W.S. and choosing the region is very, very important.
+84
+
+85
+00:06:09,760 --> 00:06:10,300
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,700 --> 00:00:04,220
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:05,030 --> 00:00:09,510
+In this video, we are going to see subdomain take-over on Tumblr.
+2
+
+3
+00:00:10,190 --> 00:00:18,350
+Many of us use Tumblr for seeing some of the awesome graphic content or pictures or images, but we
+3
+
+4
+00:00:18,350 --> 00:00:22,580
+do not know that Tumblr also provides custom.
+4
+
+5
+00:00:22,580 --> 00:00:32,000
+URL or domains and there are many organizations who point their subdomains to the Tumblr, but
+5
+
+6
+00:00:32,150 --> 00:00:33,310
+forget to claim them.
+6
+
+7
+00:00:34,040 --> 00:00:41,370
+Now, here it becomes very, very important for security researchers and bug bounty hunters wherein
+7
+
+8
+00:00:41,420 --> 00:00:50,390
+they can claim those unclaimed subdomains which are being pointed to Tumblr and show a successful demonstration
+8
+
+9
+00:00:50,390 --> 00:00:51,710
+of subdomains take over.
+9
+
+10
+00:00:52,580 --> 00:00:53,120
+All right.
+10
+
+11
+00:00:53,210 --> 00:00:57,740
+So let's quickly see how can we do this into the practical time.
+11
+
+12
+00:00:59,390 --> 00:01:03,220
+So for that, what I'm going to do is on to my terminal.
+12
+
+13
+00:01:03,230 --> 00:01:08,840
+I'm going to fire up the command, which is find domain to get the domain names for the target, which
+13
+
+14
+00:01:08,840 --> 00:01:12,730
+is srsecure.xyz and hit enter.
+14
+
+15
+00:01:13,700 --> 00:01:16,250
+Let's wait for this to give me the results.
+15
+
+16
+00:01:16,430 --> 00:01:19,550
+I'm expecting those results to come really, really quick.
+16
+
+17
+00:01:20,030 --> 00:01:27,020
+And after we have got those results from that, we are going to identify some of the subdomains to be
+17
+
+18
+00:01:27,030 --> 00:01:27,680
+vulnerable.
+18
+
+19
+00:01:28,820 --> 00:01:33,770
+As you can see, we have got the 47 subdomains in mere nine seconds.
+19
+
+20
+00:01:34,640 --> 00:01:41,360
+And if you have a close look at the subdomains from here, I'm going to choose one of the subdomain,
+20
+
+21
+00:01:41,360 --> 00:01:45,980
+which is, let's say from this, we are going to choose a subdomain, which is.
+21
+
+22
+00:01:47,560 --> 00:01:51,370
+Tumblr.srsecure.xyz
+22
+
+23
+00:01:53,080 --> 00:02:01,380
+So let me see if it has been crawled or not, because I have recently created a subdomain which is 
+23
+
+24
+00:02:01,390 --> 00:02:03,670
+tumblr.srsecure.xyz
+24
+
+25
+00:02:04,150 --> 00:02:15,220
+Now, when I create subdomains, it may take some time for the DNS crawlers or these crawlers like Google
+25
+
+26
+00:02:15,220 --> 00:02:24,540
+or Virus Total or Sublister or Facebook or CERT transparency logs of cert.sh to crawl them.
+26
+
+27
+00:02:24,970 --> 00:02:32,770
+So it may take some time to reflect over here, but to show the proof of concept, I have created a
+27
+
+28
+00:02:33,160 --> 00:02:37,660
+vulneranleble subdomain which is tumblr.srsecure.xyz
+28
+
+29
+00:02:38,170 --> 00:02:42,580
+Now if I try to ping this, let us see if this will work or not.
+29
+
+30
+00:02:42,950 --> 00:02:44,380
+So I'm just going to ping this.
+30
+
+31
+00:02:45,650 --> 00:02:53,300
+And hit enter and you can see I'm getting a reply, which means the domain is active and it is not a
+31
+
+32
+00:02:53,300 --> 00:02:54,500
+dead subdomain.
+32
+
+33
+00:02:55,280 --> 00:02:55,790
+All right.
+33
+
+34
+00:02:56,090 --> 00:03:00,190
+So let's quickly do a whois and see from where are we getting the reply from.
+34
+
+35
+00:03:00,680 --> 00:03:10,360
+So we are getting a reply from this particular domain, which is the organization name is given as automattoque.
+35
+
+36
+00:03:11,550 --> 00:03:12,080
+All right.
+36
+
+37
+00:03:12,230 --> 00:03:16,410
+So we are getting the reply from this particular organization.
+37
+
+38
+00:03:16,430 --> 00:03:22,880
+Now, Tumbler may have hosted of its own of the domain from these IP ranges.
+38
+
+39
+00:03:22,880 --> 00:03:27,520
+That's what we are getting a reply of from this particular organization name.
+39
+
+40
+00:03:28,520 --> 00:03:29,020
+All right.
+40
+
+41
+00:03:29,210 --> 00:03:39,180
+So let's quickly see if what we get when we open this IP over here and you can see it is Tumbler.
+41
+
+42
+00:03:39,320 --> 00:03:39,830
+All right.
+42
+
+43
+00:03:39,850 --> 00:03:40,580
+We were correct.
+43
+
+44
+00:03:40,580 --> 00:03:45,270
+And it is redirecting to Tumblr, as you can see, it automatically redirected.
+44
+
+45
+00:03:45,290 --> 00:03:51,550
+Let me again type it over here and you can see it will again automatically redirect itself.
+45
+
+46
+00:03:51,560 --> 00:03:57,890
+As you can see, it is redirecting back to Tumblr all through this, we can confirm the IP belongs to
+46
+
+47
+00:03:57,890 --> 00:03:58,440
+Tumblr.
+47
+
+48
+00:03:58,850 --> 00:03:59,320
+All right.
+48
+
+49
+00:03:59,690 --> 00:04:02,820
+Now, what about the subdomain that we have got?
+49
+
+50
+00:04:02,930 --> 00:04:07,980
+So let me copy paste this into the browser and let's see what happens.
+50
+
+51
+00:04:08,000 --> 00:04:13,010
+So I'm going to paste this and you can see we got an error, which is there's nothing here.
+51
+
+52
+00:04:14,360 --> 00:04:17,490
+All right, and it got redirected back to the main domain.
+52
+
+53
+00:04:17,750 --> 00:04:26,420
+Let me show it once again tumblr.srsecure.xyz and it will redirect back to the main
+53
+
+54
+00:04:26,420 --> 00:04:29,770
+domain because there is no domain or nothing over here.
+54
+
+55
+00:04:30,440 --> 00:04:34,070
+Let me just close this, close this and close this.
+55
+
+56
+00:04:34,670 --> 00:04:41,270
+Now, as we have identified, the vulnerable subdomain and the fingerprint for this particular tumblr
+56
+
+57
+00:04:41,270 --> 00:04:43,760
+takeover is there's nothing here.
+57
+
+58
+00:04:47,260 --> 00:04:53,920
+This is the fingerprint where it says there's nothing here for doesn't whatever you're looking for doesn't
+58
+
+59
+00:04:53,920 --> 00:04:54,970
+exist over here.
+59
+
+60
+00:04:55,240 --> 00:04:55,750
+All right.
+60
+
+61
+00:04:56,080 --> 00:05:00,450
+So now we have identified and we have completed our step number one.
+61
+
+62
+00:05:00,910 --> 00:05:07,330
+Now, the step number two is to take over the successful subdomain and perform a subdomain takeover.
+62
+
+63
+00:05:07,870 --> 00:05:10,390
+For that, you just need to create an account.
+63
+
+64
+00:05:10,420 --> 00:05:12,700
+So I have already created an account.
+64
+
+65
+00:05:12,710 --> 00:05:19,540
+So let me show you over here as I have logged in, as you can see, I'm logged in over here now.
+65
+
+66
+00:05:19,570 --> 00:05:23,650
+You just need to click on your username once you click on this username.
+66
+
+67
+00:05:24,070 --> 00:05:29,140
+As you can see, I have created a node as well, which is PoC of Subdomain Take-Over.
+67
+
+68
+00:05:29,560 --> 00:05:32,770
+Let me go back to my profile, click it over here and click.
+68
+
+69
+00:05:33,870 --> 00:05:37,590
+Over here and let me go to settings now.
+69
+
+70
+00:05:38,770 --> 00:05:43,490
+In the settings you can see, these are the settings of e-mail, password and other settings.
+70
+
+71
+00:05:43,540 --> 00:05:45,370
+Let me click onto the e-mail setting.
+71
+
+72
+00:05:46,570 --> 00:05:50,410
+It's not over here, let me click again in the blogs.
+72
+
+73
+00:05:50,710 --> 00:05:52,590
+Yeah, so it is in the blogs.
+73
+
+74
+00:05:52,600 --> 00:05:57,820
+When you click on blogs, you will be able to see the blog name over here.
+74
+
+75
+00:05:57,850 --> 00:06:01,140
+You can see the user name under the user name.
+75
+
+76
+00:06:01,150 --> 00:06:04,030
+You can see a custom domain.
+76
+
+77
+00:06:04,320 --> 00:06:06,280
+Now it is asking for a custom domain.
+77
+
+78
+00:06:06,520 --> 00:06:09,190
+And let's try to put our custom domain so.
+78
+
+79
+00:06:09,190 --> 00:06:15,730
+Let's say this is our custom domain https:// and click on Testament's.
+79
+
+80
+00:06:16,150 --> 00:06:20,950
+If you get a message, which is it's good, then it is working perfectly fine.
+80
+
+81
+00:06:21,190 --> 00:06:25,080
+If we get a message that something is wrong, then it is not working fine.
+81
+
+82
+00:06:25,300 --> 00:06:32,710
+So let me add Apple dot com over here to show you if what is the wrong message that you get or the false
+82
+
+83
+00:06:32,710 --> 00:06:36,970
+message for domains which are not which are not pointed to Tumblr.
+83
+
+84
+00:06:37,360 --> 00:06:42,760
+As you can see, the subdomains name is not pointing to Tumblr, but is the message that you are going
+84
+
+85
+00:06:42,760 --> 00:06:47,740
+to get in case you have got a false domain, which is not pointed to Tumblr
+85
+
+86
+00:06:48,460 --> 00:06:55,630
+OK, now let's get back to srsecure and let again click on Test domain and we have got a message.
+86
+
+87
+00:06:55,630 --> 00:06:56,670
+It says, it's good.
+87
+
+88
+00:06:56,860 --> 00:07:01,040
+Let me save this once I have saved this.
+88
+
+89
+00:07:01,120 --> 00:07:07,050
+Now the attacker is successfully able to get this particular Tumblr URL.
+89
+
+90
+00:07:07,330 --> 00:07:13,030
+So let me just go over here and you can see this is the PoC of subdomain take-over.
+90
+
+91
+00:07:13,300 --> 00:07:13,800
+Perfect.
+91
+
+92
+00:07:14,050 --> 00:07:20,470
+Now, we are able to take this particular subdomain successfully and we can post any malicious content
+92
+
+93
+00:07:20,470 --> 00:07:25,510
+that we want over here because we have the full control of that particular subdomain.
+93
+
+94
+00:07:25,960 --> 00:07:33,790
+Now, if the original owner wants the subdomain, then we need to delete it from here and we need to
+94
+
+95
+00:07:34,000 --> 00:07:35,170
+turn this off.
+95
+
+96
+00:07:36,280 --> 00:07:43,750
+And through this, our subdomain will get disabled and the original program owner can claim it back.
+96
+
+97
+00:07:44,170 --> 00:07:51,430
+Remember, you have to do this step after and after only when they have identified the vulnerability
+97
+
+98
+00:07:51,730 --> 00:07:58,750
+and they are providing you a reward, bounty or swag, anything that sort of and you have discussed
+98
+
+99
+00:07:58,750 --> 00:08:00,070
+with the program owner.
+99
+
+100
+00:08:00,070 --> 00:08:05,020
+And they want to mitigate this issue in case they want to continue using this subdomain.
+100
+
+101
+00:08:05,140 --> 00:08:09,480
+You have to delete it from here or basically disable from here.
+101
+
+102
+00:08:09,520 --> 00:08:15,130
+Or if they do not want this particular subdomain, then they can just directly delete the entry from
+102
+
+103
+00:08:15,130 --> 00:08:15,820
+their DNS.
+103
+
+104
+00:08:16,540 --> 00:08:16,950
+All right.
+104
+
+105
+00:08:16,960 --> 00:08:21,490
+So I hope you guys understood how you can do the subdomain take-over for Tumblr.
+105
+
+106
+00:08:21,880 --> 00:08:22,450
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,340 --> 00:00:02,190
+Hello, everyone.
+1
+
+2
+00:00:03,110 --> 00:00:12,740
+And now, as we have completed the installation for Sublister, we are going to run this into our target
+2
+
+3
+00:00:12,740 --> 00:00:13,150
+domain.
+3
+
+4
+00:00:13,430 --> 00:00:17,260
+So let's see, my target domain is srsecure.xyz.
+4
+
+5
+00:00:18,260 --> 00:00:20,180
+Then you need to supply the hyphen.
+5
+
+6
+00:00:20,180 --> 00:00:25,550
+d flag, which stands for the domain name, and I will hit enter.
+6
+
+7
+00:00:26,630 --> 00:00:31,880
+As you can see it is enumerating the subdomains for the target that you have supplied.
+7
+
+8
+00:00:32,180 --> 00:00:38,990
+You can give any target that you want, it can be uber PayPal, Google, Facebook, anything, and
+8
+
+9
+00:00:38,990 --> 00:00:47,480
+it will start searching into Baidu, Yahoo, Google, bing ask net craft and different types of search
+9
+
+10
+00:00:47,480 --> 00:00:49,380
+engines or DNS crawlers.
+10
+
+11
+00:00:49,940 --> 00:01:00,020
+So basically how Sublister works is it tries to collect all the subdomains which are being stored by these
+11
+
+12
+00:01:00,020 --> 00:01:04,400
+different services like Baidu, Yahoo, Google, etc..
+12
+
+13
+00:01:04,850 --> 00:01:12,170
+In a couple of seconds, it is going to identify and give us the number of subdomains that are being
+13
+
+14
+00:01:12,560 --> 00:01:15,210
+made for srsecure.xyz
+14
+
+15
+00:01:15,560 --> 00:01:19,300
+And this way you will be able to identify all the subdomains.
+15
+
+16
+00:01:20,480 --> 00:01:22,340
+Now, as this tool is running.
+16
+
+17
+00:01:22,370 --> 00:01:28,880
+I have already run,one of the instance and here is the output, how it will look like.
+17
+
+18
+00:01:29,300 --> 00:01:36,920
+So let me just show you and you can see we have identified in total 56 subdomains for that specific
+18
+
+19
+00:01:36,920 --> 00:01:37,430
+target.
+19
+
+20
+00:01:37,820 --> 00:01:43,650
+And you can see the subdomains looks something like this, which is anil. srsecure.xyz
+20
+
+21
+00:01:43,700 --> 00:01:47,900
+Sounds like your apple. srsecure.xyz and beta. srsecure.xyz.
+21
+
+22
+00:01:48,410 --> 00:01:53,300
+And you can see there are a lot of subdomains which are being made over here.
+22
+
+23
+00:01:54,640 --> 00:02:02,110
+Now, let's try to see if we get the subdomain that I have created recently, which is shifaShopify
+23
+
+24
+00:02:02,110 --> 00:02:07,790
+srsecure and you can see over here, it has still not been populated.
+24
+
+25
+00:02:08,260 --> 00:02:14,240
+This is because the DNS crawler has not still called the new subdomain.
+25
+
+26
+00:02:14,680 --> 00:02:22,590
+This is usual and it may take some time for new subdomains to get crawled and appear in the search results.
+26
+
+27
+00:02:23,110 --> 00:02:26,050
+So we should give this some specific time.
+27
+
+28
+00:02:26,050 --> 00:02:33,040
+And in about 30 minutes, we will be able to see the results into the subdomain enumeration that we
+28
+
+29
+00:02:33,040 --> 00:02:33,490
+are doing.
+29
+
+30
+00:02:35,110 --> 00:02:43,030
+So this has completed again over here and we are not able to see the new subdomain because it has been
+30
+
+31
+00:02:43,420 --> 00:02:50,750
+just published by me five or 10 minutes ago and it would take some time to get populated into these
+31
+
+32
+00:02:50,750 --> 00:02:51,400
+scans.
+32
+
+33
+00:02:52,810 --> 00:02:53,280
+All right.
+33
+
+34
+00:02:53,500 --> 00:02:59,650
+So after you have identified the subdomains from these scans now, what is the next step that we are
+34
+
+35
+00:02:59,650 --> 00:03:00,230
+going to do?
+35
+
+36
+00:03:00,820 --> 00:03:07,510
+So let me just clear my screen and let me try to ping the subdomain that we have identified.
+36
+
+37
+00:03:07,690 --> 00:03:15,190
+So we have identified the subdomain, which is shifashopify.srsecure.xyz
+37
+
+38
+00:03:15,580 --> 00:03:21,610
+And we are going to ping this to check if this subdomain exists or does not exist.
+38
+
+39
+00:03:22,210 --> 00:03:27,280
+And you can see we are getting a reply from that specific subdomain.
+39
+
+40
+00:03:28,450 --> 00:03:33,930
+And you can notice over here the IP address from which we are getting the reply is this.
+40
+
+41
+00:03:34,150 --> 00:03:38,390
+So let's try to identify to whom this IP address belongs to.
+41
+
+42
+00:03:38,860 --> 00:03:41,830
+So I'm going to simply who is on this IP address?
+42
+
+43
+00:03:42,220 --> 00:03:51,610
+And we already know this IP address belongs to Shopify Operations which is Shopify organization now.
+43
+
+44
+00:03:52,860 --> 00:04:01,740
+What are the next steps that we should do so we are going to just open up a new tab and try to open
+44
+
+45
+00:04:02,850 --> 00:04:05,940
+the subdomain that we have just identified.
+45
+
+46
+00:04:08,930 --> 00:04:16,580
+And when I opened this particular subdomain, it looks something like this and the message says only
+46
+
+47
+00:04:16,580 --> 00:04:24,380
+one step left to finish setting up your new Web address, go to your domain settings, click connect
+47
+
+48
+00:04:24,380 --> 00:04:27,890
+existing domain and enter  shifashopify.
+48
+
+49
+00:04:27,890 --> 00:04:29,880
+srsecure.xyz
+49
+
+50
+00:04:30,140 --> 00:04:30,650
+Perfect.
+50
+
+51
+00:04:31,250 --> 00:04:40,190
+Now you have to remember, whenever you will be able to identify those particular subdomains which are
+51
+
+52
+00:04:40,190 --> 00:04:42,020
+vulnerable to subdomain take-over.
+52
+
+53
+00:04:42,110 --> 00:04:49,340
+For Shopify specifically, this is one of the fingerprint which you are going to see everywhere.
+53
+
+54
+00:04:49,760 --> 00:04:54,440
+By fingerprint, I mean you're going to see the same message everywhere.
+54
+
+55
+00:04:54,740 --> 00:05:02,670
+And remember our memories for Shopify, you will see the message, which is only one step left.
+55
+
+56
+00:05:03,200 --> 00:05:11,450
+This is important because there are so many fingerprints or patterns for different types of cloud providers.
+56
+
+57
+00:05:11,960 --> 00:05:16,110
+And this is the specific message for Shopify.
+57
+
+58
+00:05:17,510 --> 00:05:18,020
+All right.
+58
+
+59
+00:05:18,290 --> 00:05:25,130
+Now, as we have identified the vulnerable subdomain and we have seen, how does it look like when you
+59
+
+60
+00:05:25,640 --> 00:05:32,330
+stumble upon any subdomain, which is pointed to Shopify but is not being claimed now
+60
+
+61
+00:05:32,330 --> 00:05:38,720
+We are going to claim this as an attacker and we are going to own the whole subdomain through which
+61
+
+62
+00:05:38,720 --> 00:05:45,980
+any attacker can host any malicious content onto this sub domain and customers can get redirected to
+62
+
+63
+00:05:45,980 --> 00:05:47,570
+this sub domain and.
+63
+
+64
+00:05:48,780 --> 00:05:56,010
+The attacker may host some of the malicious content and steal sensitive information from the users or
+64
+
+65
+00:05:56,010 --> 00:05:56,670
+the customers.
+65
+
+66
+00:05:57,620 --> 00:05:59,850
+Now, how do we clean this subdomain?
+66
+
+67
+00:06:00,110 --> 00:06:08,480
+So first thing that you need to do is quickly sign up for Shopify so you will be redirected to the original
+67
+
+68
+00:06:08,480 --> 00:06:10,070
+Shopify dot com page.
+68
+
+69
+00:06:10,460 --> 00:06:12,620
+You just need to click here and get started.
+69
+
+70
+00:06:13,160 --> 00:06:17,270
+And Shopify offers you a 14 day trial.
+70
+
+71
+00:06:17,630 --> 00:06:19,170
+This is one of the best thing.
+71
+
+72
+00:06:19,700 --> 00:06:26,660
+This means that you do not need to pay anything for proving subdomain take-over vulnerabilities and
+72
+
+73
+00:06:26,870 --> 00:06:29,810
+you will be able to make a PoC free of cost.
+73
+
+74
+00:06:30,140 --> 00:06:30,580
+All right.
+74
+
+75
+00:06:30,860 --> 00:06:33,410
+So let's quickly given the email address.
+75
+
+76
+00:06:33,740 --> 00:06:37,070
+So let's use one of the e-mail address for this attack.
+76
+
+77
+00:06:37,340 --> 00:06:42,410
+I'm going to choose an e-mail address for this attack, which is, let's say.
+77
+
+78
+00:06:46,590 --> 00:06:48,450
+hacker.udemy
+78
+
+79
+00:06:49,850 --> 00:06:50,300
+One.
+79
+
+80
+00:06:51,830 --> 00:06:59,990
+@Gmail dot com and password, which was a password, let's say the store name we are going to
+80
+
+81
+00:06:59,990 --> 00:07:02,330
+give as Shifa.
+81
+
+82
+00:07:04,090 --> 00:07:07,240
+Shopify subdomain take-over.
+82
+
+83
+00:07:08,730 --> 00:07:15,030
+OK, so it is say store name can't contain the word Shopify, no issues, so let me just remove that and
+83
+
+84
+00:07:16,320 --> 00:07:19,410
+shifa subdomain take over and let me create a store.
+84
+
+85
+00:07:23,890 --> 00:07:31,390
+As you can see over here, it is creating the store and moving ahead with some of the steps, let's
+85
+
+86
+00:07:31,390 --> 00:07:34,120
+wait for this to complete and.
+86
+
+87
+00:07:35,690 --> 00:07:40,130
+Once we are inside this, we will be able to do the next quick steps.
+87
+
+88
+00:07:41,060 --> 00:07:47,750
+One thing that you can quickly notice over here is that we have got one of the domain like this, which
+88
+
+89
+00:07:47,750 --> 00:07:52,760
+is our store name, which is shifa Subdomain takeover my Shopify dot com.
+89
+
+90
+00:07:53,540 --> 00:07:53,980
+All right.
+90
+
+91
+00:07:53,990 --> 00:07:55,790
+So it will ask you some of the questions.
+91
+
+92
+00:07:55,790 --> 00:07:57,770
+We can just simply skip those.
+92
+
+93
+00:07:58,040 --> 00:08:01,450
+But you need to add the last step, which is an address.
+93
+
+94
+00:08:01,550 --> 00:08:03,660
+So let me just give some of the details.
+94
+
+95
+00:08:04,010 --> 00:08:06,380
+So let's say I give them details as Rohit.
+95
+
+96
+00:08:07,860 --> 00:08:09,420
+Gautam address.
+96
+
+97
+00:08:09,470 --> 00:08:10,500
+Let me give us Mumbai.
+97
+
+98
+00:08:11,810 --> 00:08:20,090
+Let me give as Mumbai again over here, Mumbai country, India, state Maharastra, Pincode.
+98
+
+99
+00:08:20,780 --> 00:08:26,620
+Let me give this let me see if I can keep this blank and enter the store.
+99
+
+100
+00:08:26,690 --> 00:08:28,540
+OK, so it is asking for a phone number.
+100
+
+101
+00:08:28,610 --> 00:08:29,810
+So let me give.
+101
+
+102
+00:08:33,230 --> 00:08:35,310
+My phone number and enter the store.
+102
+
+103
+00:08:36,320 --> 00:08:45,470
+All right, so once you have given all the necessary details, we will be able to come on to our account.
+103
+
+104
+00:08:45,470 --> 00:08:54,260
+And now this is the page from where we can do the next quick steps to perform a successful subdomain
+104
+
+105
+00:08:54,260 --> 00:08:54,820
+take over.
+105
+
+106
+00:08:55,370 --> 00:08:55,820
+All right.
+106
+
+107
+00:08:56,120 --> 00:09:02,690
+So now over here, you can see we just need to click on this particular button, which is add domain.
+107
+
+108
+00:09:03,080 --> 00:09:05,120
+And remember, what was the subdomain?
+108
+
+109
+00:09:05,120 --> 00:09:07,700
+That was vulnerable it was Shifa.
+109
+
+110
+00:09:09,500 --> 00:09:15,170
+Shopify.srsecure.xyz
+110
+
+111
+00:09:17,770 --> 00:09:20,020
+Yes, this is the one which was vulnerable.
+111
+
+112
+00:09:20,410 --> 00:09:27,220
+Now I just need to click on Add Domain and over here, as you can see, this is my primary domain through
+112
+
+113
+00:09:27,220 --> 00:09:28,920
+which I have created account.
+113
+
+114
+00:09:29,140 --> 00:09:34,020
+I just simply need to click on Connect Existing Domain.
+114
+
+115
+00:09:34,600 --> 00:09:37,090
+And over here I can give the domain name.
+115
+
+116
+00:09:37,600 --> 00:09:45,490
+Remember, you can remove this extra https and slash and you can just hit on next.
+116
+
+117
+00:09:46,390 --> 00:09:52,300
+Once you hit on next, it is going to say you you need to connect your namecheap domain.
+117
+
+118
+00:09:52,960 --> 00:10:00,710
+This is because the srsecure main domain is provided by the service provider, which is name
+118
+
+119
+00:10:00,740 --> 00:10:01,020
+cheap.
+119
+
+120
+00:10:01,510 --> 00:10:01,950
+All right.
+120
+
+121
+00:10:01,960 --> 00:10:03,520
+So we don't need to do anything.
+121
+
+122
+00:10:03,520 --> 00:10:06,010
+We just need to click on Verify Connection.
+122
+
+123
+00:10:06,910 --> 00:10:11,860
+Once we have clicked on Verify Connection, it is going to take just a couple of seconds.
+123
+
+124
+00:10:12,070 --> 00:10:19,870
+And after that, we will be able to claim successfully the domain and once we have claimed it.
+124
+
+125
+00:10:22,150 --> 00:10:30,760
+As you can see over here, we have claimed it successfully and now we can find anything or upload anything
+125
+
+126
+00:10:30,760 --> 00:10:32,730
+onto this particular domain.
+126
+
+127
+00:10:33,250 --> 00:10:37,600
+As you can see, it says status connected, SSL pending.
+127
+
+128
+00:10:37,600 --> 00:10:42,400
+It will automatically even put SSL certificate free of cost over there.
+128
+
+129
+00:10:43,180 --> 00:10:46,630
+Now, let's verify what happens when we go over there.
+129
+
+130
+00:10:46,960 --> 00:10:49,880
+Are we able to see the same fingerprint or not?
+130
+
+131
+00:10:50,200 --> 00:10:54,790
+So let me just paste it over here and let's see what do we get?
+131
+
+132
+00:10:55,030 --> 00:10:55,570
+Perfect.
+132
+
+133
+00:10:55,870 --> 00:11:00,370
+As you can see over here, we are able to see shifa subdomain take over.
+133
+
+134
+00:11:00,670 --> 00:11:07,570
+The coming soon is because we have not created a website right now, but we are able to claim this particular
+134
+
+135
+00:11:07,570 --> 00:11:15,070
+page and I can host any application that I want over here, change to theme, change the content and
+135
+
+136
+00:11:15,070 --> 00:11:22,300
+put anything over here so you can see and notice the comparison between the fingerprints that get changed
+136
+
+137
+00:11:22,570 --> 00:11:28,990
+before it was something like this which says only one step left because this subdomain was vulnerable.
+137
+
+138
+00:11:29,380 --> 00:11:37,390
+Now, the attacker has successfully claimed this subdomain by creating a successful account on Shopify
+138
+
+139
+00:11:37,660 --> 00:11:44,800
+and claiming the particular subdomain, he can upload anything onto this particular subdomain which
+139
+
+140
+00:11:44,950 --> 00:11:47,260
+will be served to the users.
+140
+
+141
+00:11:47,950 --> 00:11:54,010
+So I hope you guys understood how you can successfully do Shopify subdomain take over.
+141
+
+142
+00:11:54,520 --> 00:11:55,060
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,050 --> 00:00:03,750
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,560 --> 00:00:11,340
+So in this video, we are going to see one of the interesting subdomain takeover's onto a new cloud
+2
+
+3
+00:00:11,340 --> 00:00:13,380
+service platform, which is Cargo.
+3
+
+4
+00:00:13,770 --> 00:00:14,250
+All right.
+4
+
+5
+00:00:14,820 --> 00:00:15,720
+So let's see this.
+5
+
+6
+00:00:15,760 --> 00:00:22,440
+So I have created a subdomain, which is cargo.hacktify.in and which is pointing to this IP address.
+6
+
+7
+00:00:23,130 --> 00:00:27,180
+This IP address belongs to the cargo cloud service provider.
+7
+
+8
+00:00:27,840 --> 00:00:35,160
+So you can also verify that using your terminal just go into a terminal and type host cargo.
+8
+
+9
+00:00:37,190 --> 00:00:45,200
+Sorry about that, you can simply go into a terminal and host cargo.hacktify.in and you will be able
+9
+
+10
+00:00:45,200 --> 00:00:46,320
+to see the IP address.
+10
+
+11
+00:00:46,340 --> 00:00:51,070
+So this is the IP address, which belongs to the cargo web application.
+11
+
+12
+00:00:51,730 --> 00:00:53,330
+Let's confirm that as well.
+12
+
+13
+00:00:53,840 --> 00:01:00,380
+So if I search this, you can see this domain has been configured for use by cargo alright.
+13
+
+14
+00:01:01,100 --> 00:01:07,640
+So you can see cargo.hacktify.in gives the same error message, which means that Web application
+14
+
+15
+00:01:07,640 --> 00:01:12,260
+has been successfully created but never claimed on the cargo website.
+15
+
+16
+00:01:12,890 --> 00:01:17,560
+So to claim it, you are going to go onto the cargo website and create an account.
+16
+
+17
+00:01:18,380 --> 00:01:24,760
+So let's create an account quickly and make a site with the template.
+17
+
+18
+00:01:24,770 --> 00:01:27,420
+OK, we are ready and the email address.
+18
+
+19
+00:01:27,440 --> 00:01:30,240
+So let's quickly enter the email address.
+19
+
+20
+00:01:30,290 --> 00:01:32,360
+So to the email address.
+20
+
+21
+00:01:32,930 --> 00:01:34,330
+Backup email address.
+21
+
+22
+00:01:34,340 --> 00:01:35,300
+We don't want to give.
+22
+
+23
+00:01:35,630 --> 00:01:37,120
+I want to give the password.
+23
+
+24
+00:01:37,130 --> 00:01:39,230
+So let me give the password.
+24
+
+25
+00:01:40,160 --> 00:01:50,390
+Now it says to the cargo URL so let's use  URL which is cargo.hacktify.in and you can
+25
+
+26
+00:01:50,390 --> 00:01:54,700
+see at the end of this adding cargo side of it and in the name of your site.
+26
+
+27
+00:01:54,710 --> 00:02:03,590
+So let's end of the same name for our site, which is called cargo.hacktify.in and click
+27
+
+28
+00:02:03,590 --> 00:02:04,520
+on submit.
+28
+
+29
+00:02:05,660 --> 00:02:15,590
+Now the attacker is able to identify that the website, which is cargo.hacktify.in is
+29
+
+30
+00:02:15,590 --> 00:02:20,530
+pointing to the cargo subdomain, but it's not been successfully claimed.
+30
+
+31
+00:02:20,540 --> 00:02:22,460
+So the attacker has claimed it.
+31
+
+32
+00:02:24,050 --> 00:02:34,190
+Yeah, so now once we have created our account, so let me just type your Subdomain take over, because
+32
+
+33
+00:02:34,640 --> 00:02:41,090
+I want this message to be shown over onto the Web application and let's click on Save.
+33
+
+34
+00:02:41,270 --> 00:02:42,420
+So I think it is save now.
+34
+
+35
+00:02:42,450 --> 00:02:44,770
+Now, we don't want to change the design.
+35
+
+36
+00:02:44,780 --> 00:02:46,160
+Let's keep it as it is.
+36
+
+37
+00:02:46,250 --> 00:02:53,420
+Let's click on Connect and Existing Domain and let's choose the domain that we want to take over,
+37
+
+38
+00:02:53,750 --> 00:02:57,420
+which is cargo.hacktify.in and hit enter.
+38
+
+39
+00:02:57,890 --> 00:03:04,130
+And now you can see it became green, which means that we are able to successfully take over the domain.
+39
+
+40
+00:03:04,670 --> 00:03:06,060
+Now let's try to see this.
+40
+
+41
+00:03:06,440 --> 00:03:13,850
+So this was the original domain that was hosted by the admin of hacktify and the attacker was able
+41
+
+42
+00:03:13,850 --> 00:03:17,600
+to identify that there is no such application which is running.
+42
+
+43
+00:03:17,900 --> 00:03:23,630
+All this domain has been configured for use by cargo is the fingerprint which is available onto the
+43
+
+44
+00:03:23,750 --> 00:03:24,890
+Web application.
+44
+
+45
+00:03:25,520 --> 00:03:31,000
+Now, let's try to reload this and see if the attacker is able to take over the domain.
+45
+
+46
+00:03:31,460 --> 00:03:38,480
+And you can see this site is private, is one of the messages is flashing onto this Web application.
+46
+
+47
+00:03:38,480 --> 00:03:47,600
+And you can see this site is a private message, is there, because we need to upgrade our account so
+47
+
+48
+00:03:47,600 --> 00:03:50,690
+you can see monthly we need to upgrade it to 13 dollars.
+48
+
+49
+00:03:51,350 --> 00:03:51,730
+All right.
+49
+
+50
+00:03:51,740 --> 00:03:53,090
+So we are not going to do that.
+50
+
+51
+00:03:54,140 --> 00:04:02,510
+But this is enough to prove that we have successfully taken over the website and the account, although
+51
+
+52
+00:04:02,510 --> 00:04:07,170
+you can also make any changes into the content and design, whatever you want.
+52
+
+53
+00:04:07,460 --> 00:04:15,620
+So let's say we change this untitled page to subdomain takeover we can also put any images, whatever
+53
+
+54
+00:04:15,620 --> 00:04:19,960
+we like, and we can host it that way as well.
+54
+
+55
+00:04:20,290 --> 00:04:22,510
+Let's go back here and deliver this.
+55
+
+56
+00:04:23,120 --> 00:04:23,470
+Yeah.
+56
+
+57
+00:04:23,480 --> 00:04:25,330
+So we are not able to see anything yet.
+57
+
+58
+00:04:25,340 --> 00:04:30,340
+But this site is it is private because it is now controlled by the attackers.
+58
+
+59
+00:04:30,350 --> 00:04:35,260
+So this was a successful subdomain takeover on the cargo web application.
+59
+
+60
+00:04:35,600 --> 00:04:36,800
+So I hope you guys understood.
+60
+
+61
+00:04:36,920 --> 00:04:37,490
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,910 --> 00:00:04,640
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:05,270 --> 00:00:12,170
+So in this video, we are going to see what of the tool, which is useful to identify subdomain because
+2
+
+3
+00:00:12,890 --> 00:00:20,660
+so after you have identified subdomains for any target program, you just need to supply all your subdomains
+3
+
+4
+00:00:20,810 --> 00:00:26,160
+to this tool and it will automatically identify the subdomain, takeover vulnerability for you.
+4
+
+5
+00:00:26,960 --> 00:00:27,850
+So how to do it?
+5
+
+6
+00:00:28,340 --> 00:00:33,070
+First of all, you need to download and install this tool, which is a subzy.
+6
+
+7
+00:00:33,680 --> 00:00:39,800
+You can also clone this or you can download a zip from here and do the further installation.
+7
+
+8
+00:00:40,790 --> 00:00:47,060
+If you do not want to do the installation manually, you can also install it with the help of Go
+8
+
+9
+00:00:47,360 --> 00:00:49,010
+as a tool is created and go.
+9
+
+10
+00:00:49,400 --> 00:00:55,280
+So for the installation, you just need to copy these two lines, which is go get and go install.
+10
+
+11
+00:00:55,810 --> 00:01:02,620
+Remember, for this, you need to have the go lang installation into your computer, which is a prerequisite.
+11
+
+12
+00:01:03,380 --> 00:01:09,500
+So after you just copy paste this into your terminal, you will be able to successfully install the
+12
+
+13
+00:01:09,890 --> 00:01:10,220
+subzy tool.
+13
+
+14
+00:01:11,330 --> 00:01:19,430
+Now, in case you come across any errors year, it has clearly shown how to set your go path for
+14
+
+15
+00:01:19,460 --> 00:01:21,240
+each Shell environment.
+15
+
+16
+00:01:21,740 --> 00:01:29,450
+For example, if you are running bash,zsh, fish windows, etc., you can just copy paste these
+16
+
+17
+00:01:29,780 --> 00:01:36,590
+commands into your terminal and it will do the job for, you know, as I'm running the zsh.
+17
+
+18
+00:01:36,590 --> 00:01:43,670
+So I'm going to copy paste the above commands, which are this into my terminal and it will successfully
+18
+
+19
+00:01:43,670 --> 00:01:46,160
+export the go path for me.
+19
+
+20
+00:01:46,850 --> 00:01:52,490
+I have already done it, but I'm going to show you how to do it for this.
+20
+
+21
+00:01:52,670 --> 00:01:56,120
+You just need to go to your terminal and copy paste the.
+21
+
+22
+00:01:56,120 --> 00:01:56,510
+Command.
+22
+
+23
+00:01:57,050 --> 00:02:04,430
+As you can see, I'm running a Z S.H. So I have pasted this command and now the go path has been successfully
+23
+
+24
+00:02:04,430 --> 00:02:05,060
+exported.
+24
+
+25
+00:02:05,780 --> 00:02:06,240
+Perfect.
+25
+
+26
+00:02:06,620 --> 00:02:12,080
+Now you can just copy paste those two commands, which was go get and go install.
+26
+
+27
+00:02:12,380 --> 00:02:18,120
+subzy should automatically get installed for your system without any issues
+27
+
+28
+00:02:18,780 --> 00:02:22,940
+Now you can just verify if the installation has been done or no.
+28
+
+29
+00:02:23,270 --> 00:02:28,930
+by typing the command, which is a subzy and you should get a help menu like this.
+29
+
+30
+00:02:29,750 --> 00:02:30,270
+Perfect.
+30
+
+31
+00:02:30,290 --> 00:02:32,610
+So we have successfully installed the tool.
+31
+
+32
+00:02:33,350 --> 00:02:38,340
+Now it's time to test the tool to identify if it works or not.
+32
+
+33
+00:02:38,870 --> 00:02:42,650
+So you can see your other options to use this tool.
+33
+
+34
+00:02:42,650 --> 00:02:43,820
+The first one is target.
+34
+
+35
+00:02:44,990 --> 00:02:52,070
+In case you want to scan only one target, then you can give the option, which is subzy space hyphen target
+35
+
+36
+00:02:52,280 --> 00:02:52,900
+target.
+36
+
+37
+00:02:53,270 --> 00:02:56,210
+You can also give multiple targets by Comma.
+37
+
+38
+00:02:56,270 --> 00:03:03,920
+As you can see over here, if you want to give a list of subdomains or target from any file, then you
+38
+
+39
+00:03:03,920 --> 00:03:11,060
+can just pass the path of the file and it will start scanning all the target domains or subdomains from
+39
+
+40
+00:03:11,060 --> 00:03:11,840
+that specific path.
+40
+
+41
+00:03:11,840 --> 00:03:15,170
+But you can also increase the concurrency.
+41
+
+42
+00:03:15,560 --> 00:03:20,150
+Concurrency means the number of default checks or you can see thread's.
+42
+
+43
+00:03:20,450 --> 00:03:24,890
+It will make a process much more faster, hide fails means.
+43
+
+44
+00:03:25,130 --> 00:03:31,100
+You do not want to see which ones are failing, which means not vulnerable you only want to see and is
+44
+
+45
+00:03:31,100 --> 00:03:34,030
+interested in, which is vulnerable.
+45
+
+46
+00:03:34,610 --> 00:03:36,800
+Alright, so let's quickly test this.
+46
+
+47
+00:03:37,670 --> 00:03:43,160
+So I have made a file which is sites.txt, which contains all the subdomains.
+47
+
+48
+00:03:43,340 --> 00:03:49,940
+So I have enumerated these subdomains from my website, which is srscure.xyz.
+48
+
+49
+00:03:50,450 --> 00:03:54,410
+So now I'm going to type the command, which is sabzy space //.
+49
+
+50
+00:03:54,410 --> 00:04:02,690
+Target sites dot txt as you can see over here now, I'm also going to use the concurrency flag to increase
+50
+
+51
+00:04:02,690 --> 00:04:08,480
+the concurrency, which is the threat to get faster responses by default.
+51
+
+52
+00:04:08,480 --> 00:04:10,100
+It uses ten threads.
+52
+
+53
+00:04:10,100 --> 00:04:14,390
+I'm going to use twenty and you can see it has started scanning.
+53
+
+54
+00:04:15,050 --> 00:04:18,140
+Now, this output is given by the tool, which is find domain.
+54
+
+55
+00:04:18,440 --> 00:04:22,430
+So you can see these are all the verbose messages that it gives.
+55
+
+56
+00:04:22,430 --> 00:04:27,190
+And it is this tool is trying and saying https error.
+56
+
+57
+00:04:27,890 --> 00:04:35,040
+OK, moving ahead, you can see Apple.srscure.xyz is not vulnerable 
+57
+
+58
+00:04:35,040 --> 00:04:41,210
+stko.srscure.xyz is not vulnerable but redmik20.srscure.xyz
+58
+
+59
+00:04:41,210 --> 00:04:44,720
+is vulnerable and you can see it is pointed to Shopify.
+59
+
+60
+00:04:45,170 --> 00:04:45,680
+Perfect.
+60
+
+61
+00:04:45,680 --> 00:04:53,420
+So we have identifieda vulnerable domain which is being pointed to Shopify but have not been claimed.
+61
+
+62
+00:04:54,470 --> 00:05:01,160
+We have identified more domains, which is varshclothestores.srscure.xyz which
+62
+
+63
+00:05:01,160 --> 00:05:01,310
+is.
+63
+
+64
+00:05:01,480 --> 00:05:03,580
+Again, pointing to Shopify.
+64
+
+65
+00:05:04,600 --> 00:05:13,000
+Now, let's say we do not want to see all such noise onto our terminal and we are only interested in
+65
+
+66
+00:05:13,000 --> 00:05:20,320
+seeing those particular output which are vulnerable and again, simply type hide, underscore fails,
+66
+
+67
+00:05:20,680 --> 00:05:26,320
+and you will be able to see only those targeted subdomains like you can see, which are vulnerable.
+67
+
+68
+00:05:27,640 --> 00:05:28,990
+So let's confirm this.
+68
+
+69
+00:05:28,990 --> 00:05:35,680
+If it is vulnerable or no going to the Incognito browser, we can see the target is successfully vulnerable.
+69
+
+70
+00:05:36,220 --> 00:05:39,220
+So I hope you guys understood how you can install this tool.
+70
+
+71
+00:05:39,430 --> 00:05:46,510
+How can you supply your list with the subdomains and identify if the target is vulnerable or no.
+71
+
+72
+00:05:46,720 --> 00:05:47,260
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,400 --> 00:00:04,040
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,790 --> 00:00:11,870
+So in this video, we are going to use one of the tool which is written in gold and is used for identification
+2
+
+3
+00:00:11,870 --> 00:00:14,720
+of subdomain takeover vulnerabilities.
+3
+
+4
+00:00:15,530 --> 00:00:19,280
+Now, as this tool is written in gold, it is faster.
+4
+
+5
+00:00:19,610 --> 00:00:27,140
+And because of its concurrency, it makes our process much more fast to identify multiple subdomains
+5
+
+6
+00:00:27,890 --> 00:00:31,530
+that are vulnerable to subdomain or what vulnerabilities.
+6
+
+7
+00:00:32,420 --> 00:00:39,950
+So let's quickly jump into and see how can you do the installation of the tool and how you can identify
+7
+
+8
+00:00:39,950 --> 00:00:44,240
+targets to be vulnerable to subdomain teakwood when liabilities.
+8
+
+9
+00:00:45,470 --> 00:00:49,900
+For that, you just need to come to this GitHub repository, which is a subject.
+9
+
+10
+00:00:50,330 --> 00:00:55,010
+And you can see over here the installation commands are being given.
+10
+
+11
+00:00:55,700 --> 00:01:00,980
+Now, for this, you need to have go install into your computer as a prerequisite.
+11
+
+12
+00:01:01,430 --> 00:01:06,810
+So, again, if you do not have go installed, please install go Lanco.
+12
+
+13
+00:01:07,340 --> 00:01:13,730
+So after you have installed it, you can simply type the command, which is go get GitHub dot com slash
+13
+
+14
+00:01:14,030 --> 00:01:20,400
+hacker slash subject as given over here to install the latest version of subject.
+14
+
+15
+00:01:21,320 --> 00:01:21,770
+Perfect.
+15
+
+16
+00:01:22,130 --> 00:01:28,590
+So I have done the installation of Sobchak into my computer as I have go preinstalled.
+16
+
+17
+00:01:29,090 --> 00:01:33,340
+So now let's just type subject to see if it is running or not.
+17
+
+18
+00:01:33,830 --> 00:01:40,820
+And you can see you will be able to see Helfman and a usage menu which confirms that it has successfully
+18
+
+19
+00:01:40,820 --> 00:01:41,440
+installed.
+19
+
+20
+00:01:42,470 --> 00:01:43,040
+All right.
+20
+
+21
+00:01:43,100 --> 00:01:51,100
+So now we want to give a list of subdomains to subject for identification of subdomain teakwood one.
+21
+
+22
+00:01:52,430 --> 00:01:57,460
+So now we are going to supply a list of subdomains using the fine domain tool.
+22
+
+23
+00:01:58,160 --> 00:02:02,360
+So the command is fine domain hyphen D, which stands for the target.
+23
+
+24
+00:02:02,900 --> 00:02:09,470
+And we are going to give the target, which is S.R. Secure Dot, X, Y, Z, and we are going to add
+24
+
+25
+00:02:09,470 --> 00:02:11,990
+a flag which is hyphen, hyphen quite.
+25
+
+26
+00:02:12,530 --> 00:02:20,690
+Remember guys, this flag is used when we do not want to see the verbose message or we do not want to
+26
+
+27
+00:02:20,690 --> 00:02:23,540
+see the banner of a fine domain tool.
+27
+
+28
+00:02:24,260 --> 00:02:31,790
+Now whatever will be the output of the fine domain tool, we are going to take that output into a file.
+28
+
+29
+00:02:31,820 --> 00:02:38,660
+We are going to use a command, which is B, and I'm going to open the output into a file with this
+29
+
+30
+00:02:38,660 --> 00:02:39,110
+site.
+30
+
+31
+00:02:39,110 --> 00:02:40,310
+Start the 60.
+31
+
+32
+00:02:41,190 --> 00:02:48,810
+All right, as you can see, we have successfully enumerated all the subdomains for the target into
+32
+
+33
+00:02:48,810 --> 00:02:51,080
+a file called Site Start.
+33
+
+34
+00:02:52,530 --> 00:03:02,040
+Let's count how many subdomains are there and in total of 107 subdomains are there, which we have identified.
+34
+
+35
+00:03:02,430 --> 00:03:02,910
+Perfect.
+35
+
+36
+00:03:03,930 --> 00:03:10,460
+So now we have the list of subdomains to be checked for subdomain, take over one of the abilities.
+36
+
+37
+00:03:11,040 --> 00:03:16,640
+Let's quickly jump on to how to use a subject and its command, as you can see.
+37
+
+38
+00:03:16,860 --> 00:03:23,640
+First, you have to right subject, then followed by Hyphen DeBlois, which stands for the WORDLIST
+38
+
+39
+00:03:23,640 --> 00:03:28,470
+which contains the subdomains and the file is Saitoti.
+39
+
+40
+00:03:29,610 --> 00:03:37,440
+We are going to give that number of threat to be 100 to increase the speed so that we get faster results
+40
+
+41
+00:03:37,680 --> 00:03:40,350
+and then our process gets completed quickly.
+41
+
+42
+00:03:41,700 --> 00:03:44,050
+We are going to give a timeout of 30 seconds.
+42
+
+43
+00:03:44,100 --> 00:03:51,960
+So this timeout is basically when subject is not able to connect to any of the subdomain, it will automatically
+43
+
+44
+00:03:51,960 --> 00:03:55,080
+give up onto that subdomain after 30 seconds.
+44
+
+45
+00:03:55,590 --> 00:04:01,770
+And we are going to see if the output into a file called this result dot text, which is denoted by
+45
+
+46
+00:04:01,770 --> 00:04:09,240
+a flag which is hyphen or and at the end we are given hyphen SSL hyphen.
+46
+
+47
+00:04:09,240 --> 00:04:14,620
+SSL means that also test the website with SSL as well.
+47
+
+48
+00:04:15,510 --> 00:04:24,810
+Now running this command directly on the terminal will start the subdomain decoder scan onto the list
+48
+
+49
+00:04:24,810 --> 00:04:32,580
+of targets into the site started and it was really very quick to identify and you can see it has completed
+49
+
+50
+00:04:32,580 --> 00:04:41,100
+the scan as well for 107 domains in just four to five seconds and has identified that this subdomain
+50
+
+51
+00:04:41,100 --> 00:04:45,930
+is vulnerable, which is Red Mekki 20 dot as articulate X, Y, Z.
+51
+
+52
+00:04:46,260 --> 00:04:54,480
+And we have already seen that this subdomain is vulnerable to Shopify take because we have pointed it
+52
+
+53
+00:04:54,480 --> 00:04:58,460
+to Shopify, but we have not taken over the account.
+53
+
+54
+00:04:59,520 --> 00:05:08,340
+So I hope you guys understood how you can use subject to my skill or identify subdomains for any target
+54
+
+55
+00:05:08,340 --> 00:05:08,970
+program.
+55
+
+56
+00:05:09,180 --> 00:05:09,720
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 11: HTML Injection
+
+0
+1
+00:00:01,260 --> 00:00:04,310
+Hello, everyone, welcome to this video.
+1
+
+2
+00:00:05,250 --> 00:00:16,470
+So I assume till now you have learned about HTML and you know how the basics of HTML work, so it's
+2
+
+3
+00:00:16,470 --> 00:00:25,500
+time to jump into HTML injection attacks and understand how you can find a HTML injection in any target
+3
+
+4
+00:00:25,500 --> 00:00:26,090
+website.
+4
+
+5
+00:00:27,000 --> 00:00:31,530
+Before that, let's understand what exactly is a HTML injection.
+5
+
+6
+00:00:32,190 --> 00:00:40,980
+So it is a type of vulnerability which occurs in Web application that allows users to insert HTML code
+6
+
+7
+00:00:41,340 --> 00:00:48,000
+via specific parameters, which we also call this entry points or injection points.
+7
+
+8
+00:00:48,830 --> 00:00:57,900
+Always remember, HTML injection can only be exploited with the help of social engineering attacks.
+8
+
+9
+00:00:58,320 --> 00:01:08,250
+That basically means we are going to trick valid users of the application to fall for our HTML injected
+9
+
+10
+00:01:08,250 --> 00:01:18,210
+web page so that they give their credentials into our fake login forms or a malicious website so that
+10
+
+11
+00:01:18,210 --> 00:01:20,570
+we capture their cookies and credentials.
+11
+
+12
+00:01:21,270 --> 00:01:21,770
+All right.
+12
+
+13
+00:01:21,780 --> 00:01:30,540
+So now we understand how an HTML injection attack works and how are we going to benefit from this type
+13
+
+14
+00:01:30,540 --> 00:01:31,320
+of attacks.
+14
+
+15
+00:01:32,060 --> 00:01:40,620
+Remember, again, this attack only works with the help of social engineering in which you have to make
+15
+
+16
+00:01:40,620 --> 00:01:48,590
+the victim come and click on your specific links and you assume that he's going to fall for your attack.
+16
+
+17
+00:01:49,920 --> 00:01:53,200
+So let's see a normal search template over here.
+17
+
+18
+00:01:53,850 --> 00:01:57,660
+So this is a very, very simple code from a Target website.
+18
+
+19
+00:01:58,020 --> 00:02:01,790
+wherein, you can see html starts html
+19
+
+20
+00:02:01,810 --> 00:02:09,240
+Close here are the results that match your query for anything that you search on to any target website.
+20
+
+21
+00:02:09,250 --> 00:02:13,620
+So let's say you search for a product that is computer on Amazon.
+21
+
+22
+00:02:13,890 --> 00:02:18,510
+This is how the output is going to look like, which will give you some results.
+22
+
+23
+00:02:18,660 --> 00:02:21,150
+Let the result A and result B.
+23
+
+24
+00:02:22,660 --> 00:02:31,420
+Now the attacker is going to input a query into that search box and you can see this is the query, which
+24
+
+25
+00:02:31,420 --> 00:02:40,600
+looks like it's a H2 tag special offer and there is a giraffe in the background, which basically means
+25
+
+26
+00:02:40,810 --> 00:02:48,350
+that it is going to redirect on the attacker dot site, which is a malicious link.
+26
+
+27
+00:02:48,760 --> 00:02:57,850
+So when the attacker is going to put this link into the search button and it interprets this and gets
+27
+
+28
+00:02:57,850 --> 00:03:05,470
+executed, and if the victim clicks onto that special offer, he will get redirected to the attacker
+28
+
+29
+00:03:05,470 --> 00:03:06,940
+control domain.
+29
+
+30
+00:03:08,170 --> 00:03:16,570
+Now, when the attacker will actually input his query, then how this will look like you can see the
+30
+
+31
+00:03:16,570 --> 00:03:23,920
+code over here, the attacker input query, which redirects to the malicious site, as you can see here
+31
+
+32
+00:03:23,920 --> 00:03:26,020
+are the search results that match your query.
+32
+
+33
+00:03:26,530 --> 00:03:31,510
+There's a special offer and the href is to the attackers website.
+33
+
+34
+00:03:31,960 --> 00:03:39,850
+And when the poor victim will click onto this special offer, he may get redirected to the clone of
+34
+
+35
+00:03:39,850 --> 00:03:40,380
+Amazon.
+35
+
+36
+00:03:40,390 --> 00:03:48,190
+Let's say if it is vulnerable and will end up logging in or doing some sensitive actions which can compromise
+36
+
+37
+00:03:48,430 --> 00:03:51,100
+his integrity or confidentiality.
+37
+
+38
+00:03:53,020 --> 00:03:58,390
+So it is the practical time and let's see how you can demonstrate this type of attack.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,870 --> 00:00:08,670
+Hello, everyone, welcome to this video, and we are going to see a practical demonstration of HTML
+1
+
+2
+00:00:08,670 --> 00:00:14,660
+injection onto a lab website, which is testphp dot vulnweb dot com.
+2
+
+3
+00:00:15,390 --> 00:00:21,330
+So once you come onto this particular website, you can see here on the left hand side, there's a search
+3
+
+4
+00:00:21,330 --> 00:00:21,780
+button.
+4
+
+5
+00:00:22,500 --> 00:00:27,370
+And when you hit go, you will be able to search anything that you type over here.
+5
+
+6
+00:00:27,960 --> 00:00:34,950
+So, for example, let's say I type testing for HTML injection and hit go. You can see
+6
+
+7
+00:00:34,950 --> 00:00:39,530
+It is getting reflected over here and there is nothing fancy.
+7
+
+8
+00:00:39,540 --> 00:00:42,430
+It is just simply getting reflected.
+8
+
+9
+00:00:43,280 --> 00:00:51,480
+Now what if I copy a code which is a HTML code of image source, as you can see over here.
+9
+
+10
+00:00:51,840 --> 00:00:52,920
+And what is the source?
+10
+
+11
+00:00:53,280 --> 00:00:56,820
+The source is from the attacker controlled website.
+11
+
+12
+00:00:57,100 --> 00:00:58,670
+As you can see for demonstration.
+12
+
+13
+00:00:58,680 --> 00:01:02,940
+I have put srsecure.xyz and into uploads directory
+13
+
+14
+00:01:02,940 --> 00:01:06,000
+I have uploaded an image which is Hacktify.png
+14
+
+15
+00:01:07,170 --> 00:01:13,790
+So let me just copy this go here and paste it over here and hit  go, so let's see what happens.
+15
+
+16
+00:01:14,460 --> 00:01:22,740
+You can see the HTML code is successfully executed and the image is successfully loaded over here,
+16
+
+17
+00:01:23,190 --> 00:01:25,060
+which should not have happened.
+17
+
+18
+00:01:25,500 --> 00:01:34,300
+Now, as you can see, it says your website is hacked by Hacktify and kindly go to evil dot com.
+18
+
+19
+00:01:34,920 --> 00:01:40,880
+Similarly, I have created one more HTML code, so let's copy this and put it over here.
+19
+
+20
+00:01:41,310 --> 00:01:48,930
+So what's into this you can see there is an input type button, so obviously we are going to get a button and
+20
+
+21
+00:01:49,230 --> 00:01:55,360
+we have given on click, which basically means when the button is clicked, location.href
+21
+
+22
+00:01:55,360 --> 00:02:04,530
+which means redirect to evil dot com and print the button value to log into a new website so the victim
+22
+
+23
+00:02:04,530 --> 00:02:13,200
+will get tricked over here and he will think like the button is for the link to the new website.
+23
+
+24
+00:02:13,210 --> 00:02:20,250
+And once he clicks on it, he's going to get redirected onto the attacker controlled website, as you can
+24
+
+25
+00:02:20,250 --> 00:02:21,360
+see over here.
+25
+
+26
+00:02:21,810 --> 00:02:28,950
+And there can be an exact replica onto the attackers controlled domain or website through which the
+26
+
+27
+00:02:28,950 --> 00:02:36,050
+victim will not know that he or she has been redirected to a fake attacker controlled Web site.
+27
+
+28
+00:02:36,630 --> 00:02:40,350
+Now you can see there is a button which says login to the new website.
+28
+
+29
+00:02:40,350 --> 00:02:46,650
+So I'm going to click on this and you can see we have redirected to evil dot com because that is what
+29
+
+30
+00:02:46,650 --> 00:02:48,570
+we wrote into our code.
+30
+
+31
+00:02:49,380 --> 00:02:54,720
+Now, you can do a lot of tweaking with this code.
+31
+
+32
+00:02:54,720 --> 00:03:00,570
+As you can see over here, I have tried to change the style in which I have given the height and the
+32
+
+33
+00:03:00,570 --> 00:03:08,700
+width as well as well as I'm giving a color while you can just do this little bit of changes and tweaks
+33
+
+34
+00:03:08,700 --> 00:03:16,430
+according to the website template, so the victim get tricked in clicking that particular button.
+34
+
+35
+00:03:16,890 --> 00:03:19,650
+So here I have choose the color green.
+35
+
+36
+00:03:19,650 --> 00:03:26,070
+You can choose any color you want, according to the website, as you can see, everything, all the
+36
+
+37
+00:03:26,070 --> 00:03:27,990
+links all here are into blue.
+37
+
+38
+00:03:28,020 --> 00:03:30,260
+You can choose this blue as well.
+38
+
+39
+00:03:30,600 --> 00:03:36,840
+So the victim gets tricked into clicking the particular button that you have created.
+39
+
+40
+00:03:37,220 --> 00:03:43,080
+As you can see, we have also increased the size for the button.
+40
+
+41
+00:03:43,080 --> 00:03:44,310
+Now it says log into the new website.
+41
+
+42
+00:03:44,310 --> 00:03:50,000
+And when I click it, I will again get redirected onto the attackers control Web site.
+42
+
+43
+00:03:50,490 --> 00:03:56,720
+So this was a very, very basic example or demonstration for 
+HTML injection attacks.
+43
+
+44
+00:03:57,150 --> 00:04:05,070
+You can follow the POC and try to identify the similar kind of entry points or injection point into
+44
+
+45
+00:04:05,070 --> 00:04:08,490
+any target website to find HTML Injection.
+45
+
+46
+00:04:09,370 --> 00:04:16,530
+One more thing I would like to share is in many cases, whenever you try to sign up onto any target
+46
+
+47
+00:04:16,530 --> 00:04:22,560
+website at that particular point of time, when you give your name, the first name and the last name
+47
+
+48
+00:04:22,890 --> 00:04:31,260
+there, also you can try to input the HTML tags and you must have noticed that you get an email verification
+48
+
+49
+00:04:31,260 --> 00:04:37,680
+link or let's say you get a template message which says, Hi, Rohit, welcome on XYZ website.
+49
+
+50
+00:04:38,220 --> 00:04:44,490
+And that particular time with those first name, last name fields, if you give HTML tags and you
+50
+
+51
+00:04:44,490 --> 00:04:54,900
+see there is a HTML tag, getting executed into the email that you have received is also an indication
+51
+
+52
+00:04:54,900 --> 00:04:59,740
+of HTML injection of valid vulnerability may exist onto
+52
+
+53
+00:04:59,870 --> 00:05:01,740
+that target from application.
+53
+
+54
+00:05:02,440 --> 00:05:03,970
+So I hope you guys understood this.
+54
+
+55
+00:05:04,330 --> 00:05:04,900
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:02,180 --> 00:00:03,030
+Hello, everyone.
+1
+
+2
+00:00:03,800 --> 00:00:09,350
+So in this video, we are going to see a HTML injection onto a live Web site.
+2
+
+3
+00:00:10,250 --> 00:00:14,880
+So as you already know, what is HTML Injection
+3
+
+4
+00:00:15,620 --> 00:00:25,490
+We are going to insert our HTML tags into any injection point onto the target application and
+4
+
+5
+00:00:25,490 --> 00:00:30,260
+of the Web application interprets or executes our tags,
+5
+
+6
+00:00:30,440 --> 00:00:34,010
+Then it is vulnerable to HTML injection attack.
+6
+
+7
+00:00:34,790 --> 00:00:36,050
+As you can see over here,
+7
+
+8
+00:00:36,380 --> 00:00:43,430
+The tags that I have written is the H1 tag, the heading one tag in which I have written Rohit as
+8
+
+9
+00:00:43,430 --> 00:00:46,510
+a heading and heading tag closed.
+9
+
+10
+00:00:46,520 --> 00:00:55,850
+So I'm going to copy this and I'm going to go on to a website which is online learning harvard dot edu,
+10
+
+11
+00:00:55,850 --> 00:00:59,420
+as you can see over here, and there is a search box over here.
+11
+
+12
+00:00:59,870 --> 00:01:02,990
+So it is considered as my entry point.
+12
+
+13
+00:01:03,590 --> 00:01:10,310
+As you can see, I'm not able to find any results over here, so I'm going to change the H1 tag to let's
+13
+
+14
+00:01:10,310 --> 00:01:12,920
+say H2 too tag and hit enter.
+14
+
+15
+00:01:13,640 --> 00:01:16,580
+Let's see if it is getting executed or not.
+15
+
+16
+00:01:16,580 --> 00:01:18,490
+And yes, it got executed.
+16
+
+17
+00:01:19,070 --> 00:01:25,880
+Now, if I change the tags and if I see if anything changes into the search query.
+17
+
+18
+00:01:27,520 --> 00:01:36,940
+Let's see this and you can see it got changed, which means the target web application is actually interpreting
+18
+
+19
+00:01:36,940 --> 00:01:46,400
+and executing whatever has been given as a query, which indicates that this is vulnerable to HTML
+19
+
+20
+00:01:46,450 --> 00:01:47,070
+injection.
+20
+
+21
+00:01:47,560 --> 00:01:56,800
+As you can see, when I used it H2 H3 H4, it kept on changing the search query that I am heading
+21
+
+22
+00:01:56,800 --> 00:01:58,040
+into the search box.
+22
+
+23
+00:01:58,600 --> 00:01:59,110
+All right,
+23
+
+24
+00:01:59,870 --> 00:02:06,580
+So I have created an image over here, as you can see, and I have hosted this onto the target website,
+24
+
+25
+00:02:07,570 --> 00:02:17,170
+which is my web site, and I'm going to give the path of that particular image into the entry point,
+25
+
+26
+00:02:17,170 --> 00:02:18,030
+which is over here.
+26
+
+27
+00:02:18,050 --> 00:02:21,580
+So I'm going to give this and I'm going to search for it.
+27
+
+28
+00:02:21,910 --> 00:02:31,930
+And I will see if this Harvard University Web site is able to load the particular image that I have
+28
+
+29
+00:02:32,050 --> 00:02:33,970
+hosted onto my Web site.
+29
+
+30
+00:02:34,300 --> 00:02:38,540
+And if it loads it, then this vulnerable to HTML Injection.
+30
+
+31
+00:02:39,310 --> 00:02:44,260
+Now, if you remember for this, we use the image source tags.
+31
+
+32
+00:02:44,740 --> 00:02:53,830
+So you can see over here I have used the image source tags, which you can see over here the entry point
+32
+
+33
+00:02:53,830 --> 00:02:56,770
+or the injection point is keywords equals to,
+33
+
+34
+00:02:57,100 --> 00:02:59,630
+And what is the keyword that has been searched for?
+34
+
+35
+00:02:59,680 --> 00:03:07,540
+It is image source equals to srsecure.xyz/uploads/Hacktify.png
+35
+
+36
+00:03:08,080 --> 00:03:11,540
+And the successful image is getting loaded over here.
+36
+
+37
+00:03:12,010 --> 00:03:16,320
+So this indicates the website is vulnerable to HTML injection.
+37
+
+38
+00:03:16,660 --> 00:03:24,820
+And now if this particular URL is being shared with anyone, they may come across this Web page
+38
+
+39
+00:03:25,090 --> 00:03:32,410
+and they will think like, all right, this website is down and they may get tricked in going to evil
+39
+
+40
+00:03:32,440 --> 00:03:33,160
+dot com.
+40
+
+41
+00:03:33,490 --> 00:03:41,350
+And if they go to that particular evil dot com and submit their credentials, then it will compromise
+41
+
+42
+00:03:41,350 --> 00:03:44,810
+their confidentiality and integrity.
+42
+
+43
+00:03:45,310 --> 00:03:50,330
+So I have pasted the link over here, which we are trying to load.
+43
+
+44
+00:03:50,620 --> 00:03:56,310
+So this is because it is getting loaded over here and this is how it looks like.
+44
+
+45
+00:03:56,740 --> 00:03:58,360
+So I hope you guys understood this.
+45
+
+46
+00:03:59,050 --> 00:03:59,650
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 12: Click Jacking
+
+0
+1
+00:00:01,290 --> 00:00:02,160
+Hello, everyone.
+1
+
+2
+00:00:03,330 --> 00:00:10,560
+So in this video, we are going to see one of the proof of concept for click jacking type of attack.
+2
+
+3
+00:00:11,850 --> 00:00:20,280
+So in this video, we will see how you can identify if any website is vulnerable to click jacking attack,
+3
+
+4
+00:00:21,090 --> 00:00:31,080
+how you can practically code a click jacking vulnerable POC and test for any website if it loads
+4
+
+5
+00:00:31,080 --> 00:00:36,570
+into your POC code to confirm the website is vulnerable to click jacking.
+5
+
+6
+00:00:37,170 --> 00:00:38,520
+So let's quickly see this.
+6
+
+7
+00:00:39,120 --> 00:00:46,080
+So here we have taken a live target in which it is an ice cream website.
+7
+
+8
+00:00:46,800 --> 00:00:55,200
+So I'm going to load this website into my vulnerable POC code to confirm if there exists a click jacking
+8
+
+9
+00:00:55,200 --> 00:00:56,010
+vulnerability.
+9
+
+10
+00:00:57,480 --> 00:01:05,220
+So as you can see, I have successfully loaded the target and it is getting loaded over here Now.
+10
+
+11
+00:01:05,700 --> 00:01:07,770
+I will copy the URL from here,
+11
+
+12
+00:01:08,190 --> 00:01:14,090
+And this is the POC code, which I have saved into my favorite text editor.
+12
+
+13
+00:01:14,970 --> 00:01:18,330
+You can choose as per your preference, whatever you like.
+13
+
+14
+00:01:18,690 --> 00:01:26,880
+Also, you can save it into your conventional notepad or notepad plus plus if you have not installed
+14
+
+15
+00:01:26,880 --> 00:01:27,470
+sublime.
+15
+
+16
+00:01:28,320 --> 00:01:28,950
+All right.
+16
+
+17
+00:01:29,220 --> 00:01:36,000
+Now, quickly, let's understand the code what actually we have written and we are able to do the click
+17
+
+18
+00:01:36,000 --> 00:01:36,390
+jack.
+18
+
+19
+00:01:37,650 --> 00:01:44,210
+As you can see over here, we have the Click Jack Test page, which is basically the click jacking attack.
+19
+
+20
+00:01:44,700 --> 00:01:48,390
+So we have started with the HTML and HTML close.
+20
+
+21
+00:01:48,670 --> 00:01:58,680
+This is basically the boilerplate which says that this is a HTML file then head, title we have given.
+21
+
+22
+00:01:59,340 --> 00:02:01,260
+We have closed the head, body.
+22
+
+23
+00:02:01,590 --> 00:02:08,580
+A paragraph which says website is vulnerable to click jacking and the most important part, which is the
+23
+
+24
+00:02:08,580 --> 00:02:16,740
+iframe, as you can see over here, we have given the iframe src, which is the iframe source of the
+24
+
+25
+00:02:16,740 --> 00:02:21,990
+website that we want to test on to confirm if it is vulnerable.
+25
+
+26
+00:02:22,710 --> 00:02:29,780
+And just for the convenience, we have given the width and the height as five hundred and five hundred.
+26
+
+27
+00:02:30,540 --> 00:02:35,400
+Now you just have to save this particular code with the name.
+27
+
+28
+00:02:35,760 --> 00:02:40,190
+Anything that you want an extension as dot HTML.
+28
+
+29
+00:02:41,130 --> 00:02:46,230
+Once you have saved this file you have to open this with your browser.
+29
+
+30
+00:02:46,710 --> 00:02:52,110
+So I have saved this with the name as click jack underscore poc dot html.
+30
+
+31
+00:02:52,710 --> 00:03:01,830
+Now when I open it with the browser you can see over here iframe gets loaded with 500 pixels of height
+31
+
+32
+00:03:02,070 --> 00:03:11,340
+and 500 pixels of breadth and the website successfully gets loaded into our iframe which thus confirms
+32
+
+33
+00:03:11,340 --> 00:03:16,200
+the existence of the vulnerability onto the particular target.
+33
+
+34
+00:03:16,740 --> 00:03:20,760
+So I hope you guys understood how to do this particular POC.
+34
+
+35
+00:03:20,940 --> 00:03:28,350
+It was very quick and pretty simple to identify if any website is vulnerable to the click jacking attack
+35
+
+36
+00:03:28,350 --> 00:03:29,250
+through the POC.
+36
+
+37
+00:03:29,670 --> 00:03:30,180
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,410 --> 00:00:03,960
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,590 --> 00:00:12,040
+So in this video, we are going to see how you can identify if any website is vulnerable to click jacking
+2
+
+3
+00:00:12,060 --> 00:00:14,710
+attack through an automated way.
+3
+
+4
+00:00:15,510 --> 00:00:20,520
+We have already seen how to do this with the help of a manual code.
+4
+
+5
+00:00:20,940 --> 00:00:27,900
+But in case you do not have much time to check it with the help of the manual code, you can always
+5
+
+6
+00:00:27,900 --> 00:00:30,160
+do it using a much faster way.
+6
+
+7
+00:00:30,810 --> 00:00:34,830
+So we are going to see such a way into this video.
+7
+
+8
+00:00:35,730 --> 00:00:42,690
+So for this, I'm going to choose a life target, which is a Rolling Stones dot com.
+8
+
+9
+00:00:43,140 --> 00:00:50,370
+Now, as you can see, I have successfully loaded this website onto my browser and it looks something
+9
+
+10
+00:00:50,370 --> 00:00:50,940
+like this.
+10
+
+11
+00:00:51,890 --> 00:00:58,370
+Now, I want to test if this particular website is vulnerable to the click jacking attack, so I'm going
+11
+
+12
+00:00:58,370 --> 00:00:59,990
+to copy its URL.
+12
+
+13
+00:01:00,440 --> 00:01:07,490
+So once I have copied this URL I'm going to log on onto our website, which is Samy Dot PL
+13
+
+14
+00:01:07,760 --> 00:01:12,560
+Slash, quick jack slash quick jack dot HTML.
+14
+
+15
+00:01:13,040 --> 00:01:17,550
+So this particular website is on the go
+15
+
+16
+00:01:17,750 --> 00:01:21,920
+Proof of concept for click jacking based attacks.
+16
+
+17
+00:01:23,180 --> 00:01:31,250
+So once you have loaded this website successfully on the left hand top box, you can see there is a
+17
+
+18
+00:01:31,250 --> 00:01:32,540
+search field.
+18
+
+19
+00:01:32,960 --> 00:01:37,680
+Now over here you have to give your target and simply hit go.
+19
+
+20
+00:01:38,300 --> 00:01:46,190
+So as you can see onto the screen, I have pasted the target that I want to test for if it is vulnerable
+20
+
+21
+00:01:46,190 --> 00:01:46,830
+or no.
+21
+
+22
+00:01:47,570 --> 00:01:51,120
+So I'm going to paste it and I'm going to hit go.
+22
+
+23
+00:01:53,150 --> 00:01:59,420
+So once I hit go, I have to wait for the website to successfully load.
+23
+
+24
+00:01:59,960 --> 00:02:06,320
+And you can see that it has been successfully loaded onto the Web site.
+24
+
+25
+00:02:06,470 --> 00:02:08,030
+That is samy dot pl.
+25
+
+26
+00:02:08,450 --> 00:02:15,800
+So this confirms again that this website is vulnerable to click jacking attack as it is successfully
+26
+
+27
+00:02:15,800 --> 00:02:17,390
+loading into an iFrame.
+27
+
+28
+00:02:18,350 --> 00:02:26,600
+So to understand what actually is happening behind the hood, nothing fancy the website runs a iframe
+28
+
+29
+00:02:26,600 --> 00:02:33,170
+in the background and tries to load the target that we want to test for if it is vulnerable to click
+29
+
+30
+00:02:33,170 --> 00:02:33,620
+jacking.
+30
+
+31
+00:02:34,770 --> 00:02:41,760
+And once it is loaded into the iframe, we will be able to see the particular website onto your screen.
+31
+
+32
+00:02:42,480 --> 00:02:44,020
+So this is it for this video.
+32
+
+33
+00:02:44,040 --> 00:02:52,020
+I hope you guys and told how you can test for multiple websites on the go quickly using samy dot pl
+33
+
+34
+00:02:52,260 --> 00:02:54,560
+if they are vulnerable to click jacking.
+34
+
+35
+00:02:54,810 --> 00:02:55,410
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,360 --> 00:00:04,510
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:05,450 --> 00:00:12,930
+So till now, we have been pretty much confident in identifying click jacking based vulnerabilities.
+2
+
+3
+00:00:13,490 --> 00:00:21,950
+So now here we have one more alternative to identify click jacking based when vulnerabilities quickly
+3
+
+4
+00:00:21,950 --> 00:00:22,610
+on the go.
+4
+
+5
+00:00:23,300 --> 00:00:32,030
+So here we have our Target website, which is TechCrunch dot com, and we are going to see if this website
+5
+
+6
+00:00:32,030 --> 00:00:33,600
+is vulnerable to click jacking.
+6
+
+7
+00:00:34,010 --> 00:00:36,880
+So simply first, I'm going to copy the URL.
+7
+
+8
+00:00:37,220 --> 00:00:42,020
+So we are going to test this later on to identify if it is vulnerable or not.
+8
+
+9
+00:00:42,680 --> 00:00:52,430
+So for this, you can log on to security headers dot com, which basically kinds of probes out all the
+9
+
+10
+00:00:52,430 --> 00:00:59,070
+security headers which have been associated with any particular Web site.
+10
+
+11
+00:00:59,600 --> 00:01:06,350
+So basically, as you can see, there is a big scan button over here where you need to enter the address
+11
+
+12
+00:01:06,380 --> 00:01:07,910
+of the target Web site.
+12
+
+13
+00:01:08,150 --> 00:01:18,050
+And hit scan therefore, once you do that, this website will basically scan all the target security headers
+13
+
+14
+00:01:18,410 --> 00:01:25,640
+onto the target Web site to identify if it fits in any of these columns.
+14
+
+15
+00:01:25,640 --> 00:01:33,200
+As you can see, it says Hall of Fame or Hall of Shame, in case it has all the required security headers
+15
+
+16
+00:01:33,500 --> 00:01:37,880
+then it is going to give a grade based on the headers present.
+16
+
+17
+00:01:38,090 --> 00:01:44,150
+And if it misses any of the headers and it is going to put it into the column of Hall of Shame, which
+17
+
+18
+00:01:44,150 --> 00:01:49,030
+basically means the security is low and there are no headers present.
+18
+
+19
+00:01:49,520 --> 00:01:51,590
+So let's quickly see how do we do it.
+19
+
+20
+00:01:52,730 --> 00:01:58,200
+So once you're onto this target Web site, kindly enter the target over here.
+20
+
+21
+00:01:58,220 --> 00:02:02,350
+So I'm going to enter the target over here and hit on scan.
+21
+
+22
+00:02:02,960 --> 00:02:09,260
+So as I said that we are going to see a grade based on the security headers.
+22
+
+23
+00:02:09,530 --> 00:02:15,140
+And you we have seen that the grade that has been given is a grade of F.
+23
+
+24
+00:02:15,620 --> 00:02:23,780
+That basically means that the website TechCrunch dot com misses all the required and necessary security
+24
+
+25
+00:02:23,780 --> 00:02:24,320
+headers.
+25
+
+26
+00:02:24,620 --> 00:02:32,840
+Thus it lies into the column of Hall of Shame, which basically means there is a lack of a security.
+26
+
+27
+00:02:33,960 --> 00:02:39,930
+And now here we can observe the most important thing that we want to look on, which is the
+27
+
+28
+00:02:39,930 --> 00:02:47,820
+X-Frame options, and you can see there is a red cross over there, which confirms that this website will be
+28
+
+29
+00:02:47,840 --> 00:02:53,580
+vulnerable to click jacking as there is no X-Frame options. Moving down,
+29
+
+30
+00:02:53,790 --> 00:03:00,480
+If you want to read about any of the security headers or what they actually mean, you can read it over
+30
+
+31
+00:03:00,480 --> 00:03:08,200
+here into the documentation part there has been an excellent one liner for each of the security
+31
+
+32
+00:03:08,200 --> 00:03:10,770
+headers, which you can read from here and understand.
+32
+
+33
+00:03:11,100 --> 00:03:18,170
+And also they have given the mitigations of what will happen if you implement these headers.
+33
+
+34
+00:03:18,600 --> 00:03:25,290
+So I hope you guys understood how you can utilize this website on the go to identify multiple websites
+34
+
+35
+00:03:25,800 --> 00:03:33,420
+in case they lack any of the security headers to give a grade which ranges from A to F.
+35
+
+36
+00:03:33,640 --> 00:03:34,230
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,660 --> 00:00:01,510
+Hello, everyone.
+1
+
+2
+00:00:02,310 --> 00:00:09,120
+So in this video, we are going to see unmitigated website against click jacking.
+2
+
+3
+00:00:09,690 --> 00:00:14,030
+So we have already seen multiple websites which are vulnerable to click jacking.
+3
+
+4
+00:00:14,720 --> 00:00:23,070
+Now, in case you come across any website which actually defends click jacking by putting the necessary
+4
+
+5
+00:00:23,070 --> 00:00:27,200
+protection in place, how you're going to identify that.
+5
+
+6
+00:00:27,690 --> 00:00:35,970
+So for that, I have put this video in which we are going to identify if the website is not vulnerable
+6
+
+7
+00:00:35,970 --> 00:00:38,880
+to click jacking using multiple ways.
+7
+
+8
+00:00:39,570 --> 00:00:41,580
+The website is starbucks dot in.
+8
+
+9
+00:00:42,810 --> 00:00:51,030
+All right, so first we may identify the website is vulnerable or not vulnerable using the network
+9
+
+10
+00:00:51,030 --> 00:00:51,430
+tab.
+10
+
+11
+00:00:52,080 --> 00:00:58,920
+So as you can see, I opened the network tab with the help of Right Click Inspect Element.
+11
+
+12
+00:00:58,920 --> 00:01:03,870
+And you can come over here. Now into the network tab
+12
+
+13
+00:01:04,020 --> 00:01:11,490
+when you are there, you just need to reload the website again and you will be able to see all the request
+13
+
+14
+00:01:11,490 --> 00:01:13,110
+and response over here.
+14
+
+15
+00:01:13,880 --> 00:01:16,490
+Now just click on to the first request.
+15
+
+16
+00:01:16,500 --> 00:01:22,770
+That is the starbucks dot in which you can see over here and once you click on that.
+16
+
+17
+00:01:24,460 --> 00:01:32,410
+You will be able to see all the necessary headers that are present into that particular request.
+17
+
+18
+00:01:33,040 --> 00:01:40,840
+So as you can see over here, there is a header which is present which says X Frame options, same origin.
+18
+
+19
+00:01:41,170 --> 00:01:48,380
+And we have already seen that directives for click jacking and X-Frame options.
+19
+
+20
+00:01:48,670 --> 00:01:56,410
+So this is one of the directive that fits into the protection of click jacking and thus we can confirm
+20
+
+21
+00:01:56,800 --> 00:02:00,220
+this website is not vulnerable to click jacking attack.
+21
+
+22
+00:02:01,000 --> 00:02:01,450
+All right.
+22
+
+23
+00:02:02,230 --> 00:02:10,080
+Let's try the other way around, which is through the code that we have made to identify and make POC's
+23
+
+24
+00:02:10,090 --> 00:02:11,150
+for click jacking.
+24
+
+25
+00:02:11,680 --> 00:02:18,730
+So I'm just going to put our target over here which is starbucks dot in and I'm going to save the code
+25
+
+26
+00:02:19,000 --> 00:02:23,350
+so once I have saved the code, I'm going to open it with my browser.
+26
+
+27
+00:02:23,740 --> 00:02:28,690
+And you can see there would be an error which says refused to connect.
+27
+
+28
+00:02:29,110 --> 00:02:30,760
+Why is this error coming?
+28
+
+29
+00:02:30,970 --> 00:02:39,760
+Because the Target website, which is starbucks dot in is not allowed to get opened into an iframe
+29
+
+30
+00:02:40,060 --> 00:02:47,860
+because we have seen the protection that was X-Frame Options Directive, which says Same Origin, and
+30
+
+31
+00:02:47,860 --> 00:02:54,190
+this is a different origin, which is basically our localhost machine and it is not allowed to open
+31
+
+32
+00:02:54,430 --> 00:02:58,270
+that target website into our new iframe.
+32
+
+33
+00:02:59,860 --> 00:03:06,430
+All right, let's see another way to identify if the website is not vulnerable as we have already used
+33
+
+34
+00:03:06,430 --> 00:03:09,800
+samy dot pl to make quick POC's on the go.
+34
+
+35
+00:03:10,120 --> 00:03:13,500
+Let's see if we are able to open up it over here or not.
+35
+
+36
+00:03:13,960 --> 00:03:19,450
+And you can see we will get the same result and it refused to connect.
+36
+
+37
+00:03:20,200 --> 00:03:26,470
+And the last one which we have seen, which is the security headers, let's try to identify all here
+37
+
+38
+00:03:26,470 --> 00:03:26,950
+as well.
+38
+
+39
+00:03:27,490 --> 00:03:35,860
+And you can see once I hit scan, there is a security header which is present that is X-Frame options
+39
+
+40
+00:03:36,010 --> 00:03:44,440
+that you can see over here because of which we can confirm that click jacking is not present on this
+40
+
+41
+00:03:44,440 --> 00:03:45,510
+target web site.
+41
+
+42
+00:03:46,000 --> 00:03:53,470
+So I hope you guys understood the four ways that we saw to identify if any website is vulnerable
+42
+
+43
+00:03:53,470 --> 00:03:55,240
+to this attack or not.
+43
+
+44
+00:03:55,600 --> 00:03:56,140
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,670 --> 00:00:04,370
+Hello, everyone, welcome to this video.
+1
+
+2
+00:00:05,300 --> 00:00:12,620
+So in this video, we are going to see how you can increase the severity of click jacking attack.
+2
+
+3
+00:00:13,100 --> 00:00:20,990
+As we all know that whenever you identify a click jacking based vulnerability into any target web application
+3
+
+4
+00:00:21,470 --> 00:00:27,460
+at that particular point of time, this vulnerability is considered as a low one vulnerability.
+4
+
+5
+00:00:28,130 --> 00:00:36,110
+But in case you are able to identify any sensitive action onto the target web application or you are
+5
+
+6
+00:00:36,110 --> 00:00:45,860
+able to do any sensitive action onto the target Web site, then the severity jumps to a high or medium
+6
+
+7
+00:00:45,860 --> 00:00:46,230
+level.
+7
+
+8
+00:00:47,420 --> 00:00:57,290
+So it depends how you can utilize Click Jacking to perform a sensitive action and bump the severity
+8
+
+9
+00:00:57,290 --> 00:00:59,490
+of the Target website.
+9
+
+10
+00:01:00,350 --> 00:01:08,030
+So for that, we have created a particular tool which is going to help you to increase the severity
+10
+
+11
+00:01:08,030 --> 00:01:10,520
+of click jacking based attacks.
+11
+
+12
+00:01:11,180 --> 00:01:20,180
+Now, as you can see onto the screen, there are three buttons, namely Drag Me, which is a login button.
+12
+
+13
+00:01:20,540 --> 00:01:24,850
+Here you can see an email button and you can see drag me passwords.
+13
+
+14
+00:01:25,070 --> 00:01:32,330
+So the main scenario that we are going to create over here is we are going to drag these buttons on
+14
+
+15
+00:01:32,330 --> 00:01:39,800
+to an actual vulnerable target web application and we are going to put these email and password and login
+15
+
+16
+00:01:39,800 --> 00:01:43,840
+buttons over the target web applications actual button.
+16
+
+17
+00:01:44,090 --> 00:01:51,140
+And we are going to impersonate the target web application and then we are going to exploit the click
+17
+
+18
+00:01:51,140 --> 00:01:55,500
+jacking scenario. Now before doing this
+18
+
+19
+00:01:55,520 --> 00:02:00,850
+let's understand how you can utilize this so that you will be able to understand.
+19
+
+20
+00:02:01,640 --> 00:02:06,860
+Now, I have opened this particular tool from my localhost machine.
+20
+
+21
+00:02:06,880 --> 00:02:12,080
+As you can see, the URL which is users rohit desktop work
+21
+
+22
+00:02:12,380 --> 00:02:19,010
+udemy course clickjack tool and index dot html. So I will just reload this again to confirm.
+22
+
+23
+00:02:19,770 --> 00:02:26,990
+Now you can see this particular tool is running a index.html file. So I'm going to attach the code.
+23
+
+24
+00:02:27,410 --> 00:02:29,110
+So with a description.
+24
+
+25
+00:02:29,120 --> 00:02:32,670
+So you guys, you guys can use it from the resources section.
+25
+
+26
+00:02:33,230 --> 00:02:37,730
+Now once you have run this, it is going to open something like this.
+26
+
+27
+00:02:37,940 --> 00:02:44,420
+Now, let's try to load a vulnerable website over here where you can see URL.
+27
+
+28
+00:02:44,720 --> 00:02:52,370
+So let me just quickly open a vulnerable web application for demonstration.
+28
+
+29
+00:02:52,400 --> 00:02:59,510
+I'm going to choose this vulnerable application test php dot vulnweb dot com and I'm going to
+29
+
+30
+00:02:59,510 --> 00:03:00,860
+click on load.
+30
+
+31
+00:03:01,160 --> 00:03:06,730
+Once I click on Load, it is going to load it into the background, as you can see over here.
+31
+
+32
+00:03:07,040 --> 00:03:12,350
+So I'm going to drag this onto the right hand side so you can clearly see the website over here.
+32
+
+33
+00:03:12,590 --> 00:03:16,160
+So now this website has successfully loaded into an iframe.
+33
+
+34
+00:03:16,760 --> 00:03:22,350
+Now I'm going to click on your profile so it asks me to login.
+34
+
+35
+00:03:22,670 --> 00:03:25,600
+Now, this is a sensitive action, which is to login.
+35
+
+36
+00:03:25,970 --> 00:03:26,450
+All right.
+36
+
+37
+00:03:26,750 --> 00:03:32,560
+Now, what I'm going to do is I'm I'm going to craft my click jacking POC over here.
+37
+
+38
+00:03:32,900 --> 00:03:36,860
+So let me just drag this email onto the user name part.
+38
+
+39
+00:03:37,010 --> 00:03:43,920
+As you can see over here, you have to match this particular white field about exactly the username field.
+39
+
+40
+00:03:43,980 --> 00:03:45,840
+So let me just put it over here.
+40
+
+41
+00:03:46,370 --> 00:03:52,730
+You do not need to be perfect into this, but you just need to put it above that.
+41
+
+42
+00:03:53,150 --> 00:03:57,260
+Let's drag the password button and let's keep it over here as well.
+42
+
+43
+00:03:57,800 --> 00:03:58,910
+Now, the login one.
+43
+
+44
+00:03:59,480 --> 00:04:01,870
+Let's keep it over here.
+44
+
+45
+00:04:02,360 --> 00:04:02,870
+All right.
+45
+
+46
+00:04:02,900 --> 00:04:11,990
+Now it looks perfect and we are going to craft this so that we basically can show the impact or demonstration
+46
+
+47
+00:04:11,990 --> 00:04:17,540
+of click jacking attack onto this Web application to increase the severity.
+47
+
+48
+00:04:18,170 --> 00:04:22,220
+Now, once you have done this, you just need to click on load.
+48
+
+49
+00:04:22,370 --> 00:04:24,410
+So I'm sorry.
+49
+
+50
+00:04:24,410 --> 00:04:26,220
+You just need to click on View.
+50
+
+51
+00:04:26,330 --> 00:04:31,370
+So once you click on View, you will be able to see a new sandbox dot
+51
+
+52
+00:04:31,370 --> 00:04:35,000
+HTML page has successfully opened automatically.
+52
+
+53
+00:04:35,480 --> 00:04:43,010
+And you can see there are two fields which are overlapping or overlaying on to the previous field,
+53
+
+54
+00:04:43,010 --> 00:04:44,180
+as you can see over here.
+54
+
+55
+00:04:44,780 --> 00:04:47,720
+Now, once the user logs in over here.
+55
+
+56
+00:04:47,810 --> 00:04:57,860
+So let me show you by giving a user name, test and password as admin and hit signing and let's see
+56
+
+57
+00:04:57,860 --> 00:04:58,430
+what happens.
+57
+
+58
+00:04:58,910 --> 00:05:01,070
+So once I click assigning, you can see.
+58
+
+59
+00:05:01,280 --> 00:05:06,600
+This page says captured credentials are username as test and password is admin.
+59
+
+60
+00:05:06,830 --> 00:05:14,270
+So this way, the attacker is able to capture the credentials and the credentials that we used was username
+60
+
+61
+00:05:15,020 --> 00:05:16,210
+test and password admin.
+61
+
+62
+00:05:16,490 --> 00:05:25,530
+So like this in this scenario, if any victim logs in over here, then he is going to give out his credentials.
+62
+
+63
+00:05:25,940 --> 00:05:31,880
+So this is one of the best way to demonstrate the vulnerability that you are able to steal the credentials
+63
+
+64
+00:05:31,880 --> 00:05:34,850
+of any user using click jacking.
+64
+
+65
+00:05:34,880 --> 00:05:41,400
+So this jumps the severity from low to high and this is how you do it.
+65
+
+66
+00:05:42,030 --> 00:05:52,190
+Now, for some cases, how are you going to receive these credentials onto the attackers place or to
+66
+
+67
+00:05:52,250 --> 00:05:53,070
+attacker's server?
+67
+
+68
+00:05:53,090 --> 00:05:59,600
+So let's say you have sended this particular link to any victim and the victim opens up this particular
+68
+
+69
+00:05:59,600 --> 00:06:00,080
+page.
+69
+
+70
+00:06:00,590 --> 00:06:02,310
+It looks something like this.
+70
+
+71
+00:06:02,870 --> 00:06:07,680
+Now, how is the victim when he logs in
+71
+
+72
+00:06:07,700 --> 00:06:15,020
+How are how are the credentials going to be sent to the attacker so for that this code also contains
+72
+
+73
+00:06:15,020 --> 00:06:22,010
+a window dot location dot href which says send the credentials to this particular.
+73
+
+74
+00:06:22,010 --> 00:06:22,540
+URL.
+74
+
+75
+00:06:22,760 --> 00:06:31,500
+So this demonstration I have been running a localhost PHP server, which will get the email and password.
+75
+
+76
+00:06:31,520 --> 00:06:34,970
+So we are already getting it into an alert, which you have already seen.
+76
+
+77
+00:06:35,180 --> 00:06:36,030
+Let me show you again.
+77
+
+78
+00:06:36,470 --> 00:06:43,730
+So let's say I type your admin and password, also admin and hit sign in you are able to see into the alert
+78
+
+79
+00:06:43,730 --> 00:06:45,710
+the captured given credentials.
+79
+
+80
+00:06:45,980 --> 00:06:49,660
+Now, it is also going to send it over here.
+80
+
+81
+00:06:49,670 --> 00:06:54,910
+As you can see, we are able to receive the credentials onto the server that I am running.
+81
+
+82
+00:06:55,130 --> 00:06:57,590
+So the command to run the server is very simple.
+82
+
+83
+00:06:57,590 --> 00:07:04,460
+You just need to type PHP hyphen s capital S localhost and any port number you want.
+83
+
+84
+00:07:04,490 --> 00:07:08,300
+So we are we have started successfully a PHP server.
+84
+
+85
+00:07:08,300 --> 00:07:12,080
+As you can see it is listening on localhost port 8001
+85
+
+86
+00:07:12,260 --> 00:07:20,560
+And whenever the victim clicks or victim tries to login, the attacker is going to get the credentials.
+86
+
+87
+00:07:20,570 --> 00:07:26,280
+And this way the attacker can take these credentials to login into the target web application.
+87
+
+88
+00:07:26,870 --> 00:07:35,320
+So I hope this is clear and you understood how you can utilize this particular tool to create POC's
+88
+
+89
+00:07:35,360 --> 00:07:39,350
+for any click jacking based vulnerabilities and increase the severity.
+89
+
+90
+00:07:39,650 --> 00:07:40,190
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,890 --> 00:00:04,500
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:05,100 --> 00:00:11,110
+So in this video, we are going to see a live exploitation of click jacking vulnerability.
+2
+
+3
+00:00:12,300 --> 00:00:12,780
+All right.
+3
+
+4
+00:00:12,870 --> 00:00:22,560
+So we already know about click jacking attacks and how an attacker can utilize this to make this low level
+4
+
+5
+00:00:22,560 --> 00:00:25,240
+vulnerability a high level vulnerability.
+5
+
+6
+00:00:25,890 --> 00:00:34,440
+So let's quickly jump into this video and see how can we actually simulate a click jacking based
+6
+
+7
+00:00:34,440 --> 00:00:40,810
+vulnerability and show its exploitation and severity to the target program.
+7
+
+8
+00:00:41,790 --> 00:00:46,110
+So for this, as you can see over here, my target is only dot in.
+8
+
+9
+00:00:46,440 --> 00:00:50,010
+So I'm going to use this website to demonstrate the attack.
+9
+
+10
+00:00:50,670 --> 00:00:54,780
+So, first of all, I'm going to create an account onto this web application.
+10
+
+11
+00:00:55,200 --> 00:01:00,930
+As you can see, I have successfully signed up and now I'm going to do my verification.
+11
+
+12
+00:01:00,960 --> 00:01:06,430
+Once the verification is done, I will have a valid account on this website.
+12
+
+13
+00:01:07,620 --> 00:01:12,360
+So let's just wait and let me complete the verification part and we can move ahead.
+13
+
+14
+00:01:13,180 --> 00:01:22,380
+Now, you can take any Web application that you want to prove click jacking based vulnerabilities if the page is successfully
+14
+
+15
+00:01:22,380 --> 00:01:24,040
+loading into your iframe.
+15
+
+16
+00:01:24,300 --> 00:01:32,010
+So I have identified this website to be vulnerable to click jacking because they do not have proper mitigations
+16
+
+17
+00:01:32,010 --> 00:01:34,270
+for clickjacking based on vulnerability.
+17
+
+18
+00:01:34,980 --> 00:01:36,960
+Therefore, there are no X-Frame options.
+18
+
+19
+00:01:37,110 --> 00:01:41,640
+So once I have identified the target, I am creating account over here.
+19
+
+20
+00:01:42,240 --> 00:01:47,760
+As you can see, I have successfully created account and I am now logged into my account as well.
+20
+
+21
+00:01:48,210 --> 00:01:54,780
+I'm just updating my last name details to show you guys that I have successfully logged in and I have
+21
+
+22
+00:01:54,780 --> 00:01:57,780
+the rights to update the details of my account.
+22
+
+23
+00:01:58,440 --> 00:01:58,910
+All right.
+23
+
+24
+00:01:58,920 --> 00:02:04,500
+As you can see, I have created my account as well and I can update my details as well, which proves
+24
+
+25
+00:02:04,500 --> 00:02:07,290
+that I am logged into my account.
+25
+
+26
+00:02:08,020 --> 00:02:14,140
+Now, we require the click jack tool that we have created to do the click jacking exploitation.
+26
+
+27
+00:02:14,960 --> 00:02:22,560
+Now, one thing to remember over here is I'm going to prove this vulnerability onto my localhost website.
+27
+
+28
+00:02:23,580 --> 00:02:31,400
+OK, so what you guys can do is you can also create the same POC onto your localhost website.
+28
+
+29
+00:02:31,440 --> 00:02:40,170
+You can create it into your computer or else you can host your POC or your website onto any online free
+29
+
+30
+00:02:40,170 --> 00:02:45,270
+service like triple zero Web host dot com in case you do not have your own personal website.
+30
+
+31
+00:02:45,450 --> 00:02:48,220
+Or you can post it on your personal website as well.
+31
+
+32
+00:02:49,530 --> 00:02:51,550
+The steps would be exactly the same.
+32
+
+33
+00:02:52,110 --> 00:02:53,790
+So let me just go into that folder.
+33
+
+34
+00:02:54,030 --> 00:02:57,480
+So I'm into the folder right now and the folder name is clickjack tool.
+34
+
+35
+00:02:57,900 --> 00:03:01,290
+And again, these are the files which are inside that folder.
+35
+
+36
+00:03:02,250 --> 00:03:05,520
+Our important file is the index dot HTML.
+36
+
+37
+00:03:05,580 --> 00:03:13,050
+So I'm going to start a quick PHP server using the command php hyphen s localhost colon eight thousand
+37
+
+38
+00:03:13,050 --> 00:03:13,400
+and one.
+38
+
+39
+00:03:13,800 --> 00:03:18,180
+So it is the port number on which I have started my local HP server.
+39
+
+40
+00:03:18,630 --> 00:03:19,110
+Perfect.
+40
+
+41
+00:03:19,590 --> 00:03:26,090
+Now let's verify our PHP server has started and you can see successfully my PHP server has started.
+41
+
+42
+00:03:26,640 --> 00:03:28,340
+So let's copy our target.
+42
+
+43
+00:03:28,350 --> 00:03:32,550
+URL link and paste it over into the URL and hit load.
+43
+
+44
+00:03:33,690 --> 00:03:40,560
+As you can see, my target has successfully loaded into our localhost server that we have created.
+44
+
+45
+00:03:40,980 --> 00:03:48,090
+And again, see, this is exactly the same target which has successfully loaded and I am even logged
+45
+
+46
+00:03:48,270 --> 00:03:49,290
+into my account.
+46
+
+47
+00:03:49,470 --> 00:03:53,520
+So let us quickly first log off of our account.
+47
+
+48
+00:03:53,520 --> 00:03:55,650
+So I have logged out of my account.
+48
+
+49
+00:03:56,010 --> 00:03:59,370
+Let me again load it, as you can see.
+49
+
+50
+00:03:59,400 --> 00:04:00,340
+Yeah, perfect.
+50
+
+51
+00:04:00,360 --> 00:04:04,800
+Now you can see I am presented with the username password field.
+51
+
+52
+00:04:05,010 --> 00:04:12,330
+So let me get back to the username password field and it was only dot in slash log out.
+52
+
+53
+00:04:12,330 --> 00:04:16,940
+So I should be able to get the logging onto the login end point.
+53
+
+54
+00:04:16,950 --> 00:04:17,360
+All right.
+54
+
+55
+00:04:17,640 --> 00:04:19,800
+So I have the login end point right now.
+55
+
+56
+00:04:20,040 --> 00:04:27,180
+So we are going to craft a POC where we are going to first drag the email, which is the first field,
+56
+
+57
+00:04:27,180 --> 00:04:29,520
+which is the email address will and keep it over here.
+57
+
+58
+00:04:29,670 --> 00:04:31,260
+So I'll just place it.
+58
+
+59
+00:04:31,260 --> 00:04:34,710
+You dont need to be perfect in placing it.
+59
+
+60
+00:04:34,710 --> 00:04:37,860
+You can place it as where as you want.
+60
+
+61
+00:04:38,070 --> 00:04:45,180
+Just a little bit on to the username and password field and let's place the login button over the login
+61
+
+62
+00:04:45,180 --> 00:04:47,340
+field or else let's do one thing.
+62
+
+63
+00:04:47,340 --> 00:04:52,470
+Let's place it in the center instead of placing it onto the left.
+63
+
+64
+00:04:53,700 --> 00:04:59,850
+So if you have any issues in dragging this, remember you just have to hold
+64
+
+65
+00:05:00,010 --> 00:05:04,520
+the button and drag, you just don't have to click it and move your mouse mouse pointer.
+65
+
+66
+00:05:04,540 --> 00:05:09,520
+You have to actually hold it and drag it, then it will work.
+66
+
+67
+00:05:09,670 --> 00:05:10,050
+All right.
+67
+
+68
+00:05:10,060 --> 00:05:11,430
+So I have dragged it over here.
+68
+
+69
+00:05:11,740 --> 00:05:13,430
+Now I will hit view button.
+69
+
+70
+00:05:13,990 --> 00:05:16,570
+Now, let's see what happens when we hit the view button.
+70
+
+71
+00:05:16,600 --> 00:05:17,040
+All right.
+71
+
+72
+00:05:17,590 --> 00:05:24,860
+So you can see it looks perfectly fine and our buttons have successfully overlapped the e-mail address field
+72
+
+73
+00:05:24,890 --> 00:05:29,750
+the password field and the sign in button, which looks perfect for us.
+73
+
+74
+00:05:30,250 --> 00:05:33,990
+Now, you can notice over here we are on to our localhost.
+74
+
+75
+00:05:34,000 --> 00:05:35,590
+This is our local host URL.
+75
+
+76
+00:05:35,740 --> 00:05:43,570
+And as I mentioned before, the starting of the video, you can host this application, which we hosted
+76
+
+77
+00:05:43,570 --> 00:05:48,910
+into our local PHP server onto a live website as well.
+77
+
+78
+00:05:49,270 --> 00:05:55,960
+If in case you do not have any of the websites you can hosted on triple zero Web hosting dot com, it
+78
+
+79
+00:05:55,960 --> 00:06:03,080
+provides you free hosting and you can host this POC there and you can prove the flaw as well.
+79
+
+80
+00:06:03,340 --> 00:06:05,260
+The steps are exactly the same.
+80
+
+81
+00:06:06,680 --> 00:06:14,870
+All right, so now we have successfully loaded it all here, so let's assume the victim comes over our
+81
+
+82
+00:06:14,870 --> 00:06:21,860
+this target and he thinks like he have to login into the only website because it is successfully getting
+82
+
+83
+00:06:21,860 --> 00:06:24,100
+loaded into our iFrame.
+83
+
+84
+00:06:24,500 --> 00:06:27,290
+So he gives his username and password clicks on.
+84
+
+85
+00:06:27,290 --> 00:06:29,710
+I'm not a robot, so bypasses.
+85
+
+86
+00:06:30,260 --> 00:06:34,100
+So let's bypass this by giving the correct.
+86
+
+87
+00:06:35,670 --> 00:06:42,880
+captcha and hit on Sign In, and you can see perfect captured credentials are username is hacker dot Udemy
+87
+
+88
+00:06:42,940 --> 00:06:46,380
+@ gmail dot com password is admin @
+88
+
+89
+00:06:46,410 --> 00:06:47,180
+One, two, three.
+89
+
+90
+00:06:47,520 --> 00:06:53,430
+So this way the attacker is able to successfully get hold of the credentials in which he has got the
+90
+
+91
+00:06:53,430 --> 00:06:56,040
+username and password for the demonstration.
+91
+
+92
+00:06:56,090 --> 00:07:02,280
+over here, we have put or allowed the credentials to be into the alert box.
+92
+
+93
+00:07:02,280 --> 00:07:08,130
+In real case scenario, this will be automatically send it to the attack as Web server that we have
+93
+
+94
+00:07:08,130 --> 00:07:14,820
+already seen into the previous video and we have seen how the credentials are sent to the attackers
+94
+
+95
+00:07:14,970 --> 00:07:15,500
+server.
+95
+
+96
+00:07:16,020 --> 00:07:24,420
+So I hope you guys understood how you can make and demonstrate this attack to prove the severity and
+96
+
+97
+00:07:24,420 --> 00:07:26,440
+how you can perform the exploitation.
+97
+
+98
+00:07:26,910 --> 00:07:27,480
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,270 --> 00:00:02,910
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:03,660 --> 00:00:10,310
+So in this video, we are going to see an interesting tool that we have created to identify click jacking
+2
+
+3
+00:00:10,350 --> 00:00:11,740
+based on vulnerabilities.
+3
+
+4
+00:00:12,090 --> 00:00:20,640
+So in case you have multiple targets and you need to identify everything based on automation and you
+4
+
+5
+00:00:20,640 --> 00:00:27,060
+do not want to manually write the code, go to the browser, check if it is loading into the iFrame
+5
+
+6
+00:00:27,060 --> 00:00:31,160
+successfully or not, and identifying if the target is vulnerable or not.
+6
+
+7
+00:00:31,740 --> 00:00:38,790
+So here we have coded a python, simple script, which will help you to even create the POC and
+7
+
+8
+00:00:38,790 --> 00:00:41,590
+prove the click jacking based flaws.
+8
+
+9
+00:00:42,120 --> 00:00:48,840
+This is going to help you to identify multiple targets and it is going to help your help you save your
+9
+
+10
+00:00:48,840 --> 00:00:49,620
+time as well.
+10
+
+11
+00:00:50,100 --> 00:00:56,940
+So let's quickly see, how can we use this script to identify if the targets are vulnerable to click
+11
+
+12
+00:00:56,940 --> 00:00:57,370
+jacking.
+12
+
+13
+00:00:58,290 --> 00:00:58,680
+All right.
+13
+
+14
+00:00:58,950 --> 00:01:00,690
+So it is a python based tool.
+14
+
+15
+00:01:00,690 --> 00:01:06,830
+So obviously we had to write Python Click jack dot py and then the target Web site name.
+15
+
+16
+00:01:07,080 --> 00:01:14,580
+So let's say we try, first of all, in this website, which is test php dot vulnweb dot com.
+16
+
+17
+00:01:14,730 --> 00:01:17,580
+As we know, this website is vulnerable to click jacking.
+17
+
+18
+00:01:18,180 --> 00:01:26,220
+Let's identify if you are able to see that if it gets detected by our tool and does it create a POC
+18
+
+19
+00:01:26,220 --> 00:01:26,740
+for us.
+19
+
+20
+00:01:27,120 --> 00:01:33,540
+So I'm just going to simply hit enter and you can see it says test complete and you can see the click
+20
+
+21
+00:01:33,550 --> 00:01:34,830
+jacking test results.
+21
+
+22
+00:01:34,860 --> 00:01:41,670
+Our target is this website and you can see the target is rendered below, which proves that it is 
+22
+
+23
+00:01:41,670 --> 00:01:42,020
+vulnerable.
+23
+
+24
+00:01:42,420 --> 00:01:48,580
+And you can see, this is the example of click jacking iFrame and link, which is normally invisible, perfect.
+24
+
+25
+00:01:48,870 --> 00:01:54,420
+So we are able to identify the target as vulnerable as well as we are able to generate a POC to which
+25
+
+26
+00:01:54,420 --> 00:02:00,590
+you can just simply click a screenshot and send it to the target program.
+26
+
+27
+00:02:00,960 --> 00:02:07,500
+Obviously, remember when you have identified, click jacking based on vulnerabilities you also need to show
+27
+
+28
+00:02:07,830 --> 00:02:09,390
+or action.
+28
+
+29
+00:02:09,690 --> 00:02:17,450
+It can be a sensitive action that basically gets approved whenever you are going to test click jacking
+29
+
+30
+00:02:17,490 --> 00:02:18,610
+based on vulnerabilities.
+30
+
+31
+00:02:19,230 --> 00:02:19,670
+All right.
+31
+
+32
+00:02:19,710 --> 00:02:24,720
+So let's test one more target to confirm everything is working fine.
+32
+
+33
+00:02:25,050 --> 00:02:29,820
+So we have already proved the flaw on only dot in.
+33
+
+34
+00:02:29,820 --> 00:02:35,100
+And let's see if the tool identifies the click jacking vulnerability onto this target.
+34
+
+35
+00:02:35,130 --> 00:02:41,010
+So I'm just going to hit enter and you can see click jacking test results.
+35
+
+36
+00:02:41,010 --> 00:02:45,600
+If you see the target website is rendered below, it is vulnerable and perfect.
+36
+
+37
+00:02:45,870 --> 00:02:48,640
+We are able to see the target website is rendered below.
+37
+
+38
+00:02:48,900 --> 00:02:54,840
+Now you can further make the POC generate a sensitive actions from the target through the tool
+38
+
+39
+00:02:54,840 --> 00:02:56,430
+that we have already seen.
+39
+
+40
+00:02:57,720 --> 00:03:04,320
+And you can make a successful POC and increase the severity of the website and submit it to the target
+40
+
+41
+00:03:04,320 --> 00:03:05,350
+program as well.
+41
+
+42
+00:03:05,880 --> 00:03:13,050
+So I hope you guys understood and this is going to help you a lot in automating your work identification
+42
+
+43
+00:03:13,050 --> 00:03:19,830
+of a vulnerable website and later on identifying sensitive actions onto that website and making a report
+43
+
+44
+00:03:19,830 --> 00:03:24,470
+and sending it to the target bug bounty program or your penetration testing job.
+44
+
+45
+00:03:24,720 --> 00:03:26,130
+So I hope you guys understood.
+45
+
+46
+00:03:26,400 --> 00:03:26,940
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,160 --> 00:00:09,110
+Hello, everyone, and welcome to this video so till now we have seen a couple of ways to identify click
+1
+
+2
+00:00:09,110 --> 00:00:16,340
+jacking based vulnerabilities, so we started with manually writing the code from samy dot pl Quick
+2
+
+3
+00:00:16,340 --> 00:00:20,420
+Jack automated website, python based click jacking testor.
+3
+
+4
+00:00:20,990 --> 00:00:26,870
+We have seen a couple of tools as well that we wrote and we used it to identify click jacking based
+4
+
+5
+00:00:26,870 --> 00:00:29,660
+vulnerabilities with automated POC's.
+5
+
+6
+00:00:30,710 --> 00:00:39,070
+So I hope you guys understood this, but it would be incomplete without showing you the power of Burp Suite
+6
+
+7
+00:00:39,530 --> 00:00:47,150
+Burp Suite also have awesome feature of identification of click jacking based vulnerability and creating a proof
+7
+
+8
+00:00:47,150 --> 00:00:47,890
+of concept.
+8
+
+9
+00:00:48,470 --> 00:00:57,050
+So let's quickly jump into this and let's see how can we utilize Burp Suite hidden feature of identification of click
+9
+
+10
+00:00:57,050 --> 00:00:58,930
+jacking based vulnerabilities.
+10
+
+11
+00:00:59,630 --> 00:01:02,240
+So first of all, you have to start your Burp Suite.
+11
+
+12
+00:01:02,480 --> 00:01:06,230
+So I'm on to the professional version one point seven point three four.
+12
+
+13
+00:01:06,620 --> 00:01:11,420
+You just need to click on Burp and I have to click on Burp click bandit.
+13
+
+14
+00:01:12,080 --> 00:01:18,970
+So Burp Click Bandit is the feature which is used to simulate and create a click jacking based POC.
+14
+
+15
+00:01:19,810 --> 00:01:24,850
+All right, so we just need to click on copy click bandit to clipboard.
+15
+
+16
+00:01:25,220 --> 00:01:30,860
+So after you have clicked this, it will automatically copy the code that we are going to use.
+16
+
+17
+00:01:31,520 --> 00:01:33,680
+Now you just need to go to your browser.
+17
+
+18
+00:01:33,800 --> 00:01:36,230
+So as you can see, I'm onto my browser right now.
+18
+
+19
+00:01:36,560 --> 00:01:39,290
+So let me just bring it over here.
+19
+
+20
+00:01:39,380 --> 00:01:40,850
+Let me reload this as well.
+20
+
+21
+00:01:41,600 --> 00:01:47,030
+So once you're onto your browser, you have to right click and go to inspect element.
+21
+
+22
+00:01:47,510 --> 00:01:54,080
+So once you're into the inspect element, go to your console tab and paste what we have copied from
+22
+
+23
+00:01:54,080 --> 00:01:55,640
+there and hit enter.
+23
+
+24
+00:01:57,020 --> 00:02:04,190
+So once you hit enter, you can see an orange color message over to your screen which says Burp click bandit
+24
+
+25
+00:02:04,780 --> 00:02:05,470
+And you can see
+25
+
+26
+00:02:05,510 --> 00:02:10,640
+It says start finish and on the right hand side it says record mode.
+26
+
+27
+00:02:11,150 --> 00:02:11,600
+All right.
+27
+
+28
+00:02:11,600 --> 00:02:15,710
+So we are going to start our POC for that you just need to hit on start.
+28
+
+29
+00:02:16,490 --> 00:02:24,290
+Once you click on start, it will automatically enable the application that you are going to test for
+29
+
+30
+00:02:24,290 --> 00:02:26,390
+click jacking based vulnerabilities.
+30
+
+31
+00:02:26,900 --> 00:02:32,630
+As you can see, it has successfully loaded into your iframe, so we have identified it to be vulnerable.
+31
+
+32
+00:02:33,440 --> 00:02:37,420
+Now we are going to make a few clicks to make up POC.
+32
+
+33
+00:02:37,730 --> 00:02:45,380
+So let's assume there is a button which is a delete button over here, which is a sensitive action.
+33
+
+34
+00:02:45,380 --> 00:02:48,110
+So let's say let's assume this is the delete button for now.
+34
+
+35
+00:02:48,440 --> 00:02:54,680
+So what we are going to do is we are going to create a POC with a sensitive action over here.
+35
+
+36
+00:02:55,340 --> 00:02:59,270
+So once we have started this, as you can see over here.
+36
+
+37
+00:02:59,960 --> 00:03:05,120
+So let's click on this so you can see we have been successfully logged out.
+37
+
+38
+00:03:05,420 --> 00:03:09,410
+Let's go back to your profile, click on user name, click on.
+38
+
+39
+00:03:09,470 --> 00:03:10,790
+Let's try to log in again.
+39
+
+40
+00:03:12,990 --> 00:03:18,860
+And again, log in, click over here click on login, and again, we have successfully logged in.
+40
+
+41
+00:03:18,870 --> 00:03:20,880
+And again, let me click on Log Out.
+41
+
+42
+00:03:21,880 --> 00:03:28,330
+All right, now let me click on finish and let's see our POC that has been successfully created so
+42
+
+43
+00:03:28,330 --> 00:03:29,630
+we can see over here click.
+43
+
+44
+00:03:29,650 --> 00:03:33,550
+So let me just click over here second click on your profile.
+44
+
+45
+00:03:34,060 --> 00:03:35,470
+Third click is over here.
+45
+
+46
+00:03:35,620 --> 00:03:40,240
+We have to fill the credentials that is test test and click on login.
+46
+
+47
+00:03:40,240 --> 00:03:45,910
+And then we get successfully logged in and we click on the logout button over here, which was assumed
+47
+
+48
+00:03:45,910 --> 00:03:48,120
+to be our delete button.
+48
+
+49
+00:03:48,550 --> 00:03:55,090
+And again, see if we got a successful message that says you have been clicked jacked and now you just simply
+49
+
+50
+00:03:55,090 --> 00:04:01,720
+can click on toggle transparency and you cannot see what the application is hidden in the background.
+50
+
+51
+00:04:01,930 --> 00:04:03,220
+Let me just reset this.
+51
+
+52
+00:04:05,150 --> 00:04:11,840
+Now, when you reset, everything becomes back to normal, and now we can again start creating our POC.
+52
+
+53
+00:04:12,050 --> 00:04:16,710
+So to create the POC again, you have to paste the code that we have copied over here.
+53
+
+54
+00:04:16,730 --> 00:04:18,020
+So let me paste it over here.
+54
+
+55
+00:04:18,380 --> 00:04:19,970
+Hit enter. Again
+55
+
+56
+00:04:19,970 --> 00:04:20,990
+click on start.
+56
+
+57
+00:04:22,620 --> 00:04:27,990
+Let's go to your profile, let's quickly login because it was logged out.
+57
+
+58
+00:04:30,460 --> 00:04:35,790
+And let's assume this is the delete button, so let's click this, all right, let's click on Finish
+58
+
+59
+00:04:36,220 --> 00:04:40,360
+and again, see, these are the clicks that we have made first here.
+59
+
+60
+00:04:40,820 --> 00:04:47,050
+Then we clicked on the login button and then we clicked over and logged in and then we clicked on the
+60
+
+61
+00:04:47,410 --> 00:04:47,770
+logout button.
+61
+
+62
+00:04:48,250 --> 00:04:51,820
+which we assumed as our delete button.
+62
+
+63
+00:04:52,180 --> 00:04:55,550
+So you can see you have been successfully clickjacked.
+63
+
+64
+00:04:56,170 --> 00:04:57,500
+So you can save this as well.
+64
+
+65
+00:04:57,520 --> 00:04:59,020
+So let me just save this.
+65
+
+66
+00:04:59,200 --> 00:05:06,730
+So let's say we open this with Google Chrome and you can see these are the steps.
+66
+
+67
+00:05:09,900 --> 00:05:12,510
+And click on login.
+67
+
+68
+00:05:13,570 --> 00:05:19,440
+You can see this was the delete button that we created now for demonstration purposes, guys, here
+68
+
+69
+00:05:19,440 --> 00:05:22,340
+is the transparency, which is like this.
+69
+
+70
+00:05:22,370 --> 00:05:26,080
+So I can also toggle the transparency and save this now again.
+70
+
+71
+00:05:26,490 --> 00:05:32,650
+And now you can see we can trick the victim in saying this is a game and click over here.
+71
+
+72
+00:05:32,670 --> 00:05:39,600
+So when the victim clicks over here, what will happen is he is unknowingly clicking on the delete button.
+72
+
+73
+00:05:39,600 --> 00:05:46,460
+And once he clicks on the delete button, there will be his account deleted from the web application.
+73
+
+74
+00:05:46,800 --> 00:05:49,270
+As you can see, this was for demonstration purposes.
+74
+
+75
+00:05:49,290 --> 00:05:52,540
+That's why we can see you have been click jacked.
+75
+
+76
+00:05:52,920 --> 00:05:54,480
+So I hope you guys understood this.
+76
+
+77
+00:05:54,510 --> 00:05:55,080
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 13: File Inclusion Exploitation
+
+0
+1
+00:00:01,590 --> 00:00:04,290
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:05,190 --> 00:00:11,370
+So in this video, we are going to learn about one of the most important vulnerability, which is known
+2
+
+3
+00:00:11,370 --> 00:00:12,360
+as file inclusion.
+3
+
+4
+00:00:13,200 --> 00:00:21,510
+But before starting file inclusion types of attacks, we need to distinguish between a unique vulnerability,
+4
+
+5
+00:00:21,900 --> 00:00:27,660
+which is sometimes confused with file inclusion, which is known as path traversal.
+5
+
+6
+00:00:28,680 --> 00:00:29,250
+All right.
+6
+
+7
+00:00:29,250 --> 00:00:33,930
+So let's jump into this and see what this actually is.
+7
+
+8
+00:00:35,400 --> 00:00:40,290
+The first question that should arise to your mind is why file inclusion?
+8
+
+9
+00:00:41,070 --> 00:00:47,540
+Does these types of vulnerabilities really hold that much of importance then answer is Yes
+9
+
+10
+00:00:47,550 --> 00:00:55,920
+These are high value targets if you are able to identify any final inclusion and to those, for example,
+10
+
+11
+00:00:55,920 --> 00:01:01,260
+Uber, PayPal, Google, Facebook, etc., then this vulnerability.
+11
+
+12
+00:01:02,250 --> 00:01:09,750
+Has the CVSS scored, which lies in the range of high to critical, so what actually is final inclusion?
+12
+
+13
+00:01:10,560 --> 00:01:17,070
+So this vulnerability exist when any Web application includes a file without correctly sanitizing the
+13
+
+14
+00:01:17,070 --> 00:01:25,650
+input, which allows the attacker to manipulate the input and inject path traversal characters and include
+14
+
+15
+00:01:25,650 --> 00:01:33,090
+other files from the Web server, which basically means you need to identify an injection point and
+15
+
+16
+00:01:33,090 --> 00:01:35,700
+you need to include any file from the server.
+16
+
+17
+00:01:36,560 --> 00:01:42,920
+And if the server gives you that particular file, then, yes, you have successfully identified a file
+17
+
+18
+00:01:42,920 --> 00:01:50,180
+inclusion based vulnerabilities now to make the situations more worse, you can include some
+18
+
+19
+00:01:50,180 --> 00:01:56,450
+of the sensitive files from the server, which will hold a lot of severity and make the bug critical.
+19
+
+20
+00:01:57,950 --> 00:02:04,790
+All right, so I have demonstrated a diagram over here in which you can see on the left hand side is
+20
+
+21
+00:02:04,790 --> 00:02:05,540
+the attacker.
+21
+
+22
+00:02:05,930 --> 00:02:11,940
+On the right hand side is the server, which may be vulnerable to path traversal or file inclusion.
+22
+
+23
+00:02:13,370 --> 00:02:18,860
+So the first thing that will happen over here is the attacker is going to send a request to the server
+23
+
+24
+00:02:19,310 --> 00:02:23,130
+and in return, the server is going to reply with a response.
+24
+
+25
+00:02:23,840 --> 00:02:31,730
+Now, in path traversal based vulnerabilities attacker is able to read one of the file from the server.
+25
+
+26
+00:02:32,150 --> 00:02:37,970
+For instance, if the given server is running onto a Linux based operating systems, then the attacker
+26
+
+27
+00:02:37,970 --> 00:02:41,780
+is able to read the etc/passwd or the etc/shadow file.
+27
+
+28
+00:02:42,650 --> 00:02:50,630
+And if the system is running on a Windows based computer, then the attacker can read the log file or
+28
+
+29
+00:02:50,660 --> 00:02:52,140
+the boot dot ini file.
+29
+
+30
+00:02:53,360 --> 00:02:53,900
+All right.
+30
+
+31
+00:02:55,310 --> 00:03:04,640
+Now, to understand this mode and to get a clear picture of what is the difference between path traversal
+31
+
+32
+00:03:04,640 --> 00:03:11,120
+and file inclusion, you can see this figure in which you can see there are two circles, the outer
+32
+
+33
+00:03:11,120 --> 00:03:12,560
+circle and the inner circle.
+33
+
+34
+00:03:13,310 --> 00:03:16,610
+The Outer Circle represents file inclusion.
+34
+
+35
+00:03:18,050 --> 00:03:23,670
+The inner circle represents, which is a subset path traversal.
+35
+
+36
+00:03:24,560 --> 00:03:31,940
+So this basically means file inclusion based vulnerabilities is the combination of path traversal plus
+36
+
+37
+00:03:31,940 --> 00:03:37,550
+execute files, which basically means in file inclusion,
+37
+
+38
+00:03:37,700 --> 00:03:44,410
+you're able to read the files from any server and also you're able to execute files as well.
+38
+
+39
+00:03:45,110 --> 00:03:50,260
+And if you are able to execute the files, then you have found a valid file inclusion based vulnerability.
+39
+
+40
+00:03:50,960 --> 00:03:52,670
+So I hope this is clear with everyone.
+40
+
+41
+00:03:53,150 --> 00:04:01,580
+And you know, now that that the path traversal is a subset of file inclusion and in file inclusion you
+41
+
+42
+00:04:01,580 --> 00:04:05,680
+can also execute the files onto the server. In the next videos
+42
+
+43
+00:04:05,690 --> 00:04:12,260
+we are going to see how you can demonstrate a file inclusion and path traversal like vulnerabilities
+43
+
+44
+00:04:12,260 --> 00:04:13,430
+onto any given server.
+44
+
+45
+00:04:13,880 --> 00:04:14,420
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,580 --> 00:00:02,370
+Hello, everyone.
+1
+
+2
+00:00:03,320 --> 00:00:11,300
+So in this video, we are going to see how can we identify a LFI vulnerability onto a given particular
+2
+
+3
+00:00:11,300 --> 00:00:15,380
+Web application, so it is the practical time.
+3
+
+4
+00:00:15,560 --> 00:00:22,530
+And let's quickly jump onto the practical to see how can we actually identify and exploit this vulnerability.
+4
+
+5
+00:00:24,050 --> 00:00:30,820
+So as you can see over here, I'm onto a target application, which is test php dot vulnweb dot com.
+5
+
+6
+00:00:31,640 --> 00:00:37,910
+And once I'm onto this particular website, what I'm going to do is I'm going to set up Burp Suite with this
+6
+
+7
+00:00:37,940 --> 00:00:38,510
+website.
+7
+
+8
+00:00:39,110 --> 00:00:44,420
+As you can see, I'm running on to the latest version of Burp Suite, which is twenty twenty point nine
+8
+
+9
+00:00:44,420 --> 00:00:44,990
+point one.
+9
+
+10
+00:00:46,710 --> 00:00:53,410
+Now, I have also been running when Burp Suite instance of one point seven point three four.
+10
+
+11
+00:00:53,640 --> 00:01:01,350
+So basically I'm running two instances of Burp Suite just to differentiate between both the Burp Suite versions
+11
+
+12
+00:01:01,350 --> 00:01:07,790
+and how they work and how we can utilize them for identifying LFI based vulnerabilities.
+12
+
+13
+00:01:08,430 --> 00:01:18,890
+So because of limited options into Burp 2.0 that we cannot crawl or use Spider onto the target web application.
+13
+
+14
+00:01:19,170 --> 00:01:26,310
+I'm going to demonstrate this attack with the help of Burp one point X version, which can be freely downloaded
+14
+
+15
+00:01:26,310 --> 00:01:27,970
+from the Portswigger website.
+15
+
+16
+00:01:28,590 --> 00:01:29,040
+All right.
+16
+
+17
+00:01:29,220 --> 00:01:35,610
+So once I have set it up, the Burp Suite one point three seven version with my target browser, that is
+17
+
+18
+00:01:35,610 --> 00:01:41,790
+Mozilla Firefox, I'm going to intercept this particular application and I'm going to bring the particular
+18
+
+19
+00:01:41,790 --> 00:01:42,390
+request in
+19
+
+20
+00:01:42,390 --> 00:01:50,130
+Burp. As you can see on the screen now, I will just reload this and you can see I have got the successful
+20
+
+21
+00:01:50,130 --> 00:01:51,130
+request over here.
+21
+
+22
+00:01:51,390 --> 00:01:53,280
+Now I will simply right
+22
+
+23
+00:01:53,280 --> 00:01:57,750
+click and click on Repeater because I want to use this request later on.
+23
+
+24
+00:01:59,070 --> 00:02:00,420
+Also, I will again
+24
+
+25
+00:02:00,420 --> 00:02:00,630
+right
+25
+
+26
+00:02:00,630 --> 00:02:02,340
+click and send this to spider.
+26
+
+27
+00:02:02,910 --> 00:02:09,000
+I'm sending this to Spider because I want as many as endpoints for this specific target.
+27
+
+28
+00:02:09,510 --> 00:02:16,710
+Remember, if I'm increasing the scope for my target, that means I may get a lot of parameters that
+28
+
+29
+00:02:16,710 --> 00:02:22,240
+may turn out to be vulnerable and I can identify a valid LFI based vulnerability.
+29
+
+30
+00:02:22,830 --> 00:02:26,110
+That's why putting this to Spider is very important.
+30
+
+31
+00:02:26,970 --> 00:02:35,040
+Now it sometimes may ask you to submit the forms it come across onto any target web application if you
+31
+
+32
+00:02:35,040 --> 00:02:35,640
+want to submit.
+32
+
+33
+00:02:35,880 --> 00:02:40,380
+You can submit with some random or junk data or you can simply ignore it.
+33
+
+34
+00:02:40,860 --> 00:02:42,720
+For now, I'm going to ignore this form.
+34
+
+35
+00:02:44,120 --> 00:02:49,970
+All right, now let's go back to Target, and you can see this is my target web application on which
+35
+
+36
+00:02:50,210 --> 00:02:55,340
+I'm performing a test and trying to identify a valid LFI based vulnerability.
+36
+
+37
+00:02:56,000 --> 00:03:01,280
+Now, I will just right click over here and click on Add to Scope.
+37
+
+38
+00:03:01,290 --> 00:03:04,820
+I have already done this before and this has added to my scope.
+38
+
+39
+00:03:05,330 --> 00:03:11,870
+Remember, whenever you're sending any target application for spidering, it will ask you to add to
+39
+
+40
+00:03:11,870 --> 00:03:13,850
+scope as I've already done this.
+40
+
+41
+00:03:14,120 --> 00:03:17,820
+You can see now it is showing option which is remove from scope.
+41
+
+42
+00:03:18,650 --> 00:03:19,030
+All right.
+42
+
+43
+00:03:19,040 --> 00:03:25,100
+So once we have done this, I'm going to again send this to Spider just to crawl more end point so that
+43
+
+44
+00:03:25,100 --> 00:03:27,080
+we get more parameters.
+44
+
+45
+00:03:27,080 --> 00:03:30,020
+And our scope and our scope gets increased.
+45
+
+46
+00:03:31,430 --> 00:03:36,210
+Now, you can see over here there are all the particular URL's which have been crawled.
+46
+
+47
+00:03:36,620 --> 00:03:42,950
+Now I'm going to filter them based on parameters or you can see I'm going to sort them based on parameters
+47
+
+48
+00:03:43,490 --> 00:03:50,060
+So you can see over here, here are all the parameters that can be seen or all the endpoints that can be
+48
+
+49
+00:03:50,060 --> 00:03:51,920
+seen for a target application.
+49
+
+50
+00:03:52,550 --> 00:04:00,230
+Now, if you're testing on an application which has multiple endpoints or has a very big scope, there
+50
+
+51
+00:04:00,260 --> 00:04:03,680
+would be thousands of URL's that will be crawled by Burp Suite.
+51
+
+52
+00:04:04,040 --> 00:04:08,960
+And in those circumstances, it may get difficult for you to choose each URL
+52
+
+53
+00:04:08,960 --> 00:04:11,860
+one by one to identify which one to test.
+53
+
+54
+00:04:12,050 --> 00:04:18,050
+Now, for that, what you can do is you can simply use the Burp search feature.
+54
+
+55
+00:04:18,740 --> 00:04:19,550
+How to do that?
+55
+
+56
+00:04:19,700 --> 00:04:22,070
+Just go in Burp and click on search.
+56
+
+57
+00:04:22,370 --> 00:04:32,120
+Now, as we know, there are some of the specific set of injection points or vulnerable parameters for LFI
+57
+
+58
+00:04:32,120 --> 00:04:36,940
+based vulnerability, and you can simply search those vulnerable parameters.
+58
+
+59
+00:04:37,340 --> 00:04:43,880
+I'm going to attach the list of vulnerable parameters in to the description and then you can download it and you
+59
+
+60
+00:04:43,880 --> 00:04:46,510
+can identify those parameters as well.
+60
+
+61
+00:04:47,510 --> 00:04:56,150
+Now, one of the parameter is file equals to this parameter means that my target web application is going to show
+61
+
+62
+00:04:56,150 --> 00:04:58,570
+a file that can be any file.
+62
+
+63
+00:04:58,880 --> 00:05:03,930
+Let's say it is a PDF file, a JPG file, a PNG or a audio file.
+63
+
+64
+00:05:04,430 --> 00:05:12,140
+So the file is stored on the target server and it is going to give that file to any user when the user
+64
+
+65
+00:05:12,290 --> 00:05:14,510
+wants wants that particular file.
+65
+
+66
+00:05:15,500 --> 00:05:22,870
+So what if instead of that particular file, we request for something else to the target server?
+66
+
+67
+00:05:23,480 --> 00:05:30,810
+Maybe if there is a vulnerability, we may get that intended file by the attacker.
+67
+
+68
+00:05:31,730 --> 00:05:36,630
+So let's quickly identify these parameters if they do exist or not.
+68
+
+69
+00:05:37,730 --> 00:05:46,430
+Over here, you can see I'm choosing the option, which is case sensitive and the locations is only request
+69
+
+70
+00:05:46,430 --> 00:05:53,320
+headers because I want this parameter in my request headers and request body, not in the response.
+70
+
+71
+00:05:53,570 --> 00:05:53,910
+Why?
+71
+
+72
+00:05:54,170 --> 00:06:02,450
+Because in the request itself, I'm going to request for another file, which is etc/passwd etc/shadow or
+72
+
+73
+00:06:02,450 --> 00:06:06,890
+something which is sensitive and attacker can take advantage of.
+73
+
+74
+00:06:08,680 --> 00:06:15,520
+Now, you can see over here, you can check or uncheck based on from where you want to scan it, so
+74
+
+75
+00:06:15,520 --> 00:06:17,090
+let's target proxy repeater.
+75
+
+76
+00:06:17,140 --> 00:06:19,560
+So I'm going to keep these settings that default.
+76
+
+77
+00:06:19,900 --> 00:06:22,180
+You also don't need to change anything over here.
+77
+
+78
+00:06:22,480 --> 00:06:24,310
+Now, just hit on go.
+78
+
+79
+00:06:24,700 --> 00:06:31,870
+Once you hit on go, you can see you are able to get all the end points of the target, which was
+79
+
+80
+00:06:32,170 --> 00:06:37,710
+test php dot vulnweb dot com and these all URL's are coming from the target.
+80
+
+81
+00:06:37,710 --> 00:06:44,270
+As you can see over here, they are under the site map, which we have already crawled and saved.
+81
+
+82
+00:06:44,530 --> 00:06:51,160
+Now you can identify yes, it matches a particular parameter.
+82
+
+83
+00:06:51,470 --> 00:06:53,440
+As file equals to over here.
+83
+
+84
+00:06:53,950 --> 00:07:04,180
+Now I'm going to choose one of these and send it to repeater because I want to try LFI on these particular
+84
+
+85
+00:07:04,300 --> 00:07:07,030
+requests or these particular parameters.
+85
+
+86
+00:07:07,720 --> 00:07:15,550
+So you can see this is an image which is getting loaded from the server because the request looks something
+86
+
+87
+00:07:15,550 --> 00:07:20,710
+like get show image dot php and file equals to the image name.
+87
+
+88
+00:07:21,130 --> 00:07:23,890
+Here the image is one dot jgp.
+88
+
+89
+00:07:23,920 --> 00:07:30,490
+And on the right hand side you can see the rendered response of one dot jpg and it looks something like
+89
+
+90
+00:07:30,490 --> 00:07:30,770
+this.
+90
+
+91
+00:07:31,510 --> 00:07:40,690
+Now what if instead of this one dot jpg file, I want to include something else, let's say something sensitive
+91
+
+92
+00:07:40,690 --> 00:07:42,110
+from that specific server.
+92
+
+93
+00:07:42,400 --> 00:07:46,290
+So what I'm going to include is etc/passwd file.
+93
+
+94
+00:07:46,810 --> 00:07:54,430
+Remember, this passwd file is considered sensitive for any server because it contains the name of
+94
+
+95
+00:07:54,430 --> 00:08:01,240
+the users and the attacker is able to enumerate the names of the users onto that particular server which
+95
+
+96
+00:08:01,240 --> 00:08:01,750
+is running.
+96
+
+97
+00:08:02,380 --> 00:08:06,230
+So you can see over  here I'm going to send the request and you can see we got an error.
+97
+
+98
+00:08:06,620 --> 00:08:13,390
+Now I'm going to add dot dot slash and you're able to see successfully,
+98
+
+99
+00:08:13,390 --> 00:08:15,820
+I'm able to see the passwd file.
+99
+
+100
+00:08:16,390 --> 00:08:19,420
+Now, why did I add the dot dot slash?
+100
+
+101
+00:08:19,750 --> 00:08:27,670
+That is only because to get one step out of that particular directory or go one step back of that particular
+101
+
+102
+00:08:27,670 --> 00:08:35,110
+directory and you can see over here, I'm successfully able to see the passwd file into my response.
+102
+
+103
+00:08:38,590 --> 00:08:45,700
+Now, this is considered as sensitive because now I can read any other files I want from the Target
+103
+
+104
+00:08:45,700 --> 00:08:46,390
+Web server.
+104
+
+105
+00:08:49,200 --> 00:08:57,060
+I hope you guys understood how you can also identify LFI based vulnerabilities from any target web application,
+105
+
+106
+00:08:57,180 --> 00:09:04,530
+if the input is not sanitized and anyone is allowed to read any sensitive files from vulnerable parameters
+106
+
+107
+00:09:04,530 --> 00:09:08,190
+like file equals to onto any target web application.
+107
+
+108
+00:09:08,460 --> 00:09:09,000
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,990 --> 00:00:01,840
+Hello, everyone.
+1
+
+2
+00:00:02,640 --> 00:00:11,790
+So in this video, we are going to see one of the LFI vulnerability onto a live website site, so let's
+2
+
+3
+00:00:11,790 --> 00:00:20,250
+quickly see how we can identify a basic LFI onto any target and how can we exploit it.
+3
+
+4
+00:00:20,940 --> 00:00:29,340
+Remember these type of LFI vulnerabilities are generally categorized as a P1 and a P2 based vulnerability,
+4
+
+5
+00:00:29,880 --> 00:00:34,080
+which holds the severity of critical or high.
+5
+
+6
+00:00:34,770 --> 00:00:41,820
+So in case you identify any LFI based vulnerabilities into any target, make sure you report it as soon
+6
+
+7
+00:00:41,820 --> 00:00:46,830
+as possible so the chances of getting duplicate becomes less.
+7
+
+8
+00:00:49,170 --> 00:00:57,730
+Let's see the practical and understand how you can identify LFI vulnerability into a life target, so
+8
+
+9
+00:00:57,750 --> 00:01:04,170
+fir this what I have done is I'm going to choose this particular target, which is crown official dot
+9
+
+10
+00:01:04,170 --> 00:01:04,440
+com.
+10
+
+11
+00:01:04,980 --> 00:01:11,940
+So once I onto this website, what I'm going to do is I have started my Burp Suite as well, and I have
+11
+
+12
+00:01:11,940 --> 00:01:13,860
+already crawled the URL's.
+12
+
+13
+00:01:14,370 --> 00:01:16,890
+And you can see here are all the URL's.
+13
+
+14
+00:01:17,190 --> 00:01:18,940
+Now, let me start it again.
+14
+
+15
+00:01:19,440 --> 00:01:26,250
+So what I'm going to do is first I'm going to reload this target so that I can get the URL into
+15
+
+16
+00:01:26,250 --> 00:01:26,740
+my Burp Suite.
+16
+
+17
+00:01:26,780 --> 00:01:29,630
+Now I'm going to utilize this.
+17
+
+18
+00:01:29,640 --> 00:01:33,630
+So I'm going to send it to repeater and turn this off.
+18
+
+19
+00:01:34,230 --> 00:01:34,670
+All right.
+19
+
+20
+00:01:34,680 --> 00:01:41,850
+So I have the request into my Burp Suite and you can see this is how the request looks like and
+20
+
+21
+00:01:41,850 --> 00:01:42,820
+this is the response.
+21
+
+22
+00:01:43,510 --> 00:01:51,360
+Now, once of the spider crawls the URL so in Burp Suite  Community audition for 2020, there is
+22
+
+23
+00:01:51,360 --> 00:01:56,910
+a passive crawler, which means you have to manually go to each URL's and it will automatically bring
+23
+
+24
+00:01:56,910 --> 00:01:58,440
+those URL's into Burp Suite.
+24
+
+25
+00:01:59,250 --> 00:02:05,650
+Or else if you are on to Burp Suite's community edition one point x version, then you can run a spider,
+25
+
+26
+00:02:05,940 --> 00:02:08,730
+which will automatically spider all the URL's for you.
+26
+
+27
+00:02:09,780 --> 00:02:17,790
+So right now I'm into Burp Suite version 2020, so I have already crawled the URL's by going on each links
+27
+
+28
+00:02:17,790 --> 00:02:18,360
+one by one.
+28
+
+29
+00:02:18,780 --> 00:02:20,970
+And let me just show you, how does it looks like.
+29
+
+30
+00:02:21,720 --> 00:02:29,340
+So you can see over here, these are all the URL's which I was able to passively crawl and bring
+30
+
+31
+00:02:29,340 --> 00:02:29,940
+to Burp.
+31
+
+32
+00:02:30,870 --> 00:02:32,130
+Now, let's do one thing.
+32
+
+33
+00:02:32,130 --> 00:02:37,500
+Let's take one of the URL, which is let's say page equals to contact dot php.
+33
+
+34
+00:02:38,850 --> 00:02:40,470
+And let me send this to the Repeater.
+34
+
+35
+00:02:41,580 --> 00:02:47,940
+As you can see, I have this URL and the get request in my repeated tab when I hit send you see I'm getting
+35
+
+36
+00:02:47,940 --> 00:02:51,240
+a response for the contact dot php.
+36
+
+37
+00:02:51,930 --> 00:02:58,440
+Now what if I say instead of contact dot php  /etc/passwd.
+37
+
+38
+00:02:59,100 --> 00:03:02,340
+For those of you who do not know what is etc/passwd
+38
+
+39
+00:03:02,760 --> 00:03:10,320
+So this passwd file represents the number of users into any Linux based system.
+39
+
+40
+00:03:10,740 --> 00:03:12,510
+Let me show in my computer.
+40
+
+41
+00:03:15,640 --> 00:03:24,700
+As you can see over here, if I try to cat /etc/passwd you will be able to see all the users that
+41
+
+42
+00:03:24,700 --> 00:03:27,250
+belong to this specific computer.
+42
+
+43
+00:03:27,280 --> 00:03:34,330
+So these are all the users that are running into this specific system.
+43
+
+44
+00:03:35,710 --> 00:03:36,220
+All right.
+44
+
+45
+00:03:36,220 --> 00:03:42,370
+So now what we are going to do is we are going to see the /etc/passwd file and let's see
+45
+
+46
+00:03:42,370 --> 00:03:46,570
+if we are able to see the users for the crown official dot com server.
+46
+
+47
+00:03:47,050 --> 00:03:48,120
+Let me hit send.
+47
+
+48
+00:03:48,550 --> 00:03:53,830
+Let's see the response, if any, where we get the passwd file.
+48
+
+49
+00:03:54,220 --> 00:03:59,350
+And you can see over here, the passwd file has successfully loaded.
+49
+
+50
+00:04:01,000 --> 00:04:07,330
+And we can see there is a root user and there is the crown official dot com, one more user which
+50
+
+51
+00:04:07,330 --> 00:04:08,240
+has been created.
+51
+
+52
+00:04:08,890 --> 00:04:17,380
+Now, let's see, the shadow file as well hit send and let's see if we are able to see the password for any
+52
+
+53
+00:04:17,380 --> 00:04:18,940
+of the users that are being created.
+53
+
+54
+00:04:19,570 --> 00:04:23,440
+And you can see we are able to see the passwords as well.
+54
+
+55
+00:04:23,770 --> 00:04:29,950
+As you can see, these are all the default users, which is staff, guest, SSL, admin database, etc..
+55
+
+56
+00:04:30,850 --> 00:04:32,640
+So this is it for this video.
+56
+
+57
+00:04:32,740 --> 00:04:39,970
+I hope you guys understood how you can do a basic LFI onto any target by just including the payload,
+57
+
+58
+00:04:39,970 --> 00:04:47,650
+which is /etc/passwd or /etc/shadow in one of the injection points.
+58
+
+59
+00:04:48,040 --> 00:04:48,550
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,870 --> 00:00:09,160
+Hello, everyone, and welcome to this video in this video we are going to see how can you identify
+1
+
+2
+00:00:09,190 --> 00:00:12,060
+LFI vulnerability into a live Web website
+2
+
+3
+00:00:12,760 --> 00:00:15,610
+So let's quickly see the practical.
+3
+
+4
+00:00:18,670 --> 00:00:27,770
+Over here you can see, we are on to one of the website which is ravaged band dot com on this website there exist,
+4
+
+5
+00:00:27,790 --> 00:00:31,150
+a particular specific vulnerability, which is LFI.
+5
+
+6
+00:00:31,480 --> 00:00:35,180
+And I'm going to show you how you can identify that vulnerability.
+6
+
+7
+00:00:36,040 --> 00:00:42,930
+So let me first quickly start by Burp Suite and capture the request in my Burp.
+7
+
+8
+00:00:43,780 --> 00:00:49,090
+As you can see, I have captured the request in my Bursp Suite and I'm going to send this to repeater in
+8
+
+9
+00:00:49,090 --> 00:00:51,330
+case I want to use the request later on.
+9
+
+10
+00:00:52,300 --> 00:01:00,100
+Now, I will also send this request to spider because I want to crawl as many as as endpoints I can.
+10
+
+11
+00:01:00,760 --> 00:01:09,820
+Why I'm crawling those endpoints because that will increase the scope and I will be able to identify
+11
+
+12
+00:01:10,060 --> 00:01:14,780
+some of the certain parameters that can be vulnerable to this vulnerability.
+12
+
+13
+00:01:15,790 --> 00:01:16,250
+All right.
+13
+
+14
+00:01:16,420 --> 00:01:22,420
+So once you send anything to Spider, it is going to ask you to confirm that
+14
+
+15
+00:01:22,420 --> 00:01:27,430
+would you like to add this specific target to the current spidering scope?
+15
+
+16
+00:01:27,940 --> 00:01:30,760
+And you have to press a yes when you will press.
+16
+
+17
+00:01:30,820 --> 00:01:34,330
+yes, it will automatically get added to the scope.
+17
+
+18
+00:01:34,750 --> 00:01:42,660
+And you can see the spider has successfully started. Now into the target site map button
+18
+
+19
+00:01:42,910 --> 00:01:45,790
+You have to choose your target.
+19
+
+20
+00:01:46,060 --> 00:01:48,130
+As you can see over here, this is my target.
+20
+
+21
+00:01:48,310 --> 00:01:50,410
+So I'm going to, again, add to scope.
+21
+
+22
+00:01:50,770 --> 00:01:53,500
+And if I want, I can also spider the host.
+22
+
+23
+00:01:54,280 --> 00:02:02,620
+Now, when I have my target over here on the right hand side, you can see these are all the particular
+23
+
+24
+00:02:02,620 --> 00:02:10,650
+you are URL's that have been identified or the endpoints that have been identified for the target application.
+24
+
+25
+00:02:11,290 --> 00:02:18,100
+Now, I can't choose any of the particular request from here to play with it and identify if it is vulnerable
+25
+
+26
+00:02:18,100 --> 00:02:19,930
+to any of the certain attack.
+26
+
+27
+00:02:20,680 --> 00:02:28,810
+Now, you can see I have took a particular get request, which is going to index dot php slash
+27
+
+28
+00:02:29,050 --> 00:02:32,250
+page equals to contact dot php.
+28
+
+29
+00:02:33,520 --> 00:02:38,980
+This particular page represents a contact page onto the particular Target website.
+29
+
+30
+00:02:39,670 --> 00:02:45,420
+Now, what if I replace the contact dot php page with something else?
+30
+
+31
+00:02:45,880 --> 00:02:53,860
+Let's say I want to include something else from the target server, which is /etc/passwd
+31
+
+32
+00:02:53,860 --> 00:02:57,580
+instead of the contact dot php file.
+32
+
+33
+00:02:58,360 --> 00:03:02,770
+And let's see if we are able to see the passwd content.
+33
+
+34
+00:03:03,640 --> 00:03:11,230
+If I scroll down, then you can see over here I'm going to search based on a route:x because
+34
+
+35
+00:03:11,230 --> 00:03:14,710
+this is how a passwd file is represented.
+35
+
+36
+00:03:14,710 --> 00:03:16,750
+But there is always a root user.
+36
+
+37
+00:03:17,230 --> 00:03:19,360
+And you can see over here there are two users.
+37
+
+38
+00:03:19,690 --> 00:03:26,050
+First is root and second is ravaged ban dot com user, which has been created onto that particular
+38
+
+39
+00:03:26,230 --> 00:03:27,400
+Linux server.
+39
+
+40
+00:03:28,060 --> 00:03:28,540
+All right.
+40
+
+41
+00:03:28,720 --> 00:03:35,440
+So here we have successfully identified that the vulnerable parameter page is vulnerable to
+41
+
+42
+00:03:36,640 --> 00:03:43,750
+LFI based attack, when we are able to read the sensitive content from the server now, you can see
+42
+
+43
+00:03:44,020 --> 00:03:50,800
+I have changed the payload to etc/shadow and I'm trying to read the shadow file.
+43
+
+44
+00:03:52,310 --> 00:03:59,510
+For those who do not know what shadow file represents, it contains the passwords of all the users into
+44
+
+45
+00:03:59,510 --> 00:04:00,670
+the Linux system.
+45
+
+46
+00:04:01,220 --> 00:04:06,050
+And you can see I have the password, but obviously they are not in the plaintext.
+46
+
+47
+00:04:06,290 --> 00:04:07,610
+They are encrypted.
+47
+
+48
+00:04:09,400 --> 00:04:17,590
+But they can be decrypted using some of the techniques and we can get hold of the original password
+48
+
+49
+00:04:17,590 --> 00:04:18,290
+of the user.
+49
+
+50
+00:04:19,630 --> 00:04:29,140
+Now here this demonstration shows the vulnerable parameter page wherein we are able to inject any arbitrary
+50
+
+51
+00:04:29,140 --> 00:04:37,280
+file and we are able to read that from the target web server, which portrays the LFI vulnerability.
+51
+
+52
+00:04:37,990 --> 00:04:40,780
+So I hope you guys understood how to perform this attack.
+52
+
+53
+00:04:41,560 --> 00:04:42,130
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,130 --> 00:00:04,010
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,760 --> 00:00:12,320
+So in this video, we are going to see how can we increase our impact from LFI vulnerability to
+2
+
+3
+00:00:12,320 --> 00:00:12,620
+RCE.
+3
+
+4
+00:00:13,880 --> 00:00:23,790
+So we have seen till now in how to identify LFI videos that how you can successfully find out any vulnerable 
+4
+
+5
+00:00:24,110 --> 00:00:32,090
+parameter onto the Web application and try to read the file from the server wherein you can also execute
+5
+
+6
+00:00:32,090 --> 00:00:32,680
+the file.
+6
+
+7
+00:00:33,380 --> 00:00:40,490
+But now we are going to increase the impact and the severity for this vulnerability so that if you are
+7
+
+8
+00:00:40,490 --> 00:00:46,570
+hunting this on any bug bounty program, you can increase the reward for this vulnerability.
+8
+
+9
+00:00:47,850 --> 00:00:56,160
+All right, so I have divided this process into a few parts so that you better understand how you can
+9
+
+10
+00:00:56,160 --> 00:01:01,470
+increase the impact of LFI vulnerability to remote code execution.
+10
+
+11
+00:01:02,280 --> 00:01:11,260
+So part one is obviously identifying the main flaw into the web application, which is LFI.
+11
+
+12
+00:01:11,760 --> 00:01:19,730
+So here is a live website, which is vehicle duty dot com, wherein there lies availability of LFI.
+12
+
+13
+00:01:20,280 --> 00:01:26,640
+As you can see, I was able to load and read the etc/passwd file from the server.
+13
+
+14
+00:01:28,530 --> 00:01:40,860
+OK, so let's move ahead, part two identification of /proc/self/environ this basically
+14
+
+15
+00:01:40,860 --> 00:01:49,460
+is the process file into any Linux system wherein I was able to read the custom user agent.
+15
+
+16
+00:01:49,830 --> 00:01:57,710
+If you look closely, the user agent equals two is the current request that has been sent to the server.
+16
+
+17
+00:01:58,590 --> 00:02:07,220
+If you look, the user agent is Mozilla and my computer's user agent, which is Macintosh, Intel,
+17
+
+18
+00:02:07,350 --> 00:02:07,930
+Mac.
+18
+
+19
+00:02:08,280 --> 00:02:17,230
+So I came to know that my custom user agent gets saved into the procself environment variable.
+19
+
+20
+00:02:17,790 --> 00:02:25,670
+What if instead of this, if I tried to send a custom user agent because it is under my control.
+20
+
+21
+00:02:26,460 --> 00:02:34,020
+So part three, writing a custom user agent and saving it into the proc/self/environ
+21
+
+22
+00:02:34,920 --> 00:02:42,300
+Now, if you look closely over here, I have written a PHP shell code here.
+22
+
+23
+00:02:42,870 --> 00:02:50,760
+I have base64 encoded the Shell code just because the server does not detect if a shell is coming.
+23
+
+24
+00:02:51,390 --> 00:02:57,730
+And you can see I am writing a file and the filename is RCE by LFI dot PHP.
+24
+
+25
+00:02:58,080 --> 00:03:02,020
+So this simple reverse shell is getting uploaded.
+25
+
+26
+00:03:03,480 --> 00:03:07,590
+So the simple PHB shell is getting uploaded to the server.
+26
+
+27
+00:03:07,890 --> 00:03:16,230
+And when I hit go for this request, I'm able to see a 200 OK response, which basically means that
+27
+
+28
+00:03:16,230 --> 00:03:21,870
+my this custom user agent has successfully saved onto the target server.
+28
+
+29
+00:03:22,290 --> 00:03:24,040
+Now it's time to verify this.
+29
+
+30
+00:03:25,320 --> 00:03:33,660
+So part five, as you can see over here, the file that I tried to write on the server was LFI
+30
+
+31
+00:03:33,660 --> 00:03:34,690
+done dot txt.
+31
+
+32
+00:03:35,130 --> 00:03:44,340
+And you can see this was RCE using LFI job done, which means I was able to successfully write a file
+32
+
+33
+00:03:44,340 --> 00:03:45,280
+onto the server.
+33
+
+34
+00:03:46,020 --> 00:03:50,400
+Also, I can execute as many as commands I want.
+34
+
+35
+00:03:51,090 --> 00:03:53,060
+So I hope you guys understood this.
+35
+
+36
+00:03:53,430 --> 00:04:02,610
+Let's jump into the practical to see more in depth about how can we increase our impact for this vulnerability
+36
+
+37
+00:04:02,610 --> 00:04:05,430
+to turn from LFI to RCE.
+37
+
+38
+00:04:07,050 --> 00:04:11,900
+So as you can see over here, this is a life application, vehicle duty dot com.
+38
+
+39
+00:04:12,330 --> 00:04:19,500
+I have identified that there exists LFI vulnerability, which we have already discussed in one
+39
+
+40
+00:04:19,500 --> 00:04:21,840
+of the vulnerable parameter over here.
+40
+
+41
+00:04:22,260 --> 00:04:22,650
+All right.
+41
+
+42
+00:04:22,650 --> 00:04:30,610
+So let's identify the vulnerable parameter and the vulnerable parameter over here is pg equals two.
+42
+
+43
+00:04:31,090 --> 00:04:38,820
+Now, I'm going to put the payload into this vulnerable parameter or the injection point and try to see if
+43
+
+44
+00:04:38,820 --> 00:04:41,760
+I am able to exploit LFI vulnerability.
+44
+
+45
+00:04:42,270 --> 00:04:48,360
+I will just reload the application and try to identify if I'm able to see the 
+45
+
+46
+00:04:48,360 --> 00:04:48,780
+etc/passwd 
+46
+
+47
+00:04:48,780 --> 00:04:49,160
+file.
+47
+
+48
+00:04:49,800 --> 00:04:51,840
+Let's wait for this to completely load.
+48
+
+49
+00:04:52,140 --> 00:04:54,320
+And here I cannot see anything.
+49
+
+50
+00:04:54,330 --> 00:04:59,370
+So let's do again a hit and trial and move into one more path.
+50
+
+51
+00:05:00,190 --> 00:05:02,690
+Remember, this is totally hit and trial.
+51
+
+52
+00:05:02,700 --> 00:05:06,030
+You have to navigate inside and out of directories.
+52
+
+53
+00:05:06,390 --> 00:05:07,620
+So yes, it worked.
+53
+
+54
+00:05:07,950 --> 00:05:15,960
+And now I'm able to see the passwd file, which contains the users that exist into the server, which
+54
+
+55
+00:05:15,960 --> 00:05:18,190
+is running vehicle duty dot com.
+55
+
+56
+00:05:18,810 --> 00:05:19,200
+All right.
+56
+
+57
+00:05:19,210 --> 00:05:21,290
+So I have the passwd file.
+57
+
+58
+00:05:21,300 --> 00:05:24,470
+Now, let's try to read another file.
+58
+
+59
+00:05:24,630 --> 00:05:33,240
+So let's say we try to read the proc/self/environ file and let's see what interesting thing we
+59
+
+60
+00:05:33,240 --> 00:05:35,080
+can identify from there.
+60
+
+61
+00:05:35,820 --> 00:05:42,730
+So I have to write /proc/environ Now when I try to load this.
+61
+
+62
+00:05:42,750 --> 00:05:47,400
+It will not allow me to load anything because you need to write self as well.
+62
+
+63
+00:05:48,000 --> 00:05:52,260
+Now, let's see if we are able to get any sensitive information from the server.
+63
+
+64
+00:05:52,800 --> 00:05:53,950
+All right, here we go.
+64
+
+65
+00:05:54,330 --> 00:06:01,410
+Here you can see we are able to see the processes that are being running and into the last request
+65
+
+66
+00:06:02,250 --> 00:06:08,360
+because that has been sent to the server HTTP user agent has been saved over here.
+66
+
+67
+00:06:09,060 --> 00:06:10,470
+And what is the user agent?
+67
+
+68
+00:06:10,770 --> 00:06:15,930
+This is basically the last requested user agent to the server.
+68
+
+69
+00:06:15,930 --> 00:06:25,470
+And here you can see it's Mozilla 5.0, Macintosh Intel Mac OS X 10.15, which is basically my
+69
+
+70
+00:06:25,470 --> 00:06:27,660
+computer systems user agent.
+70
+
+71
+00:06:28,170 --> 00:06:28,610
+Perfect.
+71
+
+72
+00:06:29,020 --> 00:06:39,060
+So this means that any request that I send to the server saves my user agent and I can control my user
+72
+
+73
+00:06:39,060 --> 00:06:48,480
+agent, that basically means I can also try to save a custom user, user agent or custom modified code
+73
+
+74
+00:06:48,480 --> 00:06:49,590
+into the user agent.
+74
+
+75
+00:06:49,800 --> 00:06:50,190
+All right.
+75
+
+76
+00:06:50,190 --> 00:06:57,720
+So let's do this let's send this request to Burp Suite and send this to repeater, because from here, we are
+76
+
+77
+00:06:57,720 --> 00:06:59,890
+going to use this request again and again.
+77
+
+78
+00:07:00,450 --> 00:07:05,910
+Now, let's try to read this file and we are able to successfully get a 200, OK, which means
+78
+
+79
+00:07:05,910 --> 00:07:07,380
+we are able to read this file.
+79
+
+80
+00:07:07,960 --> 00:07:17,430
+Now, as I discussed, we are going to modify the user agent as a user agent over here is this and this
+80
+
+81
+00:07:17,430 --> 00:07:23,010
+is exactly the same user agent that you can see onto the left hand side over here.
+81
+
+82
+00:07:24,330 --> 00:07:30,060
+Now, this is getting reflected into the response, which means this is getting saved onto the target
+82
+
+83
+00:07:30,060 --> 00:07:30,450
+server.
+83
+
+84
+00:07:31,170 --> 00:07:36,390
+Now, let's control this and modify this to a PHP shell.
+84
+
+85
+00:07:36,810 --> 00:07:44,040
+So I have written a PHP shell and I have base64 encoded the shell just to bypass any filters.
+85
+
+86
+00:07:44,040 --> 00:07:51,330
+If they try to block my payload, I'll just copy this and I'm going to paste over there into the custom
+86
+
+87
+00:07:51,330 --> 00:07:54,310
+user agent field before pasting it over there.
+87
+
+88
+00:07:54,630 --> 00:07:59,940
+Let's do a breakdown of what exactly the shell does. As it is a PHP shell.
+88
+
+89
+00:07:59,940 --> 00:08:06,960
+It has to start with PHP and you can see I assign a variable equals to I'm going to post something.
+89
+
+90
+00:08:07,440 --> 00:08:11,310
+It is going to open a file which is denoted by fopen.
+90
+
+91
+00:08:11,610 --> 00:08:18,990
+And you can see post file file basically is the name of the file that I want the data to be written
+91
+
+92
+00:08:18,990 --> 00:08:24,120
+into, and the data will get written into the file and it will get closed.
+92
+
+93
+00:08:24,480 --> 00:08:31,640
+If you look over here, file equals to fopen the file name that I want to be created onto the server.
+93
+
+94
+00:08:31,920 --> 00:08:35,660
+So I have given the name as RCE by LFI dot PHP.
+94
+
+95
+00:08:36,090 --> 00:08:39,170
+So it is going to write into that file and close that file.
+95
+
+96
+00:08:39,540 --> 00:08:45,660
+The data, which you can see is base 64 encoded is going to get written into the file successfully.
+96
+
+97
+00:08:46,200 --> 00:08:46,680
+All right.
+97
+
+98
+00:08:46,980 --> 00:08:49,930
+So let's copy and past it over here.
+98
+
+99
+00:08:51,090 --> 00:09:00,000
+So this is the new user agent that I'm going to send to the server, which basically is a PHP shell.
+99
+
+100
+00:09:01,110 --> 00:09:10,440
+Now, let's try to send this request and verify that are we able to save our custom user agent onto
+100
+
+101
+00:09:10,440 --> 00:09:14,050
+the server into the proc/self/environ file?
+101
+
+102
+00:09:14,790 --> 00:09:18,320
+So I've written this and I'm going to send this now.
+102
+
+103
+00:09:18,720 --> 00:09:22,320
+So let's hit send and let's wait to get.
+103
+
+104
+00:09:22,320 --> 00:09:22,860
+200 OK
+104
+
+105
+00:09:22,860 --> 00:09:25,500
+so we've got a 400 bad request.
+105
+
+106
+00:09:25,800 --> 00:09:31,770
+Just because we messed up writing the custom user agent here, I need to write it this way.
+106
+
+107
+00:09:32,010 --> 00:09:33,800
+And again, let me send it.
+107
+
+108
+00:09:34,260 --> 00:09:41,540
+Yeah, again, it is a bad request because the data that we have pasted over here is not properly formatted.
+108
+
+109
+00:09:42,000 --> 00:09:47,750
+So let me just format it properly and remove any extra thing that has been copied by mistake.
+109
+
+110
+00:09:48,180 --> 00:09:50,580
+And now let's try to send this perfect.
+110
+
+111
+00:09:51,750 --> 00:09:59,160
+We haven't got a successful 200 OK response, which means our file by the name RCE by LFI dot PHP
+111
+
+112
+00:09:59,160 --> 00:10:03,260
+should have been made onto the target server.
+112
+
+113
+00:10:03,750 --> 00:10:04,850
+Let's verify this.
+113
+
+114
+00:10:05,280 --> 00:10:12,800
+So for this we are going onto the server, which is vehicle  duty dot com and trying to open our file.
+114
+
+115
+00:10:13,110 --> 00:10:17,480
+So let's see if we are successfully able to open our file.
+115
+
+116
+00:10:18,120 --> 00:10:27,480
+So the file that we made was RCE by LFI dot PHP and you can see over here the file is successfully
+116
+
+117
+00:10:27,480 --> 00:10:28,110
+created.
+117
+
+118
+00:10:28,860 --> 00:10:29,460
+Perfect.
+118
+
+119
+00:10:29,460 --> 00:10:35,660
+So let's create a new file under the target server and let's say we call the file name as LFI done
+119
+
+120
+00:10:35,670 --> 00:10:41,400
+dot txt and write some shell into this just for security reasons
+120
+
+121
+00:10:41,400 --> 00:10:43,770
+we do not want to break anything into the server.
+121
+
+122
+00:10:43,980 --> 00:10:46,000
+I'm just writing a simple message.
+122
+
+123
+00:10:46,020 --> 00:10:53,550
+which says this was RCEE using LFI Job Done and you can see it has been successfully completed
+123
+
+124
+00:10:53,820 --> 00:11:01,110
+So after the request is fulfilled successfully, let's try to see if our shell has worked or the file
+124
+
+125
+00:11:01,110 --> 00:11:02,040
+has been created.
+125
+
+126
+00:11:02,370 --> 00:11:08,130
+So the file that we created was LFI done dot txt and try to open that file over here.
+126
+
+127
+00:11:08,430 --> 00:11:13,680
+And you can see a success message which says this was RCE using LFI Job Done.
+127
+
+128
+00:11:13,680 --> 00:11:22,020
+I hope you guys understand this, how we increase the impact of LFI to RCE and how we are able
+128
+
+129
+00:11:22,020 --> 00:11:24,020
+to completely take over the server.
+129
+
+130
+00:11:24,840 --> 00:11:27,620
+This was just a demonstration where in we did not execute
+130
+
+131
+00:11:27,700 --> 00:11:35,170
+any harmful code onto the server, but any attacker with malicious intentions can do a lot of
+131
+
+132
+00:11:35,170 --> 00:11:42,100
+harm to the server, including addition or deletion of files from the server, which can make it completely
+132
+
+133
+00:11:42,100 --> 00:11:42,820
+unusable.
+133
+
+134
+00:11:43,420 --> 00:11:45,040
+So I hope you guys understood this.
+134
+
+135
+00:11:45,700 --> 00:11:50,830
+This can be considered as a P1 critical vulnerability on many of the bug bounty programs.
+135
+
+136
+00:11:51,160 --> 00:11:51,730
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,850 --> 00:00:03,430
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,120 --> 00:00:11,810
+So in this video, we are going to learn about two categories of file inclusion, namely local and remote.
+2
+
+3
+00:00:12,580 --> 00:00:21,070
+So before seeing this, let's recall when we learned about what is the difference between path traversal
+3
+
+4
+00:00:21,070 --> 00:00:29,620
+and file inclusion based vulnerabilities in which we saw that if we are able to read any file from any
+4
+
+5
+00:00:29,620 --> 00:00:33,130
+server, then it falls under path traversal.
+5
+
+6
+00:00:33,730 --> 00:00:41,110
+For example, if you are able to read a file, which is called as file dot php, then it will fall
+6
+
+7
+00:00:41,110 --> 00:00:42,820
+in that path traversal.
+7
+
+8
+00:00:44,110 --> 00:00:52,330
+But in LFI or local file inclusion, you're able to read the file as well and you are able to execute
+8
+
+9
+00:00:52,330 --> 00:00:54,910
+the file or execute the commands as well.
+9
+
+10
+00:00:55,660 --> 00:01:05,530
+That's why we have seen that path traversal is a subset of local file inclusion that basically sums
+10
+
+11
+00:01:05,530 --> 00:01:11,650
+up and summarizes to LFI equals path traversal plus execution.
+11
+
+12
+00:01:12,520 --> 00:01:13,090
+All right.
+12
+
+13
+00:01:13,480 --> 00:01:18,120
+So now let's see what is the difference between LFI and RFI.
+13
+
+14
+00:01:18,850 --> 00:01:24,430
+So as you can see on the left side of the screen, I have created a diagram and on to the right hand
+14
+
+15
+00:01:24,430 --> 00:01:27,860
+side of the screen, I have again created a diagram for RFI.
+15
+
+16
+00:01:29,230 --> 00:01:38,890
+Also, I have noted the very, very simplistic definition to understand this attack in which local file
+16
+
+17
+00:01:38,890 --> 00:01:46,660
+inclusion or LFI means when any attacker is able to load files from the local server or the web application
+17
+
+18
+00:01:46,660 --> 00:01:56,380
+itself and is also being able to execute commands, then the attacker has found how valid LFI vulnerability
+18
+
+19
+00:01:57,250 --> 00:01:58,390
+Onto the right hand side.
+19
+
+20
+00:01:58,660 --> 00:02:06,190
+If the attacker is able to load any files from any given remote server that he controls and is also
+20
+
+21
+00:02:06,190 --> 00:02:13,780
+able to execute some specific command, then he has found a remote file inclusion vulnerability.
+21
+
+22
+00:02:14,920 --> 00:02:18,430
+Now let's understand this more with the help of a diagram.
+22
+
+23
+00:02:19,360 --> 00:02:24,050
+As you can see, this is the attacker and this is the target web application server.
+23
+
+24
+00:02:24,940 --> 00:02:33,520
+So in LFI, the attacker is going to read the files, for instance, file dot php or etc/passwd
+24
+
+25
+00:02:33,520 --> 00:02:33,850
+file.
+25
+
+26
+00:02:34,750 --> 00:02:42,100
+And the attacker is also able to execute a specific set of commands onto the target server to retrieve
+26
+
+27
+00:02:42,100 --> 00:02:43,090
+the sensitive data.
+27
+
+28
+00:02:44,290 --> 00:02:51,610
+On the right hand side, you can see the attacker is able to read the files as well as execute commands.
+28
+
+29
+00:02:51,790 --> 00:03:00,460
+But the attacker is also being able to load specific files from any bad server, as you can see over
+29
+
+30
+00:03:00,460 --> 00:03:08,440
+here, and the vulnerable web application or the server will successfully load the files and even execute
+30
+
+31
+00:03:08,440 --> 00:03:08,710
+them.
+31
+
+32
+00:03:09,430 --> 00:03:17,450
+This way, the attacker can run any files onto the bad server through a remotely configured bad server.
+32
+
+33
+00:03:18,250 --> 00:03:23,060
+So this is the main difference between local file inclusion and remote file inclusion.
+33
+
+34
+00:03:23,500 --> 00:03:24,910
+I hope you guys understood this.
+34
+
+35
+00:03:25,240 --> 00:03:25,780
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 14: Broken Link Hijacking
+
+0
+1
+00:00:01,750 --> 00:00:04,480
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:05,330 --> 00:00:12,590
+So in this video, we are going to see about an interesting vulnerability, which is broken link hijacking,
+2
+
+3
+00:00:13,550 --> 00:00:20,750
+maybe many of you must not have heard about the broken link hijacking or BLH because it is
+3
+
+4
+00:00:20,750 --> 00:00:27,680
+quite uncommon type of vulnerability, which is generally missed by a lot of security researchers.
+4
+
+5
+00:00:28,430 --> 00:00:31,700
+So why are we going to learn about BLH?
+5
+
+6
+00:00:32,240 --> 00:00:40,670
+Because it is one of its kind of vulnerabilities which is less identified by many hackers and it rewards
+6
+
+7
+00:00:40,730 --> 00:00:42,410
+good in different programs.
+7
+
+8
+00:00:43,730 --> 00:00:45,850
+So what is this vulnerability?
+8
+
+9
+00:00:46,220 --> 00:00:53,960
+So this vulnerability exists when any web application includes file, resources, scripts or any type
+9
+
+10
+00:00:53,960 --> 00:01:00,230
+of data from another Web server, and the links are not active anymore and available to claim.
+10
+
+11
+00:01:01,100 --> 00:01:04,220
+So this basically means any target website.
+11
+
+12
+00:01:04,220 --> 00:01:11,180
+Let's say example dot com has a lot of links which are being pointed to, let's say another website
+12
+
+13
+00:01:11,180 --> 00:01:12,670
+with this example dot com.
+13
+
+14
+00:01:13,070 --> 00:01:18,460
+But those links are not functional anymore and they are available to be taken over.
+14
+
+15
+00:01:19,070 --> 00:01:21,530
+This is broken link hijacking.
+15
+
+16
+00:01:21,800 --> 00:01:30,110
+In this way, any attacker can claim those particular link which are serving the data and can also serve
+16
+
+17
+00:01:30,110 --> 00:01:32,510
+malicious content to the users.
+17
+
+18
+00:01:32,540 --> 00:01:36,020
+So what is the motivation of this untouched vulnerability?
+18
+
+19
+00:01:36,680 --> 00:01:44,900
+As you can see, this was a poll done in which hackeone security researchers was asked about a broken
+19
+
+20
+00:01:44,900 --> 00:01:45,170
+link
+20
+
+21
+00:01:45,170 --> 00:01:51,790
+hijacking. Do you actively look for broken links on bug bounty programs only two said yes.
+21
+
+22
+00:01:52,340 --> 00:01:56,060
+And ten security researchers said no.
+22
+
+23
+00:01:56,510 --> 00:02:01,370
+They do not identify a broken link hijacking on many bug bounty programs.
+23
+
+24
+00:02:02,920 --> 00:02:10,290
+Now, this sounds a lot like a subdomain takeovers in which we take over the subdomains of target programs,
+24
+
+25
+00:02:10,780 --> 00:02:17,800
+but in this we are going to take over not the subdomains, but the resources, the links which are already
+25
+
+26
+00:02:17,800 --> 00:02:19,620
+there into the Web application.
+26
+
+27
+00:02:20,290 --> 00:02:25,690
+So let's understand this with the help of a figure, as you can see, onto the left hand side is the
+27
+
+28
+00:02:25,690 --> 00:02:31,730
+attacker and the right hand side is the server on which there are some links which are vulnerable.
+28
+
+29
+00:02:32,410 --> 00:02:40,570
+So let's say the attacker sends a request onto the target server where there is a link of the social
+29
+
+30
+00:02:40,570 --> 00:02:46,920
+media and let's say it is pointing to Linkedin when the attacker receives a response from the server,
+30
+
+31
+00:02:47,560 --> 00:02:52,850
+it says not found 404 or your profile does not exist.
+31
+
+32
+00:02:53,320 --> 00:02:59,680
+This basically means that the link is broken and is not available on Linkedin.
+32
+
+33
+00:03:00,070 --> 00:03:08,110
+Thus the attacker quickly signs up on LinkedIn platform and takes the same username which have been
+33
+
+34
+00:03:08,110 --> 00:03:09,700
+pointed on the server.
+34
+
+35
+00:03:10,690 --> 00:03:18,400
+This way, the attacker can serve a malicious profile on the server and anyone who comes onto the server
+35
+
+36
+00:03:18,520 --> 00:03:25,960
+and clicks on the social media of LinkedIn will be redirected to the attacker and will be communicated
+36
+
+37
+00:03:25,960 --> 00:03:30,630
+to the attackers profile, which he has impersonated and made onto.
+37
+
+38
+00:03:31,450 --> 00:03:33,640
+This is just not limited to LinkedIn.
+38
+
+39
+00:03:34,000 --> 00:03:39,490
+They can be many broken links to other social media platforms like Twitter, Facebook, Instagram,
+39
+
+40
+00:03:39,490 --> 00:03:49,900
+etc. To make this more bad,  there can be links that can be hijacked of S3 bucket as well as JavaScript
+40
+
+41
+00:03:49,900 --> 00:03:56,660
+files to serve malicious content and pop up XSS based vulnerabilities as well.
+41
+
+42
+00:03:57,610 --> 00:04:04,450
+So I hope you guys understood how dangerous it is if these types of issues are not fixed and how what
+42
+
+43
+00:04:04,450 --> 00:04:07,310
+can be the impact of broken link hijacking?
+43
+
+44
+00:04:08,410 --> 00:04:13,150
+Now let's understand one more example of broken link hijacking.
+44
+
+45
+00:04:14,170 --> 00:04:20,740
+This can be a dangerous vulnerability because the attacker can serve malicious content to all the users.
+45
+
+46
+00:04:21,100 --> 00:04:24,940
+As you can see, under the figure on the right hand side, there is an attacker.
+46
+
+47
+00:04:25,390 --> 00:04:31,140
+Let's say he wants to identify a script onto the target server.
+47
+
+48
+00:04:31,300 --> 00:04:37,770
+So let's say the script name is program dot sh. So he clicks onto the website and there he sees
+48
+
+49
+00:04:37,780 --> 00:04:44,140
+a button of download script when he clicks onto that download script the server sends a request
+49
+
+50
+00:04:44,140 --> 00:04:45,700
+to its CDN.
+50
+
+51
+00:04:45,880 --> 00:04:52,810
+Let's say the script is hosted on the AWS S3 bucket, but the link is broken.
+51
+
+52
+00:04:53,380 --> 00:05:01,900
+Now the attacker can quickly go onto a AWS, make the same bucket name and serve program dot sh
+52
+
+53
+00:05:01,900 --> 00:05:06,490
+as a malicious content on malicious file to all its users.
+53
+
+54
+00:05:07,000 --> 00:05:16,300
+This way, anyone who tries to download the file and execute this file will execute not the legitimate
+54
+
+55
+00:05:16,300 --> 00:05:20,650
+file from the server, but a harmful, malicious file of the attacker.
+55
+
+56
+00:05:21,490 --> 00:05:28,510
+So this way the attacker can compromise the security of all the users by serving his own malicious,
+56
+
+57
+00:05:28,510 --> 00:05:29,730
+executable files.
+57
+
+58
+00:05:30,700 --> 00:05:37,810
+This way, it increases the severity and criticality of this vulnerability, so I hope you guys understood.
+58
+
+59
+00:05:38,230 --> 00:05:38,800
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,000 --> 00:00:02,450
+Yes, so hello, everyone.
+1
+
+2
+00:00:02,980 --> 00:00:09,520
+So in this video, we are going to see one of the very interesting example of how a security researcher
+2
+
+3
+00:00:09,520 --> 00:00:15,400
+was able to identify a broken link hijacking into a company's LinkedIn page.
+3
+
+4
+00:00:15,910 --> 00:00:22,440
+And through this vulnerability, when he was able to identify, he reported the vulnerability and got
+4
+
+5
+00:00:22,450 --> 00:00:24,880
+a reward of five hundred dollars.
+5
+
+6
+00:00:25,330 --> 00:00:28,320
+So let's quickly see how he was able to identify.
+6
+
+7
+00:00:28,360 --> 00:00:35,080
+And then we are going to see the same proof of concept to identify a broken link hijacking on a company's
+7
+
+8
+00:00:35,080 --> 00:00:35,980
+LinkedIn page.
+8
+
+9
+00:00:36,220 --> 00:00:36,600
+All right.
+9
+
+10
+00:00:37,030 --> 00:00:41,290
+So a very good resource, which is ed overflow broken link hijacking.
+10
+
+11
+00:00:41,300 --> 00:00:45,010
+We are going to discuss it in the next couple of videos.
+11
+
+12
+00:00:45,820 --> 00:00:53,560
+So he used tool which is blc, we are also going to see how you can use this tool to identify broken
+12
+
+13
+00:00:53,560 --> 00:00:56,550
+links on any target of an application.
+13
+
+14
+00:00:56,560 --> 00:00:59,410
+But before that, let's see this interesting thing.
+14
+
+15
+00:00:59,900 --> 00:01:00,550
+Where in you can
+15
+
+16
+00:01:00,550 --> 00:01:05,620
+see the URL is www.linedkin.com/company and the company name.
+16
+
+17
+00:01:05,630 --> 00:01:08,800
+So the researcher was able to identify this.
+17
+
+18
+00:01:08,800 --> 00:01:15,010
+URL with the company name and the response to that was 404 not found.
+18
+
+19
+00:01:15,670 --> 00:01:21,880
+OK, so the next step was to create a company page with the above company name, which was actually
+19
+
+20
+00:01:21,880 --> 00:01:25,950
+not available or was not of any time published.
+20
+
+21
+00:01:26,650 --> 00:01:29,290
+So he made the company name in the above
+21
+
+22
+00:01:29,290 --> 00:01:31,660
+URL and he did took over that
+22
+
+23
+00:01:32,410 --> 00:01:39,070
+So now, as I hope you guys have understood as there is a LinkedIn page of the company, when I the user
+23
+
+24
+00:01:39,070 --> 00:01:43,540
+clicks on the link, he will be taken to the hacker controlled LinkedIn page.
+24
+
+25
+00:01:43,810 --> 00:01:44,250
+All right.
+25
+
+26
+00:01:44,530 --> 00:01:51,130
+So this way, any messages or any communication or queries that has been sent to the LinkedIn page will
+26
+
+27
+00:01:51,130 --> 00:01:53,220
+be sent to the attackers controlled page.
+27
+
+28
+00:01:53,590 --> 00:02:01,820
+And this way, the attacker can also create a business loss or reputation loss for the target organization.
+28
+
+29
+00:02:02,230 --> 00:02:08,910
+So let's see a quick POC or a proof of concept of this vulnerability.
+29
+
+30
+00:02:10,120 --> 00:02:13,540
+As you can see over here, the web application is broken
+30
+
+31
+00:02:13,540 --> 00:02:14,780
+dot srsecure 
+31
+
+32
+00:02:14,800 --> 00:02:16,530
+dot xyz
+32
+
+33
+00:02:16,540 --> 00:02:20,990
+wherein there is a broken link onto this target website.
+33
+
+34
+00:02:21,160 --> 00:02:22,810
+So where is the broken link?
+34
+
+35
+00:02:23,020 --> 00:02:27,210
+I have simulated the exact same scenario.
+35
+
+36
+00:02:27,220 --> 00:02:34,510
+And when you click on to the LinkedIn, so let me click on to the LinkedIn and you will be able to see that it is
+36
+
+37
+00:02:34,810 --> 00:02:35,380
+unavailable.
+37
+
+38
+00:02:35,560 --> 00:02:42,430
+Can you see the profile is unavailable, which means there is no account on LinkedIn that has been
+38
+
+39
+00:02:42,430 --> 00:02:44,470
+created with LinkedIn.
+39
+
+40
+00:02:44,860 --> 00:02:53,110
+The same URL and you can see what was the profile name, the profile name is if you look closely on
+40
+
+41
+00:02:53,110 --> 00:02:55,020
+the left bottom over here.
+41
+
+42
+00:02:56,170 --> 00:02:57,850
+Let me take over there and it is.
+42
+
+43
+00:02:57,850 --> 00:02:59,260
+Take me over please.
+43
+
+44
+00:02:59,300 --> 00:02:59,700
+All right.
+44
+
+45
+00:02:59,710 --> 00:03:06,700
+So now we are going to take over the account for that I have just signed up on LinkedIn and I have created
+45
+
+46
+00:03:06,700 --> 00:03:07,280
+account.
+46
+
+47
+00:03:07,300 --> 00:03:12,710
+So let me just finish the steps and then we are going to take over the LinkedIn profile.
+47
+
+48
+00:03:13,330 --> 00:03:17,710
+So let me quickly put these details click on next.
+48
+
+49
+00:03:19,670 --> 00:03:21,110
+OK, so let's say student.
+49
+
+50
+00:03:24,680 --> 00:03:27,260
+OK, so let's say.
+50
+
+51
+00:03:28,690 --> 00:03:30,220
+Google, for instance.
+51
+
+52
+00:03:34,440 --> 00:03:36,370
+OK, so are you looking for a new job?
+52
+
+53
+00:03:36,470 --> 00:03:37,050
+Not now.
+53
+
+54
+00:03:37,780 --> 00:03:39,390
+Let's quickly skip this.
+54
+
+55
+00:03:42,190 --> 00:03:47,230
+OK, so let's skip this as well, let's skip this as well and.
+55
+
+56
+00:03:49,070 --> 00:03:50,130
+Let's finish this.
+56
+
+57
+00:03:50,420 --> 00:03:57,370
+All right, so you can see we're now we have successfully created our account and perfect.
+57
+
+58
+00:03:58,280 --> 00:04:05,080
+Let's go on to our settings page quickly and click on View Profile, as you can see when I click on
+58
+
+59
+00:04:05,090 --> 00:04:05,850
+view profile.
+59
+
+60
+00:04:05,900 --> 00:04:09,080
+This is my profile link which says hacker
+60
+
+61
+00:04:09,770 --> 00:04:14,150
+Hyphen Udemy hyphen aa77201ba
+61
+
+62
+00:04:14,180 --> 00:04:20,350
+So I need to change this right because I want a new URL for myself.
+62
+
+63
+00:04:20,360 --> 00:04:25,480
+So for that I need to go into the settings and I need to change my public URL.
+63
+
+64
+00:04:25,490 --> 00:04:31,430
+So let me go in settings and let me see my public
+64
+
+65
+00:04:31,430 --> 00:04:32,150
+URL
+65
+
+66
+00:04:32,210 --> 00:04:33,470
+So it should be in.
+66
+
+67
+00:04:35,450 --> 00:04:44,360
+Yeah, so I am able to edit this profile, you also just head over to edit contact info and when I click on
+67
+
+68
+00:04:44,360 --> 00:04:48,580
+this, I will be redirected to edit my public profile.
+68
+
+69
+00:04:48,990 --> 00:04:49,360
+All right.
+69
+
+70
+00:04:49,460 --> 00:04:57,410
+So here you can see on to the right hand side edit your custom URL so I am going to edit this to take me over
+70
+
+71
+00:04:58,040 --> 00:04:59,720
+please, and see if this.
+71
+
+72
+00:05:00,550 --> 00:05:02,670
+And you can see success perfect.
+72
+
+73
+00:05:03,190 --> 00:05:05,200
+Now let's see if we are able to take over this.
+73
+
+74
+00:05:05,210 --> 00:05:09,550
+So let me just reload this again and click on the LinkedIn once.
+74
+
+75
+00:05:10,060 --> 00:05:17,350
+So once I click on LinkedIn and you can see we have successfully taken over the LinkedIn profile of the
+75
+
+76
+00:05:17,350 --> 00:05:25,510
+Target organization and now the malicious content will be served using this profile, which is hacker Udemy
+76
+
+77
+00:05:25,510 --> 00:05:31,830
+that we have recently created and this is the attacker controlled domain.
+77
+
+78
+00:05:32,290 --> 00:05:34,930
+So I hope you guys understood how you can do this.
+78
+
+79
+00:05:35,080 --> 00:05:35,650
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,210 --> 00:00:03,880
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,150 --> 00:00:10,690
+So in this video, we are going to see some of the very useful resources that can be used for broken
+2
+
+3
+00:00:10,690 --> 00:00:14,890
+link hijacking, how expired links can be exploited.
+3
+
+4
+00:00:15,670 --> 00:00:16,050
+All right.
+4
+
+5
+00:00:16,060 --> 00:00:19,590
+So first, let's quickly see stored broken link hijacking.
+5
+
+6
+00:00:20,050 --> 00:00:26,870
+So this way the attacker can do impersonation of the company's account.
+6
+
+7
+00:00:26,890 --> 00:00:34,330
+It can be social media accounts or any other account that are pointing to different platforms like Instagram,
+7
+
+8
+00:00:34,330 --> 00:00:37,740
+Twitter, LinkedIn, Pinterest, etc..
+8
+
+9
+00:00:38,650 --> 00:00:41,590
+Second way is external J.S. file hacking.
+9
+
+10
+00:00:41,870 --> 00:00:43,850
+Now, this is very, very simple.
+10
+
+11
+00:00:44,230 --> 00:00:52,510
+So let's assume the target of Web application has this particular code in which they are loading a script
+11
+
+12
+00:00:52,510 --> 00:00:58,300
+for from example dot com script dot js. Now for some reasons.
+12
+
+13
+00:00:58,510 --> 00:01:05,080
+The example dot com is a cloud service and allows us to put our J.S. code over there.
+13
+
+14
+00:01:05,500 --> 00:01:08,320
+So this link is not working anymore.
+14
+
+15
+00:01:08,410 --> 00:01:12,670
+Let's assume that so we are able to put our J.S. code over there.
+15
+
+16
+00:01:12,940 --> 00:01:21,820
+And when the target web application loads this J.S. , which is the JavaScript from the example dot com
+16
+
+17
+00:01:21,820 --> 00:01:27,490
+at that time, it is going to load the attacker controlled malicious J.S. file.
+17
+
+18
+00:01:27,700 --> 00:01:36,310
+So this way we can take over the example dot com or we can takeover the name of the same file which has been
+18
+
+19
+00:01:36,310 --> 00:01:42,050
+uploaded and control the JS file on example dot EDU, which is the target web application.
+19
+
+20
+00:01:42,940 --> 00:01:45,220
+This can also lead to information leakage.
+20
+
+21
+00:01:45,400 --> 00:01:55,540
+In many cases, old dead links which are supplied into the noreferrer or these types of parameters can easily
+21
+
+22
+00:01:55,540 --> 00:01:56,380
+be taken over.
+22
+
+23
+00:01:57,070 --> 00:02:03,610
+There are many instances when companies still link to expired analytics page, and this way, if we
+23
+
+24
+00:02:03,610 --> 00:02:10,930
+take over the analytics page, the attacker can monitor traffic and possibly get a lot of a valuable
+24
+
+25
+00:02:10,930 --> 00:02:19,150
+information. Content hijacking and also within wherein we can hijack the malicious content and serve
+25
+
+26
+00:02:19,150 --> 00:02:21,350
+our own malicious content.
+26
+
+27
+00:02:22,450 --> 00:02:30,250
+Similarly reflected broken link hijacking in which all the parameters like href and source attribute
+27
+
+28
+00:02:30,250 --> 00:02:34,460
+contains the links which are dead that can easily be taken over.
+28
+
+29
+00:02:35,050 --> 00:02:43,240
+For example, if you see examples scenario over here, the CDN example dot com serves script dot JS and
+29
+
+30
+00:02:43,240 --> 00:02:51,020
+if you are able to take over that, we are able to serve our malicious content or malicious file.
+30
+
+31
+00:02:51,020 --> 00:02:54,870
+It is kind of the same example that we have seen previously.
+31
+
+32
+00:02:55,990 --> 00:03:02,680
+So some of the tools to do this, obviously it will get very, very difficult to identify each link
+32
+
+33
+00:03:02,680 --> 00:03:08,700
+on to the target web application one by one to see which one of is working on which one is broken.
+33
+
+34
+00:03:08,710 --> 00:03:14,240
+We cannot do it manually by clicking on each link for the identification purposes.
+34
+
+35
+00:03:14,590 --> 00:03:20,530
+So for this, there's a very awesome tool called Broken Link Checker, which we are going to use right
+35
+
+36
+00:03:20,530 --> 00:03:25,440
+now to identify the broken links on any target web application.
+36
+
+37
+00:03:25,450 --> 00:03:27,040
+So let's quickly go on to that link.
+37
+
+38
+00:03:28,210 --> 00:03:36,310
+And you can see this is the tool now to install this tool, you should have NPM and installed. You require
+38
+
+39
+00:03:36,310 --> 00:03:43,370
+NodeJS so you can install NodeJS and you can just copy paste this command into your terminal.
+39
+
+40
+00:03:44,490 --> 00:03:51,440
+Now, once you do this, you are ready to run a broken link checker or in short bl.
+40
+
+41
+00:03:52,350 --> 00:03:53,580
+So let's copy this command
+41
+
+42
+00:03:53,580 --> 00:03:58,920
+And let's paste it into our terminal and let's see what happens.
+42
+
+43
+00:03:59,100 --> 00:04:04,470
+So you can read more about the tool and the documentation from here, and you will be able to know a
+43
+
+44
+00:04:04,470 --> 00:04:07,740
+lot of more options that you can use.
+44
+
+45
+00:04:07,920 --> 00:04:08,310
+All right.
+45
+
+46
+00:04:08,640 --> 00:04:12,330
+So let's quickly copy this and paste it onto our terminal.
+46
+
+47
+00:04:12,540 --> 00:04:12,930
+So.
+47
+
+48
+00:04:14,600 --> 00:04:21,710
+Now, you can see over here the filter level is sorry about that filter level is three 
+48
+
+49
+00:04:21,710 --> 00:04:23,900
+https://broken.srsecure.xyz
+49
+
+50
+00:04:23,960 --> 00:04:28,790
+So I will hit enter and it will start identifying each 
+50
+
+51
+00:04:29,940 --> 00:04:38,190
+link one by one, it will start identifying each link, one by one onto the target web application and
+51
+
+52
+00:04:38,190 --> 00:04:42,340
+will denote you if it is OK or if it is broken, as you can see over here.
+52
+
+53
+00:04:42,930 --> 00:04:48,570
+Now, one thing to notice over here is let's say if this link is broken, as you can see over here,
+53
+
+54
+00:04:49,110 --> 00:04:59,340
+because there is no jcarousel dot css file into the server, but we cannot take over this because this
+54
+
+55
+00:04:59,340 --> 00:05:06,420
+file is actually uploaded onto the main target subdomain or that main target server in case you are
+55
+
+56
+00:05:06,420 --> 00:05:13,340
+able to take over broken.srsecure.xyz,  using subdomain takeover, then you can serve the malicious content.
+56
+
+57
+00:05:13,350 --> 00:05:18,570
+But for now, if there is no subdomain takeover vulnerability, you cannot serve the malicious content which
+57
+
+58
+00:05:18,570 --> 00:05:20,560
+is hosted on the server itself.
+58
+
+59
+00:05:21,150 --> 00:05:25,050
+So let's try to identify some links which are not hosted on the same server.
+59
+
+60
+00:05:25,050 --> 00:05:32,910
+But somewhere else. Here we can see that we have identified a broken link which is on LinkedIn.
+60
+
+61
+00:05:33,510 --> 00:05:41,920
+Now we can takeover this now because this is pointing to a LinkedIn profile which says Take me over please.
+61
+
+62
+00:05:42,360 --> 00:05:50,430
+So yeah, we have made this vulnerable link onto the target server and it has successfully pointed out
+62
+
+63
+00:05:50,430 --> 00:05:53,400
+that this is a broken link which can be taken over.
+63
+
+64
+00:05:53,940 --> 00:06:00,480
+So I hope you guys understand how you can utilize this and it will tell you all the broken links into
+64
+
+65
+00:06:00,480 --> 00:06:01,430
+any target.
+65
+
+66
+00:06:02,190 --> 00:06:05,420
+As you can see, this is the final finished version.
+66
+
+67
+00:06:05,430 --> 00:06:07,500
+And you can see these are all the broken links.
+67
+
+68
+00:06:07,770 --> 00:06:13,930
+We cannot take over this, but we can take over the LinkedIn one and we can report it to the Target website.
+68
+
+69
+00:06:15,090 --> 00:06:15,990
+So thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,810 --> 00:00:04,370
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,990 --> 00:00:11,260
+So this is a very interesting find by one of the security researchers in which he was able to take over
+2
+
+3
+00:00:11,260 --> 00:00:13,780
+a company's Instagram page in two minutes.
+3
+
+4
+00:00:13,990 --> 00:00:17,710
+So this is, again, an example of broken link hijacking.
+4
+
+5
+00:00:18,580 --> 00:00:24,220
+So are you thinking I heard about subdomain hijacking, but what is broken link hijacking?
+5
+
+6
+00:00:24,910 --> 00:00:30,370
+So there is only one difference between what it involves an expired link onto the target page.
+6
+
+7
+00:00:30,610 --> 00:00:31,080
+All right.
+7
+
+8
+00:00:31,090 --> 00:00:33,190
+So we know this now.
+8
+
+9
+00:00:33,760 --> 00:00:41,430
+When the user came onto the target web application, he came onto one of the URL that was Instagram,
+9
+
+10
+00:00:41,440 --> 00:00:46,510
+as you can see over here, instagram dot com target insta one, two, three.
+10
+
+11
+00:00:46,990 --> 00:00:50,250
+And you can see sorry the page isn't available message.
+11
+
+12
+00:00:50,260 --> 00:00:54,250
+onto that target Instagram page of the target company.
+12
+
+13
+00:00:55,810 --> 00:01:04,750
+Now we can take over this particular target name, so he successfully created and he was able to take
+13
+
+14
+00:01:04,750 --> 00:01:07,780
+over the company's Instagram page, so impact of 
+14
+
+15
+00:01:07,920 --> 00:01:11,740
+the issue is more reputational than monetary loss to the company.
+15
+
+16
+00:01:12,010 --> 00:01:17,330
+Attacker can post bad content in the name of the company as the page is linked with the website.
+16
+
+17
+00:01:17,470 --> 00:01:22,570
+So whenever a legitimate user comes and clicks will be redirected to the attacker controlled account.
+17
+
+18
+00:01:23,110 --> 00:01:29,650
+Now, the impact can also be increased in a way that the attacker tries to communicate with the users
+18
+
+19
+00:01:29,800 --> 00:01:35,800
+through the name of the organization on which the account has been successfully created.
+19
+
+20
+00:01:36,160 --> 00:01:39,370
+That can also lead to monetary loss.
+20
+
+21
+00:01:40,720 --> 00:01:46,970
+So this was a very, very simple report that was identified and reported to the target organization.
+21
+
+22
+00:01:47,320 --> 00:01:54,730
+So this gives you a brief idea of how not to miss these types of vulnerabilities into the social media
+22
+
+23
+00:01:54,730 --> 00:01:57,830
+handles on any target web application.
+23
+
+24
+00:01:58,330 --> 00:01:59,860
+So I hope you guys understood this.
+24
+
+25
+00:02:00,190 --> 00:02:00,760
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,420 --> 00:00:03,210
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:03,540 --> 00:00:10,290
+So while performing penetration testing for Target Organization, we are able to identify one of the
+2
+
+3
+00:00:10,290 --> 00:00:13,120
+broken link into the Web application.
+3
+
+4
+00:00:13,350 --> 00:00:17,300
+So, as you can see, this is a live target, which is your dost dot com.
+4
+
+5
+00:00:17,850 --> 00:00:25,860
+And onto this target web application, we identified that one of the link was pointing to another service,
+5
+
+6
+00:00:25,860 --> 00:00:29,850
+but actually never was existing or was never claimed.
+6
+
+7
+00:00:30,450 --> 00:00:30,930
+All right.
+7
+
+8
+00:00:31,110 --> 00:00:33,810
+So let's see this how we are able to identify this.
+8
+
+9
+00:00:34,590 --> 00:00:42,650
+So we clicked on one of the users page and redirected to the LinkedIn profile, as we can see over here
+9
+
+10
+00:00:43,260 --> 00:00:43,550
+now.
+10
+
+11
+00:00:44,040 --> 00:00:49,440
+Unfortunately, this LinkedIn profile does not exist or the profile is not available.
+11
+
+12
+00:00:50,160 --> 00:00:57,180
+So now what the attacker is going to do is attacker is going to create a LinkedIn profile with the same
+12
+
+13
+00:00:57,180 --> 00:01:05,610
+user name, which was pointing to LinkedIn from the target of application, which is your dost dot com.
+13
+
+14
+00:01:05,880 --> 00:01:06,320
+All right.
+14
+
+15
+00:01:06,810 --> 00:01:10,440
+So as you can see, I have created account with the name Goodman.
+15
+
+16
+00:01:11,100 --> 00:01:18,270
+So I'm just going to quickly go into the settings to identify where I can change my public URL
+16
+
+17
+00:01:18,720 --> 00:01:20,820
+and take over the target
+17
+
+18
+00:01:21,270 --> 00:01:24,270
+URL of the target web application.
+18
+
+19
+00:01:24,830 --> 00:01:28,710
+So let me just navigate to edit my public profile.
+19
+
+20
+00:01:29,460 --> 00:01:34,490
+And you can see on the right hand side, this is my old profile, which is good man.
+20
+
+21
+00:01:34,500 --> 00:01:38,880
+And now I'm going to copy this URL and past it over here.
+21
+
+22
+00:01:40,750 --> 00:01:42,620
+So, yeah, I have done this.
+22
+
+23
+00:01:42,640 --> 00:01:45,150
+Let me just save this and you can see success.
+23
+
+24
+00:01:45,160 --> 00:01:46,570
+We have updated your settings.
+24
+
+25
+00:01:46,870 --> 00:01:49,740
+I have successfully claimed the new URL.
+25
+
+26
+00:01:50,020 --> 00:01:56,680
+So let me again click on the URL as you see, this person works in the operations.
+26
+
+27
+00:01:56,860 --> 00:01:57,300
+All right.
+27
+
+28
+00:01:57,670 --> 00:02:08,230
+So now any attacker can impersonate this employee, which is working in operations and try to communicate
+28
+
+29
+00:02:08,230 --> 00:02:14,230
+with other users or communicate with the people who are working on this website.
+29
+
+30
+00:02:14,680 --> 00:02:20,130
+And this way it can be a loss to the target company or organization.
+30
+
+31
+00:02:20,710 --> 00:02:22,450
+So I hope you guys understood this.
+31
+
+32
+00:02:22,960 --> 00:02:23,560
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,480 --> 00:00:01,830
+And welcome to this video.
+1
+
+2
+00:00:02,490 --> 00:00:09,060
+So in this video, we are going to see interesting broken link hijacking report in which a security
+2
+
+3
+00:00:09,060 --> 00:00:14,560
+researcher was able to identify this issue on one of the program on hackerone.
+3
+
+4
+00:00:15,150 --> 00:00:22,020
+So let's have a closer look onto this report, which was submitted to a bug bounty program, which is
+4
+
+5
+00:00:22,020 --> 00:00:22,830
+a Gratipay.
+5
+
+6
+00:00:23,730 --> 00:00:30,950
+As you can see, the security researcher was able to identify the issue on a subdomain, which is gratipay dot
+6
+
+7
+00:00:30,960 --> 00:00:32,720
+piwik dot pro.
+7
+
+8
+00:00:33,300 --> 00:00:40,480
+Now, for those who do not know what is Piwik, it is an alternative for Google Analytics Suite.
+8
+
+9
+00:00:40,920 --> 00:00:49,020
+So these are some of the software or services which are used by many of the organizations to keep track
+9
+
+10
+00:00:49,020 --> 00:00:58,350
+of their data and to keep track of how many users or customers are landing onto their web applications.
+10
+
+11
+00:00:58,740 --> 00:01:02,310
+So as you can see, this is an alternative to Google Analytics.
+11
+
+12
+00:01:02,690 --> 00:01:13,320
+Now, what happened here was that Gratipay had one of its account on Piwik dot pro, and this led
+12
+
+13
+00:01:13,320 --> 00:01:17,620
+to this subdomain takeover, as you can see over here.
+13
+
+14
+00:01:18,210 --> 00:01:25,360
+Now, actually, the root cause of this was which is mentioned by the program owner.
+14
+
+15
+00:01:25,710 --> 00:01:31,970
+The issue is that we have stopped using Piwik, but it still includes the JavaScript on our pages.
+15
+
+16
+00:01:32,490 --> 00:01:41,760
+Now, due to this, the subdomain, which is gratipay dot piwikpay dot pro, was still available to claim
+16
+
+17
+00:01:41,760 --> 00:01:44,820
+by the security researcher, as you can see over here.
+17
+
+18
+00:01:45,180 --> 00:01:49,390
+So this is gratipay.piwik.pro and you can see the subdomain is available.
+18
+
+19
+00:01:49,800 --> 00:01:56,580
+Now, the main thing that arises over here is how did the security researcher came to know about this?
+19
+
+20
+00:01:57,210 --> 00:02:01,860
+It is just because of the broken links into the JavaScript files.
+20
+
+21
+00:02:02,430 --> 00:02:11,040
+And due to this, the issue came up and the security researcher was quickly able to escalate it to claim
+21
+
+22
+00:02:11,040 --> 00:02:15,840
+this subdomain free of cost and show the proof of concept.
+22
+
+23
+00:02:16,830 --> 00:02:19,260
+So this is, again, a very interesting find.
+23
+
+24
+00:02:19,260 --> 00:02:26,940
+And you should always remember that JavaScript files can be very, very useful to identify many URLS and
+24
+
+25
+00:02:26,940 --> 00:02:33,750
+to track if they are still valid or dead in case they are dead, then its very, very good for us to
+25
+
+26
+00:02:33,750 --> 00:02:40,530
+claim those particular URLs if they're pointing onto any cloud service or public services that can be
+26
+
+27
+00:02:40,530 --> 00:02:46,140
+easily claimed and we can takeover that to show the criticality and severity of the issue.
+27
+
+28
+00:02:46,890 --> 00:02:54,450
+So I hope you guys understood this and learn from this bug bounty report that how you should also look
+28
+
+29
+00:02:54,450 --> 00:02:57,600
+over all the javascript files and do not miss it.
+29
+
+30
+00:02:57,990 --> 00:02:58,530
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,220 --> 00:00:03,680
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,280 --> 00:00:11,360
+So in this video, we are going to see one of a very good resource which can be useful for us for identification
+2
+
+3
+00:00:11,360 --> 00:00:17,660
+of broken links into any targeted Web application, if it is of a bug bounty program or while you are
+3
+
+4
+00:00:17,660 --> 00:00:20,240
+doing any penetration testing job.
+4
+
+5
+00:00:20,990 --> 00:00:21,490
+All right.
+5
+
+6
+00:00:21,500 --> 00:00:28,580
+So if you just come on dead link checker dot com, here you can see it is a free, broken link tool.
+6
+
+7
+00:00:28,970 --> 00:00:36,460
+Now, this tool has been helpful for me to identify a lot of broken links onto any target web application.
+7
+
+8
+00:00:36,770 --> 00:00:40,400
+So let's try and see how does it work?
+8
+
+9
+00:00:40,850 --> 00:00:43,430
+So you just need to enter your target.
+9
+
+10
+00:00:43,490 --> 00:00:49,180
+So, for instance, our target here is broken.srsecure.xyz
+10
+
+11
+00:00:49,630 --> 00:00:55,880
+Remember, this is an application which I have created and I have kept it to be vulnerable by design.
+11
+
+12
+00:00:56,870 --> 00:01:03,280
+Now you can choose a single Web page or check the whole website when you choose, check the whole website
+12
+
+13
+00:01:03,290 --> 00:01:07,540
+it is going to crawl all the URL's onto the target of Web application.
+13
+
+14
+00:01:07,850 --> 00:01:14,570
+So basically it is going to spider the application, identify all the URL's and try to see if they
+14
+
+15
+00:01:14,570 --> 00:01:15,580
+respond or not.
+15
+
+16
+00:01:16,420 --> 00:01:23,500
+If it identifies any of the URL's, that it will just reflected over here and will let us know.
+16
+
+17
+00:01:25,100 --> 00:01:31,310
+Additionally, if you want to check only the single page and the links onto the target page, for instance,
+17
+
+18
+00:01:31,610 --> 00:01:38,210
+broken.srsecure.xyz/contact.html 
+18
+
+19
+00:01:38,820 --> 00:01:42,950
+It will only see all the links on this targeted page.
+19
+
+20
+00:01:43,430 --> 00:01:48,580
+But here we want to see all the links are you are allowed onto the whole Web site.
+20
+
+21
+00:01:49,520 --> 00:01:53,870
+So after you hit check, it is going to give you a captcha.
+21
+
+22
+00:01:53,930 --> 00:02:00,580
+So just pass this captcha and again check and then you have to wait for it to finish.
+22
+
+23
+00:02:01,010 --> 00:02:05,830
+As you can see, it has already started scanning and has identified around 60 URL's
+23
+
+24
+00:02:05,840 --> 00:02:13,550
+till now there will be a lot of you are URLs that will come over here that will include fonts,
+24
+
+25
+00:02:13,880 --> 00:02:16,370
+image, JavaScript, etc..
+25
+
+26
+00:02:16,880 --> 00:02:22,460
+Now, you need to keep in mind that you cannot take over those not found.
+26
+
+27
+00:02:22,460 --> 00:02:28,560
+As you can see over here, we have identified there are a lot of not found and total of nine failed.
+27
+
+28
+00:02:29,210 --> 00:02:35,510
+You cannot takeover this because these are the resources or the data or files that have been hosted on
+28
+
+29
+00:02:35,570 --> 00:02:36,980
+the same server.
+29
+
+30
+00:02:37,370 --> 00:02:41,780
+So let's see something else that what can we do takeover?
+30
+
+31
+00:02:42,290 --> 00:02:47,020
+As you can see over here, this is LinkedIn.com/in/
+31
+
+32
+00:02:47,360 --> 00:02:48,500
+Take me, please.
+32
+
+33
+00:02:48,860 --> 00:02:56,600
+Now, we know this this is one of the LinkedIn profile that has been created but never claimed on LinkedIn
+33
+
+34
+00:02:56,960 --> 00:02:58,830
+or the profile does not exist.
+34
+
+35
+00:02:59,420 --> 00:03:06,380
+So in this case, we can, as an attacker, take over the LinkedIn profile page and successfully claim
+35
+
+36
+00:03:06,380 --> 00:03:07,810
+it. This way
+36
+
+37
+00:03:07,820 --> 00:03:15,110
+the attacker can also impersonate as an employee of the targeted organization and further conduct other
+37
+
+38
+00:03:15,110 --> 00:03:18,900
+attacks like phishing, brand reputation or business loss.
+38
+
+39
+00:03:19,430 --> 00:03:25,960
+So I hope you guys understood how you can utilize this in your day to day job for identification of
+39
+
+40
+00:03:26,210 --> 00:03:29,600
+broken link hijacking on multiple bug bounty programs.
+40
+
+41
+00:03:29,930 --> 00:03:30,470
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,750 --> 00:00:03,680
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,500 --> 00:00:11,850
+So till now we have seen a lot of resources about broken link hijacking as well as we have discussed many
+2
+
+3
+00:00:11,850 --> 00:00:14,220
+practical scenarios and test cases, too.
+3
+
+4
+00:00:15,270 --> 00:00:16,110
+But what if?
+4
+
+5
+00:00:17,070 --> 00:00:23,250
+You get something that is going to help you while you browse the website onto your browser, that would
+5
+
+6
+00:00:23,250 --> 00:00:32,220
+become pretty convenient for you for identification of automated broken links into any target of application for
+6
+
+7
+00:00:32,220 --> 00:00:33,360
+any bug bounty program.
+7
+
+8
+00:00:34,200 --> 00:00:40,890
+So, yes, there has been a very, very useful extension that I came across and I really liked it,
+8
+
+9
+00:00:41,490 --> 00:00:47,690
+which helps you identify the broken links on any target application right through your browser.
+9
+
+10
+00:00:48,840 --> 00:00:51,770
+So it is broken link checker.
+10
+
+11
+00:00:51,810 --> 00:00:56,910
+It is a free extension that is available for your browser, for here
+11
+
+12
+00:00:56,910 --> 00:00:58,410
+I'm going to use it for Chrome.
+12
+
+13
+00:00:59,220 --> 00:01:02,970
+You just need to click on add as I've already installed it.
+13
+
+14
+00:01:03,180 --> 00:01:08,070
+And you can see over here, it says Remove from chrome and you can see
+14
+
+15
+00:01:09,200 --> 00:01:14,710
+A pink color box that will appear on to the right hand side of your browser.
+15
+
+16
+00:01:16,460 --> 00:01:23,570
+All right, so now we are on to the target web page, which is yourdost dot com and we are onto the
+16
+
+17
+00:01:23,570 --> 00:01:24,170
+homepage.
+17
+
+18
+00:01:24,200 --> 00:01:27,200
+We are currently not into any of its
+18
+
+19
+00:01:28,220 --> 00:01:29,830
+internal pages.
+19
+
+20
+00:01:29,840 --> 00:01:36,830
+As you can see, there are many pages like expert discussion, covid-19, etc. So let's try to identify
+20
+
+21
+00:01:36,830 --> 00:01:43,790
+some links onto this targeted Web page and see if we successfully identify any of the broken links.
+21
+
+22
+00:01:44,570 --> 00:01:50,060
+So I'll simply click on this and it will start scanning the link very, very quickly.
+22
+
+23
+00:01:50,660 --> 00:01:55,790
+And you can see it has identified a total of 75 links on this page.
+23
+
+24
+00:01:56,270 --> 00:02:00,080
+And you can see it has already identified two errors.
+24
+
+25
+00:02:00,770 --> 00:02:01,330
+All right.
+25
+
+26
+00:02:01,880 --> 00:02:06,350
+So let's try to click on the links that it has identified.
+26
+
+27
+00:02:07,360 --> 00:02:16,260
+And go over there and you can see this is the link which is pointing to the Play Store and this id equals to
+27
+
+28
+00:02:16,330 --> 00:02:22,990
+go dot yourdost dot app is the id of the application where it is pointing to.
+28
+
+29
+00:02:23,530 --> 00:02:26,390
+But there is no such application onto the play store.
+29
+
+30
+00:02:27,160 --> 00:02:32,600
+Now, this can be abused by the attacker in which he can try to put an application onto the Play Store
+30
+
+31
+00:02:32,610 --> 00:02:37,670
+with the same name or with the same ID as you can see over here.
+31
+
+32
+00:02:38,710 --> 00:02:41,610
+Similar case must be under the App Store.
+32
+
+33
+00:02:41,770 --> 00:02:46,060
+So let's try to see this and again, see app not available.
+33
+
+34
+00:02:47,440 --> 00:02:55,060
+So attacker can also put up under the App Store, which can be impersonated as the application from
+34
+
+35
+00:02:55,270 --> 00:02:57,290
+our target web application.
+35
+
+36
+00:02:58,090 --> 00:03:03,910
+Let's move onto the website and let's see if we are able to identify manually these links.
+36
+
+37
+00:03:05,530 --> 00:03:11,500
+And it should be somewhere we can see the Android links onto the targeted Web page.
+37
+
+38
+00:03:15,640 --> 00:03:23,200
+Yeah, so as you can see, these links are being hidden from the Target webpage, but it has been added
+38
+
+39
+00:03:23,410 --> 00:03:25,590
+in the back end to the page source.
+39
+
+40
+00:03:26,350 --> 00:03:32,260
+So this helps you to identify even hidden links which you are not able to identify visually onto the
+40
+
+41
+00:03:32,260 --> 00:03:33,620
+target application.
+41
+
+42
+00:03:34,450 --> 00:03:40,810
+So I hope you guys understood this and you find this very, very helpful into identification of broken
+42
+
+43
+00:03:40,810 --> 00:03:41,260
+links.
+43
+
+44
+00:03:41,740 --> 00:03:42,250
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,560 --> 00:00:03,290
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:03,890 --> 00:00:09,080
+So in this video, we are going to see common injection through broken link hijacking.
+2
+
+3
+00:00:09,080 --> 00:00:13,340
+So it is a very, very interesting report that we have come across.
+3
+
+4
+00:00:13,640 --> 00:00:23,030
+And here the report was submitted to Facebook and Facebook rewarded with 500 dollars for this specific
+4
+
+5
+00:00:23,030 --> 00:00:23,870
+vulnerability
+5
+
+6
+00:00:24,380 --> 00:00:30,530
+Now, you may be thinking that we have seen what is a broken link hijacking and now are we able to do
+6
+
+7
+00:00:30,560 --> 00:00:32,980
+common injection through broken link hijacking?
+7
+
+8
+00:00:32,990 --> 00:00:39,690
+And it is yes, you're able to do it if you find the right test case scenario.
+8
+
+9
+00:00:40,490 --> 00:00:41,020
+All right.
+9
+
+10
+00:00:41,030 --> 00:00:42,210
+So let's see this.
+10
+
+11
+00:00:42,920 --> 00:00:46,580
+So this guy used the dork.
+11
+
+12
+00:00:46,580 --> 00:00:54,550
+As you can see, this is the Google dock, which is organization Facebook and S3 dot Amazon AWS,
+12
+
+13
+00:00:54,560 --> 00:00:55,040
+dot com.
+13
+
+14
+00:00:55,220 --> 00:01:04,940
+Now, we know that S3 is a service by Amazon AWS with which we can create our bucket and we can host
+14
+
+15
+00:01:04,940 --> 00:01:06,420
+our content into it.
+15
+
+16
+00:01:07,070 --> 00:01:14,390
+We have already seen how to create bucket into our subdomain takeover videos in which we have successfully
+16
+
+17
+00:01:14,720 --> 00:01:18,810
+made a bucket and taken over many of the subdomains.
+17
+
+18
+00:01:19,670 --> 00:01:20,140
+All right.
+18
+
+19
+00:01:20,420 --> 00:01:29,390
+So now when this guy used this dork, he came across multiple bottles in one of the project was this.
+19
+
+20
+00:01:29,390 --> 00:01:33,200
+As you can see, this repository is owned by Facebook.
+20
+
+21
+00:01:33,830 --> 00:01:42,020
+And you you can see there is a Bash script with the name of setup underscore processed underscore
+21
+
+22
+00:01:42,020 --> 00:01:43,400
+data dot sh.
+22
+
+23
+00:01:43,850 --> 00:01:45,110
+Now, this is a bash script.
+23
+
+24
+00:01:45,290 --> 00:01:45,730
+All right.
+24
+
+25
+00:01:45,800 --> 00:01:47,600
+So let's have a look over here.
+25
+
+26
+00:01:48,800 --> 00:01:51,150
+And you can see this bash script
+26
+
+27
+00:01:51,230 --> 00:01:51,950
+exactly
+27
+
+28
+00:01:51,950 --> 00:01:57,680
+does what you can see it sends a wget command to a URL.
+28
+
+29
+00:01:57,860 --> 00:02:00,890
+And what is the URL the URL is pointing to
+29
+
+30
+00:02:00,920 --> 00:02:02,090
+A S3 bucket.
+30
+
+31
+00:02:02,510 --> 00:02:04,880
+The bucket name is Fair Data.
+31
+
+32
+00:02:05,300 --> 00:02:07,880
+And you can see there is a gunzip file
+32
+
+33
+00:02:07,880 --> 00:02:13,340
+which is basically a zip file, which is data dot tar dot gz.
+33
+
+34
+00:02:14,600 --> 00:02:22,220
+Now, any attacker can simply take over the bucket and place a malicious zip file in the same path as shown
+34
+
+35
+00:02:22,220 --> 00:02:23,370
+in the above image.
+35
+
+36
+00:02:23,690 --> 00:02:29,180
+So if you have a closer look, you can see the part is after fair data, which is the bucket name,
+36
+
+37
+00:02:29,180 --> 00:02:38,150
+the party's memnn and and kvmemnn and the file which is data dot tar dot gz, which is
+37
+
+38
+00:02:38,150 --> 00:02:38,810
+a zip file.
+38
+
+39
+00:02:38,990 --> 00:02:39,460
+All right.
+39
+
+40
+00:02:39,680 --> 00:02:43,730
+So let's quickly have a look at the steps to reproduce this vulnerability.
+40
+
+41
+00:02:44,060 --> 00:02:50,420
+Remember, this is a very, very simple vulnerability that was identified and can easily be reproduced.
+41
+
+42
+00:02:51,440 --> 00:02:55,370
+So the first step is to create a S3 bucket named fair data.
+42
+
+43
+00:02:55,610 --> 00:03:00,250
+And we have already seen this, how to create buckets in the subdomain takeover videos.
+43
+
+44
+00:03:00,830 --> 00:03:09,210
+Next, create a folder which is memnn inside it again, create a folder with kvmemnn and
+44
+
+45
+00:03:09,210 --> 00:03:13,310
+place our malicious zip file, which is data dot tar dot gz over there.
+45
+
+46
+00:03:13,670 --> 00:03:17,010
+And it should look something like this, as you can see over here.
+46
+
+47
+00:03:17,310 --> 00:03:19,110
+Now what is the impact.
+47
+
+48
+00:03:19,460 --> 00:03:25,860
+So when the attacker is able to control the file, which is this file.
+48
+
+49
+00:03:26,210 --> 00:03:35,180
+Now if the users download the bash script, which is the bash script setup process data dot sh. This script
+49
+
+50
+00:03:35,180 --> 00:03:43,130
+will get downloaded, which is controlled by the attacker and attacker can execute malicious and harmful
+50
+
+51
+00:03:43,550 --> 00:03:46,320
+commands onto the system of end users.
+51
+
+52
+00:03:47,360 --> 00:03:51,980
+So the victim trust the shell file, which is mentioned in the Facebook repository.
+52
+
+53
+00:03:52,340 --> 00:03:57,630
+So the victim will think as the Shell file is into the repository, which has been hosted by Facebook.
+53
+
+54
+00:03:57,650 --> 00:04:04,670
+So it should be something legitimate right? No, but it is the attacker control repository and contains
+54
+
+55
+00:04:04,670 --> 00:04:09,980
+some harmful commands that may cause some disruption into the Linux system.
+55
+
+56
+00:04:10,970 --> 00:04:18,050
+As you can see, the reward that was given by Facebook was five hundred dollars on 16th January 2020
+56
+
+57
+00:04:18,560 --> 00:04:20,510
+and again see into a message over here.
+57
+
+58
+00:04:20,900 --> 00:04:25,920
+After reviewing the issue, we have decided to award you a bounty of $ 500.
+58
+
+59
+00:04:26,390 --> 00:04:30,420
+Below is an explanation of the bounty amount as S3 bucket take over
+59
+
+60
+00:04:30,440 --> 00:04:36,080
+usually these submissions are low-impact are not eligible for a white hat program, but in this case,
+60
+
+61
+00:04:36,080 --> 00:04:40,350
+the bucket contains an executable shell script that could be run by other people.
+61
+
+62
+00:04:40,820 --> 00:04:47,960
+So this actually contains the severity and has been understood that it may portray a risk to all its
+62
+
+63
+00:04:48,320 --> 00:04:48,940
+customers.
+63
+
+64
+00:04:49,610 --> 00:04:51,200
+So I hope you guys understood this.
+64
+
+65
+00:04:51,380 --> 00:04:58,730
+How interesting scenario can be chained, which is command injection with broken link hijacking.
+65
+
+66
+00:04:59,240 --> 00:05:00,040
+So I hope you guys understood.
+66
+
+67
+00:05:00,600 --> 00:05:01,140
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,790 --> 00:00:03,550
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,420 --> 00:00:10,240
+So in this video, we are going to see a live of exploitation of one of the broken link hijacking.
+2
+
+3
+00:00:11,200 --> 00:00:19,780
+So I am onto GitHub dot com and I have searched for a query, which is S3 Dot Amazon AWS dot
+3
+
+4
+00:00:19,780 --> 00:00:20,130
+com.
+4
+
+5
+00:00:20,620 --> 00:00:28,430
+So this is a specific query which meets 232 repository results, as you can see over here.
+5
+
+6
+00:00:29,070 --> 00:00:36,470
+Now, these are all the repositories which contains the keyword, which is S3 dot Amazon AWS.
+6
+
+7
+00:00:36,500 --> 00:00:38,750
+as you can see here already.
+7
+
+8
+00:00:38,980 --> 00:00:44,830
+So we are going to see one of the broken link hijacking in which we are able to solve our malicious
+8
+
+9
+00:00:44,980 --> 00:00:50,050
+content to all the users who access the specific repository.
+9
+
+10
+00:00:51,130 --> 00:00:57,010
+So, for instance, what I'm going to do over here is after I search, this query, I'm going to take
+10
+
+11
+00:00:57,010 --> 00:01:06,520
+this first repository, which is Emis Catalog dot S3 Amazon, AWS dot com slash index dot
+11
+
+12
+00:01:06,520 --> 00:01:07,210
+html.
+12
+
+13
+00:01:07,960 --> 00:01:08,470
+All right.
+13
+
+14
+00:01:08,480 --> 00:01:11,370
+So let's copy and paste this over here.
+14
+
+15
+00:01:11,650 --> 00:01:17,260
+And when I paste this, you can see an error message which says no such bucket.
+15
+
+16
+00:01:17,800 --> 00:01:19,330
+Now, if you try to recall.
+16
+
+17
+00:01:20,320 --> 00:01:28,660
+Then we have seen the similar type of example in the Facebook broken link hijacking command injection
+17
+
+18
+00:01:28,660 --> 00:01:29,060
+video.
+18
+
+19
+00:01:29,470 --> 00:01:37,750
+So over here we have the similar scenario in which it is pointing to one of the AWS bucket, but it is not
+19
+
+20
+00:01:38,020 --> 00:01:38,710
+created.
+20
+
+21
+00:01:39,100 --> 00:01:39,490
+All right.
+21
+
+22
+00:01:39,490 --> 00:01:43,920
+So we are going to create a bucket over there being an attacker.
+22
+
+23
+00:01:45,690 --> 00:01:53,130
+So now let's quickly jump over here and try to open the repository, so let's see what the repository
+23
+
+24
+00:01:53,130 --> 00:01:53,650
+looks like.
+24
+
+25
+00:01:53,670 --> 00:02:00,750
+So there are a lot of files which have been successfully created and so much other stuff and all of
+25
+
+26
+00:02:00,750 --> 00:02:04,160
+these files are pointing to Ms.
+26
+
+27
+00:02:04,170 --> 00:02:07,080
+Hyphen catalog dot Amazon AWS.
+27
+
+28
+00:02:07,860 --> 00:02:13,510
+Now, we know over here that emis hyphen catalog is the bucket name.
+28
+
+29
+00:02:13,530 --> 00:02:20,200
+So let's quickly create a bucket name with the same name, which is emis hyphen catalog.
+29
+
+30
+00:02:20,230 --> 00:02:25,800
+So yeah, let us see if it is allowing us to create a name in the region.
+30
+
+31
+00:02:25,800 --> 00:02:27,790
+You can choose any region that you want.
+31
+
+32
+00:02:28,050 --> 00:02:29,760
+So I'm just giving it to default.
+32
+
+33
+00:02:30,160 --> 00:02:33,780
+Remember, AWS Buckets are independent of region.
+33
+
+34
+00:02:34,380 --> 00:02:38,430
+You can choose any region and the buckets will be successfully created.
+34
+
+35
+00:02:38,850 --> 00:02:39,290
+All right.
+35
+
+36
+00:02:39,300 --> 00:02:49,710
+So let's turn the block all public access because I want everyone to access the bucket just for the
+36
+
+37
+00:02:49,710 --> 00:02:50,490
+proof of concept.
+37
+
+38
+00:02:50,720 --> 00:02:52,890
+Then later on, I'm going to delete the bucket.
+38
+
+39
+00:02:53,730 --> 00:02:54,200
+All right.
+39
+
+40
+00:02:54,210 --> 00:03:00,540
+So here you can see we have successfully created a bucket and now it's time to upload something into
+40
+
+41
+00:03:00,540 --> 00:03:03,190
+the bucket to show a proof of concept.
+41
+
+42
+00:03:03,900 --> 00:03:04,310
+All right.
+42
+
+43
+00:03:04,320 --> 00:03:07,980
+So let's quickly upload a file into the bucket.
+43
+
+44
+00:03:08,580 --> 00:03:16,350
+And, yeah, I can notice a lot of UI has been changed on the AWS console since I have visited this
+44
+
+45
+00:03:16,650 --> 00:03:17,170
+last.
+45
+
+46
+00:03:17,340 --> 00:03:21,540
+So it looks pretty clean and nice this time.
+46
+
+47
+00:03:22,260 --> 00:03:22,680
+All right.
+47
+
+48
+00:03:22,690 --> 00:03:29,550
+So you can see we have uploaded a file which is poc dot txt successfully it has uploaded.
+48
+
+49
+00:03:29,830 --> 00:03:30,450
+So.
+49
+
+50
+00:03:31,180 --> 00:03:31,740
+All right.
+50
+
+51
+00:03:31,750 --> 00:03:38,010
+So I'm going to upload one more file which is cors poc dot txt in case we need that or just
+51
+
+52
+00:03:38,010 --> 00:03:45,330
+leave one file, which is poc dot txt. Alright so just hit on upload and it will be successfully uploaded
+52
+
+53
+00:03:45,840 --> 00:03:51,930
+It says you must check box that it doesn't want to have Bucket versioning.
+53
+
+54
+00:03:51,930 --> 00:03:54,180
+And so we do not want to enable any versionning
+54
+
+55
+00:03:55,260 --> 00:04:02,530
+So it was it is only Lock Creation's and it is any version if any requests are being sent to your bucket.
+55
+
+56
+00:04:03,030 --> 00:04:04,530
+So we do not want to do that.
+56
+
+57
+00:04:05,310 --> 00:04:12,060
+And you can see my file is successfully into the bucket and again, see the bucket URL, which is
+57
+
+58
+00:04:12,060 --> 00:04:12,930
+given over here.
+58
+
+59
+00:04:13,500 --> 00:04:17,800
+This is exactly the same that we got into our previous Facebook video.
+59
+
+60
+00:04:18,570 --> 00:04:19,010
+All right.
+60
+
+61
+00:04:19,020 --> 00:04:20,160
+So you can see the object.
+61
+
+62
+00:04:20,160 --> 00:04:21,390
+URL is emis
+62
+
+63
+00:04:21,390 --> 00:04:30,080
+hyphen catalog dot s3 dot ap hyphen south hyphen one dot, amazonaws dot com slash poc dot txt.
+63
+
+64
+00:04:30,750 --> 00:04:38,220
+Let's try to open it and you can see we opened it but we got an error and it is access denied. The access
+64
+
+65
+00:04:38,220 --> 00:04:42,330
+denied messages due to we have not allowed the public access.
+65
+
+66
+00:04:43,870 --> 00:04:48,040
+So once we give the public access, now we are able to successfully open it.
+66
+
+67
+00:04:49,270 --> 00:04:53,120
+Now let's see if the changes reflect over here or not.
+67
+
+68
+00:04:53,380 --> 00:04:55,560
+So it again says access denied.
+68
+
+69
+00:04:56,020 --> 00:04:59,460
+First, the message was no such bucket.
+69
+
+70
+00:04:59,470 --> 00:05:03,260
+And now you can see the message has changed to access denied over here.
+70
+
+71
+00:05:03,460 --> 00:05:03,870
+All right.
+71
+
+72
+00:05:03,880 --> 00:05:11,410
+Which means the bucket has been successfully claimed by us guys and we have hosted the content into
+72
+
+73
+00:05:11,410 --> 00:05:11,650
+it.
+73
+
+74
+00:05:11,650 --> 00:05:16,060
+And the file which is poc dot txt not index dot html.
+74
+
+75
+00:05:16,510 --> 00:05:23,050
+That's why it is giving a error, which is access denied because there is no such file like index dot
+75
+
+76
+00:05:23,080 --> 00:05:23,780
+html.
+76
+
+77
+00:05:23,800 --> 00:05:26,700
+There is only one file which is poc dot txt.
+77
+
+78
+00:05:27,670 --> 00:05:35,800
+So now what we are going to do is we are going to rename the file, which is poc dot txt to index dot html.
+78
+
+79
+00:05:36,430 --> 00:05:38,890
+So let me just skip this part of the video.
+79
+
+80
+00:05:40,640 --> 00:05:46,550
+So I'm changing the bucket settings to public, and you have to confirm for that already, it's already
+80
+
+81
+00:05:46,550 --> 00:05:47,300
+confirmed.
+81
+
+82
+00:05:47,300 --> 00:05:54,850
+And now I'm going to rename the file of poc dot txt to index dot html.
+82
+
+83
+00:05:55,580 --> 00:06:02,480
+So you need to select that file go in actions, choose rename first time making it public.
+83
+
+84
+00:06:03,550 --> 00:06:08,410
+So it is accessible by everyone and now it is accessible, right?
+84
+
+85
+00:06:10,700 --> 00:06:18,740
+So here you can see index dot html is not accessible, but poc dot txt is accessible, because it is
+85
+
+86
+00:06:18,740 --> 00:06:24,440
+the file which is there onto the bucket, but there is no such file like index dot html, so let's
+86
+
+87
+00:06:24,440 --> 00:06:27,240
+quickly create an index dot html file as well.
+87
+
+88
+00:06:27,590 --> 00:06:29,330
+So let's quickly rename this.
+88
+
+89
+00:06:33,200 --> 00:06:43,310
+So go to actions and click on rename object and give the file name of poc dot txt to index dot html and
+89
+
+90
+00:06:43,310 --> 00:06:44,500
+hit Save Changes.
+90
+
+91
+00:06:44,540 --> 00:06:50,920
+All right, so now let's hope we are able to successfully claim this link.
+91
+
+92
+00:06:51,170 --> 00:06:56,650
+So let's go to this link and let's see the malicious content and it looks perfectly fine.
+92
+
+93
+00:06:57,080 --> 00:07:04,100
+So, yes, guys, I hope you guys understood how you can take over these bucket names and these links
+93
+
+94
+00:07:04,670 --> 00:07:07,340
+where in they are being pointed but never claimed.
+94
+
+95
+00:07:07,340 --> 00:07:13,800
+And this was the successful exploitation of broken link hijacking of the entire repository.
+95
+
+96
+00:07:14,060 --> 00:07:15,420
+So I hope you guys understood.
+96
+
+97
+00:07:15,620 --> 00:07:16,220
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 15: SQL Injection
+
+
+0
+1
+00:00:00,120 --> 00:00:05,760
+Hello and welcome to this SQL section. In this section, we are going to be talking about database
+1
+
+2
+00:00:05,760 --> 00:00:09,420
+and SQL before going directly to SQL Injection.
+2
+
+3
+00:00:09,420 --> 00:00:12,220
+Let's learn some basics about SQL.
+3
+
+4
+00:00:13,230 --> 00:00:18,840
+So what is data? Data is collection of raw facts, which is unorganized.
+4
+
+5
+00:00:19,080 --> 00:00:24,050
+Data can be either character text, word, pictures, sound or video.
+5
+
+6
+00:00:24,420 --> 00:00:28,290
+Basically, a data can be anything in a raw format.
+6
+
+7
+00:00:29,290 --> 00:00:35,730
+So what is information? Information is processed data, but is an organized format.
+7
+
+8
+00:00:38,010 --> 00:00:43,160
+How things used to work in olden days, I named this method as a manual method.
+8
+
+9
+00:00:43,170 --> 00:00:47,090
+So let's take an example to understand about this manual method.
+9
+
+10
+00:00:47,730 --> 00:00:52,020
+Let's imagine if a teacher want to find out how many students are there in the class.
+10
+
+11
+00:00:52,380 --> 00:00:54,340
+So how will they do that?
+11
+
+12
+00:00:54,360 --> 00:00:58,500
+How do they calculate about the attendance of the students?
+12
+
+13
+00:01:00,550 --> 00:01:07,630
+So to find out using this manual way a teacher, may take out a notebook or register wherein she has
+13
+
+14
+00:01:07,630 --> 00:01:14,860
+mentioned about the attendance of the students to calculate manually how many students are there in
+14
+
+15
+00:01:14,860 --> 00:01:15,430
+the class.
+15
+
+16
+00:01:16,000 --> 00:01:18,810
+So this is how it used to work.
+16
+
+17
+00:01:18,820 --> 00:01:22,000
+There is no such a standard name for this method.
+17
+
+18
+00:01:22,000 --> 00:01:24,820
+But then I call this method as a manual method.
+18
+
+19
+00:01:27,540 --> 00:01:30,220
+So what are the limitations of this manual method?
+19
+
+20
+00:01:30,240 --> 00:01:39,120
+So there is no standard format in manual method that means two teachers from the same school might have
+20
+
+21
+00:01:39,120 --> 00:01:45,930
+different formats to store the data or the attendance of the students into their notebooks.
+21
+
+22
+00:01:46,230 --> 00:01:49,990
+Everyone has a liberty to choose their own standard format.
+22
+
+23
+00:01:50,010 --> 00:01:57,810
+There is no specialized format or method being developed to create something or to store some results.
+23
+
+24
+00:01:58,170 --> 00:02:01,420
+So which makes this thing unorganized.
+24
+
+25
+00:02:01,830 --> 00:02:11,190
+That means there is no proper way of maintaining the records. The third limitation is human
+25
+
+26
+00:02:11,190 --> 00:02:14,980
+error, which is always there when you do a lot of work manually.
+26
+
+27
+00:02:15,240 --> 00:02:16,790
+So that's it for this video.
+27
+
+28
+00:02:16,800 --> 00:02:17,880
+Thank you so much.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,920 --> 00:00:02,790
+Hello and welcome to this video.
+1
+
+2
+00:00:02,930 --> 00:00:09,470
+We all know about spreadsheets, so to overcome all the limitations of the manual method, that was
+2
+
+3
+00:00:09,470 --> 00:00:12,540
+unorganized and unstructured and human error.
+3
+
+4
+00:00:12,560 --> 00:00:21,260
+Then comes the spreadsheet, which is organized in which we have search options as well as the different
+4
+
+5
+00:00:21,260 --> 00:00:29,750
+advanced filters, which makes our work a lot more easy, which reduces human error as well as the data
+5
+
+6
+00:00:29,750 --> 00:00:32,500
+is now into the organized format.
+6
+
+7
+00:00:32,990 --> 00:00:33,620
+So,
+7
+
+8
+00:00:34,760 --> 00:00:40,850
+Let's take the same example which we have used in the previous video, if a teacher want to find out
+8
+
+9
+00:00:40,850 --> 00:00:46,550
+how many students are present in the class, so with the help of a spreadsheet, it becomes very easy.
+9
+
+10
+00:00:46,550 --> 00:00:53,270
+Using the filters, you can just select the attendance column, there you can select present and then
+10
+
+11
+00:00:53,270 --> 00:00:59,980
+you can calculate based on that how many number of students are present, which reduces human error,
+11
+
+12
+00:01:00,000 --> 00:01:05,240
+as well as the efforts of turning or rolling the pages from the register or notebook.
+12
+
+13
+00:01:05,240 --> 00:01:10,750
+And a lot of different efforts are then reduced as well as it looks very organized.
+13
+
+14
+00:01:10,880 --> 00:01:16,000
+This is a organized way of storing the data.
+14
+
+15
+00:01:17,340 --> 00:01:24,070
+What are the limitations of spreadsheet? Spreadsheets cannot manage large chunks of data.
+15
+
+16
+00:01:24,210 --> 00:01:30,230
+It is very difficult to update the data into the spreadsheet when you have large chunks of data.
+16
+
+17
+00:01:30,600 --> 00:01:35,950
+And one very important drawback of this spreadsheet, that is lack of security of data.
+17
+
+18
+00:01:36,270 --> 00:01:40,830
+So to overcome this, we are going to be talking about a SQL and database in next videos.
+18
+
+19
+00:01:41,070 --> 00:01:42,750
+So this is it for this video.
+19
+
+20
+00:01:42,780 --> 00:01:43,860
+Thank you so much.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,060 --> 00:00:01,830
+Hello and welcome to this video.
+1
+
+2
+00:00:01,860 --> 00:00:08,220
+In this video, we are going to be talking about database. To overcome all the limitations of spreadsheet
+2
+
+3
+00:00:08,220 --> 00:00:14,830
+we have database that was to handle the large chunk of data to handle the security flaws.
+3
+
+4
+00:00:15,090 --> 00:00:22,080
+So here we have a database which overcomes all the limitations of spreadsheet. A database is a collection
+4
+
+5
+00:00:22,080 --> 00:00:23,030
+of information.
+5
+
+6
+00:00:23,430 --> 00:00:27,180
+Data is stored in the form of tables into the database.
+6
+
+7
+00:00:27,750 --> 00:00:34,470
+So how to access that database to access, to manipulate, to update the database, you need to learn
+7
+
+8
+00:00:34,480 --> 00:00:36,450
+one language that is SQL.
+8
+
+9
+00:00:36,450 --> 00:00:38,850
+SQL stands for Structured Query
+9
+
+10
+00:00:38,850 --> 00:00:42,870
+Language. SQL is used to communicate with the database.
+10
+
+11
+00:00:42,870 --> 00:00:46,920
+SQL lets you access and manipulate the database.
+11
+
+12
+00:00:49,000 --> 00:00:55,570
+Let's understand the same example with the help of database and SQL now. On the left hand side, we
+12
+
+13
+00:00:55,570 --> 00:01:02,440
+have a table which is stored into the database, which holds three records one, two and three John Shifa and
+13
+
+14
+00:01:02,440 --> 00:01:03,290
+Rohit
+14
+
+15
+00:01:03,640 --> 00:01:06,970
+The attendance for the following is present absent and present.
+15
+
+16
+00:01:07,330 --> 00:01:13,900
+And here you're if you want to access this table from the database, you need to know one language that
+16
+
+17
+00:01:13,910 --> 00:01:14,080
+is
+17
+
+18
+00:01:14,370 --> 00:01:14,840
+SQL
+18
+
+19
+00:01:15,400 --> 00:01:20,350
+So using a SQL Query, we are going to be accessing the database.
+19
+
+20
+00:01:20,360 --> 00:01:22,420
+We are going to manipulate this database.
+20
+
+21
+00:01:22,430 --> 00:01:27,940
+We are going to see the record and we are going to do a lot more with the help of SQL accessing
+21
+
+22
+00:01:27,940 --> 00:01:28,810
+the database.
+22
+
+23
+00:01:30,230 --> 00:01:35,660
+In the next video, we are going to see how to create a table, how to insert records into the table,
+23
+
+24
+00:01:35,990 --> 00:01:39,290
+how to access the table with the help of SQL.
+24
+
+25
+00:01:40,220 --> 00:01:41,550
+That's it for this video.
+25
+
+26
+00:01:41,570 --> 00:01:42,740
+Thank you so much.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,450 --> 00:00:02,940
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:03,720 --> 00:00:09,310
+So in this video, we're going to see how can you set up Xampp into your computers?
+2
+
+3
+00:00:09,690 --> 00:00:19,810
+So what is a Xampp? Xampp is something which is going to help us create and serve our server as well as database.
+3
+
+4
+00:00:20,490 --> 00:00:28,590
+So before starting with the SQL injection attacks, we are going to first set up in our computers
+4
+
+5
+00:00:28,590 --> 00:00:37,470
+are MySQL database and Apache Web Server to understand actually how are the queries been fired and
+5
+
+6
+00:00:37,470 --> 00:00:40,440
+what actually happens in the back end.
+6
+
+7
+00:00:41,100 --> 00:00:44,220
+So we will have a quick fresher for
+7
+
+8
+00:00:45,420 --> 00:00:52,530
+MySQL and queries, so we will understand what is the logic behind and the background concept behind
+8
+
+9
+00:00:52,530 --> 00:00:55,750
+SQL injection and what actually happens.
+9
+
+10
+00:00:56,040 --> 00:00:58,480
+How do we communicate with the database?
+10
+
+11
+00:00:58,830 --> 00:01:01,400
+How is the tables created?
+11
+
+12
+00:01:01,470 --> 00:01:03,480
+How are the columns created?
+12
+
+13
+00:01:03,720 --> 00:01:06,860
+And how are the queries being run?
+13
+
+14
+00:01:08,080 --> 00:01:14,860
+So to do that, you just need to install XAMPP into your computers, so once you come onto this website,
+14
+
+15
+00:01:14,860 --> 00:01:21,250
+which is Apache Friends dot org, you need to come on to this page which is download dot html.
+15
+
+16
+00:01:22,670 --> 00:01:30,140
+Now, here you can see you can find XAMPP for windows.
+16
+
+17
+00:01:31,850 --> 00:01:38,170
+Now here you can find Xampp for Windows, Xampp for Linux and Xampp for OSX.
+17
+
+18
+00:01:38,660 --> 00:01:45,080
+So according to your needs and according to your system distribution, you can install anyone that you
+18
+
+19
+00:01:45,080 --> 00:01:46,850
+want. For my computer
+19
+
+20
+00:01:46,880 --> 00:01:54,560
+I'm going to install Xampp for OSX. So all Mac users can install the OS X version. others who are running
+20
+
+21
+00:01:54,560 --> 00:02:03,500
+onto Ubuntu or Kali or Parrot or a plain Debian flavor can install Xampp for Linux and Windows 8
+21
+
+22
+00:02:03,500 --> 00:02:06,480
+and Windows 10 users can install Xampp for Windows.
+22
+
+23
+00:02:07,270 --> 00:02:07,840
+All right.
+23
+
+24
+00:02:07,860 --> 00:02:13,100
+So I'm going to quickly install this version, which is seven point two point three four.
+24
+
+25
+00:02:13,130 --> 00:02:15,820
+So I'm just going to click on download 64 bit.
+25
+
+26
+00:02:16,670 --> 00:02:22,970
+As you can see, it has started downloading successfully, and after it has completed downloading,
+26
+
+27
+00:02:22,970 --> 00:02:27,890
+I'm going to install it and I'll take you through the next step of installation.
+27
+
+28
+00:02:28,730 --> 00:02:35,510
+Now, remember, guys, the installation steps are exactly pretty much the same on all the major distributions
+28
+
+29
+00:02:35,510 --> 00:02:39,380
+that you go on if it is Linux, Windows or OSX.
+29
+
+30
+00:02:39,800 --> 00:02:45,110
+So I hope you do not identify any issues while installation.
+30
+
+31
+00:02:48,590 --> 00:02:54,130
+If you come across any errors or issues while installation, you can always ask your questions into
+31
+
+32
+00:02:54,140 --> 00:02:59,530
+the Q&A section and I would love to help you guys to solve all your queries.
+32
+
+33
+00:03:00,470 --> 00:03:04,070
+Let's wait for this to download and then we are going to move ahead.
+33
+
+34
+00:03:06,850 --> 00:03:12,880
+All right, so we can see the download was successful, so let's move ahead to the installation and
+34
+
+35
+00:03:13,270 --> 00:03:19,900
+Mac OS users may look something like this onto your screen, so I'm just going to double click it and
+35
+
+36
+00:03:19,900 --> 00:03:20,670
+wait for it.
+36
+
+37
+00:03:21,430 --> 00:03:24,910
+So the next step is it is asking you to open it.
+37
+
+38
+00:03:24,940 --> 00:03:28,450
+So let me quickly open and type in my password.
+38
+
+39
+00:03:29,840 --> 00:03:34,050
+Now, let's wait for the next steps and then we can move ahead.
+39
+
+40
+00:03:35,090 --> 00:03:39,340
+So, yeah, the installation bar has successfully opened.
+40
+
+41
+00:03:39,710 --> 00:03:46,130
+Now, again, I'm saying this steps apply to all the major distribution if you are on Windows or Linux
+41
+
+42
+00:03:46,610 --> 00:03:50,120
+I will just hit next, next, next.
+42
+
+43
+00:03:50,660 --> 00:03:54,390
+And OK, I do not want to know this.
+43
+
+44
+00:03:54,410 --> 00:03:54,920
+All right.
+44
+
+45
+00:03:55,580 --> 00:03:56,270
+Next.
+45
+
+46
+00:03:56,520 --> 00:03:59,200
+And it has started installing it.
+46
+
+47
+00:03:59,900 --> 00:04:06,800
+It should just take a few seconds to install and then we should be ready to run our Xampp installation.
+47
+
+48
+00:04:07,380 --> 00:04:12,380
+So first of all, first thing that we are going to do is run our Apache server and then we are going
+48
+
+49
+00:04:12,380 --> 00:04:15,170
+to run our my MySQL database server.
+49
+
+50
+00:04:16,260 --> 00:04:20,760
+So let's wait for this to complete and then we can move ahead.
+50
+
+51
+00:04:21,560 --> 00:04:22,730
+Yeah, so all right.
+51
+
+52
+00:04:22,730 --> 00:04:30,740
+We have successfully installed Xampp now and now it's time to launch it and quickly set up our first
+52
+
+53
+00:04:30,740 --> 00:04:32,320
+MySQL application.
+53
+
+54
+00:04:32,780 --> 00:04:37,940
+So let me just click on Finish and you can see it says it works perfect.
+54
+
+55
+00:04:38,600 --> 00:04:41,210
+Now, let's go to manage servers.
+55
+
+56
+00:04:41,210 --> 00:04:45,760
+And you can see over here all the servers are currently stopped.
+56
+
+57
+00:04:46,160 --> 00:04:52,340
+So let's start all of the servers so you can just click on, start all and it will automatically start
+57
+
+58
+00:04:52,340 --> 00:04:53,000
+all of them.
+58
+
+59
+00:04:53,810 --> 00:05:00,220
+It will turn from red to orange and it should turn to green to successfully start it.
+59
+
+60
+00:05:00,350 --> 00:05:02,020
+So it is successfully starting it.
+60
+
+61
+00:05:02,450 --> 00:05:05,690
+Let's wait for this in just a few seconds.
+61
+
+62
+00:05:05,690 --> 00:05:08,720
+It will successfully start it and then we are good to go.
+62
+
+63
+00:05:10,450 --> 00:05:17,590
+So let me just move it onto the right hand side of my screen and you can see MySQL database has successfully
+63
+
+64
+00:05:17,590 --> 00:05:24,820
+started, so let me just type localhost hit enter and you can see it works.
+64
+
+65
+00:05:24,820 --> 00:05:25,260
+All right.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,100 --> 00:00:06,110
+Hello and welcome to this video. In this video, we are going to create a database, we are going to
+1
+
+2
+00:00:06,110 --> 00:00:07,940
+add tables into the database.
+2
+
+3
+00:00:07,970 --> 00:00:13,310
+We are going to access and add records to the table with the help of SQL.
+3
+
+4
+00:00:13,850 --> 00:00:17,240
+So let's create the database first.
+4
+
+5
+00:00:17,240 --> 00:00:23,360
+So to create the database, you will have to make sure that you write the proper name of the database.
+5
+
+6
+00:00:23,660 --> 00:00:26,380
+So you have to select the name of the database.
+6
+
+7
+00:00:26,390 --> 00:00:30,560
+I am selecting udemy as a name of my database and click on CREATE.
+7
+
+8
+00:00:30,920 --> 00:00:35,160
+So once you create your database, you will land onto this page.
+8
+
+9
+00:00:35,180 --> 00:00:40,000
+This page is a create table page if you want to create table,
+9
+
+10
+00:00:40,020 --> 00:00:45,750
+so you have to write down the name of the table and the number of column you want into your table.
+10
+
+11
+00:00:46,130 --> 00:00:50,600
+So I want three columns and the name of the table should be notebook.
+11
+
+12
+00:00:51,500 --> 00:00:52,580
+So here I
+12
+
+13
+00:00:52,580 --> 00:00:59,220
+click on Go and then once I hit on go, I am on to the next page, which is the structure of the table.
+13
+
+14
+00:00:59,630 --> 00:01:06,740
+So if you remember that I selected three columns, so I got three input field over your 1 2 and 3 wherein
+14
+
+15
+00:01:06,740 --> 00:01:09,310
+I'm going to write three column names.
+15
+
+16
+00:01:09,740 --> 00:01:13,370
+So the first column name I want is serial number.
+16
+
+17
+00:01:13,940 --> 00:01:15,710
+So I will type serial number.
+17
+
+18
+00:01:15,860 --> 00:01:21,350
+The second column name should be name and the third column name should be attendance.
+18
+
+19
+00:01:22,490 --> 00:01:31,190
+As per example, I'm going to replicate the same table structure, so the first data type should be
+19
+
+20
+00:01:31,190 --> 00:01:36,230
+INT, I want serial number to be an integer value and the rest two to be VARCHAR.
+20
+
+21
+00:01:37,510 --> 00:01:43,750
+If you don't select the length and if you try to click on go, it will say that you need to select a valid
+21
+
+22
+00:01:43,750 --> 00:01:44,710
+length.
+22
+
+23
+00:01:44,710 --> 00:01:49,450
+So the maximum allowed length for the serial number should be ten.
+23
+
+24
+00:01:49,960 --> 00:01:55,430
+And for the rest two I'm selecting 50 50, you can select anything as per your requirements.
+24
+
+25
+00:01:56,020 --> 00:01:59,120
+This is not compulsory and then you can click on go.
+25
+
+26
+00:01:59,410 --> 00:02:06,270
+So if you see that my table notebook is been created, if I go to SQL the query is auto generated.
+26
+
+27
+00:02:06,280 --> 00:02:14,980
+That is select * from notebook, which means select star means all the records from the table
+27
+
+28
+00:02:14,990 --> 00:02:16,510
+that is notebook.
+28
+
+29
+00:02:18,660 --> 00:02:19,980
+And I hit go.
+29
+
+30
+00:02:21,130 --> 00:02:28,600
+So when you hit go, you will be able to see the table, which is an notebook, so here I have not inserted
+30
+
+31
+00:02:28,600 --> 00:02:34,690
+any record or values into the table, so I am seeing only the structure of the table with three columns
+31
+
+32
+00:02:34,690 --> 00:02:37,100
+that is serial number, name and attendance.
+32
+
+33
+00:02:37,630 --> 00:02:40,870
+So now I want to insert the value into this table.
+33
+
+34
+00:02:40,880 --> 00:02:43,420
+So you have to go again to the SQL.
+34
+
+35
+00:02:44,530 --> 00:02:49,050
+If you do not know the syntax of insert, no need to worry.
+35
+
+36
+00:02:49,330 --> 00:02:56,050
+You can click on this button insert and you will automatically get the syntax of the insert query.
+36
+
+37
+00:02:57,170 --> 00:03:06,440
+Now, I'm going to be adding values to this notebook table, so the first record should be one is first
+37
+
+38
+00:03:06,440 --> 00:03:07,940
+column is serial number.
+38
+
+39
+00:03:07,940 --> 00:03:13,670
+The value assigned to the first column number should be one. To the name
+39
+
+40
+00:03:13,670 --> 00:03:15,890
+it should be Rohit and for the attendance.
+40
+
+41
+00:03:15,890 --> 00:03:17,060
+It should be present.
+41
+
+42
+00:03:17,390 --> 00:03:24,790
+This should be my first record, serial number one name Rohit and attendance to be present.
+42
+
+43
+00:03:25,220 --> 00:03:32,120
+Make sure that when you select a VARCHAR and when you insert that value into the query, make sure to
+43
+
+44
+00:03:32,120 --> 00:03:38,090
+put it into the single quote so that it works perfectly and you have to hit on go.
+44
+
+45
+00:03:40,540 --> 00:03:47,500
+As you see, one row has been inserted into the database Now, I'm going to be adding two more records
+45
+
+46
+00:03:47,500 --> 00:03:48,570
+into my table.
+46
+
+47
+00:03:48,850 --> 00:03:56,290
+So as you can see, if I now select Start from notebook, so I see one record which is inserted right
+47
+
+48
+00:03:56,290 --> 00:03:56,620
+now.
+48
+
+49
+00:03:59,690 --> 00:04:08,990
+So now I'm adding second record that is serial number 2 name Shifa, and attendance should be absent.
+49
+
+50
+00:04:10,410 --> 00:04:11,360
+Click on Go.
+50
+
+51
+00:04:13,870 --> 00:04:20,720
+OK, great, so second record has been inserted into my table, if you want to see the table again hit
+51
+
+52
+00:04:20,770 --> 00:04:26,680
+the query select star from Table name or else you can keep on adding the records once you are done
+52
+
+53
+00:04:26,680 --> 00:04:30,090
+at the end, you can see all the records which you have inserted.
+53
+
+54
+00:04:30,550 --> 00:04:31,590
+So I hit on go.
+54
+
+55
+00:04:32,380 --> 00:04:34,480
+I am done with adding three records.
+55
+
+56
+00:04:34,490 --> 00:04:39,240
+So now I'm going to see whether the table is been updated or not.
+56
+
+57
+00:04:39,250 --> 00:04:45,640
+So select star from your table so here I can see if the table is being added with three records,
+57
+
+58
+00:04:45,640 --> 00:04:46,780
+which I have added.
+58
+
+59
+00:04:48,410 --> 00:04:55,800
+So, yes, you can see three different record has been added to my table when you click on, when you hit a query
+59
+
+60
+00:04:55,880 --> 00:04:58,390
+select star from the table.
+60
+
+61
+00:04:58,670 --> 00:05:00,580
+So this is it for this video.
+61
+
+62
+00:05:00,590 --> 00:05:06,710
+We have learned how to create a database, how to create a table, how to select the data type for the
+62
+
+63
+00:05:06,710 --> 00:05:12,080
+particular column, as well as how to see the database.
+63
+
+64
+00:05:12,080 --> 00:05:20,030
+What all you have created using a very select star from table name is the very simple syntax of this SQL.
+64
+
+65
+00:05:20,570 --> 00:05:21,650
+Thank you so much.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,140 --> 00:00:02,960
+Hello and welcome to this video.
+1
+
+2
+00:00:02,970 --> 00:00:09,690
+In the previous video, we have seen that how to create a database, how to add a table to the database
+2
+
+3
+00:00:09,690 --> 00:00:17,310
+and how to see what all you have created using select star from Notebook. Notebook was the name of that
+3
+
+4
+00:00:17,310 --> 00:00:19,930
+table, which we have created in the previous video.
+4
+
+5
+00:00:20,220 --> 00:00:26,430
+So now to access again, that table, you have to go to the SQL, write down the same query,
+5
+
+6
+00:00:26,550 --> 00:00:33,450
+select star from the table name, and then you'll see that we have inserted three records into the
+6
+
+7
+00:00:33,450 --> 00:00:33,940
+table.
+7
+
+8
+00:00:34,290 --> 00:00:42,090
+So now if I want to filter based on attendance, that means I want to see how many students were present
+8
+
+9
+00:00:42,090 --> 00:00:43,630
+on the particular day.
+9
+
+10
+00:00:44,040 --> 00:00:47,670
+So to filter based on attendance.
+10
+
+11
+00:00:47,670 --> 00:00:53,460
+We have some condition clause, which is known as where clause into the SQL.
+11
+
+12
+00:00:53,700 --> 00:01:00,540
+So I'm going to use this where and I want to put a condition on the column, which is attendance.
+12
+
+13
+00:01:00,540 --> 00:01:04,580
+So my query will be select star from table
+13
+
+14
+00:01:04,590 --> 00:01:07,770
+that means I want to select all the records from the table.
+14
+
+15
+00:01:07,770 --> 00:01:17,610
+That is notebook where attendance column is equal to the value present so that I'm going to get only
+15
+
+16
+00:01:17,710 --> 00:01:22,790
+the records whose value is present in to the attendance column.
+16
+
+17
+00:01:23,310 --> 00:01:31,200
+So you can see that I got only two records because for the serial number two that is Shifa we have inserted a 
+17
+
+18
+00:01:31,200 --> 00:01:38,780
+record that was absent in the attendance column. I'm getting only two records whose value is present
+18
+
+19
+00:01:38,790 --> 00:01:40,120
+into the attendance column.
+19
+
+20
+00:01:40,440 --> 00:01:48,120
+So this is how you can use the where clause and put some conditions to access and filter the data from
+20
+
+21
+00:01:48,120 --> 00:01:49,080
+your database.
+21
+
+22
+00:01:49,440 --> 00:01:52,990
+Okay, so now let's see the records for absent.
+22
+
+23
+00:01:53,130 --> 00:01:58,830
+That means I'm putting a condition that is where our attendance column equals absent.
+23
+
+24
+00:01:59,100 --> 00:02:08,100
+So I'm getting only one record that is Shifa because only to the attendance column absent value is
+24
+
+25
+00:02:08,100 --> 00:02:11,450
+present with the record Shifa.
+25
+
+26
+00:02:11,850 --> 00:02:14,490
+So that's it for this video.
+26
+
+27
+00:02:14,520 --> 00:02:15,660
+Thank you so much.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:03,010 --> 00:00:04,840
+Hello and welcome to this video.
+1
+
+2
+00:00:04,870 --> 00:00:12,250
+This video is Lab Exercise, so I want you guys to complete this three super simple exercise.
+2
+
+3
+00:00:12,640 --> 00:00:15,620
+So the first one is find out the name of employees.
+3
+
+4
+00:00:15,620 --> 00:00:21,520
+Second is list all the employees who are working in I.T. department and the third is show different
+4
+
+5
+00:00:21,520 --> 00:00:22,670
+types of department.
+5
+
+6
+00:00:23,020 --> 00:00:27,480
+So what is the reference of this, how you are going to get this table?
+6
+
+7
+00:00:27,490 --> 00:00:30,670
+So I'm going to show you the table, the table structure.
+7
+
+8
+00:00:30,910 --> 00:00:36,420
+And based on that, you have to fire this three simple queries into your SQL database.
+8
+
+9
+00:00:37,090 --> 00:00:43,450
+I would encourage doing it yourself, try to search it out on the Internet, try to take reference from
+9
+
+10
+00:00:43,450 --> 00:00:46,980
+previous videos, work hard and try to solve it.
+10
+
+11
+00:00:47,320 --> 00:00:52,470
+Still, if you are not able to do this, continue watching this video till the end.
+11
+
+12
+00:00:52,480 --> 00:00:55,390
+I am going to solve all this three exercise for you.
+12
+
+13
+00:00:56,300 --> 00:00:58,490
+So here is the table structure.
+13
+
+14
+00:00:58,520 --> 00:01:02,000
+I want you guys to create this structure, something like this.
+14
+
+15
+00:01:05,480 --> 00:01:11,480
+That table should have three columns by the name employee I.D., employee name and employee department. The
+15
+
+16
+00:01:11,480 --> 00:01:13,550
+name of the table should be employee.
+16
+
+17
+00:01:14,150 --> 00:01:19,970
+The data type should be INT for the employee I.D. and for the rest two it should be VARCHAR.
+17
+
+18
+00:01:21,390 --> 00:01:29,040
+The size of the integer should be 10, the maximum allowed size for the Name and  Department should be 50 and
+18
+
+19
+00:01:29,040 --> 00:01:29,580
+50.
+19
+
+20
+00:01:30,150 --> 00:01:33,450
+So this is how the structure should look like.
+20
+
+21
+00:01:35,040 --> 00:01:40,830
+Here are the values to be inserted into the table one, two and three, John, Harry, Peter and the
+21
+
+22
+00:01:40,830 --> 00:01:43,500
+department are Finance IT and HR.
+22
+
+23
+00:01:45,750 --> 00:01:53,880
+Pause the video for five minutes try to do it on your own, take the exercise questions, understand
+23
+
+24
+00:01:53,880 --> 00:02:00,630
+about the structure and the data, and try to write down three different queries for three simple questions,
+24
+
+25
+00:02:00,630 --> 00:02:02,720
+which I have assigned to you over here.
+25
+
+26
+00:02:03,570 --> 00:02:07,550
+If you are not able to do it, then continue watching this video.
+26
+
+27
+00:02:10,210 --> 00:02:16,780
+I am going to go on my localhost now, I'm using the database, which I have created previously.
+27
+
+28
+00:02:16,810 --> 00:02:19,830
+You can although create a new database if you want.
+28
+
+29
+00:02:19,840 --> 00:02:23,950
+I am using the same user database which I have created previously.
+29
+
+30
+00:02:24,760 --> 00:02:32,180
+I'm going to directly create a table by the name employee as given in to the lab exercise from here.
+30
+
+31
+00:02:32,710 --> 00:02:39,370
+It says that I have to create a table by the name employee, so I'm using the same name that is employee
+31
+
+32
+00:02:39,370 --> 00:02:40,450
+to create a table.
+32
+
+33
+00:02:42,430 --> 00:02:44,410
+With three columns.
+33
+
+34
+00:02:45,530 --> 00:02:46,550
+And hit on go.
+34
+
+35
+00:02:50,050 --> 00:02:56,620
+Let's copy the name of the column from the table itself, so I'm going to copy the name that is employee
+35
+
+36
+00:02:56,620 --> 00:02:57,040
+underscore id
+36
+
+37
+00:02:59,350 --> 00:03:06,490
+I'll go on to the localhost and paste this integer and the length maximum should be 10. The second
+37
+
+38
+00:03:06,490 --> 00:03:11,830
+column name was Employee underscore name so I'm going to rename this to employee name.
+38
+
+39
+00:03:12,310 --> 00:03:17,050
+Changed this to VARCHAR and value should be 50. Again.
+39
+
+40
+00:03:17,060 --> 00:03:23,840
+the third thing, I'm going to rename this to employee underscore department. Data type should be VARCHAR 
+40
+
+41
+00:03:24,520 --> 00:03:27,280
+and the length maximum allowed should be 50.
+41
+
+42
+00:03:29,090 --> 00:03:29,540
+Great.
+42
+
+43
+00:03:29,570 --> 00:03:38,330
+So everything seems perfect, looks exactly same what the requirement was, so I'm going to click on save.
+43
+
+44
+00:03:39,740 --> 00:03:42,530
+And the structure of my table is now ready.
+44
+
+45
+00:03:42,560 --> 00:03:49,040
+I am ready with three different columns as suggested, so I'm going to go into the employees table to
+45
+
+46
+00:03:49,040 --> 00:03:50,120
+see the structure.
+46
+
+47
+00:03:50,570 --> 00:03:56,970
+If you see that you're I have three columns, employee id, employee name and employee department.
+47
+
+48
+00:03:57,380 --> 00:03:58,490
+So now what next?
+48
+
+49
+00:03:58,700 --> 00:04:02,510
+So I'm going to quickly enter the values into the table.
+49
+
+50
+00:04:03,900 --> 00:04:11,010
+So to insert the values I'll go to the SQL tab, select on insert button, and then I'm going to
+50
+
+51
+00:04:11,010 --> 00:04:12,330
+change the values.
+51
+
+52
+00:04:14,170 --> 00:04:19,840
+Change the first value to 1 second value to John.
+52
+
+53
+00:04:21,080 --> 00:04:25,730
+And the third value to Finance.
+53
+
+54
+00:04:27,280 --> 00:04:28,450
+And click on Go.
+54
+
+55
+00:04:31,330 --> 00:04:34,790
+It's exactly same what the requirement was.
+55
+
+56
+00:04:35,410 --> 00:04:41,220
+So make sure that you put a single quote when you are entering the VARCHAR.
+56
+
+57
+00:04:43,590 --> 00:04:49,500
+I'm just copying this so that it becomes easy to enter the second record and yes, the first row has
+57
+
+58
+00:04:49,500 --> 00:04:53,070
+been inserted into my table, that is employees.
+58
+
+59
+00:04:56,380 --> 00:05:02,260
+You can edit it from your or else you can go into the SQL and do the same process, so I pasted the
+59
+
+60
+00:05:02,260 --> 00:05:10,300
+line, I copied, I'm changing the values to 2 Harry and IT and now again hit on Go.
+60
+
+61
+00:05:10,460 --> 00:05:12,370
+Another record has been inserted.
+61
+
+62
+00:05:16,370 --> 00:05:19,460
+I'm going to add third record, that is Peter.
+62
+
+63
+00:05:20,660 --> 00:05:30,800
+3 and HR . Click on Go, the last row is also been inserted to check out how the table looks like
+63
+
+64
+00:05:30,800 --> 00:05:32,960
+select star from employees.
+64
+
+65
+00:05:32,960 --> 00:05:35,090
+And here is how the table looks like.
+65
+
+66
+00:05:35,420 --> 00:05:38,440
+It's exactly same what the requirements was.
+66
+
+67
+00:05:39,110 --> 00:05:40,930
+So that is it for the video.
+67
+
+68
+00:05:40,940 --> 00:05:44,290
+And next video, we are going to perform three simple queries.
+68
+
+69
+00:05:44,300 --> 00:05:45,410
+Thank you so much.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:04,220 --> 00:00:05,990
+Hello and welcome to this video.
+1
+
+2
+00:00:06,010 --> 00:00:12,660
+In the previous video, we have created a table by the name employees we have added three records into it.
+2
+
+3
+00:00:13,130 --> 00:00:15,740
+So now let's complete the lab exercise.
+3
+
+4
+00:00:15,740 --> 00:00:24,700
+So the first exercises is find the name of all the employees, so I'll quickly go to the localhost and
+4
+
+5
+00:00:25,010 --> 00:00:31,720
+hit a query that is select star from employees, which is going to give me all the records from the employees
+5
+
+6
+00:00:31,730 --> 00:00:32,200
+table.
+6
+
+7
+00:00:32,720 --> 00:00:39,890
+So the second thing is list all the employees who are working in I.T. So how to do that?
+7
+
+8
+00:00:39,900 --> 00:00:46,820
+We have discussed it previously that if you want to put any condition, we can use some conditional
+8
+
+9
+00:00:46,820 --> 00:00:49,300
+clause such as where clause.
+9
+
+10
+00:00:49,760 --> 00:00:54,320
+So now we are going to go on to the localhost, go to SQL.
+10
+
+11
+00:00:55,170 --> 00:01:01,440
+And we want to fetch all the different records present in the employees table where
+11
+
+12
+00:01:02,280 --> 00:01:10,860
+employee department is equal to I.T., so it is going to give me all the records present in the table
+12
+
+13
+00:01:10,870 --> 00:01:15,050
+who all works in to the IT department hit on go.
+13
+
+14
+00:01:15,070 --> 00:01:15,600
+You'll see
+14
+
+15
+00:01:15,600 --> 00:01:23,270
+the result as only Harry is the person from the whole employee's table who works in the I.T. department.
+15
+
+16
+00:01:23,280 --> 00:01:26,460
+So I am getting the result as such.
+16
+
+17
+00:01:27,750 --> 00:01:34,880
+So now moving on, the third question is show different types of departments, so how to find out
+17
+
+18
+00:01:34,920 --> 00:01:43,920
+different types of department present, so select distinct the column name that is employe department
+18
+
+19
+00:01:44,100 --> 00:01:45,710
+from employee's table.
+19
+
+20
+00:01:46,500 --> 00:01:52,510
+So this is the key word used to find out the unique values present in a particular column.
+20
+
+21
+00:01:52,980 --> 00:02:00,380
+So we are going to find out the different departments present in the table, employees.
+21
+
+22
+00:02:00,390 --> 00:02:07,950
+So here you see there are three different departments that is Finance I.T. and H.R. So this is the solution
+22
+
+23
+00:02:07,950 --> 00:02:12,670
+of all the three exercises which I have given you, you can practice a lot more.
+23
+
+24
+00:02:12,690 --> 00:02:19,960
+There are so many resources around the Internet so you can find out such questions and practice on yourself.
+24
+
+25
+00:02:20,370 --> 00:02:22,050
+So that's it for this video.
+25
+
+26
+00:02:22,080 --> 00:02:23,220
+Thank you so much.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,440 --> 00:00:02,460
+Hello and welcome to this video.
+1
+
+2
+00:00:02,480 --> 00:00:10,130
+In this video, we are going to talk about truth tables, logical operators such as AND and OR. AND logical
+2
+
+3
+00:00:10,550 --> 00:00:19,010
+operator behaves in such a way that if condition A is false and condition B is false, then the output
+3
+
+4
+00:00:19,010 --> 00:00:21,700
+that you are going to get will always be false.
+4
+
+5
+00:00:24,120 --> 00:00:32,010
+Here zero represents false and one represents true, so if condition A is not satisfied, but condition
+5
+
+6
+00:00:32,010 --> 00:00:33,320
+B is satisfied.
+6
+
+7
+00:00:33,980 --> 00:00:40,420
+Still, the AND operator is not going to allow you, not going to give you the result.
+7
+
+8
+00:00:40,950 --> 00:00:45,680
+You have to remember this way that AND is a very strict logical operator.
+8
+
+9
+00:00:46,230 --> 00:00:55,080
+If both statements are satisfied, then only the output is going to be true in AND logical operator
+9
+
+10
+00:00:55,620 --> 00:00:55,830
+The other hand
+10
+
+11
+00:00:55,860 --> 00:00:59,490
+we have OR logical operator, which is very lenient.
+11
+
+12
+00:00:59,490 --> 00:01:05,400
+If any one of the condition is satisfied, then the output will be true.
+12
+
+13
+00:01:06,090 --> 00:01:12,620
+If it is false and true, the output that you are going to get will always be true.
+13
+
+14
+00:01:12,780 --> 00:01:22,190
+In terms of OR logical operator, it will only be false when both the conditions are not satisfied.
+14
+
+15
+00:01:22,740 --> 00:01:26,700
+If any one of the statement is true, the output will be true.
+15
+
+16
+00:01:27,000 --> 00:01:32,100
+And here is, if both the statements are true, then output is true.
+16
+
+17
+00:01:32,640 --> 00:01:34,740
+I don't want you guys to get confused.
+17
+
+18
+00:01:34,740 --> 00:01:42,060
+We are going to see this thing practically in the next video so that you understand how AND and OR operators
+18
+
+19
+00:01:42,090 --> 00:01:48,030
+are very helpful in accessing the queries from the database.
+19
+
+20
+00:01:48,480 --> 00:01:49,620
+Thank you so much.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,740 --> 00:00:07,110
+Hello and welcome to this video. In this video we are going to discuss about the logical operators,
+1
+
+2
+00:00:07,110 --> 00:00:12,870
+which we have discussed in the previous video, Logical Operator AND and OR.
+2
+
+3
+00:00:14,160 --> 00:00:21,300
+Also, we are going to practically prove the truth tables, which we have seen in the previous video.
+3
+
+4
+00:00:21,630 --> 00:00:28,710
+I am going to use the same table which I have created previously, that table named employee's table which
+4
+
+5
+00:00:28,710 --> 00:00:35,410
+consist of three different records and three columns, employee id employee name and employee department.
+5
+
+6
+00:00:35,850 --> 00:00:42,840
+I'm going to go into the SQL tab wherein the automated generated query that they select star from
+6
+
+7
+00:00:42,840 --> 00:00:44,740
+employees is already there.
+7
+
+8
+00:00:45,180 --> 00:00:49,970
+So I am going to create some conditional statements.
+8
+
+9
+00:00:49,980 --> 00:00:54,090
+I'm going to use employee name equals Harry.
+9
+
+10
+00:00:56,030 --> 00:01:03,380
+To make this statement true, as I said previously, that logical operators are been used between two
+10
+
+11
+00:01:03,380 --> 00:01:05,240
+different conditional statements.
+11
+
+12
+00:01:05,240 --> 00:01:15,410
+So the first statement is where clause employee name equal to HARRY. I am using AND operator here and taking
+12
+
+13
+00:01:15,410 --> 00:01:21,370
+another column that is employee department and writing it equal to IT.
+13
+
+14
+00:01:21,800 --> 00:01:22,670
+That means
+14
+
+15
+00:01:24,020 --> 00:01:32,480
+my query says that select all the records from the employee where employee name equals Harry and where employee department
+15
+
+16
+00:01:32,480 --> 00:01:33,710
+equals I.T..
+16
+
+17
+00:01:35,970 --> 00:01:44,160
+So according to the employee's table statement, that is employee name equals Harry and statement B, that
+17
+
+18
+00:01:44,160 --> 00:01:51,660
+is employee department equals I.T. Both these statements are true. According to the employee's table.
+18
+
+19
+00:01:51,690 --> 00:01:56,690
+So I am getting the output of Harry as an output.
+19
+
+20
+00:01:56,700 --> 00:01:58,440
+You can see down over here.
+20
+
+21
+00:02:00,400 --> 00:02:07,970
+Now I will go back to SQL or you can edit it in line over here itself, so I am changing the department,
+21
+
+22
+00:02:07,990 --> 00:02:14,470
+HR, according to the employee's table Harry belongs to I.T. department, not H.R. department.
+22
+
+23
+00:02:14,490 --> 00:02:21,130
+So I am not getting any results, which simply means that statement A is true.
+23
+
+24
+00:02:21,130 --> 00:02:23,980
+But Statement B makes it false.
+24
+
+25
+00:02:23,980 --> 00:02:30,970
+So the output of true and false becomes false, according to the true table discussed.
+25
+
+26
+00:02:30,970 --> 00:02:38,650
+As you can see over here, if anyone of this statement is false, the output is always going to be false.
+26
+
+27
+00:02:42,110 --> 00:02:46,010
+Now, I am going to change this again, go to SQL.
+27
+
+28
+00:02:48,510 --> 00:02:55,620
+Just to see how the tables looks like and what is the data inside it, so here you can see that Harry
+28
+
+29
+00:02:55,620 --> 00:02:59,090
+belongs to I.T. department, not HR department.
+29
+
+30
+00:02:59,520 --> 00:03:02,640
+So that is why when I put department.
+30
+
+31
+00:03:04,610 --> 00:03:12,740
+So when I put employee department equals I.T., I get the result, but when I put Harry Department H.R.,
+31
+
+32
+00:03:12,740 --> 00:03:14,370
+I am not getting any results.
+32
+
+33
+00:03:14,870 --> 00:03:22,160
+So now I'm trying some other condition as employee ID equals to an employee name equals.
+33
+
+34
+00:03:23,260 --> 00:03:23,830
+Peter.
+34
+
+35
+00:03:26,150 --> 00:03:32,360
+This statement is, again, false because employee I.D. 3 is Peter not 2, so I am not going to
+35
+
+36
+00:03:32,360 --> 00:03:34,230
+get any result over here.
+36
+
+37
+00:03:34,850 --> 00:03:43,100
+So now let's make this statement true so that to verify that how ANR operator. AND operator will work
+37
+
+38
+00:03:43,100 --> 00:03:45,830
+only if both the statements are true.
+38
+
+39
+00:03:45,980 --> 00:03:48,020
+It is not going to work either
+39
+
+40
+00:03:48,020 --> 00:03:49,780
+one of the statement is false.
+40
+
+41
+00:03:49,790 --> 00:03:53,580
+If both those statements are false, we are not going to get any results.
+41
+
+42
+00:03:54,230 --> 00:03:56,930
+So this is how AND operator behaves.
+42
+
+43
+00:03:58,060 --> 00:04:05,520
+Let's test for OR operator for the same conditions, employee ID equals to employee name equals Harry.
+43
+
+44
+00:04:05,890 --> 00:04:08,030
+We are getting exact same result.
+44
+
+45
+00:04:08,050 --> 00:04:15,250
+That means if both the conditions are true, we are getting the output as true according to truth table
+45
+
+46
+00:04:15,250 --> 00:04:21,670
+over your if both the conditions are true, we are always going to get the result as true according
+46
+
+47
+00:04:21,670 --> 00:04:27,160
+to the OR table, which is exactly similar to AND's truth table.
+47
+
+48
+00:04:28,340 --> 00:04:33,800
+But where the difference is, so the difference is over here.
+48
+
+49
+00:04:38,940 --> 00:04:45,810
+Let's take an employee I.D., which not at all exist in the table that is employee id equals 4 and employee
+49
+
+50
+00:04:45,810 --> 00:04:49,560
+name equals Harry and let's see what the output is.
+50
+
+51
+00:04:49,590 --> 00:04:51,780
+So, yes, we are getting the Output.
+51
+
+52
+00:04:52,140 --> 00:04:57,630
+That means if anyone of the condition is true, we are getting the result.
+52
+
+53
+00:04:57,660 --> 00:05:01,650
+This is how OR should behave according to the truth table.
+53
+
+54
+00:05:01,650 --> 00:05:06,450
+And it is behaving, as you can see in the practical over here.
+54
+
+55
+00:05:08,830 --> 00:05:15,610
+If I change this to AND, I am not going to get any result because AMD says that I will not allow
+55
+
+56
+00:05:15,610 --> 00:05:23,010
+if anyone of this statement is false, but OR says that I will allow if anyone of this statement is true,
+56
+
+57
+00:05:23,440 --> 00:05:25,270
+this is where the difference is.
+57
+
+58
+00:05:25,600 --> 00:05:29,970
+If both statements are true, then the output is true.
+58
+
+59
+00:05:29,980 --> 00:05:34,630
+If anyone of this statement is true, then the output is true according to OR.
+59
+
+60
+00:05:35,050 --> 00:05:37,600
+So this is where the major difference is.
+60
+
+61
+00:05:41,990 --> 00:05:48,290
+Let's change this to OR and see, yes, we are getting the results of one statement is true.
+61
+
+62
+00:05:48,680 --> 00:05:55,790
+So let's try to make this again, both the statements true employee ID 1 and name equals John.
+62
+
+63
+00:05:55,790 --> 00:05:59,560
+So, yes, we are getting the result as expected.
+63
+
+64
+00:05:59,990 --> 00:06:05,930
+So I hope you guys understood about the difference between AND and OR logical operators.
+64
+
+65
+00:06:06,260 --> 00:06:07,550
+That's it for this video.
+65
+
+66
+00:06:07,580 --> 00:06:08,570
+Thank you so much.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,700 --> 00:00:07,120
+Hello and welcome to this video and this video we are going to discuss about how an application fetches
+1
+
+2
+00:00:07,150 --> 00:00:11,240
+the user's data from the database with the help of a SQL.
+2
+
+3
+00:00:11,920 --> 00:00:17,640
+Let's imagine this is an application made by Hacktify for all its students.
+3
+
+4
+00:00:17,680 --> 00:00:20,800
+So if a user enters the user name
+4
+
+5
+00:00:21,720 --> 00:00:28,320
+And enters the correct password, he or she is allowed to enter into the application and maybe he or she
+5
+
+6
+00:00:28,320 --> 00:00:34,150
+can see their profile, their progress, maybe their attendance and a lot of things.
+6
+
+7
+00:00:34,440 --> 00:00:38,340
+So this is how generally an application looks like and it works.
+7
+
+8
+00:00:39,240 --> 00:00:44,820
+So how the application takes help from the database to fetch the users.
+8
+
+9
+00:00:44,820 --> 00:00:49,610
+Correct details such as the correct username and password.
+9
+
+10
+00:00:49,950 --> 00:00:55,890
+So we will see the generic query what is been used in most of the applications.
+10
+
+11
+00:00:56,740 --> 00:01:03,780
+So here is the general SQL query. Here I am taking username as admin and password as admin.
+11
+
+12
+00:01:04,000 --> 00:01:08,130
+Let's imagine that this user does exist into the database.
+12
+
+13
+00:01:08,430 --> 00:01:17,640
+So the query should look something like select star from student where user name equals admin and password
+13
+
+14
+00:01:17,640 --> 00:01:19,060
+equals admin.
+14
+
+15
+00:01:19,410 --> 00:01:27,510
+So if both the details match in to the database as we have used AND logic operator over here, which
+15
+
+16
+00:01:27,510 --> 00:01:36,630
+means if both the conditions are true, only if both the conditions are true, then only AND operator
+16
+
+17
+00:01:36,630 --> 00:01:44,760
+will allow to access the application or else it will not allow the user to go into the application.
+17
+
+18
+00:01:46,070 --> 00:01:47,450
+But as I said that
+18
+
+19
+00:01:48,480 --> 00:01:56,160
+both the details does exist into the database, let's imagine this so both username and password is
+19
+
+20
+00:01:56,160 --> 00:02:02,760
+correct so that admin will be able to see the profile page which says hello admin, which belongs to
+20
+
+21
+00:02:02,760 --> 00:02:04,450
+a particular user.
+21
+
+22
+00:02:04,830 --> 00:02:07,500
+So this is how a application generally works.
+22
+
+23
+00:02:07,980 --> 00:02:13,950
+When you enter in your credentials, your username and your password, it forms up a query.
+23
+
+24
+00:02:14,250 --> 00:02:18,540
+It fits into the query and then it goes through the database.
+24
+
+25
+00:02:18,540 --> 00:02:21,960
+It checks whether the user exists or not.
+25
+
+26
+00:02:22,230 --> 00:02:30,150
+If the user exist, if the credentials are correct, the particular user is allowed in to the application.
+26
+
+27
+00:02:30,180 --> 00:02:32,820
+Otherwise, he or she might get an error.
+27
+
+28
+00:02:33,090 --> 00:02:35,640
+saying the credentials are not good.
+28
+
+29
+00:02:37,260 --> 00:02:43,140
+So in the next video, we are going to move towards SQL injection and how do we spoof a query,
+29
+
+30
+00:02:43,140 --> 00:02:49,960
+how do we spoof a database to get the details without knowing correct passwords and user names?
+30
+
+31
+00:02:50,580 --> 00:02:51,690
+Thank you so much.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:03,850 --> 00:00:10,350
+Hello and welcome to this video. In this video, we are going to see SQL query breakdown. Along with 
+1
+
+2
+00:00:10,360 --> 00:00:11,970
+SQL query breakdown
+2
+
+3
+00:00:11,980 --> 00:00:17,100
+we are going to see how to bypass or how to perform SQL injection.
+3
+
+4
+00:00:17,560 --> 00:00:25,030
+The logic is going to be clear in this video, how to an attacker perform a SQL injection on to any
+4
+
+5
+00:00:25,030 --> 00:00:26,690
+particular application.
+5
+
+6
+00:00:27,220 --> 00:00:29,620
+So let's try to understand this query.
+6
+
+7
+00:00:29,950 --> 00:00:37,210
+Select star from student, where you are the school u_name equal to admin and u_pass equals
+7
+
+8
+00:00:37,210 --> 00:00:39,670
+human or 1 equals 1.
+8
+
+9
+00:00:39,680 --> 00:00:43,630
+So I would recommend neglect this part for now.
+9
+
+10
+00:00:43,960 --> 00:00:47,080
+Try to understand this much of query.This
+10
+
+11
+00:00:47,080 --> 00:00:52,480
+I am repeating this query again and again in all my videos.
+11
+
+12
+00:00:52,750 --> 00:00:59,200
+So this query means select all the details from student table.
+12
+
+13
+00:00:59,350 --> 00:01:08,530
+Where u_name column equals admin and u_password column equals human.
+13
+
+14
+00:01:08,860 --> 00:01:16,480
+That means fetch out all the details from the student table, whose username is admin and password
+14
+
+15
+00:01:16,480 --> 00:01:17,200
+is human.
+15
+
+16
+00:01:19,090 --> 00:01:25,270
+While this query is executing, it will check for the following details into the column, username and
+16
+
+17
+00:01:25,270 --> 00:01:26,380
+password if
+17
+
+18
+00:01:27,530 --> 00:01:37,400
+the user name column has admin as a user and human as a password, if both the conditions are satisfied,
+18
+
+19
+00:01:37,400 --> 00:01:45,050
+then the query is going give us the output as true and is going to allow the user to enter into the
+19
+
+20
+00:01:45,050 --> 00:01:45,970
+application.
+20
+
+21
+00:01:45,980 --> 00:01:53,180
+Otherwise, it will not allow, as we have seen from the truth table, that and will only allow the user to
+21
+
+22
+00:01:53,180 --> 00:01:59,000
+enter into the application if both the conditions are satisfied.
+22
+
+23
+00:01:59,030 --> 00:02:04,070
+Otherwise it will not allow the user to enter into the application.
+23
+
+24
+00:02:05,940 --> 00:02:13,740
+So being an attacker, what an attacker does is if he or she doesn't know the password, so at the place
+24
+
+25
+00:02:13,740 --> 00:02:21,660
+of password, the attacker is going to put this as a payload human single quote or 1 equals 1.
+25
+
+26
+00:02:21,690 --> 00:02:23,020
+What does this mean?
+26
+
+27
+00:02:23,250 --> 00:02:25,720
+Let's break down this query to further.
+27
+
+28
+00:02:26,470 --> 00:02:33,450
+OK, so the user name is admin and password, which the attacker is passing is human.
+28
+
+29
+00:02:33,660 --> 00:02:40,080
+But according to the student database, there is no such user as well as there is no such password into
+29
+
+30
+00:02:40,080 --> 00:02:40,770
+the table.
+30
+
+31
+00:02:41,370 --> 00:02:50,980
+So username gives false and password also gives false, but at the place of password in to the input
+31
+
+32
+00:02:50,980 --> 00:02:51,360
+field.
+32
+
+33
+00:02:51,360 --> 00:02:57,780
+The attacker has inserted something else as well, which is OR 1 equals 1.
+33
+
+34
+00:02:58,260 --> 00:03:07,620
+So OR will behave as a logical operator into the query and then it is going to perform something which
+34
+
+35
+00:03:07,620 --> 00:03:08,370
+is true.
+35
+
+36
+00:03:08,640 --> 00:03:14,290
+1 is always 1 to one and it is always going to give you the result as true.
+36
+
+37
+00:03:14,610 --> 00:03:19,050
+So this query will now become false and false.
+37
+
+38
+00:03:19,050 --> 00:03:21,690
+False AND False becomes False.
+38
+
+39
+00:03:22,470 --> 00:03:26,320
+False OR True becomes True according to the truth table.
+39
+
+40
+00:03:26,340 --> 00:03:33,470
+So this is how the attacker gets into the application without knowing the correct details of the user.
+40
+
+41
+00:03:33,870 --> 00:03:37,410
+We are going to see this practically into the next video.
+41
+
+42
+00:03:37,420 --> 00:03:40,540
+So no need to worry if you didn't understood the whole thing.
+42
+
+43
+00:03:40,920 --> 00:03:42,060
+Thank you so much.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,010 --> 00:00:04,010
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,850 --> 00:00:12,620
+So in this video, we're going to discuss about SQL injection as to now we have already discussed
+2
+
+3
+00:00:12,620 --> 00:00:19,580
+about what is a SQL, how to create your database and how to write your own queries.
+3
+
+4
+00:00:20,470 --> 00:00:29,560
+Now, what is a SQL injection, so when any attacker is able to interfere with the queries that
+4
+
+5
+00:00:29,590 --> 00:00:39,010
+the application makes to the database and can successfully retrieve any sensitive data from it, then
+5
+
+6
+00:00:39,010 --> 00:00:40,730
+it is known as a SQL injection.
+6
+
+7
+00:00:41,470 --> 00:00:48,850
+So basically, the attacker gets the capability of the retrieval of the database names, the tables,
+7
+
+8
+00:00:49,120 --> 00:00:51,810
+the columns, as well as the database.
+8
+
+9
+00:00:52,630 --> 00:01:02,380
+Also, the attacker is able to get the shell of  MySQL or any database, and sometimes the OS
+9
+
+10
+00:01:02,410 --> 00:01:09,250
+shell as well through which he or she is able to execute commands onto the target server.
+10
+
+11
+00:01:11,000 --> 00:01:13,730
+All right, so what is the impact of SQL injection?
+11
+
+12
+00:01:14,180 --> 00:01:22,700
+So you must have already guessed that if any attacker is able to get the sensitive data of all the users
+12
+
+13
+00:01:23,360 --> 00:01:28,080
+from the server, then obviously it is going to be of a critical impact.
+13
+
+14
+00:01:29,030 --> 00:01:37,260
+Now, if the attacker is able to successfully identify and exploit SQL injection into any target, then
+14
+
+15
+00:01:37,260 --> 00:01:45,200
+it can lead to unauthorized access to sensitive data that can be passwords, credit card details, etc..
+15
+
+16
+00:01:45,950 --> 00:01:52,850
+He or she can also perform authentication bypass into multiple applications, which we are going to
+16
+
+17
+00:01:52,850 --> 00:01:54,980
+see in upcoming videos.
+17
+
+18
+00:01:55,340 --> 00:02:02,360
+But I will show you without the correct username and password how you can login into any application.
+18
+
+19
+00:02:03,470 --> 00:02:11,510
+Attacker can also retrieve the hidden data, which is not available for the public to use or see subverting
+19
+
+20
+00:02:11,510 --> 00:02:14,380
+or modifying the application logic as well.
+20
+
+21
+00:02:14,630 --> 00:02:22,910
+So the attacker gets in control of the MySQL queries and he or she can modify how the application is
+21
+
+22
+00:02:22,910 --> 00:02:25,820
+going to behave from first point to last.
+22
+
+23
+00:02:26,600 --> 00:02:27,080
+All right.
+23
+
+24
+00:02:27,380 --> 00:02:34,130
+And the last one is he or she can also execute commands onto the server, which is most dangerous.
+24
+
+25
+00:02:34,820 --> 00:02:42,590
+So this gives the capability of modifying the database as well as the deletion of anything from to the
+25
+
+26
+00:02:42,590 --> 00:02:46,400
+server, which is, again, of high critical impact.
+26
+
+27
+00:02:47,990 --> 00:02:50,170
+So what is the severity of SQL injection?
+27
+
+28
+00:02:50,420 --> 00:02:57,590
+You may ask, so it is considered as a P1, which is priority one, which is critical vulnerability
+28
+
+29
+00:02:57,590 --> 00:03:05,960
+on crowdsource platforms like Backroad Integrity, Synack or Hackerone, and also the CVSS score for a
+29
+
+30
+00:03:05,960 --> 00:03:12,740
+successful SQL injection is considered to be between 9 and 10, which is a critical vulnerability.
+30
+
+31
+00:03:14,140 --> 00:03:17,530
+So how are we going to test this or where
+31
+
+32
+00:03:17,560 --> 00:03:20,770
+should I actually look for a SQL injection?
+32
+
+33
+00:03:21,340 --> 00:03:28,960
+So this is known as injection point, but actually you are going to put your payload to identify if
+33
+
+34
+00:03:28,960 --> 00:03:35,680
+the application behaves in a different manner and you successfully identify if the application is vulnerable
+34
+
+35
+00:03:35,680 --> 00:03:37,230
+to SQL injection attacks.
+35
+
+36
+00:03:37,930 --> 00:03:39,710
+So where can the query be injected.
+36
+
+37
+00:03:40,120 --> 00:03:47,860
+This is the question that arises to my mind so for, a successful SQL injection, the injection point
+37
+
+38
+00:03:47,860 --> 00:03:53,330
+can be in the get request or in the post request, in the headers or in the cookies.
+38
+
+39
+00:03:53,620 --> 00:03:59,770
+So basically you can identify a SQL injection anywhere and everywhere into the application.
+39
+
+40
+00:04:01,460 --> 00:04:09,710
+OK, so how are we going to approach. First of all, we are going to fuzz the application parameters
+40
+
+41
+00:04:09,950 --> 00:04:15,340
+so any application may contain one or more parameters in all the URL's.
+41
+
+42
+00:04:16,510 --> 00:04:23,320
+So first of all, we are going to fuzz the application parameters, get a list of more and more parameters
+42
+
+43
+00:04:23,320 --> 00:04:24,580
+using Spider as well.
+43
+
+44
+00:04:24,910 --> 00:04:31,150
+Remember, when you are doing spidering, you're increasing the scope for the target application for
+44
+
+45
+00:04:31,150 --> 00:04:34,090
+identification of more and more vulnerabilities.
+45
+
+46
+00:04:34,750 --> 00:04:40,900
+Now, out of those parameters, we are going to identify one of the injection parameter, which is
+46
+
+47
+00:04:40,900 --> 00:04:46,730
+basically nothing but a vulnerable component or a vulnerable parameter into the application.
+47
+
+48
+00:04:47,470 --> 00:04:50,760
+Next, we're going to check for vulnerable component.
+48
+
+49
+00:04:50,770 --> 00:04:58,060
+If the application is vulnerable through that parameter whenever we are going to pass our SQL queries.
+49
+
+50
+00:04:58,720 --> 00:05:05,350
+Now, once our queries are getting executed onto the target, server or we have identified the parameter
+50
+
+51
+00:05:05,350 --> 00:05:11,530
+is behaving in a different manner when we are when we are giving special characters or let's say
+51
+
+52
+00:05:11,530 --> 00:05:13,670
+we are fuzzing those specific parameters.
+52
+
+53
+00:05:14,440 --> 00:05:21,270
+After we have identified that we are going to attack it with SQL injection queries and successfully exploit.
+53
+
+54
+00:05:22,620 --> 00:05:24,040
+So I hope you guys understood.
+54
+
+55
+00:05:24,330 --> 00:05:24,880
+Thank you.
+55
+
+56
+00:05:25,110 --> 00:05:31,410
+In upcoming videos, we are going to see the practical of how you can basically perform a SQL injection
+56
+
+57
+00:05:31,410 --> 00:05:31,860
+attacks.
+57
+
+58
+00:05:32,130 --> 00:05:38,330
+But this is the approach that you should have in your mind whenever you are going to practice for a
+58
+
+59
+00:05:38,340 --> 00:05:41,880
+SQL injection attacks on any Web application.
+59
+
+60
+00:05:42,240 --> 00:05:42,720
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,320 --> 00:00:03,010
+Hello and welcome to this video.
+1
+
+2
+00:00:03,030 --> 00:00:08,790
+In this video, we are going to see another lab for the second payload, which we have learned in the
+2
+
+3
+00:00:08,790 --> 00:00:09,870
+previous video.
+3
+
+4
+00:00:10,350 --> 00:00:16,320
+So there is one more amazing website to practice, SQL injection, which is called codin game dot com.
+4
+
+5
+00:00:16,650 --> 00:00:21,700
+So you can visit this website and you can perform as SQL injection labs for free.
+5
+
+6
+00:00:22,170 --> 00:00:26,140
+So, SQL code injection is what we are going to do.
+6
+
+7
+00:00:26,260 --> 00:00:31,920
+You're the correct username and password is given on to the website itself, which is admin.
+7
+
+8
+00:00:32,310 --> 00:00:36,660
+The user name is admin and the password is admin
+8
+
+9
+00:00:36,660 --> 00:00:37,580
+123.
+9
+
+10
+00:00:38,370 --> 00:00:44,580
+So you will have to go down here you will see the code in which you will be able to see the query as
+10
+
+11
+00:00:44,580 --> 00:00:44,910
+well.
+11
+
+12
+00:00:45,270 --> 00:00:49,130
+So you just have to run this so that you will see the application.
+12
+
+13
+00:00:49,740 --> 00:00:52,200
+So there is some error.
+13
+
+14
+00:00:53,310 --> 00:00:55,080
+You will have to go up again.
+14
+
+15
+00:00:55,110 --> 00:01:01,910
+OK, so here is how the login screen looks like username and password, so at the place of username
+15
+
+16
+00:01:01,920 --> 00:01:08,100
+I am trying to put admin as a username and the place of password I am trying.
+16
+
+17
+00:01:09,250 --> 00:01:17,770
+Or some random thing, let's say A, B, C, D, E, F, so let's copy this thing and try to paste it
+17
+
+18
+00:01:17,770 --> 00:01:20,050
+over here and hit on login.
+18
+
+19
+00:01:20,440 --> 00:01:22,600
+So it says viewer were not found.
+19
+
+20
+00:01:22,810 --> 00:01:28,230
+So when you try with any random username and password, you are going to see this screen.
+20
+
+21
+00:01:28,540 --> 00:01:34,810
+So there is one drawback of this thing that you will have to reload it if you want to do the whole process
+21
+
+22
+00:01:34,810 --> 00:01:35,250
+again.
+22
+
+23
+00:01:35,680 --> 00:01:39,970
+So I am again going to go run the application.
+23
+
+24
+00:01:39,970 --> 00:01:45,100
+I copied the correct credential because I want to see how the screen looks like.
+24
+
+25
+00:01:45,100 --> 00:01:49,930
+If I enter in the correct password, I'm just going to type admin.
+25
+
+26
+00:01:49,930 --> 00:01:50,830
+123.
+26
+
+27
+00:01:51,280 --> 00:01:55,570
+Copy this and I'm going to pasteit over here and hit on log in.
+27
+
+28
+00:01:55,600 --> 00:02:02,430
+So when you put the correct credential you will be able to see this screen, which is hello app admin
+28
+
+29
+00:02:03,010 --> 00:02:05,800
+So I am again going to try login. Now
+29
+
+30
+00:02:05,800 --> 00:02:07,510
+I'm trying to bypass it.
+30
+
+31
+00:02:07,510 --> 00:02:12,550
+So I put at the place of username admin and at the place of password.
+31
+
+32
+00:02:12,550 --> 00:02:17,140
+I'm going to try this thing, what we have learned in the previous video.
+32
+
+33
+00:02:23,420 --> 00:02:32,510
+ABC single quoted close or one equals one, I make sure that I am not putting the closing single quote
+33
+
+34
+00:02:32,720 --> 00:02:38,610
+at the place of one because I am assuming it is already been there by the developer.
+34
+
+35
+00:02:39,080 --> 00:02:44,440
+So this is how I performed SQL injection and I was able to log into the application.
+35
+
+36
+00:02:44,440 --> 00:02:44,750
+Here
+36
+
+37
+00:02:44,800 --> 00:02:48,110
+if you scroll down, you will be able to see the standard output.
+37
+
+38
+00:02:48,120 --> 00:02:50,050
+what all query we have tried.
+38
+
+39
+00:02:50,480 --> 00:02:57,620
+So with the query you will be able to see that our query is perfectly balanced over payload is perfectly balanced
+39
+
+40
+00:02:57,620 --> 00:03:03,890
+into the query, and it is allowing us to enter into the application with the help of this query.
+40
+
+41
+00:03:04,220 --> 00:03:10,580
+If you want to do furrher labs, you can click on next SQL injection lab and you can do the processing.
+41
+
+42
+00:03:11,890 --> 00:03:18,880
+OK, so I copied the query from there, I pasted it over here on to the sublime and let's break down
+42
+
+43
+00:03:18,880 --> 00:03:21,700
+to understand what happened exactly at the back end.
+43
+
+44
+00:03:21,700 --> 00:03:29,050
+And so username equals admin has given us true because we have seen that admin user does exist into
+44
+
+45
+00:03:29,050 --> 00:03:30,100
+the user table.
+45
+
+46
+00:03:30,580 --> 00:03:37,000
+Password equals ABC is going to give us false because we don't know the correct password or one equals
+46
+
+47
+00:03:37,000 --> 00:03:40,480
+one or one equals one is going to give us
+47
+
+48
+00:03:40,480 --> 00:03:40,840
+True.
+48
+
+49
+00:03:41,260 --> 00:03:48,790
+So if we do further processing true and false is false, false or true is going to give you true.
+49
+
+50
+00:03:48,820 --> 00:03:51,920
+And this is how you are logged in to the application.
+50
+
+51
+00:03:51,940 --> 00:03:53,770
+I hope you understood this.
+51
+
+52
+00:03:54,370 --> 00:03:55,570
+Thank you so much.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,730 --> 00:00:08,080
+In this video, we are going to see another payload for doing a SQL injection, so the query remains
+1
+
+2
+00:00:08,080 --> 00:00:08,680
+the same.
+2
+
+3
+00:00:08,980 --> 00:00:16,840
+Select star from student where uname equals admin and password equals single quote and single quote.
+3
+
+4
+00:00:16,840 --> 00:00:22,260
+Whatever the user is going to enter is going to be appended over here and over here.
+4
+
+5
+00:00:23,550 --> 00:00:29,750
+So whatever username you are going to enter into, the application is going to go and append over here
+5
+
+6
+00:00:29,760 --> 00:00:35,610
+and do the query and whatever password you are going to enter in is going to append over here.
+6
+
+7
+00:00:36,030 --> 00:00:43,160
+And this single quote, I assume, is already been there, kept by the developer.
+7
+
+8
+00:00:43,500 --> 00:00:49,310
+So will have to make sure to balance this single quote as well while we are entering the payload.
+8
+
+9
+00:00:49,440 --> 00:00:51,760
+So that syntax becomes perfect.
+9
+
+10
+00:00:51,930 --> 00:00:56,090
+So when it goes to the database, our query should execute.
+10
+
+11
+00:00:56,490 --> 00:01:00,930
+So here I am entering into the user name input field.
+11
+
+12
+00:01:00,930 --> 00:01:09,870
+I am putting admin and at the place of password I am putting this payload, which is a single quote or
+12
+
+13
+00:01:10,050 --> 00:01:13,930
+one equals one hyphen hyphen So here.
+13
+
+14
+00:01:13,950 --> 00:01:16,140
+what does this hyphen hyphen mean.
+14
+
+15
+00:01:16,560 --> 00:01:20,400
+Hyphen Hyphen is commenting the rest of the query.
+15
+
+16
+00:01:21,600 --> 00:01:27,720
+You would have seen this double slash to comment your programmer code while you are using any other
+16
+
+17
+00:01:27,720 --> 00:01:28,380
+language.
+17
+
+18
+00:01:28,830 --> 00:01:33,340
+So in SQL we use hyphen hyphen to comment the rest of the query.
+18
+
+19
+00:01:33,780 --> 00:01:34,950
+So this is how
+19
+
+20
+00:01:35,370 --> 00:01:43,260
+my last single code is not functional because it is never going to execute because of the hyphen hyphen
+20
+
+21
+00:01:43,260 --> 00:01:50,790
+comments So now executable query is something like this, which is select star from the student where
+21
+
+22
+00:01:50,800 --> 00:01:57,180
+username equals admin and password equals nothing or one equals one.
+22
+
+23
+00:01:58,790 --> 00:02:06,380
+So let's break down this query further uname equals admin and password equals empty quote or one
+23
+
+24
+00:02:06,380 --> 00:02:10,160
+equals one and rest of the things are already been commented.
+24
+
+25
+00:02:11,770 --> 00:02:18,730
+So here I am assuming that admin user also doesn't exist into the student table, so it is going to
+25
+
+26
+00:02:18,730 --> 00:02:28,630
+give me the output is false and password is empty again, it is going to give me false and OR is a
+26
+
+27
+00:02:28,630 --> 00:02:29,880
+logical operator.
+27
+
+28
+00:02:29,920 --> 00:02:31,490
+After that we have put
+28
+
+29
+00:02:31,600 --> 00:02:34,750
+one equals one, which is always a true condition.
+29
+
+30
+00:02:34,940 --> 00:02:41,020
+You can use A equals A, B equals B, 2 equals 2, 5 equals 5.
+30
+
+31
+00:02:41,020 --> 00:02:42,640
+Whatever you feel like.
+31
+
+32
+00:02:43,240 --> 00:02:51,370
+Our intention is to make the query is true from here. So 
+uname equals admin which is going to give
+32
+
+33
+00:02:51,370 --> 00:02:58,600
+us false and password equals empty is again going to give us false or one equals one is going to give
+33
+
+34
+00:02:58,600 --> 00:02:58,810
+us
+34
+
+35
+00:02:58,810 --> 00:02:59,220
+True.
+35
+
+36
+00:02:59,740 --> 00:03:07,150
+So let's evaluate this thing further false and false will result in false or true.
+36
+
+37
+00:03:07,390 --> 00:03:10,300
+False or true will give you always true.
+37
+
+38
+00:03:11,860 --> 00:03:18,820
+So after the execution of this query, the database is going to allow you to enter into the application
+38
+
+39
+00:03:19,210 --> 00:03:22,030
+as the queries result is true.
+39
+
+40
+00:03:23,480 --> 00:03:30,290
+It is only concerned that if the result is true, I'm going to allow the user to enter into the application.
+40
+
+41
+00:03:30,560 --> 00:03:34,820
+If it is false, I will not allow the user to enter into the application.
+41
+
+42
+00:03:35,330 --> 00:03:38,890
+I hope you understood the breakdown of this second payload.
+42
+
+43
+00:03:39,590 --> 00:03:45,380
+So in the next video, we are going to see the practical of the same thing, what we have discussed
+43
+
+44
+00:03:45,380 --> 00:03:46,250
+in this video.
+44
+
+45
+00:03:46,700 --> 00:03:47,840
+Thank you so much.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,060 --> 00:00:01,870
+Hello and welcome to this video.
+1
+
+2
+00:00:02,100 --> 00:00:08,640
+In this video, we are going to see practically what we have seen in the previous video about the logic
+2
+
+3
+00:00:08,640 --> 00:00:10,200
+of SQL injection.
+3
+
+4
+00:00:12,480 --> 00:00:19,590
+You can visit to this amazing website that is hacks planning dot com where in you'll get amazing labs.
+4
+
+5
+00:00:21,510 --> 00:00:27,660
+This labs are made intentionally vulnerable so that you can practice on it and you can prepare yourself
+5
+
+6
+00:00:27,660 --> 00:00:30,130
+to get into real bug bounty hunting.
+6
+
+7
+00:00:30,390 --> 00:00:31,810
+So let's get started.
+7
+
+8
+00:00:32,550 --> 00:00:40,980
+Once you visit on this Web site that is hacks planning dot com, you can scroll down and you'll see this SQL 
+8
+
+9
+00:00:40,980 --> 00:00:41,640
+injection.
+9
+
+10
+00:00:41,640 --> 00:00:44,030
+You have to select this SQL injection.
+10
+
+11
+00:00:44,700 --> 00:00:51,120
+So this application says this is the vulnerable application we will be trying to hack with the SQL
+11
+
+12
+00:00:51,120 --> 00:00:52,090
+injection attack.
+12
+
+13
+00:00:54,180 --> 00:01:01,530
+So we will be doing all the steps as suggested in this vulnerable lab, so heres the application log
+13
+
+14
+00:01:01,530 --> 00:01:02,760
+which will get to see.
+14
+
+15
+00:01:04,240 --> 00:01:10,210
+So the first thing is to go ahead and try to log in with the following credential, the credentials
+15
+
+16
+00:01:10,210 --> 00:01:15,690
+are user @ email dot com and at the place of password, you need to enter password.
+16
+
+17
+00:01:16,060 --> 00:01:20,470
+So let's enter both these fields and see what happens.
+17
+
+18
+00:01:21,880 --> 00:01:23,560
+At the place of password.
+18
+
+19
+00:01:24,940 --> 00:01:26,140
+Type password.
+19
+
+20
+00:01:27,530 --> 00:01:28,490
+Hit on Log-in.
+20
+
+21
+00:01:29,910 --> 00:01:36,990
+So it says unknown email or passwords, so the second step is to guess the password because the previous
+21
+
+22
+00:01:36,990 --> 00:01:38,550
+password didn't work here.
+22
+
+23
+00:01:38,890 --> 00:01:45,210
+So it says that the email put the same e-mail address that is user @ email dot com and
+23
+
+24
+00:01:45,210 --> 00:01:48,030
+at the place of password again type password.
+24
+
+25
+00:01:48,300 --> 00:01:53,520
+But if you notice closely, there is one single quote at the end.
+25
+
+26
+00:01:53,530 --> 00:01:58,400
+So we are going to enter password and then single quote and login.
+26
+
+27
+00:01:59,310 --> 00:02:03,540
+So it says the application crashed with an unexpected error.
+27
+
+28
+00:02:03,570 --> 00:02:04,960
+So what does this mean?
+28
+
+29
+00:02:05,280 --> 00:02:11,730
+So when an application gives you some error regarding the syntax, so you should be very happy because
+29
+
+30
+00:02:12,390 --> 00:02:17,940
+there might be a chance that the application might be vulnerable to a SQL injection.
+30
+
+31
+00:02:19,310 --> 00:02:22,670
+So now let's see what happens into the logs window.
+31
+
+32
+00:02:23,840 --> 00:02:31,730
+And also it says that there is some syntax error due to the password and single quote, which we added
+32
+
+33
+00:02:31,730 --> 00:02:38,750
+at the end at the input field of the password, due to which the syntax of the query is messed up and
+33
+
+34
+00:02:38,750 --> 00:02:40,560
+created, something syntax error.
+34
+
+35
+00:02:40,850 --> 00:02:42,350
+So let's see what it is.
+35
+
+36
+00:02:44,260 --> 00:02:50,330
+If you see this query closely, it's the same query, what we have discussed in the previous videos.
+36
+
+37
+00:02:50,330 --> 00:02:55,700
+So select start from users, users here is the name of the table where
+37
+
+38
+00:02:55,840 --> 00:03:02,800
+email is the name of the column where we have passed, user @ email dot com and AND is a logical
+38
+
+39
+00:03:02,800 --> 00:03:03,390
+operator here.
+39
+
+40
+00:03:03,400 --> 00:03:08,330
+Your password equals password, single quote.
+40
+
+41
+00:03:08,380 --> 00:03:15,970
+This is what we have added at the place of password due to which syntax error has occurred.
+41
+
+42
+00:03:17,600 --> 00:03:24,380
+So let's see this clearly, it says that there is some syntax error, again, it saying so here is the
+42
+
+43
+00:03:24,380 --> 00:03:27,950
+code window they have made for the user's understanding.
+43
+
+44
+00:03:27,950 --> 00:03:30,440
+So let's see in the code window closely.
+44
+
+45
+00:03:33,590 --> 00:03:40,970
+So at the place of password, I'm going to again type password and then one extra quote so that to do
+45
+
+46
+00:03:40,970 --> 00:03:47,330
+the early closing of the query, let's see what is the meaning of early closing and what I'm trying
+46
+
+47
+00:03:47,330 --> 00:03:47,820
+to say.
+47
+
+48
+00:03:48,050 --> 00:03:50,660
+So in the next step will see that.
+48
+
+49
+00:03:50,660 --> 00:03:53,090
+What does early closing mean?
+49
+
+50
+00:03:54,410 --> 00:04:00,410
+So now here I am again going to log in with same e-mail address and the password this time will be
+50
+
+51
+00:04:00,410 --> 00:04:07,620
+single quote space OR space one equals one hyphen hyphen.
+51
+
+52
+00:04:08,270 --> 00:04:15,680
+So do remember that in SQL hyphen hyphen means comment the rest of the part,
+52
+
+53
+00:04:15,680 --> 00:04:21,710
+whatever part of the query is. We comment in SQL using hyphen hyphen.
+53
+
+54
+00:04:22,950 --> 00:04:30,240
+So if you will see in the code window it says what we have been told and what the query is going to interpret,
+54
+
+55
+00:04:30,930 --> 00:04:37,830
+password is empty then OR which is going to behave as a logical operator here, one equals one, which
+55
+
+56
+00:04:37,830 --> 00:04:39,660
+is always a true condition.
+56
+
+57
+00:04:39,660 --> 00:04:43,860
+Once value is always equal to one, you can select anything 2 equal 2.
+57
+
+58
+00:04:43,980 --> 00:04:46,810
+You should select the condition, which is always true.
+58
+
+59
+00:04:47,100 --> 00:04:54,090
+So here for ease we have selected one equals one and commemt the rest of the part, which is hyphen,
+59
+
+60
+00:04:54,090 --> 00:04:56,010
+hyphen and try to log in.
+60
+
+61
+00:04:56,040 --> 00:05:01,920
+So now you see that without knowing the correct password, we are inside the application.
+61
+
+62
+00:05:02,280 --> 00:05:04,770
+So this is how SQL injection work.
+62
+
+63
+00:05:06,480 --> 00:05:15,000
+We tried to make the outcome of the query so that the database understands this result of the query
+63
+
+64
+00:05:15,000 --> 00:05:18,170
+is true, that means I am allowed to show the result.
+64
+
+65
+00:05:19,080 --> 00:05:26,160
+You would think the leniency of the OR operator we have spoofed the query and bypassed it without knowing
+65
+
+66
+00:05:26,160 --> 00:05:27,320
+the correct password.
+66
+
+67
+00:05:27,330 --> 00:05:29,370
+We have logged into the application.
+67
+
+68
+00:05:29,640 --> 00:05:32,850
+So this is what the fundamental of SQL injection is.
+68
+
+69
+00:05:32,850 --> 00:05:36,110
+And this is one simple basic payload of SQLi.
+69
+
+70
+00:05:36,390 --> 00:05:41,760
+We are going to see more payload and more different techniques about the SQL injection in the next
+70
+
+71
+00:05:41,760 --> 00:05:42,310
+videos.
+71
+
+72
+00:05:42,750 --> 00:05:43,920
+Thank you so much.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,670 --> 00:00:04,410
+Yeah, so hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,940 --> 00:00:10,520
+So in this video, we are going to see how can you sign up for a very good resource that has been given
+2
+
+3
+00:00:10,520 --> 00:00:15,290
+by the Port Swigger team and they call it as a Web security academy.
+3
+
+4
+00:00:15,920 --> 00:00:23,210
+So I have personally found this to be a very, very good, extensive resource that will help you to
+4
+
+5
+00:00:23,210 --> 00:00:27,410
+build up your skills for pentesting as well as bug bounty hunting.
+5
+
+6
+00:00:28,280 --> 00:00:28,780
+All right.
+6
+
+7
+00:00:28,790 --> 00:00:34,070
+So let's jump into this and see how can you freely access this? For this
+7
+
+8
+00:00:34,070 --> 00:00:41,380
+You simply need to sign up with your details and the lab will be accessed to you free of cost.
+8
+
+9
+00:00:41,840 --> 00:00:44,240
+So for that, you simply need to go to this.
+9
+
+10
+00:00:44,240 --> 00:00:48,270
+URL which is portswigger dot net, and you need to register yourself.
+10
+
+11
+00:00:48,860 --> 00:00:53,450
+So let me just quickly register with my email id.
+11
+
+12
+00:00:55,480 --> 00:01:01,070
+So once I give my email ID, I need to click on that green button, which is register.
+12
+
+13
+00:01:01,720 --> 00:01:09,010
+So it will send the email instructions for you onto your Gmail account once you have received the email
+13
+
+14
+00:01:09,010 --> 00:01:09,760
+instructions.
+14
+
+15
+00:01:10,000 --> 00:01:16,000
+You can just click on that and you will receive a password into that and you can utilize that password
+15
+
+16
+00:01:16,330 --> 00:01:18,370
+to login into your account.
+16
+
+17
+00:01:19,360 --> 00:01:26,500
+Now, I have successfully logged into my Gmail and I'm waiting for the mail from the Port Swigger team,
+17
+
+18
+00:01:26,500 --> 00:01:29,580
+which I can utilize to login into the account.
+18
+
+19
+00:01:30,670 --> 00:01:36,960
+Now, for some reasons, I did not receive the mail, so I have tried to sign up into the Port Swigger
+19
+
+20
+00:01:37,010 --> 00:01:41,320
+Web security academy using my another email address.
+20
+
+21
+00:01:41,560 --> 00:01:48,970
+So I'm going to use this email address now and I'm going to log in now again so you can see I have successfully
+21
+
+22
+00:01:48,970 --> 00:01:52,190
+logged in because I also received the password into my email.
+22
+
+23
+00:01:52,720 --> 00:01:53,230
+Perfect.
+23
+
+24
+00:01:53,260 --> 00:01:58,850
+Now go to the tab which is Academy and you will see Web Security Academy.
+24
+
+25
+00:01:59,260 --> 00:02:05,570
+Now, there is a lot of very useful, helpful learning material as well as labs that you can solve.
+25
+
+26
+00:02:05,980 --> 00:02:09,460
+We just need to click on SQL injection lab number one.
+26
+
+27
+00:02:09,940 --> 00:02:16,300
+So in the upcoming videos, I'm going to show you how you can solve this lab in a very, very simple
+27
+
+28
+00:02:16,300 --> 00:02:16,690
+manner.
+28
+
+29
+00:02:17,170 --> 00:02:22,030
+So I hope you guys understood how you can access this resource and sign up for it.
+29
+
+30
+00:02:22,450 --> 00:02:22,990
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,800 --> 00:00:03,470
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,070 --> 00:00:10,970
+So in this video, we are going to solve one of the SQL injection lab that is provided by the Port
+2
+
+3
+00:00:10,970 --> 00:00:11,730
+Swigger team.
+3
+
+4
+00:00:12,290 --> 00:00:17,620
+So we have already seen how to sign up onto the web security academy. Guys
+4
+
+5
+00:00:17,770 --> 00:00:24,980
+this is one of the very good resource that you can utilize to brush up your skills for bug bounty hunting
+5
+
+6
+00:00:24,980 --> 00:00:26,540
+and penetration testing.
+6
+
+7
+00:00:27,200 --> 00:00:27,680
+All right.
+7
+
+8
+00:00:27,740 --> 00:00:29,750
+So here is the first lab.
+8
+
+9
+00:00:29,750 --> 00:00:31,610
+And let's quickly solve this.
+9
+
+10
+00:00:32,810 --> 00:00:40,070
+So the lab says a SQL Injection Vulnerability in where clause allowing retrieval of hidden data.
+10
+
+11
+00:00:40,790 --> 00:00:45,760
+Now, this lab is based on the previous videos that we have seen.
+11
+
+12
+00:00:47,270 --> 00:00:53,090
+So we are going to utilize our that knowledge in solving this lab.
+12
+
+13
+00:00:54,030 --> 00:01:00,540
+All right, so you can see or hear this loud contains a SQL indication, vulnerability into the product
+13
+
+14
+00:01:00,540 --> 00:01:01,640
+category filter.
+14
+
+15
+00:01:02,040 --> 00:01:04,890
+So the one level parameter is category.
+15
+
+16
+00:01:06,150 --> 00:01:12,410
+When the user selects a category, the application carries out an SQL query which is given below.
+16
+
+17
+00:01:12,960 --> 00:01:19,980
+So you can see the actual query is also given. Now to solve the lab perform SQL injection action attack
+17
+
+18
+00:01:20,130 --> 00:01:27,060
+that causes the application to display the details of all products in any category, both released and
+18
+
+19
+00:01:27,060 --> 00:01:27,760
+unreleased.
+19
+
+20
+00:01:28,530 --> 00:01:28,980
+All right.
+20
+
+21
+00:01:28,980 --> 00:01:37,560
+So the motive of solving this lab is to see all the products which lies into the categories, which
+21
+
+22
+00:01:37,560 --> 00:01:39,330
+is even unreleased.
+22
+
+23
+00:01:40,020 --> 00:01:40,610
+Perfect.
+23
+
+24
+00:01:40,650 --> 00:01:42,970
+So now we know what is our aim.
+24
+
+25
+00:01:42,990 --> 00:01:46,230
+So let's jump into the lab and quickly solve it.
+25
+
+26
+00:01:47,580 --> 00:01:53,490
+For that, you need to click on Access the Lab button and it will just take a few seconds to bring up
+26
+
+27
+00:01:53,490 --> 00:01:54,390
+the lab for you.
+27
+
+28
+00:01:55,110 --> 00:02:01,500
+As you can see, we have successfully started the lab and it looks something like this on which there
+28
+
+29
+00:02:01,500 --> 00:02:04,160
+is a shop: We like to shop.
+29
+
+30
+00:02:04,170 --> 00:02:06,060
+So perfect.
+30
+
+31
+00:02:06,690 --> 00:02:14,640
+Now, if you remember in the question, it was said that the product category is the vulnerable point
+31
+
+32
+00:02:14,640 --> 00:02:15,780
+or the injection point.
+32
+
+33
+00:02:16,200 --> 00:02:19,110
+So let's choose something from here.
+33
+
+34
+00:02:19,650 --> 00:02:21,750
+I think this is the product category.
+34
+
+35
+00:02:22,290 --> 00:02:29,760
+So let's say we click on Clothings shoes and accessories or let's say we go on food and drink.
+35
+
+36
+00:02:30,960 --> 00:02:37,380
+As you can see, over here we have three products right now onto our home screen.
+36
+
+37
+00:02:37,920 --> 00:02:44,260
+And these three products are the first one, the second one and the third one.
+37
+
+38
+00:02:45,270 --> 00:02:51,210
+Now, let's identify if we are able to see all the products here or not.
+38
+
+39
+00:02:51,510 --> 00:02:55,730
+But now we want to see those products which are not released yet.
+39
+
+40
+00:02:56,040 --> 00:02:56,690
+So what to do?
+40
+
+41
+00:02:57,390 --> 00:03:00,230
+So we are going to use one query that I have written.
+41
+
+42
+00:03:00,630 --> 00:03:07,320
+So let's just copy paste this query and paste it, and then we will do the breakdown of the query and
+42
+
+43
+00:03:07,320 --> 00:03:07,920
+hit enter.
+43
+
+44
+00:03:08,340 --> 00:03:10,140
+And you can see Congratulations
+44
+
+45
+00:03:10,140 --> 00:03:17,760
+you have solved the lab and you are able to see all the products that were hidden or were not released
+45
+
+46
+00:03:17,760 --> 00:03:20,460
+but have been successfully released now.
+46
+
+47
+00:03:20,490 --> 00:03:26,340
+Or you are able to retrieve the data from the database of those products, which was not released.
+47
+
+48
+00:03:27,010 --> 00:03:29,620
+So let's do a quick breakdown of the query.
+48
+
+49
+00:03:30,780 --> 00:03:38,570
+So what is the query that has been fired in the backend when you try to go onto any category, select
+49
+
+50
+00:03:38,580 --> 00:03:42,900
+star from products table where category equals to
+50
+
+51
+00:03:42,900 --> 00:03:51,150
+So category column equals to gifts and released column equals to one this basically means to show only
+51
+
+52
+00:03:51,150 --> 00:03:54,660
+the products in a specific category which are released.
+52
+
+53
+00:03:55,110 --> 00:04:03,870
+But we have used this query which makes the condition as true, and we are able to retrieve the sensitive
+53
+
+54
+00:04:03,870 --> 00:04:09,900
+data from the database in which we are able to see those products which are also not released.
+54
+
+55
+00:04:10,410 --> 00:04:16,530
+We have already seen a couple of videos in the previous sections in which we have the deep breakdown
+55
+
+56
+00:04:16,800 --> 00:04:20,520
+even using the truth table to understand this query.
+56
+
+57
+00:04:20,970 --> 00:04:27,600
+Similarly, you can use this query as well if you do not want to comment the ending part of the query.
+57
+
+58
+00:04:27,870 --> 00:04:30,770
+And this would do the job for you as well.
+58
+
+59
+00:04:31,320 --> 00:04:35,830
+So I hope you guys understood this and we have successfully solved our lab number one.
+59
+
+60
+00:04:36,240 --> 00:04:36,810
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,590 --> 00:00:04,520
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:05,100 --> 00:00:12,570
+So as we have seen in a previous video, how we were able to solve the SQL in the lab of the security
+2
+
+3
+00:00:12,570 --> 00:00:19,980
+academy in which we are able to see the products into the category which were not released, and we
+3
+
+4
+00:00:19,980 --> 00:00:23,720
+were able to retrieve actually all the products from the database.
+4
+
+5
+00:00:24,300 --> 00:00:30,720
+So here is a live target in which we are going to do the similar thing and we are going to retrieve
+5
+
+6
+00:00:30,750 --> 00:00:34,610
+all the products from the database using a query.
+6
+
+7
+00:00:35,370 --> 00:00:37,350
+So let's identify it.
+7
+
+8
+00:00:37,350 --> 00:00:45,720
+how can we fix our query, balance it basically, and try to retrieve all the data from the server so
+8
+
+9
+00:00:45,720 --> 00:00:51,720
+you can see the target is coda dot cc  product product dot php question mark.
+9
+
+10
+00:00:51,720 --> 00:00:52,970
+id equals to one.
+10
+
+11
+00:00:53,430 --> 00:00:55,350
+So this is our target.
+11
+
+12
+00:00:55,350 --> 00:01:00,360
+And you can see here is a product which is some kind of amplifier.
+12
+
+13
+00:01:01,000 --> 00:01:07,860
+Alright, so I have already identified a query which I'm going to past it over here and hit enter, then
+13
+
+14
+00:01:07,860 --> 00:01:09,090
+I'm going to explain the query.
+14
+
+15
+00:01:09,780 --> 00:01:15,000
+So let's hit enter and let's wait for this to execute and load.
+15
+
+16
+00:01:16,200 --> 00:01:22,590
+As you can see, it has successfully executed and here you can see all the products that have been retrieved
+16
+
+17
+00:01:22,710 --> 00:01:24,060
+from the database.
+17
+
+18
+00:01:24,690 --> 00:01:33,330
+So it is exactly the same that we did into our previous video on lab and we have identified the same
+18
+
+19
+00:01:33,600 --> 00:01:34,410
+vulnerability.
+19
+
+20
+00:01:34,440 --> 00:01:36,590
+But this is onto a life target.
+20
+
+21
+00:01:37,050 --> 00:01:43,680
+So I hope you guys understood this because we have already explained this in depth in one of the video
+21
+
+22
+00:01:43,950 --> 00:01:47,640
+of how this query is balanced successfully.
+22
+
+23
+00:01:47,910 --> 00:01:53,490
+And according to the truth table, how the data has become through the query has become true.
+23
+
+24
+00:01:53,730 --> 00:01:57,590
+And we are able to retrieve all the data from the target server.
+24
+
+25
+00:01:58,170 --> 00:02:00,310
+So I hope you guys understood this video.
+25
+
+26
+00:02:00,780 --> 00:02:01,320
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,050 --> 00:00:03,900
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,880 --> 00:00:10,900
+So in this video, we are going to see a second lab for web security academy for a SQL injection.
+2
+
+3
+00:00:11,840 --> 00:00:18,530
+So in this lab, we are going to see log-in bypass using a SQL injection, which is we are not going
+3
+
+4
+00:00:18,530 --> 00:00:25,050
+to type the right or the correct username password and still get logged into the application.
+4
+
+5
+00:00:26,200 --> 00:00:26,640
+Yes.
+5
+
+6
+00:00:26,660 --> 00:00:30,160
+So this is possible through SQL injection as well.
+6
+
+7
+00:00:31,240 --> 00:00:39,130
+We basically have to form the right query, which will make the logic true and will allow us to login
+7
+
+8
+00:00:39,130 --> 00:00:40,150
+into the application.
+8
+
+9
+00:00:41,500 --> 00:00:41,910
+All right.
+9
+
+10
+00:00:41,920 --> 00:00:44,350
+So let's see the question and the aim for this lab.
+10
+
+11
+00:00:44,830 --> 00:00:50,830
+As you can see, this is an SQL injection vulnerability allowing Log-in bypass this lab contains an SQL
+11
+
+12
+00:00:51,040 --> 00:00:57,190
+injection vulnerability into the login function. To solve the lab, perform a SQL injection attack
+12
+
+13
+00:00:57,190 --> 00:01:01,330
+that plugs into the application as an administrator user.
+13
+
+14
+00:01:01,930 --> 00:01:02,410
+All right.
+14
+
+15
+00:01:02,650 --> 00:01:07,060
+So now we know that we want to login into the lab using administrators.
+15
+
+16
+00:01:07,600 --> 00:01:10,520
+So under the right hand side, you can see there is a login button.
+16
+
+17
+00:01:11,260 --> 00:01:12,670
+Let me simply click on it.
+17
+
+18
+00:01:13,180 --> 00:01:17,400
+And now you can see there is username and password field.
+18
+
+19
+00:01:17,980 --> 00:01:21,680
+So the first thing that I'm going to try is default credentials.
+19
+
+20
+00:01:21,730 --> 00:01:29,050
+So let's say admin admin and let's see if it works or no, it doesn't work, which means that this login
+20
+
+21
+00:01:29,050 --> 00:01:33,120
+portal is securely protected and I need to bypass it.
+21
+
+22
+00:01:33,940 --> 00:01:39,450
+So I'm going to use this query and we have already discussed about this query.
+22
+
+23
+00:01:40,060 --> 00:01:42,160
+And let me just try to login.
+23
+
+24
+00:01:42,940 --> 00:01:48,820
+When I hit on login, you can see I have successfully logged into the application.
+24
+
+25
+00:01:48,820 --> 00:01:56,380
+And here is a log out button, which appears we have already discussed how this query is balanced and
+25
+
+26
+00:01:56,380 --> 00:02:00,020
+what is the logic according to the table.
+26
+
+27
+00:02:00,550 --> 00:02:06,940
+So I hope you guys understood how can we successfully perform an authentication bypass or login bypass
+27
+
+28
+00:02:07,150 --> 00:02:08,440
+using a SQL injection
+28
+
+29
+00:02:09,100 --> 00:02:13,090
+In case you have any doubts or queries, you can ask it into the Q&A section.
+29
+
+30
+00:02:13,390 --> 00:02:13,870
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,120 --> 00:00:02,890
+Hello and welcome, everyone.
+1
+
+2
+00:00:03,370 --> 00:00:10,360
+So in this video, we are going to see a log-in bypass onto a live web application so till now we have seen
+2
+
+3
+00:00:10,360 --> 00:00:16,530
+log-in bypass on to the lab exercise, but now we have moved to the live application.
+3
+
+4
+00:00:16,840 --> 00:00:22,260
+So here is an application, which is technical traders dot com login dot php.
+4
+
+5
+00:00:22,270 --> 00:00:25,030
+And this is an admin login, which we are going to bypass.
+5
+
+6
+00:00:25,170 --> 00:00:31,300
+So here we are also going to try with default credentials, which is admin and admin, and let's see
+6
+
+7
+00:00:31,300 --> 00:00:32,540
+if it works for us no.
+7
+
+8
+00:00:33,100 --> 00:00:36,860
+And you can see and give a error to us which is wrong username and password.
+8
+
+9
+00:00:36,880 --> 00:00:44,020
+Let's try with admin and password as password this time and log in and you can see it still gives the
+9
+
+10
+00:00:44,020 --> 00:00:48,420
+error, which means that we are not able to bypass this with the default credentials.
+10
+
+11
+00:00:48,940 --> 00:00:55,570
+So let's try to do some SQL injection and we will see some SQL queries to bypass the login.
+11
+
+12
+00:00:56,830 --> 00:00:58,890
+So we wish to login as admin.
+12
+
+13
+00:00:58,900 --> 00:01:04,600
+So I'm going to write admin and in the password field I'm going to write a SQL query and which is
+13
+
+14
+00:01:04,600 --> 00:01:09,250
+this. We have already discussed about this query and have done a breakdown.
+14
+
+15
+00:01:09,460 --> 00:01:14,850
+So let's copy paste this over here and hit on login and let's see if we are able to login.
+15
+
+16
+00:01:15,190 --> 00:01:21,310
+And you can see we are successfully able to login into the application and you can see welcome admin
+16
+
+17
+00:01:21,910 --> 00:01:23,290
+and here is the log out button
+17
+
+18
+00:01:23,290 --> 00:01:31,780
+But now I can go on to inventory, sales, history, etc etc. and see a lot of sensitive information
+18
+
+19
+00:01:31,960 --> 00:01:34,660
+which is only visible to the admin account.
+19
+
+20
+00:01:35,440 --> 00:01:43,420
+But we will not move to any of these buttons or go onto any places because it may leak some of the sensitive
+20
+
+21
+00:01:43,690 --> 00:01:46,210
+information off the target web application.
+21
+
+22
+00:01:46,810 --> 00:01:56,980
+So I'll just hit log out and I hope you guys understood how you can also identify login bypassed based vulnerabilities
+22
+
+23
+00:01:56,980 --> 00:02:01,390
+on the Web applications by using the query. Onto the homepage.
+23
+
+24
+00:02:01,540 --> 00:02:04,870
+Where is the login details and the username field
+24
+
+25
+00:02:05,080 --> 00:02:11,200
+You can try with different usernames that you want, but if you try admin, it contains the highest
+25
+
+26
+00:02:11,200 --> 00:02:11,770
+privilege.
+26
+
+27
+00:02:11,980 --> 00:02:19,090
+So if you get logged in using admin, it is going to give you more rate which will contain more criticality
+27
+
+28
+00:02:19,090 --> 00:02:22,870
+and severity if you are going to report it to any bug bounty program.
+28
+
+29
+00:02:23,980 --> 00:02:30,160
+So I would recommend always try to login with first the default credentials and then you can try to
+29
+
+30
+00:02:30,160 --> 00:02:35,550
+login with the SQL bypass query that we have seen on the multiple web application.
+30
+
+31
+00:02:35,560 --> 00:02:43,510
+It works most of the time for poorly developed websites in which there are SQL issues and it will
+31
+
+32
+00:02:43,510 --> 00:02:46,270
+work for you for most of the applications.
+32
+
+33
+00:02:46,810 --> 00:02:48,150
+So I hope you guys understood.
+33
+
+34
+00:02:48,160 --> 00:02:54,430
+In case you have any issues or you have any doubts or queries, you can always ask it into the Q&A section.
+34
+
+35
+00:02:55,120 --> 00:02:55,600
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:02,330 --> 00:00:05,000
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:05,750 --> 00:00:11,690
+So in this video, we are going to see the installation of a very, very useful tool, which is a sql
+2
+
+3
+00:00:11,690 --> 00:00:12,110
+map.
+3
+
+4
+00:00:12,750 --> 00:00:18,380
+It is a very, very famous tool into the security community because a lot of security researchers,
+4
+
+5
+00:00:18,380 --> 00:00:20,220
+bug bounty hunters, use this tool.
+5
+
+6
+00:00:21,140 --> 00:00:22,830
+So what is so special about this?
+6
+
+7
+00:00:23,630 --> 00:00:27,190
+It is an automatic SQL injection and database decoder tool.
+7
+
+8
+00:00:27,500 --> 00:00:33,840
+So you are going to basically automate your most of the manual work that you perform using this tool.
+8
+
+9
+00:00:34,520 --> 00:00:40,120
+So it kind of help you in identification of websites which are vulnerable.
+9
+
+10
+00:00:40,430 --> 00:00:49,040
+And also you can do automated exploitation for identification of databases and retrieve data to your
+10
+
+11
+00:00:49,040 --> 00:00:49,630
+computer.
+11
+
+12
+00:00:50,420 --> 00:00:53,100
+You can simply download it into your computer.
+12
+
+13
+00:00:53,450 --> 00:01:01,310
+So first, when you are on to this repository, which is GitHub dot com slash sql map project slash
+13
+
+14
+00:01:01,310 --> 00:01:08,840
+sql map, you can simply click on the code button or you can download it or you can git clone into
+14
+
+15
+00:01:08,840 --> 00:01:09,830
+your computer.
+15
+
+16
+00:01:11,000 --> 00:01:16,730
+So this is your very first step in the beginning installation of sql map.
+16
+
+17
+00:01:17,180 --> 00:01:24,020
+So once you have downloaded this next, you should have  python into your computer because this tool
+17
+
+18
+00:01:24,020 --> 00:01:26,430
+is compatible with only Python.
+18
+
+19
+00:01:27,170 --> 00:01:30,490
+Ok, so you need to click over here and you can copy it.
+19
+
+20
+00:01:30,890 --> 00:01:32,930
+Then you have to go to your terminal.
+20
+
+21
+00:01:33,470 --> 00:01:35,860
+Remember, you can also download the zip from there.
+21
+
+22
+00:01:36,440 --> 00:01:42,770
+Then you have to go to your terminal and you can simply type git clone and paste the link that you have
+22
+
+23
+00:01:42,770 --> 00:01:43,370
+copied.
+23
+
+24
+00:01:44,350 --> 00:01:50,620
+Now, as I have already downloaded this, so I'm not going to download it again and you can see the content
+24
+
+25
+00:01:50,920 --> 00:01:52,750
+which is over here.
+25
+
+26
+00:01:53,200 --> 00:01:56,410
+So this is how it will look like into your computer as well.
+26
+
+27
+00:01:57,190 --> 00:02:04,130
+Now it's time to see if we have successfully downloaded everything and it is working fine into our computer.
+27
+
+28
+00:02:04,510 --> 00:02:12,660
+So simply run python sqlmap dot py and it should open up a banner message like this with a usage
+28
+
+29
+00:02:12,670 --> 00:02:13,190
+menu.
+29
+
+30
+00:02:13,810 --> 00:02:14,260
+Perfect.
+30
+
+31
+00:02:14,500 --> 00:02:20,540
+It looks like that we have been running the instance correctly and it's good for us to use.
+31
+
+32
+00:02:21,370 --> 00:02:28,330
+Now, if you want to see any other issues that come across into your installation, you can simply see
+32
+
+33
+00:02:28,540 --> 00:02:34,000
+the issues page of a scale map project and you may be able to fix it.
+33
+
+34
+00:02:34,720 --> 00:02:40,640
+I hope you do not have any issues because the installation is a very, very simple.
+34
+
+35
+00:02:41,170 --> 00:02:47,380
+Now, one thing that you need to keep in mind is that you can install any version of Python because
+35
+
+36
+00:02:47,380 --> 00:02:52,320
+this is compatible with Python two or Python three as well.
+36
+
+37
+00:02:52,330 --> 00:02:54,070
+And that's the best thing about it.
+37
+
+38
+00:02:54,070 --> 00:02:59,650
+As you can see over here, it works out of the box with Python within 2.6, 2.7 and
+38
+
+39
+00:02:59,650 --> 00:03:07,540
+3.x on any platform, regardless of your running on Windows, Linux or Mac OS.
+39
+
+40
+00:03:07,780 --> 00:03:09,400
+So this is it for this video.
+40
+
+41
+00:03:09,400 --> 00:03:12,700
+And I hope you guys understood the installation of sqlmap.
+41
+
+42
+00:03:13,160 --> 00:03:13,720
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,280 --> 00:00:04,130
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,790 --> 00:00:10,650
+So in this video, we are going to identify SQL injection on to a live target.
+2
+
+3
+00:00:11,390 --> 00:00:18,650
+So here the life target is hotelornate dot com dot pk and we will see if we are able to identify
+3
+
+4
+00:00:18,650 --> 00:00:20,210
+SQL injection into it.
+4
+
+5
+00:00:21,200 --> 00:00:28,130
+So, as we know for identification of SQLi based vulnerabilities, we need to identify an injection
+5
+
+6
+00:00:28,130 --> 00:00:29,560
+point onto a target.
+6
+
+7
+00:00:30,200 --> 00:00:36,050
+So as you can see on the URL right now, we do not have any indication point or any parameters
+7
+
+8
+00:00:36,680 --> 00:00:43,820
+neither do we can see anything on to the application right now where we can input something or write
+8
+
+9
+00:00:43,820 --> 00:00:44,330
+something.
+9
+
+10
+00:00:45,020 --> 00:00:54,140
+So let's navigate onto the Web application right now and try to identify if we are able to get any parameter
+10
+
+11
+00:00:54,140 --> 00:00:55,670
+onto the Web application.
+11
+
+12
+00:00:56,210 --> 00:00:59,680
+So you can see under the left hand side it has key amenities.
+12
+
+13
+00:00:59,960 --> 00:01:09,230
+So I'm going to go on one of them to see if I'm able to identify any parameters and test it so that
+13
+
+14
+00:01:09,230 --> 00:01:13,630
+if it becomes vulnerable to SQL injection so that we can move further.
+14
+
+15
+00:01:14,960 --> 00:01:21,110
+So I'm going to click on Guestroom and you can see once I click on this into the URL 2
+15
+
+16
+00:01:21,110 --> 00:01:22,340
+parameters appear.
+16
+
+17
+00:01:22,880 --> 00:01:29,520
+The first parameter is ud equals to one and the second parameter is id equals to one.
+17
+
+18
+00:01:30,590 --> 00:01:35,120
+Now I do not know out of both of which parameter is vulnerable.
+18
+
+19
+00:01:35,750 --> 00:01:39,180
+So I'm going to identify the inflection point one by one.
+19
+
+20
+00:01:39,950 --> 00:01:47,450
+So for the first parameter, I'm going to put a single quote just to check if it gives me an error or
+20
+
+21
+00:01:47,450 --> 00:01:50,390
+the application load successfully as it is.
+21
+
+22
+00:01:51,020 --> 00:01:56,450
+And you can see when I gave a single quote, the application did not change its behavior.
+22
+
+23
+00:01:56,960 --> 00:01:57,890
+So let's try it on.
+23
+
+24
+00:01:57,890 --> 00:01:58,930
+Id equals to one.
+24
+
+25
+00:01:59,660 --> 00:02:05,450
+Once I give the parameter, you can see the application behaves differently.
+25
+
+26
+00:02:05,900 --> 00:02:08,360
+The application has changed it state.
+26
+
+27
+00:02:09,020 --> 00:02:12,770
+The main reason over here is we are not able to see any MySQL based error.
+27
+
+28
+00:02:13,250 --> 00:02:15,610
+The developer has suppressed the error.
+28
+
+29
+00:02:16,310 --> 00:02:24,110
+It is one of the most common techniques that developer uses to suppress the errors so the users are
+29
+
+30
+00:02:24,110 --> 00:02:26,970
+not able to see those errors onto their browsers.
+30
+
+31
+00:02:27,410 --> 00:02:27,860
+All right.
+31
+
+32
+00:02:27,860 --> 00:02:35,840
+So now we have identified the vulnerable injection point and that was id equals to now we are going
+32
+
+33
+00:02:35,840 --> 00:02:44,060
+to use sqlmap to exploit further and get sensitive information from its database.
+33
+
+34
+00:02:44,960 --> 00:02:46,400
+So to run sqlmap
+34
+
+35
+00:02:46,400 --> 00:02:52,220
+You need to type python sqlmap dot py hyphen u and then in double quotes
+35
+
+36
+00:02:52,220 --> 00:02:54,890
+You need to give your target web address
+36
+
+37
+00:02:55,430 --> 00:03:02,900
+As you can see over here now, how a sqlmap is going to know which of the injection point or
+37
+
+38
+00:03:02,900 --> 00:03:04,180
+parameter is vulnerable.
+38
+
+39
+00:03:04,760 --> 00:03:06,800
+So we need to tell that to sqlmap.
+39
+
+40
+00:03:07,550 --> 00:03:12,200
+For that, you need to add a custom injection marker, which is star.
+40
+
+41
+00:03:13,070 --> 00:03:19,790
+On any of the parameters that you think is vulnerable or you have identified to be vulnerable when the
+41
+
+42
+00:03:19,790 --> 00:03:27,950
+application is changing its state, as you can see, I have successfully added injection point, which
+42
+
+43
+00:03:27,950 --> 00:03:29,240
+is id equals to one.
+43
+
+44
+00:03:29,240 --> 00:03:31,100
+And I have added a star over there.
+44
+
+45
+00:03:31,940 --> 00:03:37,820
+Now, I will just simply enter and you can see a message that has been given by a sqlmap, which
+45
+
+46
+00:03:37,820 --> 00:03:38,840
+is custom injection
+46
+
+47
+00:03:38,840 --> 00:03:41,060
+markers are found in the option -u
+47
+
+48
+00:03:41,060 --> 00:03:43,280
+Do you want to process it?
+48
+
+49
+00:03:43,960 --> 00:03:46,760
+You can see I have written capital Y
+49
+
+50
+00:03:47,450 --> 00:03:48,500
+Which means yes.
+50
+
+51
+00:03:48,800 --> 00:03:55,340
+And it has identified that the resuming back in DBMS is MySQL and testing connection to the target
+51
+
+52
+00:03:55,340 --> 00:03:57,530
+URL and you can see the backend.
+52
+
+53
+00:03:57,530 --> 00:04:00,860
+DBMS is my MySQL. Web application
+53
+
+54
+00:04:00,860 --> 00:04:07,890
+technology is Apache and MySQL is greater than equal to 5.0.12
+54
+
+55
+00:04:08,360 --> 00:04:14,930
+So we have identified a lot of information regarding the web application technology and the backend
+55
+
+56
+00:04:14,930 --> 00:04:15,690
+DBMS.
+56
+
+57
+00:04:16,310 --> 00:04:23,930
+Now you can also use a flag which is banner to do banner grabbing.
+57
+
+58
+00:04:24,260 --> 00:04:31,980
+So banner grabbing is one of the technique in which we identify about our target that what it is using.
+58
+
+59
+00:04:32,450 --> 00:04:36,410
+So when you will do banner grabbing, you will get the same output.
+59
+
+60
+00:04:37,610 --> 00:04:43,700
+OK, one more thing to notice over here is that whenever you are running a sqlmap onto any target,
+60
+
+61
+00:04:44,390 --> 00:04:50,930
+all the data that you can see onto your command prompt or onto your terminal is automatically getting
+61
+
+62
+00:04:50,930 --> 00:04:56,990
+logged and saved under our hidden directly, which is dot sqlmap, as you can see over
+62
+
+63
+00:04:56,990 --> 00:05:01,080
+here. Inside the output folder and with the target name.
+63
+
+64
+00:05:01,370 --> 00:05:07,030
+So for now, the target name is hotelornate dot com, dot pk. Perfect.
+64
+
+65
+00:05:07,580 --> 00:05:13,400
+Moving ahead, I'm going to add hyphen hyphen banner to do banner grabbing.
+65
+
+66
+00:05:13,700 --> 00:05:21,590
+Remember, if you do not add hyphen, hyphen, banner also it is by default going to identify and do
+66
+
+67
+00:05:21,590 --> 00:05:22,760
+banner grabbing for you.
+67
+
+68
+00:05:23,240 --> 00:05:24,200
+But you should know this.
+68
+
+69
+00:05:24,710 --> 00:05:25,010
+Oops.
+69
+
+70
+00:05:25,100 --> 00:05:28,520
+We wrote three hyphen, hyphen, hyphen or three dashes.
+70
+
+71
+00:05:28,520 --> 00:05:31,790
+You just need to add two dashes and hit enter.
+71
+
+72
+00:05:32,240 --> 00:05:33,140
+Now you can see it.
+72
+
+73
+00:05:33,140 --> 00:05:34,940
+Asked again for custom injection.
+73
+
+74
+00:05:34,940 --> 00:05:35,620
+marker found
+74
+
+75
+00:05:35,630 --> 00:05:36,850
+Do you want to process it?
+75
+
+76
+00:05:37,280 --> 00:05:42,410
+So you have to add hyphen Y capital Y which means yes again.
+76
+
+77
+00:05:43,430 --> 00:05:45,860
+And it has identified the same details for you.
+77
+
+78
+00:05:46,850 --> 00:05:55,580
+Now guys, I do not want to add this hyphen Y every time, whenever I'm scanning, I want sqlmap
+78
+
+79
+00:05:55,580 --> 00:06:00,080
+to process all my request and take the decisions automatically as
+79
+
+80
+00:06:00,080 --> 00:06:00,400
+Yes.
+80
+
+81
+00:06:01,040 --> 00:06:03,470
+So for that you need to add hyphen hyphen
+81
+
+82
+00:06:03,470 --> 00:06:10,970
+batch. So hyphen hyphen batch means we are telling a sqlmap to take the decisions automatically and
+82
+
+83
+00:06:10,970 --> 00:06:13,850
+do not ask the user for any prompt.
+83
+
+84
+00:06:15,050 --> 00:06:21,080
+And you can see we are able to identify the details about the server, which is exactly the same.
+84
+
+85
+00:06:22,370 --> 00:06:29,120
+Now, moving ahead, we want to identify now something sensitive from the Web application, right.
+85
+
+86
+00:06:29,720 --> 00:06:36,350
+Which is the database for that I'm going to add hyphen hyphen dbs, which means database.
+86
+
+87
+00:06:37,490 --> 00:06:40,260
+And it ended and it just a few time.
+87
+
+88
+00:06:40,280 --> 00:06:48,170
+It has identified in total of available 2 database, as you can see, fetching database names, available
+88
+
+89
+00:06:48,170 --> 00:06:54,350
+databases is 2 first is the information schema and the second one is ornate_ornate.
+89
+
+90
+00:06:55,700 --> 00:07:03,860
+Now out of these both database, ornate_ornate looks more interesting because it is likely to be
+90
+
+91
+00:07:03,860 --> 00:07:07,060
+more related to our target of application.
+91
+
+92
+00:07:07,640 --> 00:07:14,630
+So for now, we are going to go inside the ornate_ornate database and identify if we get anything
+92
+
+93
+00:07:14,630 --> 00:07:15,740
+sensitive into it.
+93
+
+94
+00:07:16,340 --> 00:07:24,230
+Remember, information schema is the schema of the target database and you may not get anything sensitive
+94
+
+95
+00:07:24,230 --> 00:07:25,520
+into that database.
+95
+
+96
+00:07:26,660 --> 00:07:34,730
+So going into the ornate_ornate database, we will now try to identify and fetch the tables that exist
+96
+
+97
+00:07:34,730 --> 00:07:35,870
+in the database.
+97
+
+98
+00:07:36,560 --> 00:07:41,830
+So for that you need to type hyphen D, which stands for database and the database name.
+98
+
+99
+00:07:42,980 --> 00:07:49,130
+As we want the tables that exist, we are going to type hyphen hyphen tables and it enter.
+99
+
+100
+00:07:50,510 --> 00:07:55,520
+As you can see, we are able to retrieve in total of five tables.
+100
+
+101
+00:07:55,940 --> 00:08:02,450
+The first one is gallery, lito_about, lito_editor, lito_page, lito_user.
+101
+
+102
+00:08:03,050 --> 00:08:06,380
+Remember guys, we added hyphen hyphen batch.
+102
+
+103
+00:08:06,710 --> 00:08:12,380
+That is the reason it is not asking us to confirm anything or no prompt is appearing.
+103
+
+104
+00:08:13,100 --> 00:08:17,510
+It is taking all the decisions automatically. Perfect.
+104
+
+105
+00:08:18,000 --> 00:08:25,400
+Now let's go into one off the table so it looks like this lito_user table is interesting.
+105
+
+106
+00:08:25,610 --> 00:08:33,320
+And I would like to go into this table so far that we need to give the table with hyphen T flag, which
+106
+
+107
+00:08:33,320 --> 00:08:34,040
+is 
+107
+
+108
+00:08:34,040 --> 00:08:35,090
+lito_user.
+108
+
+109
+00:08:35,390 --> 00:08:37,720
+And as we want all the columns right now.
+109
+
+110
+00:08:37,760 --> 00:08:41,830
+So we are going to add hyphen hyphen columns and hit enter.
+110
+
+111
+00:08:42,680 --> 00:08:51,800
+And you can see we have successfully identified that in the lito_user database or I'm sorry, into
+111
+
+112
+00:08:51,800 --> 00:08:54,880
+the ornet_ornet only database lito_user table.
+112
+
+113
+00:08:55,100 --> 00:09:01,880
+We have identified in total five columns, which is email, full name, ID, password and username.
+113
+
+114
+00:09:03,050 --> 00:09:08,050
+Now I want to see the data which is into this five columns.
+114
+
+115
+00:09:08,630 --> 00:09:15,800
+So for that I'm going to dump the database by typing the command, which is hyphen hyphen, dump.
+115
+
+116
+00:09:16,310 --> 00:09:22,670
+And you can see we are able to get the successful retrieval of data and you can see there is a total
+116
+
+117
+00:09:22,670 --> 00:09:23,780
+of one entry.
+117
+
+118
+00:09:24,110 --> 00:09:28,170
+And you can see this is the email address which lies on Hotmail dot com.
+118
+
+119
+00:09:28,490 --> 00:09:29,440
+This is a user name.
+119
+
+120
+00:09:29,450 --> 00:09:34,550
+which is admin, full name is administrator, and the password is also admin.
+120
+
+121
+00:09:34,940 --> 00:09:35,380
+Bingo.
+121
+
+122
+00:09:35,690 --> 00:09:41,030
+We are able to identify the credentials of the admin, which is username admin and password admin.
+122
+
+123
+00:09:41,420 --> 00:09:49,130
+And you can also see that the details have been successfully saved into one of the file, which is lito
+123
+
+124
+00:09:49,130 --> 00:09:51,230
+user dot csv automatically.
+124
+
+125
+00:09:52,040 --> 00:09:53,980
+That is the best thing about sqlmap.
+125
+
+126
+00:09:54,350 --> 00:09:57,200
+That is that it continuously logs everything.
+126
+
+127
+00:09:57,500 --> 00:10:03,410
+And whenever you want to go back, you can just go to the folders and you are able to identify about
+127
+
+128
+00:10:03,410 --> 00:10:04,020
+your target.
+128
+
+129
+00:10:04,700 --> 00:10:10,700
+Now, one more thing that I would like to mention to every one of you is whenever you are testing for
+129
+
+130
+00:10:10,700 --> 00:10:19,520
+SQL injection in any of applications, you should not dump any sensitive information or database or
+130
+
+131
+00:10:19,520 --> 00:10:26,490
+tables or columns from that target, because that may be violation of policies against that bug bounty
+131
+
+132
+00:10:26,510 --> 00:10:27,080
+program.
+132
+
+133
+00:10:27,080 --> 00:10:33,500
+And you may end up in some trouble, although you have identified a very critical vulnerability, it
+133
+
+134
+00:10:33,500 --> 00:10:41,090
+may end up that you may not get anything for this hard work or identification of a very good vulnerability
+134
+
+135
+00:10:41,090 --> 00:10:41,900
+into the target.
+135
+
+136
+00:10:42,530 --> 00:10:51,350
+So in case you identify that any of the web application is vulnerable to SQL, just identification of
+136
+
+137
+00:10:51,350 --> 00:10:58,490
+the database name is more than sufficient to prove the criticality and the severity of the vulnerability
+137
+
+138
+00:10:58,910 --> 00:11:00,340
+to the bug bounty program.
+138
+
+139
+00:11:00,560 --> 00:11:07,850
+So you should just make a video or a screenshot POC showing the database name and they will automatically
+139
+
+140
+00:11:07,850 --> 00:11:11,600
+understand and triage your vulnerability. Remember
+140
+
+141
+00:11:11,840 --> 00:11:17,840
+if you have identified SQL based vulnerability, then it is considered to be a critical and a
+141
+
+142
+00:11:17,840 --> 00:11:18,830
+high vulnerability.
+142
+
+143
+00:11:19,100 --> 00:11:26,330
+So it should go for a P1 or a P2 bug at least on any bug bounty program or any pentesting tool that
+143
+
+144
+00:11:26,330 --> 00:11:26,990
+you are going to do.
+144
+
+145
+00:11:27,950 --> 00:11:36,020
+So I hope you guys understood how you can use sqlmap for exploitation of web applications and how
+145
+
+146
+00:11:36,020 --> 00:11:43,920
+you can also dump and download the sensitive information from the database for any underlying website.
+146
+
+147
+00:11:44,660 --> 00:11:45,910
+I hope you guys understood.
+147
+
+148
+00:11:45,920 --> 00:11:53,350
+In case you have any issues in performing the exact steps, you can always post your questions into
+148
+
+149
+00:11:53,360 --> 00:11:56,750
+the Q&A section, and I would always help you.
+149
+
+150
+00:11:56,990 --> 00:11:57,470
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,820 --> 00:00:03,220
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:03,970 --> 00:00:11,110
+So in this video, we are going to see one of the SQL injection on a Dutch government website which
+2
+
+3
+00:00:11,110 --> 00:00:13,570
+has a responsible disclosure policy.
+3
+
+4
+00:00:14,380 --> 00:00:14,760
+All right.
+4
+
+5
+00:00:14,770 --> 00:00:17,680
+So first, let's see the target.
+5
+
+6
+00:00:17,680 --> 00:00:25,150
+And this is a life target, which is albetroskam.nl, which is a Netherlands based Web application.
+6
+
+7
+00:00:25,200 --> 00:00:25,590
+All right.
+7
+
+8
+00:00:26,200 --> 00:00:35,710
+So into this Web application, let's go to one of the functionality to retrieve a parameter or ID. Before
+8
+
+9
+00:00:35,710 --> 00:00:36,060
+that.
+9
+
+10
+00:00:36,070 --> 00:00:43,630
+Let's quickly start our Burp Suite as well, because we are going to use it maybe to spider the application
+10
+
+11
+00:00:43,630 --> 00:00:48,200
+and to identify more endpoints through the application.
+11
+
+12
+00:00:48,760 --> 00:00:51,700
+So remember, guys, always spidering
+12
+
+13
+00:00:51,700 --> 00:01:00,730
+your application gives you more increased scope of assets that can be URL's that can be parameter's,
+13
+
+14
+00:01:00,940 --> 00:01:08,470
+which helps you definitely in identification of more and more injection points and identification of
+14
+
+15
+00:01:08,470 --> 00:01:09,220
+vulnerabilites
+15
+
+16
+00:01:09,970 --> 00:01:15,010
+So as you can see, I have got this end point, which is a GET request.
+16
+
+17
+00:01:15,370 --> 00:01:18,610
+And I have added this to my scope.
+17
+
+18
+00:01:18,760 --> 00:01:27,030
+As you can see over here now, I will just wait for Burp for identification of more and more URL's. Also,
+18
+
+19
+00:01:27,850 --> 00:01:32,860
+as I'm under the Burp Suite community edition, this is the latest edition of 2020.
+19
+
+20
+00:01:32,860 --> 00:01:37,930
+And there is a restriction of a lot of features.
+20
+
+21
+00:01:37,930 --> 00:01:46,150
+But still, this version runs a passive crawler which will crawl the URL's for me automatically and
+21
+
+22
+00:01:46,150 --> 00:01:49,630
+which will be visible to you over here, as you can see.
+22
+
+23
+00:01:50,140 --> 00:01:56,910
+Now, I will just simply double click params because I want to see the parameter based assets or URL's
+23
+
+24
+00:01:56,920 --> 00:02:01,040
+and I'm going to try on one of the URL
+24
+
+25
+00:02:01,300 --> 00:02:06,940
+So let's say we pick up this, which is get detail dot php
+25
+
+26
+00:02:07,090 --> 00:02:10,350
+question mark id equals to 10. Perfect.
+26
+
+27
+00:02:10,750 --> 00:02:16,310
+So let's say, for instance, make it to 20 and we are able to get a response.
+27
+
+28
+00:02:16,580 --> 00:02:21,000
+Now let's click on Render and let's see what do we get over here.
+28
+
+29
+00:02:21,160 --> 00:02:28,000
+And you can see there is a page which gets rendered with the image on id equals to twenty.
+29
+
+30
+00:02:28,480 --> 00:02:34,210
+Let's identify if this is vulnerable and let's give a single quote and hit send.
+30
+
+31
+00:02:35,050 --> 00:02:39,910
+Now let's wait for the response and I can see it is still loading.
+31
+
+32
+00:02:40,240 --> 00:02:45,390
+Let's give one more error and you could see we got an error actually, OK.
+32
+
+33
+00:02:45,560 --> 00:02:51,370
+So if you missed it, let's do it again and let's wait for the error to pop up and we will confirm that
+33
+
+34
+00:02:51,370 --> 00:02:54,280
+there is a vulnerability of SQL injection.
+34
+
+35
+00:02:54,280 --> 00:02:54,700
+Perfect.
+35
+
+36
+00:02:55,090 --> 00:03:03,390
+As you can see, we have got error, which says mysqli_num_rows() expects parameter 1 to be mysqli_result
+36
+
+37
+00:03:03,700 --> 00:03:04,710
+boolean given.
+37
+
+38
+00:03:04,720 --> 00:03:05,080
+All right.
+38
+
+39
+00:03:05,090 --> 00:03:13,330
+So we have error, which means we have identified our injection point and this target is vulnerable
+39
+
+40
+00:03:13,330 --> 00:03:15,160
+to SQL injection.
+40
+
+41
+00:03:15,340 --> 00:03:15,820
+Perfect.
+41
+
+42
+00:03:16,270 --> 00:03:24,850
+Now let's copy the order of this target and fire up sqlmap, which is going to help us in automating
+42
+
+43
+00:03:24,850 --> 00:03:28,240
+the exploitation for this web application.
+43
+
+44
+00:03:28,660 --> 00:03:36,630
+So let me just quickly go into the folder of sqlmap and start python sqlmap.py 
+44
+
+45
+00:03:36,640 --> 00:03:36,820
+hyphen u
+45
+
+46
+00:03:36,820 --> 00:03:42,070
+stands for the target URL which you need to give it give in double quotes.
+46
+
+47
+00:03:42,250 --> 00:03:49,270
+And I'm going to add the custom injection point where ID equals to with the help of star and right
+47
+
+48
+00:03:49,270 --> 00:03:52,450
+hyphen hyphen batch hyphen hyphen banner
+48
+
+49
+00:03:52,870 --> 00:04:00,430
+which means I want to run all the task or request or take the decisions by sqlmap and banner means 
+49
+
+50
+00:04:00,790 --> 00:04:06,560
+that I want to do banner grabbing and identify the technology and the database version.
+50
+
+51
+00:04:07,780 --> 00:04:15,310
+You just need to hit enter and it will start the scanning and exploitation on that specific target.
+51
+
+52
+00:04:15,790 --> 00:04:22,290
+It will do some of the test to identify and do banner grab onto that specific target and will let us know.
+52
+
+53
+00:04:23,180 --> 00:04:31,580
+And let's see what is the output of this, so let's wait and see if we get something.
+53
+
+54
+00:04:31,590 --> 00:04:37,120
+And you can see we have already got a message over here, which says URI parameter
+54
+
+55
+00:04:37,130 --> 00:04:45,260
+1 is MySQL is greater than equal to 5.0 or error based, which means there is an error based vulnerability.
+55
+
+56
+00:04:45,260 --> 00:04:50,530
+And we know that we give a single quote at id equal to 20 and we got the error.
+56
+
+57
+00:04:50,690 --> 00:04:54,080
+And this is actually the same thing that sqlmap is telling us.
+57
+
+58
+00:04:54,290 --> 00:04:54,740
+Perfect.
+58
+
+59
+00:04:56,000 --> 00:04:58,440
+So I will just skip this a little bit.
+59
+
+60
+00:04:58,460 --> 00:05:05,900
+So let's go to where it identifies something sensitive from the server.
+60
+
+61
+00:05:05,900 --> 00:05:14,930
+And you can see it has identified that target URL appears to have 17 columns into the query.
+61
+
+62
+00:05:15,590 --> 00:05:16,820
+All right, let's wait for this.
+62
+
+63
+00:05:16,820 --> 00:05:19,460
+And yeah, it has successfully completed.
+63
+
+64
+00:05:19,940 --> 00:05:23,360
+And you can see the Web server operating system is Linux.
+64
+
+65
+00:05:23,750 --> 00:05:28,200
+The Web application technology is Nginx or Plesk.
+65
+
+66
+00:05:28,220 --> 00:05:33,950
+And you can see the back and DBMS is MySQL greater than equal to 5.0.
+66
+
+67
+00:05:34,700 --> 00:05:35,130
+Perfect.
+67
+
+68
+00:05:35,630 --> 00:05:43,460
+So we have identified a lot of information about the target from here and now it's time to exploit it
+68
+
+69
+00:05:43,730 --> 00:05:47,960
+and get more sensitive information, which is,
+69
+
+70
+00:05:49,180 --> 00:05:56,010
+the database names so here we have one of the payload, which is boolean based blind, and you can see
+70
+
+71
+00:05:56,020 --> 00:06:03,170
+over here So I'm just going to copy this into my browser and see what do we get.
+71
+
+72
+00:06:03,430 --> 00:06:04,720
+And you can see.
+72
+
+73
+00:06:05,960 --> 00:06:13,760
+Let's understand the payload quickly, where you can see that it is AND and a true condition, which is
+73
+
+74
+00:06:13,760 --> 00:06:16,280
+6219 eqauls to 6219
+74
+
+75
+00:06:16,880 --> 00:06:20,860
+And when I load this, you can see the application is behaving properly.
+75
+
+76
+00:06:21,230 --> 00:06:26,180
+But when I make this condition is false, the application does not give anything.
+76
+
+77
+00:06:26,780 --> 00:06:29,900
+As you can see, there is a change in the behavior.
+77
+
+78
+00:06:30,080 --> 00:06:37,100
+When I make it to the equals, which is same it again, loads the application so yeah we can see that the
+78
+
+79
+00:06:37,100 --> 00:06:38,630
+payload is working over there.
+79
+
+80
+00:06:39,410 --> 00:06:41,500
+Similarly, we have more other queries.
+80
+
+81
+00:06:42,170 --> 00:06:44,960
+Now we are going to exploit the database.
+81
+
+82
+00:06:44,960 --> 00:06:48,020
+That is, we want to know the names of the database.
+82
+
+83
+00:06:48,350 --> 00:06:52,480
+And for that we know that we need to type hyphen hyphen dbs.
+83
+
+84
+00:06:53,120 --> 00:06:55,490
+So I will just type that and hit enter.
+84
+
+85
+00:06:55,670 --> 00:07:00,160
+And you can see we have identified in total of two databases, are there.
+85
+
+86
+00:07:00,650 --> 00:07:05,110
+The first one is albertro and the second one is information schema.
+86
+
+87
+00:07:05,480 --> 00:07:08,750
+So I'm much more interested in the first database.
+87
+
+88
+00:07:11,890 --> 00:07:18,640
+So I'm going to write hyphen capital D and the name of the database, and we want all the tables from
+88
+
+89
+00:07:18,640 --> 00:07:18,870
+it.
+89
+
+90
+00:07:22,580 --> 00:07:29,400
+Now, as you can see, it have started fetching the tables for the database albatros, and you can see
+90
+
+91
+00:07:29,400 --> 00:07:38,700
+it has retrieved the first one, which is image description, link table, project backup, new site, projects,
+91
+
+92
+00:07:39,400 --> 00:07:45,350
+projects, back up, all side projects modified from old site and text, etc..
+92
+
+93
+00:07:46,190 --> 00:07:52,900
+Now we have the database as well as we have the name of the tables.
+93
+
+94
+00:07:53,150 --> 00:07:57,110
+So let's do one thing and let's go into one of the table.
+94
+
+95
+00:07:57,620 --> 00:08:05,450
+So let's say the interesting one which looks like is projects and see what are the columns into this
+95
+
+96
+00:08:06,260 --> 00:08:07,990
+table, which is projects.
+96
+
+97
+00:08:08,450 --> 00:08:16,210
+So for that you need to type hyphen D the table name and hyphen hyphen columns and just hit enter.
+97
+
+98
+00:08:16,640 --> 00:08:24,080
+Let's wait for this to complete and here we will get the results in, which is the sqlmap will identify
+98
+
+99
+00:08:24,440 --> 00:08:27,510
+the number of columns into the target.
+99
+
+100
+00:08:30,760 --> 00:08:38,590
+And you can see it has started fetching the columns for projects and you can see it is id title
+100
+
+101
+00:08:38,590 --> 00:08:42,460
+is project publish description ordering.
+101
+
+102
+00:08:42,700 --> 00:08:43,220
+Perfect.
+102
+
+103
+00:08:43,240 --> 00:08:49,840
+So we have also identified the columns now and you can see it is still retrieving more and more.
+103
+
+104
+00:08:50,680 --> 00:08:51,160
+Now.
+104
+
+105
+00:08:52,410 --> 00:08:59,040
+While I was reporting this rocket to the organization or to the Dutch government, I did not try to
+105
+
+106
+00:08:59,040 --> 00:08:59,930
+dump the data.
+106
+
+107
+00:08:59,940 --> 00:09:05,490
+So in this proof of concept, I'm not going to dump any data from the target for application.
+107
+
+108
+00:09:05,790 --> 00:09:12,630
+And I'm just going to send a screenshot of the database names and the table names, which is more than
+108
+
+109
+00:09:12,630 --> 00:09:20,670
+sufficient for the target organization to prove the vulnerability exist into their Web application.
+109
+
+110
+00:09:21,120 --> 00:09:27,450
+Remember, I have already expressed that you should not dump any sensitive data information from the
+110
+
+111
+00:09:27,450 --> 00:09:33,990
+target application, identification of database names or table names is more than enough to prove this
+111
+
+112
+00:09:33,990 --> 00:09:34,810
+vulnerability.
+112
+
+113
+00:09:35,460 --> 00:09:38,070
+So I hope you guys understand how you can do this.
+113
+
+114
+00:09:39,040 --> 00:09:39,550
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,940 --> 00:00:03,590
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,330 --> 00:00:12,070
+So in this video, we are going to see about SQL injection shell techniques, which is a very, very important
+2
+
+3
+00:00:12,070 --> 00:00:13,690
+part of a SQL injection
+3
+
+4
+00:00:14,700 --> 00:00:23,010
+So using this technique, you may get a SQL shell or different types of shell onto the target of
+4
+
+5
+00:00:23,220 --> 00:00:31,020
+application, so once you get the shell onto the target server, you are able to execute your commands
+5
+
+6
+00:00:31,020 --> 00:00:32,080
+onto the target server.
+6
+
+7
+00:00:32,670 --> 00:00:41,250
+So now you can guess the impact of any user executing his or her own commands onto the target server.
+7
+
+8
+00:00:41,760 --> 00:00:45,780
+This makes the vulnerability as a critical vulnerability.
+8
+
+9
+00:00:46,650 --> 00:00:47,190
+All right.
+9
+
+10
+00:00:47,550 --> 00:00:54,810
+So what are the different types of shells that we are going to attack and get onto the target web applications?
+10
+
+11
+00:00:55,380 --> 00:01:02,880
+So the first one is a SQL shell in which we are able to execute all the SQL commands onto the
+11
+
+12
+00:01:02,880 --> 00:01:04,400
+target web application.
+12
+
+13
+00:01:05,040 --> 00:01:12,900
+The second type of shell that we are going to get is a OS level shell on which we can execute all the system
+13
+
+14
+00:01:12,900 --> 00:01:19,680
+level commands onto the target web application, which can include deletions of files and data.
+14
+
+15
+00:01:20,970 --> 00:01:26,940
+The third type of shell that we're going to see is the reverse shell using meterpreter in which we
+15
+
+16
+00:01:26,940 --> 00:01:33,840
+are going to upload a reverse shell and wait to get the shell or the system access onto the target of
+16
+
+17
+00:01:33,900 --> 00:01:34,670
+application.
+17
+
+18
+00:01:35,160 --> 00:01:43,920
+And the last one is a SSH shell in which we are going to upload our SSH keys onto the Target Web application,
+18
+
+19
+00:01:43,920 --> 00:01:50,850
+which is vulnerable, and perform SSH onto the target web server to get the system level access.
+19
+
+20
+00:01:51,960 --> 00:02:00,660
+So these are all the shell techniques that we are going to see in the upcoming videos to get the maximum advantage
+20
+
+21
+00:02:00,990 --> 00:02:03,750
+of the target web application server.
+21
+
+22
+00:02:05,210 --> 00:02:07,830
+So now you may ask, what is a shell?
+22
+
+23
+00:02:08,640 --> 00:02:16,460
+So it is the ability to execute commands on the target server or perform sensitive actions on the
+23
+
+24
+00:02:16,460 --> 00:02:17,600
+database or server.
+24
+
+25
+00:02:18,140 --> 00:02:24,860
+So basically, you get to execute your commands in short on the target web application where you
+25
+
+26
+00:02:24,860 --> 00:02:26,880
+can perform any sensitive action.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,240 --> 00:00:06,180
+So let's quickly jump onto the first technique, which is a SQL shell.
+1
+
+2
+00:00:06,820 --> 00:00:12,820
+Now for this, we are going to run a sqlmap and we are going to execute the command.
+2
+
+3
+00:00:14,300 --> 00:00:20,100
+And we are going to execute the command, which has been shown below, which is python sqlmap.py 
+3
+
+4
+00:00:20,150 --> 00:00:21,470
+Hyphen U.
+4
+
+5
+00:00:21,800 --> 00:00:22,940
+Which stands for the URL.
+5
+
+6
+00:00:23,360 --> 00:00:28,360
+We are going to give the URL, the custom injection point or the injection marker.
+6
+
+7
+00:00:28,970 --> 00:00:37,440
+And then we are going to give the SQL shell using the command hyphen hyphen sql hyphen shell.
+7
+
+8
+00:00:38,090 --> 00:00:38,570
+All right.
+8
+
+9
+00:00:39,260 --> 00:00:44,500
+Let's move ahead to the practical time and let's see how can we execute this.
+9
+
+10
+00:00:45,050 --> 00:00:51,890
+So we are going to perform this on to a life target of Dutch government and let's see if we are able
+10
+
+11
+00:00:51,890 --> 00:00:53,830
+to get the SQL shell.
+11
+
+12
+00:00:54,410 --> 00:00:58,480
+So in this video, you can see over here the command that I have already given.
+12
+
+13
+00:00:58,490 --> 00:00:59,870
+And this is our target.
+13
+
+14
+00:01:00,170 --> 00:01:03,470
+I have already identified this target to be vulnerable.
+14
+
+15
+00:01:03,680 --> 00:01:07,610
+And you can see I have added a star at the parameter, which is id.
+15
+
+16
+00:01:08,840 --> 00:01:15,200
+batch means I'm going to execute all the command, so I want the sqlmap to take all the decisions
+16
+
+17
+00:01:15,530 --> 00:01:20,540
+and do not prompt for yes or no. I want to do banner grabbing as well.
+17
+
+18
+00:01:20,570 --> 00:01:26,840
+That's why I have written banner and I have written hyphen os hyphen shell and hyphen hyphen sql
+18
+
+19
+00:01:26,840 --> 00:01:27,980
+hyphen shell as well.
+19
+
+20
+00:01:28,280 --> 00:01:33,290
+So if I can get OS level shell or if I can get a SQL level shell.
+20
+
+21
+00:01:34,500 --> 00:01:41,430
+So let's see which shell do we get into this target web application so we just need to hit enter and
+21
+
+22
+00:01:41,430 --> 00:01:44,520
+you can see sqlmap has successfully started.
+22
+
+23
+00:01:45,350 --> 00:01:52,340
+And you can see we are able to successfully get the shell at the bottom of the screen over here, the
+23
+
+24
+00:01:52,340 --> 00:01:59,510
+back end DBMS is MySQL. Fetching the banner and you can see this is the output because of the command
+24
+
+25
+00:01:59,510 --> 00:02:02,620
+that we executed, which was hyphen hyphen banne.
+25
+
+26
+00:02:02,930 --> 00:02:08,240
+And we have grabbed the technology that has been used onto the target web server.
+26
+
+27
+00:02:08,870 --> 00:02:12,200
+So we can see it uses the operating system as Linux.
+27
+
+28
+00:02:12,620 --> 00:02:19,820
+The web app technology is Nginx and Plesk the backend DBMS is MySQL greater than equal to
+28
+
+29
+00:02:19,820 --> 00:02:20,820
+5.0.
+29
+
+30
+00:02:21,860 --> 00:02:28,690
+We are not interested in to the banner that we have grabbed. What we are much more interested in MySQL
+30
+
+31
+00:02:28,700 --> 00:02:36,240
+shell and let's see if we are able to execute any commands onto the shell of the server of the database.
+31
+
+32
+00:02:36,800 --> 00:02:43,850
+So I have written very simple three basic queries that I'm going to perform not to harm the target web
+32
+
+33
+00:02:43,890 --> 00:02:45,040
+application server.
+33
+
+34
+00:02:45,560 --> 00:02:49,310
+You can execute as many as commands you want onto the target server.
+34
+
+35
+00:02:49,520 --> 00:02:57,230
+But keep in mind, we are not going to update, delete or modify or alter with any data into the database.
+35
+
+36
+00:02:58,530 --> 00:03:05,250
+So first, let's quickly run this command in which we're going to type select three * three from dual.
+36
+
+37
+00:03:06,330 --> 00:03:12,200
+Is there is a spelling mistake from D, I have added a D over here, so which is a spell error,
+37
+
+38
+00:03:12,210 --> 00:03:15,440
+so let's fix that and execute it again.
+38
+
+39
+00:03:15,660 --> 00:03:18,270
+And we are going to see the output of three.
+39
+
+40
+00:03:18,270 --> 00:03:25,500
+* three, which we are going to get, is nine and you can see which means that we are able to execute
+40
+
+41
+00:03:25,500 --> 00:03:27,680
+our query onto onto the server.
+41
+
+42
+00:03:29,390 --> 00:03:35,900
+Now we are going to execute these commands, which is select star from Projects table or select star
+42
+
+43
+00:03:35,900 --> 00:03:36,970
+from users.
+43
+
+44
+00:03:37,730 --> 00:03:42,300
+So let's quickly execute this command and wait for this to execute.
+44
+
+45
+00:03:42,740 --> 00:03:47,930
+As you can see, fetching current database, fetching columns from the table users into the database
+45
+
+46
+00:03:47,930 --> 00:03:57,650
+albatros and completed it did not return any output because there is no such table with the name users.
+46
+
+47
+00:03:58,100 --> 00:04:02,270
+So we got nothing because there was no such table.
+47
+
+48
+00:04:02,420 --> 00:04:08,840
+But I know that this database contains a table which is projects, so I'm going to change it to projects
+48
+
+49
+00:04:08,840 --> 00:04:09,760
+and hit enter.
+49
+
+50
+00:04:10,100 --> 00:04:15,440
+And you can it has successfully started retrieving the database from the table projects.
+50
+
+51
+00:04:16,310 --> 00:04:22,960
+So this way it is going to show you or dump all the data from the table projects.
+51
+
+52
+00:04:23,300 --> 00:04:30,350
+So I hope you guys understood how we are able to get the SQL shell onto the target web server and
+52
+
+53
+00:04:30,350 --> 00:04:32,790
+we are able to execute our commands.
+53
+
+54
+00:04:33,290 --> 00:04:39,830
+Now, keep in mind, whenever you are doing pentesting or bug bounty hunting and you get the SQL level
+54
+
+55
+00:04:39,830 --> 00:04:47,510
+access or the access to any target application, I would highly recommend not to execute any malicious
+55
+
+56
+00:04:47,510 --> 00:04:53,840
+query or command over there to update, delete or modify any content onto the server.
+56
+
+57
+00:04:54,980 --> 00:05:02,150
+Obviously, if you have got the SQL shell, it is going to increase the impact and target organization
+57
+
+58
+00:05:02,150 --> 00:05:09,230
+will automatically understand it, but you should not execute any harmful command and just a very basic
+58
+
+59
+00:05:09,230 --> 00:05:13,580
+command to explain what is the shell access.
+59
+
+60
+00:05:14,120 --> 00:05:15,410
+So I hope you guys understood.
+60
+
+61
+00:05:15,440 --> 00:05:16,010
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 16: SSRF
+
+0
+1
+00:00:01,600 --> 00:00:04,240
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:05,200 --> 00:00:12,790
+So in this video, we are going to discuss about SSRF, which is also known as Server Side Request
+2
+
+3
+00:00:12,790 --> 00:00:13,140
+Forgery.
+3
+
+4
+00:00:13,990 --> 00:00:21,100
+First, you should know this, that a very common vulnerability, which is identified in a lot of bug
+4
+
+5
+00:00:21,100 --> 00:00:27,930
+bounty programs on these crowdsourced platforms like Bugcrowd, Intigrity, Synack or hackerone.
+5
+
+6
+00:00:28,720 --> 00:00:35,710
+Also, this is a type of vulnerability which is also identified in a lot of private programs, which
+6
+
+7
+00:00:35,710 --> 00:00:36,730
+you should not miss.
+7
+
+8
+00:00:37,420 --> 00:00:46,600
+So let's quickly jump into what of SSRF and understand what exactly is this vulnerability, which is
+8
+
+9
+00:00:46,600 --> 00:00:50,150
+the class and attack vector for this venerability.
+9
+
+10
+00:00:50,650 --> 00:00:57,790
+So it is a Web based bug which allows the attackers to induce server side applications to make arbitrary
+10
+
+11
+00:00:58,000 --> 00:01:00,280
+HTTP request to any domain.
+11
+
+12
+00:01:01,330 --> 00:01:08,170
+Attacker might also cause the server to make a connection back to himself or to any other Web based services
+12
+
+13
+00:01:08,170 --> 00:01:14,530
+within the organization's infrastructure or to any third party domains or systems as well.
+13
+
+14
+00:01:15,310 --> 00:01:24,490
+Now, we have understood till now that SSRF basically includes inducing some HTTP request to ourselves
+14
+
+15
+00:01:24,790 --> 00:01:30,190
+or within the organization, to some other Web based services or any third party domains.
+15
+
+16
+00:01:30,520 --> 00:01:31,090
+All right.
+16
+
+17
+00:01:31,540 --> 00:01:40,420
+So let's now understand and jump into how all of SSRF and understand the principle of how it actually
+17
+
+18
+00:01:40,420 --> 00:01:41,450
+functions or work.
+18
+
+19
+00:01:42,370 --> 00:01:48,880
+So for this, I have demonstrated a very, very simple principle example that will make everything clear
+19
+
+20
+00:01:48,880 --> 00:01:52,270
+for you to understand the working of this attack.
+20
+
+21
+00:01:53,050 --> 00:02:02,080
+So the first thing that happens is any attacker, which you can see over here, sends a request to example
+21
+
+22
+00:02:02,080 --> 00:02:02,650
+dot com.
+22
+
+23
+00:02:02,830 --> 00:02:08,620
+Remember, in this case, we have considered example dot com to be a vulnerable Web application.
+23
+
+24
+00:02:09,310 --> 00:02:14,830
+So the attacker is sending a request, which is a GET request to example dot com, which is our host.
+24
+
+25
+00:02:15,100 --> 00:02:19,060
+And that hacker says, I want to reach Google dot com through you.
+25
+
+26
+00:02:19,630 --> 00:02:29,110
+So the server sends a request to Google dot com and then the request is finally transferred or sent
+26
+
+27
+00:02:29,320 --> 00:02:34,480
+to Google dot com server as you can see the request that has been sent is a GET request.
+27
+
+28
+00:02:34,810 --> 00:02:36,710
+And the host is Google dot com this time.
+28
+
+29
+00:02:37,210 --> 00:02:46,570
+So basically, the attacker has induced the action of fetching a resource from a third party or attacker
+29
+
+30
+00:02:46,570 --> 00:02:51,310
+controlled domain through the vulnerable web application, which is an example dot com.
+30
+
+31
+00:02:51,880 --> 00:03:01,180
+Now the Google dot com or the attacker controlled dot com or a Web application server may send a response
+31
+
+32
+00:03:01,390 --> 00:03:03,970
+from it back to Google dot com.
+32
+
+33
+00:03:04,210 --> 00:03:10,540
+And the example dot com will send a response to the attacker dot com.
+33
+
+34
+00:03:10,900 --> 00:03:13,810
+And this is how a SSRF attack works.
+34
+
+35
+00:03:14,470 --> 00:03:20,410
+Now, to sum up everything in very, very simple words, you should understand that an attacker can
+35
+
+36
+00:03:20,590 --> 00:03:28,750
+make any arbitrary request to any third party domain from the vulnerable web application and get the response
+36
+
+37
+00:03:28,750 --> 00:03:34,320
+of those particular requests that has been made is the main principle of SSRF.
+37
+
+38
+00:03:35,490 --> 00:03:42,630
+Also, you should keep in mind that the attacker may not induce any request to third party domain and
+38
+
+39
+00:03:42,630 --> 00:03:50,550
+may only induce request to himself or back to his server, which he is controlling.
+39
+
+40
+00:03:51,660 --> 00:04:00,660
+The attacker may also scan the internal network and get the responses of that scans onto his own server
+40
+
+41
+00:04:00,660 --> 00:04:01,110
+as well.
+41
+
+42
+00:04:02,630 --> 00:04:09,200
+All right, so what does the impact of SSRF, so till now you must have understood that the attacker can
+42
+
+43
+00:04:09,200 --> 00:04:17,420
+get a lot of sensitive information from the server back to him onto his third party domain or any arbitrary
+43
+
+44
+00:04:17,420 --> 00:04:17,840
+server.
+44
+
+45
+00:04:19,480 --> 00:04:24,320
+So the attacker can get unauthorized actions onto the web application.
+45
+
+46
+00:04:24,850 --> 00:04:32,920
+The attacker can access the data within the organization or metadata for cloud instances, as nowadays
+46
+
+47
+00:04:32,920 --> 00:04:39,310
+a lot of web application providers are shifting to cloud instances like Google.
+47
+
+48
+00:04:39,670 --> 00:04:42,340
+AWS to give some example.
+48
+
+49
+00:04:43,520 --> 00:04:49,940
+Now, you may also get a lot of sensitive files from those metadata of the cloud instances, which we
+49
+
+50
+00:04:49,940 --> 00:04:51,050
+are going to see ahead.
+50
+
+51
+00:04:51,890 --> 00:04:58,010
+You can also make our internal port scan of the target web applications organization and identify
+51
+
+52
+00:04:58,010 --> 00:05:02,140
+if there is any service which is running onto the server.
+52
+
+53
+00:05:02,720 --> 00:05:10,880
+If the service is vulnerable, then you can also able to exploit that service and you can achieve RCE.
+53
+
+54
+00:05:12,340 --> 00:05:18,430
+You can also know about the internal IP's which are running behind a reverse proxy after a successful
+54
+
+55
+00:05:18,430 --> 00:05:20,980
+identification of SSRF attack.
+55
+
+56
+00:05:22,990 --> 00:05:31,030
+So here is a very, very simple example, which you can understand for how you can utilize SSRF to
+56
+
+57
+00:05:31,030 --> 00:05:37,540
+scan internal services, as you can see, this is the attacker on the most top left.
+57
+
+58
+00:05:38,260 --> 00:05:46,900
+And you can see there is a firewall which only allows 2 request, which is through port 80 and port
+58
+
+59
+00:05:46,900 --> 00:05:47,400
+443.
+59
+
+60
+00:05:48,190 --> 00:05:52,870
+Now, the attacker identifies SSRF based vulnerability into the Web application.
+60
+
+61
+00:05:53,170 --> 00:06:00,490
+He is also able to scan all of the ports maybe which are running on ElasticSearch Kibana, Memcached
+61
+
+62
+00:06:00,640 --> 00:06:03,910
+Redis or MongoDB on other ports as well.
+62
+
+63
+00:06:04,900 --> 00:06:12,510
+So this is how the attacker is able to scan internal services by only going through port 80 and 443 and
+63
+
+64
+00:06:12,520 --> 00:06:19,610
+identification of a successful SSRF into the application and then further scan all the internal services.
+64
+
+65
+00:06:20,500 --> 00:06:26,470
+So I hope you guys understood in the upcoming videos we are going to see the basics of SSRF and then
+65
+
+66
+00:06:26,470 --> 00:06:32,830
+we'll move on to advance and how you can bypass SSRF protection on multiple Web applications
+66
+
+67
+00:06:33,070 --> 00:06:35,000
+and how to do further exploitation.
+67
+
+68
+00:06:35,680 --> 00:06:36,880
+I hope you guys understood.
+68
+
+69
+00:06:37,090 --> 00:06:37,630
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,160 --> 00:00:03,590
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,530 --> 00:00:12,010
+So in this video, we are going to see the steps and approach towards identification of SSRF based
+2
+
+3
+00:00:12,030 --> 00:00:12,670
+vulnerabilities.
+3
+
+4
+00:00:13,560 --> 00:00:21,410
+So the first step is that we will exploit a Web application to induce the request to the attackers controlled
+4
+
+5
+00:00:21,420 --> 00:00:21,960
+server.
+5
+
+6
+00:00:22,530 --> 00:00:23,040
+All right.
+6
+
+7
+00:00:24,260 --> 00:00:27,680
+This is what we have understood into the principle as well.
+7
+
+8
+00:00:28,800 --> 00:00:36,270
+Moving ahead to the next step, we are going to configure the Burp collaborator as a third party server. In
+8
+
+9
+00:00:36,270 --> 00:00:42,370
+case you have any of your VPS or any of your website, you can use that as well.
+9
+
+10
+00:00:43,020 --> 00:00:49,770
+I assume that many of you would have your own Web application or your own VPS,  which can be used as
+10
+
+11
+00:00:49,770 --> 00:00:52,750
+a third party server in case you do not have it.
+11
+
+12
+00:00:52,890 --> 00:00:53,710
+No need to worry.
+12
+
+13
+00:00:54,120 --> 00:00:57,030
+We are going to use the Burp collaborator.
+13
+
+14
+00:00:58,570 --> 00:01:04,840
+In case you also do not have Burp collaborator, then I'm going to tell you a very, very simple trick and
+14
+
+15
+00:01:04,840 --> 00:01:10,630
+a very good resource that you can utilize as your third party attacker controlled server.
+15
+
+16
+00:01:11,850 --> 00:01:19,020
+So the third step is wait for the interaction from the target web application to identify if it is vulnerable
+16
+
+17
+00:01:19,020 --> 00:01:19,580
+or not.
+17
+
+18
+00:01:20,520 --> 00:01:28,200
+Once have identified it to be vulnerable as we get a successful interaction, then we will do the attack
+18
+
+19
+00:01:28,230 --> 00:01:32,020
+on to that Web application and complete the successful attack.
+19
+
+20
+00:01:33,120 --> 00:01:41,590
+So let's quickly jump on to the practical time to successfully do a SSRF attack on a target application.
+20
+
+21
+00:01:42,270 --> 00:01:51,510
+So for this example, we are going to take test php dot vuln web dot com as our target application to identify
+21
+
+22
+00:01:51,550 --> 00:01:54,080
+SSRF based vulnerabilities.
+22
+
+23
+00:01:55,080 --> 00:02:00,000
+So the first thing that I'm going to do is I need an injection point to identify.
+23
+
+24
+00:02:00,420 --> 00:02:04,200
+For that, I'm going to use Burp Suite. In to Burp Suite
+24
+
+25
+00:02:04,200 --> 00:02:12,120
+first, I'm going to spider the application to identify entry points and increase the scope of my target
+25
+
+26
+00:02:12,120 --> 00:02:20,100
+web application as I'm running on Version 2.0 in which the spider has changed its name.
+26
+
+27
+00:02:20,550 --> 00:02:28,070
+So I'm going to show you what is the changed name of Burp Spider into the version 2.X
+27
+
+28
+00:02:28,830 --> 00:02:33,590
+So let's quickly go back to the application, load so we get a request over here.
+28
+
+29
+00:02:35,130 --> 00:02:37,200
+Now, I'm just going to right click first.
+29
+
+30
+00:02:37,200 --> 00:02:39,390
+Send this to repeater. Again
+30
+
+31
+00:02:39,390 --> 00:02:45,510
+I'm going to right click and I'm going to click on Engagement Tools and I'm going to click on Discover
+31
+
+32
+00:02:45,510 --> 00:02:46,110
+Content.
+32
+
+33
+00:02:46,960 --> 00:02:57,270
+Remember, Burp Spider has changed its name to content discovery or discover content in all the versions
+33
+
+34
+00:02:57,270 --> 00:03:00,170
+of Burp Suite which starts from 2.0.
+34
+
+35
+00:03:00,930 --> 00:03:07,350
+So we just need to click on session is not running and it will start your session and it will start
+35
+
+36
+00:03:07,350 --> 00:03:15,030
+identifying or crawling the target application for a lot of URL's and parameters.
+36
+
+37
+00:03:15,030 --> 00:03:21,990
+As you can see over here, you can simply go to site map and also see the target URL's that are loading over
+37
+
+38
+00:03:22,170 --> 00:03:27,570
+here. Now as we want a few of the URL's which contains the parameters.
+38
+
+39
+00:03:27,600 --> 00:03:33,180
+So I'm just going to double click on params and you can see we have successfully got all the parameters
+39
+
+40
+00:03:33,180 --> 00:03:33,720
+over here.
+40
+
+41
+00:03:35,130 --> 00:03:35,700
+Perfect.
+41
+
+42
+00:03:35,700 --> 00:03:38,510
+So I'm going to pick one off the parameter from here.
+42
+
+43
+00:03:38,820 --> 00:03:43,170
+So let me just minimize this, because I do not want to stop spidering.
+43
+
+44
+00:03:43,440 --> 00:03:51,240
+I want a lot more request because, you know, the more you spider, the more assets or scope increased
+44
+
+45
+00:03:51,240 --> 00:03:56,790
+you get, which means that you are increasing your chances of getting a valid vulnerability.
+45
+
+46
+00:03:57,690 --> 00:04:03,510
+Now, for instance, for now, I'm going to close this because we have already identified a lot of 
+46
+
+47
+00:04:03,510 --> 00:04:04,410
+URL's right now.
+47
+
+48
+00:04:04,410 --> 00:04:11,790
+And I'm going to choose anyone from this into a real time scenario, onto a bug bounty program that
+48
+
+49
+00:04:11,790 --> 00:04:17,630
+in your hunting on a Web application, you can keep it running so you get more number of requests.
+49
+
+50
+00:04:18,420 --> 00:04:20,310
+Alright, so let me just exit this.
+50
+
+51
+00:04:21,390 --> 00:04:28,920
+Now you have to go to your target and from here let's pick any of the target
+51
+
+52
+00:04:28,920 --> 00:04:29,650
+URL
+52
+
+53
+00:04:29,730 --> 00:04:39,330
+So let's say we are going to pick one of the URL, which is for example, let's pick a URL which starts
+53
+
+54
+00:04:39,330 --> 00:04:42,420
+or which says file equals to
+54
+
+55
+00:04:43,080 --> 00:04:46,110
+So let me see if I can a URL are like this.
+55
+
+56
+00:04:46,920 --> 00:04:47,790
+Let me just right
+56
+
+57
+00:04:47,820 --> 00:04:50,250
+click over here and click on add to scope.
+57
+
+58
+00:04:50,610 --> 00:04:55,830
+I can filter this based on scope as well as I do not want to see any glitter over here.
+58
+
+59
+00:04:56,460 --> 00:04:57,060
+Again, again.
+59
+
+60
+00:04:57,060 --> 00:04:57,630
+Right click.
+60
+
+61
+00:04:57,990 --> 00:05:06,390
+and go to engagement tools, I can again click on discover content and start and it will start identifying
+61
+
+62
+00:05:06,390 --> 00:05:07,920
+and crawling the target again.
+62
+
+63
+00:05:08,260 --> 00:05:18,360
+Ok, now if I want to identify a specific set of parameters from the given discovered content, I can
+63
+
+64
+00:05:18,360 --> 00:05:19,140
+also do that.
+64
+
+65
+00:05:19,620 --> 00:05:22,370
+For that you just need to go to Burp and you need to search.
+65
+
+66
+00:05:23,010 --> 00:05:26,390
+So now I'm going to search for something called as file.
+66
+
+67
+00:05:27,120 --> 00:05:33,000
+Now you can just tick this option as well in which you have to choose in scope only, which will only
+67
+
+68
+00:05:33,000 --> 00:05:38,040
+search the parameter file into your in scope domains as well.
+68
+
+69
+00:05:38,640 --> 00:05:45,000
+So I'm just going to go and you can see I have got a lot of your URL's, which contains file already.
+69
+
+70
+00:05:45,000 --> 00:05:48,390
+So I'm going to choose one of which is this.
+70
+
+71
+00:05:48,900 --> 00:05:49,500
+So let me just
+71
+
+72
+00:05:49,500 --> 00:05:49,680
+right
+72
+
+73
+00:05:49,680 --> 00:05:51,390
+click and send this to repeater.
+73
+
+74
+00:05:51,720 --> 00:05:52,170
+Perfect.
+74
+
+75
+00:05:52,740 --> 00:05:54,630
+Now we have one of the URL
+75
+
+76
+00:05:54,630 --> 00:05:58,660
+which I'm going to try for a successful SSRF.
+76
+
+77
+00:05:58,680 --> 00:06:03,750
+So let me first hit go and see what is this which it contains.
+77
+
+78
+00:06:04,470 --> 00:06:11,090
+So I think it contains a picture, which is 1 dot jpg. Llet us render and you can see it contains a picture.
+78
+
+79
+00:06:11,810 --> 00:06:12,420
+All right.
+79
+
+80
+00:06:12,660 --> 00:06:19,890
+So now we are going to test the parameter file equals to if it is vulnerable to SSRF or not.
+80
+
+81
+00:06:20,420 --> 00:06:25,790
+So, as I already mentioned, that we are going to use Burp collaborator, so you, for that, you just
+81
+
+82
+00:06:25,790 --> 00:06:30,410
+simply need to click on Burp and you can choose the Burp collaborator client.
+82
+
+83
+00:06:31,910 --> 00:06:39,650
+Now, you can see over here, this is number to generate, which means how many collabora payloads
+83
+
+84
+00:06:39,650 --> 00:06:40,440
+we want to generate.
+84
+
+85
+00:06:40,460 --> 00:06:41,920
+So I just want to generate one.
+85
+
+86
+00:06:42,050 --> 00:06:50,420
+You can also choose one and click on copy to clipboard and it will copy the collaborator client payload,
+86
+
+87
+00:06:50,420 --> 00:06:53,840
+which is nothing but your third party servers name.
+87
+
+88
+00:06:54,730 --> 00:07:01,150
+Or the address. Poll every 60 seconds, you can choose or you can make it to one second, which means
+88
+
+89
+00:07:01,150 --> 00:07:07,820
+it is going to refresh and check if there are any interaction requests that have come or not.
+89
+
+90
+00:07:08,200 --> 00:07:12,500
+So let's click on Copy to Clipboard and go back over here.
+90
+
+91
+00:07:13,150 --> 00:07:20,500
+Now, let's just remove this and we paste it over here. Now as we want the request to be sent.
+91
+
+92
+00:07:20,530 --> 00:07:28,390
+So let me just add HTTP in front of it to make the request go to our collaborator server, which is
+92
+
+93
+00:07:28,390 --> 00:07:31,690
+our third party server, and make the application.
+93
+
+94
+00:07:31,930 --> 00:07:34,180
+It is HTTP based server.
+94
+
+95
+00:07:37,160 --> 00:07:43,700
+All right, so now let me just hit go and let's see if we get something in the response and you can
+95
+
+96
+00:07:43,700 --> 00:07:50,900
+see I got a 200 OK and something in response, go back to your collaborator and see if we have got something.
+96
+
+97
+00:07:51,500 --> 00:07:57,080
+And you can see, yes, we have got a couple of requests over here so let's see the request that
+97
+
+98
+00:07:57,080 --> 00:07:58,540
+we have received over here.
+98
+
+99
+00:07:58,700 --> 00:08:01,820
+And you can see this is the request which has been received.
+99
+
+100
+00:08:02,090 --> 00:08:04,880
+The collaborator server had received an HTTP request.
+100
+
+101
+00:08:05,450 --> 00:08:08,910
+The request was received from the IP address, which is this IP address.
+101
+
+102
+00:08:09,440 --> 00:08:13,030
+Now, let's verify if this IP address belongs to whom.
+102
+
+103
+00:08:13,790 --> 00:08:17,980
+For that, let's go back to over here. Paste the IP address over here.
+103
+
+104
+00:08:18,410 --> 00:08:24,500
+And you can see the IP address belongs to acunetix which is test php.
+104
+
+105
+00:08:24,890 --> 00:08:25,360
+Perfect.
+105
+
+106
+00:08:25,700 --> 00:08:34,880
+So we have identified a valid SSRF over here as it is making interaction with attacker controlled third
+106
+
+107
+00:08:34,880 --> 00:08:35,840
+party domain.
+107
+
+108
+00:08:36,470 --> 00:08:41,470
+Let let me again show you the collaborator client and let me see where is the collaborator client.
+108
+
+109
+00:08:41,480 --> 00:08:44,100
+It is over here now.
+109
+
+110
+00:08:44,180 --> 00:08:46,750
+This is the spider which is running.
+110
+
+111
+00:08:46,760 --> 00:08:49,220
+So the collaborator client should be.
+111
+
+112
+00:08:53,010 --> 00:08:59,960
+So I think so I'm just going to start a collaborator client again, I have closed the previous window.
+112
+
+113
+00:09:00,300 --> 00:09:07,830
+So now again, I'm going to make one over here because I want to poll it in once again or copy this
+113
+
+114
+00:09:07,830 --> 00:09:11,290
+over here, past it over here and let's see if we get any interaction.
+114
+
+115
+00:09:11,630 --> 00:09:18,330
+Remember, you need to add HTTP and past it over here and hit
+115
+
+116
+00:09:18,330 --> 00:09:20,430
+go. Wait for the interaction.
+116
+
+117
+00:09:20,440 --> 00:09:22,470
+Let's verify if we got the interaction over here.
+117
+
+118
+00:09:22,650 --> 00:09:28,530
+And again, see, we have got a successful interaction from the IP address, which is belonging to a
+118
+
+119
+00:09:28,530 --> 00:09:29,070
+target.
+119
+
+120
+00:09:29,460 --> 00:09:30,780
+As you can see over here.
+120
+
+121
+00:09:31,650 --> 00:09:35,310
+This is the response that we have got from our target.
+121
+
+122
+00:09:35,850 --> 00:09:44,150
+So this is how you test for SSRF based vulnerabilities onto any target web application.
+122
+
+123
+00:09:45,540 --> 00:09:52,680
+So we will end for this video. Into the next video I'm going to show you if you do not have Burp collaborator
+123
+
+124
+00:09:53,070 --> 00:10:01,080
+which is this option for a third party services or third party attacker control domain, how you can utilize
+124
+
+125
+00:10:01,080 --> 00:10:03,630
+any other free and useful resource?
+125
+
+126
+00:10:04,380 --> 00:10:05,630
+So I hope you guys understood.
+126
+
+127
+00:10:05,820 --> 00:10:06,330
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,440 --> 00:00:04,200
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:05,430 --> 00:00:11,670
+So in this video, we are going to see three awesome resources that you can utilize as a third party
+2
+
+3
+00:00:11,670 --> 00:00:19,200
+domain in case you do not have the collaborator client or your own VPS. All the three resources are
+3
+
+4
+00:00:19,200 --> 00:00:24,810
+totally free and you can utilize it as much as you want for your SSRF testing.
+4
+
+5
+00:00:25,620 --> 00:00:26,060
+All right.
+5
+
+6
+00:00:26,070 --> 00:00:32,730
+So in the previous video we have seen about how we got interactions on our Burp collaborator client while
+6
+
+7
+00:00:32,730 --> 00:00:38,940
+we were doing SSRF testing on to a vulnerable parameter, which was file equals to on onto the
+7
+
+8
+00:00:38,940 --> 00:00:39,240
+test
+8
+
+9
+00:00:39,240 --> 00:00:43,700
+php dot vuln web dot com which was this.
+9
+
+10
+00:00:44,730 --> 00:00:45,240
+Yes.
+10
+
+11
+00:00:45,510 --> 00:00:50,220
+And we got a request from this IP address.
+11
+
+12
+00:00:51,120 --> 00:00:56,900
+So now we are going to test the same thing, but without a collaborator client.
+12
+
+13
+00:00:57,780 --> 00:01:03,870
+So the first resource or a website that you can use is a webhook dot site.
+13
+
+14
+00:01:04,380 --> 00:01:12,820
+So you just need to come onto a webhook dot site and it will wait for your first request, as you can see over here.
+14
+
+15
+00:01:13,180 --> 00:01:21,240
+The cool thing about this is that you get your own unique URL as well as your unique email address as
+15
+
+16
+00:01:21,240 --> 00:01:27,000
+well, which you can utilize to sign up onto multiple Web applications, which we are going to see in
+16
+
+17
+00:01:27,000 --> 00:01:30,000
+a couple of more attacks of SSRF.
+17
+
+18
+00:01:30,800 --> 00:01:32,620
+All right, so let's use this.
+18
+
+19
+00:01:32,660 --> 00:01:36,110
+I'm going to copy this to clipboard, which is my unique.
+19
+
+20
+00:01:36,110 --> 00:01:36,760
+URL
+20
+
+21
+00:01:37,340 --> 00:01:44,530
+Let's go to Burp Suite and now over here we are not going to use this collaborator client.
+21
+
+22
+00:01:44,810 --> 00:01:50,650
+Instead, we are going to use this resource, which is our copied webhook.
+22
+
+23
+00:01:51,020 --> 00:01:55,520
+So let's go back to Burp Suite and remove this and paste it.
+23
+
+24
+00:01:56,090 --> 00:01:59,200
+Now, I'm just going to hit go. Before I go
+24
+
+25
+00:01:59,660 --> 00:02:05,620
+you can see where this is waiting for your first request and there is no current request.
+25
+
+26
+00:02:06,050 --> 00:02:13,640
+Let me just hit go and go over here and you can see we have successfully got our first request over here.
+26
+
+27
+00:02:14,270 --> 00:02:19,100
+And you can see, this is the first request that we have received, which means there was a successful
+27
+
+28
+00:02:19,100 --> 00:02:27,290
+interaction between the targeted Web application server and our client, which is our third party collaborator
+28
+
+29
+00:02:27,290 --> 00:02:30,050
+that we have used, as you can see over here.
+29
+
+30
+00:02:30,920 --> 00:02:31,340
+All right.
+30
+
+31
+00:02:31,760 --> 00:02:37,240
+So let's move on to the second resource, which is a request bin dot com. For here
+31
+
+32
+00:02:37,280 --> 00:02:41,350
+you need to login and it is, again, free of cost.
+32
+
+33
+00:02:41,360 --> 00:02:46,040
+So I have just signed up and I have taken name, which is 
+hero
+33
+
+34
+00:02:46,060 --> 00:02:48,700
+Udemy, you can take any name that you want.
+34
+
+35
+00:02:49,100 --> 00:02:55,250
+Now you can see I have a request bin over here and it is also waiting for event and you can see your
+35
+
+36
+00:02:55,250 --> 00:02:56,180
+end point over here.
+36
+
+37
+00:02:56,180 --> 00:02:57,890
+So I'm going to copy this end point.
+37
+
+38
+00:02:58,280 --> 00:03:05,780
+Go back to Burp Suite and I'm going to utilize this over here and hit go and you can see success true.
+38
+
+39
+00:03:06,200 --> 00:03:12,470
+Now let's see if we got an event over here and you can see we got one event over last twenty four hours
+39
+
+40
+00:03:12,890 --> 00:03:15,860
+and you can see the event is this, which is a GET request.
+40
+
+41
+00:03:16,250 --> 00:03:22,670
+And you can see we have received this GET request and this is the IP address that we have received the GET request
+41
+
+42
+00:03:22,670 --> 00:03:22,970
+from.
+42
+
+43
+00:03:23,390 --> 00:03:30,230
+If you see closely, this is the same IP address that we received into our collaborator client.
+43
+
+44
+00:03:31,190 --> 00:03:38,540
+Let me show you let me go back to Firefox and you can see this is the same IP address.
+44
+
+45
+00:03:40,670 --> 00:03:45,090
+Yes, which is exactly the same of the target web application.
+45
+
+46
+00:03:45,590 --> 00:03:49,670
+Now there is one more resource which you can use, which is a request catcher.
+46
+
+47
+00:03:50,180 --> 00:03:52,220
+Now, let me just take a name.
+47
+
+48
+00:03:52,490 --> 00:03:54,360
+Let's say we take the name as hero.
+48
+
+49
+00:03:54,710 --> 00:03:59,030
+Udemy dot request catcher. Just hit on Get Started.
+49
+
+50
+00:03:59,100 --> 00:04:02,050
+Now you can see, we do not have any request right now.
+50
+
+51
+00:04:02,060 --> 00:04:04,940
+So let me send a quick request over here.
+51
+
+52
+00:04:05,330 --> 00:04:12,290
+Let's copy the name that we are going to send a request to let us go to collaborator client over here.
+52
+
+53
+00:04:12,290 --> 00:04:16,790
+And hit this. Let me hit go and you can see request caught.
+53
+
+54
+00:04:17,630 --> 00:04:18,140
+Perfect.
+54
+
+55
+00:04:18,300 --> 00:04:19,540
+Let's go there and see.
+55
+
+56
+00:04:19,730 --> 00:04:21,440
+Have we received a request?
+56
+
+57
+00:04:21,710 --> 00:04:27,890
+And you can see, we have successfully received a request, which means that it is working absolutely
+57
+
+58
+00:04:27,890 --> 00:04:34,990
+fine and it is making interactions with our third party web client or web server.
+58
+
+59
+00:04:35,450 --> 00:04:40,670
+So I hope you guys understood. These are some of the resources that you can use extensively for your
+59
+
+60
+00:04:40,670 --> 00:04:47,570
+testing purposes, not only in SSRF based vulnerabilities, but in case you want any listener or client
+60
+
+61
+00:04:47,840 --> 00:04:48,680
+onto the public
+61
+
+62
+00:04:48,680 --> 00:04:50,750
+facing URL, you can always use this.
+62
+
+63
+00:04:51,470 --> 00:04:52,000
+Perfect.
+63
+
+64
+00:04:52,160 --> 00:04:55,430
+So I hope you guys understood how you can utilize these resources.
+64
+
+65
+00:04:55,430 --> 00:05:01,070
+We are going to use them extensively in our upcoming videos in case I am using collaborator client and
+65
+
+66
+00:05:01,070 --> 00:05:02,210
+you do not have one.
+66
+
+67
+00:05:02,210 --> 00:05:05,630
+You can also use these resources in future.
+67
+
+68
+00:05:06,050 --> 00:05:07,340
+I hope you guys understood.
+68
+
+69
+00:05:07,340 --> 00:05:11,870
+In case you have any issues or doubts, you can always ask into the Q&A section.
+69
+
+70
+00:05:12,140 --> 00:05:12,650
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,110 --> 00:00:03,810
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,620 --> 00:00:10,620
+So in this video, we are going to see SSRF based attacks and to start with, we're going to see
+2
+
+3
+00:00:10,640 --> 00:00:13,830
+SSRF attacks against the server itself.
+3
+
+4
+00:00:14,730 --> 00:00:23,150
+So as we already know, using SSRF, we can scan any third party based web application through the vulnerable
+4
+
+5
+00:00:23,160 --> 00:00:23,640
+server.
+5
+
+6
+00:00:24,420 --> 00:00:34,110
+Now let us see, how can you utilize SSRF to scan the server itself and how you can exfiltrate sensitive
+6
+
+7
+00:00:34,110 --> 00:00:36,680
+data or information from the server.
+7
+
+8
+00:00:37,500 --> 00:00:46,080
+So many times the admin functionality is only accessible to the authenticated users of the target program
+8
+
+9
+00:00:46,200 --> 00:00:47,380
+or the web application.
+9
+
+10
+00:00:48,330 --> 00:00:54,840
+So when any attacker impersonates and makes a request through the local machine, he gets access
+10
+
+11
+00:00:54,840 --> 00:00:56,220
+to that functionality.
+11
+
+12
+00:00:56,910 --> 00:00:58,350
+What does this actually means?
+12
+
+13
+00:00:59,040 --> 00:01:05,520
+This actually means that the attacker is going to fool the application and make the application think
+13
+
+14
+00:01:05,520 --> 00:01:09,630
+like the request is coming from the organization itself.
+14
+
+15
+00:01:10,050 --> 00:01:15,900
+And the application will allow the admin functionality to all its local users.
+15
+
+16
+00:01:16,740 --> 00:01:22,920
+To understand this, we are going to see a simple animation and get the principle.
+16
+
+17
+00:01:23,910 --> 00:01:29,820
+So onto the left hand side, you can see there is an attacker who is going to send the request to the
+17
+
+18
+00:01:29,820 --> 00:01:32,460
+vulnerable web application on your right hand side.
+18
+
+19
+00:01:33,090 --> 00:01:41,530
+And the request is going to be let's get slash admin the host is example dot com as it is our vulnerable
+19
+
+20
+00:01:41,550 --> 00:01:43,200
+application example dot com.
+20
+
+21
+00:01:43,770 --> 00:01:50,730
+And let's suppose there is a parameter URL equlas to into the body, which says again, example dot
+21
+
+22
+00:01:50,730 --> 00:01:53,130
+com, which is the name of the web application.
+22
+
+23
+00:01:54,060 --> 00:02:00,570
+The server is going to send a response to the attacker and the response is going to be 403
+23
+
+24
+00:02:00,960 --> 00:02:07,530
+because the attacker is not allowed to see the admin functionality of the vulnerable Web application,
+24
+
+25
+00:02:07,890 --> 00:02:09,470
+which is example dot com.
+25
+
+26
+00:02:10,170 --> 00:02:18,120
+But if the attackers sends again a get request to slash admin with the same host example dot com, but
+26
+
+27
+00:02:18,120 --> 00:02:19,090
+this time in the URL
+27
+
+28
+00:02:19,120 --> 00:02:24,690
+he impersonates himself as the request is coming from the localhost.
+28
+
+29
+00:02:25,050 --> 00:02:27,420
+As you can see, this is a loopback IP.
+29
+
+30
+00:02:27,900 --> 00:02:34,140
+The server quickly responds with 200 OK thinking that the request is coming from the internal
+30
+
+31
+00:02:34,140 --> 00:02:39,930
+of the organization and gives the admin dashboard all the functionality.
+31
+
+32
+00:02:41,410 --> 00:02:43,040
+So what is the impact of this?
+32
+
+33
+00:02:43,600 --> 00:02:51,610
+The attacker is able to access the internal portal or any admin which he or she is not allowed to. So
+33
+
+34
+00:02:51,610 --> 00:02:58,150
+SSRF gives you the functionalities which are hidden from the public world and you can access inside the
+34
+
+35
+00:02:58,150 --> 00:02:59,020
+organization.
+35
+
+36
+00:02:59,830 --> 00:03:05,760
+Attacker is also able to bypass the access controls and authentications to access the protected resources.
+36
+
+37
+00:03:06,730 --> 00:03:13,780
+That we have already seen. Attacker can also perform sensitive actions under the targeted Web applications,
+37
+
+38
+00:03:14,140 --> 00:03:20,620
+like deleting account or modifying some data which are going to see in the practical in just a couple
+38
+
+39
+00:03:20,620 --> 00:03:21,400
+of few seconds.
+39
+
+40
+00:03:22,930 --> 00:03:29,860
+Also, the attacker is able to execute commands to scan the internal ports and also the network to
+40
+
+41
+00:03:29,860 --> 00:03:34,690
+identify if any vulnerable services are been running and further exploit them.
+41
+
+42
+00:03:36,700 --> 00:03:44,100
+So what are the steps to perform this SSRF onto a target web application?
+42
+
+43
+00:03:45,130 --> 00:03:51,220
+So I have listed down four steps to solve this practical or to perform this attack.
+43
+
+44
+00:03:52,060 --> 00:03:52,930
+The first one is.
+44
+
+45
+00:03:54,190 --> 00:04:00,010
+We will exploit a Web application to induce a request to the backend server by bypassing the access
+45
+
+46
+00:04:00,010 --> 00:04:00,520
+control.
+46
+
+47
+00:04:01,450 --> 00:04:07,510
+So basically what we are going to do is. We are going to send request to the localhost or through the
+47
+
+48
+00:04:07,510 --> 00:04:14,800
+loopback IP address to the Web application and trick the Web application in thinking like the request
+48
+
+49
+00:04:14,800 --> 00:04:17,460
+is coming from the internal organization.
+49
+
+50
+00:04:18,460 --> 00:04:25,570
+Then we are going to perform some sensitive actions as unauthenticated users, which the application
+50
+
+51
+00:04:25,570 --> 00:04:28,120
+is believing us to be authenticated user.
+51
+
+52
+00:04:28,970 --> 00:04:32,090
+Hence our attack will be successful.
+52
+
+53
+00:04:33,190 --> 00:04:35,240
+So it is a practical time.
+53
+
+54
+00:04:35,260 --> 00:04:41,050
+And let's quickly jump onto the practical to understand how can we do this as SSRF attack.
+54
+
+55
+00:04:42,660 --> 00:04:49,690
+So as you can see over here, I'm onto the Port Swigger Web Security Academy Lab, which is basic
+55
+
+56
+00:04:49,690 --> 00:04:52,220
+SSRF against local server.
+56
+
+57
+00:04:52,840 --> 00:04:59,830
+So we are going to solve this lab based on the information that we have learned till now.
+57
+
+58
+00:05:00,700 --> 00:05:08,770
+Ok, so the question is to solve the lab, change the stock check URL to access the admin interface
+58
+
+59
+00:05:09,040 --> 00:05:14,890
+at localhost slash admin and delete the user Carlos.
+59
+
+60
+00:05:15,280 --> 00:05:18,420
+So we have this task to be performed.
+60
+
+61
+00:05:21,170 --> 00:05:26,650
+From this information, we understand this, that there is a Web application which gives us some stock
+61
+
+62
+00:05:26,660 --> 00:05:35,310
+information about the target and we need to delete a user by being an admin user.
+62
+
+63
+00:05:36,800 --> 00:05:42,680
+So first of all, we are going to configure Burp Suite quickly with our Web application, as you can see,
+63
+
+64
+00:05:43,010 --> 00:05:45,340
+and I'm going to intercept a request.
+64
+
+65
+00:05:45,470 --> 00:05:48,500
+So we are going to perform the attack from our Burp Suite.
+65
+
+66
+00:05:49,550 --> 00:05:55,020
+Now, let me just increase the display size, the font so you could see it more better.
+66
+
+67
+00:05:55,700 --> 00:05:56,210
+Perfect.
+67
+
+68
+00:05:56,660 --> 00:06:03,470
+Now, over here, you can see I have got the request in my repeater tab and you can see it is working perfectly
+68
+
+69
+00:06:03,470 --> 00:06:03,790
+fine.
+69
+
+70
+00:06:04,220 --> 00:06:08,480
+So now it is the time to get the request off the stock.
+70
+
+71
+00:06:09,260 --> 00:06:11,090
+So let's come on to this page
+71
+
+72
+00:06:11,090 --> 00:06:13,490
+And at the bottom, you can see check stock.
+72
+
+73
+00:06:13,620 --> 00:06:19,940
+So I'm going to just click on that and I'm going to capture the request in Burp Suite on which we are
+73
+
+74
+00:06:19,940 --> 00:06:22,640
+going to perform the SSRF based attacks.
+74
+
+75
+00:06:24,070 --> 00:06:28,900
+So as you can see, I have captured the request over here and now I'm going to send this to repeater.
+75
+
+76
+00:06:29,500 --> 00:06:32,160
+As you can see now, this request is in the repeater.
+76
+
+77
+00:06:32,590 --> 00:06:38,830
+And you can see we have got that there are 121 units in stock in London.
+77
+
+78
+00:06:39,430 --> 00:06:39,940
+All right.
+78
+
+79
+00:06:40,330 --> 00:06:43,890
+Let's get back to Burp and hit send.
+79
+
+80
+00:06:44,650 --> 00:06:49,870
+And you can see we are getting a response of the stock now.
+80
+
+81
+00:06:50,380 --> 00:06:55,120
+Let's go back to the question and see if we are able to see the stock check feature.
+81
+
+82
+00:06:55,150 --> 00:06:57,460
+Yes, we are absolutely able to replicate that.
+82
+
+83
+00:06:57,910 --> 00:07:00,400
+Now to solve the lab change the stock check.
+83
+
+84
+00:07:00,400 --> 00:07:05,740
+URL to access the admin interface at localhost slash admin.
+84
+
+85
+00:07:06,130 --> 00:07:06,600
+Perfect.
+85
+
+86
+00:07:07,000 --> 00:07:10,840
+So now we are going to send a request to localhost.
+86
+
+87
+00:07:10,990 --> 00:07:17,330
+So for that we will simply type http colon slash slash localhost and hit send.
+87
+
+88
+00:07:17,920 --> 00:07:21,760
+And let's see if it is able to communicate to localhost or not.
+88
+
+89
+00:07:21,850 --> 00:07:25,740
+And in this way able to see the output. Perfect.
+89
+
+90
+00:07:25,750 --> 00:07:31,390
+And you can see we are also able to see the admin panel as well, which we were not able to see previously.
+90
+
+91
+00:07:32,230 --> 00:07:38,820
+Now remember, if I put any URL are over here, it is going to behave in a different manner.
+91
+
+92
+00:07:39,070 --> 00:07:41,920
+So let's say I put something which does not exist.
+92
+
+93
+00:07:42,040 --> 00:07:44,490
+Let's say localhost does not exist dot com.
+93
+
+94
+00:07:44,800 --> 00:07:51,220
+Then it is going to throw error into the response, which means it is not able to successfully load
+94
+
+95
+00:07:51,220 --> 00:07:54,400
+the resource that we are trying it to fetch.
+95
+
+96
+00:07:54,790 --> 00:07:55,320
+Perfect.
+96
+
+97
+00:07:55,660 --> 00:07:59,360
+So let's click on Render and let's see if we are able to render this.
+97
+
+98
+00:07:59,470 --> 00:08:07,360
+And you can see I have got a successful admin panel functionality which was not present before, as
+98
+
+99
+00:08:07,360 --> 00:08:08,890
+you can see over here to confirm.
+99
+
+100
+00:08:09,700 --> 00:08:10,130
+Perfect.
+100
+
+101
+00:08:10,130 --> 00:08:16,810
+So we are in the right direction that we are able to get the admin functionality because the Web application
+101
+
+102
+00:08:16,810 --> 00:08:22,760
+now thinks that the request is coming from the internal organization or the localhost.
+102
+
+103
+00:08:23,440 --> 00:08:28,500
+Now, the second part of the question is we need to delete the user, which is Carlos.
+103
+
+104
+00:08:28,900 --> 00:08:29,400
+All right.
+104
+
+105
+00:08:29,410 --> 00:08:32,520
+So let's see if we have any information about Carlos.
+105
+
+106
+00:08:32,530 --> 00:08:37,810
+No, because we are not still on to the slash admin.
+106
+
+107
+00:08:37,810 --> 00:08:38,270
+URL.
+107
+
+108
+00:08:38,950 --> 00:08:44,950
+So now you can see if I hit this end point we are going to get some information and you can see delete
+108
+
+109
+00:08:45,190 --> 00:08:48,680
+Carlos and delete Wiener, as you can see over here.
+109
+
+110
+00:08:49,150 --> 00:08:49,580
+Perfect.
+110
+
+111
+00:08:49,870 --> 00:08:57,760
+So we have got more sensitive information from the targeted application in which when we hit the admin
+111
+
+112
+00:08:57,760 --> 00:09:01,540
+dashboard, we get the list of all the users from the application.
+112
+
+113
+00:09:01,900 --> 00:09:04,810
+The first user is admin, Carlos and Wiener.
+113
+
+114
+00:09:05,410 --> 00:09:05,870
+Perfect.
+114
+
+115
+00:09:05,890 --> 00:09:07,880
+Now we want to delete one of the user.
+115
+
+116
+00:09:08,140 --> 00:09:08,500
+So what
+116
+
+117
+00:09:08,500 --> 00:09:09,100
+we can do it.
+117
+
+118
+00:09:09,100 --> 00:09:15,540
+We can delete it from our Burp Suite as well. As well as we can delete it from our browser as well.
+118
+
+119
+00:09:16,750 --> 00:09:23,670
+Let me just copy paste this over here and here, you can see I can just simply hit on delete and it
+119
+
+120
+00:09:23,670 --> 00:09:29,280
+says admin interface only available if logged in as admin or if requested from loopback.
+120
+
+121
+00:09:29,440 --> 00:09:35,820
+Ok, so it basically means that your request should be coming from admin portal only.
+121
+
+122
+00:09:36,490 --> 00:09:36,990
+All right.
+122
+
+123
+00:09:37,000 --> 00:09:41,900
+So let's hit the request from Burp Suite to delete the user.
+123
+
+124
+00:09:41,920 --> 00:09:43,300
+So let me just copy this.
+124
+
+125
+00:09:43,300 --> 00:09:50,680
+And paste it over here. So this basically means that we want to delete a user, which is Carlos and you
+125
+
+126
+00:09:50,680 --> 00:09:52,990
+can see 302 found. Perfect.
+126
+
+127
+00:09:52,990 --> 00:09:55,360
+So we have successfully solved the lab.
+127
+
+128
+00:09:55,900 --> 00:09:57,670
+So what are the key takeaways from this?
+128
+
+129
+00:09:58,420 --> 00:10:07,930
+The first is that we took a vulnerable endpoint that was stock and we ended up entering the localhost
+129
+
+130
+00:10:08,170 --> 00:10:09,880
+to see if it successfully loads.
+130
+
+131
+00:10:10,360 --> 00:10:15,550
+If you put something which does not exist dot com, then it is going to throw error through which we
+131
+
+132
+00:10:15,550 --> 00:10:19,540
+can confirm that it is interacting with the target that we are giving.
+132
+
+133
+00:10:19,930 --> 00:10:24,520
+In this case, we wanted to interact it with its own server.
+133
+
+134
+00:10:25,000 --> 00:10:26,770
+That's why we have given the localhost.
+134
+
+135
+00:10:27,100 --> 00:10:33,510
+Also have given the port, for example, localhost colon 22 to do a port scan as well.
+135
+
+136
+00:10:33,760 --> 00:10:36,120
+But that was not required in this case.
+136
+
+137
+00:10:37,000 --> 00:10:43,930
+So later on we identified when we give localhost we are able to get admin functionality and then we
+137
+
+138
+00:10:43,930 --> 00:10:48,610
+are able to see three users when we hit the endpoint, which is localhost slash
+138
+
+139
+00:10:48,610 --> 00:10:55,930
+admin then we deleted one of the user and we successfully solved the lab in which we are able to perform
+139
+
+140
+00:10:56,230 --> 00:11:01,500
+an admin feature or admin action, which was an authenticated user.
+140
+
+141
+00:11:02,080 --> 00:11:06,790
+So I hope you guys understood how to perform this and how you can do this attack.
+141
+
+142
+00:11:06,820 --> 00:11:07,330
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,860 --> 00:00:03,570
+Hello and welcome, everyone.
+1
+
+2
+00:00:04,440 --> 00:00:10,340
+So in this video, we are going to see SSRF attacks against another backend system.
+2
+
+3
+00:00:11,070 --> 00:00:16,260
+So in the previous video we saw how can we attack our own system?
+3
+
+4
+00:00:16,470 --> 00:00:22,500
+But now we are going to see how can we attack any other backend system which is running into the same
+4
+
+5
+00:00:22,500 --> 00:00:24,310
+network of the organization.
+5
+
+6
+00:00:25,740 --> 00:00:33,510
+So we are going to scan the target machine, which has the admin interface on the port 8080 and we are
+6
+
+7
+00:00:33,510 --> 00:00:37,260
+going to use it to perform more sensitive actions.
+7
+
+8
+00:00:37,950 --> 00:00:38,420
+All right.
+8
+
+9
+00:00:38,850 --> 00:00:45,630
+So to understand this principle, let's see a quick animation so you can see here is the attacker.
+9
+
+10
+00:00:46,500 --> 00:00:53,130
+And there is a vulnerable Web application, which is example dot com, which is vulnerable to SSRF, and
+10
+
+11
+00:00:53,130 --> 00:00:59,830
+there is one more application into the same network, an organization which is awesome app dot com.
+11
+
+12
+00:01:01,230 --> 00:01:08,100
+So the first attacker is going to send a request to example dot com and the request is going to be a
+12
+
+13
+00:01:08,100 --> 00:01:16,230
+GET request of, let's say he wants to access the admin portal on the host example dot com where
+13
+
+14
+00:01:16,230 --> 00:01:19,320
+URL into the body of example dot com.
+14
+
+15
+00:01:20,980 --> 00:01:27,370
+So it is going to reply with a response which is going to be forbidden.
+15
+
+16
+00:01:28,540 --> 00:01:37,090
+Now the attacker is going to send one more request that is a GET request again to the slash admin portal
+16
+
+17
+00:01:37,630 --> 00:01:45,550
+on the host example dot com, but into the URL parameter from the body the attacker specifies awesome
+17
+
+18
+00:01:45,700 --> 00:01:47,770
+app dot com slash admin.
+18
+
+19
+00:01:48,160 --> 00:01:51,580
+where is the actual admin portal hosted.
+19
+
+20
+00:01:52,480 --> 00:01:59,290
+So this time the vulnerable application example dot com is going to send a request to awesome app dot
+20
+
+21
+00:01:59,290 --> 00:02:06,640
+com, which is specified into the main request which has been sent by the attacker and the Web application,
+21
+
+22
+00:02:06,640 --> 00:02:07,540
+which is awesome app
+22
+
+23
+00:02:07,570 --> 00:02:15,940
+dot com in return gives the response to example dot com which it sends back to the attackers browser
+23
+
+24
+00:02:16,030 --> 00:02:17,580
+or attackers screen.
+24
+
+25
+00:02:18,010 --> 00:02:24,880
+And this way the attacker is able to get the sensitive information from the Web application, which
+25
+
+26
+00:02:24,880 --> 00:02:29,830
+is awesome app dot com through the vulnerable example dot com machine.
+26
+
+27
+00:02:30,880 --> 00:02:34,560
+So I hope you guys understood this, now, what is the impact?
+27
+
+28
+00:02:35,450 --> 00:02:41,060
+The impact is exactly the same that we have seen into the previous video in which the attacker is able
+28
+
+29
+00:02:41,060 --> 00:02:46,460
+to exploit the SSRF into the own system of the Web application.
+29
+
+30
+00:02:48,200 --> 00:02:55,190
+So what are the steps that we are going to do, so we will exploit our web application to induce request
+30
+
+31
+00:02:55,730 --> 00:03:01,760
+to the backend server by bypassing the access control, as we saw into the animation, we're going to
+31
+
+32
+00:03:01,760 --> 00:03:09,200
+send request to another server and perform sensitive actions. After we have performed sensitive actions
+32
+
+33
+00:03:09,200 --> 00:03:16,540
+as unauthenticated users not being admin, we will confirm that our attack was successful.
+33
+
+34
+00:03:17,790 --> 00:03:19,210
+So it is the practical time.
+34
+
+35
+00:03:19,230 --> 00:03:26,910
+And let's quickly jump on to see how can we perform this  SSRF attack against another backend systems
+35
+
+36
+00:03:27,090 --> 00:03:28,690
+into the same. You can see over here
+36
+
+37
+00:03:28,860 --> 00:03:34,500
+this is the lab that we are going to solve, which is basic SSRF against another the backend system.
+37
+
+38
+00:03:35,250 --> 00:03:40,890
+Now, let me just click on Access Lab and we can start this lab. Before that
+38
+
+39
+00:03:40,890 --> 00:03:47,790
+you can see the question is to solve the lab, use the stock check functionality to scan the internal
+39
+
+40
+00:03:47,790 --> 00:03:55,560
+network, which is 192 dot 168 dot zero dot x, which means we do not know the target system as it is
+40
+
+41
+00:03:55,560 --> 00:03:56,880
+given as X.
+41
+
+42
+00:03:57,210 --> 00:04:07,080
+So we need to know the target system from the range for the admin interface on which port 8080 is running,
+42
+
+43
+00:04:07,080 --> 00:04:10,320
+and then we are going to delete the user that is Carlos.
+43
+
+44
+00:04:10,890 --> 00:04:16,010
+So let's quickly begin with the lab and you can see this is the Web application.
+44
+
+45
+00:04:16,020 --> 00:04:17,610
+Let me click on view details.
+45
+
+46
+00:04:17,610 --> 00:04:20,200
+And here is the check stock functionality.
+46
+
+47
+00:04:20,940 --> 00:04:25,640
+Let me quickly set up Burp Suite, and I'm going to intercept this request in my Burp.
+47
+
+48
+00:04:26,610 --> 00:04:32,970
+Now for this video, I have used my Burp professional because scanning the range.
+48
+
+49
+00:04:32,970 --> 00:04:37,880
+I'm going to use intruder just not to make the video much longer.
+49
+
+50
+00:04:38,040 --> 00:04:43,380
+I'm going to increase the threads in my intruder so it does the process a little bit faster.
+50
+
+51
+00:04:44,340 --> 00:04:50,370
+You are good to go onto the community edition as well, because we can do the same thing on community
+51
+
+52
+00:04:50,370 --> 00:04:56,240
+edition, but just your request are going to be a little bit slow, but it should do the job for you
+52
+
+53
+00:04:56,250 --> 00:04:57,630
+and it's exactly the same.
+53
+
+54
+00:04:58,640 --> 00:05:05,240
+You just do not get to tune your request, which means you cannot make them faster into the community
+54
+
+55
+00:05:05,240 --> 00:05:05,690
+edition.
+55
+
+56
+00:05:06,170 --> 00:05:11,030
+Other than that, it is exactly the same and works perfectly fine.
+56
+
+57
+00:05:11,870 --> 00:05:12,200
+All right.
+57
+
+58
+00:05:12,200 --> 00:05:14,360
+So this is a request that we have got.
+58
+
+59
+00:05:14,690 --> 00:05:17,000
+So I'm going to send this request to repeater.
+59
+
+60
+00:05:18,260 --> 00:05:23,060
+Now, once it is into the repeater tab, we are going to do the inspection of this request.
+60
+
+61
+00:05:23,510 --> 00:05:29,830
+So you can see this is something which is passing into the parameter, which is stock API equals to.
+61
+
+62
+00:05:29,870 --> 00:05:34,370
+So let us first send this to Decoder and see what exactly is this.
+62
+
+63
+00:05:35,360 --> 00:05:41,660
+And you can see this is the URL which is being passed which says http ip address which is
+63
+
+64
+00:05:41,660 --> 00:05:48,210
+192.168.0.1:8080 product stock check, product ID and store ID.
+64
+
+65
+00:05:48,490 --> 00:05:48,880
+All right.
+65
+
+66
+00:05:49,460 --> 00:05:52,790
+So now we know that into the question.
+66
+
+67
+00:05:52,790 --> 00:05:54,820
+There was admin specified.
+67
+
+68
+00:05:54,830 --> 00:06:03,830
+So we are going to replace this with a IP address, which is that 0.1:8080 slash admin and lets hit
+68
+
+69
+00:06:03,830 --> 00:06:07,800
+go and see if you are able to access the admin portal.
+69
+
+70
+00:06:08,510 --> 00:06:11,130
+So this was just a random hit and trial.
+70
+
+71
+00:06:11,150 --> 00:06:18,890
+And you can see we got an error message on a 400 Bad Request, which says missing parameter, which
+71
+
+72
+00:06:18,890 --> 00:06:23,710
+means obviously this is not the correct machine or the server.
+72
+
+73
+00:06:24,410 --> 00:06:27,340
+So we need to identify it, which is the correct machine.
+73
+
+74
+00:06:27,350 --> 00:06:33,730
+For that, we are going to use intruder and we are going to identify the right IP address from the range.
+74
+
+75
+00:06:34,430 --> 00:06:36,230
+So we just need to select this one.
+75
+
+76
+00:06:36,470 --> 00:06:42,740
+Click on ADD because this is our injection point. Go in payload type and choose numbers.
+76
+
+77
+00:06:43,560 --> 00:06:50,510
+So we are going to choose numbers from 0 to 254 to scan these many IP addresses with the step of
+77
+
+78
+00:06:50,510 --> 00:06:53,420
+one and hit on start attack.
+78
+
+79
+00:06:55,060 --> 00:07:02,260
+Now, when I will hit on start attack, it will automatically start scanning the IP addresses from the
+79
+
+80
+00:07:02,260 --> 00:07:04,720
+range that is 0 to 254.
+80
+
+81
+00:07:05,870 --> 00:07:11,040
+And we are going to sort the results based on the status, as you can see over here.
+81
+
+82
+00:07:12,290 --> 00:07:19,880
+Let's just wait for this to complete and then we are going to observe our results and identify which
+82
+
+83
+00:07:19,880 --> 00:07:23,840
+is the correct IP address of the backend server, which is running.
+83
+
+84
+00:07:24,230 --> 00:07:29,780
+And then we are going to get the admin status or we are going to perform some sensitive actions.
+84
+
+85
+00:07:30,710 --> 00:07:36,670
+As you can see, this is the error that we get on invalid external stop check
+85
+
+86
+00:07:36,680 --> 00:07:43,730
+URL an invalid IP before address when the IP is 192.168.0.0 because that is an invalid IP.
+86
+
+87
+00:07:44,960 --> 00:07:51,050
+You can see here missing parameter error because this is the same IP, which is 192.168.0.1
+87
+
+88
+00:07:51,060 --> 00:07:54,440
+the error message that we have already received.
+88
+
+89
+00:07:55,390 --> 00:08:01,300
+Now, if you notice, all year we have finally got a status code of 200 onto the payload, which is
+89
+
+90
+00:08:01,300 --> 00:08:03,400
+206. Perfect
+90
+
+91
+00:08:03,760 --> 00:08:11,060
+So we have identified that the IP address is 192.168.0.206
+91
+
+92
+00:08:11,560 --> 00:08:16,030
+You can also click on status tab and you will be able to see the 200
+92
+
+93
+00:08:16,030 --> 00:08:17,250
+OK. Perfect.
+93
+
+94
+00:08:17,260 --> 00:08:18,020
+It is over here.
+94
+
+95
+00:08:18,880 --> 00:08:24,370
+Now, this proves that we have identified our target vulnerable system, which is running the admin
+95
+
+96
+00:08:24,370 --> 00:08:25,030
+interface.
+96
+
+97
+00:08:25,510 --> 00:08:26,440
+Let's confirm.
+97
+
+98
+00:08:27,100 --> 00:08:28,510
+But this in repeater. Hit
+98
+
+99
+00:08:28,510 --> 00:08:31,090
+Go and see if we are able to see.
+99
+
+100
+00:08:31,300 --> 00:08:40,120
+And you can see we have the admin portal access and here are the three delete button with administrator
+100
+
+101
+00:08:40,450 --> 00:08:41,600
+Carlos and Wiener. 
+101
+
+102
+00:08:43,330 --> 00:08:48,370
+So we need to delete Carlos to finish this lab and this exercise.
+102
+
+103
+00:08:48,730 --> 00:08:51,270
+So we are going to delete the Carlos from here.
+103
+
+104
+00:08:51,280 --> 00:08:56,740
+As you can see, when I rendered we're able to see the list of users as we have successfully logged
+104
+
+105
+00:08:56,740 --> 00:08:59,520
+in as admin panel and these are the users.
+105
+
+106
+00:08:59,950 --> 00:09:03,880
+So let's just remove this and delete the user, Carlos.
+106
+
+107
+00:09:04,180 --> 00:09:05,410
+And hit go.
+107
+
+108
+00:09:06,430 --> 00:09:06,940
+Perfect.
+108
+
+109
+00:09:06,970 --> 00:09:12,600
+So we are able to delete the user and let's see if we are able to complete our lab and it says congratulations.
+109
+
+110
+00:09:13,560 --> 00:09:13,940
+Awesome.
+110
+
+111
+00:09:14,000 --> 00:09:15,790
+So we have successfully solved our lab.
+111
+
+112
+00:09:16,540 --> 00:09:17,920
+So I hope you guys understood.
+112
+
+113
+00:09:17,920 --> 00:09:19,340
+How did we do this?
+113
+
+114
+00:09:20,230 --> 00:09:21,550
+Let me give a quick recap.
+114
+
+115
+00:09:22,030 --> 00:09:30,400
+First of all, we identified that the stock parameter is vulnerable because it was given into the hints.
+115
+
+116
+00:09:31,250 --> 00:09:37,310
+The next thing that we did was we needed to identify the correct server, which is the backend server
+116
+
+117
+00:09:37,340 --> 00:09:40,010
+or the IP address from the range.
+117
+
+118
+00:09:40,070 --> 00:09:43,000
+So we did that using intruder.
+118
+
+119
+00:09:43,250 --> 00:09:51,750
+So we brute force the IP from 0 to 254 and based on the status code we identified 200
+119
+
+120
+00:09:51,770 --> 00:09:53,270
+OK, on one IP.
+120
+
+121
+00:09:54,160 --> 00:10:00,790
+And we successfully identified that the admin interface or the admin portal was running on that IP address,
+121
+
+122
+00:10:01,570 --> 00:10:03,980
+and then we successfully deleted the user.
+122
+
+123
+00:10:04,690 --> 00:10:06,190
+So I hope you guys understood this.
+123
+
+124
+00:10:06,400 --> 00:10:06,940
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,320 --> 00:00:03,930
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,830 --> 00:00:09,540
+So in this video, you're going to see SSRF, but an interesting test case.
+2
+
+3
+00:00:10,760 --> 00:00:19,760
+We are going to see how when any developer blacklist or block certain characters into any web application
+3
+
+4
+00:00:20,390 --> 00:00:29,120
+just to mitigate any vulnerability like SSRF in this case, how are we going to bypass that and successfully
+4
+
+5
+00:00:29,120 --> 00:00:30,090
+perform the attack.
+5
+
+6
+00:00:31,490 --> 00:00:38,630
+So developers usually use blacklist filters, which is a very bad technique to block certain characters.
+6
+
+7
+00:00:38,630 --> 00:00:46,940
+As a input as many times, security researchers are able to bypass those blacklist filters by using
+7
+
+8
+00:00:47,090 --> 00:00:50,810
+a different versions which can bypass the blacklist.
+8
+
+9
+00:00:52,560 --> 00:01:00,270
+Many time application blocks host name like 127.0.0.1 or localhost.
+9
+
+10
+00:01:01,670 --> 00:01:10,330
+And also, sometimes it blocks sensitive, URL's like /admin, /phpmyadmin, /dashboard.
+10
+
+11
+00:01:10,940 --> 00:01:12,950
+So in that case, what should be done?
+11
+
+12
+00:01:14,280 --> 00:01:21,470
+Let's understand this, using a principle with the help of animation on the left hand side is the attacker
+12
+
+13
+00:01:22,170 --> 00:01:26,890
+and on the right hand side is the vulnerable web application with is example dot com.
+13
+
+14
+00:01:27,660 --> 00:01:34,320
+So the attacker is going to send a request and the request is going to be a GET request of slash admin
+14
+
+15
+00:01:34,320 --> 00:01:40,680
+dashboard, the host example dot com and into the URL parameter, which is the vulnerable parameter
+15
+
+16
+00:01:40,680 --> 00:01:41,430
+into the body.
+16
+
+17
+00:01:41,850 --> 00:01:44,980
+The attacker puts the localhost IP address.
+17
+
+18
+00:01:45,360 --> 00:01:51,090
+Now there is a proper blacklist filter which has been applied by the developer.
+18
+
+19
+00:01:51,420 --> 00:01:57,550
+And when the web application, which is the example dot com, sends the response to the attacker, it
+19
+
+20
+00:01:57,550 --> 00:01:59,670
+says 403 Forbidden.
+20
+
+21
+00:02:00,510 --> 00:02:10,290
+Now, the attacker forms a new GET request in which he is going to put the URL as the integer version
+21
+
+22
+00:02:10,320 --> 00:02:12,570
+of the localhost IP address.
+22
+
+23
+00:02:12,990 --> 00:02:14,820
+And he also uses
+23
+
+24
+00:02:15,800 --> 00:02:21,970
+The URL encoding version of slash into the GET parameter.
+24
+
+25
+00:02:22,590 --> 00:02:26,380
+Now, here there are two things that the attacker has bypassed.
+25
+
+26
+00:02:26,810 --> 00:02:35,240
+First is a blacklist filter of loopback IP or localhost and a blacklist filter of slash by URL encoding
+26
+
+27
+00:02:35,240 --> 00:02:35,480
+it.
+27
+
+28
+00:02:36,080 --> 00:02:40,390
+And the wonderful application successfully gives a 200 OK.
+28
+
+29
+00:02:41,340 --> 00:02:44,690
+I hope you guys understood that the impact remains the same.
+29
+
+30
+00:02:45,630 --> 00:02:52,620
+As we have seen in the previous videos, the steps for this would be so we are going to exploit a Web
+30
+
+31
+00:02:52,620 --> 00:02:57,200
+application to induce request to backend server by bypassing the access control.
+31
+
+32
+00:02:57,960 --> 00:03:02,810
+We will bypass the blacklist filters in order to perform a successful SSRF.
+32
+
+33
+00:03:03,330 --> 00:03:10,440
+And once we have done that, we will perform some sensitive actions as an unauthenticated users and
+33
+
+34
+00:03:10,440 --> 00:03:12,200
+our attack will be successful.
+34
+
+35
+00:03:13,320 --> 00:03:20,130
+So let's jump onto the practical time and see how can we perform SSRF to bypass the blacklist filters?
+35
+
+36
+00:03:22,290 --> 00:03:29,700
+All right, so you can see over here, this is the Web Security Academy SSRF blacklist based input
+36
+
+37
+00:03:29,700 --> 00:03:31,070
+filter Web application.
+37
+
+38
+00:03:31,530 --> 00:03:34,470
+So let's quickly jump on to this product, let's say.
+38
+
+39
+00:03:35,130 --> 00:03:41,460
+And once we are onto this, let's click on check stock and you can see the stock which is available.
+39
+
+40
+00:03:42,090 --> 00:03:44,910
+Quickly go to Burp Suite, Intercept on.
+40
+
+41
+00:03:46,810 --> 00:03:50,320
+And again, click on check stock. Go to Burp
+41
+
+42
+00:03:51,170 --> 00:03:59,780
+And now I'm just going to send this to repeater and into the repeater tab I hit send and you can see we are seeing
+42
+
+43
+00:03:59,780 --> 00:04:00,430
+a response.
+43
+
+44
+00:04:01,070 --> 00:04:08,720
+Now, let's just copy this and send this to Decoder and let's try to decode it and understand what actually
+44
+
+45
+00:04:08,720 --> 00:04:09,670
+it wants to say.
+45
+
+46
+00:04:10,520 --> 00:04:14,350
+And you can see there is a URL which is 
+46
+
+47
+00:04:14,420 --> 00:04:19,780
+stock.weliketoshop.net:8080 product stock check productId.
+47
+
+48
+00:04:19,820 --> 00:04:28,680
+And store Id. Now going back over here, we know that there is a blacklist based input filter.
+48
+
+49
+00:04:28,850 --> 00:04:38,780
+But still, let's give it a try and say we want to scan the localhost and hit send and we got error,
+49
+
+50
+00:04:38,780 --> 00:04:45,320
+which says external stock check block for security reasons, which was expected.
+50
+
+51
+00:04:45,740 --> 00:04:46,310
+All right.
+51
+
+52
+00:04:46,310 --> 00:04:48,440
+So now let's go back over here.
+52
+
+53
+00:04:50,050 --> 00:04:56,520
+And there are very awesome bypasses for SSRF, as you can see one of it over here.
+53
+
+54
+00:04:57,360 --> 00:05:06,580
+Wherein we can just make the loopback IP address, which is 127.0.0.1 to 127.1
+54
+
+55
+00:05:06,880 --> 00:05:07,630
+And you can see.
+55
+
+56
+00:05:08,550 --> 00:05:12,810
+A lot of security researchers has posted this bypass.
+56
+
+57
+00:05:13,140 --> 00:05:18,540
+Now, let's just try if this works or not, into your browser itself, I'm just going to put it over
+57
+
+58
+00:05:18,540 --> 00:05:23,580
+here and hit enter and you can see it converts to a loopback IP address automatically.
+58
+
+59
+00:05:24,420 --> 00:05:32,700
+So the behavior of the browser is also the similar in which it converts this IP address to a loopback
+59
+
+60
+00:05:32,700 --> 00:05:33,060
+IP.
+60
+
+61
+00:05:35,890 --> 00:05:36,430
+Perfect.
+61
+
+62
+00:05:36,880 --> 00:05:43,240
+Now, if you want to read more about how this works, you can read more about it.
+62
+
+63
+00:05:43,360 --> 00:05:51,280
+I'm going to give the reference of inet_aton and you can just read about why this behaves in this
+63
+
+64
+00:05:51,280 --> 00:05:51,760
+manner.
+64
+
+65
+00:05:52,690 --> 00:05:53,130
+All right.
+65
+
+66
+00:05:53,140 --> 00:05:58,600
+So now as we know this, we are going to take use of this.
+66
+
+67
+00:05:58,600 --> 00:06:07,120
+And instead of localhost, let me show you what the loopback IP address as well as it is blocking.
+67
+
+68
+00:06:07,390 --> 00:06:11,840
+Let's remove this and just add one, as we have seen into the browser.
+68
+
+69
+00:06:12,160 --> 00:06:19,380
+This works as a local host or loopback IP as our Chrome browser is redirecting our request to the local
+69
+
+70
+00:06:19,600 --> 00:06:20,800
+IP address hit send.
+70
+
+71
+00:06:21,400 --> 00:06:25,170
+And you can see we are successfully able to bypass our first mitigation.
+71
+
+72
+00:06:25,780 --> 00:06:26,260
+Perfect.
+72
+
+73
+00:06:26,740 --> 00:06:36,310
+Now we want the admin portal and hit send and you can see this is the second mitigation or the blacklist
+73
+
+74
+00:06:36,310 --> 00:06:43,090
+filter in which the developer has put a blacklist filter of the keyword, which is admin, and we are
+74
+
+75
+00:06:43,090 --> 00:06:47,660
+not able to send a successful request as it is getting blocked.
+75
+
+76
+00:06:48,610 --> 00:06:49,410
+Now what to do?
+76
+
+77
+00:06:50,290 --> 00:06:57,500
+So we are going to see one more awesome way to bypass this, which is URL encoding.
+77
+
+78
+00:06:57,550 --> 00:07:01,180
+So we are going to URL URL input slash
+78
+
+79
+00:07:02,150 --> 00:07:06,760
+As you can see, it URL encodes to %2F
+79
+
+80
+00:07:07,460 --> 00:07:17,850
+Let's try if we can bypass it, using %2F hit send and you can see it still blocks. No issues.
+80
+
+81
+00:07:18,320 --> 00:07:19,790
+Let's do a double encoding.
+81
+
+82
+00:07:20,960 --> 00:07:25,280
+So we are going to encode %2F again.
+82
+
+83
+00:07:26,630 --> 00:07:30,310
+And let's see, yeah, so now let's try if this works.
+83
+
+84
+00:07:31,210 --> 00:07:38,060
+So let's go to Burp again and paste it over here.
+84
+
+85
+00:07:38,080 --> 00:07:41,330
+Hit send and you can see it, it's still blocking.
+85
+
+86
+00:07:41,980 --> 00:07:42,490
+All right.
+86
+
+87
+00:07:43,000 --> 00:07:48,970
+So it may be a case that they are just blocking the key word, which is admin.
+87
+
+88
+00:07:49,630 --> 00:07:56,380
+So let's just make it capital and see if we are able to bypass it and hit send.
+88
+
+89
+00:07:57,310 --> 00:08:04,450
+And you can see, we are successfully able to bypass the SSRF with blacklist based input filter
+89
+
+90
+00:08:05,300 --> 00:08:14,260
+web application, so let's see if we are able to see admin panel and we are able to see the successful
+90
+
+91
+00:08:14,530 --> 00:08:15,860
+admin panel.
+91
+
+92
+00:08:16,180 --> 00:08:16,600
+Perfect.
+92
+
+93
+00:08:16,840 --> 00:08:18,250
+Let me just render this for you.
+93
+
+94
+00:08:22,460 --> 00:08:26,660
+And you can see we have the access to admin panel now.
+94
+
+95
+00:08:27,800 --> 00:08:32,060
+As you can see, over here, so we are able to bypass the first mitigation.
+95
+
+96
+00:08:32,150 --> 00:08:33,980
+Now let's see for the second one.
+96
+
+97
+00:08:34,100 --> 00:08:40,730
+So when I hit send, you can see we get blocked for security reasons because this has been blocked as
+97
+
+98
+00:08:40,730 --> 00:08:42,570
+an blacklist filter.
+98
+
+99
+00:08:42,590 --> 00:08:47,720
+So let's just make this capital and let's see if you are able to bypass this and hit send.
+99
+
+100
+00:08:48,080 --> 00:08:50,680
+And you can see we are able to successfully bypass this.
+100
+
+101
+00:08:51,050 --> 00:08:55,280
+Let's set for admin and you can see we are able to delete two users.
+101
+
+102
+00:08:55,640 --> 00:08:57,470
+Let us just simply copy this.
+102
+
+103
+00:08:57,470 --> 00:09:00,760
+Go here and add it over here and hit send.
+103
+
+104
+00:09:01,160 --> 00:09:04,600
+And you can see we have successfully able to solve the lab.
+104
+
+105
+00:09:05,360 --> 00:09:07,280
+There is another way to do it as well.
+105
+
+106
+00:09:08,600 --> 00:09:09,050
+Perfect.
+106
+
+107
+00:09:10,580 --> 00:09:12,980
+Now, one more thing that you should know guys
+107
+
+108
+00:09:12,980 --> 00:09:17,540
+is you can also use this as a bypass.
+108
+
+109
+00:09:18,080 --> 00:09:26,030
+Also, if you go to the IPv4 converter and you put your localhost orloopback IP over here and
+109
+
+110
+00:09:26,030 --> 00:09:29,670
+you hit and convert, there are different formats that you can see here.
+110
+
+111
+00:09:29,870 --> 00:09:39,740
+One of the format is the integer format and you can also use the integer format to bypass a lot of SSRF
+111
+
+112
+00:09:39,740 --> 00:09:41,120
+based filters.
+112
+
+113
+00:09:41,540 --> 00:09:48,290
+For instance, you can see we have successfully able to get our results and it looks perfectly fine.
+113
+
+114
+00:09:50,610 --> 00:10:00,330
+So now let's move ahead and let's perform a sensitive action in which we are going to delete a user.
+114
+
+115
+00:10:03,570 --> 00:10:11,130
+So now we are also going to URL encode the A parameter into this, as we saw it was not working.
+115
+
+116
+00:10:11,880 --> 00:10:14,160
+So now to URL encode this
+116
+
+117
+00:10:14,160 --> 00:10:17,970
+we can use any free URL encoder available online.
+117
+
+118
+00:10:18,330 --> 00:10:20,760
+So I have already URL encoded it.
+118
+
+119
+00:10:20,760 --> 00:10:24,180
+And let me put it over here and show you how does it looks like.
+119
+
+120
+00:10:24,780 --> 00:10:31,620
+Let me click on my decode and you can see finally it looks something like this, which is the bypass
+120
+
+121
+00:10:31,620 --> 00:10:35,440
+for the localhost or the loopback IP address slash admin.
+121
+
+122
+00:10:36,210 --> 00:10:42,020
+This part is the same that we have been till now in all our SSRF videos.
+122
+
+123
+00:10:42,030 --> 00:10:43,910
+So we are using the same endpoint.
+123
+
+124
+00:10:44,640 --> 00:10:46,490
+So let's see if we are able to complete it.
+124
+
+125
+00:10:46,500 --> 00:10:50,700
+So let's just hit send and you can see 302 found.
+125
+
+126
+00:10:50,880 --> 00:10:55,810
+Let's go to our application and you can see congratulations, you have solved the lab.
+126
+
+127
+00:10:56,340 --> 00:11:01,830
+So I hope you guys understood how we are able to successfully solve this blacklist filter lab
+127
+
+128
+00:11:01,830 --> 00:11:03,210
+of SSRF. Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,090 --> 00:00:03,490
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,360 --> 00:00:10,240
+So in this video, we are going to see SSRF attacks with whitelist based input filters.
+2
+
+3
+00:00:11,170 --> 00:00:18,280
+So some developers use whitelist filters to block certain characters as an input and only allows certain
+3
+
+4
+00:00:18,280 --> 00:00:19,570
+characters and numbers
+4
+
+5
+00:00:21,350 --> 00:00:22,770
+into the Web application.
+5
+
+6
+00:00:23,540 --> 00:00:29,660
+Apart from that, if any of the characters are being supplied, the request has been rejected or it
+6
+
+7
+00:00:29,660 --> 00:00:31,130
+does not get processed.
+7
+
+8
+00:00:32,120 --> 00:00:40,730
+Many time applications block host names like the loopback IP address or localhost or even some time special characters
+8
+
+9
+00:00:41,570 --> 00:00:49,460
+or sometimes sensitive URL's like slash Admin or admin @, which can be used for embedded credentials
+9
+
+10
+00:00:49,850 --> 00:00:51,230
+or hash.
+10
+
+11
+00:00:52,700 --> 00:00:59,660
+Let us understand the principle of a whitelist filter bypass using SSRF with the help of an animation
+11
+
+12
+00:01:00,440 --> 00:01:05,720
+you can see on your left is the attacker and on the right is the vulnerable web application, which
+12
+
+13
+00:01:05,720 --> 00:01:06,920
+is example dot com.
+13
+
+14
+00:01:07,860 --> 00:01:14,610
+The attacker can sends a request of a get slash admin dashboard, the host is example dot com and into the
+14
+
+15
+00:01:14,610 --> 00:01:22,050
+body parameter, there is a URL which says loopback IP address, 127.0.0.1
+15
+
+16
+00:01:22,530 --> 00:01:27,980
+And the server sends a response to the error 403 Forbidden.
+16
+
+17
+00:01:28,590 --> 00:01:37,680
+Now, the attacker bypasses this whitelist of filtering in which the Web server, which is example
+17
+
+18
+00:01:37,680 --> 00:01:43,620
+dot com checks, if there is a loopbact IP address which is passed.
+18
+
+19
+00:01:44,010 --> 00:01:50,700
+But in case we embed that using the embedded credentials technique, then we are able to bypass it.
+19
+
+20
+00:01:51,670 --> 00:01:54,510
+And we successfully get a 200 OK.
+20
+
+21
+00:01:55,830 --> 00:02:01,440
+So what is the impact. Impact is similar to the previous videos that we have seen, that attacker
+21
+
+22
+00:02:01,440 --> 00:02:08,190
+is able to get sensitive actions onto the server and he can bypass access control and authentication
+22
+
+23
+00:02:08,190 --> 00:02:12,200
+to protected resources and also get access to that computer.
+23
+
+24
+00:02:14,230 --> 00:02:19,780
+What are the steps that we are going to perform, we are going to bypass the whitelist filters in order
+24
+
+25
+00:02:19,780 --> 00:02:26,260
+to perform the SSRF, if we are successful to perform sensitive actions as an unauthenticated user then 
+25
+
+26
+00:02:26,260 --> 00:02:27,580
+our attack is successful.
+26
+
+27
+00:02:28,640 --> 00:02:33,950
+So it is a practical time and let's quickly jump into the practical and understand how can we bypass
+27
+
+28
+00:02:33,950 --> 00:02:41,150
+the whitelist based filtering, there is the application which is SSRF with whitelist based input
+28
+
+29
+00:02:41,150 --> 00:02:41,540
+filter.
+29
+
+30
+00:02:42,230 --> 00:02:46,090
+Let's quickly start the application and solve the lab.
+30
+
+31
+00:02:46,520 --> 00:02:53,580
+We have to change the stock check URL in order to access the admin interface and http://localhost/
+31
+
+32
+00:02:53,600 --> 00:02:54,070
+admin.
+32
+
+33
+00:02:54,080 --> 00:02:59,300
+There is no port specified, so it is running on the default port as it is mentioned.
+33
+
+34
+00:02:59,300 --> 00:03:05,000
+We will assume it is running on port 80 and we have to delete the user, which is Carlos.
+34
+
+35
+00:03:05,510 --> 00:03:08,340
+Developer has also deployed an anti-SSRF defense.
+35
+
+36
+00:03:08,480 --> 00:03:11,450
+So we are going to bypass that as well.
+36
+
+37
+00:03:12,020 --> 00:03:12,460
+All right.
+37
+
+38
+00:03:12,470 --> 00:03:15,770
+So our Web application has successfully deployed.
+38
+
+39
+00:03:16,270 --> 00:03:23,900
+Let's quickly jump over here and let's click on this couple umbrella's picture and let's quickly click
+39
+
+40
+00:03:23,900 --> 00:03:25,040
+on check stock.
+40
+
+41
+00:03:25,460 --> 00:03:27,750
+And you can see we are able to get a response.
+41
+
+42
+00:03:28,370 --> 00:03:34,580
+Now, let's capture this request into our Burp Suite for further inspection.
+42
+
+43
+00:03:35,410 --> 00:03:38,320
+So let me just skip these requests.
+43
+
+44
+00:03:38,350 --> 00:03:46,570
+No, I do not want them again, let's click over here, check stock and wait for the link at the request
+44
+
+45
+00:03:46,570 --> 00:03:47,200
+over here.
+45
+
+46
+00:03:47,200 --> 00:03:49,220
+And we have got it. Now
+46
+
+47
+00:03:49,510 --> 00:03:55,670
+the request is into our repeater tab, and this is what we get into the stock API parameter.
+47
+
+48
+00:03:56,160 --> 00:03:59,860
+Let's quickly send this to Decoder and see what is it.
+48
+
+49
+00:04:00,340 --> 00:04:07,780
+And you can see, there is a URL which says stock.weliketoshop.net product
+49
+
+50
+00:04:08,380 --> 00:04:11,580
+stock check, product ID and store ID.
+50
+
+51
+00:04:12,310 --> 00:04:16,290
+But as we mentioned into the question, there was no port 8080.
+51
+
+52
+00:04:16,300 --> 00:04:21,370
+So we are not going to consider it anymore and make all our payloads on port
+52
+
+53
+00:04:21,370 --> 00:04:22,150
+8080 only.
+53
+
+54
+00:04:24,080 --> 00:04:31,040
+Ok, so first, let's try the basic one that we're going to put on localhost and hit send, it was obvious
+54
+
+55
+00:04:31,040 --> 00:04:37,340
+that it is going to throw error. External stop check host must be
+55
+
+56
+00:04:37,380 --> 00:04:39,970
+stock.weliketoshop.net
+56
+
+57
+00:04:40,520 --> 00:04:45,760
+So it says it wants the host, which is stock.weliketoshop.net
+57
+
+58
+00:04:46,070 --> 00:04:47,720
+It is not going to take this.
+58
+
+59
+00:04:47,720 --> 00:04:51,860
+They have waitlisted this and we need this particular
+59
+
+60
+00:04:51,860 --> 00:04:53,840
+URL into our payload.
+60
+
+61
+00:04:53,960 --> 00:04:54,380
+All right.
+61
+
+62
+00:04:54,380 --> 00:04:56,540
+So let's do something like this.
+62
+
+63
+00:04:56,900 --> 00:04:59,260
+Let's make a subdomain out of it and let's see.
+63
+
+64
+00:04:59,900 --> 00:05:03,470
+And you can see we still get an error, which means this is not working.
+64
+
+65
+00:05:04,130 --> 00:05:04,480
+All right.
+65
+
+66
+00:05:04,490 --> 00:05:06,100
+So lets make here @
+66
+
+67
+00:05:07,070 --> 00:05:11,030
+And you can see we got a different error that says missing parameter.
+67
+
+68
+00:05:11,480 --> 00:05:18,380
+And guys if you tried this into your web browser, writing anything @ something it is going
+68
+
+69
+00:05:18,380 --> 00:05:24,980
+to redirect after whatever is written after the @, if you want to see.
+69
+
+70
+00:05:25,100 --> 00:05:26,920
+Let me just show you as well.
+70
+
+71
+00:05:27,350 --> 00:05:39,870
+Let's go to Google dot com or let's say Yahoo dot com, @ Google dot com.
+71
+
+72
+00:05:40,250 --> 00:05:43,190
+So it is going to redirect to Google dot com.
+72
+
+73
+00:05:43,580 --> 00:05:44,090
+Perfect.
+73
+
+74
+00:05:45,060 --> 00:05:46,970
+Let's get back over here.
+74
+
+75
+00:05:49,870 --> 00:05:55,120
+And now let's say we write admin @ maybe we are able to bypass it.
+75
+
+76
+00:05:55,240 --> 00:05:55,710
+No.
+76
+
+77
+00:05:56,260 --> 00:06:00,470
+So let's change this and let's try one more thing over here.
+77
+
+78
+00:06:00,490 --> 00:06:02,230
+Let's keep it to localhost again.
+78
+
+79
+00:06:03,320 --> 00:06:06,810
+And let us simply remove all this stuff.
+79
+
+80
+00:06:06,860 --> 00:06:07,910
+We do not want it.
+80
+
+81
+00:06:08,710 --> 00:06:14,670
+Let's try just with port 8080 and it and it gives the same error, which is missing parameter.
+81
+
+82
+00:06:15,920 --> 00:06:23,180
+Now, when we remove 8080 the error has changed and it is giving an internal server error.
+82
+
+83
+00:06:24,450 --> 00:06:32,280
+Let us look at it again and you can see missing parameter, let's add a slash admin over here and observe
+83
+
+84
+00:06:32,280 --> 00:06:33,090
+what happens.
+84
+
+85
+00:06:33,090 --> 00:06:36,450
+And you can see we get the same error and it is not working.
+85
+
+86
+00:06:36,690 --> 00:06:44,520
+Now, what we can do is we can add a hash over here, path fragment and observe what happens.
+86
+
+87
+00:06:45,120 --> 00:06:48,480
+Let hit send and you can see it worked.
+87
+
+88
+00:06:49,230 --> 00:06:50,070
+It worked
+88
+
+89
+00:06:50,390 --> 00:06:57,150
+when we have double encoded our path fragment, that was hash.
+89
+
+90
+00:06:57,180 --> 00:07:03,090
+So you need to keep in mind that hash was not working, but when we encoded it basically double encoded,
+90
+
+91
+00:07:03,090 --> 00:07:03,600
+it worked.
+91
+
+92
+00:07:04,440 --> 00:07:05,880
+And you can see the response.
+92
+
+93
+00:07:06,330 --> 00:07:10,720
+We have got the endpoint, which is the delete username.
+93
+
+94
+00:07:11,280 --> 00:07:11,760
+Perfect.
+94
+
+95
+00:07:12,510 --> 00:07:14,700
+Now let's send this to Decoder.
+95
+
+96
+00:07:15,000 --> 00:07:17,130
+And you can see when we
+96
+
+97
+00:07:18,680 --> 00:07:25,440
+smart decode this, and you can see it just comes back to the path fragment, which is hash.
+97
+
+98
+00:07:26,120 --> 00:07:30,110
+So this is first and this is second encoding.
+98
+
+99
+00:07:32,460 --> 00:07:32,950
+Perfect.
+99
+
+100
+00:07:33,270 --> 00:07:40,530
+Now, let's copy this end point as we need to delete the user, which is Carlos, add it over here and
+100
+
+101
+00:07:40,530 --> 00:07:41,370
+hit send.
+101
+
+102
+00:07:42,880 --> 00:07:49,630
+Just remove it and hit send before hitting send, let's see that we are locked in into the admin
+102
+
+103
+00:07:49,630 --> 00:07:53,720
+panel and these are all the users hit send and perfect.
+103
+
+104
+00:07:54,100 --> 00:07:56,400
+We should have been solved our lab.
+104
+
+105
+00:07:56,410 --> 00:08:02,950
+And you can see we are successfully able to solve the lab with the help of bypassing of a white listing
+105
+
+106
+00:08:02,950 --> 00:08:03,970
+based input filter.
+106
+
+107
+00:08:04,150 --> 00:08:05,240
+I hope you guys understood.
+107
+
+108
+00:08:05,800 --> 00:08:06,370
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,750 --> 00:00:03,090
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:03,960 --> 00:00:08,920
+So in this video, we are going to perform SSRF with Open Redirect.
+2
+
+3
+00:00:08,940 --> 00:00:11,760
+So basically we are going to chain two vulnerabilities.
+3
+
+4
+00:00:12,480 --> 00:00:19,080
+First, we're going to identify your open redirect vulnerability onto a web application, and then we
+4
+
+5
+00:00:19,080 --> 00:00:21,690
+are going to escalate it to SSRF.
+5
+
+6
+00:00:22,680 --> 00:00:28,920
+So you should know whenever you identify open redirects  Web applications, you try to
+6
+
+7
+00:00:28,920 --> 00:00:33,710
+escalate it to SSRF without just reporting open redirects.
+7
+
+8
+00:00:34,590 --> 00:00:40,650
+By doing this, you are increasing the severity of the target, vulnerability that you have identified,
+8
+
+9
+00:00:41,040 --> 00:00:46,780
+which means you are increasing the reward or the bounty for the bug that you have found.
+9
+
+10
+00:00:47,970 --> 00:00:48,440
+All right.
+10
+
+11
+00:00:48,450 --> 00:00:49,910
+So let's quickly solve this lab.
+11
+
+12
+00:00:49,920 --> 00:00:52,120
+So I'm just going to click on access the lab.
+12
+
+13
+00:00:52,810 --> 00:00:56,100
+Remember, we have to identify two vulnerabilities first.
+13
+
+14
+00:00:56,490 --> 00:01:01,410
+So first we are going to see open redirect and then we are going to escalate it to SSRF.
+14
+
+15
+00:01:02,380 --> 00:01:09,250
+Now, let's quickly click on one of the product, as you can see this product, let's click on check
+15
+
+16
+00:01:09,250 --> 00:01:13,120
+stock and we are able to see the successful output over here.
+16
+
+17
+00:01:13,720 --> 00:01:20,410
+Now, I generally see for open redirect onto a target application in the login pages because at that
+17
+
+18
+00:01:20,410 --> 00:01:24,000
+time it logins and moves to another portal.
+18
+
+19
+00:01:24,370 --> 00:01:32,110
+Maybe if you have logged in, it moves to log in dot or portal dot or something dot example dot com
+19
+
+20
+00:01:32,110 --> 00:01:35,380
+slash profile or account or dashboard.
+20
+
+21
+00:01:36,280 --> 00:01:42,010
+Second thing is choose on some of the links onto the target application, which it may redirect.
+21
+
+22
+00:01:42,010 --> 00:01:48,240
+As you can see here onto the bottom right written list or next product.
+22
+
+23
+00:01:48,250 --> 00:01:51,310
+So I'm going to click on next product and I'm going to see the link.
+23
+
+24
+00:01:51,850 --> 00:01:53,230
+So I have copied the link.
+24
+
+25
+00:01:53,350 --> 00:01:55,560
+Let me just paste it over here.
+25
+
+26
+00:01:56,420 --> 00:01:59,880
+And I will show you how does it looks like.
+26
+
+27
+00:02:00,050 --> 00:02:04,460
+So let me just copy the link, go here. paste it over here and here
+27
+
+28
+00:02:04,460 --> 00:02:12,440
+you can see there is a parameter which is path equals to which is pointing to slash product question mark
+28
+
+29
+00:02:12,440 --> 00:02:14,080
+product id equals to three.
+29
+
+30
+00:02:14,480 --> 00:02:20,760
+So it is asking for path from the server, which is slash product directory.
+30
+
+31
+00:02:21,410 --> 00:02:21,820
+All right.
+31
+
+32
+00:02:22,160 --> 00:02:27,980
+So we are just going to remove this and let's say I type localhost over here and we are going to see
+32
+
+33
+00:02:27,980 --> 00:02:29,570
+does it redirect properly?
+33
+
+34
+00:02:30,020 --> 00:02:37,730
+And you can see it says not found because it is trying to identify and see if there is anything, any file
+34
+
+35
+00:02:37,730 --> 00:02:40,220
+or any directory with the name of localhost.
+35
+
+36
+00:02:40,220 --> 00:02:42,650
+And it gave error, which is not found.
+36
+
+37
+00:02:42,980 --> 00:02:48,940
+And you can see the new URL that has been generated, which is now the single URL which is
+37
+
+38
+00:02:48,950 --> 00:02:54,950
+example dot com ttill here, the web security academy dot net slash product slash localhost, which
+38
+
+39
+00:02:54,950 --> 00:02:59,410
+means it was identifying the product id that was three and it is loading over here.
+39
+
+40
+00:03:00,710 --> 00:03:01,290
+Perfect.
+40
+
+41
+00:03:01,310 --> 00:03:07,580
+So we can see that something is fishy over here where it is identifying the product and it is loading
+41
+
+42
+00:03:07,580 --> 00:03:09,060
+it which is the spot.
+42
+
+43
+00:03:09,680 --> 00:03:10,190
+So.
+43
+
+44
+00:03:10,370 --> 00:03:18,440
+All right, let's quickly identify that if we can find open an redirect or because we have already seen
+44
+
+45
+00:03:18,440 --> 00:03:19,890
+it is redirecting some where.
+45
+
+46
+00:03:20,480 --> 00:03:22,520
+So let's quickly get it.
+46
+
+47
+00:03:22,520 --> 00:03:27,670
+And I'm going to send it to repeater and then we are going to perform SSRF over there.
+47
+
+48
+00:03:28,100 --> 00:03:35,330
+Before that, let's quickly send this into the repeater, because this is stock API parameter where
+48
+
+49
+00:03:35,330 --> 00:03:37,490
+we have to identify the SSRF.
+49
+
+50
+00:03:38,360 --> 00:03:40,880
+Now you can see the encoded part, which is this part.
+50
+
+51
+00:03:41,390 --> 00:03:46,580
+I have decoded it and it is simply nothing but the product and the path.
+51
+
+52
+00:03:47,090 --> 00:03:51,800
+And you can see when I paste the product and path the URL that we have got from there.
+52
+
+53
+00:03:53,290 --> 00:03:59,810
+It tries to redirect and it says invalid external stock check, URL invalid URL.
+53
+
+54
+00:03:59,920 --> 00:04:03,570
+So we have got error, which is invalid, external stock check URL.
+54
+
+55
+00:04:03,730 --> 00:04:09,190
+So now we are going to add a slash over here and let's see if we get another error.
+55
+
+56
+00:04:09,310 --> 00:04:11,820
+And you can see missing parameter path.
+56
+
+57
+00:04:12,220 --> 00:04:15,670
+So it requires the parameter, which is path but we can see
+57
+
+58
+00:04:15,670 --> 00:04:17,620
+we have already given the parameter path.
+58
+
+59
+00:04:17,770 --> 00:04:21,790
+So there may be something that the developer is validating in the backend.
+59
+
+60
+00:04:21,790 --> 00:04:25,600
+So let's just remove this and or encode this simply.
+60
+
+61
+00:04:28,240 --> 00:04:35,290
+So let's encode it so we have encoded it and let's pass it over here and send do we get the error? No
+61
+
+62
+00:04:35,710 --> 00:04:42,460
+And you can see we have successfully loaded the web page. Perfect and we are also able to see the admin
+62
+
+63
+00:04:42,460 --> 00:04:43,510
+panel over here.
+63
+
+64
+00:04:43,750 --> 00:04:46,090
+So which means we have successfully bypassed.
+64
+
+65
+00:04:46,420 --> 00:04:51,030
+And the trick over here was URL encoding the end parameter.
+65
+
+66
+00:04:51,040 --> 00:04:55,610
+And you can see when I render this, it shows us the admin panel.
+66
+
+67
+00:04:55,840 --> 00:04:56,350
+Perfect.
+67
+
+68
+00:04:57,040 --> 00:05:00,040
+Now, to finish this lab, we need to see that.
+68
+
+69
+00:05:00,040 --> 00:05:01,360
+What do we have to do?
+69
+
+70
+00:05:01,570 --> 00:05:09,430
+So under the question there was that we have to delete one of the user and we have to navigate and move
+70
+
+71
+00:05:09,430 --> 00:05:11,310
+to one of the IP address.
+71
+
+72
+00:05:11,860 --> 00:05:13,380
+So let's do that quickly.
+72
+
+73
+00:05:13,390 --> 00:05:17,140
+Let's go back to the question and let's see.
+73
+
+74
+00:05:18,080 --> 00:05:19,270
+What do we have to do?
+74
+
+75
+00:05:20,450 --> 00:05:28,220
+All right, so you're you can see we have to go to the IP address, which is this and /admin. So let's
+75
+
+76
+00:05:28,220 --> 00:05:31,940
+just copy this go over here and paste it over here and hit send.
+76
+
+77
+00:05:32,420 --> 00:05:39,320
+And you can see we are able to see the admin panel as well as we are able to see the user, Carlos,
+77
+
+78
+00:05:39,620 --> 00:05:41,160
+and the request to delete it.
+78
+
+79
+00:05:41,180 --> 00:05:46,640
+So let's just quickly fire that, copy this part and paste it over here and hit send.
+79
+
+80
+00:05:47,300 --> 00:05:51,810
+And you can see done. Here we are able to successfully solve over lab.
+80
+
+81
+00:05:51,830 --> 00:05:52,350
+Perfect.
+81
+
+82
+00:05:52,550 --> 00:05:58,070
+So I hope you guys understood how we changed the open redirect vulnerability with SSRF.
+82
+
+83
+00:05:58,160 --> 00:06:05,120
+So first of all, we identified that one of the parameter was vulnerable and was insecurely redirecting to
+83
+
+84
+00:06:05,120 --> 00:06:05,770
+somewhere else.
+84
+
+85
+00:06:05,780 --> 00:06:11,390
+So we redirected it to one of our IP address that was given to us into the question.
+85
+
+86
+00:06:11,630 --> 00:06:17,030
+And we were able to see the admin portal and we successfully perform the sensitive action of deleting
+86
+
+87
+00:06:17,030 --> 00:06:17,540
+a user.
+87
+
+88
+00:06:17,990 --> 00:06:19,260
+So I hope you guys understood.
+88
+
+89
+00:06:19,280 --> 00:06:19,850
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,610 --> 00:00:02,890
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:03,700 --> 00:00:09,870
+So in this video, we're going to discuss about SSRF attacks with the help of MPEG.
+2
+
+3
+00:00:10,750 --> 00:00:19,940
+So what is it actually so we can also perform SSRF attacks using a specific format for video files.
+3
+
+4
+00:00:20,590 --> 00:00:28,210
+So how are we going to do this so we can induce a SSRF using the MPEG video payload embedded inside
+4
+
+5
+00:00:28,210 --> 00:00:28,570
+of it.
+5
+
+6
+00:00:29,620 --> 00:00:35,190
+Many times application doesn't validate sensitive input or even special characters.
+6
+
+7
+00:00:35,830 --> 00:00:44,320
+So we will use this and perform SSRF onto a live web application and exfiltrate some of the sensitive information
+7
+
+8
+00:00:44,470 --> 00:00:45,760
+from that website.
+8
+
+9
+00:00:47,490 --> 00:00:53,790
+Now to understand this, let's quickly jump into this principle, so here I'm going to explain you
+9
+
+10
+00:00:53,790 --> 00:00:55,200
+with the help of animation.
+10
+
+11
+00:00:55,440 --> 00:00:58,350
+So on the left hand side is the attacker machine.
+11
+
+12
+00:00:58,680 --> 00:01:03,260
+On the right hand side, there's the vulnerable web application, which is example dot com.
+12
+
+13
+00:01:04,050 --> 00:01:08,310
+So the attacker is going to send a request, which is a POST request.
+13
+
+14
+00:01:08,310 --> 00:01:13,830
+Let's say the request is to convert the video file from one format to another format.
+14
+
+15
+00:01:14,400 --> 00:01:21,150
+As you can see, the request is a POST request to an endpoint, which is convert.php, the host is example
+15
+
+16
+00:01:21,150 --> 00:01:21,690
+dot com.
+16
+
+17
+00:01:21,930 --> 00:01:31,560
+And the content is, for instance, we have put /etc/passwd. When this request goes to the web application,
+17
+
+18
+00:01:31,860 --> 00:01:38,480
+the web application in turn send the response to the attacker in which it says 200 OK
+18
+
+19
+00:01:39,000 --> 00:01:47,970
+And attacker is able to successfully get the sensitive content of /etc/passwd from the vulnerable application
+19
+
+20
+00:01:47,970 --> 00:01:48,410
+server.
+20
+
+21
+00:01:49,530 --> 00:01:51,000
+But what is the impact of this?
+21
+
+22
+00:01:51,730 --> 00:01:58,080
+The attacker is able to bypass the access control and authentication mechanism to get access to the
+22
+
+23
+00:01:58,080 --> 00:01:59,370
+protected resources.
+23
+
+24
+00:02:00,180 --> 00:02:06,270
+In this animation, we have understood how the attacker is able to get hold of the /etc/passwd file.
+24
+
+25
+00:02:06,840 --> 00:02:12,950
+But if he knows the internal structure, he can also get access to any other sensitive file as well.
+25
+
+26
+00:02:14,620 --> 00:02:20,950
+The attacker can similarly perform sensitive actions onto the target web application, and he or she
+26
+
+27
+00:02:20,950 --> 00:02:26,230
+may also be able to execute commands to scan the internal ports and the network.
+27
+
+28
+00:02:27,250 --> 00:02:30,940
+Now, what are the steps we are going to perform to achieve this SSRF?
+28
+
+29
+00:02:31,690 --> 00:02:37,520
+So we will exploit a web app to induce a request to the server and retrieve sensitive information.
+29
+
+30
+00:02:38,680 --> 00:02:44,680
+In this video, we are going to perform a sensitive action as an unauthenticated user and we are going
+30
+
+31
+00:02:44,680 --> 00:02:46,800
+to download sensitive files from the machine.
+31
+
+32
+00:02:46,930 --> 00:02:54,820
+For instance, /etc/passwd file and if our attack is successful, then we will have SSRF on endpoint
+32
+
+33
+00:02:54,820 --> 00:02:56,230
+one of the web application.
+33
+
+34
+00:02:57,750 --> 00:03:04,260
+So it is a practical time and lets quickly jump on to the practical to see to see how are we going to
+34
+
+35
+00:03:04,260 --> 00:03:05,070
+perform this?
+35
+
+36
+00:03:06,800 --> 00:03:13,130
+Yes, so first you need to come to this GitHub repository, and after you are onto this GitHub repository,
+36
+
+37
+00:03:13,130 --> 00:03:19,560
+we have to download this so you can choose an option to download or also you can perform a git clone.
+37
+
+38
+00:03:20,000 --> 00:03:23,570
+So I'm going to git clone into my terminal.
+38
+
+39
+00:03:23,780 --> 00:03:27,740
+So I'm just going to type git clone and the link that we have copied.
+39
+
+40
+00:03:28,760 --> 00:03:35,630
+So it gives the error, which says already exist and is not a empty directly, which means I already have
+40
+
+41
+00:03:35,630 --> 00:03:41,830
+this downloaded into my computer. Now for you, I'm going to delete it and I'm going to redownload it.
+41
+
+42
+00:03:41,870 --> 00:03:47,050
+So let me just perform rm -rf to remove it forcefully.
+42
+
+43
+00:03:47,060 --> 00:03:50,160
+And now it has been gone from my computer.
+43
+
+44
+00:03:51,140 --> 00:03:54,430
+Now I'm just going to git clone again to download it.
+44
+
+45
+00:03:54,440 --> 00:03:57,200
+As you can see, the download has successfully completed.
+45
+
+46
+00:03:57,830 --> 00:04:06,910
+Let me just go inside the directory and here you can see here is the file which is generate_xbin_avi.py
+46
+
+47
+00:04:06,920 --> 00:04:08,690
+which is a Python script.
+47
+
+48
+00:04:09,140 --> 00:04:10,760
+So I'm going to just run it.
+48
+
+49
+00:04:11,000 --> 00:04:18,860
+And the format to generate your payload is give file:///etc/passwd
+49
+
+50
+00:04:19,100 --> 00:04:23,150
+which is the file that we need to download from the target server.
+50
+
+51
+00:04:23,750 --> 00:04:29,210
+Let's give the name of the output file that we want to get generated and let's say we give the name
+51
+
+52
+00:04:29,210 --> 00:04:31,920
+as ssrf.avi 
+52
+
+53
+00:04:32,030 --> 00:04:35,360
+for instance. You can give any name that you want.
+53
+
+54
+00:04:35,750 --> 00:04:37,730
+Just remember to give the extension
+54
+
+55
+00:04:37,730 --> 00:04:43,180
+as AVI. Now you can see the file has been successfully generated.
+55
+
+56
+00:04:43,910 --> 00:04:50,690
+Now we are going to use this file to upload onto target of web application so you can see this is a live
+56
+
+57
+00:04:50,690 --> 00:04:53,690
+website, which is files hyphen conversion dot com.
+57
+
+58
+00:04:54,140 --> 00:04:59,000
+And here this website converts the video file into other file formats.
+58
+
+59
+00:04:59,570 --> 00:05:05,450
+So we have generated our malicious file in the format, which is AVI, and we are going to generate
+59
+
+60
+00:05:05,450 --> 00:05:07,250
+it to a format which is dot mp4.
+60
+
+61
+00:05:07,250 --> 00:05:11,020
+here you can see select a file option is there.
+61
+
+62
+00:05:11,030 --> 00:05:16,600
+So I'm just going to click on that and it is going to ask me that which file you want to upload.
+62
+
+63
+00:05:17,300 --> 00:05:20,450
+Let's quickly give the directory path of the file.
+63
+
+64
+00:05:20,450 --> 00:05:26,000
+As you can see, the file that we generated was ssrf.avi and hit Convert
+64
+
+65
+00:05:26,000 --> 00:05:29,620
+Now Button. As you can see, it has been processing.
+65
+
+66
+00:05:30,320 --> 00:05:37,730
+So what is happening in the background is the file has been successfully uploaded, which contains our
+66
+
+67
+00:05:37,730 --> 00:05:40,900
+payload, which is /etc/passwd.
+67
+
+68
+00:05:41,420 --> 00:05:50,240
+The back end engine is rendering that filename and the path from the file and it is going to give us
+68
+
+69
+00:05:50,450 --> 00:05:55,880
+that file data into the new render or converted file.
+69
+
+70
+00:05:55,880 --> 00:06:01,790
+As you can see, the resulted file is ssrf.mp4 which is successfully generated.
+70
+
+71
+00:06:02,330 --> 00:06:05,420
+But on Firefox it says video can't be played.
+71
+
+72
+00:06:05,450 --> 00:06:07,400
+Let's go onto Chrome and see.
+72
+
+73
+00:06:08,000 --> 00:06:13,790
+And when I paste it over here, we can successfully see the file is rendering and it is going to play
+73
+
+74
+00:06:14,210 --> 00:06:15,170
+and perfect.
+74
+
+75
+00:06:15,440 --> 00:06:23,420
+We are able to see the content of /etc/passwd file into our newly converted output file, which is
+75
+
+76
+00:06:23,900 --> 00:06:24,710
+ssrf.mp4.
+76
+
+77
+00:06:25,340 --> 00:06:26,980
+So I hope you guys understood this.
+77
+
+78
+00:06:27,260 --> 00:06:34,520
+So what has happened into the back end is the file got uploaded which contains the malicious payload,
+78
+
+79
+00:06:34,520 --> 00:06:40,940
+which is file:///etcc/passwd. It got read by the back end engine.
+79
+
+80
+00:06:40,940 --> 00:06:47,750
+It got rendered and we are able to see the output of that file through the same ssrf.mp4
+80
+
+81
+00:06:47,750 --> 00:06:49,340
+converted output file.
+81
+
+82
+00:06:50,000 --> 00:06:51,530
+I hope you guys understand this.
+82
+
+83
+00:06:52,190 --> 00:06:56,450
+If not, you can ask it into the Q&A section and I would love to help you guys.
+83
+
+84
+00:06:56,640 --> 00:06:57,560
+Thank you so much.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,190 --> 00:00:03,860
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,640 --> 00:00:12,050
+So in this video, we are going to perform SSRF attack with JIRA domains. Also we are going to see
+2
+
+3
+00:00:12,050 --> 00:00:18,230
+how can we escalate it and also combine it with XSS attacks.
+3
+
+4
+00:00:18,590 --> 00:00:19,040
+All right.
+4
+
+5
+00:00:19,040 --> 00:00:20,060
+So let's quickly start.
+5
+
+6
+00:00:20,970 --> 00:00:27,930
+So we are going to induce a SSRF in the vulnerable version of JIRA in the vulnerable parameter and we are going
+6
+
+7
+00:00:27,930 --> 00:00:30,470
+to exploit it, and what is the vulnerable parameter?
+7
+
+8
+00:00:30,480 --> 00:00:32,420
+It is consumerURI
+8
+
+9
+00:00:33,570 --> 00:00:40,440
+So we are going to use this and perform SSRF and also we will look how can we perform XSS with it.
+9
+
+10
+00:00:41,830 --> 00:00:47,150
+Now, to understand this here is a very, very simple principle with the help of animation.
+10
+
+11
+00:00:47,170 --> 00:00:48,530
+So let's understand this.
+11
+
+12
+00:00:49,570 --> 00:00:51,540
+So here is the first attacker.
+12
+
+13
+00:00:51,820 --> 00:00:54,920
+Second is the vulnerable application, which is example dot com.
+13
+
+14
+00:00:55,060 --> 00:00:59,120
+And third is the attacker controlled domain, which is attacker dot com.
+14
+
+15
+00:01:00,460 --> 00:01:05,620
+So first, the attacker is going to send the request to example dot com, which is a GET request.
+15
+
+16
+00:01:05,980 --> 00:01:07,150
+The host is example.
+16
+
+17
+00:01:07,150 --> 00:01:11,740
+And the consumerURI vulnerable parameter, says google.com
+17
+
+18
+00:01:11,950 --> 00:01:18,490
+So the target applications and the response to the attacker and it successfully redirects to Google
+18
+
+19
+00:01:18,490 --> 00:01:19,060
+dot com.
+19
+
+20
+00:01:19,360 --> 00:01:25,630
+So we have seen that we are able to induce a third party request from example, dot com to Google dot
+20
+
+21
+00:01:25,630 --> 00:01:25,920
+com.
+21
+
+22
+00:01:26,470 --> 00:01:32,770
+Now, in order to achieve XSS , we are going to send a request to attacker dot com slash ssrf
+22
+
+23
+00:01:32,830 --> 00:01:39,040
+dot html and which contains the successful payload of XSS
+23
+
+24
+00:01:39,340 --> 00:01:45,760
+And when it gets the response back to the example dot com, it successfully executes the XSS.
+24
+
+25
+00:01:46,360 --> 00:01:52,630
+So through this technique, the attacker can also perform XSS and steal cookies of other users.
+25
+
+26
+00:01:53,760 --> 00:02:01,020
+Moving ahead, it is a practical time and let's quickly see how can we do this practical and understand
+26
+
+27
+00:02:01,020 --> 00:02:01,370
+this
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,650 --> 00:00:07,160
+All right, so we have opened our terminal, so in the terminal now, we are going to enumerate the
+1
+
+2
+00:00:07,160 --> 00:00:08,840
+subdomains of our target.
+2
+
+3
+00:00:08,930 --> 00:00:15,590
+For that, we are going to use the tool, which is a find domain, to find the domain hyphen, hyphen
+3
+
+4
+00:00:15,590 --> 00:00:17,560
+d, which stands for Domain Name.
+4
+
+5
+00:00:17,750 --> 00:00:23,990
+And I'm going to copy the domain name from here and I'm going to paste it over here, which is intellect
+5
+
+6
+00:00:23,990 --> 00:00:26,390
+design dot com and I'm going to hit enter.
+6
+
+7
+00:00:26,690 --> 00:00:27,100
+All right.
+7
+
+8
+00:00:27,350 --> 00:00:31,070
+So it is hyphen t, which stands for target. Hyphen d
+8
+
+9
+00:00:31,100 --> 00:00:36,980
+we use this flag in sub finder, which is another tool, which is again a very good tool, which is
+9
+
+10
+00:00:36,980 --> 00:00:39,500
+used for identification of subdomains.
+10
+
+11
+00:00:39,500 --> 00:00:41,090
+You can use either of the tool.
+11
+
+12
+00:00:41,360 --> 00:00:43,810
+Both works pretty fast and fine.
+12
+
+13
+00:00:45,020 --> 00:00:52,430
+So now it has started enumerating the subdomains of the target and it was very quick to identify subdomains.
+13
+
+14
+00:00:52,430 --> 00:00:57,380
+And you can see we have a total of 76 subdomains in just three seconds.
+14
+
+15
+00:00:57,770 --> 00:00:58,280
+Perfect.
+15
+
+16
+00:00:58,520 --> 00:01:03,650
+So out of these subdomains, we are going to choose one of the subdomain, which is jira dot intellect
+16
+
+17
+00:01:03,650 --> 00:01:04,580
+design dot com.
+17
+
+18
+00:01:05,180 --> 00:01:06,920
+Now, why specifically JIRA?
+18
+
+19
+00:01:06,920 --> 00:01:14,960
+Because guys SSRF that we are going to find is only working on a vulnerable instance of JIRA,
+19
+
+20
+00:01:14,960 --> 00:01:16,820
+which means any domain or
+20
+
+21
+00:01:16,830 --> 00:01:22,190
+subdomains right now, anywhere in the world which are running vulnerable version or the software
+21
+
+22
+00:01:22,190 --> 00:01:27,560
+of Jira can easily be exploited through this practical.
+22
+
+23
+00:01:27,890 --> 00:01:28,310
+All right.
+23
+
+24
+00:01:28,320 --> 00:01:29,800
+So let's just copy this.
+24
+
+25
+00:01:30,230 --> 00:01:32,750
+So go to our browser and paste it over here.
+25
+
+26
+00:01:33,350 --> 00:01:35,600
+And now let's wait for this to open.
+26
+
+27
+00:01:36,200 --> 00:01:41,810
+Once it gets open, we are going to see if this target is vulnerable or not.
+27
+
+28
+00:01:43,540 --> 00:01:48,460
+All right, so it has successfully opened over here, as you can see, jira dot intellect design dot
+28
+
+29
+00:01:48,460 --> 00:01:52,560
+com slash dashboard dot jspa. Perfect.
+29
+
+30
+00:01:52,900 --> 00:01:56,230
+So now we have our target web application running over here.
+30
+
+31
+00:01:56,680 --> 00:02:05,200
+Now, this is the end point that we need to hit to identify the vulnerable version of Jira and we will
+31
+
+32
+00:02:05,200 --> 00:02:06,910
+perform SSRF over there.
+32
+
+33
+00:02:06,940 --> 00:02:13,060
+So less so let's just paste our end point over here and you can see the consumerURI
+33
+
+34
+00:02:13,060 --> 00:02:14,380
+parameter
+34
+
+35
+00:02:14,380 --> 00:02:17,780
+is the injection point into this vulnerable version of software.
+35
+
+36
+00:02:18,230 --> 00:02:20,310
+Here we are going to paste google.com
+36
+
+37
+00:02:20,920 --> 00:02:28,240
+So basically we are issuing some of the request to a third party domain from jira dot intellectdesign
+37
+
+38
+00:02:28,240 --> 00:02:30,530
+dot com and let's see if it works or not.
+38
+
+39
+00:02:30,700 --> 00:02:34,990
+And you can see it has successfully loaded Google dot com over here.
+39
+
+40
+00:02:35,020 --> 00:02:35,530
+Perfect.
+40
+
+41
+00:02:35,770 --> 00:02:40,120
+Now, this proves that this target is vulnerable to SSRF.
+41
+
+42
+00:02:40,780 --> 00:02:47,500
+Now to chain it with XSS, what we are going to do is you need to come to a srsecure.xyz
+42
+
+43
+00:02:47,500 --> 00:02:50,340
+slash ssrf dot html
+43
+
+44
+00:02:50,830 --> 00:02:56,680
+So here I have posted a XSS payload, so I'm going to paste  it over here and I'm going to load it.
+44
+
+45
+00:02:57,130 --> 00:03:01,330
+So I'm making a request to my attacker control domain.
+45
+
+46
+00:03:01,660 --> 00:03:04,710
+And you can see jira.intellectdesign.com is vulnerable.
+46
+
+47
+00:03:04,720 --> 00:03:12,910
+We have got a XSS alert over here and when we hit OK, we will also get the cookie over here, as
+47
+
+48
+00:03:12,910 --> 00:03:13,410
+you can see.
+48
+
+49
+00:03:13,630 --> 00:03:21,650
+So this way the attacker can get hold of the cookies of the user if he or she is logged in.
+49
+
+50
+00:03:22,360 --> 00:03:30,700
+So now this way we have escalated our SSRF to XSS as well to steal the cookies.
+50
+
+51
+00:03:30,850 --> 00:03:37,480
+Now let me go to the page source and show. Here very simply written alert document dot domain
+51
+
+52
+00:03:37,480 --> 00:03:41,300
+plus the domain is vulnerable and we are alerting document dot cookie.
+52
+
+53
+00:03:41,830 --> 00:03:48,400
+Of course, this payload can be modified in which the cookie should be sent to the attackers controlled
+53
+
+54
+00:03:48,400 --> 00:03:48,820
+domain.
+54
+
+55
+00:03:49,540 --> 00:03:55,990
+Now this is enough to prove the SSRF and XSS, so I hope you guys understood this.
+55
+
+56
+00:03:56,650 --> 00:03:59,920
+If you have any doubts or questions, you can post it into the Q&A.
+56
+
+57
+00:04:00,700 --> 00:04:01,240
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,240 --> 00:00:02,790
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:03,570 --> 00:00:11,700
+So in this video, we're going to see how can you automate your SSRF finding on vulnerable versions
+2
+
+3
+00:00:11,700 --> 00:00:18,960
+of Jira software, which is running on any target domains or subdomains of any bug bounty program,
+3
+
+4
+00:00:19,230 --> 00:00:27,150
+whether it is on Bugcrowd, Hackerone, Intigrity, etc. Even if it is a private program, you can use
+4
+
+5
+00:00:27,150 --> 00:00:33,870
+this technique to identify vulnerable versions of Jira software, which is running, and you can successfully
+5
+
+6
+00:00:34,170 --> 00:00:35,070
+exploit them.
+6
+
+7
+00:00:35,460 --> 00:00:35,910
+All right.
+7
+
+8
+00:00:36,270 --> 00:00:43,050
+So first you're going to use a Google dork, which is secure slash Dashboard dot jspa.
+8
+
+9
+00:00:43,620 --> 00:00:52,020
+And when you use this dork, you are able to identify only and only those domains are subdomains which
+9
+
+10
+00:00:52,050 --> 00:00:54,870
+have the Jira version running on them.
+10
+
+11
+00:00:55,350 --> 00:01:00,090
+So this way, basically, you're filtering out domains and subdomains quickly.
+11
+
+12
+00:01:01,510 --> 00:01:08,140
+Now, you can see I have got a few domains and subdomains over here, so guys, this is one of the techniques
+12
+
+13
+00:01:08,140 --> 00:01:10,810
+to identify this. Another way
+13
+
+14
+00:01:10,810 --> 00:01:18,940
+what you can do is identify all the targeted subdomains for your favorite programs and filter from those
+14
+
+15
+00:01:19,210 --> 00:01:20,980
+any of the subdomains.
+15
+
+16
+00:01:20,980 --> 00:01:27,730
+If it is running on Jira. How to do that, you can simply look at the URL, which may be something like jira
+16
+
+17
+00:01:27,730 --> 00:01:31,070
+dot or bugs dot, as you can see over here.
+17
+
+18
+00:01:31,630 --> 00:01:40,180
+Most of the URL's of the Jira software are running on with the subdomains, bugs dot jira dot or tracking
+18
+
+19
+00:01:40,180 --> 00:01:40,460
+dot.
+19
+
+20
+00:01:40,660 --> 00:01:43,420
+So you can easily identify and bifurcate.
+20
+
+21
+00:01:44,770 --> 00:01:46,540
+Sorry for this and let me just.
+21
+
+22
+00:01:46,540 --> 00:01:46,850
+Yeah.
+22
+
+23
+00:01:47,530 --> 00:01:52,480
+Now, as you can see over here, most of the subdomains are running Jira dot.
+23
+
+24
+00:01:52,660 --> 00:01:54,550
+So this way we can identify them.
+24
+
+25
+00:01:55,270 --> 00:01:57,140
+I can see this is Apache.
+25
+
+26
+00:01:57,160 --> 00:02:04,510
+So I'm just going to copy this and I'm going to paste it into a file for your reference right now.
+26
+
+27
+00:02:04,750 --> 00:02:07,270
+And we are going to exploit them one by one.
+27
+
+28
+00:02:09,220 --> 00:02:10,260
+So, all right.
+28
+
+29
+00:02:10,300 --> 00:02:12,730
+Let's go back to our terminal.
+29
+
+30
+00:02:12,730 --> 00:02:17,560
+And now I'm going to create a file, which is a list dot txt.
+30
+
+31
+00:02:18,070 --> 00:02:22,360
+So let's open this list dot txt and I have already written
+31
+
+32
+00:02:23,290 --> 00:02:29,710
+the targeted subdomains, which are running Jira, as you can see over here, so I'm just going to copy
+32
+
+33
+00:02:29,710 --> 00:02:31,710
+this as well and I'm going to paste it over here.
+33
+
+34
+00:02:32,170 --> 00:02:33,620
+So I have done this manually.
+34
+
+35
+00:02:34,120 --> 00:02:39,030
+You can also pick subdomains from any tools output like
+35
+
+36
+00:02:39,060 --> 00:02:42,940
+subfinder, findomain, sulbister and you can use that as well.
+36
+
+37
+00:02:44,120 --> 00:02:47,530
+All right, so let's just copy this as well.
+37
+
+38
+00:02:47,580 --> 00:02:54,650
+Paste it over here and we are going to identify if any of them are vulnerable with the help of the Python
+38
+
+39
+00:02:54,650 --> 00:02:54,980
+tool.
+39
+
+40
+00:02:56,570 --> 00:02:59,520
+Perfect, so we have written quite the names over here.
+40
+
+41
+00:02:59,630 --> 00:03:04,440
+Let's copy the opera as well and paste it over here.
+41
+
+42
+00:03:04,580 --> 00:03:05,070
+Perfect.
+42
+
+43
+00:03:05,090 --> 00:03:06,030
+So let's save it.
+43
+
+44
+00:03:06,650 --> 00:03:12,550
+Now, we have listed and saved all our targets into a file which is known as list dot txt.
+44
+
+45
+00:03:14,690 --> 00:03:20,780
+Now we have to run Jira scan dot py which is the Python script, which will help us to identify if our
+45
+
+46
+00:03:20,780 --> 00:03:25,370
+target is vulnerable or not. So just hit, enter and wait.
+46
+
+47
+00:03:25,630 --> 00:03:30,940
+And you can see it as identified that jira dot intellectdesign dot com is vulnerable.
+47
+
+48
+00:03:30,950 --> 00:03:36,660
+And yes, we know that it is vulnerable, which means the script is running perfectly fine. Now
+48
+
+49
+00:03:36,710 --> 00:03:40,490
+the targets are not vulnerable, as you can see over here.
+49
+
+50
+00:03:41,780 --> 00:03:42,300
+Perfect.
+50
+
+51
+00:03:42,650 --> 00:03:48,500
+So these targets are not vulnerable, but you can pass a list of subdomains with all the Jira related
+51
+
+52
+00:03:48,770 --> 00:03:53,200
+targeted domains and if they are vulnerable, you will be able to see it over there.
+52
+
+53
+00:03:54,960 --> 00:04:02,640
+All right, so now how can you install this tool so for that you just need to go to GitHub of this 
+53
+
+54
+00:04:02,640 --> 00:04:07,940
+security researcher, which is Random-Robbie, I am going to give the link into the description
+54
+
+55
+00:04:07,950 --> 00:04:10,900
+So you just have to git clone into your terminal.
+55
+
+56
+00:04:11,220 --> 00:04:17,610
+So I'm just going to perform, git clone and hit enter and you can see it has downloaded. Just go inside
+56
+
+57
+00:04:17,610 --> 00:04:17,820
+it.
+57
+
+58
+00:04:17,820 --> 00:04:21,240
+And here you can find Jira-Scan dot py. But
+58
+
+59
+00:04:21,240 --> 00:04:22,770
+there is no list dot txt.
+59
+
+60
+00:04:24,450 --> 00:04:31,080
+So you have to create your list dot txt put your bug bounty targets into it and start scanning
+60
+
+61
+00:04:31,080 --> 00:04:32,920
+them. Before doing that
+61
+
+62
+00:04:32,940 --> 00:04:39,480
+you also have to install the requirements.txt file. So you just have to type sudo pip install hyphen
+62
+
+63
+00:04:39,480 --> 00:04:46,230
+r, which means read the file, which is requirements dot txt and it will automatically install all the
+63
+
+64
+00:04:46,230 --> 00:04:48,510
+dependencies required to run this tool.
+64
+
+65
+00:04:48,930 --> 00:04:55,260
+As I have already installed all the dependencies, it says all dependencies and requirements are satisfied.
+65
+
+66
+00:04:56,580 --> 00:04:57,110
+Perfect.
+66
+
+67
+00:04:57,390 --> 00:05:03,390
+So now you can simply run this and it is going to give a error, which will say no file found, which
+67
+
+68
+00:05:03,390 --> 00:05:04,310
+is list dot txt.
+68
+
+69
+00:05:05,850 --> 00:05:12,000
+As I have already said, you have to put all your targets into the file which is list dot txt and then you
+69
+
+70
+00:05:12,000 --> 00:05:12,570
+can run it.
+70
+
+71
+00:05:13,020 --> 00:05:17,580
+So let me just run it again, go back and here there is list dot text.
+71
+
+72
+00:05:17,610 --> 00:05:22,910
+So now it has started identifying the target subdomains from this file.
+72
+
+73
+00:05:23,460 --> 00:05:24,880
+So I hope you guys understood.
+73
+
+74
+00:05:25,200 --> 00:05:25,770
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,420 --> 00:00:03,640
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,420 --> 00:00:09,760
+So in this video, we are going to see an awesome bug which was reported by a security researcher to
+2
+
+3
+00:00:09,760 --> 00:00:16,150
+Facebook for which he was able to get a reward of, in total, 31500$
+3
+
+4
+00:00:16,150 --> 00:00:18,200
+for the SSRF that he identified.
+4
+
+5
+00:00:18,760 --> 00:00:20,600
+That's a very, very interesting find.
+5
+
+6
+00:00:21,100 --> 00:00:23,840
+So I hope you guys learn a lot from this find.
+6
+
+7
+00:00:23,860 --> 00:00:26,890
+So we are going to do a complete breakdown of this report.
+7
+
+8
+00:00:27,640 --> 00:00:34,310
+And the best part is we are going to identify the same vulnerability into other application as well.
+8
+
+9
+00:00:35,140 --> 00:00:44,320
+So let's quickly start and Facebook is the largest social networking site, and he was able to identify
+9
+
+10
+00:00:44,320 --> 00:00:49,870
+one of the subdomain after subdomain enumeration and the subdomain was M hyphen.
+10
+
+11
+00:00:50,020 --> 00:00:52,180
+nexux dot the Facebook dot com.
+11
+
+12
+00:00:52,540 --> 00:00:59,020
+So whenever the user clicks on that particular subdomain, it redirects him to this end point, which
+12
+
+13
+00:00:59,020 --> 00:01:04,080
+is slash servlet, slash mstr  web admin.
+13
+
+14
+00:01:04,300 --> 00:01:09,280
+You can observe into the below screenshot and it says URL blocked.
+14
+
+15
+00:01:09,310 --> 00:01:11,380
+please contact your sytems admin.
+15
+
+16
+00:01:12,640 --> 00:01:19,840
+So what he did, he quickly googled the keyword, which was mstrWebAdmin, which was coming into
+16
+
+17
+00:01:19,840 --> 00:01:22,300
+the end points when he saw the error.
+17
+
+18
+00:01:22,450 --> 00:01:29,470
+So he observed that it was a business intelligence portal that was built on MicroStrategy.
+18
+
+19
+00:01:29,590 --> 00:01:34,000
+So MSTR stands for MicroStrategy Web Admin.
+19
+
+20
+00:01:34,330 --> 00:01:34,720
+All right.
+20
+
+21
+00:01:34,730 --> 00:01:35,620
+So we have the clue
+21
+
+22
+00:01:35,620 --> 00:01:43,290
+number one, that we have identified that there is a software of MicroStrategy which is running on m hyphen
+22
+
+23
+00:01:43,340 --> 00:01:49,190
+nexus dot the Facebook dot com which domain that the researcher has identified.
+23
+
+24
+00:01:49,990 --> 00:01:51,310
+Let's move ahead.
+24
+
+25
+00:01:51,580 --> 00:01:54,020
+So Googling mstrWebAdmin
+25
+
+26
+00:01:55,360 --> 00:02:03,040
+we came to know that, ok, so it is a micro strategy software, and we can also confirm that from this
+26
+
+27
+00:02:03,040 --> 00:02:04,210
+blog, as you can see.
+27
+
+28
+00:02:04,720 --> 00:02:10,460
+So it is one of the business intelligence portal known internally as nexus.
+28
+
+29
+00:02:10,720 --> 00:02:14,510
+That's why the name of the domain was Nexus.
+29
+
+30
+00:02:14,570 --> 00:02:14,980
+All right.
+30
+
+31
+00:02:15,460 --> 00:02:19,270
+So we have got some of the clues which points that
+31
+
+32
+00:02:20,470 --> 00:02:30,040
+the subdomain is being hosted on to MicroStrategy software. Now moving ahead from the official configuration
+32
+
+33
+00:02:30,040 --> 00:02:36,700
+document from MicroStrategy, he identified that there are total two endpoints that are publicly
+33
+
+34
+00:02:36,700 --> 00:02:37,360
+accessible.
+34
+
+35
+00:02:37,720 --> 00:02:39,070
+This is the first endpoint.
+35
+
+36
+00:02:39,880 --> 00:02:47,910
+which is yourcompany dot com slash MicroStrategy slash servlet slash mstrWeb?
+36
+
+37
+00:02:48,430 --> 00:02:53,190
+And second one is MicroStrategy slash servlet slash  taskProc?
+37
+
+38
+00:02:53,650 --> 00:02:58,330
+Let's see, which was the endpoint that we were able to see, which is mstrWebAdmin.
+38
+
+39
+00:02:59,170 --> 00:02:59,520
+All right.
+39
+
+40
+00:02:59,890 --> 00:03:05,740
+So we identified that we are able to see one of the endpoint and also these two endpoints are publicly
+40
+
+41
+00:03:05,740 --> 00:03:06,350
+accessible.
+41
+
+42
+00:03:06,730 --> 00:03:12,250
+Now, going further into the official configuration document of MicroStrategy, the researcher identified
+42
+
+43
+00:03:12,250 --> 00:03:16,810
+that the URL which was slash servlet slash mstrWeb.
+43
+
+44
+00:03:17,320 --> 00:03:22,080
+Then he observed that task does not require any authentication.
+44
+
+45
+00:03:22,090 --> 00:03:28,170
+So it takes a value from the task id parameter to perform some custom data collection and content
+45
+
+46
+00:03:28,170 --> 00:03:28,760
+generation.
+46
+
+47
+00:03:28,780 --> 00:03:37,720
+So by enumerating some tasks using the intruder, he was able to identify a valid session parameter where
+47
+
+48
+00:03:37,720 --> 00:03:40,410
+you can see over here you can observe.
+48
+
+49
+00:03:40,900 --> 00:03:46,930
+And there was something called as a short URL task, which is the process short URL and does
+49
+
+50
+00:03:46,930 --> 00:03:52,900
+not check for valid authentication session if you did not understand what basically is happening here.
+50
+
+51
+00:03:53,320 --> 00:03:58,840
+So there is an endpoint, which is this endpoint which has been identified and into this endpoint.
+51
+
+52
+00:03:59,740 --> 00:04:06,970
+the task id is short URL and the source URL is Google dot com, which the security researcher gave
+52
+
+53
+00:04:07,300 --> 00:04:14,120
+to try if this domain, which is Facebook is trying to interacting with any third party domain or not.
+53
+
+54
+00:04:14,590 --> 00:04:17,980
+So for some specific reasons, it did not work.
+54
+
+55
+00:04:17,980 --> 00:04:19,900
+And you can see the error.
+55
+
+56
+00:04:19,900 --> 00:04:27,250
+The source, you are told, is not valid, which means the Web application is not making any HTTP request
+56
+
+57
+00:04:27,250 --> 00:04:29,740
+or connection to any third party domain.
+57
+
+58
+00:04:31,100 --> 00:04:36,460
+So every time it gives me a error message, which is the source URL is not valid with a status
+58
+
+59
+00:04:36,480 --> 00:04:39,350
+code of 500, which is internal error.
+59
+
+60
+00:04:39,950 --> 00:04:40,370
+All right.
+60
+
+61
+00:04:40,610 --> 00:04:46,550
+Then the security researcher thought of downloading the whole application package, which was more than
+61
+
+62
+00:04:46,550 --> 00:04:47,090
+400 MB
+62
+
+63
+00:04:47,780 --> 00:04:50,130
+This is the MicroStrategy software.
+63
+
+64
+00:04:50,600 --> 00:04:54,320
+So there were several scripts inside which contains some Java files.
+64
+
+65
+00:04:54,830 --> 00:05:00,140
+Now, this is something which you guys also need to understand that whenever you get stuck at a particular
+65
+
+66
+00:05:00,140 --> 00:05:06,880
+point of time, the best thing that comes handy is download the whole software package.
+66
+
+67
+00:05:07,100 --> 00:05:14,360
+For example, if you're working on Apache or Nginx, try to identify reading from the code itself,
+67
+
+68
+00:05:14,360 --> 00:05:20,710
+because that is the time when you may identify many hidden potential flaws.
+68
+
+69
+00:05:21,380 --> 00:05:27,290
+Alright so here the researcher downloaded the whole package and he started looking each.
+69
+
+70
+00:05:28,290 --> 00:05:37,380
+package one by one using jd-gui tool, so told jd-gui tool is used to read the decompiled files of
+70
+
+71
+00:05:37,380 --> 00:05:37,740
+Java.
+71
+
+72
+00:05:38,260 --> 00:05:46,210
+Now the main target was shortURL, as we knew that shortURL is one of the parameter.
+72
+
+73
+00:05:46,230 --> 00:05:51,370
+But whenever we try to load Google dot com into it and just throws the error.
+73
+
+74
+00:05:51,900 --> 00:05:58,440
+So finally I found that our class was from Java file, as you can see over here, and you can see a very, very
+74
+
+75
+00:05:58,440 --> 00:06:06,240
+interesting thing over here where you can see private static, final string allow domain equals to tinyurl.
+75
+
+76
+00:06:06,240 --> 00:06:07,470
+dot com.
+76
+
+77
+00:06:08,640 --> 00:06:17,410
+All right, so we know that there is a specific domain which is only allowed, which is tinyurl
+77
+
+78
+00:06:18,060 --> 00:06:18,410
+Ok.
+78
+
+79
+00:06:18,510 --> 00:06:25,270
+So now we know that only tinyurl is going to work in there. As you can see into this code
+79
+
+80
+00:06:25,290 --> 00:06:31,400
+now, here the source URL is not valid and a task exception is there
+80
+
+81
+00:06:31,800 --> 00:06:39,850
+If anyone tries to load any URL, which is not equal to tinyurl, or which does not start with tinyurl.
+81
+
+82
+00:06:41,040 --> 00:06:48,120
+So now we know that we are able to load only tinyurl and not anything else, which is Google dot
+82
+
+83
+00:06:48,120 --> 00:06:50,490
+com that we tried in the start.
+83
+
+84
+00:06:51,030 --> 00:06:56,190
+So now let's quickly exploit so the researcher quickly started
+84
+
+85
+00:06:56,190 --> 00:07:05,580
+the Burp collaborator client copied the Burp collaborator's address, went to tinyurl and here you can see
+85
+
+86
+00:07:05,610 --> 00:07:07,050
+this is the collaborator URL
+86
+
+87
+00:07:07,200 --> 00:07:09,840
+convert it into a tinyurl address.
+87
+
+88
+00:07:09,840 --> 00:07:17,910
+As tinyurl addresses are allowed as per the software configuration and you
+88
+
+89
+00:07:17,910 --> 00:07:18,930
+can see over here.
+89
+
+90
+00:07:19,230 --> 00:07:25,440
+So this is that I need you all dot com slash the shortened URL which was given as you can see, and
+90
+
+91
+00:07:25,440 --> 00:07:28,890
+it's successfully connected to the Burp collaborator client.
+91
+
+92
+00:07:28,900 --> 00:07:29,380
+Perfect.
+92
+
+93
+00:07:29,820 --> 00:07:37,530
+So we have a HTTP request on our collaborator, which means it is an external SSRF, so that vulnerability is
+93
+
+94
+00:07:37,530 --> 00:07:40,070
+present over here, we have identified this.
+94
+
+95
+00:07:40,350 --> 00:07:43,400
+Let's quickly see whose IP address is this.
+95
+
+96
+00:07:43,740 --> 00:07:49,730
+And you can see this IP address belongs to Facebook, which can be confirmed from the WHOis recorded,
+96
+
+97
+00:07:49,770 --> 00:07:54,360
+as you can see here from the website, which is who isdot com slash
+97
+
+98
+00:07:54,540 --> 00:07:56,530
+Whois slash the IP address
+98
+
+99
+00:07:56,910 --> 00:07:57,390
+Perfect.
+99
+
+100
+00:07:58,290 --> 00:07:59,010
+Let's move ahead.
+100
+
+101
+00:07:59,310 --> 00:08:02,820
+Now it's the time to test the internal SSRF.
+101
+
+102
+00:08:03,240 --> 00:08:10,110
+So we are going to create tinyurl of invalid internal IP address example, a wrong IP address and inserted
+102
+
+103
+00:08:10,110 --> 00:08:10,860
+into the source
+103
+
+104
+00:08:10,860 --> 00:08:12,480
+URL parameter and observe.
+104
+
+105
+00:08:12,510 --> 00:08:16,500
+There is no response from the server, but you can see there is no response.
+105
+
+106
+00:08:16,650 --> 00:08:24,540
+But we are going to create a tinyurl of the internal IP address this time and insert it into the source
+106
+
+107
+00:08:24,540 --> 00:08:27,090
+URL parameter and observe it
+107
+
+108
+00:08:27,090 --> 00:08:36,390
+ask for http basic authentication, which means the server is running http basic auth on port 8080 which
+108
+
+109
+00:08:36,390 --> 00:08:44,550
+can be confirmed over here, which means that we are able to enumerate the internal infrastructure behind
+109
+
+110
+00:08:44,550 --> 00:08:49,230
+the firewall environment and we are able to see what's running in the back end.
+110
+
+111
+00:08:49,770 --> 00:08:56,250
+But for some reasons, Facebook said thanks for writing in various features of our site, intentionally
+111
+
+112
+00:08:56,250 --> 00:08:59,760
+make requests to external users supplied, hosts and ports.
+112
+
+113
+00:09:00,330 --> 00:09:07,680
+So long story short, Facebook did not accept it and said we have the protections already in place,
+113
+
+114
+00:09:07,680 --> 00:09:10,450
+so we don't consider this behavior as a security risk.
+114
+
+115
+00:09:10,980 --> 00:09:12,850
+So now it's time to dig more deeper.
+115
+
+116
+00:09:13,230 --> 00:09:20,640
+So what the security researcher did was he tried to increase the impact of the severity of this SSRF
+116
+
+117
+00:09:20,790 --> 00:09:22,500
+by identifying XSS.
+117
+
+118
+00:09:22,860 --> 00:09:30,660
+So what he did, he quickly made up POC of XSS, hosted on his target website and loaded that target
+118
+
+119
+00:09:30,660 --> 00:09:31,710
+website using tinyurl.
+119
+
+120
+00:09:31,710 --> 00:09:38,010
+over here and you can see a successful XSS over here which can be used to trick users
+120
+
+121
+00:09:38,010 --> 00:09:39,660
+and steal credentials.
+121
+
+122
+00:09:40,200 --> 00:09:45,420
+Perfect second way using a phishing attack with the help of SSRF.
+122
+
+123
+00:09:45,420 --> 00:09:53,040
+So we know the Target website is able to successfully load tinyurl. We can create and host a phishing
+123
+
+124
+00:09:53,040 --> 00:09:59,520
+page of Facebook to login that can steal victims Facebook login credentials, which can look like
+124
+
+125
+00:09:59,520 --> 00:10:01,970
+a legitimate login portal, as you can see here.
+125
+
+126
+00:10:02,490 --> 00:10:06,930
+ahemdabadexpress.co.in is the attackers control domain.
+126
+
+127
+00:10:07,200 --> 00:10:12,870
+But the attacker will take this domain shorten it using tinyurl and loaded into the sourceURL.
+127
+
+128
+00:10:12,870 --> 00:10:19,380
+parameter of Facebook which will successfully show a page, which is this which is controlled
+128
+
+129
+00:10:19,380 --> 00:10:20,390
+by the attacker.
+129
+
+130
+00:10:20,700 --> 00:10:27,390
+So when any victim comes here, login for this credential,s the attacker is able to get those credentials,
+130
+
+131
+00:10:27,510 --> 00:10:28,590
+which you can see,
+131
+
+132
+00:10:29,400 --> 00:10:36,360
+these are the credentials which the user will input and you can see over here the attacker is able to successfully
+132
+
+133
+00:10:36,600 --> 00:10:39,090
+steal the credentials of the user.
+133
+
+134
+00:10:40,020 --> 00:10:43,230
+Now, this is something which shows our impact.
+134
+
+135
+00:10:43,350 --> 00:10:49,530
+So the attacker is able to steal the credentials and perform identity theft as well as the attacker
+135
+
+136
+00:10:49,530 --> 00:10:56,190
+is able to steal cookies using XSS or do a lot of things onto a user's computer.
+136
+
+137
+00:10:57,880 --> 00:11:04,300
+Next, the researcher was able to fingerprint the internal network aware services, so what he did
+137
+
+138
+00:11:04,300 --> 00:11:10,540
+was he was able to scan the internal network and send in more than 10000 requests to find an open put
+138
+
+139
+00:11:10,540 --> 00:11:14,350
+on the server or any application running onto that port.
+139
+
+140
+00:11:14,380 --> 00:11:22,360
+So what the security researcher did was he made a couple of tinyurls and started identifying each
+140
+
+141
+00:11:22,360 --> 00:11:24,310
+port number to see which one is open.
+141
+
+142
+00:11:24,310 --> 00:11:31,150
+And he identified after scanning a successful application which was running on port, ten three zero
+142
+
+143
+00:11:31,150 --> 00:11:31,450
+three.
+143
+
+144
+00:11:31,780 --> 00:11:37,750
+And the name of the application was LightRay, which can be seen from this screenshot here.
+144
+
+145
+00:11:38,440 --> 00:11:44,530
+So before I for further investigate on this, Facebook security team resolved thae vulnerability and
+145
+
+146
+00:11:44,530 --> 00:11:48,630
+finally was awarded with a bounty of one thousand dollars.
+146
+
+147
+00:11:48,970 --> 00:11:49,480
+Perfect.
+147
+
+148
+00:11:50,020 --> 00:11:57,580
+So I hope you guys understood how the security researcher diged in more, deeper and deeper to identify
+148
+
+149
+00:11:57,580 --> 00:12:00,520
+the potential impact of the vulnerability.
+149
+
+150
+00:12:00,820 --> 00:12:08,650
+So first thing was to identify that only tinyurl's will go with them. Second thing, escalate SSRF
+150
+
+151
+00:12:08,650 --> 00:12:16,630
+to XSS and a phishing based scenario in which the attacker is able to steal the valid cookies and
+151
+
+152
+00:12:16,630 --> 00:12:19,870
+session of the user as well as the credentials.
+152
+
+153
+00:12:20,930 --> 00:12:26,030
+All right, so moving ahead, the security researcher has come to mind one more vulnerability, which
+153
+
+154
+00:12:26,030 --> 00:12:30,710
+is sensitivity data exposure to increase the bounty amount from Facebook.
+154
+
+155
+00:12:31,250 --> 00:12:34,280
+So is this the end of the story has just begun.
+155
+
+156
+00:12:34,640 --> 00:12:41,450
+So the security researchers started more fiddling with the software package and he identified one of
+156
+
+157
+00:12:41,450 --> 00:12:45,780
+the URL parameters was also vulnerable, as you can see, over here,
+157
+
+158
+00:12:46,160 --> 00:12:52,120
+So he identified that search string is again vulnerable 
+parameter.
+158
+
+159
+00:12:52,130 --> 00:12:54,050
+So he identified one more SSRF.
+159
+
+160
+00:12:54,620 --> 00:13:00,440
+As you can see, he got a successful request onto his Burp collaborator client.
+160
+
+161
+00:13:01,610 --> 00:13:07,580
+So this way, the researcher was able to identify one more SRF into Facebook.
+161
+
+162
+00:13:08,060 --> 00:13:15,200
+Now, if you move ahead now, this is another vulnerability that the researcher has identified, which is sensitive
+162
+
+163
+00:13:15,200 --> 00:13:16,240
+data exposure.
+163
+
+164
+00:13:16,370 --> 00:13:22,580
+And because of the sensitive data exposure, the remaining amount of bounty is added because of the
+164
+
+165
+00:13:22,580 --> 00:13:23,890
+sensitive data exposure.
+165
+
+166
+00:13:27,460 --> 00:13:31,900
+For which he was given a bounty of thirty thousand dollars in total.
+166
+
+167
+00:13:32,290 --> 00:13:33,050
+That's huge.
+167
+
+168
+00:13:33,100 --> 00:13:40,510
+So now the is also reported the SSRF vulnerability to MicroStrategy because it was into the demo portal
+168
+
+169
+00:13:40,510 --> 00:13:42,740
+itself, as you can see over here.
+169
+
+170
+00:13:43,120 --> 00:13:54,430
+So the researcher was able to identify juicy information using the AWS metadata API from the MicroStrategy
+170
+
+171
+00:13:54,430 --> 00:13:57,630
+demo portal, as you can see into that screenshot over here.
+171
+
+172
+00:13:58,030 --> 00:14:00,420
+And they reported this to MicroStrategy as well.
+172
+
+173
+00:14:00,430 --> 00:14:06,160
+And they were generous enough to fix it and they gave a bounty of $ 500.
+173
+
+174
+00:14:07,480 --> 00:14:14,200
+So in total, thirty one thousand five hundred, in which one thousand dollars was for the SSRF, thirty
+174
+
+175
+00:14:14,210 --> 00:14:19,900
+thousand for sensitive data leakage and five hundred dollars again for the same as SSRF.
+175
+
+176
+00:14:19,900 --> 00:14:22,550
+On to the demo folder of MicroStrategy.
+176
+
+177
+00:14:23,050 --> 00:14:25,690
+So I hope you guys understand this report.
+177
+
+178
+00:14:26,020 --> 00:14:32,320
+I'm going to put the link into the description so you can just go over there and read the whole report
+178
+
+179
+00:14:32,320 --> 00:14:32,620
+again.
+179
+
+180
+00:14:33,570 --> 00:14:39,150
+In the next video, we are going to replicate the scenario and we are going to identify the same bug
+180
+
+181
+00:14:39,150 --> 00:14:40,920
+in to the live website.
+181
+
+182
+00:14:41,220 --> 00:14:41,760
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:00,840 --> 00:00:03,180
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,050 --> 00:00:08,700
+So in the previous video we have seen about the micro strategy.
+2
+
+3
+00:00:09,510 --> 00:00:13,500
+This is an SSRF vulnerability which was identified into the facebook.com.
+3
+
+4
+00:00:13,710 --> 00:00:17,630
+So we are going to replicate this same vulnerability over here.
+4
+
+5
+00:00:18,180 --> 00:00:24,990
+So to do that, first of all, what we are going to do is we are going to write down a few steps.
+5
+
+6
+00:00:25,440 --> 00:00:27,890
+So let me just open up the editor.
+6
+
+7
+00:00:28,350 --> 00:00:35,190
+So the first step is we are going to identify a micro strategy, redirect on any subdomain.
+7
+
+8
+00:00:35,700 --> 00:00:42,450
+So first we're going to identify a subdomain and we are going to see if it redirects to MicroStrategy,
+8
+
+9
+00:00:42,720 --> 00:00:47,340
+a Web admin portal, as we saw into the Facebook, and it was giving error.
+9
+
+10
+00:00:47,370 --> 00:00:54,750
+So we are going to expect that. Once we have identified the target domain, which is running on MicroStrategy,
+10
+
+11
+00:00:55,110 --> 00:01:01,000
+we are going to input google.com to see if the URL is valid or not.
+11
+
+12
+00:01:01,350 --> 00:01:05,260
+And then from there we can confirm if the URL is working or not.
+12
+
+13
+00:01:05,910 --> 00:01:13,170
+So as in the previous video, we saw that URL would not work because into the software configuration tinyurl
+13
+
+14
+00:01:13,170 --> 00:01:17,180
+is something which will only work.
+14
+
+15
+00:01:17,640 --> 00:01:22,920
+So we are going to try with tinyurl and we are going to see if it correctly loads or not.
+15
+
+16
+00:01:23,340 --> 00:01:30,180
+And then we are going to load our tinyurl based XSS
+16
+
+17
+00:01:32,550 --> 00:01:41,700
+page or the XSS payload over here to make this vulnerability from SSRF to XSS to increase the impact
+17
+
+18
+00:01:41,700 --> 00:01:44,940
+and overall severity of the vulnerability.
+18
+
+19
+00:01:45,690 --> 00:01:52,920
+We can also make the same clone page of the target of application as we saw into the Facebook scenario,
+19
+
+20
+00:01:53,280 --> 00:01:58,170
+and then we can phish credentials of any legitimate user.
+20
+
+21
+00:01:58,980 --> 00:01:59,420
+All right.
+21
+
+22
+00:01:59,430 --> 00:02:04,770
+So let's quickly jump onto the practical and let's see these steps one by one.
+22
+
+23
+00:02:06,820 --> 00:02:12,490
+All right, so here, as you can see, this is one of the subdomain which is
+23
+
+24
+00:02:14,300 --> 00:02:16,980
+reportin.barronltg.com
+24
+
+25
+00:02:17,000 --> 00:02:25,460
+So when I just go onto that subdomain, it automatically redirects me over here, which means the first
+25
+
+26
+00:02:25,460 --> 00:02:31,020
+step has successfully satisfied it redirects to MicroStrategy.
+26
+
+27
+00:02:31,550 --> 00:02:32,210
+All right.
+27
+
+28
+00:02:32,220 --> 00:02:34,340
+So this is our vulnerable target.
+28
+
+29
+00:02:34,700 --> 00:02:38,810
+Now, let's quickly copy the injection point that we saw.
+29
+
+30
+00:02:39,810 --> 00:02:42,540
+Which was the targetedURL endpoint.
+30
+
+31
+00:02:42,570 --> 00:02:47,250
+So let's just copy this, go into the browser and try to open.
+31
+
+32
+00:02:47,610 --> 00:02:56,370
+So here you have to notice that we are trying to open google.com and as expected, we have got
+32
+
+33
+00:02:56,370 --> 00:03:04,380
+an error that google.com is not a safe URL or it would not work here. As we knew
+33
+
+34
+00:03:04,380 --> 00:03:08,510
+it is not going to work because it is written into the software configuration.
+34
+
+35
+00:03:08,910 --> 00:03:10,260
+So let's try with tinyurl.com
+35
+
+36
+00:03:10,260 --> 00:03:12,950
+and let's see if it works or not.
+36
+
+37
+00:03:13,530 --> 00:03:22,290
+And you can see we are successfully able to open tinyurl inside reporting.barronltg.com
+37
+
+38
+00:03:22,680 --> 00:03:24,800
+which is our vulnerable live domain.
+38
+
+39
+00:03:25,650 --> 00:03:26,150
+Perfect.
+39
+
+40
+00:03:26,400 --> 00:03:33,720
+It is working as expected and now we are successfully able to load the tinyurl domain as well
+40
+
+41
+00:03:34,740 --> 00:03:43,240
+Now let's just quickly navigate to srsecure.xyz/ssrf.html where I have posted
+41
+
+42
+00:03:43,240 --> 00:03:51,300
+an html page which contains a XSS payload of executing the document and cookie.
+42
+
+43
+00:03:51,690 --> 00:03:55,390
+So I'm just going to copy that and I'm going to paste it over here.
+43
+
+44
+00:03:56,040 --> 00:04:00,880
+Now we know it is not going to work because it does not load any.
+44
+
+45
+00:04:00,880 --> 00:04:02,970
+URL apart from 
+45
+
+46
+00:04:02,970 --> 00:04:03,290
+tinyurls
+46
+
+47
+00:04:03,320 --> 00:04:06,380
+So we have to convert that as well.
+47
+
+48
+00:04:07,170 --> 00:04:10,590
+So you saw we got a error which was expected.
+48
+
+49
+00:04:10,860 --> 00:04:16,400
+So now let's quickly open tinyurl and we are going to convert our tinyurl
+49
+
+50
+00:04:16,480 --> 00:04:24,750
+Also, if I show you the error into Chrome browser, you can see this is how the error is
+50
+
+51
+00:04:25,470 --> 00:04:29,760
+displayed into the response, which is the source URL is not valid.
+51
+
+52
+00:04:30,000 --> 00:04:36,030
+And if you remember, we were getting the same error into the previous video, into the Facebook POC
+52
+
+53
+00:04:36,120 --> 00:04:36,500
+case.
+53
+
+54
+00:04:37,350 --> 00:04:37,800
+Perfect.
+54
+
+55
+00:04:38,190 --> 00:04:43,320
+Now, let's quickly make a tinyurl to exploit this to XSS.
+55
+
+56
+00:04:43,860 --> 00:04:45,150
+So let's open 
+56
+
+57
+00:04:45,150 --> 00:04:46,170
+tinyurl.com
+57
+
+58
+00:04:47,220 --> 00:04:57,390
+Go over there and copy the link of srsecure.xyz/ssrf.html and paste it
+58
+
+59
+00:04:57,390 --> 00:05:01,860
+over here. So you can see enter a long URL to make tiny.
+59
+
+60
+00:05:01,860 --> 00:05:07,520
+So we are going to paste it over here and it is automatically going to shorten our
+60
+
+61
+00:05:07,530 --> 00:05:15,450
+URL. So just hit on make tinyurl and wait and you can see the URL has successfully
+61
+
+62
+00:05:15,780 --> 00:05:18,810
+shortened and converted to a tiny URL.
+62
+
+63
+00:05:18,810 --> 00:05:20,060
+Perfect.
+63
+
+64
+00:05:20,670 --> 00:05:26,310
+Now let's just copy this, go back to our target and try to load it over there.
+64
+
+65
+00:05:26,910 --> 00:05:27,800
+Over here.
+65
+
+66
+00:05:28,860 --> 00:05:32,310
+So if you recall, we are not able to open.
+66
+
+67
+00:05:32,310 --> 00:05:33,900
+srsecure.xyz/ssrf.html
+67
+
+68
+00:05:33,900 --> 00:05:38,310
+which contains our XSS payload.
+68
+
+69
+00:05:38,520 --> 00:05:46,980
+But when we replace this with tinyurl, which basically points to our srsecure payload, we are able
+69
+
+70
+00:05:46,980 --> 00:05:49,980
+to successfully get the XSS execution.
+70
+
+71
+00:05:49,980 --> 00:05:57,050
+As you can see here, you can also see the cookie over here because the payload is document dot
+71
+
+72
+00:05:57,060 --> 00:05:58,050
+cookie, Now an
+72
+
+73
+00:05:58,050 --> 00:05:59,970
+attacker can utilize this to steal it.
+73
+
+74
+00:05:59,970 --> 00:06:06,760
+Obviously, to make another scenario, we can also make a similar phishing clone of this target web
+74
+
+75
+00:06:06,780 --> 00:06:14,260
+application and try to load it over here by shortening the URL with the help of tinyurl.
+75
+
+76
+00:06:14,670 --> 00:06:23,340
+So I hope you guys understood how we are able to replicate the same POC or the same attack of SSRF that
+76
+
+77
+00:06:23,340 --> 00:06:26,460
+was reported to Facebook on to a live website.
+77
+
+78
+00:06:26,850 --> 00:06:28,140
+I hope you guys understood.
+78
+
+79
+00:06:28,330 --> 00:06:28,920
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,870 --> 00:00:03,550
+Hello and welcome, everyone.
+1
+
+2
+00:00:04,420 --> 00:00:12,490
+So in this video, we are going to discuss about filters, so how can you utilize filters for identification
+2
+
+3
+00:00:12,490 --> 00:00:20,430
+of SSRF and exfiltration of sensitive data to increase the severity and criticality of your bug.
+3
+
+4
+00:00:21,450 --> 00:00:28,050
+So here we are going to do it onto a live target and I'm going to show you how you can successfully
+4
+
+5
+00:00:28,050 --> 00:00:32,790
+perform SSRF and also use the different types of filters.
+5
+
+6
+00:00:33,000 --> 00:00:33,480
+All right.
+6
+
+7
+00:00:33,870 --> 00:00:39,690
+So our target is this Web site and we are going to attack on this.
+7
+
+8
+00:00:40,380 --> 00:00:48,120
+So what I'm going to do, first of all, is I'm going to scan this web site using my Burp, which is
+8
+
+9
+00:00:48,120 --> 00:00:53,120
+basically I'm going to spider all the web URL's and end points first.
+9
+
+10
+00:00:53,580 --> 00:00:57,160
+So I have configured this with Burp already.
+10
+
+11
+00:00:57,180 --> 00:00:59,240
+And now let me just go to my Burp Suite
+11
+
+12
+00:01:00,470 --> 00:01:04,820
+Do intercept on and let me just reload this target.
+12
+
+13
+00:01:06,140 --> 00:01:10,560
+Let me just go back to Burp and you can see we have our target.
+13
+
+14
+00:01:11,180 --> 00:01:20,630
+Let me just send this to repeater and now we want to spider this and get all the possible URL's
+14
+
+15
+00:01:21,380 --> 00:01:23,000
+Let me just go back to repeater.
+15
+
+16
+00:01:23,510 --> 00:01:23,930
+Right
+16
+
+17
+00:01:23,930 --> 00:01:28,130
+Click and now we want to spider this.
+17
+
+18
+00:01:28,250 --> 00:01:31,550
+So let's just click on Add to Sitemap.
+18
+
+19
+00:01:31,820 --> 00:01:34,990
+And this is now added to site map.
+19
+
+20
+00:01:35,540 --> 00:01:44,240
+So here you can see of the website is successfully added and our target was vivelab12 dot fr.
+20
+
+21
+00:01:45,640 --> 00:01:50,740
+And it is over here. Now, so let me just right click over here.
+21
+
+22
+00:01:52,930 --> 00:01:59,030
+And click on Add to scope, and it successfully added to my scope, as you can see over here.
+22
+
+23
+00:01:59,500 --> 00:02:00,010
+Perfect.
+23
+
+24
+00:02:00,310 --> 00:02:05,560
+Now let me just click on Filter and click on show only in scope items.
+24
+
+25
+00:02:05,740 --> 00:02:14,890
+And here you can see I will only be able to see those items which are into my scope and all other targets
+25
+
+26
+00:02:14,890 --> 00:02:20,970
+or background requests that are going into my browser will not get captured into Burp Suite.
+26
+
+27
+00:02:22,270 --> 00:02:22,690
+Perfect.
+27
+
+28
+00:02:22,900 --> 00:02:30,790
+So now you can read for this and it will automatically spider more and give you some of the links,
+28
+
+29
+00:02:30,790 --> 00:02:32,240
+as you can see over here.
+29
+
+30
+00:02:32,500 --> 00:02:37,680
+So we have successfully got a lot of links from here, so I'm going to use one of them.
+30
+
+31
+00:02:38,020 --> 00:02:44,260
+So let's say I'm going to use this one, which I have already saved it over here.
+31
+
+32
+00:02:44,410 --> 00:02:46,290
+And you can see this is here.
+32
+
+33
+00:02:46,300 --> 00:02:47,440
+So let me just copy this.
+33
+
+34
+00:02:47,770 --> 00:02:53,190
+This is the same endpoint that I have discovered through spidering.
+34
+
+35
+00:02:53,620 --> 00:02:59,170
+Let me just paste it over here, go to Burp and I'm going to capture this.
+35
+
+36
+00:03:02,280 --> 00:03:06,560
+Now, I will just go here and right click and send this to repeater.
+36
+
+37
+00:03:07,050 --> 00:03:12,990
+Now you can see over here, this is the end point, which is pointing to WP content plugins.
+37
+
+38
+00:03:13,400 --> 00:03:15,630
+jsmo12 wordpress php
+38
+
+39
+00:03:16,470 --> 00:03:23,640
+jsmol dot php isform true call equals to get raw data from database query equals to.
+39
+
+40
+00:03:24,880 --> 00:03:29,900
+nothing. Query equals to I have added our target here.
+40
+
+41
+00:03:30,640 --> 00:03:34,700
+So there was a parameter, I was just replaced that parameter to target here.
+41
+
+42
+00:03:35,140 --> 00:03:39,040
+Now I have identified the endpoint to be vulnerable.
+42
+
+43
+00:03:39,310 --> 00:03:44,610
+So what I'm going to do is I'm going to add my collaborator IP over here.
+43
+
+44
+00:03:44,830 --> 00:03:50,560
+Now, for some reasons, if you do not have a collaborator into the community edition of Burp Suite, do
+44
+
+45
+00:03:50,560 --> 00:03:53,370
+not need to worry about that in this video.
+45
+
+46
+00:03:53,380 --> 00:03:59,200
+I'm not going to use the collaborator IP or the collaborator client to capture the request and prove
+46
+
+47
+00:03:59,200 --> 00:03:59,830
+SSRF.
+47
+
+48
+00:04:00,280 --> 00:04:06,790
+Instead, I will show you some of the free resources that you can utilize, which works in the same
+48
+
+49
+00:04:06,790 --> 00:04:08,020
+and efficient manner.
+49
+
+50
+00:04:08,560 --> 00:04:11,710
+So first of all, you need to come onto the webhook.site
+50
+
+51
+00:04:12,100 --> 00:04:15,460
+Once you are here, you are able to create a free web hook.
+51
+
+52
+00:04:16,240 --> 00:04:23,500
+Now, I have created my free web hook and let me just show you how does it looks like and you will see
+52
+
+53
+00:04:23,500 --> 00:04:24,460
+your unique URL
+53
+
+54
+00:04:24,460 --> 00:04:26,690
+and it looks something like this.
+54
+
+55
+00:04:26,800 --> 00:04:31,240
+So this is my unique URL and you just need to copy this.
+55
+
+56
+00:04:31,660 --> 00:04:38,170
+And if we get any hit on our unique URL, it would look something like this
+56
+
+57
+00:04:38,170 --> 00:04:40,010
+you can see I have got one request.
+57
+
+58
+00:04:40,360 --> 00:04:42,670
+This is the previous request that I have got.
+58
+
+59
+00:04:42,670 --> 00:04:44,560
+Let me just delete this request right now.
+59
+
+60
+00:04:44,920 --> 00:04:47,500
+And now it is waiting for your first request.
+60
+
+61
+00:04:47,950 --> 00:04:51,370
+Let let me copy the unique URL to my webhook.
+61
+
+62
+00:04:52,150 --> 00:04:56,260
+Go to Burp Suite and enter my unique URL and hit send.
+62
+
+63
+00:04:56,710 --> 00:05:05,200
+And you can see as soon as we hit send and we have received a response, there comes a hit on to our
+63
+
+64
+00:05:05,500 --> 00:05:11,780
+web URL, which means the host from which we are getting the hit is vulnerable.
+64
+
+65
+00:05:12,460 --> 00:05:15,490
+You can see we have also got the host IP.
+65
+
+66
+00:05:15,730 --> 00:05:22,570
+If I do a whois, I would be able to know that this request is coming from this particular target.
+66
+
+67
+00:05:23,020 --> 00:05:23,440
+All right.
+67
+
+68
+00:05:23,740 --> 00:05:29,750
+So let me just close this and show you the second alternative.
+68
+
+69
+00:05:29,770 --> 00:05:33,730
+So this is the second alternative, which is Pipedream dot com.
+69
+
+70
+00:05:34,420 --> 00:05:40,390
+And you can just come over here and you can request a bin and you can see waiting for an event.
+70
+
+71
+00:05:40,510 --> 00:05:42,530
+So it is waiting for even to happen.
+71
+
+72
+00:05:42,940 --> 00:05:45,730
+Now, this is your end point, which you can utilize.
+72
+
+73
+00:05:45,760 --> 00:05:52,930
+So let me just copy, even go back to Burp Suite and replace the previous one with the new
+73
+
+74
+00:05:53,960 --> 00:05:57,210
+end point of our request bin and let me hit send.
+74
+
+75
+00:05:57,740 --> 00:05:58,240
+Let's wait.
+75
+
+76
+00:05:58,280 --> 00:06:02,810
+If we get a hit over here, as you can see, it says success true.
+76
+
+77
+00:06:03,350 --> 00:06:04,060
+Let's wait.
+77
+
+78
+00:06:04,070 --> 00:06:10,550
+If we go if we have got a new request, once we get a new request, it is going to send a ping over
+78
+
+79
+00:06:10,550 --> 00:06:10,880
+here.
+79
+
+80
+00:06:12,170 --> 00:06:15,800
+And you can see we have got a successful request over here.
+80
+
+81
+00:06:16,220 --> 00:06:21,260
+And you can see it comes from the same IP address as we saw previously.
+81
+
+82
+00:06:21,770 --> 00:06:22,280
+Perfect.
+82
+
+83
+00:06:22,730 --> 00:06:26,860
+Now, we have come to know that our target is vulnerable.
+83
+
+84
+00:06:26,930 --> 00:06:33,350
+That is the reason it is making a connection request to the attacker controlled domain or any third party
+84
+
+85
+00:06:33,350 --> 00:06:33,660
+domain.
+85
+
+86
+00:06:34,370 --> 00:06:40,370
+Similarly, this is a third resource that I am going to show you, which is a request catcher dot com.
+86
+
+87
+00:06:40,940 --> 00:06:46,220
+Not the best thing about request catcher dot com is you can also create your free subdomains, as you
+87
+
+88
+00:06:46,220 --> 00:06:46,970
+can see over here.
+88
+
+89
+00:06:47,390 --> 00:06:52,820
+So I have created a free subdomain which is bug bounty dot request catcher dot com.
+89
+
+90
+00:06:52,820 --> 00:06:59,140
+And you can see here I can receive successful requests. Now how to use this.
+90
+
+91
+00:06:59,150 --> 00:07:02,510
+Once you have created your subdomain, copy the sub domain name
+91
+
+92
+00:07:03,020 --> 00:07:05,850
+go over where you want to test for SSRF.
+92
+
+93
+00:07:06,200 --> 00:07:10,820
+Let me just replace this with my new subdomain of request.
+93
+
+94
+00:07:10,820 --> 00:07:13,040
+catcher and let me just right here.
+94
+
+95
+00:07:14,000 --> 00:07:20,270
+SSRF. So the subdomain and the endpoint, I can add anything that I want.
+95
+
+96
+00:07:20,630 --> 00:07:27,740
+I have already done this test once, as you can see, and the endpoint that I chose was slash test and
+96
+
+97
+00:07:27,740 --> 00:07:35,720
+this time I'm choosing SSRF so that I can show you I get a new request onto my bug bounty dot request catcher
+97
+
+98
+00:07:35,720 --> 00:07:36,280
+dot com.
+98
+
+99
+00:07:36,980 --> 00:07:39,500
+Let me just hit send. And you can see
+99
+
+100
+00:07:39,500 --> 00:07:46,220
+I have successfully got one more hit and this is the hit which I'm getting from the same target, which
+100
+
+101
+00:07:46,220 --> 00:07:47,400
+is this IP address.
+101
+
+102
+00:07:47,900 --> 00:07:54,650
+Now this proof that I was able to successfully induce a request from this target to myself.
+102
+
+103
+00:07:55,190 --> 00:08:02,420
+Now in the next video we are going to see how can we utilize this to exfiltrate sensitive information
+103
+
+104
+00:08:02,420 --> 00:08:03,230
+from the target.
+104
+
+105
+00:08:03,680 --> 00:08:04,190
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+0
+1
+00:00:01,570 --> 00:00:09,630
+OK, so now, as we have identified the target to be vulnerable to SSRF potentially as it is making a
+1
+
+2
+00:00:09,640 --> 00:00:14,860
+request to the third party controlled domain, now we are going to escalate it.
+2
+
+3
+00:00:15,400 --> 00:00:24,370
+So what you can do basically is try to scan the internal network as well, identify ports whatever services
+3
+
+4
+00:00:24,370 --> 00:00:25,930
+are running on different ports.
+4
+
+5
+00:00:26,630 --> 00:00:30,040
+But we're not going to do the usual thing over here.
+5
+
+6
+00:00:30,250 --> 00:00:38,080
+Instead, we are going to use different filters to identify more sensitive information and dump sensitive
+6
+
+7
+00:00:38,080 --> 00:00:38,700
+information.
+7
+
+8
+00:00:39,280 --> 00:00:47,800
+So I know the application runs on WordPress because when I was spidering the application, I have got
+8
+
+9
+00:00:47,800 --> 00:00:54,220
+this directory which is wp-content which proves the target is running on a WordPress.
+9
+
+10
+00:00:54,460 --> 00:01:03,280
+Now, for those of you who know that whenever you make an application on WordPress, you have a login,
+10
+
+11
+00:01:03,280 --> 00:01:11,140
+which is the WP admin login, and there is a configuration file, which is WP config, which is a WordPress
+11
+
+12
+00:01:11,140 --> 00:01:12,220
+configuration file.
+12
+
+13
+00:01:12,940 --> 00:01:20,650
+So what we are going to do into this video is we are going to retrieve the WP configuration file for
+13
+
+14
+00:01:20,650 --> 00:01:27,340
+this target, which contains extremely sensitive information like the database name, the secret keys,
+14
+
+15
+00:01:27,580 --> 00:01:30,430
+password or details, etc..
+15
+
+16
+00:01:31,840 --> 00:01:40,270
+Now, in order to do that, we are not able to retrieve files by just giving the name of the file.
+16
+
+17
+00:01:40,300 --> 00:01:45,520
+So let me just show you let me go to my Burp again and now
+17
+
+18
+00:01:48,210 --> 00:01:51,720
+let me just copy the file name from here.
+18
+
+19
+00:01:56,280 --> 00:02:03,560
+Ok, so now I want this file, which is wordpress configuration, dot php.
+19
+
+20
+00:02:04,020 --> 00:02:08,970
+Let me just hit send and you can say it is unrecognized call.
+20
+
+21
+00:02:09,360 --> 00:02:17,840
+So jsmol dot php, which is this end point, does not understand what exactly is WP config.
+21
+
+22
+00:02:18,210 --> 00:02:23,970
+Let us try to navigate inside some directories and now let's see if you are able to get it.
+22
+
+23
+00:02:24,180 --> 00:02:30,030
+And still we are not able to retrieve the file now.
+23
+
+24
+00:02:30,900 --> 00:02:35,050
+Filters come handy in this place and we are going to use that.
+24
+
+25
+00:02:35,070 --> 00:02:40,590
+So let's say I'm going to use the php filter this time and I'm going to try to get the file.
+25
+
+26
+00:02:40,740 --> 00:02:43,940
+And you can see it still gives me the same error.
+26
+
+27
+00:02:46,780 --> 00:02:56,000
+All right, so now I'm just going to use the exact same payload to identify the website is vulnerable.
+27
+
+28
+00:02:56,710 --> 00:03:04,300
+So now we are going to use the php filter and the resource file or the resource data that we want from
+28
+
+29
+00:03:04,300 --> 00:03:08,200
+the target server, which is the wp config dot php.
+29
+
+30
+00:03:08,770 --> 00:03:16,150
+Let me just hit send and you can see we are successfully able to get the WordPress configuration file
+30
+
+31
+00:03:16,510 --> 00:03:23,910
+and you can see the DB name is vivelab12 vivelab12, db password.
+31
+
+32
+00:03:23,920 --> 00:03:31,180
+so they have not kept any DB password, which can be only retrieved or connected from the localhost.
+32
+
+33
+00:03:31,480 --> 00:03:38,710
+And you can see a lot of more sensitive information like authorization key secure auth key, logged in key
+33
+
+34
+00:03:39,010 --> 00:03:41,820
+nonce key, logged in salt, etc..
+34
+
+35
+00:03:42,190 --> 00:03:49,270
+So now this is very sensitive information and can be reported to the target bug bounty program, which
+35
+
+36
+00:03:49,270 --> 00:03:53,140
+will be flagged as a P1 critical security vulnerability.
+36
+
+37
+00:03:53,800 --> 00:04:02,500
+Now, as we can see over here, we have used a couple of dot dot slash just to navigate from the directories.
+37
+
+38
+00:04:02,720 --> 00:04:07,520
+And if I do not use this, we will not be able to retrieve the result.
+38
+
+39
+00:04:07,930 --> 00:04:15,910
+This is because we are going one step, two step three steps and into the four step back to navigate
+39
+
+40
+00:04:15,910 --> 00:04:21,490
+into the directory where this file lies, which is wp config dot php.
+40
+
+41
+00:04:21,790 --> 00:04:26,230
+And in a similar manner, you can download any sensitive files from the target.
+41
+
+42
+00:04:26,620 --> 00:04:32,470
+If you want to see what other files can be downloaded from a WordPress configuration, you can just
+42
+
+43
+00:04:32,470 --> 00:04:38,800
+go and have a look at the official WordPress documentation, but then you can see what are the other
+43
+
+44
+00:04:38,800 --> 00:04:42,430
+files which contains sensitive and juicy information.
+44
+
+45
+00:04:43,090 --> 00:04:49,810
+I have shown you the WP config dot php, which is the most critical file as we have seen it contains
+45
+
+46
+00:04:49,810 --> 00:04:54,600
+the information about the database as well as the auth keys.
+46
+
+47
+00:04:55,480 --> 00:05:00,900
+So I hope you guys understood how we are able to retrieve this using the php filter.
+47
+
+48
+00:05:01,480 --> 00:05:08,410
+Now, just a quick side note that you should remember sometimes instead of php filters, you can also
+48
+
+49
+00:05:08,410 --> 00:05:14,080
+use these filters like file://, dict:// , sftp://, gopher:// etc
+49
+
+50
+00:05:15,720 --> 00:05:24,560
+Many times these filters are also helpful in retrieving sensitive information from the target web server.
+50
+
+51
+00:05:24,840 --> 00:05:31,020
+So you should always give a try with these filters as well whenever you have identified SSRF to
+51
+
+52
+00:05:31,020 --> 00:05:34,830
+retrieve sensitive information from the target web application.
+52
+
+53
+00:05:35,310 --> 00:05:36,640
+I hope you guys understood.
+53
+
+54
+00:05:36,810 --> 00:05:37,410
+Thank you.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+==================================================================================
+
+# Section 17: Remote Code Execution
+
+0
+1
+00:00:01,680 --> 00:00:03,900
+Hello, everyone, and welcome to this video.
+1
+
+2
+00:00:04,710 --> 00:00:11,790
+So here there is an awesome CVE, which is an RCE vulnerability, which is identified into Apache
+2
+
+3
+00:00:11,790 --> 00:00:12,330
+software.
+3
+
+4
+00:00:12,960 --> 00:00:21,000
+So it is identified into Apache Unomi Software, which is basically a pre-auth RCE vulnerability
+4
+
+5
+00:00:21,390 --> 00:00:28,650
+Now, this vulnerability has been assigned a CVSS score of 10 which is critical.
+5
+
+6
+00:00:29,310 --> 00:00:31,140
+Now, this is because of
+6
+
+7
+00:00:32,360 --> 00:00:39,410
+the complete compromise of, Unomi services and confidentiality, integrity and availability,
+7
+
+8
+00:00:39,620 --> 00:00:47,390
+in addition to allowing the access to underlying operating system, which means basically any unauthenticated
+8
+
+9
+00:00:47,570 --> 00:00:55,730
+attacker can execute commands onto this Apache software and execute malicious commands.
+9
+
+10
+00:00:56,450 --> 00:01:03,410
+Now, this basically compromises the CIA triad and due to which the CVSS score has been assigned
+10
+
+11
+00:01:03,410 --> 00:01:05,960
+as 10.0, which is critical.
+11
+
+12
+00:01:06,500 --> 00:01:06,950
+All right.
+12
+
+13
+00:01:06,950 --> 00:01:10,370
+So let's quickly see what is this vulnerability.
+13
+
+14
+00:01:11,090 --> 00:01:18,800
+So this vulnerability lies in sending a specially crafted POST request to the endpoint, which is context.
+14
+
+15
+00:01:18,800 --> 00:01:19,940
+dot json.
+15
+
+16
+00:01:20,510 --> 00:01:25,720
+And you can see over here, this is the body which has been sent and into the body.
+16
+
+17
+00:01:26,150 --> 00:01:29,150
+you can see there is a runtime dot get runtime 
+17
+
+18
+00:01:29,360 --> 00:01:36,910
+dot execute. Here any command that you send will be executed onto the target webserver.
+18
+
+19
+00:01:37,160 --> 00:01:42,800
+So here we are basically going to create an empty file using the command touch into the directory, which
+19
+
+20
+00:01:42,800 --> 00:01:45,820
+is temp and the file name is POC.
+20
+
+21
+00:01:46,010 --> 00:01:46,400
+All right.
+21
+
+22
+00:01:47,180 --> 00:01:54,170
+Vulnerability number two, the same pre-auth RCE vulnerability is been assigned, but through a different
+22
+
+23
+00:01:54,170 --> 00:01:54,530
+way.
+23
+
+24
+00:01:55,440 --> 00:02:03,090
+And here you can see the researcher is able to execute the same command as you can see over here, which
+24
+
+25
+00:02:03,090 --> 00:02:11,460
+is touch slash temp slash POC within the payload may look like scary, but nothing fancy is happening
+25
+
+26
+00:02:11,460 --> 00:02:12,960
+over here. With the game
+26
+
+27
+00:02:12,990 --> 00:02:19,890
+the same thing is being run, which is runtime dot get runtime r dot execute the command, which is touch
+27
+
+28
+00:02:19,890 --> 00:02:22,530
+to create a blank file into the temp directory.
+28
+
+29
+00:02:23,830 --> 00:02:25,880
+All right, so I hope you guys understood this.
+29
+
+30
+00:02:25,900 --> 00:02:32,520
+Now let us try to see some more public POC'S that started coming up into the wild.
+30
+
+31
+00:02:33,040 --> 00:02:34,690
+So first, see over here,
+31
+
+32
+00:02:34,870 --> 00:02:38,860
+So again, CVE 2020-13942 payload.
+32
+
+33
+00:02:39,880 --> 00:02:48,360
+Here you can see the researcher is able to craft his own payload wherein he is trying to open a calculator.
+33
+
+34
+00:02:49,240 --> 00:02:53,440
+And what happens if I execute this command?
+34
+
+35
+00:02:54,540 --> 00:02:58,260
+You can see a calculator successfully gets popped up.
+35
+
+36
+00:02:58,660 --> 00:02:59,060
+All right.
+36
+
+37
+00:02:59,710 --> 00:03:06,550
+So this means the attacker is able to successfully execute commands on to the underlying target operating
+37
+
+38
+00:03:06,550 --> 00:03:07,000
+system.
+38
+
+39
+00:03:07,540 --> 00:03:13,310
+Let's have a look at the POC, which has been released by the original finder, our original author.
+39
+
+40
+00:03:14,590 --> 00:03:17,530
+So the first POC as you can see. HTTP Request
+40
+
+41
+00:03:17,560 --> 00:03:20,590
+so this is the HTTP request which has been sent.
+41
+
+42
+00:03:20,860 --> 00:03:27,520
+So let's copy this and let's send the same HTTP request to a target, which I have identified.
+42
+
+43
+00:03:27,940 --> 00:03:29,100
+So let's go over here.
+43
+
+44
+00:03:31,280 --> 00:03:39,650
+All right, so I'm going to replace the content over here and you can see this is the content over here. So
+44
+
+45
+00:03:39,650 --> 00:03:43,220
+let me just remove this part and let me hit send.
+45
+
+46
+00:03:43,670 --> 00:03:47,320
+And you can see I'm successfully able to get a 200 OK?
+46
+
+47
+00:03:47,690 --> 00:03:49,300
+And this is the output wherein
+47
+
+48
+00:03:49,310 --> 00:03:56,210
+you can see the command that I have executed is genome calculator, which means the calculator application
+48
+
+49
+00:03:56,210 --> 00:03:59,000
+must have opened onto the target server.
+49
+
+50
+00:03:59,000 --> 00:04:05,090
+And you can see the couple of parameters are available into the response body, which is profileId,
+50
+
+51
+00:04:05,550 --> 00:04:09,800
+sessionId, profileProperties,sessionProperties, etc..
+51
+
+52
+00:04:10,370 --> 00:04:12,620
+This confirms the target is vulnerable
+52
+
+53
+00:04:13,160 --> 00:04:18,950
+If the target gives the error and does not give this output into the response, which means it is not
+53
+
+54
+00:04:18,950 --> 00:04:19,420
+vulnerable.
+54
+
+55
+00:04:19,730 --> 00:04:26,240
+But here in this case, this target is successfully exploitable and vulnerable. Moving ahead.
+55
+
+56
+00:04:30,100 --> 00:04:35,320
+As we can see over here, this is another POC which has been uploaded and here you can see the same
+56
+
+57
+00:04:35,320 --> 00:04:39,370
+exact payload, but the command which has been executed is who am I?
+57
+
+58
+00:04:39,460 --> 00:04:41,490
+So let's try this as well.
+58
+
+59
+00:04:41,500 --> 00:04:43,080
+So let's copy it from here.
+59
+
+60
+00:04:44,770 --> 00:04:46,720
+Go to our Burp.
+60
+
+61
+00:04:47,730 --> 00:04:54,210
+And paste it over here and hit send. We get a bad request, my bad.
+61
+
+62
+00:04:55,880 --> 00:05:02,090
+And hit send and you can see and we are able to get the same response over here and the executed command is,
+62
+
+63
+00:05:02,090 --> 00:05:03,230
+who am I?
+63
+
+64
+00:05:03,950 --> 00:05:08,630
+All right, so you we can confirm that we are getting a right response based on this.
+64
+
+65
+00:05:08,630 --> 00:05:10,970
+And this confirms that the target is vulnerable
+65
+
+66
+00:05:11,450 --> 00:05:17,660
+Now, there are many templates that has been released into the wild for identification of the vulnerability,
+66
+
+67
+00:05:17,960 --> 00:05:24,410
+As well as many WAF rules that has been also released to block many WAF rules
+67
+
+68
+00:05:24,650 --> 00:05:33,770
+So you can see one of the detection rules, if any of the target is if any one is trying to identify
+68
+
+69
+00:05:34,160 --> 00:05:38,980
+the vulnerability onto your target server, you are going to get alerted by this delection rules.
+69
+
+70
+00:05:39,680 --> 00:05:46,880
+Also, if you see the nuclei, then you can see over here the matcher is the matched condition is
+70
+
+71
+00:05:46,880 --> 00:05:49,570
+and match type status 200.
+71
+
+72
+00:05:49,580 --> 00:05:52,130
+OK, words are these words
+72
+
+73
+00:05:52,130 --> 00:05:58,460
+And they are basically doing a regex of profile session id properties and segment.
+73
+
+74
+00:05:58,770 --> 00:06:03,320
+Let's see this profile sessions, id.
+74
+
+75
+00:06:04,240 --> 00:06:12,430
+Properties and segment, as you can see, ids properties and segment, so this is basically it to conclude
+75
+
+76
+00:06:12,430 --> 00:06:18,220
+that the target is vulnerable because we are able to get this into our response successfully.
+76
+
+77
+00:06:19,900 --> 00:06:27,600
+Now, how to identify multiple targets for that, you can simply use search engines like Shodan Census
+77
+
+78
+00:06:27,610 --> 00:06:29,000
+also you can use Google Dors.
+78
+
+79
+00:06:29,000 --> 00:06:34,090
+So I'm just going to show you how you can use Censys so you can just search for Apache
+79
+
+80
+00:06:34,090 --> 00:06:40,000
+Unomi and you will be able to see multiple targets as can be seen over here.
+80
+
+81
+00:06:40,210 --> 00:06:45,640
+Now, you can just come to any of the targets or let's say I go to the first target, which is this
+81
+
+82
+00:06:45,640 --> 00:06:45,870
+one.
+82
+
+83
+00:06:46,300 --> 00:06:50,410
+Let's go to Go and let's wait for this to open.
+83
+
+84
+00:06:56,240 --> 00:07:02,990
+Yeah, so so you can see successfully it has opened over here and this is the default configuration
+84
+
+85
+00:07:02,990 --> 00:07:04,630
+page of Apache Unomi
+85
+
+86
+00:07:05,120 --> 00:07:11,150
+And now you can try basically here you can search this as a Google dork as well.
+86
+
+87
+00:07:11,150 --> 00:07:16,930
+To identify multiple target, you have to modify your dork to get the right programs.
+87
+
+88
+00:07:16,940 --> 00:07:17,350
+All right.
+88
+
+89
+00:07:17,570 --> 00:07:22,640
+Now, I also written a script for you to identify multiple domains.
+89
+
+90
+00:07:22,640 --> 00:07:28,610
+If you have them, if you have subdomain enumerated, a lot of domains for any bug bounty program,
+90
+
+91
+00:07:28,610 --> 00:07:35,770
+then you can directly put the list of subdomains to this bash script and it will automatically identify
+91
+
+92
+00:07:35,780 --> 00:07:38,320
+for you if the target is vulnerable or not.
+92
+
+93
+00:07:38,320 --> 00:07:42,740
+For that, you just need to put your targets into a file, as you can see over here.
+93
+
+94
+00:07:42,830 --> 00:07:50,480
+And then I'm going to supply this file to my bash script and let me just hit enter and you can see it has
+94
+
+95
+00:07:50,480 --> 00:07:53,270
+started identifying if the target is vulnerable or not.
+95
+
+96
+00:07:53,510 --> 00:07:58,250
+And you can see this IP is vulnerable, which we have already seen into our Burp Suite.
+96
+
+97
+00:07:58,460 --> 00:08:04,280
+Apart from that, all the programs, as you can see, all the domains or subdomains are not vulnerable
+97
+
+98
+00:08:04,520 --> 00:08:11,150
+So this can be helpful to everyone to identify or mass scale your bug hunting, because this is a new
+98
+
+99
+00:08:11,150 --> 00:08:18,890
+CVE and you may end up identifying a vulnerable target subdomain program of any bug bounty program that
+99
+
+100
+00:08:18,890 --> 00:08:23,300
+can be even private because there are many RVDP programs that are been run.
+100
+
+101
+00:08:23,720 --> 00:08:29,420
+And you may get lucky to find out one of the subdomains which is not yet patched and which is running
+101
+
+102
+00:08:29,720 --> 00:08:32,040
+onto the outdated version of Apache Unomi.
+102
+
+103
+00:08:33,140 --> 00:08:37,880
+Now, remember, as this is a critical vulnerability, it is a remote code execution.
+103
+
+104
+00:08:38,210 --> 00:08:40,760
+It is a pre-auth remote code execution.
+104
+
+105
+00:08:40,760 --> 00:08:46,820
+So the chances are high that you may end up getting a very good bounty. In case you identify a vulnerable
+105
+
+106
+00:08:46,820 --> 00:08:47,270
+target.
+106
+
+107
+00:08:47,270 --> 00:08:48,830
+Then please do comment below.
+107
+
+108
+00:08:49,430 --> 00:08:53,630
+I would be very happy that you get benefit out of this video.
+108
+
+109
+00:08:56,080 --> 00:08:57,440
+So this is it for this video.
+109
+
+110
+00:08:57,700 --> 00:09:03,460
+I hope you guys liked it. I'm going to add all the resources into the description section so you guys
+110
+
+111
+00:09:03,460 --> 00:09:05,200
+can use it without any issues.
+111
+
+112
+00:09:05,920 --> 00:09:06,780
+Stay safe.
+112
+
+113
+00:09:06,850 --> 00:09:07,390
+Thank you.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
