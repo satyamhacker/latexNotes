@@ -6088,7 +6088,7 @@ Total Topics: 2 | Total Keywords: 33 | CVEs: 0 | Missed: 0
 
 # Section 6: How to start with Bug Bounty Platforms and Reporting
 
-Yeh raha tumhare **Section 6** ka Part 1. Isme main **Topic 1 (Bugcrowd)** aur **Topic 2 (HackerOne)** ko fully deep-dive karke explain kar raha hoon. Saare keywords, techniques aur practical details strictly preserve kiye gaye hain.
+
 
 =====Section 6: How to start with Bug Bounty Platforms and Reporting=====
 Is section mein hum Bugcrowd, HackerOne, Open Bug Bounty, NCIIPC, aur private RVDP programs pe bug bounty hunting aur reporting ka complete roadmap samjhenge.
