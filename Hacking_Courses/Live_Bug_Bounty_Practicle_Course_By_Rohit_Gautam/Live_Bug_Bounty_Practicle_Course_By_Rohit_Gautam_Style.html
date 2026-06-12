@@ -391,13 +391,18 @@
                     return response.text();
                 })
                 .then(markdown => {
-                    // 1. Pre-process Markdown (Fix indented modules and sections)
-                    let processed = markdown.replace(/^#\s+(Section\s+\d+.*)/gm, '## MODULE_MARKER $1');
-                    processed = processed.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, '## MODULE_MARKER $1');
+                    // 1. Pre-process Markdown (Universal Module & Topic Catcher)
+                    // Catch explicit headers like "# Section 1...", "### ⚛️ Module 1..."
+                    let processed = markdown.replace(/^#+\s*(?:.*?\s)?(Module\s+\d+|Section\s+\d+)(.*)/gim, '## MODULE_MARKER $1$2');
                     
-                    // The Markdown has headers like `### 🎯 1. OTP Bypass via Response Manipulation`
-                    // Let's ensure these are properly targeted as topics.
-                    processed = processed.replace(/^###\s+(.*)/gm, '### TOPIC_MARKER $1');
+                    // Catch implicitly indented modules like "  Module 1: ..."
+                    processed = processed.replace(/^\s*(Module\s+\d+.*)/gim, '## MODULE_MARKER $1');
+                    
+                    // Convert remaining h3 and h4 headers into properly styled Topics
+                    processed = processed.replace(/^#{3,4}\s+(?!MODULE_MARKER)(.*)/gm, '### TOPIC_MARKER $1');
+                    
+                    // Converts "1.1:" to bold for better readability
+                    processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
 
                     // 2. Configure Renderer
                     const renderer = new marked.Renderer();
