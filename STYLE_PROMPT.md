@@ -405,6 +405,37 @@ document.addEventListener("DOMContentLoaded", () => {
          return `<h${level}${classStr} id="${id}">${cleanText}</h${level}>`;
     };
 
+    // GitHub-Style Alerts (Callouts)
+    renderer.blockquote = function(quote) {
+        const text = quote ? String(quote) : '';
+        let color = '#58a6ff'; // Default Blue (Note)
+        let bg = 'rgba(88, 166, 255, 0.08)';
+        let title = 'Note';
+        let icon = 'fa-info-circle';
+        
+        let isAlert = false;
+        
+        if (text.includes('[!WARNING]')) { color = '#d29922'; bg = 'rgba(210, 153, 34, 0.1)'; title = 'Warning'; icon = 'fa-triangle-exclamation'; isAlert = true; }
+        else if (text.includes('[!IMPORTANT]')) { color = '#8957e5'; bg = 'rgba(137, 87, 229, 0.1)'; title = 'Important'; icon = 'fa-circle-exclamation'; isAlert = true; }
+        else if (text.includes('[!TIP]') || text.includes('[!SUCCESS]')) { color = '#238636'; bg = 'rgba(35, 134, 54, 0.1)'; title = 'Tip'; icon = 'fa-lightbulb'; isAlert = true; }
+        else if (text.includes('[!CAUTION]') || text.includes('[!DANGER]')) { color = '#da3633'; bg = 'rgba(218, 54, 51, 0.1)'; title = 'Caution'; icon = 'fa-skull-crossbones'; isAlert = true; }
+        else if (text.includes('[!NOTE]')) { isAlert = true; }
+        
+        if (isAlert) {
+            // Strip out the tag whether it's wrapped in a <p> or standalone
+            const cleanText = text.replace(/(<p>)?\s*\[!(NOTE|WARNING|IMPORTANT|TIP|SUCCESS|CAUTION|DANGER)\]\s*(<\/p>|<br>)?/i, '<p>');
+            return `<div style="border-left: 4px solid ${color}; background: ${bg}; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; page-break-inside: avoid;">
+                <div style="color: ${color}; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-family: 'Outfit', sans-serif;">
+                    <i class="fa-solid ${icon}"></i> ${title}
+                </div>
+                <div style="color: var(--text-secondary); margin: 0;">${cleanText}</div>
+            </div>`;
+        }
+        
+        // Default blockquote behavior
+        return `<blockquote>${text}</blockquote>`;
+    };
+
     // 3. Render
     contentArea.innerHTML = marked.parse(processed, { renderer: renderer });
 });
