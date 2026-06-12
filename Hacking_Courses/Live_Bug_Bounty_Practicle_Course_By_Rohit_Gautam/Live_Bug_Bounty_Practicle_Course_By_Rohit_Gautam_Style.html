@@ -56,8 +56,8 @@
             padding-bottom: 0.5rem;
         }
 
-        /* Topic & Module Sections - Big Bold Blue */
-        h2.topic-section, h2.module-section {
+        /* Module Sections - Big Bold Blue */
+        .module-section {
             font-family: 'Outfit', sans-serif;
             font-size: 2.5rem;
             font-weight: 800;
@@ -66,10 +66,44 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            border-left: 5px solid #4facfe;
+            border-left: 6px solid #4facfe;
             padding-left: 1rem;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Topic Sections - Distinct Vibrant Gradient */
+        .topic-section {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); /* Orange-ish gradient */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-left: 4px solid #fda085;
+            padding-left: 1rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            padding-top: 0.2rem;
+            padding-bottom: 0.2rem;
+            background-color: rgba(253, 160, 133, 0.05); /* very subtle background for depth */
+            border-radius: 0 8px 8px 0;
+            display: inline-block; /* Makes background fit the text width + padding */
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* Ensure normal H3 looks standard */
+        h3:not(.topic-section) {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.4rem;
         }
 
         /* Mac-Style Code Blocks */

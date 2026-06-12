@@ -74,8 +74,8 @@ h2 {
     padding-bottom: 0.5rem;
 }
 
-/* Topic & Module Sections - Big Bold Blue */
-h2.topic-section, h2.module-section {
+/* Module Sections - Big Bold Blue */
+.module-section {
     font-family: 'Outfit', sans-serif;
     font-size: 2.5rem;
     font-weight: 800;
@@ -84,10 +84,44 @@ h2.topic-section, h2.module-section {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    border-left: 5px solid #4facfe;
+    border-left: 6px solid #4facfe;
     padding-left: 1rem;
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Topic Sections - Distinct Vibrant Gradient */
+.topic-section {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); /* Orange-ish gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-left: 4px solid #fda085;
+    padding-left: 1rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.2rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    background-color: rgba(253, 160, 133, 0.05); /* very subtle background for depth */
+    border-radius: 0 8px 8px 0;
+    display: inline-block; /* Makes background fit the text width + padding */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ensure normal H3 looks standard */
+h3:not(.topic-section) {
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.4rem;
 }
 
 /* Mac-Style Code Blocks */
@@ -250,11 +284,14 @@ Use this specific logic to handle the Markdown parsing. It fixes common bugs and
 document.addEventListener("DOMContentLoaded", () => {
     // ... Fetch MD logic ...
     
-    // 1. Pre-process Markdown (Fix indented modules)
-    // Converts "  Module 1:" to "## MODULE_MARKER Module 1:"
-    let processed = markdown.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, '## MODULE_MARKER $1');
-    // Converts "Topic X.X:" to special heading
-    processed = processed.replace(/^##\s+(Topic\s+\d+\.\d+:.*)/gm, '## TOPIC_MARKER $1');
+    // 1. Pre-process Markdown (Fix indented modules and sections)
+    let processed = markdown.replace(/^#\s+(Section\s+\d+.*)/gm, '## MODULE_MARKER $1');
+    processed = processed.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, '## MODULE_MARKER $1');
+    
+    // The Markdown has headers like `### 🎯 1. OTP Bypass via Response Manipulation`
+    // Let's ensure these are properly targeted as topics.
+    processed = processed.replace(/^###\s+(.*)/gm, '### TOPIC_MARKER $1');
+    
     // Converts "1.1:" to bold
     processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
 
@@ -288,23 +325,24 @@ document.addEventListener("DOMContentLoaded", () => {
     
     renderer.heading = function(text, level) {
          const safeText = text ? String(text) : '';
-         const id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+         let id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+         let classStr = '';
+         let cleanText = safeText;
          
-         // Check if this is a Module section
-         if (safeText.startsWith('MODULE_MARKER ')) {
-             const cleanText = safeText.replace('MODULE_MARKER ', '');
-             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
-             return `<h${level} class="module-section" id="${cleanId}">${cleanText}</h${level}>`;
+         if (safeText.includes('MODULE_MARKER ')) {
+             cleanText = safeText.replace(/MODULE_MARKER /g, '');
+             id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+             classStr = ' class="module-section"';
+             level = 2; // enforce level 2
+         }
+         else if (safeText.includes('TOPIC_MARKER ')) {
+             cleanText = safeText.replace(/TOPIC_MARKER /g, '');
+             id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+             classStr = ' class="topic-section"';
+             level = 3; // enforce level 3
          }
          
-         // Check if this is a Topic section
-         if (safeText.startsWith('TOPIC_MARKER ')) {
-             const cleanText = safeText.replace('TOPIC_MARKER ', '');
-             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
-             return `<h${level} class="topic-section" id="${cleanId}">${cleanText}</h${level}>`;
-         }
-         
-         return `<h${level} id="${id}">${safeText}</h${level}>`;
+         return `<h${level}${classStr} id="${id}">${cleanText}</h${level}>`;
     };
 
     // 3. Render
