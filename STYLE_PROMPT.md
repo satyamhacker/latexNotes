@@ -156,6 +156,17 @@ code {
     word-wrap: break-word !important;
 }
 
+/* Inline Code Styling */
+p code, li code, td code {
+    background-color: rgba(88, 166, 255, 0.15);
+    color: #79c0ff;
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-family: 'Fira Code', monospace;
+    border: 1px solid rgba(88, 166, 255, 0.2);
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -219,6 +230,41 @@ tr:hover {
     padding: 3rem 4rem;
     max-width: 900px;
     margin: 0 auto;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+/* Content Links */
+.main-content a {
+    color: #58a6ff;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(88, 166, 255, 0.5);
+    transition: all 0.2s;
+}
+.main-content a:hover {
+    color: #79c0ff;
+    border-bottom: 1px solid #79c0ff;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-color);
+}
+
+/* Task Lists / Checkboxes */
+input[type="checkbox"] {
+    accent-color: #58a6ff;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    top: 2px;
 }
 
 /* Blockquote */
@@ -273,6 +319,20 @@ blockquote {
     .main-content { padding: 2rem !important; margin: 0 auto; max-width: 100%; }
     
     a { text-decoration: none !important; border-bottom: none !important; }
+
+    /* PDF Page Breaking Rules */
+    .module-section {
+        page-break-before: always; /* Each new section starts on a fresh page */
+        margin-top: 0 !important;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid; /* Prevent header at the bottom of a page */
+    }
+    
+    pre, blockquote, table, img {
+        page-break-inside: avoid; /* Prevent code blocks and tables from splitting across pages */
+    }
 }
 ```
 
