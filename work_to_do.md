@@ -1047,223 +1047,131 @@ Sections: 1 | Topics: 4 | Subtopics: 33
 
 # Module 5: Distributed Algorithms & Data Structures (Expert Level)
 
+📦 Processing: Phase Update — Module 5: Distributed Algorithms & Data Structures (Expert Level)
 
-📦 Processing: Phase 1 — Module 4: Caching & CDN
+=====Section 1: Distributed Consensus & Internal Algorithms=====
+Distributed systems mein multiple nodes ke beech agreement (consensus) aur data consistency ensure karne ki hardcore internal algorithms.
 
-=====Section 1: Caching & CDN [⚠️ Derived]=====
-System ko fast aur scalable banane ke liye memory aur geographically distributed networks ka proper use. [⚠️ Derived]
+--1--Distributed Consensus & Internal Algorithms--
+Topic 1: Consensus Algorithms & Leader Election
+Subtopics: Distributed Consensus, Paxos Algorithm, Raft Algorithm, Leader Election, Split Brain Problem, Quorum, Heartbeats, Term, Zookeeper, Kafka Internals
 
---1--Caching & CDN--
-Topic 1: Caching Basics
-Subtopics: Caching Concept, Key Terms, Latency Numbers, Caching Architecture, Cache Hit vs Cache Miss, Hit Rate Calculation, 80-20 Rule (Pareto Principle), Read-Heavy System, Write-Heavy System, Balanced System, In-Memory Caches, Application-Level Caches
+```text
+[📊 Diagram reproduced: Raft Leader Election]
+
+[Node A (Follower)]        [Node B (Leader)]        [Node C (Follower)]
+       |                          |                        |
+       |<------ Heartbeat --------|                        |
+       |                          |------ Heartbeat ------>|
+       |                          |                        |
+(Timeout!) -> Becomes Candidate   |                        |
+       |                          |                        |
+[RequestVote] ------------------->| (Votes Yes)            |
+[RequestVote] -------------------------------------------->| (Votes Yes)
+       |
+(Gets Quorum = 2/3 votes) -> Becomes NEW LEADER
+       |
+       |------ Heartbeat (I am new leader) --------------->|
+```
 
 [📊 SCOPE SIGNAL for Topic 1:
 
 * Depth Level: Deep
 * Coverage Angle: Both
-* Notes mein content volume: Long explanation with latency data, formulas, ASCII architecture diagram, and Python code example.
-* Key terms from notes: Cache, Cache Hit, Cache Miss, Hit Rate, TTL, Eviction, RAM, SSD, HDD, L1 Cache, Redis, Memcached, Pareto Principle, Read-Heavy, Write-Heavy
-* Explicit emphasis in notes: "Latency Numbers (Every Developer Should Know)", "Conclusion: RAM (Cache) is 100,000x faster than Disk (Database)"
-* Notes mein jo analogies/examples the: "Cache ek cheat sheet jaisa hai" (exam notebook page vs textbook page 247). Twitter timeline caching example for 500M+ users.
+* Notes mein content volume: Detailed breakdown of Raft states (Follower, Candidate, Leader) and Zookeeper/Kafka internal mechanisms.
+* Key terms from notes: Paxos, Raft, Consensus, Quorum, Leader Election, Heartbeats, Split Brain.
+* Explicit emphasis in notes: "Ek Senior Architect ko pata hona chahiye ki Zookeeper ya Kafka internally kaam kaise karta hai (Leader election via Raft)."
+* Notes mein jo analogies/examples the: "Class monitor election" analogy for Leader Election.
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[Caching, RAM, persistent storage, Cache Hit, Cache Miss, Hit Rate, TTL, Eviction, LRU, LFU, CPU 100%, 503 errors, bounce rate, GET /user/123, Redis.get, Redis.set, PostgreSQL, L1 Cache, L2 Cache, SSD, HDD, Pareto Principle, 80-20 Rule, Hazelcast, Caffeine, Node-cache, Cache-Aside, Read-Through, Write-Behind, Write-Through, Write-Back, psycopg2, redis_client.setex, ⭐"Latency Numbers (Every Developer Should Know)"[emphasized in notes], ⭐"RAM (Cache) is 100,000x faster than Disk"[emphasized in notes], Twitter Timeline Caching]
+[Consensus, Paxos, Raft, Zookeeper, Kafka, Leader Election, Follower, Candidate, Leader, Quorum, Split Brain, Heartbeat, Term, Log Replication, Commit Index, Distributed State Machine]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: (N/A — notes mein is topic ke liye koi testing phase describe nahi kiya gaya)
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: User data request karta hai, app pehle Redis cache check karta hai. Agar hit hua toh <1ms mein data return hota hai, agar miss hua toh database (10-100ms) se fetch karke cache mein store (TTL ke saath) aur user ko return kiya jata hai.
-* Additional context: Twitter timeline caching use karta hai (800 tweets cached for 5 mins) jisse 95% DB load reduce hota hai aur sub-100ms load time achieve hota hai.
+* Testing/Offline Phase: Raft algorithm ke timeout aur election scenarios ko simulate karke split-brain network partitions test karna.
+* Fixing/Iteration Phase: Agar cluster mein leader down ho jaye, toh remaining nodes naya term start karte hain aur < 500ms mein naya leader elect karte hain taaki system available rahe.
+* Live Production Phase: Kafka aur Zookeeper production mein Raft use karke strict linearizable consistency maintain karte hain, jahan har write request siraf leader handle karta hai.
 
-Topic 2: Caching Patterns
-Subtopics: Caching Patterns Concept, Cache-Aside (Lazy Loading), Write-Through, Write-Behind (Write-Back), Read-Through, Refresh-Ahead, Cache Invalidation Strategies
+Topic 2: Peer-to-Peer Communication & Synchronization
+Subtopics: Gossip Protocol, Epidemic Broadcast, Node Failure Detection, Vector Clocks, Logical Clocks, Concurrent Events, Causal Ordering
+
+```text
+[📊 Diagram reproduced: Vector Clocks Logic]
+
+Initial state: [A:0, B:0, C:0]
+
+Node A updates data: [A:1, B:0, C:0]
+Node B updates data: [A:0, B:1, C:0]
+
+Syncing A & B -> Conflict detected! Both updated independently.
+Merged state: [A:1, B:1, C:0]
+```
 
 [📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
-* Coverage Angle: Both
-* Notes mein content volume: Long explanation with ASCII flow diagrams and detailed Python code implementations for multiple patterns.
-* Key terms from notes: Cache-Aside, Lazy Loading, Write-Through, Write-Behind, Write-Back, Read-Through, Refresh-Ahead, Invalidation, Eventual consistency
-* Explicit emphasis in notes: None
-* Notes mein jo analogies/examples the: "Cache-Aside: Tum khud apni cheat sheet maintain karte ho", "Write-Through: Teacher tumhare notes aur textbook dono update karta hai", "Write-Behind: Teacher pehle notes update karta hai, baad mein textbook". Instagram caching strategy example.
+* Coverage Angle: Conceptual only
+* Notes mein content volume: Decentralized node communication patterns and logical time math.
+* Key terms from notes: Gossip Protocol, Vector Clocks, Logical Time, Causal Ordering.
+* Explicit emphasis in notes: "Distributed systems mein time (wall-clock) par trust nahi kar sakte, isliye Vector Clocks chahiye."
+* Notes mein jo analogies/examples the: "Office rumors spreading" analogy for Gossip Protocol.
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[Caching Patterns, Cache-Aside, Lazy Loading, Write-Through, Write-Behind, Write-Back, Read-Through, Refresh-Ahead, Redis.get, Redis.set, Redis.del, TTL, Eventual consistency, Strong consistency, Batch writes, AWS ElastiCache, Apache Ignite, queue.Queue, threading.Thread, db_writer, Kafka, RabbitMQ, Instagram Caching Strategy]
+[Gossip Protocol, Epidemic algorithm, Peer-to-Peer, P2P, Failure Detection, Vector Clocks, Lamport Timestamps, Logical Clocks, Causal Ordering, Concurrent Events, DynamoDB, Cassandra, Conflict Resolution]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: (N/A)
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: App pehle cache check karta hai (Cache-Aside), ya critical data ke liye cache aur DB dono ek saath update karta hai (Write-Through), ya phir high-volume data ke liye fast cache write karke background thread mein async DB write (Write-Behind) karta hai.
-* Additional context: Instagram Cache-Aside user profiles ke liye, Write-Through critical settings ke liye, aur Write-Behind analytics/likes ke liye use karta hai.
+* Testing/Offline Phase: P2P networks mein packet drop scenarios model karna aur Gossip dissemination time calculate karna.
+* Fixing/Iteration Phase: Vector Clocks conflict detect hone par application layer par diverge states bheje jaate hain, taaki developer/user explicitly merge kar sake (like DynamoDB cart merge).
+* Live Production Phase: Cassandra nodes har second random peers se gossip karke topology aur node failure ka O(log N) time mein pata lagate hain bina central server ke.
 
-Topic 3: Advanced Caching Issues (Eviction & Stampede)
-Subtopics: Eviction Policies, LRU (Least Recently Used), LFU (Least Frequently Used), TTL, Cache Stampede (Thundering Herd), Probabilistic Early Expiration, Distributed Locking
+Topic 3: Distributed Data Structures
+Subtopics: Merkle Trees, Hash Trees, Data Verification, Anti-Entropy, Bloom Filters, Probabilistic Data Structures, False Positives
+
+```text
+[📊 Diagram reproduced: Merkle Tree]
+
+          [Hash(Hash0 + Hash1)] (Root Hash)
+                /                      [Hash0]                     [Hash1]
+       /     \                     /       [Data A] [Data B]           [Data C] [Data D]
+
+(Agar Data C corrupt hua, toh Hash1 aur Root Hash change hoga, jisse inconsistency turant detect ho jayegi.)
+```
 
 [📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
 * Coverage Angle: Both
-* Notes mein content volume: Detailed explanations, ASCII diagrams for LRU/Stampede, formulas, aur Python code implementation for LRU Cache aur Stampede Locking.
-* Key terms from notes: Eviction Policies, LRU, LFU, TTL, Cache Stampede, Thundering Herd, Probabilistic Early Expiration, Distributed Locking, Mutex, Jitter
-* Explicit emphasis in notes: "CRITICAL: prevents deadlock", "CRITICAL: Always release lock in finally block"
-* Notes mein jo analogies/examples the: "Eviction: Limited space ki notebook...", "Cache Stampede: Exam hall mein ek hi question ka answer sabko chahiye...". Reddit AMA failure aur Twitter Trending Topics ka example.
+* Notes mein content volume: Tree structures, probabilistic math, and practical use cases in massive datasets.
+* Key terms from notes: Merkle Trees, Bloom Filters, False Positives, Anti-Entropy.
+* Explicit emphasis in notes: "Bloom filter DB queries bachane ka sabse powerful tool hai (Can say 'Definitely No', but only 'Probably Yes')."
+* Notes mein jo analogies/examples the: "Airport security checks" analogy for Bloom Filters.
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[Eviction Policies, LRU, LFU, TTL, Cache Stampede, Thundering Herd, Probabilistic Early Expiration, Locking, Mutex, Jitter, allkeys-lru, allkeys-lfu, volatile-ttl, allkeys-random, maxmemory, SETNX, Compare-And-Swap, OrderedDict, move_to_end, popitem, redis_client.setnx, redis_client.expire, Deadlock, Redis Redlock, Twitter Trending Topics, ⭐"CRITICAL: prevents deadlock"[emphasized in notes], ⭐"CRITICAL: Always release lock in finally block"[emphasized in notes]]
+[Merkle Trees, Hash Trees, Data Verification, Anti-Entropy, Synchronization, Blockchain, DynamoDB, Bloom Filters, Probabilistic Data Structure, False Positives, False Negatives, Set Membership, Cache memory optimization, Hash functions]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Testing/Offline Phase: (N/A)
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: Jab cache memory full ho jati hai, LRU sabse purane unused data ko remove karta hai. Jab koi viral/popular cache expire hota hai, toh app distributed lock acquire karta hai taaki sirf ek request DB query kare aur baaki wait karein, jisse DB stampede/overload prevent hota hai.
-* Additional context: Twitter LRU eviction aur probabilistic early expiration (TTL 50-60s) use karta hai trending topics caching mein stampedes rokne ke liye.
-
-Topic 4: CDN (Content Delivery Network)
-Subtopics: CDN Concept, Edge Servers, Origin Server, Push CDN, Pull CDN, Static vs Dynamic Content, Cache-Control Headers, Cache Invalidation
-
-[📊 SCOPE SIGNAL for Topic 4:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Notes mein content volume: Long explanation with architecture diagram, cost saving formulas, Cache-Control headers Express code, aur AWS S3/CloudFront integration code.
-* Key terms from notes: CDN, Edge Servers, PoPs, Origin Server, Static Content, Dynamic Content, Push CDN, Pull CDN, Cloudflare, AWS CloudFront, Akamai, Fastly, Cache-Control, max-age, immutable, Invalidation
-* Explicit emphasis in notes: None
-* Notes mein jo analogies/examples the: "CDN ek pizza delivery chain jaisa hai...". Instagram early days latency issue aur Netflix custom CDN (Open Connect) ka example.
-]
-
-🔑 KEYWORDS DUMP for Topic 4:
-[CDN, Content Delivery Network, Edge Servers, PoPs, Origin Server, Static Content, Dynamic Content, DNS Resolution, Push CDN, Pull CDN, Cloudflare, AWS CloudFront, Akamai, Fastly, Nginx, GeoDNS, Varnish Cache, Cache-Control, public, private, max-age, immutable, no-cache, no-store, must-revalidate, boto3, s3.upload_file, cloudfront.create_invalidation, Netflix Open Connect]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
-
-* Testing/Offline Phase: Developer server par Cache-Control headers configure karta hai (e.g., images ke liye 1 year max-age, APIs ke liye no-cache) ya manual files S3/CDN par upload karta hai (Push CDN).
-* Fixing/Iteration Phase: Agar content urgently update karna ho aur old cache clear karna ho, toh developer CDN API (jaise AWS CloudFront create_invalidation) use karke edge servers par purge request bhejta hai.
-* Live Production Phase: User globally (e.g., India) jab image request karta hai, DNS nearest Edge Server (India CDN) resolve karta hai. Agar cache hit hua toh <50ms mein deliver hota hai, warna Origin Server (US) se fetch karke locally cache hota hai.
-* Additional context: Netflix apna custom CDN (Open Connect) use karta hai off-peak hours mein videos pre-cache karne ke liye, jisse 95% global traffic edge se serve hota hai.
+* Testing/Offline Phase: Bloom Filter ke size aur hash functions ka optimal count calculate karna taaki false positive rate < 1% rahe.
+* Fixing/Iteration Phase: Agar database check heavy hai, toh ek in-memory Bloom filter lagana jo guarantee de ki "Username is available" bina DB hit kiye.
+* Live Production Phase: DynamoDB nodes ke beech data mismatch (Anti-Entropy) background mein Merkle Trees compare karke efficiently fix hota hai, jahan sirf modified branches sync karni padti hain (saving massive bandwidth).
 
 ---
-
-[📊 Diagram reproduced: Caching Architecture]
-
-```
-                    [User Request]
-                          |
-                    GET /user/123
-                          |
-                          v
-                 +------------------+
-                 |    Application    |
-                 +------------------+
-                          |
-                    (1) Check Cache
-                          |
-                          v
-                 +------------------+
-                 |   Redis Cache    |
-                 |   (In-Memory)    |
-                 +------------------+
-                    /            \
-            Cache Hit            Cache Miss
-            (Fast <1ms)          (Slow path)
-                 /                  \
-                v                    v
-          [Return Data]         +------------+
-          from Cache            |  Database  |
-                                | (PostgreSQL)|
-                                +------------+
-                                      |
-                                (2) Fetch Data
-                                      |
-                                      v
-                                [Store in Cache]
-                                (for next request)
-                                      |
-                                      v
-                                [Return to User]
-
-```
-
-[📊 Diagram reproduced: CDN Architecture]
-
-```
-                    [Users Globally]
-                          |
-        +-----------------+-----------------+
-        |                 |                 |
-   [User India]      [User US]        [User Europe]
-        |                 |                 |
-    (1) Request      (1) Request       (1) Request
-    photo.jpg        photo.jpg         photo.jpg
-        |                 |                 |
-        v                 v                 v
-   +----------+      +----------+      +----------+
-   | CDN Edge |      | CDN Edge |      | CDN Edge |
-   |  India   |      |    US    |      |  Europe  |
-   +----------+      +----------+      +----------+
-        |                 |                 |
-   Cache Hit?        Cache Hit?        Cache Hit?
-        |                 |                 |
-    Yes (Fast)        Yes (Fast)        No (Miss)
-    10-50ms           10-50ms               |
-        |                 |                 |
-        |                 |            (2) Fetch from
-        |                 |             Origin Server
-        |                 |                 |
-        |                 |                 v
-        |                 |         +---------------+
-        |                 |         | Origin Server |
-        |                 |         |   (US Main)   |
-        |                 |         +---------------+
-        |                 |                 |
-        |                 |            (3) Cache +
-        |                 |             Serve (500ms)
-        |                 |                 |
-        v                 v                 v
-   [Fast Load]       [Fast Load]       [First time slow,
-    10-50ms           10-50ms          then fast]
-
-```
-
----
-
-**Double-check steps performed:**
-
-* [x] Poore notes completely padhe bina kuch skip kiye.
-* [x] Notes ko Sections mein group kiya — related topics ek Section mein hain.
-* [x] Har Section ka tagline/context line add kiya.
-* [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-* [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-* [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
-* [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-* [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-* [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-* [x] Chronological order preserved.
-* [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
-* [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-* [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-* [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-* [x] Diagrams/tables reproduced ya flagged — koi silently skip nahi ki.
-* [x] OCR quality warning di agar 20%+ content unclear tha (N/A).
-* [x] Phase tracking aur CONTINUE protocol follow kiya (Fit in one response).
-* [x] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon? Haan, "Caching Patterns" ke andar multiple detailed strategies ko single topic mein group kiya, aur "Advanced Caching Issues" mein LRU aur Stampede dono ko merged rakha.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Caching & CDN [⚠️ Derived]
-Topic 1: Caching Basics
-Topic 2: Caching Patterns
-Topic 3: Advanced Caching Issues (Eviction & Stampede)
-Topic 4: CDN (Content Delivery Network)
+Section 1: Distributed Consensus & Internal Algorithms
+Topic 1: Consensus Algorithms & Leader Election
+Topic 2: Peer-to-Peer Communication & Synchronization
+Topic 3: Distributed Data Structures
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 33
+Sections: 1 | Topics: 3 | Subtopics: 24
 
 **--- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.**
 
