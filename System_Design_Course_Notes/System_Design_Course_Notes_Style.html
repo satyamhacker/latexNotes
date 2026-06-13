@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Design Notes</title>
+    <title>Premium System Design Notes</title>
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Highlight.js CSS -->
@@ -13,211 +13,177 @@
     
     <style>
         :root {
-            /* Color Palette - Deep Dark Theme */
-            --bg-primary: #0f1115;
-            --bg-secondary: #161b22;
-            --text-primary: #ffffff;
-            --text-secondary: #e6edf3;
+            /* Deep Dark Premium Theme */
+            --bg-primary: #0a0c10;
+            --bg-secondary: rgba(22, 27, 34, 0.6);
+            --text-primary: #f0f6fc;
+            --text-secondary: #c9d1d9;
             --accent-blue: #58a6ff;
-            --accent-gradient: linear-gradient(135deg, #61dafb 0%, #4facfe 100%);
-            --border-color: #30363d;
+            --accent-glow: rgba(88, 166, 255, 0.4);
+            --accent-gradient: linear-gradient(135deg, #58a6ff 0%, #00f2fe 100%);
+            --topic-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            --border-color: rgba(48, 54, 61, 0.6);
+            --glass-bg: rgba(15, 17, 21, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.05);
         }
 
         body {
             background-color: var(--bg-primary);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(88, 166, 255, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(253, 160, 133, 0.04) 0%, transparent 50%);
+            background-attachment: fixed;
             color: var(--text-primary);
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #58a6ff; }
 
         /* Loading Spinner */
         #loader {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 1.5rem; color: var(--accent-blue); z-index: 9999;
-        }
-
-        h1 {
             font-family: 'Outfit', sans-serif;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 3rem;
-            border-bottom: 3px solid var(--border-color);
+            font-size: 1.8rem; color: var(--accent-blue); z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; gap: 1rem;
         }
 
-        h2 {
-            color: var(--text-primary);
-            font-size: 2rem;
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 0.5rem;
-        }
+        /* Layout & Sidebar */
+        .layout { display: flex; min-height: 100vh; }
 
-        /* Module Sections - Big Bold Blue */
-        .module-section {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #4facfe;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            border-left: 6px solid #4facfe;
-            padding-left: 1rem;
-            margin-top: 4rem;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Topic Sections - Distinct Vibrant Gradient */
-        .topic-section {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.7rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            border-left: 4px solid #fda085;
-            padding-left: 1rem;
-            margin-top: 2.5rem;
-            margin-bottom: 1.2rem;
-            padding-top: 0.2rem;
-            padding-bottom: 0.2rem;
-            background-color: rgba(253, 160, 133, 0.05);
-            border-radius: 0 8px 8px 0;
-            display: inline-block;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* Ensure normal H3 looks standard */
-        h3:not(.topic-section) {
-            color: var(--text-primary);
-            font-size: 1.4rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.4rem;
-        }
-
-        /* Mac-Style Code Blocks */
-        pre.mac-window {
-            background: #0d1115;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin: 2rem 0;
-            white-space: pre-wrap !important;
-            word-break: break-word !important; 
-            overflow-x: hidden !important;
-        }
-
-        .code-header {
-            background: #161b22;
-            padding: 8px 15px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex; justify-content: space-between;
-            align-items: center;
-        }
-
-        .control { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px; }
-        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-
-        code {
-            font-family: 'Fira Code', monospace;
-            white-space: pre-wrap !important; 
-            word-wrap: break-word !important;
-        }
-        
-        /* Inside the block padding */
-        .mac-window code {
-            display: block;
-            padding: 1.5rem;
-            overflow-x: auto;
-        }
-
-        /* Inline Code Styling */
-        p code, li code, td code {
-            background-color: rgba(88, 166, 255, 0.15);
-            color: #79c0ff;
-            padding: 0.2em 0.4em;
-            border-radius: 6px;
-            font-size: 0.9em;
-            font-family: 'Fira Code', monospace;
-            border: 1px solid rgba(88, 166, 255, 0.2);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border: 1px solid var(--border-color);
-        }
-
-        th {
-            background: #1c2128;
-            color: var(--accent-blue);
-            font-weight: 600;
-        }
-
-        tr:hover {
-            background: rgba(88, 166, 255, 0.1);
-        }
-
-        /* Sidebar */
         .sidebar {
-            width: 260px;
+            width: 280px;
             min-height: 100vh;
-            background: var(--bg-secondary);
-            border-right: 1px solid var(--border-color);
-            padding: 2rem 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-right: 1px solid var(--glass-border);
+            padding: 2.5rem 1.5rem;
             position: sticky;
             top: 0;
             overflow-y: auto;
             flex-shrink: 0;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.2);
         }
 
         .sidebar a {
             display: block;
             color: var(--text-secondary);
             text-decoration: none;
-            padding: 0.4rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            transition: background 0.2s, color 0.2s;
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2px;
         }
 
         .sidebar a:hover {
-            background: rgba(88, 166, 255, 0.12);
-            color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--text-primary);
+            transform: translateX(4px);
+        }
+        .sidebar a:hover::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--accent-gradient);
+            border-radius: 4px;
         }
 
-        .layout {
-            display: flex;
-            min-height: 100vh;
-        }
-
+        /* Main Content */
         .main-content {
             flex: 1;
-            padding: 3rem 4rem;
-            max-width: 900px;
+            padding: 4rem 5%;
+            max-width: 950px;
             margin: 0 auto;
-            line-height: 1.7;
-            font-size: 1.05rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 3rem;
+            font-weight: 800;
+        }
+
+        h2.module-section {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-left: 6px solid #58a6ff;
+            padding-left: 1.2rem;
+            margin-top: 5rem;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: -20px 0 30px -15px var(--accent-glow);
+        }
+
+        h3.topic-section {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--topic-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-left: 4px solid #fda085;
+            padding: 0.3rem 0 0.3rem 1.2rem;
+            margin-top: 3.5rem;
+            margin-bottom: 1.5rem;
+            background-color: rgba(253, 160, 133, 0.05);
+            border-radius: 0 12px 12px 0;
+            display: block;
+            box-shadow: -15px 0 25px -15px rgba(253, 160, 133, 0.3);
+        }
+
+        h4 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        h5 {
+            font-family: 'Outfit', sans-serif;
+            color: #79c0ff;
+            font-size: 1.1rem;
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
 
         /* Content Links */
@@ -230,19 +196,125 @@
         .main-content a:hover {
             color: #79c0ff;
             border-bottom: 1px solid #79c0ff;
+            text-shadow: 0 0 8px rgba(121, 192, 255, 0.4);
+        }
+
+        /* Code Blocks */
+        pre.mac-window {
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 20px rgba(88, 166, 255, 0.05);
+            margin: 2.5rem 0;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        pre.mac-window:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(88, 166, 255, 0.1);
+        }
+
+        .code-header {
+            background: rgba(22, 27, 34, 0.8);
+            backdrop-filter: blur(5px);
+            padding: 12px 18px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex; 
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .window-controls .control { 
+            width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 8px; 
+            box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+        }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+
+        .copy-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border-color);
+            color: var(--text-secondary); padding: 5px 12px;
+            border-radius: 6px; cursor: pointer; font-size: 0.85rem;
+            transition: all 0.2s; font-family: 'Inter', sans-serif;
+        }
+        .copy-btn:hover { background: rgba(255,255,255,0.1); color: #fff; transform: scale(1.05); }
+
+        .mac-window code {
+            display: block;
+            padding: 1.5rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Inline Code */
+        p code, li code, td code {
+            background: rgba(88, 166, 255, 0.1);
+            color: #79c0ff;
+            padding: 0.2em 0.5em;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-family: 'Fira Code', monospace;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 2.5rem 0;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        th, td {
+            padding: 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background: rgba(0,0,0,0.3);
+            color: var(--accent-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr { transition: background 0.2s; }
+        tr:hover { background: rgba(88, 166, 255, 0.05); }
+
+        /* Blockquote */
+        blockquote {
+            border-left: 4px solid var(--accent-blue);
+            background: linear-gradient(90deg, rgba(88, 166, 255, 0.1) 0%, transparent 100%);
+            margin: 2rem 0;
+            padding: 1.5rem 2rem;
+            border-radius: 0 12px 12px 0;
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 1.05rem;
         }
 
         /* Images */
         img {
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-            margin: 1.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            margin: 2rem 0;
             border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+        img:hover {
+            transform: scale(1.02);
         }
 
-        /* Task Lists / Checkboxes */
+        /* Task Lists */
         input[type="checkbox"] {
             accent-color: #58a6ff;
             width: 1.2rem;
@@ -253,87 +325,33 @@
             top: 2px;
         }
 
-        /* Blockquote */
-        blockquote {
-            border-left: 4px solid var(--accent-blue);
-            background: rgba(88, 166, 255, 0.06);
-            margin: 1.5rem 0;
-            padding: 1rem 1.5rem;
-            border-radius: 0 8px 8px 0;
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-        
-        .copy-btn {
-            background: #21262d; border: 1px solid #30363d;
-            color: var(--text-secondary); padding: 4px 10px;
-            border-radius: 6px; cursor: pointer; font-size: 0.8rem;
-            transition: all 0.2s;
-        }
-        .copy-btn:hover { background: #30363d; color: #fff; }
-
-        /* CRITICAL PRINT STYLES - DO NOT MODIFY */
+        /* Print Styles */
         @media print {
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 color-adjust: exact !important;
             }
-
-            body { margin: 0; padding: 0; }
-            
-            .print-wrapper {
-                background-color: #0f1115 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                min-height: 100vh;
-                width: 100%;
-                margin: 0; padding: 0;
-            }
-
-            /* Force white text for readability */
-            .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th {
-                color: #ffffff !important;
-            }
-
-            /* Keep code blocks distinct */
-            pre {
-                border: 1px solid #444;
-                page-break-inside: avoid;
-            }
-
-            .sidebar, .copy-btn, .window-controls, #loader {
-                display: none !important;
-            }
-
-            .layout {
-                display: block;
-            }
-            
+            body { margin: 0; padding: 0; background: #0a0c10 !important; }
+            .print-wrapper { background-color: #0a0c10 !important; width: 100%; }
+            .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th { color: #ffffff !important; }
+            pre { border: 1px solid #444; page-break-inside: avoid; }
+            .sidebar, .copy-btn, .window-controls, #loader { display: none !important; }
+            .layout { display: block; }
             .main-content { padding: 2rem !important; margin: 0 auto; max-width: 100%; }
-            
             a { text-decoration: none !important; border-bottom: none !important; }
-
-            /* PDF Page Breaking Rules */
-            .module-section {
-                page-break-before: always; /* Each new section starts on a fresh page */
-                margin-top: 0 !important;
-            }
-            
-            h1, h2, h3, h4, h5, h6 {
-                page-break-after: avoid; /* Prevent header at the bottom of a page */
-            }
-            
-            pre, blockquote, table, img, .topic-section {
-                page-break-inside: avoid; /* Prevent code blocks and tables from splitting across pages */
-            }
+            .module-section { page-break-before: always; margin-top: 0 !important; }
+            h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
+            pre, blockquote, table, img, .topic-section { page-break-inside: avoid; }
         }
     </style>
 </head>
 <body>
-    <div id="loader"><i class="fa-solid fa-spinner fa-spin"></i> Loading System Design Notes...</div>
+    <div id="loader">
+        <i class="fa-solid fa-circle-notch fa-spin"></i> 
+        <span>Loading Premium Notes...</span>
+    </div>
     
-    <!-- WRAPPER IS MANDATORY FOR PRINTING BACKGROUNDS -->
     <div class="print-wrapper">
         <div class="layout">
             <nav class="sidebar" id="sidebar">
@@ -355,7 +373,6 @@
             const sidebar = document.getElementById("sidebar");
             const loader = document.getElementById("loader");
 
-            // Define the local markdown file to load
             const mdFile = "./System_Design_Course_Notes.md";
 
             fetch(mdFile)
@@ -364,16 +381,15 @@
                     return response.text();
                 })
                 .then(markdown => {
-                    // 1. Pre-process Markdown (Universal Module & Topic Catcher)
-                    // Catch explicit headers like "# Section 1...", "### ⚛️ Module 1..."
+                    // 1. Pre-process Markdown
+                    // Catch explicitly named modules
                     let processed = markdown.replace(/^#+\s*(?:.*?\s)?(Module\s+\d+|Section\s+\d+)(.*)/gim, '## MODULE_MARKER $1$2');
                     
-                    // Catch implicitly indented modules like "  Module 1: ..."
+                    // Catch implicitly indented modules
                     processed = processed.replace(/^\s*(Module\s+\d+.*)/gim, '## MODULE_MARKER $1');
                     
-                    // Convert remaining h2, h3 and h4 headers into properly styled Topics
-                    // We use {2,4} because System Design notes use '## Topic' instead of '### Topic'
-                    processed = processed.replace(/^#{2,4}\s+(?!MODULE_MARKER)(.*)/gm, '### TOPIC_MARKER $1');
+                    // Catch Topic sections exclusively! Ensures "#### 2. Definition" doesn't become a topic.
+                    processed = processed.replace(/^#+\s*(.*Topic\s*:.*)/gim, '### TOPIC_MARKER $1');
                     
                     // Converts "1.1:" to bold for better readability
                     processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
@@ -381,18 +397,14 @@
                     // 2. Configure Renderer
                     const renderer = new marked.Renderer();
                     
-                    // Safety check: Cast code to string to avoid [object Object] crash
                     renderer.code = function(code, language) {
                         const safeCode = code ? String(code) : '';
-                        // Robust highlighting with Auto-detection
                         let highlighted = safeCode;
-                        // If language is provided and valid, use it
                         if (language && hljs.getLanguage(language)) {
                             try {
                                 highlighted = hljs.highlight(safeCode, { language: language }).value;
                             } catch (e) { highlighted = hljs.highlightAuto(safeCode).value; }
                         } else {
-                            // Otherwise, or if 'plaintext', force auto-detection
                             highlighted = hljs.highlightAuto(safeCode).value;
                         }
                         
@@ -421,22 +433,21 @@
                              cleanText = safeText.replace(/MODULE_MARKER /g, '');
                              id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
                              classStr = ' class="module-section"';
-                             level = 2; // enforce level 2
+                             level = 2;
                          }
                          else if (safeText.includes('TOPIC_MARKER ')) {
                              cleanText = safeText.replace(/TOPIC_MARKER /g, '');
                              id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
                              classStr = ' class="topic-section"';
-                             level = 3; // enforce level 3
+                             level = 3;
                          }
                          
                          return `<h${level}${classStr} id="${id}">${cleanText}</h${level}>`;
                     };
 
-                    // GitHub-Style Alerts (Callouts)
                     renderer.blockquote = function(quote) {
                         const text = quote ? String(quote) : '';
-                        let color = '#58a6ff'; // Default Blue (Note)
+                        let color = '#58a6ff'; 
                         let bg = 'rgba(88, 166, 255, 0.08)';
                         let title = 'Note';
                         let icon = 'fa-info-circle';
@@ -450,25 +461,23 @@
                         else if (text.includes('[!NOTE]')) { isAlert = true; }
                         
                         if (isAlert) {
-                            // Strip out the tag whether it's wrapped in a <p> or standalone
                             const cleanText = text.replace(/(<p>)?\s*\[!(NOTE|WARNING|IMPORTANT|TIP|SUCCESS|CAUTION|DANGER)\]\s*(<\/p>|<br>)?/i, '<p>');
-                            return `<div style="border-left: 4px solid ${color}; background: ${bg}; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; page-break-inside: avoid;">
-                                <div style="color: ${color}; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-family: 'Outfit', sans-serif;">
+                            return `<div style="border-left: 4px solid ${color}; background: ${bg}; padding: 1.5rem 2rem; margin: 2rem 0; border-radius: 0 12px 12px 0; page-break-inside: avoid; box-shadow: inset 0 0 20px rgba(0,0,0,0.1);">
+                                <div style="color: ${color}; font-weight: bold; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem; font-family: 'Outfit', sans-serif; font-size: 1.1rem;">
                                     <i class="fa-solid ${icon}"></i> ${title}
                                 </div>
-                                <div style="color: var(--text-secondary); margin: 0;">${cleanText}</div>
+                                <div style="color: var(--text-secondary); margin: 0; font-size: 1.05rem;">${cleanText}</div>
                             </div>`;
                         }
                         
-                        // Default blockquote behavior
                         return `<blockquote>${text}</blockquote>`;
                     };
 
                     // 3. Render
                     contentArea.innerHTML = marked.parse(processed, { renderer: renderer });
                     
-                    // 4. Generate Sidebar TOC based on h1, h2 (modules), h3 (topics)
-                    const headers = contentArea.querySelectorAll("h1, h2, h3");
+                    // 4. Generate Sidebar TOC
+                    const headers = contentArea.querySelectorAll("h1, h2, h3, h4");
                     headers.forEach(header => {
                         const link = document.createElement("a");
                         link.href = "#" + header.id;
@@ -480,26 +489,40 @@
                             link.style.marginBottom = "1rem";
                         } else if (header.tagName === "H2") {
                             link.style.marginLeft = "10px";
-                            link.style.marginTop = "0.5rem";
-                            link.style.color = "#4facfe";
+                            link.style.marginTop = "0.8rem";
+                            link.style.color = "#58a6ff";
+                            link.style.fontWeight = "600";
                         } else if (header.tagName === "H3") {
-                            link.style.marginLeft = "25px";
+                            if (header.classList.contains("topic-section")) {
+                                link.style.marginLeft = "20px";
+                                link.style.fontSize = "0.9rem";
+                                link.style.color = "#fda085";
+                                link.style.marginTop = "0.4rem";
+                                link.style.fontWeight = "500";
+                            } else {
+                                link.style.marginLeft = "30px";
+                                link.style.fontSize = "0.85rem";
+                                link.style.color = "var(--text-secondary)";
+                            }
+                        } else if (header.tagName === "H4") {
+                            link.style.marginLeft = "30px";
                             link.style.fontSize = "0.8rem";
-                            link.style.color = "#fda085";
+                            link.style.color = "var(--text-secondary)";
+                            link.style.opacity = "0.7";
                         }
                         
                         sidebar.appendChild(link);
                     });
 
-                    loader.style.display = "none";
+                    loader.style.opacity = "0";
+                    setTimeout(() => loader.style.display = "none", 300);
                 })
                 .catch(err => {
-                    loader.innerHTML = "Error loading notes: " + err.message;
+                    loader.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i><span>Error loading notes: ' + err.message + '</span>';
                     loader.style.color = "#ff5f56";
                 });
         });
 
-        // Global Copy Function
         window.copyCode = function(id, btn) {
             const codeEl = document.getElementById(id);
             if (!codeEl) return;
@@ -507,9 +530,11 @@
             navigator.clipboard.writeText(text).then(() => {
                 btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
                 btn.style.color = "#27c93f";
+                btn.style.borderColor = "#27c93f";
                 setTimeout(() => {
                     btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
                     btn.style.color = "var(--text-secondary)";
+                    btn.style.borderColor = "var(--border-color)";
                 }, 2000);
             });
         };
