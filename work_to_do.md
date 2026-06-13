@@ -2204,6 +2204,92 @@ Subtopics: TLS/SSL Handshake, Cryptographic Protocols, Certificate Chain, Rate L
 * Live Production Phase: Client aur server asymmetric key exchange karke session key generate karte hain, jiske baad saari communication AES symmetric encryption se secure hoti hai.
 * Additional context: Stripe requires all API calls to use strictly TLS 1.2+ for PCI DSS compliance.
 
+📦 Processing: Phase Extension — Module 8: Observability & Security
+
+--2--Security Fundamentals--
+Topic 6: Mobile Client Hardening & Zero Trust DevSecOps [⚠️ New]
+Subtopics: App Attestation, Certificate Pinning, RASP (Runtime Application Self-Protection), Reverse Engineering, Code Obfuscation, Jailbreak/Root Detection, JS Bridge Security, Zero Trust Architecture
+
+```text
+[📊 Diagram reproduced: ZERO TRUST MOBILE ARCHITECTURE]
+[Attacker (Modified App/Bot)] --Fake Request--> [API Gateway]
+                                                   |
+                                                   | (Missing/Invalid Device Integrity Token)
+                                                   v
+                                            [Reject 403 Forbidden]
+
+[Legitimate User (Genuine App)] --App Attestation Token--> [API Gateway]
+                                                              |
+                                                              | (Token Verified via Google/Apple Servers)
+                                                              v
+                                                   [Allow Request to Backend]
+
+```
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Mobile security layers, code obfuscation techniques, and bot-prevention architecture.
+* Key terms from notes: RASP, App Attestation, Certificate Pinning, Obfuscation, Zero Trust, Root Detection.
+* Explicit emphasis in notes: "Never trust the client. An attacker will decompile your app and mock your API calls."
+* Notes mein jo analogies/examples the: "Fake ID Card vs Biometric Scan" analogy. Pokemon Go GPS spoofing hack example.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[Mobile Client Hardening, Zero Trust Architecture, RASP, Runtime Application Self-Protection, App Attestation, iOS DeviceCheck, Android Play Integrity, SafetyNet, Certificate Pinning, SSL Pinning, Man-in-the-middle attack, MITM, Reverse Engineering, Code Obfuscation, ProGuard, DexGuard, Jailbreak detection, Root detection, Frida, Magisk, JS Bridge Security, Webview exploitation]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Mobile developer ProGuard/DexGuard implement karke code ko obfuscate (unreadable) banata hai aur TLS certificates app ke andar pin karta hai.
+* Fixing/Iteration Phase: Agar koi hacker app ko modify karke fake API hits marne ki koshish karta hai, toh App Attestation (Play Integrity/DeviceCheck) backend ko bata deta hai ki request modified app se aayi hai, aur backend usey reject kar deta hai.
+* Live Production Phase: RASP continuously app ke runtime environment ko monitor karta hai. Agar user ne phone root/jailbreak kiya hai ya koi MITM proxy (Burp Suite) lagayi hai, toh app explicitly crash ho jati hai ya sensitive transactions (Payment) block kar deti hai.
+
+
+
+
+📦 Processing: Phase Extension — Module 8: Observability & Security
+
+--2--Security Fundamentals--
+Topic 6: Mobile Client Hardening & Zero Trust DevSecOps [⚠️ New]
+Subtopics: App Attestation, Certificate Pinning, RASP (Runtime Application Self-Protection), Reverse Engineering, Code Obfuscation, Jailbreak/Root Detection, JS Bridge Security, Zero Trust Architecture
+
+```text
+[📊 Diagram reproduced: ZERO TRUST MOBILE ARCHITECTURE]
+[Attacker (Modified App/Bot)] --Fake Request--> [API Gateway]
+                                                   |
+                                                   | (Missing/Invalid Device Integrity Token)
+                                                   v
+                                            [Reject 403 Forbidden]
+
+[Legitimate User (Genuine App)] --App Attestation Token--> [API Gateway]
+                                                              |
+                                                              | (Token Verified via Google/Apple Servers)
+                                                              v
+                                                   [Allow Request to Backend]
+
+```
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Mobile security layers, code obfuscation techniques, and bot-prevention architecture.
+* Key terms from notes: RASP, App Attestation, Certificate Pinning, Obfuscation, Zero Trust, Root Detection.
+* Explicit emphasis in notes: "Never trust the client. An attacker will decompile your app and mock your API calls."
+* Notes mein jo analogies/examples the: "Fake ID Card vs Biometric Scan" analogy. Pokemon Go GPS spoofing hack example.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[Mobile Client Hardening, Zero Trust Architecture, RASP, Runtime Application Self-Protection, App Attestation, iOS DeviceCheck, Android Play Integrity, SafetyNet, Certificate Pinning, SSL Pinning, Man-in-the-middle attack, MITM, Reverse Engineering, Code Obfuscation, ProGuard, DexGuard, Jailbreak detection, Root detection, Frida, Magisk, JS Bridge Security, Webview exploitation]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Mobile developer ProGuard/DexGuard implement karke code ko obfuscate (unreadable) banata hai aur TLS certificates app ke andar pin karta hai.
+* Fixing/Iteration Phase: Agar koi hacker app ko modify karke fake API hits marne ki koshish karta hai, toh App Attestation (Play Integrity/DeviceCheck) backend ko bata deta hai ki request modified app se aayi hai, aur backend usey reject kar deta hai.
+* Live Production Phase: RASP continuously app ke runtime environment ko monitor karta hai. Agar user ne phone root/jailbreak kiya hai ya koi MITM proxy (Burp Suite) lagayi hai, toh app explicitly crash ho jati hai ya sensitive transactions (Payment) block kar deti hai.
+
+
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -2218,9 +2304,10 @@ Section 2: Security Fundamentals (Auth & Network) [⚠️ Derived]
 Topic 3: Authentication, Authorization & JWT [⚠️ Derived]
 Topic 4: OAuth 2.0 & Delegated Access [⚠️ Derived]
 Topic 5: Network Security & Cryptography [⚠️ Derived]
+Topic 6: Mobile Client Hardening & Zero Trust DevSecOps [⚠️ New]
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 5 | Subtopics: 28
+Sections: 2 | Topics: 6 | Subtopics: 36
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -2458,6 +2545,87 @@ TERRAFORM WORKFLOW:
 
 ```
 
+
+📦 Processing: Phase Extension — Module 9: Deployment & Infrastructure
+
+=====Section 1.5: DevSecOps, Automation & Cost Optimization [⚠️ New]=====
+Modern deployments ko automated, secure aur financially sustainable (cheap) banane ki advanced strategies.
+
+--1.5--DevSecOps, Automation & Cost Optimization--
+Topic 3A: CI/CD Pipeline Architecture & GitOps
+Subtopics: Continuous Integration, Continuous Deployment, GitOps Pattern, Pull-Based Deployment, Push-Based Deployment, Artifact Registry, Vulnerability Scanning, Secret Management, CI/CD Pipeline Flow, Single Source of Truth
+
+```text
+[📊 Diagram reproduced: GITOPS ARCHITECTURE FLOW]
+[Developer] --git push--> [GitHub Repo] (Single Source of Truth)
+                            |
+                            v
+[GitHub Actions (CI)] -> 1. Run Unit Tests -> 2. Build Docker Image -> 3. Scan Vulnerabilities (Trivy)
+                            |
+                            v
+[Artifact Registry] <--push image-- [Update K8s Manifest Repo YAML]
+                                           ^
+                                           | (Detects changes & Pulls - No external Push allowed)
+                                           v
+                                  [ArgoCD / Kubernetes Cluster]
+
+```
+
+[📊 SCOPE SIGNAL for Topic 3A:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Pipeline stages, security scans, and GitOps flow diagrams.
+* Key terms from notes: GitOps, Pull-based, DevSecOps, ArgoCD, Artifact Registry.
+* Explicit emphasis in notes: "Git is the single source of truth. Cluster pulls changes automatically, never push directly to production."
+* Notes mein jo analogies/examples the: "Restaurant Order Ticket" analogy — Waiter (Git) order likhta hai, Chef (ArgoCD) ticket dekh kar automatically khana banata hai bina waiters ke kitchen mein aaye.
+]
+
+🔑 KEYWORDS DUMP for Topic 3A:
+[CI/CD, Continuous Integration, Continuous Deployment, GitOps, Pull-based deployment, Push-based deployment, GitHub Actions, GitLab CI, ArgoCD, Flux, Artifact Registry, ECR, GCR, Trivy, SonarQube, DevSecOps, Vulnerability Scanning, Secret Management, HashiCorp Vault, YAML manifest, Single Source of Truth, automated testing, zero-downtime pipeline]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3A:
+
+* Testing/Offline Phase: Developer local code likh kar git push karta hai. CI pipeline turant unit tests chalati hai aur Trivy se Docker image scan karti hai.
+* Fixing/Iteration Phase: Agar code mein hardcoded secrets ya vulnerabilities milti hain, toh pipeline fail ho jati hai aur deployment ruk jata hai.
+* Live Production Phase: Image pass hone par Artifact Registry mein jati hai. ArgoCD (GitOps agent) K8s cluster ke andar baith kar Git repo ko monitor karta hai, aur naya image tag aate hi cluster ko smoothly (zero-downtime) update kar deta hai.
+
+Topic 3B: FinOps, Serverless Edge & Cost Optimization
+Subtopics: FinOps Fundamentals, Serverless Computing, Edge Computing, Scale-to-Zero, Cold Starts, Cloudflare Workers, Egress Costs, Spot Instances, AWS Lambda, Edge Caching, Serverless Architecture Flow
+
+```text
+[📊 Diagram reproduced: SERVERLESS EDGE CACHING & SCALE-TO-ZERO]
+[User in India] ---> [Cloudflare Edge Server - Mumbai]
+                         | (Cache Hit? -> Return instantly, $0 Egress Cost)
+                         |
+                         v (Cache Miss)
+[User in India] ---> [AWS API Gateway] ---> [AWS Lambda (Scale-to-Zero)]
+                                            | (Wakes up in 100ms, charges only for execution time)
+                                            v
+                                       [Database]
+
+```
+
+[📊 SCOPE SIGNAL for Topic 3B:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Cloud billing math, Edge architecture diagrams, and cost-saving formulas.
+* Key terms from notes: FinOps, Serverless Edge, Scale-to-Zero, Cold Start, Cloudflare Workers, Egress Cost.
+* Explicit emphasis in notes: "Egress cost (data leaving the cloud) is the silent killer. Always cache at the edge."
+* Notes mein jo analogies/examples the: "Prepaid Taxi vs Own Car" analogy for Serverless vs EC2.
+]
+
+🔑 KEYWORDS DUMP for Topic 3B:
+[FinOps, Cloud Cost Optimization, Serverless Computing, Scale-to-Zero, Cold Start, Edge Computing, Cloudflare Workers, Vercel Edge, AWS Lambda, Egress Costs, Ingress Costs, Spot Instances, Preemptible VMs, NAT Gateway costs, Edge Caching, WebAssembly, V8 Isolates, 0ms cold start, Pay-as-you-go]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3B:
+
+* Testing/Offline Phase: Backend APIs ko serverless functions (AWS Lambda/Edge Workers) mein likhna taaki server idle hone par $0 bill aaye.
+* Fixing/Iteration Phase: Cold starts (functions ko jagane ka time) fix karne ke liye Edge workers (V8 isolates) use karna jo <1ms mein start hote hain.
+* Live Production Phase: Viral traffic spike aane par Cloudflare Workers instantly scale out hote hain (1M+ requests) aur data CDN edge se serve karte hain, jisse expensive AWS Egress charges bach jate hain aur application scale-to-zero model par highly cost-efficient rehti hai.
+
+
 Topic 4: Disaster Recovery (DR) - RPO, RTO & Backup Strategies
 Subtopics: Disaster Recovery, Recovery Point Objective (RPO), Recovery Time Objective (RTO), Active-Active Architecture, Active-Passive Architecture, Hot Standby, Warm Standby, Cold Backup, Continuous Replication, 3-2-1 Backup Rule, DR Testing Methods, Replication Lag
 
@@ -2605,11 +2773,14 @@ Section 1: Deployment & Infrastructure [⚠️ Derived]
 Topic 1: Deployment Strategies - Blue-Green & Canary Releases
 Topic 2: Containerization - Docker & Kubernetes Fundamentals
 Topic 3: Infrastructure as Code (IaC) - Terraform Concepts
+Section 1.5: DevSecOps, Automation & Cost Optimization [⚠️ New]
+Topic 3A: CI/CD Pipeline Architecture & GitOps
+Topic 3B: FinOps, Serverless Edge & Cost Optimization
 Topic 4: Disaster Recovery (DR) - RPO, RTO & Backup Strategies
 Topic 5: File Storage Service - Block vs Object Storage, Chunking & Deduplication
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 71
+Sections: 2 | Topics: 7 | Subtopics: 92
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -6204,6 +6375,107 @@ Subtopics: RAG (Retrieval-Augmented Generation), Embedding Models, Vector Databa
 * Fixing/Iteration Phase: Agar OpenAI API down ho jaye, toh LLM Gateway request ko automatically Anthropic Claude ya open-source Llama model par route kar deta hai (Fallback Routing).
 * Live Production Phase: User query aati hai, Semantic Cache check hota hai. Agar exact ya similar meaning ka question pehle pucha gaya tha, toh bina expensive LLM API call kiye instant sub-10ms response return hota hai, saving API costs and latency.
 
+📦 Processing: Phase Extension — Module 24: Design AI/LLM Systems
+
+--1--AI System Architecture & RAG Pipelines--
+Topic 2: Agentic Workflows, Tool Use & GraphRAG Architecture [⚠️ New]
+Subtopics: Multi-Agent Systems, Function Calling, Tool Use, ReAct Framework, GraphRAG, Knowledge Graphs, State Machines in LLMs, LangGraph, AutoGen
+
+```text
+[📊 Diagram reproduced: MULTI-AGENT & TOOL USE PIPELINE]
+[User Query: "Refund my last order"]
+       |
+       v
+[Supervisor Agent (Router)]
+       |
+       +---> [RAG Agent] -> Searches Knowledge Base for Refund Policy rules
+       |
+       +---> [Action Agent] -> Uses Function Calling (Tool: `get_order_status()`)
+                               -> Uses Function Calling (Tool: `process_refund()`)
+       |
+       v
+[Synthesizer Agent] -> Merges data -> Returns "Refund of $50 processed."
+
+```
+
+```text
+[📊 Diagram reproduced: Vector RAG vs GraphRAG]
+Vector RAG: "Find documents similar to 'CEO'" -> [Doc1, Doc5] (Similarity match, lacks context)
+GraphRAG: "Find who reports to CEO" -> Navigates nodes: [John(CEO)] -manages-> [Sarah(VP)] -manages-> [Mike(Manager)] (Understands strict relationships)
+
+```
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Agent architectures, state machine logic for LLMs, and GraphRAG vs Vector RAG comparisons.
+* Key terms from notes: Multi-Agent, Function Calling, Tool Use, ReAct, GraphRAG, Knowledge Graph.
+* Explicit emphasis in notes: "Vector DBs find similarity, Knowledge Graphs find relationships. GraphRAG combines both."
+* Notes mein jo analogies/examples the: "Company Hierarchy" analogy — Vector DB employee handbook hai, Knowledge Graph org chart hai jo batata hai kaun kiska boss hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Multi-Agent Systems, Agentic Workflows, Function Calling, Tool Use, ReAct Framework, Reason and Act, GraphRAG, Knowledge Graphs, Neo4j, LangGraph, AutoGen, CrewAI, State Machines, Cyclic Graphs, Supervisor Agent, Worker Agent, Routing, Semantic Router, Entity Extraction, Triples, Node-Edge relationships]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer LLM ko external APIs (e.g., Stripe refund API) as "Tools" provide karta hai aur Knowledge Graph mein entities map karta hai (e.g., User -> bought -> Product).
+* Fixing/Iteration Phase: LLM hallucinations fix karne ke liye ReAct (Reason + Act) loop use hota hai, jahan model apna action perform karne ke baad check karta hai ki kya task complete hua ya nahi.
+* Live Production Phase: User complex query karta hai. Ek Supervisor LLM query ko break down karke specialized Agents ko bhejta hai. GraphRAG use karke model hidden relationships nikalta hai, Function calling se database update karta hai, aur user ko complete automated action serve karta hai bina human intervention ke.
+
+
+
+📦 Processing: Phase Extension — Module 24: Design AI/LLM Systems
+
+--1--AI System Architecture & RAG Pipelines--
+Topic 2: Agentic Workflows, Tool Use & GraphRAG Architecture [⚠️ New]
+Subtopics: Multi-Agent Systems, Function Calling, Tool Use, ReAct Framework, GraphRAG, Knowledge Graphs, State Machines in LLMs, LangGraph, AutoGen
+
+```text
+[📊 Diagram reproduced: MULTI-AGENT & TOOL USE PIPELINE]
+[User Query: "Refund my last order"]
+       |
+       v
+[Supervisor Agent (Router)]
+       |
+       +---> [RAG Agent] -> Searches Knowledge Base for Refund Policy rules
+       |
+       +---> [Action Agent] -> Uses Function Calling (Tool: `get_order_status()`)
+                               -> Uses Function Calling (Tool: `process_refund()`)
+       |
+       v
+[Synthesizer Agent] -> Merges data -> Returns "Refund of $50 processed."
+
+```
+
+```text
+[📊 Diagram reproduced: Vector RAG vs GraphRAG]
+Vector RAG: "Find documents similar to 'CEO'" -> [Doc1, Doc5] (Similarity match, lacks context)
+GraphRAG: "Find who reports to CEO" -> Navigates nodes: [John(CEO)] -manages-> [Sarah(VP)] -manages-> [Mike(Manager)] (Understands strict relationships)
+
+```
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Agent architectures, state machine logic for LLMs, and GraphRAG vs Vector RAG comparisons.
+* Key terms from notes: Multi-Agent, Function Calling, Tool Use, ReAct, GraphRAG, Knowledge Graph.
+* Explicit emphasis in notes: "Vector DBs find similarity, Knowledge Graphs find relationships. GraphRAG combines both."
+* Notes mein jo analogies/examples the: "Company Hierarchy" analogy — Vector DB employee handbook hai, Knowledge Graph org chart hai jo batata hai kaun kiska boss hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Multi-Agent Systems, Agentic Workflows, Function Calling, Tool Use, ReAct Framework, Reason and Act, GraphRAG, Knowledge Graphs, Neo4j, LangGraph, AutoGen, CrewAI, State Machines, Cyclic Graphs, Supervisor Agent, Worker Agent, Routing, Semantic Router, Entity Extraction, Triples, Node-Edge relationships]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer LLM ko external APIs (e.g., Stripe refund API) as "Tools" provide karta hai aur Knowledge Graph mein entities map karta hai (e.g., User -> bought -> Product).
+* Fixing/Iteration Phase: LLM hallucinations fix karne ke liye ReAct (Reason + Act) loop use hota hai, jahan model apna action perform karne ke baad check karta hai ki kya task complete hua ya nahi.
+* Live Production Phase: User complex query karta hai. Ek Supervisor LLM query ko break down karke specialized Agents ko bhejta hai. GraphRAG use karke model hidden relationships nikalta hai, Function calling se database update karta hai, aur user ko complete automated action serve karta hai bina human intervention ke.
+
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -6212,9 +6484,10 @@ Subtopics: RAG (Retrieval-Augmented Generation), Embedding Models, Vector Databa
 
 Section 1: AI System Architecture & RAG Pipelines
 Topic 1: RAG Architecture, LLM Gateway & Semantic Caching
+Topic 2: Agentic Workflows, Tool Use & GraphRAG Architecture [⚠️ New]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 1 | Subtopics: 10
+Sections: 1 | Topics: 2 | Subtopics: 19
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
