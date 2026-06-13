@@ -638,6 +638,53 @@ Subtopics: Normalization Forms, Query Performance Optimization, Index Creation T
 * Live Production Phase: Connection pool (10-50 connections) use hota hai to avoid 100-200ms expensive connection creation overhead har request par.
 * Additional context: SQL database vertical scale hota hai (~100K writes/sec limit) and Consistency is preferred over Availability during network partitions.
 
+📦 Processing: Phase Update — Module 3: Databases (SQL, NoSQL & Modern Tech)
+
+=====Section 1.5: Advanced Data Modeling & Schema Design [⚠️ New]=====
+System requirements ke basis par tables banana, relationships define karna aur scale par constraints handle karna.
+
+--1.5--Advanced Data Modeling & Schema Design--
+Topic 2A: Relational vs NoSQL Schema Design (Practical Implementation)
+Subtopics: Entity-Relationship (ER) Modeling, 1:1, 1:N, M:N Relationships, Junction Tables, Polymorphic Associations, NoSQL Access Patterns, Single-Table Design, Partition Key vs Sort Key, Scaling Foreign Keys, Denormalization
+
+```text
+[📊 Diagram reproduced: SQL M:N Relationship vs NoSQL Single-Table Design]
+
+SQL (Normalized M:N with Junction Table):
+[Users Table]       [User_Groups (Junction)]       [Groups Table]
+user_id (PK)   <--- user_id (FK)                   group_id (PK)
+name                group_id (FK)             ---> group_name
+
+NoSQL (Single-Table Design - DynamoDB):
+Partition Key (PK) | Sort Key (SK)     | Attributes
+-------------------|-------------------|------------------------
+USER#123           | PROFILE#123       | name="Alice", age=25
+USER#123           | GROUP#456         | group_name="Admins", joined="2026"
+GROUP#456          | METADATA#456      | total_members=10
+
+```
+
+[📊 SCOPE SIGNAL for Topic 2A:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Detailed comparison of schema designs, ER diagrams, and access pattern logic.
+* Key terms from notes: ER Diagram, Junction Table, Single-Table Design, Partition Key, Sort Key, Denormalization, Access Patterns.
+* Explicit emphasis in notes: "Scale par strict Foreign Keys avoid karo, application layer pe referential integrity handle karo."
+* Notes mein jo analogies/examples the: "Excel sheets with VLOOKUP (SQL)" vs "Pre-printed ID cards (NoSQL)".
+]
+
+🔑 KEYWORDS DUMP for Topic 2A:
+[Data Modeling, ER Diagram, Entity-Relationship, 1:1, 1:N, M:N, Junction Table, Foreign Key constraint, Polymorphic Associations, NoSQL Access Patterns, Single-Table Design, DynamoDB, Partition Key, Sort Key, GSI, Global Secondary Index, Denormalization, Query-first design, Write-heavy vs Read-heavy modeling, Microservices data isolation]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2A:
+
+* Testing/Offline Phase: Developer queries aur access patterns (e.g., "Get all groups for a user") list karta hai schema design karne se pehle.
+* Fixing/Iteration Phase: SQL mein expensive JOINs ko fix karne ke liye heavily queried data ko Redis mein cache karna ya NoSQL mein denormalize karna.
+* Live Production Phase: NoSQL Single-Table design allow karta hai ki ek hi query mein user profile aur uske groups O(1) latency ke sath fetch ho jayein without any JOIN overhead.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 =====Section 2: Non-Relational Databases (NoSQL)=====
 Flexible schema, horizontal scaling aur high write throughput ke liye NoSQL ka ecosystem. [⚠️ Derived]
 
@@ -754,6 +801,9 @@ Section 1: Relational Databases (SQL)
 Topic 1: SQL Database Basics & Architecture [⚠️ Derived]
 Topic 2: SQL Operations, Performance & Trade-offs [⚠️ Derived]
 
+Section 1.5: Advanced Data Modeling & Schema Design [⚠️ New]
+Topic 2A: Relational vs NoSQL Schema Design (Practical Implementation)
+
 Section 2: Non-Relational Databases (NoSQL)
 Topic 3: NoSQL Foundations & Database Types [⚠️ Derived]
 Topic 4: NoSQL Implementation & Trade-offs [⚠️ Derived]
@@ -765,7 +815,7 @@ Section 4: Database Scaling Strategies
 Topic 6: Scaling Strategies & Distributed Concepts [⚠️ Derived]
 
 📊 PHASE SUMMARY:
-Sections: 4 | Topics: 6 | Subtopics: 39
+Sections: 5 | Topics: 7 | Subtopics: 50
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -4864,10 +4914,79 @@ Sections: 3 | Topics: 6 | Subtopics: 42
 ==================================================================================
 
 
-# Module 18: Design Instagram/Newsfeed
+# Module 18: Design Collaborative System (Google Docs)
+
+📦 Processing: Phase Update — Module 18: Design Collaborative System (Google Docs)
+
+=====Section 1: Collaborative Environments=====
+Multiple users ko same document par milliseconds latency ke saath conflict-free edit karne ki architecture.
+
+--1--Collaborative Environments--
+Topic 1: Operational Transformation (OT) & CRDTs
+Subtopics: Real-Time Collaboration, Operational Transformation (OT), CRDT (Conflict-free Replicated Data Type), Concurrency Control, Cursor Sync, Snapshotting, WebSocket Broadcasting, Document State Recovery
+
+```text
+[📊 Diagram reproduced: Conflict Resolution (OT vs CRDT)]
+
+Scenario: Document says "ABC".
+User 1 inserts "X" at index 1 -> "AXBC"
+User 2 inserts "Y" at index 2 -> "ABYC"
+
+Operational Transformation (OT) - Centralized Server:
+[User 1] -> op(insert, 'X', 1) -> [Server]
+[User 2] -> op(insert, 'Y', 2) -> [Server]
+Server mathematically transforms operations:
+User 2's op becomes op(insert, 'Y', 3) because X was added before it.
+Server broadcasts transformed ops. All clients converge to "AXBYC".
+
+CRDT - Decentralized (Peer-to-Peer logic):
+Every character gets a mathematically unique fractional ID.
+A = 0.1, B = 0.2, C = 0.3
+User 1 inserts 'X' between A and B -> ID assigned: 0.15
+User 2 inserts 'Y' between B and C -> ID assigned: 0.25
+Result sorts automatically by ID: A(0.1), X(0.15), B(0.2), Y(0.25), C(0.3) -> "AXBYC". No central transformation needed!
+
+```
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Algorithm comparison, WebSocket flow, and memory optimization math.
+* Key terms from notes: Collaborative Editing, OT, CRDT, LWW, Snapshotting, Cursor sync.
+* Explicit emphasis in notes: "OT requires a central server; CRDT is math-based and works peer-to-peer (Figma approach)."
+* Notes mein jo analogies/examples the: Google Docs (uses OT) and Figma (uses CRDTs).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Real-Time Collaboration, Collaborative Editing, Operational Transformation, OT, Central Server, CRDT, Conflict-free Replicated Data Type, Figma, Google Docs, Concurrency Control, Cursor Sync, Ephemeral data, Snapshotting, Event Sourcing, WebSocket Broadcasting, Redis Pub/Sub, Fractional Indexing, Convergence, Tombstones, Garbage Collection, Commutative operations]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Text characters ko fractional indexing assign karne ka logic implement karna taaki array insertions independent rahen.
+* Fixing/Iteration Phase: CRDTs mein delete kiye gaye characters memory mein reh jate hain (Tombstones). Memory leak fix karne ke liye background Garbage Collection chalana jo inactive users ke baad tombstones clean kare.
+* Live Production Phase: Users ke cursor movements ephemeral data (Redis Pub/Sub) ke through broadcast hote hain bina DB touch kiye. Document ke actual keystrokes CRDT data structure mein merge hote hain aur har 5 minutes mein ek full document snapshot S3 mein save hota hai fast loading ke liye.
+
+---
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Collaborative Environments
+Topic 1: Operational Transformation (OT) & CRDTs
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 1 | Subtopics: 8
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 19: Design Instagram/Newsfeed
 
 
-📦 **Processing: Phase 1 — Module 18: Design Instagram/Newsfeed**
+📦 **Processing: Phase 1 — Module 19: Design Instagram/Newsfeed**
 
 =====Section 1: Newsfeed Architecture & Fanout Strategies [⚠️ Derived]=====
 Billion-scale platforms par instantly personalized timeline generate karne ka system. [⚠️ Derived]
@@ -5219,10 +5338,10 @@ Sections: 1 | Topics: 6 | Subtopics: 42
 
 ==================================================================================
 
-# Module 19: Design YouTube/Netflix (Video Streaming)
+# Module 20: Design YouTube/Netflix (Video Streaming)
 
 
-📦 **Processing: Phase 1 — Module 19: Design YouTube/Netflix (Video Streaming)**
+📦 **Processing: Phase 1 — Module 20: Design YouTube/Netflix (Video Streaming)**
 
 =====Section 1: Video Streaming System (Playback & Delivery) [⚠️ Derived]=====
 User ko bina buffer ke fast video deliver karne ka architecture aur CDN logic. [⚠️ Derived]
@@ -5649,11 +5768,11 @@ Sections: 2 | Topics: 9 | Subtopics: 66
 ==================================================================================
 
 
-# Module 20: Design Uber (Ride-Hailing System)
+# Module 21: Design Uber (Ride-Hailing System)
 
 
 
-📦 Processing: Phase 1 — Module 20: Design Uber (Ride-Hailing System)
+📦 Processing: Phase 1 — Module 21: Design Uber (Ride-Hailing System)
 
 =====Section 1: Uber Location Service (Geospatial Indexing)=====
 Duniya ko searchable grids mein todna for sub-millisecond fast pickups. [⚠️ Derived]
@@ -5854,9 +5973,9 @@ Sections: 2 | Topics: 4 | Subtopics: 34
 
 ==================================================================================
 
-# Module 21: Design E-Commerce Store (Amazon)
+# Module 22: Design E-Commerce Store (Amazon)
 
-📦 Processing: Phase 2 — Module 21: Design E-Commerce Store (Amazon)
+📦 Processing: Phase 2 — Module 22: Design E-Commerce Store (Amazon)
 
 =====Section 1: E-Commerce Inventory & Order System [⚠️ Derived]=====
 Flash sales mein overselling rokna aur complex distributed orders manage karna bina system block kiye. [⚠️ Derived]
@@ -6045,6 +6164,149 @@ Sections: 2 | Topics: 4 | Subtopics: 38
 
 --- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 ⏳ Waiting for: Next phase/module notes (or 'DONE' keyword)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 23: Design Payment Gateway (Stripe/Wallet)
+
+📦 Processing: Phase Update — Module 23: Design Payment Gateway (Stripe/Wallet)
+
+=====Section 1: Financial Systems & Ledgers=====
+Paisa transfer karna bina data loss ya double-spending ke, strict financial compliance ke saath.
+
+--1--Financial Systems & Ledgers--
+Topic 1: Double-Entry Ledger, Idempotency & Reconciliation
+Subtopics: Double-Entry Accounting, Debits and Credits, Strict Idempotency, Idempotency Key, Payment Gateway Architecture, PSP (Payment Service Provider), Reconciliation Pipeline, PCI-DSS Compliance, Distributed ACID Transactions
+
+```text
+[📊 Diagram reproduced: Double-Entry Ledger System]
+
+Rule: Sum of all accounts must always equal ZERO. (Credit is Positive, Debit is Negative).
+
+Transaction: User A sends $50 to User B.
+Transaction ID: TXN_999
+
+Ledger Entries (Atomic DB Transaction):
+| Entry ID | TXN_ID  | Account ID | Amount | Type   |
+|----------|---------|------------|--------|--------|
+| 101      | TXN_999 | User_A     | -$50   | DEBIT  |
+| 102      | TXN_999 | User_B     | +$50   | CREDIT |
+(Total = 0. System is perfectly balanced).
+
+[📊 Diagram reproduced: Payment Reconciliation Cron Flow]
+[Internal DB Ledger]    [Bank/Stripe Report (Next Day)]
+          \                  /
+           v                v
+     [Reconciliation Worker (Airflow)]
+           |
+           +--> Match found? -> Mark "SETTLED"
+           +--> Mismatch? -> Alert Finance Team (Discrepancy Queue)
+
+```
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Financial DB schemas, idempotency workflows, and cron job pipelines.
+* Key terms from notes: Double-Entry, Debit, Credit, Idempotency Key, Reconciliation, PCI-DSS, Settlement.
+* Explicit emphasis in notes: "Double-entry is non-negotiable for financial systems to track where money went."
+* Notes mein jo analogies/examples the: Stripe and PayPal core architecture workflows.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Double-Entry Ledger, Double-Entry Accounting, Debit, Credit, Strict Idempotency, Idempotency Key, UUID, HTTP 409 Conflict, Payment Gateway, PSP, Payment Service Provider, Stripe, PayPal, Reconciliation Pipeline, Cron Jobs, Settlement, PCI-DSS Compliance, Tokenization, Distributed ACID, Immutable logs, Append-only DB, Event Sourcing, Financial Discrepancy]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Ledger database ko append-only mode mein design karna jahan updates allowed nahi hote, sirf compensating records add kiye jate hain (e.g., Refund is a new row, not an UPDATE query).
+* Fixing/Iteration Phase: Agar internal DB mein payment "Success" hai but Bank API mein "Failed" hai, toh raat 2 baje chalne wali Reconciliation job mismatch flag karti hai.
+* Live Production Phase: Checkout button par click karne par client ek `Idempotency-Key` bhejta hai. Agar network timeout ho aur user dobara click kare, payment service DB mein key check karti hai aur duplicate charge prevent karti hai.
+
+---
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Financial Systems & Ledgers
+Topic 1: Double-Entry Ledger, Idempotency & Reconciliation
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 1 | Subtopics: 9
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 24: Design AI/LLM Systems (ChatGPT Wrapper/RAG)
+
+📦 Processing: Phase Update — Module 24: Design AI/LLM Systems (ChatGPT Wrapper/RAG)
+
+=====Section 1: AI System Architecture & RAG Pipelines=====
+2026 ke standard GenAI applications ko scale par deploy aur optimize karne ka framework.
+
+--1--AI System Architecture & RAG Pipelines--
+Topic 1: RAG Architecture, LLM Gateway & Semantic Caching
+Subtopics: RAG (Retrieval-Augmented Generation), Embedding Models, Vector Database, Prompt Engineering, Semantic Caching, LLM API Gateway, Token Rate Limiting, Fallback Routing, Chunking Strategies, Agentic Workflows
+
+```text
+[📊 Diagram reproduced: Enterprise RAG & Semantic Cache Pipeline]
+
+[User Prompt: "What is my leave balance?"]
+       |
+       v
+[Semantic Cache (Redis/VectorDB)] ---> (Cache HIT: "How many leaves do I have?") ---> [Return Instant Response]
+       |
+       v (Cache MISS)
+[Embedding Service (OpenAI ada-002)] -> Generates Vector [0.12, -0.05, ...]
+       |
+       v
+[Vector DB (Pinecone/Milvus)] -> Performs Similarity Search (Cosine Similarity)
+       |
+       v (Returns top-K relevant chunks)
+[Prompt Builder] -> (Injects Chunks + User Query into System Prompt)
+       |
+       v
+[LLM API Gateway] -> (Rate limits tokens, routes to available model)
+       |
+       v
+[LLM (GPT-4 / Claude)] -> Generates final contextual answer
+
+```
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Pipeline architectures, token math, and prompt flow diagrams.
+* Key terms from notes: RAG, Semantic Caching, Embeddings, LLM Gateway, Token Rate Limiting, Chunking.
+* Explicit emphasis in notes: "Never expose raw LLM API directly; always use an LLM Gateway for token throttling and model fallback."
+* Notes mein jo analogies/examples the: "Open-book exam" analogy for RAG (jahan LLM student hai aur Vector DB textbook hai).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[RAG, Retrieval-Augmented Generation, Embedding, Vector Database, Pinecone, Milvus, Semantic Caching, GPTCache, LLM API Gateway, LiteLLM, Token Rate Limiting, TPM, Tokens Per Minute, Fallback Routing, Model Degradation, Chunking Strategies, Overlap, LangChain, LlamaIndex, Cosine Similarity, Hallucination mitigation, Context Window, Agentic Workflows]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Documents ko 500-token chunks mein split karke embeddings generate karna aur Vector DB mein upsert karna.
+* Fixing/Iteration Phase: Agar OpenAI API down ho jaye, toh LLM Gateway request ko automatically Anthropic Claude ya open-source Llama model par route kar deta hai (Fallback Routing).
+* Live Production Phase: User query aati hai, Semantic Cache check hota hai. Agar exact ya similar meaning ka question pehle pucha gaya tha, toh bina expensive LLM API call kiye instant sub-10ms response return hota hai, saving API costs and latency.
+
+---
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: AI System Architecture & RAG Pipelines
+Topic 1: RAG Architecture, LLM Gateway & Semantic Caching
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 1 | Subtopics: 10
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
