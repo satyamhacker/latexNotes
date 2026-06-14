@@ -1701,6 +1701,40 @@ Subtopics: Race Conditions Concept, Single-Packet Attacks, HTTP/2 Concurrency, B
 * Tool Name: Burp Suite (Turbo Intruder)
 * Navigation Steps: Target Request > Extensions > Turbo Intruder > Send to Turbo Intruder > Select `race1.py` script (or HTTP/2 single packet script) > Adjust connection/request numbers > Click Attack > Analyze 200 OK responses.
 
+--8--Business Logic & Mass Assignment--
+Topic 6: API Layer 7 DoS & Pagination Abuse
+Subtopics: Pagination Concept, Limit/Offset Manipulation, Database Resource Exhaustion, Regular Expression Denial of Service (ReDoS)
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Concept explanation + live exploitation demo
+* Key terms from transcript: pagination abuse, limit parameter, offset, resource exhaustion, CPU spike, ReDoS, regular expression denial of service
+* Exam Tips / Instructor Emphasis: Instructor emphasize karta hai ki DoS hamesha volumetric (DDoS) nahi hota. API hacking mein smart, single-request DoS (Layer 7) dhoondhna real skill hai.
+* Instructor ne jo analogies/examples/demos use kiye: Ek `/api/users?limit=10&page=1` endpoint intercept karke `limit=1000000` bheja, jisse backend database hang ho gaya aur 504 Gateway Timeout aa gaya. Phir ek search endpoint pe evil regex payload bhej kar CPU exhaustion dikhaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[Layer 7 DoS, Denial of Service, pagination abuse, `limit` parameter, `offset`, resource exhaustion, database locking, memory leak, 504 Gateway Timeout, ReDoS, Regular Expression Denial of Service, evil regex, backtracking, `^(([a-z])+.)+[A-Z]([a-z])+$`, payload size, single-request DoS, availability impact]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 6:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Business logic flaws aur un-optimized backend queries ka fayda utha kar application ki availability (CIA triad) ko break karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Recon/Discovery Phase: Attacker API endpoints map karta hai jo large datasets return karte hain (e.g., users list, transaction history) aur unke URL parameters (`limit`, `per_page`, `size`) observe karta hai.
+* Exploitation/Weaponization Phase: Attacker in parameters ki value ko extreme high numbers (`99999999`) se replace karta hai. ReDoS ke case mein, attacker search fields mein intentionally complex regex patterns inject karta hai (agar API input ko regex engine mein pass karti hai).
+* Post-Exploitation/Reporting Phase: Backend server huge data fetch karne mein ya complex regex evaluate (catastrophic backtracking) karne mein apne saare CPU/Memory resources exhaust kar deta hai, leading to Application Crash ya DoS.
+* Additional context: Bug bounties mein production data ko crash karne se bachne ke liye carefully payload design karna aur strictly limits mein test karna zaroori hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 6:
+
+* Tool Name: Burp Suite (Repeater)
+* Navigation Steps: Send target GET request to Repeater > Change `limit=20` to `limit=100000` > Send > Observe response time (agar 10-20 seconds se zyada lag raha hai ya 500/504 aa raha hai toh it's vulnerable).
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -1713,9 +1747,10 @@ Topic 2: Vulnerable Code Analysis (Node.js & MongoDB)
 Topic 3: Mass Assignment Exploitation & Privilege Escalation
 Topic 4: HTTP Verb Fuzzing & Business Logic Abuse
 Topic 5: API Race Conditions & Concurrency
+Topic 6: API Layer 7 DoS & Pagination Abuse
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 31 | CVEs: 0
+Sections: 1 | Topics: 6 | Subtopics: 35 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2448,3 +2483,101 @@ Sections: 1 | Topics: 2 | Subtopics: 9 | CVEs: 0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
+
+# Section 14: Real-Time & Advanced API Protocols
+
+=====Section 14: Real-Time & Advanced API Protocols=====
+Instructor is section mein traditional HTTP REST se aage badh kar real-time WebSockets (WSS) aur microservices ke binary protocols (gRPC/Protobuf) ki hacking methodology explain karta hai. [⚠️ Derived]
+
+--14--Real-Time & Advanced API Protocols--
+Topic 1: WebSockets (WSS) API Exploitation
+Subtopics: HTTP vs WebSockets, Handshake Process, 101 Switching Protocols, Cross-Site WebSocket Hijacking (CSWSH), WebSocket Frame Injection (XSS/SQLi)
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Architecture breakdown + live frame injection + CSWSH demo
+* Key terms from transcript: WebSockets, wss://, full-duplex, 101 Switching Protocols, Upgrade header, CSWSH, WebSocket frames
+* Exam Tips / Instructor Emphasis: "WebSockets HTTP nahi hain. Ek baar connection establish ho gaya, toh traditional WAFs frames ke andar ka payload nahi dekh paate."
+* Instructor ne jo analogies/examples/demos use kiye: Ek live chat API ko intercept karke pehle Origin header modify karke CSWSH exploit kiya (session hijack), aur phir chat payload frame ke andar `<img src=x onerror=alert(1)>` (XSS) aur SQLi inject karke live execution dikhaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[WebSockets, `wss://`, `ws://`, full-duplex communication, bidirectional, HTTP Upgrade header, 101 Switching Protocols, Sec-WebSocket-Key, Cross-Site WebSocket Hijacking, CSWSH, CSRF equivalent, Origin header, WebSocket frames, payload injection, XSS via WebSocket, SQLi via WebSocket, Burp WebSocket History, unauthenticated streams, real-time API, chat application, ticker]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Reconnaissance / Exploitation
+* Attack methodology context from transcript: Real-time, continuous data streams mein vulnerabilities find karna aur WebSockets ki lack of authentication/CORS ka abuse karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker Burp Suite ke "WebSockets History" tab mein traffic dekhta hai aur notice karta hai ki API messages binary ya text frames mein continuously bhej/receive rahi hai.
+* Exploitation/Weaponization Phase:
+1. **CSWSH:** Attacker initial HTTP handshake request mein `Origin` header ko manipulate karke dekhta hai ki kya connection tab bhi upgrade hota hai. Agar haan, toh malicious HTML page banakar victim ka connection hijack karta hai.
+2. **Frame Injection:** Attacker Repeater mein direct WebSocket connection open rakhta hai aur client-to-server frames mein SQLi ya XSS payloads inject karta hai.
+
+
+* Post-Exploitation/Reporting Phase: WAF bypass ho jata hai kyunki payload HTTP request mein nahi, active TCP socket (frame) ke andar travel karta hai.
+* Additional context: None.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Burp Suite
+* Navigation Steps: Proxy > WebSockets history > Select frame > Send to Repeater > Repeater tab mein jao > Connection active dikhega > "Send" payload in the message field.
+
+--14--Real-Time & Advanced API Protocols--
+Topic 2: gRPC & Protobuf APIs Exploitation
+Subtopics: gRPC Architecture, Protocol Buffers (Protobuf) Serialization, Binary Payloads, Reverse Engineering .proto Files, gRPC-Web Extension
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Expert
+* Coverage Angle: Conceptual + Tool Setup Demo
+* Transcript mein content volume: Short explanation + environment setup for advanced pentesting
+* Key terms from transcript: gRPC, microservices, Protocol Buffers, Protobuf, binary serialization, .proto files, gRPC-Web
+* Exam Tips / Instructor Emphasis: "When you see unreadable gibberish binary data in Burp and the Content-Type says 'application/grpc-web', don't panic. You just need to deserialize it."
+* Instructor ne jo analogies/examples/demos use kiye: Ek unreadable binary payload intercept kiya, usko Burp gRPC extension se readable JSON jaisi format mein deserialize karke parameter (user_id) modify kiya, aur wapas binary mein serialize karke exploit kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[gRPC, Google RPC, HTTP/2, microservices, Protocol Buffers, Protobuf, binary serialization, unreadable payload, `application/grpc`, `application/grpc-web`, `.proto` files, schema extraction, reverse engineering, serialization, deserialization, Burp Suite Extender, gRPC Web Proxy, black-box to white-box]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Reconnaissance / Tool Setup / Exploitation
+* Attack methodology context from transcript: Binary, compiled API traffic ko intercept karke readable format mein convert (deserialize) karna taaki standard API attacks (SQLi, BOLA) perform kiye ja sakein.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker API traffic intercept karta hai. JSON ki jagah, body mein binary data hota hai aur header `Content-Type: application/grpc` hota hai.
+* Exploitation/Weaponization Phase: Attacker Burp Suite mein gRPC extension install karta hai. Extension binary Protobuf data ko decode kar deta hai. Ab attacker us decoded data ke andar IDOR/BOLA, SQLi, ya Mass Assignment payloads theek waise hi inject karta hai jaise JSON mein karta tha.
+* Post-Exploitation/Reporting Phase: Modified data wapas binary mein serialize hoke server pe jata hai aur exploit trigger ho jata hai.
+* Additional context: Agar target `.proto` files leak kar de (e.g., via open source repo or source maps), toh black-box testing instantly white-box ban jati hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Burp Suite (BApp Store)
+* Navigation Steps: Extender > BApp Store > Search "gRPC" > Install "gRPC Web Extender" (or similar Protobuf decoder) > Proxy tab > Unreadable binary ab readable keys/values mein dikhega.
+
+---
+
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+```
+📋 EXTRACTED IN THIS PHASE:
+
+Section 8: Business Logic & Mass Assignment
+  Topic 6: API Layer 7 DoS & Pagination Abuse
+Section 14: Real-Time & Advanced API Protocols
+  Topic 1: WebSockets (WSS) API Exploitation
+  Topic 2: gRPC & Protobuf APIs Exploitation
+
+📊 PHASE SUMMARY:
+Sections: 2 | Topics: 3 | Subtopics: 14 | CVEs: 0
+
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
