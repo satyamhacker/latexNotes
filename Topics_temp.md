@@ -547,6 +547,40 @@ Subtopics: Parameter Parsing Quirks, WAF Bypass via HPP, Server-Side Parameter P
 * Tool Name: Burp Suite (Repeater)
 * Navigation Steps: Repeater tab > URL query string mein duplicate parameters add karo > Send > Response analyze karo ki kaunsa parameter reflect/execute hua.
 
+--3--Enumerating APIs--
+Topic 7: Version Control & Leak Search (GitLeaks & APKs)
+Subtopics: GitHub Dorking, Secret Scanning, GitLeaks Usage, Mobile APK Decompilation, Hardcoded API Keys, String Extraction
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Explanation + tool execution demo
+* Key terms from transcript: version control, GitHub dorks, GitLeaks, APK decompilation, hardcoded credentials, API keys, strings.xml
+* Exam Tips / Instructor Emphasis: "Developers frequently commit secrets to public or private repos. Hardcoded API keys in mobile apps or JS files are instant wins."
+* Instructor ne jo analogies/examples/demos use kiye: GitHub dorks (e.g., `filename:.env "target.com"`) dikhaya aur GitLeaks se repo scan karke hardcoded token nikala. Phir jadx-gui use karke Android APK decompile kiya aur `strings.xml` se API endpoints/keys read kiye.
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[Version control, Git, GitHub dorking, secret scanning, hardcoded credentials, API keys, `.env`, tokens, GitLeaks, mobile apps, APK decompilation, jadx-gui, dex2jar, `strings.xml`, source code review, open source intelligence, OSINT, credential leakage]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 7:
+
+* Phase(s): Reconnaissance / OSINT
+* Attack methodology context from transcript: Public repositories aur compiled applications (mobile apps) ka source code review karke authentication bypass ke liye leaked secrets (keys/tokens) dhundhna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Recon/Discovery Phase: Attacker GitHub par target domain ke dorks run karta hai (e.g., `"target.com" api_key`). Sath hi target ka Android APK download karke Jadx-gui se decompile karta hai.
+* Exploitation/Weaponization Phase: Decompiled files ke `strings.xml` ya minified JS mein attacker ko internal API endpoints aur static tokens milte hain.
+* Post-Exploitation/Reporting Phase: Un tokens ko use karke attacker seedha authenticated API endpoints access karta hai, bypassing the normal login flow.
+* Additional context: Bug bounties mein leaked tokens sabse common aur high-severity findings mein aate hain.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 7:
+
+* Tool Name: GitLeaks & Jadx-gui
+* Navigation Steps: Run GitLeaks: `gitleaks detect --source /path/to/repo` > Check output for secrets. For Mobile: Open Jadx-gui > Load `.apk` file > Resources > `res/values/strings.xml` > Search (Ctrl+F) for `api_key` or `http`.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -561,9 +595,10 @@ Section 3: Enumerating APIs
   Topic 4: Wfuzz Command Line Exploitation
   Topic 5: Manual JS Enumeration & Endpoints Harvesting
   Topic 6: HTTP Parameter Pollution (HPP) & SSPP
+  Topic 7: Version Control & Leak Search (GitLeaks & APKs)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 29 | CVEs: 0
+Sections: 1 | Topics: 7 | Subtopics: 35 | CVEs: 0
 
 ```
 
@@ -1012,14 +1047,201 @@ Section 5: Attacking Authentification
 Topic 1: Authentication Fundamentals & Token Types
 Topic 2: API Brute Force Attacks
 Topic 3: Token Analysis & Randomness Testing
+--5--Attacking Authentification--
+Topic 9: Response Manipulation (Login Bypass)
+Subtopics: HTTP Status Code Forgery, Blind Trust by Frontend, Success Flag Injection
+
+[📊 SCOPE SIGNAL for Topic 9:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Concept explanation + live exploitation demo
+* Key terms from transcript: response manipulation, login bypass, 403 Forbidden, 200 OK, frontend validation, blind trust, success flag
+* Exam Tips / Instructor Emphasis: "Server jhooth bole to frontend maan jaaye? Agar frontend sirf status code dekhta hai, to 403 ko 200 bana ke andar ghus jao."
+* Instructor ne jo analogies/examples/demos use kiye: Burp Suite mein `admin:wrongpass` dekar `403 Forbidden` response intercept kiya, aur status code ko `200 OK` (along with `{"success":true}`) mein modify karke login bypass achieve kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[Response manipulation, login bypass, 403 Forbidden, 200 OK, frontend validation, blind trust, status code forgery, success flag, Burp Suite Intercept, Grep-Match, authentication bypass]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 9:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Frontend ki server response status pe blind trust (lack of backend token validation) ka fayda utha kar authentication gateway bypass karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+
+* Recon/Discovery Phase: Attacker pehle valid credentials se login karke dekhta hai ki server `200 OK` ke sath kya `success` flag bhejta hai.
+* Exploitation/Weaponization Phase: Phir attacker invalid credentials bhejta hai aur aane wale `403 Forbidden` response ko intercept karke manually `200 OK` mein badal deta hai.
+* Post-Exploitation/Reporting Phase: Frontend is forged response ko dekh kar samajhta hai login successful raha aur attacker ko dashboard pe redirect kar deta hai.
+* Additional context: Bahut se mobile apps aur legacy portals abhi bhi is simple vulnerability se bypass ho jate hain.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 9:
+
+* Tool Name: Burp Suite
+* Navigation Steps: Proxy > Options > Intercept Server Responses (Enable) > Send wrong login request > Intercept response > Change `403 Forbidden` to `200 OK` > Forward.
+
+--5--Attacking Authentification--
+Topic 10: Password Reset Logic Flaws
+Subtopics: Token Leakage, Parameter Pollution, Host Header Injection
+
+[📊 SCOPE SIGNAL for Topic 10:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Theory + Exploit execution
+* Key terms from transcript: password reset, token leakage, parameter pollution, Host header injection, account takeover
+* Exam Tips / Instructor Emphasis: "Password resets are often the weakest link in authentication. Developers focus on login but leave the backdoor wide open."
+* Instructor ne jo analogies/examples/demos use kiye: Ek victim ka password reset trigger kiya aur request mein `email=victim@a.com&email=attacker@b.com` dekar token apne email pe redirect karwaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 10:
+[Password reset flaw, token leakage, parameter pollution, HPP, Host header injection, `X-Forwarded-Host`, account takeover, ATO, logic flaw, reset link, email poisoning]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 10:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Account recovery workflows ki logic vulnerabilities ko abuse karke kisi dusre user ka account take over karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+
+* Recon/Discovery Phase: Attacker password reset flow ko analyze karta hai aur dekhta hai ki reset link kaise generate/send hota hai.
+* Exploitation/Weaponization Phase: Attacker HTTP request mein parameter pollution (e.g., `email=victim&email=attacker`) ya Host Header Injection (e.g., `Host: evil.com`) perform karta hai.
+* Post-Exploitation/Reporting Phase: Server backend logic flaw ke karan password reset link attacker ke domain ya email par bhej deta hai, jisse attacker naya password set kar leta hai.
+* Additional context: None.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 10:
+
+* Tool Name: Burp Suite (Repeater)
+* Navigation Steps: Intercept password reset request > Modify headers/parameters > Send > Check attacker's inbox/server for the leaked token.
+
+--5--Attacking Authentification--
+Topic 11: Multi-Factor Authentication (MFA) Bypass
+Subtopics: Step Skipping, Response Modification, Rate Limit Bruteforcing
+
+[📊 SCOPE SIGNAL for Topic 11:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Detailed exploit walk-through
+* Key terms from transcript: MFA bypass, 2FA bypass, step skipping, response manipulation, rate limiting
+* Exam Tips / Instructor Emphasis: "MFA is only as strong as its implementation. If you can force browse past the MFA check, the protection is zero."
+* Instructor ne jo analogies/examples/demos use kiye: Login ke baad aane wale MFA verification page ki request ko drop kar diya aur seedha `/dashboard` pe force browse kiya, jisse server ne bina OTP ke access de diya.
+]
+
+🔑 KEYWORDS DUMP for Topic 11:
+[MFA bypass, 2FA bypass, multi-factor authentication, step skipping, force browsing, response modification, OTP bruteforce, rate limiting bypass, logic flaw]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 11:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Multi-step authentication flow mein intermediate steps (like OTP) ko bypass ya skip karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
+
+* Recon/Discovery Phase: Attacker valid username/password submit karta hai aur uske baad aane wale MFA prompt par ruk jata hai.
+* Exploitation/Weaponization Phase: Attacker us MFA request ko intercept karke either response modify karta hai (like changing `mfa_required: true` to `false`) ya completely us request ko drop karke direct `/profile` endpoint pe chala jata hai (Force Browsing).
+* Post-Exploitation/Reporting Phase: Agar backend state properly manage nahi kar raha hai, toh wo session ko fully authenticated maan leta hai aur access allow kar deta hai.
+* Additional context: Agar OTP length chhoti hai aur rate limit nahi hai, toh attacker Intruder se OTP bruteforce bhi kar sakta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 11:
+
+* Tool Name: Burp Suite
+* Navigation Steps: Intercept Login > Drop MFA request / Change URL to `/dashboard` directly > Check if session is established.
+
+--5--Attacking Authentification--
+Topic 12: Clickjacking (Session Riding) in APIs
+Subtopics: UI Redressing, Iframe Overlays, Authenticated API Calls
+
+[📊 SCOPE SIGNAL for Topic 12:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical application
+* Transcript mein content volume: Attack concept and payload creation
+* Key terms from transcript: Clickjacking, session riding, iframe, UI redressing, X-Frame-Options
+* Exam Tips / Instructor Emphasis: "Even if the API is secure against direct attacks, if the web interface using it lacks X-Frame-Options, you can trick victims into making authenticated API calls."
+* Instructor ne jo analogies/examples/demos use kiye: Ek invisible iframe banaya jisme victim ki profile page thi aur ek fake "Win Prize" button ke theek upar "Delete Account" button align kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 12:
+[Clickjacking, session riding, iframe, UI redressing, `X-Frame-Options`, `Content-Security-Policy`, `frame-ancestors`, authenticated API calls, social engineering, opacity 0, CSS overlay]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 12:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Victim ki authenticated state ka fayda utha kar, unse anjaane mein critical API actions (like delete account, transfer funds) perform karwana via UI redressing.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 12:
+
+* Recon/Discovery Phase: Attacker check karta hai ki target site ke headers mein `X-Frame-Options` ya CSP missing toh nahi hai.
+* Exploitation/Weaponization Phase: Attacker ek malicious HTML page banata hai jisme target application ko ek invisible iframe (`opacity: 0`) mein load karta hai aur apni site ke ek attractive button (e.g., "Click Here") ke upar align kar deta hai.
+* Post-Exploitation/Reporting Phase: Jab authenticated victim us fake button pe click karta hai, toh actual mein backend API pe "Delete Account" ya "Transfer Money" ki request chali jati hai.
+* Additional context: Yeh attack mainly web interfaces ke liye hai, par impact seedha API state pe hota hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 12:
+
+* Tool Name: Burp Suite (Clickbandit) / Text Editor
+* Navigation Steps: Burp > Top Menu > Burp Clickbandit > Copy script to browser console / Or write a custom HTML iframe payload.
+
+--5--Attacking Authentification--
+Topic 13: Session Security (Fixation, Rotation, Concurrency)
+Subtopics: Session Fixation, Token Rotation, Concurrent Logins, Session Invalidation
+
+[📊 SCOPE SIGNAL for Topic 13:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual + Testing strategy
+* Transcript mein content volume: Detailed explanation of session lifecycle flaws
+* Key terms from transcript: Session fixation, rotation, concurrency, invalidation, logout flaws
+* Exam Tips / Instructor Emphasis: "Session security doesn't end at login. What happens after logout or password change is equally critical."
+* Instructor ne jo analogies/examples/demos use kiye: Dikhaaya ki password change karne ke baad bhi purana session token valid rehta hai, ya logout ke baad bhi token server pe destroy nahi hota (lack of server-side invalidation).
+]
+
+🔑 KEYWORDS DUMP for Topic 13:
+[Session fixation, token rotation, concurrent logins, session invalidation, logout flaws, token expiry, stateful vs stateless, JWT invalidation, blocklist, backend state]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 13:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Session lifecycle ke management flaws ko abuse karke unauthorized persistent access maintain karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 13:
+
+* Recon/Discovery Phase: Attacker ek valid session token capture karta hai.
+* Exploitation/Weaponization Phase:
+1. **Fixation:** Attacker victim ko ek pre-generated session ID use karne ke liye force karta hai.
+2. **Invalidation:** Attacker account logout karta hai ya password change karta hai, aur phir purana token wapas use karke dekhta hai.
+* Post-Exploitation/Reporting Phase: Agar purana token abhi bhi kaam kar raha hai (specially stateless JWTs mein jahan blocklisting implement nahi hai), toh attacker persistent Account Takeover report karta hai.
+* Additional context: Concurrent login issues check karna (kya ek account ek sath 10 jagah khul sakta hai) is also part of this phase.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 13:
+
+* Tool Name: Burp Suite (Repeater)
+* Navigation Steps: Login > Capture Token > Logout / Change Password > Send request with old token in Repeater > If 200 OK, session is not invalidated.
+
+---
+
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 5: Attacking Authentification
+Topic 1: Authentication Fundamentals & Token Types
+Topic 2: API Brute Force Attacks
+Topic 3: Token Analysis & Randomness Testing
 Topic 4: JSON Web Token (JWT) Fundamentals
 Topic 5: JWT Offline Cracking & Forging
 Topic 6: JWT Auditing & Algorithm Attacks
 Topic 7: Advanced Brute Force & Custom Token Generation Challenges
 Topic 8: OAuth 2.0 & OpenID Connect (OIDC) Exploitation
+Topic 9: Response Manipulation (Login Bypass)
+Topic 10: Password Reset Logic Flaws
+Topic 11: Multi-Factor Authentication (MFA) Bypass
+Topic 12: Clickjacking (Session Riding) in APIs
+Topic 13: Session Security (Fixation, Rotation, Concurrency)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 8 | Subtopics: 45 | CVEs: 1
+Sections: 1 | Topics: 13 | Subtopics: 62 | CVEs: 1
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1319,8 +1541,129 @@ Topic 6: NoSQL Injection Fundamentals & MongoDB
 Topic 7: NoSQL Injection Exploitation & Auth Bypass
 Topic 8: XML External Entity (XXE) via Content-Type Swapping
 
+--6--Injection--
+Topic 9: Server-Side Template Injection (SSTI)
+Subtopics: Template Engines, Context Escape, RCE via SSTI, Payloads
+
+[📊 SCOPE SIGNAL for Topic 9:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Theory + Exploit demo
+* Key terms from transcript: SSTI, template engine, Jinja2, Twig, evaluation, RCE, double curly braces
+* Exam Tips / Instructor Emphasis: "When an API uses user input to render emails or documents on the server-side without sanitization, you get SSTI. It almost always leads to RCE."
+* Instructor ne jo analogies/examples/demos use kiye: Ek API endpoint jo `{"name": "user"}` accept karke "Hello user" email bhejta hai. Payload `{{7*7}}` bheja aur email mein "49" print hua. Phir Python `__class__` payload se command execution (id) kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[SSTI, Server-Side Template Injection, Jinja2, Twig, Handlebars, template engine, context escape, remote code execution, RCE, `{{7*7}}`, payload, `__class__`, `__mro__`, MRO, subprocess, `popen`]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 9:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Template engines (mostly used in PDF generation or emails via APIs) ke parsing syntax ko abuse karke server par arbitrary code execute karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+
+* Recon/Discovery Phase: Attacker JSON payload mein mathematical expressions (like `${7*7}`, `{{7*7}}`, `<%= 7*7 %>`) bhej kar backend template engine detect karta hai.
+* Exploitation/Weaponization Phase: Attacker detected engine ke specific payload bhejta hai taaki sandboxed context se bahar nikal sake (e.g., Python `__subclasses__()`).
+* Post-Exploitation/Reporting Phase: RCE achieve hone par attacker reverse shell spawn karta hai ya `/etc/passwd` read karta hai.
+* Additional context: APIs mein SSTI directly HTTP response mein nahi dikhta, out-of-band (like an email received) check karna padta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 9:
+
+* Tool Name: Burp Suite & Tplmap
+* Navigation Steps: Repeater > Inject `{{7*7}}` in fields > Send. / CLI: Run `tplmap.py -u <URL> -d <data>` to automate exploitation.
+
+--6--Injection--
+Topic 10: Prototype Pollution (Node.js Special)
+Subtopics: JavaScript Objects, `__proto__`, Property Injection, Logic Bypass
+
+[📊 SCOPE SIGNAL for Topic 10:
+
+* Depth Level: Deep
+* Coverage Angle: Theory + Practical
+* Transcript mein content volume: Deep technical dive
+* Key terms from transcript: Prototype pollution, JavaScript, Node.js, __proto__, constructor, prototype, object injection
+* Exam Tips / Instructor Emphasis: "In JavaScript, if you can pollute the Object prototype, you pollute every object in the application. This can lead to privilege escalation or DoS."
+* Instructor ne jo analogies/examples/demos use kiye: Ek JSON body jisme `{"__proto__": {"isAdmin": true}}` bheja gaya. Backend merge/clone function ne global Object ko modify kar diya, jisse ek naye user ko automatically admin rights mil gaye.
+]
+
+🔑 KEYWORDS DUMP for Topic 10:
+[Prototype pollution, Node.js, JavaScript objects, `__proto__`, constructor, prototype chain, `isAdmin`, privilege escalation, merge function, deep clone, JSON parsing, AST injection, RCE]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 10:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: JS/Node.js ki object-oriented design flaw (prototype chain) ko abuse karke backend logic ko globally modify karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+
+* Recon/Discovery Phase: Attacker API ke JSON payload mein `{"__proto__":{"test":"polluted"}}` inject karke dekhta hai ki server crash hota hai ya kisi aur endpoint pe wo property reflect hoti hai.
+* Exploitation/Weaponization Phase: Attacker aisi property pollute karta hai jiska backend logic pe asar ho (jaise `isAdmin: true` ya `debug: true`).
+* Post-Exploitation/Reporting Phase: Attacker bina actual privileges ke admin actions perform kar pata hai kyunki backend ka har object ab `isAdmin=true` return kar raha hai.
+* Additional context: Yeh vulnerability sirf Node.js/JavaScript backends pe apply hoti hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 10:
+
+* Tool Name: Burp Suite
+* Navigation Steps: Repeater > Add `__proto__` block in JSON POST request > Send > Check subsequent requests for privilege escalation.
+
+--6--Injection--
+Topic 11: Insecure Deserialization (Java/C# Focus)
+Subtopics: Serialization Concepts, Magic Methods, Gadget Chains, RCE
+
+[📊 SCOPE SIGNAL for Topic 11:
+
+* Depth Level: Deep
+* Coverage Angle: Theory + Practical
+* Transcript mein content volume: Concept explanation + Tool (Ysoserial) usage
+* Key terms from transcript: Serialization, deserialization, Java, C#, gadget chain, magic methods, ysoserial
+* Exam Tips / Instructor Emphasis: "If an API accepts a serialized object from the user and deserializes it without verification, it's game over. RCE is almost guaranteed."
+* Instructor ne jo analogies/examples/demos use kiye: Ek base64 encoded Java serialized object (starting with `rO0`) dikhaya. Phir Ysoserial tool se payload generate karke use base64 encode kiya aur API ko bheja to get a reverse shell.
+]
+
+🔑 KEYWORDS DUMP for Topic 11:
+[Insecure deserialization, serialization, magic methods, Java, `rO0`, C#, PHP, Python pickle, gadget chains, Ysoserial, remote code execution, RCE, object injection, base64]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 11:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Application ke deserialization process (object reconstruction) mein malicious data (gadgets) inject karke code execution achieve karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
+
+* Recon/Discovery Phase: Attacker API headers (like Cookies) ya body mein base64 encoded strings dekhta hai jo `rO0` (Java) ya `O:` (PHP) se shuru hoti hain.
+* Exploitation/Weaponization Phase: Attacker ysoserial use karke target library (e.g., CommonsCollections) ke hisaab se RCE payload generate karta hai.
+* Post-Exploitation/Reporting Phase: Server payload ko deserialize karte hi attacker ki di hui commands execute kar deta hai (RCE).
+* Additional context: Yeh bahut complex bug hai, isliye pentesting mein tools like Ysoserial standard hain.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 11:
+
+* Tool Name: Ysoserial
+* Navigation Steps: CLI: `java -jar ysoserial.jar CommonsCollections1 'calc.exe' > payload.bin` > Encode to base64 > Send via Burp Repeater.
+
+---
+
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 6: Injection
+Topic 1: SQL Injection Fundamentals
+Topic 2: Fuzzing & Manual SQLi Verification
+Topic 3: Union-Based SQL Injection
+Topic 4: Automated Exploitation with SQLMap
+Topic 5: SQLi Authentication Bypass
+Topic 6: NoSQL Injection Fundamentals & MongoDB
+Topic 7: NoSQL Injection Exploitation & Auth Bypass
+Topic 8: XML External Entity (XXE) via Content-Type Swapping
+Topic 9: Server-Side Template Injection (SSTI)
+Topic 10: Prototype Pollution (Node.js Special)
+Topic 11: Insecure Deserialization (Java/C# Focus)
+
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 8 | Subtopics: 36 | CVEs: 0
+Sections: 1 | Topics: 11 | Subtopics: 50 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2579,5 +2922,376 @@ Sections: 2 | Topics: 3 | Subtopics: 14 | CVEs: 0
 
 
 ```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 15: Emerging API & Cloud Threats
+
+=====Section 15: Emerging API & Cloud Threats=====
+[Instructor is section mein modern APIs (jaise cloud-native deployments) ki unique vulnerabilities aur unke exploitations pe focus karta hai.]
+
+--15--Emerging API & Cloud Threats--
+Topic 1: Cloud-Native API Risks (AWS/Azure/GCP)
+Subtopics: Cloud Metadata SSRF, S3 Bucket Leakages, IAM Role Abuse
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Concept + Cloud specific exploitation
+* Key terms from transcript: AWS metadata, `169.254.169.254`, Azure metadata, IAM roles, S3 buckets, cloud-native APIs
+* Exam Tips / Instructor Emphasis: "When hacking an API hosted in AWS, an SSRF isn't just about reading local files. It's about hitting the metadata service and stealing cloud credentials."
+* Instructor ne jo analogies/examples/demos use kiye: SSRF payload `http://169.254.169.254/latest/meta-data/iam/security-credentials/` inject karke AWS IAM tokens extract kiye aur AWS CLI setup karke cloud environment access kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Cloud-native APIs, AWS metadata SSRF, `169.254.169.254`, Azure, GCP, IAM roles, security credentials, STS tokens, S3 bucket leakages, misconfigured permissions, cloud privilege escalation]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Post-Exploitation / Privilege Escalation
+* Attack methodology context from transcript: SSRF jaisi vulnerability ko leverage karke cloud provider ke internal metadata se highly privileged tokens extract karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker Wappalyzer ya DNS records se identify karta hai ki API AWS/Cloud pe hosted hai.
+* Exploitation/Weaponization Phase: SSRF vulnerability find karne ke baad attacker cloud metadata endpoints pe query bhejta hai.
+* Post-Exploitation/Reporting Phase: Attacker AWS Access Key, Secret Key aur Session Token extract karke apne local AWS CLI me configure karta hai aur full cloud takeover report karta hai.
+* Additional context: Bug Bounties mein Cloud Metadata SSRF hamesha P1 (Critical) severity hoti hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Burp Suite & AWS CLI
+* Navigation Steps: Repeater > Inject `169.254.169.254` > Copy JSON response > Terminal: `aws configure` > Set keys > `aws s3 ls`.
+
+--15--Emerging API & Cloud Threats--
+Topic 2: API Cache Poisoning
+Subtopics: Unkeyed Parameters, Caching Layers, Payload Storage, Reflection
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: Theory and demonstration of cache flaws
+* Key terms from transcript: Cache poisoning, unkeyed parameters, Cloudflare, Varnish, X-Forwarded-Host, cache hit, cache miss
+* Exam Tips / Instructor Emphasis: "If an API caches responses based on the URL but reflects unkeyed headers in the response, you can poison the cache for everyone."
+* Instructor ne jo analogies/examples/demos use kiye: Ek API pe request bheji jisme `X-Forwarded-Host: evil.com` tha. Server ne URL evil.com ke sath cache kar diya. Ab jab normal user request karta hai toh use evil.com ka link milta hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[API Cache poisoning, caching layers, Varnish, Cloudflare, unkeyed parameters, keyed parameters, `X-Forwarded-Host`, `X-Forwarded-Scheme`, reflected XSS, cache hit, `CF-Cache-Status: HIT`]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Web/API caching mechanisms ko exploit karke ek user ke response me malicious payload store karwana jo sabhi users ko serve ho.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker Param Miner (Burp Extension) use karke unkeyed headers find karta hai jo response mein reflect hote hain.
+* Exploitation/Weaponization Phase: Attacker malicious header add karke request bhejta hai jab tak `Cache-Status: HIT` na mil jaye.
+* Post-Exploitation/Reporting Phase: Dusre users jo same API endpoint access karte hain, unhe attacker ka poisoned response milta hai (e.g., malicious JS payload for XSS).
+* Additional context: APIs mein cache poisoning jyadatar JSON injection ya malicious redirect paths create karne ke liye use hoti hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Burp Suite (Param Miner)
+* Navigation Steps: Right click request > Extensions > Param Miner > Guess Headers > Check output for reflected unkeyed headers > Exploit manually in Repeater.
+
+--15--Emerging API & Cloud Threats--
+Topic 3: API Versioning & Deprecation Flaws
+Subtopics: Endpoint Discovery, Legacy Vulnerabilities, Sunset Headers
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Surface
+* Coverage Angle: Practical approach
+* Transcript mein content volume: Concept and finding techniques
+* Key terms from transcript: API versioning, deprecation, /v1/, /v2/, legacy code, sunset
+* Exam Tips / Instructor Emphasis: "Developers fix a bug in /v2/ but forget to take down /v1/. Always test older API versions."
+* Instructor ne jo analogies/examples/demos use kiye: `/v2/users` pe BOLA test kiya jo secure tha, par URL ko `/v1/users` me change karke test kiya toh wahan BOLA exist karta tha.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[API versioning, legacy endpoints, deprecated APIs, `/v1/`, `/v2/`, `/v3/`, sunset headers, backwards compatibility, shadow APIs, zombie APIs]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 3:
+
+* Phase(s): Reconnaissance / Exploitation
+* Attack methodology context from transcript: "Zombie APIs" (purane versions) discover karke unme maujood unpatched vulnerabilities (jo newer versions me fix ho chuki hain) ko exploit karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Recon/Discovery Phase: Attacker Ffuf ya Burp Intruder se version numbers fuzz karta hai (`/api/v§1§/`).
+* Exploitation/Weaponization Phase: Attacker secure endpoints ko legacy endpoints se swap karke vulnerabilities (like BOLA, Mass Assignment) test karta hai.
+* Post-Exploitation/Reporting Phase: Agar `/v1` pe exploit successful hota hai jabki `/v2` secure hai, toh yeh Patch Bypass / Zombie API issue report hota hai.
+* Additional context: API lifecycle management ki kami iska root cause hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
+
+* Tool Name: Burp Suite (Intruder)
+* Navigation Steps: Send to Intruder > Highlight version number `/v1/` > Set payload type to Numbers (1 to 10) > Start attack > Check for `200 OK` responses.
+
+--15--Emerging API & Cloud Threats--
+Topic 4: Security Headers & Verbose Errors (Information Disclosure)
+Subtopics: Stack Traces, Missing Headers, CORS, HSTS
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Surface
+* Coverage Angle: Conceptual & Reporting
+* Transcript mein content volume: Brief coverage
+* Key terms from transcript: Verbose errors, stack trace, security headers, information disclosure
+* Exam Tips / Instructor Emphasis: "A stack trace is a roadmap for an attacker. It tells you the exact framework, line numbers, and database queries."
+* Instructor ne jo analogies/examples/demos use kiye: Invalid JSON format bheja, aur API ne response mein poora Node.js stack trace aur database query leak kar di.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Verbose errors, stack traces, information disclosure, security headers, HSTS, CORS, `X-Content-Type-Options`, framework fingerprints, database schema leak]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 4:
+
+* Phase(s): Reconnaissance
+* Attack methodology context from transcript: Server errors ko purposefully trigger karke backend architecture (frameworks, databases, code structure) ki detailed information extract karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Recon/Discovery Phase: Attacker invalid inputs (like special characters, malformed JSON, mismatched types) bhejta hai.
+* Exploitation/Weaponization Phase: Server crash ho kar `500 Internal Server Error` ke sath detailed stack trace return karta hai.
+* Post-Exploitation/Reporting Phase: Attacker is info (file paths, DB queries) ko use karke SQLi ya LFI payload craft karta hai.
+* Additional context: Yeh finding akele low severity hoti hai, par dusre attacks map karne ke liye critical hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 4:
+
+* Tool Name: Burp Suite
+* Navigation Steps: Repeater > Break JSON syntax `{"id": 1` > Send > Analyze response body for stack traces.
+
+---
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 15: Emerging API & Cloud Threats
+Topic 1: Cloud-Native API Risks (AWS/Azure/GCP)
+Topic 2: API Cache Poisoning
+Topic 3: API Versioning & Deprecation Flaws
+Topic 4: Security Headers & Verbose Errors (Information Disclosure)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 4 | Subtopics: 15 | CVEs: 0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 16: Webhooks & Microservices Architecture
+
+=====Section 16: Webhooks & Microservices Architecture=====
+[Instructor is section mein event-driven APIs (Webhooks) aur internal microservices ke interactions mein aane wali security flaws ko discuss karta hai.]
+
+--16--Webhooks & Microservices Architecture--
+Topic 1: Webhook Security
+Subtopics: Signature Verification, Replay Attacks, SSRF via Webhooks
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Theory + Exploitation
+* Key terms from transcript: Webhooks, event-driven, signature verification, HMAC, replay attacks, blind SSRF
+* Exam Tips / Instructor Emphasis: "If an API consumes a webhook without verifying its cryptographic signature, anyone can fake events like 'payment successful'."
+* Instructor ne jo analogies/examples/demos use kiye: Stripe payment webhook ko simulate karke ek fake `payment_intent.succeeded` event bheja jise API ne process karke account upgrade kar diya (kyunki signature check nahi tha).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Webhooks, event-driven APIs, callback URL, HMAC signature, `X-Hub-Signature`, replay attacks, fake events, payment bypass, SSRF via webhooks, blind SSRF, asynchronous]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Third-party services (jaise Stripe/GitHub) ki taraf se aane wale asynchronous events (webhooks) ko spoof karna to bypass business logic.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker API documentation ya request history se webhook endpoint (`/api/webhook/stripe`) discover karta hai.
+* Exploitation/Weaponization Phase: Attacker directly us endpoint pe ek POST request bhejta hai with a fake JSON payload claiming "payment successful".
+* Post-Exploitation/Reporting Phase: Agar API HMAC signature verify nahi karti, toh wo transaction ko valid maan leti hai. Agar signature validation hai, toh attacker "Replay Attack" try karta hai (purani valid webhook request ko baar baar bhejna).
+* Additional context: SSRF bhi webhook configuration panels me common hai jahan attacker internal IPs input kar deta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Burp Suite & Webhook.site
+* Navigation Steps: Capture webhook payload structure > Send to Repeater > Modify values (e.g., amount/status) > Remove signature headers > Send to target webhook endpoint.
+
+--16--Webhooks & Microservices Architecture--
+Topic 2: Microservices Communication Security
+Subtopics: Service-to-Service Auth, mTLS Misconfigurations, Implicit Trust
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Explanation
+* Key terms from transcript: Microservices, internal APIs, implicit trust, service-to-service, mTLS, zero trust
+* Exam Tips / Instructor Emphasis: "Once you breach the perimeter, microservices often trust each other blindly. Finding an SSRF can give you unauthenticated access to internal microservices."
+* Instructor ne jo analogies/examples/demos use kiye: Ek external API pe SSRF mila, jise use karke internal billing microservice (`http://billing-service:8080`) pe bina kisi token ke query ki aur data nikal liya.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Microservices, internal APIs, implicit trust, service-to-service authentication, mTLS, Mutual TLS, zero trust, API Gateway, internal routing, SSRF pivoting]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Post-Exploitation / Lateral Movement
+* Attack methodology context from transcript: External entry point (like SSRF) se internal API network mein lateral movement karna jahan authentication strict nahi hoti.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker error messages ya recon se internal microservice hostnames (like `user-service.local`) collect karta hai.
+* Exploitation/Weaponization Phase: Attacker SSRF payload craft karta hai internal endpoints ko hit karne ke liye (`http://internal-api/admin/delete`).
+* Post-Exploitation/Reporting Phase: Kyunki microservices aapas mein ek dusre par "Implicit Trust" rakhti hain (bina authorization headers ke), internal request successfully process ho jati hai.
+* Additional context: Yeh Zero Trust Architecture ki absence ko highlight karta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Burp Suite (Repeater)
+* Navigation Steps: Inject internal URL in SSRF vulnerable parameter > Send > Read response from internal microservice.
+
+---
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 16: Webhooks & Microservices Architecture
+Topic 1: Webhook Security
+Topic 2: Microservices Communication Security
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 6 | CVEs: 0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 17: Professional Pentesting & Reporting
+
+=====Section 17: Professional Pentesting & Reporting=====
+[Instructor is final module mein API hacking ko real-world job ya bug bounty ke point of view se wrap up karta hai, covering automation scripts, report writing, aur industry standards.]
+
+--17--Professional Pentesting & Reporting--
+Topic 1: CLI & Scripting for APIs
+Subtopics: Nuclei, Ffuf, Postman/Newman, Custom Python Scripts
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical Tooling
+* Transcript mein content volume: Tool demos
+* Key terms from transcript: CLI, automation, Nuclei, ffuf, Postman collections, Newman, Python requests
+* Exam Tips / Instructor Emphasis: "GUI tools are great for learning, but CLI tools and custom scripts are what make you fast and efficient in the real world."
+* Instructor ne jo analogies/examples/demos use kiye: `ffuf` se API endpoints fuzz kiye, `nuclei` se misconfigurations scan kiye, aur Postman Collection ko `newman run` command se terminal mein execute karke dikhaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[CLI tools, automation, Scripting, Python `requests`, API fuzzing, `ffuf`, Nuclei, YAML templates, Postman, Newman, CI/CD pipeline integration, `Kiterunner`]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Reconnaissance / Automation
+* Attack methodology context from transcript: API testing workflows ko command-line tools aur scripts ke through automate aur scale karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker `Kiterunner` ya `ffuf` se wordlist based API endpoint discovery karta hai.
+* Exploitation/Weaponization Phase: Attacker Nuclei API templates run karta hai for low-hanging fruits (like exposed Swagger UI). Python `requests` use karke custom race condition exploits likhta hai.
+* Post-Exploitation/Reporting Phase: N/A
+* Additional context: Bug bounties mein speed ke liye automation crucial hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Ffuf & Newman
+* Navigation Steps: `ffuf -w words.txt -u https://api.target.com/FUZZ` / `newman run postman_collection.json -e environment.json`
+
+--17--Professional Pentesting & Reporting--
+Topic 2: Vulnerability Reporting (CVSS & PoC)
+Subtopics: CVSS Scoring, Writing PoCs, Risk Assessment, Remediation
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Professional skills
+* Transcript mein content volume: Reporting guidelines
+* Key terms from transcript: Reporting, CVSS v3.1, Proof of Concept, PoC, remediation, business impact
+* Exam Tips / Instructor Emphasis: "A great finding with a bad report gets ignored. Write clear steps to reproduce and focus on the business impact."
+* Instructor ne jo analogies/examples/demos use kiye: Ek BOLA vulnerability ke liye CVSS score (e.g. 7.5 High) calculate karke dikhaya aur ek perfect step-by-step PoC ka structure explain kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Reporting, CVSS, Common Vulnerability Scoring System, Proof of Concept, PoC, business impact, remediation, steps to reproduce, triage, severity, bug bounty report]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Reporting
+* Attack methodology context from transcript: Penetration test complete hone ke baad findings ko professional, actionable, aur clear format me clients/developers tak pahunchana.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: N/A
+* Exploitation/Weaponization Phase: N/A
+* Post-Exploitation/Reporting Phase: Attacker report draft karta hai: Title, Description, CVSS Score, Business Impact, Step-by-step PoC (with HTTP requests/responses), aur Remediation advice.
+* Additional context: Good reporting skills directly translate to higher payouts in bug bounties and better career growth.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: CVSS Calculator
+* Navigation Steps: Open CVSS v3.1 Calculator > Select vectors (Attack Vector, Complexity, Privileges, Impact) > Generate score and vector string.
+
+--17--Professional Pentesting & Reporting--
+Topic 3: Remediation Timelines (Industry Standards)
+Subtopics: SLAs, Patching Cycles, Retesting
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Surface
+* Coverage Angle: Conceptual
+* Transcript mein content volume: Brief overview
+* Key terms from transcript: Remediation, SLAs, patching, retesting, timeline
+* Exam Tips / Instructor Emphasis: "Understand that developers can't fix everything in one day. Prioritize critical bugs for immediate patching."
+* Instructor ne jo analogies/examples/demos use kiye: Explain kiya ki Critical bugs ke liye usually 24-48 hours ka SLA hota hai, jabki Low/Medium findings 30-90 days le sakti hain.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Remediation timeline, Service Level Agreement, SLA, patching cycles, retesting, vulnerability management, triage, prioritization]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 3:
+
+* Phase(s): Reporting / Post-Engagement
+* Attack methodology context from transcript: Pentest ke baad patch management lifecycle ko samajhna aur retesting align karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Recon/Discovery Phase: N/A
+* Exploitation/Weaponization Phase: N/A
+* Post-Exploitation/Reporting Phase: Report submit hone ke baad dev team fix deploy karti hai based on SLA severity, phir pentester us fix ko retest karke verify karta hai ki bypass toh nahi ho raha.
+* Additional context: Yeh corporate pentesting aur compliance (like PCI-DSS) ke liye zaruri hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
+
+* Tool Name: N/A
+* Navigation Steps: N/A
+
+---
+
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 17: Professional Pentesting & Reporting
+Topic 1: CLI & Scripting for APIs
+Topic 2: Vulnerability Reporting (CVSS & PoC)
+Topic 3: Remediation Timelines (Industry Standards)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 3 | Subtopics: 9 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
