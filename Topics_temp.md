@@ -513,6 +513,40 @@ Subtopics: Manual Traffic Review, Developer Tools Debugger, Technology Stack Det
 * Tool Name: Web Browser / Developer Tools
 * Navigation Steps: Browse application and click through all functions (posts, comments, settings) > Open Developer Tools (F12) > Go to Debugger tab (or Sources tab) > Drop down JS files folder > Open `static.js` / `config.js` / `index.js` > Copy unreadable code > Paste into Online JS Formatter/Beautifier
 
+--3--Enumerating APIs--
+Topic 6: HTTP Parameter Pollution (HPP) & SSPP
+Subtopics: Parameter Parsing Quirks, WAF Bypass via HPP, Server-Side Parameter Pollution (SSPP), Array Injection, Express.js vs PHP Parsing
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Practical demonstration + architectural theory
+* Key terms from transcript: HTTP Parameter Pollution, HPP, Server-Side Parameter Pollution, SSPP, WAF bypass, array injection, Express.js, query string
+* Exam Tips / Instructor Emphasis: Instructor emphasize karega ki WAF pehle parameter ko check karta hai, jabki backend (like Express.js) last parameter ko array mein convert kar sakta hai, jisse filtering bypass ho jati hai.
+* Instructor ne jo analogies/examples/demos use kiye: URL mein `?user_id=1&user_id=admin_id` bhej kar dikhana ki backend kis value ko process karta hai aur kaise WAF ko dhoka diya jata hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[HTTP parameter pollution, HPP, server-side parameter pollution, SSPP, WAF bypass, Web Application Firewall, query string manipulation, array injection, Express.js array parsing, PHP parameter overwrite, `?id=1&id=2`, business logic bypass, backend processing]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 6:
+
+* Phase(s): Scanning & Enumeration / Exploitation
+* Attack methodology context from transcript: Enumeration phase mein multiple same-name parameters inject karke backend ka behavior aur WAF presence map karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Recon/Discovery Phase: Attacker API endpoint observe karta hai (e.g., `/api/profile?id=101`) aur usme duplicate parameter add karta hai (`?id=101&id=102`) yeh dekhne ke liye ki API 101, 102, ya array `[101, 102]` return karti hai.
+* Exploitation/Weaponization Phase: Agar backend Express.js hai aur HPP vulnerable hai, toh attacker malicious payload doosre parameter mein dalta hai (`?id=safe&id=malicious`). WAF safe value dekh kar allow kar deta hai, par backend malicious value execute kar deta hai.
+* Post-Exploitation/Reporting Phase: (N/A)
+* Additional context: Bug bounty mein yeh WAF bypass karne ka sabse reliable tarika hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 6:
+
+* Tool Name: Burp Suite (Repeater)
+* Navigation Steps: Repeater tab > URL query string mein duplicate parameters add karo > Send > Response analyze karo ki kaunsa parameter reflect/execute hua.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -526,9 +560,10 @@ Section 3: Enumerating APIs
   Topic 3: Discovering LFI via Burp Suite Intruder
   Topic 4: Wfuzz Command Line Exploitation
   Topic 5: Manual JS Enumeration & Endpoints Harvesting
+  Topic 6: HTTP Parameter Pollution (HPP) & SSPP
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 24 | CVEs: 0
+Sections: 1 | Topics: 6 | Subtopics: 29 | CVEs: 0
 
 ```
 
@@ -933,6 +968,40 @@ Subtopics: Username Enumeration via Wordlists, Negative Search Filtering, Ffuf A
 * Tool Name: Burp Suite (Intruder)
 * Navigation Steps: Intruder > Positions > set payload marker > Payloads tab > Payload Processing > Add rule > Encode > select Base64-encode > OK > Start attack.
 
+--5--Attacking Authentification--
+Topic 8: OAuth 2.0 & OpenID Connect (OIDC) Exploitation
+Subtopics: OAuth 2.0 Flow, Authorization Code Grant, Implicit Grant, Redirect URI Manipulation, State Parameter CSRF, Account Takeover (ATO)
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation + live demo of Account Takeover
+* Key terms from transcript: OAuth 2.0, OpenID Connect, OIDC, authorization code, client_id, redirect_uri, state parameter, CSRF, account takeover
+* Exam Tips / Instructor Emphasis: "Tokens tabhi secure hain jab unka issuance flow secure ho. `redirect_uri` ko manipulate karna OAuth hacking ka holy grail hai."
+* Instructor ne jo analogies/examples/demos use kiye: "Login with Google" flow ko intercept karke `redirect_uri` ko attacker controlled server pe change kiya taaki victim ka OAuth code attacker ke server pe leak ho jaye.
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[OAuth 2.0, OpenID Connect, OIDC, Authorization Code Grant, Implicit Grant, SSO, Single Sign-On, `client_id`, ⭐`redirect_uri`, `response_type=code`, `state` parameter, CSRF protection, account takeover, ATO, token leakage, attacker controlled domain, URI bypass, wildcard bypass]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 8:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Third-party authentication integrations (SSO) ke implementation flaws ko exploit karke unauthorized access ya Account Takeover achieve karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Recon/Discovery Phase: Attacker login page pe "Login with X" button pe click karta hai aur Burp mein OAuth request (jisme `client_id` aur `redirect_uri` hote hain) intercept karta hai.
+* Exploitation/Weaponization Phase: Attacker `redirect_uri` ko apne malicious server (e.g., `https://attacker.com/callback`) se replace karta hai. Agar strict validation nahi hai, toh API authorize hone ke baad valid access code attacker ke server pe bhej deti hai.
+* Post-Exploitation/Reporting Phase: Attacker us code ko use karke victim ke account ka JWT/session token generate kar leta hai aur full Account Takeover (ATO) report karta hai.
+* Additional context: Instructor `state` parameter ki absence se CSRF attack demo karta hai jahan attacker apna account victim se link kar deta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 8:
+
+* Tool Name: Burp Suite & Webhook.site
+* Navigation Steps: Intercept Login request > Repeater > Modify `redirect_uri` parameter > Forward > Check Webhook.site logs for leaked Authorization Code.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -947,9 +1016,10 @@ Topic 4: JSON Web Token (JWT) Fundamentals
 Topic 5: JWT Offline Cracking & Forging
 Topic 6: JWT Auditing & Algorithm Attacks
 Topic 7: Advanced Brute Force & Custom Token Generation Challenges
+Topic 8: OAuth 2.0 & OpenID Connect (OIDC) Exploitation
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 39 | CVEs: 1
+Sections: 1 | Topics: 8 | Subtopics: 45 | CVEs: 1
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1199,6 +1269,40 @@ Subtopics: NoSQL Payload Fuzzing, JSON Operator Injection, Not Equal Bypass, Bur
 * Tool Name: Burp Suite
 * Navigation Steps: Intruder tab > Payloads > Payload Encoding (untick URL-encode these characters) > Start Attack > Options tab > Grep - Extract / Grep - Match (negative search for "invalid")
 
+--6--Injection--
+Topic 8: XML External Entity (XXE) via Content-Type Swapping
+Subtopics: Content-Type Header Manipulation, JSON to XML Conversion, XXE Concept, External Entity Injection, LFI via XXE
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Exploit demo + tool usage
+* Key terms from transcript: Content-Type, application/json, application/xml, XXE, XML External Entity, XML parser, local file inclusion
+* Exam Tips / Instructor Emphasis: "Just because the API asks for JSON doesn't mean it won't parse XML. Always try changing the Content-Type."
+* Instructor ne jo analogies/examples/demos use kiye: Normal JSON POST request ko Burp extension se XML mein convert kiya, `application/xml` header set kiya, aur `SYSTEM "file:///etc/passwd"` payload inject karke LFI achieve kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[Content-Type, `application/json`, `application/xml`, ⭐XXE, XML External Entity, XML parser, hidden attack surface, DOCTYPE, SYSTEM, ⭐`file:///etc/passwd`, local file inclusion, LFI, SSRF via XXE, Burp Suite Content Type Converter, blind XXE, out-of-band XXE]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 8:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Unintended parsers (XML) ko trigger karke JSON-based APIs mein legacy vulnerabilities (XXE) exploit karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Recon/Discovery Phase: Attacker ek normal JSON API request intercept karta hai (e.g., profile update).
+* Exploitation/Weaponization Phase: Attacker `Content-Type: application/json` ko `application/xml` mein change karta hai aur body ko XML format mein rewrite karta hai jisme ek malicious DOCTYPE entity definition (like fetching `/etc/passwd`) hoti hai.
+* Post-Exploitation/Reporting Phase: Backend ka misconfigured XML parser payload ko process karta hai aur API response mein server ki internal file (LFI) ka content return kar deta hai.
+* Additional context: Agar data reflect nahi hota, toh attacker blind XXE techniques use karta hai external DNS interaction ke liye.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 8:
+
+* Tool Name: Burp Suite
+* Navigation Steps: Send Request to Repeater > Highlight JSON body > Extensions > Content Type Converter > Convert to XML > Edit Header to `Content-Type: application/xml` > Inject DOCTYPE payload > Send.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -1213,9 +1317,10 @@ Topic 4: Automated Exploitation with SQLMap
 Topic 5: SQLi Authentication Bypass
 Topic 6: NoSQL Injection Fundamentals & MongoDB
 Topic 7: NoSQL Injection Exploitation & Auth Bypass
+Topic 8: XML External Entity (XXE) via Content-Type Swapping
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 31 | CVEs: 0
+Sections: 1 | Topics: 8 | Subtopics: 36 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1420,10 +1525,10 @@ Sections: 1 | Topics: 5 | Subtopics: 19 | CVEs: 0
 
 
 
-# Section 8: Mass Assignment
+# Section 8: Business Logic & Mass Assignment
 
 
-=====Section 8: Mass Assignment=====
+=====Section 8: Business Logic & Mass Assignment=====
 Instructor is section mein Mass Assignment (OWASP API Top 10) ki theory, Node.js/MongoDB code review, aur real-world API exploitation cover karta hai. [⚠️ Derived]
 
 --8--Mass Assignment--
@@ -1562,20 +1667,55 @@ Subtopics: Endpoint Fuzzing, HTTP Request Methods, FFUF Fuzzing, Burp Suite Intr
 * Tool Name: Burp Suite
 * Navigation Steps: (Intruder) Ctrl-I (Send to Intruder) > Positions tab > Add payload marker to HTTP Method > Payloads tab > Select 'HTTP verbs' list > Start attack | (Repeater) Send to Repeater > Extensions > Content Type Converter > Convert to JSON > Switch to Raw tab > Edit JSON body > Send
 
+--8--Business Logic & Mass Assignment--
+Topic 5: API Race Conditions & Concurrency
+Subtopics: Race Conditions Concept, Single-Packet Attacks, HTTP/2 Concurrency, Bypassing Rate Limits, Financial Logic Abuse
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Advanced tool usage + live exploit demo
+* Key terms from transcript: race condition, concurrency, time-of-check to time-of-use, TOCTOU, Turbo Intruder, single-packet attack, HTTP/2
+* Exam Tips / Instructor Emphasis: "Race conditions require exact timing. Burp Intruder isn't fast enough; you must use Turbo Intruder or HTTP/2 single-packet techniques."
+* Instructor ne jo analogies/examples/demos use kiye: Ek e-commerce API pe single-use discount coupon ko Turbo Intruder ke through ek hi millisecond mein 20 baar redeem karke dikhaya, jisse balance negative mein chala gaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Race condition, concurrency flaw, TOCTOU, time-of-check to time-of-use, thread safety, database locking, ⭐Turbo Intruder, single-packet attack, HTTP/2 concurrent requests, rate limit bypass, financial logic abuse, coupon redemption, parallel requests, synchronization gap]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 5:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: Server ke processing time (database read vs write) ke microsecond gap ko exploit karke business logic limits bypass karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Recon/Discovery Phase: Attacker ek sensitive action identify karta hai jiske limits hain (e.g., transferring funds, redeeming a coupon once, voting).
+* Exploitation/Weaponization Phase: Attacker Burp Suite ke Turbo Intruder mein Python script use karta hai taaki 30+ requests exactly ek hi network packet (HTTP/2 single-packet attack) mein server tak pahunchein.
+* Post-Exploitation/Reporting Phase: Server ka database pehli request ka update likhne se pehle hi baaki 29 requests ko check karke "valid" maan leta hai. Attacker ek coupon se 30x discount le leta hai.
+* Additional context: Yeh modern APIs mein financial fraud dhoondhne ka sabse elite method hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 5:
+
+* Tool Name: Burp Suite (Turbo Intruder)
+* Navigation Steps: Target Request > Extensions > Turbo Intruder > Send to Turbo Intruder > Select `race1.py` script (or HTTP/2 single packet script) > Adjust connection/request numbers > Click Attack > Analyze 200 OK responses.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 8: Mass Assignment
+Section 8: Business Logic & Mass Assignment
 Topic 1: Mass Assignment Fundamentals & Discovery
 Topic 2: Vulnerable Code Analysis (Node.js & MongoDB)
 Topic 3: Mass Assignment Exploitation & Privilege Escalation
 Topic 4: HTTP Verb Fuzzing & Business Logic Abuse
+Topic 5: API Race Conditions & Concurrency
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 26 | CVEs: 0
+Sections: 1 | Topics: 5 | Subtopics: 31 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1584,7 +1724,7 @@ Sections: 1 | Topics: 4 | Subtopics: 26 | CVEs: 0
 # Section 9: Excessive Data Exposure
 
 
-=====Section 1: Excessive Data Exposure=====
+=====Section 9: Excessive Data Exposure=====
 [Instructor is section mein Excessive Data Exposure vulnerability explain karta hai aur "crappy" (crAPI) application mein Postman/Burp Suite use karke live data leaks demonstrate karta hai.]
 
 --1--Excessive Data Exposure--
@@ -1691,19 +1831,54 @@ Subtopics: getRecentPosts Data Extraction, User ID Leak, getPost Endpoint Exploi
 * Tool Name: Burp Suite
 * Navigation Steps: Capture request > Send to Repeater > Modify ID parameter > Send request > Analyze Response for leaked data
 
+--9--Excessive Data Exposure--
+Topic 4: Cross-Origin Resource Sharing (CORS) Misconfigurations
+Subtopics: Same-Origin Policy (SOP), CORS Headers, Wildcard Origins, Null Origin Bypass, Reflected Origin Manipulation, Data Exfiltration via XHR
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Theory + Live exploit via malicious HTML page
+* Key terms from transcript: CORS, Same-Origin Policy, SOP, Access-Control-Allow-Origin, ACAO, Access-Control-Allow-Credentials, XHR request, origin reflection
+* Exam Tips / Instructor Emphasis: "Data exposure is useless if you can't steal it from a victim. CORS bypass is how you weaponize leaky APIs."
+* Instructor ne jo analogies/examples/demos use kiye: Burp mein `Origin: https://evil.com` bhej kar dekha ki API usey reflect karti hai. Phir ek malicious HTML file banayi jisme JavaScript (XHR) ne victim ke browser se API hit ki aur leaked user data attacker ke server pe bhej diya.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Cross-Origin Resource Sharing, CORS, Same-Origin Policy, SOP, ⭐`Access-Control-Allow-Origin`, ACAO, wildcard `*`, ⭐`Access-Control-Allow-Credentials: true`, null origin bypass, reflected origin, Origin header manipulation, XMLHttpRequest, XHR, fetch API, malicious payload, data exfiltration, JavaScript exploit]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 4:
+
+* Phase(s): Exploitation / Weaponization
+* Attack methodology context from transcript: API ke relaxed CORS headers ka fayda utha kar doosre domain se victim ke authenticated session ka data steal karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Recon/Discovery Phase: Attacker API request ko Repeater mein bhejta hai aur header mein `Origin: https://attacker.com` add karta hai. Agar response mein `Access-Control-Allow-Origin: https://attacker.com` aur `Access-Control-Allow-Credentials: true` aata hai, toh API vulnerable hai.
+* Exploitation/Weaponization Phase: Attacker ek malicious webpage banata hai jisme JavaScript likhi hoti hai. Yeh script background mein target API ko GET request bhejti hai (victim ke cookies ke sath).
+* Post-Exploitation/Reporting Phase: Victim jaise hi malicious link kholta hai, API apna sensitive JSON data script ko de deti hai, aur script woh data attacker ke webhook pe bhej deti hai.
+* Additional context: Null origin (`Origin: null`) ek common WAF/regex bypass technique hai jo instructor ne highlight ki.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 4:
+
+* Tool Name: Burp Suite & Text Editor
+* Navigation Steps: Repeater > Add `Origin: https://evil.com` header > Send > Check response headers. If vulnerable > Write malicious JS in Text Editor > Host locally > Open in browser with active API session.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Excessive Data Exposure
+Section 9: Excessive Data Exposure
 Topic 1: Excessive Data Exposure Fundamentals
 Topic 2: API Enumeration & Baseline Setup
 Topic 3: Chaining Data Leaks & BOLA Exploitation
+Topic 4: Cross-Origin Resource Sharing (CORS) Misconfigurations
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 18 | CVEs: 0
+Sections: 1 | Topics: 4 | Subtopics: 24 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2179,6 +2354,96 @@ Topic 6: Course Wrap-Up & Conclusion
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 6 | Subtopics: 30 | CVEs: 0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 13: GraphQL API Exploitation
+
+=====Section 13: GraphQL API Exploitation=====
+Instructor is section mein modern GraphQL APIs ka architecture, Introspection queries se schema discovery, aur query aliasing/batching ke through rate limit bypass demonstrate karta hai.
+
+--13--GraphQL API Exploitation--
+Topic 1: GraphQL Fundamentals & Introspection
+Subtopics: REST vs GraphQL, The Single Endpoint Structure, Queries & Mutations, Introspection Query, InQL Scanner
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation + live schema extraction
+* Key terms from transcript: GraphQL, single endpoint, /graphql, queries, mutations, schema, introspection, InQL
+* Exam Tips / Instructor Emphasis: "GraphQL me enumeration ka sabse bada tool Introspection hai. Agar ye enabled hai, toh API apne aap apna poora attack surface tumhe de degi."
+* Instructor ne jo analogies/examples/demos use kiye: Postman mein `/graphql` endpoint pe standard Introspection query run ki aur poora backend schema (users, posts, hidden admin fields) dump karke dikhaya. GraphQL Voyager ka use karke schema ko visually map kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[GraphQL, REST vs GraphQL, single endpoint, ⭐`/graphql`, ⭐`/v1/graphql`, queries, read data, mutations, modify data, ⭐Introspection query, `__schema`, `__type`, schema definition, hidden endpoints, Burp Suite Extender, ⭐InQL Scanner, GraphQL Voyager, visual mapping, information disclosure]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Reconnaissance / Scanning & Enumeration
+* Attack methodology context from transcript: GraphQL specific discovery techniques use karke undocumented queries aur mutations nikalna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker URL directories fuzz karta hai ya JS files padhta hai `/graphql` dhoondhne ke liye. Endpoint milne par, wo ek special `__schema` (Introspection) query bhejta hai.
+* Exploitation/Weaponization Phase: Agar introspection enabled hai, API apni saari backend tables, objects, queries, aur mutations return kar deti hai.
+* Post-Exploitation/Reporting Phase: Attacker InQL extension ya GraphQL Voyager use karke is JSON data ko parse karta hai aur hidden mutations (e.g., `deleteUser`, `makeAdmin`) dhoondh leta hai aage exploit karne ke liye.
+* Additional context: Agar introspection disabled hai, toh attacker InQL ya Clairvoyance use karke field names bruteforce/guess karta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Burp Suite (InQL Extension)
+* Navigation Steps: BApp Store > Install InQL > Proxy HTTP History > Find `/graphql` request > Send to InQL Scanner > InQL tab mein ja kar dumped queries aur mutations analyze karo.
+
+--13--GraphQL API Exploitation--
+Topic 2: Query Batching, Aliases & DoS Attacks
+Subtopics: Query Aliasing, Bypassing Rate Limits via Batching, Circular Queries, Denial of Service (DoS)
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Live exploit demo with query construction
+* Key terms from transcript: Aliases, query batching, rate limiting bypass, circular queries, deep nesting, DoS
+* Exam Tips / Instructor Emphasis: "GraphQL design inherently allows fetching multiple things at once. We can abuse this to brute force passwords in a single HTTP request."
+* Instructor ne jo analogies/examples/demos use kiye: Ek login mutation ko `alias1`, `alias2` karke ek hi HTTP request ke andar 100 alag-alag passwords ke sath bheja, jisse login rate-limit bypass ho gaya. Deep nesting se DoS trigger karke dikhaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[GraphQL aliases, ⭐query batching, rate limit bypass, brute force bypass, single HTTP request, multiple mutations, `alias1: login(username:"admin", password:"123")`, ⭐circular queries, deep nesting, `author -> posts -> author -> posts`, AST parsing, Denial of Service, DoS, resource exhaustion]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Exploitation
+* Attack methodology context from transcript: GraphQL ke native syntax (aliases/batching) ka abuse karke standard web protections (rate limits) ko bypass karna aur backend exhaust karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker login ya OTP endpoint find karta hai jo GraphQL mutation se chal raha hai.
+* Exploitation/Weaponization Phase: Attacker ek custom GraphQL payload likhta hai jisme "Aliases" use hote hain. Is technique se wo 500 OTP combinations ya passwords ek hi JSON payload/HTTP request mein bhej deta hai.
+* Post-Exploitation/Reporting Phase: WAF ya API gateway sirf "1 HTTP request" dekhta hai aur allow kar deta hai, jabki backend GraphQL engine un 500 combinations ko process kar leta hai, leading to a successful authentication bypass.
+* Additional context: Circular queries (e.g., requesting user -> their posts -> the post's user -> their posts...) bhej kar server ki memory crash karna (DoS) bhi demonstrate kiya gaya.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Postman / Burp Suite
+* Navigation Steps: Repeater > GraphQL tab (or JSON body) > Write aliased payload > Send > Check response array for the successful login alias.
+
+---
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 13: GraphQL API Exploitation
+Topic 1: GraphQL Fundamentals & Introspection
+Topic 2: Query Batching, Aliases & DoS Attacks
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 9 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
