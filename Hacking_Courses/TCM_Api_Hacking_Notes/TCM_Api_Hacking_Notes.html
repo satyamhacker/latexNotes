@@ -404,8 +404,9 @@ li {
                     // Catch implicitly indented modules like "  Module 1: ..."
                     processed = processed.replace(/^\s*(Module\s+\d+.*)/gim, '## MODULE_MARKER $1');
                     
-                    // Convert remaining h3 and h4 headers into properly styled Topics
-                    processed = processed.replace(/^#{3,4}\s+(?!MODULE_MARKER)(.*)/gm, '### TOPIC_MARKER $1');
+                    // Convert ONLY the main topics (those starting with the target emoji) into properly styled Topics
+                    // This prevents every single sub-heading from becoming a giant gradient block.
+                    processed = processed.replace(/^#{3}\s+(🎯\s*.*)/gm, '### TOPIC_MARKER $1');
                     
                     // Converts "1.1:" to bold for better readability
                     processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
@@ -503,7 +504,7 @@ li {
                     contentArea.innerHTML = marked.parse(processed, { renderer: renderer });
 
                     // Generate TOC
-                    const headings = contentArea.querySelectorAll('h2, h3');
+                    const headings = contentArea.querySelectorAll('h2, h3.topic-section');
                     headings.forEach(heading => {
                         const li = document.createElement('li');
                         const a = document.createElement('a');
