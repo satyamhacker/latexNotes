@@ -1,9 +1,5 @@
 # Section 1: Introduction
 
-
-
-
-
 ---
 
 ### 🎯 1. API Fundamentals & Abstraction
