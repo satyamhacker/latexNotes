@@ -3,8 +3,6 @@
 
 
 
-=====Section 1: Introduction=====
-Is section mein hum API ke basics, architecture types, testing tools (Burp Suite, Postman, curl), aur API security risks ka introductory overview cover karenge taaki tumhara pentesting foundation strong ho.
 
 ---
 
@@ -504,9 +502,7 @@ Total Topics: 4 | Total Keywords: 63 | CVEs: 0 | Missed: 0
 # Section 2: Lab Setup
 
 
-### 🏁 Section Overview: Lab Setup
 
-Is section mein hum Postman (API testing tool) ki configuration aur OWASP crAPI (Completely Ridiculous API — ek intentionally vulnerable web application) ka local Docker lab setup seekhenge. Yeh API hacking ke liye humara primary battleground hoga.
 
 ---
 
@@ -2366,9 +2362,6 @@ Starbucks ki bug bounty mein ek security researcher ne GitHub par ek simple dork
 # Section 4: Attacking Authorization
 
 
-=====Section 4: Attacking Authorization=====
-Is section mein hum API security ki do sabse critical vulnerabilities—**BOLA** aur **BFLA**—ke fundamentals cover karenge aur unka crAPI (Completely Ridiculous API) aur VAPI (vulnerable API) labs pe practical exploitation seekhenge.
-
 ---
 
 ### 🎯 1. Authorization Fundamentals & Concepts
@@ -3060,7 +3053,7 @@ HTTP/1.1 200 OK         # Server checks token validity, but NOT the role. Video 
 Overview: **Section 5: Attacking Authentification**
 Is section mein hum API endpoints ke authentication mechanisms ko deeply analyze karna aur attack karna seekhenge. API security mein sabse weak link aksar authentication aur session management hota hai — jahan brute forcing, token manipulation, aur logic flaws se poora system compromise kiya jaa sakta hai.
 
-*Chunki yeh section bohot bada aur detailed hai (13 Topics), main limit cross hone se bachane ke liye inhe batch-by-batch deeply explain karunga. Pehle **Topic 1, 2, aur 3** ko cover karte hain.*
+
 
 ---
 
@@ -5213,9 +5206,7 @@ Total Topics: 13 | Total Keywords: 188 | CVEs: 1 | Missed: 0
 
 # Section 6: Injection
 
-### 🏁 Section Overview: Injection
 
-Is section mein hum APIs ke andar Injection attacks (SQLi, NoSQLi, XXE, SSTI, Prototype Pollution, aur Insecure Deserialization) ki theory, fuzzing techniques, aur manual/automated exploitation cover karenge. Yeh samajhna zaroori hai ki APIs mein bhi traditional web vulnerabilities exist karti hain kyunki defense in depth principles aksar ignore hote hain.
 
 ---
 
@@ -6925,8 +6916,7 @@ Desrialization bugs ne itihas mein sabse bade hacks kiye hain. E.g., Equifax bre
 # Section 7: Mid-course Capstone
 
 
-=====Section 7: Mid-course Capstone=====
-Is section mein hum ek complete vulnerable API application ka mid-course capstone lab setup karenge aur usme multiple real-world vulnerabilities (jaise BFLA, BOLA, JWT cracking, aur endpoint fuzzing) exploit karenge.
+
 
 ---
 
@@ -7644,8 +7634,7 @@ Total keywords across all subtopics: 66
 
 # Section 8: Business Logic & Mass Assignment
 
-=====Section 8: Business Logic & Mass Assignment=====
-Is section mein hum API hacking ka ek bohot critical aspect seekhenge: **Mass Assignment** (jo OWASP API Top 10 list mein ek major vulnerability hai) aur **Business Logic Flaws**. Hum theory, Node.js/MongoDB ka backend code review, aur real-world API exploitation cover karenge.
+
 
 ---
 
@@ -9425,8 +9414,7 @@ Bitcoin exchanges mein CORS ek favorite bug hai. Ek attacker ne dekha ki crypto 
 
 # Section 10: SSRF - Server-side Request Forgery
 
-=====Section 10: SSRF - Server-side Request Forgery=====
-Yeh section Server-Side Request Forgery (SSRF) ke core concepts par focused hai. Yahan hum PortSwigger Academy aur crAPI application ka use karke live exploitation aur real-world pentest/bug bounty scenarios cover karenge.
+
 
 ---
 
@@ -10324,9 +10312,7 @@ Total Topics: 3 | Total Keywords: 60 | CVEs: 0 | Missed: 0
 
 # Section 12: Final Capstone
 
-### 🏁 Section Overview: Final Capstone Walkthrough
 
-Is section mein instructor "The Pasta Mentor" API ka final capstone challenge introduce karte hain. Yeh ek real-world API pentest simulation hai jahan hum weak sessions, API fuzzing, SSRF (Server-Side Request Forgery), aur Mass Assignment jaisi critical vulnerabilities ko exploit karke Authorization Bypass aur Privilege Escalation achieve karenge.
 
 ---
 
@@ -12108,9 +12094,7 @@ Total Topics: 2 | Total Keywords: 39 | CVEs: 0 | Missed: 0
 # Section 15: Emerging API & Cloud Threats
 
 
-Is section mein hum modern APIs aur cloud environments ke sabse dangerous attack vectors ko explore karenge. Yeh bugs bug bounty aur real-world pentests mein seedha P1 (Critical) severity maane jaate hain.
 
-Badi output size ke limit ko dekhte hue, main is message mein **Topic 1 aur Topic 2** ko deep dive ke sath cover kar raha hoon.
 
 ---
 
@@ -12802,9 +12786,7 @@ Total Topics: 4 | Total Keywords: 41 | CVEs: 0 | Missed: 0
 
 # Section 16: Webhooks & Microservices Architecture
 
-### 🏁 Section Overview: Webhooks & Microservices Architecture
 
-Is section mein hum samjhenge ki modern event-driven APIs (Webhooks) aur internal microservices ke interactions mein kya security flaws aate hain. External perimeter break hone ke baad andar ka network kaise compromise hota hai, yeh humara main focus rahega.
 
 ---
 
@@ -13221,7 +13203,7 @@ Cloud pentests (jaise Kubernetes environments) mein, developers aksar internal n
 
 # Section 17: Professional Pentesting & Reporting
 
-Is module mein hum API hacking aur offensive security ko ek professional level par laa rahe hain. Sirf vulnerabilities dhundhna kaafi nahi hai — unhe automate karna, unka impact prove karna, aur ek solid professional report likhna bug bounty aur corporate pentesting mein success ki asli chabi hai.
+
 
 ---
 
