@@ -12598,7 +12598,7 @@ Real-world bug bounty mein API cache poisoning bahut destructive ho sakti hai. H
 
 ▶️ Resuming from: Topic 3: API Versioning & Deprecation Flaws — Remaining after this: [Topic 4: Security Headers & Verbose Errors (Information Disclosure)]
 
-*(⚠️ Note: Skeleton ke SCOPE SIGNAL ke mutabiq is topic ka depth 'Surface' hai, isliye main 18-point structure ki jagah Top 7 Critical Points generate kar raha hoon taaki focus to-the-point rahe.)*
+
 
 ### 🎯 1. API Versioning & Deprecation Flaws
 
