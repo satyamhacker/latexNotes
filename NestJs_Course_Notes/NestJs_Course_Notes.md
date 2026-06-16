@@ -3077,7 +3077,6 @@ Total keywords across all subtopics in this topic: 105
 # section 6: Nest Architecture Organizing Code with Modules
 
 
-# Section 6: Nest Architecture Organizing Code with Modules
 
 Yeh section ek practical "side project" par focused hai, jiska goal real-world application banana nahi, balki NestJS ke core concepts — **Modules** aur **Dependency Injection** — ko ek computer components ki analogy se deeply samajhna hai. Chaliye is project ko step-by-step build karte hain.
 
