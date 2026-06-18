@@ -11582,7 +11582,7 @@ Condition: Is NODE_ENV === 'test'?
 
 ==================================================================================
 
-# section 14: Managing App Configuration
+# Section 14: Managing App Configuration
 
 
 ### 🌐 Section Overview: Managing App Configuration
