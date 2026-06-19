@@ -14612,7 +14612,7 @@ User -> (POST /email)  -> Save in DB, Returns instantly ✅
 
 ==================================================================================
 
-# section 17: Query Builders with TypeORM
+# Section 17: Query Builders with TypeORM
 
 
 ### 🌐 Section 17 Overview: Query Builders with TypeORM
