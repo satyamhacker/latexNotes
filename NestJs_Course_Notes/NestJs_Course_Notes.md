@@ -12329,7 +12329,7 @@ Total keywords across all subtopics in this topic: 46
 
 ==================================================================================
 
-# section 15: Relations with TypeORM
+# Section 15: Relations with TypeORM
 
 
 
