@@ -15297,6 +15297,10 @@ Total keywords across all subtopics in this topic: 52
 
 ---
 
+==================================================================================
+
+
+
 
 ### 🌐 Section 17.5 Overview: Performance Optimization with Caching
 Database queries ko optimize kar liya, ab hum seekhenge ki database tak request ko pahunchne se hi kaise roka jaye taaki application lightning-fast respond kare. Is section mein hum **Caching** aur uski scaling strategies (in-memory se lekar Redis tak) explore karenge.
