@@ -297,6 +297,7 @@ Jab tum (Request) restaurant aate ho, toh guard ID check karta hai (**Guard** �
 ### 📖 3. Technical Definition
 - **Precise English:** Implementing the bare minimum NestJS application by writing a root Module, a Controller to handle HTTP requests, and a bootstrap function that instantiates the NestFactory to listen on a specific port.
 - **Hinglish Simplification:** Ek basic Nest app banane ke liye sabse kam zaroori code likhna — jisme ek Controller (jo request lega), ek Module (jo sabko group karega), aur ek main startup function (jo app ko start karega) hota hai.
+- **Module Definition:** Module ek **logical grouping** hoti hai jo related controllers, services, providers, aur imports ko ek jagah organize karti hai.
 
 ### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 - **Problem:** Bina Controllers aur Modules ke, framework ko pata hi nahi chalega ki jab koi user browser se request bheje toh kaunsa code run karna hai. 
@@ -445,7 +446,7 @@ The Bare Minimum Architecture:
 - **Q:** Controller ko Nest execution flow mein kahan place kiya jata hai?
 - **A:** Request aane ke baad, jab woh Pipes (validation) aur Guards (auth) se succesfully pass ho jati hai, toh framework use Route mapping ke through sahi Controller ke sahi method (`@Get`, `@Post` etc) par bhej deta hai. Controller ka kaam sirf request receive karna aur final response lautana hota hai.
 - **Q:** `@Module` decorator ka primary kaam kya hai?
-- **A:** `@Module` decorator class ko metadata deta hai jisse Nest ko pata chalta hai ki us module ke andar kaunse Controllers aur Services aate hain. Yeh ek boundary ya container ki tarah act karta hai, bina iske framework kisi bhi controller ko memory mein load nahi karega.
+- **A:** Module ek **logical grouping** hoti hai jo related controllers, services, providers, aur imports ko ek jagah organize karti hai. `@Module` decorator class ko metadata deta hai jisse Nest ko pata chalta hai ki us module ke andar kaunse Controllers aur Services aate hain. Yeh ek boundary ya container ki tarah act karta hai, bina iske framework kisi bhi controller ko memory mein load nahi karega.
 
 ### 📝 18. One-Line Memory Hook
 "Module hai container, Controller hai dakiya (postman), aur main.ts hai gaadi ki chaabi."
