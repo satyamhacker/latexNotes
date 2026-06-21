@@ -13346,21 +13346,22 @@ messages: Message[];
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
 
-**1. `messages: Message[];` ka matlab**
-- Ye **database mein direct array column** nahi banata.  
-- Ye sirf **ORM level par ek virtual property** hai jo batata hai ki ek `User` ke saath multiple `Message` records linked ho sakte hain.  
-- Database mein actual structure hamesha **separate `messages` table** hota hai.  
-- Jab aap ek user fetch karte ho aur `relations: ['messages']` specify karte ho, to TypeORM us user ke saare messages ko array ke form mein load karke `user.messages` property mein daal deta hai.
+### ⚡ OneToMany side par kya hota hai? (`messages: Message[]`)
+- User entity ke andar jo `messages: Message[]` likha hai, wo sirf ORM level par ek **virtual property** hai.  
+- Database mein `users` table ke andar koi `messages` column nahi banta.  
+- Jab tum ORM se user fetch karte ho aur relations load karte ho, to TypeORM `messages` table se saare rows nikal kar `user.messages` array mein daal deta hai.
 
-👉 **Matlab:** `messages: Message[]` ek **virtual relation property** hai, actual DB column nahi! Ye sirf ORM ke andar ek collection property hai jo DB ke `messages` table se data fetch karke fill hoti hai. Database mein aisi koi array physically store nahi hoti.
+👉 **Matlab:** `messages: Message[]` ek **virtual relation property** hai, actual DB column nahi! Database mein aisi koi array physically store nahi hoti.
 
-**2. `message.sender` ka matlab (Auto-Generated Foreign Keys)**
+---
+
+### 🔍 ManyToOne side par hi foreign key banta hai (`message.sender`)
+Jab tum `@ManyToOne(() => User, (user) => user.messages)` likhte ho, to `Message` entity ke table mein ek **foreign key column** banega.
 
 **👉 Rule of Thumb (TypeORM convention):**  
-- `@ManyToOne(() => User, (user) => user.messages)` likhne se DB mein ek **foreign key column** banega.  
 - Column ka naam hamesha **propertyName + Id** hota hai.  
-- Example: agar property ka naam `sender` hai → DB column `senderId` banega.  
-- Agar property ka naam `author` hota → DB column `authorId` banega.  
+- Yahan `sender` property hai, to DB mein `senderId` column banega.  
+- Ye `senderId` column `users.id` ko reference karega.
 
 **💻 Example (Message Entity)**
 ```typescript
