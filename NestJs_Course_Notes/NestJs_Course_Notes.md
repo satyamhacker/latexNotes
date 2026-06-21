@@ -15505,6 +15505,61 @@ Error: "Transaction Failed, Money Refunded!"
 - **Line 24 `rollbackTransaction()`:** ACID (Atomicity, Consistency, Isolation, Durability) mein yeh "Atomicity" hai. Ek step fail matlab sab undo.
 - **Line 28 `release()`:** Extremely critical. Database ek baar mein limited connections allow karta hai (jaise 100). Agar tum release call karna bhool gaye, toh connection hang ho jayega aur 100 transactions baad application naye users ko block kar degi (Connection Timeout Error).
 
+---
+
+### 🛡️ Step-by-Step Breakdown of Manual Transactions
+
+**1. `createQueryRunner()`**
+- Ye ek **QueryRunner object** banata hai jo tumhe DB ke saath low‑level control deta hai.  
+- Normally tum `repository.save()` ya `manager.save()` use karte ho jo auto‑commit kar dete hain.  
+- Lekin agar tumhe **ACID transaction** (atomic, rollback, commit) chahiye, to tum explicitly QueryRunner use karte ho.
+
+**2. `queryRunner.connect()`**
+- Ye QueryRunner ko actual database connection pool ke saath attach karta hai.  
+- Matlab ab tum direct DB ke saath interact kar sakte ho is isolated QueryRunner ke through.
+
+**3. `queryRunner.startTransaction()`**
+- Ye ek **transaction boundary start** karta hai.  
+- Ab jitne bhi queries tum `queryRunner.manager.save()` ya `queryRunner.query()` se run karoge, wo sab ek hi transaction ke andar aayenge.  
+- Jab tak tum `commitTransaction()` nahi karte, tab tak changes DB mein permanent nahi hote.  
+- Agar error aata hai to tum `rollbackTransaction()` call karke sab changes cleanly undo (reverse) kar sakte ho.
+
+### 🎨 Transaction Request Flow Diagram
+```text
+ [Client Request] 
+        │
+        ▼
+ 🚀 [Controller] -> [Service]
+        │
+        ├─▶ 1. createQueryRunner()    <-- Setup independent manual runner
+        ├─▶ 2. connect()              <-- Database se judo
+        ├─▶ 3. startTransaction()     <-- ACID lock chalu
+        │
+        ├─▶ ⚙️ queryRunner.manager.save(EntityA)
+        ├─▶ ⚙️ queryRunner.manager.save(EntityB)
+        │
+        ├─▶ ✅ IF SUCCESS: commitTransaction()   <-- DB changes Saved!
+        ├─▶ ❌ IF ERROR: rollbackTransaction()   <-- DB changes Reverted!
+        │
+        ▼
+ 🔓 [finally block] -> release()      <-- Connection freed (Critical!)
+        │
+        ▼
+ 📤 [Response to Client]
+```
+
+### ✅ Hinglish Summary
+- `createQueryRunner()` → ek transaction runner banata hai.  
+- `connect()` → DB connection establish karta hai.  
+- `startTransaction()` → ek transaction start karta hai jisme tum multiple queries safe tarike se run kar sakte ho.  
+- Agar sab sahi ho → `commitTransaction()`.  
+- Agar error ho → `rollbackTransaction()`.  
+- End mein → `release()` taaki connection wapas pool me free ho jaaye.
+
+### 📝 One-Line Memory Hook
+**“QueryRunner = manual transaction control; connect → startTransaction → commit/rollback → release.”**
+
+
 ### 🔒 8. Security-First Check
 **Data Consistency & Race Conditions:** Agar transaction nahi hoga, toh 2 log ek hi second mein same car khareed sakte hain (double checkout bug). Transaction **Isolation Levels** (jaise Serializable) ensure karta hai ki ek time pe ek hi query runner us specific row ko update kare, baaki requests ko queue mein wait karna padega.
 
