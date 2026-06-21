@@ -13354,18 +13354,34 @@ messages: Message[];
 
 👉 **Matlab:** `messages: Message[]` ek **virtual relation property** hai, actual DB column nahi! Ye sirf ORM ke andar ek collection property hai jo DB ke `messages` table se data fetch karke fill hoti hai. Database mein aisi koi array physically store nahi hoti.
 
-**2. `message.sender` ka matlab**
-- Ye **reverse relation** hai jo `Message` entity ke andar define hota hai:
+**2. `message.sender` ka matlab (Auto-Generated Foreign Keys)**
+
+**👉 Rule of Thumb (TypeORM convention):**  
+- `@ManyToOne(() => User, (user) => user.messages)` likhne se DB mein ek **foreign key column** banega.  
+- Column ka naam hamesha **propertyName + Id** hota hai.  
+- Example: agar property ka naam `sender` hai → DB column `senderId` banega.  
+- Agar property ka naam `author` hota → DB column `authorId` banega.  
+
+**💻 Example (Message Entity)**
 ```typescript
 @ManyToOne(() => User, (user) => user.messages, { onDelete: 'CASCADE' })
-sender: User;
+sender: User; // <-- Ye property DB mein 'senderId' ban jayegi
 ```
-- Iska matlab: har `Message` ek `User` ko point karega jise **sender** kaha gaya hai.  
-- Database level par iska effect hota hai:  
-  - `messages` table ke andar ek **foreign key column** banega (usually `senderId` ya `userId`).  
-  - Ye foreign key `users` table ke `id` column ko reference karega.  
 
-👉 **Matlab:** `message.sender` = ek `Message` ka **sender user**. Aur DB mein ye link **foreign key (user_id)** ke through store hota hai.
+**Database table (messages):**
+```text
+id (uuid)          | PRIMARY KEY
+content (text)     | NOT NULL
+sentAt (timestamp) | DEFAULT now()
+senderId (uuid)    | FOREIGN KEY → users.id
+```
+
+**✅ Hinglish Explanation:**
+- Tumhe entity mein `senderId` explicitly likhne ki zaroorat nahi hai.  
+- TypeORM automatically `senderId` column create karega kyunki tumne `sender: User` relation banaya hai.  
+- Matlab: **ManyToOne relation ke foreign key column apne aap ban jaate hain, aur unka naam propertyName + Id hota hai.**
+
+👉 **Matlab:** `message.sender` = ek `Message` ka **sender user**. Aur DB mein ye link **foreign key (senderId)** ke through store hota hai.
 
 ---
 
