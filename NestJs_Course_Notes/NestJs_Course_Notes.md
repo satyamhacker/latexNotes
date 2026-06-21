@@ -1,13 +1,13 @@
-# section 1: --not of use
+# Section 1: --not of use
 
 
 ==================================================================================
 
-# section 2: The Basics of Nest
+# Section 2: The Basics of Nest
 
 
 ### 📚 Section Overview: The Basics of Nest
-Is section mein hum NestJS (Node.js ka ek progressive framework — backend applications banane ke liye) ke foundational concepts clear karenge. Hum Nest CLI (Command Line Interface — auto-generation tool) ka use karne ke bajaye, bilkul **scratch** se project setup karenge taaki internals, dependencies, aur routing flow ka "Under the Hood" magic samajh aa sake.
+Is Section mein hum NestJS (Node.js ka ek progressive framework — backend applications banane ke liye) ke foundational concepts clear karenge. Hum Nest CLI (Command Line Interface — auto-generation tool) ka use karne ke bajaye, bilkul **scratch** se project setup karenge taaki internals, dependencies, aur routing flow ka "Under the Hood" magic samajh aa sake.
 
 ---
 
@@ -464,7 +464,7 @@ The Bare Minimum Architecture:
 ### 🎯 4. Code Organization & Advanced Routing
 
 ### 🐣 2. Simple Analogy (Hinglish)
-Socho ek dawai ki dukaan (Pharmacy) hai. Agar saari dawaiyan, receipts, aur register ek hi bade dabbe (`main.ts`) mein daal doon, toh dawai dhundhne mein ghanto lagenge. Isliye dukaan wala har dawai ko alag racks aur labeled dabbon mein rakhta hai (One class per file). Aur agar dawaiyon ke section bane hon — jaise "Bacho ki dawai" ya "Heart ki dawai" — toh usse routing kehte hain, jahan customer seedha sahi section (Prefix path jaise `/app/asdf`) mein jaata hai. 
+Socho ek dawai ki dukaan (Pharmacy) hai. Agar saari dawaiyan, receipts, aur register ek hi bade dabbe (`main.ts`) mein daal doon, toh dawai dhundhne mein ghanto lagenge. Isliye dukaan wala har dawai ko alag racks aur labeled dabbon mein rakhta hai (One class per file). Aur agar dawaiyon ke Section bane hon — jaise "Bacho ki dawai" ya "Heart ki dawai" — toh usse routing kehte hain, jahan customer seedha sahi Section (Prefix path jaise `/app/asdf`) mein jaata hai. 
 
 ### 📖 3. Technical Definition
 - **Precise English:** Refactoring a monolithic application file into distinct logical files following NestJS naming conventions (one class per file), and applying controller-level path prefixes for advanced hierarchical routing.
@@ -657,11 +657,11 @@ Total keywords across all subtopics in this topic: 76
 ==================================================================================
 
 
-# section 3: Generating Projects with the Nest CLI
+# Section 3: Generating Projects with the Nest CLI
 
 
 ### 📚 Section Overview: Generating Projects with the Nest CLI
-Pichle section mein humne "scratch" se project setup kiya taaki internals samajh aayein. Ab hum real-world industry approach use karenge — **Nest CLI (Command Line Interface — ek terminal tool jo code automatically generate karta hai)**. Is section mein hum ek nayi "Messages" app banayenge, default boilerplate ko clean karenge, aur API testing tools (Postman/REST Client) ka setup karenge.
+Pichle Section mein humne "scratch" se project setup kiya taaki internals samajh aayein. Ab hum real-world industry approach use karenge — **Nest CLI (Command Line Interface — ek terminal tool jo code automatically generate karta hai)**. Is Section mein hum ek nayi "Messages" app banayenge, default boilerplate ko clean karenge, aur API testing tools (Postman/REST Client) ka setup karenge.
 
 ---
 
@@ -1467,11 +1467,11 @@ Total keywords across all subtopics in this topic: 69
 ==================================================================================
 
 
-# section 4: Validating Request Data with Pipes
+# Section 4: Validating Request Data with Pipes
 
 
 ### 🏁 Section Overview: Section 4 — Validating Request Data with Pipes
-Is section mein hum samjhenge ki ek client (jaise browser ya mobile app) se aane wali incoming request se data kaise nikalte hain, aur sabse important — us data ko automatically validate (check) kaise karte hain taaki humari application safe rahe. Hum NestJS ke decorators aur built-in pipes ka use karenge.
+Is Section mein hum samjhenge ki ek client (jaise browser ya mobile app) se aane wali incoming request se data kaise nikalte hain, aur sabse important — us data ko automatically validate (check) kaise karte hain taaki humari application safe rahe. Hum NestJS ke decorators aur built-in pipes ka use karenge.
 
 ---
 
@@ -2012,7 +2012,7 @@ Yahan NestJS pipe ke **Validation pipe steps** deeply explain kiye gaye hain:
 5. **Result:** Agar data pass hua, toh route handler pe bhejo; agar fail hua toh **validation errors** throw karo.
 
 ### 💡 7. Concept Visualization (Theory Topic ke liye)
-*(Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.)*
+*(Yeh purely conceptual topic hai — Hands-On Section ki jagah Concept Visualization de raha hoon.)*
 
 **Step-by-step Execution Flow in JavaScript (The "Runtime Magic"):**
 
@@ -2159,16 +2159,16 @@ Total keywords across all subtopics in this topic: 36
 ==================================================================================
 
 
-# section 5:  Nest Architecture Services and Repositories
+# Section 5:  Nest Architecture Services and Repositories
 
 
-Yeh raha Section 5 ka deep-dive! Main is section ko ek-ek karke process karunga taaki quality aur depth mein koi compromise na ho. Hum pehle **Topic 1** aur **Topic 2** cover karenge, phir `CONTINUE` protocol use karenge.
+Yeh raha Section 5 ka deep-dive! Main is Section ko ek-ek karke process karunga taaki quality aur depth mein koi compromise na ho. Hum pehle **Topic 1** aur **Topic 2** cover karenge, phir `CONTINUE` protocol use karenge.
 
 ---
 
 # 📚 Section 5 Overview: Nest Architecture: Services and Repositories
 
-Is section mein hum NestJS architecture ki core foundation — **Services** aur **Repositories** — aur Dependency Injection (DI) ke concepts ko detail mein samjhenge. Yeh section tumhe batayega ki logic ko alag-alag layers mein kaise todte hain taaki code scalable aur maintainable rahe.
+Is Section mein hum NestJS architecture ki core foundation — **Services** aur **Repositories** — aur Dependency Injection (DI) ke concepts ko detail mein samjhenge. Yeh Section tumhe batayega ki logic ko alag-alag layers mein kaise todte hain taaki code scalable aur maintainable rahe.
 
 ---
 
@@ -2786,7 +2786,7 @@ NestJS ka **⭐Injector** (Container ka dusra naam) application startup ke waqt 
    - Agar 3 alag controllers ko same service chahiye, toh container baar baar object nahi banata. Wo list mein se wahi purana **reuse instance** kar leta hai. Ise **⭐Singleton** pattern kehte hain, jo **memory efficiency** (RAM bachane) ke liye best hai.
 
 > **💡 7. Concept Visualization (Theory Topic ke liye):**
-> *(Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon)*
+> *(Yeh purely conceptual topic hai — Hands-On Section ki jagah Concept Visualization de raha hoon)*
 > ```text
 > [ Startup Phase ]
 > 
@@ -3074,11 +3074,11 @@ Total keywords across all subtopics in this topic: 105
 
 ==================================================================================
 
-# section 6: Nest Architecture Organizing Code with Modules
+# Section 6: Nest Architecture Organizing Code with Modules
 
 
 
-Yeh section ek practical "side project" par focused hai, jiska goal real-world application banana nahi, balki NestJS ke core concepts — **Modules** aur **Dependency Injection** — ko ek computer components ki analogy se deeply samajhna hai. Chaliye is project ko step-by-step build karte hain.
+Yeh Section ek practical "side project" par focused hai, jiska goal real-world application banana nahi, balki NestJS ke core concepts — **Modules** aur **Dependency Injection** — ko ek computer components ki analogy se deeply samajhna hai. Chaliye is project ko step-by-step build karte hain.
 
 ---
 
@@ -3556,7 +3556,7 @@ Aapko module decorators (`@Module({})`) ke andar `exports` aur `imports` ke arra
 ### ⚙️ 6. Under the Hood (Deep Dive)
 **"Behind the Scenes" mechanics:**
 1. Jab aap `@Injectable()` likhte ho, NestJS ki background registry (container) ek note bana leti hai ki "Yeh class banani pad sakti hai".
-2. Jab `PowerModule` us service ko `exports` array mein dalta hai, toh container mark karta hai: "Yeh class ab global registry section mein share hone ke liye ready hai".
+2. Jab `PowerModule` us service ko `exports` array mein dalta hai, toh container mark karta hai: "Yeh class ab global registry Section mein share hone ke liye ready hai".
 3. Jab `CPUModule`, `PowerModule` ko `imports` array mein dalta hai, toh container `CPUModule` ko us global shared registry ka access de deta hai.
 4. Akhir mein, jab CPU Service ka **constructor** (ek special method jo class ka object banne par sabse pehle run hota hai) run hota hai, NestJS ka **DI System** dekhta hai ki uski argument list mein kya maanga gaya hai. Woh wahan se `PowerService` ka ek instance (single copy) uthakar automatically usme fit (inject) kar deta hai.
 
@@ -4166,11 +4166,11 @@ Large enterprise CRM systems (jaise Salesforce frontend/backend layers) similar 
 ==================================================================================
 
 
-# section 7: Big Project Time!
+# Section 7: Big Project Time!
 
 
 ### 🌐 Section 7 Overview: Big Project Time!
-Is section mein hum ek poora naya "Used Car Pricing API" (MyCV) project zero se start kar rahe hain. Hum iska architecture samjhenge, naye features design karenge, aur uske baad NestJS (ek powerful Node.js framework) ka use karke iska initial project skeleton aur routes setup karenge.
+Is Section mein hum ek poora naya "Used Car Pricing API" (MyCV) project zero se start kar rahe hain. Hum iska architecture samjhenge, naye features design karenge, aur uske baad NestJS (ek powerful Node.js framework) ka use karke iska initial project skeleton aur routes setup karenge.
 
 ---
 
@@ -4801,12 +4801,12 @@ app.module.ts (Auto-updated)
 ==================================================================================
 
 
-# section 8: Persisting Data with TypeORM
+# Section 8: Persisting Data with TypeORM
 
 
 ### 🏁 Section Overview: Persisting Data with TypeORM
 
-Is section mein hum NestJS ke andar database integrate karna seekhenge. Hum samjhenge ki NestJS kitna flexible hai, **TypeORM** (Object-Relational Mapper — classes ko database tables se map karne wala tool) kyun NestJS ke saath ek "match made in heaven" hai, aur kaise hum development mein **SQLite** (file-based lightweight database) aur production mein **Postgres** use karte hain. 
+Is Section mein hum NestJS ke andar database integrate karna seekhenge. Hum samjhenge ki NestJS kitna flexible hai, **TypeORM** (Object-Relational Mapper — classes ko database tables se map karne wala tool) kyun NestJS ke saath ek "match made in heaven" hai, aur kaise hum development mein **SQLite** (file-based lightweight database) aur production mein **Postgres** use karte hain. 
 
 Chalo, step-by-step is poore flow ko deeply samajhte hain.
 
@@ -4975,7 +4975,7 @@ Socho ek building (App Module) mein ek main paani ki tanki (Shared SQLite connec
 4. **Shared Connection:** NestJS ka DI (Dependency Injection) in repositories ko Users Module aur Reports Module ko automatically de deta hai.
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
-*(Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.)*
+*(Yeh purely conceptual topic hai — Hands-On Section ki jagah Concept Visualization de raha hoon.)*
 
 **Step-by-Step Flow:**
 1. App start hota hai.
@@ -5442,7 +5442,7 @@ Socho tumne ek ghar ka naksha (Entity) banaya. `synchronize: true` ek jadui thek
 3. **Migration Flow:** Migration ek `.ts` file hoti hai (e.g., `16409923-AddAgeColumn.ts`). TypeORM database mein ek special `migrations` table banata hai jisme woh track karta hai ki kaunsi migration file chal chuki hai. Jab tum naya code push karte ho, sirf nayi (unchalo) migrations run hoti hain.
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
-*(Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.)*
+*(Yeh purely conceptual topic hai — Hands-On Section ki jagah Concept Visualization de raha hoon.)*
 
 **Step-by-Step Flow (Production vs Development):**
 1. **Development (Synchronize = true):**
@@ -6107,7 +6107,7 @@ Total keywords across all subtopics in this topic: 61
 
 ==================================================================================
 
-# section 9: Creating and Saving User Data
+# Section 9: Creating and Saving User Data
 
 
 
@@ -6116,7 +6116,7 @@ Here is the deep, comprehensive breakdown for the first two topics of Section 9.
 ---
 
 ### 🌐 Section 9 Overview: Creating and Saving User Data
-Is section mein hum NestJS aur TypeORM ko aasliyat mein connect karte hain. Hum dekhenge ki kaise ek Service database ke saath interact karti hai, Dependency Injection ke gotchas kya hain, aur `create` vs `save` ka internal flow kaise kaam karta hai.
+Is Section mein hum NestJS aur TypeORM ko aasliyat mein connect karte hain. Hum dekhenge ki kaise ek Service database ke saath interact karti hai, Dependency Injection ke gotchas kya hain, aur `create` vs `save` ka internal flow kaise kaam karta hai.
 
 ---
 
@@ -6821,7 +6821,7 @@ Postman mein GET http://localhost:3000/auth/1 hit karne pe user JSON dikhega.
 - **Line 20:** Yahan id URL parameter se aayi hai (`@Param`), aur jo data update karna hai woh request ki body se (`@Body`).
 
 #### 🔒 8. Security-First Check
-Controller currently directly puray user object ko return kar raha hai, jisme `password` field bhi shamil hai. Production mein API se password field bahar nikalna (filter out karna) mandatory hai taaki client side pe sensitive information leak na ho. (Yeh aage 'Interceptors/Serialization' section mein theek kiya jata hai).
+Controller currently directly puray user object ko return kar raha hai, jisme `password` field bhi shamil hai. Production mein API se password field bahar nikalna (filter out karna) mandatory hai taaki client side pe sensitive information leak na ho. (Yeh aage 'Interceptors/Serialization' Section mein theek kiya jata hai).
 
 #### 🏗️ 9. Scalability & Industry Context
 Industry standard mein controllers ko bilkul "thin" (patla) rakha jata hai. Controller ka kaam sirf data lena, basic format check karna aur service ko call karna hona chahiye. Agar aage chalkar app ko GraphQL ya gRPC mein convert karna pade, toh "thin controller" hone ki wajah se Service layer bina kisi code change ke reuse ho jati hai.
@@ -7221,7 +7221,7 @@ Section 9 mukammal taur par complete aur notes-ified ho chuka hai! Aap jab chahe
 
 ==================================================================================
 
-# section 10: Custom Data Serialization
+# Section 10: Custom Data Serialization
 
 
 Section 10 ka overview aur uske pehle do topics ko main Notes Guru style mein expand kar raha hoon. Model ki memory limit ko dhyan mein rakhte hue, main ise parts mein generate karunga taaki quality aur depth 100% maintain rahe.
@@ -7229,7 +7229,7 @@ Section 10 ka overview aur uske pehle do topics ko main Notes Guru style mein ex
 ---
 
 ### 🏁 Overview: Section 10 - Custom Data Serialization
-Is section mein hum samjhenge ki outgoing responses (jo data API client ko bhejti hai) se sensitive data (jaise passwords) ko securely kaise hide kiya jaye. NestJS (ek progressive Node.js framework) ka default solution kya hai, uski limitations kya hain, aur production-grade custom interceptors kaise banaye jaate hain.
+Is Section mein hum samjhenge ki outgoing responses (jo data API client ko bhejti hai) se sensitive data (jaise passwords) ko securely kaise hide kiya jaye. NestJS (ek progressive Node.js framework) ka default solution kya hai, uski limitations kya hain, aur production-grade custom interceptors kaise banaye jaate hain.
 
 ---
 
@@ -7429,7 +7429,7 @@ Jab hum Custom Interceptor + DTO architecture use karte hain:
 4. **Data Mapping:** Interceptor original Entity data ko us DTO ke rules ke hisaab se format (filter) karta hai. Is wajah se formatting per-handler (har route ke liye alag) ho sakti hai.
 
 ### 💡 7. Concept Visualization (Theory Topic ke liye)
-*Yeh section strictly architectural concepts par focused hai, isliye code block ki jagah visual mental model dekho:*
+*Yeh Section strictly architectural concepts par focused hai, isliye code block ki jagah visual mental model dekho:*
 
 **Step-by-Step Flow of Role-based Serialization:**
 1. **User (Role: Admin)** requests `/users/1`.
@@ -8193,7 +8193,7 @@ Stripe ya Razorpay (Payment gateways) ki API documentation OpenAPI specs se gene
 - **A:** Pehle `@nestjs/swagger` install karte hain. Phir `main.ts` mein `DocumentBuilder` se config banate hain. Uske baad `SwaggerModule.createDocument()` call karte hain, aur ant mein `SwaggerModule.setup()` use karke UI ko ek path (like `/api`) par mount kar dete hain.
 - **Q:** `@ApiProperty()` decorator ka kya importance hai?
 - **A:** TypeScript compile hone ke baad JS mein class properties ka type info kho deta hai. `@ApiProperty()` runtime metadata generate karta hai jisse Swagger UI ko pata chalta hai ki API ko konsi fields chahiye, unka data type kya hai, aur unke example values kya hain.
-- **Q:** Agar mujhe Swagger endpoints ko logically group karna ho (jaise saare Auth wale routes ek section mein), toh kya karunga?
+- **Q:** Agar mujhe Swagger endpoints ko logically group karna ho (jaise saare Auth wale routes ek Section mein), toh kya karunga?
 - **A:** Tum Controller class ke theek upar ⭐`@ApiTags('Auth')` decorator lagaoge. Yeh Swagger UI mein un sab routes ko ek collapsible 'Auth' folder ke andar group kar dega jisse readability badhti hai.
 
 ### 📝 18. One-Line Memory Hook
@@ -8439,11 +8439,11 @@ Total keywords across all subtopics in this section: 60+
 ==================================================================================
 
 
-# section 11: Authentication From Scratch
+# Section 11: Authentication From Scratch
 
 
 ### 🌐 Section 11 Overview: Authentication From Scratch
-Is section mein hum NestJS ke andar authentication system ko bilkul zero se build karenge. Hum samjhenge ki client aur server ke beech data kaise flow karta hai, passwords ko securely kaise store kiya jata hai (hashing aur salting), aur sessions (cookies) ke through users ko logged in kaise rakha jata hai.
+Is Section mein hum NestJS ke andar authentication system ko bilkul zero se build karenge. Hum samjhenge ki client aur server ke beech data kaise flow karta hai, passwords ko securely kaise store kiya jata hai (hashing aur salting), aur sessions (cookies) ke through users ko logged in kaise rakha jata hai.
 
 ---
 
@@ -9415,7 +9415,7 @@ Jira, GitHub, ya kisi bhi Dashboard app mein lagbhag har route authenticated hot
 ---
 
 ### Section Overview: Getting Started with Unit Testing
-Is section mein hum NestJS ke andar automated testing ki duniya mein enter karenge. Hum samjhenge ki controllers aur services ko test kaise karte hain, "fake" services (mocks) kaise banate hain, aur sabse important: Dependency Injection (DI) ka real power testing mein kaise use hota hai.
+Is Section mein hum NestJS ke andar automated testing ki duniya mein enter karenge. Hum samjhenge ki controllers aur services ko test kaise karte hain, "fake" services (mocks) kaise banate hain, aur sabse important: Dependency Injection (DI) ka real power testing mein kaise use hota hai.
 
 ---
 
@@ -10607,11 +10607,11 @@ Total keywords: 7 | ✅ All covered: 7 | ❌ Any missed: 0
 
 ==================================================================================
 
-# section 13: Integration Testing
+# Section 13: Integration Testing
 
 
 ### 🌐 Overview: Section 13 — Integration Testing
-Is section mein hum NestJS ke **End-to-End (E2E) testing fundamentals** seekhenge. Hum dekhenge ki kaise E2E test ek poore application flow ko test karte hain, testing environment aur development environment mein aane wale **synchronization issues** ko kaise fix karte hain, aur testing ke liye ek **separate database environment** kaise setup karte hain taaki test data real data ke saath mix na ho.
+Is Section mein hum NestJS ke **End-to-End (E2E) testing fundamentals** seekhenge. Hum dekhenge ki kaise E2E test ek poore application flow ko test karte hain, testing environment aur development environment mein aane wale **synchronization issues** ko kaise fix karte hain, aur testing ke liye ek **separate database environment** kaise setup karte hain taaki test data real data ke saath mix na ho.
 
 ---
 
@@ -10657,7 +10657,7 @@ Chalo dekhte hain NestJS E2E command aur `package.json` setup kaisa hota hai.
 
 ```json
 // Node.js 18+ | NestJS 10.x (package.json snippet)
-1  "scripts": {                                     // scripts section — npm commands define karta hai
+1  "scripts": {                                     // scripts Section — npm commands define karta hai
 2    "test": "jest",                                // Unit tests run karne ki command
 3    "test:e2e": "jest --config ./test/jest-e2e.json" // test:e2e command — E2E tests run karta hai test directory se
 4  }
@@ -10709,7 +10709,7 @@ Test Suites: 1 passed, 1 total
 ### 🖥️ Command Clarity Rule
 - **Command:** `npm run test:e2e`
 - **Anatomy:**
-  - `npm run`: npm ka command runner jo `package.json` ke scripts section se commands execute karta hai.
+  - `npm run`: npm ka command runner jo `package.json` ke scripts Section se commands execute karta hai.
   - `test:e2e`: Script ka naam jo humne define kiya hai.
 - **Expected Output:**
 ```text
@@ -11406,7 +11406,7 @@ project-root/
 ### ⚙️ 6. Under the Hood (Deep Dive)
 1. NodeJS mein ek global environment object hota hai: `process.env`. Default industry standard mein environment mode `NODE_ENV` variable mein store hota hai (`development`, `test`, ya `production`).
 2. Jab `npm run test:e2e` chalta hai, toh testing script internally `NODE_ENV` ko `test` set kar deti hai.
-3. NestJS app boot hoti hai aur apne imports section mein `TypeOrmModule` load karti hai.
+3. NestJS app boot hoti hai aur apne imports Section mein `TypeOrmModule` load karti hai.
 4. Database name ko hardcode karne ke bajaye hum usme **dependency injection** (ConfigService) lagate hain.
 5. ConfigService dekhta hai, kya `NODE_ENV === 'test'` hai? Agar haan, toh woh database configuration ko bolta hai ki `test.sqlite` banale aur use kar.
 6. Isse dono environments ko unka isolated space mil jata hai.
@@ -11587,9 +11587,9 @@ Condition: Is NODE_ENV === 'test'?
 
 ### 🌐 Section Overview: Managing App Configuration
 
-NestJS mein configuration management aur environment variables handle karna ek critical skill hai. Is section mein hum test aur development environments ko isolate karna, database connections ko asynchronously configure karna, aur testing environment mein common errors (jaise SQLite locking) ko resolve karna seekhenge.
+NestJS mein configuration management aur environment variables handle karna ek critical skill hai. Is Section mein hum test aur development environments ko isolate karna, database connections ko asynchronously configure karna, aur testing environment mein common errors (jaise SQLite locking) ko resolve karna seekhenge.
 
-Main is section ko **Video-by-Video (Topic-by-Topic)** process kar raha hoon taaki ek bhi detail miss na ho. Chalo shuru karte hain!
+Main is Section ko **Video-by-Video (Topic-by-Topic)** process kar raha hoon taaki ek bhi detail miss na ho. Chalo shuru karte hain!
 
 ---
 
@@ -11958,7 +11958,7 @@ Socho ek register (diary) hai jisme details likhni hain (SQLite database). Ab ag
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```json
-// package.json mein scripts section kuch aisa dikhega:
+// package.json mein scripts Section kuch aisa dikhega:
 "scripts": {
   "test:e2e": "cross-env NODE_ENV=test jest --config ./test/jest-e2e.json --maxWorkers=1"
 }
@@ -12334,7 +12334,7 @@ Total keywords across all subtopics in this topic: 46
 
 
 ### 🌐 Section Overview: Reports Feature Implementation
-Is section mein hum apni application ke andar "Reports" module ki foundation rakh rahe hain. Ek user apni car ki details submit karega (jaise Make, Model, Year, Mileage, etc.) aur humara system us data ko database mein store karke future mein car ki price estimate karne ke liye use karega.
+Is Section mein hum apni application ke andar "Reports" module ki foundation rakh rahe hain. Ek user apni car ki details submit karega (jaise Make, Model, Year, Mileage, etc.) aur humara system us data ko database mein store karke future mein car ki price estimate karne ke liye use karega.
 
 ---
 
@@ -12837,7 +12837,7 @@ Instagram mein bina login kiye aap feed (GET) toh thodi bahut dekh sakte ho, but
 ---
 
 ### 🌐 Section Overview: Advanced TypeORM Relationships
-Database mein information akeli exist nahi karti. Ek User app mein aata hai aur multiple Reports banata hai. Is section mein hum un TypeORM relations aur associations ko samjhenge jisse "Users" aur "Reports" aapas mein link hote hain, aur output mein sensitive data ko kaise hide (serialize) kiya jata hai.
+Database mein information akeli exist nahi karti. Ek User app mein aata hai aur multiple Reports banata hai. Is Section mein hum un TypeORM relations aur associations ko samjhenge jisse "Users" aur "Reports" aapas mein link hote hain, aur output mein sensitive data ko kaise hide (serialize) kiya jata hai.
 
 ---
 
@@ -12864,7 +12864,7 @@ Socho ek School ki baat karte hain:
 - **❌ Kab mat karo / Alternative prefer karo:** Jab NoSQL databases (jaise MongoDB) use kar rahe hon, jahan hum mostly related data ko ek hi document ke andar array bana kar embed (`embedded documents`) kar dete hain instead of separate tables.
 
 ### 💡 7. Concept Visualization (Theory Topic ke liye)
-Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.
+Yeh purely conceptual topic hai — Hands-On Section ki jagah Concept Visualization de raha hoon.
 
 **1. 1-to-1 Association (Country / Capital)**
 ```text
@@ -12911,7 +12911,7 @@ Associations NestJS aur SQL databases ka sabse confusing part hote hain kyunki g
   - **Prove karo:** Upar diagram mein dekho — arrow dono side alag label karta hai context ke hisaab se.
 
 ### 🛠️ 12. Troubleshooting Flowchart
-*(Theory section — Troubleshooting Flowchart N/A)*
+*(Theory Section — Troubleshooting Flowchart N/A)*
 
 ### ⚖️ 13. Comparison (Ye vs Woh)
 | Association | Use Case in Real Life | Foreign Key Placement |
@@ -13244,12 +13244,12 @@ Twitter/X API pe jab tum ek tweet (report) dekhte ho, uske response object mein 
 
 ==================================================================================
 
-# section 16: A Basic Permissions System
+# Section 16: A Basic Permissions System
 
 
 ### 🏁 Section Overview: Section 16 — A Basic Permissions System
 
-Is section mein hum reports ko approve karne ki functionality, administrative authorization (kaun kya kar sakta hai), aur query transformation logic ko implement karenge. Hum guards aur interceptors ke beech aane wale ek major architecture bug ko bhi fix karenge using Middlewares.
+Is Section mein hum reports ko approve karne ki functionality, administrative authorization (kaun kya kar sakta hai), aur query transformation logic ko implement karenge. Hum guards aur interceptors ke beech aane wale ek major architecture bug ko bhi fix karenge using Middlewares.
 
 Chalo ek-ek karke topics ko deep dive karte hain!
 
@@ -14188,7 +14188,7 @@ The Transformation Pipeline:
 ### 🎯 5. Car Estimate Query Logic
 
 > **💡 Concept Visualization (Theory Topic ke liye):**
-> *(Skeleton ka Scope Signal `Conceptual only` tha, isliye is section mein Hands-On code block ki jagah hum Concept Visualization use karenge. Hum focus karenge logic aur mathematical flow par jo TypeORM queries seekhne ke liye zaroori hai.)*
+> *(Skeleton ka Scope Signal `Conceptual only` tha, isliye is Section mein Hands-On code block ki jagah hum Concept Visualization use karenge. Hum focus karenge logic aur mathematical flow par jo TypeORM queries seekhne ke liye zaroori hai.)*
 
 ### 🐣 2. Simple Analogy (Hinglish)
 
@@ -14616,7 +14616,7 @@ User -> (POST /email)  -> Save in DB, Returns instantly ✅
 
 
 ### 🌐 Section 17 Overview: Query Builders with TypeORM
-Is section mein hum TypeORM ke basic limits ko cross karke **Query Builders** ki duniya mein enter karenge, jahan hum complex SQL queries ko directly JavaScript/TypeScript code ke through programmatically likhenge. 
+Is Section mein hum TypeORM ke basic limits ko cross karke **Query Builders** ki duniya mein enter karenge, jahan hum complex SQL queries ko directly JavaScript/TypeScript code ke through programmatically likhenge. 
 
 ---
 
@@ -15303,7 +15303,7 @@ Total keywords across all subtopics in this topic: 52
 
 
 ### 🌐 Section 17.5 Overview: Performance Optimization with Caching
-Database queries ko optimize kar liya, ab hum seekhenge ki database tak request ko pahunchne se hi kaise roka jaye taaki application lightning-fast respond kare. Is section mein hum **Caching** aur uski scaling strategies (in-memory se lekar Redis tak) explore karenge.
+Database queries ko optimize kar liya, ab hum seekhenge ki database tak request ko pahunchne se hi kaise roka jaye taaki application lightning-fast respond kare. Is Section mein hum **Caching** aur uski scaling strategies (in-memory se lekar Redis tak) explore karenge.
 
 
 ---
@@ -15542,7 +15542,7 @@ Total keywords across all subtopics in this topic: 11
 
 
 ### 🏁 Section Overview: Section 18 — Production Deployment
-Is section mein hum ek feature-complete application ko local environment se utha kar actual **production environment** (live server) par deploy karne ka end-to-end flow kheenge. Database swapping, security loopholes fix karna, aur complex TypeORM CLI integrations iske core focus hain.
+Is Section mein hum ek feature-complete application ko local environment se utha kar actual **production environment** (live server) par deploy karne ka end-to-end flow kheenge. Database swapping, security loopholes fix karna, aur complex TypeORM CLI integrations iske core focus hain.
 
 ---
 
@@ -15699,7 +15699,7 @@ Local Dev (Insecure)             Production (Secure)
 
 ### 🎯 2. TypeORM Synchronization vs Migrations
 
-*(Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.)*
+*(Yeh purely conceptual topic hai — Hands-On Section ki jagah Concept Visualization de raha hoon.)*
 
 #### 🐣 2. Simple Analogy (Hinglish)
 Socho tum ek ghar bana rahe ho. 
@@ -16365,7 +16365,7 @@ Total keywords across all subtopics in this phase: 87
 
 
 ### 🏁 Section Overview: Section 19 — Real-time Communication with WebSockets
-Is section mein hum traditional request-response model ko chhod kar bi-directional, live communication setup karna seekhenge. Hum Socket.io aur NestJS Gateways ka use karke real-time notifications aur instant data updates implement karenge.
+Is Section mein hum traditional request-response model ko chhod kar bi-directional, live communication setup karna seekhenge. Hum Socket.io aur NestJS Gateways ka use karke real-time notifications aur instant data updates implement karenge.
 
 ---
 
@@ -16582,7 +16582,7 @@ Total keywords across all subtopics in this topic: 11
 
 
 **Section Overview: Advanced Security & DevOps**
-Yeh section enterprise-grade backend development ka core hai. Yahan hum sirf features nahi banate, balki app ko secure (hackers se bachana) aur monitorable (production mein kya chal raha hai track karna) banate hain. Ek junior dev bas app chalata hai, but ek senior architect app ko tutne se bachata hai.
+Yeh Section enterprise-grade backend development ka core hai. Yahan hum sirf features nahi banate, balki app ko secure (hackers se bachana) aur monitorable (production mein kya chal raha hai track karna) banate hain. Ek junior dev bas app chalata hai, but ek senior architect app ko tutne se bachata hai.
 
 ---
 
@@ -17344,7 +17344,7 @@ Total keywords across all subtopics in this topic: 11
 ***
 
 # 📖 Section Overview: Section 21: Enterprise Auth with JWT & Passport
-Is section mein hum industry-standard JSON Web Tokens (JWT) aur Passport.js (Node.js ka sabse popular authentication middleware jo 500+ login strategies support karta hai) ka use karke secure, stateless authentication seekhenge. Hum basic email/password se le kar Google OAuth2 tak sab cover karenge.
+Is Section mein hum industry-standard JSON Web Tokens (JWT) aur Passport.js (Node.js ka sabse popular authentication middleware jo 500+ login strategies support karta hai) ka use karke secure, stateless authentication seekhenge. Hum basic email/password se le kar Google OAuth2 tak sab cover karenge.
 
 ---
 
@@ -17818,7 +17818,7 @@ Total keywords across all subtopics in this topic: 8
 - Keywords Covered: 19 ✅
 - Keywords Missed: 0
 
-> ✅ **Notes Guru confirms:** Yeh notes original handwritten notes ka 100% content cover karti hain — har topic, har subtopic, har keyword. Pura section masterfully expand kar diya gaya hai!
+> ✅ **Notes Guru confirms:** Yeh notes original handwritten notes ka 100% content cover karti hain — har topic, har subtopic, har keyword. Pura Section masterfully expand kar diya gaya hai!
 
 
 ==================================================================================
@@ -17827,7 +17827,7 @@ Total keywords across all subtopics in this topic: 8
 # Section 22: Microservices Architecture
 
 
-**Section 22: Microservices Architecture** ka overview: Is section mein hum ek badi Monolith app ko chhote, independent services mein todna aur unke beech efficient communication (jaise Message Brokers ke through) setup karna seekhenge.
+**Section 22: Microservices Architecture** ka overview: Is Section mein hum ek badi Monolith app ko chhote, independent services mein todna aur unke beech efficient communication (jaise Message Brokers ke through) setup karna seekhenge.
 
 Yahan main **Topic 1** ke full, deep notes generate kar raha hoon. Topic 2 limit cross na kare isliye use iske baad continue karenge.
 
@@ -18417,7 +18417,7 @@ Total keywords across all subtopics in this topic: 7
 
 
 
-**Section 23: Background Tasks with Bull Queues** ka overview: Is section mein hum dekhenge ki heavy aur time-consuming tasks (jaise emails bhejna ya PDF generate karna) ko main API flow se nikaal kar background mein kaise process karte hain taaki hamara server fast aur responsive rahe.
+**Section 23: Background Tasks with Bull Queues** ka overview: Is Section mein hum dekhenge ki heavy aur time-consuming tasks (jaise emails bhejna ya PDF generate karna) ko main API flow se nikaal kar background mein kaise process karte hain taaki hamara server fast aur responsive rahe.
 
 Yahan main **Topic 1** ke deep aur consolidated notes generate kar raha hoon.
 
@@ -18757,7 +18757,7 @@ Total keywords across all subtopics in this topic: 13
 
 ### 🌐 Section Overview: Enterprise Pattern: Dynamic Modules
 
-Is section mein hum NestJS (server-side Node.js framework — scalable backend apps banane ke liye) ke advanced concepts explore karenge. Hum reusable modules banana seekhenge jo `forRoot` ya `register` methods ke through dynamic configuration accept karte hain. Yeh pattern library building aur large-scale enterprise applications ke liye critical hai.
+Is Section mein hum NestJS (server-side Node.js framework — scalable backend apps banane ke liye) ke advanced concepts explore karenge. Hum reusable modules banana seekhenge jo `forRoot` ya `register` methods ke through dynamic configuration accept karte hain. Yeh pattern library building aur large-scale enterprise applications ke liye critical hai.
 
 ---
 
@@ -19021,7 +19021,7 @@ Total keywords across all subtopics in this topic: 9
 
 ### 🌐 Section Overview: Performance & Real-time Edge Cases
 
-Is section mein hum application ki speed aur real-time capabilities ko optimize karna seekhenge. Jab app scale hoti hai, toh har kilobyte (KB) aur har open connection server par load dalta hai. Hum dekhenge ki WebSockets ke over-engineered alternative ki jagah Server-Sent Events (SSE) kaise use karein, aur payload size ko drastically kaise shrink karein.
+Is Section mein hum application ki speed aur real-time capabilities ko optimize karna seekhenge. Jab app scale hoti hai, toh har kilobyte (KB) aur har open connection server par load dalta hai. Hum dekhenge ki WebSockets ke over-engineered alternative ki jagah Server-Sent Events (SSE) kaise use karein, aur payload size ko drastically kaise shrink karein.
 
 ---
 
@@ -19261,7 +19261,7 @@ Total keywords across all subtopics in this topic: 9
 
 ### 🌐 Section Overview: Advanced Enterprise Patterns
 
-Is section mein hum NestJS (scalable backend Node.js framework) ke un advanced architectural concepts ko explore karenge jo ek junior developer ko senior architect banate hain. Hum application ki memory tuning (Injection Scopes) aur industry-standard authorization mechanisms (Reflector & Metadata) ko deeply samjhenge.
+Is Section mein hum NestJS (scalable backend Node.js framework) ke un advanced architectural concepts ko explore karenge jo ek junior developer ko senior architect banate hain. Hum application ki memory tuning (Injection Scopes) aur industry-standard authorization mechanisms (Reflector & Metadata) ko deeply samjhenge.
 
 ---
 
