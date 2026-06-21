@@ -4,6 +4,42 @@
 
 ---
 
+### 📂 Enterprise Folder & File Structure
+
+Professional development ke liye hum **NestJS Monorepo Workspaces** ka pattern use karenge. Poore project mein files is structure me rahengi taaki code clean rahe:
+
+```text
+chatsphere/
+├── nest-cli.json              # Monorepo configuration
+├── package.json               # Dependencies
+├── .env.development           # Dev secrets
+├── .env.test                  # Test secrets
+├── apps/
+│   └── main-api/              # Core application
+│       ├── src/
+│       │   ├── main.ts        # Entry point (Swagger, Helmet, Versioning)
+│       │   ├── app.module.ts  # Root module connecting everything
+│       │   ├── config/        # Config setup (typeorm, env)
+│       │   ├── common/        # Global Interceptors, Filters, Pipes, Guards
+│       │   └── modules/       # Feature Modules
+│       │       ├── auth/      # Auth Module (JWT, Passport, Controllers)
+│       │       ├── users/     # Users Module (Entity, Service, Controller)
+│       │       ├── chats/     # Chats Module (Groups, Entities, Logic)
+│       │       ├── messages/  # Messages Module (Real-time Gateway, Logic)
+│       │       └── storage/   # Dynamic Module for File Uploads
+│       └── test/              # E2E Tests (app.e2e-spec.ts)
+├── libs/
+│   └── shared-utils/          # Monorepo shared library (interfaces, helpers)
+│       └── src/
+│           └── index.ts       # Exporting shared logic
+└── database/
+    ├── migrations/            # Auto-generated TypeORM migrations
+    ├── seeds/                 # seed.ts script
+    └── ormconfig.ts           # TypeORM CLI config
+```
+
+---
+
 ### Phase 1: Workspace Initialization, Architecture & Core Infrastructure
 Sabse pehle hum zameen tayyar karenge, project architecture define karenge aur basic tools set karenge taaki aage ka development smooth ho.
 
