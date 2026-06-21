@@ -13352,7 +13352,7 @@ messages: Message[];
 - Database mein actual structure hamesha **separate `messages` table** hota hai.  
 - Jab aap ek user fetch karte ho aur `relations: ['messages']` specify karte ho, to TypeORM us user ke saare messages ko array ke form mein load karke `user.messages` property mein daal deta hai.
 
-👉 **Matlab:** `messages: Message[]` = **ORM ke andar ek collection property**, jo DB ke `messages` table se data fetch karke fill hoti hai. Ye array DB mein physically store nahi hota.
+👉 **Matlab:** `messages: Message[]` ek **virtual relation property** hai, actual DB column nahi! Ye sirf ORM ke andar ek collection property hai jo DB ke `messages` table se data fetch karke fill hoti hai. Database mein aisi koi array physically store nahi hoti.
 
 **2. `message.sender` ka matlab**
 - Ye **reverse relation** hai jo `Message` entity ke andar define hota hai:
