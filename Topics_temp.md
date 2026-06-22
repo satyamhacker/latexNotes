@@ -1,4 +1,4 @@
-# Section 1:  Python Foundations & Setup
+# Section 1: Python Setup & Core Programming Fundamentals
 
 
 📦 Processing: Phase 1 — Module 1: Python & Django Basics
@@ -174,7 +174,7 @@ Sections: 2 | Topics: 6 | Subtopics: 37
 
 ==================================================================================
 
-# Section 2: Loops & Output Control Core Data Structures (Collections)
+# Section 2: Flow Control (Loops) & Core Data Structures
 
 📦 Processing: Phase 2 — Module 2: Data Structures & Loops
 
@@ -399,7 +399,7 @@ Sections: 2 | Topics: 8 | Subtopics: 58
 
 ==================================================================================
 
-# Section 3: Python Functions, Files & OOP
+# Section 3: Python Functions, File I/O & Object-Oriented Programming (OOP)
 
 📦 Processing: Phase/Module 3 — Python Functions, Files & OOP
 
@@ -1392,7 +1392,7 @@ Sections: 1 | Topics: 8 | Subtopics: 92
 
 ==================================================================================
 
-# Section 9: Views, DB & Core Mechanics
+# Section 9: Advanced Django: CBVs, Signals, Middleware & Advanced ORM
 
 
 📦 Processing: Phase 1 — Django Views, Databases & Advanced Core Concepts
@@ -1909,7 +1909,7 @@ Sections: 3 | Topics: 8 | Subtopics: 42
 
 ==================================================================================
 
-# Section 11: Advanced Debugging, Tools & Git
+# Section 11: Developer Tools: Debugging, API Testing (Postman) & Git Workflow
 
 📦 Processing: Phase 1 — Module 11 (Advanced Debugging, Tools & Git)
 
@@ -2139,7 +2139,7 @@ Sections: 3 | Topics: 8 | Subtopics: 54
 ==================================================================================
 
 
-# Section 12: Production, Deployment & Advanced Concepts
+# Section 12: Deployment (Docker, AWS) & Background Tasks (Celery, Redis)
 
 Haan bhai, main bilkul ready hoon! 🚀 Pichli baar ek system glitch ki wajah se main ruk gaya tha, par aapke **Module 12 (Python & Django)** wale notes mere context mein already saved hain. Mujhe aapse dobara notes paste karwane ki zaroorat nahi hai.
 
@@ -2446,7 +2446,7 @@ Sections: 1 | Topics: 3 | Subtopics: 25
 ==================================================================================
 
 
-# Section 14: Custom User Model Setup & Architecture
+# Section 14: Custom User Model (AbstractUser) & Email Login Setup
 
 Haan, main bilkul ready hoon! Pichli baar system error ki wajah se mera default message chala gaya tha, par main apne **Notes-to-Skeleton Extractor** role mein poori tarah active aur strictly rules se bound hoon.
 
