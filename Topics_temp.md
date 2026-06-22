@@ -2451,11 +2451,34 @@ Topic 2: DRF ViewSets & Routers Automation
 Topic 3: API Security (Token Authentication & Access Permissions)
 
 
+Topic 4: Hierarchical Data & Trees (Nested Comments/Categories) [⚠️ Derived]
+Subtopics: Self-Referencing ForeignKey Issue, N+1 Problem in Trees, Modified Preorder Tree Traversal (MPTT), django-mptt Setup, TreeForeignKey, recursetree Template Tag
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only (Focus on implementation over complex math)
+* Notes mein content volume: Model setup with `TreeForeignKey` and HTML rendering code
+* Key terms from notes: django-mptt, TreeForeignKey, Hierarchical, Nested, N+1 queries, recursetree, children
+* Explicit emphasis in notes: "Normal ForeignKey se tree banana N+1 query problem ka sabse bada kaaran hai. MPTT ise 1 query mein solve karta hai."
+* Notes mein jo analogies/examples the: "Russian Doll" (Ek ke andar ek) aur "E-commerce Categories" (Electronics -> Mobiles -> Apple).
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Hierarchical Data, Nested Comments, Categories, Self-Referencing ForeignKey, `models.ForeignKey('self')`, N+1 Problem, MPTT, Modified Preorder Tree Traversal, `django-mptt`, `django-treebeard`, `MPTTModel`, `TreeForeignKey`, `parent`, `level`, `lft`, `rght`, `tree_id`, `{% load mptt_tags %}`, `{% recursetree %}`, `{{ node.name }}`, `{{ children }}`, E-commerce, Reddit comments, fast read query]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Developer model ko `MPTTModel` se inherit karata hai aur `TreeForeignKey` banata hai. Terminal shell mein parent aur child categories create karke test karta hai.
+* Fixing/Iteration Phase: Agar HTML mein 10 level deep comments render karte waqt page slow/hang ho jaye, toh developer loop ki jagah `recursetree` tag use karke use 100x fast kar deta hai.
+* Live Production Phase: Amazon jaisi site par jab user "Categories" dropdown kholta hai, toh DB 100 query fire karne ke bajaye sirf 1 single query mein poora tree (Mobiles, Laptops, Accessories) utha kar le aata hai.
+* Additional context: Har badhi site jahan "Reply to Reply" (Reddit/Twitter) ya deep categories hoti hain, wahan normal database relation fail ho jata hai, wahan MPTT lagana hi padta hai.
+
+
 Topic 1: Many-to-Many Relationships (M2M)
-
 Topic 2: DRF ViewSets & Routers Automation
-
 Topic 3: API Security (Token Authentication & Access Permissions)
+Topic 4: Hierarchical Data & Trees (Nested Comments/Categories) [⚠️ Derived]
 
 
 ---
@@ -2923,11 +2946,59 @@ Subtopics: URLVersioning, AcceptHeaderVersioning, Breaking Changes Mitigation, W
 
 
 
+Topic 5: GraphQL APIs (The REST Alternative) [⚠️ Derived]
+Subtopics: REST vs GraphQL, Over-fetching & Under-fetching, strawberry-graphql-django, Schema Definition, Queries (GET), Mutations (POST), GraphiQL Interface
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Moderate (Beginner to Intermediate integration)
+* Coverage Angle: Practical only
+* Notes mein content volume: Setup instructions, Schema code, aur Query writing examples
+* Key terms from notes: GraphQL, REST limit, Over-fetching, Under-fetching, Strawberry, Schema, Query, Mutation, GraphiQL
+* Explicit emphasis in notes: "REST mein server decide karta hai kya data bhejna hai, GraphQL mein frontend (client) decide karta hai kya chahiye."
+* Notes mein jo analogies/examples the: REST ko "Fixed Thali (Buffet)" bola (jo milega sab khana padega), aur GraphQL ko "A La Carte Menu" bola (sirf wahi order karo jo khana hai).
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[GraphQL, REST Alternative, Over-fetching, Under-fetching, `strawberry-graphql-django`, `strawberry`, Schema, Type Definition, `@strawberry.type`, Query, GET data, Mutation, POST data, `GraphiQL` IDE, single endpoint, `/graphql`, payload, client-driven, API flexibility, Shopify API, Github API, ⭐"Fixed Thali vs A La Carte"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Developer `/graphql` endpoint banata hai aur browser mein in-built GraphiQL IDE khol kar dummy queries run karke test karta hai.
+* Fixing/Iteration Phase: Mobile app developer ko UI ke liye sirf "User ka First Name" chahiye tha par REST API poora 50-field ka data bhej rahi thi (slow internet issue). GraphQL lagane se wo sirf `{ user { firstName } }` mangwata hai.
+* Live Production Phase: Production mein frontend team ko naya page banane ke liye backend team se nayi API banwane ki zaroorat nahi padti; wo directly GraphQL schema se apna required data fetch kar lete hain.
+* Additional context: Meta (Facebook) ne GraphQL banaya tha taaki slow mobile networks par data transfer minimize kiya ja sake.
+
+Topic 6: Fintech-Level Safety: Idempotency & Distributed Locks [⚠️ Derived]
+Subtopics: Network Lag Issues, Double-Charging Problem, Idempotency-Key Header, Redis Distributed Locks, cache.add() Mechanics, API Race Conditions
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only (Code-first approach for decorators)
+* Notes mein content volume: Custom decorator code using Redis cache
+* Key terms from notes: Idempotency, Double-charging, Redis Lock, Race Condition, cache.add, UUID
+* Explicit emphasis in notes: "Payment gateway mein bina Idempotency ke API banana aapki company ko bankrupt kar sakta hai."
+* Notes mein jo analogies/examples the: Idempotency key ko "Movie Ticket" bataya — ek baar scan ho gayi toh dubara ussi ticket se entry (payment) nahi ho sakti, bhale hi user kitni baar bhi button dabaye.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[Idempotency, Idempotent, Idempotency-Key, Double-charging, Network lag, double-click, API Safety, Race Conditions, Distributed Locks, Redis Lock, `django.core.cache`, `cache.add()`, timeout, UUID, Decorator, `@idempotent_request`, Payment Gateway, Stripe API, Mutex, atomic operation, ⭐"Movie Ticket"[emphasized in notes], ⭐"Bankrupt"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Developer frontend se ek hi request ko 1 second mein 5 baar bhej kar test karta hai. Pehli request 200 OK deti hai, baaki 4 requests 409 Conflict ya cached result deti hain.
+* Fixing/Iteration Phase: Agar user form submit button par lagatar click kare (impatient user), toh DB mein 5 same orders create ho jaate the. Developer Redis Lock lagakar is race condition ko permanently fix karta hai.
+* Live Production Phase: Jab payment processing hoti hai, server sabse pehle Redis mein request ka UUID lock karta hai. Agar same UUID doosre server par bhi aaye, toh Redis usko reject kar deta hai, ensuring user ka paisa strictly ek hi baar kate.
+* Additional context: Har financial aur E-commerce enterprise API mein Header mein `Idempotency-Key` bhejna standard practice hai.
+
+
 Topic 1: DRF Pagination, Filtering & JWT Auth
-
 Topic 2: API Documentation & Django Ninja
-
 Topic 3: API Security: CORS & Rate Limiting (Throttling) [⚠️ Derived]
+Topic 4: API Versioning & Webhooks Integration [⚠️ Derived]
+Topic 5: GraphQL APIs (The REST Alternative) [⚠️ Derived]
+Topic 6: Fintech-Level Safety: Idempotency & Distributed Locks [⚠️ Derived]
 
 ---
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2986,6 +3057,29 @@ Subtopics: Isolating Tests, unittest.mock, @patch Decorator, MagicMock, External
 * Live Production Phase: GitHub Actions (CI/CD) par tests millisecond mein pass hote hain kyunki network requests block kar di gayi hain aur unki jagah Mocks (Stunt Doubles) kaam kar rahe hain.
 * Additional context: Bina Mocking ke enterprise CI/CD pipeline banana lagbhag impossible hai kyunki aap har git push par Stripe ko real hits nahi de sakte.
 
+Topic 1.8: Code Coverage Metrics (`pytest-cov`) [⚠️ Derived]
+Subtopics: Test Coverage Concept, pytest-cov Installation, Running Coverage, HTML Report Generation, Uncovered Lines Identification, CI/CD Coverage Gates
+
+[📊 SCOPE SIGNAL for Topic 1.8:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Terminal commands and workflow configuration
+* Key terms from notes: Code Coverage, pytest-cov, 80% Rule, HTML Report, CI/CD Gate
+* Explicit emphasis in notes: "100% test coverage ek myth hai, par 80% enterprise standard hai."
+* Notes mein jo analogies/examples the: Code coverage ko "X-Ray Scan" bataya gaya jo dikhata hai ki code ka kaunsa hissa tests ne chua (touch kiya) tak nahi hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 1.8:
+[Code Coverage, Metric, `pytest-cov`, `coverage.py`, `pytest --cov=.`, HTML Report, `pytest --cov=. --cov-report=html`, `htmlcov/index.html`, Uncovered lines, Red lines, CI/CD Gate, `--cov-fail-under=80`, Quality Assurance, PR block, Tech Debt, ⭐"X-Ray Scan"[emphasized in notes], ⭐"80% enterprise standard"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1.8:
+
+* Testing/Offline Phase: Developer test likhne ke baad terminal mein `pytest --cov=. --cov-report=html` chalata hai. Phir browser mein `index.html` open karke dekhta hai ki kis `if/else` block mein test nahi gaya (wo lines red dikhti hain).
+* Fixing/Iteration Phase: Uncovered (red) lines ko dekh kar developer naye test cases likhta hai jab tak coverage green na ho jaye.
+* Live Production Phase: GitHub Actions (CI/CD) par pipeline set hoti hai `pytest --cov-fail-under=80`. Agar koi junior developer bina test likhe naya feature push karta hai jisse total coverage 79% ho jati hai, toh pipeline crash (fail) ho jati hai aur code merge nahi hone deti.
+* Additional context: Badhi companies mein managers specifically "Coverage Reports" track karte hain taaki future bugs (Tech Debt) ko roka ja sake.
+
 Topic 2: Production Logging & Error Tracking (Logging, Loguru, Sentry)
 Subtopics: Python Logging Module, settings.LOGGING, loguru, File Handlers, Rotating Logs, Error Tracking, Sentry Integration
 
@@ -3011,9 +3105,8 @@ Subtopics: Python Logging Module, settings.LOGGING, loguru, File Handlers, Rotat
 
 
 Topic 1: Pytest, Ruff Linter & Modern Workflows (uv)
-
-Topic 1.5: Advanced Testing (Mocking & Patching)
-
+Topic 1.5: Advanced Testing (Mocking & Patching) [⚠️ Derived]
+Topic 1.8: Code Coverage Metrics (`pytest-cov`) [⚠️ Derived]
 Topic 2: Production Logging & Error Tracking (Logging, Loguru, Sentry)
 
 
