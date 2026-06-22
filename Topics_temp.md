@@ -1609,6 +1609,29 @@ Topic 7: Testing Basics (`TestCase`, `self.client.get`, `assertEqual`)
 Topic 8: Middleware (Class-based, `__call__`, function-based)
 Topic 9: Signals (`post_save`, `@receiver`, `ready()`)
 
+Topic 10: Advanced Database & ORM Mastery (Indexes, Constraints)
+Subtopics: Database Indexing, db_index, models.Index, Meta.indexes, UniqueConstraint, CheckConstraint, Data Migrations, RunPython
+
+[📊 SCOPE SIGNAL for Topic 10:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed explanations with indexing strategies and constraints
+* Key terms from notes: Index, B-Tree, db_index=True, models.Index, constraints, UniqueConstraint, CheckConstraint, Data Migration, RunPython
+* Explicit emphasis in notes: "Millions of rows par bina index ke database crash ho sakta hai."
+* Notes mein jo analogies/examples the: Index ko "Book ke aakhiri panno (Index pages)" se compare kiya gaya hai jisse fast searching hoti hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 10:
+[Database Indexing, db_index=True, Meta.indexes, models.Index, fields, B-Tree, Table Scan, Slow Query, Constraints, UniqueConstraint, CheckConstraint, Q objects, Data Migrations, Schema Migrations, migrations.RunPython, bulk_update]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+
+* Testing/Offline Phase: Developer model banate waqt decide karta hai ki kaunse fields par sabse zyada filter/search hoga, aur wahan `db_index=True` lagata hai.
+* Fixing/Iteration Phase: Agar live app mein query slow ho jaye, toh developer naya index add karke migration chalata hai jisse search millisecond mein ho jaye.
+* Live Production Phase: E-commerce sites par jab lakho users ek saath search karte hain, toh Database (PostgreSQL) Index ka use karke table scan avoid karta hai. Database-level constraints ensure karte hain ki galat data (e.g. negative price) DB mein save na ho sake.
+* Additional context: Enterprise scale par DB architecture sabse zyada matter karta hai.
+
 ---
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ==================================================================================
@@ -2735,6 +2758,29 @@ Subtopics: pytest, pytest-django, Fixtures, Ruff, Linter, Formatter, GitHub Acti
 * Fixing/Iteration Phase: Agar kisi ne syntax error ya formatting galti ki, toh Ruff usko turant fix (ruff format) kar deta hai.
 * Live Production Phase: Developer code push karta hai -> GitHub Actions server spin up karta hai -> Ruff & Pytest run karta hai -> Agar pass hua, toh automatically Heroku/AWS par deploy (CD) kar deta hai.
 * Additional context: 2026 mein Professional Python codebases specifically Ruff aur Pytest par depend karte hain, purane tools legacy ban chuke hain.
+
+Topic 2: Production Logging & Error Tracking (Logging, Loguru, Sentry)
+Subtopics: Python Logging Module, settings.LOGGING, loguru, File Handlers, Rotating Logs, Error Tracking, Sentry Integration
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Logging dict setup, Loguru usage, and Sentry implementation
+* Key terms from notes: logging, logger, WARNING, ERROR, CRITICAL, INFO, DEBUG, loguru, settings.LOGGING, Sentry, DSN, Stack Trace
+* Explicit emphasis in notes: "Production mein print() use karna sabse badi galti hai, hamesha logging use karein."
+* Notes mein jo analogies/examples the: Logging ko "Hawai jahaz (Airplane) ka Black Box" bataya gaya, aur Sentry ko "Automatic Ambulance/Police Alert".
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Python Logging, import logging, logger.info(), logger.error(), settings.LOGGING, handlers, formatters, FileHandler, loguru, Winston alternative, RotatingFileHandler, 50MB log file, Sentry, sentry_sdk, DSN, Error Tracking, Stack Trace, APM, Performance Monitoring, Crash Report]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer `print()` ki jagah `logger.info()` (built-in ya loguru) use karta hai taaki console aur file dono mein formatted data dikhe.
+* Fixing/Iteration Phase: Jab production par app crash hoti hai (500 Server Error), toh developer direct Sentry dashboard open karta hai, jahan exact line number aur variables ki value save milti hai. Use logs server mein ssh karke nahi padhne padte.
+* Live Production Phase: Background mein log files silently rotate hoti rehti hain (e.g. max 50MB per file) aur koi CRITICAL error aane par Slack/Email par Sentry automatically alert bhej deta hai.
+* Additional context: Node.js mein jo kaam 'Winston' karta hai, Python mein built-in 'logging' module ya modern 'loguru' module karta hai. Sentry industry standard hai error tracking ke liye.
 
 ---
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
