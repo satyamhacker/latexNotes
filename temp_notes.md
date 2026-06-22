@@ -1188,7 +1188,7 @@ Total keywords across all subtopics in this topic: 95
 
 Is section mein hum Python ke sabse powerful features seekhenge: **Loops** (kaam ko automatically repeat karna) aur **Core Data Structures** (data ko smartly store aur manage karna).
 
-Yahan hum **Section 3 (Loops & Output Control)** se shuru kar rahe hain.
+Yahan hum ** (Loops & Output Control)** se shuru kar rahe hain.
 
 ---
 
@@ -3632,7 +3632,7 @@ Total keywords across all subtopics in this topic: 106
 
 ### Section Overview: Python Module 3 - Functions, Files & OOP
 
-Yeh section aapke code ko chote, unstructured scripts se ek well-organized, scalable, aur professional application mein badalne ke core concepts cover karta hai. Hum code ko reusable (Functions) banana, permanently store (File I/O) karna, aur real-world objects (OOP) ko map karna seekhenge.
+
 
 ---
 
@@ -13982,9 +13982,6 @@ Total keywords across all subtopics in this topic: 16
 
 # Section 10: DRF Foundations: Serializers, API Views & CRUD
 
-**Notes Guru initialized!** 🚀 Tumhara skeleton deeply process kar liya gaya hai. Hum **Section 1 (Topic 1 & 2)** se shuru kar rahe hain. Har ek concept ko hum absolutely ground-level se uthayenge.
-
-Yahan **Topic 1 aur Topic 2** ke complete, highly detailed notes hain. Uske baad hum aage badhenge.
 
 ---
 
