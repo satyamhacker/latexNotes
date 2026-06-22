@@ -951,6 +951,29 @@ Subtopics: Makemigrations, Migrate, Database Schema Sync, Translation Files, Cre
 * Live Production Phase: News website (jaise Aaj Tak) mein reporters/admins /admin panel se naya content add karte hain bina code chhue.
 * Additional context: Teamwork environment mein ek developer git push karta hai migration files aur doosra sirf migrate chalata hai.
 
+Topic 2.5: Advanced Django Admin & Bulk Operations [⚠️ Derived]
+Subtopics: Customizing Admin UI, Jazzmin / Unfold Themes, django-import-export, CSV/Excel Bulk Import, Custom Admin Actions
+
+[📊 SCOPE SIGNAL for Topic 2.5:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Setup commands aur code snippets for admin.py
+* Key terms from notes: django-import-export, bulk data, CSV, Jazzmin, Unfold, UI theme, admin actions
+* Explicit emphasis in notes: "Data Entry team ke liye life-saver" — emphasize bulk export/import.
+* Notes mein jo analogies/examples the: "Excel to Database Pipeline" — ek click mein 1000 products import karna.
+]
+
+🔑 KEYWORDS DUMP for Topic 2.5:
+[Advanced Admin, django-import-export, CSV, Excel, bulk import, bulk export, Jazzmin, Unfold, Tailwind Admin, UI theme, Data Entry, admin actions, `@admin.action`, queryset.update, ExportMixin, ImportExportModelAdmin, ⭐"Data Entry team ke liye life-saver"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2.5:
+
+* Testing/Offline Phase: Developer model banakar `ImportExportModelAdmin` register karta hai aur CSV file upload test karta hai.
+* Fixing/Iteration Phase: Agar UI boring lage toh Jazzmin install karke dashboard ko modern look deta hai.
+* Live Production Phase: Non-technical operations team live server par naye products ka Excel sheet seedha admin panel mein upload karti hai bina developer ko disturb kiye.
+* Additional context: Enterprise apps mein default admin UI rarely use hota hai; usko theming aur bulk actions se powerful banaya jata hai.
+
 =Section 3: ORM Interactions & Operations [⚠️ Derived]=
 Database se baat karna aur data handle karna bina raw SQL likhe. [⚠️ Derived]
 
@@ -1034,6 +1057,7 @@ Subtopics: Transaction Atomic, Commit, Rollback, N Plus One Query Problem, Selec
 Topic 1: Models, Fields & Configuration [⚠️ Derived]
 
 Topic 2: Migrations & Django Admin [⚠️ Derived]
+Topic 2.5: Advanced Django Admin & Bulk Operations [⚠️ Derived]
 
 Topic 3: Shell & Basic CRUD [⚠️ Derived]
 Topic 4: Advanced ORM Methods [⚠️ Derived]
@@ -2245,6 +2269,52 @@ Subtopics: Full Page Caching, Per-View Caching, Template Fragment Caching, Cache
 * Live Production Phase: Django incoming requests ke liye slow DB queries run karne ke bajaye, pre-rendered HTML fragments ko direct Redis cache se utha kar user ko bhej deta hai, jisse server CPU load kam hota hai.
 * Additional context: News website ke specific blocks (jo har 5 min mein update hote hain) ya detailed blog posts ko cache karne ke liye optimal approach hai.
 
+Topic 8: Enterprise Secrets Management & Security [⚠️ Derived]
+Subtopics: python-decouple, .env best practices, AWS Secrets Manager, HashiCorp Vault, Environment Variable Injection
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed settings.py configuration and AWS integration code
+* Key terms from notes: Secrets, .env, python-decouple, AWS Secrets Manager, HashiCorp Vault, Credentials leak
+* Explicit emphasis in notes: "API keys hardcode karna apraadh (crime) hai!"
+* Notes mein jo analogies/examples the: AWS Secrets Manager ko "Digital Bank Vault" kaha gaya hai jiski chaabi (key) sirf server ke paas hoti hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[Secrets Management, python-decouple, `config()`, `.env`, cast=bool, AWS Secrets Manager, HashiCorp Vault, boto3, Credentials leak, Github exposure, ⭐"apraadh (crime)"[emphasized in notes], Digital Bank Vault, IAM roles, KMS]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Testing/Offline Phase: Developer local environment mein `.env` file use karke `python-decouple` se keys fetch karta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Production server seedha AWS Secrets Manager se connect hota hai aur real-time mein Stripe/Database passwords securely RAM mein inject karta hai, bina disk par save kiye.
+* Additional context: SOC2 aur ISO compliance ke liye secrets management strictly required hai.
+
+Topic 9: Database Scaling: Connection Pooling (PgBouncer) [⚠️ Derived]
+Subtopics: Django Connection Limit, Too Many Connections Error, PgBouncer Setup, Connection Pooling Concept, Transaction vs Session Pooling
+
+[📊 SCOPE SIGNAL for Topic 9:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual only
+* Notes mein content volume: Architecture diagram explanation and configuration concept
+* Key terms from notes: PgBouncer, Connection Pooling, Too many connections, Database limits, Transaction pooling
+* Explicit emphasis in notes: "High traffic mein bina PgBouncer ke DB crash tay hai."
+* Notes mein jo analogies/examples the: PgBouncer ko "Club ka Bouncer" bataya gaya jo bheed ko control karta hai aur ek baar mein sirf utne logo ko andar jaane deta hai jitni jagah ho.
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[PgBouncer, Connection Pooling, Too many connections, Database lock, Traffic overload, MAX_CONNECTIONS, Bouncer, PostgreSQL, Transaction pooling, Session pooling, CONN_MAX_AGE, RDS Proxy, ⭐"Club ka Bouncer"[emphasized in notes], ⭐"Crash tay hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+
+* Testing/Offline Phase: (N/A)
+* Fixing/Iteration Phase: App launch hone ke baad agar "OperationalError: FATAL: too many connections" aaye, toh developer Django aur DB ke beech PgBouncer install karta hai.
+* Live Production Phase: 10,000 users ek saath aane par Django 10,000 connections nahi banata. PgBouncer unhe queue karta hai aur sirf 100 active connections use karke saara traffic seamlessly handle karta hai.
+* Additional context: (N/A)
+
 ---
 
 
@@ -2257,6 +2327,8 @@ Topic 4: Celery (Asynchronous Tasks)
 Topic 5: Redis (Message Broker & Caching)
 Topic 6: Celery Beat (Scheduled Tasks)
 Topic 7: Django Caching (Using Redis)
+Topic 8: Enterprise Secrets Management & Security [⚠️ Derived]
+Topic 9: Database Scaling: Connection Pooling (PgBouncer) [⚠️ Derived]
 
 📊 **PHASE SUMMARY:**
 
@@ -2725,6 +2797,60 @@ Subtopics: Swagger UI, OpenAPI, drf-spectacular, Django Ninja, FastAPI-like, Pyd
 * Live Production Phase: Highly scalable microservices backend banana ho toh DRF ki jagah log Django Ninja + Async use karte hain (for massive performance gains).
 * Additional context: Django Ninja ab DRF ka sabse bada competitor ban chuka hai.
 
+Topic 3: API Security: CORS & Rate Limiting (Throttling) [⚠️ Derived]
+Subtopics: django-cors-headers, Cross-Origin Resource Sharing, API Throttling, AnonRateThrottle, UserRateThrottle, ScopedRateThrottle, DDoS Mitigation
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Middleware configuration, settings array, and DRF throttle classes
+* Key terms from notes: CORS, django-cors-headers, CORS_ALLOWED_ORIGINS, OPTIONS request, Throttling, Rate Limiting, DDoS, 429 Too Many Requests
+* Explicit emphasis in notes: "CORS browser ka security feature hai, server ka nahi.", "Bina Throttling ke API open invitation hai hackers ke liye."
+* Notes mein jo analogies/examples the: CORS ko "Border Visa" kaha gaya, Throttling ko highway ka "Speed Bump (Breaker)".
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[CORS, Cross-Origin Resource Sharing, django-cors-headers, CORS_ALLOWED_ORIGINS, Middleware, Preflight request, OPTIONS, Throttling, Rate Limiting, Speed Bump, AnonRateThrottle, UserRateThrottle, ScopedRateThrottle, 100/day, 10/min, 429 Too Many Requests, DDoS attack, brute-force, ⭐"Border Visa"[emphasized in notes], ⭐"Speed Bump"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: React developer API hit karta hai aur "Blocked by CORS policy" error milta hai, jise backend developer Django settings mein frontend ka domain allow karke fix karta hai.
+* Fixing/Iteration Phase: Agar bots API par spam login try karein, toh developer login view par `10/min` ka throttle laga deta hai.
+* Live Production Phase: Agar koi user ya script limit se zyada requests bhejti hai, toh server safely 429 status code return karta hai bina DB ko overload kiye.
+* Additional context: Public APIs ke liye throttling essential hai bill control aur server stability dono ke liye.
+
+Topic 4: API Versioning & Webhooks Integration [⚠️ Derived]
+Subtopics: URLVersioning, AcceptHeaderVersioning, Breaking Changes Mitigation, Webhook Concept, Third-party Event Listeners, Payload Signature Verification
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Versioning router setup and Stripe/Github webhook verification code
+* Key terms from notes: API Versioning, URLPathVersioning, /v1/, /v2/, Breaking changes, Backward compatibility, Webhooks, POST listener, Signature verification
+* Explicit emphasis in notes: "Purane mobile apps crash hone se bachane ke liye Versioning zaroori hai."
+* Notes mein jo analogies/examples the: Webhook ko "Courier Delivery Notification (Reverse API)" bataya gaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[API Versioning, URLPathVersioning, AcceptHeaderVersioning, NamespaceVersioning, `/api/v1/`, `/api/v2/`, Breaking changes, Backward compatibility, Legacy apps, Webhooks, Reverse API, Event Listener, Stripe, Github, Twilio, Signature verification, HMAC, POST request, payload, ⭐"Courier Delivery Notification"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Developer Stripe se dummy webhook bhej kar local server par ngrok ke zariye payload receive aur verify karta hai.
+* Fixing/Iteration Phase: API response structure badalne par developer use `/v2/` mein shift karta hai aur `/v1/` ko untouched chhod deta hai.
+* Live Production Phase: User external site (Stripe) par payment karta hai, Stripe backend mein automatically Django ke webhook URL par success event bhejta hai, aur Django user ka premium account activate kar deta hai.
+* Additional context: (N/A)
+
+
+
+Topic 1: DRF Pagination, Filtering & JWT Auth
+
+Topic 2: API Documentation & Django Ninja
+
+Topic 3: API Security: CORS & Rate Limiting (Throttling) [⚠️ Derived]
+
 ---
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ==================================================================================
@@ -2781,6 +2907,95 @@ Subtopics: Python Logging Module, settings.LOGGING, loguru, File Handlers, Rotat
 * Fixing/Iteration Phase: Jab production par app crash hoti hai (500 Server Error), toh developer direct Sentry dashboard open karta hai, jahan exact line number aur variables ki value save milti hai. Use logs server mein ssh karke nahi padhne padte.
 * Live Production Phase: Background mein log files silently rotate hoti rehti hain (e.g. max 50MB per file) aur koi CRITICAL error aane par Slack/Email par Sentry automatically alert bhej deta hai.
 * Additional context: Node.js mein jo kaam 'Winston' karta hai, Python mein built-in 'logging' module ya modern 'loguru' module karta hai. Sentry industry standard hai error tracking ke liye.
+
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
+
+# Section 20: Enterprise Architecture & Database Scaling [⚠️ Derived]
+
+=Section 1: Enterprise Architecture & Database Scaling [⚠️ Derived]=
+B2B SaaS apps aur lakho users wale systems ke liye ultimate scaling aur architecture patterns. [⚠️ Derived]
+
+--1--Enterprise Architecture & Scaling--
+Topic 1: Multi-Tenancy (B2B SaaS Architecture)
+Subtopics: Tenant Architecture, django-tenant-schemas, Shared Schema vs Tenant Schema, Data Isolation, PostgreSQL Schemas
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Setup
+* Notes mein content volume: Architecture comparison and routing code
+* Key terms from notes: Multi-Tenancy, django-tenant-schemas, B2B SaaS, Data Isolation, Public Schema, Tenant Schema, company_id
+* Explicit emphasis in notes: "B2B SaaS mein har client ka data 100% isolated hona chahiye, warna data leak hone par company doob jayegi."
+* Notes mein jo analogies/examples the: Single-Tenant ko "Alag alag ghar (houses)" bola, Multi-Tenant Shared DB ko "Ek apartment mein alag rooms" bola.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Multi-Tenancy, Tenant Architecture, django-tenant-schemas, B2B SaaS, Software as a Service, Data Isolation, PostgreSQL Schemas, Public Schema, Tenant Schema, subdomain routing, client1.myapp.com, client2.myapp.com, ForeignKey(Tenant), ⭐"Ek apartment mein alag rooms"[emphasized in notes], data leak]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer local env mein `company1.localhost` aur `company2.localhost` banakar test karta hai ki ek company ka user doosri company ka data na dekh sake.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Slack ya Shopify jaise systems jahan client ka subdomain hit hote hi middleware automatically backend ko us specific client ke schema (database folder) par switch kar deta hai.
+* Additional context: Enterprise B2B software ka foundation yahi hota hai.
+
+Topic 2: Database Routing & Read Replicas
+Subtopics: DatabaseRouter, Master-Slave Architecture, Read Replicas, Write Heavy vs Read Heavy, DB Replication
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Database router python class and settings configuration
+* Key terms from notes: DatabaseRouter, Master DB, Slave DB, Read Replica, db_for_read, db_for_write, Replication lag
+* Explicit emphasis in notes: "Reads hamesha Replicas par bhejte hain, Writes hamesha Master par."
+* Notes mein jo analogies/examples the: Master ko "Kitchen Head Chef (jo banata hai)" aur Replicas ko "Waiters (jo sirf serve karte hain)" kaha gaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[DatabaseRouter, Master-Slave, Read Replica, Write Heavy, Read Heavy, db_for_read, db_for_write, Replication lag, synchronization, AWS RDS Multi-AZ, scalability, load balancing, ⭐"Kitchen Head Chef"[emphasized in notes], ⭐"Waiters"[emphasized in notes], primary database]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer ek custom `db_router.py` likhta hai jo `SELECT` queries ko replica ki taraf aur `INSERT/UPDATE` queries ko master ki taraf route kare.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Jab million users ek saath feed (GET) read karte hain, toh load 3 Read Replicas par distribute ho jata hai. Par jab koi naya post (POST) karta hai, toh wo seedha Master DB mein jata hai.
+* Additional context: High-traffic sites ke liye scale karne ka sabse reliable database pattern yahi hai.
+
+Topic 3: PostgreSQL Full-Text Search (FTS)
+Subtopics: SearchVector, SearchQuery, SearchRank, TrigramSimilarity, django.contrib.postgres.search, Elasticsearch Alternative
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed query code using Postgres specific ORM functions
+* Key terms from notes: Full-Text Search, FTS, SearchVector, SearchQuery, SearchRank, TrigramSimilarity, __icontains limitations, GinIndex
+* Explicit emphasis in notes: "LIKE '%word%' (icontains) lakho rows par table-scan karta hai aur app ko freeze kar dega."
+* Notes mein jo analogies/examples the: `__icontains` ko "Poori kitaab line-by-line padhna" bataya, jabki FTS ko "Kitaab ka Index (Table of Contents) check karna" bataya.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[PostgreSQL Full-Text Search, FTS, `SearchVector`, `SearchQuery`, `SearchRank`, `TrigramSimilarity`, typos, spelling mistakes, `__icontains`, Table scan, Slow query, `django.contrib.postgres.search`, `GinIndex`, Elasticsearch, OpenSearch, ⭐"Poori kitaab line-by-line padhna"[emphasized in notes], ⭐"Kitaab ka Index"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer slow `__icontains` queries ko `SearchVector` se replace karta hai aur test karta hai ki 'Jango' search karne par bhi 'Django' result mein aa raha hai ya nahi (using TrigramSimilarity for typos).
+* Fixing/Iteration Phase: Performance badhane ke liye models mein `GinIndex` apply kiya jata hai.
+* Live Production Phase: E-commerce platform par user jab search bar mein type karta hai, toh Postgres FTS milliseconds mein relevant aur ranked data return karta hai bina heavy external systems (jaise Elasticsearch) setup kiye.
+* Additional context: Jab tak scale extreme na ho, Elasticsearch ki jagah Postgres ka built-in FTS use karna modern Django teams ki pehli pasand hai.
+
+
+
+Topic 1: Multi-Tenancy (B2B SaaS Architecture)
+
+Topic 2: Database Routing & Read Replicas
+
+Topic 3: PostgreSQL Full-Text Search (FTS)
+
+
 
 ---
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
