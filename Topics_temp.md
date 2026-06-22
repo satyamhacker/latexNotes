@@ -215,6 +215,75 @@ Subtopics: print() Default Behavior, newline Character, end Parameter, sep Param
 * Live Production Phase: Terminal mein progress bar ya loading dots (........) dikhana.
 * Additional context: Loop ke andar pattern print karne ke liye aksar use hota hai.
 
+Topic 3: while() loops
+Subtopics: while Keyword, Condition Evaluation, Infinite Loops, Counter Variables, Increment/Decrement
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Concept explanation with infinite loop warning
+* Key terms from notes: while, condition, infinite loop, True, counter, increment
+* Explicit emphasis in notes: "Infinite loop se bachne ke liye condition false hona zaroori hai"
+* Notes mein jo analogies/examples the: "Jab tak tanki full na ho, motor chalu rakho"
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[while loop, condition, True, False, iteration, infinite loop, crash, counter, i += 1, increment, decrement, loop body]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer server chalu rakhne ke liye `while True:` use karta hai.
+* Fixing/Iteration Phase: Agar code hang ho jaye, toh developer check karta hai ki loop exit condition hit ho rahi hai ya nahi.
+* Live Production Phase: Background jobs jo continuously data listen karte hain (jaise Celery workers ya WebSockets).
+* Additional context: while loops tab use hote hain jab humein pata nahi hota ki loop kitni baar chalega.
+
+Topic 4: Break & Continue
+Subtopics: break Keyword, Loop Termination, continue Keyword, Skip Iteration, Nested Loops Interaction
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Surface
+* Coverage Angle: Both
+* Notes mein content volume: Short comparison with code snippets
+* Key terms from notes: break, continue, skip, terminate, exit
+* Explicit emphasis in notes: "Break poora loop tod deta hai, Continue sirf current round skip karta hai"
+* Notes mein jo analogies/examples the: "Break = Train se utar jana. Continue = Yeh station chhod kar agle station badhna."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[break, continue, terminate, exit loop, skip iteration, current round, if condition, control flow, efficiency, search]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Database mein specific user milne par `break` laga kar search stop karna taaki time bache.
+* Fixing/Iteration Phase: Agar data list mein koi invalid entry ho (jaise null), toh us par `continue` laga kar error se bachna.
+* Live Production Phase: (N/A)
+* Additional context: In keywords se CPU cycles aur processing time save hota hai.
+
+Topic 5: List Comprehensions
+Subtopics: Syntax, [expression for item in list], Conditionals in Comprehension, Performance, Pythonic Code
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Deep syntax breakdown with before/after comparison
+* Key terms from notes: List comprehension, one-liner, expression, iterable, pythonic
+* Explicit emphasis in notes: "Interview mein puchte hain kyunki yeh Python ko special banata hai"
+* Notes mein jo analogies/examples the: "3 line ka code 1 line mein"
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[List Comprehension, syntax, one-liner, [expr for item in list], if condition, Pythonic, fast, memory efficient, map, filter, readable, ⭐Interview Favorite[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Developer DB querysets (Django objects) ko normal Python list ya IDs list mein jaldi convert karne ke liye `[user.id for user in users]` use karta hai.
+* Fixing/Iteration Phase: Lambe aur slow for-loops ko list comprehension se replace karke code chhota aur tez banaya jata hai.
+* Live Production Phase: Data parsing aur formatting tasks jahan milliseconds matter karte hain.
+* Additional context: Jab logic complex ho jaye (jaise nested loops), toh normal for-loop prefer karna chahiye for readability.
+
 =Section 4: Core Data Structures (Collections) [⚠️ Derived]=
 Python ke zaroori building blocks data ko store, organize aur manage karne ke liye. [⚠️ Derived]
 
