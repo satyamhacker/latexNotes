@@ -1051,6 +1051,29 @@ Subtopics: Transaction Atomic, Commit, Rollback, N Plus One Query Problem, Selec
 * Live Production Phase: E-commerce order placement ya bank transfer jaise critical operations mein agar light jaye ya crash ho, toh database rollback karke money save karna.
 * Additional context: (N/A)
 
+Topic 6: Soft Deletes & Data Audit Trails [⚠️ Derived]
+Subtopics: Hard Delete vs Soft Delete, is_deleted BooleanField, Custom Model Managers, django-simple-history, Data Compliance (GDPR/SOC2)
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Custom manager code and simple-history setup
+* Key terms from notes: Soft Delete, Hard Delete, is_deleted, Custom Manager, get_queryset, django-simple-history, Audit Trail, HistoricalRecords, Compliance
+* Explicit emphasis in notes: "Enterprise mein .delete() chalana ek paap (sin) hai."
+* Notes mein jo analogies/examples the: Soft delete ko "Recycle Bin" aur Audit Trail ko "CCTV Camera" bataya gaya hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[Soft Delete, Hard Delete, `is_deleted = models.BooleanField(default=False)`, Custom Manager, `models.Manager`, `get_queryset().filter(is_deleted=False)`, Restore data, `django-simple-history`, Audit Trail, `HistoricalRecords`, history table, who changed what, GDPR, SOC2 compliance, Data Loss Prevention, ⭐"Recycle Bin"[emphasized in notes], ⭐"CCTV Camera"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Developer base model banata hai jisme `is_deleted` field ho, aur custom manager override karta hai taaki `Model.objects.all()` mein deleted items na aayein.
+* Fixing/Iteration Phase: Agar kisi employee ne galti se "Delete" daba diya, toh database admin `is_deleted=False` karke data instantly restore kar leta hai bina backup restore kiye.
+* Live Production Phase: `django-simple-history` background mein har row ke changes ka record rakhta hai (jaise kis user ne price $10 se $20 kab ki). Compliance audit ke time yeh history log bohot kaam aata hai.
+* Additional context: Healthcare, Finance aur SaaS apps mein aap permanently user data delete nahi kar sakte bina proper protocols ke.
+
 ---
 
 
@@ -1063,6 +1086,7 @@ Topic 3: Shell & Basic CRUD [⚠️ Derived]
 Topic 4: Advanced ORM Methods [⚠️ Derived]
 
 Topic 5: Transactions & Query Optimization [⚠️ Derived]
+Topic 6: Soft Deletes & Data Audit Trails [⚠️ Derived]
 
 ---
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2426,6 +2450,14 @@ Topic 1: Many-to-Many Relationships (M2M)
 Topic 2: DRF ViewSets & Routers Automation
 Topic 3: API Security (Token Authentication & Access Permissions)
 
+
+Topic 1: Many-to-Many Relationships (M2M)
+
+Topic 2: DRF ViewSets & Routers Automation
+
+Topic 3: API Security (Token Authentication & Access Permissions)
+
+
 ---
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ==================================================================================
@@ -2511,10 +2543,34 @@ Subtopics: Migration Before Configuration Error, Missing Settings Error, REQUIRE
 * Live Production Phase: `AbstractUser` 99% time use hota hai kyunki isme `is_staff` aur admin fields built-in aate hain. `AbstractBaseUser` sirf tab use hota hai jab completely scratch se sab banana ho.
 * Additional context: `OneToOneField` (Profile) sirf optional data (jaise bio) ke liye rakhte hain, jabki zaroori data (jaise phone_number) seedha `AbstractUser` mein daalte hain taaki JOIN na lagana pade.
 
+Topic 4: Role-Based Access Control (RBAC) & 2FA / OTP [⚠️ Derived]
+Subtopics: Django Groups & Permissions, Custom Roles, has_perm(), Multi-Factor Authentication (MFA), OTP Generation, django-otp, pyotp
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Permission assignment code and OTP logic
+* Key terms from notes: RBAC, Roles, Groups, Permissions, has_perm, Multi-Factor Authentication, MFA, OTP, Time-based OTP, pyotp, Authenticator App
+* Explicit emphasis in notes: "Superuser sabko nahi diya jaata, Roles banaye jaate hain."
+* Notes mein jo analogies/examples the: Groups ko "Company Departments" (HR, Sales, IT) bataya gaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[RBAC, Role-Based Access Control, Django Groups, Permissions, `django.contrib.auth.models.Group`, `Permission`, `user.groups.add()`, `user.has_perm()`, Decorators, `@permission_required`, MFA, Multi-Factor Authentication, 2FA, Two-Factor, OTP, One Time Password, TOTP, `pyotp`, `django-otp`, Google Authenticator, QR Code, Security Layer]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Developer "Manager" aur "Editor" naam ke Groups banata hai aur unhe specific models ki permissions (Add, Change, Delete) assign karta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Jab koi Manager login karta hai toh usse password ke alawa uske phone par Google Authenticator se TOTP (OTP) maanga jaata hai. Login hone ke baad, use UI par sirf wahi buttons dikhte hain jiski uske Role ko permission hai.
+* Additional context: Badi companies mein thousands of employees hote hain; sabko alag-alag level ka access dena RBAC ke zariye hi possible hai.
+
 
 Topic 1: AbstractUser Concept & The Database Trap [⚠️ Derived]
 Topic 2: Project Setup & Code Implementation [⚠️ Derived]
 Topic 3: Common Mistakes & Model Comparisons [⚠️ Derived]
+Topic 4: Role-Based Access Control (RBAC) & 2FA / OTP [⚠️ Derived]
 
 ---
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2626,6 +2682,16 @@ Topic 2: Prefix Metadata & Header Formatting [⚠️ Derived]
 Topic 3: Database Storage Strategy
 Topic 4: Django Code Implementation (Hybrid Approach)
 
+
+Topic 1: Base64 Concept & Decoding Basics
+
+Topic 2: Prefix Metadata & Header Formatting
+
+Topic 3: Database Storage Strategy
+
+Topic 4: Django Code Implementation (Hybrid Approach)
+
+
 ---
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ==================================================================================
@@ -2683,6 +2749,12 @@ Subtopics: Structural Pattern Matching, match-case, Asynchronous I/O, asyncio, a
 * Live Production Phase: 10,000 users ek saath connect hone par server block nahi hota kyunki async event loop doosre requests ko handle karta rehta hai jab tak DB response nahi aata.
 * Additional context: FastAPI aur Django Async dono is par heavily dependent hain.
 
+
+Topic 1: Type Hinting, Mypy & Dataclasses
+
+Topic 2: Pattern Matching (`match...case`) & Async Python
+
+
 ---
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ==================================================================================
@@ -2739,6 +2811,12 @@ Subtopics: ASGI, WSGI vs ASGI, Async Views, Async ORM, Django Channels, WebSocke
 * Fixing/Iteration Phase: Sync code ko async loop mein chalane se aane wale `SynchronousOnlyOperation` errors ko `sync_to_async` wrap karke fix kiya jata hai.
 * Live Production Phase: Users ko bina page refresh kiye live chat messages aur notifications aate hain (WebSockets ke through).
 * Additional context: Django ab purely sync framework nahi raha, ASGI ka support kaafi mature ho chuka hai.
+
+
+Topic 1: HTMX & Alpine.js (HTML-over-the-wire)
+
+Topic 2: Async Django & Django Channels (WebSockets)
+
 
 ---
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2885,6 +2963,29 @@ Subtopics: pytest, pytest-django, Fixtures, Ruff, Linter, Formatter, GitHub Acti
 * Live Production Phase: Developer code push karta hai -> GitHub Actions server spin up karta hai -> Ruff & Pytest run karta hai -> Agar pass hua, toh automatically Heroku/AWS par deploy (CD) kar deta hai.
 * Additional context: 2026 mein Professional Python codebases specifically Ruff aur Pytest par depend karte hain, purane tools legacy ban chuke hain.
 
+Topic 1.5: Advanced Testing (Mocking & Patching) [⚠️ Derived]
+Subtopics: Isolating Tests, unittest.mock, @patch Decorator, MagicMock, External API Mocking, responses library
+
+[📊 SCOPE SIGNAL for Topic 1.5:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Code examples showing real API call vs Mocked API call
+* Key terms from notes: Mocking, Patching, unittest.mock, @patch, MagicMock, side_effect, return_value, Isolation, Third-party APIs
+* Explicit emphasis in notes: "Test suite ko external internet/APIs ki zaroorat nahi padni chahiye."
+* Notes mein jo analogies/examples the: Mocking ko "Stunt Double" bataya gaya jo asli actor (API) ki jagah risk (test) leta hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 1.5:
+[Mocking, Patching, `unittest.mock`, `@patch`, `patch.object`, `MagicMock`, `return_value`, `side_effect`, External APIs, Stripe API, AWS S3 upload test, Isolation, fast tests, `responses` library, dummy response, CI/CD safety, ⭐"Stunt Double"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1.5:
+
+* Testing/Offline Phase: Developer ek test likhta hai jisme user upgrade hota hai. Asli Stripe API call hone ke bajaye, developer `@patch('stripe.Charge.create')` lagata hai jo ek fake "Success" response return karta hai.
+* Fixing/Iteration Phase: Agar third-party server down ho jaye, tab bhi developer ke tests fail nahi hote kyunki unhe mock kiya gaya hai.
+* Live Production Phase: GitHub Actions (CI/CD) par tests millisecond mein pass hote hain kyunki network requests block kar di gayi hain aur unki jagah Mocks (Stunt Doubles) kaam kar rahe hain.
+* Additional context: Bina Mocking ke enterprise CI/CD pipeline banana lagbhag impossible hai kyunki aap har git push par Stripe ko real hits nahi de sakte.
+
 Topic 2: Production Logging & Error Tracking (Logging, Loguru, Sentry)
 Subtopics: Python Logging Module, settings.LOGGING, loguru, File Handlers, Rotating Logs, Error Tracking, Sentry Integration
 
@@ -2907,6 +3008,14 @@ Subtopics: Python Logging Module, settings.LOGGING, loguru, File Handlers, Rotat
 * Fixing/Iteration Phase: Jab production par app crash hoti hai (500 Server Error), toh developer direct Sentry dashboard open karta hai, jahan exact line number aur variables ki value save milti hai. Use logs server mein ssh karke nahi padhne padte.
 * Live Production Phase: Background mein log files silently rotate hoti rehti hain (e.g. max 50MB per file) aur koi CRITICAL error aane par Slack/Email par Sentry automatically alert bhej deta hai.
 * Additional context: Node.js mein jo kaam 'Winston' karta hai, Python mein built-in 'logging' module ya modern 'loguru' module karta hai. Sentry industry standard hai error tracking ke liye.
+
+
+Topic 1: Pytest, Ruff Linter & Modern Workflows (uv)
+
+Topic 1.5: Advanced Testing (Mocking & Patching)
+
+Topic 2: Production Logging & Error Tracking (Logging, Loguru, Sentry)
+
 
 ---
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
