@@ -158,6 +158,9 @@ Topic 4: Operators
 Topic 5: Conditionals
 Topic 6: Exception Handling
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 2: Flow Control (Loops) & Core Data Structures
 
@@ -369,6 +372,9 @@ Topic 9: Sets & Math Operations
 Topic 10: Tuples & Unpacking
 Topic 11: Comparison: Brackets ([] vs () vs {})
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 3: Python Functions, File I/O & Object-Oriented Programming (OOP)
 
@@ -524,6 +530,9 @@ Topic 4: File I/O
 Topic 5: OOP Concepts
 Topic 6: Built-in Functions
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 4: Data Structures & Algorithms (DSA) Fundamentals
 
@@ -630,6 +639,9 @@ Topic 2: ASCII Fundamentals
 Topic 3: Two Pointers Approach
 Topic 4: Binary Search Algorithm
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 5: Django Foundations & Project Setup
 
@@ -809,6 +821,9 @@ Topic 5: manage.py startapp (App Structure)
 Topic 6: Settings Deep Dive
 Topic 7: Development Server (runserver)
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 6: The Database Layer: Models, ORM & Migrations
 
@@ -956,6 +971,9 @@ Topic 4: Advanced ORM Methods [⚠️ Derived]
 
 Topic 5: Transactions & Query Optimization [⚠️ Derived]
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 7: Mastering MVT: Views, URLs, Templates & Assets
 
@@ -1069,6 +1087,9 @@ Topic 2: URL Routing, Dispatcher & Parameters [⚠️ Derived]
 Topic 3: Django Template Language (DTL) & Inheritance [⚠️ Derived]
 Topic 4: Static Files & User Media Handling [⚠️ Derived]
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 8: Django Forms, Authentication & Helpers
 
@@ -1271,6 +1292,9 @@ Topic 6: User Authentication (`create_user`, `authenticate`, `login`, `logout`)
 Topic 7: Helpers (`redirect`, `get_object_or_404`, `reverse`, `reverse_lazy`)
 Topic 8: Messages Framework (`messages.success`)
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 9: Advanced Django: CBVs, Signals, Middleware & Advanced ORM
 
@@ -1516,6 +1540,9 @@ Topic 7: Testing Basics (`TestCase`, `self.client.get`, `assertEqual`)
 Topic 8: Middleware (Class-based, `__call__`, function-based)
 Topic 9: Signals (`post_save`, `@receiver`, `ready()`)
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 10: DRF Foundations: Serializers, API Views & CRUD
 
@@ -1736,6 +1763,9 @@ Section 3: API Views & CRUD Operations
 
 ---
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 11: Developer Tools: Debugging, API Testing (Postman) & Git Workflow
 
@@ -1948,6 +1978,9 @@ Topic 6: Shell vs Scripting for Django [⚠️ Derived]
 Topic 7: Dependency Management [⚠️ Derived]
 Topic 8: Django Extensions shell_plus [⚠️ Derived]
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 12: Deployment (Docker, AWS) & Background Tasks (Celery, Redis)
 
@@ -2137,6 +2170,9 @@ Topic 7: Django Caching (Using Redis)
 
 **--- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.**
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 13: Advanced Django & DRF Core Toolkit
 
@@ -2226,6 +2262,9 @@ Topic 1: Many-to-Many Relationships (M2M)
 Topic 2: DRF ViewSets & Routers Automation
 Topic 3: API Security (Token Authentication & Access Permissions)
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 14: Custom User Model (AbstractUser) & Email Login Setup
 
@@ -2313,6 +2352,9 @@ Topic 1: AbstractUser Concept & The Database Trap [⚠️ Derived]
 Topic 2: Project Setup & Code Implementation [⚠️ Derived]
 Topic 3: Common Mistakes & Model Comparisons [⚠️ Derived]
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 15: Base64 Image Handling (Concept & Best Practices)
 
@@ -2420,6 +2462,9 @@ Topic 2: Prefix Metadata & Header Formatting [⚠️ Derived]
 Topic 3: Database Storage Strategy
 Topic 4: Django Code Implementation (Hybrid Approach)
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 16: Modern Python Features (Python 3.10+)
 
@@ -2474,6 +2519,9 @@ Subtopics: Structural Pattern Matching, match-case, Asynchronous I/O, asyncio, a
 * Live Production Phase: 10,000 users ek saath connect hone par server block nahi hota kyunki async event loop doosre requests ko handle karta rehta hai jab tak DB response nahi aata.
 * Additional context: FastAPI aur Django Async dono is par heavily dependent hain.
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 17: Modern Django Ecosystem & Frontend
 
@@ -2528,6 +2576,9 @@ Subtopics: ASGI, WSGI vs ASGI, Async Views, Async ORM, Django Channels, WebSocke
 * Live Production Phase: Users ko bina page refresh kiye live chat messages aur notifications aate hain (WebSockets ke through).
 * Additional context: Django ab purely sync framework nahi raha, ASGI ka support kaafi mature ho chuka hai.
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 18: Advanced DRF & Modern APIs
 
@@ -2582,6 +2633,9 @@ Subtopics: Swagger UI, OpenAPI, drf-spectacular, Django Ninja, FastAPI-like, Pyd
 * Live Production Phase: Highly scalable microservices backend banana ho toh DRF ki jagah log Django Ninja + Async use karte hain (for massive performance gains).
 * Additional context: Django Ninja ab DRF ka sabse bada competitor ban chuka hai.
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
 # Section 19: Professional Testing, CI/CD & Modern Tooling
 
@@ -2613,4 +2667,7 @@ Subtopics: pytest, pytest-django, Fixtures, Ruff, Linter, Formatter, GitHub Acti
 * Live Production Phase: Developer code push karta hai -> GitHub Actions server spin up karta hai -> Ruff & Pytest run karta hai -> Agar pass hua, toh automatically Heroku/AWS par deploy (CD) kar deta hai.
 * Additional context: 2026 mein Professional Python codebases specifically Ruff aur Pytest par depend karte hain, purane tools legacy ban chuke hain.
 
+---
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+==================================================================================
 
