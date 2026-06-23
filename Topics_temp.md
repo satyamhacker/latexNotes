@@ -1197,6 +1197,78 @@ Subtopics: Scope Definition, In-Scope vs Out-of-Scope, Allowed vs Restricted Met
 * Fixing/Iteration Phase: Agar testing ke waqt koi third-party link ya ambiguous subdomain (jaise api-v2 ya Stripe portal) mile, toh testing turant rok kar client ko email likhna confirmation ke liye.
 * Live Production Phase: Client ki written approval ke baad hi extended scope par test proceed karna, ya fir out-of-scope asset ko completely ignore karna legal issues avoid karne ke liye.
 
+==================================================================================
+
+# Module 13: AI Recon & LLM Tooling Exposure
+
+Cloud aur internet par misconfigured AI agents, exposed RAG databases, aur leaked LLM API keys ko hunt karne ke modern OSINT methods. [⚠️ Derived]
+
+--13--Module 13: AI Recon & LLM Tooling Exposure--
+Topic 1: AI API Keys & Jupyter Notebook Leaks
+Subtopics: OpenAI Key Hunting, Anthropic Key Leaks, HuggingFace Tokens, Jupyter Notebook (.ipynb) Recon, Google Colab Leaks, System Prompt Extraction
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Exact regex for modern LLM keys and filetypes
+* Key terms from notes: OpenAI, `sk-proj`, `sk-ant`, HuggingFace, `.ipynb`, Google Colab, System Prompt
+* Explicit emphasis in notes: "AI keys ka leak hona aaj ke time mein S3 bucket leak hone se zyada khatarnak hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[`sk-proj-`, `sk-ant-`, `hf_`, `filetype:ipynb "sk-"`, `site:colab.research.google.com "api_key" | "openai"`, `path:system_prompt.txt`, `extension:ipynb "OPENAI_API_KEY"`, `intext:"import openai" "sk-" -github.com`, RAG Context leaks, LangChain configs]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: GitHub ya Google par Jupyter Notebooks (`.ipynb`) aur Google Colab links target karna jahan data scientists galti se hardcoded API keys chhod dete hain.
+* Fixing/Iteration Phase: Naye OpenAI project keys (`sk-proj-`) aur Anthropic keys ka specific regex use karke public repos aur Pastebin par live tracking karna.
+* Live Production Phase: Leaked API key se company ke AI agent ka system prompt extract karna, ya billing bypass karke bug bounty report submit karna.
+
+Topic 2: Exposed Vector Databases & RAG Intel
+Subtopics: Vector DB Recon, ChromaDB Exposure, Milvus Unauthenticated Ports, Qdrant Hunting, RAG Data Theft Vectors, Shodan Vector DB Filters
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Shodan and Google dorks for specific Vector DB ports
+* Key terms from notes: Vector Database, RAG, ChromaDB, Milvus, Qdrant, Pinecone
+* Explicit emphasis in notes: "Vector DBs mein company ka sabse sensitive internal data embeddings ke form mein hota hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[ChromaDB, Milvus, Qdrant, `port:19530` (Milvus), `port:8000 product:"Chroma"`, `intitle:"Chroma UI"`, `inurl:":6333/dashboard"` (Qdrant), Vector embeddings, RAG pipeline leaks, Shodan AI hunting]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Shodan par specific Vector DB ports (jaise Milvus ka 19530 ya Qdrant ka 6333) search karke exposed AI databases dhoondhna.
+* Fixing/Iteration Phase: Exposed Vector DB ke API endpoint par simple GET request bhej kar check karna ki wo unauthenticated access allow kar raha hai ya nahi.
+* Live Production Phase: RAG (Retrieval-Augmented Generation) pipeline mein stored confidential company documents aur chat histories ko publicly accessible Vector DB se bypass karke report karna.
+
+Topic 3: Exposed AI Web UIs & Frameworks
+Subtopics: Gradio UI Dorking, Streamlit Exposure, Langflow/Flowise Misconfigurations, Unauthenticated AI Chatbots, Prompt Injection Entry Points
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Footprints of popular AI UI frameworks
+* Key terms from notes: Gradio, Streamlit, Langflow, Flowise, Unauthenticated AI agents
+* Explicit emphasis in notes: "Devs AI UI banakar deploy kar dete hain bina kisi login portal ke."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[`intext:"built with Gradio"`, `intitle:"Streamlit"`, `intitle:"Flowise"`, `intitle:"Langflow"`, `inurl:7860` (Gradio default port), `inurl:8501` (Streamlit default port), Localhost AI expose, Unauthenticated AI agents, Prompt Injection endpoints]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Google aur Shodan par `intext:"built with Gradio"` ya default ports (7860/8501) search karke live internal AI apps dhoondhna.
+* Fixing/Iteration Phase: In UIs par interact karke dekhna ki kya backend APIs (OpenAI/internal tools) bina auth ke call ho rahe hain.
+* Live Production Phase: Ek exposed internal Langflow/Flowise dashboard dhoondhna jahan se attacker poore AI workflow ko modify kar sake ya Prompt Injection attack perform kar sake.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 =Section 2: Course Conclusion & Mastery=
 OSINT & Dorking Zero-to-Hacker course ke final takeaways aur next steps. [⚠️ Derived]
 
@@ -1234,11 +1306,16 @@ Topic 1: The "Look, Don't Touch" Rule
 Topic 2: Legal Risks & Cybercrime Laws
 Topic 3: Understanding Scope Contracts
 
+Module 13: AI Recon & LLM Tooling Exposure
+Topic 1: AI API Keys & Jupyter Notebook Leaks
+Topic 2: Exposed Vector Databases & RAG Intel
+Topic 3: Exposed AI Web UIs & Frameworks
+
 Section 2: Course Conclusion & Mastery
 Topic 4: Course Recap & Future Roadmap
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 4 | Subtopics: 30+
+Sections: 2 | Topics: 7 | Subtopics: 45+
 
 ⏳ **Waiting for:** Next phase/module notes
 
