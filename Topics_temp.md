@@ -621,6 +621,27 @@ Subtopics: JavaScript Endpoints, API Key Hunting in JS, Source Maps Expose, Link
 * Fixing/Iteration Phase: `inurl:".js.map"` search karke galti se expose hue source maps download karna, jisse frontend ka poora un-minified original code mil jaye.
 * Live Production Phase: LinkFinder aur SecretFinder tools ko JS URLs par run karke mass level par internal endpoints extract karna aur auth bypass test karna.
 
+Topic 8: Bug Bounty Specific Dorking (Subdomain Takeovers)
+Subtopics: Subdomain Takeover Signatures, Abandoned Domains, GitHub Pages Expose, AWS S3 Takeovers, Heroku & Zendesk Recon
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Specific dorks to identify vulnerable takeovers
+* Key terms from notes: Subdomain Takeovers, SDTO, GitHub pages, AWS S3 buckets, Heroku, Zendesk
+* Explicit emphasis in notes: "Yeh bug bounty ka low-hanging fruit hai jo explicitly mention hona chahiye."
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[Subdomain Takeovers, SDTO, abandoned domains, GitHub pages, AWS S3 buckets, Heroku, Zendesk, `site:target.com intext:"NoSuchBucket"`, `intext:"There isn't a GitHub Pages site here"`, low-hanging fruit, CNAME records]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Testing/Offline Phase: Target company ke subdomains ki list banakar unhe mass-scan karna taaki CNAME records dhoondhe ja sakein jo dead/abandoned third-party services point kar rahe hon.
+* Fixing/Iteration Phase: Google dorks (`site:target.com intext:"NoSuchBucket"`) ka use karke direct search result se vulnerable endpoints nikalna bina scanner chalaye.
+* Live Production Phase: Ek vulnerable abandoned GitHub Pages URL ko apne account par claim karke deface proof-of-concept (PoC) create karna aur full SDTO bounty claim karna.
+
 --- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -635,9 +656,10 @@ Topic 4: Vulnerability Report Dorking
 Topic 5: Exposed Device Dorking
 Topic 6: Open Directory & Cloud Drive Dorking (Hunting Courses & Large Files)
 Topic 7: JavaScript (JS) Recon & Source Code Dorking
+Topic 8: Bug Bounty Specific Dorking (Subdomain Takeovers)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 88
+Sections: 1 | Topics: 8 | Subtopics: 93
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -1227,6 +1249,69 @@ Subtopics: Strava Heatmaps, Military Base Recon, Physical Layout Mapping, Overpa
 * Fixing/Iteration Phase: Overpass Turbo par custom queries likh kar target building ke aas paas ke cell towers aur CCTV cameras ko accurately map karna.
 * Live Production Phase: In tools se mile data ka use karke Red Team engagements mein physical penetration testing plan aur execute karna.
 
+Topic 9: Alternative IoT & Infrastructure Search Engines
+Subtopics: FOFA Dorking, Hunter.how Queries, Netlas.io Recon, LeakIX Misconfigurations, Asian Tech Stack Profiling
+
+[📊 SCOPE SIGNAL for Topic 9:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Next-gen IoT search engines beyond Shodan
+* Key terms from notes: FOFA, Hunter.how, Netlas.io, LeakIX, Chinese Shodan alternative
+* Explicit emphasis in notes: "Bug bounty mein FOFA sabse zyada use hota hai kyunki iski crawling Google/Shodan se alag hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[FOFA, `fofa.info`, Hunter.how, Netlas.io, LeakIX, Asian tech stack, alternative IoT engines, misconfiguration engines, open databases]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+
+* Testing/Offline Phase: Jab Shodan par results exhaust ho jayein, toh target ka IP subnet FOFA aur Netlas par daalna taaki additional open ports mil sakein.
+* Fixing/Iteration Phase: Hunter.how par specific vulnerabilities ya exposed `.env`/`.git` files ke liye query run karna jo directly index hui ho.
+* Live Production Phase: LeakIX se directly open databases aur known misconfigurations dhoondhna jo Shodan ne miss kar di, aur critical risk report karna.
+
+Topic 10: Advanced Tooling & Automation (ProjectDiscovery Stack)
+Subtopics: Katana Web Crawler, HTTPX Filtering, Subfinder Automation, Naabu Port Scanning, Pipeline Integration
+
+[📊 SCOPE SIGNAL for Topic 10:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: ProjectDiscovery tools replacing legacy scanners
+* Key terms from notes: ProjectDiscovery, Katana, HTTPX, Subfinder, Naabu
+* Explicit emphasis in notes: "Modern bug bounty ProjectDiscovery tools ke bina adhoori hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 10:
+[ProjectDiscovery, Katana, HTTPX, Subfinder, Naabu, live JavaScript rendering, deep crawling, bash scripts, pipeline automation, web crawler, port scanning]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+
+* Testing/Offline Phase: Subfinder aur Naabu ko ek sath chain karke target ke saare active subdomains aur unke open ports dhoondhna.
+* Fixing/Iteration Phase: HTTPX ka use karke un ports ko filter karna jo valid HTTP responses de rahe hain.
+* Live Production Phase: Filtered URLs ko Katana mein feed karke JavaScript-rendered pages ko deeply crawl karna aur unme chhupe naye endpoints aur parameters dhoondhna.
+
+Topic 11: Passive DNS & Historical IP OSINT
+Subtopics: SecurityTrails Historical Data, DNSDumpster Visuals, Origin IP Discovery, Cloudflare Bypass
+
+[📊 SCOPE SIGNAL for Topic 11:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Exposing hidden infrastructures via historical DNS
+* Key terms from notes: Passive DNS, SecurityTrails, DNSDumpster, Origin IP, Cloudflare bypass
+* Explicit emphasis in notes: "Agar target Cloudflare ke pichhe chhipa hai, toh uska origin IP nikalne ki strategy."
+]
+
+🔑 KEYWORDS DUMP for Topic 11:
+[Passive DNS, Historical IP OSINT, SecurityTrails, DNSDumpster, historical DNS records, Origin IP discovery, Cloudflare bypass, true server IP]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
+
+* Testing/Offline Phase: DNSDumpster par target domain dhoondhna taaki ek visual map aur purane MX/TXT records nikal sakein.
+* Fixing/Iteration Phase: SecurityTrails par us domain ki historical IP list check karna jo shayad Cloudflare implement hone se pehle active thi.
+* Live Production Phase: Purane (historical) IP address par directly scan/exploit chalana taaki target ke naye WAF (Web Application Firewall) ko bypass kiya ja sake.
+
 --- 🛑 PHASE 8 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1242,9 +1327,12 @@ Topic 5: Web Archive Alternatives (Archive.today & Archive.is)
 Topic 6: Deep Infrastructure & Scope Expansion (Corporate OSINT)
 Topic 7: Continuous Automation & Pipeline Tooling
 Topic 8: Advanced Geo-OSINT & Physical Recon
+Topic 9: Alternative IoT & Infrastructure Search Engines
+Topic 10: Advanced Tooling & Automation (ProjectDiscovery Stack)
+Topic 11: Passive DNS & Historical IP OSINT
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 8 | Subtopics: 83
+Sections: 1 | Topics: 11 | Subtopics: 98
 
 ⏳ **Waiting for:** Next phase/module notes
 
@@ -1420,6 +1508,27 @@ Subtopics: Machine Learning Threat Models, Pickle File (.pkl) RCE, H5 Models, Hu
 * Fixing/Iteration Phase: Hugging Face Spaces aur Datasets ke andar thoroughly scan karke accidentally uploaded internal PII ya confidential spreadsheets hunt karna.
 * Live Production Phase: Untrusted `.pkl` file exploit use karke target server par RCE (Remote Code Execution) achieve karna jab wo ML model load ho raha ho.
 
+Topic 5: AI & LLM (Advanced Code Assistant Leaks)
+Subtopics: Copilot Training Leaks, CodeWhisperer Exposures, IDE Prompt Extractions, Internal Codebase Leaks
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Hunting sensitive data leaked by AI coding assistants
+* Key terms from notes: GitHub Copilot, CodeWhisperer, IDE, VS Code, training data leak
+* Explicit emphasis in notes: "Developers apne IDEs mein Copilot use karte hain, jo kabhi-kabhi internal codebase aur API keys ko as training data leak kar deta hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[GitHub Copilot, CodeWhisperer, AI code assistants, prompt leaks, IDE, VS Code, internal codebase, API keys, training data, public repos, gists]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Target company ke developers ke public GitHub gists aur repos ko actively monitor karna.
+* Fixing/Iteration Phase: AI code assistants (jaise Copilot) ke dwara auto-generate aur accidentally push ki gayi files mein company ke internal IP addresses aur credentials search karna.
+* Live Production Phase: Leaked API keys ka use karke live environment bypass prove karna aur AI tools ke misconfiguration ki severity demonstrate karna.
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 =Section 2: Course Conclusion & Mastery=
@@ -1464,13 +1573,12 @@ Topic 1: AI API Keys & Jupyter Notebook Leaks
 Topic 2: Exposed Vector Databases & RAG Intel
 Topic 3: Exposed AI Web UIs & Frameworks
 Topic 4: Advanced ML Security & Pickle File Hunting
+Topic 5: AI & LLM (Advanced Code Assistant Leaks)
+Topic 6: AI-Driven Prompt Injection Frameworks
+Topic 7: Model Stealing & Intellectual Property Exposure
 
 Section 2: Course Conclusion & Mastery
 Topic 4: Course Recap & Future Roadmap
-
-📊 PHASE SUMMARY:
-Sections: 2 | Topics: 8 | Subtopics: 50+
-
 ⏳ **Waiting for:** Next phase/module notes
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1638,6 +1746,27 @@ Subtopics: Telegago, Invite Link Scraping, Telegram Dorking, Discord Chat Indexi
 * Fixing/Iteration Phase: Reddit (`site:reddit.com`) aur Twitter par employees ki aapas ki technical discussions track karna taaki internal infrastructure (jaise kaunsa cloud provider ya server version use ho raha hai) pata chale.
 * Live Production Phase: Bug bounty hunters Discord aur Telegram par hackers ke private leak groups ko passively monitor karte hain. Jaise hi kisi target ka leak aata hai, wo vulnerability analyze karke jaldi report karte hain.
 
+Topic 2: SOCMINT (Advanced Social Media OSINT)
+Subtopics: TikTok OSINT, Instagram Footprinting, Reverse Video Search, Dating App Recon, Tinder/Bumble API Leaks
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both Practical and Ethical
+* Notes mein content volume: Tracking employees through unconventional social platforms
+* Key terms from notes: TikTok, Instagram OSINT, reverse video search, Dating App OSINT, Tinder, Bumble API
+* Explicit emphasis in notes: "Red teamers aksar Tinder/Bumble API ka use karte hain employees ko track aur spear-phish karne ke liye."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[TikTok OSINT, Instagram OSINT, location tracking, reverse video search, physical pentesting, social media footprints, Dating App OSINT, Tinder API, Bumble API, spear-phishing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Target company ke physical location ko Instagram aur TikTok par search karke employees dwara post ki gayi andar ki videos/photos analyze karna.
+* Fixing/Iteration Phase: Dating app APIs (Tinder/Bumble) ke through spoofed location daal kar specific corporate building mein baithe employees ke profiles scrape karna.
+* Live Production Phase: In profiles se unke hobbies aur interests nikal kar highly customized spear-phishing attacks craft karna ek advanced red team engagement mein.
+
 --- 🛑 PHASE 11 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1646,9 +1775,10 @@ Subtopics: Telegago, Invite Link Scraping, Telegram Dorking, Discord Chat Indexi
 
 Module 11: SOCMINT & Instant Messaging OSINT
 Topic 1: Telegram & Discord OSINT
+Topic 2: SOCMINT (Advanced Social Media OSINT)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 1 | Subtopics: 6
+Sections: 1 | Topics: 2 | Subtopics: 11
 
 ⏳ **Waiting for:** Next phase/module notes
 
@@ -1682,6 +1812,27 @@ Subtopics: Tor Network Dorking, Ahmia.fi, Onion Links, BreachForums Alternatives
 * Fixing/Iteration Phase: Tor browser set up karke Ahmia.fi (Dark web search engine) par target company ka naam dhoondhna taaki ransomware gangs ke leak sites (e.g., LockBit) par early warnings mil sakein.
 * Live Production Phase: Red team engagements mein purane leaked passwords (DeHashed se nikale hue) ko use karke credential stuffing attack perform karna aur corporate VPN ya Office365 mein initial foothold banana.
 
+Topic 2: Deep/Dark Web & Leaks (The Next Level)
+Subtopics: Ransomware Leak Sites, Ransomwatch, I2P Network Recon, Torrent OSINT, Corporate IP Torrent History
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical and Strict Ethical Warnings
+* Notes mein content volume: Monitoring extortion and alternative dark networks
+* Key terms from notes: Ransomware Leak Sites, Ransomwatch, I2P Network, Torrent OSINT, iknowwhatyoudownload
+* Explicit emphasis in notes: "Ransomware gangs (LockBit, ALPHV) apne victims ka data dark web par leak karte hain."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Ransomware Leak Sites, Ransomwatch, LockBit, ALPHV, dark web, I2P Network, Invisible Internet Project, Torrent OSINT, `iknowwhatyoudownload.com`, corporate IP, torrent history]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Target company ki public IP range ko `iknowwhatyoudownload.com` par scan karke dekhna ki kya employees office network se illegal files/malware torrent kar rahe hain.
+* Fixing/Iteration Phase: I2P network aur Ransomwatch jaise OSINT aggregators ko set up karke monitor karna ki kya target company ransomware gangs ka agla shikar bani hai.
+* Live Production Phase: Agar target company ka data leak hota hai, toh public leak se corporate credentials aur internal documents nikal kar security weaknesses report karna.
+
 --- 🛑 PHASE 12 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1690,9 +1841,10 @@ Subtopics: Tor Network Dorking, Ahmia.fi, Onion Links, BreachForums Alternatives
 
 Module 12: Deep/Dark Web & Advanced Leak Engines
 Topic 1: Dark Web Recon & Data Leak Engines
+Topic 2: Deep/Dark Web & Leaks (The Next Level)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 1 | Subtopics: 8
+Sections: 1 | Topics: 2 | Subtopics: 13
 
 ⏳ **Waiting for:** Next phase/module notes
 
