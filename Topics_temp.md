@@ -998,6 +998,27 @@ Subtopics: Pastebin Dorking Concept, Paste Sites Monitoring, Google Dorking for 
 * Live Production Phase: Leak verify hone par sample data ka screenshot lekar DMCA takedown request bhejna aur company ko immediately private disclosure karna bina dump download kiye.
 * Additional context: Pastebin leaks instant hote hain, bots inhein detect karke within minutes exploit karna shuru kar dete hain.
 
+Topic 4: Alternative Git Platforms (Beyond GitHub)
+Subtopics: GitLab Dorking, Bitbucket Exposure, Self-Hosted Gitea, Registration Page Expose
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Git alternatives for lower competition
+* Key terms from notes: GitLab, Bitbucket, Gitea, Self-Hosted Git, Registration page
+* Explicit emphasis in notes: "Smart hunters wahan dekhte hain jahan bheed nahi hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[`site:gitlab.com`, `site:bitbucket.org`, `intitle:"GitLab" intext:"register"`, Gitea instances, Self-Hosted Git, less competition]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Target company ke domains ko GitLab aur Bitbucket par Google dorks ke through dhoondhna jahan public repos ho sakte hain.
+* Fixing/Iteration Phase: `intitle:"GitLab" intext:"register"` dork ka use karke company ke self-hosted private git instances dhoondhna jo galti se open registration allow kar rahe hain.
+* Live Production Phase: Ek self-hosted GitLab instance par fake account register karke internal source code access karna aur high severity report file karna.
+
 --- 🛑 PHASE 7 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1008,9 +1029,10 @@ Section 1: GitHub & Data Leak Dorking
 Topic 1: Intro to GitHub Dorking (Why it's Dangerous)
 Topic 2: Dorking for Keys & Passwords
 Topic 3: Pastebin & Public Leaks (Monitoring for Data Dumps) + Module Conclusion
+Topic 4: Alternative Git Platforms (Beyond GitHub)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 32
+Sections: 1 | Topics: 4 | Subtopics: 36
 
 ⏳ **Waiting for:** Next phase/module notes
 
@@ -1184,6 +1206,27 @@ Subtopics: Nuclei Templating, Mass Recon, SpiderFoot, Recon-ng, Maltego, Graph &
 * Fixing/Iteration Phase: Nuclei templates use karke ikkathe kiye gaye hazaron URLs par ek sath known CVEs aur misconfigurations scale par test karna.
 * Live Production Phase: Apne automation pipeline ko server par 24/7 run karna taaki naya subdomain ya vulnerability expose hote hi sabse pehle alert mil jaye.
 
+Topic 8: Advanced Geo-OSINT & Physical Recon
+Subtopics: Strava Heatmaps, Military Base Recon, Physical Layout Mapping, Overpass Turbo, OpenStreetMap Queries, CCTV Mapping
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Modern Geo-OSINT tools for physical penetration testing
+* Key terms from notes: Strava Heatmaps, Overpass Turbo, OpenStreetMap, CCTV locations, Physical Recon
+* Explicit emphasis in notes: "Real-world threat intelligence mein aur bhi tools use hote hain physical pentesting ke liye."
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[Strava Heatmaps, jogging patterns, military bases, high-security corporate areas, physical layout, Overpass Turbo, OpenStreetMap, OSM queries, CCTV camera locations, cell towers, physical pentesting]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Testing/Offline Phase: Strava Heatmaps ka use karke high-security corporate ya military areas mein employees ke jogging aur movement patterns observe karna.
+* Fixing/Iteration Phase: Overpass Turbo par custom queries likh kar target building ke aas paas ke cell towers aur CCTV cameras ko accurately map karna.
+* Live Production Phase: In tools se mile data ka use karke Red Team engagements mein physical penetration testing plan aur execute karna.
+
 --- 🛑 PHASE 8 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1198,9 +1241,10 @@ Topic 4: Censys & ZoomEye (Shodan Alternatives) + Module Conclusion
 Topic 5: Web Archive Alternatives (Archive.today & Archive.is)
 Topic 6: Deep Infrastructure & Scope Expansion (Corporate OSINT)
 Topic 7: Continuous Automation & Pipeline Tooling
+Topic 8: Advanced Geo-OSINT & Physical Recon
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 77
+Sections: 1 | Topics: 8 | Subtopics: 83
 
 ⏳ **Waiting for:** Next phase/module notes
 
@@ -1483,6 +1527,69 @@ Subtopics: APK Decompilation, Hardcoded Keys Extraction, MobSF, APKTool, Cloud K
 * Fixing/Iteration Phase: Decompiled source code (Java/Kotlin/Swift) ke andar string search karke hardcoded AWS keys, Firebase URLs, aur internal API endpoints dhoondhna.
 * Live Production Phase: Mobile app se extract ki hui API keys ko use karke live database par read/write access lena aur critical data leak report karna.
 
+Topic 3: SaaS, Workspaces & Public API Leaks
+Subtopics: Postman Public Workspaces, Trello Board Leaks, Notion API Leaks, Jira Misconfigurations, Confluence Dashboards
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Modern team collaboration tools exposing data
+* Key terms from notes: Postman, Trello, Notion, Jira, Confluence, Authorization Bearer
+* Explicit emphasis in notes: "Aaj kal sensitive data code mein nahi, balki team collaboration tools mein leak ho raha hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Postman Public Workspaces, `Authorization: Bearer`, `site:trello.com "password" | "API"`, `site:notion.site`, onboarding documents, server credentials, Jira dashboards, Confluence unauthenticated, Atlassian]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Google dorks use karke Trello boards (`site:trello.com`) ya Notion sites dhoondhna jo employees ne public chhod diye hain.
+* Fixing/Iteration Phase: Postman par target company ki public workspaces dhoondhna aur unke test requests mein hardcoded live `Bearer` tokens extract karna.
+* Live Production Phase: Misconfigured Jira/Confluence dashboards dhoondhna jahan unauthenticated access se internal network diagrams aur server credentials extract kiye ja sakein.
+
+Topic 4: CI/CD Pipelines & Container OSINT
+Subtopics: Docker Hub Recon, .dockerenv Passwords, Jenkins Build Logs, GitHub Actions Expose, Kubernetes Dashboards
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Hunting for container and CI/CD secrets
+* Key terms from notes: Docker Hub, Jenkins, Kubernetes, K8s dashboard, build logs, .dockerenv
+* Explicit emphasis in notes: "Ek unauthenticated K8s dashboard matlab poore cluster ka direct access (RCE)."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Docker Hub, `.dockerenv`, hardcoded database passwords, Jenkins build logs, GitHub Actions logs, Kubernetes Dashboards, `intitle:"Kubernetes Dashboard"`, K8s, RCE, AWS keys, CI/CD]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Target company ke public Docker images dhoondhna aur unhe pull karke reverse engineer karna taaki `.dockerenv` se secrets nikale ja sakein.
+* Fixing/Iteration Phase: Public Jenkins ya GitHub Actions ke build logs padhna aur galti se echo ho gaye deployment tokens/AWS keys dhoondhna.
+* Live Production Phase: Shodan par `intitle:"Kubernetes Dashboard"` search karke unauthenticated K8s cluster access dhoondhna aur full RCE perform karna.
+
+Topic 5: Corporate Identity & Cloud Tenant OSINT
+Subtopics: Azure AD Enumeration, Office 365 Tenant Recon, O365recon, TREVORspray
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Extracting domains and identities from cloud tenants
+* Key terms from notes: Azure AD, Tenant OSINT, O365, o365recon, TREVORspray
+* Explicit emphasis in notes: "Yeh check karna ki kisi email ID se Azure tenant exist karta hai ya nahi."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Azure AD Enumeration, Office 365, O365, internal domains, cloud tenant, `o365recon`, `TREVORspray`, identity OSINT]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Target company ke employees ki public emails use karke Azure AD tenant ka existence verify karna.
+* Fixing/Iteration Phase: `o365recon` ya `TREVORspray` tools ka use karke Office 365 portal se company ke internal aur hidden domains extract karna.
+* Live Production Phase: Ek bar internal domains extract ho jayein, toh un par sub-domain enumeration chalana naye vulnerable endpoints dhoondhne ke liye.
+
 --- 🛑 PHASE 10 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1492,9 +1599,12 @@ Subtopics: APK Decompilation, Hardcoded Keys Extraction, MobSF, APKTool, Cloud K
 Module 10: Modern Cloud & API Recon
 Topic 1: Cloud Storage Hunting (Azure, GCP, Firebase)
 Topic 2: Mobile App OSINT (APK/IPA Recon)
+Topic 3: SaaS, Workspaces & Public API Leaks
+Topic 4: CI/CD Pipelines & Container OSINT
+Topic 5: Corporate Identity & Cloud Tenant OSINT
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 13
+Sections: 1 | Topics: 5 | Subtopics: 27
 
 ⏳ **Waiting for:** Next phase/module notes
 
