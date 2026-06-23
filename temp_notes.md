@@ -2733,8 +2733,6 @@ Agar tum ek-ek karke sab pe exploit (`ms08_067` ya `ms17_010`) chalaoge, toh 150
 # Module 4: Phase 3 - Gaining Access (Exploitation)
 
 
-=Section 1: Gaining Access (Exploitation)=
-Target system mein entry lene ke top 3 methods — Server, Client, aur Password attacks is section mein deeply cover kiye gaye hain.
 
 ---
 
@@ -6555,7 +6553,7 @@ Total Topics: 5 | Total Keywords: 98 | CVEs: 0 | Missed: 0
 
 **Notes Guru (Offensive Security Edition)** in action! 🚀 Module 9 ka data gathering phase shuru karte hain. Post-exploitation mein yeh sabse critical step hota hai kyunki initial foothold milne ke baad attacker ka main goal information extract karna (victim profiling) hota hai.
 
-Main yahan pehle **Topic 1** aur **Topic 2** ko deep-dive 18-point structure mein explain kar raha hoon. Complete hone par `CONTINUE` type karna taaki aage badh sakein.
+
 
 ---
 
@@ -10612,9 +10610,7 @@ $6$salt$hashstring:Password123!
 # Module 13: Hacking Other OS (Android)
 
 
-```hindi
-📱 Module 13: Hacking Other OS (Android)
-```
+
 ## Section 1: Module 13 - Hacking Other OS (Android)
 
 Mobile devices ko exploit karne ka complete Android attack chain seekhenge. Is section mein do powerful topics hain – pehla **APK binding** se ek legitimate app ke andar payload chhupana, aur doosra **Android Meterpreter** se compromised device se sensitive data nikaalna. Har ek step beginner-friendly explain kiya jayega.
@@ -13943,7 +13939,6 @@ Attacker (Kali) --> Compromised Host1 (Meterpreter session)
 # Module 17 — Extensibility, Containers & Hardware (2026 Era)
 
 
-# Module 17 — Extensibility, Containers & Hardware (2026 Era)
 ## Section 1: Hardware Bridge, Containers & API (Metasploit ko IoT, Docker, aur custom scripts ke saath integrate karna)
 
 Is section mein hum seekhenge ki Metasploit ko sirf network tak hi nahi, physical hardware (cars, IoT) aur modern cloud-native environments (Docker, Kubernetes) tak kaise extend kiya jaata hai. Saath hi MSFRPC API ke through headless automation se Metasploit ko bina GUI/console ke kaise script se control karein — yeh teeno advanced extensibility ke final missing pieces hain.
