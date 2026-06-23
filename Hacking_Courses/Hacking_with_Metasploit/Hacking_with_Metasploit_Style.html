@@ -393,7 +393,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Fetch MD logic
     fetch("Hacking_with_Metasploit.md")
         .then(response => {
-            if (!response.ok) {
+            // Also accept status 0 for local file:// protocols
+            if (!response.ok && response.status !== 0) {
                 throw new Error("Failed to load markdown file");
             }
             return response.text();
@@ -432,7 +433,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 const copyId = Math.random().toString(36).substr(2, 9);
 
-                return \`
+                return `
                 <pre class="mac-window">
                     <div class="code-header">
                         <div class="window-controls">
@@ -440,32 +441,32 @@ document.addEventListener("DOMContentLoaded", () => {
                             <span class="control yellow"></span>
                             <span class="control green"></span>
                         </div>
-                        <button class="copy-btn" onclick="copyCode('\${copyId}')"><i class="fas fa-copy"></i> Copy</button>
+                        <button class="copy-btn" onclick="copyCode('${copyId}')"><i class="fas fa-copy"></i> Copy</button>
                     </div>
-                    <code id="\${copyId}" class="hljs language-\${language || 'plaintext'}">\${highlighted}</code>
-                </pre>\`;
+                    <code id="${copyId}" class="hljs language-${language || 'plaintext'}">${highlighted}</code>
+                </pre>`;
             };
             
             renderer.heading = function(text, level) {
                  const safeText = text ? String(text) : '';
-                 let id = safeText.toLowerCase().replace(/[^\\w]+/g, '-');
+                 let id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
                  let classStr = '';
                  let cleanText = safeText;
                  
                  if (safeText.includes('MODULE_MARKER ')) {
                      cleanText = safeText.replace(/MODULE_MARKER /g, '');
-                     id = cleanText.toLowerCase().replace(/[^\\w]+/g, '-');
+                     id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
                      classStr = ' class="module-section"';
                      level = 2; // enforce level 2
                  }
                  else if (safeText.includes('TOPIC_MARKER ')) {
                      cleanText = safeText.replace(/TOPIC_MARKER /g, '');
-                     id = cleanText.toLowerCase().replace(/[^\\w]+/g, '-');
+                     id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
                      classStr = ' class="topic-section"';
                      level = 3; // enforce level 3
                  }
                  
-                 return \`<h\${level}\${classStr} id="\${id}">\${cleanText}</h\${level}>\`;
+                 return `<h${level}${classStr} id="${id}">${cleanText}</h${level}>`;
             };
 
             // GitHub-Style Alerts (Callouts)
@@ -486,17 +487,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 if (isAlert) {
                     // Strip out the tag whether it's wrapped in a <p> or standalone
-                    const cleanText = text.replace(/(<p>)?\\s*\\[!(NOTE|WARNING|IMPORTANT|TIP|SUCCESS|CAUTION|DANGER)\\]\\s*(<\\/p>|<br>)?/i, '<p>');
-                    return \`<div style="border-left: 4px solid \${color}; background: \${bg}; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; page-break-inside: avoid;">
-                        <div style="color: \${color}; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-family: 'Outfit', sans-serif;">
-                            <i class="fa-solid \${icon}"></i> \${title}
+                    const cleanText = text.replace(/(<p>)?\s*\[!(NOTE|WARNING|IMPORTANT|TIP|SUCCESS|CAUTION|DANGER)\]\s*(<\/p>|<br>)?/i, '<p>');
+                    return `<div style="border-left: 4px solid ${color}; background: ${bg}; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; page-break-inside: avoid;">
+                        <div style="color: ${color}; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-family: 'Outfit', sans-serif;">
+                            <i class="fa-solid ${icon}"></i> ${title}
                         </div>
-                        <div style="color: var(--text-secondary); margin: 0;">\${cleanText}</div>
-                    </div>\`;
+                        <div style="color: var(--text-secondary); margin: 0;">${cleanText}</div>
+                    </div>`;
                 }
                 
                 // Default blockquote behavior
-                return \`<blockquote>\${text}</blockquote>\`;
+                return `<blockquote>${text}</blockquote>`;
             };
 
             marked.setOptions({
@@ -539,7 +540,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(err => {
             console.error(err);
-            loader.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes';
+            loader.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes (Is CORS blocking local files?)';
         });
 });
 
