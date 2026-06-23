@@ -600,6 +600,27 @@ Subtopics: Open Directories, "Index of" Mastery, Media Hunting, PDF/Course Leaks
 * Fixing/Iteration Phase: Search results se web pages/blogs hatane ke liye `-html -htm -php -jsp` add karna taaki sirf direct server file structure mile.
 * Live Production Phase: Pentesters target domain par open directories dhoondhte hain (`site:target.com intitle:"index of"`) jahan galti se backup `.zip` ya `.sql` files chhooti hoti hain.
 
+Topic 7: JavaScript (JS) Recon & Source Code Dorking
+Subtopics: JavaScript Endpoints, API Key Hunting in JS, Source Maps Expose, LinkFinder, SecretFinder, TruffleHog JS, ext:js Dorking
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Dorks for JS files and source map extraction
+* Key terms from notes: filetype:js, .js.map, Source Maps, un-minified code, LinkFinder, SecretFinder
+* Explicit emphasis in notes: "Bug bounty ka sabse bada hissa JavaScript files mein chhupa hota hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[`ext:js`, `filetype:js`, `inurl:".js.map"`, `filetype:map`, Source Maps, un-minified code, LinkFinder, SecretFinder, TruffleHog, API endpoints, hidden routes, `/api/v2/internal/`]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Testing/Offline Phase: Google dorks (`ext:js`) se target ke JavaScript files ikkathe karna aur unme hidden API routes aur hardcoded tokens dhoondhna.
+* Fixing/Iteration Phase: `inurl:".js.map"` search karke galti se expose hue source maps download karna, jisse frontend ka poora un-minified original code mil jaye.
+* Live Production Phase: LinkFinder aur SecretFinder tools ko JS URLs par run karke mass level par internal endpoints extract karna aur auth bypass test karna.
+
 --- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -613,9 +634,10 @@ Topic 3: Sensitive File Dorking
 Topic 4: Vulnerability Report Dorking
 Topic 5: Exposed Device Dorking
 Topic 6: Open Directory & Cloud Drive Dorking (Hunting Courses & Large Files)
+Topic 7: JavaScript (JS) Recon & Source Code Dorking
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 81
+Sections: 1 | Topics: 7 | Subtopics: 88
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -1099,6 +1121,69 @@ Subtopics: Censys & ZoomEye Concepts, Cross-Verification Strategy, Free Tiers Be
 * Live Production Phase: Discovered hidden interfaces ya vulnerable servers (jaise unpatched Apache Struts in Equifax case) ko verify karke responsible disclosure report banana.
 * Additional context: ZoomEye specifically Chinese internet coverage aur visual screenshots ke liye strong mana jata hai, jabki Censys SSL certificates enumeration ka king hai.
 
+Topic 5: Web Archive Alternatives (Archive.today & Archive.is)
+Subtopics: Archive.is Features, Robots.txt Bypass, Snapshot Capture, OSINT Investigations
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Alternatives to Wayback Machine for bypassing restrictions
+* Key terms from notes: Archive.today, Archive.is, robots.txt bypass, snapshot
+* Explicit emphasis in notes: "Archive.is ek life-saver alternative hai jab Wayback Machine fail ho jaye."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Archive.today, Archive.is, robots.txt bypass, snapshot capture, Wayback Machine alternative, web history, OSINT investigations]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Jab target company apne `robots.txt` ko use karke Wayback Machine se apna data delete karwa de, toh `archive.is` par check karna.
+* Fixing/Iteration Phase: `archive.today` par target domain search karke purane snapshots nikalna jo abhi bhi public hain.
+* Live Production Phase: Sensitive leaked endpoints ya pages ka snapshot capture karke evidence secure karna.
+
+Topic 6: Deep Infrastructure & Scope Expansion (Corporate OSINT)
+Subtopics: Certificate Transparency (CT) Logs, crt.sh Enumeration, Reverse WHOIS, ASN Mapping, BGP.he.net, Crunchbase, Whoxy, Favicon Hashing
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Both Practical and Strategic
+* Notes mein content volume: Broadening the attack surface with corporate data and CT logs
+* Key terms from notes: Scope expansion, crt.sh, ASN Mapping, Reverse WHOIS, BGP.he.net, Crunchbase, Whoxy, http.favicon.hash
+* Explicit emphasis in notes: "Bug bounty mein sabse bada advantage tab milta hai jab aap wo assets dhoondhte ho jo kisi aur ko nahi mile."
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[Certificate Transparency, CT Logs, crt.sh, Reverse WHOIS, ASN Mapping, BGP.he.net, Crunchbase, Whoxy, Acquisitions, `http.favicon.hash`, Favicon Hashing, Scope expansion, IP ranges]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Target company ki newly acquired choti companies ko Crunchbase se dhoondhna aur unke domains par attack surface map karna.
+* Fixing/Iteration Phase: `crt.sh` par target ka naam daal kar saare subdomains (jaise dev, staging) ke SSL certificates nikalna jo DNS brute-forcing mein miss ho gaye.
+* Live Production Phase: Target company ke internal tool ka favicon hash nikalna aur Shodan par `http.favicon.hash:<hash>` search karke internet par expose hue saare internal instances dhoondhna.
+
+Topic 7: Continuous Automation & Pipeline Tooling
+Subtopics: Nuclei Templating, Mass Recon, SpiderFoot, Recon-ng, Maltego, Graph & Node Mapping
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Scaling OSINT findings into automated attacks
+* Key terms from notes: Nuclei, Recon-ng, SpiderFoot, Maltego, Continuous Automation, Pipeline
+* Explicit emphasis in notes: "Nuclei ke bina aaj ka bug bounty incomplete hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[Nuclei, templates, Recon-ng, SpiderFoot, Maltego, continuous automation, pipeline tooling, mass scanning, graph format, node mapping, threat intel, red teaming]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Testing/Offline Phase: OSINT se mile data (IPs, subdomains, APIs) ko Maltego ya SpiderFoot mein feed karke relationships aur visual graph map banana.
+* Fixing/Iteration Phase: Nuclei templates use karke ikkathe kiye gaye hazaron URLs par ek sath known CVEs aur misconfigurations scale par test karna.
+* Live Production Phase: Apne automation pipeline ko server par 24/7 run karna taaki naya subdomain ya vulnerability expose hote hi sabse pehle alert mil jaye.
+
 --- 🛑 PHASE 8 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1110,9 +1195,12 @@ Topic 1: The Wayback Machine (Time-Travel OSINT)
 Topic 2: Human OSINT (LinkedIn, Job Postings for Tech Stack Info)
 Topic 3: File Metadata (EXIF Data Analysis)
 Topic 4: Censys & ZoomEye (Shodan Alternatives) + Module Conclusion
+Topic 5: Web Archive Alternatives (Archive.today & Archive.is)
+Topic 6: Deep Infrastructure & Scope Expansion (Corporate OSINT)
+Topic 7: Continuous Automation & Pipeline Tooling
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 57
+Sections: 1 | Topics: 7 | Subtopics: 77
 
 ⏳ **Waiting for:** Next phase/module notes
 
@@ -1267,6 +1355,27 @@ Subtopics: Gradio UI Dorking, Streamlit Exposure, Langflow/Flowise Misconfigurat
 * Fixing/Iteration Phase: In UIs par interact karke dekhna ki kya backend APIs (OpenAI/internal tools) bina auth ke call ho rahe hain.
 * Live Production Phase: Ek exposed internal Langflow/Flowise dashboard dhoondhna jahan se attacker poore AI workflow ko modify kar sake ya Prompt Injection attack perform kar sake.
 
+Topic 4: Advanced ML Security & Pickle File Hunting
+Subtopics: Machine Learning Threat Models, Pickle File (.pkl) RCE, H5 Models, Hugging Face Spaces & Datasets Leaks, Malicious Code Execution
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: OSINT for ML model vulnerabilities and PII leaks
+* Key terms from notes: .pkl, Pickle file, .h5, RCE vulnerability, Hugging Face Spaces, Datasets, PII
+* Explicit emphasis in notes: "Agar koi .pkl file untrusted source se aati hai, toh usme malicious code ho sakta hai (RCE vulnerability)."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Pickle file, `.pkl`, `.h5`, Machine Learning models, RCE vulnerability, Hugging Face Spaces, Hugging Face Datasets, PII, Personally Identifiable Information, internal spreadsheets, malicious code]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Google dorks aur GitHub search use karke public `.pkl` ya `.h5` files dhoondhna jo machine learning models serve kar rahe hain.
+* Fixing/Iteration Phase: Hugging Face Spaces aur Datasets ke andar thoroughly scan karke accidentally uploaded internal PII ya confidential spreadsheets hunt karna.
+* Live Production Phase: Untrusted `.pkl` file exploit use karke target server par RCE (Remote Code Execution) achieve karna jab wo ML model load ho raha ho.
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 =Section 2: Course Conclusion & Mastery=
@@ -1310,12 +1419,13 @@ Module 13: AI Recon & LLM Tooling Exposure
 Topic 1: AI API Keys & Jupyter Notebook Leaks
 Topic 2: Exposed Vector Databases & RAG Intel
 Topic 3: Exposed AI Web UIs & Frameworks
+Topic 4: Advanced ML Security & Pickle File Hunting
 
 Section 2: Course Conclusion & Mastery
 Topic 4: Course Recap & Future Roadmap
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 7 | Subtopics: 45+
+Sections: 2 | Topics: 8 | Subtopics: 50+
 
 ⏳ **Waiting for:** Next phase/module notes
 
@@ -1352,6 +1462,42 @@ Subtopics: Firebase Database Leaks, Azure Blob Storage, GCP Buckets, Misconfigur
 * Fixing/Iteration Phase: Us URL ke aage `.json` lagakar browser mein open karna. Agar permission misconfigured hai, toh poora live database browser mein dump ho jayega.
 * Live Production Phase: GraphQL endpoints par introspection queries bhejkar poori API ka map (hidden queries aur mutations) nikalna aur unauthenticated data access report karna.
 
+Topic 2: Mobile App OSINT (APK/IPA Recon)
+Subtopics: APK Decompilation, Hardcoded Keys Extraction, MobSF, APKTool, Cloud Key Leaks, API URL Recon
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Reverse engineering mobile apps for OSINT
+* Key terms from notes: MobSF, Mobile Security Framework, APKTool, APK/IPA decompilation, hardcoded cloud keys, Firebase URLs, S3 buckets
+* Explicit emphasis in notes: "Firebase URL milti kahan se hai? Mobile app OSINT OSINT ka ek major part hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[MobSF, Mobile Security Framework, APKTool, APK, IPA, Decompilation, Reverse engineering, Hardcoded cloud keys, API URLs, S3 bucket names, Firebase URLs, Android, iOS]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Target company ke Android APK ya iOS IPA ko download karke MobSF ya APKTool se decompile karna.
+* Fixing/Iteration Phase: Decompiled source code (Java/Kotlin/Swift) ke andar string search karke hardcoded AWS keys, Firebase URLs, aur internal API endpoints dhoondhna.
+* Live Production Phase: Mobile app se extract ki hui API keys ko use karke live database par read/write access lena aur critical data leak report karna.
+
+--- 🛑 PHASE 10 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Module 10: Modern Cloud & API Recon
+Topic 1: Cloud Storage Hunting (Azure, GCP, Firebase)
+Topic 2: Mobile App OSINT (APK/IPA Recon)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 13
+
+⏳ **Waiting for:** Next phase/module notes
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
@@ -1382,6 +1528,20 @@ Subtopics: Telegago, Invite Link Scraping, Telegram Dorking, Discord Chat Indexi
 * Fixing/Iteration Phase: Reddit (`site:reddit.com`) aur Twitter par employees ki aapas ki technical discussions track karna taaki internal infrastructure (jaise kaunsa cloud provider ya server version use ho raha hai) pata chale.
 * Live Production Phase: Bug bounty hunters Discord aur Telegram par hackers ke private leak groups ko passively monitor karte hain. Jaise hi kisi target ka leak aata hai, wo vulnerability analyze karke jaldi report karte hain.
 
+--- 🛑 PHASE 11 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Module 11: SOCMINT & Instant Messaging OSINT
+Topic 1: Telegram & Discord OSINT
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 1 | Subtopics: 6
+
+⏳ **Waiting for:** Next phase/module notes
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
@@ -1411,6 +1571,20 @@ Subtopics: Tor Network Dorking, Ahmia.fi, Onion Links, BreachForums Alternatives
 * Testing/Offline Phase: Target company ke domains ya CEO ki emails ko IntelX.io aur DeHashed par search karna taaki unke past leaked passwords (clear text) mil sakein.
 * Fixing/Iteration Phase: Tor browser set up karke Ahmia.fi (Dark web search engine) par target company ka naam dhoondhna taaki ransomware gangs ke leak sites (e.g., LockBit) par early warnings mil sakein.
 * Live Production Phase: Red team engagements mein purane leaked passwords (DeHashed se nikale hue) ko use karke credential stuffing attack perform karna aur corporate VPN ya Office365 mein initial foothold banana.
+
+--- 🛑 PHASE 12 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Module 12: Deep/Dark Web & Advanced Leak Engines
+Topic 1: Dark Web Recon & Data Leak Engines
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 1 | Subtopics: 8
+
+⏳ **Waiting for:** Next phase/module notes
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
