@@ -1,7 +1,7 @@
 # Module 1: Basic Search Operators (Google Foundation)
 
 
-=Section 1: Basic Search Operators (Google Foundation)=
+
 *Google Dorking ka foundation jisse search engine ko pentesting tool banaya jaata hai.*
 
 ### 🎯 1. Introduction to Google Dorking
@@ -8141,7 +8141,7 @@ Asset Found: payment.shop.com
 # Module 10: Advanced Cloud, Social & Dark Web Recon
 
 
-=Module 10: Modern Cloud & API Recon=
+
 Cloud infrastructure, messaging apps, aur dark net leaks se real-time zero-days aur intelligence extract karna.
 
 ### 🎯 1. Cloud Storage Hunting (Azure, GCP, Firebase)
