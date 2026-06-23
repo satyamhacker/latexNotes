@@ -324,9 +324,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
             font-size: 1.5rem;
             color: var(--accent-blue);
             z-index: 9999;
+        }
+
+        #error-msg {
+            font-size: 1rem;
+            color: #da3633;
+            max-width: 80%;
+            text-align: center;
+            display: none;
         }
 
         /* CRITICAL PRINT STYLES - DO NOT MODIFY */
@@ -388,7 +398,10 @@
     </style>
 </head>
 <body>
-    <div id="loader"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+    <div id="loader">
+        <div><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+        <div id="error-msg"></div>
+    </div>
     
     <!-- WRAPPER IS MANDATORY FOR PRINTING BACKGROUNDS -->
     <div class="print-wrapper">
@@ -410,6 +423,7 @@
             const contentArea = document.getElementById("content-area");
             const toc = document.getElementById("toc");
             const loader = document.getElementById("loader");
+            const errorMsg = document.getElementById("error-msg");
 
             fetch("Google_Dork_And_Search_Engine_Dork_For_Hacking.md")
                 .then(response => response.ok ? response.text() : Promise.reject("Failed to load markdown file"))
@@ -435,7 +449,7 @@
                         }
                         
                         const randomId = Math.random().toString(36).substr(2, 9);
-                        return \`
+                        return `
                         <pre class="mac-window">
                             <div class="code-header">
                                 <div class="window-controls">
@@ -443,32 +457,32 @@
                                     <span class="control yellow"></span>
                                     <span class="control green"></span>
                                 </div>
-                                <button class="copy-btn" onclick="copyCode('\${randomId}')"><i class="fas fa-copy"></i> Copy</button>
+                                <button class="copy-btn" onclick="copyCode('${randomId}')"><i class="fas fa-copy"></i> Copy</button>
                             </div>
-                            <code id="\${randomId}" class="hljs language-\${language || 'plaintext'}">\${highlighted}</code>
-                        </pre>\`;
+                            <code id="${randomId}" class="hljs language-${language || 'plaintext'}">${highlighted}</code>
+                        </pre>`;
                     };
                     
                     renderer.heading = function(text, level) {
                          const safeText = text ? String(text) : '';
-                         let id = safeText.toLowerCase().replace(/[^\\w]+/g, '-');
+                         let id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
                          let classStr = '';
                          let cleanText = safeText;
                          
                          if (safeText.includes('MODULE_MARKER ')) {
                              cleanText = safeText.replace(/MODULE_MARKER /g, '');
-                             id = cleanText.toLowerCase().replace(/[^\\w]+/g, '-');
+                             id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
                              classStr = ' class="module-section"';
                              level = 2;
                          }
                          else if (safeText.includes('TOPIC_MARKER ')) {
                              cleanText = safeText.replace(/TOPIC_MARKER /g, '');
-                             id = cleanText.toLowerCase().replace(/[^\\w]+/g, '-');
+                             id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
                              classStr = ' class="topic-section"';
                              level = 3;
                          }
                          
-                         return \`<h\${level}\${classStr} id="\${id}">\${cleanText}</h\${level}>\`;
+                         return `<h${level}${classStr} id="${id}">${cleanText}</h${level}>`;
                     };
 
                     // GitHub-Style Alerts
@@ -487,16 +501,16 @@
                         else if (text.includes('[!NOTE]')) { isAlert = true; }
                         
                         if (isAlert) {
-                            const cleanText = text.replace(/(<p>)?\\s*\\[!(NOTE|WARNING|IMPORTANT|TIP|SUCCESS|CAUTION|DANGER)\\]\\s*(<\\/p>|<br>)?/i, '<p>');
-                            return \`<div style="border-left: 4px solid \${color}; background: \${bg}; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; page-break-inside: avoid;">
-                                <div style="color: \${color}; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-family: 'Outfit', sans-serif;">
-                                    <i class="fa-solid \${icon}"></i> \${title}
+                            const cleanText = text.replace(/(<p>)?\s*\[!(NOTE|WARNING|IMPORTANT|TIP|SUCCESS|CAUTION|DANGER)\]\s*(<\/p>|<br>)?/i, '<p>');
+                            return `<div style="border-left: 4px solid ${color}; background: ${bg}; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; page-break-inside: avoid;">
+                                <div style="color: ${color}; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-family: 'Outfit', sans-serif;">
+                                    <i class="fa-solid ${icon}"></i> ${title}
                                 </div>
-                                <div style="color: var(--text-secondary); margin: 0;">\${cleanText}</div>
-                            </div>\`;
+                                <div style="color: var(--text-secondary); margin: 0;">${cleanText}</div>
+                            </div>`;
                         }
                         
-                        return \`<blockquote>\${text}</blockquote>\`;
+                        return `<blockquote>${text}</blockquote>`;
                     };
 
                     // 3. Render
@@ -508,7 +522,7 @@
                     headings.forEach(h => {
                         const li = document.createElement("li");
                         const a = document.createElement("a");
-                        a.href = \`#\${h.id}\`;
+                        a.href = `#${h.id}`;
                         a.textContent = h.textContent;
                         a.style.paddingLeft = h.tagName === "H1" ? "0" : h.tagName === "H2" ? "1rem" : "2rem";
                         li.appendChild(a);
@@ -518,8 +532,10 @@
                     loader.style.display = "none";
                 })
                 .catch(err => {
-                    console.error(err);
-                    loader.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes';
+                    console.error("Error loading markdown: ", err);
+                    loader.querySelector('div:first-child').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes';
+                    errorMsg.innerHTML = "If you opened this file directly in your browser (file:///...), you might be seeing a CORS error. Try opening it using a local web server (e.g. VS Code Live Server, or 'python -m http.server').";
+                    errorMsg.style.display = "block";
                 });
         });
 
