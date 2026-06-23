@@ -1529,6 +1529,48 @@ Subtopics: Copilot Training Leaks, CodeWhisperer Exposures, IDE Prompt Extractio
 * Fixing/Iteration Phase: AI code assistants (jaise Copilot) ke dwara auto-generate aur accidentally push ki gayi files mein company ke internal IP addresses aur credentials search karna.
 * Live Production Phase: Leaked API keys ka use karke live environment bypass prove karna aur AI tools ke misconfiguration ki severity demonstrate karna.
 
+Topic 6: AI-Driven Prompt Injection Frameworks
+Subtopics: Jailbreaking LLMs, Indirect Prompt Injection, LangChain Vulnerabilities, ReAct Exploit, Automated Prompt Injection Tools
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Exploiting AI workflows through prompt injections
+* Key terms from notes: Prompt Injection, Jailbreaking, LangChain, ReAct, Indirect Injection
+* Explicit emphasis in notes: "AI models ko unke intended behavior se hatakar malicious commands execute karwana aaj ki sabse badi vulnerability hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[Prompt Injection, Indirect Prompt Injection, Jailbreaking LLMs, LangChain, ReAct framework, AI agents, malicious commands, LLM bypass, system prompt extraction, `ignore previous instructions`]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Target application ke AI chatbot ya RAG system ke system prompts ko extract karne ke liye "ignore previous instructions" jaise basic payload test karna.
+* Fixing/Iteration Phase: Web pages ya PDFs ke andar hidden text (Indirect Prompt Injection) embed karna taaki jab RAG usko padhe toh wo malicious command execute kare.
+* Live Production Phase: LangChain ya ReAct agents ko manipulate karke backend APIs par unauthorized actions (jaise email bhejthna ya data delete karna) perform karwana.
+
+Topic 7: Model Stealing & Intellectual Property Exposure
+Subtopics: Weights Leaks, Open-Source Model Extraction, API Rate Limit Bypass, Shadow AI Tooling
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Extracting proprietary ML models and weights
+* Key terms from notes: Model Stealing, Weights Leaks, API abuse, Shadow AI
+* Explicit emphasis in notes: "Companies karodon kharch karti hain models train karne mein, aur misconfigurations se unke weights leak ho jate hain."
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[Model Stealing, Weights Leaks, IP Exposure, API rate limit bypass, Shadow AI, proprietary models, `.bin`, `pytorch_model.bin`, model inversion, extraction attacks]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Testing/Offline Phase: Cloud buckets (S3, Azure) par misconfigured `.bin` ya `safetensors` files dhoondhna jo company ke proprietary AI weights leak kar rahe hon.
+* Fixing/Iteration Phase: Paid AI APIs ke endpoints par rate limit bypass dhoondhna aur systematic querying ke through model ko clone (Model Stealing) karne ki koshish karna.
+* Live Production Phase: Employees dwara use kiye gaye unapproved (Shadow AI) tools se chat histories aur intellectual property ka leak track karna aur management ko report karna.
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 =Section 2: Course Conclusion & Mastery=
