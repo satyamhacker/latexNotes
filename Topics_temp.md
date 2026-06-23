@@ -1942,6 +1942,9 @@ Subtopics: macOS Persistence, LaunchAgents, LaunchDaemons, Plist Configuration, 
 * Live Production Phase: Victim machine par script create kiya, usko plist ke through LaunchAgents mein load kiya. Reboot ke baad Kali par wapas connection receive ho gaya.
 * Additional context: Persistence file ko legitimate naam (jaise `com.apple.update`) dena chahiye stealth ke liye.
 
+---
+
+
 =Section 2: Module 15 - Framework Automation & Defense [⚠️ Derived]=
 Metasploit automation scripts, bypass techniques aur defense evasion ka pro level. [⚠️ Derived]
 
@@ -2116,8 +2119,132 @@ Aapke 58/58 topics poore ho chuke hain! Type **'DONE'** to print the final combi
 
 ⏳ Waiting for: 'DONE' or next phase notes.
 
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
 
+
+# Module 16: Advanced Metasploit 6+ Features (2026 Era)
+
+=Section 1: Modern Metasploit Features & Evasion [⚠️ Missing in Original]=
+Metasploit ke latest features jo modern Antivirus aur Cloud environments ko bypass karte hain.
+
+--1--Modern Metasploit Features & Evasion--
+Topic 1: Evasion Modules & AMSI Bypass (`evasion/`)
+Subtopics: Evasion Module Type, AMSI Bypass, Windows Defender Evasion, C/C++ Source Payloads, In-Memory Execution, Obfuscation
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Commands for MSF native evasion modules
+* Key terms from notes: evasion modules, AMSI bypass, Windows Defender, in-memory, windows/windows_defender_exe, show evasion
+* Explicit emphasis in notes: "msfvenom encoders (shikata_ga_nai) dead hain, native Evasion modules use karo!"
+* Notes mein jo analogies/examples the: "Yeh payload ko antivirus ke saamne invisible cloak pehna deta hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Evasion modules, AMSI bypass, Antimalware Scan Interface, Windows Defender, `show evasion`, `use evasion/windows/windows_defender_exe`, `use evasion/windows/windows_defender_js_hta`, C/C++ compilation, in-memory execution, invisible cloak, RC4 encryption, `set PAYLOAD`, `exploit`, ⭐"msfvenom encoders dead hain"[emphasized in notes], ⭐invisible cloak[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Target par Windows Defender active hai. Standard `msfvenom` payload turant delete ho gaya.
+* Fixing/Iteration Phase: MSFconsole mein `use evasion/windows/windows_defender_exe` select kiya. Yeh module payload ko disk par likhne se pehle native C code mein compile karke obfuscate karta hai.
+* Live Production Phase: Generated executable ko target par run kiya. Defender ne scan kiya par malicious signature nahi mila. In-memory execution ke through Meterpreter session mil gaya without triggering AMSI.
+* Additional context: Evasion modules constantly update hote hain, isliye MSF framework hamesha updated rakhna zaroori hai.
+
+Topic 2: Fileless Attacks via Web Delivery (`multi/script/web_delivery`)
+Subtopics: Web Delivery Module, Fileless Malware, PowerShell Memory Injection, Python/PHP Delivery, Proxy Bypass
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Setup commands for one-liner execution
+* Key terms from notes: web_delivery, fileless attack, PowerShell, memory injection, one-liner, diskless
+* Explicit emphasis in notes: "Disk par kuch save mat karo, seedha RAM mein exploit karo!"
+* Notes mein jo analogies/examples the: "Hawa mein attack - koi file nahi, koi saboot nahi."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Web Delivery, `exploit/multi/script/web_delivery`, Fileless malware, PowerShell injection, RAM execution, diskless, Python, PHP, PSH, one-liner command, `set target 2`, `set payload windows/meterpreter/reverse_https`, `exploit -j`, URIPATH, Hawa mein attack, proxy bypass, ⭐"Disk par kuch save mat karo"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Attacker VM par `web_delivery` module configure kiya aur target (PowerShell) set kiya. Module ne ek single one-liner PowerShell command generate ki.
+* Fixing/Iteration Phase: Payload type ko `reverse_https` set kiya taaki network monitoring tools ko traffic normal web browsing jaisa lage.
+* Live Production Phase: Social engineering ya kisi command execution vuln (RCE) ke through target server par wo one-liner paste karke run kiya. Payload seedha attacker server se fetch hokar RAM mein execute hua. Hard drive par koi file save nahi hui, Antivirus bypass ho gaya.
+
+Topic 3: Meterpreter BOF Support (Beacon Object Files)
+Subtopics: BOF Concept, Meterpreter `bof` Command, Cobalt Strike Integration, Unmanaged Code Execution, Stealth Post-Exploitation
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Commands for executing BOFs inside Meterpreter
+* Key terms from notes: BOF, Beacon Object File, bof execute, unmanaged code, Cobalt Strike compatibility, stealth
+* Explicit emphasis in notes: "Meterpreter ab Cobalt Strike wale BOFs chala sakta hai!"
+* Notes mein jo analogies/examples the: "Doosre framework ke weapons apne interface mein use karna."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[BOF, Beacon Object File, Meterpreter BOF support, Cobalt Strike compatibility, unmanaged C code, stealth post-exploitation, `bof execute`, `bof list`, memory injection, API hooks, `nanodump.o`, `whoami.o`, cross-framework, ⭐"Cobalt Strike wale BOFs chala sakta hai!"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: GitHub se popular BOF scripts (jaise stealthy password dumpers) download kiye aur compile kiye (.o files).
+* Fixing/Iteration Phase: Normal `hashdump` module loud tha aur EDR trigger kar raha tha.
+* Live Production Phase: Meterpreter session ke andar `bof execute /path/to/nanodump.o` command run kiya. Meterpreter ne bina naya process create kiye, stealthy way mein memory ke andar BOF run kiya aur credentials dump kar liye.
+
+Topic 4: Native Cloud Enumeration (`auxiliary/cloud/`)
+Subtopics: AWS/Azure Auxiliary Scanners, S3 Bucket Enumeration, IAM Credential Testing, EC2 Instance Gathering
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Commands for cloud recon via Metasploit
+* Key terms from notes: auxiliary/cloud, AWS, Azure, S3 buckets, IAM keys, EC2
+* Explicit emphasis in notes: "Metasploit sirf local IPs tak limited nahi hai!"
+* Notes mein jo analogies/examples the: None
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Cloud enumeration, `auxiliary/cloud/aws/enum_s3`, `auxiliary/cloud/aws/enum_ec2`, `auxiliary/cloud/azure/enum_ad`, IAM keys, Access Key ID, Secret Access Key, S3 buckets, public buckets, Azure AD, `set ACCESS_KEY_ID`, `set SECRET_ACCESS_KEY`, `run`, ⭐"Metasploit sirf local IPs tak limited nahi hai!"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Kisi previous exploit se AWS IAM Access Keys mili (e.g., `.aws/credentials` file se).
+* Fixing/Iteration Phase: Third-party tools setup karne ki jagah direct Metasploit open kiya.
+* Live Production Phase: MSF mein `auxiliary/cloud/aws/enum_s3` load kiya, churayi hui keys input ki, aur run kiya. Metasploit ne company ke saare private/public S3 buckets list kar diye jahan se sensitive data download kiya gaya.
+
+Topic 5: Encrypted SMB & Named Pipe Pivoting
+Subtopics: Metasploit 6 Pivot Updates, Named Pipes, Encrypted Bind Shells, SMB Evasion
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Command sequence for deep internal network pivots
+* Key terms from notes: Named pipes, SMB pivot, encrypted bind shell, MSF6 routing
+* Explicit emphasis in notes: "Internal pivots ko fully encrypt karo!"
+* Notes mein jo analogies/examples the: None
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Named pipes, SMB pivot, `windows/meterpreter/bind_named_pipe`, `payload/windows/meterpreter/reverse_tcp_rc4`, MSF6 routing, internal network evasion, encrypted bind shell, lateral movement, psexec with named pipes, stealth pivot, ⭐"Internal pivots ko fully encrypt karo!"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Internal network mein port 4444 aur 445 par deep inspection/firewalls setup the.
+* Fixing/Iteration Phase: Standard `bind_tcp` pakda ja raha tha. MSF6 ka naya `bind_named_pipe` payload use kiya.
+* Live Production Phase: Compromised machine se internal server par psexec chalaya using named pipes. Traffic normal Windows SMB communication ke andar blend ho gaya, aur IDS/IPS us internal pivot ko detect nahi kar paaye.
+
+---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
 
