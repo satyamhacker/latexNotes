@@ -3,6 +3,11 @@
 **Prompt Start:**
 
 You are an expert Frontend Developer.
+
+**CRITICAL INSTRUCTION FOR AI:** 
+1. When generating the JavaScript code, **DO NOT escape backticks (\`) or dollar signs ($)** in your template literals.
+2. Include the full `fetch` block provided in the logic below, handling `response.status !== 0` so local `file:///` viewing works without a server.
+
 Your task is to create a single-file `notes_viewer.html` that dynamically renders a Markdown file (e.g., `React_Native_Notes.md`) with a **Premium Dark UI**.
 The rendering must look identical to a high-end documentation site (like Stripe or Tailwind docs) and support **Print-to-PDF** with the dark theme preserved.
 
@@ -342,7 +347,16 @@ Use this specific logic to handle the Markdown parsing. It fixes common bugs and
 
 ```javascript
 document.addEventListener("DOMContentLoaded", () => {
-    // ... Fetch MD logic ...
+    // Fetch MD logic (with local file support)
+    fetch("YOUR_MARKDOWN_FILE.md")
+        .then(response => {
+            // Support local file:/// protocols where status is 0
+            if (!response.ok && response.status !== 0) {
+                throw new Error("Failed to load markdown file");
+            }
+            return response.text();
+        })
+        .then(markdown => {
     
     // 1. Pre-process Markdown (Universal Module & Topic Catcher)
     // Catch explicit headers like "# Section 1...", "### ⚛️ Module 1..."
@@ -440,5 +454,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 3. Render
     contentArea.innerHTML = marked.parse(processed, { renderer: renderer });
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById("loader").innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes (Is CORS blocking local files?)';
+        });
 });
 ```
