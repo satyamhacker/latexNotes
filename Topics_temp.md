@@ -578,6 +578,28 @@ Subtopics: Exposed Device Dorking, Physical Security Risk, Network Entry Point, 
 * Live Production Phase: Exposed devices se internal network compromise ya industrial espionage ho sakta hai. Google se better results is case mein Shodan deta hai.
 * Additional context: Sirf intentionally public (traffic/weather) cameras dekhna ethical hai, private devices ko password na hone par bhi access karna illegal aur privacy violation hai.
 
+Topic 6: Open Directory & Cloud Drive Dorking (Hunting Courses & Large Files)
+Subtopics: Open Directories, "Index of" Mastery, Media Hunting, PDF/Course Leaks, Google Drive Recon, Mega.nz Searching, Extension Exclusion Trick
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Heavy on exact dorks and exclusion syntax
+* Key terms from notes: Open directory, Index of, Google Drive links, Premium courses, File exclusions
+* Explicit emphasis in notes: "Minus (-) operator open directories ka best friend hai" — to remove HTML/PHP pages and get direct files.
+* Notes mein jo analogies/examples the: "Digital godown ke darwaze khule chhod dena."
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[intitle:"index of", "parent directory", `intitle:"index of" (mp4 | mkv | pdf | zip) "ethical hacking" -html -htm -php -jsp`, `site:drive.google.com "CEH" | "OSCP" | "course"`, `site:mega.nz "leak" | "password"`, `intitle:"index of" intext:api_key.txt`, `intitle:"index of" "DCIM"`, ⭐-html -htm -php -jsp[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Premium courses, leaked databases, ya private company files dhoondhne ke liye `intitle:"index of"` ke saath specific file formats aur keywords combine karna.
+* Fixing/Iteration Phase: Search results se web pages/blogs hatane ke liye `-html -htm -php -jsp` add karna taaki sirf direct server file structure mile.
+* Live Production Phase: Pentesters target domain par open directories dhoondhte hain (`site:target.com intitle:"index of"`) jahan galti se backup `.zip` ya `.sql` files chhooti hoti hain.
+
 --- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -590,9 +612,10 @@ Topic 2: Login Page Dorking
 Topic 3: Sensitive File Dorking
 Topic 4: Vulnerability Report Dorking
 Topic 5: Exposed Device Dorking
+Topic 6: Open Directory & Cloud Drive Dorking (Hunting Courses & Large Files)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 74
+Sections: 1 | Topics: 6 | Subtopics: 81
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -678,6 +701,28 @@ Subtopics: contains: Operator, Link Discovery, Directory Listings, Navigation Pa
 * Live Production Phase: DocumentCorp assessment mein pentester ko ek internal directory listing mili jisme confidential documents ke links the, aur page publicly accessible hone ki wajah se report karke bounty earn ki.
 * Additional context: (N/A)
 
+Topic 4: Yandex & DuckDuckGo (Visual Recon & Bangs)
+Subtopics: Yandex Image Search, Facial Recognition, Eastern Europe Targeting, DuckDuckGo Bangs, Privacy Engine Dorking, Cross-Engine Validation
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Bullet points of DDG Bangs and Yandex specific use cases
+* Key terms from notes: Yandex Reverse Image, Facial tracking, DDG Bangs, `!`, Uncensored search
+* Explicit emphasis in notes: "Yandex ki image search Google se 10x zyada aggressive hai."
+* Notes mein jo analogies/examples the: "Google images cheezein dhoondhta hai, Yandex chehre (faces) dhoondhta hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Yandex, Reverse Image Search, Facial tracking, Eastern Europe, Baidu, DuckDuckGo, DDG Bangs, `!gh` (GitHub), `!r` (Reddit), `!so` (StackOverflow), `!w` (Wikipedia), `!pwned`, `!shodan`, `!domain`, uncensored results, PimEyes, FaceCheck.id]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Target employee ki ek image lekar use Yandex ya PimEyes par reverse search karna taaki uske hidden social media accounts ya forum profiles mil sakein.
+* Fixing/Iteration Phase: DuckDuckGo par `!gh` ya `!shodan` jaisi Bang commands use karke bina us site par gaye direct fast reconnaissance karna.
+* Live Production Phase: Agar target company Russian, Asian ya Eastern European hai, toh Google ki jagah seedha Yandex/Baidu par target domains run karna kyunki Google wahan heavily filtered hota hai.
+
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Sections & Topics Extracted in this phase:**
@@ -687,6 +732,7 @@ Section 1: Module 5 - Beyond Google (Other Search Engines)
    Topic 1: Why Use Bing? (Different Results & Operators)
    Topic 2: Bing Dork: ip: (Reverse IP Lookup)
    Topic 3: Bing Dork: contains: (Finding File Links)
+   Topic 4: Yandex & DuckDuckGo (Visual Recon & Bangs)
 
 ```
 
@@ -698,9 +744,10 @@ Section 1: Module 5 - Beyond Google (Other Search Engines)
 Topic 1: Why Use Bing? (Different Results & Operators)
 Topic 2: Bing Dork: ip: (Reverse IP Lookup)
 Topic 3: Bing Dork: contains: (Finding File Links)
+Topic 4: Yandex & DuckDuckGo (Visual Recon & Bangs)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 24
+Sections: 1 | Topics: 4 | Subtopics: 30
 
 ⏳ **Waiting for:** Next phase/module notes
 
@@ -1071,6 +1118,7 @@ Sections: 1 | Topics: 4 | Subtopics: 57
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+
 ==================================================================================
 
 
@@ -1193,6 +1241,99 @@ Topic 4: Course Recap & Future Roadmap
 Sections: 2 | Topics: 4 | Subtopics: 30+
 
 ⏳ **Waiting for:** Next phase/module notes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+==================================================================================
+
+# Module 10: Advanced Cloud, Social & Dark Web Recon
+
+Cloud infrastructure, messaging apps, aur dark net leaks se real-time zero-days aur intelligence extract karna. [⚠️ Derived]
+
+--10--Module 10: Modern Cloud & API Recon--
+Topic 1: Cloud Storage Hunting (Azure, GCP, Firebase)
+Subtopics: Firebase Database Leaks, Azure Blob Storage, GCP Buckets, Misconfigured Storage, Firebaseio Endpoints, GraphQL Introspection, Automation Tools
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Heavy on exact URL patterns and API endpoint discovery
+* Key terms from notes: Firebase, core.windows.net, storage.googleapis.com, GraphQL, Introspection query, `.json` trick
+* Explicit emphasis in notes: "Firebase mein `.json` lagana bug bounty ka sabse aasan $500 hai."
+* Notes mein jo analogies/examples the: "S3 bucket purana zamana hai, aaj ka data Firebase aur Azure mein leak ho raha hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[`site:firebaseio.com`, `.json`, `site:core.windows.net`, `site:storage.googleapis.com`, `inurl:graphql`, `intext:"__schema"`, GraphQL Introspection, `site:target.com inurl:/graphql`, Firebase Scanner, Azure misconfiguration, anonymous read access, ⭐.json trick[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Target ke Android/iOS app ko decompile karke uski Firebase database URL (`target.firebaseio.com`) nikalna.
+* Fixing/Iteration Phase: Us URL ke aage `.json` lagakar browser mein open karna. Agar permission misconfigured hai, toh poora live database browser mein dump ho jayega.
+* Live Production Phase: GraphQL endpoints par introspection queries bhejkar poori API ka map (hidden queries aur mutations) nikalna aur unauthenticated data access report karna.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+
+# Module 11: SOCMINT & Instant Messaging OSINT
+
+
+Topic 1: Telegram & Discord OSINT
+Subtopics: Telegago, Invite Link Scraping, Telegram Dorking, Discord Chat Indexing, Premium Leak Channels, Threat Intel Gathering
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Specific Google dorks for messaging platforms
+* Key terms from notes: t.me, Telegago, Discord invites, SOCMINT, sysadmin rants, credential markets
+* Explicit emphasis in notes: "Aajkal hackers dark web nahi, Telegram use karte hain."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[`site:t.me "target.com"`, `site:t.me "database dump" | "combo"`, Telegago search, `site:[discord.com/invite](https://discord.com/invite) "target"`, `inurl:discord.gg`, `site:reddit.com "sysadmin" "target.com"`, `site:twitter.com "target.com" "down" | "server"`, Telepathy tool, DiscordScraper]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Google dorks use karke Telegram channels (`site:t.me`) dhoondhna jahan target company ka naam mentioned ho.
+* Fixing/Iteration Phase: Reddit (`site:reddit.com`) aur Twitter par employees ki aapas ki technical discussions track karna taaki internal infrastructure (jaise kaunsa cloud provider ya server version use ho raha hai) pata chale.
+* Live Production Phase: Bug bounty hunters Discord aur Telegram par hackers ke private leak groups ko passively monitor karte hain. Jaise hi kisi target ka leak aata hai, wo vulnerability analyze karke jaldi report karte hain.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+
+# Module 12: Deep/Dark Web & Advanced Leak Engines
+
+Topic 1: Dark Web Recon & Data Leak Engines
+Subtopics: Tor Network Dorking, Ahmia.fi, Onion Links, BreachForums Alternatives, IntelligenceX, DeHashed, Reverse Hash Searching, PasteHunter Automation
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical and Strict Ethical Warnings
+* Notes mein content volume: Clear web leak engines vs Dark web directories
+* Key terms from notes: Tor, .onion, Ahmia, IntelX, DeHashed, Leak-lookup, Hash reversing, Exploit.in
+* Explicit emphasis in notes: "Dark web par dhoondho, par khud ko dox mat karo. VPN + Tor hamesha!"
+* Notes mein jo analogies/examples the: "Google surface water hai. IntelX mariana trench hai jahan sara dooba hua data milta hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Tor Browser, Ahmia.fi, `.onion`, Torch, IntelX, intelligenceX.io, DeHashed.com, Leak-lookup.com, Snusbase, reverse password search, BreachForums, Exploit.in, `site:*.onion "target.com"`, email to password reversal, MD5, SHA256, ⭐VPN + Tor[emphasized in notes], ⭐IntelX[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Target company ke domains ya CEO ki emails ko IntelX.io aur DeHashed par search karna taaki unke past leaked passwords (clear text) mil sakein.
+* Fixing/Iteration Phase: Tor browser set up karke Ahmia.fi (Dark web search engine) par target company ka naam dhoondhna taaki ransomware gangs ke leak sites (e.g., LockBit) par early warnings mil sakein.
+* Live Production Phase: Red team engagements mein purane leaked passwords (DeHashed se nikale hue) ko use karke credential stuffing attack perform karna aur corporate VPN ya Office365 mein initial foothold banana.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
