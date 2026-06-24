@@ -2210,3 +2210,118 @@ Total Sections: 1 | Total Topics: 4 | Total Subtopics: 42 (approx across topics)
 
 ==================================================================================
 
+
+
+# Module 14: The Pentester's Operational Workspace
+
+📦 Processing: Phase/Module 14 — The Pentester's Operational Workspace
+
+=Section 1: Workflow Management & Data Manipulation=
+Pentester ka daily CLI workflow: Session maintain karna aur massive data (logs/JSON) ko CLI par filter karna. [⚠️ Derived]
+
+--1--Workflow Management & Data Manipulation--
+Topic 1: Terminal Multiplexing (tmux & screen)
+Subtopics: Terminal Multiplexer Concept, tmux vs screen, Sessions vs Windows vs Panes, Install tmux, Basic tmux Shortcuts, Detach and Attach Sessions, Session Persistence, Scripting tmux, Pentester Relevance, Common Mistakes
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Command snippets, shortcut keys table, and session management scenarios
+* Key terms from notes: tmux, screen, multiplexer, session, pane, window, detach, attach, background tasks, persistence
+* Explicit emphasis in notes: "CRITICAL Fix: Lamba nmap scan hamesha tmux mein chalayein taaki SSH disconnect hone par scan fail na ho."
+* Notes mein jo analogies/examples the: "Multiple Monitor" analogy — ek hi terminal screen ko 4 virtual monitors (panes) mein divide karna.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[tmux, screen, terminal multiplexer, tmux new -s recon, tmux attach -t recon, tmux ls, Ctrl+b, Ctrl+b d, Ctrl+b %, Ctrl+b ", Ctrl+b arrow-keys, session persistence, background process, SSH disconnect, long-running scans, pane synchronization]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Penetration testing environment (Kali/Parrot) setup karte waqt default tmux profile configure karna.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Pentester target server pe SSH karta hai, turant `tmux` start karta hai, ek pane mein `nmap`/`gobuster` chalata hai aur dusre pane mein local privilege escalation scripts search karta hai. Connection drop hone par wapas SSH karke `tmux attach` karta hai.
+* Additional context: Reverse shells handle karte waqt tmux bahut crucial hai.
+
+Topic 2: Deep Data Parsing & Native Encoding (sed, jq, base64)
+Subtopics: Advanced Text Parsing, Stream Editor (sed) Syntax, JSON Parsing (jq) Syntax, Regular Expressions (Regex) Basics, Base64 Encoding/Decoding, Hexdump (xxd), Hashing (md5sum/sha256sum), Payload Obfuscation, Extracting API Keys
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Heavy piped commands, JSON parsing examples, and payload encoding techniques
+* Key terms from notes: sed, jq, regex, base64, xxd, md5sum, sha256sum, JSON API, obfuscation, bad characters
+* Explicit emphasis in notes: "Stealth Tip: Payloads ko hamesha base64 encode karke target par bhejkar decode karein to bypass bad-character filtering."
+* Notes mein jo analogies/examples the: "Filter aur Translator" analogy — `jq` JSON data ka translator hai, aur `base64` malicious code ka disguise (mask) hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[sed, Stream Editor, jq, JSON Processor, Regex, Regular Expressions, base64, base64 -d, xxd, hexdump, xxd -r, md5sum, sha256sum, tr, sed 's/old/new/g', curl | jq '.data.token', payload obfuscation, bad characters, data exfiltration, hash verification, grep -Eo]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Exploit script likhte waqt malicious commands ko base64 mein encode karna taaki WAF block na kare.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Pentester target web application ke API endpoint ko hit karta hai, JSON output milta hai, usko `jq` mein pipe karke sirf "admin_tokens" extract karta hai. Phir reverse shell code ko base64 encode karke target ke `/tmp` folder mein execute karta hai.
+* Additional context: Bina GUI (CyberChef) ke CLI par data encode/decode karna aana chahiye.
+
+=Section 2: System Interaction & Network Capture=
+Target system par hardware resources samajhna, network shares mount karna aur live traffic capture karna. [⚠️ Derived]
+
+--2--System Interaction & Network Capture--
+Topic 3: Architecture Enum & Advanced Mounting (Loot Extraction)
+Subtopics: Hardware Enumeration Commands, Architecture Identification, Block Devices Check, Mount Command Basics, Mounting NFS Shares, Mounting SMB/CIFS Shares, Unmounting (umount), Pentester Relevance, Preparing Target-Specific Payloads
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Command outputs, flag explanations, and network mounting syntax
+* Key terms from notes: uname, lscpu, arch, lsblk, fdisk, mount, umount, NFS, CIFS, /mnt, /media, architecture, payload compatibility
+* Explicit emphasis in notes: "CRITICAL Fix: Payload compile karne se pehle target ka architecture (x86 vs x64 vs ARM) zaroor verify karein."
+* Notes mein jo analogies/examples the: "Plugging a USB" analogy — remote network share ko apne system ke folder (/mnt) mein ek virtual USB drive ki tarah plug karna.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[uname -a, uname -r, lscpu, arch, cat /etc/os-release, lsblk, fdisk -l, df -h, mount, umount, mount -t nfs, mount -t cifs, /mnt, /media, //ip/share, payload architecture, x86, x86_64, aarch64, loot extraction, unprivileged mount]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Pentester target ka OS/kernel version (`uname -a`) check karta hai aur apne Kali system par exactly ussi architecture ke liye C/C++ exploit compile karta hai.
+* Fixing/Iteration Phase: Agar `umount` "target is busy" error de, toh `lsof` ya `fuser` se processes kill karke unmount karna.
+* Live Production Phase: Internal network scan ke dauran open NFS share milta hai. Pentester usko apne local `/mnt/target_nfs` par mount karta hai, `.git` ya `config.php` files copy karta hai (loot), aur phir safely unmount kar deta hai.
+* Additional context: Storage structure check karna (`lsblk`) disk forensics ke liye bhi useful hai.
+
+Topic 4: Live Network Traffic Capture (tcpdump)
+Subtopics: Packet Capture Basics, tcpdump Syntax, BPF (Berkeley Packet Filter) Basics, Interface Selection, Filtering by Port/IP, Saving to PCAP, Reading PCAP files, Pentester Relevance, Sniffing Cleartext Credentials
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Traffic filtering syntax, PCAP file handling, and credential sniffing scenarios
+* Key terms from notes: tcpdump, tshark, pcap, sniffing, promiscuous mode, cleartext protocols, FTP/HTTP, packet capture
+* Explicit emphasis in notes: "Stealth Tip: tcpdump ka output hamesha .pcap file mein save karein (-w) aur Wireshark mein analyze karein taaki terminal hang na ho."
+* Notes mein jo analogies/examples the: "Wiretapping" analogy — network cable se guzarne wale har packet/data (phone call) ko intercept karke sun-na.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[tcpdump, tshark, packet capture, pcap, .pcap, sniffing, tcpdump -i eth0, tcpdump -i any, port 80, port 21, src host, dst host, tcpdump -w capture.pcap, tcpdump -r capture.pcap, -A, -X, promiscuous mode, cleartext credentials, FTP, HTTP, Telnet, man-in-the-middle, MITM]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: (N/A)
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Pentester ko ek weak server ka root milta hai. Woh background mein `tcpdump -i any port 21 -w ftp.pcap` chalata hai. Jab koi admin FTP par login karta hai, pentester .pcap file download karke usme se plaintext username/password nikal leta hai further lateral movement ke liye.
+* Additional context: Target par GUI (Wireshark) available nahi hota, isliye CLI sniffing (tcpdump) master karna zaroori hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+### 📌 Insertion Note for You:
+
+Jab tum apne AI se notes generate karwaoge, toh pehle Module 1 se 13 generate karwana, aur uske theek baad is **Module 14** ka skeleton pass kar dena. Yeh properly tumhare "Linux for Pentester" course ko ek practical, action-oriented climax dega!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
