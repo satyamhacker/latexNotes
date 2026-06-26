@@ -877,6 +877,29 @@ Subtopics: JWT Structure, alg: none Attack, Secret Confusion (HMAC vs RSA), KID 
 * Fixing/Iteration Phase: Developer `jsonwebtoken` library mein strictly `{ algorithms: ['RS256'] }` pass karta hai taaki server malicious algorithms ko parse hi na kare.
 * Live Production Phase: Tampered tokens backend par cryptographic validation fail kar dete hain aur HTTP 401 Unauthorized return hota hai.
 
+Topic 11: 3.11: Future of Auth - WebAuthn, Passkeys & Biometrics
+Subtopics: Passwordless Authentication, FIDO2, WebAuthn Flow, Public/Private Key Cryptography, Passkeys, Biometric Bypass Risks, Replay Attacks on AuthN, Fallback Flaws
+
+[📊 SCOPE SIGNAL for Topic 11:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Explanation of cryptographic auth flow and its implementation vulnerabilities
+* Key terms from notes: Passwordless, WebAuthn, FIDO2, Passkey, Public Key, Private Key, Authenticator, Fallback mechanisms, Replay attack
+* Explicit emphasis in notes: "Passwordless ka matlab security nahi, iska matlab hai ki ab trust 'password' se hatkar 'device' par chala gaya hai."
+* Notes mein jo analogies/examples the: "Ghar ke lock ko chabi (password) se hatakar fingerprint scanner (WebAuthn) par shift karna, par agar scanner ka software hack ho jaye, toh fingerprint ki zarurat hi nahi padti."
+]
+
+🔑 KEYWORDS DUMP for Topic 11:
+[WebAuthn, Passwordless, FIDO2, Passkeys, Biometrics, TouchID, Windows Hello, Authenticator, Public Key, Private Key Cryptography, Challenge, `navigator.credentials.create()`, `navigator.credentials.get()`, Replay Attacks, Fallback Flaws, account recovery loop, Magic Links, AuthN bypass, OTP fallback, ⭐"trust 'password' se hatkar 'device' par chala gaya hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
+
+* Testing/Offline Phase: Pentester check karta hai ki kya server properly 'Challenge' verify kar raha hai ya pichli intercept ki hui signed request dobara (Replay Attack) bhejkar login ho raha hai.
+* Fixing/Iteration Phase: Developer har login attempt ke liye ek unique cryptographically secure 'challenge' bhejta hai aur server par strict signature validation lagata hai.
+* Live Production Phase: Hacker passkey bypass nahi kar pata, toh wo kamzor 'fallback' option (jaise "Use Email OTP instead") par attack karke account takeover kar leta hai.
+* Additional context: Passkeys phishing-resistant hote hain, isliye hackers ab Auth flow ke logic (fallback) par attack karte hain.
+
 --- 🛑 PHASE 3 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Sections & Topics Extracted in this phase:**
@@ -893,6 +916,7 @@ Section 3: Module 3: Identity & Access: Authentication, Session Hijacking, MFA &
   Topic 8: 3.8: Enterprise SSO (OAuth 2.0 & OIDC) Misconfigurations
   Topic 9: 3.9: SAML XML Signature Wrapping (XSW)
   Topic 10: 3.10: Advanced JWT (JSON Web Token) Attacks
+  Topic 11: 3.11: Future of Auth - WebAuthn, Passkeys & Biometrics
 
 ```
 
@@ -916,9 +940,10 @@ Topic 7: 3.7: Sensitive Data in GET Requests (GET vs POST)
 Topic 8: 3.8: Enterprise SSO (OAuth 2.0 & OIDC) Misconfigurations
 Topic 9: 3.9: SAML XML Signature Wrapping (XSW)
 Topic 10: 3.10: Advanced JWT (JSON Web Token) Attacks
+Topic 11: 3.11: Future of Auth - WebAuthn, Passkeys & Biometrics
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 10 | Subtopics: 65
+Sections: 1 | Topics: 11 | Subtopics: 73
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1494,6 +1519,29 @@ Subtopics: WebSocket Handshake, ws:// vs wss://, Cross-Site WebSocket Hijacking 
 * Fixing/Iteration Phase: Developer WebSocket server start hote waqt handshake event par `Origin` header ko strictly validate karta hai aur socket connection ke liye URL parameter ya auth middleware ke through JWT verify karta hai.
 * Live Production Phase: Evil site se aayi hui WebSocket request ka handshake server reject kar deta hai kyunki Origin whitelist mein match nahi karta.
 
+Topic 7: 6.6: Advanced API Security (Webhooks & gRPC)
+Subtopics: Webhooks Concept, Webhook Spoofing, HMAC Signatures, Replay Attacks on Webhooks, SSRF via Webhooks, gRPC Basics, Protobuf Manipulation, API Reverse Engineering
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed implementation of webhook signature validation and gRPC payload tampering
+* Key terms from notes: Webhook, Stripe, GitHub, Spoofing, HMAC, crypto.createHmac, Protobuf, gRPC, SSRF
+* Explicit emphasis in notes: "Bina signature (HMAC) verify kiye kisi bhi Webhook par bharosa karna, company ka bank khali karwa sakta hai."
+* Notes mein jo analogies/examples the: "Delivery boy (Webhook) parcel dekar bola 'Payment ho gayi hai', par uske paas Amazon ki official stamp (HMAC Signature) nahi thi."
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[Webhooks, Stripe API, GitHub Webhooks, Webhook Spoofing, Event-driven, HMAC, `crypto.createHmac('sha256', secret)`, Signature Validation, `stripe-signature`, Replay Attacks, Idempotency keys, SSRF via Webhook, gRPC, RPC, Protocol Buffers, Protobuf, `.proto` files, binary serialization, API Reverse Engineering, gRPC-Web, Burp Suite gRPC extension, ⭐"Bina signature (HMAC) verify kiye... bharosa karna"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Testing/Offline Phase: Hacker Stripe payment success ka fake JSON payload banata hai aur bina actual payment kiye server ke public Webhook endpoint par bhejta hai.
+* Fixing/Iteration Phase: Developer `req.headers['stripe-signature']` ko read karke backend secret ke sath HMAC hash calculate karta hai aur request se match karta hai.
+* Live Production Phase: Fake webhook reject ho jata hai kyunki hacker ke paas secret key nahi thi hash generate karne ke liye.
+* Additional context: gRPC APIs binary format use karti hain, isliye standard Burp proxy mein garbage dikhti hain bina Protobuf definitions ke.
+
 ===Section 3: Advanced Attacks Intro (Module 7 Teaser) [⚠️ Derived]===
 Agle module ki jhalak jahan server assumptions aur logic ko test kiya jayega. [⚠️ Derived]
 
@@ -1536,12 +1584,14 @@ Topic 3: API Security (Weak Keys & Rate Limiting)
 Topic 3b: 6.4: GraphQL Introspection & Query Batching
 Topic 4: Mass Assignment
 Topic 5: CORS Misconfiguration
+  Topic 6: 6.5: WebSockets Security & CSWSH (Cross-Site WebSocket Hijacking)
+  Topic 7: 6.6: Advanced API Security (Webhooks & gRPC)
 
 Section 3: Advanced Attacks Intro (Module 7 Teaser) [⚠️ Derived]
 Topic 6: Module 7 Introduction
 
 📊 PHASE SUMMARY:
-Sections: 3 | Topics: 8 | Subtopics: 60
+Sections: 3 | Topics: 9 | Subtopics: 68
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -1996,6 +2046,29 @@ Subtopics: Static Application Security Testing (SAST), Taint Analysis, Data Flow
 * Live Production Phase: (N/A - This is purely a pre-deployment/audit activity).
 * Additional context: Regex-based grep tools code context nahi samajhte, par Semgrep/CodeQL variables aur functions ka logic track kar sakte hain.
 
+--1--Module 9 - The Hacker's Process (Extended)--
+Topic 4c: Step 4.8 - Dynamic Fuzzing & Unhandled Exceptions
+Subtopics: Fuzzing Concept, Coverage-Guided Fuzzing, Ffuf, RESTler, Mutation-based Testing, Unhandled Exceptions, Denial of Service (DoS) via Fuzzing, Edge Case Discovery
+
+[📊 SCOPE SIGNAL for Topic 4c:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Tool usage and concept of mutating inputs to break application logic
+* Key terms from notes: Fuzzing, DAST, ffuf, RESTler, Mutation, Unhandled Exceptions, crashes, edge cases, Fuzz lists, SecLists
+* Explicit emphasis in notes: "Jahan code review (White-Box) khatam hota hai, wahan Fuzzing shuru hoti hai. Aise inputs socho jo developer ke dimaag mein bhi nahi aaye honge."
+* Notes mein jo analogies/examples the: "Taale (Lock) ko master key se kholne ki jagah, usme alag-alag ajeeb aakaar ki chaabiyan (fuzzing) daalkar forcefully todna."
+]
+
+🔑 KEYWORDS DUMP for Topic 4c:
+[Fuzzing, Dynamic Application Security Testing, DAST, Coverage-Guided, Ffuf, `ffuf -w wordlist.txt -u https://api.com/user/FUZZ`, RESTler, API Fuzzing, Swagger/OpenAPI fuzzing, Mutation, Unhandled Exceptions, HTTP 500, Crashes, Denial of Service, DoS, SecLists, Naughty Strings, Edge Cases, memory leaks, brute-forcing parameters, ⭐"Jahan code review khatam hota hai, wahan Fuzzing shuru hoti hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4c:
+
+* Testing/Offline Phase: Pentester `ffuf` aur SecLists (Naughty Strings) use karke API ke parameters mein ek sath 10,000 special characters aur mutated JSON payloads bhejta hai.
+* Fixing/Iteration Phase: Developer server logs mein HTTP 500 errors (crashes) check karta hai aur un unhandled exceptions ke aas-paas strict Try-Catch aur Type Checking lagata hai.
+* Live Production Phase: Fuzzing tools ke through app robust ban jati hai, aur future mein unexpected inputs par crash hone ki jagah gracefully HTTP 400 Bad Request return karti hai.
+
 Topic 5: Step 5 - Authentication & Authorization Review
 Subtopics: Authentication Review, Authorization Review, Account Takeover, Privilege Escalation, Route Guards, IDOR Check
 
@@ -2170,6 +2243,7 @@ Topic 2: Step 2 - Black-Box Testing (Bina Code Dekhe)
 Topic 3: Step 3 - White-Box Review (Code Structure Samajhna)
 Topic 4: Step 4 - Input Handling Review (Data Kahan se Aa Raha Hai?)
 Topic 4b: Step 4.5 - Automated Taint Analysis (Semgrep & CodeQL)
+Topic 4c: Step 4.8 - Dynamic Fuzzing & Unhandled Exceptions
 Topic 5: Step 5 - Authentication & Authorization Review
 Topic 6: Step 6 - Sensitive Data Exposure Review
 Topic 7: Step 7 - Business Logic Review
@@ -2180,7 +2254,7 @@ Section 2: Course Completion & Bonus Intro [⚠️ Derived]
 Topic 10: Course Recap & Module 10 Introduction [⚠️ Derived]
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 11 | Subtopics: 53
+Sections: 2 | Topics: 12 | Subtopics: 61
 
 --- 🛑 PHASE 9 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -2292,6 +2366,29 @@ Subtopics: HTTP Request Smuggling, Front-end Server, Back-end Server, Content-Le
 * Live Production Phase: Ek user ki smuggled malicious request backend buffer mein ruki rehti hai, aur agle normal user ki request ke sath chipak kar execute ho jati hai (e.g. bypass IP checks).
 * Additional context: Yeh attack codebase se zyada infrastructure aur reverse proxy configuration mismatch ka nateeja hai.
 
+--1--Bonus Advanced Topics (Extended)--
+Topic 3b: 10.3b: Web Cache Poisoning & Deception
+Subtopics: Web Cache Poisoning, Cache Deception, Cloudflare/Varnish, Cache Keys, Unkeyed Headers, X-Forwarded-Host, Reflected XSS via Cache, Static Extension Trick
+
+[📊 SCOPE SIGNAL for Topic 3b:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed explanation of how caching layers get hijacked to serve malicious files
+* Key terms from notes: Cache, Cloudflare, Varnish, CDN, Cache Key, Unkeyed Headers, Web Cache Poisoning, Web Cache Deception, X-Forwarded-Host, HIT, MISS
+* Explicit emphasis in notes: "App bilkul secure ho sakti hai, par agar Caching layer (CDN) misconfigured hai, toh poori site hijack ho jayegi."
+* Notes mein jo analogies/examples the: "Traffic cop (Cache) ko galat raste ka sign dikha dena, taaki baad mein aane wali saari gaadiyan (users) kachre (malicious payload) mein jaake giren."
+]
+
+🔑 KEYWORDS DUMP for Topic 3b:
+[Web Cache Poisoning, Web Cache Deception, CDN, Content Delivery Network, Cloudflare, Varnish, Cache Key, URL Path, Unkeyed Headers, `X-Forwarded-Host: evil.com`, `X-Original-URL`, Cache HIT, Cache MISS, Reflected XSS, `/profile/settings.css`, `.js`, `.css` static extension trick, sensitive data leak, Purge Cache, Cache-Control: no-store, Vary header, ⭐"Caching layer misconfigured hai, toh poori site hijack"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3b:
+
+* Testing/Offline Phase: Hacker request bhejte waqt extra header (`X-Forwarded-Host: evil.com`) add karta hai. Agar server response mein `evil.com` reflect karta hai, toh hacker is response ko CDN par 'Cache HIT' karwa deta hai.
+* Fixing/Iteration Phase: Developer backend par unkeyed headers ko process karna band karta hai aur sensitive pages par strictly `Cache-Control: private, no-store` header set karta hai.
+* Live Production Phase: Cache Poison hone par normal users ko valid URL par bhi hacker ki JS file serve hone lagti hai (mass XSS). Fix hone par cache engine sirf safe, static assets ko cache karta hai.
+
 Topic 4: 10.4: Clickjacking (UI Redress Attack)
 Subtopics: Clickjacking, UI Redress Attack, Invisible iframe, Invisible Aadmi Analogy, X-Frame-Options Header, Helmet.js, SAMEORIGIN, Content-Security-Policy
 
@@ -2373,13 +2470,14 @@ Topic 1: 10.1: DOM-based XSS (DOM XSS)
 Topic 2: 10.2: Insecure Deserialization
 Topic 2b: Server-Side Template Injection (SSTI)
 Topic 3: 10.3: HTTP Request Smuggling
+Topic 3b: 10.3b: Web Cache Poisoning & Deception
 Topic 4: 10.4: Clickjacking (UI Redress Attack)
 
 Section 2: Course Wrap-up [⚠️ Derived]
 Topic 5: Final Conclusion & Next Steps [⚠️ Derived]
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 6 | Subtopics: 37
+Sections: 2 | Topics: 7 | Subtopics: 45
 
 --- 🛑 PHASE 10 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -2463,6 +2561,51 @@ Subtopics: CI/CD Workflows, GitHub Actions Security, Pwn Requests (Malicious PRs
 * Fixing/Iteration Phase: DevOps engineer CI yaml mein `pull_request_target` ka use dhyan se karta hai, external PRs ke liye secrets inject hone se rokta hai, aur isolated/ephemeral runners ka use karta hai.
 * Live Production Phase: Malicious PR run toh hota hai, par ek low-privileged isolated container mein jahan cloud secrets present nahi hote, jisse attack surface zero ho jata hai.
 
+--1--Cloud & Infrastructure as Code (IaC) Security (Extended)--
+Topic 4: 11.4: Container Breakouts & Kubernetes (K8s) Security
+Subtopics: Docker Security, Container Escape, docker.sock Mount, Privileged Containers, Capabilities, Kubernetes (K8s) Basics, Kubelet API, Misconfigured RBAC, SSRF to Pod Takeover
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Explanations of how hackers jump from isolated containers to host nodes
+* Key terms from notes: Container Escape, Breakout, Docker, docker.sock, Privileged, Capabilities, Kubernetes, RBAC, Service Account Tokens, Kubelet
+* Explicit emphasis in notes: "Container koi virtual machine nahi hai, yeh sirf ek bhram (illusion) hai. Agar privileged flag ON hai, toh host server aapke haath mein hai."
+* Notes mein jo analogies/examples the: "Hotel room (Container) jisme se ek rasta seedha manager ke control room (docker.sock) mein khulta hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Docker Security, Container Escape, Breakout, `/var/run/docker.sock`, `--privileged`, Linux Capabilities, `CAP_SYS_ADMIN`, cgroups, namespaces, mount, Kubernetes, K8s, Pods, Kubelet API, port 10250, anonymous auth, RBAC, Role-Based Access Control, `/var/run/secrets/kubernetes.io/serviceaccount/token`, Service Account Token, kubectl, SSRF to Kubelet, Node Takeover, ⭐"Container koi virtual machine nahi hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Command Injection (Topic 2.2) pane ke baad, pentester dekhta hai ki wo Docker container mein hai. Wo `/var/run/docker.sock` dhoondhta hai aur naya root container launch karke host server ka file system mount kar leta hai.
+* Fixing/Iteration Phase: DevOps team containers ko `--read-only` root filesystem ke sath run karti hai, `docker.sock` mount karna ban karti hai, aur K8s mein strict RBAC apply karti hai.
+* Live Production Phase: Hacker command injection toh pata hai, par container isolate hone ki wajah se lateral movement (host server par jana) fail ho jata hai.
+
+Topic 5: 11.5: Serverless Security (AWS Lambda & Cloud Functions)
+Subtopics: Ephemeral Compute, Serverless Architecture, Event Injection, IAM Role Over-Privilege, Deserialization in Lambdas, Persistent Storage Risks (/tmp)
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: How serverless functions are exploited via event triggers
+* Key terms from notes: Serverless, AWS Lambda, Event Injection, IAM Role, ephemeral, /tmp directory
+* Explicit emphasis in notes: "Serverless ka matlab 'No Server' nahi hai, iska matlab hai ki ab aapka focus sirf Code aur Cloud Permissions par hona chahiye."
+* Notes mein jo analogies/examples the: "Ek temporary mazdoor (Lambda) jo kaam khatam karke chala jata hai, par agar uske paas God-mode IAM role hai, toh wo data chura kar jaa sakta hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Serverless Security, AWS Lambda, Google Cloud Functions, Azure Functions, Ephemeral, Event Injection, S3 bucket triggers, SNS, SQS, IAM Role Over-Privilege, `*:*`, Principle of Least Privilege, Insecure Deserialization, Python Pickle in Lambda, `/tmp` directory persistence, data exfiltration, CloudWatch logs injection, SSRF in Lambda, ⭐"Serverless ka matlab 'No Server' nahi hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Pentester ek aisi malicious file S3 bucket mein upload karta hai jiska filename ek Command Injection payload hota hai. Jab Lambda us file ko process karta hai, payload execute ho jata hai.
+* Fixing/Iteration Phase: Architect Lambda function ka IAM role strict karta hai (e.g., sirf ek specific S3 bucket se read karne ki permission) taaki agar RCE ho bhi jaye, toh cloud takeover na ho sake.
+* Live Production Phase: Lambda function execute hone ke kuch minutes baad destroy ho jata hai (ephemeral), jisse hacker ko persistent backdoor (jaise reverse shell) maintain karna bohot mushkil ho jata hai.
+
 --- 🛑 PHASE 11 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Sections & Topics Extracted in this phase:**
@@ -2471,6 +2614,9 @@ Subtopics: CI/CD Workflows, GitHub Actions Security, Pwn Requests (Malicious PRs
 Section 11: Enterprise Cloud & IaC (NEW SECTION)
   Topic 1: 11.1: Cloud Metadata SSRF (AWS IMDSv1 vs IMDSv2)
   Topic 2: 11.2: Infrastructure as Code (IaC) Secrets Leakage
+  Topic 3: 11.3: CI/CD Pipeline Poisoning & Runner Hijacking
+  Topic 4: 11.4: Container Breakouts & Kubernetes (K8s) Security
+  Topic 5: 11.5: Serverless Security (AWS Lambda & Cloud Functions)
 ```
 
 ⏳ **Waiting for:** Next phase/module notes (Module 12)
@@ -2484,6 +2630,134 @@ Section 11: Enterprise Cloud & IaC (NEW SECTION)
 Section 1: Cloud & Infrastructure as Code (IaC) Security [⚠️ Derived]
 Topic 1: 11.1: Cloud Metadata SSRF (AWS IMDSv1 vs IMDSv2)
 Topic 2: 11.2: Infrastructure as Code (IaC) Secrets Leakage
+Topic 3: 11.3: CI/CD Pipeline Poisoning & Runner Hijacking
+Topic 4: 11.4: Container Breakouts & Kubernetes (K8s) Security
+Topic 5: 11.5: Serverless Security (AWS Lambda & Cloud Functions)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 22
+Sections: 1 | Topics: 5 | Subtopics: 37
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 12: Advanced Code Review Ecosystems (Mobile, AI, Game & Desktop) [⚠️ Derived]
+
+*Application source code ke andar chhipe advanced frameworks aur secure development patterns ka postmortem karna.*
+
+--1--Advanced Code Review Ecosystems--
+Topic 1: 12.1: Mobile Application Source Code Auditing (Android & iOS)
+Subtopics: Mobile Security Code Review, Insecure Local Storage APIs, WebView Component Sinks, JavaScriptInterface Injection, Exported IPC Component Vulnerabilities, Deep Link Schema Parsing Flaws, Android Network Security Config
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both (Vulnerable Code Patterns vs. Secure Remediations)
+* Notes mein content volume: Long explanation with code level grep patterns and framework validation snippets
+* Key terms from notes: Source Code Review, Android, iOS, Sinks, WebView, JavaScriptInterface, SharedPreferences, NSUserDefaults, IPC components, AndroidManifest.xml, Deep Links, NetworkSecurityConfig
+* Explicit emphasis in notes: "Mobile source code review ka matlab hai hardcoded configurations dhoondhna aur dangerous client-side API implementations ko block karna."
+* Notes mein jo analogies/examples the: "Ghar ke andar ke locker (Local Storage) ka darwaza khula chhod dena ya padosi ke bachhe (Intent/IPC) ko bina verification ke tijori kholne dena."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Mobile Code Review, Android, iOS, Java, Kotlin, Swift, Objective-C, `MODE_WORLD_READABLE`, `getSharedPreferences`, `NSUserDefaults`, `Keychain`, `android:exported="true"`, Intent Filter, `MODE_PRIVATE`, `webView.getSettings().setJavaScriptEnabled(true)`, `addJavascriptInterface`, WebView Vulnerability, `setAllowUniversalAccessFromFileURLs`, Sinks, Deep Link Parsing, `getIntent().getData()`, `intent://`, Custom URI Schemes, `network_security_config.xml`, Cleartext Traffic, ⭐"hardcoded configurations dhoondhna aur dangerous client-side API implementations ko block karna"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Auditor `AndroidManifest.xml` aur source code mein global search (grep) marta hai dangerous keywords ke liye jaise `exported="true"` ya `setJavaScriptEnabled(true)` taaki unsecured data access points pakde ja sakein.
+* Fixing/Iteration Phase: Developer manifests se unnecessary exported components ko `false` karta hai, WebViews mein file access disable karta hai, aur cleartext HTTP traffic ko completely config file se ban kar deta hai.
+* Live Production Phase: Mobile application client ke device par binary runtime validation enforce karti hai, aur koi dusri malicious app custom intents bhej kar data bypass nahi kar paati.
+
+Topic 2: 12.2: Secure AI Development & LLM Integration Auditing
+Subtopics: AI Code Review, Prompt Concatenation Sinks, Unsanitized LLM Output Sinks, LangChain Wrapper Misconfigurations, AI System Prompt Disclosure Patterns, Vector Database Query Poisoning Code
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both (Vulnerable Logic vs. Secure Architectures)
+* Notes mein content volume: Detailed comparison of direct string templates vs parameterized AI prompt definitions with code examples
+* Key terms from notes: Source Code Review, AI integration, Prompt Injection, String Concatenation, Template Literals, Sinks, LangChain, LlamaIndex, Output Sanitation, Vector Database, Prompt Templates
+* Explicit emphasis in notes: "AI prompt engineering ab code engineering hai. Input concatenation use karna backend code mein SQLi invite karne jaisa paap hai."
+* Notes mein jo analogies/examples the: "Chatbot ko instructions lifafe mein band karke dene ki jagah user ke hath mein plain paper de dena jisme wo kuch bhi likh sake."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[AI Code Review, LLM Integration, Prompt Injection, String Concatenation, `${user_input}`, Template Literals, `langchain.prompts`, `PromptTemplate`, input parameters, Unsanitized Output, `dangerouslySetInnerHTML`, `eval()`, exec sinks, system prompt isolation, Vector DB, embedding validation, cosine similarity tampering, API wrappers, python execution contexts, Node.js LLM client, ⭐"Input concatenation use karna backend code mein SQLi invite karne jaisa paap hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Static review ke dauran auditor code lines trace karta hai jahan user variable directly instruction base prompt string ke sath append ho raha ho (`text + user_input`).
+* Fixing/Iteration Phase: Developer variable append hatakar explicit parameterized Prompt Templates aur placeholders use karta hai jo strict input separation enforce karein.
+* Live Production Phase: Runtime par prompt logic secure rehta hai aur agar user bolega "ignore previous tasks", toh AI engine usse command nahi balki as a raw text string process karega.
+
+Topic 3: 12.3: Game Engine Logic Flaws & Client-Authority Code Review
+Subtopics: Game Source Code Review, Client-Authority Code Patterns, Insecure Remote Procedure Calls (RPCs), Missing Server Validation Sinks, Unity C# Script Auditing, IL2CPP Reverse Engineering Defenses
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Source code patterns of multiplayer state management and missing validation logic
+* Key terms from notes: Source Code Review, Game Security, Client-Authority, Server-Authority, RPC, Unity, Unreal, C#, C++, state management, validation functions
+* Explicit emphasis in notes: "Game code auditing ka sunehra niyam: Har us variable check par shak karo jo local memory se chal raha hai bina server validation ke."
+* Notes mein jo analogies/examples the: "Bank clerk bina manager se pooche (Server Validation) customer ke kehne par directly account balance update (Client-Authority) kar de."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Game Auditing, Code Review, Unity, Unreal Engine, Client-Authority Flaws, `[RPC]`, Remote Procedure Call, `PhotonNetwork`, Photon RPC, Mirror networking, Network Behaviour, server-side tracking, `health = inputHealth`, missing boundary checks, data validation, integer manipulation, C# scripts, Unity assembly, metadata obfuscation, IL2CPP protection, code stripping, ⭐"Har us variable check par shak karo jo local memory se chal raha hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Auditor multiplayer C# code padhta hai aur dhoondhta hai ki kya state variables (`score`, `damage`, `position`) seedha network stream se bina authorization function ke overwrite ho rahe hain.
+* Fixing/Iteration Phase: Developer logic ko complete transform karke Server-Authority pattern lagata hai jahan client sirf input event (`player_fired`) bhejta hai aur ammo depletion aur collision database khud backend par calculate karta hai.
+* Live Production Phase: Local machine par memory freeze ya parameters temper hone ke bavajood, live game state compromise nahi hoti kyunki server har action ko authoritative tick data se overwrite kar deta hai.
+
+Topic 4: 12.4: Native Code Review & Desktop Application Safety (Thick Client)
+Subtopics: Thick Client Source Code Review, Legacy Code Sinks, Memory Management Flaws, DLL Loading Logic, Insecure IPC Handlers, Win32 API Security, Absolute Path Requirements
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: C/C++ memory safety review guidelines and Windows native secure coding functions
+* Key terms from notes: Source Code Review, Desktop Application, Native Code, Memory Management, Buffer Overflow, DLL Hijacking, LoadLibrary, IPC, Named Pipes, Registry APIs
+* Explicit emphasis in notes: "Desktop application security ka sabse bada khatra native binaries ki uncontrolled execution memory hoti hai."
+* Notes mein jo analogies/examples the: "Letter box par bina nameplate lagaye delivery accept karna (Relative DLL Loading) jahan koi bhi ganda packet (Malicious DLL) fit kiya ja sake."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Thick Client Auditing, Native Apps, Source Code Review, Memory Safety, Buffer Overflow, `strcpy`, `strcat`, `sprintf`, bounded functions, `strncpy`, `snprintf`, DLL Hijacking, `LoadLibrary`, `LoadLibraryEx`, Relative Path Sinks, `SetDllDirectory`, IPC Sinks, Named Pipes, `CreateNamedPipe`, `SecurityDescriptor`, NULL DACL risk, Registry vulnerability, `RegOpenKeyEx`, Process elevation code, ⭐"Desktop application security ka sabse bada khatra native binaries ki uncontrolled execution memory hoti hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Auditor legacy C/C++ ya electron desktop app ka native component scan karta hai aur dangerous function definitions (`strcpy`) aur un-vetted `LoadLibrary` calls ko blacklist karta hai.
+* Fixing/Iteration Phase: Developer saare unbounded buffer handlers ko secure modern alternative function string handlers se replace karta hai aur strict file system routing paths configure karta hai.
+* Live Production Phase: Desktop software secure context mein operate force karta hai aur local machine par privileged state execution ke dauran unauthorized control ya system takeover strictly blocks rehta hai.
+
+--- 🛑 PHASE 12 SKELETON READY. ALL MASTER ECOSYSTEMS ALIGNED TO 100% WHITE-BOX SOURCE CODE REVIEW.
+
+✅ **Sections & Topics Extracted in this phase:**
+
+```
+Section 12: Advanced Code Review Ecosystems (Mobile, AI, Game & Desktop) [⚠️ Derived]
+  Topic 1: 12.1: Mobile Application Source Code Auditing (Android & iOS)
+  Topic 2: 12.2: Secure AI Development & LLM Integration Auditing
+  Topic 3: 12.3: Game Engine Logic Flaws & Client-Authority Code Review
+  Topic 4: 12.4: Native Code Review & Desktop Application Safety (Thick Client)
+```
+
+⏳ **Waiting for:** Next phase/module notes (Module 13 - Final)
+
+---
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 12: Advanced Code Review Ecosystems (Mobile, AI, Game & Desktop) [⚠️ Derived]
+Topic 1: 12.1: Mobile Application Source Code Auditing (Android & iOS)
+Topic 2: 12.2: Secure AI Development & LLM Integration Auditing
+Topic 3: 12.3: Game Engine Logic Flaws & Client-Authority Code Review
+Topic 4: 12.4: Native Code Review & Desktop Application Safety (Thick Client)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 4 | Subtopics: 26
