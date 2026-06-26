@@ -508,35 +508,30 @@ Subtopics: XML External Entity, XXE, XML Parsing, SSRF, Denial of Service, libxm
 * Live Production Phase: Server ka XML parser <!ENTITY> tags ko bypass/ignore kar deta hai aur hacker ko file ka access nahi milta.
 * Additional context: JSON based APIs mein XXE nahi hota kyunki JSON mein entities ka concept nahi hai.
 
-Topic 4: 2.4: Broken Access Control (BAC)
-
-```
-Subtopics: Broken Access Control, Privilege Escalation, IDOR, Session User, URL Parameters, Check Ownership, Authentication vs Authorization, UUID
-
-```
+Topic 4: 2.4: Broken Access Control (BAC) & Multi-Tenant Data Isolation
+Subtopics: Broken Access Control, Privilege Escalation, IDOR, Session User Sinks, URL Parameters, Check Ownership, Authentication vs Authorization, UUID Migration, Multi-Tenant SaaS Isolation Sinks, ORM Global Query Scopes, Logical Tenancy Bypass
 
 [📊 SCOPE SIGNAL for Topic 4:
 
 * Depth Level: Deep
-* Coverage Angle: Both
-* Notes mein content volume: Long explanation + multiple examples + code
-* Key terms from notes: Broken Access Control, Privilege Escalation, IDOR, Insecure Direct Object Reference, req.session.user, req.params, 403 Forbidden, Authentication, AuthN, Authorization, AuthZ, UUID
-* Explicit emphasis in notes: "Kisi bhi resource (data) ko access dene se pehle hamesha do cheezein check karo: 1. Kya user login hai (Authentication)? 2. Kya is user ko yeh data dekhne ki permission hai (Authorization)?"
-* Notes mein jo analogies/examples the: Building ka darwaza jahan ek user ki chaabi se padosi ka apartment aur admin ka room dono khul jate hain
+* Coverage Angle: Both (Vulnerable Query Patterns vs. Architectural Scoping)
+* Notes mein content volume: Detailed syntax review of row-level data isolation, missing tenant scoping in queries, and secure database abstraction wrappers
+* Key terms from notes: Broken Access Control, IDOR, ownership verification, Multi-tenancy, tenant_id, Global Query Scopes, Mongoose middleware filters, Sequelize hooks
+* Explicit emphasis in notes: "IDOR sirf user ka id badalna nahi hai; enterprise SaaS mein asli tabahi tab hoti hai jab aap core data queries mein tenant_id filter lagana bhool jaate hain."
+* Notes mein jo analogies/examples the: "Ghar ka darwaza khula chhod dena (IDOR), ya ek hi badi almirah (Database) mein bina partitions/locks ke saare clients ki files (Cross-Tenant Data) mix karke rakh dena."
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[Broken Access Control, Admin Panel, Privilege Escalation, req.session.user, app.get('/api/users/:userId/profile', ...), req.params.userId, SELECT * FROM users WHERE id = ?, Burp Suite, IDOR, Insecure Direct Object Reference, requestedUserId, loggedInUserId, loggedInUserRole, 403 Forbidden, Authentication, AuthN, Authorization, AuthZ, UUID, ⭐"1. Kya user login hai (Authentication)? 2. Kya is user ko yeh data dekhne ki permission hai (Authorization)?"[emphasized in notes]]
+[Broken Access Control, Admin Panel, Privilege Escalation, req.session.user, app.get('/api/users/:userId/profile', ...), req.params.userId, SELECT * FROM users WHERE id = ?, Burp Suite, IDOR, Insecure Direct Object Reference, requestedUserId, loggedInUserId, loggedInUserRole, 403 Forbidden, Authentication, AuthN, Authorization, AuthZ, UUID, Multi-Tenancy, Tenant Isolation Sinks, Logical Tenancy Bypass, `tenant_id`, Global Query Scopes, ORM Hooks, `beforeFind` hook, Sequelize scoping, Mongoose global filters, data leak code paths, ⭐"queries mein tenant_id filter lagana bhool jaate hain"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
-* Testing/Offline Phase: Hacker Burp Suite use karke apni request intercept karta hai aur profile URL mein apni ID ki jagah admin ki ID (101) daalta hai.
-* Fixing/Iteration Phase: Developer backend route mein strict check lagata hai ki requestedUserId aur loggedInUserId same ho, ya user 'admin' role ka ho.
-* Live Production Phase: Server resource dene se pehle har request pe AuthN aur AuthZ verify karta hai, fail hone par seedha 403 Forbidden response deta hai.
-* Additional context: Yeh OWASP ki #1 vulnerability hai.
+* Testing/Offline Phase: Source code audit ke dauran auditor database models aur query layers (`db.query` ya ORM calls) mein text-search (grep) marta hai yeh check karne ke liye ki kya har dynamic query explicitly current session ke authenticated `tenant_id` se mapped/scoped hai ya nahi.
+* Fixing/Iteration Phase: Developer manually har route par filter lagane ke bajaye architectural level par ORM ke Global Query Scopes aur automatic middle-layer hooks implement karta hai jo har incoming base database fetch mein `WHERE tenant_id = context.getTenantId()` automatically append kar de.
+* Live Production Phase: Runtime par agar koi user database parameters alter karke kisi doosre tenant ki row fetch karne ki koshish bhi karta hai, toh backend scope automatic context match na hone ki wajah se request ko 403 Forbidden se securely block kar deta hai.
 
 Topic 5: 2.5: Cryptographic Failures: Weak Algorithms (MD5 vs Bcrypt)
-Subtopics: Cryptographic Failures, Weak Algorithms, MD5, SHA1, Rainbow Tables, Bcrypt, Salt, Hash Cracking, Adaptive Hashing, Cost Factor
+Subtopics: Cryptographic Failures, Weak Algorithms, MD5, SHA1, Rainbow Tables, Bcrypt, Salt, Hash Cracking, Adaptive Hashing, Cost Factor, Pseudo-Random Number Generators (PRNG) vs CSRNG, Insecure Randomness Sinks, Math.random() Exploitation
 
 [📊 SCOPE SIGNAL for Topic 5:
 
@@ -549,7 +544,7 @@ Subtopics: Cryptographic Failures, Weak Algorithms, MD5, SHA1, Rainbow Tables, B
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[Cryptographic Failures, MD5, Bcrypt, hashing, SHA1, Rainbow Tables, crack, crypto, createHash('md5'), hashedPassword, Crackstation, salt, saltRounds = 10, cost factor, brute-force, $2b$10$, createHash('sha1'), scrypt, argon2, SHA256, PBKDF2-SHA256, ⭐"Passwords store karne ke liye MD5/SHA1 paap hai"[emphasized in notes]]
+[Cryptographic Failures, MD5, Bcrypt, hashing, SHA1, Rainbow Tables, crack, crypto, createHash('md5'), hashedPassword, Crackstation, salt, saltRounds = 10, cost factor, brute-force, $2b$10$, createHash('sha1'), scrypt, argon2, SHA256, PBKDF2-SHA256, Math.random(), crypto.randomBytes, crypto.getRandomValues(), Predictable Tokens, Entropy Estimation, CSPRNG, ⭐"Passwords store karne ke liye MD5/SHA1 paap hai"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
@@ -1399,6 +1394,29 @@ Subtopics: Malicious Packages Concept, Direct Server Access, Environment Variabl
 * Live Production Phase: Developer galti se malicious package install karta hai, aur `require()` karte hi hacker ka chupke se likha gaya code `.env` files padh kar attacker server pe POST kar deta hai.
 * Additional context: npm audit is attack ko nahi pakad sakta kyunki yeh intentional 'virus' hota hai, 'vulnerability' nahi.
 
+--1--Supply Chain Flaws (Extended)--
+Topic 2b: 6.2b: DevSecOps Compliance (SBOM, SLSA & Provenance)
+Subtopics: Software Bill of Materials (SBOM), CycloneDX vs SPDX, SLSA Framework, Build Integrity, Artifact Signing (Sigstore/Cosign), Tamper-Evident Provenance
+
+[📊 SCOPE SIGNAL for Topic 2b:
+
+* Depth Level: Deep
+* Coverage Angle: Both (Compliance Theory & Practical DevSecOps Implementation)
+* Notes mein content volume: Explanation of generating SBOMs and verifying code integrity before deployment
+* Key terms from notes: SBOM, SLSA, Provenance, CycloneDX, Syft, Sigstore, Cosign, Build Integrity
+* Explicit emphasis in notes: "Auditor ke paas list honi chahiye ki software ke andar kaunse parts (libraries) use hue hain. Bina SBOM ke enterprise software audit adhoora hai."
+* Notes mein jo analogies/examples the: "Packaged food ke peeche likhi 'Ingredients List' (SBOM) aur FSSAI ka 'Quality Seal' (SLSA/Provenance)."
+]
+
+🔑 KEYWORDS DUMP for Topic 2b:
+[DevSecOps, SBOM, Software Bill of Materials, SLSA, Supply-chain Levels for Software Artifacts, Provenance, CycloneDX, SPDX, Syft, npm SBOM, `npm ci`, Build Integrity, Artifact Signing, Sigstore, Cosign, Tamper-Evident, immutable log, CI/CD Compliance, Ingredients List, ⭐"Bina SBOM ke enterprise software audit adhoora hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2b:
+
+* Testing/Offline Phase: White-box auditor `syft` ya npm tools use karke pure codebase ka ek machine-readable SBOM (CycloneDX format) generate karta hai taaki deep dependency tree ka analysis ho sake.
+* Fixing/Iteration Phase: DevOps engineer CI/CD pipeline mein Cosign (Sigstore) integrate karta hai jo compiled code (Docker image/binary) ko cryptographically sign kar deta hai.
+* Live Production Phase: Production server container run karne se pehle uski SLSA provenance aur signature verify karta hai. Agar kisi ne raste mein code tamper kiya hoga, toh signature mismatch se deployment block ho jayegi.
+
 ===Section 2: API & Logic Misconfigurations (Weak Keys, Mass Assignment, CORS) [⚠️ Derived]===
 API design, backend data mapping, aur browser security policies mein chhupi loopholes. [⚠️ Derived]
 
@@ -1578,6 +1596,7 @@ Subtopics: Advanced Server Attacks, Host Header Injection, ReDoS
 Section 1: Supply Chain Flaws (Vulnerable Components, Malicious Packages) [⚠️ Derived]
 Topic 1: Vulnerable & Outdated Components
 Topic 2: Dependency / Supply Chain Attacks
+Topic 2b: 6.2b: DevSecOps Compliance (SBOM, SLSA & Provenance)
 
 Section 2: API & Logic Misconfigurations (Weak Keys, Mass Assignment, CORS) [⚠️ Derived]
 Topic 3: API Security (Weak Keys & Rate Limiting)
@@ -1591,7 +1610,7 @@ Section 3: Advanced Attacks Intro (Module 7 Teaser) [⚠️ Derived]
 Topic 6: Module 7 Introduction
 
 📊 PHASE SUMMARY:
-Sections: 3 | Topics: 9 | Subtopics: 68
+Sections: 3 | Topics: 10 | Subtopics: 74
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -2757,16 +2776,40 @@ Subtopics: Thick Client Source Code Review, Legacy Code Sinks, Memory Management
 * Fixing/Iteration Phase: Developer saare unbounded buffer handlers ko secure modern alternative function string handlers se replace karta hai aur strict file system routing paths configure karta hai.
 * Live Production Phase: Desktop software secure context mein operate force karta hai aur local machine par privileged state execution ke dauran unauthorized control ya system takeover strictly blocks rehta hai.
 
+--1--Advanced Code Review Ecosystems (Extended)--
+Topic 5: 12.5: IoT & Embedded Systems Firmware Auditing
+Subtopics: Firmware Source Code Review, RTOS Memory Management Flaws, Hardcoded Hardware Secrets, IoT Messaging Protocol Sinks (MQTT/CoAP), Over-The-Air (OTA) Update Validation Logic, Debug Interface Sinks (UART/JTAG), Embedded C/C++ Boundary Checks
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Both (Vulnerable Firmware Patterns vs. Secure Implementation)
+* Notes mein content volume: Explanation of embedded constraints, reviewing C-level protocol parsers, and secure firmware update logic
+* Key terms from notes: Firmware, RTOS, MQTT, OTA, C/C++, Memory Corruption, UART/JTAG debug flags, Hardware Secrets
+* Explicit emphasis in notes: "IoT devices mein patch push karna sabse mushkil hota hai. Ek baar insecure firmware flash ho gaya, toh device hamesha ke liye compromised hai."
+* Notes mein jo analogies/examples the: "Smart lock ka firmware jisme lock kholne ka PIN seedha code mein likha ho, aur OTA update bina kisi official stamp (digital signature) ke accept ho jaye."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[IoT Auditing, Embedded Systems, Firmware Review, RTOS, Real-Time Operating System, Embedded C, C++, Memory Corruption, Buffer Overflow, Hardcoded Hardware Keys, Cryptographic Secrets, MQTT, CoAP, Telemetry Sinks, OTA Updates, Over-The-Air, Signature Verification, UART, JTAG, Debug Interfaces, conditional compilation, `#ifdef DEBUG`, Hardware-Software Interface, ⭐"Ek baar insecure firmware flash ho gaya, toh device hamesha ke liye compromised hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Auditor IoT device ke firmware source code (C/C++) mein trace karta hai ki kya debug flags (`#ifdef DEBUG`) production mein enabled chhoot gaye hain, aur kya MQTT payload parsing mein buffer overflow sinks maujood hain.
+* Fixing/Iteration Phase: Developer UART/JTAG debug interfaces ko code se disable karta hai, IoT telemetry data parsing mein strict boundary checks lagata hai, aur Over-The-Air (OTA) updates ke code mein cryptographic signature validation enforce karta hai.
+* Live Production Phase: Hacker network intercept karke apna malicious fake firmware push karne ki koshish karta hai, par device ka bootloader firmware ki cryptographic signature verify karne mein fail ho jata hai aur malicious update reject kar deta hai.
+
 --- 🛑 PHASE 12 SKELETON READY. ALL MASTER ECOSYSTEMS ALIGNED TO 100% WHITE-BOX SOURCE CODE REVIEW.
 
 ✅ **Sections & Topics Extracted in this phase:**
 
 ```
-Section 12: Advanced Code Review Ecosystems (Mobile, AI, Game & Desktop) [⚠️ Derived]
+Section 12: Advanced Code Review Ecosystems (Mobile, AI, Game, Desktop & IoT) [⚠️ Derived]
   Topic 1: 12.1: Mobile Application Source Code Auditing (Android & iOS)
   Topic 2: 12.2: Secure AI Development & LLM Integration Auditing
   Topic 3: 12.3: Game Engine Logic Flaws & Client-Authority Code Review
   Topic 4: 12.4: Native Code Review & Desktop Application Safety (Thick Client)
+  Topic 5: 12.5: IoT & Embedded Systems Firmware Auditing
 ```
 
 ⏳ **Waiting for:** Next phase/module notes (Module 13 - Final)
@@ -2777,11 +2820,12 @@ Section 12: Advanced Code Review Ecosystems (Mobile, AI, Game & Desktop) [⚠️
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 12: Advanced Code Review Ecosystems (Mobile, AI, Game & Desktop) [⚠️ Derived]
+Section 12: Advanced Code Review Ecosystems (Mobile, AI, Game, Desktop & IoT) [⚠️ Derived]
 Topic 1: 12.1: Mobile Application Source Code Auditing (Android & iOS)
 Topic 2: 12.2: Secure AI Development & LLM Integration Auditing
 Topic 3: 12.3: Game Engine Logic Flaws & Client-Authority Code Review
 Topic 4: 12.4: Native Code Review & Desktop Application Safety (Thick Client)
+Topic 5: 12.5: IoT & Embedded Systems Firmware Auditing
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 26
+Sections: 1 | Topics: 5 | Subtopics: 33
