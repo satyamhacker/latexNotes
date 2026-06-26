@@ -1,4 +1,4 @@
-﻿# Module 1: React Basics & Setup
+# Module 1: React Basics & Setup
 
 
 📦 Processing: Phase/Module 1 — React Basics & Setup
@@ -189,6 +189,32 @@ Subtopics: UI Frameworks, Pre-built Components, Material UI, MUI, Tailwind, Boot
 * Live Production Phase: Jab user live website par scroll karta hai, toh `triggerOnce` logic ke through intersection observer check karta hai aur component ko fade/slide in karwata hai, par sirf pehli baar taaki user irritate na ho.
 * Additional context: UI frameworks use karne se development fast hoti hai aur app mein ek consistent, professional design language bani rehti hai.
 
+===Section 3: Enterprise UI Scaling [⚠️ AI-Generated]===
+Bade teams mein UI consistency maintain karna aur bina style likhe accessible logic use karna. [⚠️ AI-Generated]
+
+Topic 4: Design Systems & Headless UI [⚠️ AI-Generated]
+Subtopics: Storybook, UI Isolation, Headless UI, Radix UI, React Aria, Component Documentation, Design Tokens
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Explanation with Storybook setup and Radix UI example
+* Key terms from notes: Storybook, Headless UI, isolation, Radix UI, React Aria, unstyled components, accessibility, focus management
+* Explicit emphasis in notes: "Logic humara (Headless UI), Design tumhara (Tailwind/CSS)"
+* Notes mein jo analogies/examples the: "Car ka Engine (Headless UI) vs Car ki Body/Paint (Tailwind)", "Component Showroom (Storybook)"
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Storybook, UI isolation, Design System, documentation, Headless UI, Radix UI, React Aria, unstyled, accessibility, a11y, focus trapping, keyboard navigation, npx storybook@latest init, .storybook, UI consistency, single source of truth, ⭐Logic humara, Design tumhara[emphasized in notes], ⭐Component Showroom]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Developer app se alag, Storybook environment mein button/modal banata hai aur uske saare states (hover, disabled, loading) test karta hai.
+* Fixing/Iteration Phase: Agar UI accessible nahi hai (Tab key kaam nahi kar rahi), toh developer scratch se likhne ke bajaye Radix UI ka headless component use karta hai jisme logic pehle se hota hai.
+* Live Production Phase: 50+ developers ki team ek hi Storybook library se components import karti hai, jisse poori website par 100% design consistency rehti hai.
+* Additional context: Enterprise mein button ya modal scratch se banana waste of time maana jaata hai, Headless UI standard hai.
+
 ---
 
 **--- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.**
@@ -200,6 +226,8 @@ Section 2: Styling in React
   Topic 1: Basic Styling (Global, Stylesheets & Inline)
   Topic 2: Scoped & Advanced Styling (Modules, Styled-Components, Tailwind)
   Topic 3: UI Frameworks & Animation Libraries
+Section 3: Enterprise UI Scaling
+  Topic 4: Design Systems & Headless UI
 
 ```
 
@@ -216,8 +244,11 @@ Topic 1: Basic Styling (Global, Stylesheets & Inline) [⚠️ Derived]
 Topic 2: Scoped & Advanced Styling (Modules, Styled-Components, Tailwind) [⚠️ Derived]
 Topic 3: UI Frameworks & Animation Libraries [⚠️ Derived]
 
+Section 3: Enterprise UI Scaling [⚠️ AI-Generated]
+Topic 4: Design Systems & Headless UI [⚠️ AI-Generated]
+
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 31
+Sections: 2 | Topics: 4 | Subtopics: 38
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1216,6 +1247,29 @@ Subtopics: Core Web Vitals, LCP, FID, CLS, reportWebVitals, SEO, Asset Optimizat
 * Live Production Phase: Google Analytics / Vercel captures excellent Web Vitals from real users, improving SEO and reducing layout shifts during page loads.
 * Additional context: Vite and CRA come pre-configured with reportWebVitals for easy tracking.
 
+Topic 9: React 18/19 Concurrent Features [⚠️ AI-Generated]
+Subtopics: Concurrent Mode, useTransition, useDeferredValue, Non-blocking UI, CPU-heavy Rendering, Suspense for Data Fetching
+
+[📊 SCOPE SIGNAL for Topic 9:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Notes mein content volume: Detailed explanation with useTransition filtering example
+* Key terms from notes: Concurrent rendering, useTransition, isPending, startTransition, useDeferredValue, non-blocking, urgent update, background update
+* Explicit emphasis in notes: "UI freeze nahi hona chahiye" (Typing fast honi chahiye)
+* Notes mein jo analogies/examples the: "Emergency Ambulance (Urgent state like typing) vs Normal Traffic (Background heavy rendering)"
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[Concurrent Mode, React 18, useTransition, startTransition, isPending, useDeferredValue, non-blocking UI, CPU-heavy, urgent update, background update, input typing, heavy list filtering, UI freeze, Suspense, fallback, ⭐Emergency Ambulance, ⭐Normal Traffic]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+
+* Testing/Offline Phase: Developer 10,000 items ka list filter banata hai. Normal state update se typing lag hoti hai.
+* Fixing/Iteration Phase: Developer typing state ko normal rakhta hai, aur list filter state ko `startTransition` ke andar daal deta hai.
+* Live Production Phase: User jab search bar mein fast type karta hai, UI bilkul freeze nahi hota. React peeche background mein list filter karta rehta hai aur jab ready hota hai tab screen par dikhata hai.
+* Additional context: Yeh `useMemo` aur `useCallback` se ek step aage ki performance optimization hai.
+
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.
@@ -1237,9 +1291,10 @@ Topic 6: why-did-you-render Library
 Section 4: Event Control & Real-World User Metrics [⚠️ Derived]
 Topic 7: Throttling & Debouncing
 Topic 8: Core Web Vitals & Asset Optimization [⚠️ Derived]
+Topic 9: React 18/19 Concurrent Features [⚠️ AI-Generated]
 
 📊 PHASE SUMMARY:
-Sections: 4 | Topics: 8 | Subtopics: 48
+Sections: 4 | Topics: 9 | Subtopics: 54
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -1352,6 +1407,32 @@ Subtopics: Server State Management, React Query, TanStack Query, SWR, Automatic 
 * Live Production Phase: Users experience ultra-fast UI because they instantly see cached stale data while the tool silently fetches fresh updates in the background.
 * Additional context: React Query is considered the industry standard for reducing fetching boilerplate code by 80%.
 
+===Section 3: Real-Time Data Integration [⚠️ AI-Generated]===
+Jab data HTTP requests ka wait na kare balki server se direct push ho. [⚠️ AI-Generated]
+
+Topic 5: WebSockets & Server-Sent Events (SSE) [⚠️ AI-Generated]
+Subtopics: HTTP Polling vs WebSockets, Socket.io Client, Bi-directional Communication, Server-Sent Events (SSE), Event Listeners, Connection Cleanup
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Concept comparison and Socket.io useEffect integration
+* Key terms from notes: WebSockets, Socket.io, real-time, bi-directional, Server-Sent Events, SSE, polling, ws://, wss://, socket.on, socket.emit, connection teardown
+* Explicit emphasis in notes: "Cleanup karna bahut zaroori hai" varna memory leak hoga.
+* Notes mein jo analogies/examples the: "Baar-baar postman se poochhna (Polling)" vs "Phone call line open rakhna (WebSockets)" vs "Radio broadcast sunna (SSE)".
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[WebSockets, Socket.io, real-time, live data, chat app, stock ticker, bi-directional communication, Server-Sent Events, SSE, unidirectional, HTTP Polling, socket.io-client, socket.on(), socket.emit(), io(), disconnect, cleanup function, useEffect, ⭐Phone call, ⭐Radio broadcast]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Developer `useEffect` ke andar socket connection open karta hai aur server se live messages listen karta hai.
+* Fixing/Iteration Phase: Developer component unmount hone par `socket.disconnect()` add karta hai taaki multiple ghost connections na banein.
+* Live Production Phase: User ko stock prices ya WhatsApp-like chat messages bina page refresh kiye milliseconds mein screen par dikhte hain.
+* Additional context: Dashboards aur live tracking enterprise apps ke liye yeh mandatory skill hai.
+
 --- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1366,8 +1447,11 @@ Section 2: Advanced State Management (React Query) [⚠️ Derived]
 Topic 3: Client State vs. Server State
 Topic 4: React Query and SWR (The Intermediate Way)
 
+Section 3: Real-Time Data Integration [⚠️ AI-Generated]
+Topic 5: WebSockets & Server-Sent Events (SSE) [⚠️ AI-Generated]
+
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 4 | Subtopics: 30
+Sections: 3 | Topics: 5 | Subtopics: 36
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -1726,6 +1810,29 @@ Subtopics: React Developer Tools Extension, Components Tab, React Component Tree
 * Live Production Phase: (N/A)
 * Additional context: Yeh tool sirf development build mein kaam karta hai aur prop drilling track karne ke liye invaluable hai.
 
+Topic 6: Advanced Testing (E2E & API Mocking) [⚠️ AI-Generated]
+Subtopics: End-to-End Testing (E2E), Cypress, Playwright, User Journeys, Mock Service Worker (MSW), API Interception, Network Level Mocking
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: MSW setup and Cypress login flow example
+* Key terms from notes: Cypress, Playwright, E2E, End-to-End, User Journey, MSW, Mock Service Worker, network interception, Service Worker
+* Explicit emphasis in notes: "Real browser environment" (E2E ke liye).
+* Notes mein jo analogies/examples the: "Asli gaadi ko highway par chala kar dekhna (E2E)" vs "Engine test karna (Unit)". MSW as "Stunt Double" (asli backend nahi, par frontend ko lagta hai asli hai).
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[E2E Testing, End-to-End, Cypress, Playwright, real browser, automated clicking, User Journey, Login to Checkout, Mock Service Worker, MSW, network interception, REST API mock, setupWorker, graphql mock, independent frontend dev, ⭐Stunt Double, ⭐Highway test]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Backend API ready nahi hai, toh developer MSW use karke network layer par fake JSON response bhejta hai aur UI complete karta hai.
+* Fixing/Iteration Phase: Developer Cypress run karta hai jo automatically browser kholta hai, form bharta hai, aur check karta hai ki submit ke baad dashboard khula ya nahi.
+* Live Production Phase: CI/CD pipeline deploy hone se pehle automatically E2E tests run karti hai, taaki agar koi critical flow (jaise Payment) toot gaya ho toh code production mein na jaaye.
+* Additional context: Enterprise mein 100% test coverage se zyada important "Critical Path E2E coverage" hota hai.
+
 --- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Sections & Topics Extracted in this phase:**
@@ -1737,6 +1844,7 @@ Section 2: Testing, Quality, Accessibility & Debugging (Module 11)
    Topic 3: Accessibility (a11y) Basics (ARIA, Semantic HTML)
    Topic 4: Browser Debugging (Console, Sources)
    Topic 5: React Dev Tools (Components Tab)
+   Topic 6: Advanced Testing (E2E & API Mocking)
 
 ```
 
@@ -1750,9 +1858,10 @@ Topic 2: Basic Testing with Jest & React Testing Library (RTL)
 Topic 3: Accessibility (a11y) Basics (ARIA, Semantic HTML)
 Topic 4: Browser Debugging (Console, Sources)
 Topic 5: React Dev Tools (Components Tab)
+Topic 6: Advanced Testing (E2E & API Mocking) [⚠️ AI-Generated]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 30
+Sections: 1 | Topics: 6 | Subtopics: 37
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2093,6 +2202,148 @@ Section 1: Advanced Animation & Visualization (Module 13) [⚠️ Derived]
 Sections: 1 | Topics: 4 | Subtopics: 28
 
 ```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 14: Enterprise Architecture & Security
+
+📦 Processing: Phase/Module 4 — Enterprise Architecture & Security
+
+===Section 1: Enterprise Security Patterns [⚠️ AI-Generated]===
+Frontend par sensitive data protect karna aur hackers se app ko bachana. [⚠️ AI-Generated]
+
+--1--Enterprise Security--
+Topic 1: Security Vectors & Token Management (JWT, XSS, CSRF) [⚠️ AI-Generated]
+Subtopics: JWT Refresh Token Rotation, Axios Interceptors, XSS (Cross-Site Scripting), DOMPurify, dangerouslySetInnerHTML risks, CSRF, Role-Based Access Control (RBAC)
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Code (Interceptors)
+* Notes mein content volume: Detailed security practices and Axios Interceptor code for token rotation
+* Key terms from notes: JWT, Access Token, Refresh Token, Axios Interceptor, 401 Unauthorized, XSS, DOMPurify, CSRF, RBAC, HttpOnly cookies
+* Explicit emphasis in notes: "dangerouslySetInnerHTML ka use bina sanitize kiye KABHI nahi karna."
+* Notes mein jo analogies/examples the: "Club ka VIP pass (Access Token) aur Pass renew karne wala manager (Refresh Token/Interceptor)."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[JWT, JSON Web Token, Access Token, Refresh Token, Axios Interceptor, 401 Unauthorized, retry request, XSS, Cross-Site Scripting, dangerouslySetInnerHTML, DOMPurify, sanitize, CSRF, Cross-Site Request Forgery, HttpOnly cookies, localStorage vulnerability, Role-Based Access Control, RBAC, Admin vs User, ⭐VIP pass]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Axios interceptor likhta hai jo har request mein token attach kare aur 401 aane par background mein naya token fetch kare.
+* Fixing/Iteration Phase: Developer rich-text editor se aane wale HTML ko `DOMPurify.sanitize()` se wrap karta hai taaki koi malicious `<script>` tag run na ho.
+* Live Production Phase: User ghanton tak app use karta hai, background mein tokens silently refresh hote rehte hain bina use logout kiye, aur hackers app mein scripts inject nahi kar paate.
+* Additional context: Enterprise apps mein tokens ko `localStorage` mein rakhna security risk (XSS) maana jaata hai, HttpOnly cookies preferred hoti hain.
+
+===Section 2: Scale & Architecture [⚠️ AI-Generated]===
+Bade codebase aur multiple teams ko handle karne ka structure. [⚠️ AI-Generated]
+
+--2--Scale & Architecture--
+Topic 2: Monorepos & Micro-Frontends [⚠️ AI-Generated]
+Subtopics: Monorepo Concept, Turborepo / Nx, Workspace packages, Module Federation, Micro-Frontends (MFE), Feature-Sliced Design (FSD)
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Conceptual
+* Coverage Angle: Architecture
+* Notes mein content volume: Architectural breakdown of how enterprise repos are structured
+* Key terms from notes: Monorepo, Micro-Frontends, Turborepo, Nx, Module Federation, Webpack, FSD, shared packages
+* Explicit emphasis in notes: "Ek repo mein multiple apps (Monorepo)" vs "Multiple apps milkar ek website banna (Micro-Frontend)."
+* Notes mein jo analogies/examples the: "Shopping Mall" (Micro-frontend) jahan har dukaan (feature) alag owner (team) chalata hai par customer ko ek hi building lagti hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Monorepo, single repository, multiple projects, Turborepo, Nx, workspaces, shared UI package, Micro-Frontends, MFE, Webpack Module Federation, independent deployment, Feature-Sliced Design, FSD, architectural pattern, scalability, ⭐Shopping Mall]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Learning Phase: Developer samajhta hai ki ek app ke andar /admin aur /client ko alag deploy karna kyun zaroori hai.
+* Application Phase: Developer Turborepo use karke ek shared "ui-library" package banata hai jise frontend aur admin dashboard dono projects import karte hain.
+* Mastery Phase: Micro-frontends setup karna jahan Team A Header maintain karti hai, Team B Cart maintain karti hai, aur dono live runtime pe Webpack Module Federation ke through merge hote hain.
+* Additional context: Yeh strictly Senior level concept hai jab team size 20+ developers ka ho.
+
+--- 🛑 PHASE 4 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Sections & Topics Extracted in this phase:**
+
+```
+Section 1: Enterprise Security Patterns
+  Topic 1: Security Vectors & Token Management (JWT, XSS, CSRF)
+Section 2: Scale & Architecture
+  Topic 2: Monorepos & Micro-Frontends
+
+```
+
+⏳ **Waiting for:** Next phase/module notes
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Enterprise Security Patterns [⚠️ AI-Generated]
+Topic 1: Security Vectors & Token Management (JWT, XSS, CSRF) [⚠️ AI-Generated]
+
+Section 2: Scale & Architecture [⚠️ AI-Generated]
+Topic 2: Monorepos & Micro-Frontends [⚠️ AI-Generated]
+
+📊 PHASE SUMMARY:
+Sections: 2 | Topics: 2 | Subtopics: 13
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 15: Code Quality Automation & CI/CD
+
+📦 Processing: Phase/Module 5 — Code Quality & Automation
+
+===Section 1: Pre-commit & Pipeline Automation [⚠️ AI-Generated]===
+Code ko push hone se pehle check karna aur automatically server par deploy karna. [⚠️ AI-Generated]
+
+--1--Pre-commit & Pipeline Automation--
+Topic 1: Git Hooks, Husky & Deployment Pipelines [⚠️ AI-Generated]
+Subtopics: Husky, lint-staged, Pre-commit Hook, ESLint Auto-fix, Prettier Auto-format, CI/CD Basics, GitHub Actions, Automated Testing in Pipeline
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical setup
+* Notes mein content volume: Command setup for Husky and conceptual CI/CD flow
+* Key terms from notes: Husky, lint-staged, git hooks, pre-commit, pre-push, CI/CD, GitHub Actions, YAML, Vercel, AWS
+* Explicit emphasis in notes: "Ganda code commit hi nahi hona chahiye."
+* Notes mein jo analogies/examples the: "Airport Security Check (Husky)" jo flight (GitHub) par baithne se pehle luggage (Code) scan karta hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Husky, git hooks, pre-commit, pre-push, lint-staged, ESLint, Prettier, code quality, broken code, CI/CD, Continuous Integration, Continuous Deployment, GitHub Actions, .github/workflows, YAML, automated testing, build process, Vercel, AWS S3, ⭐Airport Security Check]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer project mein Husky aur lint-staged install karta hai.
+* Fixing/Iteration Phase: Jab developer `git commit` type karta hai, Husky automatically pehle Prettier aur ESLint chalata hai. Agar tests fail hue ya code ganda hua, toh commit block ho jaata hai.
+* Live Production Phase: Code GitHub par push hone ke baad, GitHub Actions (CI/CD pipeline) automatically code ko build karti hai, cloud par deploy karti hai, aur Slack par success message bhej deti hai.
+* Additional context: Enterprise teams mein manual formatting ya manual deployment nahi hoti, sab kuch automated hota hai.
+
+--- 🛑 PHASE 5 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Sections & Topics Extracted in this phase:**
+
+```
+Section 1: Pre-commit & Pipeline Automation
+  Topic 1: Git Hooks, Husky & Deployment Pipelines
+
+```
+
+⏳ **Waiting for:** Next phase/module notes
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Pre-commit & Pipeline Automation [⚠️ AI-Generated]
+Topic 1: Git Hooks, Husky & Deployment Pipelines [⚠️ AI-Generated]
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 1 | Subtopics: 8
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
