@@ -1145,7 +1145,7 @@ Server setup, default framework settings, aur error handling mein chhooti hui ga
 
 --2--Environment & Error Misconfigurations (Headers, Debug Mode, Error Handling)--
 Topic 2: Security Misconfiguration - Debug Mode
-Subtopics: Debug Mode Risks, Information Leakage, Car Hood Analogy, Default Express Error Handler, NODE_ENV Configuration, Production Environment Defaults, Secure Generic Errors, dotenv Usage, Server-Side Console Logging
+Subtopics: Debug Mode Risks, Information Leakage, Car Hood Analogy, Default Express Error Handler, NODE_ENV Configuration, Production Environment Defaults, Secure Generic Errors, dotenv Usage, Server-Side Console Logging, Client-Side Source Maps Leakage, Insecure Webpack/Vite Production Configurations
 
 [📊 SCOPE SIGNAL for Topic 2:
 
@@ -1158,7 +1158,7 @@ Subtopics: Debug Mode Risks, Information Leakage, Car Hood Analogy, Default Expr
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[Security Misconfiguration, Debug Mode, development, production, `DEBUG = true`, stack trace, server path, secret keys, `NODE_ENV`, config.js, `DB_PASSWORD`, fs.readFile, Error Handler, `err.message`, `config.NODE_ENV === 'development'`, process.env, `console.error`, generic message, Black-box, Verbose Errors, ⭐"Aapka live server (production) hamesha 'production' mode mein hi chalna chahiye"[emphasized in notes]]
+[Security Misconfiguration, Debug Mode, development, production, `DEBUG = true`, stack trace, server path, secret keys, `NODE_ENV`, config.js, `DB_PASSWORD`, fs.readFile, Error Handler, `err.message`, `config.NODE_ENV === 'development'`, process.env, `console.error`, generic message, Black-box, Verbose Errors, .map files, Source Maps Leak, webpack.config.js, sourcemap: false, unminified react/typescript source code leak, Vite config, ⭐"Aapka live server (production) hamesha 'production' mode mein hi chalna chahiye"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
@@ -2047,27 +2047,50 @@ Subtopics: Static Application Security Testing (SAST), Taint Analysis, Data Flow
 * Additional context: Regex-based grep tools code context nahi samajhte, par Semgrep/CodeQL variables aur functions ka logic track kar sakte hain.
 
 --1--Module 9 - The Hacker's Process (Extended)--
-Topic 4c: Step 4.8 - Dynamic Fuzzing & Unhandled Exceptions
-Subtopics: Fuzzing Concept, Coverage-Guided Fuzzing, Ffuf, RESTler, Mutation-based Testing, Unhandled Exceptions, Denial of Service (DoS) via Fuzzing, Edge Case Discovery
+Topic 4c: Step 4.8 - Property-Based Testing & API Schema Fuzzing
+Subtopics: Code-Level Fuzzing, Property-Based Testing, Schema-Driven Fuzzing, RESTler Specification Parsing, Unhandled Exception Sinks, Application Crash Analysis, Memory Exhaustion Sinks
 
 [📊 SCOPE SIGNAL for Topic 4c:
 
 * Depth Level: Deep
-* Coverage Angle: Practical only
-* Notes mein content volume: Tool usage and concept of mutating inputs to break application logic
-* Key terms from notes: Fuzzing, DAST, ffuf, RESTler, Mutation, Unhandled Exceptions, crashes, edge cases, Fuzz lists, SecLists
-* Explicit emphasis in notes: "Jahan code review (White-Box) khatam hota hai, wahan Fuzzing shuru hoti hai. Aise inputs socho jo developer ke dimaag mein bhi nahi aaye honge."
-* Notes mein jo analogies/examples the: "Taale (Lock) ko master key se kholne ki jagah, usme alag-alag ajeeb aakaar ki chaabiyan (fuzzing) daalkar forcefully todna."
+* Coverage Angle: Practical Only
+* Notes mein content volume: Source code input mutation strategies and tracking unhandled runtime rejections
+* Key terms from notes: Fuzzing, Property-Based, RESTler, Swagger specification, unhandledRejection, uncaughtException, Memory leak
+* Explicit emphasis in notes: "White-box auditing mein fuzzing ka maqsad network scan karna nahi, balki code ke ajeeb edge-cases par backend engine ko crash (DoS) karna hai."
+* Notes mein jo analogies/examples the: "Engine (Code) ke andar automatic machine se hazaron alag-alag tarah ke gande fuel inputs (mutated data) daalkar dekhna ki engine kahan dhuaan chhodta hai."
 ]
 
 🔑 KEYWORDS DUMP for Topic 4c:
-[Fuzzing, Dynamic Application Security Testing, DAST, Coverage-Guided, Ffuf, `ffuf -w wordlist.txt -u https://api.com/user/FUZZ`, RESTler, API Fuzzing, Swagger/OpenAPI fuzzing, Mutation, Unhandled Exceptions, HTTP 500, Crashes, Denial of Service, DoS, SecLists, Naughty Strings, Edge Cases, memory leaks, brute-forcing parameters, ⭐"Jahan code review khatam hota hai, wahan Fuzzing shuru hoti hai"[emphasized in notes]]
+[Code-Level Fuzzing, Property-Based Testing, RESTler, Swagger Fuzzer, `openapi.json`, compile specs, input mutation, Unhandled Exceptions, `process.on('unhandledRejection')`, `uncaughtException`, Node.js Crash, HTTP 500 Sinks, Memory Exhaustion, Denial of Service, DoS code paths, try-catch voids, boundary validation error, ⭐"backend engine ko crash (DoS) karna hai"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4c:
 
-* Testing/Offline Phase: Pentester `ffuf` aur SecLists (Naughty Strings) use karke API ke parameters mein ek sath 10,000 special characters aur mutated JSON payloads bhejta hai.
-* Fixing/Iteration Phase: Developer server logs mein HTTP 500 errors (crashes) check karta hai aur un unhandled exceptions ke aas-paas strict Try-Catch aur Type Checking lagata hai.
-* Live Production Phase: Fuzzing tools ke through app robust ban jati hai, aur future mein unexpected inputs par crash hone ki jagah gracefully HTTP 400 Bad Request return karti hai.
+* Testing/Offline Phase: Auditor application ke OpenAPI/Swagger specification code ko RESTler tool mein feed karta hai jo automatically code logic par mutated dictionary payloads hit karta hai.
+* Fixing/Iteration Phase: Triaging ke dauran auditor codebase ke un functions ko trace karta hai jahan fuzzing se error throw hua aur wahan runtime type guards aur validation block lagata hai.
+* Live Production Phase: Production engine par agar koi unexpected automated input aata hai, toh backend process crash hone ke bajaye gracefully error handler execute karta hai.
+
+--1--Module 9 - The Hacker's Process (Extended)--
+Topic 4d: Step 4.9 - Triaging SAST Noise & Security Suppression Auditing
+Subtopics: SAST False Positives Triaging, Security Code Baseline, Dangerous Code Suppression Patterns, CodeQL/Semgrep Inline Ignore Verification, Pre-commit Security Validation Hooks, Continuous Code Compliance
+
+[📊 SCOPE SIGNAL for Topic 4d:
+
+* Depth Level: Deep
+* Coverage Angle: Both (Audit Metrics & Vulnerable Suppression Code)
+* Notes mein content volume: Detailed syntax review of how developers bypass security pipelines using override code comments
+* Key terms from notes: Triaging, False Positives, Suppression, nosemgrep, linter override, security gate bypass, pre-commit hook, CI/CD block
+* Explicit emphasis in notes: "Code review mein hamesha inline ignore comments par utna hi shak karo jitna insecure input code par karte ho. Yeh pipeline ka chhor-darwaza hain."
+* Notes mein jo analogies/examples the: "Security camera (SAST) ke aage sticker (ignore comment) chipka dena taaki building management ko alert na jaye."
+]
+
+🔑 KEYWORDS DUMP for Topic 4d:
+[SAST Triaging, False Positives, Security Noise, Suppression Sinks, `# nosemgrep`, `// nosemgrep`, `/* codeql ignore */`, `eslint-disable-next-line`, linter bypass, security gate override, audit baseline, static analysis triage, git pre-commit hook, Husky configuration, security regression, code validation metrics, ⭐"inline ignore comments par utna hi shak karo"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4d:
+
+* Testing/Offline Phase: Source code audit ke dauran auditor pure codebase mein text-search (grep) chalata hai `nosemgrep` ya lint-disable tags ke liye taaki pata chale developers ne kahan security rule bypass kiya hai.
+* Fixing/Iteration Phase: Developer legitimate false positives ko central triage baseline configuration file mein document karta hai aur real code bugs se inline ignore tags hata kar actual fix lagata hai.
+* Live Production Phase: CI/CD automation pipeline strict verification run karti hai aur agar bina code review approval ke koi suppression tag milta hai toh build deploy hone se pehle hi block ho jati hai.
 
 Topic 5: Step 5 - Authentication & Authorization Review
 Subtopics: Authentication Review, Authorization Review, Account Takeover, Privilege Escalation, Route Guards, IDOR Check
@@ -2243,7 +2266,8 @@ Topic 2: Step 2 - Black-Box Testing (Bina Code Dekhe)
 Topic 3: Step 3 - White-Box Review (Code Structure Samajhna)
 Topic 4: Step 4 - Input Handling Review (Data Kahan se Aa Raha Hai?)
 Topic 4b: Step 4.5 - Automated Taint Analysis (Semgrep & CodeQL)
-Topic 4c: Step 4.8 - Dynamic Fuzzing & Unhandled Exceptions
+Topic 4c: Step 4.8 - Property-Based Testing & API Schema Fuzzing
+Topic 4d: Step 4.9 - Triaging SAST Noise & Security Suppression Auditing
 Topic 5: Step 5 - Authentication & Authorization Review
 Topic 6: Step 6 - Sensitive Data Exposure Review
 Topic 7: Step 7 - Business Logic Review
@@ -2254,7 +2278,7 @@ Section 2: Course Completion & Bonus Intro [⚠️ Derived]
 Topic 10: Course Recap & Module 10 Introduction [⚠️ Derived]
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 12 | Subtopics: 61
+Sections: 2 | Topics: 13 | Subtopics: 67
 
 --- 🛑 PHASE 9 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
