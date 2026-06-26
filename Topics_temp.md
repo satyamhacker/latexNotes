@@ -208,7 +208,7 @@ Subtopics: Storybook, UI Isolation, Headless UI, Radix UI, React Aria, Component
 🔑 KEYWORDS DUMP for Topic 4:
 [Storybook, UI isolation, Design System, documentation, Headless UI, Radix UI, React Aria, unstyled, accessibility, a11y, focus trapping, keyboard navigation, npx storybook@latest init, .storybook, UI consistency, single source of truth, ⭐Logic humara, Design tumhara[emphasized in notes], ⭐Component Showroom]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Developer app se alag, Storybook environment mein button/modal banata hai aur uske saare states (hover, disabled, loading) test karta hai.
 * Fixing/Iteration Phase: Agar UI accessible nahi hai (Tab key kaam nahi kar rahi), toh developer scratch se likhne ke bajaye Radix UI ka headless component use karta hai jisme logic pehle se hota hai.
@@ -424,10 +424,33 @@ Subtopics: Form Handling, Validation Logic, Error Display, Conditional Rendering
 * Live Production Phase: User login/signup form bharta hai, submit karta hai, logic data ko check karta hai aur agar galat (junk) data ho toh laal error message dikhata hai backend ko bhejane se pehle.
 * Additional context: Beginners ko onSubmit se shuru karna chahiye, complex hone par Formik/React Hook Form library use hoti hai.
 
-Topic 3: `useRef` Hook
-Subtopics: useRef Hook, .current Property, DOM Element Access, Mutable Value Storage, Escape Hatch, Virtual DOM Bypass
+Topic 3: Enterprise Form Validation (Zod + React Hook Form) [⚠️ AI-Generated]
+Subtopics: Schema Validation, Zod, React Hook Form (RHF), useForm hook, Resolver, Type-safe forms, Error mapping
 
 [📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Setup steps and complete form code with Zod schema
+* Key terms from notes: Zod, React Hook Form, RHF, useForm, zodResolver, schema validation, register, handleSubmit, formState, type-safe
+* Explicit emphasis in notes: "Manual if/else validation mat likho, Schema use karo."
+* Notes mein jo analogies/examples the: "Club ka Bouncer (React Hook Form) aur uske paas strict Guest List ka Rulebook (Zod Schema)."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Zod, React Hook Form, RHF, useForm, zodResolver, schema validation, register, handleSubmit, formState, errors, type-safe, validation logic, regex, minimum length, @hookform/resolvers, boilerplate, performance, re-renders, ⭐Bouncer, ⭐Rulebook]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer ek `userSchema` banata hai Zod mein (e.g., email must be valid, password > 8 chars) aur usko RHF ke `zodResolver` mein pass karta hai.
+* Fixing/Iteration Phase: Agar naya rule add karna ho (jaise age > 18), toh developer UI ko touch nahi karta, sirf Zod schema ko update karta hai.
+* Live Production Phase: User jab form bharta hai, toh bina poore page (ya component) ko re-render kiye, fast aur accurate laal error messages turant dikhte hain.
+* Additional context: Zod aur TypeScript milkar forms ko 100% bug-free bana dete hain.
+
+Topic 4: `useRef` Hook
+Subtopics: useRef Hook, .current Property, DOM Element Access, Mutable Value Storage, Escape Hatch, Virtual DOM Bypass
+
+[📊 SCOPE SIGNAL for Topic 4:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -437,20 +460,20 @@ Subtopics: useRef Hook, .current Property, DOM Element Access, Mutable Value Sto
 * Notes mein jo analogies/examples the: "TV (Component) aur Remote (State) vs HDMI Port (DOM element)", aur "Hidden notebook" vs "Scoreboard (useState)".
 ]
 
-🔑 KEYWORDS DUMP for Topic 3:
+🔑 KEYWORDS DUMP for Topic 4:
 [useRef, Hook, ref object, reference, sandarbh, .current, DOM Element, access, pakadna, , , focus, .play(), .pause(), measure, size, position, Mutable Value, timerID, counter, re-render, document.getElementById, bad practice, Virtual DOM, bypass, TV, Remote, HDMI port, hidden notebook, scoreboard, useEffect, DOM API, escape hatch, chor darwaza, `import React, { useRef, useEffect } from 'react'; function FocusInput() { const inputRef = useRef(null); useEffect(() => { if (inputRef.current) { inputRef.current.focus(); } }, []); return ( <div> <p>Page load hote hi yeh input auto-focus ho jaayega.</p> <input ref={inputRef} type="text" placeholder="Focus me!" /> </div> ); }`]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
 * Learning Phase: Hook ko TV/Remote aur Hidden Notebook ki analogy se samajhna.
 * Application Phase: Input field ko seedha focus karna, media player play/pause karna ya background timer store karna bina re-render trigger kiye.
 * Mastery Phase: UI dikhane ke liye state aur background DOM manipulation ke liye useRef (escape hatch) ko alag alag istemaal karna.
 * Additional context: (N/A)
 
-Topic 4: `React.forwardRef`
+Topic 5: `React.forwardRef`
 Subtopics: React.forwardRef, Ref Forwarding, Reserved Props, Higher-Order Component (HOC)
 
-[📊 SCOPE SIGNAL for Topic 4:
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -460,20 +483,20 @@ Subtopics: React.forwardRef, Ref Forwarding, Reserved Props, Higher-Order Compon
 * Notes mein jo analogies/examples the: "Suraksha guard" (Parent) aur "Locker" (Child DOM), jisme manager (forwardRef) ko passkey ki permission milti hai.
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 5:
 [React.forwardRef, utility, function, Parent component, ref, forward, aage bhejna, Child component, DOM element, , access, props object, reusable component, MyCustomInput, warning, suraksha guard, locker, building manager, passkey, chaabi, 2nd argument, `(props, ref)`, reserved props, aarakshit, key, HOC, Higher-Order Component, enhanced component, `import React, { forwardRef } from 'react'; const MyInput = forwardRef((props, ref) => { return ( <div> <label>{props.label}: </label> <input ref={ref} type="text" placeholder="I can be focused from parent" /> </div> ); }); export default MyInput;`, `import React, { useRef } from 'react'; import MyInput from './MyInput'; function App() { const customInputRef = useRef(null); function handleFocus() { if (customInputRef.current) { customInputRef.current.focus(); customInputRef.current.style.backgroundColor = 'yellow'; } } return ( <div> <MyInput ref={customInputRef} label="My Custom Input" /> <button onClick={handleFocus}>Focus Custom Input</button> </div> ); }`]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: Jab `<MyInput ref={myRef} />` likhne par console mein ref warning aaye ya null aaye, tab developer error fix karne ke liye forwardRef HOC lagata hai.
 * Live Production Phase: (N/A)
 * Additional context: Yeh pattern component library ya reusable UI components banate waqt sabse zyada kaam aata hai jahan parent ko base input ko focus karna ho.
 
-Topic 5: `useImperativeHandle` Hook
+Topic 6: `useImperativeHandle` Hook
 Subtopics: useImperativeHandle, Encapsulation, Custom API, Declarative vs Imperative
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Moderate
 * Coverage Angle: Conceptual only (with one complex code example)
@@ -483,10 +506,10 @@ Subtopics: useImperativeHandle, Encapsulation, Custom API, Declarative vs Impera
 * Notes mein jo analogies/examples the: "Hotel Reception Desk" jahan parent ko master key ke bajaye sirf limited functions ka access milta hai.
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [useImperativeHandle, rare, forwardRef, Child component, Parent component, limit, encapsulation, chhipana, custom object, custom functions, focusInput, clearInput, shake, Master Key, Hotel Reception Desk, room saaf karwao, internal useRef, dependencies, fancyRef, API, Declarative, Imperative, escape hatch, props, isFocused, ⭐"bahut kam use hone wala"[emphasized in notes], ⭐"99% cases mein iski zaroorat nahi padegi"[emphasized in notes], `import React, { useRef, useImperativeHandle, forwardRef } from 'react'; const FancyInput = forwardRef((props, ref) => { const internalInputRef = useRef(null); useImperativeHandle(ref, () => ({ focusAndHighlight: () => { internalInputRef.current.focus(); internalInputRef.current.style.backgroundColor = 'yellow'; }, clearInput: () => { internalInputRef.current.value = ''; internalInputRef.current.style.backgroundColor = 'white'; } }), []); return ( <input ref={internalInputRef} type="text" placeholder="Fancy Input" /> ); }); export default FancyInput;`, `import React, { useRef } from 'react'; import FancyInput from './FancyInput'; function App() { const fancyRef = useRef(null); function handleFocus() { if (fancyRef.current) { fancyRef.current.focusAndHighlight(); } } function handleClear() { if (fancyRef.current) { fancyRef.current.clearInput(); } } return ( <div> <FancyInput ref={fancyRef} /> <button onClick={handleFocus}>Focus & Highlight</button> <button onClick={handleClear}>Clear</button> </div> ); }`]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: (N/A)
@@ -501,9 +524,10 @@ Subtopics: useImperativeHandle, Encapsulation, Custom API, Declarative vs Impera
 Section 1: Module 4: Forms & Refs
    Topic 1: Controlled vs Uncontrolled Components
    Topic 2: Form Handling with Validation
-   Topic 3: useRef Hook
-   Topic 4: React.forwardRef
-   Topic 5: useImperativeHandle Hook
+   Topic 3: Enterprise Form Validation (Zod + React Hook Form)
+   Topic 4: useRef Hook
+   Topic 5: React.forwardRef
+   Topic 6: useImperativeHandle Hook
 
 ```
 
@@ -540,12 +564,13 @@ Section 1: Module 4: Forms & Refs
 Section 1: Module 4: Forms & Refs
   Topic 1: Controlled vs Uncontrolled Components
   Topic 2: Form Handling with Validation
-  Topic 3: useRef Hook
-  Topic 4: React.forwardRef
-  Topic 5: useImperativeHandle Hook
+  Topic 3: Enterprise Form Validation (Zod + React Hook Form) [⚠️ AI-Generated]
+  Topic 4: useRef Hook
+  Topic 5: React.forwardRef
+  Topic 6: useImperativeHandle Hook
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 28
+Sections: 1 | Topics: 6 | Subtopics: 35
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -645,12 +670,35 @@ Subtopics: useReducer Hook, Complex State Logic, Reducer Function, Action Object
 🔑 KEYWORDS DUMP for Topic 4:
 [useReducer, useState, shaktishaali, powerful, alternative, vikalp, complex, jatil, nested values, action, ADD_TASK, DELETE_TASK, TOGGLE_TASK, reducer function, baahar, clean, Redux, consolidate, ekatrit, Restaurant Kitchen, afra-tafri, chaos, Head Chef, Order Slip, action object, Recipe Book, initialState, shuruaati state, dispatch, setter function, type, INCREMENT, DECREMENT, RESET, ADD_AMOUNT, payload, default, mutate, Immutability, parampara, convention, ⭐"complex"[emphasized in notes], ⭐"kai alag-alag tareeke"[emphasized in notes], ⭐"baahar"[emphasized in notes], `import React, { useReducer } from 'react'; const initialState = { count: 0 }; function reducer(state, action) { console.log('Reducer chala, action hai:', action); switch (action.type) { case 'INCREMENT': return { count: state.count + 1 }; case 'DECREMENT': return { count: state.count - 1 }; case 'RESET': return { count: 0 }; case 'ADD_AMOUNT': return { count: state.count + action.payload }; default: return state; } } function ReducerCounter() { const [state, dispatch] = useReducer(reducer, initialState); return ( <div> <h1>Counter: {state.count}</h1> <button onClick={() => dispatch({ type: 'INCREMENT' })}> Increment </button> <button onClick={() => dispatch({ type: 'DECREMENT' })}> Decrement </button> <button onClick={() => dispatch({ type: 'RESET' })}> Reset </button> <button onClick={() => dispatch({ type: 'ADD_AMOUNT', payload: 5 })}> Add 5 </button> </div> ); }`]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: Jab ek component ke andar 10 alag alag useState ban jaate hain aur code messy ho jata hai, tab developer refactor karke code saaf karne ke liye useReducer apply karta hai.
 * Live Production Phase: User UI mein different actions (jaise add/delete/update) click karta hai, component bas ek dispatch(action) event fire karta hai, aur saara update logic centrally execute hoke state ko safely badal deta hai.
 * Additional context: To-Do list jaisi app jahan filters aur mutations dono sath chalte hain wahan yeh sabse zyada useful hai.
+
+Topic 5: Advanced Edge Hooks (`useSyncExternalStore` & `useId`) [⚠️ AI-Generated]
+Subtopics: SSR Safe IDs, useId Hook, Accessibility Linking, Tearing in Concurrent React, useSyncExternalStore, Subscribing to Browser APIs
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Explanation with code examples for network status syncing and accessible form inputs.
+* Key terms from notes: useId, SSR hydration mismatch, accessibility, aria-describedby, useSyncExternalStore, external store, tearing, concurrent rendering, subscribe, getSnapshot
+* Explicit emphasis in notes: "Math.random() ko IDs ke liye kabhi use mat karo, SSR toot jayega."
+* Notes mein jo analogies/examples the: "useSyncExternalStore as Live News Reporter" jo bahari duniya (browser network/storage) ki khabar React ke internal system ko bina kisi delay ke deta hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Advanced Hooks, React 18, useId, unique ID, SSR safe, hydration mismatch, accessibility, a11y, htmlFor, aria-labelledby, Math.random(), anti-pattern, useSyncExternalStore, UZES, tearing, concurrent rendering, external state, window.matchMedia, navigator.onLine, subscribe, getSnapshot, getServerSnapshot, ⭐Live News Reporter, ⭐SSR toot jayega]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Developer ek custom hook `useNetworkStatus` banata hai jo `useSyncExternalStore` use karke browser ke online/offline events ko sunta hai.
+* Fixing/Iteration Phase: Form inputs ke labels SSR par alag IDs aur Client par alag IDs generate kar rahe the (hydration error). Developer `Math.random` hata kar `useId()` lagata hai.
+* Live Production Phase: App Next.js par smoothly render hoti hai bina kisi ID mismatch error ke, aur concurrent rendering mein UI tab bhi consistent rehta hai jab external state achanak badalti hai.
+* Additional context: Yeh hooks library authors aur senior devs ke liye crucial hain jo complex external systems se React ko connect karte hain.
 
 --- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -662,6 +710,7 @@ Section 1: Module 5: Component Lifecycle & Hooks
    Topic 2: Class Components Lifecycle Methods (Legacy)
    Topic 3: useLayoutEffect Hook
    Topic 4: useReducer Hook (Complex State)
+   Topic 5: Advanced Edge Hooks (`useSyncExternalStore` & `useId`) [⚠️ AI-Generated]
 
 ```
 
@@ -699,9 +748,10 @@ Section 1: Module 5: Component Lifecycle & Hooks
   Topic 2: Class Components Lifecycle Methods (Legacy)
   Topic 3: useLayoutEffect Hook
   Topic 4: useReducer Hook (Complex State)
+Topic 5: Advanced Edge Hooks (`useSyncExternalStore` & `useId`) [⚠️ AI-Generated]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 35
+Sections: 1 | Topics: 5 | Subtopics: 41
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -805,17 +855,40 @@ Subtopics: useParams Hook, Dynamic Routes, Route Parameter Placeholder, Paramete
 🔑 KEYWORDS DUMP for Topic 4:
 [useParams, dynamic parts, dynamic routes, /products/:productId, e-commerce, 10000 products, Address analogy, Apartment Number analogy, placeholder, postman, colon, :, parameter, App.js, UserProfile.jsx, params object, destructuring, multiple params, /blog/:category/:postId, Number(userId), string]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Developer route set karte waqt path mein colon (`:`) ke saath param define karta hai, aur component ke andar useParams se use read karta hai.
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: Jab user e-commerce app mein alag-alag product links kholta hai, toh same component URL se id nikal kar API se us specific product ka data fetch karke dikhata hai.
 * Additional context: useParams se hamesha string milta hai, agar number chahiye toh manually convert karna padta hai.
 
-Topic 5: Nested Routes & Outlet Component
-Subtopics: Nested Routes, Outlet Component, Common Layouts, Parent-Child Route Relationship, Default Index Route
+Topic 5: URL-Driven State & useSearchParams [⚠️ AI-Generated]
+Subtopics: URL as Single Source of Truth, useSearchParams Hook, Query Parameters, Sharable URLs, Filter/Pagination State Sync
 
 [📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Explanation with a data table filtering/pagination code example using URL params
+* Key terms from notes: URL state, useSearchParams, query parameters, URLSearchParams, ?page=2&status=active, sharable links, persist state, history stack
+* Explicit emphasis in notes: "Dashboard filters ke liye kabhi bhi useState use mat karo, URL ko state banao."
+* Notes mein jo analogies/examples the: "Shareable Bookmark" — Agar tumhara dost link open kare, toh use exactly wahi filtered data dikhna chahiye jo tum dekh rahe ho.
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[URL-driven state, useSearchParams, react-router-dom, query parameters, querystring, URLSearchParams, get, set, delete, sharable links, bookmarkable, pagination state, ?page=2&sort=asc, syncing UI, single source of truth, window.location.search, ⭐Shareable Bookmark, ⭐URL ko state banao]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Developer table ke dropdown filter ko `useState` ki jagah `setSearchParams({ status: 'active' })` se connect karta hai.
+* Fixing/Iteration Phase: Page refresh karne par state reset ho rahi thi, developer usko fix karke component mount par URL se parameters read karke initial state set karta hai.
+* Live Production Phase: Manager ek dashboard banata hai, complex data filter karta hai, aur woh exact URL (jisme saare filters as query params hain) apne boss ko Slack par bhejta hai. Boss ko exactly wahi filtered view milta hai.
+* Additional context: Yeh pattern TanStack Table aur pagination ke saath 100% use hota hai enterprise apps mein.
+
+Topic 6: Nested Routes & Outlet Component
+Subtopics: Nested Routes, Outlet Component, Common Layouts, Parent-Child Route Relationship, Default Index Route
+
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -825,20 +898,20 @@ Subtopics: Nested Routes, Outlet Component, Common Layouts, Parent-Child Route R
 * Notes mein jo analogies/examples the: Picture Frame analogy — Parent route ek fixed Picture Frame (Layout/Sidebar) hai aur Outlet woh khaali glass area hai jahan child route ki nayi picture fit hoti hai.
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [Nested Routes, , parent-child relationship, common layouts, Dashboard, Sidebar, Navbar, DashboardLayout, DRY, Don't Repeat Yourself, Picture Frame analogy, placeholder, App.js, DashboardLayout.jsx, index, index route, ⭐"path mein / (leading slash) nahi hai"[emphasized in notes], named outlets]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: Developer ek Parent Layout banata hai jisme static UI (jaise Sidebar) hota hai, aur content area mein `<Outlet />` place karta hai.
 * Fixing/Iteration Phase: Developer test karta hai ki URL change hone par sirf beech ka content (child route) badal raha hai aur sidebar baar-baar reload nahi ho raha.
 * Live Production Phase: User jab profile se settings page par jaata hai, toh overall layout wahi rehta hai bas inner content smoothly switch ho jaata hai.
 * Additional context: Ise use karne se DRY principle follow hota hai aur components ko baar-baar copy-paste nahi karna padta.
 
-Topic 6: Protected Routes (Authentication)
+Topic 7: Protected Routes (Authentication)
 Subtopics: Protected Routes, Authentication Check, Route Wrapping, Security Vulnerability Prevention, Replace History Flag
 
-[📊 SCOPE SIGNAL for Topic 6:
+[📊 SCOPE SIGNAL for Topic 7:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -848,10 +921,10 @@ Subtopics: Protected Routes, Authentication Check, Route Wrapping, Security Vuln
 * Notes mein jo analogies/examples the: VIP Club Bouncer analogy — /dashboard ek VIP club hai, ProtectedRoute ek bouncer hai, aur isAuth VIP Pass hai. Pass hone par Bouncer andar jaane dega, warna wapas bhej dega.
 ]
 
-🔑 KEYWORDS DUMP for Topic 6:
+🔑 KEYWORDS DUMP for Topic 7:
 [Protected Routes, Authentication, logged in, security, ⭐"bahut badi security kami"[emphasized in notes], vulnerability, VIP club analogy, Bouncer, VIP Pass, isAuth, true, false, ProtectedRoute.jsx, , Outlet, App.js, isLoggedIn, global state, Context API, Redux, wrapper component, replace prop]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
 
 * Testing/Offline Phase: Developer ek custom wrapper/bouncer component banata hai jo global authentication state (isAuth) check karta hai aur us hisaab se Outlet ya redirect return karta hai.
 * Fixing/Iteration Phase: Developer bina login kiye direct `/dashboard` type karke test karta hai ki woh login page par wapas fek diya ja raha hai ya nahi.
@@ -871,8 +944,9 @@ Topic 2: Link vs NavLink (Declarative Navigation)
 Section 2: Advanced Routing Hooks & Patterns [⚠️ Derived]
 Topic 3: useNavigate Hook (Programmatic Navigation)
 Topic 4: useParams Hook (Dynamic Routes)
-Topic 5: Nested Routes & Outlet Component
-Topic 6: Protected Routes (Authentication)
+Topic 5: URL-Driven State & useSearchParams [⚠️ AI-Generated]
+Topic 6: Nested Routes & Outlet Component
+Topic 7: Protected Routes (Authentication)
 
 📊 PHASE SUMMARY:
 Sections: 2 | Topics: 6 | Subtopics: 31
@@ -965,15 +1039,38 @@ Subtopics: Render Props Pattern, render Prop, Reusable Stateful Logic, MouseTrac
 * Live Production Phase: Mouse ki X aur Y position ko track karna aur ek hi logic use karke alag-alag clients ko alag UI (jaise  tag ya  tag) mein data dikhana.
 * Additional context: Render prop ka naam 'children' bhi rakha jaa sakta hai, par Custom Hooks ne is pattern ki zaroorat kam kar di hai.
 
+Topic 4: Compound Components Pattern [⚠️ AI-Generated]
+Subtopics: Compound Components, Implicit State Sharing, Dot Notation, Context API Integration, Declarative UI
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Explanation with a custom `<Select>` or `<Tabs>` component code example
+* Key terms from notes: Compound components, implicit state, Context API, dot notation, React.Children, declarative, highly cohesive
+* Explicit emphasis in notes: "Parent aur Child components ke beech bina explicitly props pass kiye state share karna."
+* Notes mein jo analogies/examples the: "Smart TV aur uske inbuilt speakers" — dono alag dikhte hain par internally ek hi brain (Context) se connected hain.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Compound Components Pattern, React Context, implicit state sharing, highly cohesive, declarative UI, dot notation, `<Menu>`, `<Menu.Item>`, `<Tabs.Panel>`, React.Children, React.cloneElement, UI flexibility, Props Hell solution, Headless component design, ⭐Smart TV, ⭐Implicit State]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Developer ek custom `<Accordion>` component banata hai jiske andar `<Accordion.Item>` hote hain, aur inke beech ki state (kaunsa open hai) Context API se manage karta hai.
+* Fixing/Iteration Phase: Agar design team naya layout maangti hai, toh developer ko internal logic nahi badalna padta, woh bas JSX mein child components ki aage-peeche position change kar deta hai.
+* Live Production Phase: Pura UI ekdum clean aur readable dikhta hai, aur components apne aap seamlessly communicate karte hain bina 50 props pass kiye.
+* Additional context: Yeh pattern Headless UI libraries (jaise Radix) ka foundational architecture hai.
+
 ===Section 2: DOM & Application Resilience [⚠️ Derived]===
 Component ko main DOM tree ke bahar render karna aur app ko errors ki wajah se crash hone se bachana. [⚠️ Derived]
 
 --2--DOM & Application Resilience--
 
-Topic 4: React Portals
+Topic 5: React Portals
 Subtopics: React Portals, Modals, Dialogs, Tooltips, DOM Hierarchy, CSS Overflow, z-index, portal-root, createPortal, react-dom, React Tree Context
 
-[📊 SCOPE SIGNAL for Topic 4:
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -983,20 +1080,20 @@ Subtopics: React Portals, Modals, Dialogs, Tooltips, DOM Hierarchy, CSS Overflow
 * Notes mein jo analogies/examples the: "Teleporter aur Building" analogy — Portal ko ek surang (tunnel) bataya gaya jo kamre (App) ke rules se azaad karke poster (Modal) ko seedha main gate (body) par lagata hai.
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 5:
 [React Portals, first-class feature, DOM hierarchy, Modals, Popups, Dialogs, Tooltips, overflow: hidden, z-index: 1, , Teleporter, Surang, tunnel, portal-root, public/index.html, react-dom, ReactDOM.createPortal(), Modal.js, App.js, modal-backdrop, modal-content, e.stopPropagation(), Context, props]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: Modals ya tooltips ko render karna taaki woh parent component ke 'overflow: hidden' se cut na jayein ya galat 'z-index' ke karan peeche chhip na jayein.
 * Additional context: Portal DOM mein root ke bahar render hota hai, lekin React tree mein woh apni jagah hi rehta hai jisse use props aur Context aasaani se milte rehte hain.
 
-Topic 5: Error Boundaries
+Topic 6: Error Boundaries
 Subtopics: Error Boundaries, Class Components, JavaScript Errors, Fallback UI, App Crash Prevention, getDerivedStateFromError, componentDidCatch, Logging Service, Sentry, Uncaught Errors, react-error-boundary
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1006,10 +1103,10 @@ Subtopics: Error Boundaries, Class Components, JavaScript Errors, Fallback UI, A
 * Notes mein jo analogies/examples the: "Mall aur Main Circuit Breaker (MCB)" analogy — Error boundary ko ek MCB bataya gaya jo short circuit (error) hone par sirf ek shop (component) ki light cut karta hai aur poore mall (App) ko chalne deta hai.
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [Error Boundaries, Class Components, JavaScript errors, fallback UI, alternative UI, unmount, safed screen, white screen, Mall, Main Circuit Breaker, MCB, short circuit, Under Maintenance, ErrorBoundary.js, React.Component, constructor, this.state, hasError, static getDerivedStateFromError(), componentDidCatch(), errorInfo, Sentry, console.error(), CrashingComponent.js, Event Handlers, onClick, try...catch, Asynchronous code, setTimeout, fetch, Server Side Rendering, SSR, react-error-boundary, ⭐React 16+[version], ⭐React 18[version]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: componentDidCatch ka use karke errors ko external logging service (jaise Sentry) par bhejna taaki developers us error ko fix kar sakein.
@@ -1028,11 +1125,11 @@ Topic 2: Higher-Order Components (HOC)
 Topic 3: Render Props Pattern
 
 Section 2: DOM & Application Resilience [⚠️ Derived]
-Topic 4: React Portals
-Topic 5: Error Boundaries
+Topic 5: React Portals
+Topic 6: Error Boundaries
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 5 | Subtopics: 46
+Sections: 2 | Topics: 6 | Subtopics: 51
 
 ---
 
@@ -1140,21 +1237,44 @@ Subtopics: List Virtualization, Windowing, Viewport, react-window, react-virtual
 🔑 KEYWORDS DUMP for Topic 4:
 [List Virtualization, Windowing, viewport, unmount, mount, react-window, react-virtualized, FixedSizeList, VariableSizeList, style prop, Infinite Scrolling, DOM nodes, itemCount, itemSize, ⭐"style prop lagana bahut zaroori hai"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: App crashes or severely lags when trying to render 10,000+ items directly using map().
 * Fixing/Iteration Phase: Developer installs react-window, creates a Row component, and ensures the style prop is passed to correctly position absolute items.
 * Live Production Phase: User smoothly scrolls through massive data grids because only 10-12 elements exist in the DOM at any time.
 * Additional context: Often combined with Infinite Scrolling for fetching new data pages.
 
+Topic 5: Enterprise Data Grids (TanStack Table) [⚠️ AI-Generated]
+Subtopics: Headless Tables, TanStack Table (React Table), Multi-sorting, Global Filtering, Pagination, Column Resizing
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Setup guide and code example integrating basic sorting/filtering
+* Key terms from notes: TanStack Table, React Table, Headless UI, useReactTable, flexRender, getCoreRowModel, sorting, filtering, pagination, columnDefs
+* Explicit emphasis in notes: "UI khud banao, Logic TanStack se lo (Headless)."
+* Notes mein jo analogies/examples the: "Excel Sheet (TanStack) vs Printer (React UI)" — Excel saara data aur sorting handle karta hai, React sirf usko print/render karta hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Enterprise Data Grids, TanStack Table, React Table, v8, Headless UI, useReactTable, flexRender, getCoreRowModel, getSortedRowModel, getFilteredRowModel, columnDefs, accessorKey, Multi-sorting, Global Filtering, Pagination, Column Resizing, boilerplate, massive datasets, ⭐Excel Sheet, ⭐Headless Table]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Developer ek raw HTML `<table>` banata hai aur uske logic/state (e.g., sorting arrows) ko TanStack Table ke hooks se connect karta hai.
+* Fixing/Iteration Phase: Client ko data mein server-side pagination aur complex multi-column filters chahiye. Developer bina naya logic likhe TanStack ke pre-built functions use kar leta hai.
+* Live Production Phase: Admin dashboard par user 5000+ rows ko instantly filter, sort, aur paginate karta hai bina kisi lag ke, aur UI exactly company ke design system jaisa dikhta hai.
+* Additional context: Enterprise dashboards iske bina ban hi nahi sakte. Agar style ke saath chahiye toh `Ag-Grid` ka reference bhi diya ja sakta hai.
+
 ===Section 3: Performance Measurement & Debugging [⚠️ Derived]===
 Performance bottlenecks dhoondhna aur unwanted renders ko console ya graph mein track karna. [⚠️ Derived]
 
 --3--Performance Measurement & Debugging--
-Topic 5: React DevTools Profiler
+Topic 6: React DevTools Profiler
 Subtopics: React DevTools Profiler, Flame Graph, Performance Bottlenecks, Unnecessary Re-renders, Props Changed, Parent Component Rendered
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 8:
 
 * Depth Level: Moderate
 * Coverage Angle: Conceptual only
@@ -1164,20 +1284,20 @@ Subtopics: React DevTools Profiler, Flame Graph, Performance Bottlenecks, Unnece
 * Notes mein jo analogies/examples the: "Factory assembly line... Stopwatch Manager" — recording aur timing batane ke liye
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 8:
 [Profiler, React Developer Tools, flame graph, bottleneck, Props changed, State changed, Parent component rendered, Start recording, Stop recording, development build, F12]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
 
 * Testing/Offline Phase: Developer opens DevTools Profiler in development mode and hits record while performing a laggy action.
 * Fixing/Iteration Phase: Developer analyzes the resulting flame graph to spot wide bars and checks the right panel for "Why did this render?".
 * Live Production Phase: (N/A — Profiler is disabled in production to avoid overhead).
 * Additional context: (N/A)
 
-Topic 6: why-did-you-render Library
+Topic 7: why-did-you-render Library
 Subtopics: why-did-you-render, Monkey-patching, Live Console Warnings, trackAllPureComponents, Debugging Renders
 
-[📊 SCOPE SIGNAL for Topic 6:
+[📊 SCOPE SIGNAL for Topic 8:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1187,10 +1307,10 @@ Subtopics: why-did-you-render, Monkey-patching, Live Console Warnings, trackAllP
 * Notes mein jo analogies/examples the: "CCTV Camera with AI" — live background monitoring ke liye
 ]
 
-🔑 KEYWORDS DUMP for Topic 6:
+🔑 KEYWORDS DUMP for Topic 8:
 [why-did-you-render, WDR, monkey-patch, live console warning, @welldone-software/why-did-you-render, trackAllPureComponents, import.meta.env.MODE, MemoizedHeader.whyDidYouRender, dynamically import]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
 
 * Testing/Offline Phase: Developer installs WDR and interacts with the app, watching the console for detailed warnings about prop reference changes.
 * Fixing/Iteration Phase: Developer uses the console warnings to pinpoint exactly where useCallback or useMemo is missing.
@@ -1201,10 +1321,10 @@ Subtopics: why-did-you-render, Monkey-patching, Live Console Warnings, trackAllP
 Frequent actions ko control karna aur real users ke loading experience (Web Vitals) ko optimize karna. [⚠️ Derived]
 
 --4--Event Control & Real-World Metrics--
-Topic 7: Throttling & Debouncing
+Topic 8: Throttling & Debouncing
 Subtopics: Debouncing, Throttling, lodash debounce, Search Bar API Calls, Scroll Events, useMemo Wrapper
 
-[📊 SCOPE SIGNAL for Topic 7:
+[📊 SCOPE SIGNAL for Topic 9:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1214,20 +1334,20 @@ Subtopics: Debouncing, Throttling, lodash debounce, Search Bar API Calls, Scroll
 * Notes mein jo analogies/examples the: "Hotel lift... rukne ke baad" (Debounce), "Club bouncer... limit mein" (Throttle)
 ]
 
-🔑 KEYWORDS DUMP for Topic 7:
+🔑 KEYWORDS DUMP for Topic 9:
 [Debouncing, Throttling, lodash, debounce, fetchApi, useMemo, onScroll, onMouseMove, autocomplete, timer, debouncedApiCall, ⭐"Debounced function ko useMemo mein wrap karna zaroori hai"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
 
 * Testing/Offline Phase: User types quickly in an autocomplete field, triggering an API call on every single keystroke.
 * Fixing/Iteration Phase: Developer implements lodash debounce wrapped inside a useMemo hook to delay the execution.
 * Live Production Phase: API calls are sent only when the user finishes typing (debounce) or scroll events fire steadily (throttle), saving massive server load.
 * Additional context: (N/A)
 
-Topic 8: Core Web Vitals & Asset Optimization [⚠️ Derived]
+Topic 9: Core Web Vitals & Asset Optimization [⚠️ Derived]
 Subtopics: Core Web Vitals, LCP, FID, CLS, reportWebVitals, SEO, Asset Optimization, Image Formats, Compression, Native Lazy Loading, Font Optimization
 
-[📊 SCOPE SIGNAL for Topic 8:
+[📊 SCOPE SIGNAL for Topic 10:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -1237,20 +1357,20 @@ Subtopics: Core Web Vitals, LCP, FID, CLS, reportWebVitals, SEO, Asset Optimizat
 * Notes mein jo analogies/examples the: "Restaurant Main Course (LCP), Waiter response (FID), Table shifting (CLS)", "Vacation suitcase packing" (Image optimization)
 ]
 
-🔑 KEYWORDS DUMP for Topic 8:
+🔑 KEYWORDS DUMP for Topic 10:
 [Core Web Vitals, LCP, Largest Contentful Paint, FID, First Input Delay, CLS, Cumulative Layout Shift, SEO, reportWebVitals, web-vitals, Lighthouse, Asset Optimization, JPEG, PNG, WebP, AVIF, SVG, compress, tinypng, squoosh, lazy loading, loading="lazy", font-display: swap, aspect-ratio, ⭐"CLS ko width/height dekar fix karein"[emphasized in notes], ⭐"WebP (Best)"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
 
 * Testing/Offline Phase: Developer runs Chrome Lighthouse to generate a report, finding high CLS or slow LCP due to massive images.
 * Fixing/Iteration Phase: Developer compresses images, converts them to WebP, adds explicit width/height attributes, and applies loading="lazy".
 * Live Production Phase: Google Analytics / Vercel captures excellent Web Vitals from real users, improving SEO and reducing layout shifts during page loads.
 * Additional context: Vite and CRA come pre-configured with reportWebVitals for easy tracking.
 
-Topic 9: React 18/19 Concurrent Features [⚠️ AI-Generated]
+Topic 10: React 18/19 Concurrent Features [⚠️ AI-Generated]
 Subtopics: Concurrent Mode, useTransition, useDeferredValue, Non-blocking UI, CPU-heavy Rendering, Suspense for Data Fetching
 
-[📊 SCOPE SIGNAL for Topic 9:
+[📊 SCOPE SIGNAL for Topic 10:
 
 * Depth Level: Deep
 * Coverage Angle: Conceptual & Practical
@@ -1260,14 +1380,37 @@ Subtopics: Concurrent Mode, useTransition, useDeferredValue, Non-blocking UI, CP
 * Notes mein jo analogies/examples the: "Emergency Ambulance (Urgent state like typing) vs Normal Traffic (Background heavy rendering)"
 ]
 
-🔑 KEYWORDS DUMP for Topic 9:
+🔑 KEYWORDS DUMP for Topic 10:
 [Concurrent Mode, React 18, useTransition, startTransition, isPending, useDeferredValue, non-blocking UI, CPU-heavy, urgent update, background update, input typing, heavy list filtering, UI freeze, Suspense, fallback, ⭐Emergency Ambulance, ⭐Normal Traffic]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
 
 * Testing/Offline Phase: Developer 10,000 items ka list filter banata hai. Normal state update se typing lag hoti hai.
 * Fixing/Iteration Phase: Developer typing state ko normal rakhta hai, aur list filter state ko `startTransition` ke andar daal deta hai.
 * Live Production Phase: User jab search bar mein fast type karta hai, UI bilkul freeze nahi hota. React peeche background mein list filter karta rehta hai aur jab ready hota hai tab screen par dikhata hai.
+
+Topic 11: Web Workers (Main Thread Offloading) [⚠️ AI-Generated]
+Subtopics: Single Threaded JavaScript, UI Blocking, Web Workers API, Background Threads, Heavy Computation, Comlink Library
+
+[📊 SCOPE SIGNAL for Topic 11:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Concept breakdown and Web Worker setup for parsing heavy arrays.
+* Key terms from notes: Web Workers, Main Thread, UI Freezing, background thread, postMessage, onmessage, heavy computation, CSV parsing, image manipulation, Comlink
+* Explicit emphasis in notes: "React UI thread ko kabhi block (freeze) nahi karna chahiye."
+* Notes mein jo analogies/examples the: "Restaurant Head Chef (Main Thread) vs Prep Cook (Web Worker)" — Head chef customer se baat karta hai, prep cook peeche sabziyan (heavy data) kaatta hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 11:
+[Web Workers, JavaScript single thread, Main Thread, UI blocking, UI freezing, background thread, Worker API, new Worker(), postMessage(), onmessage, heavy computation, CSV parsing, data encryption, image manipulation, offloading, Comlink, proxy, Vite worker import, ?worker, ⭐Head Chef vs Prep Cook, ⭐UI freeze]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
+
+* Testing/Offline Phase: Developer ek 50MB ka CSV file dashboard mein upload karta hai, jisse React map() chalate waqt browser "Page Unresponsive" ka popup de deta hai.
+* Fixing/Iteration Phase: Developer data parsing logic ko ek alag `worker.js` file mein move karta hai aur UI se usko `postMessage` ke through data bhejta hai.
+* Live Production Phase: User jab badi file upload karta hai, UI ekdum smooth rehta hai, spinner ghoomta rehta hai, aur background mein Web Worker data process karke silently wapas bhej deta hai.
+* Additional context: Yeh ek pure Enterprise level problem jahan frontend ko data-heavy operations handle karne padte hain.
 * Additional context: Yeh `useMemo` aur `useCallback` se ek step aage ki performance optimization hai.
 
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
@@ -1283,18 +1426,20 @@ Topic 2: React Memoization Techniques (memo, useMemo, useCallback) [⚠️ Deriv
 Section 2: Large Data Strategies & Bundle Size [⚠️ Derived]
 Topic 3: Lazy Loading & Code Splitting
 Topic 4: List Virtualization (Windowing)
+Topic 5: Enterprise Data Grids (TanStack Table) [⚠️ AI-Generated]
 
 Section 3: Performance Measurement & Debugging [⚠️ Derived]
-Topic 5: React DevTools Profiler
-Topic 6: why-did-you-render Library
+Topic 6: React DevTools Profiler
+Topic 7: why-did-you-render Library
 
 Section 4: Event Control & Real-World User Metrics [⚠️ Derived]
-Topic 7: Throttling & Debouncing
-Topic 8: Core Web Vitals & Asset Optimization [⚠️ Derived]
-Topic 9: React 18/19 Concurrent Features [⚠️ AI-Generated]
+Topic 8: Throttling & Debouncing
+Topic 9: Core Web Vitals & Asset Optimization [⚠️ Derived]
+Topic 10: React 18/19 Concurrent Features [⚠️ AI-Generated]
+Topic 11: Web Workers (Main Thread Offloading) [⚠️ AI-Generated]
 
 📊 PHASE SUMMARY:
-Sections: 4 | Topics: 9 | Subtopics: 54
+Sections: 4 | Topics: 11 | Subtopics: 66
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -1400,7 +1545,7 @@ Subtopics: Server State Management, React Query, TanStack Query, SWR, Automatic 
 🔑 KEYWORDS DUMP for Topic 4:
 [Server State Management, React Query, TanStack Query, SWR, Vercel, ⭐Caching[emphasized in notes], ⭐Automatic Re-fetching[emphasized in notes], ⭐stale-while-revalidate[emphasized in notes], @tanstack/react-query, QueryClient, QueryClientProvider, useQuery, data, isLoading, isError, error, queryKey, Cache Key, queryFn, fetchUserData, mutations, useMutation, POST, PUT, DELETE]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Developer removes manual useEffects and wraps the app with QueryClientProvider to handle fetching globally.
 * Fixing/Iteration Phase: Developer uses unique query keys (e.g., ['user', userId]) so the tool automatically caches data and knows exactly when to refetch it.
@@ -1413,7 +1558,7 @@ Jab data HTTP requests ka wait na kare balki server se direct push ho. [⚠️ A
 Topic 5: WebSockets & Server-Sent Events (SSE) [⚠️ AI-Generated]
 Subtopics: HTTP Polling vs WebSockets, Socket.io Client, Bi-directional Communication, Server-Sent Events (SSE), Event Listeners, Connection Cleanup
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1423,14 +1568,40 @@ Subtopics: HTTP Polling vs WebSockets, Socket.io Client, Bi-directional Communic
 * Notes mein jo analogies/examples the: "Baar-baar postman se poochhna (Polling)" vs "Phone call line open rakhna (WebSockets)" vs "Radio broadcast sunna (SSE)".
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [WebSockets, Socket.io, real-time, live data, chat app, stock ticker, bi-directional communication, Server-Sent Events, SSE, unidirectional, HTTP Polling, socket.io-client, socket.on(), socket.emit(), io(), disconnect, cleanup function, useEffect, ⭐Phone call, ⭐Radio broadcast]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: Developer `useEffect` ke andar socket connection open karta hai aur server se live messages listen karta hai.
 * Fixing/Iteration Phase: Developer component unmount hone par `socket.disconnect()` add karta hai taaki multiple ghost connections na banein.
 * Live Production Phase: User ko stock prices ya WhatsApp-like chat messages bina page refresh kiye milliseconds mein screen par dikhte hain.
+
+===Section 4: GraphQL Integration [⚠️ AI-Generated]===
+REST APIs ke over-fetching issues ko solve karna aur sirf utna data maangna jitni zaroorat ho. [⚠️ AI-Generated]
+
+Topic 6: GraphQL & Apollo Client [⚠️ AI-Generated]
+Subtopics: REST vs GraphQL, Over-fetching, Under-fetching, Apollo Client Setup, useQuery, useMutation, Graph Queries
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Concept comparison, Apollo Provider setup, and useQuery/useMutation examples.
+* Key terms from notes: GraphQL, REST, over-fetching, under-fetching, Apollo Client, ApolloProvider, InMemoryCache, gql template literal, useQuery, useMutation
+* Explicit emphasis in notes: "Sirf wahi data maango jo UI mein dikhana hai."
+* Notes mein jo analogies/examples the: "Fixed Thali (REST API) vs Buffet System (GraphQL)" — Thali mein sab kuch aayega chahe khana ho ya nahi, Buffet mein sirf wahi loge jo plate mein chahiye.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[GraphQL, REST alternative, over-fetching, under-fetching, Apollo Client, @apollo/client, graphql, ApolloProvider, InMemoryCache, query, mutation, gql tag, useQuery, useMutation, loading, error, data, endpoints, single endpoint, /graphql, Schema, Types, ⭐Fixed Thali, ⭐Buffet System]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Developer Apollo Client configure karta hai aur `gql` use karke query likhta hai jisme 50 fields ki jagah sirf `id`, `name`, aur `email` maangi gayi ho.
+* Fixing/Iteration Phase: Agar UI mein achanak `avatar` image add karni ho, toh developer backend team ka wait nahi karta naya endpoint banane ke liye, bas apni query mein `avatar` field add kar leta hai.
+* Live Production Phase: Mobile users ka data pack aur load time bachta hai kyunki network request ka size 80% chota ho jaata hai.
+* Additional context: Bade scale enterprise architectures (jaise Netflix, GitHub) REST se move hokar GraphQL par switch ho chuke hain taaki frontend completely UI-driven data fetch kar sake.
 * Additional context: Dashboards aur live tracking enterprise apps ke liye yeh mandatory skill hai.
 
 --- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
@@ -1450,8 +1621,11 @@ Topic 4: React Query and SWR (The Intermediate Way)
 Section 3: Real-Time Data Integration [⚠️ AI-Generated]
 Topic 5: WebSockets & Server-Sent Events (SSE) [⚠️ AI-Generated]
 
+Section 4: GraphQL Integration [⚠️ AI-Generated]
+Topic 6: GraphQL & Apollo Client [⚠️ AI-Generated]
+
 📊 PHASE SUMMARY:
-Sections: 3 | Topics: 5 | Subtopics: 36
+Sections: 4 | Topics: 6 | Subtopics: 43
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -1553,7 +1727,7 @@ Subtopics:  Component, Wrapping App, Store Availability, store Prop, Context API
 🔑 KEYWORDS DUMP for Topic 4:
 [, react-redux, Redux store, configureStore, App component, wrap, index.js, main.jsx, Navbar, useSelector, useDispatch, Main Power Supply, WiFi Router, store={store}, React.StrictMode, Context API, behind the scenes]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Developer main.jsx ya index.js mein  add karke poore app ko store se connect karta hai.
 * Fixing/Iteration Phase: (N/A)
@@ -1563,7 +1737,7 @@ Subtopics:  Component, Wrapping App, Store Availability, store Prop, Context API
 Topic 5: useSelector Hook (Reading State)
 Subtopics: useSelector Hook, Reading Global State, Selector Function, Automatic Subscription & Re-rendering, State Selection Best Practices
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1573,10 +1747,10 @@ Subtopics: useSelector Hook, Reading Global State, Selector Function, Automatic 
 * Notes mein jo analogies/examples the: useSelector ko "Bank App" bola gaya hai jo specific account balance (cart items) check karne deta hai aur notification (re-render) bhejta hai.
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [useSelector, react-redux, functional component, Redux store, read state, global state, UI, Navbar, totalItems, ProfilePage, Bank App, state.cart.totalItems, automatic subscription, re-render, optional chaining, selector function, state.cart, state.user]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: Developer component mein specific state path pass karke UI verify karta hai.
 * Fixing/Iteration Phase: Developer optimize karta hai taaki unnecessary re-renders na hon (by selecting specific values instead of whole state objects).
@@ -1629,6 +1803,32 @@ Subtopics: createAsyncThunk Function, Asynchronous Logic in Redux, Action States
 * Live Production Phase: Page load hone pe component dispatch karta hai, HTTP request hoti hai, aur async response aane pe global state seamlessly sync ho jati hai.
 * Additional context: Agar extensive API caching chahiye to Redux se behtar React Query hai, par mixed state ke liye thunk use hota hai.
 
+===Section 2: Modern Lightweight State Management [⚠️ AI-Generated]===
+Redux ke heavy boilerplate ka modern, fast, aur lightweight alternative. [⚠️ AI-Generated]
+
+Topic 8: Zustand (The Modern Choice) [⚠️ AI-Generated]
+Subtopics: Zustand Setup, create hook, State & Actions together, Redux alternative, No Provider needed, DevTools Middleware
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Short comparison with Redux and a complete Zustand store example
+* Key terms from notes: Zustand, bear state, lightweight, create, set, get, no Provider, boilerplate-free, middleware
+* Explicit emphasis in notes: "Zustand mein <Provider> se app ko wrap karne ki zaroorat nahi hoti."
+* Notes mein jo analogies/examples the: "Bank ka lamba process (Redux) vs UPI se instant payment (Zustand)."
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[Zustand, state management, lightweight, boilerplate-free, create, set function, get function, no Provider wrapper, Redux alternative, React Query companion, persist middleware, devtools, npm install zustand, store.js, useStore, ⭐Bank vs UPI, ⭐No Provider]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Testing/Offline Phase: Developer `create` function use karke ek choti si file mein state aur usko update karne ke functions likh deta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Component seedha `useStore()` hook call karta hai aur globally state update kar leta hai bina kisi complex dispatch ya slice configuration ke.
+* Additional context: 2024-2025 mein naye startups aur enterprises Redux ki jagah Zustand + React Query ka combo prefer kar rahe hain.
+
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Sections & Topics Extracted in this phase:**
@@ -1642,6 +1842,8 @@ Section 1: Redux Toolkit (Module 10)
    Topic 5: useSelector Hook (Reading State)
    Topic 6: useDispatch Hook (Updating State)
    Topic 7: createAsyncThunk (Async API Calls in Redux)
+Section 2: Modern Lightweight State Management
+   Topic 8: Zustand (The Modern Choice)
 
 ```
 
@@ -1679,8 +1881,11 @@ Topic 5: useSelector Hook (Reading State)
 Topic 6: useDispatch Hook (Updating State)
 Topic 7: createAsyncThunk (Async API Calls in Redux)
 
+Section 2: Modern Lightweight State Management [⚠️ AI-Generated]
+Topic 8: Zustand (The Modern Choice) [⚠️ AI-Generated]
+
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 36
+Sections: 2 | Topics: 8 | Subtopics: 42
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1780,7 +1985,7 @@ Subtopics: Developer Tools, Console Tab, Sources Tab, Breakpoints, Code Pausing,
 🔑 KEYWORDS DUMP for Topic 4:
 [Browser Debugging, Developer Tools, F12, Console Tab, console.log(), warnings, errors, Sources Tab, debug center, breakpoints, pause points, Scope panel, Step Over, F10, Source Maps, .map files, minified code, npm run build, npm run dev, debugger;, slow motion, garage, lift]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: Jab code expected behave nahi karta, developer DevTools ke Sources tab mein breakpoint lagata hai, action trigger karta hai, aur line-by-line step over karke live variable state check karta hai.
@@ -1790,7 +1995,7 @@ Subtopics: Developer Tools, Console Tab, Sources Tab, Breakpoints, Code Pausing,
 Topic 5: React Dev Tools (Components Tab)
 Subtopics: React Developer Tools Extension, Components Tab, React Component Tree, Live Props & State Editing, Prop Drilling Tracing, Elements vs Components Tab
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Surface
 * Coverage Angle: Practical only
@@ -1800,10 +2005,10 @@ Subtopics: React Developer Tools Extension, Components Tab, React Component Tree
 * Notes mein jo analogies/examples the: Normal Elements tab building ka "X-Ray" (HTML DOM) hai, jabki Components tab building ka "Blueprint" (React Tree) hai.
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [React Dev Tools, browser extension, Chrome, Firefox, Components Tab, React Component Tree, HTML DOM tree, props, state, live edit, prop drilling, Profiler Tab, Elements tab, X-Ray, Blueprint, Room 501, Key Card, AC Temperature, Hooks, useState, useContext, npm start]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: Developer browser mein Components tab khol kar specific component select karta hai, uski state/props ko manually edit karke edge cases test karta hai bina code reload kiye.
@@ -1961,7 +2166,7 @@ Subtopics: Build Tools, Transpiler (Babel), Bundler (Vite / Webpack), ES Modules
 🔑 KEYWORDS DUMP for Topic 4:
 [Build Tools, Transpiler, Babel, Translator, ES6+, JSX, ES5, React.createElement, transform, transpile, Bundler, Vite, Webpack, Packer, bundle, main.js, HTTP request overhead, minify, IKEA Furniture, Instruction Manual, App.jsx, ES Modules, ESM, on-demand, npm run dev, npm start, npm run build, /dist, /build, create-react-app, pre-configured]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Developer `npm run dev` chalata hai toh Vite instantly ESM use karke on-demand code serve aur transpile (via Babel) karta hai.
 * Fixing/Iteration Phase: (N/A)
@@ -1971,7 +2176,7 @@ Subtopics: Build Tools, Transpiler (Babel), Bundler (Vite / Webpack), ES Modules
 Topic 5: TypeScript with React (Introduction)
 Subtopics: TypeScript (TS), Static Type Checking, Developer Experience (DX), Compile-time Error Detection, Interfaces, React.FC
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1981,10 +2186,10 @@ Subtopics: TypeScript (TS), Static Type Checking, Developer Experience (DX), Com
 * Notes mein jo analogies/examples the: Furniture assemble karna — andhere mein jahan galti baad mein pata chalti hai (JS) vs roshni mein jahan helper turant galat screw (type) ke liye tok deta hai (TS).
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [TypeScript, TS, superset, Static Type Checking, run-time, compile-time, Developer Experience, DX, Intellisense, PropTypes, dark room, light room, .tsx, UserProfileCard.tsx, interface, UserProfileProps, contract, string, number, boolean, ?, optional, React.FC, shape, npm create vite@latest my-ts-app -- --template react-ts, type, highly recommended]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: Developer VS Code mein code likhte waqt hi TypeScript se instant inline errors (red lines) dekhta hai agar galat data type pass hua ho.
 * Fixing/Iteration Phase: Developer compile-time par hi type mismatch fix kar leta hai, jisse UI crash hone se bach jata hai.
@@ -2014,6 +2219,52 @@ Subtopics: Next.js, Client Side Rendering (CSR) Issues, Server-Side Rendering (S
 * Live Production Phase: User jab site request karta hai, server poora HTML generate karke bhejta hai (instant view + SEO). Uske baad browser mein React JS download hoke us static HTML ko interactive banata hai (Hydration).
 * Additional context: Public-facing SEO-heavy sites ke liye Next.js zaroori hai, jabki private dashboards ke liye Vite (CSR) kaafi hai.
 
+Topic 7: Internationalization (i18n) & Localization [⚠️ AI-Generated]
+Subtopics: i18n Concept, react-i18next, Translation JSON files, Language Switcher, useTranslation Hook, Interpolation
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Library setup, JSON translation files, and Language Switcher component
+* Key terms from notes: i18n, localization, react-i18next, i18next, useTranslation, t() function, en.json, hi.json, Language Switcher, fallbackLng
+* Explicit emphasis in notes: "Hardcoded strings (text) ko UI mein likhna band karo."
+* Notes mein jo analogies/examples the: "Multilingual Tour Guide (i18n) jo user ki language ke hisaab se script (JSON file) padh kar sunata hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[i18n, Internationalization, localization, l10n, react-i18next, i18next, useTranslation, t function, translation namespaces, en.json, hi.json, es.json, Language Switcher, fallbackLng, interpolation, dynamic variables, i18n.changeLanguage(), hardcoded strings, ⭐Tour Guide, ⭐Script]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Testing/Offline Phase: Developer har language ke liye ek `hi.json` aur `en.json` file banata hai aur UI mein `<h1>Welcome</h1>` ki jagah `<h1>{t('welcome_message')}</h1>` likhta hai.
+* Fixing/Iteration Phase: Agar client "Welcome" ki jagah "Hello" chahta hai, toh developer code change nahi karta, sirf JSON file update karta hai.
+* Live Production Phase: User dropdown se "Hindi" select karta hai, aur instantly bina page refresh hue poori app ki bhasha badal jaati hai.
+* Additional context: Global enterprise products (jaise Amazon, Netflix) bina i18n ke nahi ban sakte.
+
+Topic 8: PWA & Offline Support (Service Workers) [⚠️ AI-Generated]
+Subtopics: Progressive Web Apps (PWA), Service Workers, Manifest.json, Offline Caching, Workbox, Installable Web Apps
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & Setup
+* Notes mein content volume: PWA concept breakdown and Vite PWA plugin setup
+* Key terms from notes: PWA, Service Worker, manifest.json, offline mode, caching strategies, Network First, Cache First, vite-plugin-pwa, Lighthouse PWA score
+* Explicit emphasis in notes: "Service worker main JavaScript thread se alag background mein chalta hai."
+* Notes mein jo analogies/examples the: "Restaurant ka Offline Menu Card" — Agar internet (waiter) nahi bhi hai, tab bhi user app khol kar purana data/layout (menu) dekh sake.
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[Progressive Web App, PWA, Service Worker, background thread, manifest.json, installable, Add to Home Screen, A2HS, offline support, caching strategies, Cache First, Network First, vite-plugin-pwa, Workbox, Push Notifications, sync, navigator.serviceWorker.register, HTTPS requirement, ⭐Offline Menu Card]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Testing/Offline Phase: Developer Vite mein PWA plugin configure karta hai aur Chrome DevTools ke 'Application' tab mein Service Worker ko test karta hai.
+* Fixing/Iteration Phase: Developer network tab mein "Offline" mode simulate karta hai aur ensure karta hai ki 'Dinosaur page' ki jagah cached React app load ho rahi hai.
+* Live Production Phase: Warehouse worker tablet par React app use kar raha hai. Internet disconnect hone par bhi app chal rahi hai, data locally save ho raha hai, aur net wapas aane par server se sync ho jaata hai.
+* Additional context: Native mobile apps ka sasta aur fast alternative banane ke liye enterprise companies PWA ka heavy use karti hain.
+
 --- 🛑 PHASE 3 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Sections & Topics Extracted in this phase:**
@@ -2026,6 +2277,7 @@ Section 3: Advanced Theory & React Ecosystem (Module 12)
    Topic 4: Bundlers (Vite / Webpack) & Transpilers (Babel)
    Topic 5: TypeScript with React (Introduction)
    Topic 6: Next.js (Introduction to SSR/RSC)
+   Topic 7: Internationalization (i18n) & Localization
 
 ```
 
@@ -2061,9 +2313,11 @@ Topic 3: Reconciliation (The "Diffing Algorithm")
 Topic 4: Bundlers (Vite / Webpack) & Transpilers (Babel)
 Topic 5: TypeScript with React (Introduction)
 Topic 6: Next.js (Introduction to SSR/RSC)
+Topic 7: Internationalization (i18n) & Localization [⚠️ AI-Generated]
+Topic 8: PWA & Offline Support (Service Workers) [⚠️ AI-Generated]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 33
+Sections: 1 | Topics: 8 | Subtopics: 45
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2163,7 +2417,7 @@ Subtopics: Animating SVGs, pathLength Property, Shape Morphing, Recharts Library
 🔑 KEYWORDS DUMP for Topic 4:
 [SVG, Scalable Vector Graphics, path, d attribute, pathLength, Morphing, Recharts, Chart.js, react-chartjs-2, D3.js, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, dataKey, motion.rect, motion.path, transformOrigin, shape prop, isAnimationActive, animationDuration, ⭐Signature, ⭐Excel]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Developer Recharts ko use karke pehle static data visualize karta hai, fir default shape ki jagah custom AnimatedBar component lagata hai.
 * Fixing/Iteration Phase: (N/A)
