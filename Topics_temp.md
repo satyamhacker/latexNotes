@@ -555,6 +555,74 @@ Subtopics: GET vs POST Requests, Sensitive Data Exposure, Access Logs, Request B
 * Live Production Phase: Payload body mein encrypt hokar network pe securely jata hai over HTTPS, URL query logs mein clean aur data-free bani rehti hai.
 * Additional context: POST request bina HTTPS ke insecure hoti hai kyunki body packet man-in-the-middle easily padh sakta hai.
 
+--3--Identification & Authentication Failures (Extended)--
+Topic 8: 3.8: Enterprise SSO (OAuth 2.0 & OIDC) Misconfigurations
+Subtopics: OAuth 2.0 Flows, Implicit Flow Vulnerabilities, Redirect URI Manipulation, State Parameter Bypass, CSRF in OAuth, JWT Signature Stripping, OIDC Claims
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed breakdown of OAuth flows and vulnerable implementation code
+* Key terms from notes: OAuth 2.0, OpenID Connect, SSO, Redirect URI, state parameter, implicit flow, authorization code, takeover
+* Explicit emphasis in notes: "Kabhi bhi 'state' parameter ko ignore mat karo, yeh aapka CSRF se bachaav hai."
+* Notes mein jo analogies/examples the: "Club ka VIP pass (token) jo kisi aur ke ID card (redirect URI) par deliver ho gaya."
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[OAuth 2.0, OIDC, SSO, Single Sign-On, Authorization Code Flow, Implicit Flow, redirect_uri, state, CSRF, Account Takeover, OAuth Proxy, passport.js, passport-google-oauth20, verify callback, JWT signature stripping, alg: none, JWKS, claims, privilege escalation, ⭐"Kabhi bhi 'state' parameter ko ignore mat karo"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Testing/Offline Phase: Hacker `redirect_uri` parameter ko intercept karke apni attacker site (`evil.com`) par point karta hai taaki victim ka auth code chura sake.
+* Fixing/Iteration Phase: Developer strict whitelisting lagata hai `redirect_uri` par (exact match, no wildcards) aur `state` parameter ko cryptographically generate karke validate karta hai.
+* Live Production Phase: App third-party login (Google/Microsoft) securely handle karti hai aur token replay ya CSRF attacks fail ho jate hain.
+* Additional context: Implicit flow ab deprecate ho chuka hai, hamesha PKCE ke saath Authorization Code flow use karna chahiye.
+
+Topic 9: 3.9: SAML XML Signature Wrapping (XSW)
+Subtopics: SAML Basics, Identity Provider (IdP), Service Provider (SP), XML Signature Wrapping (XSW), Assertion Tampering
+
+[📊 SCOPE SIGNAL for Topic 9:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Concept explanation with XML payloads
+* Key terms from notes: SAML, XML, IdP, SP, Signature Wrapping, Assertion, passport-saml
+* Explicit emphasis in notes: "SAML parsers ko hamesha strictly configure karo taaki wo tampered XML assertions ko reject karein."
+* Notes mein jo analogies/examples the: "Bank ke check par signature ke andar ek aur amount chhipa dena jise clerk (parser) confuse hoke pass kar de."
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[SAML 2.0, Security Assertion Markup Language, IdP, SP, XML Signature Wrapping, XSW, Assertion, NameID, passport-saml, XML parser, XML injection, cryptographic validation, clone, spoofing, enterprise login]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+
+* Testing/Offline Phase: Pentester Burp Suite interceptor aur SAML Raider extension use karke valid SAML response capture karta hai aur usme extra malicious `<Assertion>` inject karta hai (e.g., normal user se Admin banne ke liye).
+* Fixing/Iteration Phase: Developer updated `passport-saml` library use karta hai jo strict schema validation aur strict signature matching enforce karti hai.
+* Live Production Phase: Backend parser duplicate ya tampered XML IDs detect kar leta hai aur login flow reject kar deta hai.
+
+Topic 10: 3.10: Advanced JWT (JSON Web Token) Attacks
+Subtopics: JWT Structure, alg: none Attack, Secret Confusion (HMAC vs RSA), KID (Key ID) Manipulation, JKU/JWKS Injection, Offline Brute-force, jsonwebtoken Library Vulnerabilities
+
+[📊 SCOPE SIGNAL for Topic 10:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed breakdown of JWT headers, payloads, and vulnerable signature verification code
+* Key terms from notes: JWT, alg: none, HMAC, RSA, public key, private key, secret confusion, KID, JWKS, jwt.verify, Base64Url
+* Explicit emphasis in notes: "Hamesha `jwt.verify` mein allowed algorithms ka array explicitly define karo."
+* Notes mein jo analogies/examples the: "Check (JWT) par seal (signature) lagana, par clerk ko bol dena ki 'bina seal wale check bhi pass kar do' (alg: none)."
+]
+
+🔑 KEYWORDS DUMP for Topic 10:
+[JWT, JSON Web Token, Header, Payload, Signature, `alg: none`, `alg: HS256`, `alg: RS256`, Secret Confusion, RSA public key as HMAC secret, `KID`, Key ID manipulation, Path Traversal in KID, `../../../dev/null`, JKU, JWKS injection, `jwt.verify(token, secret, { algorithms: ['RS256'] })`, jsonwebtoken, jwt-decode, Hashcat, John the Ripper, ⭐"allowed algorithms ka array explicitly define karo"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+
+* Testing/Offline Phase: Pentester Burp Suite mein JWT intercept karta hai, header ko `alg: none` karta hai, signature delete karta hai, aur payload mein `isAdmin: true` karke bhejta hai. Ya fir public key download karke usey HMAC secret ki tarah use karke naya token sign karta hai (Secret Confusion).
+* Fixing/Iteration Phase: Developer `jsonwebtoken` library mein strictly `{ algorithms: ['RS256'] }` pass karta hai taaki server malicious algorithms ko parse hi na kare.
+* Live Production Phase: Tampered tokens backend par cryptographic validation fail kar dete hain aur HTTP 401 Unauthorized return hota hai.
+
 --- 🛑 PHASE 3 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Sections & Topics Extracted in this phase:**
@@ -568,6 +636,9 @@ Section 3: Module 3: Identity & Access: Authentication, Session Hijacking, MFA &
   Topic 5: 3.5: Lack of Multi-Factor Authentication (MFA)
   Topic 6: 3.6: Weak Session Management (Session ID in URL, No Logout Invalidation)
   Topic 7: 3.7: Sensitive Data in GET Requests (GET vs POST)
+  Topic 8: 3.8: Enterprise SSO (OAuth 2.0 & OIDC) Misconfigurations
+  Topic 9: 3.9: SAML XML Signature Wrapping (XSW)
+  Topic 10: 3.10: Advanced JWT (JSON Web Token) Attacks
 
 ```
 
@@ -583,13 +654,17 @@ Section 3: Module 3: Identity & Access: Authentication, Session Hijacking, MFA &
 Topic 1: 3.1: Identification & Authentication Failures: Introduction
 Topic 2: 3.2: Brute Force Attacks & Lockout Policy
 Topic 3: 3.3: Credential Stuffing & Weak Passwords
+--3--Identification & Authentication Failures (Extended)--
 Topic 4: 3.4: Weak Credential Recovery (Forgot Password Flaws)
 Topic 5: 3.5: Lack of Multi-Factor Authentication (MFA)
 Topic 6: 3.6: Weak Session Management (Session ID in URL, No Logout Invalidation)
 Topic 7: 3.7: Sensitive Data in GET Requests (GET vs POST)
+Topic 8: 3.8: Enterprise SSO (OAuth 2.0 & OIDC) Misconfigurations
+Topic 9: 3.9: SAML XML Signature Wrapping (XSW)
+Topic 10: 3.10: Advanced JWT (JSON Web Token) Attacks
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 46
+Sections: 1 | Topics: 10 | Subtopics: 65
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -909,14 +984,38 @@ Subtopics: Business Logic Concept, Automated Scanner Limitations, Cinema Ticket 
 * Live Production Phase: Vulnerable app manipulated amount ko payment gateway bhej deti hai jisse business ka loss hota hai. Secure app hack attempt fail kar deti hai.
 * Additional context: Scanner tools logic flaws nahi pakad sakte, inke liye threat modeling aur manual hacking mindset chahiye.
 
+--3--Logging, Monitoring & Business Logic (Extended)--
+Topic 7: 5.7: Race Conditions & TOCTOU (Time-of-Check to Time-of-Use)
+Subtopics: Race Conditions, TOCTOU, Multi-threading, Asynchronous Logic, Double Spending Attack, Coupon Abuse, Database Isolation Levels, Mutex Locks, Pessimistic Locking
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Highly technical async Node.js code with DB lock implementations
+* Key terms from notes: Race Condition, TOCTOU, Double Spending, async/await, Mutex, DB Locking, Isolation, Burp Turbo Intruder
+* Explicit emphasis in notes: "Microseconds ka gap aapki company ke millions of dollars drain kar sakta hai."
+* Notes mein jo analogies/examples the: "Ek hi bank account se ATM aur UPI se ek hi millisecond mein paise nikalna."
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[Race Condition, TOCTOU, Time-of-Check to Time-of-Use, Asynchronous, async/await, Event Loop, Double Spending, Burp Turbo Intruder, concurrent requests, DB Isolation, Pessimistic Locking, Optimistic Locking, `SELECT ... FOR UPDATE`, Mutex, redis-lock, Sequelize locks, transaction, rollback, commit, ⭐"Microseconds ka gap"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Testing/Offline Phase: Pentester Burp Turbo Intruder use karke 1 millisecond ke andar 50 same 'apply coupon' requests bhejta hai.
+* Fixing/Iteration Phase: Developer database transaction block lagata hai aur `SELECT ... FOR UPDATE` (Pessimistic Lock) use karta hai taaki jab tak ek request process ho rahi ho, row lock rahe.
+* Live Production Phase: Vulnerable app ek hi coupon ko 50 baar apply kar deti hai (logic check time gap ki wajah se). Secure app baaki 49 requests ko queue/reject kar deti hai lock hone ke karan.
+* Additional context: Node.js single-threaded hai par I/O operations (DB queries) async hote hain, jahan Race Conditions banti hain.
+
 ===Section 4: Next Steps [⚠️ Derived]===
 Upcoming attacks ki brief jhalak. [⚠️ Derived]
 
 --4--Next Steps--
-Topic 7: Module 6 Introduction
+Topic 8: Module 6 Introduction
 Subtopics: Supply Chain Attacks Concept, API Security Concept
 
-[📊 SCOPE SIGNAL for Topic 7:
+[📊 SCOPE SIGNAL for Topic 8:
 
 * Depth Level: Surface
 * Coverage Angle: Conceptual only
@@ -926,10 +1025,10 @@ Subtopics: Supply Chain Attacks Concept, API Security Concept
 * Notes mein jo analogies/examples the: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 7:
+🔑 KEYWORDS DUMP for Topic 8:
 [Module 6, doosron ka code, packages, libraries, Supply Chain, npm, APIs, modern attacks]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
 
 * Testing/Offline Phase: (N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Fixing/Iteration Phase: (N/A)
@@ -953,12 +1052,13 @@ Topic 4: Security Misconfiguration - Improper Error Handling
 Section 3: Logging, Monitoring & Business Logic (Winston, Price Manipulation) [⚠️ Derived]
 Topic 5: Logging & Monitoring Failures
 Topic 6: Business Logic Flaws & Price Manipulation
+Topic 7: 5.7: Race Conditions & TOCTOU (Time-of-Check to Time-of-Use)
 
 Section 4: Next Steps [⚠️ Derived]
-Topic 7: Module 6 Introduction
+Topic 8: Module 6 Introduction
 
 📊 PHASE SUMMARY:
-Sections: 4 | Topics: 7 | Subtopics: 56
+Sections: 4 | Topics: 8 | Subtopics: 65
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -1047,6 +1147,30 @@ Subtopics: Weak API Keys, Client-Side Hardcoding, No Rate Limiting, Denial of Se
 * Live Production Phase: Vulnerable setup mein hacker public API key se free data churata hai ya OTP api ko 10 laakh baar hit karke company ka laakho ka SMS bill generate kar deta hai.
 * Additional context: Public APIs ko hide nahi kiya jaa sakta par unhein domains se restrict zaroor karna chahiye.
 
+--2--API & Logic Misconfigurations (Extended)--
+Topic 3b: 6.4: GraphQL Introspection & Query Batching
+Subtopics: GraphQL Basics, Introspection Leak, Deeply Nested Queries, DoS via GraphQL, Query Batching, Resolver Authorization, IDOR in Resolvers
+
+[📊 SCOPE SIGNAL for Topic 3b:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed query payloads and secure Apollo Server configurations
+* Key terms from notes: GraphQL, Introspection, Resolvers, Query Depth, Batching, DoS, Apollo Server, REST vs GraphQL
+* Explicit emphasis in notes: "Production mein GraphQL Introspection HAMESHA disable honi chahiye."
+* Notes mein jo analogies/examples the: "Restaurant mein menu card (introspection) dena vs seedha kitchen mein jaake har ingredient ki list maang lena."
+]
+
+🔑 KEYWORDS DUMP for Topic 3b:
+[GraphQL, Introspection, `__schema`, `__type`, API documentation leak, Query Batching, brute force, Nested Queries, `author { posts { author { posts } } }`, DoS, Apollo Server, `introspection: false`, Query Depth Limiting, graphql-depth-limit, Resolvers, authorization checks, IDOR, context object, ⭐"Production mein GraphQL Introspection HAMESHA disable honi chahiye"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3b:
+
+* Testing/Offline Phase: Pentester `__schema` query bhej kar poori API ka map (hidden queries/mutations) nikalta hai, ya infinite nested query bhej kar server CPU 100% choke (DoS) kar deta hai.
+* Fixing/Iteration Phase: Developer Apollo Server mein `introspection: false` set karta hai aur `graphql-depth-limit` package use karke query depth ko 5 par limit kar deta hai.
+* Live Production Phase: Hacker ki nested query server pe parse hone se pehle hi depth limit error ke saath block ho jati hai.
+* Additional context: REST mein auth endpoint par lagti hai, GraphQL mein auth har single resolver (function) par lagni chahiye warna IDOR easily exploit ho jata hai.
+
 Topic 4: Mass Assignment
 Subtopics: Mass Assignment Concept, Object Assignment Trust, Hidden Property Override, Privilege Escalation, ORM Vulnerabilities, Burp Suite Manipulation, Whitelisting Fix, Data Transfer Object (DTO)
 
@@ -1093,6 +1217,29 @@ Subtopics: CORS Concept, Origin Asterisk Misconfiguration, CSRF Supercharging, S
 * Live Production Phase: Hacker `evil.com` se logged-in victim ke browser ke zariye API pe fetch bhejta hai. CORS misconfiguration hone ki wajah se browser hacker ko sensitive JSON response padhne de deta hai.
 * Additional context: Public data APIs pe `*` origin hona ek design choice ho sakti hai, but private (cookie-based) pe yeh hamesha ek flaw hai.
 
+--2--API & Logic Misconfigurations (Extended)--
+Topic 6: 6.5: WebSockets Security & CSWSH (Cross-Site WebSocket Hijacking)
+Subtopics: WebSocket Handshake, ws:// vs wss://, Cross-Site WebSocket Hijacking (CSWSH), Origin Header Bypass, Unauthenticated Sockets, Message Tampering, Socket.io Misconfigurations
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: WebSocket handshake HTTP request and secure Origin validation code
+* Key terms from notes: WebSockets, ws://, wss://, Handshake, CSWSH, Origin, Upgrade: websocket, Socket.io, auth middleware
+* Explicit emphasis in notes: "WebSockets by default Same-Origin Policy (SOP) follow nahi karte. Origin check aapko khud code mein likhna padta hai."
+* Notes mein jo analogies/examples the: "Ek private walkie-talkie channel jismein koi bhi bahar ka aadmi frequency tune karke baatein sun aur bol sakta hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[WebSockets, `ws://`, `wss://`, Handshake, `Upgrade: websocket`, `Connection: Upgrade`, CSWSH, Cross-Site WebSocket Hijacking, `Origin` header, CORS bypass, Socket.io, `io.use()`, middleware, Authentication token, Message Tampering, blind injection, Rate Limiting sockets, `verifyClient`, `allowedOrigins.includes(origin)`, ⭐"WebSockets by default Same-Origin Policy (SOP) follow nahi karte"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Pentester ek evil page banata hai jismein JavaScript directly target server ke `wss://` endpoint par connection initiate karti hai. Agar victim login hai, toh browser uske cookies bhej deta hai aur pentester ko real-time data feed mil jati hai (CSWSH).
+* Fixing/Iteration Phase: Developer WebSocket server start hote waqt handshake event par `Origin` header ko strictly validate karta hai aur socket connection ke liye URL parameter ya auth middleware ke through JWT verify karta hai.
+* Live Production Phase: Evil site se aayi hui WebSocket request ka handshake server reject kar deta hai kyunki Origin whitelist mein match nahi karta.
+
 ===Section 3: Advanced Attacks Intro (Module 7 Teaser) [⚠️ Derived]===
 Agle module ki jhalak jahan server assumptions aur logic ko test kiya jayega. [⚠️ Derived]
 
@@ -1132,6 +1279,7 @@ Topic 2: Dependency / Supply Chain Attacks
 
 Section 2: API & Logic Misconfigurations (Weak Keys, Mass Assignment, CORS) [⚠️ Derived]
 Topic 3: API Security (Weak Keys & Rate Limiting)
+Topic 3b: 6.4: GraphQL Introspection & Query Batching
 Topic 4: Mass Assignment
 Topic 5: CORS Misconfiguration
 
@@ -1139,7 +1287,7 @@ Section 3: Advanced Attacks Intro (Module 7 Teaser) [⚠️ Derived]
 Topic 6: Module 7 Introduction
 
 📊 PHASE SUMMARY:
-Sections: 3 | Topics: 6 | Subtopics: 46
+Sections: 3 | Topics: 8 | Subtopics: 60
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -1570,6 +1718,30 @@ Subtopics: Input Handling Review, Global Search, Dangerous Functions, Taint Anal
 * Live Production Phase: (N/A)
 * Additional context: Yeh automated aur manual audit ka combined approach hai jo 80% common vulns pakadta hai.
 
+--1--Module 9 - The Hacker's Process (Extended)--
+Topic 4b: Step 4.5 - Automated Taint Analysis (Semgrep & CodeQL)
+Subtopics: Static Application Security Testing (SAST), Taint Analysis, Data Flow Tracking, Semgrep Rules, GitHub CodeQL, Custom Rule Writing, CI/CD Integration
+
+[📊 SCOPE SIGNAL for Topic 4b:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: CodeQL and Semgrep yaml rule examples for tracking vulnerable functions
+* Key terms from notes: SAST, Semgrep, CodeQL, Taint Tracking, Source, Sink, false positives, yaml rules, AST (Abstract Syntax Tree)
+* Explicit emphasis in notes: "Manual search (Ctrl+F) sirf chote apps ke liye hai. Enterprise codebases ke liye Semgrep aapka radar hai."
+* Notes mein jo analogies/examples the: "Hazaaron panno ki kitaab mein ek needle (vuln) dhoondhne ke liye magnifying glass (Ctrl+F) ki jagah metal detector (SAST) use karna."
+]
+
+🔑 KEYWORDS DUMP for Topic 4b:
+[SAST, Semgrep, CodeQL, Taint Analysis, Data Flow, Source, Sink, Sanitizer, False Positives, Custom Rules, yaml, `$REQ.query`, `$RES.send`, Abstract Syntax Tree, AST, regex limitations, `semgrep --config p/nodejs`, CI/CD integration, GitHub Actions, SonarQube, ⭐"Semgrep aapka radar hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4b:
+
+* Testing/Offline Phase: Pentester client ke 500k line codebase par custom Semgrep rules likh kar run karta hai taaki saare `req.body` (source) bina validation ke database query (sink) mein jaane wale paths automatically nikal aayen.
+* Fixing/Iteration Phase: Development team in SAST tools ko GitHub Actions mein integrate karti hai taaki har Pull Request par code automatically scan ho jaye.
+* Live Production Phase: (N/A - This is purely a pre-deployment/audit activity).
+* Additional context: Regex-based grep tools code context nahi samajhte, par Semgrep/CodeQL variables aur functions ka logic track kar sakte hain.
+
 Topic 5: Step 5 - Authentication & Authorization Review
 Subtopics: Authentication Review, Authorization Review, Account Takeover, Privilege Escalation, Route Guards, IDOR Check
 
@@ -1743,6 +1915,7 @@ Topic 1: Step 1 - Reconnaissance (Project ko Samajhna)
 Topic 2: Step 2 - Black-Box Testing (Bina Code Dekhe)
 Topic 3: Step 3 - White-Box Review (Code Structure Samajhna)
 Topic 4: Step 4 - Input Handling Review (Data Kahan se Aa Raha Hai?)
+Topic 4b: Step 4.5 - Automated Taint Analysis (Semgrep & CodeQL)
 Topic 5: Step 5 - Authentication & Authorization Review
 Topic 6: Step 6 - Sensitive Data Exposure Review
 Topic 7: Step 7 - Business Logic Review
@@ -1753,7 +1926,7 @@ Section 2: Course Completion & Bonus Intro [⚠️ Derived]
 Topic 10: Course Recap & Module 10 Introduction [⚠️ Derived]
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 10 | Subtopics: 46
+Sections: 2 | Topics: 11 | Subtopics: 53
 
 --- 🛑 PHASE 9 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -1817,6 +1990,30 @@ Subtopics: Insecure Deserialization, Remote Code Execution (RCE), Malicious Gadg
 * Fixing/Iteration Phase: Complex serialize libraries ko remove karke sirf standard JSON.parse aur JSON.stringify ka use karna taaki functions deserialize na ho sakein.
 * Live Production Phase: Hacker manipulated cookie bhejta hai jo server par deserialize hote hi RCE trigger karke server shell de deta hai.
 * Additional context: JSON RCE se toh bacha lega, par Mass Assignment/Prototype Pollution se nahi.
+
+--1--Bonus Advanced Topics (Extended)--
+Topic 2b: Server-Side Template Injection (SSTI)
+Subtopics: Template Engines, SSTI Concept, EJS, Pug, Handlebars, RCE via SSTI, Object Literal Escape, Global Scope Access
+
+[📊 SCOPE SIGNAL for Topic 2b:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed payloads for EJS and Handlebars RCE
+* Key terms from notes: SSTI, Template Engine, EJS, Pug, Handlebars, `<%=`, Context, RCE, `require('child_process')`, Express res.render
+* Explicit emphasis in notes: "User input ko kabhi bhi direct template string mein render mat karo, hamesha variable pass karo."
+* Notes mein jo analogies/examples the: "Printing press (template engine) mein user ko letter chaapne ki jagah, apna khud ka naya block (code) daalne dena."
+]
+
+🔑 KEYWORDS DUMP for Topic 2b:
+[SSTI, Server-Side Template Injection, EJS, Pug, Handlebars, res.render, `<%=`, `<%-`, template literal, `global.process`, `require('child_process')`, RCE, Remote Code Execution, payload, context escape, AST, logic-less templates, Tplmap, ⭐"hamesha variable pass karo"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2b:
+
+* Testing/Offline Phase: Pentester `{{7*7}}` ya `<%= 7*7 %>` jaisi mathematical strings input field (e.g. username) mein bhejta hai. Agar output mein `49` aaye, toh SSTI confirm ho jata hai.
+* Fixing/Iteration Phase: Developer `res.render('profile', { name: req.query.name })` use karta hai na ki `res.render('Hello ' + req.query.name)` (jo dangerous hai). Handlebars jaise "logic-less" templates ka use better hai.
+* Live Production Phase: Vulnerable app hacker ka bheja hua EJS tag `<%= process.mainModule.require('child_process').execSync('id') %>` execute kar deti hai, jisse root access leak ho jata hai.
+* Additional context: Node.js mein SSTI thoda rare hai (Python Jinja2 ke comparison mein), par insecure implementation (jaise email templates) mein commonly milta hai.
 
 Topic 3: 10.3: HTTP Request Smuggling
 Subtopics: HTTP Request Smuggling, Front-end Server, Back-end Server, Content-Length Header, Transfer-Encoding Header, CL.TE Attack, Buffer Hijack, Proxy Normalization
@@ -1920,6 +2117,7 @@ Subtopics: Course Completion, Elite Attacks Mastery, Practice Recommendation
 Section 1: Module 10: Bonus Advanced Topics (DOM XSS, Deserialization, Request Smuggling, Clickjacking) [⚠️ Derived]
 Topic 1: 10.1: DOM-based XSS (DOM XSS)
 Topic 2: 10.2: Insecure Deserialization
+Topic 2b: Server-Side Template Injection (SSTI)
 Topic 3: 10.3: HTTP Request Smuggling
 Topic 4: 10.4: Clickjacking (UI Redress Attack)
 
@@ -1927,7 +2125,7 @@ Section 2: Course Wrap-up [⚠️ Derived]
 Topic 5: Final Conclusion & Next Steps [⚠️ Derived]
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 5 | Subtopics: 29
+Sections: 2 | Topics: 6 | Subtopics: 37
 
 --- 🛑 PHASE 10 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -1935,3 +2133,103 @@ Sections: 2 | Topics: 5 | Subtopics: 29
 
 ==================================================================================
 
+# Section 11: Enterprise Cloud & IaC (NEW SECTION)
+
+📦 Processing: Phase/Module 11 — Enterprise Cloud & IaC Security
+
+Section 1: Cloud & Infrastructure as Code (IaC) Security [⚠️ Derived]
+Modern cloud setups aur IaC mein hone wali aam galtiyan. [⚠️ Derived]
+
+--1--Cloud & Infrastructure as Code (IaC) Security--
+Topic 1: 11.1: Cloud Metadata SSRF (AWS IMDSv1 vs IMDSv2)
+Subtopics: AWS IMDS, Metadata API, SSRF to Cloud, IAM Roles, IAM Credentials Leak, IMDSv2 Token, Server-Side Request Forgery
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed AWS metadata endpoint URLs and attack payload
+* Key terms from notes: IMDSv1, IMDSv2, `169.254.169.254`, Metadata, SSRF, IAM Role, AccessKeyId, SecretAccessKey, Token
+* Explicit emphasis in notes: "Agar app AWS par hai aur SSRF mil gaya, toh aapka target humesha `169.254.169.254` hona chahiye."
+* Notes mein jo analogies/examples the: "Ek hotel ka intercom (metadata endpoint) jise koi bhi room se bina ID dikhaye reception (IAM keys) access kar sake."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[SSRF, Cloud Metadata, AWS, IMDS, Instance Metadata Service, `169.254.169.254`, `latest/meta-data/iam/security-credentials/`, IAM Role, AccessKeyId, SecretAccessKey, SessionToken, IMDSv2, PUT request, Token requirement, Privilege Escalation, Cloud Takeover, EC2, ⭐"target humesha 169.254.169.254"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Pentester image upload ya PDF generator endpoint (SSRF vulnerable) mein URL ki jagah `http://169.254.169.254/...` pass karta hai.
+* Fixing/Iteration Phase: DevOps engineer Terraform/CDK mein IMDSv1 ko disable karta hai aur enforce karta hai ki IMDSv2 (jo token-based aur SSRF-resistant hai) use ho.
+* Live Production Phase: Hacker ka SSRF attempt metadata server pe fail ho jata hai kyunki IMDSv2 strict `PUT` request aur headers maangta hai jo basic SSRF se nahi bheje ja sakte.
+* Additional context: Bahut si companies abhi tak legacy reasons ki wajah se IMDSv1 enabled rakhti hain, jo bohot bada risk hai.
+
+Topic 2: 11.2: Infrastructure as Code (IaC) Secrets Leakage
+Subtopics: IaC, Terraform, AWS CDK, `.tfstate` files, Hardcoded Secrets in Git, Git History, trufflehog, gitleaks, Environment Variables
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & Practical
+* Notes mein content volume: Explanation of how secrets leak via IaC files
+* Key terms from notes: Terraform, `.tfstate`, AWS CDK, git commit, GitHub, trufflehog, gitleaks, Secrets Manager
+* Explicit emphasis in notes: "Infrastructure code waisa hi secure hona chahiye jaisa application code. '.tfstate' mein secrets plain text mein hote hain."
+* Notes mein jo analogies/examples the: "Ghar ka naya naksha (IaC) jismein tijori ka password bhi print ho gaya ho."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[IaC, Infrastructure as Code, Terraform, `.tf`, `.tfstate`, state file, AWS CDK, CloudFormation, Hardcoded Secrets, Database Password, AWS Keys, GitHub, Git History, BFG Repo Cleaner, trufflehog, gitleaks, pre-commit hook, AWS Secrets Manager, HashiCorp Vault, ⭐"plain text mein hote hain"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Pentester client ke GitHub repo ka `.git` history clone karta hai aur `trufflehog` run karke purane commits se Terraform files mein hardcoded DB passwords nikalta hai.
+* Fixing/Iteration Phase: Developer secrets ko `.tf` files se nikal kar AWS Secrets Manager/Vault mein rakhta hai aur `.tfstate` ko encrypted S3 bucket (remote backend) par store karta hai.
+* Live Production Phase: CI/CD pipeline mein `gitleaks` lagaya gaya hai jo kisi bhi naye PR mein secret push hone se pehle use block kar deta hai.
+
+--1--Cloud & Infrastructure as Code (IaC) Security (Extended)--
+Topic 3: 11.3: CI/CD Pipeline Poisoning & Runner Hijacking
+Subtopics: CI/CD Workflows, GitHub Actions Security, Pwn Requests (Malicious PRs), Self-Hosted Runner Takeover, Pipeline Secrets Extraction, Insecure Environment Variables
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Vulnerable GitHub Actions `.yml` files vs Secure execution contexts
+* Key terms from notes: CI/CD, Pipeline Poisoning, GitHub Actions, Pull Request, Runner, `pull_request_target`, secrets.GITHUB_TOKEN, reverse shell
+* Explicit emphasis in notes: "Untrusted code (jaise external PR) ko kabhi bhi privileged CI/CD runner par execute mat hone do."
+* Notes mein jo analogies/examples the: "Factory ki assembly line (Pipeline) par bahar se aaye kisi anjaan vyakti ko quality inspector bana dena."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[CI/CD, Continuous Integration, Pipeline Poisoning, GitHub Actions, `.github/workflows/`, GitLab CI, `.gitlab-ci.yml`, Pwn Requests, Malicious PR, Runner Hijacking, Self-hosted runners, `pull_request` vs `pull_request_target`, `secrets.GITHUB_TOKEN`, `secrets.AWS_ACCESS_KEY_ID`, Reverse Shell in pipeline, base64 exfiltration, `actions/checkout`, untrusted code execution, DevSecOps, ⭐"untrusted code execute mat hone do"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Pentester (as an external contributor) open-source repo ya internal project mein ek Pull Request (PR) bhejta hai jiske tests (e.g. `npm test`) mein malicious code chhupa hota hai jo CI environment ke secrets padh kar attacker ko bhej de.
+* Fixing/Iteration Phase: DevOps engineer CI yaml mein `pull_request_target` ka use dhyan se karta hai, external PRs ke liye secrets inject hone se rokta hai, aur isolated/ephemeral runners ka use karta hai.
+* Live Production Phase: Malicious PR run toh hota hai, par ek low-privileged isolated container mein jahan cloud secrets present nahi hote, jisse attack surface zero ho jata hai.
+
+--- 🛑 PHASE 11 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Sections & Topics Extracted in this phase:**
+
+```
+Section 11: Enterprise Cloud & IaC (NEW SECTION)
+  Topic 1: 11.1: Cloud Metadata SSRF (AWS IMDSv1 vs IMDSv2)
+  Topic 2: 11.2: Infrastructure as Code (IaC) Secrets Leakage
+```
+
+⏳ **Waiting for:** Next phase/module notes (Module 12)
+
+---
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Cloud & Infrastructure as Code (IaC) Security [⚠️ Derived]
+Topic 1: 11.1: Cloud Metadata SSRF (AWS IMDSv1 vs IMDSv2)
+Topic 2: 11.2: Infrastructure as Code (IaC) Secrets Leakage
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 3 | Subtopics: 22
