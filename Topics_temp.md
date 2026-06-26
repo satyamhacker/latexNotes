@@ -1062,15 +1062,37 @@ Subtopics: Compound Components, Implicit State Sharing, Dot Notation, Context AP
 * Live Production Phase: Pura UI ekdum clean aur readable dikhta hai, aur components apne aap seamlessly communicate karte hain bina 50 props pass kiye.
 * Additional context: Yeh pattern Headless UI libraries (jaise Radix) ka foundational architecture hai.
 
+Topic 5: Control Props Pattern (Advanced Component API) [⚠️ AI-Generated]
+Subtopics: Control Props, Inversion of Control, Controlled vs Uncontrolled Hybrid, State Reducers, Custom UI Libraries
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Explanation with a custom complex Toggle or Select component
+* Key terms from notes: Control Props, Inversion of Control (IoC), internal state, external state, controlled vs uncontrolled, fallback state, state reducer pattern
+* Explicit emphasis in notes: "Component ko itna smart banao ki wo bahar se pass kiye state se bhi chale aur bina state ke bhi (like native HTML inputs)."
+* Notes mein jo analogies/examples the: "Self-driving car (Uncontrolled) vs Manual override with Steering (Controlled)" — jahan driver jab chahe control apne haath mein le sakta hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Control Props, Inversion of Control, IoC, component API design, internal state, external state, controlled, uncontrolled, fallback state, state reducer, onChange prop, value prop, defaultValue, headless hooks, UI libraries, MUI, Radix, override logic, ⭐Self-driving car, ⭐Manual override]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Developer ek `<CustomSelect />` component banata hai jiske andar apna khud ka `useState` hota hai (uncontrolled mode ke liye).
+* Fixing/Iteration Phase: Developer logic add karta hai ki agar parent se `value` aur `onChange` props aa rahe hain, toh internal state ignore ho jaye aur component strictly parent se control ho (controlled mode).
+* Live Production Phase: Ek hi `<CustomSelect />` poori enterprise app mein 50 jagah use hota hai. Kahin log isko simple uncontrolled input ki tarah use karte hain, aur kahin complex form validation ke liye explicitly control karte hain.
+
 ===Section 2: DOM & Application Resilience [⚠️ Derived]===
 Component ko main DOM tree ke bahar render karna aur app ko errors ki wajah se crash hone se bachana. [⚠️ Derived]
 
 --2--DOM & Application Resilience--
 
-Topic 5: React Portals
+Topic 6: React Portals
 Subtopics: React Portals, Modals, Dialogs, Tooltips, DOM Hierarchy, CSS Overflow, z-index, portal-root, createPortal, react-dom, React Tree Context
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1080,20 +1102,20 @@ Subtopics: React Portals, Modals, Dialogs, Tooltips, DOM Hierarchy, CSS Overflow
 * Notes mein jo analogies/examples the: "Teleporter aur Building" analogy — Portal ko ek surang (tunnel) bataya gaya jo kamre (App) ke rules se azaad karke poster (Modal) ko seedha main gate (body) par lagata hai.
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [React Portals, first-class feature, DOM hierarchy, Modals, Popups, Dialogs, Tooltips, overflow: hidden, z-index: 1, , Teleporter, Surang, tunnel, portal-root, public/index.html, react-dom, ReactDOM.createPortal(), Modal.js, App.js, modal-backdrop, modal-content, e.stopPropagation(), Context, props]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: Modals ya tooltips ko render karna taaki woh parent component ke 'overflow: hidden' se cut na jayein ya galat 'z-index' ke karan peeche chhip na jayein.
 * Additional context: Portal DOM mein root ke bahar render hota hai, lekin React tree mein woh apni jagah hi rehta hai jisse use props aur Context aasaani se milte rehte hain.
 
-Topic 6: Error Boundaries
+Topic 7: Error Boundaries
 Subtopics: Error Boundaries, Class Components, JavaScript Errors, Fallback UI, App Crash Prevention, getDerivedStateFromError, componentDidCatch, Logging Service, Sentry, Uncaught Errors, react-error-boundary
 
-[📊 SCOPE SIGNAL for Topic 6:
+[📊 SCOPE SIGNAL for Topic 7:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1103,10 +1125,10 @@ Subtopics: Error Boundaries, Class Components, JavaScript Errors, Fallback UI, A
 * Notes mein jo analogies/examples the: "Mall aur Main Circuit Breaker (MCB)" analogy — Error boundary ko ek MCB bataya gaya jo short circuit (error) hone par sirf ek shop (component) ki light cut karta hai aur poore mall (App) ko chalne deta hai.
 ]
 
-🔑 KEYWORDS DUMP for Topic 6:
+🔑 KEYWORDS DUMP for Topic 7:
 [Error Boundaries, Class Components, JavaScript errors, fallback UI, alternative UI, unmount, safed screen, white screen, Mall, Main Circuit Breaker, MCB, short circuit, Under Maintenance, ErrorBoundary.js, React.Component, constructor, this.state, hasError, static getDerivedStateFromError(), componentDidCatch(), errorInfo, Sentry, console.error(), CrashingComponent.js, Event Handlers, onClick, try...catch, Asynchronous code, setTimeout, fetch, Server Side Rendering, SSR, react-error-boundary, ⭐React 16+[version], ⭐React 18[version]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: componentDidCatch ka use karke errors ko external logging service (jaise Sentry) par bhejna taaki developers us error ko fix kar sakein.
@@ -1129,7 +1151,7 @@ Topic 5: React Portals
 Topic 6: Error Boundaries
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 6 | Subtopics: 51
+Sections: 2 | Topics: 7 | Subtopics: 56
 
 ---
 
@@ -1576,6 +1598,7 @@ Subtopics: HTTP Polling vs WebSockets, Socket.io Client, Bi-directional Communic
 * Testing/Offline Phase: Developer `useEffect` ke andar socket connection open karta hai aur server se live messages listen karta hai.
 * Fixing/Iteration Phase: Developer component unmount hone par `socket.disconnect()` add karta hai taaki multiple ghost connections na banein.
 * Live Production Phase: User ko stock prices ya WhatsApp-like chat messages bina page refresh kiye milliseconds mein screen par dikhte hain.
+* Additional context: Dashboards aur live tracking enterprise apps ke liye yeh mandatory skill hai.
 
 ===Section 4: GraphQL Integration [⚠️ AI-Generated]===
 REST APIs ke over-fetching issues ko solve karna aur sirf utna data maangna jitni zaroorat ho. [⚠️ AI-Generated]
@@ -1602,7 +1625,31 @@ Subtopics: REST vs GraphQL, Over-fetching, Under-fetching, Apollo Client Setup, 
 * Fixing/Iteration Phase: Agar UI mein achanak `avatar` image add karni ho, toh developer backend team ka wait nahi karta naya endpoint banane ke liye, bas apni query mein `avatar` field add kar leta hai.
 * Live Production Phase: Mobile users ka data pack aur load time bachta hai kyunki network request ka size 80% chota ho jaata hai.
 * Additional context: Bade scale enterprise architectures (jaise Netflix, GitHub) REST se move hokar GraphQL par switch ho chuke hain taaki frontend completely UI-driven data fetch kar sake.
-* Additional context: Dashboards aur live tracking enterprise apps ke liye yeh mandatory skill hai.
+
+===Section 5: React 19 & Modern Mutations [⚠️ AI-Generated]===
+React ke latest primitives jahan Server Actions aur Optimistic Updates form handling aur data fetching ko replace kar rahe hain. [⚠️ AI-Generated]
+
+Topic 7: React 19 Server Actions & Modern Hooks [⚠️ AI-Generated]
+Subtopics: Server Actions, useActionState (useFormState), useFormStatus, useOptimistic, the 'use' Hook, Form Actions
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed breakdown of React 19 hooks with form submission and optimistic UI code
+* Key terms from notes: React 19, Server Actions, useActionState, useFormStatus, useOptimistic, use(), suspense integration, progressive enhancement
+* Explicit emphasis in notes: "Ab forms submit karne ke liye e.preventDefault() aur manual loading states likhne ki zaroorat nahi hai."
+* Notes mein jo analogies/examples the: "WhatsApp Message sending (useOptimistic)" — Message type karte hi screen par dikh jata hai (optimistic), aur background mein server se tick ka wait karta hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[React 19, Server Actions, form actions, action prop, useActionState, useFormState, useFormStatus, pending state, useOptimistic, the use hook, promise resolution, suspense, Context resolution, progressive enhancement, e.preventDefault() obsolete, boilerplate reduction, ⭐WhatsApp Message, ⭐Optimistic UI]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Testing/Offline Phase: Developer ek form banata hai aur `onSubmit` ki jagah HTML5 `action={myServerAction}` use karta hai.
+* Fixing/Iteration Phase: Form submit hone par loading spinner dikhane ke liye manual `useState(false)` banane ke bajaye, seedha `useFormStatus` se `pending` boolean nikal leta hai.
+* Live Production Phase: User jab kisi post ko 'Like' karta hai, toh `useOptimistic` ki madad se dil turant laal ho jaata hai bina network delay ke. Agar API fail hoti hai, toh automatically wapas grey ho jaata hai.
 
 --- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -1624,8 +1671,11 @@ Topic 5: WebSockets & Server-Sent Events (SSE) [⚠️ AI-Generated]
 Section 4: GraphQL Integration [⚠️ AI-Generated]
 Topic 6: GraphQL & Apollo Client [⚠️ AI-Generated]
 
+Section 5: React 19 & Modern Mutations [⚠️ AI-Generated]
+Topic 7: React 19 Server Actions & Modern Hooks [⚠️ AI-Generated]
+
 📊 PHASE SUMMARY:
-Sections: 4 | Topics: 6 | Subtopics: 43
+Sections: 5 | Topics: 7 | Subtopics: 49
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -2038,6 +2088,28 @@ Subtopics: End-to-End Testing (E2E), Cypress, Playwright, User Journeys, Mock Se
 * Live Production Phase: CI/CD pipeline deploy hone se pehle automatically E2E tests run karti hai, taaki agar koi critical flow (jaise Payment) toot gaya ho toh code production mein na jaaye.
 * Additional context: Enterprise mein 100% test coverage se zyada important "Critical Path E2E coverage" hota hai.
 
+Topic 7: Frontend Observability & Telemetry [⚠️ AI-Generated]
+Subtopics: Real User Monitoring (RUM), Session Replay, Distributed Tracing, Logging Levels, Datadog / LogRocket
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & Setup
+* Notes mein content volume: Introduction to RUM concepts and setting up a basic LogRocket/Datadog snippet.
+* Key terms from notes: Observability, Telemetry, Real User Monitoring (RUM), Session Replay, Distributed Tracing, LogRocket, Datadog, SLA, API error rate
+* Explicit emphasis in notes: "Error boundaries sirf code phatne ko batati hain, Observability batati hai ki user frustrate kyun hua."
+* Notes mein jo analogies/examples the: "CCTV Camera of the UI (Session Replay)" — jahan developer exactly dekh sakta hai ki error aane se theek pehle user ne kahan click kiya tha.
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[Observability, Telemetry, RUM, Real User Monitoring, Session Replay, Distributed Tracing, logging levels, info, warn, error, Datadog, LogRocket, Sentry, performance bottlenecks, user frustration, API error rate, SLA, Service Level Agreement, masking sensitive data, ⭐CCTV Camera, ⭐Silent failures]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Testing/Offline Phase: Developer app ke root mein LogRocket ya Datadog SDK initialize karta hai aur ensure karta hai ki passwords/credit cards jaisi sensitive fields mask ho rahi hain.
+* Fixing/Iteration Phase: Production mein ek customer complain karta hai ki "Checkout kaam nahi kar raha", par koi crash report nahi aayi. Developer Session Replay kholta hai aur dekhta hai ki ek invisible z-index div ki wajah se button unclickable ho gaya hai.
+* Live Production Phase: Enterprise team daily dashboards dekhti hai (jaise "Aaj kitne API calls fail hue?" ya "Kaunsa page sabse zyada slow load hua?") aur proactively bugs fix karti hai user ke complain karne se pehle.
+
 --- 🛑 PHASE 2 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Sections & Topics Extracted in this phase:**
@@ -2050,6 +2122,7 @@ Section 2: Testing, Quality, Accessibility & Debugging (Module 11)
    Topic 4: Browser Debugging (Console, Sources)
    Topic 5: React Dev Tools (Components Tab)
    Topic 6: Advanced Testing (E2E & API Mocking)
+   Topic 7: Frontend Observability & Telemetry [⚠️ AI-Generated]
 
 ```
 
