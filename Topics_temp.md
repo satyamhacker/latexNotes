@@ -204,6 +204,233 @@ Subtopics: SQL Injection, SQLi, Database Takeover, Vulnerable Login Route, Param
 * Live Production Phase: Database pehle query compile karta hai aur user input ko sirf ek string (text) maanta hai jisse attack fail ho jata hai.
 * Additional context: Hacker isse poora database chura sakta hai, data delete kar sakta hai ya server takeover kar sakta hai.
 
+--2--Module 2: Core Vulnerabilities (Extended)--
+Topic 1b: 2.1b: Injection: NoSQL Injection & Operator Bypass
+Subtopics: NoSQL Injection, MongoDB Operators, Operator Bypass, $ne (Not Equal), $where Clause, Blind NoSQLi, Mongoose Misconfigurations, mongo-sanitize
+
+[📊 SCOPE SIGNAL for Topic 1b:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed JSON payloads mapping to MongoDB queries
+* Key terms from notes: NoSQL, MongoDB, Mongoose, Operator Bypass, $ne, $regex, JSON injection, sanitize
+* Explicit emphasis in notes: "Agar app MongoDB use kar rahi hai, toh SQLi payloads bhool jao, JSON operators par focus karo."
+* Notes mein jo analogies/examples the: "Guard ko naam batane ki jagah ye bolna ki 'Mera naam wo nahi hai jo ban hai' ($ne: null), aur guard confuse hoke andar aane de."
+]
+
+🔑 KEYWORDS DUMP for Topic 1b:
+[NoSQL Injection, SQLi, MongoDB, Mongoose, Query Selector Injection, Operator Bypass, `$ne`, `$gt`, `$regex`, `$where`, Authentication Bypass, `{"username": {"$ne": null}, "password": {"$ne": null}}`, req.body, Burp Suite, JSON payload tampering, Blind NoSQLi, `mongo-sanitize`, Data Extraction, Type Casting, ⭐"JSON operators par focus karo"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1b:
+
+* Testing/Offline Phase: Pentester login form ka content-type `application/json` mein badalta hai aur username/password field mein string ki jagah ek MongoDB operator object `{"$ne": null}` bhejta hai.
+* Fixing/Iteration Phase: Developer `express-mongo-sanitize` middleware use karta hai jo kisi bhi user input key se `
+# Section 1: Security Fundamentals, Hacker Mindset, Code Review & Testing Labs
+
+📦 Processing: Phase 1 — Module 1 (Secure Coding Foundation)
+
+===Section 1: Module 1: Security Fundamentals, Hacker Mindset, Code Review & Testing Labs [⚠️ Derived]===
+Building ki neev mazboot karna aur ek hacker ki tarah sochna seekhna. [⚠️ Derived]
+
+--1--Module 1: Security Fundamentals, Hacker Mindset, Code Review & Testing Labs--
+Topic 1: Secure Coding Fundamentals
+Subtopics: Secure Coding, Insecure Coding, Development Lifecycle Vulnerability, Shift-Left Security, Security by Design, Code Review Mindset
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual only
+* Notes mein content volume: Short paragraphs with bullet points
+* Key terms from notes: Secure Coding, Insecure Coding, data theft, development lifecycle, sanitize, Security by Design, Shift-Left Security, SQL Injection, code review
+* Explicit emphasis in notes: "Sabse Zaroori" (Concept Ka Postmortem), "Secure Coding koi alag se kaam nahi hai, balki code likhne ka sahi tareeka hai."
+* Notes mein jo analogies/examples the: "Ghar ka darwaza aur mazboot tala" analogy
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Secure Coding, Insecure Coding, data theft, server control, lock, tala, vulnerability, development lifecycle, sanitize, default passwords, Security by Design, Shift-Left Security, SQL Injection, code review, database, API key, error message, optimized queries, security team, ⭐"Secure Coding koi alag se kaam nahi hai, balki code likhne ka sahi tareeka hai."[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Project ke pehle din (planning phase) se hi security ke baare mein sochna aur code review mein API keys/db inputs check karna.
+* Fixing/Iteration Phase: Jaise hi koi vulnerability (jaise SQLi) introduce hoti hai, woh usi waqt pakdi jaati hai aur fix ho jaati hai.
+* Live Production Phase: Hacker unsecured code mein user ko dhokha dene ya server control karne ka raasta dhoondhta hai.
+* Additional context: (N/A)
+
+Topic 2: Source Code Review (Hacker's Perspective)
+Subtopics: Source Code Review, Hacker Blueprint, Developer Overconfidence, Logical Flaws, Code Patterns & Keywords, SAST Limitations
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Short paragraphs with specific code keywords
+* Key terms from notes: Source Code Review, black-box, white-box, logical flaws, SAST, Business Logic Flaws, Insecure Design
+* Explicit emphasis in notes: "Sabse Zaroori" (Mindset Ka Postmortem), "Black-box testing andhere mein teer chalane jaisa hai; White-box (code review) aapko teer-kamaan aur target, sab dikha deta hai."
+* Notes mein jo analogies/examples the: "Ghar ka naksha (blueprint)" aur chor wali analogy
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Source Code Review, blueprint, black-box, white-box, backdoor, logical flaws, exec(...), eval(...), innerHTML, req.query, req.body, password =, secret =, key =, SAST, Business Logic Flaws, Insecure Design, Elite hacker, ⭐"Black-box testing andhere mein teer chalane jaisa hai; White-box (code review) aapko teer-kamaan aur target, sab dikha deta hai."[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer app chalakar (black-box) test karta hai, par auditor code line-by-line padhkar internal flaws dhoondhta hai.
+* Fixing/Iteration Phase: Code review ko regular process ka hissa banana jismein doosra developer logical flaws pakde.
+* Live Production Phase: Hacker code review (white-box) karke chhipe hue debug endpoints ya hardcoded passwords dhoondhta hai jo bahar se nahi dikhte.
+* Additional context: SAST tools simple cheezein pakadte hain par unhein context samajh nahi aata jo human hacker ko aata hai.
+
+Topic 3: OWASP Top 10 Framework
+Subtopics: OWASP Top 10, Top 10 Hitlist, A01 Broken Access Control, A02 Cryptographic Failures, A03 Injection, A04 Insecure Design, A05 Security Misconfiguration, A06 Vulnerable Components, A07 Authentication Failures, A08 Data Integrity Failures, A09 Logging Failures, A10 SSRF, Automated Scanning
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual only
+* Notes mein content volume: List of 10 categories with brief context
+* Key terms from notes: OWASP, Top 10, Injection, SSRF, sqlmap, ReDoS, HPP
+* Explicit emphasis in notes: "OWASP Top 10 ko apna Bible ya Geeta maan lo."
+* Notes mein jo analogies/examples the: "Choron ke liye Top 10 Tips" (khidki khuli chhodna, doormat ke neeche chaabi)
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[OWASP, Open Web Application Security Project, Top 10, 2021, A01: Broken Access Control, A02: Cryptographic Failures, A03: Injection, A04: Insecure Design, A05: Security Misconfiguration, A06: Vulnerable and Outdated Components, A07: Identification and Authentication Failures, A08: Software and Data Integrity Failures, A09: Security Logging and Monitoring Failures, A10: Server-Side Request Forgery, SSRF, sqlmap, ReDoS, HPP, ⭐"OWASP Top 10 ko apna Bible ya Geeta maan lo"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer in 10 categories ko checklist ki tarah use karta hai code likhte aur review karte waqt.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Hacker automated tools (jaise sqlmap) use karke inhi 10 galtiyon ko target karke app scan karta hai.
+* Additional context: Yeh list har 3-4 saal mein update hoti hai.
+
+Topic 4: Black-Box vs. White-Box Testing
+Subtopics: Black-Box Testing, White-Box Testing, Grey-Box Testing, Brute Force, Business Logic Flaws Detection
+
+[📊 Diagram reproduced: Comparison Table - Black-Box vs. White-Box Testing]
+
+| Feature | Black-Box Testing (Attacker View) | White-Box Testing (Code Review) |
+| --- | --- | --- |
+| **Kya Pata Hota Hai?** | Sirf URL / App (Jaise `example.com`) | Poora Source Code (Puri `.js`, `.py` files) |
+| **Kaun Karta Hai?** | External Hacker, Pentester, Bug Bounty Hunter | Internal Auditor, Developer, Hacker (agar code mile) |
+| **Kya Dhoondhta Hai?** | Running app ki galtiyan (Input/Output) | Code-level galtiyan (Galat Logic, Hardcoded Password) |
+| **Speed** | Slow (Bohot cheezein try karni padti hain) | Fast (Aap seedhe problem waali line par jaate hain) |
+| **Example** | SQLi payload `' OR 1=1 --` daal kar dekhna. | Code mein `db.exec("SELECT ... " + userInput)` dhoondhna. |
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Comparison table and explanatory paragraphs
+* Key terms from notes: Black-Box, White-Box, Grey-Box, pentester, bug bounty hunter, Business Logic Flaws, Burp Suite
+* Explicit emphasis in notes: "Black-Box aapko batata hai 'kya' vulnerable hai. White-Box aapko batata hai 'kyun' vulnerable hai."
+* Notes mein jo analogies/examples the: "Band tijori todna (brute force)" vs "Tijori ka design blueprint milna"
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Black-Box Testing, White-Box Testing, Grey-Box Testing, brute force, pentester, bug bounty hunter, URL, SQLi payload, ' OR 1=1 --, db.exec("SELECT ... " + userInput), Business Logic Flaws, Burp Suite, Elite hacker, ⭐"Black-Box aapko batata hai 'kya' vulnerable hai. White-Box aapko batata hai 'kyun' vulnerable hai."[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Professional pentesters Grey-Box testing karte hain, jahan woh Burp Suite se request bhejte hain aur code mein dekhte hain ki request kahan process ho rahi hai.
+* Fixing/Iteration Phase: White-box review se exact line mil jaati hai jahan problem hai.
+* Live Production Phase: Hacker shuruaat black-box se karta hai, par code leak milne par white-box attack karta hai.
+* Additional context: Companies aksar sirf black-box par nirbhar rehti hain jo ki vulnerable approach hai.
+
+Topic 5: Practice Lab Setup
+Subtopics: Practice Labs, OWASP Juice Shop, OWASP WebGoat, Docker Installation, Localhost Setup, Grey-Box Practice Environment
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Setup steps, command snippets, and warnings
+* Key terms from notes: Practice Lab, OWASP Juice Shop, OWASP WebGoat, Docker Desktop, localhost:3000, 0.0.0.0
+* Explicit emphasis in notes: "Warning: In vulnerable apps ko kabhi bhi public server... par deploy mat karna"
+* Notes mein jo analogies/examples the: "Driving simulator"
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Practice Lab, Hacking Lab, OWASP Juice Shop, Node.js, Express, Angular, e-commerce, OWASP WebGoat, Java, Docker, Docker Desktop, terminal, docker run --rm -p 3000:3000 bkimminich/juice-shop, localhost:3000, ⭐0.0.0.0[emphasized in notes], DigitalOcean, AWS, source code, GitHub, VS Code, Grey-Box, Score Board, ⭐"Theory padhna band karo, hacking shuru karo."[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Hacker in vulnerable labs ko docker ke through localhost par run karke safely exploits practice karta hai.
+* Fixing/Iteration Phase: User app chalakar (black-box) aur VS Code mein source padhkar (white-box) ek saath bugs dhoondhta hai.
+* Live Production Phase: (N/A — In apps ko kabhi public production servers par deploy nahi karna chahiye)
+* Additional context: Naye log seedhe real websites hack karke legal trouble mein phans jate hain, isliye yeh labs zaroori hain.
+
+--- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Sections & Topics Extracted in this phase:**
+
+```
+Section 1: Module 1: Security Fundamentals, Hacker Mindset, Code Review & Testing Labs [⚠️ Derived]
+  Topic 1: Secure Coding Fundamentals
+  Topic 2: Source Code Review (Hacker's Perspective)
+  Topic 3: OWASP Top 10 Framework
+  Topic 4: Black-Box vs. White-Box Testing
+  Topic 5: Practice Lab Setup
+
+```
+
+⏳ **Waiting for:** Next phase/module notes (Module 2)
+
+---
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Module 1: Security Fundamentals, Hacker Mindset, Code Review & Testing Labs [⚠️ Derived]
+Topic 1: Secure Coding Fundamentals
+Topic 2: Source Code Review (Hacker's Perspective)
+Topic 3: OWASP Top 10 Framework
+Topic 4: Black-Box vs. White-Box Testing
+Topic 5: Practice Lab Setup
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 5 | Subtopics: 29
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 2: Core Vulnerabilities (SQL/Command Injection, XXE, Access Control & Crypto)
+
+📦 Processing: Phase 2 — Module 2 (OWASP Core 4: Injection & Broken Access Control)
+
+===Section 2: Module 2: Core Vulnerabilities (SQL/Command Injection, XXE, Access Control & Crypto) [⚠️ Derived]===
+Core 4 vulnerabilities ko code-level par todna (exploit karna) aur jodna (fix karna). [⚠️ Derived]
+
+--2--Module 2: Core Vulnerabilities (SQL/Command Injection, XXE, Access Control & Crypto)--
+Topic 1: 2.1: Injection: SQL Injection (SQLi)
+
+```
+Subtopics: SQL Injection, SQLi, Database Takeover, Vulnerable Login Route, Parameterized Queries, Prepared Statements, Sanitization Bypass
+
+```
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Long explanation + multiple examples + code
+* Key terms from notes: SQL query, jackpot, database control, dump, takeover, vulnerability, String interpolation, Parameterized Queries, ORM
+* Explicit emphasis in notes: "Problem Line 5 mein hai. Hum user se mile username aur password ko seedha...", "Database se baat karte waqt user par kabhi bharosa mat karo."
+* Notes mein jo analogies/examples the: "Office guard aur visitor ki slip" jisme 'John YA 1=1' likha tha
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[SQL Injection, SQLi, database, query, jackpot, dump, takeover, admin, app.post('/login', ...), req.body.user, req.body.pass, SELECT * FROM users WHERE username = '${username}' AND password = '${password}', db.query, ' OR 1=1 --, TRUE, Parameterized Queries, ?, [username, password], bcrypt, "SELECT ... WHERE name = '" + req.body.name, "UPDATE ... SET value = '" + req.query.value, db.exec(...), string interpolation, ${variable}, Sanitization, Hex, URLencode, Prepared Statements, ORM, ⭐"Database se baat karte waqt user par kabhi bharosa mat karo"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Hacker user input field (login/search bar) mein database ki special command daalkar payload inject karta hai.
+* Fixing/Iteration Phase: Developer parameterized queries ya ORM ka istemaal karke database ko query aur data alag-alag bhejta hai.
+* Live Production Phase: Database pehle query compile karta hai aur user input ko sirf ek string (text) maanta hai jisse attack fail ho jata hai.
+ (dollar sign) aur `.` (dot) ko hata deta hai. Saath hi Mongoose schemas mein strict type casting (e.g., forcing string) enforce karta hai.
+* Live Production Phase: App backend par bypass try karne wale JSON objects reject ho jate hain kyunki Mongoose unhe invalid string maanta hai ya sanitize function unke operators strip kar deta hai.
+
 Topic 2: 2.2: Injection: Command Injection
 
 ```
@@ -230,6 +457,29 @@ Subtopics: Command Injection, System Commands, Server Shell, Reverse Shell, exec
 * Fixing/Iteration Phase: Developer Regex lagakar Allow-listing karta hai aur exec ki jagah execFile function lagata hai.
 * Live Production Phase: System input ko command ka hissa nahi balki ek text argument ki tarah process karta hai, jisse malicious shell commands execute nahi hotin.
 * Additional context: Yeh SQLi se bhi zyada khatarnaak hai kyunki seedha server ka shell mil jata hai.
+
+--2--Module 2: Core Vulnerabilities (Extended)--
+Topic 2b: 2.2b: Injection: Server-Side JavaScript Injection (SSJS)
+Subtopics: SSJS Concept, eval() Abuse, setTimeout/setInterval Vulnerabilities, new Function() Constructor, Node.js RCE, Global Process Access, Abstract Syntax Tree (AST) Injection
+
+[📊 SCOPE SIGNAL for Topic 2b:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Node.js specific code examples of eval() and alternative hidden dynamic code execution
+* Key terms from notes: SSJS, eval, new Function, RCE, setTimeout, global.process
+* Explicit emphasis in notes: "Code mein 'eval()' ka use karna matlab hacker ko apne server ka keyboard de dena."
+* Notes mein jo analogies/examples the: "Calculater app jisme user `2+2` ki jagah `delete_database()` type karta hai aur wo run ho jata hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 2b:
+[Server-Side JavaScript Injection, SSJS, `eval()`, `setTimeout()`, `setInterval()`, `new Function()`, Remote Code Execution, RCE, Node.js runtime, `global.process.mainModule.require('child_process')`, dynamic code execution, AST injection, calculator payload, `require('fs')`, SAST blocklist, ⭐"eval() ka use karna matlab hacker ko keyboard dena"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2b:
+
+* Testing/Offline Phase: Pentester dekhta hai ki application mathematical operations ya dynamic templates evaluate kar rahi hai, toh wo `eval()` test karne ke liye `res.end(require('fs').readdirSync('.').toString())` jaisa payload inject karta hai.
+* Fixing/Iteration Phase: Developer `eval()` aur `new Function()` ko completely ban kar deta hai (via ESLint/SAST rules) aur safe math evaluation ke liye `mathjs` jaisi strict parsing libraries use karta hai.
+* Live Production Phase: Hacker ka JS payload execute hone ke bajaye normal string ki tarah treat hota hai, jisse SSJS attack neutralize ho jata hai.
 
 Topic 3: 2.3: Injection: XML External Entity (XXE)
 
@@ -338,7 +588,9 @@ Subtopics: Hardcoded Keys, Source Code Secrets, API Keys, JWT Tokens, GitHub Sec
 ```
 Section 2: Module 2: Core Vulnerabilities (SQL/Command Injection, XXE, Access Control & Crypto) [⚠️ Derived]
   Topic 1: 2.1: Injection: SQL Injection (SQLi)
+  Topic 1b: 2.1b: Injection: NoSQL Injection & Operator Bypass
   Topic 2: 2.2: Injection: Command Injection
+  Topic 2b: 2.2b: Injection: Server-Side JavaScript Injection (SSJS)
   Topic 3: 2.3: Injection: XML External Entity (XXE)
   Topic 4: 2.4: Broken Access Control (BAC)
   Topic 5: 2.5: Cryptographic Failures: Weak Algorithms (MD5 vs Bcrypt)
@@ -356,14 +608,16 @@ Section 2: Module 2: Core Vulnerabilities (SQL/Command Injection, XXE, Access Co
 
 Section 2: Module 2: Core Vulnerabilities (SQL/Command Injection, XXE, Access Control & Crypto) [⚠️ Derived]
 Topic 1: 2.1: Injection: SQL Injection (SQLi)
+Topic 1b: 2.1b: Injection: NoSQL Injection & Operator Bypass
 Topic 2: 2.2: Injection: Command Injection
+Topic 2b: 2.2b: Injection: Server-Side JavaScript Injection (SSJS)
 Topic 3: 2.3: Injection: XML External Entity (XXE)
 Topic 4: 2.4: Broken Access Control (BAC)
 Topic 5: 2.5: Cryptographic Failures: Weak Algorithms (MD5 vs Bcrypt)
 Topic 6: 2.6: Cryptographic Failures: Hardcoded Keys & Secrets
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 54
+Sections: 1 | Topics: 8 | Subtopics: 69
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
