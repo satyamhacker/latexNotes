@@ -2799,17 +2799,41 @@ Subtopics: Firmware Source Code Review, RTOS Memory Management Flaws, Hardcoded 
 * Fixing/Iteration Phase: Developer UART/JTAG debug interfaces ko code se disable karta hai, IoT telemetry data parsing mein strict boundary checks lagata hai, aur Over-The-Air (OTA) updates ke code mein cryptographic signature validation enforce karta hai.
 * Live Production Phase: Hacker network intercept karke apna malicious fake firmware push karne ki koshish karta hai, par device ka bootloader firmware ki cryptographic signature verify karne mein fail ho jata hai aur malicious update reject kar deta hai.
 
+--1--Advanced Code Review Ecosystems (Extended)--
+Topic 6: 12.6: Web3 & Smart Contract Auditing (Solidity/Rust)
+Subtopics: Smart Contract Source Code Review, Reentrancy Attacks, Flash Loan/Front-Running Sinks, Access Control Flaws (tx.origin vs msg.sender), Integer Overflow/Underflow, Unchecked External Calls, Automated Auditing Tools (Slither/Mythril)
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Both (Vulnerable Solidity Patterns vs. Secure Implementation)
+* Notes mein content volume: Explanation of blockchain immutability, Reentrancy code examples, and the Checks-Effects-Interactions pattern
+* Key terms from notes: Web3, Smart Contracts, Solidity, Reentrancy, MEV, Front-Running, `msg.sender`, `tx.origin`, Slither, ReentrancyGuard
+* Explicit emphasis in notes: "Smart contract code ek baar deploy ho gaya toh wo pathar ki lakeer (immutable) ban jata hai. Yahan 'fix it later' wala attitude company ko bankrupt kar sakta hai."
+* Notes mein jo analogies/examples the: "Ek ATM (Smart Contract) jismein hacker paise nikalne ki request bhejta hai, aur balance update hone se pehle hi loop chala kar saare paise nikal leta hai (Reentrancy)."
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[Web3 Auditing, Smart Contracts, Blockchain Security, Solidity, Rust, Reentrancy Attack, Checks-Effects-Interactions pattern, Mutex, `ReentrancyGuard`, `msg.sender`, `tx.origin`, Phishing via Smart Contract, Front-Running, MEV, Miner Extractable Value, Flash Loans, Integer Overflow, SafeMath, Unchecked External Calls, `call.value`, Slither, Mythril, Hardhat, Foundry, ⭐"pathar ki lakeer (immutable) ban jata hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Auditor `.sol` (Solidity) files ko line-by-line padhta hai aur Slither/Mythril jaise SAST tools run karke dhoondhta hai ki kya external calls balance update hone se pehle ho rahi hain.
+* Fixing/Iteration Phase: Developer "Checks-Effects-Interactions" pattern follow karta hai (pehle balance check, phir internal state update, aur sabse aakhiri mein external transfer) aur `ReentrancyGuard` modifier lagata hai.
+* Live Production Phase: Smart Contract blockchain par deploy hone ke baad hacker recursive loop chala kar liquidity drain karne ki koshish karta hai, par contract state lock hone ki wajah se execution turant revert (fail) ho jati hai.
+
 --- 🛑 PHASE 12 SKELETON READY. ALL MASTER ECOSYSTEMS ALIGNED TO 100% WHITE-BOX SOURCE CODE REVIEW.
 
 ✅ **Sections & Topics Extracted in this phase:**
 
 ```
-Section 12: Advanced Code Review Ecosystems (Mobile, AI, Game, Desktop & IoT) [⚠️ Derived]
+Section 12: Advanced Code Review Ecosystems (Mobile, AI, Game, Desktop, IoT & Web3) [⚠️ Derived]
   Topic 1: 12.1: Mobile Application Source Code Auditing (Android & iOS)
   Topic 2: 12.2: Secure AI Development & LLM Integration Auditing
   Topic 3: 12.3: Game Engine Logic Flaws & Client-Authority Code Review
   Topic 4: 12.4: Native Code Review & Desktop Application Safety (Thick Client)
   Topic 5: 12.5: IoT & Embedded Systems Firmware Auditing
+  Topic 6: 12.6: Web3 & Smart Contract Auditing (Solidity/Rust)
 ```
 
 ⏳ **Waiting for:** Next phase/module notes (Module 13 - Final)
@@ -2820,12 +2844,13 @@ Section 12: Advanced Code Review Ecosystems (Mobile, AI, Game, Desktop & IoT) [�
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 12: Advanced Code Review Ecosystems (Mobile, AI, Game, Desktop & IoT) [⚠️ Derived]
+Section 12: Advanced Code Review Ecosystems (Mobile, AI, Game, Desktop, IoT & Web3) [⚠️ Derived]
 Topic 1: 12.1: Mobile Application Source Code Auditing (Android & iOS)
 Topic 2: 12.2: Secure AI Development & LLM Integration Auditing
 Topic 3: 12.3: Game Engine Logic Flaws & Client-Authority Code Review
 Topic 4: 12.4: Native Code Review & Desktop Application Safety (Thick Client)
 Topic 5: 12.5: IoT & Embedded Systems Firmware Auditing
+Topic 6: 12.6: Web3 & Smart Contract Auditing (Solidity/Rust)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 33
+Sections: 1 | Topics: 6 | Subtopics: 40
