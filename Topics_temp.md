@@ -169,7 +169,7 @@ Sections: 1 | Topics: 5 | Subtopics: 29
 
 ==================================================================================
 
-# Section 2: Module 2: Core Vulnerabilities (SQL/Command Injection, XXE, Access Control & Crypto)
+# Section 2: Core Vulnerabilities (SQL/Command Injection, XXE, Access Control & Crypto)
 
 📦 Processing: Phase 2 — Module 2 (OWASP Core 4: Injection & Broken Access Control)
 
@@ -1319,7 +1319,7 @@ Sections: 1 | Topics: 6 | Subtopics: 92
 ==================================================================================
 
 
-# Section 9:  Defensive Coding Practices (CSP, Headers, Secure Uploads, Error Handling)
+# Section 8:  Defensive Coding Practices (CSP, Headers, Secure Uploads, Error Handling)
 
 📦 Processing: Phase/Module 8 — Module 8: Defensive Coding Practices (CSP, Headers, Secure Uploads, Error Handling) & Intro to Module 9
 
