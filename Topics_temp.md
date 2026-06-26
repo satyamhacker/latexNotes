@@ -1243,10 +1243,32 @@ Subtopics: Code Splitting, React.lazy, Dynamic Import, Suspense, fallback Prop, 
 * Live Production Phase: Users experience a much faster initial page load; secondary pages are downloaded only when explicitly clicked.
 * Additional context: Best used at the route-level for straightforward code splitting.
 
-Topic 4: List Virtualization (Windowing)
-Subtopics: List Virtualization, Windowing, Viewport, react-window, react-virtualized, FixedSizeList, VariableSizeList, DOM Node Reduction, style Prop, Infinite Scrolling Comparison
+Topic 4: Build-Level Compression & Analysis (Brotli/Gzip) [⚠️ AI-Generated]
+Subtopics: Gzip vs Brotli Compression, vite-plugin-compression, Content-Encoding Headers, Webpack Bundle Analyzer, Rollup Visualizer
 
 [📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Setup guide for Vite compression plugin and bundle analyzer.
+* Key terms from notes: Brotli, Gzip, compression, vite-plugin-compression, Content-Encoding, .br, .gz, bundle analyzer, tree-shaking
+* Explicit emphasis in notes: "Brotli Gzip se 20% zyada fast aur efficient hai."
+* Notes mein jo analogies/examples the: "Rui (Cotton) ko daba kar chote packet mein bharna (Compression)" taaki network wire se jaldi pass ho sake.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Build compression, Brotli, Gzip, vite-plugin-compression, rollup-plugin-visualizer, Webpack Bundle Analyzer, Content-Encoding, Accept-Encoding, .br, .gz, network payload, UI blocking, tree-shaking, dead code elimination, bundle size, ⭐Brotli, ⭐Cotton packet]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Developer `npm run build` chalata hai aur Bundle Analyzer ka visual pie-chart dekh kar check karta hai ki kaunsi library sabse zyada space le rahi hai (jaise moment.js vs date-fns).
+* Fixing/Iteration Phase: Developer `vite-plugin-compression` add karta hai jisse build folder mein `.js` ke sath `.js.br` (Brotli) files generate hoti hain.
+* Live Production Phase: Jab browser request karta hai, server automatically `.br` file bhejta hai. 2MB ki file compress hokar 300KB mein download hoti hai, jisse load time 3x fast ho jata hai.
+
+Topic 5: List Virtualization (Windowing)
+Subtopics: List Virtualization, Windowing, Viewport, react-window, react-virtualized, FixedSizeList, VariableSizeList, DOM Node Reduction, style Prop, Infinite Scrolling Comparison
+
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1256,20 +1278,20 @@ Subtopics: List Virtualization, Windowing, Viewport, react-window, react-virtual
 * Notes mein jo analogies/examples the: "10,000 photos ki album... haath mein sirf 10 photos" — DOM reuse samjhane ke liye
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 5:
 [List Virtualization, Windowing, viewport, unmount, mount, react-window, react-virtualized, FixedSizeList, VariableSizeList, style prop, Infinite Scrolling, DOM nodes, itemCount, itemSize, ⭐"style prop lagana bahut zaroori hai"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: App crashes or severely lags when trying to render 10,000+ items directly using map().
 * Fixing/Iteration Phase: Developer installs react-window, creates a Row component, and ensures the style prop is passed to correctly position absolute items.
 * Live Production Phase: User smoothly scrolls through massive data grids because only 10-12 elements exist in the DOM at any time.
 * Additional context: Often combined with Infinite Scrolling for fetching new data pages.
 
-Topic 5: Enterprise Data Grids (TanStack Table) [⚠️ AI-Generated]
+Topic 6: Enterprise Data Grids (TanStack Table) [⚠️ AI-Generated]
 Subtopics: Headless Tables, TanStack Table (React Table), Multi-sorting, Global Filtering, Pagination, Column Resizing
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -1279,10 +1301,10 @@ Subtopics: Headless Tables, TanStack Table (React Table), Multi-sorting, Global 
 * Notes mein jo analogies/examples the: "Excel Sheet (TanStack) vs Printer (React UI)" — Excel saara data aur sorting handle karta hai, React sirf usko print/render karta hai.
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [Enterprise Data Grids, TanStack Table, React Table, v8, Headless UI, useReactTable, flexRender, getCoreRowModel, getSortedRowModel, getFilteredRowModel, columnDefs, accessorKey, Multi-sorting, Global Filtering, Pagination, Column Resizing, boilerplate, massive datasets, ⭐Excel Sheet, ⭐Headless Table]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: Developer ek raw HTML `<table>` banata hai aur uske logic/state (e.g., sorting arrows) ko TanStack Table ke hooks se connect karta hai.
 * Fixing/Iteration Phase: Client ko data mein server-side pagination aur complex multi-column filters chahiye. Developer bina naya logic likhe TanStack ke pre-built functions use kar leta hai.
@@ -1293,10 +1315,10 @@ Subtopics: Headless Tables, TanStack Table (React Table), Multi-sorting, Global 
 Performance bottlenecks dhoondhna aur unwanted renders ko console ya graph mein track karna. [⚠️ Derived]
 
 --3--Performance Measurement & Debugging--
-Topic 6: React DevTools Profiler
+Topic 7: React DevTools Profiler
 Subtopics: React DevTools Profiler, Flame Graph, Performance Bottlenecks, Unnecessary Re-renders, Props Changed, Parent Component Rendered
 
-[📊 SCOPE SIGNAL for Topic 8:
+[📊 SCOPE SIGNAL for Topic 9:
 
 * Depth Level: Moderate
 * Coverage Angle: Conceptual only
@@ -1306,20 +1328,20 @@ Subtopics: React DevTools Profiler, Flame Graph, Performance Bottlenecks, Unnece
 * Notes mein jo analogies/examples the: "Factory assembly line... Stopwatch Manager" — recording aur timing batane ke liye
 ]
 
-🔑 KEYWORDS DUMP for Topic 8:
+🔑 KEYWORDS DUMP for Topic 9:
 [Profiler, React Developer Tools, flame graph, bottleneck, Props changed, State changed, Parent component rendered, Start recording, Stop recording, development build, F12]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
 
 * Testing/Offline Phase: Developer opens DevTools Profiler in development mode and hits record while performing a laggy action.
 * Fixing/Iteration Phase: Developer analyzes the resulting flame graph to spot wide bars and checks the right panel for "Why did this render?".
 * Live Production Phase: (N/A — Profiler is disabled in production to avoid overhead).
 * Additional context: (N/A)
 
-Topic 7: why-did-you-render Library
+Topic 8: why-did-you-render Library
 Subtopics: why-did-you-render, Monkey-patching, Live Console Warnings, trackAllPureComponents, Debugging Renders
 
-[📊 SCOPE SIGNAL for Topic 8:
+[📊 SCOPE SIGNAL for Topic 9:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1329,10 +1351,10 @@ Subtopics: why-did-you-render, Monkey-patching, Live Console Warnings, trackAllP
 * Notes mein jo analogies/examples the: "CCTV Camera with AI" — live background monitoring ke liye
 ]
 
-🔑 KEYWORDS DUMP for Topic 8:
+🔑 KEYWORDS DUMP for Topic 9:
 [why-did-you-render, WDR, monkey-patch, live console warning, @welldone-software/why-did-you-render, trackAllPureComponents, import.meta.env.MODE, MemoizedHeader.whyDidYouRender, dynamically import]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
 
 * Testing/Offline Phase: Developer installs WDR and interacts with the app, watching the console for detailed warnings about prop reference changes.
 * Fixing/Iteration Phase: Developer uses the console warnings to pinpoint exactly where useCallback or useMemo is missing.
@@ -1343,10 +1365,10 @@ Subtopics: why-did-you-render, Monkey-patching, Live Console Warnings, trackAllP
 Frequent actions ko control karna aur real users ke loading experience (Web Vitals) ko optimize karna. [⚠️ Derived]
 
 --4--Event Control & Real-World Metrics--
-Topic 8: Throttling & Debouncing
+Topic 9: Throttling & Debouncing
 Subtopics: Debouncing, Throttling, lodash debounce, Search Bar API Calls, Scroll Events, useMemo Wrapper
 
-[📊 SCOPE SIGNAL for Topic 9:
+[📊 SCOPE SIGNAL for Topic 10:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1356,20 +1378,20 @@ Subtopics: Debouncing, Throttling, lodash debounce, Search Bar API Calls, Scroll
 * Notes mein jo analogies/examples the: "Hotel lift... rukne ke baad" (Debounce), "Club bouncer... limit mein" (Throttle)
 ]
 
-🔑 KEYWORDS DUMP for Topic 9:
+🔑 KEYWORDS DUMP for Topic 10:
 [Debouncing, Throttling, lodash, debounce, fetchApi, useMemo, onScroll, onMouseMove, autocomplete, timer, debouncedApiCall, ⭐"Debounced function ko useMemo mein wrap karna zaroori hai"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
 
 * Testing/Offline Phase: User types quickly in an autocomplete field, triggering an API call on every single keystroke.
 * Fixing/Iteration Phase: Developer implements lodash debounce wrapped inside a useMemo hook to delay the execution.
 * Live Production Phase: API calls are sent only when the user finishes typing (debounce) or scroll events fire steadily (throttle), saving massive server load.
 * Additional context: (N/A)
 
-Topic 9: Core Web Vitals & Asset Optimization [⚠️ Derived]
+Topic 10: Core Web Vitals & Asset Optimization [⚠️ Derived]
 Subtopics: Core Web Vitals, LCP, FID, CLS, reportWebVitals, SEO, Asset Optimization, Image Formats, Compression, Native Lazy Loading, Font Optimization
 
-[📊 SCOPE SIGNAL for Topic 10:
+[📊 SCOPE SIGNAL for Topic 11:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -1379,20 +1401,20 @@ Subtopics: Core Web Vitals, LCP, FID, CLS, reportWebVitals, SEO, Asset Optimizat
 * Notes mein jo analogies/examples the: "Restaurant Main Course (LCP), Waiter response (FID), Table shifting (CLS)", "Vacation suitcase packing" (Image optimization)
 ]
 
-🔑 KEYWORDS DUMP for Topic 10:
+🔑 KEYWORDS DUMP for Topic 11:
 [Core Web Vitals, LCP, Largest Contentful Paint, FID, First Input Delay, CLS, Cumulative Layout Shift, SEO, reportWebVitals, web-vitals, Lighthouse, Asset Optimization, JPEG, PNG, WebP, AVIF, SVG, compress, tinypng, squoosh, lazy loading, loading="lazy", font-display: swap, aspect-ratio, ⭐"CLS ko width/height dekar fix karein"[emphasized in notes], ⭐"WebP (Best)"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
 
 * Testing/Offline Phase: Developer runs Chrome Lighthouse to generate a report, finding high CLS or slow LCP due to massive images.
 * Fixing/Iteration Phase: Developer compresses images, converts them to WebP, adds explicit width/height attributes, and applies loading="lazy".
 * Live Production Phase: Google Analytics / Vercel captures excellent Web Vitals from real users, improving SEO and reducing layout shifts during page loads.
 * Additional context: Vite and CRA come pre-configured with reportWebVitals for easy tracking.
 
-Topic 10: React 18/19 Concurrent Features [⚠️ AI-Generated]
+Topic 11: React 18/19 Concurrent Features [⚠️ AI-Generated]
 Subtopics: Concurrent Mode, useTransition, useDeferredValue, Non-blocking UI, CPU-heavy Rendering, Suspense for Data Fetching
 
-[📊 SCOPE SIGNAL for Topic 10:
+[📊 SCOPE SIGNAL for Topic 11:
 
 * Depth Level: Deep
 * Coverage Angle: Conceptual & Practical
@@ -1402,19 +1424,19 @@ Subtopics: Concurrent Mode, useTransition, useDeferredValue, Non-blocking UI, CP
 * Notes mein jo analogies/examples the: "Emergency Ambulance (Urgent state like typing) vs Normal Traffic (Background heavy rendering)"
 ]
 
-🔑 KEYWORDS DUMP for Topic 10:
+🔑 KEYWORDS DUMP for Topic 11:
 [Concurrent Mode, React 18, useTransition, startTransition, isPending, useDeferredValue, non-blocking UI, CPU-heavy, urgent update, background update, input typing, heavy list filtering, UI freeze, Suspense, fallback, ⭐Emergency Ambulance, ⭐Normal Traffic]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
 
 * Testing/Offline Phase: Developer 10,000 items ka list filter banata hai. Normal state update se typing lag hoti hai.
 * Fixing/Iteration Phase: Developer typing state ko normal rakhta hai, aur list filter state ko `startTransition` ke andar daal deta hai.
 * Live Production Phase: User jab search bar mein fast type karta hai, UI bilkul freeze nahi hota. React peeche background mein list filter karta rehta hai aur jab ready hota hai tab screen par dikhata hai.
 
-Topic 11: Web Workers (Main Thread Offloading) [⚠️ AI-Generated]
+Topic 12: Web Workers (Main Thread Offloading) [⚠️ AI-Generated]
 Subtopics: Single Threaded JavaScript, UI Blocking, Web Workers API, Background Threads, Heavy Computation, Comlink Library
 
-[📊 SCOPE SIGNAL for Topic 11:
+[📊 SCOPE SIGNAL for Topic 12:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1424,10 +1446,10 @@ Subtopics: Single Threaded JavaScript, UI Blocking, Web Workers API, Background 
 * Notes mein jo analogies/examples the: "Restaurant Head Chef (Main Thread) vs Prep Cook (Web Worker)" — Head chef customer se baat karta hai, prep cook peeche sabziyan (heavy data) kaatta hai.
 ]
 
-🔑 KEYWORDS DUMP for Topic 11:
+🔑 KEYWORDS DUMP for Topic 12:
 [Web Workers, JavaScript single thread, Main Thread, UI blocking, UI freezing, background thread, Worker API, new Worker(), postMessage(), onmessage, heavy computation, CSV parsing, data encryption, image manipulation, offloading, Comlink, proxy, Vite worker import, ?worker, ⭐Head Chef vs Prep Cook, ⭐UI freeze]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 12:
 
 * Testing/Offline Phase: Developer ek 50MB ka CSV file dashboard mein upload karta hai, jisse React map() chalate waqt browser "Page Unresponsive" ka popup de deta hai.
 * Fixing/Iteration Phase: Developer data parsing logic ko ek alag `worker.js` file mein move karta hai aur UI se usko `postMessage` ke through data bhejta hai.
@@ -1447,21 +1469,22 @@ Topic 2: React Memoization Techniques (memo, useMemo, useCallback) [⚠️ Deriv
 
 Section 2: Large Data Strategies & Bundle Size [⚠️ Derived]
 Topic 3: Lazy Loading & Code Splitting
-Topic 4: List Virtualization (Windowing)
-Topic 5: Enterprise Data Grids (TanStack Table) [⚠️ AI-Generated]
+Topic 4: Build-Level Compression & Analysis (Brotli/Gzip) [⚠️ AI-Generated]
+Topic 5: List Virtualization (Windowing)
+Topic 6: Enterprise Data Grids (TanStack Table) [⚠️ AI-Generated]
 
 Section 3: Performance Measurement & Debugging [⚠️ Derived]
-Topic 6: React DevTools Profiler
-Topic 7: why-did-you-render Library
+Topic 7: React DevTools Profiler
+Topic 8: why-did-you-render Library
 
 Section 4: Event Control & Real-World User Metrics [⚠️ Derived]
-Topic 8: Throttling & Debouncing
-Topic 9: Core Web Vitals & Asset Optimization [⚠️ Derived]
-Topic 10: React 18/19 Concurrent Features [⚠️ AI-Generated]
-Topic 11: Web Workers (Main Thread Offloading) [⚠️ AI-Generated]
+Topic 9: Throttling & Debouncing
+Topic 10: Core Web Vitals & Asset Optimization [⚠️ Derived]
+Topic 11: React 18/19 Concurrent Features [⚠️ AI-Generated]
+Topic 12: Web Workers (Main Thread Offloading) [⚠️ AI-Generated]
 
 📊 PHASE SUMMARY:
-Sections: 4 | Topics: 11 | Subtopics: 66
+Sections: 4 | Topics: 12 | Subtopics: 71
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -2590,6 +2613,28 @@ Subtopics: Monorepo Concept, Turborepo / Nx, Workspace packages, Module Federati
 * Learning Phase: Developer samajhta hai ki ek app ke andar /admin aur /client ko alag deploy karna kyun zaroori hai.
 * Application Phase: Developer Turborepo use karke ek shared "ui-library" package banata hai jise frontend aur admin dashboard dono projects import karte hain.
 * Mastery Phase: Micro-frontends setup karna jahan Team A Header maintain karti hai, Team B Cart maintain karti hai, aur dono live runtime pe Webpack Module Federation ke through merge hote hain.
+
+Topic 3: Enterprise Folder Structure (FSD & Atomic Design) [⚠️ AI-Generated]
+Subtopics: Feature-Sliced Design (FSD), Domain-Driven Structure, Atomic Design (Atoms, Molecules, Organisms), Barrel Exports (index.ts), Absolute Imports
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical Setup
+* Notes mein content volume: Detailed folder tree diagrams and explanation of import restrictions.
+* Key terms from notes: Feature-Sliced Design, FSD, Atomic Design, Domain-driven, Barrel exports, Absolute imports, cross-imports, spaghetti imports
+* Explicit emphasis in notes: "Features ek doosre ko import nahi kar sakte, sirf shared UI ko kar sakte hain."
+* Notes mein jo analogies/examples the: "City Planning" — jahan Residential area (Features) aur Public park (Shared UI) alag hote hain, aur rules hote hain ki kahan se kahan road (imports) ja sakti hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Folder structure, Feature-Sliced Design, FSD, app, processes, pages, widgets, features, entities, shared, Atomic Design, atoms, molecules, organisms, templates, Domain-Driven Design, DDD, Barrel exports, index.ts, Absolute imports, paths compilerOptions, tsconfig.json, cross-imports, circular dependency, ⭐City Planning, ⭐Feature isolation]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer project setup karte waqt strict folder rules banata hai (jaise `src/features/auth` aur `src/shared/ui`).
+* Fixing/Iteration Phase: Agar `Cart` feature ko `Payment` feature ki zaroorat padti hai, toh developer direct import karne ki jagah (circular dependency se bachne ke liye) unhe `pages` level par compose karta hai.
+* Live Production Phase: (N/A - Yeh purely developer experience aur maintainability ke liye hai). Jab naya developer team join karta hai, toh use exactly pata hota hai ki kahan kaunsi file milegi, code dhoondhne mein waqt barbaad nahi hota.
 * Additional context: Yeh strictly Senior level concept hai jab team size 20+ developers ka ho.
 
 --- 🛑 PHASE 4 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
@@ -2601,6 +2646,7 @@ Section 1: Enterprise Security Patterns
   Topic 1: Security Vectors & Token Management (JWT, XSS, CSRF)
 Section 2: Scale & Architecture
   Topic 2: Monorepos & Micro-Frontends
+   Topic 3: Enterprise Folder Structure (FSD & Atomic Design) [⚠️ AI-Generated]
 
 ```
 
@@ -2613,9 +2659,10 @@ Topic 1: Security Vectors & Token Management (JWT, XSS, CSRF) [⚠️ AI-Generat
 
 Section 2: Scale & Architecture [⚠️ AI-Generated]
 Topic 2: Monorepos & Micro-Frontends [⚠️ AI-Generated]
+Topic 3: Enterprise Folder Structure (FSD & Atomic Design) [⚠️ AI-Generated]
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 2 | Subtopics: 13
+Sections: 2 | Topics: 3 | Subtopics: 18
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2652,6 +2699,31 @@ Subtopics: Husky, lint-staged, Pre-commit Hook, ESLint Auto-fix, Prettier Auto-f
 * Live Production Phase: Code GitHub par push hone ke baad, GitHub Actions (CI/CD pipeline) automatically code ko build karti hai, cloud par deploy karti hai, aur Slack par success message bhej deti hai.
 * Additional context: Enterprise teams mein manual formatting ya manual deployment nahi hoti, sab kuch automated hota hai.
 
+===Section 2: Release Strategies & Safety [⚠️ AI-Generated]===
+Naye features ko production mein safe tareeqe se deploy karna. [⚠️ AI-Generated]
+
+Topic 2: Feature Flags & A/B Testing [⚠️ AI-Generated]
+Subtopics: Feature Toggling, Dark Launches, Trunk-Based Development, A/B Testing, LaunchDarkly / Unleash
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & Logic implementation
+* Notes mein content volume: Logic implementation of a simple feature flag context and third-party mentions.
+* Key terms from notes: Feature Flags, Feature Toggles, Dark Launch, Trunk-Based Development, A/B Testing, gradual rollout, LaunchDarkly
+* Explicit emphasis in notes: "Code ko deploy karna aur Feature ko release karna, dono alag cheezein hain."
+* Notes mein jo analogies/examples the: "Ghar ka Main Switchboard" — Wiring poori ho chuki hai (code deployed), par bulb tabhi jalega jab admin switch on karega (Feature turned on).
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Feature Flags, Feature Toggles, Dark Launch, A/B Testing, gradual rollout, canary release, Trunk-Based Development, LaunchDarkly, Unleash, ConfigCat, context API, boolean flags, UI conditional rendering, rollback, ⭐Switchboard, ⭐Deploy vs Release]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer naya 'AI Chatbot' feature banata hai, par use ek if-condition (`if (featureFlags.enableAIChat)`) ke andar wrap kar deta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Code live chala jaata hai par users ko Chatbot nahi dikhta (Dark Launch). Manager dashboard se 10% users ke liye flag 'ON' karta hai. Agar app crash nahi hoti (A/B testing success), toh 100% users ke liye 'ON' kar diya jaata hai. Agar fat gaya, toh 1 click mein wapas 'OFF' kar diya jaata hai bina code rollback kiye.
+
 --- 🛑 PHASE 5 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Sections & Topics Extracted in this phase:**
@@ -2659,6 +2731,9 @@ Subtopics: Husky, lint-staged, Pre-commit Hook, ESLint Auto-fix, Prettier Auto-f
 ```
 Section 1: Pre-commit & Pipeline Automation
   Topic 1: Git Hooks, Husky & Deployment Pipelines
+
+Section 2: Release Strategies & Safety
+   Topic 2: Feature Flags & A/B Testing
 
 ```
 
@@ -2669,8 +2744,11 @@ Section 1: Pre-commit & Pipeline Automation
 Section 1: Pre-commit & Pipeline Automation [⚠️ AI-Generated]
 Topic 1: Git Hooks, Husky & Deployment Pipelines [⚠️ AI-Generated]
 
+Section 2: Release Strategies & Safety [⚠️ AI-Generated]
+Topic 2: Feature Flags & A/B Testing [⚠️ AI-Generated]
+
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 1 | Subtopics: 8
+Sections: 2 | Topics: 2 | Subtopics: 13
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
