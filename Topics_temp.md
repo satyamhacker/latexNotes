@@ -598,7 +598,7 @@ Sections: 1 | Topics: 3 | Subtopics: 13
 # Module 5: Access Control and Encapsulation
 
 
-📦 Processing: Phase 1 — C# Ethical Malware Dev (Module 4)
+📦 Processing: Phase 1 — C# Ethical Malware Dev (Module 5)
 
 ===Section 1: Access Control and Encapsulation===
 Code ke chowkidaar (gatekeepers) jo security aur clean code ensure karte hain.
@@ -768,7 +768,7 @@ Sections: 1 | Topics: 6 | Subtopics: 35
 # Module 6: Inheritance and Polymorphism
 
 
-📦 Processing: Phase 2 — C# Ethical Malware Dev (Module 5)
+📦 Processing: Phase 2 — C# Ethical Malware Dev (Module 6)
 
 ===Section 2: Inheritance and Polymorphism [⚠️ Derived]===
 Code reuse aur parent-child hierarchy se DRY (Don't Repeat Yourself) framework banana. [⚠️ Derived]
@@ -1013,7 +1013,7 @@ Sections: 1 | Topics: 3 | Subtopics: 25
 # Module 8: C# Data Handling Tools (Variables, StringBuilder & Collections)
 
 
-📦 **Processing: Phase 1 — C# Data Handling Tools (Module 13) [⚠️ Derived]**
+📦 **Processing: Phase 1 — C# Data Handling Tools (Module 8) [⚠️ Derived]**
 
 ===Section 1: C# Data Handling Tools for C2 Output [⚠️ Derived]===
 C2 output ko efficiently manage karne ke liye zaroori C# tools — var, StringBuilder, List, aur Arrays. [⚠️ Derived]
@@ -1407,12 +1407,12 @@ Sections: 1 | Topics: 5 | Subtopics: 60
 # Module 11: C2 Implant Engine & Persistent Communication
 
 
-📦 **Processing: Phase 1 — C2 Implant Engine (Module 10)**
+📦 **Processing: Phase 1 — C2 Implant Engine (Module 11)**
 
 ===Section 1: C2 Implant Engine & Persistent Communication [⚠️ Derived]===
 Implant ko zinda rakhna aur lagataar attacker se naye commands maangna. [⚠️ Derived]
 
---16--C2 Implant Engine & Persistent Communication--
+--11--C2 Implant Engine & Persistent Communication--
 Topic 1: Persistent C2 Communication (HTTP GET Polling) [⚠️ Derived]
 Subtopics: Persistent C2 Communication, HTTP GET Polling, Heartbeat, Command Execution Trigger, Infinite while loop, WebClient, NO_TASK, PowerShellExecutor, Thread.Sleep, CPU Usage Issue, Fixed Sleep Time, Hardcoded IP, C2 Jitter, Cobalt Strike Beacon
 
@@ -1568,7 +1568,7 @@ Sections: 1 | Topics: 5 | Subtopics: 48
 ===Section 1: System Reconnaissance (Implant Coding Start) [⚠️ Derived]===
 Pehla asli implant module jahan hum victim machine se system OS, user, aur AV ki jaankari nikaalna seekhenge. [⚠️ Derived]
 
---11--System Reconnaissance--
+--12--System Reconnaissance--
 Topic 1: File Structure for Malware Project
 Subtopics: Malware Project File Structure, Single Responsibility Principle, Program.cs, InfoEnumerator.cs, Utils.cs
 
@@ -1736,7 +1736,7 @@ Sections: 1 | Topics: 6 | Subtopics: 37
 ===Section 1: C2 File Download Operations [⚠️ Derived]===
 Implant ko upgrade karne aur remote server se naye tools deploy karne ka mechanism. [⚠️ Derived]
 
---12--C2 File Download Operations--
+--13--C2 File Download Operations--
 Topic 1: File Download Process & Fileless Concept [⚠️ Derived]
 Subtopics: File Download Overview, Implant Upgrade, WebClient Process Flow, Common Hardcoding Mistakes, Fileless Execution, Assembly.Load Method
 
@@ -1835,7 +1835,7 @@ Subtopics: FileDownloader Code, System.Net and System.IO Imports, Dynamic Path G
 =====Section 2: File System Enumeration & Recon [⚠️ Derived]=====
 Victim machine par files aur folders dhoondhne ke liye implant ki capabilities (Reconnaissance). [⚠️ Derived]
 
---12--File System Enumeration & Recon--
+--13--File System Enumeration & Recon--
 Topic 3: DirectoryHandler & OPSEC File Listing [⚠️ Derived]
   Subtopics: DirectoryHandler Concept, Reconnaissance Importance, Native .NET Execution, Directory Class Methods, UnauthorizedAccessException Handling, StringBuilder Usage, EDR Evasion
 
@@ -1963,10 +1963,10 @@ Sections: 2 | Topics: 3 | Subtopics: 12
 
 📦 Processing: Phase 2 — Module 12 (Persistence) & Module 13 Intro
 
-===Section 1: Persistence (Module 12)===
+===Section 1: Persistence (Module 14)===
 System reboot ke baad bhi target machine par long-term access banaye rakhne ke essential methods.
 
---13--Persistence (Module 12)--
+--14--Persistence (Module 14)--
 Topic 1: Persistence Overview
 Subtopics: Persistence Definition, C2 Connection Maintenance, Execution Workflow, Run Keys, Startup Folder, Ransomware Example, Living Off The Land, Common Beginner Mistakes, MITRE ATT&CK TA0003, Sysinternals Autoruns
 
@@ -2036,10 +2036,10 @@ Subtopics: Startup Folder Persistence, Environment Path Resolution, File Copy Op
 * Live Production Phase: Professional Red Team pure .exe ko copy karne ke bajaay ek .lnk (Shortcut) file banati hai jismein legitimate icon hota hai taaki user ko shaq na ho. Locky jaisa ransomware startup folder mein script daalta tha jo boot par actual payload internet se laati thi.
 * Additional context: Environment.SpecialFolder.Startup hamesha use karein (non-admin). File.Copy mein 'true' flag lagana zaroori hai overwrite ke liye.
 
-===Section 2: File System Manipulations Intro (Module 13) [⚠️ Derived]===
+===Section 2: File System Manipulations Intro (Module 14) [⚠️ Derived]===
 Victim machine par files ke saath interact karne ka initial overview. [⚠️ Derived]
 
---13--File System Manipulations Intro--
+--14--File System Manipulations Intro--
 Topic 4: Module 13 File System Overview [⚠️ Derived]
 Subtopics: File System Manipulation, Payload Downloading, Directory Enumeration Commands
 
@@ -2091,13 +2091,13 @@ Subtopics: File System Manipulation, Payload Downloading, Directory Enumeration 
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Persistence (Module 12)
+Section 1: Persistence (Module 14)
 Topic 1: Persistence Overview
 Topic 2: Windows Registry Persistence (Run Key)
 Topic 3: Startup Folder Persistence
 Topic 4: Module 13 File System Overview [⚠️ Derived]
 
-Section 2: File System Manipulations Intro (Module 13) [⚠️ Derived]
+Section 2: File System Manipulations Intro (Module 14) [⚠️ Derived]
 Topic 1: Persistence Overview
 Topic 2: Windows Registry Persistence (Run Key)
 Topic 3: Startup Folder Persistence
@@ -2265,7 +2265,7 @@ Sections: 1 | Topics: 5 | Subtopics: 37
 ===Section 1: Core Utility Functions (DRY Principle) [⚠️ Derived]===
 Pichle modules ke code ko reusable 'Utils' mein badalna jo implant ka dil (core) banenge. [⚠️ Derived]
 
---14--Core Utility Functions--
+--16--Core Utility Functions--
 Topic 1: File Handling Functions (Read/Write)
 Subtopics: Core Utility File Handling, FileUtils, ReadFile, WriteFile, Don't Repeat Yourself, File.ReadAllText, File.WriteAllText, System.IO, try-catch, Absolute Path, Relative Path, File.ReadAllBytes, FileStream, File.AppendAllText, File.Delete
 
@@ -3132,7 +3132,7 @@ Sections: 1 | Topics: 2 | Subtopics: 11
 ===Section 1: Bypassing Advanced Network Defenses===
 Jab HTTP/HTTPS blocked ho ya deeply inspected ho, tab DNS, ICMP aur CDNs ka use karke C2 traffic ko chhipana.
 
---25--Advanced Covert Channels & Infrastructure--
+--24--Advanced Covert Channels & Infrastructure--
 Topic 1: DNS & ICMP Tunneling (Stealth Networking) [⚠️ New]
 Subtopics: DNS Tunneling Concept, TXT/A Records Exfiltration, ICMP Payload Injection, Ping Tunneling, Network Segmentation Bypass, dnscat2, iodine
 
@@ -3187,7 +3187,7 @@ Subtopics: Domain Fronting Concept, CDN (Content Delivery Network) Routing, Host
 ===Section 1: Bypassing the Front Door (MFA & SmartScreen)===
 Malware banane ke baad use victim ke PC tak safely pahunchana aur execute karwana (Phishing & Droppers).
 
---24--Initial Access & Payload Delivery--
+--25--Initial Access & Payload Delivery--
 Topic 1: Adversary-in-the-Middle (AiTM) Phishing [⚠️ New]
 Subtopics: AiTM Concept, Bypassing 2FA/MFA, Evilginx2, Phishlets, Session Cookie Theft, Reverse Proxy Phishing, Token Injection
 
