@@ -3257,6 +3257,46 @@ This response is AI-generated, for reference only.
 
 ==================================================================================
 
+# Module 22.6: Practical Sleep Masking (Ekko/Foliage) for Memory Scanners
+
+
+Rationale: Module 11, Topic 5 ne Sleep Obfuscation ka concept bataya, par actual C# code nahi diya. APT groups Ekko technique use karte hain — sleep se pehle memory ko XOR/RC4 encrypt karte hain, timers set karte hain, aur sleep ke baad decrypt karte hain. Isse EDR memory dump mein C2 URLs, AES keys, shellcode nahi dikhte.
+
+===Section 1: Bypassing Modern Windows Defenses (Final Expansion)===
+
+--22.6--Practical Sleep Masking (Memory Encryption during Sleep) [⚠️ New]
+
+Topic 1: Ekko/Foliage Sleep Obfuscation Implementation [⚠️ New]
+Subtopics: Memory Scanner Evasion, YARA Rule Evasion, Sleep Masking Concept, Ekko Technique, Foliage Technique, ROP Chain Setup (Conceptual), VirtualProtect to RWX, XOR/RC4 Encryption of .text Section, Timer Callbacks, Sleep Timers, Wake-up Decryption, C# Implementation with P/Invoke, Protecting AES Keys in RAM, EDR Memory Dump Bypass
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+Depth Level: Deep
+
+Coverage Angle: Practical
+
+Notes mein content volume: Full C# code to encrypt the implant's own memory before sleeping and decrypt after waking up.
+
+Key terms from notes: Sleep Masking, Ekko, Foliage, Memory Encryption, YARA, VirtualProtect, Timer Callbacks, ROP, XOR Encryption
+
+Explicit emphasis in notes: "Jab implant sleep par jaata hai, toh uska .text section (code) aur .data section (C2 URLs, AES keys) RAM mein plaintext mein rehta hai. EDR YARA scan karke malware detect kar leta hai. Sleep se pehle memory ko encrypt karo, wake up hone par decrypt karo — EDR andha ho jaata hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Sleep Masking, Ekko, Foliage, Memory Encryption, YARA Evasion, VirtualProtect, PAGE_EXECUTE_READWRITE, PAGE_READWRITE, XOR Encryption, RC4, Timer Callbacks, SetTimer, WaitForSingleObject, ROP Chain, .text Section, .data Section, Heap Encryption, NtDelayExecution, Memory Scanners, CrowdStrike Memory Scan, Defender ATP, Beacon Memory]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+Live Production Phase: Implant Thread.Sleep(60000) call karne se pehle, EkkoMask() function call karta hai. VirtualProtect se apni memory ko PAGE_READWRITE banata hai. .text section ko XOR key se encrypt kar deta hai (C2 URLs, shellcode hidden). SetTimer callback set karta hai jo 60 seconds baad decrypt karega. Implant NtDelayExecution sleep par chala jaata hai. CrowdStrike RAM scan karta hai — encrypted garbage data dikhta hai, YARA signature match nahi hota. 60 seconds baad timer fire karta hai, decrypt function run hota hai, memory wapas normal ho jaati hai. Implant C2 se connect karta hai. Zero detection.
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
 
 # Module 23: OPSEC & Automated Infrastructure (Red Team DevOps)
 
