@@ -2776,11 +2776,43 @@ Subtopics: Windows Services Architecture, Unquoted Service Paths, Weak Service P
 
 * Live Production Phase: Admin access milne ke baad, attacker dekhta hai ki system par ek 3rd-party software chal raha hai jiska service path bina quotes (unquoted) ke likha hai (`C:\Program Files\My App\service.exe`). Attacker ek malicious C# executable banata hai jiska naam `My.exe` hota hai aur use `C:\Program Files\` mein drop kar deta hai. Jaise hi PC reboot hota hai, Windows OS us malicious `My.exe` ko as SYSTEM execute kar deta hai, giving the attacker absolute God Mode over the OS.
 
+Topic  PPID Spoofing (Parent Process ID Spoofing)
+
+(Kyunki privilege escalation ke baad seedha stealthy child process spawn karna hota hai)
+
+===Section 1: Elevating Privileges (Expansion)===
+
+--19--Windows Local Privilege Escalation (Expansion)--
+
+Topic 3: PPID Spoofing (Hiding Process Ancestry from EDR) [⚠️ New]
+Subtopics: Process Heritance Monitoring, EDR Parent-Child Detection, CreateProcess, STARTUPINFOEX, PROC_THREAD_ATTRIBUTE_PARENT_PROCESS, UpdateProcThreadAttribute, Spoofing Parent to Explorer.exe, Bypassing Process Tree Alerts, C# P/Invoke for Kernel32, NtCreateUserProcess, OPSEC for Child Processes
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+Depth Level: Deep
+
+Coverage Angle: Practical
+
+Notes mein content volume: C# code to spoof the parent PID to explorer.exe before spawning cmd.exe or powershell.exe.
+
+Key terms from notes: PPID Spoofing, Parent PID, Heritance, EDR Process Tree, STARTUPINFOEX, PROC_THREAD_ATTRIBUTE_PARENT_PROCESS, UpdateProcThreadAttribute, NtCreateUserProcess
+
+Explicit emphasis in notes: "EDR logs mein 'Malware.exe -> Cmd.exe' sabse bada red flag hai. PPID spoof karo toh log mein 'Explorer.exe -> Cmd.exe' aata hai. Trusted parent, zero alerts."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[PPID Spoofing, Parent PID, Process Heritance, EDR Process Tree, STARTUPINFOEX, lpAttributeList, PROC_THREAD_ATTRIBUTE_PARENT_PROCESS, UpdateProcThreadAttribute, InitializeProcThreadAttributeList, CreateProcess, CreateProcessAsUser, NtCreateUserProcess, Explorer.exe PID, svchost.exe, stealth spawn, cmd.exe evasion, powershell stealth, C# P/Invoke, Kernel32.dll, Ntdll.dll]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+Live Production Phase: Admin access milne ke baad, attacker ko cmd.exe chalana hai. Agar woh direct Process.Start("cmd.exe") karega toh EDR (CrowdStrike) alert karegi: "Suspicious child process from unknown parent". Attacker C# mein STARTUPINFOEX use karta hai, explorer.exe ka PID dhoondta hai, usko parent process attribute set karta hai. CreateProcess call hoti hai. EDR console mein log aata hai: "explorer.exe (PID 1234) spawned cmd.exe (PID 5678)". EDR ki behavioral rule trust karti hai, attacker ka reverse shell ban jata hai bina kisi alert ke
+
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Elevating Privileges
 Topic 1: UAC Bypass Techniques (Fodhelper & COM) [⚠️ New]
 Topic 2: Service Misconfigurations & SYSTEM Escalation [⚠️ New]
+Topic 3:  PPID Spoofing (Parent Process ID Spoofing)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 2 | Subtopics: 15
@@ -3057,6 +3089,39 @@ Subtopics: Application Whitelisting (AWL) Concepts, Windows Defender Application
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Live Production Phase: Attacker ek custom `payload.exe` drop karta hai, par Windows Defender Application Control (WDAC) usko block kar deta hai kyunki woh Microsoft/Enterprise dwara signed nahi hai. Attacker pivot karta hai aur apne C# code ko ek `.csproj` (XML) file mein daal kar drop karta hai. Phir woh Windows ke andar pehle se maujood aur trusted `C:\Windows\Microsoft.NET\Framework4.0.30319\MSBuild.exe` ko call karke us `.csproj` ko pass karta hai. MSBuild (jo WDAC whitelist mein hai) attacker ke code ko memory mein compile aur execute kar deta hai, poori tarah se Defender ki policy ko bypass karte hue.
+
+ Topic 5: In-Memory C# Compiler (CSharpCodeProvider) — AppLocker Killer
+
+ (Kyunki AMSI/ETW bypass karne ke baad, ab WDAC/AppLocker ko bypass karna hai)
+
+===Section 1: Bypassing Modern Windows Defenses (Expansion)===
+
+--22--Advanced Defense Evasion (Expansion)--
+
+Topic 5: In-Memory .NET Compilation (Bypassing AppLocker/WDAC) [⚠️ New]
+Subtopics: AppLocker Bypass, WDAC Bypass, CSharpCodeProvider, CodeDomProvider, CompilerParameters, GenerateInMemory, Assembly.Load from Byte[], Runtime Compilation, Avoid Disk Writes, No .exe on Disk, Dynamic Payload Generation, C# String to Memory Execution
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+Depth Level: Deep
+
+Coverage Angle: Practical
+
+Notes mein content volume: C# code to compile a C# source code string directly into memory and execute it via Assembly.Load.
+
+Key terms from notes: CSharpCodeProvider, CodeDom, GenerateInMemory, Assembly.Load, Runtime Compilation, AppLocker, WDAC, Diskless Execution
+
+Explicit emphasis in notes: "Agar WDAC/AppLocker enabled hai toh custom .exe kabhi nahi chalegi. Lekin C# source code ko runtime par compile karke memory mein load karo -> .NET framework khud allow karta hai. Defender pure .NET activity samajhta hai, block nahi karta."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[CSharpCodeProvider, ICodeCompiler, CompilerParameters, GenerateInMemory, GenerateExecutable, Assembly.Load, Byte[] CompiledAssembly, Microsoft.CSharp.CSharpCodeProvider, System.CodeDom.Compiler, CompilerError, Assembly.CreateInstance, ExecuteInMemory, Dynamic Payload, Obfuscated Source, Base64 Decode, Diskless Malware, Pure .NET Bypass]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+Live Production Phase: Victim ka WDAC (Windows Defender Application Control) sirf signed Microsoft binaries ko allow karta hai. Attacker payload.exe drop karta hai, WDAC turant block kar deta hai. Attacker apna C# source code (Base64 encoded) C2 se fetch karta hai. Implant CSharpCodeProvider use karta hai. CompilerParameters GenerateInMemory = true set karta hai. Compiler source code ko compile karke ek Assembly (byte array) return karta hai. Implant Assembly.Load(compiledBytes).CreateInstance("ExploitClass").Run() call karta hai. Disk par koi .exe nahi likhi, WDAC ko pata hi nahi chala. Malware successfully chala.
+
+
 
 ---
 
@@ -3840,6 +3905,37 @@ Explicit emphasis in notes: "EDR Teams.exe ko block nahi karega kyunki woh signe
 Live Production Phase: Attacker C2 sends drop_payload command. Implant writes a malicious version.dll into C:\Users\victim\AppData\Local\Microsoft\OneDrive\. Then it executes C:\Program Files\Microsoft OneDrive\OneDrive.exe. OneDrive loads, finds version.dll in its directory, loads it. Malware runs inside OneDrive.exe memory space. Defender/CrowdStrike see OneDrive.exe making network connections and writing files—they consider OneDrive "trusted" and allow everything. Attacker maintains persistent, undetected access
 
 
+Topic 2: DLL Proxying (Crash-Proof DLL Sideloading)
+
+
+(Kyunki pehle DLL drop karna sikha, ab usko crash-proof banana sikhenge)
+
+===Section 1: Abusing Trusted Signers (LotTP - Expansion)===
+
+--33--Living Off Trusted Processes (Expansion)--
+
+Topic 2: DLL Proxying (Forwarding Exports for Stealth) [⚠️ New]
+Subtopics: DLL Export Forwarding, Legitimate DLL Crash, version.dll vs original, Forwarder Functions, __declspec(dllexport), Module Definition File (.def), P/Invoke to GetProcAddress, LoadLibrary of Original DLL, Manual Export Forwarding, DllMain Execution, OPSEC for Trusted Binaries
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+Depth Level: Deep
+
+Coverage Angle: Practical
+
+Notes mein content volume: C# code to load the original Windows DLL and forward all function calls to it so the trusted app doesn't crash.
+
+Key terms from notes: DLL Proxying, Export Forwarding, version.dll, winhttp.dll, GetProcAddress, LoadLibrary, DllMain, Forwarder Functions, .def file, crash prevention
+
+Explicit emphasis in notes: "Agar tum sirf malicious version.dll drop karoge toh OneDrive crash karega aur user ko alert ho jayega. DLL Proxying se original functions forward karo -> app smoothly chale -> user ko pata nahi chalega."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[DLL Proxying, Export Forwarding, version.dll, winhttp.dll, msimg32.dll, GetProcAddress, LoadLibrary, DllMain, __declspec(dllexport), Module Definition File, .def file, EXPORTS keyword, forwarder function, original DLL path, C:\Windows\System32, OPSEC, crash prevention, trusted process stability]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+Live Production Phase: Attacker malicious version.dll drop karta hai. Agar yeh DLL sirf DllMain mein shellcode run kare aur baaki functions (jaise GetFileVersionInfo) ko ignore kare toh OneDrive.exe crash ho jaayega. Attacker LoadLibrary se original Windows version.dll ko memory mein load karta hai. Har export function (like GetFileVersionInfo) ko woh redefine karta hai ki return OriginalDLL.GetFileVersionInfo(...). OneDrive perfectly chalta hai, user ko kuch shaq nahi hota. Malware silently background mein C2 se connect ho jaata hai.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
