@@ -2811,6 +2811,25 @@ Subtopics: Kernel Mode vs User Mode, Ring 0 Execution, Bring Your Own Vulnerable
 
 * Live Production Phase: Attacker system par ek officially signed (but vulnerable) ASUS driver (RTCore64.sys) drop karta hai. Implant us driver ke through kernel (Ring 0) memory mein arbitrary read/write exploit run karta hai, aur CrowdStrike/Defender EDR agent ke kernel callbacks ko disable kar deta hai. EDR chalu dikhta hai, par actually andha ho chuka hota hai.
 
+Topic 5: WDAC & AppLocker Bypasses (Application Whitelisting) [⚠️ New]
+Subtopics: Application Whitelisting (AWL) Concepts, Windows Defender Application Control (WDAC), AppLocker Policies, LOLBins (Living Off The Land Binaries), MSBuild.exe Abuse, InstallUtil.exe Evasion, Regasm/Regsvcs Execution, COM Scriptlets (.sct)
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Practical
+* Notes mein content volume: Bypassing execution restrictions by using Microsoft's own trusted tools to compile and run malicious C# code.
+* Key terms from notes: WDAC, AppLocker, AWL, LOLBins, MSBuild, InstallUtil
+* Explicit emphasis in notes: "Agar enterprise ne WDAC enforce kiya hai, toh custom .exe kabhi nahi chalegi. Tumhe Microsoft ke apne signed binaries (LOLBins) ko as a proxy use karna padega."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[WDAC, Windows Defender Application Control, AppLocker, AWL, Application Whitelisting, LOLBAS, LOLBins, Living Off The Land Binaries, MSBuild.exe, InstallUtil.exe, Regasm.exe, Regsvcs.exe, RunDLL32.exe, Csc.exe, Microsoft.Workflow.Compiler.exe, .csproj, XML payloads, COM Scriptlets, .sct, regsvr32, bypass execution policies]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Live Production Phase: Attacker ek custom `payload.exe` drop karta hai, par Windows Defender Application Control (WDAC) usko block kar deta hai kyunki woh Microsoft/Enterprise dwara signed nahi hai. Attacker pivot karta hai aur apne C# code ko ek `.csproj` (XML) file mein daal kar drop karta hai. Phir woh Windows ke andar pehle se maujood aur trusted `C:\Windows\Microsoft.NET\Framework4.0.30319\MSBuild.exe` ko call karke us `.csproj` ko pass karta hai. MSBuild (jo WDAC whitelist mein hai) attacker ke code ko memory mein compile aur execute kar deta hai, poori tarah se Defender ki policy ko bypass karte hue.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -2822,9 +2841,10 @@ Topic 1: Static AV Evasion & Custom Crypters (FUD) [⚠️ New]
 Topic 2: AMSI Bypass (Memory Patching) [⚠️ Derived]
 Topic 3: ETW Blinding (Event Tracing for Windows) [⚠️ Derived]
 Topic 4: Kernel-Level Evasion (BYOVD & PPL Bypass) [⚠️ New]
+Topic 5: WDAC & AppLocker Bypasses (Application Whitelisting) [⚠️ New]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 32
+Sections: 1 | Topics: 5 | Subtopics: 40
 
 --- 🛑 PHASE 4 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
