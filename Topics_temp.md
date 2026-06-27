@@ -1731,6 +1731,8 @@ Sections: 1 | Topics: 6 | Subtopics: 37
 # Module 13: Playing With File System
 
 
+
+
 📦 Processing: Phase 1 — C2 Payload Operations & Recon [⚠️ Derived]
 
 ===Section 1: C2 File Download Operations [⚠️ Derived]===
@@ -1749,6 +1751,7 @@ Subtopics: File Download Overview, Implant Upgrade, WebClient Process Flow, Comm
 * Explicit emphasis in notes: "Fileless Execution" — highlighted as professional red team technique
 * Notes mein jo analogies/examples the: Deploying a keylogger or mimikatz from C2 server to upgrade the implant
 ]
+
 
 🔑 KEYWORDS DUMP for Topic 1:
 [keylogger.exe, mimikatz.exe, stager, implant, WebClient, DownloadFile(url, local_path), Process.Start, C:, C:\Users\Administrator..., http://, Wireshark, download_exec, mimi.exe, C:\Temp\m.exe, WebClient.DownloadData(url), byte array, Assembly.Load(bytes), ⭐Fileless Execution[emphasized in notes], keylogger.dll, AppData, LocalAppData, Temp, Environment.GetFolderPath(...), try...catch, https, HttpClient, System.Net.WebClient, System.Diagnostics.Process.Start]
@@ -1773,10 +1776,11 @@ Subtopics: FileDownloader Code, System.Net and System.IO Imports, Dynamic Path G
 * Notes mein jo analogies/examples the: Google robots.txt download as an example
 ]
 
+
 🔑 KEYWORDS DUMP for Topic 2:
 [FileDownloader, System.Net, System.IO, System.Diagnostics, fileUrl, localFolder, Environment.SpecialFolder.ApplicationData, fileName, localPath, Path.Combine, WebClient, client.DownloadFile, Process.Start, notepad.exe, try...catch, Exception ex, using block, dispose, memory leaks, shell:appdata, blocking, DownloadFileAsync, client.DownloadProgressChanged, HTTP proxy, WebClient.DownloadData, WebClient.UploadFile,
 
-```csharp
+csharp
   using System;
   using System.Net; // WebClient ke liye zaroori
   using System.IO;   // Path aur Environment classes ke liye zaroori
@@ -1801,6 +1805,7 @@ Subtopics: FileDownloader Code, System.Net and System.IO Imports, Dynamic Path G
               Console.WriteLine($"[*] Downloading file from: {fileUrl}");
               Console.WriteLine($"[*] Saving to: {localPath}");
 
+
               try
               {
                   // 3. WebClient object banana
@@ -1823,7 +1828,9 @@ Subtopics: FileDownloader Code, System.Net and System.IO Imports, Dynamic Path G
           }
       }
   }
-```]
+]
+
+
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 - Testing/Offline Phase: Testing the payload by downloading a harmless txt file (like robots.txt) and opening it via Notepad.
@@ -1850,7 +1857,7 @@ Topic 3: DirectoryHandler & OPSEC File Listing [⚠️ Derived]
 
 🔑 KEYWORDS DUMP for Topic 3:
 [DirectoryHandler, ls, dir, cd, ⭐Reconnaissance[emphasized in notes], Desktop, passwords.txt, System.IO, StringBuilder, output.AppendLine, Environment.SpecialFolder.Desktop, Directory.GetCurrentDirectory(), Directory.SetCurrentDirectory(path), Directory.GetDirectories(targetPath), Directory.GetFiles(targetPath), Path.GetFileName, try...catch, UnauthorizedAccessException, cmd.exe /c dir, Process.Start, native .NET code, EDR, Antivirus, recursive, cd .., hidden files, File.GetAttributes(), Network drive, Directory, DirectoryInfo, FileInfo, Directory.EnumerateFiles, 
-```csharp
+csharp
   using System;
   using System.IO; // Directory, File, Path classes ke liye zaroori
   using System.Text; // StringBuilder ke liye
@@ -1904,7 +1911,8 @@ Topic 3: DirectoryHandler & OPSEC File Listing [⚠️ Derived]
           }
       }
   }
-```]
+]
+
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 - Testing/Offline Phase: Beginners might try using cmd.exe to run `dir` command directly, unaware of detection risks.
@@ -1915,28 +1923,7 @@ Topic 3: DirectoryHandler & OPSEC File Listing [⚠️ Derived]
 
 
 
-**Double-check steps performed:**
-- [x] Poore notes completely padhe bina kuch skip kiye.
-- [x] Notes ko Sections mein group kiya — related topics ek Section mein hain.
-- [x] Har Section ka tagline/context line add kiya.
-- [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-- [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-- [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
-- [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-- [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-- [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-- [x] Chronological order preserved.
-- [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
-- [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya — depth level, coverage angle, content volume, key terms, emphasis sab filled hain (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya — notes mein aaya har ek word/phrase/command/term/code capture kiya, emphasized terms ⭐ se mark kiye, unclear terms [unclear] se flag kiye, version numbers ⭐X.x[version] se mark kiye (per topic, not per subtopic).
-- [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya — notes mein jo bhi real-world flow tha woh capture kiya. Agar N/A toh clearly likha. Theoretical topics ke liye Learning/Application/Mastery phases use kiye.
-- [x] Diagrams/tables reproduced ya flagged — koi silently skip nahi ki.
-- [x] OCR quality warning di agar 20%+ content unclear tha (N/A here).
-- [x] Phase tracking aur CONTINUE protocol follow kiya (Phase fit entirely in output limit).
-- [x] Output limit aane se pehle ruka — ek complete Topic ke baad — aur CONTINUE message mein completed + remaining list + progress stats print kiye.
-- [x] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon?
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
