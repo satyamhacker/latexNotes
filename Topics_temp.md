@@ -2683,6 +2683,35 @@ Subtopics: CryptoStream Breakdown Concept, File-to-File Encryption Efficiency, C
 * Live Production Phase (C2 Security): `NetworkUtils.SendPostRequest` mein data network par bhejne se pehle `AESUtils.EncryptString` se encrypt aur Base64 encode hota hai. Server side par (e.g., PHP) `openssl_decrypt()` us data ko same Key/IV se decrypt karta hai.
 * Additional context: CryptoStream ki streaming capabilities ki wajah se 5GB ki file bhi ek low-memory (8MB RAM) implant se bina crash hue encrypt ho sakti hai.
 
+Rationale: Your current AES uses a hardcoded key. If Blue Team captures the implant, they decrypt ALL past traffic. Using RSA key exchange provides Perfect Forward Secrecy (PFS). Also, .NET's default TLS fingerprint is unique and detectable by JA3 signatures—must spoof it to Chrome/Firefox.
+
+===Section 3: Advanced Offensive Cryptography & Network Stealth (Expansion)===
+
+--18--Advanced Data Capture & Operational Security (Expansion)--
+
+Topic 5: Hybrid Encryption (RSA+AES) & JA3 Fingerprint Spoofing [⚠️ New]
+Subtopics: Hybrid Cryptosystem, RSA Public Key Embedding, Ephemeral AES Session Key, Perfect Forward Secrecy (PFS), RSA-OAEP Encryption, AES-GCM Bulk Encryption, C# RSACryptoServiceProvider, TLS Fingerprint Randomization, JA3 Hash Evasion, Chrome TLS Fingerprint Spoofing, SslStream Customization, SslClientAuthenticationOptions, Cipher Suite Selection, ALPN Spoofing
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+Depth Level: Deep
+
+Coverage Angle: Both
+
+Notes mein content volume: Code to exchange RSA-encrypted AES keys and modify the C# HttpClient TLS stack to look like Chrome.
+
+Key terms from notes: RSA, AES-GCM, Perfect Forward Secrecy, JA3, TLS Fingerprint, SslStream, Cipher Suites
+
+Explicit emphasis in notes: "Hardcoded AES key = death. RSA key exchange = E2E encryption. Default .NET JA3 = immediately flagged. Spoof Chrome's JA3 = invisible."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Hybrid Encryption, RSA, AES-GCM, RSA-OAEP, Perfect Forward Secrecy, Ephemeral Key, RSACryptoServiceProvider, AesGcm, JA3, JA3S, TLS Fingerprint, SslClientAuthenticationOptions, CipherSuitesPolicy, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_CHACHA20_POLY1305_SHA256, ALPN h2, SNI Spoofing, ServicePointManager.SecurityProtocol, HttpClientHandler.SslOptions, Chrome JA3 hash 6734f37431670b3ab4292b8f60f29984]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+Live Production Phase: Implant starts. It generates a random 32-byte AES key. Encrypts this key with the embedded RSA Public Key. Sends it to C2. C2 decrypts with RSA Private key. All subsequent traffic is AES-GCM encrypted. Simultaneously, Implant initiates TLS using SslClientAuthenticationOptions set to Chrome's exact cipher suites and extensions. Blue Team captures traffic. JA3 hash reads as "Google Chrome". TLS payload is random AES ciphertext (not plaintext JSON). EDR cannot decrypt, Firewall thinks it's Chrome browsing. Implant is completely silent on the wire.
+
 --- 🛑 PHASE 18 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Completed steps:**
@@ -2702,6 +2731,7 @@ Topic 1: Screenshot Capture - Victim ki Screen Dekhna
 Topic 2: Privilege Escalation Check
 Topic 3: Encrypt and Decrypt Files (AES)
 Topic 4: Deep Dive: AES Encryption Code (CryptoStream)
+Topic 5: Hybrid Encryption (RSA+AES) & JA3 Fingerprint Spoofing [⚠️ New]
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 4 | Subtopics: 87
@@ -3175,6 +3205,37 @@ Subtopics: Domain Fronting Concept, CDN (Content Delivery Network) Routing, Host
 * Live Production Phase: C2 implant network connection `ajax.microsoft.com` (SNI) par banata hai jise firewall allow kar deta hai. Par HTTP request ke andar `Host: attacker-c2.azureedge.net` (Host Header) daal deta hai, jisse Azure ka CDN traffic ko silently attacker ke server par bhej deta hai.
 
 ✅ **Notes Guru Skeleton Ready:** Module 24 (Topics 1-2).
+
+Rationale: Polling every 5 seconds is loud and archaic. WebSockets provide a persistent, full-duplex, low-latency channel that looks exactly like a modern web app (Slack, Discord, Trading platforms) to network firewalls and EDR.
+
+===Section 1: Bypassing Advanced Network Defenses (Expansion)===
+
+--24--Advanced Covert Channels & Infrastructure (Expansion)--
+
+Topic 3: WebSocket & HTTP/2 Persistent C2 [⚠️ New]
+Subtopics: WebSocket Protocol, wss:// Handshake, Persistent Full-Duplex Connection, HTTP/2 Multiplexing, C2 over WebSockets, Net.WebSockets ClientWebSocket, ReceiveAsync/SendAsync, Real-time Command Execution, WebSocket Frame Analysis, Cloudflare WebSocket Proxy, Long-Polling vs WebSocket, Browser Developer Tools Mimicry
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+Depth Level: Deep
+
+Coverage Angle: Practical
+
+Notes mein content volume: Full C# code to replace polling loop with a persistent async WebSocket listener.
+
+Key terms from notes: WebSocket, ClientWebSocket, wss://, Full-Duplex, ReceiveAsync, SendAsync, Persistent Connection, Cloudflare
+
+Explicit emphasis in notes: "HTTP polling se C2 traffic ka 'beat' detectable hai. WebSocket ek baar connect ho, command turant aati hai, no heartbeat noise."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[WebSocket, wss://, ClientWebSocket, await socket.ConnectAsync(uri, cancellationToken), await socket.ReceiveAsync(buffer, cancellationToken), await socket.SendAsync(buffer, WebSocketMessageType.Text, true, cancellationToken), Persistent Connection, Full-Duplex, HTTP/2 Multiplexing, Real-time C2, No Polling Noise, Cloudflare WebSocket Proxy, System.Net.WebSockets, WebSocketState.Open, Frame Opcode, CloseStatus, browser dev tools mimicry]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+Live Production Phase: Attacker deploys implant. Implant opens a single wss://c2-server.com/ws connection. Attacker types "screenshot" in the C2 panel. The command is pushed instantly via the WebSocket frame. Implant executes, sends the 500KB image back via the same open connection in 300ms. Firewall logs show a single long-lived TLS connection to a CDN/IP. There are no repeated GET/DNS queries. EDR network detection rules see "normal web traffic" and ignore it.
+
+
 
 ---
 
@@ -3703,4 +3764,112 @@ Topic 1: UEFI/BIOS Bootkits & Rootkits (Ring -1) [⚠️ New]
 Sections: 1 | Topics: 1 | Subtopics: 7
 
 --- 🛑 DONE. All phases and advanced modules are complete. The ultimate cross-platform, multi-environment Red Teaming skeleton is fully compiled.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Module 33: Living Off Trusted Processes (DLL Sideloading into Teams/OneDrive)
+
+
+Rationale: EDRs have specific rules that ignore Microsoft-signed processes (Teams, OneDrive, Zoom). If you drop a malicious DLL into their folder and trigger the trusted binary, your malware runs with the "trusted" certificate context, bypassing 70% of EDR behavioral detections.
+
+===Section 1: Abusing Trusted Signers (LotTP)===
+AV/EDR Microsoft signed binaries ko trust karti hai. Unhi trusted binaries ko apna loader banao.
+
+--33--Living Off Trusted Processes (LotTP)--
+
+Topic 1: DLL Sideloading via OneDrive/Teams/Spotify [⚠️ New]
+Subtopics: Windows DLL Search Order Hijacking, Trusted Binary Execution, OneDriveUpdater.exe Abuse, Teams.exe DLL Sideloading, Zoom Meetings DLL Hijack, SpotifyUpdate.exe Abuse, Version.dll / winhttp.dll Spoofing, Path Environment Variable Manipulation, Process Hollowing via Trusted Binary, C2 Launch via Trusted Context, EDR Whitelist Bypass, OPSEC Considerations
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+Depth Level: Deep
+
+Coverage Angle: Practical
+
+Notes mein content volume: C# code to drop a malicious DLL into %LocalAppData%\Microsoft\OneDrive\ and trigger OneDrive.exe.
+
+Key terms from notes: DLL Sideloading, Search Order Hijacking, Trusted Binary, OneDrive, Teams, Version.dll, EDR Whitelist
+
+Explicit emphasis in notes: "EDR Teams.exe ko block nahi karega kyunki woh signed hai. Agar Teams tumhara DLL load kare toh EDR sochta hai Teams legitimate hai—total bypass."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[DLL Sideloading, LotTP, OneDrive.exe, Teams.exe, Spotify.exe, %LocalAppData%\Microsoft\OneDrive\, C:\Program Files\Microsoft Teams\current\, Version.dll, winhttp.dll, msimg32.dll, Search Order Hijacking, DllMain, LoadLibrary, CreateRemoteThread (via trusted process), EDR Whitelist Bypass, Process Execution via Trusted Binary, signed binary abuse, shellcode injection into trusted process]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+Live Production Phase: Attacker C2 sends drop_payload command. Implant writes a malicious version.dll into C:\Users\victim\AppData\Local\Microsoft\OneDrive\. Then it executes C:\Program Files\Microsoft OneDrive\OneDrive.exe. OneDrive loads, finds version.dll in its directory, loads it. Malware runs inside OneDrive.exe memory space. Defender/CrowdStrike see OneDrive.exe making network connections and writing files—they consider OneDrive "trusted" and allow everything. Attacker maintains persistent, undetected access
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Module 34: Advanced Eternal Persistence (WMI Event Subs & COM Hijacking)
+
+
+Rationale: Registry Run keys and Startup folders are monitored by every AV. WMI Event Subscriptions run at the OS level and are notoriously hard to detect. COM Hijacking means every time the user opens a file (like Word), your malware runs.
+
+===Section 1: Stealthy & Resilient Backdoors===
+Registry ka zamana gaya. WMI aur COM ka use karke aisi persistence banao jo AV scans aur manual investigations mein bhi nazar na aaye.
+
+--34--Advanced Persistence (WMI & COM Hijacking)--
+
+Topic 1: WMI Permanent Event Subscriptions (Eternal Persistence) [⚠️ New]
+Subtopics: WMI Architecture, __EventFilter, __CommandLineEventConsumer, Permanent WMI Event, ProcessStartEvent Trigger, RegistryKeyChangeEvent Trigger, System Boot Timer, Root\subscription Namespace, C# System.Management Classes, ManagementEventWatcher, Multi-Trigger Redundancy, WMI Log Evasion, Eternal Persistence
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+Depth Level: Deep
+
+Coverage Angle: Practical
+
+Notes mein content volume: C# code to register a WMI event that runs malware whenever explorer.exe starts.
+
+Key terms from notes: WMI, __EventFilter, __CommandLineEventConsumer, Permanent Event, Root\subscription
+
+Explicit emphasis in notes: "Registry clean karne se WMI nahi hat-ta. Yeh persistence OS reinstall ke baad bhi zinda rehti hai agar data partition safe hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[WMI, Windows Management Instrumentation, Permanent WMI Event, __EventFilter, __CommandLineEventConsumer, Root\subscription, SELECT * FROM __InstanceCreationEvent WITHIN 10 WHERE TargetInstance ISA 'Win32_Process' AND TargetInstance.Name = 'explorer.exe', System.Management, ManagementObject, Put(), WMI Binding, Eternal Persistence, Event Log Evasion, WMIC / Invoke-WmiMethod]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+Live Production Phase: Implant registers a WMI filter: "Whenever explorer.exe starts, run C:\Windows\Temp\updater.exe". Victim reboots PC. Registry is clean, Startup folder is empty. But when Windows starts Explorer, the WMI subsystem triggers the malware. Blue Team runs Sysinternals Autoruns—they don't see it (Autoruns doesn't deep-scan WMI by default). SOC runs EDR scans—they see no persistence. Malware comes back every boot. Complete stealth.
+
+Topic 2: COM Hijacking (Office & Explorer Abuse) [⚠️ New]
+Subtopics: COM (Component Object Model), CLSID Registry Keys, InprocServer32, TreatAs Key, Office COM Object Hijacking, Windows Explorer COM Hijack, COM Elevation Moniker, HKCU vs HKLM, C# Registry Manipulation, COM ProxyStub Hijacking
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+Depth Level: Deep
+
+Coverage Angle: Practical
+
+Notes mein content volume: C# registry code to hijack Word's COM object.
+
+Key terms from notes: COM Hijacking, CLSID, InprocServer32, TreatAs, HKCU
+
+Explicit emphasis in notes: "Office COM hijack karne par jab victim Word kholta hai, malware run hota hai. Office trusted hai, EDR alert nahi karega."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[COM Hijacking, CLSID, InprocServer32, TreatAs, HKCU\Software\Classes\CLSID{GUID}\InprocServer32, Microsoft Office COM, {00024500-0000-0000-C000-000000000046}, Windows Explorer, shell:::{GUID}, COM Elevation Moniker, Microsoft.Win32.Registry, CreateSubKey, SetValue, ProxyStub, CoCreateInstance]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+Live Production Phase: Attacker code writes registry key HKCU\Software\Classes\CLSID\{245A...}\InprocServer32 pointing to C:\Users\victim\AppData\Roaming\OfficeHelper.dll. Victim opens a Word document. Windows COM subsystem loads the DLL. Office runs with High Integrity, loads malware. EDR sees Word.exe loading OfficeHelper.dll—thinks it's a legit Office add-in. Malware runs in the context of Word, exfiltrates documents while victim works. No new suspicious process created.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
 
