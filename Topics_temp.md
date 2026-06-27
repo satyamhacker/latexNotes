@@ -2848,6 +2848,37 @@ Subtopics: Static Signatures vs Heuristics, Entropy Management, Custom Crypters 
 
 * Live Production Phase: Attacker apne C# payload (Cobalt Strike / Meterpreter) ko raw byte array mein convert karta hai, XOR/AES se encrypt karta hai, aur ek custom 'Stub' likhta hai. Compile hone ke baad, file ki entropy artificially reduce ki jati hai (e.g., adding English dictionary words as junk data/resources) aur `SigThief` ka use karke ek fake Microsoft certificate se sign kiya jata hai taaki Defender disk scan karte waqt isko legitimate maane aur quarantine na kare.
 
+Topic 1.5 Build-Time Obfuscation via ConfuserEx
+
+Rationale: Module 20, Topic 1 mein Control Flow Flattening mention kiya gaya hai, par kisi beginner ko implement karna nahi aata. ConfuserEx jaisa free tool use karke .NET code ko itna obfuscate kiya ja sakta hai ki signature-based AVs hara ho jaayein.
+
+===Section 1: Memory Execution Tactics (Expansion)===
+
+--20--Process Injection & Shellcode Runners (Expansion)--
+
+Topic 1.5: Build-Time Code Obfuscation (ConfuserEx / Obfuscar) [⚠️ New]
+Subtopics: .NET Obfuscation, ConfuserEx, Obfuscar, Control Flow Obfuscation, Renaming, String Encryption, Anti-Decompilation, Build Pipeline Integration, Defender Signature Evasion
+
+[📊 SCOPE SIGNAL for Topic 1.5:
+
+Depth Level: Moderate
+
+Coverage Angle: Practical
+
+Notes mein content volume: Steps to download, configure, and run ConfuserEx on the compiled C# payload to make it FUD.
+
+Key terms from notes: ConfuserEx, Obfuscar, Build Pipeline, Anti-tamper, Renaming, String Encryption
+
+Explicit emphasis in notes: "Crypters ache hain, par base mscorelib calls ko bhi obfuscate karo. ConfuserEx max preset se static entropy itna kam ho jaata hai ki Defender file ko 'clean' maan leta hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1.5:
+[ConfuserEx, Obfuscar, Obfuscation, Build Pipeline, dotnet build, Obfuscator, Renaming, Control Flow, Anti-Debug, Anti-Dump, String Encryption, Resource Encryption, Static Entropy, Defender Evasion, FUD]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1.5:
+
+Live Production Phase: Attacker ne C# payload compile kar liya (payload.exe). Attacker ConfuserEx GUI / CLI launch karta hai. "Max Protection" preset select karta hai. Output folder set karta hai. "Protect" button dabata hai. Naya payload 90% file signature match loss kar deta hai. Defender scan karta hai — entropy low, flow complex, strings encrypted — "Clean" report aati hai. Payload successfully victim ke system par pahunch jaata hai.
+
 Topic 2: Local Shellcode Runner Basics
 Subtopics: Shellcode Concept, MSFVenom/Cobalt Strike Payloads, Memory Allocation, VirtualAlloc, Marshal.Copy, Memory Execution, CreateThread, PAGE_EXECUTE_READWRITE
 
@@ -2928,6 +2959,7 @@ Subtopics: Module Stomping Concept, DLL Overwriting, Asynchronous Procedure Call
 
 Section 1: Memory Execution Tactics [⚠️ Derived]
 Topic 1: Static AV Evasion & Custom Crypters (FUD) [⚠️ New]
+Topic 1.5 Build-Time Obfuscation via ConfuserEx
 Topic 2: Local Shellcode Runner Basics
 Topic 3: Remote Process Injection
 Topic 4: Process Hollowing & Reflective DLL Injection
@@ -2985,6 +3017,41 @@ Subtopics: Kernel vs User-Land, EDR API Hooking, ntdll.dll manipulation, Direct 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
 * Live Production Phase: Jab EDR `kernel32.dll` mein `VirtualAlloc` ko hook karta hai (malware pakadne ke liye), tab implant P/Invoke use karne ke bajaye direct Assembly level `syscall` instruction (via D/Invoke) issue karta hai, EDR ki aankhon ke bilkul neeche se bypass karke.
+
+Topic 3: ntdll.dll Unhooking (Fresh Mapping)
+
+Rationale: Module 21 mein aapne Direct Syscalls sikhaya. Par EDRs (CrowdStrike, Defender) sirf kernel32.dll ko nahi, balki ntdll.dll ke andar syscall instructions (mov eax, SSN; syscall) ko inline hooks (jmp instructions) se replace kar dete hain. Agar aap Module 21 ka code direct call karte hain, toh woh EDR ke hooked ntdll se guzarta hai — EDR ko alert ho jaata hai.
+
+Professionals EDR ko dhoka dene ke liye disk se fresh ntdll.dll load karte hain (kyunki disk par EDR hook nahi daal sakta) aur uske clean bytes ko memory mein copy kar dete hain. Iske baad syscall EDR ki aankhon ke neeche se direct Kernel tak pahunchta hai.
+
+===Section 1: Hiding API Calls from EDR Hooks (Expansion)===
+
+--21--Unmanaged Code Evasion (Expansion)--
+
+Topic 3: Fresh ntdll.dll Unhooking (Bypassing Inline Hooks) [⚠️ New]
+Subtopics: Inline Hooking Concept, EDR Hooking ntdll.dll, JMP Instructions, Fresh ntdll Copy from Disk, NtCreateSection, NtMapViewOfSection, VirtualProtect, Memory Overwrite, Replacing Hooked Bytes, Syscall Number Extraction, Dynamic SSN Resolution, EDR Kernel Callback Bypass
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+Depth Level: Deep
+
+Coverage Angle: Practical
+
+Notes mein content volume: C# code to read a clean ntdll.dll from System32 and overwrite the hooked .text section in memory.
+
+Key terms from notes: ntdll.dll, Unhooking, Inline Hook, JMP, NtCreateSection, NtMapViewOfSection, VirtualProtect, Fresh Memory Mapping, SSN, Direct Syscall
+
+Explicit emphasis in notes: "Direct Syscall ka code agar hooked ntdll se guzarta hai toh EDR ko detect ho jata hai. Pehle ntdll ko memory mein unhook karo, phir syscall karo."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[ntdll.dll, Unhooking, Inline Hook, User-Land Hook, EDR Hook, JMP instruction, C:\Windows\System32\ntdll.dll, File.ReadAllBytes, NtCreateSection, NtMapViewOfSection, VirtualProtect, PAGE_EXECUTE_READWRITE, MEM_COMMIT, .text Section, PE Headers, Section Header, Raw Bytes, Clean Bytes, Overwrite Memory, Syscall Stub, SSN, System Service Number, Dynamic SSN Resolution]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+Live Production Phase: Implant kernel32.dll ki jagah direct syscall use karta hai (Module 21). Par CrowdStrike ne ntdll.dll ke NtCreateThreadEx function ke starting bytes ko jmp (0xE9) se replace kar diya hai. Implant File.ReadAllBytes(@"C:\Windows\System32\ntdll.dll") se disk par se fresh copy load karta hai. PE headers parse karke .text section ka memory address dhoondta hai. VirtualProtect se memory ko PAGE_EXECUTE_READWRITE banata hai aur fresh bytes overwrite kar deta hai. Ab EDR ka hook hat chuka hai. Implant direct NtCreateThreadEx syscall executes karta hai. EDR ke logs mein "suspicious syscall" nahi aata, kyunki hook hi nahi bacha.
+
+
 
 ---
 
