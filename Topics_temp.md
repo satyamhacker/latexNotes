@@ -2732,10 +2732,29 @@ Sections: 1 | Topics: 2 | Subtopics: 44
 Windows Defender aur EDRs ki aankhon (AMSI aur ETW) mein dhool jhonkna.
 
 --20--Advanced Defense Evasion--
-Topic 1: AMSI Bypass (Memory Patching)
-Subtopics: AMSI Concept, Anti-Malware Scan Interface, amsi.dll, AmsiScanBuffer, Memory Patching, VirtualProtect, Hex/Byte Patching, EDR hooking, Reflection Bypass
+Topic 1: Static AV Evasion & Custom Crypters (FUD) [⚠️ New]
+Subtopics: Static Signatures vs Heuristics, Entropy Management, Custom Crypters Architecture, Stub vs Builder, XOR/AES Payload Encoding, Obfuscation Techniques, Control Flow Flattening, Code Signing Spoofing, Bloat/Junk Code Injection
 
 [📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed breakdown of bypassing disk-based static AV scans before attempting in-memory execution.
+* Key terms from notes: Static Analysis, Signatures, Crypter, Entropy, Obfuscation, FUD
+* Explicit emphasis in notes: "Memory mein AMSI bypass karne se pehle tumhari .exe ko disk par AV se bachna hoga. High entropy AV ka sabse bada red flag hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Antivirus, AV Bypass, Static Signatures, Heuristic Analysis, Custom Crypter, Packer, Entropy, Shannon Entropy, XOR Encoding, AES encryption, Obfuscation, Control Flow Flattening, String Encryption, ConfuserEx, Code Signing, SigThief, Dropper, Stub, Builder, FUD, Fully Undetectable, Junk Code, Resource stuffing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Live Production Phase: Attacker apne C# payload (Cobalt Strike / Meterpreter) ko raw byte array mein convert karta hai, XOR/AES se encrypt karta hai, aur ek custom 'Stub' likhta hai. Compile hone ke baad, file ki entropy artificially reduce ki jati hai (e.g., adding English dictionary words as junk data/resources) aur `SigThief` ka use karke ek fake Microsoft certificate se sign kiya jata hai taaki Defender disk scan karte waqt isko legitimate maane aur quarantine na kare.
+
+Topic 2: AMSI Bypass (Memory Patching)
+Subtopics: AMSI Concept, Anti-Malware Scan Interface, amsi.dll, AmsiScanBuffer, Memory Patching, VirtualProtect, Hex/Byte Patching, EDR hooking, Reflection Bypass
+
+[📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -2745,19 +2764,19 @@ Subtopics: AMSI Concept, Anti-Malware Scan Interface, amsi.dll, AmsiScanBuffer, 
 * Notes mein jo analogies/examples the: AMSI ko ek "Security Guard" aur patching ko "Guard ki aankh par patti baandhna" kaha gaya hai.
 ]
 
-🔑 KEYWORDS DUMP for Topic 1:
+🔑 KEYWORDS DUMP for Topic 2:
 [AMSI, Anti-Malware Scan Interface, amsi.dll, AmsiScanBuffer, AmsiScanString, Memory Patching, VirtualProtect, PAGE_EXECUTE_READWRITE, byte[] patch, 0xEB, unmanaged memory, Marshal.Copy, LoadLibrary, GetProcAddress, Windows Defender, EDR evasion, Assembly.Load, Fileless malware, Reflection]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
 * Testing/Offline Phase: Developer dekhta hai ki Mimikatz ko in-memory load karte hi Defender "Malicious Content Detected" ka error deta hai.
 * Fixing/Iteration Phase: Developer `AmsiScanBuffer` function ko memory mein dhundta hai aur uski shuruaat mein "Return / Invalid Args" ke bytes patch kar deta hai.
 * Live Production Phase: Payload chalne se pehle AMSI bypass function call hota hai. AMSI andha ho jata hai, aur uske baad C2 se koi bhi malicious DLL (jaise keylogger) in-memory bina alert ke load ho jati hai.
 
-Topic 2: ETW Blinding (Event Tracing for Windows)
+Topic 3: ETW Blinding (Event Tracing for Windows)
 Subtopics: ETW Concept, System Telemetry, ntdll.dll, EtwEventWrite, Blue Team Logging, Sysmon, Memory Patching ETW
 
-[📊 SCOPE SIGNAL for Topic 2:
+[📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -2766,17 +2785,17 @@ Subtopics: ETW Concept, System Telemetry, ntdll.dll, EtwEventWrite, Blue Team Lo
 * Explicit emphasis in notes: "AMSI payload content dekhta hai, ETW tumhari harkatein (behavior) record karta hai."
 ]
 
-🔑 KEYWORDS DUMP for Topic 2:
+🔑 KEYWORDS DUMP for Topic 3:
 [ETW, Event Tracing for Windows, Telemetry, ntdll.dll, EtwEventWrite, EtwEventWriteFull, Sysmon, Event Viewer, Blue Team, SOC, Security Operations Center, Memory Patching, RET instruction, 0xC3, blind the logs, behavioral analysis, OpSec, Operational Security]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
 * Live Production Phase: Malware execute hone par pehla step AMSI patch karna hota hai, aur doosra step `EtwEventWrite` ko patch karke `return (0xC3)` set karna hota hai. Iske baad malware jo bhi process banata hai ya network call karta hai, uski telemetry Blue Team ke SIEM dashboard tak pahunchti hi nahi.
 
-Topic 3: Kernel-Level Evasion (BYOVD & PPL Bypass) [⚠️ New]
+Topic 4: Kernel-Level Evasion (BYOVD & PPL Bypass) [⚠️ New]
 Subtopics: Kernel Mode vs User Mode, Ring 0 Execution, Bring Your Own Vulnerable Driver (BYOVD), RTCore64.sys, LSA Protection Bypass, Protected Process Light (PPL), EDR Telemetry Blinding, Driver Signature Enforcement (DSE)
 
-[📊 SCOPE SIGNAL for Topic 3:
+[📊 SCOPE SIGNAL for Topic 4:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -2785,10 +2804,10 @@ Subtopics: Kernel Mode vs User Mode, Ring 0 Execution, Bring Your Own Vulnerable
 * Explicit emphasis in notes: "User-land evasion (AMSI/ETW) kaafi nahi hai. Apex attackers directly Kernel (Ring 0) mein ghus kar EDR ke process ko andha (blind) kar dete hain."
 ]
 
-🔑 KEYWORDS DUMP for Topic 3:
+🔑 KEYWORDS DUMP for Topic 4:
 [BYOVD, Bring Your Own Vulnerable Driver, Ring 0, Kernel mode, RTCore64.sys, Capcom.sys, LSA Protection, LSASS, PPL, Protected Process Light, DSE, Driver Signature Enforcement, EDR blinding, Object callbacks, Process Explorer, KDU, Kernel Driver Utility]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
 * Live Production Phase: Attacker system par ek officially signed (but vulnerable) ASUS driver (RTCore64.sys) drop karta hai. Implant us driver ke through kernel (Ring 0) memory mein arbitrary read/write exploit run karta hai, aur CrowdStrike/Defender EDR agent ke kernel callbacks ko disable kar deta hai. EDR chalu dikhta hai, par actually andha ho chuka hota hai.
 
@@ -2799,12 +2818,13 @@ Subtopics: Kernel Mode vs User Mode, Ring 0 Execution, Bring Your Own Vulnerable
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Bypassing Modern Windows Defenses [⚠️ Derived]
-Topic 1: AMSI Bypass (Memory Patching) [⚠️ New]
-Topic 2: ETW Blinding (Event Tracing for Windows) [⚠️ New]
-Topic 3: Kernel-Level Evasion (BYOVD & PPL Bypass) [⚠️ New]
+Topic 1: Static AV Evasion & Custom Crypters (FUD) [⚠️ New]
+Topic 2: AMSI Bypass (Memory Patching) [⚠️ Derived]
+Topic 3: ETW Blinding (Event Tracing for Windows) [⚠️ Derived]
+Topic 4: Kernel-Level Evasion (BYOVD & PPL Bypass) [⚠️ New]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 23
+Sections: 1 | Topics: 4 | Subtopics: 32
 
 --- 🛑 PHASE 4 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
