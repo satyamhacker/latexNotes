@@ -3012,3 +3012,274 @@ Topic 3: Remote Execution (WMI & RPC) [⚠️ New]
 Sections: 1 | Topics: 3 | Subtopics: 16
 
 --- 🛑 DONE. All phases and advanced modules are complete.
+
+==================================================================================
+
+# Module 24: Advanced Covert Channels & Infrastructure
+
+📦 Processing: Phase/Module 24 — Advanced Covert Channels
+
+===Section 1: Bypassing Advanced Network Defenses===
+Jab HTTP/HTTPS blocked ho ya deeply inspected ho, tab DNS, ICMP aur CDNs ka use karke C2 traffic ko chhipana.
+
+--24--Advanced Covert Channels & Infrastructure--
+Topic 1: DNS & ICMP Tunneling (Stealth Networking) [⚠️ New]
+Subtopics: DNS Tunneling Concept, TXT/A Records Exfiltration, ICMP Payload Injection, Ping Tunneling, Network Segmentation Bypass, dnscat2, iodine
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Explanation of how to use non-HTTP protocols for C2 beacons
+* Key terms from notes: DNS Tunneling, ICMP, Ping, TXT records, covert channel, payload size limits
+* Explicit emphasis in notes: "Blue team HTTP logs check karti hai, par DNS aur Ping ko aksar ignore kiya jata hai."
+* Notes mein jo analogies/examples the: "Chhote-chhote purze (data) ko alag-alag lifafon (DNS queries) mein bhej kar wapas jodna."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Covert Channel, DNS Tunneling, ICMP Tunneling, Ping, TXT record, A record, Base64 encoding, FQDN, Fully Qualified Domain Name, Network Segmentation, dnscat2, iodine, Blue Team, SOC, Firewall Bypass, Wireshark PCAP, Data Exfiltration, beaconing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer apne local network mein ping command ke data payload size ko modify karke choti C2 command bhej kar test karta hai.
+* Fixing/Iteration Phase: DNS UDP packet size limit (512 bytes) ki wajah se data truncate hone par fragmentation logic add karta hai.
+* Live Production Phase: Victim machine highly restricted VLAN mein hai jahan internet (Port 80/443) blocked hai, par internal DNS server external queries resolve karta hai. Implant DNS TXT queries (jaise `[base64_data].malicious.com`) banakar C2 se baat karta hai.
+
+Topic 2: Domain Fronting & CDN Abuse [⚠️ New]
+Subtopics: Domain Fronting Concept, CDN (Content Delivery Network) Routing, Host Header Manipulation, SNI (Server Name Indication) vs Host Header, Fastly/Cloudflare Abuse
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual
+* Notes mein content volume: Evading IP bans and domain reputation filters using CDNs
+* Key terms from notes: Domain Fronting, CDN, Host Header, SNI, High-reputation domain
+* Explicit emphasis in notes: "Domain fronting se tumhara traffic legitimate domain (jaise google.com) ka dikhta hai, par backend par tumhare C2 par route ho jata hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Domain Fronting, CDN, Content Delivery Network, Cloudflare, Fastly, AWS CloudFront, SNI, Server Name Indication, Host Header, High-reputation domain, Evasion, TLS termination, proxy, C2 Redirectors, Malleable C2, Cobalt Strike, OPSEC]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: C2 implant network connection `ajax.microsoft.com` (SNI) par banata hai jise firewall allow kar deta hai. Par HTTP request ke andar `Host: attacker-c2.azureedge.net` (Host Header) daal deta hai, jisse Azure ka CDN traffic ko silently attacker ke server par bhej deta hai.
+
+✅ **Notes Guru Skeleton Ready:** Module 24 (Topics 1-2).
+
+---
+
+# Module 25: Active Directory & Identity Exploitation
+
+📦 Processing: Phase/Module 25 — Active Directory Red Teaming
+
+===Section 1: Dominating the Windows Domain===
+Network mein aane ke baad Domain Admin banne tak ka safar (BloodHound, Kerberos).
+
+--25--Active Directory & Identity Exploitation--
+Topic 1: AD Reconnaissance (BloodHound & LDAP) [⚠️ New]
+Subtopics: Active Directory Graph Theory, BloodHound, SharpHound, LDAP Queries, SPN (Service Principal Name) Enumeration, Domain Trusts, GPO Check
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical
+* Notes mein content volume: How to map the entire AD network from a low-privilege implant
+* Key terms from notes: BloodHound, SharpHound, LDAP, Graph Database, Domain Admin
+* Explicit emphasis in notes: "Bina BloodHound ke AD environment mein ghoomna andhere mein teer chalane jaisa hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Active Directory, AD Recon, BloodHound, SharpHound, LDAP search, Graph Theory, Neo4j, Domain Admin, DA, Service Principal Name, SPN, Domain Trusts, Group Policy Objects, GPO, ACLs, Access Control Lists, BloodHound CE, Ingestors, C# LDAP queries, stealth recon]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Live Production Phase: Beachhead implant se attacker `SharpHound.exe` (in-memory) run karta hai. JSON files generate hoti hain jinhe C2 par exfiltrate kiya jata hai. Attacker BloodHound GUI mein graph dekhta hai aur path nikalta hai: "UserA -> LocalAdmin -> ServerB -> DomainAdmin".
+
+Topic 2: Kerberos Attacks (Roasting & Tickets) [⚠️ New]
+Subtopics: Kerberos Protocol Flaws, Kerberoasting, AS-REP Roasting, Golden Ticket, Silver Ticket, DCSync (Mimikatz), Ticket Granting Ticket (TGT)
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Exploiting Kerberos for privilege escalation and persistence
+* Key terms from notes: Kerberos, TGT, TGS, Kerberoasting, AS-REP, Golden Ticket, DCSync
+* Explicit emphasis in notes: "DCSync se sidha Domain Controller se saare passwords ke hashes (NTDS.dit) nikal aate hain bina DC par login kiye."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Kerberos, TGT, Ticket Granting Ticket, TGS, Service Ticket, Kerberoasting, AS-REP Roasting, Rubeus, Impacket, GetUserSPNs, Hashcat, Golden Ticket, krbtgt, Silver Ticket, DCSync, Mimikatz, NTDS.dit, Pass-the-Ticket, Over-Pass-The-Hash, Active Directory Persistence]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: Implant `Rubeus` run karke vulnerable service accounts (SPNs) ke Kerberos tickets request karta hai. Tickets ko C2 par bhej kar offline `Hashcat` se crack kiya jata hai. Password crack hone par attacker us account se `DCSync` attack run karke poore domain ka control le leta hai.
+
+✅ **Notes Guru Skeleton Ready:** Module 25 (Topics 1-2).
+
+---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+
+# Module 26: Cross-Platform Red Teaming (Linux & macOS)
+
+📦 Processing: Phase/Module 26 — Linux & macOS Payloads
+
+===Section 1: Expanding Beyond Windows===
+Linux servers aur macOS endpoints ke liye native implants aur persistence create karna.
+
+--26--Cross-Platform Red Teaming (Linux & macOS)--
+Topic 1: Linux Payloads, Persistence & PrivEsc [⚠️ New]
+Subtopics: ELF Binaries, .NET Core Cross-Platform Compile, Python/Go Implants, Cron Jobs, SUID Binaries, LD_PRELOAD Hooking, SSH Authorized Keys Persistence, PAM Backdoors
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical
+* Notes mein content volume: Porting C2 logic to Linux and bypassing Linux defenses
+* Key terms from notes: ELF, cron, SUID, LD_PRELOAD, PAM, SSH keys
+* Explicit emphasis in notes: "Linux servers par registry nahi hoti, wahan sab kuch files (cron, bashrc, ssh keys) se hota hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Linux Red Teaming, ELF binary, .NET Core linux-x64, GoLang, Python payload, Persistence, Cron jobs, crontab, SUID bit, Privilege Escalation, LinPEAS, DirtyCow, LD_PRELOAD, API Hooking (Linux), libc, SSH Authorized_keys, ~/.bashrc, PAM backdoor, Pluggable Authentication Modules, root, /etc/shadow]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Live Production Phase: Attacker Linux web server exploit karta hai. C# payload ko `linux-x64` ke liye compile karke run karta hai. Persistence ke liye attacker `~/.ssh/authorized_keys` mein apni public key daal deta hai aur `crontab` mein reverse shell ka schedule set kar deta hai.
+
+Topic 2: macOS Implants & TCC Bypasses [⚠️ New]
+Subtopics: Mach-O Binaries, Dylib Injection/Hijacking, LaunchDaemons & LaunchAgents, TCC (Transparency, Consent, and Control) Bypass, AppleScript Abuse
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Notes mein content volume: macOS specific persistence and evading Apple's privacy controls
+* Key terms from notes: Mach-O, Dylib, LaunchAgents, TCC, AppleScript
+* Explicit emphasis in notes: "macOS par sabse bada dushman TCC hai jo screen recording ya files access karne se rokata hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[macOS Red Teaming, Mach-O binary, Objective-C, Swift, Dylib Hijacking, Dynamic Library, Persistence, LaunchDaemons, LaunchAgents, ~/Library/LaunchAgents, plist files, TCC, Transparency Consent and Control, Privacy prompts, TCC bypass, FDA, Full Disk Access, AppleScript, osascript, XProtect, Gatekeeper bypass, codesigning]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: macOS victim par payload drop hota hai. Implant persist karne ke liye ek malicious `.plist` file `LaunchAgents` mein banata hai jo har login par execute hoti hai. Screenshot lene ke liye implant existing allowed apps (jaise Terminal ya Zoom) ke TCC permissions ko dylib hijacking ke through abuse karta hai.
+
+✅ **Notes Guru Skeleton Ready:** Module 26 (Topics 1-2).
+
+---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 27: Mobile Device Targeting (Android Focus)
+
+📦 Processing: Phase/Module 27 — Android Exploitation & C2
+
+===Section 1: Mobile Endpoint Compromise===
+Android devices ke malicious APKs banana, smali patching aur Accessibility Services ka abuse.
+
+--27--Mobile Device Targeting (Android Focus)--
+Topic 1: APK Reverse Engineering & Smali Patching [⚠️ New]
+Subtopics: APK Structure, APKTool, Dex to Jar, Smali Code, Injecting Metasploit/C2 Payloads into Legitimate Apps, Re-signing APKs
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical
+* Notes mein content volume: How to decompile a normal app, inject malware, and recompile it
+* Key terms from notes: APK, Smali, APKTool, Dex, Keystore, Re-signing
+* Explicit emphasis in notes: "Legitimate app (jaise WhatsApp/Calculator) ko decompile karke usme apna C2 hook lagana Android Red Teaming ka core hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Android Red Teaming, APK, Android Package, APKTool, decompilation, classes.dex, Smali, Java byte code, JD-GUI, JADX, Payload Injection, msfvenom android/meterpreter/reverse_tcp, MainActivity, AndroidManifest.xml, permissions, jarsigner, keytool, zipalign, Re-signing, Backdooring Apps]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Live Production Phase: Attacker ek popular 'Flashlight' app download karta hai, `apktool` se decompile karta hai. `AndroidManifest.xml` mein INTERNET aur READ_SMS permissions add karta hai, `MainActivity.smali` mein apna C2 connection code (Java/Smali) inject karta hai, aur app ko rebuild + sign karke victim ko phishing ke through bhejta hai.
+
+Topic 2: Accessibility Service Abuse & Mobile C2 [⚠️ New]
+Subtopics: Accessibility Service, Screen Scraping, Keylogging on Android, Bypassing 2FA/OTP, SMS Interception, Frida Hooking
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Notes mein content volume: Abusing Android's accessibility features to control the device and steal OTPs
+* Key terms from notes: Accessibility Service, 2FA, OTP, Screen Scraping, Frida
+* Explicit emphasis in notes: "Android par root na hone par Accessibility Service sabse powerful weapon hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Accessibility Service, Screen Scraping, UIAutomator, Keylogging, SMS Interception, READ_SMS, OTP Bypass, 2FA, Two-Factor Authentication, overlay attacks, SYSTEM_ALERT_WINDOW, Device Administrator, Frida, Dynamic Instrumentation, API hooking, Mobile C2 Implant, Android Intents, Broadcast Receivers]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: Malicious app victim se "Accessibility" permission maangti hai (e.g. "To optimize battery"). Permission milte hi app background mein screen par aane wale saare OTPs read kar leti hai, keystrokes (passwords) capture karti hai, aur C2 server par bhej deti hai bina root access ke.
+
+✅ **Notes Guru Skeleton Ready:** Module 27 (Topics 1-2).
+
+---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 28: Cloud Evasion & Container Breakouts (AWS/Azure)
+
+📦 Processing: Phase/Module 28 — Cloud & Containers
+
+===Section 1: Modern Cloud Operations===
+Cloud-hosted environments aur Docker containers ke andar se host/network tak phailna.
+
+--28--Cloud Evasion & Container Breakouts--
+Topic 1: Docker & Kubernetes Escapes [⚠️ New]
+Subtopics: Container Evasion Concept, Privileged Containers, Cap_Sys_Admin, Docker Socket Abuse, Kubelet API, Service Account Tokens
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Identifying if you are in a container and how to break out to the host node
+* Key terms from notes: Docker, Kubernetes, Escape, docker.sock, Capabilities
+* Explicit emphasis in notes: "Agar PID 1 bash nahi hai, aur /.dockerenv exist karta hai, toh tum ek container mein phanse ho."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Cloud Red Teaming, Container Breakout, Docker Escape, Kubernetes, K8s, /.dockerenv, cgroups, Privileged Container, Capabilities, CAP_SYS_ADMIN, /var/run/docker.sock, Docker Socket, chroot, Service Account Token, /var/run/secrets/kubernetes.io/serviceaccount, Kubelet API, kube-apiserver, kubectl, Pod execution]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Live Production Phase: C2 implant ek vulnerable web app ke through run hota hai. Recon module check karta hai ki woh Docker container mein hai. Implant container mein mounted `docker.sock` dhoondhta hai aur uska abuse karke host machine (EC2 instance) par ek naya, root-privileged container spawn kar deta hai, effectively host ko compromise karke.
+
+Topic 2: Cloud Metadata Exploitation (AWS/Azure) [⚠️ New]
+Subtopics: Instance Metadata Service (IMDSv1 vs IMDSv2), SSRF to Metadata, Stealing Cloud Credentials, Azure Managed Identities, Pacu (AWS Exploitation Framework)
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical
+* Notes mein content volume: Abusing SSRF or local RCE to steal cloud IAM roles via metadata endpoints
+* Key terms from notes: IMDS, 169.254.169.254, SSRF, IAM Roles, AWS, Azure
+* Explicit emphasis in notes: "Cloud environments mein 169.254.169.254 holy grail (khazana) hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Instance Metadata Service, IMDS, IMDSv1, IMDSv2, 169.254.169.254, AWS IAM Roles, Temporary Credentials, AccessKeyId, SecretAccessKey, Token, SSRF, Server-Side Request Forgery, Azure Managed Identities, GCP Metadata, Metadata Header, Pacu framework, Cloud PrivEsc, S3 buckets, lateral movement (Cloud)]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: Implant AWS EC2 instance par run hota hai. Woh HTTP GET request `http://169.254.169.254/latest/meta-data/iam/security-credentials/` par bhejta hai. AWS us instance ke temporary IAM credentials return karta hai. Attacker un credentials ko C2 par exfiltrate karta hai aur locally AWS CLI use karke target ki S3 buckets se sensitive data download kar leta hai.
+
+✅ **Notes Guru Skeleton Ready:** Module 28 (Topics 1-2).
+
+---
+
+🛑 **DONE. The ultimate cross-platform, multi-environment Red Teaming skeleton is fully compiled.**
