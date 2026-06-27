@@ -2974,6 +2974,25 @@ Subtopics: Process Hollowing Concept, CreateProcess Suspended, UnmapViewOfSectio
 🔑 KEYWORDS DUMP for Topic 3:
 [Process Hollowing, CreateProcess, CREATE_SUSPENDED, NtUnmapViewOfSection, hollow out, PE replacement, SetThreadContext, ResumeThread, Reflective DLL Injection, memory-only execution, PE Headers, DOS Header, NT Header, MZ signature, diskless execution, advanced evasion]
 
+Topic 4: Module Stomping & Early Bird APC Injection [⚠️ New]
+Subtopics: Module Stomping Concept, DLL Overwriting, Asynchronous Procedure Calls (APC), Early Bird APC, QueueUserAPC, Thread Hijacking, OPSEC of RWX Memory
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Practical
+* Notes mein content volume: Advanced process injection methods that avoid allocating highly suspicious RWX memory.
+* Key terms from notes: Module Stomping, APC Injection, QueueUserAPC, Thread Hijacking
+* Explicit emphasis in notes: "VirtualAlloc/VirtualAllocEx se nayi memory allocate karna EDRs ke liye sabse bada red flag hai. Existing modules (DLLs) ki memory ko hijack karna (Stomping) stealthiest approach hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Module Stomping, Module Overloading, Code Cave, VirtualProtect, LoadLibraryEx, DONT_RESOLVE_DLL_REFERENCES, xpsprint.dll, Asynchronous Procedure Calls, APC Injection, Early Bird APC, QueueUserAPC, CreateProcess, CREATE_SUSPENDED, NtTestAlert, ResumeThread, Thread Hijacking, ContextSwitch, Memory scanners evasion, PAGE_EXECUTE_READWRITE]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Live Production Phase: Attacker VirtualAlloc use karne ke bajaay ek target process (e.g., explorer.exe) mein ek legit, seldom-used DLL (xpsprint.dll) ko load karwata hai. Phir woh us legit DLL ke code section (RX) par overwrite karke (Module Stomping) apna malicious shellcode daal deta hai. Execution ke liye, woh QueueUserAPC ka use karta hai taaki jab process ka main thread alertable state mein aaye, toh shellcode silently execute ho jaye bina koi naya suspicious thread banaye.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -2984,9 +3003,10 @@ Section 1: Memory Execution Tactics [⚠️ Derived]
 Topic 1: Local Shellcode Runner Basics [⚠️ New]
 Topic 2: Remote Process Injection [⚠️ New]
 Topic 3: Process Hollowing & Reflective DLL Injection [⚠️ New]
+Topic 4: Module Stomping & Early Bird APC Injection [⚠️ New]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 20
+Sections: 1 | Topics: 4 | Subtopics: 27
 
 --- 🛑 PHASE 6 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
