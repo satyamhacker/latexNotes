@@ -1404,7 +1404,162 @@ Sections: 1 | Topics: 5 | Subtopics: 60
 
 ==================================================================================
 
-# Module 11: System Reconnaissance
+# Module 11: C2 Implant Engine & Persistent Communication
+
+
+📦 **Processing: Phase 1 — C2 Implant Engine (Module 10)**
+
+===Section 1: C2 Implant Engine & Persistent Communication [⚠️ Derived]===
+Implant ko zinda rakhna aur lagataar attacker se naye commands maangna. [⚠️ Derived]
+
+--16--C2 Implant Engine & Persistent Communication--
+Topic 1: Persistent C2 Communication (HTTP GET Polling) [⚠️ Derived]
+Subtopics: Persistent C2 Communication, HTTP GET Polling, Heartbeat, Command Execution Trigger, Infinite while loop, WebClient, NO_TASK, PowerShellExecutor, Thread.Sleep, CPU Usage Issue, Fixed Sleep Time, Hardcoded IP, C2 Jitter, Cobalt Strike Beacon
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual only
+* Notes mein content volume: Long explanation with concept breakdown and common mistakes
+* Key terms from notes: Persistent, C2, HTTP GET, ping, heartbeat, whoami, while(true), WebClient.DownloadString, get_task.php, NO_TASK, exec whoami, PowerShellExecutor, Thread.Sleep, 100% CPU, Jitter, C2 Jitter, Cobalt Strike, Beacon, low-and-slow
+* Explicit emphasis in notes: "Sabse Badi Galti" — Thread.Sleep use na karna (100% CPU usage), "Jitter" (randomness) for stealth
+* Notes mein jo analogies/examples the: Implant ki "dhadkan" (heartbeat), Cobalt Strike ka Beacon (6 ghante + jitter)
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Persistent, C2 Communication, HTTP GET Polling, Heartbeat, implant, malware, whoami, command execution, one-way, dead connection, while(true), infinite loop, WebClient.DownloadString(), c2_url, get_task.php, NO_TASK, exec whoami, PowerShellExecutor, Thread.Sleep(5000), 100% CPU, Antivirus, EDR, network pattern, Blue Teams, Hardcoded IP, Jitter, random(-1000, 1000), C2 Jitter, stealth, Cobalt Strike, Beacon, low-and-slow, try...catch, Domain Name, C2 Beaconing, System.Threading.Thread, System.Random, ⭐"Sabse Badi Galti"[emphasized in notes], ⭐"Jitter"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: 5-10 second ka sleep time testing ke liye aachha hai taaki command jaldi execute ho.
+* Fixing/Iteration Phase: (N/A — notes mein is phase ke liye koi flow describe nahi kiya gaya)
+* Live Production Phase: Professional Red Team fixed sleep use nahi karti, Jitter add karti hai (e.g., Sleep(5000 + random(-1000, 1000))). Cobalt Strike beacon low-and-slow operations mein har 6 ghante + jitter mein check-in karta hai.
+* Additional context: HTTP GET 99% networks par allowed hota hai aur normal web traffic jaisa dikhta hai.
+
+Topic 2: C2 Loop Architecture & Logic (Algorithm & Recap) [⚠️ Derived]
+Subtopics: C2 Loop Algorithm, Fault-Tolerant Implant, try-catch-finally, User-Agent Disguise, C2 Long Polling, WebSockets, DNS C2
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual only
+* Notes mein content volume: Step-by-step logic and recap checklist
+* Key terms from notes: algorithm, System.Threading, System.Net, c2_url, sleepTime, while(true), try...catch, DownloadString, fault-tolerant, finally block, User-Agent, Long Polling, WebSocket, DNS C2
+* Explicit emphasis in notes: "Sleep hamesha try-catch ke baahar hona chahiye", "Implant kabhi crash nahi hona chahiye"
+* Notes mein jo analogies/examples the: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[algorithm, System.Threading, System.Net, c2_url, sleepTime, while(true), try...catch, WebClient, DownloadString(), string task, NO_TASK, PowerShellExecutor, fault-tolerant, crash report, persistence, try-catch-finally, User-Agent, Long Polling, WebSocket, DNS C2, C2 over WebSockets, C2 Long Polling, ⭐"fault-tolerant"[emphasized in notes], ⭐"Sleep hamesha try-catch ke baahar hona chahiye"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Testing ke liye catch block mein Console.WriteLine("C2 Down") likh sakte hain.
+* Fixing/Iteration Phase: Ek developer ka code hang ho raha tha kyunki usne Sleep ko try-catch ke andar rakha tha, jisse fail hone par 100% CPU usage hua.
+* Live Production Phase: Professional Red Team ka implant kabhi crash nahi hona chahiye (fault-tolerant). Agar C2 down ho toh implant chup-chaap wait karta hai aur connection wapas aane par try karta hai. Real malware mein catch block khaali rakhte hain.
+* Additional context: (N/A)
+
+Topic 3: RepeatedGetRequest C# Implementation [⚠️ Derived]
+Subtopics: RepeatedGetRequest Code, System.Net, System.Threading, WebClient Object, using block, User-Agent Setup, string.IsNullOrEmpty, task.Trim, Exception Handling, Garbage Collector, Domain Fronting, C2 Redirectors
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Full C# code snippet with line-by-line explanation
+* Key terms from notes: RepeatedGetRequest, System.Net, System.Threading, WebClient, Thread.Sleep, while(true), try-catch, using block, User-Agent, Mozilla/5.0, string.IsNullOrEmpty, task.Trim(), Garbage Collector, C2 Redirectors, Domain Fronting
+* Explicit emphasis in notes: "Sleep ko try block ke andar rakhna sabse badi galti hai", "Attacker ka IP kabhi hardcode nahi hota"
+* Notes mein jo analogies/examples the: Chrome browser jaisa traffic dikhane ke liye Mozilla/5.0 User-Agent use karna.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[RepeatedGetRequest, C# Code, System.Net, System.Threading, WebClient, Thread.Sleep, c2Url, 127.0.0.1, get_task.txt, sleepTime, while(true), try...catch, using block, IDisposable, Headers.Add(), User-Agent, Mozilla/5.0, DownloadString(), string.IsNullOrEmpty(), string.Trim(), NO_TASK, \n, Exception ex, Garbage Collector, memory leak, Domain Name, C2 Redirectors, Apache mod_rewrite, Nginx proxy_pass, Domain Fronting, HttpClient, async/await, multi-threaded, python -m http.server 8000, ⭐Chrome 90.0.4430.93[version], ⭐"sabse badi galti"[emphasized in notes], ⭐"Attacker ka IP kabhi hardcode nahi hota"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Testing ke liye localhost (127.0.0.1) par XAMPP ya Python (python -m http.server 8000) se web server chala kar task.txt serve karte hain.
+* Fixing/Iteration Phase: Agar Sleep try-catch ke andar hua aur C2 down hua, toh 1 ghante tak 100% CPU chalega aur Blue Team pakad legi.
+* Live Production Phase: Attacker ka IP kabhi hardcode nahi hota. Woh ek Domain Name use karte hain (e.g., update.ms-cdn-services.com) jo Redirectors ke peeche chhupa hota hai, taaki asli C2 IP safe rahe. User-Agent Chrome jaisa set karte hain.
+* Additional context: (N/A)
+
+===Section 2: Modernizing the C2 Engine (New Addition)===
+Legacy `WebClient` ko modern `HttpClient` se replace karna aur Memory scanners se bachne ke liye Sleep Obfuscation.
+
+Topic 4: Modern C2 Comms (HttpClient & Async/Await) [⚠️ New]
+Subtopics: Synchronous vs Asynchronous, Thread Blocking, HttpClient Class, async keyword, await keyword, Task, ConfigureAwait, Connection Pooling, IDisposable
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Refactoring Module 10 code from WebClient to HttpClient with async/await
+* Key terms from notes: HttpClient, WebClient deprecated, async, await, Task, non-blocking, multi-threading, concurrency
+* Explicit emphasis in notes: "WebClient ab purana ho chuka hai, professional C# malware hamesha HttpClient use karte hain."
+* Notes mein jo analogies/examples the: Synchronous (line mein khade rehna) vs Asynchronous (token lekar doosra kaam karna)
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[HttpClient, WebClient, deprecated, legacy, async, await, Task, Task, SendAsync, GetAsync, non-blocking, GUI freeze, UI thread, concurrency, connection pooling, IDisposable, try-await-catch, C2 polling, multi-threading, modern C#]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Developer purane `WebClient.DownloadString` ko `await client.GetStringAsync` se replace karta hai.
+* Fixing/Iteration Phase: Thread block hone ki wajah se agar implant hang ho raha tha, toh async/await use karke woh responsive ho jata hai.
+* Live Production Phase: C2 implant multiple tasks (jaise keylogging, screenshot, aur network poll) ek hi time par smoothly karta hai kyunki network call thread ko block nahi karti.
+
+Topic 5: Sleep Obfuscation & Memory Scanners [⚠️ New]
+Subtopics: Sleep Obfuscation Concept, Hunt-Sleeping-Beacons, Beacon Memory Encryption, Ekko/Foliage Techniques Concept, ROP Chains (Conceptual), VirtualProtect
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual only (No complex ROP chain code, just methodology)
+* Notes mein content volume: How EDRs find sleeping implants in RAM and how to hide them
+* Key terms from notes: Sleep Obfuscation, Memory Scanners, YARA rules, Hunt-Sleeping-Beacons, Ekko, Foliage, encrypting heap, ROP chain
+* Explicit emphasis in notes: "Jab implant sleep kar raha ho, tab uski memory encrypt honi chahiye varna YARA scan pakad lega."
+* Notes mein jo analogies/examples the: "Chor (malware) jab so raha ho, toh apna chehra mask (encryption) se dhak leta hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Sleep Obfuscation, Memory Scanners, Hunt-Sleeping-Beacons, YARA rules, memory dump, RAM analysis, Blue Team, Ekko, Foliage, ROP chain, Return Oriented Programming, encrypting heap, XOR, VirtualProtect, RWX to RW, PAGE_READWRITE, PAGE_EXECUTE_READWRITE, sleep hooks, stealth beaconing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Developer dekhta hai ki `Thread.Sleep(60000)` ke dauran agar RAM dump liya jaye, toh AES keys aur C2 URLs clear text mein RAM mein dikhte hain.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Advanced Red Teams `Ekko` jaisi technique use karti hain. Sleep karne se theek pehle implant apni hi memory ko XOR se encrypt karta hai, timers set karta hai, aur sleep mein chala jata hai. Wake up hone par Windows API (ROP) use wapas decrypt karti hai. EDR memory scan karta hai par use sirf garbage data milta hai.
+
+---
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: C2 Implant Engine & Persistent Communication [⚠️ Derived]
+Topic 1: Persistent C2 Communication (HTTP GET Polling) [⚠️ Derived]
+Topic 2: C2 Loop Architecture & Logic (Algorithm & Recap) [⚠️ Derived]
+Topic 3: RepeatedGetRequest C# Implementation [⚠️ Derived]
+Topic 4: Modern C2 Comms (HttpClient & Async/Await) [⚠️ New]
+Topic 5: Sleep Obfuscation & Memory Scanners [⚠️ New]
+Section 2: Modernizing the C2 Engine (New Addition)
+Topic 1: Persistent C2 Communication (HTTP GET Polling) [⚠️ Derived]
+Topic 2: C2 Loop Architecture & Logic (Algorithm & Recap) [⚠️ Derived]
+Topic 3: RepeatedGetRequest C# Implementation [⚠️ Derived]
+Topic 4: Modern C2 Comms (HttpClient & Async/Await) [⚠️ New]
+Topic 5: Sleep Obfuscation & Memory Scanners [⚠️ New]
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 5 | Subtopics: 48
+
+**--- 🛑 PHASE 16 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.**
+
+⏳ **Waiting for:** Next phase/module notes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 12: System Reconnaissance
 
 
 
@@ -1573,7 +1728,7 @@ Sections: 1 | Topics: 6 | Subtopics: 37
 
 ==================================================================================
 
-# Module 12: Playing With File System
+# Module 13: Playing With File System
 
 
 📦 Processing: Phase 1 — C2 Payload Operations & Recon [⚠️ Derived]
@@ -1803,15 +1958,15 @@ Sections: 2 | Topics: 3 | Subtopics: 12
 
 ==================================================================================
 
-# Module 13: Persistence
+# Module 14: Persistence
 
 
-📦 Processing: Phase 2 — Module 11 (Persistence) & Module 12 Intro
+📦 Processing: Phase 2 — Module 12 (Persistence) & Module 13 Intro
 
-===Section 1: Persistence (Module 11)===
+===Section 1: Persistence (Module 12)===
 System reboot ke baad bhi target machine par long-term access banaye rakhne ke essential methods.
 
---13--Persistence (Module 11)--
+--13--Persistence (Module 12)--
 Topic 1: Persistence Overview
 Subtopics: Persistence Definition, C2 Connection Maintenance, Execution Workflow, Run Keys, Startup Folder, Ransomware Example, Living Off The Land, Common Beginner Mistakes, MITRE ATT&CK TA0003, Sysinternals Autoruns
 
@@ -1881,11 +2036,11 @@ Subtopics: Startup Folder Persistence, Environment Path Resolution, File Copy Op
 * Live Production Phase: Professional Red Team pure .exe ko copy karne ke bajaay ek .lnk (Shortcut) file banati hai jismein legitimate icon hota hai taaki user ko shaq na ho. Locky jaisa ransomware startup folder mein script daalta tha jo boot par actual payload internet se laati thi.
 * Additional context: Environment.SpecialFolder.Startup hamesha use karein (non-admin). File.Copy mein 'true' flag lagana zaroori hai overwrite ke liye.
 
-===Section 2: File System Manipulations Intro (Module 12) [⚠️ Derived]===
+===Section 2: File System Manipulations Intro (Module 13) [⚠️ Derived]===
 Victim machine par files ke saath interact karne ka initial overview. [⚠️ Derived]
 
 --13--File System Manipulations Intro--
-Topic 4: Module 12 File System Overview [⚠️ Derived]
+Topic 4: Module 13 File System Overview [⚠️ Derived]
 Subtopics: File System Manipulation, Payload Downloading, Directory Enumeration Commands
 
 [📊 SCOPE SIGNAL for Topic 4:
@@ -1893,13 +2048,13 @@ Subtopics: File System Manipulation, Payload Downloading, Directory Enumeration 
 * Depth Level: Surface
 * Coverage Angle: Conceptual only
 * Notes mein content volume: Sirf 1-2 lines ki introduction
-* Key terms from notes: Module 12, file system, C2 server, payloads, dir, ls
+* Key terms from notes: Module 13, file system, C2 server, payloads, dir, ls
 * Explicit emphasis in notes: None
 * Notes mein jo analogies/examples the: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[Module 12, file system, khilwaad, C2 server, payloads, download, victim machine, dir, ls, commands]
+[Module 13, file system, khilwaad, C2 server, payloads, download, victim machine, dir, ls, commands]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
@@ -1919,7 +2074,7 @@ Subtopics: File System Manipulation, Payload Downloading, Directory Enumeration 
 * [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
 * [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
 * [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-* [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya (Module 11.2 & 11.3 merged, Module 12 intro grouped).
+* [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya (Module 12.2 & 11.3 merged, Module 13 intro grouped).
 * [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
 * [x] Chronological order preserved.
 * [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
@@ -1936,17 +2091,17 @@ Subtopics: File System Manipulation, Payload Downloading, Directory Enumeration 
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Persistence (Module 11)
+Section 1: Persistence (Module 12)
 Topic 1: Persistence Overview
 Topic 2: Windows Registry Persistence (Run Key)
 Topic 3: Startup Folder Persistence
-Topic 4: Module 12 File System Overview [⚠️ Derived]
+Topic 4: Module 13 File System Overview [⚠️ Derived]
 
-Section 2: File System Manipulations Intro (Module 12) [⚠️ Derived]
+Section 2: File System Manipulations Intro (Module 13) [⚠️ Derived]
 Topic 1: Persistence Overview
 Topic 2: Windows Registry Persistence (Run Key)
 Topic 3: Startup Folder Persistence
-Topic 4: Module 12 File System Overview [⚠️ Derived]
+Topic 4: Module 13 File System Overview [⚠️ Derived]
 
 📊 PHASE SUMMARY:
 Sections: 2 | Topics: 4 | Subtopics: 28
@@ -1955,183 +2110,10 @@ Sections: 2 | Topics: 4 | Subtopics: 28
 
 ==================================================================================
 
-# Module 14: Core Utility Functions
-
-
-📦 **Processing: Phase 2 — Core Utility Functions (Module 16)**
-
-===Section 1: Core Utility Functions (DRY Principle) [⚠️ Derived]===
-Pichle modules ke code ko reusable 'Utils' mein badalna jo implant ka dil (core) banenge. [⚠️ Derived]
-
---14--Core Utility Functions--
-Topic 1: File Handling Functions (Read/Write)
-Subtopics: Core Utility File Handling, FileUtils, ReadFile, WriteFile, Don't Repeat Yourself, File.ReadAllText, File.WriteAllText, System.IO, try-catch, Absolute Path, Relative Path, File.ReadAllBytes, FileStream, File.AppendAllText, File.Delete
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Notes mein content volume: Concept breakdown with full static class code snippet
-* Key terms from notes: ReadFile, WriteFile, utility functions, DRY, FileUtils, File.ReadAllText, try-catch, string content, File.WriteAllText, static class, System.IO, absolute path, relative path, byte[], binary files, FileStream
-* Explicit emphasis in notes: "try-catch block na lagana file operations mein sabse badi galti hai"
-* Notes mein jo analogies/examples the: steal_file C:\Users\Victim.ssh\id_rsa command ka example aur exfil_cookies ka real-world use case
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Core Utility, File Handling, Read/Write, FileUtils, ReadFile, WriteFile, DRY, Don't Repeat Yourself, download C:\config.ini, hosts file, File.ReadAllText, try-catch, File Not Found, Access Denied, crash, static class, string content, File.WriteAllText, System.IO, ERROR: Could not read file, SUCCESS, Absolute path, Relative path, byte[], File.ReadAllBytes, File.WriteAllBytes, FileStream, File.AppendAllText, File.Delete, ⭐"sabse badi galti"[emphasized in notes]]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Solo dev bhi FileUtils class banata hai taaki error handling (return "ERROR...") har baar consistent ho.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: Implant mein ek Core.Utils namespace hota hai. C2 se steal_file ya exfil_cookies command aane par FileUtils.ReadFile call hota hai. Access na hone par implant crash nahi hota, C2 ko ERROR bhejta hai.
-* Additional context: (N/A)
-
-Topic 2: Registry Manipulation (Set/Get)
-Subtopics: Registry Manipulation, RegistryUtils, SetRegistryValue, GetRegistryValue, Microsoft.Win32, Registry.SetValue, Registry.GetValue, HKLM, HKCU, WoW6432Node, OpenSubKey, DeleteSubKey
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Notes mein content volume: Detailed explanation with code and shortcut methods
-* Key terms from notes: GetRegistryValue, SetRegistryValue, Microsoft.Win32, Registry.SetValue, Registry.GetValue, HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE, Admin rights, DWORD, OpenSubKey
-* Explicit emphasis in notes: "HKCU ko HKLM par prefer karo"
-* Notes mein jo analogies/examples the: UAC check karne ka (EnableLUA) example
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[Registry Manipulation, Set/Get, RegistryUtils, GetRegistryValue, SetRegistryValue, Microsoft.Win32, Registry.SetValue, Registry.GetValue, keyPath, valueName, valueData, null, HKEY_CURRENT_USER, HKCU, HKEY_LOCAL_MACHINE, HKLM, Admin rights, Access Denied, DWORD, check_uac, EnableLUA, WoW6432Node, 32-bit vs 64-bit registry, OpenSubKey, DeleteValue, DeleteSubKey, ⭐"HKCU ko HKLM par prefer karo"[emphasized in notes]]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Module 11 mein OpenSubKey se process seekha tha, yahan Registry.SetValue shortcut use kiya jo 90% kaam ke liye kaafi hai.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: Main() function RegistryUtils.SetRegistryValue use karke persistence set karta hai. C2 se reg_read ya check_uac command aane par GetRegistryValue call hota hai.
-* Additional context: (N/A)
-
-Topic 3: Process Management (List Processes)
-Subtopics: Process Management, ProcessUtils, ListProcesses, ps command, tasklist, Stealth, System.Diagnostics, Process.GetProcesses, StringBuilder, MainWindowTitle, Parent-Child Relationship, KillProcess, WMI query
-
-[📊 SCOPE SIGNAL for Topic 3:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Notes mein content volume: Concept breakdown, code, and stealth mechanics explanation
-* Key terms from notes: tasklist, ps, Reconnaissance, ProcessUtils, ListProcesses, System.Diagnostics, Process.GetProcesses, StringBuilder, MainWindowTitle, stealthy, powershell.exe, EDR, Antivirus, parent-child relationship
-* Explicit emphasis in notes: "Yeh native .NET tareeka stealthy hai kyunki naya process nahi banata"
-* Notes mein jo analogies/examples the: MsMpEng.exe (AV) aur wireshark.exe/x64dbg.exe (analysis tools) detect karne ka example
-]
-
-🔑 KEYWORDS DUMP for Topic 3:
-[Process Management, ps, tasklist, ProcessUtils, ListProcesses, Reconnaissance, MsMpEng.exe, wireshark.exe, x64dbg.exe, powershell.exe, noisy, EDR, Antivirus, process creation, stealthy, System.Diagnostics, Process.GetProcesses, StringBuilder, MainWindowTitle, InvalidOperationException, Access Denied, parent-child relationship, grep, low-and-slow, kill(), Process.GetProcessById, Win32_Process, System.Management.ManagementObjectSearcher, ⭐"stealthy"[emphasized in notes]]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-
-* Testing/Offline Phase: Testing ke liye notepad.exe chalao, PID dhoondho aur KillProcess function se band karo.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: PowerShell call karne ke bajaye native API use hota hai taaki EDR monitor na kar sake. Output C2 par jaata hai, attacker grep karke wireshark dhoondhta hai, agar mile toh sleep time 1 ghanta kar deta hai (low-and-slow).
-* Additional context: (N/A)
-
-Topic 4: Network Communication (Send GET/POST Request)
-Subtopics: Network Communication, NetworkUtils, SendGetRequest, SendPostRequest, GET vs POST, C2_USER_AGENT, WebClient, UploadString, UploadData, HTTPS, SSL
-
-[📊 SCOPE SIGNAL for Topic 4:
-
-* Depth Level: Moderate
-* Coverage Angle: Both
-* Notes mein content volume: Code snippet with GET/POST request encapsulation
-* Key terms from notes: GET, POST, NetworkUtils, C2_USER_AGENT, SendGetRequest, SendPostRequest, WebClient, UploadString, Headers.Add
-* Explicit emphasis in notes: "Result bhejne ke liye hamesha POST use karo"
-* Notes mein jo analogies/examples the: task maangna (GET) aur 50KB ka ps output bhejna (POST)
-]
-
-🔑 KEYWORDS DUMP for Topic 4:
-[Network Communication, GET, POST, NetworkUtils, C2_USER_AGENT, SendGetRequest, SendPostRequest, WebClient, Headers.Add(), DownloadString, UploadString, System.Net, ⭐Chrome/90.0.4430.93[version], DRY principle, $_POST, Config class, HttpClient, AES encryption, UploadData, HTTPS, SSL, Wireshark, ⭐"Result bhejne ke liye hamesha POST use karo"[emphasized in notes]]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
-
-* Testing/Offline Phase: Testing ke liye C2_GET_URL aur C2_POST_URL variables banake modify kiya ja sakta hai.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: NetworkUtils C2 communication ka dimaag hoti hai. C2 loop sirf SendGetRequest call karta hai, aur ps jaisa lamba result SendPostRequest (upload) se C2 body mein bhejta hai.
-* Additional context: HTTPS use karne se network par data automatically encrypt ho jaata hai.
-
-Topic 5: System Information Gathering
-Subtopics: System Info Recon, SystemInfoUtils, GetSystemInfo, Initial Check-in packet, Environment class, Dns.GetHostEntry, Beacon Management, JSON format, WMI AntiVirusProduct, Public IP
-
-[📊 SCOPE SIGNAL for Topic 5:
-
-* Depth Level: Moderate
-* Coverage Angle: Both
-* Notes mein content volume: Centralized recon code and C2 beacon concept
-* Key terms from notes: GetSystemInfo, SystemInfoUtils, initial check-in, Environment.OSVersion, Environment.UserName, Environment.MachineName, Dns.GetHostEntry, AddressList
-* Explicit emphasis in notes: None
-* Notes mein jo analogies/examples the: Attacker panel mein "Beacon #1" vs "victim@VICTIM-PC" dikhne ka farq
-]
-
-🔑 KEYWORDS DUMP for Topic 5:
-[System Info Recon, Initial Check-in, SystemInfoUtils, GetSystemInfo, hello packet, Beacon #1, victim@VICTIM-PC, Environment.OSVersion, Environment.UserName, Environment.MachineName, Dns.GetHostEntry, System.Net, Environment.Is64BitOperatingSystem, Environment.UserDomainName, AddressList[0], Abstraction, victim ID, JSON, AntiVirusProduct, api.ipify.org, Environment.ProcessorCount, WMI, Windows Management Instrumentation]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
-
-* Testing/Offline Phase: Yeh code abstraction karta hai, 10 line code ko Main loop mein ek line mein badal deta hai.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: Implant pehli baar chalne par initial check-in (hello packet) bhejta hai. Us information se C2 server ek unique 'victim ID' banata hai taaki panel mein devices easily identify ho sakein.
-* Additional context: (N/A)
-
-Topic 6: Core Utilities - The "Glue" (Recap)
-Subtopics: Core Utilities The Glue, Main loop logic, Orchestrator, Separation of Concerns, Config.cs, Namespaces, PowerShellUtils wrap
-
-[📊 SCOPE SIGNAL for Topic 6:
-
-* Depth Level: Moderate
-* Coverage Angle: Conceptual only
-* Notes mein content volume: Architecture recap showing how all Utils fit together in Main
-* Key terms from notes: Glue, Orchestrator, Separation of Concerns, Config.cs, namespaces, Program.cs, public static
-* Explicit emphasis in notes: None
-* Notes mein jo analogies/examples the: Program.cs as "orchestrator" or manager.
-]
-
-🔑 KEYWORDS DUMP for Topic 6:
-[Core Utilities, The Glue, Recap, big picture, FileUtils, RegistryUtils, ProcessUtils, NetworkUtils, SystemInfoUtils, Core.Utils, Config.C2_CHECKIN_URL, Config.PERSIST_PATH, Config.IMPLANT_PATH, Config.C2_GET_TASK_URL, Config.C2_POST_RESULT_URL, Config.C2_SLEEP_TIME, static, Program.cs, Orchestrator, manager, Separation of Concerns, magic strings, Config.cs, PowerShellUtils.RunCommand, C# Static Classes, C# Namespaces]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
-
-* Testing/Offline Phase: (N/A)
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: Professional implant ka Main loop ek Orchestrator hota hai (glue code). Woh sirf doosre Utils ko batata hai ki kya karna hai (Separation of Concerns). Saari URL/Sleep details Config.cs mein rehti hain.
-* Additional context: (N/A)
-
----
-
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
-
-📋 EXTRACTED IN THIS PHASE:
-
-Section 1: Core Utility Functions (DRY Principle) [⚠️ Derived]
-Topic 1: File Handling Functions (Read/Write)
-Topic 2: Registry Manipulation (Set/Get)
-Topic 3: Process Management (List Processes)
-Topic 4: Network Communication (Send GET/POST Request)
-Topic 5: System Information Gathering
-Topic 6: Core Utilities - The "Glue" (Recap)
-
-📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 68
-
-**--- 🛑 PHASE 14 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.**
-
-⏳ **Waiting for:** Next phase/module notes
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
 # Module 15: PowerShell Command Execution
 
 
-📦 **Processing: Phase 2 — PowerShell Command Execution (Module 14) [⚠️ Derived]**
+📦 **Processing: Phase 2 — PowerShell Command Execution (Module 15) [⚠️ Derived]**
 
 ===Section 2: C2 Command Execution Engine (PowerShell) [⚠️ Derived]===
 C2 implant ka core brain — victim system par remotely commands run karna aur output wapas bhejna using LotL techniques. [⚠️ Derived]
@@ -2275,130 +2257,152 @@ Sections: 1 | Topics: 5 | Subtopics: 37
 
 ==================================================================================
 
-# Module 16: C2 Implant Engine & Persistent Communication
+# Module 16: Core Utility Functions
 
 
-📦 **Processing: Phase 1 — C2 Implant Engine (Module 15)**
+📦 **Processing: Phase 2 — Core Utility Functions (Module 16)**
 
-===Section 1: C2 Implant Engine & Persistent Communication [⚠️ Derived]===
-Implant ko zinda rakhna aur lagataar attacker se naye commands maangna. [⚠️ Derived]
+===Section 1: Core Utility Functions (DRY Principle) [⚠️ Derived]===
+Pichle modules ke code ko reusable 'Utils' mein badalna jo implant ka dil (core) banenge. [⚠️ Derived]
 
---16--C2 Implant Engine & Persistent Communication--
-Topic 1: Persistent C2 Communication (HTTP GET Polling) [⚠️ Derived]
-Subtopics: Persistent C2 Communication, HTTP GET Polling, Heartbeat, Command Execution Trigger, Infinite while loop, WebClient, NO_TASK, PowerShellExecutor, Thread.Sleep, CPU Usage Issue, Fixed Sleep Time, Hardcoded IP, C2 Jitter, Cobalt Strike Beacon
+--14--Core Utility Functions--
+Topic 1: File Handling Functions (Read/Write)
+Subtopics: Core Utility File Handling, FileUtils, ReadFile, WriteFile, Don't Repeat Yourself, File.ReadAllText, File.WriteAllText, System.IO, try-catch, Absolute Path, Relative Path, File.ReadAllBytes, FileStream, File.AppendAllText, File.Delete
 
 [📊 SCOPE SIGNAL for Topic 1:
 
 * Depth Level: Deep
-* Coverage Angle: Conceptual only
-* Notes mein content volume: Long explanation with concept breakdown and common mistakes
-* Key terms from notes: Persistent, C2, HTTP GET, ping, heartbeat, whoami, while(true), WebClient.DownloadString, get_task.php, NO_TASK, exec whoami, PowerShellExecutor, Thread.Sleep, 100% CPU, Jitter, C2 Jitter, Cobalt Strike, Beacon, low-and-slow
-* Explicit emphasis in notes: "Sabse Badi Galti" — Thread.Sleep use na karna (100% CPU usage), "Jitter" (randomness) for stealth
-* Notes mein jo analogies/examples the: Implant ki "dhadkan" (heartbeat), Cobalt Strike ka Beacon (6 ghante + jitter)
+* Coverage Angle: Both
+* Notes mein content volume: Concept breakdown with full static class code snippet
+* Key terms from notes: ReadFile, WriteFile, utility functions, DRY, FileUtils, File.ReadAllText, try-catch, string content, File.WriteAllText, static class, System.IO, absolute path, relative path, byte[], binary files, FileStream
+* Explicit emphasis in notes: "try-catch block na lagana file operations mein sabse badi galti hai"
+* Notes mein jo analogies/examples the: steal_file C:\Users\Victim.ssh\id_rsa command ka example aur exfil_cookies ka real-world use case
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[Persistent, C2 Communication, HTTP GET Polling, Heartbeat, implant, malware, whoami, command execution, one-way, dead connection, while(true), infinite loop, WebClient.DownloadString(), c2_url, get_task.php, NO_TASK, exec whoami, PowerShellExecutor, Thread.Sleep(5000), 100% CPU, Antivirus, EDR, network pattern, Blue Teams, Hardcoded IP, Jitter, random(-1000, 1000), C2 Jitter, stealth, Cobalt Strike, Beacon, low-and-slow, try...catch, Domain Name, C2 Beaconing, System.Threading.Thread, System.Random, ⭐"Sabse Badi Galti"[emphasized in notes], ⭐"Jitter"[emphasized in notes]]
+[Core Utility, File Handling, Read/Write, FileUtils, ReadFile, WriteFile, DRY, Don't Repeat Yourself, download C:\config.ini, hosts file, File.ReadAllText, try-catch, File Not Found, Access Denied, crash, static class, string content, File.WriteAllText, System.IO, ERROR: Could not read file, SUCCESS, Absolute path, Relative path, byte[], File.ReadAllBytes, File.WriteAllBytes, FileStream, File.AppendAllText, File.Delete, ⭐"sabse badi galti"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: 5-10 second ka sleep time testing ke liye aachha hai taaki command jaldi execute ho.
-* Fixing/Iteration Phase: (N/A — notes mein is phase ke liye koi flow describe nahi kiya gaya)
-* Live Production Phase: Professional Red Team fixed sleep use nahi karti, Jitter add karti hai (e.g., Sleep(5000 + random(-1000, 1000))). Cobalt Strike beacon low-and-slow operations mein har 6 ghante + jitter mein check-in karta hai.
-* Additional context: HTTP GET 99% networks par allowed hota hai aur normal web traffic jaisa dikhta hai.
+* Testing/Offline Phase: Solo dev bhi FileUtils class banata hai taaki error handling (return "ERROR...") har baar consistent ho.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Implant mein ek Core.Utils namespace hota hai. C2 se steal_file ya exfil_cookies command aane par FileUtils.ReadFile call hota hai. Access na hone par implant crash nahi hota, C2 ko ERROR bhejta hai.
+* Additional context: (N/A)
 
-Topic 2: C2 Loop Architecture & Logic (Algorithm & Recap) [⚠️ Derived]
-Subtopics: C2 Loop Algorithm, Fault-Tolerant Implant, try-catch-finally, User-Agent Disguise, C2 Long Polling, WebSockets, DNS C2
+Topic 2: Registry Manipulation (Set/Get)
+Subtopics: Registry Manipulation, RegistryUtils, SetRegistryValue, GetRegistryValue, Microsoft.Win32, Registry.SetValue, Registry.GetValue, HKLM, HKCU, WoW6432Node, OpenSubKey, DeleteSubKey
 
 [📊 SCOPE SIGNAL for Topic 2:
 
-* Depth Level: Moderate
-* Coverage Angle: Conceptual only
-* Notes mein content volume: Step-by-step logic and recap checklist
-* Key terms from notes: algorithm, System.Threading, System.Net, c2_url, sleepTime, while(true), try...catch, DownloadString, fault-tolerant, finally block, User-Agent, Long Polling, WebSocket, DNS C2
-* Explicit emphasis in notes: "Sleep hamesha try-catch ke baahar hona chahiye", "Implant kabhi crash nahi hona chahiye"
-* Notes mein jo analogies/examples the: None
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed explanation with code and shortcut methods
+* Key terms from notes: GetRegistryValue, SetRegistryValue, Microsoft.Win32, Registry.SetValue, Registry.GetValue, HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE, Admin rights, DWORD, OpenSubKey
+* Explicit emphasis in notes: "HKCU ko HKLM par prefer karo"
+* Notes mein jo analogies/examples the: UAC check karne ka (EnableLUA) example
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[algorithm, System.Threading, System.Net, c2_url, sleepTime, while(true), try...catch, WebClient, DownloadString(), string task, NO_TASK, PowerShellExecutor, fault-tolerant, crash report, persistence, try-catch-finally, User-Agent, Long Polling, WebSocket, DNS C2, C2 over WebSockets, C2 Long Polling, ⭐"fault-tolerant"[emphasized in notes], ⭐"Sleep hamesha try-catch ke baahar hona chahiye"[emphasized in notes]]
+[Registry Manipulation, Set/Get, RegistryUtils, GetRegistryValue, SetRegistryValue, Microsoft.Win32, Registry.SetValue, Registry.GetValue, keyPath, valueName, valueData, null, HKEY_CURRENT_USER, HKCU, HKEY_LOCAL_MACHINE, HKLM, Admin rights, Access Denied, DWORD, check_uac, EnableLUA, WoW6432Node, 32-bit vs 64-bit registry, OpenSubKey, DeleteValue, DeleteSubKey, ⭐"HKCU ko HKLM par prefer karo"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: Testing ke liye catch block mein Console.WriteLine("C2 Down") likh sakte hain.
-* Fixing/Iteration Phase: Ek developer ka code hang ho raha tha kyunki usne Sleep ko try-catch ke andar rakha tha, jisse fail hone par 100% CPU usage hua.
-* Live Production Phase: Professional Red Team ka implant kabhi crash nahi hona chahiye (fault-tolerant). Agar C2 down ho toh implant chup-chaap wait karta hai aur connection wapas aane par try karta hai. Real malware mein catch block khaali rakhte hain.
+* Testing/Offline Phase: Module 12 mein OpenSubKey se process seekha tha, yahan Registry.SetValue shortcut use kiya jo 90% kaam ke liye kaafi hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Main() function RegistryUtils.SetRegistryValue use karke persistence set karta hai. C2 se reg_read ya check_uac command aane par GetRegistryValue call hota hai.
 * Additional context: (N/A)
 
-Topic 3: RepeatedGetRequest C# Implementation [⚠️ Derived]
-Subtopics: RepeatedGetRequest Code, System.Net, System.Threading, WebClient Object, using block, User-Agent Setup, string.IsNullOrEmpty, task.Trim, Exception Handling, Garbage Collector, Domain Fronting, C2 Redirectors
+Topic 3: Process Management (List Processes)
+Subtopics: Process Management, ProcessUtils, ListProcesses, ps command, tasklist, Stealth, System.Diagnostics, Process.GetProcesses, StringBuilder, MainWindowTitle, Parent-Child Relationship, KillProcess, WMI query
 
 [📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
-* Coverage Angle: Practical only
-* Notes mein content volume: Full C# code snippet with line-by-line explanation
-* Key terms from notes: RepeatedGetRequest, System.Net, System.Threading, WebClient, Thread.Sleep, while(true), try-catch, using block, User-Agent, Mozilla/5.0, string.IsNullOrEmpty, task.Trim(), Garbage Collector, C2 Redirectors, Domain Fronting
-* Explicit emphasis in notes: "Sleep ko try block ke andar rakhna sabse badi galti hai", "Attacker ka IP kabhi hardcode nahi hota"
-* Notes mein jo analogies/examples the: Chrome browser jaisa traffic dikhane ke liye Mozilla/5.0 User-Agent use karna.
+* Coverage Angle: Both
+* Notes mein content volume: Concept breakdown, code, and stealth mechanics explanation
+* Key terms from notes: tasklist, ps, Reconnaissance, ProcessUtils, ListProcesses, System.Diagnostics, Process.GetProcesses, StringBuilder, MainWindowTitle, stealthy, powershell.exe, EDR, Antivirus, parent-child relationship
+* Explicit emphasis in notes: "Yeh native .NET tareeka stealthy hai kyunki naya process nahi banata"
+* Notes mein jo analogies/examples the: MsMpEng.exe (AV) aur wireshark.exe/x64dbg.exe (analysis tools) detect karne ka example
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[RepeatedGetRequest, C# Code, System.Net, System.Threading, WebClient, Thread.Sleep, c2Url, 127.0.0.1, get_task.txt, sleepTime, while(true), try...catch, using block, IDisposable, Headers.Add(), User-Agent, Mozilla/5.0, DownloadString(), string.IsNullOrEmpty(), string.Trim(), NO_TASK, \n, Exception ex, Garbage Collector, memory leak, Domain Name, C2 Redirectors, Apache mod_rewrite, Nginx proxy_pass, Domain Fronting, HttpClient, async/await, multi-threaded, python -m http.server 8000, ⭐Chrome 90.0.4430.93[version], ⭐"sabse badi galti"[emphasized in notes], ⭐"Attacker ka IP kabhi hardcode nahi hota"[emphasized in notes]]
+[Process Management, ps, tasklist, ProcessUtils, ListProcesses, Reconnaissance, MsMpEng.exe, wireshark.exe, x64dbg.exe, powershell.exe, noisy, EDR, Antivirus, process creation, stealthy, System.Diagnostics, Process.GetProcesses, StringBuilder, MainWindowTitle, InvalidOperationException, Access Denied, parent-child relationship, grep, low-and-slow, kill(), Process.GetProcessById, Win32_Process, System.Management.ManagementObjectSearcher, ⭐"stealthy"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Testing/Offline Phase: Testing ke liye localhost (127.0.0.1) par XAMPP ya Python (python -m http.server 8000) se web server chala kar task.txt serve karte hain.
-* Fixing/Iteration Phase: Agar Sleep try-catch ke andar hua aur C2 down hua, toh 1 ghante tak 100% CPU chalega aur Blue Team pakad legi.
-* Live Production Phase: Attacker ka IP kabhi hardcode nahi hota. Woh ek Domain Name use karte hain (e.g., update.ms-cdn-services.com) jo Redirectors ke peeche chhupa hota hai, taaki asli C2 IP safe rahe. User-Agent Chrome jaisa set karte hain.
+* Testing/Offline Phase: Testing ke liye notepad.exe chalao, PID dhoondho aur KillProcess function se band karo.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: PowerShell call karne ke bajaye native API use hota hai taaki EDR monitor na kar sake. Output C2 par jaata hai, attacker grep karke wireshark dhoondhta hai, agar mile toh sleep time 1 ghanta kar deta hai (low-and-slow).
 * Additional context: (N/A)
 
-===Section 2: Modernizing the C2 Engine (New Addition)===
-Legacy `WebClient` ko modern `HttpClient` se replace karna aur Memory scanners se bachne ke liye Sleep Obfuscation.
-
-Topic 4: Modern C2 Comms (HttpClient & Async/Await) [⚠️ New]
-Subtopics: Synchronous vs Asynchronous, Thread Blocking, HttpClient Class, async keyword, await keyword, Task, ConfigureAwait, Connection Pooling, IDisposable
+Topic 4: Network Communication (Send GET/POST Request)
+Subtopics: Network Communication, NetworkUtils, SendGetRequest, SendPostRequest, GET vs POST, C2_USER_AGENT, WebClient, UploadString, UploadData, HTTPS, SSL
 
 [📊 SCOPE SIGNAL for Topic 4:
 
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Notes mein content volume: Refactoring Module 15 code from WebClient to HttpClient with async/await
-* Key terms from notes: HttpClient, WebClient deprecated, async, await, Task, non-blocking, multi-threading, concurrency
-* Explicit emphasis in notes: "WebClient ab purana ho chuka hai, professional C# malware hamesha HttpClient use karte hain."
-* Notes mein jo analogies/examples the: Synchronous (line mein khade rehna) vs Asynchronous (token lekar doosra kaam karna)
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Code snippet with GET/POST request encapsulation
+* Key terms from notes: GET, POST, NetworkUtils, C2_USER_AGENT, SendGetRequest, SendPostRequest, WebClient, UploadString, Headers.Add
+* Explicit emphasis in notes: "Result bhejne ke liye hamesha POST use karo"
+* Notes mein jo analogies/examples the: task maangna (GET) aur 50KB ka ps output bhejna (POST)
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[HttpClient, WebClient, deprecated, legacy, async, await, Task, Task, SendAsync, GetAsync, non-blocking, GUI freeze, UI thread, concurrency, connection pooling, IDisposable, try-await-catch, C2 polling, multi-threading, modern C#]
+[Network Communication, GET, POST, NetworkUtils, C2_USER_AGENT, SendGetRequest, SendPostRequest, WebClient, Headers.Add(), DownloadString, UploadString, System.Net, ⭐Chrome/90.0.4430.93[version], DRY principle, $_POST, Config class, HttpClient, AES encryption, UploadData, HTTPS, SSL, Wireshark, ⭐"Result bhejne ke liye hamesha POST use karo"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
-* Testing/Offline Phase: Developer purane `WebClient.DownloadString` ko `await client.GetStringAsync` se replace karta hai.
-* Fixing/Iteration Phase: Thread block hone ki wajah se agar implant hang ho raha tha, toh async/await use karke woh responsive ho jata hai.
-* Live Production Phase: C2 implant multiple tasks (jaise keylogging, screenshot, aur network poll) ek hi time par smoothly karta hai kyunki network call thread ko block nahi karti.
+* Testing/Offline Phase: Testing ke liye C2_GET_URL aur C2_POST_URL variables banake modify kiya ja sakta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: NetworkUtils C2 communication ka dimaag hoti hai. C2 loop sirf SendGetRequest call karta hai, aur ps jaisa lamba result SendPostRequest (upload) se C2 body mein bhejta hai.
+* Additional context: HTTPS use karne se network par data automatically encrypt ho jaata hai.
 
-Topic 5: Sleep Obfuscation & Memory Scanners [⚠️ New]
-Subtopics: Sleep Obfuscation Concept, Hunt-Sleeping-Beacons, Beacon Memory Encryption, Ekko/Foliage Techniques Concept, ROP Chains (Conceptual), VirtualProtect
+Topic 5: System Information Gathering
+Subtopics: System Info Recon, SystemInfoUtils, GetSystemInfo, Initial Check-in packet, Environment class, Dns.GetHostEntry, Beacon Management, JSON format, WMI AntiVirusProduct, Public IP
 
 [📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
-* Coverage Angle: Conceptual only (No complex ROP chain code, just methodology)
-* Notes mein content volume: How EDRs find sleeping implants in RAM and how to hide them
-* Key terms from notes: Sleep Obfuscation, Memory Scanners, YARA rules, Hunt-Sleeping-Beacons, Ekko, Foliage, encrypting heap, ROP chain
-* Explicit emphasis in notes: "Jab implant sleep kar raha ho, tab uski memory encrypt honi chahiye varna YARA scan pakad lega."
-* Notes mein jo analogies/examples the: "Chor (malware) jab so raha ho, toh apna chehra mask (encryption) se dhak leta hai."
+* Coverage Angle: Both
+* Notes mein content volume: Centralized recon code and C2 beacon concept
+* Key terms from notes: GetSystemInfo, SystemInfoUtils, initial check-in, Environment.OSVersion, Environment.UserName, Environment.MachineName, Dns.GetHostEntry, AddressList
+* Explicit emphasis in notes: None
+* Notes mein jo analogies/examples the: Attacker panel mein "Beacon #1" vs "victim@VICTIM-PC" dikhne ka farq
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[Sleep Obfuscation, Memory Scanners, Hunt-Sleeping-Beacons, YARA rules, memory dump, RAM analysis, Blue Team, Ekko, Foliage, ROP chain, Return Oriented Programming, encrypting heap, XOR, VirtualProtect, RWX to RW, PAGE_READWRITE, PAGE_EXECUTE_READWRITE, sleep hooks, stealth beaconing]
+[System Info Recon, Initial Check-in, SystemInfoUtils, GetSystemInfo, hello packet, Beacon #1, victim@VICTIM-PC, Environment.OSVersion, Environment.UserName, Environment.MachineName, Dns.GetHostEntry, System.Net, Environment.Is64BitOperatingSystem, Environment.UserDomainName, AddressList[0], Abstraction, victim ID, JSON, AntiVirusProduct, api.ipify.org, Environment.ProcessorCount, WMI, Windows Management Instrumentation]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
-* Testing/Offline Phase: Developer dekhta hai ki `Thread.Sleep(60000)` ke dauran agar RAM dump liya jaye, toh AES keys aur C2 URLs clear text mein RAM mein dikhte hain.
+* Testing/Offline Phase: Yeh code abstraction karta hai, 10 line code ko Main loop mein ek line mein badal deta hai.
 * Fixing/Iteration Phase: (N/A)
-* Live Production Phase: Advanced Red Teams `Ekko` jaisi technique use karti hain. Sleep karne se theek pehle implant apni hi memory ko XOR se encrypt karta hai, timers set karta hai, aur sleep mein chala jata hai. Wake up hone par Windows API (ROP) use wapas decrypt karti hai. EDR memory scan karta hai par use sirf garbage data milta hai.
+* Live Production Phase: Implant pehli baar chalne par initial check-in (hello packet) bhejta hai. Us information se C2 server ek unique 'victim ID' banata hai taaki panel mein devices easily identify ho sakein.
+* Additional context: (N/A)
+
+Topic 6: Core Utilities - The "Glue" (Recap)
+Subtopics: Core Utilities The Glue, Main loop logic, Orchestrator, Separation of Concerns, Config.cs, Namespaces, PowerShellUtils wrap
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual only
+* Notes mein content volume: Architecture recap showing how all Utils fit together in Main
+* Key terms from notes: Glue, Orchestrator, Separation of Concerns, Config.cs, namespaces, Program.cs, public static
+* Explicit emphasis in notes: None
+* Notes mein jo analogies/examples the: Program.cs as "orchestrator" or manager.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[Core Utilities, The Glue, Recap, big picture, FileUtils, RegistryUtils, ProcessUtils, NetworkUtils, SystemInfoUtils, Core.Utils, Config.C2_CHECKIN_URL, Config.PERSIST_PATH, Config.IMPLANT_PATH, Config.C2_GET_TASK_URL, Config.C2_POST_RESULT_URL, Config.C2_SLEEP_TIME, static, Program.cs, Orchestrator, manager, Separation of Concerns, magic strings, Config.cs, PowerShellUtils.RunCommand, C# Static Classes, C# Namespaces]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: (N/A)
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Professional implant ka Main loop ek Orchestrator hota hai (glue code). Woh sirf doosre Utils ko batata hai ki kya karna hai (Separation of Concerns). Saari URL/Sleep details Config.cs mein rehti hain.
+* Additional context: (N/A)
 
 ---
 
@@ -2406,25 +2410,21 @@ Subtopics: Sleep Obfuscation Concept, Hunt-Sleeping-Beacons, Beacon Memory Encry
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: C2 Implant Engine & Persistent Communication [⚠️ Derived]
-Topic 1: Persistent C2 Communication (HTTP GET Polling) [⚠️ Derived]
-Topic 2: C2 Loop Architecture & Logic (Algorithm & Recap) [⚠️ Derived]
-Topic 3: RepeatedGetRequest C# Implementation [⚠️ Derived]
-Topic 4: Modern C2 Comms (HttpClient & Async/Await) [⚠️ New]
-Topic 5: Sleep Obfuscation & Memory Scanners [⚠️ New]
-Section 2: Modernizing the C2 Engine (New Addition)
-Topic 1: Persistent C2 Communication (HTTP GET Polling) [⚠️ Derived]
-Topic 2: C2 Loop Architecture & Logic (Algorithm & Recap) [⚠️ Derived]
-Topic 3: RepeatedGetRequest C# Implementation [⚠️ Derived]
-Topic 4: Modern C2 Comms (HttpClient & Async/Await) [⚠️ New]
-Topic 5: Sleep Obfuscation & Memory Scanners [⚠️ New]
+Section 1: Core Utility Functions (DRY Principle) [⚠️ Derived]
+Topic 1: File Handling Functions (Read/Write)
+Topic 2: Registry Manipulation (Set/Get)
+Topic 3: Process Management (List Processes)
+Topic 4: Network Communication (Send GET/POST Request)
+Topic 5: System Information Gathering
+Topic 6: Core Utilities - The "Glue" (Recap)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 48
+Sections: 1 | Topics: 6 | Subtopics: 68
 
-**--- 🛑 PHASE 16 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.**
+**--- 🛑 PHASE 14 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.**
 
 ⏳ **Waiting for:** Next phase/module notes
+
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -3125,9 +3125,64 @@ Sections: 1 | Topics: 2 | Subtopics: 11
 
 ==================================================================================
 
-# Module 24: Initial Access & Payload Delivery
+# Module 24: Advanced Covert Channels & Infrastructure
 
-📦 Processing: Phase/Module 24 — Initial Access & Payload Delivery
+📦 Processing: Phase/Module 24 — Advanced Covert Channels
+
+===Section 1: Bypassing Advanced Network Defenses===
+Jab HTTP/HTTPS blocked ho ya deeply inspected ho, tab DNS, ICMP aur CDNs ka use karke C2 traffic ko chhipana.
+
+--25--Advanced Covert Channels & Infrastructure--
+Topic 1: DNS & ICMP Tunneling (Stealth Networking) [⚠️ New]
+Subtopics: DNS Tunneling Concept, TXT/A Records Exfiltration, ICMP Payload Injection, Ping Tunneling, Network Segmentation Bypass, dnscat2, iodine
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Explanation of how to use non-HTTP protocols for C2 beacons
+* Key terms from notes: DNS Tunneling, ICMP, Ping, TXT records, covert channel, payload size limits
+* Explicit emphasis in notes: "Blue team HTTP logs check karti hai, par DNS aur Ping ko aksar ignore kiya jata hai."
+* Notes mein jo analogies/examples the: "Chhote-chhote purze (data) ko alag-alag lifafon (DNS queries) mein bhej kar wapas jodna."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Covert Channel, DNS Tunneling, ICMP Tunneling, Ping, TXT record, A record, Base64 encoding, FQDN, Fully Qualified Domain Name, Network Segmentation, dnscat2, iodine, Blue Team, SOC, Firewall Bypass, Wireshark PCAP, Data Exfiltration, beaconing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer apne local network mein ping command ke data payload size ko modify karke choti C2 command bhej kar test karta hai.
+* Fixing/Iteration Phase: DNS UDP packet size limit (512 bytes) ki wajah se data truncate hone par fragmentation logic add karta hai.
+* Live Production Phase: Victim machine highly restricted VLAN mein hai jahan internet (Port 80/443) blocked hai, par internal DNS server external queries resolve karta hai. Implant DNS TXT queries (jaise `[base64_data].malicious.com`) banakar C2 se baat karta hai.
+
+Topic 2: Domain Fronting & CDN Abuse [⚠️ New]
+Subtopics: Domain Fronting Concept, CDN (Content Delivery Network) Routing, Host Header Manipulation, SNI (Server Name Indication) vs Host Header, Fastly/Cloudflare Abuse
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual
+* Notes mein content volume: Evading IP bans and domain reputation filters using CDNs
+* Key terms from notes: Domain Fronting, CDN, Host Header, SNI, High-reputation domain
+* Explicit emphasis in notes: "Domain fronting se tumhara traffic legitimate domain (jaise google.com) ka dikhta hai, par backend par tumhare C2 par route ho jata hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Domain Fronting, CDN, Content Delivery Network, Cloudflare, Fastly, AWS CloudFront, SNI, Server Name Indication, Host Header, High-reputation domain, Evasion, TLS termination, proxy, C2 Redirectors, Malleable C2, Cobalt Strike, OPSEC]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: C2 implant network connection `ajax.microsoft.com` (SNI) par banata hai jise firewall allow kar deta hai. Par HTTP request ke andar `Host: attacker-c2.azureedge.net` (Host Header) daal deta hai, jisse Azure ka CDN traffic ko silently attacker ke server par bhej deta hai.
+
+✅ **Notes Guru Skeleton Ready:** Module 24 (Topics 1-2).
+
+---
+
+==================================================================================
+
+# Module 25: Initial Access & Payload Delivery
+
+📦 Processing: Phase/Module 25 — Initial Access & Payload Delivery
 
 ===Section 1: Bypassing the Front Door (MFA & SmartScreen)===
 Malware banane ke baad use victim ke PC tak safely pahunchana aur execute karwana (Phishing & Droppers).
@@ -3210,61 +3265,6 @@ Sections: 1 | Topics: 3 | Subtopics: 21
 ---
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-# Module 25: Advanced Covert Channels & Infrastructure
-
-📦 Processing: Phase/Module 25 — Advanced Covert Channels
-
-===Section 1: Bypassing Advanced Network Defenses===
-Jab HTTP/HTTPS blocked ho ya deeply inspected ho, tab DNS, ICMP aur CDNs ka use karke C2 traffic ko chhipana.
-
---25--Advanced Covert Channels & Infrastructure--
-Topic 1: DNS & ICMP Tunneling (Stealth Networking) [⚠️ New]
-Subtopics: DNS Tunneling Concept, TXT/A Records Exfiltration, ICMP Payload Injection, Ping Tunneling, Network Segmentation Bypass, dnscat2, iodine
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Notes mein content volume: Explanation of how to use non-HTTP protocols for C2 beacons
-* Key terms from notes: DNS Tunneling, ICMP, Ping, TXT records, covert channel, payload size limits
-* Explicit emphasis in notes: "Blue team HTTP logs check karti hai, par DNS aur Ping ko aksar ignore kiya jata hai."
-* Notes mein jo analogies/examples the: "Chhote-chhote purze (data) ko alag-alag lifafon (DNS queries) mein bhej kar wapas jodna."
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Covert Channel, DNS Tunneling, ICMP Tunneling, Ping, TXT record, A record, Base64 encoding, FQDN, Fully Qualified Domain Name, Network Segmentation, dnscat2, iodine, Blue Team, SOC, Firewall Bypass, Wireshark PCAP, Data Exfiltration, beaconing]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer apne local network mein ping command ke data payload size ko modify karke choti C2 command bhej kar test karta hai.
-* Fixing/Iteration Phase: DNS UDP packet size limit (512 bytes) ki wajah se data truncate hone par fragmentation logic add karta hai.
-* Live Production Phase: Victim machine highly restricted VLAN mein hai jahan internet (Port 80/443) blocked hai, par internal DNS server external queries resolve karta hai. Implant DNS TXT queries (jaise `[base64_data].malicious.com`) banakar C2 se baat karta hai.
-
-Topic 2: Domain Fronting & CDN Abuse [⚠️ New]
-Subtopics: Domain Fronting Concept, CDN (Content Delivery Network) Routing, Host Header Manipulation, SNI (Server Name Indication) vs Host Header, Fastly/Cloudflare Abuse
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Conceptual
-* Notes mein content volume: Evading IP bans and domain reputation filters using CDNs
-* Key terms from notes: Domain Fronting, CDN, Host Header, SNI, High-reputation domain
-* Explicit emphasis in notes: "Domain fronting se tumhara traffic legitimate domain (jaise google.com) ka dikhta hai, par backend par tumhare C2 par route ho jata hai."
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[Domain Fronting, CDN, Content Delivery Network, Cloudflare, Fastly, AWS CloudFront, SNI, Server Name Indication, Host Header, High-reputation domain, Evasion, TLS termination, proxy, C2 Redirectors, Malleable C2, Cobalt Strike, OPSEC]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Live Production Phase: C2 implant network connection `ajax.microsoft.com` (SNI) par banata hai jise firewall allow kar deta hai. Par HTTP request ke andar `Host: attacker-c2.azureedge.net` (Host Header) daal deta hai, jisse Azure ka CDN traffic ko silently attacker ke server par bhej deta hai.
-
-✅ **Notes Guru Skeleton Ready:** Module 24 (Topics 1-2).
-
----
 
 ==================================================================================
 
