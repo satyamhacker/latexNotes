@@ -1573,159 +1573,7 @@ Sections: 1 | Topics: 6 | Subtopics: 37
 
 ==================================================================================
 
-# Module 12: Persistence
-
-
-📦 Processing: Phase 2 — Module 11 (Persistence) & Module 12 Intro
-
-===Section 1: Persistence (Module 11)===
-System reboot ke baad bhi target machine par long-term access banaye rakhne ke essential methods.
-
---12--Persistence (Module 11)--
-Topic 1: Persistence Overview
-Subtopics: Persistence Definition, C2 Connection Maintenance, Execution Workflow, Run Keys, Startup Folder, Ransomware Example, Living Off The Land, Common Beginner Mistakes, MITRE ATT&CK TA0003, Sysinternals Autoruns
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Moderate
-* Coverage Angle: Conceptual only
-* Notes mein content volume: Long explanation with multiple bullet points
-* Key terms from notes: Persistence, C2, Command and Control, reboot, Windows Registry, Run keys, Startup Folder, Living off the land, LotL, WMI event subscriptions, DLL hijacking, MITRE ATT&CK Framework, TA0003, Sysinternals Autoruns
-* Explicit emphasis in notes: "permanently" (connection toot jayega), "hamesha" (long-term access)
-* Notes mein jo analogies/examples the: "Ransomware (jaise WannaCry)" example diya gaya tha ki yeh files encrypt karne ke liye persistence use karta hai
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Persistence Overview, victim, system restart, reboot, C2, Command and Control, Windows Registry, Run keys, Startup Folder, Operating System, OS, phishing, one-shot attack, payload, ⭐permanently, Ransomware, WannaCry, encrypt, low-privilege, LotL, living off the land, WMI event subscriptions, DLL hijacking, Antivirus, AVs, shell:startup, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run, MITRE ATT&CK Framework, TA0003 - Persistence, Sysinternals Autoruns]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Solo developer script banata hai jo payload download kare aur uske saath Registry key add kar de taaki boot par chale.
-* Fixing/Iteration Phase: (N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Live Production Phase: Professional Red Team multiple redundant persistence methods use karti hai (e.g., Registry + Scheduled Task) taaki agar ek clean ho jaaye toh doosra active rahe. Ransomware (WannaCry) persistence use karta hai taaki reboot hone par bhi encryption jaari rahe.
-* Additional context: Hamesha reboot ke baad test karna chahiye ki C2 connection wapas aata hai ya nahi.
-
-Topic 2: Windows Registry Persistence (Run Key)
-Subtopics: Windows Registry Run Key, Execution Process, HKLM vs HKCU, Dynamic Execution Path, Hardcoded Path Issue, Obvious Name Mistake, Advanced Evasion Techniques, Registry Steps Recap
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Notes mein content volume: Long explanation with C# code, step-by-step breakdown, and recap summary
-* Key terms from notes: HKEY_CURRENT_USER, HKCU, HKEY_LOCAL_MACHINE, HKLM, Run key, payload.exe, Microsoft.Win32, RegistryKey, System.Reflection.Assembly.GetExecutingAssembly().Location, OpenSubKey, SetValue, Admin rights, WMI Event Subscription, COM Hijacking, regedit
-* Explicit emphasis in notes: "permanently", "turant" karna chahiye, HKCU over HKLM
-* Notes mein jo analogies/examples the: "JavaUpdater" ya "TeamsHelper" jaisa legitimate naam rakhne ka example diya tha; RunOnce aur Policies\Explorer\Run ko less common alternatives bataya
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[Windows Registry, Run Key, HKEY_LOCAL_MACHINE, HKLM, HKEY_CURRENT_USER, HKCU, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run, payload.exe, C#, Microsoft.Win32, RegistryKey, System.Windows.Forms, System.Reflection.Assembly.GetExecutingAssembly().Location, OpenSubKey, CreateSubKey, SetValue, regedit, Access Denied, Hardcoded Path, AppData, ProgramData, Dropper, RunOnce, ...Policies\Explorer\Run, Antivirus, AVs, EDRs, WMI Event Subscription, COM Hijacking, Registry.GetValue(), Registry.DeleteValue(), `using Microsoft.Win32;`, `string keyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";`, `string valueName = "MyEthicalApp";`, `string executablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;`, `using (RegistryKey rk = Registry.CurrentUser.OpenSubKey(keyPath, true))`, `rk.SetValue(valueName, executablePath);`, `Console.WriteLine($"[+] Persistence added to Registry: {keyPath}");`, `catch (Exception ex)`]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Solo developer ek 'dropper' banata hai jo main payload ko AppData mein copy karke HKCU\Run key set karta hai.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: Red Team standard HKCU\Run ko avoid karti hai kyunki yeh monitored hota hai, aur evasion ke liye "less common" keys (RunOnce) use karti hai. Persistence target system par drop hote hi recon ke baad pehla step hota hai.
-* Additional context: HKCU ko prefer kiya jaata hai taaki admin prompt na aaye. Legitimate software names (e.g., Teams Updater) aur normal folders (AppData) use karne chahiye stealth ke liye.
-
-Topic 3: Startup Folder Persistence
-Subtopics: Startup Folder Persistence, Environment Path Resolution, File Copy Operation, Admin vs Current User Startup, File Already Exists Error, Payload Obfuscation, Lnk Shortcut Evasion
-
-[📊 SCOPE SIGNAL for Topic 3:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Notes mein content volume: Long explanation with C# code and alternative workflow tips
-* Key terms from notes: Startup folder, Environment.GetFolderPath, SpecialFolder.Startup, System.IO, File.Copy, Path.Combine, shell:startup, CommonStartup, overwriting flag, .lnk file, Locky
-* Explicit emphasis in notes: Overwrite flag `true` na lagana crash kar sakta hai; CommonStartup ke liye Admin rights chahiye
-* Notes mein jo analogies/examples the: Locky ransomware ka example diya jo Startup folder mein .vbs script rakhta tha payload download karne ke liye
-]
-
-🔑 KEYWORDS DUMP for Topic 3:
-[Startup Folder, Registry editing, low-tech, Environment.GetFolderPath, Environment.SpecialFolder.Startup, System.Reflection.Assembly.GetExecutingAssembly().Location, AppData, .lnk file, Shortcut, System.IO, Path.Combine, File.Copy, overwrite, shell:startup, CommonStartup, Environment.SpecialFolder.CommonStartup, Admin rights, Obfuscation, updater.exe, OneDriveHelper.exe, Locky ransomware, .vbs file, COM objects, Sysinternals Autoruns, shell:common startup, `string startupFolder = Environment.GetFolderPath(Environment.SpecialFolder.Startup);`, `string destinationFilePath = Path.Combine(startupFolder, Path.GetFileName(sourceFilePath));`, `File.Copy(sourceFilePath, destinationFilePath, true);`]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-
-* Testing/Offline Phase: Solo researcher is method ko quick testing aur simple persistence ke liye use karta hai kyunki ise code karna bahut aasan hai.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: Professional Red Team pure .exe ko copy karne ke bajaay ek .lnk (Shortcut) file banati hai jismein legitimate icon hota hai taaki user ko shaq na ho. Locky jaisa ransomware startup folder mein script daalta tha jo boot par actual payload internet se laati thi.
-* Additional context: Environment.SpecialFolder.Startup hamesha use karein (non-admin). File.Copy mein 'true' flag lagana zaroori hai overwrite ke liye.
-
-===Section 2: File System Manipulations Intro (Module 12) [⚠️ Derived]===
-Victim machine par files ke saath interact karne ka initial overview. [⚠️ Derived]
-
---12--File System Manipulations Intro--
-Topic 4: Module 12 File System Overview [⚠️ Derived]
-Subtopics: File System Manipulation, Payload Downloading, Directory Enumeration Commands
-
-[📊 SCOPE SIGNAL for Topic 4:
-
-* Depth Level: Surface
-* Coverage Angle: Conceptual only
-* Notes mein content volume: Sirf 1-2 lines ki introduction
-* Key terms from notes: Module 12, file system, C2 server, payloads, dir, ls
-* Explicit emphasis in notes: None
-* Notes mein jo analogies/examples the: None
-]
-
-🔑 KEYWORDS DUMP for Topic 4:
-[Module 12, file system, khilwaad, C2 server, payloads, download, victim machine, dir, ls, commands]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
-
-* Testing/Offline Phase: (N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: (N/A)
-* Additional context: (N/A)
-
---- 🛑 PHASE 12 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
-
-✅ **Double-check steps performed:**
-
-* [x] Poore notes completely padhe bina kuch skip kiye.
-* [x] Notes ko Sections mein group kiya — related topics ek Section mein hain.
-* [x] Har Section ka tagline/context line add kiya.
-* [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-* [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-* [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
-* [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-* [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya (Module 11.2 & 11.3 merged, Module 12 intro grouped).
-* [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-* [x] Chronological order preserved.
-* [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
-* [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-* [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-* [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-* [x] Diagrams/tables reproduced ya flagged — (N/A).
-* [x] OCR quality warning di agar 20%+ content unclear tha — (N/A).
-* [x] Phase tracking aur CONTINUE protocol follow kiya.
-* [x] Output limit aane se pehle ruka.
-* [x] Chhote aur related concepts ko ek broad Topic mein merge kiya (Topic 11.2 aur 11.3 ko ek hi Topic mein extract kiya).
-
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
-
-📋 EXTRACTED IN THIS PHASE:
-
-Section 1: Persistence (Module 11)
-Topic 1: Persistence Overview
-Topic 2: Windows Registry Persistence (Run Key)
-Topic 3: Startup Folder Persistence
-Topic 4: Module 12 File System Overview [⚠️ Derived]
-
-Section 2: File System Manipulations Intro (Module 12) [⚠️ Derived]
-Topic 1: Persistence Overview
-Topic 2: Windows Registry Persistence (Run Key)
-Topic 3: Startup Folder Persistence
-Topic 4: Module 12 File System Overview [⚠️ Derived]
-
-📊 PHASE SUMMARY:
-Sections: 2 | Topics: 4 | Subtopics: 28
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-# Module 13: Playing With File System
+# Module 12: Playing With File System
 
 
 📦 Processing: Phase 1 — C2 Payload Operations & Recon [⚠️ Derived]
@@ -1733,7 +1581,7 @@ Sections: 2 | Topics: 4 | Subtopics: 28
 ===Section 1: C2 File Download Operations [⚠️ Derived]===
 Implant ko upgrade karne aur remote server se naye tools deploy karne ka mechanism. [⚠️ Derived]
 
---13--C2 File Download Operations--
+--12--C2 File Download Operations--
 Topic 1: File Download Process & Fileless Concept [⚠️ Derived]
 Subtopics: File Download Overview, Implant Upgrade, WebClient Process Flow, Common Hardcoding Mistakes, Fileless Execution, Assembly.Load Method
 
@@ -1832,7 +1680,7 @@ Subtopics: FileDownloader Code, System.Net and System.IO Imports, Dynamic Path G
 =====Section 2: File System Enumeration & Recon [⚠️ Derived]=====
 Victim machine par files aur folders dhoondhne ke liye implant ki capabilities (Reconnaissance). [⚠️ Derived]
 
---13--File System Enumeration & Recon--
+--12--File System Enumeration & Recon--
 Topic 3: DirectoryHandler & OPSEC File Listing [⚠️ Derived]
   Subtopics: DirectoryHandler Concept, Reconnaissance Importance, Native .NET Execution, Directory Class Methods, UnauthorizedAccessException Handling, StringBuilder Usage, EDR Evasion
 
@@ -1949,7 +1797,159 @@ Topic 3: DirectoryHandler & OPSEC File Listing [⚠️ Derived]
 
 📊 PHASE SUMMARY:
 Sections: 2 | Topics: 3 | Subtopics: 12
-🛑 PHASE 13 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+🛑 PHASE 12 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 13: Persistence
+
+
+📦 Processing: Phase 2 — Module 11 (Persistence) & Module 12 Intro
+
+===Section 1: Persistence (Module 11)===
+System reboot ke baad bhi target machine par long-term access banaye rakhne ke essential methods.
+
+--13--Persistence (Module 11)--
+Topic 1: Persistence Overview
+Subtopics: Persistence Definition, C2 Connection Maintenance, Execution Workflow, Run Keys, Startup Folder, Ransomware Example, Living Off The Land, Common Beginner Mistakes, MITRE ATT&CK TA0003, Sysinternals Autoruns
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual only
+* Notes mein content volume: Long explanation with multiple bullet points
+* Key terms from notes: Persistence, C2, Command and Control, reboot, Windows Registry, Run keys, Startup Folder, Living off the land, LotL, WMI event subscriptions, DLL hijacking, MITRE ATT&CK Framework, TA0003, Sysinternals Autoruns
+* Explicit emphasis in notes: "permanently" (connection toot jayega), "hamesha" (long-term access)
+* Notes mein jo analogies/examples the: "Ransomware (jaise WannaCry)" example diya gaya tha ki yeh files encrypt karne ke liye persistence use karta hai
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Persistence Overview, victim, system restart, reboot, C2, Command and Control, Windows Registry, Run keys, Startup Folder, Operating System, OS, phishing, one-shot attack, payload, ⭐permanently, Ransomware, WannaCry, encrypt, low-privilege, LotL, living off the land, WMI event subscriptions, DLL hijacking, Antivirus, AVs, shell:startup, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run, MITRE ATT&CK Framework, TA0003 - Persistence, Sysinternals Autoruns]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Solo developer script banata hai jo payload download kare aur uske saath Registry key add kar de taaki boot par chale.
+* Fixing/Iteration Phase: (N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+* Live Production Phase: Professional Red Team multiple redundant persistence methods use karti hai (e.g., Registry + Scheduled Task) taaki agar ek clean ho jaaye toh doosra active rahe. Ransomware (WannaCry) persistence use karta hai taaki reboot hone par bhi encryption jaari rahe.
+* Additional context: Hamesha reboot ke baad test karna chahiye ki C2 connection wapas aata hai ya nahi.
+
+Topic 2: Windows Registry Persistence (Run Key)
+Subtopics: Windows Registry Run Key, Execution Process, HKLM vs HKCU, Dynamic Execution Path, Hardcoded Path Issue, Obvious Name Mistake, Advanced Evasion Techniques, Registry Steps Recap
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Long explanation with C# code, step-by-step breakdown, and recap summary
+* Key terms from notes: HKEY_CURRENT_USER, HKCU, HKEY_LOCAL_MACHINE, HKLM, Run key, payload.exe, Microsoft.Win32, RegistryKey, System.Reflection.Assembly.GetExecutingAssembly().Location, OpenSubKey, SetValue, Admin rights, WMI Event Subscription, COM Hijacking, regedit
+* Explicit emphasis in notes: "permanently", "turant" karna chahiye, HKCU over HKLM
+* Notes mein jo analogies/examples the: "JavaUpdater" ya "TeamsHelper" jaisa legitimate naam rakhne ka example diya tha; RunOnce aur Policies\Explorer\Run ko less common alternatives bataya
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Windows Registry, Run Key, HKEY_LOCAL_MACHINE, HKLM, HKEY_CURRENT_USER, HKCU, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run, payload.exe, C#, Microsoft.Win32, RegistryKey, System.Windows.Forms, System.Reflection.Assembly.GetExecutingAssembly().Location, OpenSubKey, CreateSubKey, SetValue, regedit, Access Denied, Hardcoded Path, AppData, ProgramData, Dropper, RunOnce, ...Policies\Explorer\Run, Antivirus, AVs, EDRs, WMI Event Subscription, COM Hijacking, Registry.GetValue(), Registry.DeleteValue(), `using Microsoft.Win32;`, `string keyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";`, `string valueName = "MyEthicalApp";`, `string executablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;`, `using (RegistryKey rk = Registry.CurrentUser.OpenSubKey(keyPath, true))`, `rk.SetValue(valueName, executablePath);`, `Console.WriteLine($"[+] Persistence added to Registry: {keyPath}");`, `catch (Exception ex)`]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Solo developer ek 'dropper' banata hai jo main payload ko AppData mein copy karke HKCU\Run key set karta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Red Team standard HKCU\Run ko avoid karti hai kyunki yeh monitored hota hai, aur evasion ke liye "less common" keys (RunOnce) use karti hai. Persistence target system par drop hote hi recon ke baad pehla step hota hai.
+* Additional context: HKCU ko prefer kiya jaata hai taaki admin prompt na aaye. Legitimate software names (e.g., Teams Updater) aur normal folders (AppData) use karne chahiye stealth ke liye.
+
+Topic 3: Startup Folder Persistence
+Subtopics: Startup Folder Persistence, Environment Path Resolution, File Copy Operation, Admin vs Current User Startup, File Already Exists Error, Payload Obfuscation, Lnk Shortcut Evasion
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Long explanation with C# code and alternative workflow tips
+* Key terms from notes: Startup folder, Environment.GetFolderPath, SpecialFolder.Startup, System.IO, File.Copy, Path.Combine, shell:startup, CommonStartup, overwriting flag, .lnk file, Locky
+* Explicit emphasis in notes: Overwrite flag `true` na lagana crash kar sakta hai; CommonStartup ke liye Admin rights chahiye
+* Notes mein jo analogies/examples the: Locky ransomware ka example diya jo Startup folder mein .vbs script rakhta tha payload download karne ke liye
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Startup Folder, Registry editing, low-tech, Environment.GetFolderPath, Environment.SpecialFolder.Startup, System.Reflection.Assembly.GetExecutingAssembly().Location, AppData, .lnk file, Shortcut, System.IO, Path.Combine, File.Copy, overwrite, shell:startup, CommonStartup, Environment.SpecialFolder.CommonStartup, Admin rights, Obfuscation, updater.exe, OneDriveHelper.exe, Locky ransomware, .vbs file, COM objects, Sysinternals Autoruns, shell:common startup, `string startupFolder = Environment.GetFolderPath(Environment.SpecialFolder.Startup);`, `string destinationFilePath = Path.Combine(startupFolder, Path.GetFileName(sourceFilePath));`, `File.Copy(sourceFilePath, destinationFilePath, true);`]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Solo researcher is method ko quick testing aur simple persistence ke liye use karta hai kyunki ise code karna bahut aasan hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Professional Red Team pure .exe ko copy karne ke bajaay ek .lnk (Shortcut) file banati hai jismein legitimate icon hota hai taaki user ko shaq na ho. Locky jaisa ransomware startup folder mein script daalta tha jo boot par actual payload internet se laati thi.
+* Additional context: Environment.SpecialFolder.Startup hamesha use karein (non-admin). File.Copy mein 'true' flag lagana zaroori hai overwrite ke liye.
+
+===Section 2: File System Manipulations Intro (Module 12) [⚠️ Derived]===
+Victim machine par files ke saath interact karne ka initial overview. [⚠️ Derived]
+
+--13--File System Manipulations Intro--
+Topic 4: Module 12 File System Overview [⚠️ Derived]
+Subtopics: File System Manipulation, Payload Downloading, Directory Enumeration Commands
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Surface
+* Coverage Angle: Conceptual only
+* Notes mein content volume: Sirf 1-2 lines ki introduction
+* Key terms from notes: Module 12, file system, C2 server, payloads, dir, ls
+* Explicit emphasis in notes: None
+* Notes mein jo analogies/examples the: None
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Module 12, file system, khilwaad, C2 server, payloads, download, victim machine, dir, ls, commands]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: (N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: (N/A)
+* Additional context: (N/A)
+
+--- 🛑 PHASE 13 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Double-check steps performed:**
+
+* [x] Poore notes completely padhe bina kuch skip kiye.
+* [x] Notes ko Sections mein group kiya — related topics ek Section mein hain.
+* [x] Har Section ka tagline/context line add kiya.
+* [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
+* [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
+* [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
+* [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
+* [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya (Module 11.2 & 11.3 merged, Module 12 intro grouped).
+* [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
+* [x] Chronological order preserved.
+* [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
+* [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
+* [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
+* [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
+* [x] Diagrams/tables reproduced ya flagged — (N/A).
+* [x] OCR quality warning di agar 20%+ content unclear tha — (N/A).
+* [x] Phase tracking aur CONTINUE protocol follow kiya.
+* [x] Output limit aane se pehle ruka.
+* [x] Chhote aur related concepts ko ek broad Topic mein merge kiya (Topic 11.2 aur 11.3 ko ek hi Topic mein extract kiya).
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Persistence (Module 11)
+Topic 1: Persistence Overview
+Topic 2: Windows Registry Persistence (Run Key)
+Topic 3: Startup Folder Persistence
+Topic 4: Module 12 File System Overview [⚠️ Derived]
+
+Section 2: File System Manipulations Intro (Module 12) [⚠️ Derived]
+Topic 1: Persistence Overview
+Topic 2: Windows Registry Persistence (Run Key)
+Topic 3: Startup Folder Persistence
+Topic 4: Module 12 File System Overview [⚠️ Derived]
+
+📊 PHASE SUMMARY:
+Sections: 2 | Topics: 4 | Subtopics: 28
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2713,14 +2713,73 @@ Sections: 1 | Topics: 4 | Subtopics: 87
 
 ==================================================================================
 
-# Module 19: Payload Evasion & Injection
+# Module 19: Windows Local Privilege Escalation (PrivEsc)
 
-📦 Processing: Phase/Module 19 — Payload Evasion & Injection
+📦 Processing: Phase/Module 19 — Windows Local Privilege Escalation (PrivEsc)
+
+===Section 1: Elevating Privileges===
+Standard user ki aukaat se nikal kar Windows ka bhagwaan (Admin/SYSTEM) banne ka technical rasta.
+
+--19--Windows Local Privilege Escalation (PrivEsc)--
+Topic 1: UAC Bypass Techniques (Fodhelper & COM) [⚠️ New]
+Subtopics: User Account Control (UAC), High vs Medium Integrity, Auto-Elevated Binaries, Fodhelper.exe Abuse, Registry Hijacking, HKCU\Software\Classes\ms-settings, DelegateExecute, Silent Elevation, Defender Reactions
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: C# code to write registry keys that trick auto-elevated Windows binaries into running our payload as Admin without a prompt.
+* Key terms from notes: UAC, High Integrity, Fodhelper, Auto-Elevated, Registry Hijacking
+* Explicit emphasis in notes: "Agar UAC bypass nahi kiya, toh tumhara implant ek 'Blind and Powerless' agent banke reh jayega. Mimikatz bina Admin ke nahi chalta."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[UAC Bypass, User Account Control, Privilege Escalation, PrivEsc, High Integrity, Medium Integrity, Fodhelper.exe, sdclt.exe, computerdefaults.exe, Auto-Elevated, Registry Hijacking, HKCU\Software\Classes\ms-settings\Shell\Open\command, DelegateExecute, C# Registry manipulation, Silent Elevation, NT AUTHORITY\SYSTEM, Access Denied evasion]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Live Production Phase: C2 implant check-in karta hai aur report deta hai `IsAdmin: False`. Attacker C2 panel se `bypass_uac` command bhejta hai. Implant `HKCU` (jiske liye admin rights nahi chahiye) mein ek registry key banata hai aur usme apne payload ka path daal deta hai. Phir woh Windows ke trusted `fodhelper.exe` ko start karta hai. Fodhelper auto-elevate hokar background mein registry check karta hai aur attacker ke payload ko as an Administrator execute kar deta hai. Ek naya, High Integrity beacon C2 par connect hota hai.
+
+Topic 2: Service Misconfigurations & SYSTEM Escalation [⚠️ New]
+Subtopics: Windows Services Architecture, Unquoted Service Paths, Weak Service Permissions, Service Registry ACLs, DLL Hijacking in Services, Process Execution as SYSTEM
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical
+* Notes mein content volume: Finding and exploiting badly configured software (like AVs or updaters) to go from Admin to SYSTEM.
+* Key terms from notes: Unquoted Service Paths, DLL Hijacking, SYSTEM, Service Permissions
+* Explicit emphasis in notes: "Hamesha dhyan rakho, Administrator aakhri manzil nahi hai, SYSTEM aakhri manzil hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Windows Services, SYSTEM, NT AUTHORITY\SYSTEM, Unquoted Service Paths, Weak ACLs, Access Control Lists, binPath, DLL Hijacking, IKEEXT, wpad.dll, Service Execution, LocalSystem, sc query, icacls, PrivEsc enumeration, PowerUp, Seatbelt]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: Admin access milne ke baad, attacker dekhta hai ki system par ek 3rd-party software chal raha hai jiska service path bina quotes (unquoted) ke likha hai (`C:\Program Files\My App\service.exe`). Attacker ek malicious C# executable banata hai jiska naam `My.exe` hota hai aur use `C:\Program Files\` mein drop kar deta hai. Jaise hi PC reboot hota hai, Windows OS us malicious `My.exe` ko as SYSTEM execute kar deta hai, giving the attacker absolute God Mode over the OS.
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Elevating Privileges
+Topic 1: UAC Bypass Techniques (Fodhelper & COM) [⚠️ New]
+Topic 2: Service Misconfigurations & SYSTEM Escalation [⚠️ New]
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 15
+
+--- 🛑 PHASE 19 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+==================================================================================
+
+# Module 20: Payload Evasion & Injection
+
+📦 Processing: Phase/Module 20 — Payload Evasion & Injection
 
 ===Section 1: Memory Execution Tactics===
 Apne malicious payloads ko legitimately dikhne wale processes ke andar chupana.
 
---19--Process Injection & Shellcode Runners--
+--20--Process Injection & Shellcode Runners--
 Topic 1: Static AV Evasion & Custom Crypters (FUD) [⚠️ New]
 Subtopics: Static Signatures vs Heuristics, Entropy Management, Custom Crypters Architecture, Stub vs Builder, XOR/AES Payload Encoding, Obfuscation Techniques, Control Flow Flattening, Code Signing Spoofing, Bloat/Junk Code Injection
 
@@ -2828,18 +2887,18 @@ Topic 5: Module Stomping & Early Bird APC Injection [⚠️ New]
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 5 | Subtopics: 36
 
---- 🛑 PHASE 19 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+--- 🛑 PHASE 20 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ==================================================================================
 
-# Module 20: Unmanaged Code Evasion (Syscalls & Hashing)
+# Module 21: Unmanaged Code Evasion (Syscalls & Hashing)
 
-📦 Processing: Phase/Module 20 — Unmanaged Code Evasion
+📦 Processing: Phase/Module 21 — Unmanaged Code Evasion
 
 ===Section 1: Hiding API Calls from EDR Hooks===
 P/Invoke ki limitations ko cross karna aur direct Windows Kernel se baat karna.
 
---20--Unmanaged Code Evasion--
+--21--Unmanaged Code Evasion--
 Topic 1: API Hashing (Hiding Imports)
 Subtopics: IAT (Import Address Table), Static Analysis, EDR signatures, Hashing API names, Dynamic API Resolution, GetProcAddress, LoadLibrary
 
@@ -2891,18 +2950,18 @@ Topic 2: Direct Syscalls (Bypassing User-Land Hooks)
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 2 | Subtopics: 14
 
---- 🛑 PHASE 20 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+--- 🛑 PHASE 21 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ==================================================================================
 
-# Module 21: Advanced Defense Evasion (EDR/AV Bypass)
+# Module 22: Advanced Defense Evasion (EDR/AV Bypass)
 
-📦 Processing: Phase/Module 21 — Advanced Defense Evasion
+📦 Processing: Phase/Module 22 — Advanced Defense Evasion
 
 ===Section 1: Bypassing Modern Windows Defenses===
 Windows Defender aur EDRs ki aankhon (AMSI aur ETW) mein dhool jhonkna.
 
---21--Advanced Defense Evasion--
+--22--Advanced Defense Evasion--
 Topic 1: AMSI Bypass (Memory Patching)
 Subtopics: AMSI Concept, Anti-Malware Scan Interface, amsi.dll, AmsiScanBuffer, Memory Patching, VirtualProtect, Hex/Byte Patching, EDR hooking, Reflection Bypass
 
@@ -2997,18 +3056,83 @@ Topic 4: WDAC & AppLocker Bypasses (Application Whitelisting) [⚠️ New]
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 4 | Subtopics: 32
 
---- 🛑 PHASE 21 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+--- 🛑 PHASE 22 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ==================================================================================
 
-# Module 22: Initial Access & Payload Delivery
+# Module 23: OPSEC & Automated Infrastructure (Red Team DevOps)
 
-📦 Processing: Phase/Module 22 — Initial Access & Payload Delivery
+📦 Processing: Phase/Module 23 — Infrastructure OPSEC
+
+===Section 1: Untraceable C2 Infrastructure===
+Blue team/Law enforcement se bachne ke liye disposable aur highly anonymized servers setup karna.
+
+--23--OPSEC & Automated Infrastructure--
+Topic 1: Infrastructure as Code (Terraform & Ansible) [⚠️ New]
+Subtopics: Red Team DevOps, Terraform, Ansible, Disposable Infrastructure, Automated VPS Deployment, Rapid Rebuilds
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical
+* Notes mein content volume: Writing scripts to automate the deployment of Apache, MySQL, and C2 panels in 2 minutes.
+* Key terms from notes: Terraform, Ansible, IaC, Disposable, VPS
+* Explicit emphasis in notes: "Ek professional attacker apna C2 server manually click karke nahi banata. Agar server burn (block) ho jaye, toh naya server script ke zariye 2 minute mein ready hona chahiye."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Infrastructure as Code, IaC, Red Team DevOps, Terraform, .tf files, Ansible, Playbooks, Automated deployment, DigitalOcean API, AWS EC2, Disposable infrastructure, Burned IP, fast flux, proxy chains, Server provisioning, OPSEC, Operational Security, resilience]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Live Production Phase: Blue Team attacker ka IP block kar deti hai. Attacker apna local `terraform apply` script chalata hai. AWS par naya server banta hai, Ansible uspe Apache aur C2 panel install karta hai, aur DNS records update ho jate hain. 5 minute ke andar naya C2 live ho jata hai aur implants nayi IP par ping karne lagte hain.
+
+Topic 2: Ultimate Anonymity (Tor & Hidden Services) [⚠️ New]
+Subtopics: The Onion Router (Tor), Hidden Services (.onion), Reverse Proxy over Tor, E2E Encryption, Anonymizing Attacker Location
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Notes mein content volume: Routing C2 traffic over the Tor network to completely hide the attacker's server location.
+* Key terms from notes: Tor, .onion, Hidden Service, Anonymity, OPSEC
+* Explicit emphasis in notes: "Agar C2 server ka IP public internet par hai, toh uski hosting company tak pahuanch kar use takedown kiya ja sakta hai. Tor Hidden Services IP expose hi nahi karte."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Tor network, The Onion Router, Hidden Services, .onion domains, Anonymity, OPSEC, Untraceable, Dark Web C2, End-to-End Encryption, Tor proxy, torrc, socat, Proxychains, IP obscuration, Takedown resistance, Law Enforcement Evasion, Bulletproof hosting]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: Attacker apna C2 panel kisi random local server par host karta hai aur usme Tor install karke ek `.onion` hidden service banata hai. Victim machine ka C# implant `Socks5` proxy ya Tor2Web gateways ka use karke us `.onion` address par beacon karta hai. Blue team network logs mein sirf Tor traffic dekhti hai, par yeh nahi jaan paati ki C2 server aakhir physical duniya mein kahan rakha hai.
+
+---
+
+✅ **Notes Guru Skeleton Ready:** Module 31 (Topics 1-2).
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Untraceable C2 Infrastructure [⚠️ Derived]
+Topic 1: Infrastructure as Code (Terraform & Ansible) [⚠️ New]
+Topic 2: Ultimate Anonymity (Tor & Hidden Services) [⚠️ New]
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 11
+
+---
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 24: Initial Access & Payload Delivery
+
+📦 Processing: Phase/Module 24 — Initial Access & Payload Delivery
 
 ===Section 1: Bypassing the Front Door (MFA & SmartScreen)===
 Malware banane ke baad use victim ke PC tak safely pahunchana aur execute karwana (Phishing & Droppers).
 
---22--Initial Access & Payload Delivery--
+--24--Initial Access & Payload Delivery--
 Topic 1: Adversary-in-the-Middle (AiTM) Phishing [⚠️ New]
 Subtopics: AiTM Concept, Bypassing 2FA/MFA, Evilginx2, Phishlets, Session Cookie Theft, Reverse Proxy Phishing, Token Injection
 
@@ -3089,79 +3213,14 @@ Sections: 1 | Topics: 3 | Subtopics: 21
 
 ==================================================================================
 
-# Module 23: OPSEC & Automated Infrastructure (Red Team DevOps)
+# Module 25: Advanced Covert Channels & Infrastructure
 
-📦 Processing: Phase/Module 23 — Infrastructure OPSEC
-
-===Section 1: Untraceable C2 Infrastructure===
-Blue team/Law enforcement se bachne ke liye disposable aur highly anonymized servers setup karna.
-
---23--OPSEC & Automated Infrastructure--
-Topic 1: Infrastructure as Code (Terraform & Ansible) [⚠️ New]
-Subtopics: Red Team DevOps, Terraform, Ansible, Disposable Infrastructure, Automated VPS Deployment, Rapid Rebuilds
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Moderate
-* Coverage Angle: Practical
-* Notes mein content volume: Writing scripts to automate the deployment of Apache, MySQL, and C2 panels in 2 minutes.
-* Key terms from notes: Terraform, Ansible, IaC, Disposable, VPS
-* Explicit emphasis in notes: "Ek professional attacker apna C2 server manually click karke nahi banata. Agar server burn (block) ho jaye, toh naya server script ke zariye 2 minute mein ready hona chahiye."
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Infrastructure as Code, IaC, Red Team DevOps, Terraform, .tf files, Ansible, Playbooks, Automated deployment, DigitalOcean API, AWS EC2, Disposable infrastructure, Burned IP, fast flux, proxy chains, Server provisioning, OPSEC, Operational Security, resilience]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Live Production Phase: Blue Team attacker ka IP block kar deti hai. Attacker apna local `terraform apply` script chalata hai. AWS par naya server banta hai, Ansible uspe Apache aur C2 panel install karta hai, aur DNS records update ho jate hain. 5 minute ke andar naya C2 live ho jata hai aur implants nayi IP par ping karne lagte hain.
-
-Topic 2: Ultimate Anonymity (Tor & Hidden Services) [⚠️ New]
-Subtopics: The Onion Router (Tor), Hidden Services (.onion), Reverse Proxy over Tor, E2E Encryption, Anonymizing Attacker Location
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Conceptual & Practical
-* Notes mein content volume: Routing C2 traffic over the Tor network to completely hide the attacker's server location.
-* Key terms from notes: Tor, .onion, Hidden Service, Anonymity, OPSEC
-* Explicit emphasis in notes: "Agar C2 server ka IP public internet par hai, toh uski hosting company tak pahuanch kar use takedown kiya ja sakta hai. Tor Hidden Services IP expose hi nahi karte."
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[Tor network, The Onion Router, Hidden Services, .onion domains, Anonymity, OPSEC, Untraceable, Dark Web C2, End-to-End Encryption, Tor proxy, torrc, socat, Proxychains, IP obscuration, Takedown resistance, Law Enforcement Evasion, Bulletproof hosting]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Live Production Phase: Attacker apna C2 panel kisi random local server par host karta hai aur usme Tor install karke ek `.onion` hidden service banata hai. Victim machine ka C# implant `Socks5` proxy ya Tor2Web gateways ka use karke us `.onion` address par beacon karta hai. Blue team network logs mein sirf Tor traffic dekhti hai, par yeh nahi jaan paati ki C2 server aakhir physical duniya mein kahan rakha hai.
-
----
-
-✅ **Notes Guru Skeleton Ready:** Module 31 (Topics 1-2).
-
-📋 EXTRACTED IN THIS PHASE:
-
-Section 1: Untraceable C2 Infrastructure [⚠️ Derived]
-Topic 1: Infrastructure as Code (Terraform & Ansible) [⚠️ New]
-Topic 2: Ultimate Anonymity (Tor & Hidden Services) [⚠️ New]
-
-📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 11
-
----
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-# Module 24: Advanced Covert Channels & Infrastructure
-
-📦 Processing: Phase/Module 24 — Advanced Covert Channels
+📦 Processing: Phase/Module 25 — Advanced Covert Channels
 
 ===Section 1: Bypassing Advanced Network Defenses===
 Jab HTTP/HTTPS blocked ho ya deeply inspected ho, tab DNS, ICMP aur CDNs ka use karke C2 traffic ko chhipana.
 
---24--Advanced Covert Channels & Infrastructure--
+--25--Advanced Covert Channels & Infrastructure--
 Topic 1: DNS & ICMP Tunneling (Stealth Networking) [⚠️ New]
 Subtopics: DNS Tunneling Concept, TXT/A Records Exfiltration, ICMP Payload Injection, Ping Tunneling, Network Segmentation Bypass, dnscat2, iodine
 
@@ -3209,14 +3268,14 @@ Subtopics: Domain Fronting Concept, CDN (Content Delivery Network) Routing, Host
 
 ==================================================================================
 
-# Module 25: Active Directory & Identity Exploitation
+# Module 26: Active Directory & Identity Exploitation
 
-📦 Processing: Phase/Module 25 — Active Directory Red Teaming
+📦 Processing: Phase/Module 26 — Active Directory Red Teaming
 
 ===Section 1: Dominating the Windows Domain===
 Network mein aane ke baad Domain Admin banne tak ka safar (BloodHound, Kerberos).
 
---25--Active Directory & Identity Exploitation--
+--26--Active Directory & Identity Exploitation--
 Topic 1: AD Reconnaissance (BloodHound & LDAP) [⚠️ New]
 Subtopics: Active Directory Graph Theory, BloodHound, SharpHound, LDAP Queries, SPN (Service Principal Name) Enumeration, Domain Trusts, GPO Check
 
@@ -3294,14 +3353,14 @@ Sections: 1 | Topics: 3 | Subtopics: 23
 
 ==================================================================================
 
-# Module 26: Lateral Movement & Token Impersonation
+# Module 27: Lateral Movement & Token Impersonation
 
-📦 Processing: Phase/Module 26 — Lateral Movement & Token Impersonation
+📦 Processing: Phase/Module 27 — Lateral Movement & Token Impersonation
 
 ===Section 1: Expanding the Compromise===
 Ek compromised PC (Beachhead) se poore corporate network (Active Directory) mein phailna.
 
---26--Lateral Movement & Token Impersonation--
+--27--Lateral Movement & Token Impersonation--
 Topic 1: Access Token Impersonation & PrivEsc
 Subtopics: Access Tokens Concept, LogonUser, ImpersonateLoggedOnUser, DuplicateTokenEx, SYSTEM Escalation, Pass-the-Hash Concept
 
@@ -3377,14 +3436,14 @@ Sections: 1 | Topics: 3 | Subtopics: 16
 
 ==================================================================================
 
-# Module 27: Cloud Evasion & Container Breakouts (AWS/Azure)
+# Module 28: Cloud Evasion & Container Breakouts (AWS/Azure)
 
-📦 Processing: Phase/Module 27 — Cloud & Containers
+📦 Processing: Phase/Module 28 — Cloud & Containers
 
 ===Section 1: Modern Cloud Operations===
 Cloud-hosted environments aur Docker containers ke andar se host/network tak phailna.
 
---27--Cloud Evasion & Container Breakouts--
+--28--Cloud Evasion & Container Breakouts--
 Topic 1: Docker & Kubernetes Escapes [⚠️ New]
 Subtopics: Container Evasion Concept, Privileged Containers, Cap_Sys_Admin, Docker Socket Abuse, Kubelet API, Service Account Tokens
 
@@ -3431,14 +3490,14 @@ Subtopics: Instance Metadata Service (IMDSv1 vs IMDSv2), SSRF to Metadata, Steal
 
 ==================================================================================
 
-# Module 28: Cross-Platform Red Teaming (Linux & macOS)
+# Module 29: Cross-Platform Red Teaming (Linux & macOS)
 
-📦 Processing: Phase/Module 28 — Linux & macOS Payloads
+📦 Processing: Phase/Module 29 — Linux & macOS Payloads
 
 ===Section 1: Expanding Beyond Windows===
 Linux servers aur macOS endpoints ke liye native implants aur persistence create karna.
 
---28--Cross-Platform Red Teaming (Linux & macOS)--
+--29--Cross-Platform Red Teaming (Linux & macOS)--
 Topic 1: Linux Payloads, Persistence & PrivEsc [⚠️ New]
 Subtopics: ELF Binaries, .NET Core Cross-Platform Compile, Python/Go Implants, Cron Jobs, SUID Binaries, LD_PRELOAD Hooking, SSH Authorized Keys Persistence, PAM Backdoors
 
@@ -3485,14 +3544,14 @@ Subtopics: Mach-O Binaries, Dylib Injection/Hijacking, LaunchDaemons & LaunchAge
 
 ==================================================================================
 
-# Module 29: Mobile Device Targeting (Android Focus)
+# Module 30: Mobile Device Targeting (Android Focus)
 
-📦 Processing: Phase/Module 29 — Android Exploitation & C2
+📦 Processing: Phase/Module 30 — Android Exploitation & C2
 
 ===Section 1: Mobile Endpoint Compromise===
 Android devices ke malicious APKs banana, smali patching aur Accessibility Services ka abuse.
 
---29--Mobile Device Targeting (Android Focus)--
+--30--Mobile Device Targeting (Android Focus)--
 Topic 1: APK Reverse Engineering & Smali Patching [⚠️ New]
 Subtopics: APK Structure, APKTool, Dex to Jar, Smali Code, Injecting Metasploit/C2 Payloads into Legitimate Apps, Re-signing APKs
 
@@ -3539,14 +3598,14 @@ Subtopics: Accessibility Service, Screen Scraping, Keylogging on Android, Bypass
 
 ==================================================================================
 
-# Module 30: Physical Red Teaming & Close-Access Operations
+# Module 31: Physical Red Teaming & Close-Access Operations
 
-📦 Processing: Phase/Module 30 — Physical Access
+📦 Processing: Phase/Module 31 — Physical Access
 
 ===Section 1: Hardware-Based Compromise===
 Jab network aur email tightly secured hon, tab target building ke andar ghuskar hardware ke zariye initial access lena.
 
---30--Physical Red Teaming & Close-Access Operations--
+--31--Physical Red Teaming & Close-Access Operations--
 Topic 1: Keystroke Injection (BadUSB) [⚠️ New]
 Subtopics: HID (Human Interface Device) Spoofing, BadUSB, Rubber Ducky, DuckyScript, Bash Bunny, O.MG Cable, Rapid Execution
 
@@ -3604,14 +3663,14 @@ Sections: 1 | Topics: 2 | Subtopics: 13
 
 ==================================================================================
 
-# Module 31: Hypervisor-Level Attacks & Firmware Implants
+# Module 32: Hypervisor-Level Attacks & Firmware Implants
 
-📦 Processing: Phase/Module 31 — Firmware Implants
+📦 Processing: Phase/Module 32 — Firmware Implants
 
 ===Section X: Ultimate Persistence (Firmware & Boot)===
 Operating System se bhi neeche (Ring -1) jakar aisi persistence banana jo OS format hone ke baad bhi zinda rahe.
 
---31--Hypervisor-Level Attacks & Firmware Implants--
+--32--Hypervisor-Level Attacks & Firmware Implants--
 Topic 1: UEFI/BIOS Bootkits & Rootkits (Ring -1) [⚠️ New]
 Subtopics: Boot Process Overview, UEFI vs Legacy BIOS, SPI Flash Modification, SMM (System Management Mode), Bootkits, Hypervisor-level Rootkits, Secure Boot Bypass
 
