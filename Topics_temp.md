@@ -1958,162 +1958,10 @@ Sections: 2 | Topics: 3 | Subtopics: 12
 
 ==================================================================================
 
-# Module 14: Persistence
+# Module 14: PowerShell Command Execution
 
 
-📦 Processing: Phase 2 — Module 12 (Persistence) & Module 13 Intro
-
-===Section 1: Persistence (Module 12)===
-System reboot ke baad bhi target machine par long-term access banaye rakhne ke essential methods.
-
---13--Persistence (Module 12)--
-Topic 1: Persistence Overview
-Subtopics: Persistence Definition, C2 Connection Maintenance, Execution Workflow, Run Keys, Startup Folder, Ransomware Example, Living Off The Land, Common Beginner Mistakes, MITRE ATT&CK TA0003, Sysinternals Autoruns
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Moderate
-* Coverage Angle: Conceptual only
-* Notes mein content volume: Long explanation with multiple bullet points
-* Key terms from notes: Persistence, C2, Command and Control, reboot, Windows Registry, Run keys, Startup Folder, Living off the land, LotL, WMI event subscriptions, DLL hijacking, MITRE ATT&CK Framework, TA0003, Sysinternals Autoruns
-* Explicit emphasis in notes: "permanently" (connection toot jayega), "hamesha" (long-term access)
-* Notes mein jo analogies/examples the: "Ransomware (jaise WannaCry)" example diya gaya tha ki yeh files encrypt karne ke liye persistence use karta hai
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Persistence Overview, victim, system restart, reboot, C2, Command and Control, Windows Registry, Run keys, Startup Folder, Operating System, OS, phishing, one-shot attack, payload, ⭐permanently, Ransomware, WannaCry, encrypt, low-privilege, LotL, living off the land, WMI event subscriptions, DLL hijacking, Antivirus, AVs, shell:startup, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run, MITRE ATT&CK Framework, TA0003 - Persistence, Sysinternals Autoruns]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Solo developer script banata hai jo payload download kare aur uske saath Registry key add kar de taaki boot par chale.
-* Fixing/Iteration Phase: (N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Live Production Phase: Professional Red Team multiple redundant persistence methods use karti hai (e.g., Registry + Scheduled Task) taaki agar ek clean ho jaaye toh doosra active rahe. Ransomware (WannaCry) persistence use karta hai taaki reboot hone par bhi encryption jaari rahe.
-* Additional context: Hamesha reboot ke baad test karna chahiye ki C2 connection wapas aata hai ya nahi.
-
-Topic 2: Windows Registry Persistence (Run Key)
-Subtopics: Windows Registry Run Key, Execution Process, HKLM vs HKCU, Dynamic Execution Path, Hardcoded Path Issue, Obvious Name Mistake, Advanced Evasion Techniques, Registry Steps Recap
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Notes mein content volume: Long explanation with C# code, step-by-step breakdown, and recap summary
-* Key terms from notes: HKEY_CURRENT_USER, HKCU, HKEY_LOCAL_MACHINE, HKLM, Run key, payload.exe, Microsoft.Win32, RegistryKey, System.Reflection.Assembly.GetExecutingAssembly().Location, OpenSubKey, SetValue, Admin rights, WMI Event Subscription, COM Hijacking, regedit
-* Explicit emphasis in notes: "permanently", "turant" karna chahiye, HKCU over HKLM
-* Notes mein jo analogies/examples the: "JavaUpdater" ya "TeamsHelper" jaisa legitimate naam rakhne ka example diya tha; RunOnce aur Policies\Explorer\Run ko less common alternatives bataya
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[Windows Registry, Run Key, HKEY_LOCAL_MACHINE, HKLM, HKEY_CURRENT_USER, HKCU, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run, payload.exe, C#, Microsoft.Win32, RegistryKey, System.Windows.Forms, System.Reflection.Assembly.GetExecutingAssembly().Location, OpenSubKey, CreateSubKey, SetValue, regedit, Access Denied, Hardcoded Path, AppData, ProgramData, Dropper, RunOnce, ...Policies\Explorer\Run, Antivirus, AVs, EDRs, WMI Event Subscription, COM Hijacking, Registry.GetValue(), Registry.DeleteValue(), `using Microsoft.Win32;`, `string keyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";`, `string valueName = "MyEthicalApp";`, `string executablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;`, `using (RegistryKey rk = Registry.CurrentUser.OpenSubKey(keyPath, true))`, `rk.SetValue(valueName, executablePath);`, `Console.WriteLine($"[+] Persistence added to Registry: {keyPath}");`, `catch (Exception ex)`]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Solo developer ek 'dropper' banata hai jo main payload ko AppData mein copy karke HKCU\Run key set karta hai.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: Red Team standard HKCU\Run ko avoid karti hai kyunki yeh monitored hota hai, aur evasion ke liye "less common" keys (RunOnce) use karti hai. Persistence target system par drop hote hi recon ke baad pehla step hota hai.
-* Additional context: HKCU ko prefer kiya jaata hai taaki admin prompt na aaye. Legitimate software names (e.g., Teams Updater) aur normal folders (AppData) use karne chahiye stealth ke liye.
-
-Topic 3: Startup Folder Persistence
-Subtopics: Startup Folder Persistence, Environment Path Resolution, File Copy Operation, Admin vs Current User Startup, File Already Exists Error, Payload Obfuscation, Lnk Shortcut Evasion
-
-[📊 SCOPE SIGNAL for Topic 3:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Notes mein content volume: Long explanation with C# code and alternative workflow tips
-* Key terms from notes: Startup folder, Environment.GetFolderPath, SpecialFolder.Startup, System.IO, File.Copy, Path.Combine, shell:startup, CommonStartup, overwriting flag, .lnk file, Locky
-* Explicit emphasis in notes: Overwrite flag `true` na lagana crash kar sakta hai; CommonStartup ke liye Admin rights chahiye
-* Notes mein jo analogies/examples the: Locky ransomware ka example diya jo Startup folder mein .vbs script rakhta tha payload download karne ke liye
-]
-
-🔑 KEYWORDS DUMP for Topic 3:
-[Startup Folder, Registry editing, low-tech, Environment.GetFolderPath, Environment.SpecialFolder.Startup, System.Reflection.Assembly.GetExecutingAssembly().Location, AppData, .lnk file, Shortcut, System.IO, Path.Combine, File.Copy, overwrite, shell:startup, CommonStartup, Environment.SpecialFolder.CommonStartup, Admin rights, Obfuscation, updater.exe, OneDriveHelper.exe, Locky ransomware, .vbs file, COM objects, Sysinternals Autoruns, shell:common startup, `string startupFolder = Environment.GetFolderPath(Environment.SpecialFolder.Startup);`, `string destinationFilePath = Path.Combine(startupFolder, Path.GetFileName(sourceFilePath));`, `File.Copy(sourceFilePath, destinationFilePath, true);`]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-
-* Testing/Offline Phase: Solo researcher is method ko quick testing aur simple persistence ke liye use karta hai kyunki ise code karna bahut aasan hai.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: Professional Red Team pure .exe ko copy karne ke bajaay ek .lnk (Shortcut) file banati hai jismein legitimate icon hota hai taaki user ko shaq na ho. Locky jaisa ransomware startup folder mein script daalta tha jo boot par actual payload internet se laati thi.
-* Additional context: Environment.SpecialFolder.Startup hamesha use karein (non-admin). File.Copy mein 'true' flag lagana zaroori hai overwrite ke liye.
-
-===Section 2: File System Manipulations Intro (Module 13) [⚠️ Derived]===
-Victim machine par files ke saath interact karne ka initial overview. [⚠️ Derived]
-
---13--File System Manipulations Intro--
-Topic 4: Module 13 File System Overview [⚠️ Derived]
-Subtopics: File System Manipulation, Payload Downloading, Directory Enumeration Commands
-
-[📊 SCOPE SIGNAL for Topic 4:
-
-* Depth Level: Surface
-* Coverage Angle: Conceptual only
-* Notes mein content volume: Sirf 1-2 lines ki introduction
-* Key terms from notes: Module 13, file system, C2 server, payloads, dir, ls
-* Explicit emphasis in notes: None
-* Notes mein jo analogies/examples the: None
-]
-
-🔑 KEYWORDS DUMP for Topic 4:
-[Module 13, file system, khilwaad, C2 server, payloads, download, victim machine, dir, ls, commands]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
-
-* Testing/Offline Phase: (N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: (N/A)
-* Additional context: (N/A)
-
---- 🛑 PHASE 13 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
-
-✅ **Double-check steps performed:**
-
-* [x] Poore notes completely padhe bina kuch skip kiye.
-* [x] Notes ko Sections mein group kiya — related topics ek Section mein hain.
-* [x] Har Section ka tagline/context line add kiya.
-* [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-* [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-* [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
-* [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-* [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya (Module 12.2 & 11.3 merged, Module 13 intro grouped).
-* [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-* [x] Chronological order preserved.
-* [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
-* [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-* [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
-* [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-* [x] Diagrams/tables reproduced ya flagged — (N/A).
-* [x] OCR quality warning di agar 20%+ content unclear tha — (N/A).
-* [x] Phase tracking aur CONTINUE protocol follow kiya.
-* [x] Output limit aane se pehle ruka.
-* [x] Chhote aur related concepts ko ek broad Topic mein merge kiya (Topic 11.2 aur 11.3 ko ek hi Topic mein extract kiya).
-
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
-
-📋 EXTRACTED IN THIS PHASE:
-
-Section 1: Persistence (Module 12)
-Topic 1: Persistence Overview
-Topic 2: Windows Registry Persistence (Run Key)
-Topic 3: Startup Folder Persistence
-Topic 4: Module 13 File System Overview [⚠️ Derived]
-
-Section 2: File System Manipulations Intro (Module 13) [⚠️ Derived]
-Topic 1: Persistence Overview
-Topic 2: Windows Registry Persistence (Run Key)
-Topic 3: Startup Folder Persistence
-Topic 4: Module 13 File System Overview [⚠️ Derived]
-
-📊 PHASE SUMMARY:
-Sections: 2 | Topics: 4 | Subtopics: 28
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-# Module 15: PowerShell Command Execution
-
-
-📦 **Processing: Phase 2 — PowerShell Command Execution (Module 15) [⚠️ Derived]**
+📦 **Processing: Phase 2 — PowerShell Command Execution (Module 14) [⚠️ Derived]**
 
 ===Section 2: C2 Command Execution Engine (PowerShell) [⚠️ Derived]===
 C2 implant ka core brain — victim system par remotely commands run karna aur output wapas bhejna using LotL techniques. [⚠️ Derived]
@@ -2257,10 +2105,10 @@ Sections: 1 | Topics: 5 | Subtopics: 37
 
 ==================================================================================
 
-# Module 16: Core Utility Functions
+# Module 15: Core Utility Functions
 
 
-📦 **Processing: Phase 2 — Core Utility Functions (Module 16)**
+📦 **Processing: Phase 2 — Core Utility Functions (Module 15)**
 
 ===Section 1: Core Utility Functions (DRY Principle) [⚠️ Derived]===
 Pichle modules ke code ko reusable 'Utils' mein badalna jo implant ka dil (core) banenge. [⚠️ Derived]
@@ -2425,6 +2273,158 @@ Sections: 1 | Topics: 6 | Subtopics: 68
 
 ⏳ **Waiting for:** Next phase/module notes
 
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 16: Persistence
+
+
+📦 Processing: Phase 2 — Module 12 (Persistence) & Module 13 Intro
+
+===Section 1: Persistence (Module 12)===
+System reboot ke baad bhi target machine par long-term access banaye rakhne ke essential methods.
+
+--13--Persistence (Module 12)--
+Topic 1: Persistence Overview
+Subtopics: Persistence Definition, C2 Connection Maintenance, Execution Workflow, Run Keys, Startup Folder, Ransomware Example, Living Off The Land, Common Beginner Mistakes, MITRE ATT&CK TA0003, Sysinternals Autoruns
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual only
+* Notes mein content volume: Long explanation with multiple bullet points
+* Key terms from notes: Persistence, C2, Command and Control, reboot, Windows Registry, Run keys, Startup Folder, Living off the land, LotL, WMI event subscriptions, DLL hijacking, MITRE ATT&CK Framework, TA0003, Sysinternals Autoruns
+* Explicit emphasis in notes: "permanently" (connection toot jayega), "hamesha" (long-term access)
+* Notes mein jo analogies/examples the: "Ransomware (jaise WannaCry)" example diya gaya tha ki yeh files encrypt karne ke liye persistence use karta hai
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Persistence Overview, victim, system restart, reboot, C2, Command and Control, Windows Registry, Run keys, Startup Folder, Operating System, OS, phishing, one-shot attack, payload, ⭐permanently, Ransomware, WannaCry, encrypt, low-privilege, LotL, living off the land, WMI event subscriptions, DLL hijacking, Antivirus, AVs, shell:startup, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run, MITRE ATT&CK Framework, TA0003 - Persistence, Sysinternals Autoruns]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Solo developer script banata hai jo payload download kare aur uske saath Registry key add kar de taaki boot par chale.
+* Fixing/Iteration Phase: (N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+* Live Production Phase: Professional Red Team multiple redundant persistence methods use karti hai (e.g., Registry + Scheduled Task) taaki agar ek clean ho jaaye toh doosra active rahe. Ransomware (WannaCry) persistence use karta hai taaki reboot hone par bhi encryption jaari rahe.
+* Additional context: Hamesha reboot ke baad test karna chahiye ki C2 connection wapas aata hai ya nahi.
+
+Topic 2: Windows Registry Persistence (Run Key)
+Subtopics: Windows Registry Run Key, Execution Process, HKLM vs HKCU, Dynamic Execution Path, Hardcoded Path Issue, Obvious Name Mistake, Advanced Evasion Techniques, Registry Steps Recap
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Long explanation with C# code, step-by-step breakdown, and recap summary
+* Key terms from notes: HKEY_CURRENT_USER, HKCU, HKEY_LOCAL_MACHINE, HKLM, Run key, payload.exe, Microsoft.Win32, RegistryKey, System.Reflection.Assembly.GetExecutingAssembly().Location, OpenSubKey, SetValue, Admin rights, WMI Event Subscription, COM Hijacking, regedit
+* Explicit emphasis in notes: "permanently", "turant" karna chahiye, HKCU over HKLM
+* Notes mein jo analogies/examples the: "JavaUpdater" ya "TeamsHelper" jaisa legitimate naam rakhne ka example diya tha; RunOnce aur Policies\Explorer\Run ko less common alternatives bataya
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Windows Registry, Run Key, HKEY_LOCAL_MACHINE, HKLM, HKEY_CURRENT_USER, HKCU, HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run, payload.exe, C#, Microsoft.Win32, RegistryKey, System.Windows.Forms, System.Reflection.Assembly.GetExecutingAssembly().Location, OpenSubKey, CreateSubKey, SetValue, regedit, Access Denied, Hardcoded Path, AppData, ProgramData, Dropper, RunOnce, ...Policies\Explorer\Run, Antivirus, AVs, EDRs, WMI Event Subscription, COM Hijacking, Registry.GetValue(), Registry.DeleteValue(), `using Microsoft.Win32;`, `string keyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";`, `string valueName = "MyEthicalApp";`, `string executablePath = System.Reflection.Assembly.GetExecutingAssembly().Location;`, `using (RegistryKey rk = Registry.CurrentUser.OpenSubKey(keyPath, true))`, `rk.SetValue(valueName, executablePath);`, `Console.WriteLine($"[+] Persistence added to Registry: {keyPath}");`, `catch (Exception ex)`]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Solo developer ek 'dropper' banata hai jo main payload ko AppData mein copy karke HKCU\Run key set karta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Red Team standard HKCU\Run ko avoid karti hai kyunki yeh monitored hota hai, aur evasion ke liye "less common" keys (RunOnce) use karti hai. Persistence target system par drop hote hi recon ke baad pehla step hota hai.
+* Additional context: HKCU ko prefer kiya jaata hai taaki admin prompt na aaye. Legitimate software names (e.g., Teams Updater) aur normal folders (AppData) use karne chahiye stealth ke liye.
+
+Topic 3: Startup Folder Persistence
+Subtopics: Startup Folder Persistence, Environment Path Resolution, File Copy Operation, Admin vs Current User Startup, File Already Exists Error, Payload Obfuscation, Lnk Shortcut Evasion
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Long explanation with C# code and alternative workflow tips
+* Key terms from notes: Startup folder, Environment.GetFolderPath, SpecialFolder.Startup, System.IO, File.Copy, Path.Combine, shell:startup, CommonStartup, overwriting flag, .lnk file, Locky
+* Explicit emphasis in notes: Overwrite flag `true` na lagana crash kar sakta hai; CommonStartup ke liye Admin rights chahiye
+* Notes mein jo analogies/examples the: Locky ransomware ka example diya jo Startup folder mein .vbs script rakhta tha payload download karne ke liye
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Startup Folder, Registry editing, low-tech, Environment.GetFolderPath, Environment.SpecialFolder.Startup, System.Reflection.Assembly.GetExecutingAssembly().Location, AppData, .lnk file, Shortcut, System.IO, Path.Combine, File.Copy, overwrite, shell:startup, CommonStartup, Environment.SpecialFolder.CommonStartup, Admin rights, Obfuscation, updater.exe, OneDriveHelper.exe, Locky ransomware, .vbs file, COM objects, Sysinternals Autoruns, shell:common startup, `string startupFolder = Environment.GetFolderPath(Environment.SpecialFolder.Startup);`, `string destinationFilePath = Path.Combine(startupFolder, Path.GetFileName(sourceFilePath));`, `File.Copy(sourceFilePath, destinationFilePath, true);`]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Solo researcher is method ko quick testing aur simple persistence ke liye use karta hai kyunki ise code karna bahut aasan hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Professional Red Team pure .exe ko copy karne ke bajaay ek .lnk (Shortcut) file banati hai jismein legitimate icon hota hai taaki user ko shaq na ho. Locky jaisa ransomware startup folder mein script daalta tha jo boot par actual payload internet se laati thi.
+* Additional context: Environment.SpecialFolder.Startup hamesha use karein (non-admin). File.Copy mein 'true' flag lagana zaroori hai overwrite ke liye.
+
+===Section 2: File System Manipulations Intro (Module 13) [⚠️ Derived]===
+Victim machine par files ke saath interact karne ka initial overview. [⚠️ Derived]
+
+--13--File System Manipulations Intro--
+Topic 4: Module 13 File System Overview [⚠️ Derived]
+Subtopics: File System Manipulation, Payload Downloading, Directory Enumeration Commands
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Surface
+* Coverage Angle: Conceptual only
+* Notes mein content volume: Sirf 1-2 lines ki introduction
+* Key terms from notes: Module 13, file system, C2 server, payloads, dir, ls
+* Explicit emphasis in notes: None
+* Notes mein jo analogies/examples the: None
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Module 13, file system, khilwaad, C2 server, payloads, download, victim machine, dir, ls, commands]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: (N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: (N/A)
+* Additional context: (N/A)
+
+--- 🛑 PHASE 13 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Double-check steps performed:**
+
+* [x] Poore notes completely padhe bina kuch skip kiye.
+* [x] Notes ko Sections mein group kiya — related topics ek Section mein hain.
+* [x] Har Section ka tagline/context line add kiya.
+* [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
+* [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
+* [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
+* [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
+* [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya (Module 12.2 & 11.3 merged, Module 13 intro grouped).
+* [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
+* [x] Chronological order preserved.
+* [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
+* [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
+* [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya.
+* [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
+* [x] Diagrams/tables reproduced ya flagged — (N/A).
+* [x] OCR quality warning di agar 20%+ content unclear tha — (N/A).
+* [x] Phase tracking aur CONTINUE protocol follow kiya.
+* [x] Output limit aane se pehle ruka.
+* [x] Chhote aur related concepts ko ek broad Topic mein merge kiya (Topic 11.2 aur 11.3 ko ek hi Topic mein extract kiya).
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Persistence (Module 12)
+Topic 1: Persistence Overview
+Topic 2: Windows Registry Persistence (Run Key)
+Topic 3: Startup Folder Persistence
+Topic 4: Module 13 File System Overview [⚠️ Derived]
+
+Section 2: File System Manipulations Intro (Module 13) [⚠️ Derived]
+Topic 1: Persistence Overview
+Topic 2: Windows Registry Persistence (Run Key)
+Topic 3: Startup Folder Persistence
+Topic 4: Module 13 File System Overview [⚠️ Derived]
+
+📊 PHASE SUMMARY:
+Sections: 2 | Topics: 4 | Subtopics: 28
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
