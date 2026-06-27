@@ -2713,15 +2713,34 @@ Sections: 1 | Topics: 4 | Subtopics: 87
 
 ==================================================================================
 
-# Module 19: Process Injection & Shellcode Runners
+# Module 19: Payload Evasion & Injection
 
-📦 Processing: Phase/Module 19 — Process Injection & Shellcode Runners
+📦 Processing: Phase/Module 19 — Payload Evasion & Injection
 
 ===Section 1: Memory Execution Tactics===
 Apne malicious payloads ko legitimately dikhne wale processes ke andar chupana.
 
 --19--Process Injection & Shellcode Runners--
-Topic 1: Local Shellcode Runner Basics
+Topic 1: Static AV Evasion & Custom Crypters (FUD) [⚠️ New]
+Subtopics: Static Signatures vs Heuristics, Entropy Management, Custom Crypters Architecture, Stub vs Builder, XOR/AES Payload Encoding, Obfuscation Techniques, Control Flow Flattening, Code Signing Spoofing, Bloat/Junk Code Injection
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed breakdown of bypassing disk-based static AV scans before attempting in-memory execution.
+* Key terms from notes: Static Analysis, Signatures, Crypter, Entropy, Obfuscation, FUD
+* Explicit emphasis in notes: "Memory mein AMSI bypass karne se pehle tumhari .exe ko disk par AV se bachna hoga. High entropy AV ka sabse bada red flag hai."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Antivirus, AV Bypass, Static Signatures, Heuristic Analysis, Custom Crypter, Packer, Entropy, Shannon Entropy, XOR Encoding, AES encryption, Obfuscation, Control Flow Flattening, String Encryption, ConfuserEx, Code Signing, SigThief, Dropper, Stub, Builder, FUD, Fully Undetectable, Junk Code, Resource stuffing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Live Production Phase: Attacker apne C# payload (Cobalt Strike / Meterpreter) ko raw byte array mein convert karta hai, XOR/AES se encrypt karta hai, aur ek custom 'Stub' likhta hai. Compile hone ke baad, file ki entropy artificially reduce ki jati hai (e.g., adding English dictionary words as junk data/resources) aur `SigThief` ka use karke ek fake Microsoft certificate se sign kiya jata hai taaki Defender disk scan karte waqt isko legitimate maane aur quarantine na kare.
+
+Topic 2: Local Shellcode Runner Basics
 Subtopics: Shellcode Concept, MSFVenom/Cobalt Strike Payloads, Memory Allocation, VirtualAlloc, Marshal.Copy, Memory Execution, CreateThread, PAGE_EXECUTE_READWRITE
 
 [📊 SCOPE SIGNAL for Topic 1:
@@ -2740,7 +2759,7 @@ Subtopics: Shellcode Concept, MSFVenom/Cobalt Strike Payloads, Memory Allocation
 
 * Live Production Phase: Attacker C2 se ek raw shellcode (Meterpreter) bhejta hai. C# implant `VirtualAlloc` se apni hi memory space mein jagah banata hai, shellcode copy karta hai, aur `CreateThread` se execute kar deta hai.
 
-Topic 2: Remote Process Injection
+Topic 3: Remote Process Injection
 Subtopics: Remote Injection Concept, Target Process Selection, OpenProcess, VirtualAllocEx, WriteProcessMemory, CreateRemoteThread, Cross-Process interaction
 
 [📊 SCOPE SIGNAL for Topic 2:
@@ -2759,7 +2778,7 @@ Subtopics: Remote Injection Concept, Target Process Selection, OpenProcess, Virt
 
 * Live Production Phase: C2 implant background mein `notepad.exe` start karta hai, uski PID ka access (`OpenProcess`) leta hai, uske andar memory allocate (`VirtualAllocEx`) karke payload likhta hai, aur usi notepad ke andar payload chalu kar deta hai. Agar koi Task Manager dekhe, toh sirf Notepad chal raha hota hai.
 
-Topic 3: Process Hollowing & Reflective DLL Injection
+Topic 4: Process Hollowing & Reflective DLL Injection
 Subtopics: Process Hollowing Concept, CreateProcess Suspended, UnmapViewOfSection, Reflective DLL Loading, PE Headers manipulation
 
 [📊 SCOPE SIGNAL for Topic 3:
@@ -2774,7 +2793,7 @@ Subtopics: Process Hollowing Concept, CreateProcess Suspended, UnmapViewOfSectio
 🔑 KEYWORDS DUMP for Topic 3:
 [Process Hollowing, CreateProcess, CREATE_SUSPENDED, NtUnmapViewOfSection, hollow out, PE replacement, SetThreadContext, ResumeThread, Reflective DLL Injection, memory-only execution, PE Headers, DOS Header, NT Header, MZ signature, diskless execution, advanced evasion]
 
-Topic 4: Module Stomping & Early Bird APC Injection [⚠️ New]
+Topic 5: Module Stomping & Early Bird APC Injection [⚠️ New]
 Subtopics: Module Stomping Concept, DLL Overwriting, Asynchronous Procedure Calls (APC), Early Bird APC, QueueUserAPC, Thread Hijacking, OPSEC of RWX Memory
 
 [📊 SCOPE SIGNAL for Topic 4:
@@ -2800,13 +2819,14 @@ Subtopics: Module Stomping Concept, DLL Overwriting, Asynchronous Procedure Call
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Memory Execution Tactics [⚠️ Derived]
-Topic 1: Local Shellcode Runner Basics
-Topic 2: Remote Process Injection
-Topic 3: Process Hollowing & Reflective DLL Injection
-Topic 4: Module Stomping & Early Bird APC Injection [⚠️ New]
+Topic 1: Static AV Evasion & Custom Crypters (FUD) [⚠️ New]
+Topic 2: Local Shellcode Runner Basics
+Topic 3: Remote Process Injection
+Topic 4: Process Hollowing & Reflective DLL Injection
+Topic 5: Module Stomping & Early Bird APC Injection [⚠️ New]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 27
+Sections: 1 | Topics: 5 | Subtopics: 36
 
 --- 🛑 PHASE 19 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -2883,26 +2903,7 @@ Sections: 1 | Topics: 2 | Subtopics: 14
 Windows Defender aur EDRs ki aankhon (AMSI aur ETW) mein dhool jhonkna.
 
 --21--Advanced Defense Evasion--
-Topic 1: Static AV Evasion & Custom Crypters (FUD) [⚠️ New]
-Subtopics: Static Signatures vs Heuristics, Entropy Management, Custom Crypters Architecture, Stub vs Builder, XOR/AES Payload Encoding, Obfuscation Techniques, Control Flow Flattening, Code Signing Spoofing, Bloat/Junk Code Injection
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Notes mein content volume: Detailed breakdown of bypassing disk-based static AV scans before attempting in-memory execution.
-* Key terms from notes: Static Analysis, Signatures, Crypter, Entropy, Obfuscation, FUD
-* Explicit emphasis in notes: "Memory mein AMSI bypass karne se pehle tumhari .exe ko disk par AV se bachna hoga. High entropy AV ka sabse bada red flag hai."
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Antivirus, AV Bypass, Static Signatures, Heuristic Analysis, Custom Crypter, Packer, Entropy, Shannon Entropy, XOR Encoding, AES encryption, Obfuscation, Control Flow Flattening, String Encryption, ConfuserEx, Code Signing, SigThief, Dropper, Stub, Builder, FUD, Fully Undetectable, Junk Code, Resource stuffing]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Live Production Phase: Attacker apne C# payload (Cobalt Strike / Meterpreter) ko raw byte array mein convert karta hai, XOR/AES se encrypt karta hai, aur ek custom 'Stub' likhta hai. Compile hone ke baad, file ki entropy artificially reduce ki jati hai (e.g., adding English dictionary words as junk data/resources) aur `SigThief` ka use karke ek fake Microsoft certificate se sign kiya jata hai taaki Defender disk scan karte waqt isko legitimate maane aur quarantine na kare.
-
-Topic 2: AMSI Bypass (Memory Patching)
+Topic 1: AMSI Bypass (Memory Patching)
 Subtopics: AMSI Concept, Anti-Malware Scan Interface, amsi.dll, AmsiScanBuffer, Memory Patching, VirtualProtect, Hex/Byte Patching, EDR hooking, Reflection Bypass
 
 [📊 SCOPE SIGNAL for Topic 2:
@@ -2924,7 +2925,7 @@ Subtopics: AMSI Concept, Anti-Malware Scan Interface, amsi.dll, AmsiScanBuffer, 
 * Fixing/Iteration Phase: Developer `AmsiScanBuffer` function ko memory mein dhundta hai aur uski shuruaat mein "Return / Invalid Args" ke bytes patch kar deta hai.
 * Live Production Phase: Payload chalne se pehle AMSI bypass function call hota hai. AMSI andha ho jata hai, aur uske baad C2 se koi bhi malicious DLL (jaise keylogger) in-memory bina alert ke load ho jati hai.
 
-Topic 3: ETW Blinding (Event Tracing for Windows)
+Topic 2: ETW Blinding (Event Tracing for Windows)
 Subtopics: ETW Concept, System Telemetry, ntdll.dll, EtwEventWrite, Blue Team Logging, Sysmon, Memory Patching ETW
 
 [📊 SCOPE SIGNAL for Topic 3:
@@ -2943,7 +2944,7 @@ Subtopics: ETW Concept, System Telemetry, ntdll.dll, EtwEventWrite, Blue Team Lo
 
 * Live Production Phase: Malware execute hone par pehla step AMSI patch karna hota hai, aur doosra step `EtwEventWrite` ko patch karke `return (0xC3)` set karna hota hai. Iske baad malware jo bhi process banata hai ya network call karta hai, uski telemetry Blue Team ke SIEM dashboard tak pahunchti hi nahi.
 
-Topic 4: Kernel-Level Evasion (BYOVD & PPL Bypass) [⚠️ New]
+Topic 3: Kernel-Level Evasion (BYOVD & PPL Bypass) [⚠️ New]
 Subtopics: Kernel Mode vs User Mode, Ring 0 Execution, Bring Your Own Vulnerable Driver (BYOVD), RTCore64.sys, LSA Protection Bypass, Protected Process Light (PPL), EDR Telemetry Blinding, Driver Signature Enforcement (DSE)
 
 [📊 SCOPE SIGNAL for Topic 4:
@@ -2962,7 +2963,7 @@ Subtopics: Kernel Mode vs User Mode, Ring 0 Execution, Bring Your Own Vulnerable
 
 * Live Production Phase: Attacker system par ek officially signed (but vulnerable) ASUS driver (RTCore64.sys) drop karta hai. Implant us driver ke through kernel (Ring 0) memory mein arbitrary read/write exploit run karta hai, aur CrowdStrike/Defender EDR agent ke kernel callbacks ko disable kar deta hai. EDR chalu dikhta hai, par actually andha ho chuka hota hai.
 
-Topic 5: WDAC & AppLocker Bypasses (Application Whitelisting) [⚠️ New]
+Topic 4: WDAC & AppLocker Bypasses (Application Whitelisting) [⚠️ New]
 Subtopics: Application Whitelisting (AWL) Concepts, Windows Defender Application Control (WDAC), AppLocker Policies, LOLBins (Living Off The Land Binaries), MSBuild.exe Abuse, InstallUtil.exe Evasion, Regasm/Regsvcs Execution, COM Scriptlets (.sct)
 
 [📊 SCOPE SIGNAL for Topic 5:
@@ -2988,14 +2989,13 @@ Subtopics: Application Whitelisting (AWL) Concepts, Windows Defender Application
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Bypassing Modern Windows Defenses [⚠️ Derived]
-Topic 1: Static AV Evasion & Custom Crypters (FUD) [⚠️ New]
-Topic 2: AMSI Bypass (Memory Patching)
-Topic 3: ETW Blinding (Event Tracing for Windows)
-Topic 4: Kernel-Level Evasion (BYOVD & PPL Bypass) [⚠️ New]
-Topic 5: WDAC & AppLocker Bypasses (Application Whitelisting) [⚠️ New]
+Topic 1: AMSI Bypass (Memory Patching)
+Topic 2: ETW Blinding (Event Tracing for Windows)
+Topic 3: Kernel-Level Evasion (BYOVD & PPL Bypass) [⚠️ New]
+Topic 4: WDAC & AppLocker Bypasses (Application Whitelisting) [⚠️ New]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 41
+Sections: 1 | Topics: 4 | Subtopics: 32
 
 --- 🛑 PHASE 21 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
