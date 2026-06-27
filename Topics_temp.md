@@ -1932,7 +1932,7 @@ Sections: 1 | Topics: 4 | Subtopics: 24
 
 ==================================================================================
 
-# Module 14: 
+# Module 14: PowerShell Command Execution
 
 
 📦 **Processing: Phase 2 — PowerShell Command Execution (Module 14) [⚠️ Derived]**
@@ -2080,7 +2080,7 @@ Sections: 1 | Topics: 5 | Subtopics: 38
 ==================================================================================
 
 
-# Module 15: 
+# Module 15: C2 Implant Engine & Persistent Communication
 
 
 📦 **Processing: Phase 1 — C2 Implant Engine (Module 15)**
@@ -2182,7 +2182,7 @@ Sections: 1 | Topics: 3 | Subtopics: 33
 
 
 
-# Module 16: 
+# Module 16: Core Utility Functions
 
 
 📦 **Processing: Phase 2 — Core Utility Functions (Module 16)**
@@ -2355,7 +2355,7 @@ Sections: 1 | Topics: 6 | Subtopics: 74
 
 ==================================================================================
 
-# Module 17:
+# Module 17: Advanced Implant Techniques (Keylogging & Anti-Forensics)
 
 
 📦 Processing: Phase/Module 17 — C# Ethical Malware Dev (Beginner-to-Intermediate)
@@ -2462,7 +2462,7 @@ Sections: 1 | Topics: 3 | Subtopics: 46
 ==================================================================================
 
 
-# Module 18: 
+# Module 18: Advanced Data Capture & Operational Security
 
 
 📦 Processing: Phase/Module 18 — C# Ethical Malware Dev (Beginner-to-Intermediate)
