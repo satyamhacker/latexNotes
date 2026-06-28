@@ -1440,7 +1440,8 @@ Subtopics: Allure Framework, allure-pytest, Rich HTML Reports, Attachments (Logs
 * Fixing/Iteration Phase: Test fail hone par Allure report ke andar hi API ka poora request aur response JSON directly attached mil jata hai, terminal dekhne ki zaroorat nahi padti.
 * Live Production Phase: Managers dashboard par historical trend dekhte hain ki pichle 10 din se API pass % badh raha hai ya gir raha hai.
 
-Topic 2: CI/CD Pipelines (GitHub Actions / Jenkins YAML) [⚠️ Derived]
+Topic 2: CI/CD Pipelines (GitHub Actions / Jenkins YAML)
+Topic 3: Enterprise Code Quality & Git Hooks (`pre-commit`, `ruff`, `mypy`) [⚠️ Derived]
 Subtopics: Continuous Integration, GitHub Actions, workflow.yml, Pipeline Stages, Code Checkout, Environment Setup, Dependency Install, Test Execution, Publishing Reports, Pipeline Gates, Artifacts
 
 [📊 SCOPE SIGNAL for Topic 2:
@@ -1462,6 +1463,28 @@ Subtopics: Continuous Integration, GitHub Actions, workflow.yml, Pipeline Stages
 * Fixing/Iteration Phase: Developer ne code push kiya, GitHub Actions ne naya container banaya, dependencies install ki, tests run kiye. Agar ek bhi test fail hua, toh pipeline "Red" (Fail) ho jayegi aur code merge hone se rok degi (Quality Gate).
 * Live Production Phase: Regression suite automatically raat 12 baje (Cron job) chalta hai aur subah QA team ko Slack par Allure report ka link mil jata hai.
 
+Topic 3: Enterprise Code Quality & Git Hooks (`pre-commit`, `ruff`, `mypy`) [⚠️ Derived]
+Subtopics: Code Standardization, Git Hooks, pre-commit framework, .pre-commit-config.yaml, ruff (Fast Linter/Formatter), mypy (Static Type Checking), Type Hints, Pull Request Etiquette
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Practical Workflow
+* Notes mein content volume: Explanation with .pre-commit-config.yaml setup and type hinting examples
+* Key terms from notes: pre-commit, Git Hooks, ruff, flake8, black, mypy, static typing, Type Hints, linting, formatting, PEP8
+* Explicit emphasis in notes: "Ganda code CI/CD pipeline par fail hone ka wait nahi karna chahiye. pre-commit use karo taaki kharab code git commit hi na ho sake."
+* Notes mein jo analogies/examples the: "Airport Security Check" analogy — Jaise plane (GitHub) par baithne se pehle security (pre-commit) aapka bag check karti hai ki koi prohibited item (bad code) toh nahi, waise hi yeh tools kaam karte hain.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Code Quality, pre-commit, .pre-commit-config.yaml, pre-commit install, Git hooks, ruff, ultra-fast, Rust, linter, formatter, replace black, replace flake8, mypy, Static Type Checker, Type Hints, def get_user(user_id: int) -> dict:, PEP8, Code Review, Pull Request, ⭐"Airport Security Check"[analogy], ⭐"commit hi na ho sake"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer code likh kar jab `git commit -m "added new test"` chalata hai, toh automatically `pre-commit` hook trigger hota hai.
+* Fixing/Iteration Phase: Agar code mein koi extra space, unused import, ya type mismatch (`mypy` error) hota hai, toh commit ruk jata hai (fail). Developer error fix karta hai, aur phir se commit karta hai.
+* Live Production Phase: Yeh ensure karta hai ki GitHub repo mein hamesha 100% clean, standardized, aur error-free Python code hi push ho, jisse Code Review ka time bach jaye.
+
 --- 🛑 PHASE 12 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1471,9 +1494,10 @@ Subtopics: Continuous Integration, GitHub Actions, workflow.yml, Pipeline Stages
 Section 1: Enterprise Level Automation Standards
 Topic 1: Enterprise Reporting with Allure (`allure-pytest`)
 Topic 2: CI/CD Pipelines (GitHub Actions / Jenkins YAML)
+Topic 3: Enterprise Code Quality & Git Hooks (`pre-commit`, `ruff`, `mypy`)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 19
+Sections: 1 | Topics: 3 | Subtopics: 27
 
 ⏳ Waiting for: Next phase/module notes
 
