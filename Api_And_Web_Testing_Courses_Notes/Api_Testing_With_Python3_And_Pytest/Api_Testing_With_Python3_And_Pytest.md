@@ -4,7 +4,7 @@ Yeh raha **Module 1: Setup & Pytest Basics** ke complete notes, aapke 11-point f
 
 -----
 
-## MODULE 1: Setup & Pytest Basics ⚙️
+## Module 1: Setup & Pytest Basics ⚙️
 
 ### 1.1: Setting Up Testing Environment (Virtual Environment - `venv`)
 
@@ -437,7 +437,7 @@ Yeh raha **Module 2: Advanced Pytest** ke complete notes.
 
 -----
 
-## MODULE 2: Advanced Pytest ⚡
+## Module 2: Advanced Pytest ⚡
 
 ### 2.1: Pytest Fixtures (Setup & Teardown, `yield`)
 
@@ -1333,7 +1333,7 @@ Yeh raha **Module 3: API Client & Test Strategy** ke complete notes.
 
 -----
 
-## MODULE 3: API Client & Test Strategy 🏗️
+## Module 3: API Client & Test Strategy 🏗️
 
 ### 3.1: Modular HTTP Helper Class (`requests_helper.py`)
 
@@ -1954,7 +1954,7 @@ Yeh raha **Module 5: Database Fundamentals (MySQL)** ke complete notes, jo aapke
 
 -----
 
-## MODULE 5: Database Fundamentals (MySQL) 📊
+## Module 5: Database Fundamentals (MySQL) 📊
 
 *(Note: Yeh saari queries `MySQL` ke standard par hain, lekin 99% `PostgreSQL`, `SQLite` etc. mein bhi same kaam karengi.)*
 
@@ -2628,7 +2628,7 @@ Yeh raha **Module 6: DevOps & Containerization** ke complete notes.
 
 -----
 
-## MODULE 6: DevOps & Containerization 🐳
+## Module 6: DevOps & Containerization 🐳
 
 ### 6.1: Docker Kya Hai? (Dockerfile, Image, Container vs VM)
 
@@ -3430,7 +3430,7 @@ Yeh raha **Module 7: Advanced Concepts & Security** ke complete notes.
 
 -----
 
-## MODULE 7: Advanced Concepts & Security 🔒
+## Module 7: Advanced Concepts & Security 🔒
 
 ### 7.1: Security Testing: Broken Access Control (IDOR)
 
@@ -4014,7 +4014,7 @@ Yeh raha **Module 8: (Bonus) Practical Example: WordPress** ke complete notes.
 
 ---
 
-## MODULE 8: (Bonus) Practical Example: WordPress 🌐
+## Module 8: (Bonus) Practical Example: WordPress 🌐
 
 ### 8.1: What is WordPress? (.com vs .org)
 
