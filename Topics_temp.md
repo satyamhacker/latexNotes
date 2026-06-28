@@ -255,10 +255,10 @@ Sections: 1 | Topics: 4 | Subtopics: 34
 Test scripts ko maintainable, clean, aur professional banane ki foundation. [⚠️ Derived]
 
 --1--API Client & Test Strategy--
-Topic 1: HTTP & Professional Helper Classes [⚠️ Derived]
+Topic 2: HTTP & Professional Helper Classes [⚠️ Derived]
 Subtopics: Modular HTTP Helper Class, DRY Principle, requests_helper.py, base_url, auth_token, Headers Setup, GET POST PUT DELETE Methods, Fixtures Integration, Professional Helper Class, Business Logic Combination, Random Data Generation, customer_helper.py, Internal Helper Methods, Public Methods, Response Data Extraction, Faker Library
 
-[📊 SCOPE SIGNAL for Topic 1:
+[📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -268,20 +268,20 @@ Subtopics: Modular HTTP Helper Class, DRY Principle, requests_helper.py, base_ur
 * Notes mein jo analogies/examples the: "Personal Assistant" analogy — bina helper ke khud order karna vs assistant ko bolna (basic vs smart assistant)
 ]
 
-🔑 KEYWORDS DUMP for Topic 1:
+🔑 KEYWORDS DUMP for Topic 2:
 [requests, centralized, DRY, Maintainability, Readability, repetitive, requests_helper.py, **init**, base_url, auth_token, headers, Authorization, Bearer, endpoint, params, payload, files, response, status_code, conftest.py, fixture, session, customer_helper.py, random, string, _generate_random_email, string.ascii_lowercase, create_customer, json(), Faker, faker.email(), faker.name(), faker.address(), ⭐"import requests ko paap samjho"[emphasized in notes], ⭐"smart nahi, simple rakhein"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
 * Testing/Offline Phase: Developer ek central helper class banata hai taaki API logic aur random data generation ko test files se alag rakha ja sake.
 * Fixing/Iteration Phase: Har naye test mein developer seedha `helper.create_customer()` call karta hai bina raw URLs ya requests parameters likhe.
 * Live Production Phase: (N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: Chhote projects (5-10 tests) mein zaroori nahi, par professional projects (100+ tests) mein yeh "must-have" hai.
 
-Topic 2: Test Case Design (Positive & Negative Paths) [⚠️ Derived]
+Topic 3: Test Case Design (Positive & Negative Paths) [⚠️ Derived]
 Subtopics: Test Case Design, TCID-29 Create Customer Positive, Happy Path, Negative Path, Edge Cases, TC-30 Existing Email Conflict, TC-31 Invalid Email Format, TC-32 Missing Field, TC-33 Short Password, Arrange Act Assert Flow, Status Code Verification, Response Body Verification
 
-[📊 SCOPE SIGNAL for Topic 2:
+[📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -291,20 +291,20 @@ Subtopics: Test Case Design, TCID-29 Create Customer Positive, Happy Path, Negat
 * Notes mein jo analogies/examples the: "Security gate" analogy (valid ID vs fake/expired ID), "Gmail account creation" analogy for 409 conflict
 ]
 
-🔑 KEYWORDS DUMP for Topic 2:
+🔑 KEYWORDS DUMP for Topic 3:
 [TCID-29, Test Case Design, Test Plan, Test Scenario, Happy Path, Negative Path, Edge cases, TC-30, TC-31, TC-32, TC-33, 201 Created, 409 Conflict, 400 Bad Request, test_customers.py, pytest.fixture, pytest.mark.smoke, pytest.mark.api, pytest.mark.regression, Arrange, Act, Assert, response.status_code, response.json(), TestRail, Jira, Zephyr, Data Integrity, UniqueConstraintViolation, 500 Internal Server Error, AssertionError, get("error", ""), lower(), teardown, yield, ⭐"Negative tests Happy Path se zyada important ho sakte hain"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
 * Testing/Offline Phase: Code likhne se pehle QA engineer ek table mein positive aur negative scenarios (Test Plan) design karta hai.
 * Fixing/Iteration Phase: Test verify karta hai ki duplicate data bhejne par API crash (500 Error) hone ki bajaye properly handle karke 409 Conflict de.
 * Live Production Phase: Real users ko DB corrupt hone se bachata hai aur unhe valid error message dikhata hai jab wo already taken email use karte hain.
 * Additional context: (N/A)
 
-Topic 3: Logging Basics (Print vs Logger) [⚠️ Derived]
+Topic 4: Logging Basics (Print vs Logger) [⚠️ Derived]
 Subtopics: Print vs Logger, Logging Levels, DEBUG, INFO, WARNING, ERROR, Logger Setup, getLogger, basicConfig, Pytest Log Capture Command
 
-[📊 SCOPE SIGNAL for Topic 3:
+[📊 SCOPE SIGNAL for Topic 4:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -314,20 +314,20 @@ Subtopics: Print vs Logger, Logging Levels, DEBUG, INFO, WARNING, ERROR, Logger 
 * Notes mein jo analogies/examples the: "Car dashboard" analogy — print() ek single red light hai har error ke liye, jabki logging ek proper dashboard hai RPM, speed aur critical warnings ke saath.
 ]
 
-🔑 KEYWORDS DUMP for Topic 3:
+🔑 KEYWORDS DUMP for Topic 4:
 [print(), raw, logging, DEBUG, INFO, WARNING, ERROR, CRITICAL, getLogger, **name**, basicConfig, level, response.text, pytest --log-cli-level=INFO, --capture=no, caplog, assert, breakpoint(), ⭐"print() ko bhool jaao. logging use karo"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
 * Testing/Offline Phase: Developer local debugging ke liye temporary `print()` use karta hai lekin final code mein use hata kar structured `logging` laga deta hai.
 * Fixing/Iteration Phase: CI/CD pipeline par jab test fail hota hai, toh logs dekh kar error ki severity (INFO vs ERROR) turant samajh aati hai.
 * Live Production Phase: (N/A)
 * Additional context: (N/A)
 
-Topic 4: API Schema Validation (`pydantic` / `jsonschema`)
+Topic 5: API Schema Validation (`pydantic` / `jsonschema`)
 Subtopics: API Schema Validation, Contract Testing, Tedious Checks Avoidance, pydantic, jsonschema, BaseModel, EmailStr, Datetime Validation, ValidationError Handling, Unpacking Dictionary
 
-[📊 SCOPE SIGNAL for Topic 4:
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -337,21 +337,21 @@ Subtopics: API Schema Validation, Contract Testing, Tedious Checks Avoidance, py
 * Notes mein jo analogies/examples the: "Furniture Installation Manual" analogy — har part manually check karne ki bajaye, aaye hue furniture ko manual (schema) se match karna.
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 5:
 [API Schema Validation, pydantic, jsonschema, blueprint, Contract Testing, brittle, BaseModel, EmailStr, datetime, CustomerResponseSchema, ValidationError, pytest.fail, pytest.raises, unpacking, response_data, isinstance, ⭐"safety net"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Developer ek `BaseModel` banata hai jo API ke response structure aur data types ka blueprint act karta hai.
 * Fixing/Iteration Phase: Agar backend dev galti se `email` ko `user_email` kar de, toh schema validation turant fail ho jata hai aur bug report karta hai.
 * Live Production Phase: (N/A)
 * Additional context: Schema valid hone ke baad bhi specific business values check karne ke liye manual assert zaroori hain.
 
-Topic 5: Handling Flakiness (Retries & Waits)
-Topic 6: Multi-Environment Setup & API Versioning
+Topic 6: Handling Flakiness (Retries & Waits)
+Topic 7: Multi-Environment Setup & API Versioning
 Subtopics: Flaky Tests, Asynchronous Processes, Static Wait Problem, Dynamic Retries, time.sleep(), Retry Loop, tenacity Library
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -361,10 +361,10 @@ Subtopics: Flaky Tests, Asynchronous Processes, Static Wait Problem, Dynamic Ret
 * Notes mein jo analogies/examples the: "Amazon Order Tracking" analogy — order karte hi instantly track karne par "Not found" aata hai, isliye retry loop (har 30 min baad) use karte hain.
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [Flakiness, Flaky test, Retries, Waits, asynchronously, time.sleep, loop, max_retries, wait_time_sec, break, flag, is_customer_found, Static Wait, Dynamic Wait, tenacity, @tenacity.retry, ⭐"Static sleep se bacho, Dynamic Retries hamesha behtar hai"[emphasized in notes], ⭐"sabse khatarnaak"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: Developer test likhte waqt sleep() lagane ki bajaye ek dynamic retry loop ya tenacity library implement karta hai.
 * Fixing/Iteration Phase: Test CI/CD pipeline mein flaky nahi hota kyunki woh asynchronously DB mein write hone ka intelligently wait karta hai.
@@ -377,12 +377,12 @@ Subtopics: Flaky Tests, Asynchronous Processes, Static Wait Problem, Dynamic Ret
 
 ```
 Section 1: API Client & Test Strategy
-  Topic 1: HTTP & Professional Helper Classes
-  Topic 2: Test Case Design (Positive & Negative Paths)
-  Topic 3: Logging Basics (Print vs Logger)
-  Topic 4: API Schema Validation (`pydantic` / `jsonschema`)
-  Topic 5: Handling Flakiness (Retries & Waits)
-Topic 6: Multi-Environment Setup & API Versioning
+  Topic 2: HTTP & Professional Helper Classes
+  Topic 3: Test Case Design (Positive & Negative Paths)
+  Topic 4: Logging Basics (Print vs Logger)
+  Topic 5: API Schema Validation (`pydantic` / `jsonschema`)
+  Topic 6: Handling Flakiness (Retries & Waits)
+Topic 7: Multi-Environment Setup & API Versioning
 
 ```
 
@@ -395,15 +395,15 @@ Topic 6: Multi-Environment Setup & API Versioning
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: API Client & Test Strategy
-Topic 1: HTTP & Professional Helper Classes
-Topic 2: Test Case Design (Positive & Negative Paths)
-Topic 3: Logging Basics (Print vs Logger)
-Topic 4: API Schema Validation (`pydantic` / `jsonschema`)
-Topic 5: Handling Flakiness (Retries & Waits)
-Topic 6: Multi-Environment Setup & API Versioning
+Topic 2: HTTP & Professional Helper Classes
+Topic 3: Test Case Design (Positive & Negative Paths)
+Topic 4: Logging Basics (Print vs Logger)
+Topic 5: API Schema Validation (`pydantic` / `jsonschema`)
+Topic 6: Handling Flakiness (Retries & Waits)
+Topic 7: Multi-Environment Setup & API Versioning
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 65
+Sections: 1 | Topics: 7 | Subtopics: 72
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1143,7 +1143,7 @@ Topic 1: JWT (JSON Web Token) Validation (`PyJWT`)
 Topic 2: Secrets Management (No Hardcoded Passwords)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 17
+Sections: 1 | Topics: 3 | Subtopics: 24
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -1255,7 +1255,8 @@ Jab `/api/users` REST endpoints ki jagah single `/graphql` endpoint ya real-time
 
 --1--Testing GraphQL & Asynchronous APIs--
 Topic 1: GraphQL API Testing
-Topic 2: Event-Driven Testing & WebSockets (Kafka / RabbitMQ) [⚠️ Derived]
+Topic 2: Event-Driven Testing & WebSockets (Kafka / RabbitMQ)
+Topic 3: Asynchronous REST Testing & Race Conditions (`httpx` + `asyncio`) [⚠️ Derived]
 Subtopics: GraphQL Basics, Single Endpoint, Queries (GET equivalent), Mutations (POST/PUT equivalent), Over-fetching, Under-fetching, HTTP 200 Always, Error Array Handling
 
 [📊 SCOPE SIGNAL for Topic 1:
@@ -1277,7 +1278,8 @@ Subtopics: GraphQL Basics, Single Endpoint, Queries (GET equivalent), Mutations 
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: Mobile apps bandwidth bachane ke liye GraphQL use karti hain kyunki unhe sirf wahi data milta hai jo unhone manga hota hai.
 
-Topic 2: Event-Driven Testing & WebSockets (Kafka / RabbitMQ) [⚠️ Derived]
+Topic 2: Event-Driven Testing & WebSockets (Kafka / RabbitMQ)
+Topic 3: Asynchronous REST Testing & Race Conditions (`httpx` + `asyncio`) [⚠️ Derived]
 Subtopics: Asynchronous Messaging, Pub/Sub Model, Event-Driven Architecture, WebSockets (ws://), Kafka Producers/Consumers, RabbitMQ, Dead Letter Queue (DLQ), Fire-and-Forget, Polling for Results
 
 [📊 SCOPE SIGNAL for Topic 2:
@@ -1299,6 +1301,27 @@ Subtopics: Asynchronous Messaging, Pub/Sub Model, Event-Driven Architecture, Web
 * Fixing/Iteration Phase: Agar asynchronous process fail hoti hai, toh QA check karta hai ki failed message DLQ (Dead Letter Queue) mein gaya ya lost ho gaya.
 * Live Production Phase: Chat applications, Uber live tracking, aur Swiggy order updates isi architecture par chalte hain.
 
+Topic 3: Asynchronous REST Testing & Race Conditions (`httpx` + `asyncio`) [⚠️ Derived]
+Subtopics: Synchronous vs Asynchronous Python, httpx library, asyncio, Await Keyword, Concurrent Requests, Race Conditions Verification, asyncio.gather
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Code & Concept
+* Notes mein content volume: Python code block using `async def` and `httpx.AsyncClient`
+* Key terms from notes: httpx, asyncio, await, concurrent, race conditions, requests library limits, asyncio.gather
+* Explicit emphasis in notes: "requests library slow hai jab 100 calls ek saath karni hon. Race conditions test karne ke liye httpx aur asyncio hi kaam aayega."
+* Notes mein jo analogies/examples the: "Ticket Counter" analogy — `requests` matlab ek line mein lag kar ticket lena. `httpx` + `asyncio` matlab 100 logon ko ek saath counter par bhej dena (Race condition check karne ke liye).
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[asyncio, httpx, pip install httpx, asynchronous, async def, await, concurrent execution, Race Conditions, Concurrency, asyncio.gather, httpx.AsyncClient(), requests library, Blocking I/O, Non-blocking, ⭐"Ticket Counter"[analogy], ⭐"100 calls ek saath"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer ek test likhta hai jismein 50 concurrent `httpx` POST requests ek hi email ID se bheji jati hain.
+* Fixing/Iteration Phase: Test verify karta hai ki kya DB mein galti se 2 accounts ban gaye (Race Condition bug), ya API ne 1st request ko 201 aur baaki 49 ko properly 409 Conflict diya.
+
 --- 🛑 PHASE 10 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1308,9 +1331,10 @@ Subtopics: Asynchronous Messaging, Pub/Sub Model, Event-Driven Architecture, Web
 Section 1: Testing GraphQL & Asynchronous APIs
 Topic 1: GraphQL API Testing
 Topic 2: Event-Driven Testing & WebSockets (Kafka / RabbitMQ)
+Topic 3: Asynchronous REST Testing & Race Conditions (`httpx` + `asyncio`)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 17
+Sections: 1 | Topics: 3 | Subtopics: 24
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -1441,7 +1465,8 @@ Subtopics: Allure Framework, allure-pytest, Rich HTML Reports, Attachments (Logs
 * Live Production Phase: Managers dashboard par historical trend dekhte hain ki pichle 10 din se API pass % badh raha hai ya gir raha hai.
 
 Topic 2: CI/CD Pipelines (GitHub Actions / Jenkins YAML)
-Topic 3: Enterprise Code Quality & Git Hooks (`pre-commit`, `ruff`, `mypy`) [⚠️ Derived]
+Topic 3: Enterprise Code Quality & Git Hooks (`pre-commit`, `ruff`, `mypy`)
+Topic 4: Automated CI/CD Alerts (Slack & MS Teams Webhooks) [⚠️ Derived]
 Subtopics: Continuous Integration, GitHub Actions, workflow.yml, Pipeline Stages, Code Checkout, Environment Setup, Dependency Install, Test Execution, Publishing Reports, Pipeline Gates, Artifacts
 
 [📊 SCOPE SIGNAL for Topic 2:
@@ -1463,7 +1488,8 @@ Subtopics: Continuous Integration, GitHub Actions, workflow.yml, Pipeline Stages
 * Fixing/Iteration Phase: Developer ne code push kiya, GitHub Actions ne naya container banaya, dependencies install ki, tests run kiye. Agar ek bhi test fail hua, toh pipeline "Red" (Fail) ho jayegi aur code merge hone se rok degi (Quality Gate).
 * Live Production Phase: Regression suite automatically raat 12 baje (Cron job) chalta hai aur subah QA team ko Slack par Allure report ka link mil jata hai.
 
-Topic 3: Enterprise Code Quality & Git Hooks (`pre-commit`, `ruff`, `mypy`) [⚠️ Derived]
+Topic 3: Enterprise Code Quality & Git Hooks (`pre-commit`, `ruff`, `mypy`)
+Topic 4: Automated CI/CD Alerts (Slack & MS Teams Webhooks) [⚠️ Derived]
 Subtopics: Code Standardization, Git Hooks, pre-commit framework, .pre-commit-config.yaml, ruff (Fast Linter/Formatter), mypy (Static Type Checking), Type Hints, Pull Request Etiquette
 
 [📊 SCOPE SIGNAL for Topic 3:
@@ -1485,6 +1511,26 @@ Subtopics: Code Standardization, Git Hooks, pre-commit framework, .pre-commit-co
 * Fixing/Iteration Phase: Agar code mein koi extra space, unused import, ya type mismatch (`mypy` error) hota hai, toh commit ruk jata hai (fail). Developer error fix karta hai, aur phir se commit karta hai.
 * Live Production Phase: Yeh ensure karta hai ki GitHub repo mein hamesha 100% clean, standardized, aur error-free Python code hi push ho, jisse Code Review ka time bach jaye.
 
+Topic 4: Automated CI/CD Alerts (Slack & MS Teams Webhooks) [⚠️ Derived]
+Subtopics: Webhooks Concept, Incoming Webhooks, Slack App Integration, MS Teams Connectors, GitHub Actions Notification Steps, Conditional Execution (if: failure())
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical Integration
+* Notes mein content volume: GitHub Actions workflow snippet with Slack Webhook integration
+* Key terms from notes: Webhook, Slack Notifications, MS Teams, Incoming Webhook URL, CI/CD Alerts, Action Failure
+* Explicit emphasis in notes: "Test fail hone par engineer ko pata chalna chahiye, engineer ko ja kar check nahi karna chahiye. Push framework, pull nahi."
+* Notes mein jo analogies/examples the: "Fire Alarm" analogy — Aag lagne par (test fail) alarm khud bajta hai (Slack message), aapko baar-baar ghadi dekh kar check nahi karna padta ki aag lagi hai ya nahi.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Webhooks, Incoming Webhooks, Slack Integration, MS Teams, Alerting, Notifications, GitHub Actions, if: failure(), secrets.SLACK_WEBHOOK_URL, JSON payload, cURL, Push vs Pull, Faster Feedback Loop, ⭐"Fire Alarm"[analogy], ⭐"Push framework, pull nahi"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Live Production Phase: Jaise hi GitHub Actions par raat 12 baje regression suite fail hota hai, pipeline turant `if: failure()` step me jaati hai aur Slack channel `#qa-alerts` par ek red message bhejti hai: "🚨 API Regression Failed! Click here to view Allure Report."
+
 --- 🛑 PHASE 12 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1495,9 +1541,10 @@ Section 1: Enterprise Level Automation Standards
 Topic 1: Enterprise Reporting with Allure (`allure-pytest`)
 Topic 2: CI/CD Pipelines (GitHub Actions / Jenkins YAML)
 Topic 3: Enterprise Code Quality & Git Hooks (`pre-commit`, `ruff`, `mypy`)
+Topic 4: Automated CI/CD Alerts (Slack & MS Teams Webhooks)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 27
+Sections: 1 | Topics: 4 | Subtopics: 33
 
 ⏳ Waiting for: Next phase/module notes
 
