@@ -7,10 +7,10 @@
 API testing ki shuruaat — environment setup se lekar test execution aur debugging tak. [⚠️ Derived]
 
 --1--Setup & Pytest Basics--
-Topic 1: Modern Virtual Environment & Package Management (`uv`) [⚠️ Derived]
+Topic 2: Modern Virtual Environment & Package Management (`uv`) [⚠️ Derived]
 Subtopics: uv Introduction, Rust-based Tooling, Project Isolation, venv vs uv, Creating Environments (uv venv), Fast Dependency Installation (uv pip install), requirements.txt, Lock Files, Version Conflicts, Drop-in Replacement
 
-[📊 SCOPE SIGNAL for Topic 1:
+[📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -20,20 +20,20 @@ Subtopics: uv Introduction, Rust-based Tooling, Project Isolation, venv vs uv, C
 * Notes mein jo analogies/examples the: "Bicycle (pip/venv) vs Bullet Train (uv)" analogy to explain the speed difference in dependency management.
 ]
 
-🔑 KEYWORDS DUMP for Topic 1:
+🔑 KEYWORDS DUMP for Topic 2:
 [uv, Astral, Rust, lightning-fast, drop-in replacement, isolated, private, dependencies, Project Isolation, requirements.txt, Version conflicts, uv venv, .venv, Scripts\activate, source, bin/activate, uv pip install pytest, uv pip sync, conda, lightweight, Git, .gitignore, ⭐"Bicycle vs Bullet Train"[analogy], ⭐"ghanton ka install seconds mein"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
 * Testing/Offline Phase: Developer naya project start karte waqt `uv venv` banata hai aur `uv pip install requests pytest` chalata hai, jo traditional pip se 100x fast install hota hai, taaki global Python clean rahe.
 * Fixing/Iteration Phase: Jab 100 dependencies wala project clone hota hai, toh `uv` bina wait kiye turant environment ready kar deta hai.
 * Live Production Phase: CI/CD pipelines mein `uv` use karne se build time minutes se seconds mein aa jata hai, jis se server cost bachti hai.
 * Additional context: Yeh commands bilkul traditional venv jaisi hain, bas aage `uv` lagana hota hai.
 
-Topic 2: Pytest Fundamentals & Test Structure [⚠️ Derived]
+Topic 3: Pytest Fundamentals & Test Structure [⚠️ Derived]
 Subtopics: Pytest Framework, Fixtures, Test Discovery, Automatic Class Instantiation, Test Isolation, unittest vs Pytest, AAA Pattern, Arrange, Act, Assert
 
-[📊 SCOPE SIGNAL for Topic 2:
+[📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -43,20 +43,20 @@ Subtopics: Pytest Framework, Fixtures, Test Discovery, Automatic Class Instantia
 * Notes mein jo analogies/examples the: "Car as application and Pytest as Automatic QC Inspector", "Biscuit factory QC inspector for AAA pattern"
 ]
 
-🔑 KEYWORDS DUMP for Topic 2:
+🔑 KEYWORDS DUMP for Topic 3:
 [Pytest, framework, assert, Fixtures, Setup, Teardown, Discovery, pytest-html, pytest-xdist, pytest-cov, Automatic Class Instantiation, self, Test Isolation, unittest, boilerplate, open-source, AAA pattern, Arrange, Act, Assert, actual_result, expected_result, test_simple_math.py, ⭐Automatic Class Instantiation[emphasized in notes], ⭐Test Isolation[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
 * Testing/Offline Phase: Developer tests likhne ke liye AAA pattern (Arrange data, Act on function, Assert result) follow karta hai. Pytest automatically classes ke naye objects (self) bana kar tests ko isolate karta hai.
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: (N/A)
 * Additional context: (N/A)
 
-Topic 3: Test Discovery Rules & Execution (CLI) [⚠️ Derived]
+Topic 4: Test Discovery Rules & Execution (CLI) [⚠️ Derived]
 Subtopics: Naming Convention, File Names, Function Names, Class Names, Method Names, pytest Command, verbose Flag, Specific File Execution, Specific Function Execution, Keyword Expression
 
-[📊 SCOPE SIGNAL for Topic 3:
+[📊 SCOPE SIGNAL for Topic 4:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -66,20 +66,20 @@ Subtopics: Naming Convention, File Names, Function Names, Class Names, Method Na
 * Notes mein jo analogies/examples the: "Pytest as postman delivering only to houses with 'TEST' sticker"
 ]
 
-🔑 KEYWORDS DUMP for Topic 3:
+🔑 KEYWORDS DUMP for Topic 4:
 [Naming Convention, test_*.py, **test.py, test*, Test, tests/ folder, pytest, CLI, CI/CD, Jenkins, GitHub Actions, flags, pytest -v, verbose, PASSED, FAILED, -k, keyword expression, pytest: command not found, ⭐"Files: test_*.py. Functions: test_*. Classes: Test*"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
 * Testing/Offline Phase: Developer terminal mein pytest commands (jaise pytest -v ya -k) run karke specific ya saare tests ko unke file/folder naming rules ke basis par execute karta hai.
 * Fixing/Iteration Phase: Agar "command not found" error aaye toh developer check karta hai ki venv active hai ya nahi.
 * Live Production Phase: CI/CD pipelines (jaise Jenkins, GitHub Actions) mein tests automate karne ke liye yahi CLI commands use hoti hain.
 * Additional context: (N/A)
 
-Topic 4: API Testing Core & Debugging [⚠️ Derived]
+Topic 5: API Testing Core & Debugging [⚠️ Derived]
 Subtopics: API Authentication, Basic Auth, API Key, Bearer Token, requests Library, Authorization Header, HTTP GET Request, Status Code 200, JSON Parsing, assert Keyword Validation, Debugging, breakpoint(), pdb.set_trace(), Python Debugger, Disable Output Capturing
 
-[📊 SCOPE SIGNAL for Topic 4:
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -89,10 +89,10 @@ Subtopics: API Authentication, Basic Auth, API Key, Bearer Token, requests Libra
 * Notes mein jo analogies/examples the: "Private club entry pass (Basic Auth, API Key, Bearer Token)", "Movie pause & zoom in for debugging"
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 5:
 [Authentication, 401 Unauthorized, 404 Not Found, Basic Auth, ID Card, API Key, ?api_key=123, Bearer Token, VIP Pass, requests, base_url, endpoint, my_headers, Authorization, f-string, requests.get, Response object, status_code, 200, OK, .json(), assert, dictionary, query parameter, breakpoint(), pdb.set_trace(), Python Debugger, Pdb, c, continue, n, next, q, quit, pytest -v -s, disable output capturing, ⭐Python 3.7+[version], ⭐"API test mein hamesha pehle status_code check karo"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Developer API call karta hai (auth tokens aur headers ke saath), status code aur JSON response extract karke assert se verify karta hai. Agar output samajh na aaye toh breakpoint() lagakar execution rokta hai.
 * Fixing/Iteration Phase: Debugger prompt (Pdb) par developer ruk kar variables (e.g., response.status_code, response.json()) ki actual values check karta hai taaki error fix kar sake.
@@ -106,13 +106,13 @@ Subtopics: API Authentication, Basic Auth, API Key, Bearer Token, requests Libra
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Setup, Architecture & Pytest Basics
-Topic 1: Modern Virtual Environment & Package Management (`uv`)
-Topic 2: Pytest Fundamentals & Test Structure
-Topic 3: Test Discovery Rules & Execution (CLI)
-Topic 4: API Testing Core & Debugging
+Topic 2: Modern Virtual Environment & Package Management (`uv`)
+Topic 3: Pytest Fundamentals & Test Structure
+Topic 4: Test Discovery Rules & Execution (CLI)
+Topic 5: API Testing Core & Debugging
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 47
+Sections: 1 | Topics: 5 | Subtopics: 51
 
 ⏳ **Waiting for:** Next phase/module notes ("Module 2: Advanced Pytest")
 
@@ -321,10 +321,10 @@ Subtopics: Test Case Design, TCID-29 Create Customer Positive, Happy Path, Negat
 * Live Production Phase: Real users ko DB corrupt hone se bachata hai aur unhe valid error message dikhata hai jab wo already taken email use karte hain.
 * Additional context: (N/A)
 
-Topic 4: Logging Basics (Print vs Logger) [⚠️ Derived]
+Topic 5: Logging Basics (Print vs Logger) [⚠️ Derived]
 Subtopics: Print vs Logger, Logging Levels, DEBUG, INFO, WARNING, ERROR, Logger Setup, getLogger, basicConfig, Pytest Log Capture Command
 
-[📊 SCOPE SIGNAL for Topic 4:
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -334,20 +334,20 @@ Subtopics: Print vs Logger, Logging Levels, DEBUG, INFO, WARNING, ERROR, Logger 
 * Notes mein jo analogies/examples the: "Car dashboard" analogy — print() ek single red light hai har error ke liye, jabki logging ek proper dashboard hai RPM, speed aur critical warnings ke saath.
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 5:
 [print(), raw, logging, DEBUG, INFO, WARNING, ERROR, CRITICAL, getLogger, **name**, basicConfig, level, response.text, pytest --log-cli-level=INFO, --capture=no, caplog, assert, breakpoint(), ⭐"print() ko bhool jaao. logging use karo"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Developer local debugging ke liye temporary `print()` use karta hai lekin final code mein use hata kar structured `logging` laga deta hai.
 * Fixing/Iteration Phase: CI/CD pipeline par jab test fail hota hai, toh logs dekh kar error ki severity (INFO vs ERROR) turant samajh aati hai.
 * Live Production Phase: (N/A)
 * Additional context: (N/A)
 
-Topic 5: API Schema Validation (`pydantic` / `jsonschema`)
+Topic 6: API Schema Validation (`pydantic` / `jsonschema`)
 Subtopics: API Schema Validation, Contract Testing, Tedious Checks Avoidance, pydantic, jsonschema, BaseModel, EmailStr, Datetime Validation, ValidationError Handling, Unpacking Dictionary
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -357,21 +357,21 @@ Subtopics: API Schema Validation, Contract Testing, Tedious Checks Avoidance, py
 * Notes mein jo analogies/examples the: "Furniture Installation Manual" analogy — har part manually check karne ki bajaye, aaye hue furniture ko manual (schema) se match karna.
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [API Schema Validation, pydantic, jsonschema, blueprint, Contract Testing, brittle, BaseModel, EmailStr, datetime, CustomerResponseSchema, ValidationError, pytest.fail, pytest.raises, unpacking, response_data, isinstance, ⭐"safety net"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: Developer ek `BaseModel` banata hai jo API ke response structure aur data types ka blueprint act karta hai.
 * Fixing/Iteration Phase: Agar backend dev galti se `email` ko `user_email` kar de, toh schema validation turant fail ho jata hai aur bug report karta hai.
 * Live Production Phase: (N/A)
 * Additional context: Schema valid hone ke baad bhi specific business values check karne ke liye manual assert zaroori hain.
 
-Topic 6: Handling Flakiness (Retries & Waits)
-Topic 7: Multi-Environment Setup & API Versioning
+Topic 7: Handling Flakiness (Retries & Waits)
+Topic 8: Multi-Environment Setup & API Versioning
 Subtopics: Flaky Tests, Asynchronous Processes, Static Wait Problem, Dynamic Retries, time.sleep(), Retry Loop, tenacity Library
 
-[📊 SCOPE SIGNAL for Topic 6:
+[📊 SCOPE SIGNAL for Topic 7:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -381,10 +381,10 @@ Subtopics: Flaky Tests, Asynchronous Processes, Static Wait Problem, Dynamic Ret
 * Notes mein jo analogies/examples the: "Amazon Order Tracking" analogy — order karte hi instantly track karne par "Not found" aata hai, isliye retry loop (har 30 min baad) use karte hain.
 ]
 
-🔑 KEYWORDS DUMP for Topic 6:
+🔑 KEYWORDS DUMP for Topic 7:
 [Flakiness, Flaky test, Retries, Waits, asynchronously, time.sleep, loop, max_retries, wait_time_sec, break, flag, is_customer_found, Static Wait, Dynamic Wait, tenacity, @tenacity.retry, ⭐"Static sleep se bacho, Dynamic Retries hamesha behtar hai"[emphasized in notes], ⭐"sabse khatarnaak"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
 
 * Testing/Offline Phase: Developer test likhte waqt sleep() lagane ki bajaye ek dynamic retry loop ya tenacity library implement karta hai.
 * Fixing/Iteration Phase: Test CI/CD pipeline mein flaky nahi hota kyunki woh asynchronously DB mein write hone ka intelligently wait karta hai.
@@ -399,10 +399,10 @@ Subtopics: Flaky Tests, Asynchronous Processes, Static Wait Problem, Dynamic Ret
 Section 1: API Client & Test Strategy
   Topic 2: HTTP & Professional Helper Classes
   Topic 3: Test Case Design (Positive & Negative Paths)
-  Topic 4: Logging Basics (Print vs Logger)
-  Topic 5: API Schema Validation (`pydantic` / `jsonschema`)
-  Topic 6: Handling Flakiness (Retries & Waits)
-Topic 7: Multi-Environment Setup & API Versioning
+  Topic 5: Logging Basics (Print vs Logger)
+  Topic 6: API Schema Validation (`pydantic` / `jsonschema`)
+  Topic 7: Handling Flakiness (Retries & Waits)
+Topic 8: Multi-Environment Setup & API Versioning
 
 ```
 
@@ -417,13 +417,13 @@ Topic 7: Multi-Environment Setup & API Versioning
 Section 1: API Client & Test Strategy
 Topic 2: HTTP & Professional Helper Classes
 Topic 3: Test Case Design (Positive & Negative Paths)
-Topic 4: Logging Basics (Print vs Logger)
-Topic 5: API Schema Validation (`pydantic` / `jsonschema`)
-Topic 6: Handling Flakiness (Retries & Waits)
-Topic 7: Multi-Environment Setup & API Versioning
+Topic 5: Logging Basics (Print vs Logger)
+Topic 6: API Schema Validation (`pydantic` / `jsonschema`)
+Topic 7: Handling Flakiness (Retries & Waits)
+Topic 8: Multi-Environment Setup & API Versioning
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 72
+Sections: 1 | Topics: 8 | Subtopics: 78
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
