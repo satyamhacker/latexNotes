@@ -3478,7 +3478,6 @@ CLI: `pytest --env=QA`
 
 # Module 4: Backend Validation & DAO Pattern 🛡️
 
-# Module 4: Backend Validation & DAO Pattern 🛡️
 
 Is module mein hum seekhenge ki API test karte waqt sirf API ka `200 OK` response dekhna kaafi nahi hota. Asli verification tab hoti hai jab hum directly database (DB) mein jaakar check karein ki data sahi se save hua ya nahi.
 
@@ -6939,7 +6938,6 @@ Jab ek MERN stack (Mongo, Express, React, Node) developer naya laptop khareedta 
 
 # Module 7: Advanced Concepts & Security Api Testing
 
-### 🚀 Module 7: Advanced Concepts & Security Api Testing
 
 **Overview:** Functional testing se aage badhkar ab hum Security aur Advanced Frameworks (BDD, Performance) ki duniya mein enter kar rahe hain. Yeh concepts ek aam tester ko ek Senior QA/Security expert banate hain.
 
