@@ -80,54 +80,30 @@ Subtopics: Selenium IDE, Selenium WebDriver, Selenium Grid, Selenium Client Libr
 * Live Production Phase: (N/A)
 * Additional context: Grid ka use karke real-world mein 10 alag machines par parallel tests run hote hain taaki speed badhe.
 
-Topic 4: Environment Setup & First Test Script [⚠️ Derived]
-Subtopics: Python Setup, VS Code IDE, virtualenv, Selenium Installation, webdriver-manager, First Selenium Script
+--2--Selenium Ecosystem & Setup--
+Topic 4: Environment Setup & First Test Script (Selenium Manager)
+Subtopics: Python Setup, VS Code IDE, virtualenv, Selenium Installation, Built-in Selenium Manager, First Selenium Script, Headless New Mode
 
 [📊 SCOPE SIGNAL for Topic 4:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
 * Notes mein content volume: Step-by-step terminal commands, 1 full code script, line-by-line code explanation
-* Key terms from notes: Python, VS Code, virtualenv, pip install selenium, webdriver-manager, Service, ChromeDriverManager, driver.get
-* Explicit emphasis in notes: "Add Python to PATH" — checkbox tick karna zaroori hai. "Hamesha, hamesha, hamesha har naye project ke liye ek naya venv banao."
-* Notes mein jo analogies/examples the: Painting studio (virtualenv) aur Magic Tool (webdriver-manager) analogy
+* Key terms from notes: Python, VS Code, virtualenv, pip install selenium, Selenium Manager, driver.get, --headless=new
+* Explicit emphasis in notes: "Ab webdriver-manager ki zaroorat nahi hai, Selenium 4 khud apna driver manage karta hai!"
+* Notes mein jo analogies/examples the: "Painting studio" (virtualenv) aur "In-house Assistant" (Selenium Manager) analogy — ab bahar se helper (third-party library) bulane ki zaroorat nahi.
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[Python, IDE, VS Code, PyCharm, virtualenv, venv, pip, ⭐"Add Python to PATH"[emphasized in notes], `pip install virtualenv`, `cd C:\MyAutomationProject`, `python -m venv my_env`, `.\my_env\Scripts\activate`, `source my_env/bin/activate`, `pip install selenium`, `pip install webdriver-manager`, `pip list`, `test_browser.py`, `import time`, `from selenium import webdriver`, `from selenium.webdriver.chrome.service import Service`, ⭐Selenium 4[version], `from webdriver_manager.chrome import ChromeDriverManager`, `driver_service = Service(ChromeDriverManager().install())`, `driver = webdriver.Chrome(service=driver_service)`, `driver.get("https://www.google.com")`, `driver.title`, `time.sleep(5)`, `driver.quit()`, `driver.close()`, ModuleNotFoundError]
+[Python, IDE, VS Code, virtualenv, venv, pip, ⭐"Add Python to PATH"[emphasized in notes], `python -m venv my_env`, `pip install selenium`, `test_browser.py`, `import time`, `from selenium import webdriver`, ⭐Selenium 4.6+[version], ⭐Selenium Manager[version], `driver = webdriver.Chrome()`, `driver.get("https://www.google.com")`, `options.add_argument("--headless=new")`, `driver.title`, `time.sleep(5)`, `driver.quit()`, ModuleNotFoundError, ⭐"Ab webdriver-manager ki zaroorat nahi hai"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
-* Testing/Offline Phase: Developer naya project folder banata hai, virtual environment activate karta hai taaki dependency conflicts na hon, aur required packages (Selenium, webdriver-manager) install karta hai.
-* Fixing/Iteration Phase: `webdriver-manager` dynamically check karta hai current Chrome version aur automatically sahi driver fetch karta hai, jisse path update karne ki headache khatam hoti hai.
+* Testing/Offline Phase: Developer naya project folder banata hai, virtual environment activate karta hai, aur sirf Selenium install karta hai.
+* Fixing/Iteration Phase: Jaise hi code run hota hai, Built-in **Selenium Manager** dynamically current browser version check karta hai aur silently network se sahi driver download karke execute kar deta hai.
 * Live Production Phase: (N/A)
-* Additional context: Hamesha test ke end mein `driver.quit()` likhna practice mein laya jata hai taaki background .exe processes kill ho jayein aur memory free rahe.
+* Additional context: 2026 mein purana `--headless` flag deprecate ho chuka hai, ab hamesha `--headless=new` use hota hai modern rendering ke liye.
 
----
-
-**Double-check steps performed:**
-
-* [x] Poore notes completely padhe bina kuch skip kiye.
-* [x] Notes ko Sections mein group kiya — related topics ek Section mein hain.
-* [x] Har Section ka tagline/context line add kiya.
-* [x] Har Topic ko correct sequential numbering di (Topic 1, Topic 2...).
-* [x] Har concept — chahe 1 line mein ho — subtopic naam ki list mein add kiya (sirf short name, koi description nahi).
-* [x] Subtopics flat comma-separated list mein hain — koi descriptions nahi, koi brackets mein details nahi, koi "Simple Analogy/Technical Definition" sections nahi.
-* [x] Koi bhi code/command paraphrase nahi kiya — exactly preserve kiya (KEYWORDS DUMP mein).
-* [x] Messy/unstructured notes ko logically group kiya aur `[⚠️ Derived]` flag lagaya.
-* [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-* [x] Chronological order preserved.
-* [x] Unclear/missing subtopic names `[⚠️]` se flag kiye.
-* [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya — depth level, coverage angle, content volume, key terms, emphasis sab filled hain (per topic, not per subtopic).
-* [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya — notes mein aaya har ek word/phrase/command/term/code capture kiya, emphasized terms ⭐ se mark kiye, unclear terms [unclear] se flag kiye, version numbers ⭐X.x[version] se mark kiye (per topic, not per subtopic).
-* [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya — notes mein jo bhi real-world flow tha woh capture kiya.
-* [x] Diagrams/tables reproduced ya flagged — (N/A here, standard table was merged logically into conceptual keywords).
-* [x] OCR quality warning di agar 20%+ content unclear tha (N/A).
-* [x] Phase tracking aur CONTINUE protocol follow kiya.
-* [x] Output limit aane se pehle ruka — ek complete Topic ke baad.
-* [x] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon?
-
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
@@ -137,7 +113,7 @@ Topic 2: Testing Life Cycles & ROI [⚠️ Derived]
 
 Section 2: Selenium Ecosystem & Setup [⚠️ Derived]
 Topic 3: Selenium Components & Architecture [⚠️ Derived]
-Topic 4: Environment Setup & First Test Script [⚠️ Derived]
+Topic 4: Environment Setup & First Test Script (Selenium Manager)
 
 📊 PHASE SUMMARY:
 Sections: 2 | Topics: 4 | Subtopics: 25
@@ -1067,6 +1043,7 @@ Subtopics: openpyxl Library, Excel Data Extraction, CSV Format, json Built-in Mo
 * Additional context: (N/A)
 
 Topic 7: PyTest parametrize with Data Files
+Topic 8: Dynamic Synthetic Data Generation (Faker Library)
 Subtopics: Pytest Parametrize Decorator, Argument Mapping, Independent Test Execution, test_login_ddt.py Implementation, Direct Data Parameterization
 
 [📊 SCOPE SIGNAL for Topic 7:
@@ -1093,6 +1070,30 @@ Subtopics: Pytest Parametrize Decorator, Argument Mapping, Independent Test Exec
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
+--2--Data-Driven Testing (DDT) & Parameterization--
+Topic 8: Dynamic Synthetic Data Generation (Faker Library)
+Subtopics: Static vs Dynamic Data, Faker Library Introduction, Generating Dummy PII (Names, Emails, Phone Numbers), Faker in PyTest Fixtures, Avoiding Hardcoded Data Constraints
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Concept explanation with 1 Python code snippet
+* Key terms from notes: Synthetic Data, Faker, pip install Faker, fake.email(), fake.name(), fake.credit_card_number(), Dynamic Data, PII (Personally Identifiable Information)
+* Explicit emphasis in notes: "Production (asli) customer data automation mein use karna ek crime hai!"
+* Notes mein jo analogies/examples the: "Actor ka Makeup" analogy — Jaise movie mein nakli police wala asli lagta hai, waise hi Faker se bana nakli data system ko asli lagna chahiye.
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[Faker, Synthetic Data, Dynamic Data, pip install Faker, from faker import Faker, fake = Faker(), fake.name(), fake.email(), fake.phone_number(), fake.address(), fake.credit_card_number(), PII, GDPR compliance, random data, unique email per test, test_registration, @pytest.fixture, pytest-faker, ⭐"Production data automation mein use karna crime hai!"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Testing/Offline Phase: Jab tester ek registration/signup flow automate karta hai, toh har baar ek naya email chahiye hota hai taaki "Email already exists" error na aaye. Tester static Excel use karne ke bajaye `Faker` se random unique email generate karta hai.
+* Fixing/Iteration Phase: PII compliance (GDPR) meet karne ke liye framework se saara hardcoded data hata kar Faker se replace kiya jaata hai.
+* Live Production Phase: (N/A)
+* Additional context: 2026 mein Data Driven Testing (DDT) ke saath dynamic data (Faker) ka combination har professional framework ka hissa hota hai.
+
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Page Object Model (POM) Architecture [⚠️ Derived]
@@ -1105,9 +1106,10 @@ Section 2: Data-Driven Testing (DDT) & Parameterization [⚠️ Derived]
 Topic 5: Data-Driven Testing (DDT) Concept
 Topic 6: Reading Test Data (Excel, CSV, JSON) [⚠️ Derived]
 Topic 7: PyTest parametrize with Data Files
+Topic 8: Dynamic Synthetic Data Generation (Faker Library)
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 7 | Subtopics: 41
+Sections: 2 | Topics: 8 | Subtopics: 46
 
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -1295,28 +1297,28 @@ Sections: 1 | Topics: 6 | Subtopics: 45
 1000 tests ko 10 ghante nahi, 1 ghante mein chalane ka framework setup.
 
 --1--Advanced Testing (Grid & Cloud)--
-Topic 1: Cross-Browser Testing
-Subtopics: Cross-Browser Testing, Rendering Engine Differences, conftest.py Modification, pytest_addoption Hook, driver_setup Fixture, request.config.getoption, webdriver.Firefox Logic, webdriver.Edge Logic, Command-Line Execution Flags, Safari Setup, webdriver-manager Usage
+--1--Advanced Testing (Grid & Cloud)--
+Topic 1: Cross-Browser Testing (Zero-Config Approach) (Zero-Config Approach)
+Subtopics: Cross-Browser Testing, Rendering Engine Differences, conftest.py Modification, pytest_addoption Hook, driver_setup Fixture, request.config.getoption, webdriver.Firefox, webdriver.Edge, Command-Line Execution Flags, Safari Setup
 
 [📊 SCOPE SIGNAL for Topic 1:
 
 * Depth Level: Deep
 * Coverage Angle: Both
 * Notes mein content volume: Detailed explanation with PyTest code and command-line examples
-* Key terms from notes: Cross-browser testing, rendering engine, broken CSS, conftest.py, pytest_addoption, --browser, request.config.getoption, webdriver.Firefox, FirefoxService, GeckoDriverManager, command-line flag, Safari, webdriver-manager
-* Explicit emphasis in notes: "har browser par sahi chal raha hai" — to avoid losing users
-* Notes mein jo analogies/examples the: "Microsoft Word vs Google Docs vs Notepad" analogy for different browsers showing the same document differently
+* Key terms from notes: Cross-browser testing, rendering engine, broken CSS, conftest.py, pytest_addoption, --browser, request.config.getoption, webdriver.Firefox, Command-line flag
+* Explicit emphasis in notes: "har browser par sahi chal raha hai"
+* Notes mein jo analogies/examples the: "Microsoft Word vs Google Docs vs Notepad" analogy for different browsers showing the same document differently.
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[Cross-browser testing, Chrome, Firefox, Edge, Safari, rendering engine, bug report, conftest.py, pytest_addoption, --browser, driver_setup, request, request.config.getoption, webdriver.Firefox, FirefoxService, GeckoDriverManager, webdriver.Edge, EdgeService, EdgeChromiumDriverManager, webdriver.Chrome, ChromeService, ChromeDriverManager, command-line flag, pytest -v, pytest -n 2, webdriver-manager]
+[Cross-browser testing, Chrome, Firefox, Edge, Safari, rendering engine, bug report, conftest.py, pytest_addoption, --browser, driver_setup, request, request.config.getoption, webdriver.Firefox, webdriver.Edge, webdriver.Chrome, command-line flag, pytest -v, pytest -n 2, Zero-Config, Selenium Manager, out-of-the-box]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: Developer command line se `--browser` flag pass karta hai taaki alag-alag browsers par manually ya CI pipeline mein tests verify ho sakein.
-* Fixing/Iteration Phase: Agar Firefox ya Edge mein test fail hota hai, toh developer us specific browser ka rendering engine issue fix karta hai.
-* Live Production Phase: Real user chahe koi bhi browser (Chrome/Edge/Firefox) use kare, application ka UI aur logic phatna nahi chahiye.
-* Additional context: (N/A)
+* Testing/Offline Phase: Developer command line se `--browser firefox` flag pass karta hai taaki alag-alag browsers par manually ya CI pipeline mein tests verify ho sakein.
+* Fixing/Iteration Phase: Agar Firefox mein test fail hota hai, toh developer us specific browser ka rendering engine issue fix karta hai. Built-in Selenium Manager automatically Firefox ke liye geckodriver download kar leta hai bina kisi extra code ke.
+* Live Production Phase: (N/A)
 
 Topic 2: Selenium Grid (Hub & Node Concept)
 Subtopics: Selenium Grid, Hub and Node Architecture, Parallel Execution Distribution, Traditional Java Setup, webdriver.Remote, ChromeOptions, command_executor Configuration, Hub Execution Command, Node Execution Command
@@ -1418,7 +1420,7 @@ Subtopics: Cloud Selenium Grid, BrowserStack & Sauce Labs, Environment Variables
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Advanced Testing (Grid & Cloud)
-Topic 1: Cross-Browser Testing
+Topic 1: Cross-Browser Testing (Zero-Config Approach)
 Topic 2: Selenium Grid (Hub & Node Concept)
 Topic 3: Selenium Grid with Docker
 Topic 4: Scaling Grid with Kubernetes (K8s) & Helm
