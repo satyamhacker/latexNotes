@@ -348,6 +348,7 @@ Subtopics: API Schema Validation, Contract Testing, Tedious Checks Avoidance, py
 * Additional context: Schema valid hone ke baad bhi specific business values check karne ke liye manual assert zaroori hain.
 
 Topic 5: Handling Flakiness (Retries & Waits)
+Topic 6: Multi-Environment Setup & API Versioning
 Subtopics: Flaky Tests, Asynchronous Processes, Static Wait Problem, Dynamic Retries, time.sleep(), Retry Loop, tenacity Library
 
 [📊 SCOPE SIGNAL for Topic 5:
@@ -381,6 +382,7 @@ Section 1: API Client & Test Strategy
   Topic 3: Logging Basics (Print vs Logger)
   Topic 4: API Schema Validation (`pydantic` / `jsonschema`)
   Topic 5: Handling Flakiness (Retries & Waits)
+Topic 6: Multi-Environment Setup & API Versioning
 
 ```
 
@@ -398,9 +400,10 @@ Topic 2: Test Case Design (Positive & Negative Paths)
 Topic 3: Logging Basics (Print vs Logger)
 Topic 4: API Schema Validation (`pydantic` / `jsonschema`)
 Topic 5: Handling Flakiness (Retries & Waits)
+Topic 6: Multi-Environment Setup & API Versioning
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 57
+Sections: 1 | Topics: 6 | Subtopics: 65
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -493,6 +496,7 @@ Subtopics: String Functions, UPPER, LOWER, LENGTH, CONCAT, Date Functions, NOW, 
 * Additional context: (N/A)
 
 Topic 4: Database Schema & Cleanup Operations (CREATE, DROP, TRUNCATE, DELETE) [⚠️ Derived]
+Topic 5: Test Data Management (TDM) & Parallel Safety [⚠️ Derived]
 Subtopics: CREATE TABLE, Data Types, INT, VARCHAR, TIMESTAMP, Constraints, PRIMARY KEY, UNIQUE KEY, DEFAULT, DROP TABLE, TRUNCATE TABLE, DELETE FROM, Teardown Operations
 
 [📊 SCOPE SIGNAL for Topic 4:
@@ -541,9 +545,10 @@ Topic 1: Read Operations & Filtering (SELECT, IN, LIKE) [⚠️ Derived]
 Topic 2: Relational Queries & Aggregations (JOINs, COUNT, SUM) [⚠️ Derived]
 Topic 3: Built-in Functions & Data Insertion (String/Date, INSERT INTO) [⚠️ Derived]
 Topic 4: Database Schema & Cleanup Operations (CREATE, DROP, TRUNCATE, DELETE) [⚠️ Derived]
+Topic 5: Test Data Management (TDM) & Parallel Safety [⚠️ Derived]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 56
+Sections: 1 | Topics: 5 | Subtopics: 62
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1087,7 +1092,8 @@ Subtopics: Contract Testing Concept, Consumer, Provider, Pact Framework, pact-py
 * Fixing/Iteration Phase: Backend developer jab bhi code push karta hai, uski pipeline us contract ko download karti hai aur backend par chala kar dekhti hai ki contract toota toh nahi.
 * Live Production Phase: Yeh assure karta hai ki Frontend aur Backend independently deploy ho sakein bina ek doosre ko break kiye.
 
-Topic 2: External Mock Servers (WireMock) [⚠️ Derived]
+Topic 2: External Mock Servers (WireMock)
+Topic 3: Cloud Infrastructure Mocking (LocalStack) [⚠️ Derived]
 Subtopics: Third-Party Mocking, WireMock, Dockerized Mock Server, Mappings, Stubs, Simulating Errors (503, Timeout)
 
 [📊 SCOPE SIGNAL for Topic 2:
@@ -1109,6 +1115,28 @@ Subtopics: Third-Party Mocking, WireMock, Dockerized Mock Server, Mappings, Stub
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: (N/A — Mocking production mein nahi hoti).
 
+Topic 3: Cloud Infrastructure Mocking (LocalStack) [⚠️ Derived]
+Subtopics: AWS Local Testing, LocalStack Docker Image, Mocking S3 Buckets, Mocking SQS Queues, Boto3 Client Configuration, Cloud Costs Reduction
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical Workflow
+* Notes mein content volume: Docker compose snippet and Python boto3 mock example
+* Key terms from notes: LocalStack, AWS, Cloud Mocking, S3, SQS, DynamoDB, boto3, endpoint_url, Docker
+* Explicit emphasis in notes: "Tests chalane ke liye AWS ka asli bill mat badhao. Local laptop par LocalStack use karo."
+* Notes mein jo analogies/examples the: "Nakli Samundar (Wave Pool)" analogy — Asli samundar (AWS) mein ship test karne ke bajaye, local wave pool (LocalStack) mein test karna jo bilkul real jaisa behave karta hai par free hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[LocalStack, AWS Mocking, S3 Bucket, SQS Queue, DynamoDB, boto3, endpoint_url, http://localhost:4566, awscli-local, awslocal, Docker container, Cloud costs, Serverless testing, Infrastructure integration, ⭐"Nakli Samundar (Wave Pool)"[analogy]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer apne `docker-compose.yml` mein WireMock aur MySQL ke saath 'LocalStack' bhi add karta hai. API jab file upload karti hai, toh woh asli AWS ki jagah LocalStack container ke andar mock S3 bucket mein jati hai.
+* Fixing/Iteration Phase: Test turant verify kar leta hai ki kya API ne S3 bucket mein sahi file format push kiya, bina internet ya AWS credentials ke.
+* Live Production Phase: (N/A)
+
 --- 🛑 PHASE 9 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1118,9 +1146,10 @@ Subtopics: Third-Party Mocking, WireMock, Dockerized Mock Server, Mappings, Stub
 Section 1: Contract Testing & Mock Servers
 Topic 1: Consumer-Driven Contract Testing (Pact-Python)
 Topic 2: External Mock Servers (WireMock)
+Topic 3: Cloud Infrastructure Mocking (LocalStack)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 14
+Sections: 1 | Topics: 3 | Subtopics: 20
 
 ⏳ Waiting for: Next phase/module notes
 
