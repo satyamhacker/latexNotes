@@ -255,6 +255,26 @@ Sections: 1 | Topics: 4 | Subtopics: 34
 Test scripts ko maintainable, clean, aur professional banane ki foundation. [⚠️ Derived]
 
 --1--API Client & Test Strategy--
+Topic 1: API Contract Analysis & Exploratory Testing (Swagger & Postman) [⚠️ Derived]
+Subtopics: Swagger / OpenAPI Specification, Reading API Contracts, Exploratory Testing, Postman Collections, Environment Variables in Postman, curl Generation, Automation Pre-requisites
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical Workflow
+* Notes mein content volume: Explanation of how to read Swagger docs and translate them to Pytest
+* Key terms from notes: Swagger, OpenAPI, Postman, Contract, Exploratory Testing, cURL, Endpoints, Payloads
+* Explicit emphasis in notes: "Automation likhne se pehle API ko Postman mein apne haathon se chala kar dekho. Bina API samjhe code likhna andhere mein teer chalane jaisa hai."
+* Notes mein jo analogies/examples the: "Map (Swagger) vs Driving (Postman) vs Self-Driving Car (Pytest)" analogy.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Swagger, OpenAPI spec, Postman, Exploratory Testing, Manual Testing, cURL, REST Client, HTTP verbs, Headers, Query Parameters, Pre-request script, Collections, Environments, ⭐"Map vs Driving vs Self-Driving"[analogy], ⭐"andhere mein teer"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Backend dev API banakar Swagger URL deta hai. QA pehle usay Postman mein import karta hai, token set karta hai, aur manually edge cases try karta hai. Jab logic samajh aa jata hai, tabhi Pytest mein helper classes likhna shuru karta hai.
+
 Topic 2: HTTP & Professional Helper Classes [⚠️ Derived]
 Subtopics: Modular HTTP Helper Class, DRY Principle, requests_helper.py, base_url, auth_token, Headers Setup, GET POST PUT DELETE Methods, Fixtures Integration, Professional Helper Class, Business Logic Combination, Random Data Generation, customer_helper.py, Internal Helper Methods, Public Methods, Response Data Extraction, Faker Library
 
