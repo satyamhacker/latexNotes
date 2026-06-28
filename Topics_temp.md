@@ -514,7 +514,7 @@ Topic 2: Database Connection Fixtures (Setup & Teardown)
 Topic 3: E2E Verification (API Response vs DB State)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 18
+Sections: 1 | Topics: 4 | Subtopics: 26
 
 ⏳ Waiting for: Next phase/module notes
 
@@ -1391,7 +1391,8 @@ Subtopics: Hardcoded vs Dynamic Data, hypothesis library, @given decorator, Edge
 * Testing/Offline Phase: Developer `@given(st.emails())` lagata hai, aur Pytest automatically test ko 100 baar alag-alag ajeeb (but valid) emails bhej kar API ki robust limit check karta hai.
 
 Topic 2: AI in API Testing (LLMs & Code Gen)
-Topic 3: Observability & Distributed Tracing (Correlation IDs) [⚠️ Derived]
+Topic 3: Observability & Distributed Tracing (Correlation IDs)
+Topic 4: Secure AI Testing with Local LLMs & MCP (Model Context Protocol) [⚠️ Derived]
 Subtopics: LLM Prompting for QA, OpenAPI to Test Cases, Automated Schema Generation, GitHub Copilot, Log RCA (Root Cause Analysis)
 
 [📊 SCOPE SIGNAL for Topic 2:
@@ -1411,7 +1412,8 @@ Subtopics: LLM Prompting for QA, OpenAPI to Test Cases, Automated Schema Generat
 
 * Testing/Offline Phase: Developer API ka JSON response copy karke ChatGPT ko deta hai: "Convert this JSON into a Pydantic schema for Pytest". 2 ghante ka boilerplate code 2 second mein likh kar test framework mein add kar liya jata hai.
 
-Topic 3: Observability & Distributed Tracing (Correlation IDs) [⚠️ Derived]
+Topic 3: Observability & Distributed Tracing (Correlation IDs)
+Topic 4: Secure AI Testing with Local LLMs & MCP (Model Context Protocol) [⚠️ Derived]
 Subtopics: Testing in Production, Distributed Tracing, Correlation ID (X-Request-ID), Centralized Logging, ELK Stack, Datadog, Splunk, Microservices Debugging
 
 [📊 SCOPE SIGNAL for Topic 3:
@@ -1432,6 +1434,28 @@ Subtopics: Testing in Production, Distributed Tracing, Correlation ID (X-Request
 * Testing/Offline Phase: Pytest script API request bhejte waqt header mein ek unique `X-Correlation-ID` (e.g., UUID) generate karke bhejti hai.
 * Fixing/Iteration Phase: Agar test fail hota hai (500 Error), toh QA Datadog/Splunk kholta hai, wahi UUID search karta hai, aur instantly pata chal jata hai ki 5 microservices mein se kis service ki wajah se API phati.
 
+Topic 4: Secure AI Testing with Local LLMs & MCP (Model Context Protocol) [⚠️ Derived]
+Subtopics: Data Privacy in AI, Local LLMs (Ollama, Llama-3), Model Context Protocol (MCP) Introduction, Connecting AI to Local Databases, Cursor IDE with MCP, Autonomous E2E Test Generation, Context-Aware AI, Preventing Data Leakage
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Cutting-Edge Architecture & Workflow
+* Notes mein content volume: Explanation of running local models and setting up an MCP server for DB/API integration.
+* Key terms from notes: MCP, Model Context Protocol, Local AI, Ollama, Cursor IDE, Anthropic, Data Leakage, Context-Aware, Autonomous Agent
+* Explicit emphasis in notes: "Apni company ka private API logic public ChatGPT par paste karna sabse bada security risk hai. Hamesha Local AI aur MCP use karo."
+* Notes mein jo analogies/examples the: "Blindfolded Assistant vs Assistant with Keys" analogy — Cloud AI ek blindfolded assistant hai jise sab kuch bol kar batana padta hai. MCP wala AI ek assistant hai jiske paas DB aur code ki chaabiyan (keys) hain aur woh khud jaa kar check kar sakta hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[MCP, Model Context Protocol, Local AI, Ollama, Llama-3, Cursor IDE, Claude Desktop, SQLite/MySQL MCP Server, Context-Aware, Data Privacy, Prompt Leakage, Autonomous Testing, AI Agent, DB Verification, Zero-shot Generation, ⭐"Blindfolded Assistant"[analogy], ⭐"sabse bada security risk"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: QA engineer apne laptop par Ollama se local AI chalata hai. Woh Cursor IDE mein "MySQL MCP Server" configure karta hai.
+* Fixing/Iteration Phase: QA AI ko prompt deta hai: *"Write a Pytest E2E flow for the /checkout API and verify the order status in the database"*. Kyunki MCP active hai, AI khud local DB ka schema padhta hai, sahi SQL query (DAO) likhta hai, aur ekdum perfect, ready-to-run Pytest code generate kar deta hai bina data internet par leak kiye.
+* Live Production Phase: (N/A - Local workflow only)
+
 --- 🛑 PHASE 11 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1442,9 +1466,10 @@ Section 1: AI Tools, Tracing & Property Testing
 Topic 1: Property-Based Testing (`hypothesis` library)
 Topic 2: AI in API Testing (LLMs & Code Gen)
 Topic 3: Observability & Distributed Tracing (Correlation IDs)
+Topic 4: Secure AI Testing with Local LLMs & MCP (Model Context Protocol)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 18
+Sections: 1 | Topics: 4 | Subtopics: 26
 
 ⏳ Waiting for: Next phase/module notes
 
