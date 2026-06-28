@@ -499,7 +499,7 @@ Subtopics: execute_script, JS Click, Hidden Elements, Scrolling, textContent, in
 Topic 8: Scrolling Techniques [⚠️ Derived]
 Subtopics: Scroll by Pixel, Scroll to Element, window.scrollTo, scrollHeight, scrollIntoView, ActionChains.scroll_to_element
 
-[📊 SCOPE SIGNAL for Topic 8:
+[📊 SCOPE SIGNAL for Topic 9:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -509,10 +509,10 @@ Subtopics: Scroll by Pixel, Scroll to Element, window.scrollTo, scrollHeight, sc
 * Notes mein jo analogies/examples the: Lamba newspaper padhna — 10 inch sarkaana (Pixel scroll) vs seedha Sports section pe fold karna (Element scroll).
 ]
 
-🔑 KEYWORDS DUMP for Topic 8:
+🔑 KEYWORDS DUMP for Topic 9:
 [Scroll by Pixel, Scroll to Element, window.scrollTo(), document.body.scrollHeight, scrollIntoView(), ActionChains.scroll_to_element(), viewport, lazy loading, ElementNotInteractableException, ⭐"Hamesha Scroll by Element ko prefer karo"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
 
 * Testing/Offline Phase: Lazy loaded lists (e.g. Instagram feed) ya footer ke elements ko screen view mein laana.
 * Fixing/Iteration Phase: Different screen sizes ki wajah se 'Scroll by Pixel' ke random failures ko fix karke 'Scroll to Element' lagana.
@@ -817,7 +817,7 @@ Subtopics: Markers, Custom Markers, skip marker, xfail marker, @pytest.mark.smok
 Topic 8: Parallel Execution (pytest-xdist)
 Subtopics: pytest-xdist, Parallel Execution, Sequential Execution, CPU cores, Independent Tests, -n 4, -n auto, scope conflict
 
-[📊 SCOPE SIGNAL for Topic 8:
+[📊 SCOPE SIGNAL for Topic 9:
 
 * Depth Level: Moderate
 * Coverage Angle: Conceptual & CLI Commands
@@ -827,10 +827,10 @@ Subtopics: pytest-xdist, Parallel Execution, Sequential Execution, CPU cores, In
 * Notes mein jo analogies/examples the: Supermarket shopping analogy — Bina xdist akele 100 items laane mein 1 ghanta lagta hai. xdist ke saath 4 doston (CPU cores) mein list baant di aur 15 minute mein shopping khatam.
 ]
 
-🔑 KEYWORDS DUMP for Topic 8:
+🔑 KEYWORDS DUMP for Topic 9:
 [pytest-xdist, plugin, Parallel Execution, Sequential Execution, CPU cores, workers, Independent Tests, -n 4, -n auto, scope="function", scope="session", scope conflict, crash, Selenium Grid, ⭐"sab crash ho jayega"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
 
 * Testing/Offline Phase: 500 tests sequentially run hone mein 1 ghanta lete hain, developer feedback ke liye wait karta rehta hai.
 * Fixing/Iteration Phase: pytest-xdist install karke `-n auto` flag lagata hai jisse tests available CPU cores par ek saath daudte hain aur time 15-20 mins reh jata hai.
@@ -1364,10 +1364,34 @@ Subtopics: Docker Containerization, Selenium Grid with Docker, docker-compose.ym
 * Live Production Phase: (N/A)
 * Additional context: Test khatam hone ke baad `docker-compose down` chala kar pura infra easily dispose kiya jaata hai (clean state).
 
-Topic 4: Cloud Selenium Grid (BrowserStack, Sauce Labs, LambdaTest)
-Subtopics: Cloud Selenium Grid, BrowserStack & Sauce Labs, Environment Variables Setup, Hub URL Format, bstack:options Configuration, webdriver.Remote Cloud Execution, browserstack_executor Script, Local vs Cloud Grid Comparison
+--1--Advanced Testing (Grid & Cloud)--
+Topic 4: Scaling Grid with Kubernetes (K8s) & Helm
+Subtopics: Kubernetes Basics for QA, Pods vs Containers, Helm Charts for Selenium Grid, KEDA (Event-driven Auto-scaling), kubectl commands, Cloud-Native Testing
 
 [📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & CLI Commands
+* Notes mein content volume: Enterprise architecture flow, Helm install commands, and auto-scaling concepts
+* Key terms from notes: Kubernetes, K8s, Helm Chart, Pods, Deployments, Auto-scaling, KEDA, kubectl, Node pools
+* Explicit emphasis in notes: "Enterprise level par Docker Compose kaam nahi aata, wahan Kubernetes hi Raja hai."
+* Notes mein jo analogies/examples the: "Building vs Entire City" analogy — Docker Compose ek building manage karta hai, Kubernetes poori city (server cluster) ko manage karta hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Kubernetes, K8s, Helm, Helm Charts, Pods, Deployments, Services, ingress, auto-scaling, KEDA, kubectl get pods, kubectl apply -f, minikube, EKS, AKS, GKE, Cloud-Native, enterprise execution, parallel testing 1000 nodes, ⭐"Kubernetes hi Raja hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: QA Engineer local minikube cluster par ya dev-k8s cluster par Helm chart ke zariye apna private Grid deploy karta hai.
+* Fixing/Iteration Phase: Agar queue mein 500 tests ek saath aate hain, toh KEDA automatically 50 naye Chrome Pods (machines) create karta hai, aur tests khatam hone par unhe destroy kar deta hai (Cost saving).
+* Live Production Phase: DevOps CI/CD pipeline tests ko K8s cluster endpoint par bhejti hai.
+* Additional context: 2026 mein QA automation leads se basic `kubectl` commands aane ki expectation hoti hai taaki wo grid issue debug kar sakein.
+
+Topic 5: Cloud Selenium Grid (BrowserStack, Sauce Labs, LambdaTest)
+Subtopics: Cloud Selenium Grid, BrowserStack & Sauce Labs, Environment Variables Setup, Hub URL Format, bstack:options Configuration, webdriver.Remote Cloud Execution, browserstack_executor Script, Local vs Cloud Grid Comparison
+
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -1377,10 +1401,10 @@ Subtopics: Cloud Selenium Grid, BrowserStack & Sauce Labs, Environment Variables
 * Notes mein jo analogies/examples the: "Ola/Uber on-demand rental" analogy for renting test environments instead of buying/maintaining local nodes.
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 5:
 [Cloud Grid, BrowserStack, Sauce Labs, LambdaTest, Username, Access Key, Capability Generator, os, os.environ.get, BSTACK_USER, BSTACK_KEY, hub_url, webdriver.ChromeOptions, bstack:options, osVersion, browserName, browserVersion, buildName, sessionName, request.node.name, set_capability, webdriver.Remote, browserstack_executor, setSessionStatus, pytest_runtest_makereport, hookwrapper, network latency, CI, Nightly run]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Final release se pehle (Nightly runs) tests ko BrowserStack jaise cloud platform par bheja jaata hai taaki real Mac, iPhone, aur rare OS versions par testing ho sake.
 * Fixing/Iteration Phase: Agar cloud par test fail hota hai, toh PyTest `browserstack_executor` ke zariye result cloud dashboard par "Failed" set kar deta hai taaki report clearly dikhe.
@@ -1397,7 +1421,8 @@ Section 1: Advanced Testing (Grid & Cloud)
 Topic 1: Cross-Browser Testing
 Topic 2: Selenium Grid (Hub & Node Concept)
 Topic 3: Selenium Grid with Docker
-Topic 4: Cloud Selenium Grid (BrowserStack, Sauce Labs, LambdaTest)
+Topic 4: Scaling Grid with Kubernetes (K8s) & Helm
+Topic 5: Cloud Selenium Grid (BrowserStack, Sauce Labs, LambdaTest)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 4 | Subtopics: 37
@@ -1947,7 +1972,7 @@ Subtopics: Dockerfile Basics, Containerized Tests, Base Image, requirements.txt,
 Topic 8: CI/CD with Jenkins
 Subtopics: Continuous Integration, Continuous Deployment, Jenkins Server Config, Build Triggers, Requirements File Setup, PyTest CLI Execution
 
-[📊 SCOPE SIGNAL for Topic 8:
+[📊 SCOPE SIGNAL for Topic 9:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1957,10 +1982,10 @@ Subtopics: Continuous Integration, Continuous Deployment, Jenkins Server Config,
 * Notes mein jo analogies/examples the: "Factory ka Automated Manager" ki analogy — Git push as raw material, Jenkins as Manager, PyTest as Quality Control.
 ]
 
-🔑 KEYWORDS DUMP for Topic 8:
+🔑 KEYWORDS DUMP for Topic 9:
 [CI, Continuous Integration, CD, Continuous Deployment, Jenkins, automatic testing, Fast Feedback, webhook, git pull, requirements.txt, pytest, Factory ka Automated Manager, SCM, Source Control, Build Triggers, Execute Shell, Execute Windows batch, bash, venv, source venv/bin/activate, pip install -r requirements.txt, pip freeze, ShiningPanda, ⭐"Automation ka Automation"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
 
 * Testing/Offline Phase: Developer main branch mein code push karta hai jisse webhook trigger hota hai.
 * Fixing/Iteration Phase: Jenkins automatic factory ki tarah test chalata hai, aur fail hone par alert bhejta hai.
@@ -2013,32 +2038,29 @@ Subtopics: CI/CD Notification Loop, Fast Feedback, Slack Webhook Config, Conditi
 * Live Production Phase: Test pass hone par Slack par green alert (good) jaata hai jiska matlab product ship hone ke liye ready hai.
 * Additional context: (N/A)
 
-Topic 11: Selenium 4 CDP & BiDi APIs
-Subtopics: Chrome DevTools Protocol, WebDriver BiDi, Network Throttling, Geolocation Mocking, Console JS Error Capturing, WebSocket Architecture, Cloud Scalability Limitations
+--1--Advanced Topics--
+Topic 11: W3C WebDriver BiDi (Bidirectional API) & CDP
+Subtopics: WebDriver BiDi Architecture, Cross-Browser Compatibility, Network Interception via BiDi, Console Log Listening, DOM Mutation Observer, CDP Fallback
 
 [📊 SCOPE SIGNAL for Topic 11:
 
 * Depth Level: Deep
 * Coverage Angle: Both
-* Notes mein content volume: Long deep-dive explanation with comprehensive python code and ASCII diagram
-* Key terms from notes: CDP, Chrome DevTools Protocol, BiDi APIs, Network Throttling, Geolocation Mocking, execute_cdp_cmd, Emulation.setGeolocationOverride, Network.emulateNetworkConditions, get_log("browser"), SEVERE, WebSocket Connection
-* Explicit emphasis in notes: "CRITICAL SECTION", "SEVERE"
-* Notes mein jo analogies/examples the: "Car" ki analogy — Normal W3C driver seat par baithkar steering ghumana hai, CDP direct engine ka bonet kholkar mechanic tool lagana hai.
+* Notes mein content volume: Detailed explanation of BiDi architecture with event-driven Python code
+* Key terms from notes: WebDriver BiDi, Bidirectional, W3C Standard, Event-driven, async/await, Console.log, Network.beforeRequestSent, CDP legacy
+* Explicit emphasis in notes: "CDP ab purana ho gaya hai, 2026 mein asli power W3C BiDi ki hai kyunki yeh Firefox aur Safari par bhi chalta hai."
+* Notes mein jo analogies/examples the: "Walkie-Talkie vs Phone Call" analogy — Purana WebDriver ek-tarfa walkie-talkie tha, BiDi ek live phone call (two-way connection) hai.
 ]
 
 🔑 KEYWORDS DUMP for Topic 11:
-[Selenium 4, CDP, Chrome DevTools Protocol, BiDi APIs, Network Throttling, Geolocation Mocking, Console JS Error, W3C WebDriver, Emulation.setGeolocationOverride, latitude, longitude, accuracy, Network.emulateNetworkConditions, offline, latency, downloadThroughput, uploadThroughput, driver.execute_cdp_cmd, get_log("browser"), SEVERE, Server-side IP address, bstack:options, networkProfile, State leak, UnknownCommandException, InvalidArgumentException, WebDriverException, net::ERR_INTERNET_DISCONNECTED, ⭐Python 3.11[version], ⭐Selenium 4.10[version]]
+[Selenium 4.20+, WebDriver BiDi, W3C Standard, Websocket, Event-driven, async, await, Network Interception, bidi_connection, log.entryAdded, Network.responseCompleted, DOM mutations, cross-browser, Firefox, Safari, Chrome DevTools Protocol, CDP fallback, ⭐Python 3.13+[version], ⭐"CDP ab purana ho gaya hai"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
 
-* Testing/Offline Phase: Tester slow 3G connection wale UI bugs ko normal fast Wi-Fi par reproduce nahi kar pata hai.
-* Fixing/Iteration Phase: Tester Selenium 4 ka Network Throttle use karke speed artificially slow karta hai aur SEVERE JS console errors catch karta hai.
-* Live Production Phase: Issue fix hone ke baad, tester network throttle wala suite nightly CI/CD pipeline mein add kar deta hai taaki agar future mein app bhari (heavy) ho, toh automatically alert mil jaaye.
-* Additional context: Swiggy/Uber Eats jaisi apps QA ke dauran CDP geolocation mocking use karti hain bina real travel kiye city-specific content check karne ke liye.
-
---- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
-
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+* Testing/Offline Phase: Developer test likhta hai jahan test wait nahi karta, balki browser khud test ko ping karta hai jaise hi koi JS error aata hai.
+* Fixing/Iteration Phase: Cross-browser pipeline mein BiDi ka use karke Firefox aur Chrome dono par ek saath network request ko mock kiya jaata hai (jo pehle sirf Chrome par CDP se hota tha).
+* Live Production Phase: (N/A)
+* Additional context: 2026 mein WebDriver BiDi lagbhag sabhi browsers par default standard ban chuka hai, raw CDP ka use sirf rare Chrome-specific bugs ke liye hota hai.
 
 --1--Advanced Topics--
 Topic 12: Network Interception & API Mocking (CDP)
@@ -2076,7 +2098,7 @@ Topic 6: Git & Version Control Basics
 Topic 8: CI/CD with Jenkins
 Topic 9: CI/CD with GitHub Actions
 Topic 10: Slack / Email Notifications
-Topic 11: Selenium 4 CDP & BiDi APIs
+Topic 11: W3C WebDriver BiDi (Bidirectional API) & CDP
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 10 | Subtopics: 61
@@ -2349,12 +2371,14 @@ Section 1: Projects & Job Prep
 Topic 1: E-Commerce Project Flow
 Topic 2: HR Portal Project Flow
 Topic 3: Test Strategy Document Preparation
+Topic 4: Agile Ceremonies & Test Estimation
 Topic 5: Writing Good Test Cases
 Topic 6: Interview Theory Q&A
 Topic 7: System Design for Automation Frameworks
+Topic 9: Generative AI & LLMs in Test Automation
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 8 | Subtopics: 56
+Sections: 1 | Topics: 9 | Subtopics: 60
 
 ⏳ **Waiting for:** Next phase/module notes (or type 'DONE')
 
