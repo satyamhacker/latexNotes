@@ -1,4 +1,4 @@
-# MODULE 1: Automation & Selenium Basics
+# Module 1: Automation & Selenium Basics
 
 
 📦 Processing: Phase/Module 1 — Automation & Selenium Basics
@@ -148,7 +148,7 @@ Sections: 2 | Topics: 4 | Subtopics: 25
 
 ==================================================================================
 
-# MODULE 2: WebDriver & Locators
+# Module 2: WebDriver & Locators
 
 
 
@@ -324,7 +324,7 @@ Sections: 2 | Topics: 5 | Subtopics: 37
 ==================================================================================
 
 
-# MODULE 3: Element Interaction & Waits
+# Module 3: Element Interaction & Waits
 
 
 📦 Processing: Phase 1 — Module 3: Element Interaction & Waits
@@ -639,7 +639,7 @@ Total Sections: 1 | Total Topics: 11 | Total Subtopics: ~85
 
 ==================================================================================
 
-# MODULE 4: PyTest Framework
+# Module 4: PyTest Framework
 
 📦 Processing: Phase/Module 4 — PyTest Framework
 
@@ -916,7 +916,7 @@ Sections: 3 | Topics: 10 | Subtopics: 74
 
 ==================================================================================
 
-# MODULE 5: Automation Framework Design (POM)
+# Module 5: Automation Framework Design (POM)
 
 📦 Processing: Phase 1 — Module 5: Automation Framework Design (POM)
 
@@ -1117,7 +1117,7 @@ Sections: 2 | Topics: 7 | Subtopics: 41
 ==================================================================================
 
 
-# MODULE 6: Logging, Reporting & Debugging
+# Module 6: Logging, Reporting & Debugging
 
 📦 Processing: Phase 1 — Module 6: Logging, Reporting & Debugging
 
@@ -1287,7 +1287,7 @@ Sections: 1 | Topics: 6 | Subtopics: 45
 
 ==================================================================================
 
-## MODULE 7: Advanced Testing (Grid & Cloud)
+# Module 7: Advanced Testing (Grid & Cloud)
 
 📦 Processing: Phase 1 — Module 7: Advanced Testing (Grid & Cloud)
 
@@ -1410,7 +1410,7 @@ Sections: 1 | Topics: 4 | Subtopics: 37
 
 ==================================================================================
 
-# MODULE 8: Mobile Testing with Appium
+# Module 8: Mobile Testing with Appium
 
 
 📦 Processing: Phase 1 — Module 8: Mobile Testing with Appium
@@ -1594,7 +1594,7 @@ Sections: 1 | Topics: 6 | Subtopics: 39
 
 ==================================================================================
 
-# MODULE 9: BDD Framework
+# Module 9: BDD Framework
 
 
 📦 Processing: Phase/Module 1 — Module 11: BDD Framework
@@ -1775,7 +1775,7 @@ Section 1: BDD Framework (Bridging Tech and Business) [⚠️ Derived]
 
 ==================================================================================
 
-# MODULE 10: Advanced Topics (Visual, Security, CI/CD)
+# Module 10: Advanced Topics (Visual, Security, CI/CD)
 
 📦 Processing: Phase 1 — Module 12 (Advanced Topics)
 
@@ -2040,7 +2040,7 @@ Sections: 1 | Topics: 10 | Subtopics: 61
 
 ==================================================================================
 
-# MODULE 11: (Bonus) Projects & Job Prep
+# Module 11: (Bonus) Projects & Job Prep
 
 📦 Processing: Phase 1 — Module 13 (Bonus: Projects & Job Prep)
 
@@ -2216,7 +2216,7 @@ Sections: 1 | Topics: 6 | Subtopics: 42
 
 ==================================================================================
 
-# MODULE 12: (Bonus 2) Integration & Performance
+# Module 12: (Bonus 2) Integration & Performance
 
 
 📦 Processing: Phase 1 — Module 14 (Bonus 2: Integration & Performance)
@@ -2290,31 +2290,3 @@ Sections: 1 | Topics: 2 | Subtopics: 18
 
 ==================================================================================
 
-
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-
-
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
