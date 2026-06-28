@@ -7,6 +7,24 @@
 API testing ki shuruaat — environment setup se lekar test execution aur debugging tak. [⚠️ Derived]
 
 --1--Setup & Pytest Basics--
+Topic 1: The Automation Test Pyramid & Shift-Left Strategy [⚠️ Derived]
+Subtopics: Unit Testing vs Integration Testing vs E2E Testing, The Automation Pyramid, API Testing Positioning, Cost of Bugs, Shift-Left Testing, Developer vs SDET Roles
+
+[📊 SCOPE SIGNAL for Topic 1:
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & Architecture
+* Notes mein content volume: Explanation of different testing layers and where API testing fits
+* Key terms from notes: Test Pyramid, Unit Tests, Integration Tests, End-to-End (E2E), UI Tests, Shift-Left, Cost of fixing bugs, SDET
+* Explicit emphasis in notes: "API testing Integration layer mein aati hai. Yeh UI E2E tests se fast hoti hai aur Unit tests se zyada reliable hoti hai."
+* Notes mein jo analogies/examples the: "Car Manufacturing" analogy — Engine ka ek part test karna (Unit), Engine ko gaadi se jod kar start karna (Integration/API), Poori gaadi ko road par chalana (E2E/UI).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Test Pyramid, Unit Testing, White-box, Integration Testing, API Testing, Service Layer, End-to-End Testing, E2E, UI Testing, Selenium, Shift-Left, ROI, Bug fixing cost, Developer vs QA, Scope isolation, ⭐"Car Manufacturing"[analogy], ⭐"Integration layer mein aati hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+* Testing/Offline Phase: QA team decide karti hai ki kaunsa test kahan automate hoga. Agar calculation check karni hai toh Dev ko bolte hain Unit test likho. Agar business flow check karna hai toh Pytest mein API integration test likhte hain, taaki UI automation par bhoj kam ho.
+
 Topic 2: Modern Virtual Environment & Package Management (`uv`) [⚠️ Derived]
 Subtopics: uv Introduction, Rust-based Tooling, Project Isolation, venv vs uv, Creating Environments (uv venv), Fast Dependency Installation (uv pip install), requirements.txt, Lock Files, Version Conflicts, Drop-in Replacement
 
@@ -106,6 +124,24 @@ Subtopics: API Authentication, Basic Auth, API Key, Bearer Token, requests Libra
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Setup, Architecture & Pytest Basics
+Topic 1: The Automation Test Pyramid & Shift-Left Strategy [⚠️ Derived]
+Subtopics: Unit Testing vs Integration Testing vs E2E Testing, The Automation Pyramid, API Testing Positioning, Cost of Bugs, Shift-Left Testing, Developer vs SDET Roles
+
+[📊 SCOPE SIGNAL for Topic 1:
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & Architecture
+* Notes mein content volume: Explanation of different testing layers and where API testing fits
+* Key terms from notes: Test Pyramid, Unit Tests, Integration Tests, End-to-End (E2E), UI Tests, Shift-Left, Cost of fixing bugs, SDET
+* Explicit emphasis in notes: "API testing Integration layer mein aati hai. Yeh UI E2E tests se fast hoti hai aur Unit tests se zyada reliable hoti hai."
+* Notes mein jo analogies/examples the: "Car Manufacturing" analogy — Engine ka ek part test karna (Unit), Engine ko gaadi se jod kar start karna (Integration/API), Poori gaadi ko road par chalana (E2E/UI).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Test Pyramid, Unit Testing, White-box, Integration Testing, API Testing, Service Layer, End-to-End Testing, E2E, UI Testing, Selenium, Shift-Left, ROI, Bug fixing cost, Developer vs QA, Scope isolation, ⭐"Car Manufacturing"[analogy], ⭐"Integration layer mein aati hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+* Testing/Offline Phase: QA team decide karti hai ki kaunsa test kahan automate hoga. Agar calculation check karni hai toh Dev ko bolte hain Unit test likho. Agar business flow check karna hai toh Pytest mein API integration test likhte hain, taaki UI automation par bhoj kam ho.
+
 Topic 2: Modern Virtual Environment & Package Management (`uv`)
 Topic 3: Pytest Fundamentals & Test Structure
 Topic 4: Test Discovery Rules & Execution (CLI)
@@ -321,6 +357,24 @@ Subtopics: Test Case Design, TCID-29 Create Customer Positive, Happy Path, Negat
 * Live Production Phase: Real users ko DB corrupt hone se bachata hai aur unhe valid error message dikhata hai jab wo already taken email use karte hain.
 * Additional context: (N/A)
 
+Topic 4: API Chaining & Stateful E2E Workflows [⚠️ Derived]
+Subtopics: API Chaining, Passing State between Tests, Extracting IDs, Multi-step Workflows, CRUD Lifecycle Testing, test execution order (pytest-ordering)
+
+[📊 SCOPE SIGNAL for Topic 4:
+* Depth Level: Deep
+* Coverage Angle: Code & Practical Flow
+* Notes mein content volume: A full Pytest example showing POST -> GET -> PUT -> DELETE using extracted variables
+* Key terms from notes: API Chaining, Stateful workflow, Extracting variables, response.json()['id'], CRUD lifecycle, sequential testing
+* Explicit emphasis in notes: "Asli E2E test single API hit nahi hota. Woh ek poora user journey hota hai. Create -> Update -> Delete ek hi test flow mein hona chahiye."
+* Notes mein jo analogies/examples the: "E-Commerce Shopping Cart" analogy — Pehle token (Login) lo, phir cart mein daalo (POST), phir checkout (POST), tabhi aap bol sakte ho ki system chal raha hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[API Chaining, Stateful Workflows, End-to-End, E2E Flow, Dynamic Data Passing, Extracting variables, Dictionary extraction, id extraction, CRUD Lifecycle, POST GET PUT DELETE sequential, User Journey, Pytest fixtures scope, pytest-ordering, Dependency between tests, ⭐"E-Commerce Shopping Cart"[analogy], ⭐"Asli E2E test single API hit nahi hota"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+* Testing/Offline Phase: Developer ek test function banata hai jo pehle `create_user` API call karta hai, wahan se `user_id` extract karta hai, phir us `user_id` ko pass karke `create_order` API call karta hai, aur verify karta hai ki us specific user ka order lag gaya.
+
 Topic 5: Logging Basics (Print vs Logger) [⚠️ Derived]
 Subtopics: Print vs Logger, Logging Levels, DEBUG, INFO, WARNING, ERROR, Logger Setup, getLogger, basicConfig, Pytest Log Capture Command
 
@@ -399,7 +453,25 @@ Subtopics: Flaky Tests, Asynchronous Processes, Static Wait Problem, Dynamic Ret
 Section 1: API Client & Test Strategy
   Topic 2: HTTP & Professional Helper Classes
   Topic 3: Test Case Design (Positive & Negative Paths)
-  Topic 5: Logging Basics (Print vs Logger)
+  Topic 4: API Chaining & Stateful E2E Workflows [⚠️ Derived]
+Subtopics: API Chaining, Passing State between Tests, Extracting IDs, Multi-step Workflows, CRUD Lifecycle Testing, test execution order (pytest-ordering)
+
+[📊 SCOPE SIGNAL for Topic 4:
+* Depth Level: Deep
+* Coverage Angle: Code & Practical Flow
+* Notes mein content volume: A full Pytest example showing POST -> GET -> PUT -> DELETE using extracted variables
+* Key terms from notes: API Chaining, Stateful workflow, Extracting variables, response.json()['id'], CRUD lifecycle, sequential testing
+* Explicit emphasis in notes: "Asli E2E test single API hit nahi hota. Woh ek poora user journey hota hai. Create -> Update -> Delete ek hi test flow mein hona chahiye."
+* Notes mein jo analogies/examples the: "E-Commerce Shopping Cart" analogy — Pehle token (Login) lo, phir cart mein daalo (POST), phir checkout (POST), tabhi aap bol sakte ho ki system chal raha hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[API Chaining, Stateful Workflows, End-to-End, E2E Flow, Dynamic Data Passing, Extracting variables, Dictionary extraction, id extraction, CRUD Lifecycle, POST GET PUT DELETE sequential, User Journey, Pytest fixtures scope, pytest-ordering, Dependency between tests, ⭐"E-Commerce Shopping Cart"[analogy], ⭐"Asli E2E test single API hit nahi hota"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+* Testing/Offline Phase: Developer ek test function banata hai jo pehle `create_user` API call karta hai, wahan se `user_id` extract karta hai, phir us `user_id` ko pass karke `create_order` API call karta hai, aur verify karta hai ki us specific user ka order lag gaya.
+
+Topic 5: Logging Basics (Print vs Logger)
   Topic 6: API Schema Validation (`pydantic` / `jsonschema`)
   Topic 7: Handling Flakiness (Retries & Waits)
 Topic 8: Multi-Environment Setup & API Versioning
@@ -417,6 +489,24 @@ Topic 8: Multi-Environment Setup & API Versioning
 Section 1: API Client & Test Strategy
 Topic 2: HTTP & Professional Helper Classes
 Topic 3: Test Case Design (Positive & Negative Paths)
+Topic 4: API Chaining & Stateful E2E Workflows [⚠️ Derived]
+Subtopics: API Chaining, Passing State between Tests, Extracting IDs, Multi-step Workflows, CRUD Lifecycle Testing, test execution order (pytest-ordering)
+
+[📊 SCOPE SIGNAL for Topic 4:
+* Depth Level: Deep
+* Coverage Angle: Code & Practical Flow
+* Notes mein content volume: A full Pytest example showing POST -> GET -> PUT -> DELETE using extracted variables
+* Key terms from notes: API Chaining, Stateful workflow, Extracting variables, response.json()['id'], CRUD lifecycle, sequential testing
+* Explicit emphasis in notes: "Asli E2E test single API hit nahi hota. Woh ek poora user journey hota hai. Create -> Update -> Delete ek hi test flow mein hona chahiye."
+* Notes mein jo analogies/examples the: "E-Commerce Shopping Cart" analogy — Pehle token (Login) lo, phir cart mein daalo (POST), phir checkout (POST), tabhi aap bol sakte ho ki system chal raha hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[API Chaining, Stateful Workflows, End-to-End, E2E Flow, Dynamic Data Passing, Extracting variables, Dictionary extraction, id extraction, CRUD Lifecycle, POST GET PUT DELETE sequential, User Journey, Pytest fixtures scope, pytest-ordering, Dependency between tests, ⭐"E-Commerce Shopping Cart"[analogy], ⭐"Asli E2E test single API hit nahi hota"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+* Testing/Offline Phase: Developer ek test function banata hai jo pehle `create_user` API call karta hai, wahan se `user_id` extract karta hai, phir us `user_id` ko pass karke `create_order` API call karta hai, aur verify karta hai ki us specific user ka order lag gaya.
+
 Topic 5: Logging Basics (Print vs Logger)
 Topic 6: API Schema Validation (`pydantic` / `jsonschema`)
 Topic 7: Handling Flakiness (Retries & Waits)
