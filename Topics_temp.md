@@ -1777,7 +1777,6 @@ Section 1: BDD Framework (Bridging Tech and Business) [⚠️ Derived]
 
 # Module 10: Advanced Topics (Visual, Security, CI/CD)
 
-📦 Processing: Phase 1 — Module 12 (Advanced Topics)
 
 ===Section 1: Advanced Topics (Visual, Security, CI/CD)===
 Yeh bonus module automation tester ko automation architect banata hai — visual checks, security, aur pipelines ke through.
@@ -1921,10 +1920,34 @@ Subtopics: Version Control System, GitHub Repository, Local vs Remote Sync, Bran
 * Live Production Phase: Code review ke baad PR ko main branch mein merge kar diya jaata hai.
 * Additional context: (N/A)
 
-Topic 7: CI/CD with Jenkins
-Subtopics: Continuous Integration, Continuous Deployment, Jenkins Server Config, Build Triggers, Requirements File Setup, PyTest CLI Execution
+--1--Advanced Topics--
+Topic 7: Dockerizing the Automation Framework
+Subtopics: Dockerfile Basics, Containerized Tests, Base Image, requirements.txt, Volumes, Entrypoint, Headless Execution Requirement
 
 [📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Step-by-step Dockerfile creation with execution commands
+* Key terms from notes: Dockerfile, python:3.11-slim, WORKDIR, COPY, RUN pip install, ENTRYPOINT, docker build, docker run
+* Explicit emphasis in notes: "Iske bina CI/CD server par aapka code kabhi nahi chalega"
+* Notes mein jo analogies/examples the: "Tiffin Box" analogy — Apna code, dependencies (Selenium/PyTest), aur Python ek box (container) mein pack karke Jenkins ko dena taaki "It works on my machine" wala excuse na rahe.
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[Dockerfile, Container, Image, python:3.11-slim, WORKDIR, COPY, RUN, pip install -r requirements.txt, CMD, ENTRYPOINT, docker build -t my-tests ., docker run, docker run -v, volume mapping, headless mode, CI/CD ready, Isolated environment, "It works on my machine", ⭐"Iske bina CI/CD server par aapka code kabhi nahi chalega"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Testing/Offline Phase: Developer apne framework folder mein ek `Dockerfile` banata hai aur locally test karta hai ki container ke andar tests headless mode mein chal rahe hain ya nahi.
+* Fixing/Iteration Phase: Agar kisi library ka version conflict hota hai, toh requirements.txt aur Dockerfile update karke naya image build kiya jaata hai.
+* Live Production Phase: Jenkins/GitHub Actions isi Docker image ko pull karke run karte hain, unhe apne server par Python install karne ki zaroorat nahi padti.
+* Additional context: UI testing ke liye hamesha `--headless` flag on hona chahiye docker container ke andar.
+
+Topic 8: CI/CD with Jenkins
+Subtopics: Continuous Integration, Continuous Deployment, Jenkins Server Config, Build Triggers, Requirements File Setup, PyTest CLI Execution
+
+[📊 SCOPE SIGNAL for Topic 8:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1934,20 +1957,20 @@ Subtopics: Continuous Integration, Continuous Deployment, Jenkins Server Config,
 * Notes mein jo analogies/examples the: "Factory ka Automated Manager" ki analogy — Git push as raw material, Jenkins as Manager, PyTest as Quality Control.
 ]
 
-🔑 KEYWORDS DUMP for Topic 7:
+🔑 KEYWORDS DUMP for Topic 8:
 [CI, Continuous Integration, CD, Continuous Deployment, Jenkins, automatic testing, Fast Feedback, webhook, git pull, requirements.txt, pytest, Factory ka Automated Manager, SCM, Source Control, Build Triggers, Execute Shell, Execute Windows batch, bash, venv, source venv/bin/activate, pip install -r requirements.txt, pip freeze, ShiningPanda, ⭐"Automation ka Automation"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
 
 * Testing/Offline Phase: Developer main branch mein code push karta hai jisse webhook trigger hota hai.
 * Fixing/Iteration Phase: Jenkins automatic factory ki tarah test chalata hai, aur fail hone par alert bhejta hai.
 * Live Production Phase: Test pass hone par Jenkins code ko automatic live server par deploy kar deta hai.
 * Additional context: (N/A)
 
-Topic 8: CI/CD with GitHub Actions
+Topic 9: CI/CD with GitHub Actions
 Subtopics: Serverless CI/CD, Infrastructure as Code, YAML Workflow Configuration, Action Triggers, GitHub Runners, Step Definitions, Artifact Archiving
 
-[📊 SCOPE SIGNAL for Topic 8:
+[📊 SCOPE SIGNAL for Topic 9:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -1957,20 +1980,20 @@ Subtopics: Serverless CI/CD, Infrastructure as Code, YAML Workflow Configuration
 * Notes mein jo analogies/examples the: "Banquet Hall" ki analogy — Jenkins as buying/managing full hall vs GitHub Actions as giving a checklist to a ready-made hall.
 ]
 
-🔑 KEYWORDS DUMP for Topic 8:
+🔑 KEYWORDS DUMP for Topic 9:
 [GitHub Actions, serverless, Infrastructure as Code, IaC, YAML, .yml, Workflow, runners, Party, Banquet Hall, .github/workflows/, ci-tests.yml, on: push, branches, pull_request, workflow_dispatch, jobs, runs-on, ubuntu-latest, windows-latest, macos-latest, steps, actions/checkout@v4, actions/setup-python@v4, ⭐Python 3.10[version], actions/upload-artifact@v3, if: always(), Secrets and variables, ${{ secrets.DB_PASSWORD }}]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
 
 * Testing/Offline Phase: (N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: (N/A)
 * Additional context: (N/A)
 
-Topic 9: Slack / Email Notifications
+Topic 10: Slack / Email Notifications
 Subtopics: CI/CD Notification Loop, Fast Feedback, Slack Webhook Config, Conditional Action Steps, GitHub Secrets Binding
 
-[📊 SCOPE SIGNAL for Topic 9:
+[📊 SCOPE SIGNAL for Topic 10:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -1980,20 +2003,20 @@ Subtopics: CI/CD Notification Loop, Fast Feedback, Slack Webhook Config, Conditi
 * Notes mein jo analogies/examples the: "Factory ka Alarm" ki analogy — Fail par zor se red alert bajna, Pass par green light.
 ]
 
-🔑 KEYWORDS DUMP for Topic 9:
+🔑 KEYWORDS DUMP for Topic 10:
 [Slack, Email Notifications, CI/CD pipeline, Fast Feedback, Incoming Webhook, SLACK_WEBHOOK_URL, if: failure(), rtCamp/action-slack-notify@v2, env, SLACK_TITLE, SLACK_MESSAGE, SLACK_COLOR, if: success(), Email Extension, emailext, ⭐"aakhri step"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: Test fail hone par Slack par automatic red alert (danger) notification jaata hai taaki developer turant fix kare.
 * Live Production Phase: Test pass hone par Slack par green alert (good) jaata hai jiska matlab product ship hone ke liye ready hai.
 * Additional context: (N/A)
 
-Topic 10: Selenium 4 CDP & BiDi APIs
+Topic 11: Selenium 4 CDP & BiDi APIs
 Subtopics: Chrome DevTools Protocol, WebDriver BiDi, Network Throttling, Geolocation Mocking, Console JS Error Capturing, WebSocket Architecture, Cloud Scalability Limitations
 
-[📊 SCOPE SIGNAL for Topic 10:
+[📊 SCOPE SIGNAL for Topic 11:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -2003,10 +2026,10 @@ Subtopics: Chrome DevTools Protocol, WebDriver BiDi, Network Throttling, Geoloca
 * Notes mein jo analogies/examples the: "Car" ki analogy — Normal W3C driver seat par baithkar steering ghumana hai, CDP direct engine ka bonet kholkar mechanic tool lagana hai.
 ]
 
-🔑 KEYWORDS DUMP for Topic 10:
+🔑 KEYWORDS DUMP for Topic 11:
 [Selenium 4, CDP, Chrome DevTools Protocol, BiDi APIs, Network Throttling, Geolocation Mocking, Console JS Error, W3C WebDriver, Emulation.setGeolocationOverride, latitude, longitude, accuracy, Network.emulateNetworkConditions, offline, latency, downloadThroughput, uploadThroughput, driver.execute_cdp_cmd, get_log("browser"), SEVERE, Server-side IP address, bstack:options, networkProfile, State leak, UnknownCommandException, InvalidArgumentException, WebDriverException, net::ERR_INTERNET_DISCONNECTED, ⭐Python 3.11[version], ⭐Selenium 4.10[version]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
 
 * Testing/Offline Phase: Tester slow 3G connection wale UI bugs ko normal fast Wi-Fi par reproduce nahi kar pata hai.
 * Fixing/Iteration Phase: Tester Selenium 4 ka Network Throttle use karke speed artificially slow karta hai aur SEVERE JS console errors catch karta hai.
@@ -2017,6 +2040,30 @@ Subtopics: Chrome DevTools Protocol, WebDriver BiDi, Network Throttling, Geoloca
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
+--1--Advanced Topics--
+Topic 12: Network Interception & API Mocking (CDP)
+Subtopics: Network Interception, Request Blocking, API Mocking, Fake JSON Response, Image Blocking, BiDi NetworkHooks
+
+[📊 SCOPE SIGNAL for Topic 12:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed explanation with 2 CDP code examples (Block images, Mock API)
+* Key terms from notes: Intercept, Mocking, Fake Response, Network.setRequestInterception, fetch, route, blocklist
+* Explicit emphasis in notes: "Heavy images ko block karke test execution 2x fast karo"
+* Notes mein jo analogies/examples the: "Restaurant ka rasta" analogy — Order kitchen (backend) tak jaane se pehle hi nakli pizza (mocked data) pakda dena.
+]
+
+🔑 KEYWORDS DUMP for Topic 12:
+[Network Interception, Mocking, Fake JSON, Blocking requests, Network.setRequestInterception, fetch.enable, fetch.fulfillRequest, fetch.failRequest, base64, 200 OK, 500 Internal Server Error, route, heavy images block, CDP, BiDi APIs, performance boost, ⭐"Heavy images ko block karke test execution 2x fast karo"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 12:
+
+* Testing/Offline Phase: Developer test likhta hai jisme `.png` aur `.jpg` network requests ko block kar diya jaata hai taaki page instantly load ho.
+* Fixing/Iteration Phase: Backend server down hone par, tester API response ko mock (fake JSON 200 OK) kar deta hai taaki UI tests fail na hon.
+* Live Production Phase: (N/A)
+* Additional context: Mocking ka use tab hota hai jab backend team ne abhi tak API nahi banayi hoti par UI ready hota hai.
+
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Advanced Topics (Visual, Security, CI/CD)
@@ -2026,10 +2073,10 @@ Topic 3: Accessibility Testing
 Topic 4: Basic Security Checks
 Topic 5: Secure Credential Management
 Topic 6: Git & Version Control Basics
-Topic 7: CI/CD with Jenkins
-Topic 8: CI/CD with GitHub Actions
-Topic 9: Slack / Email Notifications
-Topic 10: Selenium 4 CDP & BiDi APIs
+Topic 8: CI/CD with Jenkins
+Topic 9: CI/CD with GitHub Actions
+Topic 10: Slack / Email Notifications
+Topic 11: Selenium 4 CDP & BiDi APIs
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 10 | Subtopics: 61
@@ -2040,7 +2087,83 @@ Sections: 1 | Topics: 10 | Subtopics: 61
 
 ==================================================================================
 
-# Module 11: (Bonus) Projects & Job Prep
+# Module 11: Backend Automation (API & DB)
+
+📦 Processing: Phase/Module 11 — Backend Automation (API & DB)
+
+===Section 1: Backend Automation & Validation===
+UI automation incomplete hai agar aap backend API aur Database ko validate nahi karte.
+
+--1--Backend Automation & Validation--
+Topic 1: API Fundamentals & Postman
+Subtopics: REST API Concepts, HTTP Methods (GET, POST, PUT, DELETE), Status Codes, JSON Payloads, Headers, Bearer Token, Postman Interface, Manual API Testing
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Concept explanations with Postman setup steps
+* Key terms from notes: REST, Endpoints, GET, POST, PUT, DELETE, 200 OK, 201 Created, 400 Bad Request, 401 Unauthorized, 500 Server Error, JSON, Headers, Bearer Token, Postman
+* Explicit emphasis in notes: "API Automation ka base Postman hai"
+* Notes mein jo analogies/examples the: "Waiter in a Restaurant" analogy — Customer (UI), Waiter (API), Kitchen (Database).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[REST API, HTTP Methods, GET read, POST create, PUT update, DELETE remove, Status Codes, 200 OK, 201 Created, 400 Bad Request, 401 Unauthorized, 404 Not Found, 500 Internal Server Error, JSON payload, Headers, Authorization, Bearer Token, Postman, Collections, Environment Variables, ⭐"API Automation ka base Postman hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Learning Phase: Postman tool open karke manual GET aur POST request bhejna aur JSON response padhna seekhna.
+* Application Phase: (N/A)
+* Mastery Phase: (N/A)
+
+Topic 2: Automating APIs with Python `requests`
+Subtopics: requests Library, GET Request, POST Request with JSON, Dynamic Payloads, Validating Response Code, Validating Response Body, PyTest Integration for API
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed code blocks for CRUD operations using PyTest
+* Key terms from notes: import requests, requests.get(), requests.post(), response.json(), response.status_code, assertions
+* Explicit emphasis in notes: "UI test chalaane se pehle data API se set up karo"
+* Notes mein jo analogies/examples the: (N/A)
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[requests, Python API testing, pip install requests, requests.get(), requests.post(), requests.put(), requests.delete(), response.status_code, response.json(), JSON parsing, dictionary, assert response.status_code == 200, json=payload, headers=headers, API Test suite, PyTest API integration, Data Setup, ⭐"UI test chalaane se pehle data API se set up karo"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer PyTest framework mein `test_api.py` banata hai jahan Python `requests` library se user create/delete ki testing hoti hai bina browser khole.
+* Fixing/Iteration Phase: (N/A)
+
+Topic 3: Database Validations in Automation (SQL)
+Subtopics: DB Connection (psycopg2/pymysql), Basic SQL Queries, CRUD in SQL, Executing Queries in Python, Fetching Data, DB Teardown/Cleanup
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: SQL query basics plus Python DB connection code
+* Key terms from notes: pymysql, psycopg2, SELECT, INSERT, cursor.execute(), cursor.fetchone(), Teardown, Rollback
+* Explicit emphasis in notes: "UI par jo dikh raha hai, wo DB mein bhi hona chahiye!"
+* Notes mein jo analogies/examples the: "Cash Register vs Vault" analogy — UI Cash register hai, par asli paisa (data) Vault (DB) mein check karna zaroori hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Database, SQL, RDBMS, pymysql, psycopg2, DB connection, cursor, SELECT * FROM, WHERE, cursor.execute(), cursor.fetchone(), cursor.fetchall(), commit(), rollback(), DB Validation, UI to DB sync, Test Teardown, Data Cleanup, ⭐"UI par jo dikh raha hai, wo DB mein bhi hona chahiye!"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Test script UI ke through ek user register karti hai, phir DB connect karke `SELECT` query fire karti hai taaki confirm ho ki data database mein entry ho chuka hai.
+* Fixing/Iteration Phase: Test ke aakhir (Teardown) mein `DELETE` query chala kar kachra (test data) saaf kar diya jaata hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 12: (Bonus) Projects & Job Prep
 
 📦 Processing: Phase 1 — Module 13 (Bonus: Projects & Job Prep)
 
@@ -2117,10 +2240,33 @@ Subtopics: Test Strategy Concept, Scope Definition, Tools & Technology Stack, Ri
 * Mastery Phase: (N/A)
 * Additional context: (N/A)
 
-Topic 4: Writing Good Test Cases
-Subtopics: Manual Test Cases, Good Test Case Properties, Equivalence Partitioning EP, Boundary Value Analysis BVA, Decision Table, Automation Candidates Selection
+--1--Bonus Projects & Job Prep--
+Topic 4: Agile Ceremonies & Test Estimation
+Subtopics: Sprint Planning, QA Role in Agile, User Story Analysis, Acceptance Criteria, Story Points Estimation, Definition of Ready (DoR), Definition of Done (DoD)
 
 [📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual only
+* Notes mein content volume: Theoretical explanation of Agile meetings and QA duties
+* Key terms from notes: Sprint, Scrum, User Story, Acceptance Criteria, Story Points, Fibonacci, Planning Poker, DoR, DoD
+* Explicit emphasis in notes: "Bina Acceptance Criteria ke testing shuru mat karo"
+* Notes mein jo analogies/examples the: "T-Shirt Sizing" analogy for estimation (S, M, L, XL effort).
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Agile, Scrum, Sprint Planning, Daily Standup, Sprint Retrospective, User Story, JIRA, Acceptance Criteria, Story Points, Fibonacci sequence, Planning Poker, T-Shirt Sizing, Effort Estimation, Complexity, Definition of Ready, DoR, Definition of Done, DoD, Shift-Left Testing, ⭐"Bina Acceptance Criteria ke testing shuru mat karo"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Learning Phase: QA samajhta hai ki Agile setup mein uska role sirf testing nahi, requirement gathering (Shift-Left) bhi hai.
+* Application Phase: Sprint Planning meeting mein QA developer ke saath baithkar batata hai ki ek story ko automate karne mein 3 Story Points (approx 3 days) lagenge.
+* Mastery Phase: (N/A)
+
+Topic 5: Writing Good Test Cases
+Subtopics: Manual Test Cases, Good Test Case Properties, Equivalence Partitioning EP, Boundary Value Analysis BVA, Decision Table, Automation Candidates Selection
+
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
 * Coverage Angle: Conceptual only
@@ -2130,20 +2276,20 @@ Subtopics: Manual Test Cases, Good Test Case Properties, Equivalence Partitionin
 * Notes mein jo analogies/examples the: "Recipe" ki analogy — bad test case jisme measure na ho vs good test case jisme clear steps aur taste (expected result) defined ho.
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 5:
 [Manual Test Cases, TestRail, Excel, Automation Candidates, Title, Steps, Expected Result, Equivalence Partitioning, EP, Valid, Invalid, Boundary Value Analysis, BVA, Boundaries, Decision Table, Regression Tests, Smoke Tests, Data-Driven Tests, DDT, Usability Tests, Exploratory Tests, One-time Tests, Recipe, Namkeen Paani, paani_hona_chahiye, ⭐"Sabse Zaroori"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Automation start hone se pehle manual test cases likhe jaate hain BVA aur EP techniques use karke.
 * Fixing/Iteration Phase: Manual test cases mein se automation candidates (Regression, Smoke, DDT) filter kiye jaate hain.
 * Live Production Phase: (N/A)
 * Additional context: Usability aur exploratory testing ko automate nahi kiya jaata, unhe manual chhod diya jaata hai.
 
-Topic 5: Interview Theory Q&A
+Topic 6: Interview Theory Q&A
 Subtopics: Code Review Process, Flaky Test Debugging, Test Strategy Questions, Core Concept Questions
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Moderate
 * Coverage Angle: Conceptual only
@@ -2153,20 +2299,20 @@ Subtopics: Code Review Process, Flaky Test Debugging, Test Strategy Questions, C
 * Notes mein jo analogies/examples the: "Maths ka Sawaal vs Viva" ki analogy — practical (code) vs theory jisme check hota hai concept samjha hai ya nahi.
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [theory, Code Review, Logic, for loop, Framework, POM, locator, Page Class, Readability, Waits, time.sleep(), WebDriverWait, flaky test, debug, Logs, Screenshot, EC.element_to_be_clickable, dynamic, Test Strategy, Scope, pytest-html, logging, CI, GitHub Actions, on-push, nightly, BasePage, Implicit vs Explicit Wait, pytest-bdd, pytest-xdist, Exam, Practical, Viva, ⭐"thought process"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Learning Phase: Interviewer candidate ka thought process evaluate karta hai through theory questions.
 * Application Phase: Candidate apne troubleshooting process ko explain karta hai (e.g., debug flaky tests using screenshots and explicit waits).
 * Mastery Phase: (N/A)
 * Additional context: (N/A)
 
-Topic 6: System Design for Automation Frameworks
+Topic 7: System Design for Automation Frameworks
 Subtopics: System Design Overview, Architecture Levels, Base Tools, Core Framework, BDD Layer, Reporting & Utils, Execution & CI/CD Pipeline, Implementation Approach
 
-[📊 SCOPE SIGNAL for Topic 6:
+[📊 SCOPE SIGNAL for Topic 7:
 
 * Depth Level: Deep
 * Coverage Angle: Conceptual only
@@ -2176,10 +2322,10 @@ Subtopics: System Design Overview, Architecture Levels, Base Tools, Core Framewo
 * Notes mein jo analogies/examples the: "Coder vs Architect" ki analogy — eent jodne wala vs poori building ka naksha banane wala.
 ]
 
-🔑 KEYWORDS DUMP for Topic 6:
+🔑 KEYWORDS DUMP for Topic 7:
 [System Design, Architecture, whiteboard, Amazon, Coder, Mistri, Architect, Level 1, Base, Python, Selenium, Appium, Requests, Level 2, Core, PyTest, POM, BasePage, DDT, Excel, JSON, Level 3, BDD, pytest-bdd, Gherkin, .feature, Level 4, Reporting, Utils, pytest-html, Allure, Logging, Screenshot on Failure, .env, Level 5, Execution, Git, GitHub, GitHub Actions, Jenkins, pytest-xdist, parallel, Selenium Grid, Slack, notify, implementation, Smoke Test, Pipeline, diagram, ⭐"sabse advanced"[emphasized in notes], ⭐"poori picture"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
 
 * Testing/Offline Phase: Candidate whiteboard par framework ka poora naksha (levels 1-5) design karke samjhata hai.
 * Fixing/Iteration Phase: Implementation ke time pehle Core setup hota hai, phir Smoke test automate kiya jaata hai.
@@ -2203,12 +2349,12 @@ Section 1: Projects & Job Prep
 Topic 1: E-Commerce Project Flow
 Topic 2: HR Portal Project Flow
 Topic 3: Test Strategy Document Preparation
-Topic 4: Writing Good Test Cases
-Topic 5: Interview Theory Q&A
-Topic 6: System Design for Automation Frameworks
+Topic 5: Writing Good Test Cases
+Topic 6: Interview Theory Q&A
+Topic 7: System Design for Automation Frameworks
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 42
+Sections: 1 | Topics: 8 | Subtopics: 56
 
 ⏳ **Waiting for:** Next phase/module notes (or type 'DONE')
 
@@ -2216,7 +2362,7 @@ Sections: 1 | Topics: 6 | Subtopics: 42
 
 ==================================================================================
 
-# Module 12: (Bonus 2) Integration & Performance
+# Module 13: (Bonus 2) Integration & Performance
 
 
 📦 Processing: Phase 1 — Module 14 (Bonus 2: Integration & Performance)
