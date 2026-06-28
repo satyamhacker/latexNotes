@@ -1469,28 +1469,29 @@ Subtopics: Client-Server Architecture, Client (Python Script), Server (Appium Se
 * Mastery Phase: (N/A — notes mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: (N/A)
 
-Topic 2: Appium Server Setup
-Subtopics: Node.js, npm, Appium Server, Appium Doctor, Android SDK Setup, Environment Variables, Appium Desktop vs Command-line
+--1--Mobile Testing with Appium--
+Topic 2: Appium 2.x Server Setup & Standalone Inspector
+Subtopics: Appium 2.x CLI Architecture, Node.js & npm, Decoupled Drivers, appium driver install, Appium Inspector (Standalone), Appium Doctor, Android SDK & Environment Variables
 
 [📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
-* Notes mein content volume: Step-by-step installation guide with commands
-* Key terms from notes: Node.js, npm, Appium Server, Appium Doctor, ConnectionRefusedError, localhost:4723, Android Studio, Android SDK, ADB, ANDROID_HOME, JAVA_HOME, Appium Desktop, CI/CD
-* Explicit emphasis in notes: "Shuruaat ke liye, main 'Appium Desktop' hi recommend karunga"
-* Notes mein jo analogies/examples the: Restaurant setup analogy (Node.js=Bijli, npm=Electrician, Appium Server=Main Switchboard, Appium Doctor=Inspector)
+* Notes mein content volume: Step-by-step installation guide with modern Appium 2 commands
+* Key terms from notes: Node.js, npm, Appium 2.x, CLI, appium driver install uiautomator2, Appium Inspector, Standalone App, Appium Doctor, ANDROID_HOME, JAVA_HOME
+* Explicit emphasis in notes: "Appium Desktop ab band ho chuka hai! 2026 mein hamesha Appium CLI aur Standalone Inspector use karein."
+* Notes mein jo analogies/examples the: "Lego Blocks" analogy — Purana Appium ek judi hui car tha (sab pre-installed), naya Appium 2.x Lego blocks hai jahan aapko engine (server) aur pahiye (drivers) alag se connect karne padte hain.
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[Node.js, npm, Appium Server, Appium Doctor, ConnectionRefusedError, localhost:4723, node -v, npm -v, npm install -g appium, npm install -g appium-doctor, Android Studio, Android SDK, ADB, Android Debug Bridge, ANDROID_HOME, JAVA_HOME, appium-doctor --android, appium, Appium Desktop, GUI, CI/CD, Jenkins, ⭐"Appium Desktop"[emphasized in notes]]
+[Node.js, npm, Appium 2.x, Appium CLI, npm install -g appium, decoupled architecture, appium driver list, appium driver install uiautomator2, appium driver install xcuitest, Appium Inspector, Standalone app, Web Inspector, Appium Doctor, ConnectionRefusedError, localhost:4723, Android Studio, Android SDK, ADB, ANDROID_HOME, JAVA_HOME, CI/CD, ⭐"Appium Desktop ab band ho chuka hai!"[emphasized in notes], ⭐"Appium 2.x"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: Local machine setup using Node.js and npm to run Appium Server. Troubleshooting setup issues using Appium Doctor.
-* Fixing/Iteration Phase: Fixing missing dependencies based on red cross marks from Appium Doctor setup checks.
-* Live Production Phase: Running server via command line for CI/CD pipelines like Jenkins.
-* Additional context: Appium Desktop is recommended for beginners as an all-in-one package.
+* Testing/Offline Phase: Local machine par tester command prompt mein `appium` type karta hai server start karne ke liye. Phir UI inspect karne ke liye ek alag software "Appium Inspector" open karta hai.
+* Fixing/Iteration Phase: Missing dependencies ko fix karne ke liye `appium-doctor --android` run karke red flags (errors) clear kiye jaate hain.
+* Live Production Phase: CI/CD pipelines (Jenkins) seedha `appium` CLI background command trigger karti hain headless mobile tests ke liye.
+* Additional context: Appium 2.x ka sabse bada fayda ye hai ki aapko poora Appium update nahi karna padta, sirf specific driver (e.g., UiAutomator2) update kar sakte hain.
 
 Topic 3: Desired Capabilities
 Subtopics: Desired Capabilities (app:options), Key Capabilities List, Session Initialization, UiAutomator2Options Class, Avoiding Re-installations
@@ -1591,7 +1592,7 @@ Subtopics: Click / Tap, Send Keys, Clear, Swipe Coordinates, ActionChains / W3C 
 ```
 Section 1: Mobile Testing with Appium
   Topic 1: Appium Architecture
-  Topic 2: Appium Server Setup
+  Topic 2: Appium 2.x Server Setup & Standalone Inspector
   Topic 3: Desired Capabilities
   Topic 4: Emulator vs. Real Device
   Topic 5: Appium Locators
