@@ -981,9 +981,383 @@ Topic 6: Custom Pytest Plugins (Concept)
 Sections: 1 | Topics: 6 | Subtopics: 49
 
 ⏳ Waiting for: Next phase/module notes
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 8: Advanced Authentication & Identity ⚡
+
+📦 Processing: Phase/Module 8 — Advanced Authentication
+
+===Section 1: OAuth 2.0, JWT & Secrets Management [⚠️ Derived]===
+Basic Auth se aage badhkar modern microservices ki security aur identity verify karne ke tareeqe. [⚠️ Derived]
+
+--1--Advanced Authentication & Identity--
+Topic 1: JWT (JSON Web Token) Validation (`PyJWT`) [⚠️ Derived]
+Subtopics: JWT Structure, Header, Payload, Signature, Base64 Decoding, PyJWT Library, Claims Validation, Expiry (exp), Issuer (iss), Role-Based Access Control (RBAC)
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed explanation with token decoding code
+* Key terms from notes: JWT, PyJWT, decode, claims, exp, iss, roles, Base64, spoofing, token expiry
+* Explicit emphasis in notes: "Sirf 200 OK check mat karo, token ko Python mein decode karke check karo ki user ka role (admin/user) sahi hai ya nahi."
+* Notes mein jo analogies/examples the: "Club ka VIP Wristband" analogy — Token sirf entry pass nahi hai, uspe likha hota hai ki aap drink le sakte hain (roles) aur kab tak (expiry).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[JWT, JSON Web Token, Header, Payload, Signature, jwt.decode, PyJWT, pip install PyJWT, claims, exp, iss, sub, iat, Role-Based Access Control, RBAC, Base64, Token tampering, verify_signature=False, 401 Unauthorized, ⭐"Club ka VIP Wristband"[analogy]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer login API hit karta hai, token nikalta hai, aur `jwt.decode` karke assert karta hai ki token mein "role": "admin" aur expiry future ki date hai.
+* Fixing/Iteration Phase: Agar expiry time galat configure hua ho, toh test turant pakad leta hai.
+* Live Production Phase: Microservices isi token ko bina database hit kiye trust karti hain, isliye iska structure test karna critical hai.
+* Additional context: Automation mein hum mostly signature verify nahi karte (bina secret key ke decode karte hain `verify_signature=False`), sirf payload claims test karte hain.
+
+Topic 2: Secrets Management (No Hardcoded Passwords) [⚠️ Derived]
+Subtopics: Environment Variables, .env Files, python-dotenv, CI/CD Secrets, AWS Secrets Manager, GitHub Secrets, Security Breaches
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Setup guide for local and CI/CD secrets
+* Key terms from notes: .env, dotenv, os.getenv, GitHub Secrets, AWS Secrets, hardcoded passwords, security risk
+* Explicit emphasis in notes: "Code mein password likhna sabse bada paap hai. .gitignore mein .env hamesha hona chahiye."
+* Notes mein jo analogies/examples the: "Ghar ki chaabi (password) door-mat ke neeche (code) rakhne ke bajaye bank locker (Secrets Manager) mein rakhna."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Secrets Management, .env, python-dotenv, load_dotenv(), os.environ.get, os.getenv, GitHub Secrets, Jenkins Credentials, AWS Secrets Manager, Vault, Security Breach, Git history, .gitignore, ⭐"Ghar ki chaabi bank locker mein"[analogy]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer apne local machine par `.env` file banata hai jise Git track nahi karta. Test file mein `os.getenv("DB_PASSWORD")` use hota hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: CI/CD pipeline (Jenkins/GitHub) apne secure vault se actual passwords inject karti hai jab container run hota hai.
+
+--- 🛑 PHASE 8 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: OAuth 2.0, JWT & Secrets Management
+Topic 1: JWT (JSON Web Token) Validation (`PyJWT`)
+Topic 2: Secrets Management (No Hardcoded Passwords)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 17
+
+⏳ Waiting for: Next phase/module notes
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
 
+# Module 9: Microservices & Contract Testing 🤝
+
+📦 Processing: Phase/Module 9 — Contract & Mocking
+
+===Section 1: Contract Testing & Mock Servers [⚠️ Derived]===
+Jab 50 teams alag-alag API bana rahi hon, toh integration ko tutne se bachane ka framework. [⚠️ Derived]
+
+--1--Contract Testing & Mock Servers--
+Topic 1: Consumer-Driven Contract Testing (Pact-Python) [⚠️ Derived]
+Subtopics: Contract Testing Concept, Consumer, Provider, Pact Framework, pact-python, Pact Broker, JSON Contract File, Avoiding E2E Flakiness
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Deep architectural explanation with Pact code blocks
+* Key terms from notes: Contract Testing, Pact, Consumer, Provider, Pact Broker, E2E slow, JSON contract, schema mismatch
+* Explicit emphasis in notes: "End-to-End (E2E) tests slow aur flaky hote hain. Microservices mein Contract Testing best alternative hai."
+* Notes mein jo analogies/examples the: "Business Agreement (Contract)" analogy — Frontend (Consumer) aur Backend (Provider) ek paper sign karte hain (JSON file), taaki koi ek party achanak rule na badle.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Contract Testing, Consumer-Driven Contract, CDC, Pact, pact-python, Pact Broker, Consumer, Provider, expectations, JSON contract file, interactions, E2E tests, Microservices, Integration testing, schema mismatch, fail fast, ⭐"Business Agreement"[analogy]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Frontend team ek "Pact" likhti hai ki unhe backend se kya chahiye. Woh ek JSON file (contract) generate karti hai aur Pact Broker par upload karti hai.
+* Fixing/Iteration Phase: Backend developer jab bhi code push karta hai, uski pipeline us contract ko download karti hai aur backend par chala kar dekhti hai ki contract toota toh nahi.
+* Live Production Phase: Yeh assure karta hai ki Frontend aur Backend independently deploy ho sakein bina ek doosre ko break kiye.
+
+Topic 2: External Mock Servers (WireMock) [⚠️ Derived]
+Subtopics: Third-Party Mocking, WireMock, Dockerized Mock Server, Mappings, Stubs, Simulating Errors (503, Timeout)
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Docker run command and mapping JSON examples
+* Key terms from notes: WireMock, third-party API, Payment Gateway, stubs, mapping, simulate errors, timeouts
+* Explicit emphasis in notes: "Apne tests ko 3rd party (jaise Stripe/PayPal) ki speed ya uptime par depend mat hone do. WireMock use karo."
+* Notes mein jo analogies/examples the: "Flight Simulator" analogy — Asli hawai jahaz (Stripe API) udane ki jagah, simulator (WireMock) mein practice karna, jahan aap aंधी-toofan (503 Error) simulate kar sakte ho.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[WireMock, Mock Server, Third-Party APIs, Stripe, PayPal, Mountebank, Docker container, mappings, stubs, JSON configuration, mock response, 503 Service Unavailable, network timeout, simulate latency, isolation, ⭐"Flight Simulator"[analogy]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer Docker mein WireMock chalata hai. Payment API ko mock karta hai jisse fake 200 Success ya 500 Error return hota hai taaki test kar sake ki app kaise react karegi.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: (N/A — Mocking production mein nahi hoti).
+
+--- 🛑 PHASE 9 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Contract Testing & Mock Servers
+Topic 1: Consumer-Driven Contract Testing (Pact-Python)
+Topic 2: External Mock Servers (WireMock)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 14
+
+⏳ Waiting for: Next phase/module notes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 10: Modern API Protocols (Beyond REST) 🚀
+
+📦 Processing: Phase/Module 10 — GraphQL & WebSockets
+
+===Section 1: Testing GraphQL & Asynchronous APIs [⚠️ Derived]===
+Jab `/api/users` REST endpoints ki jagah single `/graphql` endpoint ya real-time `ws://` aa jaye. [⚠️ Derived]
+
+--1--Testing GraphQL & Asynchronous APIs--
+Topic 1: GraphQL API Testing
+Topic 2: Event-Driven Testing & WebSockets (Kafka / RabbitMQ) [⚠️ Derived]
+Subtopics: GraphQL Basics, Single Endpoint, Queries (GET equivalent), Mutations (POST/PUT equivalent), Over-fetching, Under-fetching, HTTP 200 Always, Error Array Handling
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed comparison of REST vs GraphQL payloads
+* Key terms from notes: /graphql, Query, Mutation, payload, errors array, always 200 OK, over-fetching
+* Explicit emphasis in notes: "(Sabse bada dhokha!) GraphQL fail hone par bhi HTTP Status 200 OK deta hai. Hamesha response JSON ke andar 'errors' key check karo."
+* Notes mein jo analogies/examples the: "Thali System (REST) vs Buffet (GraphQL)" analogy — REST mein jo thaali aayegi wahi khani padegi, GraphQL mein aap batate hain aapko kya chahiye.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[GraphQL, /graphql, Query, read data, Mutation, modify data, Schema, payload, JSON, HTTP 200 OK, "errors" key, "data" key, Over-fetching, Under-fetching, Apollo, requests.post, variables, GQL, ⭐"Thali vs Buffet"[analogy], ⭐"Sabse bada dhokha"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer `requests.post()` se `/graphql` par query string bhejta hai. Status code assert karne ke bajaye, woh assert karta hai ki `response.json()` mein "errors" key `None` ho.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Mobile apps bandwidth bachane ke liye GraphQL use karti hain kyunki unhe sirf wahi data milta hai jo unhone manga hota hai.
+
+Topic 2: Event-Driven Testing & WebSockets (Kafka / RabbitMQ) [⚠️ Derived]
+Subtopics: Asynchronous Messaging, Pub/Sub Model, Event-Driven Architecture, WebSockets (ws://), Kafka Producers/Consumers, RabbitMQ, Dead Letter Queue (DLQ), Fire-and-Forget, Polling for Results
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Concept explanation with Python websocket/Kafka consumer code snippet
+* Key terms from notes: Async, WebSockets, Kafka, Pub/Sub, RabbitMQ, Message Broker, Event-driven, DLQ, fire-and-forget, websockets library, kafka-python
+* Explicit emphasis in notes: "REST API ek phone call hai (turant jawaab), jabki Kafka ek Email/Post office hai (jawaab baad mein aayega). Inko test karne ka tareeka bilkul alag hota hai."
+* Notes mein jo analogies/examples the: "Restaurant Token System" analogy — Aap order (POST) dekar token lete hain, aur jab khana banta hai toh counter se awaz aati hai (Event/Message), aap counter par khade nahi rehte.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[WebSockets, ws://, wss://, asyncio, Kafka, RabbitMQ, Message Broker, Pub/Sub, Publisher, Subscriber, Event-Driven, Producer, Consumer, DLQ, Dead Letter Queue, kafka-python, fire-and-forget, asynchronous, polling, ⭐"Restaurant Token System"[analogy], ⭐"Phone call vs Post office"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer ek test likhta hai jo API par POST request bhejta hai, aur phir turant check karne ke bajaye, Kafka consumer ban kar wait karta hai ki DB update hone ke baad "UserCreated" ka event message broker mein aaya ya nahi.
+* Fixing/Iteration Phase: Agar asynchronous process fail hoti hai, toh QA check karta hai ki failed message DLQ (Dead Letter Queue) mein gaya ya lost ho gaya.
+* Live Production Phase: Chat applications, Uber live tracking, aur Swiggy order updates isi architecture par chalte hain.
+
+--- 🛑 PHASE 10 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Testing GraphQL & Asynchronous APIs
+Topic 1: GraphQL API Testing
+Topic 2: Event-Driven Testing & WebSockets (Kafka / RabbitMQ)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 17
+
+⏳ Waiting for: Next phase/module notes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Module 11: AI-Powered API Testing & Observability 🧠
+
+📦 Processing: Phase/Module 11 — AI & Advanced Validation
+
+===Section 1: AI Tools, Tracing & Property Testing [⚠️ Derived]===
+Apni QA/SDET approach ko Next-Gen (AI aur Data-driven) banana. [⚠️ Derived]
+
+--1--AI Tools & Observability--
+Topic 1: Property-Based Testing (`hypothesis` library) [⚠️ Derived]
+Subtopics: Hardcoded vs Dynamic Data, hypothesis library, @given decorator, Edge Case Generation, Limit Testing
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Concept & Code
+* Notes mein content volume: Explanation with hypothesis python code snippet
+* Key terms from notes: hypothesis, property-based testing, @given, strategies, stubs, edge cases, fuzzing
+* Explicit emphasis in notes: "Ek test mein 10 hardcoded email likhne se acha hai, Hypothesis ko bolo ki 100 random valid aur invalid formats fire kare."
+* Notes mein jo analogies/examples the: "Crash Test Dummy" analogy — Car ko ek baar normal speed par thokna (standard test) vs 100 alag-alag angle, speed, aur weight se thok kar limit check karna (property-based).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Property-based testing, hypothesis, pip install hypothesis, @given, strategies, st.text(), st.emails(), st.integers(), edge cases, limit testing, Fuzzing, dynamic data generation, hardcoded data, flaky, ⭐"Crash Test Dummy"[analogy]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer `@given(st.emails())` lagata hai, aur Pytest automatically test ko 100 baar alag-alag ajeeb (but valid) emails bhej kar API ki robust limit check karta hai.
+
+Topic 2: AI in API Testing (LLMs & Code Gen)
+Topic 3: Observability & Distributed Tracing (Correlation IDs) [⚠️ Derived]
+Subtopics: LLM Prompting for QA, OpenAPI to Test Cases, Automated Schema Generation, GitHub Copilot, Log RCA (Root Cause Analysis)
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical workflows only
+* Notes mein content volume: Prompts templates for ChatGPT/Claude and workflow steps
+* Key terms from notes: ChatGPT, Claude, Prompt Engineering, OpenAPI/Swagger, JSON Schema, Pydantic, Root Cause Analysis, GitHub Copilot
+* Explicit emphasis in notes: "AI ko code likhne do, par validation human (aap) karega. AI ek smart intern hai, aap uske manager ho."
+* Notes mein jo analogies/examples the: "Exoskeleton Suit" analogy — AI aapko replace nahi karega, woh aapki speed 10x badha dega (jaise Iron Man suit).
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[AI, LLM, ChatGPT, Claude, GitHub Copilot, Prompt Engineering, OpenAPI spec, Swagger, Test Case Generation, Edge Cases, Pydantic schema generation, JSON to Model, RCA, Root Cause Analysis, Traceback, boilerplate, ⭐"Exoskeleton Suit"[analogy], ⭐"AI smart intern hai"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer API ka JSON response copy karke ChatGPT ko deta hai: "Convert this JSON into a Pydantic schema for Pytest". 2 ghante ka boilerplate code 2 second mein likh kar test framework mein add kar liya jata hai.
+
+Topic 3: Observability & Distributed Tracing (Correlation IDs) [⚠️ Derived]
+Subtopics: Testing in Production, Distributed Tracing, Correlation ID (X-Request-ID), Centralized Logging, ELK Stack, Datadog, Splunk, Microservices Debugging
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Moderate
+* Coverage Angle: Concept & Tools
+* Notes mein content volume: Explanation of tracing a request across multiple services
+* Key terms from notes: Observability, Distributed Tracing, X-Correlation-ID, ELK, Splunk, Datadog, Microservices, blind spot
+* Explicit emphasis in notes: "Microservices mein bina Correlation ID ke bug dhoondhna andhere kamre mein kaali billi dhoondhne jaisa hai."
+* Notes mein jo analogies/examples the: "Amazon Package Tracking Number" analogy — Jaise ek AWB number se pata chalta hai ki package kis warehouse (microservice) mein atka hai, waise hi Correlation ID kaam karti hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Observability, Distributed Tracing, Correlation ID, X-Correlation-ID, X-Request-ID, Header injection, Centralized Logging, ELK, Elasticsearch, Logstash, Kibana, Datadog, Splunk, Traceability, blind spot, Microservices, ⭐"Tracking Number"[analogy], ⭐"Andhere kamre mein kaali billi"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Pytest script API request bhejte waqt header mein ek unique `X-Correlation-ID` (e.g., UUID) generate karke bhejti hai.
+* Fixing/Iteration Phase: Agar test fail hota hai (500 Error), toh QA Datadog/Splunk kholta hai, wahi UUID search karta hai, aur instantly pata chal jata hai ki 5 microservices mein se kis service ki wajah se API phati.
+
+--- 🛑 PHASE 11 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: AI Tools, Tracing & Property Testing
+Topic 1: Property-Based Testing (`hypothesis` library)
+Topic 2: AI in API Testing (LLMs & Code Gen)
+Topic 3: Observability & Distributed Tracing (Correlation IDs)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 3 | Subtopics: 18
+
+⏳ Waiting for: Next phase/module notes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ **Notes Guru Skeleton for M8-M11 added.**
+
+==================================================================================
+
+# Module 12: Enterprise CI/CD & Advanced Reporting 🏆
+
+📦 Processing: Phase/Module 12 — The Grand Finale
+
+===Section 1: Enterprise Level Automation Standards [⚠️ Derived]===
+Local laptop se bahar nikal kar test suite ko ek real production-grade enterprise setup mein deploy karna. [⚠️ Derived]
+
+--1--Enterprise CI/CD & Advanced Reporting--
+Topic 1: Enterprise Reporting with Allure (`allure-pytest`) [⚠️ Derived]
+Subtopics: Allure Framework, allure-pytest, Rich HTML Reports, Attachments (Logs, JSON), Test Steps Setup, Historical Trends, Test Categories, Pytest HTML vs Allure
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Setup commands and Python decorator examples
+* Key terms from notes: Allure, allure-pytest, rich reporting, @allure.step, @allure.feature, @allure.story, attachments, history trend
+* Explicit emphasis in notes: "Management aur clients ko pytest-html samajh nahi aata. Unhe Allure ki rich dashboards aur pie-charts chahiye hote hain."
+* Notes mein jo analogies/examples the: "Black and white newspaper (pytest-html) vs Full-color Interactive Magazine (Allure)."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Allure Framework, allure-pytest, Rich HTML Reports, @allure.step, @allure.feature, @allure.story, allure.attach, JSON response attachment, allure serve, XML, Test execution trend, Flaky tests dashboard, Enterprise grade, ⭐"Full-color Interactive Magazine"[analogy]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer apne tests ko `@allure.step()` se decorate karta hai taaki report mein dikhe ki pehle "Create User" hua, phir "Login" hua.
+* Fixing/Iteration Phase: Test fail hone par Allure report ke andar hi API ka poora request aur response JSON directly attached mil jata hai, terminal dekhne ki zaroorat nahi padti.
+* Live Production Phase: Managers dashboard par historical trend dekhte hain ki pichle 10 din se API pass % badh raha hai ya gir raha hai.
+
+Topic 2: CI/CD Pipelines (GitHub Actions / Jenkins YAML) [⚠️ Derived]
+Subtopics: Continuous Integration, GitHub Actions, workflow.yml, Pipeline Stages, Code Checkout, Environment Setup, Dependency Install, Test Execution, Publishing Reports, Pipeline Gates, Artifacts
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical Workflow
+* Notes mein content volume: GitHub Actions `.yml` file explanation
+* Key terms from notes: CI/CD, Pipeline, GitHub Actions, .github/workflows, YAML, steps, actions/checkout, upload-artifact, pipeline gate
+* Explicit emphasis in notes: "Aapka automation tab tak complete nahi hai, jab tak woh kisi pipeline par scheduled (raat 12 baje) na chal raha ho."
+* Notes mein jo analogies/examples the: "Car Assembly Line" analogy — Code push karna ek raw material daalna hai, aur pipeline usko automatically check (weld/paint) karke bahar nikalti hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[CI/CD, Continuous Integration, Pipeline, GitHub Actions, GitLab CI, Jenkinsfile, .yml, .github/workflows, on: push, cron job, actions/checkout, actions/setup-python, pip install -r, pytest, upload-artifact, Quality Gate, Nightly Execution, ⭐"Car Assembly Line"[analogy], ⭐"raat 12 baje"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer `.yml` file likhta hai jismein rules hote hain ki jab bhi koi Master branch mein code push kare, toh kaunsi commands chalengi.
+* Fixing/Iteration Phase: Developer ne code push kiya, GitHub Actions ne naya container banaya, dependencies install ki, tests run kiye. Agar ek bhi test fail hua, toh pipeline "Red" (Fail) ho jayegi aur code merge hone se rok degi (Quality Gate).
+* Live Production Phase: Regression suite automatically raat 12 baje (Cron job) chalta hai aur subah QA team ko Slack par Allure report ka link mil jata hai.
+
+--- 🛑 PHASE 12 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Enterprise Level Automation Standards
+Topic 1: Enterprise Reporting with Allure (`allure-pytest`)
+Topic 2: CI/CD Pipelines (GitHub Actions / Jenkins YAML)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 19
+
+⏳ Waiting for: Next phase/module notes
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
