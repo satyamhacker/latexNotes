@@ -1,7 +1,7 @@
 # Section 1: Introduction
 
 ===Section 1: Introduction===
-[⚠️ Derived] Speaker is section mein Arduino aur microcontrollers ka basic introduction, unke use cases, hardware components, aur Tinkercad simulator ke baare mein batata hai.
+[⚠️ Derived] Speaker is section mein Arduino aur microcontrollers ka basic introduction, unke use cases, hardware components, aur Wokwi simulator ke baare mein batata hai.
 
 --1--Introduction--
 Topic 1: Microcontrollers & Arduino Basics
@@ -50,28 +50,27 @@ Subtopics: Arduino Project History, Common Arduino Boards, Open Source Ecosystem
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi production phase describe nahi kiya gaya)
 * Additional context: Speaker ne clear kiya ki alag-alag manufacturers Arduino boards banate hain, color/layout change ho sakta hai par pin layout aur microcontroller same rehta hai.
 
-Topic 3: Tinkercad Online Simulator
-Subtopics: Free Online Simulator, Tinkercad Platform, Circuit Creation, Code Simulation
+Topic 3: Wokwi Online Simulator (Professional Embedded Simulation)
+Subtopics: Free Online Simulator, Wokwi Platform vs Tinkercad, Real avr-gcc Compiler Backend, Logic Analyzer Capabilities, Open Source GitHub Integration
 
 [📊 SCOPE SIGNAL for Topic 3:
 
-* Depth Level: Surface
-* Coverage Angle: Practical only
-* Transcript mein content volume: Short explanation with a brief demo of the final project
-* Key terms from transcript: free online simulator, Web browser, Tinker Cat, Tinker Cat dot com, security, simulate
-* Explicit emphasis by speaker: Simulator is "completely free to use".
-* Speaker ne jo analogies/examples use kiye: None
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: Explanation of why professional engineers use Wokwi over basic simulators for bare-metal coding.
+* Key terms from transcript: Wokwi, simulator, avr-gcc, browser-based, logic analyzer, bare-metal, GitHub, open-source friendly.
+* Explicit emphasis by speaker: "We will not use basic tools like Tinkercad because they cannot handle professional bare-metal code or RTOS. Wokwi runs the exact same compiler as the Arduino IDE."
+* Speaker ne jo analogies/examples use kiye: Tinkercad is like training wheels on a bicycle; Wokwi is a flight simulator that uses the exact same software as the real plane.
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[free online simulator, Web browser, Tinker Cat[unclear], Tinker Cat dot com[unclear], Dinko[unclear], final project, security[unclear], simulate, interact]
+[Wokwi, simulator, browser simulator, `avr-gcc` compiler, Tinkercad alternative, bare-metal support, logic analyzer, FreeRTOS support, GitHub integration, virtual hardware, `diagram.json`]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Testing/Offline Phase: User computer pe web browser open karke Tinkercad dot com pe jata hai, components drag karke circuit banata hai, aur code likhta hai.
-* Fixing/Iteration Phase: User simulation run karke directly dekhta hai ki components ke saath kya ho raha hai aur real-life ki tarah unse interact karta hai.
-* Live Production Phase: (N/A — yeh ek virtual simulation tool hai)
-* Additional context: Speaker ne bataya ki projects ko online save kiya ja sakta hai aur yeh physical hardware ke bina testing karne ka tareeka hai.
+* Learning Phase: Beginners learn that browser simulators can completely replace physical hardware for learning even the most advanced concepts.
+* Application Phase: Developer uses Wokwi to test logic without worrying about frying physical components or dealing with messy wiring.
+* Mastery Phase: Advanced engineers use Wokwi's virtual Logic Analyzer to debug microsecond-level SPI and I2C hardware bus timing issues before ever touching a real oscilloscope.
 
 ---
 
@@ -82,7 +81,7 @@ Subtopics: Free Online Simulator, Tinkercad Platform, Circuit Creation, Code Sim
 Section 1: Introduction
 Topic 1: Microcontrollers & Arduino Basics
 Topic 2: Arduino Boards & Hardware Components
-Topic 3: Tinkercad Online Simulator
+Topic 3: Wokwi Online Simulator
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 3 | Subtopics: 14
@@ -93,14 +92,14 @@ Sections: 1 | Topics: 3 | Subtopics: 14
 
 
 
-# Section 2: Install and Setup Arduino IDE + Tinkercad Simulation
+# Section 2: Install and Setup Arduino IDE + Wokwi Simulation
 
 
 
-===Section 2: Install and Setup Arduino IDE + Tinkercad Simulation===
-[⚠️ Derived] Speaker is section mein Arduino IDE ko install/customize karna, physical board connect karna, aur Tinkercad simulation set up karna sikhata hai.
+===Section 2: Install and Setup Arduino IDE + Wokwi Simulation===
+[⚠️ Derived] Speaker is section mein Arduino IDE ko install/customize karna, physical board connect karna, aur Wokwi simulation set up karna sikhata hai.
 
---2--Install and Setup Arduino IDE + Tinkercad Simulation--
+--2--Install and Setup Arduino IDE + Wokwi Simulation--
 Topic 1: Arduino IDE Installation
 Subtopics: Arduino IDE Download, Version 1 vs Version 2, Windows Installation Process
 
@@ -170,28 +169,27 @@ Subtopics: USB Connection, Board Selection, Port Selection, Port Identification 
 * Live Production Phase: Upload button press karne pe code actually compile ho kar physical Arduino board ke andar chala jata hai run karne ke liye.
 * Additional context: None
 
-Topic 4: Tinkercad Setup & Simulation Interface
-Subtopics: Tinkercad Account Creation, Circuit Workspace, Components Library, Text Code Editor, Simulation Controls
+Topic 4: Wokwi Setup & Simulation Interface
+Subtopics: Wokwi Account Creation, diagram.json Wiring, Code Editor (ino/c/h files), Start/Pause Simulation, Serial Monitor Integration, Downloading .hex files
 
 [📊 SCOPE SIGNAL for Topic 4:
 
 * Depth Level: Moderate
 * Coverage Angle: Practical only
-* Transcript mein content volume: UI walkthrough with short examples
-* Key terms from transcript: free online tool, Autodesk, designs, circuits, workspace, Arduino UNO three, block interface, text code, start simulation, stop simulation
-* Explicit emphasis by speaker: "You need to first stop the simulation and then change the code." — Speaker ne is point pe highlight kiya ki simulation stop kiye bina code change nahi ho sakta.
+* Transcript mein content volume: UI walkthrough, wiring components via JSON and GUI, and running code.
+* Key terms from transcript: wokwi.com, new project, diagram.json, standard C++, play button, virtual serial monitor.
+* Explicit emphasis by speaker: "Wokwi uses standard C and C++ files. You can literally copy-paste your code from Wokwi directly into your Arduino IDE and it will run exactly the same."
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[no hardware component, simulation, Tinker CAD, Autodesk, web browser, Tinker CAD dot com, personal account, sign in, Google, Apple, Microsoft, Facebook, email, dashboard, designs, circuits, new circuit, workspace, components, Arduino UNO three[unclear], code button, code interface, block interface, text code, start simulation, stop simulation, auto-save]
+[Wokwi dot com, web browser, new project, Arduino Uno, virtual breadboard, `diagram.json`, wiring components, code editor, `.ino`, `.c`, `.h`, Start Simulation, Pause Simulation, Serial Monitor, download hex, exact timing]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
-* Testing/Offline Phase: Hardware na hone par developer Tinkercad pe virtual circuit banata hai, components drag karta hai, block ki jagah text interface mein code likhta hai aur 'Start simulation' karke test karta hai.
-* Fixing/Iteration Phase: Agar circuit ya code mein koi badlaav karna ho, toh developer ko pehle forcefully 'Stop simulation' karna padta hai (physical IDE ke muqable jahan turant badlaav ho sakta hai).
-* Live Production Phase: (N/A — yeh pura process ek offline/testing simulation environment hai)
-* Additional context: Tinkercad cloud-based hai isliye har change automatically save ho jata hai.
+* Testing/Offline Phase: Hardware na hone par developer Wokwi pe virtual circuit banata hai, GUI se wires drag karta hai (jo `diagram.json` mein save hota hai), aur standard C++ interface mein code likhkar test karta hai.
+* Fixing/Iteration Phase: Agar code crash hota hai, toh developer virtual Serial Monitor aur Wokwi ke execution pauses ka use karke real-time debugging karta hai.
+* Live Production Phase: Developer Wokwi se directly `.hex` file download karke production physical board (AVRDUDE ke through) par flash karta hai, proving 1:1 parity between simulation and reality.
 
 ---
 
@@ -199,11 +197,11 @@ Subtopics: Tinkercad Account Creation, Circuit Workspace, Components Library, Te
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 2: Install and Setup Arduino IDE + Tinkercad Simulation
+Section 2: Install and Setup Arduino IDE + Wokwi Simulation
 Topic 1: Arduino IDE Installation
 Topic 2: Arduino IDE Customization
 Topic 3: Connecting Physical Board & Uploading Code
-Topic 4: Tinkercad Setup & Simulation Interface
+Topic 4: Wokwi Setup & Simulation Interface
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 4 | Subtopics: 17
@@ -312,25 +310,25 @@ Subtopics: Power Cycle, Hardware Reset Button, Serial Monitor Toggle, Code Re-up
 * Live Production Phase: User simply hardware ki power nikal kar dobara laga sakta hai taaki program wapas fresh start ho.
 * Additional context: Speaker ne warn kiya ki Serial monitor band-chalu karne wali trick Leonardo jaise kuch specific boards pe kaam nahi karti.
 
-Topic 5: Tinkercad Simulation Workflow
-Subtopics: Tinkercad Dashboard, Board Setup, Text Code Editor, Simulation Start/Stop, Error Checking in Simulation, Simulation Serial Monitor, Simulation Reset
+Topic 5: Wokwi Simulation Workflow
+Subtopics: Wokwi Dashboard, Board Setup, Text Code Editor, Simulation Start/Stop, Error Checking in Simulation, Simulation Serial Monitor, Simulation Reset
 
 [📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
 * Coverage Angle: Practical only
 * Transcript mein content volume: Demo
-* Key terms from transcript: simulation, Tinkercad, circuits, code blocks, text, Start Simulation, Serial Monitor
-* Explicit emphasis by speaker: TinkerCad mein bhi exactly same process aur same errors milte hain jo real IDE mein aate hain.
+* Key terms from transcript: simulation, Wokwi, circuits, code blocks, text, Start Simulation, Serial Monitor
+* Explicit emphasis by speaker: Wokwi mein bhi exactly same process aur same errors milte hain jo real IDE mein aate hain.
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[simulation, Tinkercad, dashboard, circuits, code blocks, text, Start Simulation, Stop Simulation, Serial Monitor, reset button, expected semicolon]
+[simulation, Wokwi, dashboard, circuits, code blocks, text, Start Simulation, Stop Simulation, Serial Monitor, reset button, expected semicolon]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
-* Testing/Offline Phase: Developer physical board na hone par Tinkercad dashboard pe Arduino board drag karta hai aur text editor mein same C++ code likhta hai.
+* Testing/Offline Phase: Developer physical board na hone par Wokwi dashboard pe Arduino board drag karta hai aur text editor mein same C++ code likhta hai.
 * Fixing/Iteration Phase: Developer "Start Simulation" click karta hai. Agar code mein syntax error (jaise missing semicolon) hoti hai, toh simulator bhi exact wahi error highlight karta hai jise developer wahi fix karta hai.
 * Live Production Phase: (N/A — yeh explicitly offline/simulation environment hai)
 * Additional context: Simulation ke andar bhi ek virtual Serial Monitor aur virtual reset button hota hai jo real hardware ki tarah react karta hai.
@@ -379,7 +377,7 @@ Topic 1: Arduino Code Structure & Execution
 Topic 2: First Program - LED Blinking
 Topic 3: Debugging with Serial Monitor
 Topic 4: Program Restart Methods
-Topic 5: Tinkercad Simulation Workflow
+Topic 5: Wokwi Simulation Workflow
 Topic 6: Activity 1 - Blink & Serial Mix
 
 📊 PHASE SUMMARY:
@@ -397,24 +395,24 @@ Speaker yahan breadboard ka working mechanism aur Arduino ke sath circuits proto
 
 --1--Breadboard & Circuit Basics--
 Topic 1: Breadboard Anatomy and Working
-Subtopics: Soldering Alternative, TinkerCAD Breadboard, Plus and Minus Lines, Power Supply, Ground Reference, Independent Lines, Vertical Dot Connections, Physical Breadboard
+Subtopics: Soldering Alternative, Wokwi Breadboard, Plus and Minus Lines, Power Supply, Ground Reference, Independent Lines, Vertical Dot Connections, Physical Breadboard
 
 [📊 SCOPE SIGNAL for Topic 1:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
 * Transcript mein content volume: Long explanation with demo
-* Key terms from transcript: breadboard, prototype, solder, TinkerCAD, power supply, ground, common point, reference point
+* Key terms from transcript: breadboard, prototype, solder, Wokwi, power supply, ground, common point, reference point
 * Explicit emphasis by speaker: Ground is a common point between all components — super important for a voltage reference.
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[breadboard, prototype, solder, messy, TinkerCAD, simulation, small breadboard, standard size, plus line, minus line, red line, blue line, power supply, ground, common point, reference point, voltage, vertical dots, connected dots, 60 lines, 5 connected dots, physical breadboard, line 45, ⭐ground]
+[breadboard, prototype, solder, messy, Wokwi, simulation, small breadboard, standard size, plus line, minus line, red line, blue line, power supply, ground, common point, reference point, voltage, vertical dots, connected dots, 60 lines, 5 connected dots, physical breadboard, line 45, ⭐ground]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: Developer circuit ko actually solder karne se pehle TinkerCAD simulation ya physical breadboard pe components plug karke test karta hai.
+* Testing/Offline Phase: Developer circuit ko actually solder karne se pehle Wokwi simulation ya physical breadboard pe components plug karke test karta hai.
 * Fixing/Iteration Phase: Agar circuit modify karna ho, toh breadboard pe wires nikal kar change karna bas kuch seconds ka kaam hota hai.
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: Speaker ne highlight kiya ki breadboard prototyping ke liye best hai kyunki yeh messy soldering avoid karta hai.
@@ -424,7 +422,7 @@ Speaker yahan resistors ka role, unke color codes calculate karna, aur circuit b
 
 --2--Resistors and Safety Rules--
 Topic 1: Resistors and Color Coding
-Subtopics: Current Reduction, Component Damage Prevention, Standard Resistor Values, Resistor Color Code, 4-Band Calculation, 5-Band Calculation, Multiplier, Tolerance Band, Google Color Code Calculator, TinkerCAD Resistors
+Subtopics: Current Reduction, Component Damage Prevention, Standard Resistor Values, Resistor Color Code, 4-Band Calculation, 5-Band Calculation, Multiplier, Tolerance Band, Google Color Code Calculator, Wokwi Resistors
 
 [📊 SCOPE SIGNAL for Topic 1:
 
@@ -437,7 +435,7 @@ Subtopics: Current Reduction, Component Damage Prevention, Standard Resistor Val
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[resistor, reduce current, applied voltage, damage LED, 220 ohm, 330 ohm, 470 ohm, 1 kilo-ohm, 10 kilo-ohm, 10k, resistor color code, 4-band resistor, 5-band resistor, multiplier, tolerance, brown, gold, silver, 1 percent, 5 percent, 10 percent, red red brown, 22, 220, red red black black, brown black orange, 10000 ohm, brown black black red, Google search, resistor color code calculator, TinkerCAD resistor rotation, ⭐220 ohm]
+[resistor, reduce current, applied voltage, damage LED, 220 ohm, 330 ohm, 470 ohm, 1 kilo-ohm, 10 kilo-ohm, 10k, resistor color code, 4-band resistor, 5-band resistor, multiplier, tolerance, brown, gold, silver, 1 percent, 5 percent, 10 percent, red red brown, 22, 220, red red black black, brown black orange, 10000 ohm, brown black black red, Google search, resistor color code calculator, Wokwi resistor rotation, ⭐220 ohm]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -470,11 +468,11 @@ Subtopics: Short Circuit Risk, Powering Off Rule, Double Checking Connections, M
 * Additional context: Safety rule ke mutabiq har naye component ka sabse pehle "common ground" connect karna chahiye.
 
 ===Section 3: Building and Coding the First Circuit===
-Speaker yahan TinkerCAD aur physical hardware pe pehla LED circuit banata hai aur blink program upload karke run karta hai.
+Speaker yahan Wokwi aur physical hardware pe pehla LED circuit banata hai aur blink program upload karke run karta hai.
 
 --3--Building and Coding the First Circuit--
 Topic 1: LED Circuit Assembly
-Subtopics: TinkerCAD Circuit Setup, Ground Connection, Black Wire Convention, LED Anode and Cathode, Resistor Placement, Digital Pin 12, Physical Hardware Assembly
+Subtopics: Wokwi Circuit Setup, Ground Connection, Black Wire Convention, LED Anode and Cathode, Resistor Placement, Digital Pin 12, Physical Hardware Assembly
 
 [📊 SCOPE SIGNAL for Topic 1:
 
@@ -491,7 +489,7 @@ Subtopics: TinkerCAD Circuit Setup, Ground Connection, Black Wire Convention, LE
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: Developer pehle TinkerCAD mein GND se black wire connect karta hai, LED ka cathode ground mein aur anode resistor ke through Pin 12 mein lagata hai. Phir same steps physical Arduino pe repeat karta hai.
+* Testing/Offline Phase: Developer pehle Wokwi mein GND se black wire connect karta hai, LED ka cathode ground mein aur anode resistor ke through Pin 12 mein lagata hai. Phir same steps physical Arduino pe repeat karta hai.
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: (N/A)
 * Additional context: Black wires ground ke liye convention ki tarah use kiye jaate hain clarity ke liye.
@@ -766,7 +764,7 @@ Sections: 1 | Topics: 3 | Subtopics: 18 (estimated total concept nodes)
 
 
 ===Section 1: Push Button Fundamentals & Circuit Setup===
-Speaker is section mein push button ko as a sensor introduce karta hai aur Tinkercad se lekar real hardware tak uski wiring detail mein samjhata hai.
+Speaker is section mein push button ko as a sensor introduce karta hai aur Wokwi se lekar real hardware tak uski wiring detail mein samjhata hai.
 
 --1--Push Button Fundamentals & Circuit Setup--
 Topic 1: Introduction to Sensors & Push Buttons
@@ -794,24 +792,24 @@ Subtopics: Sensors, Digital Input, Push Button, Component Decisions
 
 --1--Push Button Fundamentals & Circuit Setup--
 Topic 2: Circuit Wiring & Pull-Down Resistor
-Subtopics: Tinkercad Setup, Breadboard Connections, Resistor Wiring, Pull-Down Resistor, Pull-Up Resistor, Floating Voltage, Hardware Circuit
+Subtopics: Wokwi Setup, Breadboard Connections, Resistor Wiring, Pull-Down Resistor, Pull-Up Resistor, Floating Voltage, Hardware Circuit
 
 [📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
 * Transcript mein content volume: Long explanation with hardware and software demo
-* Key terms from transcript: TinkerCAD, duplicate, 10 kilo-ohm resistor, ground, 5 volt, pull-down resistor, pull-up resistor, floating voltage, default state
+* Key terms from transcript: Wokwi, duplicate, 10 kilo-ohm resistor, ground, 5 volt, pull-down resistor, pull-up resistor, floating voltage, default state
 * Explicit emphasis by speaker: "I recommend you do the same black and red ground and power supply"
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[TinkerCAD, duplicate circuit, push button, resistor, 10 kilo-ohm, brown black orange, ground, 5 volt, ⭐red wire, ⭐black wire, green wire, digital pin 2, pull-down resistor, pull-up resistor, floating voltage, default state, low, high, zero volt, hardware circuit, USB cable]
+[Wokwi, duplicate circuit, push button, resistor, 10 kilo-ohm, brown black orange, ground, 5 volt, ⭐red wire, ⭐black wire, green wire, digital pin 2, pull-down resistor, pull-up resistor, floating voltage, default state, low, high, zero volt, hardware circuit, USB cable]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: Developer Tinkercad mein virtual circuit design karta hai, components place karta hai, aur red/black color coding use karta hai taaki testing ke waqt power aur ground mein confusion na ho.
+* Testing/Offline Phase: Developer Wokwi mein virtual circuit design karta hai, components place karta hai, aur red/black color coding use karta hai taaki testing ke waqt power aur ground mein confusion na ho.
 * Fixing/Iteration Phase: Floating voltage (0 se 5V ke beech fluctuate hona) ka issue fix karne ke liye developer ek pull-down resistor lagata hai taaki button ka default state securely LOW (0V) pe fix rahe.
 * Live Production Phase: Real hardware pe wires aur breadboard use karke final physical circuit deploy kiya jaata hai.
 * Additional context: None
@@ -845,7 +843,7 @@ Subtopics: Input Mode, Digital Read Function, High and Low States, Binary State
 
 --2--Programming Digital Inputs & Logic--
 Topic 2: Reading & Printing Button State
-Subtopics: Pin Definition, Serial Monitor Initialization, Delay Function, If-Else Logic, Tinkercad Simulation
+Subtopics: Pin Definition, Serial Monitor Initialization, Delay Function, If-Else Logic, Wokwi Simulation
 
 [📊 SCOPE SIGNAL for Topic 2:
 
@@ -858,11 +856,11 @@ Subtopics: Pin Definition, Serial Monitor Initialization, Delay Function, If-Els
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[#define, buttonPin 2, pinMode, Serial.begin, Serial.println, digitalRead, delay, 100 milliseconds, compile, upload, serial monitor, if statement, ⭐== operator, else statement, Button is pressed, Button is not pressed, TinkerCAD simulation, mouse click]
+[#define, buttonPin 2, pinMode, Serial.begin, Serial.println, digitalRead, delay, 100 milliseconds, compile, upload, serial monitor, if statement, ⭐== operator, else statement, Button is pressed, Button is not pressed, Wokwi simulation, mouse click]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: Developer code likhta hai jahan button state read karke Serial Monitor pe directly print ki jaati hai (0 or 1, ya human-readable text). Tinkercad mein mouse click se virtual test karta hai.
+* Testing/Offline Phase: Developer code likhta hai jahan button state read karke Serial Monitor pe directly print ki jaati hai (0 or 1, ya human-readable text). Wokwi mein mouse click se virtual test karta hai.
 * Fixing/Iteration Phase: Developer `delay(100)` add karta hai taaki console pe data itni tezi se print na ho ki human eye padh na sake. Code mein double equal (`==`) ki common galti ko dhyan mein rakhta hai.
 * Live Production Phase: (N/A)
 * Additional context: None
@@ -896,7 +894,7 @@ Subtopics: Component Initialization, State Checking, Output Control, Hardware Co
 
 --3--Hardware Integration & Debugging--
 Topic 2: Serial Plotter Visualization
-Subtopics: Serial Plotter Tool, Baud Rate, Data Visualization, Tinkercad Graph
+Subtopics: Serial Plotter Tool, Baud Rate, Data Visualization, Wokwi Graph
 
 [📊 SCOPE SIGNAL for Topic 2:
 
@@ -909,11 +907,11 @@ Subtopics: Serial Plotter Tool, Baud Rate, Data Visualization, Tinkercad Graph
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[Serial Plotter, debug tool, plot, Serial.println, full speed, no delay, Tools, ⭐Ctrl+Shift+L, baud rate, no line ending, graph, TinkerCAD, Toggle graph, 0 to 1]
+[Serial Plotter, debug tool, plot, Serial.println, full speed, no delay, Tools, ⭐Ctrl+Shift+L, baud rate, no line ending, graph, Wokwi, Toggle graph, 0 to 1]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: Developer Arduino IDE ka Serial Plotter (ya Tinkercad mein Toggle Graph) open karta hai taaki sensor ka raw binary data (0 aur 1) visual graph ke form mein real-time dekh sake bina delay function lagaye.
+* Testing/Offline Phase: Developer Arduino IDE ka Serial Plotter (ya Wokwi mein Toggle Graph) open karta hai taaki sensor ka raw binary data (0 aur 1) visual graph ke form mein real-time dekh sake bina delay function lagaye.
 * Fixing/Iteration Phase: Developer debug karta hai ki graph plot karne ke liye print statement se saara text hatakar sirf raw data (`digitalRead`) send karna zaroori hai, warna plotter properly graph nahi banayega.
 * Live Production Phase: (N/A)
 * Additional context: None
@@ -974,7 +972,7 @@ Sections: 3 | Topics: 6 | Subtopics: 24
 
 
 ===Section 1: Potentiometer Basics & Circuit Setup===
-Speaker is section mein naye analog sensor (potentiometer) ko introduce karta hai aur Tinkercad se lekar physical board tak uski wiring samjhata hai.
+Speaker is section mein naye analog sensor (potentiometer) ko introduce karta hai aur Wokwi se lekar physical board tak uski wiring samjhata hai.
 
 --1--Potentiometer Basics & Circuit Setup--
 Topic 1: Introduction to Potentiometer
@@ -1002,13 +1000,13 @@ Subtopics: Potentiometer Sensor, Range of Values, Volume Button Analogy, Analog 
 
 --1--Potentiometer Basics & Circuit Setup--
 Topic 2: Circuit Wiring & Connections
-Subtopics: Tinkercad Duplicate, 10 Kilo-ohm Resistance, Terminal 1, Wiper Pin, Terminal 2, Analog Input A2, Hardware Layout
+Subtopics: Wokwi Duplicate, 10 Kilo-ohm Resistance, Terminal 1, Wiper Pin, Terminal 2, Analog Input A2, Hardware Layout
 
 [📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation with Tinkercad and physical hardware setup
+* Transcript mein content volume: Long explanation with Wokwi and physical hardware setup
 * Key terms from transcript: variable resistance, 10 kilo-ohm, terminal 1, wiper, terminal 2, ground, 5-volt, analog input pin A2, breadboard
 * Explicit emphasis by speaker: "make sure that you don't connect both pins to the ground of both pins to Facebook" [⚠️ Auto-caption error — meant "5-volt"]
 * Speaker ne jo analogies/examples use kiye: None
@@ -1019,7 +1017,7 @@ Subtopics: Tinkercad Duplicate, 10 Kilo-ohm Resistance, Terminal 1, Wiper Pin, T
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: Developer Tinkercad mein virtual potentiometer add karta hai, 10 kilo-ohm resistance select karta hai aur 3 pins (Ground, 5V, aur Analog A2) wire karta hai.
+* Testing/Offline Phase: Developer Wokwi mein virtual potentiometer add karta hai, 10 kilo-ohm resistance select karta hai aur 3 pins (Ground, 5V, aur Analog A2) wire karta hai.
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: Real Arduino board par same wiring replicate ki jaati hai, dhyan rakhte hue ki 3 pins breadboard ki alag-alag lines mein connected hon.
 * Additional context: Speaker ne hardware layout mein spacing explicitly maintain ki taaki future components ke liye room bache.
@@ -1104,20 +1102,20 @@ Subtopics: LED Brightness Goal, Data Scaling, Divide by 4, PWM Functionality
 
 --3--LED Brightness Integration (Activity)--
 Topic 2: Code Implementation & Testing
-Subtopics: Variable Declaration, Mathematical Scaling, analogWrite Execution, Hardware Fade Effect, Tinkercad Verification
+Subtopics: Variable Declaration, Mathematical Scaling, analogWrite Execution, Hardware Fade Effect, Wokwi Verification
 
 [📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Full code solution with Tinkercad and physical hardware demo
+* Transcript mein content volume: Full code solution with Wokwi and physical hardware demo
 * Key terms from transcript: #define ledPin 11, pinMode OUTPUT, potentiometerValue, ledBrightness, analogWrite
 * Explicit emphasis by speaker: "Don't make the confusion between them. analogRead to read... analogWrite to write"
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[#define ledPin 11, #define potentiometer A2, pinMode OUTPUT, potentiometerValue, analogRead, ledBrightness, divide by 4, analogWrite, duty cycle, compile, error fix, upload, hardware fade out, Tinkercad simulation, ⭐analogRead vs analogWrite, full speed]
+[#define ledPin 11, #define potentiometer A2, pinMode OUTPUT, potentiometerValue, analogRead, ledBrightness, divide by 4, analogWrite, duty cycle, compile, error fix, upload, hardware fade out, Wokwi simulation, ⭐analogRead vs analogWrite, full speed]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
@@ -1215,7 +1213,7 @@ Subtopics: Digital Pins, Analog Pins, Output Mode, Input Mode
 
 --1--Pins Recap & Hardware Setup--
 Topic 2: Traffic Light Circuit Setup
-Subtopics: Tinkercad Duplication, LED Wiring, Resistor Configuration, Hardware Translation
+Subtopics: Wokwi Duplication, LED Wiring, Resistor Configuration, Hardware Translation
 
 [📊 SCOPE SIGNAL for Topic 2:
 
@@ -1232,7 +1230,7 @@ Subtopics: Tinkercad Duplication, LED Wiring, Resistor Configuration, Hardware T
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: Developer Tinkercad mein pehle components place karke wiring verify karta hai.
+* Testing/Offline Phase: Developer Wokwi mein pehle components place karke wiring verify karta hai.
 * Fixing/Iteration Phase: Wiring mein koi short circuit ya wrong connection check karta hai (e.g. metallic parts touching).
 * Live Production Phase: Real hardware components ke saath physical Arduino board pe circuit replicate karta hai.
 * Additional context: None
@@ -1408,7 +1406,7 @@ Subtopics: Serial.available(), Serial.parseInt(), Line Ending Issue, Overflow Ha
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[`Serial.available() > 0`, `Serial.parseInt()`, `Serial.parseFloat()`, `Serial.readString()`, No line ending, Newline, carriage return, backslash n, 0, overflow, 30000, 50000, -15536, long, float, 3.14, double, String, serial timeout, 1 second delay, `Serial.setTimeout()`, 1000 milliseconds, 10 milliseconds, Tinkercad]
+[`Serial.available() > 0`, `Serial.parseInt()`, `Serial.parseFloat()`, `Serial.readString()`, No line ending, Newline, carriage return, backslash n, 0, overflow, 30000, 50000, -15536, long, float, 3.14, double, String, serial timeout, 1 second delay, `Serial.setTimeout()`, 1000 milliseconds, 10 milliseconds, Wokwi]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
@@ -1930,7 +1928,7 @@ Subtopics: Hardware Sensors, Actuators, Ultrasonic Sensor, LCD Screen, Infrared 
 * Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 
 ===Section 2: Ultrasonic Sensor Hardware Setup===
-Speaker TinkerCAD aur real breadboard pe Ultrasonic sensor (HC-SR04) ki wiring aur pin connections explain karta hai.
+Speaker Wokwi aur real breadboard pe Ultrasonic sensor (HC-SR04) ki wiring aur pin connections explain karta hai.
 
 --2--Ultrasonic Sensor Hardware Setup--
 Topic 1: HC-SR04 Pinout & Wiring
@@ -1941,17 +1939,17 @@ Subtopics: Sensor Type Selection, VCC Pin, GND Pin, Echo Pin, Trigger Pin, Inter
 * Depth Level: Moderate
 * Coverage Angle: Practical only
 * Transcript mein content volume: Long explanation + demo
-* Key terms from transcript: TinkerCAD, ultrasonic sensor, HC-SR04, four pins, VCC, GND, Trigger pin, Echo pin, digital pin 3, digital pin 4, breadboard
+* Key terms from transcript: Wokwi, ultrasonic sensor, HC-SR04, four pins, VCC, GND, Trigger pin, Echo pin, digital pin 3, digital pin 4, breadboard
 * Explicit emphasis by speaker: "the one we are going to use is that what the HC-SR04", "make sure that the equip pin is connected on an interactive pin"
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[TinkerCAD, ultrasonic sensor, HC-SR04, four pins, VCC, GND, Trigger pin, Echo pin, digital pin 3, digital pin 4, breadboard, 5V, ground, ⭐interrupt pin constraint]
+[Wokwi, ultrasonic sensor, HC-SR04, four pins, VCC, GND, Trigger pin, Echo pin, digital pin 3, digital pin 4, breadboard, 5V, ground, ⭐interrupt pin constraint]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: Developer pehle TinkerCAD simulator mein HC-SR04 sensor select karke 4 pins (VCC, GND, Trig, Echo) connect karta hai, ensure karta hai ki Echo pin interrupt-capable pin (Pin 3) pe ho.
+* Testing/Offline Phase: Developer pehle Wokwi simulator mein HC-SR04 sensor select karke 4 pins (VCC, GND, Trig, Echo) connect karta hai, ensure karta hai ki Echo pin interrupt-capable pin (Pin 3) pe ho.
 * Fixing/Iteration Phase: Developer physical breadboard pe wiring karta hai aur sensor ko clear open space ki taraf face karke lagata hai taaki wrong measurements na aayein.
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 
@@ -2238,11 +2236,11 @@ Subtopics: LCD Actuator Concept, Pin Diagram, Power Pins, Contrast Pin, Potentio
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[actuator, stencils category, Tinkercad, breadboard, GND, 5V, V0, contrast, potentiometer, RS, A5, RW, E, A4, D4, D5, D6, D7, digital pin 6, 7, 8, 9, A, K, anode, cathode, 220 ohm resistor, ⭐analog pins as digital pins]
+[actuator, stencils category, Wokwi, breadboard, GND, 5V, V0, contrast, potentiometer, RS, A5, RW, E, A4, D4, D5, D6, D7, digital pin 6, 7, 8, 9, A, K, anode, cathode, 220 ohm resistor, ⭐analog pins as digital pins]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: Developer Tinkercad mein virtual wiring test karta hai aur phir real breadboard par wires plug karta hai (left to right sequence mein).
+* Testing/Offline Phase: Developer Wokwi mein virtual wiring test karta hai aur phir real breadboard par wires plug karta hai (left to right sequence mein).
 * Fixing/Iteration Phase: Developer potentiometer ka connection adjust karta hai contrast set karne ke liye (V0 pin pe).
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: Speaker ne mention kiya ki LCD sensor nahi balki actuator hai, isliye iska data output control karna padta hai.
@@ -2380,7 +2378,7 @@ Is section mein speaker sikhata hai ki Arduino projects ko infrared remote contr
 
 --1--IR Remote Controller - Make Your Projects More Interactive--
 Topic 1: Hardware Setup & Pinout Variations
-Subtopics: IR Receiver, Remote Controller, Tinkercad Simulation, Real Hardware Pinout, GND Pin, Power Pin, Data Pin
+Subtopics: IR Receiver, Remote Controller, Wokwi Simulation, Real Hardware Pinout, GND Pin, Power Pin, Data Pin
 
 [📊 SCOPE SIGNAL for Topic 1:
 
@@ -2388,36 +2386,36 @@ Subtopics: IR Receiver, Remote Controller, Tinkercad Simulation, Real Hardware P
 * Coverage Angle: Practical only
 * Transcript mein content volume: Short explanation with simulation vs real hardware comparison
 * Key terms from transcript: infrared receiver, remote controller, actuator, GND, Power, Data, digital pin 5
-* Explicit emphasis by speaker: Speaker ne baar-baar emphasize kiya ki Tinkercad aur real hardware ke IR receiver sensor mein pins ka order alag ho sakta hai (GND, VCC, Data).
+* Explicit emphasis by speaker: Speaker ne baar-baar emphasize kiya ki Wokwi aur real hardware ke IR receiver sensor mein pins ka order alag ho sakta hai (GND, VCC, Data).
 * Speaker ne jo analogies/examples use kiye: "controller you use in everyday life" (TV controller analogy)
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[infrared receiver, remote controller, actuator, Tinkercad, PIR sensor, GND, Power, Data, digital pin 5, ⭐pinout order, battery]
+[infrared receiver, remote controller, actuator, Wokwi, PIR sensor, GND, Power, Data, digital pin 5, ⭐pinout order, battery]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: Developer circuit build karta hai aur receiver ke GND, VCC aur Data pins ko Arduino se connect karta hai. Tinkercad aur real hardware mein pinout verify karta hai.
+* Testing/Offline Phase: Developer circuit build karta hai aur receiver ke GND, VCC aur Data pins ko Arduino se connect karta hai. Wokwi aur real hardware mein pinout verify karta hai.
 * Fixing/Iteration Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Live Production Phase: Real user physical remote control ke buttons dabata hai jo infrared signals bhejte hain receiver ko complex applications control karne ke liye.
 * Additional context: Speaker ne warn kiya ki passive infrared sensor (PIR) aur IR remote receiver dono alag components hain.
 
 --1--IR Remote Controller - Make Your Projects More Interactive--
 Topic 2: Library Installation & Version Management
-Subtopics: Library Manager, IRremote Library, Version Selection, Tinkercad Limitations, Library Folder Location
+Subtopics: Library Manager, IRremote Library, Version Selection, Wokwi Limitations, Library Folder Location
 
 [📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Moderate
 * Coverage Angle: Practical only
 * Transcript mein content volume: Short explanation + screen recording of Arduino IDE
-* Key terms from transcript: IRremote.h, library manager, GitHub, versions, Tinkercad
-* Explicit emphasis by speaker: Tinkercad custom libraries ya updates allow nahi karta, isliye wahan purana version hi chalta hai.
+* Key terms from transcript: IRremote.h, library manager, GitHub, versions, Wokwi
+* Explicit emphasis by speaker: Wokwi custom libraries ya updates allow nahi karta, isliye wahan purana version hi chalta hai.
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[⭐IRremote.h, library manager, GitHub, ⭐2.6.1[version], ⭐3.0.3[version], ⭐Tinkercad limitation, update, Documents/Arduino/libraries]
+[⭐IRremote.h, library manager, GitHub, ⭐2.6.1[version], ⭐3.0.3[version], ⭐Wokwi limitation, update, Documents/Arduino/libraries]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
@@ -2496,7 +2494,7 @@ Subtopics: Project Requirements, LED State Arrays, Initialization Functions, Tog
 * Testing/Offline Phase: Developer arrays banata hai LEDs ki pins aur current states (HIGH/LOW) store karne ke liye. LCD, LEDs aur IR sensor ko ek single script mein integrate karta hai.
 * Fixing/Iteration Phase: Array boundary errors se bachne ke liye developer toggle function mein index validation (if index >= array_size then return) lagata hai. Data types overflow se bachne ke liye v2 code mein "int" ki jagah "long" use karta hai.
 * Live Production Phase: End user remote se buttons press karta hai. Button 1, 2, 3 LEDs toggle karte hain, Button 0 saare LEDs off karta hai, aur LCD screen har operation ka status real-time update karti hai.
-* Additional context: Speaker ne mention kiya ki TinkerCad (v2) mein values badi aati hain isliye data type "long" hona zaroori hai, warna integer overflow ki wajah se code fail ho jayega.
+* Additional context: Speaker ne mention kiya ki Wokwi (v2) mein values badi aati hain isliye data type "long" hona zaroori hai, warna integer overflow ki wajah se code fail ho jayega.
 
 ---
 
@@ -2527,24 +2525,24 @@ Speaker is section mein photoresistor sensor ka use karke environment ki light/l
 
 --18--Photoresistor - Measure Luminosity--
 Topic 1: Hardware Setup & Pin Connections
-Subtopics: Photoresistor Concept, Tinkercad Duplication, 10k Ohm Resistor, Ground Connection, 5V Connection, Analog Pin A0
+Subtopics: Photoresistor Concept, Wokwi Duplication, 10k Ohm Resistor, Ground Connection, 5V Connection, Analog Pin A0
 
 [📊 SCOPE SIGNAL for Topic 1:
 
 * Depth Level: Moderate
 * Coverage Angle: Practical only
-* Transcript mein content volume: Short explanation + Tinkercad and physical hardware setup demo
-* Key terms from transcript: photoresistor sensor, luminosity, Tinkercad, breadboard, 10k ohm resistor, ground, 5V, analog pin A0, potentiometer
+* Transcript mein content volume: Short explanation + Wokwi and physical hardware setup demo
+* Key terms from transcript: photoresistor sensor, luminosity, Wokwi, breadboard, 10k ohm resistor, ground, 5V, analog pin A0, potentiometer
 * Explicit emphasis by speaker: Speaker ne explicitly emphasize kiya ki photoresistor mein koi plus ya minus side nahi hoti (polarity nahi hoti), direction matter nahi karti.
 * Speaker ne jo analogies/examples use kiye: Potentiometer analogy — speaker ne photoresistor ko potentiometer se compare kiya, jahan knob ghumaane ki jagah light se resistance change hota hai.
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[photoresistor sensor, luminosity, Tinkercad, breadboard, terminal 1, terminal 2, ⭐10k ohm resistor, ground, 5V, ⭐analog pin A0, analog input, potentiometer, physical hardware, save wires]
+[photoresistor sensor, luminosity, Wokwi, breadboard, terminal 1, terminal 2, ⭐10k ohm resistor, ground, 5V, ⭐analog pin A0, analog input, potentiometer, physical hardware, save wires]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: Developer breadboard par circuit banata hai jisme sensor ka ek leg 5V aur doosra 10k resistor ke through GND se connect karta hai. A0 pin se data read karne ke liye wire lagata hai. Tinkercad pe fake light slider se test karta hai.
+* Testing/Offline Phase: Developer breadboard par circuit banata hai jisme sensor ka ek leg 5V aur doosra 10k resistor ke through GND se connect karta hai. A0 pin se data read karne ke liye wire lagata hai. Wokwi pe fake light slider se test karta hai.
 * Fixing/Iteration Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Live Production Phase: Sensor real environment ki light ko detect karke analog value bhejta hai taaki smart actions (jaise home automation) liye ja sakein.
 * Additional context: Speaker ne mention kiya ki hardware setup mein breadboard par components directly plug karke wires save ki ja sakti hain.
@@ -2835,7 +2833,7 @@ Subtopics: Interactive Obstacle Detection, Ultrasonic Sensor, LCD Display, Warni
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[interactive obstacle detection application, ultrasonic sensor, distance, LCD display screen, yellow LED, locked mode, push button, green LED, photoresistor, infrared remote control, play button, toggle, centimeters, inches, ⭐EEPROM memories, reset button, default settings, simulation, TinkerCAD, PDF]
+[interactive obstacle detection application, ultrasonic sensor, distance, LCD display screen, yellow LED, locked mode, push button, green LED, photoresistor, infrared remote control, play button, toggle, centimeters, inches, ⭐EEPROM memories, reset button, default settings, simulation, Wokwi, PDF]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -3054,7 +3052,7 @@ Subtopics: Analog Read Photoresistor, Brightness Inversion Math, Green LED PWM O
 * Additional context: User Up/Down buttons daba kar 3 screens (Distance, Settings, Luminosity) mein perfectly cycle kar sakta hai.
 
 Topic 11: Real-World Prototyping & Version Nuances (Bonus)
-Subtopics: TinkerCAD Simulation Nuances, Project Ideas Sourcing, 4-Step Project Architecture Flow, Crowdfunding & Scaled Production
+Subtopics: Wokwi Simulation Nuances, Project Ideas Sourcing, 4-Step Project Architecture Flow, Crowdfunding & Scaled Production
 
 [📊 SCOPE SIGNAL for Topic 11:
 
@@ -3067,14 +3065,14 @@ Subtopics: TinkerCAD Simulation Nuances, Project Ideas Sourcing, 4-Step Project 
 ]
 
 🔑 KEYWORDS DUMP for Topic 11:
-[TinkerCAD, ⭐IRremote version 2[version], hexadecimal numbers, 0x, results.value, global architecture, POC, proof of concept, prototype, MVP, minimal viable product, Kickstarter, Indiegogo, crowdfunding, PCB manufacturers, Instructables, Arduino Project Hub]
+[Wokwi, ⭐IRremote version 2[version], hexadecimal numbers, 0x, results.value, global architecture, POC, proof of concept, prototype, MVP, minimal viable product, Kickstarter, Indiegogo, crowdfunding, PCB manufacturers, Instructables, Arduino Project Hub]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
 
 * Learning Phase: Developer online forums (Instructables, Arduino Project Hub) browse karta hai inspiration aur open-source ideas gather karne ke liye.
 * Application Phase: Developer ek idea ki Global Architecture sochta hai, phir cheap components use karke breadboard par ek Proof of Concept (POC) banata hai. Uske baad hardware ko real environment mein integrate karke ek Minimal Viable Product (MVP/Prototype) test karta hai.
 * Mastery Phase: Successful MVP banne ke baad, developer Kickstarter ya Indiegogo pe product ko crowdfund karta hai taaki PCB manufacturers se large-scale production करवा sake.
-* Additional context: TinkerCAD simulation is noted to be slightly slow/laggy when handling complex programs compared to real physical hardware.
+* Additional context: Wokwi simulation is noted to be slightly slow/laggy when handling complex programs compared to real physical hardware.
 
 ---
 
@@ -3127,7 +3125,7 @@ Subtopics: ADC Resolution, analogRead(), analogWrite(), Duty Cycle, Potentiomete
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: Developer potentiometer ko TinkerCAD mein connect karta hai aur ADC values ko Serial Monitor par print karke check karta hai ki values 0-1023 ke beech aa rahi hain ya nahi.
+* Testing/Offline Phase: Developer potentiometer ko Wokwi mein connect karta hai aur ADC values ko Serial Monitor par print karke check karta hai ki values 0-1023 ke beech aa rahi hain ya nahi.
 * Fixing/Iteration Phase: Agar LED linearly fade nahi ho rahi, toh developer `map()` function use karke 0-1023 range ko 0-255 (PWM range) mein convert karta hai.
 * Live Production Phase: Industrial settings mein yehi ADC logic temperature sensors padhne aur motor speed control (PWM) ke liye directly use hota hai.
 * Additional context: Speaker ne clarify kiya ki sirf tilde (~) mark wale digital pins hi PWM support karte hain.
@@ -3182,44 +3180,12 @@ Subtopics: Polling vs Interrupts, Hardware Pins 2 and 3, attachInterrupt(), ISR 
 
 ==================================================================================
 
-# Section 22: Advanced Timers & Internal Interrupts
+# Section 22: Advanced Embedded C & Memory Management
 
-===Section 22: Advanced Timers & Internal Interrupts===
-[🆕 Advanced Module] Speaker explain karta hai ki `millis()` background mein kaise kaam karta hai aur internal hardware timers (Timer0, Timer1, Timer2) ko modify karke ultra-precise internal interrupts kaise banaye jate hain.
-
---22--Advanced Timers & Internal Interrupts--
-Topic 1: Hardware Timers & CTC Mode
-Subtopics: Timer Registers, Prescalers, Compare Match, ISR (Interrupt Service Routine)
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Register-level coding + logic math
-* Key terms from transcript: Timer1, 16-bit timer, prescaler, CTC mode, ISR, TCCR1A, TIMSK1
-* Explicit emphasis by speaker: "millis() has a slight drift. For perfectly timed industrial execution, you must use hardware Timer Interrupts."
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Hardware timers, Timer0, Timer1, Timer2, 16-bit timer, prescaler, 1024, CTC mode, Clear Timer on Compare Match, ISR, Interrupt Service Routine, `ISR(TIMER1_COMPA_vect)`, `TCCR1A`, `TCCR1B`, `TIMSK1`, `OCR1A`, background execution]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer Timer1 ko configure karke ek ISR banata hai jo exactly har 1 second baad trigger hota hai, `loop()` ki speed ki parwah kiye bina.
-* Fixing/Iteration Phase: Developer math formula `(16*10^6) / (prescaler * desired_freq) - 1` use karke `OCR1A` register ki exact value calculate karta hai.
-* Live Production Phase: Stepper motors, precise PID controllers, aur audio processing completely hardware timers pe run karte hain taaki timing perfectly lock rahe.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-# Section 23: Advanced Embedded C & Memory Management
-
-===Section 23: Advanced Embedded C & Memory Management===
+===Section 22: Advanced Embedded C & Memory Management===
 [🆕 Advanced Module] Is section mein memory management, pointers, aur hardware registers ko directly access karna sikhaya gaya hai taaki Arduino ki "hobbyist" limitations ko cross karke production-level memory efficiency achieve ki ja sake.
 
---23--Advanced Embedded C & Memory Management--
+--22--Advanced Embedded C & Memory Management--
 Topic 1: Pointers & Ditching the "String" Object
 Subtopics: Pointer Declaration, Pass by Reference, Heap Fragmentation, Char Arrays, C-Strings, null terminator
 
@@ -3242,7 +3208,7 @@ Subtopics: Pointer Declaration, Pass by Reference, Heap Fragmentation, Char Arra
 * Fixing/Iteration Phase: Developer null terminator `` missing hone ki wajah se aane wale garbage data ko debug karke fix karta hai.
 * Live Production Phase: Ek Arduino node mahino tak bina restart hue consistently chalta hai kyunki char arrays memory fragmentation (RAM leakage) create nahi karte.
 
---23--Advanced Embedded C & Memory Management--
+--22--Advanced Embedded C & Memory Management--
 Topic 2: Flash Memory Storage & PROGMEM (Defeating the 2KB RAM Limit)
 Subtopics: Harvard Architecture, SRAM vs Flash Memory, The F() Macro, <avr/pgmspace.h>, PROGMEM Keyword, Reading from Flash (pgm_read_byte), Lookup Tables
 
@@ -3265,7 +3231,7 @@ Subtopics: Harvard Architecture, SRAM vs Flash Memory, The F() Macro, <avr/pgmsp
 * Fixing/Iteration Phase: Developer ek heavy math array (jaise sine-wave lookup table for motor control) ko RAM se hata kar `const int sineTable[] PROGMEM` define karta hai. Data read karne ke liye standard `array[i]` ki jagah `pgm_read_word(&array[i])` use karke code fix karta hai.
 * Live Production Phase: Industrial devices (jinme complex LCD menus aur heavy sensor calibration data hota hai) mahino tak bina RAM overflow/crash ke chalte hain, kyunki developer ne smart memory mapping ke through 80% RAM free rakhi hoti hai.
 
---23--Advanced Embedded C & Memory Management--
+--22--Advanced Embedded C & Memory Management--
 Topic 3: Structs, Enums & Finite State Machines (FSM)
 Subtopics: `enum` State Definitions, `struct` Data Grouping, `typedef` usage, Memory Alignment/Padding, FSM Architecture, Switch-Case state handling
 
@@ -3289,7 +3255,7 @@ Subtopics: `enum` State Definitions, `struct` Data Grouping, `typedef` usage, Me
 * Live Production Phase: Production level RTOS queues (jaise FreeRTOS) ya I2C transmission mein, developer alag-alag variables bhejne ke bajaye ek single `struct` banakar uska pointer pass karta hai. FSM structure ensure karta hai ki CPU ek waqt pe strictly ek hi logical state run kare, jisse catastrophic hardware failures avoid hote hain.
 * Additional context: Speaker highlight karta hai ki pointers aur structs ka combination hi wo bridge hai jo Arduino sketches ko professional C firmware se alag karta hai.
 
---23--Advanced Embedded C & Memory Management--
+--22--Advanced Embedded C & Memory Management--
 Topic 4: Bitwise Operations & Direct Port Manipulation
 Subtopics: Bit Masking, Bit Shifting, AND/OR/XOR, Direct PORT Manipulation
 
@@ -3312,8 +3278,84 @@ Subtopics: Bit Masking, Bit Shifting, AND/OR/XOR, Direct PORT Manipulation
 * Fixing/Iteration Phase: Bit mask calculations verify karta hai taaki ek pin change karte waqt galti se dusri pins modify na ho jayein.
 * Live Production Phase: Custom high-speed sensor protocols mein bitwise operations hardware limits ko push karke fast execution ensure karte hain.
 
+Topic 5: Professional C Standards: <stdint.h> & Atomic Operations
+Subtopics: MISRA C Basics, Fixed-Width Integers, Portability Issues of 'int', The 8-bit ALU Limitation, Data Tearing, Global Interrupts Enable/Disable, cli(), sei(), <util/atomic.h>, ATOMIC_BLOCK
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Explanation of multi-cycle read corruption and code refactoring for integer types
+* Key terms from transcript: stdint.h, uint8_t, uint32_t, int16_t, MISRA C, data tearing, atomic block, cli, sei, 8-bit architecture, race condition
+* Explicit emphasis by speaker: "In the professional industry, using standard 'int' or 'long' is strictly banned. You must use fixed-width integers like uint8_t. Furthermore, reading a 32-bit volatile variable on an 8-bit chip takes 4 clock cycles—if an interrupt fires in the middle, your data is destroyed. You must use atomic blocks."
+* Speaker ne jo analogies/examples use kiye: Data tearing is like trying to read a 4-page letter while someone else is aggressively turning the pages. You might read the first half of an old sentence and the second half of a new one, creating garbage data.
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[`<stdint.h>`, `uint8_t`, `uint16_t`, `uint32_t`, `int8_t`, `int16_t`, MISRA C compliance, portability, architecture limits, 8-bit ALU, data tearing, volatile multi-byte, global interrupt flag, `cli()`, `sei()`, `<util/atomic.h>`, `ATOMIC_BLOCK`, `ATOMIC_RESTORESTATE`, shared variables, true thread-safety]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Developer refactors the entire codebase to replace `byte` with `uint8_t`, `int` with `int16_t`, and `unsigned long` with `uint32_t` to guarantee a 100% predictable memory footprint across any compiler.
+* Fixing/Iteration Phase: Developer tracks down a rare, random bug where a 16-bit encoder value occasionally spikes to physically impossible numbers. Realizes it's "Data Tearing" caused by a hardware interrupt, and wraps the variable read in an `ATOMIC_BLOCK` to fix it instantly.
+* Live Production Phase: Aerospace and medical embedded systems mandate these exact practices (MISRA C compliance) to mathematically guarantee that hardware interrupts cannot corrupt shared multi-byte variables during real-time execution.
+
+Topic 6: Multi-File Projects & Modular Architecture (.h / .c)
+Subtopics: The .ino Illusion, Header Files (.h), Source Files (.c), Include Guards (#ifndef), The extern Keyword, Function Prototypes
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Explanation of the linker and separating custom drivers from main logic
+* Key terms from transcript: modular programming, header guards, extern, include, .c files, .h files, linker error, multiple definitions
+* Explicit emphasis by speaker: "The Arduino IDE has been holding your hand by auto-merging your tabs. In professional bare-metal C, you must manually connect your files using headers and protect against double-inclusions using header guards."
+* Speaker ne jo analogies/examples use kiye: A header file is the "Menu" (it promises what the restaurant makes); the .c file is the "Kitchen" (where the actual code lives). The linker is the waiter connecting the two.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[modular programming, header files, `.h`, source files, `.c`, include guards, `#ifndef`, `#define`, `#endif`, `#pragma once`, `extern` keyword, linkage, variable scope, function prototype, multiple definitions error, linker error, `#include " "`, standard libraries]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Developer ek massive 1000-line codebase ko alag-alag modules (e.g., `usart.c`, `usart.h`, `main.c`) mein split karta hai taaki readability aur maintainability badhe.
+* Fixing/Iteration Phase: Compilation ke dauran "multiple definition" linker error aane par, developer header file mein global variables ke aage `extern` keyword lagata hai aur `#ifndef` header guards use karke issue fix karta hai.
+* Live Production Phase: Enterprise RTOS firmware mein 50+ files hoti hain. Modularity ensure karti hai ki multiple engineers ek hi project pe bina `git merge` conflicts ke parallel kaam kar sakein.
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+
+==================================================================================
+
+# Section 23: Advanced Timers & Internal Interrupts
+
+===Section 23: Advanced Timers & Internal Interrupts===
+[🆕 Advanced Module] Speaker explain karta hai ki `millis()` background mein kaise kaam karta hai aur internal hardware timers (Timer0, Timer1, Timer2) ko modify karke ultra-precise internal interrupts kaise banaye jate hain.
+
+--23--Advanced Timers & Internal Interrupts--
+Topic 1: Hardware Timers & CTC Mode
+Subtopics: Timer Registers, Prescalers, Compare Match, ISR (Interrupt Service Routine)
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Register-level coding + logic math
+* Key terms from transcript: Timer1, 16-bit timer, prescaler, CTC mode, ISR, TCCR1A, TIMSK1
+* Explicit emphasis by speaker: "millis() has a slight drift. For perfectly timed industrial execution, you must use hardware Timer Interrupts."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Hardware timers, Timer0, Timer1, Timer2, 16-bit timer, prescaler, 1024, CTC mode, Clear Timer on Compare Match, ISR, Interrupt Service Routine, `ISR(TIMER1_COMPA_vect)`, `TCCR1A`, `TCCR1B`, `TIMSK1`, `OCR1A`, background execution]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Timer1 ko configure karke ek ISR banata hai jo exactly har 1 second baad trigger hota hai, `loop()` ki speed ki parwah kiye bina.
+* Fixing/Iteration Phase: Developer math formula `(16*10^6) / (prescaler * desired_freq) - 1` use karke `OCR1A` register ki exact value calculate karta hai.
+* Live Production Phase: Stepper motors, precise PID controllers, aur audio processing completely hardware timers pe run karte hain taaki timing perfectly lock rahe.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
 
@@ -3509,7 +3551,7 @@ Subtopics: Superloop Limitations, Schedulers, Context Switching, Preemptive Mult
 
 --26--Multitasking with FreeRTOS--
 Topic 2: Creating Tasks & Priorities
-Subtopics: xTaskCreate, Task Handles, vTaskDelay, Priority Levels, Core Pinning (ESP32)
+Subtopics: xTaskCreate, Task Handles, vTaskDelay, Priority Levels
 
 [📊 SCOPE SIGNAL for Topic 2:
 
@@ -3522,7 +3564,7 @@ Subtopics: xTaskCreate, Task Handles, vTaskDelay, Priority Levels, Core Pinning 
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[`xTaskCreate()`, `TaskHandle_t`, stack size, task priority, `vTaskDelay()`, `pdMS_TO_TICKS`, task starvation, infinite task loop, multicore, ESP32 core pinning, idle task]
+[`xTaskCreate()`, `TaskHandle_t`, stack size, task priority, `vTaskDelay()`, `pdMS_TO_TICKS`, task starvation, infinite task loop, idle task]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
@@ -3667,3 +3709,7 @@ Subtopics: Fuse Bits Architecture, Low Fuse, High Fuse, Extended Fuse, Internal 
 
 
 ==================================================================================
+
+
+
+
