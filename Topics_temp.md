@@ -823,6 +823,65 @@ Subtopics: Bit Masking, Bit Shifting, AND/OR/XOR, Direct PORT Manipulation
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+==================================================================================
+
+# Section 5C: Advanced I/O - UART Parsing & Data Persistence
+
+===Section 5C: Advanced I/O - UART Parsing & Data Persistence===
+[⚠️ Derived] Speaker is section mein real-world communication aur storage sikhata hai — Serial monitor se incoming text commands ko C-Strings aur pointers ke through parse karna, aur power off hone ke baad bhi device ka state EEPROM mein save rakhna.
+
+--5C--Advanced I/O - UART Parsing & Data Persistence--
+Topic 1: Non-Blocking UART Parsing & CLI (Command Line Interface)
+Subtopics: Serial.available(), Serial.read(), Ring Buffers, String Tokenization (strtok), String to Integer (atoi), Handling Line Endings (
+, \r), Buffer Overflow Protection
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation integrating Pointers and C-Strings from Section 5B to process incoming data
+* Key terms from transcript: UART, RX/TX, Serial.available(), Serial.read(), buffer array, char array, strtok, atoi, carriage return, line feed, payload, CLI
+* Explicit emphasis by speaker: "Never use Serial.readString() or Serial.parseInt() in production! They contain hidden delays that will block your CPU. We build our own non-blocking character buffers."
+* Speaker ne jo analogies/examples use kiye: A buffer array is like a mailbox; you check it one letter at a time without waiting for the postman, and strtok is like a pair of scissors cutting a sentence into words based on spaces or commas.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[UART, RX, TX, `Serial.available()`, `Serial.read()`, non-blocking read, incoming byte, `char` buffer, index counter, null terminator, `\0`, `
+`, `\r`, carriage return, line feed, string tokenization, `strtok()`, delimiter, `atoi()`, string to integer, buffer overflow, CLI, Command Line Interface, payload parsing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Serial Monitor mein "SET_SPEED:255" type karke bhejta hai, aur microcontroller us string ko receive karke `strtok` se split karta hai aur 255 ko integer mein convert karke motor ki speed set karta hai.
+* Fixing/Iteration Phase: Agar bad data ya lambi string aane par Arduino crash ho raha hai, toh developer code mein buffer limit check add karta hai (e.g., `if(index < BUFFER_SIZE - 1)`) taaki buffer overflow na ho.
+* Live Production Phase: Production mein, Arduino ek PC ya master device ke saath UART pe connected hota hai, aur continuously non-blocking way mein JSON-like ya comma-separated commands receive karta hai bina apne main FSM loops ko roke.
+* Additional context: Yeh topic directly Section 5B ke C-Strings aur Pointers ka practical application hai.
+
+--5C--Advanced I/O - UART Parsing & Data Persistence--
+Topic 2: EEPROM & Non-Volatile Memory Management
+Subtopics: EEPROM Architecture, EEPROM.read() / EEPROM.write(), Storing Structs with EEPROM.put() / EEPROM.get(), Write Cycles limitation, Wear Leveling Basics
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Practical explanation focusing on memory limits and saving custom data types (Structs)
+* Key terms from transcript: EEPROM, non-volatile memory, power cycle, EEPROM.get(), EEPROM.put(), write cycles, 100,000 limit, wear leveling, calibration data
+* Explicit emphasis by speaker: "EEPROM has a physical limit of about 100,000 writes. If you put an EEPROM write inside your infinite loop by mistake, you will physically destroy that memory sector in a few seconds."
+* Speaker ne jo analogies/examples use kiye: RAM is like a whiteboard that gets wiped clean every night; EEPROM is like carving data into a stone tablet—it stays forever, but you can only carve over the same spot so many times before it breaks.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[EEPROM, non-volatile memory, power loss, `EEPROM.read()`, `EEPROM.write()`, `EEPROM.update()`, `EEPROM.put()`, `EEPROM.get()`, byte address, 1024 bytes, write cycle limit, 100,000 writes, hardware degradation, memory preservation, saving Structs, calibration parameters, state recovery]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer ek custom `struct` (jisme device configuration aur FSM state hai) banata hai aur `EEPROM.put()` use karke use memory mein save karta hai. USB nikal kar wapas lagane par `EEPROM.get()` se wahi state recover karta hai.
+* Fixing/Iteration Phase: Developer realize karta hai ki woh har second temperature save kar raha hai, jisse EEPROM jaldi kharab ho jayegi. Woh logic modify karke `EEPROM.update()` lagata hai (jo sirf tabhi write karta hai jab value actually change ho) ya sirf shutdown interrupt aane par save karta hai.
+* Live Production Phase: Industrial machines EEPROM use karte hain apne offsets, user settings, aur last known state ko save karne ke liye, taaki power cut hone ke baad system zero se start hone ke bajaye directly wahin se resume kare jahan se ruka tha.
+* Additional context: Structs ko direct memory block ki tarah EEPROM mein dalna pointers ka ek behtareen use case dikhata hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 =======================================================================
 
 # Section 6: LEDs - Digital Pins as Output Pins
