@@ -667,6 +667,85 @@ Sections: 1 | Topics: 4 | Subtopics: 27
 
 ==================================================================================
 
+# Section 5A: Bare-Metal Realities (Analog, Non-Blocking, & Interrupts)
+
+===Section 5A: Bare-Metal Realities (Analog, Non-Blocking, & Interrupts)===
+[⚠️ Derived] Speaker is section mein professional firmware development ki buniyad rakhta hai — delay() ko chhod kar millis() apnana, analog data read karna, aur CPU ko block kiye bina interrupts ke through events handle karna sikhata hai.
+
+--5A--Bare-Metal Realities--
+**Topic 1: Analog Data & PWM (Pulse Width Modulation)**
+Subtopics: ADC Resolution, analogRead(), analogWrite(), Duty Cycle, Potentiometers, Fading LEDs
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with hardware demo and oscilloscope visualization
+* Key terms from transcript: ADC, analog to digital, 10-bit resolution, 0 to 1023, PWM, duty cycle, fake analog, analogWrite, analogRead
+* Explicit emphasis by speaker: "PWM is not true analog, it's just turning the digital pin on and off really fast to trick the hardware."
+* Speaker ne jo analogies/examples use kiye: PWM compared to flickering a light switch so fast it looks dim.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[ADC, analogRead(), 10-bit resolution, 0 to 1023, analogWrite(), PWM, pulse width modulation, duty cycle, 0 to 255, potentiometer, fading LED, analog pins, A0, A1, pseudo-analog, oscilloscope]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer potentiometer ko TinkerCAD mein connect karta hai aur ADC values ko Serial Monitor par print karke check karta hai ki values 0-1023 ke beech aa rahi hain ya nahi.
+* Fixing/Iteration Phase: Agar LED linearly fade nahi ho rahi, toh developer `map()` function use karke 0-1023 range ko 0-255 (PWM range) mein convert karta hai.
+* Live Production Phase: Industrial settings mein yehi ADC logic temperature sensors padhne aur motor speed control (PWM) ke liye directly use hota hai.
+* Additional context: Speaker ne clarify kiya ki sirf tilde (~) mark wale digital pins hi PWM support karte hain.
+
+**Topic 2: Ditching delay() for Non-Blocking Code (millis)**
+Subtopics: The Problem with delay(), CPU Blocking, The millis() Function, Timestamps, Delta Time Calculation, Concurrent Blinking
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with side-by-side code comparison
+* Key terms from transcript: blocking code, delay(), millis(), multitasking, unsigned long, timestamp, delta time
+* Explicit emphasis by speaker: "Using delay() in professional firmware is a crime. It paralyzes the CPU. You must use millis() to track time."
+* Speaker ne jo analogies/examples use kiye: delay() is like going to sleep and ignoring the world; millis() is like checking your watch periodically while still working on your desk.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[blocking code, delay(), millis(), CPU halted, unsigned long, overflow 50 days, timestamp, current time, previous time, delta time, `currentMillis - previousMillis >= interval`, concurrent tasks, multitasking Arduino, FSM introduction]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer do alag-alag LEDs ko alag speed pe blink karne ki koshish karta hai. `delay()` ke saath yeh fail ho jata hai, tab woh `millis()` ka timer logic likhta hai.
+* Fixing/Iteration Phase: Variable overflow error (negative time) bachane ke liye developer strictly `unsigned long` data type use karta hai `int` ki jagah.
+* Live Production Phase: Production firmware mein sensor polling, UI updates, aur motor control ek hi loop mein bina ruke parallel chalta rehta hai kyunki CPU kabhi block nahi hota.
+* Additional context: Yeh topic aage aane wale FreeRTOS aur Hardware Timers seekhne ke liye sabse zaroori foundational step hai.
+
+**Topic 3: External Interrupts & The volatile Keyword**
+Subtopics: Polling vs Interrupts, Hardware Pins 2 and 3, attachInterrupt(), ISR (Interrupt Service Routine), FALLING/RISING states, volatile keyword
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Focused explanation with strict rules on ISRs
+* Key terms from transcript: polling, interrupts, attachInterrupt, ISR, volatile, debounce, RISING, FALLING
+* Explicit emphasis by speaker: "Keep your ISRs as short and fast as possible. Never put a delay() or a Serial.print() inside an interrupt routine!"
+* Speaker ne jo analogies/examples use kiye: Polling is like constantly asking "Are we there yet?"; Interrupt is like getting a phone call only when you arrive.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[polling, external interrupt, attachInterrupt(), ISR, Interrupt Service Routine, digital pin 2, digital pin 3, RISING, FALLING, CHANGE, ⭐volatile, RAM cache optimization, race condition, short ISR]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer button press detect karne ke liye interrupt attach karta hai taaki `millis()` wale loop ke dauran koi button press miss na ho.
+* Fixing/Iteration Phase: Agar button dabane pe code crash hota hai ya ajeeb behave karta hai, toh developer ISR ke andar se `Serial.print()` hata deta hai aur shared variables ke aage `volatile` lagata hai taaki compiler unhe optimize away na kare.
+* Live Production Phase: Safety-critical systems (e.g., Emergency Stop button) directly hardware interrupts se wired hote hain taaki CPU immediately normal loop chhod kar override action le sake.
+* Additional context: Speaker ne debounce ka issue highlight kiya jo hardware interrupts ke saath amplify ho jata hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
 # Section 5B: Advanced Embedded C & Memory Management
 
 ===Section 5B: Advanced Embedded C & Memory Management===
