@@ -1483,12 +1483,12 @@ Sections: 1 | Topics: 5 | Subtopics: 20
 
 ==================================================================================
 
-# Section 10B: Industry Standard Bus Protocols (I2C & SPI)
+# Section 11: Industry Standard Bus Protocols (I2C & SPI)
 
-===Section 10B: Industry Standard Bus Protocols (I2C & SPI)===
+===Section 11: Industry Standard Bus Protocols (I2C & SPI)===
 [🆕 Advanced Module] Speaker yahan complex industrial communication seekhata hai jahan ek hi Arduino se multiple sensors connect kiye jaate hain using standard Bus architectures.
 
---10B--Industry Standard Bus Protocols (I2C & SPI)--
+--11--Industry Standard Bus Protocols (I2C & SPI)--
 Topic 1: I2C (Inter-Integrated Circuit) & SPI
 Subtopics: Master-Slave Concept, SDA/SCL, Hexadecimal Addresses, Pull-up Resistors, SPI MOSI/MISO, Chip Select
 
@@ -1515,12 +1515,12 @@ Subtopics: Master-Slave Concept, SDA/SCL, Hexadecimal Addresses, Pull-up Resisto
 
 ==================================================================================
 
-# Section 11: Time Functionalities - Improve Your Programs and Multitask
+# Section 12: Time Functionalities - Improve Your Programs and Multitask
 
-===Section 11: Time Functionalities - Improve Your Programs and Multitask===
+===Section 12: Time Functionalities - Improve Your Programs and Multitask===
 Speaker is section mein Arduino time functionalities explain karta hai aur dikhata hai ki `delay()` ko hata kar multitask programs kaise banaye jaate hain.
 
---11--Time Functionalities - Improve Your Programs and Multitask--
+--12--Time Functionalities - Improve Your Programs and Multitask--
 Topic 1: Delay Functionality & Its Limitations
 Subtopics: Delay, Delay Microseconds, Blocking Execution, Serial Communication Issue, Multi-Blink Problem
 
@@ -1637,7 +1637,7 @@ Subtopics: Serial Delay Update, Potentiometer PWM, Button State Toggle, Real-Tim
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 11: Time Functionalities - Improve Your Programs and Multitask
+Section 12: Time Functionalities - Improve Your Programs and Multitask
 Topic 1: Delay Functionality & Its Limitations
 Topic 2: Core Time Tracking (millis, micros & Duration)
 Topic 3: Non-Blocking Execution Structure
@@ -1652,12 +1652,12 @@ Sections: 1 | Topics: 5 | Subtopics: 25
 
 ==================================================================================
 
-# Section 11B: Multitasking with FreeRTOS
+# Section 13: Multitasking with FreeRTOS
 
-===Section 11B: Multitasking with FreeRTOS===
+===Section 13: Multitasking with FreeRTOS===
 [🆕 Advanced 2026 Module] Speaker explain karta hai ki "Superloop" (void loop) kab fail hota hai, aur industry-standard Real-Time Operating Systems (RTOS) ka use karke true multi-threading kaise achieve ki jati hai.
 
---11B--Multitasking with FreeRTOS--
+--13--Multitasking with FreeRTOS--
 Topic 1: RTOS vs Superloop Architecture
 Subtopics: Superloop Limitations, Schedulers, Context Switching, Preemptive Multitasking
 
@@ -1680,7 +1680,7 @@ Subtopics: Superloop Limitations, Schedulers, Context Switching, Preemptive Mult
 * Application Phase: Developer FreeRTOS library include karke apne microcontroller ko ek mini-computer ki tarah configure karta hai.
 * Mastery Phase: (N/A)
 
---11B--Multitasking with FreeRTOS--
+--13--Multitasking with FreeRTOS--
 Topic 2: Creating Tasks & Priorities
 Subtopics: xTaskCreate, Task Handles, vTaskDelay, Priority Levels, Core Pinning (ESP32)
 
@@ -1703,7 +1703,7 @@ Subtopics: xTaskCreate, Task Handles, vTaskDelay, Priority Levels, Core Pinning 
 * Fixing/Iteration Phase: Agar sensor reading slow ho jati hai, toh developer us task ki priority badha deta hai (e.g., Priority 3) aur UI print task ki priority kam kar deta hai (Priority 1).
 * Live Production Phase: Production system independently tasks run karta hai; agar WiFi module disconnect/hang hota hai, toh bhi motor control task seamlessly chalta rehta hai kyunki OS resources manage kar raha hai.
 
---11B--Multitasking with FreeRTOS--
+--13--Multitasking with FreeRTOS--
 Topic 3: Mutexes, Semaphores & Queues
 Subtopics: Race Conditions, Memory Collisions, Mutex Locks, Inter-Task Communication (Queues)
 
@@ -1730,13 +1730,13 @@ Subtopics: Race Conditions, Memory Collisions, Mutex Locks, Inter-Task Communica
 
 ==================================================================================
 
-# Section 12: Debounce the Push Button
+# Section 14: Debounce the Push Button
 
 
-===Section 12: Debounce the Push Button===
+===Section 14: Debounce the Push Button===
 Speaker is section mein push button bounce issue ko explain karke usko millis() function ke through fix karna sikhata hai. [⚠️ Derived]
 
---12--Debounce the Push Button--
+--14--Debounce the Push Button--
 Topic 1: The Push Button Bounce Problem
 Subtopics: State Change Detection, Previous State Storage, Physical Bounce Phenomenon, Debounce Delay Concept
 
@@ -1812,7 +1812,7 @@ Subtopics: Pin Setup, State Machine Approach, Parallel Actions, Separate Functio
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 12: Debounce the Push Button
+Section 14: Debounce the Push Button
 Topic 1: The Push Button Bounce Problem
 Topic 2: Implementing the Debounce Code
 Topic 3: Parallel Execution Activity (Blink & Toggle)
@@ -1827,13 +1827,13 @@ Sections: 1 | Topics: 3 | Subtopics: 12
 
 
 
-# Section 13: Arduino Interrupts
+# Section 15: Arduino Interrupts
 
 
-===Section 13: Arduino Interrupts===
+===Section 15: Arduino Interrupts===
 Speaker is section mein polling aur interrupts ke beech ka difference explain karta hai, aur hardware interrupts use karke button press handle karna sikhata hai. [⚠️ Derived]
 
---13--Arduino Interrupts--
+--15--Arduino Interrupts--
 Topic 1: What are Interrupts
 
 ```
@@ -1963,7 +1963,7 @@ Subtopics: Rising Mode Configuration, Counter Variable Setup, Incremental Logic,
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 13: Arduino Interrupts
+Section 15: Arduino Interrupts
 Topic 1: What are Interrupts
 Topic 2: Implementing an Interrupt
 Topic 3: Debouncing Inside the Interrupt
@@ -1978,12 +1978,12 @@ Sections: 1 | Topics: 5 | Subtopics: 28
 ==================================================================================
 ==================================================================================
 
-# Section 5A: Bare-Metal Realities (Analog, Non-Blocking, & Interrupts)
+# Section 16: Bare-Metal Realities (Analog, Non-Blocking, & Interrupts)
 
-===Section 5A: Bare-Metal Realities (Analog, Non-Blocking, & Interrupts)===
+===Section 16: Bare-Metal Realities (Analog, Non-Blocking, & Interrupts)===
 [⚠️ Derived] Speaker is section mein professional firmware development ki buniyad rakhta hai — delay() ko chhod kar millis() apnana, analog data read karna, aur CPU ko block kiye bina interrupts ke through events handle karna sikhata hai.
 
---5A--Bare-Metal Realities--
+--16--Bare-Metal Realities--
 **Topic 1: Analog Data & PWM (Pulse Width Modulation)**
 Subtopics: ADC Resolution, analogRead(), analogWrite(), Duty Cycle, Potentiometers, Fading LEDs
 
@@ -2057,12 +2057,12 @@ Subtopics: Polling vs Interrupts, Hardware Pins 2 and 3, attachInterrupt(), ISR 
 
 ==================================================================================
 
-# Section 13B: Advanced Timers & Internal Interrupts
+# Section 17: Advanced Timers & Internal Interrupts
 
-===Section 13B: Advanced Timers & Internal Interrupts===
+===Section 17: Advanced Timers & Internal Interrupts===
 [🆕 Advanced Module] Speaker explain karta hai ki `millis()` background mein kaise kaam karta hai aur internal hardware timers (Timer0, Timer1, Timer2) ko modify karke ultra-precise internal interrupts kaise banaye jate hain.
 
---13B--Advanced Timers & Internal Interrupts--
+--17--Advanced Timers & Internal Interrupts--
 Topic 1: Hardware Timers & CTC Mode
 Subtopics: Timer Registers, Prescalers, Compare Match, ISR (Interrupt Service Routine)
 
@@ -2089,12 +2089,12 @@ Subtopics: Timer Registers, Prescalers, Compare Match, ISR (Interrupt Service Ro
 
 ==================================================================================
 
-# Section 5B: Advanced Embedded C & Memory Management
+# Section 18: Advanced Embedded C & Memory Management
 
-===Section 5B: Advanced Embedded C & Memory Management===
+===Section 18: Advanced Embedded C & Memory Management===
 [🆕 Advanced Module] Is section mein memory management, pointers, aur hardware registers ko directly access karna sikhaya gaya hai taaki Arduino ki "hobbyist" limitations ko cross karke production-level memory efficiency achieve ki ja sake.
 
---5B--Advanced Embedded C & Memory Management--
+--18--Advanced Embedded C & Memory Management--
 Topic 1: Pointers & Ditching the "String" Object
 Subtopics: Pointer Declaration, Pass by Reference, Heap Fragmentation, Char Arrays, C-Strings, null terminator
 
@@ -2117,7 +2117,7 @@ Subtopics: Pointer Declaration, Pass by Reference, Heap Fragmentation, Char Arra
 * Fixing/Iteration Phase: Developer null terminator `\0` missing hone ki wajah se aane wale garbage data ko debug karke fix karta hai.
 * Live Production Phase: Ek Arduino node mahino tak bina restart hue consistently chalta hai kyunki char arrays memory fragmentation (RAM leakage) create nahi karte.
 
---5B--Advanced Embedded C & Memory Management--
+--18--Advanced Embedded C & Memory Management--
 **Topic 2: Structs, Enums & Finite State Machines (FSM)**
 Subtopics: `enum` State Definitions, `struct` Data Grouping, `typedef` usage, Memory Alignment/Padding, FSM Architecture, Switch-Case state handling
 
@@ -2141,7 +2141,7 @@ Subtopics: `enum` State Definitions, `struct` Data Grouping, `typedef` usage, Me
 * Live Production Phase: Production level RTOS queues (jaise FreeRTOS) ya I2C transmission mein, developer alag-alag variables bhejne ke bajaye ek single `struct` banakar uska pointer pass karta hai. FSM structure ensure karta hai ki CPU ek waqt pe strictly ek hi logical state run kare, jisse catastrophic hardware failures avoid hote hain.
 * Additional context: Speaker highlight karta hai ki pointers aur structs ka combination hi wo bridge hai jo Arduino sketches ko professional C firmware se alag karta hai.
 
---5B--Advanced Embedded C & Memory Management--
+--18--Advanced Embedded C & Memory Management--
 Topic 3: Bitwise Operations & Fast Register Access
 Subtopics: Bit Masking, Bit Shifting, AND/OR/XOR, Direct PORT Manipulation
 
@@ -2168,12 +2168,12 @@ Subtopics: Bit Masking, Bit Shifting, AND/OR/XOR, Direct PORT Manipulation
 
 ==================================================================================
 
-# Section 13C: Bare-Metal Peripherals (ADC & USART Registers)
+# Section 19: Bare-Metal Peripherals (ADC & USART Registers)
 
-===Section 13C: Bare-Metal Peripherals (ADC & USART Registers)===
+===Section 19: Bare-Metal Peripherals (ADC & USART Registers)===
 [🆕 Advanced Module] Is section mein standard analogRead() aur Serial.print() ki blocking limitations ko bypass karke, direct ADC registers aur USART hardware interrupts ko configure karna sikhaya gaya hai taaki maximum CPU efficiency achieve ho.
 
---13C--Bare-Metal Peripherals (ADC & USART Registers)--
+--19--Bare-Metal Peripherals (ADC & USART Registers)--
 Topic 1: Fast ADC & Auto-Triggering (Free-Running Mode)
 Subtopics: ADMUX Register, ADCSRA Register, Free-Running Mode, ADC Interrupts, Voltage Reference (AREF)
 
@@ -2196,7 +2196,7 @@ Subtopics: ADMUX Register, ADCSRA Register, Free-Running Mode, ADC Interrupts, V
 * Fixing/Iteration Phase: Developer bitwise math verify karta hai taaki sahi channel (A0-A5) select ho bina doosre config bits ko overwrite kiye.
 * Live Production Phase: Audio processing ya fast PID motor control algorithms mein CPU completely free rehta hai aur ADC data directly hardware interrupt ke through arrays mein stream hota hai.
 
---13C--Bare-Metal Peripherals (ADC & USART Registers)--
+--19--Bare-Metal Peripherals (ADC & USART Registers)--
 Topic 2: Interrupt-Driven USART (Bare-Metal Serial)
 Subtopics: UBRR0 Register, UCSR0A/B/C Registers, RX Complete Interrupt, Data Register Empty (UDRE)
 
@@ -2223,7 +2223,7 @@ Subtopics: UBRR0 Register, UCSR0A/B/C Registers, RX Complete Interrupt, Data Reg
 
 
 
-# Section 14: EEPROM - Save Values on the Arduino
+# Section 20: EEPROM - Save Values on the Arduino
 
 
 ===Section 1: Introduction to EEPROM Memory===
@@ -2395,12 +2395,12 @@ Sections: 3 | Topics: 6 | Subtopics: 22
 
 ==================================================================================
 
-# Section 5C: Advanced I/O - UART Parsing & Data Persistence
+# Section 21: Advanced I/O - UART Parsing & Data Persistence
 
-===Section 5C: Advanced I/O - UART Parsing & Data Persistence===
+===Section 21: Advanced I/O - UART Parsing & Data Persistence===
 [⚠️ Derived] Speaker is section mein real-world communication aur storage sikhata hai — Serial monitor se incoming text commands ko C-Strings aur pointers ke through parse karna, aur power off hone ke baad bhi device ka state EEPROM mein save rakhna.
 
---5C--Advanced I/O - UART Parsing & Data Persistence--
+--21--Advanced I/O - UART Parsing & Data Persistence--
 Topic 1: Non-Blocking UART Parsing & CLI (Command Line Interface)
 Subtopics: Serial.available(), Serial.read(), Ring Buffers, String Tokenization (strtok), String to Integer (atoi), Handling Line Endings (
 , \r), Buffer Overflow Protection
@@ -2426,7 +2426,7 @@ Subtopics: Serial.available(), Serial.read(), Ring Buffers, String Tokenization 
 * Live Production Phase: Production mein, Arduino ek PC ya master device ke saath UART pe connected hota hai, aur continuously non-blocking way mein JSON-like ya comma-separated commands receive karta hai bina apne main FSM loops ko roke.
 * Additional context: Yeh topic directly Section 5B ke C-Strings aur Pointers ka practical application hai.
 
---5C--Advanced I/O - UART Parsing & Data Persistence--
+--21--Advanced I/O - UART Parsing & Data Persistence--
 Topic 2: EEPROM & Non-Volatile Memory Management
 Subtopics: EEPROM Architecture, EEPROM.read() / EEPROM.write(), Storing Structs with EEPROM.put() / EEPROM.get(), Write Cycles limitation, Wear Leveling Basics
 
@@ -2454,12 +2454,12 @@ Subtopics: EEPROM Architecture, EEPROM.read() / EEPROM.write(), Storing Structs 
 
 ==================================================================================
 
-# Section 14B: Robust Firmware: Watchdogs & TDD
+# Section 22: Robust Firmware: Watchdogs & TDD
 
-===Section 14B: Robust Firmware: Watchdogs & TDD===
+===Section 22: Robust Firmware: Watchdogs & TDD===
 [🆕 Advanced Module] Is section mein professional fail-safes (Watchdog Timer) aur Test-Driven Development (TDD) introduce kiya gaya hai.
 
---14B--Robust Firmware: Watchdogs & TDD--
+--22--Robust Firmware: Watchdogs & TDD--
 Topic 1: Watchdog Timer & Unit Testing
 Subtopics: avr/wdt.h, System Freezes, Hardware Reset, Unity Framework, Logic Testing
 
@@ -2486,7 +2486,7 @@ Subtopics: avr/wdt.h, System Freezes, Hardware Reset, Unity Framework, Logic Tes
 
 
 
-# Section 15: Ultrasonic Sensor - Measure Distances
+# Section 23: Ultrasonic Sensor - Measure Distances
 
 
 ===Section 1: Introduction to hardware components===
@@ -2803,7 +2803,7 @@ Sections: 8 | Topics: 10 | Subtopics: 37
 
 ==================================================================================
 
-# Section 16: LCD Screen - Display Text Directly on Your CircuitRobot
+# Section 24: LCD Screen - Display Text Directly on Your CircuitRobot
 
 
 ===Section 1: LCD Screen Basics & Hardware Setup===
@@ -2959,7 +2959,7 @@ Sections: 3 | Topics: 5 | Subtopics: 21
 ==================================================================================
 
 
-# Section 17: IR Remote Controller - Make Your Projects More Interactive
+# Section 25: IR Remote Controller - Make Your Projects More Interactive
 
 ===Section 1: IR Remote Controller - Make Your Projects More Interactive===
 Is section mein speaker sikhata hai ki Arduino projects ko infrared remote control se kaise interact karwaya jaye, hardware setup se lekar library versions aur multi-component projects tak.
@@ -3105,13 +3105,13 @@ Sections: 1 | Topics: 5 | Subtopics: 28
 ==================================================================================
 
 
-# Section 18: Photoresistor - Measure Luminosity
+# Section 26: Photoresistor - Measure Luminosity
 
 
-===Section 18: Photoresistor - Measure Luminosity===
+===Section 26: Photoresistor - Measure Luminosity===
 Speaker is section mein photoresistor sensor ka use karke environment ki light/luminosity ko measure karna aur uske base par automatic systems banana sikhata hai.
 
---18--Photoresistor - Measure Luminosity--
+--26--Photoresistor - Measure Luminosity--
 Topic 1: Hardware Setup & Pin Connections
 Subtopics: Photoresistor Concept, Tinkercad Duplication, 10k Ohm Resistor, Ground Connection, 5V Connection, Analog Pin A0
 
@@ -3135,7 +3135,7 @@ Subtopics: Photoresistor Concept, Tinkercad Duplication, 10k Ohm Resistor, Groun
 * Live Production Phase: Sensor real environment ki light ko detect karke analog value bhejta hai taaki smart actions (jaise home automation) liye ja sakein.
 * Additional context: Speaker ne mention kiya ki hardware setup mein breadboard par components directly plug karke wires save ki ja sakti hain.
 
---18--Photoresistor - Measure Luminosity--
+--26--Photoresistor - Measure Luminosity--
 Topic 2: Reading Analog Values
 Subtopics: analogRead Function, Value Range, Serial Plotter Usage, Defining Thresholds
 
@@ -3159,7 +3159,7 @@ Subtopics: analogRead Function, Value Range, Serial Plotter Usage, Defining Thre
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: Minimum value exact 0 nahi aati, transcript mein sensor cover karne par 40 ke aas-paas value dikhi thi.
 
---18--Photoresistor - Measure Luminosity--
+--26--Photoresistor - Measure Luminosity--
 Topic 3: Automatic Light System (Activity & Solution)
 Subtopics: Threshold Definition Logic, LED Toggling, Inversely Proportional Brightness, analogWrite Computation
 
@@ -3183,7 +3183,7 @@ Subtopics: Threshold Definition Logic, LED Toggling, Inversely Proportional Brig
 * Live Production Phase: Automatic light system real-world mein chal raha hota hai; jab room dark hota hai, LEDs automatically on ho jati hain aur ambient light ke hisaab se unki brightness adapt hoti hai.
 * Additional context: None
 
---18--Photoresistor - Measure Luminosity--
+--26--Photoresistor - Measure Luminosity--
 Topic 4: Computing Average Luminosity (Activity & Solution)
 Subtopics: Sampling Concept, Data Array Initialization, millis() Timing, Sum and Average Formula, Array Boundary Reset, Long Datatype Usage
 
@@ -3213,7 +3213,7 @@ Subtopics: Sampling Concept, Data Array Initialization, millis() Timing, Sum and
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 18: Photoresistor - Measure Luminosity
+Section 26: Photoresistor - Measure Luminosity
 Topic 1: Hardware Setup & Pin Connections
 Topic 2: Reading Analog Values
 Topic 3: Automatic Light System (Activity & Solution)
@@ -3227,7 +3227,7 @@ Sections: 1 | Topics: 4 | Subtopics: 20
 ==================================================================================
 
 
-# Section 19: Final project - Interactive Obstacle Detection
+# Section 27: Final project - Interactive Obstacle Detection
 
 
 ===Section 1: Final Project Overview & Core Sensors===
@@ -3387,12 +3387,12 @@ Sections: 2 | Topics: 5 | Subtopics: 31
 
 ==================================================================================
 
-# Section 20: Production Deployment (AVR Bare-Metal)
+# Section 28: Production Deployment (AVR Bare-Metal)
 
-===Section 20: Production Deployment (AVR Bare-Metal)===
+===Section 28: Production Deployment (AVR Bare-Metal)===
 [🆕 Advanced Module] Speaker sikhata hai ki final product ko Arduino IDE se nahi, balki HEX files, AVRDUDE, aur low-power sleep modes se deploy kaise karte hain.
 
---20--Production Deployment (AVR Bare-Metal)--
+--28--Production Deployment (AVR Bare-Metal)--
 Topic 1: Power Management & AVRDUDE Flashing
 Subtopics: avr/sleep.h, Power Down Mode, Wake on Interrupt, .hex binaries, Bootloaders, avrdude
 
