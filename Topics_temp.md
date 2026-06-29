@@ -665,6 +665,84 @@ Sections: 1 | Topics: 4 | Subtopics: 27
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+==================================================================================
+
+# Section 5B: Advanced Embedded C & Memory Management
+
+===Section 5B: Advanced Embedded C & Memory Management===
+[🆕 Advanced 2026 Module] Is section mein memory management, pointers, aur hardware registers ko directly access karna sikhaya gaya hai taaki Arduino ki "hobbyist" limitations ko cross karke production-level memory efficiency achieve ki ja sake.
+
+--5B--Advanced Embedded C & Memory Management--
+Topic 1: Demystifying Pointers and Memory Addresses
+Subtopics: RAM Architecture, Memory Addresses, Pointer Declaration, Dereferencing, Passing by Reference
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with memory diagram references
+* Key terms from transcript: pointers, memory address, ampersand, asterisk, dereference, pass by reference, RAM, footprint
+* Explicit emphasis by speaker: "Never pass large structs or arrays by value, always pass by reference to save RAM."
+* Speaker ne jo analogies/examples use kiye: Memory address as a "house number" and pointer as the "GPS coordinate".
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[pointer, memory address, `&` ampersand, `*` asterisk, dereference, pass by reference, memory footprint, stack memory, heap, `int* ptr`, hardware registers, segmentation fault, memory leak]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer code likhta hai jahan sensor ka heavy data pass karne ke liye values ki copy banane ke bajaye memory address (pointer) pass kiya jata hai.
+* Fixing/Iteration Phase: Agar system crash (memory corruption) hota hai, toh developer check karta hai ki koi dangling pointer toh nahi reh gaya jo galat address point kar raha ho.
+* Live Production Phase: Production devices (jaise smartwatch) ki limited RAM mein pointers efficient data handling ensure karte hain bina memory exhaust kiye.
+
+--5B--Advanced Embedded C & Memory Management--
+Topic 2: Ditching "String" for C-Strings (char arrays)
+Subtopics: String Object Fragmentation, Char Arrays, Null Terminator, strcpy, strcmp, Memory Pre-allocation
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Multiple examples + code refactoring demo
+* Key terms from transcript: String class, heap fragmentation, char array, null terminator, C-strings, strcpy, memory allocation
+* Explicit emphasis by speaker: "The uppercase 'S' String class is banned in professional firmware. It will crash your device after a few days."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[String object, heap fragmentation, memory crash, `char` array, C-strings, `\0` null terminator, `<string.h>`, `strcpy()`, `strcmp()`, `sprintf()`, static allocation, buffer overflow, professional firmware]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer purane Arduino code se saare `String text = "hello"` hata kar `char text[10] = "hello"` likhta hai. Variable data combine karne ke liye `sprintf()` use karta hai.
+* Fixing/Iteration Phase: Developer null terminator `\0` missing hone ki wajah se aane wale garbage data ko debug karke fix karta hai.
+* Live Production Phase: Ek IoT device 2 saal tak bina restart hue consistently chalta hai kyunki char arrays memory fragmentation create nahi karte.
+
+--5B--Advanced Embedded C & Memory Management--
+Topic 3: Bitwise Operations & Register Access
+Subtopics: Binary Math, Bit Masking, Bit Shifting, AND/OR/XOR Operators, Direct Register Manipulation
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Deep mathematical logic + direct hardware coding
+* Key terms from transcript: bitwise, masking, shifting, AND, OR, XOR, PORTB, DDRB, clock cycles
+* Explicit emphasis by speaker: "digitalWrite is slow. If you need nanosecond precision, you must manipulate the hardware registers directly using bitwise operations."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[bitwise operations, bit masking, bit shifting, `<<`, `>>`, `&` AND, `|` OR, `^` XOR, `~` NOT, hardware registers, `PORTB`, `DDRB`, `digitalWrite()` overhead, execution speed, nanosecond precision, embedded C]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer `digitalWrite()` ko replace karke seedha hardware registers (`PORTB |= (1<<5)`) modify karta hai taaki pin toggle speed 100x fast ho sake.
+* Fixing/Iteration Phase: Bit mask calculations verify karta hai taaki ek pin change karte waqt galti se dusri pins modify na ho jayein.
+* Live Production Phase: High-speed industrial protocols ya custom video drivers mein bitwise operations hardware limits ko push karke ultra-fast execution ensure karte hain.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 =======================================================================
 
 # Section 6: LEDs - Digital Pins as Output Pins
@@ -1483,6 +1561,61 @@ Sections: 1 | Topics: 5 | Subtopics: 20
 
 ==================================================================================
 
+# Section 10B: Industry Standard Bus Protocols (I2C & SPI)
+
+===Section 10B: Industry Standard Bus Protocols (I2C & SPI)===
+[🆕 Advanced 2026 Module] Speaker yahan complex industrial communication seekhata hai jahan ek hi Arduino se 10+ sensors aur displays connect kiye jaate hain using standard Bus architectures (I2C and SPI).
+
+--10B--Industry Standard Bus Protocols (I2C & SPI)--
+Topic 1: I2C (Inter-Integrated Circuit) Protocol
+Subtopics: Bus Architecture, SDA and SCL Pins, Master-Slave Concept, Hexadecimal Addresses, Wire.h Library
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation + logic analyzer demonstration
+* Key terms from transcript: I2C bus, two-wire interface, SDA, SCL, Master, Slave, 7-bit address, pull-up resistors, Wire library
+* Explicit emphasis by speaker: "Every device on an I2C bus must have a unique hardware address."
+* Speaker ne jo analogies/examples use kiye: Teacher (Master) calling a student by their ID number (Address) before giving them a worksheet (Data).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[I2C protocol, Inter-Integrated Circuit, Bus architecture, SDA data line, SCL clock line, Master, Slave, hexadecimal address, 0x27, 0x68, `<Wire.h>`, `Wire.beginTransmission()`, `Wire.endTransmission()`, 10k pull-up resistors, bus conflict]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer breadboard par ek LCD aur ek Gyroscope dono ko same 2 pins (SDA/SCL) se connect karta hai aur I2C scanner code run karke dono ke hex addresses find karta hai.
+* Fixing/Iteration Phase: Agar sensors detect nahi hote, toh developer 10k ohm pull-up resistors add karta hai bus lines par signal stabilize karne ke liye.
+* Live Production Phase: Modern embedded boards I2C bus ka use karke kam pins mein multiple components efficiently handle karte hain (e.g. smart weather stations).
+
+--10B--Industry Standard Bus Protocols (I2C & SPI)--
+Topic 2: SPI (Serial Peripheral Interface) Protocol
+Subtopics: Speed vs Pins Trade-off, MOSI/MISO/SCK/CS Pins, Full-Duplex Communication, SPI.h Library
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Hardware wiring demo + code snippet
+* Key terms from transcript: SPI, fast data transfer, MOSI, MISO, SCK, CS/SS, full-duplex, SD card module
+* Explicit emphasis by speaker: "Use I2C for simplicity and less wires, use SPI when you need to move massive amounts of data very fast, like saving to an SD card."
+* Speaker ne jo analogies/examples use kiye: I2C is like a single lane road, SPI is a multi-lane high-speed highway.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[SPI protocol, Serial Peripheral Interface, MOSI, Master Out Slave In, MISO, Master In Slave Out, SCK, Serial Clock, CS, Chip Select, SS, Slave Select, full-duplex, `<SPI.h>`, SD card module, TFT display, high-speed data]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer SPI pins use karke micro-SD card module wire karta hai aur fast data logging ka code test karta hai.
+* Fixing/Iteration Phase: Developer multiple devices lagane par ensure karta hai ki har device ka Chip Select (CS) pin alag digital pin se connected ho, taaki bus conflicts na hon.
+* Live Production Phase: Drones aur high-speed data loggers SPI use karte hain kyunki wahan data milliseconds mein read/write hona zaroori hota hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
 # Section 11: Time Functionalities - Improve Your Programs and Multitask
 
 ===Section 11: Time Functionalities - Improve Your Programs and Multitask===
@@ -1615,6 +1748,84 @@ Topic 5: Full Multitask Implementation (Activity)
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 5 | Subtopics: 25
 
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 11B: Multitasking with FreeRTOS
+
+===Section 11B: Multitasking with FreeRTOS===
+[🆕 Advanced 2026 Module] Speaker explain karta hai ki "Superloop" (void loop) kab fail hota hai, aur industry-standard Real-Time Operating Systems (RTOS) ka use karke true multi-threading kaise achieve ki jati hai.
+
+--11B--Multitasking with FreeRTOS--
+Topic 1: RTOS vs Superloop Architecture
+Subtopics: Superloop Limitations, Schedulers, Context Switching, Preemptive Multitasking
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual only
+* Transcript mein content volume: Architectural explanation
+* Key terms from transcript: Superloop, RTOS, FreeRTOS, scheduler, task priorities, context switch, bare-metal
+* Explicit emphasis by speaker: "In professional 2026 firmware, you almost never put your main code inside the void loop."
+* Speaker ne jo analogies/examples use kiye: Superloop is like a chef cooking one dish at a time; RTOS is having multiple sous-chefs managed by a head chef (Scheduler).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Superloop, `void loop()`, RTOS, Real-Time Operating System, FreeRTOS, Zephyr, scheduler, preemptive multitasking, context switch, blocking architecture, tick rate, thread, bare-metal programming]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Learning Phase: Developer samajhta hai ki hardware interrupts aur `millis()` ki limits hain; complex IoT devices ko OS-level task scheduling ki zaroorat hoti hai.
+* Application Phase: Developer FreeRTOS library include karke apne microcontroller ko ek mini-computer ki tarah configure karta hai.
+* Mastery Phase: (N/A)
+
+--11B--Multitasking with FreeRTOS--
+Topic 2: Creating Tasks & Priorities
+Subtopics: xTaskCreate, Task Handles, vTaskDelay, Priority Levels, Core Pinning (ESP32)
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Live coding + multi-task simulation
+* Key terms from transcript: xTaskCreate, TaskHandle_t, vTaskDelay, priority, starvation, stack size
+* Explicit emphasis by speaker: "Don't use standard delay() inside an RTOS task, always use vTaskDelay so the scheduler can run other tasks."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[`xTaskCreate()`, `TaskHandle_t`, stack size, task priority, `vTaskDelay()`, `pdMS_TO_TICKS`, task starvation, infinite task loop, multicore, ESP32 core pinning, idle task]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer 3 alag functions (Blink LED, Read Sensor, Print Serial) ko `void loop` se nikaal kar alag-alag FreeRTOS tasks banata hai `xTaskCreate` se.
+* Fixing/Iteration Phase: Agar sensor reading slow ho jati hai, toh developer us task ki priority badha deta hai (e.g., Priority 3) aur UI print task ki priority kam kar deta hai (Priority 1).
+* Live Production Phase: Production system independently tasks run karta hai; agar WiFi module disconnect/hang hota hai, toh bhi motor control task seamlessly chalta rehta hai kyunki OS resources manage kar raha hai.
+
+--11B--Multitasking with FreeRTOS--
+Topic 3: Mutexes, Semaphores & Queues
+Subtopics: Race Conditions, Memory Collisions, Mutex Locks, Inter-Task Communication (Queues)
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Complex logic explanation with code fixes
+* Key terms from transcript: race condition, Mutex, binary semaphore, Queue, thread-safe
+* Explicit emphasis by speaker: "Never let two tasks write to the exact same variable or hardware pin at the same time."
+* Speaker ne jo analogies/examples use kiye: Mutex is like the key to a single-occupancy bathroom. Only the task with the key can enter the code block.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[race condition, memory collision, thread-safe, Mutex, Semaphore, `xSemaphoreCreateMutex()`, `xSemaphoreTake()`, `xSemaphoreGive()`, IPC, Inter-Process Communication, Queues, `xQueueSend()`, `xQueueReceive()`]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer Queues banata hai jahan Sensor Task data Queue mein push karta hai, aur Networking Task wahan se data pull karke internet pe bhejta hai (Inter-Task communication).
+* Fixing/Iteration Phase: Jab do tasks ek saath Serial Monitor print karne ki koshish karte hain aur text mix ho jata hai (race condition), developer wahan Mutex lock lagata hai.
+* Live Production Phase: Enterprise-level embedded systems multi-threading mein crash free chalte hain kyunki saare shared resources logically locked aur synchronized hote hain.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2035,6 +2246,61 @@ Topic 2: Cap Value & EEPROM Integration
 
 📊 PHASE SUMMARY:
 Sections: 3 | Topics: 6 | Subtopics: 22
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 14B: Hardware Debugging & Fail-Safes
+
+===Section 14B: Hardware Debugging & Fail-Safes===
+[🆕 Advanced 2026 Module] Speaker serial monitor debugging ki limits batata hai aur professional debugging workflows (JTAG) + remote reliability tools (Watchdog) introduce karta hai.
+
+--14B--Hardware Debugging & Fail-Safes--
+Topic 1: Hardware Debugging (JTAG/SWD) vs Serial Prints
+Subtopics: Breakpoints, Memory Inspection, Step Execution, JTAG Interface, SWD Pins
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: Tool demonstration + IDE 2.x/VS Code Integration
+* Key terms from transcript: Hardware debugger, SWD, JTAG, breakpoint, step over, step into, local variables watch
+* Explicit emphasis by speaker: "Serial print changes the timing of your code. To find real bugs, you need a hardware debugger to freeze the chip."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Hardware debugger, JTAG interface, SWD, Serial Wire Debug, breakpoints, execution freeze, step into, step over, call stack, VS Code debug panel, OpenOCD, GDB, variable inspection, print debugging limits]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer apne board (e.g. ARM cortex) ko JTAG debugger se connect karta hai. IDE mein red dot (breakpoint) lagata hai taaki code exactly error wali line pe aake freeze ho jaye.
+* Fixing/Iteration Phase: Developer live chip ke andar ke registers aur variable values ko RAM mein direct inspect karke complex bugs solve karta hai bina hazaro `Serial.println()` likhe.
+* Live Production Phase: (N/A - Debugging tool).
+
+--14B--Hardware Debugging & Fail-Safes--
+Topic 2: The Watchdog Timer (WDT)
+Subtopics: System Freezes, Hardware Reset, WDT Initialization, Petting the Dog
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Concept explanation + implementation code
+* Key terms from transcript: Watchdog Timer, WDT, system freeze, infinite loop lockup, reset, petting the dog
+* Explicit emphasis by speaker: "If your device is going to be deployed somewhere you cannot physically press the reset button, a Watchdog is mandatory."
+* Speaker ne jo analogies/examples use kiye: "Petting the dog" — you must feed the watchdog every 2 seconds, if you forget (code hangs), the dog bites (hard resets the system).
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Watchdog Timer, WDT, hardware reset, fail-safe, remote deployment, lockup, infinite loop crash, `wdt_enable()`, `wdt_reset()`, petting the dog, feeding the watchdog, timeout period, 2 seconds, 8 seconds, robust firmware]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer setup mein 4-second ka Watchdog timer configure karta hai. Main loop ke end mein `wdt_reset()` call karta hai taaki timer reset hota rahe.
+* Fixing/Iteration Phase: Developer intentionally ek infinite `while(true)` loop banata hai error test karne ke liye, aur dekhta hai ki 4 second baad hardware automatically reboot hota hai ya nahi.
+* Live Production Phase: Space satellites, remote weather stations, aur industrial robots mahino tak bina human intervention ke chalte hain kyunki Watchdog timer glitch aane par unhe self-heal (reboot) kar deta hai.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2942,4 +3208,76 @@ Sections: 2 | Topics: 5 | Subtopics: 31
 
 ==================================================================================
 
+# Section 20: 2026 Industry Transition (IoT, ESP32 & VS Code)
 
+===Section 20: 2026 Industry Transition (IoT, ESP32 & VS Code)===
+[🆕 Advanced 2026 Module] Speaker legacy tools ko discard karke modern 2026 toolchain (PlatformIO) aur 32-bit IoT hardware (ESP32) set up karta hai for cloud connectivity and low-power operations.
+
+--20--2026 Industry Transition (IoT, ESP32 & VS Code)--
+Topic 1: Upgrading the Toolchain (VS Code + PlatformIO)
+Subtopics: PlatformIO Extension, Git Integration, platformio.ini Configuration, Dependency Management
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Software installation + project migration demo
+* Key terms from transcript: VS Code, PlatformIO, linting, autocomplete, version control, platformio.ini, libraries
+* Explicit emphasis by speaker: "In the industry, we do not download ZIP libraries manually. Everything is strictly version-controlled in the INI file."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[VS Code, PlatformIO, PIO extension, IDE migration, professional toolchain, GitHub integration, linting, IntelliSense autocomplete, `platformio.ini`, dependency management, `lib_deps`, environment variables, framework-arduino]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer VS Code install karke PlatformIO extension dalta hai. Apne purane Arduino code ko `.cpp` extension dekar naye framework mein import karta hai.
+* Fixing/Iteration Phase: Developer `platformio.ini` file mein required libraries ke exact version numbers type karta hai taaki project team mein kisi ke bhi PC pe automatically compile ho sake.
+* Live Production Phase: CI/CD pipelines (GitHub Actions) cloud mein isi PIO structure ko use karke automatically firmware build aur test karti hain.
+
+--20--2026 Industry Transition (IoT, ESP32 & VS Code)--
+Topic 2: Moving to 32-bit (ESP32) & Wi-Fi Connectivity
+Subtopics: 32-bit Architecture vs 8-bit, Wi-Fi Library, HTTP GET/POST, JSON Parsing
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Board comparison + live WiFi cloud integration
+* Key terms from transcript: ESP32, 32-bit ARM/Xtensa, WiFi.h, HTTPClient, API, JSON, payload
+* Explicit emphasis by speaker: None
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[ESP32, 32-bit architecture, dual-core, Xtensa, WiFi module, `<WiFi.h>`, SSID, password, `<HTTPClient.h>`, HTTP GET, HTTP POST, REST API, JSON parsing, ArduinoJson library, cloud dashboard, AWS IoT]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer Arduino Uno ko hatakar ESP32 board breadboard pe lagata hai. Code mein Wi-Fi credentials add karke local router se connect karta hai.
+* Fixing/Iteration Phase: Developer sensor data (jaise potentiometer value) ko JSON string mein convert karta hai aur HTTP POST request ke through cloud server par bhejta hai.
+* Live Production Phase: Smart Home devices (like Alexa plugs) locally sensors read karke Wi-Fi ke through cloud servers se communicate karte hain real-time me.
+
+--20--2026 Industry Transition (IoT, ESP32 & VS Code)--
+Topic 3: MQTT Protocol & Low Power (Deep Sleep)
+Subtopics: MQTT Broker, Publish/Subscribe Model, Deep Sleep Modes, Wake-up Sources, Power Profiling
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Advanced IoT protocol coding + hardware power optimization
+* Key terms from transcript: MQTT, telemetry, PubSubClient, Broker, Deep Sleep, RTC memory, wake stub, microamps
+* Explicit emphasis by speaker: "HTTP is too heavy for battery devices. MQTT is the lightweight standard for IoT."
+* Speaker ne jo analogies/examples use kiye: MQTT is like a YouTube subscription (Subscribe) vs posting a video (Publish).
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[MQTT protocol, Message Queuing Telemetry Transport, PubSubClient, MQTT Broker, Publish, Subscribe, topic, lightweight payload, power optimization, Deep Sleep, Light Sleep, `esp_deep_sleep_start()`, RTC memory, external wake-up, timer wake-up, battery-powered IoT, microamps, mA to µA]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer HTTP hatakar MQTT use karta hai taaki data milliseconds mein send ho sake. Device ko battery par chalane ke liye `esp_deep_sleep_start()` configure karta hai taaki woh har 10 minute mein sirf 2 second ke liye jage.
+* Fixing/Iteration Phase: Developer multimeter/power profiler lagakar check karta hai ki sleep state mein current 50mA se girkar 10µA (microamps) par aa raha hai ya nahi.
+* Live Production Phase: Agricultural sensors khet mein ek chhote coin cell battery par 2-3 saal tak chalte hain, because system 99% time deep sleep mein rehta hai aur MQTT ke through fast data push karke wapas so jata hai.
