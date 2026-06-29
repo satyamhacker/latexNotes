@@ -1652,91 +1652,13 @@ Sections: 1 | Topics: 5 | Subtopics: 25
 
 ==================================================================================
 
-# Section 13: Multitasking with FreeRTOS
-
-===Section 13: Multitasking with FreeRTOS===
-[🆕 Advanced 2026 Module] Speaker explain karta hai ki "Superloop" (void loop) kab fail hota hai, aur industry-standard Real-Time Operating Systems (RTOS) ka use karke true multi-threading kaise achieve ki jati hai.
-
---13--Multitasking with FreeRTOS--
-Topic 1: RTOS vs Superloop Architecture
-Subtopics: Superloop Limitations, Schedulers, Context Switching, Preemptive Multitasking
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Conceptual only
-* Transcript mein content volume: Architectural explanation
-* Key terms from transcript: Superloop, RTOS, FreeRTOS, scheduler, task priorities, context switch, bare-metal
-* Explicit emphasis by speaker: "In professional 2026 firmware, you almost never put your main code inside the void loop."
-* Speaker ne jo analogies/examples use kiye: Superloop is like a chef cooking one dish at a time; RTOS is having multiple sous-chefs managed by a head chef (Scheduler).
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Superloop, `void loop()`, RTOS, Real-Time Operating System, FreeRTOS, Zephyr, scheduler, preemptive multitasking, context switch, blocking architecture, tick rate, thread, bare-metal programming]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Learning Phase: Developer samajhta hai ki hardware interrupts aur `millis()` ki limits hain; complex IoT devices ko OS-level task scheduling ki zaroorat hoti hai.
-* Application Phase: Developer FreeRTOS library include karke apne microcontroller ko ek mini-computer ki tarah configure karta hai.
-* Mastery Phase: (N/A)
-
---13--Multitasking with FreeRTOS--
-Topic 2: Creating Tasks & Priorities
-Subtopics: xTaskCreate, Task Handles, vTaskDelay, Priority Levels, Core Pinning (ESP32)
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Live coding + multi-task simulation
-* Key terms from transcript: xTaskCreate, TaskHandle_t, vTaskDelay, priority, starvation, stack size
-* Explicit emphasis by speaker: "Don't use standard delay() inside an RTOS task, always use vTaskDelay so the scheduler can run other tasks."
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[`xTaskCreate()`, `TaskHandle_t`, stack size, task priority, `vTaskDelay()`, `pdMS_TO_TICKS`, task starvation, infinite task loop, multicore, ESP32 core pinning, idle task]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer 3 alag functions (Blink LED, Read Sensor, Print Serial) ko `void loop` se nikaal kar alag-alag FreeRTOS tasks banata hai `xTaskCreate` se.
-* Fixing/Iteration Phase: Agar sensor reading slow ho jati hai, toh developer us task ki priority badha deta hai (e.g., Priority 3) aur UI print task ki priority kam kar deta hai (Priority 1).
-* Live Production Phase: Production system independently tasks run karta hai; agar WiFi module disconnect/hang hota hai, toh bhi motor control task seamlessly chalta rehta hai kyunki OS resources manage kar raha hai.
-
---13--Multitasking with FreeRTOS--
-Topic 3: Mutexes, Semaphores & Queues
-Subtopics: Race Conditions, Memory Collisions, Mutex Locks, Inter-Task Communication (Queues)
-
-[📊 SCOPE SIGNAL for Topic 3:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Complex logic explanation with code fixes
-* Key terms from transcript: race condition, Mutex, binary semaphore, Queue, thread-safe
-* Explicit emphasis by speaker: "Never let two tasks write to the exact same variable or hardware pin at the same time."
-* Speaker ne jo analogies/examples use kiye: Mutex is like the key to a single-occupancy bathroom. Only the task with the key can enter the code block.
-]
-
-🔑 KEYWORDS DUMP for Topic 3:
-[race condition, memory collision, thread-safe, Mutex, Semaphore, `xSemaphoreCreateMutex()`, `xSemaphoreTake()`, `xSemaphoreGive()`, IPC, Inter-Process Communication, Queues, `xQueueSend()`, `xQueueReceive()`]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-
-* Testing/Offline Phase: Developer Queues banata hai jahan Sensor Task data Queue mein push karta hai, aur Networking Task wahan se data pull karke internet pe bhejta hai (Inter-Task communication).
-* Fixing/Iteration Phase: Jab do tasks ek saath Serial Monitor print karne ki koshish karte hain aur text mix ho jata hai (race condition), developer wahan Mutex lock lagata hai.
-* Live Production Phase: Enterprise-level embedded systems multi-threading mein crash free chalte hain kyunki saare shared resources logically locked aur synchronized hote hain.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-# Section 14: Debounce the Push Button
+# Section 13: Debounce the Push Button
 
 
-===Section 14: Debounce the Push Button===
+===Section 13: Debounce the Push Button===
 Speaker is section mein push button bounce issue ko explain karke usko millis() function ke through fix karna sikhata hai. [⚠️ Derived]
 
---14--Debounce the Push Button--
+--13--Debounce the Push Button--
 Topic 1: The Push Button Bounce Problem
 Subtopics: State Change Detection, Previous State Storage, Physical Bounce Phenomenon, Debounce Delay Concept
 
@@ -1812,7 +1734,7 @@ Subtopics: Pin Setup, State Machine Approach, Parallel Actions, Separate Functio
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 14: Debounce the Push Button
+Section 13: Debounce the Push Button
 Topic 1: The Push Button Bounce Problem
 Topic 2: Implementing the Debounce Code
 Topic 3: Parallel Execution Activity (Blink & Toggle)
@@ -1827,13 +1749,13 @@ Sections: 1 | Topics: 3 | Subtopics: 12
 
 
 
-# Section 15: Arduino Interrupts
+# Section 14: Arduino Interrupts
 
 
-===Section 15: Arduino Interrupts===
+===Section 14: Arduino Interrupts===
 Speaker is section mein polling aur interrupts ke beech ka difference explain karta hai, aur hardware interrupts use karke button press handle karna sikhata hai. [⚠️ Derived]
 
---15--Arduino Interrupts--
+--14--Arduino Interrupts--
 Topic 1: What are Interrupts
 
 ```
@@ -1963,7 +1885,7 @@ Subtopics: Rising Mode Configuration, Counter Variable Setup, Incremental Logic,
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 15: Arduino Interrupts
+Section 14: Arduino Interrupts
 Topic 1: What are Interrupts
 Topic 2: Implementing an Interrupt
 Topic 3: Debouncing Inside the Interrupt
@@ -1978,515 +1900,7 @@ Sections: 1 | Topics: 5 | Subtopics: 28
 ==================================================================================
 ==================================================================================
 
-# Section 16: Bare-Metal Realities (Analog, Non-Blocking, & Interrupts)
-
-===Section 16: Bare-Metal Realities (Analog, Non-Blocking, & Interrupts)===
-[⚠️ Derived] Speaker is section mein professional firmware development ki buniyad rakhta hai — delay() ko chhod kar millis() apnana, analog data read karna, aur CPU ko block kiye bina interrupts ke through events handle karna sikhata hai.
-
---16--Bare-Metal Realities--
-**Topic 1: Analog Data & PWM (Pulse Width Modulation)**
-Subtopics: ADC Resolution, analogRead(), analogWrite(), Duty Cycle, Potentiometers, Fading LEDs
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Long explanation with hardware demo and oscilloscope visualization
-* Key terms from transcript: ADC, analog to digital, 10-bit resolution, 0 to 1023, PWM, duty cycle, fake analog, analogWrite, analogRead
-* Explicit emphasis by speaker: "PWM is not true analog, it's just turning the digital pin on and off really fast to trick the hardware."
-* Speaker ne jo analogies/examples use kiye: PWM compared to flickering a light switch so fast it looks dim.
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[ADC, analogRead(), 10-bit resolution, 0 to 1023, analogWrite(), PWM, pulse width modulation, duty cycle, 0 to 255, potentiometer, fading LED, analog pins, A0, A1, pseudo-analog, oscilloscope]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer potentiometer ko TinkerCAD mein connect karta hai aur ADC values ko Serial Monitor par print karke check karta hai ki values 0-1023 ke beech aa rahi hain ya nahi.
-* Fixing/Iteration Phase: Agar LED linearly fade nahi ho rahi, toh developer `map()` function use karke 0-1023 range ko 0-255 (PWM range) mein convert karta hai.
-* Live Production Phase: Industrial settings mein yehi ADC logic temperature sensors padhne aur motor speed control (PWM) ke liye directly use hota hai.
-* Additional context: Speaker ne clarify kiya ki sirf tilde (~) mark wale digital pins hi PWM support karte hain.
-
-**Topic 2: Ditching delay() for Non-Blocking Code (millis)**
-Subtopics: The Problem with delay(), CPU Blocking, The millis() Function, Timestamps, Delta Time Calculation, Concurrent Blinking
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Long explanation with side-by-side code comparison
-* Key terms from transcript: blocking code, delay(), millis(), multitasking, unsigned long, timestamp, delta time
-* Explicit emphasis by speaker: "Using delay() in professional firmware is a crime. It paralyzes the CPU. You must use millis() to track time."
-* Speaker ne jo analogies/examples use kiye: delay() is like going to sleep and ignoring the world; millis() is like checking your watch periodically while still working on your desk.
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[blocking code, delay(), millis(), CPU halted, unsigned long, overflow 50 days, timestamp, current time, previous time, delta time, `currentMillis - previousMillis >= interval`, concurrent tasks, multitasking Arduino, FSM introduction]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer do alag-alag LEDs ko alag speed pe blink karne ki koshish karta hai. `delay()` ke saath yeh fail ho jata hai, tab woh `millis()` ka timer logic likhta hai.
-* Fixing/Iteration Phase: Variable overflow error (negative time) bachane ke liye developer strictly `unsigned long` data type use karta hai `int` ki jagah.
-* Live Production Phase: Production firmware mein sensor polling, UI updates, aur motor control ek hi loop mein bina ruke parallel chalta rehta hai kyunki CPU kabhi block nahi hota.
-* Additional context: Yeh topic aage aane wale FreeRTOS aur Hardware Timers seekhne ke liye sabse zaroori foundational step hai.
-
-**Topic 3: External Interrupts & The volatile Keyword**
-Subtopics: Polling vs Interrupts, Hardware Pins 2 and 3, attachInterrupt(), ISR (Interrupt Service Routine), FALLING/RISING states, volatile keyword
-
-[📊 SCOPE SIGNAL for Topic 3:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Focused explanation with strict rules on ISRs
-* Key terms from transcript: polling, interrupts, attachInterrupt, ISR, volatile, debounce, RISING, FALLING
-* Explicit emphasis by speaker: "Keep your ISRs as short and fast as possible. Never put a delay() or a Serial.print() inside an interrupt routine!"
-* Speaker ne jo analogies/examples use kiye: Polling is like constantly asking "Are we there yet?"; Interrupt is like getting a phone call only when you arrive.
-]
-
-🔑 KEYWORDS DUMP for Topic 3:
-[polling, external interrupt, attachInterrupt(), ISR, Interrupt Service Routine, digital pin 2, digital pin 3, RISING, FALLING, CHANGE, ⭐volatile, RAM cache optimization, race condition, short ISR]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-
-* Testing/Offline Phase: Developer button press detect karne ke liye interrupt attach karta hai taaki `millis()` wale loop ke dauran koi button press miss na ho.
-* Fixing/Iteration Phase: Agar button dabane pe code crash hota hai ya ajeeb behave karta hai, toh developer ISR ke andar se `Serial.print()` hata deta hai aur shared variables ke aage `volatile` lagata hai taaki compiler unhe optimize away na kare.
-* Live Production Phase: Safety-critical systems (e.g., Emergency Stop button) directly hardware interrupts se wired hote hain taaki CPU immediately normal loop chhod kar override action le sake.
-* Additional context: Speaker ne debounce ka issue highlight kiya jo hardware interrupts ke saath amplify ho jata hai.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-# Section 17: Advanced Timers & Internal Interrupts
-
-===Section 17: Advanced Timers & Internal Interrupts===
-[🆕 Advanced Module] Speaker explain karta hai ki `millis()` background mein kaise kaam karta hai aur internal hardware timers (Timer0, Timer1, Timer2) ko modify karke ultra-precise internal interrupts kaise banaye jate hain.
-
---17--Advanced Timers & Internal Interrupts--
-Topic 1: Hardware Timers & CTC Mode
-Subtopics: Timer Registers, Prescalers, Compare Match, ISR (Interrupt Service Routine)
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Register-level coding + logic math
-* Key terms from transcript: Timer1, 16-bit timer, prescaler, CTC mode, ISR, TCCR1A, TIMSK1
-* Explicit emphasis by speaker: "millis() has a slight drift. For perfectly timed industrial execution, you must use hardware Timer Interrupts."
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Hardware timers, Timer0, Timer1, Timer2, 16-bit timer, prescaler, 1024, CTC mode, Clear Timer on Compare Match, ISR, Interrupt Service Routine, `ISR(TIMER1_COMPA_vect)`, `TCCR1A`, `TCCR1B`, `TIMSK1`, `OCR1A`, background execution]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer Timer1 ko configure karke ek ISR banata hai jo exactly har 1 second baad trigger hota hai, `loop()` ki speed ki parwah kiye bina.
-* Fixing/Iteration Phase: Developer math formula `(16*10^6) / (prescaler * desired_freq) - 1` use karke `OCR1A` register ki exact value calculate karta hai.
-* Live Production Phase: Stepper motors, precise PID controllers, aur audio processing completely hardware timers pe run karte hain taaki timing perfectly lock rahe.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-# Section 18: Advanced Embedded C & Memory Management
-
-===Section 18: Advanced Embedded C & Memory Management===
-[🆕 Advanced Module] Is section mein memory management, pointers, aur hardware registers ko directly access karna sikhaya gaya hai taaki Arduino ki "hobbyist" limitations ko cross karke production-level memory efficiency achieve ki ja sake.
-
---18--Advanced Embedded C & Memory Management--
-Topic 1: Pointers & Ditching the "String" Object
-Subtopics: Pointer Declaration, Pass by Reference, Heap Fragmentation, Char Arrays, C-Strings, null terminator
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Long explanation with memory diagrams
-* Key terms from transcript: pointers, memory address, dereference, heap fragmentation, char array, C-strings, null terminator
-* Explicit emphasis by speaker: "The uppercase 'S' String class is banned in professional firmware. It will fragment your 2KB RAM and crash your Arduino."
-* Speaker ne jo analogies/examples use kiye: Memory address as a "house number" and pointer as the "GPS coordinate".
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[pointer, memory address, `&` ampersand, `*` asterisk, pass by reference, memory footprint, stack memory, heap fragmentation, `char` array, C-strings, `\0` null terminator, `<string.h>`, `strcpy()`, `sprintf()`, memory crash]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer purane Arduino code se `String` hata kar `char array` likhta hai aur large structs ko pass karne ke liye pointers use karta hai.
-* Fixing/Iteration Phase: Developer null terminator `\0` missing hone ki wajah se aane wale garbage data ko debug karke fix karta hai.
-* Live Production Phase: Ek Arduino node mahino tak bina restart hue consistently chalta hai kyunki char arrays memory fragmentation (RAM leakage) create nahi karte.
-
---18--Advanced Embedded C & Memory Management--
-**Topic 2: Structs, Enums & Finite State Machines (FSM)**
-Subtopics: `enum` State Definitions, `struct` Data Grouping, `typedef` usage, Memory Alignment/Padding, FSM Architecture, Switch-Case state handling
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Long explanation integrating previous concepts (millis + interrupts) into a unified FSM framework
-* Key terms from transcript: struct, enum, typedef, finite state machine, FSM, switch-case, state transition, memory padding, data payload
-* Explicit emphasis by speaker: "Magic numbers are terrible for state management. Always use enums to define your machine states, and pack your related sensor variables into structs."
-* Speaker ne jo analogies/examples use kiye: Struct is like a custom "filing cabinet" that holds different data types (int, float, bool) in one folder. FSM is like a vending machine transitioning between "Waiting for Coin", "Dispensing", and "Error" states.
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[struct, custom data type, typedef, enum, enumeration, states, finite state machine, FSM, switch-case, default case, state transition, memory padding, alignment, data payload, grouping variables, traffic light example, vending machine, magic numbers]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer system ki logic block flowchart banata hai aur `enum` use karke un states (jaise INIT, IDLE, ACTIVE, ERROR) ko code mein define karta hai, taaki switch-case mein arbitrary integers yaad na rakhne padein.
-* Fixing/Iteration Phase: Agar firmware memory unexpected tarah se full ho rahi hai, toh developer `struct` ke andar variables ka order adjust karta hai (memory alignment aur struct padding) taaki precious RAM waste na ho.
-* Live Production Phase: Production level RTOS queues (jaise FreeRTOS) ya I2C transmission mein, developer alag-alag variables bhejne ke bajaye ek single `struct` banakar uska pointer pass karta hai. FSM structure ensure karta hai ki CPU ek waqt pe strictly ek hi logical state run kare, jisse catastrophic hardware failures avoid hote hain.
-* Additional context: Speaker highlight karta hai ki pointers aur structs ka combination hi wo bridge hai jo Arduino sketches ko professional C firmware se alag karta hai.
-
---18--Advanced Embedded C & Memory Management--
-Topic 3: Bitwise Operations & Fast Register Access
-Subtopics: Bit Masking, Bit Shifting, AND/OR/XOR, Direct PORT Manipulation
-
-[📊 SCOPE SIGNAL for Topic 3:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Mathematical logic + hardware coding
-* Key terms from transcript: bitwise, masking, shifting, PORTB, DDRB, clock cycles
-* Explicit emphasis by speaker: "digitalWrite is extremely slow. For microsecond precision, manipulate the hardware registers directly."
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 3:
-[bitwise operations, bit masking, bit shifting, `<<`, `>>`, `&`, `|`, `^`, `~`, hardware registers, `PORTB`, `DDRB`, `digitalWrite()` overhead, execution speed, microsecond precision, bare-metal C]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-
-* Testing/Offline Phase: Developer `digitalWrite()` ko replace karke seedha hardware registers (`PORTB |= (1<<5)`) modify karta hai taaki pin toggle speed fast ho.
-* Fixing/Iteration Phase: Bit mask calculations verify karta hai taaki ek pin change karte waqt galti se dusri pins modify na ho jayein.
-* Live Production Phase: Custom high-speed sensor protocols mein bitwise operations hardware limits ko push karke fast execution ensure karte hain.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-# Section 19: Bare-Metal Peripherals (ADC & USART Registers)
-
-===Section 19: Bare-Metal Peripherals (ADC & USART Registers)===
-[🆕 Advanced Module] Is section mein standard analogRead() aur Serial.print() ki blocking limitations ko bypass karke, direct ADC registers aur USART hardware interrupts ko configure karna sikhaya gaya hai taaki maximum CPU efficiency achieve ho.
-
---19--Bare-Metal Peripherals (ADC & USART Registers)--
-Topic 1: Fast ADC & Auto-Triggering (Free-Running Mode)
-Subtopics: ADMUX Register, ADCSRA Register, Free-Running Mode, ADC Interrupts, Voltage Reference (AREF)
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Register configuration and interrupt handling explanation
-* Key terms from transcript: ADMUX, ADCSRA, analogRead blocking, 13 ADC clock cycles, Free-Running mode, AREF, voltage reference
-* Explicit emphasis by speaker: "Standard analogRead() halts the CPU for 100 microseconds. For audio or fast control loops, you must use ADC interrupts in free-running mode."
-* Speaker ne jo analogies/examples use kiye: standard analogRead is like waiting at the counter for food; an ADC interrupt is like being handed food on a conveyor belt continuously without waiting.
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[ADMUX, ADCSRA, ADC multiplexer, prescaler, free-running mode, auto-trigger, `ISR(ADC_vect)`, analogRead overhead, reference voltage, AREF, 5V, 1.1V internal, 10-bit resolution, non-blocking analog, bare-metal C]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer `analogRead()` ko hata kar ADMUX aur ADCSRA registers bitwise operator se set karta hai taaki ADC background mein continuous conversions karta rahe.
-* Fixing/Iteration Phase: Developer bitwise math verify karta hai taaki sahi channel (A0-A5) select ho bina doosre config bits ko overwrite kiye.
-* Live Production Phase: Audio processing ya fast PID motor control algorithms mein CPU completely free rehta hai aur ADC data directly hardware interrupt ke through arrays mein stream hota hai.
-
---19--Bare-Metal Peripherals (ADC & USART Registers)--
-Topic 2: Interrupt-Driven USART (Bare-Metal Serial)
-Subtopics: UBRR0 Register, UCSR0A/B/C Registers, RX Complete Interrupt, Data Register Empty (UDRE)
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Hardware serial configuration without Arduino core libraries
-* Key terms from transcript: USART, baud rate register, UBRR0, UCSR0, TXEN0, RXEN0, RXCIE0, UDRE0, ISR
-* Explicit emphasis by speaker: "The standard Arduino Serial library uses a massive amount of RAM and hidden buffers. By writing your own USART driver, you save memory and gain total control over transmission."
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[USART, UBRR0, UCSR0A, UCSR0B, UCSR0C, TXEN0, RXEN0, RXCIE0, RX complete interrupt, `ISR(USART_RX_vect)`, UDRE0, data register empty, bare-metal serial, memory footprint, circular buffer]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer standard `Serial.begin()` hatakar UBRR0 register ko set karke manually 9600 baud rate configure karta hai aur `ISR(USART_RX_vect)` likhta hai incoming data background mein catch karne ke liye.
-* Fixing/Iteration Phase: UART buffer overflows rokne ke liye developer ek custom lightweight circular buffer implement karta hai jo default library se chhota aur fast ho.
-* Live Production Phase: Memory-constrained industrial sensors (e.g. running on tiny ATmega chips) mein yeh custom UART driver standard Arduino libraries ke RAM footprint ko drastically reduce kar deta hai.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-
-
-# Section 20: EEPROM - Save Values on the Arduino
-
-
-===Section 1: Introduction to EEPROM Memory===
-Speaker is section mein EEPROM memory ke basics, uske use cases, aur hardware limitations explain karta hai.
-
---1--Introduction to EEPROM Memory--
-Topic 1: EEPROM Concept & Use Cases
-Subtopics: Variables vs EEPROM, Data Retention, Default Settings Override, Temperature Setting Example
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Moderate
-* Coverage Angle: Conceptual only
-* Transcript mein content volume: Short explanation with real-world example
-* Key terms from transcript: EEPROM memory, variables, restarting program, hard drive, RAM, default setting, temperature sensor, degrees Celsius, degrees Fahrenheit
-* Explicit emphasis by speaker: None
-* Speaker ne jo analogies/examples use kiye: Hard drive vs RAM for computer (EEPROM is like a hard drive, variables/RAM get wiped on restart)
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[EEPROM memory, variables, restarting program, hard drive, RAM, default setting, temperature sensor, degrees Celsius, degrees Fahrenheit]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Learning Phase: Concept samjhaya jaata hai ki volatile memory (RAM) restart pe wipe ho jaati hai, jabki EEPROM data retain karti hai.
-* Application Phase: Real problems mein isse default settings (jaise temperature units) ko save karne ke liye use kiya jaata hai taaki restart ke baad setting restore ho sake.
-* Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-
-Topic 2: Hardware Limitations & Constraints
-Subtopics: Board Compatibility, Storage Limit, Value Range, Write Cycle Limit, Infinite Loop Warning
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Moderate
-* Coverage Angle: Conceptual only
-* Transcript mein content volume: Short explanation with explicit warnings
-* Key terms from transcript: Arduino Uno, Arduino Mega, Arduino Zero, 1024 values, 0 to 255, 100,000 writing cycles, void loop function, infinite loop
-* Explicit emphasis by speaker: "never, ever write in your EPROM at full speed in the void look function", "test your program before"
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[Arduino Uno, Arduino Mega, Arduino Zero, 1024 values, 0 to 255, ⭐100,000 writing cycles, worn off, ⭐void loop function, infinite loop, test your program]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Learning Phase: Developer hardware constraints seekhta hai — jaise Uno/Nano pe sirf 1024 addresses aur har address pe 100k write cycles ki limit.
-* Application Phase: Developer program design karte waqt ensure karta hai ki EEPROM pe infinite loop mein writes na hon taaki memory addresses burn na hon.
-* Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-
-===Section 2: Coding EEPROM: Write and Read===
-Speaker EPROM library include karke memory mein data write aur read karne ka process code step-by-step batata hai.
-
---2--Coding EEPROM: Write and Read--
-Topic 1: Writing Data to EEPROM
-Subtopics: Library Inclusion, EEPROM.write(), Address Range, Byte Size Restriction
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Moderate
-* Coverage Angle: Practical only
-* Transcript mein content volume: Multiple examples + code
-* Key terms from transcript: EEPROM.h, EEPROM.write(), address, byte, 0 to 1023, 0 to 255, void setup, void loop
-* Explicit emphasis by speaker: "don't write in the loop... write in the setup", "destroying two addresses"
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[`#include <EEPROM.h>`, `EEPROM.write()`, address, byte, 0 to 1023, 0 to 255, 44, 150, address 0, address 200, ⭐void setup(), ⭐void loop(), destroying addresses]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer `#include <EEPROM.h>` add karta hai aur `EEPROM.write()` use karke specific addresses (0 aur 200) pe hardcoded values (44 aur 150) store karta hai.
-* Fixing/Iteration Phase: Developer explicitly code ko `void setup()` mein rakhta hai taaki infinite loop ki wajah se fast cycles cross na ho jayein.
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-
-Topic 2: Reading Data from EEPROM
-Subtopics: EEPROM.read(), Unwritten Address Behavior, Execution Placement
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Moderate
-* Coverage Angle: Practical only
-* Transcript mein content volume: Multiple examples + code
-* Key terms from transcript: EEPROM.read(), Serial.print, Serial.begin, address 89, 255, unwritten address
-* Explicit emphasis by speaker: None
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[`EEPROM.read()`, `Serial.print()`, `Serial.begin()`, address 89, 255, 0, unwritten address, `EEPROM.write(0)`]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer board restart karta hai aur `EEPROM.read()` use karke pehle se stored values (44, 150) nikaal ke Serial Monitor pe print karta hai.
-* Fixing/Iteration Phase: Developer random/unwritten address (89) read karke check karta hai, jo default empty state mein 255 ya 0 return karta hai.
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-
-===Section 3: Project Integration: Potentiometer, Serial & EEPROM===
-Speaker ek real-world multitasking project banata hai jahan potentiometer, LED, Serial communication, aur EEPROM ek saath use hote hain brightness cap set karne ke liye.
-
---3--Project Integration: Potentiometer, Serial & EEPROM--
-Topic 1: Data Validation & Hardware Setup
-Subtopics: Serial Data Parsing, Input Validation, Potentiometer Mapping, Analog Write
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Multiple examples + code + demo
-* Key terms from transcript: Serial.begin, Serial.available, Serial.parseInt, Serial.setTimeout, validate data, analogRead, analogWrite, potentiometer, LED, divide by four
-* Explicit emphasis by speaker: "validate the data", "divide this value by four"
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[`Serial.begin()`, `Serial.available()`, `Serial.parseInt()`, `Serial.setTimeout(10)`, ⭐validate data, 10000, 256, `analogRead()`, `analogWrite()`, potentiometer, LED, ⭐divide by four, 0 to 1023, 0 to 255, `pinMode()`]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer hardware set karta hai (Potentiometer & LED). Serial parser setup karta hai `Serial.setTimeout(10)` ke saath taaki input read ho sake. Potentiometer value (0-1023) ko divide by 4 karta hai.
-* Fixing/Iteration Phase: Developer explicitly serial data ko validate karta hai taaki sirf 0 se 255 ke beech ki valid analog value hi system aage process kare.
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-
-Topic 2: Cap Value & EEPROM Integration
-Subtopics: Brightness Capping Logic, Max Intensity Variable, Dynamic EEPROM Write, Setup Initialization, Zero Value Handling
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation + code + demo
-* Key terms from transcript: max brightness, cap value, #define, EEPROM_ADDRESS_MAX_BRIGHTNESS, BRIGHTNESS_DEFAULT, EEPROM.write, EEPROM.read, default value, hardware reset
-* Explicit emphasis by speaker: "Pay attention to how and where you write on the April memory"
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[max brightness, cap value, `#define EEPROM_ADDRESS_MAX_BRIGHTNESS 350`, `#define BRIGHTNESS_DEFAULT 255`, `EEPROM.write()`, `EEPROM.read()`, capping logic, hardware reset, `if(brightness > maxBrightness)`, zero fallback]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer code likhta hai jahan setup phase mein EEPROM se `maxBrightness` cap read hota hai. Agar value 0 aati hai, toh fallback `#define BRIGHTNESS_DEFAULT 255` use hota hai.
-* Fixing/Iteration Phase: Developer Serial Monitor ke through naye cap values (e.g., 60, 200, 80) bhejta hai. Code valid received value ko variable mein update karta hai aur dynamically `EEPROM.write()` karta hai.
-* Live Production Phase: App run hote waqt, real user potentiometer ghumata hai par LED brightness hamesha EEPROM mein stored cap value (e.g., max 60) pe stop ho jaati hai, chahe device physically reset hi kyun na ho gaya ho.
-
----
-
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
-
-📋 EXTRACTED IN THIS PHASE:
-
-Section 1: Introduction to EEPROM Memory
-Topic 1: EEPROM Concept & Use Cases
-Topic 2: Hardware Limitations & Constraints
-
-Section 2: Coding EEPROM: Write and Read
-Topic 1: Writing Data to EEPROM
-Topic 2: Reading Data from EEPROM
-
-Section 3: Project Integration: Potentiometer, Serial & EEPROM
-Topic 1: Data Validation & Hardware Setup
-Topic 2: Cap Value & EEPROM Integration
-
-📊 PHASE SUMMARY:
-Sections: 3 | Topics: 6 | Subtopics: 22
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-# Section 21: Advanced I/O - UART Parsing & Data Persistence
-
-===Section 21: Advanced I/O - UART Parsing & Data Persistence===
-[⚠️ Derived] Speaker is section mein real-world communication aur storage sikhata hai — Serial monitor se incoming text commands ko C-Strings aur pointers ke through parse karna, aur power off hone ke baad bhi device ka state EEPROM mein save rakhna.
-
---21--Advanced I/O - UART Parsing & Data Persistence--
-Topic 1: Non-Blocking UART Parsing & CLI (Command Line Interface)
-Subtopics: Serial.available(), Serial.read(), Ring Buffers, String Tokenization (strtok), String to Integer (atoi), Handling Line Endings (
-, \r), Buffer Overflow Protection
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Long explanation integrating Pointers and C-Strings from Section 5B to process incoming data
-* Key terms from transcript: UART, RX/TX, Serial.available(), Serial.read(), buffer array, char array, strtok, atoi, carriage return, line feed, payload, CLI
-* Explicit emphasis by speaker: "Never use Serial.readString() or Serial.parseInt() in production! They contain hidden delays that will block your CPU. We build our own non-blocking character buffers."
-* Speaker ne jo analogies/examples use kiye: A buffer array is like a mailbox; you check it one letter at a time without waiting for the postman, and strtok is like a pair of scissors cutting a sentence into words based on spaces or commas.
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[UART, RX, TX, `Serial.available()`, `Serial.read()`, non-blocking read, incoming byte, `char` buffer, index counter, null terminator, `\0`, `
-`, `\r`, carriage return, line feed, string tokenization, `strtok()`, delimiter, `atoi()`, string to integer, buffer overflow, CLI, Command Line Interface, payload parsing]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer Serial Monitor mein "SET_SPEED:255" type karke bhejta hai, aur microcontroller us string ko receive karke `strtok` se split karta hai aur 255 ko integer mein convert karke motor ki speed set karta hai.
-* Fixing/Iteration Phase: Agar bad data ya lambi string aane par Arduino crash ho raha hai, toh developer code mein buffer limit check add karta hai (e.g., `if(index < BUFFER_SIZE - 1)`) taaki buffer overflow na ho.
-* Live Production Phase: Production mein, Arduino ek PC ya master device ke saath UART pe connected hota hai, aur continuously non-blocking way mein JSON-like ya comma-separated commands receive karta hai bina apne main FSM loops ko roke.
-* Additional context: Yeh topic directly Section 5B ke C-Strings aur Pointers ka practical application hai.
-
---21--Advanced I/O - UART Parsing & Data Persistence--
-Topic 2: EEPROM & Non-Volatile Memory Management
-Subtopics: EEPROM Architecture, EEPROM.read() / EEPROM.write(), Storing Structs with EEPROM.put() / EEPROM.get(), Write Cycles limitation, Wear Leveling Basics
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Practical explanation focusing on memory limits and saving custom data types (Structs)
-* Key terms from transcript: EEPROM, non-volatile memory, power cycle, EEPROM.get(), EEPROM.put(), write cycles, 100,000 limit, wear leveling, calibration data
-* Explicit emphasis by speaker: "EEPROM has a physical limit of about 100,000 writes. If you put an EEPROM write inside your infinite loop by mistake, you will physically destroy that memory sector in a few seconds."
-* Speaker ne jo analogies/examples use kiye: RAM is like a whiteboard that gets wiped clean every night; EEPROM is like carving data into a stone tablet—it stays forever, but you can only carve over the same spot so many times before it breaks.
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[EEPROM, non-volatile memory, power loss, `EEPROM.read()`, `EEPROM.write()`, `EEPROM.update()`, `EEPROM.put()`, `EEPROM.get()`, byte address, 1024 bytes, write cycle limit, 100,000 writes, hardware degradation, memory preservation, saving Structs, calibration parameters, state recovery]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer ek custom `struct` (jisme device configuration aur FSM state hai) banata hai aur `EEPROM.put()` use karke use memory mein save karta hai. USB nikal kar wapas lagane par `EEPROM.get()` se wahi state recover karta hai.
-* Fixing/Iteration Phase: Developer realize karta hai ki woh har second temperature save kar raha hai, jisse EEPROM jaldi kharab ho jayegi. Woh logic modify karke `EEPROM.update()` lagata hai (jo sirf tabhi write karta hai jab value actually change ho) ya sirf shutdown interrupt aane par save karta hai.
-* Live Production Phase: Industrial machines EEPROM use karte hain apne offsets, user settings, aur last known state ko save karne ke liye, taaki power cut hone ke baad system zero se start hone ke bajaye directly wahin se resume kare jahan se ruka tha.
-* Additional context: Structs ko direct memory block ki tarah EEPROM mein dalna pointers ka ek behtareen use case dikhata hai.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-# Section 22: Robust Firmware: Watchdogs & TDD
-
-===Section 22: Robust Firmware: Watchdogs & TDD===
-[🆕 Advanced Module] Is section mein professional fail-safes (Watchdog Timer) aur Test-Driven Development (TDD) introduce kiya gaya hai.
-
---22--Robust Firmware: Watchdogs & TDD--
-Topic 1: Watchdog Timer & Unit Testing
-Subtopics: avr/wdt.h, System Freezes, Hardware Reset, Unity Framework, Logic Testing
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: System fail-safe coding + Testing methodology
-* Key terms from transcript: Watchdog Timer, lockup, petting the dog, Test-Driven Development, Unity
-* Explicit emphasis by speaker: "If your Arduino is deployed remotely, a Watchdog is mandatory. Test your math on your computer before flashing to the board."
-* Speaker ne jo analogies/examples use kiye: "Petting the dog" — feed the watchdog regularly, if you forget (code hangs), the dog bites (hard resets the system).
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Watchdog Timer, WDT, hardware reset, `<avr/wdt.h>`, infinite loop crash, `wdt_enable()`, `wdt_reset()`, WDTO_2S, petting the dog, Test-Driven Development, TDD, automated testing, Unity framework, CI/CD pipeline, `TEST_ASSERT_EQUAL()`]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer setup mein 2-second ka Watchdog timer configure karta hai aur `loop()` mein `wdt_reset()` call karta hai. Saath hi apne math functions ka Unit Test PC pe run karke verify karta hai.
-* Fixing/Iteration Phase: Developer intentionally ek infinite loop banata hai aur dekhta hai ki 2 second baad Arduino automatically reboot hota hai ya nahi.
-* Live Production Phase: Remote weather stations mahino tak chalte hain kyunki Watchdog timer glitch aane par unhe automatically self-heal (reboot) kar deta hai.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-
-
-# Section 23: Ultrasonic Sensor - Measure Distances
+# Section 15: Ultrasonic Sensor - Measure Distances
 
 
 ===Section 1: Introduction to hardware components===
@@ -2803,7 +2217,7 @@ Sections: 8 | Topics: 10 | Subtopics: 37
 
 ==================================================================================
 
-# Section 24: LCD Screen - Display Text Directly on Your CircuitRobot
+# Section 16: LCD Screen - Display Text Directly on Your CircuitRobot
 
 
 ===Section 1: LCD Screen Basics & Hardware Setup===
@@ -2959,7 +2373,7 @@ Sections: 3 | Topics: 5 | Subtopics: 21
 ==================================================================================
 
 
-# Section 25: IR Remote Controller - Make Your Projects More Interactive
+# Section 17: IR Remote Controller - Make Your Projects More Interactive
 
 ===Section 1: IR Remote Controller - Make Your Projects More Interactive===
 Is section mein speaker sikhata hai ki Arduino projects ko infrared remote control se kaise interact karwaya jaye, hardware setup se lekar library versions aur multi-component projects tak.
@@ -3105,13 +2519,13 @@ Sections: 1 | Topics: 5 | Subtopics: 28
 ==================================================================================
 
 
-# Section 26: Photoresistor - Measure Luminosity
+# Section 18: Photoresistor - Measure Luminosity
 
 
-===Section 26: Photoresistor - Measure Luminosity===
+===Section 18: Photoresistor - Measure Luminosity===
 Speaker is section mein photoresistor sensor ka use karke environment ki light/luminosity ko measure karna aur uske base par automatic systems banana sikhata hai.
 
---26--Photoresistor - Measure Luminosity--
+--18--Photoresistor - Measure Luminosity--
 Topic 1: Hardware Setup & Pin Connections
 Subtopics: Photoresistor Concept, Tinkercad Duplication, 10k Ohm Resistor, Ground Connection, 5V Connection, Analog Pin A0
 
@@ -3135,7 +2549,7 @@ Subtopics: Photoresistor Concept, Tinkercad Duplication, 10k Ohm Resistor, Groun
 * Live Production Phase: Sensor real environment ki light ko detect karke analog value bhejta hai taaki smart actions (jaise home automation) liye ja sakein.
 * Additional context: Speaker ne mention kiya ki hardware setup mein breadboard par components directly plug karke wires save ki ja sakti hain.
 
---26--Photoresistor - Measure Luminosity--
+--18--Photoresistor - Measure Luminosity--
 Topic 2: Reading Analog Values
 Subtopics: analogRead Function, Value Range, Serial Plotter Usage, Defining Thresholds
 
@@ -3159,7 +2573,7 @@ Subtopics: analogRead Function, Value Range, Serial Plotter Usage, Defining Thre
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: Minimum value exact 0 nahi aati, transcript mein sensor cover karne par 40 ke aas-paas value dikhi thi.
 
---26--Photoresistor - Measure Luminosity--
+--18--Photoresistor - Measure Luminosity--
 Topic 3: Automatic Light System (Activity & Solution)
 Subtopics: Threshold Definition Logic, LED Toggling, Inversely Proportional Brightness, analogWrite Computation
 
@@ -3183,7 +2597,7 @@ Subtopics: Threshold Definition Logic, LED Toggling, Inversely Proportional Brig
 * Live Production Phase: Automatic light system real-world mein chal raha hota hai; jab room dark hota hai, LEDs automatically on ho jati hain aur ambient light ke hisaab se unki brightness adapt hoti hai.
 * Additional context: None
 
---26--Photoresistor - Measure Luminosity--
+--18--Photoresistor - Measure Luminosity--
 Topic 4: Computing Average Luminosity (Activity & Solution)
 Subtopics: Sampling Concept, Data Array Initialization, millis() Timing, Sum and Average Formula, Array Boundary Reset, Long Datatype Usage
 
@@ -3213,7 +2627,7 @@ Subtopics: Sampling Concept, Data Array Initialization, millis() Timing, Sum and
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 26: Photoresistor - Measure Luminosity
+Section 18: Photoresistor - Measure Luminosity
 Topic 1: Hardware Setup & Pin Connections
 Topic 2: Reading Analog Values
 Topic 3: Automatic Light System (Activity & Solution)
@@ -3227,7 +2641,179 @@ Sections: 1 | Topics: 4 | Subtopics: 20
 ==================================================================================
 
 
-# Section 27: Final project - Interactive Obstacle Detection
+# Section 19: EEPROM - Save Values on the Arduino
+
+
+===Section 1: Introduction to EEPROM Memory===
+Speaker is section mein EEPROM memory ke basics, uske use cases, aur hardware limitations explain karta hai.
+
+--1--Introduction to EEPROM Memory--
+Topic 1: EEPROM Concept & Use Cases
+Subtopics: Variables vs EEPROM, Data Retention, Default Settings Override, Temperature Setting Example
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual only
+* Transcript mein content volume: Short explanation with real-world example
+* Key terms from transcript: EEPROM memory, variables, restarting program, hard drive, RAM, default setting, temperature sensor, degrees Celsius, degrees Fahrenheit
+* Explicit emphasis by speaker: None
+* Speaker ne jo analogies/examples use kiye: Hard drive vs RAM for computer (EEPROM is like a hard drive, variables/RAM get wiped on restart)
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[EEPROM memory, variables, restarting program, hard drive, RAM, default setting, temperature sensor, degrees Celsius, degrees Fahrenheit]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Learning Phase: Concept samjhaya jaata hai ki volatile memory (RAM) restart pe wipe ho jaati hai, jabki EEPROM data retain karti hai.
+* Application Phase: Real problems mein isse default settings (jaise temperature units) ko save karne ke liye use kiya jaata hai taaki restart ke baad setting restore ho sake.
+* Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+
+Topic 2: Hardware Limitations & Constraints
+Subtopics: Board Compatibility, Storage Limit, Value Range, Write Cycle Limit, Infinite Loop Warning
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual only
+* Transcript mein content volume: Short explanation with explicit warnings
+* Key terms from transcript: Arduino Uno, Arduino Mega, Arduino Zero, 1024 values, 0 to 255, 100,000 writing cycles, void loop function, infinite loop
+* Explicit emphasis by speaker: "never, ever write in your EPROM at full speed in the void look function", "test your program before"
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Arduino Uno, Arduino Mega, Arduino Zero, 1024 values, 0 to 255, ⭐100,000 writing cycles, worn off, ⭐void loop function, infinite loop, test your program]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Learning Phase: Developer hardware constraints seekhta hai — jaise Uno/Nano pe sirf 1024 addresses aur har address pe 100k write cycles ki limit.
+* Application Phase: Developer program design karte waqt ensure karta hai ki EEPROM pe infinite loop mein writes na hon taaki memory addresses burn na hon.
+* Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+
+===Section 2: Coding EEPROM: Write and Read===
+Speaker EPROM library include karke memory mein data write aur read karne ka process code step-by-step batata hai.
+
+--2--Coding EEPROM: Write and Read--
+Topic 1: Writing Data to EEPROM
+Subtopics: Library Inclusion, EEPROM.write(), Address Range, Byte Size Restriction
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Multiple examples + code
+* Key terms from transcript: EEPROM.h, EEPROM.write(), address, byte, 0 to 1023, 0 to 255, void setup, void loop
+* Explicit emphasis by speaker: "don't write in the loop... write in the setup", "destroying two addresses"
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[`#include <EEPROM.h>`, `EEPROM.write()`, address, byte, 0 to 1023, 0 to 255, 44, 150, address 0, address 200, ⭐void setup(), ⭐void loop(), destroying addresses]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer `#include <EEPROM.h>` add karta hai aur `EEPROM.write()` use karke specific addresses (0 aur 200) pe hardcoded values (44 aur 150) store karta hai.
+* Fixing/Iteration Phase: Developer explicitly code ko `void setup()` mein rakhta hai taaki infinite loop ki wajah se fast cycles cross na ho jayein.
+* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+
+Topic 2: Reading Data from EEPROM
+Subtopics: EEPROM.read(), Unwritten Address Behavior, Execution Placement
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Multiple examples + code
+* Key terms from transcript: EEPROM.read(), Serial.print, Serial.begin, address 89, 255, unwritten address
+* Explicit emphasis by speaker: None
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[`EEPROM.read()`, `Serial.print()`, `Serial.begin()`, address 89, 255, 0, unwritten address, `EEPROM.write(0)`]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer board restart karta hai aur `EEPROM.read()` use karke pehle se stored values (44, 150) nikaal ke Serial Monitor pe print karta hai.
+* Fixing/Iteration Phase: Developer random/unwritten address (89) read karke check karta hai, jo default empty state mein 255 ya 0 return karta hai.
+* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+
+===Section 3: Project Integration: Potentiometer, Serial & EEPROM===
+Speaker ek real-world multitasking project banata hai jahan potentiometer, LED, Serial communication, aur EEPROM ek saath use hote hain brightness cap set karne ke liye.
+
+--3--Project Integration: Potentiometer, Serial & EEPROM--
+Topic 1: Data Validation & Hardware Setup
+Subtopics: Serial Data Parsing, Input Validation, Potentiometer Mapping, Analog Write
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Multiple examples + code + demo
+* Key terms from transcript: Serial.begin, Serial.available, Serial.parseInt, Serial.setTimeout, validate data, analogRead, analogWrite, potentiometer, LED, divide by four
+* Explicit emphasis by speaker: "validate the data", "divide this value by four"
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[`Serial.begin()`, `Serial.available()`, `Serial.parseInt()`, `Serial.setTimeout(10)`, ⭐validate data, 10000, 256, `analogRead()`, `analogWrite()`, potentiometer, LED, ⭐divide by four, 0 to 1023, 0 to 255, `pinMode()`]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer hardware set karta hai (Potentiometer & LED). Serial parser setup karta hai `Serial.setTimeout(10)` ke saath taaki input read ho sake. Potentiometer value (0-1023) ko divide by 4 karta hai.
+* Fixing/Iteration Phase: Developer explicitly serial data ko validate karta hai taaki sirf 0 se 255 ke beech ki valid analog value hi system aage process kare.
+* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+
+Topic 2: Cap Value & EEPROM Integration
+Subtopics: Brightness Capping Logic, Max Intensity Variable, Dynamic EEPROM Write, Setup Initialization, Zero Value Handling
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Long explanation + code + demo
+* Key terms from transcript: max brightness, cap value, #define, EEPROM_ADDRESS_MAX_BRIGHTNESS, BRIGHTNESS_DEFAULT, EEPROM.write, EEPROM.read, default value, hardware reset
+* Explicit emphasis by speaker: "Pay attention to how and where you write on the April memory"
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[max brightness, cap value, `#define EEPROM_ADDRESS_MAX_BRIGHTNESS 350`, `#define BRIGHTNESS_DEFAULT 255`, `EEPROM.write()`, `EEPROM.read()`, capping logic, hardware reset, `if(brightness > maxBrightness)`, zero fallback]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer code likhta hai jahan setup phase mein EEPROM se `maxBrightness` cap read hota hai. Agar value 0 aati hai, toh fallback `#define BRIGHTNESS_DEFAULT 255` use hota hai.
+* Fixing/Iteration Phase: Developer Serial Monitor ke through naye cap values (e.g., 60, 200, 80) bhejta hai. Code valid received value ko variable mein update karta hai aur dynamically `EEPROM.write()` karta hai.
+* Live Production Phase: App run hote waqt, real user potentiometer ghumata hai par LED brightness hamesha EEPROM mein stored cap value (e.g., max 60) pe stop ho jaati hai, chahe device physically reset hi kyun na ho gaya ho.
+
+---
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Introduction to EEPROM Memory
+Topic 1: EEPROM Concept & Use Cases
+Topic 2: Hardware Limitations & Constraints
+
+Section 2: Coding EEPROM: Write and Read
+Topic 1: Writing Data to EEPROM
+Topic 2: Reading Data from EEPROM
+
+Section 3: Project Integration: Potentiometer, Serial & EEPROM
+Topic 1: Data Validation & Hardware Setup
+Topic 2: Cap Value & EEPROM Integration
+
+📊 PHASE SUMMARY:
+Sections: 3 | Topics: 6 | Subtopics: 22
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 20: Final project - Interactive Obstacle Detection
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.** (Phase 1)
 
@@ -3517,16 +3103,525 @@ Sections: 1 | Topics: 6 | Subtopics: 28
 
 ==================================================================================
 
+# Section 21: Bare-Metal Realities (Analog, Non-Blocking, & Interrupts)
+
+===Section 21: Bare-Metal Realities (Analog, Non-Blocking, & Interrupts)===
+[⚠️ Derived] Speaker is section mein professional firmware development ki buniyad rakhta hai — delay() ko chhod kar millis() apnana, analog data read karna, aur CPU ko block kiye bina interrupts ke through events handle karna sikhata hai.
+
+--21--Bare-Metal Realities--
+**Topic 1: Analog Data & PWM (Pulse Width Modulation)**
+Subtopics: ADC Resolution, analogRead(), analogWrite(), Duty Cycle, Potentiometers, Fading LEDs
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with hardware demo and oscilloscope visualization
+* Key terms from transcript: ADC, analog to digital, 10-bit resolution, 0 to 1023, PWM, duty cycle, fake analog, analogWrite, analogRead
+* Explicit emphasis by speaker: "PWM is not true analog, it's just turning the digital pin on and off really fast to trick the hardware."
+* Speaker ne jo analogies/examples use kiye: PWM compared to flickering a light switch so fast it looks dim.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[ADC, analogRead(), 10-bit resolution, 0 to 1023, analogWrite(), PWM, pulse width modulation, duty cycle, 0 to 255, potentiometer, fading LED, analog pins, A0, A1, pseudo-analog, oscilloscope]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer potentiometer ko TinkerCAD mein connect karta hai aur ADC values ko Serial Monitor par print karke check karta hai ki values 0-1023 ke beech aa rahi hain ya nahi.
+* Fixing/Iteration Phase: Agar LED linearly fade nahi ho rahi, toh developer `map()` function use karke 0-1023 range ko 0-255 (PWM range) mein convert karta hai.
+* Live Production Phase: Industrial settings mein yehi ADC logic temperature sensors padhne aur motor speed control (PWM) ke liye directly use hota hai.
+* Additional context: Speaker ne clarify kiya ki sirf tilde (~) mark wale digital pins hi PWM support karte hain.
+
+**Topic 2: Ditching delay() for Non-Blocking Code (millis)**
+Subtopics: The Problem with delay(), CPU Blocking, The millis() Function, Timestamps, Delta Time Calculation, Concurrent Blinking
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with side-by-side code comparison
+* Key terms from transcript: blocking code, delay(), millis(), multitasking, unsigned long, timestamp, delta time
+* Explicit emphasis by speaker: "Using delay() in professional firmware is a crime. It paralyzes the CPU. You must use millis() to track time."
+* Speaker ne jo analogies/examples use kiye: delay() is like going to sleep and ignoring the world; millis() is like checking your watch periodically while still working on your desk.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[blocking code, delay(), millis(), CPU halted, unsigned long, overflow 50 days, timestamp, current time, previous time, delta time, `currentMillis - previousMillis >= interval`, concurrent tasks, multitasking Arduino, FSM introduction]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer do alag-alag LEDs ko alag speed pe blink karne ki koshish karta hai. `delay()` ke saath yeh fail ho jata hai, tab woh `millis()` ka timer logic likhta hai.
+* Fixing/Iteration Phase: Variable overflow error (negative time) bachane ke liye developer strictly `unsigned long` data type use karta hai `int` ki jagah.
+* Live Production Phase: Production firmware mein sensor polling, UI updates, aur motor control ek hi loop mein bina ruke parallel chalta rehta hai kyunki CPU kabhi block nahi hota.
+* Additional context: Yeh topic aage aane wale FreeRTOS aur Hardware Timers seekhne ke liye sabse zaroori foundational step hai.
+
+**Topic 3: External Interrupts & The volatile Keyword**
+Subtopics: Polling vs Interrupts, Hardware Pins 2 and 3, attachInterrupt(), ISR (Interrupt Service Routine), FALLING/RISING states, volatile keyword
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Focused explanation with strict rules on ISRs
+* Key terms from transcript: polling, interrupts, attachInterrupt, ISR, volatile, debounce, RISING, FALLING
+* Explicit emphasis by speaker: "Keep your ISRs as short and fast as possible. Never put a delay() or a Serial.print() inside an interrupt routine!"
+* Speaker ne jo analogies/examples use kiye: Polling is like constantly asking "Are we there yet?"; Interrupt is like getting a phone call only when you arrive.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[polling, external interrupt, attachInterrupt(), ISR, Interrupt Service Routine, digital pin 2, digital pin 3, RISING, FALLING, CHANGE, ⭐volatile, RAM cache optimization, race condition, short ISR]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer button press detect karne ke liye interrupt attach karta hai taaki `millis()` wale loop ke dauran koi button press miss na ho.
+* Fixing/Iteration Phase: Agar button dabane pe code crash hota hai ya ajeeb behave karta hai, toh developer ISR ke andar se `Serial.print()` hata deta hai aur shared variables ke aage `volatile` lagata hai taaki compiler unhe optimize away na kare.
+* Live Production Phase: Safety-critical systems (e.g., Emergency Stop button) directly hardware interrupts se wired hote hain taaki CPU immediately normal loop chhod kar override action le sake.
+* Additional context: Speaker ne debounce ka issue highlight kiya jo hardware interrupts ke saath amplify ho jata hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 22: Advanced Timers & Internal Interrupts
+
+===Section 22: Advanced Timers & Internal Interrupts===
+[🆕 Advanced Module] Speaker explain karta hai ki `millis()` background mein kaise kaam karta hai aur internal hardware timers (Timer0, Timer1, Timer2) ko modify karke ultra-precise internal interrupts kaise banaye jate hain.
+
+--22--Advanced Timers & Internal Interrupts--
+Topic 1: Hardware Timers & CTC Mode
+Subtopics: Timer Registers, Prescalers, Compare Match, ISR (Interrupt Service Routine)
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Register-level coding + logic math
+* Key terms from transcript: Timer1, 16-bit timer, prescaler, CTC mode, ISR, TCCR1A, TIMSK1
+* Explicit emphasis by speaker: "millis() has a slight drift. For perfectly timed industrial execution, you must use hardware Timer Interrupts."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Hardware timers, Timer0, Timer1, Timer2, 16-bit timer, prescaler, 1024, CTC mode, Clear Timer on Compare Match, ISR, Interrupt Service Routine, `ISR(TIMER1_COMPA_vect)`, `TCCR1A`, `TCCR1B`, `TIMSK1`, `OCR1A`, background execution]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Timer1 ko configure karke ek ISR banata hai jo exactly har 1 second baad trigger hota hai, `loop()` ki speed ki parwah kiye bina.
+* Fixing/Iteration Phase: Developer math formula `(16*10^6) / (prescaler * desired_freq) - 1` use karke `OCR1A` register ki exact value calculate karta hai.
+* Live Production Phase: Stepper motors, precise PID controllers, aur audio processing completely hardware timers pe run karte hain taaki timing perfectly lock rahe.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 23: Advanced Embedded C & Memory Management
+
+===Section 23: Advanced Embedded C & Memory Management===
+[🆕 Advanced Module] Is section mein memory management, pointers, aur hardware registers ko directly access karna sikhaya gaya hai taaki Arduino ki "hobbyist" limitations ko cross karke production-level memory efficiency achieve ki ja sake.
+
+--23--Advanced Embedded C & Memory Management--
+Topic 1: Pointers & Ditching the "String" Object
+Subtopics: Pointer Declaration, Pass by Reference, Heap Fragmentation, Char Arrays, C-Strings, null terminator
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with memory diagrams
+* Key terms from transcript: pointers, memory address, dereference, heap fragmentation, char array, C-strings, null terminator
+* Explicit emphasis by speaker: "The uppercase 'S' String class is banned in professional firmware. It will fragment your 2KB RAM and crash your Arduino."
+* Speaker ne jo analogies/examples use kiye: Memory address as a "house number" and pointer as the "GPS coordinate".
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[pointer, memory address, `&` ampersand, `*` asterisk, pass by reference, memory footprint, stack memory, heap fragmentation, `char` array, C-strings, `` null terminator, `<string.h>`, `strcpy()`, `sprintf()`, memory crash]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer purane Arduino code se `String` hata kar `char array` likhta hai aur large structs ko pass karne ke liye pointers use karta hai.
+* Fixing/Iteration Phase: Developer null terminator `` missing hone ki wajah se aane wale garbage data ko debug karke fix karta hai.
+* Live Production Phase: Ek Arduino node mahino tak bina restart hue consistently chalta hai kyunki char arrays memory fragmentation (RAM leakage) create nahi karte.
+
+--23--Advanced Embedded C & Memory Management--
+Topic 2: Flash Memory Storage & PROGMEM (Defeating the 2KB RAM Limit)
+Subtopics: Harvard Architecture, SRAM vs Flash Memory, The F() Macro, <avr/pgmspace.h>, PROGMEM Keyword, Reading from Flash (pgm_read_byte), Lookup Tables
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Memory architecture breakdown with code fixes for RAM overflow
+* Key terms from transcript: PROGMEM, Flash memory, SRAM, Harvard Architecture, pgm_read_byte, F() macro, constant variables, lookup table
+* Explicit emphasis by speaker: "If you store all your LCD menu text and UART messages in standard arrays, your 2KB of RAM will hit 100% and your chip will silently crash. You must force read-only data into Flash memory using PROGMEM."
+* Speaker ne jo analogies/examples use kiye: RAM is your tiny active workbench; Flash memory is the massive filing cabinet in the back of the room. Don't put all your reference manuals on the workbench—leave them in the cabinet and only fetch the exact page you need when you need it.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Harvard Architecture, SRAM, Flash memory, 2KB limit, `PROGMEM`, `<avr/pgmspace.h>`, `pgm_read_byte()`, `pgm_read_word()`, `strcpy_P()`, `F() macro`, `Serial.print(F("Text"))`, `const char`, lookup tables, UI menus, memory exhaustion, silent crash, dynamic memory, program storage space]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer code compile karta hai aur IDE warning dekhta hai: "Low memory available, stability problems may occur." Woh turant saare `Serial.print("...")` statements ko `Serial.print(F("..."))` mein wrap karta hai taaki strings RAM ki jagah Flash mein store hon.
+* Fixing/Iteration Phase: Developer ek heavy math array (jaise sine-wave lookup table for motor control) ko RAM se hata kar `const int sineTable[] PROGMEM` define karta hai. Data read karne ke liye standard `array[i]` ki jagah `pgm_read_word(&array[i])` use karke code fix karta hai.
+* Live Production Phase: Industrial devices (jinme complex LCD menus aur heavy sensor calibration data hota hai) mahino tak bina RAM overflow/crash ke chalte hain, kyunki developer ne smart memory mapping ke through 80% RAM free rakhi hoti hai.
+
+--23--Advanced Embedded C & Memory Management--
+Topic 3: Structs, Enums & Finite State Machines (FSM)
+Subtopics: `enum` State Definitions, `struct` Data Grouping, `typedef` usage, Memory Alignment/Padding, FSM Architecture, Switch-Case state handling
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation integrating previous concepts (millis + interrupts) into a unified FSM framework
+* Key terms from transcript: struct, enum, typedef, finite state machine, FSM, switch-case, state transition, memory padding, data payload
+* Explicit emphasis by speaker: "Magic numbers are terrible for state management. Always use enums to define your machine states, and pack your related sensor variables into structs."
+* Speaker ne jo analogies/examples use kiye: Struct is like a custom "filing cabinet" that holds different data types (int, float, bool) in one folder. FSM is like a vending machine transitioning between "Waiting for Coin", "Dispensing", and "Error" states.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[struct, custom data type, typedef, enum, enumeration, states, finite state machine, FSM, switch-case, default case, state transition, memory padding, alignment, data payload, grouping variables, traffic light example, vending machine, magic numbers]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer system ki logic block flowchart banata hai aur `enum` use karke un states (jaise INIT, IDLE, ACTIVE, ERROR) ko code mein define karta hai, taaki switch-case mein arbitrary integers yaad na rakhne padein.
+* Fixing/Iteration Phase: Agar firmware memory unexpected tarah se full ho rahi hai, toh developer `struct` ke andar variables ka order adjust karta hai (memory alignment aur struct padding) taaki precious RAM waste na ho.
+* Live Production Phase: Production level RTOS queues (jaise FreeRTOS) ya I2C transmission mein, developer alag-alag variables bhejne ke bajaye ek single `struct` banakar uska pointer pass karta hai. FSM structure ensure karta hai ki CPU ek waqt pe strictly ek hi logical state run kare, jisse catastrophic hardware failures avoid hote hain.
+* Additional context: Speaker highlight karta hai ki pointers aur structs ka combination hi wo bridge hai jo Arduino sketches ko professional C firmware se alag karta hai.
+
+--23--Advanced Embedded C & Memory Management--
+Topic 4: Bitwise Operations & Direct Port Manipulation
+Subtopics: Bit Masking, Bit Shifting, AND/OR/XOR, Direct PORT Manipulation
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Mathematical logic + hardware coding
+* Key terms from transcript: bitwise, masking, shifting, PORTB, DDRB, clock cycles
+* Explicit emphasis by speaker: "digitalWrite is extremely slow. For microsecond precision, manipulate the hardware registers directly."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[bitwise operations, bit masking, bit shifting, `<<`, `>>`, `&`, `|`, `^`, `~`, hardware registers, `PORTB`, `DDRB`, `digitalWrite()` overhead, execution speed, microsecond precision, bare-metal C]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Developer `digitalWrite()` ko replace karke seedha hardware registers (`PORTB |= (1<<5)`) modify karta hai taaki pin toggle speed fast ho.
+* Fixing/Iteration Phase: Bit mask calculations verify karta hai taaki ek pin change karte waqt galti se dusri pins modify na ho jayein.
+* Live Production Phase: Custom high-speed sensor protocols mein bitwise operations hardware limits ko push karke fast execution ensure karte hain.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+==================================================================================
+
+# Section 24: Bare-Metal Peripherals (ADC & USART Registers)
+
+===Section 24: Bare-Metal Peripherals (ADC & USART Registers)===
+[🆕 Advanced Module] Is section mein standard analogRead() aur Serial.print() ki blocking limitations ko bypass karke, direct ADC registers aur USART hardware interrupts ko configure karna sikhaya gaya hai taaki maximum CPU efficiency achieve ho.
+
+--24--Bare-Metal Peripherals (ADC & USART Registers)--
+Topic 1: Fast ADC & Auto-Triggering (Free-Running Mode)
+Subtopics: ADMUX Register, ADCSRA Register, Free-Running Mode, ADC Interrupts, Voltage Reference (AREF)
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Register configuration and interrupt handling explanation
+* Key terms from transcript: ADMUX, ADCSRA, analogRead blocking, 13 ADC clock cycles, Free-Running mode, AREF, voltage reference
+* Explicit emphasis by speaker: "Standard analogRead() halts the CPU for 100 microseconds. For audio or fast control loops, you must use ADC interrupts in free-running mode."
+* Speaker ne jo analogies/examples use kiye: standard analogRead is like waiting at the counter for food; an ADC interrupt is like being handed food on a conveyor belt continuously without waiting.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[ADMUX, ADCSRA, ADC multiplexer, prescaler, free-running mode, auto-trigger, `ISR(ADC_vect)`, analogRead overhead, reference voltage, AREF, 5V, 1.1V internal, 10-bit resolution, non-blocking analog, bare-metal C]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer `analogRead()` ko hata kar ADMUX aur ADCSRA registers bitwise operator se set karta hai taaki ADC background mein continuous conversions karta rahe.
+* Fixing/Iteration Phase: Developer bitwise math verify karta hai taaki sahi channel (A0-A5) select ho bina doosre config bits ko overwrite kiye.
+* Live Production Phase: Audio processing ya fast PID motor control algorithms mein CPU completely free rehta hai aur ADC data directly hardware interrupt ke through arrays mein stream hota hai.
+
+--24--Bare-Metal Peripherals (ADC & USART Registers)--
+Topic 2: Interrupt-Driven USART (Bare-Metal Serial)
+Subtopics: UBRR0 Register, UCSR0A/B/C Registers, RX Complete Interrupt, Data Register Empty (UDRE)
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Hardware serial configuration without Arduino core libraries
+* Key terms from transcript: USART, baud rate register, UBRR0, UCSR0, TXEN0, RXEN0, RXCIE0, UDRE0, ISR
+* Explicit emphasis by speaker: "The standard Arduino Serial library uses a massive amount of RAM and hidden buffers. By writing your own USART driver, you save memory and gain total control over transmission."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[USART, UBRR0, UCSR0A, UCSR0B, UCSR0C, TXEN0, RXEN0, RXCIE0, RX complete interrupt, `ISR(USART_RX_vect)`, UDRE0, data register empty, bare-metal serial, memory footprint, circular buffer]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer standard `Serial.begin()` hatakar UBRR0 register ko set karke manually 9600 baud rate configure karta hai aur `ISR(USART_RX_vect)` likhta hai incoming data background mein catch karne ke liye.
+* Fixing/Iteration Phase: UART buffer overflows rokne ke liye developer ek custom lightweight circular buffer implement karta hai jo default library se chhota aur fast ho.
+* Live Production Phase: Memory-constrained industrial sensors (e.g. running on tiny ATmega chips) mein yeh custom UART driver standard Arduino libraries ke RAM footprint ko drastically reduce kar deta hai.
+
+
+--24--Bare-Metal Peripherals (ADC & USART Registers)--
+Topic 3: Hardware PWM & Motor Control (Bypassing analogWrite)
+Subtopics: Fast PWM Mode, Phase Correct PWM, Timer Control Registers (TCCR), Compare Output Mode (COM) Bits, Custom Duty Cycle Math, PWM Frequency Scaling
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation of timer waveforms + register code
+* Key terms from transcript: Fast PWM, Phase Correct PWM, TCCR0A, TCCR1A, COM1A1, duty cycle, TOP value, OCR1A, analogWrite overhead
+* Explicit emphasis by speaker: "analogWrite() uses predefined, slow frequencies. To control industrial motors or high-frequency LEDs without whining noises, you must manually configure the Timer's PWM registers."
+* Speaker ne jo analogies/examples use kiye: standard analogWrite is like riding a bicycle with one fixed gear; Hardware PWM registers give you a 21-speed gearbox to tune the exact frequency and power delivery.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Hardware PWM, Fast PWM, Phase Correct PWM, `TCCR1A`, `TCCR1B`, `COM1A1`, `WGM12`, `WGM13`, `OCR1A`, `ICR1`, TOP value, frequency calculation, duty cycle, motor driver, H-bridge, whining noise, oscilloscope, prescaler scaling]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer `analogWrite()` ko hata kar TCCR registers aur COM bits set karta hai taaki direct hardware pin pe 20kHz ka PWM signal generate ho.
+* Fixing/Iteration Phase: Developer motor se aane wali annoying "whining" sound ko eliminate karne ke liye prescaler adjust karta hai taaki PWM frequency human hearing range (>20kHz) ke bahar chali jaye.
+* Live Production Phase: Drone ESCs (Electronic Speed Controllers) aur precision robotics mein motor speed directly inhi hardware timer registers se control hoti hai taaki CPU free rahe aur latency strictly zero ho.
+
+
+--24--Bare-Metal Peripherals (ADC & USART Registers)--
+Topic 4: Bare-Metal SPI & I2C (TWI) Registers
+Subtopics: Dropping Wire/SPI Libraries, SPI Control Register (SPCR), SPI Data Register (SPDR), Two-Wire Interface (TWI), TWBR (Bit Rate), TWCR (Control), Master/Slave Bare-Metal Configuration
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Detailed register breakdown and bitwise flag checking
+* Key terms from transcript: SPI, TWI, I2C, SPCR, SPDR, TWCR, TWBR, polling flags, bare-metal communication, SPIF flag
+* Explicit emphasis by speaker: "The Wire library hides massive amounts of blocking code. For true control over your communication buses, you must write your own TWI and SPI drivers using the hardware registers."
+* Speaker ne jo analogies/examples use kiye: Using standard libraries is like sending a letter through the post office (you don't know how it gets there); writing to SPDR is like handing the letter directly to the courier.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Bare-metal SPI, SPCR, SPI Control Register, SPDR, SPI Data Register, SPIF flag, MSTR bit, SPE bit, Two-Wire Interface, TWI, I2C bare-metal, TWCR, TWBR, TWSR, TWINT flag, bit rate formula, hardware bus, removing `<Wire.h>`, removing `<SPI.h>`]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Developer completely removes `<SPI.h>` from their code and configures the `SPCR` register to set the Arduino as a Master, then writes a byte to `SPDR` to communicate with an SD card or sensor.
+* Fixing/Iteration Phase: Developer debugs I2C lockups by checking the `TWINT` flag in the `TWCR` register, ensuring the hardware has actually finished transmitting the byte before sending the next one.
+* Live Production Phase: In safety-critical embedded systems, developers use these custom bare-metal drivers to ensure exact timing and zero hidden library overhead when reading high-speed gyroscope or memory chip data.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
+# Section 25: Advanced I/O - UART Parsing & Data Persistence
+
+===Section 25: Advanced I/O - UART Parsing & Data Persistence===
+[⚠️ Derived] Speaker is section mein real-world communication aur storage sikhata hai — Serial monitor se incoming text commands ko C-Strings aur pointers ke through parse karna, aur power off hone ke baad bhi device ka state EEPROM mein save rakhna.
+
+--25--Advanced I/O - UART Parsing & Data Persistence--
+Topic 1: Non-Blocking UART Parsing & CLI (Command Line Interface)
+Subtopics: Serial.available(), Serial.read(), Ring Buffers, String Tokenization (strtok), String to Integer (atoi), Handling Line Endings (
+, \r), Buffer Overflow Protection
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation integrating Pointers and C-Strings from Section 5B to process incoming data
+* Key terms from transcript: UART, RX/TX, Serial.available(), Serial.read(), buffer array, char array, strtok, atoi, carriage return, line feed, payload, CLI
+* Explicit emphasis by speaker: "Never use Serial.readString() or Serial.parseInt() in production! They contain hidden delays that will block your CPU. We build our own non-blocking character buffers."
+* Speaker ne jo analogies/examples use kiye: A buffer array is like a mailbox; you check it one letter at a time without waiting for the postman, and strtok is like a pair of scissors cutting a sentence into words based on spaces or commas.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[UART, RX, TX, `Serial.available()`, `Serial.read()`, non-blocking read, incoming byte, `char` buffer, index counter, null terminator, `\0`, `
+`, `\r`, carriage return, line feed, string tokenization, `strtok()`, delimiter, `atoi()`, string to integer, buffer overflow, CLI, Command Line Interface, payload parsing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Serial Monitor mein "SET_SPEED:255" type karke bhejta hai, aur microcontroller us string ko receive karke `strtok` se split karta hai aur 255 ko integer mein convert karke motor ki speed set karta hai.
+* Fixing/Iteration Phase: Agar bad data ya lambi string aane par Arduino crash ho raha hai, toh developer code mein buffer limit check add karta hai (e.g., `if(index < BUFFER_SIZE - 1)`) taaki buffer overflow na ho.
+* Live Production Phase: Production mein, Arduino ek PC ya master device ke saath UART pe connected hota hai, aur continuously non-blocking way mein JSON-like ya comma-separated commands receive karta hai bina apne main FSM loops ko roke.
+* Additional context: Yeh topic directly Section 5B ke C-Strings aur Pointers ka practical application hai.
+
+--25--Advanced I/O - UART Parsing & Data Persistence--
+Topic 2: EEPROM & Non-Volatile Memory Management
+Subtopics: EEPROM Architecture, EEPROM.read() / EEPROM.write(), Storing Structs with EEPROM.put() / EEPROM.get(), Write Cycles limitation, Wear Leveling Basics
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Practical explanation focusing on memory limits and saving custom data types (Structs)
+* Key terms from transcript: EEPROM, non-volatile memory, power cycle, EEPROM.get(), EEPROM.put(), write cycles, 100,000 limit, wear leveling, calibration data
+* Explicit emphasis by speaker: "EEPROM has a physical limit of about 100,000 writes. If you put an EEPROM write inside your infinite loop by mistake, you will physically destroy that memory sector in a few seconds."
+* Speaker ne jo analogies/examples use kiye: RAM is like a whiteboard that gets wiped clean every night; EEPROM is like carving data into a stone tablet—it stays forever, but you can only carve over the same spot so many times before it breaks.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[EEPROM, non-volatile memory, power loss, `EEPROM.read()`, `EEPROM.write()`, `EEPROM.update()`, `EEPROM.put()`, `EEPROM.get()`, byte address, 1024 bytes, write cycle limit, 100,000 writes, hardware degradation, memory preservation, saving Structs, calibration parameters, state recovery]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer ek custom `struct` (jisme device configuration aur FSM state hai) banata hai aur `EEPROM.put()` use karke use memory mein save karta hai. USB nikal kar wapas lagane par `EEPROM.get()` se wahi state recover karta hai.
+* Fixing/Iteration Phase: Developer realize karta hai ki woh har second temperature save kar raha hai, jisse EEPROM jaldi kharab ho jayegi. Woh logic modify karke `EEPROM.update()` lagata hai (jo sirf tabhi write karta hai jab value actually change ho) ya sirf shutdown interrupt aane par save karta hai.
+* Live Production Phase: Industrial machines EEPROM use karte hain apne offsets, user settings, aur last known state ko save karne ke liye, taaki power cut hone ke baad system zero se start hone ke bajaye directly wahin se resume kare jahan se ruka tha.
+* Additional context: Structs ko direct memory block ki tarah EEPROM mein dalna pointers ka ek behtareen use case dikhata hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 26: Multitasking with FreeRTOS
+
+===Section 26: Multitasking with FreeRTOS===
+[🆕 Advanced 2026 Module] Speaker explain karta hai ki "Superloop" (void loop) kab fail hota hai, aur industry-standard Real-Time Operating Systems (RTOS) ka use karke true multi-threading kaise achieve ki jati hai.
+
+--26--Multitasking with FreeRTOS--
+Topic 1: RTOS vs Superloop Architecture
+Subtopics: Superloop Limitations, Schedulers, Context Switching, Preemptive Multitasking
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual only
+* Transcript mein content volume: Architectural explanation
+* Key terms from transcript: Superloop, RTOS, FreeRTOS, scheduler, task priorities, context switch, bare-metal
+* Explicit emphasis by speaker: "In professional 2026 firmware, you almost never put your main code inside the void loop."
+* Speaker ne jo analogies/examples use kiye: Superloop is like a chef cooking one dish at a time; RTOS is having multiple sous-chefs managed by a head chef (Scheduler).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Superloop, `void loop()`, RTOS, Real-Time Operating System, FreeRTOS, Zephyr, scheduler, preemptive multitasking, context switch, blocking architecture, tick rate, thread, bare-metal programming]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Learning Phase: Developer samajhta hai ki hardware interrupts aur `millis()` ki limits hain; complex IoT devices ko OS-level task scheduling ki zaroorat hoti hai.
+* Application Phase: Developer FreeRTOS library include karke apne microcontroller ko ek mini-computer ki tarah configure karta hai.
+* Mastery Phase: (N/A)
+
+--26--Multitasking with FreeRTOS--
+Topic 2: Creating Tasks & Priorities
+Subtopics: xTaskCreate, Task Handles, vTaskDelay, Priority Levels, Core Pinning (ESP32)
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Live coding + multi-task simulation
+* Key terms from transcript: xTaskCreate, TaskHandle_t, vTaskDelay, priority, starvation, stack size
+* Explicit emphasis by speaker: "Don't use standard delay() inside an RTOS task, always use vTaskDelay so the scheduler can run other tasks."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[`xTaskCreate()`, `TaskHandle_t`, stack size, task priority, `vTaskDelay()`, `pdMS_TO_TICKS`, task starvation, infinite task loop, multicore, ESP32 core pinning, idle task]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer 3 alag functions (Blink LED, Read Sensor, Print Serial) ko `void loop` se nikaal kar alag-alag FreeRTOS tasks banata hai `xTaskCreate` se.
+* Fixing/Iteration Phase: Agar sensor reading slow ho jati hai, toh developer us task ki priority badha deta hai (e.g., Priority 3) aur UI print task ki priority kam kar deta hai (Priority 1).
+* Live Production Phase: Production system independently tasks run karta hai; agar WiFi module disconnect/hang hota hai, toh bhi motor control task seamlessly chalta rehta hai kyunki OS resources manage kar raha hai.
+
+--26--Multitasking with FreeRTOS--
+Topic 3: Mutexes, Semaphores & Queues
+Subtopics: Race Conditions, Memory Collisions, Mutex Locks, Inter-Task Communication (Queues)
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Complex logic explanation with code fixes
+* Key terms from transcript: race condition, Mutex, binary semaphore, Queue, thread-safe
+* Explicit emphasis by speaker: "Never let two tasks write to the exact same variable or hardware pin at the same time."
+* Speaker ne jo analogies/examples use kiye: Mutex is like the key to a single-occupancy bathroom. Only the task with the key can enter the code block.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[race condition, memory collision, thread-safe, Mutex, Semaphore, `xSemaphoreCreateMutex()`, `xSemaphoreTake()`, `xSemaphoreGive()`, IPC, Inter-Process Communication, Queues, `xQueueSend()`, `xQueueReceive()`]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer Queues banata hai jahan Sensor Task data Queue mein push karta hai, aur Networking Task wahan se data pull karke internet pe bhejta hai (Inter-Task communication).
+* Fixing/Iteration Phase: Jab do tasks ek saath Serial Monitor print karne ki koshish karte hain aur text mix ho jata hai (race condition), developer wahan Mutex lock lagata hai.
+* Live Production Phase: Enterprise-level embedded systems multi-threading mein crash free chalte hain kyunki saare shared resources logically locked aur synchronized hote hain.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 27: Robust Firmware: Watchdogs & TDD
+
+===Section 27: Robust Firmware: Watchdogs & TDD===
+[🆕 Advanced Module] Is section mein professional fail-safes (Watchdog Timer) aur Test-Driven Development (TDD) introduce kiya gaya hai.
+
+--27--Robust Firmware: Watchdogs & TDD--
+Topic 1: Watchdog Timer & Unit Testing
+Subtopics: avr/wdt.h, System Freezes, Hardware Reset, Unity Framework, Logic Testing
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: System fail-safe coding + Testing methodology
+* Key terms from transcript: Watchdog Timer, lockup, petting the dog, Test-Driven Development, Unity
+* Explicit emphasis by speaker: "If your Arduino is deployed remotely, a Watchdog is mandatory. Test your math on your computer before flashing to the board."
+* Speaker ne jo analogies/examples use kiye: "Petting the dog" — feed the watchdog regularly, if you forget (code hangs), the dog bites (hard resets the system).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Watchdog Timer, WDT, hardware reset, `<avr/wdt.h>`, infinite loop crash, `wdt_enable()`, `wdt_reset()`, WDTO_2S, petting the dog, Test-Driven Development, TDD, automated testing, Unity framework, CI/CD pipeline, `TEST_ASSERT_EQUAL()`]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer setup mein 2-second ka Watchdog timer configure karta hai aur `loop()` mein `wdt_reset()` call karta hai. Saath hi apne math functions ka Unit Test PC pe run karke verify karta hai.
+* Fixing/Iteration Phase: Developer intentionally ek infinite loop banata hai aur dekhta hai ki 2 second baad Arduino automatically reboot hota hai ya nahi.
+* Live Production Phase: Remote weather stations mahino tak chalte hain kyunki Watchdog timer glitch aane par unhe automatically self-heal (reboot) kar deta hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
 # Section 28: Production Deployment (AVR Bare-Metal)
 
 ===Section 28: Production Deployment (AVR Bare-Metal)===
-[🆕 Advanced Module] Speaker sikhata hai ki final product ko Arduino IDE se nahi, balki HEX files, AVRDUDE, aur low-power sleep modes se deploy kaise karte hain.
+[⚠️ Advanced Module] Speaker sikhata hai ki final product ko Arduino IDE se nahi, balki HEX files, AVRDUDE, aur low-power sleep modes se deploy kaise karte hain.
 
 --28--Production Deployment (AVR Bare-Metal)--
-Topic 1: Power Management & AVRDUDE Flashing
-Subtopics: avr/sleep.h, Power Down Mode, Wake on Interrupt, .hex binaries, Bootloaders, avrdude
+Topic 1: The AVR Toolchain & Makefiles (Ditching the IDE)
+Subtopics: avr-gcc Compiler, Object Files (.o), Linking, Makefile Structure, Build Automation, Generating the .hex file
 
 [📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Terminal workflow explanation and Makefile line-by-line breakdown
+* Key terms from transcript: avr-gcc, Makefile, compiler, linker, object files, hex binary, avr-objcopy, build system
+* Explicit emphasis by speaker: "You cannot call yourself a bare-metal embedded engineer if you still rely on the Arduino IDE's compile button. You must know how to build your code from the command line using Make."
+* Speaker ne jo analogies/examples use kiye: The IDE compile button is like a microwave dinner; using avr-gcc and a Makefile is like cooking a meal from scratch where you control every single ingredient and temperature.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[AVR toolchain, `avr-gcc`, compiler flags, `-Os`, `-Wall`, `-mmcu=atmega328p`, linker, object files, `.o`, Makefile, build automation, `make all`, `make clean`, `avr-objcopy`, `.hex` generation, ELF file, command line interface, ditching the IDE]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer sets up a simple text editor (like VS Code) and writes a `Makefile` that specifies the microcontroller target and compiler optimization flags (`-Os`).
+* Fixing/Iteration Phase: Developer runs `make` in the terminal, reads the raw `avr-gcc` compiler errors, fixes syntax issues in their C code, and successfully generates the final `.hex` file.
+* Live Production Phase: In professional CI/CD pipelines (like GitHub Actions), automated servers run these exact Makefiles to compile the firmware and check for errors before the code is ever flashed onto a production machine.
+
+--28--Production Deployment (AVR Bare-Metal)--
+Topic 2: Power Management & AVRDUDE Flashing
+Subtopics: avr/sleep.h, Power Down Mode, Wake on Interrupt, .hex binaries, Bootloaders, avrdude
+
+[📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
@@ -3536,14 +3631,39 @@ Subtopics: avr/sleep.h, Power Down Mode, Wake on Interrupt, .hex binaries, Bootl
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 1:
+🔑 KEYWORDS DUMP for Topic 2:
 [power management, `<avr/sleep.h>`, `set_sleep_mode()`, `SLEEP_MODE_PWR_DOWN`, `sleep_cpu()`, wake-up interrupt, low power, microamps, compiled binary, `.hex` file, AVRDUDE, command line interface, bootloader, `avrdude -c arduino -p m328p -U flash:w:main.hex:i`]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
 * Testing/Offline Phase: Developer loop ke end mein Arduino ko `SLEEP_MODE_PWR_DOWN` bhejta hai aur wakeup ke liye external pin interrupt (Pin 2) configure karta hai.
 * Fixing/Iteration Phase: Terminal open karke `avrdude` command ke through `.hex` file ko Arduino par directly flash karta hai bina IDE open kiye.
 * Live Production Phase: Factories mein mass programming scripts ka use karke ek saath saikdon custom PCBs (with ATmega chips) par firmware load kiya jata hai, jo battery pe saalon tak chalte hain due to sleep modes.
+
+--28--Production Deployment (AVR Bare-Metal)--
+Topic 3: AVR Fuses, Clock Sources & Brown-Out Detection
+Subtopics: Fuse Bits Architecture, Low Fuse, High Fuse, Extended Fuse, Internal vs External Oscillator, BODLEVEL (Brown-Out Detection), AVRDUDE Fuse Flashing
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Hardware safety explanation + terminal commands
+* Key terms from transcript: Fuse bits, clock source, 16MHz crystal, 8MHz internal, Brown-out detection, BOD, bricking the chip, avrdude terminal
+* Explicit emphasis by speaker: "If you deploy a custom PCB without setting the BOD fuse, a dying battery will cause voltage drops that will permanently corrupt your EEPROM memory."
+* Speaker ne jo analogies/examples use kiye: Brown-Out Detection (BOD) is like a pilot ejecting safely right before the plane crashes; it holds the CPU in reset during dangerous low-voltage states to prevent memory corruption.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[AVR Fuses, fuse bits, Low Fuse, High Fuse, Extended Fuse, `lfuse`, `hfuse`, `efuse`, clock source, 16MHz crystal, 8MHz internal oscillator, Brown-Out Detection, BOD, BODLEVEL, EEPROM corruption, voltage drop, `avrdude -c usbtiny -p m328p -U lfuse:w:0xFF:m`, bricking]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer custom PCB design karne ke baad terminal mein `avrdude` commands likhkar external 16MHz crystal activate karne ke liye Low Fuse flash karta hai.
+* Fixing/Iteration Phase: Developer battery drain hone par EEPROM mein garbage data save hone ki problem ko fix karne ke liye 2.7V ka BOD (Brown-Out Detection) fuse enable karta hai.
+* Live Production Phase: Factory environment mein, firmware `.hex` flash hone ke turant baad script automatic fuse flashing karti hai taaki har microcontroller strict hardware parameters (clock speed, safety voltage limits) par lock ho jaye.
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 
 ==================================================================================
