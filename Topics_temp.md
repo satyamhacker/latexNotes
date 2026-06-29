@@ -775,10 +775,34 @@ Subtopics: Pointer Declaration, Pass by Reference, Heap Fragmentation, Char Arra
 * Live Production Phase: Ek Arduino node mahino tak bina restart hue consistently chalta hai kyunki char arrays memory fragmentation (RAM leakage) create nahi karte.
 
 --5B--Advanced Embedded C & Memory Management--
-Topic 2: Bitwise Operations & Fast Register Access
-Subtopics: Bit Masking, Bit Shifting, AND/OR/XOR, Direct PORT Manipulation
+**Topic 2: Structs, Enums & Finite State Machines (FSM)**
+Subtopics: `enum` State Definitions, `struct` Data Grouping, `typedef` usage, Memory Alignment/Padding, FSM Architecture, Switch-Case state handling
 
 [📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation integrating previous concepts (millis + interrupts) into a unified FSM framework
+* Key terms from transcript: struct, enum, typedef, finite state machine, FSM, switch-case, state transition, memory padding, data payload
+* Explicit emphasis by speaker: "Magic numbers are terrible for state management. Always use enums to define your machine states, and pack your related sensor variables into structs."
+* Speaker ne jo analogies/examples use kiye: Struct is like a custom "filing cabinet" that holds different data types (int, float, bool) in one folder. FSM is like a vending machine transitioning between "Waiting for Coin", "Dispensing", and "Error" states.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[struct, custom data type, typedef, enum, enumeration, states, finite state machine, FSM, switch-case, default case, state transition, memory padding, alignment, data payload, grouping variables, traffic light example, vending machine, magic numbers]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer system ki logic block flowchart banata hai aur `enum` use karke un states (jaise INIT, IDLE, ACTIVE, ERROR) ko code mein define karta hai, taaki switch-case mein arbitrary integers yaad na rakhne padein.
+* Fixing/Iteration Phase: Agar firmware memory unexpected tarah se full ho rahi hai, toh developer `struct` ke andar variables ka order adjust karta hai (memory alignment aur struct padding) taaki precious RAM waste na ho.
+* Live Production Phase: Production level RTOS queues (jaise FreeRTOS) ya I2C transmission mein, developer alag-alag variables bhejne ke bajaye ek single `struct` banakar uska pointer pass karta hai. FSM structure ensure karta hai ki CPU ek waqt pe strictly ek hi logical state run kare, jisse catastrophic hardware failures avoid hote hain.
+* Additional context: Speaker highlight karta hai ki pointers aur structs ka combination hi wo bridge hai jo Arduino sketches ko professional C firmware se alag karta hai.
+
+--5B--Advanced Embedded C & Memory Management--
+Topic 3: Bitwise Operations & Fast Register Access
+Subtopics: Bit Masking, Bit Shifting, AND/OR/XOR, Direct PORT Manipulation
+
+[📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
 * Coverage Angle: Both
@@ -788,10 +812,10 @@ Subtopics: Bit Masking, Bit Shifting, AND/OR/XOR, Direct PORT Manipulation
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 2:
+🔑 KEYWORDS DUMP for Topic 3:
 [bitwise operations, bit masking, bit shifting, `<<`, `>>`, `&`, `|`, `^`, `~`, hardware registers, `PORTB`, `DDRB`, `digitalWrite()` overhead, execution speed, microsecond precision, bare-metal C]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
 * Testing/Offline Phase: Developer `digitalWrite()` ko replace karke seedha hardware registers (`PORTB |= (1<<5)`) modify karta hai taaki pin toggle speed fast ho.
 * Fixing/Iteration Phase: Bit mask calculations verify karta hai taaki ek pin change karte waqt galti se dusri pins modify na ho jayein.
