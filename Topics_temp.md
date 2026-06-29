@@ -766,12 +766,12 @@ Subtopics: Pointer Declaration, Pass by Reference, Heap Fragmentation, Char Arra
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[pointer, memory address, `&` ampersand, `*` asterisk, pass by reference, memory footprint, stack memory, heap fragmentation, `char` array, C-strings, ` ` null terminator, `<string.h>`, `strcpy()`, `sprintf()`, memory crash]
+[pointer, memory address, `&` ampersand, `*` asterisk, pass by reference, memory footprint, stack memory, heap fragmentation, `char` array, C-strings, `\0` null terminator, `<string.h>`, `strcpy()`, `sprintf()`, memory crash]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
 * Testing/Offline Phase: Developer purane Arduino code se `String` hata kar `char array` likhta hai aur large structs ko pass karne ke liye pointers use karta hai.
-* Fixing/Iteration Phase: Developer null terminator ` ` missing hone ki wajah se aane wale garbage data ko debug karke fix karta hai.
+* Fixing/Iteration Phase: Developer null terminator `\0` missing hone ki wajah se aane wale garbage data ko debug karke fix karta hai.
 * Live Production Phase: Ek Arduino node mahino tak bina restart hue consistently chalta hai kyunki char arrays memory fragmentation (RAM leakage) create nahi karte.
 
 --5B--Advanced Embedded C & Memory Management--
@@ -3359,3 +3359,6 @@ Subtopics: avr/sleep.h, Power Down Mode, Wake on Interrupt, .hex binaries, Bootl
 * Testing/Offline Phase: Developer loop ke end mein Arduino ko `SLEEP_MODE_PWR_DOWN` bhejta hai aur wakeup ke liye external pin interrupt (Pin 2) configure karta hai.
 * Fixing/Iteration Phase: Terminal open karke `avrdude` command ke through `.hex` file ko Arduino par directly flash karta hai bina IDE open kiye.
 * Live Production Phase: Factories mein mass programming scripts ka use karke ek saath saikdon custom PCBs (with ATmega chips) par firmware load kiya jata hai, jo battery pe saalon tak chalte hain due to sleep modes.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
