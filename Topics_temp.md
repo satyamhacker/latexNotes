@@ -1,5 +1,4 @@
-# Module 1: 
-
+# Module 1: Basic Components, Ohm's Law & Multimeter Safety (Resistors, Fuses)
 📦 Processing: Phase 1 — Electronics Components & Repair (Module 1)
 
 ===Section 1: Electronics Components Foundation & Testing [⚠️ Derived]===
@@ -157,9 +156,7 @@ Sections: 1 | Topics: 5 | Subtopics: 60
 ==================================================================================
 
 
-# Module 2:
-
-
+# Module 2: Energy Storage & Filtering (Capacitors, Inductors & Potentiometers)
 📦 Processing: Phase 2 — Electronics Components & Repair (Module 2)
 
 ===Section 2: Current Control, Storage & Filtering [⚠️ Derived]===
@@ -280,8 +277,7 @@ Sections: 1 | Topics: 4 | Subtopics: 58
 
 ==================================================================================
 
-# Module 3: 
-
+# Module 3: AC Voltage, Surge Protection & Timing (Transformers, MOVs & Crystals)
 📦 Processing: Phase 1 — Module 3: Electronics Components (Voltage, Protection & Timing)
 
 ===Section 1: Voltage Modification, Protection & Timing [⚠️ Derived]===
@@ -404,8 +400,7 @@ Sections: 1 | Topics: 4 | Subtopics: 36
 
 ==================================================================================
 
-# Module 4:
-
+# Module 4: Electromechanical Parts (Switches, Relays, Motors & Speakers)
 📦 Processing: Phase 1 — Module 4: Electromechanical Components
 
 ===Section 1: Electromechanical Components (Movements & Switching) [⚠️ Derived]===
@@ -557,8 +552,7 @@ Sections: 1 | Topics: 5 | Subtopics: 41
 
 ==================================================================================
 
-# Module 5: 
-
+# Module 5: Power Math, Batteries & Schematics (Series/Parallel, Lithium & TP4056)
 📦 Processing: Phase 1 — Module 5 (Electronics Formulas, Batteries & Abbreviations)
 
 ===Section 1: Electronics Formulas & Components Setup [⚠️ Derived]===
@@ -718,8 +712,7 @@ Sections: 1 | Topics: 5 | Subtopics: 16
 
 ==================================================================================
 
-# Module 6:
-
+# Module 6: Diodes & Rectification (Standard, Schottky, Zener & Bridge Rectifiers)
 📦 Processing: Phase 1 — Module 6 Diodes
 
 ===Section 1: Diodes & Rectification (Module 6) [⚠️ Derived]===
@@ -844,8 +837,7 @@ Sections: 1 | Topics: 3 | Subtopics: 46
 
 ==================================================================================
 
-# Module 7: 
-
+# Module 7: Transistors & High-Speed Switching (BJTs, FETs & MOSFETs)
 📦 Processing: Phase 1 — Module 7 Transistors
 
 ===Section 1: Bipolar Junction Transistor (BJT) (Module 7) [⚠️ Derived]===
@@ -1011,9 +1003,7 @@ Sections: 2 | Topics: 4 | Subtopics: 49
 
 ==================================================================================
 
-# Module 8: 
-
-
+# Module 8: High-Power AC Switching (SCR, Diac & Triac)
 📦 Processing: Phase 1 — Module 8 (Thyristors)
 
 ===Section 1: Module 8 - Thyristors [⚠️ Derived]===
@@ -1151,9 +1141,7 @@ Sections: 1 | Topics: 3 | Subtopics: 28
 
 ==================================================================================
 
-# Module 9:
-
-
+# Module 9: Light Sensors & Optoelectronics (LDRs, Solar Cells & Optocouplers)
 📦 Processing: Phase/Module 9 — Optoelectronics
 
 ===Section 1: Module 9 - Optoelectronics [⚠️ Derived]===
@@ -1374,8 +1362,7 @@ Sections: 1 | Topics: 5 | Subtopics: 56
 
 ==================================================================================
 
-# Module 10:
-
+# Module 10: Integrated Circuits (ICs, Voltage Regulators, Op-Amps & 555 Timers)
 📦 Processing: Phase/Module 10 — Integrated Circuits (ICs) & Repair
 
 ===Section 1: Integrated Circuits (ICs) Foundation [⚠️ Derived]===
@@ -1535,9 +1522,7 @@ Sections: 1 | Topics: 4 | Subtopics: 59
 
 ==================================================================================
 
-# Module 11: 
-
-
+# Module 11: Systematic Troubleshooting & Repair Masterclass (Step-by-Step SOP)
 📦 Processing: Phase/Module 11 — Electronics Components & Repair Summary
 
 ===Section 1: Component Testing Summaries & Systematic Circuit Repair [⚠️ Derived]===
@@ -1681,9 +1666,7 @@ Sections: 1 | Topics: 3 | Subtopics: 24
 
 ==================================================================================
 
-# Module 12:
-
-
+# Module 12: Modern Hardware Design (Prototyping, SMD, Buck/Boost & Connectors)
 📦 Processing: Phase 1 — Module 12: Industry Topics
 
 ===Section 12: Industry Topics (Prototyping, SMD, Modern Power) [⚠️ Derived]===
@@ -1802,9 +1785,7 @@ Sections: 1 | Topics: 4 | Subtopics: 27
 
 ==================================================================================
 
-# Module 13:
-
-
+# Module 13: Circuit Stability, Noise Filtering & Board Protection (TVS, PTC & ESP32 Brownouts)
 📦 Processing: Phase 1 — Module 13: Circuit Stability & Protection
 
 ===Section 13: Circuit Stability & Protection [⚠️ Derived]===
@@ -1947,9 +1928,7 @@ Sections: 1 | Topics: 5 | Subtopics: 29
 
 ==================================================================================
 
-# Module 14:
-
-
+# Module 14: IoT & Robotics Interfacing (Sensors, Motor Drivers, Relays & Smart LEDs)
 📦 Processing: Phase 1 — Module 14: Industry Topics - IoT/Robotics (Input/Output)
 
 ===Section 14: IoT & Robotics (Input/Output) [⚠️ Derived]===
@@ -2236,9 +2215,7 @@ Sections: 1 | Topics: 11 | Subtopics: 42
 ==================================================================================
 
 
-# Module 15:
-
-
+# Module 15: User Interface & Audio (Switches, Encoders, OLEDs & Amplifiers)
 📦 Processing: Phase 1 — Module 15 (UI & Audio)
 
 ===Section 15: User Interface & Audio===
@@ -2339,8 +2316,7 @@ Sections: 1 | Topics: 3 | Subtopics: 36
 
 ==================================================================================
 
-# Module 16:
-
+# Module 16: PCB Design Fundamentals & Hardware Safety (Traces, Isolation & Logic)
 📦 Processing: Phase 1 — Module 16: PCB Design Fundamentals & Hardware Safety
 
 ===Section 16: PCB Design Fundamentals & Hardware Safety [⚠️ Derived]===
