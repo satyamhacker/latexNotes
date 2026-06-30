@@ -245,83 +245,54 @@ Subtopics: RealVNC Viewer Installation, Desktop Connection, Changing Default Pas
 
 * Testing/Offline Phase: Developer apne main PC pe "RealVNC Viewer" install karke Pi ke IP aur new password se graphical desktop access karta hai. Phir initial wizard ke through password change karta hai aur system packages update karta hai.
 * Fixing/Iteration Phase: Agar VNC screen ka resolution fit nahi ho raha ya black borders hain, toh developer terminal khol kar `sudo nano /boot/config.txt` open karta hai aur specific framebuffer line ko hashtag se comment out karke save karta hai.
-* Live Production Phase: Jab kaam khatam ho jaye, toh Pi ko hamesha GUI menu ya command se proper 'shut down' kiya jata hai, aur screen black hone ke baad hi power cable remove ki jaati hai SD card corruption se bachne ke liye.
-* Additional context: VNC viewer Pi ke restart hone pe automatically connection retry karta rehta hai.
+* Live Production Phase: Jab kaam khatam ho jaye, toh Pi ko hamesha GUI menu ya command se proper 'shut down' kiya jata hai, aur screen black hone===Section 3: Professional Development Workflow (VS Code & PlatformIO)===
+Speaker is section mein outdated VNC aur Arduino IDE workflow ko replace karke, VS Code Remote SSH aur PlatformIO ke through ek fast, headless, aur professional development environment set up karna sikhata hai.
 
-===Section 3: Arduino IDE Setup on Raspberry Pi===
-Speaker is section mein batata hai ki Arduino IDE ko directly Raspberry Pi OS pe kaise install aur configure karein, taaki development workflow fast aur seamless ho jaye.
-
---3--Arduino IDE Setup on Raspberry Pi--
-Topic 1: The Workflow Advantage
-Subtopics: Development Workflow, Unplug-Plug Cycle, Direct Programming
+--3--Professional Development Workflow (VS Code & PlatformIO)--
+Topic 1: Headless Remote Development (VS Code SSH)
+Subtopics: VS Code Remote Explorer, SSH Key Authentication, File Synchronization, Terminal Integration
 
 [📊 SCOPE SIGNAL for Topic 1:
 
-* Depth Level: Surface
-* Coverage Angle: Conceptual only
-* Transcript mein content volume: Short explanation of the problem and solution
-* Key terms from transcript: Arduino I.D., upload, Python program, unplug, plug
-* Explicit emphasis by speaker: Direct Pi pe IDE install karne se "it can save you a lot of pain" by avoiding repetitive hardware plugging/unplugging.
-* Speaker ne jo analogies/examples use kiye: None
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Step-by-step IDE setup
+* Key terms from transcript: VS Code, Remote SSH, headless, lag-free, SSH keys, ssh-keygen
+* Explicit emphasis by speaker: "Never write code on the Pi directly via VNC. Use your powerful PC and edit remotely over SSH."
+* Speaker ne jo analogies/examples use kiye: Typing locally but the code is saving directly on the Pi's filesystem.
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[Arduino I.D.[unclear], Windows, Mac, Linux, upload, Python program, unplug, plug, modify the original program]
+[VS Code, Visual Studio Code, Remote SSH extension, headless setup, ssh-keygen, passwordless login, latency-free, integrated terminal, local development, remote execution]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: Standard approach mein developer code apne main PC pe likhta hai, Arduino ko PC se connect karke code upload karta hai, phir wahan se unplug karke Pi se connect karta hai testing ke liye.
-* Fixing/Iteration Phase: Agar code change karna ho, toh developer ko baar-baar Arduino ko Pi se nikal kar wapas PC mein lagana padta hai, jo bohot frustrating workflow hai.
-* Live Production Phase: Is cycle ko todne ke liye, developer Arduino IDE ko direct Raspberry Pi pe install kar leta hai. Ab Arduino hamesha Pi se connected rehta hai aur wahi se re-program aur test hota hai.
-* Additional context: N/A
+* Testing/Offline Phase: Developer apne Windows/Mac par VS Code open karta hai, "Remote - SSH" extension install karta hai, aur Pi ka IP daal kar connect karta hai.
+* Fixing/Iteration Phase: Baar-baar password daalne se bachne ke liye developer `ssh-keygen` se public key generate karta hai aur use Pi par push karta hai (Passwordless auth).
+* Live Production Phase: Developer ko VNC lag face nahi karna padta. Woh apne PC ke smooth interface mein code likhta hai, aur terminal par command chalate hi code direct Pi par execute hota hai.
 
---3--Arduino IDE Setup on Raspberry Pi--
-Topic 2: Linux Terminal Installation
-Subtopics: Outdated APT Version Warning, Architecture Verification, Tar Archive Extraction, Moving to Opt Directory, Install Script Execution
+--3--Professional Development Workflow (VS Code & PlatformIO)--
+Topic 2: PlatformIO for Professional C++ (Replacing Arduino IDE)
+Subtopics: PlatformIO Extension, platformio.ini Configuration, Library Management, CLI Flashing
 
 [📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation of terminal commands for downloading and extracting software
-* Key terms from transcript: sudo apt get install arduino, 32 of 64 bits, you name Space Dash, M32, pseudo M. V., slash of it, install each
-* Explicit emphasis by speaker: "Don't do that" — explicitly warns NOT to use `sudo apt get install arduino` kyunki repo mein version old aur outdated hota hai.
-* Speaker ne jo analogies/examples use kiye: None
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation of migrating from .ino to modern C++
+* Key terms from transcript: PlatformIO, PIO, platformio.ini, dependency management, framework=arduino
+* Explicit emphasis by speaker: Arduino IDE lacks proper autocomplete and version control. PlatformIO is mandatory for industry projects.
+* Speaker ne jo analogies/examples use kiye: Arduino IDE is like a bicycle with training wheels; PlatformIO is a sports car.
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[AAPT[unclear], sudo apt get install arduino, web browser, Google, software, Linux, 32 of 64 bits, you name Space Dash[unclear], `uname -m`, L m v seven L[unclear], armv7l, x eighty six 64[unclear], x86_64, terminal, home directorate, Downloads folder, the space Dash X if[unclear], `tar -xf`, auto completion, pseudo M. V.[unclear], `sudo mv`, slash of it[unclear], `/opt/`, city slash[unclear], `cd /opt/`, script, install each[unclear], `sudo ./install.sh`, uninstall script]
+[PlatformIO, PIO, VS Code extension, `platformio.ini`, `main.cpp`, dependency management, `lib_deps`, Arduino framework, ESP-IDF, cross-platform compile, `pio run -t upload`]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: Developer web browser open karke Arduino ki official site pe jata hai. Apne Pi ka architecture check karne ke liye `uname -m` run karta hai (32-bit vs 64-bit confirm karne ke liye), aur correct Linux tar file download karta hai.
-* Fixing/Iteration Phase: Phir developer terminal mein `tar -xf` se archive extract karta hai, extracted folder ko `sudo mv` command use karke `/opt/` directory mein move karta hai system-wide access ke liye, aur wahan jaake `sudo ./install.sh` run karke IDE properly install karta hai.
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi live production phase describe nahi kiya gaya)
-* Additional context: Speaker clearly dikhata hai ki apt-get ka default version skip karke manual tarball method kaise secure and latest IDE deta hai.
-
---3--Arduino IDE Setup on Raspberry Pi--
-Topic 3: IDE Preferences & Testing
-Subtopics: Font Size Configuration, Line Numbers Enable, Preferences.txt Modification, Board & Port Selection, Upload Test
-
-[📊 SCOPE SIGNAL for Topic 3:
-
-* Depth Level: Moderate
-* Coverage Angle: Practical only
-* Transcript mein content volume: Short explanation of UI settings and file editing
-* Key terms from transcript: programming menu, font size, display line numbers, sketchbook, preferences.txt, console us, board Arduino Uno
-* Explicit emphasis by speaker: Speaker strictly emphasize karta hai: "Before you open that file, you closed the IDE... Very important." (preferences.txt open karne se pehle Arduino IDE band karna zaroori hai).
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 3:
-[menu programming, Arduino icon, fine preferences[unclear], font size, 14, display line numbers, sketchbook, home directory, more preferences can be edited directly in the fight here[unclear], preferences.txt, ed not front[unclear], editor.font, A. Beast[unclear], console us[unclear], Consolas, control s, USB cable, board Arduino Uno, nano, omega, aluminum unibody[unclear], /dev/ttyACM0, /dev/ttyUSB0, compiling, uploading, empty program, cellular communication[unclear], serial communication]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-
-* Testing/Offline Phase: IDE start karke developer UI preferences se font size aur line numbers set karta hai. Advanced font change (e.g. Consolas) ke liye IDE close karke `preferences.txt` file manually edit karta hai.
-* Fixing/Iteration Phase: Setup verify karne ke liye, developer Arduino Uno ko Pi se USB ke through connect karta hai, Tools menu mein correct Board aur Port (`ttyACM0` ya similar) select karta hai, aur ek empty program compile aur upload karke test karta hai.
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi live production phase describe nahi kiya gaya)
-* Additional context: Uploading test successful hone ka matlab hai ki dono boards hardware/software level pe ready hain serial communication shuru karne ke liye.
+* Testing/Offline Phase: Developer VS Code (connected to Pi via SSH) mein PlatformIO install karta hai. Ek naya project banata hai aur `platformio.ini` mein board (e.g., `uno` ya `esp32dev`) define karta hai.
+* Fixing/Iteration Phase: External libraries (jaise Servo ya LiquidCrystal) ko zip file se manually daalne ke bajaye, developer unka naam `lib_deps` mein likhta hai, aur PIO unhe auto-download kar leta hai.
+* Live Production Phase: Developer `pio run -t upload` command se direct Pi ke terminal se Arduino ko flash kar deta hai bina kisi GUI interface ko open kiye.
 
 ---
 
@@ -336,6 +307,13 @@ Section 2: Raspberry Pi OS Installation & Headless Setup
   Topic 3: Initial SSH Connection
   Topic 4: Enabling VNC Server via raspi-config
   Topic 5: VNC Client Setup & OS Configuration
+
+Section 3: Professional Development Workflow (VS Code & PlatformIO)
+  Topic 1: Headless Remote Development (VS Code SSH)
+  Topic 2: PlatformIO for Professional C++ (Replacing Arduino IDE)
+
+📊 PHASE SUMMARY:
+Sections: 2 | Topics: 7 | Subtopics: 42uration
 
 Section 3: Arduino IDE Setup on Raspberry Pi
   Topic 1: The Workflow Advantage
@@ -526,6 +504,29 @@ Subtopics: Port Busy Errors, SerialException Handling, Auto-Reconnect Loop, Retr
 * Live Production Phase: Speaker explicitly batata hai ki yeh auto-reconnect mechanism final production project me use hoga taaki system robust bane aur disconnects ko handle kar sake.
 * Additional context: Speaker suggest karta hai ki ek maximum retry limit (e.g., 10 times) bhi implement ki ja sakti hai taaki infinite loop avoid ho sake.
 
+--1--PART 1 - Serial Communication Between Raspberry Pi and Arduino--
+Topic 8: Persistent Hardware Binding (Udev Rules)
+Subtopics: Identifying USB Devices, lsusb, udevadm, Creating Rules, Symlinks
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Terminal commands for Linux device management
+* Key terms from transcript: udev rules, symlink, lsusb, vendor ID, product ID, persistent naming
+* Explicit emphasis by speaker: "If you plug in a camera and an Arduino, your Pi might swap their ports on reboot. Udev rules fix this permanently."
+* Speaker ne jo analogies/examples use kiye: Calling a person by their ID card (Vendor ID) instead of the seat they are sitting on (ACM0/ACM1).
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[`lsusb`, `udevadm info`, Vendor ID, Product ID, ATmega328P, `/etc/udev/rules.d/`, `99-usb-serial.rules`, `SUBSYSTEM=="tty"`, `ATTRS{idVendor}`, `SYMLINK+="arduino_main"`, persistent port, `udevadm control --reload-rules`]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Testing/Offline Phase: Developer Pi terminal par `lsusb` chalata hai aur Arduino ka Vendor ID/Product ID nikalta hai.
+* Fixing/Iteration Phase: Developer `/etc/udev/rules.d/` mein ek rule file banata hai ki jab bhi yeh specific Vendor ID wala device plug ho, OS use `ttyACM0` ke bajaye `/dev/arduino_main` ka naam (symlink) de.
+* Live Production Phase: Python script mein ab `/dev/ttyACM0` ki jagah `/dev/arduino_main` likha jata hai. Ab factory mein board restart ho ya alag USB port mein plug ho, code kabhi crash nahi hoga kyunki naam hamesha fix rahega.
+
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
@@ -538,9 +539,10 @@ Topic 4: Connection Initialization Sequence
 Topic 5: Reading & Writing Data (Unidirectional)
 Topic 6: Bi-directional Communication Flow
 Topic 7: Exception Handling & Auto-Reconnect
+Topic 8: Persistent Hardware Binding (Udev Rules)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 36
+Sections: 1 | Topics: 8 | Subtopics: 41
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1339,28 +1341,27 @@ Subtopics: Bot Initialization, Chat ID Retrieval, Sending Messages
 * Additional context: (N/A)
 
 --5--Programming the Telegram Bot [⚠️ Derived]--
-Topic 3: Combining Polling and Notifications [⚠️ Derived]
-Subtopics: Continuous Loop Structure, Threading Behavior, Graceful Shutdown
+Topic 3: Production Bot Deployment (Webhooks & Reverse Proxy)
+Subtopics: Polling vs Webhooks, FastAPI/Flask Integration, Ngrok/Cloudflare Tunnels, Payload Routing
 
 [📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Multiple examples + code + demo
-* Key terms from transcript: while True, time.sleep, threading, try except KeyboardInterrupt, updater.stop
-* Explicit emphasis by speaker: time.sleep won't block the data polling because it runs in a different thread
-* Speaker ne jo analogies/examples use kiye: while True is like void loop in Arduino, stuff before it is like void setup
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Architecture shift and proxy setup
+* Key terms from transcript: webhook, reverse proxy, polling, Cloudflare tunnel, ngrok, push vs pull
+* Explicit emphasis by speaker: "Polling loops drain CPU and get rate-limited. In production, Telegram should push data to you via Webhooks."
+* Speaker ne jo analogies/examples use kiye: Polling is asking "Are we there yet?" every 5 seconds. Webhooks is the driver saying "We have arrived" only when needed.
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[while True, infinite loop, ⭐void setup, ⭐void loop, import time, time.sleep(10), ⭐different thread, polling, try, except KeyboardInterrupt, updater.stop(), control+c]
+[Webhooks, Long Polling, CPU optimization, Reverse Proxy, Cloudflare Tunnels, `cloudflared`, Ngrok, HTTPS endpoint, FastAPI, Flask, `setWebhook`, Push architecture, payload routing, firewall bypass]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Testing/Offline Phase: Developer independent notifications aur command handlers ko merge karne ke liye `while True` loop banata hai jisme `time.sleep(10)` lagaya jata hai.
-* Fixing/Iteration Phase: Developer `updater.idle()` hata deta hai kyunki ab loop khud script ko zinda rakhega. Exit karte time error se bachne ke liye poore loop ko `try...except KeyboardInterrupt` block mein wrap karta hai aur exit hone pe `updater.stop()` run karwata hai.
-* Live Production Phase: Program continuously har 10 seconds mein notification bhejta rehta hai aur background thread mein telegram updates ke liye poll karta rehta hai. App se commands aane par dono system parallel kaam karte hain.
-* Additional context: Jab user Control+C marta hai toh bot gracefully stop ho jata hai.
+* Testing/Offline Phase: Developer `while True` aur `updater.start_polling()` ko remove karke ek chota FastAPI web server banata hai jo `/webhook` route par listen karta hai.
+* Fixing/Iteration Phase: Pi local network mein hota hai (no public IP). Developer Cloudflare Tunnel (`cloudflared`) install karta hai jo Pi ko ek secure HTTPS URL (e.g., `bot.myfactory.com`) assign kar deta hai bina router firewall khele.
+* Live Production Phase: Developer Telegram API ko batata hai (`setWebhook`) ki jab bhi koi message aaye, is naye HTTPS URL par bhejo. Ab Pi ka CPU 0% use hota hai jab tak koi message actual mein na aaye.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
@@ -1385,10 +1386,10 @@ Topic 3: Securing the Bot Token [⚠️ Derived]
 Section 5: Programming the Telegram Bot [⚠️ Derived]
 Topic 1: Responding to Commands [⚠️ Derived]
 Topic 2: Sending Independent Messages [⚠️ Derived]
-Topic 3: Combining Polling and Notifications [⚠️ Derived]
+Topic 3: Production Bot Deployment (Webhooks & Reverse Proxy)
 
 📊 PHASE SUMMARY:
-Sections: 5 | Topics: 11 | Subtopics: 31
+Sections: 5 | Topics: 11 | Subtopics: 32
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1766,11 +1767,67 @@ Sections: 7 | Topics: 8 | Subtopics: 42
 ==================================================================================
 
 # Section 10: Advanced Microcontroller Architecture (RTOS & Power)
+# Section 10: Edge Data Logging & Industrial Dashboards
 
-===Section 10: Advanced Microcontroller Architecture (RTOS & Power)===
+===Section 10: Edge Data Logging & Industrial Dashboards===
+Speaker is section mein Telegram UI se aage badhkar, Raspberry Pi par ek professional local monitoring server setup karna sikhata hai jismein real-time sensor data aur camera feeds dikhayi dete hain.
+
+--10--Edge Data Logging & Industrial Dashboards--
+Topic 1: Time-Series Databases (InfluxDB)
+Subtopics: Relational vs Time-Series DB, InfluxDB Setup, Telegraf, Data Retention Policies, Python InfluxDB Client
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Database setup and Python script modification
+* Key terms from transcript: InfluxDB, TSDB, Time-Series, Telegraf, data retention, timestamp, SQL vs NoSQL
+* Explicit emphasis by speaker: "For IoT sensors, traditional SQL databases are too slow. You must use a Time-Series Database optimized for timestamps."
+* Speaker ne jo analogies/examples use kiye: SQL is like an address book; TSDB is like a heart-rate monitor log.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[InfluxDB, TSDB, Time-Series Database, Telegraf, Python InfluxDB client, API token, bucket, organization, data retention policy, fast write speed, CPU temperature, sensor telemetry]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Raspberry Pi par InfluxDB Docker container run karta hai aur Python script modify karta hai taaki Arduino se aane wala har temperature/sensor data ek timestamp ke sath DB mein push ho.
+* Fixing/Iteration Phase: Agar SD card jaldi bhar raha hai, toh developer Data Retention Policy set karta hai taaki 30 din purana data automatically delete ho jaye.
+* Live Production Phase: Factory ka gateway (Pi) har second hazaaron data points bina OS ko crash kiye efficiently database mein log karta rehta hai.
+
+--10--Edge Data Logging & Industrial Dashboards--
+Topic 2: Real-Time Visualization (Grafana)
+Subtopics: Grafana Docker Integration, InfluxDB Data Source, Creating Dashboards, Alerting Rules
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: UI walkthrough for dashboard creation
+* Key terms from transcript: Grafana, dashboard, data source, gauge, time-series graph, alerts, web interface
+* Explicit emphasis by speaker: "This is what a real industrial control room looks like."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Grafana, Dashboard, Data Source integration, Flux query language, gauges, time-series graphs, visual alerts, threshold, industrial control room, local network IP, port 3000]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer Pi par Grafana install karta hai, usko InfluxDB se connect karta hai, aur drag-and-drop karke live temperature gauges aur history graphs banata hai.
+* Fixing/Iteration Phase: Developer Grafana mein visual thresholds set karta hai (e.g., Temperature > 50Â°C turns red).
+* Live Production Phase: Factory manager apne tablet ya PC par Raspberry Pi ka IP address kholta hai aur use poori factory ka live, beautiful, real-time dashboard dikhta hai bina kisi cloud subscription ke.
+
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
+
+==================================================================================
+
+# Section 11: Advanced Microcontroller Architecture (RTOS & Power)
+
+===Section 11: Advanced Microcontroller Architecture (RTOS & Power)===
 Speaker is section mein hobbyist `void loop()` se aage badhkar industry-standard FreeRTOS aur low-power optimization par shift hone ka practical workflow sikhata hai.
 
---10--Advanced Microcontroller Architecture (RTOS & Power)--
+--11--Advanced Microcontroller Architecture (RTOS & Power)--
 Topic 1: FreeRTOS Fundamentals (ESP32/STM32)
 Subtopics: Task Creation, Scheduler, Mutexes, Semaphores, Message Queues, Task Priorities, Watchdog Timers (WDT)
 
@@ -1793,7 +1850,7 @@ Subtopics: Task Creation, Scheduler, Mutexes, Semaphores, Message Queues, Task P
 * Fixing/Iteration Phase: Agar I2C sensor aur Display ek sath bus access karne ki koshish mein crash hote hain, toh developer Mutex lock lagata hai taaki ek waqt par ek hi task bus use kare.
 * Live Production Phase: Final firmware mein system smoothly multitask karta hai bina kisi microsecond delay ke. Agar koi task hang hota hai, toh hardware Watchdog Timer (WDT) system ko automatically reboot kar deta hai.
 
---10--Advanced Microcontroller Architecture (RTOS & Power)--
+--11--Advanced Microcontroller Architecture (RTOS & Power)--
 Topic 2: Low-Power Optimization & PMIC
 Subtopics: Deep Sleep, Light Sleep, RTC Memory, Wake-up Sources, ULP Coprocessor, Power Management ICs
 
@@ -1821,12 +1878,12 @@ Subtopics: Deep Sleep, Light Sleep, RTC Memory, Wake-up Sources, ULP Coprocessor
 ==================================================================================
 
 
-# Section 11: Industrial Communication & Security
+# Section 12: Industrial Communication & Security
 
-===Section 11: Industrial Communication & Security===
+===Section 12: Industrial Communication & Security===
 Speaker yahan factory aur production environments ke liye robust wired protocols aur data encryption implement karna sikhata hai.
 
---11--Industrial Communication & Security--
+--12--Industrial Communication & Security--
 Topic 1: Industrial Protocols (CAN Bus & Modbus)
 Subtopics: EMI Resilience, RS-485 Transceivers, Modbus RTU/TCP, CAN Bus Architecture, Differential Signaling
 
@@ -1849,7 +1906,7 @@ Subtopics: EMI Resilience, RS-485 Transceivers, Modbus RTU/TCP, CAN Bus Architec
 * Fixing/Iteration Phase: Agar data garbled aa raha hai due to factory motors, developer twisted pair cable use karta hai taaki differential signaling noise ko cancel out kar de.
 * Live Production Phase: Industrial automation plant mein, sensor data PLC (Programmable Logic Controller) tak Modbus RTU ke through bina kisi packet drop ke pahunchta hai.
 
---11--Industrial Communication & Security--
+--12--Industrial Communication & Security--
 Topic 2: Hardware Security & Cryptography
 Subtopics: TLS 1.3 / SSL, Secure Boot, NVS Encryption, ATECC608A Secure Element, AWS/Azure IoT Certificates
 
@@ -1876,12 +1933,12 @@ Subtopics: TLS 1.3 / SSL, Secure Boot, NVS Encryption, ATECC608A Secure Element,
 
 ==================================================================================
 
-# Section 12: Wireless IoT Gateways & ESP32 Integration
+# Section 13: Wireless IoT Gateways & ESP32 Integration
 
-===Section 12: Wireless IoT Gateways & ESP32 Integration===
+===Section 13: Wireless IoT Gateways & ESP32 Integration===
 Speaker is section mein batata hai ki serial/USB cable ki limitations ko tod kar, Raspberry Pi ko ek central wireless hub (Gateway) kaise banaya jaye jo saikdon ESP32/STM32 nodes se data collect kare.
 
---12--Wireless IoT Gateways & ESP32 Integration--
+--13--Wireless IoT Gateways & ESP32 Integration--
 Topic 1: MQTT Broker on Raspberry Pi (Mosquitto)
 Subtopics: Publish/Subscribe Architecture, Eclipse Mosquitto Setup, ESP32 MQTT Client, QoS Levels, Payload Formatting
 
@@ -1904,7 +1961,7 @@ Subtopics: Publish/Subscribe Architecture, Eclipse Mosquitto Setup, ESP32 MQTT C
 * Fixing/Iteration Phase: Agar packets drop ho rahe hain network noise ki wajah se, toh developer QoS level 0 se badhakar QoS 1 (At least once delivery) kar deta hai taaki data guarantee ke sath pahuche.
 * Live Production Phase: Ek smart greenhouse mein 50 ESP32 soil moisture sensors bina kisi wire ke apna data Raspberry Pi (Broker) par bhejte hain, aur Pi unhe process karke wapas water pumps (other ESP32s) ko command publish karta hai.
 
---12--Wireless IoT Gateways & ESP32 Integration--
+--13--Wireless IoT Gateways & ESP32 Integration--
 Topic 2: Low-Latency Mesh with ESP-NOW & Bridge to RPi
 Subtopics: ESP-NOW Protocol, MAC Address Binding, Wi-Fi Router Bypass, ESP32 to RPi Serial Bridge
 
@@ -1931,12 +1988,12 @@ Subtopics: ESP-NOW Protocol, MAC Address Binding, Wi-Fi Router Bypass, ESP32 to 
 
 ==================================================================================
 
-# Section 13: Production Deployment & Maintenance
+# Section 14: Production Deployment & Maintenance
 
-===Section 13: Production Deployment & Maintenance===
+===Section 14: Production Deployment & Maintenance===
 Speaker explain karta hai ki remote hardware ko bina physical access ke debug, update, aur test kaise kiya jata hai.
 
---13--Production Deployment & Maintenance--
+--14--Production Deployment & Maintenance--
 Topic 1: FOTA (Firmware Over-The-Air) & Dual-Bank Bootloaders
 Subtopics: Flash Partitioning, OTA Architecture, Rollback Mechanisms, Version Control
 
@@ -1956,42 +2013,67 @@ Subtopics: Flash Partitioning, OTA Architecture, Rollback Mechanisms, Version Co
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
 * Testing/Offline Phase: Developer custom CSV partition table banata hai (splitting flash into two OTA slots). Woh WiFi ke through ek naya binary (`.bin`) file push karta hai.
-* Fixing/Iteration Phase: Developer jaan bujh kar update ke beech power cut karta hai. Bootloader detect karta hai ki naya firmware corrupt hai aur purane safe firmware (OTA_0) par rollback karta hai.
-* Live Production Phase: Market mein deploy hone ke baad, saare devices raat ko 2 AM par automatically secure server se check karte hain, firmware download karte hain, aur swap karke naye version par boot hote hain.
+* Fixing/Iteration Phase: Developer jaan bujh kar update ke beech power cut karta hai. Bootloader dete==================================================================================
 
---13--Production Deployment & Maintenance--
-Topic 2: Professional Debugging & CI/CD pipeline
-Subtopics: JTAG/SWD Debugging, Crash Dump Analysis, Hardware-in-the-Loop (HIL) Testing, GitHub Actions
+# Section 15: Industrial Power Management & Graceful Shutdowns (UPS)
+
+===Section 15: Industrial Power Management & Graceful Shutdowns (UPS)===
+Speaker batata hai ki field deployments mein Raspberry Pi ko achanak power cuts se hone wale SD Card / OS corruption se kaise bachaya jaye.
+
+--15--Industrial Power Management & Graceful Shutdowns (UPS)--
+Topic 1: UPS HAT Integration & Battery Backup
+Subtopics: Li-Po/18650 Batteries, UPS Power Routing, Hardware Watchdogs, Current Draw Analysis
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Hardware mounting and battery specs
+* Key terms from transcript: UPS HAT, Uninterruptible Power Supply, 18650 battery, power outage, SD card corruption
+* Explicit emphasis by speaker: "A Raspberry Pi is a full computer; pulling the plug is exactly like pulling the plug on your desktop PC. It will eventually break."
+* Speaker ne jo analogies/examples use kiye: Laptop battery analogy — even if power cuts, the laptop switches to battery without rebooting.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[UPS HAT, Uninterruptible Power Supply, Raspberry Pi GPIO, 18650 lithium-ion, Li-Po, power failure, seamless switching, 5V 3A supply, brownout, SD card corruption, voltage spike]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Raspberry Pi ke GPIO pins par ek UPS HAT mount karta hai aur do 18650 batteries insert karta hai. Wall adapter direct UPS HAT mein lagaya jata hai, Pi mein nahi.
+* Fixing/Iteration Phase: Developer main power plug nikal kar test karta hai ki Pi reboot toh nahi hua. UPS HAT seamlessly power switch kar leta hai bina voltage drop (brownout) ke.
+* Live Production Phase: Industrial panel mein, agar grid power 5 minute ke liye chali jaye, toh gateway (Pi) offline nahi hota aur apna edge computation continue rakhta hai.
+
+--15--Industrial Power Management & Graceful Shutdowns (UPS)--
+Topic 2: I2C Battery Monitoring & Automated Halt
+Subtopics: INA219/MAX17043 Sensors, I2C Protocol on Pi, Shutdown Python Script, Systemd Power Daemon
 
 [📊 SCOPE SIGNAL for Topic 2:
 
-* Depth Level: Moderate
+* Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Toolchain setup and automated scripting
-* Key terms from transcript: JTAG, SWD, ST-Link, GDB, Core Dump, CI/CD, GitHub Actions, Unity Testing
-* Explicit emphasis by speaker: `Serial.print` is not debugging; step-through debugging is mandatory for complex pointer issues.
-* Speaker ne jo analogies/examples use kiye: GDB allows you to freeze time inside your microcontroller.
+* Transcript mein content volume: Python code reading battery levels and executing system commands
+* Key terms from transcript: I2C, INA219, voltage monitor, sudo halt, graceful shutdown
+* Explicit emphasis by speaker: "You need a software script to tell the Pi when the backup battery is about to die so it can kill processes cleanly."
+* Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[JTAG, SWD, ST-Link, J-Link, OpenOCD, GDB, breakpoints, memory inspection, Core Dump, HardFault, CI/CD, GitHub Actions, Unity, Ceedling, Hardware-in-the-Loop, HIL testing, automated testing]
+[I2C interface, `raspi-config`, INA219, MAX17043, battery percentage, voltage reading, `os.system("sudo halt")`, `sudo shutdown -h now`, systemd service, power daemon, graceful shutdown, file system sync, corrupted sectors]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: Developer J-Link debugger ko pins se connect karta hai aur VS Code mein breakpoints set karke memory aur registers ki live state dekhta hai (without `Serial.print`).
-* Fixing/Iteration Phase: Agar system crash (HardFault) hota hai, toh Core Dump flash mein save ho jata hai. Developer dump extract karke exact line of code (e.g., null pointer dereference) fix karta hai.
-* Live Production Phase: Jab developer code GitHub par push karta hai, ek automated CI/CD pipeline server par code compile karti hai, unit tests run karti hai, aur physical test-rack (HIL) par firmware flash karke green signal deti hai.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+* Testing/Offline Phase: Developer Pi ka I2C interface enable karta hai. Python mein `smbus` library use karke UPS HAT se current voltage aur battery percentage read karta hai.
+* Fixing/Iteration Phase: Developer ek background script likhta hai ki agar power disconnected hai aur battery < 10% ho gayi hai, toh system pehle database save kare, MQTT par "Going offline" alert bheje, aur phir `sudo shutdown -h now` trigger kar de.
+* Live Production Phase: Jab lamba power cut hota hai, Pi apni battery drain hone tak chalta hai. Marne se theek pehle woh cleanly shutdown ho jata hai, jisse filesystem safely unmount ho jata hai aur OS 100% safe rehta hai jab power wapas aati hai.
 
 ==================================================================================
 
-# Section 14: Embedded Linux (Scaling the Raspberry Pi)
+# Section 16: Embedded Linux (Scaling the Raspberry Pi)
 
-===Section 14: Embedded Linux (Scaling the Raspberry Pi)===
+===Section 16: Embedded Linux (Scaling the Raspberry Pi)===
 Speaker Raspberry Pi ko ek standard desktop OS (Raspberry Pi OS) se hata kar ek read-only, minimal, industry-grade embedded Linux system mein convert karna sikhata hai.
 
---14--Embedded Linux (Scaling the Raspberry Pi)--
+--16--Embedded Linux (Scaling the Raspberry Pi)--
 Topic 1: Custom OS Images (Yocto & Buildroot)
 Subtopics: Build Systems, Custom Linux Kernel, Read-Only RootFS, Device Tree Overlays, Systemd Watchdogs
 
@@ -2019,19 +2101,19 @@ Subtopics: Build Systems, Custom Linux Kernel, Read-Only RootFS, Device Tree Ove
 ```
 📋 EXTRACTED IN THIS PHASE (ADVANCED ADDITIONS):
 
-Section 10: Advanced Microcontroller Architecture (RTOS & Power)
+Section 11: Advanced Microcontroller Architecture (RTOS & Power)
   Topic 1: FreeRTOS Fundamentals (ESP32/STM32)
   Topic 2: Low-Power Optimization & PMIC
 
-Section 11: Industrial Communication & Security
+Section 12: Industrial Communication & Security
   Topic 1: Industrial Protocols (CAN Bus & Modbus)
   Topic 2: Hardware Security & Cryptography
 
-Section 13: Production Deployment & Maintenance
+Section 14: Production Deployment & Maintenance
   Topic 1: FOTA (Firmware Over-The-Air) & Bootloaders
   Topic 2: Professional Debugging & CI/CD pipeline
 
-Section 14: Embedded Linux (Scaling the Raspberry Pi)
+Section 16: Embedded Linux (Scaling the Raspberry Pi)
   Topic 1: Custom OS Images (Yocto & Buildroot)
 
 📊 PHASE SUMMARY:
@@ -2043,12 +2125,12 @@ Sections Added: 4 | Topics Added: 7
 
 ==================================================================================
 
-# Section 15: Edge AI & Machine Learning (TinyML)
+# Section 17: Edge AI & Machine Learning (TinyML)
 
-===Section 15: Edge AI & Machine Learning (TinyML)===
+===Section 17: Edge AI & Machine Learning (TinyML)===
 Speaker is section mein batata hai ki cloud par data bhejne ke bajaye, microcontrollers (ESP32/STM32) par hi Machine Learning models kaise train aur deploy kiye jaate hain.
 
---15--Edge AI & Machine Learning (TinyML)--
+--17--Edge AI & Machine Learning (TinyML)--
 Topic 1: TinyML Fundamentals & Edge Impulse
 Subtopics: Data Forwarding, Neural Networks on MCU, TensorFlow Lite for Microcontrollers, Anomaly Detection, Keyword Spotting
 
@@ -2071,16 +2153,41 @@ Subtopics: Data Forwarding, Neural Networks on MCU, TensorFlow Lite for Microcon
 * Fixing/Iteration Phase: Agar microcontroller out of RAM (memory limits) chala jata hai, toh developer model ko heavily quantize karta hai taaki accuracy lose kiye bina size chota ho jaye.
 * Live Production Phase: Factory mein motor par laga ESP32 locally vibration analyze karta hai. 99% time woh chup rehta hai, aur sirf tab alert bhejta hai jab ML model anomaly detect karta hai (predictive maintenance).
 
+--17--Edge AI & Machine Learning (TinyML)--
+Topic 2: Edge Vision AI & Hardware Accelerators
+Subtopics: Limitations of CPU Vision, Google Coral Edge TPU, Hailo AI Accelerator, Object Detection Models (YOLO), Video Stream Inference
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Hardware mounting and specialized Python libraries
+* Key terms from transcript: Edge TPU, Google Coral, Hailo-8L, PCIe, YOLO, Object Detection, FPS, bottleneck
+* Explicit emphasis by speaker: "Running computer vision on the Pi's CPU will give you 2 frames per second. With an accelerator, you get 30 to 60 frames per second."
+* Speaker ne jo analogies/examples use kiye: Adding a dedicated graphics card to a gaming PC.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Google Coral Edge TPU, Hailo AI Accelerator, PCIe Hat, USB accelerator, YOLOv8, MobileNet SSD, Object Detection, PyCoral, inference speed, FPS, hardware bottleneck, defect detection, bounding boxes]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer standard Pi CPU par camera feed se object detection run karta hai aur system overheat hoke lag (2 FPS) hone lagta hai.
+* Fixing/Iteration Phase: Developer Pi 5 ke PCIe slot par Hailo-8L ya Coral TPU connect karta hai. Python code mein model ko TPU par delegate karta hai, aur FPS 30+ ho jata hai bina CPU load ke.
+* Live Production Phase: Assembly line par Pi camera products ko scan karta hai, TPU realtime mein defective parts detect karta hai, aur Arduino servo motor ko serial command bhej kar defective product ko belt se hata deta hai.
+
+
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
 
-# Section 16: Local GenAI & Autonomous RAG Systems on Raspberry Pi
+# Section 18: Local GenAI & Autonomous RAG Systems on Raspberry Pi
 
-===Section 16: Local GenAI & Autonomous RAG Systems on Raspberry Pi===
+===Section 18: Local GenAI & Autonomous RAG Systems on Raspberry Pi===
 Speaker is advanced module mein sikhata hai ki Raspberry Pi par bina internet ke chote Large Language Models (LLMs) aur RAG (Retrieval-Augmented Generation) kaise run karein taaki system khud human-like decisions le sake.
 
---16--Local GenAI & Autonomous RAG Systems on Raspberry Pi--
+--18--Local GenAI & Autonomous RAG Systems on Raspberry Pi--
 Topic 1: Running Local LLMs on Raspberry Pi
 Subtopics: Llama.cpp, Ollama, Model Quantization, Phi-3 / Qwen Models, RAM Constraints, System Prompts
 
@@ -2103,7 +2210,7 @@ Subtopics: Llama.cpp, Ollama, Model Quantization, Phi-3 / Qwen Models, RAM Const
 * Fixing/Iteration Phase: Agar model answer dene mein 30 seconds laga raha hai, toh developer aur chota model (Qwen 0.5B) use karta hai ya context window kam karta hai taaki latency 2-3 seconds tak aa jaye.
 * Live Production Phase: Jab sensor koi strange data bhejta hai, system if-else loop ke bajaye us data ko LLM ke paas as a prompt bhejta hai. LLM autonomously decide karta hai ki situation critical hai ya nahi, aur hardware (Arduino/ESP) ko JSON command bhejta hai.
 
---16--Local GenAI & Autonomous RAG Systems on Raspberry Pi--
+--18--Local GenAI & Autonomous RAG Systems on Raspberry Pi--
 Topic 2: Edge RAG (Retrieval-Augmented Generation) for IoT
 Subtopics: Vector Databases at Edge, ChromaDB/FAISS, Document Embeddings, Maintenance Manuals Ingestion, Context-Aware Execution
 
@@ -2131,11 +2238,11 @@ Subtopics: Vector Databases at Edge, ChromaDB/FAISS, Document Embeddings, Mainte
 ```
 📋 EXTRACTED IN THIS PHASE (AI & INTEGRATION ADDITIONS):
 
-Section 12: Wireless IoT Gateways & ESP32 Integration
+Section 13: Wireless IoT Gateways & ESP32 Integration
   Topic 1: MQTT Broker on Raspberry Pi (Mosquitto)
   Topic 2: Low-Latency Mesh with ESP-NOW & Bridge to RPi
 
-Section 16: Local GenAI & Autonomous RAG Systems on Raspberry Pi
+Section 18: Local GenAI & Autonomous RAG Systems on Raspberry Pi
   Topic 1: Running Local LLMs on Raspberry Pi
   Topic 2: Edge RAG (Retrieval-Augmented Generation) for IoT
 
@@ -2148,12 +2255,12 @@ Sections Added: 2 | Topics Added: 4
 
 ==================================================================================
 
-# Section 17: Advanced Cloud Architecture & Edge Containerization
+# Section 19: Advanced Cloud Architecture & Edge Containerization
 
-===Section 17: Advanced Cloud Architecture & Edge Containerization===
+===Section 19: Advanced Cloud Architecture & Edge Containerization===
 Speaker explain karta hai ki thousands of IoT devices ko cloud pe securely provision, manage, aur update (via Docker) kaise kiya jata hai.
 
---17--Advanced Cloud Architecture & Edge Containerization--
+--19--Advanced Cloud Architecture & Edge Containerization--
 Topic 1: Digital Twins & Zero-Touch Provisioning
 Subtopics: AWS IoT Device Shadow, Azure Device Twins, RPC (Remote Procedure Call), Just-in-Time Provisioning
 
@@ -2176,7 +2283,7 @@ Subtopics: AWS IoT Device Shadow, Azure Device Twins, RPC (Remote Procedure Call
 * Fixing/Iteration Phase: Agar device offline ho jata hai, cloud update fail nahi karta, balki state ko hold karta hai. Jab device reconnect hota hai, woh immediately shadow sync karke missed command execute kar leta hai.
 * Live Production Phase: Company factory se 10,000 ESP32 boards ship karti hai. Devices pehli baar internet se connect hote hi automatically cloud par apne unique certificates generate aur provision kar lete hain (Zero-Touch).
 
---17--Advanced Cloud Architecture & Edge Containerization--
+--19--Advanced Cloud Architecture & Edge Containerization--
 Topic 2: Edge Containerization on Raspberry Pi (Docker/Balena)
 Subtopics: Docker Basics for Edge, Docker Compose, Microservices, BalenaOS, Container Auto-Restart
 
@@ -2203,12 +2310,12 @@ Subtopics: Docker Basics for Edge, Docker Compose, Microservices, BalenaOS, Cont
 
 ==================================================================================
 
-# Section 18: Hardware DFM (Design for Manufacturing) & Compliance
+# Section 20: Hardware DFM (Design for Manufacturing) & Compliance
 
-===Section 18: Hardware DFM (Design for Manufacturing) & Compliance===
+===Section 20: Hardware DFM (Design for Manufacturing) & Compliance===
 Speaker prototype boards (Arduino/ESP32 dev kits) se move karke custom PCBs banane aur global certifications pass karne ke concepts sikhata hai.
 
---18--Hardware DFM (Design for Manufacturing) & Compliance--
+--20--Hardware DFM (Design for Manufacturing) & Compliance--
 Topic 1: Custom PCB Design & Signal Integrity
 Subtopics: Schematic Design, PCB Layout, Decoupling Capacitors, Ground Planes, Antenna Placement
 
@@ -2231,7 +2338,7 @@ Subtopics: Schematic Design, PCB Layout, Decoupling Capacitors, Ground Planes, A
 * Fixing/Iteration Phase: Wi-Fi range kam aane par, developer PCB redesign karta hai taaki ESP32 antenna ke theek neeche koi copper ya ground plane na ho (Antenna keep-out zone).
 * Live Production Phase: Gerber files generate karke factory (e.g., JLCPCB/PCBWay) ko bheji jaati hain jahan Pick-and-Place machines mass-produce karti hain.
 
---18--Hardware DFM (Design for Manufacturing) & Compliance--
+--20--Hardware DFM (Design for Manufacturing) & Compliance--
 Topic 2: EMI/EMC Compliance & ESD Protection
 Subtopics: TVS Diodes, Optocouplers, CE/FCC Certifications, Reverse Polarity Protection
 
@@ -2252,21 +2359,22 @@ Subtopics: TVS Diodes, Optocouplers, CE/FCC Certifications, Reverse Polarity Pro
 
 * Testing/Offline Phase: Developer USB port aur external buttons ki data lines par TVS diodes add karta hai taaki human touch se aane wali static electricity (ESD) chip ko damage na kare.
 * Fixing/Iteration Phase: Agar system high-voltage motors control kar raha hai, toh developer relay/transistor ke bajaye Optocouplers lagata hai taaki high-voltage circuit low-voltage microcontroller se physically isolate rahe (Galvanic Isolation).
-* Live Production Phase: Final product ko independent labs mein bheja jata hai EMI testing ke liye. EMI/EMC tests pass hone ke baad hi product par CE (Europe) ya FCC (USA) ka logo lagta hai aur woh legally market mein sell ho sakta hai.
+* Live Production Phase: Final product ko independent labs mein bheja jata hai EMI testing ke liye. EMI/EMC tests pass hone ke baad hi product par CE (Europe) ya FCC (USA) ka logo lagta hai aur woh legally market market mein sell ho sakta hai.
 
 ==================================================================================
 
 ```
 📋 EXTRACTED IN THIS PHASE (FINAL INDUSTRY MASTER ADDITIONS):
 
-Section 15: Edge AI & Machine Learning (TinyML)
+Section 17: Edge AI & Machine Learning (TinyML)
   Topic 1: TinyML Fundamentals & Edge Impulse
+  Topic 2: Edge Vision AI & Hardware Accelerators
 
-Section 17: Advanced Cloud Architecture & Edge Containerization
+Section 19: Advanced Cloud Architecture & Edge Containerization
   Topic 1: Digital Twins & Zero-Touch Provisioning
   Topic 2: Edge Containerization on Raspberry Pi (Docker/Balena)
 
-Section 18: Hardware DFM (Design for Manufacturing) & Compliance
+Section 20: Hardware DFM (Design for Manufacturing) & Compliance
   Topic 1: Custom PCB Design & Signal Integrity
   Topic 2: EMI/EMC Compliance & ESD Protection
 
@@ -2280,75 +2388,88 @@ Sections Added: 3 | Topics Added: 5
 ==================================================================================
 
 
-# Section 19: Conclusion
+# Section 20: Robotics & Autonomous Systems (ROS 2)
 
+===Section 20: Robotics & Autonomous Systems (ROS 2)===
+Speaker batata hai ki real-world AGVs (Automated Guided Vehicles) aur robotics ke liye custom Python scripts ki jagah ROS 2 framework aur micro-ROS ka use kaise kiya jata hai.
 
-===Section 19: Conclusion===
-Speaker is section mein course ka recap deta hai, project development ki best practices summarize karta hai, aur advanced robotics frameworks (ROS) ke baare mein batata hai.
+--20--Robotics & Autonomous Systems (ROS 2)--
+Topic 1: ROS 2 Architecture & DDS Middleware
+Subtopics: ROS 1 EOL, Nodes, Topics, Publish/Subscribe in ROS, Data Distribution Service (DDS), Distributed Computing
 
---19--Conclusion--
-Topic 1: Best Practices & Project Workflow
-Subtopics: Project Idea, Functionality Allocation, Communication Protocol, Coding Sequence, Iterative Testing
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Architectural shift from basic scripts to distributed nodes
+* Key terms from transcript: ROS 2, Robot Operating System, Humble, DDS, Nodes, Topics, Distributed system
+* Explicit emphasis by speaker: "ROS 1 is dead. ROS 2 with DDS is the only way to build modern commercial robots."
+* Speaker ne jo analogies/examples use kiye: Centralized brain (old way) vs Distributed nervous system (ROS 2).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[ROS 2, Robot Operating System, ROS 2 Humble, DDS, Data Distribution Service, Nodes, Topics, Messages, Publisher, Subscriber, Colcon build, RViz, distributed computing, AGV, LiDAR integration]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Pi par ROS 2 install karta hai. Ek Python "Node" banata hai jo camera data process karta hai aur doosra Node banata hai jo decision leta hai. Dono nodes DDS middleware ke through independently baat karte hain.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Ek complex robot mein multiple Raspberry Pis aur sensors lagaye jate hain. ROS 2 un sabko ek unified system ki tarah treat karta hai (Distributed Computing).
+
+--20--Robotics & Autonomous Systems (ROS 2)--
+Topic 2: Bridging Microcontrollers with micro-ROS
+Subtopics: micro-ROS Architecture, ESP32 ROS 2 Nodes, XRCE-DDS Agent, Seamless Hardware Integration
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: ESP32 programming for native ROS 2 compatibility
+* Key terms from transcript: micro-ROS, XRCE-DDS, ESP32, native node, agent
+* Explicit emphasis by speaker: "You no longer need to write custom serial parsers. With micro-ROS, your ESP32 becomes a native part of the robot's brain."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[micro-ROS, uROS, ESP32, STM32, XRCE-DDS Agent, native node, FreeRTOS integration, seamless communication, hardware abstraction, Wi-Fi transport, Serial transport, ROS 2 topic publishing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer purane custom serial protocol (`command:value\n`) ko discard kar deta hai. Woh ESP32 par `micro-ROS` flash karta hai.
+* Fixing/Iteration Phase: Pi par ek `Micro-ROS Agent` run kiya jata hai. ESP32 ab directly ROS 2 topics (e.g., `/cmd_vel`) par subscribe karta hai jaise ki woh Pi ke andar ka hi koi software ho.
+* Live Production Phase: Boston Dynamics ya Amazon warehouse robots isi architecture par chalte hain, jahan MCU (muscles) aur CPU (brain) ek hi standard language (ROS 2) bolte hain wirelessly ya wired.
+
+==================================================================================
+
+# Section 21: Final Conclusion & Industry Readiness
+
+===Section 21: Final Conclusion & Industry Readiness===
+Speaker course wrap up karta hai aur IoT/Robotics engineer banne ke workflow aur mindset par final advice deta hai.
+
+--21--Final Conclusion & Industry Readiness--
+Topic 1: The Full-Stack Hardware Engineer
+Subtopics: Prototype to Production Pipeline, Mindset Shift, Continuous Learning
 
 [📊 SCOPE SIGNAL for Topic 1:
 
 * Depth Level: Surface
 * Coverage Angle: Conceptual only
-* Transcript mein content volume: Short explanation
-* Key terms from transcript: project idea, functionalities, application logic, hardware equipment, communication protocol, Arduino code, Serial monitor
-* Explicit emphasis by speaker: Speaker strictly emphasize karta hai ki "application logic is on the Raspberry Pi and the execution of hardware equipment is on the Arduino".
-* Speaker ne jo analogies/examples use kiye: Taking a photo with the Pi camera as an obvious functionality allocation example.
+* Transcript mein content volume: Short summary
+* Key terms from transcript: full-stack hardware, prototype, production, compliance, reliability
+* Explicit emphasis by speaker: "You are no longer a hobbyist; you now know how to build systems that don't fail."
+* Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[project idea, functionalities, ⭐application logic, ⭐hardware equipment, communication protocol, Arduino code, debug, Serial monitor, Raspberry Pi code, intermediate goal, step by step process, Pi camera]
+[full-stack hardware engineer, prototype to production, system reliability, edge computing, scalability, hardware lifecycle, â­have fun]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Learning Phase: Developer ek project idea sochta hai aur required functionalities ki list banata hai.
-* Application Phase: Developer hardware tasks ko Arduino ko aur main logic ko Raspberry Pi ko allocate karta hai, phir dono ke beech communication protocol define karta hai.
-* Mastery Phase: Developer pehle Arduino code likhta hai aur Serial monitor se debug karta hai, phir RPi pe step-by-step logic implement karke real product complete karta hai.
-* Additional context: Speaker is workflow ko ek "best practice" batata hai jo kisi bhi naye scratch project ko fast develop karne mein help karta hai.
-
---19--Conclusion--
-Topic 2: Next Steps & Advanced Technologies
-Subtopics: Project Customization, Project Ideation, Robot Operating System, ROS Integration
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Surface
-* Coverage Angle: Conceptual only
-* Transcript mein content volume: Short list of ideas
-* Key terms from transcript: mastery, new project, Robot Operating System, ROS, robotic applications, robot software
-* Explicit emphasis by speaker: "Don't forget to have fun" — speaker ise super important batata hai for making progress.
-* Speaker ne jo analogies/examples use kiye: ROS + Raspberry Pi + Arduino combo as a stack for complete robot software.
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[mastery, new project, Google, Robot Operating System, ROS, robotic applications, ROS + Raspberry Pi + Arduino combo, robot software, work experience, ⭐have fun]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Learning Phase: Student course complete karke basics master karta hai aur Google par naye project ideas search karta hai.
-* Application Phase: Student existing intercom project ko customize karta hai taaki woh uske real home mein fit ho sake.
-* Mastery Phase: Developer advanced frameworks jaise Robot Operating System (ROS) seekhta hai aur RPi + Arduino combo use karke complex real-world robotics software banata hai.
-* Additional context: Speaker mention karta hai ki usne apne previous work experience mein ROS, RPi aur Arduino ka combo use karke robotics software banaya tha.
-
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
-
-📋 EXTRACTED IN THIS PHASE:
-
-Section 19: Conclusion
-Topic 1: Best Practices & Project Workflow
-Topic 2: Next Steps & Advanced Technologies
-
-📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 9
-
+* Learning Phase: Student basic LED blinking se shuru hoke RTOS, AI, aur ROS 2 tak pahunch gaya.
+* Application Phase: Student apne DIY projects ko industry standards (Docker, PCB, FOTA) ke sath rebuild karta hai.
+* Mastery Phase: Student successfully ek commercial grade IoT/Robotics product market mein launch karta hai.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
-
-
 
