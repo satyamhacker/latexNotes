@@ -2396,7 +2396,29 @@ Subtopics: Vector Databases at Edge, ChromaDB/FAISS, Document Embeddings, Mainte
 * Fixing/Iteration Phase: Agar AI galat context utha raha hai, toh developer chunk size aur overlap parameters adjust karta hai taaki retrieval accurate ho.
 * Live Production Phase: factory mein motor garam hone par, ESP32 Pi ko alert bhejta hai. Pi ka RAG system turant local FAISS database se manual search karta hai, error code ka solution nikalta hai, LLM us solution ko format karta hai, Telegram par maintenance team ko report bhejta hai, aur automatically cooling fan on (Arduino via Serial) kar deta hai.
 
-==================================================================================
+--20--Local GenAI & Autonomous RAG Systems on Raspberry Pi--
+Topic 3: Multi-Modal AI & Edge VLMs (Vision-Language Models)
+Subtopics: Beyond YOLO, Local VLMs (LLaVA/Moondream), Image-to-Text Reasoning, Hardware Context Awareness
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Code for passing camera frames directly to local multi-modal AI
+* Key terms from transcript: VLM, Vision-Language Model, LLaVA, Moondream, PiCamera, spatial reasoning, multi-modal
+* Explicit emphasis by speaker: "Object detection tells you 'Person: 90%'. A VLM tells you 'A person in a red shirt is trying to pick the lock.' That context is everything in 2026."
+* Speaker ne jo analogies/examples use kiye: Giving your AI not just a brain (LLM), but eyes that can read and reason.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[VLM, Vision-Language Model, Multi-modal, LLaVA, Moondream, Qwen-VL, image captioning, spatial reasoning, PiCamera frame, base64 encoding, visual anomaly, context awareness, edge reasoning, zero-shot detection]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer Raspberry Pi par ek lightweight VLM (jaise Moondream2) load karta hai. OpenCV se frame capture karke usko base64 mein encode karta hai aur VLM ko prompt deta hai: "Describe any safety hazards in this image."
+* Fixing/Iteration Phase: Agar inference slow (10+ seconds) ho raha hai, toh developer resolution ko 336x336 par downscale karta hai taaki Pi ka CPU/RAM jaldi process kar sake.
+* Live Production Phase: Intercom system par jab koi button dabata hai, Pi camera photo leta hai aur VLM usko analyze karta hai. Agar VLM ko lagta hai ki person masked/armed hai, toh woh autonomously door lock system (Arduino) ko freeze kar deta hai aur Telegram par text bhejta hai: "Suspicious masked individual at the door."
+
 
 ```
 📋 EXTRACTED IN THIS PHASE (AI & INTEGRATION ADDITIONS):
@@ -2408,9 +2430,10 @@ Section 13: Wireless IoT Gateways & ESP32 Integration
 Section 20: Local GenAI & Autonomous RAG Systems on Raspberry Pi
   Topic 1: Running Local LLMs on Raspberry Pi
   Topic 2: Edge RAG (Retrieval-Augmented Generation) for IoT
+  Topic 3: Multi-Modal AI & Edge VLMs (Vision-Language Models)
 
 📊 PHASE SUMMARY:
-Sections Added: 2 | Topics Added: 4
+Sections Added: 2 | Topics Added: 5
 
 ```
 
@@ -2469,6 +2492,28 @@ Subtopics: Exposing Serial/MQTT as Tools, Writing MCP Tool Schemas, Guardrails &
 * Fixing/Iteration Phase: Developer dekhta hai ki AI kabhi-kabhi hallucinate karke galat time par cooling system trigger kar raha hai. Woh code mein "Guardrails" aur "Human-in-the-loop" (HITL) add karta hai, jahan AI decision lene ke baad Telegram par puchta hai: "Temperature is 80C. I plan to turn on the cooling system. Approve? (Yes/No)".
 * Live Production Phase: Factory floor par, jab MQTT se anomaly aati hai, Agentic AI khud InfluxDB se history nikalta hai (Tool 1), RAG se manual padhta hai (Tool 2), problem diagnose karta hai, aur MCP ke through Arduino ko command bhej kar machine ko safe state mein le aata hai (Tool 3). Yeh poora process autonomously 2 seconds mein hota hai.
 
+--21--Agentic IoT & Model Context Protocol (MCP)--
+Topic 3: Voice-Native AI (The "Jarvis" Hardware UI)
+Subtopics: Wake-Word Detection, Local STT (Whisper), Text-to-Speech (TTS), Voice-to-Tool Execution, Full Duplex Audio
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Connecting USB microphones/speakers to AI reasoning loops
+* Key terms from transcript: Wake-word, Porcupine, Whisper.cpp, STT, TTS, Voice UI, hands-free
+* Explicit emphasis by speaker: "In industrial environments, workers wear heavy gloves. They can't use Telegram or touchscreens. Voice-to-Action is the ultimate interface."
+* Speaker ne jo analogies/examples use kiye: Smart speaker (Alexa/Jarvis) but connected to physical factory tools instead of Spotify.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Voice UI, Wake-word detection, Porcupine, STT, Speech-to-Text, Whisper.cpp, faster-whisper, TTS, Text-to-Speech, Piper TTS, USB microphone, I2S audio, Full-Duplex, Voice-to-Action, hands-free execution]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer Pi par ek USB microphone aur speaker lagata hai. `Porcupine` library se ek custom wake-word (e.g., "Hey System") set karta hai, aur `faster-whisper` se local audio ko text mein convert karta hai.
+* Fixing/Iteration Phase: Background noise (machinery/wind) ki wajah se mic galat sun raha hai, toh developer audio stream par WebRTC Noise Suppression (VAD) filter lagata hai taaki AI sirf human voice sune.
+* Live Production Phase: Factory worker machine ke paas khade hoke bolta hai: "Hey System, turn off the main valve." Mic audio capture karta hai -> Whisper text banata hai -> MCP Agent samajhta hai ki kya karna hai -> Arduino valve band karta hai -> TTS se speaker par awaz aati hai: "Main valve is now closed, sir."
 
 
 ```
@@ -2477,9 +2522,10 @@ Subtopics: Exposing Serial/MQTT as Tools, Writing MCP Tool Schemas, Guardrails &
 Section 21: Agentic IoT & Model Context Protocol (MCP)
   Topic 1: Introduction to Agentic AI & MCP Architecture
   Topic 2: Building an IoT MCP Server for Hardware Control
+  Topic 3: Voice-Native AI (The "Jarvis" Hardware UI)
 
 📊 PHASE SUMMARY:
-Sections Added: 1 | Topics Added: 2
+Sections Added: 1 | Topics Added: 3
 
 ```
 
