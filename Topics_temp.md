@@ -1989,14 +1989,177 @@ Sections Added: 4 | Topics Added: 7
 
 ==================================================================================
 
+# Section 14: Edge AI & Machine Learning (TinyML)
 
-# Section 14: Conclusion
+===Section 14: Edge AI & Machine Learning (TinyML)===
+Speaker is section mein batata hai ki cloud par data bhejne ke bajaye, microcontrollers (ESP32/STM32) par hi Machine Learning models kaise train aur deploy kiye jaate hain.
+
+--14--Edge AI & Machine Learning (TinyML)--
+Topic 1: TinyML Fundamentals & Edge Impulse
+Subtopics: Data Forwarding, Neural Networks on MCU, TensorFlow Lite for Microcontrollers, Anomaly Detection, Keyword Spotting
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Model training lifecycle and C++ inference code
+* Key terms from transcript: TinyML, Edge Impulse, TensorFlow Lite, inference, anomaly detection, DSP (Digital Signal Processing)
+* Explicit emphasis by speaker: "Do not send raw vibration data to the cloud; infer locally and only send the result (e.g., 'motor failing')."
+* Speaker ne jo analogies/examples use kiye: Smart speaker analogy — Google Home cloud par tabhi connect hota hai jab woh locally "Hey Google" (keyword spotting) detect kar leta hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[TinyML, Edge Impulse, TensorFlow Lite for Microcontrollers, TFLite, inference, quantization, INT8, neural network, DSP, anomaly detection, predictive maintenance, keyword spotting, accelerometer data, feature extraction, latency, bandwidth saving]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer ESP32/STM32 se accelerometer data collect karke Edge Impulse platform par bhejta hai. Wahan ek Neural Network train karta hai aur use C++ library (INT8 quantized) ke form mein export karta hai.
+* Fixing/Iteration Phase: Agar microcontroller out of RAM (memory limits) chala jata hai, toh developer model ko heavily quantize karta hai taaki accuracy lose kiye bina size chota ho jaye.
+* Live Production Phase: Factory mein motor par laga ESP32 locally vibration analyze karta hai. 99% time woh chup rehta hai, aur sirf tab alert bhejta hai jab ML model anomaly detect karta hai (predictive maintenance).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 15: Advanced Cloud Architecture & Edge Containerization
+
+===Section 15: Advanced Cloud Architecture & Edge Containerization===
+Speaker explain karta hai ki thousands of IoT devices ko cloud pe securely provision, manage, aur update (via Docker) kaise kiya jata hai.
+
+--15--Advanced Cloud Architecture & Edge Containerization--
+Topic 1: Digital Twins & Zero-Touch Provisioning
+Subtopics: AWS IoT Device Shadow, Azure Device Twins, RPC (Remote Procedure Call), Just-in-Time Provisioning
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Cloud architecture diagrams and JSON payload structure
+* Key terms from transcript: Digital Twin, Device Shadow, reported state, desired state, JITP, fleet management
+* Explicit emphasis by speaker: "Never manage device states manually; use shadows so the cloud can sync states even when the device is offline."
+* Speaker ne jo analogies/examples use kiye: Digital Twin is like a virtual avatar of your hardware in the cloud.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Digital Twin, AWS IoT Device Shadow, Azure Device Twins, reported state, desired state, MQTT topics, zero-touch provisioning, JITP (Just-in-Time Provisioning), fleet management, RPC, remote procedure call, JSON payload, offline sync]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer AWS IoT par ek Device Shadow create karta hai. Cloud se `desired` state bhejta hai (e.g., "valve: open"). ESP32 MQTT par us command ko sunta hai, valve open karta hai, aur `reported` state update karta hai (e.g., "valve: open").
+* Fixing/Iteration Phase: Agar device offline ho jata hai, cloud update fail nahi karta, balki state ko hold karta hai. Jab device reconnect hota hai, woh immediately shadow sync karke missed command execute kar leta hai.
+* Live Production Phase: Company factory se 10,000 ESP32 boards ship karti hai. Devices pehli baar internet se connect hote hi automatically cloud par apne unique certificates generate aur provision kar lete hain (Zero-Touch).
+
+--15--Advanced Cloud Architecture & Edge Containerization--
+Topic 2: Edge Containerization on Raspberry Pi (Docker/Balena)
+Subtopics: Docker Basics for Edge, Docker Compose, Microservices, BalenaOS, Container Auto-Restart
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Dockerfiles creation and Balena deploy process
+* Key terms from transcript: Docker, container, image, microservices, BalenaOS, K3s, restart policy
+* Explicit emphasis by speaker: Containerizing your Python app ensures it runs exactly the same on your laptop and on the Pi.
+* Speaker ne jo analogies/examples use kiye: Shipping containers — it doesn't matter what's inside; the cargo ship (OS) knows exactly how to load and run it.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Docker, containerization, Dockerfile, `docker-compose.yml`, microservices, BalenaOS, BalenaCloud, K3s, edge gateway, restart policy, `restart: always`, volume mapping, dependency isolation]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer apne Python Telegram bot aur camera script ko ek `Dockerfile` mein pack karta hai. VNC ya bare-metal ke bajaye, woh Pi par seedha `docker-compose up -d` run karta hai.
+* Fixing/Iteration Phase: Agar Python script crash karti hai (e.g., API timeout), Docker ki `restart: always` policy container ko turant reboot kar deti hai bina pure OS ko hilaaye.
+* Live Production Phase: Enterprise deployments mein, Raspberry Pi fleet par BalenaOS install hota hai. Developer GitHub pe naya code push karta hai, aur cloud automatically saare Raspberry Pi gateways par naya Docker container over-the-air deploy kar deta hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 16: Hardware DFM (Design for Manufacturing) & Compliance
+
+===Section 16: Hardware DFM (Design for Manufacturing) & Compliance===
+Speaker prototype boards (Arduino/ESP32 dev kits) se move karke custom PCBs banane aur global certifications pass karne ke concepts sikhata hai.
+
+--16--Hardware DFM (Design for Manufacturing) & Compliance--
+Topic 1: Custom PCB Design & Signal Integrity
+Subtopics: Schematic Design, PCB Layout, Decoupling Capacitors, Ground Planes, Antenna Placement
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: PCB design software walkthrough and rules
+* Key terms from transcript: PCB, schematic, Altium, KiCad, decoupling capacitor, ground plane, EMI
+* Explicit emphasis by speaker: "Dev boards have decoupling capacitors built-in. If you use a bare ESP32 chip on your own PCB without them, it will randomly reset."
+* Speaker ne jo analogies/examples use kiye: Ground plane acting like a sponge to absorb electronic noise.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[PCB, Printed Circuit Board, Design for Manufacturing, DFM, KiCad, Altium Designer, schematic, decoupling capacitors, ground plane, copper pour, trace width, via stitching, antenna keep-out zone, bare-metal chip, ESP32-WROOM]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer breadboard prototype ko KiCad mein schematic mein convert karta hai, bare chips (ESP32/STM32) use karta hai, aur unke aas-paas 100nF ke decoupling capacitors place karta hai taaki power spikes chip ko reset na karein.
+* Fixing/Iteration Phase: Wi-Fi range kam aane par, developer PCB redesign karta hai taaki ESP32 antenna ke theek neeche koi copper ya ground plane na ho (Antenna keep-out zone).
+* Live Production Phase: Gerber files generate karke factory (e.g., JLCPCB/PCBWay) ko bheji jaati hain jahan Pick-and-Place machines mass-produce karti hain.
+
+--16--Hardware DFM (Design for Manufacturing) & Compliance--
+Topic 2: EMI/EMC Compliance & ESD Protection
+Subtopics: TVS Diodes, Optocouplers, CE/FCC Certifications, Reverse Polarity Protection
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual only
+* Transcript mein content volume: Safety electronics theory
+* Key terms from transcript: ESD, TVS diode, CE, FCC, optocoupler, transient voltage
+* Explicit emphasis by speaker: "If a user touches your button after walking on a carpet, the static shock can fry your microcontroller instantly."
+* Speaker ne jo analogies/examples use kiye: TVS Diode is like a pressure relief valve; if voltage goes above safe limits, it safely dumps it to ground.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[EMI, Electromagnetic Interference, EMC, Electromagnetic Compatibility, ESD, Electrostatic Discharge, TVS diode, Transient Voltage Suppressor, optocoupler, galvanic isolation, CE certification, FCC compliance, reverse polarity protection, Schottky diode, static shock]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer USB port aur external buttons ki data lines par TVS diodes add karta hai taaki human touch se aane wali static electricity (ESD) chip ko damage na kare.
+* Fixing/Iteration Phase: Agar system high-voltage motors control kar raha hai, toh developer relay/transistor ke bajaye Optocouplers lagata hai taaki high-voltage circuit low-voltage microcontroller se physically isolate rahe (Galvanic Isolation).
+* Live Production Phase: Final product ko independent labs mein bheja jata hai EMI testing ke liye. EMI/EMC tests pass hone ke baad hi product par CE (Europe) ya FCC (USA) ka logo lagta hai aur woh legally market mein sell ho sakta hai.
+
+==================================================================================
+
+```
+📋 EXTRACTED IN THIS PHASE (FINAL INDUSTRY MASTER ADDITIONS):
+
+Section 14: Edge AI & Machine Learning (TinyML)
+  Topic 1: TinyML Fundamentals & Edge Impulse
+
+Section 15: Advanced Cloud Architecture & Edge Containerization
+  Topic 1: Digital Twins & Zero-Touch Provisioning
+  Topic 2: Edge Containerization on Raspberry Pi (Docker/Balena)
+
+Section 16: Hardware DFM (Design for Manufacturing) & Compliance
+  Topic 1: Custom PCB Design & Signal Integrity
+  Topic 2: EMI/EMC Compliance & ESD Protection
+
+📊 PHASE SUMMARY:
+Sections Added: 3 | Topics Added: 5
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
 
 
-===Section 14: Conclusion===
+# Section 17: Conclusion
+
+
+===Section 17: Conclusion===
 Speaker is section mein course ka recap deta hai, project development ki best practices summarize karta hai, aur advanced robotics frameworks (ROS) ke baare mein batata hai.
 
---14--Conclusion--
+--17--Conclusion--
 Topic 1: Best Practices & Project Workflow
 Subtopics: Project Idea, Functionality Allocation, Communication Protocol, Coding Sequence, Iterative Testing
 
@@ -2020,7 +2183,7 @@ Subtopics: Project Idea, Functionality Allocation, Communication Protocol, Codin
 * Mastery Phase: Developer pehle Arduino code likhta hai aur Serial monitor se debug karta hai, phir RPi pe step-by-step logic implement karke real product complete karta hai.
 * Additional context: Speaker is workflow ko ek "best practice" batata hai jo kisi bhi naye scratch project ko fast develop karne mein help karta hai.
 
---14--Conclusion--
+--17--Conclusion--
 Topic 2: Next Steps & Advanced Technologies
 Subtopics: Project Customization, Project Ideation, Robot Operating System, ROS Integration
 
@@ -2048,7 +2211,7 @@ Subtopics: Project Customization, Project Ideation, Robot Operating System, ROS 
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 14: Conclusion
+Section 17: Conclusion
 Topic 1: Best Practices & Project Workflow
 Topic 2: Next Steps & Advanced Technologies
 
