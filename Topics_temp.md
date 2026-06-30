@@ -2177,12 +2177,65 @@ Sections Added: 4 | Topics Added: 7
 
 ==================================================================================
 
-# Section 18: Edge AI & Machine Learning (TinyML)
+# Section 18: Computer Vision Fundamentals (OpenCV)
 
-===Section 18: Edge AI & Machine Learning (TinyML)===
+===Section 18: Computer Vision Fundamentals (OpenCV)===
+Speaker is section mein batata hai ki heavy AI models run karne se pehle, OpenCV ka use karke camera frames ko pre-process, filter, aur analyze kaise kiya jata hai.
+
+--18--Computer Vision Fundamentals (OpenCV)--
+Topic 1: Image Processing & Frame Pre-Processing
+Subtopics: OpenCV Installation, Color Space Conversion (RGB to Grayscale), Gaussian Blur, Canny Edge Detection, Region of Interest (ROI)
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Python code for manipulating PiCamera streams with OpenCV
+* Key terms from transcript: OpenCV, cv2, Grayscale, thresholding, edge detection, pre-processing, ROI
+* Explicit emphasis by speaker: "Never feed raw 1080p RGB frames directly to an AI model. Always use OpenCV to crop, grayscale, and resize first to save 80% of your processing power."
+* Speaker ne jo analogies/examples use kiye: OpenCV is like wearing polarized sunglasses — it filters out the noise so you only see the important shapes.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[OpenCV, cv2, computer vision, frame masking, Grayscale conversion, Gaussian Blur, Canny Edge Detection, thresholding, Region of Interest, ROI, frame rate optimization, numpy arrays, PiCamera array]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Raspberry Pi par `opencv-python` install karta hai. Camera se live frame capture karke usko grayscale mein convert karta hai, noise hatane ke liye blur karta hai, aur objects ke borders nikalne ke liye Canny Edge detection lagata hai.
+* Fixing/Iteration Phase: Agar frame process hone mein delay aa raha hai, toh developer Region of Interest (ROI) define karta hai, taaki code poore frame ke bajaye sirf us hisse ko dekhe jahan movement expected hai.
+* Live Production Phase: Assembly line par jab koi part gujarta hai, OpenCV us part ka silhouette (edges) extract karta hai aur sirf woh chota processed frame aage AI model ko bhejta hai, jisse system ultra-fast (60 FPS) chalta hai.
+
+--18--Computer Vision Fundamentals (OpenCV)--
+Topic 2: Classical Vision: Motion & Barcode Decoding
+Subtopics: Background Subtraction, Contour Detection, ZBar Integration, QR Code Scanning
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Logic for detecting changes between frames without Deep Learning
+* Key terms from transcript: Background subtraction, contours, bounding box, QR code, PyZbar
+* Explicit emphasis by speaker: "You don't need a heavy Neural Network just to detect if someone walked into a room or to read a barcode. Classical computer vision is much faster."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Background subtraction, motion detection, cv2.absdiff, contours, bounding box, cv2.rectangle, PyZbar, QR code reader, Barcode scanner, classical CV, lightweight execution]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer do consecutive camera frames ke beech ka difference nikalta hai (`cv2.absdiff`). Agar difference ek threshold se bada hai, toh matlab frame mein motion hua hai. Us motion ke chaaron taraf ek green rectangle draw karta hai.
+* Fixing/Iteration Phase: Shadows ya light changes ki wajah se aane wale fake motion ko fix karne ke liye developer contour area ka filter lagata hai (sirf baday changes ko motion manna).
+* Live Production Phase: Factory ke entry gate par system 24/7 chalta hai. Jaise hi koi truck aata hai, motion detect hota hai, OpenCV truck pe lage QR code ko padhta hai, aur intercom door autonomously khol deta hai bina kisi heavy AI model ke.
+
+==================================================================================
+
+# Section 19: Edge AI & Machine Learning (TinyML)
+
+===Section 19: Edge AI & Machine Learning (TinyML)===
 Speaker is section mein batata hai ki cloud par data bhejne ke bajaye, microcontrollers (ESP32/STM32) par hi Machine Learning models kaise train aur deploy kiye jaate hain.
 
---18--Edge AI & Machine Learning (TinyML)--
+--19--Edge AI & Machine Learning (TinyML)--
 Topic 1: TinyML Fundamentals & Edge Impulse
 Subtopics: Data Forwarding, Neural Networks on MCU, TensorFlow Lite for Microcontrollers, Anomaly Detection, Keyword Spotting
 
@@ -2205,7 +2258,7 @@ Subtopics: Data Forwarding, Neural Networks on MCU, TensorFlow Lite for Microcon
 * Fixing/Iteration Phase: Agar microcontroller out of RAM (memory limits) chala jata hai, toh developer model ko heavily quantize karta hai taaki accuracy lose kiye bina size chota ho jaye.
 * Live Production Phase: Factory mein motor par laga ESP32 locally vibration analyze karta hai. 99% time woh chup rehta hai, aur sirf tab alert bhejta hai jab ML model anomaly detect karta hai (predictive maintenance).
 
---18--Edge AI & Machine Learning (TinyML)--
+--19--Edge AI & Machine Learning (TinyML)--
 Topic 2: Edge Vision AI & Hardware Accelerators
 Subtopics: Limitations of CPU Vision, Google Coral Edge TPU, Hailo AI Accelerator, Object Detection Models (YOLO), Video Stream Inference
 
@@ -2234,12 +2287,12 @@ Subtopics: Limitations of CPU Vision, Google Coral Edge TPU, Hailo AI Accelerato
 
 ==================================================================================
 
-# Section 19: Local GenAI & Autonomous RAG Systems on Raspberry Pi
+# Section 20: Local GenAI & Autonomous RAG Systems on Raspberry Pi
 
-===Section 19: Local GenAI & Autonomous RAG Systems on Raspberry Pi===
+===Section 20: Local GenAI & Autonomous RAG Systems on Raspberry Pi===
 Speaker is advanced module mein sikhata hai ki Raspberry Pi par bina internet ke chote Large Language Models (LLMs) aur RAG (Retrieval-Augmented Generation) kaise run karein taaki system khud human-like decisions le sake.
 
---19--Local GenAI & Autonomous RAG Systems on Raspberry Pi--
+--20--Local GenAI & Autonomous RAG Systems on Raspberry Pi--
 Topic 1: Running Local LLMs on Raspberry Pi
 Subtopics: Llama.cpp, Ollama, Model Quantization, Phi-3 / Qwen Models, RAM Constraints, System Prompts
 
@@ -2262,7 +2315,7 @@ Subtopics: Llama.cpp, Ollama, Model Quantization, Phi-3 / Qwen Models, RAM Const
 * Fixing/Iteration Phase: Agar model answer dene mein 30 seconds laga raha hai, toh developer aur chota model (Qwen 0.5B) use karta hai ya context window kam karta hai taaki latency 2-3 seconds tak aa jaye.
 * Live Production Phase: Jab sensor koi strange data bhejta hai, system if-else loop ke bajaye us data ko LLM ke paas as a prompt bhejta hai. LLM autonomously decide karta hai ki situation critical hai ya nahi, aur hardware (Arduino/ESP) ko JSON command bhejta hai.
 
---19--Local GenAI & Autonomous RAG Systems on Raspberry Pi--
+--20--Local GenAI & Autonomous RAG Systems on Raspberry Pi--
 Topic 2: Edge RAG (Retrieval-Augmented Generation) for IoT
 Subtopics: Vector Databases at Edge, ChromaDB/FAISS, Document Embeddings, Maintenance Manuals Ingestion, Context-Aware Execution
 
@@ -2294,7 +2347,7 @@ Section 13: Wireless IoT Gateways & ESP32 Integration
   Topic 1: MQTT Broker on Raspberry Pi (Mosquitto)
   Topic 2: Low-Latency Mesh with ESP-NOW & Bridge to RPi
 
-Section 19: Local GenAI & Autonomous RAG Systems on Raspberry Pi
+Section 20: Local GenAI & Autonomous RAG Systems on Raspberry Pi
   Topic 1: Running Local LLMs on Raspberry Pi
   Topic 2: Edge RAG (Retrieval-Augmented Generation) for IoT
 
@@ -2307,12 +2360,12 @@ Sections Added: 2 | Topics Added: 4
 
 ==================================================================================
 
-# Section 20: Agentic IoT & Model Context Protocol (MCP)
+# Section 21: Agentic IoT & Model Context Protocol (MCP)
 
-===Section 20: Agentic IoT & Model Context Protocol (MCP)===
+===Section 21: Agentic IoT & Model Context Protocol (MCP)===
 Speaker is section mein batata hai ki ek simple LLM ko ek "Autonomous Agent" mein kaise convert karein jo MCP (Model Context Protocol) ka use karke physically hardware ko control kar sake aur khud decisions le sake.
 
---20--Agentic IoT & Model Context Protocol (MCP)--
+--21--Agentic IoT & Model Context Protocol (MCP)--
 Topic 1: Introduction to Agentic AI & MCP Architecture
 Subtopics: LLM vs Autonomous Agent, Tool Calling (Function Calling), Model Context Protocol (MCP) Standard, MCP Client vs MCP Server, LangGraph/CrewAI Basics
 
@@ -2335,7 +2388,7 @@ Subtopics: LLM vs Autonomous Agent, Tool Calling (Function Calling), Model Conte
 * Fixing/Iteration Phase: Hardware APIs ko alag-alag likhne ke bajaye, developer **Model Context Protocol (MCP)** standard apnata hai taaki koi bhi AI model (GPT-4, Claude, ya Local Llama) bina code change kiye un tools ko samajh sake.
 * Live Production Phase: Ek autonomous AI agent Raspberry Pi par 24/7 background mein run karta hai aur factory ke states ko monitor karta hai, apne aap decision leta hai bina human intervention ke.
 
---20--Agentic IoT & Model Context Protocol (MCP)--
+--21--Agentic IoT & Model Context Protocol (MCP)--
 Topic 2: Building an IoT MCP Server for Hardware Control
 Subtopics: Exposing Serial/MQTT as Tools, Writing MCP Tool Schemas, Guardrails & Human-in-the-Loop, Autonomous Execution Loop
 
@@ -2360,12 +2413,12 @@ Subtopics: Exposing Serial/MQTT as Tools, Writing MCP Tool Schemas, Guardrails &
 
 ==================================================================================
 
-# Section 21: Advanced Cloud Architecture & Edge Containerization
+# Section 22: Advanced Cloud Architecture & Edge Containerization
 
-===Section 21: Advanced Cloud Architecture & Edge Containerization===
+===Section 22: Advanced Cloud Architecture & Edge Containerization===
 Speaker explain karta hai ki thousands of IoT devices ko cloud pe securely provision, manage, aur update (via Docker) kaise kiya jata hai.
 
---21--Advanced Cloud Architecture & Edge Containerization--
+--22--Advanced Cloud Architecture & Edge Containerization--
 Topic 1: Digital Twins & Zero-Touch Provisioning
 Subtopics: AWS IoT Device Shadow, Azure Device Twins, RPC (Remote Procedure Call), Just-in-Time Provisioning
 
@@ -2388,7 +2441,7 @@ Subtopics: AWS IoT Device Shadow, Azure Device Twins, RPC (Remote Procedure Call
 * Fixing/Iteration Phase: Agar device offline ho jata hai, cloud update fail nahi karta, balki state ko hold karta hai. Jab device reconnect hota hai, woh immediately shadow sync karke missed command execute kar leta hai.
 * Live Production Phase: Company factory se 10,000 ESP32 boards ship karti hai. Devices pehli baar internet se connect hote hi automatically cloud par apne unique certificates generate aur provision kar lete hain (Zero-Touch).
 
---21--Advanced Cloud Architecture & Edge Containerization--
+--22--Advanced Cloud Architecture & Edge Containerization--
 Topic 2: Edge Containerization on Raspberry Pi (Docker/Balena)
 Subtopics: Docker Basics for Edge, Docker Compose, Microservices, BalenaOS, Container Auto-Restart
 
@@ -2415,12 +2468,65 @@ Subtopics: Docker Basics for Edge, Docker Compose, Microservices, BalenaOS, Cont
 
 ==================================================================================
 
-# Section 22: Hardware DFM (Design for Manufacturing) & Compliance
+# Section 23: Central AI Orchestration & Swarm Intelligence
 
-===Section 22: Hardware DFM (Design for Manufacturing) & Compliance===
+===Section 23: Central AI Orchestration & Swarm Intelligence===
+Speaker batata hai ki jab aapke paas 100 Raspberry Pi Agentic nodes hon, toh un sabko ek 'Central Brain' (Cloud AI) ke through kaise orchestrate aur coordinate kiya jata hai.
+
+--23--Central AI Orchestration & Swarm Intelligence--
+Topic 1: Cloud AI Hubs & Fleet Analytics
+Subtopics: Centralized Data Lakes, Sending Edge Features to Cloud, Large Model Inference (AWS Bedrock/OpenAI), Predictive Fleet Analytics
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Architectural data flow from Edge to Central AI
+* Key terms from transcript: Central AI, Swarm, AWS Bedrock, data lake, fleet analytics, big data
+* Explicit emphasis by speaker: "The Edge AI reacts in milliseconds to stop a machine. The Central AI analyzes months of data from 1000 machines to improve factory efficiency."
+* Speaker ne jo analogies/examples use kiye: Edge AI is the reflex system (pulling your hand from a hot stove). Central AI is the conscious brain (learning not to touch stoves).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Central AI, Cloud Orchestration, Swarm Intelligence, AWS Bedrock, OpenAI API, Data Lake, S3, Fleet analytics, global dashboard, large context windows, multi-modal AI, predictive maintenance fleet-wide]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Raspberry Pi se sirf highly compressed features (e.g., "Motor 5 overheat frequency") ko secure MQTT ke through Cloud Data Lake mein bhejta hai.
+* Fixing/Iteration Phase: Raw video/audio bhejne se cloud bill badh jata hai, isliye developer rule lagata hai ki Pi sirf anomalies aur text logs hi Central AI ko feed kare.
+* Live Production Phase: Cloud par baitha ek massive GPT-4o ya Claude model poori factory ke 100 Pis ka data ek sath dekhta hai aur pattern nikalta hai ki "Jab Machine A rukti hai, toh 5 minute baad Machine C mein error aati hai", aur poori supply chain ko optimize kar deta hai.
+
+--23--Central AI Orchestration & Swarm Intelligence--
+Topic 2: Multi-Agent Communication (Swarm Orchestration)
+Subtopics: Central MCP Server, Hierarchical AI Agents, Task Delegation, Swarm Coordination Protocols
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Multi-agent routing logic
+* Key terms from transcript: Hierarchical agents, Swarm, Task delegation, Central MCP, inter-agent communication
+* Explicit emphasis by speaker: "In a true swarm, Edge agents don't just talk to the hardware; they talk to each other through the Central AI."
+* Speaker ne jo analogies/examples use kiye: The CEO (Central AI) giving high-level targets to Department Managers (Edge Pis), who then instruct the workers (Arduino/ESP32).
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Swarm orchestration, Multi-Agent System, MAS, Hierarchical AI, Central MCP Server, task delegation, inter-agent communication, global state, LangGraph Swarm, CrewAI Fleet, routing logic]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer ek Central MCP Server likhta hai. Jab Cloud AI decide karta hai ki "Factory temperature needs to drop", woh Central MCP ko call karta hai.
+* Fixing/Iteration Phase: Developer routing logic banata hai taaki Central AI khud decide kare ki kis specific Raspberry Pi (Zone 1, Zone 2) ko cooling trigger karne ka command bhejna hai.
+* Live Production Phase: Agar Factory Zone A mein aag lagti hai, Zone A ka Pi Central AI ko alert karta hai. Central AI autonomously Zone B aur C ke Pis ko command bhejta hai ki "Lock doors and cut gas supply". Yeh 100% autonomous swarm intelligence hai.
+
+==================================================================================
+
+# Section 24: Hardware DFM (Design for Manufacturing) & Compliance
+
+===Section 24: Hardware DFM (Design for Manufacturing) & Compliance===
 Speaker prototype boards (Arduino/ESP32 dev kits) se move karke custom PCBs banane aur global certifications pass karne ke concepts sikhata hai.
 
---22--Hardware DFM (Design for Manufacturing) & Compliance--
+--24--Hardware DFM (Design for Manufacturing) & Compliance--
 Topic 1: Custom PCB Design & Signal Integrity
 Subtopics: Schematic Design, PCB Layout, Decoupling Capacitors, Ground Planes, Antenna Placement
 
@@ -2443,7 +2549,7 @@ Subtopics: Schematic Design, PCB Layout, Decoupling Capacitors, Ground Planes, A
 * Fixing/Iteration Phase: Wi-Fi range kam aane par, developer PCB redesign karta hai taaki ESP32 antenna ke theek neeche koi copper ya ground plane na ho (Antenna keep-out zone).
 * Live Production Phase: Gerber files generate karke factory (e.g., JLCPCB/PCBWay) ko bheji jaati hain jahan Pick-and-Place machines mass-produce karti hain.
 
---22--Hardware DFM (Design for Manufacturing) & Compliance--
+--24--Hardware DFM (Design for Manufacturing) & Compliance--
 Topic 2: EMI/EMC Compliance & ESD Protection
 Subtopics: TVS Diodes, Optocouplers, CE/FCC Certifications, Reverse Polarity Protection
 
@@ -2471,15 +2577,15 @@ Subtopics: TVS Diodes, Optocouplers, CE/FCC Certifications, Reverse Polarity Pro
 ```
 📋 EXTRACTED IN THIS PHASE (FINAL INDUSTRY MASTER ADDITIONS):
 
-Section 18: Edge AI & Machine Learning (TinyML)
+Section 19: Edge AI & Machine Learning (TinyML)
   Topic 1: TinyML Fundamentals & Edge Impulse
   Topic 2: Edge Vision AI & Hardware Accelerators
 
-Section 21: Advanced Cloud Architecture & Edge Containerization
+Section 22: Advanced Cloud Architecture & Edge Containerization
   Topic 1: Digital Twins & Zero-Touch Provisioning
   Topic 2: Edge Containerization on Raspberry Pi (Docker/Balena)
 
-Section 22: Hardware DFM (Design for Manufacturing) & Compliance
+Section 24: Hardware DFM (Design for Manufacturing) & Compliance
   Topic 1: Custom PCB Design & Signal Integrity
   Topic 2: EMI/EMC Compliance & ESD Protection
 
@@ -2493,12 +2599,12 @@ Sections Added: 3 | Topics Added: 5
 ==================================================================================
 
 
-# Section 23: Robotics & Autonomous Systems (ROS 2)
+# Section 25: Robotics & Autonomous Systems (ROS 2)
 
-===Section 23: Robotics & Autonomous Systems (ROS 2)===
+===Section 25: Robotics & Autonomous Systems (ROS 2)===
 Speaker batata hai ki real-world AGVs (Automated Guided Vehicles) aur robotics ke liye custom Python scripts ki jagah ROS 2 framework aur micro-ROS ka use kaise kiya jata hai.
 
---23--Robotics & Autonomous Systems (ROS 2)--
+--25--Robotics & Autonomous Systems (ROS 2)--
 Topic 1: ROS 2 Architecture & DDS Middleware
 Subtopics: ROS 1 EOL, Nodes, Topics, Publish/Subscribe in ROS, Data Distribution Service (DDS), Distributed Computing
 
@@ -2521,7 +2627,7 @@ Subtopics: ROS 1 EOL, Nodes, Topics, Publish/Subscribe in ROS, Data Distribution
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: Ek complex robot mein multiple Raspberry Pis aur sensors lagaye jate hain. ROS 2 un sabko ek unified system ki tarah treat karta hai (Distributed Computing).
 
---23--Robotics & Autonomous Systems (ROS 2)--
+--25--Robotics & Autonomous Systems (ROS 2)--
 Topic 2: Bridging Microcontrollers with micro-ROS
 Subtopics: micro-ROS Architecture, ESP32 ROS 2 Nodes, XRCE-DDS Agent, Seamless Hardware Integration
 
@@ -2546,12 +2652,12 @@ Subtopics: micro-ROS Architecture, ESP32 ROS 2 Nodes, XRCE-DDS Agent, Seamless H
 
 ==================================================================================
 
-# Section 24: Final Conclusion & Industry Readiness
+# Section 26: Final Conclusion & Industry Readiness
 
-===Section 24: Final Conclusion & Industry Readiness===
+===Section 26: Final Conclusion & Industry Readiness===
 Speaker course wrap up karta hai aur IoT/Robotics engineer banne ke workflow aur mindset par final advice deta hai.
 
---24--Final Conclusion & Industry Readiness--
+--26--Final Conclusion & Industry Readiness--
 Topic 1: The Full-Stack Hardware Engineer
 Subtopics: Prototype to Production Pipeline, Mindset Shift, Continuous Learning
 
@@ -2596,9 +2702,37 @@ Sections Added: 1 | Topics Added: 2
 ```
 📋 EXTRACTED IN THIS PHASE (THE FINAL AGENTIC AI PILLAR):
 
-Section 20: Agentic IoT & Model Context Protocol (MCP)
+Section 21: Agentic IoT & Model Context Protocol (MCP)
   Topic 1: Introduction to Agentic AI & MCP Architecture
   Topic 2: Building an IoT MCP Server for Hardware Control
+
+📊 PHASE SUMMARY:
+Sections Added: 1 | Topics Added: 2
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+```
+📋 EXTRACTED IN THIS PHASE (OPENCV ADDITION):
+
+Section 18: Computer Vision Fundamentals (OpenCV)
+  Topic 1: Image Processing & Frame Pre-Processing
+  Topic 2: Classical Vision: Motion & Barcode Decoding
+
+📊 PHASE SUMMARY:
+Sections Added: 1 | Topics Added: 2
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+```
+📋 EXTRACTED IN THIS PHASE (CENTRAL AI ADDITION):
+
+Section 23: Central AI Orchestration & Swarm Intelligence
+  Topic 1: Cloud AI Hubs & Fleet Analytics
+  Topic 2: Multi-Agent Communication (Swarm Orchestration)
 
 📊 PHASE SUMMARY:
 Sections Added: 1 | Topics Added: 2
