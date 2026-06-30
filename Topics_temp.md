@@ -177,75 +177,72 @@ Subtopics: Pi Boot Sequence, LED Indicators, IP Scanner Tool, IP Range Configura
 * Additional context: Angry IP scanner ko chalane ke liye Java install hona zaroori hai.
 
 --2--Raspberry Pi OS Installation & Headless Setup--
-Topic 3: Initial SSH Connection
-Subtopics: .ssh Folder Cleanup, Command Prompt/Terminal, PuTTY Installation, SSH Login Command, Default Credentials
+Topic 3: Initial SSH Connection (Native OpenSSH)
+Subtopics: .ssh Folder Cleanup, Command Prompt/Terminal, Native Windows SSH, SSH Login Command, Default Credentials
 
 [📊 SCOPE SIGNAL for Topic 3:
-
 * Depth Level: Moderate
 * Coverage Angle: Practical only
 * Transcript mein content volume: Step-by-step terminal commands and login flow
-* Key terms from transcript: Dot H folder, known hosts, terminal, user age, putting on, username, default username
-* Explicit emphasis by speaker: "So there is no way for you to discover that it's simply the default one that I'm giving it to you" (referring to username 'pi').
+* Key terms from transcript: known hosts, terminal, Windows Terminal, OpenSSH, default username
+* Explicit emphasis by speaker: "You don't need third-party apps like PuTTY anymore. Windows, Mac, and Linux all have native SSH built right into the terminal."
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[ESA's age[unclear], S.H.[unclear], Dot H folder[unclear], known hosts, terminal, Windows key and then C and a command, Linux, Mac, Windows 10, user age is his age[unclear], message command not found[unclear], putting on[unclear], client, default username, by[unclear], pi, 192, 168, 43 Dot 56, password, raspberry]
+[SSH connection, `.ssh` folder, known_hosts, Windows Terminal, PowerShell, Mac, Linux, native OpenSSH, ⭐PuTTY deprecated, client, default username, pi, 192.168.x.x, password, raspberry]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-
-* Testing/Offline Phase: Developer command prompt ya terminal kholta hai (Windows/Mac/Linux) aur `ssh pi@IP_ADDRESS` type karke Pi ka remote access leta hai. Windows users jinke paas native SSH nahi hai, woh "PuTTY" client use karte hain.
-* Fixing/Iteration Phase: Agar connection error aaye, toh developer apne user directory se `.ssh/known_hosts` file delete karta hai purane conflicting certificates clear karne ke liye.
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi live production phase describe nahi kiya gaya)
-* Additional context: Pehli baar connect karne pe host warning aati hai jisse 'yes' karke accept karna padta hai, uske baad blind password typing karni hoti hai.
+* Testing/Offline Phase: Developer natively Windows PowerShell, Mac Terminal, ya Linux console kholta hai aur seedha `ssh pi@IP_ADDRESS` type karke Pi ka remote access leta hai bina koi extra software install kiye.
+* Fixing/Iteration Phase: Agar "Host key verification failed" error aaye, toh developer apne user directory se `.ssh/known_hosts` file delete karta hai ya terminal mein `ssh-keygen -R IP_ADDRESS` run karke purane conflicting certificates clear karta hai.
+* Live Production Phase: Developer hamesha native terminal environment use karta hai jisse scripts aur SSH keys (like `ssh-keygen`) cross-platform seamlessly kaam karte hain.
 
 --2--Raspberry Pi OS Installation & Headless Setup--
-Topic 4: Enabling VNC Server via raspi-config
-Subtopics: VNC Purpose, Raspi-Config Tool, Interface Options, Boot Auto-login, Display Resolution, Rebooting
+Topic 4: Modern Remote Desktop (WayVNC & Wayland)
+Subtopics: Bookworm OS Changes, Wayland vs X11, TigerVNC / WayVNC Setup, Screen Resolution via Wayfire
 
 [📊 SCOPE SIGNAL for Topic 4:
-
 * Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation of terminal UI navigation and multiple config changes
-* Key terms from transcript: ANC, desktop, raspy dash config, administrator, interface options, V.A. server, boot auto-login, display options
-* Explicit emphasis by speaker: Resolution change karna bahut zaroori hai warna "for some reasons... the Vinci saver may not walk" (VNC server kaam nahi karega).
-* Speaker ne jo analogies/examples use kiye: None
+* Transcript mein content volume: Long explanation of OS architecture changes and new VNC protocols
+* Key terms from transcript: Bookworm, Wayland, X11, WayVNC, TigerVNC, wayfire.ini, headless resolution
+* Explicit emphasis by speaker: "RealVNC is outdated for the new Bookworm OS because it uses Wayland instead of X11. We must use WayVNC or TigerVNC now."
+* Speaker ne jo analogies/examples use kiye: Upgrading from an old highway (X11) to a modern, secure high-speed rail (Wayland).
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[ANC[unclear], VNC, desktop, monitor, pseudo space[unclear], raspy dash config, auto completion, administrator, interface options, V.A. server[unclear], sudo route[unclear], sudo reboot, boot auto-login, desktop ontology[unclear], display options, resolution, full HD, Vinci saver[unclear]]
+[Bookworm OS, Wayland, X11 deprecation, WayVNC, TigerVNC, headless resolution, wayfire.ini, raspi-config, Advanced Options, Wayland backend, secure remote desktop]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
-
-* Testing/Offline Phase: Developer SSH terminal ke andar `sudo raspi-config` command run karta hai. Woh Interface Options mein jaake VNC server enable karta hai, Boot options mein auto-login to desktop set karta hai, aur Display options mein full HD resolution set karta hai taaki remote screen sahi se render ho.
-* Fixing/Iteration Phase: Har major setting change ke baad developer Pi ko `sudo reboot` se restart karta hai aur SSH ke through wapas connect karta hai next config update karne ke liye.
-* Live Production Phase: Headless setups mein VNC ka use karke developer bina kisi external monitor ya keyboard lagaye Pi ka pura graphical desktop access kar sakta hai.
-* Additional context: Transcript mein VNC ko kaafi jagah "ANC", "Vinci", ya "V.A. server" auto-caption kiya gaya hai.
+* Testing/Offline Phase: Developer SSH terminal ke andar `sudo raspi-config` chalata hai, par RealVNC enable karne ke bajaye Advanced options se Wayland backend verify karta hai, aur headless resolution set karne ke liye `wayfire.ini` edit karta hai.
+* Fixing/Iteration Phase: Agar purana RealVNC viewer connect nahi ho raha (black screen/error), toh developer realize karta hai ki OS Wayland par hai, aur apne PC par TigerVNC viewer install karke fix karta hai.
+* Live Production Phase: Modern headless setups mein Wayland better security aur performance deta hai hardware acceleration ke through.
+* Additional context: Speaker aggressively warn karta hai ki purane tutorials jo RealVNC sikhate hain woh ab latest Raspberry Pi OS par crash karenge.
 
 --2--Raspberry Pi OS Installation & Headless Setup--
-Topic 5: VNC Client Setup & OS Configuration
-Subtopics: RealVNC Viewer Installation, Desktop Connection, Changing Default Password, OS Update Wizard, Config.txt Resolution Fix, Safe Shutdown Procedure
+Topic 5: Raspberry Pi Connect (Official Web GUI)
+Subtopics: RPi Connect Daemon, Browser-based VNC, RPi ID Linking, NAT/Firewall Bypass
 
 [📊 SCOPE SIGNAL for Topic 5:
-
 * Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation traversing the GUI setup, terminal file editing, and hardware safety
-* Key terms from transcript: real DNC, multi-platform, full screen mode, Nano text editor, config that, shut down, power cable
-* Explicit emphasis by speaker: "Very important thing is actually when you want to shut down... don't just take off your cable when it's running" kyunki isse SD card corrupt ho sakta hai.
-* Speaker ne jo analogies/examples use kiye: Computer ko direct plug pull nahi karte running state mein — Pi ke sath bhi wahi karna hai.
+* Transcript mein content volume: Setup walkthrough for the new official Raspberry Pi Connect service
+* Key terms from transcript: Raspberry Pi Connect, rpi-connect, web browser, NAT traversal, firewall bypass
+* Explicit emphasis by speaker: "You don't even need to install a VNC viewer anymore. Raspberry Pi Connect lets you access the desktop directly from any web browser."
+* Speaker ne jo analogies/examples use kiye: Like TeamViewer or AnyDesk, but built natively by Raspberry Pi and runs directly in your browser.
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[real DNC[unclear], VNC viewer, real DNC dot com, Windows client, multi-platform, warning, welcome screen, country, language, new password, black border, update, packages, restart, attempt to reconnect, full screen mode, Nano text editor, slash boot slash config that[unclear], `/boot/config.txt`, hashtag, control S, control X, shut down, power cable, corrupt the SD card]
+[Raspberry Pi Connect, rpi-connect, daemon, web browser, remote desktop, secure tunnel, NAT traversal, firewall bypass, Raspberry Pi ID, `rpi-connect signin`, web portal]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+* Testing/Offline Phase: Developer terminal mein `sudo apt install rpi-connect` chalata hai, fir `rpi-connect signin` karke apne Raspberry Pi ID se device ko link karta hai.
+* Fixing/Iteration Phase: Pehle VNC ke liye IP scanners aur port forwarding (ngrok/Cloudflare) ki zaroorat padti thi. Ab developer router ke bahar se bhi bina VPN ke direct browser se connect kar leta hai.
+* Live Production Phase: Fleet management easy ho gaya hai. Developer duniya ke kisi bhi kone se connect.raspberrypi.com par login karke apni factory ke Pi ka live GUI dekh sakta hai.
 
-* Testing/Offline Phase: Developer apne main PC pe "RealVNC Viewer" install karke Pi ke IP aur new password se graphical desktop access karta hai. Phir initial wizard ke through password change karta hai aur system packages update karta hai.
-* Fixing/Iteration Phase: Agar VNC screen ka resolution fit nahi ho raha ya black borders hain, toh developer terminal khol kar `sudo nano /boot/config.txt` open karta hai aur specific framebuffer line ko hashtag se comment out karke save karta hai.
-* Live Production Phase: Jab kaam khatam ho jaye, toh Pi ko hamesha GUI menu ya command se proper 'shut down' kiya jata hai, aur screen black hone===Section 3: Professional Development Workflow (VS Code & PlatformIO)===
+# Section 3: Professional Development Workflow (VS Code & PlatformIO)
+
+===Section 3: Professional Development Workflow (VS Code & PlatformIO)===
 Speaker is section mein outdated VNC aur Arduino IDE workflow ko replace karke, VS Code Remote SSH aur PlatformIO ke through ek fast, headless, aur professional development environment set up karna sikhata hai.
 
 --3--Professional Development Workflow (VS Code & PlatformIO)--
@@ -304,9 +301,9 @@ Subtopics: PlatformIO Extension, platformio.ini Configuration, Library Managemen
 Section 2: Raspberry Pi OS Installation & Headless Setup
   Topic 1: OS Flashing & SD Card Setup
   Topic 2: Booting & IP Discovery
-  Topic 3: Initial SSH Connection
-  Topic 4: Enabling VNC Server via raspi-config
-  Topic 5: VNC Client Setup & OS Configuration
+  Topic 3: Initial SSH Connection (Native OpenSSH)
+  Topic 4: Modern Remote Desktop (WayVNC & Wayland)
+  Topic 5: Raspberry Pi Connect (Official Web GUI)
 
 Section 3: Professional Development Workflow (VS Code & PlatformIO)
   Topic 1: Headless Remote Development (VS Code SSH)
@@ -2006,27 +2003,25 @@ Subtopics: LoRa vs LoRaWAN, SX1302 Concentrator Hats, The Things Network (TTN), 
 * Live Production Phase: Smart agriculture farm mein, Raspberry Pi farm ke beecho-beech ek pole par laga hota hai aur 5 kilometer door lage 500 soil sensors ka data bina kisi internet ke collect karta hai.
 
 --14--Long-Range Industrial IoT (LoRaWAN & Cellular)--
-Topic 2: Edge Nodes (ESP32 + LoRa/NB-IoT)
-Subtopics: SX1276/SX1262 Transceivers, AT Commands for Cellular, Payload Formatting, Deep Sleep Integration
+Topic 2: Edge Nodes (ESP32 + LTE-M/NB-IoT)
+Subtopics: 2G Network Shutdown, SIM7080G/SIM7000 Modules, LTE-M vs NB-IoT, AT Commands for 4G, Deep Sleep Integration
 
 [📊 SCOPE SIGNAL for Topic 2:
-
 * Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Code for formatting bytes and communicating with cell towers
-* Key terms from transcript: SX1276, AT commands, NB-IoT, LTE-M, SIM module, payload formatter
-* Explicit emphasis by speaker: "In LoRaWAN, every single byte costs battery and airtime. Never send JSON over LoRa; always pack data into raw bytes."
-* Speaker ne jo analogies/examples use kiye: Packing a suitcase — JSON is like putting clothes in separate big boxes; byte-packing is vacuum-sealing everything into one tiny bag.
+* Transcript mein content volume: Hardware migration from 2G to 4G IoT and AT command execution
+* Key terms from transcript: 2G sunset, SIM800L dead, SIM7080G, NB-IoT, LTE-M, AT commands, CAT-M1
+* Explicit emphasis by speaker: "Do NOT buy the SIM800L module anymore. 2G networks are permanently shut down in most countries. We are strictly using LTE-M and NB-IoT modules like SIM7080G."
+* Speaker ne jo analogies/examples use kiye: Packing a suitcase — byte-packing is vacuum-sealing everything into one tiny bag to save expensive cellular data on NB-IoT networks.
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[ESP32, SX1276, SX1262, LoRa node, NB-IoT, LTE-M, SIM800L, SIM7000, AT commands, byte packing, bitwise operations, payload formatter, deep sleep, airtime restrictions, duty cycle]
+[⭐2G sunset, SIM800L deprecated, SIM7080G, SIM7000, NB-IoT, LTE-M, CAT-M1, AT commands, ESP32 cellular, byte packing, bitwise operations, payload formatter, deep sleep, eDRX, PSM, Power Saving Mode]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer ESP32 ko LoRa chip (SX1262) se connect karta hai. Data ko JSON `{"temp": 25.5}` ke bajaye raw bytes (e.g., `0x00FF`) mein pack karne ke liye bitwise operators (shift `<<`) use karta hai.
-* Fixing/Iteration Phase: Agar gateway available nahi hai, toh developer ESP32 ke sath ek NB-IoT Cellular module lagata hai aur serial terminal se AT commands bhej kar direct 4G tower se connection establish karta hai.
-* Live Production Phase: Ek smart water meter (ESP32) zameen ke andar laga hota hai. Woh har 24 ghante mein ek baar deep sleep se uthta hai, NB-IoT ya LoRa ke through 12 bytes ka encrypted payload bhejta hai, aur agle 10 saal tak bina battery change kiye chalta hai.
+* Testing/Offline Phase: Developer ESP32 ko naye SIM7080G (LTE-M/NB-IoT) module se connect karta hai. Purane 2G AT commands ki jagah naye 4G context activation commands test karta hai. Data ko raw bytes mein pack karke bhejta hai taaki bandwidth bache.
+* Fixing/Iteration Phase: Agar connection fail hota hai, toh developer check karta hai ki SIM card specific NB-IoT APN (Access Point Name) pe configured hai ya nahi, aur CAT-M1 vs NB-IoT band scan manually terminal se set karta hai.
+* Live Production Phase: Ek smart water meter zameen ke andar laga hota hai. SIM800L ki tarah yeh fast battery drain nahi karta, balki NB-IoT ke PSM (Power Saving Mode) ka use karke micro-amps pe chalta hai. Woh har 24 ghante mein uth kar payload bhejta hai aur single battery par 10 saal tak chalta hai.
 
 
 
@@ -2035,7 +2030,7 @@ Subtopics: SX1276/SX1262 Transceivers, AT Commands for Cellular, Payload Formatt
 
 Section 14: Long-Range Industrial IoT (LoRaWAN & Cellular)
   Topic 1: LoRaWAN Architecture & Raspberry Pi Gateways
-  Topic 2: Edge Nodes (ESP32 + LoRa/NB-IoT)
+  Topic 2: Edge Nodes (ESP32 + LTE-M/NB-IoT)
 
 📊 PHASE SUMMARY:
 Sections Added: 1 | Topics Added: 2
