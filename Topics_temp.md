@@ -115,7 +115,29 @@ Subtopics: Resistors, Current Limiting, Voltage Divider, Symbols, Units, Visual 
 
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+\nTopic 5: Current Measurement (Amps/mA) & Multimeter Fuse
+Subtopics: Series Connection Testing, Current Draw, Milliamps (mA), Amps (A), Deep Sleep Current, Multimeter 10A Port, Multimeter mA Port, Internal Fuse Blown Fault, Beginner Parallel Mistake
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Detailed steps on breaking the circuit to measure current, with heavy safety warnings
+* Key terms from notes: Series, Circuit todna, Amps, mA, 10A port, probe change, Internal Fuse, Deep sleep, IoT battery life
+* Explicit emphasis in notes: "Multimeter ko kabhi bhi Voltage ki tarah (parallel mein) laga kar Current mat naapna, meter ka fuse udd jayega!"
+* Notes mein jo analogies/examples the: "Paani ke pipe ko kaat kar beech mein flow meter lagana" (Series analogy)
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Current measurement, Amperes, A, mA, microamps, uA, Series, circuit todna, probe placement, 10A port, COM port, VΩmA port, blown fuse, meter fuse, Deep sleep, ESP32 current, WiFi current spike, parallel mistake, short circuit, 10A limit, multimeter safety, paani ka pipe, flow meter]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Circuit ko power off karna, power wire ko cut/disconnect karna, aur multimeter ko 'Series' mein connect karke (ek probe battery par, dusri circuit par) power on karna.
+* Fixing/Iteration Phase: Agar current naapte waqt meter hamesha '0.00' dikhaye (jabki circuit chal raha ho), matlab multimeter ke andar ka mA fuse jal chuka hai aur usko khol kar replace karna padega.
+* Live Production Phase: ESP32 ka WiFi connect hote waqt 500mA spike check karna, ya battery backup calculate karne ke liye deep sleep current (10uA) naapna.
+* Additional context: 10A measuring ke liye hamesha Red probe ko 10A wale alag hole mein daalna zaroori hai.
+\n✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
@@ -123,10 +145,10 @@ Section 1: Electronics Components Foundation & Testing [⚠️ Derived]
 Topic 1: Component Basics & Multimeter Setup [⚠️ Derived]
 Topic 2: Fuse & Fuse Testing (Page 195, 196, 232)
 Topic 3: Ohm's Law (Page 196)
-Topic 4: Resistors, Testing & Color Codes (Page 197, 232)
+Topic 4: Resistors, Testing & Color Codes\nTopic 5: Current Measurement (Amps/mA) & Multimeter Fuse (Page 197, 232)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 60
+Sections: 1 | Topics: 5 | Subtopics: 60
 
 ⏳ Waiting for: Next phase/module notes (Module 2: Potentiometers aur Capacitors)
 
@@ -630,17 +652,39 @@ Section 1: Electronics Formulas & Components Setup [⚠️ Derived]
 
 ```
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+\nTopic 4: Lithium Batteries (18650) & TP4056 BMS Module
+Subtopics: Li-Ion 18650, Li-Po, Nominal Voltage (3.7V), Full Charge (4.2V), Dead Voltage (3.0V), Battery Management System (BMS), TP4056 Module, Over-charge Protection, Over-discharge Protection, Short Circuit Protection, Spot Welding vs Soldering
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Battery handling safety, module wiring (B+, B-, OUT+, OUT-), and voltage testing
+* Key terms from notes: 18650, 3.7V, 4.2V, TP4056, BMS, Over-discharge, aag lagna (fire hazard), B+, B-, OUT+, OUT-
+* Explicit emphasis in notes: "Lithium battery ko 3.0V se niche discharge karna usko hamesha ke liye maar deta hai", "Battery ke upar directly soldering iron lagana blast karwa sakta hai"
+* Notes mein jo analogies/examples the: "Petrol ka tank jo overfill hone par fat sakta hai"
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Li-Ion, 18650 cell, Li-Po, 3.7V Nominal, 4.2V Full, 3.0V Dead, 2.5V under-voltage, TP4056, Type-C charging, BMS, Battery Management System, Over-charge, Over-discharge, OUT+, OUT-, B+, B-, short-circuit protection, aag, fire hazard, blast, spot welder, soldering battery, DW01A protection IC, charge indicator LED, Red LED, Blue LED]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Multimeter ko VDC mode par set karke 18650 battery ka voltage check karna (3.0V se 4.2V ke beech).
+* Fixing/Iteration Phase: Agar ESP32 achanak band ho raha hai, toh TP4056 ke 'OUT' pins par voltage check karna. Agar voltage zero hai, matlab BMS ne under-voltage (battery save karne ke liye) cut-off kar diya hai.
+* Live Production Phase: Kisi bhi IoT, Robotics ya custom PCB project ko rechargeable banana, jisme user Type-C cable se device safely charge kar sake.
+* Additional context: Battery connections direct chip/ESP32 ko nahi dene chahiye, hamesha TP4056 ke 'OUT' se lena chahiye.
+\n✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Electronics Formulas & Components Setup [⚠️ Derived]
 Topic 1: Zaroori Electrical Formulas (Page 208)
 Topic 2: Battery Connections (Series/Parallel) (Page 205)
-Topic 3: Common Abbreviations (Circuit Board ke Akshar) (Page 214)
+Topic 3: Common Abbreviations (Circuit Board ke Akshar)\nTopic 4: Lithium Batteries (18650) & TP4056 BMS Module (Page 214)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 16
+Sections: 1 | Topics: 4 | Subtopics: 16
 
 ⏳ **Waiting for:** Next phase/module notes
 
@@ -716,7 +760,7 @@ AC Wave: ~~~/_/_/_~~~ ---> Full DC Wave: _*/_/_/_/_*
 * Additional context: Component par ek 'cut' (notch) hota hai jo positive pin pehchanne mein madad karta hai.
 
 Topic 3: Special Purpose Diodes [⚠️ Derived]
-Subtopics: Schottky Diode, Metal-Semiconductor Junction, Low Voltage Drop, Fast Switching, Zener Diode, Voltage Regulation, Zener Voltage, Cold Test, Hot Testing, Varactor Diode, Voltage-Controlled Capacitor, Tunnel Diode, Negative Resistance
+Subtopics: Schottky Diode, Metal-Semiconductor Junction, Low Voltage Drop, Fast Switching, Zener Diode, Voltage Regulation, Zener Voltage, Cold Test, Hot Testing
 
 [📊 Diagram reproduced: Schottky Diode ASCII Symbol]
 Anode (+) --->S--- Cathode (-)
@@ -724,31 +768,25 @@ Anode (+) --->S--- Cathode (-)
 [📊 Diagram reproduced: Zener Diode ASCII Symbol]
 Anode (+) --->Z--- Cathode (-)
 
-[📊 Diagram reproduced: Varactor Diode ASCII Symbol]
-Anode (+) --->||--- Cathode (-)
-
-[📊 Diagram reproduced: Tunnel Diode ASCII Symbol]
-Anode (+) --->W--- Cathode (-)
-
 [📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
 * Coverage Angle: Both
 * Notes mein content volume: Multiple specialized component descriptions with specific testing variations
-* Key terms from notes: metal-semiconductor junction, Low Voltage Drop, Fast Switching, Voltage Regulate, Zener Voltage (Vz), Hot testing, Voltage-Controlled Capacitor, Tunnel Diode
+* Key terms from notes: metal-semiconductor junction, Low Voltage Drop, Fast Switching, Voltage Regulate, Zener Voltage (Vz), Hot testing
 * Explicit emphasis in notes: "Multimeter Zener Voltage nahi bata sakta", "Aap ek Schottky diode ki jagah normal diode nahi laga sakte"
-* Notes mein jo analogies/examples the: "Variable Capacitor ka modern digital roop" (Varactor)
+* Notes mein jo analogies/examples the: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[Schottky Diode, metal-semiconductor junction, Low Voltage Drop, 0.15V se 0.4V, Fast Switching, TO-220, Diode Mode, ⇥, ~150 se 400, OL, leaky, SMPS, Output Rectifier, Reverse Polarity Protection, Zener Diode, Reverse, ulta, Voltage Regulate, fixed voltage, Ground, Voltage Protector, Voltage Stabilizer, glass, orange/red color, Zener Voltage (Vz), 5.1V, 12V, 0.5W, Cold Test, 400-800, Hot testing, DC Voltage mode, parallel, Varactor Diode, Varicap, Voltage-Controlled Capacitor, Capacitance, Capacitor symbol, FM Radio, TV Tuners, Channel tune, Tunnel Diode, high-speed switch, negative resistance, W-shape cathode, Microwave, GHz, oscillators, ⭐"Multimeter Zener Voltage nahi bata sakta"[emphasized in notes], ⭐"Aap ek Schottky diode ki jagah normal diode (jaise 1N4007) nahi laga sakte"[emphasized in notes]]
+[Schottky Diode, metal-semiconductor junction, Low Voltage Drop, 0.15V se 0.4V, Fast Switching, TO-220, Diode Mode, ⇥, ~150 se 400, OL, leaky, SMPS, Output Rectifier, Reverse Polarity Protection, Zener Diode, Reverse, ulta, Voltage Regulate, fixed voltage, Ground, Voltage Protector, Voltage Stabilizer, glass, orange/red color, Zener Voltage (Vz), 5.1V, 12V, 0.5W, Cold Test, 400-800, Hot testing, DC Voltage mode, parallel, ⭐"Multimeter Zener Voltage nahi bata sakta"[emphasized in notes], ⭐"Aap ek Schottky diode ki jagah normal diode (jaise 1N4007) nahi laga sakte"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
 * Testing/Offline Phase: Multimeter se diode mode mein in sabhi diodes ka basic 'Open' ya 'Short' fault check (Cold test) karna. Zener ke case mein, actual working ke liye circuit mein power dekar voltage (Hot testing) check karni padti hai.
 * Fixing/Iteration Phase: Agar output short ho ya component TO-220 package mein jala ho, toh uski jagah strictly same type ka (e.g., Schottky ki jagah Schottky) hi replace karna.
-* Live Production Phase: Schottky tezi se SMPS switching aur reverse polarity protection karta hai, Zener microcontroller ko fixed voltage deta hai, Varactor radio channels tune karta hai, aur Tunnel diode microwave circuits mein use hota hai.
-* Additional context: Inme se kuch diodes repair mein bohot rare hote hain (jaise Tunnel diode), inki checking normal multimeter se bas short/open tak limited hai.
+* Live Production Phase: Schottky tezi se SMPS switching aur reverse polarity protection karta hai, Zener microcontroller ko fixed voltage deta hai.
+* Additional context: Inme se kuch diodes repair mein bohot rare hote hain inki checking normal multimeter se bas short/open tak limited hai.
 
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -1345,7 +1383,7 @@ Pin 4 -|     |o Pin 5
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[kaale box, dimaag, dil, Silicon, plastic, ceramic, package, pins, CPU, Processor IC, 555 Timer IC, Symbol, Box, Part Number, 555, LM741, 7805, Dot, bindu, Notch, aadha-circle cut, ⭐Pin 1[emphasized in notes], Anti-clockwise, ghadi ki ulti disha, Visual Check, burnt, jala, cracked, phata, bulged, phoola, rust, zang, Cold Test, Multimeter, Continuity, Beep, Vcc, Power, GND, Ground, ⭐Short[emphasized in notes], 0.00, Hot Test, static electricity, CMOS ICs, Processor, RAM IC, Main Control IC, ATmega328 IC, ECU IC, Oscilloscope, Logic Analyzer, Open]
+[kaale box, dimaag, dil, Silicon, plastic, ceramic, package, pins, CPU, Processor IC, 555 Timer IC, Symbol, Box, Part Number, 555, 7805, Dot, bindu, Notch, aadha-circle cut, ⭐Pin 1[emphasized in notes], Anti-clockwise, ghadi ki ulti disha, Visual Check, burnt, jala, cracked, phata, bulged, phoola, rust, zang, Cold Test, Multimeter, Continuity, Beep, Vcc, Power, GND, Ground, ⭐Short[emphasized in notes], 0.00, Hot Test, static electricity, CMOS ICs, Processor, RAM IC, Main Control IC, ATmega328 IC, ECU IC, Oscilloscope, Logic Analyzer, Open]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -1391,7 +1429,7 @@ Subtopics: Unstable DC to Fixed DC, Positive Voltage Regulators, Negative Voltag
 * Additional context: Yeh ICs garmi paida karti hain, isliye heatsink lagana padta hai warna overheat hokar band (thermal shutdown) ho jayengi.
 
 Topic 3: Operational Amplifiers (Op-Amps)
-Subtopics: High Gain DC Amplifier, Inverting Input, Non Inverting Input, Differential Amplification, Amplifier Circuit, Comparator Circuit, Filter Circuit, Buffer Circuit, Op Amp Pins, Comparator Hot Test, Output Stuck Fault, Single Supply Mistake, Dual Supply Requirement, Op Amp Golden Rule
+Subtopics: High Gain DC Amplifier, Inverting Input, Non Inverting Input, Differential Amplification, Amplifier Circuit, Comparator Circuit, Filter Circuit, Buffer Circuit, Op Amp Pins, Comparator Hot Test, Output Stuck Fault, Single Supply Requirement, Op Amp Golden Rule
 
 [📊 Diagram reproduced: Op-Amp Triangle Symbol ASCII]
 
@@ -1411,20 +1449,20 @@ In+  (+) --- /
 * Depth Level: Deep
 * Coverage Angle: Both
 * Notes mein content volume: Core concepts, use cases, and testing methodology
-* Key terms from notes: high-gain, DC Amplifier, Inverting, Non-Inverting, differential, Amplifier, Comparator, Filter, Buffer, LM741, LM358, V+, V-, Out, Comparator Circuit, Reference, LOW, HIGH, single supply, dual supply, Golden Rule
+* Key terms from notes: high-gain, DC Amplifier, Inverting, Non-Inverting, differential, Amplifier, Comparator, Filter, Buffer, LM358, V+, V-, Out, Comparator Circuit, Reference, LOW, HIGH, single supply, Golden Rule
 * Explicit emphasis in notes: "Golden Rule: Op-Amp apne output ko is tarah badalta hai ki uske dono inputs (V+ aur V-) ka voltage hamesha barabar ho jaaye"
 * Notes mein jo analogies/examples the: "Swiss Army Knife" — multi-purpose use ke liye analogy
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[high-gain, DC Amplifier, Inverting Input, -, Non-Inverting Input, +, Output, Out, differential, antar, amplify, ⭐Swiss Army Knife[analogy], Amplifier, Fix 10x, 100x gain, Audio signal, Comparator, compare, tulna, Filter, noise, shor, Buffer, LM741, LM358, Triangle shape, V+, Power, V-, Visual Check, burnt, cracked, 0V, Hot Test, DC Voltage Mode, Reference, 2.5V, sensor, 1.8V, 3.0V, LOW, HIGH, 4.9V, stuck, atka, single supply, +5V, dual supply, +12V, -12V, IR sensor, Sound sensor, LDR, Photodiode, LM393, pre-amps, ECG signal, Audio equalizers, Bass, Treble, ⭐Golden Rule[emphasized in notes]]
+[high-gain, DC Amplifier, Inverting Input, -, Non-Inverting Input, +, Output, Out, differential, antar, amplify, ⭐Swiss Army Knife[analogy], Amplifier, Fix 10x, 100x gain, Audio signal, Comparator, compare, tulna, Filter, noise, shor, Buffer, LM358, Triangle shape, V+, Power, V-, Visual Check, burnt, cracked, 0V, Hot Test, DC Voltage Mode, Reference, 2.5V, sensor, 1.8V, 3.0V, LOW, HIGH, 4.9V, stuck, atka, single supply, +5V, IR sensor, Sound sensor, LDR, Photodiode, LM393, pre-amps, ECG signal, Audio equalizers, Bass, Treble, ⭐Golden Rule[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
 * Testing/Offline Phase: Multimeter ko DC voltage par set karke Comparator circuit mein V- (reference) aur V+ (sensor) ka voltage naapna, aur output check karna.
 * Fixing/Iteration Phase: Agar V+ < V- hai aur output HIGH hai, ya output ek hi voltage par atka (stuck) hai, toh Op-Amp kharab hai.
 * Live Production Phase: Sensor modules (IR/Sound) mein voltage compare karne ke liye, audio mic signals badhane ke liye, medical ECG machines aur audio equalizers mein.
-* Additional context: Beginners dual-supply LM741 ko single supply par chalane ki galti karte hain, jabki LM358 single par chal jaata hai.
+* Additional context: LM358 single supply par aasaani se chal jaata hai.
 
 Topic 4: Timer 555
 Subtopics: Versatile 8 Pin IC, Three 5k Resistors Concept, Astable Mode, Monostable Mode, IC Pin Details, Visual Inspection, Astable Hot Test, Rapid Fluctuation Output, Capacitor Charge Discharge, Stuck Output Fault, Reset Pin Connection Mistake
@@ -1578,16 +1616,37 @@ Subtopics: Visual Inspection Procedure, Magnifying Glass Analysis, Dry Solder Id
 * [x] Output limit aane se pehle ruka — ek complete Topic ke baad — aur CONTINUE message mein completed + remaining list + progress stats print kiye.
 * [x] Kya maine chhote aur related concepts ko ek broad Topic mein merge kiya hai taaki Topics ki ginti kam rahe aur notes unnecessarily lambe na hon?
 
-> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> \nTopic 3: The "USB Data vs. Power Only" Trap
+Subtopics: Power Only Cables, Data Cables, USB D+ and D- Lines, Continuity Test for USB, COM Port Missing Error, ESP32 Code Upload Failure
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Practical Troubleshooting
+* Notes mein content volume: Step-by-step guide to verifying cable integrity before blaming the microcontroller
+* Key terms from notes: Power-only cable, D+, D-, TX, RX, Continuity test, COM Port, "Failed to connect to ESP32"
+* Explicit emphasis in notes: "Pura din code aur drivers fix karne mein nikal jayega, jabki asli culprit ek ₹50 ki fake USB cable hogi!"
+* Notes mein jo analogies/examples the: "Aisa pipe jisme sirf hawa hai, paani nahi"
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Power only cable, Data cable, USB Type-C, Micro-USB, VBUS, GND, D+, D-, Data Plus, Data Minus, Continuity Beep, break-out board, ESP32 upload error, Failed to connect, COM port missing, Device Manager, USB TTL, fake cable, beginner trap]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: USB cable ko PC mein lagane se pehle, ek USB breakout board ki madad se D+ aur D- pins ki end-to-end continuity check karna.
+* Fixing/Iteration Phase: Agar Arduino IDE mein COM port show nahi ho raha, toh drivers update karne se pehle cable badal kar dekhna sabse pehla SOP kadam hona chahiye.
+* Live Production Phase: N/A (Diagnostic step only)
+\n✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Component Testing Summaries & Systematic Circuit Repair [⚠️ Derived]
 Topic 1: Component Testing Summary Matrix
-Topic 2: Standard Operating Procedure (SOP) for Circuit Repair
+Topic 2: Standard Operating Procedure (SOP) for Circuit Repair\nTopic 3: The "USB Data vs. Power Only" Trap
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 24
+Sections: 1 | Topics: 3 | Subtopics: 24
 
 --- 🛑 PHASE 11 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -1677,17 +1736,38 @@ Subtopics: Voltage Regulators, LDO, Buck Converter, Boost Converter, VIN & VOUT,
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+\nTopic 4: Connectors, Crimping & Wire Integrity
+Subtopics: JST-XH Connectors, Dupont Headers, Screw Terminals, Ribbon (FPC) Cables, Crimping Tool, Continuity End-to-End Test, Internal Wire Breakage
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Notes mein content volume: Types of connectors and how to test for internal wire breaks
+* Key terms from notes: JST-XH, Dupont, Male/Female headers, Crimping, internal break, loose contact
+* Explicit emphasis in notes: "Taar bahar se theek dikhti hai, par andar se tooti hoti hai (Internal Break)"
+* Notes mein jo analogies/examples the: None
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[JST-XH, 2.54mm pitch, Dupont wires, jumper wires, Male-to-Female, Screw terminals, KF301, Ribbon cable, FPC, Crimping tool, metal pins, loose connection, internal breakage, Continuity mode, wire wiggle test, hilakar check karna, mechanical stress]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Multimeter probes ko cable ke dono ends (connectors) par lagakar 'Continuity Beep' sunna, aur phir taar ko thoda 'hila kar (wiggle)' dekhna ki beep rukti toh nahi hai.
+* Fixing/Iteration Phase: Agar motor chalte-chalte ruk jaye, toh 90% fault board par nahi balki JST connector ke loose crimp mein hota hai, jise nayi pin ke sath re-crimp karna padta hai.
+* Live Production Phase: Breadboard prototypes ko final 3D printed box ya PCB mein pack karte waqt JST/Screw terminals use karna taaki wires hilein nahi.
+\n✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
 Section 12: Industry Topics (Prototyping, SMD, Modern Power) [⚠️ Derived]
 Topic 1: Prototyping (Breadboard, Perfboard & Soldering)
 Topic 2: SMD Components (Surface Mount Devices)
-Topic 3: Modern Power (LDO, Buck, Boost)
+Topic 3: Modern Power (LDO, Buck, Boost)\nTopic 4: Connectors, Crimping & Wire Integrity
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 27
+Sections: 1 | Topics: 4 | Subtopics: 27
 
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -1800,7 +1880,28 @@ Subtopics: Circuit Protection, TVS Diodes, PTC Resettable Fuses, Transient Volta
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+\nTopic 5: ESP32 Power Spikes & Brownout Troubleshooting
+Subtopics: Brownout Detector, WiFi Current Spikes, 500mA Peak, Weak LDO Regulators, Missing Bulk Capacitors, Voltage Drop, Reset Loop
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Practical Troubleshooting
+* Notes mein content volume: Explaining why microcontrollers crash when radios turn on and how to fix it
+* Key terms from notes: Brownout, Reset loop, WiFi spike, 500mA, AMS1117-3.3, Bulk capacitor (1000uF)
+* Explicit emphasis in notes: "Brownout ka error code ka nahi, power supply ka fault hai!"
+* Notes mein jo analogies/examples the: "Achanak ghar mein AC on karne se jaise light dim (kam) ho jati hai"
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Brownout detector triggered, ESP32 reset loop, WiFi connection, Radio spike, 500mA peak current, AMS1117-3.3V, weak LDO, voltage drop, VCC sag, Oscilloscope, Bulk Capacitor, 470uF, 1000uF Electrolytic, decoupling, external power supply, USB port current limit, 500mA USB limit]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Multimeter ka response time slow hota hai, isliye WiFi spike dekhne ke liye Oscilloscope ka use hota hai. Par basic test ke liye VDC mode par 3.3V rail par voltage drop observe karna.
+* Fixing/Iteration Phase: Agar serial monitor par "Brownout detector was triggered" aaye, toh ESP32 ke 3.3V aur GND ke beech ek bada (e.g. 470uF) electrolytic capacitor lagana. Agar phir bhi theek na ho, toh better 3.3V Buck converter lagana.
+* Live Production Phase: ESP32 ko server/cloud se connect karte waqt maximum stable power dena taaki device crash na ho.
+\n✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
@@ -1808,10 +1909,10 @@ Section 13: Circuit Stability & Protection [⚠️ Derived]
 Topic 1: Signal Integrity (Decoupling/Bypass Capacitors)
 Topic 2: Pull-up & Pull-down Resistors
 Topic 3: Filtering (Ferrite Beads, RC Filters)
-Topic 4: Protection (TVS Diodes, PTC Resettable Fuses)
+Topic 4: Protection (TVS Diodes, PTC Resettable Fuses)\nTopic 5: ESP32 Power Spikes & Brownout Troubleshooting
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 29
+Sections: 1 | Topics: 5 | Subtopics: 29
 
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -1923,27 +2024,27 @@ Subtopics: Flyback Diodes, Snubber Diode, Inductive Load, Inductive Kickback, Fl
 * Additional context: L298N jaise motor driver ICs aur Relay modules mein yeh diode pehle se circuit board par laga hota hai.
 
 Topic 5: Actuators (Servo, Stepper) & Drivers (H-Bridge)
-Subtopics: Actuators, Servo Motor, Stepper Motor, H-Bridge Driver, L298N, L293D, Servo Motor Testing, H-Bridge Testing, External Power Supply, Stepper Drivers
+Subtopics: Actuators, Servo Motor, Stepper Motor, H-Bridge Driver, L298N (theory), DRV8833, TB6612FNG, Servo Motor Testing, H-Bridge Testing, External Power Supply, Stepper Drivers
 
 [📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Deep
 * Coverage Angle: Both
 * Notes mein content volume: Detailed comparison of motors, testing steps for servo and H-bridge, real-world examples
-* Key terms from notes: muscles, PWM, Step, Direction, L298N, L293D, IN1, IN2, OUT1, OUT2, VCC_Motor, VCC_Logic, DRV8833, TB6612FNG, micro-stepping
+* Key terms from notes: muscles, PWM, Step, Direction, DRV8833, TB6612FNG, L298N (inefficient), IN1, IN2, OUT1, OUT2, VCC_Motor, VCC_Logic, DRV8833, TB6612FNG, micro-stepping
 * Explicit emphasis in notes: "Motor ko hamesha alag (External) Power Supply se chalayein!", "Sabse common fault"
 * Notes mein jo analogies/examples the: "haath-paanv (muscles)", "car ki steering", "3D Printer"
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[Actuators, muscles, haath-paanv, Servo Motor, specific angle, 0°, 180°, steering, Stepper Motor, precise steps, 1.8°, Driver, H-Bridge, Arduino, PWM, Step, Direction, L298N, L293D, MOSFETs, Transistors, GND, VCC, Signal, IN1, IN2, OUT1, OUT2, kat-kat, jerk, jhatke, explode, ⭐Sabse common fault[emphasized in notes], burnt, Servo Sweep, VCC_Motor, VCC_Logic, High, Low, Reset, 500mA, 1A, 2A, ⭐External Power Supply[emphasized in notes], inefficient, heat, DRV8833, TB6612FNG, Robotic Arm, RC Cars, RC Planes, Camera Gimbal, Automatic door lock, 3D Printers, CNC Machines, Paper printers, Medical equipment, Robotics cars, DC motor, Stepper Drivers, A4988, DRV8825, micro-stepping]
+[Actuators, muscles, haath-paanv, Servo Motor, specific angle, 0°, 180°, steering, Stepper Motor, precise steps, 1.8°, Driver, H-Bridge, Arduino, PWM, Step, Direction, DRV8833, TB6612FNG, L298N, MOSFETs, Transistors, GND, VCC, Signal, IN1, IN2, OUT1, OUT2, kat-kat, jerk, jhatke, explode, ⭐Sabse common fault[emphasized in notes], burnt, Servo Sweep, VCC_Motor, VCC_Logic, High, Low, Reset, 500mA, 1A, 2A, ⭐External Power Supply[emphasized in notes], inefficient, heat, DRV8833, TB6612FNG, Robotic Arm, RC Cars, RC Planes, Camera Gimbal, Automatic door lock, 3D Printers, CNC Machines, Paper printers, Medical equipment, Robotics cars, DC motor, Stepper Drivers, A4988, DRV8825, micro-stepping]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Servo ko Arduino ke 'Servo Sweep' code se test karna. H-Bridge (L298N) ko VDC mode mein IN1 aur IN2 pe high/low de kar OUT1/OUT2 par voltage check karke test karna ki motor directions badal rahi hai ya nahi.
 * Fixing/Iteration Phase: Agar servo power dene pe bahut garam ho ya kat-kat aawaz kare toh motor kharab hai. Agar H-bridge input lene par bhi output na badle toh IC jal gayi hai. Agar motor chalte hi Arduino reset ho jaye toh external power supply lagani padegi.
 * Live Production Phase: Robotic arm (servo), 3D printer (stepper), ya RC car (DC motor + H-Bridge) ko microcontroller se signal bhej kar precise physical movement dena.
-* Additional context: L298N purana aur inefficient hai, uski jagah modern DRV8833/TB6612FNG drivers use karna chahiye. Servo aur stepper hamesha alag external power mangte hain.
+* Additional context: L298N purana aur inefficient hai (theory only), uski jagah modern DRV8833/TB6612FNG drivers use karna chahiye. Servo aur stepper hamesha alag external power mangte hain.
 
 Topic 6: Basic Sensors (Thermistor, PIR, Ultrasonic, IMU, Hall Effect)
 Subtopics: Sensors, Thermistor, PIR, Ultrasonic Sensor, HC-SR04, IMU, MPU6050, Hall Effect Sensor, Analog vs Digital, Thermistor Test, Sensor Voltage Test, Voltage Divider
@@ -1970,7 +2071,28 @@ Subtopics: Sensors, Thermistor, PIR, Ultrasonic Sensor, HC-SR04, IMU, MPU6050, H
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+\nTopic 7: Microcontroller Boot States & ESP32 Strapping Pins
+Subtopics: Boot Process, Strapping Pins (GPIO0, GPIO2, GPIO12, GPIO15), Default Pull-ups/Pull-downs, Boot Failure, PCB Design Mistake, Safe GPIOs
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Deep
+* Coverage Angle: Concept & PCB Design Warning
+* Notes mein content volume: List of dangerous pins and why they crash the board if used incorrectly
+* Key terms from notes: Strapping pins, Boot sequence, GPIO0, GPIO12, Flash voltage, Pull-up, Pull-down
+* Explicit emphasis in notes: "In pins par kabhi bhi relays, switches, ya sensors mat lagana warna board boot hi nahi hoga!"
+* Notes mein jo analogies/examples the: "Engine start hote waqt galti se gear mein hona"
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[Strapping Pins, ESP32 Bootloader, Boot sequence, GPIO 0, GPIO 2, GPIO 12, GPIO 15, Internal Flash Voltage, 3.3V vs 1.8V, Boot failure, fatal error, failed to connect, pull-up, pull-down, Safe GPIOs, Input only pins (34, 35, 36, 39), relay trigger during boot]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Testing/Offline Phase: Agar custom PCB ya breadboard par ESP32 ON nahi ho raha, toh multimeter (VDC) se GPIO 0, 2, aur 12 par check karna ki kahin bahar se 3.3V ya GND toh nahi aa raha.
+* Fixing/Iteration Phase: Agar sensor GPIO12 par laga hai aur ESP32 boot nahi ho raha, toh us pin se sensor hata kar kisi 'Safe GPIO' (jaise GPIO 13, 14, 26) par transfer karna.
+* Live Production Phase: Custom ESP32 PCB design karte waqt schematic mein in pins ko explicitly khali chhodna ya sirf aisi chizon ke liye use karna jo boot ke baad active hon.
+\n✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
@@ -1980,10 +2102,10 @@ Topic 2: Logic Level Shifters
 Topic 3: MOSFETs as a Switch
 Topic 4: Flyback Diodes (Snubber Diode)
 Topic 5: Actuators (Servo, Stepper) & Drivers (H-Bridge)
-Topic 6: Basic Sensors (Thermistor, PIR, Ultrasonic, IMU, Hall Effect)
+Topic 6: Basic Sensors (Thermistor, PIR, Ultrasonic, IMU, Hall Effect)\nTopic 7: Microcontroller Boot States & ESP32 Strapping Pins
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 42
+Sections: 1 | Topics: 7 | Subtopics: 42
 
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
@@ -2027,28 +2149,27 @@ Subtopics: Tactile Switch, Keypad, Rotary Encoder, Input Function, Symbol and Un
 * Live Production Phase: User practically button dabata hai ya encoder ghumata hai, jisse circuit ko physical action ka electrical signal (High/Low/Quadrature) milta hai aur microcontroller event trigger karta hai.
 * Additional context: Rotary encoder relative movement (kitna ghooma) batata hai, uski fixed absolute position nahi hoti.
 
-Topic 2: UI Outputs (7-Segment, Character LCDs)
-Subtopics: 7-Segment Display, Character LCD, Output Function, Symbol and Unit, Visual Check, Multimeter Testing, LCD Contrast Issue, Cold Solder Joints, CA vs CC Logic, 7-Segment Resistors, Real-World Use, I2C LCD Module
+Topic 2: UI Outputs (I2C LCDs & OLED Displays)
+Subtopics: I2C LCD Module, PCF8574, OLED Display, SSD1306, 0.96 inch, I2C Protocol, SDA, SCL, Pixels, Screen Burn-in, Display Testing, I2C Scanner
 
 [📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
 * Coverage Angle: Both
-* Notes mein content volume: Long explanation focusing on troubleshooting, testing, and practical wiring
-* Key terms from notes: segments, a,b,c,d,e,f,g, Common Anode, Common Cathode, D0-D7, RS, E, V0, Diode Test Mode, VCC, GND, I2C, PCF8574
-* Explicit emphasis in notes: "VCC aur GND ke beech lagatar beep aaye, toh display 100% 'short' hai", "I2C LCD module... bahut saare pins bacha leta hai"
-* Notes mein jo analogies/examples the: "Printing...", "Temp: 25.1 C", "Enter Password"
+* Notes mein content volume: How modern 4-wire displays work and how to troubleshoot empty screens
+* Key terms from notes: I2C, SDA, SCL, OLED, SSD1306, Pixels, I2C Scanner, 0x27, 0x3C, Contrast
+* Explicit emphasis in notes: "OLEDs mein backlight nahi hoti, har pixel khud ek LED hai."
+* Notes mein jo analogies/examples the: "4 wires mein poori screen chalana"
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[7-Segment Display, Character LCD, 16x2, segments, a,b,c,d,e,f,g, ⭐Common Anode, ⭐Common Cathode, CA, CC, D0-D7, RS, E, V0, characters, digits, bleed, black spots, flex cable, Multimeter, ⭐Diode Test Mode, VCC, GND, OL, short, open, 10k Potentiometer, cold solder joints, garbage, current limiting resistor, 220Ω, Digital clock, Elevator, Petrol pump, Voltmeter, Ammeter, 3D Printers, CNC machines, parallel, 8 data pins, I2C, ⭐PCF8574, SDA, SCL]
+[I2C LCD, PCF8574, OLED Display, SSD1306, 0.96 inch, 128x64, Pixels, SDA, Serial Data, SCL, Serial Clock, I2C Address, 0x27, 0x3F, 0x3C, I2C Scanner code, VCC, GND, Multimeter Continuity, SCL-SDA short, Screen burn-in, contrast, U8g2 library, Adafruit_SSD1306]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: Diode test mode se 7-segment ke a-g pins pe touch karke segment ka 'glow' check karna. LCD ke VCC aur GND mein continuity check karke short detect karna, aur V0 pin test ke liye power dekar pehli line mein kaale boxes dekhna.
-* Fixing/Iteration Phase: LCD par kuch na dikhne pe V0 pin ko 10k potentiometer ya GND se jod kar contrast adjust karna. 7-Segment pe common anode/cathode mismatch ko code mein theek karna, aur current limiting resistors (220 ohm) zaroor lagana taaki pins na jalein.
-* Live Production Phase: Machine circuit ke status, sensor readings, ya menu options ko visual text ya numbers ke form mein screen par display karti hai taaki user output padh sake.
-* Additional context: Modern production circuits mein parallel LCDs ki jagah I2C module (PCF8574) zyaada prefer karte hain taaki 4 wires mein kaam ho jaaye.
+* Testing/Offline Phase: Multimeter (Continuity) se check karna ki SDA aur SCL aapas mein short toh nahi hain. Arduino par 'I2C Scanner' code daal kar check karna ki display ka address (0x3C ya 0x27) detect ho raha hai ya nahi.
+* Fixing/Iteration Phase: Agar screen blank hai par I2C scanner address detect kar raha hai, matlab wiring theek hai, code ya library mein address galat likha hai. Agar I2C nahi mil raha, toh SDA/SCL ulte lage ho sakte hain.
+* Live Production Phase: Smartwatches, IoT dashboards, aur sensors ka live data dikhane ke liye compact aur high-contrast OLEDs ka use karna.
 
 Topic 3: Audio (Microphones, LM386 Amplifier, Buzzers)
 Subtopics: Buzzer, Microphone, LM386 Amplifier, Audio Function, Symbol and Unit, Visual Check, Multimeter Testing, Active vs Passive Buzzers, Microphone Biasing, LM386 Wiring, Real-World Use, KY-037 Sound Sensor
@@ -2083,7 +2204,7 @@ Subtopics: Buzzer, Microphone, LM386 Amplifier, Audio Function, Symbol and Unit,
 
 Section 15: User Interface & Audio
 Topic 1: UI Inputs (Tactile Switches, Rotary Encoders, Keypads)
-Topic 2: UI Outputs (7-Segment, Character LCDs)
+Topic 2: UI Outputs (I2C LCDs & OLED Displays)
 Topic 3: Audio (Microphones, LM386 Amplifier, Buzzers)
 
 📊 PHASE SUMMARY:
@@ -2096,3 +2217,49 @@ Sections: 1 | Topics: 3 | Subtopics: 36
 ==================================================================================
 
 
+
+==================================================================================
+
+# Module 16:
+
+📦 Processing: Phase 1 — Module 16: PCB Design Fundamentals & Hardware Safety
+
+===Section 16: PCB Design Fundamentals & Hardware Safety [⚠️ Derived]===
+Rules for moving from breadboard to printed circuit board safely.
+
+--16--PCB Design Fundamentals & Hardware Safety--
+Topic 1: Traces, Isolation & PCB Logic
+Subtopics: Trace Width, Current Capacity, PCB as a Fuse, Copper Pour (Ground Plane), Vias, Creepage and Clearance, 220V AC Isolation, Mounting Holes & Standoffs, Logic Analyzer Basic
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Concept & Safety Standard
+* Notes mein content volume: Rules for moving from breadboard to printed circuit board safely
+* Key terms from notes: Trace width, Copper pour, Antenna Keep-Out, Vias, Creepage, Clearance, Isolation slot, Standoffs, Logic Analyzer
+* Explicit emphasis in notes: "AC aur DC lines ke beech hamesha physically jagah (slot) khali chhoden warna high voltage jump kar jayega!" aur "ESP32 antenna ke niche kabhi copper mat dalna!"
+* Notes mein jo analogies/examples the: "Patli sarak par heavy truck bhejna (Thin trace high current)"
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[PCB traces, trace width calculator, Amps, copper thickness, 1oz, Copper pour, Ground plane, Noise reduction, EMI shield, ⭐Antenna Keep-Out zone, No-copper zone, Vias, top layer, bottom layer, Creepage, Clearance, Isolation slot, 220V AC tracks, high voltage jump, arcing, Standoffs, Nylon standoffs, metal short circuit, Logic Analyzer, 8-channel, 24MHz, digital debugging, I2C signal read]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Multimeter se Top aur Bottom layer ko connect karne wale 'Vias' ke beech continuity check karna taaki manufacturing defect pata chale. $10 Logic Analyzer se I2C ya UART wires par digital 0 aur 1 ka actual flow computer screen par dekhna.
+* Fixing/Iteration Phase: Agar motor chalne par PCB ka track jal gaya, matlab trace width kam thi, wahan temporary thick copper wire solder karni padegi. Agar bare PCB ko lohe ke table par rakh ke chalaya, toh standoffs na hone ki wajah se short ho jayega.
+* Live Production Phase: ESP32 relay board design karte waqt 220V mains ke tracks ko thick rakhna, unke beech PCB board ko kaat kar (slot) hawa pass karwana. Board par noise kam karne ke liye GND copper pour karna, ⭐lekin ESP32 ke antenna ke niche 'Keep-Out Zone' (no copper) chhodna taaki WiFi signal block na ho.
+
+--- 🛑 PHASE 16 SKELETON READY.
+
+✅ **Notes Guru ke liye skeleton ready hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 16: PCB Design Fundamentals & Hardware Safety
+Topic 1: Traces, Isolation & PCB Logic
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 1 | Subtopics: 9
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
