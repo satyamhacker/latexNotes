@@ -315,14 +315,6 @@ Section 3: Professional Development Workflow (VS Code & PlatformIO)
 📊 PHASE SUMMARY:
 Sections: 2 | Topics: 7 | Subtopics: 42uration
 
-Section 3: Arduino IDE Setup on Raspberry Pi
-  Topic 1: The Workflow Advantage
-  Topic 2: Linux Terminal Installation
-  Topic 3: IDE Preferences & Testing
-
-📊 PHASE SUMMARY:
-Sections: 2 | Topics: 8 | Subtopics: 42
-
 ```
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -385,28 +377,27 @@ Subtopics: USB Cable Connection, Serial Pins vs USB, Voltage Level Shifters, Por
 * Additional context: None
 
 --1--PART 1 - Serial Communication Between Raspberry Pi and Arduino--
-Topic 3: Permissions & PySerial Installation
-Subtopics: Dialout Group Permission, User Groups Verification, PySerial Module, Pip3 Installation
+Topic 3: Python Virtual Environment & PySerial (Modern Setup)
+Subtopics: Dialout Group Permission, PEP 668 Compliance, Venv Creation, Activating Environment, Pip Installation
 
 [📊 SCOPE SIGNAL for Topic 3:
 
-* Depth Level: Moderate
+* Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Short explanation + commands execution
-* Key terms from transcript: dialout group, permission, sudo adduser, Python module, pyserial, pip3
-* Explicit emphasis by speaker: "if you just added your user to the dialogue, you need to log out and login"
-* Speaker ne jo analogies/examples use kiye: None
+* Transcript mein content volume: Commands execution and modern OS compliance
+* Key terms from transcript: dialout group, python3 -m venv, source activate, externally managed environment, pyserial
+* Explicit emphasis by speaker: "Never use sudo pip3 install anymore. You must create a virtual environment first or the Pi OS will block you."
+* Speaker ne jo analogies/examples use kiye: Venv is like a sandbox; whatever you install stays inside and doesn't break the main house (OS).
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[`groups`, bail out[unclear], dialout group, permission, `sudo adduser`, other by use it[unclear], pi user, log out and login, restart Raspberry Pi, Python library, by serial[unclear], pyserial module, ⭐Python 3[version], Python three Dash the IP[unclear], `sudo apt-get install python3-pip`, IP three installed by serial[unclear], `pip3 install pyserial`, `pip3 show pyserial`]
+[`groups`, dialout group, `sudo adduser pi dialout`, restart Raspberry Pi, ⭐externally-managed-environment, `python3 -m venv myenv`, `source myenv/bin/activate`, `(myenv)`, `pip install pyserial`, `pip show pyserial`]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Testing/Offline Phase: Developer Raspberry Pi terminal pe `groups` command se check karta hai ki user `dialout` group me hai ya nahi. Agar nahi, toh `sudo adduser pi dialout` run karta hai, logout-login karta hai, aur phir `pip3` ke through `pyserial` module install karta hai.
-* Fixing/Iteration Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Additional context: None
+* Testing/Offline Phase: Developer terminal pe `groups` command se check karta hai ki user `dialout` group me hai ya nahi. Phir modern OS rules ko respect karte hue `python3 -m venv myenv` run karta hai ek safe sandbox banane ke liye.
+* Fixing/Iteration Phase: Agar `pip install` error deta hai "externally managed", toh developer realize karta hai ki usne environment activate nahi kiya. Woh `source myenv/bin/activate` run karta hai, jisse terminal prompt ke aage `(myenv)` likha aa jata hai, uske baad successfully install karta hai.
+* Live Production Phase: Autostart scripts (Systemd) mein system Python ki jagah explicitly is virtual environment wale Python ka absolute path (`/home/pi/myenv/bin/python`) pass kiya jata hai.
 
 --1--PART 1 - Serial Communication Between Raspberry Pi and Arduino--
 Topic 4: Connection Initialization Sequence
@@ -1191,28 +1182,27 @@ Subtopics: GUI Enable Method, Terminal Enable Method
 * Additional context: (N/A)
 
 --3--Capturing Photos with Python [⚠️ Derived]--
-Topic 2: Python Script Setup & Capturing [⚠️ Derived]
-Subtopics: PiCamera Initialization, Resolution Setting, Directory Creation, Luminosity Adjustment, Image Capture, Image Rotation
+Topic 2: Modern Image Capture via libcamera-still
+Subtopics: Legacy Stack Deprecation, Subprocess Module, libcamera-still Execution, Image Resizing, Directory Management
 
 [📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Multiple examples + code + demo
-* Key terms from transcript: picamera, PiCamera, resolution, os, mkdir, time.sleep, capture, rotation, kilobytes
-* Explicit emphasis by speaker: Camera needs time to adjust to luminosity (wait 2 seconds), Smaller resolution is important for sending over internet
+* Transcript mein content volume: Subprocess command logic replacing legacy picamera
+* Key terms from transcript: libcamera, libcamera-still, subprocess, os.mkdir, resolution tuning
+* Explicit emphasis by speaker: "The old picamera library is dead on new OS versions. We must call the system's libcamera tool directly from Python using subprocess."
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[import time, from picamera import PiCamera, camera = PiCamera(), camera.resolution, (1080, 720), import os, image_folder_name, /home/pi/camera, os.path.exists(), os.mkdir(), time.sleep(2), ⭐luminosity, image_file_name, new_image.jpg, camera.capture(), camera.rotation = 180, (640, 480), 562 kilobytes, 500 kilobytes, 200 kilobytes, ⭐internet]
+[deprecated picamera, ⭐libcamera-still, `import subprocess`, `import os`, `import time`, `os.path.exists()`, `os.mkdir()`, image_folder_name, `/home/pi/camera`, `subprocess.run()`, `--width`, `640`, `--height`, `480`, `--output`, `--timeout`, `2000`, wait for luminosity, payload size, ⭐internet speed]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: Developer Python script likhta hai jisme folder check hota hai, camera initialize hota hai, aur 2 seconds wait karke capture command chalti hai.
-* Fixing/Iteration Phase: Photo click hone par developer dekhta hai ki image upside down hai, toh woh `camera.rotation = 180` add karke theek karta hai. Size bada hone (500kb) par woh resolution ko `(640, 480)` pe set karta hai taaki size chota (200kb) ho jaye.
-* Live Production Phase: Script efficiently properly oriented aur optimized (small size) image save karti hai jo baad mein internet pe fast send ho sakti hai.
-* Additional context: Same filename use karne par purani photo overwrite ho jati hai.
+* Testing/Offline Phase: Developer Python script mein folder check karta hai. Camera hardware ko access karne ke liye `picamera` ki jagah `subprocess.run()` ka use karke bash command `libcamera-still -o image.jpg --timeout 2000` execute karta hai. Timeout 2000ms diya jata hai taaki lens luminosity adjust kar sake.
+* Fixing/Iteration Phase: Photo size 2MB aane par internet transmission slow ho jati hai. Developer subprocess parameters mein `--width 640 --height 480` append karta hai taaki image 200kb tak compress ho jaye.
+* Live Production Phase: Script OS-level camera drivers ko directly invoke karti hai, jo AI models (OpenCV) aur Telegram bot dono ke liye highly optimized and crash-free frame capture guarantee karta hai.
 
 ===Section 4: Telegram Bot Configuration [⚠️ Derived]===
 Speaker Telegram app setup, BotFather ke through bot create karne, aur API token ko secure karne ka complete process explain karta hai.
