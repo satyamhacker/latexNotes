@@ -1876,13 +1876,67 @@ Subtopics: TLS 1.3 / SSL, Secure Boot, NVS Encryption, ATECC608A Secure Element,
 
 ==================================================================================
 
+# Section 12: Wireless IoT Gateways & ESP32 Integration
 
-# Section 12: Production Deployment & Maintenance
+===Section 12: Wireless IoT Gateways & ESP32 Integration===
+Speaker is section mein batata hai ki serial/USB cable ki limitations ko tod kar, Raspberry Pi ko ek central wireless hub (Gateway) kaise banaya jaye jo saikdon ESP32/STM32 nodes se data collect kare.
 
-===Section 12: Production Deployment & Maintenance===
+--12--Wireless IoT Gateways & ESP32 Integration--
+Topic 1: MQTT Broker on Raspberry Pi (Mosquitto)
+Subtopics: Publish/Subscribe Architecture, Eclipse Mosquitto Setup, ESP32 MQTT Client, QoS Levels, Payload Formatting
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation of broker setup and wireless JSON exchange
+* Key terms from transcript: MQTT, Mosquitto, Broker, Publish, Subscribe, Quality of Service, QoS, ESP32 Client
+* Explicit emphasis by speaker: "For multiple microcontrollers talking to one Raspberry Pi, MQTT is the absolute industry standard."
+* Speaker ne jo analogies/examples use kiye: MQTT is like a newspaper publisher (ESP32) and subscriber (Raspberry Pi). The broker is the post office.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[MQTT, Eclipse Mosquitto, Broker, Publisher, Subscriber, ESP32, PubSubClient library, Quality of Service, QoS 0, QoS 1, QoS 2, JSON payload, ArduinoJSON, wireless integration, local network, port 1883]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Raspberry Pi par `sudo apt install mosquitto` run karke local broker setup karta hai. ESP32 par Wi-Fi connect karke `PubSubClient` library se dummy sensor data publish karta hai.
+* Fixing/Iteration Phase: Agar packets drop ho rahe hain network noise ki wajah se, toh developer QoS level 0 se badhakar QoS 1 (At least once delivery) kar deta hai taaki data guarantee ke sath pahuche.
+* Live Production Phase: Ek smart greenhouse mein 50 ESP32 soil moisture sensors bina kisi wire ke apna data Raspberry Pi (Broker) par bhejte hain, aur Pi unhe process karke wapas water pumps (other ESP32s) ko command publish karta hai.
+
+--12--Wireless IoT Gateways & ESP32 Integration--
+Topic 2: Low-Latency Mesh with ESP-NOW & Bridge to RPi
+Subtopics: ESP-NOW Protocol, MAC Address Binding, Wi-Fi Router Bypass, ESP32 to RPi Serial Bridge
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Code for peer-to-peer ESP communication bridging to RPi
+* Key terms from transcript: ESP-NOW, connectionless, MAC address, low latency, bridge, UART
+* Explicit emphasis by speaker: "When Wi-Fi routers fail or reboot, your system shouldn't die. ESP-NOW bypasses the router completely."
+* Speaker ne jo analogies/examples use kiye: Walkie-talkie analogy — devices baat karne ke liye cell tower (router) ka wait nahi karte.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[ESP-NOW, connectionless protocol, MAC address, peer-to-peer, Wi-Fi bypass, low latency, mesh network, ESP32 receiver, ESP32 sender, UART bridge, serial communication, robust network]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer 5 ESP32 boards ko ESP-NOW ke through MAC address se bind karta hai. Yeh boards router ke bina direct aapas mein baat karte hain (in microseconds).
+* Fixing/Iteration Phase: Kyunki Raspberry Pi natively ESP-NOW support nahi karta, developer ek "Master ESP32" ko Pi se USB/Serial se connect karta hai (Gateway Bridge).
+* Live Production Phase: Factory floor par jahan Wi-Fi signal weak hota hai, sensors ESP-NOW se Master ESP32 ko data bhejte hain, aur woh Master ESP32 us data ko serial ke through Raspberry Pi brain tak pahunchata hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 13: Production Deployment & Maintenance
+
+===Section 13: Production Deployment & Maintenance===
 Speaker explain karta hai ki remote hardware ko bina physical access ke debug, update, aur test kaise kiya jata hai.
 
---12--Production Deployment & Maintenance--
+--13--Production Deployment & Maintenance--
 Topic 1: FOTA (Firmware Over-The-Air) & Dual-Bank Bootloaders
 Subtopics: Flash Partitioning, OTA Architecture, Rollback Mechanisms, Version Control
 
@@ -1905,7 +1959,7 @@ Subtopics: Flash Partitioning, OTA Architecture, Rollback Mechanisms, Version Co
 * Fixing/Iteration Phase: Developer jaan bujh kar update ke beech power cut karta hai. Bootloader detect karta hai ki naya firmware corrupt hai aur purane safe firmware (OTA_0) par rollback karta hai.
 * Live Production Phase: Market mein deploy hone ke baad, saare devices raat ko 2 AM par automatically secure server se check karte hain, firmware download karte hain, aur swap karke naye version par boot hote hain.
 
---12--Production Deployment & Maintenance--
+--13--Production Deployment & Maintenance--
 Topic 2: Professional Debugging & CI/CD pipeline
 Subtopics: JTAG/SWD Debugging, Crash Dump Analysis, Hardware-in-the-Loop (HIL) Testing, GitHub Actions
 
@@ -1932,13 +1986,12 @@ Subtopics: JTAG/SWD Debugging, Crash Dump Analysis, Hardware-in-the-Loop (HIL) T
 
 ==================================================================================
 
+# Section 14: Embedded Linux (Scaling the Raspberry Pi)
 
-# Section 13: Embedded Linux (Scaling the Raspberry Pi)
-
-===Section 13: Embedded Linux (Scaling the Raspberry Pi)===
+===Section 14: Embedded Linux (Scaling the Raspberry Pi)===
 Speaker Raspberry Pi ko ek standard desktop OS (Raspberry Pi OS) se hata kar ek read-only, minimal, industry-grade embedded Linux system mein convert karna sikhata hai.
 
---13--Embedded Linux (Scaling the Raspberry Pi)--
+--14--Embedded Linux (Scaling the Raspberry Pi)--
 Topic 1: Custom OS Images (Yocto & Buildroot)
 Subtopics: Build Systems, Custom Linux Kernel, Read-Only RootFS, Device Tree Overlays, Systemd Watchdogs
 
@@ -1961,6 +2014,7 @@ Subtopics: Build Systems, Custom Linux Kernel, Read-Only RootFS, Device Tree Ove
 * Fixing/Iteration Phase: Power cuts se SD card corrupt hone ki problem ko fix karne ke liye, developer Root Filesystem (rootfs) ko "Read-Only" mode mein mount karta hai aur logs ko RAM (`tmpfs`) mein shift karta hai.
 * Live Production Phase: Final commercial device (jaise smart kiosk ya industrial gateway) 5 seconds mein boot hota hai, aur log cable nikal kar direct power off karne par bhi OS kabhi corrupt nahi hota.
 
+==================================================================================
 
 ```
 📋 EXTRACTED IN THIS PHASE (ADVANCED ADDITIONS):
@@ -1973,11 +2027,11 @@ Section 11: Industrial Communication & Security
   Topic 1: Industrial Protocols (CAN Bus & Modbus)
   Topic 2: Hardware Security & Cryptography
 
-Section 12: Production Deployment & Maintenance
+Section 13: Production Deployment & Maintenance
   Topic 1: FOTA (Firmware Over-The-Air) & Bootloaders
   Topic 2: Professional Debugging & CI/CD pipeline
 
-Section 13: Embedded Linux (Scaling the Raspberry Pi)
+Section 14: Embedded Linux (Scaling the Raspberry Pi)
   Topic 1: Custom OS Images (Yocto & Buildroot)
 
 📊 PHASE SUMMARY:
@@ -1989,12 +2043,12 @@ Sections Added: 4 | Topics Added: 7
 
 ==================================================================================
 
-# Section 14: Edge AI & Machine Learning (TinyML)
+# Section 15: Edge AI & Machine Learning (TinyML)
 
-===Section 14: Edge AI & Machine Learning (TinyML)===
+===Section 15: Edge AI & Machine Learning (TinyML)===
 Speaker is section mein batata hai ki cloud par data bhejne ke bajaye, microcontrollers (ESP32/STM32) par hi Machine Learning models kaise train aur deploy kiye jaate hain.
 
---14--Edge AI & Machine Learning (TinyML)--
+--15--Edge AI & Machine Learning (TinyML)--
 Topic 1: TinyML Fundamentals & Edge Impulse
 Subtopics: Data Forwarding, Neural Networks on MCU, TensorFlow Lite for Microcontrollers, Anomaly Detection, Keyword Spotting
 
@@ -2021,12 +2075,85 @@ Subtopics: Data Forwarding, Neural Networks on MCU, TensorFlow Lite for Microcon
 
 ==================================================================================
 
-# Section 15: Advanced Cloud Architecture & Edge Containerization
+# Section 16: Local GenAI & Autonomous RAG Systems on Raspberry Pi
 
-===Section 15: Advanced Cloud Architecture & Edge Containerization===
+===Section 16: Local GenAI & Autonomous RAG Systems on Raspberry Pi===
+Speaker is advanced module mein sikhata hai ki Raspberry Pi par bina internet ke chote Large Language Models (LLMs) aur RAG (Retrieval-Augmented Generation) kaise run karein taaki system khud human-like decisions le sake.
+
+--16--Local GenAI & Autonomous RAG Systems on Raspberry Pi--
+Topic 1: Running Local LLMs on Raspberry Pi
+Subtopics: Llama.cpp, Ollama, Model Quantization, Phi-3 / Qwen Models, RAM Constraints, System Prompts
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Terminal commands for model pulling and Python API integration
+* Key terms from transcript: Llama.cpp, Ollama, quantized models, GGUF, Phi-3, Qwen, local inference, autonomous agent
+* Explicit emphasis by speaker: "Raspberry Pi 4/5 doesn't have a massive GPU, so you MUST use heavily quantized 4-bit or 8-bit small models."
+* Speaker ne jo analogies/examples use kiye: Giving a "brain upgrade" to the intercom system so it can converse naturally instead of just reading hardcoded strings.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Ollama, Llama.cpp, GenAI, Large Language Models, LLM, quantization, GGUF, 4-bit, 8-bit, Phi-3-mini, Llama-3 8B, Qwen1.5, autonomous agent, System Prompt, context window, API endpoints, JSON output]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Raspberry Pi 5 (8GB) par `Ollama` install karta hai aur ek chota model (jaise Microsoft Phi-3) pull karta hai. Python script ke through local LLM ko temperature=0 ke sath run karta hai taaki responses predictable rahein.
+* Fixing/Iteration Phase: Agar model answer dene mein 30 seconds laga raha hai, toh developer aur chota model (Qwen 0.5B) use karta hai ya context window kam karta hai taaki latency 2-3 seconds tak aa jaye.
+* Live Production Phase: Jab sensor koi strange data bhejta hai, system if-else loop ke bajaye us data ko LLM ke paas as a prompt bhejta hai. LLM autonomously decide karta hai ki situation critical hai ya nahi, aur hardware (Arduino/ESP) ko JSON command bhejta hai.
+
+--16--Local GenAI & Autonomous RAG Systems on Raspberry Pi--
+Topic 2: Edge RAG (Retrieval-Augmented Generation) for IoT
+Subtopics: Vector Databases at Edge, ChromaDB/FAISS, Document Embeddings, Maintenance Manuals Ingestion, Context-Aware Execution
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Python code for vector embeddings and RAG pipeline setup
+* Key terms from transcript: RAG, Retrieval-Augmented Generation, Vector DB, ChromaDB, FAISS, embeddings, semantic search, maintenance manual
+* Explicit emphasis by speaker: "Your AI needs facts, not hallucinations. RAG grounds the AI by giving it access to your machine's PDF manuals locally."
+* Speaker ne jo analogies/examples use kiye: RAG is like giving an open-book exam to the AI; it searches the manual first before giving an order.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[RAG, Retrieval-Augmented Generation, Vector Database, FAISS, ChromaDB, HuggingFace embeddings, sentence-transformers, chunking, semantic search, hallucination mitigation, PDF parsing, LangChain, LlamaIndex, context-aware]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer ek industrial motor ka 500-page ka PDF maintenance manual Raspberry Pi par upload karta hai. Python mein `LangChain` aur `FAISS` use karke us manual ko chote chunks mein tod kar vector embeddings create karta hai.
+* Fixing/Iteration Phase: Agar AI galat context utha raha hai, toh developer chunk size aur overlap parameters adjust karta hai taaki retrieval accurate ho.
+* Live Production Phase: factory mein motor garam hone par, ESP32 Pi ko alert bhejta hai. Pi ka RAG system turant local FAISS database se manual search karta hai, error code ka solution nikalta hai, LLM us solution ko format karta hai, Telegram par maintenance team ko report bhejta hai, aur automatically cooling fan on (Arduino via Serial) kar deta hai.
+
+==================================================================================
+
+```
+📋 EXTRACTED IN THIS PHASE (AI & INTEGRATION ADDITIONS):
+
+Section 12: Wireless IoT Gateways & ESP32 Integration
+  Topic 1: MQTT Broker on Raspberry Pi (Mosquitto)
+  Topic 2: Low-Latency Mesh with ESP-NOW & Bridge to RPi
+
+Section 16: Local GenAI & Autonomous RAG Systems on Raspberry Pi
+  Topic 1: Running Local LLMs on Raspberry Pi
+  Topic 2: Edge RAG (Retrieval-Augmented Generation) for IoT
+
+📊 PHASE SUMMARY:
+Sections Added: 2 | Topics Added: 4
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 17: Advanced Cloud Architecture & Edge Containerization
+
+===Section 17: Advanced Cloud Architecture & Edge Containerization===
 Speaker explain karta hai ki thousands of IoT devices ko cloud pe securely provision, manage, aur update (via Docker) kaise kiya jata hai.
 
---15--Advanced Cloud Architecture & Edge Containerization--
+--17--Advanced Cloud Architecture & Edge Containerization--
 Topic 1: Digital Twins & Zero-Touch Provisioning
 Subtopics: AWS IoT Device Shadow, Azure Device Twins, RPC (Remote Procedure Call), Just-in-Time Provisioning
 
@@ -2049,7 +2176,7 @@ Subtopics: AWS IoT Device Shadow, Azure Device Twins, RPC (Remote Procedure Call
 * Fixing/Iteration Phase: Agar device offline ho jata hai, cloud update fail nahi karta, balki state ko hold karta hai. Jab device reconnect hota hai, woh immediately shadow sync karke missed command execute kar leta hai.
 * Live Production Phase: Company factory se 10,000 ESP32 boards ship karti hai. Devices pehli baar internet se connect hote hi automatically cloud par apne unique certificates generate aur provision kar lete hain (Zero-Touch).
 
---15--Advanced Cloud Architecture & Edge Containerization--
+--17--Advanced Cloud Architecture & Edge Containerization--
 Topic 2: Edge Containerization on Raspberry Pi (Docker/Balena)
 Subtopics: Docker Basics for Edge, Docker Compose, Microservices, BalenaOS, Container Auto-Restart
 
@@ -2076,12 +2203,12 @@ Subtopics: Docker Basics for Edge, Docker Compose, Microservices, BalenaOS, Cont
 
 ==================================================================================
 
-# Section 16: Hardware DFM (Design for Manufacturing) & Compliance
+# Section 18: Hardware DFM (Design for Manufacturing) & Compliance
 
-===Section 16: Hardware DFM (Design for Manufacturing) & Compliance===
+===Section 18: Hardware DFM (Design for Manufacturing) & Compliance===
 Speaker prototype boards (Arduino/ESP32 dev kits) se move karke custom PCBs banane aur global certifications pass karne ke concepts sikhata hai.
 
---16--Hardware DFM (Design for Manufacturing) & Compliance--
+--18--Hardware DFM (Design for Manufacturing) & Compliance--
 Topic 1: Custom PCB Design & Signal Integrity
 Subtopics: Schematic Design, PCB Layout, Decoupling Capacitors, Ground Planes, Antenna Placement
 
@@ -2104,7 +2231,7 @@ Subtopics: Schematic Design, PCB Layout, Decoupling Capacitors, Ground Planes, A
 * Fixing/Iteration Phase: Wi-Fi range kam aane par, developer PCB redesign karta hai taaki ESP32 antenna ke theek neeche koi copper ya ground plane na ho (Antenna keep-out zone).
 * Live Production Phase: Gerber files generate karke factory (e.g., JLCPCB/PCBWay) ko bheji jaati hain jahan Pick-and-Place machines mass-produce karti hain.
 
---16--Hardware DFM (Design for Manufacturing) & Compliance--
+--18--Hardware DFM (Design for Manufacturing) & Compliance--
 Topic 2: EMI/EMC Compliance & ESD Protection
 Subtopics: TVS Diodes, Optocouplers, CE/FCC Certifications, Reverse Polarity Protection
 
@@ -2132,14 +2259,14 @@ Subtopics: TVS Diodes, Optocouplers, CE/FCC Certifications, Reverse Polarity Pro
 ```
 📋 EXTRACTED IN THIS PHASE (FINAL INDUSTRY MASTER ADDITIONS):
 
-Section 14: Edge AI & Machine Learning (TinyML)
+Section 15: Edge AI & Machine Learning (TinyML)
   Topic 1: TinyML Fundamentals & Edge Impulse
 
-Section 15: Advanced Cloud Architecture & Edge Containerization
+Section 17: Advanced Cloud Architecture & Edge Containerization
   Topic 1: Digital Twins & Zero-Touch Provisioning
   Topic 2: Edge Containerization on Raspberry Pi (Docker/Balena)
 
-Section 16: Hardware DFM (Design for Manufacturing) & Compliance
+Section 18: Hardware DFM (Design for Manufacturing) & Compliance
   Topic 1: Custom PCB Design & Signal Integrity
   Topic 2: EMI/EMC Compliance & ESD Protection
 
@@ -2153,13 +2280,13 @@ Sections Added: 3 | Topics Added: 5
 ==================================================================================
 
 
-# Section 17: Conclusion
+# Section 19: Conclusion
 
 
-===Section 17: Conclusion===
+===Section 19: Conclusion===
 Speaker is section mein course ka recap deta hai, project development ki best practices summarize karta hai, aur advanced robotics frameworks (ROS) ke baare mein batata hai.
 
---17--Conclusion--
+--19--Conclusion--
 Topic 1: Best Practices & Project Workflow
 Subtopics: Project Idea, Functionality Allocation, Communication Protocol, Coding Sequence, Iterative Testing
 
@@ -2183,7 +2310,7 @@ Subtopics: Project Idea, Functionality Allocation, Communication Protocol, Codin
 * Mastery Phase: Developer pehle Arduino code likhta hai aur Serial monitor se debug karta hai, phir RPi pe step-by-step logic implement karke real product complete karta hai.
 * Additional context: Speaker is workflow ko ek "best practice" batata hai jo kisi bhi naye scratch project ko fast develop karne mein help karta hai.
 
---17--Conclusion--
+--19--Conclusion--
 Topic 2: Next Steps & Advanced Technologies
 Subtopics: Project Customization, Project Ideation, Robot Operating System, ROS Integration
 
@@ -2211,7 +2338,7 @@ Subtopics: Project Customization, Project Ideation, Robot Operating System, ROS 
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 17: Conclusion
+Section 19: Conclusion
 Topic 1: Best Practices & Project Workflow
 Topic 2: Next Steps & Advanced Technologies
 
