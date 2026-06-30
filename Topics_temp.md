@@ -322,13 +322,13 @@ Sections: 2 | Topics: 7 | Subtopics: 42uration
 ==================================================================================
 
 
-# Section 3: PART 1 - Serial Communication Between Raspberry Pi and Arduino
+# Section 3: PART 1 - Serial Communication Between Raspberry Pi and Microcontrollers (Arduino/ESP32/STM32)
 
 
-===Section 1: PART 1 - Serial Communication Between Raspberry Pi and Arduino===
-[⚠️ Corrupted caption — verify manually] Speaker is section mein Raspberry Pi aur Arduino ke beech serial communication ka complete setup, initialization, aur bi-directional data flow explain karta hai.
+===Section 1: PART 1 - Serial Communication Between Raspberry Pi and Microcontrollers (Arduino/ESP32/STM32)===
+[⚠️ Corrupted caption — verify manually] Speaker is section mein Raspberry Pi aur Microcontrollers (Arduino, ESP32, STM32) ke beech serial communication ka complete setup, initialization, aur bi-directional data flow explain karta hai.
 
---1--PART 1 - Serial Communication Between Raspberry Pi and Arduino--
+--1--PART 1 - Serial Communication Between Raspberry Pi and Microcontrollers (Arduino/ESP32/STM32)--
 Topic 1: Serial Communication Basics
 Subtopics: Serial Communication, UART Protocol, Asynchronous Reception, Asynchronous Transmission, High-Level Libraries
 
@@ -352,7 +352,7 @@ Subtopics: Serial Communication, UART Protocol, Asynchronous Reception, Asynchro
 * Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: Speaker mention karta hai ki normal Serial Monitor use karna bhi PC aur Arduino ke beech serial communication hi hai.
 
---1--PART 1 - Serial Communication Between Raspberry Pi and Arduino--
+--1--PART 1 - Serial Communication Between Raspberry Pi and Microcontrollers (Arduino/ESP32/STM32)--
 Topic 2: Hardware Setup & Port Identification
 Subtopics: USB Cable Connection, Serial Pins vs USB, Voltage Level Shifters, Port Identification Command, Unplug-Replug Verification
 
@@ -376,30 +376,30 @@ Subtopics: USB Cable Connection, Serial Pins vs USB, Voltage Level Shifters, Por
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: None
 
---1--PART 1 - Serial Communication Between Raspberry Pi and Arduino--
-Topic 3: Python Virtual Environment & PySerial (Modern Setup)
-Subtopics: Dialout Group Permission, PEP 668 Compliance, Venv Creation, Activating Environment, Pip Installation
+--1--PART 1 - Serial Communication Between Raspberry Pi and Microcontrollers (Arduino/ESP32/STM32)--
+Topic 3: Modern Python Packaging with `uv` & PySerial
+Subtopics: Dialout Group Permission, PEP 668 Compliance, Installing uv, Creating venv with uv, Lightning Fast Pip Installation
 
 [📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
 * Transcript mein content volume: Commands execution and modern OS compliance
-* Key terms from transcript: dialout group, python3 -m venv, source activate, externally managed environment, pyserial
-* Explicit emphasis by speaker: "Never use sudo pip3 install anymore. You must create a virtual environment first or the Pi OS will block you."
-* Speaker ne jo analogies/examples use kiye: Venv is like a sandbox; whatever you install stays inside and doesn't break the main house (OS).
+* Key terms from transcript: dialout group, uv venv, uv pip install, externally managed environment, pyserial
+* Explicit emphasis by speaker: "Never use sudo pip3 install anymore. Instead of slow standard venv, we use Astral's `uv` for lightning-fast virtual environments and package installations."
+* Speaker ne jo analogies/examples use kiye: Venv is like a sandbox, and `uv` is the bullet-train that builds the sandbox 100x faster.
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[`groups`, dialout group, `sudo adduser pi dialout`, restart Raspberry Pi, ⭐externally-managed-environment, `python3 -m venv myenv`, `source myenv/bin/activate`, `(myenv)`, `pip install pyserial`, `pip show pyserial`]
+[`groups`, dialout group, `sudo adduser pi dialout`, restart Raspberry Pi, ⭐externally-managed-environment, `curl -LsSf https://astral.sh/uv/install.sh | sh`, `uv venv`, `source .venv/bin/activate`, `(.venv)`, `uv pip install pyserial`, `uv pip show pyserial`]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Testing/Offline Phase: Developer terminal pe `groups` command se check karta hai ki user `dialout` group me hai ya nahi. Phir modern OS rules ko respect karte hue `python3 -m venv myenv` run karta hai ek safe sandbox banane ke liye.
-* Fixing/Iteration Phase: Agar `pip install` error deta hai "externally managed", toh developer realize karta hai ki usne environment activate nahi kiya. Woh `source myenv/bin/activate` run karta hai, jisse terminal prompt ke aage `(myenv)` likha aa jata hai, uske baad successfully install karta hai.
-* Live Production Phase: Autostart scripts (Systemd) mein system Python ki jagah explicitly is virtual environment wale Python ka absolute path (`/home/pi/myenv/bin/python`) pass kiya jata hai.
+* Testing/Offline Phase: Developer terminal pe `groups` command se check karta hai ki user `dialout` group me hai ya nahi. Phir modern OS rules ko respect karte hue `uv venv` run karta hai ek safe sandbox banane ke liye milliseconds mein.
+* Fixing/Iteration Phase: Agar standard `pip install` error deta hai "externally managed", toh developer realize karta hai ki usne environment activate nahi kiya. Woh `source .venv/bin/activate` run karta hai, jisse terminal prompt ke aage `(.venv)` likha aa jata hai, uske baad `uv pip install pyserial` successfully run karta hai.
+* Live Production Phase: Autostart scripts (Systemd) mein system Python ki jagah explicitly is virtual environment wale Python ka absolute path (`/home/pi/.venv/bin/python`) pass kiya jata hai.
 
---1--PART 1 - Serial Communication Between Raspberry Pi and Arduino--
+--1--PART 1 - Serial Communication Between Raspberry Pi and Microcontrollers (Arduino/ESP32/STM32)--
 Topic 4: Connection Initialization Sequence
 Subtopics: Arduino Serial Setup, Native USB Wait State, Python Interpreter Line, PySerial Import, Serial Object Creation, Baud Rate Match, Initialization Delay, Input Buffer Reset, Connection Closure
 
@@ -423,7 +423,7 @@ Subtopics: Arduino Serial Setup, Native USB Wait State, Python Interpreter Line,
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: Speaker mention karta hai ki native USB wale Arduino boards (Leonardo/Zero) ke liye `while(!Serial)` loop zaroori hota hai taaki serial ready hone ka wait ho sake.
 
---1--PART 1 - Serial Communication Between Raspberry Pi and Arduino--
+--1--PART 1 - Serial Communication Between Raspberry Pi and Microcontrollers (Arduino/ESP32/STM32)--
 Topic 5: Reading & Writing Data (Unidirectional)
 Subtopics: Arduino Print Methods, Python Infinite Loop, Buffer Polling, Decoding Bytes, String Stripping, Keyboard Interrupts, Arduino Availability Check, Reading Strings, Single Quotes Rule, Encoding Bytes
 
@@ -447,7 +447,7 @@ Subtopics: Arduino Print Methods, Python Infinite Loop, Buffer Polling, Decoding
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: Speaker batata hai ki board pe RX/TX LEDs physically confirm karti hain ki data transfer aur receive ho raha hai.
 
---1--PART 1 - Serial Communication Between Raspberry Pi and Arduino--
+--1--PART 1 - Serial Communication Between Raspberry Pi and Microcontrollers (Arduino/ESP32/STM32)--
 Topic 6: Bi-directional Communication Flow
 Subtopics: Global Counters, String Concatenation, Data Echoing, Blocking While Loop
 
@@ -471,7 +471,7 @@ Subtopics: Global Counters, String Concatenation, Data Echoing, Blocking While L
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: None
 
---1--PART 1 - Serial Communication Between Raspberry Pi and Arduino--
+--1--PART 1 - Serial Communication Between Raspberry Pi and Microcontrollers (Arduino/ESP32/STM32)--
 Topic 7: Exception Handling & Auto-Reconnect
 Subtopics: Port Busy Errors, SerialException Handling, Auto-Reconnect Loop, Retry Delays
 
@@ -495,7 +495,7 @@ Subtopics: Port Busy Errors, SerialException Handling, Auto-Reconnect Loop, Retr
 * Live Production Phase: Speaker explicitly batata hai ki yeh auto-reconnect mechanism final production project me use hoga taaki system robust bane aur disconnects ko handle kar sake.
 * Additional context: Speaker suggest karta hai ki ek maximum retry limit (e.g., 10 times) bhi implement ki ja sakti hai taaki infinite loop avoid ho sake.
 
---1--PART 1 - Serial Communication Between Raspberry Pi and Arduino--
+--1--PART 1 - Serial Communication Between Raspberry Pi and Microcontrollers (Arduino/ESP32/STM32)--
 Topic 8: Persistent Hardware Binding (Udev Rules)
 Subtopics: Identifying USB Devices, lsusb, udevadm, Creating Rules, Symlinks
 
@@ -522,7 +522,7 @@ Subtopics: Identifying USB Devices, lsusb, udevadm, Creating Rules, Symlinks
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: PART 1 - Serial Communication Between Raspberry Pi and Arduino
+Section 1: PART 1 - Serial Communication Between Raspberry Pi and Microcontrollers (Arduino/ESP32/STM32)
 Topic 1: Serial Communication Basics
 Topic 2: Hardware Setup & Port Identification
 Topic 3: Permissions & PySerial Installation
@@ -1297,7 +1297,7 @@ Subtopics: Module Installation, Updater Initialization, Command Handler, Callbac
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[pip3 install python-telegram-bot, --upgrade, from telegram.ext import Updater, CommandHandler, updater = Updater(token=telegram_token), dispatcher = updater.dispatcher, dispatcher.add_handler(), CommandHandler('start', start_handler), def start_handler(update, context), update.effective_chat.id, context.bot.send_message(), chat_id, text, Hello from Python, updater.start_polling(), updater.idle(), control+c, Python Telegram Bot documentation]
+[pip install python-telegram-bot, --upgrade, from telegram.ext import Updater, CommandHandler, updater = Updater(token=telegram_token), dispatcher = updater.dispatcher, dispatcher.add_handler(), CommandHandler('start', start_handler), def start_handler(update, context), update.effective_chat.id, context.bot.send_message(), chat_id, text, Hello from Python, updater.start_polling(), updater.idle(), control+c, Python Telegram Bot documentation]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -1470,13 +1470,13 @@ Subtopics: Non-Blocking Photo Logic, Push Button Execution, Folder Configuration
 * Depth Level: Deep
 * Coverage Angle: Practical only
 * Transcript mein content volume: Long explanation with code + physical button demo + Telegram demo
-* Key terms from transcript: Raspberry Pi camera, non-blocking way, push button, get photo command, picamera, time.time, send photo
+* Key terms from transcript: Raspberry Pi camera, non-blocking way, push button, get photo command, subprocess, libcamera, time.time, send photo
 * Explicit emphasis by speaker: None
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[Raspberry Pi camera, non-blocking way, push button, get photo command, picamera, PiCamera, camera.resolution, camera.rotation = 180, image file name, os module, os.path.exists(), os.mkdir(), camera.capture(), time.sleep(), time.time(), photo delay, sleep(0.01), Serial.readline().decode('utf-8').strip(), button pressed, telegram.Bot, bot.send_photo, context.bot.send_photo, open(filename, 'rb'), update.effective_chat.id, keyboard interrupt, kg of data[unclear], updater.stop(), ACM1, ACM0, photo.jpg]
+[Raspberry Pi camera, non-blocking way, push button, get photo command, subprocess, libcamera-still, image resolution, image file name, os module, os.path.exists(), os.mkdir(), subprocess.run(), time.sleep(), time.time(), photo delay, sleep(0.01), Serial.readline().decode('utf-8').strip(), button pressed, telegram.Bot, bot.send_photo, context.bot.send_photo, open(filename, 'rb'), update.effective_chat.id, keyboard interrupt, kg of data[unclear], updater.stop(), ACM1, ACM0, photo.jpg]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
