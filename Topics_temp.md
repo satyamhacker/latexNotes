@@ -129,28 +129,27 @@ Sections: 1 | Topics: 4 | Subtopics: 22
 Speaker is section mein Raspberry Pi ko headless mode (bina monitor/keyboard) mein set up karne ka poora process batata hai — SD card flash karne se lekar IP find karne aur SSH/VNC ke through connect karne tak.
 
 --2--Raspberry Pi OS Installation & Headless Setup--
-Topic 1: OS Flashing & SD Card Setup
-Subtopics: Raspberry Pi Imager, OS Selection, Hidden Configuration Menu, SSH Enable, Wi-Fi Setup, SD Card Formatting
+Topic 1: OS Flashing & Storage (NVMe/SSD Boot Standard)
+Subtopics: Raspberry Pi Imager, Bookworm OS, Hidden Configuration Menu, NVMe/PCIe Base, SD Card Corruption Limits, USB-C PD Power (5V/5A)
 
 [📊 SCOPE SIGNAL for Topic 1:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Step-by-step long explanation with software UI walkthrough
-* Key terms from transcript: Raspberry Pi imager, Raspberry Pi OS, micro SD card, control shift and X, Enable Essence each, password authentication, Wi-Fi network
-* Explicit emphasis by speaker: SD card flash karne se pehle speaker ne explicitly warn kiya ki "everything will be erased" so make sure data backed up hai.
-* Speaker ne jo analogies/examples use kiye: None
+* Transcript mein content volume: Step-by-step UI walkthrough and hardware storage explanation
+* Key terms from transcript: Raspberry Pi imager, Bookworm OS, NVMe SSD, PCIe slot, USB boot, control shift and X, Power Delivery, 5 Amps
+* Explicit emphasis by speaker: "Never use an SD card for a production database or AI project. It will corrupt. Use an NVMe SSD via the PCIe slot or a USB 3.0 SSD."
+* Speaker ne jo analogies/examples use kiye: Running a factory server on an SD card is like building a house on sand.
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[Dubai[unclear], operating system, micro SD card, Wi-Fi, SSA connection[unclear], Raspberry Pi dot org, Raspberry Pi imager, Windows, Ubuntu, Raspberry Pi Ice[unclear], Brazilian[unclear], control shift and X, Enable Essence each[unclear], password authentication, by user[unclear], raspberry, Configure Wi-Fi, cache, successfully written]
+[operating system, NVMe SSD, PCIe base, USB 3.0 boot, micro SD card limitations, Wi-Fi, SSH connection, Raspberry Pi Imager, Bookworm OS, control shift and X, password authentication, 5V 5A power supply, USB-C PD, brownout]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: Developer naya Raspberry Pi start karne ke liye apne main computer pe "Raspberry Pi Imager" download karta hai, secret menu (Ctrl+Shift+X) open karke SSH aur Wi-Fi details pehle se set kar deta hai, aur OS ko SD card pe flash karta hai.
-* Fixing/Iteration Phase: Agar Wi-Fi credentials galat dale gaye, toh Pi network se connect nahi hoga aur headless setup fail ho jayega (developer ko same network use karna hoga).
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi live production phase describe nahi kiya gaya)
-* Additional context: Speaker highlight karta hai ki pehle OS ka naam "Raspbian" (Brazilian miscaptioned) tha, par ab "Raspberry Pi OS" hai.
+* Testing/Offline Phase: Developer naya Raspberry Pi start karne ke liye "Raspberry Pi Imager" open karta hai, secret menu (Ctrl+Shift+X) se SSH/Wi-Fi credentials set karta hai, aur OS ko SD card ke bajaye direct ek NVMe SSD (PCIe base par mounted) par flash karta hai.
+* Fixing/Iteration Phase: Agar Pi baar-baar reboot (brownout) ho raha hai, toh developer 3A power adapter ko hata kar official 5V/5A USB-C PD (Power Delivery) adapter lagata hai kyunki SSD aur camera mil kar zyada power draw karte hain.
+* Live Production Phase: OS directly SSD se boot hota hai, jo SD card ke comparison mein 10x fast hai aur power cuts ke dauran database (InfluxDB) writes mein corrupt nahi hota.
 
 --2--Raspberry Pi OS Installation & Headless Setup--
 Topic 2: Booting & IP Discovery
@@ -299,7 +298,7 @@ Subtopics: PlatformIO Extension, platformio.ini Configuration, Library Managemen
 📋 EXTRACTED IN THIS PHASE:
 
 Section 2: Raspberry Pi OS Installation & Headless Setup
-  Topic 1: OS Flashing & SD Card Setup
+  Topic 1: OS Flashing & Storage (NVMe/SSD Boot Standard)
   Topic 2: Booting & IP Discovery
   Topic 3: Initial SSH Connection (Native OpenSSH)
   Topic 4: Modern Remote Desktop (WayVNC & Wayland)
@@ -1077,7 +1076,30 @@ Sections: 3 | Topics: 3 | Subtopics: 12 (approx combined concepts)
 Speaker is section mein batata hai ki Arduino ke baad ab Raspberry Pi par software-heavy functionalities kaise implement karni hain.
 
 --1--Raspberry Pi Functionalities Overview [⚠️ Derived]--
-Topic 1: Course Scope & Overview [⚠️ Derived]
+Topic 1: Native Pi GPIO (The libgpiod Shift) [⚠️ Derived]
+Subtopics: RPi.GPIO Deprecation, Bookworm Kernel Changes, libgpiod Character Device, gpiozero Library, PEP 668 Environment
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Code syntax changes for direct Pi GPIO control
+* Key terms from transcript: RPi.GPIO dead, libgpiod, gpiozero, PEP 668, character device, virtual environment
+* Explicit emphasis by speaker: "If you try to pip install RPi.GPIO on the new OS, it will fail. The Linux kernel has completely changed how it handles hardware pins."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[RPi.GPIO deprecated, `libgpiod`, `gpiozero`, PEP 668, externally managed environment, Bookworm OS, Linux kernel 5.11+, character device, `from gpiozero import LED, Button`, pull-up resistor, pin mapping, BCM pins]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer agar direct Pi ke pins par ek LED/Button lagana chahta hai, toh woh `uv` ya `venv` ke andar `gpiozero` library install karta hai. (Pehle log `RPi.GPIO` use karte the jo ab fail ho jata hai).
+* Fixing/Iteration Phase: Agar script "externally managed environment" error deti hai, toh developer virtual environment activate karke modern `from gpiozero import Button` syntax likhta hai, jo inherently `libgpiod` backend use karta hai.
+* Live Production Phase: Pi ke native GPIO pins ab modern character device drivers ke through safely access hote hain, jo ROS 2 aur Docker containers ke andar purane memory-mapping (sysfs) method se zyada secure aur stable hain.
+
+--1--Raspberry Pi Functionalities Overview [⚠️ Derived]--
+Topic 2: Course Scope & Overview [⚠️ Derived]
 Subtopics: Hardware vs Software, Camera Integration, Telegram Bot, Final Project Goal
 
 [📊 SCOPE SIGNAL for Topic 1:
@@ -1355,7 +1377,8 @@ Subtopics: Polling vs Webhooks, FastAPI/Flask Integration, Ngrok/Cloudflare Tunn
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Raspberry Pi Functionalities Overview [⚠️ Derived]
-Topic 1: Course Scope & Overview [⚠️ Derived]
+Topic 1: Native Pi GPIO (The libgpiod Shift) [⚠️ Derived]
+Topic 2: Course Scope & Overview [⚠️ Derived]
 
 Section 2: Raspberry Pi Camera Setup [⚠️ Derived]
 Topic 1: Camera Types [⚠️ Derived]
