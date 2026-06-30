@@ -1765,14 +1765,238 @@ Sections: 7 | Topics: 8 | Subtopics: 42
 
 ==================================================================================
 
+# Section 10: Advanced Microcontroller Architecture (RTOS & Power)
 
-# Section 10: Conclusion
+===Section 10: Advanced Microcontroller Architecture (RTOS & Power)===
+Speaker is section mein hobbyist `void loop()` se aage badhkar industry-standard FreeRTOS aur low-power optimization par shift hone ka practical workflow sikhata hai.
+
+--10--Advanced Microcontroller Architecture (RTOS & Power)--
+Topic 1: FreeRTOS Fundamentals (ESP32/STM32)
+Subtopics: Task Creation, Scheduler, Mutexes, Semaphores, Message Queues, Task Priorities, Watchdog Timers (WDT)
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with code architecture
+* Key terms from transcript: RTOS, deterministic, preemptive scheduler, mutex, race condition, thread-safe, memory leak
+* Explicit emphasis by speaker: "Never use delay() in an industry project; block the task instead so the scheduler can run other tasks."
+* Speaker ne jo analogies/examples use kiye: Mutex ko ek "bathroom key" ki tarah explain kiya — jo task key lega, wahi hardware (e.g., I2C bus) use karega.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[FreeRTOS, scheduler, `xTaskCreate`, priorities, stack size, mutex, semaphore, `xSemaphoreTake`, message queues, thread-safe, ESP32 dual-core, core affinity, starvation, race condition, watchdog timer, WDT, block state]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer ek hi board par 3 independent tasks (Sensor Read, Display Update, WiFi Send) banata hai aur priorities assign karke serial monitor par execution order test karta hai.
+* Fixing/Iteration Phase: Agar I2C sensor aur Display ek sath bus access karne ki koshish mein crash hote hain, toh developer Mutex lock lagata hai taaki ek waqt par ek hi task bus use kare.
+* Live Production Phase: Final firmware mein system smoothly multitask karta hai bina kisi microsecond delay ke. Agar koi task hang hota hai, toh hardware Watchdog Timer (WDT) system ko automatically reboot kar deta hai.
+
+--10--Advanced Microcontroller Architecture (RTOS & Power)--
+Topic 2: Low-Power Optimization & PMIC
+Subtopics: Deep Sleep, Light Sleep, RTC Memory, Wake-up Sources, ULP Coprocessor, Power Management ICs
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Hardware tuning and code for micro-ampere execution
+* Key terms from transcript: deep sleep, nano-amps, RTC SRAM, ext0 wake, timer wake, battery life
+* Explicit emphasis by speaker: "Your Wi-Fi radio is the biggest enemy of your battery."
+* Speaker ne jo analogies/examples use kiye: Smartwatch analogy — screen off rehti hai (deep sleep) aur sirf tilt ya button dabane par wake up hoti hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[deep sleep, light sleep, micro-amps, nano-amps, RTC memory, `esp_sleep_enable_timer_wakeup`, `esp_sleep_enable_ext0_wakeup`, ULP coprocessor, PMIC, power management, quiescent current, Wi-Fi radio off, battery calculation]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer multimeter ya power profiler connect karke board ka current consumption measure karta hai, phir deep sleep code likh kar dekhta hai ki current 50mA se gir kar 10µA par aaya ya nahi.
+* Fixing/Iteration Phase: Agar deep sleep ke baad variables reset ho rahe hain, toh developer critical states ko standard RAM se nikal kar RTC SRAM (jo sleep mein on rehti hai) mein move karta hai.
+* Live Production Phase: IoT sensor field mein lagaya jata hai jahan woh din mein 23 ghante 59 minute sota hai, aur sirf 1 minute uth kar data bhejta hai, jisse coin cell battery saalo tak chalti hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
 
 
-===Section 10: Conclusion===
+# Section 11: Industrial Communication & Security
+
+===Section 11: Industrial Communication & Security===
+Speaker yahan factory aur production environments ke liye robust wired protocols aur data encryption implement karna sikhata hai.
+
+--11--Industrial Communication & Security--
+Topic 1: Industrial Protocols (CAN Bus & Modbus)
+Subtopics: EMI Resilience, RS-485 Transceivers, Modbus RTU/TCP, CAN Bus Architecture, Differential Signaling
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Wiring diagrams and register mapping explanation
+* Key terms from transcript: CAN Bus, Modbus RTU, RS-485, differential pair, twisted pair, PLC, noise immunity
+* Explicit emphasis by speaker: UART aur I2C lambe wires (1 meter se zyada) par factory noise mein fail ho jate hain, RS-485 is mandatory.
+* Speaker ne jo analogies/examples use kiye: Car engine control unit (ECU) communicating via CAN bus.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[CAN Bus, Modbus RTU, Modbus TCP, RS-485, differential signaling, EMI, noise immunity, PLC, holding registers, input registers, twisted pair, termination resistor, 120 ohms, MAX485, half-duplex]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer RS-485 transceiver IC (MAX485) ko microcontroller ke UART se connect karta hai aur 120-ohm termination resistors lagakar 10-meter lambi cable par data transfer test karta hai.
+* Fixing/Iteration Phase: Agar data garbled aa raha hai due to factory motors, developer twisted pair cable use karta hai taaki differential signaling noise ko cancel out kar de.
+* Live Production Phase: Industrial automation plant mein, sensor data PLC (Programmable Logic Controller) tak Modbus RTU ke through bina kisi packet drop ke pahunchta hai.
+
+--11--Industrial Communication & Security--
+Topic 2: Hardware Security & Cryptography
+Subtopics: TLS 1.3 / SSL, Secure Boot, NVS Encryption, ATECC608A Secure Element, AWS/Azure IoT Certificates
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Certificate generation and hardware key injection
+* Key terms from transcript: TLS 1.3, SSL, private key, public key, symmetric encryption, secure boot, bricking, secure element
+* Explicit emphasis by speaker: "Never hardcode your Wi-Fi passwords or API tokens in plain text in production firmware."
+* Speaker ne jo analogies/examples use kiye: Secure element is like a digital vault; even if someone steals the physical board, they can't extract the private key.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Hardware security, TLS 1.3, SSL certificates, AES-256, SHA-256, Secure Boot, eFuse, NVS encryption, ATECC608A, crypto-accelerator, AWS IoT Core, Azure IoT Hub, X.509 certificates, private key, man-in-the-middle attack]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer AWS IoT core par device register karta hai, X.509 certificates download karta hai, aur unhe microcontroller ki flash memory mein securely store karta hai.
+* Fixing/Iteration Phase: TLS handshake fail hone par developer check karta hai ki device ka hardware RTC (Real Time Clock) time internet time (NTP) se synced hai ya nahi, kyunki wrong time par certificates invalid ho jate hain.
+* Live Production Phase: Device end-to-end encrypted MQTT stream ke through server se baat karta hai, preventing any Man-in-the-Middle (MITM) attacks.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Section 12: Production Deployment & Maintenance
+
+===Section 12: Production Deployment & Maintenance===
+Speaker explain karta hai ki remote hardware ko bina physical access ke debug, update, aur test kaise kiya jata hai.
+
+--12--Production Deployment & Maintenance--
+Topic 1: FOTA (Firmware Over-The-Air) & Dual-Bank Bootloaders
+Subtopics: Flash Partitioning, OTA Architecture, Rollback Mechanisms, Version Control
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Memory mapping and partition tables
+* Key terms from transcript: FOTA, OTA, bootloader, dual-bank, OTA_0, OTA_1, rollback, bricked device
+* Explicit emphasis by speaker: Always keep a factory partition as a fallback.
+* Speaker ne jo analogies/examples use kiye: Updating your smartphone OS in the background while still using it.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[FOTA, OTA updates, bootloader, flash partition table, OTA_0, OTA_1, factory partition, firmware rollback, anti-bricking, HTTPs stream, binary file, checksum validation, MD5, SHA]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer custom CSV partition table banata hai (splitting flash into two OTA slots). Woh WiFi ke through ek naya binary (`.bin`) file push karta hai.
+* Fixing/Iteration Phase: Developer jaan bujh kar update ke beech power cut karta hai. Bootloader detect karta hai ki naya firmware corrupt hai aur purane safe firmware (OTA_0) par rollback karta hai.
+* Live Production Phase: Market mein deploy hone ke baad, saare devices raat ko 2 AM par automatically secure server se check karte hain, firmware download karte hain, aur swap karke naye version par boot hote hain.
+
+--12--Production Deployment & Maintenance--
+Topic 2: Professional Debugging & CI/CD pipeline
+Subtopics: JTAG/SWD Debugging, Crash Dump Analysis, Hardware-in-the-Loop (HIL) Testing, GitHub Actions
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Toolchain setup and automated scripting
+* Key terms from transcript: JTAG, SWD, ST-Link, GDB, Core Dump, CI/CD, GitHub Actions, Unity Testing
+* Explicit emphasis by speaker: `Serial.print` is not debugging; step-through debugging is mandatory for complex pointer issues.
+* Speaker ne jo analogies/examples use kiye: GDB allows you to freeze time inside your microcontroller.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[JTAG, SWD, ST-Link, J-Link, OpenOCD, GDB, breakpoints, memory inspection, Core Dump, HardFault, CI/CD, GitHub Actions, Unity, Ceedling, Hardware-in-the-Loop, HIL testing, automated testing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer J-Link debugger ko pins se connect karta hai aur VS Code mein breakpoints set karke memory aur registers ki live state dekhta hai (without `Serial.print`).
+* Fixing/Iteration Phase: Agar system crash (HardFault) hota hai, toh Core Dump flash mein save ho jata hai. Developer dump extract karke exact line of code (e.g., null pointer dereference) fix karta hai.
+* Live Production Phase: Jab developer code GitHub par push karta hai, ek automated CI/CD pipeline server par code compile karti hai, unit tests run karti hai, aur physical test-rack (HIL) par firmware flash karke green signal deti hai.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Section 13: Embedded Linux (Scaling the Raspberry Pi)
+
+===Section 13: Embedded Linux (Scaling the Raspberry Pi)===
+Speaker Raspberry Pi ko ek standard desktop OS (Raspberry Pi OS) se hata kar ek read-only, minimal, industry-grade embedded Linux system mein convert karna sikhata hai.
+
+--13--Embedded Linux (Scaling the Raspberry Pi)--
+Topic 1: Custom OS Images (Yocto & Buildroot)
+Subtopics: Build Systems, Custom Linux Kernel, Read-Only RootFS, Device Tree Overlays, Systemd Watchdogs
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Long explanation of bitbake and build environments
+* Key terms from transcript: Yocto Project, Buildroot, embedded Linux, read-only filesystem, SD card corruption, cross-compilation
+* Explicit emphasis by speaker: Standard Raspbian is too bloated for commercial products and kills SD cards due to constant logging.
+* Speaker ne jo analogies/examples use kiye: Standard OS ek Swiss Army Knife hai, jabki Custom Yocto OS ek specialized surgical scalpel hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Embedded Linux, Yocto Project, bitbake, recipes, Buildroot, cross-compilation toolchain, rootfs, read-only file system, RAM disk, tmpfs, SD card corruption, custom Linux kernel, Device Tree, IPC, D-Bus, systemd hardware watchdog]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer apne powerful PC par Buildroot ya Yocto set up karta hai aur cross-compile karke sirf 50MB ka ek custom Linux image banata hai jisme GUI ya faltu apps nahi hote, sirf unka Python/C++ logic aur required drivers hote hain.
+* Fixing/Iteration Phase: Power cuts se SD card corrupt hone ki problem ko fix karne ke liye, developer Root Filesystem (rootfs) ko "Read-Only" mode mein mount karta hai aur logs ko RAM (`tmpfs`) mein shift karta hai.
+* Live Production Phase: Final commercial device (jaise smart kiosk ya industrial gateway) 5 seconds mein boot hota hai, aur log cable nikal kar direct power off karne par bhi OS kabhi corrupt nahi hota.
+
+
+```
+📋 EXTRACTED IN THIS PHASE (ADVANCED ADDITIONS):
+
+Section 10: Advanced Microcontroller Architecture (RTOS & Power)
+  Topic 1: FreeRTOS Fundamentals (ESP32/STM32)
+  Topic 2: Low-Power Optimization & PMIC
+
+Section 11: Industrial Communication & Security
+  Topic 1: Industrial Protocols (CAN Bus & Modbus)
+  Topic 2: Hardware Security & Cryptography
+
+Section 12: Production Deployment & Maintenance
+  Topic 1: FOTA (Firmware Over-The-Air) & Bootloaders
+  Topic 2: Professional Debugging & CI/CD pipeline
+
+Section 13: Embedded Linux (Scaling the Raspberry Pi)
+  Topic 1: Custom OS Images (Yocto & Buildroot)
+
+📊 PHASE SUMMARY:
+Sections Added: 4 | Topics Added: 7
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Section 14: Conclusion
+
+
+===Section 14: Conclusion===
 Speaker is section mein course ka recap deta hai, project development ki best practices summarize karta hai, aur advanced robotics frameworks (ROS) ke baare mein batata hai.
 
---10--Conclusion--
+--14--Conclusion--
 Topic 1: Best Practices & Project Workflow
 Subtopics: Project Idea, Functionality Allocation, Communication Protocol, Coding Sequence, Iterative Testing
 
@@ -1796,7 +2020,7 @@ Subtopics: Project Idea, Functionality Allocation, Communication Protocol, Codin
 * Mastery Phase: Developer pehle Arduino code likhta hai aur Serial monitor se debug karta hai, phir RPi pe step-by-step logic implement karke real product complete karta hai.
 * Additional context: Speaker is workflow ko ek "best practice" batata hai jo kisi bhi naye scratch project ko fast develop karne mein help karta hai.
 
---10--Conclusion--
+--14--Conclusion--
 Topic 2: Next Steps & Advanced Technologies
 Subtopics: Project Customization, Project Ideation, Robot Operating System, ROS Integration
 
@@ -1824,7 +2048,7 @@ Subtopics: Project Customization, Project Ideation, Robot Operating System, ROS 
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 10: Conclusion
+Section 14: Conclusion
 Topic 1: Best Practices & Project Workflow
 Topic 2: Next Steps & Advanced Technologies
 
