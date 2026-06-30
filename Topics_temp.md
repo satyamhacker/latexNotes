@@ -2038,7 +2038,21 @@ Subtopics: SX1276/SX1262 Transceivers, AT Commands for Cellular, Payload Formatt
 * Fixing/Iteration Phase: Agar gateway available nahi hai, toh developer ESP32 ke sath ek NB-IoT Cellular module lagata hai aur serial terminal se AT commands bhej kar direct 4G tower se connection establish karta hai.
 * Live Production Phase: Ek smart water meter (ESP32) zameen ke andar laga hota hai. Woh har 24 ghante mein ek baar deep sleep se uthta hai, NB-IoT ya LoRa ke through 12 bytes ka encrypted payload bhejta hai, aur agle 10 saal tak bina battery change kiye chalta hai.
 
-==================================================================================
+
+
+```
+📋 EXTRACTED IN THIS PHASE (FINAL MISSING PILLAR):
+
+Section 14: Long-Range Industrial IoT (LoRaWAN & Cellular)
+  Topic 1: LoRaWAN Architecture & Raspberry Pi Gateways
+  Topic 2: Edge Nodes (ESP32 + LoRa/NB-IoT)
+
+📊 PHASE SUMMARY:
+Sections Added: 1 | Topics Added: 2
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Section 15: Production Deployment & Maintenance
 
@@ -2228,7 +2242,21 @@ Subtopics: Background Subtraction, Contour Detection, ZBar Integration, QR Code 
 * Fixing/Iteration Phase: Shadows ya light changes ki wajah se aane wale fake motion ko fix karne ke liye developer contour area ka filter lagata hai (sirf baday changes ko motion manna).
 * Live Production Phase: Factory ke entry gate par system 24/7 chalta hai. Jaise hi koi truck aata hai, motion detect hota hai, OpenCV truck pe lage QR code ko padhta hai, aur intercom door autonomously khol deta hai bina kisi heavy AI model ke.
 
-==================================================================================
+
+
+```
+📋 EXTRACTED IN THIS PHASE (OPENCV ADDITION):
+
+Section 18: Computer Vision Fundamentals (OpenCV)
+  Topic 1: Image Processing & Frame Pre-Processing
+  Topic 2: Classical Vision: Motion & Barcode Decoding
+
+📊 PHASE SUMMARY:
+Sections Added: 1 | Topics Added: 2
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Section 19: Edge AI & Machine Learning (TinyML)
 
@@ -2284,6 +2312,22 @@ Subtopics: Limitations of CPU Vision, Google Coral Edge TPU, Hailo AI Accelerato
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+```
+📋 EXTRACTED IN THIS PHASE (FINAL INDUSTRY MASTER ADDITIONS):
+
+Section 19: Edge AI & Machine Learning (TinyML)
+  Topic 1: TinyML Fundamentals & Edge Impulse
+  Topic 2: Edge Vision AI & Hardware Accelerators
+
+📊 PHASE SUMMARY:
+Sections Added: 1 | Topics Added: 2
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
 
 ==================================================================================
 
@@ -2411,7 +2455,21 @@ Subtopics: Exposing Serial/MQTT as Tools, Writing MCP Tool Schemas, Guardrails &
 * Fixing/Iteration Phase: Developer dekhta hai ki AI kabhi-kabhi hallucinate karke galat time par cooling system trigger kar raha hai. Woh code mein "Guardrails" aur "Human-in-the-loop" (HITL) add karta hai, jahan AI decision lene ke baad Telegram par puchta hai: "Temperature is 80C. I plan to turn on the cooling system. Approve? (Yes/No)".
 * Live Production Phase: Factory floor par, jab MQTT se anomaly aati hai, Agentic AI khud InfluxDB se history nikalta hai (Tool 1), RAG se manual padhta hai (Tool 2), problem diagnose karta hai, aur MCP ke through Arduino ko command bhej kar machine ko safe state mein le aata hai (Tool 3). Yeh poora process autonomously 2 seconds mein hota hai.
 
-==================================================================================
+
+
+```
+📋 EXTRACTED IN THIS PHASE (THE FINAL AGENTIC AI PILLAR):
+
+Section 21: Agentic IoT & Model Context Protocol (MCP)
+  Topic 1: Introduction to Agentic AI & MCP Architecture
+  Topic 2: Building an IoT MCP Server for Hardware Control
+
+📊 PHASE SUMMARY:
+Sections Added: 1 | Topics Added: 2
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Section 22: Self-Hosted IoT Cloud & VPS Deployment (Startup Scale)
 
@@ -2464,7 +2522,21 @@ Subtopics: ThingsBoard CE, Node-RED Flow Orchestration, Self-Hosted Digital Twin
 * Fixing/Iteration Phase: Code likhne ke bajaye, developer Node-RED mein drag-and-drop nodes banata hai: "Agar MQTT par temp > 80 aaye, toh Telegram par alert bhejo aur database mein save karo" (Rule Engine).
 * Live Production Phase: Startup ke paas ab ek apna custom dashboard (ThingsBoard) hai jahan unke clients login kar sakte hain, naye devices register kar sakte hain, aur OTA updates trigger kar sakte hain, bilkul ek million-dollar company ki tarah.
 
-==================================================================================
+
+
+```
+📋 EXTRACTED IN THIS PHASE (THE STARTUP VPS PILLAR):
+
+Section 22: Self-Hosted IoT Cloud & VPS Deployment (Startup Scale)
+  Topic 1: VPS Provisioning & Secure MQTT Clusters (EMQX)
+  Topic 2: Open-Source Device Management & Rule Engines
+
+📊 PHASE SUMMARY:
+Sections Added: 1 | Topics Added: 2
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Section 23: Advanced Cloud Architecture & Edge Containerization
 
@@ -2519,6 +2591,21 @@ Subtopics: Docker Basics for Edge, Docker Compose, Microservices, BalenaOS, Cont
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+```
+📋 EXTRACTED IN THIS PHASE (FINAL INDUSTRY MASTER ADDITIONS):
+
+Section 23: Advanced Cloud Architecture & Edge Containerization
+  Topic 1: Digital Twins & Zero-Touch Provisioning
+  Topic 2: Edge Containerization on Raspberry Pi (Docker/Balena)
+
+📊 PHASE SUMMARY:
+Sections Added: 1 | Topics Added: 2
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
 ==================================================================================
 
 # Section 24: Central AI Orchestration & Swarm Intelligence
@@ -2572,7 +2659,21 @@ Subtopics: Central MCP Server, Hierarchical AI Agents, Task Delegation, Swarm Co
 * Fixing/Iteration Phase: Developer routing logic banata hai taaki Central AI khud decide kare ki kis specific Raspberry Pi (Zone 1, Zone 2) ko cooling trigger karne ka command bhejna hai.
 * Live Production Phase: Agar Factory Zone A mein aag lagti hai, Zone A ka Pi Central AI ko alert karta hai. Central AI autonomously Zone B aur C ke Pis ko command bhejta hai ki "Lock doors and cut gas supply". Yeh 100% autonomous swarm intelligence hai.
 
-==================================================================================
+
+
+```
+📋 EXTRACTED IN THIS PHASE (CENTRAL AI ADDITION):
+
+Section 24: Central AI Orchestration & Swarm Intelligence
+  Topic 1: Cloud AI Hubs & Fleet Analytics
+  Topic 2: Multi-Agent Communication (Swarm Orchestration)
+
+📊 PHASE SUMMARY:
+Sections Added: 1 | Topics Added: 2
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Section 25: Hardware DFM (Design for Manufacturing) & Compliance
 
@@ -2625,30 +2726,20 @@ Subtopics: TVS Diodes, Optocouplers, CE/FCC Certifications, Reverse Polarity Pro
 * Fixing/Iteration Phase: Agar system high-voltage motors control kar raha hai, toh developer relay/transistor ke bajaye Optocouplers lagata hai taaki high-voltage circuit low-voltage microcontroller se physically isolate rahe (Galvanic Isolation).
 * Live Production Phase: Final product ko independent labs mein bheja jata hai EMI testing ke liye. EMI/EMC tests pass hone ke baad hi product par CE (Europe) ya FCC (USA) ka logo lagta hai aur woh legally market market mein sell ho sakta hai.
 
-==================================================================================
 
 ```
 📋 EXTRACTED IN THIS PHASE (FINAL INDUSTRY MASTER ADDITIONS):
-
-Section 19: Edge AI & Machine Learning (TinyML)
-  Topic 1: TinyML Fundamentals & Edge Impulse
-  Topic 2: Edge Vision AI & Hardware Accelerators
-
-Section 23: Advanced Cloud Architecture & Edge Containerization
-  Topic 1: Digital Twins & Zero-Touch Provisioning
-  Topic 2: Edge Containerization on Raspberry Pi (Docker/Balena)
 
 Section 25: Hardware DFM (Design for Manufacturing) & Compliance
   Topic 1: Custom PCB Design & Signal Integrity
   Topic 2: EMI/EMC Compliance & ESD Protection
 
 📊 PHASE SUMMARY:
-Sections Added: 3 | Topics Added: 5
+Sections Added: 1 | Topics Added: 2
 
 ```
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 ==================================================================================
 
 
