@@ -2413,12 +2413,65 @@ Subtopics: Exposing Serial/MQTT as Tools, Writing MCP Tool Schemas, Guardrails &
 
 ==================================================================================
 
-# Section 22: Advanced Cloud Architecture & Edge Containerization
+# Section 22: Self-Hosted IoT Cloud & VPS Deployment (Startup Scale)
 
-===Section 22: Advanced Cloud Architecture & Edge Containerization===
+===Section 22: Self-Hosted IoT Cloud & VPS Deployment (Startup Scale)===
+Speaker is section mein batata hai ki bina AWS/Azure ka heavy bill pay kiye, ek $5 Linux VPS par apna khud ka production-grade IoT Cloud, MQTT Broker, aur Device Management system kaise host karein.
+
+--22--Self-Hosted IoT Cloud & VPS Deployment (Startup Scale)--
+Topic 1: VPS Provisioning & Secure MQTT Clusters (EMQX)
+Subtopics: Linux VPS Setup, Nginx Reverse Proxy, Let's Encrypt SSL/TLS, EMQX Broker Clustering, UFW Firewall
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Terminal commands for server hardening and broker setup
+* Key terms from transcript: Linux VPS, DigitalOcean, EMQX, Nginx, Let's Encrypt, SSL certificate, firewall
+* Explicit emphasis by speaker: "AWS IoT is great, but expensive. For a startup, you host a scalable broker like EMQX on a Ubuntu VPS and secure it with free Let's Encrypt certificates."
+* Speaker ne jo analogies/examples use kiye: Moving your post office (Broker) from your local house (Raspberry Pi) to a central public building (VPS) so anyone in the world can send mail securely.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Linux VPS, Ubuntu Server, DigitalOcean, Linode, Hetzner, EMQX, MQTT cluster, Nginx reverse proxy, Let's Encrypt, Certbot, SSL/TLS certificates, UFW firewall, port 8883, MQTTS, secure websockets, WSS]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer ek cloud provider par Ubuntu VPS kharidta hai. Us par EMQX (Enterprise MQTT broker) install karta hai, Nginx setup karta hai, aur Certbot ke through free SSL certificate lagata hai taaki data encrypted rahe (MQTTS).
+* Fixing/Iteration Phase: Agar server par attacks aate hain, toh developer UFW (Uncomplicated Firewall) use karke unused ports ko block karta hai aur fail2ban setup karta hai.
+* Live Production Phase: Factory mein lage saare Raspberry Pis aur ESP32s ab factory ke local network ke bajaye is public VPS par securely data publish karte hain, jisse startup duniya ke kisi bhi kone se factory ko monitor kar sakti hai at virtually zero cost.
+
+--22--Self-Hosted IoT Cloud & VPS Deployment (Startup Scale)--
+Topic 2: Open-Source Device Management & Rule Engines
+Subtopics: ThingsBoard CE, Node-RED Flow Orchestration, Self-Hosted Digital Twins, Database Linking (PostgreSQL)
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Visual orchestration and dashboard creation on VPS
+* Key terms from transcript: ThingsBoard, Node-RED, rule engine, PostgreSQL, open-source device management
+* Explicit emphasis by speaker: "You don't need AWS Device Shadows. Open-source tools like ThingsBoard give you digital twins and asset management for free."
+* Speaker ne jo analogies/examples use kiye: Node-RED is like a visual plumbing system for your data streams.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[ThingsBoard Community Edition, Node-RED, rule engine, visual programming, PostgreSQL, self-hosted digital twins, asset management, telemetry routing, payload parsing, API endpoints, webhooks orchestration]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer usi Linux VPS par Docker ke through `Node-RED` aur `ThingsBoard` install karta hai.
+* Fixing/Iteration Phase: Code likhne ke bajaye, developer Node-RED mein drag-and-drop nodes banata hai: "Agar MQTT par temp > 80 aaye, toh Telegram par alert bhejo aur database mein save karo" (Rule Engine).
+* Live Production Phase: Startup ke paas ab ek apna custom dashboard (ThingsBoard) hai jahan unke clients login kar sakte hain, naye devices register kar sakte hain, aur OTA updates trigger kar sakte hain, bilkul ek million-dollar company ki tarah.
+
+==================================================================================
+
+# Section 23: Advanced Cloud Architecture & Edge Containerization
+
+===Section 23: Advanced Cloud Architecture & Edge Containerization===
 Speaker explain karta hai ki thousands of IoT devices ko cloud pe securely provision, manage, aur update (via Docker) kaise kiya jata hai.
 
---22--Advanced Cloud Architecture & Edge Containerization--
+--23--Advanced Cloud Architecture & Edge Containerization--
 Topic 1: Digital Twins & Zero-Touch Provisioning
 Subtopics: AWS IoT Device Shadow, Azure Device Twins, RPC (Remote Procedure Call), Just-in-Time Provisioning
 
@@ -2441,7 +2494,7 @@ Subtopics: AWS IoT Device Shadow, Azure Device Twins, RPC (Remote Procedure Call
 * Fixing/Iteration Phase: Agar device offline ho jata hai, cloud update fail nahi karta, balki state ko hold karta hai. Jab device reconnect hota hai, woh immediately shadow sync karke missed command execute kar leta hai.
 * Live Production Phase: Company factory se 10,000 ESP32 boards ship karti hai. Devices pehli baar internet se connect hote hi automatically cloud par apne unique certificates generate aur provision kar lete hain (Zero-Touch).
 
---22--Advanced Cloud Architecture & Edge Containerization--
+--23--Advanced Cloud Architecture & Edge Containerization--
 Topic 2: Edge Containerization on Raspberry Pi (Docker/Balena)
 Subtopics: Docker Basics for Edge, Docker Compose, Microservices, BalenaOS, Container Auto-Restart
 
@@ -2468,12 +2521,12 @@ Subtopics: Docker Basics for Edge, Docker Compose, Microservices, BalenaOS, Cont
 
 ==================================================================================
 
-# Section 23: Central AI Orchestration & Swarm Intelligence
+# Section 24: Central AI Orchestration & Swarm Intelligence
 
-===Section 23: Central AI Orchestration & Swarm Intelligence===
+===Section 24: Central AI Orchestration & Swarm Intelligence===
 Speaker batata hai ki jab aapke paas 100 Raspberry Pi Agentic nodes hon, toh un sabko ek 'Central Brain' (Cloud AI) ke through kaise orchestrate aur coordinate kiya jata hai.
 
---23--Central AI Orchestration & Swarm Intelligence--
+--24--Central AI Orchestration & Swarm Intelligence--
 Topic 1: Cloud AI Hubs & Fleet Analytics
 Subtopics: Centralized Data Lakes, Sending Edge Features to Cloud, Large Model Inference (AWS Bedrock/OpenAI), Predictive Fleet Analytics
 
@@ -2496,7 +2549,7 @@ Subtopics: Centralized Data Lakes, Sending Edge Features to Cloud, Large Model I
 * Fixing/Iteration Phase: Raw video/audio bhejne se cloud bill badh jata hai, isliye developer rule lagata hai ki Pi sirf anomalies aur text logs hi Central AI ko feed kare.
 * Live Production Phase: Cloud par baitha ek massive GPT-4o ya Claude model poori factory ke 100 Pis ka data ek sath dekhta hai aur pattern nikalta hai ki "Jab Machine A rukti hai, toh 5 minute baad Machine C mein error aati hai", aur poori supply chain ko optimize kar deta hai.
 
---23--Central AI Orchestration & Swarm Intelligence--
+--24--Central AI Orchestration & Swarm Intelligence--
 Topic 2: Multi-Agent Communication (Swarm Orchestration)
 Subtopics: Central MCP Server, Hierarchical AI Agents, Task Delegation, Swarm Coordination Protocols
 
@@ -2521,12 +2574,12 @@ Subtopics: Central MCP Server, Hierarchical AI Agents, Task Delegation, Swarm Co
 
 ==================================================================================
 
-# Section 24: Hardware DFM (Design for Manufacturing) & Compliance
+# Section 25: Hardware DFM (Design for Manufacturing) & Compliance
 
-===Section 24: Hardware DFM (Design for Manufacturing) & Compliance===
+===Section 25: Hardware DFM (Design for Manufacturing) & Compliance===
 Speaker prototype boards (Arduino/ESP32 dev kits) se move karke custom PCBs banane aur global certifications pass karne ke concepts sikhata hai.
 
---24--Hardware DFM (Design for Manufacturing) & Compliance--
+--25--Hardware DFM (Design for Manufacturing) & Compliance--
 Topic 1: Custom PCB Design & Signal Integrity
 Subtopics: Schematic Design, PCB Layout, Decoupling Capacitors, Ground Planes, Antenna Placement
 
@@ -2549,7 +2602,7 @@ Subtopics: Schematic Design, PCB Layout, Decoupling Capacitors, Ground Planes, A
 * Fixing/Iteration Phase: Wi-Fi range kam aane par, developer PCB redesign karta hai taaki ESP32 antenna ke theek neeche koi copper ya ground plane na ho (Antenna keep-out zone).
 * Live Production Phase: Gerber files generate karke factory (e.g., JLCPCB/PCBWay) ko bheji jaati hain jahan Pick-and-Place machines mass-produce karti hain.
 
---24--Hardware DFM (Design for Manufacturing) & Compliance--
+--25--Hardware DFM (Design for Manufacturing) & Compliance--
 Topic 2: EMI/EMC Compliance & ESD Protection
 Subtopics: TVS Diodes, Optocouplers, CE/FCC Certifications, Reverse Polarity Protection
 
@@ -2581,11 +2634,11 @@ Section 19: Edge AI & Machine Learning (TinyML)
   Topic 1: TinyML Fundamentals & Edge Impulse
   Topic 2: Edge Vision AI & Hardware Accelerators
 
-Section 22: Advanced Cloud Architecture & Edge Containerization
+Section 23: Advanced Cloud Architecture & Edge Containerization
   Topic 1: Digital Twins & Zero-Touch Provisioning
   Topic 2: Edge Containerization on Raspberry Pi (Docker/Balena)
 
-Section 24: Hardware DFM (Design for Manufacturing) & Compliance
+Section 25: Hardware DFM (Design for Manufacturing) & Compliance
   Topic 1: Custom PCB Design & Signal Integrity
   Topic 2: EMI/EMC Compliance & ESD Protection
 
@@ -2599,12 +2652,12 @@ Sections Added: 3 | Topics Added: 5
 ==================================================================================
 
 
-# Section 25: Robotics & Autonomous Systems (ROS 2)
+# Section 26: Robotics & Autonomous Systems (ROS 2)
 
-===Section 25: Robotics & Autonomous Systems (ROS 2)===
+===Section 26: Robotics & Autonomous Systems (ROS 2)===
 Speaker batata hai ki real-world AGVs (Automated Guided Vehicles) aur robotics ke liye custom Python scripts ki jagah ROS 2 framework aur micro-ROS ka use kaise kiya jata hai.
 
---25--Robotics & Autonomous Systems (ROS 2)--
+--26--Robotics & Autonomous Systems (ROS 2)--
 Topic 1: ROS 2 Architecture & DDS Middleware
 Subtopics: ROS 1 EOL, Nodes, Topics, Publish/Subscribe in ROS, Data Distribution Service (DDS), Distributed Computing
 
@@ -2627,7 +2680,7 @@ Subtopics: ROS 1 EOL, Nodes, Topics, Publish/Subscribe in ROS, Data Distribution
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: Ek complex robot mein multiple Raspberry Pis aur sensors lagaye jate hain. ROS 2 un sabko ek unified system ki tarah treat karta hai (Distributed Computing).
 
---25--Robotics & Autonomous Systems (ROS 2)--
+--26--Robotics & Autonomous Systems (ROS 2)--
 Topic 2: Bridging Microcontrollers with micro-ROS
 Subtopics: micro-ROS Architecture, ESP32 ROS 2 Nodes, XRCE-DDS Agent, Seamless Hardware Integration
 
@@ -2652,12 +2705,12 @@ Subtopics: micro-ROS Architecture, ESP32 ROS 2 Nodes, XRCE-DDS Agent, Seamless H
 
 ==================================================================================
 
-# Section 26: Final Conclusion & Industry Readiness
+# Section 27: Final Conclusion & Industry Readiness
 
-===Section 26: Final Conclusion & Industry Readiness===
+===Section 27: Final Conclusion & Industry Readiness===
 Speaker course wrap up karta hai aur IoT/Robotics engineer banne ke workflow aur mindset par final advice deta hai.
 
---26--Final Conclusion & Industry Readiness--
+--27--Final Conclusion & Industry Readiness--
 Topic 1: The Full-Stack Hardware Engineer
 Subtopics: Prototype to Production Pipeline, Mindset Shift, Continuous Learning
 
@@ -2730,9 +2783,23 @@ Sections Added: 1 | Topics Added: 2
 ```
 📋 EXTRACTED IN THIS PHASE (CENTRAL AI ADDITION):
 
-Section 23: Central AI Orchestration & Swarm Intelligence
+Section 24: Central AI Orchestration & Swarm Intelligence
   Topic 1: Cloud AI Hubs & Fleet Analytics
   Topic 2: Multi-Agent Communication (Swarm Orchestration)
+
+📊 PHASE SUMMARY:
+Sections Added: 1 | Topics Added: 2
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+```
+📋 EXTRACTED IN THIS PHASE (THE STARTUP VPS PILLAR):
+
+Section 22: Self-Hosted IoT Cloud & VPS Deployment (Startup Scale)
+  Topic 1: VPS Provisioning & Secure MQTT Clusters (EMQX)
+  Topic 2: Open-Source Device Management & Rule Engines
 
 📊 PHASE SUMMARY:
 Sections Added: 1 | Topics Added: 2
