@@ -1993,6 +1993,28 @@ Subtopics: ESP-NOW Protocol, MAC Address Binding, Wi-Fi Router Bypass, ESP32 to 
 * Fixing/Iteration Phase: Kyunki Raspberry Pi natively ESP-NOW support nahi karta, developer ek "Master ESP32" ko Pi se USB/Serial se connect karta hai (Gateway Bridge).
 * Live Production Phase: Factory floor par jahan Wi-Fi signal weak hota hai, sensors ESP-NOW se Master ESP32 ko data bhejte hain, aur woh Master ESP32 us data ko serial ke through Raspberry Pi brain tak pahunchata hai.
 
+--13--Wireless IoT Gateways & ESP32 Integration--
+Topic 3: Real-Time Telepresence & Video Streaming (WebRTC)
+Subtopics: Limitations of MJPEG/RTSP, WebRTC Architecture, MediaSoup / LiveKit setup on Pi, Sub-100ms Latency, Two-Way Audio/Video
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Setting up peer-to-peer ultra-low latency streams
+* Key terms from transcript: WebRTC, sub-100ms latency, MediaSoup, LiveKit, UDP, peer-to-peer
+* Explicit emphasis by speaker: "If you are driving a robot remotely or talking to an AI, you cannot have a 2-second video delay. You must use WebRTC."
+* Speaker ne jo analogies/examples use kiye: Dropping the old walkie-talkie (RTSP) and upgrading to a live FaceTime call (WebRTC) with your hardware.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[WebRTC, Telepresence, sub-100ms latency, MediaSoup, LiveKit, UDP streaming, peer-to-peer, P2P, two-way audio, ICE server, STUN/TURN, Python aiortc, remote driving, teleoperation]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+* Testing/Offline Phase: Developer Pi par `aiortc` (Python WebRTC library) ya LiveKit server setup karta hai. PiCamera ki feed ko H.264 hardware encoding ke through seedha WebRTC track mein inject karta hai.
+* Fixing/Iteration Phase: Agar Pi router ke peeche (NAT) chhipa hai aur feed bahar nahi jaa rahi, toh developer ek free STUN/TURN server (jaise Google STUN) configure karta hai taaki direct P2P connection ban sake.
+* Live Production Phase: Tum duniya ke kisi bhi kone mein apne phone browser par apna dashboard kholte ho. Tumhe apne robot/factory ka live 1080p video aur audio dikhta hai with zero lag (sub-100ms), aur tumhari aawaz direct robot ke speaker se nikalti hai.
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
@@ -2426,6 +2448,7 @@ Subtopics: Beyond YOLO, Local VLMs (LLaVA/Moondream), Image-to-Text Reasoning, H
 Section 13: Wireless IoT Gateways & ESP32 Integration
   Topic 1: MQTT Broker on Raspberry Pi (Mosquitto)
   Topic 2: Low-Latency Mesh with ESP-NOW & Bridge to RPi
+  Topic 3: Real-Time Telepresence & Video Streaming (WebRTC)
 
 Section 20: Local GenAI & Autonomous RAG Systems on Raspberry Pi
   Topic 1: Running Local LLMs on Raspberry Pi
@@ -2515,6 +2538,27 @@ Subtopics: Wake-Word Detection, Local STT (Whisper), Text-to-Speech (TTS), Voice
 * Fixing/Iteration Phase: Background noise (machinery/wind) ki wajah se mic galat sun raha hai, toh developer audio stream par WebRTC Noise Suppression (VAD) filter lagata hai taaki AI sirf human voice sune.
 * Live Production Phase: Factory worker machine ke paas khade hoke bolta hai: "Hey System, turn off the main valve." Mic audio capture karta hai -> Whisper text banata hai -> MCP Agent samajhta hai ki kya karna hai -> Arduino valve band karta hai -> TTS se speaker par awaz aati hai: "Main valve is now closed, sir."
 
+--21--Agentic IoT & Model Context Protocol (MCP)--
+Topic 4: Long-Term Episodic Memory (The "Jarvis" Memory)
+Subtopics: Semantic Memory vs Episodic Memory, Mem0 / Zep Integration, User Personalization, Cross-Session Context
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Adding stateful memory to stateless LLMs
+* Key terms from transcript: Episodic Memory, Mem0, Zep, Vector DB, personalization, cross-session
+* Explicit emphasis by speaker: "An LLM resets every time you talk to it. To build a true Jarvis, the agent must remember what you told it yesterday and adapt to your preferences over time."
+* Speaker ne jo analogies/examples use kiye: The difference between a goldfish (stateless AI) and a personal assistant (stateful AI with episodic memory).
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Long-Term Memory, Episodic Memory, Semantic Memory, Mem0, Zep memory, LangGraph Checkpointer, user personalization, cross-session context, persistent state, SQLite, cognitive architecture, Jarvis memory]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+* Testing/Offline Phase: Developer AI agent ke peechhe `Mem0` (Memory layer) attach karta hai. Jab user bolta hai "I prefer the factory temp at 22C", Memory layer is fact ko extract karke user ke profile mein save kar leti hai.
+* Fixing/Iteration Phase: Agar memory bohot badi ho jaye aur AI slow ho jaye, toh developer "Memory Consolidation" script chalata hai jo purani useless yaadon ko compress kar deti hai.
+* Live Production Phase: Agli baar jab worker bolta hai "Set the temperature to my favorite", AI turant apni episodic memory check karta hai, 22C nikalta hai, aur MQTT ke through AC ko command bhej deta hai.
 
 ```
 📋 EXTRACTED IN THIS PHASE (THE FINAL AGENTIC AI PILLAR):
@@ -2523,9 +2567,10 @@ Section 21: Agentic IoT & Model Context Protocol (MCP)
   Topic 1: Introduction to Agentic AI & MCP Architecture
   Topic 2: Building an IoT MCP Server for Hardware Control
   Topic 3: Voice-Native AI (The "Jarvis" Hardware UI)
+  Topic 4: Long-Term Episodic Memory (The "Jarvis" Memory)
 
 📊 PHASE SUMMARY:
-Sections Added: 1 | Topics Added: 3
+Sections Added: 1 | Topics Added: 4
 
 ```
 
