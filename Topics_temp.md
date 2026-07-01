@@ -2277,28 +2277,24 @@ Subtopics: Password File Reading, Yagmail SMTP Client, Send Email Function, Atta
 * Additional context: (N/A)
 
 --18--The Ultimate "Jarvis" Final Project--
-Topic 6: Flask Web Server & Log Parsing
-Subtopics: Flask App Setup, Index Route, Check Movement Route, File Line Counting, State Difference Logic, Global Keyword Usage
+Topic 6: FastAPI Web Server & Async Log Parsing
+Subtopics: FastAPI App Setup, Async Endpoints, Check Movement Route, File Line Counting, State Difference Logic, Global Keyword Usage
 
 [📊 SCOPE SIGNAL for Topic 6:
-
 * Depth Level: Deep
 * Coverage Angle: Both
-* Transcript mein content volume: Long explanation + logic breakdown for state tracking
-* Key terms from transcript: Flask, app.route, check movement, log file, read permission, for line in f, line counter, os.path.exists, photo counter, difference, global keyword
-* Explicit emphasis by speaker: Speaker ne highlight kiya ki Python mein function ke andar global variable ko assign/update karne ke liye `global` keyword use karna mandatory hai, warna woh ek local variable ban jayega.
-* Speaker ne jo analogies/examples use kiye: None
+* Transcript mein content volume: Long explanation + logic breakdown for async state tracking
+* Key terms from transcript: FastAPI, app.get, async def, uvicorn, read permission, for line in f, line counter, photo counter, difference
+* Explicit emphasis by speaker: "Always use async def for your API routes so your AI doesn't block the web server."
 ]
 
 🔑 KEYWORDS DUMP for Topic 6:
-[Flask, app = Flask(**name**), app.run(host='0.0.0.0'), @app.route('/'), index function, check_movement(), read logs, log_file_name, with open('r'), for line in f, line_counter, os.path.exists(), return statement, message string, difference computation, photo_counter, ⭐global photo_counter, string casting]
+[FastAPI, app = FastAPI(), uvicorn.run, @app.get('/'), async def check_movement(), read logs, log_file_name, with open('r'), for line in f, line_counter, os.path.exists(), JSON response, difference computation, photo_counter, ⭐global photo_counter]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
-
-* Testing/Offline Phase: Developer ek second script banata hai jo pehli script dwara banayi gayi text file ko as a database read karta hai. Server cross-device test hota hai IP address use karke.
-* Fixing/Iteration Phase: User ko total number batane ke bajaye, developer difference track karta hai (`line_counter - photo_counter`) taaki user ko sirf "new" photos ka number dikhe.
-* Live Production Phase: Flask web server `0.0.0.0` host pe run karta hai. Jab bhi koi client `/check-movement` route access karta hai, server log file ko parse karke lines count karta hai, global counter ko update karta hai aur dynamic string response return karta hai.
-* Additional context: Speaker ne clear kiya ki ek file ko ek programme write kar raha ho aur doosra read kar raha ho toh chalta hai, bas dono simultaneously write na karein.
+* Testing/Offline Phase: Developer FastAPI script banata hai jo pehli script dwara banayi text file ko read karti hai.
+* Fixing/Iteration Phase: User ko total number batane ke bajaye, developer difference track karta hai (`line_counter - photo_counter`) taaki user ko sirf "new" photos dikhein.
+* Live Production Phase: Uvicorn server `0.0.0.0` host pe run karta hai. Client `/check-movement` route access karta hai, API asynchronously log parse karke fast JSON response return karti hai.
 
 --18--The Ultimate "Jarvis" Final Project--
 Topic 7: Web Interface & HTML Formatting
@@ -2388,7 +2384,7 @@ Topic 2: PIR Sensor Logic & Timers
 Topic 3: Camera Module Integration (Picamera2)
 Topic 4: File Handling & Local Logging
 Topic 5: Email Automation Workflow
-Topic 6: Flask Web Server & Log Parsing
+Topic 6: FastAPI Web Server & Async Log Parsing
 Topic 7: Web Interface & HTML Formatting
 Topic 8: Background Automation with Systemd
 Topic 9: Project Customizations (Outro)
@@ -2474,6 +2470,26 @@ Subtopics: Motor Control, Pulse Width Modulation (PWM), I2C / SPI Buses, PCA9685
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 * Mastery Phase: Developer basic LEDs se aage badhkar I2C protocol ke through PCA9685 board connect karta hai. Uske baad ROS 2 (Robot Operating System) ka framework use karke drone ke propellers (via ESCs) aur robotic arms ko precise PWM signals bhejta hai.
 
+
+--19--Conclusion--
+Topic 4: Drone Companion Architecture (MAVLink & Pixhawk)
+Subtopics: RTOS vs Linux, Flight Controllers, Pixhawk, Companion Computer Concept, MAVLink Protocol, DroneKit/MAVSDK
+
+[📊 SCOPE SIGNAL for Topic 4:
+* Depth Level: Surface
+* Coverage Angle: Conceptual only
+* Transcript mein content volume: Crucial industry safety architecture for flying robots
+* Key terms from transcript: Companion computer, Flight Controller, Pixhawk, MAVLink, RTOS, DroneKit
+* Explicit emphasis by speaker: "Never connect drone propellers directly to a Raspberry Pi. Linux is not a Real-Time OS. Use a flight controller."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Companion computer, Flight Controller, Pixhawk, ArduPilot, PX4, RTOS, Real-Time Operating System, Linux jitter, ⭐MAVLink protocol, telemetry, DroneKit, MAVSDK, UART serial connection]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+* Learning Phase: Developer samajhta hai ki Pi ka kaam AI vision (computer vision) aur route planning hai, jabki Flight Controller (Pixhawk) ka kaam motors ko balance karna hai.
+* Application Phase: Developer Pi ko UART ke through Pixhawk se connect karta hai aur Python (MAVSDK) se MAVLink commands ("Go to coordinates X, Y") bhejta hai.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -2484,6 +2500,7 @@ Section 19: Conclusion
 Topic 1: Course Recap
 Topic 2: Future Learning Paths
 Topic 3: Robotics, Drones & Hardware Protocols
+Topic 4: Drone Companion Architecture (MAVLink & Pixhawk)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 2 | Subtopics: 13
