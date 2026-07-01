@@ -204,7 +204,6 @@ Topic 1: Headless Setup Overview & OS Flashing
 Subtopics: Headless Setup Concept, Raspberry Pi Imager, SSH Enablement, Wi-Fi Configuration, Locale Settings, SD Card Flashing
 
 [📊 SCOPE SIGNAL for Topic 1:
-
 * Depth Level: Deep
 * Coverage Angle: Practical only
 * Transcript mein content volume: Long explanation of flashing steps aur configuration settings
@@ -1169,7 +1168,7 @@ Subtopics: Pre-Wiring Steps, PIR Pin Layout, Ground Connection, 5V Power Connect
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[user input, 0, 1, int, input(), if structure, exit, gpiozero, from gpiozero import LED, led = LED(17), ⭐==, led.off(), elif, led.on(), else, print, string cast, time.sleep(2)]
+[power off, remove power cable, remove SD card, female to female wire, male to female wires, 10 kilo ohm resistor, ground, black wire, orange cable, 3.3 volt pin, 5 volt pin, ⭐5 volts, external side, internal side, GPIO number 4, metallic parts]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
@@ -1897,7 +1896,7 @@ Subtopics: Dynamic URL Parameters, LED Pin Validation, State Validation, Multipl
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[`@app.post('/led/{led_pin}/state/{led_state}')`, `trigger_led(led_pin, led_state)`, `from gpiozero import LED`, `led_dict = {17: LED(17), 27: LED(27), 22: LED(22)}`, validation, `if led_pin not in led_dict`, wrong GPIO number, `if led_state == 0`, `led_dict[led_pin].off()`, `led_dict[led_pin].on()`, HTTPException, status_code=404, URL parameters]`, `gpiozero`, `gpiozero`, `gpiozero`, `gpiozero`, `gpiozero`, validation, `if not led_pin in led_pin_list`, wrong GPIO number, `if led_state == 0`, `if led_state == 1`, state must be 0 or 1, return ok, internal error, 500 error, 404 error, URL parameters]
+[`@app.post('/led/{led_pin}/state/{led_state}')`, `trigger_led(led_pin, led_state)`, `from gpiozero import LED`, `led_dict = {17: LED(17), 27: LED(27), 22: LED(22)}`, validation, `if led_pin not in led_dict`, wrong GPIO number, `if led_state == 0`, `led_dict[led_pin].off()`, `led_dict[led_pin].on()`, HTTPException, status_code=404, URL parameters]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
@@ -2528,7 +2527,7 @@ Subtopics: Project Based Learning, Advanced Hardware Protocols, Advanced Camera 
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[Python, GPIO library, communication protocols, UART, SPI, I2C, physical hardware components, ⭐burn your Raspberry Pi, camera module, documentation, image processing, OpenCV, artificial intelligence, detect faces, web development, HTML, CSS, JavaScript, Flask, web applications, ⭐fun project]
+[Python, GPIO library, communication protocols, UART, SPI, I2C, physical hardware components, ⭐burn your Raspberry Pi, camera module, documentation, image processing, OpenCV, artificial intelligence, detect faces, web development, HTML, CSS, JavaScript, FastAPI, web applications, ⭐fun project]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
