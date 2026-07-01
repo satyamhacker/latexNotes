@@ -727,10 +727,8 @@ Total keywords across all subtopics in this topic: 42
 
 ==================================================================================
 
-# Section 2: Installation Steps
+# Section 2: Raspberry Pi OS Installation & Headless Setup
 
-
-### 🚀 Section Overview: Section 2 - Raspberry Pi OS Installation & Headless Setup
 
 Is section mein hum Raspberry Pi ko completely **headless mode** (bina kisi external monitor, keyboard, ya mouse ke) mein set up karna seekhenge. Hum OS ko flash karne se lekar, network par device ka IP dhoondhne, aur SSH/VNC ke through remotely connect karne tak ka poora production-ready flow master karenge.
 
@@ -1958,7 +1956,7 @@ Agar tum ek startup mein ho jo Smart Home devices (ESP32) banata hai aur tumhara
 # Section 3: PART 1 - Serial Communication Between Raspberry Pi and Microcontrollers (Arduino/ESP32/STM32)
 
 
-### 🌐 Section Overview: PART 1 - Serial Communication Between Raspberry Pi and Microcontrollers
+
 
 Is section mein hum deep dive karenge ki kaise ek Raspberry Pi (jo ek mini-computer hai) aur ek Microcontroller (jaise Arduino, ESP32, ya STM32) ke beech data ka aadan-pradan (communication) hota hai. Hum hardware setup se lekar Python programming aur modern best practices tak sab kuch cover karenge taaki tumhara data seamless aur error-free flow ho.
 
@@ -5304,7 +5302,7 @@ Spacecraft Telemetry. Ground control station (Python architecture) continuous da
 # Section 5: PART 2 - Arduino Functionalities (Hardware Components)
 
 
-### Overview: Section 1: PART 2 - Arduino Functionalities (Hardware Components)
+
 
 *(**[⚠️ Derived]** Is section mein hum final intercom project ke liye required Arduino hardware components ki circuit building aur programming ka deep recap dekh rahe hain. Har component ko detail mein samjhenge.)*
 
@@ -15661,7 +15659,7 @@ Amazon apni fulfillment center conveyor belts par defective boxes detect karne k
 
 # Section 20: Local GenAI & Autonomous RAG Systems on Raspberry Pi
 
-### 🌐 Section Overview: Section 20: Local GenAI & Autonomous RAG Systems on Raspberry Pi
+
 
 Is advanced module mein hum seekhenge ki Raspberry Pi jaise chhote, low-power hardware par bina internet ke AI (Large Language Models) aur RAG (Retrieval-Augmented Generation) kaise chalayein. Goal yeh hai ki humara IoT system hardcoded if-else logic se aage badhkar, ek khud-sochne wala **autonomous agent** (aisa software jo apne aap decisions le sake) ban jaye.
 
@@ -17367,7 +17365,7 @@ Total keywords across all subtopics in this topic: 68
 
 # Section 22: Self-Hosted IoT Cloud & VPS Deployment (Startup Scale)
 
-### 🌐 Section Overview: Section 22: Self-Hosted IoT Cloud & VPS Deployment (Startup Scale)
+
 
 Is section mein hum seekhenge ki kaise ek startup bina AWS (Amazon Web Services — Amazon ka cloud platform) ya Azure (Microsoft ka cloud) ke mehenge bills pay kiye, apna khud ka production-grade IoT Cloud bana sakti hai. Hum ek saste Linux server par poora infrastructure host karenge jo scalable bhi hoga aur bank-grade secure bhi.
 
@@ -17806,7 +17804,7 @@ Total keywords across all subtopics in this topic: 11
 
 # Section 23: Advanced Cloud Architecture & Edge Containerization
 
-### 🌐 Section Overview: Advanced Cloud Architecture & Edge Containerization
+
 
 Is section mein hum samjhenge ki jab aapke paas ek-do nahi, balki thousands of IoT devices (jaise sensors, cameras, smart ACs) hote hain, toh unhe cloud par securely provision, manage, aur update kaise kiya jaata hai. Hum **Digital Twins** ke concept se offline devices ko sync karna seekhenge, aur **Docker/Balena** use karke Raspberry Pi par edge applications ko safely run karna samjhenge.
 
@@ -18247,8 +18245,6 @@ Total keywords across all subtopics in this topic: 26
 
 
 # Section 24: Central AI Orchestration & Swarm Intelligence
-
-### 🌐 Section 24 Overview: Central AI Orchestration & Swarm Intelligence
 
 Is section mein hum edge computing se ek level upar jayenge. Jab aapke paas factory ya system mein 100 alag-alag Raspberry Pi (edge nodes) hon, toh unhe as isolated islands nahi chhod sakte. Hum seekhenge ki kaise in sabhi agents ko ek "Central Brain" (Cloud AI) se connect karke orchestrate kiya jata hai, taaki ek true Swarm Intelligence (jaise madhumakkhiyon ka jhund ek mind se kaam karta hai) ban sake.
 
@@ -18756,7 +18752,7 @@ Total keywords across all subtopics in this topic: 11
 
 # Section 25: Hardware DFM (Design for Manufacturing) & Compliance
 
-### 📦 Section Overview: Section 25: Hardware DFM (Design for Manufacturing) & Compliance
+
 
 Is section mein hum breadboard aur prototype boards (jaise Arduino ya ESP32 dev kits) ki duniya se bahar nikal kar, real-world custom PCBs (Printed Circuit Boards) banane aur global market ke liye certifications (CE/FCC) pass karne ka deep dive karenge. Yeh prototype se production tak ka safar hai.
 
@@ -19133,7 +19129,7 @@ USER FINGER (STATIC ZAP: 8000V) ⚡
 # Section 26: Robotics & Autonomous Systems (ROS 2)
 
 
-### 🌐 Section Overview: Section 26: Robotics & Autonomous Systems (ROS 2)
+
 
 Is section mein hum samjhenge ki modern AGVs (Automated Guided Vehicles — self-driving robots jo factories mein samaan uthate hain) aur complex robotics ke liye purane custom Python scripts ko chhod kar **ROS 2 framework** aur **micro-ROS** ka use kyun aur kaise kiya jata hai. Yeh ek massive architectural shift hai amateur robotics se commercial robotics ki taraf.
 
@@ -19548,7 +19544,7 @@ Boston Dynamics ke Spot (robot dog) ya Amazon warehouse robots isi architecture 
 
 # Section 27: Final Conclusion & Industry Readiness
 
-### 🌐 Section Overview: Section 27: Final Conclusion & Industry Readiness
+
 
 Is section mein hum is poore safar ko wrap up karenge. Ek hobbyist (jo sirf maze ke liye electronics banata hai) se ek industry-ready IoT aur Robotics engineer banne ke liye jo mindset shift chahiye, hum us par final advice discuss karenge.
 
