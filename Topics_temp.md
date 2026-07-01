@@ -2414,7 +2414,7 @@ Subtopics: Project Result Demo, Program 1 Overview, Program 2 Overview, Developm
 * Additional context: Speaker batata hai ki programming mein Google use karna ek fundamental developer habit hai.
 
 --18--The Ultimate "Jarvis" Final Project--
-Topic 2: PIR Sensor Logic & Timers
+Topic 2: Event-Driven PIR Logic & Hardware Interrupts
 Subtopics: GPIO Initialization, Try Except Cleanup, State Transition Logic, Movement Timer Implementation, Photo Cooldown Logic, LED Indicator Setup
 
 [📊 SCOPE SIGNAL for Topic 2:
@@ -2456,7 +2456,7 @@ Subtopics: Picamera2 Initialization, libcamera Wrapper, Camera Warmup, Dynamic F
 * Live Production Phase: Script start hote hi Picamera2 object initialize hota hai aur 2 seconds warmup leta hai. Jab PIR/OpenCV trigger hota hai, `picam2.capture_file()` directly hardware pipeline se optimized image local storage mein save kar deta hai.
 
 --18--The Ultimate "Jarvis" Final Project--
-Topic 4: File Handling & Local Logging
+Topic 4: Fast & Persistent Logging (SQLite Integration)
 Subtopics: Old Log Removal, OS Path Exists, Append Mode Concept, Update Log Function, Newline Formatting
 
 [📊 SCOPE SIGNAL for Topic 4:
@@ -2480,7 +2480,7 @@ Subtopics: Old Log Removal, OS Path Exists, Append Mode Concept, Update Log Func
 * Additional context: (N/A)
 
 --18--The Ultimate "Jarvis" Final Project--
-Topic 5: Email Automation Workflow
+Topic 5: Real-Time Media Alerts (Webhooks & Telegram Bot API)
 Subtopics: Password File Reading, Yagmail SMTP Client, Send Email Function, Attachment Handling, Parameter Debugging
 
 [📊 SCOPE SIGNAL for Topic 5:
@@ -2504,7 +2504,7 @@ Subtopics: Password File Reading, Yagmail SMTP Client, Send Email Function, Atta
 * Additional context: (N/A)
 
 --18--The Ultimate "Jarvis" Final Project--
-Topic 6: FastAPI Web Server & Async Log Parsing
+Topic 6: Non-Blocking FastAPI & Async SQL Queries
 Subtopics: FastAPI App Setup, Async Endpoints, Check Movement Route, File Line Counting, State Difference Logic, Global Keyword Usage
 
 [📊 SCOPE SIGNAL for Topic 6:
@@ -2605,11 +2605,11 @@ Subtopics: Parameter Tuning, Push Button Integration, Cron Job Concept
 
 Section 18: The Ultimate "Jarvis" Final Project
 Topic 1: Project Architecture & Setup
-Topic 2: PIR Sensor Logic & Timers
+Topic 2: Event-Driven PIR Logic & Hardware Interrupts
 Topic 3: Camera Module Integration (Picamera2)
-Topic 4: File Handling & Local Logging
-Topic 5: Email Automation Workflow
-Topic 6: FastAPI Web Server & Async Log Parsing
+Topic 4: Fast & Persistent Logging (SQLite Integration)
+Topic 5: Real-Time Media Alerts (Webhooks & Telegram Bot API)
+Topic 6: Non-Blocking FastAPI & Async SQL Queries
 Topic 7: Web Interface & HTML Formatting
 Topic 8: Background Automation (Dynamic Systemd Daemons)
 Topic 9: Project Customizations (Outro)
