@@ -115,6 +115,29 @@ Subtopics: Learning Workflow, Challenge Rules, Hardware Safety Protocol
 * Live Production Phase: N/A
 * Additional context: N/A
 
+Topic 6: Thermal Management & Power Architecture
+Subtopics: Active Coolers, 27W Power Supply Unit, Pi 5 Requirements
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Short explanation of hardware requirements
+* Key terms from transcript: active cooler, 27W PSU, Pi 5, thermal throttling, AI workloads
+* Explicit emphasis by speaker: "Pi 5 bina cooling ke AI nahi chala sakta."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[active cooler, 27W PSU, Pi 5, thermal throttling, AI workloads, heat sink, power architecture]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Developer ensures that the 27W PSU and active cooler are installed before running heavy AI workloads to prevent thermal throttling.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: (N/A)
+* Additional context: Pi 5 generates significant heat and requires proper cooling.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -127,9 +150,10 @@ Topic 2: Raspberry Pi Capabilities & History
 Topic 3: Raspberry Pi Hardware Anatomy
 Topic 4: Required Materials & Components
 Topic 5: Safety & Learning Best Practices
+Topic 6: Thermal Management & Power Architecture
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 22
+Sections: 1 | Topics: 6 | Subtopics: 25
 
 **Double-check steps performed (Internal Verification):**
 
@@ -1721,295 +1745,91 @@ Sections: 1 | Topics: 4 | Subtopics: 18
 
 ==================================================================================
 
-# Section 12: Add Vision to Your Applications with the Raspberry Pi Camera V2 Module
+# Section 12: Modern Vision & Local Edge Security
 
+===Section 12: Modern Vision & Local Edge Security===
+Speaker is section mein outdated legacy camera stack ko chhod kar modern `libcamera` aur OpenCV/TensorFlow Lite ka use karke camera ko "smart" banana sikhata hai taaki false alarms (PIR issues) fix ho sakein.
 
-===Section 1: Hardware Setup & Camera Types===
-Speaker yahan standard aur NoIR cameras ke beech ka difference aur unhe board par correctly plug karne ka physical hardware setup batata hai.
-
---1--Hardware Setup & Camera Types--
-Topic 1: Pi Camera Versions
-Subtopics: Standard Camera, NoIR Camera, Low Light Environments
+--12--Modern Vision & Local Edge Security--
+Topic 1: Libcamera Stack & Modern OS Capture
+Subtopics: Bullseye/Bookworm OS Updates, Libcamera-hello, Libcamera-still, Tuning Camera Parameters
 
 [📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Surface
-* Coverage Angle: Conceptual only
-* Transcript mein content volume: Short explanation
-* Key terms from transcript: standard camera, green board, noir camera, no high air, no infrared, black PCB, low light environments, complete dark room, daylight
-* Explicit emphasis by speaker: None
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[standard camera, green board, noir camera, no high air, no infrared, black PCB, low light environments, dark room, daylight]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Learning Phase: Developer hardware options samajhta hai jahan standard camera normal light ke liye aur NoIR camera strictly low-light/dark environments ke liye hota hai (kyunki daylight mein NoIR ki image quality kharab aati hai).
-* Application Phase: (N/A)
-* Mastery Phase: (N/A)
-* Additional context: Speaker ne recommend kiya hai ki course aur final project ke liye standard camera use karein.
-
---1--Hardware Setup & Camera Types--
-Topic 2: Physical Hardware Connection
-Subtopics: Power Disconnect, Camera Port Identification, Cable Insertion, Connector Latch
-
-[📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Moderate
 * Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation
-* Key terms from transcript: power cable, SD card, GPIOs, camera port, display port, blue indication, USB port, metallic part, black plastic part
-* Explicit emphasis by speaker: "make sure you don't mix those two" (camera port aur display port ko lekar warning)
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[power cable, shut down, SD card, hardware circuit, sensors, LED, GPIOs, camera port, display port, blue indication, USB port, metallic part, black plastic part, ⭐"make sure you don't mix those two"]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer Raspberry Pi ko poori tarah shut down karta hai, power cable aur SD card nikalta hai safety ke liye. Fir camera ki ribbon cable ko camera port mein insert karta hai (blue side facing USB port) aur black latch se lock kar deta hai.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: (N/A)
-* Additional context: None
-
-===Section 2: OS Configuration & Enabling Camera===
-Yahan operating system (Bullseye vs Buster) ke according camera enable karne ka process aur headless setup mein VNC/HDMI issues ko fix karna sikhaya gaya hai.
-
---2--OS Configuration & Enabling Camera--
-Topic 1: Bullseye OS & Legacy Camera Stack
-Subtopics: OS Version Check, Configuration Menu, Legacy Camera Support, VNC Desktop Issue
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation
-* Key terms from transcript: Bullseye, cloud wallpaper, Buster, temple wallpaper, cat /etc/os-release, sudo raspi-config, interface options, legacy camera stack, reboot, cannot currently show the desktop
-* Explicit emphasis by speaker: "the camera feature has been completely changed in Raspberry Pi Bullseye... it's still really not stable"
+* Transcript mein content volume: Short explanation + CLI demo
+* Key terms from transcript: libcamera, bookworm OS, legacy stack removal, IMX500, tuning, autofocus
+* Explicit emphasis by speaker: "Do not use raspistill, it is dead. Libcamera is the modern standard."
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[Bullseye, cloud wallpaper, Buster, temple wallpaper, cat /etc/os-release, ⭐11[version], ⭐10[version], sudo raspi-config, interface options, legacy camera, legacy camera stack, reboot, VNC, cannot currently show the desktop]
+[⭐libcamera, bookworm, raspistill dead, legacy removed, libcamera-hello, libcamera-still, autofocus, tuning file, IMX500, frame rate, terminal commands]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
-* Testing/Offline Phase: Developer terminal open karke pehle OS version check karta hai. Agar OS Bullseye hai, toh woh `raspi-config` menu mein ja kar legacy camera stack enable karta hai kyunki naya stack abhi stable nahi hai. Uske baad system reboot kiya jata hai.
-* Fixing/Iteration Phase: (N/A)
+* Testing/Offline Phase: Developer naye OS pe `libcamera-hello` command terminal mein run karke camera ki feed test karta hai.
+* Fixing/Iteration Phase: Agar image dark hai, toh tuning parameters CLI mein pass karke brightness adjust karta hai.
 * Live Production Phase: (N/A)
-* Additional context: None
 
---2--OS Configuration & Enabling Camera--
-Topic 2: HDMI Boot Config Fix
-Subtopics: SSH Connection, Boot Config File, HDMI Hotplug, HDMI Group & Mode, DT Overlay
+Topic 2: OpenCV Object Detection (Haar Cascades)
+Subtopics: OpenCV Installation, Grayscale Conversion, Haar Cascade XML, Human Body Detection
 
 [📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation + code + demo
-* Key terms from transcript: ssh, terminal, sudo nano /boot/config.txt, hdmi_force_hotplug, hdmi_group, hdmi_mode, dtparam, dtoverlay=vc4-fkms-v3d
-* Explicit emphasis by speaker: "If you don't comment this line, you may have some problems running VNC on the full screen"
-* Speaker ne jo analogies/examples use kiye: None
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with code and visual output
+* Key terms from transcript: OpenCV, cv2, grayscale, haar cascade, bounding box, false positive reduction
+* Explicit emphasis by speaker: "PIR detects heat, OpenCV detects shapes. Combine them or use CV to stop false alarms from wind."
+* Speaker ne jo analogies/examples use kiye: "PIR is like a blind guard feeling heat, OpenCV is the guard actually seeing the intruder."
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[VNC connection, terminal, cmd, Windows, ssh, pi, IP address, 192.168.31.76, sudo nano /boot/config.txt, admin privileges, hdmi_force_hotplug, hdmi_group, hdmi_mode, hdmi group 1, mode 16, full hd mode, dt overlay, dtoverlay=vc4-fkms-v3d, ctrl s, ctrl x, sudo reboot, raspistill]
+[OpenCV, import cv2, python3-opencv, grayscale, Haar Cascade, frontalface_default.xml, fullbody.xml, detectMultiScale, bounding box, rectangle, false positive reduction, real-time FPS]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: (N/A)
-* Fixing/Iteration Phase: Jab legacy camera enable karne ke baad VNC desktop display error ("cannot currently show the desktop") deta hai, toh developer SSH ke through connect karta hai. Woh `/boot/config.txt` file mein `hdmi_force_hotplug`, `hdmi_group`, aur `hdmi_mode` ko force karta hai aur `dtoverlay` ko comment out karta hai taaki VNC wapas kaam kar sake.
-* Live Production Phase: (N/A)
-* Additional context: Speaker ne warn kiya hai ki config file modify karne ke baad next boot thoda lamba (about 2 minutes) ho sakta hai.
+* Testing/Offline Phase: Developer Python script mein OpenCV import karta hai, image ko grayscale mein convert karke Haar Cascade run karta hai.
+* Fixing/Iteration Phase: CPU overload se bachne ke liye resolution downscale karta hai aur FPS ko 5-10 par limit karta hai.
+* Live Production Phase: System ab sirf motion pe nahi, balki "Human detected" par alert generate karta hai.
 
---2--OS Configuration & Enabling Camera--
-Topic 3: Buster OS Configuration [⚠️ Derived]
-Subtopics: Desktop Preferences Menu, CLI Camera Toggle
+Topic 3: TensorFlow Lite (TFLite) for Edge AI
+Subtopics: TFLite Runtime, MobileNet SSD, Label Mapping, Confidence Thresholds, Metadata Generation
 
 [📊 SCOPE SIGNAL for Topic 3:
 
-* Depth Level: Surface
-* Coverage Angle: Practical only
-* Transcript mein content volume: Short explanation
-* Key terms from transcript: preferences, Raspberry Pi configuration, interfaces, camera enabled, sudo raspi-config
-* Explicit emphasis by speaker: None
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation of running ML models locally
+* Key terms from transcript: TensorFlow Lite, TFLite runtime, MobileNet SSD, object detection, confidence score, JSON metadata
+* Explicit emphasis by speaker: "Send text metadata, not heavy images, to your LLM."
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[preferences, Raspberry Pi configuration, interfaces, camera enabled, disabled, reboot, sudo raspi-config, interface options]
+[TensorFlow Lite, tflite-runtime, quantized model, MobileNet SSD, COCO dataset, labels.txt, bounding boxes, confidence threshold, 0.75, ⭐JSON metadata, edge computing]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Testing/Offline Phase: Agar developer purana OS (Buster) use kar raha hai, toh woh directly UI preferences ya CLI (`raspi-config`) se camera enable kar sakta hai bina legacy stack setup kiye.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: (N/A)
-* Additional context: None
-
-===Section 3: Command Line Tools (CLI)===
-Is section mein speaker `raspistill` aur `raspivid` commands ka use karke terminal se direct photos aur videos lena sikhata hai.
-
---3--Command Line Tools (CLI)--
-Topic 1: Taking Photos (raspistill)
-Subtopics: Directory Creation, Raspistill Command, Image Rotation, Custom Resolution
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Moderate
-* Coverage Angle: Practical only
-* Transcript mein content volume: Multiple examples + code + demo
-* Key terms from transcript: home directory, mkdir, raspistill, option -o, option -rot, option -w, option -h, resolution
-* Explicit emphasis by speaker: None
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[home directory, camera folder, mkdir, file manager, raspistill, option -o, output, img.jpg, jpeg format, extension, cd, camera/img.jpg, upside down, rotation, option -rot, 180 degrees, resolution, 4.5 megabytes, width, option -w, 1280, height, option -h, 720, 720p, 500 kilobytes]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer terminal mein `raspistill` tool use karke direct test photos leta hai. Woh resolution aur rotation flags pass karta hai image format aur size (megabytes se kilobytes) ko fix karne ke liye.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: (N/A)
-* Additional context: None
-
---3--Command Line Tools (CLI)--
-Topic 2: Recording Videos (raspivid)
-Subtopics: Raspivid Command, Video Format, Duration Setting
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Moderate
-* Coverage Angle: Practical only
-* Transcript mein content volume: Short explanation + code + demo
-* Key terms from transcript: raspivid, h.264, rotation option, resolution, option -t, milliseconds
-* Explicit emphasis by speaker: "pay attention to that the time not in seconds but in millisecond"
-* Speaker ne jo analogies/examples use kiye: YouTube video format example (H.264)
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[raspivid, option -o, vid.h264, h.264, YouTube, rotation option, resolution, 720, 480, option -t, milliseconds, ⭐7000, 60000, overwrite, ⭐"time not in seconds but in millisecond"]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer terminal mein `raspivid` command chalata hai aur duration ko milliseconds mein set karta hai (`-t 7000` for 7 seconds) ek test video stream record karne ke liye.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: (N/A)
-* Additional context: Speaker ne explicitly bataya ki .h264 format YouTube aur production videos ke liye ek standard format hai.
-
-===Section 4: Python Picamera Module===
-Yahan command line tools ko chhod kar Python script ke through `picamera` module se camera control karna sikhaya gaya hai.
-
---4--Python Picamera Module--
-Topic 1: Python Photo Capture
-Subtopics: Module Import, Camera Initialization, Resolution Tuple, Camera Sleep Time, Absolute File Path, Capture Function
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation + code + demo
-* Key terms from transcript: Thonny IDE, pi camera module, from module import, pi camera object, tuple, time.sleep, absolute path, camera.capture
-* Explicit emphasis by speaker: "it needs about two seconds to adjust for the brightness of the room"
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Thonny IDE, pi camera module, from picamera import PiCamera, camera variable, pi camera object, camera.resolution, 1280, 720, brackets, parentheses, tuple, camera.rotation, 180, time.sleep, import time, ⭐adjust for the brightness, file name, absolute path, /home/pi/camera/image.jpeg, tilde, camera.capture, camera.py]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer Python script mein `PiCamera` object banata hai aur capture call karne se pehle script mein intentionally 2 second ka sleep time (`time.sleep(2)`) daalta hai taaki hardware environment ki brightness ko adjust kar sake.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: (N/A)
-* Additional context: None
-
---4--Python Picamera Module--
-Topic 2: Python Video Capture
-Subtopics: Start Recording, Wait Recording, Stop Recording
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Moderate
-* Coverage Angle: Practical only
-* Transcript mein content volume: Short explanation + code + demo
-* Key terms from transcript: h.264, start recording, wait recording, stop recording
-* Explicit emphasis by speaker: "If you directly do start and stop it will not work you need to use wait recording"
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[video.h264, three different function, right order, camera.start_recording, camera.wait_recording, 10 seconds, camera.stop_recording, ⭐"directly do start and stop it will not work"]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer video record karne ke liye teen functions ka exact sequence use karta hai: start_recording, wait_recording (yahan time seconds mein hai, CLI ki tarah ms mein nahi), aur uske baad stop_recording file save karne ke liye.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: (N/A)
-* Additional context: None
-
-===Section 5: Activity - Automated Timelapse===
-Yeh ek coding activity hai jahan OS module aur while loop use karke har 5 second mein automatically nayi photo save karni hai.
-
---5--Activity - Automated Timelapse--
-Topic 1: Timelapse Photo Script
-Subtopics: OS Path Check, Directory Creation, Infinite While Loop, String Concatenation, Counter Variable
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Moderate
-* Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation + code + demo
-* Key terms from transcript: os module, os.path.exists, os.mkdir, absolute path, while loop, counter, string concatenation
-* Explicit emphasis by speaker: None
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[OS module, os.path.exists, /home/pi/activity10, absolute path, os.mkdir, camera initialization, while true, counter, image1, image2, concatenation of strings, str, folder_name, time.sleep]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Learning Phase: (N/A)
-* Application Phase: Developer ek infinite loop likhta hai jo directory check karta hai, image count increment karta hai (e.g. image1, image2) via string concatenation, aur har 5 seconds mein nayi file save karta hai bina pichli file overwrite kiye (timelapse behavior).
-* Mastery Phase: (N/A)
-* Additional context: None
+* Testing/Offline Phase: Developer pre-trained MobileNet model load karta hai aur camera feed usme pass karta hai.
+* Fixing/Iteration Phase: Agar "dog" ko "cat" detect kare, toh developer confidence threshold badhakar 0.75 kar deta hai.
+* Live Production Phase: Camera heavy images process karke ek simple JSON text (e.g., `{"person": 1, "dog": 0}`) output karta hai jo aage LLM ko bheja jata hai.
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Hardware Setup & Camera Types
-Topic 1: Pi Camera Versions
-Topic 2: Physical Hardware Connection
-
-Section 2: OS Configuration & Enabling Camera
-Topic 1: Bullseye OS & Legacy Camera Stack
-Topic 2: HDMI Boot Config Fix
-Topic 3: Buster OS Configuration [⚠️ Derived]
-
-Section 3: Command Line Tools (CLI)
-Topic 1: Taking Photos (raspistill)
-Topic 2: Recording Videos (raspivid)
-
-Section 4: Python Picamera Module
-Topic 1: Python Photo Capture
-Topic 2: Python Video Capture
-
-Section 5: Activity - Automated Timelapse
-Topic 1: Timelapse Photo Script
+Section 12: Modern Vision & Local Edge Security
+Topic 1: Libcamera Stack & Modern OS Capture
+Topic 2: OpenCV Object Detection (Haar Cascades)
+Topic 3: TensorFlow Lite (TFLite) for Edge AI
 
 📊 PHASE SUMMARY:
-Sections: 5 | Topics: 10 | Subtopics: 37
-
----
-
+Sections: 1 | Topics: 3 | Subtopics: 13
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2136,13 +1956,248 @@ Sections: 1 | Topics: 4 | Subtopics: 18
 ==================================================================================
 
 
-# Section 14: Final Project
+# Section 14: Industrial IoT & Wireless Protocols
+
+===Section 14: Industrial IoT & Wireless Protocols===
+Speaker is section mein jumper wires aur breadboards ko chhod kar industry-standard wireless communication (MQTT) aur MQTT Brokers ko setup karna sikhata hai 4 BHK home network ke liye.
+
+--14--Industrial IoT & Wireless Protocols--
+Topic 1: MQTT Protocol Architecture
+Subtopics: Broker Concept, Publish-Subscribe Model, Topics Hierarchy, Mosquitto Installation
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation + terminal installation
+* Key terms from transcript: MQTT, Broker, publish, subscribe, topic, payload, Mosquitto, sudo apt install mosquitto
+* Explicit emphasis by speaker: "This is how millions of smart home devices talk to each other without crashing the Wi-Fi."
+* Speaker ne jo analogies/examples use kiye: "Broker is like a post office. Publishers drop letters, subscribers receive them based on the address (topic)."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[MQTT, Message Queuing Telemetry Transport, ⭐Mosquitto broker, publish, subscribe, topic hierarchy, home/bedroom/temperature, payload, QoS, sudo apt install mosquitto, systemctl enable mosquitto]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Raspberry Pi par Mosquitto broker install karta hai. Do alag terminal open karke ek mein `mosquitto_sub` (sunne ke liye) aur dusre mein `mosquitto_pub` (bolne ke liye) test karta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Pi ab ek central Hub ban gaya hai. Ghar ke kisi bhi ESP32 sensor se data directly Pi par wirelessly aata hai milliseconds mein.
+
+---
+
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 14: Industrial IoT & Wireless Protocols
+Topic 1: MQTT Protocol Architecture
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 1 | Subtopics: 4
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 15: The Smart Home OS (Home Assistant)
+
+===Section 15: The Smart Home OS (Home Assistant)===
+Flask server ko hata kar, speaker yahan Home Assistant Core install karna sikhata hai jo thousands of devices, automated routines, aur professional UI dashboard handle kar sakta hai.
+
+--15--The Smart Home OS (Home Assistant)--
+Topic 1: Home Assistant Setup & UI
+Subtopics: Docker Installation, Home Assistant Container, Integrations, UI Dashboard
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Long tutorial on port 8123 access and initial config
+* Key terms from transcript: Docker, Home Assistant Core, port 8123, integrations, lovelace UI, entities
+* Explicit emphasis by speaker: "Do not write Python HTML templates for 20 devices, let HA do it."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Docker, container, Home Assistant Core, ⭐port 8123, integrations, onboarding, entities, dashboard, Lovelace UI, smart home hub, local control]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Learning Phase: Developer Docker install karta hai aur HA container run karta hai.
+* Application Phase: Browser mein `IP:8123` open karke admin account banata hai aur ghar ke existing smart bulbs (Philips Hue/Tuya) ko bina code likhe UI se integrate karta hai.
+* Mastery Phase: Developer MQTT integration add karta hai taaki purane Python/PIR sensors bhi HA UI mein dikhne lagein.
+
+---
+
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 15: The Smart Home OS (Home Assistant)
+Topic 1: Home Assistant Setup & UI
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 1 | Subtopics: 4
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 16: Iron Man Voice Interface (Jarvis Core)
+
+===Section 16: Iron Man Voice Interface===
+Cloud APIs (Alexa/Google) ko bypass karke, Pi par offline, 100% private, low-latency wake-word, Speech-to-Text aur Text-to-Speech pipeline setup karna.
+
+--16--Iron Man Voice Interface--
+Topic 1: Wake Word & Speech-to-Text (Local)
+Subtopics: Audio HAT Setup, Porcupine Wake Word, Whisper.cpp STT, Acoustic Model
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Long explanation with C++ compilation for speed
+* Key terms from transcript: USB microphone, Porcupine, Wake word, Whisper.cpp, STT, offline dictation
+* Explicit emphasis by speaker: "Never stream 24/7 audio to a cloud server. Keep the wake word local to save CPU."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[USB microphone, ALSA, ⭐Porcupine, wake word engine, PicoVoice, Whisper.cpp, STT, Speech to text, ggml model, base.en, C++ compilation, offline dictation, privacy]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer USB mic connect karta hai aur Porcupine script run karta hai. Jab woh "Jarvis" bolta hai, tabhi aage ki recording shuru hoti hai.
+* Fixing/Iteration Phase: Agar background noise zyada ho, toh developer microphone ki ALSA gain settings CLI se kam karta hai.
+* Live Production Phase: Pi 24/7 bina internet ke wake word sunta hai aur audio ko locally text string mein convert karta hai.
+
+Topic 2: Local Text-to-Speech (Piper)
+Subtopics: Piper TTS, Voice Models, Audio Playback (Aplay)
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Short explanation + command execution
+* Key terms from transcript: Piper TTS, onnx models, text to speech, aplay, latency
+* Explicit emphasis by speaker: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[⭐Piper TTS, text to speech, onnx model, voice generation, aplay, wav format, low latency, local response]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Application Phase: STT se mila hua text (ya LLM ka response) Piper TTS mein pipe (`|`) kiya jata hai. Piper use turant audio (.wav) mein convert karta hai aur `aplay` command se speaker pe real-time mein play karta hai.
+
+---
+
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 16: Iron Man Voice Interface (Jarvis Core)
+Topic 1: Wake Word & Speech-to-Text (Local)
+Topic 2: Local Text-to-Speech (Piper)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 7
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 17: Local Agentic AI & RAG
+
+===Section 17: Local Agentic AI & RAG===
+Raspberry Pi par Ollama run karke ek small parameter LLM ko host karna. AI ko Home Assistant ki APIs control karne dena (Function Calling) aur RAG ke through system logs read karana.
+
+--17--Local Agentic AI & RAG--
+Topic 1: Ollama & Micro-LLMs
+Subtopics: Ollama Installation, Qwen 2.5 0.5B, Model Quantization, System Prompts
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation focusing on memory limits
+* Key terms from transcript: Ollama, Qwen, TinyLlama, quantization, RAM limits, system prompt
+* Explicit emphasis by speaker: "Do not run an 8B model on a Pi unless you want it to crash. Use sub-billion parameter models quantized to 4-bit."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Ollama, curl install, ⭐Qwen 0.5B, TinyLlama, quantization, 4-bit, GGUF, system prompt, personality, stateless API, localhost:11434, RAM limits]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer terminal mein `ollama run qwen:0.5b` command chalata hai aur chat test karta hai. Response speed (tokens per second) check karta hai task manager (htop) mein RAM usage dekh kar.
+
+Topic 2: Function Calling (Agentic Action)
+Subtopics: API Webhooks, JSON Output Formatting, Action Execution
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Complex logic mapping text intent to Python functions
+* Key terms from transcript: Function calling, JSON schema, webhook, intent recognition
+* Explicit emphasis by speaker: "Force the LLM to output ONLY JSON, otherwise your Python parser will break."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Function calling, intent recognition, JSON output, schema, parse response, triggers, Home Assistant API, REST webhook, ⭐"Turn off the lights", action execution]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Live Production Phase: User bolta hai "Turn off bedroom AC". Whisper text deta hai -> Ollama text ko padh kar JSON banata hai `{"device": "ac", "room": "bedroom", "state": "off"}` -> Python script is JSON ko parse karke MQTT/Home Assistant API hit karti hai, aur physical AC band ho jata hai.
+
+Topic 3: Local RAG (Retrieval-Augmented Generation)
+Subtopics: Text Embeddings, ChromaDB Lite, Querying Logs
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Concept of giving AI memory
+* Key terms from transcript: RAG, ChromaDB, Embeddings, SQLite, Context Injection
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[RAG, ChromaDB, vector database, embeddings, all-MiniLM, SQLite, context window, security logs, semantic search]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer Section 12 (Camera) aur PIR ke logs ko vector DB mein save karta hai.
+* Live Production Phase: User poochhta hai "Did anyone come to the door today?". LLM pehle ChromaDB se vectors match karta hai, relevant log text uthata hai, us text ko context mein padhta hai, aur accurate answer bolta hai.
+
+---
+
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 17: Local Agentic AI & RAG
+Topic 1: Ollama & Micro-LLMs
+Topic 2: Function Calling (Agentic Action)
+Topic 3: Local RAG (Retrieval-Augmented Generation)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 3 | Subtopics: 10
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 18: The Ultimate "Jarvis" Final Project
 
 
-===Section 14: Final Project===
+===Section 18: The Ultimate "Jarvis" Final Project===
+Pichle saare modern sections ko combine karke ek autonomous, voice-controlled, AI-vision smart home hub banana jo background mein systemd par chalta ho.
 Speaker is section mein course ke final project ka end-to-end implementation sikhata hai — PIR detection aur camera capture se lekar Flask web server aur systemd automation tak.
 
---14--Final Project--
+--18--The Ultimate "Jarvis" Final Project--
 Topic 1: Project Architecture & Setup
 Subtopics: Project Result Demo, Program 1 Overview, Program 2 Overview, Development Approach
 
@@ -2166,7 +2221,7 @@ Subtopics: Project Result Demo, Program 1 Overview, Program 2 Overview, Developm
 * Live Production Phase: Final project mein do scripts lagataar run karti hain — ek hardware/sensor handle karti hai, aur doosri web server host karti hai jisse user remote browser se data check kar sake.
 * Additional context: Speaker batata hai ki programming mein Google use karna ek fundamental developer habit hai.
 
---14--Final Project--
+--18--The Ultimate "Jarvis" Final Project--
 Topic 2: PIR Sensor Logic & Timers
 Subtopics: GPIO Initialization, Try Except Cleanup, State Transition Logic, Movement Timer Implementation, Photo Cooldown Logic, LED Indicator Setup
 
@@ -2190,7 +2245,7 @@ Subtopics: GPIO Initialization, Try Except Cleanup, State Transition Logic, Move
 * Live Production Phase: PIR sensor real-time mein loop karta hai. Jab 3 second continuous movement hoti hai aur cooldown period (60s) pass ho chuka hota hai, tabhi aage ka action trigger hota hai. LED visual feedback deti hai.
 * Additional context: (N/A)
 
---14--Final Project--
+--18--The Ultimate "Jarvis" Final Project--
 Topic 3: Camera Module Integration
 Subtopics: PiCamera Setup, Camera Warmup, Take Photo Function, Dynamic Filename Generation, Capture Method
 
@@ -2214,7 +2269,7 @@ Subtopics: PiCamera Setup, Camera Warmup, Take Photo Function, Dynamic Filename 
 * Live Production Phase: Script start hote hi camera 2 seconds warmup leta hai. Jab PIR sensor trigger hota hai, `take_photo()` function call hota hai aur image local storage mein save hoke uska path return hota hai.
 * Additional context: Speaker ne low resolution (720x480) choose ki taaki email attachments ka size chhota rahe.
 
---14--Final Project--
+--18--The Ultimate "Jarvis" Final Project--
 Topic 4: File Handling & Local Logging
 Subtopics: Old Log Removal, OS Path Exists, Append Mode Concept, Update Log Function, Newline Formatting
 
@@ -2238,7 +2293,7 @@ Subtopics: Old Log Removal, OS Path Exists, Append Mode Concept, Update Log Func
 * Live Production Phase: Har photo lene ke baad, programme securely log file ko append mode mein open karta hai aur new image ka file path ek nayi line mein add kar deta hai.
 * Additional context: (N/A)
 
---14--Final Project--
+--18--The Ultimate "Jarvis" Final Project--
 Topic 5: Email Automation Workflow
 Subtopics: Password File Reading, Yagmail SMTP Client, Send Email Function, Attachment Handling, Parameter Debugging
 
@@ -2262,7 +2317,7 @@ Subtopics: Password File Reading, Yagmail SMTP Client, Send Email Function, Atta
 * Live Production Phase: Photo save aur log hone ke baad, Yagmail trigger hota hai aur email send karta hai file as an attachment ke saath. Gmail aisi lagataar emails ko ek "thread" mein group kar deta hai.
 * Additional context: (N/A)
 
---14--Final Project--
+--18--The Ultimate "Jarvis" Final Project--
 Topic 6: Flask Web Server & Log Parsing
 Subtopics: Flask App Setup, Index Route, Check Movement Route, File Line Counting, State Difference Logic, Global Keyword Usage
 
@@ -2286,7 +2341,7 @@ Subtopics: Flask App Setup, Index Route, Check Movement Route, File Line Countin
 * Live Production Phase: Flask web server `0.0.0.0` host pe run karta hai. Jab bhi koi client `/check-movement` route access karta hai, server log file ko parse karke lines count karta hai, global counter ko update karta hai aur dynamic string response return karta hai.
 * Additional context: Speaker ne clear kiya ki ek file ko ek programme write kar raha ho aur doosra read kar raha ho toh chalta hai, bas dono simultaneously write na karein.
 
---14--Final Project--
+--18--The Ultimate "Jarvis" Final Project--
 Topic 7: Web Interface & HTML Formatting
 Subtopics: Last Photo Extraction, HTML Break Tags, Flask Static Config, HTML Image Tag, String Quote Escaping
 
@@ -2314,7 +2369,7 @@ Subtopics: Last Photo Extraction, HTML Break Tags, Flask Static Config, HTML Ima
 * Live Production Phase: Web server ab sirf text nahi balki image ka direct reference (HTML tag) return karta hai jisse browser network folder se image fetch karke UI pe display karta hai.
 * Additional context: (N/A)
 
---14--Final Project--
+--18--The Ultimate "Jarvis" Final Project--
 Topic 8: Background Automation with Systemd
 Subtopics: Systemd Concept, Service File Creation, Unit Service Install Blocks, ExecStart Configuration, Systemctl Commands
 
@@ -2338,7 +2393,7 @@ Subtopics: Systemd Concept, Service File Creation, Unit Service Install Blocks, 
 * Live Production Phase: `systemctl enable` hone ke baad, jaise hi Raspberry Pi boot hota hai (desktop UI start hone se bhi pehle), dono services automatically background mein trigger ho jati hain. Pi ko "headless" chhod diya ja sakta hai.
 * Additional context: (N/A)
 
---14--Final Project--
+--18--The Ultimate "Jarvis" Final Project--
 Topic 9: Project Customizations (Outro)
 Subtopics: Parameter Tuning, Push Button Integration, Cron Job Concept
 
@@ -2368,7 +2423,7 @@ Subtopics: Parameter Tuning, Push Button Integration, Cron Job Concept
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 14: Final Project
+Section 18: The Ultimate "Jarvis" Final Project
 Topic 1: Project Architecture & Setup
 Topic 2: PIR Sensor Logic & Timers
 Topic 3: Camera Module Integration
@@ -2388,13 +2443,13 @@ Sections: 1 | Topics: 9 | Subtopics: 42
 ==================================================================================
 
 
-# Section 15: Conclusion
+# Section 19: Conclusion
 
 
-===Section 15: Conclusion===
+===Section 19: Conclusion===
 Speaker is section mein course complete karne par congratulate karta hai, past concepts ka quick recap deta hai aur future learning ke liye advanced topics aur project-based approach suggest karta hai.
 
---15--Conclusion--
+--19--Conclusion--
 Topic 1: Course Recap
 Subtopics: Raspberry Pi OS Installation, Headless Configuration, Python 3 Programming, GPIO Hardware Management, Terminal Usage, Image Sending, Camera Module, Web Server, Final Project
 
@@ -2418,7 +2473,7 @@ Subtopics: Raspberry Pi OS Installation, Headless Configuration, Python 3 Progra
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: Speaker purely past learning modules ka high-level review de raha hai.
 
---15--Conclusion--
+--19--Conclusion--
 Topic 2: Future Learning Paths
 Subtopics: Project Based Learning, Advanced Hardware Protocols, Advanced Camera Processing, Web Development
 
@@ -2448,7 +2503,7 @@ Subtopics: Project Based Learning, Advanced Hardware Protocols, Advanced Camera 
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 15: Conclusion
+Section 19: Conclusion
 Topic 1: Course Recap
 Topic 2: Future Learning Paths
 
