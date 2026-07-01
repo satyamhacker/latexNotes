@@ -290,28 +290,24 @@ Subtopics: raspi-config Utility, VNC Enablement, Auto Login Setup, Resolution Co
 * Live Production Phase: (N/A)
 * Additional context: Speaker ne explicitly warn kiya ki physical power nikalne se pehle humesha software shutdown karna zaroori hai, taaki SD card corrupt na ho.
 
-Topic 5: Updating Wi-Fi Headlessly (Troubleshooting)
-Subtopics: Headless Wi-Fi Reconfiguration, wpa_supplicant.conf File, Network Credentials Injection, IP Address Re-discovery
+Topic 5: Updating Wi-Fi Headlessly (NetworkManager) (NetworkManager)
+Subtopics: Headless Wi-Fi Reconfiguration, NetworkManager Connections, .nmconnection Files, UUID Generation, Secure Keyfiles
 
 [📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
 * Coverage Angle: Practical only
-* Transcript mein content volume: Short targeted solution for changing networks headlessly
-* Key terms from transcript: different Wi-Fi network, wpa_supplicant.conf, SSID, PSK
-* Explicit emphasis by speaker: "it is super super important that you write the exact same name for the file if you have one small typo it's not going to work"
-* Speaker ne jo analogies/examples use kiye: None
+* Transcript mein content volume: Short targeted solution for changing networks on modern OS
+* Key terms from transcript: NetworkManager, system-connections, .nmconnection, UUID, boot firmware, PSK
+* Explicit emphasis by speaker: "wpa_supplicant is dead. You must format your network credentials as an .nmconnection file with strict permissions, otherwise the Pi will reject it."
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[troubleshooting, different Wi-Fi network, fresh install, SD card boot drive, text document, ⭐wpa_supplicant.conf, SSID, PSK, network credentials, inject configuration, Angry IP Scanner, update VNC properties]
+[troubleshooting, different Wi-Fi network, NetworkManager, Bookworm OS, /boot/firmware/system-connections/, ⭐.nmconnection, UUID, wifi-security, PSK, network credentials, inject configuration, Angry IP Scanner]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
-* Testing/Offline Phase: N/A
-* Fixing/Iteration Phase: Jab developer kisi naye location ya network par jata hai bina monitor ke, toh connection loss fix karne ke liye woh SD card nikal kar PC mein lagata hai. Boot directory mein `wpa_supplicant.conf` file manually create karta hai, naye credentials (SSID/PSK) daalta hai, aur Pi boot karke Angry IP Scanner se naya IP find karta hai.
-* Live Production Phase: N/A
-* Additional context: Yeh step sirf tab chahiye jab pre-configured network unavailable ho aur OS ko bina wipe kiye naya network add karna ho.
+* Fixing/Iteration Phase: Jab developer naye location pe jata hai, woh SD card PC mein lagata hai. Boot partition ke andar `system-connections` folder banata hai aur ek `wifi.nmconnection` file inject karta hai jisme naya SSID aur PSK hota hai. Pi boot hone par NetworkManager automatically is file ko read karke connect kar leta hai.
 
 --2--Install Raspberry Pi OS Without Any External Monitor or Keyboard--
 Topic 6: Advanced Storage (Upgrading to PCIe NVMe)
@@ -341,7 +337,7 @@ Topic 1: Headless Setup Overview & OS Flashing
 Topic 2: First Boot & Finding IP Address
 Topic 3: SSH Connection & Remote Terminal
 Topic 4: VNC Setup & Desktop Configuration
-Topic 5: Updating Wi-Fi Headlessly (Troubleshooting)
+Topic 5: Updating Wi-Fi Headlessly (NetworkManager) (Troubleshooting)
 Topic 6: Advanced Storage (Upgrading to PCIe NVMe)
 
 📊 PHASE SUMMARY:
@@ -896,21 +892,24 @@ Subtopics: Pi Pinout, Ground Pins, Power Pins, GPIO Pins, Voltage Limits, Input 
 * Application Phase: Developer Python code likhte waqt inhi exact numbers ka use karta hai GPIOs se interact karne ke liye.
 * Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 
-Topic 2: Blinking an LED with Python
-Subtopics: SD Card Setup, VNC Connection, Thonny IDE, RPi.GPIO Module, BCM Mode, Pin Setup, High and Low States, Sleep Function, Infinite Loop, Cleanup Function, Warning Messages
+Topic 2: Blinking an LED (Modern lgpio/gpiozero Backend)
+Subtopics: RP1 Southbridge Architecture, Python-lgpio Backend, Gpiozero Initialization, High and Low States, Sleep Function, Object-Oriented Hardware
 
 [📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation + multiple code examples + demo
-* Key terms from transcript: SD card, VNC, Thonny IDE, RPi.GPIO, GPIO.setmode, GPIO.BCM, GPIO.cleanup, GPIO.setup, GPIO.output, time.sleep, while True
-* Explicit emphasis by speaker: "GPIO.setmode GPIO.bcm should be the first thing you do after you import the GPIO module"
-* Speaker ne jo analogies/examples use kiye: Speaker kehta hai ki yeh Arduino ke "blink LED" example jaisa hi hai, bas Python aur Raspberry Pi mein.
+* Transcript mein content volume: Explanation of modern pin factories + code demo
+* Key terms from transcript: RP1 chip, lgpio, gpiozero, pin factory, LED object, time.sleep
+* Explicit emphasis by speaker: "Never `import RPi.GPIO`. It will crash on a Pi 5. We use the modern object-oriented `gpiozero` library with the `lgpio` backend."
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[⭐gpiozero, from gpiozero import LED, led = LED(17), led.on(), led.off(), time.sleep(1), ⭐automatic cleanup, object-oriented hardware]
+[RP1 southbridge, Linux 6.6+, ⭐lgpio, python3-lgpio, ⭐gpiozero, from gpiozero import LED, pin factory, led = LED(17), led.on(), led.off(), time.sleep(1), object-oriented hardware, automatic cleanup, garbage collection]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer Thonny IDE mein `gpiozero` se LED object import karta hai. `RPi.GPIO` ki tarah manual pin modes set karne ke bajaye, woh directly `led = LED(17)` define karta hai aur hardware ko object-oriented tarike se control karta hai. Program exit hone par `gpiozero` automatically pins release (cleanup) kar deta hai.
 
 Topic 4: Push Button Hardware Setup
 Subtopics: Safe Shutdown Process, Component List, Breadboard Mechanics, Ground Connection, Power Connection, GPIO Connection
@@ -964,8 +963,25 @@ Subtopics: Input Setup, Constant Variable Convention, Reading Input State, High 
 
 Section 1: Control Raspberry Pi's GPIOs with Python
 Topic 1: GPIO Pinout & Basics
-Topic 2: Blinking an LED with Python
-Topic 3: User Input LED Control
+Topic 2: Blinking an LED (Modern lgpio/gpiozero Backend)
+Subtopics: RP1 Southbridge Architecture, Python-lgpio Backend, Gpiozero Initialization, High and Low States, Sleep Function, Object-Oriented Hardware
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Explanation of modern pin factories + code demo
+* Key terms from transcript: RP1 chip, lgpio, gpiozero, pin factory, LED object, time.sleep
+* Explicit emphasis by speaker: "Never `import RPi.GPIO`. It will crash on a Pi 5. We use the modern object-oriented `gpiozero` library with the `lgpio` backend."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[RP1 southbridge, Linux 6.6+, ⭐lgpio, python3-lgpio, ⭐gpiozero, from gpiozero import LED, pin factory, led = LED(17), led.on(), led.off(), time.sleep(1), object-oriented hardware, automatic cleanup, garbage collection]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer Thonny IDE mein `gpiozero` se LED object import karta hai. `RPi.GPIO` ki tarah manual pin modes set karne ke bajaye, woh directly `led = LED(17)` define karta hai aur hardware ko object-oriented tarike se control karta hai. Program exit hone par `gpiozero` automatically pins release (cleanup) kar deta hai.
+
 Topic 4: Push Button Hardware Setup
 Topic 5: Reading Push Button Inputs
 
@@ -1790,27 +1806,26 @@ Subtopics: Bullseye/Bookworm OS Updates, Libcamera-hello, Libcamera-still, Tunin
 * Fixing/Iteration Phase: Agar image dark hai, toh tuning parameters CLI mein pass karke brightness adjust karta hai.
 * Live Production Phase: (N/A)
 
-Topic 2: OpenCV Object Detection (Haar Cascades)
-Subtopics: OpenCV Installation, Grayscale Conversion, Haar Cascade XML, Human Body Detection
+Topic 2: Real-Time AI Vision (YOLOv11 & GStreamer)
+Subtopics: Dropping Legacy CV2 Cascades, YOLO Architecture, GStreamer Pipelines, Quantized NCNN/TFLite Models, Zero-False-Positive Filtering
 
 [📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
 * Coverage Angle: Both
-* Transcript mein content volume: Long explanation with code and visual output
-* Key terms from transcript: OpenCV, cv2, grayscale, haar cascade, bounding box, false positive reduction
-* Explicit emphasis by speaker: "PIR detects heat, OpenCV detects shapes. Combine them or use CV to stop false alarms from wind."
-* Speaker ne jo analogies/examples use kiye: "PIR is like a blind guard feeling heat, OpenCV is the guard actually seeing the intruder."
+* Transcript mein content volume: Long explanation migrating from basic motion to deep learning
+* Key terms from transcript: YOLOv11, ultralytics, GStreamer, NCNN, bounding box, confidence threshold
+* Explicit emphasis by speaker: "PIR is blind. Haar cascades are ancient. We use YOLO to detect exact objects like 'Person' or 'Car' at 30 FPS on the edge."
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[OpenCV, import cv2, python3-opencv, grayscale, Haar Cascade, frontalface_default.xml, fullbody.xml, detectMultiScale, bounding box, rectangle, false positive reduction, real-time FPS]
+[OpenCV, python3-opencv, YOLOv11, ultralytics, ⭐quantized model, NCNN, TFLite, GStreamer pipeline, bounding box, confidence threshold, 0.70, COCO dataset, false positive elimination, real-time FPS]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: Developer Python script mein OpenCV import karta hai, image ko grayscale mein convert karke Haar Cascade run karta hai.
-* Fixing/Iteration Phase: CPU overload se bachne ke liye resolution downscale karta hai aur FPS ko 5-10 par limit karta hai.
-* Live Production Phase: System ab sirf motion pe nahi, balki "Human detected" par alert generate karta hai.
+* Testing/Offline Phase: Developer Ultralytics package install karta hai aur quantized YOLOv11 nano model load karta hai. Camera feed directly GStreamer pipeline se model mein pass hoti hai.
+* Fixing/Iteration Phase: Agar frame rate drop hota hai, developer resolution ko 640x640 pe lock karta hai aur hardware inference enable karta hai.
+* Live Production Phase: System ab sirf motion par trigger nahi karta, balki strictly tabhi alert bhejta hai jab "Person" detect hota hai with >70% confidence.
 
 Topic 3: TensorFlow Lite (TFLite) for Edge AI
 Subtopics: TFLite Runtime, MobileNet SSD, Label Mapping, Confidence Thresholds, Metadata Generation
@@ -1855,7 +1870,27 @@ Subtopics: CPU Bottlenecks, Hailo-8L Architecture, Offloading Inference
 
 Section 12: Modern Vision & Local Edge Security
 Topic 1: Libcamera Stack & Modern OS Capture
-Topic 2: OpenCV Object Detection (Haar Cascades)
+Topic 2: Real-Time AI Vision (YOLOv11 & GStreamer)
+Subtopics: Dropping Legacy CV2 Cascades, YOLO Architecture, GStreamer Pipelines, Quantized NCNN/TFLite Models, Zero-False-Positive Filtering
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation migrating from basic motion to deep learning
+* Key terms from transcript: YOLOv11, ultralytics, GStreamer, NCNN, bounding box, confidence threshold
+* Explicit emphasis by speaker: "PIR is blind. Haar cascades are ancient. We use YOLO to detect exact objects like 'Person' or 'Car' at 30 FPS on the edge."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[OpenCV, python3-opencv, YOLOv11, ultralytics, ⭐quantized model, NCNN, TFLite, GStreamer pipeline, bounding box, confidence threshold, 0.70, COCO dataset, false positive elimination, real-time FPS]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer Ultralytics package install karta hai aur quantized YOLOv11 nano model load karta hai. Camera feed directly GStreamer pipeline se model mein pass hoti hai.
+* Fixing/Iteration Phase: Agar frame rate drop hota hai, developer resolution ko 640x640 pe lock karta hai aur hardware inference enable karta hai.
+* Live Production Phase: System ab sirf motion par trigger nahi karta, balki strictly tabhi alert bhejta hai jab "Person" detect hota hai with >70% confidence.
+
 Topic 3: TensorFlow Lite (TFLite) for Edge AI
 
 Topic 4: Industrial AI Security (Frigate NVR)
@@ -2517,28 +2552,26 @@ Subtopics: Last Photo Extraction, HTML Break Tags, Flask Static Config, HTML Ima
 * Additional context: (N/A)
 
 --18--The Ultimate "Jarvis" Final Project--
-Topic 8: Background Automation with Systemd
-Subtopics: Systemd Concept, Service File Creation, Unit Service Install Blocks, ExecStart Configuration, Systemctl Commands
+Topic 8: Background Automation (Dynamic Systemd Daemons)
+Subtopics: Systemd Concept, Daemon Orchestration, Dynamic User Injection, ExecStart Configuration, Systemctl Enablement, Journalctl Debugging
 
 [📊 SCOPE SIGNAL for Topic 8:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation + full setup of background services
-* Key terms from transcript: systemd, lib/systemd/system, .service file, nano editor, sudo, root permission, Unit, description, after, multi-user.target, Service, exec start, user, WantedBy, systemctl
-* Explicit emphasis by speaker: Speaker ne bataya ki `ExecStart` mein script ka aur Python interpreter dono ka absolute path (`/usr/bin/python3`) dena zaruri hota hai.
-* Speaker ne jo analogies/examples use kiye: None
+* Transcript mein content volume: Full setup of background services and log debugging
+* Key terms from transcript: systemd, .service, root permission, whoami, dynamic user, ExecStart, systemctl, journalctl
+* Explicit emphasis by speaker: "Never hardcode 'User=pi'. You must replace it with your actual username, or the systemd daemon will crash and burn."
 ]
 
 🔑 KEYWORDS DUMP for Topic 8:
-[systemd, background automation, /lib/systemd/system/, .service, nano, sudo, root permission, [Unit], Description, After=multi-user.target, [Service], ExecStart, which python3, /usr/bin/python3, pwd, absolute path, User=pi, [Install], WantedBy, systemctl start, systemctl stop, systemctl enable, symlink, sudo reboot, list-unit-files, grep, systemctl disable]
+[systemd, background automation, /etc/systemd/system/, .service, root permission, [Unit], After=network.target, [Service], ExecStart, absolute path, ⭐User=<your_username>, dynamic user, whoami, [Install], WantedBy=multi-user.target, systemctl daemon-reload, systemctl enable, systemctl start, ⭐journalctl -u -f, debugging]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
 
-* Testing/Offline Phase: Developer `systemctl start` aur `stop` commands manually run karke check karta hai ki scripts background mein properly chal rahi hain ya nahi.
-* Fixing/Iteration Phase: Agar script fail ho rahi ho ya root as run ho gayi ho, developer `.service` file mein `User=pi` define karke execution context theek karta hai.
-* Live Production Phase: `systemctl enable` hone ke baad, jaise hi Raspberry Pi boot hota hai (desktop UI start hone se bhi pehle), dono services automatically background mein trigger ho jati hain. Pi ko "headless" chhod diya ja sakta hai.
-* Additional context: (N/A)
+* Testing/Offline Phase: Developer terminal mein `whoami` run karta hai apna current username dekhne ke liye, aur `.service` file mein `User=` attribute ke aage usse paste karta hai.
+* Fixing/Iteration Phase: Agar background script fail ho jaye, toh developer andhe ke tarah guess karne ke bajaye `journalctl -u jarvis.service -f` chalata hai taaki real-time crash logs padh sake.
+* Live Production Phase: Pi boot hote hi systemd daemon automatically user ke exact credentials ke sath hardware and web APIs start kar deta hai.
 
 --18--The Ultimate "Jarvis" Final Project--
 Topic 9: Project Customizations (Outro)
@@ -2578,7 +2611,7 @@ Topic 4: File Handling & Local Logging
 Topic 5: Email Automation Workflow
 Topic 6: FastAPI Web Server & Async Log Parsing
 Topic 7: Web Interface & HTML Formatting
-Topic 8: Background Automation with Systemd
+Topic 8: Background Automation (Dynamic Systemd Daemons)
 Topic 9: Project Customizations (Outro)
 
 📊 PHASE SUMMARY:
