@@ -223,134 +223,21 @@ Section 2: Install Raspberry Pi OS Without Any External Monitor or Keyboard
 Topic 1: Headless Setup Overview & OS Flashing
 Topic 2: First Boot & Finding IP Address
 Topic 3: SSH Connection & Remote Terminal
-Topic 4: VNC Setup & Desktop Configuration
-Topic 5: Updating Wi-Fi Headlessly (Troubleshooting)
-
-📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 28
-
-**Double-check steps performed (Internal Verification):**
-
-* [x] Poora transcript completely padha bina kuch skip kiye.
-* [x] Transcript ko logical Topics mein group kiya.
-* [x] Har Section ka tagline/context line add kiya.
-* [x] Har Topic ko correct sequential numbering di.
-* [x] Har concept subtopic naam ki list mein add kiya (sirf short name).
-* [x] Subtopics flat comma-separated list mein hain — koi descriptions ya analogies nahi.
-* [x] Code/commands exactly preserve kiye (Keywords dump mein).
-* [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
-* [x] Chronological order preserved.
-* [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
-* [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya (with ⭐ tags for emphasis).
-* [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
-* [x] Timestamps aur noise tokens skip kiye.
-* [x] Chhote aur related concepts (jaise Video 1 aur 2, Video 3 aur 4) ko broad Topics mein merge kiya.
-
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-
-# Section 3: Programming with Python3 – Variables and Functions
-
-
-===Section 1: Programming with Python3 – Variables and Functions===
-Raspberry Pi desktop par Thonny IDE ka use karke Python programming, variables, data types, aur functions ke basics ka introduction.
-
---1--Programming with Python3 – Variables and Functions--
-Topic 1: Thonny IDE & Basic Commands
-Subtopics: Thonny Python IDE, Regular Mode Switch, Shell vs Text Editor, Print Function, Saving Python Files, Code Comments, Syntax Errors
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Surface
-* Coverage Angle: Practical only
-* Transcript mein content volume: Short explanation with demo
-* Key terms from transcript: Raspberry Pi desktop, Thonny Python IDE, regular mode, shell, text editor, print, terminal, .py extension, syntax error
-* Explicit emphasis by speaker: "Please make sure that you've correctly done every step from the previous section", "don't put any space" (file names save karte waqt).
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Raspberry Pi desktop, Thonny Python IDE, ⭐regular mode, shell, environment, terminal, print(), "Hello Raspberry Pi", text editor, Python programmes, .py extension, hello_world.py, underscore, up arrow, empty lines, comments, light grey, syntax error, ⭐"print is not defined"]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer Thonny IDE open karke regular mode mein switch karta hai. Woh shell ya text editor mein Python commands likhta hai, aur `.py` extension ke saath file save karke play button se run karta hai.
-* Fixing/Iteration Phase: Agar parentheses ya quotes miss ho jayein, toh IDE mein red color se syntax error aata hai. Developer line number aur explicit message padh ke error theek karta hai.
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Additional context: N/A
-
-Topic 2: Variables & Data Types
-Subtopics: Variables Concept, Variable Naming Conventions, Math Operators, Reassigning Variables, Integer Type, Float Type, String Type, Boolean Type, Dynamic Typing, Type Function
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Moderate
-* Coverage Angle: Both
-* Transcript mein content volume: Long explanation with multiple examples
-* Key terms from transcript: Variables, container, integer, float, string, boolean, true, false, dynamically set, type function
-* Explicit emphasis by speaker: "always give a meaningful name to your variables", "this practice is strongly discouraged" (variables ka type dynamically change karne par).
-* Speaker ne jo analogies/examples use kiye: Variable as a container.
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[Variables, container, a = 5, operators, addition, subtraction, multiplication, division, ⭐meaningful names, temperature, user_age, underscore, ⭐integer, ⭐float, 3.14, point, ⭐string, "hello", quotes, ⭐boolean, True, False, uppercase, dynamically set, C, C++, Java, type(), class bool, class int, class str, changing types]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Learning Phase: Speaker explain karta hai ki variables containers hain jo values store karte hain taaki same value baar-baar manual na likhni pade aur code repeat na ho.
-* Application Phase: Developer variables create karta hai (e.g., user_age) aur unme values assign karta hai. Woh variables ko math operators ke saath update karta hai aur `type()` function se dynamically set data types check karta hai.
-* Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Additional context: Speaker highlight karta hai ki C, C++ aur Java jaisi languages mein type explicitly batana padta hai, par Python mein yeh dynamically set hota hai.
-
-Topic 3: Functions & Variable Scope
-Subtopics: Functions Concept, Def Keyword, Input Parameters, Return Keyword, Calling Functions, Variable Scope, Global Variables, Local Variables, Nested Scopes
-
-[📊 SCOPE SIGNAL for Topic 3:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Long explanation with code + demo
-* Key terms from transcript: Function, reusable block of code, def, parameters, return, scope, visibility, global variable, local variable, nested scope
-* Explicit emphasis by speaker: "first declare your function and then call the function", "A variable will be visible in the scope it is created in"
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 3:
-[Function, reusable block of code, def, triple_number, input parameters, arguments, colon, indentation, spaces, ⭐return keyword, evaluating variables, calling function, say_hello, declare function, scope, visibility, global variable, local variable, nested scope, indented block]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-
-* Learning Phase: Speaker samjhata hai ki repetitive code ko avoid karne ke liye function ek reusable block/template hota hai. Woh rules batata hai ki variable apni defined scope (global ya local) mein hi accessible hota hai.
-* Application Phase: Developer `def` keyword se function define karta hai, parameters set karta hai, aur `return` keyword se output wapas bhejta hai. Agar developer kisi local variable (jo indented block mein hai) ko global scope mein access karne ki koshish kare, toh `name error` aata hai.
-* Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Additional context: N/A
-
-Topic 4: String Manipulation Activity
-Subtopics: Upper Method, String Concatenation, Autocompletion, Positional Arguments
+Topic 4: WayVNC Setup & Modern Desktop Configuration
+Subtopics: raspi-config Utility, WayVNC Enablement, Wayland Display Server, Resolution Configuration, TigerVNC Viewer, System Updates
 
 [📊 SCOPE SIGNAL for Topic 4:
-
-* Depth Level: Moderate
+* Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Short explanation + activity solution
-* Key terms from transcript: concatenate, uppercase strings, dot upper, plus operator, positional argument, auto completion
-* Explicit emphasis by speaker: "The shorter the name of the function the better, but it's also much better to give a meaningful name."
-* Speaker ne jo analogies/examples use kiye: None
+* Transcript mein content volume: Long tutorial connecting terminal commands to GUI applications
+* Explicit emphasis by speaker: "Do not use RealVNC. Modern Raspberry Pi OS uses Wayland, so you must use WayVNC and TigerVNC viewer."
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[concatenate, uppercase strings, strA, strB, .upper, + operator, space, return, concatenateUppercaseStrings, missing positional argument, ⭐autocompletion, ctrl + space, function inside function]
+[Wayland, WayVNC, remote desktop, ⭐sudo raspi-config, admin rights, interface options, VNC server, ⭐sudo reboot, boot auto login, desktop auto login, display options, VNC resolution, 1080p, TigerVNC Viewer, VNC client, black screen error, install updates, ⭐shutdown, software shutdown]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
-
-* Testing/Offline Phase: Developer do strings ko concatenate aur uppercase karne ka function banata hai. Code likhte waqt woh IDE mein autocompletion trigger karne ke liye `ctrl + space` use karta hai.
-* Fixing/Iteration Phase: Agar function call karte waqt developer koi argument miss kar de, toh programme crash hota hai aur error message aata hai (e.g., "missing one required positional argument"). Developer error message padh kar required argument add karta hai.
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Additional context: N/A
+* Testing/Offline Phase: Developer SSH ke through `sudo raspi-config` open karta hai aur WayVNC server configure karke system reboot karta hai. Phir woh PC par TigerVNC Viewer use karke graphical desktop access karta hai.
 
 ---
 
@@ -1766,7 +1653,7 @@ Subtopics: Dynamic URL Parameters, LED Pin Validation, State Validation, Multipl
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[`@app.get('/led/<int:led_pin>/state/<int:led_state>')`, `trigger_led(led_pin, led_state)`, `led_pin_list = [17, 27, 22]`, `gpiozero`, `gpiozero`, `gpiozero`, `gpiozero`, `gpiozero`, validation, `if not led_pin in led_pin_list`, wrong GPIO number, `if led_state == 0`, `if led_state == 1`, state must be 0 or 1, return ok, internal error, 500 error, 404 error, URL parameters]
+[`@app.post('/led/{led_pin}/state/{led_state}')`, `trigger_led(led_pin, led_state)`, `from gpiozero import LED`, `led_dict = {17: LED(17), 27: LED(27), 22: LED(22)}`, validation, `if led_pin not in led_dict`, wrong GPIO number, `if led_state == 0`, `led_dict[led_pin].off()`, `led_dict[led_pin].on()`, HTTPException, status_code=404, URL parameters]`, `gpiozero`, `gpiozero`, `gpiozero`, `gpiozero`, `gpiozero`, validation, `if not led_pin in led_pin_list`, wrong GPIO number, `if led_state == 0`, `if led_state == 1`, state must be 0 or 1, return ok, internal error, 500 error, 404 error, URL parameters]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
