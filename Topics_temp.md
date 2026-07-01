@@ -1929,28 +1929,25 @@ Subtopics: FastAPI Concept, Async/Await logic, Uvicorn ASGI Server, Non-blocking
 * Testing/Offline Phase: Developer `uv pip install fastapi uvicorn` chalata hai. Python script mein `app = FastAPI()` likh kar `uvicorn web_server:app --host 0.0.0.0 --port 8000` se server start karta hai.
 * Live Production Phase: User browser se API hit karta hai. Kyunki yeh async hai, Pi ek hi waqt pe AI model run kar raha hai aur web UI ko lag-free serve kar raha hai.
 
-Topic 3: Connecting GPIO Input to Flask Route
-Subtopics: Push Button Route, GPIO Setup, Button State Check, Return Statements
+Topic 3: Connecting GPIO Input to FastAPI Endpoints
+Subtopics: Push Button Async Route, GPIO Setup, Button State Check, JSON Return Statements
 
 [📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Moderate
 * Coverage Angle: Practical only
 * Transcript mein content volume: Short explanation + code + demo
-* Key terms from transcript: /pushButton, gpiozero, button pin 26, gpiozero, gpiozero, gpiozero
-* Explicit emphasis by speaker: Else block is not mandatory — speaker ne highlight kiya ki jab return use hota hai, toh function exit ho jata hai, isliye else likhna zaroori nahi hai.
-* Speaker ne jo analogies/examples use kiye: None
+* Key terms from transcript: /pushButton, gpiozero, button pin 26, async def, endpoint
+* Explicit emphasis by speaker: "Because this is FastAPI, we don't need Flask's jsonify. Just return a Python dictionary and FastAPI converts it to JSON automatically."
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[⭐@app.get('/pushButton'), check_pushButton, gpiozero, Button, button_pin = 26, button.is_pressed, JSON return, FastAPI routing]
+[⭐@app.get('/pushButton'), async def check_pushButton(), gpiozero, Button, button_pin = 26, button.is_pressed, ⭐Python dictionary return, automatic JSON serialization, FastAPI routing]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Testing/Offline Phase: Developer physical push button ko pin 26 par connect karta hai aur Flask mein naya route `/pushButton` define karke GPIO logic likhta hai.
-* Fixing/Iteration Phase: (N/A — transcript mein is topic ke liye koi fixing phase describe nahi kiya gaya)
-* Live Production Phase: User jab apne browser mein `/pushButton` URL refresh karta hai, tab server physically button ka state check karta hai aur screen par real-time hardware status (pressed/not pressed) print kar deta hai.
-* Additional context: N/A
+* Testing/Offline Phase: Developer physical push button ko pin 26 par connect karta hai aur FastAPI mein naya async endpoint `@app.get('/pushButton')` define karke GPIO logic likhta hai.
+* Live Production Phase: User jab apne browser mein `/pushButton` URL refresh karta hai, tab server physically button ka state check karta hai aur screen par real-time hardware status JSON format mein print kar deta hai.
 
 Topic 4: Dynamic Routes & GPIO Output Control
 Subtopics: Dynamic URL Parameters, LED Pin Validation, State Validation, Multiple LED Setup, Error Handling
@@ -1983,7 +1980,26 @@ Subtopics: Dynamic URL Parameters, LED Pin Validation, State Validation, Multipl
 
 Section 1: Create a Web Application on Your Raspberry Pi with Flask
 Topic 1 & 2: Asynchronous Web Servers with FastAPI & Uvicorn
-Topic 3: Connecting GPIO Input to Flask Route
+Topic 3: Connecting GPIO Input to FastAPI Endpoints
+Subtopics: Push Button Async Route, GPIO Setup, Button State Check, JSON Return Statements
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Short explanation + code + demo
+* Key terms from transcript: /pushButton, gpiozero, button pin 26, async def, endpoint
+* Explicit emphasis by speaker: "Because this is FastAPI, we don't need Flask's jsonify. Just return a Python dictionary and FastAPI converts it to JSON automatically."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[⭐@app.get('/pushButton'), async def check_pushButton(), gpiozero, Button, button_pin = 26, button.is_pressed, ⭐Python dictionary return, automatic JSON serialization, FastAPI routing]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer physical push button ko pin 26 par connect karta hai aur FastAPI mein naya async endpoint `@app.get('/pushButton')` define karke GPIO logic likhta hai.
+* Live Production Phase: User jab apne browser mein `/pushButton` URL refresh karta hai, tab server physically button ka state check karta hai aur screen par real-time hardware status JSON format mein print kar deta hai.
+
 Topic 4: Dynamic Routes & GPIO Output Control
 
 📊 PHASE SUMMARY:
@@ -2524,7 +2540,7 @@ Subtopics: FastAPI App Setup, Async Endpoints, Check Movement Route, File Line C
 * Live Production Phase: Uvicorn server `0.0.0.0` host pe run karta hai. Client `/check-movement` route access karta hai, API asynchronously log parse karke fast JSON response return karti hai.
 
 --18--The Ultimate "Jarvis" Final Project--
-Topic 7: Web Interface & HTML Formatting
+Topic 7: Web Interface & FastAPI StaticFiles
 Subtopics: Last Photo Extraction, HTML Break Tags, Flask Static Config, HTML Image Tag, String Quote Escaping
 
 [📊 SCOPE SIGNAL for Topic 7:
@@ -2610,7 +2626,7 @@ Topic 3: Camera Module Integration (Picamera2)
 Topic 4: Fast & Persistent Logging (SQLite Integration)
 Topic 5: Real-Time Media Alerts (Webhooks & Telegram Bot API)
 Topic 6: Non-Blocking FastAPI & Async SQL Queries
-Topic 7: Web Interface & HTML Formatting
+Topic 7: Web Interface & FastAPI StaticFiles
 Topic 8: Background Automation (Dynamic Systemd Daemons)
 Topic 9: Project Customizations (Outro)
 
