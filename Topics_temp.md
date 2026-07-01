@@ -18,13 +18,12 @@ Subtopics: Target Audience, Instructor Background, Course Structure, Teaching Me
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[software engineer, entrepreneur, robotics teacher, 6-axis robotic arm, step-by-step course, hands-on activities, Raspberry Pi 4, Raspberry Pi 2, Raspberry Pi 3, headless setup, external monitor, ⭐Python 3[version], GPIOs, PIR sensor, terminal, camera module, web server, Flask framework, best practises, engineer-level thinking, ⭐no copy and paste]
+[software engineer, entrepreneur, robotics teacher, 6-axis robotic arm, step-by-step course, hands-on activities, Raspberry Pi 4, Raspberry Pi 5, headless setup, external monitor, ⭐Python 3.12, GPIOs, PIR sensor, terminal, camera module, web server, FastAPI framework, Uvicorn, best practises, engineer-level thinking, ⭐no copy and paste]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
 * Learning Phase: Beginner bina external monitor/keyboard ke OS configure karna seekhta hai aur Python 3 ke basics samajhta hai.
 * Application Phase: Developer hardware components ko GPIOs ke through control karta hai aur camera/PIR sensor se interact karta hai.
-* Mastery Phase: Developer Flask framework use karke ek complete custom web server project banata hai aur engineer-level thinking apply karta hai.
+* Mastery Phase: Developer FastAPI framework use karke ek complete custom asynchronous web server project banata hai aur engineer-level thinking apply karta hai.
 * Additional context: N/A
 
 Topic 2: Raspberry Pi Capabilities & History
@@ -999,7 +998,7 @@ Subtopics: Activity 5 Challenge, GPIO Configuration, Infinite While Loop, Button
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[time, gpiozero, gpiozero, gpiozero, LED pin 17, button pin 26, gpiozero, gpiozero, gpiozero cleanup logic, while True, gpiozero, gpiozero, gpiozero, gpiozero, activity5, Task manager, CPU usage, 25%, 27%, four Cores, 2%, 3%, 5%, ⭐time.sleep, 0.01, ⭐100 Hertz]
+[from gpiozero import LED Button, time, led = LED(17), button = Button(26), button.when_pressed = led.on, button.when_released = led.off, event-driven, Task manager, CPU usage, 2%, pause()]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -2166,6 +2165,24 @@ Subtopics: The Feedback Loop Problem, ReSpeaker Mic Array HAT, DSP (Digital Sign
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 * Fixing/Iteration Phase: Developer dekhta hai ki TTS play hone par mic wapas trigger ho raha hai. Woh ek hardware DSP mic array (jaise ReSpeaker) install karta hai jo hardware level par speaker ki aawaz ko mic input se minus (cancel) kar deta hai, jisse Jarvis room ke doosre kone se bhi clear command sun pata hai.
 
+--16--Iron Man Voice Interface (Jarvis Core)--
+Topic 5: Zero-Latency Output (Token Streaming & WebSockets)
+Subtopics: The TTFT (Time-To-First-Token) Problem, Chunking Text, WebSockets vs REST, Pipelining Ollama to Piper
+
+[📊 SCOPE SIGNAL for Topic 5:
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Eliminating the awkward silence between asking a question and getting an answer.
+* Explicit emphasis by speaker: "Do not wait for the LLM to finish thinking. Pipe the text stream directly into the TTS engine so Jarvis speaks instantly."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Time-To-First-Token, TTFT, token streaming, asynchronous generation, WebSockets, bidirectional audio, SSE, Server-Sent Events, stdout pipe, Piper streaming mode, zero-latency, conversational AI]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+* Fixing/Iteration Phase: Developer dekhta hai ki API call ke baad 4 seconds ka lag hai. Woh REST API hata kar WebSockets (FastAPI ke through) lagata hai.
+* Live Production Phase: Jaise hi Ollama se pehla shabd (token) generate hota hai, Python script usse ek chunk mein pack karke directly Piper TTS ke process mein pipe (`|`) kar deti hai. Jarvis pehla word instantly bol deta hai, resulting in a human-like <0.5s response time.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -2177,9 +2194,10 @@ Topic 1: Wake Word & Speech-to-Text (Local)
 Topic 2: Local Text-to-Speech (Piper)
 Topic 3: Industrial Audio Output (I2S DAC Amplification)
 Topic 4: Acoustic Echo Cancellation (AEC) & Mic Arrays
+Topic 5: Zero-Latency Output (Token Streaming & WebSockets)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 11
+Sections: 1 | Topics: 5 | Subtopics: 15
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
