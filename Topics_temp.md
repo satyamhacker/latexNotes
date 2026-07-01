@@ -988,6 +988,7 @@ Topic 5: Reading Push Button Inputs
 Sections: 1 | Topics: 5 | Subtopics: 30
 
 
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
@@ -1454,6 +1455,25 @@ Subtopics: IP Address Check, Disk Space Check, Raspi-config CLI, Shutdown & Rebo
 * Fixing/Iteration Phase: Advanced interfaces (SSH, VNC) set karne ke liye developer GUI tool ke bajaye `sudo raspi-config` command line utility use karta hai kyunki usme zyada options hote hain.
 * Live Production Phase: Session end hone pe developer system ko forcefully safely band karne ke liye `sudo shutdown now` execute karta hai.
 
+
+--3--Package Management & System Commands--
+Topic 3: Professional IDE Workflow (VS Code Remote-SSH)
+Subtopics: Dropping VNC Desktop, VS Code Installation, Remote-SSH Extension, Key-Based Authentication, Remote Terminal Integration
+
+[📊 SCOPE SIGNAL for Topic 3:
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Bridging the gap from beginner tools to professional workflows.
+* Explicit emphasis by speaker: "Writing heavy AI applications via VNC or Nano is painfully slow. We are going to connect Visual Studio Code directly into the Pi's brain over SSH. This is how real software engineers work."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Visual Studio Code, VS Code, ⭐Remote-SSH Extension, remote workspace, headless IDE, drop VNC, key-based authentication, integrated terminal, syntax highlighting, port forwarding, professional workflow]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+* Testing/Offline Phase: Developer apne main Windows/Mac laptop par VS Code install karta hai aur "Remote-SSH" extension download karta hai.
+* Application Phase: `ssh pi@192.168.x.x` command VS Code mein daal kar, woh Pi ke pure file system ko local IDE mein open kar leta hai. Ab woh latency-free coding kar sakta hai, aur VS Code ka integrated terminal directly Pi pe commands execute karta hai.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1631,6 +1651,25 @@ Subtopics: Copy Command, Activity Code Migration, GPIO Warning Prevention, Short
 * Fixing/Iteration Phase: Developer main working code (PIR sensor check) ko `try` block ke andar indent karta hai, aur `except KeyboardInterrupt:` ke andar `gpiozero cleanup logic` logic (ya placeholder print) daalta hai taaki `ctrl C` dabane par pins safely reset ho jayein.
 * Live Production Phase: Hardware devices pe aisi scripts run hoti hain, aur jab system administrator manually program band karta hai, toh pin reset logic guarantee karta hai ki board safe state mein waapas aa gaya hai next deployment ke liye.
 * Additional context: Speaker insists this is standard best practice whenever using the RPI.GPIO library.
+
+
+--3--Package Management & System Commands--
+Topic 3: Professional IDE Workflow (VS Code Remote-SSH)
+Subtopics: Dropping VNC Desktop, VS Code Installation, Remote-SSH Extension, Key-Based Authentication, Remote Terminal Integration
+
+[📊 SCOPE SIGNAL for Topic 3:
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Bridging the gap from beginner tools to professional workflows.
+* Explicit emphasis by speaker: "Writing heavy AI applications via VNC or Nano is painfully slow. We are going to connect Visual Studio Code directly into the Pi's brain over SSH. This is how real software engineers work."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Visual Studio Code, VS Code, ⭐Remote-SSH Extension, remote workspace, headless IDE, drop VNC, key-based authentication, integrated terminal, syntax highlighting, port forwarding, professional workflow]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+* Testing/Offline Phase: Developer apne main Windows/Mac laptop par VS Code install karta hai aur "Remote-SSH" extension download karta hai.
+* Application Phase: `ssh pi@192.168.x.x` command VS Code mein daal kar, woh Pi ke pure file system ko local IDE mein open kar leta hai. Ab woh latency-free coding kar sakta hai, aur VS Code ka integrated terminal directly Pi pe commands execute karta hai.
 
 ---
 
@@ -2469,7 +2508,7 @@ Topic 5: LLM Memory Management & ZRAM
 Topic 6: Conversational Memory & Agentic Chains
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 18
+Sections: 1 | Topics: 7 | Subtopics: 18
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
