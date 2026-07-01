@@ -1035,7 +1035,7 @@ Subtopics: Activity 6 Challenge, Previous Button State, State Transition Detecti
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[toggle the LEDs, gpiozero, time, gpiozero, gpiozero cleanup logic, LED1 pin 17, LED2 pin 27, LED3 pin 22, button pin 26, gpiozero, gpiozero, gpiozero, previous_button_state, current button state, gpiozero, !=, different from, low to high, high to low, gpiozero, ⭐state machine, LED index, 0, 1, 2, if, elif, else, activity6]
+[toggle the LEDs, time, gpiozero, LED, Button, led1 = LED(17), led2 = LED(27), led3 = LED(22), button = Button(26), previous_button_state, current button state, button.is_pressed, !=, different from, low to high, high to low, ⭐state machine, LED index, 0, 1, 2, if, elif, else, activity6]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -1062,7 +1062,7 @@ Subtopics: Activity 7 Challenge, LED Pin List Array, For Loop Pin Setup, Custom 
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[activity 7, ⭐arrays, LED pin list, [17, 27, 22], for loop, for pin in led_pin_list, gpiozero, gpiozero, gpiozero, custom function, def powerOnSelectedLEDOnly(), selected_led_pin, ==, not in, return, exit, data validation, led_index += 1, ⭐len(), >=, boundary check, parameter, activity7]
+[activity 7, ⭐arrays, LED pin list, [LED(17), LED(27), LED(22)], for loop, for led in led_pin_list, led.off(), custom function, def powerOnSelectedLEDOnly(), selected_led_index, ==, not in, return, exit, data validation, led_index += 1, ⭐len(), >=, boundary check, parameter, activity7]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -1195,7 +1195,7 @@ Subtopics: Boot Calibration Time, Module Imports, GPIO Setup, Internal Pull-Down
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[⭐calibrate, one minute, weird data, gpiozero, from gpiozero import MotionSensor, pir = MotionSensor(4), pir.wait_for_motion(), pir.wait_for_no_motion(), time.sleep, 0.1, print]
+[⭐calibrate, one minute, weird data, time module, gpiozero, from gpiozero import MotionSensor, pir = MotionSensor(4), internal resistor, default state 0, floating values, 3.3 volts, physical pull-down resistor, pir.motion_detected, time.sleep, 0.1, 10 Hz, print]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -1219,7 +1219,7 @@ Subtopics: Activity Objective, LED Setup Code, Motion Conditional Logic, Loop Fr
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[LED pin 17, gpiozero, GPIO.out, gpiozero, GPIO.low, GPIO.high, if statement, else statement, ==, time.sleep, 0.01, 100 Hertz, false positives, false negatives, light, strong light, wind, quality of PIR sensor]
+[from gpiozero import LED MotionSensor, pir = MotionSensor(4), led = LED(17), if pir.motion_detected, led.on(), else, led.off(), ==, time.sleep, 0.01, 100 Hertz, false positives, false negatives, light, strong light, wind, quality of PIR sensor]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
