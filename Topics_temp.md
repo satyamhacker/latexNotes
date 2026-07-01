@@ -83,7 +83,7 @@ Subtopics: Board Versions, Power Supply Requirements, Micro SD Card Specs, Elect
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[USB Wi-Fi dongle, 2GB, 4GB, 8GB, power supply, smartphone charger, ⭐avoid powering from computer USB, 5V, 2A, 3A, 2.5A, micro SD card, Class 10, 10 inside a circle, Xtreme Pro, number three inside a U shape, 8GB, 16GB, 32GB, 64GB formatting, breadboard, wires, male to female, male to male, female to female, resistors, 1kΩ, 10kΩ, 330Ω, 20kΩ, LEDs, push button, 4 legs, Arduino kit, PIR sensor, passive infrared sensor, HCSR501, camera module version two, green board, noir version, black board]
+[⭐@app.post('/led/{led_pin}/state/{led_state}'), trigger_led, Pydantic, HTTPException, status_code=404, fastapi error handling, URL path variables]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
@@ -182,121 +182,18 @@ Sections: 1 | Topics: 6 | Subtopics: 25
 Speaker is section mein bina kisi external monitor ya keyboard ke Raspberry Pi ko headlessly setup karne ka poora end-to-end process explain karta hai — OS flashing se lekar remote desktop access tak.
 
 --2--Install Raspberry Pi OS Without Any External Monitor or Keyboard--
-Topic 1: Headless Setup Overview & OS Flashing
-Subtopics: Headless Setup Concept, Raspberry Pi Imager, SSH Enablement, Wi-Fi Configuration, Locale Settings, SD Card Flashing
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation of flashing steps aur configuration settings
-* Key terms from transcript: headless, external monitor, Raspberry Pi imager, operating system, enable SSH, set username and password, configure Wi-Fi, set local settings
-* Explicit emphasis by speaker: "make sure you use the same one that your computer is connected to that's super super important"
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[headless setup, external monitor, external keyboard, remote desktop, flash operating system, micro SD card, Raspberry Pi Imager, ⭐1.7[version], [raspberrypi.com/software](https://www.google.com/search?q=https://raspberrypi.com/software), Windows, macOS, Linux, 16 gigabyte, settings button, ⭐enable SSH, username pi, password, Wi-Fi connection, hotspot, SSID, your Wi-Fi network, set local settings, time zone, Europe Paris, keyboard layout, QWERTY, US, FR layout, erase data]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer apne PC par Raspberry Pi Imager tool use karke micro SD card flash karta hai. Flashing se pehle woh headless setup ke liye SSH enable karta hai aur Wi-Fi + locale settings pre-configure karta hai.
-* Fixing/Iteration Phase: Agar software version purana ho (<1.7), toh developer current version uninstall karke latest download karta hai taaki advanced settings access kar sake.
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi live production flow nahi bataya gaya)
-* Additional context: N/A
-
-Topic 2: First Boot & Finding IP Address
-Subtopics: Hardware Boot Sequence, LED Indicators, Angry IP Scanner, Network Range Scanning, MAC Vendor Identification, IP Extraction
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation with software demo aur troubleshooting tips
-* Key terms from transcript: boot, power supply, 5V, 2A, red LED, green LED, Angry IP Scanner, Java runtime, IP range, broadcast address, Mac Vendor, hostname
-* Explicit emphasis by speaker: "don't power your Raspberry Pi from the laptop directly"
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[boot, power supply, ⭐5V, ⭐2A, laptop power, red LED, green LED blinking randomly, IP address, Angry IP Scanner, angryip.org, Java, standard JDK, Java runtime, Wi-Fi settings, IP range, ⭐192.168.31.0, 255, broadcast address, 10.0, Mac Vendor, Raspberry Pi trading, hostname, raspberrypi.local, ⭐192.168.31.76]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer Raspberry Pi ko power supply deta hai aur hardware LEDs (red solid, green blinking) observe karke boot confirm karta hai. Phir woh PC par Angry IP Scanner chalakar network scan karta hai aur MAC Vendor ke through Pi ka IP address find karta hai.
-* Fixing/Iteration Phase: Agar scan mein hostname na dikhe, toh developer tool ki settings mein jaakar 'Mac Vendor' column add karta hai device identify karne ke liye.
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi live production flow nahi bataya gaya)
-* Additional context: N/A
-
-Topic 3: SSH Connection & Remote Terminal
-Subtopics: Hidden .ssh Folder, Terminal Commands, SSH Syntax, Putty Client, Remote Authentication
-
-[📊 SCOPE SIGNAL for Topic 3:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Detailed command-line execution and login steps
-* Key terms from transcript: command line access, terminal, .ssh, command prompt, putty, ssh client, username, IP address, password
-* Explicit emphasis by speaker: Password type karte waqt screen par kuch nahi dikhega, yeh normal behavior hai.
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 3:
-[SSH connection, command line access, terminal, file manager, hidden folders, .ssh, known_hosts, cmd, command prompt, putty, SSH client, Windows 10, ssh command, ⭐ssh pi@192.168.31.76, username, IP address, remote authentication, password denied, host Raspberry Pi]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-
-* Testing/Offline Phase: Developer PC ka terminal (ya Putty) open karta hai aur `ssh username@IP` command run karta hai. Password authenticate karke woh Raspberry Pi ke internal terminal ka remote access leta hai.
-* Fixing/Iteration Phase: Agar SSH error de ya connection reject kare, toh developer file manager mein jaakar hidden `.ssh` folder se purani `known_hosts` file delete karta hai. Agar password denied ho, toh OS dobara flash karta hai.
-* Live Production Phase: (N/A)
-* Additional context: Speaker ne clear kiya ki agar Windows 10 se purana OS hai toh native SSH nahi hoga, uske liye Putty use karna padega.
-
-Topic 4: VNC Setup & Desktop Configuration
-Subtopics: raspi-config Utility, VNC Enablement, Auto Login Setup, Resolution Configuration, VNC Viewer Installation, System Updates, Safe Shutdown
-
-[📊 SCOPE SIGNAL for Topic 4:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Long tutorial connecting terminal commands to GUI applications
-* Key terms from transcript: VNC, sudo raspi-config, admin rights, VNC server, reboot, desktop auto login, display options, VNC Viewer, realvnc, install updates, shutdown
-* Explicit emphasis by speaker: "If you just remove the power like that on the Raspberry Pi well this may lead to some problems for example your SD card could be corrupted"
-* Speaker ne jo analogies/examples use kiye: "like your computer you don't just switch off the power on your computer you first shut it down properly"
-]
-
-🔑 KEYWORDS DUMP for Topic 4:
-[VNC, remote desktop, ⭐sudo raspi-config, admin rights, administrator privileges, interface options, VNC server, ⭐sudo reboot, connection reset, system options, boot auto login, desktop auto login, console login, display options, VNC resolution, 1080p, VNC Viewer, realvnc.com, VNC client, file new connection, remember password, black screen error, preferences, appearance settings, taskbar, system font 16, install updates, ⭐shutdown, software shutdown, corrupted SD card]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
-
-* Testing/Offline Phase: Developer SSH ke through `sudo raspi-config` utility open karta hai aur VNC server, auto-login, aur resolution (1080p) configure karke system reboot karta hai. Phir woh PC par VNC Viewer use karke graphical desktop access karta hai aur GUI updates install karta hai.
-* Fixing/Iteration Phase: Agar VNC connect hone par black screen dikhaye ("cannot currently show the desktop"), toh developer ko samajh aata hai ki configuration miss ho gayi hai, aur woh raspi-config ke steps dobara karta hai.
-* Live Production Phase: (N/A)
-* Additional context: Speaker ne explicitly warn kiya ki physical power nikalne se pehle humesha software shutdown karna zaroori hai, taaki SD card corrupt na ho.
-
-Topic 5: Updating Wi-Fi Headlessly (Troubleshooting)
-Subtopics: Headless Wi-Fi Reconfiguration, wpa_supplicant.conf File, Network Credentials Injection, IP Address Re-discovery
+Topic 5: Updating Wi-Fi Headlessly (NetworkManager)
+Subtopics: NetworkManager Concept, nmcli Command, Headless Wi-Fi Reconfiguration, SD Card Boot partition, system-connections folder
 
 [📊 SCOPE SIGNAL for Topic 5:
-
 * Depth Level: Moderate
 * Coverage Angle: Practical only
-* Transcript mein content volume: Short targeted solution for changing networks headlessly
-* Key terms from transcript: different Wi-Fi network, wpa_supplicant.conf, SSID, PSK
-* Explicit emphasis by speaker: "it is super super important that you write the exact same name for the file if you have one small typo it's not going to work"
-* Speaker ne jo analogies/examples use kiye: None
+* Key terms from transcript: NetworkManager, nmcli, system-connections, headless
+* Explicit emphasis by speaker: "wpa_supplicant is dead in modern OS, use NetworkManager."
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[troubleshooting, different Wi-Fi network, fresh install, SD card boot drive, text document, ⭐wpa_supplicant.conf, SSID, PSK, network credentials, inject configuration, Angry IP Scanner, update VNC properties]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
-
-* Testing/Offline Phase: N/A
-* Fixing/Iteration Phase: Jab developer kisi naye location ya network par jata hai bina monitor ke, toh connection loss fix karne ke liye woh SD card nikal kar PC mein lagata hai. Boot directory mein `wpa_supplicant.conf` file manually create karta hai, naye credentials (SSID/PSK) daalta hai, aur Pi boot karke Angry IP Scanner se naya IP find karta hai.
-* Live Production Phase: N/A
-* Additional context: Yeh step sirf tab chahiye jab pre-configured network unavailable ho aur OS ko bina wipe kiye naya network add karna ho.
-
+[NetworkManager, nmcli, nmtui, SD card boot drive, system-connections, .nmconnection file, SSID, PSK, modern OS]
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -837,75 +734,20 @@ Sections: 1 | Topics: 5 | Subtopics: 28
 
 
 ===Section 1: Control Raspberry Pi's GPIOs with Python===
-Speaker is section mein Raspberry Pi ke GPIO pins ka layout, hardware setup, aur Python (RPi.GPIO) ke through LED aur push button ko control karna sikhata hai.
+Speaker is section mein Raspberry Pi ke GPIO pins ka layout, hardware setup, aur Python (gpiozero) ke through LED aur push button ko control karna sikhata hai.
 
---1--Control Raspberry Pi's GPIOs with Python--
-Topic 1: GPIO Pinout & Basics
-Subtopics: Pi Pinout, Ground Pins, Power Pins, GPIO Pins, Voltage Limits, Input vs Output, Pin States, Alternate Functions
-
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Moderate
-* Coverage Angle: Conceptual only
-* Transcript mein content volume: Long explanation
-* Key terms from transcript: Raspberry Pi 4, Raspberry Pi 3, Raspberry Pi 2, ground, power pins, 3.3V, 5V, GPIO, input pin, output pin, high, low, UART, I2C, SPI
-* Explicit emphasis by speaker: "The GPIOs are 3.3V pins and not 5V pins. That is very important."
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Raspberry Pi 4, Raspberry Pi 3, Raspberry Pi 2, pinout, ground, power pins, ⭐3.3V, 5V, GPIO, input pin, output pin, push button, LED, read data, write data, high, low, voltage, reserved pins, UART, I2C, SPI]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Learning Phase: Speaker explain karta hai ki board par pins kaise grouped hain (power, ground, GPIOs) aur unki voltage limits kya hain.
-* Application Phase: Developer Python code likhte waqt inhi exact numbers ka use karta hai GPIOs se interact karne ke liye.
-* Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-
-Topic 2: Blinking an LED with Python
-Subtopics: SD Card Setup, VNC Connection, Thonny IDE, RPi.GPIO Module, BCM Mode, Pin Setup, High and Low States, Sleep Function, Infinite Loop, Cleanup Function, Warning Messages
+--1--Control Raspberry Pi's GPIOs with Python--6--Control Raspberry Pi's GPIOs with Python--
+Topic 2: Blinking an LED with gpiozero
+Subtopics: gpiozero Module, LED Object Initialization, on() and off() Methods, Automatic Cleanup
 
 [📊 SCOPE SIGNAL for Topic 2:
-
 * Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Long explanation + multiple code examples + demo
-* Key terms from transcript: SD card, VNC, Thonny IDE, RPi.GPIO, GPIO.setmode, GPIO.BCM, GPIO.cleanup, GPIO.setup, GPIO.output, time.sleep, while True
-* Explicit emphasis by speaker: "GPIO.setmode GPIO.bcm should be the first thing you do after you import the GPIO module"
-* Speaker ne jo analogies/examples use kiye: Speaker kehta hai ki yeh Arduino ke "blink LED" example jaisa hi hai, bas Python aur Raspberry Pi mein.
+* Key terms from transcript: gpiozero, LED, on, off, object-oriented
+* Explicit emphasis by speaker: "gpiozero is deprecated. Use gpiozero which automatically handles cleanup."
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[SD card, VNC, monitor, Thonny IDE, Python, RPi.GPIO, GPIO, GPIO.setmode(), GPIO.BCM, GPIO.cleanup(), LED_pin, 17, GPIO.setup(), GPIO.OUT, GPIO.output(), GPIO.HIGH, GPIO.LOW, time, import time, time.sleep(1), while True, infinite loop, ⭐"This channel is already in use", Arduino, blink LED]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer Thonny IDE mein code likh kar infinite loop chalata hai taaki LED blink ho sake. Agar developer manually script stop karta hai, toh cleanup function execute nahi hota.
-* Fixing/Iteration Phase: Jab developer dobara script run karta hai bina cleanup ke, toh system "channel is already in use" warning deta hai, jise developer abhi ke liye ignore karta hai.
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-
-Topic 3: User Input LED Control
-Subtopics: User Input Handling, Input Validation, Conditional Logic, Error Messages, Exit Function, Cleanup Execution
-[⚠️ Yeh topic maine logically group kiya hai — original transcript mein explicit heading nahi thi, yeh ek activity aur uske solution ka combination hai]
-
-[📊 SCOPE SIGNAL for Topic 3:
-
-* Depth Level: Moderate
-* Coverage Angle: Both
-* Transcript mein content volume: Short explanation + code execution
-* Key terms from transcript: input, int, if structure, state variable, exit, == sign
-* Explicit emphasis by speaker: "you use two equals so we check if the state is equal to 0"
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 3:
-[user input, 0, 1, int, input(), if structure, state variable, exit, RPi.GPIO, time, LED_pin, 17, GPIO.setmode, GPIO.BCM, GPIO.setup, GPIO.OUT, GPIO.cleanup, ⭐==, GPIO.LOW, elif, GPIO.HIGH, else, print, string cast, time.sleep(2)]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-
-* Testing/Offline Phase: Developer terminal mein 0 ya 1 enter karke LED state test karta hai. Agar valid input milta hai, toh LED power on/off hoti hai aur 2 second ke baad cleanup hoke pin reset ho jati hai.
-* Fixing/Iteration Phase: Agar user invalid input (jaise 3 ya string) daalta hai, toh script error message print karti hai, cleanup karti hai, aur exit() use karke turant band ho jati hai.
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+[⭐gpiozero, from gpiozero import LED, led = LED(17), led.on(), led.off(), time.sleep(1), ⭐automatic cleanup, object-oriented hardware]
 
 Topic 4: Push Button Hardware Setup
 Subtopics: Safe Shutdown Process, Component List, Breadboard Mechanics, Ground Connection, Power Connection, GPIO Connection
@@ -937,13 +779,13 @@ Subtopics: Input Setup, Constant Variable Convention, Reading Input State, High 
 * Depth Level: Moderate
 * Coverage Angle: Both
 * Transcript mein content volume: Code execution + demo
-* Key terms from transcript: button pin, uppercase variables, GPIO.setup, GPIO.in, GPIO.input, high, low, while true
+* Key terms from transcript: button pin, uppercase variables, gpiozero, GPIO.in, GPIO.input, high, low, while true
 * Explicit emphasis by speaker: Speaker kehta hai ki variables ko uppercase mein rakhne ka matlab hai (conventionally) ki usse baad mein change nahi karna hai.
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[RPi.GPIO, time, GPIO.setmode, GPIO.BCM, GPIO.cleanup, buttonPin, ⭐uppercase variables, convention, 26, GPIO.setup, GPIO.IN, GPIO.input, high, low, 1, 0, print, while True, time.sleep(1)]
+[gpiozero, time, GPIO.setmode, GPIO.BCM, gpiozero cleanup logic, buttonPin, ⭐uppercase variables, convention, 26, gpiozero, GPIO.IN, GPIO.input, high, low, 1, 0, print, while True, time.sleep(1)]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
@@ -993,7 +835,7 @@ Subtopics: Activity 5 Challenge, GPIO Configuration, Infinite While Loop, Button
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[RPi.GPIO as GPIO, time, GPIO.setMode, GPIO.BCM, GPIO.setup, LED pin 17, button pin 26, GPIO.OUT, GPIO.IN, GPIO.cleanup, while True, GPIO.input, GPIO.HIGH, GPIO.output, GPIO.LOW, activity5, Task manager, CPU usage, 25%, 27%, four Cores, 2%, 3%, 5%, ⭐time.sleep, 0.01, ⭐100 Hertz]
+[gpiozero as GPIO, time, GPIO.setMode, GPIO.BCM, gpiozero, LED pin 17, button pin 26, GPIO.OUT, GPIO.IN, gpiozero cleanup logic, while True, GPIO.input, GPIO.HIGH, GPIO.output, GPIO.LOW, activity5, Task manager, CPU usage, 25%, 27%, four Cores, 2%, 3%, 5%, ⭐time.sleep, 0.01, ⭐100 Hertz]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -1047,7 +889,7 @@ Subtopics: Activity 6 Challenge, Previous Button State, State Transition Detecti
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[toggle the LEDs, RPi.GPIO, time, GPIO.BCM, GPIO.cleanup, LED1 pin 17, LED2 pin 27, LED3 pin 22, button pin 26, GPIO.OUT, GPIO.IN, GPIO.LOW, previous_button_state, current button state, GPIO.input, !=, different from, low to high, high to low, GPIO.HIGH, ⭐state machine, LED index, 0, 1, 2, if, elif, else, activity6]
+[toggle the LEDs, gpiozero, time, GPIO.BCM, gpiozero cleanup logic, LED1 pin 17, LED2 pin 27, LED3 pin 22, button pin 26, GPIO.OUT, GPIO.IN, GPIO.LOW, previous_button_state, current button state, GPIO.input, !=, different from, low to high, high to low, GPIO.HIGH, ⭐state machine, LED index, 0, 1, 2, if, elif, else, activity6]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -1074,7 +916,7 @@ Subtopics: Activity 7 Challenge, LED Pin List Array, For Loop Pin Setup, Custom 
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[activity 7, ⭐arrays, LED pin list, [17, 27, 22], for loop, for pin in led_pin_list, GPIO.setup, GPIO.OUT, GPIO.LOW, custom function, def powerOnSelectedLEDOnly(), selected_led_pin, ==, not in, return, exit, data validation, led_index += 1, ⭐len(), >=, boundary check, parameter, activity7]
+[activity 7, ⭐arrays, LED pin list, [17, 27, 22], for loop, for pin in led_pin_list, gpiozero, GPIO.OUT, GPIO.LOW, custom function, def powerOnSelectedLEDOnly(), selected_led_pin, ==, not in, return, exit, data validation, led_index += 1, ⭐len(), >=, boundary check, parameter, activity7]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -1201,13 +1043,13 @@ Subtopics: Boot Calibration Time, Module Imports, GPIO Setup, Internal Pull-Down
 * Depth Level: Deep
 * Coverage Angle: Practical only
 * Transcript mein content volume: Long explanation with complete python code writing
-* Key terms from transcript: calibration, one minute, RPI.GPIO, time module, GPIO.setMode, GPIO.bcm, GPIO.setup, GPIO.in, pullUpDown, GPIO.pudDown, internal resistor, pull-up, floating values, default state, GPIO.input, time.sleep
+* Key terms from transcript: calibration, one minute, RPI.GPIO, time module, GPIO.setMode, GPIO.bcm, gpiozero, GPIO.in, pullUpDown, GPIO.pudDown, internal resistor, pull-up, floating values, default state, GPIO.input, time.sleep
 * Explicit emphasis by speaker: Sensor ko on hone ke baad kam se kam 1 minute chahiye calibrate hone ke liye, warna weird data aayega.
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[⭐calibrate, one minute, weird data, RPI.GPIO, time module, GPIO.setMode, GPIO.bcm, GPIO.cleanup, PIR_pin=4, GPIO.setup, GPIO.in, pullUpDown, ⭐GPIO.pudDown, pull-down resistor, pull-up resistor, internal resistor, default state 0, floating values, 3.3 volts, physical pull-down resistor, GPIO.input, time.sleep, 0.1, 10 Hz, 1, 0, print]
+[⭐calibrate, one minute, weird data, RPI.GPIO, time module, GPIO.setMode, GPIO.bcm, gpiozero cleanup logic, PIR_pin=4, gpiozero, GPIO.in, pullUpDown, ⭐GPIO.pudDown, pull-down resistor, pull-up resistor, internal resistor, default state 0, floating values, 3.3 volts, physical pull-down resistor, GPIO.input, time.sleep, 0.1, 10 Hz, 1, 0, print]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -1231,7 +1073,7 @@ Subtopics: Activity Objective, LED Setup Code, Motion Conditional Logic, Loop Fr
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[LED pin 17, GPIO.setup, GPIO.out, GPIO.output, GPIO.low, GPIO.high, if statement, else statement, ==, time.sleep, 0.01, 100 Hertz, false positives, false negatives, light, strong light, wind, quality of PIR sensor]
+[LED pin 17, gpiozero, GPIO.out, GPIO.output, GPIO.low, GPIO.high, if statement, else statement, ==, time.sleep, 0.01, 100 Hertz, false positives, false negatives, light, strong light, wind, quality of PIR sensor]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
@@ -1585,12 +1427,12 @@ Subtopics: Copy Command, Activity Code Migration, GPIO Warning Prevention, Short
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[cp activity8.py activity9.py, PIR sensor, LED pin, while True, kill the program, GPIO.cleanup, safety issue, warning, short circuit, destroy your board, destroy some components, try, except KeyboardInterrupt, print("cleaning up GPIOs")]
+[cp activity8.py activity9.py, PIR sensor, LED pin, while True, kill the program, gpiozero cleanup logic, safety issue, warning, short circuit, destroy your board, destroy some components, try, except KeyboardInterrupt, print("cleaning up GPIOs")]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
 * Testing/Offline Phase: Developer `cp` command se purani script copy karta hai. Script chalane par usko purane run se related ek GPIO warning dikhayi deti hai kyunki script direct kill hui thi.
-* Fixing/Iteration Phase: Developer main working code (PIR sensor check) ko `try` block ke andar indent karta hai, aur `except KeyboardInterrupt:` ke andar `GPIO.cleanup` logic (ya placeholder print) daalta hai taaki `ctrl C` dabane par pins safely reset ho jayein.
+* Fixing/Iteration Phase: Developer main working code (PIR sensor check) ko `try` block ke andar indent karta hai, aur `except KeyboardInterrupt:` ke andar `gpiozero cleanup logic` logic (ya placeholder print) daalta hai taaki `ctrl C` dabane par pins safely reset ho jayein.
 * Live Production Phase: Hardware devices pe aisi scripts run hoti hain, aur jab system administrator manually program band karta hai, toh pin reset logic guarantee karta hai ki board safe state mein waapas aa gaya hai next deployment ke liye.
 * Additional context: Speaker insists this is standard best practice whenever using the RPI.GPIO library.
 
@@ -1811,6 +1653,19 @@ Subtopics: TFLite Runtime, MobileNet SSD, Label Mapping, Confidence Thresholds, 
 * Fixing/Iteration Phase: Agar "dog" ko "cat" detect kare, toh developer confidence threshold badhakar 0.75 kar deta hai.
 * Live Production Phase: Camera heavy images process karke ek simple JSON text (e.g., `{"person": 1, "dog": 0}`) output karta hai jo aage LLM ko bheja jata hai.
 
+Topic 4: Industrial AI Security (Frigate NVR)
+Subtopics: Network Video Recorder, RTSP Streams, Frigate Docker Setup, Core Inference
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Frigate NVR, Docker container, RTSP camera stream, WebRTC, continuous recording, AI object tracking, zone detection]
+
+Topic 5: Hardware Acceleration (Hailo NPU)
+Subtopics: CPU Bottlenecks, Hailo-8L Architecture, Offloading Inference
+
+🔑 KEYWORDS DUMP for Topic 5:
+[NPU, Hailo-8L, Raspberry Pi AI Kit, 13 TOPS, PCIe gen 2, hardware acceleration, offloading inference, CPU bottleneck]
+
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1863,13 +1718,13 @@ Subtopics: Push Button Route, GPIO Setup, Button State Check, Return Statements
 * Depth Level: Moderate
 * Coverage Angle: Practical only
 * Transcript mein content volume: Short explanation + code + demo
-* Key terms from transcript: /pushButton, RPi.GPIO, button pin 26, GPIO.IN, GPIO.input, GPIO.HIGH
+* Key terms from transcript: /pushButton, gpiozero, button pin 26, GPIO.IN, GPIO.input, GPIO.HIGH
 * Explicit emphasis by speaker: Else block is not mandatory — speaker ne highlight kiya ki jab return use hota hai, toh function exit ho jata hai, isliye else likhna zaroori nahi hai.
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[`@app.route('/pushButton')`, `check_pushButton`, `import RPi.GPIO as GPIO`, `GPIO.setmode(GPIO.BCM)`, `button_pin = 26`, `GPIO.setup`, `GPIO.IN`, `GPIO.input`, `GPIO.HIGH`, button is pressed, button is not pressed, indentation, return statement, else block implied]
+[⭐@app.get('/pushButton'), check_pushButton, gpiozero, Button, button_pin = 26, button.is_pressed, JSON return, FastAPI routing]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
@@ -1892,7 +1747,7 @@ Subtopics: Dynamic URL Parameters, LED Pin Validation, State Validation, Multipl
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[`@app.route('/led/<int:led_pin>/state/<int:led_state>')`, `trigger_led(led_pin, led_state)`, `led_pin_list = [17, 27, 22]`, `GPIO.setup`, `GPIO.OUT`, `GPIO.output`, `GPIO.LOW`, `GPIO.HIGH`, validation, `if not led_pin in led_pin_list`, wrong GPIO number, `if led_state == 0`, `if led_state == 1`, state must be 0 or 1, return ok, internal error, 500 error, 404 error, URL parameters]
+[`@app.get('/led/<int:led_pin>/state/<int:led_state>')`, `trigger_led(led_pin, led_state)`, `led_pin_list = [17, 27, 22]`, `gpiozero`, `GPIO.OUT`, `GPIO.output`, `GPIO.LOW`, `GPIO.HIGH`, validation, `if not led_pin in led_pin_list`, wrong GPIO number, `if led_state == 0`, `if led_state == 1`, state must be 0 or 1, return ok, internal error, 500 error, 404 error, URL parameters]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
@@ -1965,12 +1820,12 @@ Sections: 1 | Topics: 1 | Subtopics: 4
 
 ==================================================================================
 
-# Section 15: The Smart Home OS (Home Assistant)
+# Section 15: The Smart Home OS (Home Assistant & Orchestration)
 
-===Section 15: The Smart Home OS (Home Assistant)===
+===Section 15: The Smart Home OS (Home Assistant & Orchestration)===
 Flask server ko hata kar, speaker yahan Home Assistant Core install karna sikhata hai jo thousands of devices, automated routines, aur professional UI dashboard handle kar sakta hai.
 
---15--The Smart Home OS (Home Assistant)--
+--15--The Smart Home OS (Home Assistant & Orchestration)--
 Topic 1: Home Assistant Setup & UI
 Subtopics: Docker Installation, Home Assistant Container, Integrations, UI Dashboard
 
@@ -1992,6 +1847,39 @@ Subtopics: Docker Installation, Home Assistant Container, Integrations, UI Dashb
 * Learning Phase: Developer Docker install karta hai aur HA container run karta hai.
 * Application Phase: Browser mein `IP:8123` open karke admin account banata hai aur ghar ke existing smart bulbs (Philips Hue/Tuya) ko bina code likhe UI se integrate karta hai.
 * Mastery Phase: Developer MQTT integration add karta hai taaki purane Python/PIR sensors bhi HA UI mein dikhne lagein.
+
+Topic 2: Orchestrating the Brain (Docker Compose)
+Subtopics: Docker Compose YAML, Multi-container architecture, Port Mapping, Volume Bind Mounts
+
+[📊 SCOPE SIGNAL for Topic 2:
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Managing multiple AI/IoT services
+* Explicit emphasis by speaker: "Never run multiple complex systems manually. Use docker-compose to spin up MQTT, Home Assistant, and Frigate together."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[docker-compose.yaml, multi-container, orchestration, volumes, bind mounts, port mapping, network bridge, docker compose up -d, infrastructure as code]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+* Live Production Phase: Developer ek `docker-compose.yml` file likhta hai jisme HA, Mosquitto, aur Frigate defined hain. Ek single command se Pi ka poora ecosystem boot ho jata hai, aur agar Pi restart ho, toh `restart: unless-stopped` policy sab kuch automatically wapas on kar deti hai.
+
+Topic 3: Secure Remote Access (Zero-Trust / Tailscale)
+Subtopics: Dangers of Port Forwarding, CGNAT Bypass, Tailscale VPN, WireGuard Protocol
+
+[📊 SCOPE SIGNAL for Topic 3:
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Securing the Raspberry Pi for external access
+* Explicit emphasis by speaker: "Opening port 8123 to the open internet is dangerous. Use a Zero-Trust VPN."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Zero-Trust, Tailscale, WireGuard, VPN, bypass CGNAT, port forwarding dangers, secure remote access, MagicDNS, internal IP]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+* Live Production Phase: Developer Pi aur apne smartphone par Tailscale install karta hai. Ab woh duniya mein kahin bhi ho, bina kisi router settings ko chhere, ek secure internal 100.x.x.x IP ke through apne Jarvis/Home Assistant dashboard ko safely access kar sakta hai.
+
 
 ---
 
@@ -2137,6 +2025,13 @@ Subtopics: Text Embeddings, ChromaDB Lite, Querying Logs
 * Testing/Offline Phase: Developer Section 12 (Camera) aur PIR ke logs ko vector DB mein save karta hai.
 * Live Production Phase: User poochhta hai "Did anyone come to the door today?". LLM pehle ChromaDB se vectors match karta hai, relevant log text uthata hai, us text ko context mein padhta hai, aur accurate answer bolta hai.
 
+Topic 4: Vision-Language Models (VLMs)
+Subtopics: LLaVA / Qwen-VL Architecture, Multi-modal Prompts, Local Image Inference
+
+🔑 KEYWORDS DUMP for Topic 4:
+[VLM, Vision Language Model, LLaVA, Qwen-VL, multi-modal, base64 encode, Ollama image prompt, scene analysis]
+
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -2201,7 +2096,7 @@ Subtopics: GPIO Initialization, Try Except Cleanup, State Transition Logic, Move
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[RPi.GPIO, gpio.setMode, gpio.BCM, PIR_pin, gpio.setup, gpio.IN, while True, gpio.input, time.sleep, 0.01, 100Hz, try except KeyboardInterrupt, gpio.cleanup, last_PIR_state, GPIO.LOW, GPIO.HIGH, low to low, low to high, high to low, high to high, movement_timer, time.time(), move_detect_threshold, last_time_photo_taken, min_duration_between_photos, 60 seconds, LED_in, 17, GPIO.OUT, gpio.output]
+[gpiozero, gpio.setMode, gpio.BCM, PIR_pin, gpio.setup, gpio.IN, while True, gpio.input, time.sleep, 0.01, 100Hz, try except KeyboardInterrupt, gpio.cleanup, last_PIR_state, GPIO.LOW, GPIO.HIGH, low to low, low to high, high to low, high to high, movement_timer, time.time(), move_detect_threshold, last_time_photo_taken, min_duration_between_photos, 60 seconds, LED_in, 17, GPIO.OUT, gpio.output]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
