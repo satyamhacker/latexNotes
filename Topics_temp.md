@@ -1041,7 +1041,7 @@ Subtopics: Pre-Wiring Steps, PIR Pin Layout, Ground Connection, 5V Power Connect
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[power off, remove power cable, remove SD card, female to female wire, male to female wires, 10 kilo ohm resistor, ground, black wire, orange cable, 3.3 volt pin, 5 volt pin, ⭐5 volts, external side, internal side, GPIO number 4, metallic parts]
+[user input, 0, 1, int, input(), if structure, exit, gpiozero, from gpiozero import LED, led = LED(17), ⭐==, led.off(), elif, led.on(), else, print, string cast, time.sleep(2)]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
@@ -1068,7 +1068,7 @@ Subtopics: Boot Calibration Time, Module Imports, GPIO Setup, Internal Pull-Down
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[⭐calibrate, one minute, weird data, RPI.GPIO, time module, gpiozero, GPIO.bcm, gpiozero cleanup logic, PIR_pin=4, gpiozero, GPIO.in, pullUpDown, ⭐gpiozero, pull-down resistor, pull-up resistor, internal resistor, default state 0, floating values, 3.3 volts, physical pull-down resistor, gpiozero, time.sleep, 0.1, 10 Hz, 1, 0, print]
+[⭐calibrate, one minute, weird data, gpiozero, from gpiozero import MotionSensor, pir = MotionSensor(4), pir.wait_for_motion(), pir.wait_for_no_motion(), time.sleep, 0.1, print]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -1823,6 +1823,24 @@ Subtopics: Broker Concept, Publish-Subscribe Model, Topics Hierarchy, Mosquitto 
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: Pi ab ek central Hub ban gaya hai. Ghar ke kisi bhi ESP32 sensor se data directly Pi par wirelessly aata hai milliseconds mein.
 
+
+--14--Industrial IoT & Wireless Protocols--
+Topic 2: The Matter & Thread Revolution
+Subtopics: Matter Standard Concept, Thread Mesh Networks, OpenThread Border Router (OTBR), SkyConnect / Connect Z Hardware
+
+[📊 SCOPE SIGNAL for Topic 2:
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Explanation of the modern universal smart home standard
+* Explicit emphasis by speaker: "Zigbee is great, but Matter over Thread is the 2026 standard. Your Pi must act as a Border Router."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Matter protocol, Thread mesh network, IPv6, OTBR, OpenThread Border Router, Home Home Assistant SkyConnect, Sonoff Zigbee 3.0 dongle, multiprotocol, universal compatibility, low power, smart locks]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+* Live Production Phase: Developer USB port mein SkyConnect dongle lagata hai aur Home Assistant mein OTBR add-on enable karta hai. Ab Pi ek Thread router ban gaya hai, jo Apple HomeKit ya Google Home ke Matter devices ko directly local network par bina cloud ke control kar sakta hai.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1831,6 +1849,7 @@ Subtopics: Broker Concept, Publish-Subscribe Model, Topics Hierarchy, Mosquitto 
 
 Section 14: Industrial IoT & Wireless Protocols
 Topic 1: MQTT Protocol Architecture
+Topic 2: The Matter & Thread Revolution
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 1 | Subtopics: 4
@@ -1963,6 +1982,25 @@ Subtopics: Piper TTS, Voice Models, Audio Playback (Aplay)
 
 * Application Phase: STT se mila hua text (ya LLM ka response) Piper TTS mein pipe (`|`) kiya jata hai. Piper use turant audio (.wav) mein convert karta hai aur `aplay` command se speaker pe real-time mein play karta hai.
 
+
+--16--Iron Man Voice Interface--
+Topic 3: Industrial Audio Output (I2S DAC Amplification)
+Subtopics: Flaws of Analog Audio, I2S Digital Audio Protocol, MAX98357A DAC Setup, 3W Speaker Wiring, ALSA Configuration
+
+[📊 SCOPE SIGNAL for Topic 3:
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Hardware wiring for loud, clear AI voice output
+* Explicit emphasis by speaker: "Do not use the 3.5mm jack for Jarvis. Use an I2S DAC for digital, noise-free, loud audio."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[I2S protocol, Inter-IC Sound, Digital to Analog Converter, DAC, ⭐MAX98357A, 3W speaker, 4 ohm, GPIO 18, GPIO 19, GPIO 21, BCLK, LRCK, DIN, ALSA configuration, /boot/config.txt, dtoverlay=max98357a]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+* Testing/Offline Phase: Developer breadboard par MAX98357A amplifier lagata hai aur Pi ke I2S GPIO pins (18, 19, 21) se connect karta hai.
+* Live Production Phase: Pi OS ke `/boot/config.txt` (ya `config.txt`) mein I2S overlay enable karne ke baad, Piper TTS ki awaaz directly digital signal ke through amplifier mein jati hai, jisse Jarvis ki aawaz poore kamre mein loud aur crystal clear aati hai bina kisi static noise ke.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1972,6 +2010,7 @@ Subtopics: Piper TTS, Voice Models, Audio Playback (Aplay)
 Section 16: Iron Man Voice Interface (Jarvis Core)
 Topic 1: Wake Word & Speech-to-Text (Local)
 Topic 2: Local Text-to-Speech (Piper)
+Topic 3: Industrial Audio Output (I2S DAC Amplification)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 2 | Subtopics: 7
@@ -2115,7 +2154,7 @@ Subtopics: GPIO Initialization, Try Except Cleanup, State Transition Logic, Move
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[gpiozero, MotionSensor, LED, pir = MotionSensor(4), led = LED(17), while True, pir.motion_detected, time.sleep, 0.01, 100Hz, try except KeyboardInterrupt, movement_timer, time.time(), move_detect_threshold, last_time_photo_taken, min_duration_between_photos]
+[gpiozero, MotionSensor, LED, pir = MotionSensor(4), led = LED(17), while True, pir.motion_detected, time.sleep, 0.01, 100Hz, try except KeyboardInterrupt, movement_timer, time.time(), move_detect_threshold, last_time_photo_taken, min_duration_between_photos, 60 seconds, led.on(), led.off()]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
