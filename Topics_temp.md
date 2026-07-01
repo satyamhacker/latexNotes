@@ -337,8 +337,9 @@ Topic 1: Headless Setup Overview & OS Flashing
 Topic 2: First Boot & Finding IP Address
 Topic 3: SSH Connection & Remote Terminal
 Topic 4: VNC Setup & Desktop Configuration
-Topic 5: Updating Wi-Fi Headlessly (NetworkManager) (Troubleshooting)
+Topic 5: Updating Wi-Fi Headlessly (NetworkManager)
 Topic 6: Advanced Storage (Upgrading to PCIe NVMe)
+
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 6 | Subtopics: 32
@@ -906,6 +907,23 @@ Subtopics: RP1 Southbridge Architecture, Python-lgpio Backend, Gpiozero Initiali
 
 --1--Control Raspberry Pi's GPIOs with Python--
 Topic 3: User Input LED Control (Activity)
+Subtopics: Combining Inputs and Outputs, Hardware State Logic, Interactive Circuits
+
+[📊 SCOPE SIGNAL for Topic 3:
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Activity explanation linking the LED and Button
+* Explicit emphasis by speaker: "Now we combine both: when the button is pressed, the LED turns on."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[interactive circuit, input output link, button.when_pressed, led.on, button.when_released, led.off, event-driven hardware]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+* Testing/Offline Phase: Developer ek hi script mein input (Button) aur output (LED) define karta hai, aur button press karke physical light trigger hone ka test karta hai.
+
+--1--Control Raspberry Pi\'s GPIOs with Python--
+Topic 4: User Input LED Control (Activity)
 Subtopics: Combining Inputs and Outputs, Hardware State Logic, Interactive Circuits
 
 [📊 SCOPE SIGNAL for Topic 3:
@@ -1923,16 +1941,38 @@ Subtopics: TFLite Runtime, MobileNet SSD, Label Mapping, Confidence Thresholds, 
 Topic 4: Industrial AI Security (Frigate NVR)
 Subtopics: Network Video Recorder, RTSP Streams, Frigate Docker Setup, Core Inference
 
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Explanation of replacing basic scripts with a robust NVR
+* Explicit emphasis by speaker: "For true 24/7 security, do not rely on a simple Python loop. Use Frigate NVR in Docker to track objects and record events seamlessly."
+]
+
 🔑 KEYWORDS DUMP for Topic 4:
-[Frigate NVR, Docker container, RTSP camera stream, WebRTC, continuous recording, AI object tracking, zone detection]
+[Frigate NVR, Docker container, RTSP camera stream, WebRTC, continuous recording, AI object tracking, zone detection, hardware acceleration, MQTT integration]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Application Phase: Developer simple OpenCV scripts ko stop karta hai aur Docker Compose ke through Frigate NVR deploy karta hai. Frigate camera feed ko directly ingest karke Home Assistant ko real-time MQTT alerts bhejta hai.
 
 Topic 5: Hardware Acceleration (Hailo NPU)
-Subtopics: CPU Bottlenecks, Hailo-8L Architecture, Offloading Inference
+Subtopics: CPU Bottlenecks, Hailo-8L Architecture, Offloading Inference, Pi 5 PCIe Configuration
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: Upgrading hardware for high-framerate AI
+* Explicit emphasis by speaker: "Running YOLO on the Pi's CPU will max it out at 100%. To get 30 FPS, you must offload the math to the Hailo Neural Processing Unit via the PCIe slot."
+]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[NPU, Hailo-8L, Raspberry Pi AI Kit, 13 TOPS, PCIe gen 2, hardware acceleration, offloading inference, CPU bottleneck]
+[NPU, Hailo-8L, Raspberry Pi AI Kit, 13 TOPS, PCIe gen 2, hardware acceleration, offloading inference, CPU bottleneck, AI co-processor, low power consumption]
 
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
+* Mastery Phase: Developer Pi 5 ke PCIe slot mein Hailo-8L AI Kit install karta hai. Frigate NVR / YOLO script ko reconfigure karke inference engine ko `cpu` se `hailo` par switch karta hai, jisse CPU load 90% se 10% par drop ho jata hai aur FPS triple ho jate hain.
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1964,7 +2004,8 @@ Speaker is section mein Raspberry Pi par Flask framework use karke web server ba
 Topic 1 & 2: Asynchronous Web Servers with FastAPI & Uvicorn
 Subtopics: FastAPI Concept, Async/Await logic, Uvicorn ASGI Server, Non-blocking AI Inference, Host Configuration
 
-[📊 SCOPE SIGNAL for Topic 1 & 2:
+[📊 SCOPE SIGNAL for Topic 4:
+
 * Depth Level: Deep
 * Coverage Angle: Both
 * Transcript mein content volume: Long explanation + code + demo
@@ -1982,7 +2023,10 @@ Subtopics: FastAPI Concept, Async/Await logic, Uvicorn ASGI Server, Non-blocking
 Topic 3: Connecting GPIO Input to FastAPI Endpoints
 Subtopics: Push Button Async Route, GPIO Setup, Button State Check, JSON Return Statements
 
-[📊 SCOPE SIGNAL for Topic 3:
+Topic 5: Hardware Acceleration (Hailo NPU)
+Subtopics: CPU Bottlenecks, Hailo-8L Architecture, Offloading Inference, Pi 5 PCIe Configuration
+
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
 * Coverage Angle: Practical only
@@ -2015,7 +2059,7 @@ Subtopics: Dynamic URL Parameters, LED Pin Validation, State Validation, Multipl
 🔑 KEYWORDS DUMP for Topic 4:
 [`@app.post('/led/{led_pin}/state/{led_state}')`, `trigger_led(led_pin, led_state)`, `from gpiozero import LED`, `led_dict = {17: LED(17), 27: LED(27), 22: LED(22)}`, validation, `if led_pin not in led_dict`, wrong GPIO number, `if led_state == 0`, `led_dict[led_pin].off()`, `led_dict[led_pin].on()`, HTTPException, status_code=404, URL parameters]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Developer ek array `[17, 27, 22]` banata hai aur for loop use karke sabhi LEDs ko `gpiozero` pe initialize aur power off karta hai. Phir dynamic URL variables logic likhta hai.
 * Fixing/Iteration Phase: Developer jaan-boojh kar URL mein galat pin (e.g., 18) ya galat state (e.g., 2) daal kar test karta hai. Code internal error throw karne ke bajay custom error text return karta hai ("wrong GPIO number").
