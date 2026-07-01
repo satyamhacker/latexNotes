@@ -1961,32 +1961,12 @@ Subtopics: CPU Bottlenecks, Hailo-8L Architecture, Offloading Inference
 Section 13: Modern Vision & Local Edge Security
 Topic 1: Libcamera Stack & Modern OS Capture
 Topic 2: Real-Time AI Vision (YOLOv11 & GStreamer)
-Subtopics: Dropping Legacy CV2 Cascades, YOLO Architecture, GStreamer Pipelines, Quantized NCNN/TFLite Models, Zero-False-Positive Filtering
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Long explanation migrating from basic motion to deep learning
-* Key terms from transcript: YOLOv11, ultralytics, GStreamer, NCNN, bounding box, confidence threshold
-* Explicit emphasis by speaker: "PIR is blind. Haar cascades are ancient. We use YOLO to detect exact objects like 'Person' or 'Car' at 30 FPS on the edge."
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[OpenCV, python3-opencv, YOLOv11, ultralytics, ⭐quantized model, NCNN, TFLite, GStreamer pipeline, bounding box, confidence threshold, 0.70, COCO dataset, false positive elimination, real-time FPS]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer Ultralytics package install karta hai aur quantized YOLOv11 nano model load karta hai. Camera feed directly GStreamer pipeline se model mein pass hoti hai.
-* Fixing/Iteration Phase: Agar frame rate drop hota hai, developer resolution ko 640x640 pe lock karta hai aur hardware inference enable karta hai.
-* Live Production Phase: System ab sirf motion par trigger nahi karta, balki strictly tabhi alert bhejta hai jab "Person" detect hota hai with >70% confidence.
-
 Topic 3: TensorFlow Lite (TFLite) for Edge AI
-
 Topic 4: Industrial AI Security (Frigate NVR)
 Topic 5: Hardware Acceleration (Hailo NPU)
 
 📊 PHASE SUMMARY:
+Sections: 1 | Topics: 5 | Subtopics: 21
 Sections: 1 | Topics: 3 | Subtopics: 13
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2068,31 +2048,13 @@ Subtopics: Dynamic URL Parameters, LED Pin Validation, State Validation, Multipl
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Create a Web Application on Your Raspberry Pi with Flask
+Section 14: Create a Web Application on Your Raspberry Pi with FastAPI
 Topic 1 & 2: Asynchronous Web Servers with FastAPI & Uvicorn
 Topic 3: Connecting GPIO Input to FastAPI Endpoints
-Subtopics: Push Button Async Route, GPIO Setup, Button State Check, JSON Return Statements
-
-[📊 SCOPE SIGNAL for Topic 3:
-
-* Depth Level: Moderate
-* Coverage Angle: Practical only
-* Transcript mein content volume: Short explanation + code + demo
-* Key terms from transcript: /pushButton, gpiozero, button pin 26, async def, endpoint
-* Explicit emphasis by speaker: "Because this is FastAPI, we don't need Flask's jsonify. Just return a Python dictionary and FastAPI converts it to JSON automatically."
-]
-
-🔑 KEYWORDS DUMP for Topic 3:
-[⭐@app.get('/pushButton'), async def check_pushButton(), gpiozero, Button, button_pin = 26, button.is_pressed, ⭐Python dictionary return, automatic JSON serialization, FastAPI routing]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-
-* Testing/Offline Phase: Developer physical push button ko pin 26 par connect karta hai aur FastAPI mein naya async endpoint `@app.get('/pushButton')` define karke GPIO logic likhta hai.
-* Live Production Phase: User jab apne browser mein `/pushButton` URL refresh karta hai, tab server physically button ka state check karta hai aur screen par real-time hardware status JSON format mein print kar deta hai.
-
 Topic 4: Dynamic Routes & GPIO Output Control
 
 📊 PHASE SUMMARY:
+Sections: 1 | Topics: 4 | Subtopics: 18
 Sections: 1 | Topics: 4 | Subtopics: 18
 
 
@@ -2231,10 +2193,13 @@ Subtopics: Dangers of Port Forwarding, CGNAT Bypass, Tailscale VPN, WireGuard Pr
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 16: The Smart Home OS (Home Assistant)
+Section 16: The Smart Home OS (Home Assistant & Orchestration)
 Topic 1: Home Assistant Setup & UI
+Topic 2: Orchestrating the Brain (Docker Compose)
+Topic 3: Secure Remote Access (Zero-Trust / Tailscale)
 
 📊 PHASE SUMMARY:
+Sections: 1 | Topics: 3 | Subtopics: 12
 Sections: 1 | Topics: 1 | Subtopics: 4
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
