@@ -138,6 +138,24 @@ Subtopics: Active Coolers, 27W Power Supply Unit, Pi 5 Requirements
 * Live Production Phase: (N/A)
 * Additional context: Pi 5 generates significant heat and requires proper cooling.
 
+
+--1--Introduction to the Course--
+Topic 7: Industrial Power (PoE & UPS Backup)
+Subtopics: Power over Ethernet (PoE) HAT, Uninterruptible Power Supply (UPS), Battery Backup, PiSugar/Waveshare HATs
+
+[📊 SCOPE SIGNAL for Topic 7:
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Explanation of keeping the system alive 24/7
+* Explicit emphasis by speaker: "A security system is useless if it turns off during a power cut. Always use a UPS or PoE."
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[Power over Ethernet, PoE HAT, IEEE 802.3af, LAN cable power, UPS HAT, Uninterruptible Power Supply, PiSugar, Waveshare, battery backup, safe shutdown script, 24/7 uptime, continuous security]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+* Live Production Phase: Developer Pi par UPS HAT lagata hai. Jab mains power cut hoti hai, UPS instantly battery par switch ho jata hai aur Pi ko signal bhejta hai. Agar battery 10% se kam ho, toh Pi automatically safe shutdown trigger kar deta hai taaki SD/eMMC corrupt na ho.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -151,6 +169,7 @@ Topic 3: Raspberry Pi Hardware Anatomy
 Topic 4: Required Materials & Components
 Topic 5: Safety & Learning Best Practices
 Topic 6: Thermal Management & Power Architecture
+Topic 7: Industrial Power (PoE & UPS Backup)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 6 | Subtopics: 25
@@ -779,13 +798,13 @@ Subtopics: Input Setup, Constant Variable Convention, Reading Input State, High 
 * Depth Level: Moderate
 * Coverage Angle: Both
 * Transcript mein content volume: Code execution + demo
-* Key terms from transcript: button pin, uppercase variables, gpiozero, GPIO.in, GPIO.input, high, low, while true
+* Key terms from transcript: button pin, uppercase variables, gpiozero, GPIO.in, gpiozero, high, low, while true
 * Explicit emphasis by speaker: Speaker kehta hai ki variables ko uppercase mein rakhne ka matlab hai (conventionally) ki usse baad mein change nahi karna hai.
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[gpiozero, time, GPIO.setmode, GPIO.BCM, gpiozero cleanup logic, buttonPin, ⭐uppercase variables, convention, 26, gpiozero, GPIO.IN, GPIO.input, high, low, 1, 0, print, while True, time.sleep(1)]
+[gpiozero, time, Button, button = Button(26), button.is_pressed, button.wait_for_press, while True, time.sleep(0.1), event-driven, object-oriented]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
@@ -835,7 +854,7 @@ Subtopics: Activity 5 Challenge, GPIO Configuration, Infinite While Loop, Button
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[gpiozero as GPIO, time, GPIO.setMode, GPIO.BCM, gpiozero, LED pin 17, button pin 26, GPIO.OUT, GPIO.IN, gpiozero cleanup logic, while True, GPIO.input, GPIO.HIGH, GPIO.output, GPIO.LOW, activity5, Task manager, CPU usage, 25%, 27%, four Cores, 2%, 3%, 5%, ⭐time.sleep, 0.01, ⭐100 Hertz]
+[time, gpiozero, gpiozero, gpiozero, LED pin 17, button pin 26, gpiozero, gpiozero, gpiozero cleanup logic, while True, gpiozero, gpiozero, gpiozero, gpiozero, activity5, Task manager, CPU usage, 25%, 27%, four Cores, 2%, 3%, 5%, ⭐time.sleep, 0.01, ⭐100 Hertz]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -889,12 +908,12 @@ Subtopics: Activity 6 Challenge, Previous Button State, State Transition Detecti
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[toggle the LEDs, gpiozero, time, GPIO.BCM, gpiozero cleanup logic, LED1 pin 17, LED2 pin 27, LED3 pin 22, button pin 26, GPIO.OUT, GPIO.IN, GPIO.LOW, previous_button_state, current button state, GPIO.input, !=, different from, low to high, high to low, GPIO.HIGH, ⭐state machine, LED index, 0, 1, 2, if, elif, else, activity6]
+[toggle the LEDs, gpiozero, time, gpiozero, gpiozero cleanup logic, LED1 pin 17, LED2 pin 27, LED3 pin 22, button pin 26, gpiozero, gpiozero, gpiozero, previous_button_state, current button state, gpiozero, !=, different from, low to high, high to low, gpiozero, ⭐state machine, LED index, 0, 1, 2, if, elif, else, activity6]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
 * Testing/Offline Phase: Developer ek infinite loop likhta hai jo lagataar button ka current state padhta hai aur usse `previous_button_state` variable mein saved state se compare karta hai.
-* Fixing/Iteration Phase: Agar state different hai aur current state `GPIO.HIGH` hai, tabhi developer ek state machine (`led_index`) trigger karta hai jo sequentially current index wali LED on karti hai aur doosri LEDs off karti hai.
+* Fixing/Iteration Phase: Agar state different hai aur current state `gpiozero` hai, tabhi developer ek state machine (`led_index`) trigger karta hai jo sequentially current index wali LED on karti hai aur doosri LEDs off karti hai.
 * Live Production Phase: Speaker mention karta hai ki button inputs padhte waqt ye previous vs current state comparison wali structure robotics aur hardware deal karne mein frequently use hoti hai.
 * Additional context: Real-world physical interaction ensure karti hai ki finger hold karne ya release karne se code falsely trigger na ho.
 
@@ -916,7 +935,7 @@ Subtopics: Activity 7 Challenge, LED Pin List Array, For Loop Pin Setup, Custom 
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[activity 7, ⭐arrays, LED pin list, [17, 27, 22], for loop, for pin in led_pin_list, gpiozero, GPIO.OUT, GPIO.LOW, custom function, def powerOnSelectedLEDOnly(), selected_led_pin, ==, not in, return, exit, data validation, led_index += 1, ⭐len(), >=, boundary check, parameter, activity7]
+[activity 7, ⭐arrays, LED pin list, [17, 27, 22], for loop, for pin in led_pin_list, gpiozero, gpiozero, gpiozero, custom function, def powerOnSelectedLEDOnly(), selected_led_pin, ==, not in, return, exit, data validation, led_index += 1, ⭐len(), >=, boundary check, parameter, activity7]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -1043,18 +1062,18 @@ Subtopics: Boot Calibration Time, Module Imports, GPIO Setup, Internal Pull-Down
 * Depth Level: Deep
 * Coverage Angle: Practical only
 * Transcript mein content volume: Long explanation with complete python code writing
-* Key terms from transcript: calibration, one minute, RPI.GPIO, time module, GPIO.setMode, GPIO.bcm, gpiozero, GPIO.in, pullUpDown, GPIO.pudDown, internal resistor, pull-up, floating values, default state, GPIO.input, time.sleep
+* Key terms from transcript: calibration, one minute, RPI.GPIO, time module, gpiozero, GPIO.bcm, gpiozero, GPIO.in, pullUpDown, gpiozero, internal resistor, pull-up, floating values, default state, gpiozero, time.sleep
 * Explicit emphasis by speaker: Sensor ko on hone ke baad kam se kam 1 minute chahiye calibrate hone ke liye, warna weird data aayega.
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[⭐calibrate, one minute, weird data, RPI.GPIO, time module, GPIO.setMode, GPIO.bcm, gpiozero cleanup logic, PIR_pin=4, gpiozero, GPIO.in, pullUpDown, ⭐GPIO.pudDown, pull-down resistor, pull-up resistor, internal resistor, default state 0, floating values, 3.3 volts, physical pull-down resistor, GPIO.input, time.sleep, 0.1, 10 Hz, 1, 0, print]
+[⭐calibrate, one minute, weird data, RPI.GPIO, time module, gpiozero, GPIO.bcm, gpiozero cleanup logic, PIR_pin=4, gpiozero, GPIO.in, pullUpDown, ⭐gpiozero, pull-down resistor, pull-up resistor, internal resistor, default state 0, floating values, 3.3 volts, physical pull-down resistor, gpiozero, time.sleep, 0.1, 10 Hz, 1, 0, print]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
 * Testing/Offline Phase: Developer Pi start hone ke baad 1 minute wait karta hai calibration ke liye, uske baad Python script run karke sensor ke aage move karta hai yeh dekhne ke liye ki console mein '1' print ho raha hai ya '0'.
-* Fixing/Iteration Phase: Agar sensor floating ya unreliable values deta hai (between 0 and 3.3V), toh developer code mein `pullUpDown=GPIO.pudDown` argument add karta hai taaki default signal stable aur low rahe.
+* Fixing/Iteration Phase: Agar sensor floating ya unreliable values deta hai (between 0 and 3.3V), toh developer code mein `pullUpDown=gpiozero` argument add karta hai taaki default signal stable aur low rahe.
 * Live Production Phase: (N/A)
 * Additional context: Speaker ne physical resistor (10k ohm) aur internal software resistor dono approach ka zikr kiya data stabilize karne ke liye.
 
@@ -1067,17 +1086,17 @@ Subtopics: Activity Objective, LED Setup Code, Motion Conditional Logic, Loop Fr
 * Depth Level: Moderate
 * Coverage Angle: Practical only
 * Transcript mein content volume: Activity explanation followed by code solution and real-world edge cases
-* Key terms from transcript: LED pin 17, GPIO.out, GPIO.output, GPIO.low, GPIO.high, if statement, else statement, false positives, false negatives, 100 Hertz
+* Key terms from transcript: LED pin 17, GPIO.out, gpiozero, GPIO.low, GPIO.high, if statement, else statement, false positives, false negatives, 100 Hertz
 * Explicit emphasis by speaker: None
 * Speaker ne jo analogies/examples use kiye: Light aur wind ka example diya as causes for false positives.
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[LED pin 17, gpiozero, GPIO.out, GPIO.output, GPIO.low, GPIO.high, if statement, else statement, ==, time.sleep, 0.01, 100 Hertz, false positives, false negatives, light, strong light, wind, quality of PIR sensor]
+[LED pin 17, gpiozero, GPIO.out, gpiozero, GPIO.low, GPIO.high, if statement, else statement, ==, time.sleep, 0.01, 100 Hertz, false positives, false negatives, light, strong light, wind, quality of PIR sensor]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
-* Testing/Offline Phase: Developer code mein GPIO.input check karta hai; agar movement (HIGH) aati hai toh LED on (GPIO.high) karta hai, warna LED off rakhta hai, aur haath move kar ke test karta hai.
+* Testing/Offline Phase: Developer code mein gpiozero check karta hai; agar movement (HIGH) aati hai toh LED on (GPIO.high) karta hai, warna LED off rakhta hai, aur haath move kar ke test karta hai.
 * Fixing/Iteration Phase: Agar system mein false positives aate hain, toh developer room ki lighting check karta hai, wind source band karta hai, ya sensor ki quality evaluate karta hai taaki trigger theek se kaam kare.
 * Live Production Phase: (N/A)
 * Additional context: (N/A)
@@ -1718,7 +1737,7 @@ Subtopics: Push Button Route, GPIO Setup, Button State Check, Return Statements
 * Depth Level: Moderate
 * Coverage Angle: Practical only
 * Transcript mein content volume: Short explanation + code + demo
-* Key terms from transcript: /pushButton, gpiozero, button pin 26, GPIO.IN, GPIO.input, GPIO.HIGH
+* Key terms from transcript: /pushButton, gpiozero, button pin 26, gpiozero, gpiozero, gpiozero
 * Explicit emphasis by speaker: Else block is not mandatory — speaker ne highlight kiya ki jab return use hota hai, toh function exit ho jata hai, isliye else likhna zaroori nahi hai.
 * Speaker ne jo analogies/examples use kiye: None
 ]
@@ -1741,17 +1760,17 @@ Subtopics: Dynamic URL Parameters, LED Pin Validation, State Validation, Multipl
 * Depth Level: Deep
 * Coverage Angle: Practical only
 * Transcript mein content volume: Multiple examples + code + demo (Activity + Solution merged)
-* Key terms from transcript: /led/[int:led_pin](https://www.google.com/search?q=int:led_pin)/state/[int:led_state](https://www.google.com/search?q=int:led_state), trigger_led, led_pin_list, GPIO.OUT, validation, wrong GPIO number
+* Key terms from transcript: /led/[int:led_pin](https://www.google.com/search?q=int:led_pin)/state/[int:led_state](https://www.google.com/search?q=int:led_state), trigger_led, led_pin_list, gpiozero, validation, wrong GPIO number
 * Explicit emphasis by speaker: "Handle every possibility" — speaker ne emphasize kiya ki errors ko handle karna chahiye taaki server crash na ho aur user ko proper message mile.
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[`@app.get('/led/<int:led_pin>/state/<int:led_state>')`, `trigger_led(led_pin, led_state)`, `led_pin_list = [17, 27, 22]`, `gpiozero`, `GPIO.OUT`, `GPIO.output`, `GPIO.LOW`, `GPIO.HIGH`, validation, `if not led_pin in led_pin_list`, wrong GPIO number, `if led_state == 0`, `if led_state == 1`, state must be 0 or 1, return ok, internal error, 500 error, 404 error, URL parameters]
+[`@app.get('/led/<int:led_pin>/state/<int:led_state>')`, `trigger_led(led_pin, led_state)`, `led_pin_list = [17, 27, 22]`, `gpiozero`, `gpiozero`, `gpiozero`, `gpiozero`, `gpiozero`, validation, `if not led_pin in led_pin_list`, wrong GPIO number, `if led_state == 0`, `if led_state == 1`, state must be 0 or 1, return ok, internal error, 500 error, 404 error, URL parameters]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
-* Testing/Offline Phase: Developer ek array `[17, 27, 22]` banata hai aur for loop use karke sabhi LEDs ko `GPIO.OUT` pe initialize aur power off karta hai. Phir dynamic URL variables logic likhta hai.
+* Testing/Offline Phase: Developer ek array `[17, 27, 22]` banata hai aur for loop use karke sabhi LEDs ko `gpiozero` pe initialize aur power off karta hai. Phir dynamic URL variables logic likhta hai.
 * Fixing/Iteration Phase: Developer jaan-boojh kar URL mein galat pin (e.g., 18) ya galat state (e.g., 2) daal kar test karta hai. Code internal error throw karne ke bajay custom error text return karta hai ("wrong GPIO number").
 * Live Production Phase: User externally browser se URL ko change karke (e.g., `/led/27/state/1`) specifically us physical LED ko power on ya off karta hai, completely remotely operate karte hue.
 * Additional context: N/A
@@ -2096,7 +2115,7 @@ Subtopics: GPIO Initialization, Try Except Cleanup, State Transition Logic, Move
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[gpiozero, gpio.setMode, gpio.BCM, PIR_pin, gpio.setup, gpio.IN, while True, gpio.input, time.sleep, 0.01, 100Hz, try except KeyboardInterrupt, gpio.cleanup, last_PIR_state, GPIO.LOW, GPIO.HIGH, low to low, low to high, high to low, high to high, movement_timer, time.time(), move_detect_threshold, last_time_photo_taken, min_duration_between_photos, 60 seconds, LED_in, 17, GPIO.OUT, gpio.output]
+[gpiozero, MotionSensor, LED, pir = MotionSensor(4), led = LED(17), while True, pir.motion_detected, time.sleep, 0.01, 100Hz, try except KeyboardInterrupt, movement_timer, time.time(), move_detect_threshold, last_time_photo_taken, min_duration_between_photos]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
@@ -2385,6 +2404,24 @@ Subtopics: RTOS vs Linux, Flight Controllers, Pixhawk, Companion Computer Concep
 * Learning Phase: Developer samajhta hai ki Pi ka kaam AI vision (computer vision) aur route planning hai, jabki Flight Controller (Pixhawk) ka kaam motors ko balance karna hai.
 * Application Phase: Developer Pi ko UART ke through Pixhawk se connect karta hai aur Python (MAVSDK) se MAVLink commands ("Go to coordinates X, Y") bhejta hai.
 
+
+--19--Conclusion--
+Topic 5: Industrial Deployment & Weather-Proofing
+Subtopics: IP Ratings (IP65/IP67), DIN Rail Mounts, 3D Printed Custom Enclosures, Thermal Paste
+
+[📊 SCOPE SIGNAL for Topic 5:
+* Depth Level: Surface
+* Coverage Angle: Conceptual only
+* Transcript mein content volume: Final tips on moving hardware outside the lab
+* Explicit emphasis by speaker: "Do not put a naked Raspberry Pi outside. Moisture and dust will short-circuit your GPIOs."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[IP65, IP67 waterproof, NEMA enclosures, DIN Rail mounting, factory floor, 3D printing, PLA vs PETG, custom casing, conformal coating, humidity protection, thermal pads]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+* Mastery Phase: Software aur wiring complete hone ke baad, developer 3D printer se custom case banata hai ya IP67 waterproof enclosure kharidta hai. Woh wires ke entry points ko silicone seal karta hai taaki outdoor security camera 5 saal tak bina corrosion ke chal sake.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -2396,6 +2433,7 @@ Topic 1: Course Recap
 Topic 2: Future Learning Paths
 Topic 3: Robotics, Drones & Hardware Protocols
 Topic 4: Drone Companion Architecture (MAVLink & Pixhawk)
+Topic 5: Industrial Deployment & Weather-Proofing
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 2 | Subtopics: 13
