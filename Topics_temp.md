@@ -170,7 +170,7 @@ Topic 5: Safety & Learning Best Practices
 Topic 6: Thermal Management & Power Architecture
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 25
+Sections: 1 | Topics: 7 | Subtopics: 29
 
 **Double-check steps performed (Internal Verification):**
 
@@ -290,7 +290,7 @@ Subtopics: raspi-config Utility, VNC Enablement, Auto Login Setup, Resolution Co
 * Live Production Phase: (N/A)
 * Additional context: Speaker ne explicitly warn kiya ki physical power nikalne se pehle humesha software shutdown karna zaroori hai, taaki SD card corrupt na ho.
 
-Topic 5: Updating Wi-Fi Headlessly (NetworkManager) (NetworkManager)
+Topic 5: Updating Wi-Fi Headlessly (NetworkManager)
 Subtopics: Headless Wi-Fi Reconfiguration, NetworkManager Connections, .nmconnection Files, UUID Generation, Secure Keyfiles
 
 [📊 SCOPE SIGNAL for Topic 5:
@@ -865,7 +865,6 @@ Sections: 1 | Topics: 5 | Subtopics: 28
 
 # Section 6: Control Raspberry Pi's GPIOs with Python
 
-
 ===Section 1: Control Raspberry Pi's GPIOs with Python===
 Speaker is section mein Raspberry Pi ke GPIO pins ka layout, hardware setup, aur Python (RPi.GPIO) ke through LED aur push button ko control karna sikhata hai.
 
@@ -874,33 +873,28 @@ Topic 1: GPIO Pinout & Basics
 Subtopics: Pi Pinout, Ground Pins, Power Pins, GPIO Pins, Voltage Limits, Input vs Output, Pin States, Alternate Functions
 
 [📊 SCOPE SIGNAL for Topic 1:
-
 * Depth Level: Moderate
 * Coverage Angle: Conceptual only
 * Transcript mein content volume: Long explanation
 * Key terms from transcript: Raspberry Pi 4, Raspberry Pi 3, Raspberry Pi 2, ground, power pins, 3.3V, 5V, GPIO, input pin, output pin, high, low, UART, I2C, SPI
 * Explicit emphasis by speaker: "The GPIOs are 3.3V pins and not 5V pins. That is very important."
-* Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
 [Raspberry Pi 4, Raspberry Pi 3, Raspberry Pi 2, pinout, ground, power pins, ⭐3.3V, 5V, GPIO, input pin, output pin, push button, LED, read data, write data, high, low, voltage, reserved pins, UART, I2C, SPI]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
 * Learning Phase: Speaker explain karta hai ki board par pins kaise grouped hain (power, ground, GPIOs) aur unki voltage limits kya hain.
 * Application Phase: Developer Python code likhte waqt inhi exact numbers ka use karta hai GPIOs se interact karne ke liye.
-* Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 
+--1--Control Raspberry Pi's GPIOs with Python--
 Topic 2: Blinking an LED (Modern lgpio/gpiozero Backend)
 Subtopics: RP1 Southbridge Architecture, Python-lgpio Backend, Gpiozero Initialization, High and Low States, Sleep Function, Object-Oriented Hardware
 
 [📊 SCOPE SIGNAL for Topic 2:
-
 * Depth Level: Deep
 * Coverage Angle: Practical only
 * Transcript mein content volume: Explanation of modern pin factories + code demo
-* Key terms from transcript: RP1 chip, lgpio, gpiozero, pin factory, LED object, time.sleep
 * Explicit emphasis by speaker: "Never `import RPi.GPIO`. It will crash on a Pi 5. We use the modern object-oriented `gpiozero` library with the `lgpio` backend."
 ]
 
@@ -908,85 +902,72 @@ Subtopics: RP1 Southbridge Architecture, Python-lgpio Backend, Gpiozero Initiali
 [RP1 southbridge, Linux 6.6+, ⭐lgpio, python3-lgpio, ⭐gpiozero, from gpiozero import LED, pin factory, led = LED(17), led.on(), led.off(), time.sleep(1), object-oriented hardware, automatic cleanup, garbage collection]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
 * Testing/Offline Phase: Developer Thonny IDE mein `gpiozero` se LED object import karta hai. `RPi.GPIO` ki tarah manual pin modes set karne ke bajaye, woh directly `led = LED(17)` define karta hai aur hardware ko object-oriented tarike se control karta hai. Program exit hone par `gpiozero` automatically pins release (cleanup) kar deta hai.
 
+--1--Control Raspberry Pi's GPIOs with Python--
+Topic 3: User Input LED Control (Activity)
+Subtopics: Combining Inputs and Outputs, Hardware State Logic, Interactive Circuits
+
+[📊 SCOPE SIGNAL for Topic 3:
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Activity explanation linking the LED and Button
+* Explicit emphasis by speaker: "Now we combine both: when the button is pressed, the LED turns on."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[interactive circuit, input output link, button.when_pressed, led.on, button.when_released, led.off, event-driven hardware]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+* Testing/Offline Phase: Developer ek hi script mein input (Button) aur output (LED) define karta hai, aur button press karke physical light trigger hone ka test karta hai.
+
+--1--Control Raspberry Pi's GPIOs with Python--
 Topic 4: Push Button Hardware Setup
 Subtopics: Safe Shutdown Process, Component List, Breadboard Mechanics, Ground Connection, Power Connection, GPIO Connection
 
 [📊 SCOPE SIGNAL for Topic 4:
-
 * Depth Level: Moderate
 * Coverage Angle: Practical only
 * Transcript mein content volume: Long explanation with step-by-step hardware demo
-* Key terms from transcript: shut down, VNC server, green LED, power cable, SD card, push button, 10 kilo ohm resistor, 1 kilo ohm resistor, breadboard, GPIO 26
 * Explicit emphasis by speaker: "make sure that your Raspberry Pi is correctly shut down"
-* Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
 [logout, shut down, VNC server, green LED, power cable, SD card, push button, 4 legs, 10 kilo ohm resistor, 1 kilo ohm resistor, male-to-male wire, male-to-female wire, breadboard, ground, 3.3 volt, plus line, minus line, ⭐GPIO 26, internal side]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
-
 * Testing/Offline Phase: Hardware changes karne se pehle developer Pi ko software level pe shutdown karta hai, 20 seconds wait karta hai jab tak green LED band na ho, aur power cable nikalta hai safe manipulation ke liye. Phir components ko breadboard par wire karta hai.
-* Fixing/Iteration Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 
+--1--Control Raspberry Pi's GPIOs with Python--
 Topic 5: Reading Push Button Inputs
 Subtopics: Input Setup, Constant Variable Convention, Reading Input State, High and Low Returns, Continuous Reading Loop
 
 [📊 SCOPE SIGNAL for Topic 5:
-
 * Depth Level: Moderate
 * Coverage Angle: Both
 * Transcript mein content volume: Code execution + demo
-* Key terms from transcript: button pin, uppercase variables, GPIO.setup, GPIO.in, GPIO.input, high, low, while true
 * Explicit emphasis by speaker: Speaker kehta hai ki variables ko uppercase mein rakhne ka matlab hai (conventionally) ki usse baad mein change nahi karna hai.
-* Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
 [gpiozero, time, Button, button = Button(26), button.is_pressed, button.wait_for_press, while True, time.sleep(0.1), event-driven, object-oriented]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
-
 * Testing/Offline Phase: Developer script chalata hai aur button press karke hardware input test karta hai. Jab button press hota hai toh console mein '1' print hota hai, aur chhodne par '0' print hota hai.
-* Fixing/Iteration Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 
 ---
 
-✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
-
 📋 EXTRACTED IN THIS PHASE:
 
-Section 1: Control Raspberry Pi's GPIOs with Python
+Section 6: Control Raspberry Pi's GPIOs with Python
 Topic 1: GPIO Pinout & Basics
 Topic 2: Blinking an LED (Modern lgpio/gpiozero Backend)
-Subtopics: RP1 Southbridge Architecture, Python-lgpio Backend, Gpiozero Initialization, High and Low States, Sleep Function, Object-Oriented Hardware
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Explanation of modern pin factories + code demo
-* Key terms from transcript: RP1 chip, lgpio, gpiozero, pin factory, LED object, time.sleep
-* Explicit emphasis by speaker: "Never `import RPi.GPIO`. It will crash on a Pi 5. We use the modern object-oriented `gpiozero` library with the `lgpio` backend."
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[RP1 southbridge, Linux 6.6+, ⭐lgpio, python3-lgpio, ⭐gpiozero, from gpiozero import LED, pin factory, led = LED(17), led.on(), led.off(), time.sleep(1), object-oriented hardware, automatic cleanup, garbage collection]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer Thonny IDE mein `gpiozero` se LED object import karta hai. `RPi.GPIO` ki tarah manual pin modes set karne ke bajaye, woh directly `led = LED(17)` define karta hai aur hardware ko object-oriented tarike se control karta hai. Program exit hone par `gpiozero` automatically pins release (cleanup) kar deta hai.
-
+Topic 3: User Input LED Control (Activity)
 Topic 4: Push Button Hardware Setup
 Topic 5: Reading Push Button Inputs
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 42
+Sections: 1 | Topics: 5 | Subtopics: 30
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
