@@ -1967,7 +1967,6 @@ Topic 5: Hardware Acceleration (Hailo NPU)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 5 | Subtopics: 21
-Sections: 1 | Topics: 3 | Subtopics: 13
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2054,7 +2053,6 @@ Topic 3: Connecting GPIO Input to FastAPI Endpoints
 Topic 4: Dynamic Routes & GPIO Output Control
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 18
 Sections: 1 | Topics: 4 | Subtopics: 18
 
 
@@ -2200,7 +2198,6 @@ Topic 3: Secure Remote Access (Zero-Trust / Tailscale)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 3 | Subtopics: 12
-Sections: 1 | Topics: 1 | Subtopics: 4
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
