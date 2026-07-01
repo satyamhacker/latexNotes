@@ -2611,23 +2611,25 @@ Subtopics: Password File Reading, Yagmail SMTP Client, Send Email Function, Atta
 
 --19--The Ultimate "Jarvis" Final Project--
 Topic 6: Non-Blocking FastAPI & Async SQL Queries
-Subtopics: FastAPI App Setup, Async Endpoints, Check Movement Route, File Line Counting, State Difference Logic, Global Keyword Usage
+Subtopics: FastAPI App Setup, Async Endpoints, Check Movement Route, SQL COUNT Queries, Stateless API Architecture
 
 [📊 SCOPE SIGNAL for Topic 6:
+
 * Depth Level: Deep
 * Coverage Angle: Both
 * Transcript mein content volume: Long explanation + logic breakdown for async state tracking
-* Key terms from transcript: FastAPI, app.get, async def, uvicorn, read permission, for line in f, line counter, photo counter, difference
-* Explicit emphasis by speaker: "Always use async def for your API routes so your AI doesn't block the web server."
+* Key terms from transcript: FastAPI, app.get, async def, uvicorn, SQLite cursor, fetchone, stateless
+* Explicit emphasis by speaker: "Never use global variables to track state in a web API. Your API must be stateless. It should ask the SQLite database for the total count every time the user refreshes the page."
 ]
 
 🔑 KEYWORDS DUMP for Topic 6:
-[FastAPI, app = FastAPI(), uvicorn.run, @app.get('/'), async def check_movement(), read logs, log_file_name, with open('r'), for line in f, line_counter, os.path.exists(), JSON response, difference computation, photo_counter, ⭐global photo_counter]
+[FastAPI, app = FastAPI(), uvicorn.run, @app.get('/check-movement'), async def check_movement(), sqlite3.connect, cursor.execute, SELECT COUNT(*), fetchone(), JSON response, dynamic difference computation, fast API response, ⭐stateless API]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
-* Testing/Offline Phase: Developer FastAPI script banata hai jo pehli script dwara banayi text file ko read karti hai.
-* Fixing/Iteration Phase: User ko total number batane ke bajaye, developer difference track karta hai (`line_counter - photo_counter`) taaki user ko sirf "new" photos dikhein.
-* Live Production Phase: Uvicorn server `0.0.0.0` host pe run karta hai. Client `/check-movement` route access karta hai, API asynchronously log parse karke fast JSON response return karti hai.
+
+* Testing/Offline Phase: Developer FastAPI script banata hai jo SQLite database connect karti hai.
+* Fixing/Iteration Phase: Developer code se purane `global photo_counter` aur file reading loops completely delete kar deta hai taaki API strictly database pe rely kare.
+* Live Production Phase: Uvicorn server `0.0.0.0` host pe run karta hai. Client `/check-movement` route access karta hai, API asynchronously SQLite execute karti hai aur microseconds mein accurate JSON response return karti hai bina event loop block kiye.
 
 --19--The Ultimate "Jarvis" Final Project--
 Topic 7: Web Interface & FastAPI StaticFiles
