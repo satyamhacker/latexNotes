@@ -1778,12 +1778,102 @@ Sections: 1 | Topics: 4 | Subtopics: 18
 
 ==================================================================================
 
-# Section 12: Modern Vision & Local Edge Security
+# Section 12: Modern API Integrations & Webhook Notifications
 
-===Section 12: Modern Vision & Local Edge Security===
+===Section 12: Modern API Integrations & Webhook Notifications===
+Speaker is section mein legacy email (SMTP) se aage badhkar modern IoT communication (REST APIs, Webhooks, aur JSON payloads) sikhata hai taaki hardware real-time mein smartphones par push notifications bhej sake.
+
+--12--Modern API Integrations & Webhook Notifications--
+Topic 1: Intro to REST APIs & The `requests` Module
+Subtopics: HTTP GET vs POST, JSON Payloads, Status Codes, `requests` Library Installation
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual & Practical
+* Transcript mein content volume: Shifting paradigm from email to APIs
+* Key terms from transcript: API, REST, GET, POST, JSON, status 200, pip install requests
+* Explicit emphasis by speaker: "In modern IoT, devices talk to APIs. You must master the `requests` library to make your Pi truly smart."
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[REST API, HTTP methods, GET request, POST request, JSON payload, HTTP 200 OK, HTTP 401 Unauthorized, ⭐uv pip install requests, import requests, endpoint URL]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Learning Phase: Developer samajhta hai ki API ek bridge hai. Woh terminal mein `requests` library install karta hai aur ek public test API ko GET request bhej kar JSON data terminal mein print karta hai.
+
+--12--Modern API Integrations & Webhook Notifications--
+Topic 2: Setting Up a Notification Bot (Telegram)
+Subtopics: Webhook Concepts, BotFather Creation, Chat IDs, Secure Tokens
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Setting up the receiving end for notifications
+* Explicit emphasis by speaker: "We use Telegram because it provides free, instant push notifications with zero latency compared to traditional emails."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Webhook, BotFather, Telegram Bot, API Token, chat_id, push notification, zero latency, bot privacy]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer apne phone par Telegram kholta hai, BotFather se ek naya bot create karta hai, aur API token copy karta hai taaki Pi us bot ke through messages bhej sake.
+
+--12--Modern API Integrations & Webhook Notifications--
+Topic 3: Secure Secrets Management (`.env` files)
+Subtopics: Dropping plain-text/hidden files, `python-dotenv`, Environment Variables, .gitignore
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Industry standard for hiding API keys
+* Explicit emphasis by speaker: "We used a simple hidden text file for emails, but for API keys, you must use `.env` files and `python-dotenv`. This is the professional standard."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[plain text vulnerability, python-dotenv, ⭐.env file, environment variables, os.getenv(), load_dotenv(), .gitignore, security standard, API key protection]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer project folder mein ek `.env` file banata hai aur usme `TELEGRAM_TOKEN=xyz` likhta hai. Phir Python mein `load_dotenv()` use karke secure tarike se token memory mein load karta hai bina code mein expose kiye.
+
+--12--Modern API Integrations & Webhook Notifications--
+Topic 4: Dispatching Alerts & Media via POST
+Subtopics: Constructing POST Requests, Multipart/Form-Data, Error Handling, Response Parsing
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Writing the Python script to send images
+* Explicit emphasis by speaker: "When sending images over an API, you can't just use standard JSON. You must use multipart/form-data."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[requests.post(), json=, data=, files=, multipart/form-data, binary read mode, 'rb', status_code verification, try-except requests.exceptions, instant delivery]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Live Production Phase: Developer Python script likhta hai jo camera ki photo ko `rb` (read binary) mode mein open karti hai, aur `requests.post` ke through bot API ko bhejti hai. Script run hote hi phone par 0.5 seconds mein photo popup ho jati hai.
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 4 | Subtopics: 16
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Section 13: Modern Vision & Local Edge Security
+
+===Section 13: Modern Vision & Local Edge Security===
 Speaker is section mein outdated legacy camera stack ko chhod kar modern `libcamera` aur OpenCV/TensorFlow Lite ka use karke camera ko "smart" banana sikhata hai taaki false alarms (PIR issues) fix ho sakein.
 
---12--Modern Vision & Local Edge Security--
+--13--Modern Vision & Local Edge Security--
 Topic 1: Libcamera Stack & Modern OS Capture
 Subtopics: Bullseye/Bookworm OS Updates, Libcamera-hello, Libcamera-still, Tuning Camera Parameters
 
@@ -1868,7 +1958,7 @@ Subtopics: CPU Bottlenecks, Hailo-8L Architecture, Offloading Inference
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 12: Modern Vision & Local Edge Security
+Section 13: Modern Vision & Local Edge Security
 Topic 1: Libcamera Stack & Modern OS Capture
 Topic 2: Real-Time AI Vision (YOLOv11 & GStreamer)
 Subtopics: Dropping Legacy CV2 Cascades, YOLO Architecture, GStreamer Pipelines, Quantized NCNN/TFLite Models, Zero-False-Positive Filtering
@@ -1905,12 +1995,12 @@ Sections: 1 | Topics: 3 | Subtopics: 13
 
 
 
-# Section 13: Create a Web Application on Your Raspberry Pi with FastAPI
+# Section 14: Create a Web Application on Your Raspberry Pi with FastAPI
 
-===Section 13: Create a Web Application on Your Raspberry Pi with FastAPI===
+===Section 14: Create a Web Application on Your Raspberry Pi with FastAPI===
 Speaker is section mein Raspberry Pi par Flask framework use karke web server banane aur usko GPIO pins se connect karne ka process explain karta hai.
 
---13--Create a Web Application on Your Raspberry Pi with FastAPI--
+--14--Create a Web Application on Your Raspberry Pi with FastAPI--
 Topic 1 & 2: Asynchronous Web Servers with FastAPI & Uvicorn
 Subtopics: FastAPI Concept, Async/Await logic, Uvicorn ASGI Server, Non-blocking AI Inference, Host Configuration
 
@@ -2011,12 +2101,12 @@ Sections: 1 | Topics: 4 | Subtopics: 18
 ==================================================================================
 
 
-# Section 14: Industrial IoT & Wireless Protocols
+# Section 15: Industrial IoT & Wireless Protocols
 
-===Section 14: Industrial IoT & Wireless Protocols===
+===Section 15: Industrial IoT & Wireless Protocols===
 Speaker is section mein jumper wires aur breadboards ko chhod kar industry-standard wireless communication (MQTT) aur MQTT Brokers ko setup karna sikhata hai 4 BHK home network ke liye.
 
---14--Industrial IoT & Wireless Protocols--
+--15--Industrial IoT & Wireless Protocols--
 Topic 1: MQTT Protocol Architecture
 Subtopics: Broker Concept, Publish-Subscribe Model, Topics Hierarchy, Mosquitto Installation
 
@@ -2040,7 +2130,7 @@ Subtopics: Broker Concept, Publish-Subscribe Model, Topics Hierarchy, Mosquitto 
 * Live Production Phase: Pi ab ek central Hub ban gaya hai. Ghar ke kisi bhi ESP32 sensor se data directly Pi par wirelessly aata hai milliseconds mein.
 
 
---14--Industrial IoT & Wireless Protocols--
+--15--Industrial IoT & Wireless Protocols--
 Topic 2: The Matter & Thread Revolution
 Subtopics: Matter Standard Concept, Thread Mesh Networks, OpenThread Border Router (OTBR), SkyConnect / Connect Z Hardware
 
@@ -2063,7 +2153,7 @@ Subtopics: Matter Standard Concept, Thread Mesh Networks, OpenThread Border Rout
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 14: Industrial IoT & Wireless Protocols
+Section 15: Industrial IoT & Wireless Protocols
 Topic 1: MQTT Protocol Architecture
 Topic 2: The Matter & Thread Revolution
 
@@ -2074,12 +2164,12 @@ Sections: 1 | Topics: 1 | Subtopics: 4
 
 ==================================================================================
 
-# Section 15: The Smart Home OS (Home Assistant & Orchestration)
+# Section 16: The Smart Home OS (Home Assistant & Orchestration)
 
-===Section 15: The Smart Home OS (Home Assistant & Orchestration)===
+===Section 16: The Smart Home OS (Home Assistant & Orchestration)===
 Flask server ko hata kar, speaker yahan Home Assistant Core install karna sikhata hai jo thousands of devices, automated routines, aur professional UI dashboard handle kar sakta hai.
 
---15--The Smart Home OS (Home Assistant & Orchestration)--
+--16--The Smart Home OS (Home Assistant & Orchestration)--
 Topic 1: Home Assistant Setup & UI
 Subtopics: Docker Installation, Home Assistant Container, Integrations, UI Dashboard
 
@@ -2141,7 +2231,7 @@ Subtopics: Dangers of Port Forwarding, CGNAT Bypass, Tailscale VPN, WireGuard Pr
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 15: The Smart Home OS (Home Assistant)
+Section 16: The Smart Home OS (Home Assistant)
 Topic 1: Home Assistant Setup & UI
 
 📊 PHASE SUMMARY:
@@ -2151,12 +2241,12 @@ Sections: 1 | Topics: 1 | Subtopics: 4
 
 ==================================================================================
 
-# Section 16: Iron Man Voice Interface (Jarvis Core)
+# Section 17: Iron Man Voice Interface (Jarvis Core)
 
-===Section 16: Iron Man Voice Interface===
+===Section 17: Iron Man Voice Interface===
 Cloud APIs (Alexa/Google) ko bypass karke, Pi par offline, 100% private, low-latency wake-word, Speech-to-Text aur Text-to-Speech pipeline setup karna.
 
---16--Iron Man Voice Interface--
+--17--Iron Man Voice Interface--
 Topic 1: Wake Word & Speech-to-Text (Local)
 Subtopics: Audio HAT Setup, Porcupine Wake Word, Whisper.cpp STT, Acoustic Model
 
@@ -2199,7 +2289,7 @@ Subtopics: Piper TTS, Voice Models, Audio Playback (Aplay)
 * Application Phase: STT se mila hua text (ya LLM ka response) Piper TTS mein pipe (`|`) kiya jata hai. Piper use turant audio (.wav) mein convert karta hai aur `aplay` command se speaker pe real-time mein play karta hai.
 
 
---16--Iron Man Voice Interface--
+--17--Iron Man Voice Interface--
 Topic 3: Industrial Audio Output (I2S DAC Amplification)
 Subtopics: Flaws of Analog Audio, I2S Digital Audio Protocol, MAX98357A DAC Setup, 3W Speaker Wiring, ALSA Configuration
 
@@ -2217,7 +2307,7 @@ Subtopics: Flaws of Analog Audio, I2S Digital Audio Protocol, MAX98357A DAC Setu
 * Testing/Offline Phase: Developer breadboard par MAX98357A amplifier lagata hai aur Pi ke I2S GPIO pins (18, 19, 21) se connect karta hai.
 * Live Production Phase: Pi OS ke `/boot/config.txt` (ya `config.txt`) mein I2S overlay enable karne ke baad, Piper TTS ki awaaz directly digital signal ke through amplifier mein jati hai, jisse Jarvis ki aawaz poore kamre mein loud aur crystal clear aati hai bina kisi static noise ke.
 
---16--Iron Man Voice Interface (Jarvis Core)--
+--17--Iron Man Voice Interface (Jarvis Core)--
 Topic 4: Acoustic Echo Cancellation (AEC) & Mic Arrays
 Subtopics: The Feedback Loop Problem, ReSpeaker Mic Array HAT, DSP (Digital Signal Processing), Far-field voice capture
 
@@ -2234,7 +2324,7 @@ Subtopics: The Feedback Loop Problem, ReSpeaker Mic Array HAT, DSP (Digital Sign
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 * Fixing/Iteration Phase: Developer dekhta hai ki TTS play hone par mic wapas trigger ho raha hai. Woh ek hardware DSP mic array (jaise ReSpeaker) install karta hai jo hardware level par speaker ki aawaz ko mic input se minus (cancel) kar deta hai, jisse Jarvis room ke doosre kone se bhi clear command sun pata hai.
 
---16--Iron Man Voice Interface (Jarvis Core)--
+--17--Iron Man Voice Interface (Jarvis Core)--
 Topic 5: Zero-Latency Output (Token Streaming & WebSockets)
 Subtopics: The TTFT (Time-To-First-Token) Problem, Chunking Text, WebSockets vs REST, Pipelining Ollama to Piper
 
@@ -2258,7 +2348,7 @@ Subtopics: The TTFT (Time-To-First-Token) Problem, Chunking Text, WebSockets vs 
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 16: Iron Man Voice Interface (Jarvis Core)
+Section 17: Iron Man Voice Interface (Jarvis Core)
 Topic 1: Wake Word & Speech-to-Text (Local)
 Topic 2: Local Text-to-Speech (Piper)
 Topic 3: Industrial Audio Output (I2S DAC Amplification)
@@ -2272,12 +2362,12 @@ Sections: 1 | Topics: 5 | Subtopics: 15
 
 ==================================================================================
 
-# Section 17: Local Agentic AI & RAG
+# Section 18: Local Agentic AI & RAG
 
-===Section 17: Local Agentic AI & RAG===
+===Section 18: Local Agentic AI & RAG===
 Raspberry Pi par Ollama run karke ek small parameter LLM ko host karna. AI ko Home Assistant ki APIs control karne dena (Function Calling) aur RAG ke through system logs read karana.
 
---17--Local Agentic AI & RAG--
+--18--Local Agentic AI & RAG--
 Topic 1: Ollama & Micro-LLMs
 Subtopics: Ollama Installation, Qwen 2.5 0.5B, Model Quantization, System Prompts
 
@@ -2342,7 +2432,7 @@ Subtopics: LLaVA / Qwen-VL Architecture, Multi-modal Prompts, Local Image Infere
 🔑 KEYWORDS DUMP for Topic 4:
 [VLM, Vision Language Model, LLaVA, Qwen-VL, multi-modal, base64 encode, Ollama image prompt, scene analysis]
 
---17--Local Agentic AI & RAG--
+--18--Local Agentic AI & RAG--
 Topic 5: LLM Memory Management & ZRAM
 Subtopics: Out-of-Memory (OOM) Killer, Swap Space Limits, ZRAM Concept, Configuring Compression
 
@@ -2359,7 +2449,7 @@ Subtopics: Out-of-Memory (OOM) Killer, Swap Space Limits, ZRAM Concept, Configur
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 * Testing/Offline Phase: Developer dekhta hai ki Ollama load hote hi Pi freeze ho gaya. Woh terminal mein `zram-tools` install karta hai jo RAM ke ek hisse ko compress kar deta hai, effectively 8GB RAM ko 12GB jaisa perform karne deta hai bina slow SSD swap use kiye.
 
---17--Local Agentic AI & RAG--
+--18--Local Agentic AI & RAG--
 Topic 6: Conversational Memory & Agentic Chains
 Subtopics: Short-term vs Long-term memory, LangChain Framework, Tool Binding, Agent Executor
 
@@ -2383,7 +2473,7 @@ Subtopics: Short-term vs Long-term memory, LangChain Framework, Tool Binding, Ag
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 17: Local Agentic AI & RAG
+Section 18: Local Agentic AI & RAG
 Topic 1: Ollama & Micro-LLMs
 Topic 2: Function Calling (Agentic Action)
 Topic 3: Local RAG (Retrieval-Augmented Generation)
@@ -2398,14 +2488,14 @@ Sections: 1 | Topics: 6 | Subtopics: 18
 
 ==================================================================================
 
-# Section 18: The Ultimate "Jarvis" Final Project
+# Section 19: The Ultimate "Jarvis" Final Project
 
 
-===Section 18: The Ultimate "Jarvis" Final Project===
+===Section 19: The Ultimate "Jarvis" Final Project===
 Pichle saare modern sections ko combine karke ek autonomous, voice-controlled, AI-vision smart home hub banana jo background mein systemd par chalta ho.
 Speaker is section mein course ke final project ka end-to-end implementation sikhata hai — PIR detection aur camera capture se lekar Flask web server aur systemd automation tak.
 
---18--The Ultimate "Jarvis" Final Project--
+--19--The Ultimate "Jarvis" Final Project--
 Topic 1: Project Architecture & Setup
 Subtopics: Project Result Demo, Program 1 Overview, Program 2 Overview, Development Approach
 
@@ -2429,7 +2519,7 @@ Subtopics: Project Result Demo, Program 1 Overview, Program 2 Overview, Developm
 * Live Production Phase: Final project mein do scripts lagataar run karti hain — ek hardware/sensor handle karti hai, aur doosri web server host karti hai jisse user remote browser se data check kar sake.
 * Additional context: Speaker batata hai ki programming mein Google use karna ek fundamental developer habit hai.
 
---18--The Ultimate "Jarvis" Final Project--
+--19--The Ultimate "Jarvis" Final Project--
 Topic 2: Event-Driven PIR Logic & Hardware Interrupts
 Subtopics: GPIO Initialization, Try Except Cleanup, State Transition Logic, Movement Timer Implementation, Photo Cooldown Logic, LED Indicator Setup
 
@@ -2453,7 +2543,7 @@ Subtopics: GPIO Initialization, Try Except Cleanup, State Transition Logic, Move
 * Live Production Phase: PIR sensor real-time mein loop karta hai. Jab 3 second continuous movement hoti hai aur cooldown period (60s) pass ho chuka hota hai, tabhi aage ka action trigger hota hai. LED visual feedback deti hai.
 * Additional context: (N/A)
 
---18--The Ultimate "Jarvis" Final Project--
+--19--The Ultimate "Jarvis" Final Project--
 Topic 3: Camera Module Integration (Picamera2)
 Subtopics: Picamera2 Initialization, libcamera Wrapper, Camera Warmup, Dynamic Filename Generation, capture_file Method
 
@@ -2471,7 +2561,7 @@ Subtopics: Picamera2 Initialization, libcamera Wrapper, Camera Warmup, Dynamic F
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 * Live Production Phase: Script start hote hi Picamera2 object initialize hota hai aur 2 seconds warmup leta hai. Jab PIR/OpenCV trigger hota hai, `picam2.capture_file()` directly hardware pipeline se optimized image local storage mein save kar deta hai.
 
---18--The Ultimate "Jarvis" Final Project--
+--19--The Ultimate "Jarvis" Final Project--
 Topic 4: Fast & Persistent Logging (SQLite Integration)
 Subtopics: Old Log Removal, OS Path Exists, Append Mode Concept, Update Log Function, Newline Formatting
 
@@ -2495,8 +2585,8 @@ Subtopics: Old Log Removal, OS Path Exists, Append Mode Concept, Update Log Func
 * Live Production Phase: Har photo lene ke baad, programme securely log file ko append mode mein open karta hai aur new image ka file path ek nayi line mein add kar deta hai.
 * Additional context: (N/A)
 
---18--The Ultimate "Jarvis" Final Project--
-Topic 5: Real-Time Media Alerts (Webhooks & Telegram Bot API)
+--19--The Ultimate "Jarvis" Final Project--
+Topic 5: Real-Time Media Alerts (Telegram Webhooks)
 Subtopics: Password File Reading, Yagmail SMTP Client, Send Email Function, Attachment Handling, Parameter Debugging
 
 [📊 SCOPE SIGNAL for Topic 5:
@@ -2519,7 +2609,7 @@ Subtopics: Password File Reading, Yagmail SMTP Client, Send Email Function, Atta
 * Live Production Phase: Photo save aur log hone ke baad, Yagmail trigger hota hai aur email send karta hai file as an attachment ke saath. Gmail aisi lagataar emails ko ek "thread" mein group kar deta hai.
 * Additional context: (N/A)
 
---18--The Ultimate "Jarvis" Final Project--
+--19--The Ultimate "Jarvis" Final Project--
 Topic 6: Non-Blocking FastAPI & Async SQL Queries
 Subtopics: FastAPI App Setup, Async Endpoints, Check Movement Route, File Line Counting, State Difference Logic, Global Keyword Usage
 
@@ -2539,7 +2629,7 @@ Subtopics: FastAPI App Setup, Async Endpoints, Check Movement Route, File Line C
 * Fixing/Iteration Phase: User ko total number batane ke bajaye, developer difference track karta hai (`line_counter - photo_counter`) taaki user ko sirf "new" photos dikhein.
 * Live Production Phase: Uvicorn server `0.0.0.0` host pe run karta hai. Client `/check-movement` route access karta hai, API asynchronously log parse karke fast JSON response return karti hai.
 
---18--The Ultimate "Jarvis" Final Project--
+--19--The Ultimate "Jarvis" Final Project--
 Topic 7: Web Interface & FastAPI StaticFiles
 Subtopics: Last Photo Extraction, HTML Break Tags, Flask Static Config, HTML Image Tag, String Quote Escaping
 
@@ -2567,8 +2657,8 @@ Subtopics: Last Photo Extraction, HTML Break Tags, Flask Static Config, HTML Ima
 * Live Production Phase: Web server ab sirf text nahi balki image ka direct reference (HTML tag) return karta hai jisse browser network folder se image fetch karke UI pe display karta hai.
 * Additional context: (N/A)
 
---18--The Ultimate "Jarvis" Final Project--
-Topic 8: Background Automation (Dynamic Systemd Daemons)
+--19--The Ultimate "Jarvis" Final Project--
+Topic 8: Background Automation (Dynamic Systemd Daemons & Venvs)
 Subtopics: Systemd Concept, Daemon Orchestration, Dynamic User Injection, ExecStart Configuration, Systemctl Enablement, Journalctl Debugging
 
 [📊 SCOPE SIGNAL for Topic 8:
@@ -2589,7 +2679,7 @@ Subtopics: Systemd Concept, Daemon Orchestration, Dynamic User Injection, ExecSt
 * Fixing/Iteration Phase: Agar background script fail ho jaye, toh developer andhe ke tarah guess karne ke bajaye `journalctl -u jarvis.service -f` chalata hai taaki real-time crash logs padh sake.
 * Live Production Phase: Pi boot hote hi systemd daemon automatically user ke exact credentials ke sath hardware and web APIs start kar deta hai.
 
---18--The Ultimate "Jarvis" Final Project--
+--19--The Ultimate "Jarvis" Final Project--
 Topic 9: Project Customizations (Outro)
 Subtopics: Parameter Tuning, Push Button Integration, Cron Job Concept
 
@@ -2619,15 +2709,15 @@ Subtopics: Parameter Tuning, Push Button Integration, Cron Job Concept
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 18: The Ultimate "Jarvis" Final Project
+Section 19: The Ultimate "Jarvis" Final Project
 Topic 1: Project Architecture & Setup
 Topic 2: Event-Driven PIR Logic & Hardware Interrupts
 Topic 3: Camera Module Integration (Picamera2)
 Topic 4: Fast & Persistent Logging (SQLite Integration)
-Topic 5: Real-Time Media Alerts (Webhooks & Telegram Bot API)
+Topic 5: Real-Time Media Alerts (Telegram Webhooks)
 Topic 6: Non-Blocking FastAPI & Async SQL Queries
 Topic 7: Web Interface & FastAPI StaticFiles
-Topic 8: Background Automation (Dynamic Systemd Daemons)
+Topic 8: Background Automation (Dynamic Systemd Daemons & Venvs)
 Topic 9: Project Customizations (Outro)
 
 📊 PHASE SUMMARY:
@@ -2639,13 +2729,13 @@ Sections: 1 | Topics: 9 | Subtopics: 42
 ==================================================================================
 
 
-# Section 19: Conclusion
+# Section 20: Conclusion
 
 
-===Section 19: Conclusion===
+===Section 20: Conclusion===
 Speaker is section mein course complete karne par congratulate karta hai, past concepts ka quick recap deta hai aur future learning ke liye advanced topics aur project-based approach suggest karta hai.
 
---19--Conclusion--
+--20--Conclusion--
 Topic 1: Course Recap
 Subtopics: Raspberry Pi OS Installation, Headless Configuration, Python 3 Programming, GPIO Hardware Management, Terminal Usage, Image Sending, Camera Module, Web Server, Final Project
 
@@ -2669,7 +2759,7 @@ Subtopics: Raspberry Pi OS Installation, Headless Configuration, Python 3 Progra
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
 * Additional context: Speaker purely past learning modules ka high-level review de raha hai.
 
---19--Conclusion--
+--20--Conclusion--
 Topic 2: Future Learning Paths
 Subtopics: Project Based Learning, Advanced Hardware Protocols, Advanced Camera Processing, Web Development
 
@@ -2694,7 +2784,7 @@ Subtopics: Project Based Learning, Advanced Hardware Protocols, Advanced Camera 
 * Additional context: Speaker ne emphasis diya hai ki multiple paths ek saath explore kiye ja sakte hain, par driving force hamesha ek practical project hona chahiye.
 
 
---19--Conclusion--
+--20--Conclusion--
 Topic 3: Robotics, Drones & Hardware Protocols
 Subtopics: Motor Control, Pulse Width Modulation (PWM), I2C / SPI Buses, PCA9685 Servo Driver, Introduction to ROS 2
 
@@ -2755,7 +2845,7 @@ Subtopics: IP Ratings (IP65/IP67), DIN Rail Mounts, 3D Printed Custom Enclosures
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 19: Conclusion
+Section 20: Conclusion
 Topic 1: Course Recap
 Topic 2: Future Learning Paths
 Topic 3: Robotics, Drones & Hardware Protocols
