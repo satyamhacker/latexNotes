@@ -1,6 +1,5 @@
-# Section 1: Introduction 
+# Section 1: Introduction to Raspberry Pi and Arduino 
 
-### Section 1: Introduction to Raspberry Pi and Arduino
 
 **Overview:** Is section mein hum Arduino aur Raspberry Pi ke core differences samjhenge. Hum dekhenge ki unki individual strengths kya hain (hardware vs software) aur ek complete, real-world project banane ke liye in dono ko combine karna kyun zaroori hota hai.
 
