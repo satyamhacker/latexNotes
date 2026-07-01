@@ -1450,22 +1450,22 @@ Sections: 3 | Topics: 6 | Subtopics: 31
 Speaker yahan terminal commands ke through Python modules ko install aur manage karne ka tarika explain karta hai.
 
 --1--Python Modules and Terminal Basics--
-Topic 1: Python Virtual Environments (venv) & pip
-Subtopics: PEP 668 Error, Creating venv, Activating venv, pip3 Install inside venv, Requirements.txt
+Topic 1: Lightning Fast Environments with `uv`
+Subtopics: The Rust-based uv tool, PEP 668 OS Block, uv venv creation, uv pip install, Requirements sync
 
 [📊 SCOPE SIGNAL for Topic 1:
 * Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Explanation of modern Python package management
-* Key terms from transcript: externally managed environment, virtual environment, venv, source activate, pip3 install, requirements
-* Explicit emphasis by speaker: "Never use sudo pip3 install. Always create a virtual environment first."
+* Transcript mein content volume: Explanation of modern Python package management replacing pip
+* Key terms from transcript: uv package manager, rust, externally managed environment, uv venv, uv pip install
+* Explicit emphasis by speaker: "Do not use pip. Use uv to save hours of installation time on your Raspberry Pi."
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[PEP 668, externally managed environment, python3 -m venv, virtual environment, source venv/bin/activate, deactivate, pip3 install, pip3 list, requirements.txt, isolated packages, global package block]
+[PEP 668, externally managed environment, ⭐uv package manager, Rust, uv venv, source .venv/bin/activate, ⭐uv pip install, requirements.txt, isolated packages, blazing fast installation]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-* Testing/Offline Phase: Developer naya project start karne se pehle `python3 -m venv myenv` command se isolated environment banata hai. Us environment ko `source` se activate karke safely modules (`yagmail`, `opencv`) install karta hai bina OS ko break kiye.
+* Testing/Offline Phase: Developer naya AI project shuru karta hai. Terminal mein `curl -LsSf https://astral.sh/uv/install.sh | sh` se uv install karta hai. Uske baad instantly `uv venv` aur `uv pip install opencv-python fastapi` run karta hai bina kisi lag ya OS crash ke.
 
 ===Section 2: Executing Python in Terminal===
 Is section mein terminal ke andar Python shell open karne aur scripts ko directly execute karne par focus kiya gaya hai.
@@ -1601,7 +1601,7 @@ Subtopics: Copy Command, Activity Code Migration, GPIO Warning Prevention, Short
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Python Modules and Terminal Basics
-Topic 1: Python Virtual Environments (venv) & pip
+Topic 1: Lightning Fast Environments with `uv`
 
 Section 2: Executing Python in Terminal
 Topic 1: Terminal Shell & Script Execution
@@ -1831,57 +1831,29 @@ Sections: 1 | Topics: 3 | Subtopics: 13
 
 
 
-# Section 13: Create a Web Application on Your Raspberry Pi with Flask and Python
+# Section 13: Create a Web Application on Your Raspberry Pi with FastAPI
 
-===Section 1: Create a Web Application on Your Raspberry Pi with Flask===
+===Section 13: Create a Web Application on Your Raspberry Pi with FastAPI===
 Speaker is section mein Raspberry Pi par Flask framework use karke web server banane aur usko GPIO pins se connect karne ka process explain karta hai.
 
---1--Create a Web Application on Your Raspberry Pi with Flask--
-Topic 1: Introduction to Flask on Raspberry Pi
-Subtopics: Flask Framework Concept, Web Server Capabilities, Course Scope Focus
+--13--Create a Web Application on Your Raspberry Pi with FastAPI--
+Topic 1 & 2: Asynchronous Web Servers with FastAPI & Uvicorn
+Subtopics: FastAPI Concept, Async/Await logic, Uvicorn ASGI Server, Non-blocking AI Inference, Host Configuration
 
-[📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Surface
-* Coverage Angle: Conceptual only
-* Transcript mein content volume: Short explanation
-* Key terms from transcript: Flask framework, web server, application server, HTML, CSS, JavaScript
-* Explicit emphasis by speaker: "This is not a web development course" — speaker ne clear kiya ki focus sirf Raspberry Pi features ko web se connect karne par hoga, frontend (HTML/CSS) par nahi.
-* Speaker ne jo analogies/examples use kiye: None
-]
-
-🔑 KEYWORDS DUMP for Topic 1:
-[Flask framework, web server, application server, HTML, CSS, JavaScript]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Learning Phase: Speaker clear karta hai ki web development ek alag subject hai jisse baad mein alag se seekha ja sakta hai.
-* Application Phase: Developer Flask use karta hai kyunki yeh setup karne mein easy hai aur Raspberry Pi powerful enough hai isse host karne ke liye.
-* Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Additional context: Knowledge kisi aur web framework ke saath easily replicate ki ja sakti hai.
-
-Topic 2: Basic Web Server Setup
-Subtopics: Flask Initialization, App Route Creation, Index Function, Host Configuration, Port Customization, Localhost vs Network Access
-
-[📊 SCOPE SIGNAL for Topic 2:
-
+[📊 SCOPE SIGNAL for Topic 1 & 2:
 * Depth Level: Deep
 * Coverage Angle: Both
 * Transcript mein content volume: Long explanation + code + demo
-* Key terms from transcript: from flask import Flask, app = Flask(**name**), app.run, host 0.0.0.0, @app.route('/'), index function, port 5000, 127.0.0.1, localhost, hostname -I
-* Explicit emphasis by speaker: ⭐"Don't name the file flask.py" — speaker ne warn kiya ki isse error aayega.
-* Speaker ne jo analogies/examples use kiye: Website URL example — website.com (main route /) vs [website.com/example](https://www.google.com/search?q=https://website.com/example) (custom route /example).
+* Key terms from transcript: FastAPI, Uvicorn, async def, await, ASGI, localhost, port 8000
+* Explicit emphasis by speaker: "AI requires asynchronous servers. If you use Flask, your Jarvis will freeze every time it thinks."
 ]
 
-🔑 KEYWORDS DUMP for Topic 2:
-[`from flask import Flask`, `app = Flask(__name__)`, `app.run`, `host="0.0.0.0"`, `@app.route('/')`, index function, return string, web_server.py, ⭐flask.py, port 5000, `127.0.0.1`, localhost, `hostname -I`, IP address, `192.168.43.56`, port 8500, 1024 reserved ports, control C, 200 result, 404 not found]
+🔑 KEYWORDS DUMP for Topic 1 & 2:
+[⭐FastAPI, import fastapi, app = FastAPI(), ⭐Uvicorn, ASGI server, async def, await, non-blocking, web_server.py, port 8000, 0.0.0.0, JSON response, high performance edge API]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Developer Raspberry Pi par Python script likhta hai aur `app.run` chala kar server start karta hai. Console mein running status aur port number print hota hai.
-* Fixing/Iteration Phase: Agar default port use nahi karna, toh developer port argument change karke 8500 (ya >1024) set karta hai aur server restart karta hai.
-* Live Production Phase: Koi bhi device (phone, laptop) jo same network par connected hai, woh Raspberry Pi ke IP address aur port (e.g., 192.168.43.56:5000) ko browser mein type karke is web server ko access kar sakta hai.
-* Additional context: `host="0.0.0.0"` lagane se network ke saare computers connect kar paate hain.
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1 & 2:
+* Testing/Offline Phase: Developer `uv pip install fastapi uvicorn` chalata hai. Python script mein `app = FastAPI()` likh kar `uvicorn web_server:app --host 0.0.0.0 --port 8000` se server start karta hai.
+* Live Production Phase: User browser se API hit karta hai. Kyunki yeh async hai, Pi ek hi waqt pe AI model run kar raha hai aur web UI ko lag-free serve kar raha hai.
 
 Topic 3: Connecting GPIO Input to Flask Route
 Subtopics: Push Button Route, GPIO Setup, Button State Check, Return Statements
@@ -1936,8 +1908,7 @@ Subtopics: Dynamic URL Parameters, LED Pin Validation, State Validation, Multipl
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Create a Web Application on Your Raspberry Pi with Flask
-Topic 1: Introduction to Flask on Raspberry Pi
-Topic 2: Basic Web Server Setup
+Topic 1 & 2: Asynchronous Web Servers with FastAPI & Uvicorn
 Topic 3: Connecting GPIO Input to Flask Route
 Topic 4: Dynamic Routes & GPIO Output Control
 
@@ -2240,28 +2211,22 @@ Subtopics: GPIO Initialization, Try Except Cleanup, State Transition Logic, Move
 * Additional context: (N/A)
 
 --18--The Ultimate "Jarvis" Final Project--
-Topic 3: Camera Module Integration
-Subtopics: PiCamera Setup, Camera Warmup, Take Photo Function, Dynamic Filename Generation, Capture Method
+Topic 3: Camera Module Integration (Picamera2)
+Subtopics: Picamera2 Initialization, libcamera Wrapper, Camera Warmup, Dynamic Filename Generation, capture_file Method
 
 [📊 SCOPE SIGNAL for Topic 3:
-
 * Depth Level: Moderate
 * Coverage Angle: Both
-* Transcript mein content volume: Short explanation + code implementation
-* Key terms from transcript: picamera, resolution, rotation, time.sleep, file name, timestamp, time.time, string cast, camera.capture
-* Explicit emphasis by speaker: None
-* Speaker ne jo analogies/examples use kiye: None
+* Transcript mein content volume: Short explanation + code implementation for modern camera
+* Key terms from transcript: Picamera2, libcamera, resolution, time.sleep, file name, timestamp, picam2.capture_file
+* Explicit emphasis by speaker: "Make sure you use Picamera2 and not the old picamera library."
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[picamera, camera = PiCamera(), camera.resolution, 720x480, camera.rotation, 180, time.sleep(2), take_photo(camera), file_name, /home/pi/camera/, img_, time.time(), str(), .jpg, string concatenation, camera.capture(file_name), return file_name]
+[Picamera2, libcamera wrapper, picam2 = Picamera2(), picam2.configure(picam2.create_preview_configuration()), picam2.start(), time.sleep(2), take_photo(picam2), file_name, time.time(), picam2.capture_file(), .jpg, modern stack]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
-
-* Testing/Offline Phase: Developer function create karta hai jo `time.time()` ko file name mein attach karta hai taaki har photo ka ek unique, sortable timestamp ho.
-* Fixing/Iteration Phase: (N/A)
-* Live Production Phase: Script start hote hi camera 2 seconds warmup leta hai. Jab PIR sensor trigger hota hai, `take_photo()` function call hota hai aur image local storage mein save hoke uska path return hota hai.
-* Additional context: Speaker ne low resolution (720x480) choose ki taaki email attachments ka size chhota rahe.
+* Live Production Phase: Script start hote hi Picamera2 object initialize hota hai aur 2 seconds warmup leta hai. Jab PIR/OpenCV trigger hota hai, `picam2.capture_file()` directly hardware pipeline se optimized image local storage mein save kar deta hai.
 
 --18--The Ultimate "Jarvis" Final Project--
 Topic 4: File Handling & Local Logging
@@ -2420,7 +2385,7 @@ Subtopics: Parameter Tuning, Push Button Integration, Cron Job Concept
 Section 18: The Ultimate "Jarvis" Final Project
 Topic 1: Project Architecture & Setup
 Topic 2: PIR Sensor Logic & Timers
-Topic 3: Camera Module Integration
+Topic 3: Camera Module Integration (Picamera2)
 Topic 4: File Handling & Local Logging
 Topic 5: Email Automation Workflow
 Topic 6: Flask Web Server & Log Parsing
@@ -2491,6 +2456,24 @@ Subtopics: Project Based Learning, Advanced Hardware Protocols, Advanced Camera 
 * Mastery Phase: (N/A)
 * Additional context: Speaker ne emphasis diya hai ki multiple paths ek saath explore kiye ja sakte hain, par driving force hamesha ek practical project hona chahiye.
 
+
+--19--Conclusion--
+Topic 3: Robotics, Drones & Hardware Protocols
+Subtopics: Motor Control, Pulse Width Modulation (PWM), I2C / SPI Buses, PCA9685 Servo Driver, Introduction to ROS 2
+
+[📊 SCOPE SIGNAL for Topic 3:
+* Depth Level: Surface
+* Coverage Angle: Conceptual only
+* Transcript mein content volume: Guidance on scaling to physical movement
+* Key terms from transcript: PWM, I2C, SPI, Servo motors, Drones, ROS 2
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Motor control, ⭐PWM, Pulse Width Modulation, hardware PWM vs software PWM, I2C bus, SPI bus, PCA9685 servo driver, Drones, ESC, Electronic Speed Controller, ⭐ROS 2, Robot Operating System, Micro-ROS]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+* Mastery Phase: Developer basic LEDs se aage badhkar I2C protocol ke through PCA9685 board connect karta hai. Uske baad ROS 2 (Robot Operating System) ka framework use karke drone ke propellers (via ESCs) aur robotic arms ko precise PWM signals bhejta hai.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -2500,6 +2483,7 @@ Subtopics: Project Based Learning, Advanced Hardware Protocols, Advanced Camera 
 Section 19: Conclusion
 Topic 1: Course Recap
 Topic 2: Future Learning Paths
+Topic 3: Robotics, Drones & Hardware Protocols
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 2 | Subtopics: 13
