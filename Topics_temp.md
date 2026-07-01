@@ -1450,28 +1450,22 @@ Sections: 3 | Topics: 6 | Subtopics: 31
 Speaker yahan terminal commands ke through Python modules ko install aur manage karne ka tarika explain karta hai.
 
 --1--Python Modules and Terminal Basics--
-Topic 1: Managing Python Modules
-Subtopics: pip3 Install Command, pip3 Uninstall Command, pip3 List Command, Pip and Grep Pipeline, Python Module Versions, pip3 Help Command
+Topic 1: Python Virtual Environments (venv) & pip
+Subtopics: PEP 668 Error, Creating venv, Activating venv, pip3 Install inside venv, Requirements.txt
 
 [📊 SCOPE SIGNAL for Topic 1:
-
-* Depth Level: Moderate
+* Depth Level: Deep
 * Coverage Angle: Practical only
-* Transcript mein content volume: Multiple examples + commands demo
-* Key terms from transcript: pip3, install, uninstall, list, pipe, grep, version number, package
-* Explicit emphasis by speaker: Speaker explicitly mention karta hai ki remove karne ke liye "sudo apt remove" jaisa nahi, balki "pip3 uninstall" use hota hai (different verb).
-* Speaker ne jo analogies/examples use kiye: None
+* Transcript mein content volume: Explanation of modern Python package management
+* Key terms from transcript: externally managed environment, virtual environment, venv, source activate, pip3 install, requirements
+* Explicit emphasis by speaker: "Never use sudo pip3 install. Always create a virtual environment first."
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[pip3, install, uninstall, sudo apt install, sudo apt remove, pip3 list, package, version number, rpi.gpio, ⭐0.7.0[version], pipe, `|`, grep, GPIO, pip3 help, global package]
+[PEP 668, externally managed environment, python3 -m venv, virtual environment, source venv/bin/activate, deactivate, pip3 install, pip3 list, requirements.txt, isolated packages, global package block]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
-
-* Testing/Offline Phase: Developer terminal mein `pip3 list` aur `pipe grep` use karke check karta hai ki specific module (e.g., GPIO) ka kaunsa version installed hai.
-* Fixing/Iteration Phase: Agar naya module chahiye toh `pip3 install` use karta hai, aur agar remove karna ho toh `pip3 uninstall` chalata hai.
-* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
-* Additional context: Speaker ne list lambi hone par `pipe` aur `grep` combine karke filter karne ko aasan tarika bataya.
+* Testing/Offline Phase: Developer naya project start karne se pehle `python3 -m venv myenv` command se isolated environment banata hai. Us environment ko `source` se activate karke safely modules (`yagmail`, `opencv`) install karta hai bina OS ko break kiye.
 
 ===Section 2: Executing Python in Terminal===
 Is section mein terminal ke andar Python shell open karne aur scripts ko directly execute karne par focus kiya gaya hai.
@@ -1607,7 +1601,7 @@ Subtopics: Copy Command, Activity Code Migration, GPIO Warning Prevention, Short
 📋 EXTRACTED IN THIS PHASE:
 
 Section 1: Python Modules and Terminal Basics
-Topic 1: Managing Python Modules
+Topic 1: Python Virtual Environments (venv) & pip
 
 Section 2: Executing Python in Terminal
 Topic 1: Terminal Shell & Script Execution
