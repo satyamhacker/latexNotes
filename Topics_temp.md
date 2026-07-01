@@ -1245,6 +1245,23 @@ Subtopics: Activity Objective, LED Setup Code, Motion Conditional Logic, Loop Fr
 * Live Production Phase: (N/A)
 * Additional context: (N/A)
 
+--8--Direct Movement with a PIR Sensor--
+Topic 4: Modern Evolution: mmWave Radar Sensors (Presence Detection)
+Subtopics: PIR Limitations (Micro-movements), mmWave Radar Concept, LD2410 / HLK-LD2410B, Breathing Detection vs Motion Detection
+
+[📊 SCOPE SIGNAL for Topic 4:
+* Depth Level: Surface
+* Coverage Angle: Conceptual only
+* Transcript mein content volume: Future-proofing the sensor knowledge
+* Explicit emphasis by speaker: "PIR is great for hallways, but terrible for living rooms. If you sit still watching TV, PIR turns the lights off. You need mmWave for true presence."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[PIR limitations, micro-movements, mmWave radar, millimeter wave, LD2410, HLK-LD2410B, presence detection, breathing detection, false negatives, smart home automation, continuous occupancy]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+* Application Phase: Developer samajhta hai ki living room ya bathroom ke liye PIR sensor bekar hai. Woh uski jagah mmWave sensor lagata hai, jo room mein kisi ke hone par (chahe woh chupchap baitha ho) lights on rakhta hai.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1259,9 +1276,10 @@ Topic 3: Wiring & Circuit Integration
 Section 2: Programming the PIR Sensor in Python
 Topic 1: Reading Sensor Data
 Topic 2: LED Motion Activity
+Topic 4: Modern Evolution: mmWave Radar Sensors (Presence Detection)
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 5 | Subtopics: 27
+Sections: 2 | Topics: 6 | Subtopics: 31
 
 
 
