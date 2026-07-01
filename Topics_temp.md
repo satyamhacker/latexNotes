@@ -314,6 +314,23 @@ Subtopics: Headless Wi-Fi Reconfiguration, wpa_supplicant.conf File, Network Cre
 * Live Production Phase: N/A
 * Additional context: Yeh step sirf tab chahiye jab pre-configured network unavailable ho aur OS ko bina wipe kiye naya network add karna ho.
 
+--2--Install Raspberry Pi OS Without Any External Monitor or Keyboard--
+Topic 6: Advanced Storage (Upgrading to PCIe NVMe)
+Subtopics: MicroSD Exhaustion, PCIe M.2 NVMe HAT setup, EEPROM Bootloader Config, Cloning OS
+
+[📊 SCOPE SIGNAL for Topic 6:
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: Explanation of migrating from SD card to SSD for heavy AI workloads
+* Explicit emphasis by speaker: "MicroSD is great for learning, but for 24/7 AI databases and NVR recording, you must upgrade to an NVMe SSD."
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[MicroSD exhaustion, read-write limit, PCIe Gen 2, PCIe Gen 3, NVMe SSD, M.2 HAT, EEPROM bootloader, raspi-config advanced options, boot order, rpi-clone, reliable storage, AI database]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+* Live Production Phase: Developer project ko SD card par test karne ke baad, PCIe NVMe HAT lagata hai. Pi ke EEPROM bootloader ko update karta hai (boot from NVMe) aur SD card ka poora OS SSD par clone kar deta hai 10x speed aur reliability ke liye.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -326,9 +343,10 @@ Topic 2: First Boot & Finding IP Address
 Topic 3: SSH Connection & Remote Terminal
 Topic 4: VNC Setup & Desktop Configuration
 Topic 5: Updating Wi-Fi Headlessly (Troubleshooting)
+Topic 6: Advanced Storage (Upgrading to PCIe NVMe)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 28
+Sections: 1 | Topics: 6 | Subtopics: 32
 
 **Double-check steps performed (Internal Verification):**
 
@@ -2131,6 +2149,23 @@ Subtopics: Flaws of Analog Audio, I2S Digital Audio Protocol, MAX98357A DAC Setu
 * Testing/Offline Phase: Developer breadboard par MAX98357A amplifier lagata hai aur Pi ke I2S GPIO pins (18, 19, 21) se connect karta hai.
 * Live Production Phase: Pi OS ke `/boot/config.txt` (ya `config.txt`) mein I2S overlay enable karne ke baad, Piper TTS ki awaaz directly digital signal ke through amplifier mein jati hai, jisse Jarvis ki aawaz poore kamre mein loud aur crystal clear aati hai bina kisi static noise ke.
 
+--16--Iron Man Voice Interface (Jarvis Core)--
+Topic 4: Acoustic Echo Cancellation (AEC) & Mic Arrays
+Subtopics: The Feedback Loop Problem, ReSpeaker Mic Array HAT, DSP (Digital Signal Processing), Far-field voice capture
+
+[📊 SCOPE SIGNAL for Topic 4:
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Fixing the infinite audio loop problem
+* Explicit emphasis by speaker: "If Jarvis hears his own voice through the microphone, the system breaks. You need hardware or software AEC."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Acoustic Echo Cancellation, AEC, infinite feedback loop, ReSpeaker 4-Mic Array, DSP, Digital Signal Processing, Far-field audio, direction of arrival, DoA, background noise suppression, PulseAudio config]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+* Fixing/Iteration Phase: Developer dekhta hai ki TTS play hone par mic wapas trigger ho raha hai. Woh ek hardware DSP mic array (jaise ReSpeaker) install karta hai jo hardware level par speaker ki aawaz ko mic input se minus (cancel) kar deta hai, jisse Jarvis room ke doosre kone se bhi clear command sun pata hai.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -2141,9 +2176,10 @@ Section 16: Iron Man Voice Interface (Jarvis Core)
 Topic 1: Wake Word & Speech-to-Text (Local)
 Topic 2: Local Text-to-Speech (Piper)
 Topic 3: Industrial Audio Output (I2S DAC Amplification)
+Topic 4: Acoustic Echo Cancellation (AEC) & Mic Arrays
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 7
+Sections: 1 | Topics: 4 | Subtopics: 11
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2219,6 +2255,40 @@ Subtopics: LLaVA / Qwen-VL Architecture, Multi-modal Prompts, Local Image Infere
 🔑 KEYWORDS DUMP for Topic 4:
 [VLM, Vision Language Model, LLaVA, Qwen-VL, multi-modal, base64 encode, Ollama image prompt, scene analysis]
 
+--17--Local Agentic AI & RAG--
+Topic 5: LLM Memory Management & ZRAM
+Subtopics: Out-of-Memory (OOM) Killer, Swap Space Limits, ZRAM Concept, Configuring Compression
+
+[📊 SCOPE SIGNAL for Topic 5:
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: System optimization for running massive AI models
+* Explicit emphasis by speaker: "Your Raspberry Pi will crash if you run out of memory. Enabling ZRAM is a lifesaver for local LLMs."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Out of Memory, OOM killer, system freeze, Swapfile exhaustion, ⭐ZRAM, compressed RAM, lz4 algorithm, sudo apt install zram-tools, htop memory monitoring, AI memory bottleneck]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+* Testing/Offline Phase: Developer dekhta hai ki Ollama load hote hi Pi freeze ho gaya. Woh terminal mein `zram-tools` install karta hai jo RAM ke ek hisse ko compress kar deta hai, effectively 8GB RAM ko 12GB jaisa perform karne deta hai bina slow SSD swap use kiye.
+
+--17--Local Agentic AI & RAG--
+Topic 6: Conversational Memory & Agentic Chains
+Subtopics: Short-term vs Long-term memory, LangChain Framework, Tool Binding, Agent Executor
+
+[📊 SCOPE SIGNAL for Topic 6:
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Building the "brain" workflow
+* Explicit emphasis by speaker: "A simple API call to an LLM forgets the last message. You must give your agent a memory buffer."
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[Conversational memory, context window, ⭐LangChain, LangGraph, Mem0, ConversationBufferMemory, tool binding, Agent Executor, multi-turn conversation, train of thought, context limit]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+* Application Phase: Developer raw Ollama API ki jagah LangChain framework use karta hai. Woh system mein `ConversationBufferMemory` inject karta hai taaki agar user bole "Turn on the AC", aur agle prompt mein bole "Make it 22 degrees", toh Jarvis automatically samajh jaye ki 'it' ka matlab AC hai.
+
 
 ---
 
@@ -2231,9 +2301,11 @@ Topic 1: Ollama & Micro-LLMs
 Topic 2: Function Calling (Agentic Action)
 Topic 3: Local RAG (Retrieval-Augmented Generation)
 Topic 4: Vision-Language Models (VLMs)
+Topic 5: LLM Memory Management & ZRAM
+Topic 6: Conversational Memory & Agentic Chains
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 10
+Sections: 1 | Topics: 6 | Subtopics: 18
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
