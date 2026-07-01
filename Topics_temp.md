@@ -83,7 +83,7 @@ Subtopics: Board Versions, Power Supply Requirements, Micro SD Card Specs, Elect
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[⭐@app.post('/led/{led_pin}/state/{led_state}'), trigger_led, Pydantic, HTTPException, status_code=404, fastapi error handling, URL path variables]
+[USB Wi-Fi dongle, 2GB, 4GB, 8GB, power supply, smartphone charger, ⭐avoid powering from computer USB, 5V, 2A, 3A, 2.5A, micro SD card, Class 10, 10 inside a circle, Xtreme Pro, number three inside a U shape, 8GB, 16GB, 32GB, 64GB formatting, breadboard, wires, male to female, male to male, female to female, resistors, 1kΩ, 10kΩ, 330Ω, 20kΩ, LEDs, push button, 4 legs, Arduino kit, PIR sensor, passive infrared sensor, HCSR501, camera module version two, green board, noir version, black board]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
@@ -169,7 +169,6 @@ Topic 3: Raspberry Pi Hardware Anatomy
 Topic 4: Required Materials & Components
 Topic 5: Safety & Learning Best Practices
 Topic 6: Thermal Management & Power Architecture
-Topic 7: Industrial Power (PoE & UPS Backup)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 6 | Subtopics: 25
@@ -201,18 +200,121 @@ Sections: 1 | Topics: 6 | Subtopics: 25
 Speaker is section mein bina kisi external monitor ya keyboard ke Raspberry Pi ko headlessly setup karne ka poora end-to-end process explain karta hai — OS flashing se lekar remote desktop access tak.
 
 --2--Install Raspberry Pi OS Without Any External Monitor or Keyboard--
-Topic 5: Updating Wi-Fi Headlessly (NetworkManager)
-Subtopics: NetworkManager Concept, nmcli Command, Headless Wi-Fi Reconfiguration, SD Card Boot partition, system-connections folder
+Topic 1: Headless Setup Overview & OS Flashing
+Subtopics: Headless Setup Concept, Raspberry Pi Imager, SSH Enablement, Wi-Fi Configuration, Locale Settings, SD Card Flashing
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Long explanation of flashing steps aur configuration settings
+* Key terms from transcript: headless, external monitor, Raspberry Pi imager, operating system, enable SSH, set username and password, configure Wi-Fi, set local settings
+* Explicit emphasis by speaker: "make sure you use the same one that your computer is connected to that's super super important"
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[headless setup, external monitor, external keyboard, remote desktop, flash operating system, micro SD card, Raspberry Pi Imager, ⭐1.7[version], [raspberrypi.com/software](https://www.google.com/search?q=https://raspberrypi.com/software), Windows, macOS, Linux, 16 gigabyte, settings button, ⭐enable SSH, username pi, password, Wi-Fi connection, hotspot, SSID, your Wi-Fi network, set local settings, time zone, Europe Paris, keyboard layout, QWERTY, US, FR layout, erase data]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer apne PC par Raspberry Pi Imager tool use karke micro SD card flash karta hai. Flashing se pehle woh headless setup ke liye SSH enable karta hai aur Wi-Fi + locale settings pre-configure karta hai.
+* Fixing/Iteration Phase: Agar software version purana ho (<1.7), toh developer current version uninstall karke latest download karta hai taaki advanced settings access kar sake.
+* Live Production Phase: (N/A — transcript mein is topic ke liye koi live production flow nahi bataya gaya)
+* Additional context: N/A
+
+Topic 2: First Boot & Finding IP Address
+Subtopics: Hardware Boot Sequence, LED Indicators, Angry IP Scanner, Network Range Scanning, MAC Vendor Identification, IP Extraction
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Long explanation with software demo aur troubleshooting tips
+* Key terms from transcript: boot, power supply, 5V, 2A, red LED, green LED, Angry IP Scanner, Java runtime, IP range, broadcast address, Mac Vendor, hostname
+* Explicit emphasis by speaker: "don't power your Raspberry Pi from the laptop directly"
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[boot, power supply, ⭐5V, ⭐2A, laptop power, red LED, green LED blinking randomly, IP address, Angry IP Scanner, angryip.org, Java, standard JDK, Java runtime, Wi-Fi settings, IP range, ⭐192.168.31.0, 255, broadcast address, 10.0, Mac Vendor, Raspberry Pi trading, hostname, raspberrypi.local, ⭐192.168.31.76]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer Raspberry Pi ko power supply deta hai aur hardware LEDs (red solid, green blinking) observe karke boot confirm karta hai. Phir woh PC par Angry IP Scanner chalakar network scan karta hai aur MAC Vendor ke through Pi ka IP address find karta hai.
+* Fixing/Iteration Phase: Agar scan mein hostname na dikhe, toh developer tool ki settings mein jaakar 'Mac Vendor' column add karta hai device identify karne ke liye.
+* Live Production Phase: (N/A — transcript mein is topic ke liye koi live production flow nahi bataya gaya)
+* Additional context: N/A
+
+Topic 3: SSH Connection & Remote Terminal
+Subtopics: Hidden .ssh Folder, Terminal Commands, SSH Syntax, Putty Client, Remote Authentication
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Detailed command-line execution and login steps
+* Key terms from transcript: command line access, terminal, .ssh, command prompt, putty, ssh client, username, IP address, password
+* Explicit emphasis by speaker: Password type karte waqt screen par kuch nahi dikhega, yeh normal behavior hai.
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[SSH connection, command line access, terminal, file manager, hidden folders, .ssh, known_hosts, cmd, command prompt, putty, SSH client, Windows 10, ssh command, ⭐ssh pi@192.168.31.76, username, IP address, remote authentication, password denied, host Raspberry Pi]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer PC ka terminal (ya Putty) open karta hai aur `ssh username@IP` command run karta hai. Password authenticate karke woh Raspberry Pi ke internal terminal ka remote access leta hai.
+* Fixing/Iteration Phase: Agar SSH error de ya connection reject kare, toh developer file manager mein jaakar hidden `.ssh` folder se purani `known_hosts` file delete karta hai. Agar password denied ho, toh OS dobara flash karta hai.
+* Live Production Phase: (N/A)
+* Additional context: Speaker ne clear kiya ki agar Windows 10 se purana OS hai toh native SSH nahi hoga, uske liye Putty use karna padega.
+
+Topic 4: VNC Setup & Desktop Configuration
+Subtopics: raspi-config Utility, VNC Enablement, Auto Login Setup, Resolution Configuration, VNC Viewer Installation, System Updates, Safe Shutdown
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Long tutorial connecting terminal commands to GUI applications
+* Key terms from transcript: VNC, sudo raspi-config, admin rights, VNC server, reboot, desktop auto login, display options, VNC Viewer, realvnc, install updates, shutdown
+* Explicit emphasis by speaker: "If you just remove the power like that on the Raspberry Pi well this may lead to some problems for example your SD card could be corrupted"
+* Speaker ne jo analogies/examples use kiye: "like your computer you don't just switch off the power on your computer you first shut it down properly"
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[VNC, remote desktop, ⭐sudo raspi-config, admin rights, administrator privileges, interface options, VNC server, ⭐sudo reboot, connection reset, system options, boot auto login, desktop auto login, console login, display options, VNC resolution, 1080p, VNC Viewer, realvnc.com, VNC client, file new connection, remember password, black screen error, preferences, appearance settings, taskbar, system font 16, install updates, ⭐shutdown, software shutdown, corrupted SD card]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Developer SSH ke through `sudo raspi-config` utility open karta hai aur VNC server, auto-login, aur resolution (1080p) configure karke system reboot karta hai. Phir woh PC par VNC Viewer use karke graphical desktop access karta hai aur GUI updates install karta hai.
+* Fixing/Iteration Phase: Agar VNC connect hone par black screen dikhaye ("cannot currently show the desktop"), toh developer ko samajh aata hai ki configuration miss ho gayi hai, aur woh raspi-config ke steps dobara karta hai.
+* Live Production Phase: (N/A)
+* Additional context: Speaker ne explicitly warn kiya ki physical power nikalne se pehle humesha software shutdown karna zaroori hai, taaki SD card corrupt na ho.
+
+Topic 5: Updating Wi-Fi Headlessly (Troubleshooting)
+Subtopics: Headless Wi-Fi Reconfiguration, wpa_supplicant.conf File, Network Credentials Injection, IP Address Re-discovery
 
 [📊 SCOPE SIGNAL for Topic 5:
+
 * Depth Level: Moderate
 * Coverage Angle: Practical only
-* Key terms from transcript: NetworkManager, nmcli, system-connections, headless
-* Explicit emphasis by speaker: "wpa_supplicant is dead in modern OS, use NetworkManager."
+* Transcript mein content volume: Short targeted solution for changing networks headlessly
+* Key terms from transcript: different Wi-Fi network, wpa_supplicant.conf, SSID, PSK
+* Explicit emphasis by speaker: "it is super super important that you write the exact same name for the file if you have one small typo it's not going to work"
+* Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[NetworkManager, nmcli, nmtui, SD card boot drive, system-connections, .nmconnection file, SSID, PSK, modern OS]
+[troubleshooting, different Wi-Fi network, fresh install, SD card boot drive, text document, ⭐wpa_supplicant.conf, SSID, PSK, network credentials, inject configuration, Angry IP Scanner, update VNC properties]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: N/A
+* Fixing/Iteration Phase: Jab developer kisi naye location ya network par jata hai bina monitor ke, toh connection loss fix karne ke liye woh SD card nikal kar PC mein lagata hai. Boot directory mein `wpa_supplicant.conf` file manually create karta hai, naye credentials (SSID/PSK) daalta hai, aur Pi boot karke Angry IP Scanner se naya IP find karta hai.
+* Live Production Phase: N/A
+* Additional context: Yeh step sirf tab chahiye jab pre-configured network unavailable ho aur OS ko bina wipe kiye naya network add karna ho.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -223,21 +325,134 @@ Section 2: Install Raspberry Pi OS Without Any External Monitor or Keyboard
 Topic 1: Headless Setup Overview & OS Flashing
 Topic 2: First Boot & Finding IP Address
 Topic 3: SSH Connection & Remote Terminal
-Topic 4: WayVNC Setup & Modern Desktop Configuration
-Subtopics: raspi-config Utility, WayVNC Enablement, Wayland Display Server, Resolution Configuration, TigerVNC Viewer, System Updates
+Topic 4: VNC Setup & Desktop Configuration
+Topic 5: Updating Wi-Fi Headlessly (Troubleshooting)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 5 | Subtopics: 28
+
+**Double-check steps performed (Internal Verification):**
+
+* [x] Poora transcript completely padha bina kuch skip kiye.
+* [x] Transcript ko logical Topics mein group kiya.
+* [x] Har Section ka tagline/context line add kiya.
+* [x] Har Topic ko correct sequential numbering di.
+* [x] Har concept subtopic naam ki list mein add kiya (sirf short name).
+* [x] Subtopics flat comma-separated list mein hain — koi descriptions ya analogies nahi.
+* [x] Code/commands exactly preserve kiye (Keywords dump mein).
+* [x] Koi bhi bahari knowledge add nahi ki — zero hallucination.
+* [x] Chronological order preserved.
+* [x] Har Topic ke baad 📊 SCOPE SIGNAL block add kiya.
+* [x] Har Topic ke baad 🔑 KEYWORDS DUMP add kiya (with ⭐ tags for emphasis).
+* [x] Har Topic ke baad 🔄 REAL-WORLD FLOW SIGNAL add kiya.
+* [x] Timestamps aur noise tokens skip kiye.
+* [x] Chhote aur related concepts (jaise Video 1 aur 2, Video 3 aur 4) ko broad Topics mein merge kiya.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+
+# Section 3: Programming with Python3 – Variables and Functions
+
+
+===Section 1: Programming with Python3 – Variables and Functions===
+Raspberry Pi desktop par Thonny IDE ka use karke Python programming, variables, data types, aur functions ke basics ka introduction.
+
+--1--Programming with Python3 – Variables and Functions--
+Topic 1: Thonny IDE & Basic Commands
+Subtopics: Thonny Python IDE, Regular Mode Switch, Shell vs Text Editor, Print Function, Saving Python Files, Code Comments, Syntax Errors
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Surface
+* Coverage Angle: Practical only
+* Transcript mein content volume: Short explanation with demo
+* Key terms from transcript: Raspberry Pi desktop, Thonny Python IDE, regular mode, shell, text editor, print, terminal, .py extension, syntax error
+* Explicit emphasis by speaker: "Please make sure that you've correctly done every step from the previous section", "don't put any space" (file names save karte waqt).
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Raspberry Pi desktop, Thonny Python IDE, ⭐regular mode, shell, environment, terminal, print(), "Hello Raspberry Pi", text editor, Python programmes, .py extension, hello_world.py, underscore, up arrow, empty lines, comments, light grey, syntax error, ⭐"print is not defined"]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer Thonny IDE open karke regular mode mein switch karta hai. Woh shell ya text editor mein Python commands likhta hai, aur `.py` extension ke saath file save karke play button se run karta hai.
+* Fixing/Iteration Phase: Agar parentheses ya quotes miss ho jayein, toh IDE mein red color se syntax error aata hai. Developer line number aur explicit message padh ke error theek karta hai.
+* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+* Additional context: N/A
+
+Topic 2: Variables & Data Types
+Subtopics: Variables Concept, Variable Naming Conventions, Math Operators, Reassigning Variables, Integer Type, Float Type, String Type, Boolean Type, Dynamic Typing, Type Function
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with multiple examples
+* Key terms from transcript: Variables, container, integer, float, string, boolean, true, false, dynamically set, type function
+* Explicit emphasis by speaker: "always give a meaningful name to your variables", "this practice is strongly discouraged" (variables ka type dynamically change karne par).
+* Speaker ne jo analogies/examples use kiye: Variable as a container.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Variables, container, a = 5, operators, addition, subtraction, multiplication, division, ⭐meaningful names, temperature, user_age, underscore, ⭐integer, ⭐float, 3.14, point, ⭐string, "hello", quotes, ⭐boolean, True, False, uppercase, dynamically set, C, C++, Java, type(), class bool, class int, class str, changing types]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Learning Phase: Speaker explain karta hai ki variables containers hain jo values store karte hain taaki same value baar-baar manual na likhni pade aur code repeat na ho.
+* Application Phase: Developer variables create karta hai (e.g., user_age) aur unme values assign karta hai. Woh variables ko math operators ke saath update karta hai aur `type()` function se dynamically set data types check karta hai.
+* Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+* Additional context: Speaker highlight karta hai ki C, C++ aur Java jaisi languages mein type explicitly batana padta hai, par Python mein yeh dynamically set hota hai.
+
+Topic 3: Functions & Variable Scope
+Subtopics: Functions Concept, Def Keyword, Input Parameters, Return Keyword, Calling Functions, Variable Scope, Global Variables, Local Variables, Nested Scopes
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with code + demo
+* Key terms from transcript: Function, reusable block of code, def, parameters, return, scope, visibility, global variable, local variable, nested scope
+* Explicit emphasis by speaker: "first declare your function and then call the function", "A variable will be visible in the scope it is created in"
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Function, reusable block of code, def, triple_number, input parameters, arguments, colon, indentation, spaces, ⭐return keyword, evaluating variables, calling function, say_hello, declare function, scope, visibility, global variable, local variable, nested scope, indented block]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Learning Phase: Speaker samjhata hai ki repetitive code ko avoid karne ke liye function ek reusable block/template hota hai. Woh rules batata hai ki variable apni defined scope (global ya local) mein hi accessible hota hai.
+* Application Phase: Developer `def` keyword se function define karta hai, parameters set karta hai, aur `return` keyword se output wapas bhejta hai. Agar developer kisi local variable (jo indented block mein hai) ko global scope mein access karne ki koshish kare, toh `name error` aata hai.
+* Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+* Additional context: N/A
+
+Topic 4: String Manipulation Activity
+Subtopics: Upper Method, String Concatenation, Autocompletion, Positional Arguments
 
 [📊 SCOPE SIGNAL for Topic 4:
-* Depth Level: Deep
+
+* Depth Level: Moderate
 * Coverage Angle: Practical only
-* Transcript mein content volume: Long tutorial connecting terminal commands to GUI applications
-* Explicit emphasis by speaker: "Do not use RealVNC. Modern Raspberry Pi OS uses Wayland, so you must use WayVNC and TigerVNC viewer."
+* Transcript mein content volume: Short explanation + activity solution
+* Key terms from transcript: concatenate, uppercase strings, dot upper, plus operator, positional argument, auto completion
+* Explicit emphasis by speaker: "The shorter the name of the function the better, but it's also much better to give a meaningful name."
+* Speaker ne jo analogies/examples use kiye: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[Wayland, WayVNC, remote desktop, ⭐sudo raspi-config, admin rights, interface options, VNC server, ⭐sudo reboot, boot auto login, desktop auto login, display options, VNC resolution, 1080p, TigerVNC Viewer, VNC client, black screen error, install updates, ⭐shutdown, software shutdown]
+[concatenate, uppercase strings, strA, strB, .upper, + operator, space, return, concatenateUppercaseStrings, missing positional argument, ⭐autocompletion, ctrl + space, function inside function]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
-* Testing/Offline Phase: Developer SSH ke through `sudo raspi-config` open karta hai aur WayVNC server configure karke system reboot karta hai. Phir woh PC par TigerVNC Viewer use karke graphical desktop access karta hai.
+
+* Testing/Offline Phase: Developer do strings ko concatenate aur uppercase karne ka function banata hai. Code likhte waqt woh IDE mein autocompletion trigger karne ke liye `ctrl + space` use karta hai.
+* Fixing/Iteration Phase: Agar function call karte waqt developer koi argument miss kar de, toh programme crash hota hai aur error message aata hai (e.g., "missing one required positional argument"). Developer error message padh kar required argument add karta hai.
+* Live Production Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+* Additional context: N/A
 
 ---
 
@@ -640,16 +855,42 @@ Sections: 1 | Topics: 5 | Subtopics: 28
 
 
 ===Section 1: Control Raspberry Pi's GPIOs with Python===
-Speaker is section mein Raspberry Pi ke GPIO pins ka layout, hardware setup, aur Python (gpiozero) ke through LED aur push button ko control karna sikhata hai.
+Speaker is section mein Raspberry Pi ke GPIO pins ka layout, hardware setup, aur Python (RPi.GPIO) ke through LED aur push button ko control karna sikhata hai.
 
---1--Control Raspberry Pi's GPIOs with Python--6--Control Raspberry Pi's GPIOs with Python--
-Topic 2: Blinking an LED with gpiozero
-Subtopics: gpiozero Module, LED Object Initialization, on() and off() Methods, Automatic Cleanup
+--1--Control Raspberry Pi's GPIOs with Python--
+Topic 1: GPIO Pinout & Basics
+Subtopics: Pi Pinout, Ground Pins, Power Pins, GPIO Pins, Voltage Limits, Input vs Output, Pin States, Alternate Functions
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual only
+* Transcript mein content volume: Long explanation
+* Key terms from transcript: Raspberry Pi 4, Raspberry Pi 3, Raspberry Pi 2, ground, power pins, 3.3V, 5V, GPIO, input pin, output pin, high, low, UART, I2C, SPI
+* Explicit emphasis by speaker: "The GPIOs are 3.3V pins and not 5V pins. That is very important."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Raspberry Pi 4, Raspberry Pi 3, Raspberry Pi 2, pinout, ground, power pins, ⭐3.3V, 5V, GPIO, input pin, output pin, push button, LED, read data, write data, high, low, voltage, reserved pins, UART, I2C, SPI]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Learning Phase: Speaker explain karta hai ki board par pins kaise grouped hain (power, ground, GPIOs) aur unki voltage limits kya hain.
+* Application Phase: Developer Python code likhte waqt inhi exact numbers ka use karta hai GPIOs se interact karne ke liye.
+* Mastery Phase: (N/A — transcript mein is topic ke liye koi real-world flow describe nahi kiya gaya)
+
+Topic 2: Blinking an LED with Python
+Subtopics: SD Card Setup, VNC Connection, Thonny IDE, RPi.GPIO Module, BCM Mode, Pin Setup, High and Low States, Sleep Function, Infinite Loop, Cleanup Function, Warning Messages
 
 [📊 SCOPE SIGNAL for Topic 2:
+
 * Depth Level: Deep
-* Key terms from transcript: gpiozero, LED, on, off, object-oriented
-* Explicit emphasis by speaker: "gpiozero is deprecated. Use gpiozero which automatically handles cleanup."
+* Coverage Angle: Practical only
+* Transcript mein content volume: Long explanation + multiple code examples + demo
+* Key terms from transcript: SD card, VNC, Thonny IDE, RPi.GPIO, GPIO.setmode, GPIO.BCM, GPIO.cleanup, GPIO.setup, GPIO.output, time.sleep, while True
+* Explicit emphasis by speaker: "GPIO.setmode GPIO.bcm should be the first thing you do after you import the GPIO module"
+* Speaker ne jo analogies/examples use kiye: Speaker kehta hai ki yeh Arduino ke "blink LED" example jaisa hi hai, bas Python aur Raspberry Pi mein.
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
@@ -685,7 +926,7 @@ Subtopics: Input Setup, Constant Variable Convention, Reading Input State, High 
 * Depth Level: Moderate
 * Coverage Angle: Both
 * Transcript mein content volume: Code execution + demo
-* Key terms from transcript: button pin, uppercase variables, gpiozero, GPIO.in, gpiozero, high, low, while true
+* Key terms from transcript: button pin, uppercase variables, GPIO.setup, GPIO.in, GPIO.input, high, low, while true
 * Explicit emphasis by speaker: Speaker kehta hai ki variables ko uppercase mein rakhne ka matlab hai (conventionally) ki usse baad mein change nahi karna hai.
 * Speaker ne jo analogies/examples use kiye: None
 ]
@@ -1583,6 +1824,9 @@ Topic 1: Libcamera Stack & Modern OS Capture
 Topic 2: OpenCV Object Detection (Haar Cascades)
 Topic 3: TensorFlow Lite (TFLite) for Edge AI
 
+Topic 4: Industrial AI Security (Frigate NVR)
+Topic 5: Hardware Acceleration (Hailo NPU)
+
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 3 | Subtopics: 13
 
@@ -1987,6 +2231,7 @@ Section 17: Local Agentic AI & RAG
 Topic 1: Ollama & Micro-LLMs
 Topic 2: Function Calling (Agentic Action)
 Topic 3: Local RAG (Retrieval-Augmented Generation)
+Topic 4: Vision-Language Models (VLMs)
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 3 | Subtopics: 10
