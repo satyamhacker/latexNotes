@@ -2064,10 +2064,7 @@ Subtopics: FastAPI Concept, Async/Await logic, Uvicorn ASGI Server, Non-blocking
 Topic 3: Connecting GPIO Input to FastAPI Endpoints
 Subtopics: Push Button Async Route, GPIO Setup, Button State Check, JSON Return Statements
 
-Topic 5: Hardware Acceleration (Hailo NPU)
-Subtopics: CPU Bottlenecks, Hailo-8L Architecture, Offloading Inference, Pi 5 PCIe Configuration
-
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Moderate
 * Coverage Angle: Practical only
@@ -2100,7 +2097,7 @@ Subtopics: Dynamic URL Parameters, LED Pin Validation, State Validation, Multipl
 🔑 KEYWORDS DUMP for Topic 4:
 [`@app.post('/led/{led_pin}/state/{led_state}')`, `trigger_led(led_pin, led_state)`, `from gpiozero import LED`, `led_dict = {17: LED(17), 27: LED(27), 22: LED(22)}`, validation, `if led_pin not in led_dict`, wrong GPIO number, `if led_state == 0`, `led_dict[led_pin].off()`, `led_dict[led_pin].on()`, HTTPException, status_code=404, URL parameters]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
 * Testing/Offline Phase: Developer ek array `[17, 27, 22]` banata hai aur for loop use karke sabhi LEDs ko `gpiozero` pe initialize aur power off karta hai. Phir dynamic URL variables logic likhta hai.
 * Fixing/Iteration Phase: Developer jaan-boojh kar URL mein galat pin (e.g., 18) ya galat state (e.g., 2) daal kar test karta hai. Code internal error throw karne ke bajay custom error text return karta hai ("wrong GPIO number").
