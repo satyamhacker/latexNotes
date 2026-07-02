@@ -11453,7 +11453,6 @@ Jab Raspberry Pi par motion sensor (PIR) ki script lagatar chalti hai, aur syste
 > ✅ Verified by Notes Guru. 100% Subtopic Coverage + 100% Keyword Coverage achieved for this topic.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ### 📁 Section 3: File Handling via Python
 
