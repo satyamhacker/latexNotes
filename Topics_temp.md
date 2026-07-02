@@ -515,7 +515,7 @@ Subtopics: HTTP, HTTPS, Plain Text Communication, Encrypted Communication (TLS/S
 🔑 KEYWORDS DUMP for Topic 7:
 [HTTP, 80, HTTPS, 443, web pages, insecure, TLS, SSL, SQL injection, XSS, CSRF, authentication bypass, SQLi, LFI, RFI, Heartbleed, weak ciphers, certificate issues, Directory brute-forcing, API enumeration, Plain text communication, Encrypted communication, MITM, green padlock, `nmap -p 80 -sV <target>`, `nmap -p 443 -sV <target>`, `nmap -p 80 --script http-methods <target>`, `nmap -p 443 --script ssl-enum-ciphers <target>`, `nmap -p 80,443 -sV --script http-title scanme.nmap.org`, `nmap -p 80 --script http-enum scanme.nmap.org`, `nmap -p 443 --script ssl-cert scanme.nmap.org`, `nmap -p 443 --script ssl-heartbleed <target>`, ⭐8080, ⭐8443, ⭐8000, ⭐3000, ⭐--top-ports 1000, ⭐-p-]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
 
 * Testing/Offline Phase: Pentesters web servers pe hidden services dhoondhne ke liye non-standard ports (8080, 8443, 8000, 3000) scan karte hain.
 * Fixing/Iteration Phase: (N/A)
@@ -1610,10 +1610,33 @@ Subtopics: All Formats, Tri-Format Architecture, Multi-Format Base Paths
 * Live Production Phase: (N/A)
 * Additional context: Is matrix setup se long-term validation capabilities dynamically handle ho jati hain bina engine recalculation loss ke.
 
-Topic 7: Professional Output Pipeline [⚠️ Derived]
-Subtopics: Unified Tri-Scan Execution, Extracted Review Pipeline, Database Engine Ingestion, Pattern Grep Filter
+Topic 7: Automated Web Parsing & Screenshots (EyeWitness & Aquatone)
+Subtopics: Visual Reconnaissance, XML File Parsing, EyeWitness Integration, Aquatone Integration, Mass Screenshotting, Web Interface Discovery, Bug Bounty Workflows
 
 [📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Notes mein content volume: Pipeline workflow showing Nmap XML output being fed directly into external parsing tools.
+* Key terms from notes: Visual Reconnaissance, Mass Screenshotting, EyeWitness, Aquatone, XML Parsing, Web Interface, default credentials, Bug Bounty
+* Explicit emphasis in notes: "Jab 500 open web ports milen, toh sabko manually browser mein kholna bewakoofi hai. Nmap XML ko Aquatone ya EyeWitness mein feed karo."
+* Notes mein jo analogies/examples the: None
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[Visual Reconnaissance, Mass Screenshotting, EyeWitness, Aquatone, XML Parsing, Web Interface Discovery, nmap -sS -p 80,443,8080,8443 -iL targets.txt -oX web_scan.xml, cat web_scan.xml | aquatone -nmap, eyewitness -x web_scan.xml --web, Bug Bounty, automated HTML report, visual inspection, default credentials, admin panels, login pages, time-saving, pipeline integration, ⭐"manually browser mein kholna bewakoofi hai"[emphasized in notes], ⭐aquatone -nmap[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Testing/Offline Phase: Pentester Nmap se saare HTTP/HTTPS ports (80, 443, 8080, 8443) scan karke results ko XML format (`-oX`) mein save karta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: Us XML file ko Aquatone ya EyeWitness mein pass kiya jata hai. Yeh tools automatically har IP/Port par browser launch karte hain, screenshot lete hain, server headers nikalte hain, aur ek clear HTML report generate karte hain. Pentester sirf us report ko scroll karke interesting login pages (jaise Tomcat, Jenkins, ya custom admin panels) filter karta hai.
+* Additional context: Yeh step manual reconnaissance hours ko minutes mein convert kar deta hai, especially large corporate scopes (/16 subnets) ya bug bounties mein.
+
+Topic 8: Professional Output Pipeline [⚠️ Derived]
+Subtopics: Unified Tri-Scan Execution, Extracted Review Pipeline, Database Engine Ingestion, Pattern Grep Filter
+
+[📊 SCOPE SIGNAL for Topic 8:
 
 * Depth Level: Surface
 * Coverage Angle: Practical only
@@ -1623,10 +1646,10 @@ Subtopics: Unified Tri-Scan Execution, Extracted Review Pipeline, Database Engin
 * Notes mein jo analogies/examples the: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 7:
+🔑 KEYWORDS DUMP for Topic 8:
 [Professional Workflow, -oA, `nmap -sS -sV --top-ports 1000 <target> -oA scan_$(date +%Y%m%d)`, Process data, Read .nmap, quick review, Import .xml, Metasploit, Grep .gnmap, specific info, Module 11 Complete, NMAP: Zero-to-Pro Pentester Notes]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
 
 * Testing/Offline Phase: Dynamic execution engine time parameters trace karke structural configuration paths bind karta hai multi-output tracking files ke sath.
 * Fixing/Iteration Phase: Context reading mechanisms automatically filter tags map karti hain core engine analysis optimization blocks ke data pools mein.
@@ -1665,10 +1688,11 @@ Topic 3: XML to HTML/CSV Conversion
 Topic 4: Greppable Output (`-oG`)
 Topic 5: Script Kiddie Output (`-oS`)
 Topic 6: All Formats (`-oA`)
-Topic 7: Professional Output Pipeline [⚠️ Derived]
+Topic 7: Automated Web Parsing & Screenshots (EyeWitness & Aquatone)
+Topic 8: Professional Output Pipeline [⚠️ Derived]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 28
+Sections: 1 | Topics: 8 | Subtopics: 28
 
 **--- 🛑 PHASE 11 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.**
 
@@ -1828,7 +1852,7 @@ Subtopics: NSE Database Update, Script Database Refresh, Script Categories, scri
 Topic 7: Professional NSE Workflow [⚠️ Derived]
 Subtopics: Database Update, Initial Safe Scanning, Targeted Vulnerability Testing, Service-specific Testing
 
-[📊 SCOPE SIGNAL for Topic 7:
+[📊 SCOPE SIGNAL for Topic 8:
 
 * Depth Level: Surface
 * Coverage Angle: Practical only
@@ -1841,7 +1865,7 @@ Subtopics: Database Update, Initial Safe Scanning, Targeted Vulnerability Testin
 🔑 KEYWORDS DUMP for Topic 7:
 [Professional NSE Workflow, sudo nmap --script-updatedb, nmap -sC -sV  -oA initial_scan, nmap --script="vuln*"  -oA vuln_scan, nmap --script="http-*" -p 80,443 , nmap --script="smb-*" -p 445 ]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
 
 * Testing/Offline Phase: Pentesting ka step-by-step framework: pehle database update, phir safe scan, uske baad targeted vulnerability testing, aur finally service-specific deep testing.
 * Fixing/Iteration Phase: (N/A)
@@ -2106,7 +2130,30 @@ Subtopics: Robots.txt Discovery, Hidden Directories, Email Address Harvesting, R
 * Live Production Phase: Extracted emails ko phishing campaigns aur social engineering targets ke liye use karna. Robots.txt mein mile paths (jaise /admin/) ko manually browse karke direct access check karna.
 * Additional context: Developers ko lagta hai "Disallow" se paths hidden hain, par actually yeh attackers ke liye roadmap hota hai. Large sites par unlimited depth crawling se bachne ke liye maxdepth use karna zaroori hai.
 
-Topic 4: Professional Reconnaissance Workflow [⚠️ Derived]
+Topic 4: UDP Infrastructure Recon (SNMP & TFTP)
+Subtopics: SNMP Enumeration, Community Strings, Public/Private Strings, snmp-sysdescr, snmp-processes, snmp-win32-users, snmp-netstat, TFTP Enumeration, tftp-enum, Configuration Leaks
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Broad explanation of UDP vulnerabilities and step-by-step SNMP data extraction.
+* Key terms from notes: SNMP, UDP 161, TFTP, UDP 69, Community strings, public, private, snmpwalk, MIB tree, routing tables, running processes, cleartext config files
+* Explicit emphasis in notes: "SNMP 'public' community string network ka sabse bada information leaker hai — yeh OS, users, aur processes sab bata deta hai bina authentication ke."
+* Notes mein jo analogies/examples the: None
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[UDP Infrastructure Recon, SNMP Enumeration, UDP 161, Community Strings, public, private, snmp-sysdescr, snmp-processes, snmp-win32-users, snmp-netstat, TFTP Enumeration, UDP 69, tftp-enum, Configuration Leaks, cleartext, Cisco routers, nmap -sU -p 161 --script=snmp-sysdescr,snmp-processes 192.168.1.1, nmap -sU -p 161 --script="snmp-*", nmap -sU -p 69 --script tftp-enum, MIB tree, ⭐"sabse bada information leaker"[emphasized in notes], ⭐public community string[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Target network par UDP 161 (SNMP) open milne par pentester default community string ('public' ya 'private') guess karta hai.
+* Fixing/Iteration Phase: (N/A)
+* Live Production Phase: `snmp-win32-users` aur `snmp-processes` run karke pentester target Windows/Linux machine ke valid usernames aur chal rahe vulnerable software ki list nikalta hai bina us machine ko touch kiye (via network equipment). TFTP se unauthenticated router config files download ki jati hain.
+* Additional context: UDP scanning slow hoti hai, isliye ise directly `-p 161,69` ke sath specifically target karna chahiye.
+
+Topic 5: Professional Reconnaissance Workflow [⚠️ Derived]
 Subtopics: Network Path Analysis, Web Reconnaissance, Information Harvesting, WAF Detailed Analysis
 
 [📊 SCOPE SIGNAL for Topic 4:
@@ -2119,7 +2166,7 @@ Subtopics: Network Path Analysis, Web Reconnaissance, Information Harvesting, WA
 * Notes mein jo analogies/examples the: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 5:
 [Professional Reconnaissance Workflow, Network path analysis, Web reconnaissance, Information harvesting, WAF detailed analysis, nmap --traceroute --script traceroute-geolocation , nmap --script http-robots.txt,http-waf-detect,http-sitemap-generator -p 80,443 , nmap --script http-grep, wafw00f -a ]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
@@ -2138,7 +2185,7 @@ Section 1: Reconnaissance & Web Asset Discovery [⚠️ Derived]
    Topic 1: Network Path & Geolocation [⚠️ Derived]
    Topic 2: Web Defense Identification (WAF) [⚠️ Derived]
    Topic 3: Web Content & Info Harvesting [⚠️ Derived]
-   Topic 4: Professional Reconnaissance Workflow [⚠️ Derived]
+   Topic 5: Professional Reconnaissance Workflow [⚠️ Derived]
 
 ```
 
@@ -2174,10 +2221,11 @@ Section 1: Reconnaissance & Web Asset Discovery [⚠️ Derived]
 Topic 1: Network Path & Geolocation [⚠️ Derived]
 Topic 2: Web Defense Identification (WAF) [⚠️ Derived]
 Topic 3: Web Content & Info Harvesting [⚠️ Derived]
-Topic 4: Professional Reconnaissance Workflow [⚠️ Derived]
+Topic 4: UDP Infrastructure Recon (SNMP & TFTP)
+Topic 5: Professional Reconnaissance Workflow [⚠️ Derived]
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 31
+Sections: 1 | Topics: 5 | Subtopics: 31
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2437,10 +2485,33 @@ Subtopics: Timing Templates (-T0 to -T5), Speed vs Stealth Control, Paranoid (T0
 * Live Production Phase: High-security environments mein IDS evasion ke liye stealth operations (T0-T2) aur time-critical assessments ya CTF competitions ke liye fast scanning (T4-T5) ki jati hai.
 * Additional context: (N/A)
 
-Topic 2: Deeper Host Discovery (`-PS`, `-PA`, `-PU`)
-Subtopics: Advanced Host Discovery, Custom Ping Techniques, TCP SYN Ping (-PS), TCP ACK Ping (-PA), UDP Ping (-PU), ICMP Echo Ping (-PE), ICMP Timestamp Ping (-PP), Firewall Bypass
+Topic 2: Granular Speed & Timeout Controls (`--min-rate`, `--max-rate`, `--host-timeout`)
+Subtopics: Rate Limiting, Minimum Rate Constraint, Maximum Rate Constraint, Host Timeout, Retries Control, OSCP Fast Scan Strategy, Network Congestion Management
 
 [📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Detailed comparison of why `-T4` fails vs why `--min-rate` succeeds, with OSCP standard commands.
+* Key terms from notes: --min-rate, --max-rate, --host-timeout, --max-retries, packet drops, bandwidth exhaustion, OSCP, infinite loop prevention
+* Explicit emphasis in notes: "OSCP mein 65,535 ports ko -T4 se scan hone mein ghanton lag sakte hain, hamesha `--min-rate 5000` ya `10000` use karo!"
+* Notes mein jo analogies/examples the: "Agar target packet drop kar raha hai, toh -T4 speed slow kar dega (polite mode). `--min-rate` Nmap ko force karta hai ki chahe jo ho jaye, speed kam nahi karni."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Granular Speed, Rate Limiting, --min-rate, --max-rate, --host-timeout, --max-retries, OSCP Fast Scan, Network Congestion, packet drops, stateful firewall delays, infinite loop, nmap -sS -p- --min-rate 5000 192.168.1.1, nmap --min-rate 10000 --max-retries 1, nmap -p- --host-timeout 15m, ⭐--min-rate 5000[emphasized in notes], ⭐--min-rate 10000[emphasized in notes], ⭐--host-timeout 15m[emphasized in notes], 10000 packets per second, blind speed, accuracy trade-off]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Pentester lab environment mein `--min-rate 10000` test karta hai yeh dekhne ke liye ki router crash toh nahi ho raha.
+* Fixing/Iteration Phase: Agar scan accuracy low aa rahi hai (false closed ports), toh pentester rate ko 10000 se hata kar 5000 ya 3000 kar deta hai aur `--max-retries 2` add karta hai.
+* Live Production Phase: Professional exams (OSCP) ya time-critical bug bounties mein poore 65k ports ko 2-3 minute mein scan karne ke liye `--min-rate 5000` aur unresponsive hosts ko skip karne ke liye `--host-timeout 10m` use hota hai.
+* Additional context: Yeh technique stealthy bilkul nahi hai, yeh pure aggressive noise hai.
+
+Topic 3: Deeper Host Discovery (`-PS`, `-PA`, `-PU`)
+Subtopics: Advanced Host Discovery, Custom Ping Techniques, TCP SYN Ping (-PS), TCP ACK Ping (-PA), UDP Ping (-PU), ICMP Echo Ping (-PE), ICMP Timestamp Ping (-PP), Firewall Bypass
+
+[📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -2450,20 +2521,20 @@ Subtopics: Advanced Host Discovery, Custom Ping Techniques, TCP SYN Ping (-PS), 
 * Notes mein jo analogies/examples the: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 2:
+🔑 KEYWORDS DUMP for Topic 3:
 [Advanced Host Discovery, Custom Ping Techniques, -PS, TCP SYN ping, -PA, TCP ACK ping, stateful firewall bypass, -PU, UDP ping, ICMP-filtered networks, -PE, ICMP Echo ping, -PP, ICMP Timestamp ping, nmap -PS22,80,443 192.168.1.0/24, nmap -PA80,443, nmap -PU53,161,137, nmap -PS22 -PA80 -PU53 192.168.1.0/24, -sn, ⭐"Hamesha multiple ping techniques combine karo"[emphasized in notes], ⭐"Sirf default ICMP ping rely karna"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: Modern corporate networks jahan normal ICMP ping blocked hoti hai, wahan live hosts discover karne ke liye pentester TCP SYN/ACK aur UDP pings ka use karta hai firewalls bypass karne ke liye.
 * Additional context: (N/A)
 
-Topic 3: Classic Evasion (Packet Fragmentation `-f`, `--mtu`)
+Topic 4: Classic Evasion (Packet Fragmentation `-f`, `--mtu`)
 Subtopics: Packet Fragmentation, IDS/Firewall Evasion, Packet Splitting, Basic Fragmentation (-f), Double Fragmentation (-ff), Custom MTU (--mtu), Deep Packet Inspection Avoidance
 
-[📊 SCOPE SIGNAL for Topic 3:
+[📊 SCOPE SIGNAL for Topic 4:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -2473,20 +2544,20 @@ Subtopics: Packet Fragmentation, IDS/Firewall Evasion, Packet Splitting, Basic F
 * Notes mein jo analogies/examples the: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 3:
+🔑 KEYWORDS DUMP for Topic 4:
 [Packet Fragmentation, IDS/Firewall Evasion, Packet Splitting, -f, 8 bytes, -ff, 16 bytes, --mtu, Maximum Transmission Unit, Custom MTU, Deep packet inspection avoidance, legacy system exploitation, stealth scanning, nmap -f , nmap -ff , nmap --mtu 24 , ⭐"Fragmentation ko other evasion techniques ke saath combine karo"[emphasized in notes], ⭐"Bahut chhote fragments (8 bytes) use karna"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: Chhote fragments (8 bytes) suspicious na lage isliye optimal evasion ke liye 24-32 bytes set kiye jate hain.
 * Live Production Phase: IDS aur deep packet inspection ko bypass karne ke liye large packets ko small fragments mein split karke bheja jata hai jisse IDS unhe complete reassemble na kar paye.
 * Additional context: (N/A)
 
-Topic 4: Advanced Evasion (`--data-string`, `--scan-delay`, `--badsum`)
+Topic 5: Advanced Evasion (`--data-string`, `--scan-delay`, `--badsum`)
 Subtopics: Advanced Evasion Techniques, Custom Data Payloads (--data-string), Artificial Delays (--scan-delay), Invalid Checksums (--badsum), Packet Size Manipulation (--data-length), IP Header Manipulation (--ip-options)
 
-[📊 SCOPE SIGNAL for Topic 4:
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -2496,20 +2567,20 @@ Subtopics: Advanced Evasion Techniques, Custom Data Payloads (--data-string), Ar
 * Notes mein jo analogies/examples the: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 5:
 [Advanced Evasion Techniques, Custom Data Payloads, --data-string, Artificial Delays, --scan-delay, Invalid Checksums, --badsum, Packet Size Manipulation, --data-length, IP Header Manipulation, --ip-options, behavioral analysis, nmap --data-string "HTTP/1.1 GET /" , nmap --scan-delay 2s , nmap --badsum , nmap --data-length 25 , nmap --scan-delay 1-10s , ⭐"legitimate traffic mimic karo"[emphasized in notes], ⭐"Sabhi advanced techniques ek saath use karna"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Firewall configuration check karne ke liye invalid TCP checksums (badsum) bheje jate hain.
 * Fixing/Iteration Phase: Detection avoid karne ke liye scan delays ko random intervals (jaise 1-5s) par set kiya jata hai.
 * Live Production Phase: Behavioral analysis bypass karne ke liye legitimate traffic ("GET / HTTP/1.1") spoof karke payloads bheje jate hain, aur rate limiting evade ki jati hai.
 * Additional context: (N/A)
 
-Topic 5: Niche Scan Types (SCTP `-sY`, RPC `-sR`)
+Topic 6: Niche Scan Types (SCTP `-sY`, RPC `-sR`)
 Subtopics: Specialized Scan Types, SCTP INIT Scan (-sY), RPC Scan (-sR), Protocol-specific Vulnerabilities, Specialized Service Enumeration
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Surface
 * Coverage Angle: Both
@@ -2519,20 +2590,20 @@ Subtopics: Specialized Scan Types, SCTP INIT Scan (-sY), RPC Scan (-sR), Protoco
 * Notes mein jo analogies/examples the: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [Specialized Scan Types, SCTP INIT scan, -sY, Stream Control Transmission Protocol, RPC scan, -sR, Remote Procedure Call, Telecom networks, VoIP systems, INIT chunks, portmapper queries, NFS, NIS, nmap -sY , nmap -sR , nmap -sY -p 2905,3868,4739 , 2905, M3UA, 3868, Diameter, 4739, IPFIX, ⭐"SCTP scan telecom/VoIP environments mein valuable hai"[emphasized in notes], ⭐"In specialized scans ko ignore karna"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: Telecom, VoIP systems, aur enterprise environments mein jahan standard TCP/UDP scans specific services miss kar dete hain, wahan SCTP (-sY) aur RPC (-sR) use karke niche vulnerabilities discover ki jati hain.
 * Additional context: (N/A)
 
-Topic 6: The Nmap Suite (Ncat, Ndiff, Nping)
+Topic 7: The Nmap Suite (Ncat, Ndiff, Nping)
 Subtopics: Nmap Suite Tools, Ncat, Ndiff, Nping, Reverse Shells, Port Forwarding, Scan Result Comparison, Packet Crafting
 
-[📊 SCOPE SIGNAL for Topic 6:
+[📊 SCOPE SIGNAL for Topic 7:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -2542,20 +2613,20 @@ Subtopics: Nmap Suite Tools, Ncat, Ndiff, Nping, Reverse Shells, Port Forwarding
 * Notes mein jo analogies/examples the: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 6:
+🔑 KEYWORDS DUMP for Topic 7:
 [Nmap Suite Tools, Ncat, netcat replacement, Ndiff, scan comparison, Nping, packet crafting, Reverse shells, Port forwarding, file transfer, ncat -l -p 4444, ncat target.com 80, ncat -l -p 4444 -e /bin/bash, ndiff scan1.xml scan2.xml, nping --tcp -p 80 target.com, nping --icmp --data-string "PENTESTING", nping --arp 192.168.1.1, ⭐"Ncat ko reverse shells ke liye use karo"[emphasized in notes], ⭐"In tools ko separate entities samajhna"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
 
 * Testing/Offline Phase: Firewall rules test karne ke liye Nping se custom packets craft karke bheje jate hain.
 * Fixing/Iteration Phase: Ndiff use karke purane aur naye scans (XML outputs) compare kiye jate hain taaki network changes ya changes monitor kiye ja sakein.
 * Live Production Phase: Ncat ka use reverse shells listen karne, file transfer karne, aur port forwarding ke liye target system pe as a netcat replacement kiya jata hai.
 * Additional context: (N/A)
 
-Topic 7: Advanced NSE (Lua, `broadcast` category, `ipidseq` script)
+Topic 8: Advanced NSE (Lua, `broadcast` category, `ipidseq` script)
 Subtopics: Advanced NSE Scripting, Lua Programming, Broadcast Category Scripts, ipidseq Script, Network-wide Enumeration, Advanced OS Fingerprinting, Custom Script Development
 
-[📊 SCOPE SIGNAL for Topic 7:
+[📊 SCOPE SIGNAL for Topic 8:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
@@ -2565,20 +2636,20 @@ Subtopics: Advanced NSE Scripting, Lua Programming, Broadcast Category Scripts, 
 * Notes mein jo analogies/examples the: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 7:
+🔑 KEYWORDS DUMP for Topic 8:
 [Advanced NSE Scripting, Lua Programming, Broadcast category, ipidseq script, Network-wide enumeration, OS fingerprinting, zombie hosts, idle scan, require "nmap", require "shortport", nmap --script broadcast-dhcp-discover, nmap --script broadcast-dns-service-discovery, nmap --script ipidseq , /usr/share/nmap/scripts/, nmap --script-updatedb, nmap --script http-enum,http-headers,http-methods, ⭐"Broadcast scripts local network reconnaissance ke liye powerful hain"[emphasized in notes], ⭐"Custom scripts banate samay error handling ignore karna"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
 
 * Testing/Offline Phase: Developer Lua scripting use karke custom checks aur requirements ke liye Nmap scripts likhta hai.
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: Local network pe broadcast scripts se network-wide information (DHCP, DNS, NetBIOS) gather ki jati hai, aur idle scan run karne ke liye ipidseq script se zombie hosts find kiye jate hain.
 * Additional context: (N/A)
 
-Topic 8: Pro Workflow (Metasploit `db_import`, Debugging, Resume, IPv6)
+Topic 9: Pro Workflow (Metasploit `db_import`, Debugging, Resume, IPv6)
 Subtopics: Professional Pentesting Workflow, Metasploit Integration, db_import, Debugging, Resume Functionality, IPv6 Scanning, Master Pentester Workflow
 
-[📊 SCOPE SIGNAL for Topic 8:
+[📊 SCOPE SIGNAL for Topic 9:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
@@ -2588,10 +2659,10 @@ Subtopics: Professional Pentesting Workflow, Metasploit Integration, db_import, 
 * Notes mein jo analogies/examples the: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 8:
+🔑 KEYWORDS DUMP for Topic 9:
 [Professional Pentesting Workflow, Metasploit Integration, db_import, msfconsole, msf> hosts, msf> services, Debugging, --reason, --packet-trace, --script-trace, Resume, --resume, IPv6 scanning, -6, nmap -sS -sV -oX scan.xml target.com, nmap -6 2001:db8::1, workspace, MASTER PENTESTER WORKFLOW, nmap -6 fe80::/64%eth0, ⭐"Hamesha XML output (-oX) use karo Metasploit integration ke liye"[emphasized in notes], ⭐"Debugging options ko production scans mein use karna"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
 
 * Testing/Offline Phase: Scan results analyze karne aur troubleshoot karne ke liye debugging mode (--reason, --packet-trace) use kiya jata hai.
 * Fixing/Iteration Phase: Agar long scan beech mein interrupt ho jaye, toh `--resume` command se scan ko continue kiya jata hai.
@@ -2606,16 +2677,39 @@ Subtopics: Professional Pentesting Workflow, Metasploit Integration, db_import, 
 
 Section 1: Pro-Level Pentesting & Advanced Techniques [⚠️ Derived]
 Topic 1: Timing Templates (`-T0` se `-T5`)
-Topic 2: Deeper Host Discovery (`-PS`, `-PA`, `-PU`)
-Topic 3: Classic Evasion (Packet Fragmentation `-f`, `--mtu`)
-Topic 4: Advanced Evasion (`--data-string`, `--scan-delay`, `--badsum`)
-Topic 5: Niche Scan Types (SCTP `-sY`, RPC `-sR`)
-Topic 6: The Nmap Suite (Ncat, Ndiff, Nping)
-Topic 7: Advanced NSE (Lua, `broadcast` category, `ipidseq` script)
-Topic 8: Pro Workflow (Metasploit `db_import`, Debugging, Resume, IPv6)
+Topic 2: Granular Speed & Timeout Controls (`--min-rate`, `--max-rate`, `--host-timeout`)
+Subtopics: Rate Limiting, Minimum Rate Constraint, Maximum Rate Constraint, Host Timeout, Retries Control, OSCP Fast Scan Strategy, Network Congestion Management
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Notes mein content volume: Detailed comparison of why `-T4` fails vs why `--min-rate` succeeds, with OSCP standard commands.
+* Key terms from notes: --min-rate, --max-rate, --host-timeout, --max-retries, packet drops, bandwidth exhaustion, OSCP, infinite loop prevention
+* Explicit emphasis in notes: "OSCP mein 65,535 ports ko -T4 se scan hone mein ghanton lag sakte hain, hamesha `--min-rate 5000` ya `10000` use karo!"
+* Notes mein jo analogies/examples the: "Agar target packet drop kar raha hai, toh -T4 speed slow kar dega (polite mode). `--min-rate` Nmap ko force karta hai ki chahe jo ho jaye, speed kam nahi karni."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Granular Speed, Rate Limiting, --min-rate, --max-rate, --host-timeout, --max-retries, OSCP Fast Scan, Network Congestion, packet drops, stateful firewall delays, infinite loop, nmap -sS -p- --min-rate 5000 192.168.1.1, nmap --min-rate 10000 --max-retries 1, nmap -p- --host-timeout 15m, ⭐--min-rate 5000[emphasized in notes], ⭐--min-rate 10000[emphasized in notes], ⭐--host-timeout 15m[emphasized in notes], 10000 packets per second, blind speed, accuracy trade-off]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Pentester lab environment mein `--min-rate 10000` test karta hai yeh dekhne ke liye ki router crash toh nahi ho raha.
+* Fixing/Iteration Phase: Agar scan accuracy low aa rahi hai (false closed ports), toh pentester rate ko 10000 se hata kar 5000 ya 3000 kar deta hai aur `--max-retries 2` add karta hai.
+* Live Production Phase: Professional exams (OSCP) ya time-critical bug bounties mein poore 65k ports ko 2-3 minute mein scan karne ke liye `--min-rate 5000` aur unresponsive hosts ko skip karne ke liye `--host-timeout 10m` use hota hai.
+* Additional context: Yeh technique stealthy bilkul nahi hai, yeh pure aggressive noise hai.
+
+Topic 3: Deeper Host Discovery (`-PS`, `-PA`, `-PU`)
+Topic 4: Classic Evasion (Packet Fragmentation `-f`, `--mtu`)
+Topic 5: Advanced Evasion (`--data-string`, `--scan-delay`, `--badsum`)
+Topic 6: Niche Scan Types (SCTP `-sY`, RPC `-sR`)
+Topic 7: The Nmap Suite (Ncat, Ndiff, Nping)
+Topic 8: Advanced NSE (Lua, `broadcast` category, `ipidseq` script)
+Topic 9: Pro Workflow (Metasploit `db_import`, Debugging, Resume, IPv6)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 8 | Subtopics: 58
+Sections: 1 | Topics: 9 | Subtopics: 58
 
 ⏳ **Waiting for:** Next phase/module notes
 
