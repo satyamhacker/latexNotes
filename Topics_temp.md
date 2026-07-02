@@ -515,7 +515,7 @@ Subtopics: HTTP, HTTPS, Plain Text Communication, Encrypted Communication (TLS/S
 🔑 KEYWORDS DUMP for Topic 7:
 [HTTP, 80, HTTPS, 443, web pages, insecure, TLS, SSL, SQL injection, XSS, CSRF, authentication bypass, SQLi, LFI, RFI, Heartbleed, weak ciphers, certificate issues, Directory brute-forcing, API enumeration, Plain text communication, Encrypted communication, MITM, green padlock, `nmap -p 80 -sV <target>`, `nmap -p 443 -sV <target>`, `nmap -p 80 --script http-methods <target>`, `nmap -p 443 --script ssl-enum-ciphers <target>`, `nmap -p 80,443 -sV --script http-title scanme.nmap.org`, `nmap -p 80 --script http-enum scanme.nmap.org`, `nmap -p 443 --script ssl-cert scanme.nmap.org`, `nmap -p 443 --script ssl-heartbleed <target>`, ⭐8080, ⭐8443, ⭐8000, ⭐3000, ⭐--top-ports 1000, ⭐-p-]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
 
 * Testing/Offline Phase: Pentesters web servers pe hidden services dhoondhne ke liye non-standard ports (8080, 8443, 8000, 3000) scan karte hain.
 * Fixing/Iteration Phase: (N/A)
@@ -1852,7 +1852,7 @@ Subtopics: NSE Database Update, Script Database Refresh, Script Categories, scri
 Topic 7: Professional NSE Workflow [⚠️ Derived]
 Subtopics: Database Update, Initial Safe Scanning, Targeted Vulnerability Testing, Service-specific Testing
 
-[📊 SCOPE SIGNAL for Topic 8:
+[📊 SCOPE SIGNAL for Topic 7:
 
 * Depth Level: Surface
 * Coverage Angle: Practical only
@@ -1865,7 +1865,7 @@ Subtopics: Database Update, Initial Safe Scanning, Targeted Vulnerability Testin
 🔑 KEYWORDS DUMP for Topic 7:
 [Professional NSE Workflow, sudo nmap --script-updatedb, nmap -sC -sV  -oA initial_scan, nmap --script="vuln*"  -oA vuln_scan, nmap --script="http-*" -p 80,443 , nmap --script="smb-*" -p 445 ]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
 
 * Testing/Offline Phase: Pentesting ka step-by-step framework: pehle database update, phir safe scan, uske baad targeted vulnerability testing, aur finally service-specific deep testing.
 * Fixing/Iteration Phase: (N/A)
@@ -2678,28 +2678,6 @@ Subtopics: Professional Pentesting Workflow, Metasploit Integration, db_import, 
 Section 1: Pro-Level Pentesting & Advanced Techniques [⚠️ Derived]
 Topic 1: Timing Templates (`-T0` se `-T5`)
 Topic 2: Granular Speed & Timeout Controls (`--min-rate`, `--max-rate`, `--host-timeout`)
-Subtopics: Rate Limiting, Minimum Rate Constraint, Maximum Rate Constraint, Host Timeout, Retries Control, OSCP Fast Scan Strategy, Network Congestion Management
-
-[📊 SCOPE SIGNAL for Topic 2:
-
-* Depth Level: Deep
-* Coverage Angle: Practical only
-* Notes mein content volume: Detailed comparison of why `-T4` fails vs why `--min-rate` succeeds, with OSCP standard commands.
-* Key terms from notes: --min-rate, --max-rate, --host-timeout, --max-retries, packet drops, bandwidth exhaustion, OSCP, infinite loop prevention
-* Explicit emphasis in notes: "OSCP mein 65,535 ports ko -T4 se scan hone mein ghanton lag sakte hain, hamesha `--min-rate 5000` ya `10000` use karo!"
-* Notes mein jo analogies/examples the: "Agar target packet drop kar raha hai, toh -T4 speed slow kar dega (polite mode). `--min-rate` Nmap ko force karta hai ki chahe jo ho jaye, speed kam nahi karni."
-]
-
-🔑 KEYWORDS DUMP for Topic 2:
-[Granular Speed, Rate Limiting, --min-rate, --max-rate, --host-timeout, --max-retries, OSCP Fast Scan, Network Congestion, packet drops, stateful firewall delays, infinite loop, nmap -sS -p- --min-rate 5000 192.168.1.1, nmap --min-rate 10000 --max-retries 1, nmap -p- --host-timeout 15m, ⭐--min-rate 5000[emphasized in notes], ⭐--min-rate 10000[emphasized in notes], ⭐--host-timeout 15m[emphasized in notes], 10000 packets per second, blind speed, accuracy trade-off]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Testing/Offline Phase: Pentester lab environment mein `--min-rate 10000` test karta hai yeh dekhne ke liye ki router crash toh nahi ho raha.
-* Fixing/Iteration Phase: Agar scan accuracy low aa rahi hai (false closed ports), toh pentester rate ko 10000 se hata kar 5000 ya 3000 kar deta hai aur `--max-retries 2` add karta hai.
-* Live Production Phase: Professional exams (OSCP) ya time-critical bug bounties mein poore 65k ports ko 2-3 minute mein scan karne ke liye `--min-rate 5000` aur unresponsive hosts ko skip karne ke liye `--host-timeout 10m` use hota hai.
-* Additional context: Yeh technique stealthy bilkul nahi hai, yeh pure aggressive noise hai.
-
 Topic 3: Deeper Host Discovery (`-PS`, `-PA`, `-PU`)
 Topic 4: Classic Evasion (Packet Fragmentation `-f`, `--mtu`)
 Topic 5: Advanced Evasion (`--data-string`, `--scan-delay`, `--badsum`)
