@@ -284,7 +284,7 @@ Subtopics: Logical vs Physical Address, IP Address, MAC Address, IPv4 vs IPv6, A
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[IP Address, MAC Address, Logical Address, Layer 3, Physical Address, Layer 2, IP spoofing, MAC spoofing, MAC filtering bypass, ARP poisoning, rogue device, IPv4, IPv6, Dotted decimal, Hexadecimal, ISP, DHCP server, NIC manufacturer, 32-bit, 128-bit, NAT, ip addr show, ipconfig, ip link show, getmac, macchanger -r eth0, macchanger -m, nmap -S, arp -a, nmap -sn 192.168.1.0/24, nmap -sS --script=mac-geolocation, curl ipinfo.io, Wireshark, remote attacks, tracking]
+[IP Address, MAC Address, Logical Address, Layer 3, Physical Address, Layer 2, IP spoofing, MAC spoofing, MAC filtering bypass, ARP poisoning, rogue device, IPv4, IPv6, Dotted decimal, Hexadecimal, ISP, DHCP server, NIC manufacturer, 32-bit, 128-bit, NAT, ip addr show, ipconfig, ip link show, getmac, macchanger -r eth0, macchanger -m, nmap -S, arp -a, nmap -sn 192.168.1.0/24, curl ipinfo.io, Wireshark, remote attacks, tracking]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
@@ -345,10 +345,10 @@ Sections: 1 | Topics: 5 | Subtopics: 25
 
 📦 Processing: Phase/Module 1 — Module 3: Ports & Protocols (The Gateways)
 
-===Section 1: Ports & Protocols Foundation [⚠️ Derived]===
+===Section 3: Ports & Protocols Foundation [⚠️ Derived]===
 Network Communication Ka Darwaza [⚠️ Derived]
 
---1--Ports & Protocols Foundation--
+--3--Ports & Protocols Foundation--
 Topic 1: Ports & Protocols Overview
 Subtopics: Port Definition, Protocol Definition, Total Ports (65535), Port Scanning Importance, Open Ports, Service Version, Uncommon Ports, Port-Based Filtering, Well-known Ports (0-1023), Registered Ports (1024-49151), Dynamic/Private Ports (49152-65535), Port Formula, Default Ports, High Ports
 
@@ -372,10 +372,10 @@ Subtopics: Port Definition, Protocol Definition, Total Ports (65535), Port Scann
 * Live Production Phase: Admins aksar important services ko non-standard ports par run karte hain.
 * Additional context: Beginners sirf well-known ports scan karte hain aur high ports ignore kar dete hain jahan backdoors ho sakte hain.
 
-===Section 2: File Transfer & Remote Access [⚠️ Derived]===
+===Section 3: File Transfer & Remote Access [⚠️ Derived]===
 Servers ko remotely access aur manage karne ke protocols. [⚠️ Derived]
 
---2--File Transfer & Remote Access--
+--3--File Transfer & Remote Access--
 Topic 2: FTP (20, 21) & SSH (22)
 Subtopics: FTP, SSH, Anonymous Login, Weak Credentials, SSH Tunneling, Directory Traversal, Web Shell, Control Connection, Data Connection, Encrypted Connection, Plain Text, Password Brute-force, Key-based Authentication, MITM
 
@@ -473,32 +473,32 @@ Subtopics: DNS, DHCP, Domain Names, IP Addresses, Zone Transfer Attacks, DNS Enu
 * Additional context: DNS sirf UDP nahi balke zone transfers ke liye TCP bhi use karta hai, isliye dono protocols scan karna zaroori hai.
 
 Topic 6: DORA Process
-Subtopics: DORA Process, DISCOVER, OFFER, REQUEST, ACKNOWLEDGE, DHCP Starvation, Rogue DHCP Server, MITM, Network Mapping, Broadcast Message, IP Exhaustion
+Subtopics: DORA Process, DISCOVER, OFFER, REQUEST, ACKNOWLEDGE, DHCP Starvation, Rogue DHCP Server, MITM, Network Mapping, Broadcast Message, IP Exhaustion, Modern DHCP Attack Tools
 
 [📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
 * Notes mein content volume: 4-step process explanation with tool usage
-* Key terms from notes: DISCOVER, OFFER, REQUEST, ACKNOWLEDGE, DHCP Starvation, Rogue DHCP server, 255.255.255.255, yersinia
+* Key terms from notes: DISCOVER, OFFER, REQUEST, ACKNOWLEDGE, DHCP Starvation, Rogue DHCP server, 255.255.255.255, dhcpig, Scapy
 * Explicit emphasis in notes: Rogue server attack ko bahut powerful highlight kiya gaya hai.
 * Notes mein jo analogies/examples the: "Client: 'Koi DHCP server hai? Mujhe IP chahiye!'", "Server: 'Haan, main hoon. Yeh lo IP...'"
 ]
 
 🔑 KEYWORDS DUMP for Topic 6:
-[DORA Process, DHCP client, DHCP server, IP assignment, 4-Step Process, DHCP Starvation, IPs exhaust, Rogue DHCP Server, MITM, malicious gateway, Network Mapping, DISCOVER, Broadcast message, 255.255.255.255, OFFER, REQUEST, ACKNOWLEDGE, Gateway, IP conflicts, IP exhaustion attacks, No authentication, `nmap --script dhcp-discover <target>`, `nmap -sU -p 67 --script dhcp-discover <dhcp-server-ip>`, `yersinia -G`, Raspberry Pi, ⭐DoS]
+[DORA Process, DHCP client, DHCP server, IP assignment, 4-Step Process, DHCP Starvation, IPs exhaust, Rogue DHCP Server, MITM, malicious gateway, Network Mapping, DISCOVER, Broadcast message, 255.255.255.255, OFFER, REQUEST, ACKNOWLEDGE, Gateway, IP conflicts, IP exhaustion attacks, No authentication, `nmap --script dhcp-discover <target>`, `nmap -sU -p 67 --script dhcp-discover <dhcp-server-ip>`, `dhcpig -i eth0`, Scapy DHCP script, Raspberry Pi, ⭐DoS, ⭐dhcpig[emphasized in notes], ⭐Scapy[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
-* Testing/Offline Phase: Local network par Raspberry Pi par rogue DHCP server setup karke khud ko gateway declare kiya ja sakta hai MITM karne ke liye.
+* Testing/Offline Phase: Local network par Raspberry Pi par rogue DHCP server setup karke khud ko gateway declare kiya ja sakta hai MITM karne ke liye. DHCP starvation ke liye modern tool `dhcpig` ya custom Scapy scripts use kiye jate hain.
 * Fixing/Iteration Phase: (N/A)
 * Live Production Phase: Devices ke network par aate hi unhe bina authentication ke IP mil jata hai, jo attacks allow karta hai.
-* Additional context: Yersinia tool (GUI mode) ka use karke DHCP starvation (DoS) kiya ja sakta hai.
+* Additional context: `dhcpig` (Python3-based) ya Scapy scripts ka use karke DHCP starvation (DoS) kiya ja sakta hai. `yersinia` dead tool hai aur 2026 mein use nahi karna chahiye.
 
-===Section 4: Web Application Protocols [⚠️ Derived]===
+===Section 3: Web Application Protocols [⚠️ Derived]===
 Web applications aur pentesting ke sabse common gateways. [⚠️ Derived]
 
---4--Web Application Protocols--
+--3--Web Application Protocols--
 Topic 7: HTTP (80) & HTTPS (443)
 Subtopics: HTTP, HTTPS, Plain Text Communication, Encrypted Communication (TLS/SSL), SQL Injection, XSS, CSRF, Authentication Bypass, LFI, RFI, Heartbleed, Weak Ciphers, Directory Brute-forcing, API Enumeration, MITM, Certificate Errors
 
@@ -558,10 +558,10 @@ Sections: 4 | Topics: 7 | Subtopics: 74
 
 📦 Processing: Phase 1 — Module 4: Nmap Basics & Core Scan Types
 
-===Section 1: Nmap Basics & Core Scan Types [⚠️ Derived]===
+===Section 4: Nmap Basics & Core Scan Types [⚠️ Derived]===
 Nmap pentesting ka sabse important tool hai — bina iske reconnaissance nahi ho sakti. [⚠️ Derived]
 
---1--Nmap Basics & Core Scan Types--
+--4--Nmap Basics & Core Scan Types--
 Topic 1: Nmap Introduction & Installation
 Subtopics: Nmap - Network Mapper, Installation & Setup, Network Discovery, Port Scanning, Service Version Detection, OS Fingerprinting, Vulnerability Scanning, SYN-ACK Response, RST Response, No Response
 
@@ -662,10 +662,10 @@ Sections: 1 | Topics: 3 | Subtopics: 17
 
 📦 Processing: Phase/Module 5 — Advanced Stealth Scan Techniques (OS Fingerprinting)
 
-===Section 1: Advanced Stealth Scan Techniques===
+===Section 5: Advanced Stealth Scan Techniques===
 Firewall aur IDS ko bypass karne ke liye unusual packet combinations aur OS fingerprinting methods. [⚠️ Derived]
 
---1--Advanced Stealth Scan Techniques--
+--5--Advanced Stealth Scan Techniques--
 Topic 1: NULL Scan (-sN)
 Subtopics: NULL Scan, Stateful Firewall Bypass, RFC 793 Rule, Port Closed Response, Port Open Response, Windows Non-compliance, OS Fingerprinting Trick, NULL Scan Syntax
 
@@ -774,10 +774,10 @@ Sections: 1 | Topics: 3 | Subtopics: 21
 
 📦 Processing: Phase/Module 6 — Other Scan Types & Firewall Check
 
-===Section 1: Other Scan Types & Firewall Check===
+===Section 6: Other Scan Types & Firewall Check===
 Advanced Nmap scan techniques jo default TCP SYN se aage jaate hain — UDP services, firewall rules aur stealth scanning ke liye. [⚠️ Derived]
 
---1--Other Scan Types & Firewall Check--
+--6--Other Scan Types & Firewall Check--
 Topic 1: UDP Scan (-sU)
 Subtopics: UDP Scan, Connection-less Protocol, UDP Scan Logic, UDP Open|Filtered Problem, Slow Scan Reasons, UDP Pros, UDP Cons
 
@@ -921,10 +921,10 @@ Sections: 1 | Topics: 4 | Subtopics: 22
 
 📦 Processing: Phase 1 — Module 7: Target Selection (Target Chunna)
 
-===Section 1: Target Selection (Target Chunna)===
+===Section 7: Target Selection (Target Chunna)===
 Nmap ko target specify karne ke alag-alag tareeke — single IP se lekar bulk scanning aur random targets tak.
 
---1--Target Selection (Target Chunna)--
+--7--Target Selection (Target Chunna)--
 Topic 1: Single IP, Hostname, Range, Subnet
 Subtopics: Single IP, Hostname, Domain-based Scanning, DNS Resolution, IP Range, Subnet, CIDR Notation, Host Discovery
 
@@ -1169,10 +1169,10 @@ Sections: 1 | Topics: 4 | Subtopics: 32
 
 📦 Processing: Phase 1 — Module 9: Port Selection & Scan Speed
 
-===Section 1: Port Selection & Scan Speed [⚠️ Derived]===
+===Section 9: Port Selection & Scan Speed [⚠️ Derived]===
 Nmap mein time bachane aur required coverage ke liye ports aur scan speed ko customize karna. [⚠️ Derived]
 
---1--Port Selection & Scan Speed--
+--9--Port Selection & Scan Speed--
 Topic 1: Specific Port Selection & Filtering (`-p`, `-p-`, `--open`) [⚠️ Derived]
 Subtopics: Port Name Selection, Port Number Selection, Common Port Combinations, Nmap Services File, All Ports Scan, Open Ports Filtering, Scan Speed Optimization
 
@@ -1187,7 +1187,7 @@ Subtopics: Port Name Selection, Port Number Selection, Common Port Combinations,
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[Port Selection, Name ya Number Se, ftp, 80, 443, 3306, 5432, 1433, 27017, 22, 23, 3389, 5900, 8080, 8443, http, https, ssh, `nmap -p 80,443 <target>`, `nmap -p http,https <target>`, `nmap -p 22,http,443,ftp <target>`, `/usr/share/nmap/nmap-services`, `-p-`, `--open`, 65535, `nmap -p- <target>`, `nmap -p- --open <target>`, `-T4`, `nmap -p 1-65535 --open <target>`, `nmap -p 80,443 scanme.nmap.org`, `nmap -p http,https,ssh scanme.nmap.org`, `nmap -p 22,80,443,3389 192.168.1.1 -v`, `nmap -p- -T4 scanme.nmap.org`, `nmap -p- --open -T4 192.168.1.1`, `nmap -p 1-10000 --open scanme.nmap.org -v`, Web ports, Mail ports, DB ports, 25, 110, 143, 465, 587, 993, 995, 6379, htttp[unclear], ⭐Common port combinations, ⭐-p- bina -T4 ke chalana]
+[Port Selection, Name ya Number Se, ftp, 80, 443, 3306, 5432, 1433, 27017, 22, 23, 3389, 5900, 8080, 8443, http, https, ssh, `nmap -p 80,443 <target>`, `nmap -p http,https <target>`, `nmap -p 22,http,443,ftp <target>`, `/usr/share/nmap/nmap-services`, `-p-`, `--open`, 65535, `nmap -p- <target>`, `nmap -p- --open <target>`, `-T4`, `nmap -p 1-65535 --open <target>`, `nmap -p 80,443 scanme.nmap.org`, `nmap -p http,https,ssh scanme.nmap.org`, `nmap -p 22,80,443,3389 192.168.1.1 -v`, `nmap -p- -T4 scanme.nmap.org`, `nmap -p- --open -T4 192.168.1.1`, `nmap -p 1-10000 --open scanme.nmap.org -v`, Web ports, Mail ports, DB ports, 25, 110, 143, 465, 587, 993, 995, 6379, http[unclear], ⭐Common port combinations, ⭐-p- bina -T4 ke chalana]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -1296,7 +1296,7 @@ Subtopics: Service Version Detection, Service Probes Process, Vulnerability Rese
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[Service Version Detection, -sV, Software Version Pata Karna, Open ports, services, ⭐Apache 2.4.41[version], ⭐OpenSSH 7.9[version], Vulnerability research, searchsploit, exploit-db, CVE matching, Outdated software, Compliance checking, Port scan, Service probes, nmap-service-probes, tcp, ssh, ⭐OpenSSH 7.9p1[version], Debian 10+deb10u2, http, ⭐Apache httpd 2.4.41[version], Ubuntu, Accurate version, Slow, Noisy, `nmap -sV <target>`, `nmap -sV -p 80,443 <target>`, `nmap -sV scanme.nmap.org -v`, `nmap -sV -p 22,80,443 192.168.1.1`, `nmap -sS -sV --top-ports 100 scanme.nmap.org`, `nmap -sV 192.168.1.1 -oX scan.xml`, `searchsploit --nmap scan.xml`, final detailed scan, ⭐"specific version = specific exploits"[emphasized in notes], ⭐"Har scan mein -sV use karna. Yeh slow hai"[emphasized in notes]]
+[Service Version Detection, -sV, Software Version Pata Karna, Open ports, services, ⭐Apache 2.4.41[version], ⭐OpenSSH 7.9[version], Vulnerability research, searchsploit, exploit-db, CVE matching, Outdated software, Compliance checking, Port scan, Service probes, nmap-service-probes, tcp, ssh, ⭐OpenSSH 7.9p1[version], Debian 10+deb10u2, http, ⭐Apache httpd 2.4.41[version], Ubuntu, Accurate version, Slow, Noisy, `nmap -sV <target>`, `nmap -sV -p 80,443 <target>`, `nmap -sV scanme.nmap.org -v`, `nmap -sV -p 22,80,443 192.168.1.1`, `nmap -sS -sV --top-ports 100 scanme.nmap.org`, `nmap -sV 192.168.1.1 -oX scan.xml`, `msfconsole db_import scan.xml`, final detailed scan, ⭐"specific version = specific exploits"[emphasized in notes], ⭐"Har scan mein -sV use karna. Yeh slow hai"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -1519,25 +1519,25 @@ Subtopics: XML Output, Machine-Readable Format, Automation Integration, Metasplo
 * Additional context: Direct raw format text editor ke liye suitable nahi hai isliye processing tools mandatory hain.
 
 Topic 3: XML to HTML/CSV Conversion
-Subtopics: XML Conversion, HTML Output, CSV Output, Toolchain Installation
+Subtopics: XML Conversion, HTML Output, CSV Output, Toolchain Installation, Python XML Parsing, pandas Export
 
 [📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
-* Notes mein content volume: `xsltproc` and Python package setups with conversion code blocks
-* Key terms from notes: XML Conversion, HTML, CSV, xsltproc, Spreadsheet-friendly, parsecpy, apt-get install xsltproc
+* Notes mein content volume: `xsltproc` and Python setups with conversion code blocks
+* Key terms from notes: XML Conversion, HTML, CSV, xsltproc, Spreadsheet-friendly, Python xml.etree.ElementTree, pandas
 * Explicit emphasis in notes: "xsltproc install nahi hona. apt-get install xsltproc pehle karo."
 * Notes mein jo analogies/examples the: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[XML Conversion, HTML, CSV Format, readable HTML, spreadsheet-friendly CSV, Client-friendly reports, Data analysis, Excel analysis, Management presentations, Data visualization, xsltproc, `xsltproc scan.xml -o scan.html`, pip install parsecpy, python parsecpy, `python parsecpy -x scan.xml -c scan.csv`, Extra tools needed, Conversion time, Formatting issues, `xsltproc <input.xml> -o <output.html>`, `nmap -sS scanme.nmap.org -oX scan.xml`, browser, professional, apt-get install xsltproc, ⭐"apt-get install xsltproc"[emphasized in notes]]
+[XML Conversion, HTML, CSV Format, readable HTML, spreadsheet-friendly CSV, Client-friendly reports, Data analysis, Excel analysis, Management presentations, Data visualization, xsltproc, `xsltproc scan.xml -o scan.html`, Python xml parsing, `python3 -c "import xml.etree.ElementTree as ET; tree = ET.parse('scan.xml'); ..."`, pandas DataFrame, `pip install pandas`, `python3 nmap_xml_to_csv.py`, Extra tools needed, Conversion time, Formatting issues, `xsltproc <input.xml> -o <output.html>`, `nmap -sS scanme.nmap.org -oX scan.xml`, browser, professional, apt-get install xsltproc, ⭐"apt-get install xsltproc"[emphasized in notes], ⭐Python xml.etree.ElementTree[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
 * Testing/Offline Phase: Pentester XML data backup collect karta hai.
-* Fixing/Iteration Phase: Data transform ke liye system dependency check ki jaati hai aur `xsltproc` binary manually target pipeline par deploy ki jaati hai.
+* Fixing/Iteration Phase: Data transform ke liye system dependency check ki jaati hai aur `xsltproc` binary manually target pipeline par deploy ki jaati hai. CSV ke liye Python script ya `pandas` use karke structured data banaya jata hai.
 * Live Production Phase: (N/A)
 * Additional context: Format convert hone ke baad spreadsheet dashboards aur management web portals par feed kiya jata hai.
 
@@ -1624,7 +1624,7 @@ Subtopics: Visual Reconnaissance, Machine-Readable HTTP Probing, Mass Screenshot
 ]
 
 🔑 KEYWORDS DUMP for Topic 7:
-[Visual Reconnaissance, Modern Web Probing, ProjectDiscovery, httpx, gowitness, Nuclei, XML Parsing, Web Interface Discovery, nmap -sS -p 80,443,8080,8443 -iL targets.txt -oX web_scan.xml, web_scan.xml | httpx -silent | gowitness file -f -, nuclei -l live_web_hosts.txt -t cves/, Bug Bounty, automated HTML report, visual triage, default templates, mass automation, pipeline integration, ⭐"manual browser verification slow hai"[emphasized in notes], ⭐web_scan.xml | httpx[emphasized in notes]]
+[Visual Reconnaissance, Modern Web Probing, ProjectDiscovery, httpx, gowitness, Nuclei, XML Parsing, Web Interface Discovery, nmap -sS -p 80,443,8080,8443 -iL targets.txt -oX web_scan.xml, nmap -oG web_scan.gnmap && cat web_scan.gnmap | awk '/80\/open/ {print $2}' | httpx -silent | gowitness file -f -, nuclei -l live_web_hosts.txt -t cves/, Bug Bounty, automated HTML report, visual triage, default templates, mass automation, pipeline integration, ⭐"manual browser verification slow hai"[emphasized in notes], ⭐web_scan.xml | httpx[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
 
@@ -1685,54 +1685,27 @@ Section 11: Output Formats (Result Save Karna)
 Topic 1: Normal Output (`-oN`)
 Topic 2: XML Output (`-oX`)
 Topic 3: XML to HTML/CSV Conversion
-Topic 4: Greppable Output (`-oG`)
-Topic 5: Script Kiddie Output (`-oS`)
-Topic 6: All Formats (`-oA`)
-Topic 7: Modern Web Probing & Vulnerability Handoff (`httpx`, `gowitness`, `Nuclei`)
-Topic 8: Professional Output Pipeline [⚠️ Derived]
+Subtopics: XML Conversion, HTML Output, CSV Output, Toolchain Installation, Python XML Parsing, pandas Export
 
-📊 PHASE SUMMARY:
-Sections: 1 | Topics: 8 | Subtopics: 28
-
-**--- 🛑 PHASE 11 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.**
-
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-==================================================================================
-
-
-# Module 12: Nmap Scripting Engine (NSE) Basics
-
-
-📦 Processing: Phase 1 — Module 12: Nmap Scripting Engine (NSE) Basics
-
-===Section 1: Nmap Scripting Engine (NSE) Basics===
-Nmap ke built-in scripts ko samajhna aur use karna taaki scanning aur enumeration fast aur precise ho sake. [⚠️ Derived]
-
---1--Nmap Scripting Engine (NSE) Basics--
-Topic 1: Default Script Scan (-sC)
-Subtopics: Default Script Scan, Built-in Safe Scripts, Vulnerability Detection, Service Information, Initial Reconnaissance, Service Enumeration, Banner Grabbing, Common Misconfigurations, Default Passwords, Open Shares, Client Quick Overview, http-title, ssh-hostkey, smb-os-discovery
-
-[📊 SCOPE SIGNAL for Topic 1:
+[📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
-* Notes mein content volume: Short explanation with commands and examples
-* Key terms from notes: default script scan, safe, non-intrusive, initial reconnaissance, service enumeration, banner grabbing, common misconfigurations, default passwords, open shares
-* Explicit emphasis in notes: "Hamesha -sC ko -sV ke saath use karo" — golden standard highlighted
+* Notes mein content volume: `xsltproc` and Python setups with conversion code blocks
+* Key terms from notes: XML Conversion, HTML, CSV, xsltproc, Spreadsheet-friendly, Python xml.etree.ElementTree, pandas
+* Explicit emphasis in notes: "xsltproc install nahi hona. apt-get install xsltproc pehle karo."
 * Notes mein jo analogies/examples the: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 1:
-[Default Script Scan, -sC, safe, non-intrusive, vulnerabilities, service information, initial reconnaissance, service enumeration, banner grabbing, common misconfigurations, default passwords, open shares, nmap -sC , http-title, ssh-hostkey, smb-os-discovery, nmap --script=default , nmap -sC scanme.nmap.org -v, nmap -sC -sV scanme.nmap.org, nmap -sC -p 80,443,22 scanme.nmap.org, ⭐nmap -sC -sV [emphasized], golden standard, manual enumeration, hours]
+🔑 KEYWORDS DUMP for Topic 3:
+[XML Conversion, HTML, CSV Format, readable HTML, spreadsheet-friendly CSV, Client-friendly reports, Data analysis, Excel analysis, Management presentations, Data visualization, xsltproc, `xsltproc scan.xml -o scan.html`, Python xml parsing, `python3 -c "import xml.etree.ElementTree as ET; tree = ET.parse('scan.xml'); ..."`, pandas DataFrame, `pip install pandas`, `python3 nmap_xml_to_csv.py`, Extra tools needed, Conversion time, Formatting issues, `xsltproc <input.xml> -o <output.html>`, `nmap -sS scanme.nmap.org -oX scan.xml`, browser, professional, apt-get install xsltproc, ⭐"apt-get install xsltproc"[emphasized in notes], ⭐Python xml.etree.ElementTree[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Testing/Offline Phase: Initial vulnerability assessment aur service enumeration karna bina manual script selection ke.
-* Fixing/Iteration Phase: (N/A — notes mein is topic ke liye koi fixing phase describe nahi kiya gaya)
-* Live Production Phase: Client ko quick overview dena safe scanning ke through.
-* Additional context: (N/A)
+* Testing/Offline Phase: Pentester XML data backup collect karta hai.
+* Fixing/Iteration Phase: Data transform ke liye system dependency check ki jaati hai aur `xsltproc` binary manually target pipeline par deploy ki jaati hai. CSV ke liye Python script ya `pandas` use karke structured data banaya jata hai.
+* Live Production Phase: (N/A)
+* Additional context: Format convert hone ke baad spreadsheet dashboards aur management web portals par feed kiya jata hai.
 
 Topic 2: Script Help (--script-help)
 Subtopics: Script Documentation, Built-in Manual, Arguments & Use Cases, Capabilities & Limitations, Troubleshooting, userdb, passdb, Output Format
@@ -1817,7 +1790,7 @@ Subtopics: Wildcard Pattern Scripts, Category-wise Testing, Web Application Test
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[Wildcard Pattern Scripts, --script="pattern*", Category-wise Testing, wildcard patterns, comprehensive testing, Web application testing, http-*, SMB enumeration, smb-*, SSH testing, ssh-*, Vulnerability scanning, vuln*, Boolean operators, nmap --script="http-*" -p 80 , nmap --script="http-* and not http-brute" , nmap --script="* and not " , nmap --script="http-*" -p 80 scanme.nmap.org, nmap --script="smb-* and not smb-brute" -p 445 , nmap --script="ssh-*" -p 22 , nmap --script="vuln*" , ⭐--script="http-* and not http-brute and not http-slowloris"[emphasized in notes], shell wildcard]
+[Wildcard Pattern Scripts, --script="pattern*", Category-wise Testing, wildcard patterns, comprehensive testing, Web application testing, http-*, SMB enumeration, smb-*, SSH testing, ssh-*, Vulnerability scanning, vuln*, Boolean operators, nmap --script="http-*" -p 80 , nmap --script="http-* and not http-brute" , nmap --script="* and not dos" , nmap --script="http-*" -p 80 scanme.nmap.org, nmap --script="smb-* and not smb-brute" -p 445 , nmap --script="ssh-*" -p 22 , nmap --script="vuln*" , ⭐--script="http-* and not http-brute and not http-slowloris"[emphasized in notes], shell wildcard]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
@@ -1901,10 +1874,10 @@ Sections: 1 | Topics: 7 | Subtopics: 46
 
 📦 Processing: Phase 1 — Module 13: NSE Script Categories (Attack Types)
 
-===Section 1: NSE Script Categories & Risk Levels [⚠️ Derived]===
+===Section 13: NSE Script Categories & Risk Levels [⚠️ Derived]===
 Nmap scripts ko unke behavior aur risk level ke hisaab se use karna seekho. [⚠️ Derived]
 
---1--NSE Script Categories & Risk Levels--
+--13--NSE Script Categories & Risk Levels--
 Topic 1: Foundation & Safe Scans [⚠️ Derived]
 Subtopics: Safe Category, Default Category, Initial Reconnaissance, Standard Pentesting, Risk Management, Categories List
 
@@ -2057,10 +2030,10 @@ Sections: 1 | Topics: 4 | Subtopics: 20
 
 📦 Processing: Phase 1 — Module 14: NSE for Reconnaissance
 
-===Section 1: Reconnaissance & Web Asset Discovery [⚠️ Derived]===
+===Section 14: Reconnaissance & Web Asset Discovery [⚠️ Derived]===
 Target ke network path, defenses, aur hidden web assets ki jaankari nikaalna. [⚠️ Derived]
 
---1--Reconnaissance & Web Asset Discovery--
+--14--Reconnaissance & Web Asset Discovery--
 Topic 1: Network Path & Geolocation [⚠️ Derived]
 Subtopics: Traceroute, Geolocation, Network Path Discovery, TTL, Time To Live, ICMP Time Exceeded, Network Infrastructure Mapping, Firewall Locations, IDS Locations, ISP Information
 
@@ -2153,6 +2126,7 @@ Subtopics: SNMP Enumeration, Community Strings, Public/Private Strings, snmp-sys
 * Live Production Phase: `snmp-win32-users` aur `snmp-processes` run karke pentester target Windows/Linux machine ke valid usernames aur chal rahe vulnerable software ki list nikalta hai bina us machine ko touch kiye (via network equipment). TFTP se unauthenticated router config files download ki jati hain.
 * Additional context: UDP scanning slow hoti hai, isliye ise directly `-p 161,69` ke sath specifically target karna chahiye.
 
+Topic 4: UDP Infrastructure Recon
 Topic 5: Professional Reconnaissance Workflow [⚠️ Derived]
 Subtopics: Network Path Analysis, Web Reconnaissance, Information Harvesting, WAF Detailed Analysis
 
@@ -2222,6 +2196,7 @@ Topic 1: Network Path & Geolocation [⚠️ Derived]
 Topic 2: Web Defense Identification (WAF) [⚠️ Derived]
 Topic 3: Web Content & Info Harvesting [⚠️ Derived]
 Topic 4: UDP Infrastructure Recon (SNMP & TFTP)
+Topic 4: UDP Infrastructure Recon
 Topic 5: Professional Reconnaissance Workflow [⚠️ Derived]
 
 📊 PHASE SUMMARY:
@@ -2238,10 +2213,10 @@ Sections: 1 | Topics: 5 | Subtopics: 31
 
 > 📦 Processing: Phase 1 — Firewall/IDS Evasion (Chakma Dena)
 
-===Section 1: Firewall/IDS Evasion (Chakma Dena)===
+===Section 15: Firewall/IDS Evasion (Chakma Dena)===
 IDS/Firewall bypass karke stealth mode mein scanning karne ki advanced techniques. [⚠️ Derived]
 
---1--Firewall/IDS Evasion--
+--15--Firewall/IDS Evasion--
 Topic 1: IP & Interface Manipulation [⚠️ Derived]
 Subtopics: Decoy Scan (-D), IP Address Spoofing, Stealth Reconnaissance, Random Decoys (RND), Interface Selection (-e), Network Interface Control, VPN Interface Scanning, Wireless Interface Scanning
 
@@ -2335,10 +2310,10 @@ Sections: 1 | Topics: 3 | Subtopics: 30
 
 > 📦 Processing: Phase 1 — Module 16: Nmap & Beyond (Programming & GUI)
 
-===Section 1: Nmap & Beyond (Programming & GUI)===
+===Section 16: Nmap & Beyond (Programming & GUI)===
 Nmap ko Python scripts se automate karna aur Zenmap GUI ke through network topology visualize karna. [⚠️ Derived]
 
---1--Nmap & Beyond--
+--16--Nmap & Beyond--
 Topic 1: Python Port Scanner
 Subtopics: Custom Nmap Implementation, Custom Scanning Logic, Automated Vulnerability Assessment, Stealth Scanning Techniques, Custom Reporting Formats
 
@@ -2458,10 +2433,10 @@ Sections: 1 | Topics: 4 | Subtopics: 21
 
 > 📦 Processing: Phase 1 — Module 17: Pro-Level Pentesting & Advanced Techniques
 
-===Section 1: Pro-Level Pentesting & Advanced Techniques===
+===Section 17: Pro-Level Pentesting & Advanced Techniques===
 Nmap ki sabse advanced evasion techniques, specialized scans, NSE Lua scripting, aur professional tools ke sath complete workflow integration. [⚠️ Derived]
 
---1--Pro-Level Pentesting & Advanced Techniques--
+--17--Pro-Level Pentesting & Advanced Techniques--
 Topic 1: Timing Templates (`-T0` se `-T5`)
 Subtopics: Timing Templates (-T0 to -T5), Speed vs Stealth Control, Paranoid (T0), Sneaky (T1), Polite (T2), Normal (T3), Aggressive (T4), Insane (T5), IDS Evasion, Time-critical Assessments
 
@@ -2485,27 +2460,27 @@ Subtopics: Timing Templates (-T0 to -T5), Speed vs Stealth Control, Paranoid (T0
 * Live Production Phase: High-security environments mein IDS evasion ke liye stealth operations (T0-T2) aur time-critical assessments ya CTF competitions ke liye fast scanning (T4-T5) ki jati hai.
 * Additional context: (N/A)
 
-Topic 2: Granular Speed & Timeout Controls (`--min-rate`, `--max-rate`, `--host-timeout`)
-Subtopics: Rate Limiting, Minimum Rate Constraint, Maximum Rate Constraint, Host Timeout, Retries Control, OSCP Fast Scan Strategy, Network Congestion Management
+Topic 2: Granular Speed & Timeout Controls (`--min-rate`, `--max-rate`, `--host-timeout`, `--defeat-rst-ratelimit`, `--defeat-icmp-ratelimit`)
+Subtopics: Rate Limiting, Minimum Rate Constraint, Maximum Rate Constraint, Host Timeout, Retries Control, RST Rate Limit Bypass, ICMP Rate Limit Bypass, OSCP Fast Scan Strategy, Network Congestion Management
 
 [📊 SCOPE SIGNAL for Topic 2:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
 * Notes mein content volume: Detailed comparison of why `-T4` fails vs why `--min-rate` succeeds, with OSCP standard commands.
-* Key terms from notes: --min-rate, --max-rate, --host-timeout, --max-retries, packet drops, bandwidth exhaustion, OSCP, infinite loop prevention
-* Explicit emphasis in notes: "OSCP mein 65,535 ports ko -T4 se scan hone mein ghanton lag sakte hain, hamesha `--min-rate 5000` ya `10000` use karo!"
+* Key terms from notes: --min-rate, --max-rate, --host-timeout, --max-retries, --defeat-rst-ratelimit, --defeat-icmp-ratelimit, packet drops, bandwidth exhaustion, OSCP, infinite loop prevention
+* Explicit emphasis in notes: "OSCP mein 65,535 ports ko -T4 se scan hone mein ghanton lag sakte hain, hamesha `--min-rate 5000` ya `10000` use karo!", "Cloud hosts aur modern firewalls RST/ICMP rate limit karte hain — `--defeat-rst-ratelimit` se Nmap ko force karo ki speed kam na ho."
 * Notes mein jo analogies/examples the: "Agar target packet drop kar raha hai, toh -T4 speed slow kar dega (polite mode). `--min-rate` Nmap ko force karta hai ki chahe jo ho jaye, speed kam nahi karni."
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[Granular Speed, Rate Limiting, --min-rate, --max-rate, --host-timeout, --max-retries, OSCP Fast Scan, Network Congestion, packet drops, stateful firewall delays, infinite loop, nmap -sS -p- --min-rate 5000 192.168.1.1, nmap --min-rate 10000 --max-retries 1, nmap -p- --host-timeout 15m, ⭐--min-rate 5000[emphasized in notes], ⭐--min-rate 10000[emphasized in notes], ⭐--host-timeout 15m[emphasized in notes], 10000 packets per second, blind speed, accuracy trade-off]
+[Granular Speed, Rate Limiting, --min-rate, --max-rate, --host-timeout, --max-retries, --defeat-rst-ratelimit, --defeat-icmp-ratelimit, RST rate limit, ICMP rate limit, OSCP Fast Scan, Network Congestion, packet drops, stateful firewall delays, infinite loop, nmap -sS -p- --min-rate 5000 192.168.1.1, nmap --min-rate 10000 --max-retries 1 --defeat-rst-ratelimit, nmap -p- --host-timeout 15m --defeat-icmp-ratelimit, ⭐--min-rate 5000[emphasized in notes], ⭐--min-rate 10000[emphasized in notes], ⭐--host-timeout 15m[emphasized in notes], ⭐--defeat-rst-ratelimit[emphasized in notes], 10000 packets per second, blind speed, accuracy trade-off]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
 * Testing/Offline Phase: Pentester lab environment mein `--min-rate 10000` test karta hai yeh dekhne ke liye ki router crash toh nahi ho raha.
-* Fixing/Iteration Phase: Agar scan accuracy low aa rahi hai (false closed ports), toh pentester rate ko 10000 se hata kar 5000 ya 3000 kar deta hai aur `--max-retries 2` add karta hai.
-* Live Production Phase: Professional exams (OSCP) ya time-critical bug bounties mein poore 65k ports ko 2-3 minute mein scan karne ke liye `--min-rate 5000` aur unresponsive hosts ko skip karne ke liye `--host-timeout 10m` use hota hai.
+* Fixing/Iteration Phase: Agar scan accuracy low aa rahi hai (false closed ports), toh pentester rate ko 10000 se hata kar 5000 ya 3000 kar deta hai aur `--max-retries 2` add karta hai. Agar target RST/ICMP rate limit kar raha hai, toh `--defeat-rst-ratelimit` aur `--defeat-icmp-ratelimit` flags add kiye jate hain taaki Nmap throttle na ho.
+* Live Production Phase: Professional exams (OSCP) ya time-critical bug bounties mein poore 65k ports ko 2-3 minute mein scan karne ke liye `--min-rate 5000` aur unresponsive hosts ko skip karne ke liye `--host-timeout 10m` use hota hai. Cloud targets (AWS/Azure) par `--defeat-rst-ratelimit` mandatory hai.
 * Additional context: Yeh technique stealthy bilkul nahi hai, yeh pure aggressive noise hai.
 
 Topic 3: Deeper Host Discovery (`-PS`, `-PA`, `-PU`)
@@ -2577,27 +2552,27 @@ Subtopics: Advanced Evasion Techniques, Custom Data Payloads (--data-string), Ar
 * Live Production Phase: Behavioral analysis bypass karne ke liye legitimate traffic ("GET / HTTP/1.1") spoof karke payloads bheje jate hain, aur rate limiting evade ki jati hai.
 * Additional context: (N/A)
 
-Topic 6: Niche Scan Types (SCTP `-sY`, RPC `-sR`)
-Subtopics: Specialized Scan Types, SCTP INIT Scan (-sY), RPC Scan (-sR), Protocol-specific Vulnerabilities, Specialized Service Enumeration
+Topic 6: Niche Scan Types (SCTP `-sY`, QUIC/HTTP3, Modern RPC NSE)
+Subtopics: Specialized Scan Types, SCTP INIT Scan (-sY), QUIC Protocol Scan (UDP 443), HTTP3 Enumeration, RPC NSE Enumeration, Protocol-specific Vulnerabilities, Specialized Service Enumeration
 
 [📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Surface
 * Coverage Angle: Both
-* Notes mein content volume: Protocol definitions and scanning commands
-* Key terms from notes: SCTP, -sY, Stream Control Transmission Protocol, RPC, -sR, Remote Procedure Call, Telecom networks, VoIP systems, INIT chunks, portmapper queries, NFS, NIS
-* Explicit emphasis in notes: "SCTP scan telecom/VoIP environments mein valuable hai", "In specialized scans ko ignore karna... yeh critical services reveal kar sakte hain"
+* Notes mein content volume: Protocol definitions and scanning commands for niche modern protocols
+* Key terms from notes: SCTP, -sY, Stream Control Transmission Protocol, QUIC, UDP 443, HTTP3, RPC NSE, rpc-grind, Telecom networks, VoIP systems, INIT chunks, portmapper queries, NFS, NIS
+* Explicit emphasis in notes: "SCTP scan telecom/VoIP environments mein valuable hai", "QUIC/HTTP3 ab 30%+ web traffic ka hissa hai — UDP 443 ko hamesha scan karo", "`-sR` flag Nmap ne remove kar diya hai; RPC enumeration ab `-sV` ya `rpc-grind` NSE script se karo."
 * Notes mein jo analogies/examples the: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 6:
-[Specialized Scan Types, SCTP INIT scan, -sY, Stream Control Transmission Protocol, RPC scan, -sR, Remote Procedure Call, Telecom networks, VoIP systems, INIT chunks, portmapper queries, NFS, NIS, nmap -sY , nmap -sR , nmap -sY -p 2905,3868,4739 , 2905, M3UA, 3868, Diameter, 4739, IPFIX, ⭐"SCTP scan telecom/VoIP environments mein valuable hai"[emphasized in notes], ⭐"In specialized scans ko ignore karna"[emphasized in notes]]
+[Specialized Scan Types, SCTP INIT scan, -sY, Stream Control Transmission Protocol, QUIC, UDP 443, HTTP3, Google QUIC, IETF QUIC, RPC NSE enumeration, rpc-grind, Remote Procedure Call, Telecom networks, VoIP systems, INIT chunks, portmapper queries, NFS, NIS, nmap -sY , nmap -sY -p 2905,3868,4739 , nmap -sU -p 443 --script quic-enum, nmap -sV --script rpc-grind , 2905, M3UA, 3868, Diameter, 4739, IPFIX, ⭐"SCTP scan telecom/VoIP environments mein valuable hai"[emphasized in notes], ⭐"QUIC/HTTP3 ab 30%+ web traffic ka hissa hai"[emphasized in notes], ⭐"`-sR` flag Nmap ne remove kar diya hai"[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: (N/A)
-* Live Production Phase: Telecom, VoIP systems, aur enterprise environments mein jahan standard TCP/UDP scans specific services miss kar dete hain, wahan SCTP (-sY) aur RPC (-sR) use karke niche vulnerabilities discover ki jati hain.
+* Live Production Phase: Telecom, VoIP systems, aur enterprise environments mein jahan standard TCP/UDP scans specific services miss kar dete hain, wahan SCTP (-sY) use karke niche vulnerabilities discover ki jati hain. Modern web targets par QUIC (UDP 443) ko scan karna zaroori hai kyunki traditional TCP 443 scans HTTP3 endpoints miss kar dete hain. RPC services ab `-sV` ya `rpc-grind` NSE script se enumerate kiye jate hain.
 * Additional context: (N/A)
 
 Topic 7: The Nmap Suite (Ncat, Ndiff, Nping)
@@ -2669,6 +2644,29 @@ Subtopics: Professional Pentesting Workflow, Metasploit Integration, db_import, 
 * Live Production Phase: Complete workflow me pehle comprehensive Nmap scan kiya jata hai jiska XML output banta hai, aur fir use automated exploitation ke liye Metasploit me `db_import` ke through import kar liya jata hai.
 * Additional context: Debugging tools sirf troubleshooting ke liye hain production scan ke liye nahi, kyunki unse performance par impact padta hai.
 
+Topic 10: Modern EDR/NDR Evasion & Cloud Network Scanning
+Subtopics: EDR Telemetry Evasion, NDR Behavioral Analysis Bypass, Indirect Command Execution, Cloud VPC Flow Logs, GuardDuty Evasion, Container Network Scanning, Docker CNI Recon, Kubernetes Service Enumeration
+
+[📊 SCOPE SIGNAL for Topic 10:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Notes mein content volume: Conceptual overview of 2026 defensive landscape and practical cloud scanning constraints
+* Key terms from notes: EDR, NDR, CrowdStrike, SentinelOne, Microsoft Defender for Endpoint, Darktrace, Vectra, VPC Flow Logs, GuardDuty, Azure Network Watcher, Docker bridge, Kubernetes CNI, indirect execution, proxychains
+* Explicit emphasis in notes: "2026 mein sirf IDS/IPS nahi, EDR/NDR bhi scan detect karte hain — behavioral analysis ke through.", "Cloud mein Nmap scan karte waqt GuardDuty ya VPC Flow Logs trigger ho sakte hain. Hamesha compromised insider ya pivot host se scan karo."
+* Notes mein jo analogies/examples the: None
+]
+
+🔑 KEYWORDS DUMP for Topic 10:
+[EDR Evasion, NDR Evasion, CrowdStrike, SentinelOne, Microsoft Defender for Endpoint, Darktrace, Vectra, Behavioral Analysis, Indirect Command Execution, proxychains, Cloud VPC, AWS GuardDuty, Azure Network Watcher, GCP VPC Flow Logs, Container Scanning, Docker Network, Kubernetes CNI, kubeadm, kubelet, API server, nmap via proxychains, pivot host scanning, compromised insider, ⭐"EDR/NDR bhi scan detect karte hain"[emphasized in notes], ⭐"GuardDuty ya VPC Flow Logs trigger ho sakte hain"[emphasized in notes]]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+
+* Testing/Offline Phase: Red teamer EDR/NDR lab setup karke test karta hai ki Nmap scan kaise trigger hota hai. Cloud lab mein VPC flow log analysis check kiya jata hai.
+* Fixing/Iteration Phase: Direct Nmap execution se bachne ke liye pentester pivot host (compromised internal machine) ya proxychains ke through scan route karta hai. EDR evasion ke liye indirect command execution (LOLBAS) ya memory-resident tools use kiye jate hain.
+* Live Production Phase: Corporate red team engagements mein pivot host se scan kiya jata hai taaki source IP attacker ka na ho. Kubernetes environments mein `nmap` ko sidecar container ya compromised pod se run kiya jata hai internal CNI recon ke liye.
+* Additional context: Cloud-native environments mein aggressive scanning se cloud provider ke security alerts trigger hote hain. Isliye stealth aur legitimate traffic mimicry aur bhi zaroori hai.
+
 --- 🛑 PHASE 1 SKELETON READY. Paste the next phase/module notes to continue, OR type 'DONE' if all notes are pasted.
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original notes ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai. (Aur Devanagari ko strictly Hinglish Roman mein convert kiya gaya hai).**
@@ -2702,10 +2700,10 @@ Sections: 1 | Topics: 9 | Subtopics: 58
 
 📦 Processing: Phase 1 — Module 18: Agentic AI & MCP Integration
 
-===Section 1: Agentic AI & MCP Integration===
+===Section 18: Agentic AI & MCP Integration===
 LLMs aur Agentic AI ko Nmap ke sath jodna using Model Context Protocol (MCP) taaki scans autonomously execute aur parse ho sakein. [⚠️ Derived]
 
---1--Agentic AI & MCP Integration--
+--18--Agentic AI & MCP Integration--
 Topic 1: Model Context Protocol (MCP) Fundamentals
 Subtopics: The NxM Integration Problem, MCP Host, MCP Client, MCP Server, Transport Layer (stdio/SSE), JSON-RPC, nmap-mcp-server
 
