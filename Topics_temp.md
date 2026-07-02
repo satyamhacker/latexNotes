@@ -2662,10 +2662,30 @@ Subtopics: Ollama Installation, Qwen 2.5 0.5B, Model Quantization, System Prompt
 
 * Testing/Offline Phase: Developer terminal mein `ollama run qwen:0.5b` command chalata hai aur chat test karta hai. Response speed (tokens per second) check karta hai task manager (htop) mein RAM usage dekh kar.
 
-Topic 2: Function Calling (Agentic Action)
-Subtopics: API Webhooks, JSON Output Formatting, Action Execution
+--18--Local Agentic AI & RAG--
+Topic 2: Hardware Acceleration (Vulkan GPU & Thread Tuning)
+Subtopics: CPU vs GPU Inference, VideoCore VII Architecture, Vulkan Backend Compilation, Thread Pinning, Measuring Tokens per Second
 
 [📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Squeezing every ounce of performance from the Pi's chip
+* Explicit emphasis by speaker: "Running AI purely on the Pi's CPU is like walking when you have a bicycle. We must activate the Vulkan graphics drivers to make the VideoCore VII GPU do the heavy mathematical lifting."
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Hardware acceleration, VideoCore VII GPU, ⭐Vulkan backend, llama.cpp, Ollama config, OLLAMA_NUM_PARALLEL, CPU thread pinning, bottleneck, Tokens per second, t/s, inference speed, low latency]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Fixing/Iteration Phase: Developer dekhta hai ki Jarvis answer dene mein 5 second le raha hai aur text bohot dheere (4 tokens/sec) generate ho raha hai. Developer system environment variables mein Vulkan GPU acceleration enable karta hai aur threads ko Pi ke exact 4 cores pe lock karta hai. Pi restart karne ke baad wahi model 15-20 tokens/sec ki ultra-fast speed pe chalne lagta hai.
+
+--18--Local Agentic AI & RAG--
+Topic 3: Function Calling (Agentic Action)
+Subtopics: API Webhooks, JSON Output Formatting, Action Execution
+
+[📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
@@ -2674,70 +2694,72 @@ Subtopics: API Webhooks, JSON Output Formatting, Action Execution
 * Explicit emphasis by speaker: "Force the LLM to output ONLY JSON, otherwise your Python parser will break."
 ]
 
-🔑 KEYWORDS DUMP for Topic 2:
-[Function calling, intent recognition, JSON output, schema, parse response, triggers, Home Assistant API, REST webhook, ⭐"Turn off the lights", action execution]
-
-🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
-
-* Live Production Phase: User bolta hai "Turn off bedroom AC". Whisper text deta hai -> Ollama text ko padh kar JSON banata hai `{"device": "ac", "room": "bedroom", "state": "off"}` -> Python script is JSON ko parse karke MQTT/Home Assistant API hit karti hai, aur physical AC band ho jata hai.
-
-Topic 3: Local RAG (Retrieval-Augmented Generation)
-Subtopics: Text Embeddings, ChromaDB Lite, Querying Logs
-
-[📊 SCOPE SIGNAL for Topic 3:
-
-* Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Concept of giving AI memory
-* Key terms from transcript: RAG, ChromaDB, Embeddings, SQLite, Context Injection
-]
-
 🔑 KEYWORDS DUMP for Topic 3:
-[RAG, ChromaDB, vector database, embeddings, all-MiniLM, SQLite, context window, security logs, semantic search]
+[Function calling, intent recognition, JSON output, schema, parse response, triggers, Home Assistant API, REST webhook, ⭐"Turn off the lights", action execution]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Testing/Offline Phase: Developer Section 12 (Camera) aur PIR ke logs ko vector DB mein save karta hai.
-* Live Production Phase: User poochhta hai "Did anyone come to the door today?". LLM pehle ChromaDB se vectors match karta hai, relevant log text uthata hai, us text ko context mein padhta hai, aur accurate answer bolta hai.
+* Live Production Phase: User bolta hai "Turn off bedroom AC". Whisper text deta hai -> Ollama text ko padh kar JSON banata hai `{"device": "ac", "room": "bedroom", "state": "off"}` -> Python script is JSON ko parse karke MQTT/Home Assistant API hit karti hai, aur physical AC band ho jata hai.
 
-Topic 4: Vision-Language Models (VLMs)
-Subtopics: LLaVA / Qwen-VL Architecture, Multi-modal Prompts, Local Image Inference
+--18--Local Agentic AI & RAG--
+Topic 4: Ultra-Lightweight RAG for Edge (`sqlite-vec`)
+Subtopics: The Heavy Vector DB Problem, Introduction to `sqlite-vec`, Natively Compiling C-Extensions, Text Embeddings (all-MiniLM), Semantic Search SQL Queries
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Concept of giving AI memory without crashing the hardware
+* Explicit emphasis by speaker: "Do not run ChromaDB, Pinecone, or heavy vector databases on a Raspberry Pi. You will run out of RAM. In 2026, the standard for Edge AI is `sqlite-vec`—a native C extension that adds vector search directly into tiny SQLite files."
+]
 
 🔑 KEYWORDS DUMP for Topic 4:
+[RAG, Retrieval-Augmented Generation, vector database, embeddings, all-MiniLM, ⭐sqlite-vec, SQLite extension, C-compilation, vector similarity search, cosine distance, context window, zero-overhead, memory footprint]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Developer pehle heavy vector DB load karne ki koshish karta hai aur dekhta hai ki Pi freeze ho raha hai. Phir woh `sqlite-vec` install karta hai.
+* Live Production Phase: User poochhta hai "Did anyone come to the door today?". System sirf ek simple SQL query run karta hai `SELECT log_text FROM logs ORDER BY vec_distance(...) LIMIT 1`. Microseconds mein vector match hota hai, relevant log text uthata hai, aur LLM ko bhej deta hai bina RAM spike ke.
+
+--18--Local Agentic AI & RAG--
+Topic 5: Vision-Language Models (VLMs)
+Subtopics: LLaVA / Qwen-VL Architecture, Multi-modal Prompts, Local Image Inference
+
+🔑 KEYWORDS DUMP for Topic 5:
 [VLM, Vision Language Model, LLaVA, Qwen-VL, multi-modal, base64 encode, Ollama image prompt, scene analysis]
 
 --18--Local Agentic AI & RAG--
-Topic 5: LLM Memory Management & ZRAM
+Topic 6: LLM Memory Management & ZRAM
 Subtopics: Out-of-Memory (OOM) Killer, Swap Space Limits, ZRAM Concept, Configuring Compression
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 * Depth Level: Deep
 * Coverage Angle: Practical only
 * Transcript mein content volume: System optimization for running massive AI models
 * Explicit emphasis by speaker: "Your Raspberry Pi will crash if you run out of memory. Enabling ZRAM is a lifesaver for local LLMs."
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [Out of Memory, OOM killer, system freeze, Swapfile exhaustion, ⭐ZRAM, compressed RAM, lz4 algorithm, sudo apt install zram-tools, htop memory monitoring, AI memory bottleneck]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 * Testing/Offline Phase: Developer dekhta hai ki Ollama load hote hi Pi freeze ho gaya. Woh terminal mein `zram-tools` install karta hai jo RAM ke ek hisse ko compress kar deta hai, effectively 8GB RAM ko 12GB jaisa perform karne deta hai bina slow SSD swap use kiye.
 
 --18--Local Agentic AI & RAG--
-Topic 6: Conversational Memory & Agentic Chains
+Topic 7: Conversational Memory & Agentic Chains
 Subtopics: Short-term vs Long-term memory, LangChain Framework, Tool Binding, Agent Executor
 
-[📊 SCOPE SIGNAL for Topic 6:
+[📊 SCOPE SIGNAL for Topic 7:
 * Depth Level: Deep
 * Coverage Angle: Both
 * Transcript mein content volume: Building the "brain" workflow
 * Explicit emphasis by speaker: "A simple API call to an LLM forgets the last message. You must give your agent a memory buffer."
 ]
 
-🔑 KEYWORDS DUMP for Topic 6:
+🔑 KEYWORDS DUMP for Topic 7:
 [Conversational memory, context window, ⭐LangChain, LangGraph, Mem0, ConversationBufferMemory, tool binding, Agent Executor, multi-turn conversation, train of thought, context limit]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
 * Application Phase: Developer raw Ollama API ki jagah LangChain framework use karta hai. Woh system mein `ConversationBufferMemory` inject karta hai taaki agar user bole "Turn on the AC", aur agle prompt mein bole "Make it 22 degrees", toh Jarvis automatically samajh jaye ki 'it' ka matlab AC hai.
 
 
@@ -2749,14 +2771,15 @@ Subtopics: Short-term vs Long-term memory, LangChain Framework, Tool Binding, Ag
 
 Section 18: Local Agentic AI & RAG
 Topic 1: Ollama & Micro-LLMs
-Topic 2: Function Calling (Agentic Action)
-Topic 3: Local RAG (Retrieval-Augmented Generation)
-Topic 4: Vision-Language Models (VLMs)
-Topic 5: LLM Memory Management & ZRAM
-Topic 6: Conversational Memory & Agentic Chains
+Topic 2: Hardware Acceleration (Vulkan GPU & Thread Tuning)
+Topic 3: Function Calling (Agentic Action)
+Topic 4: Ultra-Lightweight RAG for Edge (`sqlite-vec`)
+Topic 5: Vision-Language Models (VLMs)
+Topic 6: LLM Memory Management & ZRAM
+Topic 7: Conversational Memory & Agentic Chains
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 18
+Sections: 1 | Topics: 7 | Subtopics: 28
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
