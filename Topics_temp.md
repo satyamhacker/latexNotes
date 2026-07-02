@@ -244,10 +244,29 @@ Subtopics: Hardware Boot Sequence, LED Indicators, Angry IP Scanner, Network Ran
 * Live Production Phase: (N/A — transcript mein is topic ke liye koi live production flow nahi bataya gaya)
 * Additional context: N/A
 
-Topic 3: SSH Connection & Remote Terminal
-Subtopics: Hidden .ssh Folder, Terminal Commands, SSH Syntax, Putty Client, Remote Authentication
+--2--Install Raspberry Pi OS Without Any External Monitor or Keyboard--
+Topic 3: Preventing Broken Connections (Static IP / DHCP Reservation)
+Subtopics: The Dynamic IP Problem, MAC Addresses vs IP Addresses, Router Admin Panel, DHCP Reservation Setup, Local DNS Fallback (raspberrypi.local)
 
 [📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Crucial networking fix for IoT servers
+* Explicit emphasis by speaker: "If your Raspberry Pi is going to be a web server or a smart home hub, its IP address MUST NEVER CHANGE. Otherwise, all your apps will break when the router reboots."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Dynamic IP, DHCP lease, Static IP, DHCP Reservation, Router admin panel, 192.168.1.1, MAC Address, physical address, bind IP to MAC, mDNS, raspberrypi.local, network reliability, headless stability]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Fixing/Iteration Phase: Developer dekhta hai ki 2 din baad SSH connect nahi ho raha kyunki Pi ka IP .76 se .82 ho gaya hai. Developer apne Wi-Fi router ke admin panel mein login karta hai, Pi ka MAC address dhoondhta hai, aur usko ek permanent Static IP (e.g., 192.168.1.100) par lock kar deta hai. Ab router chahe kitni baar reboot ho, server ka address same rehta hai.
+
+Topic 4: SSH Connection & Remote Terminal
+Subtopics: Hidden .ssh Folder, Terminal Commands, SSH Syntax, Putty Client, Remote Authentication
+
+[📊 SCOPE SIGNAL for Topic 4:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
@@ -257,20 +276,20 @@ Subtopics: Hidden .ssh Folder, Terminal Commands, SSH Syntax, Putty Client, Remo
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 3:
+🔑 KEYWORDS DUMP for Topic 4:
 [SSH connection, command line access, terminal, file manager, hidden folders, .ssh, known_hosts, cmd, command prompt, putty, SSH client, Windows 10, ssh command, ⭐ssh pi@192.168.31.76, username, IP address, remote authentication, password denied, host Raspberry Pi]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
 * Testing/Offline Phase: Developer PC ka terminal (ya Putty) open karta hai aur `ssh username@IP` command run karta hai. Password authenticate karke woh Raspberry Pi ke internal terminal ka remote access leta hai.
 * Fixing/Iteration Phase: Agar SSH error de ya connection reject kare, toh developer file manager mein jaakar hidden `.ssh` folder se purani `known_hosts` file delete karta hai. Agar password denied ho, toh OS dobara flash karta hai.
 * Live Production Phase: (N/A)
 * Additional context: Speaker ne clear kiya ki agar Windows 10 se purana OS hai toh native SSH nahi hoga, uske liye Putty use karna padega.
 
-Topic 4: VNC Setup & Desktop Configuration
+Topic 5: VNC Setup & Desktop Configuration
 Subtopics: raspi-config Utility, VNC Enablement, Auto Login Setup, Resolution Configuration, VNC Viewer Installation, System Updates, Safe Shutdown
 
-[📊 SCOPE SIGNAL for Topic 4:
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
@@ -280,20 +299,20 @@ Subtopics: raspi-config Utility, VNC Enablement, Auto Login Setup, Resolution Co
 * Speaker ne jo analogies/examples use kiye: "like your computer you don't just switch off the power on your computer you first shut it down properly"
 ]
 
-🔑 KEYWORDS DUMP for Topic 4:
+🔑 KEYWORDS DUMP for Topic 5:
 [VNC, remote desktop, ⭐sudo raspi-config, admin rights, administrator privileges, interface options, VNC server, ⭐sudo reboot, connection reset, system options, boot auto login, desktop auto login, console login, display options, VNC resolution, 1080p, VNC Viewer, realvnc.com, VNC client, file new connection, remember password, black screen error, preferences, appearance settings, taskbar, system font 16, install updates, ⭐shutdown, software shutdown, corrupted SD card]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Developer SSH ke through `sudo raspi-config` utility open karta hai aur VNC server, auto-login, aur resolution (1080p) configure karke system reboot karta hai. Phir woh PC par VNC Viewer use karke graphical desktop access karta hai aur GUI updates install karta hai.
 * Fixing/Iteration Phase: Agar VNC connect hone par black screen dikhaye ("cannot currently show the desktop"), toh developer ko samajh aata hai ki configuration miss ho gayi hai, aur woh raspi-config ke steps dobara karta hai.
 * Live Production Phase: (N/A)
 * Additional context: Speaker ne explicitly warn kiya ki physical power nikalne se pehle humesha software shutdown karna zaroori hai, taaki SD card corrupt na ho.
 
-Topic 5: Updating Wi-Fi Headlessly (NetworkManager)
+Topic 6: Updating Wi-Fi Headlessly (NetworkManager)
 Subtopics: Headless Wi-Fi Reconfiguration, NetworkManager Connections, .nmconnection Files, UUID Generation, Secure Keyfiles
 
-[📊 SCOPE SIGNAL for Topic 5:
+[📊 SCOPE SIGNAL for Topic 6:
 
 * Depth Level: Moderate
 * Coverage Angle: Practical only
@@ -302,28 +321,28 @@ Subtopics: Headless Wi-Fi Reconfiguration, NetworkManager Connections, .nmconnec
 * Explicit emphasis by speaker: "wpa_supplicant is dead. You must format your network credentials as an .nmconnection file with strict permissions, otherwise the Pi will reject it."
 ]
 
-🔑 KEYWORDS DUMP for Topic 5:
+🔑 KEYWORDS DUMP for Topic 6:
 [troubleshooting, different Wi-Fi network, NetworkManager, Bookworm OS, /boot/firmware/system-connections/, ⭐.nmconnection, UUID, wifi-security, PSK, network credentials, inject configuration, Angry IP Scanner]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
 * Fixing/Iteration Phase: Jab developer naye location pe jata hai, woh SD card PC mein lagata hai. Boot partition ke andar `system-connections` folder banata hai aur ek `wifi.nmconnection` file inject karta hai jisme naya SSID aur PSK hota hai. Pi boot hone par NetworkManager automatically is file ko read karke connect kar leta hai.
 
 --2--Install Raspberry Pi OS Without Any External Monitor or Keyboard--
-Topic 6: Advanced Storage (Upgrading to PCIe NVMe)
+Topic 7: Advanced Storage (Upgrading to PCIe NVMe)
 Subtopics: MicroSD Exhaustion, PCIe M.2 NVMe HAT setup, EEPROM Bootloader Config, Cloning OS
 
-[📊 SCOPE SIGNAL for Topic 6:
+[📊 SCOPE SIGNAL for Topic 7:
 * Depth Level: Moderate
 * Coverage Angle: Both
 * Transcript mein content volume: Explanation of migrating from SD card to SSD for heavy AI workloads
 * Explicit emphasis by speaker: "MicroSD is great for learning, but for 24/7 AI databases and NVR recording, you must upgrade to an NVMe SSD."
 ]
 
-🔑 KEYWORDS DUMP for Topic 6:
+🔑 KEYWORDS DUMP for Topic 7:
 [MicroSD exhaustion, read-write limit, PCIe Gen 2, PCIe Gen 3, NVMe SSD, M.2 HAT, EEPROM bootloader, raspi-config advanced options, boot order, rpi-clone, reliable storage, AI database]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
 * Live Production Phase: Developer project ko SD card par test karne ke baad, PCIe NVMe HAT lagata hai. Pi ke EEPROM bootloader ko update karta hai (boot from NVMe) aur SD card ka poora OS SSD par clone kar deta hai 10x speed aur reliability ke liye.
 
 ---
@@ -335,14 +354,15 @@ Subtopics: MicroSD Exhaustion, PCIe M.2 NVMe HAT setup, EEPROM Bootloader Config
 Section 2: Install Raspberry Pi OS Without Any External Monitor or Keyboard
 Topic 1: Headless Setup Overview & OS Flashing
 Topic 2: First Boot & Finding IP Address
-Topic 3: SSH Connection & Remote Terminal
-Topic 4: VNC Setup & Desktop Configuration
-Topic 5: Updating Wi-Fi Headlessly (NetworkManager)
-Topic 6: Advanced Storage (Upgrading to PCIe NVMe)
+Topic 3: Preventing Broken Connections (Static IP / DHCP Reservation)
+Topic 4: SSH Connection & Remote Terminal
+Topic 5: VNC Setup & Desktop Configuration
+Topic 6: Updating Wi-Fi Headlessly (NetworkManager)
+Topic 7: Advanced Storage (Upgrading to PCIe NVMe)
 
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 6 | Subtopics: 32
+Sections: 1 | Topics: 7 | Subtopics: 37
 
 **Double-check steps performed (Internal Verification):**
 
