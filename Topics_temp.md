@@ -1611,27 +1611,27 @@ Subtopics: All Formats, Tri-Format Architecture, Multi-Format Base Paths
 * Additional context: Is matrix setup se long-term validation capabilities dynamically handle ho jati hain bina engine recalculation loss ke.
 
 Topic 7: Modern Web Probing & Vulnerability Handoff (`httpx`, `gowitness`, `Nuclei`)
-Subtopics: Visual Reconnaissance, XML File Parsing, EyeWitness Integration, Aquatone Integration, Mass Screenshotting, Web Interface Discovery, Bug Bounty Workflows
+Subtopics: Visual Reconnaissance, Machine-Readable HTTP Probing, Mass Screenshotting Automation, Automated Vulnerability Scanning, Attack Surface Verification, Tool Pipeline Integration
 
 [📊 SCOPE SIGNAL for Topic 7:
 
-* Depth Level: Moderate
+* Depth Level: Deep
 * Coverage Angle: Practical only
-* Notes mein content volume: Pipeline workflow showing Nmap XML output being fed directly into external parsing tools.
-* Key terms from notes: Visual Reconnaissance, Mass Screenshotting, EyeWitness, Aquatone, XML Parsing, Web Interface, default credentials, Bug Bounty
-* Explicit emphasis in notes: "Jab 500 open web ports milen, toh sabko manually browser mein kholna bewakoofi hai. Nmap XML ko Aquatone ya EyeWitness mein feed karo."
+* Notes mein content volume: Detailed multi-tool pipeline architecture showing Nmap XML data feeding directly into modern go-based CLI binaries.
+* Key terms from notes: httpx, gowitness, nuclei, templates, mass screenshotting, visual triage, active validation, automation pipeline
+* Explicit emphasis in notes: "Modern 2026 multi-host scoping mein manual browser verification slow hai; hamesha Nmap XML output ko `httpx` aur `gowitness` ke chain pipeline mein pipe karo."
 * Notes mein jo analogies/examples the: None
 ]
 
 🔑 KEYWORDS DUMP for Topic 7:
-[Visual Reconnaissance, Mass Screenshotting, EyeWitness, Aquatone, XML Parsing, Web Interface Discovery, nmap -sS -p 80,443,8080,8443 -iL targets.txt -oX web_scan.xml, cat web_scan.xml | aquatone -nmap, eyewitness -x web_scan.xml --web, Bug Bounty, automated HTML report, visual inspection, default credentials, admin panels, login pages, time-saving, pipeline integration, ⭐"manually browser mein kholna bewakoofi hai"[emphasized in notes], ⭐aquatone -nmap[emphasized in notes]]
+[Visual Reconnaissance, Modern Web Probing, ProjectDiscovery, httpx, gowitness, Nuclei, XML Parsing, Web Interface Discovery, nmap -sS -p 80,443,8080,8443 -iL targets.txt -oX web_scan.xml, web_scan.xml | httpx -silent | gowitness file -f -, nuclei -l live_web_hosts.txt -t cves/, Bug Bounty, automated HTML report, visual triage, default templates, mass automation, pipeline integration, ⭐"manual browser verification slow hai"[emphasized in notes], ⭐web_scan.xml | httpx[emphasized in notes]]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
 
-* Testing/Offline Phase: Pentester Nmap se saare HTTP/HTTPS ports (80, 443, 8080, 8443) scan karke results ko XML format (`-oX`) mein save karta hai.
+* Testing/Offline Phase: Pentester Nmap command se standard aur alternative web ports (80, 443, 8080, 8443) scan karke structured XML export (`-oX`) generate karta hai.
 * Fixing/Iteration Phase: (N/A)
-* Live Production Phase: Us XML file ko Aquatone ya EyeWitness mein pass kiya jata hai. Yeh tools automatically har IP/Port par browser launch karte hain, screenshot lete hain, server headers nikalte hain, aur ek clear HTML report generate karte hain. Pentester sirf us report ko scroll karke interesting login pages (jaise Tomcat, Jenkins, ya custom admin panels) filter karta hai.
-* Additional context: Yeh step manual reconnaissance hours ko minutes mein convert kar deta hai, especially large corporate scopes (/16 subnets) ya bug bounties mein.
+* Live Production Phase: Generated XML output se raw network hosts target karke `httpx` pipe chalayi jaati hai active protocols status code verify karne ke liye. Live URLs milte hi unhe parallelly `gowitness` mein mass screenshots aur `nuclei` mein configuration templates testing ke liye pass kiya jata hai.
+* Additional context: Yeh tool chain manual asset review ke hours ko pure single-line CLI orchestration pipeline se minutes mein convert kar deti hai.
 
 Topic 8: Professional Output Pipeline [⚠️ Derived]
 Subtopics: Unified Tri-Scan Execution, Extracted Review Pipeline, Database Engine Ingestion, Pattern Grep Filter
@@ -2639,7 +2639,7 @@ Subtopics: Advanced NSE Scripting, Lua Programming, Broadcast Category Scripts, 
 🔑 KEYWORDS DUMP for Topic 8:
 [Advanced NSE Scripting, Lua Programming, Broadcast category, ipidseq script, Network-wide enumeration, OS fingerprinting, zombie hosts, idle scan, require "nmap", require "shortport", nmap --script broadcast-dhcp-discover, nmap --script broadcast-dns-service-discovery, nmap --script ipidseq , /usr/share/nmap/scripts/, nmap --script-updatedb, nmap --script http-enum,http-headers,http-methods, ⭐"Broadcast scripts local network reconnaissance ke liye powerful hain"[emphasized in notes], ⭐"Custom scripts banate samay error handling ignore karna"[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
 
 * Testing/Offline Phase: Developer Lua scripting use karke custom checks aur requirements ke liye Nmap scripts likhta hai.
 * Fixing/Iteration Phase: (N/A)
