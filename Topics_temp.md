@@ -973,6 +973,26 @@ Subtopics: Input Setup, Constant Variable Convention, Reading Input State, High 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 * Testing/Offline Phase: Developer script chalata hai aur button press karke hardware input test karta hai. Jab button press hota hai toh console mein '1' print hota hai, aur chhodne par '0' print hota hai.
 
+--6--Control Raspberry Pi's GPIOs with Python--
+Topic 6: Generic GPIO Control (DigitalOutputDevice & DigitalInputDevice)
+Subtopics: Limitations of Named Classes, Generic Output Devices (Relays/Buzzers), Generic Input Devices (Custom Sensors), The `is_active` Property, RPi.GPIO Flexibility in gpiozero
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Refactoring specific named classes to generic hardware classes
+* Explicit emphasis by speaker: "Don't panic if your exact component isn't listed in gpiozero. For any generic sensor or actuator, use DigitalInputDevice or DigitalOutputDevice. This gives you the flexibility of old RPi.GPIO but with modern safety."
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[⭐gpiozero generic classes, DigitalOutputDevice, DigitalInputDevice, RPi.GPIO alternative, custom sensor, relay module, buzzer, output_pin.on(), output_pin.off(), input_pin.is_active, boolean state, object-oriented flexibility]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Developer ko ek heavy 220V appliance control karne ke liye 5V Relay lagana hai. Kyunki `gpiozero` mein Relay class har specific relay module ke liye fit nahi hoti, developer `from gpiozero import DigitalOutputDevice` use karta hai aur `output_pin = DigitalOutputDevice(17)` likh kar cleanly `output_pin.on()` se hardware trigger karta hai.
+* Fixing/Iteration Phase: Agar developer ke paas koi custom third-party motion sensor hai (non-PIR), toh woh `DigitalInputDevice` use karta hai aur `is_active` property se cleanly `True/False` state read karta hai bina manual pull-up/pull-down resistors configure kiye.
+
 ---
 
 📋 EXTRACTED IN THIS PHASE:
@@ -983,9 +1003,10 @@ Topic 2: Blinking an LED (Modern lgpio/gpiozero Backend)
 Topic 3: User Input LED Control (Activity)
 Topic 4: Push Button Hardware Setup
 Topic 5: Reading Push Button Inputs
+Topic 6: Generic GPIO Control (DigitalOutputDevice & DigitalInputDevice)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 30
+Sections: 1 | Topics: 6 | Subtopics: 35
 
 
 
@@ -1104,6 +1125,63 @@ Subtopics: Activity 7 Challenge, LED Pin List Array, For Loop Pin Setup, Custom 
 * Live Production Phase: Production mein, agar hardware modify karna ho aur 1 naya LED lagana ho, toh developer ko poora logic change nahi karna padta—bas `led_pin_list` array mein ek aur GPIO pin number add ya remove karna hota hai.
 * Additional context: None
 
+--7--Practice More with GPIOs--
+Topic 5: Analog Signals & ADCs (MCP3008 / ADS1115)
+Subtopics: The Analog vs Digital limitation, I2C/SPI Protocol Basics, ADC Wiring, Reading Analog Sensors (Potentiometer/LDR)
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation of hardware limitation and fixing it with an ADC chip
+* Explicit emphasis by speaker: "The Raspberry Pi has ZERO analog pins. If you connect an analog soil moisture sensor directly to a GPIO, it won't work. You must bridge it with an ADC chip."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Analog signal, Digital limitation, ADC, Analog to Digital Converter, ⭐MCP3008, ADS1115, SPI protocol, I2C protocol, Potentiometer, LDR, light dependent resistor, analog read, voltage divider, smbus module, spidev]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Developer ek Potentiometer (knob) aur LDR (Light sensor) leta hai. Pi directly analog values nahi padh sakta, isliye developer unhe MCP3008/ADS1115 chip se connect karta hai, aur us chip ko Pi ke SPI/I2C pins se wire karta hai. Python script se continuous 0-1023 ranges padhta hai room ki exact light intensity measure karne ke liye.
+
+--7--Practice More with GPIOs--
+Topic 6: Physical Displays (I2C OLED Screens)
+Subtopics: I2C Interface Activation, 0.96" OLED (SSD1306), Wiring Display, `luma.oled` Library, Printing Text & IPs
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Adding visual feedback to headless setups
+* Explicit emphasis by speaker: "If your Pi is headless, how do you know its IP address without scanning? We print it directly on a tiny OLED screen."
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[I2C interface, raspi-config I2C enable, ⭐OLED display, 0.96 inch, SSD1306, SDA pin, SCL pin, ⭐luma.oled, Pillow library, draw.text, physical dashboard, IP address display]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Live Production Phase: Developer breadboard par 0.96" OLED screen lagata hai (VCC, GND, SDA, SCL). Boot up script likhta hai jo system ka IP address, CPU temperature aur RAM usage dynamically screen par print karta hai. Ab network badalne par Pi ko scan nahi karna padta.
+
+--7--Practice More with GPIOs--
+Topic 7: Physical Movement (PWM & Servo Motors)
+Subtopics: Software PWM vs Hardware PWM, Duty Cycle Concept, Servo Motor Wiring (SG90), `gpiozero` AngularServo
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Bridging software with physical robotics
+* Explicit emphasis by speaker: "Do not power a heavy servo motor from the Pi's 5V pin, it will crash the Pi. Use an external power supply."
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[PWM, Pulse Width Modulation, Duty Cycle, Frequency, ⭐Servo motor, SG90, 180 degrees, external power supply, common ground, ⭐AngularServo, gpiozero PWMOutputDevice, physical robotics, camera pan-tilt]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Application Phase: Developer ek SG90 servo motor leta hai. `gpiozero` ki `AngularServo` class use karke script likhta hai jisme `servo.angle = 90` likhne par motor physically rotate hoti hai. Developer isse baad mein camera module ke saath combine karta hai taaki face-tracking pan-tilt camera ban sake.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1121,9 +1199,12 @@ Topic 1: State Tracking & Sequential Logic
 
 Section 4: Code Refactoring & Optimization
 Topic 1: Arrays, Loops & Custom Functions
+Topic 5: Analog Signals & ADCs (MCP3008 / ADS1115)
+Topic 6: Physical Displays (I2C OLED Screens)
+Topic 7: Physical Movement (PWM & Servo Motors)
 
 📊 PHASE SUMMARY:
-Sections: 4 | Topics: 4 | Subtopics: 23
+Sections: 4 | Topics: 7 | Subtopics: 36
 
 
 
@@ -1278,6 +1359,25 @@ Subtopics: PIR Limitations (Micro-movements), mmWave Radar Concept, LD2410 / HLK
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 * Application Phase: Developer samajhta hai ki living room ya bathroom ke liye PIR sensor bekar hai. Woh uski jagah mmWave sensor lagata hai, jo room mein kisi ke hone par (chahe woh chupchap baitha ho) lights on rakhta hai.
 
+--8--Direct Movement with a PIR Sensor--
+Topic 5: USB Peripherals & Serial Communication (UART)
+Subtopics: Hardware Bridging, USB-to-Serial, `pyserial` module, Interfacing Microcontrollers (Arduino/ESP32)
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Moderate
+* Coverage Angle: Both
+* Transcript mein content volume: Connecting Pi to other external hardware boards
+* Explicit emphasis by speaker: "The Pi is great at AI and Web, but bad at real-time sensor loops. Let an Arduino handle the sensors, and send the data to the Pi via USB Serial."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Serial communication, UART, USB peripheral, ⭐pyserial, import serial, baud rate, 9600, 115200, /dev/ttyUSB0, /dev/ttyACM0, Arduino, ESP32, hardware bridge, serial.readline(), decode utf-8]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Developer ek Arduino ko USB cable se Pi mein plug karta hai. Terminal mein `ls /dev/tty*` se port dhoondhta hai. Python mein `pyserial` use karke Arduino se bheja gaya raw sensor data read karta hai aur use parse karta hai.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1293,9 +1393,10 @@ Section 2: Programming the PIR Sensor in Python
 Topic 1: Reading Sensor Data
 Topic 2: LED Motion Activity
 Topic 4: Modern Evolution: mmWave Radar Sensors (Presence Detection)
+Topic 5: USB Peripherals & Serial Communication (UART)
 
 📊 PHASE SUMMARY:
-Sections: 2 | Topics: 6 | Subtopics: 31
+Sections: 2 | Topics: 7 | Subtopics: 35
 
 
 
@@ -1474,6 +1575,25 @@ Subtopics: Dropping VNC Desktop, VS Code Installation, Remote-SSH Extension, Key
 * Testing/Offline Phase: Developer apne main Windows/Mac laptop par VS Code install karta hai aur "Remote-SSH" extension download karta hai.
 * Application Phase: `ssh pi@192.168.x.x` command VS Code mein daal kar, woh Pi ke pure file system ko local IDE mein open kar leta hai. Ab woh latency-free coding kar sakta hai, aur VS Code ka integrated terminal directly Pi pe commands execute karta hai.
 
+--9--Use the Terminal on Your Raspberry Pi--
+Topic 4: OS Security & Hardening (Zero to Hero Security)
+Subtopics: Default User Vulnerabilities, Uncomplicated Firewall (UFW), Generating SSH Keys, Disabling Password Auth, Fail2Ban
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Securing the Pi against internet bots
+* Explicit emphasis by speaker: "If you open your Pi to the internet with a password, you will be hacked in 15 minutes. You MUST use SSH keys."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Security hardening, ⭐ufw, Uncomplicated Firewall, ufw allow ssh, ufw enable, ⭐SSH keys, ssh-keygen, id_rsa.pub, authorized_keys, disable password authentication, sshd_config, PasswordAuthentication no, ⭐fail2ban, brute-force protection, botnet defense]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Fixing/Iteration Phase: Developer terminal mein `ufw` install karke sirf zaroori ports (jaise 22, 8000) open karta hai. Phir PC par `ssh-keygen` chalakar public key Pi mein daalta hai, aur `sshd_config` mein password login ko strictly `no` kar deta hai. Ab kisi ke paas password ho toh bhi wo login nahi kar sakta, Pi 100% hack-proof ho jata hai.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -1493,9 +1613,10 @@ Topic 1: Software Installation (APT)
 Topic 2: System & Network Commands
 
 Topic 3: Professional IDE Workflow (VS Code Remote-SSH)
+Topic 4: OS Security & Hardening (Zero to Hero Security)
 
 📊 PHASE SUMMARY:
-Sections: 3 | Topics: 7 | Subtopics: 36
+Sections: 3 | Topics: 8 | Subtopics: 41
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2104,6 +2225,25 @@ Subtopics: Dynamic URL Parameters, LED Pin Validation, State Validation, Multipl
 * Live Production Phase: User externally browser se URL ko change karke (e.g., `/led/27/state/1`) specifically us physical LED ko power on ya off karta hai, completely remotely operate karte hue.
 * Additional context: N/A
 
+--14--Create a Web Application on Your Raspberry Pi with FastAPI--
+Topic 5: Hardware UI: Kiosk Mode & Chromium Autostart
+Subtopics: Headless vs Desktop UI, Wayland/X11 Autostart, Chromium Flags, Smart Mirror Concept
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Making a standalone physical UI device
+* Explicit emphasis by speaker: "Sometimes you don't want to check your phone. You want a screen on the wall showing your FastAPI dashboard 24/7."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Kiosk mode, Smart Mirror, Wayland, X11, autostart, ⭐chromium-browser, --kiosk, --noerrdialogs, --disable-infobars, fullscreen UI, dedicated dashboard screen, HDMI output]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Application Phase: Developer Pi se ek HDMI monitor connect karta hai. OS ki `autostart` configuration file edit karke usme Chromium browser ki command daalta hai flags ke saath (`--kiosk localhost:8000`). Boot hote hi bina taskbar ya mouse ke seedha FastAPI ka dashboard fullscreen mein khul jata hai.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -2114,9 +2254,10 @@ Section 14: Create a Web Application on Your Raspberry Pi with FastAPI
 Topic 1 & 2: Asynchronous Web Servers with FastAPI & Uvicorn
 Topic 3: Connecting GPIO Input to FastAPI Endpoints
 Topic 4: Dynamic Routes & GPIO Output Control
+Topic 5: Hardware UI: Kiosk Mode & Chromium Autostart
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 18
+Sections: 1 | Topics: 5 | Subtopics: 22
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2170,6 +2311,25 @@ Subtopics: Matter Standard Concept, Thread Mesh Networks, OpenThread Border Rout
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 * Live Production Phase: Developer USB port mein SkyConnect dongle lagata hai aur Home Assistant mein OTBR add-on enable karta hai. Ab Pi ek Thread router ban gaya hai, jo Apple HomeKit ya Google Home ke Matter devices ko directly local network par bina cloud ke control kar sakta hai.
 
+--15--Industrial IoT & Wireless Protocols--
+Topic 3: Hardware Timekeeping (I2C RTC DS3231)
+Subtopics: The 1970 Reboot Flaw, NTP Dependency, DS3231 Module Wiring, OS Time Sync Configuration
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Fixing a fatal hardware limitation for offline IoT
+* Explicit emphasis by speaker: "If your router dies and the Pi reboots, it thinks it's 1970. All your SSL certificates and cron jobs will instantly crash. You must install a hardware clock."
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[RTC, Real-Time Clock, ⭐DS3231, CR2032 battery, 1970 reboot flaw, NTP, Network Time Protocol, I2C wiring, hwclock command, /boot/config.txt, dtoverlay=i2c-rtc,ds3231, offline resilience]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Fixing/Iteration Phase: Developer note karta hai ki bina internet Pi ka time galat ho jata hai. Woh breadboard par DS3231 module lagata hai (I2C pins). Pi configure karta hai taaki boot hone par woh internet ki jagah is physical battery-backed chip se time padhe. Ab system 100% offline reh kar bhi perfect time track karta hai.
+
 ---
 
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -2179,9 +2339,10 @@ Subtopics: Matter Standard Concept, Thread Mesh Networks, OpenThread Border Rout
 Section 15: Industrial IoT & Wireless Protocols
 Topic 1: MQTT Protocol Architecture
 Topic 2: The Matter & Thread Revolution
+Topic 3: Hardware Timekeeping (I2C RTC DS3231)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 1 | Subtopics: 4
+Sections: 1 | Topics: 3 | Subtopics: 12
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2247,6 +2408,43 @@ Subtopics: Dangers of Port Forwarding, CGNAT Bypass, Tailscale VPN, WireGuard Pr
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 * Live Production Phase: Developer Pi aur apne smartphone par Tailscale install karta hai. Ab woh duniya mein kahin bhi ho, bina kisi router settings ko chhere, ek secure internal 100.x.x.x IP ke through apne Jarvis/Home Assistant dashboard ko safely access kar sakta hai.
 
+--16--The Smart Home OS (Home Assistant & Orchestration)--
+Topic 4: Time-Series Data & Dashboards (InfluxDB + Grafana)
+Subtopics: Relational vs Time-Series DBs, InfluxDB Docker Container, Grafana Integration, MQTT Data Ingestion
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Professional data tracking and visualization
+* Explicit emphasis by speaker: "SQLite is for text logs. If you want to track temperature changes over 5 years, you must use a Time-Series Database like InfluxDB."
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[Time-series database, ⭐InfluxDB, ⭐Grafana, Docker compose integration, telemetry, data retention, visualization, gauge panels, line charts, MQTT Telegraf, long-term tracking]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Live Production Phase: Developer apni `docker-compose.yml` mein InfluxDB aur Grafana add karta hai. Pi ab har second aane wale MQTT sensor data ko InfluxDB mein save karta hai. Browser mein Grafana open karke developer professional, dark-mode graphs banata hai jo real-time CPU temp aur room temperature dikhate hain.
+
+--16--The Smart Home OS (Home Assistant & Orchestration)--
+Topic 5: Visual Automation Flows (Node-RED)
+Subtopics: Node-RED Container Setup, Flow-Based Programming, Connecting MQTT to APIs, Logic Nodes
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Simplifying complex logic without writing Python code
+* Explicit emphasis by speaker: "Writing complex 'if-this-then-that' rules in Python gets messy. Industry uses Node-RED for drag-and-drop visual logic."
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[⭐Node-RED, visual programming, flow-based, drag and drop, MQTT in node, HTTP out node, switch node, debug node, low-code automation, integration]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Application Phase: Developer Pi par Node-RED host karta hai. UI mein ek "MQTT In" node (PIR sensor) ko ek "Switch" node (if time > 6 PM) se connect karke "HTTP Post" node (Telegram alert) se jod deta hai. Complex Python script likhne ka kaam drag-and-drop mein 2 minute mein ho jata hai.
 
 ---
 
@@ -2258,9 +2456,11 @@ Section 16: The Smart Home OS (Home Assistant & Orchestration)
 Topic 1: Home Assistant Setup & UI
 Topic 2: Orchestrating the Brain (Docker Compose)
 Topic 3: Secure Remote Access (Zero-Trust / Tailscale)
+Topic 4: Time-Series Data & Dashboards (InfluxDB + Grafana)
+Topic 5: Visual Automation Flows (Node-RED)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 3 | Subtopics: 12
+Sections: 1 | Topics: 5 | Subtopics: 20
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2730,6 +2930,25 @@ Subtopics: Parameter Tuning, Push Button Integration, Cron Job Concept
 * Live Production Phase: Future improvements ke liye developer project modify kar sakta hai — jaise PIR trigger ki jagah `crontab` use karke time-based interval (e.g. har 5 minute) par photo lena, ya external physical push button lagana.
 * Additional context: (N/A)
 
+--19--The Ultimate "Jarvis" Final Project--
+Topic 10: Production Safety (Full System Backup & OS Cloning)
+Subtopics: The Risk of SD Card Corruption, Taking Full `.img` Backups, Shrinking Images (PiShrink), Restoring Systems
+
+[📊 SCOPE SIGNAL for Topic 10:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Saving months of hard work
+* Explicit emphasis by speaker: "SD cards fail. It's not IF, it's WHEN. If you don't clone your image today, you will cry tomorrow."
+]
+
+🔑 KEYWORDS DUMP for Topic 10:
+[SD card corruption, production safety, full system backup, clone OS, ⭐.img file, dd command, Win32DiskImager, Apple Pi Baker, ⭐PiShrink, restore backup, disaster recovery, plug and play]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+
+* Mastery Phase: Poora Jarvis project systemd par successfully set hone ke baad, developer Pi ko band karta hai aur SD card nikal kar PC mein lagata hai. Software (Win32DiskImager) use karke poore 16GB card ka exact `.img` clone bana kar Google Drive par save kar leta hai. Agar kal hardware crash hua, toh woh sirf flash karke 5 minute mein exactly wahi se resume kar sakta hai bina ek line code likhe.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
@@ -2746,9 +2965,10 @@ Topic 6: Non-Blocking FastAPI & Async SQL Queries
 Topic 7: Web Interface & FastAPI StaticFiles
 Topic 8: Background Automation (Dynamic Systemd Daemons & Venvs)
 Topic 9: Project Customizations (Outro)
+Topic 10: Production Safety (Full System Backup & OS Cloning)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 9 | Subtopics: 42
+Sections: 1 | Topics: 10 | Subtopics: 46
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
