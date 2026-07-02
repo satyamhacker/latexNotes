@@ -1381,22 +1381,22 @@ Subtopics: PIR Limitations (Micro-movements), mmWave Radar Concept, LD2410 / HLK
 
 --8--Direct Movement with a PIR Sensor--
 Topic 5: USB Peripherals & Serial Communication (UART)
-Subtopics: Hardware Bridging, USB-to-Serial, `pyserial` module, Interfacing Microcontrollers (Arduino/ESP32)
+Subtopics: Hardware Bridging, USB-to-Serial, `pyserial` module, Interfacing Microcontrollers (Arduino/ESP32), Logic Level Shifting Safety
 
 [📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Moderate
 * Coverage Angle: Both
 * Transcript mein content volume: Connecting Pi to other external hardware boards
-* Explicit emphasis by speaker: "The Pi is great at AI and Web, but bad at real-time sensor loops. Let an Arduino handle the sensors, and send the data to the Pi via USB Serial."
+* Explicit emphasis by speaker: "The Pi is great at AI and Web, but bad at real-time sensor loops. Let an Arduino handle the sensors. BUT be careful! Arduino is 5V, Pi is 3.3V. Always use a Logic Level Converter if wiring direct UART, or just use a USB cable for safety."
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[Serial communication, UART, USB peripheral, ⭐pyserial, import serial, baud rate, 9600, 115200, /dev/ttyUSB0, /dev/ttyACM0, Arduino, ESP32, hardware bridge, serial.readline(), decode utf-8]
+[Serial communication, UART, USB peripheral, ⭐pyserial, import serial, baud rate, 9600, 115200, /dev/ttyUSB0, /dev/ttyACM0, Arduino, ESP32, hardware bridge, serial.readline(), decode utf-8, ⭐Logic Level Shifter, bi-directional converter, 5V to 3.3V safety]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
-* Testing/Offline Phase: Developer ek Arduino ko USB cable se Pi mein plug karta hai. Terminal mein `ls /dev/tty*` se port dhoondhta hai. Python mein `pyserial` use karke Arduino se bheja gaya raw sensor data read karta hai aur use parse karta hai.
+* Testing/Offline Phase: Developer ek Arduino ko USB cable se Pi mein plug karta hai. Terminal mein `ls /dev/tty*` se port dhoondhta hai. Python mein `pyserial` use karke Arduino se bheja gaya raw sensor data read karta hai. Agar physical pins (TX/RX) use karne hon, toh board jalne se bachane ke liye beech mein ek Logic Level Shifter lagata hai.
 
 ---
 
@@ -2906,25 +2906,24 @@ Subtopics: Last Photo Extraction, HTML Break Tags, Flask Static Config, HTML Ima
 
 --19--The Ultimate "Jarvis" Final Project--
 Topic 8: Background Automation (Dynamic Systemd Daemons & Venvs)
-Subtopics: Systemd Concept, Daemon Orchestration, Dynamic User Injection, ExecStart Configuration, Systemctl Enablement, Journalctl Debugging
+Subtopics: Systemd Concept, Daemon Orchestration, Dynamic User Injection, ExecStart Configuration, Venv Absolute Paths, Systemctl Enablement, Journalctl Debugging
 
 [📊 SCOPE SIGNAL for Topic 8:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
 * Transcript mein content volume: Full setup of background services and log debugging
-* Key terms from transcript: systemd, .service, root permission, whoami, dynamic user, ExecStart, systemctl, journalctl
-* Explicit emphasis by speaker: "Never hardcode 'User=pi'. You must replace it with your actual username, or the systemd daemon will crash and burn."
+* Explicit emphasis by speaker: "Never hardcode 'User=pi'. Also, since we are using 'uv' virtual environments, you MUST point ExecStart to the exact python file inside your .venv folder, not the global python3 command."
 ]
 
 🔑 KEYWORDS DUMP for Topic 8:
-[systemd, background automation, /etc/systemd/system/, .service, root permission, [Unit], After=network.target, [Service], ExecStart, absolute path, ⭐User=<your_username>, dynamic user, whoami, [Install], WantedBy=multi-user.target, systemctl daemon-reload, systemctl enable, systemctl start, ⭐journalctl -u -f, debugging]
+[systemd, background automation, /etc/systemd/system/, .service, root permission, [Unit], After=network.target, [Service], ⭐ExecStart, absolute path, ⭐.venv/bin/python, virtual environment path, User=<your_username>, dynamic user, whoami, [Install], WantedBy=multi-user.target, systemctl daemon-reload, systemctl enable, systemctl start, ⭐journalctl -u -f, debugging]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
 
-* Testing/Offline Phase: Developer terminal mein `whoami` run karta hai apna current username dekhne ke liye, aur `.service` file mein `User=` attribute ke aage usse paste karta hai.
+* Testing/Offline Phase: Developer terminal mein `.service` file banata hai. `ExecStart` mein woh specifically apne project ke virtual environment ka absolute path (`/home/pi/jarvis/.venv/bin/python`) pass karta hai taaki saari libraries theek se load hon.
 * Fixing/Iteration Phase: Agar background script fail ho jaye, toh developer andhe ke tarah guess karne ke bajaye `journalctl -u jarvis.service -f` chalata hai taaki real-time crash logs padh sake.
-* Live Production Phase: Pi boot hote hi systemd daemon automatically user ke exact credentials ke sath hardware and web APIs start kar deta hai.
+* Live Production Phase: Pi boot hote hi systemd daemon automatically user ke exact credentials aur isolated Python environment ke sath hardware and web APIs start kar deta hai.
 
 --19--The Ultimate "Jarvis" Final Project--
 Topic 9: Project Customizations (Outro)
