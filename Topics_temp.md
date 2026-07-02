@@ -2955,10 +2955,29 @@ Subtopics: Systemd Concept, Daemon Orchestration, Dynamic User Injection, ExecSt
 * Live Production Phase: Pi boot hote hi systemd daemon automatically user ke exact credentials aur isolated Python environment ke sath hardware and web APIs start kar deta hai.
 
 --19--The Ultimate "Jarvis" Final Project--
-Topic 9: Project Customizations (Outro)
-Subtopics: Parameter Tuning, Push Button Integration, Cron Job Concept
+Topic 9: AI Thermal Watchdog & Graceful Degradation
+Subtopics: Continuous Inference Heat, Reading Internal SoC Sensors, Temperature Thresholds, Graceful AI Degradation
 
 [📊 SCOPE SIGNAL for Topic 9:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Protecting the Pi from melting during long AI conversations
+* Explicit emphasis by speaker: "If Jarvis talks to you for 10 minutes straight, the Pi will hit 85°C and throttle. Your code must be smart enough to monitor its own physical hardware temperature and adapt."
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[Thermal throttling, SoC temperature, ⭐vcgencmd measure_temp, Python subprocess, hardware watchdog, 80 degrees celsius, ⭐graceful degradation, fallback logic, system health, continuous inference]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+
+* Live Production Phase: Developer ek background async task likhta hai jo har 10 second mein `vcgencmd measure_temp` run karta hai. Agar Pi ka temperature 75°C cross karta hai, toh Jarvis ka code automatically heavy "RAG searches" aur "Vision models" ko pause kar deta hai, aur sirf basic short text responses deta hai jab tak hardware wapas thanda (<60°C) nahi ho jata.
+
+--19--The Ultimate "Jarvis" Final Project--
+Topic 10: Project Customizations (Outro)
+Subtopics: Parameter Tuning, Push Button Integration, Cron Job Concept
+
+[📊 SCOPE SIGNAL for Topic 10:
 
 * Depth Level: Surface
 * Coverage Angle: Conceptual only
@@ -2968,10 +2987,10 @@ Subtopics: Parameter Tuning, Push Button Integration, Cron Job Concept
 * Speaker ne jo analogies/examples use kiye: None
 ]
 
-🔑 KEYWORDS DUMP for Topic 9:
+🔑 KEYWORDS DUMP for Topic 10:
 [settings tuning, duration between photos, group photos, push button, manual trigger, ⭐crontab, cron job, scheduled execution]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
 
 * Testing/Offline Phase: (N/A)
 * Fixing/Iteration Phase: (N/A)
@@ -2979,10 +2998,10 @@ Subtopics: Parameter Tuning, Push Button Integration, Cron Job Concept
 * Additional context: (N/A)
 
 --19--The Ultimate "Jarvis" Final Project--
-Topic 10: Production Safety (Full System Backup & OS Cloning)
+Topic 11: Production Safety (Full System Backup & OS Cloning)
 Subtopics: The Risk of SD Card Corruption, Taking Full `.img` Backups, Shrinking Images (PiShrink), Restoring Systems
 
-[📊 SCOPE SIGNAL for Topic 10:
+[📊 SCOPE SIGNAL for Topic 11:
 
 * Depth Level: Deep
 * Coverage Angle: Practical only
@@ -2990,10 +3009,10 @@ Subtopics: The Risk of SD Card Corruption, Taking Full `.img` Backups, Shrinking
 * Explicit emphasis by speaker: "SD cards fail. It's not IF, it's WHEN. If you don't clone your image today, you will cry tomorrow."
 ]
 
-🔑 KEYWORDS DUMP for Topic 10:
+🔑 KEYWORDS DUMP for Topic 11:
 [SD card corruption, production safety, full system backup, clone OS, ⭐.img file, dd command, Win32DiskImager, Apple Pi Baker, ⭐PiShrink, restore backup, disaster recovery, plug and play]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
 
 * Mastery Phase: Poora Jarvis project systemd par successfully set hone ke baad, developer Pi ko band karta hai aur SD card nikal kar PC mein lagata hai. Software (Win32DiskImager) use karke poore 16GB card ka exact `.img` clone bana kar Google Drive par save kar leta hai. Agar kal hardware crash hua, toh woh sirf flash karke 5 minute mein exactly wahi se resume kar sakta hai bina ek line code likhe.
 
@@ -3012,11 +3031,12 @@ Topic 5: Real-Time Media Alerts (Telegram Webhooks)
 Topic 6: Non-Blocking FastAPI & Async SQL Queries
 Topic 7: Web Interface & FastAPI StaticFiles
 Topic 8: Background Automation (Dynamic Systemd Daemons & Venvs)
-Topic 9: Project Customizations (Outro)
-Topic 10: Production Safety (Full System Backup & OS Cloning)
+Topic 9: AI Thermal Watchdog & Graceful Degradation
+Topic 10: Project Customizations (Outro)
+Topic 11: Production Safety (Full System Backup & OS Cloning)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 10 | Subtopics: 46
+Sections: 1 | Topics: 11 | Subtopics: 50
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
