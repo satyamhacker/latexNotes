@@ -1610,7 +1610,7 @@ Subtopics: All Formats, Tri-Format Architecture, Multi-Format Base Paths
 * Live Production Phase: (N/A)
 * Additional context: Is matrix setup se long-term validation capabilities dynamically handle ho jati hain bina engine recalculation loss ke.
 
-Topic 7: Automated Web Parsing & Screenshots (EyeWitness & Aquatone)
+Topic 7: Modern Web Probing & Vulnerability Handoff (`httpx`, `gowitness`, `Nuclei`)
 Subtopics: Visual Reconnaissance, XML File Parsing, EyeWitness Integration, Aquatone Integration, Mass Screenshotting, Web Interface Discovery, Bug Bounty Workflows
 
 [📊 SCOPE SIGNAL for Topic 7:
@@ -1626,7 +1626,7 @@ Subtopics: Visual Reconnaissance, XML File Parsing, EyeWitness Integration, Aqua
 🔑 KEYWORDS DUMP for Topic 7:
 [Visual Reconnaissance, Mass Screenshotting, EyeWitness, Aquatone, XML Parsing, Web Interface Discovery, nmap -sS -p 80,443,8080,8443 -iL targets.txt -oX web_scan.xml, cat web_scan.xml | aquatone -nmap, eyewitness -x web_scan.xml --web, Bug Bounty, automated HTML report, visual inspection, default credentials, admin panels, login pages, time-saving, pipeline integration, ⭐"manually browser mein kholna bewakoofi hai"[emphasized in notes], ⭐aquatone -nmap[emphasized in notes]]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
 
 * Testing/Offline Phase: Pentester Nmap se saare HTTP/HTTPS ports (80, 443, 8080, 8443) scan karke results ko XML format (`-oX`) mein save karta hai.
 * Fixing/Iteration Phase: (N/A)
@@ -1688,7 +1688,7 @@ Topic 3: XML to HTML/CSV Conversion
 Topic 4: Greppable Output (`-oG`)
 Topic 5: Script Kiddie Output (`-oS`)
 Topic 6: All Formats (`-oA`)
-Topic 7: Automated Web Parsing & Screenshots (EyeWitness & Aquatone)
+Topic 7: Modern Web Probing & Vulnerability Handoff (`httpx`, `gowitness`, `Nuclei`)
 Topic 8: Professional Output Pipeline [⚠️ Derived]
 
 📊 PHASE SUMMARY:
@@ -2156,7 +2156,7 @@ Subtopics: SNMP Enumeration, Community Strings, Public/Private Strings, snmp-sys
 Topic 5: Professional Reconnaissance Workflow [⚠️ Derived]
 Subtopics: Network Path Analysis, Web Reconnaissance, Information Harvesting, WAF Detailed Analysis
 
-[📊 SCOPE SIGNAL for Topic 4:
+[📊 SCOPE SIGNAL for Topic 5:
 
 * Depth Level: Surface
 * Coverage Angle: Practical only
@@ -2169,7 +2169,7 @@ Subtopics: Network Path Analysis, Web Reconnaissance, Information Harvesting, WA
 🔑 KEYWORDS DUMP for Topic 5:
 [Professional Reconnaissance Workflow, Network path analysis, Web reconnaissance, Information harvesting, WAF detailed analysis, nmap --traceroute --script traceroute-geolocation , nmap --script http-robots.txt,http-waf-detect,http-sitemap-generator -p 80,443 , nmap --script http-grep, wafw00f -a ]
 
-🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
 * Testing/Offline Phase: Professional pentesting mein ek step-by-step recon process follow kiya jata hai: pehle network path analysis, fir web recon, fir info harvesting, aur end mein WAF ki detailed analysis.
 * Fixing/Iteration Phase: (N/A)
