@@ -3171,7 +3171,41 @@ Sections: 1 | Topics: 7 | Subtopics: 54 | CVEs: 0
 [Instructor is section mein enterprise environments ki jaan—Active Directory—ko deeply exploit karna sikhata hai. Focus Kerberos attacks, DCSync, aur Domain Admin takeover par hai.]
 
 --13.5--Advanced Active Directory Exploitation--
-Topic 1: Kerberoasting & AS-REP Roasting Attacks
+Topic 1: Active Directory Enumeration (PowerView & BloodHound) [🆕 ADDED]
+Subtopics: AD Architecture Basics, LDAP Queries, PowerView Setup, Enumerate Domain Users & Groups, SharpHound Data Collection, BloodHound Graph Analysis
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Detailed practical execution of AD mapping before launching exploits.
+* Key terms from transcript: PowerView, SharpHound, BloodHound, LDAP, Domain Admins, Domain Controllers, SPN, Attack Path
+* Exam Tips / Instructor Emphasis: Instructor emphasizes that before you attack Active Directory, you must "map" it. Blindly firing exploits will get you caught by the Blue Team immediately.
+* Instructor ne jo analogies/examples/demos use kiye: PowerShell mein PowerView import karke `Get-NetUser` aur `Get-NetGroup` run karke dikhaya. Phir `SharpHound.exe` run karke data collect kiya (zip file) aur usko BloodHound GUI mein drag & drop karke shortest path to Domain Admin ka visual graph dikhaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Active Directory Enumeration, AD Reconnaissance, LDAP queries, lightweight directory access protocol, ⭐PowerView.ps1, `Import-Module .\PowerView.ps1`, `Get-NetDomain`, `Get-NetUser`, `Get-NetGroup "Domain Admins"`, `Get-NetComputer`, ⭐SharpHound.exe, BloodHound data collection, `Invoke-BloodHound -CollectionMethod All`, neo4j database, ⭐BloodHound GUI, shortest path to domain admin, attack path mapping, OPSEC safe recon]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Scanning & Enumeration / Reconnaissance
+* Attack methodology context from transcript: Initial access milne ke baad, local machine se AD environment ko query karna taaki high-value targets (Domain Admins, vulnerable services) locate kiye ja sakein before exploiting them.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker initial shell (medium integrity) se PowerView script memory mein load karta hai.
+* Exploitation/Weaponization Phase: (N/A - This is purely recon)
+* Post-Exploitation/Reporting Phase: Attacker `SharpHound.exe` run karta hai jo network ke saare AD objects, ACLs, aur sessions read karke ek `.zip` file banata hai. Is file ko exfiltrate karke attacker apne system pe BloodHound mein dalta hai. BloodHound ek visual graph banata hai jo exactly batata hai ki kis user/machine ko compromise karke Domain Admin bana ja sakta hai.
+* Additional context: Blue team LDAP queries ko monitor karti hai (Event ID 4662) abnormal enumeration detect karne ke liye.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: BloodHound GUI & PowerShell
+* Navigation Steps: Start neo4j console > Open BloodHound > Drag and drop SharpHound .zip file > Click "Queries" > Select "Find Shortest Paths to Domain Admins".
+
+--13.5--Advanced Active Directory Exploitation--
+Topic 2: Kerberoasting & AS-REP Roasting Attacks
 Subtopics: Kerberos Authentication Flow, Ticket Granting Ticket (TGT), TGS, Service Principal Names (SPN), Rubeus Execution, Offline Cracking, AS-REP Roasting
 
 [📊 SCOPE SIGNAL for Topic 1:
@@ -3204,7 +3238,7 @@ Subtopics: Kerberos Authentication Flow, Ticket Granting Ticket (TGT), TGS, Serv
 * Tool Name: Rubeus (CLI)
 * Navigation Steps: Run `Rubeus.exe kerberoast /nowrap /outfile:hashes.txt`
 
-Topic 2: AD Object Abuse & DCSync (Domain Controller Takeover)
+Topic 3: AD Object Abuse & DCSync (Domain Controller Takeover)
 Subtopics: Pass-the-Hash (PtH), BloodHound AD Paths, DCSync Attack, Mimikatz lsadump, KRBTGT Account, Golden Ticket Creation
 
 [📊 SCOPE SIGNAL for Topic 2:
@@ -3244,11 +3278,12 @@ Subtopics: Pass-the-Hash (PtH), BloodHound AD Paths, DCSync Attack, Mimikatz lsa
 📋 EXTRACTED IN THIS PHASE:
 
 Section 13.5: Red Team Operations - Advanced Active Directory Exploitation
-Topic 1: Kerberoasting & AS-REP Roasting Attacks
-Topic 2: AD Object Abuse & DCSync (Domain Controller Takeover)
+Topic 1: Active Directory Enumeration (PowerView & BloodHound) [🆕 ADDED]
+Topic 2: Kerberoasting & AS-REP Roasting Attacks
+Topic 3: AD Object Abuse & DCSync (Domain Controller Takeover)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 13 | CVEs: 0
+Sections: 1 | Topics: 3 | Subtopics: 19 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -3394,6 +3429,40 @@ Subtopics: Impacket Library Overview, Network-Related Attacks, psexec.py Executi
 * Tool Name: Event Viewer (Windows)
 * Navigation Steps: (Instructor manually clicks through logs) Event Viewer > System logs (for 7045 events) > Security logs (for 4624, 4672, 4648 events)
 
+--14--Red + Blue Team Operation - Lateral Movement--
+Topic 3.5: Stealth Lateral Movement (WinRM & WMIexec) [🆕 ADDED]
+Subtopics: psexec Drawbacks, WMIexec Execution, Fileless Lateral Movement, Windows Remote Management (WinRM), evil-winrm Usage, Pass-the-Hash over WinRM
+
+[📊 SCOPE SIGNAL for Topic 3.5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Practical demonstration of stealthy remote execution bypassing traditional EDR hooks.
+* Key terms from transcript: wmiexec.py, evil-winrm, Port 5985, Port 5986, fileless execution, OPSEC, pass the hash
+* Exam Tips / Instructor Emphasis: Instructor strongly highlights that `psexec` drops a binary and creates a service, which is a loud IOC (Event ID 7045). For stealth, Red Teamers use WMI or WinRM which execute commands purely in memory.
+* Instructor ne jo analogies/examples/demos use kiye: Kali machine se `wmiexec.py` use karke remote system pe command run ki. Uske baad `evil-winrm` tool se NTLM hash pass karke sidha remote PowerShell session (PTY) haasil karke dikhaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 3.5:
+[stealth lateral movement, fileless lateral movement, OPSEC safe, Impacket suite, ⭐wmiexec.py, `python3 wmiexec.py domain/user:password@IP`, DCOM, port 135, ⭐WinRM, Windows Remote Management, port 5985, port 5986, ⭐evil-winrm, `evil-winrm -i <IP> -u <user> -H <NTLM_Hash>`, Pass-the-Hash, remote PowerShell session, AMSI bypass, EDR evasion, Event ID 4688, WmiPrvSE.exe]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 3.5:
+
+* Phase(s): Post-Exploitation & Lateral Movement
+* Attack methodology context from transcript: EDR aur Blue team monitoring (Service creation alerts) se bachne ke liye native administrative protocols (WMI aur WinRM) ka abuse karna network mein move karne ke liye.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3.5:
+
+* Recon/Discovery Phase: Attacker Nmap/CrackMapExec se scan karta hai ki target pe port 135 (WMI) ya 5985 (WinRM) open hai ya nahi.
+* Exploitation/Weaponization Phase: Attacker `psexec` avoid karta hai. Badle mein, woh `wmiexec.py` (via Impacket) run karta hai jo commands ko directly `WmiPrvSE.exe` ke through execute karta hai bina disk pe malware drop kiye.
+* Post-Exploitation/Reporting Phase: Agar attacker ke paas sirf NTLM hash hai (password nahi), toh woh `evil-winrm` use karke hash pass karta hai (`-H` flag) aur direct target ka interactive PowerShell session le leta hai.
+* Additional context: Blue Team isko trace karne ke liye `WmiPrvSE.exe` dwara spawn kiye gaye unusual child processes (like cmd.exe) monitor karti hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 3.5:
+
+* Tool Name: Command Line (Kali Linux)
+* Navigation Steps: Run `evil-winrm -i 192.168.1.10 -u Administrator -H 32ed87bdb5fdc5e9cba88547376818d4`
+
 Topic 4: Incident Response & Mitigation for Lateral Movement
 Subtopics: Lateral Movement Alternatives, RDP Incident Response, Credential Resetting, Impacket Forensics Review, SMB Disablement
 
@@ -3439,6 +3508,7 @@ Section 14: Red + Blue Team Operation - Lateral Movement
   Topic 2: Firewall Configuration for RDP Connections
   Topic 2.5: Network Pivoting & Tunneling (Chisel & Proxychains) [🆕 ADDED]
   Topic 3: Impacket Exploitation (psexec.py) & Forensic Artifacts
+  Topic 3.5: Stealth Lateral Movement (WinRM & WMIexec) [🆕 ADDED]
   Topic 4: Incident Response & Mitigation for Lateral Movement
 
 📊 PHASE SUMMARY:
