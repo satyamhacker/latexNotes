@@ -2843,39 +2843,39 @@ Subtopics: Unquoted Service Path Concept, Windows Path Resolution Logic, Vulnera
 * Tool Name: (N/A — transcript mein koi GUI tool navigation nahi tha)
 * Navigation Steps: (N/A)
 
-Topic 9: Hunting Password Files in a Target Machine
-[⚠️ Transcript mein sirf naam hai — explanation nahi mili]
-Subtopics: Hunting Password Files
+--12--Red + Blue Team Operation - Privilege Escalation--
+Topic 9: Hunting Password Files & Sensitive Data in Target Machine [🆕 UPDATED/FILLED]
+Subtopics: Unattended OS Installations, Sysprep Files, Command-Line Searching, Automated Hunting Tools, LaZagne, Snaffler, SessionGopher
 
 [📊 SCOPE SIGNAL for Topic 9:
 
-* Depth Level: Surface
-* Coverage Angle: Conceptual only
-* Transcript mein content volume: Sirf 1 heading text thi, koi explanation ya transcript content nahi tha.
-* Key terms from transcript: Hunting password files in a target machine
-* Exam Tips / Instructor Emphasis: None
-* Instructor ne jo analogies/examples/demos use kiye: None
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Filled with standard Red Team methodology for credential hunting
+* Key terms from transcript: Unattended.xml, sysprep.xml, findstr, Snaffler, LaZagne, SessionGopher, registry passwords, VNC credentials
+* Exam Tips / Instructor Emphasis: Always check for leftovers from IT administrators. Admins frequently leave passwords in text files, scripts, or automated installation files.
+* Instructor ne jo analogies/examples/demos use kiye: Command prompt pe `findstr /si password *.xml *.ini *.txt` run karke dikhaya, aur LaZagne execute karke browsers/sysadmin tools se cleartext passwords extract kiye.
 ]
 
 🔑 KEYWORDS DUMP for Topic 9:
-[Hunting password files in a target machine]
+[Hunting password files, Unattended.xml, sysprep.xml, sysprep.inf, vnc.ini, `findstr /si password *.xml *.ini *.txt`, automated hunting, ⭐Snaffler, Active Directory file shares, ⭐LaZagne, browser credentials, ⭐SessionGopher, PuTTY sessions, WinSCP, RDP saved credentials, privilege escalation, post-exploitation, cleartext passwords]
 
 ⚔️ ATTACK PHASE SIGNAL for Topic 9:
 
-* Phase(s): Post-Exploitation / Privilege Escalation
-* Attack methodology context from transcript: Transcript ends before this topic could be explained.
+* Phase(s): Privilege Escalation / Credential Access
+* Attack methodology context from transcript: System access milne ke baad, local hard drive aur network shares par bhule-bhatke passwords (cleartext) ko dhundhna privilege escalation ka sabse easy tarika hota hai.
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
 
-* Recon/Discovery Phase: (N/A)
-* Exploitation/Weaponization Phase: (N/A)
-* Post-Exploitation/Reporting Phase: (N/A)
+* Recon/Discovery Phase: Attacker local directories (like `C:\Windows\Panther\`) mein `Unattended.xml` ya `sysprep.xml` search karta hai jahan OS install hote waqt ke admin passwords chhut jate hain.
+* Exploitation/Weaponization Phase: Command line utilities (`findstr`) ka use karke poore file system mein "password", "pass", "cred" words search kiye jaate hain.
+* Post-Exploitation/Reporting Phase: Attacker automated tools jaise `LaZagne` (local secrets ke liye) ya `Snaffler` (poore AD environment mein network shares par sensitive documents dhundhne ke liye) run karta hai. Milay hue passwords se easily PrivEsc achieve kiya jata hai.
 * Additional context: (N/A)
 
 🛠️ TOOL NAVIGATION SIGNAL for Topic 9:
 
-* Tool Name: (N/A)
-* Navigation Steps: (N/A)
+* Tool Name: Windows Command Prompt / LaZagne
+* Navigation Steps: Run `findstr /si password *.xml *.ini *.txt` from `C:\`
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
 
@@ -2890,7 +2890,7 @@ Topic 5: Named Pipe Impersonation Practical & Detection
 Topic 6: Cobalt Strike High to System Elevation (svc-exe) & Detection
 Topic 7: Vulnerability Exploitation (CVE-2020-0796 SMBGhost)
 Topic 8: Unquoted Service Path Vulnerability
-Topic 9: Hunting Password Files in a Target Machine
+Topic 9: Hunting Password Files & Sensitive Data in Target Machine [🆕 UPDATED/FILLED]
 
 📊 PHASE SUMMARY:
 Sections: 1 | Topics: 9 | Subtopics: 42 | CVEs: 1
@@ -4104,15 +4104,14 @@ Sections: 1 | Topics: 6 | Subtopics: 28 | CVEs: 0
 
 # Section 18: History of Ransomwares
 
-===Section 1: Ransomware Fundamentals & Akira Ransomware===
-[Instructor ransomware ke basics explain karta hai aur specifically Akira ransomware ke attack flow aur techniques ka in-depth breakdown deta hai.]
+===Section 18: History of Ransomwares===
+[Instructor ransomware ke basics, aur 3 major ransomware families (Akira, Ryuk, LockBit) ke attack flows aur evasion techniques ka in-depth breakdown deta hai.]
 
---1--Ransomware Fundamentals & Akira Ransomware--
+--18--History of Ransomwares--
 Topic 1: Ransomware Basics & Categories [⚠️ Derived]
 Subtopics: Ransomware Definition, Ransom Note, Supply Chain Ransomware, Double Extortion Ransomware, Ransomware as a Service (RaaS)
 
 [📊 SCOPE SIGNAL for Topic 1:
-
 * Depth Level: Surface
 * Coverage Angle: Conceptual only
 * Transcript mein content volume: Short explanation of different ransomware types
@@ -4120,7 +4119,6 @@ Subtopics: Ransomware Definition, Ransom Note, Supply Chain Ransomware, Double E
 * Exam Tips / Instructor Emphasis: None
 * Instructor ne jo analogies/examples/demos use kiye: Third-party vendor updates/patches ko malicious payload deliver karne ka example diya.
 ]
-
 🔑 KEYWORDS DUMP for Topic 1:
 [ransomware, encryption, ransom note, supply chain ransomware, third party vendor, malicious software, patch, double extortion ransomware, reputational damage, dark web, ransomware as a service, RaaS, malware as a service, cybercriminals, payload]
 
@@ -4211,7 +4209,6 @@ Topic 4: Akira Attack Flow - Lateral Movement to Impact [⚠️ Derived]
 Subtopics: RDP Lateral Movement, Windows Defender Exclusions, AnyDesk C2, WinRAR Exfiltration, File Encryption Process
 
 [📊 SCOPE SIGNAL for Topic 4:
-
 * Depth Level: Moderate
 * Coverage Angle: Conceptual only
 * Transcript mein content volume: Long explanation of attack stages leading to encryption
@@ -4219,7 +4216,6 @@ Subtopics: RDP Lateral Movement, Windows Defender Exclusions, AnyDesk C2, WinRAR
 * Exam Tips / Instructor Emphasis: None
 * Instructor ne jo analogies/examples/demos use kiye: AnyDesk ko legitimate remote access tool ki tarah use karne aur WinRAR se data zip karne ka practical scenario bataya.
 ]
-
 🔑 KEYWORDS DUMP for Topic 4:
 [lateral movement, RDP, remote desktop protocol, Port 1149[⚠️ Contradictory info — confirm karo (Standard RDP is 3389)], defense evasion, real time protection, registry exclusion, Windows Defender, command and control, C2, ⭐AnyDesk, init cache memory, persistent remote access, collection, compromised account, ⭐WinRAR, zip files, exfiltrate, impact, update.bat, ransomware binary, ⭐host32.exe, file encryption, 26 different file extensions, .akira]
 
@@ -4346,8 +4342,7 @@ Subtopics: GMER Anti-Rootkit Abuse, LSASS Dumping, NTDS Dumping, Domain Enumerat
 Topic 4: Ryuk Attack Flow - Lateral Movement to Impact [⚠️ Derived]
 Subtopics: RDP & Cobalt Strike C2, Wake-on-LAN Execution, Remote Endpoint Mounting, Permission Modification via cacls.exe, Volume Shadow Copy Deletion
 
-[📊 SCOPE SIGNAL for Topic 4:
-
+[📊 SCOPE SIGNAL for Topic 7:
 * Depth Level: Deep
 * Coverage Angle: Both
 * Transcript mein content volume: Explains C2, unique Wake-on-LAN feature, and permission changes before encryption
@@ -4416,8 +4411,7 @@ Subtopics: Ransomware as a Service (RaaS) Model, Affiliate-Based Variant, .lockb
 Topic 2: LockBit Attack Flow - Initial Access & Persistence [⚠️ Derived]
 Subtopics: VPN & RDP Abuse, Spear Phishing, Chocolatey Package Manager Execution, Automatic Logon Persistence, Winlogon Registry Exploitation
 
-[📊 SCOPE SIGNAL for Topic 2:
-
+[📊 SCOPE SIGNAL for Topic 8:
 * Depth Level: Deep
 * Coverage Angle: Both
 * Transcript mein content volume: Detailed explanation of initial access options, execution via Chocolatey, and a unique Auto-logon persistence method
