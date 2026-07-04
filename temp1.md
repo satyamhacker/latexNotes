@@ -1,3 +1,4 @@
+
 Yeh existing syllabus recon, WAF evasion, aur basic web automation ke liye kaafi solid foundation set karta hai. Par jab hum hardcore penetration testing, red teaming, aur end-to-end bug bounty ki baat karte hain, toh isme kuch major blind spots hain. Agar goal yeh hai ki manual work kam ho, AI heavy lifting kare, aur koi bhi critical vulnerability miss na ho, toh syllabus mein yeh topics sequence mein add hone hi chahiye.
 
 Here is the step-by-step breakdown of what is missing, why it’s critical, and exactly how local AI and MCP tools should be integrated to automate the workflow.
@@ -260,6 +261,57 @@ These represent the absolute state-of-the-art in using local LLMs (Llama 3, Mist
 
 By integrating these specific MCP servers (MobSF, BloodHound, Metasploit, mitmproxy, and NoctisAI), you transform the curriculum from a basic web scanning guide into a **Masterclass on Autonomous Cyber Warfare**.
 
+
+==================================================================================
+
+
+
+New Section 32: Container Escape & Kubernetes (K8s) Auditing
+Sequence: After Cloud IAM (Section 24).
+
+The Missing Link: Aaj kal har target Microservices aur Docker/K8s par chal raha hai. SSRF ya RCE milne ke baad tum aksar ek isolated container mein hote ho. Us container se bahar nikalna (escape) aur poore K8s cluster ko compromise karna manual testing mein bahut hard hota hai.
+
+Practical Local AI / MCP Integration:
+
+Kubectl MCP Server: Is tool ko apne local LLM se connect karo.
+
+Workflow: Tumhare paas K8s pod ka access hai. Tum prompt doge: "Pull all RBAC (Role-Based Access Control) configurations and YAML manifests from this cluster. Analyze them for overly permissive service accounts or misconfigured privileges." * Why it's a game-changer: K8s YAML files hazaro lines ki hoti hain. AI instantly bata dega ki "Pod X has privileged mode enabled and mounts the host's /var/run/docker.sock—here is the exact container escape command."
+
+New Section 33: Advanced Internal Network Pentesting (Nmap & Responder)
+Sequence: Beginning of the Internal Red Teaming phase.
+
+The Missing Link: Active Directory se pehle tumhe network map karna hota hai. Nmap ke massive XML outputs ya Responder ke logs manually padhna time-waste hai.
+
+Practical Local AI / MCP Integration:
+
+Nmap/Network MCP Server: Ek custom MCP jo directly .xml scan outputs ko ingest karta hai.
+
+Workflow: Tum /24 subnet scan karte ho. Tum AI ko prompt doge: "Ingest this Nmap XML output. Map the entire network topology, identify legacy systems (like Windows 7 or outdated SMB versions), and generate a prioritized list of the top 3 network pivot points."
+
+Responder Analysis: "Analyze these Responder logs. Did we capture any NTLMv2 hashes from high-value targets? If yes, generate the Hashcat command to crack them based on my local GPU setup."
+
+
+New Section 34: Advanced Cryptography & Token Forging (JWT/OAuth)
+Sequence: Advanced Web Exploitation.
+
+The Missing Link: Web apps mein authentication JWT (JSON Web Tokens) ya OAuth pe chalti hai. Basic syllabus sirf "Auth Bypass" bol kar chhod deta hai.
+
+Practical Local AI / MCP Integration:
+
+Custom Crypto MCP: AI ko directly raw tokens feed karna.
+
+Workflow: Tum intercept kiya hua JWT LLM ko doge: "Here is a JWT token. Analyze its header. If it's using RS256, write a Python script to attempt an algorithm confusion attack (changing it to HS256) using this public key." AI manual script likhne ka ghanto ka kaam seconds mein kar dega.
+
+New Section 35: Automated Social Engineering & Initial Access
+Sequence: Red Team Pre-Engagement.
+
+The Missing Link: Red Team engagements mein initial access aksar Phishing se aata hai.
+
+Practical Local AI / MCP Integration:
+
+LinkedIn/OSINT Scraper MCP + Mailer MCP:
+
+Workflow: Tum LLM ko prompt doge: "Use the OSINT MCP to scrape the top 10 HR employees at TargetCorp. Based on their profiles, write a highly personalized, psychological pretext email for each, related to 'Q3 Payroll Updates'. Then, generate an attached Excel VBA Macro payload that evades Mark-of-the-Web (MotW)." ---
 
 ==================================================================================
 
