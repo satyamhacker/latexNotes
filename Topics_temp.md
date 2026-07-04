@@ -3126,6 +3126,20 @@ Inme se kaunsa automation workflow (jaise Playwright MCP for web logic ya AI-gen
 
 ==================================================================================
 
+Sequence: After API Testing (Section 19 / 19.5).
+
+The Missing Link: Syllabus REST aur GraphQL APIs cover karta hai, par modern apps (trading platforms, chat apps, live trackers) WebSockets (ws://) aur IoT devices MQTT use karte hain. Inme requests asynchronous hoti hain, jisse manual testing tools (like Postman/Burp repeater) struggle karte hain.
+
+Why it needs to be added: WebSockets mein authorization bypass aur Cross-Site WebSocket Hijacking (CSWSH) dhoondhna highly profitable hai, par message streams ko manually track karna almost impossible hota hai.
+
+Practical Local AI / MCP Integration:
+
+WebSocket/MQTT Interceptor MCP: Ek custom proxy MCP jo real-time streams ko buffer karke LLM ko feed kare.
+
+Workflow: Tum AI ko prompt doge: "Monitor this live WebSocket stream for 60 seconds. Parse the incoming JSON structures. Autonomously fuzz the user_id and action parameters in the background to check for IDOR or race conditions, and alert me if a different user's data is returned." AI practically tumhare liye live traffic mein invisible payloads inject karega.
+
+==================================================================================
+
 
 Bhai, tumhara thought process bilkul spot-on hai! Tumne ekdum core missing elements pakde hain. Jab hum "AI as an autonomous helper" ki baat karte hain, toh methodology sirf web scanning tak limited nahi reh sakti. AI ka asli magic tab dikhta hai jab woh un cheezon ko automate kare jo insan ke liye bahut tedious (boring aur time-consuming) hoti hain—jaise reverse engineering, code review, aur massive logs read karna.
 
