@@ -2739,7 +2739,7 @@ Total keywords across all subtopics: 42
 
 # Section 4: MITRE ATT&CK® framework discussion
 
-### 🏁 Section Overview: MITRE ATT&CK Origin & Fundamentals
+
 
 Is section mein hum samjhenge ki MITRE ATT&CK framework kahan se aaya, **Cyber Kill Chain** kya hai, aur defensive teams **malware attack patterns** ko kaise identify karti hain.
 
@@ -4053,7 +4053,6 @@ Total Topics: 2 | Total Keywords: 37 | CVEs: 0 | Missed: 0
 # Section 5: Open source intelligence (OSINT) for Red and Blue Teamers
 
 
-### 🏁 Section Overview: Open Source Intelligence (OSINT) for Red and Blue Teamers
 
 Is section mein hum seekhenge ki kaise threat analysts aur penetration testers OSINT platforms ka use karke malicious IPs, Command & Control (C2) infrastructure, payloads, aur target vulnerabilities ko investigate karte hain.
 
@@ -4668,7 +4667,6 @@ Bug bounty programs (jaise HackerOne) mein, hunters FOFA/Shodan query likhte hai
 # Section 6: Persistence techniques for Red and Blue Teamers
 
 
-### 🏁 Section Overview: Persistence techniques for Red and Blue Teamers
 
 Is section mein hum Windows environment mein threat actors ke dwara use kiye jaane wale common persistence mechanisms (system reboot ke baad bhi access maintain rakhne ke tarike) ko detail mein samjhenge. Yeh Red Teamers (offensive) aur Blue Teamers (defensive) dono ke liye critical hain.
 
@@ -5543,7 +5541,6 @@ AD (Active Directory) pentesting mein, jab red teamer Domain Controller par loca
 # Section 7: Investigating defensive mechanisms and methods to evade antivirus and EDR
 
 
-### 🏁 Section Overview: Defensive Mechanisms & Evasion Techniques
 
 Is section mein hum samjhenge ki blue team ke defense mechanisms (AV, EDRs) internally kaise kaam karte hain, aur red teamers inhe bypass karne ke liye kaunsi advanced techniques (Process Injection, DLL Hijacking, Obfuscation, AMSI/ETW Patching) use karte hain.
 
@@ -6577,7 +6574,7 @@ App Event ---> ntdll.dll(EtwEventWrite)
 
 # Section 8: Red + Blue Team Operation - Initial Access Phase
 
-### ✅ Section Overview: Red + Blue Team Operation - Initial Access Phase
+
 
 Is section mein hum initial access lene ke real-world tarike seekhenge. Red team threat actors kaise shellcode generate karte hain, process injection karte hain, RDP brute-force karte hain, aur phishing ya public-facing apps ko exploit karte hain — aur saath hi blue team inhe kaise detect karti hai, yeh sab deeply cover hoga.
 
@@ -8022,7 +8019,6 @@ Total Topics: 10 | Total Subtopics: 40 | CVEs: 1 | Missed: 0
 # Section 9: Red + Blue Team Operation - Defence Evasion Phase
 
 
-# Section 9: Red + Blue Team Operation – Defence Evasion Phase
 
 **Overview:**  
 Instructor is section mein Windows Defender aur EDR/AV solutions ko bypass aur disable karne ke multiple real‑world techniques (manual commands, batch scripts, exclusions, rootkit tools, obfuscation) cover karta hai. Yeh saari techniques post‑exploitation phase mein aati hain, jahan payload deploy karne se pehle ya stealth maintain karne ke liye defence ko neutralise karna hota hai.
@@ -10307,7 +10303,6 @@ Jab Red Team ek enterprise Windows AD (Active Directory) network compromise kart
 
 
 
-### 🏁 Section Overview: Red + Blue Team Operation - Persistence Phase
 
 Is section mein hum samjhenge ki initial access (system hack karne) ke baad connection khone se bachne ke liye **persistence** kaise set ki jaati hai. Hum Cobalt Strike payloads, registry manipulation, startup folders, aur scheduled tasks jaise advanced post-exploitation techniques ko live practicals ke saath dekhenge.
 
@@ -10979,8 +10974,6 @@ Total Topics: 3 | Total Keywords: 69 | CVEs/MITRE: 3 (T1136, T1098, T1547.001, T
 
 # Section 12: Red + Blue Team Operation - Privilege Escalation
 
-
-### 🏁 Section Overview: Red + Blue Team Operation - Privilege Escalation
 
 Is section mein hum Windows Privilege Escalation techniques (jaise UAC bypass, token duplication, named pipe impersonation, aur unquoted service paths) ko Red Team (attacker) aur Blue Team (defender) dono perspectives se deep dive karenge.
 
@@ -12577,13 +12570,7 @@ Total Topics: 9 | Total Keywords Covered: 100% | CVEs Covered: 1 | Missed: 0
 # Section 13: Red + Blue Team Operation - Credential Access
 
 
-**Notes Guru (Offensive Security Edition)** initialize ho chuka hai. 🚀
 
-Tumhara skeleton successfully process kar liya gaya hai. Yeh Section "Credential Access" (Post-Exploitation aur Lateral Movement) ka core pillar hai.
-
-Kyunki topics kaafi deep hain aur humein **Zero Censor** aur **Maximum Depth** policy follow karni hai, main ek baar mein 2 topics generate karunga taaki koi detail truncate na ho.
-
-Chalo shuru karte hain!
 
 ---
 
@@ -15206,7 +15193,7 @@ Real enterprise SOC (Security Operations Center) mein ek playbook hoti hai. Jais
 
 # Section 15: Red + Blue Team Operation - Exfiltration
 
-### 🏁 Section Overview: Red + Blue Team Operation - Exfiltration
+
 
 Is section mein hum samjhenge ki threat actors network compromise karne ke baad data ko bahar kaise nikalte hain (exfiltration). Hum Rclone jaise third-party tools ka practical abuse, evasion techniques, aur Blue Team ki incident response strategies cover karenge.
 
@@ -16067,7 +16054,6 @@ Threat Intelligence (TI) engagements mein red teamers StealBit ke IoCs (Indicato
 # Section 16: Red + Blue Team Operation - Impact
 
 
-### 🏁 Section Overview: Red + Blue Team Operation - Impact
 
 Is section mein hum ransomware attack ke **Impact phase** ko deep dive karenge — ek threat actor kaise apne tracks hide karta hai, backups destroy karta hai, aur final ransomware payload execute karta hai, aur uske baad Blue Team ka Incident Response kya hona chahiye.
 
@@ -17389,7 +17375,7 @@ Total Topics: 6 | Total Keywords: ~75 | CVEs: 0 | Missed: 0
 
 # Section 18: History of Ransomwares
 
-### 🚀 Section 18: History of Ransomwares (Part 1)
+
 
 Is section mein hum ransomware ki duniya ke sabse khatarnak variants (Akira, Ryuk, LockBit) ke attack flows, unki history, aur evasion techniques ko deep dive karenge.
 
