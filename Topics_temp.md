@@ -3032,9 +3032,18 @@ Sections: 1 | Topics: 2 | Subtopics: 12 | CVEs: 0
 ==================================================================================
 
 
-Yeh existing syllabus recon, WAF evasion, aur basic web automation ke liye kaafi solid foundation set karta hai. Par jab hum hardcore penetration testing, red teaming, aur end-to-end bug bounty ki baat karte hain, toh isme kuch major blind spots hain. Agar goal yeh hai ki manual work kam ho, AI heavy lifting kare, aur koi bhi critical vulnerability miss na ho, toh syllabus mein yeh topics sequence mein add hone hi chahiye.
+New Section 19.5: Advanced GraphQL & gRPC Auditing
+Sequence: After Section 19 (API Vulnerability Testing).
 
-Here is the step-by-step breakdown of what is missing, why it’s critical, and exactly how local AI and MCP tools should be integrated to automate the workflow.
+The Missing Link: Syllabus mein REST APIs cover ho gayi hain, par modern enterprise apps (like Facebook, Netflix) GraphQL aur gRPC use karti hain. GraphQL schemas massive hote hain, aur gRPC ke Protobuf (.proto) files ko manually reverse-engineer karna ek headache hai.
+
+Why it needs to be added: GraphQL mein Introspection queries se pura backend structure mil jata hai, par hazaro mutations mein se IDOR (BOLA) manually dhoondhna impossible hai.
+
+Practical Local AI / MCP Integration:
+
+GraphQL Introspection MCP:
+
+Workflow: Tum LLM ko prompt doge: "Fetch the GraphQL schema for target.com using introspection. Map all undocumented queries and mutations. Generate a list of test payloads specifically targeting BOLA (IDOR) on the deleteOrganization and updateUser mutations." AI tumhe exactly wahi queries dega jo exploit try karengi.
 
 ---
 
