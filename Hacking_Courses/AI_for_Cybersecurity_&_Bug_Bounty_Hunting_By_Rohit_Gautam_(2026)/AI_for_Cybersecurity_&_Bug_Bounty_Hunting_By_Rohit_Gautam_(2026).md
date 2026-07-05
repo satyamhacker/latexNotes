@@ -14417,12 +14417,17 @@ Jab race condition trigger hogi:
 
 **--- 🛑 PART 2 FINISHED. Type 'CONTINUE' for the next topic ---**  
 ✅ **Topics Covered in this message:** Topic 2 (Asynchronous Protocol Fuzzing)  
-⏳ **Remaining Topics (in order):** Topic 1 (Automated APK/IPA Decompilation & Secret Extraction) from Section 26  
-📊 **Progress:** 2 topics done / 3 topics total
+
+Section 25: Advanced Modern APIs (GraphQL, gRPC & WebSockets)
+  Topic 1: GraphQL Introspection & gRPC Auditing
+  Topic 2: Asynchronous Protocol Fuzzing (WebSockets & MQTT)
+
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-▶️ **Resuming from: Topic 1 (Automated APK/IPA Decompilation & Secret Extraction)** — Remaining after this: **None** (Final topic of Section 26).
+==================================================================================
+
+# Section 26: AI-Powered Mobile Security (Static Analysis)
 
 ---
 
