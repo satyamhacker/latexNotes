@@ -434,13 +434,99 @@ Sections: 1 | Topics: 5 | Subtopics: 28 | CVEs: 0
 
 ==================================================================================
 
-# Section 5: LLM Tools Overview
+# Section 5: Local AI Infrastructure, Quantization & Context Management
+
+===Section 5: Local AI Infrastructure, Quantization & Context Management===
+[Instructor explains the hardware realities of running local AI models, covering quantization, context window management, and advanced inference engines to prevent crashes during heavy tasks.]
+
+--5--Local AI Infrastructure, Quantization & Context Management--
+Topic 1: Hardware Optimization & Quantization Basics
+Subtopics: Local GPU Constraints, Quantization, GGUF, EXL2, AWQ, Q4_K_M vs Q8_0 weights
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Target content volume: Optimizing local hardware to make AI usable for heavy red teaming tasks.
+* Key terms: Quantization, GGUF, EXL2, Q4_K_M, Q8_0.
+* Instructor Emphasis: Red teamers don't all have $10,000 GPU rigs. Running efficient models is critical so the system doesn't crash during heavy parsing.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Local AI Infrastructure, Quantization, Context Management, GPU constraints, GGUF, EXL2, AWQ, Q4_K_M, Q8_0, coding tasks, recon parsing, hardware optimization]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Pre-Engagement / Infrastructure Setup
+* Attack methodology context: Setting up robust, efficient local AI infrastructure that can handle large payloads without crashing.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker evaluates their local hardware capabilities and selects an appropriately quantized model (e.g., Q4_K_M for large context parsing on consumer GPUs).
+* Exploitation/Weaponization Phase: (N/A)
+* Post-Exploitation/Reporting Phase: (N/A)
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Local LLM Configuration
+* Navigation Steps: Select model weights based on task > Load into inference engine
+
+--5--Local AI Infrastructure, Quantization & Context Management--
+Topic 2: Context Window & Advanced Inference Engines
+Subtopics: Context Window Optimization, RoPE Scaling, Context Forgetting, vLLM, High-Throughput Parallel Processing
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Target content volume: Managing massive inputs like source code dumps or Nmap XMLs without losing context.
+* Key terms: Context Window, RoPE Scaling, vLLM, Parallel Processing.
+* Instructor Emphasis: Dumping a massive GitHub repo into an 8B model's context window will cause hallucinations unless RoPE scaling and proper inference engines like vLLM are used.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Context Window Optimization, RoPE Scaling, Rotary Position Embedding, massive Nmap XML, source code dump, hallucinations, vLLM, Inference Engines, Ollama, high-throughput parallel processing, Autonomous CASM]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Infrastructure Setup / Automation
+* Attack methodology context: Ensuring the AI can process huge amounts of reconnaissance data simultaneously without context degradation.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker sets up vLLM for high-throughput processing and configures RoPE scaling to handle an incoming 100k-token Nmap scan.
+* Exploitation/Weaponization Phase: The AI processes the massive data dump without forgetting the early parts of the scan, successfully identifying vulnerabilities across the entire dataset.
+* Post-Exploitation/Reporting Phase: (N/A)
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: vLLM
+* Navigation Steps: Configure vLLM engine > Set RoPE scaling parameters > Process large data dumps
+
+---
+
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 5: Local AI Infrastructure, Quantization & Context Management
+  Topic 1: Hardware Optimization & Quantization Basics
+  Topic 2: Context Window & Advanced Inference Engines
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 11 | CVEs: 0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 6: LLM Tools Overview
 
 
-===Section 5: LLM Tools Overview===
+===Section 6: LLM Tools Overview===
 [Instructor is section mein local LLM agents (Olama, Open WebUI) aur Model Context Protocol (MCP) ka setup aur reconnaissance automation cover karta hai.]
 
---5--LLM Tools Overview--
+--6--LLM Tools Overview--
 Topic 1: Intro to LLM Agents & Claude AI
 Subtopics: AI Agent Implementation, Test Bed Setup, Claude AI Desktop, Model Context Protocol (MCP), Rate Limiting Limitations
 
@@ -645,7 +731,7 @@ Subtopics: Subdomain Enumeration via Subfinder, Automated Output Categorization,
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 5: LLM Tools Overview
+Section 6: LLM Tools Overview
 Topic 1: Intro to LLM Agents & Claude AI
 Topic 2: Ollama & Local LLM Setup
 Topic 3: Open WebUI Deployment via Docker
@@ -660,13 +746,13 @@ Sections: 1 | Topics: 6 | Subtopics: 22 | CVEs: 0
 
 ==================================================================================
 
-# Section 6: Prompt Engineering
+# Section 7: Prompt Engineering
 
 
-===Section 6: LLM Fine-Tuning for Reconnaissance===
+===Section 7: LLM Fine-Tuning for Reconnaissance===
 [Instructor LLM model ko fine-tune karke subdomain enumeration aur tech stack detection karna sikhata hai.] [⚠️ Derived]
 
---6--LLM Fine-Tuning for Reconnaissance--
+--7--LLM Fine-Tuning for Reconnaissance--
 Topic 1: LLM Subdomain Enumeration
 Subtopics: Model Fine-Tuning, Vector Database Creation, Subdomain Enumeration, Contextual Output Analysis
 
@@ -699,7 +785,7 @@ Subtopics: Model Fine-Tuning, Vector Database Creation, Subdomain Enumeration, C
 
 * Tool Name: (N/A — transcript mein koi GUI tool navigation nahi tha)
 
---6--LLM Fine-Tuning for Reconnaissance--
+--7--LLM Fine-Tuning for Reconnaissance--
 Topic 2: Tech Stack & CMS Detection
 [⚠️ Yeh topic maine logically group kiya hai — original transcript mein explicit heading nahi thi]
 Subtopics: Tech Stack Detection, CMS Fingerprinting, Target Filtering, Output Export Limitations
@@ -733,10 +819,10 @@ Subtopics: Tech Stack Detection, CMS Fingerprinting, Target Filtering, Output Ex
 
 * Tool Name: (N/A — transcript mein koi GUI tool navigation nahi tha)
 
-===Section 6: API Pentesting & Vector Database Creation===
+===Section 7: API Pentesting & Vector Database Creation===
 [Instructor Postman collection aur API docs ko local LLM (GPT4All) mein load karke vector DB banana sikhata hai.] [⚠️ Derived]
 
---6--API Pentesting & Vector Database Creation--
+--7--API Pentesting & Vector Database Creation--
 Topic 3: Vulnerable API (vAPI) Documentation Analysis
 Subtopics: API Pentesting Basics, Postman Collection, Swagger Documentation, OWASP Top 10 API, Broken Object Level Authorization (BOLA), Endpoint Extraction
 
@@ -770,7 +856,7 @@ Subtopics: API Pentesting Basics, Postman Collection, Swagger Documentation, OWA
 * Tool Name: Postman
 * Navigation Steps: Collections > Overview > View complete documentation > Download JSON file
 
---6--API Pentesting & Vector Database Creation--
+--7--API Pentesting & Vector Database Creation--
 Topic 4: Local LLM Setup & Vector Embeddings
 Subtopics: Llama Local AI Agent, GPT4All Setup, Vector Database Embedding, Local Document Indexing, Open WebUI Limitations
 
@@ -804,10 +890,10 @@ Subtopics: Llama Local AI Agent, GPT4All Setup, Vector Database Embedding, Local
 * Tool Name: GPT4All
 * Navigation Steps: Find Models > Download model > Local docs > Create a folder > Provide folder path > Add files > Rebuild (embed files) > Chat > Choose model > Select local docs folder
 
-===Section 6: JavaScript Analysis & Secrets Discovery===
+===Section 7: JavaScript Analysis & Secrets Discovery===
 [Instructor Wayback URLs aur bash scripting se JS files download karke unme sensitive tokens aur passwords dhundna sikhata hai.] [⚠️ Derived]
 
---6--JavaScript Analysis & Secrets Discovery--
+--7--JavaScript Analysis & Secrets Discovery--
 Topic 5: Extracting & Downloading JS Files
 Subtopics: Wayback URLs Enumeration, JS File Grepping, Target Specific Wordlists, Bash Scripting for File Download
 
@@ -840,7 +926,7 @@ Subtopics: Wayback URLs Enumeration, JS File Grepping, Target Specific Wordlists
 
 * Tool Name: (N/A — terminal commands used)
 
---6--JavaScript Analysis & Secrets Discovery--
+--7--JavaScript Analysis & Secrets Discovery--
 Topic 6: Automated Secret Discovery in JS Files
 Subtopics: LLM Secret Discovery, Extended Grep for Secrets, Token and Password Hunting
 
@@ -880,7 +966,7 @@ Subtopics: LLM Secret Discovery, Extended Grep for Secrets, Token and Password H
 ```
 📋 EXTRACTED IN THIS PHASE:
 
-Section 6: LLM Fine-Tuning for Reconnaissance
+Section 7: LLM Fine-Tuning for Reconnaissance
   Topic 1: LLM Subdomain Enumeration
   Topic 2: Tech Stack & CMS Detection
 
@@ -902,13 +988,13 @@ Sections: 3 | Topics: 6 | Subtopics: 24 | CVEs: 1
 
 ==================================================================================
 
-# Section 7: Web AI Deployment
+# Section 8: Web AI Deployment
 
 
-===Section 7: Web AI Deployment===
+===Section 8: Web AI Deployment===
 [Instructor is section mein Model Context Protocol (MCP) ko explain karte hain aur ek local LLM ko custom Python Flask server (subfinder tool) ke saath integrate karke automated reconnaissance setup karna sikhate hain.]
 
---7--Web AI Deployment--
+--8--Web AI Deployment--
 Topic 1: Model Context Protocol (MCP) Fundamentals
 Subtopics: MCP Definition, Anthropic AI Standard, LLM Capability Enhancement, MCP Architecture, Natural Language Execution
 
@@ -1015,7 +1101,7 @@ Subtopics: Open WebUI Configuration, Flask Server Setup, Subfinder Tool Executio
 ```
 📋 EXTRACTED IN THIS PHASE:
 
-Section 7: Web AI Deployment
+Section 8: Web AI Deployment
   Topic 1: Model Context Protocol (MCP) Fundamentals
   Topic 2: Exposing Local AI Services with Ngrok
   Topic 3: Building & Configuring Custom MCP Tool (Subfinder)
@@ -1029,13 +1115,13 @@ Sections: 1 | Topics: 3 | Subtopics: 16 | CVEs: 0
 
 ==================================================================================
 
-# Section 8: Tool-Based Recon
+# Section 9: Tool-Based Recon
 
 
-===Section 8: Tool-Based Recon===
+===Section 9: Tool-Based Recon===
 Instructor LLM (Ollama) aur MCP server ka use karke automated passive aur active recon setup demonstrate kar raha hai.
 
---8--Tool-Based Recon--
+--9--Tool-Based Recon--
 Topic 1: LLM-Driven Subdomain Enumeration via MCP
 Subtopics: MCP Server Execution, Subfinder Enumeration, Open Web UI Prompts, Output File Generation
 
@@ -1142,7 +1228,7 @@ Subtopics: HTTPX Execution, Internal Server Error Troubleshooting, Local Depende
 ```
 📋 EXTRACTED IN THIS PHASE:
 
-Section 8: Tool-Based Recon
+Section 9: Tool-Based Recon
   Topic 1: LLM-Driven Subdomain Enumeration via MCP
   Topic 2: Extending LLM Capabilities with HTTPX
   Topic 3: Execution, Troubleshooting & Active Recon Plans
@@ -1156,13 +1242,13 @@ Sections: 1 | Topics: 3 | Subtopics: 14 | CVEs: 0
 
 ==================================================================================
 
-# Section 9: JavaScript Analysis
+# Section 10: JavaScript Analysis
 
 
-===Section 9: MCP Server Configuration & Troubleshooting===
+===Section 10: MCP Server Configuration & Troubleshooting===
 [⚠️ Derived — Instructor is section mein MCP server setup ka homework deta hai aur Docker networking ka common error explain karta hai.]
 
---9--MCP Server Configuration & Troubleshooting--
+--10--MCP Server Configuration & Troubleshooting--
 Topic 1: MCP Server Task & Subroute Recon
 Subtopics: MCP Server Configuration, Sub Finder Integration, Active Reconnaissance, Subroute Tool, Command Execution
 
@@ -1196,7 +1282,7 @@ Subtopics: MCP Server Configuration, Sub Finder Integration, Active Reconnaissan
 * Tool Name: Open Web UI
 * Navigation Steps: Settings > Configure MCP server > Enable it
 
---9--MCP Server Configuration & Troubleshooting--
+--10--MCP Server Configuration & Troubleshooting--
 Topic 2: Docker Networking & Connection Error Fix
 Subtopics: Docker Container Execution, Localhost Resolution Error, IP Address Discovery, Connection Verification
 
@@ -1229,10 +1315,10 @@ Subtopics: Docker Container Execution, Localhost Resolution Error, IP Address Di
 
 * Tool Name: (N/A — transcript mein koi GUI tool navigation nahi tha)
 
-===Section 9: JavaScript Analysis for Bug Bounty===
+===Section 10: JavaScript Analysis for Bug Bounty===
 [⚠️ Derived — Instructor JavaScript files ko fetch, filter, bulk download aur AI LLM ke through analyze karne ka end-to-end workflow sikhata hai.]
 
---9--JavaScript Analysis for Bug Bounty--
+--10--JavaScript Analysis for Bug Bounty--
 Topic 1: JS Analysis Basics & URL Enumeration
 Subtopics: JS File Goldmine, Sensitive Information Disclosure, Content Discovery, Asset Discovery, Waybackurls Tool, Gau Tool, Inverse Grep Filtering
 
@@ -1265,7 +1351,7 @@ Subtopics: JS File Goldmine, Sensitive Information Disclosure, Content Discovery
 
 * Tool Name: (N/A — terminal based command line execution)
 
---9--JavaScript Analysis for Bug Bounty--
+--10--JavaScript Analysis for Bug Bounty--
 Topic 2: URL Deduplication & Bulk Download
 Subtopics: Duplicate URL Removal, Parameter Stripping, Sort Unique, Bash While Loop, Wget Downloading
 
@@ -1298,7 +1384,7 @@ Subtopics: Duplicate URL Removal, Parameter Stripping, Sort Unique, Bash While L
 
 * Tool Name: (N/A — purely bash/terminal commands)
 
---9--JavaScript Analysis for Bug Bounty--
+--10--JavaScript Analysis for Bug Bounty--
 Topic 3: AI File Analysis Configuration
 Subtopics: GPT4All Setup, Allowed File Extensions, Local Docs Indexing, Vector Database Embeddings, Llama Model Integration
 
@@ -1338,7 +1424,7 @@ Subtopics: GPT4All Setup, Allowed File Extensions, Local Docs Indexing, Vector D
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 9: MCP Server Configuration & Troubleshooting
+Section 10: MCP Server Configuration & Troubleshooting
 Topic 1: MCP Server Task & Subroute Recon
 Topic 2: Docker Networking & Connection Error Fix
 
@@ -1354,12 +1440,98 @@ Sections: 2 | Topics: 5 | Subtopics: 21 | CVEs: 0
 
 ==================================================================================
 
-# Section 10: Automated Social Engineering & Initial Access
+# Section 11: Building Custom MCP Servers from Scratch (The SDKs)
 
-===Section 10: Automated Social Engineering & Initial Access===
+===Section 11: Building Custom MCP Servers from Scratch (The SDKs)===
+[Instructor teaches how to move beyond basic open-source tools by building native, stateful MCP servers from scratch using the official Anthropic Python SDK.]
+
+--11--Building Custom MCP Servers from Scratch (The SDKs)--
+Topic 1: Native Python MCP SDK & Standard I/O
+Subtopics: Python MCP SDK, Custom Exploit Scripts, Native MCP Tool Conversion, Standard I/O, Server-Sent Events (SSE)
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Target content volume: Converting proprietary python exploit scripts into native MCP tools.
+* Key terms: Python MCP SDK, Native tool, Standard I/O, SSE.
+* Instructor Emphasis: True red teamers write custom scripts daily. If you can't natively build an MCP server, your automation is bottlenecked.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[Custom MCP Servers, Anthropic SDK, Python MCP SDK, proprietary scripts, custom-built Python exploit, native MCP tool, Standard I/O, stdio, Server-Sent Events, SSE, automation bottleneck]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Weaponization / Custom Tooling
+* Attack methodology context: Integrating custom offensive security scripts directly into the AI's toolbelt as native MCP servers.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: (N/A)
+* Exploitation/Weaponization Phase: Attacker takes a custom Python exploit script and wraps it using the Anthropic Python SDK. They configure it to communicate via Standard I/O and expose it to the local LLM, allowing the AI to execute the proprietary exploit directly.
+* Post-Exploitation/Reporting Phase: (N/A)
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Python MCP SDK
+* Navigation Steps: Install SDK > Wrap custom script > Expose as tool via stdio/SSE
+
+--11--Building Custom MCP Servers from Scratch (The SDKs)--
+Topic 2: Stateful MCPs & Context Limit Debugging
+Subtopics: Stateful MCPs, Session Token Maintenance, Debugging Context Limits, context_length_exceeded, Massive Terminal Output Handling
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Target content volume: Advanced MCP development handling persistent state and large outputs.
+* Key terms: Stateful MCP, Session token, context_length_exceeded.
+* Instructor Emphasis: Tools often return too much output (like a raw gobuster scan). You must know how to handle context limits and maintain state across calls.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Stateful MCPs, persistent state, session token, authentication, Debugging MCP Context Limits, context_length_exceeded, terminal output handling, gobuster scan, error handling, state management]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Automation / Tool Execution
+* Attack methodology context: Ensuring AI tools can maintain authenticated sessions and gracefully handle massive outputs without crashing the context window.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker's MCP tool runs a massive gobuster scan. The tool logic catches the output size, chunks it or summarizes it to prevent `context_length_exceeded` errors before returning it to the LLM.
+* Exploitation/Weaponization Phase: A stateful MCP maintains an authenticated session token natively, allowing the LLM to make multiple subsequent API calls to a target without re-authenticating.
+* Post-Exploitation/Reporting Phase: (N/A)
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: Custom MCP Server
+* Navigation Steps: Implement state variables > Add output length checks and truncation logic
+
+---
+
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 11: Building Custom MCP Servers from Scratch (The SDKs)
+  Topic 1: Native Python MCP SDK & Standard I/O
+  Topic 2: Stateful MCPs & Context Limit Debugging
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 2 | Subtopics: 10 | CVEs: 0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 12: Automated Social Engineering & Initial Access
+
+===Section 12: Automated Social Engineering & Initial Access===
 [Instructor Red Teaming ka initial access phase cover karta hai, jahan OSINT scraping aur AI ka use karke highly personalized phishing emails aur EDR-evading malicious macros generate kiye jaate hain.]
 
---10--Automated Social Engineering & Initial Access--
+--12--Automated Social Engineering & Initial Access--
 Topic 1: OSINT Scraping & Pretext Generation
 Subtopics: LinkedIn Profile Scraping, Psychological Pretexting, Phishing Automation, Excel VBA Macro Generation, Mark-of-the-Web (MotW) Evasion
 
@@ -1397,7 +1569,7 @@ Subtopics: LinkedIn Profile Scraping, Psychological Pretexting, Phishing Automat
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 10: Automated Social Engineering & Initial Access
+Section 12: Automated Social Engineering & Initial Access
   Topic 1: OSINT Scraping & Pretext Generation
 
 📊 PHASE SUMMARY:
@@ -1407,12 +1579,12 @@ Sections: 1 | Topics: 1 | Subtopics: 5 | CVEs: 0
 
 ==================================================================================
 
-# Section 11: Advanced Vishing & Identity Spoofing (Deepfakes)
+# Section 13: Advanced Vishing & Identity Spoofing (Deepfakes)
 
-===Section 11: Advanced Vishing & Identity Spoofing (Deepfakes)===
+===Section 13: Advanced Vishing & Identity Spoofing (Deepfakes)===
 [Instructor identity spoofing aur vishing (voice phishing) sikhata hai, jahan local AI audio tools use karke live Helpdesk social engineering perform ki jaati hai bina OPSEC compromise kiye.]
 
---11--Advanced Vishing & Identity Spoofing (Deepfakes)--
+--13--Advanced Vishing & Identity Spoofing (Deepfakes)--
 Topic 1: Voice Cloning & Automated SIP Calling
 Subtopics: Local TTS Configuration, Deepfake Generation, Voice Cloning Models, Twilio SIP Integration, MFA Reset Attacks
 
@@ -1450,7 +1622,7 @@ Subtopics: Local TTS Configuration, Deepfake Generation, Voice Cloning Models, T
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 11: Advanced Vishing & Identity Spoofing (Deepfakes)
+Section 13: Advanced Vishing & Identity Spoofing (Deepfakes)
   Topic 1: Voice Cloning & Automated SIP Calling
 
 📊 PHASE SUMMARY:
@@ -1460,13 +1632,13 @@ Sections: 1 | Topics: 1 | Subtopics: 5 | CVEs: 0
 
 ==================================================================================
 
-# Section 12: Web Exploitation
+# Section 14: Web Exploitation
 
 
-===Section 12: Web Exploitation & Custom Wordlist Generation===
+===Section 14: Web Exploitation & Custom Wordlist Generation===
 [⚠️ Derived] Instructor is section mein target-specific JavaScript files se endpoints aur variables extract karke highly customized wordlist banana aur asset discovery/subdomain enumeration karna sikhata hai.
 
---12--Web Exploitation & Custom Wordlist Generation--
+--14--Web Exploitation & Custom Wordlist Generation--
 Topic 1: Target-Specific JavaScript Analysis & Extraction
 Subtopics: Wayback URLs, JavaScript File Crawling, Variable & Function Name Analysis, Banking vs E-commerce Endpoints, Bulk JS File Downloading
 
@@ -1564,10 +1736,10 @@ Subtopics: Permutation Generation, Hidden Asset Discovery, Active vs Passive Dis
 🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
 (N/A — transcript mein is topic ke liye koi GUI tool navigation nahi tha)
 
-===Section 12: LLM RAG Modeling for Penetration Testing===
+===Section 14: LLM RAG Modeling for Penetration Testing===
 [⚠️ Manually split] Is section mein instructor RAG (Retrieval-Augmented Generation) ka concept samjhata hai aur Open WebUI (Llama 3.1) mein custom knowledge bases (RFCs, HackTricks, API Docs) banakar pentesting tasks automate karna dikhata hai.
 
---12--LLM RAG Modeling for Penetration Testing--
+--14--LLM RAG Modeling for Penetration Testing--
 Topic 1: Retrieval-Augmented Generation (RAG) Fundamentals
 Subtopics: RAG Definition, Document Store, Vector Database, Generator Component, Feeding RFC Documents, Enhancing LLM Capabilities
 
@@ -1735,7 +1907,7 @@ Subtopics: HTTrack Website Cloning, HackTricks Knowledge Base Creation, Web Secu
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 12: Web Exploitation & Custom Wordlist Generation
+Section 14: Web Exploitation & Custom Wordlist Generation
 Topic 1: Target-Specific JavaScript Analysis & Extraction
 Topic 2: Custom Wordlist Generation & Subdomain Enumeration
 Topic 3: Subdomain Permutations & Asset Discovery
@@ -1754,12 +1926,12 @@ Sections: 2 | Topics: 8 | Subtopics: 37 | CVEs: 0
 
 ==================================================================================
 
-# Section 13: WAF & Core Concepts
+# Section 15: WAF & Core Concepts
 
-===Section 13: WAF & Core Concepts===
+===Section 15: WAF & Core Concepts===
 [Instructor is section mein Web Application Firewalls (WAF) ke fundamentals, ModSecurity, aur OWASP Core Rule Set (CRS) ka architecture explain karta hai.]
 
---13--WAF & Core Concepts--
+--15--WAF & Core Concepts--
 Topic 1: WAF Fundamentals & Architecture
 Subtopics: Web Application Firewall, ModSecurity Engine, Traffic Filtering, OWASP Core Rule Set
 
@@ -1793,7 +1965,7 @@ Subtopics: Web Application Firewall, ModSecurity Engine, Traffic Filtering, OWAS
 * Tool Name: (N/A — transcript mein koi GUI tool navigation nahi tha)
 * Navigation Steps: (N/A)
 
---13--WAF & Core Concepts--
+--15--WAF & Core Concepts--
 Topic 2: Core Rule Set (CRS) Configuration Analysis
 Subtopics: CRS Configuration Files, XSS Rule Configuration, Regex Pattern Matching, SQL Injection Rule Configuration
 
@@ -1827,10 +1999,10 @@ Subtopics: CRS Configuration Files, XSS Rule Configuration, Regex Pattern Matchi
 * Tool Name: (N/A)
 * Navigation Steps: (N/A)
 
-===Section 13: Practical WAF Fingerprinting & Triggering [⚠️ Manually split]===
+===Section 15: Practical WAF Fingerprinting & Triggering [⚠️ Manually split]===
 [Is section mein instructor live environment mein `wafw00f` se WAF detect karta hai aur payloads inject karke Apache ModSecurity logs analyze karta hai.]
 
---13--Practical WAF Fingerprinting & Triggering--
+--15--Practical WAF Fingerprinting & Triggering--
 Topic 1: WAF Fingerprinting
 Subtopics: WAF Detection, wafw00f Usage, Fingerprinting Cloudflare, Fingerprinting Imperva
 
@@ -1864,7 +2036,7 @@ Subtopics: WAF Detection, wafw00f Usage, Fingerprinting Cloudflare, Fingerprinti
 * Tool Name: wafw00f (CLI tool)
 * Navigation Steps: (N/A — transcript mein sirf basic terminal command tha)
 
---13--Practical WAF Fingerprinting & Triggering--
+--15--Practical WAF Fingerprinting & Triggering--
 Topic 2: Triggering Rules & Log Analysis
 Subtopics: XSS Payload Testing, 403 Forbidden Response, Apache Error Logs Analysis, Payload Evasion Attempts
 
@@ -1898,10 +2070,10 @@ Subtopics: XSS Payload Testing, 403 Forbidden Response, Apache Error Logs Analys
 * Tool Name: (N/A)
 * Navigation Steps: (N/A)
 
-===Section 13: AI-Assisted WAF Bypass Development [⚠️ Manually split]===
+===Section 15: AI-Assisted WAF Bypass Development [⚠️ Manually split]===
 [Is section mein instructor local LLM (Ollama) ko MDN Web API docs feed karke zero-day WAF bypass payloads generate karta hai aur unhe live Cloudflare target pe test karta hai.]
 
---13--AI-Assisted WAF Bypass Development--
+--15--AI-Assisted WAF Bypass Development--
 Topic 1: Building the LLM Knowledge Base
 Subtopics: MDN Web API Documentation, LLM Context Feeding, Local Model Setup, Resource Constraint Issues
 
@@ -1935,7 +2107,7 @@ Subtopics: MDN Web API Documentation, LLM Context Feeding, Local Model Setup, Re
 * Tool Name: Ollama (Web UI)
 * Navigation Steps: Workspace > Models > Click on Plus (set up new model) > Name: WAF Bypass Modsec > Select base model (Mixtral/Llama) > Visibility Public > Select Knowledge Base > Save and Create > New Chat
 
---13--AI-Assisted WAF Bypass Development--
+--15--AI-Assisted WAF Bypass Development--
 Topic 2: Generating Evasion Payloads
 Subtopics: Querying the LLM, Undetected Event Handlers, Obscure Web API Methods, Payload Construction, URL Encoding Issues
 
@@ -1969,7 +2141,7 @@ Subtopics: Querying the LLM, Undetected Event Handlers, Obscure Web API Methods,
 * Tool Name: (N/A)
 * Navigation Steps: (N/A)
 
---13--AI-Assisted WAF Bypass Development--
+--15--AI-Assisted WAF Bypass Development--
 Topic 3: Live Environment Validation
 Subtopics: ModSecurity Bypass Execution, Cloudflare WAF Bypass, Test Page XSS Execution
 
@@ -2003,7 +2175,7 @@ Subtopics: ModSecurity Bypass Execution, Cloudflare WAF Bypass, Test Page XSS Ex
 * Tool Name: (N/A)
 * Navigation Steps: (N/A)
 
---13--AI-Assisted WAF Bypass Development--
+--15--AI-Assisted WAF Bypass Development--
 Topic 4: Custom WAF Fuzzer Automation [⚠️ Derived]
 Subtopics: MCP Server Automation, Python Payload Fuzzer, Dynamic Payload Generation, Permutation and Combination
 
@@ -2042,7 +2214,7 @@ Subtopics: MCP Server Automation, Python Payload Fuzzer, Dynamic Payload Generat
 ```
 📋 EXTRACTED IN THIS PHASE:
 
-Section 13: WAF & Core Concepts
+Section 15: WAF & Core Concepts
   Topic 1: WAF Fundamentals & Architecture
   Topic 2: Core Rule Set (CRS) Configuration Analysis
 
@@ -2065,13 +2237,13 @@ Sections: 3 | Topics: 8 | Subtopics: 27 | CVEs: 0
 
 ==================================================================================
 
-# Section 14: Introduction of Shell Globbing
+# Section 16: Introduction of Shell Globbing
 
 
-===Section 14: Shell Globbing Fundamentals & WAF Evasion===
+===Section 16: Shell Globbing Fundamentals & WAF Evasion===
 [Instructor yahan shell globbing ke basics explain karta hai aur live demo deta hai ki kaise wildcards use karke ModSecurity aur Cloudflare WAF ko bypass karke Remote Code Execution (RCE) achieve kiya ja sakta hai.]
 
---14--Shell Globbing Fundamentals & WAF Evasion--
+--16--Shell Globbing Fundamentals & WAF Evasion--
 Topic 1: Shell Globbing & Linux Command Basics
 Subtopics: POSIX Standards, Shell Globbing Documentation, System Shell Execution, Wildcard Character Usage, Regex Pattern Matching, Range Matching, Exclusion Matching, File Name Expansion, Bash File Existence Loop, Mac OS Linux Architecture
 
@@ -2208,7 +2380,7 @@ Subtopics: Vulnerable Endpoint Discovery, DNS Lookup Command Injection, Command 
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 14: Shell Globbing Fundamentals & WAF Evasion
+Section 16: Shell Globbing Fundamentals & WAF Evasion
 Topic 1: Shell Globbing & Linux Command Basics
 Topic 2: System File Enumeration & WAF Triggering
 Topic 3: WAF Bypass using Shell Globbing
@@ -2221,13 +2393,13 @@ Sections: 1 | Topics: 4 | Subtopics: 26 | CVEs: 0
 
 ==================================================================================
 
-# Section 15: Techniques of Shell Globbing
+# Section 17: Techniques of Shell Globbing
 
 
-===Section 15: Techniques of Shell Globbing===
+===Section 17: Techniques of Shell Globbing===
 [Instructor yahan advanced shell globbing techniques, ModSecurity WAF block analysis aur Llama AI se mutated WAF bypass payloads generate karna sikhata hai. [⚠️ Derived]]
 
---15--Techniques of Shell Globbing--
+--17--Techniques of Shell Globbing--
 Topic 1: Shell Globbing Patterns & Fundamentals
 Subtopics: Question Mark Wildcard, Asterisk Wildcards, Box Bracket Pattern, Exclamation Pattern, Backslash Escape Sequences
 
@@ -2331,7 +2503,7 @@ Subtopics: Ollama Prompt Engineering, Payload Mutation, Trial and Error Testing,
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 15: Techniques of Shell Globbing
+Section 17: Techniques of Shell Globbing
 Topic 1: Shell Globbing Patterns & Fundamentals
 Topic 2: WAF Evasion Techniques (ModSecurity Testing)
 Topic 3: AI-Assisted Mutated Payload Generation
@@ -2343,13 +2515,13 @@ Sections: 1 | Topics: 3 | Subtopics: 14 | CVEs: 0
 
 ==================================================================================
 
-# Section 16: LLMs & Automation
+# Section 18: LLMs & Automation
 
 
-===Section 16: LLMs & Automation===
+===Section 18: LLMs & Automation===
 Instructor is section mein Open WebUI aur Ollama ko DuckDuckGo se integrate karke bug bounty aur recon automation ka practical setup demonstrate karta hai.
 
---16--LLMs & Automation--
+--18--LLMs & Automation--
 Topic 1: Web Search Integration in Local LLM
 Subtopics: Open WebUI Configuration, Web Search Integration, DuckDuckGo Setup, Rate Limit Prevention, Local LLM Testing
 
@@ -2486,7 +2658,7 @@ Subtopics: System vs User Prompts, AI Agent Specialized Prompts, System Prompt L
 ```
 📋 EXTRACTED IN THIS PHASE:
 
-Section 16: LLMs & Automation
+Section 18: LLMs & Automation
   Topic 1: Web Search Integration in Local LLM
   Topic 2: Bug Bounty Target Discovery (Acquisitions)
   Topic 3: Customizing LLM with System Prompts & Memory
@@ -2502,12 +2674,12 @@ Sections: 1 | Topics: 4 | Subtopics: 20 | CVEs: 0
 
 ==================================================================================
 
-# Section 17: Autonomous CASM (Continuous Attack Surface Management)
+# Section 19: Autonomous CASM (Continuous Attack Surface Management)
 
-===Section 17: Autonomous CASM (Continuous Attack Surface Management)===
+===Section 19: Autonomous CASM (Continuous Attack Surface Management)===
 [Instructor 24/7 automated bug hunting setup demonstrate karta hai, jahan AI bot internet scan karta rehta hai aur naye assets live hote hi instantly exploit test karta hai.]
 
---17--Autonomous CASM (Continuous Attack Surface Management)--
+--19--Autonomous CASM (Continuous Attack Surface Management)--
 Topic 1: 24/7 Autonomous Hunting & Alerting
 Subtopics: Cron/Temporal Automation, State Comparison, Bug Bounty Recon Framework (BBRF), Autonomous Nuclei Scanning, Alerting Workflows
 
@@ -2545,7 +2717,7 @@ Subtopics: Cron/Temporal Automation, State Comparison, Bug Bounty Recon Framewor
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 17: Autonomous CASM (Continuous Attack Surface Management)
+Section 19: Autonomous CASM (Continuous Attack Surface Management)
   Topic 1: 24/7 Autonomous Hunting & Alerting
 
 📊 PHASE SUMMARY:
@@ -2555,12 +2727,12 @@ Sections: 1 | Topics: 1 | Subtopics: 5 | CVEs: 0
 
 ==================================================================================
 
-# Section 18: HTTPX & Screenshots
+# Section 20: HTTPX & Screenshots
 
-===Section 18: Visual Reconnaissance with HTTPX===
+===Section 20: Visual Reconnaissance with HTTPX===
 [Instructor is section mein Project Discovery ke httpx tool ka use karke subdomains ki mass screenshotting aur visual reconnaissance demonstrate karta hai.]
 
---18--Visual Reconnaissance with HTTPX--
+--20--Visual Reconnaissance with HTTPX--
 Topic 1: HTTPX Introduction & Installation
 Subtopics: Project Discovery HTTPX, Binary Installation, Headless Chromium Browser, HTTPX Update Command
 
@@ -2594,7 +2766,7 @@ Subtopics: Project Discovery HTTPX, Binary Installation, Headless Chromium Brows
 * Tool Name: Project Discovery GitHub Repository
 * Navigation Steps: Search httpx GitHub > Go to official repository > Releases section > Download compatible asset for system > Unzip binary
 
---18--Visual Reconnaissance with HTTPX--
+--20--Visual Reconnaissance with HTTPX--
 Topic 2: Subdomain Screenshotting Execution & Flag Tuning
 Subtopics: Subfinder Piping, Screenshot Flag (-ss), Output Flag Error (-o), Store Response Directory Flag (-srd), Screenshot Timeout, Idle Value Delay (-sid)
 
@@ -2627,7 +2799,7 @@ Subtopics: Subfinder Piping, Screenshot Flag (-ss), Output Flag Error (-o), Stor
 
 * Tool Name: (N/A — transcript mein koi GUI tool navigation nahi tha, CLI based demo tha)
 
---18--Visual Reconnaissance with HTTPX--
+--20--Visual Reconnaissance with HTTPX--
 Topic 3: Visual Output Analysis & Vulnerability Spotting
 Subtopics: Response Folder Structure, Screenshot HTML Viewer, Subdomain Takeover Identification, XSS Discovery via Search Input
 
@@ -2661,7 +2833,7 @@ Subtopics: Response Folder Structure, Screenshot HTML Viewer, Subdomain Takeover
 * Tool Name: Browser (HTTPX HTML Viewer)
 * Navigation Steps: Open current folder > Go to output folder > Open screenshot.html in browser to view visual recon results
 
---18--Visual Reconnaissance with HTTPX--
+--20--Visual Reconnaissance with HTTPX--
 Topic 4: LLM Automation & Local Model Updates (Q&A)
 Subtopics: Automation MVP Scripting, GPT4All/Ollama Updates, Pulling Models from Registry
 
@@ -2698,7 +2870,7 @@ Subtopics: Automation MVP Scripting, GPT4All/Ollama Updates, Pulling Models from
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 18: Visual Reconnaissance with HTTPX
+Section 20: Visual Reconnaissance with HTTPX
 Topic 1: HTTPX Introduction & Installation
 Topic 2: Subdomain Screenshotting Execution & Flag Tuning
 Topic 3: Visual Output Analysis & Vulnerability Spotting
@@ -2712,12 +2884,12 @@ Sections: 1 | Topics: 4 | Subtopics: 17 | CVEs: 0
 
 ==================================================================================
 
-# Section 19: VAPT Report Generation
+# Section 21: VAPT Report Generation
 
-===Section 19: VAPT Report Generation===
+===Section 21: VAPT Report Generation===
 [⚠️ Derived] Instructor AI model aur custom knowledge base ka use karke penetration testing aur bug bounty reports generate karne ka automated process sikhata hai.
 
---19--VAPT Report Generation--
+--21--VAPT Report Generation--
 Topic 1: AI Model & Knowledge Base Setup
 Subtopics: Manual Reporting Challenges, AI Knowledge Base Creation, RT Reporting Knowledge Base, Document Parsing, Model Configuration, System Prompt Setup
 
@@ -2821,7 +2993,7 @@ Subtopics: XSS Vulnerability Input, XSS Report Analysis, PDF Export, System Prom
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 19: VAPT Report Generation
+Section 21: VAPT Report Generation
 Topic 1: AI Model & Knowledge Base Setup
 Topic 2: SQL Injection Report Generation
 Topic 3: XSS & SSRF Report Generation & LLM Troubleshooting
@@ -2834,13 +3006,13 @@ Sections: 1 | Topics: 3 | Subtopics: 16 | CVEs: 0
 
 ==================================================================================
 
-# Section 20: Nuclei & YAML Automation
+# Section 22: Nuclei & YAML Automation
 
 
-===Section 20: Nuclei & YAML Automation===
+===Section 22: Nuclei & YAML Automation===
 [⚠️ Derived] Instructor yahan Nuclei vulnerability scanner ka use karke targets scan karna aur AI ke through custom exploit templates (YAML) generate karke unhe scale/contribute karna sikhata hai.
 
---20--Nuclei & YAML Automation--
+--22--Nuclei & YAML Automation--
 Topic 1: Nuclei Scanning & Target Identification
 Subtopics: Exploit Template Generation, Moodle XSS Template, Google Dorking Targets, Single Target Scanning, Bulk Target Scanning
 
@@ -2944,7 +3116,7 @@ Subtopics: GitHub Template Contribution, FTP Weak Credentials Template, WAF Bypa
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 20: Nuclei & YAML Automation
+Section 22: Nuclei & YAML Automation
 Topic 1: Nuclei Scanning & Target Identification
 Topic 2: AI-Powered Template Generation
 Topic 3: Nuclei Community Contribution
@@ -2957,13 +3129,13 @@ Sections: 1 | Topics: 3 | Subtopics: 13 | CVEs: 0
 
 ==================================================================================
 
-# Section 21: Postman Usage
+# Section 23: Postman Usage
 
 
-===Section 21: Postman Usage===
+===Section 23: Postman Usage===
 [Instructor API testing ke liye Postman ka basic setup, vAPI collection import process, aur Docker ke through backend installation demonstrate karta hai]
 
---21--Postman Usage--
+--23--Postman Usage--
 Topic 1: Postman Introduction & Setup
 Subtopics: Postman Overview, Supported API Protocols, Postman Download, Account Creation, Workspace Configuration
 
@@ -3070,7 +3242,7 @@ Subtopics: Backend Connectivity Issue, vAPI Docker Installation, Git Clone, Dock
 ```
 📋 EXTRACTED IN THIS PHASE:
 
-Section 21: Postman Usage
+Section 23: Postman Usage
   Topic 1: Postman Introduction & Setup
   Topic 2: Importing vAPI Collection
   Topic 3: vAPI Backend Installation (Docker)
@@ -3084,12 +3256,12 @@ Sections: 1 | Topics: 3 | Subtopics: 14 | CVEs: 0
 
 ==================================================================================
 
-# Section 22: API Vulnerability Testing
+# Section 24: API Vulnerability Testing
 
-===Section 22: API Vulnerability Testing===
+===Section 24: API Vulnerability Testing===
 [Instructor Postman environments configure karta hai aur Post Bot (AI) ka use karke API endpoints par OWASP Top 10 vulnerabilities (jaise XSS) ki automated testing demonstrate karta hai]
 
---22--API Vulnerability Testing--
+--24--API Vulnerability Testing--
 Topic 1: Postman Environment & Variable Setup
 Subtopics: Llama Endpoint Extraction [⚠️], Global Environment Configuration, Host Variable Setup, User Creation (POST), User Retrieval (GET), Authentication/Cookie Errors
 
@@ -3163,7 +3335,7 @@ Subtopics: Post Bot Introduction, XSS Testing via AI, OWASP Top 10 Automated Tes
 ```
 📋 EXTRACTED IN THIS PHASE:
 
-Section 22: API Vulnerability Testing
+Section 24: API Vulnerability Testing
   Topic 1: Postman Environment & Variable Setup
   Topic 2: AI-Driven Vulnerability Testing with Post Bot
 
@@ -3179,12 +3351,12 @@ Sections: 1 | Topics: 2 | Subtopics: 12 | CVEs: 0
 
 ==================================================================================
 
-# Section 23: Advanced Modern APIs (GraphQL, gRPC & WebSockets)
+# Section 25: Advanced Modern APIs (GraphQL, gRPC & WebSockets)
 
-===Section 23: Advanced Modern APIs (GraphQL, gRPC & WebSockets)===
+===Section 25: Advanced Modern APIs (GraphQL, gRPC & WebSockets)===
 [Instructor explains how to map and exploit massive GraphQL schemas, reverse gRPC protobufs, and fuzz asynchronous WebSocket/MQTT streams using custom proxy MCPs.]
 
---23--Advanced Modern APIs (GraphQL, gRPC & WebSockets)--
+--25--Advanced Modern APIs (GraphQL, gRPC & WebSockets)--
 Topic 1: GraphQL Introspection & gRPC Auditing
 Subtopics: GraphQL Schema Mapping, Introspection Queries, gRPC Protobuf Reversing, BOLA/IDOR Identification, GraphQL Introspection MCP
 
@@ -3216,7 +3388,7 @@ Subtopics: GraphQL Schema Mapping, Introspection Queries, gRPC Protobuf Reversin
 * Tool Name: GraphQL Introspection MCP / Local LLM Chat
 * Navigation Steps: Load MCP in Open WebUI > Enter target GraphQL endpoint > Provide extraction prompt
 
---23--Advanced Modern APIs (GraphQL, gRPC & WebSockets)--
+--25--Advanced Modern APIs (GraphQL, gRPC & WebSockets)--
 Topic 2: Asynchronous Protocol Fuzzing (WebSockets & MQTT)
 Subtopics: WebSocket Hijacking, CSWSH, MQTT IoT Protocols, Live Stream Buffering, Background Fuzzing, Interceptor MCP
 
@@ -3254,7 +3426,7 @@ Subtopics: WebSocket Hijacking, CSWSH, MQTT IoT Protocols, Live Stream Buffering
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 23: Advanced Modern APIs (GraphQL, gRPC & WebSockets)
+Section 25: Advanced Modern APIs (GraphQL, gRPC & WebSockets)
   Topic 1: GraphQL Introspection & gRPC Auditing
   Topic 2: Asynchronous Protocol Fuzzing (WebSockets & MQTT)
 
@@ -3265,12 +3437,12 @@ Sections: 1 | Topics: 2 | Subtopics: 11 | CVEs: 0
 
 ==================================================================================
 
-# Section 24: AI-Powered Mobile Security (Static Analysis)
+# Section 26: AI-Powered Mobile Security (Static Analysis)
 
-===Section 24: AI-Powered Mobile Security (Static Analysis)===
+===Section 26: AI-Powered Mobile Security (Static Analysis)===
 [Instructor introduces the mobile attack surface, explaining how to use AI and MobSF/JADX MCPs to deeply analyze APKs and iOS apps for hardcoded secrets and logic flaws.]
 
---24--AI-Powered Mobile Security (Static Analysis)--
+--26--AI-Powered Mobile Security (Static Analysis)--
 Topic 1: Automated APK/IPA Decompilation & Secret Extraction
 Subtopics: Mobile Attack Surface, MobSF Integration, JADX Decompilation, Hardcoded Secrets, Manifest Parsing, Deep Links
 
@@ -3308,7 +3480,7 @@ Subtopics: Mobile Attack Surface, MobSF Integration, JADX Decompilation, Hardcod
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 24: AI-Powered Mobile Security (Static Analysis)
+Section 26: AI-Powered Mobile Security (Static Analysis)
   Topic 1: Automated APK/IPA Decompilation & Secret Extraction
 
 📊 PHASE SUMMARY:
@@ -3318,12 +3490,12 @@ Sections: 1 | Topics: 1 | Subtopics: 6 | CVEs: 0
 
 ==================================================================================
 
-# Section 25: Mobile Dynamic Instrumentation (The Red Team Edge)
+# Section 27: Mobile Dynamic Instrumentation (The Red Team Edge)
 
-===Section 25: Mobile Dynamic Instrumentation (The Red Team Edge)===
+===Section 27: Mobile Dynamic Instrumentation (The Red Team Edge)===
 [Instructor demonstrates how to bypass mobile runtime protections using ADB and AI-generated Frida scripts for dynamic memory manipulation.]
 
---25--Mobile Dynamic Instrumentation (The Red Team Edge)--
+--27--Mobile Dynamic Instrumentation (The Red Team Edge)--
 Topic 1: Bypassing Runtime Protections with Frida & AI
 Subtopics: SSL Pinning Bypass, Root Detection Bypass, ADB Logcat Analysis, Memory Manipulation, Dynamic Hooking
 
@@ -3361,7 +3533,7 @@ Subtopics: SSL Pinning Bypass, Root Detection Bypass, ADB Logcat Analysis, Memor
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 25: Mobile Dynamic Instrumentation (The Red Team Edge)
+Section 27: Mobile Dynamic Instrumentation (The Red Team Edge)
   Topic 1: Bypassing Runtime Protections with Frida & AI
 
 📊 PHASE SUMMARY:
@@ -3371,12 +3543,12 @@ Sections: 1 | Topics: 1 | Subtopics: 5 | CVEs: 0
 
 ==================================================================================
 
-# Section 26: White-Box Testing & SAST (Source Code Auditing)
+# Section 28: White-Box Testing & SAST (Source Code Auditing)
 
-===Section 26: White-Box Testing & SAST (Source Code Auditing)===
+===Section 28: White-Box Testing & SAST (Source Code Auditing)===
 [Instructor explains how to ingest entire GitHub repositories into an LLM context to perform advanced Static Application Security Testing (SAST) and sink tracing.]
 
---26--White-Box Testing & SAST (Source Code Auditing)--
+--28--White-Box Testing & SAST (Source Code Auditing)--
 Topic 1: AI-Driven Code Review & Sink Tracing
 Subtopics: GitHub Repository Ingestion, Automated Sink Tracing, Prototype Pollution, Insecure Deserialization, Cryptographic Failures
 
@@ -3414,7 +3586,7 @@ Subtopics: GitHub Repository Ingestion, Automated Sink Tracing, Prototype Pollut
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 26: White-Box Testing & SAST (Source Code Auditing)
+Section 28: White-Box Testing & SAST (Source Code Auditing)
   Topic 1: AI-Driven Code Review & Sink Tracing
 
 📊 PHASE SUMMARY:
@@ -3424,12 +3596,12 @@ Sections: 1 | Topics: 1 | Subtopics: 5 | CVEs: 0
 
 ==================================================================================
 
-# Section 27: Agentic Web Browsing & Business Logic Hunting
+# Section 29: Agentic Web Browsing & Business Logic Hunting
 
-===Section 27: Agentic Web Browsing & Business Logic Hunting===
+===Section 29: Agentic Web Browsing & Business Logic Hunting===
 [Instructor introduces browser automation MCPs to allow AI to perform authenticated, multi-step business logic testing that CLI tools cannot handle.]
 
---27--Agentic Web Browsing & Business Logic Hunting--
+--29--Agentic Web Browsing & Business Logic Hunting--
 Topic 1: Autonomous Browser Control for Logic Flaws
 Subtopics: Playwright/Puppeteer MCP, Authenticated State Testing, Multi-Step Logic, IDORs, Price Manipulation
 
@@ -3467,7 +3639,7 @@ Subtopics: Playwright/Puppeteer MCP, Authenticated State Testing, Multi-Step Log
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 27: Agentic Web Browsing & Business Logic Hunting
+Section 29: Agentic Web Browsing & Business Logic Hunting
   Topic 1: Autonomous Browser Control for Logic Flaws
 
 📊 PHASE SUMMARY:
@@ -3477,12 +3649,12 @@ Sections: 1 | Topics: 1 | Subtopics: 5 | CVEs: 0
 
 ==================================================================================
 
-# Section 28: Advanced Cryptography & Token Forging (JWT/OAuth)
+# Section 30: Advanced Cryptography & Token Forging (JWT/OAuth)
 
-===Section 28: Advanced Cryptography & Token Forging (JWT/OAuth)===
+===Section 30: Advanced Cryptography & Token Forging (JWT/OAuth)===
 [Instructor explain karta hai ki modern web apps aur APIs mein JWT (JSON Web Tokens) aur OAuth authentication ko bypass karne ke liye AI-assisted cryptography attacks (like Algorithm Confusion) kaise perform kiye jaate hain.]
 
---28--Advanced Cryptography & Token Forging (JWT/OAuth)--
+--30--Advanced Cryptography & Token Forging (JWT/OAuth)--
 Topic 1: Algorithm Confusion & Token Forging
 Subtopics: JWT Header Parsing, RS256 to HS256 Confusion Attack, Public Key Extraction, Custom Crypto MCP Integration, Python Exploit Script Generation
 
@@ -3520,7 +3692,7 @@ Subtopics: JWT Header Parsing, RS256 to HS256 Confusion Attack, Public Key Extra
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 28: Advanced Cryptography & Token Forging (JWT/OAuth)
+Section 30: Advanced Cryptography & Token Forging (JWT/OAuth)
   Topic 1: Algorithm Confusion & Token Forging
 
 📊 PHASE SUMMARY:
@@ -3530,12 +3702,12 @@ Sections: 1 | Topics: 1 | Subtopics: 5 | CVEs: 0
 
 ==================================================================================
 
-# Section 29: Cloud Metadata & IAM Exploitation (AWS/Azure/GCP)
+# Section 31: Cloud Metadata & IAM Exploitation (AWS/Azure/GCP)
 
-===Section 29: Cloud Metadata & IAM Exploitation (AWS/Azure/GCP)===
+===Section 31: Cloud Metadata & IAM Exploitation (AWS/Azure/GCP)===
 [Instructor covers the post-SSRF phase, showing how to extract cloud metadata and use AI to parse massive IAM JSON policies for privilege escalation paths.]
 
---29--Cloud Metadata & IAM Exploitation (AWS/Azure/GCP)--
+--31--Cloud Metadata & IAM Exploitation (AWS/Azure/GCP)--
 Topic 1: Cloud Pivot & IAM Policy Parsing
 Subtopics: SSRF to Cloud Pivot, 169.254.169.254, AWS IAM JSON Analysis, Privilege Escalation Vector Identification
 
@@ -3573,7 +3745,7 @@ Subtopics: SSRF to Cloud Pivot, 169.254.169.254, AWS IAM JSON Analysis, Privileg
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 29: Cloud Metadata & IAM Exploitation (AWS/Azure/GCP)
+Section 31: Cloud Metadata & IAM Exploitation (AWS/Azure/GCP)
   Topic 1: Cloud Pivot & IAM Policy Parsing
 
 📊 PHASE SUMMARY:
@@ -3583,13 +3755,13 @@ Sections: 1 | Topics: 1 | Subtopics: 4 | CVEs: 0
 
 ==================================================================================
 
-# Section 30: Container Escape & Kubernetes (K8s) Auditing
+# Section 32: Container Escape & Kubernetes (K8s) Auditing
 
-===Section 30: Container Escape & Kubernetes (K8s) Auditing===
+===Section 32: Container Escape & Kubernetes (K8s) Auditing===
 *(Note: Placed here as it naturally follows Cloud Infrastructure compromise)*
 [Instructor details how to break out of isolated Docker containers and compromise entire Kubernetes clusters by analyzing RBAC YAML manifests via AI.]
 
---30--Container Escape & Kubernetes (K8s) Auditing--
+--32--Container Escape & Kubernetes (K8s) Auditing--
 Topic 1: RBAC Analysis & Container Escapes
 Subtopics: Microservices Exploitation, K8s RBAC Configurations, YAML Manifest Parsing, Privileged Pod Escapes, Docker Socket Mounting
 
@@ -3627,7 +3799,7 @@ Subtopics: Microservices Exploitation, K8s RBAC Configurations, YAML Manifest Pa
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 30: Container Escape & Kubernetes (K8s) Auditing
+Section 32: Container Escape & Kubernetes (K8s) Auditing
   Topic 1: RBAC Analysis & Container Escapes
 
 📊 PHASE SUMMARY:
@@ -3637,12 +3809,12 @@ Sections: 1 | Topics: 1 | Subtopics: 5 | CVEs: 0
 
 ==================================================================================
 
-# Section 31: Advanced Internal Network Pentesting
+# Section 33: Advanced Internal Network Pentesting
 
-===Section 31: Advanced Internal Network Pentesting===
+===Section 33: Advanced Internal Network Pentesting===
 [Instructor explains how to ingest massive network scans and Responder logs into AI to instantly map the internal topology and crack hashes.]
 
---31--Advanced Internal Network Pentesting--
+--33--Advanced Internal Network Pentesting--
 Topic 1: Nmap Topology Mapping & Responder Analysis
 Subtopics: Nmap XML Ingestion, Network Pivot Point Identification, Legacy System Detection, Responder Log Parsing, NTLMv2 Hashcat Generation
 
@@ -3680,7 +3852,7 @@ Subtopics: Nmap XML Ingestion, Network Pivot Point Identification, Legacy System
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 31: Advanced Internal Network Pentesting
+Section 33: Advanced Internal Network Pentesting
   Topic 1: Nmap Topology Mapping & Responder Analysis
 
 📊 PHASE SUMMARY:
@@ -3690,13 +3862,13 @@ Sections: 1 | Topics: 1 | Subtopics: 5 | CVEs: 0
 
 ==================================================================================
 
-# Section 32: Automated Active Directory (AD) Exploitation
+# Section 34: Automated Active Directory (AD) Exploitation
 
-Insert directly after **Internal Network Pentesting** ===Section 32: Automated Active Directory (AD) Exploitation===
+Insert directly after **Internal Network Pentesting** ===Section 34: Automated Active Directory (AD) Exploitation===
 
 [Instructor covers internal lateral movement, bridging the gap between raw Active Directory data and exploit execution using BloodHound and Pentest MCPs.]
 
---32--Automated Active Directory (AD) Exploitation--
+--34--Automated Active Directory (AD) Exploitation--
 Topic 1: AI-Generated Cypher Queries & Domain Exploitation
 Subtopics: BloodHound Neo4j Databases, Cypher Query Generation, Attack Path Mapping, CrackMapExec/Impacket Integration
 
@@ -3734,7 +3906,7 @@ Subtopics: BloodHound Neo4j Databases, Cypher Query Generation, Attack Path Mapp
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 32: Automated Active Directory (AD) Exploitation
+Section 34: Automated Active Directory (AD) Exploitation
   Topic 1: AI-Generated Cypher Queries & Domain Exploitation
 
 📊 PHASE SUMMARY:
@@ -3744,12 +3916,12 @@ Sections: 1 | Topics: 1 | Subtopics: 4 | CVEs: 0
 
 ==================================================================================
 
-# Section 33: Post-Exploitation & Blue Team Evasion (True Red Teaming)
+# Section 35: Post-Exploitation & Blue Team Evasion (True Red Teaming)
 
-===Section 33: Post-Exploitation & Blue Team Evasion (True Red Teaming)===
+===Section 35: Post-Exploitation & Blue Team Evasion (True Red Teaming)===
 [Instructor transitions to high-tier red teaming, demonstrating how to parse PEAS logs and use AI to write polymorphic, EDR-evading payloads.]
 
---33--Post-Exploitation & Blue Team Evasion (True Red Teaming)--
+--35--Post-Exploitation & Blue Team Evasion (True Red Teaming)--
 Topic 1: Privilege Escalation & AV/EDR Evasion
 Subtopics: PEAS Log Parsing, EDR Bypass, Polymorphic Payload Generation, Nim/Rust Loaders
 
@@ -3787,7 +3959,7 @@ Subtopics: PEAS Log Parsing, EDR Bypass, Polymorphic Payload Generation, Nim/Rus
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 33: Post-Exploitation & Blue Team Evasion (True Red Teaming)
+Section 35: Post-Exploitation & Blue Team Evasion (True Red Teaming)
   Topic 1: Privilege Escalation & AV/EDR Evasion
 
 📊 PHASE SUMMARY:
@@ -3797,12 +3969,12 @@ Sections: 1 | Topics: 1 | Subtopics: 4 | CVEs: 0
 
 ==================================================================================
 
-# Section 34: AI-Powered Malware Development
+# Section 36: AI-Powered Malware Development
 
-===Section 34: AI-Powered Malware Development===
+===Section 36: AI-Powered Malware Development===
 [Instructor dives deeper into custom malware dev using the NoctisAI MCP, allowing local LLMs to compile and encrypt advanced C/C++ droppers.]
 
---34--AI-Powered Malware Development--
+--36--AI-Powered Malware Development--
 Topic 1: Custom Droppers & In-Memory Introspection
 Subtopics: Indirect Syscalls, AES Encrypted Shellcode, NoctisAI MCP, GhostMCP, Dynamic Debugging
 
@@ -3840,7 +4012,7 @@ Subtopics: Indirect Syscalls, AES Encrypted Shellcode, NoctisAI MCP, GhostMCP, D
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 34: AI-Powered Malware Development
+Section 36: AI-Powered Malware Development
   Topic 1: Custom Droppers & In-Memory Introspection
 
 📊 PHASE SUMMARY:
@@ -3850,12 +4022,12 @@ Sections: 1 | Topics: 1 | Subtopics: 5 | CVEs: 0
 
 ==================================================================================
 
-# Section 35: Fileless Execution & LOLBins Weaponization
+# Section 37: Fileless Execution & LOLBins Weaponization
 
-===Section 35: Fileless Execution & LOLBins Weaponization===
+===Section 37: Fileless Execution & LOLBins Weaponization===
 [Instructor teaches how to maintain absolute OPSEC by avoiding custom malware drops entirely, leveraging trusted OS binaries instead.]
 
---35--Fileless Execution & LOLBins Weaponization--
+--37--Fileless Execution & LOLBins Weaponization--
 Topic 1: Living Off The Land Binaries (LOLBins)
 Subtopics: Fileless Malware, OS Binary Abuse, MSBuild/InstallUtil Execution, GTFOBins MCP
 
@@ -3893,7 +4065,7 @@ Subtopics: Fileless Malware, OS Binary Abuse, MSBuild/InstallUtil Execution, GTF
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 35: Fileless Execution & LOLBins Weaponization
+Section 37: Fileless Execution & LOLBins Weaponization
   Topic 1: Living Off The Land Binaries (LOLBins)
 
 📊 PHASE SUMMARY:
@@ -3903,12 +4075,12 @@ Sections: 1 | Topics: 1 | Subtopics: 4 | CVEs: 0
 
 ==================================================================================
 
-# Section 36: AI-Driven Command & Control (C2) and Metasploit
+# Section 38: AI-Driven Command & Control (C2) and Metasploit
 
-===Section 36: AI-Driven Command & Control (C2) and Metasploit===
+===Section 38: AI-Driven Command & Control (C2) and Metasploit===
 [Instructor shows how to bridge AI directly into C2 frameworks (Metasploit/Cobalt Strike) to fully automate listener setup, exploitation, and post-exploitation modules.]
 
---36--AI-Driven Command & Control (C2) and Metasploit--
+--38--AI-Driven Command & Control (C2) and Metasploit--
 Topic 1: Autonomous MSF RPC Integration
 Subtopics: MetasploitMCP, Exploit Selection, Listener Configuration, Autonomous Post-Exploitation
 
@@ -3946,7 +4118,7 @@ Subtopics: MetasploitMCP, Exploit Selection, Listener Configuration, Autonomous 
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 36: AI-Driven Command & Control (C2) and Metasploit
+Section 38: AI-Driven Command & Control (C2) and Metasploit
   Topic 1: Autonomous MSF RPC Integration
 
 📊 PHASE SUMMARY:
@@ -3956,12 +4128,12 @@ Sections: 1 | Topics: 1 | Subtopics: 4 | CVEs: 0
 
 ==================================================================================
 
-# Section 37: Stealth Data Exfiltration & DLP Evasion
+# Section 39: Stealth Data Exfiltration & DLP Evasion
 
-===Section 37: Stealth Data Exfiltration & DLP Evasion===
+===Section 39: Stealth Data Exfiltration & DLP Evasion===
 [Instructor covers the final objective—stealing data without triggering corporate Data Loss Prevention (DLP) systems using AI-generated custom protocols.]
 
---37--Stealth Data Exfiltration & DLP Evasion--
+--39--Stealth Data Exfiltration & DLP Evasion--
 Topic 1: Evading DLP via DNS & ICMP Tunneling
 Subtopics: Data Chunking, AES Encryption, DNS TXT Queries, Slack/Discord API Exfiltration
 
@@ -3999,7 +4171,7 @@ Subtopics: Data Chunking, AES Encryption, DNS TXT Queries, Slack/Discord API Exf
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 37: Stealth Data Exfiltration & DLP Evasion
+Section 39: Stealth Data Exfiltration & DLP Evasion
   Topic 1: Evading DLP via DNS & ICMP Tunneling
 
 📊 PHASE SUMMARY:
@@ -4009,12 +4181,12 @@ Sections: 1 | Topics: 1 | Subtopics: 4 | CVEs: 0
 
 ==================================================================================
 
-# Section 38: Threat Hunting & Log Analysis (The Purple Team Edge)
+# Section 40: Threat Hunting & Log Analysis (The Purple Team Edge)
 
-===Section 38: Threat Hunting & Log Analysis (The Purple Team Edge)===
+===Section 40: Threat Hunting & Log Analysis (The Purple Team Edge)===
 [Instructor Red Teaming stealth ko improve karne ke liye Blue Team ke logs (Sysmon/EVTX) ko AI se parse karke evasion techniques refine karna sikhata hai.]
 
---38--Threat Hunting & Log Analysis (The Purple Team Edge)--
+--40--Threat Hunting & Log Analysis (The Purple Team Edge)--
 Topic 1: Sysmon & EVTX Lineage Analysis
 Subtopics: Windows Event Logs, Sysmon Parsing, Sigma Rules Analysis, Process Tree Tracing, EDR Bypass Mutation
 
@@ -4052,7 +4224,7 @@ Subtopics: Windows Event Logs, Sysmon Parsing, Sigma Rules Analysis, Process Tre
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 38: Threat Hunting & Log Analysis (The Purple Team Edge)
+Section 40: Threat Hunting & Log Analysis (The Purple Team Edge)
   Topic 1: Sysmon & EVTX Lineage Analysis
 
 📊 PHASE SUMMARY:
@@ -4062,12 +4234,12 @@ Sections: 1 | Topics: 1 | Subtopics: 5 | CVEs: 0
 
 ==================================================================================
 
-# Section 39: Red Teaming Enterprise AI (Attacking the AI itself)
+# Section 41: Red Teaming Enterprise AI (Attacking the AI itself)
 
-===Section 39: Red Teaming Enterprise AI (Attacking the AI itself)===
+===Section 41: Red Teaming Enterprise AI (Attacking the AI itself)===
 [Instructor naye attack surface ko cover karta hai: AI hacking AI. Target company ke internal chatbots aur RAG systems ko prompt injection fuzzer ke through exploit karna sikhaya gaya hai.]
 
---39--Red Teaming Enterprise AI (Attacking the AI itself)--
+--41--Red Teaming Enterprise AI (Attacking the AI itself)--
 Topic 1: Automated Prompt Injection & Jailbreaking
 Subtopics: RAG System Exploitation, LLM Vulnerabilities, Custom Auto-Fuzzer MCP, SSRF via Chatbots, Data Exfiltration via LLMs
 
@@ -4105,7 +4277,7 @@ Subtopics: RAG System Exploitation, LLM Vulnerabilities, Custom Auto-Fuzzer MCP,
 
 📋 EXTRACTED IN THIS PHASE:
 
-Section 39: Red Teaming Enterprise AI (Attacking the AI itself)
+Section 41: Red Teaming Enterprise AI (Attacking the AI itself)
   Topic 1: Automated Prompt Injection & Jailbreaking
 
 📊 PHASE SUMMARY:
