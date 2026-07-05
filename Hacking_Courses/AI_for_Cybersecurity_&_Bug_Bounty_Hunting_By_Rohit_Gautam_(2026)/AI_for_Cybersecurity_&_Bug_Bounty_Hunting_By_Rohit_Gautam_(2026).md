@@ -1141,9 +1141,7 @@ Bug bounty programs (e.g., HackerOne, Bugcrowd) mein agar tum main application (
 
 ### ✅ Notes Guru (Offensive Security Edition) is Active.
 
-Processing **Section 5: Local AI Infrastructure, Quantization & Context Management**. I have fully analyzed the skeleton, SCOPE SIGNALS, KEYWORDS DUMPS, and ATTACK PHASE SIGNALS. I am generating the deep, 18-point certification-ready notes for your offensive security infrastructure.
 
-Here are your notes:
 
 ---
 
@@ -4513,7 +4511,7 @@ Jab ek pentester ko `slack.com` jaisa bada scope milta hai, woh passive recon (`
 
 # Section 10: JavaScript Analysis
 
-Here is the deep, exam-ready expansion of your skeleton. Since the content is highly technical and detailed, I will process **Section 10 (Part 1)** and the **first topic of Section 10 (Part 2)** in this message to maintain maximum depth without hitting output limits.
+
 
 ---
 
@@ -6546,7 +6544,6 @@ But **no technique is 100%** — always test with multiple AV engines (VirusTota
 # Section 13: Advanced Vishing & Identity Spoofing (Deepfakes)
 
 
-▶️ Resuming from: Voice Cloning & Automated SIP Calling — Remaining after this: (none)
 
 ---
 
@@ -10384,8 +10381,6 @@ Real-world bug bounty mein (e.g., IoT routers ya admin panels), aise diagnostic 
 # Section 17: Techniques of Shell Globbing
 
 
-Here are the comprehensive, exam-ready notes based exactly on your authorized skeleton. I have activated the **Notes Guru (Offensive Security Edition)** persona, ensuring 100% transcript fidelity, zero censorship of offensive terms, and strict adherence to the 18-point structure, code dissection rules, and inline explanations.
-
 ---
 
 ### 🏁 Section Overview: Section 17: Techniques of Shell Globbing
@@ -12594,7 +12589,6 @@ Ek real bug bounty engagement mein, tumne `testphp.com` pe ek reflected XSS nika
 # Section 22: Nuclei & YAML Automation
 
 
-Here are the deep, exam-ready notes for **Section 22: Nuclei & YAML Automation**, structured exactly as requested.
 
 ---
 
@@ -13832,10 +13826,6 @@ Bug bounty programs mein jab pentester ek lamba `user profile form` test karta h
 # Section 25: Advanced Modern APIs (GraphQL, gRPC & WebSockets)
 
 
-**✅ Notes Guru (Offensive Security Edition) Active hai.**  
-Skeleton receive kar liya. Main **Topic 1: GraphQL Introspection & gRPC Auditing** ke saath shuru kar raha hoon, kyunki yeh **Deep + Practical only** hai — isme har flag, har query, aur automation MCP ka flow fully explain karna zaroori hai.
-
-Aage badhte hain, koi censorship nahi, koi softening nahi — seedha exam-ready (OSCP/OSWE/OSEP) notes.
 
 ---
 
