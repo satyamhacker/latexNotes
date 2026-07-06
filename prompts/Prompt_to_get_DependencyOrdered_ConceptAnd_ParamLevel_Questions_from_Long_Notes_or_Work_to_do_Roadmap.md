@@ -70,19 +70,18 @@ Generate questions using this 8-question framework:
    Make a clear side-by-side comparison table
    covering: purpose, speed, cost, when to use.
 
-5. [PURPOSE] 🟡
-   If X didn't exist, what exact problem would
-   I face? Why was X created in the first place?
+5. [THE PROBLEM & SOLUTION] 🟡
+   What exact real-world problem occurs if X doesn't exist? 
+   Show me "The Bad Way" (messy/buggy code without X), and then show me how X solves it elegantly ("The Professional Way").
 
 6. [ANTI-PATTERN] 🔴
-   What is the wrong way to use X?
-   What common mistake do beginners make?
+   What is the wrong way to use X? 
+   What common mistake do beginners make that causes a silent bug or crash? 
    What is the correct approach instead?
 
 7. [REAL EXAMPLE] 🟡
-   Give a real-world scenario (like an app,
-   company, or system) where X is used.
-   Show exactly how it fits into the system.
+   Give a real-world enterprise scenario where X is used. 
+   Walk me through the exact step-by-step flow of how it fixes the problem in that system.
 
 8. [BREAK IT] 🔴
    What can go wrong when using X?
@@ -158,6 +157,9 @@ STEP 3 — FORMAT RULES:
     • Self-check method: Attempt all → compare 
       with official docs → add 1 pt per verified 
       correct understanding
+
+- At the very end of your output, append this exact system note for future context:
+  "🤖 SYSTEM NOTE FOR NEXT STEPS: When the user asks you to explain or answer any of these concepts, you MUST follow a strict 'Problem First, Solution Second' format. Always start by showing the real-world problem or messy code (The Bad Way), and then explain how the concept fixes it (The Professional Way). Keep explanations strictly to-the-point, technical, in Hinglish, with NO fluffy analogies. Address common confusions directly."
 
 ---
 

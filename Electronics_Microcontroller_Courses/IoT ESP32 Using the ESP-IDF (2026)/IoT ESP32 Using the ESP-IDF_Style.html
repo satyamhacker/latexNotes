@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT ESP32 Using the ESP-IDF</title>
+    
+    <!-- Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark-reasonable.min.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Color Palette - Deep Dark Theme */
+            --bg-primary: #0f1115;
+            --bg-secondary: #161b22;
+            --text-primary: #ffffff; /* Pure white for better readability */
+            --text-secondary: #e6edf3; /* Much brighter grey */
+            --accent-blue: #58a6ff;
+            --accent-gradient: linear-gradient(135deg, #61dafb 0%, #4facfe 100%);
+            --border-color: #30363d;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3rem;
+            border-bottom: 3px solid var(--border-color);
+            margin-top: 0;
+        }
+
+        h2 {
+            color: var(--text-primary);
+            font-size: 2rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+        }
+
+        /* Topic & Module Sections - Big Bold Blue */
+        h2.topic-section, h2.module-section {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4facfe;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-left: 5px solid #4facfe;
+            padding-left: 1rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Mac-Style Code Blocks */
+        pre.mac-window {
+            background: #0d1115;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin: 2rem 0;
+            
+            /* STRICT WRAPPING FOR PDF */
+            white-space: pre-wrap !important;
+            word-break: break-word !important; 
+            overflow-x: hidden !important;
+        }
+
+        .code-header {
+            background: #161b22;
+            padding: 8px 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Dots helper (add these classes too) */
+        .control { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 4px;
+            padding: 4px 10px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            white-space: pre-wrap !important; 
+            word-wrap: break-word !important;
+        }
+        
+        pre code {
+            display: block;
+            padding: 1.5rem;
+        }
+
+        :not(pre) > code {
+            background: #1c2128;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background: #1c2128;
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            min-height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            flex-shrink: 0;
+            box-sizing: border-box;
+        }
+        
+        .sidebar-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-left: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .sidebar a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            transition: background 0.2s, color 0.2s;
+            line-height: 1.4;
+            margin-bottom: 2px;
+        }
+
+        .sidebar a:hover {
+            background: rgba(88, 166, 255, 0.12);
+            color: var(--accent-blue);
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        /* Blockquote */
+        blockquote {
+            border-left: 4px solid var(--accent-blue);
+            background: rgba(88, 166, 255, 0.06);
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        #loader {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* CRITICAL PRINT STYLES - DO NOT MODIFY */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            body { margin: 0; padding: 0; }
+            
+            .print-wrapper {
+                background-color: #0f1115 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                min-height: 100vh;
+                width: 100%;
+                margin: 0; padding: 0;
+            }
+
+            /* Force white text for readability */
+            .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th {
+                color: #ffffff !important;
+            }
+
+            /* Keep code blocks distinct */
+            pre.mac-window {
+                border: 1px solid #444 !important;
+                page-break-inside: avoid;
+            }
+
+            .sidebar, .copy-btn, .window-controls, #loader {
+                display: none !important;
+            }
+
+            .layout {
+                display: block !important;
+            }
+            
+            .main-content { padding: 2rem !important; margin: 0 auto !important; max-width: 100% !important; }
+            
+            a { text-decoration: none !important; border-bottom: none !important; color: #ffffff !important; }
+        }
+    </style>
+</head>
+<body>
+    <div id="loader">Loading Documentation...</div>
+    
+    <!-- WRAPPER IS MANDATORY FOR PRINTING BACKGROUNDS -->
+    <div class="print-wrapper">
+        <div class="layout" id="layout" style="display: none;">
+            <nav class="sidebar" id="sidebar">
+                <div class="sidebar-title">Table of Contents</div>
+                <div id="toc"></div>
+            </nav>
+            <main class="main-content" id="content-area">
+                <!-- Markdown content goes here -->
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const contentArea = document.getElementById('content-area');
+            const loader = document.getElementById('loader');
+            const layout = document.getElementById('layout');
+            const toc = document.getElementById('toc');
+            
+            // 1. Pre-process Markdown (Fix indented modules)
+            const mdFilename = "IoT ESP32 Using the ESP-IDF.md";
+            
+            fetch(mdFilename)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to load ${mdFilename}`);
+                    }
+                    return response.text();
+                })
+                .then(markdown => {
+                    // Converts "  Module 1:" to "## MODULE_MARKER Module 1:"
+                    let processed = markdown.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, '## MODULE_MARKER $1');
+                    
+                    // Match the actual topic headers in this specific markdown file
+                    // ### 🎯 Topic: X...  -> ## TOPIC_MARKER Topic: X...
+                    processed = processed.replace(/^###\s*(?:🎯\s*)?(Topic:\s*.*)/gm, '## TOPIC_MARKER $1');
+                    
+                    // Converts "1.1:" to bold
+                    processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
+
+                    // 2. Configure Renderer
+                    const renderer = new marked.Renderer();
+                    
+                    // Safety check: Cast code to string to avoid [object Object] crash
+                    renderer.code = function(code, language) {
+                        const safeCode = code ? String(code) : '';
+                        let highlighted = safeCode;
+                        
+                        // Robust highlighting with Auto-detection
+                        if (language && hljs.getLanguage(language)) {
+                            try {
+                                highlighted = hljs.highlight(safeCode, { language: language }).value;
+                            } catch (e) { highlighted = hljs.highlightAuto(safeCode).value; }
+                        } else {
+                            highlighted = hljs.highlightAuto(safeCode).value;
+                        }
+                        
+                        return `
+                        <pre class="mac-window">
+                            <div class="code-header">
+                                <div class="window-controls">
+                                    <span class="control red"></span>
+                                    <span class="control yellow"></span>
+                                    <span class="control green"></span>
+                                </div>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <code class="hljs language-${language || 'plaintext'}">${highlighted}</code>
+                        </pre>`;
+                    };
+                    
+                    const tocItems = [];
+                    
+                    renderer.heading = function(text, level) {
+                         const safeText = text ? String(text) : '';
+                         let isModule = false;
+                         let isTopic = false;
+                         let cleanText = safeText;
+                         
+                         // Check if this is a Module section
+                         if (safeText.startsWith('MODULE_MARKER ')) {
+                             cleanText = safeText.replace('MODULE_MARKER ', '');
+                             isModule = true;
+                         } else if (safeText.startsWith('TOPIC_MARKER ')) {
+                             // Check if this is a Topic section
+                             cleanText = safeText.replace('TOPIC_MARKER ', '');
+                             isTopic = true;
+                         }
+
+                         // Extract raw text by removing HTML tags (useful if marked parses inline markdown)
+                         const rawText = cleanText.replace(/<[^>]+>/g, '');
+                         const id = rawText.toLowerCase().replace(/[^\\w]+/g, '-');
+                         
+                         // Add to TOC (only h1, h2, h3)
+                         if (level <= 3) {
+                             tocItems.push({
+                                 level: isModule || isTopic ? 2 : level,
+                                 id: id,
+                                 text: rawText
+                             });
+                         }
+                         
+                         if (isModule) {
+                             return `<h${level} class="module-section" id="${id}">${cleanText}</h${level}>`;
+                         }
+                         
+                         if (isTopic) {
+                             return `<h2 class="topic-section" id="${id}">${cleanText}</h2>`;
+                         }
+                         
+                         return `<h${level} id="${id}">${cleanText}</h${level}>`;
+                    };
+
+                    // 3. Render
+                    contentArea.innerHTML = marked.parse(processed, { renderer: renderer });
+                    
+                    // Render TOC
+                    toc.innerHTML = tocItems.map(item => {
+                        const padding = (item.level - 1) * 1;
+                        return `<a href="#${item.id}" style="padding-left: ${padding}rem">${item.text}</a>`;
+                    }).join('');
+                    
+                    // Add copy functionality
+                    document.querySelectorAll('.copy-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const codeBlock = e.target.closest('.mac-window').querySelector('code');
+                            navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+                                const origText = e.target.innerText;
+                                e.target.innerText = 'Copied!';
+                                setTimeout(() => {
+                                    e.target.innerText = origText;
+                                }, 2000);
+                            });
+                        });
+                    });
+
+                    // Hide loader and show layout
+                    loader.style.display = 'none';
+                    layout.style.display = 'flex';
+                })
+                .catch(err => {
+                    loader.innerText = 'Failed to load markdown. Note: If opening locally, you may need a local server (e.g., Live Server) due to CORS restrictions.';
+                    loader.style.fontSize = '1rem';
+                    loader.style.textAlign = 'center';
+                    loader.style.padding = '2rem';
+                    console.error(err);
+                });
+        });
+    </script>
+</body>
+</html>

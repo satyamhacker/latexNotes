@@ -3,6 +3,11 @@
 **Prompt Start:**
 
 You are an expert Frontend Developer.
+
+**CRITICAL INSTRUCTION FOR AI:** 
+1. When generating the JavaScript code, **DO NOT escape backticks (\`) or dollar signs ($)** in your template literals.
+2. Include the full `fetch` block provided in the logic below, handling `response.status !== 0` so local `file:///` viewing works without a server.
+
 Your task is to create a single-file `notes_viewer.html` that dynamically renders a Markdown file (e.g., `React_Native_Notes.md`) with a **Premium Dark UI**.
 The rendering must look identical to a high-end documentation site (like Stripe or Tailwind docs) and support **Print-to-PDF** with the dark theme preserved.
 
@@ -74,8 +79,8 @@ h2 {
     padding-bottom: 0.5rem;
 }
 
-/* Topic & Module Sections - Big Bold Blue */
-h2.topic-section, h2.module-section {
+/* Module Sections - Big Bold Blue */
+.module-section {
     font-family: 'Outfit', sans-serif;
     font-size: 2.5rem;
     font-weight: 800;
@@ -84,10 +89,44 @@ h2.topic-section, h2.module-section {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    border-left: 5px solid #4facfe;
+    border-left: 6px solid #4facfe;
     padding-left: 1rem;
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Topic Sections - Distinct Vibrant Gradient */
+.topic-section {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); /* Orange-ish gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-left: 4px solid #fda085;
+    padding-left: 1rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.2rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    background-color: rgba(253, 160, 133, 0.05); /* very subtle background for depth */
+    border-radius: 0 8px 8px 0;
+    display: inline-block; /* Makes background fit the text width + padding */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ensure normal H3 looks standard */
+h3:not(.topic-section) {
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.4rem;
 }
 
 /* Mac-Style Code Blocks */
@@ -120,6 +159,17 @@ code {
     font-family: 'Fira Code', monospace;
     white-space: pre-wrap !important; 
     word-wrap: break-word !important;
+}
+
+/* Inline Code Styling */
+p code, li code, td code {
+    background-color: rgba(88, 166, 255, 0.15);
+    color: #79c0ff;
+    padding: 0.2em 0.4em;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-family: 'Fira Code', monospace;
+    border: 1px solid rgba(88, 166, 255, 0.2);
 }
 
 table {
@@ -185,6 +235,41 @@ tr:hover {
     padding: 3rem 4rem;
     max-width: 900px;
     margin: 0 auto;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+/* Content Links */
+.main-content a {
+    color: #58a6ff;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(88, 166, 255, 0.5);
+    transition: all 0.2s;
+}
+.main-content a:hover {
+    color: #79c0ff;
+    border-bottom: 1px solid #79c0ff;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-color);
+}
+
+/* Task Lists / Checkboxes */
+input[type="checkbox"] {
+    accent-color: #58a6ff;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    top: 2px;
 }
 
 /* Blockquote */
@@ -214,7 +299,6 @@ blockquote {
         print-color-adjust: exact !important;
         min-height: 100vh;
         width: 100%;
-        position: absolute; top: 0; left: 0;
         margin: 0; padding: 0;
     }
 
@@ -240,6 +324,20 @@ blockquote {
     .main-content { padding: 2rem !important; margin: 0 auto; max-width: 100%; }
     
     a { text-decoration: none !important; border-bottom: none !important; }
+
+    /* PDF Page Breaking Rules */
+    .module-section {
+        page-break-before: always; /* Each new section starts on a fresh page */
+        margin-top: 0 !important;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid; /* Prevent header at the bottom of a page */
+    }
+    
+    pre, blockquote, table, img {
+        page-break-inside: avoid; /* Prevent code blocks and tables from splitting across pages */
+    }
 }
 ```
 
@@ -249,14 +347,28 @@ Use this specific logic to handle the Markdown parsing. It fixes common bugs and
 
 ```javascript
 document.addEventListener("DOMContentLoaded", () => {
-    // ... Fetch MD logic ...
+    // Fetch MD logic (with local file support)
+    fetch("YOUR_MARKDOWN_FILE.md")
+        .then(response => {
+            // Support local file:/// protocols where status is 0
+            if (!response.ok && response.status !== 0) {
+                throw new Error("Failed to load markdown file");
+            }
+            return response.text();
+        })
+        .then(markdown => {
     
-    // 1. Pre-process Markdown (Fix indented modules)
-    // Converts "  Module 1:" to "## MODULE_MARKER Module 1:"
-    let processed = markdown.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, '## MODULE_MARKER $1');
-    // Converts "Topic X.X:" to special heading
-    processed = processed.replace(/^##\s+(Topic\s+\d+\.\d+:.*)/gm, '## TOPIC_MARKER $1');
-    // Converts "1.1:" to bold
+    // 1. Pre-process Markdown (Universal Module & Topic Catcher)
+    // Catch explicit headers like "# Section 1...", "### ⚛️ Module 1..."
+    let processed = markdown.replace(/^#+\s*(?:.*?\s)?(Module\s+\d+|Section\s+\d+)(.*)/gim, '## MODULE_MARKER $1$2');
+    
+    // Catch implicitly indented modules like "  Module 1: ..."
+    processed = processed.replace(/^\s*(Module\s+\d+.*)/gim, '## MODULE_MARKER $1');
+    
+    // Convert remaining h3 and h4 headers into properly styled Topics
+    processed = processed.replace(/^#{3,4}\s+(?!MODULE_MARKER)(.*)/gm, '### TOPIC_MARKER $1');
+    
+    // Converts "1.1:" to bold for better readability
     processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
 
     // 2. Configure Renderer
@@ -289,26 +401,63 @@ document.addEventListener("DOMContentLoaded", () => {
     
     renderer.heading = function(text, level) {
          const safeText = text ? String(text) : '';
-         const id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+         let id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+         let classStr = '';
+         let cleanText = safeText;
          
-         // Check if this is a Module section
-         if (safeText.startsWith('MODULE_MARKER ')) {
-             const cleanText = safeText.replace('MODULE_MARKER ', '');
-             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
-             return `<h${level} class="module-section" id="${cleanId}">${cleanText}</h${level}>`;
+         if (safeText.includes('MODULE_MARKER ')) {
+             cleanText = safeText.replace(/MODULE_MARKER /g, '');
+             id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+             classStr = ' class="module-section"';
+             level = 2; // enforce level 2
+         }
+         else if (safeText.includes('TOPIC_MARKER ')) {
+             cleanText = safeText.replace(/TOPIC_MARKER /g, '');
+             id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+             classStr = ' class="topic-section"';
+             level = 3; // enforce level 3
          }
          
-         // Check if this is a Topic section
-         if (safeText.startsWith('TOPIC_MARKER ')) {
-             const cleanText = safeText.replace('TOPIC_MARKER ', '');
-             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
-             return `<h${level} class="topic-section" id="${cleanId}">${cleanText}</h${level}>`;
-         }
-         
-         return `<h${level} id="${id}">${safeText}</h${level}>`;
+         return `<h${level}${classStr} id="${id}">${cleanText}</h${level}>`;
+    };
+
+    // GitHub-Style Alerts (Callouts)
+    renderer.blockquote = function(quote) {
+        const text = quote ? String(quote) : '';
+        let color = '#58a6ff'; // Default Blue (Note)
+        let bg = 'rgba(88, 166, 255, 0.08)';
+        let title = 'Note';
+        let icon = 'fa-info-circle';
+        
+        let isAlert = false;
+        
+        if (text.includes('[!WARNING]')) { color = '#d29922'; bg = 'rgba(210, 153, 34, 0.1)'; title = 'Warning'; icon = 'fa-triangle-exclamation'; isAlert = true; }
+        else if (text.includes('[!IMPORTANT]')) { color = '#8957e5'; bg = 'rgba(137, 87, 229, 0.1)'; title = 'Important'; icon = 'fa-circle-exclamation'; isAlert = true; }
+        else if (text.includes('[!TIP]') || text.includes('[!SUCCESS]')) { color = '#238636'; bg = 'rgba(35, 134, 54, 0.1)'; title = 'Tip'; icon = 'fa-lightbulb'; isAlert = true; }
+        else if (text.includes('[!CAUTION]') || text.includes('[!DANGER]')) { color = '#da3633'; bg = 'rgba(218, 54, 51, 0.1)'; title = 'Caution'; icon = 'fa-skull-crossbones'; isAlert = true; }
+        else if (text.includes('[!NOTE]')) { isAlert = true; }
+        
+        if (isAlert) {
+            // Strip out the tag whether it's wrapped in a <p> or standalone
+            const cleanText = text.replace(/(<p>)?\s*\[!(NOTE|WARNING|IMPORTANT|TIP|SUCCESS|CAUTION|DANGER)\]\s*(<\/p>|<br>)?/i, '<p>');
+            return `<div style="border-left: 4px solid ${color}; background: ${bg}; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; page-break-inside: avoid;">
+                <div style="color: ${color}; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-family: 'Outfit', sans-serif;">
+                    <i class="fa-solid ${icon}"></i> ${title}
+                </div>
+                <div style="color: var(--text-secondary); margin: 0;">${cleanText}</div>
+            </div>`;
+        }
+        
+        // Default blockquote behavior
+        return `<blockquote>${text}</blockquote>`;
     };
 
     // 3. Render
     contentArea.innerHTML = marked.parse(processed, { renderer: renderer });
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById("loader").innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes (Is CORS blocking local files?)';
+        });
 });
 ```

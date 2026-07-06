@@ -14,11 +14,13 @@ Generate the `MANDATORY OUTPUT STRUCTURE` separately for **EVERY SINGLE TOPIC** 
 
 ---
 
-## ⏳ THE 3-MONTH RETENTION & RUTHLESS PRACTICALITY RULE
-**The Goal:** The user will use this primer directly for REAL-TIME development and debugging other people's code. 
-- **Ruthless Pruning (Zero Fluff):** Filter out purely academic, historical, or 0%-use theoretical concepts. If a concept is never used in real-world production coding, summarize it in ONE line as "Theory Only" or skip it entirely.
-- **Explain the Core:** Keep the "Why", "How", and the "Connective Logic" intact so the production architecture is 100% understandable.
-- **Extract the 95% Usage:** Identify the functions, arguments, flags, and patterns a developer will use 95% of the time. Extract these so the user can memorize them BEFORE starting practical work.
+## ⏳ THE 3-MONTH RETENTION & SMART BREVITY RULE
+**The Goal:** The user will use this primer directly for REAL-TIME development, revision, and debugging. 
+- **SMART BREVITY (CRITICAL):** The goal is to create short revision notes. For most topics, keep explanations limited to **2-3 lines max** while providing full clarity. 
+- **AI'S DISCRETION FOR CLARITY:** You have the intelligence to decide—if a specific concept is complex or crucial for the student to understand, you are allowed to provide a slightly longer, more detailed explanation. However, **do NOT make every explanation long**. Use this allowance strictly for difficult concepts.
+- **Ruthless Pruning (Zero Fluff):** Filter out purely academic, historical, or 0%-use theoretical concepts. If a concept is never used in real-world production coding, skip it entirely.
+- **Explain the Core Briefly:** Keep the "Why", "How", and the "Connective Logic" intact. Target 2-3 lines for maximum clarity without fluff.
+- **Extract the 95% Usage:** Identify the functions, arguments, flags, and patterns a developer will use 95% of the time.
 
 ---
 
@@ -39,15 +41,18 @@ You must adapt your terminology, real-world analogies, and focus perfectly to th
 ### A) UNDERSTAND (Concept & Clarity)
 - Core theory, execution flow, why/how, and crucial decision guides (Kab use karo & Kab NAHI karo).
 - **💻 Production-Ready Code:** Minimal working code. **CRITICAL:** Break down and explain EVERY mandatory and highly-used optional argument/flag.
-- **🚨 Edge Cases & Gotchas:** Expose hidden parameters, common confusions, and what breaks it in real-time.
+- **🚨 Edge Cases & Gotchas:** Expose REAL hidden parameters, common confusions, and what breaks it. Do NOT make up fake complex problems.
 
 ### B) REMEMBER BEFORE PRACTICAL (The 95% Highlights)
 Items used repeatedly in ~95% of practical usage. This includes must-know syntax, crucial arguments/flags, and daily commands.
 
 ---
 
-## 🗣️ LANGUAGE & EXPLANATION RULE
-- **Natural Hinglish only** (Roman script, No Devanagari). Tone: Direct, practical, senior-developer-to-junior advice.
+## 🗣️ LANGUAGE & EXPLANATION RULE (CRITICAL)
+- **STRICTLY Natural Hinglish ONLY** (Use English alphabets / Roman script). 
+- **ABSOLUTELY NO DEVANAGARI SCRIPT (Hindi alphabets like क, ख, ग).** This is a non-negotiable constraint.
+- **NO WORD SALADS (CRITICAL):** Write in clear, grammatically correct, human-readable sentences. DO NOT just dump strings of English technical keywords (e.g., "memory map process format block execute limit"). This is completely unacceptable hallucination.
+- Tone: Direct, practical, senior-developer-to-junior advice.
 - **🔍 INLINE EXPLANATIONS (MANDATORY):** Explain new terms instantly (5-10 words).
 
 ---
@@ -77,8 +82,9 @@ Notes will be pasted between:
   - **Code Breakdown (Hidden Args & Flags):** (Explain EVERY mandatory and highly-used optional argument/flag in that code. Why is it there?).
 
 ### 3) 🚨 Edge Cases & Gotchas (Debugging Lifesavers)
-- **Common Confusions:** (What do beginners misunderstand about this?)
-- **Failures/Errors:** (What breaks it in real-time? How to fix it?)
+*(Keep this extremely short. If there are no real edge cases mentioned in the notes, write "N/A" or skip. Do NOT invent random technical errors or word salads).*
+- **Common Confusions:** (What do beginners misunderstand about this? 1-2 lines).
+- **Failures/Errors:** (What breaks it in real-time? 1-2 lines).
 
 ### 4) 🔥 POINTS TO REMEMBER (The 95% Real-Time Usage)
 *(Extract the exact things a dev must keep in memory for fast coding).*

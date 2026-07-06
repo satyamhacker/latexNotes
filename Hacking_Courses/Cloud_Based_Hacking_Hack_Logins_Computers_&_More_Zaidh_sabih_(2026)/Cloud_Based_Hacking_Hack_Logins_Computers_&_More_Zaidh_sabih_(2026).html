@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethical Hacking using the Cloud from Scratch</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Highlight CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark-reasonable.min.css">
+    
+    <style>
+        :root {
+            /* Color Palette - Deep Dark Theme */
+            --bg-primary: #0f1115;
+            --bg-secondary: #161b22;
+            --text-primary: #ffffff;
+            --text-secondary: #e6edf3;
+            --accent-blue: #58a6ff;
+            --accent-gradient: linear-gradient(135deg, #61dafb 0%, #4facfe 100%);
+            --border-color: #30363d;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            z-index: 9999;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3rem;
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            color: var(--text-primary);
+            font-size: 2rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Topic & Module Sections - Big Bold Blue */
+        h2.topic-section, h2.module-section {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4facfe;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-left: 5px solid #4facfe;
+            padding-left: 1rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            border-bottom: none;
+        }
+
+        /* Mac-Style Code Blocks */
+        pre.mac-window {
+            background: #0d1115;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin: 2rem 0;
+            
+            /* STRICT WRAPPING FOR PDF */
+            white-space: pre-wrap !important;
+            word-break: break-word !important; 
+            overflow-x: hidden !important;
+        }
+
+        .code-header {
+            background: #161b22;
+            padding: 8px 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Dots helper */
+        .control { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+
+        .copy-btn {
+            background: var(--accent-blue);
+            color: #fff;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            white-space: pre-wrap !important; 
+            word-wrap: break-word !important;
+            word-break: break-word !important;
+        }
+        
+        pre code {
+            display: block;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Overriding hljs default white-space to ensure wrapping */
+        .hljs {
+            white-space: pre-wrap !important;
+            word-wrap: break-word !important;
+            word-break: break-word !important;
+        }
+        
+        p code, li code {
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            color: #61dafb;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background: #1c2128;
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            min-height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1.5rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+        }
+        
+        .sidebar h2 {
+            font-size: 1.2rem;
+            margin-top: 0;
+            border: none;
+            padding-bottom: 0;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .sidebar a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            transition: background 0.2s, color 0.2s;
+            margin-bottom: 4px;
+        }
+
+        .sidebar a:hover {
+            background: rgba(88, 166, 255, 0.12);
+            color: var(--accent-blue);
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            margin-left: 300px; /* offset for sidebar */
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 1000px;
+        }
+
+        /* Blockquote */
+        blockquote {
+            border-left: 4px solid var(--accent-blue);
+            background: rgba(88, 166, 255, 0.06);
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        /* CRITICAL PRINT STYLES - DO NOT MODIFY */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            body { margin: 0; padding: 0; }
+            
+            .print-wrapper {
+                background-color: #0f1115 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                min-height: 100vh;
+                width: 100%;
+                margin: 0; padding: 0;
+            }
+
+            /* Force white text for readability */
+            .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th, blockquote, .mac-window {
+                color: #ffffff !important;
+            }
+            
+            p code, li code {
+                color: #61dafb !important;
+                background: #161b22 !important;
+            }
+
+            /* Keep code blocks distinct */
+            pre.mac-window {
+                border: 1px solid #444;
+                page-break-inside: avoid;
+                background: #0d1115 !important;
+            }
+            
+            blockquote {
+                page-break-inside: avoid;
+            }
+            
+            .code-header {
+                background: #161b22 !important;
+            }
+
+            .sidebar, .copy-btn, .window-controls, #loader {
+                display: none !important;
+            }
+
+            .layout {
+                display: block;
+            }
+            
+            .main-content { margin-left: 0 !important; padding: 2rem !important; max-width: 100%; }
+            
+            a { text-decoration: none !important; border-bottom: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div id="loader"><i class="fas fa-spinner fa-spin"></i> Loading...</div>
+    
+    <!-- WRAPPER IS MANDATORY FOR PRINTING BACKGROUNDS -->
+    <div class="print-wrapper">
+        <div class="layout">
+            <nav class="sidebar" id="sidebar">
+                <h2><i class="fas fa-book"></i> Contents</h2>
+                <ul id="toc"></ul>
+            </nav>
+            <main class="main-content" id="content-area">
+                <!-- Markdown content goes here -->
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const contentArea = document.getElementById("content-area");
+            const toc = document.getElementById("toc");
+            const loader = document.getElementById("loader");
+
+            fetch("Cloud_Based_Hacking_Hack_Logins_Computers_&_More_Zaidh_sabih_(2026).md")
+                .then(response => {
+                    if (response.ok) return response.text();
+                    throw new Error("Failed to load markdown");
+                })
+                .then(markdown => {
+                    // Pre-process Markdown
+                    let processed = markdown.replace(/^#\s+(Section\s+\d+:.*)/gm, '## MODULE_MARKER $1');
+                    processed = processed.replace(/^###\s+🏁\s+(Section Overview:.*)/gm, '## TOPIC_MARKER $1');
+                    
+                    const renderer = new marked.Renderer();
+                    
+                    renderer.code = function(code, language) {
+                        const safeCode = code ? String(code) : '';
+                        let highlighted = safeCode;
+                        if (language && hljs.getLanguage(language)) {
+                            try {
+                                highlighted = hljs.highlight(safeCode, { language: language }).value;
+                            } catch (e) { highlighted = hljs.highlightAuto(safeCode).value; }
+                        } else {
+                            highlighted = hljs.highlightAuto(safeCode).value;
+                        }
+                        
+                        const id = Math.random().toString(36).substr(2, 9);
+                        
+                        return `
+                        <pre class="mac-window">
+                            <div class="code-header">
+                                <div class="window-controls">
+                                    <span class="control red"></span>
+                                    <span class="control yellow"></span>
+                                    <span class="control green"></span>
+                                </div>
+                                <button class="copy-btn" onclick="copyCode('${id}')"><i class="fas fa-copy"></i> Copy</button>
+                            </div>
+                            <code id="${id}" class="hljs language-${language || 'plaintext'}">${highlighted}</code>
+                        </pre>`;
+                    };
+                    
+                    renderer.heading = function(text, level) {
+                         const safeText = text ? String(text) : '';
+                         const id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+                         
+                         if (safeText.startsWith('MODULE_MARKER ')) {
+                             const cleanText = safeText.replace('MODULE_MARKER ', '');
+                             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                             return `<h2 class="module-section" id="${cleanId}">${cleanText}</h2>`;
+                         }
+                         
+                         if (safeText.startsWith('TOPIC_MARKER ')) {
+                             const cleanText = safeText.replace('TOPIC_MARKER ', '');
+                             const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                             return `<h2 class="topic-section" id="${cleanId}">${cleanText}</h2>`;
+                         }
+                         
+                         return `<h${level} id="${id}">${safeText}</h${level}>`;
+                    };
+
+                    marked.setOptions({ renderer: renderer, breaks: true, gfm: true });
+                    contentArea.innerHTML = marked.parse(processed);
+
+                    const headings = contentArea.querySelectorAll("h1, h2, h3");
+                    headings.forEach(heading => {
+                        const li = document.createElement("li");
+                        const a = document.createElement("a");
+                        a.href = `#${heading.id}`;
+                        a.textContent = heading.textContent;
+                        
+                        if (heading.tagName === "H2") {
+                            a.style.paddingLeft = "1rem";
+                        } else if (heading.tagName === "H3") {
+                            a.style.paddingLeft = "2rem";
+                        }
+                        
+                        li.appendChild(a);
+                        toc.appendChild(li);
+                    });
+
+                    loader.style.display = "none";
+                })
+                .catch(err => {
+                    console.error(err);
+                    loader.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes';
+                });
+        });
+
+        function copyCode(id) {
+            const codeElem = document.getElementById(id);
+            if (!codeElem) return;
+            const text = codeElem.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target.closest('.copy-btn');
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                }, 2000);
+            }).catch(e => console.error(e));
+        }
+    </script>
+</body>
+</html>

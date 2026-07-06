@@ -38,7 +38,6 @@
             background-color: var(--bg-primary);
             color: var(--text-primary);
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
             overflow-x: hidden;
         }
 
@@ -58,69 +57,6 @@
             z-index: 9999;
         }
 
-        /* Layout */
-        .print-wrapper {
-            background-color: var(--bg-primary);
-            min-height: 100vh;
-        }
-
-        .layout {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 300px;
-            background: var(--bg-secondary);
-            border-right: 1px solid var(--border-color);
-            padding: 2rem 1rem;
-            overflow-y: auto;
-            position: fixed;
-            height: 100vh;
-            z-index: 100;
-        }
-
-        .sidebar h3 {
-            color: var(--accent-blue);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        .toc-item {
-            display: block;
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(48, 54, 61, 0.3);
-            transition: color 0.2s ease;
-        }
-
-        .toc-item:hover {
-            color: var(--accent-blue);
-        }
-
-        .toc-item.module {
-            font-weight: 600;
-            color: #4facfe;
-            margin-top: 1rem;
-        }
-
-        .toc-item.topic {
-            padding-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            margin-left: 300px;
-            padding: 3rem;
-            max-width: calc(100% - 300px);
-        }
-
-        /* Typography */
         h1 {
             font-family: 'Outfit', sans-serif;
             background: var(--accent-gradient);
@@ -129,8 +65,6 @@
             -webkit-text-fill-color: transparent;
             font-size: 3rem;
             border-bottom: 3px solid var(--border-color);
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
         }
 
         h2 {
@@ -142,8 +76,8 @@
             padding-bottom: 0.5rem;
         }
 
-        /* Topic & Module Sections - Big Bold Blue */
-        h2.topic-section, h2.module-section {
+        /* Module Sections - Big Bold Blue */
+        .module-section {
             font-family: 'Outfit', sans-serif;
             font-size: 2.5rem;
             font-weight: 800;
@@ -152,41 +86,44 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            border-left: 5px solid #4facfe;
+            border-left: 6px solid #4facfe;
             padding-left: 1rem;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            border-bottom: none;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        h3 {
-            color: var(--accent-blue);
-            font-size: 1.5rem;
+        /* Topic Sections - Distinct Vibrant Gradient */
+        .topic-section {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); /* Orange-ish gradient */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-left: 4px solid #fda085;
+            padding-left: 1rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            padding-top: 0.2rem;
+            padding-bottom: 0.2rem;
+            background-color: rgba(253, 160, 133, 0.05); /* very subtle background for depth */
+            border-radius: 0 8px 8px 0;
+            display: inline-block; /* Makes background fit the text width + padding */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Ensure normal H3 looks standard */
+        h3:not(.topic-section) {
+            color: var(--text-primary);
+            font-size: 1.4rem;
             margin-top: 2rem;
             margin-bottom: 1rem;
-        }
-
-        h4 {
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            color: var(--text-secondary);
-        }
-
-        /* Lists */
-        ul, ol {
-            margin-left: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.4rem;
         }
 
         /* Mac-Style Code Blocks */
@@ -207,63 +144,31 @@
             background: #161b22;
             padding: 8px 15px;
             border-bottom: 1px solid var(--border-color);
-            display: flex; 
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 8px 8px 0 0;
-        }
-
-        .window-controls {
-            display: flex;
+            display: flex; justify-content: space-between;
             align-items: center;
         }
 
-        /* Dots helper */
-        .control { 
-            width: 12px; 
-            height: 12px; 
-            border-radius: 50%; 
-            display: inline-block; 
-            margin-right: 6px; 
-        }
-        .red { background: #ff5f56; } 
-        .yellow { background: #ffbd2e; } 
-        .green { background: #27c93f; }
-
-        .copy-btn {
-            background: var(--accent-blue);
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: background 0.2s ease;
-        }
-
-        .copy-btn:hover {
-            background: #4a8fd9;
-        }
-
-        pre code {
-            display: block;
-            padding: 1rem;
-            font-family: 'Fira Code', monospace;
-            white-space: pre-wrap !important; 
-            word-wrap: break-word !important;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
+        /* Dots helper (add these classes too) */
+        .control { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
 
         code {
             font-family: 'Fira Code', monospace;
-            background: var(--bg-secondary);
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-size: 0.9rem;
+            white-space: pre-wrap !important; 
+            word-wrap: break-word !important;
         }
 
-        /* Tables */
+        /* Inline Code Styling */
+        p code, li code, td code {
+            background-color: rgba(88, 166, 255, 0.15);
+            color: #79c0ff;
+            padding: 0.2em 0.4em;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-family: 'Fira Code', monospace;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -289,44 +194,131 @@
             background: rgba(88, 166, 255, 0.1);
         }
 
-        /* Blockquotes */
+        /* Sidebar */
+        .sidebar {
+            width: 300px; /* Kept from previous for better spacing */
+            min-height: 100vh;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1rem;
+            position: sticky; /* Keep it sticky */
+            top: 0;
+            overflow-y: auto;
+            flex-shrink: 0;
+            height: 100vh;
+        }
+        
+        .sidebar h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+        }
+
+        .sidebar a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .sidebar a:hover {
+            background: rgba(88, 166, 255, 0.12);
+            color: var(--accent-blue);
+        }
+
+        .toc-item.module {
+            font-weight: 600;
+            color: #4facfe;
+            margin-top: 1rem;
+        }
+
+        .toc-item.topic {
+            padding-left: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 3rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Content Links */
+        .main-content a {
+            color: #58a6ff;
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(88, 166, 255, 0.5);
+            transition: all 0.2s;
+        }
+        .main-content a:hover {
+            color: #79c0ff;
+            border-bottom: 1px solid #79c0ff;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Task Lists / Checkboxes */
+        input[type="checkbox"] {
+            accent-color: #58a6ff;
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            position: relative;
+            top: 2px;
+        }
+
+        /* Blockquote */
         blockquote {
             border-left: 4px solid var(--accent-blue);
-            padding-left: 1rem;
-            margin: 1rem 0;
+            background: rgba(88, 166, 255, 0.06);
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
             color: var(--text-secondary);
             font-style: italic;
         }
 
-        /* Links */
-        a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.2s ease;
-        }
-
-        a:hover {
-            border-bottom-color: var(--accent-blue);
-        }
-
-        /* Horizontal Rules */
-        hr {
+        /* Copy Button */
+        .copy-btn {
+            background: var(--accent-blue);
+            color: white;
             border: none;
-            height: 2px;
-            background: var(--border-color);
-            margin: 2rem 0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.2s ease;
         }
 
-        /* Strong/Bold */
-        strong {
-            color: var(--text-primary);
-            font-weight: 600;
+        .copy-btn:hover {
+            background: #4a8fd9;
         }
-
-        /* Emphasis/Italic */
-        em {
-            color: var(--accent-blue);
+        
+        .window-controls {
+            display: flex;
+            align-items: center;
         }
 
         /* CRITICAL PRINT STYLES - DO NOT MODIFY */
@@ -345,7 +337,6 @@
                 print-color-adjust: exact !important;
                 min-height: 100vh;
                 width: 100%;
-                position: absolute; top: 0; left: 0;
                 margin: 0; padding: 0;
             }
 
@@ -360,7 +351,7 @@
                 page-break-inside: avoid;
             }
 
-            .sidebar, .copy-btn, .window-controls, #loader {
+            .sidebar, .copy-btn, .window-controls, #loader, .mobile-menu-btn {
                 display: none !important;
             }
 
@@ -368,23 +359,32 @@
                 display: block;
             }
             
-            .main-content { 
-                padding: 2rem !important; 
-                margin: 0 auto; 
-                max-width: 100%; 
+            .main-content { padding: 2rem !important; margin: 0 auto; max-width: 100%; }
+            
+            a { text-decoration: none !important; border-bottom: none !important; }
+
+            /* PDF Page Breaking Rules */
+            .module-section {
+                page-break-before: always; /* Each new section starts on a fresh page */
+                margin-top: 0 !important;
             }
             
-            a { 
-                text-decoration: none !important; 
-                border-bottom: none !important; 
+            h1, h2, h3, h4, h5, h6 {
+                page-break-after: avoid; /* Prevent header at the bottom of a page */
+            }
+            
+            pre, blockquote, table, img {
+                page-break-inside: avoid; /* Prevent code blocks and tables from splitting across pages */
             }
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .sidebar {
+                position: fixed;
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
+                z-index: 100;
             }
 
             .sidebar.open {
@@ -392,7 +392,6 @@
             }
 
             .main-content {
-                margin-left: 0;
                 max-width: 100%;
                 padding: 2rem 1rem;
             }
@@ -421,7 +420,7 @@
     <div class="print-wrapper">
         <div class="layout">
             <nav class="sidebar" id="sidebar">
-                <h3><i class="fas fa-list"></i> Table of Contents</h3>
+                <h3 style="border: none;"><i class="fas fa-list"></i> Table of Contents</h3>
                 <div id="toc"></div>
             </nav>
             <main class="main-content" id="content-area">
@@ -500,32 +499,32 @@
                     return response.text();
                 })
                 .then(markdown => {
-                    // 1. Pre-process Markdown (Fix indented modules)
-                    // Converts "  Module 1:" to "## MODULE_MARKER Module 1:"
-                    let processed = markdown.replace(/^\s*(MODULE\s+\d+(\.\d+)?:.*)/gm, '## MODULE_MARKER $1');
-                    // Converts "Topic X.X:" to special heading
-                    processed = processed.replace(/^###\s+(Topic\s+\d+\.\d+:.*)/gm, '## TOPIC_MARKER $1');
-                    // Convert emoji headers
-                    processed = processed.replace(/^##\s+🔹\s+(MODULE\s+\d+:.*)/gm, '## MODULE_MARKER $1');
-                    processed = processed.replace(/^##\s+🎯\s+\*\*(TOPIC\s+\d+\.\d+:.*)\*\*/gm, '## TOPIC_MARKER $1');
+                    // 1. Pre-process Markdown (Universal Module & Topic Catcher)
+                    // Catch explicit headers like "# Section 1...", "### ⚛️ Module 1..."
+                    let processed = markdown.replace(/^#+\s*(?:.*?\s)?(Module\s+\d+|Section\s+\d+)(.*)/gim, '## MODULE_MARKER $1$2');
                     
+                    // Catch implicitly indented modules like "  Module 1: ..."
+                    processed = processed.replace(/^\s*(Module\s+\d+.*)/gim, '## MODULE_MARKER $1');
+                    
+                    // Convert remaining h3 and h4 headers into properly styled Topics
+                    processed = processed.replace(/^#{3,4}\s+(?!MODULE_MARKER)(.*)/gm, '### TOPIC_MARKER $1');
+                    
+                    // Converts "1.1:" to bold for better readability
+                    processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
+
                     // 2. Configure Renderer
                     const renderer = new marked.Renderer();
                     
                     // Safety check: Cast code to string to avoid [object Object] crash
                     renderer.code = function(code, language) {
                         const safeCode = code ? String(code) : '';
-                        const validLang = language || 'plaintext';
-                        
                         // Robust highlighting with Auto-detection
                         let highlighted = safeCode;
                         // If language is provided and valid, use it
                         if (language && hljs.getLanguage(language)) {
                             try {
                                 highlighted = hljs.highlight(safeCode, { language: language }).value;
-                            } catch (e) { 
-                                highlighted = hljs.highlightAuto(safeCode).value; 
-                            }
+                            } catch (e) { highlighted = hljs.highlightAuto(safeCode).value; }
                         } else {
                             // Otherwise, or if 'plaintext', force auto-detection
                             highlighted = hljs.highlightAuto(safeCode).value;
@@ -539,33 +538,63 @@
                                     <span class="control yellow"></span>
                                     <span class="control green"></span>
                                 </div>
-                                <button class="copy-btn" onclick="copyCode(this)">
-                                    <i class="fas fa-copy"></i> Copy
-                                </button>
+                                <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
                             </div>
-                            <code class="hljs language-${validLang}">${highlighted}</code>
+                            <code class="hljs language-${language || 'plaintext'}">${highlighted}</code>
                         </pre>`;
                     };
                     
                     renderer.heading = function(text, level) {
-                        const safeText = text ? String(text) : '';
-                        const id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+                         const safeText = text ? String(text) : '';
+                         let id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+                         let classStr = '';
+                         let cleanText = safeText;
+                         
+                         if (safeText.includes('MODULE_MARKER ')) {
+                             cleanText = safeText.replace(/MODULE_MARKER /g, '');
+                             id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                             classStr = ' class="module-section"';
+                             level = 2; // enforce level 2
+                         }
+                         else if (safeText.includes('TOPIC_MARKER ')) {
+                             cleanText = safeText.replace(/TOPIC_MARKER /g, '');
+                             id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                             classStr = ' class="topic-section"';
+                             level = 3; // enforce level 3
+                         }
+                         
+                         return `<h${level}${classStr} id="${id}">${cleanText}</h${level}>`;
+                    };
+
+                    // GitHub-Style Alerts (Callouts)
+                    renderer.blockquote = function(quote) {
+                        const text = quote ? String(quote) : '';
+                        let color = '#58a6ff'; // Default Blue (Note)
+                        let bg = 'rgba(88, 166, 255, 0.08)';
+                        let title = 'Note';
+                        let icon = 'fa-info-circle';
                         
-                        // Check if this is a Module section
-                        if (safeText.startsWith('MODULE_MARKER ')) {
-                            const cleanText = safeText.replace('MODULE_MARKER ', '');
-                            const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
-                            return `<h${level} class="module-section" id="${cleanId}">${cleanText}</h${level}>`;
+                        let isAlert = false;
+                        
+                        if (text.includes('[!WARNING]')) { color = '#d29922'; bg = 'rgba(210, 153, 34, 0.1)'; title = 'Warning'; icon = 'fa-triangle-exclamation'; isAlert = true; }
+                        else if (text.includes('[!IMPORTANT]')) { color = '#8957e5'; bg = 'rgba(137, 87, 229, 0.1)'; title = 'Important'; icon = 'fa-circle-exclamation'; isAlert = true; }
+                        else if (text.includes('[!TIP]') || text.includes('[!SUCCESS]')) { color = '#238636'; bg = 'rgba(35, 134, 54, 0.1)'; title = 'Tip'; icon = 'fa-lightbulb'; isAlert = true; }
+                        else if (text.includes('[!CAUTION]') || text.includes('[!DANGER]')) { color = '#da3633'; bg = 'rgba(218, 54, 51, 0.1)'; title = 'Caution'; icon = 'fa-skull-crossbones'; isAlert = true; }
+                        else if (text.includes('[!NOTE]')) { isAlert = true; }
+                        
+                        if (isAlert) {
+                            // Strip out the tag whether it's wrapped in a <p> or standalone
+                            const cleanText = text.replace(/(<p>)?\s*\[!(NOTE|WARNING|IMPORTANT|TIP|SUCCESS|CAUTION|DANGER)\]\s*(<\/p>|<br>)?/i, '<p>');
+                            return `<div style="border-left: 4px solid ${color}; background: ${bg}; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; page-break-inside: avoid;">
+                                <div style="color: ${color}; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-family: 'Outfit', sans-serif;">
+                                    <i class="fa-solid ${icon}"></i> ${title}
+                                </div>
+                                <div style="color: var(--text-secondary); margin: 0;">${cleanText}</div>
+                            </div>`;
                         }
                         
-                        // Check if this is a Topic section
-                        if (safeText.startsWith('TOPIC_MARKER ')) {
-                            const cleanText = safeText.replace('TOPIC_MARKER ', '');
-                            const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
-                            return `<h${level} class="topic-section" id="${cleanId}">${cleanText}</h${level}>`;
-                        }
-                        
-                        return `<h${level} id="${id}">${safeText}</h${level}>`;
+                        // Default blockquote behavior
+                        return `<blockquote>${text}</blockquote>`;
                     };
 
                     // 3. Render
@@ -591,18 +620,18 @@
                     `;
                     loader.style.display = 'none';
                 });
-        });
 
-        // Smooth scrolling for TOC links
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('toc-item')) {
-                e.preventDefault();
-                const targetId = e.target.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
+            // Smooth scrolling for TOC links
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('toc-item')) {
+                    e.preventDefault();
+                    const targetId = e.target.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
                 }
-            }
+            });
         });
     </script>
 </body>
