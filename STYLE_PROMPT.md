@@ -339,6 +339,26 @@ blockquote {
         page-break-inside: avoid; /* Prevent code blocks and tables from splitting across pages */
     }
 }
+
+/* 🟡 PREMIUM HIGHLIGHT STYLES */
+mark.yellow-highlight {
+    background-color: rgba(253, 224, 71, 0.2) !important;
+    color: #fde047 !important;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-weight: 600;
+    box-shadow: 0 0 8px rgba(253, 224, 71, 0.1);
+}
+
+@media print {
+    mark.yellow-highlight {
+        background-color: #fff000 !important;
+        color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        box-shadow: none !important;
+    }
+}
 ```
 
 ## 🧠 Javascript Logic (Copy this logic)
@@ -377,16 +397,33 @@ document.addEventListener("DOMContentLoaded", () => {
     // Safety check: Cast code to string to avoid [object Object] crash
     renderer.code = function(code, language) {
         const safeCode = code ? String(code) : '';
-        // Robust highlighting with Auto-detection
-        let highlighted = safeCode;
+        
+        // 🟡 1. Extract highlights BEFORE hljs runs to protect them
+        let hlCount = 0;
+        let hlMap = {};
+        let rawCode = safeCode.replace(/\[\[HL::(.*?)::HL\]\]/g, function(match, p1) {
+            let key = `__HL_${hlCount}__`;
+            hlMap[key] = p1;
+            hlCount++;
+            return key;
+        });
+
+        // 2. Robust highlighting with Auto-detection
+        let highlighted = rawCode;
         // If language is provided and valid, use it
         if (language && hljs.getLanguage(language)) {
             try {
-                highlighted = hljs.highlight(safeCode, { language: language }).value;
-            } catch (e) { highlighted = hljs.highlightAuto(safeCode).value; }
+                highlighted = hljs.highlight(rawCode, { language: language }).value;
+            } catch (e) { highlighted = hljs.highlightAuto(rawCode).value; }
         } else {
             // Otherwise, or if 'plaintext', force auto-detection
-            highlighted = hljs.highlightAuto(safeCode).value;
+            highlighted = hljs.highlightAuto(rawCode).value;
+        }
+        
+        // 🟡 3. Restore highlights as HTML tags safely
+        for (let i = 0; i < hlCount; i++) {
+            let key = `__HL_${i}__`;
+            highlighted = highlighted.replace(key, `<mark class="yellow-highlight">${hlMap[key]}</mark>`);
         }
         
         return `
@@ -453,7 +490,12 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // 3. Render
-    contentArea.innerHTML = marked.parse(processed, { renderer: renderer });
+    let finalHtml = marked.parse(processed, { renderer: renderer });
+    
+    // Replace remaining [[HL::text::HL]] outside of code blocks
+    finalHtml = finalHtml.replace(/\[\[HL::(.*?)::HL\]\]/g, '<mark class="yellow-highlight">$1</mark>');
+    
+    contentArea.innerHTML = finalHtml;
         })
         .catch(err => {
             console.error(err);
