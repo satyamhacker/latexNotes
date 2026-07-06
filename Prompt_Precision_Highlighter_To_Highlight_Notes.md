@@ -16,9 +16,10 @@ You MUST use this exact custom syntax: `[[HL::text to highlight::HL]]`
 4. **The Substring Problem (Whole Words):** Match whole words only, unless the requested string is explicitly part of a larger word or code block. Do NOT highlight partial words (e.g., highlighting 'cat' inside 'concatenate' is FORBIDDEN).
 5. **No Nested/Overlapping Highlights:** Avoid nested highlighting. If a smaller requested term is already inside a larger highlighted term, do not add a second set of tags inside it (e.g., `[[HL::Blind SQL Injection::HL]]`, NOT `[[HL::Blind [[HL::SQL Injection::HL]]::HL]]`).
 6. **Protect Markdown Syntax & Metadata:** Be careful with existing markdown structures.
-   * For links `[text](url)`, place tags strictly around the text: `[[HL::text::HL]]`.
+   * For links `[text](url)`, place tags strictly around the text: `[[HL::text::HL]]`. **Do NOT highlight any text inside the `(url)` part.**
    * Do NOT highlight code block language identifiers (e.g., leave the `bash` in ````bash` untouched).
    * Do NOT highlight any text inside YAML frontmatter (the metadata between `---` at the very top of the document).
+   * **Do NOT highlight text inside HTML tags or attributes (e.g., `href="..."` or `src="..."`).**
 7. **Works Everywhere (Code Blocks Included):** This syntax is completely safe to use ANYWHERE. You MUST use it inside triple backtick code blocks (```), inline code, tables, and headers without hesitation.
 8. **Graceful Failure & No AI Filler:** If a requested term is NOT found in the document, do not highlight anything for that term and do not insert it. Output ONLY the final updated Markdown text. Do NOT include phrases like "Here is your markdown".
 
