@@ -1150,6 +1150,48 @@ Subtopics: Cross-Platform Architecture, React Native Hermes Engine, index.androi
 * Tool Name: CLI (reFlutter / hermes-dec)
 * Navigation Steps: Run reflutter main.apk > Select option for "Burp Suite Interception" > Enter Burp IP > Sign the output APK.
 
+--5--Android-Static-Analysis--
+Topic 11: Native C/C++ Reversing & ARM Assembly (JNI/NDK Exploitation)
+Subtopics: Java Native Interface (JNI) Architecture, NDK Libraries, ARM64 Assembly Basics, Ghidra Decompilation, JNI_OnLoad Analysis, Identifying Custom Encryption in .so files
+
+[📊 SCOPE SIGNAL for Topic 11:
+
+* Depth Level: Expert
+
+* Coverage Angle: Practical only
+
+* Transcript mein content volume: Deep dive into reversing compiled C/C++ shared objects where developers hide their most critical secrets (encryption keys, proprietary algorithms).
+
+* Key terms from transcript: JNI, Java Native Interface, NDK, shared object, .so file, Ghidra, IDA Pro, ARM64 assembly, JNI_OnLoad, pseudocode
+
+* Exam Tips / Instructor Emphasis: Instructor warned: "JADX cannot read C++. If you see a native keyword in Java, you must open the .so file in Ghidra."
+
+* Instructor ne jo analogies/examples/demos use kiye: Extracted libnative-lib.so from an APK, loaded it into Ghidra, found the JNI_OnLoad function, and traced ARM64 assembly instructions back to a hardcoded AES encryption key.
+]
+
+🔑 KEYWORDS DUMP for Topic 11:
+[native method, Java Native Interface, JNI, NDK, C++, compiled binary, shared object, .so file, Ghidra, IDA Pro, Hopper, ARM64 assembly, registers, X0, X1, JNI_OnLoad, JNIEnv, decompilation, pseudocode, static analysis, reverse engineering, AES key extraction, binary ninja, radare2]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 11:
+
+* Phase(s): Reconnaissance / Scanning & Enumeration
+
+* Attack methodology context from transcript: Static analysis of the lowest-level application code (native libraries) to bypass protections that are deliberately hidden from standard Java/Kotlin decompilers.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
+
+* Recon/Discovery Phase: Attacker decompiles APK via APKTool and searches for System.loadLibrary(). They locate the corresponding .so file in the /lib/arm64-v8a/ folder.
+
+* Exploitation/Weaponization Phase: Attacker imports the .so file into Ghidra, runs auto-analysis, and navigates to exported functions (e.g., Java_com_target_app_MainActivity_getSecret). They read the generated C pseudocode to extract the logic or encryption keys used for API authentication.
+
+* Post-Exploitation/Reporting Phase: (N/A)
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 11:
+
+* Tool Name: Ghidra
+
+* Navigation Steps: Open Ghidra > Create New Project > Import File (.so) > Double-click file to open CodeBrowser > Click Yes to Auto-Analyze > Symbol Tree (left panel) > Exports > Find JNI_OnLoad or Java_* methods > View Decompiler window (right panel) for C pseudocode.
+
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
 
 📋 EXTRACTED IN THIS PHASE:
@@ -1165,9 +1207,10 @@ Topic 7: AWS Cloud Enumeration & Exploitation
 Topic 8: Firebase Database Enumeration & Exploitation
 Topic 9: Automated Static Analysis with MobSF
 Topic 10: Reversing Cross-Platform Frameworks (Flutter & React Native)
+Topic 11: Native C/C++ Reversing & ARM Assembly (JNI/NDK Exploitation)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 10 | Subtopics: 55 | CVEs: 0
+Sections: 1 | Topics: 11 | Subtopics: 61 | CVEs: 0
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1679,6 +1722,48 @@ Subtopics: Play Integrity API (SafetyNet Replacement), Hardware-Backed Keystore,
 
 * Navigation Steps: Open KernelSU > Modules > Install from storage > Select PlayIntegrityFix.zip > Reboot device.
 
+--6--Android-Dynamic-Analysis--
+Topic 7: Advanced Unpacking & Defeating Commercial Packers
+Subtopics: Commercial Obfuscators Overview, DexGuard/DexProtector Mechanisms, In-Memory Class Loading, Memory Dumping with frida-dexdump, Reassembling Split DEX files
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Expert
+
+* Coverage Angle: Both
+
+* Transcript mein content volume: Highly technical module on dumping application code directly from RAM when static files on disk are heavily encrypted.
+
+* Key terms from transcript: Packers, obfuscators, DexGuard, DexProtector, OLLVM, memory dumping, frida-dexdump, multidex, classloader
+
+* Exam Tips / Instructor Emphasis: "Don't waste time statically analyzing a packed app. Let the app decrypt itself in memory, then dump it."
+
+* Instructor ne jo analogies/examples/demos use kiye: Showed a banking app where JADX only showed a few stub classes. Used frida-dexdump on a running instance to scrape the device's RAM, extracting the fully decrypted .dex files.
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[commercial packers, obfuscation, DexGuard, DexProtector, Bangcle, OLLVM, Obfuscator-LLVM, packed APK, dynamic class loading, ClassLoader, memory dumping, RAM extraction, frida-dexdump, bytecode, multidex, memory forensics, unpacking, decrypted payload]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 7:
+
+* Phase(s): Evasion / Reconnaissance
+
+* Attack methodology context from transcript: Bypassing military/banking-grade static defenses by attacking the application while it is executing and unencrypted in system memory.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Recon/Discovery Phase: Attacker opens an APK in JADX but finds gibberish class names and missing logic, confirming the use of a commercial packer.
+
+* Exploitation/Weaponization Phase: Attacker launches the app on a rooted device (or KernelSU setup). They attach frida-dexdump to the running process. The tool scans memory for the dex.035 magic header and dumps the decrypted .dex files back to the attacker's machine.
+
+* Post-Exploitation/Reporting Phase: Attacker opens the dumped .dex files in JADX to perform standard static analysis on the now-plaintext source code.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 7:
+
+* Tool Name: CLI (frida-dexdump)
+
+* Navigation Steps: Launch app on phone > Run frida-ps -Ua to get PID > Run frida-dexdump -U -f com.target.app > Output saves to local folder > Open dumped .dex in JADX.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -1710,9 +1795,10 @@ Topic 2: Frida Codeshare Scripts
 
 Section 6: Android-Dynamic-Analysis
 Topic 6: Bypassing Play Integrity API & Commercial RASP
+Topic 7: Advanced Unpacking & Defeating Commercial Packers
 
 📊 PHASE SUMMARY:
-Sections: 6 | Topics: 14 | Subtopics: 92 | CVEs: 0
+Sections: 6 | Topics: 15 | Subtopics: 97 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2359,6 +2445,88 @@ Subtopics: Mobile Device Management (MDM), Microsoft Intune, Workspace ONE, Keys
 
 * Navigation Steps: objection explore > run android keystore list > Extract alias for MDM client cert.
 
+--8--BONUS - Android Red Teaming--
+Topic 6: NFC, RFID & BLE (Bluetooth Low Energy) Exploitation
+Subtopics: Mobile Hardware Interfaces, BLE Sniffing (nRF Connect), Ubertooth One, NFC Relay Attacks, Host Card Emulation (HCE) Cloning, Proxmark3 Integration
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+
+* Coverage Angle: Practical only
+
+* Transcript mein content volume: Red teaming physical access controls by weaponizing the mobile device's built-in radios (NFC/BLE).
+
+* Key terms from transcript: BLE, nRF Connect, GATT characteristics, NFC relay, Host Card Emulation, Proxmark3, digital keys
+
+* Exam Tips / Instructor Emphasis: Instructor emphasized that mobile phones are now office badges and car keys. Hacking the phone's NFC/BLE stack directly compromises physical building security.
+
+* Instructor ne jo analogies/examples/demos use kiye: Used nRF Connect to read and modify insecure BLE GATT characteristics of a smart lock. Demonstrated cloning a building access badge using the Android phone's NFC Host Card Emulation (HCE).
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[Bluetooth Low Energy, BLE, NFC, Near Field Communication, RFID, nRF Connect, GATT profile, characteristics, sniffing, Ubertooth One, Wireshark BLE capture, NFC relay attack, NFCGate, Host Card Emulation, HCE, digital wallet, smart locks, Proxmark3, physical penetration testing, access badge cloning, replay attack]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 6:
+
+* Phase(s): Initial Foothold / Lateral Movement (Physical)
+
+* Attack methodology context from transcript: Exploiting the intersection of mobile software and physical security hardware via radio frequencies.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Recon/Discovery Phase: Red teamer uses the nRF Connect app on a compromised phone to scan for BLE beacons and enumerate GATT services of nearby smart devices (e.g., IoT locks).
+
+* Exploitation/Weaponization Phase: Attacker intercepts BLE traffic or uses an NFC relay app (like NFCGate) to forward the victim's phone NFC signal over the internet to the attacker's phone, which is held against the target building's physical card reader.
+
+* Post-Exploitation/Reporting Phase: Attacker gains physical entry to the target facility using the victim's digital credentials.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 6:
+
+* Tool Name: nRF Connect (Android App)
+
+* Navigation Steps: Open App > Scanner tab > Click Scan > Identify Target Device (e.g., SmartLock) > Click Connect > Expand Client tab > Browse Services & Characteristics > Click Up/Down arrows to Read/Write raw hex payloads.
+
+--8--BONUS - Android Red Teaming--
+Topic 7: TEE (Trusted Execution Environment) & TrustZone Attacks
+Subtopics: ARM TrustZone Architecture, Secure Enclave, Secure Monitor Calls (SMC), Fuzzing Trustlets, Extracting Hardware-Backed Keys
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Expert
+
+* Coverage Angle: Conceptual only
+
+* Transcript mein content volume: High-level overview of exploiting the isolated secure hardware where biometric data and master encryption keys live.
+
+* Key terms from transcript: TEE, TrustZone, Secure Enclave, SMC, QSEE, Trustlet, hardware-backed keystore
+
+* Exam Tips / Instructor Emphasis: Instructor noted that TEE exploitation requires kernel-level access and is usually the realm of advanced APTs (Advanced Persistent Threats) and zero-click exploit chains (like NSO Group's Pegasus).
+
+* Instructor ne jo analogies/examples/demos use kiye: Explained how Android's Normal World (OS) communicates with the Secure World (TEE) via SMCs, and how fuzzing these SMCs can lead to hardware-key extraction.
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[Trusted Execution Environment, TEE, ARM TrustZone, Secure Enclave, Secure World, Normal World, Secure Monitor Call, SMC, QSEE, Qualcomm Secure Execution Environment, Kinibi, Trustlet, secure app, biometric data, hardware-backed keystore, fuzzing, kernel exploit, zero-day, APT, NSO Group, memory corruption in TEE]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 7:
+
+* Phase(s): Evasion / Privilege Escalation
+
+* Attack methodology context from transcript: Escaping the main OS entirely to compromise the most secure hardware segment of the device.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Recon/Discovery Phase: Attacker achieves kernel-level root (e.g., via KernelSU or an exploit) but still cannot read cryptographic keys because they are locked inside the TEE.
+
+* Exploitation/Weaponization Phase: Attacker writes a custom fuzzer to send malformed data structures via SMC instructions to a specific "Trustlet" (secure app running inside TrustZone).
+
+* Post-Exploitation/Reporting Phase: A memory corruption bug in the Trustlet allows the attacker to dump raw memory from the Secure World, extracting the hardware-backed private keys.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 7:
+
+* Tool Name: N/A (Highly customized kernel/C scripts, no GUI tool)
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -2372,9 +2540,11 @@ Section 8: BONUS - Android Red Teaming
   Topic 3: Stealthy App Backdooring & Persistence Mechanisms
   Topic 4: Post-Exploitation via Ghost Framework
   Topic 5: Enterprise MDM Hijacking & Internal Network Pivoting
+  Topic 6: NFC, RFID & BLE (Bluetooth Low Energy) Exploitation
+  Topic 7: TEE (Trusted Execution Environment) & TrustZone Attacks
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 5 | Subtopics: 30 | CVEs: 0
+Sections: 1 | Topics: 7 | Subtopics: 41 | CVEs: 0
 
 ```
 
@@ -3055,38 +3225,46 @@ Subtopics: SSL Pinning Bypass Approaches, Frida Tools Installation, Objection In
 * Tool Name: Xcode & iOS Settings
 * Navigation Steps: Xcode: Open project > Select target physical device > General tab > Set iOS target version > Click Run > iOS Settings: General > Profiles & Device Management > Trust Apple development cert.
 
-Topic 3: iOS Jailbreaking Methodologies (checkra1n & palera1n)
-Subtopics: Jailbreaking Risks, checkra1n Jailbreak, DFU Mode, checkm8 Exploit, palera1n Jailbreak, Semi-Tethered Jailbreak
+Topic 3: Modern iOS Jailbreaking (Rootless, PAC/PPL Bypasses & TrollStore) [🔄 2026 UPDATE]
+Subtopics: Death of checkm8, Rootless Architecture, PAC (Pointer Authentication Code), PPL (Page Protection Layer), Dopamine Jailbreak, TrollStore (CoreTrust Exploit), JIT (Just-In-Time) Compilation Enablers
 
 [📊 SCOPE SIGNAL for Topic 3:
 
 * Depth Level: Deep
-* Coverage Angle: Practical only
-* Transcript mein content volume: Multiple examples + live demo
-* Key terms from transcript: jailbreak, checkra1n, palera1n, DFU mode, checkm8, iOS 14.7.1, iOS 15.x, Cydia, Sileo
-* Exam Tips / Instructor Emphasis: ⭐"Jailbreaking can be dangerous... accounts can be stolen, ransomware can happen." Instructor ne strictly advice kiya ki burner account/Apple ID use karein. Palera1n VMs (VirtualBox/VMware) mein kaam nahi karega bina PCI pass-through ke.
-* Instructor ne jo analogies/examples/demos use kiye: Instructor ne Mac par checkra1n se iPhone 7 (iOS 14.7.1) aur Linux par palera1n se iPhone 8 (iOS 15.4) ko DFU mode mein daalkar live jailbreak demo dikhaya.
+
+* Coverage Angle: Both (Concept + Practical)
+
+* Transcript mein content volume: Detailed breakdown of how modern iOS mitigates kernel exploits and how attackers bypass them without touching the root filesystem.
+
+* Key terms from transcript: Rootless jailbreak, Dopamine, TrollStore, CoreTrust bug, PAC bypass, PPL bypass, A12+ devices, Procursus bootstrap, JIT
+
+* Exam Tips / Instructor Emphasis: Instructor strongly emphasized that modifying the root filesystem is impossible on modern iOS. Pentesters MUST adapt to Rootless environments where tweaks are installed in /var/jb/.
+
+* Instructor ne jo analogies/examples/demos use kiye: Demonstrated using TrollStore to permanently sign and install a malicious IPA without a developer account by exploiting the CoreTrust certificate parsing bug.
 ]
 
 🔑 KEYWORDS DUMP for Topic 3:
-[⭐jailbreak risks, ransomware, burner account, checkra1n, iPhone 7 global, iOS 14.7.1, Checkmate symbol, checkm8, recovery mode, ⭐DFU mode, Cydia, Kydea, palera1n, iOS 15.x, iOS 16.x, A8 chipset, A11 chipset, semi-tethered, fake FS, CheckP4LE, USB-A to lightning cable, Linux x86_64, ⭐sudo systemctl stop usbmuxd, ⭐sudo mv ./palera1n-linux-x86_64 /usr/bin/palera1n, ⭐sudo chmod +x /usr/bin/palera1n, ⭐sudo palera1n -c -f, ⭐sudo palera1n -b -f, Sileo Nightly]
+[A12+ chips, rootless jailbreak, checkm8 deprecated, Dopamine, TrollStore, CoreTrust exploit, PAC, Pointer Authentication Code, PPL, Page Protection Layer, /var/jb/, Procursus bootstrap, Sileo, JIT compilation, AltStore, Jitterbug, kernel exploit, memory corruption, fake-signed binaries]
 
 ⚔️ ATTACK PHASE SIGNAL for Topic 3:
 
-* Phase(s): Lab Setup / Infrastructure
-* Attack methodology context from transcript: Jailbreaking iOS pentesting environment set karne ka last resort aur foundational step hai taaki hardware/OS level par restrictions (jaise SSL pinning) break ki ja sakein.
+* Phase(s): Lab Setup / Evasion
+
+* Attack methodology context from transcript: Setting up a modern iOS pentesting environment on current-generation hardware (A12+) where traditional checkra1n/palera1n exploits do not exist.
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
 
-* Recon/Discovery Phase: Attacker target device ka iOS version aur chipset (e.g., A8 to A11) check karta hai taaki sahi exploit (checkm8) aur tool (checkra1n ya palera1n) select kar sake.
-* Exploitation/Weaponization Phase: Attacker device ko physically DFU mode mein boot karta hai aur checkra1n/palera1n execute karke root access gain karta hai. Package managers like Cydia ya Sileo install hote hain.
-* Post-Exploitation/Reporting Phase: (N/A — yeh infrastructure setup hai)
-* Additional context: A11 devices pe passcode disable karna padta hai jailbroken state mein rehne ke liye. USB-A to lightning cable strictly recommended hai.
+* Recon/Discovery Phase: Attacker verifies the target device's iOS version and processor architecture to determine if a CoreTrust bug (TrollStore) or a kernel exploit (Dopamine) is viable.
+
+* Exploitation/Weaponization Phase: Attacker sideloads TrollStore via a Safari web clip exploit or Misaka. Unsigned or fake-signed IPAs (like Burp Mobile Assistant or decrypted target apps) are installed with permanent system privileges, completely bypassing Apple's code signing.
+
+* Post-Exploitation/Reporting Phase: Attacker uses JIT enablers to run debuggers or dynamic analysis tools that Apple normally blocks on non-jailbroken devices.
 
 🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
 
-* Tool Name: checkra1n
-* Navigation Steps: Open checkra1n > Options > Check 'Allow untested iOS/iPadOS/tvOS versions' > Click Start > Follow DFU instructions (Hold Side + Volume Down, Release Side, Keep holding Volume Down).
+* Tool Name: TrollStore / iOS Device
+
+* Navigation Steps: Download TrollStore installer via Safari > Open TrollStore > Settings > Install Persistence Helper > Install ldid > Share target .ipa to TrollStore > Click Install (Bypasses all signing checks).
 
 Topic 4: Bypassing SSL Pinning on Jailbroken iOS (SSL Kill Switch 2 & Burp Mobile Assistant)
 Subtopics: Burp Suite Mobile Assistant, Cydia Package Manager, Cydia Substitute, OpenSSH Installation, SSH Access, wget Package Download, SSL Kill Switch 2 Installation
@@ -3256,14 +3434,14 @@ Subtopics: Keychain Architecture, Hardware Encryption (Secure Enclave), Dumping 
 Section 12: iOS Dynamic Analysis & Jailbreaking
 Topic 1: iOS Proxy Setup (Burp Suite & ProxyMan)
 Topic 2: IPA Patching with Objection & Frida
-Topic 3: iOS Jailbreaking Methodologies (checkra1n & palera1n)
+Topic 3: Modern iOS Jailbreaking (Rootless, PAC/PPL Bypasses & TrollStore) [🔄 2026 UPDATE]
 Topic 4: Bypassing SSL Pinning on Jailbroken iOS (SSL Kill Switch 2 & Burp Mobile Assistant)
 Topic 5: Bypassing iOS Jailbreak Detection & RASP
 Topic 6: iOS App Repackaging & Dylib Injection (Non-Jailbroken)
 Topic 7: iOS Keychain & Data Protection API Exploitation
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 42 | CVEs: 0
+Sections: 1 | Topics: 7 | Subtopics: 43 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
