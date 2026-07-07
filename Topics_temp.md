@@ -2916,6 +2916,48 @@ Subtopics: MobSF Repository Cloning, MobSF Setup & Execution, IPA Upload, MobSF 
 * Tool Name: MobSF (Mobile Security Framework)
 * Navigation Steps: Go to `localhost:8000` > Click Upload and Analyze > Select `.ipa` file > View Info.plist > Click View Strings > Scroll through Server Locations / URLs / Emails / Firebase databases
 
+--11--iOS-Static-Analysis--
+Topic 3: iOS IPC Exploitation - URI Schemes & Universal Links
+Subtopics: CFBundleURLTypes Analysis, Deep Link Vulnerabilities, Universal Links (apple-app-site-association), Parameter Injection, One-Click Account Takeover
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+
+* Coverage Angle: Both
+
+* Transcript mein content volume: Detailed breakdown of how iOS handles external links and how attackers exploit them.
+
+* Key terms from transcript: CFBundleURLTypes, URI schemes, Universal Links, AASA file, apple-app-site-association, Info.plist, parameter injection, one-click exploit, Safari
+
+* Exam Tips / Instructor Emphasis: Instructor heavily emphasized checking the apple-app-site-association file on the web server to map out valid app paths before fuzzing URL schemes.
+
+* Instructor ne jo analogies/examples/demos use kiye: Demonstrated finding a custom URI scheme (myapp://) in Info.plist. Crafted an HTML page hosting a malicious link that, when clicked in Safari, forced the target app to execute an unauthorized money transfer.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[CF Bundle URL Types, custom URI schemes, Deep Links, Universal Links, AASA file, apple-app-site-association, Info.plist, Inter-Process Communication, IPC, parameter injection, fuzzing, one-click exploit, Safari, XSS, URL routing, application sandbox, openURL]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 3:
+
+* Phase(s): Exploitation / Weaponization
+
+* Attack methodology context from transcript: Hunting for improper validation in how the application handles data passed from external apps or the web browser.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Recon/Discovery Phase: Attacker analyzes Info.plist for custom URL schemes and enumerates the web server for the AASA file to understand Universal Links routing.
+
+* Exploitation/Weaponization Phase: Attacker identifies that a specific path (myapp://promo?url=) lacks input sanitization. They craft a malicious link hosting a JavaScript payload or a state-changing API call.
+
+* Post-Exploitation/Reporting Phase: The link is sent to a victim. When clicked, iOS automatically routes the payload into the vulnerable app, bypassing sandbox restrictions.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
+
+* Tool Name: Xcode / Safari
+
+* Navigation Steps: Open Info.plist in Xcode > Search for URL types > Expand URL Schemes > Test scheme in Safari address bar.
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -2925,9 +2967,10 @@ Subtopics: MobSF Repository Cloning, MobSF Setup & Execution, IPA Upload, MobSF 
 Section 11: iOS-Static-Analysis
 Topic 1: Manual iOS Static Analysis (File Extraction & Review)
 Topic 2: Automated iOS Static Analysis with MobSF
+Topic 3: iOS IPC Exploitation - URI Schemes & Universal Links
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 2 | Subtopics: 17 | CVEs: 0
+Sections: 1 | Topics: 3 | Subtopics: 22 | CVEs: 0
 
 ---
 
@@ -3078,6 +3121,132 @@ Subtopics: Burp Suite Mobile Assistant, Cydia Package Manager, Cydia Substitute,
 * Tool Name: Cydia & iOS Settings
 * Navigation Steps: Cydia: Sources > Edit > Add > Enter http://[Burp-IP]:8082 > Go to All Packages > Install Mobile Assistant. / Search > Substitute > Install. / Search > OpenSSH > Install. iOS Settings: Scroll down > SSL Kill Switch 2 > Toggle "Disable Certificate Validation" ON.
 
+--12--iOS Dynamic Analysis & Jailbreaking--
+Topic 5: Bypassing iOS Jailbreak Detection & RASP
+Subtopics: Jailbreak Detection Mechanisms, Cydia/Sileo Artifacts, fork() and dyld Checks, RASP Solutions, Liberty Lite, Custom Frida Interceptors, Objective-C Method Hooking
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Deep
+
+* Coverage Angle: Practical only
+
+* Transcript mein content volume: Highly technical module on evading anti-tamper mechanisms that crash the app on jailbroken devices.
+
+* Key terms from transcript: Jailbreak detection, dyld_insert_libraries, fork(), RASP, Promon, Liberty Lite, Frida Interceptor, objc_msgSend
+
+* Exam Tips / Instructor Emphasis: "If the app crashes immediately on launch, it's not always SSL pinning; it's often jailbreak detection." Instructor stressed learning to write custom Frida scripts instead of relying solely on Objection.
+
+* Instructor ne jo analogies/examples/demos use kiye: Showed a banking app crashing instantly. Used Liberty Lite to bypass basic checks, then wrote a custom Frida script to hook an Objective-C method (isJailbroken) and force it to return false.
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[Jailbreak detection, anti-tamper, RASP, Runtime Application Self-Protection, Promon, Guardsquare, Cydia artifacts, Sileo, /bin/bash, fork(), dyld_insert_libraries, Liberty Lite, FlyJB, Frida Interceptor, Objective-C hooking, objc_msgSend, Swift vtables, return false, memory manipulation, stealth, early instrumentation]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 5:
+
+* Phase(s): Initial Foothold / Evasion
+
+* Attack methodology context from transcript: Modifying application runtime memory to spoof a clean, non-jailbroken environment, allowing dynamic analysis tools to function without triggering app crashes.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Recon/Discovery Phase: Attacker launches the app on a checkra1n device; it detects Cydia files or unexpected dyld libraries and terminates.
+
+* Exploitation/Weaponization Phase: Attacker installs jailbreak bypass tweaks like Liberty Lite. If commercial RASP is present, they use Frida to trace the app's startup routines, locate the specific method verifying device integrity (e.g., -(BOOL)isDeviceJailbroken), and inject a script to hijack the return value.
+
+* Post-Exploitation/Reporting Phase: App runs normally, allowing the attacker to proceed with API interception and logic testing.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 5:
+
+* Tool Name: CLI (Frida)
+
+* Navigation Steps: frida -U -f com.target.app -l bypass.js --no-pause
+
+--12--iOS Dynamic Analysis & Jailbreaking--
+Topic 6: iOS App Repackaging & Dylib Injection (Non-Jailbroken)
+Subtopics: Dynamic Library (.dylib) Creation, App Decryption (frida-ios-dump), Dylib Injection (insert_dylib), Resigning Apps, Apple Developer Certificates, Sideloading
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+
+* Coverage Angle: Practical only
+
+* Transcript mein content volume: Complete workflow for backdooring an iOS app and running it on a clean, non-jailbroken iPhone.
+
+* Key terms from transcript: .dylib, frida-ios-dump, insert_dylib, codesign, applesign, sideloading, non-jailbroken
+
+* Exam Tips / Instructor Emphasis: Instructor emphasized this is crucial for Red Teaming, as victims do not use jailbroken phones. The payload must be packed into a legitimate app.
+
+* Instructor ne jo analogies/examples/demos use kiye: Dumped a decrypted IPA from a jailbroken device, injected a custom malicious .dylib using insert_dylib, resigned the entire app bundle using a paid Apple Developer certificate, and successfully installed it on a standard, non-jailbroken iPhone.
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[App repackaging, code injection, .dylib, dynamic library, frida-ios-dump, decrypted IPA, insert_dylib, Mach-O binary, load commands, LC_LOAD_DYLIB, codesign, applesign, Apple Developer Certificate, provisioning profile, sideloading, non-jailbroken device, red teaming, malware implant, backdooring]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 6:
+
+* Phase(s): Weaponization / Execution
+
+* Attack methodology context from transcript: Preparing a weaponized application capable of executing custom payloads (like C2 beacons) within the restrictive constraints of a standard iOS device.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Recon/Discovery Phase: Attacker uses a jailbroken device to dump a clean, decrypted version of a target app (e.g., a corporate messaging app) using frida-ios-dump.
+
+* Exploitation/Weaponization Phase: Attacker compiles a custom C2 payload into a macOS dynamic library (.dylib). They use insert_dylib to modify the app's Mach-O binary to load the malicious library upon startup.
+
+* Post-Exploitation/Reporting Phase: Attacker strips old signatures, uses applesign and a valid developer profile to re-sign the app, and distributes it to the target (e.g., via a fake MDM portal or phishing link) for execution on a non-jailbroken device.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 6:
+
+* Tool Name: CLI (insert_dylib / applesign)
+
+* Navigation Steps: insert_dylib @executable_path/malicious.dylib Payload/Target.app/Target > applesign -i [Cert_ID] -m [Profile.mobileprovision] Target.ipa
+
+--12--iOS Dynamic Analysis & Jailbreaking--
+Topic 7: iOS Keychain & Data Protection API Exploitation
+Subtopics: Keychain Architecture, Hardware Encryption (Secure Enclave), Dumping Keychain Items, Data Protection Classes, Local Storage Evasion
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Moderate
+
+* Coverage Angle: Both
+
+* Transcript mein content volume: Explanation of iOS hardware encryption and practical extraction of sensitive tokens.
+
+* Key terms from transcript: Keychain, Secure Enclave, keychain_dumper, Objection, Data Protection API, NSFileProtectionComplete
+
+* Exam Tips / Instructor Emphasis: Instructor warned that just because data isn't in SQLite or Plist files doesn't mean it's gone; developers hide high-value tokens in the Keychain, which is easily dumped on a compromised device.
+
+* Instructor ne jo analogies/examples/demos use kiye: Used Objection to dump the Keychain of a target app, revealing plaintext OAuth tokens that were invisible in the standard file system.
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[iOS Keychain, Secure Enclave, hardware encryption, keychain_dumper, Objection, Data Protection API, NSFileProtectionComplete, NSFileProtectionNone, SQLite, Plist, OAuth tokens, session hijacking, local storage, post-exploitation, credential dumping]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 7:
+
+* Phase(s): Post-Exploitation / Lateral Movement
+
+* Attack methodology context from transcript: Extracting high-value credentials securely stored by the OS to escalate privileges or hijack sessions.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Recon/Discovery Phase: Attacker searches local .sqlite and .plist files in the app's Data directory but finds no session tokens.
+
+* Exploitation/Weaponization Phase: Attacker utilizes a jailbroken device or a C2 implant to execute Keychain dumping tools (like keychain_dumper or objection explore -> ios keychain dump).
+
+* Post-Exploitation/Reporting Phase: The OS decrypts and hands over the Keychain items belonging to the app, revealing plaintext passwords or API tokens used for lateral movement.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 7:
+
+* Tool Name: Objection
+
+* Navigation Steps: objection explore > ios keychain dump
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -3089,9 +3258,12 @@ Topic 1: iOS Proxy Setup (Burp Suite & ProxyMan)
 Topic 2: IPA Patching with Objection & Frida
 Topic 3: iOS Jailbreaking Methodologies (checkra1n & palera1n)
 Topic 4: Bypassing SSL Pinning on Jailbroken iOS (SSL Kill Switch 2 & Burp Mobile Assistant)
+Topic 5: Bypassing iOS Jailbreak Detection & RASP
+Topic 6: iOS App Repackaging & Dylib Injection (Non-Jailbroken)
+Topic 7: iOS Keychain & Data Protection API Exploitation
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 4 | Subtopics: 24 | CVEs: 0
+Sections: 1 | Topics: 7 | Subtopics: 42 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
