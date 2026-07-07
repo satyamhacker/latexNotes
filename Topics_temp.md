@@ -1764,6 +1764,48 @@ Subtopics: Commercial Obfuscators Overview, DexGuard/DexProtector Mechanisms, In
 
 * Navigation Steps: Launch app on phone > Run frida-ps -Ua to get PID > Run frida-dexdump -U -f com.target.app > Output saves to local folder > Open dumped .dex in JADX.
 
+--6--Android-Dynamic-Analysis--
+Topic 8: Bypassing Hardware-Backed Biometrics (StrongBox/TEE via Frida)
+Subtopics: BiometricPrompt, CryptoObject, onAuthenticationSucceeded, KeyguardManager, FingerprintManager, StrongBox, Keystore, Binder transaction, hook, bypass MFA
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Deep
+
+* Coverage Angle: Practical only
+
+* Transcript mein content volume: Detailed Frida script walkthrough and Binder transaction analysis.
+
+* Key terms from transcript: BiometricPrompt, CryptoObject, onAuthenticationSucceeded, KeyguardManager, FingerprintManager, StrongBox, Keystore, Binder transaction, hook, bypass MFA
+
+* Exam Tips / Instructor Emphasis: ⭐ "If you see a fingerprint prompt, don't brute force it. Hook the callback. Use Frida to spoof the onAuthenticationSucceeded result even when the hardware sensor returns 'failed'."
+
+* Instructor ne jo analogies/examples/demos use kiye: Wrote a live Frida script to hook android.hardware.biometrics.BiometricPrompt$AuthenticationCallback and force-injected a true boolean into the authentication response, bypassing the fingerprint sensor entirely.
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[⭐BiometricPrompt, StrongBox, TEE, Trusted Execution Environment, onAuthenticationSucceeded, onAuthenticationError, CryptoObject, Cipher, FingerprintManager, KeyguardManager, Binder transaction, -U -f, Frida script, Android Keystore, hardware-backed keys, MFA bypass, authentication bypass, banking trojan, silent auth]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 8:
+
+* Phase(s): Initial Foothold / Post-Exploitation
+
+* Attack methodology context from transcript: Once the C2 implant is running, the attacker hooks the OS-level biometric dialog to force-success transactions without user interaction.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Recon/Discovery Phase: Attacker navigates to the payment/transfer screen in the app and identifies the BiometricPrompt class using frida-ps -Ua and frida-trace -U -i "*biometric*".
+
+* Exploitation/Weaponization Phase: Attacker injects a script that overrides onAuthenticationSucceeded. When the user places their thumb (or fails to), the OS calls the hook, and the script forces the authentication state to true, allowing the transaction to process.
+
+* Post-Exploitation/Reporting Phase: (N/A)
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 8:
+
+* Tool Name: Frida CLI
+
+* Navigation Steps: frida -U -f com.target.bank -l biometric_bypass.js --no-pause
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -1796,9 +1838,10 @@ Topic 2: Frida Codeshare Scripts
 Section 6: Android-Dynamic-Analysis
 Topic 6: Bypassing Play Integrity API & Commercial RASP
 Topic 7: Advanced Unpacking & Defeating Commercial Packers
+Topic 8: Bypassing Hardware-Backed Biometrics (StrongBox/TEE via Frida)
 
 📊 PHASE SUMMARY:
-Sections: 6 | Topics: 15 | Subtopics: 97 | CVEs: 0
+Sections: 6 | Topics: 16 | Subtopics: 107 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -2527,6 +2570,132 @@ Subtopics: ARM TrustZone Architecture, Secure Enclave, Secure Monitor Calls (SMC
 
 * Tool Name: N/A (Highly customized kernel/C scripts, no GUI tool)
 
+--8--BONUS - Android Red Teaming--
+Topic 8: Android 14/15 Scoped Storage Evasion (SAF Abuse)
+Subtopics: Scoped Storage Concepts, SAF (Storage Access Framework), DocumentFile API, ACTION_OPEN_DOCUMENT_TREE, MediaStore Limitations, Social Engineering for All Files Access
+
+[📊 SCOPE SIGNAL for Topic 8 (Scoped Storage):
+
+* Depth Level: Deep
+
+* Coverage Angle: Practical only
+
+* Transcript mein content volume: Live demonstration of abusing the Storage Access Framework to read WhatsApp/Telegram backups on non-rooted devices.
+
+* Key terms from transcript: Scoped Storage, SAF, Storage Access Framework, MANAGE_EXTERNAL_STORAGE, DocumentFile, ACTION_OPEN_DOCUMENT_TREE, MediaStore, AccessibilityService, UI Automator, exfiltration, non-rooted bypass
+
+* Exam Tips / Instructor Emphasis: "Root is dead for enterprise BYOD. You must convince the user to grant 'All Files Access' via a social engineering prompt, then use DocumentFile to traverse the entire SD card programmatically."
+
+* Instructor ne jo analogies/examples/demos use kiye: Popped a fake "Your phone is infected, click here to clean" prompt that actually requested ACTION_OPEN_DOCUMENT_TREE. Once granted, the implant recursively walked the file tree and exfiltrated Android/media/com.whatsapp/ backups via C2.
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[⭐Scoped Storage, Android 14, Android 15, SAF, Storage Access Framework, ACTION_OPEN_DOCUMENT_TREE, DocumentFile, MANAGE_EXTERNAL_STORAGE, MediaStore, exfiltration, non-root, BYOD, AccessibilityService, GestureDescription, swipe to grant, bypass, android.permission.READ_EXTERNAL_STORAGE deprecated]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 8:
+
+* Phase(s): Post-Exploitation / Exfiltration
+
+* Attack methodology context from transcript: Bypassing modern Android storage restrictions to dump sensitive user data without requiring root access.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Recon/Discovery Phase: Implant checks Build.VERSION.SDK_INT (>= 30). If Scoped Storage is active, the implant triggers a fake system warning activity.
+
+* Exploitation/Weaponization Phase: User clicks "Allow" on the SAF prompt. The implant receives the URI and uses DocumentFile.fromTreeUri() to recursively list all directories. It ignores system directories and targets WhatsApp/Media, Telegram/, and Download/.
+
+* Post-Exploitation/Reporting Phase: Files are chunked, encoded in Base64, and exfiltrated over DoH (DNS over HTTPS) to the Mythic C2.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 8:
+
+* Tool Name: Custom Implant (Java/Kotlin)
+
+* Navigation Steps: Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE); startActivityForResult(intent, 42); -> onActivityResult -> Uri treeUri = data.getData(); DocumentFile root = DocumentFile.fromTreeUri(context, treeUri);
+
+--8--BONUS - Android Red Teaming--
+Topic 9: Kernel-Level Rootkits (LKM) & Syscall Hooking
+Subtopics: LKM Development, Syscall Table Hijacking, filldir64 / getdents64 Hooks, kprobe/ftrace mechanisms, Process/Port Hiding
+
+[📊 SCOPE SIGNAL for Topic 9:
+
+* Depth Level: Expert
+
+* Coverage Angle: Practical only
+
+* Transcript mein content volume: Writing a simple Loadable Kernel Module (LKM) to hide a process from ps and a port from netstat on a rooted Android device.
+
+* Key terms from transcript: LKM, Loadable Kernel Module, syscall hooking, filldir64, getdents64, kprobe, ftrace, process hiding, port hiding, EDR evasion, Cybereason, SentinelOne
+
+* Exam Tips / Instructor Emphasis: "User-space Frida hooks are easily scanned. Kernel-space hooks are invisible to the app. Compile your LKM against the exact kernel source of the target device."
+
+* Instructor ne jo analogies/examples/demos use kiye: Wrote a kernel module that hooked the getdents64 syscall. If the PID matched the implant, the kernel simply omitted it from the directory list. ps -A showed nothing, while the process was actively beaconing.
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[⭐LKM, Loadable Kernel Module, kernel source, AOSP, filldir64, getdents64, kprobe, ftrace, syscall table, process hiding, file hiding, port hiding, netstat evasion, ls evasion, /proc hiding, EDR bypass, rootkit, KernelSU integration, Android 14 kernel]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 9:
+
+* Phase(s): Evasion / Persistence
+
+* Attack methodology context from transcript: Escalating from root (KernelSU) to kernel space to hide malicious activity from built-in system scanners.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+
+* Recon/Discovery Phase: Attacker downloads the specific kernel headers for the target ROM (e.g., apt install linux-headers-$(uname -r)).
+
+* Exploitation/Weaponization Phase: Attacker compiles the LKM. They insmod evil.ko. The module hijacks the syscall table. The malicious C2 process (PID 1337) calls getdents64, the kernel intercepts, sees PID 1337, and skips it.
+
+* Post-Exploitation/Reporting Phase: The implant runs silently. Enterprise EDR agents querying /proc see no suspicious processes, allowing long-term persistence.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 9:
+
+* Tool Name: CLI (GCC + Make)
+
+* Navigation Steps: Write C code for filldir64 hook > Compile with make -C /lib/modules/$(uname -r)/build M=$(pwd) modules > adb push evil.ko /data/local/tmp/ > insmod evil.ko
+
+--8--BONUS - Android Red Teaming--
+Topic 10: Compiling Custom Renamed Frida Gadget (Anti-RASP)
+Subtopics: Frida Core Cloning, Meson & Ninja Build System, Source Code Modification (Renaming Symbols), Custom Gadget Injection, Dynamic Analysis Evasion
+
+[📊 SCOPE SIGNAL for Topic 10:
+
+* Depth Level: Expert
+
+* Coverage Angle: Practical only
+
+* Transcript mein content volume: Cloning the Frida Core repo, changing LIBFRIDA and gum-js pipe names, recompiling for Android ARM64, and replacing default Objection gadgets.
+
+* Key terms from transcript: Frida Core, Git clone, Meson, Ninja, rename symbols, LIBFRIDA, gum-js, pipe name, RASP bypass, Promon, DexGuard, static analysis evasion, dynamic analysis evasion
+
+* Exam Tips / Instructor Emphasis: "Default Frida is burned. If you don't rename the frida:rpc string and the linjector thread name, the app will crash on launch. Recompiling takes 15 minutes and saves you hours of headache."
+
+* Instructor ne jo analogies/examples/demos use kiye: Changed LIBFRIDA to libandroid_media.so (a legitimate system library name) and recompiled. Injected the new .so via objection patchapk (using the custom .so). The banking app launched normally, RASP didn't trigger, and SSL pinning was bypassed successfully.
+]
+
+🔑 KEYWORDS DUMP for Topic 10:
+[Frida compilation, Meson, Ninja, Renaming symbols, LIBFRIDA, gum-js, pipe names, linjector, RASP bypass, Frida detection bypass, custom gadget, .so injection, DexGuard bypass, Promon bypass, banking trojan toolkit]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 10:
+
+* Phase(s): Lab Setup / Weaponization
+
+* Attack methodology context from transcript: Building an undetectable instrumentation library before even beginning the pentest.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+
+* Recon/Discovery Phase: Attacker clones frida-core and frida-gum from GitHub.
+
+* Exploitation/Weaponization Phase: Attacker performs a global find-replace on the codebase: frida:rpc -> app:rpc, gum-js -> core-js. Recompiles using Meson. The output is libfrida-gadget.so renamed to libandroid_runtime_ext.so.
+
+* Post-Exploitation/Reporting Phase: This custom .so is injected into the target APK. When loaded, it creates threads with generic names like AsyncTask #1 instead of Frida, completely evading process scanners.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 10:
+
+* Tool Name: Terminal / Meson
+
+* Navigation Steps: git clone https://github.com/frida/frida -> cd frida -> ./configure -> Modify gum/backend-darwin.c and core/pipe.c -> make core-android-arm64 -> Extract build/frida-android-arm64/lib/
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -2542,9 +2711,12 @@ Section 8: BONUS - Android Red Teaming
   Topic 5: Enterprise MDM Hijacking & Internal Network Pivoting
   Topic 6: NFC, RFID & BLE (Bluetooth Low Energy) Exploitation
   Topic 7: TEE (Trusted Execution Environment) & TrustZone Attacks
+  Topic 8: Android 14/15 Scoped Storage Evasion (SAF Abuse)
+  Topic 9: Kernel-Level Rootkits (LKM) & Syscall Hooking
+  Topic 10: Compiling Custom Renamed Frida Gadget (Anti-RASP)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 41 | CVEs: 0
+Sections: 1 | Topics: 10 | Subtopics: 57 | CVEs: 0
 
 ```
 
@@ -3425,6 +3597,90 @@ Subtopics: Keychain Architecture, Hardware Encryption (Secure Enclave), Dumping 
 
 * Navigation Steps: objection explore > ios keychain dump
 
+--12--iOS Dynamic Analysis & Jailbreaking--
+Topic 8: Modern Swift Concurrency Hooking (VTables & Mangled Symbols)
+Subtopics: Swift Memory Layout, VTables, Mangled Symbols (swift demangle), Structured Concurrency (async/await), frida-swift bindings, Manual Hooking via Module.getExportByName
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Deep
+
+* Coverage Angle: Practical only
+
+* Transcript mein content volume: Reversing Swift mangled names (_$s4MyApp...) and using frida-swift or manual Module.getExportByName() to hook VTable functions.
+
+* Key terms from transcript: Swift, VTable, mangled symbols, async/await, Structured Concurrency, frida-swift, Module.getExportByName, Interceptor.attach, memory layout, swift_demangle
+
+* Exam Tips / Instructor Emphasis: "Do NOT try to use ObjC.classes on a Swift class. It won't work. Swift uses direct VTable dispatch. You must demangle the symbol, find the function pointer, and hook it via memory address."
+
+* Instructor ne jo analogies/examples/demos use kiye: Used swift demangle to resolve _$s10MyBankApp11PaymentVCM22processTransfer4fromyyF. Then used Module.findExportByName(null, "_$s10MyBankApp...") and Interceptor.attach() to modify the amount parameter before the function executed, bypassing the server-side validation.
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[⭐Swift, VTable, mangled name, demangling, swift demangle, Module.getExportByName, Interceptor.attach, async/await, continuation, Structured Concurrency, frida-swift, iOS 15/16/17, Obj-C fallback, direct dispatch, function pointer]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 8:
+
+* Phase(s): Exploitation
+
+* Attack methodology context from transcript: Dynamically altering Swift-native business logic that doesn't rely on Objective-C runtime.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Recon/Discovery Phase: Attacker dumps the binary's symbols using nm -gU Target.app/Target | grep Swift.
+
+* Exploitation/Weaponization Phase: Attacker writes a Frida script that resolves the mangled symbol for the verifyPurchase function. They attach to the function's entry, read the amount register (x2 on ARM64), and overwrite it to 0.00 before the function returns the true flag.
+
+* Post-Exploitation/Reporting Phase: In-app purchase verified successfully for free.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 8:
+
+* Tool Name: Frida + CLI
+
+* Navigation Steps: swift demangle mangled_name -> frida -U -f com.target.ios -l hook_swift.js
+
+--12--iOS Dynamic Analysis & Jailbreaking--
+Topic 9: Enterprise Cert Abuse & Silent MDM Implant Deployment
+Subtopics: Enterprise Certificates, Provisioning Profiles (.mobileprovision), applesign Re-signing, Mobile Device Management (MDM) OTA Payloads, Zero-Click Installation
+
+[📊 SCOPE SIGNAL for Topic 9:
+
+* Depth Level: Deep
+
+* Coverage Angle: Practical only
+
+* Transcript mein content volume: Stealing a .mobileprovision and enterprise certificate from a compromised Mac, re-signing a malicious payload, and deploying it silently via MDM enrollment payloads.
+
+* Key terms from transcript: Enterprise Certificate, .mobileprovision, distribution profile, MDM, Apple Configurator, silent install, zero-click deployment, OTA enrollment, plist, applesign, ldid, provisioning profile extraction
+
+* Exam Tips / Instructor Emphasis: "If you compromise a developer's Mac, grab the ~Library/MobileDevice/Provisioning Profiles/. With that, you can sign any app for any device without the user seeing a popup. This is how APT groups deploy spyware."
+
+* Instructor ne jo analogies/examples/demos use kiye: Found an enterprise profile, extracted the private key and cert from Keychain Access, used applesign to resign a decrypted Slack app, and pushed it via an Over-the-Air (OTA) fake iOS update prompt, which silently installed without manual user consent.
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[⭐Enterprise Certificate, .mobileprovision, distribution profile, resigning, applesign, ldid, Keychain Access, MDM enrollment, OTA deployment, silent install, zero-click, APT, NSO, Pegasus, ~Library/MobileDevice/Provisioning Profiles/, plist payload, iOS red team]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 9:
+
+* Phase(s): Weaponization / Delivery
+
+* Attack methodology context from transcript: Utilizing stolen corporate signing assets to bypass Apple's security guardrails on non-jailbroken devices.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+
+* Recon/Discovery Phase: Attacker compromises an Enterprise Dev's Mac via phishing. They run security find-identity -v -p basic to list valid certs and copy the provisioning profiles.
+
+* Exploitation/Weaponization Phase: Attacker uses applesign to sign their malicious C2 payload with the stolen distribution profile. They host the signed .ipa on a malicious MDM server.
+
+* Post-Exploitation/Reporting Phase: Victim scans a QR code for "Office Wi-Fi Setup". The device silently enrolls and pushes the malicious app in the background (zero-click install).
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 9:
+
+* Tool Name: CLI (applesign)
+
+* Navigation Steps: applesign -i "Developer ID" -m stolen.mobileprovision evil.ipa -o evil_signed.ipa
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -3439,9 +3695,11 @@ Topic 4: Bypassing SSL Pinning on Jailbroken iOS (SSL Kill Switch 2 & Burp Mobil
 Topic 5: Bypassing iOS Jailbreak Detection & RASP
 Topic 6: iOS App Repackaging & Dylib Injection (Non-Jailbroken)
 Topic 7: iOS Keychain & Data Protection API Exploitation
+Topic 8: Modern Swift Concurrency Hooking (VTables & Mangled Symbols)
+Topic 9: Enterprise Cert Abuse & Silent MDM Implant Deployment
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 7 | Subtopics: 43 | CVEs: 0
+Sections: 1 | Topics: 9 | Subtopics: 54 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -3613,5 +3871,157 @@ Sections: 1 | Topics: 4 | Subtopics: 28 | CVEs: 0
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+
+==================================================================================
+
+# Section 14: Modern-API-&-Deep-Repackaging
+
+===Section 14: Modern-API-&-Deep-Repackaging===
+This section bridges the gap for Flutter/React Native repacking and gRPC/Protobuf interception.
+
+--14--Modern-API-&-Deep-Repackaging--
+Topic 1: Flutter Logic Modification & Repackaging
+Subtopics: Flutter, Dart AOT, libapp.so, Blutter, reFlutter, snapshot, binary editing, repackaging
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Expert
+
+* Coverage Angle: Practical only
+
+* Transcript mein content volume: Modifying a compiled Dart snapshot (libapp.so) to change a boolean flag and repacking the APK/IPA with reFlutter.
+
+* Key terms from transcript: Flutter, Dart AOT, libapp.so, Blutter, reFlutter, snapshot, .dart_tool, patch, binary editing, isPremium, isAdmin, repackaging, signature bypass
+
+* Exam Tips / Instructor Emphasis: "You cannot use JADX to find logic in Flutter. The logic is a compiled snapshot. Use Blutter to parse the snapshot into readable Dart pseudo-code. Find the offset of the isPremium flag, then use a hex editor to change 01 to 00, and repack the APK."
+
+* Instructor ne jo analogies/examples/demos use kiye: Used Blutter to parse libapp.so. Found the constant pool for isPremium at offset 0x7A4B. Used a hex editor to change 0x01 to 0x00. Re-ran reFlutter to repack, re-signed, and installed it. The app showed "Premium Unlocked" without a subscription.
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[⭐Flutter, Dart AOT, libapp.so, Blutter, snapshot parsing, constant pool, boolean patching, hex editor, reFlutter repack, APK rebuild, IPA rebuild, logic modification, premium bypass, in-app purchase bypass]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 1:
+
+* Phase(s): Weaponization / Exploitation
+
+* Attack methodology context from transcript: Directly patching compiled Dart machine code to alter application logic.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Recon/Discovery Phase: Attacker extracts libapp.so, runs Blutter to dump the snapshot layout.
+
+* Exploitation/Weaponization Phase: Attacker identifies the offset for isLoggedIn. Uses a hex editor to flip the byte. Saves the .so and pushes it back into the APK using apktool.
+
+* Post-Exploitation/Reporting Phase: Attacker re-signs the APK using jarsigner, installs it. The app bypasses the login screen.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 1:
+
+* Tool Name: Blutter / Hex Editor
+
+* Navigation Steps: python3 blutter.py libapp.so output_dir/ -> Open output_dir/parsed/constants.txt -> Open libapp.so in HxD -> Go to offset -> Modify byte -> Save.
+
+--14--Modern-API-&-Deep-Repackaging--
+Topic 2: React Native Hermes Bytecode Patching & Repackaging
+Subtopics: React Native, Hermes Engine, index.android.bundle, hermes-dec, JavaScript Patching, Bundle Reassembly
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Expert
+
+* Coverage Angle: Practical only
+
+* Transcript mein content volume: Extracting index.android.bundle from Hermes, decompiling with hermes-dec, patching JavaScript, and repacking.
+
+* Key terms from transcript: React Native, Hermes, index.android.bundle, hermes-dec, JavaScript patching, JS bundle, source maps, repack, react-native-repack, metro, bundle reassembly
+
+* Exam Tips / Instructor Emphasis: "Hermes compiles JS to bytecode. You must decompile it back to JS, find the API URL, patch it to your redirector, and recompile it back to Hermes bytecode."
+
+* Instructor ne jo analogies/examples/demos use kiye: Ran hermes-dec to extract JS. Changed the api_base_url from target.com to attacker.com. Used hermes compiler to recompile back to index.android.bundle. Repacked the APK. Traffic now routes to the redirector.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[⭐React Native, Hermes engine, HBC bytecode, index.android.bundle, hermes-dec, JavaScript source, hermes compiler, repack, react-native bundle, API redirect, endpoint patching, JS injection]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 2:
+
+* Phase(s): Weaponization
+
+* Attack methodology context from transcript: Modifying the core JavaScript bundle to redirect API calls or bypass client-side restrictions.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Recon/Discovery Phase: Attacker unzips APK, finds assets/index.android.bundle.
+
+* Exploitation/Weaponization Phase: Runs hermes-dec -> edits JS file searching for https://api/v1 -> changes to https://evil.com/v1 -> runs hermes to compile back to HBC -> places back into APK.
+
+* Post-Exploitation/Reporting Phase: Re-signs and installs. The app now exfiltrates user data to the evil server.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 2:
+
+* Tool Name: hermes-dec / hermes-cli
+
+* Navigation Steps: hermes-dec input.hbc > output.js -> Edit JS -> hermes -emit-binary output.js -out input.hbc
+
+--14--Modern-API-&-Deep-Repackaging--
+Topic 3: gRPC & Protobuf Network Interception (Burp Suite gRPC / Protobuf-Inspector)
+Subtopics: gRPC Architecture, Protobuf Parsing, Burp gRPC Extension, protoc Compilation, grpc-dump, IDOR via gRPC
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+
+* Coverage Angle: Practical only
+
+* Transcript mein content volume: Configuring Burp Suite with a gRPC plugin, extracting .proto files from the APK, compiling them, and using grpc-dump to edit transaction values.
+
+* Key terms from tutorial: gRPC, Protobuf, protocol buffers, .proto files, Burp gRPC extension, protoc, grpc-dump, binary payload, reflection, IDOR via gRPC
+
+* Exam Tips / Instructor Emphasis: "You cannot see gRPC parameters in plain text. You must locate the compiled .proto descriptors in the assets folder, load them into Burp, and Burp will automatically decode the binary blobs into human-readable JSON."
+
+* Instructor ne jo analogies/examples/demos use kiye: Extracted payment.proto, compiled it, loaded it into Burp gRPC. Intercepted a Transfer request. Changed the targetUserId to a different UUID in the JSON view, re-encoded it, and sent it. The backend processed the transfer to a different user (IDOR).
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[⭐gRPC, Protobuf, Protocol Buffers, .proto files, protoc, grpc-dump, Burp Suite gRPC, grpc-web, binary encoding, base64 encoded bytes, reflection, reflection service, descriptor set, API manipulation, IDOR via gRPC]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 3:
+
+* Phase(s): Reconnaissance / Exploitation
+
+* Attack methodology context from transcript: Modern microservices use gRPC. Intercepting and modifying binary Protobuf traffic to manipulate IDs and values.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Recon/Discovery Phase: Attacker decompiles APK and finds assets/*.proto or compiles a .descriptor file.
+
+* Exploitation/Weaponization Phase: Attacker loads the descriptor into Burp gRPC plugin. They intercept a GetUserProfile request. They change the user_id from 123 to 124 and replay it via the gRPC plugin's JSON editor.
+
+* Post-Exploitation/Reporting Phase: (N/A)
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 3:
+
+* Tool Name: Burp Suite (gRPC Plugin)
+
+* Navigation Steps: BApp Store -> Install "gRPC" Extension -> Extender -> gRPC tab -> Load .proto file -> Intercept traffic -> Click on "gRPC" message editor -> Edit JSON payload -> Send.
+
+---
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
+
+```
+📋 EXTRACTED IN THIS PHASE:
+
+Section 14: Modern-API-&-Deep-Repackaging
+  Topic 1: Flutter Logic Modification & Repackaging
+  Topic 2: React Native Hermes Bytecode Patching & Repackaging
+  Topic 3: gRPC & Protobuf Network Interception (Burp Suite gRPC / Protobuf-Inspector)
+
+📊 PHASE SUMMARY:
+Sections: 1 | Topics: 3 | Subtopics: 20 | CVEs: 0
+
+```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ==================================================================================
