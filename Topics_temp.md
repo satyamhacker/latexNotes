@@ -2696,6 +2696,59 @@ Subtopics: Frida Core Cloning, Meson & Ninja Build System, Source Code Modificat
 
 * Navigation Steps: git clone https://github.com/frida/frida -> cd frida -> ./configure -> Modify gum/backend-darwin.c and core/pipe.c -> make core-android-arm64 -> Extract build/frida-android-arm64/lib/
 
+--8--BONUS - Android Red Teaming--
+Topic 11: Android 15/14 Restricted Settings Bypass (Zero-UI Accessibility Grant)
+Subtopics: Android 15 Restricted Settings Policy, AccessibilityService Abuse, Overlay Permissions, GrantPermissionsActivity Loophole, SETTINGS_SECURE ADB Override, Vendor ROM Exploits (Xiaomi/Oppo/OneUI), Foreground Service Bypass, GestureDescription UI Automation, Zero-UI Permission Granting
+
+[📊 SCOPE SIGNAL for Topic 11:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Full technical walkthrough of bypassing Android 14/15's "Restricted Settings" to enable Accessibility without the user ever seeing the toggle screen.
+* Key terms from transcript: Android 15, Restricted Settings, AccessibilityService, Overlay permissions, GrantPermissionsActivity, `SETTINGS_SECURE`, `enabled_accessibility_services`, ADB over Wi-Fi, vendor ROM, Xiaomi, Oppo, ColorOS, OneUI, Foreground Service, `GestureDescription`, `dispatchGesture`, zero-UI, user awareness bypass
+* Exam Tips / Instructor Emphasis: ⭐ "On Android 15, `startActivityForResult(ACTION_ACCESSIBILITY_SETTINGS)` crashes the app or silently fails. To bypass this, you must spawn a permanent Foreground Service to keep the process alive, then overlay a hidden transparent view over the system UI and simulate precise taps using `GestureDescription` to toggle the switch while the user is distracted by a fake 'Battery Optimization' prompt."
+* Instructor ne jo analogies/examples/demos use kiye: Live demo of a malicious app on a locked Android 15 device. The app displayed a fake "Your phone is overheating" dialog. While the user tried to dismiss it, a background service enumerated the exact pixel coordinates of the "Allow" button on the Accessibility settings page, used `dispatchGesture` to click it, and immediately granted the permission without any visual indication to the user.
+]
+
+🔑 KEYWORDS DUMP for Topic 11:
+[⭐Android 15, Restricted Settings, Android 14, Accessibility bypass, Zero-UI, `android.permission.BIND_ACCESSIBILITY_SERVICE`, `Settings.ACTION_ACCESSIBILITY_SETTINGS`, `GrantPermissionsActivity`, `adb shell settings put secure enabled_accessibility_services`, `adb shell settings put secure accessibility_enabled`, vendor ROMs, ColorOS, MIUI, OneUI, foreground service, `startForeground()`, overlay, `WindowManager.LayoutParams`, `FLAG_WATCH_OUTSIDE_TOUCH`, `GestureDescription`, `Path`, `stroke`, `dispatchGesture()`, `onGestureCompleted`, screen coordinates, UI automation, UI Automator, system settings exploit]
+
+⚔️ ATTACK PHASE SIGNAL for Topic 11:
+
+* Phase(s): Post-Exploitation / Persistence (Initial Setup)
+* Attack methodology context from transcript: This is the **prerequisite** to enable the keylogger/screen-scraping features (Topic 3). It is executed immediately after the implant is installed, using a mix of social engineering (distraction) and programmatic UI injection to silently escalate permissions without the user explicitly confirming the scary "Accessibility" warning popup.
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
+
+* Recon/Discovery Phase: Implant checks `Build.VERSION.SDK_INT`. If `>= 34` (Android 14) or `>= 35` (Android 15), it identifies that standard intents are blocked. It then queries the screen resolution (`getDisplayMetrics`) to calculate the exact center coordinates of the screen.
+* Exploitation/Weaponization Phase: 
+    1. The implant starts a high-priority Foreground Service (so the OS doesn't kill it).
+    2. It creates a full-screen invisible overlay (`TYPE_APPLICATION_OVERLAY`) that captures all touch events.
+    3. It triggers a fake system dialog (e.g., "Optimizing storage...") to distract the user.
+    4. Simultaneously, it programmatically navigates to `Settings.ACTION_ACCESSIBILITY_SETTINGS` and uses `GestureDescription.Builder` to draw a path (swipe down and click) that toggles the "Enable Accessibility" switch for your malicious service.
+    5. **Vendor-Specific Fallback:** If the UI coordinate method fails (due to different OEM skins), it falls back to executing `adb shell settings put secure enabled_accessibility_services com.malicious/.Service` (only works if ADB over Wi-Fi has been previously granted via a separate phishing prompt).
+* Post-Exploitation/Reporting Phase: The Accessibility permission is now silently granted. The user sees no "malicious app" warning in settings because the system thinks they manually toggled it. The implant now has full screen-read, keylogging, and gesture-injection capabilities.
+
+🛠️ TOOL NAVIGATION SIGNAL for Topic 11:
+
+* Tool Name: Custom Kotlin Implant (Source Code Snippets)
+* Navigation Steps:
+    * **Step 1:** Create Foreground Service to prevent process death.
+    * **Step 2:** Build hidden overlay `WindowManager.LayoutParams` with `FLAG_NOT_TOUCH_MODAL`.
+    * **Step 3:** Use `GestureDescription` to automate clicks:
+    ```kotlin
+    val gestureBuilder = GestureDescription.Builder()
+    val path = Path()
+    path.moveTo(clickX.toFloat(), clickY.toFloat())
+    gestureBuilder.addStroke(GestureDescription.StrokeDescription(path, 0, 100))
+    accessibilityService.dispatchGesture(gestureBuilder.build(), null, null)
+    ```
+    * **Step 4:** ADB Fallback (if OEM UI breaks):
+    ```bash
+    adb shell settings put secure enabled_accessibility_services com.package/.AccessibilityService
+    adb shell settings put secure accessibility_enabled 1
+    ```
+
 ---
 
 ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, har attack technique, har tool command, har CVE, aur har real-world pentest flow signal captured hai. Koi bhi offensive security term censor nahi kiya gaya.**
@@ -2714,9 +2767,10 @@ Section 8: BONUS - Android Red Teaming
   Topic 8: Android 14/15 Scoped Storage Evasion (SAF Abuse)
   Topic 9: Kernel-Level Rootkits (LKM) & Syscall Hooking
   Topic 10: Compiling Custom Renamed Frida Gadget (Anti-RASP)
+  Topic 11: Android 15/14 Restricted Settings Bypass (Zero-UI Accessibility Grant)
 
 📊 PHASE SUMMARY:
-Sections: 1 | Topics: 10 | Subtopics: 57 | CVEs: 0
+Sections: 1 | Topics: 11 | Subtopics: 66 | CVEs: 0
 
 ```
 
