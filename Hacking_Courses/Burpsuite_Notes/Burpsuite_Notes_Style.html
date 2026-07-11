@@ -3,22 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burp Suite Notes - Premium Dark Mode</title>
-    
-    <!-- Dependencies -->
+    <title>Burp Suite Notes — Premium Dark Mode</title>
+
     <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark-reasonable.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
-    
+
     <style>
         :root {
-            /* Color Palette - Deep Dark Theme */
             --bg-primary: #0f1115;
             --bg-secondary: #161b22;
             --text-primary: #ffffff;
@@ -28,11 +24,7 @@
             --border-color: #30363d;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-primary);
@@ -42,34 +34,49 @@
             overflow-x: hidden;
         }
 
-        /* Loader */
+        /* ── Loader ── */
         #loader {
             position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            inset: 0;
             background: var(--bg-primary);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            gap: 1rem;
+            font-size: 1.2rem;
             color: var(--accent-blue);
             z-index: 9999;
         }
-
-        /* Print Wrapper - MANDATORY */
-        .print-wrapper {
-            background-color: var(--bg-primary);
-            min-height: 100vh;
+        #loader .loader-bar {
+            width: 200px;
+            height: 3px;
+            background: var(--border-color);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        #loader .loader-bar::after {
+            content: '';
+            display: block;
+            height: 100%;
+            width: 40%;
+            background: var(--accent-blue);
+            border-radius: 2px;
+            animation: slide 1.2s ease-in-out infinite;
+        }
+        @keyframes slide {
+            0%   { transform: translateX(-100%); }
+            100% { transform: translateX(350%); }
         }
 
-        .layout {
-            display: flex;
-            min-height: 100vh;
-        }
+        /* ── Layout ── */
+        .print-wrapper { background-color: var(--bg-primary); min-height: 100vh; }
+        .layout { display: flex; min-height: 100vh; }
 
-        /* Sidebar */
+        /* ── Sidebar ── */
         .sidebar {
-            width: 280px;
+            width: 270px;
+            flex-shrink: 0;
             background: var(--bg-secondary);
             border-right: 1px solid var(--border-color);
             padding: 2rem 1rem;
@@ -78,44 +85,47 @@
             height: 100vh;
             overflow-y: auto;
         }
-
-        .sidebar h3 {
+        .sidebar-title {
             color: var(--accent-blue);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid var(--border-color);
         }
-
-        .sidebar ul {
-            list-style: none;
-        }
-
-        .sidebar li {
-            margin: 0.5rem 0;
-        }
-
+        .sidebar ul { list-style: none; }
+        .sidebar li { margin: 0.15rem 0; }
         .sidebar a {
+            display: block;
             color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.2s;
-            display: block;
-            padding: 0.3rem 0.5rem;
-            border-radius: 4px;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
+        .sidebar a:hover { background: rgba(88,166,255,0.12); color: var(--accent-blue); }
+        .sidebar a.toc-h1 { font-weight: 700; color: var(--accent-blue); font-size: 0.88rem; }
+        .sidebar a.toc-h2 { padding-left: 1rem; }
+        .sidebar a.toc-h3 { padding-left: 1.8rem; font-size: 0.78rem; opacity: 0.85; }
 
-        .sidebar a:hover {
-            color: var(--accent-blue);
-            background: rgba(88, 166, 255, 0.1);
-        }
-
-        /* Main Content */
+        /* ── Main Content ── */
         .main-content {
             flex: 1;
             padding: 3rem 4rem;
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
+            line-height: 1.7;
+            font-size: 1.05rem;
         }
 
-        /* Typography */
+        /* ── Typography ── */
         h1 {
             font-family: 'Outfit', sans-serif;
             background: var(--accent-gradient);
@@ -137,62 +147,64 @@
             padding-bottom: 0.5rem;
         }
 
-        h2.topic-section, h2.module-section {
+        /* Module sections — big blue gradient */
+        h2.module-section {
             font-family: 'Outfit', sans-serif;
             font-size: 2.5rem;
             font-weight: 800;
-            color: #4facfe;
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            border-left: 5px solid #4facfe;
+            border-left: 6px solid #4facfe;
+            border-bottom: none;
             padding-left: 1rem;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        h3 {
+        /* Topic sections — orange gradient h3 */
+        h3.topic-section {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-left: 4px solid #fda085;
+            border-bottom: none;
+            padding: 0.2rem 0 0.2rem 1rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            background-color: rgba(253,160,133,0.05);
+            border-radius: 0 8px 8px 0;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h3:not(.topic-section) {
             color: var(--text-primary);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-top: 2rem;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.4rem;
         }
 
-        h4 {
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0.6rem;
-        }
+        h4 { color: var(--text-secondary); font-size: 1.15rem; margin-top: 1.5rem; margin-bottom: 0.6rem; }
 
-        p {
-            color: var(--text-secondary);
-            margin: 1rem 0;
-            font-size: 1.05rem;
-        }
+        p { color: var(--text-secondary); margin: 1rem 0; }
+        strong { color: var(--text-primary); font-weight: 600; }
+        em { color: var(--accent-blue); font-style: italic; }
 
-        strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
+        ul, ol { margin: 1rem 0 1rem 2rem; color: var(--text-secondary); }
+        li { margin: 0.5rem 0; }
 
-        em {
-            color: var(--accent-blue);
-            font-style: italic;
-        }
-
-        /* Lists */
-        ul, ol {
-            margin: 1rem 0 1rem 2rem;
-            color: var(--text-secondary);
-        }
-
-        li {
-            margin: 0.5rem 0;
-        }
-
-        /* Code Blocks - Mac Style */
+        /* ── Code Blocks — Mac Style ── */
         pre.mac-window {
             background: #0d1115;
             border: 1px solid var(--border-color);
@@ -203,7 +215,6 @@
             word-break: break-word !important;
             overflow-x: hidden !important;
         }
-
         .code-header {
             background: #161b22;
             padding: 8px 15px;
@@ -212,58 +223,46 @@
             justify-content: space-between;
             align-items: center;
         }
-
-        .window-controls {
-            display: flex;
-            gap: 6px;
-        }
-
-        .control {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .red { background: #ff5f56; }
+        .window-controls { display: flex; gap: 6px; align-items: center; }
+        .control { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+        .red    { background: #ff5f56; }
         .yellow { background: #ffbd2e; }
-        .green { background: #27c93f; }
+        .green  { background: #27c93f; }
 
         .copy-btn {
-            background: var(--accent-blue);
-            color: white;
-            border: none;
-            padding: 4px 12px;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            padding: 3px 10px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 0.85rem;
-            transition: opacity 0.2s;
+            font-size: 0.8rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
         }
-
-        .copy-btn:hover {
-            opacity: 0.8;
-        }
+        .copy-btn:hover { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
 
         pre code {
             font-family: 'Fira Code', monospace;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             display: block;
             padding: 1.5rem;
             white-space: pre-wrap !important;
             word-wrap: break-word !important;
         }
 
-        /* Inline Code */
-        code:not(pre code) {
-            background: var(--bg-secondary);
-            color: var(--accent-blue);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Fira Code', monospace;
+        /* Inline code */
+        p code, li code, td code {
+            background-color: rgba(88,166,255,0.15);
+            color: #79c0ff;
+            padding: 0.2em 0.4em;
+            border-radius: 6px;
             font-size: 0.9em;
+            font-family: 'Fira Code', monospace;
+            border: 1px solid rgba(88,166,255,0.2);
         }
 
-        /* Tables */
+        /* ── Tables ── */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -272,63 +271,69 @@
             border-radius: 8px;
             overflow: hidden;
         }
+        th, td { padding: 1rem; text-align: left; border: 1px solid var(--border-color); }
+        th { background: #1c2128; color: var(--accent-blue); font-weight: 600; }
+        tr:hover { background: rgba(88,166,255,0.08); }
 
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border: 1px solid var(--border-color);
-        }
-
-        th {
-            background: #1c2128;
-            color: var(--accent-blue);
-            font-weight: 600;
-        }
-
-        tr:hover {
-            background: rgba(88, 166, 255, 0.1);
-        }
-
-        /* Blockquotes */
+        /* ── Blockquote ── */
         blockquote {
             border-left: 4px solid var(--accent-blue);
-            padding-left: 1rem;
+            background: rgba(88,166,255,0.06);
             margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
             color: var(--text-secondary);
             font-style: italic;
         }
 
-        /* Links */
-        a {
-            color: var(--accent-blue);
+        /* ── Links ── */
+        .main-content a {
+            color: #58a6ff;
             text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.2s;
+            border-bottom: 1px dashed rgba(88,166,255,0.5);
+            transition: all 0.2s;
+        }
+        .main-content a:hover { color: #79c0ff; border-bottom: 1px solid #79c0ff; }
+
+        /* ── HR ── */
+        hr { border: none; border-top: 2px solid var(--border-color); margin: 3rem 0; }
+
+        /* ── Images ── */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
         }
 
-        a:hover {
-            border-bottom-color: var(--accent-blue);
+        /* ── Yellow Highlight ── */
+        mark.yellow-highlight {
+            background-color: rgba(253,224,71,0.2) !important;
+            color: #fde047 !important;
+            padding: 0.15em 0.4em;
+            border-radius: 4px;
+            font-weight: 600;
+            box-shadow: 0 0 8px rgba(253,224,71,0.1);
         }
 
-        /* Horizontal Rule */
-        hr {
-            border: none;
-            border-top: 2px solid var(--border-color);
-            margin: 3rem 0;
-        }
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
 
-        /* CRITICAL PRINT STYLES */
+        /* ══════════════════════════════════════
+           CRITICAL PRINT / PDF STYLES
+        ══════════════════════════════════════ */
         @media print {
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
                 color-adjust: exact !important;
             }
-
-            body {
-                margin: 0;
-                padding: 0;
-            }
+            body { margin: 0; padding: 0; }
 
             .print-wrapper {
                 background-color: #0f1115 !important;
@@ -336,205 +341,227 @@
                 print-color-adjust: exact !important;
                 min-height: 100vh;
                 width: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                margin: 0;
-                padding: 0;
+                margin: 0; padding: 0;
             }
 
             .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th {
                 color: #ffffff !important;
             }
 
-            pre {
-                border: 1px solid #444;
-                page-break-inside: avoid;
+            pre { border: 1px solid #444; page-break-inside: avoid; }
+
+            .sidebar, .copy-btn, .window-controls, #loader { display: none !important; }
+
+            .layout { display: block; }
+            .main-content { padding: 2rem !important; margin: 0 auto; max-width: 100%; }
+            a { text-decoration: none !important; border-bottom: none !important; }
+
+            /* Each module starts on a fresh page */
+            h2.module-section { page-break-before: always; margin-top: 0 !important; }
+
+            /* Prevent orphan headers */
+            h1, h2, h3, h4, h5, h6 { page-break-after: avoid; }
+
+            /* Keep blocks together */
+            pre, blockquote, table, img { page-break-inside: avoid; }
+
+            mark.yellow-highlight {
+                background-color: #fff000 !important;
+                color: #000000 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                box-shadow: none !important;
             }
-
-            .sidebar, .copy-btn, .window-controls, #loader {
-                display: none !important;
-            }
-
-            .layout {
-                display: block;
-            }
-
-            .main-content {
-                padding: 2rem !important;
-                margin: 0 auto;
-                max-width: 100%;
-            }
-
-            a {
-                text-decoration: none !important;
-                border-bottom: none !important;
-            }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-blue);
         }
     </style>
 </head>
 <body>
-    <div id="loader">
-        <i class="fas fa-spinner fa-spin"></i> Loading Notes...
+
+<div id="loader">
+    <i class="fas fa-shield-halved fa-lg"></i>
+    <span>Loading Burp Suite Notes…</span>
+    <div class="loader-bar"></div>
+</div>
+
+<div class="print-wrapper">
+    <div class="layout">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-title"><i class="fas fa-book-open"></i> &nbsp;Contents</div>
+            <ul id="toc"></ul>
+        </nav>
+        <main class="main-content" id="content-area"></main>
     </div>
+</div>
 
-    <div class="print-wrapper">
-        <div class="layout">
-            <nav class="sidebar" id="sidebar">
-                <h3><i class="fas fa-book"></i> Table of Contents</h3>
-                <ul id="toc"></ul>
-            </nav>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const contentArea = document.getElementById('content-area');
+    const tocArea     = document.getElementById('toc');
+    const loader      = document.getElementById('loader');
 
-            <main class="main-content" id="content-area">
-                <!-- Markdown content will be rendered here -->
-            </main>
-        </div>
-    </div>
+    fetch("Burpsuite_Notes.md")
+        .then(response => {
+            if (!response.ok && response.status !== 0) throw new Error("Failed to load markdown file");
+            return response.text();
+        })
+        .then(markdown => {
 
-    <script>
-        document.addEventListener("DOMContentLoaded", async () => {
-            const contentArea = document.getElementById('content-area');
-            const tocArea = document.getElementById('toc');
-            const loader = document.getElementById('loader');
+            // ── 1. Pre-process ──────────────────────────────────────────
+            // Catch explicit module headers: "# Module 1...", "## Module 2...", etc.
+            let processed = markdown.replace(/^#+\s*(?:.*?\s)?(Module\s+\d+|Section\s+\d+)(.*)/gim, '## MODULE_MARKER $1$2');
+            // Catch bare "Module 1: ..." lines
+            processed = processed.replace(/^\s*(Module\s+\d+.*)/gim, '## MODULE_MARKER $1');
+            // Convert h3/h4 into topic markers
+            processed = processed.replace(/^#{3,4}\s+(?!MODULE_MARKER)(.*)/gm, '### TOPIC_MARKER $1');
+            // Bold "1.1:" style numbering
+            processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
 
-            try {
-                // Fetch the Markdown file
-                const response = await fetch('Burpsuite_Notes.md');
-                if (!response.ok) throw new Error('Failed to load notes');
-                
-                let markdown = await response.text();
+            // ── 2. Renderer ─────────────────────────────────────────────
+            const renderer = new marked.Renderer();
 
-                // Pre-process Markdown
-                let processed = markdown.replace(/^\s*(Module\s+\d+(\.\d+)?:?)/gm, '## MODULE_MARKER $1');
-                processed = processed.replace(/^##\s+(Topic\s+\d+\.\d+:.*)/gm, '## TOPIC_MARKER $1');
-                processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
+            // Code blocks
+            renderer.code = function(code, language) {
+                const safeCode = code ? String(code) : '';
 
-                // Configure Renderer
-                const renderer = new marked.Renderer();
+                // Extract [[HL::text::HL]] before hljs
+                let hlCount = 0, hlMap = {};
+                let rawCode = safeCode.replace(/\[\[HL::(.*?)::HL\]\]/g, (_, p1) => {
+                    const key = `__HL_${hlCount}__`;
+                    hlMap[key] = p1;
+                    hlCount++;
+                    return key;
+                });
 
-                renderer.code = function(code, language) {
-                    const safeCode = code ? String(code) : '';
-                    let highlighted = safeCode;
-                    let validLang = language || 'plaintext';
+                let highlighted = rawCode;
+                if (language && hljs.getLanguage(language)) {
+                    try { highlighted = hljs.highlight(rawCode, { language }).value; }
+                    catch(e) { highlighted = hljs.highlightAuto(rawCode).value; }
+                } else {
+                    highlighted = hljs.highlightAuto(rawCode).value;
+                }
 
-                    if (language && hljs.getLanguage(language)) {
-                        try {
-                            highlighted = hljs.highlight(safeCode, { language: language }).value;
-                        } catch (e) {
-                            highlighted = hljs.highlightAuto(safeCode).value;
-                        }
-                    } else {
-                        highlighted = hljs.highlightAuto(safeCode).value;
-                    }
+                // Restore highlights
+                for (let i = 0; i < hlCount; i++) {
+                    const key = `__HL_${i}__`;
+                    highlighted = highlighted.replace(key, `<mark class="yellow-highlight">${hlMap[key]}</mark>`);
+                }
 
-                    const codeId = 'code-' + Math.random().toString(36).substr(2, 9);
-
-                    return `
-                    <pre class="mac-window">
-                        <div class="code-header">
-                            <div class="window-controls">
-                                <span class="control red"></span>
-                                <span class="control yellow"></span>
-                                <span class="control green"></span>
-                            </div>
-                            <button class="copy-btn" onclick="copyCode('${codeId}')">
-                                <i class="fas fa-copy"></i> Copy
-                            </button>
+                const codeId = 'code-' + Math.random().toString(36).substr(2, 9);
+                return `<pre class="mac-window">
+                    <div class="code-header">
+                        <div class="window-controls">
+                            <span class="control red"></span>
+                            <span class="control yellow"></span>
+                            <span class="control green"></span>
                         </div>
-                        <code id="${codeId}" class="hljs language-${validLang}">${highlighted}</code>
-                    </pre>`;
-                };
-
-                renderer.heading = function(text, level) {
-                    const safeText = text ? String(text) : '';
-                    const id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
-
-                    if (safeText.startsWith('MODULE_MARKER ')) {
-                        const cleanText = safeText.replace('MODULE_MARKER ', '');
-                        const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
-                        return `<h${level} class="module-section" id="${cleanId}">${cleanText}</h${level}>`;
-                    }
-
-                    if (safeText.startsWith('TOPIC_MARKER ')) {
-                        const cleanText = safeText.replace('TOPIC_MARKER ', '');
-                        const cleanId = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
-                        return `<h${level} class="topic-section" id="${cleanId}">${cleanText}</h${level}>`;
-                    }
-
-                    return `<h${level} id="${id}">${safeText}</h${level}>`;
-                };
-
-                // Render Markdown
-                marked.setOptions({
-                    renderer: renderer,
-                    breaks: true,
-                    gfm: true
-                });
-
-                contentArea.innerHTML = marked.parse(processed);
-
-                // Generate TOC
-                const headings = contentArea.querySelectorAll('h1, h2, h3');
-                headings.forEach(heading => {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.href = '#' + heading.id;
-                    a.textContent = heading.textContent;
-                    a.style.paddingLeft = (parseInt(heading.tagName.substring(1)) - 1) * 1 + 'rem';
-                    li.appendChild(a);
-                    tocArea.appendChild(li);
-                });
-
-                // Hide loader
-                loader.style.display = 'none';
-
-            } catch (error) {
-                contentArea.innerHTML = `
-                    <div style="text-align: center; padding: 3rem;">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #ff5f56;"></i>
-                        <h2>Error Loading Notes</h2>
-                        <p>Make sure <code>Burpsuite_Notes.md</code> is in the same directory as this HTML file.</p>
-                        <p style="color: #ff5f56;">${error.message}</p>
+                        <button class="copy-btn" onclick="copyCode('${codeId}')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
                     </div>
-                `;
-                loader.style.display = 'none';
-            }
-        });
+                    <code id="${codeId}" class="hljs language-${language || 'plaintext'}">${highlighted}</code>
+                </pre>`;
+            };
 
-        // Copy Code Function
-        function copyCode(codeId) {
-            const codeBlock = document.getElementById(codeId);
-            const text = codeBlock.textContent;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = event.target.closest('.copy-btn');
-                const originalHTML = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                setTimeout(() => {
-                    btn.innerHTML = originalHTML;
-                }, 2000);
-            }).catch(err => {
-                alert('Failed to copy code');
+            // Headings
+            renderer.heading = function(text, level) {
+                const safeText = text ? String(text) : '';
+                let id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+                let classStr = '', cleanText = safeText;
+
+                if (safeText.includes('MODULE_MARKER ')) {
+                    cleanText = safeText.replace(/MODULE_MARKER /g, '');
+                    id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                    classStr = ' class="module-section"';
+                    level = 2;
+                } else if (safeText.includes('TOPIC_MARKER ')) {
+                    cleanText = safeText.replace(/TOPIC_MARKER /g, '');
+                    id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                    classStr = ' class="topic-section"';
+                    level = 3;
+                }
+
+                return `<h${level}${classStr} id="${id}">${cleanText}</h${level}>`;
+            };
+
+            // Alert blockquotes
+            renderer.blockquote = function(quote) {
+                const text = quote ? String(quote) : '';
+                let color = '#58a6ff', bg = 'rgba(88,166,255,0.08)', title = 'Note', icon = 'fa-info-circle';
+                let isAlert = false;
+
+                if      (text.includes('[!WARNING]'))              { color='#d29922'; bg='rgba(210,153,34,0.1)';   title='Warning';   icon='fa-triangle-exclamation'; isAlert=true; }
+                else if (text.includes('[!IMPORTANT]'))            { color='#8957e5'; bg='rgba(137,87,229,0.1)';   title='Important'; icon='fa-circle-exclamation';   isAlert=true; }
+                else if (text.includes('[!TIP]')||text.includes('[!SUCCESS]')) { color='#238636'; bg='rgba(35,134,54,0.1)'; title='Tip'; icon='fa-lightbulb'; isAlert=true; }
+                else if (text.includes('[!CAUTION]')||text.includes('[!DANGER]')) { color='#da3633'; bg='rgba(218,54,51,0.1)'; title='Caution'; icon='fa-skull-crossbones'; isAlert=true; }
+                else if (text.includes('[!NOTE]'))                 { isAlert=true; }
+
+                if (isAlert) {
+                    const cleanText = text.replace(/(<p>)?\s*\[!(NOTE|WARNING|IMPORTANT|TIP|SUCCESS|CAUTION|DANGER)\]\s*(<\/p>|<br>)?/i, '<p>');
+                    return `<div style="border-left:4px solid ${color};background:${bg};padding:1rem 1.5rem;margin:1.5rem 0;border-radius:0 8px 8px 0;page-break-inside:avoid;">
+                        <div style="color:${color};font-weight:bold;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem;font-family:'Outfit',sans-serif;">
+                            <i class="fa-solid ${icon}"></i> ${title}
+                        </div>
+                        <div style="color:var(--text-secondary);margin:0;">${cleanText}</div>
+                    </div>`;
+                }
+                return `<blockquote>${text}</blockquote>`;
+            };
+
+            // ── 3. Render ────────────────────────────────────────────────
+            marked.setOptions({ renderer, breaks: true, gfm: true });
+            let finalHtml = marked.parse(processed);
+
+            // Restore any remaining [[HL::...::HL]] outside code blocks
+            finalHtml = finalHtml.replace(/\[\[HL::(.*?)::HL\]\]/g, '<mark class="yellow-highlight">$1</mark>');
+
+            contentArea.innerHTML = finalHtml;
+
+            // ── 4. Build TOC ─────────────────────────────────────────────
+            contentArea.querySelectorAll('h1, h2, h3').forEach(h => {
+                const li = document.createElement('li');
+                const a  = document.createElement('a');
+                a.href = '#' + h.id;
+                a.textContent = h.textContent;
+                a.className = 'toc-' + h.tagName.toLowerCase();
+                li.appendChild(a);
+                tocArea.appendChild(li);
             });
-        }
-    </script>
+
+            // ── 5. Hide loader ───────────────────────────────────────────
+            loader.style.opacity = '0';
+            loader.style.transition = 'opacity 0.4s';
+            setTimeout(() => loader.style.display = 'none', 400);
+        })
+        .catch(err => {
+            contentArea.innerHTML = `
+                <div style="text-align:center;padding:4rem 2rem;">
+                    <i class="fas fa-triangle-exclamation" style="font-size:3rem;color:#ff5f56;"></i>
+                    <h2 style="margin-top:1rem;">Error Loading Notes</h2>
+                    <p>Make sure <code>Burpsuite_Notes.md</code> is in the same folder as this HTML file.</p>
+                    <p style="color:#ff5f56;margin-top:0.5rem;">${err.message}</p>
+                    <p style="margin-top:1rem;font-size:0.9rem;opacity:0.7;">Tip: Open via a local server (e.g. VS Code Live Server) to avoid CORS issues.</p>
+                </div>`;
+            loader.style.display = 'none';
+        });
+});
+
+function copyCode(codeId) {
+    const el = document.getElementById(codeId);
+    navigator.clipboard.writeText(el.textContent).then(() => {
+        const btn = document.querySelector(`[onclick="copyCode('${codeId}')"]`);
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        btn.style.background = '#238636';
+        btn.style.color = '#fff';
+        btn.style.borderColor = '#238636';
+        setTimeout(() => {
+            btn.innerHTML = orig;
+            btn.style.background = '';
+            btn.style.color = '';
+            btn.style.borderColor = '';
+        }, 2000);
+    }).catch(() => alert('Copy failed'));
+}
+</script>
 </body>
 </html>
