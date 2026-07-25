@@ -230,6 +230,11 @@ Notes Guru code blocks start with a version comment line like:
 ```
 This is the first line of the code block and is regular code content — highlight normally if the term appears there.
 
+### Rule 31 — MULTI-PARAGRAPH / MULTI-BULLET TERMS
+If a requested term is long and spans across multiple bullet points, paragraphs, or structural elements in the document, DO NOT wrap the entire block in a single `[[HL::` and `::HL]]` tag if it wraps Markdown markers. Instead, apply the tags individually to the text **inside** each bullet point or paragraph.
+- ❌ `[[HL::- Bullet 1\n- Bullet 2::HL]]` — FORBIDDEN (breaks list syntax)
+- ✅ `- [[HL::Bullet 1::HL]]\n- [[HL::Bullet 2::HL]]` — CORRECT
+
 ---
 
 ## 🔄 PROCESSING ORDER (Follow This Exactly)
