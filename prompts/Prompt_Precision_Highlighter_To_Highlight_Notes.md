@@ -235,6 +235,10 @@ If a requested term is long and spans across multiple bullet points, paragraphs,
 - ❌ `[[HL::- Bullet 1\n- Bullet 2::HL]]` — FORBIDDEN (breaks list syntax)
 - ✅ `- [[HL::Bullet 1::HL]]\n- [[HL::Bullet 2::HL]]` — CORRECT
 
+### Rule 32 — FORMATTING-AGNOSTIC MATCHING (Tolerate Restructuring)
+Sometimes the user's requested term is a single long paragraph, but in the Markdown document, it has been restructured into headers, bullet points, or split across newlines (e.g., `Step 2: Intercept...` becomes `### Step 2: Intercept... \n - Bullet`). 
+You must recognize that this is the SAME content. **Ignore added markdown characters, bullet points, and newlines when searching for the term.** Once you find the logical match, apply the highlights carefully according to Rule 31.
+
 ---
 
 ## 🔄 PROCESSING ORDER (Follow This Exactly)

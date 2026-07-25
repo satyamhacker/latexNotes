@@ -11452,13 +11452,13 @@ Intercept karne ke liye:
 - Burp proxy on karo, target website par kisi feature ko use karo jo WebSocket use karta ho (chat, live updates).  
 - **Proxy → WebSockets history** mein check karo – wahan saare messages dikhenge.::HL]]
 
-### Step 2: Intercept WebSocket messages
-- **Proxy → Intercept → WebSocket** sub-tab par jao.  
-- **"Intercept WebSocket messages"** checkbox tick karo.  
-- Ab jab bhi message aayega, Burp rok lega. Tum message modify kar ke **Forward** kar sakte ho, ya **Drop**.
+[[HL::### Step 2: Intercept WebSocket messages::HL]]
+- [[HL::**Proxy → Intercept → WebSocket** sub-tab par jao.::HL]]  
+- [[HL::**"Intercept WebSocket messages"** checkbox tick karo.::HL]]  
+- [[HL::Ab jab bhi message aayega, Burp rok lega. Tum message modify kar ke **Forward** kar sakte ho, ya **Drop**.::HL]]
 
-### Step 3: Modify message in real-time
-- Maan lo chat app hai. Tum message bhej rahe ho "hello".  
+[[HL::### Step 3: Modify message in real-time::HL]]
+- [[HL::Maan lo chat app hai. Tum message bhej rahe ho "hello".::HL]]  
 - Burp ne rok liya. Tum message change kar do "hello<script>alert(1)</script>" – [[HL::XSS payload.  ::HL]]
 - [[HL::Forward kar do. Agar server ne reflect kiya ya kisi aur user ko dikhaya, toh XSS ho sakta hai.::HL]]
 
