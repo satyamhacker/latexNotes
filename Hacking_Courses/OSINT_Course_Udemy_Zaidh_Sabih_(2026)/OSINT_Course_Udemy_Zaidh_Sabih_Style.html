@@ -33,7 +33,7 @@
             margin: 0;
             padding: 0;
         }
-
+        
         #loader {
             position: fixed;
             top: 50%;
@@ -52,8 +52,8 @@
             -webkit-text-fill-color: transparent;
             font-size: 3rem;
             border-bottom: 3px solid var(--border-color);
-            padding-bottom: 0.5rem;
             margin-top: 2rem;
+            padding-bottom: 0.5rem;
         }
 
         h2 {
@@ -65,26 +65,54 @@
             padding-bottom: 0.5rem;
         }
 
-        h3 {
-            color: #e6edf3;
-            font-size: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        /* Topic & Module Sections - Big Bold Blue */
-        h2.topic-section, h2.module-section {
+        /* Module Sections - Big Bold Blue */
+        .module-section {
             font-family: 'Outfit', sans-serif;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 800;
             color: #4facfe;
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            border-left: 5px solid #4facfe;
+            border-left: 6px solid #4facfe;
             padding-left: 1rem;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Topic Sections - Distinct Vibrant Gradient */
+        .topic-section {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); /* Orange-ish gradient */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-left: 4px solid #fda085;
+            padding-left: 1rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            padding-top: 0.2rem;
+            padding-bottom: 0.2rem;
+            background-color: rgba(253, 160, 133, 0.05); /* very subtle background for depth */
+            border-radius: 0 8px 8px 0;
+            display: inline-block; /* Makes background fit the text width + padding */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Ensure normal H3 looks standard */
+        h3:not(.topic-section) {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.4rem;
         }
 
         /* Mac-Style Code Blocks */
@@ -109,7 +137,7 @@
             align-items: center;
         }
 
-        /* Dots helper */
+        /* Dots helper (add these classes too) */
         .control { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px; }
         .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
 
@@ -133,16 +161,24 @@
             font-family: 'Fira Code', monospace;
             white-space: pre-wrap !important; 
             word-wrap: break-word !important;
-            font-size: 0.9rem;
+        }
+
+        /* Inline Code Styling */
+        p code, li code, td code {
+            background-color: rgba(88, 166, 255, 0.15);
+            color: #79c0ff;
             padding: 0.2em 0.4em;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-family: 'Fira Code', monospace;
+            border: 1px solid rgba(88, 166, 255, 0.2);
         }
         
         pre code {
             padding: 1.5rem !important;
             background: transparent;
             display: block;
+            border: none;
         }
 
         table {
@@ -172,8 +208,8 @@
 
         /* Sidebar */
         .sidebar {
-            width: 300px;
-            height: 100vh;
+            width: 260px;
+            min-height: 100vh;
             background: var(--bg-secondary);
             border-right: 1px solid var(--border-color);
             padding: 2rem 1rem;
@@ -189,17 +225,17 @@
             margin-top: 0;
             padding-bottom: 1rem;
             border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
         }
 
         .sidebar a {
             display: block;
             color: var(--text-secondary);
             text-decoration: none;
-            padding: 0.5rem 0.75rem;
+            padding: 0.4rem 0.75rem;
             border-radius: 6px;
-            font-size: 0.85rem;
+            font-size: 0.875rem;
             transition: background 0.2s, color 0.2s;
-            line-height: 1.4;
             margin-bottom: 2px;
         }
 
@@ -218,8 +254,41 @@
             padding: 3rem 4rem;
             max-width: 900px;
             margin: 0 auto;
-            line-height: 1.6;
+            line-height: 1.7;
             font-size: 1.05rem;
+        }
+
+        /* Content Links */
+        .main-content a {
+            color: #58a6ff;
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(88, 166, 255, 0.5);
+            transition: all 0.2s;
+        }
+        .main-content a:hover {
+            color: #79c0ff;
+            border-bottom: 1px solid #79c0ff;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Task Lists / Checkboxes */
+        input[type="checkbox"] {
+            accent-color: #58a6ff;
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+            position: relative;
+            top: 2px;
         }
 
         /* Blockquote */
@@ -231,21 +300,6 @@
             border-radius: 0 8px 8px 0;
             color: var(--text-secondary);
             font-style: italic;
-        }
-        
-        img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-        
-        a {
-            color: var(--accent-blue);
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
         }
 
         /* CRITICAL PRINT STYLES - DO NOT MODIFY */
@@ -268,7 +322,7 @@
             }
 
             /* Force white text for readability */
-            .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th, blockquote, a {
+            .main-content, p, li, h1, h2, h3, h4, h5, h6, td, th {
                 color: #ffffff !important;
             }
 
@@ -289,13 +343,39 @@
             .main-content { padding: 2rem !important; margin: 0 auto; max-width: 100%; }
             
             a { text-decoration: none !important; border-bottom: none !important; }
-            
-            /* Avoid page breaks inside important elements */
-            h1, h2, h3, img, table, blockquote, pre {
-                page-break-inside: avoid;
+
+            /* PDF Page Breaking Rules */
+            .module-section {
+                page-break-before: always; /* Each new section starts on a fresh page */
+                margin-top: 0 !important;
             }
-            h1, h2 {
-                page-break-after: avoid;
+            
+            h1, h2, h3, h4, h5, h6 {
+                page-break-after: avoid; /* Prevent header at the bottom of a page */
+            }
+            
+            pre, blockquote, table, img {
+                page-break-inside: avoid; /* Prevent code blocks and tables from splitting across pages */
+            }
+        }
+
+        /* 🟡 PREMIUM HIGHLIGHT STYLES */
+        mark.yellow-highlight {
+            background-color: rgba(253, 224, 71, 0.2) !important;
+            color: #fde047 !important;
+            padding: 0.15em 0.4em;
+            border-radius: 4px;
+            font-weight: 600;
+            box-shadow: 0 0 8px rgba(253, 224, 71, 0.1);
+        }
+
+        @media print {
+            mark.yellow-highlight {
+                background-color: #fff000 !important;
+                color: #000000 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                box-shadow: none !important;
             }
         }
     </style>
@@ -325,22 +405,29 @@
             const loader = document.getElementById("loader");
             const sidebar = document.getElementById("sidebar");
 
-            // Fetch the Markdown file (must be served via HTTP server to avoid CORS issues)
+            // Fetch MD logic (with local file support)
             fetch("OSINT_Course_Udemy_Zaidh_Sabih.md")
                 .then(response => {
-                    if (!response.ok) throw new Error("File not found or network error.");
+                    // Support local file:/// protocols where status is 0
+                    if (!response.ok && response.status !== 0) {
+                        throw new Error("Failed to load markdown file");
+                    }
                     return response.text();
                 })
                 .then(markdown => {
+            
                     // Pre-process Markdown for OSINT Course format
                     let processed = markdown;
                     
                     // Convert H1 to MODULE_MARKER (so it can be identified for TOC)
-                    processed = processed.replace(/^#\s+(.*)/gm, '# MODULE_MARKER $1');
+                    processed = processed.replace(/^#\s+(.*)/gm, '## MODULE_MARKER $1');
                     
                     // The markdown skips H2 and uses H3 for everything.
-                    // Convert H3 to H2 TOPIC_MARKER to fix the skipped H2 level and apply topic styling
-                    processed = processed.replace(/^###\s+(.*)/gm, '## TOPIC_MARKER $1');
+                    // Convert H3 to TOPIC_MARKER to apply topic styling
+                    processed = processed.replace(/^###\s+(.*)/gm, '### TOPIC_MARKER $1');
+
+                    // Converts "1.1:" to bold for better readability
+                    processed = processed.replace(/^\s*(\d+\.\d+:)/gm, '**$1**');
 
                     // Set up TOC array
                     const toc = [];
@@ -348,17 +435,34 @@
                     // Configure Renderer
                     const renderer = new marked.Renderer();
                     
-                    // Code Blocks Renderer
+                    // Safety check: Cast code to string to avoid [object Object] crash
                     renderer.code = function(code, language) {
                         const safeCode = code ? String(code) : '';
-                        let highlighted = safeCode;
                         
+                        // 🟡 1. Extract highlights BEFORE hljs runs to protect them
+                        let hlCount = 0;
+                        let hlMap = {};
+                        let rawCode = safeCode.replace(/\[\[HL::(.*?)::HL\]\]/g, function(match, p1) {
+                            let key = `__HL_${hlCount}__`;
+                            hlMap[key] = p1;
+                            hlCount++;
+                            return key;
+                        });
+
+                        // 2. Robust highlighting with Auto-detection
+                        let highlighted = rawCode;
                         if (language && hljs.getLanguage(language)) {
                             try {
-                                highlighted = hljs.highlight(safeCode, { language: language }).value;
-                            } catch (e) { highlighted = hljs.highlightAuto(safeCode).value; }
+                                highlighted = hljs.highlight(rawCode, { language: language }).value;
+                            } catch (e) { highlighted = hljs.highlightAuto(rawCode).value; }
                         } else {
-                            highlighted = hljs.highlightAuto(safeCode).value;
+                            highlighted = hljs.highlightAuto(rawCode).value;
+                        }
+                        
+                        // 🟡 3. Restore highlights as HTML tags safely
+                        for (let i = 0; i < hlCount; i++) {
+                            let key = `__HL_${i}__`;
+                            highlighted = highlighted.replace(key, `<mark class="yellow-highlight">${hlMap[key]}</mark>`);
                         }
                         
                         return `
@@ -375,35 +479,79 @@
                         </pre>`;
                     };
                     
-                    // Headings Renderer
                     renderer.heading = function(text, level) {
                         const safeText = text ? String(text) : '';
+                        let id = safeText.toLowerCase().replace(/[^\w]+/g, '-');
+                        let classStr = '';
                         let cleanText = safeText;
-                        let cssClass = '';
                         
-                        if (safeText.startsWith('MODULE_MARKER ')) {
-                            cleanText = safeText.replace('MODULE_MARKER ', '');
-                            // H1 gets default styling, we don't need module-section class for level 1
-                            if (level > 1) { cssClass = ' class="module-section"'; }
-                        } else if (safeText.startsWith('TOPIC_MARKER ')) {
-                            cleanText = safeText.replace('TOPIC_MARKER ', '');
-                            cssClass = ' class="topic-section"';
-                        }
-                        
-                        const id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
-                        
-                        // Add to TOC
-                        if (level === 1 || safeText.startsWith('TOPIC_MARKER ')) {
+                        if (safeText.includes('MODULE_MARKER ')) {
+                            cleanText = safeText.replace(/MODULE_MARKER /g, '');
+                            id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                            classStr = ' class="module-section"';
+                            level = 2; // enforce level 2
+                            
                             const textContent = cleanText.replace(/<[^>]+>/g, '');
-                            toc.push({ level: level === 1 ? 1 : 2, id, text: textContent });
+                            toc.push({ level: 1, id, text: textContent });
+                        }
+                        else if (safeText.includes('TOPIC_MARKER ')) {
+                            cleanText = safeText.replace(/TOPIC_MARKER /g, '');
+                            id = cleanText.toLowerCase().replace(/[^\w]+/g, '-');
+                            classStr = ' class="topic-section"';
+                            level = 3; // enforce level 3
+                            
+                            const textContent = cleanText.replace(/<[^>]+>/g, '');
+                            toc.push({ level: 2, id, text: textContent });
+                        }
+                        else {
+                            if (level === 1) {
+                                const textContent = cleanText.replace(/<[^>]+>/g, '');
+                                toc.push({ level: 1, id, text: textContent });
+                            }
                         }
                         
-                        return `<h${level}${cssClass} id="${id}">${cleanText}</h${level}>`;
+                        return `<h${level}${classStr} id="${id}">${cleanText}</h${level}>`;
                     };
 
-                    // Render HTML
-                    contentArea.innerHTML = marked.parse(processed, { renderer: renderer });
+                    // GitHub-Style Alerts (Callouts)
+                    renderer.blockquote = function(quote) {
+                        const text = quote ? String(quote) : '';
+                        let color = '#58a6ff'; // Default Blue (Note)
+                        let bg = 'rgba(88, 166, 255, 0.08)';
+                        let title = 'Note';
+                        let icon = 'fa-info-circle';
+                        
+                        let isAlert = false;
+                        
+                        if (text.includes('[!WARNING]')) { color = '#d29922'; bg = 'rgba(210, 153, 34, 0.1)'; title = 'Warning'; icon = 'fa-triangle-exclamation'; isAlert = true; }
+                        else if (text.includes('[!IMPORTANT]')) { color = '#8957e5'; bg = 'rgba(137, 87, 229, 0.1)'; title = 'Important'; icon = 'fa-circle-exclamation'; isAlert = true; }
+                        else if (text.includes('[!TIP]') || text.includes('[!SUCCESS]')) { color = '#238636'; bg = 'rgba(35, 134, 54, 0.1)'; title = 'Tip'; icon = 'fa-lightbulb'; isAlert = true; }
+                        else if (text.includes('[!CAUTION]') || text.includes('[!DANGER]')) { color = '#da3633'; bg = 'rgba(218, 54, 51, 0.1)'; title = 'Caution'; icon = 'fa-skull-crossbones'; isAlert = true; }
+                        else if (text.includes('[!NOTE]')) { isAlert = true; }
+                        
+                        if (isAlert) {
+                            // Strip out the tag whether it's wrapped in a <p> or standalone
+                            const cleanText = text.replace(/(<p>)?\s*\[!(NOTE|WARNING|IMPORTANT|TIP|SUCCESS|CAUTION|DANGER)\]\s*(<\/p>|<br>)?/i, '<p>');
+                            return `<div style="border-left: 4px solid ${color}; background: ${bg}; padding: 1rem 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; page-break-inside: avoid;">
+                                <div style="color: ${color}; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; font-family: 'Outfit', sans-serif;">
+                                    <i class="fa-solid ${icon}"></i> ${title}
+                                </div>
+                                <div style="color: var(--text-secondary); margin: 0;">${cleanText}</div>
+                            </div>`;
+                        }
+                        
+                        // Default blockquote behavior
+                        return `<blockquote>${text}</blockquote>`;
+                    };
+
+                    // Render
+                    let finalHtml = marked.parse(processed, { renderer: renderer });
                     
+                    // Replace remaining [[HL::text::HL]] outside of code blocks
+                    finalHtml = finalHtml.replace(/\[\[HL::(.*?)::HL\]\]/g, '<mark class="yellow-highlight">$1</mark>');
+                    
+                    contentArea.innerHTML = finalHtml;
+
                     // Build TOC HTML
                     let tocHTML = '<h2>Table of Contents</h2>';
                     toc.forEach(item => {
@@ -413,13 +561,13 @@
                         tocHTML += `<a href="#${item.id}" ${style}>${item.text}</a>`;
                     });
                     sidebar.innerHTML = tocHTML;
-                    
+
                     // Hide Loader
                     loader.style.display = 'none';
                 })
                 .catch(err => {
-                    console.error("Error loading markdown:", err);
-                    loader.innerText = "Error loading notes. Ensure you are running a local web server (e.g., Live Server).";
+                    console.error(err);
+                    loader.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes (Is CORS blocking local files?)';
                 });
         });
 
