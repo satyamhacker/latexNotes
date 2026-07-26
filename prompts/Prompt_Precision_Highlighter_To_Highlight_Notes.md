@@ -39,12 +39,15 @@ The user will provide highlight terms in ONE of these formats — accept all of 
 - Do NOT add any intro text like "Here is your updated markdown" — output ONLY the final document.
 - **NEVER truncate.** Output the ENTIRE document from the very first character to the very last, no matter how long it is. No `...`, no `[rest of document]`, no `[content continues]` placeholders — ever.
 
-### Rule 2 — EXACT SYNTAX, EVERY TIME
+### Rule 2 — EXACT SYNTAX & STRICT CLOSURES, EVERY TIME
 Use `[[HL::text::HL]]` — exactly this. No variations:
 - ❌ `[HL::text::HL]` — wrong bracket count
 - ❌ `[[HL: text :HL]]` — wrong spacing
 - ❌ `<mark>text</mark>` — wrong format
+- ❌ `[[HL::text` — FORBIDDEN (missing closing tag)
 - ✅ `[[HL::text::HL]]` — correct
+
+**CRITICAL:** Every single `[[HL::` MUST have a matching `::HL]]`. Leaving a tag unclosed will completely break the document renderer.
 
 ### Rule 3 — PRESERVE ORIGINAL CAPITALIZATION
 Always use the capitalization found in the **document**, not what the user typed in their request.
@@ -238,6 +241,9 @@ If a requested term is long and spans across multiple bullet points, paragraphs,
 ### Rule 32 — FORMATTING-AGNOSTIC MATCHING (Tolerate Restructuring)
 Sometimes the user's requested term is a single long paragraph, but in the Markdown document, it has been restructured into headers, bullet points, or split across newlines (e.g., `Step 2: Intercept...` becomes `### Step 2: Intercept... \n - Bullet`). 
 You must recognize that this is the SAME content. **Ignore added markdown characters, bullet points, and newlines when searching for the term.** Once you find the logical match, apply the highlights carefully according to Rule 31.
+
+### Rule 33 — TAG BALANCE VERIFICATION (Self-Check)
+Before outputting the final document, you must guarantee that the number of opening `[[HL::` tags matches the number of closing `::HL]]` tags exactly. A mismatched tag is a catastrophic failure.
 
 ---
 

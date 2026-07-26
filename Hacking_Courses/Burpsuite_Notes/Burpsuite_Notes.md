@@ -1543,7 +1543,7 @@ Socho tum ek **mall ke security checkpost** par ho. Mall ke andar jaane se pehle
 - **Options:** Mall management ne kuch rules bana rakhe hain - "Sirf red bag walo ko rokna", "X-ray machine ko aise set karo", "Emergency exit ka kya karna hai". Ye saare settings **Options** mein define hote hain.
 
 ## 📖 3. Technical Definition (Interview Answer):
-[[HL::Proxy module ke ye chaar sections hain jo Burp Suite aur target web server ke beech hone wale saare interaction ko control, record, aur modify karte hain.
+[[HL::Proxy module ke ye chaar sections hain jo Burp Suite aur target web server ke beech hone wale saare interaction ko control, record, aur modify karte hain.::HL]]
 
 - **Intercept:** [[HL::Ek real-time traffic controller hai. Tum iska use karke browser aur server ke beech jaane wali har request (jaise "mujhe Facebook ka homepage chahiye") aur response (Facebook ka "ye lo homepage ka code") ko rok sakte ho, dekh sakte ho, badal sakte ho, aur phir aage bhej sakte ho.::HL]]
 - **HTTP History:** [[HL::Ek detailed logbook hai. Jab bhi tum koi website visit karte ho, uski saari information (URL, time, request type, server ka response code) yahan automatically save ho jaati hai. Tum baad mein ise dekh kar analysis kar sakte ho.::HL]]
