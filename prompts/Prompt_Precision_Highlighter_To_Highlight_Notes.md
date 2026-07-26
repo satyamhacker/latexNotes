@@ -39,12 +39,15 @@ The user will provide highlight terms in ONE of these formats — accept all of 
 - Do NOT add any intro text like "Here is your updated markdown" — output ONLY the final document.
 - **NEVER truncate.** Output the ENTIRE document from the very first character to the very last, no matter how long it is. No `...`, no `[rest of document]`, no `[content continues]` placeholders — ever.
 
-### Rule 2 — EXACT SYNTAX, EVERY TIME
+### Rule 2 — EXACT SYNTAX & STRICT CLOSURES, EVERY TIME
 Use `[[HL::text::HL]]` — exactly this. No variations:
 - ❌ `[HL::text::HL]` — wrong bracket count
 - ❌ `[[HL: text :HL]]` — wrong spacing
 - ❌ `<mark>text</mark>` — wrong format
+- ❌ `[[HL::text` — FORBIDDEN (missing closing tag)
 - ✅ `[[HL::text::HL]]` — correct
+
+**CRITICAL:** Every single `[[HL::` MUST have a matching `::HL]]`. Leaving a tag unclosed will completely break the document renderer.
 
 ### Rule 3 — PRESERVE ORIGINAL CAPITALIZATION
 Always use the capitalization found in the **document**, not what the user typed in their request.
@@ -229,6 +232,30 @@ Notes Guru code blocks start with a version comment line like:
 # ⚠️ Version verify karo — yeh Python 3.10+ pe tested hai
 ```
 This is the first line of the code block and is regular code content — highlight normally if the term appears there.
+
+### Rule 31 — MULTI-PARAGRAPH / MULTI-BULLET TERMS
+If a requested term is long and spans across multiple bullet points, paragraphs, or structural elements in the document, DO NOT wrap the entire block in a single `[[HL::` and `::HL]]` tag if it wraps Markdown markers. Instead, apply the tags individually to the text **inside** each bullet point or paragraph.
+- ❌ `[[HL::- Bullet 1\n- Bullet 2::HL]]` — FORBIDDEN (breaks list syntax)
+- ✅ `- [[HL::Bullet 1::HL]]\n- [[HL::Bullet 2::HL]]` — CORRECT
+
+### Rule 32 — FORMATTING-AGNOSTIC MATCHING (Tolerate Restructuring)
+Sometimes the user's requested term is a single long paragraph, but in the Markdown document, it has been restructured into headers, bullet points, or split across newlines (e.g., `Step 2: Intercept...` becomes `### Step 2: Intercept... \n - Bullet`). 
+You must recognize that this is the SAME content. **Ignore added markdown characters, bullet points, and newlines when searching for the term.** Once you find the logical match, apply the highlights carefully according to Rule 31.
+
+### Rule 33 — TAG BALANCE VERIFICATION (Self-Check)
+Before outputting the final document, you must guarantee that the number of opening `[[HL::` tags matches the number of closing `::HL]]` tags exactly. A mismatched tag is a catastrophic failure.
+
+### Rule 34 — ZOTERO PAGINATION SPLITS (Ignore PDF Tags)
+Sometimes a single continuous sentence in the document was split into two separate quotes in the user's input because of PDF page breaks (e.g., `...Tum request” ([pdf](zotero://...))\n\n“dekh sakte ho...`). You must recognize when a sentence is broken in half by Zotero tags. Mentally merge these broken quotes into a single continuous phrase (ignoring the `([pdf](zotero...))` tags and quotes between them) and highlight it as ONE single contiguous block in the document.
+
+### Rule 35 — FUZZY MATCHING (MISSING MIDDLE WORDS)
+Sometimes the user's requested term is missing words in the middle compared to the actual text in the document.
+For example, the document says: `my name is satyam singh`
+The user requests: `my name singh` (missing "is satyam" in the middle)
+You must recognize this as a match and NOT skip it. When you find the logical match in the document, you must highlight the **entire unbroken phrase** exactly as it appears in the document.
+- ✅ `[[HL::my name is satyam singh::HL]]` — CORRECT (Highlights the full unbroken text in the document)
+- ❌ `[[HL::my name::HL]] is satyam [[HL::singh::HL]]` — FORBIDDEN (Do not fragment the highlight)
+- ❌ `[[HL::my name singh::HL]]` — FORBIDDEN (Do not alter or replace the document's original text)
 
 ---
 
