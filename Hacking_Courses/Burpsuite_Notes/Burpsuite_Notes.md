@@ -1605,7 +1605,7 @@ Chalo, ab hum asli mein dekhte hain.
 
 5.  [[HL::Tum is request mein kuch bhi change kar sakte ho. Jaise `GET` ko `POST` kar do. Ya koi naya line add kar do.::HL]]
 6.  [[HL::Ab **"Forward"** button dabao. Ye request ab server ko chali jayegi.::HL]]
-7.  [[HL::Tum **"Drop"** bhi dabaa sakte ho, jisse request cancel ho::HL]] jayegi aur server tak nahi pahunchegi.
+7.  [[HL::Tum **"Drop"** bhi dabaa sakte ho, jisse request cancel ho jayegi aur server tak nahi pahunchegi.::HL]]
 
 [[HL::**Step 2: HTTP History Dekhna**::HL]]
 1.  [[HL::**Proxy → HTTP History** par jao.::HL]]
