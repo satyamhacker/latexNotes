@@ -248,6 +248,15 @@ Before outputting the final document, you must guarantee that the number of open
 ### Rule 34 — ZOTERO PAGINATION SPLITS (Ignore PDF Tags)
 Sometimes a single continuous sentence in the document was split into two separate quotes in the user's input because of PDF page breaks (e.g., `...Tum request” ([pdf](zotero://...))\n\n“dekh sakte ho...`). You must recognize when a sentence is broken in half by Zotero tags. Mentally merge these broken quotes into a single continuous phrase (ignoring the `([pdf](zotero...))` tags and quotes between them) and highlight it as ONE single contiguous block in the document.
 
+### Rule 35 — FUZZY MATCHING (MISSING MIDDLE WORDS)
+Sometimes the user's requested term is missing words in the middle compared to the actual text in the document.
+For example, the document says: `my name is satyam singh`
+The user requests: `my name singh` (missing "is satyam" in the middle)
+You must recognize this as a match and NOT skip it. When you find the logical match in the document, you must highlight the **entire unbroken phrase** exactly as it appears in the document.
+- ✅ `[[HL::my name is satyam singh::HL]]` — CORRECT (Highlights the full unbroken text in the document)
+- ❌ `[[HL::my name::HL]] is satyam [[HL::singh::HL]]` — FORBIDDEN (Do not fragment the highlight)
+- ❌ `[[HL::my name singh::HL]]` — FORBIDDEN (Do not alter or replace the document's original text)
+
 ---
 
 ## 🔄 PROCESSING ORDER (Follow This Exactly)
