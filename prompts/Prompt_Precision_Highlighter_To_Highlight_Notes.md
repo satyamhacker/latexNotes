@@ -111,10 +111,12 @@ Do NOT highlight text inside HTML tags or their attributes:
 - ❌ `<div class="[[HL::highlight::HL]]">` — FORBIDDEN
 - ✅ `<div class="highlight">[[HL::some text::HL]]</div>` — only visible content between tags
 
-### Rule 12 — CODE BLOCK LANGUAGE IDENTIFIERS: Off-Limits
-The language identifier on a fenced code block opening line must never be highlighted:
-- ❌ ` ```[[HL::bash::HL]] ` — FORBIDDEN, this breaks the renderer
-- ✅ Leave ` ```bash `, ` ```python `, ` ```text `, ` ```javascript ` etc. completely untouched
+### Rule 12 — CODE BLOCK DELIMITERS & IDENTIFIERS: Off-Limits
+The fenced code block opening and closing lines (the backticks) must NEVER be highlighted or wrapped:
+- ❌ ` ```[[HL::bash::HL]] ` — FORBIDDEN (highlighting the language)
+- ❌ `[[HL::```bash::HL]]` — FORBIDDEN (wrapping the opening backticks)
+- ❌ `[[HL::```::HL]]` — FORBIDDEN (wrapping the closing backticks)
+- ✅ Leave ` ```bash `, ` ```python `, and the closing ` ``` ` completely untouched. Highlight only the code *inside* the block.
 
 ### Rule 13 — MARKDOWN SYNTAX CHARACTERS: Never Break Structure
 Do NOT place highlight tags in positions that break Markdown syntax:
