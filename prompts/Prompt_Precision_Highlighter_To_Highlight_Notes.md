@@ -126,6 +126,8 @@ Do NOT place highlight tags in positions that break Markdown syntax:
 - ✅ `| [[HL::col::HL]] |` — correct, pipes are outside the tags
 - ❌ `[[HL::- [x]::HL]] Task done` — wrapping the checkbox syntax itself
 - ✅ `- [x] [[HL::Task done::HL]]` — wrap only the text content after the checkbox
+- ❌ `**[[HL::Bold Text:**::HL]]` — Straddling tags! HTML tags cannot start outside and end inside Markdown syntax.
+- ✅ `[[HL::**Bold Text:**::HL]]` — Correct, perfectly wrapping the entire markdown bold syntax.
 
 ### Rule 14 — SEPARATOR LINES: Off-Limits
 Notes use decorative separator lines like:
@@ -380,3 +382,4 @@ A [[HL::reverse shell::HL]] gives the attacker remote access.
 | Highlighting `[!WARNING]` alert tags | Forbidden unless explicitly requested |
 | Highlighting box-drawing characters in ASCII art (`╔`, `║`, `│`, `▼`) | Forbidden unless part of the requested term |
 | Re-wrapping already-highlighted `[[HL::...::HL]]` tags | Forbidden — double-wrapping breaks the renderer |
+| Straddling Markdown syntax (e.g. `**[[HL::Text:**::HL]]`) | Forbidden — HTML tags cannot start outside and end inside Markdown syntax. Wrap cleanly inside or outside. |

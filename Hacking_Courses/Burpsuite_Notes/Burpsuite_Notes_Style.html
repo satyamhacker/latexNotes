@@ -415,7 +415,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let hlCount = 0;
         let hlMap = {};
         let rawCode = safeCode.replace(/\[\[HL::(.*?)::HL\]\]/g, function(match, p1) {
-            let key = `__HL_${hlCount}__`;
+            let key = `HLTOKEN${hlCount}ENDHL`;
             hlMap[key] = p1;
             hlCount++;
             return key;
@@ -435,7 +435,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // 🟡 3. Restore highlights as HTML tags safely
         for (let i = 0; i < hlCount; i++) {
-            let key = `__HL_${i}__`;
+            let key = `HLTOKEN${i}ENDHL`;
             highlighted = highlighted.replace(key, `<mark class="yellow-highlight">${hlMap[key]}</mark>`);
         }
         
