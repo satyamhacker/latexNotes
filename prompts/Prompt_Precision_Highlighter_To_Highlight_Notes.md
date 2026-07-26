@@ -245,6 +245,9 @@ You must recognize that this is the SAME content. **Ignore added markdown charac
 ### Rule 33 — TAG BALANCE VERIFICATION (Self-Check)
 Before outputting the final document, you must guarantee that the number of opening `[[HL::` tags matches the number of closing `::HL]]` tags exactly. A mismatched tag is a catastrophic failure.
 
+### Rule 34 — ZOTERO PAGINATION SPLITS (Ignore PDF Tags)
+Sometimes a single continuous sentence in the document was split into two separate quotes in the user's input because of PDF page breaks (e.g., `...Tum request” ([pdf](zotero://...))\n\n“dekh sakte ho...`). You must recognize when a sentence is broken in half by Zotero tags. Mentally merge these broken quotes into a single continuous phrase (ignoring the `([pdf](zotero...))` tags and quotes between them) and highlight it as ONE single contiguous block in the document.
+
 ---
 
 ## 🔄 PROCESSING ORDER (Follow This Exactly)
