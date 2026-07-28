@@ -34998,6 +34998,9208 @@ See you in the next video.
 
 # Section 3: Basic_python_ai_powered
 
+WEBVTT
+
+1
+00:00:07.029 --> 00:00:09.710
+(Transcribed by TurboScribe. Go Unlimited to remove this message.) Guys, I am personally very excited to make
+
+2
+00:00:09.710 --> 00:00:11.010
+this video, and the reason for this is
+
+3
+00:00:11.010 --> 00:00:13.430
+that we are going to start AI-assisted
+
+4
+00:00:13.430 --> 00:00:14.630
+Python from here.
+
+5
+00:00:15.090 --> 00:00:17.050
+Now I promised you that I will teach
+
+6
+00:00:17.050 --> 00:00:20.690
+you AI-assisted programming if you do not
+
+7
+00:00:20.690 --> 00:00:21.630
+know coding at all.
+
+8
+00:00:22.010 --> 00:00:23.830
+Here you feel that coding is not made
+
+9
+00:00:23.830 --> 00:00:23.930
+for you.
+
+10
+00:00:24.330 --> 00:00:25.890
+So you watch this video carefully and listen
+
+11
+00:00:25.890 --> 00:00:28.370
+to me carefully because I will tell you
+
+12
+00:00:28.370 --> 00:00:30.870
+that what we will be doing throughout this
+
+13
+00:00:30.870 --> 00:00:32.670
+section and how it can prove game-changing
+
+14
+00:00:32.670 --> 00:00:33.870
+for data analysts.
+
+15
+00:00:35.910 --> 00:00:38.310
+If you feel or you have always felt
+
+16
+00:00:38.310 --> 00:00:40.390
+that I can't do coding, coding is not
+
+17
+00:00:40.390 --> 00:00:42.030
+made for me or I am not interested
+
+18
+00:00:42.030 --> 00:00:42.770
+in coding, I do not know so much
+
+19
+00:00:42.770 --> 00:00:44.130
+math, I do not want to learn so
+
+20
+00:00:44.130 --> 00:00:47.490
+many variables, data types, all these concepts, then
+
+21
+00:00:47.490 --> 00:00:48.350
+let me tell you something.
+
+22
+00:00:48.730 --> 00:00:50.310
+AI has changed the game.
+
+23
+00:00:50.470 --> 00:00:51.270
+Yes, you heard that right.
+
+24
+00:00:51.410 --> 00:00:52.630
+AI has changed the game.
+
+25
+00:00:53.130 --> 00:00:54.030
+Now the game has come in your favor.
+
+26
+00:00:54.030 --> 00:00:56.450
+The game has come in your favor because
+
+27
+00:00:56.450 --> 00:00:58.610
+by using AI, you can do all the
+
+28
+00:00:58.610 --> 00:01:01.470
+work that coders used to do when AI
+
+29
+00:01:01.470 --> 00:01:02.010
+was not there.
+
+30
+00:01:02.110 --> 00:01:03.510
+Listen to me carefully and I want to
+
+31
+00:01:03.510 --> 00:01:05.110
+set the expectations correctly.
+
+32
+00:01:05.710 --> 00:01:07.510
+I don't want to give you any false
+
+33
+00:01:07.510 --> 00:01:07.910
+hope.
+
+34
+00:01:08.230 --> 00:01:09.390
+I don't want to make any false promises
+
+35
+00:01:09.390 --> 00:01:09.590
+to you.
+
+36
+00:01:10.210 --> 00:01:10.970
+How much you will be able to do,
+
+37
+00:01:11.110 --> 00:01:12.090
+how much you will not be able to
+
+38
+00:01:12.090 --> 00:01:14.850
+do, what is throughout the section that we
+
+39
+00:01:14.850 --> 00:01:17.610
+are going to learn, what are the pros
+
+40
+00:01:17.610 --> 00:01:18.890
+and cons of this whole practice and what
+
+41
+00:01:18.890 --> 00:01:21.150
+we will do to avoid cons and what
+
+42
+00:01:21.150 --> 00:01:22.750
+we should do to take advantage of AI.
+
+43
+00:01:23.730 --> 00:01:24.710
+First of all, listen to one thing.
+
+44
+00:01:25.090 --> 00:01:25.890
+AI is a tool.
+
+45
+00:01:26.050 --> 00:01:26.830
+We will use it like a tool.
+
+46
+00:01:28.110 --> 00:01:29.190
+You should know the concepts.
+
+47
+00:01:29.430 --> 00:01:29.970
+I say it again.
+
+48
+00:01:30.150 --> 00:01:31.050
+You should know the concepts.
+
+49
+00:01:31.390 --> 00:01:32.490
+If you don't know how to run a
+
+50
+00:01:32.490 --> 00:01:34.710
+Python program, you won't be able to do
+
+51
+00:01:34.710 --> 00:01:34.810
+it.
+
+52
+00:01:34.910 --> 00:01:36.530
+Ask yourself if you can write such a
+
+53
+00:01:36.530 --> 00:01:39.370
+Python program that feeds you a snake game.
+
+54
+00:01:39.890 --> 00:01:40.410
+Maybe not.
+
+55
+00:01:40.530 --> 00:01:42.110
+If you have never learned Python, maybe its
+
+56
+00:01:42.110 --> 00:01:42.850
+answer will not be there.
+
+57
+00:01:43.230 --> 00:01:45.270
+But now with the help of AI, you
+
+58
+00:01:45.270 --> 00:01:46.130
+will be able to write the program.
+
+59
+00:01:46.830 --> 00:01:48.610
+That is, chatgbd will write the program for
+
+60
+00:01:48.610 --> 00:01:48.710
+you.
+
+61
+00:01:48.970 --> 00:01:50.850
+But to execute it, you will need a
+
+62
+00:01:50.850 --> 00:01:51.050
+brain.
+
+63
+00:01:51.050 --> 00:01:54.010
+And to build the same brain and skills,
+
+64
+00:01:55.010 --> 00:01:56.930
+we will work hard in this section.
+
+65
+00:01:57.150 --> 00:01:58.170
+Look, it will take effort.
+
+66
+00:01:58.310 --> 00:01:59.390
+I am not saying that it will not
+
+67
+00:01:59.390 --> 00:01:59.570
+take effort.
+
+68
+00:01:59.810 --> 00:02:00.370
+You will have to learn.
+
+69
+00:02:00.850 --> 00:02:01.850
+You will have to revise the concepts.
+
+70
+00:02:02.470 --> 00:02:03.550
+You will have to listen to me carefully.
+
+71
+00:02:04.090 --> 00:02:04.890
+You will have to follow along.
+
+72
+00:02:05.630 --> 00:02:06.570
+Let's move forward with this understanding.
+
+73
+00:02:07.610 --> 00:02:08.870
+Now look at my computer screen here.
+
+74
+00:02:08.990 --> 00:02:09.509
+What have I opened?
+
+75
+00:02:10.110 --> 00:02:12.870
+Yes, maybe you have already used this tool.
+
+76
+00:02:13.290 --> 00:02:14.730
+Maybe you know what this tool is.
+
+77
+00:02:14.750 --> 00:02:15.750
+This is chatgbd.
+
+78
+00:02:16.010 --> 00:02:17.590
+And chatgbd is something that does not need
+
+79
+00:02:17.590 --> 00:02:18.330
+an introduction.
+
+80
+00:02:18.330 --> 00:02:20.790
+But the thing that needs an introduction is
+
+81
+00:02:20.790 --> 00:02:20.970
+this.
+
+82
+00:02:21.170 --> 00:02:23.650
+At the time of recording this video, chatgbd
+
+83
+00:02:23.650 --> 00:02:28.070
+is giving you free access for 12 months.
+
+84
+00:02:28.290 --> 00:02:30.750
+It means that you can access GoPlan for
+
+85
+00:02:30.750 --> 00:02:31.830
+free for 12 months.
+
+86
+00:02:32.190 --> 00:02:33.250
+And there is a good chance that when
+
+87
+00:02:33.250 --> 00:02:34.490
+you are watching this video, this offer has
+
+88
+00:02:34.490 --> 00:02:34.710
+already gone.
+
+89
+00:02:35.210 --> 00:02:35.830
+That's fine.
+
+90
+00:02:35.930 --> 00:02:37.930
+There will always be a free version of
+
+91
+00:02:37.930 --> 00:02:38.550
+chatgbd.
+
+92
+00:02:39.130 --> 00:02:40.370
+And you guys use it.
+
+93
+00:02:41.150 --> 00:02:42.630
+I personally use chatgbd for programming.
+
+94
+00:02:43.390 --> 00:02:44.210
+And I will say that I use chatgbd
+
+95
+00:02:44.210 --> 00:02:45.550
+for beginner level programming.
+
+96
+00:02:46.430 --> 00:02:49.070
+And when I go to advanced things, I
+
+97
+00:02:49.070 --> 00:02:49.370
+use Claude.
+
+98
+00:02:50.170 --> 00:02:52.010
+I don't want to confuse you too much.
+
+99
+00:02:52.590 --> 00:02:55.070
+But Claude is a tool that does higher
+
+100
+00:02:55.070 --> 00:02:56.010
+level coding very well.
+
+101
+00:02:56.630 --> 00:02:58.190
+And if we talk about beginner level, then
+
+102
+00:02:58.190 --> 00:03:00.250
+chatgbd is something that is good enough.
+
+103
+00:03:00.450 --> 00:03:01.070
+You use chatgbd.
+
+104
+00:03:01.470 --> 00:03:02.850
+That's why I will also use chatgbd.
+
+105
+00:03:03.630 --> 00:03:04.650
+Make an account on it.
+
+106
+00:03:04.970 --> 00:03:05.710
+Log in to the account.
+
+107
+00:03:06.210 --> 00:03:07.130
+And you are good to go.
+
+108
+00:03:07.510 --> 00:03:07.830
+So keep doing this thing.
+
+109
+00:03:08.730 --> 00:03:10.930
+Second thing, never look at anything as a
+
+110
+00:03:10.930 --> 00:03:11.310
+shortcut.
+
+111
+00:03:11.310 --> 00:03:13.310
+Don't think that if you learn to write
+
+112
+00:03:13.310 --> 00:03:16.150
+and run a program from chatgbd, then the
+
+113
+00:03:16.150 --> 00:03:16.950
+matter is over there.
+
+114
+00:03:16.990 --> 00:03:17.230
+No.
+
+115
+00:03:17.650 --> 00:03:19.270
+If you want to do things well, then
+
+116
+00:03:19.270 --> 00:03:20.510
+you will have to learn concepts too.
+
+117
+00:03:21.370 --> 00:03:22.690
+This is the bitter truth.
+
+118
+00:03:22.810 --> 00:03:25.190
+If you think that AI-assisted coding means
+
+119
+00:03:25.190 --> 00:03:28.510
+that I will say chatgbd and ask chatgbd.
+
+120
+00:03:28.690 --> 00:03:29.530
+I will do what chatgbd says.
+
+121
+00:03:31.450 --> 00:03:33.610
+But such things do not work in the
+
+122
+00:03:33.610 --> 00:03:33.710
+real world.
+
+123
+00:03:34.410 --> 00:03:35.650
+You need to have domain knowledge.
+
+124
+00:03:36.690 --> 00:03:38.130
+How do you want to run the program?
+
+125
+00:03:38.690 --> 00:03:39.790
+It is important to have knowledge of it.
+
+126
+00:03:39.790 --> 00:03:41.030
+How are things working?
+
+127
+00:03:41.290 --> 00:03:42.590
+If you don't understand this, how will it
+
+128
+00:03:42.590 --> 00:03:42.870
+work?
+
+129
+00:03:42.990 --> 00:03:44.270
+If you get a memory error, you should
+
+130
+00:03:44.270 --> 00:03:45.490
+know what it means.
+
+131
+00:03:45.830 --> 00:03:49.550
+It means that the random access memory in
+
+132
+00:03:49.550 --> 00:03:50.570
+your system is decreasing.
+
+133
+00:03:51.510 --> 00:03:53.050
+As a data analyst, you will have to
+
+134
+00:03:53.050 --> 00:03:55.490
+learn and understand these concepts.
+
+135
+00:03:55.490 --> 00:03:56.210
+Only then you will be able to move
+
+136
+00:03:56.210 --> 00:03:56.510
+forward.
+
+137
+00:03:56.750 --> 00:03:57.290
+Only then you will be able to do
+
+138
+00:03:57.290 --> 00:03:57.670
+something good.
+
+139
+00:03:58.590 --> 00:03:58.970
+And you will be able to fully unlock
+
+140
+00:03:58.970 --> 00:04:00.490
+the potential of AI.
+
+141
+00:04:01.530 --> 00:04:03.030
+With that said, I also want to tell
+
+142
+00:04:03.030 --> 00:04:04.850
+you that whatever code we are going to
+
+143
+00:04:04.850 --> 00:04:07.630
+write, whatever we will talk about, I will
+
+144
+00:04:07.630 --> 00:04:08.710
+give it to you in the handbook.
+
+145
+00:04:08.710 --> 00:04:12.710
+You will have a summary handbook which will
+
+146
+00:04:12.710 --> 00:04:15.990
+help you to revise concepts and to build
+
+147
+00:04:15.990 --> 00:04:18.529
+more programs like the ones we are building
+
+148
+00:04:18.529 --> 00:04:19.850
+already in this course.
+
+149
+00:04:20.450 --> 00:04:20.970
+So what will we do from the next
+
+150
+00:04:20.970 --> 00:04:21.330
+video?
+
+151
+00:04:22.130 --> 00:04:24.470
+We will install Python and start learning more
+
+152
+00:04:24.470 --> 00:04:25.410
+about Python.
+
+153
+00:04:26.750 --> 00:04:27.910
+Let me tell you something.
+
+154
+00:04:28.070 --> 00:04:29.430
+Python is a programming language.
+
+155
+00:04:29.570 --> 00:04:33.510
+Programming means doing things automatically from the computer.
+
+156
+00:04:33.990 --> 00:04:35.950
+I know that many of you know programming.
+
+157
+00:04:36.690 --> 00:04:39.390
+But I would like to introduce programming to
+
+158
+00:04:39.390 --> 00:04:39.490
+you.
+
+159
+00:04:39.670 --> 00:04:43.190
+Because I don't want you to be confused
+
+160
+00:04:43.190 --> 00:04:43.410
+if you are a beginner.
+
+161
+00:04:43.550 --> 00:04:44.530
+Or if you have a problem in understanding
+
+162
+00:04:44.530 --> 00:04:45.110
+things later.
+
+163
+00:04:46.030 --> 00:04:48.670
+So if you have never done programming, I
+
+164
+00:04:48.670 --> 00:04:50.810
+will give you a very simple example and
+
+165
+00:04:50.810 --> 00:04:52.070
+explain what programming is.
+
+166
+00:04:52.330 --> 00:04:55.390
+If I tell you to write 1, 2,
+
+167
+00:04:55.450 --> 00:04:56.790
+3, 4 in a notepad, you will write
+
+168
+00:04:56.790 --> 00:04:56.890
+it.
+
+169
+00:04:57.030 --> 00:04:57.870
+If I tell you to write 1, 2,
+
+170
+00:04:57.910 --> 00:04:59.370
+3, 4 as 1, 2, 40.
+
+171
+00:04:59.630 --> 00:05:00.550
+Not 1, 2, 3, 4, 5, 6, 7,
+
+172
+00:05:00.630 --> 00:05:01.550
+8, all the way till 40.
+
+173
+00:05:01.690 --> 00:05:02.650
+Even then you will write it.
+
+174
+00:05:03.290 --> 00:05:05.430
+Okay, this is pretty inconvenient.
+
+175
+00:05:05.430 --> 00:05:06.370
+But I can do this.
+
+176
+00:05:06.430 --> 00:05:07.010
+You will write it.
+
+177
+00:05:07.090 --> 00:05:08.290
+If I tell you to write till 400.
+
+178
+00:05:08.650 --> 00:05:09.570
+You will write till 400.
+
+179
+00:05:09.870 --> 00:05:10.710
+But will I get it?
+
+180
+00:05:10.910 --> 00:05:11.210
+Will you give me money?
+
+181
+00:05:11.490 --> 00:05:12.970
+I will say yes, I will give you
+
+182
+00:05:12.970 --> 00:05:13.210
+money.
+
+183
+00:05:13.290 --> 00:05:13.710
+You will write it.
+
+184
+00:05:13.830 --> 00:05:15.370
+If you want money, I will write 1,
+
+185
+00:05:15.470 --> 00:05:16.390
+2, 3, 4 till 400.
+
+186
+00:05:16.590 --> 00:05:17.470
+After that, I will tell you to write
+
+187
+00:05:17.470 --> 00:05:18.070
+till 4,000.
+
+188
+00:05:18.510 --> 00:05:19.470
+You will demand more money.
+
+189
+00:05:19.810 --> 00:05:21.270
+Don't joke with me.
+
+190
+00:05:21.410 --> 00:05:22.490
+I have more work in my life.
+
+191
+00:05:22.630 --> 00:05:23.690
+If you give me more money, I will
+
+192
+00:05:23.690 --> 00:05:23.850
+do it.
+
+193
+00:05:24.030 --> 00:05:24.770
+Okay, fine.
+
+194
+00:05:25.450 --> 00:05:26.430
+Take 10,000 rupees.
+
+195
+00:05:26.490 --> 00:05:27.530
+Write till 1,000 to 4,000.
+
+196
+00:05:27.650 --> 00:05:28.270
+You may write it.
+
+197
+00:05:28.950 --> 00:05:30.070
+Maybe it is necessary to use words.
+
+198
+00:05:30.610 --> 00:05:31.630
+Otherwise, you will say that I will not
+
+199
+00:05:31.630 --> 00:05:31.810
+write.
+
+200
+00:05:31.810 --> 00:05:32.590
+Okay, fine.
+
+201
+00:05:33.010 --> 00:05:33.910
+Now I will tell you to write till
+
+202
+00:05:33.910 --> 00:05:34.290
+400,000.
+
+203
+00:05:34.570 --> 00:05:35.870
+If I tell you to write till 4
+
+204
+00:05:35.870 --> 00:05:36.170
+billion.
+
+205
+00:05:36.630 --> 00:05:37.830
+You will keep the pen down.
+
+206
+00:05:38.130 --> 00:05:38.910
+You will give a nice smile.
+
+207
+00:05:39.170 --> 00:05:40.190
+You will say, what a joke.
+
+208
+00:05:40.490 --> 00:05:41.990
+Because you also know that you will not
+
+209
+00:05:41.990 --> 00:05:43.090
+be able to write till 4 billion.
+
+210
+00:05:43.630 --> 00:05:45.230
+If you sit to write, it will take
+
+211
+00:05:45.230 --> 00:05:45.710
+a lot of time.
+
+212
+00:05:45.890 --> 00:05:48.010
+And you may not want to attempt this
+
+213
+00:05:48.010 --> 00:05:48.110
+exercise.
+
+214
+00:05:48.550 --> 00:05:49.550
+For how much money?
+
+215
+00:05:49.850 --> 00:05:50.250
+Okay, fine.
+
+216
+00:05:51.910 --> 00:05:52.770
+Programming helps here.
+
+217
+00:05:52.990 --> 00:05:54.930
+With the help of programming, you can do
+
+218
+00:05:54.930 --> 00:05:55.610
+this automatically.
+
+219
+00:05:56.610 --> 00:05:59.110
+You can program the computer to write 1,
+
+220
+00:05:59.210 --> 00:05:59.830
+2, 3, 4, 5, 6.
+
+221
+00:05:59.910 --> 00:06:01.250
+All the way till 4 billion.
+
+222
+00:06:01.250 --> 00:06:02.470
+Theoretically, you can do that.
+
+223
+00:06:02.670 --> 00:06:03.930
+Practically also, you can do that.
+
+224
+00:06:04.150 --> 00:06:06.750
+If you have enough resources installed on your
+
+225
+00:06:06.750 --> 00:06:07.070
+PC.
+
+226
+00:06:07.650 --> 00:06:09.190
+We will talk about that later.
+
+227
+00:06:09.610 --> 00:06:10.790
+But you can do this.
+
+228
+00:06:10.970 --> 00:06:12.530
+If you want to print a particular name
+
+229
+00:06:12.530 --> 00:06:13.190
+100 times.
+
+230
+00:06:13.710 --> 00:06:14.270
+Problematically.
+
+231
+00:06:14.450 --> 00:06:15.350
+Then you can do this by writing a
+
+232
+00:06:15.350 --> 00:06:16.210
+program of a few lines.
+
+233
+00:06:17.550 --> 00:06:18.410
+By using loops.
+
+234
+00:06:18.790 --> 00:06:19.730
+You can run things conditionally.
+
+235
+00:06:20.490 --> 00:06:22.570
+If you want to write a program in
+
+236
+00:06:22.570 --> 00:06:22.670
+your computer.
+
+237
+00:06:22.850 --> 00:06:24.190
+Which gives a notification.
+
+238
+00:06:24.650 --> 00:06:26.330
+You have to drink water every hour.
+
+239
+00:06:26.990 --> 00:06:28.550
+Then it can give you by writing Python.
+
+240
+00:06:28.550 --> 00:06:31.110
+So you can do something like this with
+
+241
+00:06:31.110 --> 00:06:31.810
+the help of Python.
+
+242
+00:06:32.290 --> 00:06:32.970
+You can also make a game.
+
+243
+00:06:33.790 --> 00:06:35.330
+With the help of Python, you can also
+
+244
+00:06:35.330 --> 00:06:35.850
+make a game.
+
+245
+00:06:36.550 --> 00:06:37.750
+So there is a library called Pygame.
+
+246
+00:06:38.190 --> 00:06:40.970
+You can make a game by using this
+
+247
+00:06:40.970 --> 00:06:41.070
+library.
+
+248
+00:06:41.530 --> 00:06:43.410
+Now go to Pygame.org here.
+
+249
+00:06:43.470 --> 00:06:45.230
+Pygame.org is the official website.
+
+250
+00:06:45.390 --> 00:06:46.570
+And here you can go to their docs.
+
+251
+00:06:47.490 --> 00:06:47.910
+You can read about Pygame.
+
+252
+00:06:48.970 --> 00:06:50.830
+How to make a game here.
+
+253
+00:06:50.990 --> 00:06:51.590
+What is it?
+
+254
+00:06:51.810 --> 00:06:52.750
+You can see all this.
+
+255
+00:06:52.910 --> 00:06:53.750
+And you can make good games.
+
+256
+00:06:54.430 --> 00:06:55.150
+With the help of Pygame.
+
+257
+00:06:56.390 --> 00:06:59.690
+Now I hope you understood these things.
+
+258
+00:07:00.070 --> 00:07:04.030
+Now let's talk about how Python is helpful
+
+259
+00:07:04.030 --> 00:07:04.130
+for a data analyst.
+
+260
+00:07:04.410 --> 00:07:06.890
+So if you write NumPy here.
+
+261
+00:07:07.110 --> 00:07:08.850
+And you write Pandas here.
+
+262
+00:07:08.990 --> 00:07:10.510
+And you write Matplotlib here.
+
+263
+00:07:10.770 --> 00:07:11.710
+So these are some libraries.
+
+264
+00:07:12.050 --> 00:07:12.470
+What is NumPy?
+
+265
+00:07:12.850 --> 00:07:15.650
+NumPy is a numerical Python library.
+
+266
+00:07:15.850 --> 00:07:17.390
+Which helps you make array objects.
+
+267
+00:07:18.130 --> 00:07:19.330
+I will explain it to you in short.
+
+268
+00:07:20.030 --> 00:07:21.290
+Python is considered a slow language.
+
+269
+00:07:22.110 --> 00:07:23.610
+How slow?
+
+270
+00:07:23.610 --> 00:07:24.830
+Does a program run for an hour?
+
+271
+00:07:25.650 --> 00:07:27.490
+When we talk at a granular level.
+
+272
+00:07:27.830 --> 00:07:31.250
+Let's compare C++ program with a Python program.
+
+273
+00:07:31.350 --> 00:07:32.090
+Let's say you have to print from 1
+
+274
+00:07:32.090 --> 00:07:33.310
+to 4 billion.
+
+275
+00:07:34.330 --> 00:07:36.810
+So your C++ program will print very fast.
+
+276
+00:07:37.370 --> 00:07:39.450
+Because it is a native program.
+
+277
+00:07:39.890 --> 00:07:40.770
+And it is very close to the operating
+
+278
+00:07:40.770 --> 00:07:41.170
+system.
+
+279
+00:07:41.950 --> 00:07:42.370
+It is very close to the hardware.
+
+280
+00:07:43.130 --> 00:07:43.710
+And it executes fast.
+
+281
+00:07:44.650 --> 00:07:45.990
+But when we talk about Python.
+
+282
+00:07:46.490 --> 00:07:49.110
+Because Python uses some APIs internally.
+
+283
+00:07:49.770 --> 00:07:51.290
+You get to see a slow response.
+
+284
+00:07:51.290 --> 00:07:53.530
+Python is an interpreted language.
+
+285
+00:07:53.830 --> 00:07:55.370
+It executes line by line.
+
+286
+00:07:55.990 --> 00:07:57.790
+Each line by line interpreter.
+
+287
+00:07:57.930 --> 00:08:00.110
+Python interpreter understands the program.
+
+288
+00:08:01.030 --> 00:08:01.730
+And executes it.
+
+289
+00:08:02.390 --> 00:08:05.050
+But C++ program is compiled first.
+
+290
+00:08:05.190 --> 00:08:06.130
+And converted to machine code.
+
+291
+00:08:06.790 --> 00:08:08.110
+And machine code is always fast.
+
+292
+00:08:08.430 --> 00:08:10.910
+So NumPy gives you n dimensional arrays.
+
+293
+00:08:11.370 --> 00:08:12.310
+And fast functions.
+
+294
+00:08:12.770 --> 00:08:13.910
+Because it is written in C language.
+
+295
+00:08:14.350 --> 00:08:15.550
+And because it is written in C language.
+
+296
+00:08:15.950 --> 00:08:16.710
+It runs very fast.
+
+297
+00:08:17.530 --> 00:08:19.030
+We will see how to use it.
+
+298
+00:08:19.030 --> 00:08:21.670
+Pandas is an open source Python library.
+
+299
+00:08:21.890 --> 00:08:22.930
+It is used for data manipulation.
+
+300
+00:08:23.850 --> 00:08:24.550
+And data analysis.
+
+301
+00:08:25.810 --> 00:08:27.950
+Matnotlib and Seaborn are two libraries.
+
+302
+00:08:28.530 --> 00:08:30.250
+Which you can use in Python.
+
+303
+00:08:30.650 --> 00:08:32.570
+To plot some graphs.
+
+304
+00:08:32.770 --> 00:08:35.650
+We will see how graphs can be plotted.
+
+305
+00:08:35.710 --> 00:08:36.750
+And how graphs are plotted.
+
+306
+00:08:37.030 --> 00:08:37.330
+We will see all this.
+
+307
+00:08:38.549 --> 00:08:39.610
+Give me some time.
+
+308
+00:08:40.390 --> 00:08:41.390
+We will discuss all this in upcoming videos.
+
+309
+00:08:42.990 --> 00:08:44.670
+But for now, step back and relax.
+
+310
+00:08:44.950 --> 00:08:46.550
+We will install Python in the next video.
+
+311
+00:08:47.430 --> 00:08:48.570
+We will see all these things one by
+
+312
+00:08:48.570 --> 00:08:48.930
+one.
+
+313
+00:08:48.930 --> 00:08:53.330
+And how you can get NumPy, Pandas and
+
+314
+00:08:53.330 --> 00:08:54.350
+Matplotlib copies in your computer.
+
+315
+00:08:54.670 --> 00:08:56.030
+I will tell you all this.
+
+316
+00:08:56.090 --> 00:08:57.350
+How you will use pip.
+
+317
+00:08:58.150 --> 00:08:59.850
+All these things will come in upcoming videos.
+
+318
+00:09:00.330 --> 00:09:01.370
+But I hope you got to know the
+
+319
+00:09:01.370 --> 00:09:01.970
+basic idea.
+
+320
+00:09:02.650 --> 00:09:04.630
+You can read about Python history from Wikipedia.
+
+321
+00:09:05.230 --> 00:09:06.190
+I don't want to spend too much time
+
+322
+00:09:06.190 --> 00:09:07.150
+on these things.
+
+323
+00:09:07.930 --> 00:09:11.250
+Because If I tell you that Python programming
+
+324
+00:09:11.250 --> 00:09:13.370
+language was made by Guido Van Rossum in
+
+325
+00:09:13.370 --> 00:09:14.210
+1991.
+
+326
+00:09:15.250 --> 00:09:18.650
+And from 1980s He started working on Python
+
+327
+00:09:18.650 --> 00:09:18.910
+3.
+
+328
+00:09:18.910 --> 00:09:19.910
+It was released in 2008.
+
+329
+00:09:20.610 --> 00:09:21.530
+It was a major revision.
+
+330
+00:09:21.990 --> 00:09:23.690
+You can read all these things from Wikipedia.
+
+331
+00:09:24.650 --> 00:09:25.870
+I don't want to spend too much time
+
+332
+00:09:25.870 --> 00:09:26.430
+on these things.
+
+333
+00:09:27.490 --> 00:09:29.630
+Where did Guido Van Rossum make it?
+
+334
+00:09:29.730 --> 00:09:30.350
+How did he make it?
+
+335
+00:09:30.510 --> 00:09:31.090
+Where did he live?
+
+336
+00:09:31.350 --> 00:09:34.810
+If you are interested, Wikipedia is a place.
+
+337
+00:09:35.190 --> 00:09:35.670
+And guess what?
+
+338
+00:09:35.730 --> 00:09:36.490
+There is another place.
+
+339
+00:09:36.950 --> 00:09:37.730
+Yes, you guessed it right.
+
+340
+00:09:37.930 --> 00:09:38.750
+It's ChatGPT.
+
+341
+00:09:38.870 --> 00:09:39.570
+You can ask this question.
+
+342
+00:09:40.890 --> 00:09:42.530
+What was the favorite food of the person
+
+343
+00:09:42.530 --> 00:09:42.630
+who made Python?
+
+344
+00:09:43.670 --> 00:09:45.030
+If you want to know what was the
+
+345
+00:09:45.030 --> 00:09:45.810
+name of the person who made Python?
+
+346
+00:09:45.810 --> 00:09:47.250
+What was the name of his neighbor?
+
+347
+00:09:47.910 --> 00:09:49.410
+You can ask these questions from ChatGPT.
+
+348
+00:09:49.950 --> 00:09:52.430
+We will focus on language.
+
+349
+00:09:52.650 --> 00:09:53.630
+Definitely we will focus on language.
+
+350
+00:09:54.270 --> 00:09:55.310
+We will focus on programming.
+
+351
+00:09:55.490 --> 00:09:56.170
+We will focus on how to make it.
+
+352
+00:09:56.610 --> 00:09:58.490
+I hope you are enjoying so far.
+
+353
+00:09:58.990 --> 00:10:00.690
+I am personally very excited.
+
+354
+00:10:01.230 --> 00:10:03.130
+To take you on this journey of AI
+
+355
+00:10:03.130 --> 00:10:04.230
+powered Python.
+
+356
+00:10:05.850 --> 00:10:07.510
+Thank you so much guys for watching this
+
+357
+00:10:07.510 --> 00:10:07.810
+video.
+
+358
+00:10:08.030 --> 00:10:09.150
+And I will see you in the next
+
+359
+00:10:09.150 --> 00:10:09.430
+one.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WEBVTT
+
+1
+00:00:00.010 --> 00:00:02.530
+(Transcribed by TurboScribe. Go Unlimited to remove this message.) Alright guys, so far we have seen that
+
+2
+00:00:02.530 --> 00:00:06.030
+how we can use pip and how we
+
+3
+00:00:06.030 --> 00:00:06.530
+can instal python.
+
+4
+00:00:07.010 --> 00:00:08.250
+We have also seen that if we use
+
+5
+00:00:08.250 --> 00:00:12.950
+standalone installer of python, then we can easily
+
+6
+00:00:12.950 --> 00:00:14.470
+get pip in our path.
+
+7
+00:00:14.930 --> 00:00:16.850
+Means if you go to terminal and type
+
+8
+00:00:16.850 --> 00:00:18.790
+python, you will see something like this.
+
+9
+00:00:18.890 --> 00:00:20.050
+If you exit, you can exit.
+
+10
+00:00:20.350 --> 00:00:21.190
+If you type pip, you will see something
+
+11
+00:00:21.190 --> 00:00:21.910
+like this.
+
+12
+00:00:22.050 --> 00:00:24.170
+Which means your pip is working.
+
+13
+00:00:24.550 --> 00:00:25.390
+And you can instal anything by typing pip.
+
+14
+00:00:25.390 --> 00:00:27.370
+You can instal anything by typing pip.
+
+15
+00:00:27.370 --> 00:00:28.930
+For example, if you type pip instal pandas,
+
+16
+00:00:29.330 --> 00:00:30.450
+then your pandas will be installed.
+
+17
+00:00:30.810 --> 00:00:32.430
+My pandas are already installed.
+
+18
+00:00:32.610 --> 00:00:34.230
+That's why the requirement is already satisfied.
+
+19
+00:00:34.650 --> 00:00:36.390
+By the way, you can also type pip
+
+20
+00:00:36.390 --> 00:00:37.250
+uninstall.
+
+21
+00:00:38.010 --> 00:00:41.330
+pip uninstall pandas, which will uninstall pandas.
+
+22
+00:00:41.870 --> 00:00:43.170
+And it is asking me that do you
+
+23
+00:00:43.170 --> 00:00:43.530
+want to remove?
+
+24
+00:00:44.410 --> 00:00:45.870
+Yes, I will enter capital Y.
+
+25
+00:00:46.490 --> 00:00:49.330
+It is writing successfully uninstalled pandas.
+
+26
+00:00:49.370 --> 00:00:51.710
+Which means that pandas have been uninstalled.
+
+27
+00:00:51.710 --> 00:00:55.390
+In this video, we will see what is
+
+28
+00:00:55.390 --> 00:00:58.930
+the difference between built-in modules and external
+
+29
+00:00:58.930 --> 00:00:59.450
+modules.
+
+30
+00:00:59.890 --> 00:01:01.150
+Now what happens is that whenever we are
+
+31
+00:01:01.150 --> 00:01:03.330
+writing our python programme, we write it line
+
+32
+00:01:03.330 --> 00:01:03.670
+by line.
+
+33
+00:01:04.110 --> 00:01:06.850
+And python interpreter interprets it line by line.
+
+34
+00:01:07.270 --> 00:01:09.090
+Python is an interpreted language.
+
+35
+00:01:09.610 --> 00:01:12.370
+Which means that code is executed line by
+
+36
+00:01:12.370 --> 00:01:12.470
+line.
+
+37
+00:01:12.810 --> 00:01:14.770
+Here I have made a folder that I
+
+38
+00:01:14.770 --> 00:01:15.810
+will open in VS Code.
+
+39
+00:01:16.130 --> 00:01:17.330
+And you can do this very easily.
+
+40
+00:01:17.330 --> 00:01:19.090
+You can do this by right-clicking and
+
+41
+00:01:19.090 --> 00:01:21.030
+clicking the open with code option.
+
+42
+00:01:21.890 --> 00:01:23.470
+And as soon as you do this, it
+
+43
+00:01:23.470 --> 00:01:24.450
+will open like this.
+
+44
+00:01:24.650 --> 00:01:25.610
+You see, I did open with code.
+
+45
+00:01:26.330 --> 00:01:27.410
+I will trust it.
+
+46
+00:01:27.590 --> 00:01:28.810
+I will click on yes by clicking here.
+
+47
+00:01:29.310 --> 00:01:32.130
+And see here because my code installation is
+
+48
+00:01:32.130 --> 00:01:33.050
+completely fresh.
+
+49
+00:01:33.370 --> 00:01:34.830
+It is asking me that do you want
+
+50
+00:01:34.830 --> 00:01:35.570
+to use AI features?
+
+51
+00:01:36.570 --> 00:01:37.610
+What do you want to do?
+
+52
+00:01:38.290 --> 00:01:40.710
+Definitely we want to use AI features for
+
+53
+00:01:40.710 --> 00:01:40.950
+sure.
+
+54
+00:01:41.110 --> 00:01:41.470
+It is saying that log in to the
+
+55
+00:01:41.470 --> 00:01:42.370
+github account.
+
+56
+00:01:43.010 --> 00:01:44.110
+I will not do it for now.
+
+57
+00:01:44.230 --> 00:01:44.910
+Skip for now.
+
+58
+00:01:44.910 --> 00:01:47.030
+But we are going to soon do this.
+
+59
+00:01:47.030 --> 00:01:49.750
+And we will see how we will use
+
+60
+00:01:49.750 --> 00:01:50.390
+AI features.
+
+61
+00:01:51.030 --> 00:01:53.370
+But for now, we will strengthen our concepts.
+
+62
+00:01:54.610 --> 00:01:56.690
+And for that, I will suggest you to
+
+63
+00:01:56.690 --> 00:02:00.090
+make a main.py file.
+
+64
+00:02:00.330 --> 00:02:02.930
+Main.py Here it is saying that do
+
+65
+00:02:02.930 --> 00:02:04.290
+you want to instal python extension?
+
+66
+00:02:04.490 --> 00:02:06.150
+Yes, I want to instal python extension.
+
+67
+00:02:06.790 --> 00:02:08.789
+If this option is not coming, then I
+
+68
+00:02:08.789 --> 00:02:11.070
+want to tell you that there is an
+
+69
+00:02:11.070 --> 00:02:12.070
+option of extensions in VS Code.
+
+70
+00:02:12.910 --> 00:02:13.750
+Now what are these extensions?
+
+71
+00:02:13.750 --> 00:02:16.770
+Extensions help in extending the capability of VS
+
+72
+00:02:16.770 --> 00:02:16.870
+Code.
+
+73
+00:02:18.430 --> 00:02:21.150
+Like you instal apps in your phone so
+
+74
+00:02:21.150 --> 00:02:23.150
+that you can do the work that your
+
+75
+00:02:23.150 --> 00:02:24.510
+phone cannot do by default.
+
+76
+00:02:25.210 --> 00:02:28.890
+You instal some camera apps that give you
+
+77
+00:02:28.890 --> 00:02:31.970
+filters or give you the capability to change
+
+78
+00:02:31.970 --> 00:02:32.250
+the face.
+
+79
+00:02:33.410 --> 00:02:37.410
+You have an app like Talking Tom which
+
+80
+00:02:37.410 --> 00:02:38.950
+helps you change the voice.
+
+81
+00:02:39.650 --> 00:02:42.710
+You get such things by going to the
+
+82
+00:02:42.710 --> 00:02:43.210
+play store.
+
+83
+00:02:43.570 --> 00:02:45.870
+Similarly, you can consider this as a play
+
+84
+00:02:45.870 --> 00:02:46.110
+store of VS Code.
+
+85
+00:02:46.730 --> 00:02:50.590
+Extensions will help you do things that you
+
+86
+00:02:50.590 --> 00:02:52.530
+cannot do by default using VS Code.
+
+87
+00:02:52.710 --> 00:02:54.490
+If you are not getting this extension, then
+
+88
+00:02:54.490 --> 00:02:55.870
+I want to tell you to click here
+
+89
+00:02:55.870 --> 00:02:56.350
+on this icon.
+
+90
+00:02:57.050 --> 00:02:58.410
+And after clicking on this icon, you write
+
+91
+00:02:58.410 --> 00:02:59.130
+python here.
+
+92
+00:02:59.450 --> 00:03:01.090
+And you will get an extension called python
+
+93
+00:03:01.090 --> 00:03:02.310
+from Microsoft.
+
+94
+00:03:02.810 --> 00:03:04.470
+You have to instal an extension called python
+
+95
+00:03:04.470 --> 00:03:05.330
+which will be from Microsoft.
+
+96
+00:03:05.810 --> 00:03:06.630
+Blue tick will be on it.
+
+97
+00:03:07.130 --> 00:03:07.790
+Instal it.
+
+98
+00:03:07.790 --> 00:03:12.130
+Now it is asking me to open a
+
+99
+00:03:12.130 --> 00:03:13.130
+project folder.
+
+100
+00:03:13.210 --> 00:03:14.610
+I will mark it as done.
+
+101
+00:03:15.290 --> 00:03:16.450
+Because my work is done.
+
+102
+00:03:17.110 --> 00:03:18.770
+I will come to main.py. And after
+
+103
+00:03:18.770 --> 00:03:21.490
+coming to main.py, I will write print
+
+104
+00:03:21.490 --> 00:03:22.670
+hello world.
+
+105
+00:03:23.610 --> 00:03:24.510
+Hello world.
+
+106
+00:03:24.890 --> 00:03:26.350
+And as soon as I do this, I
+
+107
+00:03:26.350 --> 00:03:26.850
+will save it.
+
+108
+00:03:27.110 --> 00:03:28.350
+By default, it does not autosave.
+
+109
+00:03:28.810 --> 00:03:29.290
+I have to save it by pressing ctrl
+
+110
+00:03:29.290 --> 00:03:29.490
+s.
+
+111
+00:03:30.510 --> 00:03:31.350
+That's why I will click on file.
+
+112
+00:03:31.990 --> 00:03:33.190
+And I will check the option of autosave.
+
+113
+00:03:34.170 --> 00:03:37.830
+With this, I will be able to save
+
+114
+00:03:37.830 --> 00:03:37.930
+automatically.
+
+115
+00:03:38.350 --> 00:03:42.750
+As I type, my programme will be saved.
+
+116
+00:03:43.630 --> 00:03:46.570
+I will close this built with agent box.
+
+117
+00:03:47.930 --> 00:03:49.490
+Because I don't want to build through agent
+
+118
+00:03:49.490 --> 00:03:49.590
+right now.
+
+119
+00:03:50.410 --> 00:03:51.810
+Before I tell you what is the difference
+
+120
+00:03:51.810 --> 00:03:53.590
+between built-in module and external module.
+
+121
+00:03:54.430 --> 00:03:56.370
+I want you to tweak some settings of
+
+122
+00:03:56.370 --> 00:03:56.470
+VS Code.
+
+123
+00:03:57.590 --> 00:03:58.710
+You click here on gear.
+
+124
+00:03:59.690 --> 00:04:00.490
+And after this, click on settings.
+
+125
+00:04:00.490 --> 00:04:02.490
+And as soon as you click on settings.
+
+126
+00:04:03.490 --> 00:04:06.450
+You write here mouse wheel zoom.
+
+127
+00:04:07.350 --> 00:04:08.510
+And here you are getting this setting.
+
+128
+00:04:09.310 --> 00:04:11.010
+Editor mouse wheel zoom.
+
+129
+00:04:11.230 --> 00:04:12.050
+Check this.
+
+130
+00:04:12.630 --> 00:04:13.470
+Now what will happen with this?
+
+131
+00:04:13.610 --> 00:04:15.329
+With this, you will be able to zoom
+
+132
+00:04:15.329 --> 00:04:17.290
+with the help of your mouse wheel.
+
+133
+00:04:18.070 --> 00:04:19.829
+By pressing ctrl, you will rotate your mouse
+
+134
+00:04:19.829 --> 00:04:20.029
+wheel.
+
+135
+00:04:20.529 --> 00:04:20.890
+So you will be able to zoom like
+
+136
+00:04:20.890 --> 00:04:21.570
+this.
+
+137
+00:04:22.090 --> 00:04:23.030
+See, I am rotating my mouse wheel.
+
+138
+00:04:23.810 --> 00:04:24.810
+I have kept ctrl hold.
+
+139
+00:04:25.590 --> 00:04:27.590
+And as I keep rotating the mouse wheel.
+
+140
+00:04:28.230 --> 00:04:29.930
+It will keep zooming.
+
+141
+00:04:30.690 --> 00:04:31.550
+Check this also.
+
+142
+00:04:31.730 --> 00:04:34.130
+Zoom the font of the terminal when using
+
+143
+00:04:34.130 --> 00:04:35.370
+mouse wheel and holding ctrl.
+
+144
+00:04:35.810 --> 00:04:37.990
+By holding ctrl, you will rotate your mouse
+
+145
+00:04:37.990 --> 00:04:38.330
+wheel.
+
+146
+00:04:38.970 --> 00:04:40.070
+So you will be able to zoom like
+
+147
+00:04:40.070 --> 00:04:40.170
+this.
+
+148
+00:04:40.390 --> 00:04:41.170
+This is very handy.
+
+149
+00:04:41.330 --> 00:04:43.570
+This is the first setting which I personally
+
+150
+00:04:43.570 --> 00:04:43.990
+turn on.
+
+151
+00:04:44.610 --> 00:04:46.270
+And I think VS Code should keep this
+
+152
+00:04:46.270 --> 00:04:46.770
+on by default.
+
+153
+00:04:47.470 --> 00:04:48.370
+Why do you turn it off?
+
+154
+00:04:49.170 --> 00:04:49.810
+Anyway, no problem.
+
+155
+00:04:50.130 --> 00:04:50.910
+Now what we will do.
+
+156
+00:04:51.510 --> 00:04:52.710
+We will run print hello world.
+
+157
+00:04:53.470 --> 00:04:55.030
+And as soon as I click here on
+
+158
+00:04:55.030 --> 00:04:55.230
+run.
+
+159
+00:04:55.230 --> 00:04:56.450
+So you see.
+
+160
+00:04:57.910 --> 00:04:59.090
+It has run.
+
+161
+00:04:59.370 --> 00:05:00.510
+It has come here by writing hello world.
+
+162
+00:05:02.430 --> 00:05:03.830
+Alright, that was pretty sweet.
+
+163
+00:05:04.030 --> 00:05:07.690
+That means my VS Code's overall setup is
+
+164
+00:05:07.690 --> 00:05:08.330
+absolutely correct.
+
+165
+00:05:09.130 --> 00:05:10.530
+Anyway, now what I will do here.
+
+166
+00:05:10.730 --> 00:05:12.070
+I will write import.
+
+167
+00:05:12.330 --> 00:05:16.030
+I will write at the top import pandas.
+
+168
+00:05:16.130 --> 00:05:17.790
+Now I am just writing import pandas here.
+
+169
+00:05:17.890 --> 00:05:18.330
+I am not writing anything.
+
+170
+00:05:18.490 --> 00:05:19.650
+I have written import pandas here.
+
+171
+00:05:20.090 --> 00:05:20.910
+And I will try to run it.
+
+172
+00:05:21.650 --> 00:05:22.450
+And it will give me an error.
+
+173
+00:05:22.670 --> 00:05:24.270
+It will say no module name pandas.
+
+174
+00:05:24.270 --> 00:05:26.390
+And this error is coming because pandas is
+
+175
+00:05:26.390 --> 00:05:26.850
+not installed.
+
+176
+00:05:27.410 --> 00:05:28.450
+Now what does this mean?
+
+177
+00:05:29.030 --> 00:05:30.730
+Pandas is an external module.
+
+178
+00:05:31.150 --> 00:05:32.290
+You will have to bring it from the
+
+179
+00:05:32.290 --> 00:05:34.410
+internet connection with the help of pip.
+
+180
+00:05:34.890 --> 00:05:36.910
+You will have to write pip instal pandas.
+
+181
+00:05:37.190 --> 00:05:37.750
+You will hit enter.
+
+182
+00:05:38.150 --> 00:05:39.650
+And as soon as you hit enter.
+
+183
+00:05:39.890 --> 00:05:40.810
+See it is coming here.
+
+184
+00:05:41.310 --> 00:05:43.170
+Instal collected packages pandas.
+
+185
+00:05:43.250 --> 00:05:45.670
+And it will instal pandas by downloading from
+
+186
+00:05:45.670 --> 00:05:45.770
+the internet.
+
+187
+00:05:46.130 --> 00:05:47.610
+And as soon as it downloads from the
+
+188
+00:05:47.610 --> 00:05:48.330
+internet and instals.
+
+189
+00:05:48.690 --> 00:05:49.630
+We will be able to use it.
+
+190
+00:05:50.110 --> 00:05:51.290
+So it is installing now.
+
+191
+00:05:51.550 --> 00:05:52.230
+It has downloaded.
+
+192
+00:05:52.230 --> 00:05:53.950
+Successfully installed pandas.
+
+193
+00:05:54.090 --> 00:05:56.230
+Now you see before this, there was a
+
+194
+00:05:56.230 --> 00:05:57.130
+yellow line coming down here.
+
+195
+00:05:57.630 --> 00:05:59.490
+Now that yellow line is not coming.
+
+196
+00:05:59.730 --> 00:06:00.630
+Let's run it and see.
+
+197
+00:06:00.910 --> 00:06:02.010
+And yes it works.
+
+198
+00:06:02.650 --> 00:06:04.490
+What happened before that when I ran this
+
+199
+00:06:04.490 --> 00:06:05.130
+programme.
+
+200
+00:06:05.410 --> 00:06:07.530
+So line by line because python programme is
+
+201
+00:06:07.530 --> 00:06:07.990
+executed.
+
+202
+00:06:09.250 --> 00:06:10.610
+My programme crashed on this line.
+
+203
+00:06:10.850 --> 00:06:11.990
+That's why we didn't get to see hello
+
+204
+00:06:11.990 --> 00:06:12.310
+world.
+
+205
+00:06:13.370 --> 00:06:14.510
+But this time we are getting to see
+
+206
+00:06:14.510 --> 00:06:15.330
+hello world.
+
+207
+00:06:16.030 --> 00:06:18.530
+Because python is an interpreted language.
+
+208
+00:06:18.770 --> 00:06:21.210
+Means your code is processed line by line.
+
+209
+00:06:21.210 --> 00:06:23.290
+First of all, line number 1 will be
+
+210
+00:06:23.290 --> 00:06:23.390
+processed.
+
+211
+00:06:23.570 --> 00:06:24.910
+Then line number 2 will be processed.
+
+212
+00:06:25.170 --> 00:06:26.630
+Then line number 3 will be processed.
+
+213
+00:06:26.790 --> 00:06:27.810
+If line number 3 is done.
+
+214
+00:06:28.110 --> 00:06:29.070
+And so on.
+
+215
+00:06:29.450 --> 00:06:30.890
+So what happened here last time.
+
+216
+00:06:31.190 --> 00:06:33.010
+When we did not instal pandas.
+
+217
+00:06:33.570 --> 00:06:36.090
+Then this line was executed first.
+
+218
+00:06:36.910 --> 00:06:38.070
+Python said that there is no pandas.
+
+219
+00:06:38.910 --> 00:06:40.050
+Crash the programme.
+
+220
+00:06:40.510 --> 00:06:41.370
+Programme crashed.
+
+221
+00:06:42.310 --> 00:06:43.470
+But when we installed pandas.
+
+222
+00:06:45.010 --> 00:06:46.710
+Then what happened that pandas.
+
+223
+00:06:47.190 --> 00:06:49.730
+Because it was in our module list.
+
+224
+00:06:49.730 --> 00:06:51.750
+Means we had installed.
+
+225
+00:06:52.610 --> 00:06:53.670
+With the help of pip instal.
+
+226
+00:06:55.130 --> 00:06:56.190
+So this line was processed.
+
+227
+00:06:56.770 --> 00:06:57.850
+Then this line was also processed.
+
+228
+00:06:58.470 --> 00:06:59.510
+And we got to see hello world.
+
+229
+00:07:00.590 --> 00:07:02.130
+Now you will say that you wrote import
+
+230
+00:07:02.130 --> 00:07:02.470
+pandas.
+
+231
+00:07:02.730 --> 00:07:03.310
+What happened to it?
+
+232
+00:07:03.790 --> 00:07:05.250
+See nothing happened to it now.
+
+233
+00:07:05.630 --> 00:07:07.350
+But we can use pandas now.
+
+234
+00:07:08.010 --> 00:07:10.190
+I will show you a sample usage of
+
+235
+00:07:10.190 --> 00:07:10.290
+pandas.
+
+236
+00:07:10.530 --> 00:07:13.050
+If you write df is equal to pandas
+
+237
+00:07:13.050 --> 00:07:14.450
+dot data frame.
+
+238
+00:07:15.090 --> 00:07:16.430
+And you write something like this.
+
+239
+00:07:16.670 --> 00:07:18.670
+A colon 1.
+
+240
+00:07:18.670 --> 00:07:19.610
+Now you will say that what are you
+
+241
+00:07:19.610 --> 00:07:19.810
+writing?
+
+242
+00:07:20.030 --> 00:07:21.690
+We are making a data frame here.
+
+243
+00:07:21.870 --> 00:07:22.250
+What is a data frame?
+
+244
+00:07:23.210 --> 00:07:26.370
+For now, ignore what a data frame is.
+
+245
+00:07:26.470 --> 00:07:27.410
+Because in the coming videos.
+
+246
+00:07:27.570 --> 00:07:28.470
+I am going to tell you everything.
+
+247
+00:07:29.730 --> 00:07:31.330
+Line number 4 that I have written here.
+
+248
+00:07:31.430 --> 00:07:33.430
+df is equal to pandas dot data frame
+
+249
+00:07:33.430 --> 00:07:34.250
+a colon 1.
+
+250
+00:07:34.350 --> 00:07:35.670
+Which will be alien for you at this
+
+251
+00:07:35.670 --> 00:07:35.970
+point.
+
+252
+00:07:37.130 --> 00:07:38.370
+It is totally understandable.
+
+253
+00:07:39.150 --> 00:07:40.410
+I just want to tell you that.
+
+254
+00:07:40.590 --> 00:07:42.250
+This is how we use imported modules.
+
+255
+00:07:43.010 --> 00:07:44.130
+I wrote import pandas.
+
+256
+00:07:44.710 --> 00:07:47.170
+So pandas package was imported in my programme.
+
+257
+00:07:48.450 --> 00:07:49.650
+Pandas package.
+
+258
+00:07:50.050 --> 00:07:51.570
+This is essentially a file.
+
+259
+00:07:51.650 --> 00:07:52.530
+Which someone else has written.
+
+260
+00:07:53.110 --> 00:07:54.010
+And I have got that file.
+
+261
+00:07:54.670 --> 00:07:55.850
+In fact, I will say collection of files.
+
+262
+00:07:56.390 --> 00:07:57.290
+I have got that collection of files.
+
+263
+00:07:57.930 --> 00:07:58.770
+With the help of the internet.
+
+264
+00:07:59.330 --> 00:08:00.070
+Which I have downloaded.
+
+265
+00:08:00.710 --> 00:08:02.530
+By writing pip instal pandas.
+
+266
+00:08:02.930 --> 00:08:04.870
+And now I can use it in my
+
+267
+00:08:04.870 --> 00:08:06.030
+main.py programme.
+
+268
+00:08:06.230 --> 00:08:07.850
+What exactly is line number 4 doing?
+
+269
+00:08:07.890 --> 00:08:09.150
+Don't worry about it now.
+
+270
+00:08:09.910 --> 00:08:11.370
+I wrote this line to show you.
+
+271
+00:08:11.750 --> 00:08:14.510
+That we can use pandas module in this
+
+272
+00:08:14.510 --> 00:08:14.770
+way.
+
+273
+00:08:14.770 --> 00:08:16.270
+By the way, I have to write here.
+
+274
+00:08:16.550 --> 00:08:17.930
+Index is equal to 1.
+
+275
+00:08:18.970 --> 00:08:20.870
+But you guys ignore this line now.
+
+276
+00:08:21.110 --> 00:08:22.010
+And now I will run it.
+
+277
+00:08:22.610 --> 00:08:23.830
+So you guys see this programme has run.
+
+278
+00:08:24.230 --> 00:08:25.430
+Here we have made a data frame.
+
+279
+00:08:25.850 --> 00:08:26.310
+We have not used it.
+
+280
+00:08:27.010 --> 00:08:28.290
+But again let me tell you something.
+
+281
+00:08:28.850 --> 00:08:31.770
+Don't worry about what this line is doing.
+
+282
+00:08:31.789 --> 00:08:33.230
+I just want to show you that.
+
+283
+00:08:33.370 --> 00:08:35.390
+You can import any module and use it.
+
+284
+00:08:36.390 --> 00:08:38.610
+And pandas is an example of.
+
+285
+00:08:39.230 --> 00:08:40.190
+External module.
+
+286
+00:08:40.450 --> 00:08:42.370
+After this we have built in modules.
+
+287
+00:08:42.370 --> 00:08:43.090
+Let me erase this line.
+
+288
+00:08:44.170 --> 00:08:45.810
+After this we have built in modules.
+
+289
+00:08:45.870 --> 00:08:48.910
+Which you can use without installing it.
+
+290
+00:08:49.770 --> 00:08:51.250
+They come with your python installation.
+
+291
+00:08:51.990 --> 00:08:53.950
+Examples of built in modules are OS.
+
+292
+00:08:54.090 --> 00:08:55.250
+OS is a very good example.
+
+293
+00:08:55.450 --> 00:08:56.510
+You import OS.
+
+294
+00:08:56.770 --> 00:08:58.290
+And you say something like.
+
+295
+00:08:58.690 --> 00:09:01.610
+Print os.listdir. Something like this.
+
+296
+00:09:01.890 --> 00:09:04.750
+And if you run os.listdir. Then see
+
+297
+00:09:04.750 --> 00:09:06.690
+here it has given me the directory contents.
+
+298
+00:09:07.410 --> 00:09:08.210
+Pretty helpful.
+
+299
+00:09:09.050 --> 00:09:10.070
+It has told me that.
+
+300
+00:09:10.070 --> 00:09:11.010
+There is a folder in your folder.
+
+301
+00:09:11.230 --> 00:09:14.790
+There is a file named main.py. This
+
+302
+00:09:14.790 --> 00:09:15.730
+is very useful.
+
+303
+00:09:16.450 --> 00:09:17.910
+I can also do this.
+
+304
+00:09:17.930 --> 00:09:22.170
+os.getcwd. Now here I have to.
+
+305
+00:09:22.630 --> 00:09:23.510
+Write opening parenthesis.
+
+306
+00:09:23.670 --> 00:09:24.250
+Close parenthesis.
+
+307
+00:09:25.190 --> 00:09:27.190
+We write this when we call a function.
+
+308
+00:09:27.810 --> 00:09:28.190
+What is a function?
+
+309
+00:09:28.550 --> 00:09:29.270
+We will read it in the coming videos.
+
+310
+00:09:29.710 --> 00:09:31.050
+But for now you guys run it like
+
+311
+00:09:31.050 --> 00:09:31.150
+this.
+
+312
+00:09:32.270 --> 00:09:33.390
+And you see here it has told me
+
+313
+00:09:33.390 --> 00:09:33.790
+the directory.
+
+314
+00:09:34.310 --> 00:09:34.870
+Your.
+
+315
+00:09:35.890 --> 00:09:37.170
+You are in this particular directory.
+
+316
+00:09:37.170 --> 00:09:40.210
+We are running this programme from this directory.
+
+317
+00:09:40.710 --> 00:09:41.130
+Very good.
+
+318
+00:09:41.310 --> 00:09:42.670
+This is a built in module.
+
+319
+00:09:42.970 --> 00:09:43.770
+This is an example of a built in
+
+320
+00:09:43.770 --> 00:09:44.030
+module.
+
+321
+00:09:44.730 --> 00:09:46.950
+Are there other built in modules like OS?
+
+322
+00:09:47.770 --> 00:09:49.270
+And how will I know.
+
+323
+00:09:49.390 --> 00:09:50.490
+Which are the built in modules?
+
+324
+00:09:50.970 --> 00:09:51.850
+So what do you do?
+
+325
+00:09:52.250 --> 00:09:54.190
+Search for built in modules in python.
+
+326
+00:09:55.330 --> 00:09:56.590
+And you will get a page.
+
+327
+00:09:56.870 --> 00:09:58.190
+Python module index.
+
+328
+00:09:58.830 --> 00:10:00.110
+And this python module index.
+
+329
+00:10:00.830 --> 00:10:02.070
+It will give you.
+
+330
+00:10:02.430 --> 00:10:04.110
+The list of all the modules.
+
+331
+00:10:04.110 --> 00:10:07.290
+Which python provides you.
+
+332
+00:10:07.770 --> 00:10:08.670
+Even some modules.
+
+333
+00:10:08.850 --> 00:10:09.610
+Which have been removed.
+
+334
+00:10:10.190 --> 00:10:11.850
+For security reasons.
+
+335
+00:10:12.110 --> 00:10:13.610
+Or for sanity reasons.
+
+336
+00:10:13.750 --> 00:10:15.370
+Or for reasons.
+
+337
+00:10:15.750 --> 00:10:17.090
+Other modules.
+
+338
+00:10:17.490 --> 00:10:18.670
+Fulfil that responsibility well.
+
+339
+00:10:19.330 --> 00:10:20.670
+You see a module called chunk has been
+
+340
+00:10:20.670 --> 00:10:21.070
+removed.
+
+341
+00:10:21.330 --> 00:10:23.630
+In 3.13. A module called CGI has
+
+342
+00:10:23.630 --> 00:10:23.910
+been removed.
+
+343
+00:10:24.270 --> 00:10:26.550
+In 3.13. Who takes these decisions?
+
+344
+00:10:27.770 --> 00:10:29.690
+The team of the Python Software Foundation.
+
+345
+00:10:29.690 --> 00:10:30.390
+The team takes the decision.
+
+346
+00:10:30.690 --> 00:10:31.490
+To remove this module.
+
+347
+00:10:32.150 --> 00:10:34.210
+Suppose there is a useful module.
+
+348
+00:10:34.730 --> 00:10:35.590
+People use it.
+
+349
+00:10:36.290 --> 00:10:37.350
+But it is taking up a lot of
+
+350
+00:10:37.350 --> 00:10:37.550
+space.
+
+351
+00:10:38.390 --> 00:10:39.450
+Python installation.
+
+352
+00:10:40.270 --> 00:10:41.850
+It is increasing it by 500 MB.
+
+353
+00:10:42.550 --> 00:10:44.190
+Python used to take space.
+
+354
+00:10:45.450 --> 00:10:46.370
+1 GB in our computer.
+
+355
+00:10:46.410 --> 00:10:47.310
+Now it is taking 1.5 GB.
+
+356
+00:10:47.470 --> 00:10:48.350
+And the team thinks.
+
+357
+00:10:48.790 --> 00:10:50.190
+Why is it taking so much space?
+
+358
+00:10:50.910 --> 00:10:52.330
+Remove this particular package.
+
+359
+00:10:53.610 --> 00:10:55.030
+Remove it from the built in module.
+
+360
+00:10:55.030 --> 00:10:56.830
+Remove it as an external module.
+
+361
+00:10:56.950 --> 00:10:57.710
+Let people instal it.
+
+362
+00:10:58.330 --> 00:10:59.270
+Because the built in module.
+
+363
+00:10:59.630 --> 00:11:01.250
+Comes with your python installation.
+
+364
+00:11:02.110 --> 00:11:03.890
+All these modules are available to you.
+
+365
+00:11:05.050 --> 00:11:06.810
+Irrespective of whether you want to use them
+
+366
+00:11:06.810 --> 00:11:07.130
+or not.
+
+367
+00:11:07.990 --> 00:11:09.170
+These are readily available.
+
+368
+00:11:09.350 --> 00:11:09.990
+If you type import json.
+
+369
+00:11:10.290 --> 00:11:11.030
+You won't get an error.
+
+370
+00:11:11.150 --> 00:11:13.630
+You type import json.
+
+371
+00:11:13.850 --> 00:11:14.650
+You won't get an error.
+
+372
+00:11:15.890 --> 00:11:17.650
+Because json is a built in module.
+
+373
+00:11:18.350 --> 00:11:19.470
+By the way json helps you.
+
+374
+00:11:19.590 --> 00:11:22.230
+To parse json strings in python.
+
+375
+00:11:22.230 --> 00:11:22.930
+We will read about it in the coming
+
+376
+00:11:22.930 --> 00:11:23.390
+videos.
+
+377
+00:11:24.470 --> 00:11:24.790
+For sure.
+
+378
+00:11:25.370 --> 00:11:26.550
+But these are the list of.
+
+379
+00:11:26.990 --> 00:11:29.990
+All the built in modules in python.
+
+380
+00:11:30.750 --> 00:11:32.030
+I hope this video was helpful.
+
+381
+00:11:32.150 --> 00:11:33.770
+I hope you are enjoying this course so
+
+382
+00:11:33.770 --> 00:11:34.050
+far.
+
+383
+00:11:34.310 --> 00:11:35.230
+In the coming videos.
+
+384
+00:11:35.450 --> 00:11:37.010
+We will strengthen our basics.
+
+385
+00:11:38.150 --> 00:11:39.070
+And after that.
+
+386
+00:11:40.230 --> 00:11:41.530
+What we won't do with the help of
+
+387
+00:11:41.530 --> 00:11:41.630
+AI.
+
+388
+00:11:42.330 --> 00:11:43.550
+You will also enjoy.
+
+389
+00:11:44.670 --> 00:11:45.790
+Thank you so much guys.
+
+390
+00:11:45.850 --> 00:11:46.690
+For watching this video.
+
+391
+00:11:47.250 --> 00:11:48.570
+See you in the next one.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WEBVTT
+
+1
+00:00:00.010 --> 00:00:01.910
+(Transcribed by TurboScribe. Go Unlimited to remove this message.) Alright guys, now we will talk about global
+
+2
+00:00:01.910 --> 00:00:05.450
+variables and local variables and why global and
+
+3
+00:00:05.450 --> 00:00:07.750
+local variables are important in Python.
+
+4
+00:00:07.990 --> 00:00:09.590
+I will right click on this and open
+
+5
+00:00:09.590 --> 00:00:11.070
+it in code, i.e. in VS Code.
+
+6
+00:00:12.010 --> 00:00:13.850
+And now I will tell you what are
+
+7
+00:00:13.850 --> 00:00:16.430
+global variables and what are local variables.
+
+8
+00:00:16.850 --> 00:00:19.130
+So far we have learned about functions.
+
+9
+00:00:20.150 --> 00:00:21.350
+Now we will see how the scope works
+
+10
+00:00:21.350 --> 00:00:25.410
+in the variables in functions.
+
+11
+00:00:27.250 --> 00:00:29.630
+I will create a file by typing local
+
+12
+00:00:29.630 --> 00:00:33.090
+variables.py. And I will turn on screen
+
+13
+00:00:33.090 --> 00:00:34.570
+cast mode for you so that you can
+
+14
+00:00:34.570 --> 00:00:35.210
+see what I am typing.
+
+15
+00:00:36.090 --> 00:00:39.330
+Let's write a very simple programme, def show
+
+16
+00:00:39.330 --> 00:00:40.410
+underscore value.
+
+17
+00:00:42.210 --> 00:00:44.950
+I have written a function here, let's say
+
+18
+00:00:44.950 --> 00:00:46.250
+x is equal to 11.
+
+19
+00:00:46.650 --> 00:00:48.670
+And I am printing x here.
+
+20
+00:00:48.670 --> 00:00:52.770
+If I call show value, then 11 will
+
+21
+00:00:52.770 --> 00:00:53.090
+be printed.
+
+22
+00:00:56.950 --> 00:00:59.450
+x is a local variable here.
+
+23
+00:00:59.670 --> 00:01:02.250
+Now if I tell you that I want
+
+24
+00:01:02.250 --> 00:01:04.670
+to change the value of x, then I
+
+25
+00:01:04.670 --> 00:01:05.370
+will do something like this.
+
+26
+00:01:05.450 --> 00:01:07.950
+x is equal to 78 and run show
+
+27
+00:01:07.950 --> 00:01:08.910
+value again.
+
+28
+00:01:10.170 --> 00:01:12.010
+So many of you may think that show
+
+29
+00:01:12.010 --> 00:01:14.430
+value will show x value 78 this time.
+
+30
+00:01:14.590 --> 00:01:15.950
+First it will show 11 and then 78.
+
+31
+00:01:15.950 --> 00:01:17.610
+But this does not happen.
+
+32
+00:01:18.090 --> 00:01:20.910
+And this does not happen because when we
+
+33
+00:01:20.910 --> 00:01:23.490
+call show value, then show value has its
+
+34
+00:01:23.490 --> 00:01:25.010
+own x is equal to 11.
+
+35
+00:01:25.590 --> 00:01:30.070
+Every function has its own variable that we
+
+36
+00:01:30.070 --> 00:01:30.650
+have declared inside the function.
+
+37
+00:01:31.430 --> 00:01:35.330
+When we call show value, x is equal
+
+38
+00:01:35.330 --> 00:01:35.910
+to 11.
+
+39
+00:01:36.810 --> 00:01:39.690
+Show value has its own variable of this
+
+40
+00:01:39.690 --> 00:01:39.790
+call.
+
+41
+00:01:39.950 --> 00:01:40.870
+It has nothing to do with the outside
+
+42
+00:01:40.870 --> 00:01:41.330
+variable.
+
+43
+00:01:42.350 --> 00:01:43.590
+This is called a local variable.
+
+44
+00:01:44.930 --> 00:01:46.550
+This is called a local variable.
+
+45
+00:01:47.430 --> 00:01:48.550
+And this is called a global variable.
+
+46
+00:01:49.230 --> 00:01:50.630
+Which is not inside any function, it is
+
+47
+00:01:50.630 --> 00:01:51.450
+outside the programme.
+
+48
+00:01:51.930 --> 00:01:54.430
+So you can't change the local variable from
+
+49
+00:01:54.430 --> 00:01:54.810
+outside.
+
+50
+00:01:56.370 --> 00:01:58.330
+I hope this is clear to you.
+
+51
+00:01:58.750 --> 00:01:59.750
+This is a global variable.
+
+52
+00:01:59.970 --> 00:02:00.770
+I will write it here.
+
+53
+00:02:01.310 --> 00:02:02.590
+Global variable.
+
+54
+00:02:03.870 --> 00:02:04.470
+Very good.
+
+55
+00:02:05.350 --> 00:02:07.090
+Now can we use the global variable inside
+
+56
+00:02:07.090 --> 00:02:07.770
+local?
+
+57
+00:02:09.289 --> 00:02:11.510
+Let's make a function called global.
+
+58
+00:02:11.510 --> 00:02:12.430
+Sorry, let's make a file.
+
+59
+00:02:15.110 --> 00:02:18.210
+Global variable.py I have copied and pasted
+
+60
+00:02:18.210 --> 00:02:18.790
+the same programme.
+
+61
+00:02:19.670 --> 00:02:21.030
+What I will do here is that I
+
+62
+00:02:21.030 --> 00:02:22.610
+have done x is equal to 78 here.
+
+63
+00:02:23.010 --> 00:02:24.170
+And I will remove this here.
+
+64
+00:02:24.310 --> 00:02:25.070
+I will just try to print x.
+
+65
+00:02:26.750 --> 00:02:28.690
+As soon as I run this, you see
+
+66
+00:02:28.690 --> 00:02:31.090
+here x is not defined error has come.
+
+67
+00:02:31.970 --> 00:02:33.770
+Which means that I am not able to
+
+68
+00:02:33.770 --> 00:02:35.230
+use x here.
+
+69
+00:02:35.410 --> 00:02:36.190
+What will happen if I raise this x?
+
+70
+00:02:37.830 --> 00:02:38.610
+And I run this.
+
+71
+00:02:39.470 --> 00:02:40.970
+78 78 Okay.
+
+72
+00:02:41.330 --> 00:02:45.090
+If I define x above, then I get
+
+73
+00:02:45.090 --> 00:02:46.430
+x in the function below.
+
+74
+00:02:47.070 --> 00:02:49.890
+And if I print x outside the function,
+
+75
+00:02:50.070 --> 00:02:50.970
+then also 78 will be printed.
+
+76
+00:02:51.090 --> 00:02:51.890
+The answer is yes.
+
+77
+00:02:52.070 --> 00:02:54.030
+Because there can be no other answer to
+
+78
+00:02:54.030 --> 00:02:54.430
+this question.
+
+79
+00:02:54.950 --> 00:02:56.110
+The value of x is 78.
+
+80
+00:02:56.350 --> 00:02:57.730
+It is 78 inside the function.
+
+81
+00:02:58.630 --> 00:02:59.830
+And it is 78 outside.
+
+82
+00:03:00.290 --> 00:03:02.330
+Okay, if I have done x is equal
+
+83
+00:03:02.330 --> 00:03:03.190
+to 78 here.
+
+84
+00:03:03.370 --> 00:03:05.590
+I want to change this.
+
+85
+00:03:05.850 --> 00:03:06.570
+I want to do x is equal to
+
+86
+00:03:06.570 --> 00:03:06.990
+78.
+
+87
+00:03:08.610 --> 00:03:09.750
+Not 78, I want to do something else.
+
+88
+00:03:09.750 --> 00:03:10.690
+I also want to do 72.
+
+89
+00:03:11.670 --> 00:03:14.750
+So if I run this, then this 72
+
+90
+00:03:14.750 --> 00:03:15.430
+will be printed inside the show value.
+
+91
+00:03:16.290 --> 00:03:18.190
+But this 78 will be printed outside.
+
+92
+00:03:18.330 --> 00:03:20.230
+Because the value of the global variable is
+
+93
+00:03:20.230 --> 00:03:20.790
+78.
+
+94
+00:03:21.510 --> 00:03:25.330
+But show value, because this time a local
+
+95
+00:03:25.330 --> 00:03:25.870
+variable is available.
+
+96
+00:03:25.990 --> 00:03:26.310
+So it will use the local value of
+
+97
+00:03:26.310 --> 00:03:27.130
+local variable x.
+
+98
+00:03:28.390 --> 00:03:29.570
+And if it does not get any value,
+
+99
+00:03:29.950 --> 00:03:30.810
+then it will use the global variable.
+
+100
+00:03:31.410 --> 00:03:31.810
+This is the rule.
+
+101
+00:03:32.230 --> 00:03:32.370
+Okay.
+
+102
+00:03:33.290 --> 00:03:34.570
+I hope you understood.
+
+103
+00:03:36.110 --> 00:03:38.390
+Now let's talk about the global keyword.
+
+104
+00:03:38.390 --> 00:03:40.170
+There is a keyword in Python.
+
+105
+00:03:40.590 --> 00:03:40.990
+Global.
+
+106
+00:03:41.290 --> 00:03:42.170
+And what does it do?
+
+107
+00:03:42.670 --> 00:03:46.150
+It is used to modify a global variable
+
+108
+00:03:46.150 --> 00:03:47.170
+inside a function.
+
+109
+00:03:47.810 --> 00:03:49.170
+Suppose I want to modify the value of
+
+110
+00:03:49.170 --> 00:03:49.270
+x.
+
+111
+00:03:50.110 --> 00:03:52.610
+If I write x is equal to 89.
+
+112
+00:03:53.430 --> 00:03:54.930
+So this has become a new local variable.
+
+113
+00:03:55.530 --> 00:03:56.470
+Yes, you are right.
+
+114
+00:03:56.610 --> 00:03:58.230
+This has become a new local variable.
+
+115
+00:03:59.130 --> 00:04:00.910
+But if I write global x before this.
+
+116
+00:04:02.950 --> 00:04:04.070
+Global x.
+
+117
+00:04:04.610 --> 00:04:05.050
+So what will happen?
+
+118
+00:04:05.910 --> 00:04:08.190
+So this will change the global variable.
+
+119
+00:04:08.970 --> 00:04:10.510
+That is, the 78 was now 89.
+
+120
+00:04:10.790 --> 00:04:13.490
+So the output of this programme will be
+
+121
+00:04:13.490 --> 00:04:15.930
+89, 89 and 89 here too.
+
+122
+00:04:16.070 --> 00:04:17.510
+Because I have used the global keyword in
+
+123
+00:04:17.510 --> 00:04:17.890
+the function.
+
+124
+00:04:18.250 --> 00:04:21.710
+So if you want to change the global
+
+125
+00:04:21.710 --> 00:04:22.150
+variable from within the function.
+
+126
+00:04:22.270 --> 00:04:23.170
+So what do you have to do?
+
+127
+00:04:23.570 --> 00:04:24.890
+You will have to use the global keyword.
+
+128
+00:04:26.470 --> 00:04:27.890
+But I would like to say one thing
+
+129
+00:04:27.890 --> 00:04:28.090
+here.
+
+130
+00:04:28.450 --> 00:04:30.850
+Use the global keyword very carefully.
+
+131
+00:04:32.190 --> 00:04:35.430
+Global variables can make code harder to understand
+
+132
+00:04:35.430 --> 00:04:35.950
+and debug.
+
+133
+00:04:36.490 --> 00:04:39.870
+Try not to use the global keyword in
+
+134
+00:04:39.870 --> 00:04:39.970
+your programmes.
+
+135
+00:04:41.830 --> 00:04:43.010
+And this is a concept.
+
+136
+00:04:43.190 --> 00:04:44.050
+Definitely a concept.
+
+137
+00:04:44.170 --> 00:04:45.330
+Many people say that if this is the
+
+138
+00:04:45.330 --> 00:04:47.490
+case, then why is there a global keyword
+
+139
+00:04:47.490 --> 00:04:47.670
+in Python?
+
+140
+00:04:47.930 --> 00:04:48.810
+Why when it is so bad?
+
+141
+00:04:49.190 --> 00:04:50.170
+It's not bad.
+
+142
+00:04:50.870 --> 00:04:52.650
+I'm just saying don't prefer it.
+
+143
+00:04:52.650 --> 00:04:53.730
+Because you will be confused.
+
+144
+00:04:54.510 --> 00:04:55.730
+I hope you understood.
+
+145
+00:04:56.350 --> 00:04:57.930
+I hope you understood local variables.
+
+146
+00:04:58.190 --> 00:04:59.030
+I understood global variables.
+
+147
+00:04:59.030 --> 00:05:01.050
+I would like to summarise once again.
+
+148
+00:05:01.490 --> 00:05:04.250
+Local variables are the variables that are made
+
+149
+00:05:04.250 --> 00:05:04.350
+in the function.
+
+150
+00:05:05.730 --> 00:05:09.390
+Global variables are the variables that you make
+
+151
+00:05:09.390 --> 00:05:09.490
+outside the function.
+
+152
+00:05:11.470 --> 00:05:14.050
+If you use such a variable in the
+
+153
+00:05:14.050 --> 00:05:15.270
+function that has never been made.
+
+154
+00:05:15.810 --> 00:05:17.170
+That is, which is not made in the
+
+155
+00:05:17.170 --> 00:05:17.270
+function.
+
+156
+00:05:17.910 --> 00:05:19.430
+Then it will check globally.
+
+157
+00:05:19.650 --> 00:05:21.130
+And if it happens, it will use its
+
+158
+00:05:21.130 --> 00:05:21.450
+value there.
+
+159
+00:05:22.470 --> 00:05:26.410
+If you want to change the global variable
+
+160
+00:05:26.410 --> 00:05:26.610
+in the function.
+
+161
+00:05:26.610 --> 00:05:26.910
+If you want to change the global variable
+
+162
+00:05:26.910 --> 00:05:27.290
+in the function.
+
+163
+00:05:27.290 --> 00:05:29.130
+Write the name of the global variable.
+
+164
+00:05:29.750 --> 00:05:30.650
+Then if you change it, it will be
+
+165
+00:05:30.650 --> 00:05:31.390
+a global change.
+
+166
+00:05:32.390 --> 00:05:33.550
+I hope you understood.
+
+167
+00:05:33.710 --> 00:05:35.350
+I hope it was very easy.
+
+168
+00:05:35.910 --> 00:05:37.190
+And you guys practise it.
+
+169
+00:05:37.590 --> 00:05:38.810
+Any question comes to your mind.
+
+170
+00:05:39.130 --> 00:05:40.290
+What will happen if we do this?
+
+171
+00:05:40.950 --> 00:05:43.490
+So I want you to run the programme
+
+172
+00:05:43.490 --> 00:05:44.530
+and find the answer.
+
+173
+00:05:45.030 --> 00:05:46.730
+I hope you are enjoying this course so
+
+174
+00:05:46.730 --> 00:05:47.030
+far.
+
+175
+00:05:47.110 --> 00:05:48.450
+See you in the next video.
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WEBVTT
+
+1
+00:00:00.010 --> 00:00:02.090
+(Transcribed by TurboScribe. Go Unlimited to remove this message.) Guys, now we are going to talk about
+
+2
+00:00:02.090 --> 00:00:02.730
+Error Handling.
+
+3
+00:00:03.330 --> 00:00:06.310
+In Python, if you get any error, then
+
+4
+00:00:06.310 --> 00:00:07.470
+your program crashes.
+
+5
+00:00:08.210 --> 00:00:10.570
+Error Handling ensures that you are handling those
+
+6
+00:00:10.570 --> 00:00:12.110
+errors properly.
+
+7
+00:00:12.790 --> 00:00:14.370
+So, what I will do here, first of
+
+8
+00:00:14.370 --> 00:00:15.230
+all, I am going to open this folder
+
+9
+00:00:15.230 --> 00:00:15.830
+in VS Code.
+
+10
+00:00:16.990 --> 00:00:18.970
+And now I will show you how you
+
+11
+00:00:18.970 --> 00:00:19.690
+can do Error Handling.
+
+12
+00:00:21.470 --> 00:00:22.670
+So, here I will make a program called
+
+13
+00:00:22.670 --> 00:00:27.490
+ErrorHandlingBasics.py. I will make a program called
+
+14
+00:00:27.490 --> 00:00:31.470
+ErrorHandlingBasics.py. And here I will show you
+
+15
+00:00:31.470 --> 00:00:32.390
+an error.
+
+16
+00:00:33.130 --> 00:00:36.170
+And then I will tell you how to
+
+17
+00:00:36.170 --> 00:00:37.690
+stop the Python program from crashing.
+
+18
+00:00:39.650 --> 00:00:44.230
+Let's say I write print and initializing here.
+
+19
+00:00:44.370 --> 00:00:45.750
+Means I am initializing something.
+
+20
+00:00:45.990 --> 00:00:50.250
+After this, I write a is equal to
+
+21
+00:00:50.250 --> 00:00:51.270
+int input.
+
+22
+00:00:51.750 --> 00:00:52.650
+You know what this is.
+
+23
+00:00:53.550 --> 00:00:56.270
+Sorry, a is equal to int input.
+
+24
+00:00:56.430 --> 00:00:57.870
+Enter a.
+
+25
+00:00:58.350 --> 00:01:00.670
+And after this, let's say you want to
+
+26
+00:01:00.670 --> 00:01:01.090
+enter b.
+
+27
+00:01:01.810 --> 00:01:02.650
+And why am I not turning on screen
+
+28
+00:01:02.650 --> 00:01:03.349
+cast mode?
+
+29
+00:01:03.989 --> 00:01:06.250
+So that you can see what I am
+
+30
+00:01:06.250 --> 00:01:06.690
+typing.
+
+31
+00:01:07.010 --> 00:01:09.610
+So, here I am writing and duplicating it.
+
+32
+00:01:09.890 --> 00:01:11.390
+By using alt shift down arrow key.
+
+33
+00:01:11.890 --> 00:01:13.070
+And then I am saying enter b.
+
+34
+00:01:13.710 --> 00:01:14.750
+So, I said enter a.
+
+35
+00:01:14.890 --> 00:01:16.110
+And let's put a backslash n here.
+
+36
+00:01:16.210 --> 00:01:17.770
+Backslash n means new line.
+
+37
+00:01:18.150 --> 00:01:19.390
+And it is going to print a new
+
+38
+00:01:19.390 --> 00:01:19.490
+line.
+
+39
+00:01:20.350 --> 00:01:24.390
+So, here we entered a, b and after
+
+40
+00:01:24.390 --> 00:01:25.230
+entering a and b.
+
+41
+00:01:26.890 --> 00:01:33.910
+We will say the value of a by
+
+42
+00:01:33.910 --> 00:01:35.090
+b is.
+
+43
+00:01:35.670 --> 00:01:37.370
+And here I will write a by b.
+
+44
+00:01:38.250 --> 00:01:39.190
+Very good.
+
+45
+00:01:39.930 --> 00:01:43.830
+And I will write print and thank you.
+
+46
+00:01:44.310 --> 00:01:45.210
+Something like this.
+
+47
+00:01:45.530 --> 00:01:47.390
+So, as soon as I run it.
+
+48
+00:01:47.390 --> 00:01:49.490
+You guys see here.
+
+49
+00:01:49.530 --> 00:01:50.010
+It will ask me a.
+
+50
+00:01:50.610 --> 00:01:51.530
+Then it will ask me b.
+
+51
+00:01:52.570 --> 00:01:53.810
+So, a is asking me.
+
+52
+00:01:53.910 --> 00:01:54.670
+Let's say I said 2.
+
+53
+00:01:55.410 --> 00:01:56.510
+b is asking me.
+
+54
+00:01:56.590 --> 00:01:57.550
+Let's say I said 5.
+
+55
+00:01:58.270 --> 00:02:00.110
+And here it showed 0.4. Then it
+
+56
+00:02:00.110 --> 00:02:00.570
+said thank you.
+
+57
+00:02:00.850 --> 00:02:01.290
+Very good.
+
+58
+00:02:01.570 --> 00:02:03.190
+Wow, that's amazing.
+
+59
+00:02:03.750 --> 00:02:04.570
+Program is working very well.
+
+60
+00:02:05.310 --> 00:02:06.010
+You must be thinking the same.
+
+61
+00:02:06.490 --> 00:02:07.570
+But let me tell you something.
+
+62
+00:02:08.270 --> 00:02:11.190
+This does not happen if b value becomes
+
+63
+00:02:11.190 --> 00:02:11.470
+0.
+
+64
+00:02:12.010 --> 00:02:13.010
+Let me show you.
+
+65
+00:02:14.110 --> 00:02:15.510
+I will say a is equal to 5.
+
+66
+00:02:15.510 --> 00:02:17.030
+b is equal to 0.
+
+67
+00:02:17.290 --> 00:02:18.230
+What happened?
+
+68
+00:02:18.370 --> 00:02:19.470
+There was an error in my program.
+
+69
+00:02:19.810 --> 00:02:22.030
+And the lines after this were not executed.
+
+70
+00:02:22.790 --> 00:02:24.250
+Means this line was not executed.
+
+71
+00:02:24.770 --> 00:02:25.770
+This is injustice.
+
+72
+00:02:26.310 --> 00:02:27.250
+This line should have been executed.
+
+73
+00:02:27.770 --> 00:02:28.570
+Why this line was not executed?
+
+74
+00:02:28.930 --> 00:02:29.870
+Why thank you was not executed?
+
+75
+00:02:30.730 --> 00:02:33.490
+Suppose this was a very important line of
+
+76
+00:02:33.490 --> 00:02:33.590
+your program.
+
+77
+00:02:34.010 --> 00:02:35.050
+What would you do then?
+
+78
+00:02:35.570 --> 00:02:36.330
+You would have been in trouble.
+
+79
+00:02:37.270 --> 00:02:39.050
+So, here print thank you.
+
+80
+00:02:39.570 --> 00:02:41.750
+What we are doing is not happening.
+
+81
+00:02:41.870 --> 00:02:43.270
+Because there is an error in this line.
+
+82
+00:02:43.270 --> 00:02:46.690
+So, how can we fix this?
+
+83
+00:02:47.290 --> 00:02:51.110
+We can fix this by wrapping everything inside
+
+84
+00:02:51.110 --> 00:02:53.430
+try and accept.
+
+85
+00:02:54.770 --> 00:02:56.310
+So, you can use try here.
+
+86
+00:02:56.530 --> 00:02:58.370
+And you will put colon inside this.
+
+87
+00:02:59.930 --> 00:03:01.030
+You are saying try this code.
+
+88
+00:03:02.050 --> 00:03:03.110
+If it works, then it is a good
+
+89
+00:03:03.110 --> 00:03:03.370
+thing.
+
+90
+00:03:03.870 --> 00:03:06.390
+If it does not work, then what to
+
+91
+00:03:06.390 --> 00:03:06.590
+do?
+
+92
+00:03:07.010 --> 00:03:09.410
+Print some error occurred.
+
+93
+00:03:10.270 --> 00:03:11.710
+Okay, we wrote it here.
+
+94
+00:03:11.710 --> 00:03:13.590
+So, we said try.
+
+95
+00:03:14.330 --> 00:03:16.770
+Then I tried to try this.
+
+96
+00:03:17.610 --> 00:03:20.070
+If it is not working, then I said
+
+97
+00:03:20.070 --> 00:03:22.030
+print this.
+
+98
+00:03:22.190 --> 00:03:24.690
+Otherwise, if it is working, then there is
+
+99
+00:03:24.690 --> 00:03:25.050
+no problem.
+
+100
+00:03:25.310 --> 00:03:25.950
+So, print this.
+
+101
+00:03:26.290 --> 00:03:26.990
+Ignore this.
+
+102
+00:03:27.610 --> 00:03:28.590
+Let's see what happens if I calculate 5
+
+103
+00:03:28.590 --> 00:03:29.910
+by 0 again.
+
+104
+00:03:30.990 --> 00:03:31.790
+I said 5.
+
+105
+00:03:32.270 --> 00:03:33.150
+B value is 0.
+
+106
+00:03:33.950 --> 00:03:34.990
+Here it came very peacefully.
+
+107
+00:03:35.430 --> 00:03:36.390
+Some error occurred.
+
+108
+00:03:37.070 --> 00:03:37.730
+And thank you.
+
+109
+00:03:38.610 --> 00:03:43.170
+To find out which error occurred, you can
+
+110
+00:03:43.170 --> 00:03:47.450
+write accept exception as e.
+
+111
+00:03:47.590 --> 00:03:49.230
+What I did till now was absolutely right.
+
+112
+00:03:49.510 --> 00:03:52.950
+But you can add accept exception as e.
+
+113
+00:03:53.910 --> 00:03:54.690
+And what will happen after doing this?
+
+114
+00:03:55.850 --> 00:03:57.430
+You can print e here.
+
+115
+00:03:58.410 --> 00:03:59.950
+You can say print e.
+
+116
+00:04:00.690 --> 00:04:02.830
+And as soon as you print e, this
+
+117
+00:04:02.830 --> 00:04:03.630
+exception will also be printed.
+
+118
+00:04:03.630 --> 00:04:05.670
+So, if I say value of a is
+
+119
+00:04:05.670 --> 00:04:07.930
+5, value of b is 0.
+
+120
+00:04:08.450 --> 00:04:10.670
+And here you can see some error occurred.
+
+121
+00:04:11.050 --> 00:04:12.290
+It was division by 0 error.
+
+122
+00:04:13.070 --> 00:04:14.090
+Here you can see.
+
+123
+00:04:14.370 --> 00:04:14.930
+I do one thing.
+
+124
+00:04:15.329 --> 00:04:16.190
+Why don't I write it like this?
+
+125
+00:04:17.510 --> 00:04:18.649
+Some error occurred.
+
+126
+00:04:19.390 --> 00:04:23.110
+And here I will say e which is
+
+127
+00:04:23.110 --> 00:04:23.550
+exception.
+
+128
+00:04:24.330 --> 00:04:26.530
+And now I say 5 and 0.
+
+129
+00:04:27.030 --> 00:04:28.310
+So, it is saying some error occurred.
+
+130
+00:04:28.730 --> 00:04:29.590
+Division by 0.
+
+131
+00:04:29.790 --> 00:04:31.030
+Means this error has come.
+
+132
+00:04:31.910 --> 00:04:32.970
+So, that's great.
+
+133
+00:04:32.970 --> 00:04:35.610
+Whenever I want to run my code, I
+
+134
+00:04:35.610 --> 00:04:36.450
+will wrap it in try.
+
+135
+00:04:37.370 --> 00:04:39.250
+So that the code below is not affected.
+
+136
+00:04:39.510 --> 00:04:42.530
+Assume that you are calculating the percentage of
+
+137
+00:04:42.530 --> 00:04:42.630
+50 people.
+
+138
+00:04:43.270 --> 00:04:45.750
+From that, the 21st person, there is some
+
+139
+00:04:45.750 --> 00:04:47.330
+error in his percentage calculation.
+
+140
+00:04:48.090 --> 00:04:49.190
+Now, error does not come only by dividing
+
+141
+00:04:49.190 --> 00:04:49.670
+by 0.
+
+142
+00:04:50.450 --> 00:04:51.930
+I gave you an example.
+
+143
+00:04:52.390 --> 00:04:54.230
+There can be many ways to get an
+
+144
+00:04:54.230 --> 00:04:54.990
+error in Python.
+
+145
+00:04:55.710 --> 00:04:56.410
+This was one way.
+
+146
+00:04:57.190 --> 00:04:59.650
+And because the error came, your program will
+
+147
+00:04:59.650 --> 00:04:59.990
+crash.
+
+148
+00:04:59.990 --> 00:05:02.770
+And you don't want your program to crash.
+
+149
+00:05:03.410 --> 00:05:06.510
+And that's why we use try and accept.
+
+150
+00:05:07.110 --> 00:05:08.910
+Its syntax works like this.
+
+151
+00:05:09.610 --> 00:05:11.050
+Now, look at the example here.
+
+152
+00:05:11.150 --> 00:05:12.630
+In which I have asked for x is
+
+153
+00:05:12.630 --> 00:05:13.890
+equal to value.
+
+154
+00:05:14.230 --> 00:05:15.410
+And divided it by 10.
+
+155
+00:05:16.010 --> 00:05:19.830
+Here we can handle different types of exceptions
+
+156
+00:05:19.830 --> 00:05:20.910
+like this.
+
+157
+00:05:21.110 --> 00:05:23.850
+For example, if value error comes, then you
+
+158
+00:05:23.850 --> 00:05:24.970
+will get this line executed.
+
+159
+00:05:25.590 --> 00:05:28.190
+If 0 division error comes, then you will
+
+160
+00:05:28.190 --> 00:05:29.090
+get this line executed.
+
+161
+00:05:29.090 --> 00:05:31.870
+And in the same way, you can handle
+
+162
+00:05:31.870 --> 00:05:34.630
+different types of errors by applying different exceptions.
+
+163
+00:05:36.130 --> 00:05:38.470
+Every type of this except block.
+
+164
+00:05:38.770 --> 00:05:40.250
+Like this one will handle the value error.
+
+165
+00:05:41.190 --> 00:05:43.430
+And this one will handle the 0 division
+
+166
+00:05:43.430 --> 00:05:44.570
+error.
+
+167
+00:05:46.130 --> 00:05:47.410
+I hope you understood.
+
+168
+00:05:47.750 --> 00:05:50.250
+And that was all about try and accept.
+
+169
+00:05:50.390 --> 00:05:51.570
+The basics are the same.
+
+170
+00:05:52.110 --> 00:05:53.790
+But let me also tell you about finally.
+
+171
+00:05:53.970 --> 00:05:54.850
+We also have finally.
+
+172
+00:05:55.330 --> 00:05:56.470
+Look, if there is an error, then try
+
+173
+00:05:56.470 --> 00:05:57.370
+will not work.
+
+174
+00:05:57.550 --> 00:05:58.250
+Except will work.
+
+175
+00:05:58.250 --> 00:06:00.110
+If there is no error and everything is
+
+176
+00:06:00.110 --> 00:06:01.130
+fine, then try will work.
+
+177
+00:06:01.510 --> 00:06:04.570
+But there is a block that always works.
+
+178
+00:06:04.710 --> 00:06:05.510
+That is finally.
+
+179
+00:06:06.070 --> 00:06:08.430
+And if I print this and write here.
+
+180
+00:06:08.670 --> 00:06:10.970
+I will always run.
+
+181
+00:06:11.210 --> 00:06:12.210
+I write this.
+
+182
+00:06:12.290 --> 00:06:13.150
+I will always run.
+
+183
+00:06:13.450 --> 00:06:14.310
+So no matter what.
+
+184
+00:06:14.770 --> 00:06:16.310
+It will always run.
+
+185
+00:06:16.770 --> 00:06:18.270
+Let me run it for you.
+
+186
+00:06:18.750 --> 00:06:19.710
+And let me show you.
+
+187
+00:06:19.730 --> 00:06:20.990
+Suppose I write 9 here.
+
+188
+00:06:21.110 --> 00:06:22.350
+So you see, I will always run came
+
+189
+00:06:22.350 --> 00:06:22.690
+here.
+
+190
+00:06:23.330 --> 00:06:25.330
+And suppose I write 0 here.
+
+191
+00:06:25.410 --> 00:06:26.710
+That is, I try to produce an error.
+
+192
+00:06:27.490 --> 00:06:30.310
+So here division by 0 is not allowed.
+
+193
+00:06:30.650 --> 00:06:32.950
+That is, this exception was handled.
+
+194
+00:06:33.490 --> 00:06:36.010
+And I will always run is printed here.
+
+195
+00:06:36.090 --> 00:06:37.690
+That is, finally will always run.
+
+196
+00:06:38.390 --> 00:06:39.810
+Now many of you will feel that when
+
+197
+00:06:39.810 --> 00:06:40.730
+finally will always run.
+
+198
+00:06:40.870 --> 00:06:41.630
+So what would you have written without finally?
+
+199
+00:06:42.390 --> 00:06:43.670
+That is, you would have written like this.
+
+200
+00:06:44.270 --> 00:06:44.930
+What was the need to put finally?
+
+201
+00:06:45.870 --> 00:06:47.090
+So the need to put finally.
+
+202
+00:06:47.730 --> 00:06:50.310
+It is when we have to return the
+
+203
+00:06:50.310 --> 00:06:50.410
+function.
+
+204
+00:06:51.090 --> 00:06:52.410
+In try and accept.
+
+205
+00:06:53.110 --> 00:06:54.970
+Suppose this whole code is in a function.
+
+206
+00:06:55.690 --> 00:06:57.250
+If this whole code was in a function.
+
+207
+00:06:58.530 --> 00:06:59.710
+Then I would have returned.
+
+208
+00:06:59.790 --> 00:07:01.590
+Either return in try or return in accept.
+
+209
+00:07:02.190 --> 00:07:03.430
+And when I return.
+
+210
+00:07:03.770 --> 00:07:05.570
+Then the code below will not run in
+
+211
+00:07:05.570 --> 00:07:05.990
+the function.
+
+212
+00:07:06.550 --> 00:07:08.490
+So finally it will run.
+
+213
+00:07:08.930 --> 00:07:09.810
+Basically this happens.
+
+214
+00:07:10.190 --> 00:07:11.830
+Now this thing is not used so much.
+
+215
+00:07:12.090 --> 00:07:12.570
+Let me tell you.
+
+216
+00:07:12.670 --> 00:07:13.790
+But again you should know.
+
+217
+00:07:14.210 --> 00:07:14.950
+I have also included in the handbook.
+
+218
+00:07:15.850 --> 00:07:16.510
+Included in detail.
+
+219
+00:07:17.310 --> 00:07:18.370
+You must go through.
+
+220
+00:07:18.590 --> 00:07:19.830
+Run the programs and see.
+
+221
+00:07:20.070 --> 00:07:21.270
+I hope you understood.
+
+222
+00:07:21.670 --> 00:07:23.170
+And I hope you are enjoying this course
+
+223
+00:07:23.170 --> 00:07:23.670
+so far.
+
+224
+00:07:23.670 --> 00:07:25.490
+See you in the next video.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WEBVTT
+
+1
+00:00:00.010 --> 00:00:01.730
+(Transcribed by TurboScribe. Go Unlimited to remove this message.) Alright guys, now we are going to talk
+
+2
+00:00:01.730 --> 00:00:04.530
+about File IoK, how to read and write
+
+3
+00:00:04.530 --> 00:00:05.350
+files in Python.
+
+4
+00:00:05.850 --> 00:00:08.210
+So, let's get started and I really don't
+
+5
+00:00:08.210 --> 00:00:09.430
+want you to get bored.
+
+6
+00:00:09.730 --> 00:00:12.230
+But there are some basics that you should
+
+7
+00:00:12.230 --> 00:00:12.830
+know.
+
+8
+00:00:13.170 --> 00:00:15.610
+Look, many people must be thinking that the
+
+9
+00:00:15.610 --> 00:00:16.650
+whole Python is being taught here.
+
+10
+00:00:16.730 --> 00:00:18.010
+But I want to clear one thing to
+
+11
+00:00:18.010 --> 00:00:19.830
+you that if you don't know these basics,
+
+12
+00:00:20.350 --> 00:00:21.370
+then you can't leverage AI.
+
+13
+00:00:22.530 --> 00:00:24.950
+I promised you that I will make you
+
+14
+00:00:24.950 --> 00:00:26.170
+do AI-assisted Python.
+
+15
+00:00:26.170 --> 00:00:28.270
+And I am still standing on my promise.
+
+16
+00:00:29.830 --> 00:00:31.689
+So, with that said, let's make a new
+
+17
+00:00:31.689 --> 00:00:31.890
+file.
+
+18
+00:00:32.670 --> 00:00:35.990
+And let's talk about the file basics here.
+
+19
+00:00:36.470 --> 00:00:38.730
+If you talk about any Python programme, then
+
+20
+00:00:38.730 --> 00:00:42.110
+your Python programme is loaded in the memory
+
+21
+00:00:42.110 --> 00:00:42.550
+first.
+
+22
+00:00:43.130 --> 00:00:45.610
+When I say memory, memory means random access
+
+23
+00:00:45.610 --> 00:00:47.950
+memory, which is also the RAM in our
+
+24
+00:00:47.950 --> 00:00:48.050
+computer.
+
+25
+00:00:48.770 --> 00:00:49.870
+And when that programme is loaded in our
+
+26
+00:00:49.870 --> 00:00:53.630
+RAM, then it is executed line by line
+
+27
+00:00:53.630 --> 00:00:54.590
+through Python.
+
+28
+00:00:54.590 --> 00:00:59.070
+But as soon as our programme terminates, all
+
+29
+00:00:59.070 --> 00:01:02.330
+the variables, whatever happened in the programme, all
+
+30
+00:01:02.330 --> 00:01:03.930
+that information is lost.
+
+31
+00:01:04.670 --> 00:01:06.790
+And that's why we use files.
+
+32
+00:01:07.830 --> 00:01:10.210
+Today we will see how to read and
+
+33
+00:01:10.210 --> 00:01:11.230
+write files.
+
+34
+00:01:11.570 --> 00:01:15.330
+And how we can play with files in
+
+35
+00:01:15.330 --> 00:01:15.430
+Python.
+
+36
+00:01:16.170 --> 00:01:18.370
+So, what we will do here, first of
+
+37
+00:01:18.370 --> 00:01:19.790
+all, let's say we have a variable.
+
+38
+00:01:19.790 --> 00:01:23.190
+And this is A is equal to Harry
+
+39
+00:01:23.190 --> 00:01:24.230
+is good.
+
+40
+00:01:24.530 --> 00:01:26.570
+Suppose this is our A is equal to
+
+41
+00:01:26.570 --> 00:01:27.270
+Harry is good.
+
+42
+00:01:27.950 --> 00:01:29.410
+Now what I want to do here, I
+
+43
+00:01:29.410 --> 00:01:30.490
+want to write this string.
+
+44
+00:01:31.650 --> 00:01:32.390
+Where should I write it?
+
+45
+00:01:32.490 --> 00:01:34.410
+I want to write it in a file
+
+46
+00:01:34.410 --> 00:01:38.130
+called harry.txt. So, what I will do
+
+47
+00:01:38.130 --> 00:01:39.730
+to do this, I will say file is
+
+48
+00:01:39.730 --> 00:01:40.910
+equal to open.
+
+49
+00:01:41.270 --> 00:01:44.230
+And here I will write harry.txt. And
+
+50
+00:01:44.230 --> 00:01:46.130
+after that, I will say here that I
+
+51
+00:01:46.130 --> 00:01:47.930
+want to open it in write mode.
+
+52
+00:01:47.930 --> 00:01:49.590
+So, here I wrote the name of the
+
+53
+00:01:49.590 --> 00:01:49.690
+file.
+
+54
+00:01:49.910 --> 00:01:50.690
+Here I wrote that I want to open
+
+55
+00:01:50.690 --> 00:01:51.430
+it in write mode.
+
+56
+00:01:52.290 --> 00:01:53.770
+And after that, what will I do here?
+
+57
+00:01:53.930 --> 00:01:55.670
+I will write here file.
+
+58
+00:01:56.770 --> 00:01:58.150
+And after that, I will write in this
+
+59
+00:01:58.150 --> 00:01:58.510
+file.
+
+60
+00:01:59.930 --> 00:02:00.450
+So, how will I write?
+
+61
+00:02:01.370 --> 00:02:05.010
+I will write here file.write. So, what
+
+62
+00:02:05.010 --> 00:02:05.150
+is write?
+
+63
+00:02:05.410 --> 00:02:06.170
+Write is a function.
+
+64
+00:02:06.690 --> 00:02:13.230
+So, I am writing writefile.write, which is
+
+65
+00:02:13.230 --> 00:02:13.710
+a function.
+
+66
+00:02:13.970 --> 00:02:14.830
+And I will say A.
+
+67
+00:02:14.830 --> 00:02:16.690
+And as soon as I run this programme,
+
+68
+00:02:17.510 --> 00:02:18.030
+what will happen?
+
+69
+00:02:18.170 --> 00:02:19.130
+That a file will be made.
+
+70
+00:02:19.490 --> 00:02:22.070
+But I want to tell you one more
+
+71
+00:02:22.070 --> 00:02:23.690
+thing that you will have to write this
+
+72
+00:02:23.690 --> 00:02:23.970
+too.
+
+73
+00:02:24.070 --> 00:02:25.090
+What are you writing?
+
+74
+00:02:25.310 --> 00:02:26.350
+Tell me the meaning of this.
+
+75
+00:02:26.390 --> 00:02:28.530
+So, see, the first thing I mean to
+
+76
+00:02:28.530 --> 00:02:28.910
+tell you.
+
+77
+00:02:29.470 --> 00:02:33.270
+The first thing that means here is that
+
+78
+00:02:33.270 --> 00:02:36.010
+you have to make a string here.
+
+79
+00:02:37.710 --> 00:02:38.770
+So, you have to make this string.
+
+80
+00:02:40.590 --> 00:02:41.850
+And after that, what do you have to
+
+81
+00:02:41.850 --> 00:02:42.230
+do?
+
+82
+00:02:42.390 --> 00:02:43.570
+Now this string can be anything.
+
+83
+00:02:43.570 --> 00:02:45.830
+It can be a result of any programme.
+
+84
+00:02:46.470 --> 00:02:47.770
+This string should be basically.
+
+85
+00:02:48.270 --> 00:02:50.590
+After this, you will open the file using
+
+86
+00:02:50.590 --> 00:02:51.250
+open function.
+
+87
+00:02:51.670 --> 00:02:53.630
+What are we doing in this line?
+
+88
+00:02:54.990 --> 00:02:56.610
+In this line, we are saying that open
+
+89
+00:02:56.610 --> 00:02:58.130
+is a function that takes two arguments.
+
+90
+00:02:58.510 --> 00:03:00.190
+The first argument is the name of the
+
+91
+00:03:00.190 --> 00:03:00.290
+file.
+
+92
+00:03:00.510 --> 00:03:01.890
+And the second is the mode in which
+
+93
+00:03:01.890 --> 00:03:02.690
+you want to open.
+
+94
+00:03:03.210 --> 00:03:05.030
+I want to open harry.txt in write
+
+95
+00:03:05.030 --> 00:03:05.270
+mode.
+
+96
+00:03:06.150 --> 00:03:08.730
+And I have opened a file here.
+
+97
+00:03:09.370 --> 00:03:12.150
+I said through this line that write this
+
+98
+00:03:12.150 --> 00:03:12.890
+string in this line.
+
+99
+00:03:12.890 --> 00:03:14.230
+So, what will happen?
+
+100
+00:03:14.650 --> 00:03:17.730
+So, this string will be written in this
+
+101
+00:03:17.730 --> 00:03:18.030
+file.
+
+102
+00:03:18.430 --> 00:03:19.370
+And this file does not exist.
+
+103
+00:03:20.130 --> 00:03:22.630
+This file called harry.txt will be created.
+
+104
+00:03:23.210 --> 00:03:24.610
+Now what will happen after this?
+
+105
+00:03:24.890 --> 00:03:25.710
+My work is done.
+
+106
+00:03:26.350 --> 00:03:27.490
+My work was done up to here.
+
+107
+00:03:27.910 --> 00:03:29.190
+So, what is the need for this?
+
+108
+00:03:29.690 --> 00:03:31.510
+Basically, the need for this is that once
+
+109
+00:03:31.510 --> 00:03:32.390
+we open the file.
+
+110
+00:03:32.870 --> 00:03:36.110
+So, we tell the operating system that we
+
+111
+00:03:36.110 --> 00:03:36.510
+are leaving this file.
+
+112
+00:03:37.250 --> 00:03:39.590
+Means that the work we had to do
+
+113
+00:03:39.590 --> 00:03:40.670
+with this file, we have done it now.
+
+114
+00:03:40.670 --> 00:03:42.470
+So, we are freeing this file.
+
+115
+00:03:42.970 --> 00:03:45.370
+And that's why what we do here?
+
+116
+00:03:45.970 --> 00:03:47.830
+We say file.close. As soon as I
+
+117
+00:03:47.830 --> 00:03:49.710
+run this programme, you will see a file
+
+118
+00:03:49.710 --> 00:03:52.990
+called harry.txt. In which the text will
+
+119
+00:03:52.990 --> 00:03:53.990
+be harry is good.
+
+120
+00:03:54.410 --> 00:03:57.250
+So, this is a very basic thing that
+
+121
+00:03:57.250 --> 00:03:58.630
+you should know.
+
+122
+00:03:59.170 --> 00:04:00.790
+Harry is good.
+
+123
+00:04:01.050 --> 00:04:01.190
+Okay?
+
+124
+00:04:01.870 --> 00:04:04.810
+So, this was our harry.txt. In which
+
+125
+00:04:04.810 --> 00:04:05.650
+harry is good came.
+
+126
+00:04:05.890 --> 00:04:06.910
+So far so good.
+
+127
+00:04:07.030 --> 00:04:08.790
+This was the way we write the file.
+
+128
+00:04:08.790 --> 00:04:10.010
+Now I will tell you the way to
+
+129
+00:04:10.010 --> 00:04:10.430
+read the file.
+
+130
+00:04:10.890 --> 00:04:12.070
+Which is very simple.
+
+131
+00:04:12.330 --> 00:04:13.110
+What will you do here?
+
+132
+00:04:13.170 --> 00:04:15.230
+You will write file is equal to open.
+
+133
+00:04:15.350 --> 00:04:18.010
+Let's say I have a file robot.txt.
+
+134
+00:04:18.630 --> 00:04:19.670
+And what will I say here?
+
+135
+00:04:19.730 --> 00:04:20.089
+I will say I want to open it
+
+136
+00:04:20.089 --> 00:04:20.570
+in read mode.
+
+137
+00:04:21.610 --> 00:04:22.770
+Obviously, you will use a small letter.
+
+138
+00:04:23.550 --> 00:04:28.090
+And after that you will say str1 is
+
+139
+00:04:28.090 --> 00:04:28.970
+equal to.
+
+140
+00:04:29.050 --> 00:04:31.990
+Here we say content is equal to file
+
+141
+00:04:31.990 --> 00:04:34.290
+.read. And as soon as you do file
+
+142
+00:04:34.290 --> 00:04:35.470
+.read, what will happen?
+
+143
+00:04:35.470 --> 00:04:39.230
+File.read will give us the string in
+
+144
+00:04:39.230 --> 00:04:40.130
+this content.
+
+145
+00:04:40.590 --> 00:04:42.510
+And we can use this content in our
+
+146
+00:04:42.510 --> 00:04:42.930
+programme.
+
+147
+00:04:43.110 --> 00:04:44.090
+As we can use it as we want.
+
+148
+00:04:44.390 --> 00:04:46.430
+So, I wrote print content here.
+
+149
+00:04:46.530 --> 00:04:47.710
+With the help of which I can use
+
+150
+00:04:47.710 --> 00:04:48.590
+its content.
+
+151
+00:04:49.570 --> 00:04:51.550
+And as soon as I run this programme.
+
+152
+00:04:52.010 --> 00:04:53.690
+Robot.txt file will be found.
+
+153
+00:04:53.970 --> 00:04:54.530
+Which is not present.
+
+154
+00:04:54.750 --> 00:04:55.570
+And you see here we are getting an
+
+155
+00:04:55.570 --> 00:04:55.770
+error.
+
+156
+00:04:56.470 --> 00:04:57.850
+Robot.txt is not there.
+
+157
+00:04:58.030 --> 00:04:58.670
+Who should I read?
+
+158
+00:04:59.570 --> 00:05:02.570
+So, we will make a robot.txt here.
+
+159
+00:05:02.570 --> 00:05:05.370
+And here we will write sample content.
+
+160
+00:05:05.930 --> 00:05:07.230
+This is a file.
+
+161
+00:05:07.350 --> 00:05:08.830
+Anything can happen in that file.
+
+162
+00:05:08.970 --> 00:05:09.970
+We have read it.
+
+163
+00:05:10.590 --> 00:05:13.930
+We will run robot.txt. And here you
+
+164
+00:05:13.930 --> 00:05:14.630
+see sample content.
+
+165
+00:05:14.750 --> 00:05:15.350
+This is a file.
+
+166
+00:05:15.730 --> 00:05:17.250
+Content has been read in the variable.
+
+167
+00:05:17.770 --> 00:05:18.750
+And we have printed it.
+
+168
+00:05:19.390 --> 00:05:20.650
+And after that we closed the file.
+
+169
+00:05:21.290 --> 00:05:22.750
+I hope you understood.
+
+170
+00:05:23.030 --> 00:05:25.050
+I hope you are enjoying making this programme.
+
+171
+00:05:26.130 --> 00:05:27.270
+I hope you are enjoying understanding the basics.
+
+172
+00:05:28.410 --> 00:05:29.450
+So, these were the basics of file.io.
+
+173
+00:05:29.450 --> 00:05:32.590
+The way we have a read function.
+
+174
+00:05:32.950 --> 00:05:34.350
+In the same way we have a read
+
+175
+00:05:34.350 --> 00:05:34.990
+lines function.
+
+176
+00:05:35.470 --> 00:05:37.150
+So, if we don't use this function.
+
+177
+00:05:38.010 --> 00:05:38.570
+Then I do one thing.
+
+178
+00:05:39.070 --> 00:05:39.870
+I make it read lines.
+
+179
+00:05:40.310 --> 00:05:41.270
+And if I make it read lines.
+
+180
+00:05:41.710 --> 00:05:42.170
+Then what will happen?
+
+181
+00:05:42.290 --> 00:05:44.030
+Content is no longer a string.
+
+182
+00:05:44.210 --> 00:05:45.490
+It is going to be a list of
+
+183
+00:05:45.490 --> 00:05:45.790
+lines.
+
+184
+00:05:46.030 --> 00:05:47.370
+So, see this has become a list of
+
+185
+00:05:47.370 --> 00:05:47.630
+lines.
+
+186
+00:05:48.570 --> 00:05:50.190
+That means the first line in our robot
+
+187
+00:05:50.190 --> 00:05:51.610
+.txt is sample content.
+
+188
+00:05:51.710 --> 00:05:53.230
+The second is this is a file.
+
+189
+00:05:53.590 --> 00:05:55.770
+So, whenever for any reason you have to
+
+190
+00:05:55.770 --> 00:05:56.070
+read the file.
+
+191
+00:05:56.750 --> 00:05:58.490
+As a list of lines.
+
+192
+00:05:58.490 --> 00:05:59.750
+So, you can use read lines.
+
+193
+00:06:01.550 --> 00:06:02.890
+After this we have a mode.
+
+194
+00:06:03.170 --> 00:06:03.810
+Append mode.
+
+195
+00:06:04.110 --> 00:06:06.910
+So, here I will make a file.
+
+196
+00:06:06.990 --> 00:06:10.650
+Append.py I will make a very basic
+
+197
+00:06:10.650 --> 00:06:11.110
+programme.
+
+198
+00:06:11.570 --> 00:06:13.170
+And here I want to append.
+
+199
+00:06:13.710 --> 00:06:14.070
+In the file.
+
+200
+00:06:15.230 --> 00:06:16.990
+Rohan is also good.
+
+201
+00:06:17.190 --> 00:06:19.290
+And I want to do a backslash n.
+
+202
+00:06:19.690 --> 00:06:21.530
+Backslash n is basically a character.
+
+203
+00:06:22.190 --> 00:06:23.190
+Which represents a new line.
+
+204
+00:06:23.830 --> 00:06:25.130
+So, wherever you write backslash n.
+
+205
+00:06:25.470 --> 00:06:26.210
+A new line comes.
+
+206
+00:06:26.210 --> 00:06:28.990
+This is called an escape sequence character.
+
+207
+00:06:29.490 --> 00:06:30.090
+Backslash n.
+
+208
+00:06:30.550 --> 00:06:32.230
+And I want to append in my robot
+
+209
+00:06:32.230 --> 00:06:35.270
+.txt. So, what will I do?
+
+210
+00:06:35.430 --> 00:06:36.930
+I will open robot.txt in append mode.
+
+211
+00:06:37.470 --> 00:06:38.630
+And here I will write a file.
+
+212
+00:06:39.650 --> 00:06:41.530
+So, what will happen by doing this?
+
+213
+00:06:41.650 --> 00:06:42.770
+And I will not do content is equal
+
+214
+00:06:42.770 --> 00:06:42.910
+to.
+
+215
+00:06:43.090 --> 00:06:43.850
+I will simply write a file.
+
+216
+00:06:44.110 --> 00:06:45.490
+I will close the file.
+
+217
+00:06:45.490 --> 00:06:46.270
+This is a programme of four lines.
+
+218
+00:06:47.330 --> 00:06:48.230
+What is he saying?
+
+219
+00:06:48.250 --> 00:06:51.190
+He is saying that you write this string.
+
+220
+00:06:51.190 --> 00:06:52.090
+Write it.
+
+221
+00:06:52.610 --> 00:06:55.370
+Write it in robot.txt. But do not
+
+222
+00:06:55.370 --> 00:06:56.710
+make robot.txt empty.
+
+223
+00:06:57.510 --> 00:06:58.630
+If you open in w mode.
+
+224
+00:06:59.210 --> 00:07:00.530
+Then robot.txt will be empty first.
+
+225
+00:07:01.010 --> 00:07:02.230
+And after that, this content will come.
+
+226
+00:07:02.550 --> 00:07:03.530
+But we want to append at the end
+
+227
+00:07:03.530 --> 00:07:06.870
+of robot.txt. I mean, whatever comes at
+
+228
+00:07:06.870 --> 00:07:06.970
+the end.
+
+229
+00:07:07.030 --> 00:07:08.750
+Whatever I am going to write now.
+
+230
+00:07:08.950 --> 00:07:10.470
+So, here file is equal to open robot
+
+231
+00:07:10.470 --> 00:07:11.910
+.txt. A.
+
+232
+00:07:12.250 --> 00:07:13.550
+And what will happen by doing file.write
+
+233
+00:07:13.550 --> 00:07:13.750
+a?
+
+234
+00:07:14.590 --> 00:07:15.890
+This line will be added.
+
+235
+00:07:16.870 --> 00:07:17.390
+Where will it be added?
+
+236
+00:07:17.390 --> 00:07:18.770
+It will be added here.
+
+237
+00:07:18.970 --> 00:07:19.830
+As line number three.
+
+238
+00:07:20.250 --> 00:07:21.710
+Let's see if it is true or false.
+
+239
+00:07:21.850 --> 00:07:23.330
+Let's run it and check.
+
+240
+00:07:23.710 --> 00:07:25.510
+And see, it has been added here.
+
+241
+00:07:26.850 --> 00:07:28.350
+I hope you understood.
+
+242
+00:07:29.170 --> 00:07:33.050
+Now see, here we have many methods of
+
+243
+00:07:33.050 --> 00:07:33.150
+file in python.
+
+244
+00:07:33.330 --> 00:07:35.610
+But these are the ones that you will
+
+245
+00:07:35.610 --> 00:07:36.790
+use 90% of the time.
+
+246
+00:07:37.410 --> 00:07:39.430
+And if anything is used in our future
+
+247
+00:07:39.430 --> 00:07:39.530
+projects.
+
+248
+00:07:39.690 --> 00:07:41.590
+Then I will tell you that thing there
+
+249
+00:07:41.590 --> 00:07:41.950
+itself.
+
+250
+00:07:43.690 --> 00:07:45.430
+And while making projects.
+
+251
+00:07:45.430 --> 00:07:47.370
+While making projects using AI.
+
+252
+00:07:47.590 --> 00:07:48.170
+You will learn a lot of things.
+
+253
+00:07:49.110 --> 00:07:50.650
+With that said, I want to tell you
+
+254
+00:07:50.650 --> 00:07:51.410
+one last thing.
+
+255
+00:07:52.290 --> 00:07:53.710
+And that is with statement.
+
+256
+00:07:54.390 --> 00:07:55.750
+So, what happens with with?
+
+257
+00:07:55.890 --> 00:07:56.990
+See, what did we do here?
+
+258
+00:07:57.370 --> 00:07:58.350
+File is equal to open.
+
+259
+00:07:58.550 --> 00:08:02.550
+File.close. And then after that, we put
+
+260
+00:08:02.550 --> 00:08:04.110
+methods by doing file.
+
+261
+00:08:04.110 --> 00:08:06.850
+I tell you that we did this.
+
+262
+00:08:07.550 --> 00:08:09.250
+Instead of doing this, what can we do?
+
+263
+00:08:10.030 --> 00:08:11.950
+Now it can be append, read, write.
+
+264
+00:08:11.950 --> 00:08:12.570
+It can be anything.
+
+265
+00:08:13.310 --> 00:08:14.670
+I say, don't do this.
+
+266
+00:08:14.890 --> 00:08:15.790
+Don't do these 3 lines.
+
+267
+00:08:16.850 --> 00:08:18.610
+And instead of these 3 lines, what can
+
+268
+00:08:18.610 --> 00:08:18.790
+you do?
+
+269
+00:08:19.790 --> 00:08:21.330
+Instead of these 3 lines, you can write
+
+270
+00:08:21.330 --> 00:08:22.210
+something like this.
+
+271
+00:08:23.550 --> 00:08:24.750
+With open.
+
+272
+00:08:25.390 --> 00:08:28.970
+And here you will write exactly this.
+
+273
+00:08:30.190 --> 00:08:31.890
+And you will write as file.
+
+274
+00:08:32.630 --> 00:08:36.130
+And you will write file.writeA. And now
+
+275
+00:08:36.130 --> 00:08:37.309
+you don't need to write file.close. You
+
+276
+00:08:37.309 --> 00:08:38.289
+don't need to write anything else.
+
+277
+00:08:38.289 --> 00:08:39.330
+Whatever you want to do with this file,
+
+278
+00:08:40.350 --> 00:08:41.750
+you can do it inside with.
+
+279
+00:08:42.010 --> 00:08:42.950
+With is a keyword.
+
+280
+00:08:43.550 --> 00:08:45.090
+And you don't need to do file.close.
+
+281
+00:08:46.010 --> 00:08:47.830
+It will automatically close the file.
+
+282
+00:08:48.850 --> 00:08:50.570
+So, some of you will say, what is
+
+283
+00:08:50.570 --> 00:08:51.390
+the benefit of doing this?
+
+284
+00:08:51.450 --> 00:08:52.310
+Why should I use with?
+
+285
+00:08:53.010 --> 00:08:55.070
+It is a way to simplify syntax.
+
+286
+00:08:56.470 --> 00:08:57.010
+That's it.
+
+287
+00:08:57.410 --> 00:08:59.710
+It automatically closes.
+
+288
+00:09:00.010 --> 00:09:01.110
+And you will see this a lot.
+
+289
+00:09:01.530 --> 00:09:02.510
+That's why I told you about it.
+
+290
+00:09:02.510 --> 00:09:04.210
+So, these are the basic functions.
+
+291
+00:09:04.990 --> 00:09:06.030
+But you will see something like this.
+
+292
+00:09:06.210 --> 00:09:07.410
+And let me tell you something else.
+
+293
+00:09:07.830 --> 00:09:08.930
+Instead of file, you can make F.
+
+294
+00:09:09.350 --> 00:09:10.470
+You don't need to write entire file.
+
+295
+00:09:11.110 --> 00:09:11.970
+You don't need to write file.
+
+296
+00:09:12.930 --> 00:09:15.110
+F.writeA. And here with open.
+
+297
+00:09:18.390 --> 00:09:19.930
+Whatever mode you are opening.
+
+298
+00:09:20.090 --> 00:09:21.410
+And after that, asF.
+
+299
+00:09:21.650 --> 00:09:24.030
+And after that, F.writeA. Write something like
+
+300
+00:09:24.030 --> 00:09:24.330
+this.
+
+301
+00:09:24.650 --> 00:09:25.610
+And that's about it.
+
+302
+00:09:25.870 --> 00:09:27.130
+What you were doing in the first 3
+
+303
+00:09:27.130 --> 00:09:29.270
+lines, it is happening in 2 lines now.
+
+304
+00:09:29.270 --> 00:09:30.670
+But it is happening very cleanly.
+
+305
+00:09:31.130 --> 00:09:33.030
+And you can do whatever you want in
+
+306
+00:09:33.030 --> 00:09:33.130
+it.
+
+307
+00:09:33.170 --> 00:09:34.670
+You can write as many lines as you
+
+308
+00:09:34.670 --> 00:09:34.770
+want.
+
+309
+00:09:35.230 --> 00:09:37.010
+F.writeA. And you can write any other
+
+310
+00:09:37.010 --> 00:09:37.510
+line after that.
+
+311
+00:09:38.090 --> 00:09:39.210
+You can do something else with F.
+
+312
+00:09:39.650 --> 00:09:42.210
+And as soon as you exit it, after
+
+313
+00:09:42.210 --> 00:09:45.550
+indent, this file will automatically close.
+
+314
+00:09:46.690 --> 00:09:48.550
+So, this is our with statement.
+
+315
+00:09:48.690 --> 00:09:49.790
+I hope you understood.
+
+316
+00:09:50.170 --> 00:09:53.450
+And I hope you are enjoying it.
+
+317
+00:09:53.650 --> 00:09:55.650
+I hope you are enjoying this course so
+
+318
+00:09:55.650 --> 00:09:55.910
+far.
+
+319
+00:09:56.270 --> 00:09:57.470
+See you in the next video.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WEBVTT
+
+1
+00:00:00.010 --> 00:00:03.750
+(Transcribed by TurboScribe. Go Unlimited to remove this message.) Before we move to AI-assisted coding, let's
+
+2
+00:00:03.750 --> 00:00:05.610
+see how to use AI, how to use
+
+3
+00:00:05.610 --> 00:00:07.650
+chatgpd, how to use Claude.
+
+4
+00:00:08.010 --> 00:00:10.350
+I will tell you everything, but I want
+
+5
+00:00:10.350 --> 00:00:12.530
+to make at least one project without AI.
+
+6
+00:00:13.130 --> 00:00:14.910
+And that project is going to be SnakeWaterGun.
+
+7
+00:00:15.290 --> 00:00:16.970
+You must have played this game in your
+
+8
+00:00:16.970 --> 00:00:17.070
+childhood.
+
+9
+00:00:17.950 --> 00:00:19.910
+And I open with code first.
+
+10
+00:00:20.590 --> 00:00:25.310
+And here I make a main.py file
+
+11
+00:00:25.310 --> 00:00:25.670
+for you.
+
+12
+00:00:26.150 --> 00:00:28.210
+And I turn on my screencast mode.
+
+13
+00:00:28.810 --> 00:00:30.430
+So that whatever I am writing, you can
+
+14
+00:00:30.430 --> 00:00:30.590
+see it.
+
+15
+00:00:30.630 --> 00:00:32.950
+Whatever I am pressing, you can see it
+
+16
+00:00:32.950 --> 00:00:33.050
+below.
+
+17
+00:00:33.110 --> 00:00:34.330
+It will be written below that Harry is
+
+18
+00:00:34.330 --> 00:00:34.810
+pressing this.
+
+19
+00:00:35.330 --> 00:00:36.990
+Like I am pressing ctrl, so ctrl is
+
+20
+00:00:36.990 --> 00:00:37.450
+written below.
+
+21
+00:00:37.610 --> 00:00:39.990
+So now I will tell you how to
+
+22
+00:00:39.990 --> 00:00:40.750
+play SnakeWaterGun.
+
+23
+00:00:41.490 --> 00:00:43.370
+Maybe you know what it is and whom
+
+24
+00:00:43.370 --> 00:00:43.710
+you are teaching.
+
+25
+00:00:44.230 --> 00:00:45.110
+But I will still tell you.
+
+26
+00:00:45.170 --> 00:00:45.930
+And then I will tell you by writing
+
+27
+00:00:45.930 --> 00:00:46.250
+code.
+
+28
+00:00:47.050 --> 00:00:48.450
+So basically what happens is that when you
+
+29
+00:00:48.450 --> 00:00:51.530
+play SnakeWaterGun, then you randomly make SnakeWater or
+
+30
+00:00:51.530 --> 00:00:52.730
+Gun with your own hands.
+
+31
+00:00:53.450 --> 00:00:54.370
+Suppose I made a gun.
+
+32
+00:00:55.050 --> 00:00:55.590
+You made a snake.
+
+33
+00:00:55.910 --> 00:00:56.750
+So my gun will blow your snake.
+
+34
+00:00:58.650 --> 00:01:00.050
+My gun will blow your snake.
+
+35
+00:01:00.610 --> 00:01:02.130
+And your snake will fly away.
+
+36
+00:01:02.750 --> 00:01:04.650
+And once your snake flies away, you are
+
+37
+00:01:04.650 --> 00:01:04.750
+done.
+
+38
+00:01:05.010 --> 00:01:07.710
+Your game will be lost.
+
+39
+00:01:08.570 --> 00:01:09.370
+So I won.
+
+40
+00:01:09.550 --> 00:01:10.410
+So when a snake and a gun fight,
+
+41
+00:01:10.650 --> 00:01:11.230
+the gun always wins.
+
+42
+00:01:12.510 --> 00:01:13.990
+Snake and water.
+
+43
+00:01:14.350 --> 00:01:17.270
+If your snake sees my water, your snake
+
+44
+00:01:17.270 --> 00:01:17.730
+will drink my water.
+
+45
+00:01:18.610 --> 00:01:20.350
+And if your snake drinks my water, you
+
+46
+00:01:20.350 --> 00:01:20.570
+will win.
+
+47
+00:01:20.570 --> 00:01:23.010
+Then it is the turn of water and
+
+48
+00:01:23.010 --> 00:01:23.270
+gun.
+
+49
+00:01:24.030 --> 00:01:24.910
+You took out your gun.
+
+50
+00:01:25.330 --> 00:01:26.070
+I took out my water.
+
+51
+00:01:26.710 --> 00:01:27.950
+Your gun will drown in my water.
+
+52
+00:01:28.890 --> 00:01:30.350
+So the water wins the gun.
+
+53
+00:01:30.630 --> 00:01:31.030
+This happens.
+
+54
+00:01:32.010 --> 00:01:34.410
+So randomly the computer will choose something.
+
+55
+00:01:34.490 --> 00:01:35.310
+You will choose something.
+
+56
+00:01:35.790 --> 00:01:38.430
+You don't know what the computer chose.
+
+57
+00:01:39.050 --> 00:01:40.790
+The computer doesn't know what you chose.
+
+58
+00:01:41.510 --> 00:01:43.050
+And then you will find out who won
+
+59
+00:01:43.050 --> 00:01:43.470
+and who didn't.
+
+60
+00:01:45.010 --> 00:01:46.710
+So first of all, we will generate random
+
+61
+00:01:46.710 --> 00:01:46.990
+numbers.
+
+62
+00:01:46.990 --> 00:01:49.930
+And there is a module to generate random
+
+63
+00:01:49.930 --> 00:01:50.030
+numbers.
+
+64
+00:01:50.170 --> 00:01:50.690
+Random.
+
+65
+00:01:51.030 --> 00:01:53.110
+Now you will say, I didn't instal it
+
+66
+00:01:53.110 --> 00:01:53.210
+from pip.
+
+67
+00:01:53.210 --> 00:01:54.150
+This is a built-in module.
+
+68
+00:01:54.430 --> 00:01:55.350
+It doesn't need to be installed from pip.
+
+69
+00:01:56.070 --> 00:01:56.350
+Random.
+
+70
+00:01:57.530 --> 00:01:59.330
+Now you will say, how will I know
+
+71
+00:01:59.330 --> 00:01:59.890
+that this is a module?
+
+72
+00:02:00.170 --> 00:02:01.190
+And it does this.
+
+73
+00:02:01.610 --> 00:02:02.610
+Experience Google.
+
+74
+00:02:03.250 --> 00:02:04.230
+Maybe chat gpt.
+
+75
+00:02:04.330 --> 00:02:04.730
+Because we are going to do the same
+
+76
+00:02:04.730 --> 00:02:05.350
+in the coming videos.
+
+77
+00:02:06.590 --> 00:02:07.910
+But for now, let me tell you that
+
+78
+00:02:07.910 --> 00:02:08.949
+if you want to generate a random integer.
+
+79
+00:02:10.190 --> 00:02:10.930
+So what will you do?
+
+80
+00:02:12.010 --> 00:02:13.610
+You will write rand underscore number.
+
+81
+00:02:13.970 --> 00:02:14.430
+I have made a variable.
+
+82
+00:02:14.430 --> 00:02:17.010
+And you will use the random.randint function.
+
+83
+00:02:17.850 --> 00:02:18.790
+What will this function do?
+
+84
+00:02:19.110 --> 00:02:19.690
+It will take two numbers.
+
+85
+00:02:20.550 --> 00:02:21.550
+And what will it do here?
+
+86
+00:02:22.090 --> 00:02:22.510
+It will generate a number from 1, 2
+
+87
+00:02:22.510 --> 00:02:24.330
+or 3 and give it to you.
+
+88
+00:02:24.790 --> 00:02:26.730
+So randomly you will get either 1 or
+
+89
+00:02:26.730 --> 00:02:27.570
+2 or 3.
+
+90
+00:02:28.530 --> 00:02:29.570
+So what will I do here?
+
+91
+00:02:30.050 --> 00:02:33.730
+I will say, if rand number is equal
+
+92
+00:02:33.730 --> 00:02:34.370
+to 1.
+
+93
+00:02:34.910 --> 00:02:35.470
+Then what do you do?
+
+94
+00:02:35.770 --> 00:02:37.250
+Give the snake to the computer.
+
+95
+00:02:37.370 --> 00:02:38.610
+Means the computer ran the snake.
+
+96
+00:02:39.070 --> 00:02:41.490
+Otherwise, I write lf here.
+
+97
+00:02:42.330 --> 00:02:43.670
+And I will copy it exactly like this.
+
+98
+00:02:44.790 --> 00:02:46.970
+Otherwise, if random number is 2.
+
+99
+00:02:47.550 --> 00:02:50.590
+Then computer is equal to water.
+
+100
+00:02:51.930 --> 00:02:54.270
+And here we will say otherwise.
+
+101
+00:02:55.250 --> 00:02:56.510
+Else what will you do?
+
+102
+00:02:57.770 --> 00:03:01.750
+Else you will do computer is equal to
+
+103
+00:03:01.750 --> 00:03:02.170
+gun.
+
+104
+00:03:03.190 --> 00:03:06.410
+So if one random number is generated, then
+
+105
+00:03:06.410 --> 00:03:07.150
+the computer is playing the snake.
+
+106
+00:03:07.790 --> 00:03:09.510
+If two random numbers are generated, then the
+
+107
+00:03:09.510 --> 00:03:10.170
+computer is playing water.
+
+108
+00:03:10.710 --> 00:03:12.170
+Otherwise, the computer is playing the gun.
+
+109
+00:03:13.390 --> 00:03:15.990
+So here you can see if random number
+
+110
+00:03:15.990 --> 00:03:16.650
+is equal to 1.
+
+111
+00:03:16.730 --> 00:03:17.650
+Computer is equal to snake.
+
+112
+00:03:17.910 --> 00:03:19.570
+If lf random number is equal to 2.
+
+113
+00:03:19.630 --> 00:03:20.470
+Computer is equal to water.
+
+114
+00:03:21.210 --> 00:03:22.610
+Else computer is equal to gun.
+
+115
+00:03:23.050 --> 00:03:24.130
+And I do one more thing here.
+
+116
+00:03:24.230 --> 00:03:25.930
+I put a print statement in which I
+
+117
+00:03:25.930 --> 00:03:26.310
+am going to write.
+
+118
+00:03:27.690 --> 00:03:29.050
+Computer is done.
+
+119
+00:03:29.330 --> 00:03:32.830
+And here I will write snake s.
+
+120
+00:03:34.710 --> 00:03:37.750
+And for water you have to press w.
+
+121
+00:03:38.610 --> 00:03:41.430
+And for gun you have to press g.
+
+122
+00:03:42.170 --> 00:03:43.610
+And what will I do here?
+
+123
+00:03:44.270 --> 00:03:45.610
+By the way, you can see the horizontal
+
+124
+00:03:45.610 --> 00:03:46.110
+scroll bar.
+
+125
+00:03:46.390 --> 00:03:47.610
+If you don't want to see it, then
+
+126
+00:03:47.610 --> 00:03:48.370
+click on view word wrap.
+
+127
+00:03:48.930 --> 00:03:50.750
+Click on view or click on word wrap.
+
+128
+00:03:50.830 --> 00:03:51.450
+Or you can also press alt z.
+
+129
+00:03:52.690 --> 00:03:54.510
+Now if I zoom in, then I will
+
+130
+00:03:54.510 --> 00:03:55.490
+not see the horizontal scroll bar.
+
+131
+00:03:55.830 --> 00:03:58.030
+I click here and close the explorer.
+
+132
+00:03:58.470 --> 00:03:59.950
+So that you can see it completely.
+
+133
+00:04:00.650 --> 00:04:02.490
+Okay, good.
+
+134
+00:04:02.970 --> 00:04:03.950
+Computer has played.
+
+135
+00:04:04.970 --> 00:04:05.910
+Now the user will play.
+
+136
+00:04:06.170 --> 00:04:08.730
+User is equal to input.
+
+137
+00:04:08.730 --> 00:04:11.150
+And I will tell you what to do.
+
+138
+00:04:17.149 --> 00:04:19.670
+Snake s, water w, gun g.
+
+139
+00:04:19.890 --> 00:04:20.010
+Okay.
+
+140
+00:04:20.649 --> 00:04:22.330
+And here we will do one more thing.
+
+141
+00:04:22.570 --> 00:04:24.190
+By the way, you have to write s,
+
+142
+00:04:24.210 --> 00:04:24.850
+w and g in a small case.
+
+143
+00:04:25.510 --> 00:04:26.930
+But suppose you press capital s.
+
+144
+00:04:27.950 --> 00:04:29.410
+Then I will put a lower here.
+
+145
+00:04:29.650 --> 00:04:30.470
+Now you will say what did you do?
+
+146
+00:04:30.810 --> 00:04:31.350
+In the same line.
+
+147
+00:04:31.570 --> 00:04:34.010
+It returns a string.
+
+148
+00:04:34.870 --> 00:04:35.850
+And what will happen with dot lower?
+
+149
+00:04:37.370 --> 00:04:38.710
+That string will be converted.
+
+150
+00:04:39.670 --> 00:04:40.410
+That string will not be converted.
+
+151
+00:04:40.810 --> 00:04:41.730
+A new string will be returned.
+
+152
+00:04:42.790 --> 00:04:44.610
+Which will be the lower case of that
+
+153
+00:04:44.610 --> 00:04:44.710
+string.
+
+154
+00:04:44.770 --> 00:04:45.390
+This is very important.
+
+155
+00:04:45.530 --> 00:04:46.770
+We saw that the string is immutable.
+
+156
+00:04:47.530 --> 00:04:50.810
+In total, you will get small s in
+
+157
+00:04:50.810 --> 00:04:50.910
+the user.
+
+158
+00:04:50.910 --> 00:04:51.970
+Even if you press capital s.
+
+159
+00:04:52.330 --> 00:04:53.290
+And if you press small s, then you
+
+160
+00:04:53.290 --> 00:04:53.670
+will get small s.
+
+161
+00:04:54.190 --> 00:04:54.330
+Okay.
+
+162
+00:04:55.550 --> 00:04:56.430
+Very good.
+
+163
+00:04:56.590 --> 00:04:57.350
+So far so good.
+
+164
+00:04:58.030 --> 00:04:58.830
+Now what we will do?
+
+165
+00:04:58.970 --> 00:05:02.090
+We will say result is equal to game
+
+166
+00:05:02.090 --> 00:05:02.910
+underscore win.
+
+167
+00:05:02.910 --> 00:05:04.070
+Which we will make a function.
+
+168
+00:05:04.870 --> 00:05:06.690
+This function will decide the whole game.
+
+169
+00:05:07.390 --> 00:05:07.810
+Who won.
+
+170
+00:05:08.710 --> 00:05:10.670
+Result is equal to game underscore win.
+
+171
+00:05:11.530 --> 00:05:12.850
+Which will return.
+
+172
+00:05:13.750 --> 00:05:14.470
+What will return?
+
+173
+00:05:14.710 --> 00:05:16.290
+If you win, it will return true.
+
+174
+00:05:16.290 --> 00:05:18.890
+And if you lose, it will return false.
+
+175
+00:05:19.550 --> 00:05:19.670
+Okay.
+
+176
+00:05:20.090 --> 00:05:21.370
+And we will do one more thing.
+
+177
+00:05:22.660 --> 00:05:22.970
+Here.
+
+178
+00:05:25.030 --> 00:05:26.070
+I will put f string.
+
+179
+00:05:26.710 --> 00:05:28.110
+By putting f string, I will show you
+
+180
+00:05:28.110 --> 00:05:28.710
+here.
+
+181
+00:05:29.050 --> 00:05:31.150
+That backslash n.
+
+182
+00:05:31.150 --> 00:05:32.350
+And.
+
+183
+00:05:32.650 --> 00:05:34.210
+You chose.
+
+184
+00:05:34.830 --> 00:05:35.630
+User.
+
+185
+00:05:36.510 --> 00:05:38.710
+And after this, it will come here.
+
+186
+00:05:39.690 --> 00:05:41.110
+Here I wrote you chose.
+
+187
+00:05:41.730 --> 00:05:42.710
+And after this, it will come.
+
+188
+00:05:43.350 --> 00:05:45.070
+What did the computer choose?
+
+189
+00:05:47.330 --> 00:05:48.630
+Computer chose.
+
+190
+00:05:49.450 --> 00:05:50.470
+And here the computer will come.
+
+191
+00:05:51.470 --> 00:05:51.730
+Okay.
+
+192
+00:05:52.410 --> 00:05:54.210
+You chose user.
+
+193
+00:05:54.390 --> 00:05:55.070
+Computer chose.
+
+194
+00:05:55.910 --> 00:05:56.710
+Okay.
+
+195
+00:05:56.710 --> 00:05:57.070
+Okay.
+
+196
+00:05:58.050 --> 00:05:59.450
+Now after this, I will write.
+
+197
+00:05:59.630 --> 00:06:01.310
+If result is none.
+
+198
+00:06:02.270 --> 00:06:03.350
+Then print it.
+
+199
+00:06:03.470 --> 00:06:04.750
+It's a draw.
+
+200
+00:06:05.230 --> 00:06:07.390
+Whenever we check the equality with none.
+
+201
+00:06:07.510 --> 00:06:08.430
+Then we use is none.
+
+202
+00:06:09.110 --> 00:06:10.170
+We don't use equal to equal to none.
+
+203
+00:06:10.950 --> 00:06:11.690
+The reason for that is.
+
+204
+00:06:11.890 --> 00:06:12.890
+None is an object.
+
+205
+00:06:13.630 --> 00:06:16.470
+That is in python memory.
+
+206
+00:06:17.050 --> 00:06:19.370
+And whether the result is none or not.
+
+207
+00:06:19.710 --> 00:06:22.030
+We can check it like this.
+
+208
+00:06:22.370 --> 00:06:22.590
+Okay.
+
+209
+00:06:23.310 --> 00:06:24.750
+Now what we will do here.
+
+210
+00:06:25.590 --> 00:06:26.930
+We will say elif.
+
+211
+00:06:27.710 --> 00:06:28.250
+And we will write.
+
+212
+00:06:30.070 --> 00:06:30.670
+Result.
+
+213
+00:06:31.270 --> 00:06:32.850
+Print you win.
+
+214
+00:06:33.310 --> 00:06:33.610
+Otherwise.
+
+215
+00:06:34.950 --> 00:06:36.010
+Otherwise you will lose.
+
+216
+00:06:36.350 --> 00:06:36.650
+Else.
+
+217
+00:06:38.090 --> 00:06:39.730
+Print you lose.
+
+218
+00:06:40.830 --> 00:06:41.310
+Okay.
+
+219
+00:06:41.490 --> 00:06:41.790
+It's simple.
+
+220
+00:06:42.030 --> 00:06:42.990
+Now we have to make a game win
+
+221
+00:06:42.990 --> 00:06:43.270
+function.
+
+222
+00:06:43.690 --> 00:06:44.730
+Which will return true.
+
+223
+00:06:44.950 --> 00:06:45.650
+I will write here.
+
+224
+00:06:48.330 --> 00:06:50.430
+Returns true if you win.
+
+225
+00:06:50.430 --> 00:06:51.750
+Otherwise if it is a draw.
+
+226
+00:06:51.950 --> 00:06:53.570
+It will return none.
+
+227
+00:06:55.270 --> 00:06:56.490
+None for draw.
+
+228
+00:06:56.750 --> 00:06:56.850
+Okay.
+
+229
+00:06:57.850 --> 00:06:58.970
+And false for lose.
+
+230
+00:06:59.110 --> 00:07:01.470
+False for lose.
+
+231
+00:07:01.750 --> 00:07:02.870
+True for win.
+
+232
+00:07:03.370 --> 00:07:04.630
+Returns true if you win.
+
+233
+00:07:04.730 --> 00:07:05.490
+False for lose.
+
+234
+00:07:05.730 --> 00:07:06.350
+None for draw.
+
+235
+00:07:06.950 --> 00:07:09.910
+I will write here.
+
+236
+00:07:10.750 --> 00:07:11.350
+Def.
+
+237
+00:08:15.870 --> 00:08:17.970
+Computer equals to S.
+
+238
+00:08:18.150 --> 00:08:19.830
+Then we will return.
+
+239
+00:08:21.870 --> 00:08:22.510
+False.
+
+240
+00:08:23.270 --> 00:08:23.790
+Is it right?
+
+241
+00:08:23.990 --> 00:08:25.570
+Yes it is.
+
+242
+00:08:26.110 --> 00:08:26.230
+Okay.
+
+243
+00:08:26.710 --> 00:08:28.830
+I will copy this.
+
+244
+00:08:29.810 --> 00:08:31.830
+You have to play very carefully.
+
+245
+00:08:33.169 --> 00:08:33.429
+Because.
+
+246
+00:08:33.510 --> 00:08:34.210
+There can be a problem.
+
+247
+00:08:35.730 --> 00:08:36.370
+Oops.
+
+248
+00:08:37.169 --> 00:08:37.490
+Enter.
+
+249
+00:08:38.789 --> 00:08:40.350
+We are fighting water and gun.
+
+250
+00:08:41.110 --> 00:08:41.890
+Here we will do W.
+
+251
+00:08:41.890 --> 00:08:42.190
+Then we will do G.
+
+252
+00:08:44.530 --> 00:08:46.370
+If water is your gun.
+
+253
+00:08:46.970 --> 00:08:47.450
+Then you will win.
+
+254
+00:08:47.970 --> 00:08:48.070
+Okay.
+
+255
+00:08:49.530 --> 00:08:49.970
+Otherwise.
+
+256
+00:08:50.590 --> 00:08:52.350
+Gun and water.
+
+257
+00:08:52.750 --> 00:08:53.730
+Then you will lose.
+
+258
+00:08:54.130 --> 00:08:54.290
+Okay.
+
+259
+00:08:54.710 --> 00:08:57.890
+I have to do gun snake and snake
+
+260
+00:08:57.890 --> 00:08:58.070
+gun.
+
+261
+00:08:58.930 --> 00:09:01.150
+Gun snake and snake gun.
+
+262
+00:09:02.030 --> 00:09:03.930
+And it is very obvious.
+
+263
+00:09:04.110 --> 00:09:04.230
+Okay.
+
+264
+00:09:04.810 --> 00:09:05.870
+If you have gun.
+
+265
+00:09:06.090 --> 00:09:06.530
+Then you will win.
+
+266
+00:09:06.530 --> 00:09:07.610
+If you have snake.
+
+267
+00:09:07.750 --> 00:09:08.510
+Then you will lose.
+
+268
+00:09:10.770 --> 00:09:11.490
+Simple.
+
+269
+00:09:12.270 --> 00:09:14.170
+I hope I have done everything right.
+
+270
+00:09:14.710 --> 00:09:15.530
+If there is any error.
+
+271
+00:09:15.850 --> 00:09:17.010
+Then we will fix it.
+
+272
+00:09:17.670 --> 00:09:18.770
+Let's run it.
+
+273
+00:09:20.610 --> 00:09:21.490
+I have run it.
+
+274
+00:09:22.150 --> 00:09:24.870
+Wait a minute.
+
+275
+00:09:25.390 --> 00:09:26.150
+Syntax warning.
+
+276
+00:09:26.250 --> 00:09:27.450
+Backslash c is.
+
+277
+00:09:28.350 --> 00:09:29.850
+Invalid escape sequence.
+
+278
+00:09:30.050 --> 00:09:30.350
+Wait a minute.
+
+279
+00:09:30.430 --> 00:09:33.590
+I have not written backslash n.
+
+280
+00:09:33.590 --> 00:09:35.550
+I have written backslash c by mistake.
+
+281
+00:09:37.960 --> 00:09:39.500
+Now you can see.
+
+282
+00:09:39.520 --> 00:09:40.620
+Snake, water and gun.
+
+283
+00:09:40.700 --> 00:09:41.320
+Your turn.
+
+284
+00:09:42.040 --> 00:09:43.480
+I want to choose gun.
+
+285
+00:09:44.580 --> 00:09:45.920
+You have chosen gun.
+
+286
+00:09:46.780 --> 00:09:47.960
+Computer has chosen water.
+
+287
+00:09:48.620 --> 00:09:49.260
+Wow.
+
+288
+00:09:50.860 --> 00:09:51.320
+Good.
+
+289
+00:09:52.940 --> 00:09:53.940
+You will defeat me.
+
+290
+00:09:54.200 --> 00:09:55.040
+Let's play one more game.
+
+291
+00:09:55.820 --> 00:09:57.520
+I have put space here.
+
+292
+00:09:58.400 --> 00:09:59.460
+Come computer.
+
+293
+00:09:59.660 --> 00:10:01.780
+I have chosen water.
+
+294
+00:10:01.780 --> 00:10:02.340
+I have chosen water.
+
+295
+00:10:03.620 --> 00:10:04.720
+Computer is cheating.
+
+296
+00:10:05.700 --> 00:10:06.760
+Computer is cheating.
+
+297
+00:10:07.280 --> 00:10:08.320
+I will choose gun.
+
+298
+00:10:09.880 --> 00:10:10.980
+He has defeated me again.
+
+299
+00:10:11.380 --> 00:10:12.260
+I am getting insulted.
+
+300
+00:10:13.620 --> 00:10:14.940
+Let's play one more game.
+
+301
+00:10:15.200 --> 00:10:16.540
+Maybe something will happen.
+
+302
+00:10:17.140 --> 00:10:17.580
+Snake.
+
+303
+00:10:18.920 --> 00:10:20.120
+I have won one game.
+
+304
+00:10:20.280 --> 00:10:22.520
+Otherwise I would have been insulted.
+
+305
+00:10:23.300 --> 00:10:25.740
+I hope you have won the game.
+
+306
+00:10:26.080 --> 00:10:27.000
+You can play it.
+
+307
+00:10:27.480 --> 00:10:28.880
+I will tell you one more thing.
+
+308
+00:10:28.880 --> 00:10:29.900
+When you are playing with your friends.
+
+309
+00:10:30.720 --> 00:10:31.940
+You can hard code it.
+
+310
+00:10:32.360 --> 00:10:33.400
+That you always win.
+
+311
+00:10:33.800 --> 00:10:34.940
+You can do result is equal to true.
+
+312
+00:10:37.020 --> 00:10:39.900
+You can directly do result is equal to
+
+313
+00:10:39.900 --> 00:10:40.200
+true.
+
+314
+00:10:40.500 --> 00:10:42.080
+Or you can find out.
+
+315
+00:10:42.080 --> 00:10:42.980
+What computer is going to choose.
+
+316
+00:10:43.680 --> 00:10:45.920
+You can do such tweaks for fun.
+
+317
+00:10:46.220 --> 00:10:47.820
+This is how you code this game.
+
+318
+00:10:48.720 --> 00:10:50.680
+If you want to play fair.
+
+319
+00:10:50.940 --> 00:10:51.800
+This is the code.
+
+320
+00:10:52.320 --> 00:10:53.460
+You will get it.
+
+321
+00:10:53.680 --> 00:10:54.200
+Congratulations.
+
+322
+00:10:54.200 --> 00:10:56.140
+You have made the first project of your
+
+323
+00:10:56.140 --> 00:10:56.240
+life.
+
+324
+00:10:56.580 --> 00:10:57.380
+If you have made it.
+
+325
+00:10:57.480 --> 00:10:58.740
+Many people have done coding before.
+
+326
+00:11:00.480 --> 00:11:02.640
+Maybe this is not their first project.
+
+327
+00:11:03.100 --> 00:11:05.040
+But if this is your first project.
+
+328
+00:11:05.800 --> 00:11:06.320
+Congratulations.
+
+329
+00:11:07.340 --> 00:11:08.960
+I hope you will keep learning.
+
+330
+00:11:09.200 --> 00:11:11.000
+In this data analyst course.
+
+331
+00:11:11.700 --> 00:11:12.540
+You will learn a lot.
+
+332
+00:11:13.540 --> 00:11:14.740
+Maybe see you in the next video.
+
+333
+00:11:14.740 --> 00:11:15.440
+See you in the next video.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WEBVTT
+
+1
+00:00:00.070 --> 00:00:02.010
+(Transcribed by TurboScribe. Go Unlimited to remove this message.) Alright guys, now we are going to talk
+
+2
+00:00:02.010 --> 00:00:04.250
+about AI-assisted software development.
+
+3
+00:00:04.410 --> 00:00:06.190
+I know you guys were waiting a lot
+
+4
+00:00:06.190 --> 00:00:07.350
+for these things.
+
+5
+00:00:07.930 --> 00:00:10.130
+And you guys might have got bored that
+
+6
+00:00:10.130 --> 00:00:13.570
+why are we being taught again and again.
+
+7
+00:00:14.670 --> 00:00:16.250
+We don't have to learn Python and all
+
+8
+00:00:16.250 --> 00:00:16.510
+these things.
+
+9
+00:00:17.370 --> 00:00:18.630
+I know, I understand.
+
+10
+00:00:18.810 --> 00:00:20.050
+I know that many of you might be
+
+11
+00:00:20.050 --> 00:00:20.290
+thinking this.
+
+12
+00:00:20.670 --> 00:00:23.050
+But we definitely had to do some things
+
+13
+00:00:23.050 --> 00:00:23.950
+and we did.
+
+14
+00:00:23.970 --> 00:00:25.690
+We didn't see a lot of Python to
+
+15
+00:00:25.690 --> 00:00:26.410
+be very honest.
+
+16
+00:00:26.410 --> 00:00:27.790
+We have skipped a lot of things.
+
+17
+00:00:28.470 --> 00:00:29.770
+But I have only told you the things
+
+18
+00:00:29.770 --> 00:00:32.110
+that you will need for AI-assisted software
+
+19
+00:00:32.110 --> 00:00:32.750
+development.
+
+20
+00:00:33.450 --> 00:00:34.890
+So now what we are going to do
+
+21
+00:00:34.890 --> 00:00:38.030
+is, we will see how AI-assisted software
+
+22
+00:00:38.030 --> 00:00:39.790
+development is done.
+
+23
+00:00:40.350 --> 00:00:42.090
+So what I will do here is, I
+
+24
+00:00:42.090 --> 00:00:43.830
+will tell you one by one which tools
+
+25
+00:00:43.830 --> 00:00:44.670
+we are going to use.
+
+26
+00:00:44.970 --> 00:00:45.710
+I won't bore you too much.
+
+27
+00:00:46.370 --> 00:00:48.050
+And I will be very very honest with
+
+28
+00:00:48.050 --> 00:00:48.250
+you.
+
+29
+00:00:48.990 --> 00:00:50.310
+You don't need to know too much.
+
+30
+00:00:51.190 --> 00:00:52.450
+You guys are data analysts.
+
+31
+00:00:52.730 --> 00:00:53.730
+You guys are not a programmer.
+
+32
+00:00:53.730 --> 00:00:55.450
+You guys don't have to make these systems.
+
+33
+00:00:56.030 --> 00:00:57.410
+You guys have to use these systems as
+
+34
+00:00:57.410 --> 00:00:57.830
+a tool.
+
+35
+00:00:58.050 --> 00:01:01.490
+Before some of you might think that AI
+
+36
+00:01:01.490 --> 00:01:02.270
+will take away our jobs.
+
+37
+00:01:03.030 --> 00:01:04.910
+I want to give a small tip on
+
+38
+00:01:04.910 --> 00:01:05.010
+this.
+
+39
+00:01:05.330 --> 00:01:08.110
+A long time ago, 200-300 years ago
+
+40
+00:01:08.110 --> 00:01:08.910
+when there were no cars.
+
+41
+00:01:09.770 --> 00:01:10.470
+Do you know what used to happen then?
+
+42
+00:01:11.090 --> 00:01:12.450
+People used to deliver goods manually from one
+
+43
+00:01:12.450 --> 00:01:13.070
+city to another.
+
+44
+00:01:15.370 --> 00:01:18.650
+After that they thought that we can use
+
+45
+00:01:18.650 --> 00:01:19.210
+animals.
+
+46
+00:01:19.970 --> 00:01:21.030
+They used animals.
+
+47
+00:01:21.450 --> 00:01:22.450
+They used horses.
+
+48
+00:01:22.450 --> 00:01:24.370
+Then they used donkeys to deliver goods from
+
+49
+00:01:24.370 --> 00:01:25.190
+one place to another.
+
+50
+00:01:25.810 --> 00:01:27.310
+And then cars came.
+
+51
+00:01:27.370 --> 00:01:29.810
+And then many more machineries came.
+
+52
+00:01:29.870 --> 00:01:30.690
+Big trucks came.
+
+53
+00:01:30.770 --> 00:01:33.790
+And in today's date, we are even automating
+
+54
+00:01:33.790 --> 00:01:33.890
+trucks.
+
+55
+00:01:34.330 --> 00:01:36.890
+Even self-driving trucks are being made.
+
+56
+00:01:37.630 --> 00:01:39.950
+So what happens is, things keep evolving.
+
+57
+00:01:40.350 --> 00:01:40.830
+Jobs don't stop.
+
+58
+00:01:41.230 --> 00:01:43.390
+For example, transportation used to be there earlier.
+
+59
+00:01:43.790 --> 00:01:44.950
+Transportation is still there.
+
+60
+00:01:45.450 --> 00:01:46.290
+Demand for transportation has increased.
+
+61
+00:01:47.010 --> 00:01:49.030
+A person does transportation.
+
+62
+00:01:49.030 --> 00:01:50.350
+A person can't do transportation without a person.
+
+63
+00:01:52.670 --> 00:01:54.410
+Similarly, this applies to coding as well.
+
+64
+00:01:55.550 --> 00:01:56.610
+Coding can't be done without a person.
+
+65
+00:01:57.370 --> 00:01:58.330
+At least, it can't be done now.
+
+66
+00:01:58.790 --> 00:02:00.130
+A person will do whatever he does.
+
+67
+00:02:00.350 --> 00:02:01.190
+He will use AI as a tool.
+
+68
+00:02:02.010 --> 00:02:03.730
+That's why I say, learn AI-assisted software
+
+69
+00:02:03.730 --> 00:02:04.270
+development.
+
+70
+00:02:04.710 --> 00:02:05.130
+If you look at it from the perspective
+
+71
+00:02:05.130 --> 00:02:07.889
+of a data analyst, then this is a
+
+72
+00:02:07.889 --> 00:02:08.550
+very good thing for you.
+
+73
+00:02:08.610 --> 00:02:10.270
+Because now you will be able to do
+
+74
+00:02:10.270 --> 00:02:10.950
+everything with the help of AI.
+
+75
+00:02:11.210 --> 00:02:12.930
+For which coders used to be called earlier.
+
+76
+00:02:13.890 --> 00:02:16.330
+If you make yourself an AI-powered data
+
+77
+00:02:16.330 --> 00:02:19.630
+analyst, then I don't think you will have
+
+78
+00:02:19.630 --> 00:02:20.790
+any problem.
+
+79
+00:02:21.030 --> 00:02:23.430
+With regards to career and jobs.
+
+80
+00:02:24.170 --> 00:02:26.070
+With that said, let's start with ChatGPT.
+
+81
+00:02:26.770 --> 00:02:27.410
+What is ChatGPT?
+
+82
+00:02:27.890 --> 00:02:30.890
+ChatGPT is the conversational foundation.
+
+83
+00:02:31.030 --> 00:02:33.530
+This is a tool that you have to
+
+84
+00:02:33.530 --> 00:02:34.770
+use all the time.
+
+85
+00:02:36.390 --> 00:02:37.990
+And let me tell you one more thing.
+
+86
+00:02:38.330 --> 00:02:38.770
+There is Gemini.
+
+87
+00:02:39.310 --> 00:02:39.890
+There is Claude.
+
+88
+00:02:40.490 --> 00:02:41.330
+There are many things.
+
+89
+00:02:41.770 --> 00:02:43.710
+But ChatGPT is an all-rounder.
+
+90
+00:02:43.890 --> 00:02:44.450
+I have used Gemini.
+
+91
+00:02:45.090 --> 00:02:45.670
+I have used Claude.
+
+92
+00:02:45.670 --> 00:02:47.950
+I have used Perplexity.
+
+93
+00:02:48.570 --> 00:02:49.090
+I have used everything.
+
+94
+00:02:49.790 --> 00:02:52.650
+But the answers that ChatGPT gives, I don't
+
+95
+00:02:52.650 --> 00:02:55.510
+think anyone has done it so far.
+
+96
+00:02:55.750 --> 00:02:57.090
+Even Gemini has not done it.
+
+97
+00:02:57.190 --> 00:02:59.350
+After Gemini 3 came, many people said that
+
+98
+00:02:59.350 --> 00:03:00.150
+Gemini has become better.
+
+99
+00:03:00.430 --> 00:03:01.970
+Yes, Gemini has already become better.
+
+100
+00:03:02.270 --> 00:03:05.030
+But ChatGPT remains the king in my opinion.
+
+101
+00:03:05.470 --> 00:03:06.850
+With that said, we will use ChatGPT.
+
+102
+00:03:07.430 --> 00:03:09.010
+And I will also tell you how you
+
+103
+00:03:09.010 --> 00:03:09.950
+can use ChatGPT for free.
+
+104
+00:03:11.050 --> 00:03:13.130
+First of all, this is a conversational foundation.
+
+105
+00:03:13.130 --> 00:03:15.870
+Whatever you ask, it tells you.
+
+106
+00:03:16.050 --> 00:03:17.670
+You ask him that I am sad.
+
+107
+00:03:17.830 --> 00:03:18.410
+This happened to me.
+
+108
+00:03:18.490 --> 00:03:19.030
+He will tell you.
+
+109
+00:03:19.310 --> 00:03:20.370
+You tell him about the situation.
+
+110
+00:03:21.050 --> 00:03:21.450
+It happened to me.
+
+111
+00:03:22.050 --> 00:03:23.010
+What should I do now?
+
+112
+00:03:23.390 --> 00:03:23.990
+He will tell you.
+
+113
+00:03:24.590 --> 00:03:27.250
+I personally use ChatGPT many times.
+
+114
+00:03:27.410 --> 00:03:29.030
+When I get emotionally charged up.
+
+115
+00:03:29.190 --> 00:03:29.870
+Sometimes there was a fight.
+
+116
+00:03:30.850 --> 00:03:31.750
+I am sad about something.
+
+117
+00:03:32.770 --> 00:03:33.870
+Or nothing is happening to me.
+
+118
+00:03:34.370 --> 00:03:34.890
+I am sad.
+
+119
+00:03:35.310 --> 00:03:36.130
+I tell ChatGPT.
+
+120
+00:03:36.530 --> 00:03:37.870
+It always gives me such answers.
+
+121
+00:03:38.230 --> 00:03:39.550
+Which is right for me personally.
+
+122
+00:03:40.320 --> 00:03:43.490
+And even if you ask him such things.
+
+123
+00:03:44.030 --> 00:03:45.370
+In which there is talk of your pros
+
+124
+00:03:45.370 --> 00:03:45.770
+and cons.
+
+125
+00:03:46.570 --> 00:03:47.550
+Then he will tell you the benefits.
+
+126
+00:03:48.250 --> 00:03:50.770
+If I compare ChatGPT and other tools.
+
+127
+00:03:51.590 --> 00:03:52.750
+Then ChatGPT is way superior.
+
+128
+00:03:52.910 --> 00:03:54.270
+And it is not that it is sponsored.
+
+129
+00:03:54.850 --> 00:03:56.310
+First of all, we are in the course.
+
+130
+00:03:57.010 --> 00:03:57.690
+So it is not sponsored.
+
+131
+00:03:58.430 --> 00:03:59.770
+I am telling you the right thing.
+
+132
+00:04:00.730 --> 00:04:01.810
+So you will ask him questions.
+
+133
+00:04:02.230 --> 00:04:02.970
+He will answer you.
+
+134
+00:04:03.410 --> 00:04:05.190
+You can ask him to explain concepts.
+
+135
+00:04:06.210 --> 00:04:07.730
+You can ask him how this will happen.
+
+136
+00:04:07.730 --> 00:04:08.710
+If you don't have any code.
+
+137
+00:04:09.010 --> 00:04:11.810
+You can ask him to run it for
+
+138
+00:04:11.810 --> 00:04:11.910
+you.
+
+139
+00:04:11.910 --> 00:04:12.970
+You can generate boilerplate.
+
+140
+00:04:13.890 --> 00:04:14.970
+Like we will see later.
+
+141
+00:04:15.470 --> 00:04:16.769
+When you have to write something.
+
+142
+00:04:17.470 --> 00:04:18.709
+Which is very boring and repetitive.
+
+143
+00:04:18.910 --> 00:04:19.529
+You can ask him to write it.
+
+144
+00:04:19.570 --> 00:04:20.010
+He will write it.
+
+145
+00:04:20.329 --> 00:04:22.770
+If you have to write documentation beyond code.
+
+146
+00:04:23.230 --> 00:04:24.010
+If you have to write anything.
+
+147
+00:04:25.410 --> 00:04:27.430
+Which you may find difficult to write.
+
+148
+00:04:27.590 --> 00:04:28.110
+You will write it.
+
+149
+00:04:28.310 --> 00:04:29.030
+There is a lot of work.
+
+150
+00:04:29.110 --> 00:04:29.530
+You will do it.
+
+151
+00:04:30.010 --> 00:04:31.390
+But do you really want to spend time
+
+152
+00:04:31.390 --> 00:04:31.870
+doing that?
+
+153
+00:04:32.210 --> 00:04:33.030
+This is the biggest question.
+
+154
+00:04:33.430 --> 00:04:37.130
+So this ChatGPT does it very well for
+
+155
+00:04:37.130 --> 00:04:37.230
+you.
+
+156
+00:04:37.230 --> 00:04:38.450
+But there is a limitation.
+
+157
+00:04:39.030 --> 00:04:40.110
+You have to give context.
+
+158
+00:04:40.570 --> 00:04:41.350
+Context means.
+
+159
+00:04:41.610 --> 00:04:43.090
+If I ask him that the code is
+
+160
+00:04:43.090 --> 00:04:43.350
+not working.
+
+161
+00:04:43.470 --> 00:04:44.650
+He will ask which code is not working.
+
+162
+00:04:44.730 --> 00:04:45.730
+I will say this code is not working.
+
+163
+00:04:46.170 --> 00:04:46.910
+I gave him a file.
+
+164
+00:04:47.050 --> 00:04:48.410
+Suppose that file uses 5 more files.
+
+165
+00:04:49.630 --> 00:04:51.030
+So ChatGPT can ask you.
+
+166
+00:04:51.430 --> 00:04:52.450
+Give me 5 more files.
+
+167
+00:04:52.730 --> 00:04:54.150
+Then only I will tell you.
+
+168
+00:04:54.150 --> 00:04:55.070
+And you will have to give those 5
+
+169
+00:04:55.070 --> 00:04:55.590
+files too.
+
+170
+00:04:56.030 --> 00:04:57.270
+And if you have 50 files instead of
+
+171
+00:04:57.270 --> 00:04:57.510
+5.
+
+172
+00:04:57.810 --> 00:04:57.970
+It can be big.
+
+173
+00:04:58.530 --> 00:04:59.150
+ChatGPT can say.
+
+174
+00:04:59.230 --> 00:05:00.830
+I can't take a single question in so
+
+175
+00:05:00.830 --> 00:05:00.930
+much data.
+
+176
+00:05:01.510 --> 00:05:02.550
+So these are the limitations.
+
+177
+00:05:03.070 --> 00:05:03.530
+But again.
+
+178
+00:05:03.810 --> 00:05:04.350
+It's okay.
+
+179
+00:05:04.870 --> 00:05:06.510
+You break your big problem into small problems.
+
+180
+00:05:06.510 --> 00:05:08.090
+And then give it to ChatGPT.
+
+181
+00:05:08.390 --> 00:05:10.450
+Why do you have to do everything at
+
+182
+00:05:10.450 --> 00:05:11.130
+once with ChatGPT?
+
+183
+00:05:11.350 --> 00:05:12.370
+I give you a tip.
+
+184
+00:05:12.730 --> 00:05:12.830
+I am giving you a tip before getting
+
+185
+00:05:12.830 --> 00:05:13.910
+ChatGPT used.
+
+186
+00:05:15.210 --> 00:05:17.050
+Give ChatGPT the problem in pieces.
+
+187
+00:05:17.650 --> 00:05:18.130
+Don't say.
+
+188
+00:05:18.370 --> 00:05:20.210
+Make me an e-commerce website and give
+
+189
+00:05:20.210 --> 00:05:20.630
+it to me.
+
+190
+00:05:20.810 --> 00:05:21.930
+He will definitely make something and give it
+
+191
+00:05:21.930 --> 00:05:22.430
+to you.
+
+192
+00:05:22.470 --> 00:05:23.650
+But it will not be that optimal.
+
+193
+00:05:24.130 --> 00:05:24.890
+You do things step by step.
+
+194
+00:05:25.470 --> 00:05:26.230
+You just tell him this much.
+
+195
+00:05:26.590 --> 00:05:27.750
+I have to make an e-commerce website.
+
+196
+00:05:28.670 --> 00:05:30.290
+How do I set up a boilerplate code?
+
+197
+00:05:30.810 --> 00:05:31.470
+He will tell you.
+
+198
+00:05:32.350 --> 00:05:32.910
+He will tell you.
+
+199
+00:05:32.990 --> 00:05:33.570
+This is your homepage.
+
+200
+00:05:33.910 --> 00:05:34.770
+This is your product page.
+
+201
+00:05:35.030 --> 00:05:35.990
+This is your page.
+
+202
+00:05:35.990 --> 00:05:36.950
+He will tell you everything.
+
+203
+00:05:37.610 --> 00:05:38.090
+And then.
+
+204
+00:05:38.650 --> 00:05:38.950
+You people.
+
+205
+00:05:39.550 --> 00:05:41.090
+You can build your pages slowly.
+
+206
+00:05:41.090 --> 00:05:41.590
+For example.
+
+207
+00:05:41.790 --> 00:05:42.250
+You have to build a homepage.
+
+208
+00:05:42.710 --> 00:05:43.050
+You tell him.
+
+209
+00:05:43.250 --> 00:05:44.070
+Now make me a slider.
+
+210
+00:05:44.570 --> 00:05:45.130
+Now make me this.
+
+211
+00:05:45.590 --> 00:05:46.370
+Now make me this.
+
+212
+00:05:46.410 --> 00:05:47.170
+He will make it for you.
+
+213
+00:05:47.290 --> 00:05:47.870
+He will make it incrementally.
+
+214
+00:05:48.350 --> 00:05:49.050
+You will keep testing.
+
+215
+00:05:49.690 --> 00:05:51.170
+You will also understand what has happened.
+
+216
+00:05:51.470 --> 00:05:52.690
+If at the same time he generates 100
+
+217
+00:05:52.690 --> 00:05:54.490
+-200 files and gives it to you.
+
+218
+00:05:55.010 --> 00:05:56.450
+Then definitely you people will not understand.
+
+219
+00:05:56.910 --> 00:05:58.450
+Who can understand 100-200 files at once?
+
+220
+00:05:58.630 --> 00:06:00.030
+If someone spits on my face.
+
+221
+00:06:00.890 --> 00:06:01.750
+100-200 files.
+
+222
+00:06:02.330 --> 00:06:03.070
+I will not understand.
+
+223
+00:06:03.570 --> 00:06:04.050
+It will take me time.
+
+224
+00:06:04.370 --> 00:06:05.110
+I am also a human being.
+
+225
+00:06:05.670 --> 00:06:06.510
+Yes, I have experience.
+
+226
+00:06:06.730 --> 00:06:07.670
+I have written a lot of code.
+
+227
+00:06:08.130 --> 00:06:08.950
+But I am a human being.
+
+228
+00:06:09.250 --> 00:06:09.730
+So yes.
+
+229
+00:06:09.830 --> 00:06:10.290
+This is a limitation.
+
+230
+00:06:10.730 --> 00:06:11.150
+Let's move forward.
+
+231
+00:06:11.370 --> 00:06:13.390
+Now after this comes IDE native integration.
+
+232
+00:06:13.570 --> 00:06:14.870
+What is IDE native integration?
+
+233
+00:06:15.250 --> 00:06:16.110
+First you were going to chatgpt.
+
+234
+00:06:16.730 --> 00:06:17.710
+You were asking him to do this.
+
+235
+00:06:17.990 --> 00:06:18.590
+He was telling you.
+
+236
+00:06:18.750 --> 00:06:18.990
+Take this.
+
+237
+00:06:19.110 --> 00:06:19.490
+This was the code.
+
+238
+00:06:19.670 --> 00:06:20.170
+You were copying.
+
+239
+00:06:20.370 --> 00:06:20.750
+You were pasting.
+
+240
+00:06:21.470 --> 00:06:22.290
+I like that a lot.
+
+241
+00:06:22.590 --> 00:06:23.230
+Chatgpt one.
+
+242
+00:06:23.510 --> 00:06:24.630
+But what is IDE native integration?
+
+243
+00:06:25.030 --> 00:06:25.970
+As you keep typing in it.
+
+244
+00:06:26.230 --> 00:06:27.090
+He keeps suggesting you.
+
+245
+00:06:28.010 --> 00:06:29.310
+You can speak.
+
+246
+00:06:30.490 --> 00:06:31.550
+Literally from your IDE.
+
+247
+00:06:31.810 --> 00:06:32.430
+Generate a function.
+
+248
+00:06:32.930 --> 00:06:33.590
+Which does the sum of two numbers.
+
+249
+00:06:34.470 --> 00:06:35.090
+And if it is 10.
+
+250
+00:06:35.090 --> 00:06:36.150
+It will do 10.
+
+251
+00:06:36.710 --> 00:06:37.670
+Take a list.
+
+252
+00:06:38.290 --> 00:06:39.010
+Sum the list.
+
+253
+00:06:39.610 --> 00:06:40.090
+Take a list.
+
+254
+00:06:40.490 --> 00:06:41.450
+Its arithmetic mean.
+
+255
+00:06:41.590 --> 00:06:42.450
+Meaning you can say anything.
+
+256
+00:06:42.630 --> 00:06:43.530
+He will write the function for you.
+
+257
+00:06:44.090 --> 00:06:45.510
+Meaning you were writing manually.
+
+258
+00:06:45.650 --> 00:06:45.930
+Write def.
+
+259
+00:06:46.370 --> 00:06:47.130
+Write the name of the function.
+
+260
+00:06:47.570 --> 00:06:48.710
+Opening closing parenthesis.
+
+261
+00:06:49.390 --> 00:06:50.390
+Now what are you doing?
+
+262
+00:06:50.550 --> 00:06:51.670
+Now you are generating directly from AI.
+
+263
+00:06:52.550 --> 00:06:52.710
+Fine.
+
+264
+00:06:53.210 --> 00:06:55.770
+So here is a real-time code completion.
+
+265
+00:06:55.910 --> 00:06:56.570
+You get it.
+
+266
+00:06:56.570 --> 00:06:57.510
+As you type it.
+
+267
+00:06:57.630 --> 00:06:58.570
+As if you forgot.
+
+268
+00:06:58.690 --> 00:07:00.050
+Which function was used.
+
+269
+00:07:00.850 --> 00:07:02.390
+To see the directory listing.
+
+270
+00:07:02.950 --> 00:07:03.750
+So you will write os.
+
+271
+00:08:05.810 --> 00:08:08.630
+will sit.
+
+272
+00:08:34.850 --> 00:08:40.549
+The licensing part is a great area in
+
+273
+00:08:40.549 --> 00:08:40.649
+the context of AI.
+
+274
+00:08:41.030 --> 00:08:43.010
+For example, I generated a code from AI
+
+275
+00:08:43.010 --> 00:08:46.710
+and used it in my business and earned
+
+276
+00:08:46.710 --> 00:08:47.670
+a lot of money from it.
+
+277
+00:08:48.430 --> 00:08:49.590
+So am I a thief?
+
+278
+00:08:50.230 --> 00:08:51.150
+Am I a code thief?
+
+279
+00:08:51.890 --> 00:08:52.910
+The answer is no.
+
+280
+00:08:53.330 --> 00:08:56.130
+Because I asked AI and AI gave it
+
+281
+00:08:56.130 --> 00:08:56.230
+to me.
+
+282
+00:08:56.270 --> 00:08:57.550
+But that AI was trained in some other
+
+283
+00:08:57.550 --> 00:08:57.870
+code.
+
+284
+00:08:58.150 --> 00:08:59.450
+The one who had that proprietary code.
+
+285
+00:08:59.570 --> 00:09:00.590
+They spent a lot of money to make
+
+286
+00:09:00.590 --> 00:09:01.030
+that code.
+
+287
+00:09:01.030 --> 00:09:02.870
+I got it for free.
+
+288
+00:09:03.710 --> 00:09:05.150
+AI generated it and gave it to me.
+
+289
+00:09:05.330 --> 00:09:06.750
+Because I did coding in the AI era.
+
+290
+00:09:07.070 --> 00:09:08.410
+They did coding in the pre-AI era.
+
+291
+00:09:08.730 --> 00:09:09.850
+When AI did not even come.
+
+292
+00:09:10.810 --> 00:09:13.030
+So yes, people are having problems with this.
+
+293
+00:09:13.530 --> 00:09:15.070
+Those companies who had spent a lot of
+
+294
+00:09:15.070 --> 00:09:16.010
+money to write the code.
+
+295
+00:09:16.670 --> 00:09:18.430
+Who had paid a lot of money to
+
+296
+00:09:18.430 --> 00:09:19.230
+the software developers.
+
+297
+00:09:19.830 --> 00:09:22.650
+Who had made an optimal code after doing
+
+298
+00:09:22.650 --> 00:09:22.750
+a lot of research.
+
+299
+00:09:23.610 --> 00:09:25.530
+Here AI is writing the whole code and
+
+300
+00:09:25.530 --> 00:09:25.770
+giving it.
+
+301
+00:09:26.330 --> 00:09:27.490
+So we have to take advantage of it.
+
+302
+00:09:27.830 --> 00:09:29.290
+We have to make our productivity and life
+
+303
+00:09:29.290 --> 00:09:29.610
+better.
+
+304
+00:09:29.610 --> 00:09:31.450
+So I will teach you this in this
+
+305
+00:09:31.450 --> 00:09:31.770
+course.
+
+306
+00:09:32.650 --> 00:09:33.390
+I will definitely teach you.
+
+307
+00:09:33.670 --> 00:09:35.470
+And people are doing it, everyone is doing
+
+308
+00:09:35.470 --> 00:09:35.590
+it.
+
+309
+00:09:35.670 --> 00:09:36.990
+So you will also do it as a
+
+310
+00:09:36.990 --> 00:09:37.510
+data analyst.
+
+311
+00:09:38.610 --> 00:09:40.630
+After this, next-gen editors come.
+
+312
+00:09:40.690 --> 00:09:42.150
+They take things to a different level.
+
+313
+00:09:42.910 --> 00:09:45.110
+For example, Cursor AI, Cloud Code.
+
+314
+00:09:45.590 --> 00:09:48.250
+And even GitHub Copilot does this thing.
+
+315
+00:09:48.730 --> 00:09:50.210
+Now what happens, I will tell you.
+
+316
+00:09:50.710 --> 00:09:51.650
+Suppose you have made a website.
+
+317
+00:09:51.910 --> 00:09:53.350
+A website has a lot of files.
+
+318
+00:09:53.890 --> 00:09:55.830
+Suppose 20, 30, 40, 50.
+
+319
+00:09:56.650 --> 00:09:58.150
+You will simply say that.
+
+320
+00:09:58.150 --> 00:09:58.750
+I want a red color image on my
+
+321
+00:09:58.750 --> 00:10:00.190
+e-commerce homepage.
+
+322
+00:10:01.490 --> 00:10:02.670
+Or I want a red color background.
+
+323
+00:10:03.430 --> 00:10:04.470
+Or I want to change the color theme
+
+324
+00:10:04.470 --> 00:10:04.970
+of this.
+
+325
+00:10:04.970 --> 00:10:05.850
+It will do it automatically.
+
+326
+00:10:06.270 --> 00:10:08.010
+You will write here in the chat that
+
+327
+00:10:08.010 --> 00:10:08.610
+do this.
+
+328
+00:10:09.090 --> 00:10:09.990
+It will do it.
+
+329
+00:10:10.490 --> 00:10:12.270
+Now what happens, sometimes it can do it,
+
+330
+00:10:12.330 --> 00:10:12.630
+sometimes it can't.
+
+331
+00:10:13.030 --> 00:10:14.050
+If you are a beginner, you are getting
+
+332
+00:10:14.050 --> 00:10:14.870
+something small written.
+
+333
+00:10:14.990 --> 00:10:15.530
+It will do it.
+
+334
+00:10:16.130 --> 00:10:17.710
+But if you are getting a little complicated
+
+335
+00:10:17.710 --> 00:10:19.550
+thing done from it.
+
+336
+00:10:19.750 --> 00:10:21.110
+Then there is a chance that it will
+
+337
+00:10:21.110 --> 00:10:21.690
+not be able to do it.
+
+338
+00:10:22.010 --> 00:10:23.070
+And there is a good chance that it
+
+339
+00:10:23.070 --> 00:10:23.670
+will not be able to do it.
+
+340
+00:10:23.690 --> 00:10:24.790
+If it is a very advanced thing.
+
+341
+00:10:24.970 --> 00:10:25.190
+Why?
+
+342
+00:10:25.270 --> 00:10:26.050
+Because it has not seen the data.
+
+343
+00:10:26.050 --> 00:10:28.030
+Now suppose you tell it.
+
+344
+00:10:28.490 --> 00:10:29.730
+I have to write a Python program.
+
+345
+00:10:30.690 --> 00:10:31.390
+What should it do?
+
+346
+00:10:32.030 --> 00:10:33.830
+Which gives me a.
+
+347
+00:10:35.070 --> 00:10:35.810
+Let's say.
+
+348
+00:10:36.090 --> 00:10:37.270
+Arrange the files of the folder.
+
+349
+00:10:38.010 --> 00:10:39.150
+My pdfs come in a folder.
+
+350
+00:10:40.350 --> 00:10:42.030
+My pngs come in a folder.
+
+351
+00:10:43.230 --> 00:10:44.390
+My let's say.
+
+352
+00:10:45.450 --> 00:10:46.710
+Documents come in my folder.
+
+353
+00:10:47.290 --> 00:10:48.330
+If you want to do this.
+
+354
+00:10:48.450 --> 00:10:49.170
+You can do it.
+
+355
+00:10:49.590 --> 00:10:51.190
+And AI will do it for you.
+
+356
+00:10:51.310 --> 00:10:52.170
+Because AI has seen this code.
+
+357
+00:10:52.870 --> 00:10:54.410
+And when we say seen.
+
+358
+00:10:54.410 --> 00:10:55.830
+In the context of humans.
+
+359
+00:10:55.930 --> 00:10:56.970
+You can see very limited things.
+
+360
+00:10:57.850 --> 00:10:59.870
+But AI can see a lot of things
+
+361
+00:10:59.870 --> 00:11:00.410
+at the same time.
+
+362
+00:11:01.490 --> 00:11:02.130
+And it is trained.
+
+363
+00:11:02.970 --> 00:11:05.450
+In fact, AI models are very big in
+
+364
+00:11:05.450 --> 00:11:05.770
+size.
+
+365
+00:11:05.990 --> 00:11:06.310
+They are in GB.
+
+366
+00:11:06.970 --> 00:11:07.390
+A lot.
+
+367
+00:11:08.450 --> 00:11:09.110
+Big size.
+
+368
+00:11:10.090 --> 00:11:10.650
+Information.
+
+369
+00:11:10.930 --> 00:11:11.270
+Those people.
+
+370
+00:11:11.790 --> 00:11:12.430
+Means the models.
+
+371
+00:11:12.550 --> 00:11:13.690
+They can handle it.
+
+372
+00:11:14.170 --> 00:11:15.210
+And they can remember things.
+
+373
+00:11:15.950 --> 00:11:16.630
+With that said.
+
+374
+00:11:16.770 --> 00:11:18.730
+We will also see this context aware next
+
+375
+00:11:18.730 --> 00:11:18.950
+generation.
+
+376
+00:11:19.790 --> 00:11:20.790
+In which simply.
+
+377
+00:11:21.150 --> 00:11:21.630
+By chatting.
+
+378
+00:11:22.090 --> 00:11:23.610
+You can get it out.
+
+379
+00:11:23.610 --> 00:11:24.910
+Complete work.
+
+380
+00:11:24.970 --> 00:11:25.290
+From AI.
+
+381
+00:11:25.690 --> 00:11:26.230
+In this.
+
+382
+00:11:26.330 --> 00:11:28.050
+Your integration is very deep.
+
+383
+00:11:28.270 --> 00:11:28.970
+Means you will say one thing.
+
+384
+00:11:29.350 --> 00:11:30.010
+And your work will be done.
+
+385
+00:11:30.130 --> 00:11:30.670
+It will tell you.
+
+386
+00:11:30.790 --> 00:11:31.210
+That I have made these changes in your
+
+387
+00:11:31.210 --> 00:11:31.670
+infiles.
+
+388
+00:11:32.810 --> 00:11:34.130
+Do you accept or reject?
+
+389
+00:11:34.350 --> 00:11:35.430
+If he did everything right.
+
+390
+00:11:35.650 --> 00:11:36.210
+Then you will accept.
+
+391
+00:11:36.470 --> 00:11:37.110
+Otherwise you will reject.
+
+392
+00:11:37.610 --> 00:11:38.450
+And let me tell you something.
+
+393
+00:11:38.550 --> 00:11:39.250
+Sometimes he makes a mistake.
+
+394
+00:11:39.850 --> 00:11:40.370
+He also writes wrong code.
+
+395
+00:11:41.030 --> 00:11:42.210
+He also writes crappy code.
+
+396
+00:11:42.450 --> 00:11:42.890
+He also writes such a code.
+
+397
+00:11:43.230 --> 00:11:44.090
+Which is very bad.
+
+398
+00:11:44.610 --> 00:11:46.470
+But from a data analyst point of view.
+
+399
+00:11:47.410 --> 00:11:48.170
+Then you.
+
+400
+00:11:48.490 --> 00:11:49.850
+It doesn't mean much with those things.
+
+401
+00:11:50.230 --> 00:11:51.210
+Because you are a very.
+
+402
+00:11:51.770 --> 00:11:53.050
+You are not a very advanced coder.
+
+403
+00:11:53.050 --> 00:11:54.290
+You don't expect this from you.
+
+404
+00:11:54.290 --> 00:11:56.010
+That you will write very optimized code.
+
+405
+00:11:56.330 --> 00:11:56.910
+You expect this from you.
+
+406
+00:11:56.970 --> 00:11:57.990
+That you will analyze the data.
+
+407
+00:11:58.450 --> 00:11:58.810
+For that.
+
+408
+00:11:58.990 --> 00:12:00.370
+If you are using AI generated code.
+
+409
+00:12:01.090 --> 00:12:02.170
+Then it will be considered a bonus.
+
+410
+00:12:03.490 --> 00:12:05.230
+Your value is going to increase in the
+
+411
+00:12:05.230 --> 00:12:05.330
+market.
+
+412
+00:12:05.690 --> 00:12:06.630
+If you do this.
+
+413
+00:12:06.810 --> 00:12:06.910
+Then.
+
+414
+00:12:07.370 --> 00:12:08.590
+I know that as far as Python is
+
+415
+00:12:08.590 --> 00:12:08.690
+concerned.
+
+416
+00:12:08.770 --> 00:12:09.290
+Whatever we have learned.
+
+417
+00:12:09.290 --> 00:12:10.110
+You must have found it a bit boring.
+
+418
+00:12:10.810 --> 00:12:11.130
+In fact.
+
+419
+00:12:11.210 --> 00:12:12.050
+I have not done much Python.
+
+420
+00:12:13.090 --> 00:12:13.390
+But.
+
+421
+00:12:13.970 --> 00:12:14.750
+What we are going to do now.
+
+422
+00:12:14.850 --> 00:12:15.830
+It is so interesting.
+
+423
+00:12:15.990 --> 00:12:16.730
+That you can't miss it.
+
+424
+00:12:17.310 --> 00:12:17.650
+After this.
+
+425
+00:12:18.730 --> 00:12:19.610
+AI terminal comes to us.
+
+426
+00:12:19.810 --> 00:12:21.170
+What does AI terminal do?
+
+427
+00:12:21.290 --> 00:12:21.730
+Basically.
+
+428
+00:12:22.010 --> 00:12:23.030
+You guys have written a normal terminal.
+
+429
+00:12:23.030 --> 00:12:24.250
+On which we write code.
+
+430
+00:12:24.650 --> 00:12:25.290
+We write pip install.
+
+431
+00:12:25.950 --> 00:12:26.710
+We write Python.
+
+432
+00:12:27.490 --> 00:12:28.550
+That is our normal terminal.
+
+433
+00:12:28.870 --> 00:12:30.530
+If you have written one character wrong in
+
+434
+00:12:30.530 --> 00:12:30.630
+it.
+
+435
+00:12:30.850 --> 00:12:32.130
+Then your command can fail.
+
+436
+00:12:32.910 --> 00:12:33.290
+Means.
+
+437
+00:12:33.550 --> 00:12:34.810
+Whatever you guys are writing.
+
+438
+00:12:35.150 --> 00:12:36.430
+That has to be accurate.
+
+439
+00:12:37.070 --> 00:12:38.210
+And I would like to tell you guys.
+
+440
+00:12:38.730 --> 00:12:41.150
+That AI has also entered the terminal these
+
+441
+00:12:41.150 --> 00:12:41.250
+days.
+
+442
+00:12:41.710 --> 00:12:41.970
+Means.
+
+443
+00:12:42.150 --> 00:12:43.070
+There will be AI in your terminal.
+
+444
+00:12:44.230 --> 00:12:45.470
+You will use it.
+
+445
+00:12:46.210 --> 00:12:46.630
+You.
+
+446
+00:12:46.670 --> 00:12:47.690
+Instead of writing.
+
+447
+00:12:48.350 --> 00:12:49.350
+Terminal code.
+
+448
+00:12:49.550 --> 00:12:50.310
+You will write this.
+
+449
+00:12:50.530 --> 00:12:51.750
+Install pandas package.
+
+450
+00:12:51.830 --> 00:12:52.810
+If you don't want to write this.
+
+451
+00:12:53.990 --> 00:12:54.510
+And.
+
+452
+00:12:55.430 --> 00:12:56.710
+If you don't want to write this.
+
+453
+00:12:57.110 --> 00:12:57.570
+Then you will write.
+
+454
+00:12:57.870 --> 00:12:59.090
+Install pandas package.
+
+455
+00:12:59.350 --> 00:12:59.590
+Enter.
+
+456
+00:12:59.950 --> 00:13:00.690
+And it will automatically.
+
+457
+00:13:00.810 --> 00:13:02.190
+Give you pip install pandas.
+
+458
+00:13:02.910 --> 00:13:03.410
+So.
+
+459
+00:13:03.550 --> 00:13:04.170
+This is our.
+
+460
+00:13:05.030 --> 00:13:05.550
+Terminal.
+
+461
+00:13:05.850 --> 00:13:06.270
+AI.
+
+462
+00:13:07.030 --> 00:13:07.390
+And.
+
+463
+00:13:07.710 --> 00:13:08.750
+AI has entered the terminal these days.
+
+464
+00:13:09.190 --> 00:13:09.970
+Using tools like.
+
+465
+00:13:10.050 --> 00:13:10.570
+Cloud code.
+
+466
+00:13:10.930 --> 00:13:11.410
+Warp.
+
+467
+00:13:11.790 --> 00:13:12.290
+We will also see all these things.
+
+468
+00:13:13.230 --> 00:13:13.530
+So.
+
+469
+00:13:13.570 --> 00:13:14.230
+In the coming videos.
+
+470
+00:13:14.470 --> 00:13:15.290
+We will see chat gpt.
+
+471
+00:13:16.090 --> 00:13:16.950
+We will see github copilot.
+
+472
+00:13:17.630 --> 00:13:18.610
+They will generate a lot of code from
+
+473
+00:13:18.610 --> 00:13:18.710
+AI.
+
+474
+00:13:19.950 --> 00:13:20.690
+And coders.
+
+475
+00:13:20.870 --> 00:13:22.050
+They will be jealous of you.
+
+476
+00:13:22.210 --> 00:13:22.730
+You.
+
+477
+00:13:22.730 --> 00:13:22.990
+If you are a coder.
+
+478
+00:13:32.830 --> 00:13:33.310
+So.
+
+479
+00:13:39.710 --> 00:13:41.690
+In the next video.
+
+480
+00:13:43.210 --> 00:13:43.490
+I hope.
+
+481
+00:13:43.730 --> 00:13:44.150
+You guys are enjoying.
+
+482
+00:13:45.190 --> 00:13:45.850
+See you.
+
+483
+00:13:45.930 --> 00:13:46.510
+In the next video.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -35010,6 +44212,15 @@ See you in the next video.
 
 
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -35025,6 +44236,25 @@ See you in the next video.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 
