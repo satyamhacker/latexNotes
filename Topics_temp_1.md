@@ -44176,26 +44176,7900 @@ In the next video.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+WEBVTT
+
+1
+00:00:00.260 --> 00:00:03.280
+(Transcribed by TurboScribe. Go Unlimited to remove this message.) Guys, in the last video, we saw how
+
+2
+00:00:03.280 --> 00:00:05.600
+AI-assisted development is done.
+
+3
+00:00:06.080 --> 00:00:07.800
+I kept things very raw and real.
+
+4
+00:00:08.240 --> 00:00:10.360
+Today, we will make a project which is
+
+5
+00:00:10.360 --> 00:00:11.720
+a file organizer project.
+
+6
+00:00:12.140 --> 00:00:13.180
+Basically, what it will do?
+
+7
+00:00:13.400 --> 00:00:14.560
+It will organize your files.
+
+8
+00:00:15.980 --> 00:00:18.160
+Suppose, you have this folder and there are
+
+9
+00:00:18.160 --> 00:00:18.960
+many files in it.
+
+10
+00:00:19.520 --> 00:00:21.200
+Some random JPG files are there.
+
+11
+00:00:21.640 --> 00:00:25.200
+Let's say, some random documents and doc files
+
+12
+00:00:25.200 --> 00:00:25.480
+are there.
+
+13
+00:00:26.100 --> 00:00:28.080
+This often happens in our downloads folder.
+
+14
+00:00:28.080 --> 00:00:30.420
+If you open your downloads folder, you must
+
+15
+00:00:30.420 --> 00:00:32.240
+have downloaded many such things.
+
+16
+00:00:33.280 --> 00:00:37.500
+There will be different file extensions, videos, doc
+
+17
+00:00:37.500 --> 00:00:39.400
+files, image files.
+
+18
+00:00:40.240 --> 00:00:41.360
+And there is a good chance that you
+
+19
+00:00:41.360 --> 00:00:42.460
+want them to be organized.
+
+20
+00:00:43.020 --> 00:00:44.180
+I mean, images should be in one folder
+
+21
+00:00:44.180 --> 00:00:47.700
+and your documents should be in another folder.
+
+22
+00:00:48.600 --> 00:00:52.460
+And let's say, your MP3 or MP4 should
+
+23
+00:00:52.460 --> 00:00:54.480
+be in the respective audio-video folder.
+
+24
+00:00:54.960 --> 00:00:55.480
+This is what we are going to do
+
+25
+00:00:55.480 --> 00:00:56.140
+in today's video.
+
+26
+00:00:56.620 --> 00:00:58.380
+So, first of all, I will bring some
+
+27
+00:00:58.380 --> 00:01:00.600
+files here so that you get a good
+
+28
+00:01:00.600 --> 00:01:02.020
+idea of what we are going to do.
+
+29
+00:01:02.240 --> 00:01:03.959
+As you can see, I have brought a
+
+30
+00:01:03.959 --> 00:01:04.940
+lot of files here.
+
+31
+00:01:05.020 --> 00:01:07.500
+I have put some JPG files here.
+
+32
+00:01:07.780 --> 00:01:08.780
+I have put PNG files.
+
+33
+00:01:09.200 --> 00:01:10.140
+I have put MP4 files.
+
+34
+00:01:10.760 --> 00:01:11.720
+I have put PNG files.
+
+35
+00:01:12.560 --> 00:01:14.380
+And you see, I want them to be
+
+36
+00:01:14.380 --> 00:01:15.500
+organized in their respective folders.
+
+37
+00:01:16.800 --> 00:01:18.560
+Now, your download folder can be filled with
+
+38
+00:01:18.560 --> 00:01:19.320
+thousands of files.
+
+39
+00:01:20.060 --> 00:01:21.080
+And it will be easy for you to
+
+40
+00:01:21.080 --> 00:01:25.200
+search if your zip folders are automatically created.
+
+41
+00:01:25.200 --> 00:01:28.240
+I mean, basically, your output will look like
+
+42
+00:01:28.240 --> 00:01:28.380
+this.
+
+43
+00:01:29.020 --> 00:01:32.740
+You will have PDFs, Word files, Excel files,
+
+44
+00:01:32.880 --> 00:01:35.960
+images, videos, music, archives.
+
+45
+00:01:36.260 --> 00:01:38.440
+These types of file types will be created
+
+46
+00:01:38.440 --> 00:01:38.880
+in their folders.
+
+47
+00:01:39.340 --> 00:01:39.440
+Okay?
+
+48
+00:01:39.800 --> 00:01:40.700
+I hope you understood.
+
+49
+00:01:40.900 --> 00:01:42.260
+If you didn't understand, it's okay.
+
+50
+00:01:42.560 --> 00:01:43.400
+I will explain it to you.
+
+51
+00:01:43.480 --> 00:01:44.500
+So, what we will do here is, we
+
+52
+00:01:44.500 --> 00:01:47.640
+will create a file named main.py. I
+
+53
+00:01:47.640 --> 00:01:49.260
+will not do much AI-assisted development right
+
+54
+00:01:49.260 --> 00:01:49.780
+now.
+
+55
+00:01:50.200 --> 00:01:51.120
+I will use AI fully.
+
+56
+00:01:51.880 --> 00:01:53.340
+And I will keep full control of this
+
+57
+00:01:53.340 --> 00:01:53.900
+project in my hands.
+
+58
+00:01:53.900 --> 00:01:54.940
+That's the target.
+
+59
+00:01:55.120 --> 00:01:55.220
+Okay?
+
+60
+00:01:55.760 --> 00:01:57.060
+So, what we will do here is, first
+
+61
+00:01:57.060 --> 00:01:59.980
+of all, we will import OS and then
+
+62
+00:01:59.980 --> 00:02:01.240
+we will import shutil.
+
+63
+00:02:01.500 --> 00:02:03.880
+So, these two are modules that help in
+
+64
+00:02:03.880 --> 00:02:07.759
+copying, moving, and checking what's in the directory.
+
+65
+00:02:08.580 --> 00:02:09.139
+Okay?
+
+66
+00:02:09.560 --> 00:02:10.900
+So, we have imported two modules.
+
+67
+00:02:11.880 --> 00:02:13.460
+Now, what I will do here is, I
+
+68
+00:02:13.460 --> 00:02:15.920
+will basically define the current directory.
+
+69
+00:02:17.020 --> 00:02:17.160
+Okay?
+
+70
+00:02:17.520 --> 00:02:22.180
+So, I will say, folder path, you want
+
+71
+00:02:22.180 --> 00:02:22.920
+to organize.
+
+72
+00:02:23.080 --> 00:02:23.200
+Okay?
+
+73
+00:02:23.200 --> 00:02:25.580
+See, it automatically gave it to me.
+
+74
+00:02:25.640 --> 00:02:25.760
+Okay?
+
+75
+00:02:26.720 --> 00:02:28.680
+Now, what happens is, we keep our constants
+
+76
+00:02:28.680 --> 00:02:30.560
+like this.
+
+77
+00:02:30.940 --> 00:02:31.060
+Okay?
+
+78
+00:02:31.620 --> 00:02:33.760
+So, folder underscore path is equal to, or
+
+79
+00:02:33.760 --> 00:02:34.760
+you can change it.
+
+80
+00:02:34.980 --> 00:02:36.940
+I mean, wherever you want to organize, you
+
+81
+00:02:36.940 --> 00:02:37.160
+can do it there.
+
+82
+00:02:37.280 --> 00:02:39.120
+But what I will do here is, I
+
+83
+00:02:39.120 --> 00:02:43.680
+will say, os dot, oops, os dot getcwd.
+
+84
+00:02:43.920 --> 00:02:44.080
+Okay?
+
+85
+00:02:44.580 --> 00:02:45.680
+Current working directory.
+
+86
+00:02:45.920 --> 00:02:46.020
+Okay?
+
+87
+00:02:46.080 --> 00:02:47.220
+I will also close this agent pane.
+
+88
+00:02:48.240 --> 00:02:49.940
+Because I basically want to bring my current
+
+89
+00:02:49.940 --> 00:02:51.020
+directory here.
+
+90
+00:02:51.500 --> 00:02:52.820
+After this, what I will do here is,
+
+91
+00:02:52.820 --> 00:02:55.680
+I will make a constant for file type
+
+92
+00:02:55.680 --> 00:02:56.460
+mapping.
+
+93
+00:02:57.960 --> 00:02:58.060
+Okay?
+
+94
+00:02:58.220 --> 00:02:59.480
+And it said absolutely right.
+
+95
+00:02:59.980 --> 00:03:00.480
+Absolutely right.
+
+96
+00:03:00.740 --> 00:03:01.240
+This is what I have to do.
+
+97
+00:03:01.780 --> 00:03:02.820
+Okay, let's add this too.
+
+98
+00:03:02.860 --> 00:03:03.360
+This is for documents.
+
+99
+00:03:03.880 --> 00:03:07.320
+It gave me a lot of good recommendations.
+
+100
+00:03:07.540 --> 00:03:08.440
+Okay, this is for videos.
+
+101
+00:03:09.160 --> 00:03:09.700
+This is for archives.
+
+102
+00:03:10.580 --> 00:03:11.600
+What else can we do?
+
+103
+00:03:12.640 --> 00:03:13.460
+No, scripts.
+
+104
+00:03:13.680 --> 00:03:13.980
+Yes, okay.
+
+105
+00:03:14.100 --> 00:03:14.620
+Let's do it for scripts too.
+
+106
+00:03:14.940 --> 00:03:15.420
+We are programmers.
+
+107
+00:03:15.640 --> 00:03:16.420
+I think that should be fine.
+
+108
+00:03:16.540 --> 00:03:16.680
+Okay?
+
+109
+00:03:16.900 --> 00:03:17.620
+Now, see what we did.
+
+110
+00:03:18.080 --> 00:03:19.720
+We made a dictionary here.
+
+111
+00:03:20.280 --> 00:03:21.420
+In which, what do we have?
+
+112
+00:03:22.020 --> 00:03:23.860
+Key is this string.
+
+113
+00:03:24.260 --> 00:03:25.300
+And value is a list.
+
+114
+00:03:25.780 --> 00:03:26.840
+And in the list, there are all the
+
+115
+00:03:26.840 --> 00:03:29.340
+extensions which we want to put in this
+
+116
+00:03:29.340 --> 00:03:29.620
+folder.
+
+117
+00:03:30.900 --> 00:03:33.780
+So, instead of all this mess, what will
+
+118
+00:03:33.780 --> 00:03:34.060
+we get?
+
+119
+00:03:34.700 --> 00:03:38.560
+We will get an images folder, a documents
+
+120
+00:03:38.560 --> 00:03:40.920
+folder, an audio folder, a videos folder, an
+
+121
+00:03:40.920 --> 00:03:42.540
+archives folder, and a scripts folder.
+
+122
+00:03:42.680 --> 00:03:42.780
+Okay?
+
+123
+00:03:43.360 --> 00:03:43.940
+I will do one thing.
+
+124
+00:03:44.140 --> 00:03:45.200
+I will remove .py from this.
+
+125
+00:03:45.540 --> 00:03:46.440
+Otherwise, what will happen?
+
+126
+00:03:46.800 --> 00:03:48.100
+My main.py will also go into the
+
+127
+00:03:48.100 --> 00:03:48.360
+folder.
+
+128
+00:03:49.080 --> 00:03:50.080
+So, I don't want this to happen.
+
+129
+00:03:50.080 --> 00:03:51.720
+I have only talked about the rest of
+
+130
+00:03:51.720 --> 00:03:52.060
+the scripts.
+
+131
+00:03:53.740 --> 00:03:55.740
+And even if you have a lot of
+
+132
+00:03:55.740 --> 00:03:58.000
+python files, you can still modify this program.
+
+133
+00:03:59.020 --> 00:04:00.460
+You can ignore the main.py file.
+
+134
+00:04:01.040 --> 00:04:01.720
+You can do it like this.
+
+135
+00:04:02.200 --> 00:04:03.660
+I will tell you how to do that
+
+136
+00:04:03.660 --> 00:04:03.760
+too.
+
+137
+00:04:04.260 --> 00:04:05.100
+Now, what will we do?
+
+138
+00:04:05.440 --> 00:04:07.460
+We will make folders if they don't exist.
+
+139
+00:04:07.840 --> 00:04:07.940
+Okay?
+
+140
+00:04:08.840 --> 00:04:11.080
+So, let's say, create folders if they don't
+
+141
+00:04:11.080 --> 00:04:11.460
+exist.
+
+142
+00:04:12.200 --> 00:04:12.960
+So, what will we do here?
+
+143
+00:04:13.900 --> 00:04:18.740
+For folder in file types.keys. Okay?
+
+144
+00:04:19.440 --> 00:04:22.480
+For folder in file types.keys. Okay?
+
+145
+00:04:22.940 --> 00:04:24.240
+Now, let's see what he has done.
+
+146
+00:04:24.420 --> 00:04:25.260
+He has not written the whole thing.
+
+147
+00:04:25.820 --> 00:04:27.140
+Now, I will have to understand what he
+
+148
+00:04:27.140 --> 00:04:27.260
+has done.
+
+149
+00:04:27.760 --> 00:04:30.040
+For folder in file types.keys. Now, you
+
+150
+00:04:30.040 --> 00:04:30.700
+will write it like this.
+
+151
+00:04:31.800 --> 00:04:32.460
+So, look at this.
+
+152
+00:04:32.460 --> 00:04:33.340
+It is telling what he has done.
+
+153
+00:04:33.620 --> 00:04:34.140
+Tap the box.
+
+154
+00:04:34.260 --> 00:04:34.380
+Okay?
+
+155
+00:04:34.480 --> 00:04:35.800
+Create folders for each file type.
+
+156
+00:04:35.860 --> 00:04:35.960
+Okay?
+
+157
+00:04:36.160 --> 00:04:37.140
+So, basically, what are we doing?
+
+158
+00:04:37.300 --> 00:04:41.060
+We are iterating images, documents, audio, videos, archives,
+
+159
+00:04:41.200 --> 00:04:41.380
+scripts.
+
+160
+00:04:41.780 --> 00:04:42.820
+So, basically, what will happen in this loop?
+
+161
+00:04:42.820 --> 00:04:43.300
+So, basically, what will happen in this loop?
+
+162
+00:04:43.860 --> 00:04:48.500
+One by one, images, documents, audio, videos, archives,
+
+163
+00:04:48.700 --> 00:04:49.700
+scripts will be the value of the folder.
+
+164
+00:04:50.320 --> 00:04:51.760
+So, in the first iteration, images will be
+
+165
+00:04:51.760 --> 00:04:52.080
+the value of the folder.
+
+166
+00:04:52.540 --> 00:04:55.100
+In the second iteration, documents will be the
+
+167
+00:04:55.100 --> 00:04:55.200
+value of the folder.
+
+168
+00:04:55.540 --> 00:04:58.600
+In the third iteration, audio will be the
+
+169
+00:04:58.600 --> 00:04:58.740
+value of the folder.
+
+170
+00:04:58.840 --> 00:04:59.280
+And so on.
+
+171
+00:04:59.360 --> 00:04:59.460
+Okay?
+
+172
+00:04:59.600 --> 00:05:00.000
+To scripts.
+
+173
+00:05:00.860 --> 00:05:01.100
+Okay?
+
+174
+00:05:01.200 --> 00:05:02.980
+Let's say, our folder is images.
+
+175
+00:05:03.260 --> 00:05:04.160
+So, what are we saying here?
+
+176
+00:05:04.300 --> 00:05:07.920
+FolderPath is equal to os.path.join. FolderPath.
+
+177
+00:05:08.080 --> 00:05:08.760
+What is our FolderPath?
+
+178
+00:05:09.280 --> 00:05:10.320
+Our FolderPath is this.
+
+179
+00:05:10.740 --> 00:05:11.660
+This is our FolderPath.
+
+180
+00:05:11.840 --> 00:05:11.960
+Okay?
+
+181
+00:05:11.960 --> 00:05:14.180
+Which we will get from our os.getcwd.
+
+182
+00:05:16.740 --> 00:05:17.380
+Very good.
+
+183
+00:05:17.760 --> 00:05:18.920
+Now, what will happen here?
+
+184
+00:05:19.280 --> 00:05:20.240
+We have taken the FolderPath.
+
+185
+00:05:20.780 --> 00:05:21.880
+We are saying, basically, make this a folder.
+
+186
+00:05:22.240 --> 00:05:23.300
+I mean, make it a folder of images.
+
+187
+00:05:23.960 --> 00:05:26.940
+And if that os.path.exists, if this
+
+188
+00:05:26.940 --> 00:05:28.940
+FolderPath does not exist, Okay?
+
+189
+00:05:29.540 --> 00:05:29.940
+So, what do you do?
+
+190
+00:05:30.000 --> 00:05:30.100
+Make it.
+
+191
+00:05:30.500 --> 00:05:33.760
+So, basically, the value of FolderPath, we have
+
+192
+00:05:33.760 --> 00:05:36.420
+said, that we, these images, I mean, basically,
+
+193
+00:05:36.560 --> 00:05:36.960
+what will happen here?
+
+194
+00:05:37.020 --> 00:05:37.980
+A folder named images.
+
+195
+00:05:38.100 --> 00:05:38.940
+The path we are making here is just
+
+196
+00:05:38.940 --> 00:05:39.400
+a variable.
+
+197
+00:05:39.860 --> 00:05:40.340
+This is a string.
+
+198
+00:05:40.340 --> 00:05:41.360
+FolderPath is a string.
+
+199
+00:05:41.760 --> 00:05:42.280
+What will happen?
+
+200
+00:05:42.420 --> 00:05:44.600
+Whatever our folder is, slash images.
+
+201
+00:05:45.100 --> 00:05:46.180
+And after that, we are saying, if this
+
+202
+00:05:46.180 --> 00:05:48.440
+slash images folder is not made here, then
+
+203
+00:05:48.440 --> 00:05:48.600
+make it.
+
+204
+00:05:49.180 --> 00:05:49.340
+Okay?
+
+205
+00:05:49.440 --> 00:05:50.140
+This is what we are saying, basically.
+
+206
+00:05:50.340 --> 00:05:50.480
+Okay?
+
+207
+00:05:50.940 --> 00:05:53.000
+So, when AI generates code and you don't
+
+208
+00:05:53.000 --> 00:05:54.160
+understand, then what can you do?
+
+209
+00:05:54.320 --> 00:05:56.160
+Suppose, I don't understand what this line did.
+
+210
+00:05:56.440 --> 00:05:56.720
+Okay?
+
+211
+00:05:56.760 --> 00:05:57.240
+So, what do you do?
+
+212
+00:05:57.340 --> 00:05:57.680
+Write like this.
+
+213
+00:05:58.600 --> 00:06:00.300
+And now, suppose, I want to know what
+
+214
+00:06:00.300 --> 00:06:01.620
+os.path.exists does.
+
+215
+00:06:01.900 --> 00:06:02.560
+Suppose, I want to know.
+
+216
+00:06:02.640 --> 00:06:03.200
+I don't know.
+
+217
+00:06:03.500 --> 00:06:07.000
+So, I will write os.path.exists. See,
+
+218
+00:06:07.020 --> 00:06:08.260
+it has told me here, what it does.
+
+219
+00:06:08.360 --> 00:06:08.960
+See, this is a trick.
+
+220
+00:06:08.960 --> 00:06:09.320
+Okay?
+
+221
+00:06:09.680 --> 00:06:10.960
+So, this is a trick of AI-assisted
+
+222
+00:06:10.960 --> 00:06:11.820
+software development.
+
+223
+00:06:12.300 --> 00:06:13.960
+If you don't understand anything, then you write.
+
+224
+00:06:14.320 --> 00:06:15.160
+And it will auto-complete.
+
+225
+00:06:16.060 --> 00:06:18.740
+Suppose, you want to know what folderPath is.
+
+226
+00:06:18.840 --> 00:06:19.700
+Suppose, you want to know.
+
+227
+00:06:19.920 --> 00:06:22.320
+So, I will write folder underscore path is
+
+228
+00:06:22.320 --> 00:06:23.860
+the full path to the folder.
+
+229
+00:06:24.320 --> 00:06:25.700
+And suppose, I want to know which folder
+
+230
+00:06:26.720 --> 00:06:28.640
+which we want to create.
+
+231
+00:06:29.500 --> 00:06:32.260
+Suppose, I will write which is and I
+
+232
+00:06:32.260 --> 00:06:35.380
+will write the folder name appended to the
+
+233
+00:06:35.380 --> 00:06:35.780
+folder path.
+
+234
+00:06:35.880 --> 00:06:36.320
+See, you guys.
+
+235
+00:06:36.540 --> 00:06:37.540
+That means, you have to write a half
+
+236
+00:06:37.540 --> 00:06:39.720
+-empty line and it will complete it for
+
+237
+00:06:39.720 --> 00:06:39.820
+you.
+
+238
+00:06:39.960 --> 00:06:44.000
+Remember, AI is an auto-complete on steroid.
+
+239
+00:06:44.120 --> 00:06:45.700
+What is auto-complete on steroid?
+
+240
+00:06:45.780 --> 00:06:49.560
+I always say, AI is nothing but auto
+
+241
+00:06:49.560 --> 00:06:50.980
+-complete on steroid.
+
+242
+00:06:51.180 --> 00:06:52.060
+Let's turn on screencast mode.
+
+243
+00:06:53.780 --> 00:06:55.860
+And I will write here, which is being
+
+244
+00:06:55.860 --> 00:06:56.200
+created.
+
+245
+00:06:56.580 --> 00:06:57.800
+I don't want to confuse it.
+
+246
+00:06:57.880 --> 00:06:58.720
+I will remove this comment.
+
+247
+00:06:59.260 --> 00:06:59.740
+It is relevant.
+
+248
+00:06:59.980 --> 00:07:00.100
+Okay?
+
+249
+00:07:00.580 --> 00:07:00.840
+Good.
+
+250
+00:07:01.880 --> 00:07:02.600
+Now, what should we do?
+
+251
+00:07:02.980 --> 00:07:03.580
+We have done so much.
+
+252
+00:07:03.880 --> 00:07:04.400
+Now, what should we do?
+
+253
+00:07:04.760 --> 00:07:05.560
+So, we have made folders.
+
+254
+00:07:05.920 --> 00:07:07.000
+So, till this point, what will happen?
+
+255
+00:07:07.260 --> 00:07:09.180
+Till this point, our folders would have been
+
+256
+00:07:09.180 --> 00:07:09.280
+made.
+
+257
+00:07:09.340 --> 00:07:13.160
+Images, documents, audio, videos, archives, scripts.
+
+258
+00:07:13.400 --> 00:07:13.960
+Shall we test it?
+
+259
+00:07:14.900 --> 00:07:15.400
+Shall we test it?
+
+260
+00:07:15.780 --> 00:07:16.520
+Let's test it.
+
+261
+00:07:16.780 --> 00:07:17.140
+Let's run it.
+
+262
+00:07:17.240 --> 00:07:18.100
+See, what is here?
+
+263
+00:07:18.140 --> 00:07:18.420
+Nothing.
+
+264
+00:07:18.980 --> 00:07:19.180
+Okay?
+
+265
+00:07:19.660 --> 00:07:20.340
+Now, what will we do?
+
+266
+00:07:20.540 --> 00:07:21.000
+We will make these folders.
+
+267
+00:07:21.560 --> 00:07:22.380
+So, what will I do?
+
+268
+00:07:22.520 --> 00:07:24.820
+As soon as I run it, folders should
+
+269
+00:07:24.820 --> 00:07:25.260
+be made here.
+
+270
+00:07:25.720 --> 00:07:27.100
+And you see, folders will be made.
+
+271
+00:07:27.700 --> 00:07:28.680
+I hope there is no error.
+
+272
+00:07:30.580 --> 00:07:31.000
+Folders are made.
+
+273
+00:07:31.080 --> 00:07:33.860
+See, archive, audio, documents, images, scripts, videos.
+
+274
+00:07:34.100 --> 00:07:34.860
+Very nice.
+
+275
+00:07:35.260 --> 00:07:36.700
+I am so happy so far.
+
+276
+00:07:37.260 --> 00:07:39.040
+When the code runs, even if it is
+
+277
+00:07:39.040 --> 00:07:41.420
+a simple code, I feel happy.
+
+278
+00:07:42.260 --> 00:07:43.720
+Even if it is simple, I know that
+
+279
+00:07:43.720 --> 00:07:44.240
+I will run it.
+
+280
+00:07:44.600 --> 00:07:45.800
+But, I feel happy.
+
+281
+00:07:46.080 --> 00:07:47.900
+Now, I will write here organize files.
+
+282
+00:07:48.060 --> 00:07:48.160
+Okay?
+
+283
+00:07:49.160 --> 00:07:50.060
+So, what will I do here?
+
+284
+00:07:50.320 --> 00:07:51.360
+Now, see, it has written the whole code.
+
+285
+00:07:51.920 --> 00:07:52.720
+So, I don't want to write the whole
+
+286
+00:07:52.720 --> 00:07:53.280
+code and throw it away.
+
+287
+00:07:53.340 --> 00:07:53.880
+I want to use my brain.
+
+288
+00:07:54.480 --> 00:07:55.360
+So, what will I do here?
+
+289
+00:07:55.440 --> 00:07:57.600
+I will say that one by one, take
+
+290
+00:07:57.600 --> 00:07:58.180
+the file.
+
+291
+00:07:58.520 --> 00:07:58.840
+Okay?
+
+292
+00:07:59.200 --> 00:08:01.700
+I will say, for file in os.list
+
+293
+00:08:01.700 --> 00:08:04.800
+listdir listdir folderpath Okay?
+
+294
+00:08:05.380 --> 00:08:06.080
+Now, I don't want to write the whole
+
+295
+00:08:06.080 --> 00:08:06.180
+code.
+
+296
+00:08:06.520 --> 00:08:07.240
+Suggest me one line.
+
+297
+00:08:07.740 --> 00:08:08.220
+Don't suggest the whole code.
+
+298
+00:08:09.020 --> 00:08:09.920
+It is suggesting the whole code.
+
+299
+00:08:10.620 --> 00:08:11.680
+I mean, it is playing on a different
+
+300
+00:08:11.680 --> 00:08:12.000
+level.
+
+301
+00:08:12.700 --> 00:08:13.740
+Now, I will hit enter.
+
+302
+00:08:13.960 --> 00:08:14.080
+Okay?
+
+303
+00:08:14.260 --> 00:08:15.440
+I will not snooze it for now.
+
+304
+00:08:15.740 --> 00:08:17.040
+I will basically keep writing.
+
+305
+00:08:17.220 --> 00:08:20.320
+I will say, file underscore path is equal
+
+306
+00:08:20.320 --> 00:08:23.220
+to and it has told me os.path
+
+307
+00:08:23.220 --> 00:08:25.340
+.join folderpath and file.
+
+308
+00:08:25.700 --> 00:08:26.660
+So, basically, what are we doing?
+
+309
+00:08:26.940 --> 00:08:28.000
+We are organizing the files.
+
+310
+00:08:28.220 --> 00:08:29.340
+Now, we are saying that take all the
+
+311
+00:08:29.340 --> 00:08:30.280
+files one by one.
+
+312
+00:08:30.640 --> 00:08:31.000
+Okay?
+
+313
+00:08:31.299 --> 00:08:31.740
+Here, what are we doing?
+
+314
+00:08:31.840 --> 00:08:32.919
+In this for loop, take all the files
+
+315
+00:08:32.919 --> 00:08:33.440
+one by one.
+
+316
+00:08:33.880 --> 00:08:34.679
+And what do you do?
+
+317
+00:08:35.900 --> 00:08:39.320
+In folderpath, generate the full path of this
+
+318
+00:08:39.320 --> 00:08:39.420
+file.
+
+319
+00:08:39.860 --> 00:08:40.600
+So, what will happen here?
+
+320
+00:08:40.720 --> 00:08:41.659
+The full path of this file will be
+
+321
+00:08:41.659 --> 00:08:41.919
+generated.
+
+322
+00:08:42.120 --> 00:08:42.720
+Now, look here.
+
+323
+00:08:43.240 --> 00:08:44.540
+The full path will be generated.
+
+324
+00:08:44.840 --> 00:08:46.700
+So, one by one, the path of the
+
+325
+00:08:46.700 --> 00:08:47.540
+file as a string will come in the
+
+326
+00:08:47.540 --> 00:08:47.980
+file path.
+
+327
+00:08:49.040 --> 00:08:49.260
+Okay?
+
+328
+00:08:49.880 --> 00:08:50.680
+Now, what do we have to do?
+
+329
+00:08:50.760 --> 00:08:51.780
+We have to skip the folders.
+
+330
+00:08:52.560 --> 00:08:54.740
+So, we will say, skip the folders because
+
+331
+00:08:54.740 --> 00:08:56.940
+we don't want our folders to be made.
+
+332
+00:08:57.080 --> 00:08:59.520
+So, here, basically, I will say, os.path
+
+333
+00:08:59.520 --> 00:09:03.500
+.isdir which is a function which finds out
+
+334
+00:09:03.500 --> 00:09:06.180
+that this folder is not a folder.
+
+335
+00:09:06.540 --> 00:09:07.180
+This file is not a folder.
+
+336
+00:09:07.560 --> 00:09:09.520
+So, isdir is not a directory or a
+
+337
+00:09:09.520 --> 00:09:09.800
+folder.
+
+338
+00:09:10.460 --> 00:09:11.680
+And after this, what we will do?
+
+339
+00:09:11.820 --> 00:09:12.440
+We will take file extension.
+
+340
+00:09:13.280 --> 00:09:15.780
+And in file extension, I want to do
+
+341
+00:09:15.780 --> 00:09:15.880
+one thing.
+
+342
+00:09:16.000 --> 00:09:16.360
+Do you know what?
+
+343
+00:09:16.660 --> 00:09:18.720
+I will tell you what I will do.
+
+344
+00:09:19.160 --> 00:09:21.400
+I will write here get file extension.
+
+345
+00:09:21.900 --> 00:09:22.500
+How will I get file extension?
+
+346
+00:09:23.360 --> 00:09:27.560
+I will say here file underscore ext is
+
+347
+00:09:27.560 --> 00:09:32.100
+equal to os.path dot split ext and
+
+348
+00:09:32.100 --> 00:09:33.980
+after this, file and one dot lower.
+
+349
+00:09:34.120 --> 00:09:34.560
+What have I done?
+
+350
+00:09:34.620 --> 00:09:35.240
+I will tell you in one line.
+
+351
+00:09:35.960 --> 00:09:37.180
+So, what I have to do here is
+
+352
+00:09:37.180 --> 00:09:38.640
+to get file extension.
+
+353
+00:09:39.400 --> 00:09:40.580
+So, here what happens in split ext?
+
+354
+00:09:41.540 --> 00:09:42.940
+The name of the file and its extension
+
+355
+00:09:42.940 --> 00:09:43.280
+both come.
+
+356
+00:09:43.580 --> 00:09:44.800
+And what will happen by doing one?
+
+357
+00:09:44.880 --> 00:09:46.380
+I will get the second element of that
+
+358
+00:09:46.380 --> 00:09:47.040
+list which is extension.
+
+359
+00:09:47.600 --> 00:09:48.280
+So, what can you do?
+
+360
+00:09:48.700 --> 00:09:51.220
+Do a brainstorming and print it here.
+
+361
+00:09:51.500 --> 00:09:53.980
+If I print it here and show you
+
+362
+00:09:53.980 --> 00:09:58.080
+os.path.splitext file then you will get
+
+363
+00:09:58.080 --> 00:09:58.780
+to see something like this.
+
+364
+00:09:58.780 --> 00:09:59.540
+I will show you.
+
+365
+00:09:59.700 --> 00:10:00.340
+See this.
+
+366
+00:10:00.600 --> 00:10:02.420
+The name of the file and its extension
+
+367
+00:10:02.420 --> 00:10:02.560
+came.
+
+368
+00:10:02.600 --> 00:10:03.340
+So, what I have to do?
+
+369
+00:10:03.600 --> 00:10:04.080
+I have to do one.
+
+370
+00:10:05.120 --> 00:10:06.700
+And as soon as I do one, I
+
+371
+00:10:06.700 --> 00:10:07.240
+will get dot mp4.
+
+372
+00:10:07.500 --> 00:10:09.340
+I have done dot lower because there is
+
+373
+00:10:09.340 --> 00:10:10.020
+something saved in capital PNG.
+
+374
+00:10:11.220 --> 00:10:12.000
+That should also come.
+
+375
+00:10:12.120 --> 00:10:12.240
+Okay?
+
+376
+00:10:12.620 --> 00:10:13.800
+For now, I will remove it.
+
+377
+00:10:14.160 --> 00:10:16.100
+But I am leaving this comment In my
+
+378
+00:10:16.100 --> 00:10:18.060
+production code I never leave this comment.
+
+379
+00:10:18.260 --> 00:10:18.520
+Okay?
+
+380
+00:10:19.740 --> 00:10:20.620
+Now, what will we do here?
+
+381
+00:10:21.020 --> 00:10:23.140
+Now, we will say here that brother what
+
+382
+00:10:23.140 --> 00:10:23.520
+should I do now?
+
+383
+00:10:24.540 --> 00:10:28.920
+Now, for folder we will say here for
+
+384
+00:10:28.920 --> 00:10:34.460
+folder extensions in filetypes.items Now, what have
+
+385
+00:10:34.460 --> 00:10:34.560
+I done?
+
+386
+00:10:34.640 --> 00:10:35.060
+I will tell you.
+
+387
+00:10:35.140 --> 00:10:35.540
+What have I done?
+
+388
+00:10:36.320 --> 00:10:40.160
+I am saying extensions not this in filetypes
+
+389
+00:10:40.160 --> 00:10:41.800
+.items So, what am I saying here?
+
+390
+00:10:41.900 --> 00:10:43.080
+I am saying that what I have to
+
+391
+00:10:43.080 --> 00:10:46.500
+do I have to remove folder extension from
+
+392
+00:10:46.500 --> 00:10:49.380
+filetypes.items means What will be the items
+
+393
+00:10:49.380 --> 00:10:50.200
+of this dictionary?
+
+394
+00:10:51.360 --> 00:10:52.500
+This and this.
+
+395
+00:10:52.640 --> 00:10:52.800
+Okay?
+
+396
+00:10:53.300 --> 00:10:55.180
+Means when we say dot items then we
+
+397
+00:10:55.180 --> 00:10:57.000
+get a tuple whose first element is this
+
+398
+00:10:57.000 --> 00:10:58.800
+and second element is this So, by doing
+
+399
+00:10:58.800 --> 00:11:00.940
+this in folder I will get this images
+
+400
+00:11:00.940 --> 00:11:04.200
+and after this in extensions I will get
+
+401
+00:11:04.200 --> 00:11:04.900
+this list Okay?
+
+402
+00:11:05.480 --> 00:11:07.240
+So, extensions is a list What is our
+
+403
+00:11:07.240 --> 00:11:07.340
+folder?
+
+404
+00:11:07.580 --> 00:11:09.160
+Our folder is this Okay?
+
+405
+00:11:09.600 --> 00:11:12.860
+Images And here I will tell you that
+
+406
+00:11:12.860 --> 00:11:16.120
+one by one we are iterating filetypes So,
+
+407
+00:11:16.180 --> 00:11:18.440
+we are saying that file type items this
+
+408
+00:11:18.440 --> 00:11:20.660
+is a dictionary filetypes Dictionary method is items
+
+409
+00:11:20.660 --> 00:11:21.600
+What does it give us?
+
+410
+00:11:21.700 --> 00:11:25.220
+It gives a tuple in which images and
+
+411
+00:11:25.220 --> 00:11:26.180
+this list Okay?
+
+412
+00:11:26.680 --> 00:11:30.040
+It gives an iterable Basically And Now I
+
+413
+00:11:30.040 --> 00:11:31.540
+have to see dot items is a tuple
+
+414
+00:11:31.540 --> 00:11:33.400
+or not This is not a tuple This
+
+415
+00:11:33.400 --> 00:11:37.660
+is an object dict items object But again
+
+416
+00:11:37.660 --> 00:11:40.120
+when you iterate this like this folder extensions
+
+417
+00:11:40.120 --> 00:11:43.040
+and filetypes then one by one you will
+
+418
+00:11:43.040 --> 00:11:45.400
+get this in folder and you will get
+
+419
+00:11:45.400 --> 00:11:47.320
+this in extensions Okay?
+
+420
+00:11:47.600 --> 00:11:49.240
+Now what we will do Now we will
+
+421
+00:11:49.240 --> 00:11:53.400
+say that if file extension is in extension
+
+422
+00:11:53.400 --> 00:11:57.840
+means this extension if file underscore ext in
+
+423
+00:11:57.840 --> 00:12:02.920
+extensions then what you do you here shutil
+
+424
+00:12:02.920 --> 00:12:07.880
+dot move and file path or .path.join
+
+425
+00:12:07.880 --> 00:12:10.840
+Okay That's absolutely correct This is a very
+
+426
+00:12:10.840 --> 00:12:12.780
+basic program AI will never make a mistake
+
+427
+00:12:12.780 --> 00:12:14.960
+in this I am sure I mean there
+
+428
+00:12:14.960 --> 00:12:18.000
+is no need to be so sure but
+
+429
+00:12:18.000 --> 00:12:19.680
+I am telling you AI never makes a
+
+430
+00:12:19.680 --> 00:12:22.220
+mistake in such small basic programs This is
+
+431
+00:12:22.220 --> 00:12:23.920
+a very basic project and if you use
+
+432
+00:12:23.920 --> 00:12:26.680
+AI in small things I mean this line
+
+433
+00:12:26.680 --> 00:12:28.380
+will never generate AI wrong I mean it
+
+434
+00:12:28.380 --> 00:12:29.340
+will be wrong to say that it will
+
+435
+00:12:29.340 --> 00:12:31.400
+never generate but we will check I am
+
+436
+00:12:31.400 --> 00:12:33.860
+telling you we said if file extension is
+
+437
+00:12:33.860 --> 00:12:36.180
+in extensions then what you do we are
+
+438
+00:12:36.180 --> 00:12:38.140
+basically in this for loop if you don't
+
+439
+00:12:38.140 --> 00:12:39.840
+remember So let's say we got the first
+
+440
+00:12:39.840 --> 00:12:42.360
+file we skipped it if it is a
+
+441
+00:12:42.360 --> 00:12:45.540
+folder Okay We removed its extension After removing
+
+442
+00:12:45.540 --> 00:12:48.560
+its extension what we did I think I
+
+443
+00:12:48.560 --> 00:12:50.240
+have put an extra space here I will
+
+444
+00:12:50.240 --> 00:12:54.600
+fix it Yes Here also Yes Okay So
+
+445
+00:12:54.600 --> 00:12:58.220
+what we did that we said now iterate
+
+446
+00:12:58.220 --> 00:13:01.700
+file items and if file extension is in
+
+447
+00:13:01.700 --> 00:13:06.500
+extensions then what you do move file path
+
+448
+00:13:06.500 --> 00:13:08.940
+in this folder Okay move it in this
+
+449
+00:13:08.940 --> 00:13:12.000
+folder So this is our old path and
+
+450
+00:13:12.000 --> 00:13:13.620
+this is our new path What does shutil
+
+451
+00:13:13.620 --> 00:13:14.380
+.move do?
+
+452
+00:13:14.960 --> 00:13:16.920
+It takes source and destination path and moves
+
+453
+00:13:16.920 --> 00:13:19.160
+a file and that's it This is for
+
+454
+00:13:19.160 --> 00:13:22.120
+all our files Is that it?
+
+455
+00:13:22.380 --> 00:13:24.160
+Yes It is After this we will print
+
+456
+00:13:24.160 --> 00:13:27.700
+a message which AI will do for us
+
+457
+00:13:27.700 --> 00:13:33.680
+Print I want that here tick emoji comes
+
+458
+00:13:33.680 --> 00:13:37.560
+Okay How do I bring tick emoji?
+
+459
+00:13:41.200 --> 00:13:44.400
+Yes Okay Here is tick emoji I have
+
+460
+00:13:44.400 --> 00:13:48.440
+Yes I like emojis And AI generates a
+
+461
+00:13:48.440 --> 00:13:50.480
+lot of emojis But it looks good too
+
+462
+00:13:50.480 --> 00:13:53.180
+You know Okay No problem Now let's run
+
+463
+00:13:53.180 --> 00:13:55.580
+this program and see if there is anything
+
+464
+00:13:55.580 --> 00:13:56.940
+wrong in what we have written So see
+
+465
+00:13:56.940 --> 00:13:58.580
+I have these files These are sample files
+
+466
+00:13:58.580 --> 00:14:02.300
+Don't make any mistake in which you are
+
+467
+00:14:02.660 --> 00:14:05.880
+randomly running anything with shutil because your files
+
+468
+00:14:05.880 --> 00:14:07.900
+will get lost I am telling you You
+
+469
+00:14:07.900 --> 00:14:09.340
+have to write the program very carefully And
+
+470
+00:14:09.340 --> 00:14:10.740
+if you are running in a PC in
+
+471
+00:14:10.740 --> 00:14:13.220
+which your very important files are there Your
+
+472
+00:14:13.220 --> 00:14:14.920
+files will move If you have written the
+
+473
+00:14:14.920 --> 00:14:16.260
+wrong code I am just giving you a
+
+474
+00:14:16.260 --> 00:14:18.420
+small warning But yes we are in a
+
+475
+00:14:18.420 --> 00:14:20.700
+folder We are working with our brain So
+
+476
+00:14:20.700 --> 00:14:22.220
+it won't happen I am not scaring you
+
+477
+00:14:22.220 --> 00:14:23.260
+I am just giving you a heads up
+
+478
+00:14:23.860 --> 00:14:25.280
+In very rare cases it will happen that
+
+479
+00:14:25.280 --> 00:14:27.760
+your files will get lost Our folder looks
+
+480
+00:14:27.760 --> 00:14:33.440
+like this Unorganized Now let's run Very quickly
+
+481
+00:14:33.440 --> 00:14:36.880
+organized See Okay So now we have webpy
+
+482
+00:14:36.880 --> 00:14:38.520
+.py And what is this?
+
+483
+00:14:38.620 --> 00:14:39.040
+.md?
+
+484
+00:14:40.380 --> 00:14:43.880
+.md Okay So we have to organize .md
+
+485
+00:14:43.880 --> 00:14:48.840
+file and .webpy Okay .webpy is left It
+
+486
+00:14:48.840 --> 00:14:52.480
+has taken but not .webpy And I have
+
+487
+00:14:52.480 --> 00:14:55.080
+to do .md So I will put .md
+
+488
+00:14:55.080 --> 00:14:58.400
+in it Let's keep it in single quote
+
+489
+00:14:58.400 --> 00:15:00.940
+And I will write m md is there
+
+490
+00:15:00.940 --> 00:15:02.340
+And see I have corrected it I have
+
+491
+00:15:02.340 --> 00:15:04.260
+made it .md On the tab key your
+
+492
+00:15:04.260 --> 00:15:07.220
+finger The smallest finger in the hand I
+
+493
+00:15:07.220 --> 00:15:08.140
+am not talking about the thumb The smallest
+
+494
+00:15:08.140 --> 00:15:11.020
+finger Okay Pinky finger as it is called
+
+495
+00:15:11.490 --> 00:15:12.820
+It should be on the tab And by
+
+496
+00:15:12.820 --> 00:15:16.440
+pressing the tab you accept Okay So Now
+
+497
+00:15:16.440 --> 00:15:19.040
+let's run it And see Our files are
+
+498
+00:15:19.040 --> 00:15:23.080
+gone We have archive in archives We have
+
+499
+00:15:23.080 --> 00:15:25.790
+audio in audio We have documents in documents
+
+500
+00:15:26.940 --> 00:15:30.520
+We have images in images We have scripts
+
+501
+00:15:30.520 --> 00:15:35.500
+in scripts We have videos in videos And
+
+502
+00:15:36.200 --> 00:15:37.920
+By the way this is the generated video
+
+503
+00:15:37.920 --> 00:15:39.960
+I made it a long time ago I
+
+504
+00:15:39.960 --> 00:15:43.880
+don't know why the audio is not playing
+
+505
+00:15:43.880 --> 00:15:47.060
+But okay Alright So we made a project
+
+506
+00:15:47.060 --> 00:15:49.600
+It was very good With the help of
+
+507
+00:15:49.600 --> 00:15:51.800
+Now many people will feel that we have
+
+508
+00:15:51.800 --> 00:15:53.660
+done a lot of things with AI You
+
+509
+00:15:53.660 --> 00:15:56.700
+should sit back Relax Understand it Now you
+
+510
+00:15:56.700 --> 00:15:57.840
+will say AI does it Why should I
+
+511
+00:15:57.840 --> 00:15:59.440
+understand Our goal is not to make this
+
+512
+00:15:59.440 --> 00:16:01.420
+project Our goal is not to make this
+
+513
+00:16:01.420 --> 00:16:03.700
+project Our goal is to make big projects
+
+514
+00:16:03.700 --> 00:16:07.720
+To do something that AI may not be
+
+515
+00:16:07.720 --> 00:16:08.480
+able to do We will make big projects
+
+516
+00:16:08.480 --> 00:16:11.040
+We will make big projects with AI when
+
+517
+00:16:11.040 --> 00:16:13.180
+we will understand the basics So if you
+
+518
+00:16:13.180 --> 00:16:15.800
+feel that learning python is useless No Learn
+
+519
+00:16:15.800 --> 00:16:18.040
+AI assisted python This is our first project
+
+520
+00:16:18.040 --> 00:16:20.500
+We made it successfully Just think how important
+
+521
+00:16:20.500 --> 00:16:23.240
+work it has done This thing is very
+
+522
+00:16:23.240 --> 00:16:25.160
+useful in data analytics You guys just think
+
+523
+00:16:25.160 --> 00:16:26.440
+If you are able to organize your files
+
+524
+00:16:26.440 --> 00:16:27.760
+Or you are able to do related work
+
+525
+00:16:28.400 --> 00:16:31.000
+You don't have to do it manually Your
+
+526
+00:16:31.000 --> 00:16:33.040
+boss gave you 10,000 files Just think
+
+527
+00:16:33.040 --> 00:16:33.560
+How will you do it?
+
+528
+00:16:33.560 --> 00:16:34.280
+Will you put them in folders one by
+
+529
+00:16:34.280 --> 00:16:34.380
+one?
+
+530
+00:16:34.380 --> 00:16:37.220
+No You wrote a script It got automated
+
+531
+00:16:37.220 --> 00:16:40.680
+So that's the leverage that you have if
+
+532
+00:16:40.680 --> 00:16:42.700
+you know coding And here I am not
+
+533
+00:16:42.700 --> 00:16:44.900
+teaching you coding in depth I am teaching
+
+534
+00:16:44.900 --> 00:16:47.000
+you AI assisted coding I hope you guys
+
+535
+00:16:47.000 --> 00:16:49.140
+are enjoying this course So far See you
+
+536
+00:16:49.140 --> 00:16:49.780
+in the next video
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+WEBVTT
+
+1
+00:00:00.140 --> 00:00:03.900
+(Transcribed by TurboScribe. Go Unlimited to remove this message.) Guys, welcome to another project which is going
+
+2
+00:00:03.900 --> 00:00:07.180
+to be very interesting because this time we
+
+3
+00:00:07.180 --> 00:00:08.160
+are going to do a typing test.
+
+4
+00:00:08.560 --> 00:00:09.480
+Which means you guys are going to make
+
+5
+00:00:09.480 --> 00:00:10.960
+a programme with which you can do a
+
+6
+00:00:10.960 --> 00:00:11.700
+typing test.
+
+7
+00:00:12.720 --> 00:00:14.300
+I will tell you guys what it means.
+
+8
+00:00:14.560 --> 00:00:16.120
+I have made a folder named project typing
+
+9
+00:00:16.120 --> 00:00:16.800
+speed test.
+
+10
+00:00:17.860 --> 00:00:19.480
+I will right click on it and open
+
+11
+00:00:19.480 --> 00:00:19.940
+with code.
+
+12
+00:00:20.340 --> 00:00:23.200
+After opening with code, I will get a
+
+13
+00:00:23.200 --> 00:00:23.860
+folder like this.
+
+14
+00:00:24.440 --> 00:00:25.840
+I will make sure that I make a
+
+15
+00:00:25.840 --> 00:00:26.780
+main.py file.
+
+16
+00:00:27.440 --> 00:00:29.880
+Because main.py means entry point.
+
+17
+00:00:31.840 --> 00:00:33.420
+Main.py is a convention.
+
+18
+00:00:33.560 --> 00:00:36.020
+It's not like you guys...
+
+19
+00:00:36.020 --> 00:00:36.820
+Oops, what did I do?
+
+20
+00:00:37.060 --> 00:00:37.460
+No problem.
+
+21
+00:00:37.900 --> 00:00:40.500
+Main.py is basically a convention.
+
+22
+00:00:41.100 --> 00:00:42.340
+It's an entry point.
+
+23
+00:00:42.440 --> 00:00:44.400
+Whenever you type main.py, anyone who sees
+
+24
+00:00:44.400 --> 00:00:47.160
+your code will know from where your main
+
+25
+00:00:47.160 --> 00:00:47.860
+code is starting.
+
+26
+00:00:48.880 --> 00:00:51.540
+I will toggle the screencast mode in command
+
+27
+00:00:51.540 --> 00:00:51.640
+palette.
+
+28
+00:00:52.160 --> 00:00:55.300
+Now I will tell you guys how we
+
+29
+00:00:55.300 --> 00:00:55.920
+will do a speed test.
+
+30
+00:00:55.920 --> 00:00:58.040
+And I will tell you guys what we
+
+31
+00:00:58.040 --> 00:00:58.600
+are going to do.
+
+32
+00:00:59.760 --> 00:01:02.080
+Before moving forward, I will say one thing.
+
+33
+00:01:02.140 --> 00:01:04.160
+The thing is that we will see a
+
+34
+00:01:04.160 --> 00:01:06.160
+lot of modules in this.
+
+35
+00:01:06.380 --> 00:01:09.000
+Like new modules, time has passed, we have
+
+36
+00:01:09.000 --> 00:01:09.860
+already seen random modules.
+
+37
+00:01:10.160 --> 00:01:11.620
+So don't think that this module has not
+
+38
+00:01:11.620 --> 00:01:11.800
+been taught.
+
+39
+00:01:12.340 --> 00:01:14.820
+See, over the period of time, you will
+
+40
+00:01:14.820 --> 00:01:16.060
+learn about a lot of built-in modules.
+
+41
+00:01:16.980 --> 00:01:18.740
+You will learn about a lot of external
+
+42
+00:01:18.740 --> 00:01:19.100
+modules.
+
+43
+00:01:20.020 --> 00:01:21.400
+So you don't have to say that I
+
+44
+00:01:21.400 --> 00:01:21.800
+have not read this.
+
+45
+00:01:21.960 --> 00:01:23.720
+You learn about this module through this project.
+
+46
+00:01:23.720 --> 00:01:25.620
+And I am making you do these projects
+
+47
+00:01:25.620 --> 00:01:28.480
+so that you will learn about new modules.
+
+48
+00:01:29.700 --> 00:01:33.360
+Plus, you will have the thinking ability to
+
+49
+00:01:33.360 --> 00:01:35.440
+approach and solve a problem.
+
+50
+00:01:36.340 --> 00:01:37.580
+And the right use of AI.
+
+51
+00:01:37.900 --> 00:01:40.160
+Because blindly I can tell the agent to
+
+52
+00:01:40.160 --> 00:01:40.840
+make it, he will make it.
+
+53
+00:01:40.980 --> 00:01:41.720
+But you will not learn anything.
+
+54
+00:01:42.460 --> 00:01:44.300
+I want to prepare you for big projects.
+
+55
+00:01:44.760 --> 00:01:46.240
+That's why these mini projects are being made.
+
+56
+00:01:47.340 --> 00:01:51.480
+With that said, we will import a time
+
+57
+00:01:51.480 --> 00:01:54.400
+module and import a random module.
+
+58
+00:01:54.560 --> 00:01:55.560
+Now I will tell you what a time
+
+59
+00:01:55.560 --> 00:01:56.260
+module does.
+
+60
+00:01:57.260 --> 00:01:58.660
+Assume I don't know what a time module
+
+61
+00:01:58.660 --> 00:01:59.140
+does.
+
+62
+00:01:59.900 --> 00:02:07.699
+Time module is used for time-related functions.
+
+63
+00:02:07.800 --> 00:02:08.360
+It's a simple thing.
+
+64
+00:02:08.460 --> 00:02:09.139
+You know it now.
+
+65
+00:02:09.560 --> 00:02:10.880
+It is used for time-related functions.
+
+66
+00:02:10.880 --> 00:02:12.220
+Sometimes you have to put sleep.
+
+67
+00:02:12.540 --> 00:02:13.060
+What does sleep mean?
+
+68
+00:02:13.600 --> 00:02:14.980
+You have to do something for your programme
+
+69
+00:02:14.980 --> 00:02:17.100
+for some time.
+
+70
+00:02:18.380 --> 00:02:20.100
+You have to wait in my programme for
+
+71
+00:02:20.100 --> 00:02:20.720
+a while.
+
+72
+00:02:21.140 --> 00:02:21.940
+For another step.
+
+73
+00:02:22.180 --> 00:02:23.260
+So you will use the time module.
+
+74
+00:02:24.840 --> 00:02:27.520
+You have to find out how much time
+
+75
+00:02:27.520 --> 00:02:30.080
+the programme took from one particular line to
+
+76
+00:02:30.080 --> 00:02:31.540
+another particular line.
+
+77
+00:02:33.400 --> 00:02:34.040
+You can guess it with the help of
+
+78
+00:02:34.040 --> 00:02:35.360
+time module.
+
+79
+00:02:36.220 --> 00:02:38.520
+In fact, you can measure it accurately.
+
+80
+00:02:38.520 --> 00:02:40.600
+You can measure it accurately.
+
+81
+00:02:41.120 --> 00:02:41.820
+How will we do all this?
+
+82
+00:02:42.160 --> 00:02:43.520
+We are going to see it here.
+
+83
+00:02:43.800 --> 00:02:48.500
+First of all, I will make a list
+
+84
+00:02:48.500 --> 00:02:48.600
+of sentences.
+
+85
+00:02:49.240 --> 00:02:50.420
+That's a good one.
+
+86
+00:02:51.040 --> 00:02:52.580
+I will write something random here.
+
+87
+00:02:53.860 --> 00:02:55.660
+You can put as many sentences as you
+
+88
+00:02:55.660 --> 00:02:56.740
+want here.
+
+89
+00:02:57.160 --> 00:02:58.080
+I will write here.
+
+90
+00:02:58.780 --> 00:03:01.940
+This is the way for us to reference
+
+91
+00:03:01.940 --> 00:03:05.260
+the object of the class.
+
+92
+00:03:06.300 --> 00:03:07.040
+I will write this much.
+
+93
+00:03:07.920 --> 00:03:09.580
+And I think that should be it.
+
+94
+00:03:10.000 --> 00:03:10.160
+That's enough.
+
+95
+00:03:10.940 --> 00:03:11.420
+That's enough.
+
+96
+00:03:12.120 --> 00:03:13.340
+That's enough sentences.
+
+97
+00:03:14.020 --> 00:03:15.660
+And now I will make a function called
+
+98
+00:03:15.660 --> 00:03:17.360
+typing speed.
+
+99
+00:03:18.440 --> 00:03:19.340
+I will make a function called typing test.
+
+100
+00:03:21.180 --> 00:03:22.660
+I will write pass here.
+
+101
+00:03:22.920 --> 00:03:23.960
+I will make it now.
+
+102
+00:03:24.340 --> 00:03:25.360
+And I will run it.
+
+103
+00:03:25.620 --> 00:03:26.000
+No, no.
+
+104
+00:03:26.120 --> 00:03:27.140
+Typing test is not def.
+
+105
+00:03:27.720 --> 00:03:28.880
+I have to run it now.
+
+106
+00:03:29.020 --> 00:03:30.300
+And I will backspace it.
+
+107
+00:03:30.500 --> 00:03:30.720
+Okay.
+
+108
+00:03:31.180 --> 00:03:32.480
+So what did we do now?
+
+109
+00:03:33.040 --> 00:03:33.780
+We imported the time module.
+
+110
+00:03:35.020 --> 00:03:35.700
+We imported the random module.
+
+111
+00:03:36.400 --> 00:03:38.680
+We made a list of sentences.
+
+112
+00:03:38.980 --> 00:03:40.300
+There are three sentences in it.
+
+113
+00:03:40.380 --> 00:03:41.740
+Don't forget these commas by mistake.
+
+114
+00:03:42.420 --> 00:03:43.140
+Otherwise, there will be a problem.
+
+115
+00:03:43.680 --> 00:03:43.780
+Okay.
+
+116
+00:03:44.360 --> 00:03:45.180
+Don't forget the commas.
+
+117
+00:03:45.820 --> 00:03:46.460
+Okay.
+
+118
+00:03:46.560 --> 00:03:46.940
+You won't forget.
+
+119
+00:03:47.080 --> 00:03:47.440
+Good.
+
+120
+00:03:47.720 --> 00:03:49.080
+Now what are we going to do?
+
+121
+00:03:49.340 --> 00:03:49.560
+See.
+
+122
+00:03:50.500 --> 00:03:53.080
+We will write our typing test function here.
+
+123
+00:03:53.780 --> 00:03:54.980
+What will this function do?
+
+124
+00:03:55.420 --> 00:03:56.540
+First of all, it will catch a random
+
+125
+00:03:56.540 --> 00:03:57.260
+test sentence.
+
+126
+00:03:58.340 --> 00:04:00.720
+Test underscore sentence is equal to random dot
+
+127
+00:04:00.720 --> 00:04:01.600
+choice sentences.
+
+128
+00:04:01.740 --> 00:04:02.140
+Very good.
+
+129
+00:04:04.300 --> 00:04:06.820
+Type the following sentence as fast as you
+
+130
+00:04:06.820 --> 00:04:07.100
+can.
+
+131
+00:04:07.760 --> 00:04:08.480
+So what are we doing here?
+
+132
+00:04:09.080 --> 00:04:10.260
+We will print this test sentence.
+
+133
+00:04:11.520 --> 00:04:12.320
+Basically, I have to pick a random from
+
+134
+00:04:12.320 --> 00:04:13.100
+these three sentences.
+
+135
+00:04:14.220 --> 00:04:15.220
+So it is random dot choice.
+
+136
+00:04:15.560 --> 00:04:16.760
+What will random dot choice do?
+
+137
+00:04:17.160 --> 00:04:19.160
+It will pick a random item from the
+
+138
+00:04:19.160 --> 00:04:20.240
+list and put it in front of you.
+
+139
+00:04:20.920 --> 00:04:21.800
+Means you had a list.
+
+140
+00:04:22.460 --> 00:04:23.920
+It took a random choice from it and
+
+141
+00:04:23.920 --> 00:04:24.540
+put it in front of you.
+
+142
+00:04:25.140 --> 00:04:25.580
+It can be this.
+
+143
+00:04:26.220 --> 00:04:26.680
+It can be this.
+
+144
+00:04:27.600 --> 00:04:28.360
+Or it can be this.
+
+145
+00:04:28.540 --> 00:04:28.740
+Okay.
+
+146
+00:04:28.740 --> 00:04:30.480
+So here you see.
+
+147
+00:04:30.560 --> 00:04:31.420
+Def typing test.
+
+148
+00:04:32.120 --> 00:04:35.000
+And after this, we picked a test sentence.
+
+149
+00:04:36.320 --> 00:04:36.860
+Printed it.
+
+150
+00:04:36.880 --> 00:04:38.960
+Told the user to type it as soon
+
+151
+00:04:38.960 --> 00:04:39.060
+as possible.
+
+152
+00:04:39.660 --> 00:04:40.840
+Showed that sentence to the user.
+
+153
+00:04:41.600 --> 00:04:42.880
+And what will we do after that?
+
+154
+00:04:43.940 --> 00:04:45.260
+We will basically say here.
+
+155
+00:04:47.560 --> 00:04:48.780
+Press enter when you are ready.
+
+156
+00:04:48.880 --> 00:04:49.200
+That's good.
+
+157
+00:04:49.320 --> 00:04:50.380
+Because the user will not be able to
+
+158
+00:04:50.380 --> 00:04:50.800
+type suddenly.
+
+159
+00:04:51.420 --> 00:04:52.520
+So as soon as he enters, he will
+
+160
+00:04:52.520 --> 00:04:52.740
+start.
+
+161
+00:04:53.160 --> 00:04:54.780
+And we will measure the start time.
+
+162
+00:04:55.140 --> 00:04:55.280
+Okay.
+
+163
+00:04:55.500 --> 00:04:56.200
+I will write here.
+
+164
+00:04:58.760 --> 00:05:00.180
+Measure the start time.
+
+165
+00:05:00.780 --> 00:05:02.000
+So what does time dot time do?
+
+166
+00:05:02.200 --> 00:05:04.820
+Time returns in seconds.
+
+167
+00:05:04.960 --> 00:05:05.120
+Okay.
+
+168
+00:05:05.160 --> 00:05:06.980
+Return the current time in seconds since the
+
+169
+00:05:06.980 --> 00:05:07.380
+epoch.
+
+170
+00:05:07.860 --> 00:05:09.980
+Means you will get time on seconds.
+
+171
+00:05:10.720 --> 00:05:11.780
+And what can you do after that?
+
+172
+00:05:12.000 --> 00:05:13.360
+By running time dot time later.
+
+173
+00:05:13.880 --> 00:05:15.640
+You can find out how much time has
+
+174
+00:05:15.640 --> 00:05:15.740
+passed.
+
+175
+00:05:16.500 --> 00:05:17.740
+Now if you did not understand this, then
+
+176
+00:05:17.740 --> 00:05:18.200
+I will tell you.
+
+177
+00:05:18.480 --> 00:05:19.980
+So we took the start time here.
+
+178
+00:05:20.260 --> 00:05:20.980
+Now we will say.
+
+179
+00:05:22.240 --> 00:05:25.140
+User underscore input is equal to input.
+
+180
+00:05:25.140 --> 00:05:27.100
+And we will tell the user to start
+
+181
+00:05:27.100 --> 00:05:27.400
+typing.
+
+182
+00:05:27.580 --> 00:05:27.680
+Okay.
+
+183
+00:05:28.840 --> 00:05:29.720
+Start typing.
+
+184
+00:05:30.040 --> 00:05:31.120
+We are telling the user to start typing.
+
+185
+00:05:32.840 --> 00:05:34.820
+And here we give backslash n in the
+
+186
+00:05:34.820 --> 00:05:34.980
+beginning.
+
+187
+00:05:35.180 --> 00:05:36.020
+So that a new line comes.
+
+188
+00:05:36.840 --> 00:05:38.260
+And what will we do after this?
+
+189
+00:05:38.440 --> 00:05:38.900
+We will measure the end time.
+
+190
+00:05:39.820 --> 00:05:40.280
+End time.
+
+191
+00:05:40.640 --> 00:05:43.060
+End underscore time is equal to time dot
+
+192
+00:05:43.060 --> 00:05:43.280
+time.
+
+193
+00:05:43.380 --> 00:05:44.060
+Measure end time.
+
+194
+00:05:44.880 --> 00:05:46.920
+And then we will find out how much
+
+195
+00:05:46.920 --> 00:05:47.820
+time has passed.
+
+196
+00:05:48.180 --> 00:05:48.780
+So time taken.
+
+197
+00:05:49.060 --> 00:05:50.420
+Time taken is equal to end time minus
+
+198
+00:05:50.420 --> 00:05:50.760
+start time.
+
+199
+00:05:50.800 --> 00:05:51.140
+Very good.
+
+200
+00:05:52.180 --> 00:05:52.600
+He did everything.
+
+201
+00:05:53.260 --> 00:05:54.920
+Now time taken is in seconds.
+
+202
+00:05:55.320 --> 00:05:55.620
+In minutes.
+
+203
+00:05:56.460 --> 00:05:58.600
+Time taken in minutes.
+
+204
+00:05:59.640 --> 00:05:59.740
+No.
+
+205
+00:05:59.840 --> 00:06:00.160
+Minutes.
+
+206
+00:06:00.320 --> 00:06:00.600
+Minutes.
+
+207
+00:06:00.680 --> 00:06:00.940
+Minutes.
+
+208
+00:06:01.020 --> 00:06:01.280
+Minutes.
+
+209
+00:06:01.400 --> 00:06:02.400
+Time taken is equal to 60.
+
+210
+00:06:03.260 --> 00:06:04.720
+After this, we will find out the word
+
+211
+00:06:04.720 --> 00:06:05.020
+count.
+
+212
+00:06:05.960 --> 00:06:06.860
+How many words have been typed?
+
+213
+00:06:07.600 --> 00:06:08.140
+Absolutely right.
+
+214
+00:06:08.220 --> 00:06:10.260
+Length of test sentence dot split.
+
+215
+00:06:10.880 --> 00:06:11.300
+Absolutely right.
+
+216
+00:06:11.380 --> 00:06:12.160
+He found the word count absolutely right.
+
+217
+00:06:13.160 --> 00:06:14.280
+How many words have been typed?
+
+218
+00:06:14.720 --> 00:06:19.120
+The length of this random sentence also came
+
+219
+00:06:19.120 --> 00:06:19.220
+in the word count.
+
+220
+00:06:19.920 --> 00:06:23.780
+We need all the words in it.
+
+221
+00:06:24.700 --> 00:06:26.440
+And when we say test sentence dot split.
+
+222
+00:06:27.160 --> 00:06:28.540
+You can also do split by space.
+
+223
+00:06:29.180 --> 00:06:29.860
+You can also do this.
+
+224
+00:06:30.100 --> 00:06:32.000
+Basically, the code generated by AI was also
+
+225
+00:06:32.000 --> 00:06:32.220
+correct.
+
+226
+00:06:32.720 --> 00:06:34.720
+Even if you remove this, by default, the
+
+227
+00:06:34.720 --> 00:06:36.140
+split function splits into white spaces.
+
+228
+00:06:37.200 --> 00:06:37.820
+What all comes in white space?
+
+229
+00:06:39.100 --> 00:06:42.680
+In white space, you get spaces, multiple spaces,
+
+230
+00:06:42.860 --> 00:06:43.200
+tabs.
+
+231
+00:06:43.660 --> 00:06:44.980
+So if you are unsure, you write this.
+
+232
+00:06:45.120 --> 00:06:47.540
+I want to keep space here and want
+
+233
+00:06:47.540 --> 00:06:48.160
+to run split function.
+
+234
+00:06:48.160 --> 00:06:49.740
+To split from space.
+
+235
+00:06:51.840 --> 00:06:52.640
+Very good.
+
+236
+00:06:52.900 --> 00:06:54.000
+So far so good.
+
+237
+00:06:54.160 --> 00:06:55.300
+Everything is going well for us.
+
+238
+00:06:55.760 --> 00:06:56.420
+Let's run once.
+
+239
+00:06:57.300 --> 00:06:57.920
+Let's run and see.
+
+240
+00:06:58.500 --> 00:07:02.360
+Or let us directly see how much speed
+
+241
+00:07:02.360 --> 00:07:03.800
+came, how many words per minute came.
+
+242
+00:07:04.620 --> 00:07:06.200
+Let's see how many words per minute came.
+
+243
+00:07:06.320 --> 00:07:07.300
+So what will we do here?
+
+244
+00:07:07.420 --> 00:07:09.640
+We will write Print Results.
+
+245
+00:07:12.520 --> 00:07:14.360
+And see what it generates.
+
+246
+00:07:14.460 --> 00:07:15.200
+I have accepted everything.
+
+247
+00:07:15.500 --> 00:07:16.200
+Now let me explain to you.
+
+248
+00:07:16.200 --> 00:07:19.720
+How many seconds did you take time?
+
+249
+00:07:20.140 --> 00:07:21.320
+And what will this do?
+
+250
+00:07:22.440 --> 00:07:23.540
+It will give you time taken with 2
+
+251
+00:07:23.540 --> 00:07:25.920
+decimal value accuracy So what was our time
+
+252
+00:07:25.920 --> 00:07:26.500
+taken?
+
+253
+00:07:26.760 --> 00:07:30.020
+But our time taken is in seconds Time
+
+254
+00:07:30.020 --> 00:07:31.680
+taken in minutes I want time taken in
+
+255
+00:07:31.680 --> 00:07:34.380
+minutes So what I will do is I
+
+256
+00:07:34.380 --> 00:07:34.920
+will subtract all this and I will do
+
+257
+00:07:34.920 --> 00:07:40.420
+time taken in minutes Okay And then minutes
+
+258
+00:07:40.420 --> 00:07:43.240
+will come here Okay And AI has given
+
+259
+00:07:43.240 --> 00:07:45.800
+me Okay, keep one thing in mind You
+
+260
+00:07:45.800 --> 00:07:48.180
+are spending your inline suggestions and chat messages
+
+261
+00:07:48.180 --> 00:07:50.060
+So keep this in mind I have used
+
+262
+00:07:50.060 --> 00:07:53.920
+9.8% of copilot Okay And as
+
+263
+00:07:53.920 --> 00:07:54.720
+soon as it comes here, it will start
+
+264
+00:07:54.720 --> 00:07:56.820
+asking me for money But see how many
+
+265
+00:07:56.820 --> 00:07:58.240
+projects we have made How much we have
+
+266
+00:07:58.240 --> 00:07:59.940
+done Even after that only 9.8%
+
+267
+00:07:59.940 --> 00:08:03.240
+has been used Good So here you see
+
+268
+00:08:03.240 --> 00:08:05.680
+time taken in minutes I have taken Words
+
+269
+00:08:05.680 --> 00:08:08.480
+typed, word count Typing speed, word count Divided
+
+270
+00:08:08.480 --> 00:08:16.360
+by Words per minute Good Let's see Okay
+
+271
+00:08:16.360 --> 00:08:19.340
+Now it is saying It will give me
+
+272
+00:08:19.340 --> 00:08:24.220
+a random sentence It is saying Type this
+
+273
+00:08:24.220 --> 00:08:28.780
+I will type I have not started typing
+
+274
+00:08:28.780 --> 00:08:35.240
+yet But I Quick brown fox Jumps over
+
+275
+00:08:35.240 --> 00:08:39.659
+the lazy dog And here I have typed
+
+276
+00:08:39.659 --> 00:08:44.220
+52 words per minute That's nice So It
+
+277
+00:08:44.220 --> 00:08:48.340
+will tell me in minutes It will be
+
+278
+00:08:48.340 --> 00:08:49.160
+good if we keep it in seconds I
+
+279
+00:08:49.160 --> 00:08:52.280
+don't think we need minutes It will be
+
+280
+00:08:52.280 --> 00:08:53.960
+good if we keep it in seconds Let's
+
+281
+00:08:53.960 --> 00:08:58.260
+remove it Okay And see It has taken
+
+282
+00:08:59.220 --> 00:09:03.320
+See It has typed words per minute For
+
+283
+00:09:03.320 --> 00:09:06.100
+this Time taken by 60 minutes I want
+
+284
+00:09:06.100 --> 00:09:11.400
+it in seconds Okay So what we have
+
+285
+00:09:11.400 --> 00:09:12.900
+done We have taken time taken in seconds
+
+286
+00:09:12.900 --> 00:09:16.020
+And the typing speed We have taken it
+
+287
+00:09:16.020 --> 00:09:18.500
+in words per minute And this gives us
+
+288
+00:09:18.500 --> 00:09:23.820
+Accuracy of 2 decimals So our final result
+
+289
+00:09:23.820 --> 00:09:24.580
+will be like this As you can see
+
+290
+00:09:24.580 --> 00:09:28.200
+52.62 words per minute So you can
+
+291
+00:09:28.200 --> 00:09:29.680
+do this So I will do one more
+
+292
+00:09:29.680 --> 00:09:32.220
+thing I will run the final test And
+
+293
+00:09:32.220 --> 00:09:36.460
+then we will conclude this project So here
+
+294
+00:09:36.460 --> 00:09:39.080
+I have this sentence And I will type
+
+295
+00:09:39.080 --> 00:09:43.620
+This is the way for us To reference
+
+296
+00:09:43.620 --> 00:09:47.760
+the object Of the class 132 words per
+
+297
+00:09:47.760 --> 00:09:49.920
+minute But I have ruined the accuracy No
+
+298
+00:09:49.920 --> 00:09:56.260
+problem But that should be fine And If
+
+299
+00:09:56.260 --> 00:09:57.720
+you are not able to type 132 It's
+
+300
+00:09:57.720 --> 00:10:02.520
+fine But that's okay You will learn with
+
+301
+00:10:02.520 --> 00:10:06.120
+time And you can use this To practise
+
+302
+00:10:07.300 --> 00:10:09.660
+User input is equal to Now you can
+
+303
+00:10:09.660 --> 00:10:11.440
+do one more thing You can remove the
+
+304
+00:10:11.440 --> 00:10:15.620
+accuracy How will you remove the accuracy Character
+
+305
+00:10:15.620 --> 00:10:17.520
+by character See how many characters have been
+
+306
+00:10:17.520 --> 00:10:21.280
+typed And then you will see Basically see
+
+307
+00:10:21.280 --> 00:10:23.180
+the words How many correct words have been
+
+308
+00:10:23.180 --> 00:10:25.760
+typed In the sequence And how many words
+
+309
+00:10:27.020 --> 00:10:30.320
+Have been typed wrongly So you can remove
+
+310
+00:10:30.320 --> 00:10:32.140
+the accuracy Accuracy will be equal to correct
+
+311
+00:10:32.140 --> 00:10:36.160
+characters Divided by length of total sentence So
+
+312
+00:10:36.160 --> 00:10:37.560
+there can be many ways to measure accuracy
+
+313
+00:10:37.560 --> 00:10:39.720
+I won't go into that much But you
+
+314
+00:10:39.720 --> 00:10:42.340
+can if you want But yes, it's a
+
+315
+00:10:42.340 --> 00:10:43.520
+very good thing I can tell the agent
+
+316
+00:10:43.520 --> 00:10:47.040
+To make this accuracy function Now I will
+
+317
+00:10:47.040 --> 00:10:52.380
+tell you a very smart thing I will
+
+318
+00:10:52.380 --> 00:10:59.000
+Make a function Called accuracy And I will
+
+319
+00:10:59.000 --> 00:11:00.640
+pass it for now I will write major
+
+320
+00:11:01.680 --> 00:11:04.580
+Accuracy It will take user input and test
+
+321
+00:11:04.580 --> 00:11:07.080
+sentence It will take the sentence And user
+
+322
+00:11:07.080 --> 00:11:11.000
+input Now I have to use this function
+
+323
+00:11:11.000 --> 00:11:13.360
+smartly What will I do here I will
+
+324
+00:11:13.360 --> 00:11:19.500
+hit enter See friends AI AI It's a
+
+325
+00:11:19.500 --> 00:11:21.380
+very good thing Now how did it measure
+
+326
+00:11:21.380 --> 00:11:25.560
+accuracy Suppose you don't care about it You
+
+327
+00:11:25.560 --> 00:11:29.700
+just want You Now I will make a
+
+328
+00:11:29.700 --> 00:11:38.160
+small mistake here See I am doing it
+
+329
+00:11:38.160 --> 00:11:42.360
+wrong So here 86.75 words per minute
+
+330
+00:11:42.360 --> 00:11:46.620
+Accuracy 98.21% It's good It gave
+
+331
+00:11:46.620 --> 00:11:50.640
+me accuracy It gave me accuracy Correct characters
+
+332
+00:11:50.640 --> 00:11:55.080
+is equal to Sum 1 For a, b
+
+333
+00:11:55.080 --> 00:11:59.480
+in zip User input Test sentence If a
+
+334
+00:11:59.480 --> 00:12:00.940
+equals to equals to b Now what does
+
+335
+00:12:00.940 --> 00:12:04.820
+zip function do Basically It makes a list
+
+336
+00:12:04.820 --> 00:12:09.040
+and zips them Now suppose You don't understand
+
+337
+00:12:09.040 --> 00:12:12.560
+this function You will copy it You will
+
+338
+00:12:12.560 --> 00:12:14.240
+come here You will come on chat gpt
+
+339
+00:12:15.040 --> 00:12:16.460
+And you will tell chat gpt Make me
+
+340
+00:12:16.460 --> 00:12:22.160
+understand this Make me understand this Step by
+
+341
+00:12:22.160 --> 00:12:25.520
+step I don't know what Zip function is
+
+342
+00:12:25.520 --> 00:12:28.440
+used for in python Is used for in
+
+343
+00:12:28.440 --> 00:12:30.560
+python See I can make videos And make
+
+344
+00:12:30.560 --> 00:12:33.440
+this course lengthy But I want you to
+
+345
+00:12:33.440 --> 00:12:35.760
+know Only that much Coding is used for
+
+346
+00:12:35.760 --> 00:12:38.500
+your data analysis Because this is not a
+
+347
+00:12:38.500 --> 00:12:43.420
+coding course See here What we did We
+
+348
+00:12:43.420 --> 00:12:45.160
+asked him and he told us Let's walk
+
+349
+00:12:45.160 --> 00:12:46.960
+through this slowly and clearly Step by step
+
+350
+00:12:46.960 --> 00:12:50.460
+Let me tell you one more thing I
+
+351
+00:12:50.460 --> 00:12:53.520
+don't do this in coding But whenever I
+
+352
+00:12:53.520 --> 00:12:56.460
+take non-coding advices So what I do
+
+353
+00:12:56.460 --> 00:13:01.700
+I tell him in prompt You Generate it
+
+354
+00:13:01.700 --> 00:13:02.280
+in such a way that I can read
+
+355
+00:13:02.280 --> 00:13:05.840
+it Don't generate emojis Don't generate tables Don't
+
+356
+00:13:05.840 --> 00:13:07.800
+generate tables Generate it in such a way
+
+357
+00:13:07.800 --> 00:13:08.840
+that I can see it while washing utensils
+
+358
+00:13:10.380 --> 00:13:13.400
+And I read aloud I read aloud as
+
+359
+00:13:13.400 --> 00:13:15.980
+I do Sure Let's walk through this slowly
+
+360
+00:13:15.980 --> 00:13:18.820
+and clearly Step by step I will explain
+
+361
+00:13:18.820 --> 00:13:21.400
+what each line does And then focus especially
+
+362
+00:13:21.400 --> 00:13:24.140
+on what zip is And why it's used
+
+363
+00:13:24.140 --> 00:13:27.120
+The function definition You can see the code
+
+364
+00:13:27.120 --> 00:13:28.920
+in our conversation You can stop it from
+
+365
+00:13:28.920 --> 00:13:33.320
+here He is telling me What does zip
+
+366
+00:13:33.320 --> 00:13:34.760
+do If you want to zip a car
+
+367
+00:13:34.760 --> 00:13:37.860
+or a cat It will take characters And
+
+368
+00:13:37.860 --> 00:13:40.480
+it will return it So basically it zipped
+
+369
+00:13:40.480 --> 00:13:44.680
+It can also be in list Here we
+
+370
+00:13:44.680 --> 00:13:46.480
+are zipping two strings That's why it told
+
+371
+00:13:46.480 --> 00:13:50.980
+me about strings We have CC, AA, TR
+
+372
+00:13:50.980 --> 00:13:54.500
+It zipped So let's say This is our
+
+373
+00:13:54.500 --> 00:14:00.140
+user input And see here It zipped it
+
+374
+00:14:00.140 --> 00:14:03.900
+If A equals to B Then check Are
+
+375
+00:14:03.900 --> 00:14:05.820
+the characters in the same position Exactly the
+
+376
+00:14:05.820 --> 00:14:10.520
+same You have to give it a positive
+
+377
+00:14:10.520 --> 00:14:13.220
+score If there is a mismatch Then you
+
+378
+00:14:13.220 --> 00:14:15.500
+have to give it a zero score And
+
+379
+00:14:15.500 --> 00:14:18.440
+see here You can do something like this
+
+380
+00:14:18.440 --> 00:14:21.080
+You can do this for words Character by
+
+381
+00:14:21.080 --> 00:14:22.880
+character Accuracy is being measured You can also
+
+382
+00:14:22.880 --> 00:14:26.520
+measure word by word ChatGPT will explain you
+
+383
+00:14:26.520 --> 00:14:29.280
+all of these things further And let me
+
+384
+00:14:29.280 --> 00:14:30.480
+tell you one more thing It is very
+
+385
+00:14:30.480 --> 00:14:33.100
+important, listen carefully Whenever you are making a
+
+386
+00:14:33.100 --> 00:14:34.480
+project Let's say you are making a typing
+
+387
+00:14:34.480 --> 00:14:36.700
+website Which is very close to your heart
+
+388
+00:14:36.700 --> 00:14:38.080
+You are going to earn money from it
+
+389
+00:14:38.080 --> 00:14:42.020
+It is your dream project You want to
+
+390
+00:14:42.020 --> 00:14:45.100
+launch it So what will you do It
+
+391
+00:14:45.100 --> 00:14:47.580
+will keep running in your mind How to
+
+392
+00:14:47.580 --> 00:14:52.180
+measure accuracy You will call your partner Let's
+
+393
+00:14:52.180 --> 00:14:54.680
+do one thing Let's do accuracy word wise
+
+394
+00:14:54.680 --> 00:14:58.360
+Let's do character wise Let's give an option
+
+395
+00:14:58.360 --> 00:15:00.820
+to the user You will discuss like this
+
+396
+00:15:00.820 --> 00:15:02.660
+You will get into this project Because this
+
+397
+00:15:02.660 --> 00:15:04.460
+project is very close to your heart When
+
+398
+00:15:04.460 --> 00:15:09.400
+I made codewithhari.com I remembered What I
+
+399
+00:15:09.400 --> 00:15:12.820
+did And I made it without AI I
+
+400
+00:15:12.820 --> 00:15:16.800
+remembered How to do this I am talking
+
+401
+00:15:16.800 --> 00:15:18.460
+about the first version And this project was
+
+402
+00:15:18.460 --> 00:15:20.180
+very close to my heart It is a
+
+403
+00:15:20.180 --> 00:15:22.860
+YouTube channel Let's make a website We will
+
+404
+00:15:22.860 --> 00:15:25.680
+give code and organise things for people It
+
+405
+00:15:25.680 --> 00:15:27.480
+will be fun So project is very close
+
+406
+00:15:27.480 --> 00:15:29.380
+to your heart Whenever you work on something
+
+407
+00:15:29.380 --> 00:15:33.400
+Whenever you work You can understand these small
+
+408
+00:15:33.400 --> 00:15:37.340
+things From chatgp And then you can use
+
+409
+00:15:37.340 --> 00:15:40.520
+it in your code Like this Let's say
+
+410
+00:15:40.520 --> 00:15:44.060
+AI wrote major accuracy wrong It won't happen
+
+411
+00:15:44.760 --> 00:15:52.680
+Let's assume What will happen I have used
+
+412
+00:15:52.680 --> 00:15:54.960
+this accuracy function only in these two lines,
+
+413
+00:15:55.420 --> 00:15:57.140
+and here I have used it.
+
+414
+00:15:57.700 --> 00:15:59.320
+So, everything else is correct.
+
+415
+00:15:59.520 --> 00:16:01.260
+I have just added it to my code.
+
+416
+00:16:02.240 --> 00:16:03.940
+I have just added a feature.
+
+417
+00:16:05.380 --> 00:16:06.540
+You can test it.
+
+418
+00:16:06.800 --> 00:16:07.500
+Will you test it?
+
+419
+00:16:07.600 --> 00:16:08.160
+Is it working properly?
+
+420
+00:16:08.440 --> 00:16:08.900
+Very good.
+
+421
+00:16:09.280 --> 00:16:09.980
+Try to understand it once.
+
+422
+00:16:10.240 --> 00:16:10.860
+Try to understand it.
+
+423
+00:16:11.140 --> 00:16:11.560
+Try to understand it with chat gpt.
+
+424
+00:16:12.220 --> 00:16:12.980
+Take a rough idea.
+
+425
+00:16:13.900 --> 00:16:15.440
+And ask it if it is correct.
+
+426
+00:16:15.440 --> 00:16:20.160
+Is this the correct way to measure accuracy?
+
+427
+00:16:20.680 --> 00:16:24.360
+Or should I use word-by-word strategy?
+
+428
+00:16:25.660 --> 00:16:27.280
+Explain in short.
+
+429
+00:16:27.620 --> 00:16:30.620
+See, it is saying that what you want
+
+430
+00:16:30.620 --> 00:16:33.140
+to define as accuracy depends on you.
+
+431
+00:16:33.880 --> 00:16:34.720
+Now see, you want to do character-by
+
+432
+00:16:34.720 --> 00:16:34.980
+-character.
+
+433
+00:16:35.880 --> 00:16:36.680
+It is good for typing test.
+
+434
+00:16:37.100 --> 00:16:37.700
+It is good for spelling check.
+
+435
+00:16:38.320 --> 00:16:40.260
+If you want to be precise, then it
+
+436
+00:16:40.260 --> 00:16:40.560
+is good.
+
+437
+00:16:40.740 --> 00:16:41.500
+What is for word-by-word?
+
+438
+00:16:41.820 --> 00:16:42.620
+For language learning.
+
+439
+00:16:42.960 --> 00:16:44.040
+For speech-to-text evaluation.
+
+440
+00:16:44.040 --> 00:16:45.200
+For sentence understanding.
+
+441
+00:16:45.880 --> 00:16:48.120
+So, it is basically saying that both are
+
+442
+00:16:48.120 --> 00:16:48.960
+best practises.
+
+443
+00:16:49.960 --> 00:16:50.720
+So, keep it.
+
+444
+00:16:51.920 --> 00:16:53.040
+And measure both.
+
+445
+00:16:53.760 --> 00:16:55.880
+Maybe you display both.
+
+446
+00:16:57.060 --> 00:16:58.720
+Or just do character-by-character.
+
+447
+00:16:58.780 --> 00:16:59.460
+So, it has told you.
+
+448
+00:16:59.640 --> 00:17:01.780
+So, this is a very good tool.
+
+449
+00:17:02.260 --> 00:17:05.060
+And even if you don't get GoPlan, I
+
+450
+00:17:05.060 --> 00:17:05.859
+know it will happen.
+
+451
+00:17:06.119 --> 00:17:06.839
+I am making a prediction.
+
+452
+00:17:07.420 --> 00:17:08.500
+Some people won't get GoPlan.
+
+453
+00:17:09.180 --> 00:17:10.579
+Then they will say, we didn't get GoPlan.
+
+454
+00:17:10.980 --> 00:17:11.480
+What should we do?
+
+455
+00:17:11.720 --> 00:17:12.300
+Should we buy it?
+
+456
+00:17:12.300 --> 00:17:13.780
+You can do all this in free plan
+
+457
+00:17:13.780 --> 00:17:14.640
+too.
+
+458
+00:17:14.780 --> 00:17:16.420
+In GoPlan, you get more limits.
+
+459
+00:17:16.800 --> 00:17:17.740
+You get to use their latest model.
+
+460
+00:17:18.800 --> 00:17:19.200
+You get a lot.
+
+461
+00:17:19.819 --> 00:17:20.720
+So, these are all benefits.
+
+462
+00:17:21.260 --> 00:17:22.940
+And they keep launching their latest models.
+
+463
+00:17:24.480 --> 00:17:26.480
+See, chat-gpt 4 also used to work
+
+464
+00:17:26.480 --> 00:17:26.580
+well.
+
+465
+00:17:27.079 --> 00:17:28.040
+5 also used to work well.
+
+466
+00:17:28.220 --> 00:17:29.240
+5.2 also used to work well.
+
+467
+00:17:29.420 --> 00:17:30.000
+They will launch 6 too.
+
+468
+00:17:30.620 --> 00:17:31.520
+See, this is a business.
+
+469
+00:17:31.860 --> 00:17:32.560
+They also want to earn money.
+
+470
+00:17:33.160 --> 00:17:34.340
+They will keep changing versions.
+
+471
+00:17:35.100 --> 00:17:35.740
+They will keep adding things.
+
+472
+00:17:36.540 --> 00:17:37.680
+They are definitely doing a good job.
+
+473
+00:17:38.220 --> 00:17:40.780
+But don't think that this is 5.2.
+
+474
+00:17:40.780 --> 00:17:41.740
+They are showing 6.2 now.
+
+475
+00:17:42.140 --> 00:17:43.560
+I will use 5.2. No, use the
+
+476
+00:17:43.560 --> 00:17:44.060
+latest one.
+
+477
+00:17:44.720 --> 00:17:45.580
+Understand the things.
+
+478
+00:17:46.640 --> 00:17:47.800
+Don't do what I am doing.
+
+479
+00:17:47.920 --> 00:17:49.160
+You are doing it line by line.
+
+480
+00:17:49.520 --> 00:17:50.740
+The prompts I am writing, you are removing
+
+481
+00:17:50.740 --> 00:17:51.720
+the prompts line by line.
+
+482
+00:17:52.000 --> 00:17:52.100
+No.
+
+483
+00:17:52.780 --> 00:17:53.520
+Learn the process.
+
+484
+00:17:54.160 --> 00:17:55.340
+How did I make you understand what this
+
+485
+00:17:55.340 --> 00:17:55.980
+function does?
+
+486
+00:17:56.140 --> 00:17:56.560
+Learn this.
+
+487
+00:17:56.940 --> 00:17:57.360
+Learn this.
+
+488
+00:17:57.840 --> 00:17:59.820
+How did I make this working code?
+
+489
+00:18:00.080 --> 00:18:00.440
+I made a project.
+
+490
+00:18:01.080 --> 00:18:01.580
+Learn this.
+
+491
+00:18:02.220 --> 00:18:04.600
+I hope guys, you are enjoying these projects.
+
+492
+00:18:05.000 --> 00:18:06.520
+See you in the next video.
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+WEBVTT
+
+1
+00:00:00.140 --> 00:00:02.320
+(Transcribed by TurboScribe. Go Unlimited to remove this message.) All right guys, as you have already seen
+
+2
+00:00:02.320 --> 00:00:05.100
+this folder project pdf merger is absolutely right,
+
+3
+00:00:05.220 --> 00:00:06.460
+you thought we are going to make this
+
+4
+00:00:06.460 --> 00:00:09.520
+only, today we are going to make a
+
+5
+00:00:09.520 --> 00:00:12.420
+pdf merger, which will help us to merge
+
+6
+00:00:12.420 --> 00:00:13.420
+two pdfs.
+
+7
+00:00:14.960 --> 00:00:16.320
+So here I open this folder in vs
+
+8
+00:00:16.320 --> 00:00:18.120
+code, I will shift right click and open
+
+9
+00:00:18.120 --> 00:00:22.520
+with code and here using ai and keeping
+
+10
+00:00:22.520 --> 00:00:24.400
+in mind the code, this is very important,
+
+11
+00:00:24.520 --> 00:00:26.120
+which I said in the second sentence.
+
+12
+00:00:26.120 --> 00:00:28.520
+I will make main.py, keeping in mind
+
+13
+00:00:28.520 --> 00:00:31.380
+the code, it is not that I told
+
+14
+00:00:31.380 --> 00:00:33.740
+agent, I told chat gpt to make it,
+
+15
+00:00:33.780 --> 00:00:36.000
+he made it, I stuck it, no that
+
+16
+00:00:36.000 --> 00:00:36.660
+doesn't work.
+
+17
+00:00:37.000 --> 00:00:38.040
+Now suppose I want to merge two pdfs,
+
+18
+00:00:38.820 --> 00:00:40.740
+I will go to google and I will
+
+19
+00:00:40.740 --> 00:00:43.340
+write library to merge pdfs, by the way
+
+20
+00:00:43.340 --> 00:00:46.700
+there is a library called pypdf2, I will
+
+21
+00:00:46.700 --> 00:00:47.400
+write python in it.
+
+22
+00:00:47.400 --> 00:00:51.360
+There is a library called pypdf2, pdf merge
+
+23
+00:00:51.360 --> 00:00:53.360
+is also there, but see here it gave
+
+24
+00:00:53.360 --> 00:00:55.340
+me pypdf2.
+
+25
+00:00:56.280 --> 00:00:58.840
+Now it is saying that pypdf2 has become
+
+26
+00:00:58.840 --> 00:01:03.160
+pypdf, for merging pdfs is pypdf, earlier it
+
+27
+00:01:03.160 --> 00:01:08.440
+was pypdf2, merge pdfs in python using pypdf
+
+28
+00:01:08.440 --> 00:01:11.440
+and see here the documentation of pypdf has
+
+29
+00:01:11.440 --> 00:01:11.640
+been opened.
+
+30
+00:01:11.640 --> 00:01:14.740
+So it is very easy to use pypdf,
+
+31
+00:01:14.740 --> 00:01:15.960
+first of all let's do one thing, let's
+
+32
+00:01:15.960 --> 00:01:19.460
+see its installation, how will be the installation?
+
+33
+00:01:19.700 --> 00:01:21.060
+It is saying that do like this, install
+
+34
+00:01:21.060 --> 00:01:24.420
+this, let's install this first, because even I
+
+35
+00:01:24.420 --> 00:01:25.500
+don't know how it works.
+
+36
+00:01:25.620 --> 00:01:27.580
+Now you don't know how it works, yes
+
+37
+00:01:27.580 --> 00:01:28.780
+I don't know, I am not missing any
+
+38
+00:01:28.780 --> 00:01:33.240
+module, I am not missing any module that
+
+39
+00:01:33.240 --> 00:01:34.260
+which module is doing what.
+
+40
+00:01:34.260 --> 00:01:36.660
+But yes, I have google, I have chat
+
+41
+00:01:36.660 --> 00:01:39.040
+gpt, I have tools with which I will
+
+42
+00:01:39.040 --> 00:01:40.680
+do whatever I want to do.
+
+43
+00:01:42.040 --> 00:01:43.540
+Obviously I will do related to pdf with
+
+44
+00:01:43.540 --> 00:01:43.880
+this module.
+
+45
+00:01:44.620 --> 00:01:48.220
+Now here pypdf import pdf writer, this is
+
+46
+00:01:48.220 --> 00:01:49.580
+a very simple code they have given me,
+
+47
+00:01:49.920 --> 00:01:52.860
+I will paste this code here.
+
+48
+00:01:53.380 --> 00:01:54.860
+This code has come from documentation till now,
+
+49
+00:01:55.060 --> 00:01:55.640
+I have not done anything.
+
+50
+00:01:55.640 --> 00:01:58.240
+Now see here it has been resolved.
+
+51
+00:01:59.080 --> 00:02:01.260
+So we are importing pdf writer from pypdf2,
+
+52
+00:02:02.540 --> 00:02:04.500
+by the way you can do this also
+
+53
+00:02:04.500 --> 00:02:08.320
+or you can import pypdf and do like
+
+54
+00:02:08.320 --> 00:02:12.680
+this, pypdf.pdf writer, means instead of these
+
+55
+00:02:12.680 --> 00:02:16.020
+two lines you can do this also, what
+
+56
+00:02:16.020 --> 00:02:16.460
+you can do?
+
+57
+00:02:16.560 --> 00:02:18.540
+You can do this, you can do import
+
+58
+00:02:18.540 --> 00:02:21.680
+pypdf and then you can do merger is
+
+59
+00:02:21.680 --> 00:02:22.660
+equal to like this.
+
+60
+00:02:23.420 --> 00:02:24.920
+But I am not doing like this.
+
+61
+00:02:26.580 --> 00:02:28.540
+Means you don't have to write pypdf dot
+
+62
+00:02:28.540 --> 00:02:29.640
+again and again, that's why we do like
+
+63
+00:02:29.640 --> 00:02:29.960
+this.
+
+64
+00:02:30.060 --> 00:02:32.720
+We say import pdf writer from pypdf directly.
+
+65
+00:02:33.080 --> 00:02:34.340
+So you have learned this syntax from this
+
+66
+00:02:34.340 --> 00:02:34.640
+project.
+
+67
+00:02:35.360 --> 00:02:36.420
+Merger is equal to this.
+
+68
+00:02:36.920 --> 00:02:39.260
+Then I am keeping this in code, it
+
+69
+00:02:39.260 --> 00:02:40.660
+is not required, it is a comment, but
+
+70
+00:02:40.660 --> 00:02:42.460
+I am keeping so that you people have
+
+71
+00:02:42.460 --> 00:02:44.180
+knowledge of this thing.
+
+72
+00:02:44.680 --> 00:02:47.120
+Now we are saying for pdf in pdfs,
+
+73
+00:02:47.280 --> 00:02:48.940
+I don't want to keep it like this,
+
+74
+00:02:49.020 --> 00:02:50.700
+I want to keep it like this.
+
+75
+00:02:50.700 --> 00:02:53.720
+And here I will say pdfs is equal
+
+76
+00:02:53.720 --> 00:02:56.420
+to, and I will make a list here,
+
+77
+00:02:56.500 --> 00:02:58.960
+one is gov.pdf. Oh brother, it has
+
+78
+00:02:58.960 --> 00:03:00.380
+also read my pdf.
+
+79
+00:03:00.940 --> 00:03:02.240
+No, no, it has not done this read,
+
+80
+00:03:02.340 --> 00:03:03.540
+I thought it has read all this.
+
+81
+00:03:04.300 --> 00:03:05.940
+No problem, I accept it by pressing tab,
+
+82
+00:03:06.240 --> 00:03:06.760
+I remove all this.
+
+83
+00:03:07.860 --> 00:03:10.540
+And I press F2 and do control C.
+
+84
+00:03:11.540 --> 00:03:13.160
+This is a trick to copy and here
+
+85
+00:03:13.160 --> 00:03:13.620
+I also do control V.
+
+86
+00:03:14.100 --> 00:03:15.780
+You can also type, I mean why will
+
+87
+00:03:15.780 --> 00:03:15.900
+you type?
+
+88
+00:03:16.460 --> 00:03:18.320
+Otherwise, you know one more way, come here,
+
+89
+00:03:19.100 --> 00:03:20.480
+press F2 or right click, press rename.
+
+90
+00:03:21.140 --> 00:03:23.280
+Or you people can click, where?
+
+91
+00:03:24.240 --> 00:03:25.320
+Is there any option to rename?
+
+92
+00:03:26.140 --> 00:03:26.700
+I don't know.
+
+93
+00:03:28.140 --> 00:03:28.820
+Is this it?
+
+94
+00:03:28.880 --> 00:03:29.360
+No, it is copy.
+
+95
+00:03:29.680 --> 00:03:30.600
+Rename is this, yes.
+
+96
+00:03:31.180 --> 00:03:32.280
+Do control C after doing this.
+
+97
+00:03:32.480 --> 00:03:33.940
+I mean, do it anyway, now copy.
+
+98
+00:03:34.640 --> 00:03:35.540
+You have to copy the name.
+
+99
+00:03:36.040 --> 00:03:37.640
+So I made a list of gov.pdf
+
+100
+00:03:37.640 --> 00:03:41.840
+and intro to python.pdf. If I had
+
+101
+00:03:41.840 --> 00:03:43.840
+more pdfs, I would have made theirs too.
+
+102
+00:03:44.320 --> 00:03:47.080
+And I want my final pdf name to
+
+103
+00:03:47.080 --> 00:03:47.420
+be merged.
+
+104
+00:03:49.000 --> 00:03:52.180
+Merged.pdf. Let's run it.
+
+105
+00:03:54.180 --> 00:03:55.920
+And as soon as we run it.
+
+106
+00:03:57.240 --> 00:03:58.060
+Bro, run it.
+
+107
+00:03:58.300 --> 00:03:59.000
+Yes, it has run.
+
+108
+00:03:59.460 --> 00:04:00.620
+Merged.pdf has been made.
+
+109
+00:04:02.140 --> 00:04:03.200
+Now you will say, that's it?
+
+110
+00:04:03.980 --> 00:04:04.880
+Yes bro, that's it.
+
+111
+00:04:06.000 --> 00:04:06.980
+We haven't done anything.
+
+112
+00:04:07.460 --> 00:04:08.940
+This was the point of this video.
+
+113
+00:04:09.120 --> 00:04:10.640
+The point of this video was that you
+
+114
+00:04:10.640 --> 00:04:11.580
+don't have to do it.
+
+115
+00:04:12.840 --> 00:04:14.020
+Your work should be done.
+
+116
+00:04:14.040 --> 00:04:14.620
+What was your work?
+
+117
+00:04:15.040 --> 00:04:17.459
+Your work was to make a pdf merging
+
+118
+00:04:17.459 --> 00:04:17.959
+program.
+
+119
+00:04:18.279 --> 00:04:19.600
+To make a program that merges pdfs.
+
+120
+00:04:20.680 --> 00:04:21.680
+You made it, right?
+
+121
+00:04:21.840 --> 00:04:22.340
+You made it, right?
+
+122
+00:04:23.040 --> 00:04:23.600
+That's it.
+
+123
+00:04:24.300 --> 00:04:26.260
+Why do you have to over-engineer?
+
+124
+00:04:26.680 --> 00:04:27.860
+Why do you have to do things from
+
+125
+00:04:27.860 --> 00:04:27.960
+scratch?
+
+126
+00:04:28.420 --> 00:04:30.040
+When you already have such a good library.
+
+127
+00:04:30.180 --> 00:04:31.280
+See, this was mine.
+
+128
+00:04:32.360 --> 00:04:35.500
+This was my gov.pdf. How many pages
+
+129
+00:04:35.500 --> 00:04:35.680
+are there in this?
+
+130
+00:04:35.820 --> 00:04:36.280
+There are 3 pages.
+
+131
+00:04:36.280 --> 00:04:37.540
+There are 13 pages in intro to python.
+
+132
+00:04:38.440 --> 00:04:38.820
+And how many pages are there in my
+
+133
+00:04:38.820 --> 00:04:39.120
+merge?
+
+134
+00:04:39.760 --> 00:04:40.480
+There are 16 pages.
+
+135
+00:04:40.640 --> 00:04:41.480
+First it was this.
+
+136
+00:04:41.900 --> 00:04:43.500
+Then intro to python was appended.
+
+137
+00:04:43.740 --> 00:04:46.520
+So in total, our pdfs have been merged.
+
+138
+00:04:47.000 --> 00:04:48.840
+If we had more pdfs, they would have
+
+139
+00:04:48.840 --> 00:04:49.240
+been merged too.
+
+140
+00:04:49.880 --> 00:04:51.480
+And we would have got the merged pdf.
+
+141
+00:04:52.160 --> 00:04:54.200
+So this was a very simple project.
+
+142
+00:04:54.500 --> 00:04:56.440
+I hope you all enjoyed it.
+
+143
+00:04:57.520 --> 00:04:58.100
+Now I will tell you.
+
+144
+00:04:58.980 --> 00:04:59.980
+What I am going to do here.
+
+145
+00:05:00.460 --> 00:05:01.600
+I am removing it.
+
+146
+00:05:01.860 --> 00:05:03.000
+I hope you understood.
+
+147
+00:05:03.000 --> 00:05:03.280
+I hope you understood.
+
+148
+00:05:03.280 --> 00:05:04.840
+How we are able to do merger is
+
+149
+00:05:04.840 --> 00:05:06.240
+equal to pdf writer.
+
+150
+00:05:06.920 --> 00:05:07.260
+By using from.
+
+151
+00:05:08.520 --> 00:05:09.060
+So I am removing it.
+
+152
+00:05:09.180 --> 00:05:11.140
+I don't want unnecessary things in code.
+
+153
+00:05:11.960 --> 00:05:13.600
+So what I will do now.
+
+154
+00:05:13.740 --> 00:05:15.580
+I will click here.
+
+155
+00:05:16.000 --> 00:05:17.540
+And I will tell the agent.
+
+156
+00:05:18.760 --> 00:05:22.640
+Wrap my code in gui.
+
+157
+00:05:23.280 --> 00:05:23.980
+Wrap my code in gui.
+
+158
+00:05:23.980 --> 00:05:24.780
+Using kinder.
+
+159
+00:05:24.920 --> 00:05:26.360
+Now you look at this prompt.
+
+160
+00:05:26.780 --> 00:05:27.100
+And understand.
+
+161
+00:05:27.800 --> 00:05:28.940
+What I have said here.
+
+162
+00:05:28.940 --> 00:05:30.360
+What I have said here.
+
+163
+00:05:30.560 --> 00:05:31.540
+I want.
+
+164
+00:05:32.340 --> 00:05:33.820
+With the help of tkinter.
+
+165
+00:05:34.640 --> 00:05:35.900
+This will become its gui.
+
+166
+00:05:35.980 --> 00:05:36.940
+So that anyone can use it.
+
+167
+00:05:37.820 --> 00:05:38.220
+Hit enter.
+
+168
+00:05:38.820 --> 00:05:39.820
+And see what it does.
+
+169
+00:05:41.140 --> 00:05:42.360
+If it couldn't do it.
+
+170
+00:05:42.480 --> 00:05:42.940
+That's fine.
+
+171
+00:05:43.100 --> 00:05:43.660
+I will revert it.
+
+172
+00:05:44.900 --> 00:05:46.340
+But if it does it.
+
+173
+00:05:46.460 --> 00:05:47.780
+That's going to be amazing.
+
+174
+00:05:48.260 --> 00:05:49.140
+So we are waiting.
+
+175
+00:05:50.840 --> 00:05:53.060
+And definitely we have a quota.
+
+176
+00:05:53.060 --> 00:05:54.140
+If I click here.
+
+177
+00:05:54.200 --> 00:05:55.140
+I have a lot of things.
+
+178
+00:05:56.420 --> 00:05:58.380
+I have used 15% inline suggestions.
+
+179
+00:05:58.980 --> 00:06:00.360
+6% chat messages.
+
+180
+00:06:01.400 --> 00:06:02.720
+I have a lot of things.
+
+181
+00:06:03.600 --> 00:06:04.520
+Now it is asking.
+
+182
+00:06:04.620 --> 00:06:05.500
+Do you want to make a virtual environment?
+
+183
+00:06:06.300 --> 00:06:07.560
+No I don't want to make it.
+
+184
+00:06:08.140 --> 00:06:12.220
+Now let's see what it is doing.
+
+185
+00:06:12.360 --> 00:06:13.900
+It has done a lot of things.
+
+186
+00:06:14.620 --> 00:06:15.940
+And yes definitely.
+
+187
+00:06:16.080 --> 00:06:17.040
+It will take time to understand it.
+
+188
+00:06:17.580 --> 00:06:20.960
+But we will definitely understand it.
+
+189
+00:06:22.340 --> 00:06:23.020
+It is saying.
+
+190
+00:06:23.900 --> 00:06:25.380
+Validate python code snippets.
+
+191
+00:06:25.560 --> 00:06:26.160
+First indexer.
+
+192
+00:06:26.320 --> 00:06:26.600
+Allow.
+
+193
+00:06:28.100 --> 00:06:30.240
+And now we will wait.
+
+194
+00:06:30.580 --> 00:06:31.620
+We can't do anything more than wait.
+
+195
+00:06:34.080 --> 00:06:34.740
+Okay.
+
+196
+00:06:34.940 --> 00:06:35.640
+Everything is fine.
+
+197
+00:06:36.360 --> 00:06:39.140
+And it has done our work.
+
+198
+00:06:39.280 --> 00:06:39.920
+Now let's run it.
+
+199
+00:06:40.240 --> 00:06:41.540
+Let's run it.
+
+200
+00:06:42.220 --> 00:06:43.460
+It is saying.
+
+201
+00:06:43.580 --> 00:06:45.140
+Select your pdf files.
+
+202
+00:06:45.140 --> 00:06:46.140
+Suppose I have selected gov.
+
+203
+00:06:46.140 --> 00:06:46.620
+I have selected.
+
+204
+00:06:48.180 --> 00:06:49.740
+And I have selected.
+
+205
+00:06:50.220 --> 00:06:50.740
+Intro to python.
+
+206
+00:06:52.120 --> 00:06:54.040
+Intro to python is also selected.
+
+207
+00:06:54.940 --> 00:06:55.280
+And.
+
+208
+00:06:56.360 --> 00:06:57.340
+Merge pdfs.
+
+209
+00:06:57.760 --> 00:06:58.240
+What is this?
+
+210
+00:06:58.820 --> 00:06:59.820
+Why is it coming after clicking on merge
+
+211
+00:06:59.820 --> 00:07:00.160
+pdfs?
+
+212
+00:07:03.980 --> 00:07:05.800
+Pdf merged successfully into.
+
+213
+00:07:05.800 --> 00:07:06.440
+Intro to python.
+
+214
+00:07:06.560 --> 00:07:09.080
+It is merging only 2 files.
+
+215
+00:07:10.180 --> 00:07:10.680
+Okay.
+
+216
+00:07:11.040 --> 00:07:11.880
+That's fine.
+
+217
+00:07:11.880 --> 00:07:14.100
+But not what I was looking for.
+
+218
+00:07:14.180 --> 00:07:14.620
+To be honest.
+
+219
+00:07:14.860 --> 00:07:17.160
+So what I will do here.
+
+220
+00:07:17.320 --> 00:07:18.440
+I will run it.
+
+221
+00:07:19.980 --> 00:07:21.040
+Select pdf.
+
+222
+00:07:21.300 --> 00:07:22.280
+Suppose I select gov.
+
+223
+00:07:23.240 --> 00:07:23.820
+And.
+
+224
+00:07:25.650 --> 00:07:26.380
+I can select 2 files.
+
+225
+00:07:29.580 --> 00:07:30.740
+Merge pdfs.
+
+226
+00:07:30.900 --> 00:07:31.180
+And.
+
+227
+00:07:31.400 --> 00:07:35.020
+I will select mm.pdf. Okay.
+
+228
+00:07:35.240 --> 00:07:36.180
+It is working.
+
+229
+00:07:37.500 --> 00:07:38.340
+Let's see.
+
+230
+00:07:38.940 --> 00:07:39.460
+Yes.
+
+231
+00:07:40.540 --> 00:07:42.020
+I think I was confused about its usage.
+
+232
+00:07:43.040 --> 00:07:43.940
+I will explain it to you again.
+
+233
+00:07:44.860 --> 00:07:45.660
+So what I have done here.
+
+234
+00:07:45.780 --> 00:07:46.240
+I have put some files.
+
+235
+00:07:46.960 --> 00:07:49.220
+Now you will run it.
+
+236
+00:07:49.400 --> 00:07:50.200
+After running.
+
+237
+00:07:50.440 --> 00:07:51.540
+Select pdf files.
+
+238
+00:07:52.120 --> 00:07:53.700
+And select the files you want to merge.
+
+239
+00:07:54.520 --> 00:07:55.100
+I have selected these 4.
+
+240
+00:07:56.040 --> 00:07:56.500
+Gov.
+
+241
+00:07:56.700 --> 00:07:57.920
+Intro to python.
+
+242
+00:07:58.340 --> 00:07:58.960
+If you want.
+
+243
+00:07:58.960 --> 00:08:00.600
+You can select them one by one.
+
+244
+00:08:00.940 --> 00:08:01.460
+I will show you.
+
+245
+00:08:01.600 --> 00:08:02.680
+Intro to python.
+
+246
+00:08:04.540 --> 00:08:07.080
+Mm.pdf. Gov.
+
+247
+00:08:07.360 --> 00:08:08.920
+You have selected these 4.
+
+248
+00:08:09.660 --> 00:08:10.660
+You will click on open.
+
+249
+00:08:10.760 --> 00:08:11.940
+You have selected these 4.
+
+250
+00:08:12.880 --> 00:08:14.440
+I am not able to resize it.
+
+251
+00:08:15.620 --> 00:08:16.440
+I am not able to resize this box.
+
+252
+00:08:17.460 --> 00:08:18.140
+Gov.
+
+253
+00:08:19.280 --> 00:08:19.960
+And.
+
+254
+00:08:20.600 --> 00:08:21.860
+I am not able to resize it.
+
+255
+00:08:22.080 --> 00:08:26.280
+I will merge pdf.
+
+256
+00:08:26.280 --> 00:08:26.460
+I will save it.
+
+257
+00:08:29.040 --> 00:08:30.400
+It is merged.
+
+258
+00:08:30.780 --> 00:08:31.380
+It is merged.
+
+259
+00:08:33.240 --> 00:08:35.880
+All pdfs are merged.
+
+260
+00:08:36.659 --> 00:08:37.340
+All pdfs are merged.
+
+261
+00:08:37.960 --> 00:08:39.580
+What we will do here.
+
+262
+00:08:40.179 --> 00:08:41.080
+We will come back.
+
+263
+00:08:41.419 --> 00:08:42.220
+We will click on keep.
+
+264
+00:08:42.940 --> 00:08:44.160
+We will click on keep.
+
+265
+00:08:44.740 --> 00:08:45.980
+We will try to understand the code.
+
+266
+00:08:47.340 --> 00:08:48.600
+What it has done.
+
+267
+00:08:49.100 --> 00:08:51.000
+It has wrapped it in kinter.
+
+268
+00:08:51.940 --> 00:08:53.060
+What is kinter?
+
+269
+00:08:53.060 --> 00:08:55.480
+It is a GUI kit.
+
+270
+00:08:56.200 --> 00:08:56.820
+It is a GUI kit.
+
+271
+00:08:57.820 --> 00:08:59.560
+It is a built in module.
+
+272
+00:08:59.840 --> 00:09:00.820
+It is a built in module.
+
+273
+00:09:00.940 --> 00:09:01.580
+You don't have to install it.
+
+274
+00:09:01.860 --> 00:09:03.180
+You don't have to install it.
+
+275
+00:09:03.700 --> 00:09:05.640
+You have to understand the flow.
+
+276
+00:09:06.620 --> 00:09:07.520
+Whenever you work in kinter.
+
+277
+00:09:08.180 --> 00:09:10.180
+You have to make a root main window.
+
+278
+00:09:10.920 --> 00:09:11.840
+You have to set the title.
+
+279
+00:09:12.600 --> 00:09:13.100
+You have to set the size.
+
+280
+00:09:13.760 --> 00:09:16.920
+We made a button widget.
+
+281
+00:09:17.700 --> 00:09:18.280
+We made a button widget.
+
+282
+00:09:18.580 --> 00:09:20.520
+It is a select button.
+
+283
+00:09:20.520 --> 00:09:23.040
+It selects pdfs.
+
+284
+00:09:24.340 --> 00:09:25.140
+It selects pdfs.
+
+285
+00:09:25.140 --> 00:09:25.880
+This function will run.
+
+286
+00:09:26.140 --> 00:09:27.380
+Select pdfs.
+
+287
+00:09:28.640 --> 00:09:31.480
+This opens a file dialog.
+
+288
+00:09:32.600 --> 00:09:33.560
+This opens a file dialog.
+
+289
+00:09:33.560 --> 00:09:35.020
+It prompts the user to select pdf files.
+
+290
+00:09:35.020 --> 00:09:35.320
+It prompts the user to select pdf files.
+
+291
+00:09:36.120 --> 00:09:37.700
+If the user has selected a file.
+
+292
+00:09:38.840 --> 00:09:39.500
+What will happen?
+
+293
+00:09:40.080 --> 00:09:41.160
+It will be inserted one by one.
+
+294
+00:09:41.600 --> 00:09:43.000
+It will be inserted one by one.
+
+295
+00:09:43.420 --> 00:09:45.440
+What is tk.end?
+
+296
+00:09:46.120 --> 00:09:48.180
+What is tk.end?
+
+297
+00:09:48.180 --> 00:09:50.740
+they go to clear previous selections they go
+
+298
+00:09:50.740 --> 00:09:52.260
+up look if I'm a palace like yeah
+
+299
+00:09:52.260 --> 00:09:54.140
+to a clear or I got or I'm
+
+300
+00:09:54.140 --> 00:09:56.820
+the PDF list make a kia insert cardia
+
+301
+00:09:56.820 --> 00:09:59.400
+in sari files co take a jitney files
+
+302
+00:09:59.400 --> 00:10:01.400
+up in a selectivity to a selection kill
+
+303
+00:10:01.400 --> 00:10:03.920
+you have our function is cabal I'm making
+
+304
+00:10:03.920 --> 00:10:06.320
+a key up I'm a car key a
+
+305
+00:10:06.320 --> 00:10:08.700
+list box bono just making a mariposa Ray
+
+306
+00:10:08.700 --> 00:10:10.580
+parts on gay take a up here for
+
+307
+00:10:10.580 --> 00:10:12.500
+basically chaotic I keep a lay a code
+
+308
+00:10:12.500 --> 00:10:15.580
+run hookah figure code run hookah of a
+
+309
+00:10:15.580 --> 00:10:16.780
+year code run hookah but look at my
+
+310
+00:10:16.780 --> 00:10:18.300
+PDF list bunge I guess can tell you
+
+311
+00:10:18.300 --> 00:10:20.120
+I'm going to tell Annie a ticket don't
+
+312
+00:10:20.120 --> 00:10:21.760
+pack a motel a key is core root
+
+313
+00:10:21.760 --> 00:10:23.660
+and the packer or Jomar main window the
+
+314
+00:10:23.660 --> 00:10:26.020
+etiquette I'm a logo but I don't just
+
+315
+00:10:26.020 --> 00:10:27.440
+a coin so I'm clicking a select while
+
+316
+00:10:27.440 --> 00:10:29.240
+a button may select while a button may
+
+317
+00:10:29.240 --> 00:10:31.360
+select PDFs function a jokey kaka a key
+
+318
+00:10:31.360 --> 00:10:34.040
+to PDF underscore list a PDF underscore list
+
+319
+00:10:34.040 --> 00:10:36.560
+a scanner paths to show Kato take a
+
+320
+00:10:36.560 --> 00:10:37.880
+or a function that I like a co
+
+321
+00:10:37.880 --> 00:10:39.300
+-user click on a nice file a button
+
+322
+00:10:39.300 --> 00:10:40.440
+because a button I think I thought I'll
+
+323
+00:10:40.440 --> 00:10:42.780
+go it's while a button may take a
+
+324
+00:10:42.780 --> 00:11:13.160
+talk or
+
+325
+00:11:13.160 --> 00:11:15.460
+a dot mean loop chalana party a GUI
+
+326
+00:11:15.460 --> 00:11:17.860
+to run carnival essential other mail loop Kamala
+
+327
+00:11:17.860 --> 00:11:21.860
+key up a GUI yota who's me elements
+
+328
+00:11:21.860 --> 00:11:23.760
+render other at a on loop or Kinter
+
+329
+00:11:23.760 --> 00:11:26.120
+is co-internally handle Karta I hope you
+
+330
+00:11:26.120 --> 00:11:27.800
+have look so much gay casick intercom karta
+
+331
+00:11:27.800 --> 00:11:30.780
+and how you can build a I assisted
+
+332
+00:11:30.780 --> 00:11:34.720
+GUIs out of your code using tkinter I
+
+333
+00:11:34.720 --> 00:11:36.820
+hope I'll come as I see you in
+
+334
+00:11:36.820 --> 00:11:37.420
+the next video
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+WEBVTT
+
+1
+00:00:00.200 --> 00:00:02.560
+(Transcribed by TurboScribe. Go Unlimited to remove this message.) Alright guys, now I have decided to make
+
+2
+00:00:02.560 --> 00:00:05.320
+one more project here and that is Drink
+
+3
+00:00:05.320 --> 00:00:06.160
+Water Reminder.
+
+4
+00:00:06.440 --> 00:00:08.220
+And this is a project that I personally
+
+5
+00:00:08.220 --> 00:00:10.820
+use and you guys will also definitely use
+
+6
+00:00:10.820 --> 00:00:11.060
+it.
+
+7
+00:00:11.280 --> 00:00:12.620
+Because it is so useful that you will
+
+8
+00:00:12.620 --> 00:00:13.520
+also say that it was fun.
+
+9
+00:00:14.120 --> 00:00:16.800
+So to give you guys this fun, I
+
+10
+00:00:16.800 --> 00:00:18.060
+will open my VS Code.
+
+11
+00:00:19.820 --> 00:00:21.420
+I am zooming in by pressing CTRL plus.
+
+12
+00:00:21.840 --> 00:00:23.280
+I have made a file named main.py.
+
+13
+00:00:23.280 --> 00:00:23.860
+I have made a file.
+
+14
+00:00:24.740 --> 00:00:26.140
+Right click command palette.
+
+15
+00:00:26.400 --> 00:00:27.440
+And by clicking here, I am toggling the
+
+16
+00:00:27.440 --> 00:00:30.120
+screencast mode so that you can see below.
+
+17
+00:00:30.760 --> 00:00:31.619
+So here we are going to make.
+
+18
+00:00:32.020 --> 00:00:33.840
+First of all, let's discuss about this.
+
+19
+00:00:34.200 --> 00:00:35.480
+A very simple utility.
+
+20
+00:00:35.720 --> 00:00:36.460
+What will it do?
+
+21
+00:00:36.840 --> 00:00:38.400
+It will tell us to drink water every
+
+22
+00:00:38.400 --> 00:00:38.500
+hour.
+
+23
+00:00:39.540 --> 00:00:43.240
+And we will know from this that we
+
+24
+00:00:43.240 --> 00:00:43.620
+have to drink water.
+
+25
+00:00:43.780 --> 00:00:46.260
+Maybe we have to sip a glass of
+
+26
+00:00:46.260 --> 00:00:47.140
+water every half hour.
+
+27
+00:00:47.680 --> 00:00:49.980
+So it will be very easy for you
+
+28
+00:00:49.980 --> 00:00:50.080
+guys.
+
+29
+00:00:50.580 --> 00:00:51.520
+So I want to tell you guys.
+
+30
+00:00:51.520 --> 00:00:54.080
+There is a Plyer library in Python.
+
+31
+00:00:54.560 --> 00:00:56.100
+Suppose you don't know what it is.
+
+32
+00:00:56.300 --> 00:00:56.900
+What will you do?
+
+33
+00:00:56.980 --> 00:00:57.840
+You will write on Google.
+
+34
+00:00:57.840 --> 00:01:02.940
+How to get notifications in Windows using Python.
+
+35
+00:01:03.200 --> 00:01:03.319
+OK.
+
+36
+00:01:03.599 --> 00:01:04.000
+Enter.
+
+37
+00:01:04.560 --> 00:01:05.120
+And look here.
+
+38
+00:01:05.400 --> 00:01:06.420
+It is telling me that you will have
+
+39
+00:01:06.420 --> 00:01:07.540
+to install a third-party library.
+
+40
+00:01:09.160 --> 00:01:11.100
+And here it is showing me Wint and
+
+41
+00:01:11.100 --> 00:01:11.480
+Toast.
+
+42
+00:01:11.700 --> 00:01:11.860
+OK.
+
+43
+00:01:12.560 --> 00:01:14.920
+But there is also a package called Plyer
+
+44
+00:01:14.920 --> 00:01:15.840
+which I have used.
+
+45
+00:01:16.040 --> 00:01:16.760
+You can use anything.
+
+46
+00:01:17.100 --> 00:01:17.240
+OK.
+
+47
+00:01:35.800 --> 00:01:40.920
+Let's close this article.
+
+48
+00:01:41.840 --> 00:01:43.820
+And here we will use Plyer.
+
+49
+00:01:43.920 --> 00:01:44.020
+OK.
+
+50
+00:01:44.540 --> 00:01:45.600
+Plyer library Python.
+
+51
+00:01:45.820 --> 00:01:47.220
+Now I will show you what Plyer does.
+
+52
+00:01:47.220 --> 00:01:49.460
+First of all, let's install it.
+
+53
+00:01:49.760 --> 00:01:50.380
+Look, don't get all these things done by
+
+54
+00:01:50.380 --> 00:01:50.600
+AI.
+
+55
+00:01:51.340 --> 00:01:51.440
+OK.
+
+56
+00:01:52.300 --> 00:01:53.720
+At least do the pip install yourself.
+
+57
+00:01:53.900 --> 00:01:54.060
+OK.
+
+58
+00:01:54.740 --> 00:01:55.460
+There are a lot of people.
+
+59
+00:01:55.740 --> 00:01:56.140
+They are shameless.
+
+60
+00:01:56.460 --> 00:01:56.880
+What do they do?
+
+61
+00:01:56.980 --> 00:01:57.480
+Directly here.
+
+62
+00:01:57.720 --> 00:01:58.760
+Let's talk to this agent.
+
+63
+00:01:58.920 --> 00:01:59.240
+Do this.
+
+64
+00:01:59.380 --> 00:01:59.600
+Do that.
+
+65
+00:01:59.760 --> 00:02:00.520
+Everything goes wrong with them.
+
+66
+00:02:01.200 --> 00:02:02.060
+Do as much as you can.
+
+67
+00:02:02.200 --> 00:02:03.220
+Do small things yourself.
+
+68
+00:02:03.380 --> 00:02:03.700
+Understand things.
+
+69
+00:02:04.660 --> 00:02:06.600
+It is not that you have started telling
+
+70
+00:02:06.600 --> 00:02:07.680
+the agent blindly.
+
+71
+00:02:08.060 --> 00:02:08.720
+I have fixed this.
+
+72
+00:02:08.780 --> 00:02:09.160
+Do this.
+
+73
+00:02:09.240 --> 00:02:09.639
+Do that.
+
+74
+00:02:10.020 --> 00:02:10.200
+OK.
+
+75
+00:02:10.900 --> 00:02:11.540
+Now look here.
+
+76
+00:02:12.340 --> 00:02:13.360
+How to use it.
+
+77
+00:02:14.280 --> 00:02:15.580
+How to use it, brother.
+
+78
+00:02:47.820 --> 00:02:49.040
+Welding media players.
+
+79
+00:02:49.260 --> 00:02:49.640
+No.
+
+80
+00:02:50.140 --> 00:02:50.300
+I don't want this.
+
+81
+00:02:51.280 --> 00:02:52.400
+I want this player.
+
+82
+00:02:52.680 --> 00:02:53.440
+I have opened the player.
+
+83
+00:02:54.400 --> 00:02:54.820
+I am also not.
+
+84
+00:02:55.840 --> 00:02:56.800
+I am also not.
+
+85
+00:02:56.820 --> 00:02:57.580
+What have I installed?
+
+86
+00:02:57.760 --> 00:02:58.720
+I will uninstall this.
+
+87
+00:02:58.800 --> 00:03:00.120
+I don't want to install useless things.
+
+88
+00:03:01.260 --> 00:03:02.440
+See, these are also learnings.
+
+89
+00:03:02.640 --> 00:03:03.460
+These are also learnings.
+
+90
+00:03:03.760 --> 00:03:04.740
+These are also learnings.
+
+91
+00:03:06.280 --> 00:03:07.360
+I have uninstalled the player.
+
+92
+00:03:07.600 --> 00:03:08.540
+I have to uninstall the player.
+
+93
+00:03:08.740 --> 00:03:09.300
+I was getting confused.
+
+94
+00:03:09.520 --> 00:03:10.280
+What is going on, brother?
+
+95
+00:03:11.140 --> 00:03:12.620
+Player is a very simple thing.
+
+96
+00:03:12.780 --> 00:03:13.140
+Paste.
+
+97
+00:03:13.520 --> 00:03:14.240
+What happened?
+
+98
+00:03:14.240 --> 00:03:17.220
+what is going on, why there is no
+
+99
+00:03:17.220 --> 00:03:18.940
+copy, clicked copy, now it is done, right
+
+100
+00:03:18.940 --> 00:03:22.080
+click and paste, hit enter and here they
+
+101
+00:03:22.080 --> 00:03:24.300
+have given some example or not to use
+
+102
+00:03:24.300 --> 00:03:26.620
+the plier they should have given an example
+
+103
+00:03:26.620 --> 00:03:29.600
+only, I would have copied and pasted it
+
+104
+00:03:30.460 --> 00:03:33.080
+anyway, I will find it from somewhere, how
+
+105
+00:03:33.080 --> 00:03:37.220
+and what to do pip install plier, plier,
+
+106
+00:03:37.660 --> 00:03:47.460
+plier example python and here from
+
+107
+00:03:47.460 --> 00:03:51.700
+plier import notification, notification.notify I will fix
+
+108
+00:03:51.700 --> 00:03:55.020
+this, I am just doing this from plier
+
+109
+00:03:55.020 --> 00:03:58.140
+import notification, then you have to do notification
+
+110
+00:03:58.140 --> 00:04:02.600
+.notify, then you have to run this let's
+
+111
+00:04:02.600 --> 00:04:04.740
+see if it works or not, I have
+
+112
+00:04:04.740 --> 00:04:08.160
+run this will it give a notification in
+
+113
+00:04:08.160 --> 00:04:10.720
+my pc, let's go has it given a
+
+114
+00:04:10.720 --> 00:04:13.880
+notification, I have turned on do not disturb
+
+115
+00:04:13.880 --> 00:04:15.019
+I have to turn off do not disturb,
+
+116
+00:04:16.079 --> 00:04:20.019
+now it will give a notification hello, this
+
+117
+00:04:20.019 --> 00:04:21.420
+is a plier notification, so what I have
+
+118
+00:04:21.420 --> 00:04:24.260
+to do my work is done, I will
+
+119
+00:04:24.260 --> 00:04:27.760
+make a very simple program I will import
+
+120
+00:04:27.760 --> 00:04:31.880
+time here and after this, let's import time
+
+121
+00:04:31.880 --> 00:04:35.960
+first, then notification then I will write the
+
+122
+00:04:35.960 --> 00:04:38.180
+code with respect, I will say water underscore
+
+123
+00:04:38.180 --> 00:04:41.460
+reminder, he has written the whole code, but
+
+124
+00:04:41.850 --> 00:04:45.060
+I will tell you how we will do
+
+125
+00:04:45.060 --> 00:04:45.800
+it, he is saying put this in while
+
+126
+00:04:45.800 --> 00:04:52.520
+true, and time.sleep for 3600 minutes, time
+
+127
+00:04:52.520 --> 00:04:56.980
+.sleep in seconds, yes, you have to give
+
+128
+00:04:56.980 --> 00:04:59.160
+the number of seconds you don't remember anything,
+
+129
+00:04:59.820 --> 00:05:03.260
+seconds, milliseconds it gets confusing, because in javascript
+
+130
+00:05:03.260 --> 00:05:06.060
+there are milliseconds here it is seconds, so
+
+131
+00:05:06.060 --> 00:05:10.140
+for 3600 seconds, it is written and now
+
+132
+00:05:10.140 --> 00:05:11.960
+we have to run the water reminder function
+
+133
+00:05:11.960 --> 00:05:17.440
+so this was a very basic code water
+
+134
+00:05:17.440 --> 00:05:19.760
+reminder function was run, now you will say
+
+135
+00:05:19.760 --> 00:05:21.240
+why did you make it while true, it
+
+136
+00:05:21.240 --> 00:05:26.160
+will keep running and it will keep running
+
+137
+00:05:26.160 --> 00:05:29.800
+because we want to run it so what
+
+138
+00:05:29.800 --> 00:05:32.180
+will happen here, it will give the program
+
+139
+00:05:32.180 --> 00:05:35.980
+notification water reminder, time to drink water, time
+
+140
+00:05:35.980 --> 00:05:40.340
+to sip some water sip some water, this
+
+141
+00:05:40.340 --> 00:05:43.220
+is what I want and water reminder for
+
+142
+00:05:43.220 --> 00:05:44.540
+harry, I want him to write my name
+
+143
+00:05:45.540 --> 00:05:49.340
+now here in notification.notify let's see what
+
+144
+00:05:49.340 --> 00:05:53.500
+else happens, don't edit the file you can
+
+145
+00:05:53.500 --> 00:05:57.100
+look in this file, can you see and
+
+146
+00:05:57.100 --> 00:05:58.360
+you can see what is there and what
+
+147
+00:05:58.360 --> 00:06:01.180
+is not you can control click in notification,
+
+148
+00:06:01.440 --> 00:06:03.540
+you can see here you can look in
+
+149
+00:06:03.540 --> 00:06:05.140
+this code, definitely you won't change the module
+
+150
+00:06:05.140 --> 00:06:08.240
+code, you can see where it is but
+
+151
+00:06:08.240 --> 00:06:09.220
+just I am telling you, you can control
+
+152
+00:06:09.220 --> 00:06:12.060
+click and see how the code is written,
+
+153
+00:06:12.060 --> 00:06:13.820
+this is not a built in module, this
+
+154
+00:06:13.820 --> 00:06:17.020
+is an external module which we have used,
+
+155
+00:06:18.060 --> 00:06:21.140
+someone else's module so this someone else's module
+
+156
+00:06:21.140 --> 00:06:23.180
+which we have installed in our pc and
+
+157
+00:06:23.180 --> 00:06:27.420
+we are using it, you can control click
+
+158
+00:06:27.420 --> 00:06:29.420
+to see what he has written but we
+
+159
+00:06:29.420 --> 00:06:29.800
+don't want to go into this much detail
+
+160
+00:06:29.800 --> 00:06:32.420
+now let's run it, I will do one
+
+161
+00:06:32.420 --> 00:06:35.300
+thing, I will do it every 3 seconds
+
+162
+00:06:35.300 --> 00:06:40.020
+I will add controls, first alt shift down
+
+163
+00:06:40.020 --> 00:06:43.400
+arrow I will replicate the line and here
+
+164
+00:06:43.400 --> 00:06:47.380
+I will put time.sleep for just 3
+
+165
+00:06:47.380 --> 00:06:50.540
+seconds so while true means, this loop will
+
+166
+00:06:50.540 --> 00:06:52.360
+keep running but this loop will keep running
+
+167
+00:06:52.360 --> 00:06:54.480
+but time.sleep will stop it what it
+
+168
+00:06:54.480 --> 00:06:56.320
+will do, it will stop this loop for
+
+169
+00:06:56.320 --> 00:07:00.480
+3 seconds then it will run again, then
+
+170
+00:07:00.480 --> 00:07:02.980
+it will stop because of time.sleep then
+
+171
+00:07:02.980 --> 00:07:05.480
+it will run again, it will execute, then
+
+172
+00:07:05.480 --> 00:07:07.520
+it will stop because of time.sleep then
+
+173
+00:07:07.520 --> 00:07:08.880
+it will execute, then it will stop because
+
+174
+00:07:08.880 --> 00:07:12.620
+of time.sleep and so on, let's run
+
+175
+00:07:12.620 --> 00:07:17.240
+it what a reminder for harry d, what
+
+176
+00:07:17.240 --> 00:07:17.340
+is d?
+
+177
+00:07:17.340 --> 00:07:19.980
+it is harry, it has been 3 seconds
+
+178
+00:07:21.400 --> 00:07:25.980
+it came again, you drank the water it
+
+179
+00:07:25.980 --> 00:07:29.280
+came again, you stopped it it came again,
+
+180
+00:07:29.400 --> 00:07:32.400
+you drank it it came again, you drank
+
+181
+00:07:32.400 --> 00:07:38.560
+it so this loop will keep running now
+
+182
+00:07:38.560 --> 00:07:39.800
+how will you quit it?
+
+183
+00:07:39.800 --> 00:07:40.440
+how will you quit it?
+
+184
+00:07:42.380 --> 00:07:47.820
+you will quit it like this now I
+
+185
+00:07:47.820 --> 00:07:53.260
+will uncomment it this is for testing purposes
+
+186
+00:07:53.260 --> 00:07:59.980
+for testing purposes, remind every 3 seconds why
+
+187
+00:07:59.980 --> 00:08:01.380
+is it running?
+
+188
+00:08:01.380 --> 00:08:02.820
+I have stopped the notification I have stopped
+
+189
+00:08:02.820 --> 00:08:09.260
+the notification so this was a simple water
+
+190
+00:08:09.260 --> 00:08:13.400
+drinking reminder which you can run and it
+
+191
+00:08:13.400 --> 00:08:17.620
+will keep reminding you to sip water so
+
+192
+00:08:17.620 --> 00:08:19.780
+as long as your computer is running you
+
+193
+00:08:19.780 --> 00:08:26.100
+can get water drinking reminder I hope you
+
+194
+00:08:26.100 --> 00:08:27.500
+liked this mini project you will get all
+
+195
+00:08:27.500 --> 00:08:30.740
+the code and handbook I will give you
+
+196
+00:08:30.740 --> 00:08:35.720
+all the downloadable material I hope you are
+
+197
+00:08:35.720 --> 00:08:39.500
+enjoying AI assisted development and overall enjoying this
+
+198
+00:08:39.500 --> 00:08:39.600
+course
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+WEBVTT
+
+1
+00:00:00.260 --> 00:00:02.880
+(Transcribed by TurboScribe. Go Unlimited to remove this message.) Alright guys, let's move ahead and today's project
+
+2
+00:00:02.880 --> 00:00:03.960
+is going to be very interesting.
+
+3
+00:00:04.540 --> 00:00:06.400
+And you must be thinking why am I
+
+4
+00:00:06.400 --> 00:00:07.119
+saying so much that it's going to be
+
+5
+00:00:07.119 --> 00:00:07.540
+interesting.
+
+6
+00:00:08.540 --> 00:00:10.320
+The reason is that we are making a
+
+7
+00:00:10.320 --> 00:00:11.760
+password manager.
+
+8
+00:00:12.060 --> 00:00:13.580
+Let me confess something.
+
+9
+00:00:14.240 --> 00:00:18.360
+I want to make as many projects as
+
+10
+00:00:18.360 --> 00:00:18.460
+possible.
+
+11
+00:00:18.600 --> 00:00:21.020
+And personally, I can't stop myself.
+
+12
+00:00:21.520 --> 00:00:23.540
+Since AI has come, I want to make
+
+13
+00:00:23.540 --> 00:00:28.120
+all my projects with the help of AI.
+
+14
+00:00:28.120 --> 00:00:29.740
+Note that I didn't say make with AI.
+
+15
+00:00:30.500 --> 00:00:32.500
+With the help of AI, I can make,
+
+16
+00:00:32.660 --> 00:00:36.540
+control, manage and control what features are there
+
+17
+00:00:36.540 --> 00:00:39.340
+in my project and what are not.
+
+18
+00:00:39.740 --> 00:00:43.240
+With that said, I will tell you which
+
+19
+00:00:43.240 --> 00:00:45.740
+model we will use and what is our
+
+20
+00:00:45.740 --> 00:00:47.780
+approach.
+
+21
+00:00:48.320 --> 00:00:49.760
+There is a module called PiperClip.
+
+22
+00:00:50.480 --> 00:00:51.480
+Let me tell you what it does.
+
+23
+00:00:51.940 --> 00:00:54.960
+It is helpful in copy-pasting on clipboard.
+
+24
+00:00:55.120 --> 00:00:55.780
+So instal it.
+
+25
+00:00:55.780 --> 00:00:57.060
+Now I will tell you what this module
+
+26
+00:00:57.060 --> 00:00:57.540
+does.
+
+27
+00:00:57.760 --> 00:01:00.400
+You must be thinking that you know about
+
+28
+00:01:00.400 --> 00:01:01.080
+so many modules.
+
+29
+00:01:02.100 --> 00:01:03.060
+How do you know?
+
+30
+00:01:03.319 --> 00:01:05.680
+Who tells you about PiperClip?
+
+31
+00:01:06.200 --> 00:01:07.240
+That this module does this.
+
+32
+00:01:07.940 --> 00:01:10.080
+So my two friends tell me.
+
+33
+00:01:10.180 --> 00:01:11.100
+So this is my first friend.
+
+34
+00:01:11.680 --> 00:01:13.700
+And this is my second friend.
+
+35
+00:01:14.680 --> 00:01:15.700
+I have more friends.
+
+36
+00:01:16.260 --> 00:01:18.700
+But mainly these two friends tell me what
+
+37
+00:01:18.700 --> 00:01:19.380
+to do and when.
+
+38
+00:01:19.380 --> 00:01:20.100
+I keep researching.
+
+39
+00:01:21.060 --> 00:01:22.680
+So you got the answer.
+
+40
+00:01:23.020 --> 00:01:24.340
+Our package has also been installed.
+
+41
+00:01:24.940 --> 00:01:26.660
+And I don't want to take too much
+
+42
+00:01:26.660 --> 00:01:26.940
+time.
+
+43
+00:01:27.900 --> 00:01:30.340
+So we will import PiperClip.
+
+44
+00:01:31.340 --> 00:01:32.460
+And we will also import the OS.
+
+45
+00:01:32.720 --> 00:01:34.520
+Because we will save our passwords in a
+
+46
+00:01:34.520 --> 00:01:34.760
+file.
+
+47
+00:01:34.960 --> 00:01:37.800
+Now I will tell you what is our
+
+48
+00:01:37.800 --> 00:01:39.560
+approach with this password manager.
+
+49
+00:01:40.360 --> 00:01:41.300
+So see what we will do.
+
+50
+00:01:41.680 --> 00:01:43.520
+We will make a file called passwords.txt.
+
+51
+00:01:44.760 --> 00:01:47.360
+In which we will save the name of
+
+52
+00:01:47.360 --> 00:01:50.120
+the website and the password of the website.
+
+53
+00:01:51.940 --> 00:01:54.800
+Whenever we need the password of any website.
+
+54
+00:01:55.160 --> 00:01:57.600
+We will tell our programme.
+
+55
+00:01:57.760 --> 00:01:59.000
+And it will copy it on the clipboard
+
+56
+00:01:59.000 --> 00:02:00.100
+and give it to us.
+
+57
+00:02:00.160 --> 00:02:01.980
+For example, let's say Facebook.
+
+58
+00:02:05.390 --> 00:02:09.009
+Let's say my email on Facebook is mark
+
+59
+00:02:09.009 --> 00:02:13.530
+at the rate zuckerberg.com And my password
+
+60
+00:02:13.530 --> 00:02:14.200
+is 567.
+
+61
+00:02:14.890 --> 00:02:16.310
+This 567 is my password.
+
+62
+00:02:16.470 --> 00:02:17.410
+Assume that I have logged in.
+
+63
+00:02:17.930 --> 00:02:19.490
+Don't try it.
+
+64
+00:02:20.510 --> 00:02:21.770
+That's too obvious.
+
+65
+00:02:22.990 --> 00:02:25.190
+So I want my programme to tell me.
+
+66
+00:02:25.190 --> 00:02:26.390
+As soon as I put facebook.com.
+
+67
+00:02:26.450 --> 00:02:27.370
+It will tell me that you have put
+
+68
+00:02:27.370 --> 00:02:29.750
+this password on facebook.com.
+
+69
+00:02:30.290 --> 00:02:31.750
+So I will make two functions here.
+
+70
+00:02:32.210 --> 00:02:32.770
+And I will make a constant.
+
+71
+00:02:33.530 --> 00:02:34.350
+I will make a constant called file underscore
+
+72
+00:02:34.350 --> 00:02:34.850
+name.
+
+73
+00:02:36.290 --> 00:02:39.010
+And I will make it here in the
+
+74
+00:02:39.010 --> 00:02:42.190
+name of passwords.txt. So basically what I
+
+75
+00:02:42.190 --> 00:02:42.490
+did.
+
+76
+00:02:42.750 --> 00:02:46.770
+I made a password.txt. Now I will
+
+77
+00:02:46.770 --> 00:02:47.510
+make two functions.
+
+78
+00:02:47.510 --> 00:02:49.210
+I will make a save password.
+
+79
+00:02:49.990 --> 00:02:51.650
+And a get password.
+
+80
+00:02:52.010 --> 00:02:54.070
+So I will make a def save password.
+
+81
+00:02:54.190 --> 00:02:55.210
+For now, I will pass it.
+
+82
+00:02:55.690 --> 00:02:57.190
+For now, I will pass it.
+
+83
+00:02:58.190 --> 00:03:00.390
+And after this, I will make a get
+
+84
+00:03:00.390 --> 00:03:00.750
+password.
+
+85
+00:03:00.930 --> 00:03:02.670
+I will pass this too.
+
+86
+00:03:03.950 --> 00:03:04.990
+Now what I will do.
+
+87
+00:03:05.550 --> 00:03:06.790
+Now I will make a main function.
+
+88
+00:03:07.590 --> 00:03:09.590
+And as soon as I write main here.
+
+89
+00:03:12.460 --> 00:03:13.840
+It has done a lot for me.
+
+90
+00:03:14.100 --> 00:03:14.960
+Let's accept it.
+
+91
+00:03:15.620 --> 00:03:16.720
+Actually, this is a very basic thing.
+
+92
+00:03:16.720 --> 00:03:19.300
+Look, I ran an infinite while loop.
+
+93
+00:03:19.960 --> 00:03:21.000
+In which I said.
+
+94
+00:03:21.340 --> 00:03:22.900
+What do you do.
+
+95
+00:03:23.300 --> 00:03:24.920
+Press 1 for save password.
+
+96
+00:03:25.280 --> 00:03:26.400
+Press 2 for get password.
+
+97
+00:03:26.880 --> 00:03:28.320
+And press 3 for exit.
+
+98
+00:03:29.180 --> 00:03:30.860
+Note that we will match the choice with
+
+99
+00:03:30.860 --> 00:03:31.320
+the string.
+
+100
+00:03:31.640 --> 00:03:32.320
+Don't match with one number.
+
+101
+00:03:33.020 --> 00:03:33.740
+Because the input.
+
+102
+00:03:34.380 --> 00:03:36.420
+Its output always comes as a string.
+
+103
+00:03:37.160 --> 00:03:39.380
+Means the choice variable is a string variable.
+
+104
+00:03:39.740 --> 00:03:39.860
+Okay.
+
+105
+00:03:40.300 --> 00:03:40.980
+Keep this in mind.
+
+106
+00:03:41.600 --> 00:03:43.180
+If you put 1, the save password function
+
+107
+00:03:43.180 --> 00:03:43.400
+will work.
+
+108
+00:03:43.900 --> 00:03:45.200
+If you put 2, the get password function
+
+109
+00:03:45.200 --> 00:03:45.460
+will work.
+
+110
+00:03:45.460 --> 00:03:47.720
+If you put 3, the loop will break.
+
+111
+00:03:47.900 --> 00:03:48.760
+Your programme will exit.
+
+112
+00:03:49.880 --> 00:03:50.540
+Let's try.
+
+113
+00:03:54.140 --> 00:03:55.860
+And as soon as I run my programme.
+
+114
+00:03:56.620 --> 00:03:57.460
+It stops for a while.
+
+115
+00:03:57.580 --> 00:03:58.040
+Why does it stop?
+
+116
+00:03:58.100 --> 00:03:59.880
+Because some extensions are activated.
+
+117
+00:04:00.120 --> 00:04:00.580
+I don't know why.
+
+118
+00:04:01.140 --> 00:04:02.220
+By the way, my C disc is also
+
+119
+00:04:02.220 --> 00:04:02.700
+very full.
+
+120
+00:04:02.980 --> 00:04:03.560
+May be because of the C drive.
+
+121
+00:04:04.440 --> 00:04:05.080
+But why did this happen?
+
+122
+00:04:05.180 --> 00:04:05.680
+Why didn't it work?
+
+123
+00:04:05.920 --> 00:04:06.160
+Okay.
+
+124
+00:04:06.240 --> 00:04:06.820
+I have not run the main function.
+
+125
+00:04:08.320 --> 00:04:09.380
+I will have to run the main function
+
+126
+00:04:09.380 --> 00:04:10.140
+too.
+
+127
+00:04:11.060 --> 00:04:11.840
+Something like this.
+
+128
+00:04:13.400 --> 00:04:14.600
+And now as soon as I run.
+
+129
+00:04:14.780 --> 00:04:15.600
+You see, he is asking me.
+
+130
+00:04:15.740 --> 00:04:16.120
+What do you want?
+
+131
+00:04:16.120 --> 00:04:17.519
+Save password.
+
+132
+00:04:18.120 --> 00:04:19.019
+Get password.
+
+133
+00:04:19.220 --> 00:04:19.579
+Or exit.
+
+134
+00:04:20.480 --> 00:04:21.360
+Save password.
+
+135
+00:04:21.900 --> 00:04:22.800
+Get password.
+
+136
+00:04:23.040 --> 00:04:23.140
+Okay.
+
+137
+00:04:23.240 --> 00:04:24.260
+So I can run it like this.
+
+138
+00:04:24.640 --> 00:04:24.840
+Okay.
+
+139
+00:04:24.900 --> 00:04:25.780
+And if I do 3, it will exit.
+
+140
+00:04:25.980 --> 00:04:26.480
+See, it has exited.
+
+141
+00:04:26.800 --> 00:04:26.980
+Okay.
+
+142
+00:04:27.860 --> 00:04:28.800
+And when I go to exit.
+
+143
+00:04:29.120 --> 00:04:30.180
+At least say thank you.
+
+144
+00:04:32.240 --> 00:04:33.600
+He said exiting.
+
+145
+00:04:33.940 --> 00:04:34.200
+Okay.
+
+146
+00:04:34.700 --> 00:04:35.040
+This is fine.
+
+147
+00:04:35.180 --> 00:04:35.660
+Exiting is fine.
+
+148
+00:04:36.600 --> 00:04:37.080
+Exiting is better than thank you.
+
+149
+00:04:37.640 --> 00:04:38.740
+Now we have to write these two functions.
+
+150
+00:04:39.040 --> 00:04:40.280
+Save password and get password.
+
+151
+00:04:40.920 --> 00:04:41.900
+So save password is simple.
+
+152
+00:04:42.100 --> 00:04:43.540
+I will make a variable called website.
+
+153
+00:04:44.600 --> 00:04:45.220
+In which I will say.
+
+154
+00:04:45.220 --> 00:04:46.300
+Input.
+
+155
+00:04:46.820 --> 00:04:47.660
+Website name.
+
+156
+00:04:47.820 --> 00:04:49.140
+And after this I will make password.
+
+157
+00:04:51.240 --> 00:04:52.460
+And what will happen here?
+
+158
+00:04:52.980 --> 00:04:53.940
+Enter password.
+
+159
+00:04:54.140 --> 00:04:54.280
+Okay.
+
+160
+00:04:54.760 --> 00:04:55.660
+Not username.
+
+161
+00:04:55.940 --> 00:04:57.020
+I just have to save the password.
+
+162
+00:04:58.620 --> 00:05:00.120
+So AI please.
+
+163
+00:05:00.620 --> 00:05:01.300
+Let it be.
+
+164
+00:05:01.460 --> 00:05:02.260
+Don't give me suggestions like this.
+
+165
+00:05:02.900 --> 00:05:03.780
+I just have to save the website and
+
+166
+00:05:03.780 --> 00:05:04.260
+password.
+
+167
+00:05:05.600 --> 00:05:07.240
+Now I will open this file name.
+
+168
+00:05:08.340 --> 00:05:09.060
+In append mode.
+
+169
+00:05:09.480 --> 00:05:11.600
+And I will save the website and password.
+
+170
+00:05:13.200 --> 00:05:13.480
+Okay.
+
+171
+00:05:14.080 --> 00:05:15.320
+So how will I save?
+
+172
+00:05:15.540 --> 00:05:15.960
+I will tell you.
+
+173
+00:05:16.840 --> 00:05:20.880
+So here I will give colon and save.
+
+174
+00:05:21.200 --> 00:05:21.800
+Something like this.
+
+175
+00:05:21.960 --> 00:05:22.100
+Okay.
+
+176
+00:05:22.260 --> 00:05:23.200
+I will say colon.
+
+177
+00:05:23.620 --> 00:05:25.620
+F.write website colon password.
+
+178
+00:05:25.800 --> 00:05:26.480
+Now what do we do?
+
+179
+00:05:26.680 --> 00:05:28.040
+Let's just save the password and see.
+
+180
+00:05:28.760 --> 00:05:29.940
+Now it is asking enter website.
+
+181
+00:05:30.100 --> 00:05:31.320
+Assume fb.com.
+
+182
+00:05:31.420 --> 00:05:31.700
+Okay.
+
+183
+00:05:31.900 --> 00:05:32.660
+Password 56.
+
+184
+00:05:33.880 --> 00:05:34.100
+Okay.
+
+185
+00:05:34.460 --> 00:05:35.040
+Now after this.
+
+186
+00:05:35.460 --> 00:05:36.600
+Assume I take another website.
+
+187
+00:05:36.940 --> 00:05:37.900
+I do one again.
+
+188
+00:05:38.240 --> 00:05:39.400
+I mean I want to save the password.
+
+189
+00:05:39.880 --> 00:05:41.600
+Assume cwh.com.
+
+190
+00:05:41.900 --> 00:05:42.680
+Password 777.
+
+191
+00:05:43.400 --> 00:05:43.920
+Okay.
+
+192
+00:05:44.660 --> 00:05:46.680
+And you will see that the password is
+
+193
+00:05:46.680 --> 00:05:47.280
+saved like this.
+
+194
+00:05:47.760 --> 00:05:47.900
+Okay.
+
+195
+00:05:48.680 --> 00:05:49.160
+Very good.
+
+196
+00:05:49.300 --> 00:05:49.820
+Very good.
+
+197
+00:05:50.780 --> 00:05:52.320
+So you gave the name of the website.
+
+198
+00:05:52.600 --> 00:05:55.880
+You gave the name of your website.
+
+199
+00:05:56.420 --> 00:05:57.180
+And you gave the password.
+
+200
+00:05:57.660 --> 00:05:58.640
+And you will get your password.
+
+201
+00:06:00.540 --> 00:06:03.260
+Now one thing is bothering me here.
+
+202
+00:06:03.380 --> 00:06:04.080
+And do you know what is bothering me?
+
+203
+00:06:04.660 --> 00:06:06.640
+If my password is colon, then there will
+
+204
+00:06:06.640 --> 00:06:06.900
+be a problem.
+
+205
+00:06:07.260 --> 00:06:08.660
+Or if my website is colon for any
+
+206
+00:06:08.660 --> 00:06:09.080
+reason.
+
+207
+00:06:09.680 --> 00:06:10.640
+Or if there is a delimiter like this.
+
+208
+00:06:10.760 --> 00:06:11.540
+Then there will be a problem.
+
+209
+00:06:11.540 --> 00:06:13.500
+That's why I will make my delimiter a
+
+210
+00:06:13.500 --> 00:06:13.980
+little unique.
+
+211
+00:06:14.880 --> 00:06:15.960
+What is the meaning of delimiter?
+
+212
+00:06:16.040 --> 00:06:20.940
+Delimiter means that character which will separate my
+
+213
+00:06:20.940 --> 00:06:23.480
+website and my password.
+
+214
+00:06:23.840 --> 00:06:23.960
+Okay.
+
+215
+00:06:24.280 --> 00:06:27.720
+So I will make my delimiter like this.
+
+216
+00:06:27.780 --> 00:06:28.040
+Okay.
+
+217
+00:06:28.640 --> 00:06:30.760
+This much part will never happen in my
+
+218
+00:06:30.760 --> 00:06:32.240
+website and my password.
+
+219
+00:06:32.460 --> 00:06:32.680
+Okay.
+
+220
+00:06:33.780 --> 00:06:35.340
+Now I press tab and accept it and
+
+221
+00:06:35.340 --> 00:06:36.100
+see what it has done.
+
+222
+00:06:36.240 --> 00:06:37.300
+It is saying that while doing get password,
+
+223
+00:06:37.800 --> 00:06:38.760
+tell me which website it is.
+
+224
+00:06:38.760 --> 00:06:40.120
+Then it is saying that I will open
+
+225
+00:06:40.120 --> 00:06:41.420
+the file name in read mode.
+
+226
+00:06:41.780 --> 00:06:42.660
+For line in F.
+
+227
+00:06:43.460 --> 00:06:44.420
+If website in line.
+
+228
+00:06:44.580 --> 00:06:44.800
+Okay.
+
+229
+00:06:45.780 --> 00:06:46.360
+Print line.
+
+230
+00:06:47.300 --> 00:06:47.640
+Break.
+
+231
+00:06:47.820 --> 00:06:47.980
+Okay.
+
+232
+00:06:48.260 --> 00:06:49.880
+But I don't want to print the line.
+
+233
+00:06:50.640 --> 00:06:53.160
+I want to copy the password of the
+
+234
+00:06:53.160 --> 00:06:53.260
+line.
+
+235
+00:06:54.020 --> 00:06:54.900
+So let's do this much now.
+
+236
+00:06:55.460 --> 00:06:56.200
+And after that we will see.
+
+237
+00:06:56.360 --> 00:06:57.100
+So now what I will do is I
+
+238
+00:06:57.100 --> 00:06:57.500
+will run this programme.
+
+239
+00:06:58.440 --> 00:06:59.360
+And I will do get password.
+
+240
+00:07:00.260 --> 00:07:01.840
+And if I will write fb.com, then
+
+241
+00:07:01.840 --> 00:07:02.640
+it should tell me the password.
+
+242
+00:07:03.280 --> 00:07:03.960
+This is the password.
+
+243
+00:07:04.160 --> 00:07:04.320
+Okay.
+
+244
+00:07:04.380 --> 00:07:06.640
+Fb.com colon 56.
+
+245
+00:07:06.860 --> 00:07:07.040
+Okay.
+
+246
+00:07:07.040 --> 00:07:07.140
+Okay.
+
+247
+00:07:07.700 --> 00:07:09.400
+I have also changed the delimiter here.
+
+248
+00:07:09.560 --> 00:07:10.840
+So I will delete this file and make
+
+249
+00:07:10.840 --> 00:07:11.580
+the password again.
+
+250
+00:07:12.960 --> 00:07:14.880
+And if I will make it now, the
+
+251
+00:07:14.880 --> 00:07:15.520
+password will be saved like this.
+
+252
+00:07:15.740 --> 00:07:17.000
+And you will say that why did you
+
+253
+00:07:17.000 --> 00:07:18.060
+put this between the website and the password.
+
+254
+00:07:18.580 --> 00:07:20.060
+Because this is a unique character.
+
+255
+00:07:20.220 --> 00:07:22.380
+I will never get this character in any
+
+256
+00:07:22.380 --> 00:07:22.800
+password.
+
+257
+00:07:23.260 --> 00:07:24.000
+It would be wrong to say this.
+
+258
+00:07:24.200 --> 00:07:25.160
+You will never get it in any password.
+
+259
+00:07:25.940 --> 00:07:27.680
+But there is a very, very, very low
+
+260
+00:07:27.680 --> 00:07:28.380
+chance that you will get it in any
+
+261
+00:07:28.380 --> 00:07:28.680
+password.
+
+262
+00:07:29.780 --> 00:07:31.180
+Maybe someone will use this character in their
+
+263
+00:07:31.180 --> 00:07:31.440
+password.
+
+264
+00:07:32.000 --> 00:07:32.700
+I will not do it.
+
+265
+00:07:32.740 --> 00:07:33.700
+This is my password manager.
+
+266
+00:07:33.780 --> 00:07:34.500
+So I will not do it.
+
+267
+00:07:34.520 --> 00:07:34.680
+Okay.
+
+268
+00:07:34.680 --> 00:07:35.080
+Okay.
+
+269
+00:07:35.080 --> 00:07:36.060
+If you want, you can make this character
+
+270
+00:07:36.060 --> 00:07:36.760
+more complex.
+
+271
+00:07:37.700 --> 00:07:38.460
+But this is enough.
+
+272
+00:07:39.060 --> 00:07:39.200
+Okay.
+
+273
+00:07:39.640 --> 00:07:40.180
+And what will be the maximum?
+
+274
+00:07:40.740 --> 00:07:40.940
+You will not be able to log in
+
+275
+00:07:40.940 --> 00:07:43.020
+to your website by using this password manager.
+
+276
+00:07:43.560 --> 00:07:46.000
+And its probability is also very low.
+
+277
+00:07:46.140 --> 00:07:48.740
+0.0000001%. Okay.
+
+278
+00:07:49.400 --> 00:07:50.740
+This character will neither be on the website
+
+279
+00:07:50.740 --> 00:07:51.380
+nor on the password.
+
+280
+00:07:51.700 --> 00:07:52.840
+If you think it will be, then you
+
+281
+00:07:52.840 --> 00:07:53.940
+make this character more complex.
+
+282
+00:07:54.380 --> 00:07:54.540
+Okay.
+
+283
+00:07:55.120 --> 00:07:55.380
+Okay.
+
+284
+00:07:56.740 --> 00:07:58.100
+Now let's save the password.
+
+285
+00:07:58.320 --> 00:07:59.820
+Here we write harry.com.
+
+286
+00:08:01.660 --> 00:08:02.580
+56 password.
+
+287
+00:08:02.580 --> 00:08:04.180
+I wrote harry instead of harry.
+
+288
+00:08:04.220 --> 00:08:04.940
+But ignore that.
+
+289
+00:08:05.820 --> 00:08:07.440
+Now after this, I will save the password
+
+290
+00:08:07.440 --> 00:08:07.680
+here again.
+
+291
+00:08:07.800 --> 00:08:09.640
+Then I will write cwh.com.
+
+292
+00:08:10.600 --> 00:08:11.520
+Cwh password.
+
+293
+00:08:11.740 --> 00:08:11.900
+Okay.
+
+294
+00:08:12.000 --> 00:08:12.420
+Now look here.
+
+295
+00:08:12.920 --> 00:08:13.060
+Okay.
+
+296
+00:08:13.200 --> 00:08:14.280
+This is how your password is saved.
+
+297
+00:08:14.940 --> 00:08:16.400
+Now when you retrieve the password.
+
+298
+00:08:17.440 --> 00:08:18.460
+So what will you do now?
+
+299
+00:08:18.760 --> 00:08:19.000
+Here.
+
+300
+00:08:19.360 --> 00:08:19.780
+Where did it go?
+
+301
+00:08:20.000 --> 00:08:20.220
+Yes.
+
+302
+00:08:20.860 --> 00:08:21.780
+Here you will say.
+
+303
+00:08:22.320 --> 00:08:23.360
+If website in line.
+
+304
+00:08:23.900 --> 00:08:25.540
+Password is equal to.
+
+305
+00:08:25.600 --> 00:08:26.300
+Absolutely right.
+
+306
+00:08:26.420 --> 00:08:26.640
+Line.
+
+307
+00:08:26.820 --> 00:08:27.220
+Strip.
+
+308
+00:08:27.960 --> 00:08:28.520
+And here.
+
+309
+00:08:29.060 --> 00:08:29.800
+Piper clip.
+
+310
+00:08:30.000 --> 00:08:30.280
+Copy.
+
+311
+00:08:30.400 --> 00:08:30.660
+Password.
+
+312
+00:08:30.660 --> 00:08:31.140
+Piper clip.
+
+313
+00:08:31.320 --> 00:08:31.539
+Copy.
+
+314
+00:08:34.620 --> 00:08:35.059
+Good.
+
+315
+00:08:36.000 --> 00:08:37.120
+Now what do we do here?
+
+316
+00:08:37.220 --> 00:08:37.659
+Remove the print line.
+
+317
+00:08:38.179 --> 00:08:38.679
+Remove the print line.
+
+318
+00:08:39.020 --> 00:08:39.659
+Let's keep it for now.
+
+319
+00:08:39.780 --> 00:08:40.220
+We will remove it later.
+
+320
+00:08:40.440 --> 00:08:40.600
+Okay.
+
+321
+00:08:40.659 --> 00:08:41.620
+When our programme will start running.
+
+322
+00:08:42.280 --> 00:08:43.920
+So I run it again here.
+
+323
+00:08:44.780 --> 00:08:45.220
+And.
+
+324
+00:08:46.520 --> 00:08:47.740
+He is asking me what do you want
+
+325
+00:08:47.740 --> 00:08:47.840
+to do.
+
+326
+00:08:48.060 --> 00:08:48.340
+Okay.
+
+327
+00:08:48.640 --> 00:08:49.460
+Save password.
+
+328
+00:08:50.620 --> 00:08:51.900
+Harry.com's password.
+
+329
+00:08:52.080 --> 00:08:52.420
+Harry.
+
+330
+00:08:52.600 --> 00:08:52.760
+Okay.
+
+331
+00:08:52.800 --> 00:08:53.540
+Now I want to get the password.
+
+332
+00:08:54.140 --> 00:08:54.340
+Okay.
+
+333
+00:08:55.160 --> 00:08:56.080
+Let's say I want to get the password.
+
+334
+00:08:56.940 --> 00:08:57.800
+Cwh.com.
+
+335
+00:08:57.900 --> 00:08:58.480
+Because it is cwh.
+
+336
+00:08:59.720 --> 00:09:00.640
+Cwh.com's password.
+
+337
+00:09:00.640 --> 00:09:01.120
+And here.
+
+338
+00:09:03.040 --> 00:09:03.560
+Oops.
+
+339
+00:09:04.460 --> 00:09:04.860
+I think.
+
+340
+00:09:05.060 --> 00:09:05.440
+I did something wrong.
+
+341
+00:09:05.900 --> 00:09:06.120
+I.
+
+342
+00:09:07.720 --> 00:09:08.840
+Why didn't I get it printed?
+
+343
+00:09:09.660 --> 00:09:10.520
+Cwh.com.
+
+344
+00:09:10.620 --> 00:09:11.100
+When I wrote it.
+
+345
+00:09:12.300 --> 00:09:12.920
+So I will say.
+
+346
+00:09:13.260 --> 00:09:13.920
+Get password.
+
+347
+00:09:15.700 --> 00:09:16.740
+Cwh.com.
+
+348
+00:09:18.420 --> 00:09:19.080
+Let me see.
+
+349
+00:09:19.240 --> 00:09:19.960
+The copy is done.
+
+350
+00:09:20.000 --> 00:09:21.240
+But why didn't this print line happen?
+
+351
+00:09:22.040 --> 00:09:23.680
+Why didn't the print line happen?
+
+352
+00:09:24.820 --> 00:09:26.020
+For website in line.
+
+353
+00:09:26.160 --> 00:09:26.520
+I also did the print line.
+
+354
+00:09:28.220 --> 00:09:29.360
+Now that's a problem.
+
+355
+00:09:29.520 --> 00:09:29.900
+I will have to see.
+
+356
+00:09:30.040 --> 00:09:30.520
+Why did this happen?
+
+357
+00:09:30.520 --> 00:09:30.620
+I will see.
+
+358
+00:09:33.080 --> 00:09:34.360
+Cwh.com.
+
+359
+00:09:34.500 --> 00:09:34.880
+Okay.
+
+360
+00:10:29.450 --> 00:10:32.410
+harry.com and password copy to clipboard.
+
+361
+00:10:32.750 --> 00:10:33.810
+Let's see what the password is.
+
+362
+00:10:35.190 --> 00:10:36.130
+Let's paste it here.
+
+363
+00:10:36.330 --> 00:10:37.230
+It's copied to the clipboard.
+
+364
+00:10:37.930 --> 00:10:38.710
+It's harry's password.
+
+365
+00:10:38.950 --> 00:10:40.230
+Let's see if it's harry's password or harry
+
+366
+00:10:40.230 --> 00:10:41.890
+.com's. Yes, it's harry's password.
+
+367
+00:10:42.610 --> 00:10:45.510
+So this was our password manager which you
+
+368
+00:10:45.510 --> 00:10:46.370
+can actually use.
+
+369
+00:10:46.630 --> 00:10:49.410
+Before I conclude this video, I want to
+
+370
+00:10:49.410 --> 00:10:51.150
+give you some warnings.
+
+371
+00:10:51.870 --> 00:10:52.830
+If you want to use this password manager
+
+372
+00:10:52.830 --> 00:10:58.010
+in the real world, you have to be
+
+373
+00:10:58.010 --> 00:10:59.290
+careful about one thing.
+
+374
+00:10:59.830 --> 00:11:01.490
+You should not lose this password.txt file.
+
+375
+00:11:03.530 --> 00:11:06.290
+There is a concept of encryption which you
+
+376
+00:11:06.290 --> 00:11:06.910
+can read about.
+
+377
+00:11:07.290 --> 00:11:11.150
+In that, this 56 will be encrypted and
+
+378
+00:11:11.150 --> 00:11:13.290
+a master key of that encryption will be
+
+379
+00:11:13.290 --> 00:11:13.390
+there.
+
+380
+00:11:13.970 --> 00:11:15.130
+But in that case, you have to save
+
+381
+00:11:15.130 --> 00:11:17.050
+that master key as well.
+
+382
+00:11:17.150 --> 00:11:22.750
+Let's say your master password is united harry
+
+383
+00:11:22.750 --> 00:11:23.090
+harry.
+
+384
+00:11:23.930 --> 00:11:27.550
+So whenever you get your password, you have
+
+385
+00:11:27.550 --> 00:11:29.510
+to write united harry harry, whatever your password
+
+386
+00:11:29.510 --> 00:11:30.250
+is.
+
+387
+00:11:30.310 --> 00:11:31.090
+Then it will be decrypted.
+
+388
+00:11:31.690 --> 00:11:33.550
+Even if the password.txt file is leaked,
+
+389
+00:11:33.690 --> 00:11:34.330
+there is no problem.
+
+390
+00:11:35.110 --> 00:11:37.070
+But this is a basic password manager and
+
+391
+00:11:37.070 --> 00:11:38.730
+I have used it personally a long time
+
+392
+00:11:38.730 --> 00:11:38.910
+ago.
+
+393
+00:11:39.230 --> 00:11:41.950
+And if your computer does not use anyone
+
+394
+00:11:41.950 --> 00:11:43.210
+other than you, and a lot of normal
+
+395
+00:11:43.210 --> 00:11:46.990
+people want to use the things that they
+
+396
+00:11:46.990 --> 00:11:47.590
+have made themselves.
+
+397
+00:11:47.810 --> 00:11:49.650
+And this is a classic example of that.
+
+398
+00:11:49.650 --> 00:11:52.090
+I hope you enjoyed making this project.
+
+399
+00:11:52.530 --> 00:11:53.950
+And I hope you will use it.
+
+400
+00:11:54.250 --> 00:11:56.290
+You can extend its functionality.
+
+401
+00:11:56.750 --> 00:11:57.730
+Sky is the limit.
+
+402
+00:11:58.030 --> 00:12:00.070
+You just need to understand how it works.
+
+403
+00:12:00.470 --> 00:12:01.670
+Which I hope you are getting.
+
+404
+00:12:02.030 --> 00:12:03.590
+Thank you so much guys for watching this
+
+405
+00:12:03.590 --> 00:12:03.850
+video.
+
+406
+00:12:04.090 --> 00:12:05.630
+And I will see you in the next
+
+407
+00:12:05.630 --> 00:12:05.970
+one.
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+==================================================================================
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
