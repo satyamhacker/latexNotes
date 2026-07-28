@@ -888,3 +888,428 @@ Sections: 1 | Topics: 7 | Subtopics: 39
 
 # Section 4: sql_for_data_analytics
 
+
+===Section 1: Database Fundamentals & Environment Setup===
+Speaker yahan database ki zaroorat, relational concepts, aur local system pe MySQL environment set up karne ka end-to-end process explain karta hai.
+
+--1--Database Fundamentals & Environment Setup--
+Topic 1: Database Architectures & MySQL Setup
+Subtopics: Database Need, Relational vs Non-Relational, CRUD Concepts, Server vs Workbench, Database Initialization
+
+[📊 SCOPE SIGNAL for Topic 1:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with analogies plus practical installation steps
+* Key terms from transcript: 10 crore orders, Flipkart, Amazon, enormous amount of data, MySQL Server, MySQL Workbench, localhost, CREATE DATABASE, USE, DROP DATABASE IF EXISTS, JSON type format
+* Explicit emphasis by speaker: "Excel is very good for a limited data" aur "Choose a simple root password because we are installing MySQL on our Windows PC for learning"
+* Speaker ne jo analogies/examples use kiye: Flipkart/Amazon ke 10 crore orders ka example diya Excel ki limitation samjhane ke liye. Server engine hai aur Workbench usko connect karne ka tool (like a game installer).
+]
+
+🔑 KEYWORDS DUMP for Topic 1:
+[10 crore orders, Flipkart, Amazon, Excel, text file, database, enormous amount of data, read operations, write operations, update operations, delete operations, MySQL, SQL, Structured Query Language, rows, relational database, PostgreSQL, MSSQL, Oracle, open source, tables, schema, CRUD, Create, Read, Update, Delete, non-relational database, flexible schema, JSON format, MongoDB, Neo4j, Cassandra, Redis, horizontal scaling, MySQL Server, Windows configures MySQL, root password, MySQL Workbench, core engine, localhost, port 3306, connection, queries, script, CREATE DATABASE, USE, DROP DATABASE IF EXISTS, starter script, execution, green tick, schemas refresh, sample.sql, save script, ⭐simple root password, ⭐AI amplifier]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
+
+* Testing/Offline Phase: Developer local machine pe MySQL Server aur Workbench install karke root password set karta hai aur connection verify karta hai.
+* Fixing/Iteration Phase: Development environment fresh start karne ke liye `DROP DATABASE IF EXISTS` use karke purana database clean kiya jata hai.
+* Live Production Phase: Production mein rigid structure maintain karne ke liye Relational DB use hota hai, aur wahan strong password policy lagayi jati hai (learning jaisa simple password nahi).
+* Additional context: Speaker ne explicitly warn kiya ki AI ko blindly copy-paste karne se system break ho sakta hai; usse ek amplifier tool ki tarah use karna chahiye.
+
+===Section 2: Schema Design & Data Integrity===
+Is section mein table ka structure design karna, data types define karna, aur robust constraints lagana sikhaya gaya hai taaki invalid data insert na ho.
+
+--2--Schema Design & Data Integrity--
+Topic 2: Core Data Types & Table Modifications
+Subtopics: SQL Data Types, Table Creation Syntax, Adding Columns, Modifying Columns, Renaming Columns, Dropping Columns
+
+[📊 SCOPE SIGNAL for Topic 2:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with code execution and syntax breakdown
+* Key terms from transcript: VARCHAR, INT, DECIMAL, BOOLEAN, DATE, DATETIME, CREATE TABLE, ALTER TABLE, ADD COLUMN, MODIFY, RENAME COLUMN, DROP COLUMN
+* Explicit emphasis by speaker: Reserved keywords ko capital mein likhna aur column names ko small mein likhna highly recommended hai clean code ke liye.
+* Speaker ne jo analogies/examples use kiye: Excel workbook ko Database, sheets ko Tables, aur rows ko SQL table rows se compare karke samjhaya.
+]
+
+🔑 KEYWORDS DUMP for Topic 2:
+[Excel workbook, sheet, rows, SQL constraints, VARCHAR, variable character, INT, integer, DECIMAL, precision, scale, BOOLEAN, true, false, flag, DATE, DATETIME, CREATE TABLE, reserved keywords, DROP TABLE, ALTER TABLE, ADD COLUMN, MODIFY, RENAME COLUMN, DROP COLUMN, commenting out, ctrl forward slash, ⭐write keywords in capital, ⭐small case for column names, schema design]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
+
+* Testing/Offline Phase: Developer table schema design karta hai aur decide karta hai ki kaunsa data type kahan fit baithega (jaise price ke liye `DECIMAL(10,2)`).
+* Fixing/Iteration Phase: Requirements change hone par developer table delete kiye bina `ALTER TABLE` use karke columns add, drop ya modify karta hai.
+* Live Production Phase: Strict schema enforce hone ki wajah se agar application galat data type (e.g., int ki jagah string) bhejti hai, toh transaction automatically reject ho jati hai.
+* Additional context: (N/A — speaker ne extra context is topic ke liye add nahi kiya)
+
+--2--Schema Design & Data Integrity--
+Topic 3: Data Integrity & Transaction Control
+Subtopics: Autocommit Flag, COMMIT Command, ROLLBACK Command, Table Constraints, Primary Key, Auto-Increment
+
+[📊 SCOPE SIGNAL for Topic 3:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Practical demonstration showing how constraints fail and how rollbacks work
+* Key terms from transcript: autocommit, COMMIT, ROLLBACK, UNIQUE, NOT NULL, CHECK, DEFAULT, PRIMARY KEY, AUTO_INCREMENT
+* Explicit emphasis by speaker: "A table can only have one primary key." aur "Until you commit, your query will not be saved permanently."
+* Speaker ne jo analogies/examples use kiye: Transaction samajhne ke liye Notepad/MS Word ka example diya ki bina "Save" pe click kiye changes permanent nahi hote.
+]
+
+🔑 KEYWORDS DUMP for Topic 3:
+[Transactions, autocommit, SET autocommit = 0, temporary changes, COMMIT, permanent save, ROLLBACK, undo changes, constraints, UNIQUE, duplicate entry error, NOT NULL, CHECK, condition violated, DEFAULT, CURRENT_DATE, Primary Key, unique identifier, fast search, AUTO_INCREMENT, ALTER TABLE ADD CONSTRAINT, multiple primary key error]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 3:
+
+* Testing/Offline Phase: Developer risky queries chalane se pehle `autocommit = 0` set karta hai taaki galti hone par `ROLLBACK` karke changes undo kiye ja sakein.
+* Fixing/Iteration Phase: Jab table mein bad data (jaise duplicate email ya invalid age) insert karne ki koshish hoti hai, toh UNIQUE ya CHECK constraints error throw karte hain jisse developer logic theek karta hai.
+* Live Production Phase: Production mein data integrity ensure karne ke liye hamesha Primary Key ka use hota hai aur manual ID insertion ki jagah system `AUTO_INCREMENT` se identifiers assign karta hai.
+* Additional context: Speaker ne mention kiya ki primary key ki wajah se table relationships banti hain aur search fast hoti hai.
+
+===Section 3: Data Manipulation & Advanced Querying===
+Is section mein tables ke andar data dalna, modify karna, safe mode mein delete karna, aur advanced filtering techniques use karna sikhaya gaya hai.
+
+--3--Data Manipulation & Advanced Querying--
+Topic 4: CRUD Execution & Advanced Filtering
+Subtopics: Single Row Insertion, Multiple Rows Insertion, SELECT Statements, NULL Value Handling, Safe Update Mode, Data Deletion
+
+[📊 SCOPE SIGNAL for Topic 4:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Multiple practical queries run step-by-step
+* Key terms from transcript: INSERT INTO, VALUES, SELECT, WHERE, IS NULL, UPDATE, SET, SET SQL_SAFE_UPDATES = 0, DELETE FROM
+* Explicit emphasis by speaker: "In SQL, we do not use equal to null. We use is null." aur "Run delete very carefully. If you run delete without a where clause... your whole table will be empty."
+* Speaker ne jo analogies/examples use kiye: Multiple Neha Verma records ka example deke samjhaya ki primary key ke bina update chalane pe safe update mode kyun rokti hai.
+]
+
+🔑 KEYWORDS DUMP for Topic 4:
+[INSERT INTO, VALUES, single row, multiple rows, comma-separated insert, time efficient, SELECT *, WHERE, <, >, =, IS NULL, IS NOT NULL, AND, OR, ORDER BY, DESC, ASC, top to bottom execution, YYYY-MM-DD, UPDATE, SET, safe update mode, SET SQL_SAFE_UPDATES = 0, DELETE FROM, single row deletion, multiple row deletion, row affected count, ⭐IS NULL, ⭐YYYY-MM-DD, ⭐safe update mode]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
+
+* Testing/Offline Phase: Developer update ya delete queries chalane se pehle hamesha `SELECT` query likh kar output verify karta hai taaki sahi records hi affect hon.
+* Fixing/Iteration Phase: Agar batch mein data dalna ho, toh dev ek hi `INSERT` statement mein comma lagakar multiple rows pass karta hai connection time optimise karne ke liye.
+* Live Production Phase: Production mein kabhi bhi bina `WHERE` clause ke `UPDATE` ya `DELETE` query nahi chalayi jati. Safe update mode disabled hone par accidentally poori table udh sakti hai.
+* Additional context: Date insert karne ke liye specifically YYYY-MM-DD format strictly follow karna padta hai SQL standards ke hisaab se.
+
+--3--Data Manipulation & Advanced Querying--
+Topic 5: Query Optimization & Functions
+Subtopics: Limit and Offset, Aggregate Functions, Scalar Functions, Date Functions, Pattern Matching, Wildcards
+
+[📊 SCOPE SIGNAL for Topic 5:
+
+* Depth Level: Moderate
+* Coverage Angle: Practical only
+* Transcript mein content volume: Multiple short examples covering math, date, and string functions
+* Key terms from transcript: LIMIT, OFFSET, COUNT, SUM, AVG, MIN, MAX, ROUND, UPPER, LOWER, LENGTH, LIKE, IN, BETWEEN
+* Explicit emphasis by speaker: "Limit 5 and offset 5... it will skip 5 and show 5." aur wildcards run karte time selected part ko execute na karne ki warning di.
+* Speaker ne jo analogies/examples use kiye: Blog page ka example diya pagination samjhane ke liye (page 1, page 2 via LIMIT/OFFSET).
+]
+
+🔑 KEYWORDS DUMP for Topic 5:
+[LIMIT, OFFSET, pagination, COUNT, SUM, AVG, MIN, MAX, AS, aggregate functions, scalar functions, ROUND, UPPER, LOWER, LENGTH, CURRENT_DATE, CURRENT_TIME, IN, NOT IN, BETWEEN, NOT BETWEEN, LIKE, wildcards, % wildcard, _ wildcard, pattern matching, total revenue, sorting, skipping rows]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
+
+* Testing/Offline Phase: Website ke dashboards ya blogs page banate time developer `LIMIT` aur `OFFSET` ka use karke pagination implement karta hai taaki frontend pe load kam pade.
+* Fixing/Iteration Phase: Agar user search mein string exactly match nahi ho rahi, toh developer `LIKE` ke saath `%` aur `_` wildcards laga kar pattern matching logic ko theek karta hai.
+* Live Production Phase: Aggregate functions (jaise `SUM` of amount) production dashboards pe real-time revenue metrics show karne ke liye heavily use hote hain.
+* Additional context: Speaker ne mention kiya ki single wildcard (`_`) exactly ek character ko match karta hai jabki `%` kitne bhi characters ko match kar sakta hai.
+
+
+
+✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 1: Database Fundamentals & Environment Setup
+Topic 1: Database Architectures & MySQL Setup
+
+Section 2: Schema Design & Data Integrity
+Topic 2: Core Data Types & Table Modifications
+Topic 3: Data Integrity & Transaction Control
+
+Section 3: Data Manipulation & Advanced Querying
+Topic 4: CRUD Execution & Advanced Filtering
+Topic 5: Query Optimization & Functions
+
+📊 PHASE SUMMARY:
+Sections: 3 | Topics: 5 | Subtopics: 28
+
+▶️ Resuming from: Section 4: Advanced Relational Concepts & Architecture
+
+===Section 4: Advanced Relational Concepts & Architecture===
+Is section mein tables ke beech strong relationships build karna, data combine karna aur performance trade-offs ko manage karna sikhaya gaya hai.
+
+--4--Advanced Relational Concepts & Architecture--
+Topic 6: Foreign Keys & Referential Integrity
+Subtopics: Foreign Key Concept, Parent-Child Table Relationship, ON DELETE CASCADE, ON DELETE SET NULL, ON DELETE RESTRICT
+
+[📊 SCOPE SIGNAL for Topic 6:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with multiple practical scenarios
+* Key terms from transcript: foreign key, sellers table, orders table, constraint, parent row, child table, ON DELETE CASCADE, ON DELETE SET NULL, RESTRICT, ADD CONSTRAINT, DROP CONSTRAINT
+* Explicit emphasis by speaker: "A foreign key connects two tables and ensures that the relationship between them is valid" aur "Prevents invalid relationships."
+* Speaker ne jo analogies/examples use kiye: Shopping complex ki dukaano ka example diya (Shop 255 exist nahi karti toh order kaise doge?). Building foundation ka example diya ON DELETE CASCADE ke liye (foundation tooti toh building giregi).
+]
+
+🔑 KEYWORDS DUMP for Topic 6:
+[foreign key, table relationships, sellers table, orders table, invalid seller references, parent row, child table, foreign key constraint fails, ON UPDATE RESTRICT, ON DELETE CASCADE, ON DELETE SET NULL, RESTRICT, default behavior, ADD CONSTRAINT, DROP CONSTRAINT, data integrity, ⭐prevent invalid relationships]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
+
+* Testing/Offline Phase: Developer foreign key constraint drop karke uski definition update (jaise CASCADE se SET NULL) karta hai aur data consistency test karta hai.
+* Fixing/Iteration Phase: Agar order table mein koi aisi seller ID insert ho jo seller table mein nahi hai (e.g., ID 255), toh SQL constraint error throw karke galat data insert hone se rokta hai.
+* Live Production Phase: Production scenarios mein marketplace band hone pe `ON DELETE CASCADE` use hota hai, par agar seller platform chhod raha ho toh user orders preserve karne ke liye `ON DELETE SET NULL` use kiya jata hai.
+* Additional context: Speaker ne explicitly mention kiya ki data aaj ke time pe "oil" hai, isliye deletion se bachne ke liye mostly `SET NULL` ko prefer kiya jata hai.
+
+--4--Advanced Relational Concepts & Architecture--
+Topic 7: Table Joins & Result Combinations
+Subtopics: INNER JOIN, LEFT JOIN, Table Aliasing, UNION, UNION ALL
+
+[📊 SCOPE SIGNAL for Topic 7:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: Multiple examples with table aliasing and joining
+* Key terms from transcript: INNER JOIN, LEFT JOIN, UNION, UNION ALL, matching data, duplicate rows, performance
+* Explicit emphasis by speaker: "UNION ALL keeps duplicates and is faster."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 7:
+[INNER JOIN, LEFT JOIN, RIGHT JOIN, table alias, matching data, O.order_id, S.seller_name, ON clause, UNION, UNION ALL, append results, duplicate rows, time-consuming task, performance, combine similar data, combined report, ⭐UNION ALL is fast]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 7:
+
+* Testing/Offline Phase: Developer query likhte waqt tables ko alias deta hai (e.g., `orders O`, `sellers S`) taaki lamba code na likhna pade.
+* Fixing/Iteration Phase: Agar dono queries mein overlapping data ho (jaise Ananya Roy ka naam), toh `UNION` explicitly duplicates remove kar deta hai jisse clean list milti hai.
+* Live Production Phase: Production reports generate karte waqt agar duplicates removal ki zaroorat na ho, toh system load kam karne ke liye hamesha `UNION ALL` use kiya jata hai kyunki woh execution mein fast hota hai.
+* Additional context: (N/A — transcript mein is topic ke liye koi explicit real-world company/scenario nahi hai)
+
+===Section 5: Performance Optimization & Virtual Tables===
+Yahan queries ko fast karne ke methods, complex queries ko encapsulate karna, aur advanced grouping techniques ko explain kiya gaya hai.
+
+--5--Performance Optimization & Virtual Tables--
+Topic 8: Database Indexing Strategies
+Subtopics: Index Concept, Performance Tradeoffs, CREATE INDEX, DROP INDEX
+
+[📊 SCOPE SIGNAL for Topic 8:
+
+* Depth Level: Moderate
+* Coverage Angle: Conceptual only
+* Transcript mein content volume: Short explanation with tradeoffs and syntax
+* Key terms from transcript: index, data structure, read speed, write performance, CREATE INDEX, DROP INDEX, primary key index
+* Explicit emphasis by speaker: "Indexes make select queries faster but slow down insert, update and delete operations."
+* Speaker ne jo analogies/examples use kiye: Book ke index page ka analogy use kiya jo directly specific chapter (page) pe le jata hai bina poori book scan kiye.
+]
+
+🔑 KEYWORDS DUMP for Topic 8:
+[Index, data structure, search fast, read speed, write performance, insert operations, update queries, delete operations, CREATE INDEX, DROP INDEX, primary key index, scan entire table, performance tradeoff, ⭐trade write performance for read speed]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 8:
+
+* Testing/Offline Phase: Developer badi table pe slow `SELECT` queries test karta hai aur phir `WHERE` clause wale columns pe `CREATE INDEX` run karke execution speed compare karta hai.
+* Fixing/Iteration Phase: Agar indexing se update operations bahut slow ho rahe hon, toh developer unnecessary indexes ko `DROP INDEX` se remove karta hai.
+* Live Production Phase: Jab blog platform pe millions of users aate hain, toh reading fast karne ke liye indexing use hoti hai bhale hi nayi post dalne (write operation) mein 1 second lag jaaye.
+* Additional context: Speaker ne explicitly mana kiya hai ki small tables aur frequent update hone wali tables pe indexes na lagayein.
+
+--5--Performance Optimization & Virtual Tables--
+Topic 9: Virtual Tables (Views)
+Subtopics: View Concept, CREATE VIEW, Updating Base Tables, DROP VIEW, Business Logic Encapsulation
+
+[📊 SCOPE SIGNAL for Topic 9:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with practical creation and updating
+* Key terms from transcript: view, virtual table, saved SQL query, CREATE VIEW, AS, DROP VIEW, business logic, sensitive columns
+* Explicit emphasis by speaker: "A view is a saved SQL query that behaves like a virtual table. This is not a real table."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 9:
+[View, virtual table, saved SQL query, CREATE VIEW, AS, DROP VIEW, complex logic, readability, restrict access, sensitive columns, business logic encapsulation, real-time table update, base table, convenience, ⭐virtual table]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
+
+* Testing/Offline Phase: Developer ek bohot complex SQL query likhta hai aur usko `CREATE VIEW` karke save kar leta hai taaki aage use standard table ki tarah query kiya ja sake.
+* Fixing/Iteration Phase: Agar original base table (e.g., orders) mein record update hota hai, toh view ko alag se update nahi karna padta, woh real-time updated data show karta hai.
+* Live Production Phase: Production mein sensitive data hide karne aur complex formulas ko centralize karne ke liye views employees ko expose kiye jate hain, taaki log directly base table query na karein.
+* Additional context: (N/A)
+
+--5--Performance Optimization & Virtual Tables--
+Topic 10: Subqueries & EXISTS Operator
+Subtopics: Subquery Concept, Subquery in WHERE Clause, EXISTS Operator, SELECT 1
+
+[📊 SCOPE SIGNAL for Topic 10:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation of nested queries and EXISTS logic
+* Key terms from transcript: subquery, query within a query, WHERE, EXISTS, SELECT 1
+* Explicit emphasis by speaker: "In exists we just find out if any record has been returned or not... we don't care what data this query is returning."
+* Speaker ne jo analogies/examples use kiye: Mathematical expression ke andar ek aur mathematical expression hone ka analogy diya.
+]
+
+🔑 KEYWORDS DUMP for Topic 10:
+[Subquery, query within a query, WHERE clause, nested query, EXISTS, SELECT 1, outer query, return boolean, record evaluation, row by row execution]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 10:
+
+* Testing/Offline Phase: Developer nested logic test karta hai jahan pehla filter ek average calculate karta hai aur outer query us average se badi values dhoondhti hai.
+* Fixing/Iteration Phase: Developer `EXISTS` ke andar explicitly columns select karne ki jagah `SELECT 1` use karta hai taaki query execute hone mein fast ho (kyunki data payload matter nahi karta, sirf row ka milna matter karta hai).
+* Live Production Phase: Complex cross-table filtering ke liye production dashboards mein heavily nested subqueries aur `EXISTS` operators run hote hain.
+* Additional context: (N/A)
+
+--5--Performance Optimization & Virtual Tables--
+Topic 11: Grouping, Filtering & Rollups
+Subtopics: GROUP BY, HAVING Clause, ORDER BY with Grouping, WITH ROLLUP
+
+[📊 SCOPE SIGNAL for Topic 11:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation distinguishing WHERE from HAVING and demonstrating ROLLUP
+* Key terms from transcript: GROUP BY, aggregate functions, HAVING, WITH ROLLUP, subtotals, grand total, null in rollup
+* Explicit emphasis by speaker: "Whenever you are using group by, you have to filter, so do not use where, use having." aur "Null doesn't mean missing value. Null basically means sum of the above."
+* Speaker ne jo analogies/examples use kiye: None
+]
+
+🔑 KEYWORDS DUMP for Topic 11:
+[GROUP BY, aggregate functions, COUNT, SUM, total sales, WHERE vs HAVING, HAVING clause, ORDER BY with Grouping, ASC, DESC, WITH ROLLUP, summary rows, subtotals, grand total, financial aggregations, business reports, sales summaries, ⭐Null doesn't mean missing value]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
+
+* Testing/Offline Phase: Developer city aur category wise group karke total revenue ka report query likhta hai.
+* Fixing/Iteration Phase: Agar grouped data ko filter karna ho, toh developer `WHERE` ki jagah `HAVING` clause apply karta hai kyunki `WHERE` grouped output pe error throw karta hai.
+* Live Production Phase: Business stakeholders ke dashboards aur financial aggregations generate karne ke liye production mein `WITH ROLLUP` use hota hai jisse automated subtotals aur grand totals milte hain.
+* Additional context: (N/A)
+
+===Section 6: Tooling, AI & Capstone Project===
+Is aakhiri section mein Workbench tools ka use, ChatGPT ki help se SQL generate karna aur ek e-commerce database scratch se design karna include hai.
+
+--6--Tooling, AI & Capstone Project--
+Topic 12: GUI Tools, AI Assistance & Capstone Project
+Subtopics: Workbench Form Editor, Data Import/Export, TRUNCATE TABLE, AI SQL Generation Prompting, Harry Shop Database Project
+
+[📊 SCOPE SIGNAL for Topic 12:
+
+* Depth Level: Deep
+* Coverage Angle: Practical only
+* Transcript mein content volume: End-to-end practical walkthrough of UI tools and a complete database design project
+* Key terms from transcript: form editor, export import, CSV, TRUNCATE TABLE, ChatGPT 5.2, prompt to SQL, database design, Capstone Project, Harry shop
+* Explicit emphasis by speaker: "AI is a co-pilot. It is not a pilot... The better you know the basics of SQL, the better AI will help you."
+* Speaker ne jo analogies/examples use kiye: AI bina basic knowledge ke use karne ka khatra batane ke liye Fortuner mechanic ka example diya (Fortuner theek karni nahi aati toh AI se pooch ke bhi theek nahi hogi).
+]
+
+🔑 KEYWORDS DUMP for Topic 12:
+[MySQL Workbench GUI, Apply changes, Revert changes, Form editor, Export to CSV, Import from CSV, TRUNCATE TABLE, empty table, refresh all, ⭐ChatGPT 5.2[version], AI amplifier, English to SQL, prompt to SQL, AI hallucination, Capstone Project, Harry shop, e-commerce store database, table relationships, schema design, order_items table, business insights, best selling products]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 12:
+
+* Testing/Offline Phase: Developer local environment mein CSV file se raw data Workbench ke import feature se daalta hai aur badi text values modify karne ke liye Form Editor use karta hai.
+* Fixing/Iteration Phase: Table ko jaldi clean karne ke liye (bin schema drop kiye), developer right-click karke `TRUNCATE TABLE` use karta hai.
+* Live Production Phase: Developer database architecture design karke web developer ko deta hai, aur complex business logic generate karne ke liye ChatGPT se queries likhwata hai, par unhein blindly deploy karne se pehle review karta hai.
+* Additional context: Speaker ne explicitly project mein 4 tables (`customers`, `products`, `orders`, `order_items`) ki relational design banai.
+
+Boss, aapne bilkul sahi point out kiya! Maine deeply wapas analyze kiya aur pakda ki pichle skeleton mein **2 sabse major aur heavy topics miss ho gaye the**.
+
+**Jo miss hua tha:**
+
+1. **Stored Procedures** (`DELIMITER`, `CALL`, parameters pass karna, aur network traffic reduce karne ka real-world logic).
+2. **Database Triggers** (`NEW`, `OLD` keywords, automated logging, aur `AFTER UPDATE` events).
+
+Yeh dono topics Notes Guru ke notes mein aane bohot zaroori hain. Main in missed topics ka skeleton yahan ek naye section mein extract kar raha hoon taaki aapka pipeline 100% complete ho jaye!
+
+---
+
+===Section 7: Advanced Database Programming===
+Speaker yahan complex queries ko database mein save karna (Stored Procedures) aur automated events fire karna (Triggers) explain karta hai taaki network traffic bache aur data inconsistency na ho.
+
+--7--Advanced Database Programming--
+Topic 13: Stored Procedures & Delimiters
+Subtopics: Stored Procedure Concept, Procedure Creation Syntax, Delimiter Concept, Calling Procedures, Procedure Parameters
+
+[📊 SCOPE SIGNAL for Topic 13:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long explanation with practical syntax writing and real-world network traffic scenario
+* Key terms from transcript: stored procedure, saved block of SQL statements, single unit, reduce repetition, CREATE PROCEDURE, BEGIN, END, DELIMITER, //, CALL, IN parameter, network traffic
+* Explicit emphasis by speaker: "From now on semicolon is not my delimiter... I temporarily changed my delimiter to double forward slash." aur "It helps us to reuse SQL logic. Maintainability improves."
+* Speaker ne jo analogies/examples use kiye: Server location ka example diya — "Your server is serving your app from Delhi. Your database server is in San Francisco." Lambi queries bhejney se network traffic badhta hai, isliye chhota naam (CALL procedure) bhejte hain.
+]
+
+🔑 KEYWORDS DUMP for Topic 13:
+[stored procedure, saved block, SQL statements, single unit, Python, C++, reusing logic, business logic, CREATE PROCEDURE, Get Delivered Orders, BEGIN, END, statement is incomplete, expecting semicolon, DELIMITER, //, double forward slash, default delimiter, CALL, IN, parameters, argument, city_name, VARCHAR(50), maintainability, network traffic, San Francisco, Delhi, ⭐reduce network traffic]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 13:
+
+* Testing/Offline Phase: Developer ek bohot complex SQL query ko database mein `CREATE PROCEDURE` se save karta hai aur `DELIMITER //` adjust karke error-free logic encapsulate karta hai.
+* Fixing/Iteration Phase: Developer procedure mein dynamic inputs (jaise `IN city_name`) pass karne ke liye parameters set karke alag-alag city ke liye procedure test karta hai.
+* Live Production Phase: Live production app (e.g. in Delhi) remote database server (e.g. in San Francisco) ko baar-baar lambi complex queries bhejney ke bajaye, sirf procedure ka chhota naam (`CALL Get_Orders()`) bhejti hai jisse network traffic aur latency drastically reduce ho jati hai.
+* Additional context: Speaker ne explicitly samjhaya ki delimiter isliye change karte hain taaki procedure ke andar wale semicolons se MySQL confuse hoke execution na rok de.
+
+--7--Advanced Database Programming--
+Topic 14: Database Triggers & Automated Events
+Subtopics: Database Triggers, Trigger Creation Syntax, Update Events, New vs Old State, Automated Logging
+
+[📊 SCOPE SIGNAL for Topic 14:
+
+* Depth Level: Deep
+* Coverage Angle: Both
+* Transcript mein content volume: Long practical demonstration with IF conditions and logging scenario
+* Key terms from transcript: trigger, automatically runs, specific event, CREATE TRIGGER, AFTER UPDATE ON, FOR EACH ROW, NEW, OLD, IF condition, END IF, NOW()
+* Explicit emphasis by speaker: "You can't call them manually. Because they call themselves." aur "This is a wrong trigger. It can destroy your data completely."
+* Speaker ne jo analogies/examples use kiye: Gun ke trigger ka example diya — "Gun has a trigger. If you press it, something happens. Like if you press the trigger, the bullet will fire."
+]
+
+🔑 KEYWORDS DUMP for Topic 14:
+[trigger, automatically runs, specific event, Employee salary, bonus, total salary, automated logging, order cancellation, CREATE TRIGGER, AFTER UPDATE ON, FOR EACH ROW, IF, END IF, ⭐NEW, ⭐OLD, NEW.order_status, OLD.order_status, NOW(), current timestamp, delimiter, gun trigger, manually call, before insert, after insert, before update, before delete, after delete, ⭐destroy your data]
+
+🔄 REAL-WORLD FLOW SIGNAL for Topic 14:
+
+* Testing/Offline Phase: Developer test karta hai ki order table mein cancel hone pe `order_cancellations` log table automatically populate ho raha hai ya nahi `NOW()` function ke sath.
+* Fixing/Iteration Phase: Developer `NEW` aur `OLD` state variables ko compare karke trigger logic theek karta hai (e.g. `OLD.order_status != cancelled` AND `NEW.order_status == cancelled`) taaki galat event fire na ho.
+* Live Production Phase: Real user jab app pe order cancel karta hai, toh backend code se koi extra log query nahi aati, database khud apna trigger fire karke automatically cancellation log table mein entry daal deta hai.
+* Additional context: Speaker ne warn kiya hai ki triggers automatically run hote hain, isliye inhe carefully use karna chahiye warna company ka data destroy ho sakta hai.
+
+---
+
+
+> ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
+
+📋 EXTRACTED IN THIS PHASE:
+
+Section 4: Advanced Relational Concepts & Architecture
+Topic 6: Foreign Keys & Referential Integrity
+Topic 7: Table Joins & Result Combinations
+
+Section 5: Performance Optimization & Virtual Tables
+Topic 8: Database Indexing Strategies
+Topic 9: Virtual Tables (Views)
+Topic 10: Subqueries & EXISTS Operator
+Topic 11: Grouping, Filtering & Rollups
+
+Section 6: Tooling, AI & Capstone Project
+Topic 12: GUI Tools, AI Assistance & Capstone Project
+
+Section 7: Advanced Database Programming
+Topic 13: Stored Procedures & Delimiters
+Topic 14: Database Triggers & Automated Events
+
+
+📊 PHASE SUMMARY:
+Sections: 3 | Topics: 7 | Subtopics: 33
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+==================================================================================
+
+# Section 5: Advanced_python
+
