@@ -423,7 +423,7 @@ Subtopics: Excel Themes, Border Drawing Tool, Percentage Formatting, Decimal Pre
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[Page layout, Themes, Border colour, Border style, draw border, Escape key, percentage, increase decimal, decrease decimal, precision, Cell Styles, bad, good, neutral]
+[Page layout, Themes, Border colour, Border style, draw border, Escape key, percentage, increase decimal, decrease decimal, precision, Cell Styles, bad, good, neutral, Harry, Larry, Perry, Jerry, circuit theme, purple border, dotted border, 89.5%]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -449,7 +449,7 @@ Subtopics: Highlight Cell Rules, Text That Contains, Data Bars, Color Scales, Ic
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[Conditional Formatting, Highlight Cell Rules, greater than, less than, between, equal to, text that contains, pass, fail, Manage Rules, edit rule, clear rules from selected cells, Data Bars, Color Scales, Icon Sets, green yellow red color scale, arrows, tick, cross, strikethrough, 0.35, 35%, 0.7, 70%, 69.6, 69.60, precision, round off]
+[Conditional Formatting, Highlight Cell Rules, greater than, less than, between, equal to, text that contains, pass, fail, Manage Rules, edit rule, clear rules from selected cells, Data Bars, Color Scales, Icon Sets, green yellow red color scale, arrows, tick, cross, strikethrough, 0.35, 35%, 0.7, 70%, 69.6, 69.60, precision, round off, Physics, Chemistry, Computer, 93, 98, 94, 46.4%]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -471,11 +471,11 @@ Subtopics: Single-Level Sort, Multi-Level Sort, Sort Warning
 * Transcript mein content volume: Short explanation with a warning
 * Key terms from transcript: sort, largest to smallest, multi-level sort, then by
 * Explicit emphasis by speaker: "It treats a row as a row. It does not treat every column independently."
-* Speaker ne jo analogies/examples use kiye: Bank statement mein credit amount se sort karna.
+* Speaker ne jo analogies/examples use kiye: Bank statement mein credit amount se sort karna. Text ko date mein parse karne ke liye usko 1 se multiply karne ka trick dikhaya.
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[sort, largest to smallest, smallest to largest, expand the selection, continue with current selection, sort by, then by, multi-level sort]
+[sort, largest to smallest, smallest to largest, expand the selection, continue with current selection, sort by, then by, multi-level sort, Affiliate income, 13377, Interest income, 8589, multiply by 1 trick, 13th January, 14th January]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -498,7 +498,7 @@ Subtopics: Applying Filters, Filter Keyboard Shortcut, Number Filters, Date Filt
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[filter, ⭐Alt D F F, Number filters, greater than, Date filters, text filters, clear filter, 1500, Fiverr, 2097, YouTube AdSense, 13590]
+[filter, ⭐Alt D F F, Number filters, greater than, Date filters, text filters, clear filter, 1500, Fiverr, 2097, YouTube AdSense, 13590, Affiliate income, 13377, Interest income, 8589, multiply by 1 trick, 13th January, 14th January]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
@@ -524,7 +524,7 @@ Subtopics: RANDBETWEEN Function, RANDARRAY Function, Freezing Values, Spill Erro
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[RAND, RANDBETWEEN, ⭐RANDARRAY, rows, columns, minimum, maximum, integer, TRUE, FALSE, recalculation, freezing values, Paste Values, ⭐SPILL ERROR]
+[RAND, RANDBETWEEN, ⭐RANDARRAY, rows, columns, minimum, maximum, integer, TRUE, FALSE, recalculation, freezing values, Paste Values, ⭐SPILL ERROR, Maths Marks, Chemistry Marks, Physics Marks, 10 rows, 3 columns, 23, 100, 53.22, 61.81]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -546,11 +546,11 @@ Subtopics: Inserting Shapes, Shape Formatting, Duplicating Shapes, Stock Images,
 * Transcript mein content volume: Long explanation with practical styling
 * Key terms from transcript: shapes, rotate, stock images, place over cells, SmartArt
 * Explicit emphasis by speaker: "If you are doing image distortion, you will not get good image. You should maintain aspect ratio."
-* Speaker ne jo analogies/examples use kiye: Nifty gainers/losers ko green up-arrow aur red down-arrow se show karna. AI model training workflow (Data Collection -> Model Selection) in SmartArt. Nifty top losers/gainers (HUL, Reliance) ka example diya arrows lagane ke liye. Phir online pictures se ek 'confused' image aur ek 'Aunty' ki image insert ki (jise mazak mein stock market guru bulaya).
+* Speaker ne jo analogies/examples use kiye: Nifty gainers/losers ko green up-arrow aur red down-arrow se show karna. AI model training workflow (Data Collection -> Model Selection) in SmartArt. Nifty top losers/gainers (HUL, Reliance) ka example diya arrows lagane ke liye. Phir online pictures se ek 'confused' image aur ek 'Aunty' ki image insert ki (jise mazak mein stock market guru bulaya). Shape ko Ctrl daba kar drag karne ko speaker ne mazak mein 'take out its soul' (uski aatma nikalna) kaha.
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[insert shapes, down arrow, shape format, theme styles, rotate shape, Ctrl copy shape, pictures, place over cells, place in cell, stock images, aspect ratio, send backwards, bring forward, ⭐SmartArt, cycle, change colors, Nifty top losers, Nifty top gainers, HUL, Reliance, 3.22%, 5.22%, confused, Aunty, stock market guru]
+[insert shapes, down arrow, shape format, theme styles, rotate shape, Ctrl copy shape, pictures, place over cells, place in cell, stock images, aspect ratio, send backwards, bring forward, ⭐SmartArt, cycle, change colors, Nifty top losers, Nifty top gainers, HUL, Reliance, 3.22%, 5.22%, confused, Aunty, stock market guru, 1.45%, sister, Data Collection, Model Selection, Model Inference, Feedback, take out its soul]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -576,7 +576,7 @@ Subtopics: Recommended Charts, Chart Types, Dynamic Chart Title, Axis Formatting
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[recommended charts, clustered column chart, line chart, pie chart, bar chart, area chart, scatter chart, chart title, dynamic title, format axis, chart design, chart elements, data labels, legend, 3D pie chart, angle of first slice, pie explosion, data callout, Cinema hall, 5 crores, Oil wells, 500 crores, Nifty 50, CSV data, 25971, 26000, 19484 crores]
+[recommended charts, clustered column chart, line chart, pie chart, bar chart, area chart, scatter chart, chart title, dynamic title, format axis, chart design, chart elements, data labels, legend, 3D pie chart, angle of first slice, pie explosion, data callout, Cinema hall, 5 crores, Oil wells, 500 crores, Nifty 50, CSV data, 25971, 26000, 19484 crores, Food, Fast food, Rent, EMI, Invest, 455, 3000, 21000, 26200, 16th December 2024]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -602,7 +602,7 @@ Subtopics: Print Preview, Page Break View, Margins Scaling, Custom Headers and F
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[⭐Ctrl P, print preview, dotted lines, page break view, page layout view, fit sheet on one page, margins, page setup, header footer, custom header, custom footer, ampersand tab, insert date]
+[⭐Ctrl P, print preview, dotted lines, page break view, page layout view, fit sheet on one page, margins, page setup, header footer, custom header, custom footer, ampersand tab, insert date, codewithharry.com]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -628,7 +628,7 @@ Subtopics: Saving as Template, Personal Templates Library, Creating New Workbook
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[Template, Save As, ⭐.xltx[version], Excel Template, Custom Office Templates, More Templates, Personal templates, move or copy sheet]
+[Template, Save As, ⭐.xltx[version], Excel Template, Custom Office Templates, More Templates, Personal templates, move or copy sheet, Harry'sWeeklyTemplate, MyWeeklyTemplate, Tripesh 1 rupee, Eat, Work, Week 1 January 27]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -651,7 +651,7 @@ Subtopics: Referencing Other Sheets, Referencing External Workbooks, Dynamic Upd
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[workbook reference, cross-sheet reference, equal to, external link, dynamic update, formula bar syntax, Suresh, Ramesh, Mahesh, Deepesh, Karunesh, Sahesh, Tripesh, Bank max limit, Sheet2!F10 * 56]
+[workbook reference, cross-sheet reference, equal to, external link, dynamic update, formula bar syntax, Suresh, Ramesh, Mahesh, Deepesh, Karunesh, Sahesh, Tripesh, Bank max limit, Sheet2!F10 * 56, Harry'sWeeklyTemplate, MyWeeklyTemplate, Tripesh 1 rupee, Eat, Work, Week 1 January 27]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
