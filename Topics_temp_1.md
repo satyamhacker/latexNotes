@@ -367,11 +367,11 @@ Subtopics: Moving Cell Selections, Auto-Updating Formulas, Inserting Rows & Colu
 * Transcript mein content volume: Demonstration of various UI interactions
 * Key terms from transcript: move, copy, insert, delete, resize, hide, unhide, duplicate
 * Explicit emphasis by speaker: "Excel tries to be as helpful as possible" (when moving cells, formulas auto-update).
-* Speaker ne jo analogies/examples use kiye: Keys to the house analogy — agar ek shortcut kaam na kare (ek chabi na mile), toh doosra tareeka (doosri chabi) use kar lo bina time waste kiye.
+* Speaker ne jo analogies/examples use kiye: Keys to the house analogy — agar ek shortcut kaam na kare (ek chabi na mile), toh doosra tareeka (doosri chabi) use kar lo bina time waste kiye. Shubham Kumar Mishra ki 56 lakhs fees ka example diya yeh dikhane ke liye ki cell width choti hone par Excel galat value (560) dikhane ke bajaye pound/hashtag (####) dikhata hai taaki data misread na ho.
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[moving selections, drag and drop, auto-updating formulas, Ctrl minus, Ctrl shift plus, resize columns, resize rows, hide, unhide, duplicate sheet, ⭐Ctrl drag, Paste Transpose, Paste Values, Paste Link, Ctrl D, Ctrl Z]
+[moving selections, drag and drop, auto-updating formulas, Ctrl minus, Ctrl shift plus, resize columns, resize rows, hide, unhide, duplicate sheet, ⭐Ctrl drag, Paste Transpose, Paste Values, Paste Link, Ctrl D, Ctrl Z, Shubham Kumar Mishra, 56 lakhs, 560, 5600, pound, hashtag, ####]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -445,11 +445,11 @@ Subtopics: Highlight Cell Rules, Text That Contains, Data Bars, Color Scales, Ic
 * Transcript mein content volume: Long explanation with multiple scenarios
 * Key terms from transcript: Conditional Formatting, Highlight Cell Rules, Data Bars, Color Scales, Icon Sets, Manage Rules
 * Explicit emphasis by speaker: "Most of the Conditional Formatting to be honest, is used in this way"
-* Speaker ne jo analogies/examples use kiye: Students marks highlighting (less than 60 scold, greater than 90 praise), Bull vs Bear market analogy for icons.
+* Speaker ne jo analogies/examples use kiye: Students marks highlighting (less than 60 scold, greater than 90 praise), Bull vs Bear market analogy for icons. Speaker ne 0.35 (35%) aur 0.7 (70%) ka criteria lagaya, aur dikhaya ki kaise ek student fail hota hai kyunki uske exact marks 69.60 the (precision issue).
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[Conditional Formatting, Highlight Cell Rules, greater than, less than, between, equal to, text that contains, pass, fail, Manage Rules, edit rule, clear rules from selected cells, Data Bars, Color Scales, Icon Sets, green yellow red color scale, arrows, tick, cross, strikethrough]
+[Conditional Formatting, Highlight Cell Rules, greater than, less than, between, equal to, text that contains, pass, fail, Manage Rules, edit rule, clear rules from selected cells, Data Bars, Color Scales, Icon Sets, green yellow red color scale, arrows, tick, cross, strikethrough, 0.35, 35%, 0.7, 70%, 69.6, 69.60, precision, round off]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -494,11 +494,11 @@ Subtopics: Applying Filters, Filter Keyboard Shortcut, Number Filters, Date Filt
 * Transcript mein content volume: Short explanation with shortcut demonstration
 * Key terms from transcript: filter, Alt D F F, Number filters, Date filters, clear filter
 * Explicit emphasis by speaker: "Press Alt D F F... I use this personally."
-* Speaker ne jo analogies/examples use kiye: Filtering out bank transactions smaller than Rs. 1500 to focus on major expenses.
+* Speaker ne jo analogies/examples use kiye: Filtering out bank transactions smaller than Rs. 1500 to focus on major expenses. 1500 rupees se upar ki transactions ko filter karne ka example diya, jismein sirf Fiverr aur YouTube AdSense ki earnings dikhi.
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[filter, ⭐Alt D F F, Number filters, greater than, Date filters, text filters, clear filter]
+[filter, ⭐Alt D F F, Number filters, greater than, Date filters, text filters, clear filter, 1500, Fiverr, 2097, YouTube AdSense, 13590]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
@@ -546,11 +546,11 @@ Subtopics: Inserting Shapes, Shape Formatting, Duplicating Shapes, Stock Images,
 * Transcript mein content volume: Long explanation with practical styling
 * Key terms from transcript: shapes, rotate, stock images, place over cells, SmartArt
 * Explicit emphasis by speaker: "If you are doing image distortion, you will not get good image. You should maintain aspect ratio."
-* Speaker ne jo analogies/examples use kiye: Nifty gainers/losers ko green up-arrow aur red down-arrow se show karna. AI model training workflow (Data Collection -> Model Selection) in SmartArt.
+* Speaker ne jo analogies/examples use kiye: Nifty gainers/losers ko green up-arrow aur red down-arrow se show karna. AI model training workflow (Data Collection -> Model Selection) in SmartArt. Nifty top losers/gainers (HUL, Reliance) ka example diya arrows lagane ke liye. Phir online pictures se ek 'confused' image aur ek 'Aunty' ki image insert ki (jise mazak mein stock market guru bulaya).
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[insert shapes, down arrow, shape format, theme styles, rotate shape, Ctrl copy shape, pictures, place over cells, place in cell, stock images, aspect ratio, send backwards, bring forward, ⭐SmartArt, cycle, change colors]
+[insert shapes, down arrow, shape format, theme styles, rotate shape, Ctrl copy shape, pictures, place over cells, place in cell, stock images, aspect ratio, send backwards, bring forward, ⭐SmartArt, cycle, change colors, Nifty top losers, Nifty top gainers, HUL, Reliance, 3.22%, 5.22%, confused, Aunty, stock market guru]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -576,7 +576,7 @@ Subtopics: Recommended Charts, Chart Types, Dynamic Chart Title, Axis Formatting
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[recommended charts, clustered column chart, line chart, pie chart, bar chart, area chart, scatter chart, chart title, dynamic title, format axis, chart design, chart elements, data labels, legend, 3D pie chart, angle of first slice, pie explosion, data callout]
+[recommended charts, clustered column chart, line chart, pie chart, bar chart, area chart, scatter chart, chart title, dynamic title, format axis, chart design, chart elements, data labels, legend, 3D pie chart, angle of first slice, pie explosion, data callout, Cinema hall, 5 crores, Oil wells, 500 crores, Nifty 50, CSV data, 25971, 26000, 19484 crores]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -651,7 +651,7 @@ Subtopics: Referencing Other Sheets, Referencing External Workbooks, Dynamic Upd
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[workbook reference, cross-sheet reference, equal to, external link, dynamic update, formula bar syntax]
+[workbook reference, cross-sheet reference, equal to, external link, dynamic update, formula bar syntax, Suresh, Ramesh, Mahesh, Deepesh, Karunesh, Sahesh, Tripesh, Bank max limit, Sheet2!F10 * 56]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
