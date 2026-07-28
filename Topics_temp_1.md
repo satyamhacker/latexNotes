@@ -907,7 +907,7 @@ Subtopics: Database Need, Relational vs Non-Relational, CRUD Concepts, Server vs
 ]
 
 🔑 KEYWORDS DUMP for Topic 1:
-[10 crore orders, Flipkart, Amazon, Excel, text file, database, enormous amount of data, read operations, write operations, update operations, delete operations, MySQL, SQL, Structured Query Language, rows, relational database, PostgreSQL, MSSQL, Oracle, open source, tables, schema, CRUD, Create, Read, Update, Delete, non-relational database, flexible schema, JSON format, MongoDB, Neo4j, Cassandra, Redis, horizontal scaling, MySQL Server, Windows configures MySQL, root password, MySQL Workbench, core engine, localhost, port 3306, connection, queries, script, CREATE DATABASE, USE, DROP DATABASE IF EXISTS, starter script, execution, green tick, schemas refresh, sample.sql, save script, ⭐simple root password, ⭐AI amplifier]
+[10 crore orders, Flipkart, Amazon, Excel, text file, database, enormous amount of data, read operations, write operations, update operations, delete operations, MySQL, SQL, Structured Query Language, rows, relational database, PostgreSQL, MSSQL, Oracle, open source, tables, schema, CRUD, Create, Read, Update, Delete, non-relational database, flexible schema, JSON format, MongoDB, Neo4j, Cassandra, Redis, horizontal scaling, MySQL Server, Windows configures MySQL, root password, MySQL Workbench, core engine, localhost, port 3306, connection, queries, script, CREATE DATABASE, USE, DROP DATABASE IF EXISTS, starter script, execution, green tick, schemas refresh, sample.sql, save script, ⭐simple root password, ⭐AI amplifier, Myntra]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 1:
 
@@ -930,11 +930,11 @@ Subtopics: SQL Data Types, Table Creation Syntax, Adding Columns, Modifying Colu
 * Transcript mein content volume: Long explanation with code execution and syntax breakdown
 * Key terms from transcript: VARCHAR, INT, DECIMAL, BOOLEAN, DATE, DATETIME, CREATE TABLE, ALTER TABLE, ADD COLUMN, MODIFY, RENAME COLUMN, DROP COLUMN
 * Explicit emphasis by speaker: Reserved keywords ko capital mein likhna aur column names ko small mein likhna highly recommended hai clean code ke liye.
-* Speaker ne jo analogies/examples use kiye: Excel workbook ko Database, sheets ko Tables, aur rows ko SQL table rows se compare karke samjhaya.
+* Speaker ne jo analogies/examples use kiye: Excel workbook ko Database, sheets ko Tables, aur rows ko SQL table rows se compare karke samjhaya. Data types samjhane ke liye Savitri (Microsoft) aur Raghav (Google) ka dummy data use kiya.
 ]
 
 🔑 KEYWORDS DUMP for Topic 2:
-[Excel workbook, sheet, rows, SQL constraints, VARCHAR, variable character, INT, integer, DECIMAL, precision, scale, BOOLEAN, true, false, flag, DATE, DATETIME, CREATE TABLE, reserved keywords, DROP TABLE, ALTER TABLE, ADD COLUMN, MODIFY, RENAME COLUMN, DROP COLUMN, commenting out, ctrl forward slash, ⭐write keywords in capital, ⭐small case for column names, schema design]
+[Excel workbook, sheet, rows, SQL constraints, VARCHAR, variable character, INT, integer, DECIMAL, precision, scale, BOOLEAN, true, false, flag, DATE, DATETIME, CREATE TABLE, reserved keywords, DROP TABLE, ALTER TABLE, ADD COLUMN, MODIFY, RENAME COLUMN, DROP COLUMN, commenting out, ctrl forward slash, ⭐write keywords in capital, ⭐small case for column names, schema design, Savitri, 67, Microsoft, June 12 2000, Raghav, 35, Google, Amit Sharma, amit.company.com, 12345678910, Hrithik Sharma, Hrithu, Ragini Sharma]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 2:
 
@@ -981,11 +981,11 @@ Subtopics: Single Row Insertion, Multiple Rows Insertion, SELECT Statements, NUL
 * Transcript mein content volume: Multiple practical queries run step-by-step
 * Key terms from transcript: INSERT INTO, VALUES, SELECT, WHERE, IS NULL, UPDATE, SET, SET SQL_SAFE_UPDATES = 0, DELETE FROM
 * Explicit emphasis by speaker: "In SQL, we do not use equal to null. We use is null." aur "Run delete very carefully. If you run delete without a where clause... your whole table will be empty."
-* Speaker ne jo analogies/examples use kiye: Multiple Neha Verma records ka example deke samjhaya ki primary key ke bina update chalane pe safe update mode kyun rokti hai.
+* Speaker ne jo analogies/examples use kiye: Multiple Neha Verma records ka example deke samjhaya ki primary key ke bina update chalane pe safe update mode kyun rokti hai. Form Editor samjhane ke liye Arjun Mehta ke 'smartphone' ka P capital kiya, Dr. Amit ka city Begusarai kiya, aur Priya Singh ke notebook ka price 800 set kiya.
 ]
 
 🔑 KEYWORDS DUMP for Topic 4:
-[INSERT INTO, VALUES, single row, multiple rows, comma-separated insert, time efficient, SELECT *, WHERE, <, >, =, IS NULL, IS NOT NULL, AND, OR, ORDER BY, DESC, ASC, top to bottom execution, YYYY-MM-DD, UPDATE, SET, safe update mode, SET SQL_SAFE_UPDATES = 0, DELETE FROM, single row deletion, multiple row deletion, row affected count, ⭐IS NULL, ⭐YYYY-MM-DD, ⭐safe update mode]
+[INSERT INTO, VALUES, single row, multiple rows, comma-separated insert, time efficient, SELECT *, WHERE, <, >, =, IS NULL, IS NOT NULL, AND, OR, ORDER BY, DESC, ASC, top to bottom execution, YYYY-MM-DD, UPDATE, SET, safe update mode, SET SQL_SAFE_UPDATES = 0, DELETE FROM, single row deletion, multiple row deletion, row affected count, ⭐IS NULL, ⭐YYYY-MM-DD, ⭐safe update mode, Ananya Roy, Kolkata, study table, Arjun Mehta, Ahmedabad, smartphone, P capital, Priya Singh, notebook, 800, Dr. Amit, Begusarai, Pooja Nair, Rohit Gupta, water bottle]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 4:
 
@@ -1009,7 +1009,7 @@ Subtopics: Limit and Offset, Aggregate Functions, Scalar Functions, Date Functio
 ]
 
 🔑 KEYWORDS DUMP for Topic 5:
-[LIMIT, OFFSET, pagination, COUNT, SUM, AVG, MIN, MAX, AS, aggregate functions, scalar functions, ROUND, UPPER, LOWER, LENGTH, CURRENT_DATE, CURRENT_TIME, IN, NOT IN, BETWEEN, NOT BETWEEN, LIKE, wildcards, % wildcard, _ wildcard, pattern matching, total revenue, sorting, skipping rows]
+[LIMIT, OFFSET, pagination, COUNT, SUM, AVG, MIN, MAX, AS, aggregate functions, scalar functions, ROUND, UPPER, LOWER, LENGTH, CURRENT_DATE, CURRENT_TIME, IN, NOT IN, BETWEEN, NOT BETWEEN, LIKE, wildcards, % wildcard, _ wildcard, pattern matching, total revenue, sorting, skipping rows, Sara Ali, S A R _ _ L I, %bad, %rabad, Hyderabad, 145200, 11440, 65000, 80]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 5:
 
@@ -1054,11 +1054,11 @@ Subtopics: Foreign Key Concept, Parent-Child Table Relationship, ON DELETE CASCA
 * Transcript mein content volume: Long explanation with multiple practical scenarios
 * Key terms from transcript: foreign key, sellers table, orders table, constraint, parent row, child table, ON DELETE CASCADE, ON DELETE SET NULL, RESTRICT, ADD CONSTRAINT, DROP CONSTRAINT
 * Explicit emphasis by speaker: "A foreign key connects two tables and ensures that the relationship between them is valid" aur "Prevents invalid relationships."
-* Speaker ne jo analogies/examples use kiye: Shopping complex ki dukaano ka example diya (Shop 255 exist nahi karti toh order kaise doge?). Building foundation ka example diya ON DELETE CASCADE ke liye (foundation tooti toh building giregi).
+* Speaker ne jo analogies/examples use kiye: Shopping complex ki dukaano ka example diya (Shop 255 exist nahi karti toh order kaise doge?). Building foundation ka example diya ON DELETE CASCADE ke liye (foundation tooti toh building giregi). Invalid foreign key relation samjhane ke liye ek joke mara ki '30th February ko mera birthday hai, party dunga' (jo exist hi nahi karta).
 ]
 
 🔑 KEYWORDS DUMP for Topic 6:
-[foreign key, table relationships, sellers table, orders table, invalid seller references, parent row, child table, foreign key constraint fails, ON UPDATE RESTRICT, ON DELETE CASCADE, ON DELETE SET NULL, RESTRICT, default behavior, ADD CONSTRAINT, DROP CONSTRAINT, data integrity, ⭐prevent invalid relationships]
+[foreign key, table relationships, sellers table, orders table, invalid seller references, parent row, child table, foreign key constraint fails, ON UPDATE RESTRICT, ON DELETE CASCADE, ON DELETE SET NULL, RESTRICT, default behavior, ADD CONSTRAINT, DROP CONSTRAINT, data integrity, ⭐prevent invalid relationships, 30th February birthday, Don Delhi, Don Electronics, Knight Electronics, Bangalore, Mumbai, Kolkata, Tech World, Tech World 2]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 6:
 
@@ -1133,7 +1133,7 @@ Subtopics: View Concept, CREATE VIEW, Updating Base Tables, DROP VIEW, Business 
 ]
 
 🔑 KEYWORDS DUMP for Topic 9:
-[View, virtual table, saved SQL query, CREATE VIEW, AS, DROP VIEW, complex logic, readability, restrict access, sensitive columns, business logic encapsulation, real-time table update, base table, convenience, ⭐virtual table]
+[View, virtual table, saved SQL query, CREATE VIEW, AS, DROP VIEW, complex logic, readability, restrict access, sensitive columns, business logic encapsulation, real-time table update, base table, convenience, ⭐virtual table, del_mum_clients]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 9:
 
@@ -1181,7 +1181,7 @@ Subtopics: GROUP BY, HAVING Clause, ORDER BY with Grouping, WITH ROLLUP
 ]
 
 🔑 KEYWORDS DUMP for Topic 11:
-[GROUP BY, aggregate functions, COUNT, SUM, total sales, WHERE vs HAVING, HAVING clause, ORDER BY with Grouping, ASC, DESC, WITH ROLLUP, summary rows, subtotals, grand total, financial aggregations, business reports, sales summaries, ⭐Null doesn't mean missing value]
+[GROUP BY, aggregate functions, COUNT, SUM, total sales, WHERE vs HAVING, HAVING clause, ORDER BY with Grouping, ASC, DESC, WITH ROLLUP, summary rows, subtotals, grand total, financial aggregations, business reports, sales summaries, ⭐Null doesn't mean missing value, Ahmedabad Electronics 30000, Bangalore Null 800, Grand total 210301, Delhi Electronics 65101, Delhi Furniture 12000, Delhi Home Decor 3000, 80101, Accessories 5500, Appliances 4200]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 11:
 
@@ -1204,11 +1204,11 @@ Subtopics: Workbench Form Editor, Data Import/Export, TRUNCATE TABLE, AI SQL Gen
 * Transcript mein content volume: End-to-end practical walkthrough of UI tools and a complete database design project
 * Key terms from transcript: form editor, export import, CSV, TRUNCATE TABLE, ChatGPT 5.2, prompt to SQL, database design, Capstone Project, Harry shop
 * Explicit emphasis by speaker: "AI is a co-pilot. It is not a pilot... The better you know the basics of SQL, the better AI will help you."
-* Speaker ne jo analogies/examples use kiye: AI bina basic knowledge ke use karne ka khatra batane ke liye Fortuner mechanic ka example diya (Fortuner theek karni nahi aati toh AI se pooch ke bhi theek nahi hogi).
+* Speaker ne jo analogies/examples use kiye: AI bina basic knowledge ke use karne ka khatra batane ke liye Fortuner mechanic ka example diya (Fortuner theek karni nahi aati toh AI se pooch ke bhi theek nahi hogi). CSV import dikhane ke liye Vikrant (Bangalore, Headset/Headphones 90000) aur Shubham (Jaipur, laptop) ka data insert kiya.
 ]
 
 🔑 KEYWORDS DUMP for Topic 12:
-[MySQL Workbench GUI, Apply changes, Revert changes, Form editor, Export to CSV, Import from CSV, TRUNCATE TABLE, empty table, refresh all, ⭐ChatGPT 5.2[version], AI amplifier, English to SQL, prompt to SQL, AI hallucination, Capstone Project, Harry shop, e-commerce store database, table relationships, schema design, order_items table, business insights, best selling products]
+[MySQL Workbench GUI, Apply changes, Revert changes, Form editor, Export to CSV, Import from CSV, TRUNCATE TABLE, empty table, refresh all, ⭐ChatGPT 5.2[version], AI amplifier, English to SQL, prompt to SQL, AI hallucination, Capstone Project, Harry shop, e-commerce store database, table relationships, schema design, order_items table, business insights, best selling products, Vikrant, Headset, Headphones, 90000, Shubham, Jaipur, hoodies, mugs, stickers, phone covers, python hoodie, AI nerd t-shirt, late night hoodie, sticker pack, terminal stickers, debugging mug]
 
 🔄 REAL-WORLD FLOW SIGNAL for Topic 12:
 
