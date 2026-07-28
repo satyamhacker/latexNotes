@@ -185,18 +185,7 @@ Subtopics: Column Resizing, Row Resizing, Moving Selections, Paste Values, Paste
 
 📋 EXTRACTED IN THIS PHASE:
 
-===Section 1: Excel Interface & Basics===
-Topic 1: Introduction to Excel
-Topic 2: Ribbon & Interface Navigation
 
-===Section 2: Workbooks, Sheets & Cells===
-Topic 1: Sheet Management
-Topic 2: Cells & Grid Limits
-
-===Section 3: Data Saving, Formats & Editing===
-Topic 1: Saving & File Formats
-Topic 2: Data Formatting
-Topic 3: Editing & Moving Data
 
 📊 PHASE SUMMARY:
 Sections: 3 | Topics: 7 | Subtopics: 33
@@ -383,22 +372,7 @@ Subtopics: Moving Cell Selections, Auto-Updating Formulas, Inserting Rows & Colu
 
 📋 EXTRACTED IN THIS PHASE:
 
-===Section 4: Calculations & References===
-Topic 1: Performing Basic Calculations
-Topic 2: Absolute vs Relative References
 
-===Section 5: Mathematical Operations===
-Topic 1: Order of Operations & Debugging
-
-===Section 6: Excel Core Functions===
-Topic 1: Using Core Functions
-Topic 2: Function Library & Help
-
-===Section 7: Practical Project - Expense Tracker===
-Topic 1: Building an Expense Tracker
-
-===Section 8: Modifying Worksheets===
-Topic 1: Advanced Worksheet Operations
 
 📊 PHASE SUMMARY:
 Sections: 5 | Topics: 7 | Subtopics: 28
@@ -662,6 +636,36 @@ Subtopics: Referencing Other Sheets, Referencing External Workbooks, Dynamic Upd
 > ✅ **Notes Guru ke liye skeleton ready hai. Yeh skeleton original transcript ka 100% content preserve karta hai — har Section, har Topic, har keyword, aur har real-world flow signal captured hai.**
 
 📋 EXTRACTED IN THIS PHASE:
+
+===Section 1: Excel Interface & Basics===
+Topic 1: Introduction to Excel
+Topic 2: Ribbon & Interface Navigation
+
+===Section 2: Workbooks, Sheets & Cells===
+Topic 1: Sheet Management
+Topic 2: Cells & Grid Limits
+
+===Section 3: Data Saving, Formats & Editing===
+Topic 1: Saving & File Formats
+Topic 2: Data Formatting
+Topic 3: Editing & Moving Data
+
+===Section 4: Calculations & References===
+Topic 1: Performing Basic Calculations
+Topic 2: Absolute vs Relative References
+
+===Section 5: Mathematical Operations===
+Topic 1: Order of Operations & Debugging
+
+===Section 6: Excel Core Functions===
+Topic 1: Using Core Functions
+Topic 2: Function Library & Help
+
+===Section 7: Practical Project - Expense Tracker===
+Topic 1: Building an Expense Tracker
+
+===Section 8: Modifying Worksheets===
+Topic 1: Advanced Worksheet Operations
 
 ===Section 9: Formatting & Cell Styles===
 Topic 1: Advanced Visual Formatting
