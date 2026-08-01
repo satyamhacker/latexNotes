@@ -131,6 +131,11 @@ Do NOT place highlight tags in positions that break Markdown syntax:
 - ❌ `**[[HL::Bold Text:**::HL]]` — Straddling tags! HTML tags cannot start outside and end inside Markdown syntax.
 - ✅ `[[HL::**Bold Text:**::HL]]` — Correct, perfectly wrapping the entire markdown bold syntax.
 
+**CRITICAL LIST MARKER EXCEPTION:**
+If a highlighted annotation spans multiple lines and includes Markdown list markers (`* `, `- `, `1. `) or blockquotes (`> `) at the beginning of the line, you MUST NOT wrap the marker inside the highlight tag. Wrapping the marker causes the renderer to see a `[` instead of the marker, completely breaking list styling and collapsing the paragraph.
+- ❌ `[[HL::* **A:** Cell humesha...::HL]]` — FORBIDDEN (Destroys bullet point list rendering)
+- ✅ `* [[HL::**A:** Cell humesha...::HL]]` — CORRECT (Marker is safely outside the tag)
+
 ### Rule 14 — SEPARATOR LINES: Off-Limits
 Notes use decorative separator lines like:
 ```
@@ -251,8 +256,9 @@ You must recognize that this is the SAME content. **Ignore added markdown charac
 ### Rule 33 — TAG BALANCE VERIFICATION (Self-Check)
 Before outputting the final document, you must guarantee that the number of opening `[[HL::` tags matches the number of closing `::HL]]` tags exactly. A mismatched tag is a catastrophic failure.
 
-### Rule 34 — ZOTERO PAGINATION SPLITS (Ignore PDF Tags)
-Sometimes a single continuous sentence in the document was split into two separate quotes in the user's input because of PDF page breaks (e.g., `...Tum request” ([pdf](zotero://...))\n\n“dekh sakte ho...`). You must recognize when a sentence is broken in half by Zotero tags. Mentally merge these broken quotes into a single continuous phrase (ignoring the `([pdf](zotero...))` tags and quotes between them) and highlight it as ONE single contiguous block in the document.
+### Rule 34 — ZOTERO PAGINATION SPLITS (Ignore PDF Tags & Verify Ground-Truth)
+Sometimes a single continuous sentence in the document was split into two separate quotes in the user's input because of PDF page breaks (e.g., `...Tum request” ([pdf](zotero://...))\n\n“dekh sakte ho...`). You must recognize when a sentence is broken in half by Zotero tags. 
+**CRITICAL VERIFICATION STEP:** When programmatically merging Zotero splits, do NOT blindly merge adjacent quotes, as this can cause catastrophic over-merging of independent annotations. You MUST digitally concatenate the two quotes and verify if the resulting continuous string exists in the target document. If it exists in the document, it is definitively a Zotero split and must be highlighted as ONE single contiguous block.
 
 ### Rule 35 — FUZZY MATCHING (MISSING MIDDLE WORDS)
 Sometimes the user's requested term is missing words in the middle compared to the actual text in the document.
@@ -407,3 +413,5 @@ When you see this, do NOT treat it as a single contiguous string. You must intel
 | Highlighting box-drawing characters in ASCII art (`╔`, `║`, `│`, `▼`) | Forbidden unless part of the requested term |
 | Re-wrapping already-highlighted `[[HL::...::HL]]` tags | Forbidden — double-wrapping breaks the renderer |
 | Straddling Markdown syntax (e.g. `**[[HL::Text:**::HL]]`) | Forbidden — HTML tags cannot start outside and end inside Markdown syntax. Wrap cleanly inside or outside. |
+| `[[HL::* Item::HL]]` | Forbidden — wrapping bullet point or blockquote markers breaks Markdown list rendering and collapses paragraphs. Marker must stay outside. |
+| Blindly merging Zotero splits without verifying | Forbidden — merging adjacent annotations without checking if the merged string actually exists in the target document causes catastrophic over-merging. |
