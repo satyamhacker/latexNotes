@@ -261,6 +261,15 @@ You must recognize this as a match and NOT skip it. When you find the logical ma
 - ❌ `[[HL::my name::HL]] is satyam [[HL::singh::HL]]` — FORBIDDEN (Do not fragment the highlight)
 - ❌ `[[HL::my name singh::HL]]` — FORBIDDEN (Do not alter or replace the document's original text)
 
+### Rule 36 — IGNORE CITATION TAGS AT THE END OF QUOTES (E.g. Page Numbers)
+The user may provide highlight terms with citation tags at the end, like:
+`“Some text to highlight” (“Course Notes”, p. 3)`
+Or quotes split across multiple lines/pages with citations in between:
+`“Some text...” (“Course Notes”, p. 12)`
+`“karo: rest of text” (“Course Notes”, p. 12)`
+
+You must IGNORE these trailing citation tags (e.g., `(“...”, p. X)` or `(p. X)`) and the surrounding quotation marks (`“ ”` or `" "`) when searching the document. Mentally strip them out, merge any split parts into a single continuous phrase, and highlight the actual contiguous text exactly as it appears in the document. Do NOT highlight the citation tags or quotes themselves unless they are literally part of the text in the document.
+
 ---
 
 ## 🔄 PROCESSING ORDER (Follow This Exactly)
