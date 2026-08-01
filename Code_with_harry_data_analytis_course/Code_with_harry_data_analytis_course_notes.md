@@ -1228,12 +1228,12 @@ Large reporting models mein "Hardcoding" se bachne ke liye macros use hote hain.
 
 [[HL::#### ⚖️ 13. Comparison (Ye vs Woh)::HL]]
 
-[[HL::| Paste Type | Kya Paste Hota Hai? | Kab Use Karein? |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| Normal Paste (`Ctrl V`) | Formulas, values, border, colors (Everything) | Basic copying, same structure maintain karna. |::HL]]
-[[HL::| **Paste Values** | Sirf text ya answer. Formulas aur colors hat jate hain. | Hardcoding karna ho jahan calculation na karni ho. |::HL]]
-[[HL::| **Format Painter** | Sirf design (colors, borders, fonts). Text wahi purana rehta hai. | UI/Design consistent banane ke liye. |::HL]]
-[[HL::| **Paste Transpose** | Data ki axis flip (Vertical <-> Horizontal) | Pivot report ka header pattern theek karne ke liye::HL]]. |
+| [[HL::Paste Type::HL]] | [[HL::Kya Paste Hota Hai?::HL]] | [[HL::Kab Use Karein?::HL]] |
+| --- | --- | --- |
+| [[HL::Normal Paste (`Ctrl V`)::HL]] | [[HL::Formulas, values, border, colors (Everything)::HL]] | [[HL::Basic copying, same structure maintain karna.::HL]] |
+| [[HL::**Paste Values**::HL]] | [[HL::Sirf text ya answer. Formulas aur colors hat jate hain.::HL]] | [[HL::Hardcoding karna ho jahan calculation na karni ho.::HL]] |
+| [[HL::**Format Painter**::HL]] | [[HL::Sirf design (colors, borders, fonts). Text wahi purana rehta hai.::HL]] | [[HL::UI/Design consistent banane ke liye.::HL]] |
+| [[HL::**Paste Transpose**::HL]] | [[HL::Data ki axis flip (Vertical <-> Horizontal)::HL]] | [[HL::Pivot report ka header pattern theek karne ke liye::HL]]. |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -1451,11 +1451,11 @@ Industry dashboards mein 5 lakh rows hoti hain. Wahan ek-ek karke formula **⭐d
 
 [[HL::#### ⚖️ 13. Comparison (Ye vs Woh)::HL]]
 
-[[HL::| Type | Example | Advantage |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| Hardcoded | `=34+67+55` | Data pata hota hai (static) par change pe fail ho jata hai. |::HL]]
-[[HL::| Cell Referencing | `=B2+C2+D2` | Data badalne par automatic recalculate hota hai. |::HL]]
-[[HL::| AutoSum Shortcut | `Alt + =` | Lambi column ke liye type nahi karna padta, range pick karta hai::HL]]. |
+| [[HL::Type::HL]] | [[HL::Example::HL]] | [[HL::Advantage::HL]] |
+| --- | --- | --- |
+| [[HL::Hardcoded::HL]] | [[HL::`=34+67+55`::HL]] | [[HL::Data pata hota hai (static) par change pe fail ho jata hai.::HL]] |
+| [[HL::Cell Referencing::HL]] | [[HL::`=B2+C2+D2`::HL]] | [[HL::Data badalne par automatic recalculate hota hai.::HL]] |
+| [[HL::AutoSum Shortcut::HL]] | [[HL::`Alt + =`::HL]] | [[HL::Lambi column ke liye type nahi karna padta, range pick karta hai::HL]]. |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -2375,11 +2375,11 @@ Startups aur small business pehle 6 mahine apni accounting (book-keeping) aisi h
 
 [[HL::#### ⚖️ 13. Comparison (Ye vs Woh)::HL]]
 
-[[HL::| Tracker Technique | Manual Way | Dynamic Way |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| Finding specific total | `D2 + D5 + D9` (food ke bills select karna manually) | `=SUMIF(C:C, "food", D:D)` |::HL]]
-[[HL::| Percent display | Likhna: `40` aur samne `percent` type karna manually | `=I2/J2`, Format tab par `%` press karna |::HL]]
-[[HL::| Visual appeal | Bina borders wali safed sheet | **Thick outside borders** + **Conditional Formatting** bar::HL]] |
+| [[HL::Tracker Technique::HL]] | [[HL::Manual Way::HL]] | [[HL::Dynamic Way::HL]] |
+| --- | --- | --- |
+| [[HL::Finding specific total::HL]] | [[HL::`D2 + D5 + D9` (food ke bills select karna manually)::HL]] | [[HL::`=SUMIF(C:C, "food", D:D)`::HL]] |
+| [[HL::Percent display::HL]] | [[HL::Likhna: `40` aur samne `percent` type karna manually::HL]] | [[HL::`=I2/J2`, Format tab par `%` press karna::HL]] |
+| [[HL::Visual appeal::HL]] | [[HL::Bina borders wali safed sheet::HL]] | [[HL::**Thick outside borders** + **Conditional Formatting** bar::HL]] |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -2772,11 +2772,11 @@ Jab corporate companies (jaise Microsoft ya Apple) apni Excel files client ko bh
 
 [[HL::#### ⚖️ 13. Comparison (Ye vs Woh)::HL]]
 
-[[HL::| Feature | Scope / Control | Primary Usage |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Theme (Page layout)** | Poori Workbook (All sheets globally) | Brand identity aur default font/colors badalne ke liye. |::HL]]
-[[HL::| **Cell Styles** | Ek specific Cell ya Range par | Status (Good/Bad/Neutral/Warning) turant darshane (indicate) ke liye. |::HL]]
-[[HL::| **Draw Border** | Specific borders manually define karna | Custom reports, jaha grid standard boxes me fit nahi banti::HL]]. |
+| [[HL::Feature::HL]] | [[HL::Scope / Control::HL]] | [[HL::Primary Usage::HL]] |
+| --- | --- | --- |
+| [[HL::**Theme (Page layout)**::HL]] | [[HL::Poori Workbook (All sheets globally)::HL]] | [[HL::Brand identity aur default font/colors badalne ke liye.::HL]] |
+| [[HL::**Cell Styles**::HL]] | [[HL::Ek specific Cell ya Range par::HL]] | [[HL::Status (Good/Bad/Neutral/Warning) turant darshane (indicate) ke liye.::HL]] |
+| [[HL::**Draw Border**::HL]] | [[HL::Specific borders manually define karna::HL]] | [[HL::Custom reports, jaha grid standard boxes me fit nahi banti::HL]]. |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -3874,10 +3874,10 @@ Agar main tumhe cricket match ki har over ki ball-by-ball written report du, toh
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
 | [[HL::Feature | Column / Bar Chart | Line / Area Chart | 3D Pie Chart |::HL]]
-[[HL::| --- | --- | --- | --- |::HL]]
-[[HL::| Main Focus | Items ko compare karna | Samay ke sath badlaav (Trend) | Purey (Whole) mein se hissa (Share) |::HL]]
-[[HL::| Data Density | Kam items ke liye best | Hazaron items (Time-series) handle kar lega | Sirf 4-5 categories (varna clutter hoga) |::HL]]
-[[HL::| Setup | X aur Y axis required | X aur Y axis required | Sirf percentages/slices (no strict Axis) |::HL]]
+| --- | --- | --- | --- |
+| [[HL::Main Focus::HL]] | [[HL::Items ko compare karna::HL]] | [[HL::Samay ke sath badlaav (Trend)::HL]] | [[HL::Purey (Whole) mein se hissa (Share)::HL]] |
+| [[HL::Data Density::HL]] | [[HL::Kam items ke liye best::HL]] | [[HL::Hazaron items (Time-series) handle kar lega::HL]] | [[HL::Sirf 4-5 categories (varna clutter hoga)::HL]] |
+| [[HL::Setup::HL]] | [[HL::X aur Y axis required::HL]] | [[HL::X aur Y axis required::HL]] | [[HL::Sirf percentages/slices (no strict Axis)::HL]] |
 
 [[HL::#### 🌍 14. Real-World Use Case (Production Application)::HL]]
 
@@ -4398,10 +4398,10 @@ Files mein jab "External Links" (doosri workbook ka reference) hota hai, toh kho
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
 | [[HL::Feature | Cross-Sheet Reference | Cross-Workbook Reference |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| Kisko link karta hai? | Same file ki doosri tabs ko (`Sheet2!A1`) | Poori tarah external doosri file ko |::HL]]
-[[HL::| Syntax Marker | Exclamation mark `!` | Square Brackets `[]` + Exclamation mark `!` |::HL]]
-[[HL::| Stability | 100% stable, file move hone se break nahi hota | Fragile, file rename/move karte hi link toot jata hai::HL]] |
+| --- | --- | --- |
+| [[HL::Kisko link karta hai?::HL]] | [[HL::Same file ki doosri tabs ko (`Sheet2!A1`)::HL]] | [[HL::Poori tarah external doosri file ko::HL]] |
+| [[HL::Syntax Marker::HL]] | [[HL::Exclamation mark `!`::HL]] | [[HL::Square Brackets `[]` + Exclamation mark `!`::HL]] |
+| [[HL::Stability::HL]] | [[HL::100% stable, file move hone se break nahi hota::HL]] | [[HL::Fragile, file rename/move karte hi link toot jata hai::HL]] |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -4417,7 +4417,7 @@ Speaker ne ek accounting hierarchy setup describe ki. Ek Master Bank Balance fil
 
 ```text
 [ [[HL::HR_Salaries.xlsx ]               [ Finance_Dashboard.xlsx ]::HL]]
-[[HL::       |                                      |::HL]]
+       |                                      |
 [[HL::Sheet: Ramesh                      Cell B2: =[HR_Salaries.xlsx]Ramesh!A5::HL]]
 [[HL::Cell A5: 45000 -----------------------> Displays: 45000 (Dynamically Linked)::HL]]
 [[HL::(If changed to 50000) ----------------> (Instantly updates to 50000)::HL]]
@@ -6222,10 +6222,10 @@ Jab table create hoti hai, toh Workbench ke left panel (Schemas) mein:
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
 | [[HL::Feature | INT | VARCHAR | DECIMAL |::HL]]
-[[HL::| --- | --- | --- | --- |::HL]]
-[[HL::| **Kya store karta hai?** | Pure numbers (no decimals) | Text, symbols, numbers | Numbers with precision |::HL]]
-[[HL::| **Example** | 67 (Savitri's age) | "Hrithik Sharma", "+91-123" | 45000.50 (Salary) |::HL]]
-[[HL::| **Phone number ke liye?** | ❌ Bura option (leading zero cut) | ✅ Best option | ❌ Not needed |::HL]]
+| --- | --- | --- | --- |
+| [[HL::**Kya store karta hai?**::HL]] | [[HL::Pure numbers (no decimals)::HL]] | [[HL::Text, symbols, numbers::HL]] | [[HL::Numbers with precision::HL]] |
+| [[HL::**Example**::HL]] | [[HL::67 (Savitri's age)::HL]] | [[HL::"Hrithik Sharma", "+91-123"::HL]] | [[HL::45000.50 (Salary)::HL]] |
+| [[HL::**Phone number ke liye?**::HL]] | [[HL::❌ Bura option (leading zero cut)::HL]] | [[HL::✅ Best option::HL]] | [[HL::❌ Not needed::HL]] |
 
 [[HL::#### 🌍 14. Real-World Use Case::HL]]
 
@@ -6451,11 +6451,11 @@ Table: employees (Schema Design)
 
 [[HL::#### ⚖️ 13. Comparison (Ye vs Woh)::HL]]
 
-[[HL::| Feature | COMMIT | ROLLBACK |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Action** | Changes ko Disk pe permanent save karta hai | Changes ko RAM se delete (undo) karta hai |::HL]]
-[[HL::| **Kab use karein?** | Jab saari queries successfully run ho jayein | Jab koi query fail ho jaye ya galti ho jaye |::HL]]
-[[HL::| **Autocommit = 1 hone par** | Automatic fire hota hai | Automatic fire nahi ho sakta (jab tak crash na ho) |::HL]]
+| [[HL::Feature::HL]] | [[HL::COMMIT::HL]] | [[HL::ROLLBACK::HL]] |
+| --- | --- | --- |
+| [[HL::**Action**::HL]] | [[HL::Changes ko Disk pe permanent save karta hai::HL]] | [[HL::Changes ko RAM se delete (undo) karta hai::HL]] |
+| [[HL::**Kab use karein?**::HL]] | [[HL::Jab saari queries successfully run ho jayein::HL]] | [[HL::Jab koi query fail ho jaye ya galti ho jaye::HL]] |
+| [[HL::**Autocommit = 1 hone par**::HL]] | [[HL::Automatic fire hota hai::HL]] | [[HL::Automatic fire nahi ho sakta (jab tak crash na ho)::HL]] |
 
 [[HL::#### 🌍 14. Real-World Use Case::HL]]
 
@@ -6471,17 +6471,17 @@ Table: employees (Schema Design)
 
 ```text
 [ [[HL::INSERT QUERY ]::HL]]
-[[HL::       |::HL]]
+       |
 [[HL::       v::HL]]
 [[HL::( autocommit = 0 ? ) ---> NO (Default) ---> [ HARD DISK: Saved Permanently ]::HL]]
-[[HL::       |::HL]]
+       |
 [[HL::      YES::HL]]
-[[HL::       |::HL]]
+       |
 [[HL::       v::HL]]
 [[HL::[ RAM: Temporary Sandbox ]::HL]]
-[[HL::       |::HL]]
+       |
 [[HL::       +----> ( If COMMIT run ) -----> [ HARD DISK: Permanent Save ]::HL]]
-[[HL::       |::HL]]
+       |
 [[HL::       +----> ( If ROLLBACK run ) ---> [ RAM Cleared: Undo Changes ]::HL]]
 
 ```
@@ -6661,11 +6661,11 @@ Kabhi bhi application se seedha user input ko SQL string mein concatenate (`"SEL
 
 [[HL::#### ⚖️ 13. Comparison (Ye vs Woh)::HL]]
 
-[[HL::| Feature | DELETE | TRUNCATE (Teaser) |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Kam kya hai?** | Ek ya usse zyada (multiple row deletion) rows delete karta hai | Poori table ko instantly empty kar deta hai |::HL]]
-[[HL::| **WHERE clause?** | ✅ Haan, use hota hai (specific row hatane ke liye) | ❌ Nahi, WHERE clause support nahi karta |::HL]]
-[[HL::| **Speed** | Slow (har row ko count karta hai) | Super Fast::HL]] |
+| [[HL::Feature::HL]] | [[HL::DELETE::HL]] | [[HL::TRUNCATE (Teaser)::HL]] |
+| --- | --- | --- |
+| [[HL::**Kam kya hai?**::HL]] | [[HL::Ek ya usse zyada (multiple row deletion) rows delete karta hai::HL]] | [[HL::Poori table ko instantly empty kar deta hai::HL]] |
+| [[HL::**WHERE clause?**::HL]] | [[HL::✅ Haan, use hota hai (specific row hatane ke liye)::HL]] | [[HL::❌ Nahi, WHERE clause support nahi karta::HL]] |
+| [[HL::**Speed**::HL]] | [[HL::Slow (har row ko count karta hai)::HL]] | [[HL::Super Fast::HL]] |
 
 #### 🌍 14. Real-World Use Case
 
@@ -6882,10 +6882,10 @@ Jab database mein 10 million rows hoti hain, toh `LIKE '%bad'` (jisme `%` shuru 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
 | [[HL::Feature | IN | BETWEEN | LIKE |::HL]]
-[[HL::| --- | --- | --- | --- |::HL]]
-[[HL::| **Kya karta hai?** | Specific values ki list se match karta hai | Ek specific number/date range check karta hai | Text ka pattern match karta hai |::HL]]
-[[HL::| **Example** | `IN (10, 20, 30)` | `BETWEEN 100 AND 500` | `LIKE 'A%'` |::HL]]
-[[HL::| **Use case** | Categorical filtering (e.g., Delhi, Mumbai) | Price filters, Date ranges | Searching names or emails |::HL]]
+| --- | --- | --- | --- |
+| [[HL::**Kya karta hai?**::HL]] | [[HL::Specific values ki list se match karta hai::HL]] | [[HL::Ek specific number/date range check karta hai::HL]] | [[HL::Text ka pattern match karta hai::HL]] |
+| [[HL::**Example**::HL]] | [[HL::`IN (10, 20, 30)`::HL]] | [[HL::`BETWEEN 100 AND 500`::HL]] | [[HL::`LIKE 'A%'`::HL]] |
+| [[HL::**Use case**::HL]] | [[HL::Categorical filtering (e.g., Delhi, Mumbai)::HL]] | [[HL::Price filters, Date ranges::HL]] | [[HL::Searching names or emails::HL]] |
 
 [[HL::#### 🌍 14. Real-World Use Case::HL]]
 
@@ -7082,10 +7082,10 @@ Industry (jaise Flipkart/Amazon with sellers from Bangalore, Mumbai, Kolkata) me
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
 | [[HL::Constraint | Parent row delete hone par Child row ka kya hoga? | Kab use karein? |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **RESTRICT** | Parent ko delete hone hi nahi dega (Error throw) | Default safety choice. Financial records. |::HL]]
-[[HL::| **CASCADE** | Child rows automatically delete ho jayengi | Posts & Comments, Folder & Files |::HL]]
-[[HL::| **SET NULL** | Child row bachegi, par FK column NULL ho jayega | Customer & Orders (preserve history) |::HL]]
+| --- | --- | --- |
+| [[HL::**RESTRICT**::HL]] | [[HL::Parent ko delete hone hi nahi dega (Error throw)::HL]] | [[HL::Default safety choice. Financial records.::HL]] |
+| [[HL::**CASCADE**::HL]] | [[HL::Child rows automatically delete ho jayengi::HL]] | [[HL::Posts & Comments, Folder & Files::HL]] |
+| [[HL::**SET NULL**::HL]] | [[HL::Child row bachegi, par FK column NULL ho jayega::HL]] | [[HL::Customer & Orders (preserve history)::HL]] |
 
 [[HL::#### 🌍 14. Real-World Use Case::HL]]
 
@@ -7300,7 +7300,7 @@ Industry (jaise Amazon) mein combined report nikalne ke liye queries bohot heavy
 | Feature | [[HL::INNER JOIN | LEFT JOIN | RIGHT JOIN::HL]] |
 | --- | --- | --- | --- |
 | **Kam kya hai?** | Sirf matching rows dono tables se | [[HL::Left table ki saari rows, chahe match ho ya na ho | Right table ki saari rows |::HL]]
-[[HL::| **Non-matching data** | Ignore kar deta hai (Delete dikhta hai) | `NULL` fill kar deta hai::HL]] | `NULL` fill kar deta hai |
+| [[HL::**Non-matching data**::HL]] | [[HL::Ignore kar deta hai (Delete dikhta hai)::HL]] | [[HL::`NULL` fill kar deta hai::HL]] | `NULL` fill kar deta hai |
 
 #### 🌍 14. Real-World Use Case
 
@@ -8087,11 +8087,11 @@ Industry dashboards aur **business reports** (jaise monthly **sales summaries**)
 
 [[HL::#### ⚖️ 13. Comparison (Ye vs Woh)::HL]]
 
-[[HL::| Feature | WHERE | HAVING |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Kab kaam karta hai?** | Data grouping se PEHLE (Pre-filter) | Data grouping ke BAAD (Post-filter) |::HL]]
-[[HL::| **Row by row check?** | ✅ Haan, original raw rows pe check lagata hai | ❌ Nahi, grouped summary buckets pe check lagata hai |::HL]]
-[[HL::| **Aggregate functions (`SUM()`)?** | ❌ Allowed nahi hain | ✅ Allowed hain::HL]] |
+| [[HL::Feature::HL]] | [[HL::WHERE::HL]] | [[HL::HAVING::HL]] |
+| --- | --- | --- |
+| [[HL::**Kab kaam karta hai?**::HL]] | [[HL::Data grouping se PEHLE (Pre-filter)::HL]] | [[HL::Data grouping ke BAAD (Post-filter)::HL]] |
+| [[HL::**Row by row check?**::HL]] | [[HL::✅ Haan, original raw rows pe check lagata hai::HL]] | [[HL::❌ Nahi, grouped summary buckets pe check lagata hai::HL]] |
+| [[HL::**Aggregate functions (`SUM()`)?**::HL]] | [[HL::❌ Allowed nahi hain::HL]] | [[HL::✅ Allowed hain::HL]] |
 
 #### 🌍 14. Real-World Use Case
 
@@ -8499,10 +8499,10 @@ Stored procedures SQL Injection attacks ko naturally prevent karte hain. Kyunki 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
 | [[HL::Feature | View | Stored Procedure |::HL]]
-[[HL::| --- | --- | --- |::HL]]
-[[HL::| **Kya store karta hai?** | Ek single SELECT statement | Complex business logic (loops, if/else, multi-queries) |::HL]]
-[[HL::| **Parameters pass kar sakte hain?** | ❌ Nahi | ✅ Haan (`IN` parameters ke through) |::HL]]
-[[HL::| **Kaise execute karein?** | `SELECT * FROM view_name` | `CALL procedure_::HL]]name()` |
+| --- | --- | --- |
+| [[HL::**Kya store karta hai?**::HL]] | [[HL::Ek single SELECT statement::HL]] | [[HL::Complex business logic (loops, if/else, multi-queries)::HL]] |
+| [[HL::**Parameters pass kar sakte hain?**::HL]] | [[HL::❌ Nahi::HL]] | [[HL::✅ Haan (`IN` parameters ke through)::HL]] |
+| [[HL::**Kaise execute karein?**::HL]] | [[HL::`SELECT * FROM view_name`::HL]] | `CALL procedure_name()` |
 
 #### 🌍 14. Real-World Use Case
 
