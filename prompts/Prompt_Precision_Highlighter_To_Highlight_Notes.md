@@ -285,6 +285,11 @@ Instead, you must **expand your highlight boundaries outwards** so that the enti
 - ❌ `**[[HL::Mistake:** Multiple screens::HL]]` — **FORBIDDEN:** Violates Rule 13 (straddling markdown tags).
 - ✅ `[[HL::**Mistake:** Multiple screens::HL]]` — **CORRECT:** The highlight expands outward to cleanly wrap the entire bold element.
 
+### Rule 38 — NESTED QUOTES IN ZOTERO EXPORTS (Regex Warning)
+Zotero annotations frequently contain internal quotation marks (e.g., `“Confusion 1 - "Cell C7 ka kya matlab hai?" Galat soch...”`). 
+If you write extraction scripts using naive regex like `re.findall(r'[“"](.*?)["”]', content)`, it will incorrectly stop at the first internal straight quote (`"`), prematurely chopping the annotation into broken pieces and causing document matching to fail.
+**CRITICAL VERIFICATION STEP:** Your extraction logic must strictly pair the outermost curly quotes (e.g., `re.findall(r'“([\s\S]*?)”', content)`) or use block-based parsing (splitting by `\n\n`) to ensure the entire annotation is captured intact without breaking on nested quotes.
+
 ---
 
 ## 🔄 PROCESSING ORDER (Follow This Exactly)
@@ -415,3 +420,4 @@ When you see this, do NOT treat it as a single contiguous string. You must intel
 | Blindly merging Zotero splits without verifying | Forbidden — merging adjacent annotations without checking if the merged string actually exists in the target document causes catastrophic over-merging. |
 | Failing to account for Overlapping Characters in Zotero splits | Forbidden — Zotero splits often duplicate letters across boundaries (e.g., `Mista` + `ake`). Simple concatenation will fail verification. |
 | Allowing interleaved Zotero citations to block merges | Forbidden — Zotero citations jammed between split fragments will block sequential merge logic. They must be stripped globally first. |
+| Using naive regex that breaks on nested quotes in Zotero exports | Forbidden — Zotero exports use curly quotes (`“`...`”`) but contain internal straight quotes (`"`). Naive regex like `[“"]` will shatter the block. |

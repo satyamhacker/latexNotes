@@ -148,7 +148,7 @@ Large audit firms (jaise PwC, Deloitte) hamesha Microsoft 365 subscription use k
 
 ```
 
-#### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
+#### ❓ 17. Interview Q&A (FAQ)
 
 * [[HL::**Q:** Desktop Excel aur Excel for the Web mein primary difference kya hai production environment mein?::HL]]
 * [[HL::**A:** Desktop Excel full CPU/RAM utilize karta hai aur heavy datasets (millions of rows) ya complex macros process kar sakta hai. Excel for the Web browser-based hai (lightweight), jo quick edits aur real-time collaboration ke liye best hai, par large offline processing ke liye struggle karta hai::HL]].
@@ -261,7 +261,7 @@ Jab senior data analysts hazaaron rows par kaam karte hain, toh unhe screen spac
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Formula Bar aur Cell mein kya farq hai? Dono mein same text dikh raha hai."**
+* [[HL::**Confusion 1 — "Formula Bar aur Cell mein kya farq hai? Dono mein same text dikh raha hai."**::HL]]
 * [[HL::**Galat soch:** Dono ek hi cheez hain, bas do alag jagah dikh rahe hain.::HL]]
 * [[HL::**Actually:** Cell mein tumhe "Result" dikhta hai, jabki Formula Bar mein us result ke peeche ka "Logic/Formula" dikhta hai.::HL]]
 * [[HL::**Prove karo:** Cell A1 mein `=10+5` likho aur Enter dabao. Ab cell mein `15` dikhega, par Formula Bar mein abhi bhi `=10+5` dikhega::HL]]!
@@ -302,7 +302,7 @@ Jab senior data analysts hazaaron rows par kaam karte hain, toh unhe screen spac
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Financial analysts jab kisi badi company (jaise HDFC Bank) ka P&L (Profit & Loss) statement banate hain, toh wo 'Data' tab (sorting/filtering ke liye) aur 'Formulas' tab ke beech frequently move karte hain. Wo apne most critical buttons (jaise [[HL::Paste Values ya::HL]] Print Preview) ko Quick Access Toolbar mein pin kar lete hain taaki Ribbon switch karne ka time bach sake.
+Financial analysts jab kisi badi company (jaise HDFC Bank) ka P&L (Profit & Loss) statement banate hain, toh wo 'Data' tab (sorting/filtering ke liye) aur 'Formulas' tab ke beech frequently move karte hain. Wo apne most critical buttons (jaise Paste Values ya Print Preview) ko Quick Access Toolbar mein pin kar lete hain taaki Ribbon switch karne ka time bach sake.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -460,7 +460,7 @@ Bottom bar se dono sheets gayab (hide) ho jayengi. Unhe wapas laane ke liye kisi
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Hide karne se kya sheet ka data delete ho jata hai?"**
+* [[HL::**Confusion 1 — "Hide karne se kya sheet ka data delete ho jata hai?"**::HL]]
 * [[HL::**Galat soch:** Log sochte hain hide matlab gayab/removed.::HL]]
 * [[HL::**Actually:** Data memory mein wahi rehta hai aur formulas bhi bilkul theek kaam karte hain. Bas tab aankhon ke saamne se hat jata hai::HL]].
 * **Prove karo:** `Sheet 1` ke A1 mein 100 likho. `Sheet 2` mein `=Sheet1!A1` likho (output 100 aayega). Ab `Sheet 1` hide kar do. Tum dekhoge ki Sheet 2 mein abhi bhi 100 dikh raha hai — calculation tooti nahi!
@@ -585,7 +585,7 @@ Socho tum cinema hall (movie theater) gaye ho. Tumhari ticket par likha hai **"R
 * Max Columns: Exactly ⭐**16384** columns. (Letters A se shuru hote hain, Z tak jate hain, fir AA, AB... aur aakhiri column **xfd** hota hai).
 
 
-* [[HL::**Isolation:** Speaker ka explicit emphasis::HL]]: "Changing in one sheet does not affect the other sheet". [[HL::Har sheet apne aap mein ek alag 1-million row ka isolated container hai jab tak unhe intentionally formula se link na kiya jaye::HL]].
+* [[HL::**Isolation:** Speaker ka explicit emphasis: "Changing in one sheet does not affect the other sheet". Har sheet apne aap mein ek alag 1-million row ka isolated container hai jab tak unhe intentionally formula se link na kiya jaye::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -633,7 +633,7 @@ Senior analysts hamesha file size check karte hain. Agar data Excel limits (1 mi
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Cell C7 ka kya matlab hai? Pehle Row kyu nahi?"**
+* [[HL::**Confusion 1 — "Cell C7 ka kya matlab hai? Pehle Row kyu nahi?"**::HL]]
 * [[HL::**Galat soch:** Log sochte hain Row pehle aani chahiye (jaise 7C) kyunki padhne mein natural lagta hai.::HL]]
 * [[HL::**Actually:** Excel ka universal syntax Column Letter pehle aur Row Number baad mein likhta hai. Hamesha Alphabet pehle aayega::HL]].
 * **Prove karo:** Kisi cell mein '=7C' type karo — error aayega! Ab '=C7' type karo, yeh properly cell C7 ko highlight karega.
@@ -790,7 +790,7 @@ Speaker ne ek bohot relatable example diya: Unka Singapore NUS (National Univers
 * [[HL::**Problem:** Laptop crash hona, battery dead hona ya galti se file close kar dena — in sab se ghanton ki mehnat minto mein delete ho jati hai.::HL]]
 * [[HL::**Solution:** **AutoSave** (Excel ka feature jo har second data save karta hai) aur cloud storage is problem ko root se khatam karte hain::HL]].
 * **What breaks if we don't use it?** Agar tum local hard drive mein save karte ho aur PC kharab ho gaya, toh no backup. Agar tum purana format use karte ho, toh naye features (like 1-million rows) toot jayenge.
-* [[HL::**✅ Kab use karo:** Hamesha default **Save As** karte waqt modern **Excel workbook** format (⭐**.xlsx**) use karo. Speaker says::HL]]: "You should use Excel SX 90% of the time". [[HL::Data easily share karne ke liye **copy link** feature use karo::HL]].
+* [[HL::**✅ Kab use karo:** Hamesha default **Save As** karte waqt modern **Excel workbook** format (⭐**.xlsx**) use karo. Speaker says: "You should use Excel SX 90% of the time". Data easily share karne ke liye **copy link** feature use karo::HL]].
 * **❌ Kab mat karo / Alternative prefer karo:** Kabhi bhi purana **97-2003** format (⭐**.xls**) use mat karo jab tak ki kisi bohot purane system (20 saal purana PC) ke liye specifically demand na ho. Agar file mein VBA code (automation scripts) hain, toh `.xlsx` ki jagah **Excel Macro Enabled Workbook** (`.xlsm`) use karo.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -855,13 +855,13 @@ Companies mein file attachments ("Report_Final_v2_edited.xlsx") bhejne ka zamana
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — ".xls aur .xlsx mein X ka kya matlab hai?"**
+* [[HL::**Confusion 1 — ".xls aur .xlsx mein X ka kya matlab hai?"**::HL]]
 * [[HL::**Galat soch:** X ka matlab sirf naya version hai.::HL]]
 * [[HL::**Actually:** X ka matlab hai "XML" (eXtensible Markup Language). `.xlsx` actually ek zip folder hai jo data ko text (XML) format mein compress karke rakhta hai, isliye file size .xls se bohot chhota hota hai::HL]].
 * **Prove karo:** Kisi `test.xlsx` file ko rename karke `test.zip` karo, aur use extract (unzip) karo. Tumhe uske andar text files (XML) milengi! (Jabki .xls binary hoti hai, usko extract nahi kar sakte).
 
 
-* **Confusion 2 — "AutoSave grey (disabled) kyu dikh raha hai?"**
+* [[HL::**Confusion 2 — "AutoSave grey (disabled) kyu dikh raha hai?"**::HL]]
 * [[HL::**Galat soch:** Excel kharab ho gaya hai.::HL]]
 * [[HL::**Actually:** AutoSave sirf tab ON hota hai jab file OneDrive ya SharePoint (cloud) par saved ho. Agar file local (C: Drive) mein hai, toh toggle disable rahega.::HL]]
 * [[HL::**Prove karo:** Nayi file banao, local PC me save karo — AutoSave toggle kaam nahi karega. Use OneDrive me save karo — toggle khud ON ho jayega::HL]].
@@ -1026,7 +1026,7 @@ Finance sector (Banks) mein **Accounting** format strict industry standard hai. 
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Currency aur Accounting format mein kya fark hai?"**
+* [[HL::**Confusion 1 — "Currency aur Accounting format mein kya fark hai?"**::HL]]
 * [[HL::**Galat soch:** Dono bilkul same hain, bas naam alag hai.::HL]]
 * [[HL::**Actually:** Accounting format mein zeroes `0` nahi dikhte, unki jagah ek dash `-` aata hai, aur currency symbol ek side perfectly align rehta hai. Currency format normal zero dikhata hai.::HL]]
 * [[HL::**Prove karo:** A1 aur B1 me `0` likho. A1 ko Currency do, wo `₹0.00` dikhayega. B1 ko Accounting do, wo `₹   -  ` dikhayega.::HL]]
@@ -1114,24 +1114,24 @@ Scientific              |  4.5E+04
 
 ### 🎯 Topic: 3. Editing & Moving Data
 
-(Column Resizing, Row Resizing, Moving Selections, Paste Values, [[HL::Paste Transpose::HL]], Clear Content)
+(Column Resizing, Row Resizing, Moving Selections, Paste Values, Paste Transpose, Clear Content)
 **Overview:** Data boundaries adjust karna, content ko copy/move karna without breaking formulas, aur columns/rows ko rapidly format karne ke daily shortcut methods hum yahan cover karenge.
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-Speaker ne bohot funny example diya. Ek cell box hota hai jisme text jaata hai. Agar naam chhota hai jaise "Harry", toh theek hai. Par agar naam bada hai — "Shubham Kumar Mishra" — toh wo naam apne cell ki boundary tod kar agle cell (bagal wale kamre) mein ghusne lagega. Iske liye hume **resize** karke boundary badi karni padti hai. Waise hi, agar list seedhi (vertical) khadi hai aur tumhe use lita (horizontal) dena hai, toh uske liye Excel me jaadu hai jise [[HL::**Paste Transpose**::HL]] kehte hain.
+Speaker ne bohot funny example diya. Ek cell box hota hai jisme text jaata hai. Agar naam chhota hai jaise "Harry", toh theek hai. Par agar naam bada hai — "Shubham Kumar Mishra" — toh wo naam apne cell ki boundary tod kar agle cell (bagal wale kamre) mein ghusne lagega. Iske liye hume **resize** karke boundary badi karni padti hai. Waise hi, agar list seedhi (vertical) khadi hai aur tumhe use lita (horizontal) dena hai, toh uske liye Excel me jaadu hai jise **Paste Transpose** kehte hain.
 
 #### 📖 3. Technical Definition
 
 * **Precise English:** Editing data involves structurally resizing rows and columns to fit content, and using advanced clipboard operations (like Paste Values or Transpose) to manipulate data arrays without copying underlying formula logic or formatting.
-* [[HL::**Hinglish Simplification:** Columns/Rows ki height/width adjust karna, aur copy-paste karte waqt Excel ko batana ki::HL]] "mujhe sirf values (answer) chahiye, formula nahi" ([[HL::Paste Values), ya::HL]] "lambi list ko bedi (horizontal) list bana do" ([[HL::Paste Transpose::HL]]).
+* [[HL::**Hinglish Simplification:** Columns/Rows ki height/width adjust karna, aur copy-paste karte waqt Excel ko batana ki "mujhe sirf values (answer) chahiye, formula nahi" (Paste Values), ya "lambi list ko bedi (horizontal) list bana do" (Paste Transpose::HL]]).
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * [[HL::**Problem:** Data entry karte waqt content bahar nikal jata hai, aur jab hum formula-driven data copy karte hain, toh destination pe jate hi references tootne se `#REF!` error aa jata hai.::HL]]
 * [[HL::**Solution:** **Column width** aur **row height** resizing data ko readable banati hai. Aur **Paste Values** formula hata kar sirf final result paste karta hai, jisse errors nahi aate::HL]].
 * **What breaks if we don't use it?** Agar tum normal `Ctrl V` (Paste) hamesha use karoge, toh background calculations bhi paste ho jayengi jo galat columns se data uthayengi aur result kharab ho jayega.
-* **✅ Kab use karo:** Jab bhi ek sheet se calculated data doosri blank sheet mein report ke liye le jana ho — hamesha **Paste Values** use karo. Jab mahino ka data row-wise ajeeb lag raha ho — [[HL::**Paste Transpose**::HL]] use karke column headers mein badal do.
+* **✅ Kab use karo:** Jab bhi ek sheet se calculated data doosri blank sheet mein report ke liye le jana ho — hamesha **Paste Values** use karo. Jab mahino ka data row-wise ajeeb lag raha ho — **Paste Transpose** use karke column headers mein badal do.
 * [[HL::**❌ Kab mat karo / Alternative prefer karo:** Jab tumhe sirf design/color same chahiye aur text nahi — tab copy-paste mat karo, **format painter** (jo brush jaisa tool hota hai) use karo. Woh sirf rang/design copy karta hai bina data over-write kiye::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -1142,7 +1142,7 @@ Jab mouse kisi do column headers (A aur B ke beech ki line) par lekar jate ho, t
 
 * [[HL::**Clear Content vs Delete:** Jab tum keyboard se 'Delete' dabate ho ya menu se **Clear Content** dabate ho, sirf text (content) udta hai. Us cell ka background color ya borders waise hi bache rehte hain. Pura structure delete karne ke liye 'Clear All' lagta hai::HL]].
 * **Auto-Fit Logic:** Jab tum column boundary pe double-click karte ho, Excel internal engine poore column ke ek-ek cell (from Row 1 to Row 1M) ko parse karta hai, sabse lambe text ("Shubham Kumar Mishra") ki length calculate karta hai, aur column ko us maximum length par set kar deta hai.
-* **Transposition Matrix:** [[HL::**Paste Transpose**::HL]] internally math ka Matrix Transpose logic use karta hai, jisme Row[x] ban jata hai Column[x] aur vice versa.
+* **Transposition Matrix:** **Paste Transpose** internally math ka Matrix Transpose logic use karta hai, jisme Row[x] ban jata hai Column[x] aur vice versa.
 * [[HL::**Moving selections:** Jab tum cell ki green boundary (edge) ko pakad kar drag karte ho, Excel internally formula dependencies trace karta hai. Isliye formulas automatic update ho jate hain aur toot-te nahi::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
@@ -1194,19 +1194,19 @@ Large reporting models mein "Hardcoding" se bachne ke liye macros use hote hain.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* [[HL::**Confusion 1 — "Paste Transpose exactly kya palat-ta hai?"**::HL]]
+* **Confusion 1 — "Paste Transpose exactly kya palat-ta hai?"**
 * **Galat soch:** Right-to-Left text ko palat deta hai.
 * **Actually:** Data ka rasta palat-ta hai. Agar data upar se niche (Row 1, Row 2, Row 3) likha hai, Transpose karne par wahi data left se right (Col A, Col B, Col C) fail jayega.
 * **Prove karo:** A1, A2, A3 me 1, 2, 3 likho. Copy karo, kisi blank jagah jao, right click > Paste options me Transpose icon (arrow wala) dabao. Data ek single line me horizontal ho jayega.
 
 
-* **Confusion 2 — "Delete key aur Backspace mein excel mein kya fark hai?"**
+* [[HL::**Confusion 2 — "Delete key aur Backspace mein excel mein kya fark hai?"**::HL]]
 * [[HL::**Galat soch:** Dono text hatate hain, same hain.::HL]]
 * [[HL::**Actually:** `Delete` key ek baar mein multiple selected cells ka pura data ('Clear Content') udata hai without entering edit mode. `Backspace` dabaoge toh sirf active ek cell empty hoga aur tumhra cursor andar edit mode me aa jayega further typing ke liye::HL]].
 * **Prove karo:** 5 cells select karo. Backspace dabao (sirf pehla empty hoke typing start hogi). Undo karo. Ab Delete dabao (saare 5 ek sath clear ho jayenge).
 
 
-* **Confusion 3 — "Ctrl Z (Undo) kaam nahi kar raha mera!"**
+* [[HL::**Confusion 3 — "Ctrl Z (Undo) kaam nahi kar raha mera!"**::HL]]
 * [[HL::**Galat soch:** Excel glitch kar raha hai.::HL]]
 * [[HL::**Actually:** Agar tumne galti se Save kar diya, ya Macro run kar diya, toh memory flush ho jati hai aur **Ctrl Z** kaam nahi karta::HL]].
 * **Prove karo:** Ek value delete karo (Ctrl Z kaam karega). Wapas delete karo, fir Macro run karo ya file band karke kholo (Undo history gayab).
@@ -1237,20 +1237,20 @@ Large reporting models mein "Hardcoding" se bachne ke liye macros use hote hain.
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Jab companies (e.g. TCS) ek tool se software data export karti hain, toh system headers vertically de deta hai (e.g., Name, Age, Salary sab rows mein). HR ko salary slip banane ke liye table horizontal (columns) me chahiye hoti hai. Woh pura data select karke [[HL::**Paste Transpose**::HL]] karte hain jisse report instant ready ho jati hai bina dobara typing ke.
+Jab companies (e.g. TCS) ek tool se software data export karti hain, toh system headers vertically de deta hai (e.g., Name, Age, Salary sab rows mein). HR ko salary slip banane ke liye table horizontal (columns) me chahiye hoti hai. Woh pura data select karke **Paste Transpose** karte hain jisse report instant ready ho jati hai bina dobara typing ke.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
 * [[HL::**Testing/Offline Phase:** User type karta hai, jab data cell ke bahar leak hone lagta hai (e.g. long names like "Shubham Kumar Mishra"), toh user manual boundary khich kar **resize** karta hai ya double-click karke auto-fit karta hai (**column width / row height** adjust karta hai::HL]]).
-* **Fixing/Iteration Phase:** Analysis ke time, vertical data ko horizontal report convert karne ke liye `Ctrl C` (copy) karke [[HL::**Paste Transpose**::HL]] use kiya jaata hai. Agar original formula ko reference error break hone se bachana hai nai jagah jane par, toh sirf **Paste Values** use hota hai.
+* **Fixing/Iteration Phase:** Analysis ke time, vertical data ko horizontal report convert karne ke liye `Ctrl C` (copy) karke **Paste Transpose** use kiya jaata hai. Agar original formula ko reference error break hone se bachana hai nai jagah jane par, toh sirf **Paste Values** use hota hai.
 * **Live Production Phase:** Jab entire table ek jagah se doosri jagah **moving selections** (border drag karke) ki jaati hai, toh Excel smart enough hota hai ki related references ko automatically update kar de bina functions tode. Design fast karne ke liye **format painter** use hota hai.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
 ```text
-[[[HL::Paste Transpose::HL]] Matrix Flip]
+[Paste Transpose Matrix Flip]
 
-Vertical Data (Input)       [[HL::Paste Transpose::HL]]        Horizontal Data (Output)
+Vertical Data (Input)       Paste Transpose        Horizontal Data (Output)
 +---------+                 =======>               +-------+-----+--------+
 | Name    |                                        | Name  | Age | Salary |
 +---------+                 Flip Axis              +-------+-----+--------+
@@ -1263,7 +1263,7 @@ Vertical Data (Input)       [[HL::Paste Transpose::HL]]        Horizontal Data (
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q:** "Clear Content" aur "Clear All" [[HL::me ek production dataset ke point of view se kya fark hai?::HL]]
+* [[HL::**Q:** "Clear Content" aur "Clear All" me ek production dataset ke point of view se kya fark hai?::HL]]
 * [[HL::**A:** 'Clear Content' (Delete key) sirf memory se array value hatata hai. 'Clear All' (Ribbon button) value ke sath-sath conditional formatting, colors, borders aur comments sab purge kar deta hai. Database cleanup me hamesha 'Clear All' use karna safe hai warna hidden formats corruptions create kar sakte hain::HL]].
 * **Q:** Paste Values ka primary performance benefit kya hai large Excel file mein?
 * **A:** Jab aapke paas 50,000 VLOOKUP formulas hote hain, toh har calculation event (jaise Enter dabana) PC lag karta hai (Volatile nature). Un saare formulas ko copy karke usi jagah 'Paste Values' karne se formulas destroy ho jate hain aur sirf 'Answer' static/hardcoded ho jata hai, jisse Excel ki speed 100x fast ho jati hai aur file size reduce ho jata hai.
@@ -1278,7 +1278,7 @@ Vertical Data (Input)       [[HL::Paste Transpose::HL]]        Horizontal Data (
 
 ```text
 🔑 Keywords Coverage Check — Editing & Moving Data
-✅ Covered   : [column width, row height, resize, moving selections, Paste Values, [[HL::Paste Transpose::HL]], Clear Content, Ctrl C, Ctrl V, Ctrl D, Ctrl Z, format painter]
+✅ Covered   : [column width, row height, resize, moving selections, Paste Values, Paste Transpose, Clear Content, Ctrl C, Ctrl V, Ctrl D, Ctrl Z, format painter]
 ⚠️ Mentioned but needs more depth : (none)
 ❌ MISSED    : (none — all keywords covered)
 
@@ -1365,7 +1365,7 @@ Lekin Excel mein hum **cell references** (jaise remote control ka button) use ka
 
 [[HL::#### ⚙️ 6. Under the Hood (Deep Dive)::HL]]
 
-* [[HL::**Evaluation Engine:** Jab bhi tum **equal to** (`=`) type karte ho, Excel samajh jata hai ki::HL]] "yeh normal text nahi hai, mujhe is **formula** ko evaluate (calculate) karna hai".
+* [[HL::**Evaluation Engine:** Jab bhi tum **equal to** (`=`) type karte ho, Excel samajh jata hai ki "yeh normal text nahi hai, mujhe is **formula** ko evaluate (calculate) karna hai".::HL]]
 * [[HL::**Dynamic Pointers:** `B2 + C2` likhne par Excel RAM mein pointers create karta hai. Jab B2 ki memory location mein value update hoti hai, toh event listener trigger hota hai aur total waala cell instantly re-calculate ho jata hai::HL]].
 * **Alt plus equal to:** Yeh shortcut pichle saare filled numbers ko detect karta hai (chahe upar ho ya left mein) aur ek implicit `SUM()` function inject kar deta hai.
 
@@ -1418,7 +1418,7 @@ Industry dashboards mein 5 lakh rows hoti hain. Wahan ek-ek karke formula **⭐d
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Maine = lagaya par B2 likhne pe calculation nahi ho rahi"**
+* [[HL::**Confusion 1 — "Maine = lagaya par B2 likhne pe calculation nahi ho rahi"**::HL]]
 * [[HL::**Galat soch:** Excel ko reference samajh nahi aa raha.::HL]]
 * [[HL::**Actually:** Ho sakta hai column formatting "Text" par set ho. Jab cell explicitly Text formatted hota hai, toh `=B2+C2` type karne par formula execute nahi hota, bas text ki tarah print ho jata hai.::HL]]
 * [[HL::**Prove karo:** Cell format check karo. Usko "General" karo, double-click karke Enter dabao, calculate ho jayega.::HL]]
@@ -1430,7 +1430,7 @@ Industry dashboards mein 5 lakh rows hoti hain. Wahan ek-ek karke formula **⭐d
 * **Prove karo:** D2 ki value delete karo, fir E2 me `Alt + =` dabao. Dekho wo range ko sirf C2 tak limited kar lega.
 
 
-* **Confusion 3 — "Formula ko naye cell mein copy-paste karne se numbers kyu change ho gaye?"**
+* [[HL::**Confusion 3 — "Formula ko naye cell mein copy-paste karne se numbers kyu change ho gaye?"**::HL]]
 * [[HL::**Galat soch:** Copy paste toota hua hai.::HL]]
 * [[HL::**Actually:** Excel default mein 'Relative' cell referencing use karta hai. Jab formula 1 row neeche drag hota hai, uske references (B2 se B3) bhi shift ho jate hain. (Ye exact problem hum next topic me "Absolute Reference" se solve karenge::HL]]).
 
@@ -1485,7 +1485,7 @@ Retail billing systems (jaise supermarket point of sale backend) mein jab invoic
 
 ```
 
-#### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
+#### ❓ 17. Interview Q&A (FAQ)
 
 * [[HL::**Q:** "Alt + =" (AutoSum) function kaise pata karta hai ki data kahan se uthana hai?::HL]]
 * [[HL::**A:** AutoSum ka internal logic active cell se pehle 'Upwards' scan karta hai. Agar upar continuous numbers hain toh column sum karta hai. Agar upar blank hai ya text hai, toh woh 'Leftwards' scan karke row ka sum generate karta hai::HL]].
@@ -1576,7 +1576,7 @@ Socho ek "garib rishtedar" (Relative Reference) hai jiske paas dollar nahi hain 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
 * [[HL::**Line 3:** Jab hum normal `F2` reference ko niche khichte hain (**drag down**), Excel use uski direction mein naturally shift karta hai. Is wajah se calculation khaali row (F3) se multiply hone lagti hai. Isko Relative reference falling issue kehte hain.::HL]]
-* [[HL::**Line 4:** `$F$2` mein dono coordinates lock hain. Isko padhne ka tarika hai::HL]]: "Freeze the column F, Freeze the row 2". [[HL::Ab is formula ko grid mein chahe right (horizontal) drag karo ya niche (vertical) drag karo — ye connection hamesha cell F2 pe fixed (chipka hua) rahega::HL]].
+* [[HL::**Line 4:** `$F$2` mein dono coordinates lock hain. Isko padhne ka tarika hai: "Freeze the column F, Freeze the row 2". Ab is formula ko grid mein chahe right (horizontal) drag karo ya niche (vertical) drag karo — ye connection hamesha cell F2 pe fixed (chipka hua) rahega::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -1598,9 +1598,9 @@ Finance aur accounting ke complex models (jaise Loan Amortization tables) mein "
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "$ aage kyu lagta hai peeche kyu nahi?"**
+* [[HL::**Confusion 1 — "$ aage kyu lagta hai peeche kyu nahi?"**::HL]]
 * [[HL::**Galat soch:** `$F2` aur `F2$` same baat hai.::HL]]
-* [[HL::**Actually:** Dollar hamesha "prefix" hota hai (aage lagta hai). Rule ye hai ki::HL]] "Jisko lock karna hai, uska theek aage lock ($) lagao". [[HL::F ke aage laga `$F` (column lock), 2 ke aage laga `$2` (row lock). `F2$` Invalid syntax hai::HL]].
+* [[HL::**Actually:** Dollar hamesha "prefix" hota hai (aage lagta hai). Rule ye hai ki "Jisko lock karna hai, uska theek aage lock ($) lagao". F ke aage laga `$F` (column lock), 2 ke aage laga `$2` (row lock). `F2$` Invalid syntax hai::HL]].
 * **Prove karo:** Cell edit mode me `F4` dabao (shortcut). Wo clearly options cycle karega: `$F$2`, `F$2`, `$F2`, `F2`. Notice karo lock hamesha aage lag raha hai.
 
 
@@ -1796,13 +1796,13 @@ Jab senior Quants (Quantitative analysts) banking calculations jaise Compound In
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "BODMAS India mein padhate the, ye PEMDAS kya hai? Konsa use karu?"**
+* [[HL::**Confusion 1 — "BODMAS India mein padhate the, ye PEMDAS kya hai? Konsa use karu?"**::HL]]
 * [[HL::**Galat soch:** Dono alag math rules hain aur alag results aayenge.::HL]]
 * [[HL::**Actually:** Dono bilkul 100% same cheez hain, bas country ka naming difference hai. 'B' se Bracket hota hai, wahi US mein 'P' se Parentheses. 'O' se Order hota hai, wahi waha 'E' se Exponent. Dono ke result match karte hain::HL]]!
 * **Prove karo:** `= (2^3) + 5` likho (Exponent/Order). Result humesha pehle power evaluate ho ke 8+5=13 hi aayega, dono rules ki definition ke hisaab se.
 
 
-* **Confusion 2 — "Jab Multiply aur Division ek hi formula me sath me (jaise 10 / 2 * 5) aa jayein toh kaun VIP hai?"**
+* [[HL::**Confusion 2 — "Jab Multiply aur Division ek hi formula me sath me (jaise 10 / 2 * 5) aa jayein toh kaun VIP hai?"**::HL]]
 * [[HL::**Galat soch:** Multiplication pehle hota hai, fir division. (Ya BODMAS padh ke, Division pehle, fir Multiplication::HL]]).
 * **Actually:** Dono ki hierarchy equal (same VIP pass) hoti hai! Agar equation same level par match karti hai, toh Excel Left-to-Right (jo left me pehle likha hai) solve karta hai.
 * **Prove karo:** `=10/2*5` type karo. Pehle left se division hoga (10/2 = 5), fir multiply (*5) = 25.
@@ -1943,7 +1943,7 @@ Agar teacher har bacche ke marks paper pe likh kar calculator pe add karega, toh
 * [[HL::**Solution:** Inbuilt functions (jaise **SUM**) poori ki poori range ek baar mein consume kar lete hain.::HL]]
 * [[HL::**What breaks if we don't use it?** Agar basic functions use nahi kiye, toh data analytics impossible ho jayegi. Tum dataset me se basic insights (jaise total items kitne hain) bhi nahi nikal paoge.::HL]]
 * [[HL::**✅ Kab use karo:** Sabka total nikalna ho toh **SUM**, sabse chhoti value ke liye **MIN**, sabse badi ke liye **MAX**, aur items ginne (count) ke liye **COUNT** use karo.::HL]]
-* [[HL::**❌ Kab mat karo / Alternative prefer karo:** Jab tumhe sirf conditionally data add karna ho (jaise::HL]] "sirf unki aamdani jodo jo Delhi me rehte hain") — [[HL::toh simple SUM mat lagao, wahan advanced `SUMIF` (jo condition ke aadhar pe jodta hai) use hoga::HL]].
+* [[HL::**❌ Kab mat karo / Alternative prefer karo:** Jab tumhe sirf conditionally data add karna ho (jaise "sirf unki aamdani jodo jo Delhi me rehte hain") — toh simple SUM mat lagao, wahan advanced `SUMIF` (jo condition ke aadhar pe jodta hai) use hoga::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -2008,7 +2008,7 @@ D7 (DAY): 15
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "SUM aur COUNT me kya fark hai? Dono jodte hi to hain."**
+* [[HL::**Confusion 1 — "SUM aur COUNT me kya fark hai? Dono jodte hi to hain."**::HL]]
 * [[HL::**Galat soch:** Dono ka result bada hota hai, ek hi baat hai.::HL]]
 * [[HL::**Actually:** **SUM** values ka wazan (weight) jodta hai (jaise 10 + 20 = 30). Lekin **COUNT** sirf ginta hai ki kitne dabbe (cells) bhare hue hain (10 aur 20 = 2 items).::HL]]
 * [[HL::**Prove karo:** A1 me 100 aur A2 me 500 likho. `=SUM(A1:A2)` 600 dega. `=COUNT(A1:A2)` sirf 2 dega.::HL]]
@@ -2121,9 +2121,9 @@ Ek mistri (mechanic) ko har ek naye purje (part) ka naam muh-zabani yaad ho, ye 
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-[[HL::Ribbon ke andar **formulas tab** hota hai. Wahan **function library** ka section hai jisme "Math", "Financial", "Date" jaise folders hote hain. Jab tum kisi bhi cell mein click karke Formula Bar ke bagal wala chhota sa **`fx`** (Insert Function) icon dabate ho, toh ek badi **function argument window** popup hoti hai. Us window ke bottom-left corner mein neele rang se likha hota hai::HL]]: **"help on this function"**.
+[[HL::Ribbon ke andar **formulas tab** hota hai. Wahan **function library** ka section hai jisme "Math", "Financial", "Date" jaise folders hote hain. Jab tum kisi bhi cell mein click karke Formula Bar ke bagal wala chhota sa **`fx`** (Insert Function) icon dabate ho, toh ek badi **function argument window** popup hoti hai. Us window ke bottom-left corner mein neele rang se likha hota hai: **"help on this function"**.::HL]]
 
-#### ⚙️ 6. Under the Hood (Deep Dive)
+[[HL::#### ⚙️ 6. Under the Hood (Deep Dive)::HL]]
 
 * [[HL::**Syntax IntelliSense:** Jab tum cell me manually `=VLOOKUP(` type karte ho, uske niche ek hovering tooltip aata hai. Ye internally **auto-complete** engine generate karta hai jisme bold font batata hai ki current cursor konsa argument mang raha hai::HL]].
 * **Web Retrieval:** Jab tum **"help on this function"** click karte ho, Excel ek web query trigger karta hai aur tumhe seedha **support.microsoft.com** ke us exact webpage par le jata hai jahan us specific formula ke video tutorials, examples, aur real-world use cases likhe hote hain.
@@ -2158,7 +2158,7 @@ Industry professionals kabhi bhi sab kuch yaad rakhne ka pressure nahi lete. Exc
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Mujhe formula ka naam nahi pata par pata hai mujhe karna kya hai."**
+* [[HL::**Confusion 1 — "Mujhe formula ka naam nahi pata par pata hai mujhe karna kya hai."**::HL]]
 * [[HL::**Galat soch:** Mujhe internet par search karna padega.::HL]]
 * [[HL::**Actually:** `fx` (Insert Function) icon dabao. Upar ek search bar aayega jisme tum plain english likh sakte ho "Calculate interest". Excel khud tumhe best functions suggest karke de dega::HL]].
 
@@ -2349,7 +2349,7 @@ Startups aur small business pehle 6 mahine apni accounting (book-keeping) aisi h
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "SUM aur SUMIF me actual differnce kya hai?"**
+* [[HL::**Confusion 1 — "SUM aur SUMIF me actual differnce kya hai?"**::HL]]
 * [[HL::**Galat soch:** Dono add karte hain.::HL]]
 * [[HL::**Actually:** `SUM` tumhare ghar ke paas khada ek truck hai jisme sab kooda (data) dal ke weight bata dega (blind addition). `SUMIF` ek smart scanner hai jisko agar tumne bola "Sirf Apple boxes allow karo", to wo filter karke sirf "food" expenses ka amount jodh ke laayega, baki kharcho (fun/office) ko ignore kar dega::HL]].
 
@@ -2506,7 +2506,7 @@ Doosra example: Maan lo ek student **Shubham Kumar Mishra** ne **56 lakhs** fees
 
 [[HL::#### ⚙️ 6. Under the Hood (Deep Dive)::HL]]
 
-* [[HL::**Referential Integrity (Auto-updating formulas):** Speaker kehta hai::HL]], "Excel tries to be as helpful as possible". [[HL::Jab tum kisi selected data (border pakad kar) ko **drag and drop** se **move** karte ho, Excel memory mein saare connected formulas ko track karta hai aur unke references naturally background mein update kar deta hai (`#REF!` error nahi aane deta).::HL]]
+* [[HL::**Referential Integrity (Auto-updating formulas):** Speaker kehta hai, "Excel tries to be as helpful as possible". Jab tum kisi selected data (border pakad kar) ko **drag and drop** se **move** karte ho, Excel memory mein saare connected formulas ko track karta hai aur unke references naturally background mein update kar deta hai (`#REF!` error nahi aane deta).::HL]]
 * [[HL::**Duplication Engine:** Jab tum bottom sheet tab par **⭐Ctrl drag** (Ctrl hold karke sheet tab ko khichna) karte ho, toh Excel poori sheet ka ek exact memory clone (duplicate) bana deta hai (e.g., `Sheet1 (2)`). Ye "Copy > Paste" se 100x fast hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
@@ -2559,7 +2559,7 @@ Jab corporate reports banti hain, toh 'Version Control' (V1, V2, V3) ka bada pro
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Jab main cell move karta hu, toh formula reference change hoga ya wahi rahega?"**
+* [[HL::**Confusion 1 — "Jab main cell move karta hu, toh formula reference change hoga ya wahi rahega?"**::HL]]
 * [[HL::**Galat soch:** Formula me B2 likha hai, nayi jagah jake bhi B2 hi rahega.::HL]]
 * [[HL::**Actually:** Excel "**auto-updating formulas**" feature se formulas ko intelligent maintain karta hai. Agar aapne ek block utha kar shift kiya, toh uske under ke internal calculation relative shift ho jayenge taaki result mathematical form me stable rahe.::HL]]
 * [[HL::**Prove karo:** A1 me 10, A2 me 20 likho, A3 me `=A1+A2` (Result 30). Ab teeno ko ek sath border se drag karke Column C me phenk do. Result 30 hi rahega, par C3 ka formula automatically `=C1+C2` ho chuka hoga!::HL]]
@@ -2600,7 +2600,7 @@ Jab companies tax audits ke liye reports CA (Chartered Accountant) ko bhejti hai
 
 * **Testing/Offline Phase:** User bade dataset mein data rearrange karta hai, cell selections ki green boundaries ko pakad kar **drag and drop** (ya **moving selections**) karke doosri jagah safely shift karta hai. Excel silent assist dekar **auto-updating formulas** ko background me chalne deta hai.
 * [[HL::**Fixing/Iteration Phase:** Jab list me text bada ho jata hai jaise "**Shubham Kumar Mishra**" aur amount (**56 lakhs**) chote cell compression ke karan risk create (e.g. **560** ya **5600**) karta hai, toh **pound** / **hashtag** (`####`) indicator trigger hota hai, jise user double-click karke **resize columns** ya **resize rows** me fix kar deta hai. Jab confidential data nahi dikhana hota, toh us specific column ko **Hide** kar diya jaata hai::HL]].
-* **Live Production Phase:** Keyboard shortcuts (**Ctrl minus**, **Ctrl shift plus**, **Ctrl D**, **Ctrl Z**) use karke user production speed badhata hai aur report design final hone par sheet tab pe **⭐Ctrl drag** (mouse) karke **duplicate sheet** (clone) banakar naya kam shuru karta hai, using tools like [[HL::**Paste Transpose**::HL]], [[HL::**Paste Values** ya::HL]] **Paste Link**.
+* **Live Production Phase:** Keyboard shortcuts (**Ctrl minus**, **Ctrl shift plus**, **Ctrl D**, **Ctrl Z**) use karke user production speed badhata hai aur report design final hone par sheet tab pe **⭐Ctrl drag** (mouse) karke **duplicate sheet** (clone) banakar naya kam shuru karta hai, using tools like **Paste Transpose**, **Paste Values** ya **Paste Link**.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -2630,7 +2630,7 @@ Column Width = Small          Column Width = Adjusted (Double Click)
 
 ```text
 🔑 Keywords Coverage Check — Advanced Worksheet Operations
-✅ Covered   : [moving selections, drag and drop, auto-updating formulas, Ctrl minus, Ctrl shift plus, resize columns, resize rows, hide, unhide, duplicate sheet, ⭐Ctrl drag, [[HL::Paste Transpose::HL]], Paste Values, Paste Link, Ctrl D, Ctrl Z, Shubham Kumar Mishra, 56 lakhs, 560, 5600, pound, hashtag, ####]
+✅ Covered   : [moving selections, drag and drop, auto-updating formulas, Ctrl minus, Ctrl shift plus, resize columns, resize rows, hide, unhide, duplicate sheet, ⭐Ctrl drag, Paste Transpose, Paste Values, Paste Link, Ctrl D, Ctrl Z, Shubham Kumar Mishra, 56 lakhs, 560, 5600, pound, hashtag, ####]
 ⚠️ Mentioned but needs more depth : (none)
 ❌ MISSED    : (none — all keywords covered)
 
@@ -2745,7 +2745,7 @@ Jab corporate companies (jaise Microsoft ya Apple) apni Excel files client ko bh
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Page Layout me Theme change kiya par mere colors change hi nahi hue!"**
+* [[HL::**Confusion 1 — "Page Layout me Theme change kiya par mere colors change hi nahi hue!"**::HL]]
 * [[HL::**Galat soch:** Theme ka feature broken hai.::HL]]
 * [[HL::**Actually:** Tumne formatting karte waqt specifically 'Standard Colors' (jo fix hote hain) choose kiye honge. Theme sirf un cells ko change karta hai jin par 'Theme Colors' lagaye gaye hon.::HL]]
 * [[HL::**Prove karo:** Cell ko highlight karne ke liye bucket icon se sabse top wali row ka koi shade (Theme color) lagao. Ab jake Theme change (e.g. from Office to **circuit theme**) karo, color turant naya theme adopt kar lega.::HL]]
@@ -2868,7 +2868,7 @@ Speaker ne Icon sets ke liye "Bull vs Bear market" analogy (share bazaar uppar j
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * [[HL::**Problem:** Jab 50,000 rows ka stock data ya mark-sheet ho, toh usme se instant outliers (sabse high ya sabse low values) human eye (aankh) se detect karna nearly impossible hai.::HL]]
-* [[HL::**Solution:** **Conditional Formatting** (jaise Color scales ya Icon sets) instantly visual heatmaps bana deti hai jisse seconds me trend samajh aata hai. Speaker notes::HL]]: "Most of the Conditional Formatting to be honest, is used in this way" ([[HL::Trends visually dikhane me).::HL]]
+* [[HL::**Solution:** **Conditional Formatting** (jaise Color scales ya Icon sets) instantly visual heatmaps bana deti hai jisse seconds me trend samajh aata hai. Speaker notes: "Most of the Conditional Formatting to be honest, is used in this way" (Trends visually dikhane me).::HL]]
 * [[HL::**What breaks if we don't use it?** Tabular data monotonous lagta hai. Clients ya managers boring tables me problems (jaise decreasing profits) jaldi catch nahi kar pate, leading to delayed business decisions.::HL]]
 * [[HL::**✅ Kab use karo:** Jab bhi Pass/Fail highlight karna ho (**greater than** / **less than**). Text (jaise 'Pending') dhundhna ho (**text that contains**), ya trends (profits ki relative range) dikhani ho (**Data Bars** ya **Color Scales**::HL]]).
 * **❌ Kab mat karo / Alternative prefer karo:** Jab tumhara target pure dataset ko filter/hide karna ho. Conditional formatting sirf rang/design change karta hai, rows chupata nahi. Filter karne ke liye (agle section ka) 'Data Filters' prefer karo.
@@ -2896,11 +2896,11 @@ Chalo basic passing conditions lagayein aur rules ko manage karna seekhein.
 1  [[HL::Action: Type student status in A1:A3 -> "pass", "fail", "pass"::HL]]
 [[HL::2  Action: Type percentages in B1:B3 -> 0.75, 0.35 (35%), 0.696 (69.60%)::HL]]
 [[HL::3  Action: Select A1:A3 -> Conditional Formatting -> Highlight Cell Rules -> Text that contains -> type "fail"::HL]]
-[[HL::4  Action: Choose formatting::HL]] "Light Red Fill with Dark Red Text" [[HL::and hit OK.::HL]]
+[[HL::4  Action: Choose formatting "Light Red Fill with Dark Red Text" and hit OK.::HL]]
 [[HL::5  Action: Select B1:B3 -> Conditional Formatting -> Highlight Cell Rules -> Greater than -> Type 0.7 (70%)::HL]]
 [[HL::6  Action: Choose formatting "Green Fill" and hit OK.::HL]]
 [[HL::7  Action: Need to fix rules? -> Click "Manage Rules" -> Select rule -> click "edit rule"::HL]]
-[[HL::8  Action: To remove everything -> click::HL]] "clear rules from selected cells"
+[[HL::8  Action: To remove everything -> click "clear rules from selected cells::HL]]"
 
 ```
 
@@ -2937,7 +2937,7 @@ Large scale supply-chain trackers me **Icon Sets** ka maximum use hota hai. Jais
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Maine 'greater than' rule apply kiya, par cell abhi tak safe blank hai?"**
+* [[HL::**Confusion 1 — "Maine 'greater than' rule apply kiya, par cell abhi tak safe blank hai?"**::HL]]
 * [[HL::**Galat soch:** System crash ho gaya hai.::HL]]
 * [[HL::**Actually:** Condition strictly 'Greater than' thi (e.g. `> 70`). Agar number exactly `70` hi hai, toh rule uspar false evaluate karega aur format nahi lagayega.::HL]]
 * [[HL::**Prove karo:** Greater than rule hamesha non-inclusive hote hain. Agar 70 ko bhi lena hai, to rules panel me ja ke usse `>= 70` (Greater than or equal to) set karna padega::HL]].
@@ -3131,7 +3131,7 @@ Large datasets (like 500,000+ rows) ko sort karne mein Excel thoda lag (freeze) 
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Mera text-based date galat sort ho raha hai"**
+* [[HL::**Confusion 1 — "Mera text-based date galat sort ho raha hai"**::HL]]
 * [[HL::**Galat soch:** Excel date samajh nahi pa raha.::HL]]
 * [[HL::**Actually:** Date text format mein hai, isliye alphabetical sorting ho rahi hai. Uspe `multiply by 1 trick` lagao.::HL]]
 * [[HL::**Prove karo:** `14th January` aur `13th January` ko sort karo. Phir ek naye column mein inko 1 se multiply karke sort karo. Fark dikh jayega.::HL]]
@@ -3190,8 +3190,8 @@ Food     | 800       Rent     | 5000
 
 #### ❓ 17. Interview Q&A
 
-* **Q:** "Expand the selection" aur "Continue with current selection" [[HL::mein kya fark hai jab Excel sort warning deta hai?::HL]]
-* [[HL::**A:** Jab aap sirf ek column select karke sort click karte hain, Excel warning deta hai. "Expand the selection" choose karne se Excel automatically aas-paas ke sabhi connected columns ko select kar leta hai taaki poori row ek saath move ho aur data corrupt na ho::HL]]. "Continue with current selection" [[HL::karne se sirf wahi column sort hota hai, jisse us column ka data baaki table ke data se misalign (scramble) ho jata hai. Hamesha "Expand" karna safe hota hai.::HL]]
+* **Q:** "[[HL::Expand the selection" aur "Continue with current selection" mein kya fark hai jab Excel sort warning deta hai?::HL]]
+* [[HL::**A:** Jab aap sirf ek column select karke sort click karte hain, Excel warning deta hai. "Expand the selection" choose karne se Excel automatically aas-paas ke sabhi connected columns ko select kar leta hai taaki poori row ek saath move ho aur data corrupt na ho. "Continue with current selection" karne se sirf wahi column sort hota hai, jisse us column ka data baaki table ke data se misalign (scramble) ho jata hai. Hamesha "Expand" karna safe hota hai.::HL]]
 * [[HL::**Q:** Multi-level sorting kahan kaam aati hai? Ek practical example dein.::HL]]
 * [[HL::**A:** Multi-level sort tab kaam aata hai jab primary sort column mein duplicate values (ties) hon. For example, agar main employee list ko "Department" ke hisaab se sort karu, toh "Sales" ke 50 log ek saath aa jayenge. Un 50 logon ke andar kiska naam pehle aayega? Wahan main "Then by" "Salary" (largest to smallest) lagaunga, taaki Sales department mein sabse highly paid log top par dikhein::HL]].
 
@@ -3287,7 +3287,7 @@ Huge datasets mein mouse se drop-down list mein click karke items dhoondhna slow
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Maine filter lagaya aur mera aadha data delete ho gaya!"**
+* [[HL::**Confusion 1 — "Maine filter lagaya aur mera aadha data delete ho gaya!"**::HL]]
 * [[HL::**Galat soch:** Filter ne data delete kar diya.::HL]]
 * [[HL::**Actually:** Data delete nahi hua, sirf hide (chhup) gaya hai. Left side ke row numbers dekho (e.g., 1, 2, 7, 8) — beech ke numbers gayab hain yani data wahin hai.::HL]]
 * [[HL::**Prove karo:** Ribbon par ja kar **Clear filter** button click karo ya `Alt D F F` wapas dabao, saara data wapas screen par aa jayega.::HL]]
@@ -3657,7 +3657,7 @@ Cells ko ek notebook ka page (ruled lines) maano jisme tum text likhte ho. Ab ag
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Meri image/shape mere data ke piche chup gayi hai!"**
+* [[HL::**Confusion 1 — "Meri image/shape mere data ke piche chup gayi hai!"**::HL]]
 * [[HL::**Galat soch:** Image delete ho gayi.::HL]]
 * [[HL::**Actually:** Layering issue hai. Ek ke upar ek image/shape rakhne se stack ban jata hai (z-index).::HL]]
 * [[HL::**Prove karo:** Shape Format tab mein jao, wahan **Bring Forward** aur **Send Backwards** options honge. Unse tum tay kar sakte ho kon aage dikhega kon piche.::HL]]
@@ -3839,7 +3839,7 @@ Agar main tumhe cricket match ki har over ki ball-by-ball written report du, toh
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Kaunsa chart kab use karu? Options bohot hain (Line, Bar, Pie)."**
+* [[HL::**Confusion 1 — "Kaunsa chart kab use karu? Options bohot hain (Line, Bar, Pie)."**::HL]]
 * [[HL::**Galat soch:** Koi bhi achha dikhne wala chart laga do.::HL]]
 * [[HL::**Actually:** Har chart ka apna purpose hai.::HL]]
 * [[HL::Time ka trend dikhana hai (e.g., Jan se Dec) = **Line chart**.::HL]]
@@ -4040,13 +4040,13 @@ Huge data ko print karna ek anti-pattern hai. Industry mein jab hume 50-page ki 
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Mera aadha chart doosre page par ja raha hai, theek kaise karu?"**
+* [[HL::**Confusion 1 — "Mera aadha chart doosre page par ja raha hai, theek kaise karu?"**::HL]]
 * [[HL::**Galat soch:** Chart ka size manual mouse se chhota karna padega ghanto laga ke.::HL]]
 * [[HL::**Actually:** Print menu mein **Page Setup** par jao aur ek click mein **Fit sheet on one page** select karo. Excel khud scale kar lega::HL]].
 * **Prove karo:** Preview mein dekho pehle cut ho raha tha, `Fit sheet...` karte hi perfectly squeeze ho gaya frame mein.
 
 
-* **Confusion 2 — "Normal view mein wapas aane ke baad ek annoying dotted line dikh rahi hai sheet par"**
+* [[HL::**Confusion 2 — "Normal view mein wapas aane ke baad ek annoying dotted line dikh rahi hai sheet par"**::HL]]
 * [[HL::**Galat soch:** Excel sheet corrupt ho gayi ya koi border lag gaya.::HL]]
 * [[HL::**Actually:** Woh **dotted lines** page break indicators hain jo `Ctrl P` dabane ke baad permanently dikhne lagti hain, taaki tum kaam karte waqt bounds ka dhyan rakho::HL]].
 * **Prove karo:** Options -> Advanced -> "Show page breaks" ko uncheck kardo, lines gayab ho jayengi.
@@ -4056,7 +4056,7 @@ Huge data ko print karna ek anti-pattern hai. Industry mein jab hume 50-page ki 
 #### 🛠️ 12. Troubleshooting Flowchart
 
 * [[HL::**`Sirf ek graph print ho raha hai, baaki table nahi`**::HL]]
-* [[HL::**Root Cause:** Tumne galti se graph ko select/click karke rakha tha jab `Ctrl P` dabaya. (Speaker ne explicitly kaha::HL]]: "If I select the chart and press ctrl p, then only the chart will be printed.")
+* [[HL::**Root Cause:** Tumne galti se graph ko select/click karke rakha tha jab `Ctrl P` dabaya. (Speaker ne explicitly kaha: "If I select the chart and press ctrl p, then only the chart will be printed::HL]].")
 * **Fix:** `Esc` dabao. Kisi khali cell par click karke graph ko deselect karo, phir `Ctrl P` dabao.
 
 
@@ -4168,14 +4168,14 @@ Templates ek "Cookie Cutter" (biscuit ka sancha) ki tarah hote hain. Ek baar san
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-[[HL::File -> **Save As** mein jaakar jab tum File Format list khologe, toh by default `.xlsx` dikhega. Wahan tumhe dhundh kar **Excel Template (*.xltx)** choose karna padega. File type badalte hi Excel automatically folder path ko **Custom Office Templates** directory mein redirect kar dega.::HL]]
+[[HL::File -> **Save As** mein jaakar jab tum File Format list khologe, toh by default `.xlsx` dikhega. Wahan tumhe dhundh kar **Excel Template (*.xltx)** choose karna padega. File type badalte hi Excel automatically folder path ko **Custom Office Templates** directory mein redirect kar dega::HL]].
 
-[[HL::#### ⚙️ 6. Under the Hood (Deep Dive)::HL]]
+#### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. [[HL::Normal file `.xlsx` (Excel Spreadsheet) extension rakhti hai.::HL]]
-2. [[HL::Template file ⭐`.xltx` (Excel Template) extension rakhti hai.::HL]]
-3. [[HL::Jab tum `.xlsx` double-click karte ho, toh wahi file read/write mode mein khulti hai.::HL]]
-4. [[HL::Par jab tum `.xltx` double-click karte ho, toh Excel memory mein ek fresh blank instance banata hai (jaise::HL]] "Book1") aur template ka design uspe stamp kar deta hai. Original `.xltx` untouched rehti hai.
+1. Normal file `.xlsx` (Excel Spreadsheet) extension rakhti hai.
+2. Template file ⭐`.xltx` (Excel Template) extension rakhti hai.
+3. Jab tum `.xlsx` double-click karte ho, toh wahi file read/write mode mein khulti hai.
+4. Par jab tum `.xltx` double-click karte ho, toh Excel memory mein ek fresh blank instance banata hai (jaise "Book1") aur template ka design uspe stamp kar deta hai. Original `.xltx` untouched rehti hai.
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -4220,7 +4220,7 @@ Template save karte waqt uske andar koi actual confidential data (jaise personal
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Mera template galti se save ho gaya, ab main uske andar ki spelling theek kaise karu? Woh baar-baar naya duplicate khol deta hai!"**
+* [[HL::**Confusion 1 — "Mera template galti se save ho gaya, ab main uske andar ki spelling theek kaise karu? Woh baar-baar naya duplicate khol deta hai!"**::HL]]
 * [[HL::**Galat soch:** Template modify nahi ho sakta.::HL]]
 * [[HL::**Actually:** Agar tum double-click karoge toh woh nayi fresh copy banayega. Template edit karne ke liye Excel open karo -> File -> Open -> Browse karke us `.xltx` file ko select karo. Ab original sancha (template) open hoga::HL]].
 * **Prove karo:** Double click vs File>Open karke title bar check karo. Ek me "TemplateName1" aayega, doosre mein directly "TemplateName.xltx".
@@ -4370,7 +4370,7 @@ Files mein jab "External Links" (doosri workbook ka reference) hota hai, toh kho
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Mujhe itna lamba syntax `[Book1]Sheet1!A1` manually likhna padega?"**
+* [[HL::**Confusion 1 — "Mujhe itna lamba syntax `[Book1]Sheet1!A1` manually likhna padega?"**::HL]]
 * [[HL::**Galat soch:** Code manually type karna padta hai.::HL]]
 * [[HL::**Actually:** Nahi! Tumko keyboard pe sirf `=` type karna hai. Uske baad mouse se doosri sheet (ya doosri open file) me jao aur cell click kar do, aur Enter daba do. Excel saara ajeeb syntax khud type kar dega formula bar mein.::HL]]
 * [[HL::**Prove karo:** Try karo! `=` daba ke dusre file me cell click karke Enter karo, dekho auto-fill kaise magic ki tarah kaam karta hai::HL]].
@@ -4530,11 +4530,11 @@ Jab tum kisi **IDE native integration** (jaise code editor ke andar directly AI)
 
 [[HL::**The Prompt Context Strategy Flow:**::HL]]
 
-1. [[HL::**Bad Way (Full Project at once):** User::HL]] -> "Build an e-commerce website in Python." -> [[HL::AI gets confused -> Generates generic, disconnected, and crappy code.::HL]]
+1. [[HL::**Bad Way (Full Project at once):** User -> "Build an e-commerce website in Python." -> AI gets confused -> Generates generic, disconnected, and crappy code.::HL]]
 2. [[HL::**Good Way (Step-by-Step with Context):**::HL]]
-* [[HL::**Step 1:** User::HL]] -> "Write the HTML skeleton for a homepage."
-* [[HL::**Step 2:** User::HL]] -> "Now generate a Python script to serve this homepage."
-* [[HL::**Step 3:** User::HL]] -> "Now add a slider logic to the homepage."
+* [[HL::**Step 1:** User -> "Write the HTML skeleton for a homepage."::HL]]
+* [[HL::**Step 2:** User -> "Now generate a Python script to serve this homepage."::HL]]
+* [[HL::**Step 3:** User -> "Now add a slider logic to the homepage."::HL]]
 * [[HL::**Result:** High quality, integrated code. Tools like **GoPlan** (project planning tool) aise hi task ko chote chunks mein break karne mein help karte hain::HL]].
 
 
@@ -4556,7 +4556,7 @@ Jab tum kisi **IDE native integration** (jaise code editor ke andar directly AI)
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Kya main seedha AI se coding seekh lu bina concepts ke?"**
+* [[HL::**Confusion 1 — "Kya main seedha AI se coding seekh lu bina concepts ke?"**::HL]]
 * [[HL::**Galat soch:** AI toh code de deta hai, mujhe syntax yaad rakhne ki kya zaroorat.::HL]]
 * [[HL::**Actually:** AI is a tool. "You should know the concepts." Agar tumhe loop ya function ka idea hi nahi hai, toh AI ne galat logic diya toh tum usko fix nahi kar paoge.::HL]]
 * [[HL::**Prove karo:** AI se ek complex logic maang ke dekho, kabhi kabhi woh infinite loop de deta hai. Bina concept knowledge ke tumhara server crash ho jayega::HL]].
@@ -4572,7 +4572,7 @@ Jab tum kisi **IDE native integration** (jaise code editor ke andar directly AI)
 
 * **`AI generates incorrect or crappy code`**
 * **Root Cause:** Tumhara prompt bohot broad/vague tha, ya tumne usse sufficient context (framework version, folder structure) nahi diya.
-* [[HL::**Fix:** Apne domain knowledge ka use karo. Prompt ko chota karo, aur clearly batao::HL]]: "Python 3 mein likho, pandas use karo, aur sirf data filtering ka function do."
+* [[HL::**Fix:** Apne domain knowledge ka use karo. Prompt ko chota karo, aur clearly batao: "Python 3 mein likho, pandas use karo, aur sirf data filtering ka function do::HL]]."
 
 
 
@@ -4886,22 +4886,22 @@ Wahien, **Error Handling (try-except)** car ke airbag jaisa hai. Normal driving 
 
 ```python
 # Python 3.10+
-1  score = 100                             # [[HL::Global variable — poore script mein available hai::HL]]
+1  [[HL::score = 100                             # Global variable — poore script mein available hai::HL]]
 2  
-[[HL::3  def update_score():                     # Function definition::HL]]
-[[HL::4      global score                        # global keyword = Python ko bata raha hai::HL]] "naya local variable mat banao, bahar wale global 'score' ko hi modify karo"
-[[HL::5      score = score + 50                  # Global variable update ho raha hai::HL]]
-[[HL::6      print(f"Inside function: {score}")  # print() = terminal pe dikhao::HL]]
+3  def update_score():                     # Function definition
+4      global score                        # global keyword = Python ko bata raha hai "naya local variable mat banao, bahar wale global 'score' ko hi modify karo"
+5      score = score + 50                  # Global variable update ho raha hai
+6      print(f"Inside function: {score}")  # print() = terminal pe dikhao
 7  
-[[HL::8  update_score()                          # Function call::HL]]
-[[HL::9  print(f"Outside function: {score}")     # Output check karo — global value badal chuki hai::HL]]
+8  update_score()                          # Function call
+9  print(f"Outside function: {score}")     # Output check karo — global value badal chuki hai
 10 
-[[HL::11 # Error Handling Flow::HL]]
-[[HL::12 try:                                    # try block = iske andar ka code risk wala hai, test karo::HL]]
-[[HL::13     result = 10 / 0                     # ZeroDivisionError aayega (math rule break)::HL]]
-[[HL::14     print(result)                       # Yeh line kabhi run nahi hogi kyunki line 13 par crash ho gaya::HL]]
-[[HL::15 except ZeroDivisionError as e:          # except = specific error catch karo; 'as e' matlab us error object ko 'e' naam do::HL]]
-[[HL::16     print(f::HL]]"Error aayi bhai: {e}")      # gracefully handle kiya, app crash nahi hua
+11 # Error Handling Flow
+12 try:                                    # try block = iske andar ka code risk wala hai, test karo
+13     result = 10 / 0                     # ZeroDivisionError aayega (math rule break)
+14     print(result)                       # Yeh line kabhi run nahi hogi kyunki line 13 par crash ho gaya
+15 except ZeroDivisionError as e:          # except = specific error catch karo; 'as e' matlab us error object ko 'e' naam do
+16     print(f"Error aayi bhai: {e}")      # gracefully handle kiya, app crash nahi hua
 17 except ValueError as e:                 # Agar wrong data type aata toh yeh block chalta
 18     print("Galat value daal di!")
 19 finally:                                # finally block = exception aaye ya na aaye, yeh hamesha chalega
@@ -5076,12 +5076,12 @@ Jab hum `open()` call karte hain, toh OS (Operating System) hard disk par rakhi 
 ```python
 # Python 3.10+
 [[HL::1  # 1. Write Mode ('w') - Purana data wipe karke naya data dalega::HL]]
-[[HL::2  file = open::HL]]("my_note.txt", "w")                 # file open() function se w (write mode) mein kholo; file nahi hogi toh nai banayega
+2  file = open("my_note.txt", "w")                 # file open() function se w (write mode) mein kholo; file nahi hogi toh nai banayega
 3  file.write("Hello! Yeh pehli line hai.")        # write() = string data ko file mein dalo
 4  file.close()                                    # close() = OS file stream ko band karo (MANDATORY)
 5  
-6  # 2. [[HL::Append Mode ('a') - Purana data bacha rahega, naya aage judega (Pro way using 'with')::HL]]
-[[HL::7  with open::HL]]("my_note.txt", "a") as file:          # with open ... as file: context manager hai, block ke baad auto-close karega
+6  # 2. Append Mode ('a') - Purana data bacha rahega, naya aage judega (Pro way using 'with')
+7  with open("my_note.txt", "a") as file:          # with open ... as file: context manager hai, block ke baad auto-close karega
 8      file.write("\nYeh dusri line append hui.")  # \n = escape sequence (new line); file mein enter key press karne jaisa kaam karega
 9  
 10 # 3. Read Mode ('r') - Data ko read karna
@@ -5740,10 +5740,10 @@ Password copied to clipboard! Kahin bhi paste (Ctrl+V) kar lo.
 13 root.geometry("300x200")                      # geometry() = window ka size width x height me set karega
 14 
 15 # Button() = click karne wala widget; command= parameter me bina () ke function name dete hain
-16 btn = tk.Button(root, text="Select PDFs to Merge", [[HL::command=select_files)::HL]]
-[[HL::17 btn.pack(pady=50)                             # pack() = widget ko window par automatically place karta hai (center me)::HL]]
+16 btn = tk.Button(root, text="Select PDFs to Merge", command=select_files)
+17 btn.pack(pady=50)                             # pack() = widget ko window par automatically place karta hai (center me)
 18 
-[[HL::19 root.mainloop()                               # main loop = window ko screen par rok ke rakhta hai (infinite event loop::HL]])
+19 root.mainloop()                               # [[HL::main loop = window ko screen par::HL]] rok ke rakhta hai (infinite event loop)
 
 ```
 
@@ -5984,7 +5984,7 @@ Aur setup ko aise samjho: **MySQL Server** tumhari gaadi ka core engine hai jo b
 
 * [[HL::**Line 1:** `DROP DATABASE IF EXISTS` — Agar tum yeh script dobara run karo aur database pehle se majood ho, toh error aayega. Yeh command pehle purane ko delete karti hai taaki execution na ruke.::HL]]
 * [[HL::**Line 2:** `CREATE DATABASE` — Yeh actual starter script hai jo naya schema (database ka container) banati hai.::HL]]
-* [[HL::**Line 3:** `USE` — MySQL ko batata hai ki::HL]] "Bhai, ab jo bhi main karunga, wo isi database ke andar karna."
+* [[HL::**Line 3:** `USE` — MySQL ko batata hai ki "Bhai, ab jo bhi main karunga, wo isi database ke andar karna::HL]]."
 
 #### 🔒 8. Security-First Check
 
@@ -6007,7 +6007,7 @@ Aur setup ko aise samjho: **MySQL Server** tumhari gaadi ka core engine hai jo b
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "SQL aur MySQL same cheez hai kya?"**
+* [[HL::**Confusion 1 — "SQL aur MySQL same cheez hai kya?"**::HL]]
 * [[HL::**Galat soch:** Dono ek hi software ke naam hain.::HL]]
 * [[HL::**Actually:** Nahi! SQL ek language (bhasha) hai. MySQL ek software (DBMS) hai jo us bhasha ko samajhta hai. (Jaise English ek bhasha hai, aur tumhara dost us bhasha ko samajhta hai::HL]]).
 * **Prove karo:** MySQL ke alawa PostgreSQL ya Oracle database try karo — wahan bhi tum SQL bhasha hi likhoge.
@@ -6189,7 +6189,7 @@ Jab table create hoti hai, toh Workbench ke left panel (Schemas) mein:
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "DROP TABLE aur DROP COLUMN mein kya fark hai?"**
+* [[HL::**Confusion 1 — "DROP TABLE aur DROP COLUMN mein kya fark hai?"**::HL]]
 * [[HL::**Galat soch:** Dono ka kaam delete karna hai, kahin bhi laga do.::HL]]
 * [[HL::**Actually:** `DROP TABLE` tumhari poori Excel sheet fadd ke phek deta hai (table + saara data khatam). `ALTER TABLE ... DROP COLUMN` sirf us sheet ka ek specific column (jaise 'phone') eraser se mitata hai, baaki table safe rehti hai::HL]].
 * **Prove karo:** `DROP TABLE` chalao, left panel se table gayab ho jayegi.
@@ -6321,7 +6321,7 @@ Table: employees (Schema Design)
 
 **Transaction ko aise samjho:** Jab tum Notepad (ek simple text editor) ya MS Word mein kuch type karte ho, toh woh changes temporary hote hain. Agar bina "Save" pe click kiye laptop band ho jaye, toh sab gayab ho jata hai (yeh **ROLLBACK** hai — undo changes). Jab tum `Ctrl + S` daba kar file save karte ho, tab jaake woh hard drive mein permanently lock hota hai (yeh **COMMIT** hai — permanent save).
 
-[[HL::**Constraints ko aise samjho:** College form bharte waqt agar tum 'Email' field khali chhod do, toh form submit nahi hota, red error aa jata hai. Database constraints wahi bouncer hain jo bolte hain::HL]] "Condition violated! Sahi format mein data laao."
+[[HL::**Constraints ko aise samjho:** College form bharte waqt agar tum 'Email' field khali chhod do, toh form submit nahi hota, red error aa jata hai. Database constraints wahi bouncer hain jo bolte hain "Condition violated! Sahi format mein data laao::HL]]."
 
 #### 📖 3. Technical Definition
 
@@ -6430,7 +6430,7 @@ Table: employees (Schema Design)
 * **Prove karo:** `CREATE TABLE t (id INT UNIQUE, name VARCHAR(10) UNIQUE);` chalega. Par `CREATE TABLE t (id INT PRIMARY KEY, name VARCHAR(10) PRIMARY KEY);` error dega.
 
 
-* **Confusion 2 — "Auto-increment skip kyun ho jata hai?"**
+* [[HL::**Confusion 2 — "Auto-increment skip kyun ho jata hai?"**::HL]]
 * [[HL::**Galat soch:** Agar id 10 delete ki toh agli id 10 aani chahiye.::HL]]
 * [[HL::**Actually:** `AUTO_INCREMENT` hamesha aage badhta hai. Agar tumne ID 5 delete kar di, toh naya user ID 6 banega, 5 dobara kabhi reuse nahi hoga database integrity banane ke liye::HL]].
 
@@ -6853,7 +6853,7 @@ Jab database mein 10 million rows hoti hain, toh `LIKE '%bad'` (jisme `%` shuru 
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "_ (underscore) aur % (percentage) mein asli farak kya hai?"**
+* [[HL::**Confusion 1 — "_ (underscore) aur % (percentage) mein asli farak kya hai?"**::HL]]
 * [[HL::**Galat soch:** Dono same pattern match karte hain, koi bhi use karlo.::HL]]
 * [[HL::**Actually:** `_` strict hai — yeh exactly 1 letter ki jagah leta hai. `%` flexible hai — yeh 0, 1, ya 100 letters ki jagah le sakta hai.::HL]]
 * [[HL::**Prove karo:** `LIKE 'A_'` search karo. Yeh 'An' ya 'Ab' dhoondega, par 'Amit' nahi dhoondega (kyunki 1 se zyada letter bache hain). Jabki `LIKE 'A%'` 'Amit', 'An' sab dhoondh lega.::HL]]
@@ -7054,7 +7054,7 @@ Industry (jaise Flipkart/Amazon with sellers from Bangalore, Mumbai, Kolkata) me
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Primary Key aur Foreign Key mein exactly fark kya hai?"**
+* [[HL::**Confusion 1 — "Primary Key aur Foreign Key mein exactly fark kya hai?"**::HL]]
 * [[HL::**Galat soch:** Dono chaabi hain, bas naam alag hain.::HL]]
 * [[HL::**Actually:** Primary Key ek table ke andar unique pehchan hoti hai (har row ka apna Aadhar card). Foreign Key **doosri table** ki primary key ka reference hoti hai (jaise ek file pe doosre department ka reference number likha ho).::HL]]
 * [[HL::**Prove karo:** `sellers` table mein `seller_id` PK hai (unique hogi). `orders` table mein `seller_id` FK hai (ek hi seller ke 10 order ho sakte hain, toh wahan duplicate allow hoga).::HL]]
@@ -7270,7 +7270,7 @@ Industry (jaise Amazon) mein combined report nikalne ke liye queries bohot heavy
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "JOIN aur UNION mein actually kya fark hai?"**
+* [[HL::**Confusion 1 — "JOIN aur UNION mein actually kya fark hai?"**::HL]]
 * [[HL::**Galat soch:** Dono tables jodte hain, kahin bhi laga do.::HL]]
 * [[HL::**Actually:** JOIN data ko horizontally (side-by-side) jodta hai columns badhata hai. UNION data ko vertically (upar-neeche) append karta hai, rows badhata hai::HL]].
 * **Prove karo:** Apna Result Grid dekho. JOIN mein column names [[HL::`order_id` aur `seller_name` sath dikhenge. UNION mein table lambi ho jayegi.::HL]]
@@ -7452,13 +7452,13 @@ Agar ek e-commerce table (orders) pe tumne 10 columns pe index laga diye, toh ek
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Primary Key par index manually lagana padega?"**
+* [[HL::**Confusion 1 — "Primary Key par index manually lagana padega?"**::HL]]
 * [[HL::**Galat soch:** Sab search keys pe `CREATE INDEX` chalana padta hai.::HL]]
 * [[HL::**Actually:** Nahi! Jab tum kisi column ko `PRIMARY KEY` ya `UNIQUE` declare karte ho, MySQL backend mein automatically ek index (Clustered Index) bana leta hai uske liye::HL]].
 * **Prove karo:** `SHOW INDEX FROM users;` chala kar dekho, tumhe `PRIMARY` naam ka index pehle se bana hua dikhega.
 
 
-* **Confusion 2 — "Index se database chota hota hai?"**
+* [[HL::**Confusion 2 — "Index se database chota hota hai?"**::HL]]
 * [[HL::**Galat soch:** Optimization matlab size shrink (kam) hona.::HL]]
 * [[HL::**Actually:** Index actual data ki ek copy/map bana ke alag se store karta hai. Iska matlab index lagane se database ka total disk storage SIZE badhta hai (RAM & Disk zyaada use hoti hai::HL]]).
 
@@ -7656,13 +7656,13 @@ Views database security ki first line of defense hain (Level 1). Tum ek junior d
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Agar main asli table update karun, toh kya mujhe view wapas banana padega?"**
+* [[HL::**Confusion 1 — "Agar main asli table update karun, toh kya mujhe view wapas banana padega?"**::HL]]
 * [[HL::**Galat soch:** View snapshot/photo hai, ek baar ban gaya toh wahi rahega.::HL]]
 * [[HL::**Actually:** Nahi! View ek CCTV camera (live feed) hai. Jab tum base table update karte ho, wo directly view (real-time table update) mein dikhne lagta hai. Wapas view create karne ki zaroorat nahi hoti::HL]].
 * **Prove karo:** `customers` table mein ek naya user 'Mumbai' ka insert karo, fir seedha `SELECT * FROM del_mum_clients` chalao. Naya user wahan automatically dikhega.
 
 
-* **Confusion 2 — "View aur Table mein technically kya fark hai jab dono mein SELECT lag sakta hai?"**
+* [[HL::**Confusion 2 — "View aur Table mein technically kya fark hai jab dono mein SELECT lag sakta hai?"**::HL]]
 * [[HL::**Galat soch:** Dono ek hi cheez hain bas naam alag hai.::HL]]
 * [[HL::**Actually:** Table data store karti hai (hard disk space khati hai). View sirf query text store karta hai (almost zero size). Table independent hoti hai, View hamesha apni parent table par depend karta hai::HL]].
 
@@ -7759,7 +7759,7 @@ Hospitals ke management software mein `patients` ki ek mukhya table hoti hai. Wa
 [[HL::#### 📖 3. Technical Definition::HL]]
 
 * [[HL::**Precise English:** A subquery is a query nested inside another query (e.g., inside a WHERE clause). The EXISTS operator is a boolean function used within a subquery to test for the existence of any record, optimizing performance by stopping the search upon finding the first match.::HL]]
-* [[HL::**Hinglish Simplification:** Subquery matlab ek SQL query ke andar ek aur choti query likhna. `EXISTS` ek special tool hai jo andar wali query se data mangwane ke bajaye sirf ye check karta hai ki::HL]] "kya result mein ek bhi row mili (True) ya nahi (False)".
+* [[HL::**Hinglish Simplification:** Subquery matlab ek SQL query ke andar ek aur choti query likhna. `EXISTS` ek special tool hai jo andar wali query se data mangwane ke bajaye sirf ye check karta hai ki "kya result mein ek bhi row mili (True) ya nahi (False::HL]])".
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
@@ -7780,9 +7780,9 @@ Hospitals ke management software mein `patients` ki ek mukhya table hoti hai. Wa
 
 1. [[HL::**Standard Subquery Execution:** Database engine dekhta hai ki `WHERE` clause ke aage brackets `()` hain. Wo bahar ka kaam rokta hai. Pehle brackets ke andar jata hai, execution complete karke ek output (jaise `450.50`) laata hai, aur outer query ko bhej deta hai.::HL]]
 2. [[HL::**EXISTS Operator Execution:**::HL]]
-* [[HL::Speaker ne kaha::HL]]: *"In exists we just find out if any record has been returned or not... we don't care what data this query is returning."*
+* [[HL::Speaker ne kaha: *"In exists we just find out if any record has been returned or not... we don't care what data this query is returning."*::HL]]
 * [[HL::`EXISTS` record evaluation (check karna ki data hai ya nahi) ke liye bana hai.::HL]]
-* [[HL::Yeh engine ko bolta hai::HL]]: "Bhai data uthake mat laa. Jese hi tujhe 1st matching row mile, mujhe `TRUE` (boolean) bhej de aur apni searching wahi rok de (short-circuit)." [[HL::Isse row by row execution bachta hai::HL]].
+* [[HL::Yeh engine ko bolta hai: "Bhai data uthake mat laa. Jese hi tujhe 1st matching row mile, mujhe `TRUE` (boolean) bhej de aur apni searching wahi rok de (short-circuit)." Isse row by row execution bachta hai::HL]].
 
 
 
@@ -7833,15 +7833,15 @@ Agar tum `IN` operator ka use karke 10,000 IDs return karte ho, toh memory full 
 * [[HL::**❌ Mistake 1:** Subquery se multiple rows return karwana par bahar `=` (equals) operator lagana.::HL]]
 * [[HL::**🤦 Why:** Beginner likhta hai `WHERE user_id = (SELECT id FROM users WHERE city='Delhi')`.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Agar andar ki subquery 1 se zyada result (list) degi, toh bahar `=` fail ho jayega. Wahan hamesha `IN` operator lagao (`WHERE user_id IN (...)`).::HL]]
-* [[HL::**⚡ Consequences:**::HL]] "Error 1242: Subquery returns more than 1 row" [[HL::aayega aur backend crash ho jayega.::HL]]
-* [[HL::**❌ Mistake 2:** `EXISTS` ke andar `SELECT *` likhna.::HL]]
+* [[HL::**⚡ Consequences:** "Error 1242: Subquery returns more than 1 row" aayega aur backend crash ho jayega.::HL]]
+* [[HL::**❌ Mistake 2:** `EXISTS` ke andar::HL]] `SELECT *` likhna.
 * [[HL::**🤦 Why:** Aadat padi hoti hai "get all data" likhne ki.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Speaker warned us: we don't care what data returns. Hamesha `SELECT 1` use karo.::HL]]
 * [[HL::**⚡ Consequences:** Agar table mein 50 heavy columns (jaise images, long texts) hain, toh database faltu mein unko padhne mein time aur CPU cycles barbad karega jabki tumko sirf unki presence check karni thi::HL]].
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Subquery vs JOIN mein se kaunsa better hai?"**
+* [[HL::**Confusion 1 — "Subquery vs JOIN mein se kaunsa better hai?"**::HL]]
 * [[HL::**Galat soch:** Dono same filtering dete hain toh hamesha Subquery likho kyuki samajhne mein asaan hai.::HL]]
 * [[HL::**Actually:** Jaha simple matching karni ho, waha JOIN bohot zyada fast hota hai kyuki database query optimizer usey better samajhta hai. Subquery tab use karo jab kisi pre-calculated result (jaise Average ya Max value) ki zarurat outer logic ko ho::HL]].
 * **Prove karo:** EXPLAIN keyword (database query plan check karne ka tool) dono queries ke aage lagao. JOIN ka cost structure subqueries se hamesha kam aayega standard searches mein.
@@ -7849,7 +7849,7 @@ Agar tum `IN` operator ka use karke 10,000 IDs return karte ho, toh memory full 
 
 * [[HL::**Confusion 2 — "SELECT 1 kya magic hai?"**::HL]]
 * [[HL::**Galat soch:** `1` kisi ID ya column ka reference hai.::HL]]
-* [[HL::**Actually:** `1` ek simple integer constant hai. `SELECT 1` engine ko bolta hai ki::HL]] "Jese hi condition true ho, column data ke badle mujhe simply number 1 lauta de". [[HL::Yeh processing ko bohot fast karta hai.::HL]]
+* [[HL::**Actually:** `1` ek simple integer constant hai. `SELECT 1` engine ko bolta hai ki "Jese hi condition true ho, column data ke badle mujhe simply number 1 lauta de". Yeh processing ko bohot fast karta hai.::HL]]
 * [[HL::**Prove karo:** `SELECT 1 FROM users;` chalao. Output mein table mein jitni rows hongi, utni baar `1` print ho jayega, data actual nahi dikhega::HL]].
 
 
@@ -7985,7 +7985,7 @@ Agar ROLLUP use kiya hai, toh sabse aakhiri row mein city/category ka naam NULL 
 2. [[HL::Agar koi `WHERE` clause (normal filter) hai, toh pehle raw rows ko filter karta hai.::HL]]
 3. [[HL::Fir `GROUP BY` un bachi hui rows ke chote-chote buckets (groups) banata hai (jaise Delhi ka bucket, Mumbai ka bucket).::HL]]
 4. [[HL::Un buckets ke andar aggregate functions (`SUM`, `COUNT`) apply hote hain aur **summary rows** banti hain.::HL]]
-5. [[HL::Fir `HAVING clause` run hota hai jo un buckets ko filter karta hai (jaise::HL]] "sirf wo buckets dikhao jinka sum > 50000 hai").
+5. [[HL::Fir `HAVING clause` run hota hai jo un buckets ko filter karta hai (jaise "sirf wo buckets dikhao jinka sum > 50000 hai").::HL]]
 6. [[HL::End mein, agar `WITH ROLLUP` hai, toh engine ek extra row banata hai jo saare buckets ka sum (grand total) hold karti hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
@@ -8060,9 +8060,9 @@ Industry dashboards aur **business reports** (jaise monthly **sales summaries**)
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "ROLLUP mein jo NULL aata hai, uska kya matlab hai?"**
+* [[HL::**Confusion 1 — "ROLLUP mein jo NULL aata hai, uska kya matlab hai?"**::HL]]
 * [[HL::**Galat soch:** Database mein value missing hai ya blank thi isliye NULL aaya.::HL]]
-* [[HL::**Actually:** Speaker emphasized: ⭐**Null doesn't mean missing value. Null basically means sum of the above.** ROLLUP ke result mein jab city ki jagah NULL likha aaye, toh padhne wala samajh jata hai ki::HL]] "Kisi ek city ka nahi, yeh sab cities mila kar (Grand Total) hai."
+* [[HL::**Actually:** Speaker emphasized: ⭐**Null doesn't mean missing value. Null basically means sum of the above.** ROLLUP ke result mein jab city ki jagah NULL likha aaye, toh padhne wala samajh jata hai ki "Kisi ek city ka nahi, yeh sab cities mila kar (Grand Total) hai."::HL]]
 * [[HL::**Prove karo:** Apna Rollup output dekho, jahan `NULL | NULL` likha hai, uske samne sabse bada total (`210301`) likha hoga jo sabka addition hoga::HL]].
 
 
@@ -8262,7 +8262,7 @@ Large systems mein jab 10 million rows upload karni hoti hain, toh "Data Import/
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "TRUNCATE aur DROP TABLE mein kya fark hai?"**
+* [[HL::**Confusion 1 — "TRUNCATE aur DROP TABLE mein kya fark hai?"**::HL]]
 * [[HL::**Galat soch:** Dono table delete karte hain, toh same hi honge.::HL]]
 * [[HL::**Actually:** `DROP TABLE` puri building (structure + data) ko gira deta hai. Tumhe `CREATE TABLE` wapas likhna padega. `TRUNCATE TABLE` building safe rakhta hai, bas andar ka saara saamaan (data) gaayab kar deta hai. Structure (columns, data types) waise hi rehte hain::HL]].
 * **Prove karo:** TRUNCATE chalao aur uske baad `SELECT * FROM table` chalao. Table wahi hogi, bas khali hogi. DROP chalane ke baad `SELECT` chalaoge toh 'Table does not exist' error aayega.
@@ -8447,33 +8447,33 @@ CREATE TABLE ... FOREIGN KEY ...
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-* [[HL::**Line 1:** `DELIMITER //` — Speaker ne zor diya::HL]]: "From now on semicolon is not my delimiter... I temporarily changed my delimiter to double forward slash." [[HL::Yeh zaroori hai taaki MySQL Line 9 wale semicolon pe aakar code ko adha na padhe.::HL]]
-* [[HL::**Line 3:** `IN city_name VARCHAR(50)` — Yeh input parameter hai (parameterized procedure). Iski madad se tum procedure ko dynamic banate ho (hardcode karne ki zaroorat nahi).::HL]]
-* [[HL::**Line 5 & 10:** `BEGIN` aur `END` is block ke start aur finish points hain.::HL]]
-* [[HL::**Line 12:** `CALL` — Yeh command stored procedure ko trigger karti hai (execute karti hai) us specific parameter ('Delhi') ke sath.::HL]]
+* **Line 1:** `DELIMITER //` — Speaker ne zor diya: "From now on semicolon is not my delimiter... I temporarily changed my delimiter to double forward slash." Yeh zaroori hai taaki MySQL Line 9 wale semicolon pe aakar code ko adha na padhe.
+* **Line 3:** `IN city_name VARCHAR(50)` — Yeh input parameter hai (parameterized procedure). Iski madad se tum procedure ko dynamic banate ho (hardcode karne ki zaroorat nahi).
+* **Line 5 & 10:** `BEGIN` aur `END` is block ke start aur finish points hain.
+* **Line 12:** `CALL` — Yeh command stored procedure ko trigger karti hai (execute karti hai) us specific parameter ('Delhi') ke sath.
 
-[[HL::#### 🔒 8. Security-First Check::HL]]
+#### 🔒 8. Security-First Check
 
-[[HL::Stored procedures SQL Injection attacks ko naturally prevent karte hain. Kyunki `CALL procedure_name(?)` pre-compiled (pehle se machine logic mein convert) hota hai, hacker input parameter mein SQL statements daal kar query ka logic alter nahi kar sakta.::HL]]
+Stored procedures SQL Injection attacks ko naturally prevent karte hain. Kyunki `CALL procedure_name(?)` pre-compiled (pehle se machine logic mein convert) hota hai, hacker input parameter mein SQL statements daal kar query ka logic alter nahi kar sakta.
 
-[[HL::#### 🏗️ 9. Scalability & Industry Context::HL]]
+#### 🏗️ 9. Scalability & Industry Context
 
-[[HL::Large systems (jaise Zomato) mein database connections expensive hote hain. Agar 5 lambi queries alag-alag bheji jayein, toh network round-trip time (latency) badh jata hai. Ek stored procedure mein un 5 queries ko lapet kar ek hi request mein server pe bhejna latency ko drastically reduce karta hai (reducing network traffic).::HL]]
+[[HL::Large systems (jaise Zomato) mein database connections expensive hote hain. Agar 5 lambi queries alag-alag bheji jayein, toh network round-trip time (latency) badh jata hai. Ek stored procedure mein un 5 queries ko lapet kar ek hi request mein server pe bhejna latency ko drastically reduce karta hai (reducing network traffic::HL]]).
 
-[[HL::#### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
+#### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
 * [[HL::**❌ Mistake 1:** Procedure banate time Delimiter wapas `;` set karna bhool jana.::HL]]
 * [[HL::**🤦 Why:** Developer `END //` likh kar ruk jata hai.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Hamesha end mein `DELIMITER ;` likho.::HL]]
-* [[HL::**⚡ Consequences:** Agar wapas `;` nahi kiya, toh aapki agli standard query (jaise `SELECT * FROM users;`) syntax error degi kyunki engine abhi bhi `//` ka wait kar raha hai.::HL]]
+* **⚡ Consequences:** Agar wapas `;` nahi kiya, toh aapki agli standard query (jaise [[HL::`SELECT * FROM users;`) syntax error degi kyunki engine abhi bhi `//` ka wait kar raha hai.::HL]]
 * [[HL::**❌ Mistake 2:** Hardcoding values inside procedures.::HL]]
-* [[HL::**✅ The 'Pro' Way:** Hamesha `IN` parameters use karo. Agar tumne `WHERE city = 'Delhi'` procedure ke andar hardcode kar diya, toh Mumbai ke orders ke liye naya procedure banana padega (jo code reuse logic ke khilaf hai).::HL]]
+* [[HL::**✅ The 'Pro' Way:** Hamesha `IN` parameters use karo. Agar tumne `WHERE city = 'Delhi'` procedure ke andar hardcode kar diya, toh Mumbai ke orders ke liye naya procedure banana padega (jo code reuse logic ke khilaf hai::HL]]).
 
-[[HL::#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)::HL]]
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
 * [[HL::**Confusion 1 — "View aur Stored Procedure mein kya fark hai?"**::HL]]
 * [[HL::**Galat soch:** Dono lambi query ko save karte hain, dono same hain.::HL]]
-* [[HL::**Actually:** View sirf ek `SELECT` query save karta hai (virtual table banata hai). Stored Procedure ke andar tum complex logic likh sakte ho — multiple `SELECT`, `INSERT`, `UPDATE`, `IF/ELSE` conditions, loops, sab kuch ek sath::HL]]!
+* **Actually:** View sirf ek `SELECT` query save karta hai (virtual table banata hai). Stored Procedure ke andar tum complex logic likh sakte ho — multiple `SELECT`, `INSERT`, `UPDATE`, [[HL::`IF/ELSE` conditions, loops, sab kuch ek sath!::HL]]
 * [[HL::**Prove karo:** Ek view mein `UPDATE` aur `SELECT` ek sath likhne ki koshish karo, syntax error aayega. Procedure mein dono smoothly chalege.::HL]]
 
 
@@ -8574,7 +8574,7 @@ Database trigger bilkul waisa hi hai. Tumne kisi order ka status 'cancelled' kiy
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* [[HL::**Problem:** Jab kisi employee ki salary update hoti hai, toh hume ensure karna hota hai ki ek audit log bane ki::HL]] "Kisne, kab aur purani salary kya thi". [[HL::Agar hum backend developer pe depend karenge, toh wo galti se log query likhna bhool sakta hai.::HL]]
+* [[HL::**Problem:** Jab kisi employee ki salary update hoti hai, toh hume ensure karna hota hai ki ek audit log bane ki "Kisne, kab aur purani salary kya thi". Agar hum backend developer pe depend karenge, toh wo galti se log query likhna bhool sakta hai.::HL]]
 * [[HL::**Solution:** Table par ek `AFTER UPDATE` trigger laga do. Chahe change Backend App se ho, DBA ne Workbench se kiya ho, ya kisi aur ne — logging 100% fail-proof tarike se automatically hogi.::HL]]
 * [[HL::**What breaks if we don't use it?** Data auditability lose ho jayegi. E-commerce mein automated logging (order cancellation history) app logic pe heavily depend karegi jisse code messy hoga.::HL]]
 * [[HL::**✅ Kab use karo (Use this when):** Audit logging, strict data validation, ya kisi related table ko indirectly update karne ke liye (jaise Employee salary badhne par department ka total salary budget automatically badha dena).::HL]]
@@ -8651,7 +8651,7 @@ Database trigger bilkul waisa hi hai. Tumne kisi order ka status 'cancelled' kiy
 
 [[HL::#### 🔒 8. Security-First Check::HL]]
 
-[[HL::Speaker warning::HL]]: "This is a wrong trigger. It can destroy your data completely." [[HL::Agar tumne trigger mein galti se infinite loop bana diya (e.g., Table A ka trigger Table B update karta hai, aur Table B ka trigger Table A update karta hai), toh database crash ho jayega. Triggers silently run hote hain, isliye galat logic se ⭐**destroy your data** ho sakta hai bina tumhe pata chale::HL]].
+[[HL::Speaker warning: "This is a wrong trigger. It can destroy your data completely." Agar tumne trigger mein galti se infinite loop bana diya (e.g., Table A ka trigger Table B update karta hai, aur Table B ka trigger Table A update karta hai), toh database crash ho jayega. Triggers silently run hote hain, isliye galat logic se ⭐**destroy your data** ho sakta hai bina tumhe pata chale::HL]].
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -8668,7 +8668,7 @@ Industry mein Triggers bohot limit mein use hote hain. Kyunki ye har row ke sath
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "BEFORE UPDATE aur AFTER UPDATE mein asli fark kya hai?"**
+* [[HL::**Confusion 1 — "BEFORE UPDATE aur AFTER UPDATE mein asli fark kya hai?"**::HL]]
 * [[HL::**Galat soch:** Dono same time pe chalte hain, bas naam alag hain.::HL]]
 * [[HL::**Actually:** `BEFORE` trigger tab chalta hai jab data memory mein aa gaya hai par disk pe save nahi hua hai. Agar tumhe check karke incoming data rokna hai (validation error throw karna hai) ya data chupke se badalna hai (jaise incoming name ko UPPER() karna), toh `BEFORE` lagao. `AFTER` tab chalta hai jab data save ho chuka hai — yeh logging ke liye best hai.::HL]]
 * [[HL::**Prove karo:** `AFTER INSERT` trigger mein `SET NEW.salary = 5000` lagane ki koshish karo, MySQL mana kar dega kyunki insert toh ho chuka hai! Yeh sirf BEFORE mein possible hai::HL]].
