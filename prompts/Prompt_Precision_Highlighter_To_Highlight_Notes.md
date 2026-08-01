@@ -256,9 +256,11 @@ You must recognize that this is the SAME content. **Ignore added markdown charac
 ### Rule 33 — TAG BALANCE VERIFICATION (Self-Check)
 Before outputting the final document, you must guarantee that the number of opening `[[HL::` tags matches the number of closing `::HL]]` tags exactly. A mismatched tag is a catastrophic failure.
 
-### Rule 34 — ZOTERO PAGINATION SPLITS (Ignore PDF Tags & Verify Ground-Truth)
-Sometimes a single continuous sentence in the document was split into two separate quotes in the user's input because of PDF page breaks (e.g., `...Tum request” ([pdf](zotero://...))\n\n“dekh sakte ho...`). You must recognize when a sentence is broken in half by Zotero tags. 
-**CRITICAL VERIFICATION STEP:** When programmatically merging Zotero splits, do NOT blindly merge adjacent quotes, as this can cause catastrophic over-merging of independent annotations. You MUST digitally concatenate the two quotes and verify if the resulting continuous string exists in the target document. If it exists in the document, it is definitively a Zotero split and must be highlighted as ONE single contiguous block.
+### Rule 34 — ZOTERO PAGINATION SPLITS (Citation Interference & Overlapping Characters)
+Sometimes a single continuous sentence in the document was split into two separate quotes in the user's input because of PDF page breaks. You must programmatically heal these splits with extreme caution:
+1. **Citation Interference:** Zotero citations (e.g., `(“Book Title”, p. 20)`) often get jammed *between* the split fragments. You MUST aggressively strip all Zotero citations globally from the raw input *before* attempting any sequential merging. Otherwise, the interleaved citation will block the detection of adjacent quotes.
+2. **Overlapping Characters:** Zotero often duplicates characters across page boundaries (e.g., splitting `Mistake` into `Mista` and `ake`). Simple string concatenation (`Mista` + `ake` = `Mistaake`) will fail ground-truth verification! Your merge logic MUST account for character overlaps at the fragment boundaries and use proximity matching (checking if fragments appear within ~25 chars of each other in the document) to definitively reconstruct the original unbroken text.
+**CRITICAL VERIFICATION STEP:** Do NOT blindly merge adjacent quotes. You MUST verify if the mathematically merged string actually exists in the target document. If it exists, it is definitively a Zotero split and must be highlighted as ONE single contiguous block.
 
 ### Rule 35 — FUZZY MATCHING (MISSING MIDDLE WORDS)
 Sometimes the user's requested term is missing words in the middle compared to the actual text in the document.
@@ -271,12 +273,8 @@ You must recognize this as a match and NOT skip it. When you find the logical ma
 
 ### Rule 36 — IGNORE CITATION TAGS AT THE END OF QUOTES (E.g. Page Numbers)
 The user may provide highlight terms with citation tags at the end, like:
-`“Some text to highlight” (“Course Notes”, p. 3)`
-Or quotes split across multiple lines/pages with citations in between:
-`“Some text...” (“Course Notes”, p. 12)`
-`“karo: rest of text” (“Course Notes”, p. 12)`
-
-You must IGNORE these trailing citation tags (e.g., `(“...”, p. X)` or `(p. X)`) and the surrounding quotation marks (`“ ”` or `" "`) when searching the document. Mentally strip them out, merge any split parts into a single continuous phrase, and highlight the actual contiguous text exactly as it appears in the document. Do NOT highlight the citation tags or quotes themselves unless they are literally part of the text in the document.
+`"Some text to highlight" ("Course Notes", p. 3)`
+You must **globally strip** these trailing citation tags from the text before searching for the term in the document. The citation tag is metadata, NOT part of the document text. Failing to strip them globally will cause the script to fail to find the text. Mentally strip them out, merge any split parts into a single continuous phrase, and highlight the actual contiguous text exactly as it appears in the document. Do NOT highlight the citation tags or quotes themselves unless they are literally part of the text in the document.
 
 ### Rule 37 — EXPAND HIGHLIGHTS OUTWARDS TO ENCOMPASS MARKDOWN
 If the text you need to highlight starts or ends *inside* a Markdown tag (like `**bold**`, `_italic_`, or `` `code` ``), **DO NOT** chop the highlight into tiny isolated words to avoid the Markdown syntax. 
@@ -415,3 +413,5 @@ When you see this, do NOT treat it as a single contiguous string. You must intel
 | Straddling Markdown syntax (e.g. `**[[HL::Text:**::HL]]`) | Forbidden — HTML tags cannot start outside and end inside Markdown syntax. Wrap cleanly inside or outside. |
 | `[[HL::* Item::HL]]` | Forbidden — wrapping bullet point or blockquote markers breaks Markdown list rendering and collapses paragraphs. Marker must stay outside. |
 | Blindly merging Zotero splits without verifying | Forbidden — merging adjacent annotations without checking if the merged string actually exists in the target document causes catastrophic over-merging. |
+| Failing to account for Overlapping Characters in Zotero splits | Forbidden — Zotero splits often duplicate letters across boundaries (e.g., `Mista` + `ake`). Simple concatenation will fail verification. |
+| Allowing interleaved Zotero citations to block merges | Forbidden — Zotero citations jammed between split fragments will block sequential merge logic. They must be stripped globally first. |
