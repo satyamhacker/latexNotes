@@ -3873,7 +3873,7 @@ Agar main tumhe cricket match ki har over ki ball-by-ball written report du, toh
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Feature | Column / Bar Chart | Line / Area Chart | 3D Pie Chart |::HL]]
+| [[HL::Feature::HL]] | [[HL::Column / Bar Chart::HL]] | [[HL::Line / Area Chart::HL]] | [[HL::3D Pie Chart::HL]] |
 | --- | --- | --- | --- |
 | [[HL::Main Focus::HL]] | [[HL::Items ko compare karna::HL]] | [[HL::Samay ke sath badlaav (Trend)::HL]] | [[HL::Purey (Whole) mein se hissa (Share)::HL]] |
 | [[HL::Data Density::HL]] | [[HL::Kam items ke liye best::HL]] | [[HL::Hazaron items (Time-series) handle kar lega::HL]] | [[HL::Sirf 4-5 categories (varna clutter hoga)::HL]] |
@@ -4397,7 +4397,7 @@ Files mein jab "External Links" (doosri workbook ka reference) hota hai, toh kho
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Feature | Cross-Sheet Reference | Cross-Workbook Reference |::HL]]
+| [[HL::Feature::HL]] | [[HL::Cross-Sheet Reference::HL]] | [[HL::Cross-Workbook Reference::HL]] |
 | --- | --- | --- |
 | [[HL::Kisko link karta hai?::HL]] | [[HL::Same file ki doosri tabs ko (`Sheet2!A1`)::HL]] | [[HL::Poori tarah external doosri file ko::HL]] |
 | [[HL::Syntax Marker::HL]] | [[HL::Exclamation mark `!`::HL]] | [[HL::Square Brackets `[]` + Exclamation mark `!`::HL]] |
@@ -6221,7 +6221,7 @@ Jab table create hoti hai, toh Workbench ke left panel (Schemas) mein:
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Feature | INT | VARCHAR | DECIMAL |::HL]]
+| [[HL::Feature::HL]] | [[HL::INT::HL]] | [[HL::VARCHAR::HL]] | [[HL::DECIMAL::HL]] |
 | --- | --- | --- | --- |
 | [[HL::**Kya store karta hai?**::HL]] | [[HL::Pure numbers (no decimals)::HL]] | [[HL::Text, symbols, numbers::HL]] | [[HL::Numbers with precision::HL]] |
 | [[HL::**Example**::HL]] | [[HL::67 (Savitri's age)::HL]] | [[HL::"Hrithik Sharma", "+91-123"::HL]] | [[HL::45000.50 (Salary)::HL]] |
@@ -6881,7 +6881,7 @@ Jab database mein 10 million rows hoti hain, toh `LIKE '%bad'` (jisme `%` shuru 
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Feature | IN | BETWEEN | LIKE |::HL]]
+| [[HL::Feature::HL]] | IN | [[HL::BETWEEN::HL]] | [[HL::LIKE::HL]] |
 | --- | --- | --- | --- |
 | [[HL::**Kya karta hai?**::HL]] | [[HL::Specific values ki list se match karta hai::HL]] | [[HL::Ek specific number/date range check karta hai::HL]] | [[HL::Text ka pattern match karta hai::HL]] |
 | [[HL::**Example**::HL]] | [[HL::`IN (10, 20, 30)`::HL]] | [[HL::`BETWEEN 100 AND 500`::HL]] | [[HL::`LIKE 'A%'`::HL]] |
@@ -7081,7 +7081,7 @@ Industry (jaise Flipkart/Amazon with sellers from Bangalore, Mumbai, Kolkata) me
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Constraint | Parent row delete hone par Child row ka kya hoga? | Kab use karein? |::HL]]
+| [[HL::Constraint::HL]] | [[HL::Parent row delete hone par Child row ka kya hoga?::HL]] | [[HL::Kab use karein?::HL]] |
 | --- | --- | --- |
 | [[HL::**RESTRICT**::HL]] | [[HL::Parent ko delete hone hi nahi dega (Error throw)::HL]] | [[HL::Default safety choice. Financial records.::HL]] |
 | [[HL::**CASCADE**::HL]] | [[HL::Child rows automatically delete ho jayengi::HL]] | [[HL::Posts & Comments, Folder & Files::HL]] |
@@ -7297,9 +7297,9 @@ Industry (jaise Amazon) mein combined report nikalne ke liye queries bohot heavy
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| Feature | [[HL::INNER JOIN | LEFT JOIN | RIGHT JOIN::HL]] |
+| Feature | [[HL::INNER JOIN::HL]] | [[HL::LEFT JOIN::HL]] | [[HL::RIGHT JOIN::HL]] |
 | --- | --- | --- | --- |
-| **Kam kya hai?** | Sirf matching rows dono tables se | [[HL::Left table ki saari rows, chahe match ho ya na ho | Right table ki saari rows |::HL]]
+| **Kam kya hai?** | Sirf matching rows dono tables se | [[HL::Left table ki saari rows, chahe match ho ya na ho::HL]] | [[HL::Right table ki saari rows::HL]] |
 | [[HL::**Non-matching data**::HL]] | [[HL::Ignore kar deta hai (Delete dikhta hai)::HL]] | [[HL::`NULL` fill kar deta hai::HL]] | `NULL` fill kar deta hai |
 
 #### 🌍 14. Real-World Use Case
@@ -8498,11 +8498,11 @@ Stored procedures SQL Injection attacks ko naturally prevent karte hain. Kyunki 
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Feature | View | Stored Procedure |::HL]]
+| [[HL::Feature::HL]] | [[HL::View::HL]] | [[HL::Stored Procedure::HL]] |
 | --- | --- | --- |
 | [[HL::**Kya store karta hai?**::HL]] | [[HL::Ek single SELECT statement::HL]] | [[HL::Complex business logic (loops, if/else, multi-queries)::HL]] |
 | [[HL::**Parameters pass kar sakte hain?**::HL]] | [[HL::❌ Nahi::HL]] | [[HL::✅ Haan (`IN` parameters ke through)::HL]] |
-| [[HL::**Kaise execute karein?**::HL]] | [[HL::`SELECT * FROM view_name`::HL]] | `CALL procedure_name()` |
+| [[HL::**Kaise execute karein?**::HL]] | [[HL::`SELECT * FROM view_name`::HL]] | [[HL::`CALL procedure_name::HL]]()` |
 
 #### 🌍 14. Real-World Use Case
 
