@@ -279,7 +279,8 @@ You must recognize this as a match and NOT skip it. When you find the logical ma
 ### Rule 36 — IGNORE CITATION TAGS AT THE END OF QUOTES (E.g. Page Numbers)
 The user may provide highlight terms with citation tags at the end, like:
 `"Some text to highlight" ("Course Notes", p. 3)`
-You must **globally strip** these trailing citation tags from the text before searching for the term in the document. The citation tag is metadata, NOT part of the document text. Failing to strip them globally will cause the script to fail to find the text. Mentally strip them out, merge any split parts into a single continuous phrase, and highlight the actual contiguous text exactly as it appears in the document. Do NOT highlight the citation tags or quotes themselves unless they are literally part of the text in the document.
+You must **globally strip** these trailing citation tags from the text before searching for the term in the document. The citation tag is metadata, NOT part of the document text. Failing to strip them globally will cause the script to fail to find the text.
+**CRITICAL:** When stripping citations, be extremely specific! Do NOT use an overly broad regex like `\(".*"\)` that accidentally strips normal parenthetical quotes in the text (e.g. `("Shubham")`). Target the exact citation title provided by the user.
 
 ### Rule 37 — EXPAND HIGHLIGHTS OUTWARDS TO ENCOMPASS MARKDOWN
 If the text you need to highlight starts or ends *inside* a Markdown tag (like `**bold**`, `_italic_`, or `` `code` ``), **DO NOT** chop the highlight into tiny isolated words to avoid the Markdown syntax. 

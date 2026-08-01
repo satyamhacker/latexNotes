@@ -238,7 +238,7 @@ Screen zoom in ho jayegi (e.g. 150%) aur upar ka Ribbon chhup jayega, jisse scre
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-* **Line 2:** `Ctrl + Z` — Yeh action Excel ki memory se last input ko cancel kar deta hai. Agar speaker ki tarah galati hui ("sitting"), toh yeh instantly delete karke purani state pe le aayega.
+* [[HL::**Line 2:** `Ctrl + Z` — Yeh action Excel ki memory se last input ko cancel kar deta hai. Agar speaker ki tarah galati hui ("sitting"), toh yeh instantly delete karke purani state pe le aayega::HL]].
 * **Line 4:** `Ctrl + Scroll Wheel` — Mouse ka **scroll wheel** use karke zoom in/out karna sabse fast tarika hai (speaker bhi personally yahi prefer karta hai external mouse ke sath). Bottom right slider use karne se zyada fast hai.
 
 #### 🔒 8. Security-First Check
@@ -575,11 +575,11 @@ Socho tum cinema hall (movie theater) gaye ho. Tumhari ticket par likha hai **"R
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-[[HL::Grid ke top par tumhein A, B, C likhe column headers dikhenge aur left side mein 1, 2, 3 likhe row headers dikhenge. Jab tum kisi bhi cell par click karte ho, toh top-left corner mein "Name Box" hota hai jahan uska **cell address** (e.g. `H12`) automatically highlight hoke display hota hai::HL]].
+[[HL::Grid ke top par tumhein A, B, C likhe column headers dikhenge aur left side mein 1, 2, 3 likhe row headers dikhenge. Jab tum kisi bhi cell par click karte ho, toh top-left corner mein "Name Box" hota hai jahan uska **cell address** (e.g. `H12`) automatically highlight hoke display hota hai.::HL]]
 
-#### ⚙️ 6. Under the Hood (Deep Dive)
+[[HL::#### ⚙️ 6. Under the Hood (Deep Dive)::HL]]
 
-* **Data Types in Cells:** Ek cell bohot smart hota hai. Agar tum usme text likhoge ("Hello"), toh wo use **string** (text data type) manega aur by default *left-align* karega. Agar tum `100` likhoge, toh wo use **number** (integer/float) manega aur by default *right-align* karega.
+* [[HL::**Data Types in Cells:** Ek cell bohot smart hota hai. Agar tum usme text likhoge ("Hello"), toh wo use **string** (text data type) manega aur by default *left-align* karega. Agar tum `100` likhoge, toh wo use **number** (integer/float) manega aur by default *right-align* karega::HL]].
 * **Grid Architecture & Limits:** Memory optimize karne ke liye grid ka size fixed hota hai.
 * Max Rows: Exactly ⭐**1048576** rows. (Matlab 1 millionth row cross karke lagbhag 10.4 lakh tak jata hai).
 * Max Columns: Exactly ⭐**16384** columns. (Letters A se shuru hote hain, Z tak jate hain, fir AA, AB... aur aakhiri column **xfd** hota hai).
@@ -1140,8 +1140,8 @@ Jab mouse kisi do column headers (A aur B ke beech ki line) par lekar jate ho, t
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-* [[HL::**Clear Content vs Delete:** Jab tum keyboard se 'Delete' dabate ho ya menu se **Clear Content** dabate ho, sirf text (content) udta hai. Us cell ka background color ya borders waise hi bache rehte hain. Pura structure delete karne ke liye 'Clear All' lagta hai::HL]].
-* **Auto-Fit Logic:** Jab tum column boundary pe double-click karte ho, Excel internal engine poore column ke ek-ek cell (from Row 1 to Row 1M) ko parse karta hai, sabse lambe text ("Shubham Kumar Mishra") ki length calculate karta hai, aur column ko us maximum length par set kar deta hai.
+* [[HL::**Clear Content vs Delete:** Jab tum keyboard se 'Delete' dabate ho ya menu se **Clear Content** dabate ho, sirf text (content) udta hai. Us cell ka background color ya borders waise hi bache rehte hain. Pura structure delete karne ke liye 'Clear All' lagta hai.::HL]]
+* [[HL::**Auto-Fit Logic:** Jab tum column boundary pe double-click karte ho, Excel internal engine poore column ke ek-ek cell (from Row 1 to Row 1M) ko parse karta hai, sabse lambe text ("Shubham Kumar Mishra") ki length calculate karta hai, aur column ko us maximum length par set kar deta hai::HL]].
 * **Transposition Matrix:** **Paste Transpose** internally math ka Matrix Transpose logic use karta hai, jisme Row[x] ban jata hai Column[x] aur vice versa.
 * [[HL::**Moving selections:** Jab tum cell ki green boundary (edge) ko pakad kar drag karte ho, Excel internally formula dependencies trace karta hai. Isliye formulas automatic update ho jate hain aur toot-te nahi::HL]].
 
@@ -1960,14 +1960,14 @@ Agar teacher har bacche ke marks paper pe likh kar calculator pe add karega, toh
 Chalo ek choti si class ke marks (jaise Speaker ne example me liya) par core functions apply karein.
 
 ```text
-# ⚠️ Version verify karo — All Excel versions
-1  Action: Enter marks in column C (C2 to C6): 45, 80, 92, 33, 75
-2  Action: In D2 type: =SUM(C:C)                    # C colon C (pura C column add karega)
-3  Action: In D3 type: =MIN(C:C)                    # Sabse lowest mark layega
-4  Action: In D4 type: =MAX(C:C)                    # Sabse highest mark layega
-5  Action: In D5 type: =AVERAGE(C2:C6)              # Specific range C2 se C6 tak ka ausat nikalega
-6  Action: In D6 type: =COUNT(C:C)                  # Number of students ginega (jinki numerical value hai)
-7  Action: In D7 type: =DAY("15-Aug-2025")          # DAY function — date mein se sirf din (day number) nikalega
+# ⚠️ [[HL::Version verify karo — All Excel versions::HL]]
+[[HL::1  Action: Enter marks in column C (C2 to C6): 45, 80, 92, 33, 75::HL]]
+[[HL::2  Action: In D2 type: =SUM(C:C)                    # C colon C (pura C column add karega)::HL]]
+[[HL::3  Action: In D3 type: =MIN(C:C)                    # Sabse lowest mark layega::HL]]
+[[HL::4  Action: In D4 type: =MAX(C:C)                    # Sabse highest mark layega::HL]]
+[[HL::5  Action: In D5 type: =AVERAGE(C2:C6)              # Specific range C2 se C6 tak ka ausat nikalega::HL]]
+[[HL::6  Action: In D6 type: =COUNT(C:C)                  # Number of students ginega (jinki numerical value hai)::HL]]
+[[HL::7  Action: In D7 type: =DAY("15-Aug-2025")          # DAY function — date mein se sirf din (day number) nikalega::HL]]
 
 ```
 
@@ -4893,19 +4893,19 @@ Wahien, **Error Handling (try-except)** car ke airbag jaisa hai. Normal driving 
 5      score = score + 50                  # Global variable update ho raha hai
 6      print(f"Inside function: {score}")  # print() = terminal pe dikhao
 7  
-8  update_score()                          # Function call
-9  print(f"Outside function: {score}")     # Output check karo — global value badal chuki hai
+8  update_score()                          # [[HL::Function call::HL]]
+[[HL::9  print(f"Outside function: {score}")     # Output check karo — global value badal chuki hai::HL]]
 10 
-11 # Error Handling Flow
-12 try:                                    # try block = iske andar ka code risk wala hai, test karo
-13     result = 10 / 0                     # ZeroDivisionError aayega (math rule break)
-14     print(result)                       # Yeh line kabhi run nahi hogi kyunki line 13 par crash ho gaya
-15 except ZeroDivisionError as e:          # except = specific error catch karo; 'as e' matlab us error object ko 'e' naam do
-16     print(f"Error aayi bhai: {e}")      # gracefully handle kiya, app crash nahi hua
-17 except ValueError as e:                 # Agar wrong data type aata toh yeh block chalta
-18     print("Galat value daal di!")
-19 finally:                                # finally block = exception aaye ya na aaye, yeh hamesha chalega
-20     print("Cleanup done. Execution safely finished.")
+[[HL::11 # Error Handling Flow::HL]]
+[[HL::12 try:                                    # try block = iske andar ka code risk wala hai, test karo::HL]]
+[[HL::13     result = 10 / 0                     # ZeroDivisionError aayega (math rule break)::HL]]
+[[HL::14     print(result)                       # Yeh line kabhi run nahi hogi kyunki line 13 par crash ho gaya::HL]]
+[[HL::15 except ZeroDivisionError as e:          # except = specific error catch karo; 'as e' matlab us error object ko 'e' naam do::HL]]
+[[HL::16     print(f"Error aayi bhai: {e}")      # gracefully handle kiya, app crash nahi hua::HL]]
+[[HL::17 except ValueError as e:                 # Agar wrong data type aata toh yeh block chalta::HL]]
+[[HL::18     print("Galat value daal di!")::HL]]
+[[HL::19 finally:                                # finally block = exception aaye ya na aaye, yeh hamesha chalega::HL]]
+[[HL::20     print("Cleanup done. Execution safely finished::HL]].")
 
 ```
 
@@ -5076,13 +5076,13 @@ Jab hum `open()` call karte hain, toh OS (Operating System) hard disk par rakhi 
 ```python
 # Python 3.10+
 [[HL::1  # 1. Write Mode ('w') - Purana data wipe karke naya data dalega::HL]]
-2  file = open("my_note.txt", "w")                 # file open() function se w (write mode) mein kholo; file nahi hogi toh nai banayega
-3  file.write("Hello! Yeh pehli line hai.")        # write() = string data ko file mein dalo
-4  file.close()                                    # close() = OS file stream ko band karo (MANDATORY)
+[[HL::2  file = open("my_note.txt", "w")                 # file open() function se w (write mode) mein kholo; file nahi hogi toh nai banayega::HL]]
+[[HL::3  file.write("Hello! Yeh pehli line hai.")        # write() = string data ko file mein dalo::HL]]
+[[HL::4  file.close()                                    # close() = OS file stream ko band karo (MANDATORY)::HL]]
 5  
-6  # 2. Append Mode ('a') - Purana data bacha rahega, naya aage judega (Pro way using 'with')
-7  with open("my_note.txt", "a") as file:          # with open ... as file: context manager hai, block ke baad auto-close karega
-8      file.write("\nYeh dusri line append hui.")  # \n = escape sequence (new line); file mein enter key press karne jaisa kaam karega
+[[HL::6  # 2. Append Mode ('a') - Purana data bacha rahega, naya aage judega (Pro way using 'with')::HL]]
+[[HL::7  with open("my_note.txt", "a") as file:          # with open ... as file: context manager hai, block ke baad auto-close karega::HL]]
+[[HL::8      file.write("\nYeh dusri line append hui.")  # \n = escape sequence (new line); file mein enter key press karne jaisa kaam karega::HL]]
 9  
 10 # 3. Read Mode ('r') - Data ko read karna
 11 with open("my_note.txt", "r") as file:          # r = read mode
@@ -5735,15 +5735,15 @@ Password copied to clipboard! Kahin bhi paste (Ctrl+V) kar lo.
 8      print(f"Selected: {files}")
 9      # Real logic mein yahan PdfWriter() loop chalega aur merger.append(file) hogi
 10 
-11 root = tk.Tk()                                # tk.Tk() = root main window (base app frame) banata hai
-12 root.title("PDF Merger App")                  # title() = app window ka naam set karega
-13 root.geometry("300x200")                      # geometry() = window ka size width x height me set karega
+[[HL::11 root = tk.Tk()                                # tk.Tk() = root main window (base app frame) banata hai::HL]]
+[[HL::12 root.title("PDF Merger App")                  # title() = app window ka naam set karega::HL]]
+[[HL::13 root.geometry("300x200")                      # geometry() = window ka size width x height me set karega::HL]]
 14 
-15 # Button() = click karne wala widget; command= parameter me bina () ke function name dete hain
-16 btn = tk.Button(root, text="Select PDFs to Merge", command=select_files)
-17 btn.pack(pady=50)                             # pack() = widget ko window par automatically place karta hai (center me)
+[[HL::15 # Button() = click karne wala widget; command= parameter me bina () ke function name dete hain::HL]]
+[[HL::16 btn = tk.Button(root, text="Select PDFs to Merge", command=select_files)::HL]]
+[[HL::17 btn.pack(pady=50)                             # pack() = widget ko window par automatically place karta hai (center me)::HL]]
 18 
-19 root.mainloop()                               # [[HL::main loop = window ko screen par::HL]] rok ke rakhta hai (infinite event loop)
+[[HL::19 root.mainloop()                               # main loop = window ko screen par rok ke rakhta hai (infinite event loop::HL]])
 
 ```
 
@@ -6127,11 +6127,11 @@ Jab table create hoti hai, toh Workbench ke left panel (Schemas) mein:
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. **VARCHAR (variable character):** Text ke liye. Agar VARCHAR(50) diya aur sirf 4 character ("Amit") use kiye, toh database baaki 46 characters ki memory free kar dega (memory bachayega).
-2. **INT (integer):** Pura number bina decimal ke (e.g., 67, 35).
-3. **DECIMAL(precision, scale):** Decimal numbers ke liye (e.g., salary). `DECIMAL(10,2)` matlab total 10 digits, jisme se 2 decimal ke baad honge.
-4. **BOOLEAN:** Sirf true/false ya 1/0 store karta hai (is_active flag ke liye).
-5. **DATE vs DATETIME:** `DATE` sirf YYYY-MM-DD rakhta hai, `DATETIME` hours, minutes, seconds bhi store karta hai.
+1. [[HL::**VARCHAR (variable character):** Text ke liye. Agar VARCHAR(50) diya aur sirf 4 character ("Amit") use kiye, toh database baaki 46 characters ki memory free kar dega (memory bachayega).::HL]]
+2. [[HL::**INT (integer):** Pura number bina decimal ke (e.g., 67, 35).::HL]]
+3. [[HL::**DECIMAL(precision, scale):** Decimal numbers ke liye (e.g., salary). `DECIMAL(10,2)` matlab total 10 digits, jisme se 2 decimal ke baad honge.::HL]]
+4. [[HL::**BOOLEAN:** Sirf true/false ya 1/0 store karta hai (is_active flag ke liye).::HL]]
+5. [[HL::**DATE vs DATETIME:** `DATE` sirf YYYY-MM-DD rakhta hai, `DATETIME` hours, minutes, seconds bhi store karta hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
