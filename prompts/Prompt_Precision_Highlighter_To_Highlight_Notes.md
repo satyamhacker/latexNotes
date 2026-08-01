@@ -136,6 +136,11 @@ If a highlighted annotation spans multiple lines and includes Markdown list mark
 - ❌ `[[HL::* **A:** Cell humesha...::HL]]` — FORBIDDEN (Destroys bullet point list rendering)
 - ✅ `* [[HL::**A:** Cell humesha...::HL]]` — CORRECT (Marker is safely outside the tag)
 
+**CRITICAL CODE BLOCK EXCEPTION:**
+Never highlight the code block backticks (e.g. ` ```bash ` or ` ``` `). If you place `[[HL::` around the backticks, the Markdown parser will no longer recognize it as a code block. It will treat it as normal text and collapse the entire block into a single broken line (removing all newlines).
+- ❌ `[[HL::```text::HL]]` — FORBIDDEN (Destroys the code block renderer)
+- ✅ ````text` — CORRECT (Leave the backticks alone)
+
 ### Rule 14 — SEPARATOR LINES: Off-Limits
 Notes use decorative separator lines like:
 ```

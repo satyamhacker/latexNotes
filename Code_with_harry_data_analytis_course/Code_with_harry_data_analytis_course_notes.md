@@ -812,7 +812,7 @@ Top left corner mein ek **AutoSave** toggle button hota hai (On/Off). Jab intern
 
 [[HL::Chalo file ko manually save karein aur OneDrive link generate karein.::HL]]
 
-[[HL::```text::HL]]
+```text
 [[HL::# ⚠️ Version verify karo — Excel 365 / Excel 2019+::HL]]
 [[HL::1  Action: Click File -> Save As                         # Save As menu open karo naya version save karne ke liye::HL]]
 [[HL::2  Action: Select OneDrive as Location                   # Cloud storage choose karo::HL]]
@@ -982,7 +982,7 @@ Socho tumhare paas pani hai (raw data). Agar tum us pani ko glass mein dalo, toh
 
 [[HL::Chalo ek custom date aur decimal adjustment ka practical example dekhein.::HL]]
 
-[[HL::```text::HL]]
+```text
 [[HL::# ⚠️ Version verify karo — All Excel versions::HL]]
 [[HL::1  Action: Type "45000.56" in cell A1 (Defaults to General format)::HL]]
 [[HL::2  Action: Click the "Currency" format from the dropdown     # Paise ka symbol aur commas add honge::HL]]
@@ -1384,7 +1384,7 @@ Chalo Shubham ke marks manually aur shortcut se add karke dekhein.
 
 ```
 
-[[HL::```text::HL]]
+```text
 [[HL::# 📤 Expected Output:::HL]]
 [[HL::Line 3 run karne se cell E2 mein '156' dikhega.::HL]]
 [[HL::Line 5 (drag down) karne se E3 aur E4 mein `=B3+C3+D3` aur `=B4+C4+D4` auto-calculate hoke result aayega.::HL]]
@@ -1556,7 +1556,7 @@ Socho ek "garib rishtedar" (Relative Reference) hai jiske paas dollar nahi hain 
 
 [[HL::Maan lo Column B mein price hai, aur F2 mein fixed Tax Rate (10%) likha hai.::HL]]
 
-[[HL::```text::HL]]
+```text
 [[HL::# ⚠️ Version verify karo — All Excel versions::HL]]
 [[HL::1  Action: Type Price 500 in B2. Type Tax Rate 10% in F2.::HL]]
 [[HL::2  Action: In cell C2, type: =B2*F2                      # Relative: Galat approach (drag karne pe tootega)::HL]]
@@ -1566,7 +1566,7 @@ Socho ek "garib rishtedar" (Relative Reference) hai jiske paas dollar nahi hain 
 
 ```
 
-[[HL::```text::HL]]
+```text
 [[HL::# 📤 Expected Output:::HL]]
 [[HL::Line 3 pe jab drag down karoge, formula `=B3*F3` banega jisse answer '0' aayega (Error!).::HL]]
 [[HL::Line 5 pe lock (`$`) lagane ke baad formula `=B3*$F$2` banega, jo perfectly Calculate hoga::HL]].
@@ -1750,7 +1750,7 @@ Speaker ne ek simple example diya: `1 + 4 * C2`. Normal dimag sochega 1+4 = 5 ka
 
 [[HL::Bina parentheses aur parentheses ke sath ek operation karke usko formula debugger me chalayenge.::HL]]
 
-[[HL::```text::HL]]
+```text
 [[HL::# ⚠️ Version verify karo — All Excel versions::HL]]
 [[HL::1  Action: In cell C2, type "2"::HL]]
 [[HL::2  Action: In cell D2, type "=1+4*C2"                # Normal formula, without brackets (BODMAS test)::HL]]
@@ -3797,7 +3797,7 @@ Agar main tumhe cricket match ki har over ki ball-by-ball written report du, toh
 
 [[HL::*Note: Chart creation is UI based. Niche steps explain kiye gaye hain ki data format kaisa hona chahiye aur kahan click karna hai.*::HL]]
 
-[[HL::```excel::HL]]
+```excel
 [[HL::# Data Preparation for Chart::HL]]
 [[HL::# Aisa ek table banao aur select karo (A1:B6)::HL]]
 [[HL::1  Expense_Type    | Amount (16th December 2024)::HL]]
@@ -4012,7 +4012,7 @@ Socho tum 50 logon ki ek group photo le rahe ho, lekin tumhara camera lens (pape
 
 ```
 
-[[HL::```text::HL]]
+```text
 [[HL::# 📤 Expected Output:::HL]]
 [[HL::(Ctrl P dabane par screen ke right side mein paper ka preview dikhega. Agar tumne sirf chart select karke Ctrl P dabaya hai, toh sirf chart preview mein aayega, baaki data nahi::HL]].)
 
@@ -4192,7 +4192,7 @@ Templates ek "Cookie Cutter" (biscuit ka sancha) ki tarah hote hain. Ek baar san
 
 ```
 
-[[HL::```text::HL]]
+```text
 [[HL::# 📤 Expected Output:::HL]]
 [[HL::(Jaise hi Personal templates se MyWeeklyTemplate pe click karoge, Excel ek nayi file "MyWeeklyTemplate1" khol dega jismein saara colors aur layout hoga, but yeh ek fresh normal .xlsx workbook hogi save karne ke liye::HL]])
 
@@ -8014,7 +8014,7 @@ Agar ROLLUP use kiya hai, toh sabse aakhiri row mein city/category ka naam NULL 
 
 [[HL::# 📤 Expected Output:::HL]]
 
-[[HL::```text::HL]]
+```text
 [[HL::(Group By without Rollup)::HL]]
 [[HL::Ahmedabad    Electronics   30000::HL]]
 [[HL::Delhi        Electronics   65101::HL]]
