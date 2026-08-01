@@ -434,3 +434,14 @@ When you see this, do NOT treat it as a single contiguous string. You must intel
 | Failing to account for Overlapping Characters in Zotero splits | Forbidden — Zotero splits often duplicate letters across boundaries (e.g., `Mista` + `ake`). Simple concatenation will fail verification. |
 | Allowing interleaved Zotero citations to block merges | Forbidden — Zotero citations jammed between split fragments will block sequential merge logic. They must be stripped globally first. |
 | Using naive regex that breaks on nested quotes in Zotero exports | Forbidden — Zotero exports use curly quotes (`“`...`”`) but contain internal straight quotes (`"`). Naive regex like `[“"]` will shatter the block. |
+| Missing Contextual Sub-Bullets (`Root Cause:`, `Fix:`, etc.) | Forbidden — Scripts often miss these due to spacing. Explicitly verify they are highlighted. |
+| Missing space before inline code after a highlight | Forbidden — E.g., `[[HL::text::HL]]`.ext` breaks Markdown inline code parsing. Always leave a space: `[[HL::text::HL]] `.ext`. |
+| Leaving a dangling/unclosed ` ``` ` code block | Forbidden — A stray ` ``` ` will swallow the entire rest of the document into a giant box! |
+
+### Rule 39 — CONTEXTUAL BULLETS (Root Cause, Fix, Actually, Mistake)
+When extracting highlights, be hyper-vigilant about contextual sub-bullets like `* **Root Cause:**`, `* **Fix:**`, `* **Galat soch:**`, `* **Actually:**`, `* **Mistake:**`. Naive string-matching scripts often miss them entirely or split them incorrectly due to line breaks, spaces, or bold tags in the Markdown that aren't perfectly mirrored in the Annotations file. You must explicitly verify that these contextual prefixes are fully wrapped in `[[HL::` tags.
+
+### Rule 40 — BACKTICK SPACING & CUSTOM JS RENDERER QUIRKS
+1. **Inline Code Spacing:** Never place an `[[HL::...::HL]]` tag immediately adjacent to an inline backtick without a space. Markdown parsers need a space to recognize the inline code block correctly. (e.g., use `[[HL::Text::HL]] `.ext``, NOT `[[HL::Text::HL]]`.ext``).
+2. **Block-Level Code (` ``` `):** The custom `STYLE_PROMPT.md` JS renderer *specifically* supports and intercepts `[[HL::` tags INSIDE ` ```text ` blocks. If an annotation requires highlighting text inside a code block (like an `Expected Output` section), you MUST apply the `[[HL::...::HL]]` tags directly around the text inside the ` ``` ` block.
+3. **Dangling Code Blocks:** When modifying code blocks, be extremely careful not to leave a stray/dangling ` ``` ` tag. A single unclosed backtick block will swallow the rest of the 8,000-line document into a single unformatted Mac-window box!

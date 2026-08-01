@@ -1439,7 +1439,7 @@ Industry dashboards mein 5 lakh rows hoti hain. Wahan ek-ek karke formula **⭐d
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 
 * [[HL::**`Output cell mein #VALUE! error aa raha hai`**::HL]]
-* **Root Cause:** Tum ek number cell ko text cell ke sath add (+) karne ki koshish kar rahe ho (e.g. [[HL::`34` + `"Absent"`).::HL]]
+* [[HL::**Root Cause:** Tum ek number cell ko text cell ke sath add (+) karne ki koshish kar rahe ho (e.g. `34` + `"Absent"`).::HL]]
 * [[HL::**Fix:** Formula check karo ki koi cell by mistake character string toh hold nahi kar raha. "Absent" ko 0 karo ya formula ko IF function se upgrade karo.::HL]]
 
 
@@ -2367,8 +2367,8 @@ Startups aur small business pehle 6 mahine apni accounting (book-keeping) aisi h
 * **Fix:** Usko Home tab se percent (%) logo click karke visual formatting upgrade karo.
 
 
-* [[HL::**`COUNTIF(C:C, "food") answer 0 (zero) kyu laa raha hai, jabki maine list me food likha hai?`**::HL]]
-* **Root Cause:** Data entry (typing) karte waqt tumne trailing space mar diya hai (e.g., [[HL::`food ` — text plus space). Excel engine text length match nahi kar pa raha.::HL]]
+* **`COUNTIF(C:C, "food")` [[HL::answer 0 (zero) kyu laa raha hai, jabki maine list me food likha hai?::HL]]**
+* [[HL::**Root Cause:** Data entry (typing) karte waqt tumne trailing space mar diya hai (e.g., `food ` — text plus space). Excel engine text length match nahi kar pa raha.::HL]]
 * [[HL::**Fix:** Data ko trim karo ya ensure karo type karte waqt spelling aur spacing perfectly identical ho!::HL]]
 
 
@@ -4172,30 +4172,28 @@ Templates ek "Cookie Cutter" (biscuit ka sancha) ki tarah hote hain. Ek baar san
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Normal file `.xlsx` (Excel Spreadsheet) extension rakhti hai.
-2. Template file ⭐`.xltx` (Excel Template) extension rakhti hai.
-3. Jab tum `.xlsx` double-click karte ho, toh wahi file read/write mode mein khulti hai.
-4. Par jab tum `.[[HL::xltx` double-click karte ho, toh Excel memory mein ek fresh blank instance banata hai (jaise "Book1") aur template ka design uspe stamp kar deta hai. Original `::HL]].xltx` untouched rehti hai.
+1. [[HL::Normal file::HL]] `.xlsx` [[HL::(Excel Spreadsheet) extension rakhti hai.::HL]]
+2. [[HL::Template file ⭐::HL]] `.xltx` [[HL::(Excel Template) extension rakhti hai.::HL]]
+3. [[HL::Jab tum::HL]] `.xlsx` [[HL::double-click karte ho, toh wahi file read/write mode mein khulti hai.::HL]]
+4. [[HL::Par jab tum::HL]] `.xltx` [[HL::double-click karte ho, toh Excel memory mein ek fresh blank instance banata hai (jaise "Book1") aur template ka design uspe stamp kar deta hai. Original::HL]] `.xltx` [[HL::untouched rehti hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
 ```text
-# Saving and Using a Template Workflow
-1  # Step 1: Design your layout (e.g., Eat, Work columns)
-2  # Step 2: Go to File -> Save As
-3  # Step 3: File type change karo
-   Save as type: Excel Template (*.xltx)
-   File name: MyWeeklyTemplate  (ya Harry'sWeeklyTemplate)
+[[HL::# Saving and Using a Template Workflow::HL]]
+[[HL::1  # Step 1: Design your layout (e.g., Eat, Work columns)::HL]]
+[[HL::2  # Step 2: Go to File -> Save As::HL]]
+[[HL::3  # Step 3: File type change karo::HL]]
+[[HL::   Save as type: Excel Template (*.xltx)::HL]]
+[[HL::   File name: MyWeeklyTemplate  (ya Harry'sWeeklyTemplate)::HL]]
 4
-5  # Step 4: Using it later
-   [[HL::File -> New -> More Templates -> Personal templates -> Click MyWeeklyTemplate::HL]]
-
+[[HL::5  # Step 4: Using it later::HL]]
+[[HL::   File -> New -> More Templates -> Personal templates -> Click MyWeeklyTemplate::HL]]
 ```
 
 ```text
 [[HL::# 📤 Expected Output:::HL]]
 [[HL::(Jaise hi Personal templates se MyWeeklyTemplate pe click karoge, Excel ek nayi file "MyWeeklyTemplate1" khol dega jismein saara colors aur layout hoga, but yeh ek fresh normal .xlsx workbook hogi save karne ke liye::HL]])
-
 ```
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
@@ -6988,29 +6986,29 @@ Tumhe tables ke beech mein ek solid line (EER Diagram) dikhegi jo one-to-many re
 
 ```sql
 # MySQL 8.0+
-# 1. Parent Table (Sellers)
-1 CREATE TABLE sellers (
-2     seller_id INT PRIMARY KEY,
-3     seller_name VARCHAR(100)
-4 );
-5 INSERT INTO sellers VALUES (1, 'Don Delhi'), (2, 'Don Electronics'), (3, 'Knight Electronics');
+[[HL::# 1. Parent Table (Sellers)::HL]]
+[[HL::1 CREATE TABLE sellers (::HL]]
+[[HL::2     seller_id INT PRIMARY KEY,::HL]]
+[[HL::3     seller_name VARCHAR(100)::HL]]
+[[HL::4 );::HL]]
+[[HL::5 INSERT INTO sellers VALUES (1, 'Don Delhi'), (2, 'Don Electronics'), (3, 'Knight Electronics');::HL]]
 
-# 2. Child Table with Foreign Key
-6 CREATE TABLE orders (
-7     order_id INT PRIMARY KEY,
-8     product VARCHAR(100),
-9     seller_id INT,
-10    -- ADD CONSTRAINT to link this table to parent
-11    FOREIGN KEY (seller_id) REFERENCES sellers(seller_id) ON DELETE SET NULL
-12 );
-13 INSERT INTO orders VALUES (101, 'Laptop', 1);       # Success: Seller 1 exist karta hai
-14 -- INSERT INTO orders VALUES (102, 'Mobile', 255);  # Error: Seller 255 exist nahi karta!
+[[HL::# 2. Child Table with Foreign Key::HL]]
+[[HL::6 CREATE TABLE orders (::HL]]
+[[HL::7     order_id INT PRIMARY KEY,::HL]]
+[[HL::8     product VARCHAR(100),::HL]]
+[[HL::9     seller_id INT,::HL]]
+[[HL::10    -- ADD CONSTRAINT to link this table to parent::HL]]
+[[HL::11    FOREIGN KEY (seller_id) REFERENCES sellers(seller_id) ON DELETE SET NULL::HL]]
+[[HL::12 );::HL]]
+[[HL::13 INSERT INTO orders VALUES (101, 'Laptop', 1);       # Success: Seller 1 exist karta hai::HL]]
+[[HL::14 -- INSERT INTO orders VALUES (102, 'Mobile', 255);  # Error: Seller 255 exist nahi karta!::HL]]
 
-# 3. Altering Foreign Key Behavior (Testing Phase)
-15 ALTER TABLE orders DROP FOREIGN KEY orders_ibfk_1;  # DROP CONSTRAINT = purani chabi hatao
-16 ALTER TABLE orders ADD CONSTRAINT fk_seller         # Nayi chabi lagao
-17     FOREIGN KEY (seller_id) REFERENCES sellers(seller_id) 
-18     ON DELETE CASCADE ON UPDATE RESTRICT;           # ON UPDATE RESTRICT = id update mat hone do
+[[HL::# 3. Altering Foreign Key Behavior (Testing Phase)::HL]]
+[[HL::15 ALTER TABLE orders DROP FOREIGN KEY orders_ibfk_1;  # DROP CONSTRAINT = purani chabi hatao::HL]]
+[[HL::16 ALTER TABLE orders ADD CONSTRAINT fk_seller         # Nayi chabi lagao::HL]]
+[[HL::17     FOREIGN KEY (seller_id) REFERENCES sellers(seller_id) ::HL]]
+[[HL::18     ON DELETE CASCADE ON UPDATE RESTRICT;           # ON UPDATE RESTRICT = id update mat hone do::HL]]
 
 ```
 
@@ -7036,11 +7034,11 @@ Error 1452: Cannot add or update a child row: a foreign key constraint fails
 
 [[HL::#### 🔒 8. Security-First Check::HL]]
 
-Foreign keys actually a security feature from an integrity standpoint. However, `ON DELETE CASCADE` ek chupa hua khatra hai. Agar ek malicious internal user ya hacker ne `sellers` table empty kar di, toh database automatically aapki saari connected tables (products, orders, reviews) bhi udha dega. Hamesha critical data ke liye `SET NULL` ya `[[HL::RESTRICT` use karein.
+Foreign keys actually a security feature from an integrity standpoint. However, `ON DELETE CASCADE` ek chupa hua khatra hai. Agar ek malicious internal user ya hacker ne `sellers` table empty kar di, toh database automatically aapki saari connected tables (products, orders, reviews) bhi udha dega. Hamesha critical data ke liye `SET NULL` ya [[HL::`RESTRICT`::HL]] use karein.
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Industry (jaise Flipkart/Amazon with sellers from Bangalore, Mumbai, Kolkata) mein **data is oil**. Wo order history kabhi delete nahi karte chahe dukaan wala platform chhod de. Isliye production mein hamesha `ON::HL]] DELETE SET NULL` use hota hai (Tech World, Tech World 2 jaise stores ke liye). Scalability wise, har [[HL::`INSERT` pe FK constraint parent table verify karta hai, jisse writes slow (overhead) ho jate hain. High-scale environments mein FK checks DB layer se hata kar code layer (API level) pe shift kar diye jate hain::HL]].
+[[HL::Industry (jaise Flipkart/Amazon with sellers from Bangalore, Mumbai, Kolkata) mein **data is oil**. Wo order history kabhi delete nahi karte chahe dukaan wala platform chhod de. Isliye production mein hamesha `DELETE SET NULL` use hota hai (Tech World, Tech World 2 jaise stores ke liye). Scalability wise, har `INSERT` pe FK constraint parent table verify karta hai, jisse writes slow (overhead) ho jate hain. High-scale environments mein FK checks DB layer se hata kar code layer (API level) pe shift kar diye jate hain::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -7608,16 +7606,16 @@ Index checks root -> Zara > Rahul -> Goes Right -> Finds Block 2 -> Fetches data
 
 ```sql
 # MySQL 8.0+
-# 1. CREATE VIEW (Saved SQL Query banana)
-1 CREATE VIEW del_mum_clients AS                                    # CREATE VIEW = view ka naam rakho; AS = is query ke basis pe
-2 SELECT customer_id, name, city FROM customers                     # Sensitive column 'credit_card' hide kar diya
-3 WHERE city IN ('Delhi', 'Mumbai');                                # Sirf Delhi aur Mumbai ke clients filter kiye
+[[HL::# 1. CREATE VIEW (Saved SQL Query banana)::HL]]
+[[HL::1 CREATE VIEW del_mum_clients AS                                    # CREATE VIEW = view ka naam rakho; AS = is query ke basis pe::HL]]
+[[HL::2 SELECT customer_id, name, city FROM customers                     # Sensitive column 'credit_card' hide kar diya::HL]]
+[[HL::3 WHERE city IN ('Delhi', 'Mumbai');                                # Sirf Delhi aur Mumbai ke clients filter kiye::HL]]
 
-# 2. Querying the View (Aise use karo jaise real table ho)
-4 SELECT * FROM del_mum_clients;                                    # Convenience! Ab lambi query baar-baar type nahi karni
+[[HL::# 2. Querying the View (Aise use karo jaise real table ho)::HL]]
+[[HL::4 SELECT * FROM del_mum_clients;                                    # Convenience! Ab lambi query baar-baar type nahi karni::HL]]
 
-# 3. DROP VIEW (Delete karna)
-5 DROP VIEW del_mum_clients;                                        # DROP VIEW = virtual table hatao (asli data delete NAHI hoga)
+[[HL::# 3. DROP VIEW (Delete karna)::HL]]
+[[HL::5 DROP VIEW del_mum_clients;                                        # DROP VIEW = virtual table hatao (asli data delete NAHI hoga)::HL]]
 
 ```
 
@@ -8418,11 +8416,11 @@ CREATE TABLE ... FOREIGN KEY ...
 
 ```sql
 # MySQL 8.0+
-# 1. [[HL::CREATE PROCEDURE (Saving the logic)::HL]]
+[[HL::# 1. CREATE PROCEDURE (Saving the logic)::HL]]
 [[HL::1 DELIMITER //                                         # DELIMITER = ab se semicolon pe mat rukna, // pe rukna::HL]]
 [[HL::2 CREATE PROCEDURE Get_Delivered_Orders(               # CREATE PROCEDURE = naya procedure banao jiska naam 'Get_Delivered_Orders' hai::HL]]
 [[HL::3     IN city_name VARCHAR(50)                         # IN = yeh ek input parameter (argument) hai jo app pass karegi::HL]]
-4 )
+[[HL::4 )::HL]]
 [[HL::5 BEGIN                                                # BEGIN = procedure ki body shuru::HL]]
 [[HL::6     SELECT * FROM orders O::HL]]
 [[HL::7     INNER JOIN customers C ON O.customer_id = C.id::HL]]
@@ -8447,10 +8445,10 @@ CREATE TABLE ... FOREIGN KEY ...
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-* **Line 1:** `DELIMITER //` — Speaker ne zor diya: "From now on semicolon is not my delimiter... I temporarily changed my delimiter to double forward slash." Yeh zaroori hai taaki MySQL Line 9 wale semicolon pe aakar code ko adha na padhe.
-* **Line 3:** `IN city_name VARCHAR(50)` — Yeh input parameter hai (parameterized procedure). Iski madad se tum procedure ko dynamic banate ho (hardcode karne ki zaroorat nahi).
-* **Line 5 & 10:** `BEGIN` aur `END` is block ke start aur finish points hain.
-* **Line 12:** `CALL` — Yeh command stored procedure ko trigger karti hai (execute karti hai) us specific parameter ('Delhi') ke sath.
+* [[HL::**Line 1:**::HL]] `DELIMITER //` [[HL::— Speaker ne zor diya: "From now on semicolon is not my delimiter... I temporarily changed my delimiter to double forward slash." Yeh zaroori hai taaki MySQL Line 9 wale semicolon pe aakar code ko adha na padhe.::HL]]
+* [[HL::**Line 3:**::HL]] `IN city_name VARCHAR(50)` [[HL::— Yeh input parameter hai (parameterized procedure). Iski madad se tum procedure ko dynamic banate ho (hardcode karne ki zaroorat nahi).::HL]]
+* [[HL::**Line 5 & 10:**::HL]] `BEGIN` [[HL::aur::HL]] `END` [[HL::is block ke start aur finish points hain.::HL]]
+* [[HL::**Line 12:**::HL]] `CALL` [[HL::— Yeh command stored procedure ko trigger karti hai (execute karti hai) us specific parameter ('Delhi') ke sath.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -8473,7 +8471,7 @@ Stored procedures SQL Injection attacks ko naturally prevent karte hain. Kyunki 
 
 * [[HL::**Confusion 1 — "View aur Stored Procedure mein kya fark hai?"**::HL]]
 * [[HL::**Galat soch:** Dono lambi query ko save karte hain, dono same hain.::HL]]
-* **Actually:** View sirf ek `SELECT` query save karta hai (virtual table banata hai). Stored Procedure ke andar tum complex logic likh sakte ho — multiple `SELECT`, `INSERT`, `UPDATE`, [[HL::`IF/ELSE` conditions, loops, sab kuch ek sath!::HL]]
+* [[HL::**Actually:** View sirf ek `SELECT` query save karta hai (virtual table banata hai). Stored Procedure ke andar tum complex logic likh sakte ho — multiple `SELECT`, `INSERT`, `UPDATE`, `IF/ELSE` conditions, loops, sab kuch ek sath!::HL]]
 * [[HL::**Prove karo:** Ek view mein `UPDATE` aur `SELECT` ek sath likhne ki koshish karo, syntax error aayega. Procedure mein dono smoothly chalege.::HL]]
 
 
