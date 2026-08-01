@@ -27,13 +27,14 @@ This syntax is processed by a custom HTML renderer that converts it into `<mark 
 
 The user will provide highlight terms in ONE of these formats — accept all of them:
 
+- **From an `Annotations.md` file:** You MUST parse the annotations file **one by one as separated by space (blank lines)**. Each block separated by a space/newline is ONE complete annotation. You must NEVER extract single isolated words (like `[[HL::nahi::HL]]`) from a block. Process every single block sequentially so that nothing gets missed!
 - **Numbered list:** `1. reverse shell  2. -sV  3. privilege escalation`
 - **Bulleted list:** `- reverse shell  - -sV  - privilege escalation`
 - **Quoted comma-separated:** `"reverse shell", "-sV", "privilege escalation"`
 - **Plain lines:** one term per line
 - **Mixed:** any combination of the above
 
-**Parse each item as a separate, independent highlight request.** Commas inside quoted strings are part of the term, not separators.
+**Parse each item as a separate, independent highlight request.** Commas inside quoted strings are part of the term, not separators. If reading from `Annotations.md`, ensure the entire block is treated as one term.
 
 ---
 
