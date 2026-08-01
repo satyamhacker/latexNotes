@@ -369,6 +369,10 @@ A [[HL::reverse shell::HL]] gives the attacker remote access.
 - Version tag comment line left untouched (it's code content, not a protected zone — but `nmap` inside it would be highlighted if it appeared there)
 - `Nmap` in the header preserved original capitalization (user asked `nmap`, document had `Nmap`)
 
+### Rule 23 — DISJOINT SENTENCES CONCATENATED IN ANNOTATIONS
+Sometimes the user will provide a single requested term that consists of two completely disjoint sentences concatenated together with separators like `----` or `...` (e.g., `Sentence A ---- Sentence B`). In the actual document, these two sentences might be separated by large gaps of text, intervening bullet points, or paragraphs.
+When you see this, do NOT treat it as a single contiguous string. You must intelligently split the request, locate `Sentence A` and `Sentence B` independently, and highlight both of them exactly where they appear in the document.
+
 ---
 
 ## ❌ COMMON MISTAKES TO NEVER MAKE
