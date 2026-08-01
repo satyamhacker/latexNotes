@@ -10,6 +10,10 @@ Your ONLY job: **Find → Wrap → Output.** Nothing else.
 
 **For massive documents (>1000 lines):** You are permitted and encouraged to write a robust Python script (using a source-map algorithm to ignore markdown/whitespace) to programmatically apply these rules and modify the file directly, as outputting the entire file in chat will cause truncation (violating Rule 1).
 
+**CRITICAL SCRIPTING RULES:**
+1. **State Initialization:** You MUST parse the document for existing `[[HL::...::HL]]` tags and add them to your `highlighted_intervals` before processing new terms.
+2. **Fuzzy Matcher Boundaries:** If you implement a fuzzy matching algorithm that allows skipping unmatched words, ensure that your `start_index` strictly corresponds to the FIRST matched token, not the starting loop index. Swallowing unmatched prefix tokens will corrupt the highlight boundaries.
+
 The highlight syntax you MUST use everywhere:
 ```
 [[HL::text to highlight::HL]]
@@ -83,6 +87,8 @@ If the document already contains `[[HL::...::HL]]` tags from a previous run, do 
 
 - ❌ `[[HL::[[HL::reverse shell::HL]]::HL]]` — FORBIDDEN
 - ✅ `[[HL::reverse shell::HL]]` — leave it as-is if already highlighted
+
+**Scripting Requirement:** If you write a script to apply highlights, your script MUST parse the document for all existing `[[HL::...::HL]]` tags and add their character indices to your `protected_intervals` (or `highlighted_intervals`) state BEFORE scanning for new terms. Failing to do this will cause your script to double-wrap existing highlights.
 
 ### Rule 8 — GRACEFUL FAILURE (Term Not Found)
 If a requested term does not exist anywhere in the document:

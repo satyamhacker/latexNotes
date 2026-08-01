@@ -11,7 +11,7 @@
 
 ### 🏁 Section Overview: Section 1: Excel Interface & Basics
 
-Is section mein hum Excel ka foundational layout, user interface (UI) elements, aur initial display settings ko samjhenge. Yeh base banayega taaki aage ke advanced calculations aur data analytics smoothly ho sakein.
+Is section mein hum Excel ka foundational layout, user interface (UI) elements, [[HL::aur::HL]] initial display settings ko samjhenge. Yeh base banayega taaki aage ke advanced calculations [[HL::aur::HL]] data analytics smoothly ho sakein.
 
 ---
 
@@ -202,7 +202,7 @@ Socho tum ek car chala rahe ho. Car ka **Dashboard** (jahan AC, music, speedomet
 Top se shuru karein toh:
 
 1. Sabse upar left mein chhota sa **Quick Access Toolbar** (save, undo, redo ke icons).
-2. Uske neeche **Excel Ribbon** jismein tabs hain: `Home, Insert, Draw, Page Layout, Formulas, Data, Review, View, Automate, Help`.
+2. Uske neeche **Excel Ribbon** jismein tabs hain: `Home, [[HL::Insert::HL]], Draw, Page Layout, Formulas, Data, Review, [[HL::View::HL]], Automate, Help`.
 3. Ribbon ke theek neeche ek lamba safed box hai jise **Formula Bar** kehte hain (jahan active cell ka actual data ya formula dikhta hai).
 4. Bottom right corner mein **zoom in** (+) aur **zoom out** (-) ka slider hota hai.
 
@@ -307,7 +307,7 @@ Financial analysts jab kisi badi company (jaise HDFC Bank) ka P&L (Profit & Loss
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
 * **Testing/Offline Phase:** Naya user interface tools (Toolbar) aur Formula Bar ko freely explore karta hai. Draw tab ya Insert tab khol kar dekhta hai kya options hain.
-* **Fixing/Iteration Phase:** Typing ke dauran galat text likhne par (e.g. "sitting" instead of "sat") user turant **Undo** (`Ctrl + Z`) aur **Redo** (`Ctrl + Y`) buttons use karke corrections karta hai.
+* **Fixing/Iteration Phase:** Typing ke dauran galat text likhne par (e.g. "sitting" instead of "sat") user turant **Undo** (`Ctrl + [[HL::Z`) aur **Redo** (`Ctrl::HL]] + Y`) buttons use karke corrections karta hai.
 * **Live Production Phase:** Space constraint hone par (jab data bohot bada ho), user ⭐**Home tab** pe double-click karke ribbon hide karta hai. Aur precise viewing ke liye external mouse se **control mouse wheel** ghuma kar zoom in/out karta hai.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
@@ -1019,7 +1019,7 @@ Finance sector (Banks) mein **Accounting** format strict industry standard hai. 
 * **❌ Mistake:** Values ko multiply karke *100* likhna Percentage nikalne ke liye.
 * **🤦 Why:** Beginners math class wala tarika lagate hain.
 * [[HL::**✅ The 'Pro' Way:** Cell mein direct fraction value (e.g., `0.5`) likho aur uske upar **Percentage Format** apply karo. Woh khud `50%` dikhayega::HL]].
-* **⚡ Consequences:** Agar tumne manually `*100` karke 50 rakha aur fir percentage lagaya, toh wo `5000%` ban jayega!
+* **⚡ Consequences:** Agar tumne manually `*[[HL::100` karke 50 rakha aur fir percentage lagaya, toh wo `5000::HL]]%` ban jayega!
 * **❌ Mistake:** Decimal rounding ko actual data truncation samajh lena.
 * **✅ The 'Pro' Way:** Hamesha Formula Bar check karo actual underlying value dekhne ke liye.
 * **⚡ Consequences:** Tumne report mein 45001 dikhaya, par aage jab tum use 2 se multiply karoge toh answer 90001.12 aayega, aur tum confuse rahoge ki 1 kaha se extra aaya.
@@ -1058,11 +1058,11 @@ Finance sector (Banks) mein **Accounting** format strict industry standard hai. 
 | --- | --- | --- |
 | Ratio/Maths | **Fraction** | `1/4` |
 | Growth/Rate | **Percentage** | `25%` |
-| Standard decimal | **General / Number** | `0.25` |
+| Standard decimal | **General / Number** | `0.[[HL::25` |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Jab HR department international employees ko offer letters (salary break-up) issue karta hai, toh Excel ke backend par ek hi number hota hai. Ek Indian employee ke liye Custom format laga kar us value ko `₹ 12,00,000` (Indian comma system) aur US employee ke liye same value convert karke `$ 15,000` dikhaya jata hai, taaki localized professional lag sake.
+Jab HR department international employees ko offer letters (salary break-up) issue karta hai, toh Excel ke backend par ek hi number hota hai. Ek Indian employee ke liye Custom format laga kar us value ko `::HL]]₹ 12,00,[[HL::000` (Indian comma system) aur US employee ke liye same value convert karke `::HL]]$ 15,000` dikhaya jata hai, taaki localized professional lag sake.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -1515,12 +1515,12 @@ Retail billing systems (jaise supermarket point of sale backend) mein jab invoic
 ### 🎯 Topic: 2. Absolute vs Relative References
 
 (Relative References, Absolute References, Freezing Columns, Freezing Rows)
-**Overview:** Jab hum formula drag/copy karte hain toh Excel naturally cells ko shift karta hai. Is topic mein hum seekhenge ki us shift ko kab aur kaise rokein "Dollar" (`$`) sign (absolute logic) ka use karke. Yeh Excel data analytics ka sabse important fundamental hai.
+**Overview:** Jab hum formula drag/copy karte hain toh Excel naturally cells ko shift karta hai. Is topic mein hum seekhenge ki us shift ko kab aur kaise rokein "Dollar" (`$[[HL::`) sign (absolute logic) ka use karke. Yeh Excel data analytics ka sabse important fundamental hai.
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
 Speaker ne iska bohot epic analogy diya hai: **"Relatives do not have dollars, Absolute have dollars"**.
-Socho ek "garib rishtedar" (Relative Reference) hai jiske paas dollar nahi hain (`F2`). Jab tum isko drag karoge, toh ye apni jagah badalta rahega (G2, H2 ho jayega). Par jo "ameer insaan" (Absolute Reference) hai, uske aage aur peeche Dollar lage hote hain (`$F$2`). Ye itna strong hai ki isko pe kahan bhi khicho (drag karo), ye apni jagah se hilta (freeze) nahi hai. Hamesha same value ko target karega.
+Socho ek "garib rishtedar" (Relative Reference) hai jiske paas dollar nahi hain (`F2::HL]]`). Jab tum isko drag karoge, toh ye apni jagah badalta rahega (G2, H2 ho jayega). Par jo "ameer insaan" (Absolute Reference) hai, uske aage aur peeche Dollar lage hote hain (`$F$2`). Ye itna strong hai ki isko pe kahan bhi khicho (drag karo), ye apni jagah se hilta (freeze) nahi hai. Hamesha same value ko target karega.
 
 #### 📖 3. Technical Definition
 
@@ -1584,7 +1584,7 @@ Socho ek "garib rishtedar" (Relative Reference) hai jiske paas dollar nahi hain 
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Finance aur accounting ke complex models (jaise Loan Amortization tables) mein "Mixed Referencing" (`$F2` ya `F$2`) ka extensive use hota hai. Agar aapko ek aisa grid (multiplication table) banana hai jahan Rows aur Columns cross hoti hon, toh sirf Absolute (`$F$2`) se kaam nahi chalega. Seniors hamesha columns ko side lock (`$F2`) karte hain jab data vertical maintain karna ho aur rows ko top lock (`F$2`) karte hain jab horizontal fixed rakhna ho.
+Finance aur accounting ke complex models (jaise Loan Amortization tables) mein "Mixed Referencing" (`$F2` ya `F$[[HL::2`) ka extensive use hota hai. Agar aapko ek aisa grid (multiplication table) banana hai jahan Rows aur Columns cross hoti hon, toh sirf Absolute (`::HL]]$F$[[HL::2`) se kaam nahi chalega. Seniors hamesha columns ko side lock (`::HL]]$[[HL::F2`) karte hain jab data vertical maintain karna ho aur rows ko top lock (`F::HL]]$2`) karte hain jab horizontal fixed rakhna ho.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -1607,7 +1607,7 @@ Finance aur accounting ke complex models (jaise Loan Amortization tables) mein "
 * **Confusion 2 — "Drag to the right karne par column $ akele kyu chalta hai?"**
 * **Galat soch:** Horizontal khichne par row bhi change hogi.
 * **Actually:** Jab tum horizontal (**drag to the right**) jate ho, tumhare rows (1, 2, 3) wahi rehti hain, sirf columns (A, B, C) shift hote hain. Isliye mixed mode mein `$F2` use hota hai taaki woh column fixed rahe.
-* **Prove karo:** `=B2` likho aur usko bagal wale cell (right side) me drag karo. Dekho wo `=C2` ban jayega (letter change hua, number nahi).
+* **Prove karo:** `=[[HL::B2` likho aur usko bagal wale cell (right side) me drag karo. Dekho wo `::HL]]=C2` ban jayega (letter change hua, number nahi).
 
 
 * **Confusion 3 — "Ameer aur Garib reference ka logic samajh nahi aaya."**
@@ -1636,11 +1636,11 @@ Finance aur accounting ke complex models (jaise Loan Amortization tables) mein "
 | **Relative Reference** | `F2` | Khul ke shift hota hai (Niche F3, Right G2). ("Garib") |
 | **Absolute Reference** | `$F$2` | Bilkul fixed rehta hai. Kahin bhi drag karo, $F$2 hi rahega. ("Ameer") |
 | **Mixed (Freeze Column)** | `$F2` | Column F fixed rahega, lekin niche jane pe row change hogi (2 -> 3). |
-| **Mixed (Freeze Row)** | `F$2` | Row 2 fixed rahegi, lekin right jane pe column change hoga (F -> G). |
+| **Mixed (Freeze Row)** | `F$[[HL::2` | Row 2 fixed rahegi, lekin right jane pe column change hoga (F -> G). |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Jab e-commerce platform pe currency convertor model banaya jata hai, toh Cell J1 mein 1 USD = 83 INR (Fixed rate) rakha jata hai. Database ki hajaro product sales in Dollars aati hain. Jab unhe INR mein convert karte hain toh `=Sale_$ * $J$1` use hota hai. Agar Relative referencing chord diya toh hajaro line ki report ruin ho jayegi kyunki J1 automatically shift ho ke J2, J3 point karne lagega.
+Jab e-commerce platform pe currency convertor model banaya jata hai, toh Cell J1 mein 1 USD = 83 INR (Fixed rate) rakha jata hai. Database ki hajaro product sales in Dollars aati hain. Jab unhe INR mein convert karte hain toh `::HL]]=Sale_$ * $J$1` use hota hai. Agar Relative referencing chord diya toh hajaro line ki report ruin ho jayegi kyunki J1 automatically shift ho ke J2, J3 point karne lagega.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -1669,7 +1669,7 @@ Row 4 |   100   |    =B4*F4 (Blank cell, Output 0)|    =B4*$F$2 (Uses F2 securel
 * [[HL::**Q:** F4 dabane pe dollar sign cycle kaise rotate karta hai? (Toggle order kya hai?)::HL]]
 * [[HL::**A:** First press: Absolute (`$F$2`). Second press: Row lock mixed (`F$2`). Third press: Column lock mixed (`$F2`). Fourth press: Back to relative normal (`F2`::HL]]).
 * **Q:** Agar mujhe 1 se 10 tak ke numbers se ek 10x10 multiplication table banana hai (rows and columns crossing), toh best formula format kya hoga cell B2 mein?
-* **A:** Us condition mein pure absolute reference (jaise `$F$2`) ya pure relative kaam nahi aayega. Humhe Mixed format use karni padegi: `=$A2 * B$1`. (Freeze column A for vertical drag, Freeze Row 1 for horizontal right drag).
+* **A:** Us condition mein pure absolute reference (jaise `$F$[[HL::2`) ya pure relative kaam nahi aayega. Humhe Mixed format use karni padegi: `::HL]]=$A2 * B$1`. (Freeze column A for vertical drag, Freeze Row 1 for horizontal right drag).
 
 #### 📝 18. One-Line Memory Hook
 
@@ -1717,7 +1717,7 @@ Jab hum lambe math expressions type karte hain, Excel rules ke hisaab se unhe pr
 #### 🐣 2. Simple Analogy (Hinglish)
 
 Traffic lights kaise kaam karti hain? Red hai toh rukna padega, green hai toh hi jaana hai — ek specific sequence follow karna mandatory hai. Math operations ke bhi "Traffic Rules" hote hain, jise hum school mein **board mass** (BODMAS) kehte the. Excel exact isi mathematical traffic rule ko manta hai.
-Speaker ne ek simple example diya: `1 + 4 * C2`. Normal dimag sochega 1+4 = 5 karo aur usko multiply kar do. Lekin Excel ka rule kehta hai, multiplication VIP (bada afsar) hai addition se. Toh wo pehle 4 ko C2 se multiply karega, aur end mein aakar 1 plus karega. Agar tum chahte ho tumhara basic rule chale toh **brackets** `()` ka seatbelt lagana mandatory hai.
+Speaker ne ek simple example diya: `1 + 4 * [[HL::C2`. Normal dimag sochega 1+4 = 5 karo aur usko multiply kar do. Lekin Excel ka rule kehta hai, multiplication VIP (bada afsar) hai addition se. Toh wo pehle 4 ko C2 se multiply karega, aur end mein aakar 1 plus karega. Agar tum chahte ho tumhara basic rule chale toh **brackets** `::HL]]()` ka seatbelt lagana mandatory hai.
 
 #### 📖 3. Technical Definition
 
@@ -1764,8 +1764,8 @@ Speaker ne ek simple example diya: `1 + 4 * C2`. Normal dimag sochega 1+4 = 5 ka
 
 ```text
 # 📤 Expected Output:
-Cell D2 evaluate window mein steps dikhayega: Underline `C2` pe hoga -> Evaluate click karne par `2` banega. 
-Fir underline `4*2` pe hoga -> Evaluate click karne par `8` banega.
+Cell D2 evaluate window mein steps dikhayega: Underline `[[HL::C2` pe hoga -> Evaluate click karne par `2::HL]]` banega. 
+Fir underline `4*[[HL::2` pe hoga -> Evaluate click karne par `8::HL]]` banega.
 Fir underline `1+8` pe hoga -> Last click result `9` dega.
 
 ```
@@ -1817,7 +1817,7 @@ Jab senior Quants (Quantitative analysts) banking calculations jaise Compound In
 
 
 * **`Equation me missing parentheses/Brackets mismatch error message`**
-* **Root Cause:** Tumne open bracket `(` lagaya par close `)` karna bhool gaye.
+* **Root Cause:** Tumne open bracket `([[HL::` lagaya par close `::HL]])` karna bhool gaye.
 * **Fix:** Formula bar me dhyaan se dekho, Excel brackets ki color matching (red, green, black pairs) automatically highlight karta hai. Jo color akela chhot gaya hai waha completion mark lagao.
 
 
@@ -1828,11 +1828,11 @@ Jab senior Quants (Quantitative analysts) banking calculations jaise Compound In
 | --- | --- | --- |
 | Equation | `=10+20*2` | `=10+20*2` |
 | How we read | (10+20) = 30. Then 30*2 = 60. | VIP Mult: 20*2 = 40. Then 10+40 = 50. |
-| Solution Output | 60 (Agar proper parenthesis ho `(10+20)*2`) | 50 (By Default Without parentheses) |
+| Solution Output | 60 (Agar proper parenthesis ho `(10+20)*[[HL::2`) | 50 (By Default Without parentheses) |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Data Science roles me jab analysts algorithms (like normalisation equation `(x - min) / (max - min)`) ko Excel par verify karte hain toh exact precedence rules bohot sensitive hote hain. Agar bracket omission hua, to value galat normalize hoke model pipeline train crash karwayegi. Evaluate formula debug is scenario me unka best validation test tool hota hai.
+Data Science roles me jab analysts algorithms (like normalisation equation `::HL]](x - min) / (max - min)`) ko Excel par verify karte hain toh exact precedence rules bohot sensitive hote hain. Agar bracket omission hua, to value galat normalize hoke model pipeline train crash karwayegi. Evaluate formula debug is scenario me unka best validation test tool hota hai.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -2327,7 +2327,7 @@ Cell I2 (Total %) me output aayega `83%` (1500 food total / 1800 overall total).
 
 * **Line 2:** **Thick outside borders** report ko read karne mein instantly easy (professional) banata hai. Ye ek chhota visual upgrade hai par data presentation me huge difference dalta hai.
 * [[HL::**Line 6:** ⭐**COUNTIF** do input mangta hai. Pehla input `C:C` (kahan dhundhna hai — "type" wale column mein). Dusra input `G2` (kya dhundhna hai — "food" text). Result 2 aaya kyu ki word match 2 bar hua::HL]].
-* **Line 7:** Dhyan do, percentage ka formula humne `(Total of Food / Grand Total)` banaya hai. Agar kal `Movie (fun)` expense ko badha kar 10,000 kar diya gaya, toh I2 cell ka **percentage calculation** **dynamic calculation** hone ki wajah se apne aap gir jayega (kyuki overall pie-chart me pizza chhota hissa ban jayega). Iske sath, in cells par average transaction value bhi calculate ki jati hai `=AVERAGEIF(...)`.
+* **Line 7:** Dhyan do, percentage ka formula humne `(Total of Food / Grand Total)` banaya hai. Agar kal `Movie (fun)[[HL::` expense ko badha kar 10,000 kar diya gaya, toh I2 cell ka **percentage calculation** **dynamic calculation** hone ki wajah se apne aap gir jayega (kyuki overall pie-chart me pizza chhota hissa ban jayega). Iske sath, in cells par average transaction value bhi calculate ki jati hai `::HL]]=AVERAGEIF(...)[[HL::`.
 
 #### 🔒 8. Security-First Check
 
@@ -2335,7 +2335,7 @@ Expense trackers personal finance hold karte hain (salary, bills, bank account d
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Startups aur small business pehle 6 mahine apni accounting (book-keeping) aisi hi ek single worksheet tracker me karte hain. Yahan humne manually categories type ki (`food`, `fun`, `office`, `investment`). Enterprise level me aate hi manually type nahi hota, ek "Data Validation Dropdown list" banai jati hai, taaki data entry wala 'fod' na type kar de galti se, warna `COUNTIF` case-sensitive us kharche ko ginna bhul jayega!
+Startups aur small business pehle 6 mahine apni accounting (book-keeping) aisi hi ek single worksheet tracker me karte hain. Yahan humne manually categories type ki (`food::HL]]`, `fun`, `office`, `[[HL::investment`). Enterprise level me aate hi manually type nahi hota, ek "Data Validation Dropdown list" banai jati hai, taaki data entry wala 'fod' na type kar de galti se, warna `COUNTIF::HL]]` case-sensitive us kharche ko ginna bhul jayega!
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -3350,11 +3350,11 @@ S.No | Source   | Amt      S.No | Source   | Amt
 * [[HL::**Q:** Agar filter lagane ke baad copy-paste karein, toh kya hidden rows bhi copy ho jayengi?::HL]]
 * [[HL::**A:** Default behavior mein Excel generally sirf visible cells copy karta hai agar simple filter laga hai. Lekin kai baar complex sheets mein hidden rows bhi copy ho jati hain. Safe practice yeh hai ki data select karke `Alt + ;` (Select Visible Cells Only shortcut) dabayein, uske baad copy (`Ctrl C`) karein, taaki strictly sirf wahi copy ho jo screen par dikh raha hai::HL]].
 * **Q:** Speaker ne `Alt D F F` pe kyun emphasis diya?
-* **A:** Yeh Excel ka ek legacy shortcut keys sequence hai (from Excel 2003 era). Ribbon mein Data tab par ja kar Filter button dhoondhna time consuming hai. `Alt D F F` sequential shortcut hai jo left hand se rapidly press kiya ja sakta hai filter ko toggle on aur toggle off karne ke liye, jo daily speed ko dramatically boost karta hai.
+* **A:** Yeh Excel ka ek legacy shortcut keys sequence hai (from Excel 2003 era). Ribbon mein Data tab par ja kar Filter button dhoondhna time consuming hai. `Alt D F [[HL::F` sequential shortcut hai jo left hand se rapidly press kiya ja sakta hai filter ko toggle on aur toggle off karne ke liye, jo daily speed ko dramatically boost karta hai.
 
 #### 📝 18. One-Line Memory Hook
 
-"Filter data delete nahi karta, bas temporarily parda (curtain) gira deta hai. Wapas lane ke liye `Alt D F F` dabao!"
+"Filter data delete nahi karta, bas temporarily parda (curtain) gira deta hai. Wapas lane ke liye `Alt::HL]] D F F` dabao!"
 
 #### 🔑 19. Keywords Coverage Verification
 
@@ -3693,7 +3693,7 @@ Cells ko ek notebook ka page (ruled lines) maano jisme tum text likhte ho. Ab ag
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Speaker ne stock market ka dummy dashboard dikhaya: **Nifty top losers** (jaise **HUL** at `-1.45%`) aur **Nifty top gainers** (jaise **Reliance** at `3.22%` ya `5.22%`). Inke aage manually shape draw kiye: **Down arrow** red color mein aur Up arrow green color mein. Phir context add karne ke liye online **stock images** insert ki — ek **confused** aadmi aur ek **Aunty** (jise joke mein 'stock market guru' ya 'sister' bulaya) taaki report visually interesting lage.
+Speaker ne stock market ka dummy dashboard dikhaya: **Nifty top losers** (jaise **HUL** at `-1.45%[[HL::`) aur **Nifty top gainers** (jaise **Reliance** at `3::HL]].22%` ya `5.22%`). Inke aage manually shape draw kiye: **Down arrow** red color mein aur Up arrow green color mein. Phir context add karne ke liye online **stock images** insert ki — ek **confused** aadmi aur ek **Aunty** (jise joke mein 'stock market guru' ya 'sister' bulaya) taaki report visually interesting lage.
 Doosra use-case tha ML Engineer ka workflow samjhana: Insert -> ⭐**SmartArt** -> **Cycle** -> jahan text boxes mein "Data Collection", "Model Selection", "Model Inference", aur "Feedback" daal kar **change colors** kiya (auto-formatted pipeline).
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
@@ -4175,7 +4175,7 @@ Templates ek "Cookie Cutter" (biscuit ka sancha) ki tarah hote hain. Ek baar san
 1. Normal file `.xlsx` (Excel Spreadsheet) extension rakhti hai.
 2. Template file ⭐`.xltx` (Excel Template) extension rakhti hai.
 3. Jab tum `.xlsx` double-click karte ho, toh wahi file read/write mode mein khulti hai.
-4. Par jab tum `.xltx` double-click karte ho, toh Excel memory mein ek fresh blank instance banata hai (jaise "Book1") aur template ka design uspe stamp kar deta hai. Original `.xltx` untouched rehti hai.
+4. Par jab tum `.[[HL::xltx` double-click karte ho, toh Excel memory mein ek fresh blank instance banata hai (jaise "Book1") aur template ka design uspe stamp kar deta hai. Original `::HL]].xltx` untouched rehti hai.
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -4237,21 +4237,21 @@ Template save karte waqt uske andar koi actual confidential data (jaise personal
 
 * **`Templates save karne ke baad 'Personal' tab mein nahi dikh raha`**
 * **Root Cause:** Save karte waqt tumne default "Custom Office Templates" folder path manually change kar diya tha (jaise Desktop pe save kar diya).
-* **Fix:** File ko Desktop se utha kar `Documents\Custom Office Templates` folder mein paste karo. Ya Save As dobara karo aur path change mat hone do.
+* **Fix:** File ko Desktop se utha kar `Documents\Custom Office [[HL::Templates` folder mein paste karo. Ya Save As dobara karo aur path change mat hone do.
 
 
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| Feature | `.xlsx` (Normal File) | ⭐`.xltx` (Template File) |
+| Feature | `::HL]].xlsx` (Normal File) | ⭐`.xltx` (Template File) |
 | --- | --- | --- |
 | Core Nature | Working document jisme data feed hota hai | Sancha (Master blueprint) |
-| Double-Click behavior | Wahi file open hoti hai edit ke liye | Nayi fresh `.xlsx` create ho jati hai memory mein |
+| Double-Click behavior | Wahi file open hoti hai edit ke liye | Nayi fresh `.[[HL::xlsx` create ho jati hai memory mein |
 | Risk | Purana data overwrite hone ka risk high | Safe. Original blank rehti hai |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Speaker ek Daily Planner ka example deta hai (from 8 AM to 5 PM layout). Ek week jahan unhone apni lifestyle set ki thi: **Eat** aur **Work** blocks banaye (Example of starting date: **Week 1 January 27**). Iske alawa finance plan setup kiya, jisme **Tripesh 1 rupee** ka hypothetical mazedar reference diya (jahan har ek cheez meticulously note hoti hai). Baar baar yeh layout na banana pade isliye unhone ise **Harry'sWeeklyTemplate** (ya **MyWeeklyTemplate**) ke naam se `.xltx` mein **Save As** kiya, jise agle week **More Templates -> Personal templates** se one-click mein load kiya ja sakta hai.
+Speaker ek Daily Planner ka example deta hai (from 8 AM to 5 PM layout). Ek week jahan unhone apni lifestyle set ki thi: **Eat** aur **Work** blocks banaye (Example of starting date: **Week 1 January 27**). Iske alawa finance plan setup kiya, jisme **Tripesh 1 rupee** ka hypothetical mazedar reference diya (jahan har ek cheez meticulously note hoti hai). Baar baar yeh layout na banana pade isliye unhone ise **Harry'sWeeklyTemplate** (ya **MyWeeklyTemplate**) ke naam se `::HL]].xltx` mein **Save As** kiya, jise agle week **More Templates -> Personal templates** se one-click mein load kiya ja sakta hai.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -5065,11 +5065,11 @@ Payment gateways (jaise Razorpay/Stripe) mein jab API request jati hai, toh woh 
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-VS Code ke side panel (Explorer) mein automatically ek nayi file (e.g., `data.txt`) pop up ho jayegi jab tum `w` ya `a` mode run karoge.
+VS Code ke side panel (Explorer) mein automatically ek nayi file (e.g., `data.[[HL::txt`) pop up ho jayegi jab tum `w::HL]]` ya `[[HL::a` mode run karoge.
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-Jab hum `open()` call karte hain, toh OS (Operating System) hard disk par rakhi file ka ek connection (File Descriptor) banakar uski stream RAM mein laata hai. Agar file band `close()` na ki jaye, toh memory leak hota hai aur doosre programs us file ko use nahi kar paate. `with` statement (jo underlying "Context Manager" use karta hai) is connection ko strictly manage karta hai.
+Jab hum `open::HL]]()[[HL::` call karte hain, toh OS (Operating System) hard disk par rakhi file ka ek connection (File Descriptor) banakar uski stream RAM mein laata hai. Agar file band `close::HL]]()[[HL::` na ki jaye, toh memory leak hota hai aur doosre programs us file ko use nahi kar paate. `with::HL]]` statement (jo underlying "Context Manager" use karta hai) is connection ko strictly manage karta hai.
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -5109,11 +5109,11 @@ List format: ['Hello! Yeh pehli line hai.', '\nYeh dusri line append hui.']
 
 * **Line 2:** `open("my_note.txt", "w")` — `w` mode file ko zero size par truncate (khali) kar deta hai start mein. Agar file already hai toh purana text gaya!
 * **Line 7:** `with open("...") as file:` — Yeh ek **keyword** combo hai. Yeh internally code ko ek invisible `try-finally` block mein daal deta hai, taaki agar `write` karte time error aaye, tab bhi file successfully `close()` ho jaye.
-* **Line 8:** `\n` — Isko **escape sequence** (backslash n) kehte hain. File mein text ke end mein automatically enter press nahi hota. Agar `\n` nahi lagaya toh saara text ek hi lambi line mein chipta chala jayega.
+* **Line 8:** `\[[HL::n` — Isko **escape sequence** (backslash n) kehte hain. File mein text ke end mein automatically enter press nahi hota. Agar `::HL]]\[[HL::n` nahi lagaya toh saara text ek hi lambi line mein chipta chala jayega.
 
 #### 🔒 8. Security-First Check
 
-File handling mein sabse bada risk **Path Traversal Attack** hota hai. Agar user ka input file name ban raha hai, toh woh `../../etc/passwords` input dekar sensitive server files read/write kar sakta hai. Hamesha user input ko strict sanitize (clean) karo aur unhe restricted folder ke bahar access mat do.
+File handling mein sabse bada risk **Path Traversal Attack** hota hai. Agar user ka input file name ban raha hai, toh woh `::HL]]../../etc/passwords` input dekar sensitive server files read/write kar sakta hai. Hamesha user input ko strict sanitize (clean) karo aur unhe restricted folder ke bahar access mat do.
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -5130,12 +5130,12 @@ File handling mein sabse bada risk **Path Traversal Attack** hota hai. Agar user
 
 * **Confusion 1 — "w aur a mode mein galti se galat file name daal diya toh kya error aayegi?"**
 * **Galat soch:** Program `FileNotFoundError` dega.
-* **Actually:** Nahi! `w` aur `a` mode mein agar us naam ki file nahi milti, toh Python khud ek nayi khali file bana deta hai. Lekin agar `r` (read mode) mein file nahi mili, toh pakka error aayegi aur app crash hoga.
+* **Actually:** Nahi! `w` aur `[[HL::a` mode mein agar us naam ki file nahi milti, toh Python khud ek nayi khali file bana deta hai. Lekin agar `r::HL]]` (read mode) mein file nahi mili, toh pakka error aayegi aur app crash hoga.
 
 
 * **Confusion 2 — "read() aur readlines() mein kya chunu?"**
 * **Galat soch:** Dono same chiz return karte hain.
-* **Actually:** Data type ka difference hai. `read()` pura paragraph ek single lamba text (String) return karta hai. `readlines()` file ki har line ko todkar ek Python List (Array) return karta hai. Agar line number 3 delete karni ho, toh list (`readlines`) use karna aasaan hai.
+* **Actually:** Data type ka difference hai. `read()[[HL::` pura paragraph ek single lamba text (String) return karta hai. `readlines::HL]]()[[HL::` file ki har line ko todkar ek Python List (Array) return karta hai. Agar line number 3 delete karni ho, toh list (`readlines::HL]]`) use karna aasaan hai.
 
 
 
@@ -5168,7 +5168,7 @@ Web servers (jaise Nginx ya Apache) par har bar jab koi user website visit karta
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
 * **Testing/Offline Phase:** Programmer ko ek chota text save karna tha, usne file ko `w` mode mein open kiya jo har bar run karne pe file ka purana data mita raha tha.
-* **Fixing/Iteration Phase:** Purana data preserve karne ke liye usne `a` mode (append) use kiya aur naye data ke end mein `\n` (new line) escape sequence add kiya taaki format kharab na ho.
+* **Fixing/Iteration Phase:** Purana data preserve karne ke liye usne `[[HL::a` mode (append) use kiya aur naye data ke end mein `::HL]]\n` (new line) escape sequence add kiya taaki format kharab na ho.
 * **Live Production Phase:** Manual `file.close()` mein bug hone ke chances the, isliye production code mein refactor karke pure block ko `with open(...) as file:` mein wrap kar diya, jisse context manager ne memory safe kardi.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
@@ -5195,11 +5195,11 @@ Web servers (jaise Nginx ya Apache) par har bar jab koi user website visit karta
 * [[HL::**Q:** Write mode (`w`) aur Append mode (`a`) mein sabse bada difference kya hai?::HL]]
 * [[HL::**A:** Jab hum `w` mode se existing file open karte hain, toh file ka pointer 0th position par set ho jata hai aur file size 0 bytes ho jata hai (purana data destroyed). Append `a` mode mein pointer file ke ekdum end mein hota hai, jisse existing data safe rehta hai aur naya data EOF (End of File) ke aage write hota hai::HL]].
 * **Q:** Agar memory (RAM) ka size chota ho (e.g. 1GB) aur file ka size bada ho (10GB), toh file ko safely kaise read karenge?
-* **A:** Hamein `file.read()` ya `file.readlines()` use nahi karna chahiye kyunki woh pura data ek baar mein RAM mein load karenge aur system crash (MemoryError) ho jayega. Humme File Object ke upar ek `for` loop (e.g., `for line in file:`) lagana chahiye jisse RAM mein ek baar mein sirf ek hi line load aur process hogi.
+* **A:** Hamein `file.read()` ya `file.readlines()[[HL::` use nahi karna chahiye kyunki woh pura data ek baar mein RAM mein load karenge aur system crash (MemoryError) ho jayega. Humme File Object ke upar ek `for::HL]]` loop (e.g., `for [[HL::line::HL]] in file:[[HL::`) lagana chahiye jisse RAM mein ek baar mein sirf ek hi line load aur process hogi.
 
 #### 📝 18. One-Line Memory Hook
 
-"w (write) = wipe, a (append) = add, r (read) = read, aur `with` matlab jaadu se auto-band."
+"w (write) = wipe, a (append) = add, r (read) = read, aur `with::HL]]` matlab jaadu se auto-band."
 
 #### 🔑 19. Keywords Coverage Verification
 
@@ -5239,7 +5239,7 @@ Web servers (jaise Nginx ya Apache) par har bar jab koi user website visit karta
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-Socho `random` module ek dice (ludo ka pasa) hai — jab bhi roll karoge naya number aayega. Aur `zip` function bilkul tumhari jacket ki zip jaisa hai — jo left side (list A) ke teeth aur right side (list B) ke teeth ko 1-to-1 ek sath jodta hai (jaise "zip a car or a cat" analogy jo speaker ne di thi, 1 item yahan se, 1 item wahan se). Agar ek side choti hui, toh zip wahi atak jayegi (shortest list tak chalegi).
+Socho `[[HL::random` module ek dice (ludo ka pasa) hai — jab bhi roll karoge naya number aayega. Aur `zip::HL]]` function bilkul tumhari jacket ki zip jaisa hai — jo left side (list A) ke teeth aur right side (list B) ke teeth ko 1-to-1 ek sath jodta hai (jaise "zip a car or a cat" analogy jo speaker ne di thi, 1 item yahan se, 1 item wahan se). Agar ek side choti hui, toh zip wahi atak jayegi (shortest list tak chalegi).
 
 #### 📖 3. Technical Definition
 
@@ -5249,7 +5249,7 @@ Socho `random` module ek dice (ludo ka pasa) hai — jab bhi roll karoge naya nu
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * **Problem:** Bina conditional flow aur random generation ke, code predictable aur boring ho jayega (jaise ek aisi game jisme computer hamesha ek hi chaal chalta ho).
-* **Solution:** `if-elif-else` code ko dimag deta hai, aur `random` unpredictability laata hai.
+* **Solution:** `if-elif-[[HL::else` code ko dimag deta hai, aur `random::HL]]` unpredictability laata hai.
 * **What breaks if we don't use it?** Typing test mein kitna time laga yeh measure karna impossible hoga bina `time.time()` ke, kyunki stopwatch manually code se link nahi ki ja sakti.
 * **✅ Kab use karo:** Jab bhi decision making karni ho, probability base events (games, lotteries) banane hon, ya performance (execution time) measure karna ho.
 * **❌ Kab mat karo / Alternative:** **Cybersecurity passwords ya tokens** generate karne ke liye `random` module kabhi use mat karo. Yeh pseudo-random hai (predict ho sakta hai). Aisi situations ke liye `secrets` module prefer karo.
@@ -5325,34 +5325,34 @@ Accuracy: 1/2 words correct
 
 * **Line 6:** `random.choice(choices)` — Yeh string/list me se ek value uthata hai. Agar yahan number chahiye hota, toh `random.randint(1, 10)` use karte jo 1 aur 10 ke beech integer deta (both included).
 * **Line 24:** `time.sleep(1.5)` — Program execution ko freeze kar deta hai OS level par. Hardware process wait karta hai.
-* **Line 30:** `original.split()` — By default yeh har **white space** (spaces, tabs, newlines) par string ko kategi aur list banayegi. Words Count nikalne ka sabse fast tarika yahi hai.
+* **Line 30:** `original.split()[[HL::` — By default yeh har **white space** (spaces, tabs, newlines) par string ko kategi aur list banayegi. Words Count nikalne ka sabse fast tarika yahi hai.
 
 #### 🔒 8. Security-First Check
 
-Agar koi game/lottery ka code `random` module se bana hai aur server par run kar raha hai, toh hacker seed seed (initialization pattern) guess karke next random number predict kar sakta hai. Sensitive/Gambling apps mein hamesha `os.urandom` ya `secrets.choice()` use karo jo OS ka entropy (hardware noise) use karta hai.
+Agar koi game/lottery ka code `random::HL]]` module se bana hai aur server par run kar raha hai, toh hacker seed seed (initialization pattern) guess karke next random number predict kar sakta hai. Sensitive/Gambling apps mein hamesha `os.urandom` ya `secrets.choice()[[HL::` use karo jo OS ka entropy (hardware noise) use karta hai.
 
 #### 🏗️ 9. Scalability & Industry Context
 
-`split()` function puri string ki ek array copy banata hai RAM mein. Agar hum 10 GB ki file ko read karke ek sath `.split()` karenge, toh RAM Out of Memory (OOM) ho jayegi. `words per minute` (WPM) calculation mein hum loop aur generators ka use karte hain taaki memory bachi rahe.
+`split::HL]]()` function puri string ki ek array copy banata hai RAM mein. Agar hum 10 GB ki file ko read karke ek sath `.split()` karenge, toh RAM Out of Memory (OOM) ho jayegi. `words per minute` (WPM) calculation mein hum loop aur generators ka use karte hain taaki memory bachi rahe.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
 * **❌ Mistake:** Har condition ko `if` ... `if` ... `if` se check karna.
 * **🤦 Why:** Beginners ko lagta hai flow same rahega.
 * **✅ The 'Pro' Way:** `if-elif-else` ladder use karo.
-* **⚡ Consequences:** Agar saare `if` hain, toh match milne ke baad bhi Python saari baaki conditions bewajah check karega, jisse CPU cycles waste hongi aur unexpected double-execution bugs aayenge. `elif` (else if) true milte hi poora block exit kar deta hai.
+* **⚡ Consequences:** Agar saare `[[HL::if` hain, toh match milne ke baad bhi Python saari baaki conditions bewajah check karega, jisse CPU cycles waste hongi aur unexpected double-execution bugs aayenge. `elif::HL]]` (else if) true milte hi poora block exit kar deta hai.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
 * **Confusion 1 — "random.randint(1, 10) mein 10 aayega ya nahi?"**
 * **Galat soch:** Programming mein generally last number exclude hota hai (jaise loop range mein).
 * **Actually:** `randint` exception hai! Isme 1 aur 10 **dono included** hote hain. Dono bounds count hote hain.
-* **Prove karo:** Terminal mein `import random` likho aur `random.randint(1, 1)` run karo. Agar exclude hota toh error aati, par yeh hamesha `1` dega.
+* **Prove karo:** Terminal mein `import [[HL::random` likho aur `random::HL]].randint(1, 1)[[HL::` run karo. Agar exclude hota toh error aati, par yeh hamesha `1::HL]]` dega.
 
 
 * **Confusion 2 — "String immutable hai toh user_input = user_input.lower() kaise chal gaya?"**
 * **Galat soch:** Immutable matlab variable badal nahi sakte.
-* **Actually:** Immutable matlab purana data nahi badal sakta. `user_input.lower()` purane text ko modifie nahi karta, balki ek naya lowercase text banata hai, aur = sign us naye text ko `user_input` naam ki chit (label) de deta hai. Purana capital wala text garbage collector (memory cleaner) delete kar deta hai.
+* **Actually:** Immutable matlab purana data nahi badal sakta. `[[HL::user_input.lower()` purane text ko modifie nahi karta, balki ek naya lowercase text banata hai, aur = sign us naye text ko `user_input::HL]]` naam ki chit (label) de deta hai. Purana capital wala text garbage collector (memory cleaner) delete kar deta hai.
 
 
 * **Confusion 3 — "zip(a, b) mein agar ek list badi hui toh kya hoga?"**
@@ -5370,7 +5370,7 @@ Agar koi game/lottery ka code `random` module se bana hai aur server par run kar
 
 * **`NameError: name 'random' is not defined`**
 * **Root Cause:** Tumne file ke upar module ko import nahi kiya.
-* **Fix:** File ki sabse pehli line mein `import random` likho. Built-in modules bina import ke kaam nahi karte.
+* **Fix:** File ki sabse pehli line mein `import [[HL::random` likho. Built-in modules bina import ke kaam nahi karte.
 
 
 
@@ -5378,19 +5378,19 @@ Agar koi game/lottery ka code `random` module se bana hai aur server par run kar
 
 | Function | Kis kaam aata hai? | Example |
 | --- | --- | --- |
-| **random.randint(a, b)** | Range ke beech integer laane ke liye. | `randint(1, 10)` -> 7 |
+| **random.randint(a, b)** | Range ke beech integer laane ke liye. | `randint::HL]](1, 10)` -> 7 |
 | **random.choice(seq)** | List/String me se koi ek uthane ke liye. | `choice(['a', 'b'])` -> 'a' |
-| **string.split()** | Text ko list of words mein todne ke liye. | `"hi bro".split()` -> `['hi', 'bro']` |
+| **string.split()** | Text ko list of words mein todne ke liye. | `"hi bro".split()` -> `['hi', 'bro'][[HL::` |
 
 #### 🌍 14. Real-World Use Case
 
-API servers par **Rate Limiting** (taaki koi hacker lagatar request bhej kar server down na karde) mein `time.time()` use hota hai. Server user ka last request time save karta hai. Agar `current_time - last_time < 1 second` hota hai, toh server request block kar deta hai (DDoS protection).
+API servers par **Rate Limiting** (taaki koi hacker lagatar request bhej kar server down na karde) mein `time::HL]].time()[[HL::` use hota hai. Server user ka last request time save karta hai. Agar `current::HL]]_time - last_time < 1 second` hota hai, toh server request block kar deta hai (DDoS protection).
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
 * **Testing/Offline Phase:** User Snake Water Gun game mein manual string inputs ("s", "w") dalta hai aur `if-elif-else` checks unhe winner banate hain.
 * **Fixing/Iteration Phase:** Jab user ne capital "S" daala, toh case-sensitive check (S == s nahi hota) ke karan logic fail ho gaya. Isko theek karne ke liye `.lower()` apply kiya gaya.
-* **Live Production Phase:** Typing test check karte time manual loop chalane ke bajaye, strings ko space ke basis par `split()` kiya gaya aur `zip()` ka use karke fast character by character / word by word accuracy calculate ki gayi.
+* **Live Production Phase:** Typing test check karte time manual loop chalane ke bajaye, strings ko space ke basis par `split()[[HL::` kiya gaya aur `zip::HL]]()` ka use karke fast character by character / word by word accuracy calculate ki gayi.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -5411,11 +5411,11 @@ Pair 2: "World" <====> "Word"   (Mismatch!)
 * **Q:** Python mein string "immutable" hone ka exact matlab aur fayda kya hai?
 * **A:** Immutable ka matlab hai ki memory mein ek baar jo string object ban gaya, uska character array change nahi ho sakta (e.g., `text[0] = 'a'` error dega). Agar change karna ho toh naya string banana padta hai. Fayda yeh hai ki yeh dictionary (hash map) mein as a Key use ho sakti hai kyunki iski value fix hoti hai, aur thread-safe hoti hai.
 * **Q:** `time.time()` aur Epoch ka kya relation hai?
-* **A:** Epoch ek reference point hai — usually January 1, 1970 (UTC). `time.time()` yahi return karta hai ki is reference point se lekar current system execution tak kitne total seconds (float mein) guzar chuke hain. Ise hum execution lag measure karne ke liye minus karte hain (`end - start`).
+* **A:** Epoch ek reference point hai — usually January 1, 1970 (UTC). `time.time()[[HL::` yahi return karta hai ki is reference point se lekar current system execution tak kitne total seconds (float mein) guzar chuke hain. Ise hum execution lag measure karne ke liye minus karte hain (`end::HL]] - start`).
 * **Q:** `.split()` function default kis character par split karta hai?
 * **A:** Default roop se `.split()` kisi bhi white space (space, tab `\t`, newline `\n`) par string ko todta hai aur saare consecutive empty spaces ko automatically remove kar deta hai.
-* **Q:** `if` ke baad lagatar 3 baar naya `if` lagane mein, aur ek `if` ke baad 2 `elif` lagane mein kya farak hai?
-* **A:** 3 `if` lagane par Python teeno conditions check karega chahe pehli true ho chuki ho (slower aur unpredictable behavior). `elif` chain banata hai, jaise hi ek bhi branch true milti hai, baaki sab skip ho jate hain (faster processing).
+* **Q:** `if` ke baad lagatar 3 baar naya `[[HL::if` lagane mein, aur ek `if::HL]]` ke baad 2 `elif` lagane mein kya farak hai?
+* **A:** 3 `[[HL::if` lagane par Python teeno conditions check karega chahe pehli true ho chuki ho (slower aur unpredictable behavior). `elif::HL]]` chain banata hai, jaise hi ek bhi branch true milti hai, baaki sab skip ho jate hain (faster processing).
 
 #### 📝 18. One-Line Memory Hook
 
@@ -6261,11 +6261,11 @@ Table: employees (Schema Design)
 * [[HL::**Q:** Phone number INT mein kyun store nahi karna chahiye?::HL]]
 * [[HL::**A:** Phone numbers (jaise 12345678910) pe hum koi maths (addition/subtraction) nahi karte. Dusra, agar number `011` se start hota hai, toh INT usko `11` bana dega (leading zero delete ho jayega). Isliye hamesha VARCHAR use hota hai::HL]].
 * **Q:** `DECIMAL(5, 2)` ka kya matlab hai?
-* **A:** Iska matlab hai ki column maximum 5 digits store karega total, jisme se exactly 2 digits decimal point ke baad honge. Example: `123.45` valid hai, but `1234.5` error dega kyunki decimal se pehle sirf 3 digits allowed hain.
+* **A:** Iska matlab hai ki column maximum 5 digits store karega total, jisme se exactly 2 digits decimal point ke baad honge. Example: `123.45` valid hai, but `1234.[[HL::5` error dega kyunki decimal se pehle sirf 3 digits allowed hain.
 
 #### 📝 18. One-Line Memory Hook
 
-"Data type VIP bouncer hai aur `ALTER TABLE` table ka plastic surgeon hai — bina jaan liye (delete kiye) shakal badal deta hai!"
+"Data type VIP bouncer hai aur `ALTER::HL]] TABLE` table ka plastic surgeon hai — bina jaan liye (delete kiye) shakal badal deta hai!"
 
 #### 🔑 19. Keywords Coverage Verification
 
@@ -6427,7 +6427,7 @@ Table: employees (Schema Design)
 * [[HL::**Confusion 1 — "Primary Key aur UNIQUE mein kya farak hai?"**::HL]]
 * [[HL::**Galat soch:** Dono ka kaam duplicate values rokna hai, toh dono same hain.::HL]]
 * [[HL::**Actually:** Ek table mein **UNIQUE** constraint kitne bhi columns (email, phone, PAN card) pe lag sakta hai aur yeh NULL (khali) values allow karta hai. Par **PRIMARY KEY** sirf ek hoti hai aur woh kabhi NULL (NOT NULL) nahi ho sakti::HL]].
-* **Prove karo:** `CREATE TABLE t (id INT UNIQUE, name VARCHAR(10) UNIQUE);` chalega. Par `CREATE TABLE t (id INT PRIMARY KEY, name VARCHAR(10) PRIMARY KEY);` error dega.
+* **Prove karo:** `CREATE TABLE t (id INT UNIQUE, name VARCHAR(10) UNIQUE);[[HL::` chalega. Par `CREATE::HL]] TABLE t (id INT PRIMARY KEY, name VARCHAR(10) PRIMARY KEY);` error dega.
 
 
 * [[HL::**Confusion 2 — "Auto-increment skip kyun ho jata hai?"**::HL]]
@@ -6974,7 +6974,7 @@ Tumhe tables ke beech mein ek solid line (EER Diagram) dikhegi jo one-to-many re
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Do tables hoti hain: **Parent table** (jaise `sellers table`) jisme Primary Key hoti hai, aur **Child table** (jaise `orders table`) jisme Foreign Key hoti hai.
+1. Do tables hoti hain: **Parent table** (jaise `sellers [[HL::table`) jisme Primary Key hoti hai, aur **Child table** (jaise `orders::HL]] table`) jisme Foreign Key hoti hai.
 2. Jab child mein koi nayi row (order) dalne ki koshish hoti hai, database background mein turant parent table scan karta hai.
 3. Agar wo reference (ID) nahi milti, toh constraint error (foreign key constraint fails) throw karda hai aur insert rok deta hai.
 4. Agar Parent (seller) delete hone ki koshish kare, toh DB 3 action le sakta hai:
@@ -7036,11 +7036,11 @@ Error 1452: Cannot add or update a child row: a foreign key constraint fails
 
 [[HL::#### 🔒 8. Security-First Check::HL]]
 
-Foreign keys actually a security feature from an integrity standpoint. However, `ON DELETE CASCADE` ek chupa hua khatra hai. Agar ek malicious internal user ya hacker ne `sellers` table empty kar di, toh database automatically aapki saari connected tables (products, orders, reviews) bhi udha dega. Hamesha critical data ke liye `SET NULL` ya `RESTRICT` use karein.
+Foreign keys actually a security feature from an integrity standpoint. However, `ON DELETE CASCADE` ek chupa hua khatra hai. Agar ek malicious internal user ya hacker ne `sellers` table empty kar di, toh database automatically aapki saari connected tables (products, orders, reviews) bhi udha dega. Hamesha critical data ke liye `SET NULL` ya `[[HL::RESTRICT` use karein.
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Industry (jaise Flipkart/Amazon with sellers from Bangalore, Mumbai, Kolkata) mein **data is oil**. Wo order history kabhi delete nahi karte chahe dukaan wala platform chhod de. Isliye production mein hamesha `ON DELETE SET NULL` use hota hai (Tech World, Tech World 2 jaise stores ke liye). Scalability wise, har [[HL::`INSERT` pe FK constraint parent table verify karta hai, jisse writes slow (overhead) ho jate hain. High-scale environments mein FK checks DB layer se hata kar code layer (API level) pe shift kar diye jate hain::HL]].
+Industry (jaise Flipkart/Amazon with sellers from Bangalore, Mumbai, Kolkata) mein **data is oil**. Wo order history kabhi delete nahi karte chahe dukaan wala platform chhod de. Isliye production mein hamesha `ON::HL]] DELETE SET NULL` use hota hai (Tech World, Tech World 2 jaise stores ke liye). Scalability wise, har [[HL::`INSERT` pe FK constraint parent table verify karta hai, jisse writes slow (overhead) ho jate hain. High-scale environments mein FK checks DB layer se hata kar code layer (API level) pe shift kar diye jate hain::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -7095,7 +7095,7 @@ Industry (jaise Flipkart/Amazon with sellers from Bangalore, Mumbai, Kolkata) me
 
 * **Testing/Offline Phase:** Developer foreign key constraint drop karke uski definition update (jaise CASCADE se SET NULL) karta hai aur data consistency test karta hai.
 * **Fixing/Iteration Phase:** Agar order table mein koi aisi seller ID insert ho jo seller table mein nahi hai (e.g., ID 255), toh SQL constraint error throw karke galat data insert hone se rokta hai.
-* **Live Production Phase:** Production scenarios mein marketplace band hone pe `ON DELETE CASCADE` use hota hai, par agar seller platform chhod raha ho toh user orders preserve karne ke liye `ON DELETE SET NULL` use kiya jata hai.
+* **Live Production Phase:** Production scenarios mein marketplace band hone pe `ON DELETE [[HL::CASCADE` use hota hai, par agar seller platform chhod raha ho toh user orders preserve karne ke liye `ON::HL]] DELETE SET NULL` use kiya jata hai.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -7123,7 +7123,7 @@ Industry (jaise Flipkart/Amazon with sellers from Bangalore, Mumbai, Kolkata) me
 * **Q:** Referential Integrity ka kya matlab hai aur yeh kaise maintain hoti hai?
 * **A:** Referential Integrity ka matlab hai ki database mein tables ke beech ka logic valid aur consistent rahe. Agar table B, table A ke kisi data ko refer kar rahi hai, toh woh data actually exist karna chahiye (orphan rows nahi hone chahiye). Yeh Foreign Key constraint ke zariye strictly enforce ki jati hai.
 * **Q:** Kya ek table mein multiple Foreign Keys ho sakti hain?
-* **A:** Haan, bilkul. Ek table (jaise `orders`) multipe tables se connect ho sakti hai. Ek FK `sellers` table ko point kar sakti hai, aur dusri FK `customers` table ko point kar sakti hai.
+* **A:** Haan, bilkul. Ek table (jaise `orders`) multipe tables se connect ho sakti hai. Ek FK `[[HL::sellers` table ko point kar sakti hai, aur dusri FK `customers::HL]]` table ko point kar sakti hai.
 * [[HL::**Q:** Parent table ko truncate ya drop kyun nahi kiya ja sakta agar FK lagi ho?::HL]]
 * [[HL::**A:** Jab tak child table mein data (references) maujood hai, parent table drop ya truncate (poori khali) nahi ki ja sakti kyunki isse referential integrity break hoti hai. Iske liye pehle `SET FOREIGN_KEY_CHECKS=0;` karna padta hai (jo dangerous hai) ya child tables clean karni padti hain::HL]].
 * **Q:** FK indexes pe kya asar dalti hai?
@@ -7253,7 +7253,7 @@ Result Grid mein tum dekhenge ki pehle 3 column 'orders' table ke hain, aur aage
 
 #### 🔒 8. Security-First Check
 
-Jab JOIN use karke api ke liye query likhte ho, toh kabhi bhi `SELECT *` mat use karo. Ho sakta hai user table join ho aur galti se password hashes ya sensitive columns joined report mein front-end pe leak ho jayein. Sirf unhi columns ka naam lo jo zaruri hain (jaise `O.order_id, S.seller_name`).
+Jab JOIN use karke api ke liye query likhte ho, toh kabhi bhi `[[HL::SELECT::HL]] *[[HL::` mat use karo. Ho sakta hai user table join ho aur galti se password hashes ya sensitive columns joined report mein front-end pe leak ho jayein. Sirf unhi columns ka naam lo jo zaruri hain (jaise `O::HL]].order_id, S.seller_name`).
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -7262,7 +7262,7 @@ Industry (jaise Amazon) mein combined report nikalne ke liye queries bohot heavy
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
 * **❌ Mistake 1:** JOIN ke sath `ON` clause bhool jana.
-* **🤦 Why:** Beginners direct `SELECT * FROM orders JOIN sellers;` likh dete hain.
+* **🤦 Why:** Beginners direct `[[HL::SELECT::HL]] * FROM orders JOIN sellers;` likh dete hain.
 * **✅ The 'Pro' Way:** Hamesha `ON` clause specify karo.
 * **⚡ Consequences:** Agar bina ON ke join kiya, toh Cartesian Product ban jayega (har order har seller ke sath jud jayega). 100 orders aur 100 sellers = 10,000 rows ka kachra result aayega aur server hang ho sakta hai.
 * **❌ Mistake 2:** Columns bina table alias ke likhna.
@@ -7285,8 +7285,8 @@ Industry (jaise Amazon) mein combined report nikalne ke liye queries bohot heavy
 [[HL::#### 🛠️ 12. Troubleshooting Flowchart::HL]]
 
 * [[HL::**`Error 1052 (23000): Column 'seller_id' in field list is ambiguous`**::HL]]
-* [[HL::**Root Cause:** Tumne::HL]] `SELECT seller_id` likha, par yeh column orders table mein bhi hai aur sellers table mein bhi. MySQL confuse hai kahan se laun.
-* **Fix:** Table alias ka use karo aur explicitly batao: `SELECT O.seller_id` ya `S.seller_id`.
+* [[HL::**Root Cause:** Tumne::HL]] `[[HL::SELECT::HL]] seller_id` likha, par yeh column orders table mein bhi hai aur sellers table mein bhi. MySQL confuse hai kahan se laun.
+* **Fix:** Table alias ka use karo aur explicitly batao: `[[HL::SELECT::HL]] O.seller_id` ya `S.seller_id`.
 
 
 * **UNION query fail ho rahi hai "The used SELECT statements have a different number of columns"**
@@ -7300,11 +7300,11 @@ Industry (jaise Amazon) mein combined report nikalne ke liye queries bohot heavy
 | Feature | [[HL::INNER JOIN::HL]] | [[HL::LEFT JOIN::HL]] | [[HL::RIGHT JOIN::HL]] |
 | --- | --- | --- | --- |
 | **Kam kya hai?** | Sirf matching rows dono tables se | [[HL::Left table ki saari rows, chahe match ho ya na ho::HL]] | [[HL::Right table ki saari rows::HL]] |
-| [[HL::**Non-matching data**::HL]] | [[HL::Ignore kar deta hai (Delete dikhta hai)::HL]] | [[HL::`NULL` fill kar deta hai::HL]] | `NULL` fill kar deta hai |
+| [[HL::**Non-matching data**::HL]] | [[HL::Ignore kar deta hai (Delete dikhta hai)::HL]] | [[HL::`NULL` fill kar deta hai::HL]] | `[[HL::NULL` fill kar deta hai |
 
 #### 🌍 14. Real-World Use Case
 
-Swiggy ke admin dashboard par jab customer support team "Order History" dekhti hai, toh backend ek **combined report** banata hai. Woh `orders` table (amount ke liye), `restaurants` table (naam ke liye) aur `delivery_partners` table (rider name ke liye) ko **INNER JOIN** aur **LEFT JOIN** lagakar single table view banata hai.
+Swiggy ke admin dashboard par jab customer support team "Order History" dekhti hai, toh backend ek **combined report** banata hai. Woh `orders::HL]]` table (amount ke liye), `[[HL::restaurants` table (naam ke liye) aur `delivery::HL]]_partners` table (rider name ke liye) ko **INNER JOIN** aur **LEFT JOIN** lagakar single table view banata hai.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -7834,7 +7834,7 @@ Agar tum `IN` operator ka use karke 10,000 IDs return karte ho, toh memory full 
 * [[HL::**🤦 Why:** Beginner likhta hai `WHERE user_id = (SELECT id FROM users WHERE city='Delhi')`.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Agar andar ki subquery 1 se zyada result (list) degi, toh bahar `=` fail ho jayega. Wahan hamesha `IN` operator lagao (`WHERE user_id IN (...)`).::HL]]
 * [[HL::**⚡ Consequences:** "Error 1242: Subquery returns more than 1 row" aayega aur backend crash ho jayega.::HL]]
-* [[HL::**❌ Mistake 2:** `EXISTS` ke andar::HL]] `SELECT *` likhna.
+* [[HL::**❌ Mistake 2:** `EXISTS` ke andar::HL]] `[[HL::SELECT::HL]] *` likhna.
 * [[HL::**🤦 Why:** Aadat padi hoti hai "get all data" likhne ki.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Speaker warned us: we don't care what data returns. Hamesha `SELECT 1` use karo.::HL]]
 * [[HL::**⚡ Consequences:** Agar table mein 50 heavy columns (jaise images, long texts) hain, toh database faltu mein unko padhne mein time aur CPU cycles barbad karega jabki tumko sirf unki presence check karni thi::HL]].
@@ -7864,7 +7864,7 @@ Agar tum `IN` operator ka use karke 10,000 IDs return karte ho, toh memory full 
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| Feature | `IN` Operator | `EXISTS` Operator |
+| Feature | `IN` Operator | `[[HL::EXISTS` Operator |
 | --- | --- | --- |
 | **Under the hood action** | Subquery chalake puri values ki list memory mein laata hai | Memory mein list nahi banata, bas True/False (boolean) check karta hai |
 | **Best used when?** | Jab list choti ho (few hundred items) | Jab table bohot badi ho (millions of rows) |
@@ -7872,12 +7872,12 @@ Agar tum `IN` operator ka use karke 10,000 IDs return karte ho, toh memory full 
 
 #### 🌍 14. Real-World Use Case
 
-Instagram (Meta) pe jab app dikhati hai "People who viewed your story", backend check karta hai ki kya tumhara viewer table mein mojud hai ya nahi. Woh user ki saari detail (profile pic, bio) turant load nahi karte, wo pehle `EXISTS` operator fire karte hain fast checking ke liye, warna system millions of clicks handle nahi kar payega.
+Instagram (Meta) pe jab app dikhati hai "People who viewed your story", backend check karta hai ki kya tumhara viewer table mein mojud hai ya nahi. Woh user ki saari detail (profile pic, bio) turant load nahi karte, wo pehle `EXISTS::HL]]` operator fire karte hain fast checking ke liye, warna system millions of clicks handle nahi kar payega.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
 * **Testing/Offline Phase:** Developer nested logic test karta hai jahan pehla filter ek average calculate karta hai aur outer query us average se badi values dhoondhti hai.
-* **Fixing/Iteration Phase:** Developer `EXISTS` ke andar explicitly columns select karne ki jagah `SELECT 1` use karta hai taaki query execute hone mein fast ho (kyunki data payload matter nahi karta, sirf row ka milna matter karta hai).
+* **Fixing/Iteration Phase:** Developer `[[HL::EXISTS` ke andar explicitly columns select karne ki jagah `SELECT::HL]] 1` use karta hai taaki query execute hone mein fast ho (kyunki data payload matter nahi karta, sirf row ka milna matter karta hai).
 * **Live Production Phase:** Complex cross-table filtering ke liye production dashboards mein heavily nested subqueries aur `EXISTS` operators run hote hain.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
@@ -7900,15 +7900,15 @@ Step 5: Final Result sent to Output.
 #### ❓ 17. Interview Q&A
 
 * **Q:** Correlated aur Non-Correlated Subquery mein fundamental difference kya hai?
-* **A:** Non-correlated subquery independent hoti hai; yeh outer query pe depend nahi karti aur query cycle mein sirf ek baar execute hoti hai (e.g., `SELECT AVG()`). Correlated subquery outer query ke har ek record (row by row execution) ke liye baar-baar chalti hai (jaise `WHERE O.seller_id = S.seller_id`), isliye yeh badi tables mein performance bottleneck ban sakti hai.
+* **A:** Non-correlated subquery independent hoti hai; yeh outer query pe depend nahi karti aur query cycle mein sirf ek baar execute hoti hai (e.g., `[[HL::SELECT::HL]] AVG()`). Correlated subquery outer query ke har ek record (row by row execution) ke liye baar-baar chalti hai (jaise `WHERE O.seller_id = S.seller_id`), isliye yeh badi tables mein performance bottleneck ban sakti hai.
 * [[HL::**Q:** `EXISTS` clause fast kyun mana jata hai?::HL]]
 * [[HL::**A:** `EXISTS` short-circuiting logic pe kaam karta hai. Jaise hi engine ko pehli valid row milti hai, wo baaki table search karna band kar deta hai aur `TRUE` lautata hai. Jabki `IN` clause ko poori subquery execute karke memory mein ek list build karni padti hai::HL]].
 * **Q:** Kya main UPDATE query ke andar subquery likh sakta hoon?
-* **A:** Haan, aam taur pe. Par MySQL ka ek strict rule hai: jis table ko aap `UPDATE` (ya delete) kar rahe ho, usi table ko subquery mein directly select nahi kar sakte (without wrapping it in another nested subquery). `Table 'X' is specified twice, both as a target for 'UPDATE' and as a separate source for data` error aati hai.
+* **A:** Haan, aam taur pe. Par MySQL ka ek strict rule hai: jis table ko aap `[[HL::UPDATE::HL]]` (ya delete) kar rahe ho, usi table ko subquery mein directly select nahi kar sakte (without wrapping it in another nested subquery). `Table 'X' is specified twice, both as a target for '[[HL::UPDATE::HL]]' and as a separate source for data` error aati hai.
 
 #### 📝 18. One-Line Memory Hook
 
-"Subquery bracket rule (BODMAS) hai jisme andar wala pehle solve hota hai, aur EXISTS ka `SELECT 1` database ki speed-gun (boolean short-circuit) hai!"
+"Subquery bracket rule (BODMAS) hai jisme andar wala pehle solve hota hai, aur EXISTS ka `[[HL::SELECT::HL]] 1` database ki speed-gun (boolean short-circuit) hai!"
 
 #### 🔑 19. Keywords Coverage Verification
 
@@ -8043,11 +8043,11 @@ Agar ROLLUP use kiya hai, toh sabse aakhiri row mein city/category ka naam NULL 
 
 #### 🔒 8. Security-First Check
 
-Financial aggregations mein decimals ke sath deal karte waqt precision issue aa sakta hai (rounding errors). Agar sensitive business reports ya payouts grouped data se generate ho rahe hain, toh ensure karein ki data type `FLOAT` ki jagah `DECIMAL` ho, taaki ek-ek paise (cent) ka hisaab accurate rahe.
+Financial aggregations mein decimals ke sath deal karte waqt precision issue aa sakta hai (rounding errors). Agar sensitive business reports ya payouts grouped data se generate ho rahe hain, toh ensure karein ki data type `FLOAT` ki jagah `[[HL::DECIMAL` ho, taaki ek-ek paise (cent) ka hisaab accurate rahe.
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Industry dashboards aur **business reports** (jaise monthly **sales summaries**) mein `GROUP BY` sabse zyada run hone wala operator hai. Par bohot bade datasets mein yeh operation server ki bohot memory aur CPU cycle (sorting ke liye) consume karta hai. Senior engineers is problem ko solve karne ke liye "Pre-aggregated tables" (cron jobs/background tasks jo raat ko data group karke nayi table mein rakh dete hain) ka use karte hain.
+Industry dashboards aur **business reports** (jaise monthly **sales summaries**) mein `GROUP::HL]] BY` sabse zyada run hone wala operator hai. Par bohot bade datasets mein yeh operation server ki bohot memory aur CPU cycle (sorting ke liye) consume karta hai. Senior engineers is problem ko solve karne ke liye "Pre-aggregated tables" (cron jobs/background tasks jo raat ko data group karke nayi table mein rakh dete hain) ka use karte hain.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -8055,7 +8055,7 @@ Industry dashboards aur **business reports** (jaise monthly **sales summaries**)
 * **🤦 Why:** Beginners sochte hain filter karna hai toh `WHERE` likhna hoga.
 * **✅ The 'Pro' Way:** Speaker ne directly warn kiya tha: "Whenever you are using group by, you have to filter, so do not use where, use having." **WHERE vs HAVING** rule clear hona chahiye.
 * **⚡ Consequences:** "Error 1111: Invalid use of group function" aayega aur query execution fail ho jayegi.
-* **❌ Mistake 2:** `SELECT` mein aisi field maangna jo `GROUP BY` mein nahi hai aur uspar koi aggregate function (`SUM/COUNT`) bhi nahi laga hai. (e.g., `SELECT city, customer_name FROM orders GROUP BY city`).
+* **❌ Mistake 2:** `[[HL::SELECT::HL]]` mein aisi field maangna jo `GROUP [[HL::BY` mein nahi hai aur uspar koi aggregate function (`SUM::HL]]/[[HL::COUNT`) bhi nahi laga hai. (e.g., `SELECT::HL]] city, customer_name FROM orders GROUP BY city`).
 * **⚡ Consequences:** MySQL 8.0 strict mode ON rakhta hai aur `ONLY_FULL_GROUP_BY` error dega, kyunki use nahi pata ki Delhi ke 100 customers mein se kis ek ka naam dikhaye.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -8068,14 +8068,14 @@ Industry dashboards aur **business reports** (jaise monthly **sales summaries**)
 
 * **Confusion 2 — "Kya main WHERE aur HAVING ek hi query mein use kar sakta hoon?"**
 * **Galat soch:** Ek hi query mein dono lagane se database confuse ho jayega.
-* **Actually:** Haan, tum bilkul kar sakte ho! `WHERE` table se data lene se pehle (raw row filtering) kachra filter kar dega. Jo bachega, uspe `GROUP BY` lag kar sum banega. Fir `HAVING` us final sum pe filter lagayega. Dono ka order alag hai.
+* **Actually:** Haan, tum bilkul kar sakte ho! `[[HL::WHERE` table se data lene se pehle (raw row filtering) kachra filter kar dega. Jo bachega, uspe `GROUP::HL]] BY` lag kar sum banega. Fir `HAVING` us final sum pe filter lagayega. Dono ka order alag hai.
 
 
 
 #### 🛠️ 12. Troubleshooting Flowchart
 
 * **`Error 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column`**
-* **Root Cause:** Tumne `SELECT city, product_name` likha, par group sirf `city` pe kiya. Har city mein hazaaron products hote hain, database confuse hai ki group summary ke samne kiska naam dikhau?
+* **Root Cause:** Tumne `[[HL::SELECT::HL]] city, product_[[HL::name` likha, par group sirf `city::HL]]` pe kiya. Har city mein hazaaron products hote hain, database confuse hai ki group summary ke samne kiska naam dikhau?
 * **Fix:** Ya toh `product_name` ko bhi `GROUP BY` mein add karo, ya fir uspe aggregation function lagao (jaise `MAX(product_name)` ya `GROUP_CONCAT(product_name)`).
 
 
@@ -8095,12 +8095,12 @@ Industry dashboards aur **business reports** (jaise monthly **sales summaries**)
 
 #### 🌍 14. Real-World Use Case
 
-Swiggy/Zomato ke restaurant dashboard pe "Month-wise Earnings" ka ek graph hota hai. Wo graph backend se `SELECT month, SUM(amount) FROM payments GROUP BY month` query se data fetch karta hai. Aur jo us page ke end mein "Total Lifetime Earning" dikhti hai, wo `WITH ROLLUP` se aati hai.
+Swiggy/Zomato ke restaurant dashboard pe "Month-wise Earnings" ka ek graph hota hai. Wo graph backend se `[[HL::SELECT::HL]] month, SUM(amount) FROM payments GROUP BY [[HL::month` query se data fetch karta hai. Aur jo us page ke end mein "Total Lifetime Earning" dikhti hai, wo `WITH::HL]] ROLLUP` se aati hai.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
 * **Testing/Offline Phase:** Developer city aur category wise group karke total revenue ka report query likhta hai.
-* **Fixing/Iteration Phase:** Agar grouped data ko filter karna ho, toh developer `WHERE` ki jagah `HAVING` clause apply karta hai kyunki `WHERE` grouped output pe error throw karta hai.
+* **Fixing/Iteration Phase:** Agar grouped data ko filter karna ho, toh developer `WHERE` ki jagah `[[HL::HAVING` clause apply karta hai kyunki `WHERE::HL]]` grouped output pe error throw karta hai.
 * **Live Production Phase:** Business stakeholders ke dashboards aur financial aggregations generate karne ke liye production mein `WITH ROLLUP` use hota hai jisse automated subtotals aur grand totals milte hain.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
@@ -8129,9 +8129,9 @@ NULL   | 800  <-- (Rollup Grand Total = Sum of the above)
 * [[HL::**Q:** Agar ek query mein WHERE, GROUP BY aur HAVING teeno hain, toh performance pe kya asar hoga?::HL]]
 * [[HL::**A:** Performance actually better hogi. `WHERE` pehle hi unwanted data (jaise cancelled orders) drop kar dega, jisse `GROUP BY` ko kam rows pe calculation (sorting aur grouping) karni padegi, CPU bachega. Fir `HAVING` final chote result set pe filter lagayega::HL]].
 * **Q:** `WITH ROLLUP` clause ka limit kya hai?
-* **A:** MySQL mein `WITH ROLLUP` `ORDER BY` ke sath perfectly behave nahi karta tha purane versions mein (kyunki summary row sort hoke beecho-beech chali jati thi). MySQL 8.0 se yeh gracefully handle hota hai.
+* **A:** MySQL mein `WITH ROLLUP` `[[HL::ORDER BY::HL]]` ke sath perfectly behave nahi karta tha purane versions mein (kyunki summary row sort hoke beecho-beech chali jati thi). MySQL 8.0 se yeh gracefully handle hota hai.
 * **Q:** Main NULL values aur Rollup ke generated NULL ko distinct (alag) kaise pehchanu query output mein?
-* **A:** MySQL `GROUPING()` function provide karta hai. Agar output row `WITH ROLLUP` dwara banayi gayi summary row hai (jahan NULL grand total represent karta hai), toh `GROUPING(column_name)` 1 return karega. Agar wo actual data ka NULL hai, toh 0 return karega.
+* **A:** MySQL `GROUPING()[[HL::` function provide karta hai. Agar output row `WITH::HL]] [[HL::ROLLUP` dwara banayi gayi summary row hai (jahan NULL grand total represent karta hai), toh `GROUPING::HL]](column_name)` 1 return karega. Agar wo actual data ka NULL hai, toh 0 return karega.
 
 #### 📝 18. One-Line Memory Hook
 
@@ -8676,7 +8676,7 @@ Industry mein Triggers bohot limit mein use hote hain. Kyunki ye har row ke sath
 
 * **Confusion 2 — "Kya DELETE trigger mein NEW state milega?"**
 * **Galat soch:** NEW mein delete hone wala row hoga.
-* **Actually:** Nahi! Jab row delete ho rahi hai, toh "naya" state kuch bacha hi nahi. `DELETE` trigger mein sirf `OLD` state milti hai. Wahi `INSERT` trigger mein sirf `NEW` state milti hai (kyunki purana kuch tha hi nahi). `UPDATE` akela hai jisme dono (NEW aur OLD) milte hain.
+* **Actually:** Nahi! Jab row delete ho rahi hai, toh "naya" state kuch bacha hi nahi. `[[HL::DELETE` trigger mein sirf `OLD::HL]]` state milti hai. Wahi `[[HL::INSERT::HL]]` trigger mein sirf `NEW` state milti hai (kyunki purana kuch tha hi nahi). `[[HL::UPDATE::HL]]` akela hai jisme dono (NEW aur OLD) milte hain.
 
 
 
@@ -8689,7 +8689,7 @@ Industry mein Triggers bohot limit mein use hote hain. Kyunki ye har row ke sath
 
 * **`Error 1359 (HY000): Trigger already exists`**
 * **Root Cause:** Tum ek trigger ko modify karke dobara `CREATE TRIGGER` chala rahe ho, par trigger names unique hote hain DB mein.
-* **Fix:** Hamesha pehle `DROP TRIGGER IF EXISTS trigger_name;` chalao, uske baad create wali script run karo.
+* **Fix:** Hamesha pehle `DROP TRIGGER IF EXISTS trigger_name;[[HL::` chalao, uske baad create wali script run karo.
 
 
 
@@ -8697,18 +8697,18 @@ Industry mein Triggers bohot limit mein use hote hain. Kyunki ye har row ke sath
 
 | Feature | Stored Procedure | Database Trigger |
 | --- | --- | --- |
-| **Invocation (Kaise chale?)** | Explicitly (aap `CALL` karke chalate ho) | Implicitly (automatically DB khud chalata hai) |
+| **Invocation (Kaise chale?)** | Explicitly (aap `CALL::HL]]` karke chalate ho) | Implicitly (automatically DB khud chalata hai) |
 | **Parameters** | Aap pass kar sakte ho (e.g. city_name) | Koi parameter nahi leta, yeh fixed events pe chalta hai |
 | **Context Context** | Standalone entity (kisi table se banda nahi) | Table-bound entity (table delete hui toh trigger bhi gaya) |
 
 #### 🌍 14. Real-World Use Case
 
-HR management softwares mein jab ek Employee salary badhti hai ya use bonus milta hai, toh total salary budget track karne ke liye, `employees` table pe trigger laga hota hai. Jaise hi uski salary update hoti hai, trigger `OLD.salary` aur `NEW.salary` ka difference (e.g. 5000 increase) nikalta hai aur `department_budgets` table mein jaakar wo 5000 add kar deta hai (automated synchronization).
+HR management softwares mein jab ek Employee salary badhti hai ya use bonus milta hai, toh total salary budget track karne ke liye, `[[HL::employees` table pe trigger laga hota hai. Jaise hi uski salary update hoti hai, trigger `OLD::HL]].[[HL::salary` aur `NEW::HL]].[[HL::salary` ka difference (e.g. 5000 increase) nikalta hai aur `department::HL]]_budgets` table mein jaakar wo 5000 add kar deta hai (automated synchronization).
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer test karta hai ki order table mein cancel hone pe `order_cancellations` log table automatically populate ho raha hai ya nahi `NOW()` function ke sath.
-* **Fixing/Iteration Phase:** Developer `NEW` aur `OLD` state variables ko compare karke trigger logic theek karta hai (e.g. `OLD.order_status != cancelled` AND `NEW.order_status == cancelled`) taaki galat event fire na ho.
+* **Testing/Offline Phase:** Developer test karta hai ki order table mein cancel hone pe `order_[[HL::cancellations` log table automatically populate ho raha hai ya nahi `NOW::HL]]()` function ke sath.
+* **Fixing/Iteration Phase:** Developer `NEW` aur `[[HL::OLD` state variables ko compare karke trigger logic theek karta hai (e.g. `OLD::HL]].order_status != cancelled` AND `NEW.order_status == cancelled`) taaki galat event fire na ho.
 * **Live Production Phase:** Real user jab app pe order cancel karta hai, toh backend code se koi extra log query nahi aati, database khud apna trigger fire karke automatically cancellation log table mein entry daal deta hai.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
@@ -8737,7 +8737,7 @@ HR management softwares mein jab ek Employee salary badhti hai ya use bonus milt
 #### ❓ 17. Interview Q&A
 
 * **Q:** NEW aur OLD pseudorecords ka triggers mein kya role hai?
-* **A:** Ye variables current row ki state ko hold karte hain. `OLD` hold karta hai record ki state modification se pehle (Sirf Update & Delete mein present hota hai). `NEW` hold karta hai record ki wo state jo modification ke baad database mein save hone wali hai (Sirf Insert & Update mein present hota hai).
+* **A:** Ye variables current row ki state ko hold karte hain. `[[HL::OLD` hold karta hai record ki state modification se pehle (Sirf Update & Delete mein present hota hai). `NEW::HL]]` hold karta hai record ki wo state jo modification ke baad database mein save hone wali hai (Sirf Insert & Update mein present hota hai).
 * **Q:** Kya main Trigger ke andar transaction commit ya rollback kar sakta hoon?
 * **A:** MySQL mein nahi. Triggers usi parent transaction ka hissa hote hain jisne unhe fire kiya hai. Agar aapne trigger ke andar explicitly `COMMIT` ya `ROLLBACK` fire kiya toh MySQL error dega kyunki parent query ki control override nahi ki ja sakti andar se. Agar trigger fail hota hai, toh parent query bhi automatically rollback ho jati hai.
 * **Q:** "Cascading Triggers" kya hote hain aur inka kya khatra hai?
@@ -8768,7 +8768,7 @@ HR management softwares mein jab ek Employee salary badhti hai ya use bonus milt
 * Keywords Covered: ALL ✅
 * Keywords Missed: 0
 
-> ✅ **Notes Guru confirms:** Yeh notes original handwritten notes aur missed topics (Section 7) ka 100% content cover karti hain — har topic, har subtopic, har keyword seamlessly incorporate kiya gaya hai, with full Hinglish flair, proper code rules (Minus One & Zero), aur beginner-safe interruption explanations. Data Analytics/SQL pipeline successfully closed! 
+> ✅ **Notes Guru confirms:** Yeh notes original handwritten notes [[HL::aur::HL]] missed topics (Section 7) ka 100% content cover karti hain — har topic, har subtopic, har keyword seamlessly incorporate kiya gaya hai, with full Hinglish flair, proper code rules (Minus One & Zero), [[HL::aur::HL]] beginner-safe interruption explanations. Data Analytics/[[HL::SQL::HL]] pipeline successfully closed! 
 
 ==================================================================================
 
