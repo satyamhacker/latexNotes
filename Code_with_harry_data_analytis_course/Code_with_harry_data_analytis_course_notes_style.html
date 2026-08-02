@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burpsuite Notes Viewer</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fira+Code:wght@400;500&family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Highlight CSS -->
+    <title>Code with Harry Data Analytics Course Notes</title>
+    <!-- Required Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark-reasonable.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
 :root {
     /* Color Palette - Deep Dark Theme */
@@ -362,7 +359,8 @@ mark.yellow-highlight {
     <div class="print-wrapper">
         <div class="layout">
             <nav class="sidebar" id="sidebar">
-                <h3>Contents</h3>
+                <h3>Table of Contents</h3>
+                <!-- TOC goes here -->
                 <div id="toc"></div>
             </nav>
             <main class="main-content" id="content-area">
@@ -371,17 +369,13 @@ mark.yellow-highlight {
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    
     <script>
 document.addEventListener("DOMContentLoaded", () => {
     const contentArea = document.getElementById("content-area");
     const loader = document.getElementById("loader");
 
     // Fetch MD logic (with local file support)
-    fetch("Burpsuite_Notes.md")
+    fetch("Code_with_harry_data_analytis_course_notes.md")
         .then(response => {
             // Support local file:/// protocols where status is 0
             if (!response.ok && response.status !== 0) {

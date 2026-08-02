@@ -58,6 +58,7 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
+    margin: 0;
 }
 
 h1 {
@@ -200,7 +201,7 @@ tr:hover {
 /* Sidebar */
 .sidebar {
     width: 260px;
-    min-height: 100vh;
+    height: 100vh;
     background: var(--bg-secondary);
     border-right: 1px solid var(--border-color);
     padding: 2rem 1rem;
@@ -208,6 +209,15 @@ tr:hover {
     top: 0;
     overflow-y: auto;
     flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.sidebar h3 {
+    margin-top: 0;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .sidebar a {
@@ -359,6 +369,18 @@ mark.yellow-highlight {
         box-shadow: none !important;
     }
 }
+
+#loader {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    z-index: 9999;
+}
 ```
 
 ## 🧠 Javascript Logic (Copy this logic)
@@ -367,6 +389,9 @@ Use this specific logic to handle the Markdown parsing. It fixes common bugs and
 
 ```javascript
 document.addEventListener("DOMContentLoaded", () => {
+    const contentArea = document.getElementById("content-area");
+    const loader = document.getElementById("loader");
+
     // Fetch MD logic (with local file support)
     fetch("YOUR_MARKDOWN_FILE.md")
         .then(response => {
@@ -402,7 +427,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let hlCount = 0;
         let hlMap = {};
         let rawCode = safeCode.replace(/\[\[HL::(.*?)::HL\]\]/g, function(match, p1) {
-            let key = `__HL_${hlCount}__`;
+            let key = `HLTOKEN${hlCount}ENDHL`;
             hlMap[key] = p1;
             hlCount++;
             return key;
@@ -422,15 +447,19 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // 🟡 3. Restore highlights as HTML tags safely
         for (let i = 0; i < hlCount; i++) {
-            let key = `__HL_${i}__`;
+            let key = `HLTOKEN${i}ENDHL`;
             highlighted = highlighted.replace(key, `<mark class="yellow-highlight">${hlMap[key]}</mark>`);
         }
         
         return `
         <pre class="mac-window">
             <div class="code-header">
-                <div class="window-controls">...</div>
-                <button onclick="copy(...)">Copy</button>
+                <div class="window-controls">
+                    <span class="control red"></span>
+                    <span class="control yellow"></span>
+                    <span class="control green"></span>
+                </div>
+                <button style="background:none; border:none; color:var(--accent-blue); cursor:pointer;" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.innerText)">Copy</button>
             </div>
             <code class="hljs language-${language || 'plaintext'}">${highlighted}</code>
         </pre>`;
@@ -493,13 +522,29 @@ document.addEventListener("DOMContentLoaded", () => {
     let finalHtml = marked.parse(processed, { renderer: renderer });
     
     // Replace remaining [[HL::text::HL]] outside of code blocks
-    finalHtml = finalHtml.replace(/\[\[HL::(.*?)::HL\]\]/g, '<mark class="yellow-highlight">$1</mark>');
+    finalHtml = finalHtml.replace(/\[\[HL::(.*?)::HL\]\]/gs, '<mark class="yellow-highlight">$1</mark>');
     
     contentArea.innerHTML = finalHtml;
+
+    // Generate TOC
+    const headings = contentArea.querySelectorAll('h1, h2.module-section, h3.topic-section');
+    const tocContainer = document.getElementById('toc');
+    let tocHTML = '';
+    headings.forEach(h => {
+        let indent = '0';
+        if(h.tagName === 'H2') indent = '1rem';
+        if(h.tagName === 'H3') indent = '2rem';
+        tocHTML += `<a href="#${h.id}" style="margin-left: ${indent}">${h.innerText}</a>`;
+    });
+    tocContainer.innerHTML = tocHTML;
+
+    // Hide loader
+    loader.style.display = 'none';
+
         })
         .catch(err => {
             console.error(err);
-            document.getElementById("loader").innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes (Is CORS blocking local files?)';
+            loader.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;Error loading notes (Is CORS blocking local files?)';
         });
 });
 ```

