@@ -8881,10 +8881,10 @@ Step 3: Dictionary Special Case
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Feature | Basic Iterable (List/Tuple) | Generator (Advanced Iterable) |
+| [[HL::Feature::HL]] | [[HL::Basic Iterable (List/Tuple)::HL]] | [[HL::Generator (Advanced Iterable)::HL]] |
 | --- | --- | --- |
-| Memory Storage | Saara data ek baar mein RAM mein rakhta hai | Data on the fly banata hai (Memory saving) |
-| Speed for iteration | Fast, but RAM heavy | Thoda CPU lagta hai, par RAM safe rehti hai |::HL]]
+| [[HL::Memory Storage::HL]] | [[HL::Saara data ek baar mein RAM mein rakhta hai::HL]] | [[HL::Data on the fly banata hai (Memory saving)::HL]] |
+| [[HL::Speed for iteration::HL]] | [[HL::Fast, but RAM heavy::HL]] | [[HL::Thoda CPU lagta hai, par RAM safe rehti hai::HL]] |
 
 [[HL::#### 🌍 14. Real-World Use Case (Production Application)::HL]]
 
@@ -9193,7 +9193,7 @@ Socho tumhare paas ek jacket ki chain (zipper) hai. Ek taraf saare left daante (
 * [[HL::**Problem:** Agar humare paas 100 items ki list hai aur 100 prices ki alag list hai, toh unhe map karke dictionary banane ke liye humein lamba loop likhna padega index numbers manage karte hue.::HL]]
 * [[HL::**Solution:** Dictionary comprehension aur `zip` object use karke yeh mapping error-free aur ek line mein ho jati hai::HL]].
 * **What breaks if we don't use it?** Code verbose ho jayega aur lists ke index out of bounds hone (list limit cross hone) ke chances badh jayenge.
-* **✅ [[HL::Kab use karo (Use this when):** Jab tumhare paas keys ki alag list ho aur values ki alag list ho, aur dono ko ek perfect 1-to-1 mapping (dictionary) mein convert karna ho.::HL]]
+* [[HL::**✅ Kab use karo (Use this when):** Jab tumhare paas keys ki alag list ho aur values ki alag list ho, aur dono ko ek perfect 1-to-1 mapping (dictionary) mein convert karna ho.::HL]]
 * [[HL::**❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab tumhari dono lists ki length alag-alag ho. Aise mein data loss (chhut jana) ho sakta hai, tab manual mapping ya Pandas (data handling library) use karna better hai::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -9206,9 +9206,9 @@ Socho tumhare paas ek jacket ki chain (zipper) hai. Ek taraf saare left daante (
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-[[HL::1. List comprehension ki tarah yeh bhi C-level par optimized hoti hai.
-2. Jab tum `zip(items, prices)` lagate ho, Python ek internal iterator banata hai jo pehli baar mein dono lists ka 0th item uthata hai, phir 1st, phir 2nd. Yeh internally ek **list of tuples** jaisa structure behave karta hai (e.g., `[('Apple', 100), ('Milk', 50)]`).
-3. Comprehension ka `{key: value}` syntax un tuples ko dictionary ke elements mein transform kar deta hai::HL]].
+1. [[HL::List comprehension ki tarah yeh bhi C-level par optimized hoti hai.::HL]]
+2. [[HL::Jab tum `zip(items, prices)` lagate ho, Python ek internal iterator banata hai jo pehli baar mein dono lists ka 0th item uthata hai, phir 1st, phir 2nd. Yeh internally ek **list of tuples** jaisa structure behave karta hai (e.g., `[('Apple', 100), ('Milk', 50)]`).::HL]]
+3. [[HL::Comprehension ka `{key: value}` syntax un tuples ko dictionary ke elements mein transform kar deta hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -9250,9 +9250,9 @@ Industry mein API responses ko combine karte waqt `.zip()` ka heavy use hota hai
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ [[HL::Mistake:** Do asamaan (unequal) length ki lists par blindly dictionary comprehension lagana.::HL]]
-* [[HL::**🤦 Why:** Beginner bhool jata hai ki agar `items` 5 hain aur `prices` 3 hain, toh kya hoga::HL]].
-* **✅ [[HL::The 'Pro' Way:** Zip object silently truncate (chhoti list tak limit) kar deta hai. Hamesha lists ki length verify karo comprehension chalane se pehle, ya `itertools.zip_longest` (advanced zip) use karo::HL]].
+* [[HL::**❌ Mistake:** Do asamaan (unequal) length ki lists par blindly dictionary comprehension lagana.::HL]]
+* [[HL::**🤦 Why:** Beginner bhool jata hai ki agar `items` 5 hain aur `prices` 3 hain, toh kya hoga.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Zip object silently truncate (chhoti list tak limit) kar deta hai. Hamesha lists ki length verify karo comprehension chalane se pehle, ya `itertools.zip_longest` (advanced zip) use karo.::HL]]
 * **⚡ Consequences:** Agar lists unequal hui, toh extra items silent tariqe se drop ho jayenge aur production database mein records missing honge.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -9375,7 +9375,7 @@ Normal List ek buffet (buffet system) ki tarah hai, jahan cook saara khana ek ba
 [[HL::* **Problem:** Data processing (e.g. 5 million numbers ka loop ya complex calculation) mein data ko `[]` list mein `.append()` karne se RAM (temporary computer memory) puri bhar jati hai aur program "Out of Memory" hoke crash ho jata hai::HL]].
 * [[HL::**Solution:** Generators "lazy data generation" (jab zaroorat ho tabhi execute karna) use karte hain, jo saara data store karne ki bajaye bas "recipe of values" store karte hain (Memory saving).::HL]]
 * [[HL::**What breaks if we don't use it?** Bade data par list comprehensions system ki memory kha jayenge aur server permanently freeze ho jayega::HL]].
-* **✅ [[HL::Kab use karo (Use this when):** Jab tumhe extremely large datasets (million+ rows), log files, ya infinite data streams (sensor data) read/process karne hon aur tumhe ek baar mein ek hi line/value ki zaroorat ho.::HL]]
+* [[HL::**✅ Kab use karo (Use this when):** Jab tumhe extremely large datasets (million+ rows), log files, ya infinite data streams (sensor data) read/process karne hon aur tumhe ek baar mein ek hi line/value ki zaroorat ho.::HL]]
 * [[HL::**❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab tumhe data ko baar-baar reverse (peeche jaana) ya random order mein index karke (`data[45]`) access karna ho. Generators sirf aage (`next()`) ja sakte hain. Wahan list better hai::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -9388,8 +9388,8 @@ Normal List ek buffet (buffet system) ki tarah hai, jahan cook saara khana ek ba
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-[[HL::1. Jab koi function `yield` (ruko aur value wapas do) keyword encounter karta hai, woh wahi par apna state (pause) kar leta hai aur return bhejta hai. Function memory se hat-ta nahi hai.
-2. Jab dobara `next(a)` call kiya jata hai, function usi exact point se dubara resume hota hai, agli iteration chalta hai, aur wapas `yield` par aakar ruk jata hai::HL]].
+1. [[HL::Jab koi function `yield` (ruko aur value wapas do) keyword encounter karta hai, woh wahi par apna state (pause) kar leta hai aur return bhejta hai. Function memory se hat-ta nahi hai.::HL]]
+2. [[HL::Jab dobara `next(a)` call kiya jata hai, function usi exact point se dubara resume hota hai, agli iteration chalta hai, aur wapas `yield` par aakar ruk jata hai.::HL]]
 3. Jab function ka loop puri tarah khatam ho jata hai, aur `next()` call kiya jata hai, toh Python automatically `StopIteration` error throw karta hai (yeh error nahi, ek signal hai ki data khatam ho gaya).
 
 #### 💻 7. Hands-On — Runnable Example
@@ -9397,34 +9397,34 @@ Normal List ek buffet (buffet system) ki tarah hai, jahan cook saara khana ek ba
 ```python
 # Python 3.9+ 
 1  # ✅ METHOD 1: Yield Keyword (For complex logic)
-2  [[HL::def big_number_generator():             # Function banaya
-3      print("Generator Start hua...")     # Debug message
-4      for i in range(5000000):          # 5 million numbers ka bada sequence
-5          # complex calculation here 
-6          yield i                       # yield i = 'i' wapas bhejo aur yahin PAUSE ho jao (on the fly generation)
+[[HL::2  def big_number_generator():             # Function banaya::HL]]
+[[HL::3      print("Generator Start hua...")     # Debug message::HL]]
+[[HL::4      for i in range(5000000):          # 5 million numbers ka bada sequence::HL]]
+[[HL::5          # complex calculation here ::HL]]
+[[HL::6          yield i                       # yield i = 'i' wapas bhejo aur yahin PAUSE ho jao (on the fly generation)::HL]]
 7
-8  a = big_number_generator()            # a mein generator object ban gaya (loop run nahi hua abhi)
-9  print(a)                              # Object ki memory location print hogi
-10 print("First Value:", next(a))        # next() function = generator ko bolo "Agli value lao"
-11 print("Second Value:", next(a))       # Woh jahan ruka tha, wahi se aage badhega
+[[HL::8  a = big_number_generator()            # a mein generator object ban gaya (loop run nahi hua abhi)::HL]]
+[[HL::9  print(a)                              # Object ki memory location print hogi::HL]]
+[[HL::10 print("First Value:", next(a))        # next() function = generator ko bolo "Agli value lao"::HL]]
+[[HL::11 print("Second Value:", next(a))       # Woh jahan ruka tha, wahi se aage badhega::HL]]
 12 
-13 # ✅ METHOD 2: Parenthesis generator creation (Fast syntax)
-14 # (tuple comprehension confusion clear: Parenthesis tuples NAHI, generators banate hain)
-15 b = (i for i in range(5))             # Square brackets [] list banate hain, ( ) parenthesis generator banate hain
-16 print("Parenthesis Gen 1:", next(b))  # 0
-17 print("Parenthesis Gen 2:", next(b))  # 1::HL]]
+[[HL::13 # ✅ METHOD 2: Parenthesis generator creation (Fast syntax)::HL]]
+[[HL::14 # (tuple comprehension confusion clear: Parenthesis tuples NAHI, generators banate hain)::HL]]
+[[HL::15 b = (i for i in range(5))             # Square brackets [] list banate hain, ( ) parenthesis generator banate hain::HL]]
+[[HL::16 print("Parenthesis Gen 1:", next(b))  # 0::HL]]
+[[HL::17 print("Parenthesis Gen 2:", next(b))  # 1::HL]]
 
-[[HL::```::HL]]
+```
 
-[[HL::# 📤 Expected Output:::HL]]
+# [[HL::📤 Expected Output:::HL]]
 
-[[HL::```text
-<generator object big_number_generator at 0x7f...>
-Generator Start hua...
-First Value: 0
-Second Value: 1
-Parenthesis Gen 1: 0
-Parenthesis Gen 2: 1::HL]]
+```text
+[[HL::<generator object big_number_generator at 0x7f...>::HL]]
+[[HL::Generator Start hua...::HL]]
+[[HL::First Value: 0::HL]]
+[[HL::Second Value: 1::HL]]
+[[HL::Parenthesis Gen 1: 0::HL]]
+[[HL::Parenthesis Gen 2: 1::HL]]
 
 ```
 
@@ -9445,9 +9445,9 @@ Parenthesis Gen 2: 1::HL]]
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ [[HL::Mistake:** Generator ko do baar loop karne ki koshish karna (e.g. `sum(a)` chalane ke turant baad dubara `sum(a)` karna).::HL]]
-* [[HL::**🤦 Why:** Beginner bhool jate hain ki generator ek one-way road hai. Ek baar data consume (khatam) ho gaya, toh woh object khali ho jata hai::HL]].
-* **✅ [[HL::The 'Pro' Way:** Agar data dobara use karna hai, toh ya toh naya generator object initiate karo, ya agar data chhota hai toh usko list mein dump kar lo::HL]].
+* [[HL::**❌ Mistake:** Generator ko do baar loop karne ki koshish karna (e.g. `sum(a)` chalane ke turant baad dubara `sum(a)` karna).::HL]]
+* [[HL::**🤦 Why:** Beginner bhool jate hain ki generator ek one-way road hai. Ek baar data consume (khatam) ho gaya, toh woh object khali ho jata hai.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Agar data dobara use karna hai, toh ya toh naya generator object initiate karo, ya agar data chhota hai toh usko list mein dump kar lo.::HL]]
 * **⚡ Consequences:** Dusre calculation (e.g., dubara loop) mein silent zero value/empty array aayega bina kisi error ke, jo poori report ya AI weight calculations corrupt kar dega.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -9607,7 +9607,7 @@ Python mein variables bhi data values claim (reference) karte hain. Agar data mu
 * [[HL::**Solution:** Python mein explicitly `A.copy()` method lagana padta hai nayi independent memory space banane ke liye::HL]].
 * [[HL::**What breaks if we don't use it?** Functions can modify mutable data passed to them, aur log yeh aksar bhool jaate hain aur bug samajhte hain, jisse production backend mein user ka original data overwrite ho sakta hai.::HL]]
 * [[HL::**✅ Kab use karo (Use this when):** Jab tumhe ek variable se doosre mein independent data transfer karna ho, toh `.copy()` use karo mutable objects pe. Immutable types (int, float, string, tuple) inherently safe hote hain::HL]].
-* **❌ [[HL::Kab mat karo / Alternative prefer karo (Avoid when):** Jab tum explicitly chahte ho ki do functions/variables real-time ek hi memory block update karein (e.g., live cache list), toh `.copy()` mat lagao (pass by reference use karo::HL]]).
+* [[HL::**❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab tum explicitly chahte ho ki do functions/variables real-time ek hi memory block update karein (e.g., live cache list), toh `.copy()` mat lagao (pass by reference use karo).::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -9620,8 +9620,8 @@ id(B) -> 140733855  (Agar same ID dikhi, matlab dono variables ek hi memory shar
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. [[HL::**Immutable objects:** int, float, string, tuple. Inko jab change karte hain (e.g., `A = A + 1`), Python us purani jagah ko chhodkar ek nayi memory jagah block karta hai naye answer ke liye. Purani memory garbage collection (memory cleaning process) mein chali jaati hai.
-2. **Mutable objects:** list, dictionary, set. Yeh flexibe hote hain. Jab tum inme `items.append(10)` karte ho, Python nayi jagah nahi banata. Woh usi purani memory address ka size badha deta hai (in-place modification::HL]]).
+1. [[HL::**Immutable objects:** int, float, string, tuple. Inko jab change karte hain (e.g., `A = A + 1`), Python us purani jagah ko chhodkar ek nayi memory jagah block karta hai naye answer ke liye. Purani memory garbage collection (memory cleaning process) mein chali jaati hai.::HL]]
+2. [[HL::**Mutable objects:** list, dictionary, set. Yeh flexibe hote hain. Jab tum inme `items.append(10)` karte ho, Python nayi jagah nahi banata. Woh usi purani memory address ka size badha deta hai (in-place modification).::HL]]
 3. Jab functions ko mutable data pass kiya jaata hai (e.g., `process_data(my_list)`), toh function argument variables ko copy nahi bhejta, reference bhejta hai. Agar function ne list modify ki, bahar waali list bhi change ho jayegi (nested data shared).
 
 #### 💻 7. Hands-On — Runnable Example
@@ -9632,32 +9632,31 @@ id(B) -> 140733855  (Agar same ID dikhi, matlab dono variables ek hi memory shar
 2  A = [1, 2, 3]                    # Mutable object (list) banaya
 3  B = A                            # B = A likhne se data copy nahi hua, reference share hua (dono same list dekh rahe hain)
 4  
-5  B.append(10)                     # [[HL::B mein 10 append kiya (list ke end me joda)
-6  print("Bug Result A:", A)        # Surprise! A bhi modify ho gaya kyunki dono ka reference same tha
+5  B.append(10)                     # [[HL::B mein 10 append kiya (list ke end me joda)::HL]]
+[[HL::6  print("Bug Result A:", A)        # Surprise! A bhi modify ho gaya kyunki dono ka reference same tha::HL]]
 7
-8  # ✅ PRO WAY (.copy() function)
-9  X = [1, 2, 3]                    # Nayi list
-10 Y = X.copy()                     # .copy() = memory me exact data ki nayi independent clone copy banata hai
-11 Y.append(99)                     # Y me 99 joda
-12 print("Original X:", X)          # X safe hai, modify nahi hua
-13 print("Cloned Y:", Y)            # Sirf Y update hua::HL]]
+[[HL::8  # ✅ PRO WAY (.copy() function)::HL]]
+[[HL::9  X = [1, 2, 3]                    # Nayi list::HL]]
+[[HL::10 Y = X.copy()                     # .copy() = memory me exact data ki nayi independent clone copy banata hai::HL]]
+[[HL::11 Y.append(99)                     # Y me 99 joda::HL]]
+[[HL::12 print("Original X:", X)          # X safe hai, modify nahi hua::HL]]
+[[HL::13 print("Cloned Y:", Y)            # Sirf Y update hua::HL]]
 
-[[HL::```::HL]]
+```
 
-[[HL::# 📤 Expected Output:::HL]]
+# [[HL::📤 Expected Output:::HL]]
 
-[[HL::```text
-Bug Result A: [1, 2, 3, 10]
+```text
+[[HL::Bug Result A: [1, 2, 3, 10]
 Original X: [1, 2, 3]
 Cloned Y: [1, 2, 3, 99]::HL]]
+```
 
-[[HL::```::HL]]
+##### [[HL::🔬 Code Explanation::HL]]
 
-[[HL::##### 🔬 Code Explanation::HL]]
-
-[[HL::* **Line 3:** `B = A` — Yahan copy nahi bani. `B` ko sirf `A` ka memory address (reference pointer) assign hua. Isko shallow sharing kehte hain::HL]].
+* [[HL::**Line 3:** `B = A` — Yahan copy nahi bani. `B` ko sirf `A` ka memory address (reference pointer) assign hua. Isko shallow sharing kehte hain.::HL]]
 * [[HL::**Line 5:** `B.append(10)` — `append()` list function hai jo same memory box ko modify karta hai. `B` ne modify kiya, par address wahi tha jo `A` ka hai.::HL]]
-* [[HL::**Line 10::HL]]:** `[[HL::X.copy()` — Yeh function memory mein list ki har value scan karke ek fresh list banata hai naye address par (shallow copy). Agar `X` mein further lists (nested data) hain toh `deepcopy()` (advanced module method) ki zaroorat padegi, par basic lists ke liye `.copy()` sufficient hai.::HL]]
+* [[HL::**Line 10:** `X.copy()` — Yeh function memory mein list ki har value scan karke ek fresh list banata hai naye address par (shallow copy). Agar `X` mein further lists (nested data) hain toh `deepcopy()` (advanced module method) ki zaroorat padegi, par basic lists ke liye `.copy()` sufficient hai.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -9815,22 +9814,22 @@ array([[1, 2],
 1  # Note: Terminal mein pehle 'pip install numpy' run karna zaroori hai.
 2  import numpy as np                # numpy library load ki, aur isko ek standard alias 'np' diya taaki bar-bar numpy na likhna pade
 3
-4  # ✅ [[HL::1D Array Creation (Vector)
-5  my_list = [10, 20, 30]            # Normal python list
-6  arr_1d = np.array(my_list)        # np.array() = Python list ko numpy ke fast ndarray (N-dimensional array) mein convert karta hai
+[[HL::4  # ✅ 1D Array Creation (Vector)::HL]]
+[[HL::5  my_list = [10, 20, 30]            # Normal python list::HL]]
+[[HL::6  arr_1d = np.array(my_list)        # np.array() = Python list ko numpy ke fast ndarray (N-dimensional array) mein convert karta hai::HL]]
 7  
-8  print("1D Numpy Array:")
-9  print(arr_1d)                     # Output dekhiye (commas nahi hote numpy array output mein)
+[[HL::8  print("1D Numpy Array:")::HL]]
+[[HL::9  print(arr_1d)                     # Output dekhiye (commas nahi hote numpy array output mein)::HL]]
 10 
-11 # ✅ 2D Array Creation (Matrix)
-12 matrix = np.array([[1, 2], [3, 4]]) # List ke andar list pass karna padta hai multidimensional data ke liye::HL]]
-13 print("\n2D Matrix Array:")
-14 print(matrix)
+[[HL::11 # ✅ 2D Array Creation (Matrix)::HL]]
+[[HL::12 matrix = np.array([[1, 2], [3, 4]]) # List ke andar list pass karna padta hai multidimensional data ke liye::HL]]
+[[HL::13 print("\n2D Matrix Array:")::HL]]
+[[HL::14 print(matrix)::HL]]
 15
-16 # ✅ [[HL::Initialization Function (np.zeros)
-17 zero_array = np.zeros((3, 3))       # np.zeros = 3 rows aur 3 cols (shape) ka array banao aur usko 0.0 values se bhar do
-18 print("\nInitialized with Zeros::HL]]:")
-19 print(zero_array)
+[[HL::16 # ✅ Initialization Function (np.zeros)::HL]]
+[[HL::17 zero_array = np.zeros((3, 3))       # np.zeros = 3 rows aur 3 cols (shape) ka array banao aur usko 0.0 values se bhar do::HL]]
+[[HL::18 print("\nInitialized with Zeros:")::HL]]
+[[HL::19 print(zero_array)::HL]]
 
 ```
 
@@ -10049,41 +10048,41 @@ AI aur Machine Learning models ko train karne se pehle, data ko clean aur struct
 0  Amit   25
 1  Ravi   30::HL]]
 
-[[HL::```::HL]]
+```
 
-[[HL::#### ⚙️ 6. Under the Hood (Deep Dive)::HL]]
+#### [[HL::⚙️ 6. Under the Hood (Deep Dive)::HL]]
 
-[[HL::1. **DataFrame Object:** Jab hum DataFrame banate hain, Pandas implicitly (khud se) ek "default index" (0, 1, 2, 3...) rows ko assign kar deta hai. Yeh index database ke primary key ki tarah fast search enable karta hai::HL]].
-2. [[HL::**Column Types:** DataFrame ka har column internally ek NumPy array hota hai (data type fixed hota hai ek column mein). Isiliye calculations bohot fast hoti hain.
-3. Jab hum `df.describe()` chalate hain, Pandas internally saare numeric columns dhundhta hai aur unpar statistics (math) apply karta hai::HL]].
+1. [[HL::**DataFrame Object:** Jab hum DataFrame banate hain, Pandas implicitly (khud se) ek "default index" (0, 1, 2, 3...) rows ko assign kar deta hai. Yeh index database ke primary key ki tarah fast search enable karta hai.::HL]]
+2. [[HL::**Column Types:** DataFrame ka har column internally ek NumPy array hota hai (data type fixed hota hai ek column mein). Isiliye calculations bohot fast hoti hain.::HL]]
+3. [[HL::Jab hum `df.describe()` chalate hain, Pandas internally saare numeric columns dhundhta hai aur unpar statistics (math) apply karta hai.::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 
 ```python
 # Python 3.9+ | pandas 2.0+
 1  # Note: Terminal mein 'pip install pandas' run karna zaroori hai.
-2  import pandas as pd                      # [[HL::import pandas as pd = standard industry alias for Pandas
+2  import pandas as pd                      # [[HL::import pandas as pd = standard industry alias for Pandas::HL]]
 3  
-4  # ✅ DataFrame from Dictionary
-5  data_dict = {                            # dictionary banayi raw tabular data ke liye
-6      'Name': ['Rahul', 'Priya', 'Amit', 'Neha', 'Vikas', 'Raj'],
-7      'Age': [25, 28, 22, 31, 26, 29],
-8      'Salary': [50000, 60000, 45000, 80000, 55000, 48000]
-9  }
-10 df = pd.DataFrame(data_dict)             # pd.DataFrame() = raw dict ya list ko tabular object mein badalta hai
+[[HL::4  # ✅ DataFrame from Dictionary::HL]]
+[[HL::5  data_dict = {                            # dictionary banayi raw tabular data ke liye::HL]]
+[[HL::6      'Name': ['Rahul', 'Priya', 'Amit', 'Neha', 'Vikas', 'Raj'],::HL]]
+[[HL::7      'Age': [25, 28, 22, 31, 26, 29],::HL]]
+[[HL::8      'Salary': [50000, 60000, 45000, 80000, 55000, 48000]::HL]]
+[[HL::9  }::HL]]
+[[HL::10 df = pd.DataFrame(data_dict)             # pd.DataFrame() = raw dict ya list ko tabular object mein badalta hai::HL]]
 11 
-12 # ✅ Data Viewing Methods
-13 print("--- df.head() ---")
-14 print(df.head())                         # df.head() = default top 5 rows dikhata hai dataset preview ke liye
+[[HL::12 # ✅ Data Viewing Methods::HL]]
+[[HL::13 print("--- df.head() ---")::HL]]
+[[HL::14 print(df.head())                         # df.head() = default top 5 rows dikhata hai dataset preview ke liye::HL]]
 15 
-16 print("\n--- df.tail(2) ---")
-17 print(df.tail(2))                        # df.tail(2) = last 2 rows dikhata hai
+[[HL::16 print("\n--- df.tail(2) ---")::HL]]
+[[HL::17 print(df.tail(2))                        # df.tail(2) = last 2 rows dikhata hai::HL]]
 18 
-19 print("\n--- df.describe() ---")
-20 print(df.describe())                     # df.describe() = mean, standard deviation, aur percentiles nikalta hai (explained below ↓)
+[[HL::19 print("\n--- df.describe() ---")::HL]]
+[[HL::20 print(df.describe())                     # df.describe() = mean, standard deviation, aur percentiles nikalta hai (explained below ↓)::HL]]
 21 
-22 print("\n--- df.info() ---")
-23 df.info()                                # df.info() = kitni rows/cols hain aur data types kya hain, woh print karta hai::HL]]
+[[HL::22 print("\n--- df.info() ---")::HL]]
+[[HL::23 df.info()                                # df.info() = kitni rows/cols hain aur data types kya hain, woh print karta hai::HL]]
 
 ```
 
@@ -10168,10 +10167,10 @@ Successfully installed pandas-2.1.0
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ [[HL::Mistake:** Dataset load karne ke baad seedha print(`df`) karna, bina `df.head()` use kiye.::HL]]
+* [[HL::**❌ Mistake:** Dataset load karne ke baad seedha print(`df`) karna, bina `df.head()` use kiye.::HL]]
 * [[HL::**🤦 Why:** Beginner sochte hain poora data screen pe dekhna zaroori hai.::HL]]
-* [[HL::**✅ The 'Pro' Way:** Hamesha `df.head()` aur `df.info()` chalao::HL]].
-* **⚡ [[HL::Consequences:** Jupyter Notebook ya terminal hang/freeze ho sakta hai agar dataset mein 5 million rows hon aur tumne unhe ek baar mein print karne ki koshish ki::HL]].
+* [[HL::**✅ The 'Pro' Way:** Hamesha `df.head()` aur `df.info()` chalao.::HL]]
+* [[HL::**⚡ Consequences:** Jupyter Notebook ya terminal hang/freeze ho sakta hai agar dataset mein 5 million rows hon aur tumne unhe ek baar mein print karne ki koshish ki.::HL]]
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -10206,11 +10205,11 @@ Successfully installed pandas-2.1.0
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Feature | MS Excel | Pandas DataFrame |
+| [[HL::Feature::HL]] | [[HL::MS Excel::HL]] | [[HL::Pandas DataFrame::HL]] |
 | --- | --- | --- |
-| Limit | 1 Million Rows approx | RAM limits it (Easily 20-30 Million Rows) |
-| Automation | Manual clicking / Macros | Fully automated scripting (Python) |
-| Repeatability | Har bar manual steps lagte hain | Ek script se hamesha same clean dataset milta hai::HL]] |
+| [[HL::Limit::HL]] | [[HL::1 Million Rows approx::HL]] | [[HL::RAM limits it (Easily 20-30 Million Rows)::HL]] |
+| [[HL::Automation::HL]] | [[HL::Manual clicking / Macros::HL]] | [[HL::Fully automated scripting (Python)::HL]] |
+| [[HL::Repeatability::HL]] | [[HL::Har bar manual steps lagte hain::HL]] | [[HL::Ek script se hamesha same clean dataset milta hai::HL]] |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -10306,36 +10305,36 @@ DataFrame ek super-store ki tarah hai jisme hazaro products rakhe hain (rows/col
 # Python 3.9+ | pandas 2.0+
 1  import pandas as pd
 2  
-3  # [[HL::Mock DataFrame
-4  df = pd.DataFrame({
-5      'product': ['Laptop', 'Mouse', 'Keyboard', 'Monitor'],
-6      'price': [1200, 25, 45, 300],
-7      'reviews': [600, 120, 800, 450],
-8      'instock': ['yes', 'no', 'yes', 'yes']
-9  })
+3  # [[HL::Mock DataFrame::HL]]
+[[HL::4  df = pd.DataFrame({::HL]]
+[[HL::5      'product': ['Laptop', 'Mouse', 'Keyboard', 'Monitor'],::HL]]
+[[HL::6      'price': [1200, 25, 45, 300],::HL]]
+[[HL::7      'reviews': [600, 120, 800, 450],::HL]]
+[[HL::8      'instock': ['yes', 'no', 'yes', 'yes']::HL]]
+[[HL::9  })::HL]]
 10 
-11 # ✅ Select Single Column (Series return hoti hai)
-12 price_col = df['price']                          # Bracket ke andar column ka naam string form mein
-13 print("--- Single Column ---")
-14 print(price_col)
+[[HL::11 # ✅ Select Single Column (Series return hoti hai)::HL]]
+[[HL::12 price_col = df['price']                          # Bracket ke andar column ka naam string form mein::HL]]
+[[HL::13 print("--- Single Column ---")::HL]]
+[[HL::14 print(price_col)::HL]]
 15 
-16 # ✅ Select Multiple Columns (Double brackets lagte hain - nested list array nahi)
-17 mult_cols = df[['price', 'reviews', 'instock']]  # Notice: andar ek Python list di gayi hai ['a', 'b']
-18 print("\n--- Multiple Columns ---")
-19 print(mult_cols.head(2))
+[[HL::16 # ✅ Select Multiple Columns (Double brackets lagte hain - nested list array nahi)::HL]]
+[[HL::17 mult_cols = df[['price', 'reviews', 'instock']]  # Notice: andar ek Python list di gayi hai ['a', 'b']::HL]]
+[[HL::18 print("\n--- Multiple Columns ---")::HL]]
+[[HL::19 print(mult_cols.head(2))::HL]]
 20 
-21 # ✅ Conditional Row Selection (Single Condition)
-22 instock_items = df[df['instock'] == 'yes']       # Pehle mask banega (True/False), fir usko df[] mein pass kiya
-23 print("\n--- In-Stock Only ---")
-24 print(instock_items)
+[[HL::21 # ✅ Conditional Row Selection (Single Condition)::HL]]
+[[HL::22 instock_items = df[df['instock'] == 'yes']       # Pehle mask banega (True/False), fir usko df[] mein pass kiya::HL]]
+[[HL::23 print("\n--- In-Stock Only ---")::HL]]
+[[HL::24 print(instock_items)::HL]]
 25 
-26 # ✅ Multiple Conditions Selection (Bitwise operators)
-27 # Condition 1: instock == yes
-28 # Condition 2: reviews > 500
-29 # ⭐ Single ampersand '&' use hota hai, 'and' ya '&&' NAHI. Parentheses () lagana mandatory hai.
-30 popular_instock = df[(df['instock'] == 'yes') & (df['reviews'] > 500)] # Explained below ↓
-31 print("\n--- Popular AND Instock ---")
-32 print(popular_instock::HL]])
+[[HL::26 # ✅ Multiple Conditions Selection (Bitwise operators)::HL]]
+[[HL::27 # Condition 1: instock == yes::HL]]
+[[HL::28 # Condition 2: reviews > 500::HL]]
+[[HL::29 # ⭐ Single ampersand '&' use hota hai, 'and' ya '&&' NAHI. Parentheses () lagana mandatory hai.::HL]]
+[[HL::30 popular_instock = df[(df['instock'] == 'yes') & (df['reviews'] > 500)] # Explained below ↓::HL]]
+[[HL::31 print("\n--- Popular AND Instock ---")::HL]]
+[[HL::32 print(popular_instock)::HL]]
 
 ```
 
@@ -10365,14 +10364,14 @@ Name: price, dtype: int64
 0    Laptop   1200      [[HL::600     yes
 2  Keyboard     45      800     yes::HL]]
 
-[[HL::```::HL]]
+```
 
-[[HL::##### 🔬 Code Explanation::HL]]
+##### [[HL::🔬 Code Explanation::HL]]
 
-[[HL::* **Line 17:** `df[['price', 'reviews', 'instock']]` — Jab ek column select karna hota hai, toh outer bracket `[]` kaafi hai. Jab 1 se zyada columns laane hote hain, toh Pandas unhe as a list input leta hai. Isliye syntax `df[ ['col1', 'col2'] ]` dikhta hai (nested list). Agar ek bracket bhool gaye toh nested list error throw hoga::HL]].
+* [[HL::**Line 17:** `df[['price', 'reviews', 'instock']]` — Jab ek column select karna hota hai, toh outer bracket `[]` kaafi hai. Jab 1 se zyada columns laane hote hain, toh Pandas unhe as a list input leta hai. Isliye syntax `df[ ['col1', 'col2'] ]` dikhta hai (nested list). Agar ek bracket bhool gaye toh nested list error throw hoga.::HL]]
 * [[HL::**Line 30:** `(df['instock'] == 'yes') & (df['reviews'] > 500)` — Multiple conditions. Har condition ko gol brackets `()` mein daalna MUST hai, warna operation precedence (kaun pehle calculate hoga) fail ho jayega. ⭐Single ampersand (`&`) strictly use karna hai kyunki normal Python `and` array-wise calculations support nahi karta. Double ampersand (`&&`) C++/Java ka syntax hai, Python mein invalid hai.::HL]]
 
-[[HL::#### 🔒 8. Security-First Check::HL]]
+#### [[HL::🔒 8. Security-First Check::HL]]
 
 [[HL::*(N/A — is concept mein direct security surface nahi hai)*::HL]]
 
@@ -10533,26 +10532,26 @@ category   0
 12 print(messy_data.isna().sum())                           # df.isna().sum() = Har column me kitne NaN hain uska total do
 13 
 14 # --- Step 2: Missing Data Handle Karna ---
-15 # [[HL::Hum rating column me khali jagah pe mean (average) fill karenge:
-16 mean_rating = messy_data['rating'].mean()                # 4.23 avg aaya
-17 messy_data['rating'] = messy_data['rating'].fillna(mean_rating) # df.fillna() = jahan NaN hai, wahan ye number bhardo (static value fill bhi de sakte hain e.g. fillna(0::HL]]))
+[[HL::15 # Hum rating column me khali jagah pe mean (average) fill karenge:::HL]]
+[[HL::16 mean_rating = messy_data['rating'].mean()                # 4.23 avg aaya::HL]]
+[[HL::17 messy_data['rating'] = messy_data['rating'].fillna(mean_rating) # df.fillna() = jahan NaN hai, wahan ye number bhardo (static value fill bhi de sakte hain e.g. fillna(0))::HL]]
 18 
-19 # --- [[HL::Step 3: Data Type Conversion ---
-20 # Pehle 'unknown' text hatana padega warna float me change karte waqt: "could not convert string to float" error aayega
-21 messy_data['price'] = messy_data['price'].replace('unknown', np.nan) # text replace kiya
-22 messy_data['price'] = messy_data['price'].astype(float)              # df.astype(float) = object (string) ko float decimal number me badalna::HL]]
+[[HL::19 # --- Step 3: Data Type Conversion ---::HL]]
+[[HL::20 # Pehle 'unknown' text hatana padega warna float me change karte waqt: "could not convert string to float" error aayega::HL]]
+[[HL::21 messy_data['price'] = messy_data['price'].replace('unknown', np.nan) # text replace kiya::HL]]
+[[HL::22 messy_data['price'] = messy_data['price'].astype(float)              # df.astype(float) = object (string) ko float decimal number me badalna::HL]]
 23 
-24 # --- [[HL::Step 4: Basic String Cleaning ---
-25 # category fix karna: lower case conversion aur strip whitespaces
-26 messy_data['category'] = messy_data['category'].str.lower().str.strip() # .str API = har row pe lower() aur strip() apply karo chaining se::HL]]
+[[HL::24 # --- Step 4: Basic String Cleaning ---::HL]]
+[[HL::25 # category fix karna: lower case conversion aur strip whitespaces::HL]]
+[[HL::26 messy_data['category'] = messy_data['category'].str.lower().str.strip() # .str API = har row pe lower() aur strip() apply karo chaining se::HL]]
 27 
-28 # --- Step 5: Duplicate Removal ---
-29 [[HL::clean_df = messy_data.drop_duplicates()                  # df.drop_duplicates() = bilkul identical (same) rows ko delete kar deta hai::HL]]
+[[HL::28 # --- Step 5: Duplicate Removal ---::HL]]
+[[HL::29 clean_df = messy_data.drop_duplicates()                  # df.drop_duplicates() = bilkul identical (same) rows ko delete kar deta hai::HL]]
 30 
-31 print("\n--- FINAL CLEAN DATA ---")
-32 print(clean_df)
+[[HL::31 print("\n--- FINAL CLEAN DATA ---")::HL]]
+[[HL::32 print(clean_df)::HL]]
 33 
-34 # Note: Agar rows directly discard (phekni) hoti, toh hum explicitly call karte: clean_df.dropna() (jo null wali lines completely mita deta hai)
+[[HL::34 # Note: Agar rows directly discard (phekni) hoti, toh hum explicitly call karte: clean_df.dropna() (jo null wali lines completely mita deta hai)::HL]]
 
 ```
 
@@ -10628,10 +10627,10 @@ Jab dataset size limit (1 Million rows) ho toh missing values `.fillna()` se tur
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Feature | `df.dropna()` | `df.fillna()` |
+| [[HL::Feature::HL]] | [[HL::`df.dropna()`::HL]] | [[HL::`df.fillna()`::HL]] |
 | --- | --- | --- |
-| Functionality | Null wali saari rows completely delete (drop) mita deta hai | Null wale sections jagah par koi synthetic estimated static placeholder value bhar deta hai |
-| Use case | Jab bohot kam missing values (e.g. 1% nulls) missing tab unko safe delete karo | Jab extensive missing limit values (e.g. 30% empty space array limit rows empty) to original lines ko fix karo delete save row detail loss save karne ko::HL]]. |
+| [[HL::Functionality::HL]] | [[HL::Null wali saari rows completely delete (drop) mita deta hai::HL]] | [[HL::Null wale sections jagah par koi synthetic estimated static placeholder value bhar deta hai::HL]] |
+| [[HL::Use case::HL]] | [[HL::Jab bohot kam missing values (e.g. 1% nulls) missing tab unko safe delete karo::HL]] | [[HL::Jab extensive missing limit values (e.g. 30% empty space array limit rows empty) to original lines ko fix karo delete save row detail loss save karne ko.::HL]] |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -10759,7 +10758,7 @@ Socho tum ek data analyst ho aur data tumhari "groceries" hai. Groceries hamesha
 * [[HL::**Solution:** Pandas I/O functions (Input/Output) se hum hazaron rows ka data ek line mein Python mein la sakte hain::HL]].
 * [[HL::**What breaks if we don't use it?** Python ki default `open()` file handling se data padhna bohot slow aur manual hai (khud comma split karna padega) — large datasets pe script crash ho jayegi.::HL]]
 * [[HL::**✅ Kab use karo:** Jab bhi data kisi external text file (`data.csv`) ya spreadsheet se lana ho analysis/filtering ke liye::HL]].
-* **❌ [[HL::Kab mat karo / Alternative prefer karo:** Jab data kisi API ya SQL database mein ho — us case mein `read_json` ya `read_sql` use karo, pehle CSV download karke padhne ki zaroorat nahi hai::HL]].
+* [[HL::**❌ Kab mat karo / Alternative prefer karo:** Jab data kisi API ya SQL database mein ho — us case mein `read_json` ya `read_sql` use karo, pehle CSV download karke padhne ki zaroorat nahi hai.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -10773,11 +10772,11 @@ Project Folder/
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-[[HL::1. Jab hum `pd.read_csv()` chalate hain, Pandas file ko memory mein load karta hai.
-2. Woh pehli row ko by default **headers** (column names) maan leta hai.
-3. Uske baad woh separators (default comma `,`) check karta hai aur data ko columns mein todta hai.
-4. Agar `skiprows=2` diya hai, toh shuru ki 2 lines totally ignore karke 3rd line se headers banana shuru karega.
-5. Finally, ek unique **index** (0, 1, 2...) assign karta hai aur `DataFrame` object return karta hai::HL]].
+1. [[HL::Jab hum `pd.read_csv()` chalate hain, Pandas file ko memory mein load karta hai.::HL]]
+2. [[HL::Woh pehli row ko by default **headers** (column names) maan leta hai.::HL]]
+3. [[HL::Uske baad woh separators (default comma `,`) check karta hai aur data ko columns mein todta hai.::HL]]
+4. [[HL::Agar `skiprows=2` diya hai, toh shuru ki 2 lines totally ignore karke 3rd line se headers banana shuru karega.::HL]]
+5. [[HL::Finally, ek unique **index** (0, 1, 2...) assign karta hai aur `DataFrame` object return karta hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -10785,27 +10784,27 @@ Project Folder/
 # Python 3.9+ | Pandas 2.x
 1  import pandas as pd                                  # pandas library — tabular data handling ke liye
 2 
-3  # --- [[HL::Example 1: Basic CSV & Custom Separator ---
-4  # read_csv() = CSV file padh kar DataFrame banata hai; sep=';' ka matlab data semicolon se separated hai
-5  df_csv = pd.read_csv('data.csv', sep=';')            
+3  # --- Example 1: Basic CSV & Custom Separator ---
+[[HL::4  # read_csv() = CSV file padh kar DataFrame banata hai; sep=';' ka matlab data semicolon se separated hai::HL]]
+[[HL::5  df_csv = pd.read_csv('data.csv', sep=';')            ::HL]]
 6 
-7  # --- Example 2: Skip Rows & Use Columns ---
-8  # skiprows=2 : Upar ki 2 faltu rows (like titles) hata dega; usecols : Sirf inhi 2 columns ko memory mein layega
-9  df_clean = pd.read_csv('data.csv', skiprows=2, usecols=['city', 'status'])
+[[HL::7  # --- Example 2: Skip Rows & Use Columns ---::HL]]
+[[HL::8  # skiprows=2 : Upar ki 2 faltu rows (like titles) hata dega; usecols : Sirf inhi 2 columns ko memory mein layega::HL]]
+[[HL::9  df_clean = pd.read_csv('data.csv', skiprows=2, usecols=['city', 'status'])::HL]]
 10
-11 # Filtering Data (Topic 5 ka revision but integrated here)
-12 # df['city'] == 'Bangalore' : Boolean mask banayega jahan city Bangalore hai
-13 df_blr = df_clean[df_clean['city'] == 'Bangalore'] 
-14 # status == delivered check karna
-15 df_del = df_clean[df_clean['status'] == 'delivered'] 
+[[HL::11 # Filtering Data (Topic 5 ka revision but integrated here)::HL]]
+[[HL::12 # df['city'] == 'Bangalore' : Boolean mask banayega jahan city Bangalore hai::HL]]
+[[HL::13 df_blr = df_clean[df_clean['city'] == 'Bangalore'] ::HL]]
+[[HL::14 # status == delivered check karna::HL]]
+[[HL::15 df_del = df_clean[df_clean['status'] == 'delivered'] ::HL]]
 16
-17 # --- Example 3: Excel Files ---
-18 # read_excel() = Excel file padhega (openpyxl engine chahiye); sheet_name='Sheet2' se specific sheet uthayega
-19 df_excel = pd.read_excel('sales.xlsx', sheet_name='Sheet2') 
+[[HL::17 # --- Example 3: Excel Files ---::HL]]
+[[HL::18 # read_excel() = Excel file padhega (openpyxl engine chahiye); sheet_name='Sheet2' se specific sheet uthayega::HL]]
+[[HL::19 df_excel = pd.read_excel('sales.xlsx', sheet_name='Sheet2') ::HL]]
 20
-21 # Excel file ke saare sheet names dekhne ke liye (ExcelFile object ka use karke)
-22 xl = pd.ExcelFile('sales.xlsx')                      # ExcelFile() = File ko metadata ke sath load karta hai
-23 print(xl.sheet_names)                                # .sheet_names = ek list return karega saari sheets ki::HL]]
+[[HL::21 # Excel file ke saare sheet names dekhne ke liye (ExcelFile object ka use karke)::HL]]
+[[HL::22 xl = pd.ExcelFile('sales.xlsx')                      # ExcelFile() = File ko metadata ke sath load karta hai::HL]]
+[[HL::23 print(xl.sheet_names)                                # .sheet_names = ek list return karega saari sheets ki::HL]]
 
 ```
 
@@ -10832,8 +10831,8 @@ Large datasets mein saare columns load karna RAM crash karwa sakta hai. Industry
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
-* **❌ [[HL::Mistake:** Padhne se pehle file ka format na dekhna (e.g., TSV file ko bina separator ke read karna::HL]]).
-* **🤦 [[HL::Why:** Beginner seedha `pd.read_csv()` chalata hai aur jab output mein `\t` aate hain toh ghabra jata hai.::HL]]
+* [[HL::**❌ Mistake:** Padhne se pehle file ka format na dekhna (e.g., TSV file ko bina separator ke read karna::HL]]).
+* [[HL::**🤦 Why:** Beginner seedha `pd.read_csv()` chalata hai aur jab output mein `\t` aate hain toh ghabra jata hai.::HL]]
 * [[HL::**✅ The 'Pro' Way:** File pehle Notepad/VS Code mein khol ke dekho ki actual separator (`sep`) comma hai, semicolon hai, ya tab hai::HL]].
 * **⚡ Consequences:** Ghalat parsing se data ek single column (`Unnamed: 0`) mein merge ho jayega aur saare ML models fail ho jayenge.
 * **❌ Mistake:** Excel file bina dependency install kiye padhna.
@@ -10988,9 +10987,9 @@ Processing chunk 2...
 15 # mode='a' = append (purana delete nahi hoga); header=False = column names dobara print na hon
 16 df.to_csv('logs.csv', mode='a', header=False, index=False) 
 17
-18 # --- [[HL::3. Chunk Size Reading (For massive files e.g. 1 GB file on 16 GB RAM) ---
-19 # chunksize=1000 : Ek baar mein sirf 1000 rows load hongi, return karega ek generator object
-20 chunk_iterator = pd.read_csv('huge_file.csv', chunksize=1000::HL]]) 
+[[HL::18 # --- 3. Chunk Size Reading (For massive files e.g. 1 GB file on 16 GB RAM) ---::HL]]
+[[HL::19 # chunksize=1000 : Ek baar mein sirf 1000 rows load hongi, return karega ek generator object::HL]]
+[[HL::20 chunk_iterator = pd.read_csv('huge_file.csv', chunksize=1000) ::HL]]
 21
 22 for chunk in chunk_iterator:                         # Loop se 1000-1000 rows aayengi memory bacha kar
 23     print(f"Processed {len(chunk)} rows")
@@ -11051,10 +11050,10 @@ Jab hum append mode (`mode='a'`) use karte hain cloud storage (S3/Azure) mein ma
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Export Parameter | `header=True` (Default) | `header=False` |
+| [[HL::Export Parameter::HL]] | [[HL::`header=True` (Default)::HL]] | [[HL::`header=False`::HL]] |
 | --- | --- | --- |
-| Use Case | Nayi file banate waqt | Existing file mein Append (`mode='a'`) karte waqt |
-| Result | Column ke naam sabse upar print honge | Sirf data row print hogi, headers nahi::HL]] |
+| [[HL::Use Case::HL]] | [[HL::Nayi file banate waqt::HL]] | [[HL::Existing file mein Append (`mode='a'`) karte waqt::HL]] |
+| [[HL::Result::HL]] | [[HL::Column ke naam sabse upar print honge::HL]] | [[HL::Sirf data row print hogi, headers nahi::HL]] |
 
 #### 🌍 14. Real-World Use Case
 
@@ -11139,22 +11138,22 @@ Matplotlib ko ek "Whiteboard" aur "Painter" ki tarah socho. `Figure` tumhara poo
 * [[HL::**Solution:** Matplotlib data ko visuals mein convert kar deta hai (Line plot, pie chart) jisse pattern seconds mein samajh aata hai::HL]].
 * [[HL::**What breaks if we don't use it?** Business teams (CEO, Managers) ko tables dikhaoge toh woh context nahi samjhenge. Data representation ke bina Analysis adhoori hai.::HL]]
 * [[HL::**✅ Kab use karo:** Jab hume time ke sath chalne wala trend (e.g. Sales over months) dekhna ho toh **Line Plot** best hai::HL]].
-* **❌ [[HL::Kab mat karo / Alternative prefer karo:** Jab advanced statistical plotting karni ho (jaise automatically grouped regression lines), tab Seaborn (jo aage aayega) use karo — Matplotlib mein woh manually likhna lamba hota hai::HL]].
+* [[HL::**❌ Kab mat karo / Alternative prefer karo:** Jab advanced statistical plotting karni ho (jaise automatically grouped regression lines), tab Seaborn (jo aage aayega) use karo — Matplotlib mein woh manually likhna lamba hota hai.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 [[HL::Jab tum script (`mylineplot.py`) run karoge:::HL]]
 
-[[HL::1. Ek naya window/pop-up khulega.
-2. Us window ke andar ek Line Graph hoga red dash-line ke sath aur dots (`o`) as markers.
-3. Terminal tab tak pause rahega jab tak woh window close nahi karte::HL]].
+1. [[HL::Ek naya window/pop-up khulega.::HL]]
+2. [[HL::Us window ke andar ek Line Graph hoga red dash-line ke sath aur dots (`o`) as markers.::HL]]
+3. [[HL::Terminal tab tak pause rahega jab tak woh window close nahi karte.::HL]]
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. **[[HL::Canvas:** Sabse neeche backend level par drawing area create hota hai.
-2. **Figure:** Yeh main window hai. Ek Figure ke andar multiple graphs (subplots) ho sakte hain.
-3. **Axes:** Yeh actual chart hai jisme x-axis, y-axis aur data hota hai. Matplotlib in teeno layers ko combine karke memory mein image banata hai.
-4. **plt.show():** Jab yeh command run hoti hai, memory se image GUI window (Graphical User Interface) par render hoti hai.::HL]]
+1. [[HL::**Canvas:** Sabse neeche backend level par drawing area create hota hai.::HL]]
+2. [[HL::**Figure:** Yeh main window hai. Ek Figure ke andar multiple graphs (subplots) ho sakte hain.::HL]]
+3. [[HL::**Axes:** Yeh actual chart hai jisme x-axis, y-axis aur data hota hai. Matplotlib in teeno layers ko combine karke memory mein image banata hai.::HL]]
+4. [[HL::**plt.show():** Jab yeh command run hoti hai, memory se image GUI window (Graphical User Interface) par render hoti hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -11163,22 +11162,22 @@ Matplotlib ko ek "Whiteboard" aur "Painter" ki tarah socho. `Figure` tumhara poo
 1  import matplotlib.pyplot as plt                 # pyplot = Matplotlib ka module jo plotting commands deta hai
 2  import numpy as np                              # array creation ke liye
 3
-4  # --- [[HL::1. Data Preparation ---
-5  x = np.array([1, 2, 3, 4, 5])                   # X-axis ka data (e.g., Days)
-6  y = np.array([10, 25, 20, 50, 40])              # Y-axis ka data (e.g., Temperature)
+[[HL::4  # --- 1. Data Preparation ---::HL]]
+[[HL::5  x = np.array([1, 2, 3, 4, 5])                   # X-axis ka data (e.g., Days)::HL]]
+[[HL::6  y = np.array([10, 25, 20, 50, 40])              # Y-axis ka data (e.g., Temperature)::HL]]
 7
-8  # --- 2. Create Line Plot ---
-9  # plt.plot() = x aur y ko connect karke line banayega
-10 # color='red', linewidth=22, linestyle='--', marker='o' (dots)
-11 plt.plot(x, y, color='red', linewidth=2, linestyle='--', marker='o')
+[[HL::8  # --- 2. Create Line Plot ---::HL]]
+[[HL::9  # plt.plot() = x aur y ko connect karke line banayega::HL]]
+[[HL::10 # color='red', linewidth=22, linestyle='--', marker='o' (dots)::HL]]
+[[HL::11 plt.plot(x, y, color='red', linewidth=2, linestyle='--', marker='o')::HL]]
 12
-13 # --- 3. Chart Customization ---
-14 plt.title('Daily Temperature Trend')            # Chart ka title top par
-15 plt.xlabel('Days')                              # X-axis ka label
-16 plt.ylabel('Temp (C::HL]])')                          # Y-axis ka label
+[[HL::13 # --- 3. Chart Customization ---::HL]]
+[[HL::14 plt.title('Daily Temperature Trend')            # Chart ka title top par::HL]]
+[[HL::15 plt.xlabel('Days')                              # X-axis ka label::HL]]
+[[HL::16 plt.ylabel('Temp (C)')                          # Y-axis ka label::HL]]
 17
-18 # --- 4. Render Chart ---
-19 plt.show()                                      # [[HL::Parda hatao aur chart window screen par dikhao::HL]]
+[[HL::18 # --- 4. Render Chart ---::HL]]
+[[HL::19 plt.show()                                      # Parda hatao aur chart window screen par dikhao::HL]]
 
 ```
 
@@ -11205,9 +11204,9 @@ Matplotlib ko ek "Whiteboard" aur "Painter" ki tarah socho. `Figure` tumhara poo
 [[HL::#### ⚠️ 10. Industry Anti-Patterns & Common Mistakes::HL]]
 
 [[HL::* **❌ Mistake:** `plt.show()` ko script ke beech mein likhna::HL]].
-* **🤦 [[HL::Why:** `plt.show()` blocking call hai. Matlab jab tak user woh graph close nahi karega, aage ki lines of code execute nahi hongi.::HL]]
+* [[HL::**🤦 Why:** `plt.show()` blocking call hai. Matlab jab tak user woh graph close nahi karega, aage ki lines of code execute nahi hongi.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Saari plots aur logic upar likho, aur `plt.show()` script ki completely aakhri (last) line honi chahiye::HL]].
-* **⚡ [[HL::Consequences:** Agar server ya loop mein beech mein `plt.show()` aa gaya, toh poora program hang ho jayega execution pause karke::HL]].
+* [[HL::**⚡ Consequences:** Agar server ya loop mein beech mein `plt.show()` aa gaya, toh poora program hang ho jayega execution pause karke.::HL]]
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -11350,9 +11349,9 @@ Aap window ke top UI mein diye gaye 'Zoom tool' (ek magnifying glass icon) se gr
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. [[HL::**Scatter Plot:** Har (X, Y) pair ko as a single dot canvas par draw karta hai. Koi line inhe connect nahi karti.
-2. **Histogram:** Tumhara poora data range (e.g., 0 se 100) ko chote-chote distinct buckets (`bins`) mein todta hai. Phir count karta hai ki ek bucket mein kitne items gire, aur us count ko bar ki height banata hai::HL]].
-3. **Box Plot (IQR Method):** Data ko sort karke uske quartiles nikalta hai. Beech ka dabba (box) 25th percentile se 75th percentile tak banta hai (jisme 50% data hota hai). Jo box ke bahar door hota hai, woh outlier hota hai.
+1. [[HL::**Scatter Plot:** Har (X, Y) pair ko as a single dot canvas par draw karta hai. Koi line inhe connect nahi karti.::HL]]
+2. [[HL::**Histogram:** Tumhara poora data range (e.g., 0 se 100) ko chote-chote distinct buckets (`bins`) mein todta hai. Phir count karta hai ki ek bucket mein kitne items gire, aur us count ko bar ki height banata hai.::HL]]
+3. [[HL::**Box Plot (IQR Method):** Data ko sort karke uske quartiles nikalta hai. Beech ka dabba (box) 25th percentile se 75th percentile tak banta hai (jisme 50% data hota hai). Jo box ke bahar door hota hai, woh outlier hota hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -11425,10 +11424,10 @@ Jab 1 million rows ka scatter plot banate hain, toh default circles browser ya s
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
-* **❌ [[HL::Mistake:** Distribution (e.g., student marks spread) dikhane ke liye Bar Chart use karna.::HL]]
+* [[HL::**❌ Mistake:** Distribution (e.g., student marks spread) dikhane ke liye Bar Chart use karna.::HL]]
 * [[HL::**🤦 Why:** Beginners ko Bar aur Histogram ek jaise "dande" wale graphs lagte hain.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Distribution ke liye hamesha `plt.hist()` use karo. Bar chart distinct categories (Apple vs Mango) ke liye hota hai::HL]].
-* **⚡ [[HL::Consequences:** Agar continuous data (age, income) ko bar chart mein daala, toh X-axis par hazaron distinct bars ban jayenge aur screen completely blank/black out ho jayegi::HL]].
+* [[HL::**⚡ Consequences:** Agar continuous data (age, income) ko bar chart mein daala, toh X-axis par hazaron distinct bars ban jayenge aur screen completely blank/black out ho jayegi.::HL]]
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -11499,8 +11498,8 @@ E-commerce companies (jaise Amazon) apne return data ka **Box Plot** banati hain
 * [[HL::**A:** Style function global state change karta hai. Isliye isse hamesha script ke top par, package imports ke turant baad set karna chahiye. Agar plots generate hone ke baad style apply kiya, toh pehle waale plots purane default (boring) style mein hi generate honge::HL]].
 * [[HL::**Q:** Scatter plot mein `alpha` parameter data analysis mein kaise help karta hai?::HL]]
 * [[HL::**A:** Jab humare paas 10,000 points hote hain, toh bohot saare dots ek hi coordinates ke aas-paas aate hain jisse ek "solid blob" ban jata hai (overplotting). `alpha` (opacity) set karne se overlapping points mil kar darker shade banate hain, aur single points light rehte hain, jisse density easily reveal ho jati hai.::HL]]
-* [[HL::**Q:** Tumhare dataset mein kuch students ki age 20-25 hai, aur ek student galti se 250 type ho gaya. Isse kaise visually pakdenge::HL]]?
-* [[HL::**A:** ⭐ Box plot is mostly used for outlier detection. Jab main age column par `plt.boxplot()` run::HL]] karunga, toh mujhe 20-25 ke paas ek normal box dikhega, aur 250 ekdam top par alag thalag dot (outlier) banke chamkega, jisse error pakdi jayegi.
+* [[HL::**Q:** Tumhare dataset mein kuch students ki age 20-25 hai, aur ek student galti se 250 type ho gaya. Isse kaise visually pakdenge?::HL]]
+* [[HL::**A:** ⭐ Box plot is mostly used for outlier detection. Jab main age column par `plt.boxplot()` run karunga, toh mujhe 20-25 ke paas ek normal box dikhega, aur 250 ekdam top par alag thalag dot (outlier) banke chamkega, jisse error pakdi jayegi.::HL]]
 
 #### 📝 18. One-Line Memory Hook
 
@@ -11580,30 +11579,30 @@ Project Folder/
 1  import matplotlib.pyplot as plt
 2  import numpy as np
 3
-4  # --- [[HL::1. ITC Cigarette Sales Trend Data (Mock data) ---
-5  # np.arange(1, 11) = 1 se 10 tak ke numbers ka array dega (Months)
-6  months = np.arange(1, 11)                           
-7  revenue = np.array([50, 55, 60, 45, 30, 35, 40, 55, 65, 70]) # Government tax aane pe revenue 60 se 45 gira, phir wapas recover hua
+[[HL::4  # --- 1. ITC Cigarette Sales Trend Data (Mock data) ---::HL]]
+[[HL::5  # np.arange(1, 11) = 1 se 10 tak ke numbers ka array dega (Months)::HL]]
+[[HL::6  months = np.arange(1, 11)                           ::HL]]
+[[HL::7  revenue = np.array([50, 55, 60, 45, 30, 35, 40, 55, 65, 70]) # Government tax aane pe revenue 60 se 45 gira, phir wapas recover hua::HL]]
 8
-9  # --- 2. Create the Plot Canvas ---
-10 # figsize=(10, 5) = canvas ki chaudaai(width) 10 aur lambaai(height) 5 inches set karega
-11 plt.figure(figsize=(10, 5))                         
+[[HL::9  # --- 2. Create the Plot Canvas ---::HL]]
+[[HL::10 # figsize=(10, 5) = canvas ki chaudaai(width) 10 aur lambaai(height) 5 inches set karega::HL]]
+[[HL::11 plt.figure(figsize=(10, 5))                         ::HL]]
 12
-13 plt.plot(months, revenue, marker='o', color='red', linewidth=2)
-14 plt.title('ITC Cigarette Sales Trend (Tax Impact)')
-15 plt.xlabel('Months')
-16 plt.ylabel('Revenue (in Cr)')
+[[HL::13 plt.plot(months, revenue, marker='o', color='red', linewidth=2)::HL]]
+[[HL::14 plt.title('ITC Cigarette Sales Trend (Tax Impact)')::HL]]
+[[HL::15 plt.xlabel('Months')::HL]]
+[[HL::16 plt.ylabel('Revenue (in Cr)')::HL]]
 17
-18 # plt.grid() = chart ke background mein halki lines banayega taaki values clearly padhi ja sakein
-19 plt.grid()                                          
+[[HL::18 # plt.grid() = chart ke background mein halki lines banayega taaki values clearly padhi ja sakein::HL]]
+[[HL::19 plt.grid()                                          ::HL]]
 20
-21 # --- 3. Save the Plot BEFORE showing it ---
-22 # savefig = image save karo. Matplotlib extension (.png/.pdf) dekh ke file format decide karta hai.
-23 plt.savefig('dailysales.png')                       
-24 plt.savefig('sales_report.pdf')                     # PDF generation (Vector format - zoom karne pe fategi nahi)
+[[HL::21 # --- 3. Save the Plot BEFORE showing it ---::HL]]
+[[HL::22 # savefig = image save karo. Matplotlib extension (.png/.pdf) dekh ke file format decide karta hai.::HL]]
+[[HL::23 plt.savefig('dailysales.png')                       ::HL]]
+[[HL::24 plt.savefig('sales_report.pdf')                     # PDF generation (Vector format - zoom karne pe fategi nahi)::HL]]
 25
-26 print("Images successfully saved!")
-27 # plt.show() # Optional: Agar tum screen par bhi dekhna chahte ho save hone ke baad::HL]]
+[[HL::26 print("Images successfully saved!")::HL]]
+[[HL::27 # plt.show() # Optional: Agar tum screen par bhi dekhna chahte ho save hone ke baad::HL]]
 
 ```
 
@@ -11630,7 +11629,7 @@ Web dashboards mein agar filename dynamically user input se ban raha hai (e.g., 
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
-* **❌ [[HL::Mistake:** `plt.show()` ke baad `plt.savefig()` call karna.::HL]]
+* [[HL::**❌ Mistake:** `plt.show()` ke baad `plt.savefig()` call karna.::HL]]
 * [[HL::**🤦 Why:** Jab tum `plt.show()` chalate ho aur window close karte ho, canvas (Figure) memory se wipe/clear ho jata hai! Uskay baad savefig chalega toh folder mein bilkul blank/white image save hogi::HL]].
 * **✅ The 'Pro' Way:** Hamesha pehle `savefig` call karo disk mein image bachane ke liye, phir end mein (optional) `show()` call karo.
 * **⚡ Consequences:** Tum automation report bhejoge aur CEO ko ek dum kora (blank) safed graph PDF receive hogi!
@@ -11752,7 +11751,7 @@ Matplotlib ek manual car (stick shift) ki tarah hai jahan tumhe gear, clutch aur
 * [[HL::**Solution:** Seaborn mein `hue='sex'` parameter use karte hi saari grouping, math calculation aur coloring automatically ek line mein ho jati hai::HL]].
 * [[HL::**What breaks if we don't use it?** Exploratory Data Analysis (EDA) bohot slow ho jayega. Data analyst ka maximum time loops likhne aur style manually fix karne mein chala jayega bajaye insights nikalne ke.::HL]]
 * [[HL::**✅ Kab use karo:** Jab DataFrame ready ho aur multi-dimensional relations (categories, sizes, trends with average math) fast explore karni ho::HL]].
-* **❌ [[HL::Kab mat karo / Alternative prefer karo:** Jab tumhe graph ki ek-ek line/pixel par extreme low-level control chahiye (custom geometries draw karne hon), tab Matplotlib direct better hai::HL]].
+* [[HL::**❌ Kab mat karo / Alternative prefer karo:** Jab tumhe graph ki ek-ek line/pixel par extreme low-level control chahiye (custom geometries draw karne hon), tab Matplotlib direct better hai.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -11775,24 +11774,24 @@ Lekin is baar chart colors bohot soothing honge (default Seaborn theme), legend 
 1  import seaborn as sns                               # sns = Standard short alias (Seaborn ka naam Samuel Norman Seaborn se aata hai)
 2  import matplotlib.pyplot as plt                     # plt.show() chalane ke liye zaroori hai!
 3
-4  # --- [[HL::1. Load Built-in Datasets ---
-5  # sns.load_dataset internet se csv fetch karke Pandas DataFrame (df) return karta hai
-6  df = sns.load_dataset('tips')                       # Restaurant billing data (total_bill, tip, sex, size)
-7  df_pen = sns.load_dataset('penguins')               # Penguins dataset
+[[HL::4  # --- 1. Load Built-in Datasets ---::HL]]
+[[HL::5  # sns.load_dataset internet se csv fetch karke Pandas DataFrame (df) return karta hai::HL]]
+[[HL::6  df = sns.load_dataset('tips')                       # Restaurant billing data (total_bill, tip, sex, size)::HL]]
+[[HL::7  df_pen = sns.load_dataset('penguins')               # Penguins dataset::HL]]
 8
-9  # --- 2. Scatter Plot with Grouping ---
-10 # hue='sex' : male aur female dots ka color auto-separate karega
-11 # size='size' : jis table pe log zyada the (party size), woh dot badi ho jayegi
-12 sns.scatterplot(x='total_bill', y='tip', data=df, hue='sex', size='size')
-13 plt.title('Bill vs Tip Relation')
-14 plt.show()                                          # 🔴 ZAROORI: Seaborn ko display Matplotlib se hi karwana padta hai
+[[HL::9  # --- 2. Scatter Plot with Grouping ---::HL]]
+[[HL::10 # hue='sex' : male aur female dots ka color auto-separate karega::HL]]
+[[HL::11 # size='size' : jis table pe log zyada the (party size), woh dot badi ho jayegi::HL]]
+[[HL::12 sns.scatterplot(x='total_bill', y='tip', data=df, hue='sex', size='size')::HL]]
+[[HL::13 plt.title('Bill vs Tip Relation')::HL]]
+[[HL::14 plt.show()                                          # 🔴 ZAROORI: Seaborn ko display Matplotlib se hi karwana padta hai::HL]]
 15
-16 # --- 3. Line Plot with Confidence Interval (Math Engine) ---
-17 # Yahan x='size' pe multiple different tips hain. Seaborn un sabka 'mean' lega
-18 # Aur ek light shaded area banayega (⭐95% confidence interval) indicating stability
-19 sns.lineplot(x='size', y='tip', data=df)
-20 plt.title('Tip Trend by Party Size')
-21 plt.show::HL]]()
+[[HL::16 # --- 3. Line Plot with Confidence Interval (Math Engine) ---::HL]]
+[[HL::17 # Yahan x='size' pe multiple different tips hain. Seaborn un sabka 'mean' lega::HL]]
+[[HL::18 # Aur ek light shaded area banayega (⭐95% confidence interval) indicating stability::HL]]
+[[HL::19 sns.lineplot(x='size', y='tip', data=df)::HL]]
+[[HL::20 plt.title('Tip Trend by Party Size')::HL]]
+[[HL::21 plt.show()::HL]]
 
 ```
 
@@ -11852,11 +11851,11 @@ Seaborn industry mein EDA (Exploratory Data Analysis) ke liye absolute standard 
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Task | Matplotlib Approach | Seaborn Approach |
+| [[HL::Task::HL]] | [[HL::Matplotlib Approach::HL]] | [[HL::Seaborn Approach::HL]] |
 | --- | --- | --- |
-| Auto Color Categories | Manually loops chalao, colors array banao | `hue='column_name'` lagao bas |
-| Auto Confidence Shade | Manually std deviation nikalo `fill_between` chalao | `sns.lineplot()` by default khud karta hai |
-| Code length | Bohot lamba | 1 line convenience utility::HL]] |
+| [[HL::Auto Color Categories::HL]] | [[HL::Manually loops chalao, colors array banao::HL]] | [[HL::`hue='column_name'` lagao bas::HL]] |
+| [[HL::Auto Confidence Shade::HL]] | [[HL::Manually std deviation nikalo `fill_between` chalao::HL]] | [[HL::`sns.lineplot()` by default khud karta hai::HL]] |
+| [[HL::Code length::HL]] | [[HL::Bohot lamba::HL]] | [[HL::1 line convenience utility::HL]] |
 
 #### 🌍 14. Real-World Use Case
 
@@ -11961,9 +11960,9 @@ Screen par sequentially popups aayenge:
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. [[HL::**Count Plot:** Yeh strictly frequency ginta hai. (e.g., Sunday = 50 rows, Monday = 30 rows).
-2. **Bar Plot:** Seaborn ka barplot Matplotlib jaisa nahi hai. Yeh Y-axis par values ka **mean** (average) calculate karta hai, aur point spread se **variance** nikal kar bar ke top par ek vertical black line (error bar) chipka deta hai.
-3. **Correlation Matrix:** DataFrame ka `df.corr()` default **Pearson correlation coefficient** chalata hai. Yeh metric -1 (ultee disha) se +1 (saath chalna) tak hoti hai. 0 matlab koi relation nahi. `sns.heatmap` bas un numbers ko matrix colors mein paint kar deta hai::HL]].
+1. [[HL::**Count Plot:** Yeh strictly frequency ginta hai. (e.g., Sunday = 50 rows, Monday = 30 rows).::HL]]
+2. [[HL::**Bar Plot:** Seaborn ka barplot Matplotlib jaisa nahi hai. Yeh Y-axis par values ka **mean** (average) calculate karta hai, aur point spread se **variance** nikal kar bar ke top par ek vertical black line (error bar) chipka deta hai.::HL]]
+3. [[HL::**Correlation Matrix:** DataFrame ka `df.corr()` default **Pearson correlation coefficient** chalata hai. Yeh metric -1 (ultee disha) se +1 (saath chalna) tak hoti hai. 0 matlab koi relation nahi. `sns.heatmap` bas un numbers ko matrix colors mein paint kar deta hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -11972,33 +11971,33 @@ Screen par sequentially popups aayenge:
 1  import seaborn as sns
 2  import matplotlib.pyplot as plt
 3
-4  df = sns.load_dataset('tips')                           # [[HL::Built-in tips dataset
+[[HL::4  df = sns.load_dataset('tips')                           # Built-in tips dataset::HL]]
 5
-6  # --- 1. Count Plot (Frequency) ---
-7  # sns.countplot() sirf ek axis (x) leta hai aur us column ke occurrences ginta hai
-8  sns.countplot(x='day', data=df)
-9  plt.title('Frequency of visits per day')
-10 plt.show()
+[[HL::6  # --- 1. Count Plot (Frequency) ---::HL]]
+[[HL::7  # sns.countplot() sirf ek axis (x) leta hai aur us column ke occurrences ginta hai::HL]]
+[[HL::8  sns.countplot(x='day', data=df)::HL]]
+[[HL::9  plt.title('Frequency of visits per day')::HL]]
+[[HL::10 plt.show()::HL]]
 11
-12 # --- 2. Bar Plot (Mean and Variance / Volatility) ---
-13 # Yahan x day hai aur y total_bill. Yeh har din ki AVERAGE nikalega
-14 sns.barplot(x='day', y='total_bill', data=df)
-15 plt.title('Average Bill per Day (with Error Bars)')
-16 plt.show()
+[[HL::12 # --- 2. Bar Plot (Mean and Variance / Volatility) ---::HL]]
+[[HL::13 # Yahan x day hai aur y total_bill. Yeh har din ki AVERAGE nikalega::HL]]
+[[HL::14 sns.barplot(x='day', y='total_bill', data=df)::HL]]
+[[HL::15 plt.title('Average Bill per Day (with Error Bars)')::HL]]
+[[HL::16 plt.show()::HL]]
 17
-18 # sns.boxplot(x='day', y='total_bill', data=df) # boxplot for strict outliers also works here
+[[HL::18 # sns.boxplot(x='day', y='total_bill', data=df) # boxplot for strict outliers also works here::HL]]
 19 
-20 # --- 3. Heat Map & Correlation Matrix ---
-21 # df.corr() Pearson correlation coefficient matrix deta hai
-22 # numeric_only=True = Text columns ('sex', 'day') ko ignore karo warna error aayega
-23 corr_matrix = df.corr(numeric_only=True)
-24 print("Correlation Matrix:")
-25 print(corr_matrix)
+[[HL::20 # --- 3. Heat Map & Correlation Matrix ---::HL]]
+[[HL::21 # df.corr() Pearson correlation coefficient matrix deta hai::HL]]
+[[HL::22 # numeric_only=True = Text columns ('sex', 'day') ko ignore karo warna error aayega::HL]]
+[[HL::23 corr_matrix = df.corr(numeric_only=True)::HL]]
+[[HL::24 print("Correlation Matrix:")::HL]]
+[[HL::25 print(corr_matrix)::HL]]
 26
-27 # annot=True = Dabbo(tiles) ke andar exact relation ki number value (e.g. 0.68) type karke dikhayega
-28 sns.heatmap(corr_matrix, annot=True, cmap='coolwarm')
-29 plt.title('Data Relation Heatmap')
-30 plt.show::HL]]()
+[[HL::27 # annot=True = Dabbo(tiles) ke andar exact relation ki number value (e.g. 0.68) type karke dikhayega::HL]]
+[[HL::28 sns.heatmap(corr_matrix, annot=True, cmap='coolwarm')::HL]]
+[[HL::29 plt.title('Data Relation Heatmap')::HL]]
+[[HL::30 plt.show()::HL]]
 
 ```
 
@@ -12191,10 +12190,10 @@ Project Setup State:
 
 [[HL::**Step-by-Step Flow of Data Analyst Setup:**::HL]]
 
-[[HL::1. **Client Brief:** Real estate advisory firm ne demand di — "Batao Gurgaon mein flat prices kis par depend karte hain?"
-2. **Data Acquisition:** Analyst Kaggle pe jaata hai aur `data.csv` download karta hai jisme property ki sari properties (details) likhi hain.
-3. **First Glance (df.head):** Analyst data ko Pandas mein load karke sirf 5 properties check karta hai.
-4. **Data Dictionary Mapping:** Analyst columns ka meaning samajhta hai::HL]]:
+1. [[HL::**Client Brief:** Real estate advisory firm ne demand di — "Batao Gurgaon mein flat prices kis par depend karte hain?"::HL]]
+2. [[HL::**Data Acquisition:** Analyst Kaggle pe jaata hai aur `data.csv` download karta hai jisme property ki sari properties (details) likhi hain.::HL]]
+3. [[HL::**First Glance (df.head):** Analyst data ko Pandas mein load karke sirf 5 properties check karta hai.::HL]]
+4. [[HL::**Data Dictionary Mapping:** Analyst columns ka meaning samajhta hai:::HL]]
 * `Property type` (Flat vs Villa).
 * `Status` — Kya property `ready to move` (ban chuki hai) ya `under construction` (abhi ban rahi hai) hai?
 * `RERA approved` — Kya project government rules registered (safe) hai?
