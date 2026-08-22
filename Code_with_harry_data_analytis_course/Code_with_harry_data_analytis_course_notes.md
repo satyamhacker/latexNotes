@@ -307,7 +307,7 @@ Financial analysts jab kisi badi company (jaise HDFC Bank) ka P&L (Profit & Loss
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
 * **Testing/Offline Phase:** Naya user interface tools (Toolbar) aur Formula Bar ko freely explore karta hai. Draw tab ya Insert tab khol kar dekhta hai kya options hain.
-* **Fixing/Iteration Phase:** Typing ke dauran galat text likhne par (e.g. "sitting" instead of "sat") user turant **Undo** (`Ctrl + [[HL::Z`) aur **Redo** (`Ctrl::HL]] + Y`) buttons use karke corrections karta hai.
+* **Fixing/Iteration Phase:** Typing ke dauran galat text likhne par (e.g. "sitting" instead of "sat") user turant **Undo[[HL::** (`Ctrl + Z`) aur **Redo** (`Ctrl::HL]] + Y`) buttons use karke corrections karta hai.
 * **Live Production Phase:** Space constraint hone par (jab data bohot bada ho), user ⭐**Home tab** pe double-click karke ribbon hide karta hai. Aur precise viewing ke liye external mouse se **control mouse wheel** ghuma kar zoom in/out karta hai.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
@@ -1058,11 +1058,11 @@ Finance sector (Banks) mein **Accounting** format strict industry standard hai. 
 | --- | --- | --- |
 | Ratio/Maths | **Fraction** | `1/4` |
 | Growth/Rate | **Percentage** | `25%` |
-| Standard decimal | **General / Number** | `0.[[HL::25` ::HL]]|[[HL::
+| Standard decimal | **General / Number** | `0.[[HL::25` ::HL]]|
 
-#### 🌍 14. Real-World Use Case (Production Application)
+[[HL::#### 🌍 14. Real-World Use Case (Production Application)::HL]]
 
-Jab HR department international employees ko offer letters (salary break-up) issue karta hai, toh Excel ke backend par ek hi number hota hai. Ek Indian employee ke liye Custom format laga kar us value ko `::HL]]₹ 12,00,[[HL::000` (Indian comma system) aur US employee ke liye same value convert karke `::HL]]$ 15,000` dikhaya jata hai, taaki localized professional lag sake.
+[[HL::Jab HR department international employees ko offer letters (salary break-up) issue karta hai, toh Excel ke backend par ek hi number hota hai. Ek Indian employee ke liye Custom format laga kar us value ko `::HL]]₹ 12,00,[[HL::000` (Indian comma system) aur US employee ke liye same value convert karke `::HL]]$ 15,000` dikhaya jata hai, taaki localized professional lag sake.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -1453,9 +1453,9 @@ Industry dashboards mein 5 lakh rows hoti hain. Wahan ek-ek karke formula **⭐d
 
 | [[HL::Type::HL]] | [[HL::Example::HL]] | [[HL::Advantage::HL]] |
 | --- | --- | --- |
-| [[HL::Hardcoded::HL]] | [[HL::`=34+67+55`::HL]] | [[HL::Data pata hota hai (static) par change pe fail ho jata hai.::HL]] |
-| [[HL::Cell Referencing::HL]] | [[HL::`=B2+C2+D2`::HL]] | [[HL::Data badalne par automatic recalculate hota hai.::HL]] |
-| [[HL::AutoSum Shortcut::HL]] | [[HL::`Alt + =`::HL]] | [[HL::Lambi column ke liye type nahi karna padta, range pick karta hai::HL]]. |
+| [[HL::Hardcoded::HL]] | `=34+67+55`::HL]] | [[HL::Data pata hota hai (static) par change pe fail ho jata hai.::HL]] |
+| [[HL::Cell Referencing::HL]] | `=B2+C2+D2`::HL]] | [[HL::Data badalne par automatic recalculate hota hai.::HL]] |
+| [[HL::AutoSum Shortcut::HL]] | `Alt + =`::HL]] | [[HL::Lambi column ke liye type nahi karna padta, range pick karta hai::HL]]. |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -1515,7 +1515,7 @@ Retail billing systems (jaise supermarket point of sale backend) mein jab invoic
 ### 🎯 Topic: 2. Absolute vs Relative References
 
 (Relative References, Absolute References, Freezing Columns, Freezing Rows)
-**Overview:** Jab hum formula drag/copy karte hain toh Excel naturally cells ko shift karta hai. Is topic mein hum seekhenge ki us shift ko kab aur kaise rokein "Dollar" (`$[[HL::`) sign (absolute logic) ka use karke. Yeh Excel data analytics ka sabse important fundamental hai.
+**Overview:** Jab hum formula drag/copy karte hain toh Excel naturally cells ko shift karta hai. Is topic mein hum seekhenge ki us shift ko kab aur kaise rokein "Dollar" (`$`) sign (absolute logic) ka use karke. Yeh Excel data analytics ka sabse important fundamental hai.
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -1539,15 +1539,15 @@ Socho ek "garib rishtedar" (Relative Reference) hai jiske paas dollar nahi hain 
 
 [[HL::Formula Bar mein reference kuch is tarah dikhta hai:::HL]]
 
-* [[HL::`F2` (Dono khule, kahin bhi hil sakte hain - Relative).::HL]]
-* [[HL::`$F$2` (Column F lock hai, Row 2 lock hai - Absolute).::HL]]
-* [[HL::`⭐$prefix` wala option keyboard shortcut `F4` dabane se edit mode mein baar-baar toggle hota hai (`F2` -> `$F$2` -> `F$2` -> `$F2`::HL]]).
+* `F2` (Dono khule, kahin bhi hil sakte hain - Relative).::HL]]
+* `$F$2` (Column F lock hai, Row 2 lock hai - Absolute).::HL]]
+* `⭐$prefix` wala option keyboard shortcut `F4` dabane se edit mode mein baar-baar toggle hota hai (`F2` -> `$F$2` -> `F$2` -> `$F2`::HL]]).
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
 * **Vector Transformation:** Jab Excel formula ko drag karta hai, toh wo background mein X aur Y coordinates dekhta hai. Agar formula ek cell right (**drag to the right**) ja raha hai, toh +1 Column coordinate shift lagta hai (F -> G).
 * [[HL::**The Dollar Override:** **dollar sign** (`$`) Excel engine ka "Pin" command hai.::HL]]
-* [[HL::`$F2` (Mixed): Iska column freeze the column hai. Niche (drag down) le jaoge toh row 2 se 3 ho jayegi, par right le jaoge toh F, G nahi banega::HL]].
+* `$F2` (Mixed): Iska column freeze the column hai. Niche (drag down) le jaoge toh row 2 se 3 ho jayegi, par right le jaoge toh F, G nahi banega::HL]].
 * `⭐F$2` (Mixed): Iski row freeze the row hai. Niche le jaoge toh Row 2 hi rahegi (lock), par right drag karoge toh column G ban jayega.
 
 
@@ -1636,11 +1636,11 @@ Finance aur accounting ke complex models (jaise Loan Amortization tables) mein "
 | **Relative Reference** | `F2` | Khul ke shift hota hai (Niche F3, Right G2). ("Garib") |
 | **Absolute Reference** | `$F$2` | Bilkul fixed rehta hai. Kahin bhi drag karo, $F$2 hi rahega. ("Ameer") |
 | **Mixed (Freeze Column)** | `$F2` | Column F fixed rahega, lekin niche jane pe row change hogi (2 -> 3). |
-| **Mixed (Freeze Row)** | `F$[[HL::2` ::HL]]|[[HL:: Row 2 fixed rahegi, lekin right jane pe column change hoga (F -> G). ::HL]]|[[HL::
+| **Mixed (Freeze Row)** | `F$[[HL::2` ::HL]]|[[HL:: Row 2 fixed rahegi, lekin right jane pe column change hoga (F -> G). ::HL]]|
 
-#### 🌍 14. Real-World Use Case (Production Application)
+[[HL::#### 🌍 14. Real-World Use Case (Production Application)::HL]]
 
-Jab e-commerce platform pe currency convertor model banaya jata hai, toh Cell J1 mein 1 USD = 83 INR (Fixed rate) rakha jata hai. Database ki hajaro product sales in Dollars aati hain. Jab unhe INR mein convert karte hain toh `::HL]]=Sale_$ * $J$1` use hota hai. Agar Relative referencing chord diya toh hajaro line ki report ruin ho jayegi kyunki J1 automatically shift ho ke J2, J3 point karne lagega.
+[[HL::Jab e-commerce platform pe currency convertor model banaya jata hai, toh Cell J1 mein 1 USD = 83 INR (Fixed rate) rakha jata hai. Database ki hajaro product sales in Dollars aati hain. Jab unhe INR mein convert karte hain toh `::HL]]=Sale_$ * $J$1` use hota hai. Agar Relative referencing chord diya toh hajaro line ki report ruin ho jayegi kyunki J1 automatically shift ho ke J2, J3 point karne lagega.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -1817,7 +1817,7 @@ Jab senior Quants (Quantitative analysts) banking calculations jaise Compound In
 
 
 * **`Equation me missing parentheses/Brackets mismatch error message`**
-* **Root Cause:** Tumne open bracket `([[HL::` lagaya par close `::HL]])` karna bhool gaye.
+* **Root Cause:** Tumne open bracket `(` lagaya par close `::HL]])` karna bhool gaye.
 * **Fix:** Formula bar me dhyaan se dekho, Excel brackets ki color matching (red, green, black pairs) automatically highlight karta hai. Jo color akela chhot gaya hai waha completion mark lagao.
 
 
@@ -1828,11 +1828,11 @@ Jab senior Quants (Quantitative analysts) banking calculations jaise Compound In
 | --- | --- | --- |
 | Equation | `=10+20*2` | `=10+20*2` |
 | How we read | (10+20) = 30. Then 30*2 = 60. | VIP Mult: 20*2 = 40. Then 10+40 = 50. |
-| Solution Output | 60 (Agar proper parenthesis ho `(10+20)*[[HL::2`) ::HL]]|[[HL:: 50 (By Default Without parentheses) ::HL]]|[[HL::
+| Solution Output | 60 (Agar proper parenthesis ho `(10+20)*[[HL::2`) ::HL]]|[[HL:: 50 (By Default Without parentheses) ::HL]]|
 
-#### 🌍 14. Real-World Use Case (Production Application)
+[[HL::#### 🌍 14. Real-World Use Case (Production Application)::HL]]
 
-Data Science roles me jab analysts algorithms (like normalisation equation `::HL]](x - min) / (max - min)`) ko Excel par verify karte hain toh exact precedence rules bohot sensitive hote hain. Agar bracket omission hua, to value galat normalize hoke model pipeline train crash karwayegi. Evaluate formula debug is scenario me unka best validation test tool hota hai.
+[[HL::Data Science roles me jab analysts algorithms (like normalisation equation `::HL]](x - min) / (max - min)`) ko Excel par verify karte hain toh exact precedence rules bohot sensitive hote hain. Agar bracket omission hua, to value galat normalize hoke model pipeline train crash karwayegi. Evaluate formula debug is scenario me unka best validation test tool hota hai.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -1930,7 +1930,7 @@ Is section mein hum Excel ke inbuilt (pehle se bane hue) formulas ko use karna s
 #### 🐣 2. Simple Analogy (Hinglish)
 
 Speaker ne ek bohot badhiya school ka example diya: Socho ek Principal apne Math teacher ko bulata hai aur kehta hai, "Mujhe check karni hai tumhari teaching quality. Mujhe class ke lowest marks, highest marks aur average (ausat) marks nikal kar do."
-Agar teacher har bacche ke marks paper pe likh kar calculator pe add karega, toh subah se shaam ho jayegi. Excel yahan ek smart assistant ka kaam karta hai. Tum bas usse commands dete ho — [[HL::`MIN` (sabse kam laao), `MAX` (sabse zyada laao), aur `AVERAGE` (sabka total karke count se divide karo) — aur result ek second mein saamne aa jata hai::HL]].
+Agar teacher har bacche ke marks paper pe likh kar calculator pe add karega, toh subah se shaam ho jayegi. Excel yahan ek smart assistant ka kaam karta hai. Tum bas usse commands dete ho — `MIN` (sabse kam laao), `MAX` (sabse zyada laao), aur `AVERAGE` (sabka total karke count se divide karo) — aur result ek second mein saamne aa jata hai::HL]].
 
 #### 📖 3. Technical Definition
 
@@ -2281,7 +2281,7 @@ Speaker kehti hai: *Junk food (pizza/burger) pe zyada spend dekh kar tumhe analy
 * **Solution:** Ek consolidated table with **dynamic calculation** jahan naya expense add karte hi summary (e.g. Total Fun Expense) auto-update ho.
 * **What breaks if we don't use it?** Finances manually add karne se 100% chance hai ki overspending hogi (paise khatam hone ka pata tab chalega jab wallet khali hoga).
 * **✅ Kab use karo:** Jab bhi tumhe day-to-day transaction records maintain karne ho aur actionable financial reports nikalni ho.
-* **❌ Kab mat karo / Alternative prefer karo:** Jab tumhare multiple current accounts, credit cards, aur complex tax logic involves ho — wahan ek simple single-sheet expense tracker [[HL::fail ho jayega. Wahan::HL]] pe **Tally** ya **Quickbooks** jaise dedicated accounting softwares ka use best hota hai.
+* **❌ Kab mat karo / Alternative prefer karo:[[HL::** Jab tumhare multiple current accounts, credit cards, aur complex tax logic involves ho — wahan ek simple single-sheet expense tracker fail ho jayega. Wahan::HL]] pe **Tally** ya **Quickbooks** jaise dedicated accounting softwares ka use best hota hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -2327,7 +2327,7 @@ Cell I2 (Total %) me output aayega `83%` (1500 food total / 1800 overall total).
 
 * **Line 2:** **Thick outside borders** report ko read karne mein instantly easy (professional) banata hai. Ye ek chhota visual upgrade hai par data presentation me huge difference dalta hai.
 * [[HL::**Line 6:** ⭐**COUNTIF** do input mangta hai. Pehla input `C:C` (kahan dhundhna hai — "type" wale column mein). Dusra input `G2` (kya dhundhna hai — "food" text). Result 2 aaya kyu ki word match 2 bar hua::HL]].
-* **Line 7:** Dhyan do, percentage ka formula humne `(Total of Food / Grand Total)` banaya hai. Agar kal `Movie (fun)[[HL::` expense ko badha kar 10,000 kar diya gaya, toh I2 cell ka **percentage calculation** **dynamic calculation** hone ki wajah se apne aap gir jayega (kyuki overall pie-chart me pizza chhota hissa ban jayega). Iske sath, in cells par average transaction value bhi calculate ki jati hai `::HL]]=AVERAGEIF(...)[[HL::`.
+* **Line 7:[[HL::** Dhyan do, percentage ka formula humne `(Total of Food / Grand Total)` banaya hai. Agar kal `Movie (fun)` expense ko badha kar 10,000 kar diya gaya, toh I2 cell ka **percentage calculation** **dynamic calculation** hone ki wajah se apne aap gir jayega (kyuki overall pie-chart me pizza chhota hissa ban jayega). Iske sath, in cells par average transaction value bhi calculate ki jati hai `::HL]]=AVERAGEIF(...)`.
 
 #### 🔒 8. Security-First Check
 
@@ -2367,7 +2367,7 @@ Startups aur small business pehle 6 mahine apni accounting (book-keeping) aisi h
 * **Fix:** Usko Home tab se percent (%) logo click karke visual formatting upgrade karo.
 
 
-* **`COUNTIF(C:C, "food")` [[HL::answer 0 (zero) kyu laa raha hai, jabki maine list me food likha hai?::HL]]**
+* [[HL::**`COUNTIF(C:C, "food")` answer 0 (zero) kyu laa raha hai, jabki maine list me food likha hai?::HL]]**
 * [[HL::**Root Cause:** Data entry (typing) karte waqt tumne trailing space mar diya hai (e.g., `food ` — text plus space). Excel engine text length match nahi kar pa raha.::HL]]
 * [[HL::**Fix:** Data ko trim karo ya ensure karo type karte waqt spelling aur spacing perfectly identical ho!::HL]]
 
@@ -2377,8 +2377,8 @@ Startups aur small business pehle 6 mahine apni accounting (book-keeping) aisi h
 
 | [[HL::Tracker Technique::HL]] | [[HL::Manual Way::HL]] | [[HL::Dynamic Way::HL]] |
 | --- | --- | --- |
-| [[HL::Finding specific total::HL]] | [[HL::`D2 + D5 + D9` (food ke bills select karna manually)::HL]] | [[HL::`=SUMIF(C:C, "food", D:D)`::HL]] |
-| [[HL::Percent display::HL]] | [[HL::Likhna: `40` aur samne `percent` type karna manually::HL]] | [[HL::`=I2/J2`, Format tab par `%` press karna::HL]] |
+| [[HL::Finding specific total::HL]] | `D2 + D5 + D9` (food ke bills select karna manually)::HL]] | `=SUMIF(C:C, "food", D:D)`::HL]] |
+| [[HL::Percent display::HL]] | [[HL::Likhna: `40` aur samne `percent` type karna manually::HL]] | `=I2/J2`, Format tab par `%` press karna::HL]] |
 | [[HL::Visual appeal::HL]] | [[HL::Bina borders wali safed sheet::HL]] | [[HL::**Thick outside borders** + **Conditional Formatting** bar::HL]] |
 
 #### 🌍 14. Real-World Use Case (Production Application)
@@ -2766,7 +2766,7 @@ Jab corporate companies (jaise Microsoft ya Apple) apni Excel files client ko bh
 
 * **`Cell me likha 89, % icon dabane pe 8900% kyu ban gaya?`**
 * **Root Cause:** Excel integer 1 ko 100% samajhta hai. 89 matlab 89*100.
-* **Fix:** 1 se choti value type karo (e.g. [[HL::`0.895`) ya type karne se *pehle* cell ko % format do aur fir seedha 89 likho.::HL]]
+* **Fix:** 1 se choti value type karo (e.g. `0.895`) ya type karne se *pehle* cell ko % format do aur fir seedha 89 likho.::HL]]
 
 
 
@@ -3350,11 +3350,11 @@ S.No | Source   | Amt      S.No | Source   | Amt
 * [[HL::**Q:** Agar filter lagane ke baad copy-paste karein, toh kya hidden rows bhi copy ho jayengi?::HL]]
 * [[HL::**A:** Default behavior mein Excel generally sirf visible cells copy karta hai agar simple filter laga hai. Lekin kai baar complex sheets mein hidden rows bhi copy ho jati hain. Safe practice yeh hai ki data select karke `Alt + ;` (Select Visible Cells Only shortcut) dabayein, uske baad copy (`Ctrl C`) karein, taaki strictly sirf wahi copy ho jo screen par dikh raha hai::HL]].
 * **Q:** Speaker ne `Alt D F F` pe kyun emphasis diya?
-* **A:** Yeh Excel ka ek legacy shortcut keys sequence hai (from Excel 2003 era). Ribbon mein Data tab par ja kar Filter button dhoondhna time consuming hai. `Alt D F [[HL::F` sequential shortcut hai jo left hand se rapidly press kiya ja sakta hai filter ko toggle on aur toggle off karne ke liye, jo daily speed ko dramatically boost karta hai.
+* **A:** Yeh Excel ka ek legacy shortcut keys sequence hai (from Excel 2003 era). Ribbon mein Data tab par ja kar Filter button dhoondhna time consuming hai. `Alt D F [[HL::F` sequential shortcut hai jo left hand se rapidly press kiya ja sakta hai filter ko toggle on aur toggle off karne ke liye, jo daily speed ko dramatically boost karta hai.::HL]]
 
-#### 📝 18. One-Line Memory Hook
+[[HL::#### 📝 18. One-Line Memory Hook::HL]]
 
-"Filter data delete nahi karta, bas temporarily parda (curtain) gira deta hai. Wapas lane ke liye `Alt::HL]] D F F` dabao!"
+[[HL::"Filter data delete nahi karta, bas temporarily parda (curtain) gira deta hai. Wapas lane ke liye `Alt::HL]] D F F` dabao!"
 
 #### 🔑 19. Keywords Coverage Verification
 
@@ -3693,7 +3693,7 @@ Cells ko ek notebook ka page (ruled lines) maano jisme tum text likhte ho. Ab ag
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Speaker ne stock market ka dummy dashboard dikhaya: **Nifty top losers** (jaise **HUL** at `-1.45%[[HL::`) aur **Nifty top gainers** (jaise **Reliance** at `3::HL]].22%` ya `5.22%`). Inke aage manually shape draw kiye: **Down arrow** red color mein aur Up arrow green color mein. Phir context add karne ke liye online **stock images** insert ki — ek **confused** aadmi aur ek **Aunty** (jise joke mein 'stock market guru' ya 'sister' bulaya) taaki report visually interesting lage.
+Speaker ne stock market ka dummy dashboard dikhaya: **Nifty top losers** (jaise **HUL[[HL::** at `-1.45%`) aur **Nifty top gainers** (jaise **Reliance** at `3::HL]].22%` ya `5.22%`). Inke aage manually shape draw kiye: **Down arrow** red color mein aur Up arrow green color mein. Phir context add karne ke liye online **stock images** insert ki — ek **confused** aadmi aur ek **Aunty** (jise joke mein 'stock market guru' ya 'sister' bulaya) taaki report visually interesting lage.
 Doosra use-case tha ML Engineer ka workflow samjhana: Insert -> ⭐**SmartArt** -> **Cycle** -> jahan text boxes mein "Data Collection", "Model Selection", "Model Inference", aur "Feedback" daal kar **change colors** kiya (auto-formatted pipeline).
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
@@ -4235,21 +4235,21 @@ Template save karte waqt uske andar koi actual confidential data (jaise personal
 
 * **`Templates save karne ke baad 'Personal' tab mein nahi dikh raha`**
 * **Root Cause:** Save karte waqt tumne default "Custom Office Templates" folder path manually change kar diya tha (jaise Desktop pe save kar diya).
-* **Fix:** File ko Desktop se utha kar `Documents\Custom Office [[HL::Templates` folder mein paste karo. Ya Save As dobara karo aur path change mat hone do.
+* **Fix:** File ko Desktop se utha kar `Documents\Custom Office [[HL::Templates` folder mein paste karo. Ya Save As dobara karo aur path change mat hone do.::HL]]
 
 
 
-#### ⚖️ 13. Comparison (Ye vs Woh)
+[[HL::#### ⚖️ 13. Comparison (Ye vs Woh)::HL]]
 
-::HL]]|[[HL:: Feature ::HL]]|[[HL:: `::HL]].xlsx` (Normal File) | ⭐`.xltx` (Template File) |
+|[[HL:: Feature ::HL]]|[[HL:: `::HL]].xlsx` (Normal File) | ⭐`.xltx` (Template File) |
 | --- | --- | --- |
 | Core Nature | Working document jisme data feed hota hai | Sancha (Master blueprint) |
 | Double-Click behavior | Wahi file open hoti hai edit ke liye | Nayi fresh `.[[HL::xlsx` create ho jati hai memory mein ::HL]]|
-|[[HL:: Risk ::HL]]|[[HL:: Purana data overwrite hone ka risk high ::HL]]|[[HL:: Safe. Original blank rehti hai ::HL]]|[[HL::
+|[[HL:: Risk ::HL]]|[[HL:: Purana data overwrite hone ka risk high ::HL]]|[[HL:: Safe. Original blank rehti hai ::HL]]|
 
-#### 🌍 14. Real-World Use Case (Production Application)
+[[HL::#### 🌍 14. Real-World Use Case (Production Application)::HL]]
 
-Speaker ek Daily Planner ka example deta hai (from 8 AM to 5 PM layout). Ek week jahan unhone apni lifestyle set ki thi: **Eat** aur **Work** blocks banaye (Example of starting date: **Week 1 January 27**). Iske alawa finance plan setup kiya, jisme **Tripesh 1 rupee** ka hypothetical mazedar reference diya (jahan har ek cheez meticulously note hoti hai). Baar baar yeh layout na banana pade isliye unhone ise **Harry'sWeeklyTemplate** (ya **MyWeeklyTemplate**) ke naam se `::HL]].xltx` mein **Save As** kiya, jise agle week **More Templates -> Personal templates** se one-click mein load kiya ja sakta hai.
+[[HL::Speaker ek Daily Planner ka example deta hai (from 8 AM to 5 PM layout). Ek week jahan unhone apni lifestyle set ki thi: **Eat** aur **Work** blocks banaye (Example of starting date: **Week 1 January 27**). Iske alawa finance plan setup kiya, jisme **Tripesh 1 rupee** ka hypothetical mazedar reference diya (jahan har ek cheez meticulously note hoti hai). Baar baar yeh layout na banana pade isliye unhone ise **Harry'sWeeklyTemplate** (ya **MyWeeklyTemplate**) ke naam se `::HL]].xltx` mein **Save As** kiya, jise agle week **More Templates -> Personal templates** se one-click mein load kiya ja sakta hai.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -4320,7 +4320,7 @@ Ek Excel sheet (ya completely alag file) se data padh kar doosri sheet mein dikh
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-Formula bar mein syntax bilkul ajeeb lagne lagega. Normal [[HL::`B2` ki jagah ab tumhe exclamation mark `!` aur square brackets `[]` dikhenge: jaise `Sheet2!B2` (cross-sheet) ya `[MasterBook.xlsx]Sheet1!B2` (cross-workbook).::HL]]
+Formula bar mein syntax bilkul ajeeb lagne lagega. Normal `B2` ki jagah ab tumhe exclamation mark `!` aur square brackets `[]` dikhenge: jaise `Sheet2!B2` (cross-sheet) ya `[MasterBook.xlsx]Sheet1!B2` (cross-workbook).::HL]]
 
 [[HL::#### ⚙️ 6. Under the Hood (Deep Dive)::HL]]
 
@@ -5063,11 +5063,11 @@ Payment gateways (jaise Razorpay/Stripe) mein jab API request jati hai, toh woh 
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-VS Code ke side panel (Explorer) mein automatically ek nayi file (e.g., `data.[[HL::txt`) pop up ho jayegi jab tum `w::HL]]` ya `[[HL::a` mode run karoge.
+VS Code ke side panel (Explorer) mein automatically ek nayi file (e.g., `data.[[HL::txt`) pop up ho jayegi jab tum `w::HL]]` ya `[[HL::a` mode run karoge.::HL]]
 
-#### ⚙️ 6. Under the Hood (Deep Dive)
+[[HL::#### ⚙️ 6. Under the Hood (Deep Dive)::HL]]
 
-Jab hum `open::HL]]()[[HL::` call karte hain, toh OS (Operating System) hard disk par rakhi file ka ek connection (File Descriptor) banakar uski stream RAM mein laata hai. Agar file band `close::HL]]()[[HL::` na ki jaye, toh memory leak hota hai aur doosre programs us file ko use nahi kar paate. `with::HL]]` statement (jo underlying "Context Manager" use karta hai) is connection ko strictly manage karta hai.
+[[HL::Jab hum `open::HL]]()` call karte hain, toh OS (Operating System) hard disk par rakhi file ka ek connection (File Descriptor) banakar uski stream RAM mein laata hai. Agar file band `close::HL]]()` na ki jaye, toh memory leak hota hai aur doosre programs us file ko use nahi kar paate. `with::HL]]` statement (jo underlying "Context Manager" use karta hai) is connection ko strictly manage karta hai.
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -5107,15 +5107,15 @@ List format: ['Hello! Yeh pehli line hai.', '\nYeh dusri line append hui.']
 
 * **Line 2:** `open("my_note.txt", "w")` — `w` mode file ko zero size par truncate (khali) kar deta hai start mein. Agar file already hai toh purana text gaya!
 * **Line 7:** `with open("...") as file:` — Yeh ek **keyword** combo hai. Yeh internally code ko ek invisible `try-finally` block mein daal deta hai, taaki agar `write` karte time error aaye, tab bhi file successfully `close()` ho jaye.
-* **Line 8:** `\[[HL::n` — Isko **escape sequence** (backslash n) kehte hain. File mein text ke end mein automatically enter press nahi hota. Agar `::HL]]\[[HL::n` nahi lagaya toh saara text ek hi lambi line mein chipta chala jayega.
+* **Line 8:[[HL::** `\n` — Isko **escape sequence** (backslash n) kehte hain. File mein text ke end mein automatically enter press nahi hota. Agar `::HL]]\[[HL::n` nahi lagaya toh saara text ek hi lambi line mein chipta chala jayega.::HL]]
 
-#### 🔒 8. Security-First Check
+[[HL::#### 🔒 8. Security-First Check::HL]]
 
-File handling mein sabse bada risk **Path Traversal Attack** hota hai. Agar user ka input file name ban raha hai, toh woh `::HL]]../../etc/passwords` input dekar sensitive server files read/write kar sakta hai. Hamesha user input ko strict sanitize (clean) karo aur unhe restricted folder ke bahar access mat do.
+[[HL::File handling mein sabse bada risk **Path Traversal Attack** hota hai. Agar user ka input file name ban raha hai, toh woh `::HL]]../../etc/passwords` input dekar sensitive server files read/write kar sakta hai. Hamesha user input ko strict sanitize (clean) karo aur unhe restricted folder ke bahar access mat do.
 
 #### 🏗️ 9. Scalability & Industry Context
 
-[[HL::`file.read()` choti files ke liye theek hai. Lekin agar server par 50 GB ki log file hai, aur tumne `file.read()` call kar diya, toh tumhara server ka saara RAM full ho jayega (Out of Memory - OOM crash). Senior engineers hamesha `for line in file:` use karke line-by-line iterate karte hain (generators ka concept), taaki RAM mein ek time par sirf 1 line aaye::HL]].
+`file.read()` choti files ke liye theek hai. Lekin agar server par 50 GB ki log file hai, aur tumne `file.read()` call kar diya, toh tumhara server ka saara RAM full ho jayega (Out of Memory - OOM crash). Senior engineers hamesha `for line in file:` use karke line-by-line iterate karte hain (generators ka concept), taaki RAM mein ek time par sirf 1 line aaye::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
@@ -5133,7 +5133,7 @@ File handling mein sabse bada risk **Path Traversal Attack** hota hai. Agar user
 
 * **Confusion 2 — "read() aur readlines() mein kya chunu?"**
 * **Galat soch:** Dono same chiz return karte hain.
-* **Actually:** Data type ka difference hai. `read()[[HL::` pura paragraph ek single lamba text (String) return karta hai. `readlines::HL]]()[[HL::` file ki har line ko todkar ek Python List (Array) return karta hai. Agar line number 3 delete karni ho, toh list (`readlines::HL]]`) use karna aasaan hai.
+* **Actually:** Data type ka difference hai. `read()` pura paragraph ek single lamba text (String) return karta hai. `readlines::HL]]()` file ki har line ko todkar ek Python List (Array) return karta hai. Agar line number 3 delete karni ho, toh list (`readlines::HL]]`) use karna aasaan hai.
 
 
 
@@ -5189,11 +5189,11 @@ Web servers (jaise Nginx ya Apache) par har bar jab koi user website visit karta
 * [[HL::**Q:** Python mein `with` keyword (context manager) file handling mein kyun use karte hain?::HL]]
 * [[HL::**A:** `with` keyword automatically file resources ko manage karta hai. Execution us block ke bahar aate hi, chahe code successful ho ya error (exception) aayi ho, Python automatically OS-level par file ko `.close()` kar deta hai. Isse resources block ya leak hone se bachte hain::HL]].
 * **Q:** Hard disk par text ke ends par nayi line kaise represent hoti hai?
-* **A:** File systems enter key ka physical movement save nahi karte, balki woh special characters save karte hain jinko Escape Sequences kehte hain. Standard text file mein naya line [[HL::`\n` (newline character) se banta hai.::HL]]
+* **A:** File systems enter key ka physical movement save nahi karte, balki woh special characters save karte hain jinko Escape Sequences kehte hain. Standard text file mein naya line `\n` (newline character) se banta hai.::HL]]
 * [[HL::**Q:** Write mode (`w`) aur Append mode (`a`) mein sabse bada difference kya hai?::HL]]
 * [[HL::**A:** Jab hum `w` mode se existing file open karte hain, toh file ka pointer 0th position par set ho jata hai aur file size 0 bytes ho jata hai (purana data destroyed). Append `a` mode mein pointer file ke ekdum end mein hota hai, jisse existing data safe rehta hai aur naya data EOF (End of File) ke aage write hota hai::HL]].
 * **Q:** Agar memory (RAM) ka size chota ho (e.g. 1GB) aur file ka size bada ho (10GB), toh file ko safely kaise read karenge?
-* **A:** Hamein `file.read()` ya `file.readlines()[[HL::` use nahi karna chahiye kyunki woh pura data ek baar mein RAM mein load karenge aur system crash (MemoryError) ho jayega. Humme File Object ke upar ek `for::HL]]` loop (e.g., `for [[HL::line::HL]] in file:[[HL::`) lagana chahiye jisse RAM mein ek baar mein sirf ek hi line load aur process hogi.
+* **A:** Hamein `file.read()` ya `file.readlines()` use nahi karna chahiye kyunki woh pura data ek baar mein RAM mein load karenge aur system crash (MemoryError) ho jayega. Humme File Object ke upar ek `for::HL]]` loop (e.g., `for [[HL::line::HL]] in file:`) lagana chahiye jisse RAM mein ek baar mein sirf ek hi line load aur process hogi.
 
 #### 📝 18. One-Line Memory Hook
 
@@ -5323,11 +5323,11 @@ Accuracy: 1/2 words correct
 
 * **Line 6:** `random.choice(choices)` — Yeh string/list me se ek value uthata hai. Agar yahan number chahiye hota, toh `random.randint(1, 10)` use karte jo 1 aur 10 ke beech integer deta (both included).
 * **Line 24:** `time.sleep(1.5)` — Program execution ko freeze kar deta hai OS level par. Hardware process wait karta hai.
-* **Line 30:** `original.split()[[HL::` — By default yeh har **white space** (spaces, tabs, newlines) par string ko kategi aur list banayegi. Words Count nikalne ka sabse fast tarika yahi hai.
+* **Line 30:[[HL::** `original.split()` — By default yeh har **white space** (spaces, tabs, newlines) par string ko kategi aur list banayegi. Words Count nikalne ka sabse fast tarika yahi hai.::HL]]
 
-#### 🔒 8. Security-First Check
+[[HL::#### 🔒 8. Security-First Check::HL]]
 
-Agar koi game/lottery ka code `random::HL]]` module se bana hai aur server par run kar raha hai, toh hacker seed seed (initialization pattern) guess karke next random number predict kar sakta hai. Sensitive/Gambling apps mein hamesha `os.urandom` ya `secrets.choice()[[HL::` use karo jo OS ka entropy (hardware noise) use karta hai.
+[[HL::Agar koi game/lottery ka code `random::HL]]` module se bana hai aur server par run kar raha hai, toh hacker seed seed (initialization pattern) guess karke next random number predict kar sakta hai. Sensitive/Gambling apps mein hamesha `os.urandom` ya `secrets.choice()` use karo jo OS ka entropy (hardware noise) use karta hai.
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -5345,7 +5345,7 @@ Agar koi game/lottery ka code `random::HL]]` module se bana hai aur server par r
 * **Confusion 1 — "random.randint(1, 10) mein 10 aayega ya nahi?"**
 * **Galat soch:** Programming mein generally last number exclude hota hai (jaise loop range mein).
 * **Actually:** `randint` exception hai! Isme 1 aur 10 **dono included** hote hain. Dono bounds count hote hain.
-* **Prove karo:** Terminal mein `import [[HL::random` likho aur `random::HL]].randint(1, 1)[[HL::` run karo. Agar exclude hota toh error aati, par yeh hamesha `1::HL]]` dega.
+* **Prove karo:** Terminal mein `import [[HL::random` likho aur `random::HL]].randint(1, 1)` run karo. Agar exclude hota toh error aati, par yeh hamesha `1::HL]]` dega.
 
 
 * **Confusion 2 — "String immutable hai toh user_input = user_input.lower() kaise chal gaya?"**
@@ -5368,27 +5368,27 @@ Agar koi game/lottery ka code `random::HL]]` module se bana hai aur server par r
 
 * **`NameError: name 'random' is not defined`**
 * **Root Cause:** Tumne file ke upar module ko import nahi kiya.
-* **Fix:** File ki sabse pehli line mein `import [[HL::random` likho. Built-in modules bina import ke kaam nahi karte.
+* **Fix:** File ki sabse pehli line mein `import [[HL::random` likho. Built-in modules bina import ke kaam nahi karte.::HL]]
 
 
 
-#### ⚖️ 13. Comparison (Ye vs Woh)
+[[HL::#### ⚖️ 13. Comparison (Ye vs Woh)::HL]]
 
-::HL]]|[[HL:: Function ::HL]]|[[HL:: Kis kaam aata hai? ::HL]]|[[HL:: Example ::HL]]|
+|[[HL:: Function ::HL]]|[[HL:: Kis kaam aata hai? ::HL]]|[[HL:: Example ::HL]]|
 | --- | --- | --- |
 |[[HL:: **random.randint(a, b)** ::HL]]|[[HL:: Range ke beech integer laane ke liye. ::HL]]|[[HL:: `randint::HL]](1, 10)` -> 7 |
 | **random.choice(seq)** | List/String me se koi ek uthane ke liye. | `choice(['a', 'b'])` -> 'a' |
-| **string.split()** | Text ko list of words mein todne ke liye. | `"hi bro".split()` -> `['hi', 'bro'][[HL::` ::HL]]|[[HL::
+| **string.split()** | Text ko list of words mein todne ke liye. | `"hi bro".split()` -> `['hi', 'bro']` ::HL]]|
 
-#### 🌍 14. Real-World Use Case
+[[HL::#### 🌍 14. Real-World Use Case::HL]]
 
-API servers par **Rate Limiting** (taaki koi hacker lagatar request bhej kar server down na karde) mein `time::HL]].time()[[HL::` use hota hai. Server user ka last request time save karta hai. Agar `current::HL]]_time - last_time < 1 second` hota hai, toh server request block kar deta hai (DDoS protection).
+[[HL::API servers par **Rate Limiting** (taaki koi hacker lagatar request bhej kar server down na karde) mein `time::HL]].time()` use hota hai. Server user ka last request time save karta hai. Agar `current::HL]]_time - last_time < 1 second` hota hai, toh server request block kar deta hai (DDoS protection).
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
 * **Testing/Offline Phase:** User Snake Water Gun game mein manual string inputs ("s", "w") dalta hai aur `if-elif-else` checks unhe winner banate hain.
 * **Fixing/Iteration Phase:** Jab user ne capital "S" daala, toh case-sensitive check (S == s nahi hota) ke karan logic fail ho gaya. Isko theek karne ke liye `.lower()` apply kiya gaya.
-* **Live Production Phase:** Typing test check karte time manual loop chalane ke bajaye, strings ko space ke basis par `split()[[HL::` kiya gaya aur `zip::HL]]()` ka use karke fast character by character / word by word accuracy calculate ki gayi.
+* **Live Production Phase:** Typing test check karte time manual loop chalane ke bajaye, strings ko space ke basis par `split()` kiya gaya aur `zip::HL]]()` ka use karke fast character by character / word by word accuracy calculate ki gayi.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -5409,7 +5409,7 @@ Pair 2: "World" <====> "Word"   (Mismatch!)
 * **Q:** Python mein string "immutable" hone ka exact matlab aur fayda kya hai?
 * **A:** Immutable ka matlab hai ki memory mein ek baar jo string object ban gaya, uska character array change nahi ho sakta (e.g., `text[0] = 'a'` error dega). Agar change karna ho toh naya string banana padta hai. Fayda yeh hai ki yeh dictionary (hash map) mein as a Key use ho sakti hai kyunki iski value fix hoti hai, aur thread-safe hoti hai.
 * **Q:** `time.time()` aur Epoch ka kya relation hai?
-* **A:** Epoch ek reference point hai — usually January 1, 1970 (UTC). `time.time()[[HL::` yahi return karta hai ki is reference point se lekar current system execution tak kitne total seconds (float mein) guzar chuke hain. Ise hum execution lag measure karne ke liye minus karte hain (`end::HL]] - start`).
+* **A:** Epoch ek reference point hai — usually January 1, 1970 (UTC). `time.time()` yahi return karta hai ki is reference point se lekar current system execution tak kitne total seconds (float mein) guzar chuke hain. Ise hum execution lag measure karne ke liye minus karte hain (`end::HL]] - start`).
 * **Q:** `.split()` function default kis character par split karta hai?
 * **A:** Default roop se `.split()` kisi bhi white space (space, tab `\t`, newline `\n`) par string ko todta hai aur saare consecutive empty spaces ko automatically remove kar deta hai.
 * **Q:** `if` ke baad lagatar 3 baar naya `[[HL::if` lagane mein, aur ek `if::HL]]` ke baad 2 `elif` lagane mein kya farak hai?
@@ -6259,11 +6259,11 @@ Table: employees (Schema Design)
 * [[HL::**Q:** Phone number INT mein kyun store nahi karna chahiye?::HL]]
 * [[HL::**A:** Phone numbers (jaise 12345678910) pe hum koi maths (addition/subtraction) nahi karte. Dusra, agar number `011` se start hota hai, toh INT usko `11` bana dega (leading zero delete ho jayega). Isliye hamesha VARCHAR use hota hai::HL]].
 * **Q:** `DECIMAL(5, 2)` ka kya matlab hai?
-* **A:** Iska matlab hai ki column maximum 5 digits store karega total, jisme se exactly 2 digits decimal point ke baad honge. Example: `123.45` valid hai, but `1234.[[HL::5` error dega kyunki decimal se pehle sirf 3 digits allowed hain.
+* **A:** Iska matlab hai ki column maximum 5 digits store karega total, jisme se exactly 2 digits decimal point ke baad honge. Example: `123.45` valid hai, but `1234.[[HL::5` error dega kyunki decimal se pehle sirf 3 digits allowed hain.::HL]]
 
-#### 📝 18. One-Line Memory Hook
+[[HL::#### 📝 18. One-Line Memory Hook::HL]]
 
-"Data type VIP bouncer hai aur `ALTER::HL]] TABLE` table ka plastic surgeon hai — bina jaan liye (delete kiye) shakal badal deta hai!"
+[[HL::"Data type VIP bouncer hai aur `ALTER::HL]] TABLE` table ka plastic surgeon hai — bina jaan liye (delete kiye) shakal badal deta hai!"
 
 #### 🔑 19. Keywords Coverage Verification
 
@@ -6425,7 +6425,7 @@ Table: employees (Schema Design)
 * [[HL::**Confusion 1 — "Primary Key aur UNIQUE mein kya farak hai?"**::HL]]
 * [[HL::**Galat soch:** Dono ka kaam duplicate values rokna hai, toh dono same hain.::HL]]
 * [[HL::**Actually:** Ek table mein **UNIQUE** constraint kitne bhi columns (email, phone, PAN card) pe lag sakta hai aur yeh NULL (khali) values allow karta hai. Par **PRIMARY KEY** sirf ek hoti hai aur woh kabhi NULL (NOT NULL) nahi ho sakti::HL]].
-* **Prove karo:** `CREATE TABLE t (id INT UNIQUE, name VARCHAR(10) UNIQUE);[[HL::` chalega. Par `CREATE::HL]] TABLE t (id INT PRIMARY KEY, name VARCHAR(10) PRIMARY KEY);` error dega.
+* **Prove karo:** `CREATE TABLE t (id INT UNIQUE, name VARCHAR(10) UNIQUE);` chalega. Par `CREATE::HL]] TABLE t (id INT PRIMARY KEY, name VARCHAR(10) PRIMARY KEY);` error dega.
 
 
 * [[HL::**Confusion 2 — "Auto-increment skip kyun ho jata hai?"**::HL]]
@@ -6461,7 +6461,7 @@ Table: employees (Schema Design)
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer risky queries chalane se pehle [[HL::`autocommit = 0` set karta hai taaki galti hone par `ROLLBACK` karke changes undo kiye ja sakein.::HL]]
+* **Testing/Offline Phase:** Developer risky queries chalane se pehle `autocommit = 0` set karta hai taaki galti hone par `ROLLBACK` karke changes undo kiye ja sakein.::HL]]
 * [[HL::**Fixing/Iteration Phase:** Jab table mein bad data (jaise duplicate email ya invalid age) insert karne ki koshish hoti hai, toh UNIQUE ya CHECK constraints error throw karte hain jisse developer logic theek karta hai.::HL]]
 * [[HL::**Live Production Phase:** Production mein data integrity ensure karne ke liye hamesha Primary Key ka use hota hai aur manual ID insertion ki jagah system `AUTO_INCREMENT` se identifiers assign karta hai::HL]].
 
@@ -6647,7 +6647,7 @@ Kabhi bhi application se seedha user input ko SQL string mein concatenate (`"SEL
 #### 🛠️ 12. Troubleshooting Flowchart
 
 * **`Error 1175 (HY000): You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column.`**
-* **Root Cause:** Tum ek aisi row update (ya delete) karne ki koshish kar rahe ho bina Primary Key (e.g. user_id) ke, aur safe update mode (safe shield) on hai. (Primary key ke bina update chalane pe safe update mode kyun rokti hai? Kyunki agar tumhare DB mein 10 'Neha Verma' hain aur tumne kaha [[HL::`UPDATE users SET age = 30 WHERE name = 'Neha Verma'`, toh 10 ki 10 update ho jayengi galti se).::HL]]
+* **Root Cause:** Tum ek aisi row update (ya delete) karne ki koshish kar rahe ho bina Primary Key (e.g. user_id) ke, aur safe update mode (safe shield) on hai. (Primary key ke bina update chalane pe safe update mode kyun rokti hai? Kyunki agar tumhare DB mein 10 'Neha Verma' hain aur tumne kaha `UPDATE users SET age = 30 WHERE name = 'Neha Verma'`, toh 10 ki 10 update ho jayengi galti se).::HL]]
 * [[HL::**Fix:** Ya toh `WHERE user_id = 5` use karo, ya query se pehle `SET SQL_SAFE_UPDATES = 0;` run karo (aur query chalne ke baad wapas `1` kar do).::HL]]
 
 
@@ -6882,7 +6882,7 @@ Jab database mein 10 million rows hoti hain, toh `LIKE '%bad'` (jisme `%` shuru 
 | [[HL::Feature::HL]] | IN | [[HL::BETWEEN::HL]] | [[HL::LIKE::HL]] |
 | --- | --- | --- | --- |
 | [[HL::**Kya karta hai?**::HL]] | [[HL::Specific values ki list se match karta hai::HL]] | [[HL::Ek specific number/date range check karta hai::HL]] | [[HL::Text ka pattern match karta hai::HL]] |
-| [[HL::**Example**::HL]] | [[HL::`IN (10, 20, 30)`::HL]] | [[HL::`BETWEEN 100 AND 500`::HL]] | [[HL::`LIKE 'A%'`::HL]] |
+| [[HL::**Example**::HL]] | `IN (10, 20, 30)`::HL]] | `BETWEEN 100 AND 500`::HL]] | `LIKE 'A%'`::HL]] |
 | [[HL::**Use case**::HL]] | [[HL::Categorical filtering (e.g., Delhi, Mumbai)::HL]] | [[HL::Price filters, Date ranges::HL]] | [[HL::Searching names or emails::HL]] |
 
 [[HL::#### 🌍 14. Real-World Use Case::HL]]
@@ -6972,7 +6972,7 @@ Tumhe tables ke beech mein ek solid line (EER Diagram) dikhegi jo one-to-many re
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Do tables hoti hain: **Parent table** (jaise `sellers [[HL::table`) jisme Primary Key hoti hai, aur **Child table** (jaise `orders::HL]] table`) jisme Foreign Key hoti hai.
+1. Do tables hoti hain: **Parent table[[HL::** (jaise `sellers table`) jisme Primary Key hoti hai, aur **Child table** (jaise `orders::HL]] table`) jisme Foreign Key hoti hai.
 2. Jab child mein koi nayi row (order) dalne ki koshish hoti hai, database background mein turant parent table scan karta hai.
 3. Agar wo reference (ID) nahi milti, toh constraint error (foreign key constraint fails) throw karda hai aur insert rok deta hai.
 4. Agar Parent (seller) delete hone ki koshish kare, toh DB 3 action le sakta hai:
@@ -7034,7 +7034,7 @@ Error 1452: Cannot add or update a child row: a foreign key constraint fails
 
 [[HL::#### 🔒 8. Security-First Check::HL]]
 
-Foreign keys actually a security feature from an integrity standpoint. However, `ON DELETE CASCADE` ek chupa hua khatra hai. Agar ek malicious internal user ya hacker ne `sellers` table empty kar di, toh database automatically aapki saari connected tables (products, orders, reviews) bhi udha dega. Hamesha critical data ke liye `SET NULL` ya [[HL::`RESTRICT`::HL]] use karein.
+Foreign keys actually a security feature from an integrity standpoint. However, `ON DELETE CASCADE` ek chupa hua khatra hai. Agar ek malicious internal user ya hacker ne `sellers` table empty kar di, toh database automatically aapki saari connected tables (products, orders, reviews) bhi udha dega. Hamesha critical data ke liye `SET NULL` ya `RESTRICT`::HL]] use karein.
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -7251,7 +7251,7 @@ Result Grid mein tum dekhenge ki pehle 3 column 'orders' table ke hain, aur aage
 
 #### 🔒 8. Security-First Check
 
-Jab JOIN use karke api ke liye query likhte ho, toh kabhi bhi `[[HL::SELECT::HL]] *[[HL::` mat use karo. Ho sakta hai user table join ho aur galti se password hashes ya sensitive columns joined report mein front-end pe leak ho jayein. Sirf unhi columns ka naam lo jo zaruri hain (jaise `O::HL]].order_id, S.seller_name`).
+Jab JOIN use karke api ke liye query likhte ho, toh kabhi bhi `[[HL::SELECT::HL]] *` mat use karo. Ho sakta hai user table join ho aur galti se password hashes ya sensitive columns joined report mein front-end pe leak ho jayein. Sirf unhi columns ka naam lo jo zaruri hain (jaise `O::HL]].order_id, S.seller_name`).
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -7271,7 +7271,7 @@ Industry (jaise Amazon) mein combined report nikalne ke liye queries bohot heavy
 * [[HL::**Confusion 1 — "JOIN aur UNION mein actually kya fark hai?"**::HL]]
 * [[HL::**Galat soch:** Dono tables jodte hain, kahin bhi laga do.::HL]]
 * [[HL::**Actually:** JOIN data ko horizontally (side-by-side) jodta hai columns badhata hai. UNION data ko vertically (upar-neeche) append karta hai, rows badhata hai::HL]].
-* **Prove karo:** Apna Result Grid dekho. JOIN mein column names [[HL::`order_id` aur `seller_name` sath dikhenge. UNION mein table lambi ho jayegi.::HL]]
+* **Prove karo:** Apna Result Grid dekho. JOIN mein column names `order_id` aur `seller_name` sath dikhenge. UNION mein table lambi ho jayegi.::HL]]
 
 
 * [[HL::**Confusion 2 — "INNER JOIN aur LEFT JOIN mein kya difference hai?"**::HL]]
@@ -7298,11 +7298,11 @@ Industry (jaise Amazon) mein combined report nikalne ke liye queries bohot heavy
 | Feature | [[HL::INNER JOIN::HL]] | [[HL::LEFT JOIN::HL]] | [[HL::RIGHT JOIN::HL]] |
 | --- | --- | --- | --- |
 | **Kam kya hai?** | Sirf matching rows dono tables se | [[HL::Left table ki saari rows, chahe match ho ya na ho::HL]] | [[HL::Right table ki saari rows::HL]] |
-| [[HL::**Non-matching data**::HL]] | [[HL::Ignore kar deta hai (Delete dikhta hai)::HL]] | [[HL::`NULL` fill kar deta hai::HL]] | `[[HL::NULL` fill kar deta hai ::HL]]|[[HL::
+| [[HL::**Non-matching data**::HL]] | [[HL::Ignore kar deta hai (Delete dikhta hai)::HL]] | `NULL` fill kar deta hai::HL]] | `[[HL::NULL` fill kar deta hai ::HL]]|
 
-#### 🌍 14. Real-World Use Case
+[[HL::#### 🌍 14. Real-World Use Case::HL]]
 
-Swiggy ke admin dashboard par jab customer support team "Order History" dekhti hai, toh backend ek **combined report** banata hai. Woh `orders::HL]]` table (amount ke liye), `[[HL::restaurants` table (naam ke liye) aur `delivery::HL]]_partners` table (rider name ke liye) ko **INNER JOIN** aur **LEFT JOIN** lagakar single table view banata hai.
+[[HL::Swiggy ke admin dashboard par jab customer support team "Order History" dekhti hai, toh backend ek **combined report[[HL::** banata hai. Woh `orders::HL]]` table (amount ke liye), `restaurants` table (naam ke liye) aur `delivery::HL]]_partners` table (rider name ke liye) ko **INNER JOIN** aur **LEFT JOIN** lagakar single table view banata hai.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -7422,7 +7422,7 @@ Yeh purely conceptual topic hai, chalo isey ASCII flow se samajhte hain.
 [[HL::**Concept Flow:**::HL]]
 
 1. [[HL::**Bina Index (Table Scan):**::HL]]
-[[HL::`SELECT * FROM users WHERE age = 30;`::HL]]
+`SELECT * FROM users WHERE age = 30;`::HL]]
 [[HL::Engine checks: Row 1 (Age 25? No) -> Row 2 (Age 50? No) -> ... Row 999999 (Age 30? Yes). -> **Extremely Slow (O(n))**::HL]]
 2. [[HL::**Index ke sath (Index Scan):**::HL]]
 [[HL::Engine goes to `idx_age` B-Tree.::HL]]
@@ -7779,7 +7779,7 @@ Hospitals ke management software mein `patients` ki ek mukhya table hoti hai. Wa
 1. [[HL::**Standard Subquery Execution:** Database engine dekhta hai ki `WHERE` clause ke aage brackets `()` hain. Wo bahar ka kaam rokta hai. Pehle brackets ke andar jata hai, execution complete karke ek output (jaise `450.50`) laata hai, aur outer query ko bhej deta hai.::HL]]
 2. [[HL::**EXISTS Operator Execution:**::HL]]
 * [[HL::Speaker ne kaha: *"In exists we just find out if any record has been returned or not... we don't care what data this query is returning."*::HL]]
-* [[HL::`EXISTS` record evaluation (check karna ki data hai ya nahi) ke liye bana hai.::HL]]
+* `EXISTS` record evaluation (check karna ki data hai ya nahi) ke liye bana hai.::HL]]
 * [[HL::Yeh engine ko bolta hai: "Bhai data uthake mat laa. Jese hi tujhe 1st matching row mile, mujhe `TRUE` (boolean) bhej de aur apni searching wahi rok de (short-circuit)." Isse row by row execution bachta hai::HL]].
 
 
@@ -7866,11 +7866,11 @@ Agar tum `IN` operator ka use karke 10,000 IDs return karte ho, toh memory full 
 | --- | --- | --- |
 |[[HL:: **Under the hood action** ::HL]]|[[HL:: Subquery chalake puri values ki list memory mein laata hai ::HL]]|[[HL:: Memory mein list nahi banata, bas True/False (boolean) check karta hai ::HL]]|
 |[[HL:: **Best used when?** ::HL]]|[[HL:: Jab list choti ho (few hundred items) ::HL]]|[[HL:: Jab table bohot badi ho (millions of rows) ::HL]]|
-|[[HL:: **Returns** ::HL]]|[[HL:: Actual payload (values) ::HL]]|[[HL:: Boolean status (True/False) ::HL]]|[[HL::
+|[[HL:: **Returns** ::HL]]|[[HL:: Actual payload (values) ::HL]]|[[HL:: Boolean status (True/False) ::HL]]|
 
-#### 🌍 14. Real-World Use Case
+[[HL::#### 🌍 14. Real-World Use Case::HL]]
 
-Instagram (Meta) pe jab app dikhati hai "People who viewed your story", backend check karta hai ki kya tumhara viewer table mein mojud hai ya nahi. Woh user ki saari detail (profile pic, bio) turant load nahi karte, wo pehle `EXISTS::HL]]` operator fire karte hain fast checking ke liye, warna system millions of clicks handle nahi kar payega.
+[[HL::Instagram (Meta) pe jab app dikhati hai "People who viewed your story", backend check karta hai ki kya tumhara viewer table mein mojud hai ya nahi. Woh user ki saari detail (profile pic, bio) turant load nahi karte, wo pehle `EXISTS::HL]]` operator fire karte hain fast checking ke liye, warna system millions of clicks handle nahi kar payega.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
@@ -8041,11 +8041,11 @@ Agar ROLLUP use kiya hai, toh sabse aakhiri row mein city/category ka naam NULL 
 
 #### 🔒 8. Security-First Check
 
-Financial aggregations mein decimals ke sath deal karte waqt precision issue aa sakta hai (rounding errors). Agar sensitive business reports ya payouts grouped data se generate ho rahe hain, toh ensure karein ki data type `FLOAT` ki jagah `[[HL::DECIMAL` ho, taaki ek-ek paise (cent) ka hisaab accurate rahe.
+Financial aggregations mein decimals ke sath deal karte waqt precision issue aa sakta hai (rounding errors). Agar sensitive business reports ya payouts grouped data se generate ho rahe hain, toh ensure karein ki data type `FLOAT` ki jagah `[[HL::DECIMAL` ho, taaki ek-ek paise (cent) ka hisaab accurate rahe.::HL]]
 
-#### 🏗️ 9. Scalability & Industry Context
+[[HL::#### 🏗️ 9. Scalability & Industry Context::HL]]
 
-Industry dashboards aur **business reports** (jaise monthly **sales summaries**) mein `GROUP::HL]] BY` sabse zyada run hone wala operator hai. Par bohot bade datasets mein yeh operation server ki bohot memory aur CPU cycle (sorting ke liye) consume karta hai. Senior engineers is problem ko solve karne ke liye "Pre-aggregated tables" (cron jobs/background tasks jo raat ko data group karke nayi table mein rakh dete hain) ka use karte hain.
+[[HL::Industry dashboards aur **business reports** (jaise monthly **sales summaries**) mein `GROUP::HL]] BY` sabse zyada run hone wala operator hai. Par bohot bade datasets mein yeh operation server ki bohot memory aur CPU cycle (sorting ke liye) consume karta hai. Senior engineers is problem ko solve karne ke liye "Pre-aggregated tables" (cron jobs/background tasks jo raat ko data group karke nayi table mein rakh dete hain) ka use karte hain.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -8078,7 +8078,7 @@ Industry dashboards aur **business reports** (jaise monthly **sales summaries**)
 
 
 * **ORDER BY kaam nahi kar raha HAVING ke baad?**
-* **Root Cause:** Tumne shayad order of execution tod diya. SQL mein strictly yahi line-up chalta hai: [[HL::`SELECT -> FROM -> WHERE -> GROUP BY -> HAVING -> ORDER BY -> LIMIT`.::HL]]
+* **Root Cause:** Tumne shayad order of execution tod diya. SQL mein strictly yahi line-up chalta hai: `SELECT -> FROM -> WHERE -> GROUP BY -> HAVING -> ORDER BY -> LIMIT`.::HL]]
 * [[HL::**Fix:** Ensure karo ki `ORDER BY` clause hamesha `HAVING` ke baad (aur `LIMIT` se pehle) likha ho.::HL]]
 
 
@@ -8129,7 +8129,7 @@ NULL   | 800  <-- (Rollup Grand Total = Sum of the above)
 * **Q:** `WITH ROLLUP` clause ka limit kya hai?
 * **A:** MySQL mein `WITH ROLLUP` `[[HL::ORDER BY::HL]]` ke sath perfectly behave nahi karta tha purane versions mein (kyunki summary row sort hoke beecho-beech chali jati thi). MySQL 8.0 se yeh gracefully handle hota hai.
 * **Q:** Main NULL values aur Rollup ke generated NULL ko distinct (alag) kaise pehchanu query output mein?
-* **A:** MySQL `GROUPING()[[HL::` function provide karta hai. Agar output row `WITH::HL]] [[HL::ROLLUP` dwara banayi gayi summary row hai (jahan NULL grand total represent karta hai), toh `GROUPING::HL]](column_name)` 1 return karega. Agar wo actual data ka NULL hai, toh 0 return karega.
+* **A:** MySQL `GROUPING()` function provide karta hai. Agar output row `WITH::HL]] [[HL::ROLLUP` dwara banayi gayi summary row hai (jahan NULL grand total represent karta hai), toh `GROUPING::HL]](column_name)` 1 return karega. Agar wo actual data ka NULL hai, toh 0 return karega.
 
 #### 📝 18. One-Line Memory Hook
 
@@ -8463,7 +8463,7 @@ Stored procedures SQL Injection attacks ko naturally prevent karte hain. Kyunki 
 * [[HL::**❌ Mistake 1:** Procedure banate time Delimiter wapas `;` set karna bhool jana.::HL]]
 * [[HL::**🤦 Why:** Developer `END //` likh kar ruk jata hai.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Hamesha end mein `DELIMITER ;` likho.::HL]]
-* **⚡ Consequences:** Agar wapas `;` nahi kiya, toh aapki agli standard query (jaise [[HL::`SELECT * FROM users;`) syntax error degi kyunki engine abhi bhi `//` ka wait kar raha hai.::HL]]
+* **⚡ Consequences:** Agar wapas `;` nahi kiya, toh aapki agli standard query (jaise `SELECT * FROM users;`) syntax error degi kyunki engine abhi bhi `//` ka wait kar raha hai.::HL]]
 * [[HL::**❌ Mistake 2:** Hardcoding values inside procedures.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Hamesha `IN` parameters use karo. Agar tumne `WHERE city = 'Delhi'` procedure ke andar hardcode kar diya, toh Mumbai ke orders ke liye naya procedure banana padega (jo code reuse logic ke khilaf hai::HL]]).
 
@@ -8500,7 +8500,7 @@ Stored procedures SQL Injection attacks ko naturally prevent karte hain. Kyunki 
 | --- | --- | --- |
 | [[HL::**Kya store karta hai?**::HL]] | [[HL::Ek single SELECT statement::HL]] | [[HL::Complex business logic (loops, if/else, multi-queries)::HL]] |
 | [[HL::**Parameters pass kar sakte hain?**::HL]] | [[HL::❌ Nahi::HL]] | [[HL::✅ Haan (`IN` parameters ke through)::HL]] |
-| [[HL::**Kaise execute karein?**::HL]] | [[HL::`SELECT * FROM view_name`::HL]] | [[HL::`CALL procedure_name::HL]]()` |
+| [[HL::**Kaise execute karein?**::HL]] | `SELECT * FROM view_name`::HL]] | `CALL procedure_name::HL]]()` |
 
 #### 🌍 14. Real-World Use Case
 
@@ -8687,7 +8687,7 @@ Industry mein Triggers bohot limit mein use hote hain. Kyunki ye har row ke sath
 
 * **`Error 1359 (HY000): Trigger already exists`**
 * **Root Cause:** Tum ek trigger ko modify karke dobara `CREATE TRIGGER` chala rahe ho, par trigger names unique hote hain DB mein.
-* **Fix:** Hamesha pehle `DROP TRIGGER IF EXISTS trigger_name;[[HL::` chalao, uske baad create wali script run karo.
+* **Fix:** Hamesha pehle `DROP TRIGGER IF EXISTS trigger_name;` chalao, uske baad create wali script run karo.
 
 
 
@@ -8794,7 +8794,7 @@ Socho tumhare paas ek playlist hai jisme 10 gaane hain. Yeh playlist ek "iterabl
 
 [[HL::#### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)::HL]]
 
-[[HL::* **Problem:** Bina iterables ke, humein collection ke har ek item ko access karne ke liye index numbers (`items[0]`, `items[1]`) manually likhne padte, jo repetitive aur unscalable hai::HL]].
+* [[HL::**Problem:** Bina iterables ke, humein collection ke har ek item ko access karne ke liye index numbers (`items[0]`, `items[1]`) manually likhne padte, jo repetitive aur unscalable hai::HL]].
 * [[HL::**Solution:** Iterables allow karte hain ki loop khud-ba-khud agla item fetch kare jab tak collection khatam na ho jaaye. AI powered python scripts mostly isi mechanism par rely karti hain::HL]].
 * **What breaks if we don't use it?** Agar loop ke andar non-iterable daal diya, toh code crash ho jayega aur automation ruk jayegi.
 * **✅ Kab use karo (Use this when):** Jab tumhare paas data collections hon (jaise lists, tuples, dictionaries, ya string iteration) aur tumhe har ek item par same operation karna ho.
@@ -8810,10 +8810,10 @@ TypeError: 'int' object is not iterable
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-[[HL::1. Jab tum `for i in A` likhte ho, Python sabse pehle check karta hai ki kya `A` iterable hai (kya uske paas `__iter__()` method — internal function jo collection ko sequential banata hai — hai?).::HL]]
-2. Agar [[HL::haan, toh Python ek "iterator" banata hai jo track rakhta hai ki abhi kaunsa item padha ja raha hai.
-3. Phir loop ek-ek karke next item mangta hai. Dictionaries ke case mein, default behaviour keys return karna hota hai (`for key in record`).
-4. Jab items khatam ho jaate hain, loop silently stop ho jaata hai::HL]].
+1. [[HL::Jab tum `for i in A` likhte ho, Python sabse pehle check karta hai ki kya `A` iterable hai (kya uske paas `__iter__()` method — internal function jo collection ko sequential banata hai — hai?).::HL]]
+2. Agar [[HL::haan, toh Python ek "iterator" banata hai jo track rakhta hai ki abhi kaunsa item padha ja raha hai.::HL]]
+3. [[HL::Phir loop ek-ek karke next item mangta hai. Dictionaries ke case mein, default behaviour keys return karna hota hai (`for key in record`).::HL]]
+4. [[HL::Jab items khatam ho jaate hain, loop silently stop ho jaata hai::HL]].
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
 
@@ -9372,7 +9372,7 @@ Normal List ek buffet (buffet system) ki tarah hai, jahan cook saara khana ek ba
 
 [[HL::#### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)::HL]]
 
-[[HL::* **Problem:** Data processing (e.g. 5 million numbers ka loop ya complex calculation) mein data ko `[]` list mein `.append()` karne se RAM (temporary computer memory) puri bhar jati hai aur program "Out of Memory" hoke crash ho jata hai::HL]].
+* [[HL::**Problem:** Data processing (e.g. 5 million numbers ka loop ya complex calculation) mein data ko `[]` list mein `.append()` karne se RAM (temporary computer memory) puri bhar jati hai aur program "Out of Memory" hoke crash ho jata hai::HL]].
 * [[HL::**Solution:** Generators "lazy data generation" (jab zaroorat ho tabhi execute karna) use karte hain, jo saara data store karne ki bajaye bas "recipe of values" store karte hain (Memory saving).::HL]]
 * [[HL::**What breaks if we don't use it?** Bade data par list comprehensions system ki memory kha jayenge aur server permanently freeze ho jayega::HL]].
 * [[HL::**✅ Kab use karo (Use this when):** Jab tumhe extremely large datasets (million+ rows), log files, ya infinite data streams (sensor data) read/process karne hon aur tumhe ek baar mein ek hi line/value ki zaroorat ho.::HL]]
@@ -9496,7 +9496,7 @@ Normal List ek buffet (buffet system) ki tarah hai, jahan cook saara khana ek ba
 
 [[HL::#### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)::HL]]
 
-[[HL::* **Testing/Offline Phase:** Developer jab kisi server par ek massive 1 million lines (e.g. Server Logs) ki `.txt` ya `.csv` file read karta hai, toh `.readlines()` (jo list banati hai) avoid karta hai, balki yield lagakar file read function banata hai (creates a generator object::HL]]).
+* [[HL::**Testing/Offline Phase:** Developer jab kisi server par ek massive 1 million lines (e.g. Server Logs) ki `.txt` ya `.csv` file read karta hai, toh `.readlines()` (jo list banati hai) avoid karta hai, balki yield lagakar file read function banata hai (creates a generator object::HL]]).
 * **Fixing/Iteration Phase:** Developer manually `next()` function call karke top 3-4 log entries (one-by-one) fetch karta hai taaki algorithm check kar sake bina poori heavy file memory mein laaye.
 * **Live Production Phase:** Live deployment mein yeh memory constraints handle karne ka permanent engine ban jata hai jahan values continuous data streams (jaise Twitter live feed) mein sequentially extract hoti rahti hain bina RAM crash kiye.
 
@@ -9516,7 +9516,7 @@ Normal List ek buffet (buffet system) ki tarah hai, jahan cook saara khana ek ba
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q:** [[HL::`yield` aur `return` keyword ke beech sabse bada difference kya hai?::HL]]
+* **Q:** `yield` aur `return` keyword ke beech sabse bada difference kya hai?::HL]]
 * [[HL::**A:** `return` function ki state aur execution ko permanently khatam kar deta hai aur control wapas de deta hai. `yield` value to wapas bhejta hai, par function ka internally execution state (variables, line memory) "pause" karke freeze kar leta hai, taaki agle `next()` call par wahi se continue kar sake::HL]].
 * [[HL::**Q:** "Lazy evaluation" ya "lazy data generation" se kya faida hota hai?::HL]]
 * [[HL::**A:** Lazy evaluation ka matlab hai data ko tabhi generate/calculate karna jab uski actual requirement aaye (on the fly). Yeh computational power aur specially RAM bachata hai, jisse Python infinite loops ya million-row datasets process kar pata hai::HL]].
@@ -9647,9 +9647,9 @@ id(B) -> 140733855  (Agar same ID dikhi, matlab dono variables ek hi memory shar
 # [[HL::📤 Expected Output:::HL]]
 
 ```text
-[[HL::Bug Result A: [1, 2, 3, 10]
-Original X: [1, 2, 3]
-Cloned Y: [1, 2, 3, 99]::HL]]
+[[HL::Bug Result A: [1, 2, 3, 10]::HL]]
+[[HL::Original X: [1, 2, 3]::HL]]
+[[HL::Cloned Y: [1, 2, 3, 99]::HL]]
 ```
 
 ##### [[HL::🔬 Code Explanation::HL]]
@@ -9785,7 +9785,7 @@ NumPy array ek high-speed bullet train ki tarah hai, jiski booking sirf business
 
 [[HL::#### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)::HL]]
 
-[[HL::* **Problem:** Python lists large datasets pe math operation (jaise har element ko * 2 karna) bahut slow process karti hain (for loop required). Lists fixed memory blocks mein nahi hoti hain::HL]].
+* [[HL::**Problem:** Python lists large datasets pe math operation (jaise har element ko * 2 karna) bahut slow process karti hain (for loop required). Lists fixed memory blocks mein nahi hoti hain::HL]].
 * [[HL::**Solution:** NumPy arrays ko continuous memory (ek ke baad ek memory slots) milti hai aur yeh background mein C language mein likhi gayi hain. Isliye arrays directly matrix math perform kar sakti hain loops ke bina (jise vectorization kehte hain::HL]]).
 * **What breaks if we don't use it?** Agar tum machine learning ya data science pixel computation mein plain lists use karoge, algorithms itne slow (fast numeric arrays ki kami) rahenge ki 10 minute ka model training 10 ghante lega.
 * **✅ Kab use karo (Use this when):** Jab tumhe large numeric data (millions of numbers), 2D/3D matrix calculations, images pixel data array processing (tensor calculations) karni ho.
@@ -9836,17 +9836,17 @@ array([[1, 2],
 # 📤 Expected Output:
 
 ```text
-[[HL::1D Numpy Array:
-[10 20 30]::HL]]
+[[HL::1D Numpy Array:::HL]]
+[[HL::[10 20 30]::HL]]
 
-[[HL::2D Matrix Array:
-[[1 2]
- [3 4]]::HL]]
+[[HL::2D Matrix Array:::HL]]
+[[HL::[[1 2]::HL]]
+[[HL:: [3 4]]::HL]]
 
-[[HL::Initialized with Zeros:
-[[0. 0. 0.]
- [0. 0. 0.]
- [0. 0. 0::HL]].]]
+[[HL::Initialized with Zeros:::HL]]
+[[HL::[[0. 0. 0.]::HL]]
+[[HL:: [0. 0. 0.]::HL]]
+[[HL:: [0. 0. 0::HL]].]]
 
 ```
 
@@ -10043,10 +10043,10 @@ AI aur Machine Learning models ko train karne se pehle, data ko clean aur struct
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 ```text
-# [[HL::DataFrame print karne par terminal mein ek neat table dikhegi index ke sath:
-   Name  Age
-0  Amit   25
-1  Ravi   30::HL]]
+# [[HL::DataFrame print karne par terminal mein ek neat table dikhegi index ke sath:::HL]]
+[[HL::   Name  Age::HL]]
+[[HL::0  Amit   25::HL]]
+[[HL::1  Ravi   30::HL]]
 
 ```
 
@@ -10089,29 +10089,29 @@ AI aur Machine Learning models ko train karne se pehle, data ko clean aur struct
 # 📤 Expected Output:
 
 ```text
---- [[HL::df.head() ---
-    Name  Age  Salary
-0  Rahul   25   50000
-1  Priya   28   60000
-2  Amit    22   45000
-3   Neha   31   80000
-4  Vikas   26   55000::HL]]
+--- [[HL::df.head() ---::HL]]
+[[HL::    Name  Age  Salary::HL]]
+[[HL::0  Rahul   25   50000::HL]]
+[[HL::1  Priya   28   60000::HL]]
+[[HL::2  Amit    22   45000::HL]]
+[[HL::3   Neha   31   80000::HL]]
+[[HL::4  Vikas   26   55000::HL]]
 
-[[HL::--- df.tail(2) ---
-   Name  Age  Salary
-4  Vikas  26   55000
-5    Raj  29   48000::HL]]
+[[HL::--- df.tail(2) ---::HL]]
+[[HL::   Name  Age  Salary::HL]]
+[[HL::4  Vikas  26   55000::HL]]
+[[HL::5    Raj  29   48000::HL]]
 
---- [[HL::df.describe() ---
-             Age        Salary
-count   6.000000      6.000000
-mean   26.833333  56333.333333
-std     3.188521  12816.655829
-min    22.000000  45000.000000
-25%    25.250000  48500.000000
-50%    27.000000  52500.000000
-75%    28.750000  58750.000000
-max    31.000000  80000.000000::HL]]
+--- [[HL::df.describe() ---::HL]]
+[[HL::             Age        Salary::HL]]
+[[HL::count   6.000000      6.000000::HL]]
+[[HL::mean   26.833333  56333.333333::HL]]
+[[HL::std     3.188521  12816.655829::HL]]
+[[HL::min    22.000000  45000.000000::HL]]
+[[HL::25%    25.250000  48500.000000::HL]]
+[[HL::50%    27.000000  52500.000000::HL]]
+[[HL::75%    28.750000  58750.000000::HL]]
+[[HL::max    31.000000  80000.000000::HL]]
 
 --- df.info() ---
 <class 'pandas.core.frame.DataFrame'>
@@ -10130,9 +10130,9 @@ memory usage: 272.0+ bytes
 ##### 🔬 Code Explanation
 
 * [[HL::**Line 20:** `df.describe()` — Yeh method numeric columns ka summary deta hai.::HL]]
-* [[HL::`mean` = average value.::HL]]
-* [[HL::`std` (standard deviation — data apni average value se kitna bikhra hua ya spread hai).::HL]]
-* [[HL::`25%, 50%, 75%` (percentiles — data points jinse neeche utne percentage data aata hai, e.g., 50% percentile is the exact middle value or median).::HL]]
+* `mean` = average value.::HL]]
+* `std` (standard deviation — data apni average value se kitna bikhra hua ya spread hai).::HL]]
+* `25%, 50%, 75%` (percentiles — data points jinse neeche utne percentage data aata hai, e.g., 50% percentile is the exact middle value or median).::HL]]
 
 
 * [[HL::**Line 23:** `df.info()` — Yeh memory usage aur null values (missing data) ka check deta hai. (Notice karo `print()` ki zaroorat nahi padi yahan, `.info()` khud print kardeta hai::HL]]).
@@ -10295,7 +10295,7 @@ DataFrame ek super-store ki tarah hai jisme hazaro products rakhe hain (rows/col
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-[[HL::1. Jab hum likhte hain `df['instock'] == 'yes'`, toh Pandas pure column pe yeh check array-level (vectorized form) mein lagata hai aur ek True/False (Boolean) Mask generate karta hai::HL]].
+1. [[HL::Jab hum likhte hain `df['instock'] == 'yes'`, toh Pandas pure column pe yeh check array-level (vectorized form) mein lagata hai aur ek True/False (Boolean) Mask generate karta hai::HL]].
 2. Jab hum is mask ko bahar brackets mein daalte hain `df[ ... ]`, toh Pandas sirf un rows ko retain karta hai jahan index value `True` milti hai, baaki hide (remove) ho jati hain.
 3. Multiple conditions combine karne ke liye standard Python `and` / `or` kaam nahi karte. Hum bitwise operators (`&` aur `|`) use karte hain jo array ke har element ko independently bit-level pe check karte hain.
 
@@ -10361,8 +10361,8 @@ Name: price, dtype: int64
 
 --- Popular AND Instock ---
     product  price  reviews instock
-0    Laptop   1200      [[HL::600     yes
-2  Keyboard     45      800     yes::HL]]
+0    Laptop   1200      [[HL::600     yes::HL]]
+[[HL::2  Keyboard     45      800     yes::HL]]
 
 ```
 
@@ -10573,11 +10573,11 @@ dtype: int64
 
 ```
 
-*(Notice output: Index 3 row delete ho gayi hai kyunki index 0 ke comparison mein woh [[HL::`drop_duplicates` ke final rules (cleaned values: tech, 10.5) mein duplicate ban chuki thi text change ke baad)*::HL]]
+*(Notice output: Index 3 row delete ho gayi hai kyunki index 0 ke comparison mein woh `drop_duplicates` ke final rules (cleaned values: tech, 10.5) mein duplicate ban chuki thi text change ke baad)*::HL]]
 
 [[HL::##### 🔬 Code Explanation::HL]]
 
-[[HL::* **Line 12:** `messy_data.isna().sum()` — `isna()` ek True/False matrix deta hai. `.sum()` columns ke hisaab se sabhi `True` (jo computationally 1 mane jaate hain) ko add karke bata deta hai ki missing values ka actual count kya hai::HL]].
+* [[HL::**Line 12:** `messy_data.isna().sum()` — `isna()` ek True/False matrix deta hai. `.sum()` columns ke hisaab se sabhi `True` (jo computationally 1 mane jaate hain) ko add karke bata deta hai ki missing values ka actual count kya hai::HL]].
 * **Line 17:** `fillna(mean_rating)` — Data Imputation technique. Agar ML train karna hai, toh hum row ko drop nahi karna chahte (data loss bacha rahe hain). Hum average data us khali dibbe (NaN) mein bhar dete hain. (Iski jagah `fillna(0)` ek specific static value fill hogi).
 * **Line 26:** `.str.lower().str.strip()` — Pandas ka `.str` accessor hume har cell pe direct operations karne deta hai loops lagaye bina. `.lower()` lowercase conversion aur `.strip()` trailing spaces (aage piche ki whitespaces) nikalta hai taaki ' TECH ' aur 'tech' exactly same count hon system ko.
 * **Line 29:** `drop_duplicates()` — Data pipeline bug jahan data scrape multiple times ho gaya ho usko silent spoil error aane se rokti hai. Yeh entire duplicate row delete kar deti hai index structure me.
@@ -10627,7 +10627,7 @@ Jab dataset size limit (1 Million rows) ho toh missing values `.fillna()` se tur
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Feature::HL]] | [[HL::`df.dropna()`::HL]] | [[HL::`df.fillna()`::HL]] |
+| [[HL::Feature::HL]] | `df.dropna()`::HL]] | `df.fillna()`::HL]] |
 | --- | --- | --- |
 | [[HL::Functionality::HL]] | [[HL::Null wali saari rows completely delete (drop) mita deta hai::HL]] | [[HL::Null wale sections jagah par koi synthetic estimated static placeholder value bhar deta hai::HL]] |
 | [[HL::Use case::HL]] | [[HL::Jab bohot kam missing values (e.g. 1% nulls) missing tab unko safe delete karo::HL]] | [[HL::Jab extensive missing limit values (e.g. 30% empty space array limit rows empty) to original lines ko fix karo delete save row detail loss save karne ko.::HL]] |
@@ -10975,13 +10975,13 @@ Processing chunk 2...
 3  # --- 1. Advanced Import (Parsing) ---
 4  # na_values : agar CSV mein inme se koi word ho, toh usse Missing (NaN) maano
 5  # dtype     : 'price' column ko strict float aur 'quantity' ko int maano, strings mana hain
-6  [[HL::df = pd.read_csv('messy_data.csv', 
-7                   na_values=['na', 'missing', '-'], 
-8                   dtype={'price': float, 'quantity': int})
-9
-10 # --- 2. Advanced Export ---
-11 # to_csv() = DataFrame ko file mein write karta hai; sep='\t' (TSV - tab separated) banayega
-12 df.to_csv('output.tsv', sep='\t', index=False::HL]]) 
+6  [[HL::df = pd.read_csv('messy_data.csv', ::HL]]
+[[HL::7                   na_values=['na', 'missing', '-'], ::HL]]
+[[HL::8                   dtype={'price': float, 'quantity': int})::HL]]
+[[HL::9::HL]]
+[[HL::10 # --- 2. Advanced Export ---::HL]]
+[[HL::11 # to_csv() = DataFrame ko file mein write karta hai; sep='\t' (TSV - tab separated) banayega::HL]]
+[[HL::12 df.to_csv('output.tsv', sep='\t', index=False::HL]]) 
 13
 14 # Append Mode (Adding new data to existing file)
 15 # mode='a' = append (purana delete nahi hoga); header=False = column names dobara print na hon
@@ -11050,7 +11050,7 @@ Jab hum append mode (`mode='a'`) use karte hain cloud storage (S3/Azure) mein ma
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Export Parameter::HL]] | [[HL::`header=True` (Default)::HL]] | [[HL::`header=False`::HL]] |
+| [[HL::Export Parameter::HL]] | `header=True` (Default)::HL]] | `header=False`::HL]] |
 | --- | --- | --- |
 | [[HL::Use Case::HL]] | [[HL::Nayi file banate waqt::HL]] | [[HL::Existing file mein Append (`mode='a'`) karte waqt::HL]] |
 | [[HL::Result::HL]] | [[HL::Column ke naam sabse upar print honge::HL]] | [[HL::Sirf data row print hogi, headers nahi::HL]] |
@@ -11203,7 +11203,7 @@ Matplotlib ko ek "Whiteboard" aur "Painter" ki tarah socho. `Figure` tumhara poo
 
 [[HL::#### ⚠️ 10. Industry Anti-Patterns & Common Mistakes::HL]]
 
-[[HL::* **❌ Mistake:** `plt.show()` ko script ke beech mein likhna::HL]].
+* [[HL::**❌ Mistake:** `plt.show()` ko script ke beech mein likhna::HL]].
 * [[HL::**🤦 Why:** `plt.show()` blocking call hai. Matlab jab tak user woh graph close nahi karega, aage ki lines of code execute nahi hongi.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Saari plots aur logic upar likho, aur `plt.show()` script ki completely aakhri (last) line honi chahiye::HL]].
 * [[HL::**⚡ Consequences:** Agar server ya loop mein beech mein `plt.show()` aa gaya, toh poora program hang ho jayega execution pause karke.::HL]]
@@ -11368,8 +11368,8 @@ Aap window ke top UI mein diye gaye 'Zoom tool' (ek magnifying glass icon) se gr
 9  x = np.array([1, 2, 3, 4, 5])
 10 y = np.array([10, 25, 20, 50, 40])
 11 # s=1000 : point ka size parameter (bada circle); alpha=0.3 : 30% opacity (transparency)
-[[HL::12 plt.scatter(x, y, s=1000, color='green', alpha=0.3)
-13 plt.show()                                      # Parda hatao aur scatter plot::HL]] [[HL::dikhao::HL]]
+[[HL::12 plt.scatter(x, y, s=1000, color='green', alpha=0.3)::HL]]
+[[HL::13 plt.show()                                      # Parda hatao aur scatter plot::HL]] [[HL::dikhao::HL]]
 14
 15 # --- 2. Histogram (For Normal Distribution) ---
 16 # np.random.randn(1000) = NumPy ka function jo 1000 random numbers dega (Normal Distribution/Bell curve mein)
@@ -11853,8 +11853,8 @@ Seaborn industry mein EDA (Exploratory Data Analysis) ke liye absolute standard 
 
 | [[HL::Task::HL]] | [[HL::Matplotlib Approach::HL]] | [[HL::Seaborn Approach::HL]] |
 | --- | --- | --- |
-| [[HL::Auto Color Categories::HL]] | [[HL::Manually loops chalao, colors array banao::HL]] | [[HL::`hue='column_name'` lagao bas::HL]] |
-| [[HL::Auto Confidence Shade::HL]] | [[HL::Manually std deviation nikalo `fill_between` chalao::HL]] | [[HL::`sns.lineplot()` by default khud karta hai::HL]] |
+| [[HL::Auto Color Categories::HL]] | [[HL::Manually loops chalao, colors array banao::HL]] | `hue='column_name'` lagao bas::HL]] |
+| [[HL::Auto Confidence Shade::HL]] | [[HL::Manually std deviation nikalo `fill_between` chalao::HL]] | `sns.lineplot()` by default khud karta hai::HL]] |
 | [[HL::Code length::HL]] | [[HL::Bohot lamba::HL]] | [[HL::1 line convenience utility::HL]] |
 
 #### 🌍 14. Real-World Use Case
@@ -12019,7 +12019,7 @@ size          0.598315  0.489299  1.000000
 
 ##### 🔬 [[HL::Code Explanation::HL]]
 
-[[HL::* **Line 8 (`sns.countplot`):** Ise Matplotlib se banane mein hume pehle `df['day'].value_counts()` likhna padta. Seaborn automatically grouped frequency nikal leta hai.::HL]]
+* [[HL::**Line 8 (`sns.countplot`):** Ise Matplotlib se banane mein hume pehle `df['day'].value_counts()` likhna padta. Seaborn automatically grouped frequency nikal leta hai.::HL]]
 * [[HL::**Line 14 (`sns.barplot`):** Seaborn default error bars plot karta hai. Agar bar lamba hai but kaali dandi choti hai, matlab average consistently same hai. Kaali dandi (error bar) lambi hui toh matlab variance (volatility) highest hai.::HL]]
 * [[HL::**Line 23 (`numeric_only=True`):** Text ka math (correlation) nahi nikal sakta. Pandas update ke baad yeh flag lagana mandatory ho gaya hai, warna `ValueError` drop hota hai text string milne par::HL]].
 
@@ -12180,7 +12180,7 @@ Project Setup State:
 
 #### ⚙️ 6. Under [[HL::the Hood (Deep Dive)::HL]]
 
-[[HL::1. **The Kaggle Source:** Kaggle (Data Science ka platform/hub jahan real datasets host hote hain) se data `.csv` format mein aata hai::HL]].
+1. [[HL::**The Kaggle Source:** Kaggle (Data Science ka platform/hub jahan real datasets host hote hain) se data `.csv` format mein aata hai::HL]].
 2. **System Overhead & df.head:** Gurgaon real estate jaise dataset mein properties ke hazaron rows hote hain. Inhe seedha `print(df)` karne se UI memory bhar jati hai. `df.head(5)` sirf memory ka chota chunk stream karke visual confirm karta hai ki load sahi hua.
 3. **Scientific Notation Crisis:** Badhi values jaise ₹15,000,000 Excel automatically `1.5E+07` likh deta hai UI compress karne ke liye. Python ise explicitly manage karta hai display formatting use karke taaki calculations mein precision loss na ho.
 
@@ -12360,8 +12360,8 @@ Socho tum ek chhote Amazon seller ho jo din mein 50 orders process karta hai. Tu
 * [[HL::**Problem:** Log 100000 rows (1 lakh rows) ke liye Python script likhne lagte hain jo time waste hai, ya fir millions of rows ko Excel mein load karke system crash kar dete hain.::HL]]
 * [[HL::**Solution:** Right tool for the right data size choose karna. Excel small data ke liye fast aur visible hai; Python large data ke liye robust hai.::HL]]
 * [[HL::**What breaks if we don't use it?** Excel mein millions of rows load karne par app hang ho jayegi, RAM full ho jayegi, aur human error ke chances badh jayenge.::HL]]
-* **✅ [[HL::Kab use karo (Use this when):** [[HL::Jab data 100000 rows se kam ho, tumhe visual data tracking chahiye, ya listed price aur discounted price ke beech ka difference manually aankhon se verify karna ho.::HL]]::HL]]
-* **❌ [[HL::Kab mat karo / Alternative prefer karo (Avoid when):** Jab data millions (lakhon) rows cross kar jaye — tab Excel drop karo aur Pandas (Python library — tabular data ko code se process karne ke liye) use karo.::HL]]
+* [[HL::**✅ Kab use karo (Use this when):** Jab data 100000 rows se kam ho, tumhe visual data tracking chahiye, ya listed price aur discounted price ke beech ka difference manually aankhon se verify karna ho.::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab data millions (lakhon) rows cross kar jaye — tab Excel drop karo aur Pandas (Python library — tabular data ko code se process karne ke liye) use karo.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -12379,7 +12379,7 @@ Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualizat
 
 **Flow of Decision Making:**
 
-[[HL::1. **Check Data Size:** Kya dataset mein 100,000 rows hain?::HL]]
+1. [[HL::**Check Data Size:** Kya dataset mein 100,000 rows hain?::HL]]
 * [[HL::**Yes (Small Data):** Use Excel. Tum ad performance ya Amazon seller sales easily filter aur sort kar sakte ho.::HL]]
 * [[HL::**No (Millions of rows):** Use Python + Pandas.::HL]]
 
@@ -12457,15 +12457,15 @@ Ek small Amazon seller apni weekly sales aur ad performance report (approx 5,000
 #### 🎨 16. Visual Diagram (ASCII Art)
 
 ```text
-[[HL::Data Size Detection
-       │
-       ├── < 100,000 Rows? ───> Use EXCEL
-       │                        (High Visual Data Tracking)
-       │                        (Prevents unseen AI hallucination)
-       │
-       └── > Millions? ───────> Use PYTHON/PANDAS
-                                (High Processing Power)
-                                (Prone to logic errors if not checked)::HL]]
+[[HL::Data Size Detection::HL]]
+[[HL::       │::HL]]
+[[HL::       ├── < 100,000 Rows? ───> Use EXCEL::HL]]
+[[HL::       │                        (High Visual Data Tracking)::HL]]
+[[HL::       │                        (Prevents unseen AI hallucination)::HL]]
+[[HL::       │::HL]]
+[[HL::       └── > Millions? ───────> Use PYTHON/PANDAS::HL]]
+[[HL::                                (High Processing Power)::HL]]
+[[HL::                                (Prone to logic errors if not checked)::HL]]
 
 ```
 
@@ -12517,7 +12517,7 @@ Socho tumhare paas ek phonebook (directory) hai. Tum usme ek naam (lookup_value)
 * [[HL::**Solution:** VLOOKUP formula lagakar hum ek master table se seconds mein data mapping automatically karwa sakte hain.::HL]]
 * [[HL::**What breaks if we don't use it?** Data copy-paste karne mein human errors honge, time waste hoga, aur order management system manual hone ki wajah se fail ho jayega.::HL]]
 * [[HL::**✅ Kab use karo (Use this when):** Jab tumhe ek common identifier (jaise Product ID ya Employee ID) ke basis pe kisi dusri sheet/table se corresponding data (jaise Product Name, Salary) lana ho.::HL]]
-* **❌ [[HL::Kab mat karo / Alternative prefer karo (Avoid when):** [[HL::Jab tumhari lookup value pehle column mein na hokar table ke beech mein ya right side mein ho. VLOOKUP sirf left-to-right kaam karta hai. Wahan XLOOKUP (advanced Excel formula — agle topic mein cover hoga) prefer karo.::HL]]::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab tumhari lookup value pehle column mein na hokar table ke beech mein ya right side mein ho. VLOOKUP sirf left-to-right kaam karta hai. Wahan XLOOKUP (advanced Excel formula — agle topic mein cover hoga) prefer karo.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -12533,7 +12533,7 @@ Socho tumhare paas ek phonebook (directory) hai. Tum usme ek naam (lookup_value)
 #### 💻 7. Hands-On — Runnable Example
 
 ```excel
-[[HL::# Excel Formula ::HL]]|[[HL:: All Excel Versions::HL]]
+[[HL::# Excel Formula | All Excel Versions::HL]]
 1  [[HL::=VLOOKUP(               # VLOOKUP() = Vertical Lookup function start::HL]]
 2      [[HL::A2,                 # lookup_value = Hum kya dhoondh rahe hain (e.g., P1003)::HL]]
 3      [[HL::Table1[#All],       # table_array = Kahan dhoondh rahe hain (table referencing use ki, hardcoded A1 to D6 better approach nahi hai)::HL]]
@@ -12556,11 +12556,11 @@ USB cable
 * [[HL::**Line 4:**::HL]] `2` [[HL::(Column Index Number) — ⭐ Excel mein column index 1 se start hota hai (C/Python programming jaisa 0 se nahi). Iska matlab Column 1 hi ID wala column hai, aur Column 2 mein Product Name (e.g., notebook, mouse) hai.::HL]]
 * [[HL::**Line 5:** `0` (Exact match) — `0` matlab exact match chahiye. Agar yeh pass nahi karoge toh default approximate match (1) le lega aur galat result de sakta hai.::HL]]
 
-[[HL::**Error Handling with IF & NA:**
-Agar product nahi milta toh VLOOKUP `#N/A` return karta hai, jisse saare aage ke calculations break ho jate hain.::HL]]
+[[HL::**Error Handling with IF & NA:**::HL]]
+[[HL::Agar product nahi milta toh VLOOKUP `#N/A` return karta hai, jisse saare aage ke calculations break ho jate hain.::HL]]
 
 ```excel
-[[HL::# Excel Formula ::HL]]|[[HL:: Error handling wrapper::HL]]
+[[HL::# Excel Formula | Error handling wrapper::HL]]
 1  [[HL::=IF(ISNA(VLOOKUP(A2, $A$1:$D$6, 2, 0)), "Not Found", VLOOKUP(A2, $A$1:$D$6, 2, 0)) # IF() = Conditional logic; ISNA() = Check karta hai kya output #N/A hai::HL]]
 
 ```
@@ -12581,11 +12581,11 @@ Not Found
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ [[HL::Mistake:** Range ko bina freeze (`$`) kiye formula drag karna (`A1:D6` instead of `$A$1:$D$6`).::HL]]
+* [[HL::**❌ Mistake:** Range ko bina freeze (`$`) kiye formula drag karna (`A1:D6` instead of `$A$1:$D$6`).::HL]]
 * [[HL::**🤦 Why:** Drag karne par Excel relative reference follow karta hai, toh next cell mein array `A2:D7` ho jata hai, data chhutne lagta hai.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Ya toh `$A$1:$D$6` freeze karo, ya `Table1` bana kar use karo.::HL]]
 * [[HL::**⚡ Consequences:** Tumhara formula neeche ke rows mein match nahi dhoondh payega aur aadhi report mein random `#N/A` errors aa jayenge.::HL]]
-* **❌ [[HL::Mistake:** [[HL::Column Index ko 0 assume karna kyunki programming (Python/JS) mein arrays 0 se start hote hain.::HL]]::HL]]
+* [[HL::**❌ Mistake:** Column Index ko 0 assume karna kyunki programming (Python/JS) mein arrays 0 se start hote hain.::HL]]
 * [[HL::**🤦 Why:** Developers ka default mental model zero-based indexing hota hai.::HL]]
 * [[HL::**✅ The 'Pro' Way:** ⭐ Always remember: Excel column counting 1 se shuru hoti hai.::HL]]
 * [[HL::**⚡ Consequences:** Formula galat column se data utha lega ya `#REF!` error phenk dega.::HL]]
@@ -12614,7 +12614,7 @@ Not Found
 
 * **`Formula dragging is shifting my table array down`**
 * **Root Cause:** Tum hardcoded range (relative referencing) use kar rahe ho.
-* **Fix:** Keyboard pe [[HL::`F4` daba kar range references ko absolute banao (add $ symbols).::HL]]
+* **Fix:** Keyboard pe `F4` daba kar range references ko absolute banao (add $ symbols).::HL]]
 
 
 * [[HL::**`#REF! Error`**::HL]]
@@ -12658,13 +12658,13 @@ Order Sheet (Input)                  Inventory Master (Table1)
 #### ❓ 17. Interview Q&A (FAQ)
 
 * **Q:** Excel VBA/Formulas mein indexing kahan se start hoti hai aur kya issues aate hain programmers ko?
-* **A:** ⭐ The index does not start from 0 in Excel. VLOOKUP mein column index humesha 1 se shuru hota hai. Programmers usually array zero-indexing assumption se [[HL::`0` pass kar dete hain, jisse error throw hota hai.::HL]]
+* **A:** ⭐ The index does not start from 0 in Excel. VLOOKUP mein column index humesha 1 se shuru hota hai. Programmers usually array zero-indexing assumption se `0` pass kar dete hain, jisse error throw hota hai.::HL]]
 * [[HL::**Q:** Range `$A$1:$D$6` aur `A1:D6` mein kya practical diffrence hai formula drag karte waqt?::HL]]
 * [[HL::**A:** `A1:D6` relative reference hai, agar formula ko row 2 se row 3 pe drag karoge toh array `A2:D7` ban jayega (shift down). Jabki `$A$1:$D$6` (freeze kiya hua) absolute reference hai, ye shift nahi hoga aur search range fix rahegi.::HL]]
 * [[HL::**Q:** VLOOKUP mein agar::HL]] `lookup_value` [[HL::na mile toh kya error aayega aur fix kya hai?::HL]]
 * [[HL::**A:** `#N/A` error aata hai. Isko handle karne ke liye hum error wrapper `IF(ISNA(VLOOKUP(...)), "Not Found", VLOOKUP(...))` lagate hain, ya modern Excel mein `IFERROR()` use karte hain taaki clean data format rahe.::HL]]
 * **Q:** Exact match aur approximate match mein VLOOKUP mein kya value use hoti hai?
-* **A:** `0` (ya FALSE) exact match ke liye hota hai, aur [[HL::`1` (ya TRUE) approximate match ke liye. Strings/IDs search karte waqt hamesha `0` lagana zaroori hai.::HL]]
+* **A:** `0` (ya FALSE) exact match ke liye hota hai, aur `1` (ya TRUE) approximate match ke liye. Strings/IDs search karte waqt hamesha `0` lagana zaroori hai.::HL]]
 * [[HL::**Q:** Table Referencing (`Table1[#All]`) why is it preferred over hardcoding?::HL]]
 * [[HL::**A:** Hardcoding mein kal ko row 7 pe naya product aaya toh formula ko update karna padega, jabki Table reference automatically dynamically expand ho jata hai naye data ke include hote hi.::HL]]
 
@@ -12736,8 +12736,8 @@ Order Sheet (Input)                  Inventory Master (Table1)
 * [[HL::**Problem:** Kai baar clients ya legacy systems se data horizontal format (mahino ke naam top row mein) aata hai. Wahan VLOOKUP fail ho jata hai kyunki usko first column mein data chahiye hota hai.::HL]]
 * [[HL::**Solution:** Hum ya toh data ko 'Paste Transpose' karke vertical bana lein, ya direct `HLOOKUP` formula laga lein.::HL]]
 * [[HL::**What breaks if we don't use it?** Horizontal data ko manually vertical likhne mein ghanto barbad honge aur human error hoga.::HL]]
-* **✅ [[HL::Kab use karo (Use this when):** Jab tumhari search value (e.g., Product ID, Month) table ki **top row** mein ho.::HL]]
-* **❌ [[HL::Kab mat karo / Alternative prefer karo (Avoid when):** [[HL::Jab table standard database format (vertical) mein ho. Wahan hamesha VLOOKUP ya XLOOKUP prefer karo kyunki vertical tables scalable hoti hain.::HL]]::HL]]
+* [[HL::**✅ Kab use karo (Use this when):** Jab tumhari search value (e.g., Product ID, Month) table ki **top row** mein ho.::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab table standard database format (vertical) mein ho. Wahan hamesha VLOOKUP ya XLOOKUP prefer karo kyunki vertical tables scalable hoti hain.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -12745,7 +12745,7 @@ Order Sheet (Input)                  Inventory Master (Table1)
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-[[HL::1. **Transpose Operation:** Memory mein Excel `(x, y)` coordinates ko `(y, x)` mein swap kar deta hai.::HL]]
+1. [[HL::**Transpose Operation:** Memory mein Excel `(x, y)` coordinates ko `(y, x)` mein swap kar deta hai.::HL]]
 2. [[HL::**HLOOKUP Flow:** Engine array ki `top row` (Row 1) mein left-to-right scan karta hai.::HL]]
 3. [[HL::Jab `exact match` milta hai, toh woh us column mein `row_index_num` (e.g., row index 4) tak vertically neeche jaata hai.::HL]]
 4. [[HL::Us intersection point ka data final output bana deta hai.::HL]]
@@ -12758,7 +12758,7 @@ Keyboard shortcut: Data copy karo -> Cell select karo -> `ALT + E + S + E` press
 [[HL::**Step 2: HLOOKUP Formula**::HL]]
 
 ```excel
-[[HL::# Excel Formula ::HL]]|[[HL:: All Excel Versions::HL]]
+[[HL::# Excel Formula | All Excel Versions::HL]]
 1  [[HL::=HLOOKUP(                # HLOOKUP() = Horizontal Lookup function start::HL]]
 2      [[HL::"P1003",             # lookup_value = Kya dhoondh rahe hain (Top row mein P1003)::HL]]
 3      [[HL::$B$1:$F$5,           # table_array = Search range (dono rows & columns ko $ se freeze kiya hai)::HL]]
@@ -12790,7 +12790,7 @@ Modern Data Engineering mein HLOOKUP bahut rarely use hota hai kyunki databases 
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ [[HL::Mistake:** Drag karne se pehle table ko freeze (`$`) na karna.::HL]]
+* [[HL::**❌ Mistake:** Drag karne se pehle table ko freeze (`$`) na karna.::HL]]
 * [[HL::**🤦 Why:** Log formula jaldi mein likhte hain aur reference shift ho jata hai.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Hamesha table array ko select karke `F4` key dabao taaki `$A$1:$Z$10` ho jaye.::HL]]
 * **⚡ Consequences:** Horizontal lookup table khisak jayegi aur aage ke saare results mein `#N/A` aane lagega.
@@ -12809,7 +12809,7 @@ Modern Data Engineering mein HLOOKUP bahut rarely use hota hai kyunki databases 
 
 * **Confusion 2 — "ISNA aur ISERR mein kya fark hai?"**
 * **Galat soch:** Dono same errors handle karte hain.
-* **Actually:** `ISNA` sirf [[HL::`#N/A` (data not found) error::HL]] ko pakadta hai. `ISERR` baaki sab errors (jaise `#REF!`, `#VALUE!`) ko pakadta hai lekin `#N/A` ko ignore karta hai.
+* **Actually:** `ISNA` sirf `#N/A` (data not found) error::HL]] ko pakadta hai. `ISERR` baaki sab errors (jaise `#REF!`, `#VALUE!`) ko pakadta hai lekin `#N/A` ko ignore karta hai.
 * **Prove karo:** Ek cell mein `=1/0` likho (gives `#DIV/0!`). `ISNA(cell)` false dega, `ISERR(cell)` true dega.
 
 
@@ -12861,8 +12861,8 @@ Finance teams ki monthly balance sheets aksar horizontal aati hain (Jan, Feb, Ma
 
 * [[HL::**Q:** Paste Transpose aur HLOOKUP dono same problem solve karte hain kya?::HL]]
 * [[HL::**A:** Nahi. Transpose pure raw data ka structure change kar deta hai (horizontal se vertical). Jabki HLOOKUP existing horizontal data structure ko bina change kiye, usme se specific information dhundh nikalne ka formula hai.::HL]]
-* **Q:** Agar mujhe [[HL::`#N/A` error::HL]] ko handle karna hai toh best approach kya hai?
-* **A:** Purane Excel mein hum [[HL::`IF(ISNA(formula), "Error", formula)` likhte the. Lekin ab modern Excel mein `IFERROR(formula, "Not Found")` likhna zyada clean aur fast approach hai.::HL]]
+* **Q:** Agar mujhe `#N/A` error::HL]] ko handle karna hai toh best approach kya hai?
+* **A:** Purane Excel mein hum `IF(ISNA(formula), "Error", formula)` likhte the. Lekin ab modern Excel mein `IFERROR(formula, "Not Found")` likhna zyada clean aur fast approach hai.::HL]]
 * [[HL::**Q:** HLOOKUP mein array freeze karna kyu zaroori hai?::HL]]
 * [[HL::**A:** Agar array `$A$1:$F$4` freeze nahi kiya, toh formula right drag karne pe search range `B1:G4` ho jayegi. Jisse pehle columns search range se bahar ho jayenge aur old IDs fetch nahi hongi.::HL]]
 * [[HL::**Q:** Kya HLOOKUP partial text search kar sakta hai?::HL]]
@@ -12922,16 +12922,16 @@ Jab tum ek hi [[HL::XLOOKUP::HL]] lagate ho aur `return_array` mein 3 columns se
 
 #### 💻 7. Hands-On — Runnable Example
 
-**Example 1: Basic [[HL::XLOOKUP::HL]] with Built-in Error Handling (Reverse Lookup)**
+[[HL::**Example 1: Basic XLOOKUP::HL]] with Built-in Error Handling (Reverse Lookup)**
 
-[[HL::```excel
-# Excel Formula ::HL]]|[[HL:: Office 365::HL]] / Excel 2021+
-1  [[HL::=XLOOKUP(::HL]]                 [[HL::# XLOOKUP function init::HL]]
-2      [[HL::A2,                   # lookup_value = Employee ID e.g., E105::HL]]
-3      [[HL::C:C,                  # lookup array = C column mein dhoondho (Right side pe hai)::HL]]
-4      [[HL::A:A,                  # return array = A column ka data wapas do (Left side pe hai - Reverse Lookup)::HL]]
-5      [[HL::"Not Found"           # [if not found] = inbuilt IFNA logic. Agar E105 nahi::HL]] mila toh yeh likh do.
-6  )
+```excel
+# Excel Formula | Office 365 / Excel 2021+
+[[HL::1  =XLOOKUP(                 # XLOOKUP function init::HL]]
+[[HL::2      A2,                   # lookup_value = Employee ID e.g., E105::HL]]
+[[HL::3      C:C,                  # lookup array = C column mein dhoondho (Right side pe hai)::HL]]
+[[HL::4      A:A,                  # return array = A column ka data wapas do (Left side pe hai - Reverse Lookup)::HL]]
+[[HL::5      "Not Found"           # [if not found] = inbuilt IFNA logic. Agar E105 nahi mila toh yeh likh do.::HL]]
+[[HL::6  )::HL]]
 
 ```
 
@@ -12941,18 +12941,18 @@ John Doe
 
 ```
 
-[[HL::**Example 2: ⭐ Spill Values & Wildcard Character Match**
-Speaker ne wildcard (`*` asterisk) aur `&` (ampersand — do texts ko jodne ke liye use hota hai) ka example diya: "pen" vs "pendoms".::HL]]
+[[HL::**Example 2: ⭐ Spill Values & Wildcard Character Match**::HL]]
+[[HL::Speaker ne wildcard (`*` asterisk) aur `&` (ampersand — do texts ko jodne ke liye use hota hai) ka example diya: "pen" vs "pendoms".::HL]]
 
-[[HL::```excel
-# Excel Formula ::HL]]|[[HL:: Office 365+::HL]]
-1  [[HL::=XLOOKUP(::HL]]                 # [[HL::XLOOKUP::HL]] function start
-2      H5 & "*",             # lookup_value = H5 cell ("pen") ko asterisk ("*") wildcard ke sath joda (ampersand `&` use karke). Ban gaya "pen*"
-3      A:A,                  # lookup array = Product name column
-4      B:D,                  # return array = Price, ID, aur Name teeno column return karne hain (⭐ spill values)
-5      "Invalid",            # [if not found]
-6      2                     # [match mode] = 2 (Yeh wildcard character match activate karta hai)
-7  )
+```excel
+# Excel Formula | Office 365+
+[[HL::1  =XLOOKUP(                 # XLOOKUP function start::HL]]
+[[HL::2      H5 & "*",             # lookup_value = H5 cell ("pen") ko asterisk ("*") wildcard ke sath joda (ampersand `&` use karke). Ban gaya "pen*"::HL]]
+[[HL::3      A:A,                  # lookup array = Product name column::HL]]
+[[HL::4      B:D,                  # return array = Price, ID, aur Name teeno column return karne hain (⭐ spill values)::HL]]
+[[HL::5      "Invalid",            # [if not found]::HL]]
+[[HL::6      2                     # [match mode] = 2 (Yeh wildcard character match activate karta hai)::HL]]
+[[HL::7  )::HL]]
 
 ```
 
@@ -12982,7 +12982,7 @@ $10   |   P1004   |   Pendoms
 * **🤦 Why:** Log purani aadat se majboor hote hain (VLOOKUP wala flow use karte hain).
 * **✅ The 'Pro' Way:** [[HL::XLOOKUP::HL]] ka 4th argument `[if not found]` natively inbuilt hai. Seedha wahan "Not Found" likho.
 * **⚡ Consequences:** Formula unnecessary lamba aur redundant ho jayega (e.g. IsERR ya isNA wrap karna yahan useless processing cycle lagata hai).
-* **❌ [[HL::Mistake:** Wildcard string `"pen*"` bana di, par match mode `2` pass nahi kiya.::HL]]
+* [[HL::**❌ Mistake:** Wildcard string `"pen*"` bana di, par match mode `2` pass nahi kiya.::HL]]
 * [[HL::**🤦 Why:** Beginners ko lagta hai asterisk lagate hi function apne aap pattern match kar lega.::HL]]
 * [[HL::**✅ The 'Pro' Way:** XLOOKUP defaults to exact match (0). Tumhe consciously usko parameter `2` dena hoga taaki wildcard activate ho.::HL]]
 * **⚡ Consequences:** Formula exact string `"pen*"` dhoondhne lagega (with asterisk symbol literally) aur `#N/A` (ya Not Found) dega kyunki database mein us naam ki item nahi hogi.
@@ -12996,7 +12996,7 @@ $10   |   P1004   |   Pendoms
 
 
 * **Confusion 2 — "Ampersand (&) aur Asterisk (*) ek sath kyu lagaye?"**
-* **Galat soch:** [[HL::`XLOOKUP("H5*",::HL]] ...)` likhne se H5 ka data le lega.
+* **Galat soch:** `XLOOKUP("H5*",::HL]] ...)` likhne se H5 ka data le lega.
 * **Actually:** Agar tum "H5*" string ke andar likhoge, toh Excel strictly "H", "5", "*" dhoondhega. Cell value fetch karne ke liye `H5` ko bahar rakh ke ampersand (`&`) se text `"*"` jodna padta hai (`H5 & "*"`).
 
 
@@ -13010,7 +13010,7 @@ $10   |   P1004   |   Pendoms
 
 * **`#SPILL! Error`**
 * **Root Cause:** Formula jahan apna return array "spill" (spread) karna chahta hai, wahan cells khali nahi hain.
-* **Fix:** Formula wale cell ke right side ke area ko select karke [[HL::`Delete` button dabao, error khud hat jayega.::HL]]
+* **Fix:** Formula wale cell ke right side ke area ko select karke `Delete` button dabao, error khud hat jayega.::HL]]
 
 
 
@@ -13132,7 +13132,7 @@ Socho ek train aa rahi hai jisme 5 dibbe (compartments) ek sath jude hue hain. H
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-[[HL::1. **Selection:** Excel selected cell ki string ko memory mein leta hai.::HL]]
+1. [[HL::**Selection:** Excel selected cell ki string ko memory mein leta hai.::HL]]
 2. [[HL::**Parsing Mode:**::HL]]
 * [[HL::Agar **Delimited** (kisi character se split karna) mode hai: Engine poori string ko scan karta hai aur jahan bhi specified character (jaise colon, tilde `~`) milta hai, string wahan se break (split) ho jati hai.::HL]]
 * [[HL::Agar **Fixed width** (fix characters ki length se split karna) mode hai: Engine exact character count (e.g., pehle 3 characters) ke baad text ko forcibly tod deta hai, chahe wahan koi word adha hi kyu na cut raha ho.::HL]]
@@ -13142,17 +13142,17 @@ Socho ek train aa rahi hai jisme 5 dibbe (compartments) ek sath jude hue hain. H
 
 #### 💻 7. Hands-On — Runnable Example
 
-Chalo ek website se laye gaye AI funding investors ke data, aur ek Country code ko split karte hain.
+[[HL::Chalo ek website se laye gaye AI funding investors ke data, aur ek Country code ko split karte hain.::HL]]
 
-**Scenario A: Delimited Splitting (Using Tilde `~`)**
-*Input Data (Cell A1):* `John Smith~Elon Musk~Sara Lee`
-*Action Sequence:*
+[[HL::**Scenario A: Delimited Splitting (Using Tilde `~`)**::HL]]
+[[HL::*Input Data (Cell A1):* `John Smith~Elon Musk~Sara Lee`::HL]]
+[[HL::*Action Sequence:*::HL]]
 
-1. Select Cell A1.
-2. Go to `Data` > `Text to Columns`.
-3. Choose `Delimited` > Next.
-4. Check `Other` aur box mein tilde `~` type karo.
-5. Click `Finish`.
+1. [[HL::Select Cell A1.::HL]]
+2. [[HL::Go to `Data` > `Text to Columns`.::HL]]
+3. [[HL::Choose `Delimited` > Next.::HL]]
+4. [[HL::Check `Other` aur box mein tilde `~` type karo.::HL]]
+5. [[HL::Click `Finish`.::HL]]
 
 ```text
 # 📤 [[HL::Expected Output:::HL]]
@@ -13162,15 +13162,15 @@ Chalo ek website se laye gaye AI funding investors ke data, aur ek Country code 
 
 ```
 
-**Scenario B: ⭐ Fixed Width Splitting (Warning Application)**
-*Input Data (Cell A2):* `IND2025001` (Country code + Invoice ID)
-*Action Sequence:*
+[[HL::**Scenario B: ⭐ Fixed Width Splitting (Warning Application)**::HL]]
+[[HL::*Input Data (Cell A2):* `IND2025001` (Country code + Invoice ID)::HL]]
+[[HL::*Action Sequence:*::HL]]
 
-1. Select Cell A2.
-2. Go to `Data` > `Text to Columns`.
-3. Choose `Fixed width` > Next.
-4. Scale (ruler) par 'IND' ke baad ek line draw karo (after 3 characters).
-5. Click `Finish`.
+1. [[HL::Select Cell A2.::HL]]
+2. [[HL::Go to `Data` > `Text to Columns`.::HL]]
+3. [[HL::Choose `Fixed width` > Next.::HL]]
+4. [[HL::Scale (ruler) par 'IND' ke baad ek line draw karo (after 3 characters).::HL]]
+5. [[HL::Click `Finish`.::HL]]
 
 ```text
 # 📤 [[HL::Expected Output:::HL]]
@@ -13190,11 +13190,11 @@ Chalo ek website se laye gaye AI funding investors ke data, aur ek Country code 
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Text to columns run karte waqt right side (bagal) wale columns ko khali (empty) na karna.
-* **🤦 Why:** Beginners bhool jate hain ki splitted data right side mein failega (spill hoga).
-* **✅ The 'Pro' Way:** Hamesha right side mein utne blank columns Insert karo jitne pieces banne wale hain.
-* **⚡ Consequences:** Agar bagal wale column mein pehle se koi important data tha (e.g., Salary ya Email), toh [[HL::splitted text usko permanently overwrite/delete kar dega bina warning ke.::HL]]
-* **❌ [[HL::Mistake:** ⭐ Fixed width mode use karna jab data strings ki length alag-alag ho. (e.g., `IND2025` aur `US2025` ko fixed width 3 se kaatna).::HL]]
+* [[HL::**❌ Mistake:** Text to columns run karte waqt right side (bagal) wale columns ko khali (empty) na karna.::HL]]
+* [[HL::**🤦 Why:** Beginners bhool jate hain ki splitted data right side mein failega (spill hoga).::HL]]
+* [[HL::**✅ The 'Pro' Way:** Hamesha right side mein utne blank columns Insert karo jitne pieces banne wale hain.::HL]]
+* [[HL::**⚡ Consequences:** Agar bagal wale column mein pehle se koi important data tha (e.g., Salary ya Email), toh splitted text usko permanently overwrite/delete kar dega bina warning ke.::HL]]
+* [[HL::**❌ Mistake:** ⭐ Fixed width mode use karna jab data strings ki length alag-alag ho. (e.g., `IND2025` aur `US2025` ko fixed width 3 se kaatna).::HL]]
 * [[HL::**🤦 Why:** Log assume karte hain engine pattern samajh lega (ki pehle letters hain phir numbers).::HL]]
 * [[HL::**✅ The 'Pro' Way:** Speaker explicitly highlights: "Number of characters should be same". Agar length variable hai (IND = 3, US = 2), toh Fixed width FAIL ho jayega. Wahan Delimiter ya formulas use karo.::HL]]
 * [[HL::**⚡ Consequences:** Data galat jagah se cut jayega. `US2025` cut kar `US2` alag aur `025` alag ban jayega, jo data corrupt kar dega.::HL]]
@@ -13246,17 +13246,17 @@ Chalo ek website se laye gaye AI funding investors ke data, aur ek Country code 
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
-[[HL::```text
+```text
 (Text To Columns - Delimited Mode with Tilde '~')::HL]]
 
-[[HL::[ John Smith~Elon Musk~Sara Lee ]  <-- Single Cell (A1)
-               │
-          [Wizard Engine] 
-       (Finds '~' and cuts)
-               │
-      +--------+--------+
-      ↓        ↓        ↓
-[John Smith] [Elon Musk] [Sara Lee]  <-- 3 Separate Cells (A1, B1, C1)::HL]]
+[[HL::[ John Smith~Elon Musk~Sara Lee ]  <-- Single Cell (A1)::HL]]
+[[HL::               │::HL]]
+[[HL::          [Wizard Engine] ::HL]]
+[[HL::       (Finds '~' and cuts)::HL]]
+[[HL::               │::HL]]
+[[HL::      +--------+--------+::HL]]
+[[HL::      ↓        ↓        ↓::HL]]
+[[HL::[John Smith] [Elon Musk] [Sara Lee]  <-- 3 Separate Cells (A1, B1, C1)::HL]]
 
 ```
 
@@ -13323,16 +13323,16 @@ Maan lo tumhare paas shadi ke guests ki ek list hai. Sara Lee ne galti se do baa
 
 #### 💻 7. Hands-On — Runnable Example
 
-**Scenario: Removing duplicate employees (Sara Lee & John Smith) properly**
+[[HL::**Scenario: Removing duplicate employees (Sara Lee & John Smith) properly**::HL]]
 
-*Action Sequence:*
+[[HL::*Action Sequence:*::HL]]
 
-1. Select Column A (Names column) jisme Sara Lee aur John Smith ke naam repeat ho rahe hain.
-2. Go to `Data` > `Remove Duplicates`.
-3. **CRITICAL STEP:** Excel Warning Dega. Hamesha **"Expand the selection"** (data ko stretch karke poore table pe apply karna) choose karo.
-4. Click `Remove Duplicates`.
-5. Checkbox popup aayega. Agar sirf Name ke base pe delete karna hai toh baaki columns 'Unselect all' karke sirf 'Name' pe check lagao (Unique combination processing).
-6. Click `OK`.
+1. [[HL::Select Column A (Names column) jisme Sara Lee aur John Smith ke naam repeat ho rahe hain.::HL]]
+2. [[HL::Go to `Data` > `Remove Duplicates`.::HL]]
+3. [[HL::**CRITICAL STEP:** Excel Warning Dega. Hamesha **"Expand the selection"** (data ko stretch karke poore table pe apply karna) choose karo.::HL]]
+4. [[HL::Click `Remove Duplicates`.::HL]]
+5. [[HL::Checkbox popup aayega. Agar sirf Name ke base pe delete karna hai toh baaki columns 'Unselect all' karke sirf 'Name' pe check lagao (Unique combination processing).::HL]]
+6. [[HL::Click `OK`.::HL]]
 
 ```text
 # 📤 Expected Output:
@@ -13351,10 +13351,10 @@ Excel ka yeh feature destructive (permanently delete karne wala) hota hai. Moder
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ [[HL::Mistake:** Warning box aane pe "Continue with current selection" pe click kar dena.::HL]]
+* [[HL::**❌ Mistake:** Warning box aane pe "Continue with current selection" pe click kar dena.::HL]]
 * [[HL::**🤦 Why:** Beginners ko lagta hai "Mera target toh sirf Column A hi hai, main baki kyu select karu?".::HL]]
-* **✅ The 'Pro' Way:** ⭐ "It's always a good idea to expand the selection". Is warning ko ignore mat karo.
-* **⚡ Consequences:** Agar tumne 'Continue' kiya, toh Column A ki duplicates delete hoke shift up ho jayengi, lekin uske bagal wale data (jaise unki Salary ya City) wahi rahenge. Data misalign (scramble) ho jayega! Jaisa speaker ne kaha: *"Amanda White was an HR... how did she reach Seattle?"* — ye data corruption ka classic example hai.
+* [[HL::**✅ The 'Pro' Way:** ⭐ "It's always a good idea to expand the selection". Is warning ko ignore mat karo.::HL]]
+* [[HL::**⚡ Consequences:** Agar tumne 'Continue' kiya, toh Column A ki duplicates delete hoke shift up ho jayengi, lekin uske bagal wale data (jaise unki Salary ya City) wahi rahenge. Data misalign (scramble) ho jayega! Jaisa speaker ne kaha: *"Amanda White was an HR... how did she reach Seattle?"* — ye data corruption ka classic example hai.::HL]]
 * **❌ Mistake:** Checkbox popup mein 'Select All' karke enter maar dena.
 * **🤦 Why:** Log assume karte hain ki exact duplicate rows apne aap remove ho jayengi.
 * **✅ The 'Pro' Way:** Dhyan se socho ki unique combination kya hai. Agar tumne Date aur Name dono select kiye, aur ek bande ne 2 alag dates pe entry ki hai, toh wo delete nahi hogi (kyunki combination unique ban gaya).
@@ -13536,10 +13536,10 @@ Corporate environments mein jahan Office 365 (Microsoft ka cloud-based subscript
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ [[HL::Mistake:** Teams ke sath discuss karne ke liye 'New Note' add karna.::HL]]
+* [[HL::**❌ Mistake:** Teams ke sath discuss karne ke liye 'New Note' add karna.::HL]]
 * [[HL::**🤦 Why:** Purane versions ke users abhi bhi 'Note' ko hi interaction tool mante hain.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Collaborate karne ke liye sirf 'Comment' use karo taaki samne wale ko tag/mention kiya ja sake.::HL]]
-* **⚡ [[HL::Consequences:** Note kisi ko notify nahi karega. Dusra banda jab tak file khol ke hover nahi karega, usko tumhara question kabhi nahi dikhega.::HL]]
+* [[HL::**⚡ Consequences:** Note kisi ko notify nahi karega. Dusra banda jab tak file khol ke hover nahi karega, usko tumhara question kabhi nahi dikhega.::HL]]
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -13651,8 +13651,8 @@ NOTES (Red Triangle)          COMMENTS (Purple Indicator)
 * [[HL::**Problem:** Jab table mein 10,000 rows aur 50 columns hote hain, vertical scrolling (neeche jana) pe top headers gayab ho jate hain, aur horizontal scrolling (right jana) pe employee ke naam gayab ho jate hain. Log baar-baar upar-neeche scroll karke confuse hote hain.::HL]]
 * [[HL::**Solution:** Freeze Top Row aur Freeze First Column se hum in headers ko screen par lock kar dete hain.::HL]]
 * [[HL::**What breaks if we don't use it?** Data entry karte waqt tum kisi aur employee ka data galat column (jaise Tax ki jagah Bonus) mein type kar doge kyunki tumhe titles dikh nahi rahe the.::HL]]
-* **✅ Kab [[HL::use karo (Use this when):** Jab bhi tumhara data tumhari PC screen ke viewing area se bada ho. Hamesha headers ko freeze karna ek standard best practice hai.::HL]]
-* **❌ [[HL::Kab mat karo / Alternative prefer karo (Avoid when):** Jab tumhe sheet ke top data aur extreme bottom data ko ek sath compare karna ho aur dono mein edits karne hon. Wahan Freeze ki jagah **Split screen** feature use karo.::HL]]
+* [[HL::**✅ Kab use karo (Use this when):** Jab bhi tumhara data tumhari PC screen ke viewing area se bada ho. Hamesha headers ko freeze karna ek standard best practice hai.::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab tumhe sheet ke top data aur extreme bottom data ko ek sath compare karna ho aur dono mein edits karne hon. Wahan Freeze ki jagah **Split screen** feature use karo.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -13684,7 +13684,7 @@ NOTES (Red Triangle)          COMMENTS (Purple Indicator)
 
 [[HL::#### 🔒 8. Security-First Check::HL]]
 
-[[HL::`(N/A — Yeh sirf ek display/view level tool hai, isse actual data ya security pe koi asar nahi padta)`::HL]]
+`(N/A — Yeh sirf ek display/view level tool hai, isse actual data ya security pe koi asar nahi padta)`::HL]]
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -13692,10 +13692,10 @@ Professional reports aur dashboards deliver karte waqt analysts hamesha first ro
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Row 1 ko select karke uske baad 'Freeze Panes' option pe click karna (assuming Row 1 freeze hogi).
-* **🤦 Why:** Beginners ka logic hota hai "jo freeze karna hai usko select karo".
-* **✅ The 'Pro' Way:** Speaker ne aggressively point kiya: "Why did I select my selected cell C2?". Excel selected cell ke *upar* aur *left* ko freeze karta hai. Agar row 1 select ki, toh uske upar kuch hai hi nahi, Excel default sheet ke aakari middle ko freeze kar dega. Hamesha targeted cell (jaise C2 ya A2) select karo.
-* **⚡ Consequences:** Sheet randomly aadhi jagah se freeze ho jayegi aur tumhe bar bar 'Unfreeze Panes' karke gussa aayega.
+* [[HL::**❌ Mistake:** Row 1 ko select karke uske baad 'Freeze Panes' option pe click karna (assuming Row 1 freeze hogi).::HL]]
+* [[HL::**🤦 Why:** Beginners ka logic hota hai "jo freeze karna hai usko select karo".::HL]]
+* [[HL::**✅ The 'Pro' Way:** Speaker ne aggressively point kiya: "Why did I select my selected cell C2?". Excel selected cell ke *upar* aur *left* ko freeze karta hai. Agar row 1 select ki, toh uske upar kuch hai hi nahi, Excel default sheet ke aakari middle ko freeze kar dega. Hamesha targeted cell (jaise C2 ya A2) select karo.::HL]]
+* [[HL::**⚡ Consequences:** Sheet randomly aadhi jagah se freeze ho jayegi aur tumhe bar bar 'Unfreeze Panes' karke gussa aayega.::HL]]
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? [[HL::(Confusion Clarifier)::HL]]
 
@@ -13832,7 +13832,7 @@ Socho tumhare paas ek 1000 page ki kitaab hai. Agar main kahu "Ramesh" naam dhun
 * [[HL::**Solution:** `CTRL F` use karke hum text, notes, comments, aur yahan tak ki hex code (6-character color code jaise #FF0000) ya RGB values search aur replace kar sakte hain.::HL]]
 * [[HL::**What breaks if we don't use it?** Manually values dhoondhne aur edit karne se 100% kuch na kuch chhoot jayega, jisse report mein inconsistency aayegi.::HL]]
 * **✅ Kab use karo (Use this when):** Jab tumhe bulk (ek sath bahut saari) data correction karni ho, ya formula references manually update karne hon (e.g., D5 ko D6 banana ho).
-* **❌ [[HL::Kab mat karo / Alternative prefer karo (Avoid when):** Jab tumhe conditional logic lagana ho (e.g. "Agar age > 30 hai tabhi Delhi ko New Delhi karo"). Find & Replace andha (blind) hota hai. Wahan `IF()` formula prefer karo.::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab tumhe conditional logic lagana ho (e.g. "Agar age > 30 hai tabhi Delhi ko New Delhi karo"). Find & Replace andha (blind) hota hai. Wahan `IF()` formula prefer karo.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -13849,13 +13849,13 @@ Socho tumhare paas ek 1000 page ki kitaab hai. Agar main kahu "Ramesh" naam dhun
 **Command Clarity: The Format-Based Search**
 
 ```text
-1. Press `CTRL F`                        # Find dialogue box open karne ka shortcut
-2. Click 'Options'                       # Advanced settings reveal karne ke liye
-3. Format dropdown -> 'Choose Format...' # Cell ka design/color set karne ke liye
-4. Fill tab -> Choose color              # RGB(196, 215, 155) ya hex code specify karo
-5. Click 'Find All'                      # Excel ek list dega un sab cells ki jinme exactly yehi green fill color hai
-# 📤 Expected Output:
-Ek bottom panel khulega jisme un saare cells ka address hoga jinka background color RGB 196, 215, 155 hai.
+1. [[HL::Press `CTRL F`                        # Find dialogue box open karne ka shortcut::HL]]
+2. [[HL::Click 'Options'                       # Advanced settings reveal karne ke liye::HL]]
+3. [[HL::Format dropdown -> 'Choose Format...' # Cell ka design/color set karne ke liye::HL]]
+4. [[HL::Fill tab -> Choose color              # RGB(196, 215, 155) ya hex code specify karo::HL]]
+5. [[HL::Click 'Find All'                      # Excel ek list dega un sab cells ki jinme exactly yehi green fill color hai::HL]]
+[[HL::# 📤 Expected Output:::HL]]
+[[HL::Ek bottom panel khulega jisme un saare cells ka address hoga jinka background color RGB 196, 215, 155 hai.::HL]]
 
 ```
 
@@ -14013,24 +14013,24 @@ Jab tum Custom Sort lagate ho, toh ek popup window khulti hai jisme tum `Add Lev
 * `CTRL shift right` : Current cell se leke last column tak ka saara data ek sath highlight (select) karna.
 * `ALT D F F` : **Magic Shortcut** — Bina ribbon chuaye table pe instantly Filters lagana ya hatana (Data -> Filter -> Filter). (Alt, then D, then F, then F individually press karna hai).
 
-**Part 2: The Date Fix Trick (Text to Columns)**
-Agar Dates Excel mein align (e.g. left side) hain, toh wo fake dates (text) hain aur sorting fail hogi.
+[[HL::**Part 2: The Date Fix Trick (Text to Columns)**::HL]]
+[[HL::Agar Dates Excel mein align (e.g. left side) hain, toh wo fake dates (text) hain aur sorting fail hogi.::HL]]
 
-1. Date column select karo.
-2. Go to `Data > Text-to-Columns`.
-3. Delimited > Next > Next > Finish. (Bina koi settings change kiye finish hit karo).
-4. **Result:** Excel automatically un text strings ko real dates (right aligned) mein convert kar dega. Ab [[HL::`Oldest to Newest` ya `Newest to Oldest` perfectly kaam karega.::HL]]
+1. [[HL::Date column select karo.::HL]]
+2. [[HL::Go to `Data > Text-to-Columns`.::HL]]
+3. [[HL::Delimited > Next > Next > Finish. (Bina koi settings change kiye finish hit karo).::HL]]
+4. [[HL::**Result:** Excel automatically un text strings ko real dates (right aligned) mein convert kar dega. Ab `Oldest to Newest` ya `Newest to Oldest` perfectly kaam karega.::HL]]
 
-[[HL::**Part 3: Multi-Level Sorting & Custom Lists**
-Man lo hume January employees ko chocolate deni hai. Par Date column mein exact dates hain.::HL]]
+[[HL::**Part 3: Multi-Level Sorting & Custom Lists**::HL]]
+[[HL::Man lo hume January employees ko chocolate deni hai. Par Date column mein exact dates hain.::HL]]
 
 1. [[HL::Helper column banao (jaise 'Month_Name').::HL]]
 2. [[HL::Formula: `=TEXT(A2, "MMM")` `(TEXT function number ko specific string format mein badalta hai. "MMM" = Jan, Feb).`::HL]]
 3. [[HL::Table select karo > `Data > Sort`.::HL]]
-4. [[HL::`Sort by` -> 'Month_Name'.::HL]]
+4. `Sort by` -> 'Month_Name'.::HL]]
 5. [[HL::Order dropdown mein `Custom List...` select karo.::HL]]
 6. [[HL::Apni list enter karo: `Jan, Feb, Mar...` ya Financial year (April se March): `Apr, May, Jun...`::HL]]
-7. [[HL::`Add Level` click karo > Then by 'Hire Date' > `Oldest to Newest`.::HL]]
+7. `Add Level` click karo > Then by 'Hire Date' > `Oldest to Newest`.::HL]]
 
 [[HL::#### 🔒 8. Security-First Check::HL]]
 
@@ -14042,7 +14042,7 @@ No mouse policy! Top investment banks (e.g. Goldman Sachs) aur consulting firms 
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ [[HL::Mistake:** Mahino (Months) ya days ko A to Z (A se Z) sort kar dena.::HL]]
+* [[HL::**❌ Mistake:** Mahino (Months) ya days ko A to Z (A se Z) sort kar dena.::HL]]
 * [[HL::**🤦 Why:** Excel ko nahi pata ki January saal ka pehla mahina hai. Usko bas 'J' letter dikhta hai.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Hamesha Sort dialogue mein jao, Order ko drop-down karo, aur 'Custom List' se natural chronological order (Jan, Feb, Mar) select karo.::HL]]
 * **⚡ Consequences:** Tumhara bar chart ya report totally ulta (alphabetical) banega aur presentation mein reject ho jayega.

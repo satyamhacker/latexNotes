@@ -197,8 +197,9 @@ These are regular blockquote text — highlight normally if the term appears the
 ### Rule 22 — EMOJI IN HEADERS AND TEXT
 Notes heavily use emojis (🎯, 🐣, 📖, 🧠, 💻, 🔒, ⚠️, ✅, ❌, ⭐, 🔴, 🔵). Do NOT highlight emojis as part of a term unless the user's requested term explicitly includes the emoji character.
 
-### Rule 23 — TABLES
-Notes contain comparison tables, anti-pattern tables, keyword tables. Highlight terms inside table cells normally. The `|` pipe characters and `---` separator rows must never be touched.
+### Rule 23 — TABLES & SEPARATOR ROWS (CRITICAL MARKDOWN BREAKER)
+Notes contain comparison tables, anti-pattern tables, keyword tables. Highlight terms inside table cells normally. The `|` pipe characters MUST NEVER be touched.
+**CRITICAL:** You must NEVER highlight the table separator row (`| --- | --- |`). If a requested highlight spans across an entire table, you MUST explicitly split the highlight to completely skip the separator row. If a separator row gets wrapped in tags (e.g., `| [[HL::---::HL]] |`), the Markdown parser will fail to recognize the table, collapsing all data into a single corrupted, unreadable line!
 
 ### Rule 24 — ASCII ART DIAGRAMS
 Notes contain ASCII art diagrams using box-drawing characters like:
@@ -290,13 +291,15 @@ You must **globally strip** these trailing citation tags from the text before se
 **CRITICAL:** When stripping citations, be extremely specific! Do NOT use an overly broad regex like `\(".*"\)` that accidentally strips normal parenthetical quotes in the text (e.g. `("Shubham")`). Target the exact citation title provided by the user.
 
 ### Rule 37 — EXPAND HIGHLIGHTS OUTWARDS TO ENCOMPASS MARKDOWN
-If the text you need to highlight starts or ends *inside* a Markdown tag (like `**bold**`, `_italic_`, or `` `code` ``), **DO NOT** chop the highlight into tiny isolated words to avoid the Markdown syntax. 
-Instead, you must **expand your highlight boundaries outwards** so that the entire Markdown syntax is safely and fully enclosed *inside* the `[[HL:: ... ::HL]]` tags.
+If the text you need to highlight starts or ends *inside* a Markdown tag (like **bold**, _italic_, or ` inline code `), **DO NOT** chop the highlight into tiny isolated words to avoid the Markdown syntax. 
+Instead, you must **expand your highlight boundaries outwards** so that the entire Markdown syntax is safely and fully enclosed *inside* the [[HL:: ... ::HL]] tags.
 
-**Example:** Target text is `Mistake: Multiple screens` but the document says `**Mistake:** Multiple screens`.
-- ❌ `**[[HL::Mistake::HL]]:** [[HL::Multiple screens::HL]]` — **FORBIDDEN:** Violates Rule 5 (isolated keywords).
-- ❌ `**[[HL::Mistake:** Multiple screens::HL]]` — **FORBIDDEN:** Violates Rule 13 (straddling markdown tags).
-- ✅ `[[HL::**Mistake:** Multiple screens::HL]]` — **CORRECT:** The highlight expands outward to cleanly wrap the entire bold element.
+**EXCEPTION (CRITICAL):** This rule does NOT apply to Fenced Code Blocks (` ``` `). Rule 12 strictly overrides this. You must NEVER expand a highlight outwards to wrap a multi-line fenced code block boundary (` ```bash `). For multi-line code blocks, the `[[HL::` tags must ALWAYS remain purely inside the block.
+
+**Example:** Target text is Mistake: Multiple screens but the document says **Mistake:** Multiple screens.
+- ❌ **[[HL::Mistake::HL]]:** [[HL::Multiple screens::HL]] — **FORBIDDEN:** Violates Rule 5 (isolated keywords).
+- ❌ **[[HL::Mistake:** Multiple screens::HL]] — **FORBIDDEN:** Violates Rule 13 (straddling markdown tags).
+- ✅ [[HL::**Mistake:** Multiple screens::HL]] — **CORRECT:** The highlight expands outward to cleanly wrap the entire bold element.
 
 ### Rule 38 — NESTED QUOTES IN ZOTERO EXPORTS (Regex Warning)
 Zotero annotations frequently contain internal quotation marks (e.g., `“Confusion 1 - "Cell C7 ka kya matlab hai?" Galat soch...”`). 
@@ -438,8 +441,8 @@ When you see this, do NOT treat it as a single contiguous string. You must intel
 | Missing space before inline code after a highlight | Forbidden — E.g., `[[HL::text::HL]]`.ext` breaks Markdown inline code parsing. Always leave a space: `[[HL::text::HL]] `.ext`. |
 | Leaving a dangling/unclosed ` ``` ` code block | Forbidden — A stray ` ``` ` will swallow the entire rest of the document into a giant box! |
 
-### Rule 39 — CONTEXTUAL BULLETS (Root Cause, Fix, Actually, Mistake)
-When extracting highlights, be hyper-vigilant about contextual sub-bullets like `* **Root Cause:**`, `* **Fix:**`, `* **Galat soch:**`, `* **Actually:**`, `* **Mistake:**`. Naive string-matching scripts often miss them entirely or split them incorrectly due to line breaks, spaces, or bold tags in the Markdown that aren't perfectly mirrored in the Annotations file. You must explicitly verify that these contextual prefixes are fully wrapped in `[[HL::` tags.
+### Rule 39 — CONTEXTUAL BULLETS (Root Cause, Fix, Actually, Mistake, Line X)
+When extracting highlights, be hyper-vigilant about contextual sub-bullets like `* **Root Cause:**`, `* **Fix:**`, `* **Galat soch:**`, `* **Actually:**`, `* **Mistake:**`, and particularly `* **Line X:**` (in code explanations). Naive string-matching scripts often miss them entirely or split them incorrectly due to line breaks, spaces, or bold tags in the Markdown that aren't perfectly mirrored in the Annotations file. You must explicitly verify that these contextual prefixes are fully wrapped in `[[HL::` tags.
 
 ### Rule 40 — BACKTICK SPACING & CUSTOM JS RENDERER QUIRKS
 1. **Inline Code Spacing:** Never place an `[[HL::...::HL]]` tag immediately adjacent to an inline backtick without a space. Markdown parsers need a space to recognize the inline code block correctly. (e.g., use `[[HL::Text::HL]] `.ext``, NOT `[[HL::Text::HL]]`.ext``).
