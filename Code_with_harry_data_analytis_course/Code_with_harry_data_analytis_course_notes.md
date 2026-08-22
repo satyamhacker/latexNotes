@@ -1058,7 +1058,7 @@ Finance sector (Banks) mein **Accounting** format strict industry standard hai. 
 | --- | --- | --- |
 | Ratio/Maths | **Fraction** | `1/4` |
 | Growth/Rate | **Percentage** | `25%` |
-| Standard decimal | **General / Number** | `0.[[HL::25` |
+| Standard decimal | **General / Number** | `0.[[HL::25` ::HL]]|[[HL::
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -1636,7 +1636,7 @@ Finance aur accounting ke complex models (jaise Loan Amortization tables) mein "
 | **Relative Reference** | `F2` | Khul ke shift hota hai (Niche F3, Right G2). ("Garib") |
 | **Absolute Reference** | `$F$2` | Bilkul fixed rehta hai. Kahin bhi drag karo, $F$2 hi rahega. ("Ameer") |
 | **Mixed (Freeze Column)** | `$F2` | Column F fixed rahega, lekin niche jane pe row change hogi (2 -> 3). |
-| **Mixed (Freeze Row)** | `F$[[HL::2` | Row 2 fixed rahegi, lekin right jane pe column change hoga (F -> G). |
+| **Mixed (Freeze Row)** | `F$[[HL::2` ::HL]]|[[HL:: Row 2 fixed rahegi, lekin right jane pe column change hoga (F -> G). ::HL]]|[[HL::
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -1828,7 +1828,7 @@ Jab senior Quants (Quantitative analysts) banking calculations jaise Compound In
 | --- | --- | --- |
 | Equation | `=10+20*2` | `=10+20*2` |
 | How we read | (10+20) = 30. Then 30*2 = 60. | VIP Mult: 20*2 = 40. Then 10+40 = 50. |
-| Solution Output | 60 (Agar proper parenthesis ho `(10+20)*[[HL::2`) | 50 (By Default Without parentheses) |
+| Solution Output | 60 (Agar proper parenthesis ho `(10+20)*[[HL::2`) ::HL]]|[[HL:: 50 (By Default Without parentheses) ::HL]]|[[HL::
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -3098,7 +3098,7 @@ Excel ribbon (menu bar) ke **Data** tab mein jao, wahan ek bada sa **Sort** butt
 *Note: Sorting mostly UI-based (buttons click karke) hoti hai, lekin yahan dates ko correctly sort karne ka ek hidden trick dikhaya gaya hai.*
 
 ```excel
-# [[HL::Excel Formula Bar | Version: Excel 2016+::HL]]
+# [[HL::Excel Formula Bar ::HL]]|[[HL:: Version: Excel 2016+::HL]]
 [[HL::1  =A2 * 1           # multiply by 1 trick — agar date as text (string) store ho gayi hai, toh 1 se multiply karne par Excel usko proper number (date serial) mein convert kar deta hai::HL]]
 [[HL::2  =SORT(A2:D100, 2, -1)  # SORT() — naya dynamic array function; 2= : doosre column se sort karo; -1= : descending order (largest to smallest) ke liye::HL]]
 
@@ -3250,7 +3250,7 @@ Food     | 800       Rent     | 5000
 *Note: Excel filters UI-driven hain, yahan important shortcut aur keyboard driven workflow dikhaya gaya hai.*
 
 ```excel
-# [[HL::Excel Actions | Shortcuts Workflow::HL]]
+# [[HL::Excel Actions ::HL]]|[[HL:: Shortcuts Workflow::HL]]
 [[HL::1  # Keyboard shortcut to toggle filters on/off::HL]]
 [[HL::2  Alt + D + F + F        # Alt D F F — speaker ka personal favourite; pehle Data menu, phir Filter, phir Filter (legacy Excel shortcut jo aaj bhi bohot fast kaam karta hai)::HL]]
 3  
@@ -3440,7 +3440,7 @@ Jab tum array function use karoge, toh result wale area ke chaaron taraf ek ligh
 #### 💻 7. Hands-On — Runnable Example
 
 ```excel
-# [[HL::Excel Formula Bar | Version: Excel 365 (Dynamic Arrays)::HL]]
+# [[HL::Excel Formula Bar ::HL]]|[[HL:: Version: Excel 365 (Dynamic Arrays)::HL]]
 [[HL::1  # Dummy Marksheet data generate karne ka example::HL]]
 [[HL::2  =RANDARRAY(10, 3, 23, 100, TRUE)  # RANDARRAY() = grid mein random data laao::HL]]
 [[HL::3                                    # 10 = rows (kitni rows chahiye)::HL]]
@@ -3800,12 +3800,12 @@ Agar main tumhe cricket match ki har over ki ball-by-ball written report du, toh
 ```excel
 [[HL::# Data Preparation for Chart::HL]]
 [[HL::# Aisa ek table banao aur select karo (A1:B6)::HL]]
-[[HL::1  Expense_Type    | Amount (16th December 2024)::HL]]
-[[HL::2  Food            | 455::HL]]
-[[HL::3  Fast food       | 3000::HL]]
-[[HL::4  Rent            | 21000::HL]]
-[[HL::5  EMI             | 26200::HL]]
-[[HL::6  Invest          | 3000::HL]]
+[[HL::1  Expense_Type    ::HL]]|[[HL:: Amount (16th December 2024)::HL]]
+[[HL::2  Food            ::HL]]|[[HL:: 455::HL]]
+[[HL::3  Fast food       ::HL]]|[[HL:: 3000::HL]]
+[[HL::4  Rent            ::HL]]|[[HL:: 21000::HL]]
+[[HL::5  EMI             ::HL]]|[[HL:: 26200::HL]]
+[[HL::6  Invest          ::HL]]|[[HL:: 3000::HL]]
 
 [[HL::# Action::HL]]
 [[HL::# Select A1:B6 -> Insert Tab -> Recommended Charts -> Clustered Column Chart select karo::HL]]
@@ -4003,7 +4003,7 @@ Socho tum 50 logon ki ek group photo le rahe ho, lekin tumhara camera lens (pape
 *Note: Print settings purely UI driven hain, isliye yahan exact workflow commands aur shortcuts demonstrate kiye gaye hain.*
 
 ```text
-# [[HL::Excel Workflow | Keyboard Shortcuts::HL]]
+# [[HL::Excel Workflow ::HL]]|[[HL:: Keyboard Shortcuts::HL]]
 [[HL::1  # Step 1: Chart select karo aur preview dekho::HL]]
 [[HL::2  Ctrl + P     # ⭐Ctrl P = Print menu aur Print Preview open karne ka universal shortcut::HL]]
 3
@@ -4241,11 +4241,11 @@ Template save karte waqt uske andar koi actual confidential data (jaise personal
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| Feature | `::HL]].xlsx` (Normal File) | ⭐`.xltx` (Template File) |
+::HL]]|[[HL:: Feature ::HL]]|[[HL:: `::HL]].xlsx` (Normal File) | ⭐`.xltx` (Template File) |
 | --- | --- | --- |
 | Core Nature | Working document jisme data feed hota hai | Sancha (Master blueprint) |
-| Double-Click behavior | Wahi file open hoti hai edit ke liye | Nayi fresh `.[[HL::xlsx` create ho jati hai memory mein |
-| Risk | Purana data overwrite hone ka risk high | Safe. Original blank rehti hai |
+| Double-Click behavior | Wahi file open hoti hai edit ke liye | Nayi fresh `.[[HL::xlsx` create ho jati hai memory mein ::HL]]|[[HL::
+::HL]]|[[HL:: Risk ::HL]]|[[HL:: Purana data overwrite hone ka risk high ::HL]]|[[HL:: Safe. Original blank rehti hai ::HL]]|[[HL::
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -5374,11 +5374,11 @@ Agar koi game/lottery ka code `random::HL]]` module se bana hai aur server par r
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| Function | Kis kaam aata hai? | Example |
-| --- | --- | --- |
-| **random.randint(a, b)** | Range ke beech integer laane ke liye. | `randint::HL]](1, 10)` -> 7 |
+::HL]]|[[HL:: Function ::HL]]|[[HL:: Kis kaam aata hai? ::HL]]|[[HL:: Example ::HL]]|[[HL::
+::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|[[HL::
+::HL]]|[[HL:: **random.randint(a, b)** ::HL]]|[[HL:: Range ke beech integer laane ke liye. ::HL]]|[[HL:: `randint::HL]](1, 10)` -> 7 |
 | **random.choice(seq)** | List/String me se koi ek uthane ke liye. | `choice(['a', 'b'])` -> 'a' |
-| **string.split()** | Text ko list of words mein todne ke liye. | `"hi bro".split()` -> `['hi', 'bro'][[HL::` |
+| **string.split()** | Text ko list of words mein todne ke liye. | `"hi bro".split()` -> `['hi', 'bro'][[HL::` ::HL]]|[[HL::
 
 #### 🌍 14. Real-World Use Case
 
@@ -7298,7 +7298,7 @@ Industry (jaise Amazon) mein combined report nikalne ke liye queries bohot heavy
 | Feature | [[HL::INNER JOIN::HL]] | [[HL::LEFT JOIN::HL]] | [[HL::RIGHT JOIN::HL]] |
 | --- | --- | --- | --- |
 | **Kam kya hai?** | Sirf matching rows dono tables se | [[HL::Left table ki saari rows, chahe match ho ya na ho::HL]] | [[HL::Right table ki saari rows::HL]] |
-| [[HL::**Non-matching data**::HL]] | [[HL::Ignore kar deta hai (Delete dikhta hai)::HL]] | [[HL::`NULL` fill kar deta hai::HL]] | `[[HL::NULL` fill kar deta hai |
+| [[HL::**Non-matching data**::HL]] | [[HL::Ignore kar deta hai (Delete dikhta hai)::HL]] | [[HL::`NULL` fill kar deta hai::HL]] | `[[HL::NULL` fill kar deta hai ::HL]]|[[HL::
 
 #### 🌍 14. Real-World Use Case
 
@@ -7862,11 +7862,11 @@ Agar tum `IN` operator ka use karke 10,000 IDs return karte ho, toh memory full 
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| Feature | `IN` Operator | `[[HL::EXISTS` Operator |
-| --- | --- | --- |
-| **Under the hood action** | Subquery chalake puri values ki list memory mein laata hai | Memory mein list nahi banata, bas True/False (boolean) check karta hai |
-| **Best used when?** | Jab list choti ho (few hundred items) | Jab table bohot badi ho (millions of rows) |
-| **Returns** | Actual payload (values) | Boolean status (True/False) |
+| Feature | `IN` Operator | `[[HL::EXISTS` Operator ::HL]]|[[HL::
+::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|[[HL::
+::HL]]|[[HL:: **Under the hood action** ::HL]]|[[HL:: Subquery chalake puri values ki list memory mein laata hai ::HL]]|[[HL:: Memory mein list nahi banata, bas True/False (boolean) check karta hai ::HL]]|[[HL::
+::HL]]|[[HL:: **Best used when?** ::HL]]|[[HL:: Jab list choti ho (few hundred items) ::HL]]|[[HL:: Jab table bohot badi ho (millions of rows) ::HL]]|[[HL::
+::HL]]|[[HL:: **Returns** ::HL]]|[[HL:: Actual payload (values) ::HL]]|[[HL:: Boolean status (True/False) ::HL]]|[[HL::
 
 #### 🌍 14. Real-World Use Case
 
@@ -8061,7 +8061,7 @@ Industry dashboards aur **business reports** (jaise monthly **sales summaries**)
 * [[HL::**Confusion 1 — "ROLLUP mein jo NULL aata hai, uska kya matlab hai?"**::HL]]
 * [[HL::**Galat soch:** Database mein value missing hai ya blank thi isliye NULL aaya.::HL]]
 * [[HL::**Actually:** Speaker emphasized: ⭐**Null doesn't mean missing value. Null basically means sum of the above.** ROLLUP ke result mein jab city ki jagah NULL likha aaye, toh padhne wala samajh jata hai ki "Kisi ek city ka nahi, yeh sab cities mila kar (Grand Total) hai."::HL]]
-* [[HL::**Prove karo:** Apna Rollup output dekho, jahan `NULL | NULL` likha hai, uske samne sabse bada total (`210301`) likha hoga jo sabka addition hoga::HL]].
+* [[HL::**Prove karo:** Apna Rollup output dekho, jahan `NULL ::HL]]|[[HL:: NULL` likha hai, uske samne sabse bada total (`210301`) likha hoga jo sabka addition hoga::HL]].
 
 
 * **Confusion 2 — "Kya main WHERE aur HAVING ek hi query mein use kar sakta hoon?"**
@@ -8693,9 +8693,9 @@ Industry mein Triggers bohot limit mein use hote hain. Kyunki ye har row ke sath
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| Feature | Stored Procedure | Database Trigger |
-| --- | --- | --- |
-| **Invocation (Kaise chale?)** | Explicitly (aap `CALL::HL]]` karke chalate ho) | Implicitly (automatically DB khud chalata hai) |
+::HL]]|[[HL:: Feature ::HL]]|[[HL:: Stored Procedure ::HL]]|[[HL:: Database Trigger ::HL]]|[[HL::
+::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|[[HL::
+::HL]]|[[HL:: **Invocation (Kaise chale?)** ::HL]]|[[HL:: Explicitly (aap `CALL::HL]]` karke chalate ho) | Implicitly (automatically DB khud chalata hai) |
 | **Parameters** | Aap pass kar sakte ho (e.g. city_name) | Koi parameter nahi leta, yeh fixed events pe chalta hai |
 | **Context Context** | Standalone entity (kisi table se banda nahi) | Table-bound entity (table delete hui toh trigger bhi gaya) |
 
@@ -12360,7 +12360,7 @@ Socho tum ek chhote Amazon seller ho jo din mein 50 orders process karta hai. Tu
 * [[HL::**Problem:** Log 100000 rows (1 lakh rows) ke liye Python script likhne lagte hain jo time waste hai, ya fir millions of rows ko Excel mein load karke system crash kar dete hain.::HL]]
 * [[HL::**Solution:** Right tool for the right data size choose karna. Excel small data ke liye fast aur visible hai; Python large data ke liye robust hai.::HL]]
 * [[HL::**What breaks if we don't use it?** Excel mein millions of rows load karne par app hang ho jayegi, RAM full ho jayegi, aur human error ke chances badh jayenge.::HL]]
-* **✅ [[HL::Kab use karo (Use this when):** Jab data 100000 rows se kam ho, tumhe visual data tracking chahiye, ya listed price aur discounted price ke beech ka difference manually aankhon se verify karna ho.::HL]]
+* **✅ [[HL::Kab use karo (Use this when):** [[HL::Jab data 100000 rows se kam ho, tumhe visual data tracking chahiye, ya listed price aur discounted price ke beech ka difference manually aankhon se verify karna ho.::HL]]::HL]]
 * **❌ [[HL::Kab mat karo / Alternative prefer karo (Avoid when):** Jab data millions (lakhon) rows cross kar jaye — tab Excel drop karo aur Pandas (Python library — tabular data ko code se process karne ke liye) use karo.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -12517,7 +12517,7 @@ Socho tumhare paas ek phonebook (directory) hai. Tum usme ek naam (lookup_value)
 * [[HL::**Solution:** VLOOKUP formula lagakar hum ek master table se seconds mein data mapping automatically karwa sakte hain.::HL]]
 * [[HL::**What breaks if we don't use it?** Data copy-paste karne mein human errors honge, time waste hoga, aur order management system manual hone ki wajah se fail ho jayega.::HL]]
 * [[HL::**✅ Kab use karo (Use this when):** Jab tumhe ek common identifier (jaise Product ID ya Employee ID) ke basis pe kisi dusri sheet/table se corresponding data (jaise Product Name, Salary) lana ho.::HL]]
-* **❌ [[HL::Kab mat karo / Alternative prefer karo (Avoid when):** Jab tumhari lookup value pehle column mein na hokar table ke beech mein ya right side mein ho. VLOOKUP sirf left-to-right kaam karta hai. Wahan XLOOKUP (advanced Excel formula — agle topic mein cover hoga) prefer karo.::HL]]
+* **❌ [[HL::Kab mat karo / Alternative prefer karo (Avoid when):** [[HL::Jab tumhari lookup value pehle column mein na hokar table ke beech mein ya right side mein ho. VLOOKUP sirf left-to-right kaam karta hai. Wahan XLOOKUP (advanced Excel formula — agle topic mein cover hoga) prefer karo.::HL]]::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -12533,13 +12533,13 @@ Socho tumhare paas ek phonebook (directory) hai. Tum usme ek naam (lookup_value)
 #### 💻 7. Hands-On — Runnable Example
 
 ```excel
-# Excel Formula | All Excel Versions
-1  =VLOOKUP(               # VLOOKUP() = Vertical Lookup function start
-2      A2,                 # lookup_value = Hum kya dhoondh rahe hain (e.g., P1003)
-3      Table1[#All],       # table_array = Kahan dhoondh rahe hain (table referencing use ki, hardcoded A1 to D6 better approach nahi hai)
-4      2,                  # col_index_num = Match milne pe kitne column right jaana hai (Index 1 se start hota hai, 0 se nahi)
-5      0                   # [range_lookup] = 0 (exact match) ya 1 (approximate match)
-6  )
+[[HL::# Excel Formula ::HL]]|[[HL:: All Excel Versions::HL]]
+1  [[HL::=VLOOKUP(               # VLOOKUP() = Vertical Lookup function start::HL]]
+2      [[HL::A2,                 # lookup_value = Hum kya dhoondh rahe hain (e.g., P1003)::HL]]
+3      [[HL::Table1[#All],       # table_array = Kahan dhoondh rahe hain (table referencing use ki, hardcoded A1 to D6 better approach nahi hai)::HL]]
+4      [[HL::2,                  # col_index_num = Match milne pe kitne column right jaana hai (Index 1 se start hota hai, 0 se nahi)::HL]]
+5      [[HL::0                   # [range_lookup] = 0 (exact match) ya 1 (approximate match)::HL]]
+6  [[HL::)::HL]]
 
 ```
 
@@ -12560,7 +12560,7 @@ USB cable
 Agar product nahi milta toh VLOOKUP `#N/A` return karta hai, jisse saare aage ke calculations break ho jate hain.::HL]]
 
 ```excel
-[[HL::# Excel Formula | Error handling wrapper::HL]]
+[[HL::# Excel Formula ::HL]]|[[HL:: Error handling wrapper::HL]]
 1  [[HL::=IF(ISNA(VLOOKUP(A2, $A$1:$D$6, 2, 0)), "Not Found", VLOOKUP(A2, $A$1:$D$6, 2, 0)) # IF() = Conditional logic; ISNA() = Check karta hai kya output #N/A hai::HL]]
 
 ```
@@ -12585,7 +12585,7 @@ Not Found
 * [[HL::**🤦 Why:** Drag karne par Excel relative reference follow karta hai, toh next cell mein array `A2:D7` ho jata hai, data chhutne lagta hai.::HL]]
 * [[HL::**✅ The 'Pro' Way:** Ya toh `$A$1:$D$6` freeze karo, ya `Table1` bana kar use karo.::HL]]
 * [[HL::**⚡ Consequences:** Tumhara formula neeche ke rows mein match nahi dhoondh payega aur aadhi report mein random `#N/A` errors aa jayenge.::HL]]
-* **❌ [[HL::Mistake:** Column Index ko 0 assume karna kyunki programming (Python/JS) mein arrays 0 se start hote hain.::HL]]
+* **❌ [[HL::Mistake:** [[HL::Column Index ko 0 assume karna kyunki programming (Python/JS) mein arrays 0 se start hote hain.::HL]]::HL]]
 * [[HL::**🤦 Why:** Developers ka default mental model zero-based indexing hota hai.::HL]]
 * [[HL::**✅ The 'Pro' Way:** ⭐ Always remember: Excel column counting 1 se shuru hoti hai.::HL]]
 * [[HL::**⚡ Consequences:** Formula galat column se data utha lega ya `#REF!` error phenk dega.::HL]]
@@ -12737,7 +12737,7 @@ Order Sheet (Input)                  Inventory Master (Table1)
 * [[HL::**Solution:** Hum ya toh data ko 'Paste Transpose' karke vertical bana lein, ya direct `HLOOKUP` formula laga lein.::HL]]
 * [[HL::**What breaks if we don't use it?** Horizontal data ko manually vertical likhne mein ghanto barbad honge aur human error hoga.::HL]]
 * **✅ [[HL::Kab use karo (Use this when):** Jab tumhari search value (e.g., Product ID, Month) table ki **top row** mein ho.::HL]]
-* **❌ [[HL::Kab mat karo / Alternative prefer karo (Avoid when):** Jab table standard database format (vertical) mein ho. Wahan hamesha VLOOKUP ya XLOOKUP prefer karo kyunki vertical tables scalable hoti hain.::HL]]
+* **❌ [[HL::Kab mat karo / Alternative prefer karo (Avoid when):** [[HL::Jab table standard database format (vertical) mein ho. Wahan hamesha VLOOKUP ya XLOOKUP prefer karo kyunki vertical tables scalable hoti hain.::HL]]::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -12758,13 +12758,13 @@ Keyboard shortcut: Data copy karo -> Cell select karo -> `ALT + E + S + E` press
 [[HL::**Step 2: HLOOKUP Formula**::HL]]
 
 ```excel
-# Excel Formula | All Excel Versions
-1  =HLOOKUP(                # HLOOKUP() = Horizontal Lookup function start
-2      "P1003",             # lookup_value = Kya dhoondh rahe hain (Top row mein P1003)
-3      $B$1:$F$5,           # table_array = Search range (dono rows & columns ko $ se freeze kiya hai)
-4      4,                   # row_index_num = Match milne par kitni rows neeche jaana hai (Top row khud Row 1 hoti hai)
-5      0                    # [range_lookup] = 0 (exact match)
-6  )
+[[HL::# Excel Formula ::HL]]|[[HL:: All Excel Versions::HL]]
+1  [[HL::=HLOOKUP(                # HLOOKUP() = Horizontal Lookup function start::HL]]
+2      [[HL::"P1003",             # lookup_value = Kya dhoondh rahe hain (Top row mein P1003)::HL]]
+3      [[HL::$B$1:$F$5,           # table_array = Search range (dono rows & columns ko $ se freeze kiya hai)::HL]]
+4      [[HL::4,                   # row_index_num = Match milne par kitni rows neeche jaana hai (Top row khud Row 1 hoti hai)::HL]]
+5      [[HL::0                    # [range_lookup] = 0 (exact match)::HL]]
+6  [[HL::)::HL]]
 
 ```
 
@@ -12829,11 +12829,11 @@ Modern Data Engineering mein HLOOKUP bahut rarely use hota hai kyunki databases 
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Feature | VLOOKUP | HLOOKUP |::HL]]
-| [[HL::--- | --- | --- |::HL]]
-| [[HL::Search Direction | Top to Bottom (Vertical) | Left to Right (Horizontal) |::HL]]
-| [[HL::Output Index | Column Index Number (`col_index_num`) | Row Index Number (`row_index_num`) |::HL]]
-| [[HL::Industry Usage | 95% cases (Highly Standard) | 5% cases (Legacy reporting formats)::HL]] |
+| [[HL::Feature ::HL]]|[[HL:: VLOOKUP ::HL]]|[[HL:: HLOOKUP ::HL]]|
+| [[HL::--- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|
+| [[HL::Search Direction ::HL]]|[[HL:: Top to Bottom (Vertical) ::HL]]|[[HL:: Left to Right (Horizontal) ::HL]]|
+| [[HL::Output Index ::HL]]|[[HL:: Column Index Number (`col_index_num`) ::HL]]|[[HL:: Row Index Number (`row_index_num`) ::HL]]|
+| [[HL::Industry Usage ::HL]]|[[HL:: 95% cases (Highly Standard) ::HL]]|[[HL:: 5% cases (Legacy reporting formats)::HL]] |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -12925,7 +12925,7 @@ Jab tum ek hi [[HL::XLOOKUP::HL]] lagate ho aur `return_array` mein 3 columns se
 **Example 1: Basic [[HL::XLOOKUP::HL]] with Built-in Error Handling (Reverse Lookup)**
 
 [[HL::```excel
-# Excel Formula | Office 365::HL]] / Excel 2021+
+# Excel Formula ::HL]]|[[HL:: Office 365::HL]] / Excel 2021+
 1  [[HL::=XLOOKUP(::HL]]                 [[HL::# XLOOKUP function init::HL]]
 2      [[HL::A2,                   # lookup_value = Employee ID e.g., E105::HL]]
 3      [[HL::C:C,                  # lookup array = C column mein dhoondho (Right side pe hai)::HL]]
@@ -12945,7 +12945,7 @@ John Doe
 Speaker ne wildcard (`*` asterisk) aur `&` (ampersand — do texts ko jodne ke liye use hota hai) ka example diya: "pen" vs "pendoms".::HL]]
 
 [[HL::```excel
-# Excel Formula | Office 365+::HL]]
+# Excel Formula ::HL]]|[[HL:: Office 365+::HL]]
 1  [[HL::=XLOOKUP(::HL]]                 # [[HL::XLOOKUP::HL]] function start
 2      H5 & "*",             # lookup_value = H5 cell ("pen") ko asterisk ("*") wildcard ke sath joda (ampersand `&` use karke). Ban gaya "pen*"
 3      A:A,                  # lookup array = Product name column
@@ -13016,12 +13016,12 @@ $10   |   P1004   |   Pendoms
 
 [[HL::#### ⚖️ 13. Comparison (Ye vs Woh)::HL]]
 
-| [[HL::Feature | ⭐ VLOOKUP | ⭐ XLOOKUP |::HL]]
-| [[HL::--- | --- | --- |::HL]]
-| [[HL::Search Direction | Left to Right Only | Any Direction (Left, Right, Reverse) |::HL]]
-| [[HL::Missing Value | Requires `IFERROR` / `ISNA` | Built-in `if not found` argument |::HL]]
-| [[HL::Column Ref | Uses Number (fragile to inserts) | Uses direct Array (bulletproof) |::HL]]
-| [[HL::Output | Single Value | Can ⭐ spill values (multiple columns)::HL]] |
+| [[HL::Feature ::HL]]|[[HL:: ⭐ VLOOKUP ::HL]]|[[HL:: ⭐ XLOOKUP ::HL]]|
+| [[HL::--- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|
+| [[HL::Search Direction ::HL]]|[[HL:: Left to Right Only ::HL]]|[[HL:: Any Direction (Left, Right, Reverse) ::HL]]|
+| [[HL::Missing Value ::HL]]|[[HL:: Requires `IFERROR` / `ISNA` ::HL]]|[[HL:: Built-in `if not found` argument ::HL]]|
+| [[HL::Column Ref ::HL]]|[[HL:: Uses Number (fragile to inserts) ::HL]]|[[HL:: Uses direct Array (bulletproof) ::HL]]|
+| [[HL::Output ::HL]]|[[HL:: Single Value ::HL]]|[[HL:: Can ⭐ spill values (multiple columns)::HL]] |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -13156,9 +13156,9 @@ Chalo ek website se laye gaye AI funding investors ke data, aur ek Country code 
 
 ```text
 # 📤 [[HL::Expected Output:::HL]]
-| [[HL::Column A   | Column B  | Column C |
-|------------|-----------|----------|::HL]]
-| [[HL::John Smith | Elon Musk | Sara Lee::HL]] |
+| [[HL::Column A   ::HL]]|[[HL:: Column B  ::HL]]|[[HL:: Column C ::HL]]|[[HL::
+::HL]]|[[HL::------------::HL]]|[[HL::-----------::HL]]|[[HL::----------::HL]]|
+| [[HL::John Smith ::HL]]|[[HL:: Elon Musk ::HL]]|[[HL:: Sara Lee::HL]] |
 
 ```
 
@@ -13174,9 +13174,9 @@ Chalo ek website se laye gaye AI funding investors ke data, aur ek Country code 
 
 ```text
 # 📤 [[HL::Expected Output:::HL]]
-| [[HL::Column A | Column B |
-|----------|----------|::HL]]
-| [[HL::IND      | 2025001::HL]]  |
+| [[HL::Column A ::HL]]|[[HL:: Column B ::HL]]|[[HL::
+::HL]]|[[HL::----------::HL]]|[[HL::----------::HL]]|
+| [[HL::IND      ::HL]]|[[HL:: 2025001::HL]]  |
 
 ```
 
@@ -13228,11 +13228,11 @@ Chalo ek website se laye gaye AI funding investors ke data, aur ek Country code 
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Feature | Delimited | Fixed Width |::HL]]
-| [[HL::--- | --- | --- |::HL]]
-| [[HL::Trigger (Splits on..) | Specific Character (Comma, Tab, Tilde, Colon) | Exact Number of Characters (e.g., after 3rd char) |::HL]]
-| [[HL::Flexibility | Handles variable lengths (Data chota ho ya bada) | ⭐ "Number of chars should be same" (Strict) |::HL]]
-| [[HL::Real-World Use | CSV files, Email lists, Website scraped data | Bank account numbers, Country codes (`IND...`) |::HL]]
+| [[HL::Feature ::HL]]|[[HL:: Delimited ::HL]]|[[HL:: Fixed Width ::HL]]|
+| [[HL::--- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|
+| [[HL::Trigger (Splits on..) ::HL]]|[[HL:: Specific Character (Comma, Tab, Tilde, Colon) ::HL]]|[[HL:: Exact Number of Characters (e.g., after 3rd char) ::HL]]|
+| [[HL::Flexibility ::HL]]|[[HL:: Handles variable lengths (Data chota ho ya bada) ::HL]]|[[HL:: ⭐ "Number of chars should be same" (Strict) ::HL]]|
+| [[HL::Real-World Use ::HL]]|[[HL:: CSV files, Email lists, Website scraped data ::HL]]|[[HL:: Bank account numbers, Country codes (`IND...`) ::HL]]|
 
 [[HL::#### 🌍 14. Real-World Use Case (Production Application)::HL]]
 
@@ -14080,11 +14080,11 @@ No mouse policy! Top investment banks (e.g. Goldman Sachs) aur consulting firms 
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| [[HL::Feature | A to Z Sort | Custom List Sort |::HL]]
-| [[HL::--- | --- | --- |::HL]]
-| [[HL::Use Case | Names, Cities, Products | Months, Weekdays, High/Med/Low |::HL]]
-| [[HL::Mechanism | Alphabetical ASCII values | User-defined rigid sequence |::HL]]
-| [[HL::Danger | Fails on chronological time terms | Requires manual setup one time::HL]] |
+| [[HL::Feature ::HL]]|[[HL:: A to Z Sort ::HL]]|[[HL:: Custom List Sort ::HL]]|
+| [[HL::--- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|
+| [[HL::Use Case ::HL]]|[[HL:: Names, Cities, Products ::HL]]|[[HL:: Months, Weekdays, High/Med/Low ::HL]]|
+| [[HL::Mechanism ::HL]]|[[HL:: Alphabetical ASCII values ::HL]]|[[HL:: User-defined rigid sequence ::HL]]|
+| [[HL::Danger ::HL]]|[[HL:: Fails on chronological time terms ::HL]]|[[HL:: Requires manual setup one time::HL]] |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
