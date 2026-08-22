@@ -4244,8 +4244,8 @@ Template save karte waqt uske andar koi actual confidential data (jaise personal
 ::HL]]|[[HL:: Feature ::HL]]|[[HL:: `::HL]].xlsx` (Normal File) | ⭐`.xltx` (Template File) |
 | --- | --- | --- |
 | Core Nature | Working document jisme data feed hota hai | Sancha (Master blueprint) |
-| Double-Click behavior | Wahi file open hoti hai edit ke liye | Nayi fresh `.[[HL::xlsx` create ho jati hai memory mein ::HL]]|[[HL::
-::HL]]|[[HL:: Risk ::HL]]|[[HL:: Purana data overwrite hone ka risk high ::HL]]|[[HL:: Safe. Original blank rehti hai ::HL]]|[[HL::
+| Double-Click behavior | Wahi file open hoti hai edit ke liye | Nayi fresh `.[[HL::xlsx` create ho jati hai memory mein ::HL]]|
+|[[HL:: Risk ::HL]]|[[HL:: Purana data overwrite hone ka risk high ::HL]]|[[HL:: Safe. Original blank rehti hai ::HL]]|[[HL::
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -5374,9 +5374,9 @@ Agar koi game/lottery ka code `random::HL]]` module se bana hai aur server par r
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-::HL]]|[[HL:: Function ::HL]]|[[HL:: Kis kaam aata hai? ::HL]]|[[HL:: Example ::HL]]|[[HL::
-::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|[[HL::
-::HL]]|[[HL:: **random.randint(a, b)** ::HL]]|[[HL:: Range ke beech integer laane ke liye. ::HL]]|[[HL:: `randint::HL]](1, 10)` -> 7 |
+::HL]]|[[HL:: Function ::HL]]|[[HL:: Kis kaam aata hai? ::HL]]|[[HL:: Example ::HL]]|
+| --- | --- | --- |
+|[[HL:: **random.randint(a, b)** ::HL]]|[[HL:: Range ke beech integer laane ke liye. ::HL]]|[[HL:: `randint::HL]](1, 10)` -> 7 |
 | **random.choice(seq)** | List/String me se koi ek uthane ke liye. | `choice(['a', 'b'])` -> 'a' |
 | **string.split()** | Text ko list of words mein todne ke liye. | `"hi bro".split()` -> `['hi', 'bro'][[HL::` ::HL]]|[[HL::
 
@@ -7862,11 +7862,11 @@ Agar tum `IN` operator ka use karke 10,000 IDs return karte ho, toh memory full 
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-| Feature | `IN` Operator | `[[HL::EXISTS` Operator ::HL]]|[[HL::
-::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|[[HL::
-::HL]]|[[HL:: **Under the hood action** ::HL]]|[[HL:: Subquery chalake puri values ki list memory mein laata hai ::HL]]|[[HL:: Memory mein list nahi banata, bas True/False (boolean) check karta hai ::HL]]|[[HL::
-::HL]]|[[HL:: **Best used when?** ::HL]]|[[HL:: Jab list choti ho (few hundred items) ::HL]]|[[HL:: Jab table bohot badi ho (millions of rows) ::HL]]|[[HL::
-::HL]]|[[HL:: **Returns** ::HL]]|[[HL:: Actual payload (values) ::HL]]|[[HL:: Boolean status (True/False) ::HL]]|[[HL::
+| Feature | `IN` Operator | `[[HL::EXISTS` Operator ::HL]]|
+| --- | --- | --- |
+|[[HL:: **Under the hood action** ::HL]]|[[HL:: Subquery chalake puri values ki list memory mein laata hai ::HL]]|[[HL:: Memory mein list nahi banata, bas True/False (boolean) check karta hai ::HL]]|
+|[[HL:: **Best used when?** ::HL]]|[[HL:: Jab list choti ho (few hundred items) ::HL]]|[[HL:: Jab table bohot badi ho (millions of rows) ::HL]]|
+|[[HL:: **Returns** ::HL]]|[[HL:: Actual payload (values) ::HL]]|[[HL:: Boolean status (True/False) ::HL]]|[[HL::
 
 #### 🌍 14. Real-World Use Case
 
@@ -8693,9 +8693,9 @@ Industry mein Triggers bohot limit mein use hote hain. Kyunki ye har row ke sath
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
-::HL]]|[[HL:: Feature ::HL]]|[[HL:: Stored Procedure ::HL]]|[[HL:: Database Trigger ::HL]]|[[HL::
-::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|[[HL::
-::HL]]|[[HL:: **Invocation (Kaise chale?)** ::HL]]|[[HL:: Explicitly (aap `CALL::HL]]` karke chalate ho) | Implicitly (automatically DB khud chalata hai) |
+::HL]]|[[HL:: Feature ::HL]]|[[HL:: Stored Procedure ::HL]]|[[HL:: Database Trigger ::HL]]|
+| --- | --- | --- |
+|[[HL:: **Invocation (Kaise chale?)** ::HL]]|[[HL:: Explicitly (aap `CALL::HL]]` karke chalate ho) | Implicitly (automatically DB khud chalata hai) |
 | **Parameters** | Aap pass kar sakte ho (e.g. city_name) | Koi parameter nahi leta, yeh fixed events pe chalta hai |
 | **Context Context** | Standalone entity (kisi table se banda nahi) | Table-bound entity (table delete hui toh trigger bhi gaya) |
 
@@ -12830,7 +12830,7 @@ Modern Data Engineering mein HLOOKUP bahut rarely use hota hai kyunki databases 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
 | [[HL::Feature ::HL]]|[[HL:: VLOOKUP ::HL]]|[[HL:: HLOOKUP ::HL]]|
-| [[HL::--- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|
+| --- | --- | --- |
 | [[HL::Search Direction ::HL]]|[[HL:: Top to Bottom (Vertical) ::HL]]|[[HL:: Left to Right (Horizontal) ::HL]]|
 | [[HL::Output Index ::HL]]|[[HL:: Column Index Number (`col_index_num`) ::HL]]|[[HL:: Row Index Number (`row_index_num`) ::HL]]|
 | [[HL::Industry Usage ::HL]]|[[HL:: 95% cases (Highly Standard) ::HL]]|[[HL:: 5% cases (Legacy reporting formats)::HL]] |
@@ -13017,7 +13017,7 @@ $10   |   P1004   |   Pendoms
 [[HL::#### ⚖️ 13. Comparison (Ye vs Woh)::HL]]
 
 | [[HL::Feature ::HL]]|[[HL:: ⭐ VLOOKUP ::HL]]|[[HL:: ⭐ XLOOKUP ::HL]]|
-| [[HL::--- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|
+| --- | --- | --- |
 | [[HL::Search Direction ::HL]]|[[HL:: Left to Right Only ::HL]]|[[HL:: Any Direction (Left, Right, Reverse) ::HL]]|
 | [[HL::Missing Value ::HL]]|[[HL:: Requires `IFERROR` / `ISNA` ::HL]]|[[HL:: Built-in `if not found` argument ::HL]]|
 | [[HL::Column Ref ::HL]]|[[HL:: Uses Number (fragile to inserts) ::HL]]|[[HL:: Uses direct Array (bulletproof) ::HL]]|
@@ -13156,8 +13156,8 @@ Chalo ek website se laye gaye AI funding investors ke data, aur ek Country code 
 
 ```text
 # 📤 [[HL::Expected Output:::HL]]
-| [[HL::Column A   ::HL]]|[[HL:: Column B  ::HL]]|[[HL:: Column C ::HL]]|[[HL::
-::HL]]|[[HL::------------::HL]]|[[HL::-----------::HL]]|[[HL::----------::HL]]|
+| [[HL::Column A   ::HL]]|[[HL:: Column B  ::HL]]|[[HL:: Column C ::HL]]|
+|------------|-----------|----------|
 | [[HL::John Smith ::HL]]|[[HL:: Elon Musk ::HL]]|[[HL:: Sara Lee::HL]] |
 
 ```
@@ -13174,8 +13174,8 @@ Chalo ek website se laye gaye AI funding investors ke data, aur ek Country code 
 
 ```text
 # 📤 [[HL::Expected Output:::HL]]
-| [[HL::Column A ::HL]]|[[HL:: Column B ::HL]]|[[HL::
-::HL]]|[[HL::----------::HL]]|[[HL::----------::HL]]|
+| [[HL::Column A ::HL]]|[[HL:: Column B ::HL]]|
+|----------|----------|
 | [[HL::IND      ::HL]]|[[HL:: 2025001::HL]]  |
 
 ```
@@ -13229,7 +13229,7 @@ Chalo ek website se laye gaye AI funding investors ke data, aur ek Country code 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
 | [[HL::Feature ::HL]]|[[HL:: Delimited ::HL]]|[[HL:: Fixed Width ::HL]]|
-| [[HL::--- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|
+| --- | --- | --- |
 | [[HL::Trigger (Splits on..) ::HL]]|[[HL:: Specific Character (Comma, Tab, Tilde, Colon) ::HL]]|[[HL:: Exact Number of Characters (e.g., after 3rd char) ::HL]]|
 | [[HL::Flexibility ::HL]]|[[HL:: Handles variable lengths (Data chota ho ya bada) ::HL]]|[[HL:: ⭐ "Number of chars should be same" (Strict) ::HL]]|
 | [[HL::Real-World Use ::HL]]|[[HL:: CSV files, Email lists, Website scraped data ::HL]]|[[HL:: Bank account numbers, Country codes (`IND...`) ::HL]]|
@@ -14081,7 +14081,7 @@ No mouse policy! Top investment banks (e.g. Goldman Sachs) aur consulting firms 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 
 | [[HL::Feature ::HL]]|[[HL:: A to Z Sort ::HL]]|[[HL:: Custom List Sort ::HL]]|
-| [[HL::--- ::HL]]|[[HL:: --- ::HL]]|[[HL:: --- ::HL]]|
+| --- | --- | --- |
 | [[HL::Use Case ::HL]]|[[HL:: Names, Cities, Products ::HL]]|[[HL:: Months, Weekdays, High/Med/Low ::HL]]|
 | [[HL::Mechanism ::HL]]|[[HL:: Alphabetical ASCII values ::HL]]|[[HL:: User-defined rigid sequence ::HL]]|
 | [[HL::Danger ::HL]]|[[HL:: Fails on chronological time terms ::HL]]|[[HL:: Requires manual setup one time::HL]] |
