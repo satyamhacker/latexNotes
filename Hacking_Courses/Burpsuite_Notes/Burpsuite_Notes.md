@@ -3590,7 +3590,7 @@ Socho tum kisi **lock ka combination** todna chahte ho. Lock mein 3 numbers hote
 ```
 [[HL::**Step 7: Payloads set karo aur attack chalao**::HL]]
 ```text
-- Payloads tab jaake wordlist daalo, phir "Start attack".
+- [[HL::Payloads tab jaake wordlist daalo, phir "Start attack".::HL]]
 ```
 
 ### ⚖️ 8. Comparison (Manual Marking vs Auto):
@@ -4194,12 +4194,12 @@ Options tab open karoge toh kuch sections dikhenge:
 ```
 
 ### ⚖️ 8. Comparison (Grep Match vs Grep Extract):
-| [[HL::Feature | Grep Match | Grep Extract |::HL]]
-[[HL::|---------|------------|--------------|::HL]]
-[[HL::| **Purpose** | Check if a string exists in response | Extract specific part of response (e.g., token) |::HL]]
-[[HL::| **Output** | Boolean (Yes/No) in results table | Extracted value in a new column |::HL]]
-[[HL::| **Configuration** | Simple string(s) | Regex with capture group |::HL]]
-[[HL::| **Use Case** | Identifying success/failure messages | Extracting dynamic values (CSRF token, error messages::HL]]) |
+| [[HL::Feature::HL]] | [[HL::Grep Match::HL]] | [[HL::Grep Extract::HL]] |
+|---------|------------|--------------|
+| [[HL::**Purpose**::HL]] | [[HL::Check if a string exists in response::HL]] | [[HL::Extract specific part of response (e.g., token)::HL]] |
+| [[HL::**Output**::HL]] | [[HL::Boolean (Yes/No) in results table::HL]] | [[HL::Extracted value in a new column::HL]] |
+| [[HL::**Configuration**::HL]] | [[HL::Simple string(s)::HL]] | [[HL::Regex with capture group::HL]] |
+| [[HL::**Use Case**::HL]] | [[HL::Identifying success/failure messages::HL]] | [[HL::Extracting dynamic values (CSRF token, error messages)::HL]] |
 
 ### 🚫 9. Common Mistakes (Beginner Traps):
 - [[HL::**Mistake 1:** Grep Match mein string bahut generic di (e.g., "error"), jisse har response mein match mil gaya. **Fix:** Specific string do jo sirf successful response mein aati ho::HL]].
@@ -4426,7 +4426,7 @@ Socho tum ek **scientist** ho. Tumhe koi chemical reaction baar-baar test karna 
   - [[HL::**Left side (top):** Request edit karne ka box (raw request).::HL]]
   - [[HL::**Right side (top):** Response display (raw, headers, etc.).::HL]]
   - [[HL::Neeche **Send** button, aur **Render** option::HL]].
-  - Left side ke upar **Go** button (send ke liye).
+  - [[HL::Left side ke upar **Go** button (send ke liye).::HL]]
 
 ### ⚙️ 6. Under the Hood (Technical Working):
 1. [[HL::Jab tum "Send to Repeater" karte ho, Burp us request ki copy le leta hai aur Repeater module ke ek naye tab mein rakh deta hai.::HL]]
@@ -4480,12 +4480,12 @@ Socho tum ek **scientist** ho. Tumhe koi chemical reaction baar-baar test karna 
 ```
 
 ### ⚖️ 8. Comparison (Repeater vs Intruder):
-| [[HL::Feature | Repeater | Intruder |::HL]]
-[[HL::|---------|----------|----------|::HL]]
-[[HL::| **Purpose** | Manual single-request testing | Automated multiple-request attacks |::HL]]
-[[HL::| **Speed** | Ek request at a time | High-speed, concurrent |::HL]]
-[[HL::| **Modifications** | Manual edit each time | Payloads defined once, automated |::HL]]
-[[HL::| **Use Case** | Exploit verification, debugging | Brute-force, fuzzing, wordlist attacks::HL]] |
+| [[HL::Feature::HL]] | [[HL::Repeater::HL]] | [[HL::Intruder::HL]] |
+|---------|----------|----------|
+| [[HL::**Purpose**::HL]] | [[HL::Manual single-request testing::HL]] | [[HL::Automated multiple-request attacks::HL]] |
+| [[HL::**Speed**::HL]] | [[HL::Ek request at a time::HL]] | [[HL::High-speed, concurrent::HL]] |
+| [[HL::**Modifications**::HL]] | [[HL::Manual edit each time::HL]] | [[HL::Payloads defined once, automated::HL]] |
+| [[HL::**Use Case**::HL]] | [[HL::Exploit verification, debugging::HL]] | [[HL::Brute-force, fuzzing, wordlist attacks::HL]] |
 
 ### 🚫 9. Common Mistakes (Beginner Traps):
 - **Mistake 1:** Request bhejne ke baad response aata hai, lekin galat response (e.g., 404) aata hai toh sochte hain ki Repeater kharab hai. **Fix:** Check karo ki host/port sahi hai, aur request valid hai (e.g., session token required ho sakta hai).
@@ -5656,18 +5656,18 @@ Socho tum ek **CCTV camera** lagate ho apne ghar ke bahar. Saare visitors record
 **[[HL::Jab Logger khulega::HL]]:**
 ```
 +---------------------------------------------------------------------+
-| [[[HL::Filter Bar]                                                        |::HL]]
-[[HL::| Filter by URL: [_________]  Status: [All]  Tool: [All]  Search: [ ]|::HL]]
-[[HL::+---------------------------------------------------------------------+::HL]]
-[[HL::| # | Tool    | URL                          | Status | Length | Time |::HL]]
-[[HL::|---|---------|-------------------------------|--------|--------|------|::HL]]
-[[HL::| 1 | Proxy   | GET /index.html               | 200    | 5432   | 10:01 |::HL]]
-[[HL::| 2 | Intruder| POST /login.php?user=admin    | 302    | 234    | 10:02 |::HL]]
-[[HL::| 3 | Intruder| POST /login.php?user=test     | 200    | 1245   | 10:02 |::HL]]
-[[HL::| 4 | Repeater| GET /admin/users               | 403    | 567    | 10:05 |::HL]]
-[[HL::| 5 | Scanner | GET /robots.txt                | 200    | 123    | 10:06 |::HL]]
-[[HL::+---------------------------------------------------------------------+::HL]]
-[[HL::| [Double-click any row to see full request/response::HL]]]                |
+| [[HL::[Filter Bar]::HL]]                                                        |
+| [[HL::Filter by URL: [_________]  Status: [All]  Tool: [All]  Search: [ ]::HL]]|
++---------------------------------------------------------------------+
+| [[HL::#::HL]] | [[HL::Tool::HL]]    | [[HL::URL::HL]]                          | [[HL::Status::HL]] | [[HL::Length::HL]] | [[HL::Time::HL]] |
+|---|---------|-------------------------------|--------|--------|------|
+| [[HL::1::HL]] | [[HL::Proxy::HL]]   | [[HL::GET /index.html::HL]]               | [[HL::200::HL]]    | [[HL::5432::HL]]   | [[HL::10:01::HL]] |
+| [[HL::2::HL]] | [[HL::Intruder::HL]]| [[HL::POST /login.php?user=admin::HL]]    | [[HL::302::HL]]    | [[HL::234::HL]]    | [[HL::10:02::HL]] |
+| [[HL::3::HL]] | [[HL::Intruder::HL]]| [[HL::POST /login.php?user=test::HL]]     | [[HL::200::HL]]    | [[HL::1245::HL]]   | [[HL::10:02::HL]] |
+| [[HL::4::HL]] | [[HL::Repeater::HL]]| [[HL::GET /admin/users::HL]]               | [[HL::403::HL]]    | [[HL::567::HL]]    | [[HL::10:05::HL]] |
+| [[HL::5::HL]] | [[HL::Scanner::HL]] | [[HL::GET /robots.txt::HL]]                | [[HL::200::HL]]    | [[HL::123::HL]]    | [[HL::10:06::HL]] |
++---------------------------------------------------------------------+
+| [[HL::[Double-click any row to see full request/response]::HL]]                |
 +---------------------------------------------------------------------+
 ```
 
@@ -5739,12 +5739,12 @@ Step 6: User filter apply karta hai
 **[[HL::Double-click karne par kya dikhega::HL]]:**
 ```text
 +------------------------+------------------------+
-| [[[HL::Request]              | [Response]             |::HL]]
-[[HL::| GET /index.html        | HTTP/1.1 200 OK        |::HL]]
-[[HL::| Host: example.com      | Content-Type: text/html|::HL]]
-[[HL::| User-Agent: Mozilla... |                        |::HL]]
-[[HL::|                        | <html>...              |::HL]]
-[[HL::+------------------------+------------------------+::HL]]
+| [[HL::[Request]::HL]]              | [[HL::[Response]::HL]]             |
+| [[HL::GET /index.html::HL]]        | [[HL::HTTP/1.1 200 OK::HL]]        |
+| [[HL::Host: example.com::HL]]      | [[HL::Content-Type: text/html::HL]]|
+| [[HL::User-Agent: Mozilla...::HL]] |                        |
+|                        | [[HL::<html>...::HL]]              |
++------------------------+------------------------+
 ```
 - [[HL::Request aur response side-by-side dikhenge.::HL]]
 
@@ -5770,13 +5770,13 @@ Step 6: User filter apply karta hai
 
 ## ⚖️ 8. [[HL::Comparison (Logger vs HTTP History):::HL]]
 
-[[HL::| Feature | Logger | HTTP History (Proxy) |::HL]]
-[[HL::|---------|--------|----------------------|::HL]]
-[[HL::| **Kis tools ka data?** | All Burp tools | Sirf Proxy se guzre requests |::HL]]
-[[HL::| **Auto-record?** | Haan, automatically | Haan, automatically |::HL]]
-[[HL::| **Filter options** | Advanced (tool, status, etc.) | Basic |::HL]]
-[[HL::| **Use case** | Pentest ke baad analysis | Real-time browsing history |::HL]]
-[[HL::| **Data retention** | Till Burp closes | Till Burp closes::HL]] |
+| [[HL::Feature::HL]] | [[HL::Logger::HL]] | [[HL::HTTP History (Proxy)::HL]] |
+|---------|--------|----------------------|
+| [[HL::**Kis tools ka data?**::HL]] | [[HL::All Burp tools::HL]] | [[HL::Sirf Proxy se guzre requests::HL]] |
+| [[HL::**Auto-record?**::HL]] | [[HL::Haan, automatically::HL]] | [[HL::Haan, automatically::HL]] |
+| [[HL::**Filter options**::HL]] | [[HL::Advanced (tool, status, etc.)::HL]] | [[HL::Basic::HL]] |
+| [[HL::**Use case**::HL]] | [[HL::Pentest ke baad analysis::HL]] | [[HL::Real-time browsing history::HL]] |
+| [[HL::**Data retention**::HL]] | [[HL::Till Burp closes::HL]] | [[HL::Till Burp closes::HL]] |
 
 ## 🚫 9. Common Mistakes (Beginner Traps):
 
