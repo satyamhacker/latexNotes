@@ -138,10 +138,9 @@ pre.mac-window {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     margin: 2rem 0;
     
-    /* STRICT WRAPPING FOR PDF */
-    white-space: pre-wrap !important;
-    word-break: break-word !important; 
-    overflow-x: hidden !important;
+    overflow-x: auto !important;
+    white-space: pre !important; 
+    word-break: normal !important;
 }
 
 .code-header {
@@ -158,8 +157,8 @@ pre.mac-window {
 
 code {
     font-family: 'Fira Code', monospace;
-    white-space: pre-wrap !important; 
-    word-wrap: break-word !important;
+    white-space: inherit !important; 
+    word-wrap: normal !important;
 }
 
 /* Inline Code Styling */
@@ -409,6 +408,14 @@ blockquote {
         page-break-after: avoid; /* Prevent header at the bottom of a page */
     }
     
+    pre.mac-window, pre.mac-window code {
+        white-space: pre-wrap !important;
+        word-break: break-all !important; 
+        overflow-x: hidden !important;
+        font-size: 11px !important; /* Shrink to fit ~120 chars per line so ASCII art doesn't wrap */
+        line-height: 1.4 !important;
+    }
+    
     pre, blockquote, table, img {
         page-break-inside: avoid; /* Prevent code blocks and tables from splitting across pages */
     }
@@ -422,6 +429,11 @@ mark.yellow-highlight {
     border-radius: 4px;
     font-weight: 600;
     box-shadow: 0 0 8px rgba(253, 224, 71, 0.1);
+}
+
+/* Fix ASCII alignment by removing horizontal padding in code blocks */
+pre mark.yellow-highlight {
+    padding: 0.15em 0 !important;
 }
 
 @media print {
