@@ -11997,23 +11997,23 @@ TypeScript ka compiler (code check karke JavaScript mein convert karne wala tool
 #### 💻 7. Hands-On — Runnable Example (CRITICAL SECTION)
 
 ```typescript
-// TypeScript 5.x | Node.js 20+
-1  // Interface define kar rahe hain TiffinBox ke liye jo type <T> accept karega
-2  interface TiffinBox<T> {                           // <T> ek [[HL::generic::HL]] type parameter hai
-3      item: T;                                       // 'item' ka type wahi hoga jo <T> mein aayega
-4      isHot: boolean;                                // isHot hamesha boolean rahega
-5  }
-6  
-7  // Generic function jo TiffinBox banata hai
-8  function packLunch<T>(food: T): TiffinBox<T> {     // packLunch<T> function hai; food: T input hai; return type TiffinBox<T> hai
-9      return {                                       // Object return kar rahe hain
-10         item: food,                                // input food ko item mein daal diya
-11         isHot: true                                // default isHot true set kiya
-12     };
-13 }
-14 
-15 // Example 1: String type pass kar rahe hain
-16 const myLunch = packLunch<string>("Pasta");        // <string> explicitly bata raha hai ki T = string hoga
+[[HL::// TypeScript 5.x | Node.js 20+::HL]]
+[[HL::1  // Interface define kar rahe hain TiffinBox ke liye jo type <T> accept karega::HL]]
+[[HL::2  interface TiffinBox<T> {                           // <T> ek generic type parameter hai::HL]]
+[[HL::3      item: T;                                       // 'item' ka type wahi hoga jo <T> mein aayega::HL]]
+[[HL::4      isHot: boolean;                                // isHot hamesha boolean rahega::HL]]
+[[HL::5  }::HL]]
+[[HL::6  ::HL]]
+[[HL::7  // Generic function jo TiffinBox banata hai::HL]]
+[[HL::8  function packLunch<T>(food: T): TiffinBox<T> {     // packLunch<T> function hai; food: T input hai; return type TiffinBox<T> hai::HL]]
+[[HL::9      return {                                       // Object return kar rahe hain::HL]]
+[[HL::10         item: food,                                // input food ko item mein daal diya::HL]]
+[[HL::11         isHot: true                                // default isHot true set kiya::HL]]
+[[HL::12     };::HL]]
+[[HL::13 }::HL]]
+[[HL::14 ::HL]]
+[[HL::15 // Example 1: String type pass kar rahe hain::HL]]
+[[HL::16 const myLunch = packLunch<string>("Pasta");        // <string> explicitly bata raha hai ki T = string hoga::HL]]
 17 console.log(myLunch.item.toUpperCase());           // toUpperCase() (string function) error nahi dega kyunki TS ko pata hai item string hai
 18 
 19 // Example 2: Number type pass kar rahe hain bina explicitly likhe (Type Inference)
@@ -12029,10 +12029,10 @@ PASTA
 
 ##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 2 — `interface TiffinBox<T>`:** Interface (object ka naksah/blueprint) bana rahe hain. `<T>` ka matlab hai ki yeh interface tab tak complete nahi hai jab tak isko koi type na diya jaye.
-* **Line 8 — `function packLunch<T>(food: T): TiffinBox<T>`:**
-* `packLunch<T>`: Function ka naam aur uska generic declaration.
-* `food: T`: Function jo argument lega uska type `T` hoga.
+* [[HL::**Line 2 — `interface TiffinBox<T>`:** Interface (object ka naksah/blueprint) bana rahe hain. `<T>` ka matlab hai ki yeh interface tab tak complete nahi hai jab tak isko koi type na diya jaye.::HL]]
+* [[HL::**Line 8 — `function packLunch<T>(food: T): TiffinBox<T>`:**::HL]]
+* [[HL::`packLunch<T>`: Function ka naam aur uska generic declaration.::HL]]
+* [[HL::`food: T`: Function jo argument lega uska type `T` hoga.::HL]]
 * [[HL::`: TiffinBox<T>`: Function jo wapas (return) karega, woh ek TiffinBox object hoga aur uske andar ka item wahi type `T` ka hoga.::HL]]
 
 
@@ -12064,10 +12064,10 @@ PASTA
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? [[HL::(Confusion Clarifier)::HL]]
 
-* **Confusion 1 — "Kya T::HL]] [[HL::koi special word hai? Mujhe T hi likhna padega?"**
-* **Galat soch:** Beginners sochte hain TS mein `T` ek keyword hai.
+* [[HL::**Confusion 1 — "Kya T koi special word hai? Mujhe T hi likhna padega?"**::HL]]
+* [[HL::**Galat soch:** Beginners sochte hain TS mein `T` ek keyword hai.::HL]]
 * [[HL::**Actually:** `T` sirf ek variable name hai (jaise math mein `x`). Tum `<Data>`, `<Item>`, ya `<MyType>` kuch bhi likh sakte ho. Conventionally log `T` (Type), `U`, `V` use karte hain.::HL]]
-* **Prove karo:** Upar waale code mein `interface TiffinBox<Khana>` likh kar dekho, code perfectly chalega.
+* [[HL::**Prove karo:** Upar waale code mein `interface TiffinBox<Khana>` likh kar dekho, code perfectly chalega.::HL]]
 
 
 * [[HL::**Confusion 2 — "Generics aur 'any' mein kya fark hai? Dono toh koi bhi type le rahe hain."**::HL]]
@@ -12171,7 +12171,7 @@ Generic React component ek Universal Vending Machine hai, jiska UI code ek baar 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * [[HL::**Problem:** E-commerce dashboard mein tumhe Dropdown chahiye: ek Categories ke liye, ek Brands ke liye, ek Users ke liye. Agar Dropdown generic nahi hai, toh `onSelect` hamesha `any` type dega, jisse tumhein manually cast karna padega (`as Category`). Yeh error-prone hai.::HL]]
-* **Solution:** `<Dropdown<T>>` banalo. Agar tumne usme categories ka array diya, toh `onSelect(item)` mein `item` automatically `Category` type ka ho jayega.
+* [[HL::**Solution:** `<Dropdown<T>>` banalo. Agar tumne usme categories ka array diya, toh `onSelect(item)` mein `item` automatically `Category` type ka ho jayega.::HL]]
 * [[HL::**✅ Kab use karo:** UI Libraries banate waqt, Data Tables, Dropdowns, Selects, Autocomplete components, ya Lists banate waqt.::HL]]
 * **❌ Kab mat karo / Alternative prefer karo:** Jab component specific layout ke liye ho (jaise `HeaderComponent` ya `FooterComponent`) wahan data dynamic nahi hota, toh generics add karna bewakoofi hai.
 
@@ -12503,8 +12503,8 @@ Cart item ready: Sneakers
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? [[HL::(Confusion Clarifier)::HL]]
 
-* **Confusion 1 — "Pick aur Omit mein kab kya use karu?"**
-* **Galat soch:** Dono same hi toh hain, kuch bhi use kar lo.
+* [[HL::**Confusion 1 — "Pick aur Omit mein kab kya use karu?"**::HL]]
+* [[HL::**Galat soch:** Dono same hi toh hain, kuch bhi use kar lo.::HL]]
 * [[HL::**Actually:** Depend karta hai list kitni badi hai. Agar 20 fields mein se 18 chahiye, toh `Omit<Model, 'f1' | 'f2'>` use karo. Agar 20 mein se sirf 2 chahiye, toh `Pick<Model, 'f1' | 'f2'>` use karo. Hamesha wo choose karo jisme code kam likhna pade.::HL]]
 * **Prove karo:** `Omit<Product, 'f1'|'f2'|'f3'|'f4'|'f5' ...>` likhna bewakoofi hai agar aapko sirf 2 fields chahiye.
 
@@ -12807,13 +12807,13 @@ Socho ek famous restaurant ka Master Menu hai (yeh tumhara base Type hai).
 
 #### 📖 3. Technical Definition (Interview Answer)
 
-* **Precise English:** The `keyof` operator takes an object type and produces a string or numeric literal union of its keys. Mapped Types build on the syntax for index signatures to iterate over those keys, generating a new type where the value shapes are systematically transformed.
-* **Hinglish Simplification:** `keyof` ek object ke saare propert names nikal kar unka ek list (union) banata hai. Mapped Types us list par loop laga kar ek naya type generate karta hai jisme values ka data-type badla ja sakta hai.
+* [[HL::**Precise English:** The `keyof` operator takes an object type and produces a string or numeric literal union of its keys. Mapped Types build on the syntax for index signatures to iterate over those keys, generating a new type where the value shapes are systematically transformed.::HL]]
+* [[HL::**Hinglish Simplification:** `keyof` ek object ke saare propert names nikal kar unka ek list (union) banata hai. Mapped Types us list par loop laga kar ek naya type generate karta hai jisme values ka data-type badla ja sakta hai.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Tumhare Design System mein ek `Theme` object hai jisme 50 colors hain (primary, secondary, danger, etc.) aur unki values HEX codes hain (jaise `#FF0000`). Ab tumhe ek naya type banana hai CSS variables ke liye jisme keys same (primary, secondary) hon, par value sirf `string` ho. Agar manual likhoge, toh kal ko naya color add hone par dono types manually sync karne padenge.
-* **Solution:** `{[K in keyof Theme]: string}` use karke tum TypeScript ko bol sakte ho: "Theme ki saari keys uthao, aur sabki value ko statically `string` set kar do."
+* [[HL::**Problem:** Tumhare Design System mein ek `Theme` object hai jisme 50 colors hain (primary, secondary, danger, etc.) aur unki values HEX codes hain (jaise `#FF0000`). Ab tumhe ek naya type banana hai CSS variables ke liye jisme keys same (primary, secondary) hon, par value sirf `string` ho. Agar manual likhoge, toh kal ko naya color add hone par dono types manually sync karne padenge.::HL]]
+* [[HL::**Solution:** `{[K in keyof Theme]: string}` use karke tum TypeScript ko bol sakte ho: "Theme ki saari keys uthao, aur sabki value ko statically `string` set kar do."::HL]]
 * **What breaks if we don't use it?:** Tumhare types out-of-sync ho jayenge. Developer naya color 'success' theme mein add karega, par uski CSS variant ka type update karna bhool jayega, jisse bug aayega.
 * **✅ Kab use karo:** Jab bhi ek type doosre type ki exact keys par depend karta ho — jaise Forms ke validation objects banana, Redux (state management library) ki actions banana, ya Design Themes manage karna.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab naya object sirf 1-2 totally alag fields rakhta ho aur base object se koi direct link na ho. Wahan simply naya `interface` likh do, faltu complexity mat badao.
@@ -13119,7 +13119,7 @@ Yahan hum tumhara **E-commerce Use Case** implement kar rahe hain. Dhyan se comm
 ```
 
 > **↓ Detailed Explanation (jo inline mein fit nahi hua):**
-> * **Line 16 — `async function safeFetch<T>(...)`:** Yeh `<T>` syntax TypeScript ka Generic feature hai. Yeh function ko ek blank template de deta hai. Jab hum line 36 mein `safeFetch<Product>` bulate hain, toh `<T>` ki jagah automatically `<Product>` type fill ho jaati hai. Yeh same code ko alag-alag data structures ke liye reuse karne mein madad karta hai.
+> * [[HL::**Line 16 — `async function safeFetch<T>(...)`:** Yeh `<T>` syntax TypeScript ka Generic feature hai. Yeh function ko ek blank template de deta hai. Jab hum line 36 mein `safeFetch<Product>` bulate hain, toh `<T>` ki jagah automatically `<Product>` type fill ho jaati hai. Yeh same code ko alag-alag data structures ke liye reuse karne mein madad karta hai.::HL]]
 > * **Line 26 — `as T`:** `response.json()` by default `any` return karta hai. `as T` (jise Type Assertion kehte hain) ka use karke hum TS ko guarantee de rahe hain ki "Trust me, API se jo aayega woh exact Product structure hi hoga."
 > 
 > 
@@ -13392,7 +13392,7 @@ Yahan hum ek real-world E-commerce cart update ka function banayenge jahan alag-
 ```
 
 > **↓ Detailed Explanation (jo inline mein fit nahi hua):**
-> * **Line 26 & 32 — `instanceof`:** Yeh operator Prototype Chain (JS ka internal inheritance mechanism) check karta hai. Jab TS dekhta hai ki `err instanceof DatabaseError` true hai, toh us if-block ke andar `err` ka type `unknown` se automatically `DatabaseError` ho jata hai, jisse hum `err.code` read kar paate hain.
+> * [[HL::**Line 26 & 32 — `instanceof`:** Yeh operator Prototype Chain (JS ka internal inheritance mechanism) check karta hai. Jab TS dekhta hai ki `err instanceof DatabaseError` true hai, toh us if-block ke andar `err` ka type `unknown` se automatically `DatabaseError` ho jata hai, jisse hum `err.code` read kar paate hain.::HL]]
 > * **Line 38 — `typeof`:** Primitive data types (jaise string, number) `instanceof` se check nahi hote, isliye string ke liye hume `typeof` keyword use karna padta hai.
 > 
 > 
@@ -13581,7 +13581,7 @@ Ab agar jhoolha jhulne wale ka balance bigad jaye aur woh gir jaye, toh poora ci
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * [[HL::**Problem:** React ka default rule hai ki agar pure page mein ek chhote se component mein bhi runtime error aayi (jaise product.price undefined ho gaya), toh React poore page ke HTML ko gayab (unmount) kar deta hai. User ko sirf ek blank white screen dikhti hai.::HL]]
-* [[HL::**Solution:**::HL]] Hum React Error Boundary banate hain. TypeScript mein hum explicitly define karte hain ki is net ke paas kya Props (inputs jo component ko milte hain) aayenge aur iska State (internal [[HL::memory) kaisa dikhega.::HL]]
+* [[HL::**Solution:** Hum React Error Boundary banate hain. TypeScript mein hum explicitly define karte hain ki is net ke paas kya Props (inputs jo component ko milte hain) aayenge aur iska State (internal memory) kaisa dikhega.::HL]]
 * **What breaks if we don't use it?** Agar tumhare e-commerce app mein checkout page par ek chhota sa delivery badge loading fail ho gaya, toh poora checkout button aur cart gayab ho jayega. User order hi nahi kar payega.
 * **✅ Kab use karo (Use this when):** - Apne main layout components ke upar (jaise Sidebar, Navbar ke alag blocks), payment components ke aas-paas, aur 3rd-party widgets ke upar.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** - Event handlers (jaise button click functions) ya async requests (fetch calls) ke andar ke errors ke liye yeh kaam nahi karta. Unke liye Subtopic 2 wala `try/catch` hi use karna padega.
@@ -13873,7 +13873,7 @@ End-to-End Type Safety ek aisa automatic system hai ki jaise hi Backend team duk
 
 #### 🧠 [[HL::4. Why This Matters (Zaroorat Kyun Hai?)::HL]]
 
-* **Problem:** Real-world mein backend developers hamesha variable names badalte rehte hain (jaise `user_id` ko `userId` kar diya). Frontend developer ko iska pata tab chalta hai jab live production pe customers ka login crash hone lagta hai. Manual sync hamesha bohot bada risk hota hai.
+* [[HL::**Problem:** Real-world mein backend developers hamesha variable names badalte rehte hain (jaise `user_id` ko `userId` kar diya). Frontend developer ko iska pata tab chalta hai jab live production pe customers ka login crash hone lagta hai. Manual sync hamesha bohot bada risk hota hai.::HL]]
 * [[HL::**Solution:** Hum use karte hain Type Codegen (Code Generation — automated tools jo backend data dekh kar frontend file create karte hain) ya tRPC (TypeScript RPC — direct type sharing network layer). Jab backend badlega, frontend compiler build fail kar dega jab tak aap code sahi nahi karte.::HL]]
 * [[HL::**What breaks if we don't use it?** API specifications mismatch hone ki wajah se har hafte production bugs aayenge aur frontend and backend teams aapas mein ladaai karti rahengi ("Tune bataya kyun nahi key badal di!").::HL]]
 * **✅ Kab use karo (Use this when):** - Jab aap Full-Stack TypeScript development kar rahe ho (Next.js/Node), ya GraphQL server use kar rahe ho jahan frontend-backend dono ka tight integration zaroori hai.
@@ -14182,17 +14182,17 @@ TypeScript ka compiler kaise kaam karta hai:
 #### 💻 7. Hands-On — Runnable Example (CRITICAL SECTION)
 
 ```typescript
-# TypeScript 5.0+ | Vite 5.x+
-1  // [[HL::types.::HL]]ts file mein humne ek type banaya
-2  export type CartItem = {                # CartItem type — sirf shape define karta hai
-3    id: string;                           # id: item ka unique text ID
-4    price: number;                        # price: item ki keemat
-5  };
-6  
-7  // main.ts file mein hum isko import kar rahe hain
-8  import type { CartItem } from './types'; # import type — bundler ko bolta hai ise JS mein mat bhejna
-9  import { calculateTotal } from './utils';# normal import — actual function jo run hoga
-10 
+[[HL::# TypeScript 5.0+ | Vite 5.x+::HL]]
+[[HL::1  // types.ts file mein humne ek type banaya::HL]]
+[[HL::2  export type CartItem = {                # CartItem type — sirf shape define karta hai::HL]]
+[[HL::3    id: string;                           # id: item ka unique text ID::HL]]
+[[HL::4    price: number;                        # price: item ki keemat::HL]]
+[[HL::5  };::HL]]
+[[HL::6  ::HL]]
+[[HL::7  // main.ts file mein hum isko import kar rahe hain::HL]]
+[[HL::8  import type { CartItem } from './types'; # import type — bundler ko bolta hai ise JS mein mat bhejna::HL]]
+[[HL::9  import { calculateTotal } from './utils';# normal import — actual function jo run hoga::HL]]
+[[HL::10 ::HL]]
 11 const item: CartItem = {                # item banaya CartItem type ka
 12   id: "PROD-123",                       # value assign ki
 13   price: 499                            # value assign ki
@@ -14214,7 +14214,7 @@ TypeScript ka compiler kaise kaam karta hai:
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
-* **Line 8:** `import type { CartItem } from './types';` — Yahan `{}` (destructuring syntax) ke bahar `type` keyword laga hai. Iska matlab `CartItem` ek phantom (bhoot) hai jo sirf editor ko dikhega, browser ko nahi. Agar isse normal import kiya, toh Vite (fast modern build tool) extra processing lagayega aur sometimes legacy modules mein error aa sakta hai.
+* [[HL::**Line 8:** `import type { CartItem } from './types';` — Yahan `{}` (destructuring syntax) ke bahar `type` keyword laga hai. Iska matlab `CartItem` ek phantom (bhoot) hai jo sirf editor ko dikhega, browser ko nahi. Agar isse normal import kiya, toh Vite (fast modern build tool) extra processing lagayega aur sometimes legacy modules mein error aa sakta hai.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -14255,7 +14255,7 @@ TypeScript ka compiler kaise kaam karta hai:
 
 | Feature | `import { X }` | `import type { X }` |
 | --- | --- | --- |
-| [[HL::**Kya lata hai?** | Actual values (functions, class, variables) | Sirf TypeScript ke types/interfaces::HL]] |
+| [[HL::**Kya lata hai?**::HL]] | [[HL::Actual values (functions, class, variables)::HL]] | [[HL::Sirf TypeScript ke types/interfaces::HL]] |
 | **Final JS Bundle mein dikhega?** | Haan (Agar code mein use hua) | KABHI NAHI (100% erase ho jayega) |
 | **Babel/Vite friendly?** | Values ke liye Yes | Types ke liye Yes, sabse best hai |
 
@@ -14365,8 +14365,8 @@ Ab ESM vs CommonJS ka fark samjho:
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * [[HL::**Problem:** Aapne `lodash` (utility library jisme 100+ math/array functions hain) install ki, aur sirf ek `capitalize` function use kiya. Bina tree-shaking ke, poore 100 functions aapki website me load ho jayenge aur speed slow ho jayegi.::HL]]
-* **Solution:** Tree-shaking sirf us 1 `capitalize` function ko uthayega aur baaki 99 ko kachre mein daal dega.
-* **What breaks if we don't use it?:** User 5MB ki JavaScript download karega sirf 1 chhota feature chalane ke liye. (Heavy load times, bad SEO).
+* [[HL::**Solution:** Tree-shaking sirf us 1 `capitalize` function ko uthayega aur baaki 99 ko kachre mein daal dega.::HL]]
+* [[HL::**What breaks if we don't use it?:** User 5MB ki JavaScript download karega sirf 1 chhota feature chalane ke liye. (Heavy load times, bad SEO).::HL]]
 * [[HL::**✅ Kab use karo:** Hamesha! Naye projects hamesha ESM (`import/export`) pe bane hone chahiye.::HL]]
 * **❌ Kab mat karo / Alternative prefer karo:** Jab legacy Node.js script likh rahe ho jisme dynamic module loading chahiye (jaise `if(condition) { require('lib') }`), tab CommonJS use hota hai. (Aise cases mein waise bhi backend pe bundle size matter nahi karta).
 
@@ -14425,8 +14425,8 @@ Tree-shaking aapka attack surface (hack hone ki jagah) kam karta hai. Agar kisi 
 * **🤦 Why:** Beginner default import use kar leta hai convenience ke liye.
 * **✅ The 'Pro' Way:** `import { debounce } from 'lodash-es';` (Notice `lodash-es` — yeh Lodash ka ESM version hai).
 * **⚡ Consequences:** `import _` kiya, toh lodash ka poora 70KB ka object memory mein aa jayega, bundler isko tree-shake nahi kar payega kyunki aapne poora `_` (dabba) mangwa liya hai. Bundle size fategi aur app slow hogi.
-* **❌ [[HL::Mistake:**::HL]] Browser app mein `require('module')` use karna.
-* **⚡ Consequences:** `require` [[HL::dynamic hai, bundler dar jaata hai aur kuch delete nahi karta (CJS cannot be tree::HL]]-shaken).
+* [[HL::**❌ Mistake:** Browser app mein `require('module')` use karna.::HL]]
+* [[HL::**⚡ Consequences:** `require` dynamic hai, bundler dar jaata hai aur kuch delete nahi karta (CJS cannot be tree-shaken).::HL]]
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -14765,7 +14765,7 @@ Problem yeh hai ki dono andhe hain! Jab aap TS (Manager) ko bata dete ho (Typing
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * [[HL::**Problem:** Aapne `.env` mein likha `VITE_API_URL=https://api.com`. Code mein aapne galti se type kar diya `fetch(import.meta.env.VITE_API_URLL)` (ek 'L' extra). TypeScript aam taur par ispe khamosh rahega, aur app live website pe fail ho jayegi (undefined me jayega).::HL]]
-* **Solution:** Agar hum TS ko pehle hi bata dein ki sirf `VITE_API_URL` valid hai, toh 'URLL' likhte hi laal error aayega!
+* [[HL::**Solution:** Agar hum TS ko pehle hi bata dein ki sirf `VITE_API_URL` valid hai, toh 'URLL' likhte hi laal error aayega!::HL]]
 * [[HL::**What breaks if we don't use it?:** Production mein silent failures (bina bataye error aana). API request `https://undefined/users` pe chali jayegi.::HL]]
 * **✅ Kab use karo:** Har ek serious project mein jahan `.env` file use hoti ho (Database connections, Stripe API Keys, Firebase config).
 * **❌ Kab mat karo / Alternative prefer karo:** Jab project mein sirf 1-2 non-critical env vars hon aur TS setup overkill lag raha ho. Par ideally, hamesha karna chahiye.
