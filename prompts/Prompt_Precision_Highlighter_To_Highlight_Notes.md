@@ -459,3 +459,10 @@ Specifically:
 
 Failing to implement this in your script will cause catastrophic, invisible truncation of highlights when the document is rendered to HTML.
 
+
+### Rule 43 — ROBUST FUZZY MATCHING FOR MARKDOWN CHARACTERS
+When users provide terms to highlight, they often provide plain text (e.g., Mistake: Browser app mein require('module') use karna), while the actual Markdown document contains formatting characters (e.g., **❌ Mistake:** Browser app mein equire('module')\ use karna.). 
+Your Python script MUST use a robust fuzzy matching algorithm or regex that ignores/strips Markdown characters (*, _, \`, <, >) during the string matching phase. If your script relies on strict .find() or strict regex without accounting for hidden backticks or bold tags, it will silently fail to find the text.
+
+### Rule 44 — TABLE PIPES (|) MUST REMAIN OUTSIDE
+If a highlight spans across multiple cells in a Markdown table, your script MUST explicitly split the [[HL:: and ::HL]] tags at the column boundaries. You must NEVER wrap a pipe (|) character inside the highlight tag (e.g., [[HL:: cell 1 | cell 2 ::HL]] is FORBIDDEN). It must be [[HL:: cell 1 ::HL]] | [[HL:: cell 2 ::HL]]. Wrapping a pipe breaks the Markdown table parser entirely.
