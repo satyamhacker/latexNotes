@@ -609,7 +609,20 @@ document.addEventListener("DOMContentLoaded", () => {
     let finalHtml = marked.parse(processed, { renderer: renderer });
     
     // Replace remaining [[HL::text::HL]] outside of code blocks
-    finalHtml = finalHtml.replace(/\[\[HL::(.*?)::HL\]\]/gs, '<mark class="yellow-highlight">$1</mark>');
+    // Fix hanging newline tags that break HTML blocks
+    finalHtml = finalHtml.replace(/\n::HL\]\]/g, '::HL]]\n');
+    
+    // Replace remaining [[HL::text::HL]] outside of code blocks
+    finalHtml = finalHtml.replace(/\[\[HL::([\s\S]*?)::HL\]\]/g, '<mark class="yellow-highlight">$1</mark>');
+    
+    // HEALING OVERLAPPING HTML DOM TAGS
+    // Fix cases where <mark> starts inside a <strong> tag but ends outside it
+    // Ex: <strong><mark>Text:</strong> More Text</mark> -> <mark><strong>Text:</strong> More Text</mark>
+    // Since browser DOM fixes overlap destructively, we fix it in the raw HTML string first
+    finalHtml = finalHtml.replace(/<strong>([^<]*?)<mark class="yellow-highlight">/g, '<mark class="yellow-highlight"><strong>$1');
+    finalHtml = finalHtml.replace(/<em>([^<]*?)<mark class="yellow-highlight">/g, '<mark class="yellow-highlight"><em>$1');
+    finalHtml = finalHtml.replace(/<\/mark>([^<]*?)<\/strong>/g, '$1</strong></mark>');
+    finalHtml = finalHtml.replace(/<\/mark>([^<]*?)<\/em>/g, '$1</em></mark>');
     
     // UI Pagination Logic
     contentArea.innerHTML = '';

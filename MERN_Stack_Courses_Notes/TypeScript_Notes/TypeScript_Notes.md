@@ -228,12 +228,12 @@ Maan lo tum ek author ho jo **French** (`TypeScript`) mein ek book likh raha hai
 #### 📖 3. Technical Definition (Interview Answer)
 
 * **Precise English:** The TypeScript Compiler (`tsc`) is a transpiler that converts TypeScript code into pure JavaScript and performs static type-checking. A Bundler (Webpack/Vite/Metro) traverses the dependency graph and combines multiple JavaScript modules, CSS, and assets into optimized output files for deployment.
-* **Hinglish Simplification:** `tsc` sirf code ki bhasha (TS se JS) badalta hai aur errors check karta hai, jabki Bundler tumhare poore project ki 100+ files ko jod kar 1-2 chhoti files mein "pack" kar deta hai taaki fast load ho sake.
+* [[HL::**Hinglish Simplification:** `tsc` sirf code ki bhasha (TS se JS) badalta hai aur errors check karta hai, jabki Bundler tumhare poore project ki 100+ files ko jod kar 1-2 chhoti files mein "pack" kar deta hai taaki fast load ho sake.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * **Problem:** Browsers aur iOS/Android platforms ko TypeScript samajh **nahi** aati. Unhe sirf raw JavaScript aati hai. Dusri problem yeh hai ki agar tumhari app mein 500 TS/JS files hain, toh browser 500 alag-alag requests bhejega load karne ke liye — jisse tumhara E-commerce app bahut slow ho jayega.
-* **Solution:** `tsc` errors pakad ke TS ko JS banata hai, aur Bundler un 500 files ko combine karke ek single `bundle.js` bana deta hai jisse loading super fast hoti hai.
+* [[HL::**Solution:** `tsc` errors pakad ke TS ko JS banata hai, aur Bundler un 500 files ko combine karke ek single `bundle.js` bana deta hai jisse loading super fast hoti hai.::HL]]
 * **✅ Kab use karo (Use this when):** - **Sirf `tsc`:** Jab tum ek standalone NPM (Node Package Manager — tools aur packages share karne ka platform) library bana rahe ho jisse dusre developers download karke apne app mein use karenge.
 * **Bundler (Vite/Metro):** Jab tum ek actual end-user frontend app (Web ya Mobile) bana rahe ho.
 
@@ -259,7 +259,7 @@ Maan lo tum ek author ho jo **French** (`TypeScript`) mein ek book likh raha hai
 Yeh poora flow actually kaise kaam karta hai?
 
 * **(1) Parsing:** Jab tum build command chalate ho, compiler tumhare `.ts` code ko padhta hai aur ek AST (Abstract Syntax Tree — code ka ek logical tree structure) banata hai.
-* **(2) Type Checking & Stripping:** Compiler check karta hai ki koi rules toh nahi tute (e.g., number wale variable mein text toh nahi daala). Phir woh TS ke sabhi types ko "strip" (hata) deta hai kyunki JS ko unki zaroorat nahi hoti.
+* [[HL::**(2) Type Checking & Stripping:** Compiler check karta hai ki koi rules toh nahi tute (e.g., number wale variable mein text toh nahi daala). Phir woh TS ke sabhi types ko "strip" (hata) deta hai kyunki JS ko unki zaroorat nahi hoti.::HL]]
 * **(3) Graph Creation:** Ab Bundler aata hai. Woh dekhta hai ki `main.ts` ne `utils.ts` ko import kiya hai, toh woh ek Dependency Graph (kaun kispe depend hai) banata hai.
 * **(4) Minification & Packing:** Bundler us plain JS code se extra spaces, comments aur lambe variables ke naam hata deta hai (minify karta hai) aur sabko ek `bundle.js` mein daal deta hai.
 
@@ -289,9 +289,9 @@ Yahan hum do alag scenarios dekhenge — ek jahan `tsc` directly use hota hai, a
 **Scenario B: Command Line (CLI) Executions**
 
 ```bash
-# Terminal Commands
+# [[HL::Terminal Commands::HL]]
 1  # Agar sirf type-check karna ho (errors pakadne ke liye):
-2  npx tsc                                    # npx: node package ko directly run karne ka tool; tsc: compiler run karo
+[[HL::2  npx tsc::HL]]                                    # npx: node package ko directly run karne ka tool; tsc: compiler run karo
 3  
 4  # Agar Vite Bundler se app pack karna ho:
 5  npm run build                              # npm run build: package.json ka script jo Vite bundler ko trigger karta hai
@@ -309,7 +309,7 @@ dist/assets/index-b4f3g.js   145.2 kB  # (Dekho, sari TS files ek optimized bund
 
 ##### 🔬 Code Explanation (For Complex Lines)
 
-* **Line 5 (Scenario A) — `noEmit: true`:** Modern apps mein hum chahte hain ki Type-checking `tsc` kare (kyunki woh usme expert hai), lekin code ko JS mein convert aur bundle karne ka kaam Vite/Metro kare (kyunki woh fast hain). Isliye hum `tsc` ko bolte hain ki tum JS file "emit" (paida) mat karo, sirf error batao.
+* [[HL::**Line 5 (Scenario A) — `noEmit: true`:** Modern apps mein hum chahte hain ki Type-checking `tsc` kare (kyunki woh usme expert hai), lekin code ko JS mein convert aur bundle karne ka kaam Vite/Metro kare (kyunki woh fast hain). Isliye hum `tsc` ko bolte hain ki tum JS file "emit" (paida) mat karo, sirf error batao.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -356,9 +356,9 @@ dist/assets/index-b4f3g.js   145.2 kB  # (Dekho, sari TS files ek optimized bund
 * **Prove karo:** Code ke output folder `dist` mein jao. Wahan binary code (0011) nahi milega, balki readable JavaScript milegi.
 
 
-* **Confusion 3 — "Babel kya hai agar Vite ya tsc already hain?"**
-* **Galat soch:** Babel bhi ek bundler hai Vite ki tarah.
-* **Actually:** Babel sirf ek purana Transpiler hai (yeh naye modern code ko aise purane JS mein badalta hai jo 10 saal purane Internet Explorer browser pe bhi chal sake). Metro bundler actually Babel ko as a internal tool use karta hai React Native code convert karne ke liye.
+* [[HL::**Confusion 3 — "Babel kya hai agar Vite ya tsc already hain?"**::HL]]
+* [[HL::**Galat soch:** Babel bhi ek bundler hai Vite ki tarah.::HL]]
+* [[HL::**Actually:** Babel sirf ek purana Transpiler hai (yeh naye modern code ko aise purane JS mein badalta hai jo 10 saal purane Internet Explorer browser pe bhi chal sake). Metro bundler actually Babel ko as a internal tool use karta hai React Native code convert karne ke liye.::HL]]
 * **Prove karo:** Babel ko akele run karke dekho, woh kabhi bhi 10 files ko ek `bundle.js` mein combine nahi kar payega. Woh sirf file-by-file translation karta hai.
 
 
@@ -500,7 +500,7 @@ Agar koi rulebook nahi hogi, toh Principal ko pata hi nahi hoga ki students ko k
 #### 📖 3. Technical Definition (Interview Answer)
 
 * **Precise English:** `tsconfig.json` is a JSON configuration file placed at the root of a TypeScript project. It specifies the compiler options and root level files required to compile the project, acting as the single source of truth for TypeScript's behavior.
-* **Hinglish Simplification:** `tsconfig.json` (JSON — JavaScript Object Notation, ek simple text format data save karne ke liye) ek text file hai jo TypeScript ko batati hai ki code ko check aur convert karte waqt kaunse rules follow karne hain.
+* [[HL::**Hinglish Simplification:** `tsconfig.json` (JSON — JavaScript Object Notation, ek simple text format data save karne ke liye) ek text file hai jo TypeScript ko batati hai ki code ko check aur convert karte waqt kaunse rules follow karne hain.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
@@ -567,8 +567,8 @@ Yeh ek standard modern React/E-commerce app ki `tsconfig.json` file hai:
 
 #### 🔒 8. Security-First Check
 
-* **How can this be hacked?** Agar `strict: false` hai, toh developers `any` type (jo har type ka data allow karta hai) use karne lagenge. Isse hackers backend se unexpected data bhej sakte hain (jaise number ki jagah object), aur app turant crash ho jayega (Data leak ya Denial of Service).
-* **How to secure it?** Hamesha production E-commerce app mein `"strict": true` rakho. Yeh developer ko zabardasti force karega ki har data ka ek strict type define kare, jisse security aur stability badhti hai.
+* [[HL::**How can this be hacked?** Agar `strict: false` hai, toh developers `any` type (jo har type ka data allow karta hai) use karne lagenge. Isse hackers backend se unexpected data bhej sakte hain (jaise number ki jagah object), aur app turant crash ho jayega (Data leak ya Denial of Service).::HL]]
+* [[HL::**How to secure it?** Hamesha production E-commerce app mein `"strict": true` rakho. Yeh developer ko zabardasti force karega ki har data ka ek strict type define kare, jisse security aur stability badhti hai.::HL]]
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -742,14 +742,14 @@ Jab Flipkart ya Amazon ki team apna naya React component library banati hai, toh
 
 #### 🎯 Topic: 3. Path Aliases (`@components/*`) setup in Vite, Next.js, and Babel (React Native)
 
-Is topic mein hum seekhenge ki kaise lambe aur confusing file paths (jaise `../../../../components/Button`) ko ek clean, chote shortcut (jaise `@components/Button`) mein badla jata hai, taaki app Web aur Mobile dono par seamlessly chale.
+[[HL::Is topic mein hum seekhenge ki kaise lambe aur confusing file paths (jaise `../../../../components/Button`) ko ek clean, chote shortcut (jaise `@components/Button`) mein badla jata hai, taaki app Web aur Mobile dono par seamlessly chale.::HL]]
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
 Maan lo tumhe apne dost ke ghar jana hai.
 
-* **Relative Path (`../../`):** Yeh waisa hai jaise dost tumhe direction de: "Ghar se nikal kar 2 gali peechhe aao, phir left lo, 3 building cross karo aur 4th floor pe aao." (Agar tum thoda aage-peeche hue, toh rasta bhatak jaoge).
-* **Path Alias (`@components/`):** Yeh waisa hai jaise dost ne direct **Google Maps ki Location Pinned** bhej di: "City Mall aa jao." (Tum chahe shehar ke kisi bhi kone mein ho, seedha City Mall pohoch jaoge). Aliases code mein yahi shortcuts banate hain!
+* [[HL::**Relative Path (`../../`):** Yeh waisa hai jaise dost tumhe direction de: "Ghar se nikal kar 2 gali peechhe aao, phir left lo, 3 building cross karo aur 4th floor pe aao." (Agar tum thoda aage-peeche hue, toh rasta bhatak jaoge).::HL]]
+* [[HL::**Path Alias (`@components/`):** Yeh waisa hai jaise dost ne direct **Google Maps ki Location Pinned** bhej di: "City Mall aa jao." (Tum chahe shehar ke kisi bhi kone mein ho, seedha City Mall pohoch jaoge). Aliases code mein yahi shortcuts banate hain!::HL]]
 
 #### 📖 3. Technical Definition (Interview Answer)
 
@@ -758,8 +758,8 @@ Maan lo tumhe apne dost ke ghar jana hai.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** "Relative Path Hell". Jab tumhara app bada hota hai, toh folder ke andar folder bante hain. Ek deep file mein button import karne ke liye `import { Button } from "../../../../components/ui/Button"` likhna padta hai. Agar kal tumne us file ki location change ki, toh rasta toot jayega aur app crash ho jayega.
-* **Solution:** `@components/Button` use karo. Yeh path kabhi toot'ta nahi hai, chahe tum import karne wali file ko kisi bhi folder mein move kar do.
+* [[HL::**Problem:** "Relative Path Hell". Jab tumhara app bada hota hai, toh folder ke andar folder bante hain. Ek deep file mein button import karne ke liye `import { Button } from "../../../../components/ui/Button"` likhna padta hai. Agar kal tumne us file ki location change ki, toh rasta toot jayega aur app crash ho jayega.::HL]]
+* [[HL::**Solution:** `@components/Button` use karo. Yeh path kabhi toot'ta nahi hai, chahe tum import karne wali file ko kisi bhi folder mein move kar do.::HL]]
 * **✅ Kab use karo (Use this when):**
 * Jab app mein 3+ levels deep folder structure ho.
 * Jab tum ek Monorepo (ek hi project mein Web aur Mobile dono ka code) bana rahe ho.
@@ -773,13 +773,13 @@ Maan lo tumhe apne dost ke ghar jana hai.
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 ```text
-❌ Bura Tarika (Relative Paths):
-import { Header } from "../../../components/Header";
+❌ [[HL::Bura Tarika (Relative Paths):::HL]]
+import::HL]] { [[HL::Header } from "../../../components/Header";
 import { formatPrice } from "../../utils/formatPrice";
 
 ✅ Pro Tarika (Path Aliases):
 import { Header } from "@components/Header";
-import { formatPrice } from "@utils/formatPrice";
+[[HL::import { formatPrice } from "@utils/formatPrice";::HL]]
 
 ```
 
@@ -799,13 +799,13 @@ Is setup ke teen hisse hain. Hum TS, Vite (Web), aur Babel (React Native) teeno 
 ```json
 // TypeScript 5.x Configuration
 1  {
-2    "compilerOptions": {                       // compilerOptions: rules ka block (Subtopic 2 mein dekha)
+2    "compilerOptions": {                       // compilerOptions: rules ka block [[HL::(Subtopic 2 mein dekha)::HL]]
 3      "baseUrl": ".",                          // baseUrl: Sabse important! Batata hai ki raste kahan se gine jayenge ('.' matlab root folder)
 4      "paths": {                               // paths: Yahan hum shortcut ke map banate hain
 5        "@components/*": ["src/components/*"], // @components/* : Jab koi yeh likhe, toh use src/components folder mein bhejo
 6        "@utils/*": ["src/utils/*"]            // @utils/* : Jab koi yeh likhe, toh use src/utils folder mein bhejo
 7      }
-8    }
+[[HL::8::HL]]    }
 9  }
 
 ```
@@ -852,10 +852,10 @@ vite v5.0.0 building for production...
 5        'module-resolver',                               // module-resolver: Yeh plugin paths ko redirect karega
 6        {
 7          root: ['./src'],                               // root: Kahan se start karein
-8          alias: {                                       // alias: Yahan exactly wahi likho jo tsconfig mein likha tha
+8          [[HL::alias: {                                       // alias: Yahan exactly wahi likho jo tsconfig mein likha tha::HL]]
 9            '@components': './src/components',           // @components shortcut ko ./src/components pe point karo
 10           '@utils': './src/utils'                      // @utils ko ./src/utils pe point karo
-11         }
+[[HL::11::HL]]         }
 12       }
 13     ]
 14   ]
@@ -876,7 +876,7 @@ vite v5.0.0 building for production...
 #### 🏗️ 9. Scalability & Industry Context
 
 * **Next.js Magic:** Next.js (React ka production framework — built-in router aur SSR ke sath) mein Path Aliases default chalte hain. Tumhe Babel ya Vite ki tarah alag config nahi likhni padti. Bas `tsconfig.json` mein paths add karo, Next.js khud samajh jata hai.
-* **Refactoring (Code Badlna):** Jab Swiggy ki codebase mein 5000 files hoti hain aur team ko ek `Button` component ko ek folder se dusre folder mein move karna hota hai, toh unhe 500 jagah imports fix nahi karne padte. Woh bas folder move karte hain aur `tsconfig.json` mein 1 line ka map update kar dete hain.
+* [[HL::**Refactoring (Code Badlna):** Jab Swiggy ki codebase mein 5000 files hoti hain aur team ko ek `Button` component ko ek folder se dusre folder mein move karna hota hai, toh unhe 500 jagah imports fix nahi karne padte. Woh bas folder move karte hain aur `tsconfig.json` mein 1 line ka map update kar dete hain.::HL]]
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -886,9 +886,9 @@ vite v5.0.0 building for production...
 * **⚡ Consequences:** Tumhara editor koi error nahi dega, sab green dikhega, par jaise hi app run karoge terminal mein crash ho jayega "Module not found" error ke sath.
 
 
-* ❌ **Mistake 2:** Ek akela generic alias `@/*` set kar dena poore app ke liye.
-* **🤦 Why:** Aalsi developers sochte hain har folder ka alias likhne se acha ek hi likh do.
-* **✅ The 'Pro' Way:** Specific aliases banao jaise `@components`, `@hooks`, `@screens`.
+* ❌ [[HL::**Mistake 2:** Ek akela generic alias `@/*` set kar dena poore app ke liye.::HL]]
+* [[HL::**🤦 Why:** Aalsi developers sochte hain har folder ka alias likhne se acha ek hi likh do.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Specific aliases banao jaise::HL]] `@components`, `@hooks`, `@screens`.
 * **⚡ Consequences:** Jab app bada hoga, tab pata nahi chalega ki `import { User } from "@/User"` mein User koi component hai, ya database model hai, ya koi hook hai. Code confusing ho jayega.
 
 
@@ -907,9 +907,9 @@ vite v5.0.0 building for production...
 * **Prove karo:** `tsconfig.json` mein bina `*` ke likho: `"@components": ["src/components"]`. Ab `@components/Button` import karke dekho — TS turant error dega kyunki use Button nahi milega, use sirf ek literal naam mila.
 
 
-* **Confusion 2 — "Kya sirf `@` hi use kar sakte hain?"**
-* **Galat soch:** `@` TypeScript ka koi fix keyword hai.
-* **Actually:** Nahi! `@` sirf ek convention (parampara) hai taaki alias alag se pehchana jaye aur NPM packages (jo `@` se shuru hote hain jaise `@mui/material`) jaisa feel ho. Tum chaho toh `~components` ya `#components` ya `shortcuts/components` bhi likh sakte ho.
+* [[HL::**Confusion 2 — "Kya sirf `@` hi use kar sakte hain?"**::HL]]
+* [[HL::**Galat soch:** `@` TypeScript ka koi fix keyword hai.::HL]]
+* [[HL::**Actually:** Nahi! `@` sirf ek convention (parampara) hai taaki alias alag se pehchana jaye aur NPM packages (jo `@` se shuru hote hain jaise `@mui/material`) jaisa feel ho. Tum chaho toh `~components` ya `#components` ya `shortcuts/components` bhi likh sakte ho.::HL]]
 * **Prove karo:** Tsconfig mein `"~utils/*": ["src/utils/*"]` likh kar test karo. `import { format } from "~utils/format"` perfectly kaam karega!
 
 
@@ -1368,7 +1368,7 @@ Is topic mein hum basic data types (jo har data ka core hote hain) aur unke grou
 Maan lo aapke kitchen mein alag-alag dabbe (containers) hain. Ek dabba namak ka hai, ek cheeni ka. Agar aap namak ke dabbe mein cheeni daaloge, toh chai kharab ho jayegi.
 TypeScript (ek programming language jo JavaScript ke upar types ki layer add karti hai) bilkul aise hi "dabbe par label" lagane ka kaam karti hai.
 
-* `string`, `number`, `boolean` = Yeh labels batate hain ki is dabbe mein sirf text, sirf number, ya sirf true/false jayega.
+* [[HL::`string`, `number`, `boolean` = Yeh labels batate hain ki is dabbe mein sirf text, sirf number, ya sirf true/false jayega.::HL]]
 * **Array** = Ek badi balti jisme aap ek hi type ka unlimited saamaan daal sakte ho (jaise sirf aaloo).
 * **Tuple** = Ek fixed thali (platter) jisme compartment fix hain — pehle compartment mein roti (string), doosre mein dal (number) hi aayegi.
 
@@ -1379,7 +1379,7 @@ TypeScript (ek programming language jo JavaScript ke upar types ki layer add kar
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** JavaScript (jo TypeScript ke peeche chalti hai) dynamically typed hai. Aap ek variable mein pehle number daal sakte ho, aur agli line mein text. Isse runtime errors aate hain — jaise `"5" + 5` milkar `"55"` ban jaata hai (math error).
+* [[HL::**Problem:** JavaScript (jo TypeScript ke peeche chalti hai) dynamically typed hai. Aap ek variable mein pehle number daal sakte ho, aur agli line mein text. Isse runtime errors aate hain — jaise `"5" + 5` milkar `"55"` ban jaata hai (math error).::HL]]
 * **Solution:** TypeScript mein Primitives aur Tuples use karne se editor aapko code type karte waqt hi rok deta hai agar aap galat data daalte ho.
 * **What breaks if we don't use it?** E-commerce app mein cart ka total calculate karte waqt agar `price` number ki jagah string (`"$19.99"`) ban gaya, toh user ko bill mein `"NaN"` (Not a Number — jab math operation fail hota hai) dikhega.
 * **✅ Kab use karo (Use this when):** Jab aapko exact pata ho ki variable ka data kaisa dikhega (e.g., Age hamesha number hogi, Username hamesha string hoga, 2D coordinates `[x, y]` hamesha Tuple honge).
@@ -1387,7 +1387,7 @@ TypeScript (ek programming language jo JavaScript ke upar types ki layer add kar
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-Aapke VS Code (code likhne ka software) mein jab aap `let age: number = "twenty"` likhoge, toh `"twenty"` ke neeche ek laal rang ki zig-zag line (red squiggly line) aayegi. Hover karne par error likha hoga. Code tab tak run nahi hoga jab tak aap error solve nahi karte.
+[[HL::Aapke VS Code (code likhne ka software) mein jab aap `let age: number = "twenty"` likhoge, toh `"twenty"` ke neeche ek laal rang ki zig-zag line (red squiggly line) aayegi. Hover karne par error likha hoga. Code tab tak run nahi hoga jab tak aap error solve nahi karte.::HL]]
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
@@ -1403,17 +1403,17 @@ TypeScript ka flow aise kaam karta hai:
 // TypeScript 5.x | Node.js 20+
 1  // --- PRIMITIVES (Basic Types) ---
 2  let productName: string = "Wireless Mouse";   // productName= variable ka naam; : string= type annotation jo sirf text allow karega
-3  let price: number = 49.99;                    // price= variable; : number= integer aur decimal dono support karta hai
-4  let inStock: boolean = true;                  // inStock= variable; : boolean= sirf true ya false accept karega
+[[HL::3  let price: number = 49.99;                    // price= variable; : number= integer aur decimal dono support karta hai::HL]]
+[[HL::4  let inStock: boolean = true;::HL]]                  // inStock= variable; : boolean= sirf true ya false accept karega
 5
 6  // --- ARRAYS (Flexible List) ---
-7  let tags: string[] = ["electronics", "pc"];   // tags= variable; string[]= array jisme sirf strings aa sakti hain.
-8  tags.push("accessories");                     // .push()= array ke end mein naya item jodne ka method. Valid hai kyunki "accessories" string hai.
+7  [[HL::let tags: string[] = ["electronics", "pc"];   // tags= variable; string[]= array jisme sirf strings aa sakti hain.::HL]]
+[[HL::8  tags.push("accessories");::HL]]                     // .push()= array ke end mein naya item jodne ka method. Valid hai kyunki "accessories" string hai.
 9  // tags.push(100);                            // 🔴 ERROR: Argument of type 'number' is not assignable to parameter of type 'string'.
 10
-11 // --- TUPLE (Fixed List) ---
+11 // --- [[HL::TUPLE (Fixed List) ---::HL]]
 12 // Tuple wahan use hota hai jahan index ki position ka ek fixed matlab ho.
-13 let productStats: [string, number] = ["Rating", 4.5]; // [string, number]= Tuple type. Index 0 HAMESHA string hoga, Index 1 HAMESHA number hoga.
+[[HL::13 let productStats: [string, number] = ["Rating", 4.5]; // [string, number]= Tuple type. Index 0 HAMESHA string hoga, Index 1 HAMESHA number hoga.::HL]]
 14 
 15 // productStats = [4.5, "Rating"];           // 🔴 ERROR: Order galat hai. Pehle string chahiye, phir number.
 16 // productStats.push(true);                  // 🔴 ERROR: boolean tuple ke structure mein nahi hai.
@@ -1429,9 +1429,9 @@ Product: Wireless Mouse, Price: $49.99
 
 ```
 
-**🔬 Code Explanation (Line-by-Line):**
+**🔬 Code Explanation [[HL::(Line::HL]]-by-Line):**
 
-* **Line 13 (`let productStats: [string, number] = ["Rating", 4.5];`):** Yeh ek Tuple banata hai. Agar aap dhyan se dekhein toh humne array ke brackets `[]` ke andar hi types likhe hain. Yeh TS compiler ko batata hai ki array ki exact length 2 honi chahiye aur sequence strictly pehle `string` aur doosra `number` hona chahiye. Agar yeh Tuple nahi hota aur plain array (`(string | number)[]`) hota, toh aap kisi bhi order mein kitne bhi items daal sakte the.
+* [[HL::**Line 13 (`let productStats: [string, number] = ["Rating", 4.5];`):** Yeh ek Tuple banata hai. Agar aap dhyan se dekhein toh humne array ke brackets `[]` ke andar hi types likhe hain. Yeh TS compiler ko batata hai ki array ki exact length 2 honi chahiye aur sequence strictly pehle `string` aur doosra `number` hona chahiye. Agar yeh Tuple nahi hota aur plain array (`(string | number)[]`) hota, toh aap kisi bhi order mein kitne bhi items daal sakte the.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -1441,7 +1441,7 @@ Product: Wireless Mouse, Price: $49.99
 #### 🏗️ 9. Scalability & Industry Context
 
 * Jab codebase mein 100,000+ lines hoti hain, toh Primitives aur Tuples khud-ba-khud documentation ban jaate hain. Naye developer ko guess nahi karna padta ki `calculateTax(price)` mein `price` kya hai. Unhe turant dikh jaata hai ki `price: number` hai.
-* **Tuples** ka bahut zyada use React (ek popular UI library) ke Hooks (state manage karne ke functions) mein hota hai, jaise `const [state, setState] = useState()`.
+* [[HL::**Tuples** ka bahut zyada use React (ek popular UI library) ke Hooks (state manage karne ke functions) mein hota hai, jaise `const [state, setState] = useState::HL]]()`.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -1457,19 +1457,19 @@ Product: Wireless Mouse, Price: $49.99
 
 
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? [[HL::(Confusion Clarifier)::HL]]
 
-* **Confusion 1 — "Array aur Tuple mein exactly fark kya hai? Dono square brackets `[]` hi toh use karte hain!"**
-* **Galat soch:** Dono same hi toh hain, bas likhne ka tarika alag hai.
-* **Actually:** Array dynamic hota hai (length badh sakti hai, order fix nahi hota). Tuple fixed structure ka contract hai.
-* **Prove karo:** Try karo:
-`let arr: string[] = ["a", "b"]; arr.push("c"); // Works`
-`let tup: [string, string] = ["a", "b"]; // Isko sirf 2 hi strings chahiye.` (Note: JS array methods like `.push()` TS tuples mein ek known edge-case flaw hai, but generally assignment limit hoti hai).
+* [[HL::**Confusion 1 — "Array aur Tuple mein exactly fark kya hai? Dono square brackets `[]` hi toh use karte hain!"**::HL]]
+* [[HL::**Galat soch:** Dono same hi toh hain, bas likhne ka tarika alag hai.::HL]]
+* [[HL::**Actually:** Array dynamic hota hai (length badh sakti hai, order fix nahi hota). Tuple fixed structure ka contract hai.::HL]]
+* [[HL::**Prove karo:** Try karo:::HL]]
+[[HL::`let arr: string[] = ["a", "b"]; arr.push("c"); // Works`::HL]]
+[[HL::`let tup: [string, string] = ["a", "b"]; // Isko sirf 2 hi strings chahiye.` (Note: JS array methods like `.push()` TS tuples mein ek known edge-case flaw hai, but generally assignment limit hoti hai).::HL]]
 
 
-* **Confusion 2 — "Kya `String` aur `string` same hain?"**
-* **Galat soch:** Capital 'S' aur small 's' se kya fark padega.
-* **Actually:** TypeScript mein `string` (small 's') primitive type hai. `String` (capital 'S') JavaScript ka global wrapper object (ek inbuilt class) hai. TypeScript mein HAMESHA small letters (`string`, `number`, `boolean`) use karte hain.
+* [[HL::**Confusion 2 — "Kya `String` aur `string` same hain?"**::HL]]
+* [[HL::**Galat soch:** Capital 'S' aur small 's' se kya fark padega.::HL]]
+* [[HL::**Actually:** TypeScript mein `string` (small 's') primitive type hai. `String` (capital 'S') JavaScript ka global wrapper object (ek inbuilt class) hai. TypeScript mein HAMESHA small letters (`string`, `number`, `boolean`) use karte hain.::HL]]
 * **Prove karo:** Agar aap `let x: String = "hi"` likhoge, toh compiler bad practices ka warning dega.
 
 
@@ -1537,18 +1537,18 @@ let coordinates: [number, number] = [28.7041, 77.1025]; // Delivery address ke G
 
 ```
 
-#### ❓ 17. Interview Q&A (FAQ)
+#### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
 
-* **Q: TypeScript mein `string` aur `String` mein kya difference hai?**
-* **A:** `string` (lowercase) TypeScript ka primitive data type hai jo simple text represent karta hai. `String` (uppercase) JavaScript ka built-in Object hai. Industry standard hamesha primitives (lowercase) use karna hai kyunki objects zyada memory lete hain aur strict comparison mein fail ho sakte hain.
-
-
-* **Q: Kya TypeScript runtime (jab app chalu ho) mein type checking karta hai?**
-* **A:** Nahi. TypeScript sirf compile-time (code run hone se pehle) check karta hai. Ek baar JavaScript ban gayi, toh runtime pe koi protection nahi hoti. Isliye API payloads validate karne padte hain.
+* [[HL::**Q: TypeScript mein `string` aur `String` mein kya difference hai?**::HL]]
+* [[HL::**A:** `string` (lowercase) TypeScript ka primitive data type hai jo simple text represent karta hai. `String` (uppercase) JavaScript ka built-in Object hai. Industry standard hamesha primitives (lowercase) use karna hai kyunki objects zyada memory lete hain aur strict comparison mein fail ho sakte hain.::HL]]
 
 
-* **Q: Array ki jagah Tuple kab use karna chahiye?**
-* **A:** Jab array ki length fix ho aur har index ka data type specific aur pehle se tay ho (jaise `[Latitude, Longitude]` ya HTTP headers). Agar data ki list lambi/chhoti ho sakti hai (jaise messages), toh Array use karna chahiye.
+* **Q: [[HL::Kya TypeScript runtime (jab app chalu ho) mein type checking karta hai?**::HL]]
+* [[HL::**A:** Nahi. TypeScript sirf compile-time (code run hone se pehle) check karta hai. Ek baar JavaScript ban gayi, toh runtime pe koi protection nahi hoti. Isliye API payloads validate karne padte hain.::HL]]
+
+
+* [[HL::**Q: Array ki jagah Tuple kab use karna chahiye?**::HL]]
+* [[HL::**A:** Jab array ki length fix ho aur har index ka data type specific aur pehle se tay ho (jaise `[Latitude, Longitude]` ya HTTP headers). Agar data ki list lambi/chhoti ho sakti hai (jaise messages), toh Array use karna chahiye.::HL]]
 
 
 * **Q: Type Inference kya hoti hai aur kya yeh safe hai?**
@@ -1613,15 +1613,15 @@ Is topic mein hum TypeScript ke 3 sabse "special" aur confusing types ko samjhen
 #### 📖 3. Technical Definition (Interview Answer)
 
 * **Precise English:** `any` disables type checking completely. `unknown` is a type-safe counterpart of `any` that requires explicit type narrowing before usage. `never` represents the type of values that never occur, often used as the return type for functions that throw errors or never finish executing.
-* **Hinglish Simplification:** `any` TypeScript ka compiler off kar deta hai. `unknown` compiler ko on rakhta hai par bolta hai "pehle khud check karo phir use karo". Aur `never` ka matlab hai "yahan tak code kabhi pohochna hi nahi chahiye".
+* [[HL::**Hinglish Simplification:** `any` TypeScript ka compiler off kar deta hai. `unknown` compiler ko on rakhta hai par bolta hai "pehle khud check karo phir use karo". Aur `never` ka matlab hai "yahan tak code kabhi pohochna hi nahi chahiye".::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Jab kisi Payment Gateway (jaise Stripe ya Razorpay) se data aata hai, toh TypeScript ko nahi pata hota ki us data ka exact type kya hai. Agar humne usko `any` de diya, aur galti se `price.toFixed()` (decimals nikalne ka method) call kar diya jabki `price` string `"$19.99"` nikla — toh poori app crash ho jayegi.
-* **Solution:** Hum us data ko `unknown` type karte hain. Isse TypeScript hume force karta hai ki "Bhai, pehle check karo ki `price` number hai ya nahi, tabhi `.toFixed()` call karne dunga".
+* **Problem:** Jab kisi Payment Gateway (jaise Stripe ya Razorpay) se data aata hai, toh TypeScript ko nahi pata hota ki [[HL::us data ka exact type kya hai. Agar humne usko `any` de diya, aur galti se `price.toFixed()` (decimals nikalne ka method) call kar diya jabki `price` string `"$19.99"` nikla — toh poori app crash ho jayegi.::HL]]
+* [[HL::**Solution:** Hum us data ko `unknown` type karte hain. Isse TypeScript hume force karta hai ki "Bhai, pehle check karo ki `price` number hai ya nahi, tabhi `.toFixed()` call karne dunga".::HL]]
 * **What breaks if we don't use it?** Runtime crashes (Production mein app fat jayegi) kyunki aap un methods ko call kar loge jo us data pe exist hi nahi karte.
 * **✅ Kab use karo (Use this when):** - `unknown`: Jab data external source (API, Webhook, User input) se aaye jiska structure confirm nahi hai.
-* `never`: Jab function intentionally error throw karta ho, ya `switch-case` mein saare options exhaust karne ho.
+* [[HL::`never`: Jab function intentionally error throw karta ho, ya `switch-case` mein saare options exhaust karne ho.::HL]]
 
 
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** - `any`: **KABHI BHI USE MAT KARO.** (Yeh concept explicitly avoid karne ke liye hi hai. Agar type nahi pata, toh hamesha `unknown` use karo).
@@ -1634,8 +1634,8 @@ Lekin agar aap `unknown` use karte ho, aur bina check kiye usko use karne ki kos
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
 * **(1) Assignment Phase:** `any` aur `unknown` dono mein aap kisi bhi tarah ka data (string, number, object) daal sakte ho.
-* **(2) Usage Phase:** - `any` ke case mein TS Compiler check karna band kar deta hai.
-* `unknown` ke case mein TS Compiler ek invisible lock laga deta hai. Type Guard (jaise `typeof` ya `instanceof` check) is lock ki chabhi (key) hota hai.
+* [[HL::**(2) Usage Phase:** - `any` ke case mein TS Compiler check karna band kar deta hai.::HL]]
+* [[HL::`unknown` ke case mein TS Compiler ek invisible lock laga deta hai. Type Guard (jaise `typeof` ya `instanceof` check) is lock ki chabhi (key) hota hai.::HL]]
 
 
 * **(3) The `never` Bottom Type:** TypeScript type system ek hierarchy (tree) hai. Sabse upar `any`/`unknown` hain, aur sabse neeche (bottom) `never` hai. `never` mein kuch bhi assign nahi ho sakta (even `any` bhi nahi).
@@ -1786,10 +1786,10 @@ Error: Price number nahi hai!
 
 ```
 
-#### ❓ 17. Interview Q&A (FAQ)
+#### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
 
-* **Q: `any` aur `unknown` mein sabse bada difference kya hai?**
-* **A:** `any` type checking ko bypass kar deta hai, jisse runtime errors aate hain. `unknown` type-safe hai, yeh aapko data tab tak use nahi karne deta jab tak aap explicitly uska type confirm (narrow down) na kar lo (Type Guards use karke).
+* [[HL::**Q: `any` aur `unknown` mein sabse bada difference kya hai?**::HL]]
+* [[HL::**A:** `any` type checking ko bypass kar deta hai, jisse runtime errors aate hain. `unknown` type-safe hai, yeh aapko data tab tak use nahi karne deta jab tak aap explicitly uska type confirm (narrow down) na kar lo (Type Guards use karke).::HL]]
 
 
 * **Q: Kya TypeScript mein `any` use karna theek hai?**
@@ -2106,24 +2106,24 @@ Type of price: number
 
 #### 🎯 Topic: 1. What is type, what is interface, `type` vs `interface` (When to use what in React/Angular)
 
-Is topic mein hum seekhenge ki TypeScript mein data ka "shape" (structure) kaise define karte hain taaki code run hone se pehle hi humein galtiyan pata chal jayein, aur kab `type` use karna chahiye versus kab `interface`.
+Is topic mein hum seekhenge ki TypeScript mein data ka "shape" (structure) kaise define karte hain taaki code run hone se pehle hi humein galtiyan pata chal jayein, aur kab `type` use karna chahiye versus kab [[HL::`interface`.::HL]]
 
-#### 🐣 2. Simple Analogy (Hinglish)
+[[HL::#### 🐣 2. Simple Analogy (Hinglish)::HL]]
 
-Maan lo tumhe ek building banani hai.
+[[HL::Maan lo tumhe ek building banani hai.::HL]]
 
-* **`interface`** ek **Blueprint (naksha)** ki tarah hai. Agar tumne naksha bana liya ki 2 kamre honge, aur baad mein tumhe 1 aur kamra add karna hai, toh tum ussi nakshe (blueprint) ko aage badha sakte ho (extend kar sakte ho). Yeh hamesha kisi "object" (jaise ghar) ke liye hota hai.
+* [[HL::**`interface`** ek **Blueprint (naksha)** ki tarah hai. Agar tumne naksha bana liya ki 2 kamre honge, aur baad mein tumhe 1 aur kamra add karna hai, toh tum ussi nakshe (blueprint) ko aage badha sakte ho (extend kar sakte ho). Yeh hamesha kisi "object" (jaise ghar) ke liye hota hai.::HL]]
 * **`type`** ek **Combo Meal ke naam** ki tarah hai. Agar tumne McDonald's mein bola "Maharaja Combo", toh uske andar burger, fries aur coke set hai. Tum kal ko is "Maharaja Combo" naam ka matlab achanak change nahi kar sakte. Yeh fixed hota hai, aur yeh sirf object hi nahi, kisi bhi cheez ka naam ho sakta hai (jaise sirf "Burger" ko bhi tum ek type bol sakte ho).
 
 #### 📖 3. Technical Definition (Interview Answer)
 
 * **Precise English:** An `interface` defines the shape of an object and supports declaration merging. A `type` alias creates a new name for any data type (including primitives, unions, and tuples) but cannot be re-opened to add new properties.
-* **Hinglish Simplification:** `interface` specifically objects ka niyam (rule) banata hai aur usko baad mein expand kiya jaa sakta hai. `type` kisi bhi data (chahe object ho ya simple text) ka ek custom naam rakhne ke kaam aata hai.
+* [[HL::**Hinglish Simplification:** `interface` specifically objects ka niyam (rule) banata hai aur usko baad mein expand kiya jaa sakta hai. `type` kisi bhi data (chahe object ho ya simple text) ka ek custom naam rakhne ke kaam aata hai.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Normal JavaScript (JS - default web language) mein koi rules nahi hote. Tumne user ka data banaya jismein `firstName` tha, par baad mein galti se `user.first_name` likh diya. JS chup-chaap undefined de dega aur app production (live website) mein crash ho jayegi.
-* **Solution:** TypeScript (TS - JS ka advanced version jo types check karta hai) mein hum `type` ya `interface` banate hain. Agar spelling mistake hui, toh code editor turant laal line (error) dikha dega, code save hi nahi hoga.
+* [[HL::**Problem:** Normal JavaScript (JS - default web language) mein koi rules nahi hote. Tumne user ka data banaya jismein `firstName` tha, par baad mein galti se `user.first_name` likh diya. JS chup-chaap undefined de dega aur app production (live website) mein crash ho jayegi.::HL]]
+* [[HL::**Solution:** TypeScript (TS - JS ka advanced version jo types check karta hai) mein hum `type` ya `interface` banate hain. Agar spelling mistake hui, toh code editor turant laal line (error) dikha dega, code save hi nahi hoga.::HL]]
 * **✅ Kab use karo (Use this when):** - React (UI library - user interface banane ka tool) mein component ke *Props* (data jo ek component se dusre mein bheja jata hai) define karne ke liye **`type`** use karo kyunki wahan complex combinations lagte hain.
 * Angular (Google ka banaya full web framework) mein Services (data fetch karne wali classes) ya API ka data model banane ke liye hamesha **`interface`** use karo kyunki woh Object-Oriented style follow karta hai.
 
@@ -2143,17 +2143,17 @@ TypeScript kaise kaam karta hai internal flow:
 
 ```typescript
 # TypeScript 5.x | Node 20+
-1  // Interface ka example (Objects ke liye best)
+1  // [[HL::Interface ka example (Objects ke liye best)::HL]]
 2  interface User {                               // interface keyword se hum ek object ka naksha bana rahe hain
 3      name: string;                              // name property hamesha text (string) honi chahiye
 4      age: number;                               // age property hamesha number honi chahiye
-5  }                                              // block close
+[[HL::5::HL]]  }                                              // block close
 6  
-7  // Type ka example (Unions/Primitives ke liye best)
-8  type Status = "success" | "error" | "loading"; // type keyword se hum ek naya naam bana rahe hain jo sirf in 3 exact strings mein se ek ho sakta hai (| ka matlab 'ya/OR')
+7  // [[HL::Type ka example (Unions/Primitives ke liye best)::HL]]
+[[HL::8  type Status = "success" | "error" | "loading"; // type keyword se hum ek naya naam bana rahe hain jo sirf in 3 exact strings mein se ek ho sakta hai (| ka matlab 'ya/OR::HL]]')
 9  
-10 // Function jo inko use karta hai
-11 function showUserStatus(user: User, status: Status): void {  // function banaya, user parameter ka type User interface hai, status ka type Status hai, aur return type void hai (kuch return nahi karega)
+10 // [[HL::Function jo inko use karta hai::HL]]
+[[HL::11 function showUserStatus(user: User, status: Status): void {  // function banaya, user parameter ka type User interface hai, status ka type Status hai, aur return type void hai (kuch return nahi karega)::HL]]
 12     console.log(`User ${user.name} is ${status}`);           // console.log() (browser ke console mein text print karne ka built-in function) use kar rahe hain
 13 }                                                            // function close
 14 
@@ -2170,10 +2170,10 @@ User Rahul is success
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 8 — `type Status = "success" | "error" | "loading";**` : Yeh "Union Type" kehlata hai. Iska matlab hai `Status` variable ki value in teen ke alawa kuch aur nahi ho sakti (jaise "failed" likhoge toh error aayega). Yeh `interface` se karna possible nahi hai.
-* **Line 11 — `void**` : Jab function kuch wapas (return) nahi karta, sirf screen par print karke khatam ho jata hai, toh uska return type `void` likhte hain.
+* [[HL::**Line 8 — `type Status = "success" | "error" | "loading";**` : Yeh "Union Type" kehlata hai. Iska matlab hai `Status` variable ki value in teen ke alawa kuch aur nahi ho sakti (jaise "failed" likhoge toh error aayega). Yeh `interface` se karna possible nahi hai.::HL]]
+* [[HL::**Line 11 — `void**` : Jab function kuch wapas (return) nahi karta, sirf screen par print karke khatam ho jata hai, toh uska return type `void` likhte hain.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -2187,10 +2187,10 @@ User Rahul is success
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Har jagah `type User = {}` likhna bina samjhe.
-* **🤦 Why:** Beginners ko lagta hai `type` chhota word hai, likhne mein aasaan hai, toh sab jagah yahi thok do.
-* **✅ The 'Pro' Way:** Objects ke liye `interface` use karo, aur Unions/complex logic ke liye `type` use karo.
-* **⚡ Consequences:** Agar tumne open source library (jo code dusre log use karte hain) mein sab kuch `type` se bana diya, toh bahar wale developers tumhari library mein apni custom properties add (Declaration Merging) nahi kar payenge aur unka code block ho jayega.
+* **❌ [[HL::Mistake:** Har jagah `type User = {}` likhna bina samjhe.::HL]]
+* [[HL::**🤦 Why:** Beginners ko lagta hai `type` chhota word hai, likhne mein aasaan hai, toh sab jagah yahi thok do.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Objects ke liye `interface` use karo, aur Unions/complex logic ke liye `type` use karo.::HL]]
+* **⚡ [[HL::Consequences:** Agar tumne open source library (jo code dusre log use karte hain) mein sab kuch `type` se bana diya, toh bahar wale developers tumhari library mein apni custom properties add (Declaration Merging) nahi kar payenge aur unka code block ho jayega.::HL]]
 * **❌ Mistake:** Data types na likh kar `any` (TS ko bolna ki type check mat kar) use kar lena.
 * **🤦 Why:** TypeScript error deta hai toh beginners frustrate ho jate hain aur error hatane ke liye `any` likh dete hain.
 * **✅ The 'Pro' Way:** Hamesha proper `type` ya `interface` define karo.
@@ -2342,15 +2342,15 @@ Maan lo tum ek Bank ka form bhar rahe ho:
 #### 📖 3. Technical Definition (Interview Answer)
 
 * **Precise English:** The `?` modifier marks a property as optional, allowing the object to omit it. The `readonly` modifier prevents a property's value from being reassigned after its initial creation, enforcing shallow immutability at compile time.
-* **Hinglish Simplification:** `?` lagane se property dena zaroori nahi rehta (woh `undefined` ho sakti hai). `readonly` lagane se property banne ke baad lock ho jati hai aur uski value baad mein code se change nahi ki jaa sakti.
+* [[HL::**Hinglish Simplification:** `?` lagane se property dena zaroori nahi rehta (woh `undefined` ho sakti hai). `readonly` lagane se property banne ke baad lock ho jati hai aur uski value baad mein code se change nahi ki jaa sakti.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Normal JS mein, database ka `id` (jo kabhi change nahi hona chahiye) koi galti se update kar sakta hai. Ya phir agar user ka `bio` (description) nahi hai, toh app fail ho sakti hai kyunki app assume kar rahi thi ki `bio` hamesha aayega.
-* **Solution:** `readonly` strict rules lagata hai ki ID/primary keys change na hon. `?` TypeScript ko batata hai ki yeh property gayab ho sakti hai, toh pehle check karo phir use karo.
-* **✅ Kab use karo (Use this when):**
-* Database IDs, creation timestamps, ya Redux (state management library — global data store karne ke liye) state ke data ko declare karte waqt `readonly` use karo.
-* Jab API (backend) se data aaye jismein kuch fields zaroori na hon (jaise user ka profile picture), wahan `?` use karo.
+* [[HL::**Problem:** Normal JS mein, database ka `id` (jo kabhi change nahi hona chahiye) koi galti se update kar sakta hai. Ya phir agar user ka `bio` (description) nahi hai, toh app fail ho sakti hai kyunki app assume kar rahi thi ki `bio` hamesha aayega.::HL]]
+* [[HL::**Solution:** `readonly` strict rules lagata hai ki ID/primary keys change na hon. `?` TypeScript ko batata hai ki yeh property gayab ho sakti hai, toh pehle check karo phir use karo.::HL]]
+* **✅ [[HL::Kab use karo (Use this when):**::HL]]
+* [[HL::Database IDs, creation timestamps, ya Redux (state management library — global data store karne ke liye) state ke data ko declare karte waqt `readonly` use karo.::HL]]
+* [[HL::Jab API (backend) se data aaye jismein kuch fields zaroori na hon (jaise user ka profile picture), wahan `?` use karo.::HL]]
 
 
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):**
@@ -2372,18 +2372,18 @@ Maan lo tum ek Bank ka form bhar rahe ho:
 
 ```typescript
 # TypeScript 5.x | Node 20+
-1  interface UserProfile {                               // interface declare kiya ek blueprint banane ke liye
+1  [[HL::interface UserProfile {                               // interface declare kiya ek blueprint banane ke liye::HL]]
 2      readonly id: number;                              // readonly modifier: value ek baar set hogi, phir change nahi hogi
 3      name: string;                                     // normal string property: zaroori hai aur mutable (changeable) hai
 4      phoneNumber?: string;                             // ? (optional modifier): yeh dena marzi hai, skip kar sakte hain
-5  }                                                     // interface block close
+[[HL::5::HL]]  }                                                     // interface block close
 6  
-7  // Object creation - Initial setup
+7  // [[HL::Object creation - Initial setup::HL]]
 8  const user: UserProfile = {                           // user object banaya jo UserProfile interface ko follow karega
 9      id: 101,                                          // id di (yeh iski pehli aur aakhri assignment hai)
 10     name: "Amit",                                     // name assign kiya
 11     // phoneNumber nahi diya, aur koi error nahi aaya kyunki woh optional (?) tha
-12 };
+[[HL::12::HL]] };
 13 
 14 // Valid operation
 15 user.name = "Amit Kumar";                             // ✅ Sahi: Normal property ko change kar sakte hain
@@ -2414,12 +2414,12 @@ No phone number found!
 
 * **Line 2 — `readonly id: number;**` : Yeh compiler-level lock hai. Iska matlab `user.id` mein nayi value assign karna allowed nahi hai. Yeh immutable (unchangeable) state enforce karne mein bohot kaam aata hai.
 * **Line 4 — `phoneNumber?: string;**` : Question mark `?` property name ke theek baad aata hai, colon `:` se pehle. Iska actual internal type `string | undefined` ban jata hai.
-* **Line 21 — `if (user.phoneNumber)**` : TS bohot smart hai. Agar hum direct `user.phoneNumber.toUpperCase()` likhte bina `if` check ke, toh error aata ki yeh `undefined` ho sakta hai. `if` check lagane ko "Type Narrowing" kehte hain.
+* **Line 21 — `if (user.phoneNumber)**` : TS bohot smart hai. Agar hum direct `user.phoneNumber.toUpperCase()` likhte bina `if` check ke, toh error aata ki yeh [[HL::`undefined`::HL]] ho sakta hai. `if` check lagane ko "Type Narrowing" kehte hain.
 
 #### 🔒 8. Security-First Check
 
-* **How can this be hacked?** `readonly` ek TypeScript illusion (dhokha) hai. Yeh sirf tumhare editor aur TS compiler mein error deta hai. Compile hone ke baad jab yeh normal JavaScript ban jata hai, toh browser mein koi bhi is `id` ko aaraam se change kar sakta hai.
-* **How to secure it?** Runtime (real server/browser) par sach mein data ko lock karne ke liye, object banane ke baad `Object.freeze(user)` call karo. Isse JavaScript us object ki kisi bhi property ko change hone se rok dega.
+* [[HL::**How can this be hacked?** `readonly` ek TypeScript illusion (dhokha) hai. Yeh sirf tumhare editor aur TS compiler mein error deta hai. Compile hone ke baad jab yeh normal JavaScript ban jata hai, toh browser mein koi bhi is `id` ko aaraam se change kar sakta hai.::HL]]
+* [[HL::**How to secure it?** Runtime (real server/browser) par sach mein data ko lock karne ke liye, object banane ke baad `Object.freeze(user)` call karo. Isse JavaScript us object ki kisi bhi property ko change hone se rok dega.::HL]]
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -2437,11 +2437,11 @@ No phone number found!
 * **✅ The 'Pro' Way:** `readonly` shallow (upar-upar se) kaam karta hai. Array mein aur items add nahi honge, par array ke andar ke objects ke *andar* change ho sakta hai. Deep freeze lagana padta hai.
 * **⚡ Consequences:** Tumhe lagega state lock hai, par andar ka data secretly change ho raha hoga jisse bugs trace karna namumkin ho jayega.
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? [[HL::(Confusion Clarifier)::HL]]
 
-* **Confusion 1 — "`const` aur `readonly` mein kya fark hai? Dono lock karte hain!"**
-* **Galat soch:** Beginners sochte hain dono same kaam karte hain.
-* **Actually:** `const` **Variables** ke liye hota hai (e.g., `const user = { ... }`). Iska matlab `user` variable kisi aur object ko point nahi kar sakta. Lekin uske andar ki properties change ho sakti hain! `readonly` **Properties** ke liye hota hai (e.g., `readonly id: 1`). Iska matlab us specific property ko change nahi kar sakte.
+* [[HL::**Confusion 1 — "`const` aur `readonly` mein kya fark hai? Dono lock karte hain!"**::HL]]
+* [[HL::**Galat soch:** Beginners sochte hain dono same kaam karte hain.::HL]]
+* [[HL::**Actually:** `const` **Variables** ke liye hota hai (e.g., `const user = { ... }`). Iska matlab `user` variable kisi aur object ko point nahi kar sakta. Lekin uske andar ki properties change ho sakti hain! `readonly` **Properties** ke liye hota hai (e.g., `readonly id: 1`). Iska matlab us specific property ko change nahi kar sakte.::HL]]
 * **Prove karo:** Try karo: `const a = { name: "X" }; a.name = "Y";` (Yeh allow ho jayega, kyunki const sirf 'a' ko protect karta hai, 'name' ko nahi).
 
 
@@ -2512,8 +2512,8 @@ Us interface mein `readonly tradeId: string` hota hai kyunki ek baar jo trade ID
 * **A:** Haan, definitely. `readonly createdDate?: Date;` likh sakte hain. Iska matlab hai ki ya toh object banate waqt date di hi nahi jayegi (optional), ya agar di gayi toh baad mein change nahi hogi (readonly).
 
 
-* **Q: What is the "Optional Chaining" operator `?.` and how does it relate to `?` in interfaces?**
-* **A:** Interface mein `?` batata hai ki property missing ho sakti hai. Jab us property ko access karna ho, tab hum JS/TS ka optional chaining `?.` operator (e.g., `user.profile?.avatar`) use karte hain. Yeh check karta hai ki agar profile undefined hai, toh aage evaluate mat karo aur crash hone se bachao.
+* **Q: [[HL::What is the "Optional Chaining" operator `?.` and how does it relate to `?` in interfaces?**::HL]]
+* [[HL::**A:** Interface mein `?` batata hai ki property missing ho sakti hai. Jab us property ko access karna ho, tab hum JS/TS ka optional chaining `?.` operator (e.g., `user.profile?.avatar`) use karte hain. Yeh check karta hai ki agar profile undefined hai, toh aage evaluate mat karo aur crash hone se bachao.::HL]]
 
 
 * **Q: If I have a `const` object, do I still need `readonly` inside its interface?**
@@ -2847,19 +2847,19 @@ Ab tum chahte ho ki us card mein ek alag se section ho: *"Special Dynamic QR Cod
 #### 📖 3. Technical Definition (Interview Answer)
 
 * **Precise English:** Declaration Merging is a mechanism where the TypeScript compiler merges two or more separate declarations with the exact same name into a single definition. This is heavily used to augment global scopes or 3rd-party module declarations without editing the source files.
-* **Hinglish Simplification:** Agar tum exact seame naam se ek naya `interface` banaoge, toh TS compiler un dono ko aapas mein jodkar ek akela bada interface bana deta hai. Isse hum bahar ki libraries ke types mein apni custom cheezein ghusa sakte hain.
+* [[HL::**Hinglish Simplification:** Agar tum exact seame naam se ek naya `interface` banaoge, toh TS compiler un dono ko aapas mein jodkar ek akela bada interface bana deta hai. Isse hum bahar ki libraries ke types mein apni custom cheezein ghusa sakte hain.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Maan lo tum Express (Node.js ka web framework — server banane ke liye) use kar rahe ho. Express ke `Request` object mein default properties hoti hain jaise `body`, `query`. Ab tumne ek security middleware (auth check karne wala code) lagaya jo token check karke `req.currentUser` naam ka data inject karta hai. TypeScript turant chilla uthega (error dega): `Property 'currentUser' does not exist on type 'Request'`. Tum Express ka source code node_modules ke andar jaakar edit nahi kar sakte, kyunki npm install karne par woh overwrite ho jayega.
-* **Solution:** Declaration merging se tum apni project file mein Express ka interface re-open karte ho aur usmein `currentUser` property declare kar dete ho. TS dono ko merge kar deta hai aur error khatam!
+* [[HL::**Problem:** Maan lo tum Express (Node.js ka web framework — server banane ke liye) use kar rahe ho. Express ke `Request` object mein default properties hoti hain jaise `body`, `query`. Ab tumne ek security middleware (auth check karne wala code) lagaya jo token check karke `req.currentUser` naam ka data inject karta hai. TypeScript turant chilla uthega (error dega): `Property 'currentUser' does not exist on type 'Request'`. Tum Express ka source code node_modules ke andar jaakar edit nahi kar sakte, kyunki npm install karne par woh overwrite ho jayega.::HL]]
+* [[HL::**Solution:** Declaration merging se tum apni project file mein Express ka interface re-open karte ho aur usmein `currentUser` property declare kar dete ho. TS dono ko merge kar deta hai aur error khatam!::HL]]
 * **✅ Kab use karo (Use this when):**
 * Jab browser ke global `window` object par koi custom 3rd-party script (jaise Google Analytics, Razorpay, ya Stripe payment gateway) load karni ho.
-* Jab Node.js ke `global` scope ya Express `Request` object mein custom properties attach karni hon.
+* [[HL::Jab Node.js ke `global` scope ya Express `Request` object mein custom properties attach karni hon.::HL]]
 
 
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):**
-* Apne project ke internal types ke liye iska use mat karo. Agar tumhara apna banaya hua `interface User` hai, toh usko re-open karne ke bajaye `interface Admin extends User` (Inheritance / Extension mechanism) use karo, taaki code predictable rahe aur confusion na ho.
+* [[HL::Apne project ke internal types ke liye iska use mat karo. Agar tumhara apna banaya hua `interface User` hai, toh usko re-open karne ke bajaye `interface Admin extends User` (Inheritance / Extension mechanism) use karo, taaki code predictable rahe aur confusion na ho.::HL]]
 
 
 
@@ -3342,14 +3342,14 @@ Socho tum ek restaurant mein gaye ho.
 #### 📖 3. Technical Definition (Interview Answer)
 
 * **Precise English:** A Union type describes a value that can be one of several types. An Intersection type combines multiple types into one, requiring the value to have all properties of the intersected types.
-* **Hinglish Simplification:** Union (`|`) variable ko allow karta hai ki wo multiple types mein se koi ek value hold kare, jabki Intersection (`&`) do alag-alag types ke saare rules/properties ko ek single type mein merge kar deta hai.
+* [[HL::**Hinglish Simplification:** Union (`|`) variable ko allow karta hai ki wo multiple types mein se koi ek value hold kare, jabki Intersection (`&`) do alag-alag types ke saare rules/properties ko ek single type mein merge kar deta::HL]] hai.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Real-world apps mein data hamesha strict ek type ka nahi hota. Jaise ek API `(Application Programming Interface — frontend aur backend ko jodne wala bridge)` se aane wala user ID kabhi number (e.g., `101`) ho sakta hai, toh kabhi UUID `(Universally Unique Identifier — ek lamba unique text string)` jaisa string ho sakta hai. Agar sirf `number` set kiya toh app crash karega jab string aayegi.
-* **Solution:** Union types allow karte hain ki hum safely declare karein: "Yeh ID ya toh string hogi ya number hogi". Aur `any` (jo TS ka sabse bada dushman hai) use karne se bacha lete hain.
-* **✅ Kab use karo (Use this when):** - Union (`|`): Jab function arguments ya API response predictable ho lekin multiple shapes le sakta ho (e.g., Success object ya Error object).
-* Intersection (`&`): Jab tumhare paas chhote-chhote types bane hon aur unhe mix karke ek bada complex object type banana ho (jaise User type aur Admin type ko jodna).
+* [[HL::**Problem:** Real-world apps mein data hamesha strict ek type ka nahi hota. Jaise ek API `(Application Programming Interface — frontend aur backend ko jodne wala bridge)` se aane wala user ID kabhi number (e.g., `101`) ho sakta hai, toh kabhi UUID `(Universally Unique Identifier — ek lamba unique text string)` jaisa string ho sakta hai. Agar sirf `number` set kiya toh app crash karega jab string aayegi.::HL]]
+* [[HL::**Solution:** Union types allow karte hain ki hum safely declare karein: "Yeh ID ya toh string hogi ya number hogi". Aur `any` (jo TS ka sabse bada dushman hai) use karne se bacha lete hain.::HL]]
+* **✅ [[HL::Kab use karo (Use this when):** - Union (`|`): Jab function arguments ya API response predictable ho lekin multiple shapes le sakta ho (e.g., Success object ya Error object).::HL]]
+* [[HL::Intersection (`&`): Jab tumhare paas chhote-chhote types bane hon aur unhe mix karke ek bada complex object type banana ho (jaise User type aur Admin type ko jodna).::HL]]
 
 
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** - Union tab mat use karo jab tumhe exactly pata ho ki hamesha ek hi fixed type aayega — faltu ka complex mat banao.
@@ -3384,11 +3384,11 @@ TypeScript ka Compiler `(jo TS code ko plain JavaScript mein convert karta hai)`
 10 
 11 // printId(true);                                                 // Yeh fail hoga kyunki boolean allow nahi hai
 12 
-13 // Intersection Type Example (&)
+13 // [[HL::Intersection Type Example (&)::HL]]
 14 type BasicUser = { name: string; email: string };                 // Ek simple object type jisme name aur email hai
 15 type AdminRights = { canDelete: boolean; rootAccess: boolean };   // Dusra object type jisme admin ke flags hain
 16 
-17 type SuperAdmin = BasicUser & AdminRights;                        // & operator se dono types ko merge karke SuperAdmin type banaya
+[[HL::17 type SuperAdmin = BasicUser & AdminRights;                        // & operator se dono types ko merge karke SuperAdmin type banaya::HL]]
 18 
 19 const myAdmin: SuperAdmin = {                                     // myAdmin variable = SuperAdmin type ka, isme saari 4 properties honi chahiye
 20     name: "Rahul",                                                // BasicUser se aayi property
@@ -3588,7 +3588,7 @@ Agar tum remote ko ek `string` (koi bhi text) allow kar doge, toh koi usme "HELL
 #### 📖 3. Technical Definition (Interview Answer)
 
 * **Precise English:** A Literal Type represents an exact, specific string, number, or boolean value rather than a collective type like `string`. The `as const` assertion tells the compiler to infer the most specific literal type possible for an expression and makes all its nested properties `readonly`.
-* **Hinglish Simplification:** Literal type ka matlab hai variable ka type 'string' hone ke bajaye ek exact value (jaise `"GET"`) hota hai. Aur `as const` lagane se TypeScript objects ko patthar ki tarah solid (readonly) bana deta hai jisse unki values kabhi change nahi ho sakti.
+* [[HL::**Hinglish Simplification:** Literal type ka matlab hai variable ka type 'string' hone ke bajaye ek exact value (jaise `"GET"`) hota hai. Aur `as const` lagane se TypeScript objects ko patthar ki tarah solid (readonly) bana deta hai jisse unki values kabhi change nahi ho sakti.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
@@ -3611,17 +3611,17 @@ Aur agar tum us object ki property assign karne ka try karoge, toh editor `reado
 
 TypeScript internal memory mein kaise types ko limit karta hai:
 (1) Normal JS engine jab dekhta hai `let a = "hello"`, toh TS usko *widen* (expand) karke type `string` bana deta hai, kyunki `let` ki value baad mein change ho sakti hai.
-(2) Jab tum `let a: "hello" = "hello"` likhte ho, toh TS isko *narrow* (shrink) kar deta hai — iska Type space infinite (infinity) se ghat kar sirf 1 exact value par aa jata hai.
-(3) Jab tum kisi object ke aage `as const` lagate ho, toh TS recursively (loop lagakar) us object ki har ek property ke aage internal `readonly` keyword laga deta hai aur sabko literal types mein lock kar deta hai.
+(2) Jab tum `let a: "hello" = "hello"` likhte ho, toh TS isko *narrow* (shrink) kar deta hai — iska Type space [[HL::infinite (infinity) se ghat kar sirf 1 exact value par aa jata hai.::HL]]
+[[HL::(3) Jab tum kisi object ke aage `as const` lagate ho, toh TS recursively (loop lagakar) us object ki har ek property ke aage internal `readonly` keyword laga deta hai aur sabko literal types mein lock kar deta hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example (CRITICAL SECTION)
 
 ```typescript
 # TypeScript 5.x | Node.js environment
 1  // 1. Literal Types with Union (|)
-2  type HttpMethod = "GET" | "POST" | "DELETE";                         // HttpMethod = sirf ye 3 exact strings allow karega, "PUT" nahi
-3  
-4  function fetchApi(url: string, method: HttpMethod) {                 // method parameter explicitly HttpMethod literal expect kar raha hai
+2  [[HL::type HttpMethod = "GET" | "POST" | "DELETE";                         // HttpMethod = sirf ye 3 exact strings allow karega, "PUT" nahi::HL]]
+[[HL::3  ::HL]]
+[[HL::4  function fetchApi(url: string, method: HttpMethod) {                 // method parameter explicitly HttpMethod literal expect kar raha hai::HL]]
 5      console.log(`Fetching ${url} with method: ${method}`);           // console.log() output print karega
 6  }
 7  
@@ -3629,16 +3629,16 @@ TypeScript internal memory mein kaise types ko limit karta hai:
 9  // fetchApi("/users", "PUT");                                        // ❌ ERROR - "PUT" type HttpMethod mein nahi hai
 10 
 11 // 2. The 'as const' Assertion
-12 const ThemeConfig = {                                                // ThemeConfig ek normal JS object hai
-13     darkMode: true,                                                  // property 1
-14     colors: {                                                        // property 2 (nested object)
-15         primary: "#007bff",                                          // hex code string
-16         secondary: "#6c757d"                                         // hex code string
-17     }
-18 } as const;                                                          // as const = TS ko bolta hai "is object ko poora freeze kardo"
-19 
-20 // ThemeConfig.darkMode = false;                                      // ❌ ERROR - Cannot assign to 'darkMode' because it is a read-only property
-21 // ThemeConfig.colors.primary = "#ff0000";                            // ❌ ERROR - Nested properties bhi deeply freeze ho chuki hain
+12 const [[HL::ThemeConfig = {                                                // ThemeConfig ek normal JS object hai::HL]]
+[[HL::13     darkMode: true,                                                  // property 1::HL]]
+[[HL::14     colors: {                                                        // property 2 (nested object)::HL]]
+[[HL::15         primary: "#007bff",                                          // hex code string::HL]]
+[[HL::16         secondary: "#6c757d"                                         // hex code string::HL]]
+[[HL::17     }::HL]]
+[[HL::18 } as const;                                                          // as const = TS ko bolta hai "is object ko poora freeze kardo"::HL]]
+[[HL::19 ::HL]]
+[[HL::20 // ThemeConfig.darkMode = false;                                      // ❌ ERROR - Cannot assign to 'darkMode' because it is a read-only property::HL]]
+[[HL::21 // ThemeConfig.colors.primary = "#ff0000";                            // ❌ ERROR - Nested properties bhi deeply freeze ho chuki hain::HL]]
 22 
 23 console.log(`Current Primary Color: ${ThemeConfig.colors.primary}`); // ✅ Read karna completely valid hai
 
@@ -3666,27 +3666,26 @@ Industry mein Enums `(TypeScript ka feature jo named constants banata hai)` ko a
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** App constants ke liye normal variables create karna (e.g., `const status = { success: "SUCCESS" }`).
-* **🤦 Why:** Beginners sochte hain ki `const` variable banana kaafi hai values ko lock karne ke liye.
-* **✅ The 'Pro' Way:** Hamesha uske aage `as const` lagao (e.g., `const status = { success: "SUCCESS" } as const`).
-* **⚡ Consequences:** JavaScript ka default `const` sirf variable ko reassign (e.g., `status = {}`) hone se rocta hai, par uske andar ki properties (`status.success = "FAILED"`) aaram se change ho sakti hain. Agar kisi junior dev ne galti se runtime pe property change kardi, toh state mismatch ki wajah se UI galat data render karega aur bug track karna mushkil ho jayega.
+* [[HL::**❌ Mistake:** App constants ke liye normal variables create karna (e.g., `const status = { success: "SUCCESS" }`).::HL]]
+* [[HL::**🤦 Why:** Beginners sochte hain ki `const` variable banana kaafi hai values ko lock karne ke liye.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Hamesha uske aage `as const` lagao (e.g., `const status = { success: "SUCCESS" } as const`).::HL]]
+* [[HL::**⚡ Consequences:** JavaScript ka default `const` sirf variable ko reassign (e.g., `status = {}`) hone se rocta hai, par uske andar ki properties (`status.success = "FAILED"`) aaram se change ho sakti hain. Agar kisi junior dev ne galti se runtime pe property change kardi, toh state mismatch ki wajah se UI galat data render karega aur bug track karna mushkil ho jayega.::HL]]
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-
-* **Confusion 1 — "`let` vs `const` vs `as const` mein kya fark hai?"**
-* **Galat soch:** Teeno ek hi cheez hain jo variables ko change hone se rokte hain.
-* **Actually:** - `let`: JS feature. Variable reassignment allowed. Type widens (e.g., `let x = "hi"` becomes `string`).
-* `const`: JS feature. Variable reassignment NOT allowed, BUT object properties can be modified.
-* `as const`: TS feature. Deeply freezes object types. NOTHING can be mutated at type level.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? [[HL::(Confusion Clarifier)::HL]]
+* [[HL::**Confusion 1 — "`let` vs `const` vs `as const` mein kya fark hai?"**::HL]]
+* [[HL::**Galat soch:** Teeno ek hi cheez hain jo variables ko change hone se rokte hain.::HL]]
+* [[HL::**Actually:** - `let`: JS feature. Variable reassignment allowed. Type widens (e.g., `let x = "hi"` becomes `string`).::HL]]
+* [[HL::`const`: JS feature. Variable reassignment NOT allowed, BUT object properties can be modified.::HL]]
+* [[HL::`as const`: TS feature. Deeply freezes object types. NOTHING can be mutated at type level.::HL]]
 
 
 * **Prove karo:** Try this in editor:
 ```typescript
-const myObj = { name: "Aman" }; 
-myObj.name = "Rahul"; // ✅ JS allows this! object mutate ho gaya
+[[HL::const myObj = { name: "Aman" }; ::HL]]
+[[HL::myObj.name = "Rahul"; // ✅ JS allows this! object mutate ho gaya::HL]]
 
-const myFrozenObj = { name: "Aman" } as const;
-// myFrozenObj.name = "Rahul"; // ❌ TS completely stops this.
+[[HL::const myFrozenObj = { name: "Aman" } as const;::HL]]
+[[HL::// myFrozenObj.name = "Rahul"; // ❌ TS completely stops this.::HL]]
 
 ```
 
@@ -3840,8 +3839,8 @@ Yahan **Type Guard** woh security check/ID check hai, aur bheed mein se kisi ek 
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Jab tumhare paas `string | number` type ka variable hota hai, toh TS tumhe `.toUpperCase()` `(string ko capital letters mein badalne wala function)` ya `.toFixed()` `(number ko decimals mein format karne wala function)` dono hi directly call nahi karne deta. TS darta hai ki agar value number nikli toh `.toUpperCase()` app ko crash kar dega.
-* **Solution:** Type guards (jaise `if (typeof val === "string")`) lagane se TS block ke andar us variable ka type narrow karke exactly `string` maan leta hai, aur tab saare methods safely allow kar deta hai.
+* [[HL::**Problem:** Jab tumhare paas `string | number` type ka variable hota hai, toh TS tumhe `.toUpperCase()` `(string ko capital letters mein badalne wala function)` ya `.toFixed()` `(number ko decimals mein format karne wala function)` dono hi directly call nahi karne deta. TS darta hai ki agar value number nikli toh `.toUpperCase()` app ko crash kar dega.::HL]]
+* [[HL::**Solution:** Type guards (jaise `if (typeof val === "string")`) lagane se TS block ke andar us variable ka type narrow karke exactly `string` maan leta hai, aur tab saare methods safely allow kar deta hai.::HL]]
 * **✅ Kab use karo (Use this when):** - Jab API `(Application Programming Interface)` se unknown ya mixed type ka data aa raha ho.
 * Jab ek function multiple types ke parameters accept karta ho aur alag-alag type par alag logic lagana ho.
 
@@ -4337,8 +4336,8 @@ Yahan `type` hi woh discriminator hai jisko padhkar reducer decide karta hai ki 
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-Socho ek tiffin box (dabba) hai. **Props** woh khana hai jo tum dabbe mein daalte ho. **TypeScript interface** us dabbe ke upar laga ek label hai jo strictly batata hai: "Isme sirf roti aur sabzi aayegi, maggi nahi". Agar tum maggi daalne ki koshish karoge, toh label turant alarm bajayega.
-Aur **`children`** kya hai? Yeh dabbe ke andar ek secret compartment hai jismein tum kuch bhi (fruit, biscuit, ya chota dabba) daal sakte ho, aur is "kuch bhi" ko define karne ke liye hum `ReactNode` ka use karte hain.
+Socho ek tiffin box (dabba) hai. **Props** woh khana hai jo tum dabbe mein daalte ho. **TypeScript interface** us dabbe ke upar laga ek label hai jo strictly batata hai: "Isme sirf roti [[HL::aur::HL]] sabzi aayegi, maggi nahi". Agar tum maggi daalne ki koshish karoge, toh label turant alarm bajayega.
+[[HL::Aur **`children`** kya hai? Yeh dabbe ke andar ek secret compartment hai jismein tum kuch bhi (fruit, biscuit, ya chota dabba) daal sakte ho, aur is "kuch bhi" ko define karne ke liye hum `ReactNode` ka use karte hain.::HL]]
 
 #### 📖 3. Technical Definition (Interview Answer)
 
@@ -4370,21 +4369,21 @@ Chalo ek Card component banate hain jo `title` aur `children` accept karta hai.
 // TypeScript 5.x | React 18+
 1  import React, { ReactNode } from 'react';              // ReactNode (React ka built-in type jo kisi bhi renderable cheez ko support karta hai) import kar rahe hain
 2  
-3  interface CardProps {                                  // interface = ek strict blueprint jo object ka shape define karta hai
-4      title: string;                                     // title= prop ka naam, string= uska type (text hona chahiye)
-5      isActive?: boolean;                                // isActive?= question mark ka matlab yeh prop optional hai (pass na karo toh error nahi aayegi)
-6      children: ReactNode;                               // children= component ke andar ka content, ReactNode= string, number, ya dusre components kuch bhi ho sakta hai
-7  }
-8  
-9  const Card = ({ title, isActive = false, children }: CardProps) => { // : CardProps = hum component ke arguments ko is interface se map kar rahe hain. isActive=false default value hai.
-10     return (
-11         <div className={`card ${isActive ? 'active' : ''}`}>  // Template literal = string ke andar variables inject karne ka tarika
-12             <h2>{title}</h2>                           // h2 = heading tag, title prop yahan render hoga
-13             <div className="content">
-14                 {children}                             // children = jo bhi parent iske tags ke beech bheja hoga, woh yahan render hoga
-15             </div>
-16         </div>
-17     );
+3  [[HL::interface CardProps {                                  // interface = ek strict blueprint jo object ka shape define karta hai::HL]]
+[[HL::4      title: string;                                     // title= prop ka naam, string= uska type (text hona chahiye)::HL]]
+[[HL::5      isActive?: boolean;                                // isActive?= question mark ka matlab yeh prop optional hai (pass na karo toh error nahi aayegi)::HL]]
+[[HL::6      children: ReactNode;                               // children= component ke andar ka content, ReactNode= string, number, ya dusre components kuch bhi ho sakta hai::HL]]
+[[HL::7  }::HL]]
+[[HL::8  ::HL]]
+[[HL::9  const Card = ({ title, isActive = false, children }: CardProps) => { // : CardProps = hum component ke arguments ko is interface se map kar rahe hain. isActive=false default value hai.::HL]]
+[[HL::10     return (::HL]]
+[[HL::11         <div className={`card ${isActive ? 'active' : ''}`}>  // Template literal = string ke andar variables inject karne ka tarika::HL]]
+[[HL::12             <h2>{title}</h2>                           // h2 = heading tag, title prop yahan render hoga::HL]]
+[[HL::13             <div className="content">::HL]]
+[[HL::14                 {children}                             // children = jo bhi parent iske tags ke beech bheja hoga, woh yahan render hoga::HL]]
+[[HL::15             </div>::HL]]
+[[HL::16         </div>::HL]]
+[[HL::17::HL]]     );
 18 }
 19 
 20 // --- Parent Component (Jo Card ko use karega) ---
@@ -4430,10 +4429,10 @@ Props ke through XSS (Cross-Site Scripting — ek attack jismein hacker harmful 
 * **⚡ Consequences:** TypeScript ka poora fayda khatam ho jata hai. Runtime pe app crash ho sakti hai kyunki compiler ne galat data aane par roka nahi.
 
 
-* **❌ Mistake 2:** `children` ko `JSX.Element` type dena.
-* **🤦 Why:** Lagta hai ki children hamesha ek HTML/React tag hi hoga.
-* **✅ The 'Pro' Way:** `ReactNode` use karo.
-* **⚡ Consequences:** Agar tumne component ke andar sirf ek text string (jaise `<Card>Hello</Card>`) pass ki, toh TypeScript error dega kyunki string `JSX.Element` nahi hoti, par `ReactNode` hoti hai.
+* [[HL::**❌ Mistake 2:** `children` ko `JSX.Element` type dena.::HL]]
+* [[HL::**🤦 Why:** Lagta hai ki children hamesha ek HTML/React tag hi hoga.::HL]]
+* [[HL::**✅ The 'Pro' Way:** `ReactNode` use karo.::HL]]
+* [[HL::**⚡ Consequences:** Agar tumne component ke andar sirf ek text string (jaise `<Card>Hello</Card>`) pass ki, toh TypeScript error dega kyunki string `JSX.Element` nahi hoti, par `ReactNode` hoti hai.::HL]]
 
 
 
@@ -4441,13 +4440,13 @@ Props ke through XSS (Cross-Site Scripting — ek attack jismein hacker harmful 
 
 * **Confusion 1 — "Interface aur Type mein kya fark hai props ke liye?"**
 * **Galat soch:** Type sirf simple values ke liye hota hai aur interface objects ke liye.
-* **Actually:** Props define karne ke liye dono almost 99% same kaam karte hain. Lekin objects ke liye industry mein `interface` zyada prefer kiya jata hai kyunki usko baad mein extend (expand) karna aasaan hota hai.
+* **Actually:** Props define karne ke liye dono almost 99% same kaam karte hain. Lekin objects ke liye industry mein [[HL::`interface`::HL]] zyada prefer kiya jata hai kyunki usko baad mein extend (expand) karna aasaan hota hai.
 * **Prove karo:** Apna code likhte waqt `interface CardProps` ki jagah `type CardProps = { title: string }` likh ke dekho — dono bilkul sahi chalenge.
 
 
-* **Confusion 2 — "ReactNode aur ReactElement mein kya fark hai?"**
-* **Galat soch:** Dono exact same cheez hain, bas alag spelling hai.
-* **Actually:** `ReactNode` sabse bada umbrella (dada ji) hai — isme sab aata hai (strings, numbers, null, arrays, aur ReactElements). `ReactElement` sirf ek pure JSX tag (jaise `<div/>` ya `<MyComponent/>`) hota hai.
+* [[HL::**Confusion 2 — "ReactNode aur ReactElement mein kya fark hai?"**::HL]]
+* [[HL::**Galat soch:** Dono exact same cheez hain, bas alag spelling hai.::HL]]
+* [[HL::**Actually:** `ReactNode` sabse bada umbrella (dada ji) hai — isme sab aata hai (strings, numbers, null, arrays, aur ReactElements). `ReactElement` sirf ek pure JSX tag (jaise `<div/>` ya `<MyComponent/>`) hota hai.::HL]]
 * **Prove karo:** Kisi prop ka type `ReactElement` rakho aur usme string `"hello"` pass karo. TS turant error dega.
 
 
@@ -4510,14 +4509,14 @@ Props ke through XSS (Cross-Site Scripting — ek attack jismein hacker harmful 
 
 ```
 
-#### ❓ 17. Interview Q&A (FAQ)
+#### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
 
-* **Q:** Props aur State mein kya difference hai?
-* **A:** Props bahar (parent) se aate hain aur read-only hote hain (unhe badla nahi ja sakta). State component ka apna internal data hota hai jise woh khud change kar sakta hai (`useState` se).
+* [[HL::**Q:** Props aur State mein kya difference hai?::HL]]
+* [[HL::**A:** Props bahar (parent) se aate hain aur read-only hote hain (unhe badla nahi ja sakta). State component ka apna internal data hota hai jise woh khud change kar sakta hai (`useState` se).::HL]]
 
 
-* **Q:** `ReactNode` aur `children` ka relation kya hai?
-* **A:** `children` ek special prop hai jo open aur close tags ke beech ka content leta hai. `ReactNode` us `children` ka sabse sahi TypeScript type hai kyunki yeh string, element, aur fragments sab allow karta hai.
+* [[HL::**Q:** `ReactNode` aur `children` ka relation kya hai?::HL]]
+* [[HL::**A:** `children` ek special prop hai jo open aur close tags ke beech ka content leta hai. `ReactNode` us `children` ka sabse sahi TypeScript type hai kyunki yeh string, element, aur fragments sab allow karta hai.::HL]]
 
 
 * **Q:** Optional props kaise define karte hain?
@@ -4776,8 +4775,8 @@ Polymorphic components bilkul waise hi hote hain. Styling aur logic same rehti h
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Tumne ek khoobsurat `<Button>` component banaya design system mein. Ab tumhe ek aisi link chahiye jo dikhne mein bilkul Button jaisi ho, par technically woh ek `<a>` (anchor tag) honi chahiye (taaki right-click karke "Open in new tab" chal sake). Agar naya `<LinkButton>` banaoge toh CSS duplicate karni padegi.
-* **Solution:** Ek Polymorphic component banao jismein tum `as="a"` pass karke usko link bana sako.
+* [[HL::**Problem:** Tumne ek khoobsurat `<Button>` component banaya design system mein. Ab tumhe ek aisi link chahiye jo dikhne mein bilkul Button jaisi ho, par technically woh ek `<a>` (anchor tag) honi chahiye (taaki right-click karke "Open in new tab" chal sake). Agar naya `<LinkButton>` banaoge toh CSS duplicate karni padegi.::HL]]
+* [[HL::**Solution:** Ek Polymorphic component banao jismein tum `as="a"` pass karke usko link bana sako.::HL]]
 * **What breaks if we don't use it?** SEO (Search Engine Optimization) aur Accessibility (Screen readers) toot jayegi agar tum hamesha `<button>` use karke `onClick={goToPage}` chalaoge. Links ko links ki tarah behave karna chahiye.
 * **✅ Kab use karo (Use this when):** Design systems (MUI, Chakra UI) banate waqt, ya jab same UI element ko alag semantic HTML meaning chahiye ho (jaise text ko kabhi `<h1>`, kabhi `<p>` banana).
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab component bohot simple aur single-purpose ho. Faltu mein har chote component ko polymorphic banana TypeScript ki complexity badhata hai aur compilation slow karta hai.
@@ -5262,30 +5261,30 @@ Lekin agar tumhare paas ek opaque (non-transparent) lohe ka baksa hai, toh tumhe
 
 **VS Code State:** Jab tum `useState` pe mouse hover karoge, toh VS Code ka tooltip dikhayega: `const count: number` (Inferring) ya `const user: UserProfile | null` (Explicit). Agar galat data daalne ki koshish ki, toh code ke neeche ek laal rang ki squiggly line (error) aa jayegi.
 
-#### ⚙️ 6. Under the Hood (Deep Dive)
+#### ⚙️ 6. [[HL::Under the Hood (Deep Dive)::HL]]
 
-(1) Tum `useState<User | null>(null)` call karte ho -> (2) TypeScript is Type Argument `<T>` ko memory mein lock kar leta hai -> (3) Jab tum `setUser({name: "Rahul"})` karte ho -> (4) TS check karta hai: "Kya yeh naya data lock kiye hue type se match karta hai?" -> (5) Agar haan, toh React state update karta hai; agar nahi, toh compilation fail ho jata hai.
+[[HL::(1) Tum `useState<User | null>(null)` call karte ho -> (2) TypeScript is Type Argument `<T>` ko memory mein lock kar leta hai -> (3) Jab tum `setUser({name: "Rahul"})` karte ho -> (4) TS check karta hai: "Kya yeh naya data lock kiye hue type se match karta hai?" -> (5) Agar haan, toh React state update karta hai; agar nahi, toh compilation fail ho jata hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example (CRITICAL SECTION)
 
 ```tsx
 // TypeScript 5.x | React 18+
-1  import React, { useState } from 'react';     // React library aur useState hook import kiya
-2  
-3  // 1. Type Definition: Yahan hum explicitly object ka structure bata rahe hain
-4  type CartItem = {                            // CartItem = E-commerce cart ka ek item
-5    id: string;                                // Product ID hamesha text hoga
-6    name: string;                              // Product ka naam
-7    price?: number;                            // ? = Optional field (price ho bhi sakta hai, nahi bhi)
-8  };
-9  
-10 export default function ShoppingCart() {
-11   // SCENARIO A: Type Inference (TS khud samajh gaya ki ye number hai)
-12   const [totalItems, setTotalItems] = useState(0); 
-13   
-14   // SCENARIO B: Explicit Generic + Optional State (Initial value undefined hai)
-15   // <CartItem | undefined> = Explicitly TS ko bataya ki ya toh CartItem aayega ya undefined rahega
-16   const [lastAddedItem, setLastAddedItem] = useState<CartItem | undefined>(undefined); 
+[[HL::1  import React, { useState } from 'react';     // React library aur useState hook import kiya::HL]]
+[[HL::2  ::HL]]
+[[HL::3  // 1. Type Definition: Yahan hum explicitly object ka structure bata rahe hain::HL]]
+[[HL::4  type CartItem = {                            // CartItem = E-commerce cart ka ek item::HL]]
+[[HL::5    id: string;                                // Product ID hamesha text hoga::HL]]
+[[HL::6    name: string;                              // Product ka naam::HL]]
+[[HL::7    price?: number;                            // ? = Optional field (price ho bhi sakta hai, nahi bhi)::HL]]
+[[HL::8  };::HL]]
+[[HL::9  ::HL]]
+[[HL::10 export default function ShoppingCart() {::HL]]
+[[HL::11   // SCENARIO A: Type Inference (TS khud samajh gaya ki ye number hai)::HL]]
+[[HL::12   const [totalItems, setTotalItems] = useState(0); ::HL]]
+[[HL::13   ::HL]]
+[[HL::14   // SCENARIO B: Explicit Generic + Optional State (Initial value undefined hai)::HL]]
+[[HL::15   // <CartItem | undefined> = Explicitly TS ko bataya ki ya toh CartItem aayega ya undefined rahega::HL]]
+[[HL::16   const [lastAddedItem, setLastAddedItem] = useState<CartItem | undefined>(undefined);::HL]] 
 17 
 18   // Item add karne ka function
 19   const handleAddItem = () => {              // Arrow function = onClick pe call hone wala function
@@ -5516,18 +5515,18 @@ TypeScript Discriminated Unions same yahi kaam karte hain — woh ensure karte h
 
 ```tsx
 // TypeScript 5.x | React 18+
-1  import React, { useReducer } from 'react';                   // React library aur useReducer hook import kiya
-2  
-3  // 1. Data Type definition (State kaisi dikhegi)
-4  type CartItem = { id: string; name: string; price: number }; // Cart item ka shape
-5  type CartState = { items: CartItem[]; total: number };       // Poori cart state ka shape
-6  
-7  // 2. DISCRIMINATED UNION (Yeh sabse important part hai)
-8  // Hum teen alag-alag types ko '|' (OR operator) se jod rahe hain. Sabme 'type' common (discriminant) hai.
-9  type CartAction = 
-10   | { type: 'ADD_ITEM'; payload: CartItem }                  // ADD ke case mein poora CartItem chahiye
-11   | { type: 'REMOVE_ITEM'; payload: string }                 // REMOVE ke case mein sirf item ka ID (string) chahiye
-12   | { type: 'CLEAR_CART' };                                  // CLEAR ke case mein koi payload nahi chahiye
+[[HL::1  import React, { useReducer } from 'react';                   // React library aur useReducer hook import kiya::HL]]
+[[HL::2  ::HL]]
+[[HL::3  // 1. Data Type definition (State kaisi dikhegi)::HL]]
+[[HL::4  type CartItem = { id: string; name: string; price: number }; // Cart item ka shape::HL]]
+[[HL::5  type CartState = { items: CartItem[]; total: number };       // Poori cart state ka shape::HL]]
+[[HL::6  ::HL]]
+[[HL::7  // 2. DISCRIMINATED UNION (Yeh sabse important part hai)::HL]]
+[[HL::8  // Hum teen alag-alag types ko '|' (OR operator) se jod rahe hain. Sabme 'type' common (discriminant) hai.::HL]]
+[[HL::9  type CartAction = ::HL]]
+[[HL::10   | { type: 'ADD_ITEM'; payload: CartItem }                  // ADD ke case mein poora CartItem chahiye::HL]]
+[[HL::11   | { type: 'REMOVE_ITEM'; payload: string }                 // REMOVE ke case mein sirf item ka ID (string) chahiye::HL]]
+[[HL::12   | { type: 'CLEAR_CART' };                                  // CLEAR ke case mein koi payload nahi chahiye::HL]]
 13 
 14 // 3. Reducer Function (State update logic)
 15 // reducer() = state aur action ko receive karke nayi state return karne wala function
@@ -6552,7 +6551,7 @@ Socho tum ek restaurant se takeaway (parcel) laaye ho.
 #### 📖 3. Technical Definition (Interview Answer)
 
 * **Precise English:** When a custom hook returns an array (a Tuple), TypeScript uses Type Widening and infers a union type array `(TypeA | TypeB)[]`. To prevent this and preserve the exact order and type of each element, we must use the `as const` assertion. Alternatively, returning an Object avoids positional typing issues entirely and is preferred for hooks returning more than 2 items.
-* **Hinglish Simplification:** Jab hum custom hook se `[state, setState]` jaisa array wapas bhejte hain, toh TS usko ek mix-up array maan leta hai jisme types jumbled hain. `as const` likhne se TS usko ek "Tuple" (fixed length aur fixed order wala array) maan leta hai. Agar 3 se zyada cheezein return karni ho, toh seedha Object return karna chahiye.
+* [[HL::**Hinglish Simplification:** Jab hum custom hook se `[state, setState]` jaisa array wapas bhejte hain, toh TS usko ek mix-up array maan leta hai jisme types jumbled hain. `as const` likhne se TS usko ek "Tuple" (fixed length aur fixed order wala array) maan leta hai. Agar 3 se zyada cheezein return karni ho, toh seedha Object return karna chahiye.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
@@ -6647,10 +6646,10 @@ Items in cart: 2
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 [[HL::Code Explanation Rule (LINE-BY-LINE)::HL]]
 
 * **Line 12:** `return [state, toggle] as const;` — `as const` ek TypeScript feature hai jo object ya array ko "readonly" (jo badla na ja sake) aur sabse strict possible type de deta hai. Isse TS isko `(boolean | function)[]` (ek lamba array jisme kuch bhi ho) ki jagah strictly length-2 Tuple `[boolean, function]` maan leta hai.
-* **Line 24:** `return { items, isLoading, addItem };` — Jab data zyada ho (3 ya usse zyada), hamesha Object use karo. Object keys (jaise `items`) TS ke andar natural labels ban jaati hain, unhe mix hone ka dar nahi hota isliye wahan `as const` unnecessary hai.
+* [[HL::**Line 24:**::HL]] `return { items, isLoading, addItem };` — Jab data zyada ho (3 ya usse zyada), hamesha Object use karo. Object keys (jaise `items`) TS ke andar natural labels ban jaati hain, unhe mix hone ka dar nahi hota isliye wahan `as const` unnecessary hai.
 * **Line 30:** `const [isSidebarOpen, toggleSidebar] = useToggle(false);` — Tuple ka faida yeh hai ki hum return aane wale data ko wahi par apne manpasand naam (`isSidebarOpen`) se rename kar sakte hain, bilkul `useState` ki tarah.
 
 #### 🔒 8. Security-First Check
@@ -6664,7 +6663,7 @@ Items in cart: 2
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** `return [value, setValue];` (Bina `as const` ke return karna).
+* **❌ Mistake:** `return [[HL::[value,::HL]] setValue];` (Bina `as const` ke return karna).
 * **🤦 Why:** Beginner bhool gaya ki TypeScript array dekhte hi "Type Widening" karta hai.
 * **✅ The 'Pro' Way:** Hamesha `return [value, setValue] as const;` likho.
 * **⚡ Consequences:** Parent component mein `setValue` function ki jagah `value | setValue` ka mix type milta hai. Jab tum function call karोगे (`setValue()`), compiler crash karega `Not all constituents of type are callable`.
@@ -6675,9 +6674,9 @@ Items in cart: 2
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "`as const` kya sirf array pe lagta hai?"**
-* **Galat soch:** Yeh sirf Array ko Tuple banane ka syntax hai.
-* **Actually:** `as const` kisi bhi object, array ya variable pe lag sakta hai. Yeh TypeScript ko bolta hai ki "Yeh data bilkul fix hai, isko narrowest type do aur readonly bana do". Agar tum `const method = "GET" as const` likhoge, toh uska type `string` nahi hoga, balki strictly `"GET"` hoga.
+* [[HL::**Confusion 1 — "`as const` kya sirf array pe lagta hai?"**::HL]]
+* [[HL::**Galat soch:** Yeh sirf Array ko Tuple banane ka syntax hai.::HL]]
+* [[HL::**Actually:** `as const` kisi bhi object, array ya variable pe lag sakta hai. Yeh TypeScript ko bolta hai ki "Yeh data bilkul fix hai, isko narrowest type do aur readonly bana do". Agar tum `const method = "GET" as const` likhoge, toh uska type `string` nahi hoga, balki strictly `"GET"` hoga.::HL]]
 * **Prove karo:** `const arr = [1, 2] as const` likho TS mein aur `arr.push(3)` karke dekho. TS array push nahi karne dega kyunki woh ab fixed readonly tuple ban chuka hai.
 
 
@@ -6758,8 +6757,8 @@ TypeScript Brain:
 **A:** Haan! Tum function ka return type manually likh sakte ho: `function useToggle(): [boolean, () => void] { ... return [state, toggle]; }`. Yeh perfectly valid hai. `as const` bas ek chota, time-saving trick hai jisse explicit type likhne ki zarurat nahi padti.
 * **Q: Jab custom hook 5 items return kar raha ho, toh best practice kya hai?**
 **A:** Hamesha Object `{}` return karein. Tuples ko sirf tab use karein jab return size 1 ya 2 ho. Object properties order-independent hoti hain aur unka self-documenting name hota hai, jo 5 items ko manage karna bohot easy aur safe banata hai.
-* **Q: `as const` ki wajah se jo `readonly` tuple banta hai, kya usse state update karne mein issue aayega?**
-**A:** Nahi. `readonly` ka matlab hai ki parent hook return aane ke baad us array ke andar naye elements `push` ya `pop` nahi kar sakta (jo vaise bhi React mein allowed nahi hai). Array ke andar jo `setter` function hai, wo bilkul normally execute hota hai aur state update karta hai.
+* **Q: [[HL::`as const` ki wajah se jo `readonly` tuple banta hai, kya usse state update karne mein issue aayega?**::HL]]
+[[HL::**A:** Nahi. `readonly` ka matlab hai ki parent hook return aane ke baad us array ke andar naye elements `push` ya `pop` nahi kar sakta (jo vaise bhi React mein allowed nahi hai). Array ke andar jo `setter` function hai, wo bilkul normally execute hota hai aur state update karta hai.::HL]]
 * **Q: Object destructuring mein agar variable rename karna ho toh kaise karte hain?**
 **A:** Object mein colon `:` syntax use hota hai. Agar hook `return { data }` kar raha hai toh parent likhega `const { data: myUser } = useFetch()`. Tuple se ye syntax thoda heavy hota hai, isliye choti cheezon ke liye Tuple better maana jata hai.
 
@@ -6837,8 +6836,8 @@ Maan lo ek switchboard hai jismein 3-pin aur 2-pin sockets hain. Agar tum ek hea
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Bina types ke, TypeScript ko nahi pata hota ki `e.target` ek button hai ya ek input field. Wo `e.target.value` pe error phek deta hai: *"Property 'value' does not exist on type 'EventTarget'"*.
-* **Solution:** `React.ChangeEvent<HTMLInputElement>` use karne se TS (TypeScript - Microsoft ki banayi language jo JavaScript me types add karti hai) ko exactly pata chal jata hai ki ye ek text input hai aur iske paas `.value` property genuinely exist karti hai.
+* [[HL::**Problem:** Bina types ke, TypeScript ko nahi pata hota ki `e.target` ek button hai ya ek input field. Wo `e.target.value` pe error phek deta hai: *"Property 'value' does not exist on type 'EventTarget'"*.::HL]]
+* [[HL::**Solution:** `React.ChangeEvent<HTMLInputElement>` use karne se TS (TypeScript - Microsoft ki banayi language jo JavaScript me types add karti hai) ko exactly pata chal jata hai ki ye ek text input hai aur iske paas `.value` property genuinely exist karti hai.::HL]]
 * **What breaks if we don't use it?** Agar tum explicitly type nahi karoge, toh TS usko silently `any` (type checking band kar dena) maan lega. Phir agar tumne tippo karke `e.targt.value` likh diya, toh editor warning nahi dega, par production mein app crash ho jayegi.
 * **✅ Kab use karo (Use this when):**
 * Jab tum input fields, dropdowns, ya forms handle kar rahe ho (e.g., Search bars, Checkout forms).
@@ -6915,9 +6914,9 @@ Browser ke native events alag hote hain aur React unhe wrap karta hai:
 `Input field visually displays: "1234 5678"`
 *(Koi console error ya TypeScript compiler error nahi aayega)*
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 10:** `const handleChange = (e: React.ChangeEvent<HTMLInputElement>)` — Ye code ki sabse critical line hai. Yahan humne `e` ko strongly type kiya hai. Agar hum sirf `e: any` rakhte, toh baad mein `e.target.checked` (jo text box mein hota hi nahi) likhne par compiler error nahi deta par app browser mein blast ho jati.
+* [[HL::**Line 10:** `const handleChange = (e: React.ChangeEvent<HTMLInputElement>)` — Ye code ki sabse critical line hai. Yahan humne `e` ko strongly type kiya hai. Agar hum sirf `e: any` rakhte, toh baad mein `e.target.checked` (jo text box mein hota hi nahi) likhne par compiler error nahi deta par app browser mein blast ho jati.::HL]]
 * **Line 23:** `replace(/(.{4})/g, "$1 ")` — Ye string method regex use karke raw numbers (e.g. `12345678`) ke har 4 block ke baad ek space daalta hai (`1234 5678`). Ye UX (User Experience) badhata hai.
 
 #### 🔒 8. Security-First Check
@@ -7046,8 +7045,8 @@ Browser ke native events alag hote hain aur React unhe wrap karta hai:
 * **A:** Isko TypeScript ka "Contextual Typing" ya "Type Inference" bolte hain. Kyunki arrow function seedha `onChange` prop ke andar likha hai, TS ko pata hai ki `input` ka `onChange` hamesha `ChangeEvent<HTMLInputElement>` pass karta hai, toh wo automatically samajh jata hai.
 
 
-* **Q: `e.preventDefault()` hum generally kahan aur kyun use karte hain event handlers mein?**
-* **A:** Ye mostly `React.FormEvent` mein `onSubmit` par use hota hai. Default behavior HTML forms ka ye hota hai ki submit par page refresh ho jata hai. SPA (Single Page Applications) mein page refresh nahi chahiye hota, isliye ise call karke hum default refresh rok dete hain.
+* [[HL::**Q: `e.preventDefault()` hum generally kahan aur kyun use karte hain event handlers mein?**::HL]]
+* [[HL::**A:** Ye mostly `React.FormEvent` mein `onSubmit` par use hota hai. Default behavior HTML forms ka ye hota hai ki submit par page refresh ho jata hai. SPA (Single Page Applications) mein page refresh nahi chahiye hota, isliye ise call karke hum default refresh rok dete hain.::HL]]
 
 
 * **Q: Main custom UI library use kar raha hu (jaise Material UI TextField), kya wahan bhi `React.ChangeEvent` lagega?**
@@ -7117,13 +7116,13 @@ Maan lo tum ek tailor (darzi) ke paas gaye shirt banwane. Tumne usko measurement
 
 #### 📖 3. Technical Definition (Interview Answer)
 
-* **Precise English:** `React.CSSProperties` is a built-in TypeScript interface in React that accurately defines all valid CSS properties and their acceptable value types (strings or numbers) in camelCase format, ensuring type safety for inline styles.
-* **Hinglish Simplification:** Ek aisi check-list (type) jo TS ko batati hai ki React ke `style={{...}}` object mein kaunse CSS words allowed hain aur unki value text honi chahiye ya number.
+* [[HL::**Precise English:** `React.CSSProperties` is a built-in TypeScript interface in React that accurately defines all valid CSS properties and their acceptable value types (strings or numbers) in camelCase format, ensuring type safety for inline styles.::HL]]
+* [[HL::**Hinglish Simplification:** Ek aisi check-list (type) jo TS ko batati hai ki React ke `style={{...}}` object mein kaunse CSS words allowed hain aur unki value text honi chahiye ya number.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** JavaScript mein object ke andar hum koi bhi key-value daal sakte hain. Agar tumne tippo kar diya `marginTop` ko `margnTop`, toh app crash nahi hogi, par styling apply bhi nahi hogi. Tum ghanton debug (error dhundhna) karte rahoge ki UI khrab kyun lag raha hai.
-* **Solution:** Jab tum kisi style object ko `React.CSSProperties` type dete ho, toh TS saari spelling mistakes aur invalid values (jaise `display: "blockk"`) ko editor mein hi red mark kar deta hai.
+* [[HL::**Problem:** JavaScript mein object ke andar hum koi bhi key-value daal sakte hain. Agar tumne tippo kar diya `marginTop` ko `margnTop`, toh app crash nahi hogi, par styling apply bhi nahi hogi. Tum ghanton debug (error dhundhna) karte rahoge ki UI khrab kyun lag raha hai.::HL]]
+* [[HL::**Solution:** Jab tum kisi style object ko `React.CSSProperties` type dete ho, toh TS saari spelling mistakes aur invalid values (jaise `display: "blockk"`) ko editor mein hi red mark kar deta hai.::HL]]
 * **What breaks if we don't use it?** UI silently break ho jayega. Button chhota reh jayega ya color gayab ho jayega kyunki browser galat CSS property ko chup-chap ignore kar deta hai.
 * **✅ Kab use karo (Use this when):**
 * Jab styles dynamic hon (e.g., API se progress bar ki `width` percentage aa rahi ho).
@@ -7157,13 +7156,13 @@ Jab tum kisi object ko `React.CSSProperties` assign karte ho aur usme `justify..
 8  };
 9
 10 export const ProgressBar = ({ progress, customStyle }: ProgressBarProps) => { 
-11     // container ka style strongly typed hai
-12     const containerStyle: React.CSSProperties = {            // variable ko explicitly CSSProperties type diya
-13         width: "100%",                                       // CSS width
-14         backgroundColor: "#e0e0e0",                          // Note: camelCase (background-color nahi)
-15         borderRadius: 8,                                     // TS allows number! React automatically "8px" assume kar lega
-16         ...customStyle                                       // Spread operator (user ne jo custom style bheje hain wo add/override kar do)
-17     };
+11     // [[HL::container ka style strongly typed hai::HL]]
+[[HL::12     const containerStyle: React.CSSProperties = {            // variable ko explicitly CSSProperties type diya::HL]]
+[[HL::13         width: "100%",                                       // CSS width::HL]]
+[[HL::14         backgroundColor: "#e0e0e0",                          // Note: camelCase (background-color nahi)::HL]]
+[[HL::15         borderRadius: 8,                                     // TS allows number! React automatically "8px" assume kar lega::HL]]
+[[HL::16         ...customStyle                                       // Spread operator (user ne jo custom style bheje hain wo add/override kar do)::HL]]
+[[HL::17::HL]]     };
 18
 19     // progress bar (fill) ka style strongly typed hai
 20     const fillStyle: React.CSSProperties = {                 
@@ -7233,10 +7232,10 @@ Jab tum kisi object ko `React.CSSProperties` assign karte ho aur usme `justify..
 * **Prove karo:** Ek prop type banao `type Props = { styles: any }` aur use `<div style={props.styles}>` me daalo. Editor koi typing error nahi rokega chahe prop mein kachra pass kar do. Phir `any` ko `React.CSSProperties` karke dekho, editor turant help karega.
 
 
-* **Confusion 2 — "Kya isme Media Queries (jaise @media max-width) laga sakte hain?"**
-* **Galat soch:** Inline styles me CSS ki har cheez possible hai.
-* **Actually:** Nahi! Inline styles (DOM node ka `.style` property) media queries, pseudo-classes (`:hover`, `:active`), aur keyframes animations support nahi karte.
-* **Prove karo:** `style={{ ":hover": { color: "red" } }}` try karo, TS error de dega ki `":hover"` CSSProperties me exist nahi karta.
+* [[HL::**Confusion 2 — "Kya isme Media Queries (jaise @media max-width) laga sakte hain?"**::HL]]
+* [[HL::**Galat soch:** Inline styles me CSS ki har cheez possible hai.::HL]]
+* [[HL::**Actually:** Nahi! Inline styles (DOM node ka `.style` property) media queries, pseudo-classes (`:hover`, `:active`), aur keyframes animations support nahi karte.::HL]]
+* [[HL::**Prove karo:** `style={{ ":hover": { color: "red" } }}` try karo, TS error de dega ki `":hover"` CSSProperties me exist nahi karta.::HL]]
 
 
 
@@ -7375,13 +7374,13 @@ Maan lo tum ek fully-loaded car kharidne gaye ho. Agar tumhe usme sirf ek custom
 
 #### 📖 3. Technical Definition (Interview Answer)
 
-* **Precise English:** `ComponentPropsWithoutRef<T>` is a TypeScript utility type provided by React that extracts all standard HTML attributes associated with a specific element (like `'button'` or `'input'`), allowing developers to extend these native props with their own custom interfaces using an intersection (`&`) type.
-* **Hinglish Simplification:** Ek shortcut type jo React ke kisi bhi HTML tag (jaise button ya input) ke saare default attributes (props) nikal leta hai, jisse tum apne custom component mein unhe easily use kar sako bina ek-ek karke define kiye.
+* [[HL::**Precise English:** `ComponentPropsWithoutRef<T>` is a TypeScript utility type provided by React that extracts all standard HTML attributes associated with a specific element (like `'button'` or `'input'`), allowing developers to extend these native props with their own custom interfaces using an intersection (`&`) type.::HL]]
+* [[HL::**Hinglish Simplification:** Ek shortcut type jo React ke kisi bhi HTML tag (jaise button ya input) ke saare default attributes (props) nikal leta hai, jisse tum apne custom component mein unhe easily use kar sako bina ek-ek karke define kiye.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Jab beginners ek custom `<Button text="Submit" />` component banate hain, aur kal ko unhe usme `disabled={true}` ya `onMouseOver={...}` lagana hota hai, toh unhe TS error aata hai kyunki unhone prop type mein sirf `text` define kiya tha. Phir wo har naye prop ko manually type karne lagte hain, jo ki bohot bada headache (prop-drilling madness) ban jata hai.
-* **Solution:** `ComponentPropsWithoutRef` use karke hum bol dete hain: "Bhai, isme standard `<button>` ki saari shaktiyan (powers) daal do."
+* [[HL::**Problem:** Jab beginners ek custom `<Button text="Submit" />` component banate hain, aur kal ko unhe usme `disabled={true}` ya `onMouseOver={...}` lagana hota hai, toh unhe TS error aata hai kyunki unhone prop type mein sirf `text` define kiya tha. Phir wo har naye prop ko manually type karne lagte hain, jo ki bohot bada headache (prop-drilling madness) ban jata hai.::HL]]
+* [[HL::**Solution:** `ComponentPropsWithoutRef` use karke hum bol dete hain: "Bhai, isme standard `<button>` ki saari shaktiyan (powers) daal do."::HL]]
 * **What breaks if we don't use it?** Reusability khatam ho jayegi. Tumhare UI components flexibile nahi rahenge aur dusre developers tumhara component use karte waqt frustrate honge kyunki wo basic HTML features use nahi kar payenge.
 * **✅ Kab use karo (Use this when):**
 * Jab tum ek Design System (UI library jaise apni company ke custom buttons, inputs, modals) bana rahe ho.
@@ -7407,15 +7406,15 @@ Jab tum dusri file mein apna banaya hua `<CustomButton>` use karoge aur space da
 // TypeScript 5.x | React 18
 1  import React from 'react';                                            // React library import ki
 2  
-3  // Custom props define kiye
-4  type CustomButtonProps = {                                            // Apna type banaya
-5      isLoading?: boolean;                                              // optional prop: kya loading spinner dikhana hai?
-6      variant: 'primary' | 'secondary';                                 // variant: sirf do strings allowed hain
-7  };
-8  
-9  // Intersection (&) use karke Native HTML Props ko Custom ke sath joda
-10 // ComponentPropsWithoutRef<'button'> (Shortcut jo button ke saare native attributes le aata hai)
-11 type ButtonProps = CustomButtonProps & React.ComponentPropsWithoutRef<'button'>;
+3  // [[HL::Custom props define kiye::HL]]
+[[HL::4  type CustomButtonProps = {                                            // Apna type banaya::HL]]
+[[HL::5      isLoading?: boolean;                                              // optional prop: kya loading spinner dikhana hai?::HL]]
+[[HL::6      variant: 'primary' | 'secondary';                                 // variant: sirf do strings allowed hain::HL]]
+[[HL::7  };::HL]]
+[[HL::8  ::HL]]
+[[HL::9  // Intersection (&) use karke Native HTML Props ko Custom ke sath joda::HL]]
+[[HL::10 // ComponentPropsWithoutRef<'button'> (Shortcut jo button ke saare native attributes le aata hai)::HL]]
+[[HL::11 type ButtonProps = CustomButtonProps & React.ComponentPropsWithoutRef<'button::HL]]'>;
 12 
 13 // Component definition. Rest operator (...props) bache hue saare native props collect kar lega
 14 export const Button = ({ isLoading, variant, children, ...props }: ButtonProps) => {
@@ -7563,10 +7562,10 @@ Jab tum dusri file mein apna banaya hua `<CustomButton>` use karoge aur space da
 
 ```
 
-#### ❓ 17. Interview Q&A (FAQ)
+#### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
 
 * **Q: `ComponentPropsWithoutRef<'div'>` aur `ComponentPropsWithoutRef<'button'>` mein kya fark hai?**
-* **A:** 'div' wale type mein div ke native attributes aayenge (jaise id, class). 'button' wale mein div ke alawa button specific attributes bhi aayenge (jaise `disabled`, `type`, `formAction`).
+* [[HL::**A:** 'div' wale type mein div ke native attributes aayenge (jaise id, class). 'button' wale mein div ke alawa button specific attributes bhi aayenge (jaise `disabled`, `type`, `formAction`).::HL]]
 
 
 * **Q: Kya main kisi ek specific native prop (jaise `onClick`) ko override (change) kar sakta hu jab main inherit kar raha hu?**
@@ -8201,16 +8200,16 @@ Jab tum `page.tsx` file mein `props.params.slug` type karोगे, toh VS Code 
 
 ### 🎯 Topic: 6. Angular Context (Strict Typing in Enterprise Apps)
 
-**Is topic mein hum Angular (Google ka banaya hua enterprise-level frontend framework) ke 4 sabse critical pillars ko samjhenge: Decorators, Observables (RxJS), Component Communication (Input/Output), aur Typed Reactive Forms.**
+**Is topic mein hum Angular (Google ka banaya hua enterprise-level frontend framework) ke 4 sabse critical pillars ko samjhenge: [[HL::Decorators,::HL]] Observables (RxJS), Component Communication (Input/Output), aur Typed Reactive Forms.**
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
 Ek badi factory (Angular App) imagine karo:
 
-* **Decorators (`@Component`):** Ye factory ke employees ka "ID Card" hai. Ye Angular ko batata hai ki "Ye normal class nahi hai, ye ek UI Component hai."
-* **Input/Output (`@Input`, `EventEmitter`):** Manager jab worker ko raw material deta hai toh wo **Input** hai. Jab worker final product wapis bhejta hai (walkie-talkie pe bolke), toh wo **Output** (EventEmitter) hai.
-* **Observables (RxJS):** Ye factory ki "Conveyor Belt" hai. Is par data continuously aata rehta hai, aur jab tak tum "subscribe" (belt ke paas khade hona) nahi karte, tumhe data nahi milta.
-* **Typed Reactive Forms:** Ye factory ka strict "Quality Check Blueprint" hai. Agar form mein age "text" mein aayi, toh factory (Angular) form ko turant reject kar degi.
+* [[HL::**Decorators (`@Component`):** Ye factory ke employees ka "ID Card" hai. Ye Angular ko batata hai ki "Ye normal class nahi hai, ye ek UI Component hai."::HL]]
+* [[HL::**Input/Output (`@Input`, `EventEmitter`):** Manager jab worker ko raw material deta hai toh wo **Input** hai. Jab worker final product wapis bhejta hai (walkie-talkie pe bolke), toh wo **Output** (EventEmitter) hai.::HL]]
+* [[HL::**Observables (RxJS):** Ye factory ki "Conveyor Belt" hai. Is par data continuously aata rehta hai, aur jab tak tum "subscribe" (belt ke paas khade hona) nahi karte, tumhe data nahi milta.::HL]]
+* [[HL::**Typed Reactive Forms:** Ye factory ka strict "Quality Check Blueprint" hai. Agar form mein age "text" mein aayi, toh factory (Angular) form ko turant reject kar degi.::HL]]
 
 #### 📖 3. Technical Definition (Interview Answer)
 
@@ -8251,23 +8250,23 @@ VS Code mein jab tum apne Angular form ka value access karोगे (`myForm.val
 5  // Interface banaya data structure fix karne ke liye
 6  export interface User { id: number; name: string; }                                        
 7  
-8  // @Component Decorator — is plain TS class ko UI component banata hai (Metadata attach karta hai)
-9  @Component({
+8  // @[[HL::Component Decorator — is plain TS class ko UI component banata hai (Metadata attach karta hai)::HL]]
+[[HL::9  @Component::HL]]({
 10     selector: 'app-profile-editor',                                                        // HTML tag ka naam: <app-profile-editor>
 11     template: `
 12         <form [formGroup]="profileForm" (ngSubmit)="save()">                               {/* Form ko class property 'profileForm' se bind kiya */}
-13             <input formControlName="name" />
+13             <[[HL::input::HL]] formControlName="name" />
 14             <button type="submit" [disabled]="profileForm.invalid">Save</button>
 15         </form>
 16     `
 17 })
-18 export class ProfileEditorComponent implements OnInit {
-19     // @Input() — Parent component se data andar aane ka raasta. 'userId' strictly number hai.
-20     @Input() userId!: number;                                                              // '!' (Non-null assertion) TS ko bolta hai ki "tention mat le, Angular isko load hone pe value de dega"
-21     
-22     // @Output() — Child se Parent ko data bhejne ka raasta.
-23     // EventEmitter<User> = Generic batata hai ki ye strictly 'User' object hi emit karega (broadcast karega).
-24     @Output() userSaved = new EventEmitter<User>();                                        
+[[HL::18 export class ProfileEditorComponent implements OnInit {::HL]]
+[[HL::19     // @Input() — Parent component se data andar aane ka raasta. 'userId' strictly number hai.::HL]]
+[[HL::20     @Input() userId!: number;                                                              // '!' (Non-null assertion) TS ko bolta hai ki "tention mat le, Angular isko load hone pe value de dega"::HL]]
+[[HL::21     ::HL]]
+[[HL::22     // @Output() — Child se Parent ko data bhejne ka raasta.::HL]]
+[[HL::23     // EventEmitter<User> = Generic batata hai ki ye strictly 'User' object hi emit karega (broadcast karega).::HL]]
+[[HL::24     @Output() userSaved = new EventEmitter<User>();                                        ::HL]]
 25 
 26     // Typed Reactive Form (Angular 14+ feature). 
 27     // Humne strictly type kiya ki 'name' form control mein strictly 'string' jayegi (ya null agar khali hai).
@@ -8521,17 +8520,17 @@ VS Code mein jab tum apne Angular form ka value access karोगे (`myForm.val
 
 Socho tum ek **Lego Blocks ka set** khareed ke laye ho. Har block ka ek specific shape hota hai (kuch blocks pe 4 dots hote hain, kuch pe 8). Agar tum ek 4-dot wale block ko 6-dot wali jagah fit karne ki koshish karoge, toh woh nahi fitega aur set toot jayega.
 
-React Native (ek framework jisse mobile apps bante hain) mein `ViewProps`, `TextProps` wahi "Lego manuals" hain. Yeh TypeScript (JavaScript ka advanced version jo rules lagata hai) ko batate hain ki ek Button ya Text mein strictly kaunsi cheezein (props) fit ho sakti hain aur kaunsi nahi.
+[[HL::React Native (ek framework jisse mobile apps bante hain) mein `ViewProps`, `TextProps` wahi "Lego manuals" hain. Yeh TypeScript (JavaScript ka advanced version jo rules lagata hai) ko batate hain ki ek Button ya Text mein strictly kaunsi cheezein (props) fit ho sakti hain aur kaunsi nahi.::HL]]
 
 #### 📖 3. Technical Definition (Interview Answer)
 
 * **Precise English:** React Native core component types (like `ViewProps` or `TextProps`) are TypeScript interfaces exported by the React Native library that define the exact shape of properties accepted by foundational UI components.
-* **Hinglish Simplification:** Yeh woh pre-defined rules hain jo guarantee karte hain ki agar aap koi mobile UI element bana rahe ho, toh aap usme galat data (jaise Text element mein image ka link) pass na kar do.
+* [[HL::**Hinglish Simplification:** Yeh woh pre-defined rules hain jo guarantee karte hain ki agar aap koi mobile UI element bana rahe ho, toh aap usme galat data (jaise Text element mein image ka link) pass na kar do.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Bina in types ke, developer ek Button ko `href` prop (jo sirf web mein hota hai) pass kar dega, aur app crash ho jayega kyunki mobile ko `href` samajh nahi aata.
-* **Solution:** `ViewProps` aur `TextProps` editor ko pehle hi bata dete hain ki kya allowed hai.
+* [[HL::**Problem:** Bina in types ke, developer ek Button ko `href` prop (jo sirf web mein hota hai) pass kar dega, aur app crash ho jayega kyunki mobile ko `href` samajh nahi aata.::HL]]
+* [[HL::**Solution:** `ViewProps` aur `TextProps` editor ko pehle hi bata dete hain ki kya allowed hai.::HL]]
 * **What breaks if we don't use it?** Production mein app phat jayega (crash hoga) jab user screen open karega kyunki native mobile platform (Android/iOS) ko galat command milegi.
 * **✅ Kab use karo (Use this when):** - Jab aap apne custom reusable components (jaise `MyCustomButton` ya `AppHeader`) bana rahe ho aur chahte ho ki unme default RN (React Native) features bhi support hon.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** - (Yeh concept har situation mein applicable hai — koi genuine avoid-scenario nahi hai jab aap RN + TS use kar rahe ho).
@@ -8550,14 +8549,14 @@ Agar Step 1 mein strict typing (`TextProps`) nahi hogi, toh Step 2 galat data St
 
 ```typescript
 # React Native 0.73+ | TypeScript 5.x
-1  import React from 'react';                                     # React core library — components banane ke liye
-2  import { TouchableOpacity, Text, TouchableOpacityProps } from 'react-native'; # RN ke core UI parts aur unke TypeScript rules
-3 
-4  // Interface: Naya type banate hain jo default props ke saath extra properties jode.
-5  interface CustomButtonProps extends TouchableOpacityProps {    # extends keyword: TouchableOpacityProps ke saare default rules isme copy kar lo
-6      title: string;                                             # title: string = hamara apna custom rule, string text hona zaroori hai
-7      isPrimary?: boolean;                                       # ? (optional modifier) = yeh prop dena zaroori nahi hai, de bhi sakte ho nahi bhi
-8  }
+1  [[HL::import React from 'react';                                     # React core library — components banane ke liye::HL]]
+[[HL::2  import { TouchableOpacity, Text, TouchableOpacityProps } from 'react-native'; # RN ke core UI parts aur unke TypeScript rules::HL]]
+[[HL::3 ::HL]]
+[[HL::4  // Interface: Naya type banate hain jo default props ke saath extra properties jode.::HL]]
+[[HL::5  interface CustomButtonProps extends TouchableOpacityProps {    # extends keyword: TouchableOpacityProps ke saare default rules isme copy kar lo::HL]]
+[[HL::6      title: string;                                             # title: string = hamara apna custom rule, string text hona zaroori hai::HL]]
+[[HL::7      isPrimary?: boolean;                                       # ? (optional modifier) = yeh prop dena zaroori nahi hai, de bhi sakte ho nahi bhi::HL]]
+[[HL::8::HL]]  }
 9 
 10 // React.FC (Functional Component) = batata hai ki yeh function ek React element return karega
 11 const PrimaryButton: React.FC<CustomButtonProps> = ({        # Component definition shuru hui
@@ -8579,7 +8578,7 @@ Agar Step 1 mein strict typing (`TextProps`) nahi hogi, toh Step 2 galat data St
 ```
 
 > **↓ Detailed Explanation:**
-> * **Line 5 — `extends TouchableOpacityProps`:** Yeh magic line hai. Iska matlab `CustomButtonProps` ko ab woh sab pata hai jo ek normal mobile button ko pata hona chahiye (jaise `onPress`, `disabled`, `style`). Humein manually saare RN rules nahi likhne pade.
+> * [[HL::**Line 5 — `extends TouchableOpacityProps`:** Yeh magic line hai. Iska matlab `CustomButtonProps` ko ab woh sab pata hai jo ek normal mobile button ko pata hona chahiye (jaise `onPress`, `disabled`, `style`). Humein manually saare RN rules nahi likhne pade.::HL]]
 > * **Line 14/17 — `...rest` pattern:** Yeh pattern assure karta hai ki humara custom wrapper un sabhi hidden features ko support kare jo RN natively deta hai, bina hume har ek ko individually pass kiye.
 > 
 > 
@@ -8676,8 +8675,8 @@ Jab Zomato ya Uber jaisi companies apni "Design System" (company ki UI library) 
 
 * **Q:** Custom components banate waqt RN ke native props inherit karna kyun zaroori hai?
 **A:** Kyunki isse component fully reusable banta hai. Aapko manually `onPress`, `onLayout`, ya `testID` pass nahi karne padte. Typescript khud ensure karta hai ki native component ko saare zaroori mobile-specific properties mil rahe hain bina kisi conflict ke.
-* **Q:** Agar mujhe default prop ko overwrite karna hai? Mante hain main chahta hoon `onPress` humesha ek specific parameter return kare?
-**A:** Aap Omit utility (TS ka feature jo object se fields hatata hai) use kar sakte ho. `interface Props extends Omit<TouchableOpacityProps, 'onPress'> { onPress: (id: string) => void; }`. Isse default `onPress` hat jayega aur aapka custom `onPress` apply ho jayega.
+* [[HL::**Q:** Agar mujhe default prop ko overwrite karna hai? Mante hain main chahta hoon `onPress` humesha ek specific parameter return kare?::HL]]
+[[HL::**A:** Aap Omit utility (TS ka feature jo object se fields hatata hai) use kar sakte ho. `interface Props extends Omit<TouchableOpacityProps, 'onPress'> { onPress: (id: string) => void; }`. Isse default `onPress` hat jayega aur aapka custom `onPress` apply ho jayega.::HL]]
 * **Q:** `ViewProps` aur `ViewStyle` mein kya difference hai?
 **A:** `ViewProps` poore container ki properties (jaise gestures, id, layout events) control karta hai. `ViewStyle` uske andar ke sirf appearance/design rules (jaise color, padding, margin) ka type hai.
 * **Q:** Kya main `TextProps` ko `<View>` element mein pass kar sakta hoon?
@@ -8729,14 +8728,14 @@ React Native mein `TextStyle`, `ViewStyle` aur `ImageStyle` wahi measurement cat
 
 #### 📖 3. Technical Definition (Interview Answer)
 
-* **Precise English:** React Native styles are strictly typed objects rather than CSS strings. Types like `ViewStyle`, `TextStyle`, and `ImageStyle` ensure that style properties passed to `StyleSheet.create` or component style props match the valid layout and paint properties supported by the native platform engine.
-* **Hinglish Simplification:** Web jaisa string-based CSS yahan nahi chalta. RN mein styles JavaScript objects hote hain, aur in Types ke through TS check karta hai ki aapne koi aisi CSS property toh nahi likh di jo mobile mein exist hi nahi karti (jaise `float: left`).
+* [[HL::**Precise English:** React Native styles are strictly typed objects rather than CSS strings. Types like `ViewStyle`, `TextStyle`, and `ImageStyle` ensure that style properties passed to `StyleSheet.create` or component style props match the valid layout and paint properties supported by the native platform engine.::HL]]
+* [[HL::**Hinglish Simplification:** Web jaisa string-based CSS yahan nahi chalta. RN mein styles JavaScript objects hote hain, aur in Types ke through TS check karta hai ki aapne koi aisi CSS property toh nahi likh di jo mobile mein exist hi nahi karti (jaise `float: left`).::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Web CSS bohot forgiving hai (galat property likho toh woh ignore kar deta hai). Lekin React Native Yoga engine (jo mobile pe UI render karta hai) use karta hai. Agar Yoga engine ko koi unknown styling property mili, toh poori app crash ho jayegi.
-* **Solution:** `ViewStyle`, `TextStyle` etc. strictly wahi CSS keys allow karte hain jo Yoga engine aur Native platforms samajhte hain.
-* **What breaks if we don't use it?** Typing mistake ki wajah se (e.g., `backGroundColor` instead of `backgroundColor`) compiler chup rahega, lekin native app screen load hote hi red screen crash de degi.
+* [[HL::**Problem:** Web CSS bohot forgiving hai (galat property likho toh woh ignore kar deta hai). Lekin React Native Yoga engine (jo mobile pe UI render karta hai) use karta hai. Agar Yoga engine ko koi unknown styling property mili, toh poori app crash ho jayegi.::HL]]
+* [[HL::**Solution:** `ViewStyle`, `TextStyle` etc. strictly wahi CSS keys allow karte hain jo Yoga engine aur Native platforms samajhte hain.::HL]]
+* [[HL::**What breaks if we don't use it?** Typing mistake ki wajah se (e.g., `backGroundColor` instead of `backgroundColor`) compiler chup rahega, lekin native app screen load hote hi red screen crash de degi.::HL]]
 * **✅ Kab use karo (Use this when):** - Hamesha, jab bhi aap app mein color, layout, padding ya font size define kar rahe ho.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** - Agar aap completely alag styling library use kar rahe ho jaise NativeWind (Tailwind CSS for React Native) — us case mein NativeWind apne types khud handle karta hai.
 
@@ -8761,10 +8760,10 @@ Typescript is poore process ke Step 1 mein galti pakad leta hai.
 5  import { StyleProp } from 'react-native';
 6 
 7  // Component props define karte hain jinme external style pass kiya ja sake
-8  interface CardProps {
-9      title: string;                                               # Text jo card pe dikhega
-10     containerStyle?: StyleProp<ViewStyle>;                       # StyleProp<ViewStyle>: Yeh ek normal object {padding:10} ya array [{padding:10}] dono accept karega
-11     textStyle?: StyleProp<TextStyle>;                            # textStyle sirf font-related styling accept karega
+8  [[HL::interface CardProps {::HL]]
+[[HL::9      title: string;                                               # Text jo card pe dikhega::HL]]
+[[HL::10     containerStyle?: StyleProp<ViewStyle>;                       # StyleProp<ViewStyle>: Yeh ek normal object {padding:10} ya array [{padding:10}] dono accept karega::HL]]
+[[HL::11     textStyle?: StyleProp<TextStyle>;                            # textStyle sirf font-related styling accept karega::HL]]
 12 }
 13
 14 const CustomCard: React.FC<CardProps> = ({ title, containerStyle, textStyle }) => {
@@ -8794,8 +8793,8 @@ Typescript is poore process ke Step 1 mein galti pakad leta hai.
 ```
 
 > **↓ Detailed Explanation:**
-> * **Line 10/11 — `StyleProp<ViewStyle>`:** Yeh point bohot critical hai. Agar aap sirf `containerStyle?: ViewStyle` likhte, toh user styles ko array mein pass nahi kar pata (jaise `style={[styles.box, { margin: 10 }]}`). `StyleProp` ek utility wrapper hai jo RN styles ko flexibility deta hai (arrays aur null values accept karne ki) jabki andar ki type (ViewStyle) ko strict rakhta hai.
-> * **Line 24 — `StyleSheet.create()`:** Yeh ek memoized function hai (purane calculations yaad rakhta hai speed ke liye) jo JavaScript bridge ke through ek hi baar styles native side bhejta hai, baar baar render pe re-create nahi karta.
+> * [[HL::**Line 10/11 — `StyleProp<ViewStyle>`:** Yeh point bohot critical hai. Agar aap sirf `containerStyle?: ViewStyle` likhte, toh user styles ko array mein pass nahi kar pata (jaise `style={[styles.box, { margin: 10 }]}`). `StyleProp` ek utility wrapper hai jo RN styles ko flexibility deta hai (arrays aur null values accept karne ki) jabki andar ki type (ViewStyle) ko strict rakhta hai.::HL]]
+> * [[HL::**Line 24 — `StyleSheet.create()`:** Yeh ek memoized function hai (purane calculations yaad rakhta hai speed ke liye) jo JavaScript bridge ke through ek hi baar styles native side bhejta hai, baar baar render pe re-create nahi karta.::HL]]
 > 
 > 
 
@@ -8819,12 +8818,12 @@ Large scale apps (jaise Instagram) mein, har developer alag file mein same color
 * **✅ The 'Pro' Way:** Hamesha `StyleProp<ViewStyle>` ya `StyleProp<TextStyle>` use karo.
 * **⚡ Consequences:** `any` use karne pe TS chup ho jayega. Koi developer aapke Component pe galti se `style={{ color: 'red' }}` (jo Text ka prop hai) `<View>` wrapper pe bhej dega. Mobile engine layout parse karte waqt crash ho jayega aur user ki screen black/red ho jayegi.
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? [[HL::(Confusion Clarifier)::HL]]
 
-* **Confusion 1 — "`ViewStyle` aur `StyleProp<ViewStyle>` mein exactly kya fark hai?"**
-* **Galat soch:** "Dono same hain, kuch bhi likh do."
-* **Actually:** `ViewStyle` ek raw object hai `{ flex: 1 }`. React Native mein hum styles ko Arrays mein pass karte hain combine karne ke liye `[{flex: 1}, {padding: 10}]`. `ViewStyle` array accept nahi karta. `StyleProp<ViewStyle>` ek special wrapper hai jo Object, Array, `null`, aur `undefined` sab safely accept karta hai.
-* **Prove karo:** `const myStyle: ViewStyle = [{flex: 1}];` likh ke dekho, TS turant error dega. Isko `StyleProp<ViewStyle>` se change karo, error gayab ho jayegi.
+* [[HL::**Confusion 1 — "`ViewStyle` aur `StyleProp<ViewStyle>` mein exactly kya fark hai?"**::HL]]
+* [[HL::**Galat soch:** "Dono same hain, kuch bhi likh do."::HL]]
+* [[HL::**Actually:** `ViewStyle` ek raw object hai `{ flex: 1 }`. React Native mein hum styles ko Arrays mein pass karte hain combine karne ke liye `[{flex: 1}, {padding: 10}]`. `ViewStyle` array accept nahi karta. `StyleProp<ViewStyle>` ek special wrapper hai jo Object, Array, `null`, aur `undefined` sab safely accept karta hai.::HL]]
+* [[HL::**Prove karo:** `const myStyle: ViewStyle = [{flex: 1}];` likh ke dekho, TS turant error dega. Isko `StyleProp<ViewStyle>` se change karo, error gayab ho jayegi.::HL]]
 
 
 * **Confusion 2 — "Web mein main div pe `color: 'red'` lagata tha toh andar ke saare span red ho jate the (cascading). RN mein style inherit kyun nahi hota?"**
@@ -8837,8 +8836,8 @@ Large scale apps (jaise Instagram) mein, har developer alag file mein same color
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 
 * **`Type 'string' is not assignable to type 'number'.` (e.g. for `padding: "10px"`)**
-* **Root Cause:** Web developer aadat se "10px" (string) likh raha hai. RN mein units by default dp (density-independent pixels) hoti hain, jo purely numbers (10) hoti hain.
-* **Fix:** `"10px"` ko delete karke sirf `10` likho.
+* [[HL::**Root Cause:** Web developer aadat se "10px" (string) likh raha hai. RN mein units by default dp (density-independent pixels) hoti hain, jo purely numbers (10) hoti hain.::HL]]
+* [[HL::**Fix:** `"10px"` ko delete karke sirf `10` likho.::HL]]
 
 
 * **`Property 'boxShadow' does not exist on type 'ViewStyle'.`**
@@ -8961,16 +8960,16 @@ Kyunki hardware (Mouse vs Ungli) bilkul alag hai, inke signals aur events bhi bi
 
 #### 📖 3. Technical Definition (Interview Answer)
 
-* **Precise English:** React Native employs a distinct event system replacing web DOM events (`MouseEvent`) with touch-specific synthetic events (`GestureResponderEvent`). It abstracts platform-specific touches into cross-platform props like `onPress` and `onChangeText`.
-* **Hinglish Simplification:** Web wale `onClick` aur `onChange` mobile mein nahi chalte. React Native ne mobile screens ke liye apne khud ke touch aur text events banaye hain (jaise `onPress` aur `onChangeText`), jo aapki ungli ki position aur dabav (pressure) ko record karte hain.
+* [[HL::**Precise English:** React Native employs a distinct event system replacing web DOM events (`MouseEvent`) with touch-specific synthetic events (`GestureResponderEvent`). It abstracts platform-specific touches into cross-platform props like `onPress` and `onChangeText`.::HL]]
+* [[HL::**Hinglish Simplification:** Web wale `onClick` aur `onChange` mobile mein nahi chalte. React Native ne mobile screens ke liye apne khud ke touch aur text events banaye hain (jaise `onPress` aur `onChangeText`), jo aapki ungli ki position aur dabav (pressure) ko record karte hain.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Web developers aadat se mobile button pe `onClick` likh dete hain, jo RN mein exist hi nahi karta.
-* **Solution:** Typescript ensure karta hai ki aap `onPress` use karein aur uske andar `GestureResponderEvent` `(React Native ka touch event type)` ka sahi data use karein.
-* **What breaks if we don't use it?** Agar aap galat event listener (jaise `onChange` with web types) lagaoge, toh user form fill hi nahi kar payega kyunki app type mismatch ka error de degi.
-* **✅ Kab use karo (Use this when):** - Jab bhi user screen se interact kar raha ho (buttons dabana, form bharna, swipe karna).
-* **❌ Kab mat karo / Alternative prefer karo (Avoid when):** - Complex gestures (jaise zoom karna ya Tinder jaisa swipe karna) ke liye in basic events (`onPress`) ka use mat karo — uske liye `react-native-gesture-handler` `(advanced touch handling library)` prefer karo.
+* [[HL::**Problem:** Web developers aadat se mobile button pe `onClick` likh dete hain, jo RN mein exist hi nahi karta.::HL]]
+* [[HL::**Solution:** Typescript ensure karta hai ki aap `onPress` use karein aur uske andar `GestureResponderEvent` `(React Native ka touch event type)` ka sahi data use karein.::HL]]
+* [[HL::**What breaks if we don't use it?** Agar aap galat event listener (jaise `onChange` with web types) lagaoge, toh user form fill hi nahi kar payega kyunki app type mismatch ka error de degi.::HL]]
+* [[HL::**✅ Kab use karo (Use this when):** - Jab bhi user screen se interact kar raha ho (buttons dabana, form bharna, swipe karna).::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo (Avoid when):** - Complex gestures (jaise zoom karna ya Tinder jaisa swipe karna) ke liye in basic events (`onPress`) ka use mat karo — uske liye `react-native-gesture-handler` `(advanced touch handling library)` prefer karo.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -8990,12 +8989,12 @@ Jab aap `<TouchableOpacity on... />` type karoge, toh IDE `onClick` ko suggest n
 4  const InteractionDemo: React.FC = () => {                                           # Component start
 5      const [text, setText] = useState<string>('');                                   # useState (React hook — text store karega)
 6 
-7      // GestureResponderEvent: Mobile touch event ka strict TS type
-8      const handlePress = (event: GestureResponderEvent) => {                         # Function jab button press hoga
-9          // event.nativeEvent: OS se aaya hua raw data object
-10         // locationX, locationY: Screen pe exactly kahan touch hua (coordinates)
-11         console.log('Touched X:', event.nativeEvent.locationX);                     
-12     };
+7      // [[HL::GestureResponderEvent: Mobile touch event ka strict TS type::HL]]
+[[HL::8      const handlePress = (event: GestureResponderEvent) => {                         # Function jab button press hoga::HL]]
+[[HL::9          // event.nativeEvent: OS se aaya hua raw data object::HL]]
+[[HL::10         // locationX, locationY: Screen pe exactly kahan touch hua (coordinates)::HL]]
+[[HL::11         console.log('Touched X:', event.nativeEvent.locationX);                     ::HL]]
+[[HL::12::HL]]     };
 13
 14     return (
 15         <View style={{ padding: 20 }}>
@@ -9020,7 +9019,7 @@ Jab aap `<TouchableOpacity on... />` type karoge, toh IDE `onClick` ko suggest n
 ```
 
 > **↓ Detailed Explanation:**
-> * **Line 8 — `GestureResponderEvent`:** Yeh Typescript ko batata hai ki `event` ke andar `nativeEvent` object hai, jiske andar `locationX`, `timestamp`, aur `target` properties mojood hain. Agar ye type nahi lagayenge toh TS `event.nativeEvent` pe error dega.
+> * [[HL::**Line 8 — `GestureResponderEvent`:** Yeh Typescript ko batata hai ki `event` ke andar `nativeEvent` object hai, jiske andar `locationX`, `timestamp`, aur `target` properties mojood hain. Agar ye type nahi lagayenge toh TS `event.nativeEvent` pe error dega.::HL]]
 > * **Line 22 — `onChangeText` vs `onChange`:** RN mein `TextInput` ke paas dono hote hain. `onChangeText` direct typed string pass karta hai (`val: string`). Jabki `onChange` ek poora `NativeSyntheticEvent<TextInputChangeEventData>` `(complex form event object)` return karta hai jo beginners ke liye handle karna mushkil hota hai.
 > 
 > 
@@ -9120,8 +9119,8 @@ Production apps mein buttons fast tap (double/triple tap) ho sakte hain (user fr
 
 * **Q:** Web aur mobile touch handling architecture mein core difference kya hai?
 **A:** Web mein events DOM elements ke upar bubble hote hain (mouse clicks). Mobile mein OS screen pe x-y coordinates deta hai (touch gestures), jisko RN ka Yoga aur JS bridge wrap karke Synthetic events (`GestureResponderEvent`) banata hai taaki Android aur iOS ka event format ek jaisa ho jaye.
-* **Q:** `GestureResponderEvent` interface mein kaun kaun si critical properties hoti hain?
-**A:** Sabse important `nativeEvent` object hota hai, jiske andar `locationX`/`Y` (element ke relative touch position), `pageX`/`Y` (poori screen ke relative), aur `timestamp` (kab touch hua) hote hain.
+* [[HL::**Q:** `GestureResponderEvent` interface mein kaun kaun si critical properties hoti hain?::HL]]
+[[HL::**A:** Sabse important `nativeEvent` object hota hai, jiske andar `locationX`/`Y` (element ke relative touch position), `pageX`/`Y` (poori screen ke relative), aur `timestamp` (kab touch hua) hote hain.::HL]]
 * **Q:** Main button ko disable karna chahta hoon, kya main `onClick={null}` karu?
 **A:** Nahi, RN mein event handlers ko null karne ki jagah component prop use kiya jata hai. Aap `<TouchableOpacity disabled={true} onPress={...}>` use karenge. Typescript ensure karega ki `disabled` prop ek boolean hi ho.
 * **Q:** `onChange` event object kab useful hota hai agar hum mostly `onChangeText` use karte hain?
@@ -9170,16 +9169,16 @@ React Native mein, jab user phone rotate karta hai ya keyboard open hota hai, to
 
 #### 📖 3. Technical Definition (Interview Answer)
 
-* **Precise English:** `onLayout` is a core event prop triggered when a component mounts or its layout (dimensions/position) changes. It returns a `LayoutChangeEvent` containing the `x`, `y`, `width`, and `height` properties calculated by the native layout engine.
-* **Hinglish Simplification:** Web ki tarah hum yahan CSS Media Queries (`@media(max-width)`) use nahi kar sakte. RN mein jab kisi dabbe (View) ka size ya jagah change hoti hai, toh `onLayout` function chalta hai jo humein uski exact height/width TS object mein de deta hai.
+* [[HL::**Precise English:** `onLayout` is a core event prop triggered when a component mounts or its layout (dimensions/position) changes. It returns a `LayoutChangeEvent` containing the `x`, `y`, `width`, and `height` properties calculated by the native layout engine.::HL]]
+* [[HL::**Hinglish Simplification:** Web ki tarah hum yahan CSS Media Queries (`@media(max-width)`) use nahi kar sakte. RN mein jab kisi dabbe (View) ka size ya jagah change hoti hai, toh `onLayout` function chalta hai jo humein uski exact height/width TS object mein de deta hai.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** RN app alag-alag screens pe chalti hai (iPhone SE, iPad, Android Fold). Humein kai baar run-time pe pata lagana hota hai ki ek specific element kitni space le raha hai taaki hum uske andar ke animation ya chart ko us size ka bana sakein.
-* **Solution:** `onLayout` prop `LayoutChangeEvent` ke saath exact pixel measurement JS ko wapas bhej deta hai render hone ke baad.
-* **What breaks if we don't use it?** Agar hum dimensions hardcode karenge (jaise `width: 300`), toh chhote phone mein wo bahar nikal jayega (overflow) aur bade tablet mein chhota dikhega. UI responsive nahi ban payega.
-* **✅ Kab use karo (Use this when):** - Jab kisi animation, dynamic UI (jaise bottom sheet ya chart), ya responsive grid ke liye aapko component ki exact height/width runtime pe chahiye.
-* **❌ Kab mat karo / Alternative prefer karo (Avoid when):** - Poori screen ki width/height nikalne ke liye iska use mat karo — uske liye `useWindowDimensions()` `(React hook jo screen dimensions deta hai)` better aur fast hai.
+* [[HL::**Problem:** RN app alag-alag screens pe chalti hai (iPhone SE, iPad, Android Fold). Humein kai baar run-time pe pata lagana hota hai ki ek specific element kitni space le raha hai taaki hum uske andar ke animation ya chart ko us size ka bana sakein.::HL]]
+* [[HL::**Solution:** `onLayout` prop `LayoutChangeEvent` ke saath exact pixel measurement JS ko wapas bhej deta hai render hone ke baad.::HL]]
+* [[HL::**What breaks if we don't use it?** Agar hum dimensions hardcode karenge (jaise `width: 300`), toh chhote phone mein wo bahar nikal jayega (overflow) aur bade tablet mein chhota dikhega. UI responsive nahi ban payega.::HL]]
+* [[HL::**✅ Kab use karo (Use this when):** - Jab kisi animation, dynamic UI (jaise bottom sheet ya chart), ya responsive grid ke liye aapko component ki exact height/width runtime pe chahiye.::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo (Avoid when):** - Poori screen ki width/height nikalne ke liye iska use mat karo — uske liye `useWindowDimensions()` `(React hook jo screen dimensions deta hai)` better aur fast hai.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -9400,7 +9399,7 @@ Box Height: 400px
 #### 🐣 2. Simple Analogy (Hinglish)
 
 Socho ek **Sushi Restaurant ki Conveyor Belt** hai. Agar restaurant 1000 sushi ek saath table pe rakh dega, toh table toot jayegi (Memory crash). Uske bajaye, belt pe sirf wahi 10-15 sushi dikhti hain jo aapke saamne hain. Jab pichli waali aage nikal jaati hain, kitchen unhi khali plates pe nayi sushi rakh deta hai.
-React Native mein `FlatList` wahi conveyor belt hai. Yeh sirf utne elements banata hai jitne screen pe dikh rahe hain. Aur `ListRenderItem<T>` us belt ka strict quality inspector hai — jo check karta hai ki har plate (item) pe exactly wahi data (jaise `item.price`) rakha ho jo humne define kiya tha.
+[[HL::React Native mein `FlatList` wahi conveyor belt hai. Yeh sirf utne elements banata hai jitne screen pe dikh rahe hain. Aur `ListRenderItem<T>` us belt ka strict quality inspector hai — jo check karta hai ki har plate (item) pe exactly wahi data (jaise `item.price`) rakha ho jo humne define kiya tha.::HL]]
 
 #### 📖 3. Technical Definition (Interview Answer)
 
@@ -9430,27 +9429,27 @@ Jab aap `renderItem` function ke andar `item.` type karoge, VS Code turant dropd
 1  import React from 'react';                                                            # React import
 2  import { View, Text, FlatList, ListRenderItem, StyleSheet, Image } from 'react-native'; # RN Components
 3 
-4  // 🛍️ STEP 1: Product ka Type Define karo (Schema)
-5  interface Product {                                                                   # Single product ka structure
-6      id: string;                                                                       # Unique identifier
-7      name: string;                                                                     # Product ka naam
-8      price: number;                                                                    # Product ki kimat (number mein)
-9      image: string;                                                                    # Image ka URL
-10 }
-11
-12 // Dummy Data (API se aata hai usually)
-13 const DUMMY_PRODUCTS: Product[] = [                                                   # Product type ka array
-14     { id: 'p1', name: 'Nike Air Max', price: 120, image: 'https://link.to/shoe' },    # Pehla item
-15     { id: 'p2', name: 'Adidas Ultraboost', price: 150, image: 'https://link.to/shoe2'}# Dusra item
-16 ];
-17
-18 // 🛍️ STEP 2: FlatList component banate hain
-19 const ProductListScreen: React.FC = () => {
+4  // 🛍️ [[HL::STEP 1: Product ka Type Define karo (Schema)::HL]]
+[[HL::5  interface Product {                                                                   # Single product ka structure::HL]]
+[[HL::6      id: string;                                                                       # Unique identifier::HL]]
+[[HL::7      name: string;                                                                     # Product ka naam::HL]]
+[[HL::8      price: number;                                                                    # Product ki kimat (number mein)::HL]]
+[[HL::9      image: string;                                                                    # Image ka URL::HL]]
+[[HL::10 }::HL]]
+[[HL::11::HL]]
+[[HL::12 // Dummy Data (API se aata hai usually)::HL]]
+[[HL::13 const DUMMY_PRODUCTS: Product[] = [                                                   # Product type ka array::HL]]
+[[HL::14     { id: 'p1', name: 'Nike Air Max', price: 120, image: 'https://link.to/shoe' },    # Pehla item::HL]]
+[[HL::15     { id: 'p2', name: 'Adidas Ultraboost', price: 150, image: 'https://link.to/shoe2'}# Dusra item::HL]]
+[[HL::16 ];::HL]]
+[[HL::17::HL]]
+[[HL::18 // 🛍️ STEP 2: FlatList component banate hain::HL]]
+[[HL::19 const ProductListScreen: React.FC::HL]] = () => {
 20     
-21     // 🛍️ STEP 3: renderItem function alag nikalo with ListRenderItem<Product>
-22     // ListRenderItem ek generic type hai, <Product> batata hai ki data Product hai
-23     const renderProductCard: ListRenderItem<Product> = ({ item, index }) => {         # Destructuring: event object se 'item' aur 'index' nikala
-24         return (
+[[HL::21     // 🛍️ STEP 3: renderItem function alag nikalo with ListRenderItem<Product>::HL]]
+[[HL::22     // ListRenderItem ek generic type hai, <Product> batata hai ki data Product hai::HL]]
+[[HL::23     const renderProductCard: ListRenderItem<Product> = ({ item, index }) => {         # Destructuring: event object se 'item' aur 'index' nikala::HL]]
+[[HL::24         return (::HL]]
 25             <View style={styles.card}>
 26                 {/* VS Code yahan item.name ka autocomplete dega */}
 27                 <Text style={styles.name}>{item.name}</Text>                          # Text render ho raha hai
@@ -9479,8 +9478,8 @@ Jab aap `renderItem` function ke andar `item.` type karoge, VS Code turant dropd
 ```
 
 > **↓ Detailed Explanation:**
-> * **Line 23 — `ListRenderItem<Product>`:** Agar hum yeh nahi likhte, toh TS ko nahi pata lagta ki argument kya hai. FlatList by default `{ item, index, separators }` bhejta hai. `ListRenderItem` use karne se hum `item` ko automatically `Product` maan lete hain.
-> * **Line 38 — `keyExtractor={(item) => item.id}`:** FlatList internally items map karta hai. Agar ek item delete ya add ho, toh React ko kaise pata chalega konsa DOM update karna hai? `keyExtractor` har dabbe pe ek anokhi chit (string) chipka deta hai (jaise ID) taaki list randomly jump na kare.
+> * [[HL::**Line 23 — `ListRenderItem<Product>`:** Agar hum yeh nahi likhte, toh TS ko nahi pata lagta ki argument kya hai. FlatList by default `{ item, index, separators }` bhejta hai. `ListRenderItem` use karne se hum `item` ko automatically `Product` maan lete hain.::HL]]
+> * [[HL::**Line 38 — `keyExtractor={(item) => item.id}`:** FlatList internally items map karta hai. Agar ek item delete ya add ho, toh React ko kaise pata chalega konsa DOM update karna hai? `keyExtractor` har dabbe pe ek anokhi chit (string) chipka deta hai (jaise ID) taaki list randomly jump na kare.::HL]]
 > 
 > 
 
@@ -9641,11 +9640,11 @@ React Native ka `<Image />` component wahi smart frame hai, aur `ImageSourceProp
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Web developers aadat se `<img src="https://path" />` likhte hain. RN mein agar `source="https://path"` kiya, toh app crash ho jayegi kyunki Native bundler seedha string nahi samajhta.
-* **Solution:** `ImageSourcePropType` ensure karta hai ki external image ke liye aap hamesha ek object `{ uri: string }` banayein.
-* **What breaks if we don't use it?** Compile time pe koi error nahi aayega, lekin device pe image tag red/blank load hoga aur yellow warning throw karega JS console mein.
-* **✅ Kab use karo (Use this when):** - Jab aap kisi Custom Component mein image bhejne wala prop define kar rahe ho (e.g., `ProfileCard` jisme avatar photo aani hai).
-* **❌ Kab mat karo / Alternative prefer karo (Avoid when):** - Agar aap SVG (vector graphics) load kar rahe ho, toh native `<Image>` use mat karo, uske liye `react-native-svg` `(special library for vectors)` better hai kyunki SVG ka XML format is prop ke liye valid nahi hota.
+* [[HL::**Problem:** Web developers aadat se `<img src="https://path" />` likhte hain. RN mein agar `source="https://path"` kiya, toh app crash ho jayegi kyunki Native bundler seedha string nahi samajhta.::HL]]
+* [[HL::**Solution:** `ImageSourcePropType` ensure karta hai ki external image ke liye aap hamesha ek object `{ uri: string }` banayein.::HL]]
+* [[HL::**What breaks if we don't use it?** Compile time pe koi error nahi aayega, lekin device pe image tag red/blank load hoga aur yellow warning throw karega JS console mein.::HL]]
+* **✅ [[HL::Kab use karo (Use this when):** - Jab aap kisi Custom Component mein image bhejne wala prop define kar rahe ho (e.g., `ProfileCard` jisme avatar photo aani hai).::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo (Avoid when):** - Agar aap SVG (vector graphics) load kar rahe ho, toh native `<Image>` use mat karo, uske liye `react-native-svg` `(special library for vectors)` better hai kyunki SVG ka XML format is prop ke liye valid nahi hota.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -9665,19 +9664,19 @@ React Native mein 2 Image systems alag tareeke se kaam karte hain:
 1  import React from 'react';                                                            # React core
 2  import { View, Image, ImageSourcePropType, StyleSheet, Text } from 'react-native';    # UI + Types
 3 
-4  // 🖼️ STEP 1: Custom Component ka interface define karo
-5  interface ProfileCardProps {
-6      username: string;                                                                 # Text
-7      // avatarProp ek strict type hai jo sirf valid RN image sources accept karega
-8      avatar: ImageSourcePropType;                                                      # Important: Yahan string nahi, ImageSourcePropType liya hai
-9  }
-10
-11 // 🖼️ STEP 2: Component jo image render karega
-12 const ProfileCard: React.FC<ProfileCardProps> = ({ username, avatar }) => {         # Props ko destructure kiya
-13     return (
-14         <View style={styles.card}>
-15             {/* source prop accept karta hai exactly wahi jo avatar ka type hai */}
-16             <Image source={avatar} style={styles.image} />                            # Image component
+4  // 🖼️ [[HL::STEP 1: Custom Component ka interface define karo::HL]]
+[[HL::5  interface ProfileCardProps {::HL]]
+[[HL::6      username: string;                                                                 # Text::HL]]
+[[HL::7      // avatarProp ek strict type hai jo sirf valid RN image sources accept karega::HL]]
+[[HL::8      avatar: ImageSourcePropType;                                                      # Important: Yahan string nahi, ImageSourcePropType liya hai::HL]]
+[[HL::9  }::HL]]
+[[HL::10::HL]]
+[[HL::11 // 🖼️ STEP 2: Component jo image render karega::HL]]
+[[HL::12 const ProfileCard: React.FC<ProfileCardProps> = ({ username, avatar }) => {         # Props ko destructure kiya::HL]]
+[[HL::13     return (::HL]]
+[[HL::14         <View style={styles.card}>::HL]]
+[[HL::15             {/* source prop accept karta hai exactly wahi jo avatar ka type hai */}::HL]]
+[[HL::16             <Image source={avatar} style={styles.image::HL]]} />                            # Image component
 17             <Text style={styles.name}>{username}</Text>
 18         </View>
 19     );
@@ -9820,8 +9819,8 @@ Native `<Image>` component basic use ke liye thik hai, par scale pe (e.g., Insta
 **A:** `ImageSourcePropType` explicitly arrays ko allow karta hai. Aap array of objects pass kar sakte ho: `source={[{uri: '...1x', width: 50}, {uri: '...2x', width: 100}]}`. RN native engine auto-select kar lega screen density ke hisab se.
 * **Q:** Local image load hone pe delay kyun nahi hota?
 **A:** Kyunki build process ke dauran, `require` image ko optimize karke apk/ipa package (app ke folder) mein embedded resource ke roop mein rakh deta hai. Woh internet se download nahi hoti, directly flash storage se read hoti hai.
-* **Q:** Base64 image render karne ka format TS mein kaisa hota hai?
-**A:** Base64 (image ka textual code) remote image (uri) ke hi format ko use karta hai. Aap likhenge: `source={{ uri: 'data:image/png;base64,iVBORw0KGgo...' }}`. TS isko perfectly valid object manega.
+* [[HL::**Q:** Base64 image render karne ka format TS mein kaisa hota hai?::HL]]
+[[HL::**A:** Base64 (image ka textual code) remote image (uri) ke hi format ko use karta hai. Aap likhenge: `source={{ uri: 'data:image/png;base64,iVBORw0KGgo...' }}`. TS isko perfectly valid object manega.::HL]]
 * **Q:** `resizeMode` prop ka kaam kya hai Image ke context mein?
 **A:** Image ki defined width/height aur actual photo ke dimension alag ho sakte hain. `resizeMode` (e.g. `'cover'`, `'contain'`, `'stretch'`) batata hai ki photo us dibbe (container) mein kaise phelengi ya cut hongi, jaise CSS mein `object-fit` karta hai.
 
@@ -10375,9 +10374,9 @@ Yahan hum ek dynamic route `/product/:id` banayenge aur TypeScript use karke saf
 2  
 3  // Component: Product Detail Page
 4  const ProductDetail = () => {
-5      // useParams() = URL ke dynamic parts (jaise /product/:id mein id) ko extract karta hai
-6      // <{ id: string }> = TypeScript ko batata hai ki parameter ka naam 'id' hai aur woh string hoga
-7      const { id } = useParams<{ id: string }>(); 
+5      // [[HL::useParams() = URL ke dynamic parts (jaise /product/:id mein id) ko extract karta hai::HL]]
+[[HL::6      // <{ id: string }> = TypeScript ko batata hai ki parameter ka naam 'id' hai aur woh string hoga::HL]]
+[[HL::7      const { id } = useParams<{ id: string::HL]] }>(); 
 8      
 9      // useLocation() = Current URL ki poori jankari deta hai (jaise path, query parameters)
 10     const location = useLocation(); 
@@ -10437,10 +10436,10 @@ Current Path is: /product/999
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 7:** `const { id } = useParams<{ id: string }>();` — Yeh sabse important line hai. Agar hum TS use nahi karte toh `useParams()` return karta `Record<string, string | undefined>`, jisse bug aa sakta tha. `<{ id: string }>` generic pass karke humne force kiya ki humein strictly `id` chahiye jo URL se aayegi.
-* **Line 28:** `<Link to="/product/999">` — Humne `<a href="...">` use nahi kiya. `Link` internally `event.preventDefault()` call karta hai taaki browser default refresh na kare aur History API me naya URL push kar deta hai.
+* [[HL::**Line 7:** `const { id } = useParams<{ id: string }>();` — Yeh sabse important line hai. Agar hum TS use nahi karte toh `useParams()` return karta `Record<string, string | undefined>`, jisse bug aa sakta tha. `<{ id: string }>` generic pass karke humne force kiya ki humein strictly `id` chahiye jo URL se aayegi.::HL]]
+* [[HL::**Line 28:** `<Link to="/product/999">` — Humne `<a href="...">` use nahi kiya.::HL]] `Link` internally `event.preventDefault()` call karta hai taaki browser default refresh na kare aur History API me naya URL push kar deta hai.
 
 #### 🔒 8. Security-First Check
 
@@ -10468,17 +10467,17 @@ Current Path is: /product/999
 
 
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? [[HL::(Confusion Clarifier)::HL]]
 
-* **Confusion 1 — "Path Params vs Query Params mein kya farq hai?"**
-* **Galat soch:** `/product/123` aur `/product?id=123` dono same hi hain bas likhne ka tarika alag hai.
-* **Actually:** Path Params (`/123`) resource ki ID batate hain aur route definition (`/:id`) ka hissa hote hain (`useParams` se milte hain). Query Params (`?id=123`) filtering/sorting ke liye hote hain aur `useLocation().search` se milte hain.
-* **Prove karo:** Apne code mein route `<Route path="/product/:id" />` rakho. Ab URL mein `/product?id=123` dalo. Tumhara route match nahi karega! 404 aayega kyunki path parameter missing hai.
+* [[HL::**Confusion 1 — "Path Params vs Query Params mein kya farq hai?"**::HL]]
+* [[HL::**Galat soch:** `/product/123` aur `/product?id=123` dono same hi hain bas likhne ka tarika alag hai.::HL]]
+* [[HL::**Actually:** Path Params (`/123`) resource ki ID batate hain aur route definition (`/:id`) ka hissa hote hain (`useParams` se milte hain). Query Params (`?id=123`) filtering/sorting ke liye hote hain aur `useLocation().search` se milte hain.::HL]]
+* [[HL::**Prove karo:** Apne code mein route `<Route path="/product/:id" />` rakho. Ab URL mein `/product?id=123` dalo. Tumhara route match nahi karega! 404 aayega kyunki path parameter missing hai.::HL]]
 
 
-* **Confusion 2 — "Kya React Router actual server pe files dhundhta hai?"**
-* **Galat soch:** URL `/about` karne se router server se `about.html` file mangwata hai.
-* **Actually:** Nahi! Browser mein sirf `index.html` load hua tha. React Router browser ko "bewakoof" banata hai History API se taaki URL badla hua dikhe, par actually woh sirf JavaScript se alag UI dikha raha hai, server ke paas koi request nahi ja rahi hoti page ke liye.
+* [[HL::**Confusion 2 — "Kya React Router actual server pe files dhundhta hai?"**::HL]]
+* [[HL::**Galat soch:** URL `/about` karne se router server se `about.html` file mangwata hai.::HL]]
+* [[HL::**Actually:** Nahi! Browser mein sirf `index.html` load hua tha. React Router browser ko "bewakoof" banata hai History API se taaki URL badla hua dikhe, par actually woh sirf JavaScript se alag UI dikha raha hai, server ke paas koi request nahi ja rahi hoti page ke liye.::HL]]
 * **Prove karo:** Network tab kholo Developer tools (F12) mein. Ek route se doosre par click karo. Tum dekhoge ki wahan koi naya HTML page download nahi ho raha hai.
 
 
@@ -10605,13 +10604,13 @@ Yahi exact kaam `RootStackParamList` karta hai — yeh advance mein rules set ka
 
 #### 📖 3. Technical Definition (Interview Answer)
 
-* **Precise English:** In React Navigation with TypeScript, `RootStackParamList` acts as a central registry that defines the shape of parameters expected by each route. Using types like `NativeStackScreenProps`, it provides compile-time safety, ensuring screens are navigated to with the correct payload.
-* **Hinglish Simplification:** Mobile app mein screens ke beech move karne ko navigation kehte hain. TypeScript ke zariye hum ek dictionary (`RootStackParamList`) banate hain jo strictly check karti hai ki ek screen se doosre screen par jaate waqt koi required variable (jaise ID) miss na ho jaye.
+* [[HL::**Precise English:** In React Navigation with TypeScript, `RootStackParamList` acts as a central registry that defines the shape of parameters expected by each route. Using types like `NativeStackScreenProps`, it provides compile-time safety, ensuring screens are navigated to with the correct payload.::HL]]
+* [[HL::**Hinglish Simplification:** Mobile app mein screens ke beech move karne ko navigation kehte hain. TypeScript ke zariye hum ek dictionary (`RootStackParamList`) banate hain jo strictly check karti hai ki ek screen se doosre screen par jaate waqt koi required variable (jaise ID) miss na ho jaye.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** JavaScript (bina TS) mein tum `navigation.navigate('ProductDetail')` likh sakte ho bina `productId` pass kiye. App compile ho jayegi, user screen open karega, aur wahan API call fail ho jayegi kyunki `id` undefined hai — app directly crash (safed screen) ho jayegi.
-* **Solution:** TypeScript ko app banne se pehle (VS Code ke andar hi) pata chal jata hai ki tum parameter bhool gaye ho, aur woh code save hi nahi karne dega.
+* [[HL::**Problem:** JavaScript (bina TS) mein tum `navigation.navigate('ProductDetail')` likh sakte ho bina `productId`::HL]] [[HL::pass kiye. App compile ho jayegi, user screen open karega, aur wahan API call fail ho jayegi kyunki `id` undefined hai — app directly crash (safed screen) ho jayegi.::HL]]
+* [[HL::**Solution:** TypeScript ko app banne se pehle (VS Code ke andar hi) pata chal jata hai ki tum parameter bhool gaye ho, aur woh code save hi nahi karne dega.::HL]]
 * **What breaks if we don't use it?** Production mein random mobile app crashes aayenge jab users aisi screen pe poochenge jahan data missing hai.
 * **✅ Kab use karo (Use this when):** Har React Native (mobile app banane ka framework) project mein jahan React Navigation (mobile routing library) use ho raha ho.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** (Yeh concept har mobile app situation mein applicable hai — koi genuine avoid-scenario nahi hai agar tum TypeScript use kar rahe ho).
@@ -10636,37 +10635,37 @@ Yahan hum ek E-commerce app ka setup karenge jahan TypeScript humein force kareg
 3  import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack'; // Stack navigator — screens ko ek ke upar ek (stack) rakhne ke liye
 4  import { Text, View, Button } from 'react-native';                    // React Native core UI components — mobile screen par render karne ke liye
 5  
-6  // 1. Dictionaries of Routes: Yehi hai hamara "Ticket Checker" (E-commerce Use Case)
-7  export type RootStackParamList = {                                    // RootStackParamList — list of all screens aur unke required params
-8    Home: undefined;                                                    // Home screen ko open hone ke liye koi extra data (param) nahi chahiye
-9    ProductDetail: { productId: string };                               // ProductDetail ko open hone ke liye 'productId' (string) dena MANDATORY hai
-10 };
+6  // [[HL::1. Dictionaries of Routes: Yehi hai hamara "Ticket Checker" (E-commerce Use Case)::HL]]
+[[HL::7  export type RootStackParamList = {                                    // RootStackParamList — list of all screens aur unke required params::HL]]
+[[HL::8    Home: undefined;                                                    // Home screen ko open hone ke liye koi extra data (param) nahi chahiye::HL]]
+[[HL::9    ProductDetail: { productId: string };                               // ProductDetail ko open hone ke liye 'productId' (string) dena MANDATORY hai::HL]]
+[[HL::10::HL]] };
 11 
-12 // 2. Create the Stack
-13 const Stack = createNativeStackNavigator<RootStackParamList>();         // createNativeStackNavigator() — factory function jo TS map ke saath stack banata hai
+12 // [[HL::2. Create the Stack::HL]]
+[[HL::13 const Stack = createNativeStackNavigator<RootStackParamList>();         // createNativeStackNavigator() — factory function jo TS map ke saath stack banata hai::HL]]
 14 
-15 // --- HOME SCREEN ---
-16 // NavigationProp type define kiya taaki TS autocomplete de sake
-17 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>; 
+15 // --- [[HL::HOME SCREEN ---::HL]]
+[[HL::16 // NavigationProp type define kiya taaki TS autocomplete de sake::HL]]
+[[HL::17 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home::HL]]'>; 
 18 
 19 const HomeScreen = () => {
-20   // useNavigation() = navigation object deta hai jisse doosre screen pe ja sakein
-21   const navigation = useNavigation<NavigationProp>();                 
+20   // [[HL::useNavigation() = navigation object deta hai jisse doosre screen pe ja sakein::HL]]
+[[HL::21   const navigation = useNavigation<NavigationProp::HL]]>();                 
 22   return (
 23     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}> {/* View = Container, jaise web me <div> */}
 24       <Text>Home Screen</Text>                                        {/* Text = text dikhane ke liye, jaise <p> */}
 25       <Button 
 26         title="Go to Product 42" 
-27         // E-Commerce Use Case: Agar main { productId: '42' } hata doon, toh TS yahi error fekega!
-28         onPress={() => navigation.navigate('ProductDetail', { productId: '42' })} // navigate() = naye screen pe jump karna
-29       />
+27         // [[HL::E-Commerce Use Case: Agar main { productId: '42' } hata doon, toh TS yahi error fekega!::HL]]
+[[HL::28         onPress={() => navigation.navigate('ProductDetail', { productId: '42' })} // navigate() = naye screen pe jump karna::HL]]
+[[HL::29::HL]]       />
 30     </View>
 31   );
 32 };
 33 
 34 // --- PRODUCT DETAIL SCREEN ---
-35 // DetailRouteProp type define kiya taaki TS bata sake is route me kya aayega
-36 type DetailRouteProp = RouteProp<RootStackParamList, 'ProductDetail'>;
+35 // [[HL::DetailRouteProp type define kiya taaki TS bata sake is route me kya aayega::HL]]
+[[HL::36 type DetailRouteProp = RouteProp<RootStackParamList, 'ProductDetail::HL]]'>;
 37 
 38 const ProductDetailScreen = () => {
 39   // useRoute() = pichle screen se bheja gaya data (params) nikalne ke liye
@@ -10714,7 +10713,7 @@ Yahan hum ek E-commerce app ka setup karenge jahan TypeScript humein force kareg
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
 * **Line 9:** `ProductDetail: { productId: string };` — Yeh line E-commerce type safety ka dil hai. Agar main yahan likh doon `{ productId: string, discountCode?: string }` (question mark `?` matlab optional), toh discount code dena zaruri nahi hoga, par `productId` dena hamesha zaruri rahega.
-* **Line 17:** `NativeStackNavigationProp<RootStackParamList, 'Home'>` — Yeh type TypeScript ko batata hai ki "Yeh banda Home screen par khada hai, ab yeh kahan-kahan ja sakta hai aur wahan le jaane ke liye kya lagan padega, yeh check karo."
+* [[HL::**Line 17:** `NativeStackNavigationProp<RootStackParamList, 'Home'>` — Yeh type TypeScript ko batata hai ki "Yeh banda Home screen par khada hai, ab yeh kahan-kahan ja sakta hai aur wahan le jaane ke liye kya lagan padega, yeh check karo."::HL]]
 * **Line 40:** `const route = useRoute<DetailRouteProp>();` — Agar hum yeh generic (`<DetailRouteProp>`) pass na karein, toh `route.params` ka type `any` ho jayega. Phir `route.params.xyz` likhne par bhi editor error nahi dega, jo production app crash kar sakta hai.
 
 #### 🔒 8. Security-First Check
@@ -10823,10 +10822,10 @@ navigation.navigate('ProductDetail', { productId: 'abc' }) --> SUCCESS! ✅
 
 ```
 
-#### ❓ 17. Interview Q&A (FAQ)
+#### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
 
-* **Q:** What is the primary benefit of defining a `RootStackParamList`?
-* **A:** Sabse bada fayda Compile-Time Safety hai. Yeh developers ko navigate karte waqt zaroori parameters miss karne se rokti hai, jisse production app mein missing data ki wajah se hone wale "undefined" crashes zero ho jate hain.
+* [[HL::**Q:** What is the primary benefit of defining a `RootStackParamList`?::HL]]
+* [[HL::**A:** Sabse bada fayda Compile-Time Safety hai. Yeh developers ko navigate karte waqt zaroori parameters miss karne se rokti hai, jisse production app mein missing data ki wajah se hone wale "undefined" crashes zero ho jate hain.::HL]]
 
 
 * **Q:** How do you pass optional parameters to a screen?
@@ -10882,7 +10881,7 @@ navigation.navigate('ProductDetail', { productId: 'abc' }) --> SUCCESS! ✅
 
 Imagine karo tumhara app ek bada sa Office hai. Agar HR department ko IT department ko koi file deni hai, toh woh pehle ek peon ko bulayenge, woh Manager ko dega, Manager phir IT wale ko dega. Ise React mein **Prop Drilling** `(parent se child, phir uske child tak data lamba pass karna)` kehte hain — yeh slow aur annoying hai.
 
-**Zustand / Redux** ek central "Digital Database" ki tarah hai. Jisko bhi file (data) chahiye, woh seedha us database se nikal lega. Beech mein kisi aur component ko pareshan karne ki zaroorat nahi. Aur **TypeScript** yahan Security Guard ka kaam karta hai — woh check karta hai ki jo file tum database mein daal rahe ho, uska format exactly sahi hai ya nahi.
+[[HL::**Zustand / Redux** ek central "Digital Database" ki tarah hai. Jisko bhi file (data) chahiye, woh seedha us database se nikal lega. Beech mein kisi aur component ko pareshan karne ki zaroorat nahi. Aur **TypeScript** yahan Security Guard ka kaam karta hai — woh check karta hai ki jo file tum database mein daal rahe ho, uska format exactly sahi hai ya nahi.::HL]]
 
 #### 📖 3. Technical Definition (Interview Answer)
 
@@ -10922,11 +10921,11 @@ src/
 
 Global state update ka flow aise kaam karta hai:
 
-1. **(Component)** -> `dispatch(action)` call karta hai. (Dispatch matlab order bhejna).
-2. **(TypeScript)** -> Action ko check karta hai. Agar number chahiye aur tumne string bheji, toh wahi error de dega.
-3. **(Reducer)** -> Store ke andar ka function jo order receive karta hai aur existing state ko naye data ke hisaab se modify karta hai.
-4. **(Store)** -> Naya state update hota hai.
-5. **(UI Update)** -> Jo bhi component is store se connected tha, woh automatically re-render (refresh) ho jaata hai.
+1. [[HL::**(Component)** -> `dispatch(action)` call karta hai. (Dispatch matlab order bhejna).::HL]]
+2. [[HL::**(TypeScript)** -> Action ko check karta hai. Agar number chahiye aur tumne string bheji, toh wahi error de dega.::HL]]
+3. [[HL::**(Reducer)** -> Store ke andar ka function jo order receive karta hai aur existing state ko naye data ke hisaab se modify karta hai.::HL]]
+4. [[HL::**(Store)** -> Naya state update hota hai.::HL]]
+5. [[HL::**(UI Update)** -> Jo bhi component is store se connected tha, woh automatically re-render (refresh) ho jaata hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example (CRITICAL SECTION)
 
@@ -10960,7 +10959,7 @@ Global state update ka flow aise kaam karta hai:
 
 ```typescript
 # TypeScript 5.x | @reduxjs/toolkit 2.x
-1  import { createSlice, PayloadAction } from "@reduxjs/toolkit"  // createSlice() = Redux mein ek feature ka mini-store (slice) banata hai; PayloadAction = TS generic type jo action ke data ko type karta hai
+[[HL::1  import { createSlice, PayloadAction } from "@reduxjs/toolkit"  // createSlice() = Redux mein ek feature ka mini-store (slice) banata hai; PayloadAction = TS generic type jo action ke data ko type karta hai::HL]]
 2
 3  type CounterState = { value: number }                          // Blueprint: state mein ek 'value' naam ka number hoga
 4  const initialState: CounterState = { value: 0 }                // Shuruwati object, TypeScript ko pata hai yeh strictly CounterState type ka hai
@@ -10970,8 +10969,8 @@ Global state update ka flow aise kaam karta hai:
 8      initialState,                                              // Upar define kiya hua initialState assign kiya
 9      reducers: {                                                // reducers = Functions jo state change karne ka logic hold karte hain
 10         increment: (state) => { state.value += 1 },            // Immer library (RTK mein built-in) direct mutation (+=) allow karti hai bina naya object banaye
-11         addByAmount: (state, action: PayloadAction<number>) => { // action.payload mein purely ek 'number' aayega (TypeScript constraint)
-12             state.value += action.payload                      // state ki value ko action mein aayi hui value se badha do
+11         [[HL::addByAmount: (state, action: PayloadAction<number>) => { // action.payload mein purely ek 'number' aayega (TypeScript constraint)::HL]]
+[[HL::12             state.value += action.payload                      // state ki value ko action mein aayi hui value se badha do::HL]]
 13         }
 14     }
 15 })
@@ -10983,9 +10982,9 @@ Global state update ka flow aise kaam karta hai:
 
 *(koi output nahi — yeh RTK Slice successfully define ho gaya hai)*
 
-##### 🔬 Code Explanation (Line-by-Line detail)
+##### 🔬 Code Explanation [[HL::(Line-by-Line detail)::HL]]
 
-* **Line 11 (RTK):** `action: PayloadAction<number>` — Yeh sabse crucial step hai TS + Redux mein. Redux mein function call karte waqt jo data hum bhejte hain usse "payload" kehte hain. `PayloadAction<number>` TypeScript ko bol raha hai ki "agar koi `addByAmount("hello")` string ke saath call kare, toh compilation fail kardo, mujhe strictly number chahiye."
+* [[HL::**Line 11 (RTK):** `action: PayloadAction<number>` — Yeh sabse crucial step hai TS + Redux mein. Redux mein function call karte waqt jo data hum bhejte hain usse "payload" kehte hain. `PayloadAction<number>` TypeScript ko bol raha hai ki "agar koi `addByAmount("hello")` string ke saath call kare, toh compilation fail kardo, mujhe strictly number chahiye."::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -11013,18 +11012,18 @@ Global state update ka flow aise kaam karta hai:
 * **⚡ Consequences:** React ko pata nahi chalega ki state change hui hai, aur UI screen pe update nahi hoga (UI freeze bug).
 
 
-* **❌ Mistake 3: Typing 'any' in PayloadAction.** `action: PayloadAction<any>`.
-* **🤦 Why:** Jab TypeScript error deta hai toh beginners lazy hokar `any` laga dete hain.
-* **✅ The 'Pro' Way:** Hamesha exact type define karo `PayloadAction<UserObject>`.
-* **⚡ Consequences:** TypeScript ka poora purpose hi khatam ho jayega, run-time error aayenge.
+* **❌ [[HL::Mistake 3: Typing 'any' in PayloadAction.** `action: PayloadAction<any>`.::HL]]
+* [[HL::**🤦 Why:** Jab TypeScript error deta hai toh beginners lazy hokar `any` laga dete hain.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Hamesha exact type define karo `PayloadAction<UserObject>`.::HL]]
+* [[HL::**⚡ Consequences:** TypeScript ka poora purpose hi khatam ho jayega, run-time error aayenge.::HL]]
 
 
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? [[HL::(Confusion Clarifier)::HL]]
 
-* **Confusion 1 — "Redux, Zustand aur Context API mein kya fark hai? Sab toh ek hi kaam karte hain!"**
-* **Galat soch:** Context API Redux ka complete replacement hai.
-* **Actually:** Context API sirf data paas karne ka rasta hai, state manager nahi. Agar Context ki value change hoti hai, toh uske andar ke SAARE components re-render hote hain (slow!). Zustand/Redux targeted re-rendering karte hain (fast!).
+* [[HL::**Confusion 1 — "Redux, Zustand aur Context API mein kya fark hai? Sab toh ek hi kaam karte hain!"**::HL]]
+* [[HL::**Galat soch:** Context API Redux ka complete replacement hai.::HL]]
+* [[HL::**Actually:** Context API sirf data paas karne ka rasta hai, state manager nahi. Agar Context ki value change hoti hai, toh uske andar ke SAARE components re-render hote hain (slow!). Zustand/Redux targeted re-rendering karte hain (fast!).::HL]]
 * **Prove karo:** Ek Context API banao aur usme array rakho. Ek component mein add button banao. Tum dekhoge ki saare components uselessly re-render ho rahe hain (React DevTools mein highlight hoga). Zustand mein Slectors use karke dekhna, sirf zaroorat wala part re-render hoga.
 
 
@@ -11904,7 +11903,7 @@ VS Code editor mein jab tum apna mouse `CheckoutData` type par hover karoge, toh
 
 
 * **Q: Agar mere paas ek field optional karni hai form mein (jaise referal code), to Zod me aur inference me kya change ayega?**
-* **A:** Zod mein tum likhoge `referral: z.string().optional()`. Zod infer automatic base par TS type mein `referral?: string | undefined` lagayega. Hame kuch bhi manual configure nahi karna padega.
+* **A:** Zod mein tum likhoge `referral: z.string().optional()`. Zod infer automatic base par TS type mein `referral?: string | undefined` lagayega. [[HL::Hame::HL]] kuch bhi manual configure nahi karna padega.
 
 
 
@@ -11973,15 +11972,15 @@ TypeScript mein `<T>` wahi khali dabba hai — jo data daaloge, wahi safely wapa
 
 #### 📖 3. Technical Definition (Interview Answer)
 
-* **Precise English:** Generics provide variables to types. A generic allows you to write a component or function that can work over a variety of types rather than a single one, while preserving strict type safety.
-* **Hinglish Simplification:** Ek aisi type-variable banana jo function call karte waqt decide hoti hai ki woh `string` hogi, `number` hogi ya kuch aur.
+* [[HL::**Precise English:** Generics provide variables to types. A generic allows you to write a component or function that can work over a variety of types rather than a single one, while preserving strict type safety.::HL]]
+* [[HL::**Hinglish Simplification:** Ek aisi type-variable banana jo function call karte waqt decide hoti hai ki woh `string` hogi, `number` hogi ya kuch aur.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar tumhe ek function likhna hai jo ek array ka pehla item return kare. Agar array strings ka hai, toh function `string` return kare. Agar array numbers ka hai, toh `number` return kare. Bina Generics ke, tumhe har type ke liye alag function likhna padega ya phir `any` (TypeScript ka sabse bada dushman — jo saari safety khatam kar deta hai) use karna padega.
-* **Solution:** Generics `<T>` allow karta hai ki function ek hi ho, aur type automatically input ke hisaab se adapt ho jaye.
-* **What breaks if we don't use it?:** Code repetition bohot badh jayega, ya phir `any` use karne se production mein achanak "undefined is not a function" waale crashes aayenge kyunki type safety chali gayi thi.
-* **✅ Kab use karo:** Jab ek hi logic multiple data structures ya types par apply karna ho (e.g., API calls, sorting arrays, caching data).
+* [[HL::**Problem:** Agar tumhe ek function likhna hai jo ek array ka pehla item return kare. Agar array strings ka hai, toh function `string` return kare. Agar array numbers ka hai, toh `number` return kare. Bina Generics ke, tumhe har type ke liye alag function likhna padega ya phir `any` (TypeScript ka sabse bada dushman — jo saari safety khatam kar deta hai) use karna padega.::HL]]
+* [[HL::**Solution:** Generics `<T>` allow karta hai ki function ek hi ho, aur type automatically input ke hisaab se adapt ho jaye.::HL]]
+* [[HL::**What breaks if we don't use it?:** Code repetition bohot badh jayega, ya phir `any` use karne se production mein achanak "undefined is not a function" waale crashes aayenge kyunki type safety chali gayi thi.::HL]]
+* **✅ [[HL::Kab use karo:** Jab ek hi logic multiple data structures ya types par apply karna ho (e.g., API calls, sorting arrays, caching data).::HL]]
 * **❌ Kab mat karo / Alternative prefer karo:** Jab function specifically ek hi type ke liye bana ho (jaise `calculateTax` function sirf `number` lega — yahan generics overkill aur bewakoofi hai).
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -12000,7 +11999,7 @@ TypeScript ka compiler (code check karke JavaScript mein convert karne wala tool
 ```typescript
 // TypeScript 5.x | Node.js 20+
 1  // Interface define kar rahe hain TiffinBox ke liye jo type <T> accept karega
-2  interface TiffinBox<T> {                           // <T> ek generic type parameter hai
+2  interface TiffinBox<T> {                           // <T> ek [[HL::generic::HL]] type parameter hai
 3      item: T;                                       // 'item' ka type wahi hoga jo <T> mein aayega
 4      isHot: boolean;                                // isHot hamesha boolean rahega
 5  }
@@ -12028,13 +12027,13 @@ TypeScript ka compiler (code check karke JavaScript mein convert karne wala tool
 PASTA
 404.00
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
 * **Line 2 — `interface TiffinBox<T>`:** Interface (object ka naksah/blueprint) bana rahe hain. `<T>` ka matlab hai ki yeh interface tab tak complete nahi hai jab tak isko koi type na diya jaye.
 * **Line 8 — `function packLunch<T>(food: T): TiffinBox<T>`:**
 * `packLunch<T>`: Function ka naam aur uska generic declaration.
 * `food: T`: Function jo argument lega uska type `T` hoga.
-* `: TiffinBox<T>`: Function jo wapas (return) karega, woh ek TiffinBox object hoga aur uske andar ka item wahi type `T` ka hoga.
+* [[HL::`: TiffinBox<T>`: Function jo wapas (return) karega, woh ek TiffinBox object hoga aur uske andar ka item wahi type `T` ka hoga.::HL]]
 
 
 * **Line 20 — Type Inference:** Humne `packLunch<number>(404)` nahi likha. TypeScript smart hai, usne `404` dekha aur khud guess kar liya ki `T` ek `number` hai. Isko 'Type Inference' kehte hain.
@@ -12063,17 +12062,17 @@ PASTA
 
 
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? [[HL::(Confusion Clarifier)::HL]]
 
-* **Confusion 1 — "Kya T koi special word hai? Mujhe T hi likhna padega?"**
+* **Confusion 1 — "Kya T::HL]] [[HL::koi special word hai? Mujhe T hi likhna padega?"**
 * **Galat soch:** Beginners sochte hain TS mein `T` ek keyword hai.
-* **Actually:** `T` sirf ek variable name hai (jaise math mein `x`). Tum `<Data>`, `<Item>`, ya `<MyType>` kuch bhi likh sakte ho. Conventionally log `T` (Type), `U`, `V` use karte hain.
+* [[HL::**Actually:** `T` sirf ek variable name hai (jaise math mein `x`). Tum `<Data>`, `<Item>`, ya `<MyType>` kuch bhi likh sakte ho. Conventionally log `T` (Type), `U`, `V` use karte hain.::HL]]
 * **Prove karo:** Upar waale code mein `interface TiffinBox<Khana>` likh kar dekho, code perfectly chalega.
 
 
-* **Confusion 2 — "Generics aur 'any' mein kya fark hai? Dono toh koi bhi type le rahe hain."**
-* **Galat soch:** `any` = `<T>`.
-* **Actually:** `any` type checking ko "band" kar deta hai. `<T>` type checking ko "dynamic" banata hai par "on" rakhta hai. Agar tum generic mein `string` pass karoge, toh TS sure karega ki aage sirf string methods hi call hon. `any` sab kuch allow kar dega.
+* [[HL::**Confusion 2 — "Generics aur 'any' mein kya fark hai? Dono toh koi bhi type le rahe hain."**::HL]]
+* [[HL::**Galat soch:** `any` = `<T>`.::HL]]
+* [[HL::**Actually:** `any` type checking ko "band" kar deta hai. `<T>` type checking ko "dynamic" banata hai par "on" rakhta hai. Agar tum generic mein `string` pass karoge, toh TS sure karega ki aage sirf string methods hi call hon. `any` sab kuch allow kar dega.::HL]]
 * **Prove karo:** `function test(arg: any) { arg.map() }` — yeh TS error nahi dega, chahe input number ho (aur runtime pe crash hoga). Generics pakad lega.
 
 
@@ -12167,13 +12166,13 @@ Generic React component ek Universal Vending Machine hai, jiska UI code ek baar 
 #### 📖 3. Technical Definition (Interview Answer)
 
 * **Precise English:** Generic React Components utilize TypeScript generics to infer the type of the passed props dynamically. This ensures that event handlers like `onChange` or `onSelect` return the exact same type as the provided data array.
-* **Hinglish Simplification:** Ek React component jisme hum data (array) pass karein, aur TypeScript khud samajh jaye ki jab item click hoga, toh kis type ka data return hoga.
+* [[HL::**Hinglish Simplification:** Ek React component jisme hum data (array) pass karein, aur TypeScript khud samajh jaye ki jab item click hoga, toh kis type ka data return hoga.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** E-commerce dashboard mein tumhe Dropdown chahiye: ek Categories ke liye, ek Brands ke liye, ek Users ke liye. Agar Dropdown generic nahi hai, toh `onSelect` hamesha `any` type dega, jisse tumhein manually cast karna padega (`as Category`). Yeh error-prone hai.
+* [[HL::**Problem:** E-commerce dashboard mein tumhe Dropdown chahiye: ek Categories ke liye, ek Brands ke liye, ek Users ke liye. Agar Dropdown generic nahi hai, toh `onSelect` hamesha `any` type dega, jisse tumhein manually cast karna padega (`as Category`). Yeh error-prone hai.::HL]]
 * **Solution:** `<Dropdown<T>>` banalo. Agar tumne usme categories ka array diya, toh `onSelect(item)` mein `item` automatically `Category` type ka ho jayega.
-* **✅ Kab use karo:** UI Libraries banate waqt, Data Tables, Dropdowns, Selects, Autocomplete components, ya Lists banate waqt.
+* [[HL::**✅ Kab use karo:** UI Libraries banate waqt, Data Tables, Dropdowns, Selects, Autocomplete components, ya Lists banate waqt.::HL]]
 * **❌ Kab mat karo / Alternative prefer karo:** Jab component specific layout ke liye ho (jaise `HeaderComponent` ya `FooterComponent`) wahan data dynamic nahi hota, toh generics add karna bewakoofi hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -12405,12 +12404,12 @@ Tumhe har naye order ke liye naya Menu card chhapne ki zaroorat nahi hai, base m
 #### 📖 3. Technical Definition (Interview Answer)
 
 * **Precise English:** Utility types are globally available TypeScript generics that facilitate type transformations. They allow you to derive new types from existing ones without duplicating code, strictly maintaining the Single Source of Truth principle.
-* **Hinglish Simplification:** TypeScript ke aise ready-made tools jo tumhare purane types ki shape badal dete hain (kuch properties hatana, add karna, ya optional banana) bina unhe wapas manually type kiye.
+* [[HL::**Hinglish Simplification:** TypeScript ke aise ready-made tools jo tumhare purane types ki shape badal dete hain (kuch properties hatana, add karna, ya optional banana) bina unhe wapas manually type kiye.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Ek e-commerce app mein `Product` model mein 20 fields hain (id, name, price, reviews, sellerInfo, etc.). Jab tum "Cart" mein item daalte ho, toh tumhe sirf basic details chahiye (reviews aur seller info nahi chahiye). Agar tum naya `CartItem` interface banaoge, toh code duplicate hoga. Kal ko agar `price` ka type change hua, toh 2 jagah update karna padega.
-* **Solution:** `Omit<Product, 'reviews' | 'sellerInfo'>` use karo. Base type ek hi rahega, derive karke naya type ban jayega.
+* [[HL::**Problem:** Ek e-commerce app mein `Product` model mein 20 fields hain (id, name, price, reviews, sellerInfo, etc.). Jab tum "Cart" mein item daalte ho, toh tumhe sirf basic details chahiye (reviews aur seller info nahi chahiye). Agar tum naya `CartItem` interface banaoge, toh code duplicate hoga. Kal ko agar `price` ka type change hua, toh 2 jagah update karna padega.::HL]]
+* [[HL::**Solution:** `Omit<Product, 'reviews' | 'sellerInfo'>` use karo. Base type ek hi rahega, derive karke naya type ban jayega.::HL]]
 * **What breaks if we don't use it?:** Code duplication (DRY principle tootega). Types out of sync ho jayenge (database mein field update hogi, par frontend ka type purana hi reh jayega).
 * **✅ Kab use karo:** API payloads (jaise user update karne ke liye `Partial<User>`), ya lightweight versions of heavy models banane ke liye.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab derived type ka base type se koi logical relation na ho. (e.g., `Admin` ko `Omit<User, ...>` karke banana galat hai agar unki definitions completely alag direction mein evolve hone waali hain).
@@ -12430,19 +12429,19 @@ TypeScript internally object ke har key par loop lagata hai (mapped types ke thr
 
 ```typescript
 // TypeScript 5.x | Node.js 20+
-1  // 1. Base Type banaya (Heavy Data)
-2  interface Product {                                           // Product ka main naksah (blueprint)
-3      id: number;                                               // product ki unique ID
-4      name: string;                                             // product ka naam
-5      price: number;                                            // product ki keemat
-6      reviews: string[];                                        // customer reviews (heavy data)
-7  }
-8  
-9  // 2. Omit: 'reviews' hata kar lightweight CartItem banaya (E-commerce Use Case)
-10 type CartItem = Omit<Product, 'reviews'>;                     // Omit = Product lo, aur usme se 'reviews' key nikal do
+[[HL::1  // 1. Base Type banaya (Heavy Data)::HL]]
+[[HL::2  interface Product {                                           // Product ka main naksah (blueprint)::HL]]
+[[HL::3      id: number;                                               // product ki unique ID::HL]]
+[[HL::4      name: string;                                             // product ka naam::HL]]
+[[HL::5      price: number;                                            // product ki keemat::HL]]
+[[HL::6      reviews: string[];                                        // customer reviews (heavy data)::HL]]
+[[HL::7  }::HL]]
+[[HL::8  ::HL]]
+[[HL::9  // 2. Omit: 'reviews' hata kar lightweight CartItem banaya (E-commerce Use Case)::HL]]
+[[HL::10 type CartItem = Omit<Product, 'reviews'>;                     // Omit = Product lo, aur usme se 'reviews' key nikal do::HL]]
 11 
-12 // 3. Partial: Update karne ke liye sab kuch optional (?) banaya
-13 type ProductUpdate = Partial<Product>;                        // Partial = Product ki saari keys ko optional bana do (e.g., id?, name?, price?)
+12 // [[HL::3. Partial: Update karne ke liye sab kuch optional (?) banaya::HL]]
+[[HL::13 type ProductUpdate = Partial<Product>;                        // Partial = Product ki saari keys ko optional bana do (e.g., id?, name?, price?)::HL]]
 14 
 15 // 4. Record: Object mapping banayi (Dictionary jaisa)
 16 // Record<KeyType, ValueType>
@@ -12472,11 +12471,11 @@ TypeScript internally object ke har key par loop lagata hai (mapped types ke thr
 
 Cart item ready: Sneakers
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 10 — `type CartItem = Omit<Product, 'reviews'>`:** Humne naya type banaya. `Omit` ek built-in generic hai jo 2 parameters leta hai: pehla base type (`Product`), aur dusra union of keys jo remove karni hain (`'reviews'`).
-* **Line 17 — `Record<string, CartItem>`:** Yeh type dictionary/hash-map banane ke kaam aata hai. Iska matlab hai: `cartState` ek object hoga, jiske keys hamesha string honge, aur unki values hamesha `CartItem` hongi. `cartState['shoe_1'] = itemToBuy` perfectly valid hai.
-* **Line 29 — `ReturnType<typeof calculateTotal>`:** `typeof` (TypeScript operator jo variables/functions ka type read karta hai) se function ka type nikala, aur `ReturnType` ne us function ke output (number) ko extract kar liya.
+* [[HL::**Line 10 — `type CartItem = Omit<Product, 'reviews'>`:** Humne naya type banaya. `Omit` ek built-in generic hai jo 2 parameters leta hai: pehla base type (`Product`), aur dusra union of keys jo remove karni hain (`'reviews::HL]]'`).
+* **Line 17 — `Record<string, CartItem>`:** Yeh type dictionary/hash-map banane ke kaam aata hai. Iska matlab hai: `cartState` ek object hoga, jiske keys hamesha string honge, aur unki values hamesha [[HL::`CartItem` hongi. `cartState['shoe_1'] = itemToBuy` perfectly valid hai.::HL]]
+* [[HL::**Line 29 — `ReturnType<typeof calculateTotal>`:** `typeof` (TypeScript operator jo variables/functions ka type read karta hai) se function ka type nikala, aur `ReturnType` ne us function ke output (number) ko extract kar liya.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -12502,11 +12501,11 @@ Cart item ready: Sneakers
 
 
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? [[HL::(Confusion Clarifier)::HL]]
 
 * **Confusion 1 — "Pick aur Omit mein kab kya use karu?"**
 * **Galat soch:** Dono same hi toh hain, kuch bhi use kar lo.
-* **Actually:** Depend karta hai list kitni badi hai. Agar 20 fields mein se 18 chahiye, toh `Omit<Model, 'f1' | 'f2'>` use karo. Agar 20 mein se sirf 2 chahiye, toh `Pick<Model, 'f1' | 'f2'>` use karo. Hamesha wo choose karo jisme code kam likhna pade.
+* [[HL::**Actually:** Depend karta hai list kitni badi hai. Agar 20 fields mein se 18 chahiye, toh `Omit<Model, 'f1' | 'f2'>` use karo. Agar 20 mein se sirf 2 chahiye, toh `Pick<Model, 'f1' | 'f2'>` use karo. Hamesha wo choose karo jisme code kam likhna pade.::HL]]
 * **Prove karo:** `Omit<Product, 'f1'|'f2'|'f3'|'f4'|'f5' ...>` likhna bewakoofi hai agar aapko sirf 2 fields chahiye.
 
 
@@ -12803,7 +12802,7 @@ T extends Promise<infer R> ? R : T
 
 Socho ek famous restaurant ka Master Menu hai (yeh tumhara base Type hai).
 
-1. **`keyof` kya hai?** Tumne waiter se poocha: "Bhai, sabziyon ke sirf NAAM bata de, ingredients mat bata." Waiter ne ek list pakda di: "Paneer, Dal, Aloo". Yeh `keyof` hai — jo sirf menu ke left-side wale naam nikal lata hai.
+1. [[HL::**`keyof`::HL]] kya hai?** Tumne waiter se poocha: "Bhai, sabziyon ke sirf NAAM bata de, ingredients mat bata." Waiter ne ek list pakda di: "Paneer, Dal, Aloo". Yeh `keyof` hai — jo sirf menu ke left-side wale naam nikal lata hai.
 2. **Mapped Types kya hai?** Ab tumne waiter ko bola: "In saare naamon ka ek naya 'Half-Plate' menu bana do, jisme sabki quantity aadhi ho." Waiter ne us "Paneer, Dal, Aloo" ki list pe loop lagaya aur automatically ek naya menu bana diya bina ek-ek item type kiye. Yeh Mapped Types hai — Typescript mein types ko copy-paste-modify karne ka automated machine.
 
 #### 📖 3. Technical Definition (Interview Answer)
@@ -12834,22 +12833,22 @@ TypeScript ka compiler ise teen steps mein break karta hai:
 
 ```typescript
 // TypeScript 5.x | Node.js 20+
-1  // 1. Ek Master Theme Interface (Design System ka base)
-2  interface ThemeColors {                                           // Base object type jisme colors defined hain
-3      primary: string;                                              // Primary color (e.g., blue)
-4      secondary: string;                                            // Secondary color (e.g., gray)
-5      danger: string;                                               // Danger color (e.g., red)
-6  }
-7  
-8  // 2. keyof operator ka magic dekho
-9  // ThemeKeys ka type ban jayega: "primary" | "secondary" | "danger"
-10 type ThemeKeys = keyof ThemeColors;                               // keyof = ThemeColors ke saare property names ko extract karke Union banao
-11 
-12 // 3. Mapped Type ka use: Naya type banana
-13 // Hum chahte hain ki ek ThemeConfig bane jisme inhi colors ko enable/disable (boolean) kar sakein
-14 type ThemeConfig = {                                              // Naya object type shuru
-15     [K in keyof ThemeColors]: boolean;                            // [K in ...]: Loop chalao har key par. K variable hai. Value ko hamesha 'boolean' bana do.
-16 };
+[[HL::1  // 1. Ek Master Theme Interface (Design System ka base)::HL]]
+[[HL::2  interface ThemeColors {                                           // Base object type jisme colors defined hain::HL]]
+[[HL::3      primary: string;                                              // Primary color (e.g., blue)::HL]]
+[[HL::4      secondary: string;                                            // Secondary color (e.g., gray)::HL]]
+[[HL::5      danger: string;                                               // Danger color (e.g., red)::HL]]
+[[HL::6  }::HL]]
+[[HL::7  ::HL]]
+[[HL::8  // 2. keyof operator ka magic dekho::HL]]
+[[HL::9  // ThemeKeys ka type ban jayega: "primary" | "secondary" | "danger"::HL]]
+[[HL::10 type ThemeKeys = keyof ThemeColors;                               // keyof = ThemeColors ke saare property names ko extract karke Union banao::HL]]
+[[HL::11 ::HL]]
+[[HL::12 // 3. Mapped Type ka use: Naya type banana::HL]]
+[[HL::13 // Hum chahte hain ki ek ThemeConfig bane jisme inhi colors ko enable/disable (boolean) kar sakein::HL]]
+[[HL::14 type ThemeConfig = {                                              // Naya object type shuru::HL]]
+[[HL::15     [K in keyof ThemeColors]: boolean;                            // [K in ...]: Loop chalao har key par. K variable hai. Value ko hamesha 'boolean' bana do.::HL]]
+[[HL::16::HL]] };
 17 
 18 // 4. Iska fayda runtime par:
 19 // TS strict check karega ki sirf wahi keys allow hon jo ThemeColors mein thi
@@ -13041,9 +13040,9 @@ Agar tum bina damage check kiye seedha laptop on karne ki koshish karoge, toh sh
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** JavaScript ka default `fetch` API (browser ka built-in function jo network request karta hai) itna dumb hai ki woh kisi bhi response ko `any` ya `unknown` maan leta hai. Agar network fail ho gaya aur tumne `response.price` print karne ki koshish ki, toh poori screen crash ho jayegi (runtime error).
-* **Solution:** Hum ek custom `ApiResponse<T>` banayenge. Yeh TypeScript ko explicitly bata dega ki agar `error` present hai, toh `data` null hoga. Yeh developer ko majboor karega `if (error)` check likhne ke liye.
-* **What breaks if we don't use it?** Production mein tumhari app achanak blank white screen dikhayegi ("Cannot read properties of undefined") kyunki backend ne data ki jagah HTML error page bhej diya hoga.
+* [[HL::**Problem:** JavaScript ka default `fetch` API (browser ka built-in function jo network request karta hai) itna dumb hai ki woh kisi bhi response ko `any` ya `unknown` maan leta hai. Agar network fail ho gaya aur tumne `response.price` print karne ki koshish ki, toh poori screen crash ho jayegi (runtime error).::HL]]
+* [[HL::**Solution:** Hum ek custom `ApiResponse<T>` banayenge. Yeh TypeScript ko explicitly bata dega ki agar `error` present hai, toh `data` null hoga. Yeh developer ko majboor karega `if (error)` check likhne ke liye.::HL]]
+* [[HL::**What breaks if we don't use it?** Production mein tumhari app achanak blank white screen dikhayegi ("Cannot read properties of undefined") kyunki backend ne data ki jagah HTML error page bhej diya hoga.::HL]]
 * **✅ Kab use karo (Use this when):** - Har baar jab tum external backend, database, ya 3rd-party API (jaise Stripe, PayPal) se data fetch kar rahe ho.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** - Jab tum internal pure functions (jo sirf maths ya logic karte hain, internet se baat nahi karte) likh rahe ho. Wahan direct strict return types best hain, wrapper overkill (unnecessary extra code) hoga.
 
@@ -13069,8 +13068,8 @@ Yahan hum tumhara **E-commerce Use Case** implement kar rahe hain. Dhyan se comm
 ```typescript
 // TypeScript 5.x | Node.js 18+ (Browser fetch API)
 
-1  // Generic Type T ka matlab hai "Template" ya "Placeholder" - baad mein hum batayenge ki kya data aayega
-2  type ApiResponse<T> = {                              // ApiResponse ek custom type hai
+1  // [[HL::Generic Type T ka matlab hai "Template" ya "Placeholder" - baad mein hum batayenge ki kya data aayega::HL]]
+[[HL::2  type ApiResponse<T> = {                              // ApiResponse ek custom type::HL]] hai
 3      data: T | null;                                  // data ya toh valid 'T' type ka hoga, ya phir null (kuch nahi)
 4      error: string | null;                            // error ya toh string message hoga, ya null
 5  };
@@ -13082,9 +13081,9 @@ Yahan hum tumhara **E-commerce Use Case** implement kar rahe hain. Dhyan se comm
 11     price: number;                                   // Product ka daam
 12 };
 13 
-14 // Hamara Custom Wrapper Function
-15 // async function hamesha ek Promise return karta hai (Promise matlab future mein aane wala data)
-16 async function safeFetch<T>(url: string): Promise<ApiResponse<T>> { 
+14 // [[HL::Hamara Custom Wrapper Function::HL]]
+[[HL::15 // async function hamesha ek Promise return karta hai (Promise matlab future mein aane wala data)::HL]]
+[[HL::16 async function safeFetch<T>(url: string): Promise<ApiResponse<T::HL]]>> { 
 17     try {                                            // try block: Code ko safely run karne ki koshish karo
 18         const response = await fetch(url);           // fetch() = network request bhejo. await = wait karo jab tak reply na aaye
 19         
@@ -13252,14 +13251,14 @@ Oops! Network failed or parsing error
 
 ```
 
-#### ❓ 17. Interview Q&A (FAQ)
+#### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
 
 * **Q: JavaScript ka fetch(), HTTP 404/500 errors ko catch block mein kyun nahi bhejta?**
-* **A:** Kyunki `fetch` design hi aise kiya gaya hai ki agar usko server se koi bhi answer mila (chahe woh fail hone ka answer hi kyun na ho), toh woh request ko 'successful' maanta hai. Catch block sirf tab trigger hota hai jab internet disconnected ho ya request cancel ho jaye. Isliye wrapper mein `!response.ok` check lagana padta hai.
+* [[HL::**A:** Kyunki `fetch` design hi aise kiya gaya hai ki agar usko server se koi bhi answer mila (chahe woh fail hone ka answer hi kyun na ho), toh woh request ko 'successful' maanta hai. Catch block sirf tab trigger hota hai jab internet disconnected ho ya request cancel ho jaye. Isliye wrapper mein `!response.ok` check lagana padta hai.::HL]]
 
 
-* **Q: Generic type `<T>` ka exactly kya role hai hamare API wrapper mein?**
-* **A:** Generic `<T>` wrapper ko reusable banata hai. Agar yeh nahi hota, toh humein `User` ke liye `fetchUser`, `Product` ke liye `fetchProduct` alag alag functions likhne padte. `<T>` ka use karke hum ek hi function banate hain aur dynamically type set karte hain jaise `safeFetch<User>(url)`.
+* [[HL::**Q: Generic type `<T>` ka exactly kya role hai hamare API wrapper mein?**::HL]]
+* [[HL::**A:** Generic `<T>` wrapper ko reusable banata hai. Agar yeh nahi hota, toh humein `User` ke liye `fetchUser`, `Product` ke liye `fetchProduct` alag alag functions likhne padte. `<T>` ka use karke hum ek hi function banate hain aur dynamically type set karte hain jaise `safeFetch<User>(url)`.::HL]]
 
 
 * **Q: `T | null` aur Optional properties `data?: T` mein kya fark hai in ApiResponse?**
@@ -13364,7 +13363,7 @@ Yahan hum ek real-world E-commerce cart update ka function banayenge jahan alag-
 23     } catch (err: unknown) {                         // err: unknown = hume nahi pata kya throw hua
 24         
 25         // STEP 1: Check karo ki kya yeh humara custom DatabaseError hai
-26         if (err instanceof DatabaseError) {          // instanceof = check karta hai ki err, DatabaseError blueprint se bana hai kya
+26         if (err [[HL::instanceof DatabaseError) {          // instanceof = check karta hai ki err, DatabaseError blueprint se bana hai kya::HL]]
 27             console.error(`DB FAIL [Code: ${err.code}]: ${err.message}`); // Yahan err.code valid hai kyunki TS ne narrow kar diya
 28             return;
 29         }
@@ -13375,8 +13374,8 @@ Yahan hum ek real-world E-commerce cart update ka function banayenge jahan alag-
 34             return;
 35         }
 36         
-37         // STEP 3: Fallback (kya pata kisi ne string throw ki ho?)
-38         if (typeof err === "string") {               // typeof = check karta hai data ka basic type (string, number, boolean)
+37         // [[HL::STEP 3: Fallback (kya pata kisi ne string throw ki ho?)::HL]]
+[[HL::38         if (typeof err === "string") {               // typeof = check karta hai data ka basic type (string, number, boolean)::HL]]
 39             console.error(`STRING ERROR: ${err}`);   // Yahan direct err print karenge
 40             return;
 41         }
@@ -13581,8 +13580,8 @@ Ab agar jhoolha jhulne wale ka balance bigad jaye aur woh gir jaye, toh poora ci
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** React ka default rule hai ki agar pure page mein ek chhote se component mein bhi runtime error aayi (jaise product.price undefined ho gaya), toh React poore page ke HTML ko gayab (unmount) kar deta hai. User ko sirf ek blank white screen dikhti hai.
-* **Solution:** Hum React Error Boundary banate hain. TypeScript mein hum explicitly define karte hain ki is net ke paas kya Props (inputs jo component ko milte hain) aayenge aur iska State (internal memory) kaisa dikhega.
+* [[HL::**Problem:** React ka default rule hai ki agar pure page mein ek chhote se component mein bhi runtime error aayi (jaise product.price undefined ho gaya), toh React poore page ke HTML ko gayab (unmount) kar deta hai. User ko sirf ek blank white screen dikhti hai.::HL]]
+* [[HL::**Solution:**::HL]] Hum React Error Boundary banate hain. TypeScript mein hum explicitly define karte hain ki is net ke paas kya Props (inputs jo component ko milte hain) aayenge aur iska State (internal [[HL::memory) kaisa dikhega.::HL]]
 * **What breaks if we don't use it?** Agar tumhare e-commerce app mein checkout page par ek chhota sa delivery badge loading fail ho gaya, toh poora checkout button aur cart gayab ho jayega. User order hi nahi kar payega.
 * **✅ Kab use karo (Use this when):** - Apne main layout components ke upar (jaise Sidebar, Navbar ke alag blocks), payment components ke aas-paas, aur 3rd-party widgets ke upar.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** - Event handlers (jaise button click functions) ya async requests (fetch calls) ke andar ke errors ke liye yeh kaam nahi karta. Unke liye Subtopic 2 wala `try/catch` hi use karna padega.
@@ -13872,11 +13871,11 @@ End-to-End Type Safety ek aisa automatic system hai ki jaise hi Backend team duk
 * **Precise English:** End-to-End (E2E) type safety ensures that data contract schemas defined on the server-side automatically propagate to the client-side without manual duplication, achieved either via shared monorepo paths (tRPC) or automated artifact compilation from a schema registry (GraphQL Code Generator).
 * **Hinglish Simplification:** Server aur Browser ke beech ke raste ko type-safe banana, jisse backend ka data model badalne par frontend ka auto-complete automatically update ho jaye.
 
-#### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
+#### 🧠 [[HL::4. Why This Matters (Zaroorat Kyun Hai?)::HL]]
 
 * **Problem:** Real-world mein backend developers hamesha variable names badalte rehte hain (jaise `user_id` ko `userId` kar diya). Frontend developer ko iska pata tab chalta hai jab live production pe customers ka login crash hone lagta hai. Manual sync hamesha bohot bada risk hota hai.
-* **Solution:** Hum use karte hain Type Codegen (Code Generation — automated tools jo backend data dekh kar frontend file create karte hain) ya tRPC (TypeScript RPC — direct type sharing network layer). Jab backend badlega, frontend compiler build fail kar dega jab tak aap code sahi nahi karte.
-* **What breaks if we don't use it?** API specifications mismatch hone ki wajah se har hafte production bugs aayenge aur frontend and backend teams aapas mein ladaai karti rahengi ("Tune bataya kyun nahi key badal di!").
+* [[HL::**Solution:** Hum use karte hain Type Codegen (Code Generation — automated tools jo backend data dekh kar frontend file create karte hain) ya tRPC (TypeScript RPC — direct type sharing network layer). Jab backend badlega, frontend compiler build fail kar dega jab tak aap code sahi nahi karte.::HL]]
+* [[HL::**What breaks if we don't use it?** API specifications mismatch hone ki wajah se har hafte production bugs aayenge aur frontend and backend teams aapas mein ladaai karti rahengi ("Tune bataya kyun nahi key badal di!").::HL]]
 * **✅ Kab use karo (Use this when):** - Jab aap Full-Stack TypeScript development kar rahe ho (Next.js/Node), ya GraphQL server use kar rahe ho jahan frontend-backend dono ka tight integration zaroori hai.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** - Jab aap kisi aisi public third-party API se baat kar rahe ho jiska aapke paas koi control ya access nahi hai (jaise open weather API). Wahan aapko manually subtopic 1 wala strict wrapper hi likhna padega.
 
@@ -14165,15 +14164,15 @@ Maan lo ek school bus bacchon ko picnic pe le jaa rahi hai. Teacher ke paas ek "
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar aap normally types import karte ho, toh bundlers jaise Webpack (JavaScript code ko ek single file mein pack karne wala tool) confuse ho sakte hain aur types ko actual code samajh kar bundle size bada kar sakte hain.
-* **Solution:** `import type` bundler ko ek clear signal deta hai ki "isko turant delete kar do build karte waqt".
+* [[HL::**Problem:** Agar aap normally types import karte ho, toh bundlers jaise Webpack (JavaScript code ko ek single file mein pack karne wala tool) confuse ho sakte hain aur types ko actual code samajh kar bundle size bada kar sakte hain.::HL]]
+* [[HL::**Solution:** `import type` bundler ko ek clear signal deta hai ki "isko turant delete kar do build karte waqt".::HL]]
 * **What breaks if we don't use it?:** Aapki e-commerce website ka load time slow ho jayega kyunki user useless empty code download kar raha hoga.
 * **✅ Kab use karo:** Jab aap doosri file se sirf Interfaces, Types, ya Generics import kar rahe ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab aapko actual classes, functions, ya variables import karne hain jo code mein run honge. Wahan normal `import` use karo.
 
-#### 🔍 5. Visual / Editor Mein Kya Dikhega
+#### 🔍 5. Visual / [[HL::Editor Mein Kya Dikhega::HL]]
 
-Editor mein aapko `import type { Product } from './models'` dikhega, lekin jab aap `dist` folder (final production folder jahan code pack hota hai) check karोगे, toh JS file mein is line ka koi nishaan nahi hoga.
+[[HL::Editor mein aapko `import type { Product } from './models'` dikhega, lekin jab aap `dist` folder (final production folder jahan code pack hota hai) check karोगे, toh JS file mein is line ka koi nishaan nahi hoga.::HL]]
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
@@ -14184,7 +14183,7 @@ TypeScript ka compiler kaise kaam karta hai:
 
 ```typescript
 # TypeScript 5.0+ | Vite 5.x+
-1  // types.ts file mein humne ek type banaya
+1  // [[HL::types.::HL]]ts file mein humne ek type banaya
 2  export type CartItem = {                # CartItem type — sirf shape define karta hai
 3    id: string;                           # id: item ka unique text ID
 4    price: number;                        # price: item ki keemat
@@ -14211,7 +14210,7 @@ TypeScript ka compiler kaise kaam karta hai:
 
 ```
 
-*Note: Agar hum iska JS output dekhein, toh Line 8 (import type) final JS mein **exist hi nahi karegi**.*
+*Note: Agar hum iska JS output dekhein, toh [[HL::Line::HL]] 8 (import type) final JS mein **exist hi nahi karegi**.*
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
@@ -14230,9 +14229,9 @@ TypeScript ka compiler kaise kaam karta hai:
 
 * **❌ Mistake:** `import { UserType, loginUser } from './user';` ek hi line mein dono (type aur function) normal import karna.
 * **🤦 Why:** Beginners ko laggta hai ki TS smart hai aur khud samajh jayega.
-* **✅ The 'Pro' Way:** `import { loginUser } from './user';`
+* **✅ [[HL::The 'Pro' Way:** `import { loginUser } from './user';`::HL]]
 `import type { UserType } from './user';`
-(Modern TS mein `import { loginUser, type UserType }` bhi allow hai).
+[[HL::(Modern TS mein `import { loginUser, type UserType }` bhi allow hai).::HL]]
 * **⚡ Consequences:** Agar Vite/Babel (code transformer tool) jaise tools use kar rahe ho, toh unhe bina type-checking ke turant code bundle karna hota hai. Normal import dekh kar Babel confuse ho sakta hai aur crash kar sakta hai.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -14256,7 +14255,7 @@ TypeScript ka compiler kaise kaam karta hai:
 
 | Feature | `import { X }` | `import type { X }` |
 | --- | --- | --- |
-| **Kya lata hai?** | Actual values (functions, class, variables) | Sirf TypeScript ke types/interfaces |
+| [[HL::**Kya lata hai?** | Actual values (functions, class, variables) | Sirf TypeScript ke types/interfaces::HL]] |
 | **Final JS Bundle mein dikhega?** | Haan (Agar code mein use hua) | KABHI NAHI (100% erase ho jayega) |
 | **Babel/Vite friendly?** | Values ke liye Yes | Types ke liye Yes, sabse best hai |
 
@@ -14296,8 +14295,8 @@ Amazon ya Flipkart ki frontend app Next.js (React ka framework) pe bani hai. Unk
 * **A:** Vite aur Babel code ko file-by-file transpile (convert) karte hain bina dusri files ko check kiye (isolatedModules). Unhe nahi pata `User` ek type hai ya actual class. `import type` unko explicitly bata deta hai ki isse safely delete kar do.
 
 
-* **Q:** Kya main `import { type User, login } from './api'` use kar sakta hoon?
-* **A:** Haan, TypeScript 4.5+ mein inline type imports allow ho gaye hain. Yeh aur bhi clean hai, kyunki ek hi line mein value aur type alag-alag handle ho jaate hain.
+* **Q:** [[HL::Kya main `import { type User, login } from './api'` use kar sakta hoon?::HL]]
+* [[HL::**A:** Haan, TypeScript 4.5+ mein inline type imports allow ho gaye hain. Yeh aur bhi clean hai, kyunki ek hi line mein value aur type alag-alag handle ho jaate hain.::HL]]
 
 
 * **Q:** Agar main class ko `import type` se laaun, toh kya us class ko extend (inherit) kar sakta hoon?
@@ -14361,14 +14360,14 @@ Ab ESM vs CommonJS ka fark samjho:
 #### 📖 3. Technical Definition (Interview Answer)
 
 * **Precise English:** Tree-shaking is a dead-code elimination technique used by bundlers. It relies on the static structure of ES6 module syntax (ESM - `import`/`export`) to detect unreferenced code at compile-time, whereas CommonJS (`require()`) is dynamic and cannot be reliably analyzed statically.
-* **Hinglish Simplification:** Jo code likha gaya hai par poore app mein kahin call/use nahi hua, usko automatically delete kar dene ka process.
+* [[HL::**Hinglish Simplification:** Jo code likha gaya hai par poore app mein kahin call/use nahi hua, usko automatically delete kar dene ka process.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Aapne `lodash` (utility library jisme 100+ math/array functions hain) install ki, aur sirf ek `capitalize` function use kiya. Bina tree-shaking ke, poore 100 functions aapki website me load ho jayenge aur speed slow ho jayegi.
+* [[HL::**Problem:** Aapne `lodash` (utility library jisme 100+ math/array functions hain) install ki, aur sirf ek `capitalize` function use kiya. Bina tree-shaking ke, poore 100 functions aapki website me load ho jayenge aur speed slow ho jayegi.::HL]]
 * **Solution:** Tree-shaking sirf us 1 `capitalize` function ko uthayega aur baaki 99 ko kachre mein daal dega.
 * **What breaks if we don't use it?:** User 5MB ki JavaScript download karega sirf 1 chhota feature chalane ke liye. (Heavy load times, bad SEO).
-* **✅ Kab use karo:** Hamesha! Naye projects hamesha ESM (`import/export`) pe bane hone chahiye.
+* [[HL::**✅ Kab use karo:** Hamesha! Naye projects hamesha ESM (`import/export`) pe bane hone chahiye.::HL]]
 * **❌ Kab mat karo / Alternative prefer karo:** Jab legacy Node.js script likh rahe ho jisme dynamic module loading chahiye (jaise `if(condition) { require('lib') }`), tab CommonJS use hota hai. (Aise cases mein waise bhi backend pe bundle size matter nahi karta).
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -14386,13 +14385,13 @@ Tree Shaking ka flow:
 #### 💻 7. Hands-On — Runnable Example (CRITICAL SECTION)
 
 ```javascript
-# Node.js 20+ | ESM (package.json mein "type": "module" hona chahiye)
-1  // mathUtils.js (Utility File)
-2  export const add = (a, b) => a + b;           # add() function — export kiya
-3  export const subtract = (a, b) => a - b;      # subtract() function — export kiya
-4  
-5  // main.js (App ki Entry File)
-6  import { add } from './mathUtils.js';         # ESM Static Import — hume sirf 'add' chahiye
+# [[HL::Node.js 20+ | ESM (package.json mein "type": "module" hona chahiye)::HL]]
+[[HL::1  // mathUtils.js (Utility File)::HL]]
+[[HL::2  export const add = (a, b) => a + b;           # add() function — export kiya::HL]]
+[[HL::3  export const subtract = (a, b) => a - b;      # subtract() function — export kiya::HL]]
+[[HL::4  ::HL]]
+[[HL::5  // main.js (App ki Entry File)::HL]]
+[[HL::6  import { add } from './mathUtils.js';         # ESM Static Import — hume sirf 'add' chahiye::HL]]
 7  
 8  console.log("Result:", add(5, 5));            # sirf add() run kiya. subtract() dead code ban gaya.
 
@@ -14407,9 +14406,9 @@ Result: 10
 
 *(Yahan jab Vite/Rollup isko bundle karega, toh `subtract` function final file mein HOGA HI NAHI, kyunki woh `main.js` mein call nahi hua. Isko bolte hain Tree Shaking!)*
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 6:** `import { add } from './mathUtils.js';` — Yeh ESM syntax hai. Yeh line of code "Static" (fixed) hai. Yeh hum file ke top pe hi likh sakte hain, kisi `if` condition ke andar nahi. Kyunki yeh fixed hai, build tool (Vite/Rollup - bundlers) ko code RUN kiye bina hi pata chal jaata hai ki `subtract` ki demand nahi hai.
+* [[HL::**Line 6:** `import { add } from './mathUtils.js';` — Yeh ESM syntax hai. Yeh line of code "Static" (fixed) hai. Yeh hum file ke top pe hi likh sakte hain, kisi `if` condition ke andar nahi. Kyunki yeh fixed hai, build tool (Vite/Rollup - bundlers) ko code RUN kiye bina hi pata chal jaata hai ki `subtract` ki demand nahi hai.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -14426,8 +14425,8 @@ Tree-shaking aapka attack surface (hack hone ki jagah) kam karta hai. Agar kisi 
 * **🤦 Why:** Beginner default import use kar leta hai convenience ke liye.
 * **✅ The 'Pro' Way:** `import { debounce } from 'lodash-es';` (Notice `lodash-es` — yeh Lodash ka ESM version hai).
 * **⚡ Consequences:** `import _` kiya, toh lodash ka poora 70KB ka object memory mein aa jayega, bundler isko tree-shake nahi kar payega kyunki aapne poora `_` (dabba) mangwa liya hai. Bundle size fategi aur app slow hogi.
-* **❌ Mistake:** Browser app mein `require('module')` use karna.
-* **⚡ Consequences:** `require` dynamic hai, bundler dar jaata hai aur kuch delete nahi karta (CJS cannot be tree-shaken).
+* **❌ [[HL::Mistake:**::HL]] Browser app mein `require('module')` use karna.
+* **⚡ Consequences:** `require` [[HL::dynamic hai, bundler dar jaata hai aur kuch delete nahi karta (CJS cannot be tree::HL]]-shaken).
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -14765,9 +14764,9 @@ Problem yeh hai ki dono andhe hain! Jab aap TS (Manager) ko bata dete ho (Typing
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Aapne `.env` mein likha `VITE_API_URL=https://api.com`. Code mein aapne galti se type kar diya `fetch(import.meta.env.VITE_API_URLL)` (ek 'L' extra). TypeScript aam taur par ispe khamosh rahega, aur app live website pe fail ho jayegi (undefined me jayega).
+* [[HL::**Problem:** Aapne `.env` mein likha `VITE_API_URL=https://api.com`. Code mein aapne galti se type kar diya `fetch(import.meta.env.VITE_API_URLL)` (ek 'L' extra). TypeScript aam taur par ispe khamosh rahega, aur app live website pe fail ho jayegi (undefined me jayega).::HL]]
 * **Solution:** Agar hum TS ko pehle hi bata dein ki sirf `VITE_API_URL` valid hai, toh 'URLL' likhte hi laal error aayega!
-* **What breaks if we don't use it?:** Production mein silent failures (bina bataye error aana). API request `https://undefined/users` pe chali jayegi.
+* [[HL::**What breaks if we don't use it?:** Production mein silent failures (bina bataye error aana). API request `https://undefined/users` pe chali jayegi.::HL]]
 * **✅ Kab use karo:** Har ek serious project mein jahan `.env` file use hoti ho (Database connections, Stripe API Keys, Firebase config).
 * **❌ Kab mat karo / Alternative prefer karo:** Jab project mein sirf 1-2 non-critical env vars hon aur TS setup overkill lag raha ho. Par ideally, hamesha karna chahiye.
 
@@ -14788,18 +14787,18 @@ TypeScript ka "Declaration Merging" magic:
 
 ```typescript
 # TypeScript 5.0+ | Vite 5.x
-1  // File: vite-env.d.ts (Root folder mein)
-2  /// <reference types="vite/client" />         # Vite ke default types import kar raha hai
-3
-4  interface ImportMetaEnv {                     # Vite ka global env interface hum extend kar rahe hain
-5    readonly VITE_API_URL: string;              # readonly: Taki code mein koi isko change (re-assign) na kare
-6    readonly VITE_STRIPE_PUBLIC_KEY: string;    # env vars humesha string hote hain string
-7  }
+1  // [[HL::File: vite-env.d.ts (Root folder mein)::HL]]
+[[HL::2  /// <reference types="vite/client" />         # Vite ke default types import kar raha hai::HL]]
+[[HL::3::HL]]
+[[HL::4  interface ImportMetaEnv {                     # Vite ka global env interface hum extend kar rahe hain::HL]]
+[[HL::5    readonly VITE_API_URL: string;              # readonly: Taki code mein koi isko change (re-assign) na kare::HL]]
+[[HL::6    readonly VITE_STRIPE_PUBLIC_KEY: string;    # env vars humesha string hote hain string::HL]]
+[[HL::7::HL]]  }
 8
-9  interface ImportMeta {                        # ImportMeta object ko extend kiya
-10   readonly env: ImportMetaEnv;                # iske 'env' property ko apne naye interface se link kiya
-11 }
-12
+9  [[HL::interface ImportMeta {                        # ImportMeta object ko extend kiya::HL]]
+[[HL::10   readonly env: ImportMetaEnv;                # iske 'env' property ko apne naye interface se link kiya::HL]]
+[[HL::11 }::HL]]
+[[HL::12::HL]]
 13 // File: main.ts (Actual App code)
 14 // Yahan . karke auto-complete aayega
 15 const apiUrl = import.meta.env.VITE_API_URL;  # import.meta.env Vite ka built-in object hai env file padhne ke liye
@@ -14840,7 +14839,7 @@ Server started on port 8080
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 
 * **Line 2 (Vite):** `/// <reference types="vite/client" />` — Yeh ek Triple-Slash Directive hai. Yeh TS ko bolta hai "Pehle Vite ke default types load karo (jaise `MODE`, `DEV`, `PROD`), phir mere custom variables ko usme jod dena." Agar yeh na likha toh default vite variables (jaise `import.meta.env.DEV`) undefined dikhne lagenge.
-* **Line 5 (Vite):** `readonly VITE_API_URL: string;` — `readonly` bahut important keyword hai. `import.meta.env` ek constant hota hai build hone ke baad. Agar aap app code me likhoge `import.meta.env.VITE_API_URL = 'hacked'`, toh compiler turant error phek dega.
+* [[HL::**Line 5 (Vite):** `readonly VITE_API_URL: string;` — `readonly` bahut important keyword hai. `import.meta.env` ek constant hota hai build hone ke baad. Agar aap app code me likhoge `import.meta.env.VITE_API_URL = 'hacked'`, toh compiler turant error phek dega.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -14936,8 +14935,8 @@ interface ImportMetaEnv {         interface ImportMetaEnv {
 * **A:** Jab aap do alag-alag files mein same naam ka `interface` declare karte ho, toh TS un dono ko overwrite nahi karta, balki ek single unified interface bana kar merge kar deta hai. Yahi trick `.env` variables type karne ke liye use hoti hai.
 
 
-* **Q:** Agar `.env` file mein `VITE_PORT=80` likha hai, toh uska JS Type kya banega runtime pe?
-* **A:** Runtime pe woh hamesha `String` ("80") banega. Environment variables hamesha strings ya undefined hote hain OS rules ke according. TS me isko type `string` hi dena chahiye.
+* **Q:** [[HL::Agar `.env` file mein `VITE_PORT=80` likha hai, toh uska JS Type kya banega runtime pe?::HL]]
+* [[HL::**A:** Runtime pe woh hamesha `String` ("80") banega. Environment variables hamesha strings ya undefined hote hain OS rules ke according. TS me isko type `string` hi dena chahiye.::HL]]
 
 
 * **Q:** Kya main `global.d.ts` mein `let` ya `const` declare kar sakta hoon?
@@ -15074,9 +15073,9 @@ Tests:       1 passed, 1 total
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 9:** `const mockedFetchPrice = fetchPrice as jest.MockedFunction<typeof fetchPrice>;` — Yeh magic line hai. `typeof fetchPrice` original function ka type nikalta hai (jaise `(id: string) => Promise<string>`). `jest.MockedFunction` us type ko Jest ke special properties (jaise `mockResolvedValue`, `mockClear`) ke saath merge karta hai taaki Line 13 pe aapko exact wahi data type return karna pade jo real API karti hai.
+* [[HL::**Line 9:** `const mockedFetchPrice = fetchPrice as jest.MockedFunction<typeof fetchPrice>;` — Yeh magic line hai. `typeof fetchPrice` original function ka type nikalta hai (jaise `(id: string) => Promise<string>`). `jest.MockedFunction` us type ko Jest ke special properties (jaise `mockResolvedValue`, `mockClear`) ke saath merge karta hai taaki Line 13 pe aapko exact wahi data type return karna pade jo real API karti hai.::HL]]
 * **Line 18:** `as HTMLInputElement` — `screen.getByPlaceholderText` by default `HTMLElement` (generic element) return karta hai. Generic element par `.value` property nahi hoti (kya `<div>` ki value hoti hai? Nahi). Isliye humein Type Assertion (`as HTMLInputElement`) use karna padta hai TS ko samjhane ke liye ki yeh sach mein ek `<input>` tag hai.
 * **Line 21:** `fireEvent.change()` — React Testing Library (RTL) ka function jo user ka typing action nakal karta hai. Yeh React ke *Synthetic Event* (cross-browser compatible event system) ko trigger karta hai.
 

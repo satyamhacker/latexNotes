@@ -14,7 +14,7 @@ Your ONLY job: **Find → Wrap → Output.** Nothing else.
 1. **State Initialization:** You MUST parse the document for existing `[[HL::...::HL]]` tags and add them to your `highlighted_intervals` before processing new terms.
 2. **Fuzzy Matcher Boundaries:** If you implement a fuzzy matching algorithm that allows skipping unmatched words, ensure that your `start_index` strictly corresponds to the FIRST matched token, not the starting loop index. Swallowing unmatched prefix tokens will corrupt the highlight boundaries.
 
-The highlight syntax you MUST use everywhere:
+3. **Markdown Structural Integrity:** The script CANNOT use a naive .replace(). It must parse Markdown elements properly. If a highlight spans multiple list items or paragraphs, the script MUST apply separate [[HL:: and ::HL]] tags to each list item. Wrapping Markdown structural characters (like *  bullet points) inside the HTML tag will fatally break the Markdown parser. Furthermore, the script MUST dynamically shift the tags outside of any adjacent bold/italic tags (** / _) to prevent generating overlapping DOM elements. (See Rule 42 for details).\nThe highlight syntax you MUST use everywhere:
 ```
 [[HL::text to highlight::HL]]
 ```
@@ -450,3 +450,12 @@ When extracting highlights, be hyper-vigilant about contextual sub-bullets like 
 3. **Dangling Code Blocks:** When modifying code blocks, be extremely careful not to leave a stray/dangling ` ``` ` tag. A single unclosed backtick block will swallow the rest of the 8,000-line document into a single unformatted Mac-window box!
 ### Rule 41 — COMPLEX MULTI-LINE SNIPPETS (FALLBACK SCRIPTING)
 If a requested annotation is a massive, multi-line block containing complex formatting (like raw code blocks, indented formulas, or tables), standard fuzzy matching will often fail due to spacing/punctuation drifts. Do NOT silently skip these annotations. You must actively implement specific fallback matching (e.g. explicitly searching for unique sub-strings within the block) or inject them manually to guarantee 100% coverage.
+
+### Rule 42 — AVOID DOM OVERLAPPING IN SCRIPTS (CRITICAL FOR HTML RENDERER)
+If you write a Python script to automate highlighting, you CANNOT rely on naive content.replace() or basic regex. Your script MUST include explicit boundary-correction logic to prevent generating overlapping Markdown tags (which result in overlapping HTML tags and silently broken highlights in the browser).
+Specifically:
+1. **Bold/Italic Tags (**, *, _):** If a highlight starts or ends adjacent to these tags, your script must algorithmically expand the [[HL:: and ::HL]] tags OUTWARDS so they completely enclose the Markdown syntax (e.g., [[HL::**Text:**::HL]]). Do NOT generate straddling tags like **[[HL::Text:**::HL]].
+2. **Multi-Line & Bullet Points:** If a highlight spans across newlines or list items, your script must split the highlight into single-line segments, re-opening [[HL:: and re-closing ::HL]] on EVERY single line/bullet point. NEVER wrap multiple list items in a single tag.
+
+Failing to implement this in your script will cause catastrophic, invisible truncation of highlights when the document is rendered to HTML.
+
