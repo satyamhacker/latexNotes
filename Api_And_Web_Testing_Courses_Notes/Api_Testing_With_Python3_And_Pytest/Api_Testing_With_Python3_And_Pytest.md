@@ -28,7 +28,7 @@ Is topic mein hum samjhenge ki software testing ke alag-alag layers kya hote hai
 * **Problem:** Agar hum sirf E2E (End-to-End — poore application ka flow test karna) ya UI tests likhenge, toh testing bohot slow hogi aur bugs fix karna expensive hoga (Cost of bugs badh jayega).
 * **Solution:** Test Pyramid follow karke hum base par Unit tests, middle mein API/Integration tests (Service Layer — backend logic test), aur top par kuch UI tests likhte hain.
 * **What breaks if we don't use it?** Chhoti si API ki galti dhoondhne ke liye poora UI automate karna padega, jisse test suites ghanton (hours) tak run karenge aur ROI (Return on Investment — lagaye gaye time/paise ka fayda) gir jayega.
-* **✅ Kab use karo:** Har modern software project mein jahan Developer aur QA milkar quality ensure kar rahe ho. Scope isolation (har component ko alag se test karna) ke liye API testing best hai.
+* **✅ Kab [[HL::use karo:**::HL]] Har modern software project mein jahan Developer aur QA milkar quality ensure kar rahe ho. Scope isolation (har component ko alag se test karna) ke liye API testing best hai.
 * **❌ Kab mat karo / Alternative prefer karo:** Simple static websites (jahan backend/API nahi hai) mein integration testing overkill hai; wahan direct UI ya visual tests behtar hain.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -38,7 +38,7 @@ Is topic mein hum samjhenge ki software testing ke alag-alag layers kya hote hai
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
 1. **Developer Phase:** Dev code likhta hai aur **Unit Tests** (White-box testing — code ka internal logic check karna) run karta hai. Yeh milliseconds mein execute hote hain.
-2. **Shift-Left Phase:** CI/CD pipeline mein code aate hi turant **API Testing** (Integration Tests) trigger hoti hai. Yeh UI E2E tests se fast hoti hai aur Unit tests se zyada reliable hoti hai.
+2. **Shift-Left Phase:** CI/CD [[HL::pipeline::HL]] mein code aate hi turant **API Testing** (Integration Tests) trigger hoti hai. Yeh UI E2E tests se fast hoti hai aur Unit tests se zyada reliable hoti hai.
 3. **E2E Phase:** Sab kuch pass hone ke baad, Selenium (UI automation tool — browser ko code se control karta hai) jaise tools se E2E Testing hoti hai.
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
@@ -68,7 +68,7 @@ Industry mein "Bug fixing cost" exponential hoti hai. Agar ek bug dev phase mein
 * **❌ Mistake:** "Ice-Cream Cone" pattern follow karna — matlab UI tests sabse zyada aur Unit tests sabse kam likhna.
 * **🤦 Why:** Beginners ko lagta hai ki user ko toh UI hi dikhega, toh bas wahi test karo.
 * **✅ The 'Pro' Way:** Automation Pyramid follow karo. Base strong rakho (Unit/API).
-* **⚡ Consequences:** CI/CD pipeline build hone mein 4-5 ghante legi, aur chhota sa UI change hote hi saare E2E tests toot jayenge (brittle tests).
+* **⚡ Consequences:** CI/CD [[HL::pipeline::HL]] build hone mein 4-5 ghante legi, aur chhota sa UI change hote hi saare E2E tests toot jayenge (brittle tests).
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -133,7 +133,7 @@ Amazon ke checkout process mein. Tax calculation ka logic Unit test hota hai. Pa
 * **Q:** SDET ka role developer aur QA se kaise alag hai?
 * **A:** Developer product banata hai, QA product ko manually test karta hai. SDET (Software Dev Engineer in Test) testing process ko automate karne ke liye code aur frameworks likhta hai. Woh developer ki tarah code karta hai but for quality assurance.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Pyramid kehta hai: Unit ko bheed banao, API ko beech mein rakho, aur UI ko VIP treatment do (sabse kam)."
 
@@ -153,7 +153,7 @@ Amazon ke checkout process mein. Tax calculation ka logic Unit test hota hai. Pa
 
 ### 🎯 Topic: 2. Modern Virtual Environment & Package Management (`uv`)
 
-Is topic mein hum Python projects ke liye naya aur ultra-fast package manager `uv` samjhenge jo purane `pip` aur `venv` ko replace kar raha hai.
+[[HL::Is topic mein hum Python projects ke liye naya aur ultra-fast package manager `uv` samjhenge jo purane `pip` aur `venv` ko replace kar raha hai.::HL]]
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -162,15 +162,15 @@ Maan lo tumhe 100 kgs ka saaman (dependencies) Delhi se Mumbai bhejna hai. Puran
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** `uv` is an extremely fast, Rust-based Python package installer and resolver designed as a drop-in replacement for `pip` and `venv`, created by Astral. It enables isolated project dependencies lightning-fast.
-* **Hinglish Simplification:** `uv` ek naya, super-fast tool hai (jo Rust language mein bana hai) jisse hum Python ke virtual environments banate hain aur packages install karte hain. Yeh purane pip aur venv ka ek behtar aur tez alternative hai.
+* [[HL::**Precise English:** `uv` is an extremely fast, Rust-based Python package installer and resolver designed as a drop-in replacement for `pip` and `venv`, created by Astral. It enables isolated project dependencies lightning-fast.::HL]]
+* [[HL::**Hinglish Simplification:** `uv` ek naya, super-fast tool hai (jo Rust language mein bana hai) jisse hum Python ke virtual environments banate hain aur packages install karte hain. Yeh purane pip aur venv ka ek behtar aur tez alternative hai.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Python ka default package manager (`pip`) bade projects (jisme bohot saari dependencies/external libraries hon) mein packages resolve aur install karne mein bohot slow hai (minutes/hours lagte hain). Version conflicts (library A ko v1 chahiye, library B ko v2) resolve karna painful hai.
-* **Solution:** `uv` (Astral company ka tool) Rust (fast language) mein likha gaya hai, jo installations ko 10-100x fast banata hai aur smart lock files use karke version conflicts smartly handle karta hai. ⭐ "Purane 'pip' aur 'venv' ko chhod do, 'uv' use karo. Yeh ghanton ka install seconds mein karta hai."
-* **What breaks if we don't use it?** Bade projects aur CI/CD pipelines mein time waste hoga, server bills badhenge kyunki deployment slow hogi.
-* **✅ Kab use karo:** Har naye Python project mein, CI/CD pipelines mein, ya jab tumhari `requirements.txt` (file jisme saare packages ki list hoti hai) bohot badi ho.
+* [[HL::**Problem:** Python ka default package manager (`pip`) bade projects (jisme bohot saari dependencies/external libraries hon) mein packages resolve aur install karne mein bohot slow hai (minutes/hours lagte hain). Version conflicts (library A ko v1 chahiye, library B ko v2) resolve karna painful hai.::HL]]
+* [[HL::**Solution:** `uv` (Astral company ka tool) Rust (fast language) mein likha gaya hai, jo installations ko 10-100x fast banata hai aur smart lock files use karke version conflicts smartly handle karta hai. ⭐ "Purane 'pip' aur 'venv' ko chhod do, 'uv' use karo. Yeh ghanton ka install seconds mein karta hai."::HL]]
+* [[HL::**What breaks if we don't use it?** Bade projects aur CI/CD pipelines mein time waste hoga, server bills badhenge kyunki deployment slow hogi.::HL]]
+* [[HL::**✅ Kab use karo:** Har naye Python project mein, CI/CD pipelines mein, ya jab tumhari `requirements.txt` (file jisme saare packages ki list hoti hai) bohot badi ho.::HL]]
 * **❌ Kab mat karo / Alternative prefer karo:** Agar tumhara environment data science ka hai jahan system-level C/C++ libraries ki complex dependency hai, tab Conda (data science package manager) better option ho sakta hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -188,40 +188,40 @@ my_api_project/
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Jab tum `uv venv` chalate ho, yeh milliseconds mein ek lightweight `.venv` folder banata hai (bina poori Python copy kiye, OS-level symlinks use karke).
-2. Jab tum `uv pip install` chalate ho, yeh Rust-based resolver use karke turant calculate karta hai ki kaunse versions safe hain, parallel downloading karta hai, aur global cache se link karta hai (agar package pehle se downloaded hai).
-3. Result: Ek completely isolated (private) environment jo global Python ko ganda nahi karta.
+1. [[HL::Jab tum `uv venv` chalate ho, yeh milliseconds mein ek lightweight `.venv` folder banata hai (bina poori Python copy kiye, OS-level symlinks use karke).::HL]]
+2. [[HL::Jab tum `uv pip install` chalate ho, yeh Rust-based resolver use karke turant calculate karta hai ki kaunse versions safe hain, parallel downloading karta hai, aur global cache se link karta hai (agar package pehle se downloaded hai).::HL]]
+3. [[HL::Result: Ek completely isolated (private) environment jo global Python ko ganda nahi karta.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
 ```bash
-# OS Terminal Command (Windows/Linux/Mac)
-# ⚠️ Version verify karo — uv 0.1.x+
-1  uv venv                          # 'uv' tool se ek naya virtual environment (.venv) banao
-2  # Windows pe activate karna:
-3  .venv\Scripts\activate           # Script run karke env activate karo (terminal prompt pe (.venv) dikhega)
-4  # Mac/Linux pe activate karna:
-5  source .venv/bin/activate        # 'source' (script run command) se activate karo
-6  
-7  uv pip install pytest requests   # 'pip install' ki jagah 'uv pip install' (drop-in replacement)
-8  uv pip sync requirements.txt     # 'requirements.txt' se exactly match karne ke liye sync karo
+# [[HL::OS Terminal Command (Windows/Linux/Mac)::HL]]
+# [[HL::⚠️ Version verify karo — uv 0.1.x+::HL]]
+[[HL::1  uv venv                          # 'uv' tool se ek naya virtual environment (.venv) banao::HL]]
+[[HL::2  # Windows pe activate karna:::HL]]
+[[HL::3  .venv\Scripts\activate           # Script run karke env activate karo (terminal prompt pe (.venv) dikhega)::HL]]
+[[HL::4  # Mac/Linux pe activate karna:::HL]]
+[[HL::5  source .venv/bin/activate        # 'source' (script run command) se activate karo::HL]]
+[[HL::6::HL]]  
+[[HL::7  uv pip install pytest requests   # 'pip install' ki jagah 'uv pip install' (drop-in replacement)::HL]]
+[[HL::8  uv pip sync requirements.txt     # 'requirements.txt' se exactly match karne ke liye sync karo::HL]]
 
 ```
 
 ```text
 # 📤 Expected Output:
-Using Python 3.12.2 environment at: .venv
-Resolved 7 packages in 12ms
-Installed 7 packages in 45ms
- + pytest==8.0.0
- + requests==2.31.0
+[[HL::Using Python 3.12.2 environment at: .venv::HL]]
+[[HL::Resolved 7 packages in 12ms::HL]]
+[[HL::Installed 7 packages in 45ms::HL]]
+ + [[HL::pytest==8.0.0::HL]]
+ + [[HL::requests==2.31.0::HL]]
 
 ```
 
 ##### 🔬 Command Explanation
 
-* **Line 1 (`uv venv`):** Yeh command current directory mein ek `.venv` folder banati hai jo tumhara private, lightweight Python environment hai.
-* **Line 7 (`uv pip install pytest`):** Yeh bilkul `pip install` jaisa kaam karta hai (drop-in replacement), par internally Rust engine use karta hai isliye lightning-fast hai. `pytest` aur `requests` libraries install hongi.
+* [[HL::**Line 1 (`uv venv`):** Yeh command current directory mein ek `.venv` folder banati hai jo tumhara private, lightweight Python environment hai.::HL]]
+* [[HL::**Line 7 (`uv pip install pytest`):** Yeh bilkul `pip install` jaisa kaam karta hai (drop-in replacement), par internally Rust engine use karta hai isliye lightning-fast hai. `pytest` aur `requests` libraries install hongi.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -229,13 +229,13 @@ Global Python environment mein packages install karne se version conflicts aur m
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Large tech companies mein CI/CD pipelines din mein 1000 baar run hoti hain. Agar `pip install` 3 minutes leta hai, aur `uv` 3 seconds, toh compute time aur server costs drastically kam ho jaati hain. `uv` ka cache system itna scalable hai ki agar multiple projects same library use karte hain, toh woh dubara download nahi karta.
+Large tech companies mein CI/CD [[HL::pipelines::HL]] din mein 1000 baar run hoti hain. Agar `pip install` 3 minutes leta hai, aur `uv` 3 seconds, toh compute time aur server costs drastically kam ho jaati hain. `uv` ka cache system itna scalable hai ki agar multiple projects same library use karte hain, toh woh dubara download nahi karta.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Naya project banana aur directly `pip install something` kar dena (bina venv ke).
-* **🤦 Why:** Beginners ko environment isolation ka idea nahi hota.
-* **✅ The 'Pro' Way:** Pehle hamesha `uv venv` banao, usse activate karo, phir packages daalo.
+* **❌ [[HL::Mistake:** Naya project banana aur directly `pip install something` kar dena (bina venv ke).::HL]]
+* [[HL::**🤦 Why:** Beginners ko environment isolation ka idea nahi hota.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Pehle hamesha `uv venv` banao, usse activate karo, phir packages daalo.::HL]]
 * **⚡ Consequences:** Global Python ganda ho jayega. Naya project chalega toh purana project kisi package version conflict ki wajah se toot jayega.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -260,8 +260,8 @@ Large tech companies mein CI/CD pipelines din mein 1000 baar run hoti hain. Agar
 
 
 * **`.venv folder ban gaya par packages globally install ho gaye`**
-* **Root Cause:** Environment activate karna bhool gaye.
-* **Fix:** Windows pe `.venv\Scripts\activate` ya Mac pe `source .venv/bin/activate` chalao pehle, phir install karo.
+* [[HL::**Root Cause:** Environment activate karna bhool gaye.::HL]]
+* [[HL::**Fix:** Windows pe `.venv\Scripts\activate` ya Mac pe `source .venv/bin/activate` chalao pehle, phir install karo.::HL]]
 
 
 
@@ -275,13 +275,13 @@ Large tech companies mein CI/CD pipelines din mein 1000 baar run hoti hain. Agar
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Bade open-source frameworks (jaise LangChain ya FastAPI) apne CI/CD pipelines ko GitHub Actions par run karte hain. Unhone `pip` ko hata kar `uv` use karna shuru kiya hai taaki unke tests ki environment setup 3 minute se ghat kar 15 seconds ho jaye.
+Bade open-source frameworks (jaise LangChain ya FastAPI) apne CI/CD [[HL::pipelines::HL]] ko GitHub Actions par run karte hain. Unhone `pip` ko hata kar `uv` use karna shuru kiya hai taaki unke tests ki environment setup 3 minute se ghat kar 15 seconds ho jaye.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer naya project start karte waqt `uv venv` banata hai aur `uv pip install requests pytest` chalata hai, jo traditional pip se 100x fast install hota hai, taaki global Python clean rahe.
+* [[HL::**Testing/Offline Phase:** Developer naya project start karte waqt `uv venv` banata hai aur `uv pip install requests pytest` chalata hai, jo traditional pip se 100x fast install hota hai, taaki global Python clean rahe.::HL]]
 * **Fixing/Iteration Phase:** Jab 100 dependencies wala project GitHub se clone hota hai, toh `uv` bina wait kiye turant environment ready kar deta hai (ghanton ka install seconds mein).
-* **Live Production Phase:** CI/CD pipelines mein `uv` use karne se build time minutes se seconds mein aa jata hai, jis se server cost bachti hai.
+* **Live Production Phase:** CI/CD [[HL::pipelines::HL]] mein `uv` use karne se build time minutes se seconds mein aa jata hai, jis se server cost bachti hai.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -300,8 +300,8 @@ Bade open-source frameworks (jaise LangChain ya FastAPI) apne CI/CD pipelines ko
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q:** Project Isolation kyun zaroori hai aur virtual environments kaise help karte hain?
-* **A:** Har project ki alag dependencies aur unke specific versions hote hain (e.g., Project A ko requests v1 chahiye, Project B ko v2). Agar global OS mein install karenge, toh conflicts aayenge. Virtual environments (.venv) har project ko ek isolated (private) space dete hain jahan sirf uske apne packages hote hain.
+* [[HL::**Q:** Project Isolation kyun zaroori hai aur virtual environments kaise help karte hain?::HL]]
+* [[HL::**A:** Har project ki alag dependencies aur unke specific versions hote hain (e.g., Project A ko requests v1 chahiye, Project B ko v2). Agar global OS mein install karenge, toh conflicts aayenge. Virtual environments (.venv) har project ko ek isolated (private) space dete hain jahan sirf uske apne packages hote hain.::HL]]
 * **Q:** `uv` purane `pip` se itna fast kyun hai?
 * **A:** Kyunki pip Python mein likha gaya hai, jabki `uv` (by Astral) Rust mein likha gaya hai jo ek systems programming language hai aur memory/threading ko bohot aggressively aur fast manage karti hai. Sath hi, uv ka internal package resolver aur caching mechanism bohot optimized hai.
 * **Q:** "Drop-in replacement" ka kya matlab hota hai context of `uv` mein?
@@ -311,7 +311,7 @@ Bade open-source frameworks (jaise LangChain ya FastAPI) apne CI/CD pipelines ko
 * **Q:** Kya main Conda ki jagah uv use kar sakta hoon?
 * **A:** General web/API development mein haan. Lekin agar tum Data Science ya ML kar rahe ho jahan complex C/C++ binaries (jaise CUDA) ki OS-level dependencies hain, wahan Conda abhi bhi zyada robust ecosystem hai, jabki uv pure Python packages ke liye best (aur lightweight) hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Pip chalao cycle par, uv chalao bullet train par — drop-in replacement hai, tension nahi, seconds mein installation done."
 
@@ -377,26 +377,26 @@ Aur test likhne ka **AAA Pattern (Arrange, Act, Assert)** aise kaam karta hai:
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * **Problem:** Python ka default `unittest` module bohot zyada "boilerplate" (faltu aur repetitive code) mangta hai. Usme classes banani padti hain, manual setup karna padta hai, aur assertions likhna complex hota hai.
-* **Solution:** Pytest seedhe functions likhne ki azaadi deta hai. Iska `assert` keyword bohot powerful aur smart hai. Yeh plugins support karta hai jaise `pytest-html` (test reports HTML mein dekhne ke liye), `pytest-xdist` (tests ko parallel run karne ke liye taaki jaldi khatam hon), aur `pytest-cov` (check karne ke liye ki kitna code test hua).
+* [[HL::**Solution:** Pytest seedhe functions likhne ki azaadi deta hai. Iska `assert` keyword bohot powerful aur smart hai. Yeh plugins support karta hai jaise `pytest-html` (test reports HTML mein dekhne ke liye), `pytest-xdist` (tests ko parallel run karne ke liye taaki jaldi khatam hon), aur `pytest-cov` (check karne ke liye ki kitna code test hua).::HL]]
 * **What breaks if we don't use it?** Bade test suites maintain karna mushkil ho jayega. Developers test likhne se bachenge kyunki process bohot time-consuming hoga.
-* **✅ Kab use karo:** Python ke kisi bhi project mein (chhota ya bada) jahan reliable aur maintainable automated tests chahiye.
+* **✅ Kab [[HL::use karo:**::HL]] Python ke kisi bhi project mein (chhota ya bada) jahan reliable aur maintainable automated tests chahiye.
 * **❌ Kab mat karo / Alternative prefer karo:** Agar team pehle se `unittest` pe bohot heavily invested hai aur migration ka time/budget nahi hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-Folder mein ek file hogi `test_simple_math.py`. Code mein koi heavy classes nahi hongi, seedhe test functions honge.
+[[HL::Folder mein ek file hogi `test_simple_math.py`. Code mein koi heavy classes nahi hongi, seedhe test functions honge.::HL]]
 
 ```text
-project_root/
-└── tests/
-    └── test_simple_math.py   <-- Pytest automatically is file ko dhoondh lega
+[[HL::project_root/::HL]]
+[[HL::└── tests/::HL]]
+    [[HL::└── test_simple_math.py   <-- Pytest automatically is file ko dhoondh lega::HL]]
 
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. **Discovery:** Pytest run hote hi files scan karta hai (Discovery process).
-2. **Setup/Teardown:** Agar tumne Fixtures (Pytest ka feature jo test se pehle aur baad mein data/setup manage karta hai) define kiye hain, toh Pytest unhe execute karega.
+1. [[HL::**Discovery:** Pytest run hote hi files scan karta hai (Discovery process).::HL]]
+2. [[HL::**Setup/Teardown:** Agar tumne Fixtures (Pytest ka feature jo test se pehle aur baad mein data/setup manage karta hai) define kiye hain, toh Pytest unhe execute karega.::HL]]
 3. **⭐ Automatic Class Instantiation:** Agar tumne test ko Class ke andar likha hai, toh Pytest us class ka object (instance) khud banata hai (har test ke liye naya). Tumhe manual object nahi banana padta.
 4. **⭐ Test Isolation:** Har test independent hota hai. Ek test fail hone par doosra test affect nahi hota kyunki class ka naya object (`self` parameter ke through) har baar fresh banta hai.
 
@@ -405,18 +405,18 @@ project_root/
 ```python
 # Python 3.10+ | pytest 8.x
 1  # File: test_simple_math.py
-2  def add_numbers(a, b):                       # Yeh hamara actual function hai jise test karna hai
-3      return a + b                             # Dono numbers ka sum return karta hai
-4
-5  def test_addition_logic():                   # Pytest function naam 'test_' se start hona chahiye
-6      # Arrange (Setup data)
-7      expected_result = 10                     # expected_result = jo answer hume chahiye
-8      
-9      # Act (Perform action)
-10     actual_result = add_numbers(6, 4)        # actual_result = function ko run karke jo answer aaya
-11     
-12     # Assert (Verify)
-13     assert actual_result == expected_result  # assert = Pytest ko bolo verify kare ki dono match karte hain
+2  def add_numbers(a, b):                       # [[HL::Yeh hamara actual function hai jise test karna hai::HL]]
+[[HL::3      return a + b                             # Dono numbers ka sum return karta hai::HL]]
+[[HL::4::HL]]
+[[HL::5  def test_addition_logic():                   # Pytest function naam 'test_' se start hona chahiye::HL]]
+[[HL::6      # Arrange (Setup data)::HL]]
+[[HL::7      expected_result = 10                     # expected_result = jo answer hume chahiye::HL]]
+[[HL::8::HL]]      
+[[HL::9      # Act (Perform action)::HL]]
+[[HL::10     actual_result = add_numbers(6, 4)        # actual_result = function ko run karke jo answer aaya::HL]]
+[[HL::11::HL]]     
+[[HL::12     # Assert (Verify)::HL]]
+[[HL::13     assert actual_result == expected_result  # assert = Pytest ko bolo verify kare ki dono match karte hain::HL]]
 
 ```
 
@@ -433,9 +433,9 @@ test_simple_math.py .                                                    [100%]
 
 ##### 🔬 Code Explanation
 
-* **Line 5:** `test_addition_logic()` — Pytest is function ko test maanega kyunki iska naam `test_` se shuru hota hai.
-* **Lines 7-10:** AAA pattern ka Arrange aur Act phase. Hum inputs dekar function call karte hain.
-* **Line 13:** `assert actual_result == expected_result` — `assert` Pytest ka core keyword hai. Agar condition True hai, test PASSED hoga. Agar False hui, test FAILED dikhayega aur exact detail dega ki kya values thin.
+* [[HL::**Line 5:**::HL]] `test_addition_logic()` — Pytest is function ko test maanega kyunki iska naam `test_` se shuru hota hai.
+* [[HL::**Lines::HL]] 7-10:** AAA pattern ka Arrange aur Act phase. Hum inputs dekar function call karte hain.
+* [[HL::**Line 13:** `assert actual_result == expected_result` — `assert` Pytest ka core keyword hai. Agar condition True hai, test PASSED hoga. Agar False hui, test FAILED dikhayega aur exact detail dega ki kya values thin.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -450,14 +450,14 @@ Industry mein test suites mein thousands of tests hote hain. Pytest ki Test Isol
 * **❌ Mistake:** Ek hi test function ke andar 10 alag-alag logic check karna (multiple Acts aur Asserts).
 * **🤦 Why:** Beginners sochte hain ki ek lamba test likhna zyada aasaan hai.
 * **✅ The 'Pro' Way:** AAA pattern follow karo. Ek test mein ek hi primary behavior (Act) aur uska Assert hona chahiye.
-* **⚡ Consequences:** Agar lamba test line 2 pe fail hua, toh baaki ke 8 tests run hi nahi honge, aur poori coverage ki report galat ho jayegi.
+* **⚡ Consequences:** Agar lamba test [[HL::line::HL]] 2 pe fail hua, toh baaki ke 8 tests run hi nahi honge, aur poori coverage ki report galat ho jayegi.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Fixtures kya bimari hai?"**
-* **Galat soch:** Fixtures test likhne ka naya syntax hai.
-* **Actually:** Fixture sirf ek helper function hai. Maan lo tumhe har test se pehle Database se connect karna hai, aur test ke baad disconnect (Setup aur Teardown). Fixture yeh kaam automatic kar deta hai taaki tumhe har test mein same code repeat na karna pade.
-* **Prove karo:** Ek function pe `@pytest.fixture` lagao aur us function ka naam test function ke parameters mein pass kar do — woh khud-ba-khud pehle run ho jayega.
+* [[HL::**Confusion 1 — "Fixtures kya bimari hai?"**::HL]]
+* [[HL::**Galat soch:** Fixtures test likhne ka naya syntax hai.::HL]]
+* [[HL::**Actually:** Fixture sirf ek helper function hai. Maan lo tumhe har test se pehle Database se connect karna hai, aur test ke baad disconnect (Setup aur Teardown). Fixture yeh kaam automatic kar deta hai taaki tumhe har test mein same code repeat na karna pade.::HL]]
+* [[HL::**Prove karo:** Ek function pe `@pytest.fixture` lagao aur us function ka naam test function ke parameters mein pass kar do — woh khud-ba-khud pehle run ho jayega.::HL]]
 
 
 
@@ -483,7 +483,7 @@ Spotify ki backend team apni thousands of microservices ko test karne ke liye Py
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer tests likhne ke liye AAA pattern (Arrange data, Act on function, Assert result) follow karta hai. Pytest automatically classes ke naye objects (self) bana kar tests ko isolate karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer tests likhne ke liye AAA pattern (Arrange data, Act on function, Assert result) follow karta hai. Pytest automatically classes ke naye objects (self) bana kar tests ko isolate karta hai.
 * **Fixing/Iteration Phase:** (N/A - Contextually restricted by skeleton)
 * **Live Production Phase:** (N/A)
 
@@ -503,14 +503,14 @@ Spotify ki backend team apni thousands of microservices ko test karne ke liye Py
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q:** Pytest Test Discovery kaise kaam karta hai?
-* **A:** Pytest automatically un files ko dhoondhta hai jinka naam `test_*.py` ya `*_test.py` ho. Un files ke andar, woh un functions ko run karta hai jinka naam `test_` se shuru hota hai, aur un classes ko jo `Test` se shuru hoti hain.
+* [[HL::**Q:** Pytest Test Discovery kaise kaam karta hai?::HL]]
+* [[HL::**A:** Pytest automatically un files ko dhoondhta hai jinka naam `test_*.py` ya `*_test.py` ho. Un files ke andar, woh un functions ko run karta hai jinka naam `test_` se shuru hota hai, aur un classes ko jo `Test` se shuru hoti hain.::HL]]
 * **Q:** Pytest mein "Automatic Class Instantiation" ka kya fayda hai?
 * **A:** `unittest` mein hume manual objects banane padte hain. Pytest mein hum sirf test class banate hain, aur Pytest runtime par khud hi us class ka ek naya fresh object (instance) banata hai har test method run karne se pehle, jisse Test Isolation (koi shared state nahi) maintain hoti hai.
 * **Q:** AAA pattern kya hai aur kyun use karna chahiye?
 * **A:** AAA (Arrange, Act, Assert) tests ko structure karne ka standard pattern hai. Isse test readability badhti hai aur clearly pata chalta hai ki test kya set kar raha hai, kya action le raha hai, aur kya verify kar raha hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Pytest ek smart Inspector hai: Arrange se saaman laao, Act se kaam karao, aur Assert se thappa lagao!"
 
@@ -539,15 +539,15 @@ Socho Pytest ek Postman (dakiya) hai. Uske paas rule hai ki woh sirf un gharon m
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** Test Discovery is the automated process by which Pytest locates testing files and functions based on specific Naming Conventions. Execution is performed via the CLI (Command Line Interface), supporting flags for verbosity and specific filtering.
+* **Precise English:** Test Discovery is the automated process by which Pytest locates testing files and functions based on specific Naming Conventions. Execution is performed via the CLI (Command [[HL::Line::HL]] Interface), supporting flags for verbosity and specific filtering.
 * **Hinglish Simplification:** Test Discovery ek rule hai jisse Pytest khud tumhare tests dhoondhta hai, bas naam sahi hona chahiye. Iske baad hum terminal (CLI) se alag-alag commands dekar un tests ko run kar sakte hain.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar hume har test file aur function ka path manually terminal mein type karna pade, toh 500 tests run karna almost impossible ho jayega.
-* **Solution:** Pytest Naming Convention follow karta hai (⭐ "Files: test_*.py. Functions: test_*. Classes: Test*"). Bas terminal mein `pytest` likho, aur woh poore project mein saare tests dhoondh kar run kar dega.
+* [[HL::**Problem:** Agar hume har test file aur function ka path manually terminal mein type karna pade, toh 500 tests run karna almost impossible ho jayega.::HL]]
+* [[HL::**Solution:** Pytest Naming Convention follow karta hai (⭐ "Files: test_*.py. Functions: test_*. Classes: Test*"). Bas terminal mein `pytest` likho, aur woh poore project mein saare tests dhoondh kar run kar dega.::HL]]
 * **What breaks if we don't use it?** Naming rules break karne par tests ignore ho jayenge. Developer sochega ki uske 100 tests pass hain, par actual mein woh run hi nahi hue honge.
-* **✅ Kab use karo:** Hamesha. Har Pytest project ko yehi folder aur naming rules follow karne chahiye (tests files ek `tests/` folder mein rakho).
+* **✅ Kab [[HL::use karo:**::HL]] Hamesha. Har Pytest project ko yehi folder aur naming rules follow karne chahiye (tests files ek `tests/` folder mein rakho).
 * **❌ Kab mat karo / Alternative prefer karo:** (Yeh concept har situation mein applicable hai — koi genuine avoid-scenario nahi hai).
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -555,18 +555,18 @@ Socho Pytest ek Postman (dakiya) hai. Uske paas rule hai ki woh sirf un gharon m
 Aisa ek standard folder structure dikhega:
 
 ```text
-my_project/
-└── tests/                      <-- Saare tests is folder mein
-    ├── test_login.py           <-- File starts with 'test_'
-    └── test_payment.py         
+[[HL::my_project/::HL]]
+[[HL::└── tests/                      <-- Saare tests is folder mein::HL]]
+    [[HL::├── test_login.py           <-- File starts with 'test_'::HL]]
+    [[HL::└── test_payment.py::HL]]         
 
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. **Scanning:** Jab tum terminal mein `pytest` type karte ho, system current directory se shuru karke saari directories scan karta hai.
-2. **Filtering:** File Names check karta hai (`test_*.py` ya `*_test.py`). Un files ke andar Method Names aur Function Names (`test_*`) filter karta hai.
-3. **Execution:** CI/CD (Continuous Integration/Continuous Deployment — code ko automatically test aur server pe bhejney ka pipeline) pipelines jaise Jenkins (automation server) aur GitHub Actions mein bhi exactly yahi CLI (Command Line Interface) backend mein chalti hai.
+1. [[HL::**Scanning:** Jab tum terminal mein `pytest` type karte ho, system current directory se shuru karke saari directories scan karta hai.::HL]]
+2. [[HL::**Filtering:** File Names check karta hai (`test_*.py` ya `*_test.py`). Un files ke andar Method Names aur Function Names (`test_*`) filter karta hai.::HL]]
+3. **Execution:** CI/CD (Continuous Integration/Continuous Deployment — code ko automatically test aur server pe bhejney ka [[HL::pipeline)::HL]] [[HL::pipelines::HL]] jaise Jenkins (automation server) aur GitHub Actions mein bhi exactly yahi CLI (Command [[HL::Line::HL]] Interface) backend mein chalti hai.
 
 #### 🖥️ Command Clarity Rule
 
@@ -586,9 +586,9 @@ test_login.py .F  [100%]
 
 ```
 
-* **Command:** `pytest -v`
-* **Anatomy:**
-* `-v` ya `--verbose`: Detailed output flag. Har file ke andar kaunsa test PASSED ya FAILED hua, uska naam screen par dikhayega.
+* [[HL::**Command:** `pytest -v`::HL]]
+* [[HL::**Anatomy:**::HL]]
+* [[HL::`-v` ya `--verbose`: Detailed output flag. Har file ke andar kaunsa test PASSED ya FAILED hua, uska naam screen par dikhayega.::HL]]
 
 
 
@@ -621,9 +621,9 @@ Jab project bada hota hai toh usme hazaron tests hote hain. Developer specific f
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** File ka naam `login_testcases.py` ya class ka naam `testLogin` rakhna.
-* **🤦 Why:** Beginners ko lagta hai ki naam mein 'test' hona kaafi hai, exact format (naming convention) ki parwah nahi karte.
-* **✅ The 'Pro' Way:** Exact rules follow karo: ⭐ "Files: `test_*.py` ya `*_test.py`. Functions: `test_*`. Classes: `Test*`".
+* **❌ [[HL::Mistake:** File ka naam `login_testcases.py` ya class ka naam `testLogin` rakhna.::HL]]
+* [[HL::**🤦 Why:** Beginners ko lagta hai ki naam mein 'test' hona kaafi hai, exact format (naming convention) ki parwah nahi karte.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Exact rules follow karo: ⭐ "Files: `test_*.py` ya `*_test.py`. Functions: `test_*`. Classes: `Test*`".::HL]]
 * **⚡ Consequences:** Pytest tests ko ignore kar dega (0 items collected) aur false confidence milega ki code theek hai jabki bugs production mein chale jayenge.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -667,9 +667,9 @@ Jab GitHub Actions (CI/CD tool) par pull request aati hai, toh background server
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer terminal mein pytest commands (jaise `pytest -v` ya `-k`) run karke specific ya saare tests ko unke file/folder naming rules ke basis par execute karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer terminal mein pytest commands (jaise `pytest -v` ya `-k`) run karke specific ya saare tests ko unke file/folder naming rules ke basis par execute karta hai.
 * **Fixing/Iteration Phase:** Agar "command not found" error aaye toh developer check karta hai ki venv active hai ya nahi.
-* **Live Production Phase:** CI/CD pipelines (jaise Jenkins, GitHub Actions) mein tests automate karne ke liye yahi same CLI commands use hoti hain.
+* **Live Production Phase:** CI/CD [[HL::pipelines::HL]] (jaise Jenkins, GitHub Actions) mein tests automate karne ke liye yahi same CLI commands use hoti hain.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -689,12 +689,12 @@ Finds "utils.py"     ---> NO "test_" prefix    ---> IGNORE!
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q:** Pytest Test Discovery rules kya hain?
-* **A:** Pytest un files ko dhoondhta hai jo `test_*.py` ya `*_test.py` hon. Unke andar `Test*` classes aur `test_*` methods/functions ko execute karta hai. Yeh standard naming convention hai.
-* **Q:** `-v` aur `-k` flags ka CLI mein kya use hai?
-* **A:** `-v` (verbose) test execution ki detailed report dikhata hai (har file/function ka name + PASSED/FAILED). `-k` (keyword expression) ek filter hai jo specific string match karne wale tests ko run karta hai, e.g., `pytest -k "auth"` sirf authentication tests chalayega.
+* [[HL::**Q:** Pytest Test Discovery rules kya hain?::HL]]
+* [[HL::**A:** Pytest un files ko dhoondhta hai jo `test_*.py` ya `*_test.py` hon. Unke andar `Test*` classes aur `test_*` methods/functions ko execute karta hai. Yeh standard naming convention hai.::HL]]
+* [[HL::**Q:** `-v` aur `-k` flags ka CLI mein kya use hai?::HL]]
+* [[HL::**A:** `-v` (verbose) test execution ki detailed report dikhata hai (har file/function ka name + PASSED/FAILED). `-k` (keyword expression) ek filter hai jo specific string match karne wale tests ko run karta hai, e.g., `pytest -k "auth"` sirf authentication tests chalayega.::HL]]
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Naam mein 'test_' hoga toh Pytest rukega, warna postman aage nikal jayega!"
 
@@ -725,59 +725,59 @@ Aur agar club mein kuch gadbad ho rahi hai aur samajh nahi aa raha, toh tum CCTV
 #### 📖 3. Technical Definition
 
 * **Precise English:** API Core Testing involves sending HTTP GET/POST requests using the `requests` library, passing required Authentication headers (Basic Auth, API Key, Bearer Token), and validating the JSON response along with HTTP status codes. Debugging is done via Python's built-in `breakpoint()` which invokes the Pdb (Python Debugger) for interactive state inspection.
-* **Hinglish Simplification:** API testing mein hum `requests` library se API ko call lagate hain, apna password (authentication token) pass karte hain, aur check karte hain ki data (JSON) sahi aaya ya nahi. Agar code fat jaye, toh `breakpoint()` lagakar code ko wahi rok dete hain aur variables check karte hain.
+* [[HL::**Hinglish Simplification:** API testing mein hum `requests` library se API ko call lagate hain, apna password (authentication token) pass karte hain, aur check karte hain ki data (JSON) sahi aaya ya nahi. Agar code fat jaye, toh `breakpoint()` lagakar code ko wahi rok dete hain aur variables check karte hain.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** API publicly open rakhna khatarnak hai (data chori ho sakta hai). Isliye Authentication zaroori hai. Doosri problem yeh hai ki API fail hone par sirf error message milta hai, exactly kyun fail hua (variables ki state kya thi) yeh samajhna mushkil hota hai.
-* **Solution:** Hum HTTP headers mein Authorization pass karte hain. Pytest mein `assert` se validations karte hain. Aur agar samajh na aaye, toh `pdb` (Python Debugger) se code execution freeze kar lete hain. (⭐ "API test mein hamesha pehle status_code check karo")
+* [[HL::**Problem:** API publicly open rakhna khatarnak hai (data chori ho sakta hai). Isliye Authentication zaroori hai. Doosri problem yeh hai ki API fail hone par sirf error message milta hai, exactly kyun fail hua (variables ki state kya thi) yeh samajhna mushkil hota hai.::HL]]
+* [[HL::**Solution:** Hum HTTP headers mein Authorization pass karte hain. Pytest mein `assert` se validations karte hain. Aur agar samajh na aaye, toh `pdb` (Python Debugger) se code execution freeze kar lete hain. (⭐ "API test mein hamesha pehle status_code check karo")::HL]]
 * **What breaks if we don't use it?** Bina auth ke 401 Unauthorized error aayega. Bina debugger ke, developer hours waste karega guess work (andaaze lagane) mein ki response actual mein kya aaya tha.
-* **✅ Kab use karo:** Jab bhi tum kisi protected (secure) REST API se data fetch/verify kar rahe ho, ya code weird (ajeeb) behave kar raha ho aur console logs se fix na ho raha ho.
+* **✅ Kab [[HL::use karo:**::HL]] Jab bhi tum kisi protected (secure) REST API se data fetch/verify kar rahe ho, ya code weird (ajeeb) behave kar raha ho aur console logs se fix na ho raha ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Simple print debugging tab theek hai jab error chhota ho (e.g., typo). Har chhoti cheez ke liye `breakpoint()` lagana slow process hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-Jab `breakpoint()` hit hota hai, terminal ki execution ruk jayegi aur ek interactive Pdb prompt `(Pdb)` khul jayega jahan tum live commands type kar sakte ho.
+[[HL::Jab `breakpoint()` hit hota hai, terminal ki execution ruk jayegi aur ek interactive Pdb prompt `(Pdb)` khul jayega jahan tum live commands type kar sakte ho.::HL]]
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Tumhare test se ek **HTTP GET Request** nikalti hai jisme **base_url**, **endpoint**, aur **my_headers** attach hote hain (Authorization ke liye).
-2. Server authenticate karta hai. Agar pass hua toh **200 OK** bhejta hai with data. Agar fail toh **401 Unauthorized** ya **404 Not Found** (galat address).
-3. Pytest mein `assert` check karta hai ki expected output hi actual output hai.
-4. Agar `pytest -v -s` chalao aur code mein `breakpoint()` ho, toh terminal pe execution freeze ho jati hai, jisse tum us second par API ke Response object ke andar jhaank (inspect) sakte ho.
+1. [[HL::Tumhare test se ek **HTTP GET Request** nikalti hai jisme **base_url**, **endpoint**, aur **my_headers** attach hote hain (Authorization ke liye).::HL]]
+2. [[HL::Server authenticate karta hai. Agar pass hua toh **200 OK** bhejta hai with data. Agar fail toh **401 Unauthorized** ya **404 Not Found** (galat address).::HL]]
+3. [[HL::Pytest mein `assert` check karta hai ki expected output hi actual output hai.::HL]]
+4. [[HL::Agar `pytest -v -s` chalao aur code mein `breakpoint()` ho, toh terminal pe execution freeze ho jati hai, jisse tum us second par API ke Response object ke andar jhaank (inspect) sakte ho.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
 ```python
 # ⭐ Python 3.7+ | requests 2.x | pytest 8.x
 1  import requests                          # HTTP API calls lagane wali default library
-2  import pytest                            # Test assertions ke liye
-3
-4  def test_get_user_profile():
-5      base_url = "https://api.example.com" # API ka main domain address
-6      endpoint = "/v1/profile"             # Us domain par specific page ya resource
-7      
-8      # Authorization Header setup (Bearer Token method)
-9      token = "super_secret_123"           # API token
-10     my_headers = {
-11         "Authorization": f"Bearer {token}" # f-string ka use karke token ko format kiya
-12     }
-13     
-14     # API key method (query parameter ke through) bhi possible hai: ?api_key=123
-15     
-16     # Act: Request bhejo
-17     response = requests.get(f"{base_url}{endpoint}", headers=my_headers)  # requests.get() GET request bhejta hai
-18     
-19     # Agar yahan fail ho raha hai, toh breakpoint() se debugger khol sakte hain (line neeche commented hai)
-20     # breakpoint()                       # Execution yahan pause ho jayegi
-21     
-22     # Assert: Validations
-23     # ⭐ API test mein hamesha pehle status_code check karo
-24     assert response.status_code == 200   # Check kiya ki connection OK hai ya nahi (200 matlab sab theek)
-25     
-26     # JSON Parsing
-27     data = response.json()               # .json() response ko Python dictionary mein convert karta hai
-28     assert data["username"] == "john_doe" # Dictionary key access karke value validate ki
+2  [[HL::import pytest                            # Test assertions ke liye::HL]]
+[[HL::3::HL]]
+[[HL::4  def test_get_user_profile():::HL]]
+[[HL::5      base_url = "https://api.example.com" # API ka main domain address::HL]]
+[[HL::6      endpoint = "/v1/profile"             # Us domain par specific page ya resource::HL]]
+[[HL::7::HL]]      
+[[HL::8      # Authorization Header setup (Bearer Token method)::HL]]
+[[HL::9      token = "super_secret_123"           # API token::HL]]
+[[HL::10     my_headers = {::HL]]
+[[HL::11         "Authorization": f"Bearer {token}" # f-string ka use karke token ko format kiya::HL]]
+[[HL::12     }::HL]]
+[[HL::13::HL]]     
+[[HL::14     # API key method (query parameter ke through) bhi possible hai: ?api_key=123::HL]]
+[[HL::15::HL]]     
+[[HL::16     # Act: Request bhejo::HL]]
+[[HL::17     response = requests.get(f"{base_url}{endpoint}", headers=my_headers)  # requests.get() GET request bhejta hai::HL]]
+[[HL::18::HL]]     
+[[HL::19     # Agar yahan fail ho raha hai, toh breakpoint() se debugger khol sakte hain (line neeche commented hai)::HL]]
+[[HL::20     # breakpoint()                       # Execution yahan pause ho jayegi::HL]]
+[[HL::21::HL]]     
+[[HL::22     # Assert: Validations::HL]]
+[[HL::23     # ⭐ API test mein hamesha pehle status_code check karo::HL]]
+[[HL::24     assert response.status_code == 200   # Check kiya ki connection OK hai ya nahi (200 matlab sab theek)::HL]]
+[[HL::25::HL]]     
+[[HL::26     # JSON Parsing::HL]]
+[[HL::27     data = response.json()               # .json() response ko Python dictionary mein convert karta hai::HL]]
+[[HL::28     assert data["username"] == "john_doe" # Dictionary key access karke value validate ki::HL]]
 
 ```
 
@@ -790,18 +790,18 @@ test_api.py .                                                          [100%]
 
 ##### 🔬 Code Explanation
 
-* **Lines 10-12:** `my_headers` ek Python dictionary hai jisme `"Authorization"` key pass ki. Yeh API ko tumhari identity prove karti hai. Iske bina server **401 Unauthorized** error dega. `f-string` (jisme `f""` lagta hai) variables ko string ke andar daalne ka easy tarika hai.
-* **Line 17:** `requests.get()` function target URL pe call karta hai aur ek `Response object` return karta hai jisme server ka poora reply hota hai (status, body, headers).
-* **Line 24:** Pytest ka `assert` check karta hai ki `response.status_code` exactly 200 hai.
-* **Line 27:** `response.json()` server ke text data ko padh kar Python `dictionary` (key-value format) bana deta hai jisse access karna asaan ho.
+* [[HL::**Lines 10-12:** `my_headers` ek Python dictionary hai jisme `"Authorization"` key pass ki. Yeh API ko tumhari identity prove karti hai. Iske bina server **401 Unauthorized** error dega. `f-string` (jisme `f""` lagta hai) variables ko string ke andar daalne ka easy tarika hai.::HL]]
+* [[HL::**Line 17:** `requests.get()` function target URL pe call karta hai aur ek `Response object` return karta hai jisme server ka poora reply hota hai (status, body, headers).::HL]]
+* [[HL::**Line 24:** Pytest ka `assert` check karta hai ki `response.status_code` exactly 200 hai.::HL]]
+* [[HL::**Line 27:** `response.json()` server ke text data ko padh kar Python `dictionary` (key-value format) bana deta hai jisse access karna asaan ho.::HL]]
 
 #### 🖥️ Command Clarity Rule (Debugging)
 
-Jab code mein `breakpoint()` ya purana style `pdb.set_trace()` (line 20) active ho, toh terminal run command alag hoti hai:
+[[HL::Jab code mein `breakpoint()` ya purana style `pdb.set_trace()` (line 20) active ho, toh terminal run command alag hoti hai:::HL]]
 
-* **Command:** `pytest -v -s`
-* **Anatomy:**
-* `-s`: Disable output capturing. By default pytest print aur interactive inputs ko block kar deta hai. `-s` lagane se tum debugger mein commands type kar paoge.
+* [[HL::**Command:** `pytest -v -s`::HL]]
+* [[HL::**Anatomy:**::HL]]
+* [[HL::`-s`: Disable output capturing. By default pytest print aur interactive inputs ko block kar deta hai. `-s` lagane se tum debugger mein commands type kar paoge.::HL]]
 
 
 
@@ -814,12 +814,12 @@ Jab code mein `breakpoint()` ya purana style `pdb.set_trace()` (line 20) active 
 
 ```
 
-**Pdb Prompt commands (Terminal mein kya type karein):**
+[[HL::**Pdb Prompt commands (Terminal mein kya type karein):**::HL]]
 
-* `n` ya `next`: Agli line pe jao.
-* `c` ya `continue`: Breakpoint hata kar poora program end tak run karo.
-* `q` ya `quit`: Debugging band karke program wahi crash kardo.
-* `response.status_code`: Yeh type karke Enter maroge toh live variable ki value dikh jayegi.
+* [[HL::`n` ya `next`: Agli line pe jao.::HL]]
+* [[HL::`c` ya `continue`: Breakpoint hata kar poora program end tak run karo.::HL]]
+* [[HL::`q` ya `quit`: Debugging band karke program wahi crash kardo.::HL]]
+* [[HL::`response.status_code`: Yeh type karke Enter maroge toh live variable ki value dikh jayegi.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -827,7 +827,7 @@ Basic Auth (Username:Password), API Key, aur Bearer Token teeno tarike API ko se
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Large teams mein, API errors silent killers hote hain. Status code 500 (Internal Server Error) aaya, par developer ne body nahi padhi. Isliye Pdb debugging production-grade testing mein lifesaver hai, especially jab complex JSON tree ho (1000 lines ka response) jise sirf print karke padhna impossible ho.
+Large teams mein, API errors silent killers hote hain. Status code 500 (Internal Server Error) aaya, par developer ne body nahi padhi. Isliye Pdb debugging production-grade testing mein lifesaver hai, especially jab complex JSON tree ho (1000 [[HL::lines::HL]] ka response) jise sirf print karke padhna impossible ho.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -881,9 +881,9 @@ Jab tum Zomato pe payment karte ho, toh frontend app backend ke Stripe (payment 
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer API call karta hai (auth tokens aur headers ke saath), status code aur JSON response extract karke assert se verify karta hai. Agar output samajh na aaye toh `breakpoint()` lagakar execution rokta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer API call karta hai (auth tokens aur headers ke saath), status code aur JSON response extract karke assert se verify karta hai. Agar output samajh na aaye toh `breakpoint()` lagakar execution rokta hai.
 * **Fixing/Iteration Phase:** Debugger prompt (Pdb) par developer ruk kar variables (e.g., `response.status_code`, `response.json()`) ki actual values check karta hai taaki error fix kar sake.
-* **Live Production Phase:** Test jab CI/CD pipeline pe jaata hai, toh debugging breakpoints remove kar diye jate hain taaki tests smoothly run ho saken.
+* **Live Production Phase:** Test jab CI/CD [[HL::pipeline::HL]] pe jaata hai, toh debugging breakpoints remove kar diye jate hain taaki tests smoothly run ho saken.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -904,18 +904,18 @@ HTTP GET /v1/profile --------> [API Server (Validates Token)]
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q:** API Testing mein `requests` library kya role play karti hai?
-* **A:** `requests` Python ki most popular HTTP library hai. Hum iska use HTTP verbs (GET, POST, PUT, DELETE) call karne, headers/tokens attach karne aur JSON payloads bhejney aur receive karne ke liye karte hain.
+* [[HL::**Q:** API Testing mein `requests` library kya role play karti hai?::HL]]
+* [[HL::**A:** `requests` Python ki most popular HTTP library hai. Hum iska use HTTP verbs (GET, POST, PUT, DELETE) call karne, headers/tokens attach karne aur JSON payloads bhejney aur receive karne ke liye karte hain.::HL]]
 * **Q:** 200, 401, aur 404 status codes ka kya matlab hota hai?
 * **A:** 200 (OK) matlab request successful thi. 401 (Unauthorized) matlab aapki identity verify nahi hui (invalid token). 404 (Not Found) matlab aap jo endpoint search kar rahe hain, woh server par exist nahi karta.
-* **Q:** `breakpoint()` kya karta hai aur Pytest mein debugger enable karne ke liye konsa flag lagta hai?
-* **A:** `breakpoint()` code execution ko wahi pause kar deta hai aur Python Debugger (Pdb) start kar deta hai taaki live variables inspect kiye ja sakein. Pytest mein by default I/O (Input/Output) blocked rehta hai, isliye debugger prompt access karne ke liye `-s` flag (disable output capturing) lagana mandatory hai.
+* [[HL::**Q:** `breakpoint()` kya karta hai aur Pytest mein debugger enable karne ke liye konsa flag lagta hai?::HL]]
+* [[HL::**A:** `breakpoint()` code execution ko wahi pause kar deta hai aur Python Debugger (Pdb) start kar deta hai taaki live variables inspect kiye ja sakein. Pytest mein by default I/O (Input/Output) blocked rehta hai, isliye debugger prompt access karne ke liye `-s` flag (disable output capturing) lagana mandatory hai.::HL]]
 * **Q:** JSON parsing `requests` library mein kaise ki jati hai?
 * **A:** Jab hum API se data recieve karte hain, woh by default text/string format mein hota hai. Hum `response.json()` method call karte hain, jo us string ko parse karke properly formatted Python dictionary bana deta hai jise access karna aasan hota hai.
 * **Q:** API Keys ko URL mein (query parameter) bhejney ka kya nuksan hai?
 * **A:** URL query parameters network logs, browser history, aur router firewalls mein plain text mein save ho jate hain, jisse API key leak hone ka bohot bada risk (Security Risk) hota hai. Isliye headers mein (e.g., Authorization header) token bhejney ko industry standard maana jata hai kyunki woh HTTPS TLS encryption ke andar chhupe hote hain.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "API test ka pehla usool: Pehle status check, phir data extract. Atak jao toh breakpoint lagao, Pdb se pucho!"
 
@@ -983,15 +983,15 @@ Sath hi, restaurant mein ek **Central Kitchen (`conftest.py`)** hoti hai jahan s
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** Pytest fixtures are helper functions that provide a fixed baseline (like database connections or mock data) for tests to execute reliably. The `conftest.py` file acts as a centralized directory for shared fixtures.
-* **Hinglish Simplification:** Fixture ek helper function hai jo test run hone se pehle zaroori cheezein (jaise login karna ya DB connect karna) taiyaar karke test ko de deta hai, aur test khatam hone par safai (cleanup) bhi kar deta hai.
+* **Precise English:** Pytest fixtures are helper functions that provide a fixed [[HL::baseline::HL]] (like database connections or mock data) for tests to execute reliably. The `conftest.py` file acts as a centralized directory for shared fixtures.
+* [[HL::**Hinglish Simplification:** Fixture ek helper function hai jo test run hone se pehle zaroori cheezein (jaise login karna ya DB connect karna) taiyaar karke test ko de deta hai, aur test khatam hone par safai (cleanup) bhi kar deta hai.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Har test mein DB connect karna aur close karna repetitive code (duplicate code) banata hai. Isse DRY (Don't Repeat Yourself — code repeat mat karo) principle break hota hai.
-* **Solution:** Fixtures setup aur teardown logic ko ek jagah extract kar lete hain. Test function sirf fixture ko as a parameter (argument) call karta hai.
-* **What breaks if we don't use it?** Agar tumhare 500 tests DB connect kar rahe hain aur connection logic change hua, toh 500 jagah code edit karna padega.
-* **✅ Kab use karo (Use this when):** Jab multiple tests ko same setup (jaise test database, browser instance, ya user login token) chahiye ho.
+* [[HL::**Problem:** Har test mein DB connect karna aur close karna repetitive code (duplicate code) banata hai. Isse DRY (Don't Repeat Yourself — code repeat mat karo) principle break hota hai.::HL]]
+* [[HL::**Solution:** Fixtures setup aur teardown logic ko ek jagah extract kar lete hain. Test function sirf fixture ko as a parameter (argument) call karta hai.::HL]]
+* [[HL::**What breaks if we don't use it?** Agar tumhare 500 tests DB connect kar rahe hain aur connection logic change hua, toh 500 jagah code edit karna padega.::HL]]
+* [[HL::**✅ Kab use karo (Use this when):** Jab multiple tests ko same setup (jaise test database, browser instance, ya user login token) chahiye ho.::HL]]
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab data sirf ek hi specific test mein chahiye aur kahin aur nahi — wahan normal helper function ya seedha test ke andar variables use karna better hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -1006,13 +1006,13 @@ project_root/
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-Jab ek test function chalne wala hota hai:
+[[HL::Jab ek test function chalne wala hota hai:::HL]]
 
-1. Pytest dekhta hai ki test ke parameter (argument) mein kaunse fixture ka naam likha hai.
-2. Pytest us naam ke fixture ko `conftest.py` ya current file mein dhoondhta hai.
-3. **Setup Phase:** Fixture ka code `yield` keyword tak run hota hai (connection banta hai).
-4. Fixture woh value test function ko pass karta hai aur ruk jata hai. Test run (test isolation mein) hota hai.
-5. **Teardown (Cleanup) Phase:** Test khatam hone ke baad, fixture `yield` ke baad wala code run karta hai (connection close).
+1. [[HL::Pytest dekhta hai ki test ke parameter (argument) mein kaunse fixture ka naam likha hai.::HL]]
+2. [[HL::Pytest us naam ke fixture ko `conftest.py` ya current file mein dhoondhta hai.::HL]]
+3. [[HL::**Setup Phase:** Fixture ka code `yield` keyword tak run hota hai (connection banta hai).::HL]]
+4. [[HL::Fixture woh value test function ko pass karta hai aur ruk jata hai. Test run (test isolation mein) hota hai.::HL]]
+5. [[HL::**Teardown (Cleanup) Phase:** Test khatam hone ke baad, fixture `yield` ke baad wala code run karta hai (connection close).::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -1020,14 +1020,14 @@ Jab ek test function chalne wala hota hai:
 # Python 3.10+ | Pytest 7.0+
 1  import pytest                               # pytest framework import kiya
 2
-3  # @pytest.fixture = decorator jo batata hai ki yeh normal function nahi, fixture hai
-4  # scope="session" = poore test run (session) mein sirf 1 baar chalega (heavy cheezon ke liye)
-5  @pytest.fixture(scope="session")
-6  def db_connection():                        # fixture ka naam db_connection hai
-7      print("\n[Setup] Connecting to Database...") # test se pehle print hoga
-8      db = {"user": "admin", "status": "connected"} # dummy database connection object
-9      yield db                                # yield = waiter ki tarah db test ko do aur yahan pause ho jao
-10     print("\n[Teardown] Closing Database...")    # test khatam hone par yeh line chalegi (cleanup)
+3  # [[HL::@pytest.fixture = decorator jo batata hai ki yeh normal function nahi, fixture hai::HL]]
+[[HL::4  # scope="session" = poore test run (session) mein sirf 1 baar chalega (heavy cheezon ke liye)::HL]]
+5  [[HL::@pytest.fixture(scope="session")::HL]]
+[[HL::6  def db_connection():                        # fixture ka naam db_connection hai::HL]]
+[[HL::7      print("\n[Setup] Connecting to Database...") # test se pehle print hoga::HL]]
+[[HL::8      db = {"user": "admin", "status": "connected"} # dummy database connection object::HL]]
+[[HL::9      yield db::HL]]                                # [[HL::yield = waiter ki tarah db test ko::HL]] do aur yahan pause ho jao
+10     print("\n[Teardown] Closing Database...")    # test khatam hone par yeh [[HL::line::HL]] chalegi (cleanup)
 11
 12 # Test function fixture ka naam as argument leta hai
 13 def test_check_user(db_connection):         # pytest khud 'db_connection' fixture yahan inject karega
@@ -1048,10 +1048,10 @@ PASSED
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 5:** `@pytest.fixture(scope="session")` — Yeh batata hai ki yeh fixture poore test run mein sirf ek baar banega. Agar 100 tests isko mangenge, toh sabko same connection milega.
-* **Line 9:** `yield db` — ⭐ **yield keyword fixtures ki jaan hai**. Agar hum yahan `return db` likhte, toh function wahi khatam ho jata aur cleanup (Line 10) kabhi run nahi hoti. `yield` value deta hai aur pause ho jata hai. Test khatam hone par wapas yahin se resume hota hai.
+* [[HL::**Line 5:** `@pytest.fixture(scope="session")` — Yeh batata hai ki yeh fixture poore test run mein sirf ek baar banega. Agar 100 tests isko mangenge, toh sabko same connection milega.::HL]]
+* [[HL::**Line 9:** `yield db` — ⭐ **yield keyword fixtures ki jaan hai**. Agar hum yahan `return db` likhte, toh function wahi khatam ho jata aur cleanup (Line 10) kabhi run nahi hoti. `yield` value deta hai aur pause ho jata hai. Test khatam hone par wapas yahin se resume hota hai.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -1059,10 +1059,10 @@ Fixtures mein database credentials ya API keys directly hardcode mat karo. Hames
 
 #### 🏗️ 9. Scalability & Industry Context
 
-* **Scopes (Scalability):** - `scope="function"` (default): Har test ke liye naya banega.
-* `scope="class"`: Poori test class ke liye ek baar banega.
-* `scope="module"`: Ek poore `.py` file ke liye ek baar.
-* `scope="session"`: Heavy cheezon (DB, API Client, Browser instances) ke liye **hamesha** `session` use karein taaki tests seconds ki jagah milliseconds mein run ho.
+* [[HL::**Scopes (Scalability):** - `scope="function"` (default): Har test ke liye naya banega.::HL]]
+* [[HL::`scope="class"`: Poori test class ke liye ek baar banega.::HL]]
+* [[HL::`scope="module"`: Ek poore `.py` file ke liye ek baar.::HL]]
+* [[HL::`scope="session"`: Heavy cheezon (DB, API Client, Browser instances) ke liye **hamesha** `session` use karein taaki tests seconds ki jagah milliseconds mein run ho.::HL]]
 
 
 * **Central Kitchen:** Industry mein `conftest.py` ko project root pe rakha jata hai (Shared fixtures ke liye) taaki koi bhi test file bina explicit `import` ke unhe use kar sake.
@@ -1078,23 +1078,23 @@ Fixtures mein database credentials ya API keys directly hardcode mat karo. Hames
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "`return` aur `yield` mein kya fark hai?"**
-* **Galat soch:** Dono value waapas dete hain, koi fark nahi.
-* **Actually:** `return` function ko hamesha ke liye exit kar deta hai. `yield` ek pause button hai — test ko value deta hai, wait karta hai test khatam hone ka, phir aage ka code chalata hai (cleanup).
+* [[HL::**Confusion 1 — "`return` aur `yield` mein kya fark hai?"**::HL]]
+* [[HL::**Galat soch:** Dono value waapas dete hain, koi fark nahi.::HL]]
+* [[HL::**Actually:** `return` function ko hamesha ke liye exit kar deta hai. `yield` ek pause button hai — test ko value deta hai, wait karta hai test khatam hone ka, phir aage ka code chalata hai (cleanup).::HL]]
 * **Prove karo:** Fixture mein `yield` ki jagah `return` likho aur uske neeche `print("cleaning")` likho. Test run karo — "cleaning" kabhi print nahi hoga!
 
 
-* **Confusion 2 — "Kya mujhe `conftest.py` ko kahin import karna padega?"**
-* **Galat soch:** Jaise `config.py` import karte hain, waise `conftest.py` karna hoga.
-* **Actually:** Nahi! Pytest is file ka naam jaanta hai. Jis folder mein test chal raha hai, wahan (aur uske upar wale folders mein) Pytest khud `conftest.py` dhoondh leta hai.
+* [[HL::**Confusion 2 — "Kya mujhe `conftest.py` ko kahin import karna padega?"**::HL]]
+* [[HL::**Galat soch:** Jaise `config.py` import karte hain, waise `conftest.py` karna hoga.::HL]]
+* [[HL::**Actually:** Nahi! Pytest is file ka naam jaanta hai. Jis folder mein test chal raha hai, wahan (aur uske upar wale folders mein) Pytest khud `conftest.py` dhoondh leta hai.::HL]]
 
 
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 
 * **`fixture 'abc' not found`**
-* **Root Cause:** Ya toh naam ki spelling galat hai, ya fixture test folder ke scope se bahar (doosre folder) ke `conftest.py` mein hai.
-* **Fix:** Spelling check karo. Dekho ki test file aur `conftest.py` same directory structure mein hain. CLI run karo: `pytest --fixtures` (yeh command saare available fixtures list kar degi).
+* [[HL::**Root Cause:** Ya toh naam ki spelling galat hai, ya fixture test folder ke scope se bahar (doosre folder) ke `conftest.py` mein hai.::HL]]
+* [[HL::**Fix:** Spelling check karo. Dekho ki test file aur `conftest.py` same directory structure mein hain. CLI run karo: `pytest --fixtures` (yeh command saare available fixtures list kar degi).::HL]]
 
 
 * **Setup 10 baar run ho raha hai jabki 1 baar hona chahiye tha!**
@@ -1117,9 +1117,9 @@ Selenium (browser automation tool — web testing ke liye Chrome/Firefox ko code
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer ko naya DB test likhna hai. Woh setup/teardown ko automate karne ke liye fixture banata hai, efficiency badhane ke liye sahi scope (`session`) define karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer ko naya DB test likhna hai. Woh setup/teardown ko automate karne ke liye fixture banata hai, efficiency badhane ke liye sahi scope (`session`) define karta hai.
 * **Fixing/Iteration Phase:** Woh is fixture ko `conftest.py` mein rakhta hai taaki poore project mein import kiye bina as a shared fixture use kar sake.
-* **Live Production Phase:** CI/CD pipeline jab tests run karti hai, tab Setup, test run, aur Teardown smoothly chalte hain bina memory leaks ke.
+* **Live Production Phase:** CI/CD [[HL::pipeline::HL]] jab tests run karti hai, tab Setup, test run, aur Teardown smoothly chalte hain bina memory leaks ke.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -1143,15 +1143,15 @@ Selenium (browser automation tool — web testing ke liye Chrome/Firefox ko code
 #### ❓ 17. Interview Q&A (FAQ)
 
 * **Q:** Pytest mein `conftest.py` ka kya role hai?
-* **A:** `conftest.py` ek special file hai jo test directory mein hoti hai. Isme hum shared fixtures (aur configuration) rakhte hain. Pytest automatically is file ko discover kar leta hai, isliye humein isko explicitly import karne ki zaroorat nahi padti. Isko 'Central Kitchen' samjho jahan se poore folder ko resources milte hain.
+* [[HL::**A:** `conftest.py` ek special file hai jo test directory mein hoti hai. Isme hum shared fixtures (aur configuration) rakhte hain. Pytest automatically is file ko discover kar leta hai, isliye humein isko explicitly import karne ki zaroorat nahi padti. Isko 'Central Kitchen' samjho jahan se poore folder ko resources milte hain.::HL]]
 * **Q:** Fixture scope kya hote hain aur unhe kab use karna chahiye?
 * **A:** Scopes define karte hain ki ek fixture kitni baar execute hoga. 4 main scopes hain: `function` (default - har test pehle), `class` (class level par), `module` (file level par), aur `session` (poore execution cycle mein ek baar). Heavy initialization jaise API clients ya DB ke liye hamesha `session` scope use karna chahiye to save execution time.
-* **Q:** Setup aur Teardown kaise achieve hota hai fixtures mein?
-* **A:** Hum `yield` keyword ka use karte hain. `yield` se pehle wala code Setup (initialization) hota hai. Uske baad fixture ruk jata hai aur test chalta hai. Test poora hone par `yield` ke baad wala code run hota hai jo Teardown (cleanup, resources close karna) ka kaam karta hai.
+* [[HL::**Q:** Setup aur Teardown kaise achieve hota hai fixtures mein?::HL]]
+* [[HL::**A:** Hum `yield` keyword ka use karte hain. `yield` se pehle wala code Setup (initialization) hota hai. Uske baad fixture ruk jata hai aur test chalta hai. Test poora hone par::HL]] `yield` [[HL::ke baad wala code run hota hai jo Teardown (cleanup, resources close karna) ka kaam karta hai.::HL]]
 * **Q:** Test isolation ka concept fixtures mein kaise maintain hota hai?
 * **A:** Agar ek test fixture ka data modify karta hai, toh by default (`function` scope mein) doosre test ko modify kiya hua data nahi milta — usse ek fresh fixture object milta hai. Yeh ensure karta hai ki ek test fail hone par doosre tests par side-effect na ho (test isolation).
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 ⭐ **"yield keyword fixtures ki jaan hai — wait karta hai, test chalata hai, phir safai (cleanup) karta hai!"**
 
@@ -1182,14 +1182,14 @@ Selenium (browser automation tool — web testing ke liye Chrome/Firefox ko code
 #### 📖 3. Technical Definition
 
 * **Precise English:** Test execution control involves using Pytest Markers to categorize and selectively run tests. Parametrization enables Data-Driven Testing (DDT) by injecting multiple sets of arguments into a single test function.
-* **Hinglish Simplification:** Pytest mein hum tests par labels (tags) lagakar unhe filter kar sakte hain. Aur ek hi test function ko multiple data sets pass karke, kam code likh kar zyada tests run kar sakte hain.
+* [[HL::**Hinglish Simplification:** Pytest mein hum tests par labels (tags) lagakar unhe filter kar sakte hain. Aur ek hi test function ko multiple data sets pass karke, kam code likh kar zyada tests run kar sakte hain.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar re-login page test karna hai 50 alag passwords se, toh kya tum 50 test functions likhoge? Nahi! Usse file thousands of lines ki ho jayegi. Also, production deploy se pehle saare 10,000 tests run karne ka time nahi hota.
-* **Solution:** Parametrize use karke 1 test mein 50 inputs bhejo (Data-Driven Testing). Aur Markers use karke sirf critical (smoke) tests run karo.
+* [[HL::**Problem:** Agar re-login page test karna hai 50 alag passwords se, toh kya tum 50 test functions likhoge? Nahi! Usse file thousands of lines ki ho jayegi. Also, production deploy se pehle saare 10,000 tests run karne ka time nahi hota.::HL]]
+* [[HL::**Solution:** Parametrize use karke 1 test mein 50 inputs bhejo (Data-Driven Testing). Aur Markers use karke sirf critical (smoke) tests run karo.::HL]]
 * **What breaks if we don't use it?** Development cycle bohot slow ho jayegi. Known bugs test results ko "Failed" dikhayenge jisse developers panic honge (isliye xfail zaroori hai).
-* **✅ Kab use karo:**
+* **✅ Kab [[HL::use karo:**::HL]]
 * Parametrize: Jab test ka logic same ho, bas inputs aur expected outputs alag hon.
 * Markers: Jab tumhe slow tests ko API tests ya UI tests se alag karna ho.
 
@@ -1199,11 +1199,11 @@ Selenium (browser automation tool — web testing ke liye Chrome/Firefox ko code
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 ```ini
-# pytest.ini file (Project root mein)
-[pytest]
-markers =
-    smoke: Quick tests to check core functionality
-    api: API related tests
+# [[HL::pytest.ini file (Project root mein)::HL]]
+[[HL::[pytest]::HL]]
+[[HL::markers =::HL]]
+    [[HL::smoke: Quick tests to check core functionality::HL]]
+    [[HL::api: API related tests::HL]]
 
 ```
 
@@ -1222,23 +1222,23 @@ markers =
 2  import sys                                  # OS details check karne ke liye module
 3
 4  # 1. Parametrization (DDT) example
-5  # @pytest.mark.parametrize: 2 arguments lega 'username' aur 'password' list of tuples se
-6  @pytest.mark.parametrize("username, password", [ 
-7      ("admin", "1234"),                      # Test run 1 ka data
-8      ("user1", "pass"),                      # Test run 2 ka data
-9  ])
-10 def test_login(username, password):         # variables decorate function mein pass honge
+5  # [[HL::@pytest.mark.parametrize: 2 arguments lega 'username' aur 'password' list of tuples se::HL]]
+6  [[HL::@pytest.mark.parametrize("username, password", [::HL]] 
+[[HL::7      ("admin", "1234"),                      # Test run 1 ka data::HL]]
+[[HL::8      ("user1", "pass"),                      # Test run 2 ka data::HL]]
+[[HL::9  ])::HL]]
+[[HL::10 def::HL]] test_login(username, password):         # variables decorate function mein pass honge
 11     print(f"\nTrying login: {username} - {password}")
 12     assert username != ""                   # basic verification
 13
-14 # 2. Markers aur Skipif example
-15 @pytest.mark.smoke                          # Custom marker (smoke testing ke liye)
-16 @pytest.mark.skipif(sys.platform == "win32", reason="Doesn't run on Windows") # sys.platform se OS check karo
-17 def test_unix_feature():                    # yeh sirf Linux/Mac(darwin) pe chalega
+14 # 2. [[HL::Markers aur Skipif example::HL]]
+[[HL::15 @pytest.mark.smoke::HL]]                          # [[HL::Custom marker (smoke testing ke liye)::HL]]
+[[HL::16 @pytest.mark.skipif(sys.platform == "win32", reason="Doesn't run on Windows") # sys.platform se OS check karo::HL]]
+[[HL::17 def test_unix_feature():::HL]]                    # yeh sirf Linux/Mac(darwin) pe chalega
 18     assert True
 19
-20 # 3. XFAIL example (Expected Fail)
-21 @pytest.mark.xfail(reason="Bug #123 is not fixed yet") # Hum jante hain yeh fail hoga
+20 # 3. [[HL::XFAIL example (Expected Fail)::HL]]
+[[HL::21 @pytest.mark.xfail(reason="Bug #123 is not fixed yet") # Hum jante hain yeh fail hoga::HL]]
 22 def test_broken_feature():
 23     assert 1 == 2                           # deliberately failing code
 
@@ -1259,15 +1259,15 @@ SKIP [1] test_control.py:15: Doesn't run on Windows
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 6:** `@pytest.mark.parametrize("username, password", [...])` — Pytest string ko split karta hai aur data list ke har tuple ke values un parameters mein daal deta hai. Ek test logic likha, lekin run 2 tests hue!
-* **Line 16:** `sys.platform == "win32"` — Yeh check karta hai ki OS Windows hai. Agar condition `True` hui toh test completely bypass (skip) ho jayega. (Linux ke liye 'linux', Mac ke liye 'darwin' hota hai).
-* **Line 21:** `xfail` (Expected Fail) — Test run hota hai! Lekin fail hone par pipeline lal rang (Error) mein crash nahi hoti. Yeh batata hai ki haan, mujhe pata tha yeh tootega.
+* [[HL::**Line 6:** `@pytest.mark.parametrize("username, password", [...])` — Pytest string ko split karta hai aur data list ke har tuple ke values un parameters mein daal deta hai. Ek test logic likha, lekin run 2 tests hue!::HL]]
+* [[HL::**Line::HL]] 16:** `sys.platform == "win32"` — Yeh check karta hai ki OS Windows hai. Agar condition `True` hui toh test completely bypass (skip) ho jayega. (Linux ke liye 'linux', Mac ke liye 'darwin' hota hai).
+* [[HL::**Line::HL]] 21:** `xfail` (Expected Fail) — Test run hota hai! Lekin fail hone par [[HL::pipeline::HL]] lal rang (Error) mein crash nahi hoti. Yeh batata hai ki haan, mujhe pata tha yeh tootega.
 
 #### 🔒 8. Security-First Check
 
-Kabhi kabhi security tests (jaise vulnerability scans) mistakenly skip ho jate hain agar OS markers galat lage hon. Ensure karo ki production (CI/CD) pipelines mein saare security tests override parameters ke bina chalein.
+Kabhi kabhi security tests (jaise vulnerability scans) mistakenly skip ho jate hain agar OS markers galat lage hon. Ensure karo ki production (CI/CD) [[HL::pipelines::HL]] mein saare security tests override parameters ke bina chalein.
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -1284,10 +1284,10 @@ Data-driven testing (DDT) industry mein sabse zyada use hota hai. Excel, CSV, ya
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Skip aur XFAIL mein exact difference kya hai?"**
-* **Galat soch:** Dono ka matlab same hai — test ko ignore karna.
-* **Actually:** `skip` test ko execute hi nahi karta (jaise teacher ne list se naam kaat diya). `xfail` test ko completely run karta hai, agar fail hua toh warning deta hai, par agar Galti Se PASS ho gaya (XPASS), toh alarm bajata hai ki "Yeh fail hona tha, pass kaise hua?".
-* **Prove karo:** Upar wale code mein line 23 mein `1 == 1` likh do. Ab woh XPASS (Unexpected Pass) throw karega.
+* [[HL::**Confusion 1 — "Skip aur XFAIL mein exact difference kya hai?"**::HL]]
+* [[HL::**Galat soch:** Dono ka matlab same hai — test ko ignore karna.::HL]]
+* [[HL::**Actually:** `skip` test ko execute hi nahi karta (jaise teacher ne list se naam kaat diya). `xfail` test ko completely run karta hai, agar fail hua toh warning deta hai, par agar Galti Se PASS ho gaya (XPASS), toh alarm bajata hai ki "Yeh fail hona tha, pass kaise hua?".::HL]]
+* **Prove karo:** Upar wale code mein [[HL::line::HL]] 23 mein `1 == 1` likh do. Ab woh XPASS (Unexpected Pass) throw karega.
 
 
 * **Confusion 2 — "Parametrize ka argument string mein kyun likha hai `"username, password"`?"**
@@ -1304,8 +1304,8 @@ Data-driven testing (DDT) industry mein sabse zyada use hota hai. Excel, CSV, ya
 
 
 * **`-m flag error: "not a valid match expression"`**
-* **Root Cause:** Command line par tumne `-m smoke and api` bina quotes ke likha hoga, jisse shell confuse ho gaya.
-* **Fix:** Hamesha quotes use karo: `pytest -m "smoke or api"`.
+* **Root Cause:** Command [[HL::line::HL]] par tumne `-m smoke and api` bina quotes ke likha hoga, jisse shell confuse ho gaya.
+* **Fix:** Hamesha quotes [[HL::use karo:::HL]] `pytest -m "smoke or api"`.
 
 
 
@@ -1323,9 +1323,9 @@ E-commerce websites (jaise Amazon) par search function check karne ke liye QA en
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer API testing likhta hai. Kuch tests slow (db wale) hote hain, kuch fast. Woh inpe `@pytest.mark.slow` tags lagata hai aur CLI (`-m`) se selectively run karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer API testing likhta hai. Kuch tests slow (db wale) hote hain, kuch fast. Woh inpe `@pytest.mark.slow` tags lagata hai aur CLI (`-m`) se selectively run karta hai.
 * **Fixing/Iteration Phase:** Bug milne par woh us test pe `@pytest.mark.xfail` lagata hai ticket number ke sath. Jab kal us bug ko fix karta hai, toh run karne par test XPASS hota hai, phir woh us marker ko hata deta hai.
-* **Live Production Phase:** Nightly build pipeline saare data-driven tests (`parametrize`) aur saare markers run karti hai (except `skipif` jo production OS environment se match na khayein).
+* **Live Production Phase:** Nightly build [[HL::pipeline::HL]] saare data-driven tests (`parametrize`) aur saare markers run karti hai (except `skipif` jo production OS environment se match na khayein).
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -1347,8 +1347,8 @@ Input: admin         Input: user
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q:** Data-Driven Testing (DDT) kya hoti hai aur Pytest isse kaise support karta hai?
-* **A:** DDT ek test strategy hai jahan ek hi logic ko alag-alag test data ke sath test kiya jata hai taaki multiple scenarios cover ho sakein bina code duplicate kiye. Pytest isko `@pytest.mark.parametrize` decorator ke through natively support karta hai.
+* [[HL::**Q:** Data-Driven Testing (DDT) kya hoti hai aur Pytest isse kaise support karta hai?::HL]]
+* [[HL::**A:** DDT ek test strategy hai jahan ek hi logic ko alag-alag test data ke sath test kiya jata hai taaki multiple scenarios cover ho sakein bina code duplicate kiye. Pytest isko `@pytest.mark.parametrize` decorator ke through natively support karta hai.::HL]]
 * **Q:** Hum tests ko specifically mark kyun karte hain? Iska CLI syntax kya hai?
 * **A:** Hum tests ko tag (mark) karte hain (e.g., `@pytest.mark.smoke`) taaki hum logical groupings bana sakein. Phir hum sirf unn specific tests ko run kar sakte hain using command: `pytest -m "smoke"`. Custom markers ko `pytest.ini` mein register karna zaroori hai to avoid warnings.
 * **Q:** Ek test Galti Se pass ho raha hai jabki usse fail hona chahiye tha. Tum isse kaise track karoge?
@@ -1356,7 +1356,7 @@ Input: admin         Input: user
 * **Q:** `sys.platform` ka use `skipif` ke sath kahan hota hai?
 * **A:** Cross-platform development mein. Agar tumhare paas ek script hai jo sirf Linux environment (`sys.platform == 'linux'`) ke specific file paths use karti hai, toh tum us test ko Windows machines par fail hone se rokne ke liye `skipif(sys.platform == 'win32')` laga dete ho.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 ⭐ **"Data-driven testing ke liye parametrize Pytest ka sabse powerful feature hai — aur XFAIL ko Bug tracking ke liye use karein!"**
 
@@ -1414,14 +1414,14 @@ Total keywords across processed subtopics: 52
 #### 📖 3. Technical Definition
 
 * **Precise English:** Mocking is a technique to isolate code by replacing real external dependencies with controllable dummy objects using the `pytest-mock` plugin. Built-in fixtures like `capsys`, `caplog`, and `monkeypatch` allow testing of `stdout`/`stderr`, logging systems, and dynamic environment variable modifications safely.
-* **Hinglish Simplification:** Mocking ka matlab hai apne code ke test mein asal external systems (jaise payment gateway) ki jagah ek fake (dummy) object lagana. Isse test fast hota hai aur internet par depend nahi karta. Pytest ke built-in tools hume console output padhne aur environment variables temporarily change karne ki power dete hain.
+* [[HL::**Hinglish Simplification:** Mocking ka matlab hai apne code ke test mein asal external systems (jaise payment gateway) ki jagah ek fake (dummy) object lagana. Isse test fast hota hai aur internet par depend nahi karta. Pytest ke built-in tools hume console output padhne aur environment variables temporarily change karne ki power dete hain.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar tumhara test actually Stripe ya PayPal ki API ko call karta hai, toh har test run pe credit card charge ho jayega! Agar internet down hai, toh test fail ho jayega bhale hi tumhara code sahi ho.
-* **Solution:** Hum real API call ko "Mock" (replace) kar dete hain. Hum mock ko bolte hain: "Jab bhi koi tujhe call kare, toh always 'Payment Successful' bol dena". Yeh **Unit Testing ke liye zaroori hai** (matlab sirf apne code logic ko test karna).
+* [[HL::**Problem:** Agar tumhara test actually Stripe ya PayPal ki API ko call karta hai, toh har test run pe credit card charge ho jayega! Agar internet down hai, toh test fail ho jayega bhale hi tumhara code sahi ho.::HL]]
+* [[HL::**Solution:** Hum real API call ko "Mock" (replace) kar dete hain. Hum mock ko bolte hain: "Jab bhi koi tujhe call kare, toh always 'Payment Successful' bol dena". Yeh **Unit Testing ke liye zaroori hai** (matlab sirf apne code logic ko test karna).::HL]]
 * **What breaks if we don't use it?** Tests bohot slow ho jayenge, flaky (kabhi pass, kabhi fail) honge, aur external APIs ka rate-limit cross ho jayega.
-* **✅ Kab use karo (Use this when):** Jab code external API ko call kar raha ho, Database likh raha ho, ya emails send kar raha ho.
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Jab code external API ko call kar raha ho, Database likh raha ho, ya emails send kar raha ho.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Integration tests ya End-to-End (E2E) tests mein, jahan tum sach mein dekhna chahte ho ki 2 real systems aapas mein baat kar pa rahe hain ya nahi.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -1481,12 +1481,12 @@ test_weather.py::test_weather_api PASSED
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 12:** `mocker` (pytest-mock plugin se aata hai), `monkeypatch`, aur `capsys` teeno built-in fixtures hain. Tumhe inhe `conftest.py` mein likhne ki zaroorat nahi, Pytest inko by default jaanta hai.
-* **Line 14:** `monkeypatch.setenv(...)` — Test chalne tak `API_KEY` ki value `"fake_secret_123"` set ho jayegi. Isse real `.env` file ko chhedne ki zaroorat nahi padti.
-* **Line 22:** `mocker.patch(...)` — Sabse critical line. Jab `get_weather` function `requests.get` call karega, toh asal internet pe request nahi jayegi, balki humara banaya hua `mock_resp` turant return ho jayega.
-* **Line 28:** `capsys.readouterr()` — Isne `stdout` (normal prints) aur `stderr` (error prints) dono ko capture kar liya. Iska result tuple hota hai jisko hum `captured.out` (Line 32) se access karte hain.
+* [[HL::**Line::HL]] 12:** `mocker` (pytest-mock plugin se aata hai), `monkeypatch`, aur `capsys` teeno built-in fixtures hain. Tumhe inhe `conftest.py` mein likhne ki zaroorat nahi, Pytest inko by default jaanta hai.
+* [[HL::**Line::HL]] 14:** `monkeypatch.setenv(...)` — Test chalne tak `API_KEY` ki value `"fake_secret_123"` set ho jayegi. Isse real `.env` file ko chhedne ki zaroorat nahi padti.
+* [[HL::**Line::HL]] 22:** `mocker.patch(...)` — Sabse critical [[HL::line.::HL]] Jab `get_weather` function `requests.get` call karega, toh asal internet pe request nahi jayegi, balki humara banaya hua `mock_resp` turant return ho jayega.
+* [[HL::**Line::HL]] 28:** `capsys.readouterr()` — Isne `stdout` (normal prints) aur `stderr` (error prints) dono ko capture kar liya. Iska result tuple hota hai jisko hum `captured.out` [[HL::(Line::HL]] 32) se access karte hain.
 
 #### 🔒 8. Security-First Check
 
@@ -1503,7 +1503,7 @@ Large systems (Microservices) mein, har team dusri team ki API pe depend karti h
 * **✅ The 'Pro' Way:** ⭐ **"Hamesha jahan cheez use ho rahi hai uss path ko patch karo"**. Agar `file_A.py` mein `import requests` likha hai, toh `mocker.patch('file_A.requests.get')` likhna padega.
 * **⚡ Consequences:** Agar galat path patch kiya, toh mock apply nahi hoga aur test asli API call kar dega, jisse production data corrupt ho sakta hai.
 * **❌ Mistake:** Logs test karne ke liye log files ko open/read karna test ke andar.
-* **⚡ Consequences:** File I/O operations slow hote hain aur parallel execution mein race conditions (2 tests same file read/write karne ki koshish karte hain) create karte hain. Hamesha **`caplog`** (Capture Log Output) built-in fixture use karo jo in-memory logs pakadta hai bina disk pe likhe.
+* **⚡ Consequences:** File I/O operations slow hote hain aur parallel execution mein race conditions (2 tests same file read/write karne ki koshish karte hain) create karte hain. Hamesha **`caplog`** (Capture Log Output) built-in fixture [[HL::use karo::HL]] jo in-memory logs pakadta hai bina disk pe likhe.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -1542,11 +1542,11 @@ Large systems (Microservices) mein, har team dusri team ki API pe depend karti h
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Stripe API (payment processing tool) testing. Jab tumhari E-commerce site pe koi checkout karta hai, test file mein `mocker.patch("stripe.Charge.create", return_value={"status": "succeeded"})` likha jata hai. Isse CI/CD pipeline jab GitHub pe test chalati hai toh sach ka paisa nahi katta, par checkout logic test ho jata hai.
+Stripe API (payment processing tool) testing. Jab tumhari E-commerce site pe koi checkout karta hai, test file mein `mocker.patch("stripe.Charge.create", return_value={"status": "succeeded"})` likha jata hai. Isse CI/CD [[HL::pipeline::HL]] jab GitHub pe test chalati hai toh sach ka paisa nahi katta, par checkout logic test ho jata hai.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer apne local laptop pe payment logic likhta hai. Woh `mocker` use karke payment gateway ko isolate karta hai, aur `monkeypatch` use karke test-specific environment variables set karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer apne local laptop pe payment logic likhta hai. Woh `mocker` use karke payment gateway ko isolate karta hai, aur `monkeypatch` use karke test-specific environment variables set karta hai.
 * **Fixing/Iteration Phase:** Agar assert fail hota hai, woh `capsys.readouterr()` check karta hai terminal pe ki function ne exact kya print kiya tha, aur code modify karta hai.
 * **Live Production Phase:** (N/A — Mocking strictly testing tool hai, production mein code bina kisi mocks ke real systems se baat karta hai).
 
@@ -1575,8 +1575,8 @@ Stripe API (payment processing tool) testing. Jab tumhari E-commerce site pe koi
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q:** Mocking kya hoti hai aur Unit Testing mein yeh kyun zaroori hai?
-* **A:** Mocking ek process hai jisme hum code ke external dependencies (DB, APIs) ko dummy objects se replace karte hain. Yeh Unit Testing ke liye zaroori hai kyunki unit test ka maqsad sirf ek specific function/unit ka logic test karna hota hai. Agar external API down hai, toh test fail nahi hona chahiye. Mocking isolation ensure karti hai.
+* [[HL::**Q:** Mocking kya hoti hai aur Unit Testing mein yeh kyun zaroori hai?::HL]]
+* [[HL::**A:** Mocking ek process hai jisme hum code ke external dependencies (DB, APIs) ko dummy objects se replace karte hain. Yeh Unit Testing ke liye zaroori hai kyunki unit test ka maqsad sirf ek specific function/unit ka logic test karna hota hai. Agar external API down hai, toh test fail nahi hona chahiye. Mocking isolation ensure karti hai.::HL]]
 * **Q:** Mocker se function patch karte waqt sabse common mistake kya hoti hai?
 * **A:** Sabse common mistake galat path ko patch karna hai. Rule yeh hai ki humesha us namespace (file/path) ko patch karna chahiye "jahan cheez use ho rahi hai", na ki jahan se cheez import hui hai. E.g., agar `app.py` requests use kar raha hai, hum `app.requests.get` patch karenge.
 * **Q:** `capsys` aur `caplog` built-in fixtures mein kya fark hai?
@@ -1584,7 +1584,7 @@ Stripe API (payment processing tool) testing. Jab tumhari E-commerce site pe koi
 * **Q:** Tum apne tests mein sensitive Environment Variables kaise handle karoge?
 * **A:** Main kabhi bhi hardcode nahi karunga. Main Pytest ke built-in `monkeypatch` fixture ka use karunga aur `monkeypatch.setenv('DB_PASS', 'dummy')` se test run ke dauran safe, temporary variables inject karunga jo test khatam hote hi clean ho jayenge.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 ⭐ **"Mocking Fighter Jet Simulator hai — asli plane udaye bina, real flying test karna!"**
 
@@ -1622,8 +1622,8 @@ Stripe API (payment processing tool) testing. Jab tumhari E-commerce site pe koi
 
 * **Problem:** Jab company mein 5,000 tests ho jate hain, toh unhe run hone mein 30 minute lag sakte hain. Developers wait karte rehte hain. Aur managers ko nahi pata hota ki team kitna achha test likh rahi hai ya results kya hain.
 * **Solution:** Parallel execution se 30 min ka time 5 min reh jata hai. Coverage report bataati hai kahan tests missing hain, aur HTML report stakeholders ko forward ki ja sakti hai.
-* **What breaks if we don't use it?** Development speed drastically slow ho jayegi. CI/CD pipelines bottleneck ban jayengi. Untested code directly production mein chala jayega (blind spots).
-* **✅ Kab use karo:** CI/CD (Continuous Integration/Continuous Deployment — code automatically test aur server par bhejne ka system) pipelines jaise Jenkins, GitHub Actions mein.
+* **What breaks if we don't use it?** Development speed drastically slow ho jayegi. CI/CD [[HL::pipelines::HL]] bottleneck ban jayengi. Untested code directly production mein chala jayega (blind spots).
+* **✅ Kab [[HL::use karo:**::HL]] CI/CD (Continuous Integration/Continuous Deployment — code automatically test aur server par bhejne ka system) [[HL::pipelines::HL]] jaise Jenkins, GitHub Actions mein.
 * **❌ Kab mat karo / Alternative prefer karo:** Development ke dauran jab tum ek single test ko debug kar rahe ho, toh parallel execution (`-n auto`) off rakho warna tracebacks samajh nahi aayenge.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -1631,15 +1631,15 @@ Stripe API (payment processing tool) testing. Jab tumhari E-commerce site pe koi
 ```text
 project_root/
 ├── htmlcov/          ← (Coverage HTML report ka folder)
-│   └── index.html    ← Isey browser mein open karo toh code lines red/green dikhengi
+│   └── index.html    ← Isey browser mein open karo toh code [[HL::lines::HL]] red/green dikhengi
 ├── report.html       ← (Pytest-html plugin ka output)
 
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-* **`pytest-cov`:** Yeh code ke Abstract Syntax Tree (AST) mein hooks laga deta hai. Jab test chalta hai, toh yeh track karta hai ki interpreter kaunsi line se guzra (Cover) aur kaunsi line pe gaya hi nahi (Miss).
-* **`pytest-xdist`:** Pytest normally ek hi thread (serial) pe run hota hai. `xdist` master-worker architecture use karta hai. Yeh test list ko chote chunks mein banta hai aur CPU ke alag-alag processing cores (workers) ko bhej deta hai.
+* [[HL::**`pytest-cov`:** Yeh code ke Abstract Syntax Tree (AST) mein hooks laga deta hai. Jab test chalta hai, toh yeh track karta hai ki interpreter kaunsi line se guzra (Cover) aur kaunsi line pe gaya hi nahi (Miss).::HL]]
+* [[HL::**`pytest-xdist`:** Pytest normally ek hi thread (serial) pe run hota hai. `xdist` master-worker architecture use karta hai. Yeh test list ko chote chunks mein banta hai aur CPU ke alag-alag processing cores (workers) ko bhej deta hai.::HL]]
 
 #### 💻 7. Hands-On — CLI Commands (Practical Execution)
 
@@ -1696,12 +1696,12 @@ project_root/
 ##### 🔬 Command Explanation
 
 * **Command 1:** Agar `--self-contained-html` use nahi kiya, toh report dusre computer (manager) pe khulegi toh styling (CSS) toot jayegi.
-* **Command 2:** `Stmts` ka matlab total lines of code. `Miss` matlab untested code. `Cover` matlab percentage (`Stmts - Miss / Stmts`).
+* **Command 2:** `Stmts` ka matlab total [[HL::lines::HL]] of code. `Miss` matlab untested code. `Cover` matlab percentage (`Stmts - Miss / Stmts`).
 * **Command 3:** `gw` ka matlab gateway hai. Pytest master node hota hai, aur `gw0`, `gw1` uske sub-processes (workers) hain.
 
 #### 🔒 8. Security-First Check
 
-Coverage reports (`htmlcov`) aur Test HTML reports (`report.html`) ko kabhi bhi public internet par host mat karna! Inme tumhara source code line-by-line plainly likha hota hai. Yeh ek massive security risk ban jayega agar koi hacker inhe access kar le. Inhe CI/CD tools (jaise Jenkins) ke secure artifacts section mein store (HTML Publisher) kiya jata hai.
+Coverage reports (`htmlcov`) aur Test HTML reports (`report.html`) ko kabhi bhi public internet par host mat karna! Inme tumhara source code [[HL::line-by-line::HL]] plainly likha hota hai. Yeh ek massive security risk ban jayega agar koi hacker inhe access kar le. Inhe CI/CD tools (jaise Jenkins) ke secure artifacts section mein store (HTML Publisher) kiya jata hai.
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -1720,8 +1720,8 @@ Industry mein tests ko 100+ parallel nodes/containers par spread kiya jata hai (
 
 * **Confusion 1 — "Coverage mein 'Branch Coverage' kya hota hai?"**
 * **Galat soch:** Agar maine ek `if-else` block test kiya hai jismein `if` condition hit hui, toh code cover ho gaya.
-* **Actually:** Nahi! Pytest line hit toh karega, par `else` wali condition untested reh gayi. Isse 'Branch coverage miss' kehte hain. `--cov-branch` flag use karne se asli coverage samne aati hai.
-* **Prove karo:** Apna coverage report kholo — dekhoge ki `if` wali line green hogi, par `else` branch red hogi, bhale hi file ka total coverage 90% dikh raha ho.
+* **Actually:** Nahi! Pytest [[HL::line::HL]] hit toh karega, par `else` wali condition untested reh gayi. Isse 'Branch coverage miss' kehte hain. `--cov-branch` flag use karne se asli coverage samne aati hai.
+* **Prove karo:** Apna coverage report kholo — dekhoge ki `if` wali [[HL::line::HL]] green hogi, par `else` branch red hogi, bhale hi file ka total coverage 90% dikh raha ho.
 
 
 * **Confusion 2 — "xdist use karne pe 'serial' run se zyada time kyun lag raha hai?"**
@@ -1757,18 +1757,18 @@ Industry mein tests ko 100+ parallel nodes/containers par spread kiya jata hai (
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Jenkins (ek popular CI/CD tool — code build aur test automate karta hai) mein ek pipeline banti hai. Jab developer code push karta hai:
+Jenkins (ek popular CI/CD tool — code build aur test automate karta hai) mein ek [[HL::pipeline::HL]] banti hai. Jab developer code push karta hai:
 
 1. Jenkins ek server banata hai aur `pytest -n auto --cov=src --html=report.html` run karta hai.
 2. Fast test finish hote hain.
 3. Jenkins ka "HTML Publisher" plugin `report.html` aur `htmlcov` folder utha ke ek web dashboard pe dikhata hai.
-4. Agar coverage 80% se neeche aayi, toh pipeline code merge hone se block (Fail) kar deti hai.
+4. Agar coverage 80% se neeche aayi, toh [[HL::pipeline::HL]] code merge hone se block (Fail) kar deti hai.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer apni branch branch push karne se pehle local pc par `pytest-cov` chalata hai aur `htmlcov/index.html` mein red lines dekh kar missing tests poore karta hai. Woh slow tests run karne ke liye `xdist` (`-n auto`) ka use karta hai.
-* **Fixing/Iteration Phase:** Agar CI/CD pipeline mein coverage drop hoti hai, toh woh HTML report open karke precisely untested lines dhundhta hai aur naye tests likhta hai.
-* **Live Production Phase:** CI/CD pipeline mein har successful test run ek timestamped report (`pytest-html`) artifact ke roop mein store karta hai taaki quality team/auditors check kar sakein.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer apni branch branch push karne se pehle local pc par `pytest-cov` chalata hai aur `htmlcov/index.html` mein red [[HL::lines::HL]] dekh kar missing tests poore karta hai. Woh slow tests run karne ke liye `xdist` (`-n auto`) ka use karta hai.
+* **Fixing/Iteration Phase:** Agar CI/CD [[HL::pipeline::HL]] mein coverage drop hoti hai, toh woh HTML report open karke precisely untested [[HL::lines::HL]] dhundhta hai aur naye tests likhta hai.
+* **Live Production Phase:** CI/CD [[HL::pipeline::HL]] mein har successful test run ek timestamped report (`pytest-html`) artifact ke roop mein store karta hai taaki quality team/auditors check kar sakein.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -1794,14 +1794,14 @@ Jenkins (ek popular CI/CD tool — code build aur test automate karta hai) mein 
 
 * **Q:** Tumhare hisab se "Good Test Coverage" ka percentage kya hona chahiye?
 * **A:** Industry standard usually 80% ke aas-paas hota hai, lekin "Coverage ko ek guide samjho, absolute bhagwaan nahi". 100% coverage achieve karna aksar diminishing returns deta hai (effort zyada, faida kam). Humaara focus critical business logic, APIs, aur complex algorithms pe 100% cover karne ka hona chahiye.
-* **Q:** Pytest mein tests ko parallel mein run karne ka kya faida hai aur kaunsa plugin use hota hai?
-* **A:** Parallel execution tests ko multiple CPU cores (workers) par distribute karta hai, jisse test suite run hone ka total time drastically kam ho jata hai (e.g., 30 mins to 5 mins). Iske liye `pytest-xdist` plugin use hota hai (`-n auto` flag ke sath).
+* [[HL::**Q:** Pytest mein tests ko parallel mein run karne ka kya faida hai aur kaunsa plugin use hota hai?::HL]]
+* [[HL::**A:** Parallel execution tests ko multiple CPU cores (workers) par distribute karta hai, jisse test suite run hone ka total time drastically kam ho jata hai (e.g., 30 mins to 5 mins). Iske liye `pytest-xdist` plugin use hota hai (`-n auto` flag ke sath).::HL]]
 * **Q:** Agar main xdist use karta hoon, toh tests likhte waqt mujhe kya dhyan rakhna chahiye?
 * **A:** Sabse zaroori cheez yeh hai ki tests ek-dusre par dependent nahi hone chahiye (Independent tests). Agar Test A Test B ke data ka wait kar raha hai, toh race condition hogi aur randomly fail honge kyunki parallel mein kaun pehle execute hoga, yeh guarantee nahi hoti.
 * **Q:** `--self-contained-html` ka pytest-html report mein kya kaam hai?
 * **A:** By default, HTML report assets (jaise CSS, images) ko external links ki tarah rakhta hai. Agar file move/share ki jaye toh layout toot jata hai. `--self-contained-html` saare assets ko ek hi single HTML file ke andar embed (pack) kar deta hai, jisse isey emails ya Jenkins artifacts mein safely forward kiya ja sakta hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 ⭐ **"xdist tumhara fast dost hai, aur cov tumhara GPS tracker — par coverage guide hai, bhagwaan nahi!"**
 
@@ -1873,7 +1873,7 @@ Socho tumhe ek nayi jagah jana hai. Swagger (map) tumhe rasta dikhata hai ki kah
 * **Problem:** Bina API behavior samjhe automation code likhne se lagatar bugs aate hain aur samajh nahi aata ki test script galat hai ya API.
 * **Solution:** Pehle Postman mein Exploratory Testing (manual checking bina pre-planned scripts ke) karke API ka contract aur response confirm kar lo.
 * **What breaks if we don't use it?** Tum automation code mein fas jaoge, requests fail hongi, aur debugging mein ghanto barbaad honge kyunki tumhe API ka actual payload structure nahi pata.
-* **✅ Kab use karo:** Jab bhi backend developer nayi API banakar de, ya jab API mein koi bada change aaye aur naya Automation test likhna ho.
+* **✅ Kab [[HL::use karo:**::HL]] Jab bhi backend developer nayi API banakar de, ya jab API mein koi bada change aaye aur naya Automation test likhna ho.
 * **❌ Kab mat karo / Alternative:** Jab API exactly purani wali jaisi ho aur sirf ek chhota sa regression test add karna ho — tab seedha automation code likh sakte ho.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -1899,7 +1899,7 @@ Body: (empty for GET)
 
 ```bash
 # Bash (Terminal) | curl 7.x+
-1  curl -X GET "https://api.example.com/users?role=admin" \  # curl (command-line tool — HTTP requests bhejne ke liye); -X GET = HTTP method specify karna
+1  curl -X GET "https://api.example.com/users?role=admin" \  # curl [[HL::(command-line::HL]] tool — HTTP requests bhejne ke liye); -X GET = HTTP method specify karna
 2       -H "Authorization: Bearer my_token_123" \            # -H (Header flag) — request ke saath meta-data jaise auth token bhejna
 3       -H "Content-Type: application/json"                  # JSON data format expect/send kar rahe hain
 
@@ -1916,12 +1916,12 @@ Body: (empty for GET)
 
 #### 🔬 Code Explanation
 
-* **Line 1:** `curl` command command-line se API hit karne ka tarika hai. `-X GET` ka matlab hum data "read" karna chahte hain. `?role=admin` ek query parameter hai jo list ko filter karta hai.
-* **Line 2:** `-H` flag se hum `Authorization` header bhej rahe hain taaki server hamein pehchan sake.
+* [[HL::**Line::HL]] 1:** `curl` command [[HL::command-line::HL]] se API hit karne ka tarika hai. `-X GET` ka matlab hum data "read" karna chahte hain. `?role=admin` ek query parameter hai jo list ko filter karta hai.
+* [[HL::**Line::HL]] 2:** `-H` flag se hum `Authorization` header bhej rahe hain taaki server hamein pehchan sake.
 
 #### 🔒 8. Security-First Check
 
-Postman mein testing karte waqt apne production tokens ya passwords ko hardcode mat karo. Postman **Environments** (variables ka isolated scope jaise dev, qa, prod) ka use karo aur tokens ko "secret" type mark karo taaki wo screen pe plain text mein na dikhein.
+Postman mein testing karte waqt apne production tokens ya passwords ko hardcode mat karo. Postman **Environments** (variables ka isolated scope jaise dev, qa, prod) ka [[HL::use karo::HL]] aur tokens ko "secret" type mark karo taaki wo screen pe plain text mein na dikhein.
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -1936,10 +1936,10 @@ Industry mein hundreds of APIs hoti hain. Unhe manage karne ke liye QA engineers
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Swagger aur Postman mein kya farq hai?"**
-* **Galat soch:** Dono tool API hit karne ke liye hote hain.
-* **Actually:** Swagger sirf ek "Documentation" hai (Map). Halanki isme "Try it out" button hota hai, par yeh proper testing tool nahi hai. Postman ek proper Testing workspace (Car) hai jahan tum collections, scripts, aur environments manage karte ho.
-* **Prove karo:** Swagger mein tumhe har baar token paste karna padega, lekin Postman mein tum ek baar environment variable bana do, woh sab requests mein auto-apply ho jayega.
+* [[HL::**Confusion 1 — "Swagger aur Postman mein kya farq hai?"**::HL]]
+* [[HL::**Galat soch:** Dono tool API hit karne ke liye hote hain.::HL]]
+* [[HL::**Actually:** Swagger sirf ek "Documentation" hai (Map). Halanki isme "Try it out" button hota hai, par yeh proper testing tool nahi hai. Postman ek proper Testing workspace (Car) hai jahan tum collections, scripts, aur environments manage karte ho.::HL]]
+* [[HL::**Prove karo:** Swagger mein tumhe har baar token paste karna padega, lekin Postman mein tum ek baar environment variable bana do, woh sab requests mein auto-apply ho jayega.::HL]]
 
 
 
@@ -1964,7 +1964,7 @@ Ek FinTech startup mein backend team nayi "Transfer Money" API ka Swagger URL QA
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** Backend dev API banakar Swagger URL deta hai. QA pehle usay Postman mein import karta hai, token set karta hai, aur manually edge cases try karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Backend dev API banakar Swagger URL deta hai. QA pehle usay Postman mein import karta hai, token set karta hai, aur manually edge cases try karta hai.
 * **Fixing/Iteration Phase:** Agar API galat behave karti hai, toh QA dev ko batata hai. Jab logic samajh aa jata hai aur fix ho jata hai...
 * **Live Production Phase:** Tabhi QA Pytest mein helper classes likhna shuru karta hai aur CI/CD mein integrate karta hai.
 
@@ -1996,7 +1996,7 @@ Ek FinTech startup mein backend team nayi "Transfer Money" API ka Swagger URL QA
 * **Q:** HTTP headers aur query parameters mein kya difference hai?
 * **A:** Headers request ki meta-information hote hain (jaise auth tokens, content type) jo background mein bheje jaate hain. Query parameters URL ka part hote hain (jaise `?id=5`) jo generally data ko filter ya sort karne ke kaam aate hain.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Swagger API ka naksha hai, Postman us raste pe test drive hai, aur Pytest automation tumhari self-driving car."
 
@@ -2032,8 +2032,8 @@ Socho tum ek boss ho. Agar tumhe pizza order karna ho, flight book karni ho, ya 
 * **Problem:** Agar tumhare paas 100 tests hain aur sabmein `requests.get('url...', headers={...})` likha hai, aur kal ko authentication ka tarika change ho jaye, toh tumhe 100 jagah code modify karna padega. Yeh un-maintainable (repetitive) hai.
 * **Solution:** Ek `requests_helper.py` (Centralized HTTP setup) aur `customer_helper.py` (Business logic) banao. Maintainability aur Readability instantly badh jayegi.
 * **What breaks if we don't use it?** Code brittle (asani se tootne wala) ho jayega. Ek chhota sa infrastructure change tumhari poori test suite ko tod dega aur refactoring mein din lag jayenge.
-* **✅ Kab use karo:** Jab bhi project mein 5 se zyada API tests likhne hon. Professional projects mein yeh "must-have" hai taaki test suite maintainable rahe.
-* **❌ Kab mat karo / Alternative:** Agar tum sirf ek 10-line ka throwaway script likh rahe ho kisi API ka response jaldi se terminal pe dekhne ke liye — wahan poora architecture banana overkill hai, tab plain `requests` use karo.
+* **✅ Kab [[HL::use karo:**::HL]] Jab bhi project mein 5 se zyada API tests likhne hon. Professional projects mein yeh "must-have" hai taaki test suite maintainable rahe.
+* **❌ Kab mat karo / Alternative:** Agar tum sirf ek [[HL::10-line::HL]] ka throwaway script likh rahe ho kisi API ka response jaldi se terminal pe dekhne ke liye — wahan poora architecture banana overkill hai, tab plain `requests` [[HL::use karo.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -2049,8 +2049,8 @@ tests/
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Pytest jab start hota hai, woh `conftest.py` mein likha **fixture** (setup/teardown code jo tests ke pehle/baad run hota hai) chalata hai. Yeh fixture ek baar chalta hai (**session** scope).
-2. Yeh fixture `APIHelper` class (requests_helper) ka object banata hai `base_url` aur `auth_token` ke saath.
+1. [[HL::Pytest jab start hota hai, woh `conftest.py` mein likha **fixture** (setup/teardown code jo tests ke pehle/baad run hota hai) chalata hai. Yeh fixture ek baar chalta hai (**session** scope).::HL]]
+2. [[HL::Yeh fixture `APIHelper` class (requests_helper) ka object banata hai `base_url` aur `auth_token` ke saath.::HL]]
 3. Test case seedha `customer_helper.py` se `create_customer()` public method call karta hai.
 4. Internal helper method random data banata hai aur `APIHelper` ka `post()` method call karke server se baat karta hai.
 
@@ -2126,9 +2126,9 @@ Yahan hum dekhenge ki ⭐ **"import requests ko paap samjho"** rule kaise follow
 
 #### 🔬 Code Explanation
 
-* **File 1, Line 7:** `"Authorization": f"Bearer {auth_token}"` — Yeh API authentication ka standard tarika hai. Ek baar yahan likh diya, ab har `get()` aur `post()` mein apne aap jayega (DRY principle).
-* **File 2, Line 10:** `_generate_random_email` — Method ke aage underscore `_` lagane ka matlab hai yeh ek "internal/private" method hai, isko bahar test file se call nahi karna chahiye. Aise functions test data ki unique constraints ko bypass karne ke liye useful hote hain, par aajkal `Faker` (Line 17) zyada popular hai.
-* **File 2, Line 22:** Helper method ka kaam API hit karna aur data wapas dena hai. Assertion (check karna ki pass hua ya fail) helper ke andar nahi, test file ke andar hona chahiye.
+* **File 1, [[HL::Line::HL]] 7:** `"Authorization": f"Bearer {auth_token}"` — Yeh API authentication ka standard tarika hai. Ek baar yahan likh diya, ab har `get()` aur `post()` mein apne aap jayega (DRY principle).
+* **File 2, [[HL::Line::HL]] 10:** `_generate_random_email` — Method ke aage underscore `_` lagane ka matlab hai yeh ek "internal/private" method hai, isko bahar test file se call nahi karna chahiye. Aise functions test data ki unique constraints ko bypass karne ke liye useful hote hain, par aajkal `Faker` [[HL::(Line::HL]] 17) zyada popular hai.
+* **File 2, [[HL::Line::HL]] 22:** Helper method ka kaam API hit karna aur data wapas dena hai. Assertion (check karna ki pass hua ya fail) helper ke andar nahi, test file ke andar hona chahiye.
 
 #### 🔒 8. Security-First Check
 
@@ -2187,7 +2187,7 @@ Uber jaisi company ki QA automation suite mein har test case mein ride book karn
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** Developer ek central helper class banata hai taaki API logic aur random data generation ko test files se alag rakha ja sake.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer ek central helper class banata hai taaki API logic aur random data generation ko test files se alag rakha ja sake.
 * **Fixing/Iteration Phase:** Har naye test mein developer seedha `helper.create_customer()` call karta hai bina raw URLs ya requests parameters likhe.
 * **Live Production Phase:** (N/A — yeh testing internal infrastructure hai, seedha end users isse interact nahi karte)
 
@@ -2218,7 +2218,7 @@ Uber jaisi company ki QA automation suite mein har test case mein ride book karn
 * **Q:** Helper function vs Fixture ka use kab karna chahiye?
 * **A:** Fixture system-level configurations aur dependency injection ke liye best hai (jaise DB connect karna, ya helper classes ka object instantiate karke tests ko dena). Helper function business logic perform karne ke liye hai jisko test ke dauran explicitly call karna hota hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Helpers tumhare personal assistants hain — test sirf order dega, requests bhejne ki mehnat Helper khud karega."
 
@@ -2280,7 +2280,7 @@ Socho ek club ka "Security gate" hai. **Happy Path** (positive test) tab hota ha
 * **Problem:** Log aksar sirf "correct data" bhejkar test pass hone ki khushi manate hain. Lekin real users humesha galat data daalte hain (e.g., email ki jagah number), jisse server crash ho jata hai.
 * **Solution:** Ek proper **Test Plan** (tests ki detailed strategy document) banakar usme har API ke liye Positive aur Negative cases clearly define karo. ⭐ **"Negative tests Happy Path se zyada important ho sakte hain"**.
 * **What breaks if we don't use it?** Agar negative cases test nahi kiye, toh galat data database mein chala jayega, **Data Integrity** (data ki correctness aur consistency) kharab hogi, ya users ko ajeeb technical error codes dikhenge.
-* **✅ Kab use karo:** Har single API endpoint (POST, GET, PUT, DELETE) ke liye code likhne se pehle cases design karte waqt.
+* **✅ Kab [[HL::use karo:**::HL]] Har single API endpoint (POST, GET, PUT, DELETE) ke liye code likhne se pehle cases design karte waqt.
 * **❌ Kab mat karo / Alternative:** (Yeh concept har situation mein applicable hai — koi genuine avoid-scenario nahi hai. Testing bina planning ke kabhi nahi honi chahiye).
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -2369,21 +2369,21 @@ test_customers.py::test_create_customer_duplicate PASSED
 
 #### 🔬 Code Explanation
 
-* **Line 7-8:** `yield helper` test ko chalne deta hai. Jab test pass/fail hoke khatam hota hai, tab `helper.cleanup_db()` (Line 8) chalta hai. Ise **teardown** kehte hain, jo garbage data ko saf karta hai.
-* **Line 11-12 & 26:** Markers (`@pytest.mark.smoke`, `@pytest.mark.regression`) se tum CLI (command line interface) mein select kar sakte ho ki sirf fast tests (smoke) run karne hain ya saare deep tests (regression).
-* **Line 22 & 37:** `assert` statement ek condition check karta hai. Agar false ho, toh Python **AssertionError** (test fail hone ka default exception) throw karta hai.
-* **Line 39:** `error_data.get("error", "")` safe tarika hai dictionary access karne ka. Agar backend ne `error` key bheji hi nahi, toh program crash nahi hoga, empty string aayegi.
+* [[HL::**Line::HL]] 7-8:** `yield helper` test ko chalne deta hai. Jab test pass/fail hoke khatam hota hai, tab `helper.cleanup_db()` [[HL::(Line::HL]] 8) chalta hai. Ise **teardown** kehte hain, jo garbage data ko saf karta hai.
+* [[HL::**Line::HL]] 11-12 & 26:** Markers (`@pytest.mark.smoke`, `@pytest.mark.regression`) se tum CLI (command [[HL::line::HL]] interface) mein select kar sakte ho ki sirf fast tests (smoke) run karne hain ya saare deep tests (regression).
+* [[HL::**Line::HL]] 22 & 37:** `assert` statement ek condition check karta hai. Agar false ho, toh Python **AssertionError** (test fail hone ka default exception) throw karta hai.
+* [[HL::**Line::HL]] 39:** `error_data.get("error", "")` safe tarika hai dictionary access karne ka. Agar backend ne `error` key bheji hi nahi, toh program crash nahi hoga, empty string aayegi.
 
 #### 🔒 8. Security-First Check
 
-Kabhi bhi negative test karte waqt yeh check zaroori hai ki system **500 Internal Server Error** toh return nahi kar raha. 500 error ka matlab hai system crash ho gaya, aur aisi situations mein backend apna "stack trace" (internal code lines aur logic) expose kar deta hai, jo ek bahut bada security risk (Information Disclosure) hai. Proper error like **400 Bad Request** (invalid client input) ya **409 Conflict** (duplicate logic) aana chahiye.
+Kabhi bhi negative test karte waqt yeh check zaroori hai ki system **500 Internal Server Error** toh return nahi kar raha. 500 error ka matlab hai system crash ho gaya, aur aisi situations mein backend apna "stack trace" (internal code [[HL::lines::HL]] aur logic) expose kar deta hai, jo ek bahut bada security risk (Information Disclosure) hai. Proper error like **400 Bad Request** (invalid client input) ya **409 Conflict** (duplicate logic) aana chahiye.
 
 #### 🏗️ 9. Scalability & Industry Context
 
 Industry mein QA engineers Test Plans likhte waqt categories banate hain:
 
 * **TCID** (Test Case Identifier) — jaise `TCID-29` har test ko ek unique code diya jata hai.
-* Large teams mein thousands of tests hote hain. Wahan markers (`pytest.mark.smoke`) ka use karke hum CI/CD pipeline mein sirf critical 50 tests run karte hain (smoke), taaki deployment jaldi ho, aur raat mein poore 5000 tests chalate hain (regression).
+* Large teams mein thousands of tests hote hain. Wahan markers (`pytest.mark.smoke`) ka use karke hum CI/CD [[HL::pipeline::HL]] mein sirf critical 50 tests run karte hain (smoke), taaki deployment jaldi ho, aur raat mein poore 5000 tests chalate hain (regression).
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
@@ -2428,7 +2428,7 @@ Gmail account create karte waqt agar tum `mark.zuckerberg@gmail.com` try karo, t
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** Code likhne se pehle QA engineer ek table mein positive aur negative **Test Scenarios** (high-level use cases jaise TC-31, TC-32, TC-33) design karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Code likhne se pehle QA engineer ek table mein positive aur negative **Test Scenarios** (high-level use cases jaise TC-31, TC-32, TC-33) design karta hai.
 * **Fixing/Iteration Phase:** Test verify karta hai ki duplicate data bhejne par API crash (500 Error) hone ki bajaye properly handle karke 409 Conflict de.
 * **Live Production Phase:** Jab real system deploy hota hai, toh yeh gracefully errors handle karta hai. Real users ko DB corrupt hone se bachata hai aur unhe valid error message dikhata hai jab wo already taken email use karte hain.
 
@@ -2461,7 +2461,7 @@ Gmail account create karte waqt agar tum `mark.zuckerberg@gmail.com` try karo, t
 * **Q:** Teardown phase kyu zaroori hota hai tests mein?
 * **A:** Agar ek test create API call karke naya data banata hai, aur teardown us data ko delete nahi karta, toh database clutter ho jayega. Agli baar wahi test duplicate error (409) ki wajah se fail ho sakta hai. Pytest mein `yield` ka use karke hum cleanup logic chalate hain.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Happy path sirf demo ke liye hota hai, asli production system Negative paths ki mazbooti par tikta hai."
 
@@ -2490,36 +2490,36 @@ Gmail account create karte waqt agar tum `mark.zuckerberg@gmail.com` try karo, t
 #### 📖 3. Technical Definition
 
 * **Precise English:** API Chaining (or Stateful Workflows) is a testing technique where the output of one API request (like an extracted ID) is dynamically passed as the input to a subsequent API request, validating the complete CRUD lifecycle and business dependencies.
-* **Hinglish Simplification:** Ek test mein multiple APIs ko ek chain/sequence mein call karna, jahan pehli API se mila data (jaise user ID) agli API mein pass hota hai.
+* [[HL::**Hinglish Simplification:** Ek test mein multiple APIs ko ek chain/sequence mein call karna, jahan pehli API se mila data (jaise user ID) agli API mein pass hota hai.::HL]]
 
 #### 🧠 4. Why This Matters
 
-* **Problem:** Kai baar individual APIs (POST alag, GET alag) perfectly pass hoti hain, par jab woh real app mein ek ke baad ek call hoti hain, toh system data sync/state mismatch ki wajah se break ho jata hai.
-* **Solution:** **Stateful Workflows** (jahan system ki current "state" ya data tests ke beech share hoti hai) likho jo real **User Journey** (user app mein exactly jaise ghumta hai) mimic kare.
-* **What breaks if we don't use it?** Tumhe lagega API pass ho gayi (100% green), lekin jab frontend user record update (PUT) karne jayega, toh record DB mein reflect hi nahi hua hoga (sync issue), and tumhara isolate test yeh kabhi nahi pakad payega.
-* **✅ Kab use karo:** Jab system mein clearly dependent resources hon (e.g., Order banane se pehle Customer banana zaroori ho) — **CRUD Lifecycle** (Create, Read, Update, Delete) test karne ke liye.
+* [[HL::**Problem:** Kai baar individual APIs (POST alag, GET alag) perfectly pass hoti hain, par jab woh real app mein ek ke baad ek call hoti hain, toh system data sync/state mismatch ki wajah se break ho jata hai.::HL]]
+* [[HL::**Solution:** **Stateful Workflows** (jahan system ki current "state" ya data tests ke beech share hoti hai) likho jo real **User Journey** (user app mein exactly jaise ghumta hai) mimic kare.::HL]]
+* [[HL::**What breaks if we don't use it?** Tumhe lagega API pass ho gayi (100% green), lekin jab frontend user record update (PUT) karne jayega, toh record DB mein reflect hi nahi hua hoga (sync issue), and tumhara isolate test yeh kabhi nahi pakad payega.::HL]]
+* **✅ Kab [[HL::use karo:**::HL]] Jab system mein clearly dependent resources hon (e.g., Order banane se pehle Customer banana zaroori ho) — **CRUD Lifecycle** (Create, Read, Update, Delete) test karne ke liye.
 * **❌ Kab mat karo / Alternative:** Public, independent data-fetch APIs (e.g., Weather API) jahan kisi state ki zaroorat nahi hoti, wahan chaining ka koi matlab nahi, sirf isolated GET tests likho.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 ```text
-# Terminal mein Pytest ki execution sequence aise dikhegi:
-PASSED test_e2e_flow.py::test_step_1_create_user      # Pehle ID bani
-PASSED test_e2e_flow.py::test_step_2_get_user         # Usi ID ko verify kiya
-PASSED test_e2e_flow.py::test_step_3_update_user      # Usi ID ka data change kiya
-PASSED test_e2e_flow.py::test_step_4_delete_user      # Usi ID ko DB se nikal diya
+# [[HL::Terminal mein Pytest ki execution sequence aise dikhegi:::HL]]
+[[HL::PASSED test_e2e_flow.py::test_step_1_create_user      # Pehle ID bani::HL]]
+[[HL::PASSED test_e2e_flow.py::test_step_2_get_user         # Usi ID ko verify kiya::HL]]
+[[HL::PASSED test_e2e_flow.py::test_step_3_update_user      # Usi ID ka data change kiya::HL]]
+[[HL::PASSED test_e2e_flow.py::test_step_4_delete_user      # Usi ID ko DB se nikal diya::HL]]
 
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-API chaining mein sabse bada role data extraction ka hota hai.
+[[HL::API chaining mein sabse bada role data extraction ka hota hai.::HL]]
 
-1. Pehli API `POST /users` hit hoti hai.
-2. Response se hum `id` nikalte hain (**Dictionary extraction** via `response.json()['id']`).
-3. Is `id` variable ko hum global class ya **Dynamic Data Passing** ke through test class ke state mein save kar dete hain (e.g., `self.user_id = data['id']`).
-4. Agla test step `GET /users/{self.user_id}` call karta hai.
-5. Execution ka **sequential testing** order barkaraar rakhne ke liye hum Pytest plugins jaise `pytest-ordering` ka use karte hain.
+1. [[HL::Pehli API `POST /users` hit hoti hai.::HL]]
+2. [[HL::Response se hum `id` nikalte hain (**Dictionary extraction** via `response.json()['id']`).::HL]]
+3. [[HL::Is `id` variable ko hum global class ya **Dynamic Data Passing** ke through test class ke state mein save kar dete hain (e.g., `self.user_id = data['id']`).::HL]]
+4. [[HL::Agla test step `GET /users/{self.user_id}` call karta hai.::HL]]
+5. [[HL::Execution ka **sequential testing** order barkaraar rakhne ke liye hum Pytest plugins jaise `pytest-ordering` ka use karte hain.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example (CRUD Chaining)
 
@@ -2533,35 +2533,35 @@ API chaining mein sabse bada role data extraction ka hota hai.
 6      user_id = None                  # Class variable (state store karne ke liye)
 7      base_url = "https://reqres.in/api/users"
 8  
-9      @pytest.mark.run(order=1)       # Pehla test
-10     def test_step_1_create_user(self):
-11         payload = {"name": "morpheus", "job": "leader"}
-12         response = requests.post(self.base_url, json=payload)
-13         assert response.status_code == 201
-14         
-15         # Dynamic Data Passing & Extracting variables
-16         data = response.json()
-17         # id extraction
-18         TestUserE2EJourney.user_id = data['id']  # user_id save kar li class level pe
-19         print(f"Created ID: {TestUserE2EJourney.user_id}")
-20 
-21     @pytest.mark.run(order=2)       # Doosra test (Dependency between tests)
-22     def test_step_2_get_user(self):
-23         # Extract ki hui id use karo
-24         url = f"{self.base_url}/{TestUserE2EJourney.user_id}"
-25         response = requests.get(url)
-26         assert response.status_code in [200, 404] # reqres fake API hai, generally 200 aana chahiye
+9      [[HL::@pytest.mark.run(order=1)       # Pehla test::HL]]
+[[HL::10     def test_step_1_create_user(self):::HL]]
+[[HL::11         payload = {"name": "morpheus", "job": "leader"}::HL]]
+[[HL::12         response = requests.post(self.base_url, json=payload)::HL]]
+[[HL::13         assert response.status_code == 201::HL]]
+[[HL::14::HL]]         
+[[HL::15         # Dynamic Data Passing & Extracting variables::HL]]
+[[HL::16         data = response.json()::HL]]
+[[HL::17         # id extraction::HL]]
+[[HL::18         TestUserE2EJourney.user_id = data['id']  # user_id save kar li class level pe::HL]]
+[[HL::19         print(f"Created ID: {TestUserE2EJourney.user_id}")::HL]]
+[[HL::20::HL]] 
+[[HL::21     @pytest.mark.run(order=2)       # Doosra test (Dependency between tests)::HL]]
+[[HL::22     def test_step_2_get_user(self):::HL]]
+[[HL::23         # Extract ki hui id use karo::HL]]
+[[HL::24         url = f"{self.base_url}/{TestUserE2EJourney.user_id}"::HL]]
+[[HL::25         response = requests.get(url)::HL]]
+[[HL::26         assert response.status_code in [200, 404] # reqres fake API hai, generally 200 aana chahiye::HL]]
 27 
-28     @pytest.mark.run(order=3)       # Teesra test (Update)
-29     def test_step_3_update_user(self):
-30         url = f"{self.base_url}/{TestUserE2EJourney.user_id}"
-31         payload = {"name": "morpheus", "job": "zion resident"}
-32         response = requests.put(url, json=payload)
-33         assert response.status_code == 200
-34 
-35     @pytest.mark.run(order=4)       # Chautha test (Delete)
-36     def test_step_4_delete_user(self):
-37         url = f"{self.base_url}/{TestUserE2EJourney.user_id}"
+28     [[HL::@pytest.mark.run(order=3)       # Teesra test (Update)::HL]]
+[[HL::29     def test_step_3_update_user(self):::HL]]
+[[HL::30         url = f"{self.base_url}/{TestUserE2EJourney.user_id}"::HL]]
+[[HL::31         payload = {"name": "morpheus", "job": "zion resident"}::HL]]
+[[HL::32         response = requests.put(url, json=payload)::HL]]
+[[HL::33         assert response.status_code == 200::HL]]
+[[HL::34::HL]] 
+[[HL::35     @pytest.mark.run(order=4)       # Chautha test (Delete)::HL]]
+[[HL::36     def test_step_4_delete_user(self):::HL]]
+[[HL::37         url = f"{self.base_url}/{TestUserE2EJourney.user_id}"::HL]]
 38         response = requests.delete(url)
 39         assert response.status_code == 204        # 204 No Content = successfully deleted
 
@@ -2570,20 +2570,20 @@ API chaining mein sabse bada role data extraction ka hota hai.
 # 📤 Expected Output:
 
 ```text
-$ pytest test_chaining.py -v -s
-test_chaining.py::TestUserE2EJourney::test_step_1_create_user Created ID: 843
-PASSED
-test_chaining.py::TestUserE2EJourney::test_step_2_get_user PASSED
-test_chaining.py::TestUserE2EJourney::test_step_3_update_user PASSED
-test_chaining.py::TestUserE2EJourney::test_step_4_delete_user PASSED
+$ [[HL::pytest test_chaining.py -v -s::HL]]
+[[HL::test_chaining.py::TestUserE2EJourney::test_step_1_create_user Created ID: 843::HL]]
+[[HL::PASSED::HL]]
+[[HL::test_chaining.py::TestUserE2EJourney::test_step_2_get_user PASSED::HL]]
+[[HL::test_chaining.py::TestUserE2EJourney::test_step_3_update_user PASSED::HL]]
+[[HL::test_chaining.py::TestUserE2EJourney::test_step_4_delete_user PASSED::HL]]
 
 ```
 
 #### 🔬 Code Explanation
 
-* **Line 4-9:** Pytest default behavior mein tests ko alphabetically run karta hai. **pytest-ordering** (`@pytest.mark.run(order=1)`) ek external plugin hai jo sequence forcefully enforce karta hai, jisse CRUD ek logic sequence (POST -> GET -> PUT -> DELETE) mein chale.
-* **Line 18:** `TestUserE2EJourney.user_id = data['id']` is step mein hum state save kar rahe hain. Isay class variable banaya gaya hai taaki doosre function methods bhi ise read kar sakein.
-* **Line 24, 30, 37:** `TestUserE2EJourney.user_id` ab ek dynamic path variable ban gaya hai, kisi hardcoded ID ("123") par depend hone ki jagah hum freshly create hui ID delete kar rahe hain.
+* [[HL::**Line 4-9:** Pytest default behavior mein tests ko alphabetically run karta hai. **pytest-ordering** (`@pytest.mark.run(order=1)`) ek external plugin hai jo sequence forcefully enforce karta hai, jisse CRUD ek logic sequence (POST -> GET -> PUT -> DELETE) mein chale.::HL]]
+* [[HL::**Line::HL]] 18:** `TestUserE2EJourney.user_id = data['id']` is step mein hum state save kar rahe hain. Isay class variable banaya gaya hai taaki doosre function methods bhi ise read kar sakein.
+* [[HL::**Line::HL]] 24, 30, 37:** `TestUserE2EJourney.user_id` ab ek dynamic path variable ban gaya hai, kisi hardcoded ID ("123") par depend hone ki jagah hum freshly create hui ID delete kar rahe hain.
 
 #### 🔒 8. Security-First Check
 
@@ -2613,7 +2613,7 @@ Industry mein Pytest tests default tarike se isolated hote hain, aur senior engi
 
 * **`KeyError: 'id'` jab data extract kar rahe hon**
 * **Root Cause:** Tumne `data['id']` likha par API ne actually response mein `{ "userId": 123 }` bheja tha, ya error (400) aayi thi jisme ID hoti hi nahi hai.
-* **Fix:** Extract karne se pehle status code `assert` karo (Line 13). Phir print karke dekho raw JSON keys kya aayin hain.
+* **Fix:** Extract karne se pehle status code `assert` karo [[HL::(Line::HL]] 13). Phir print karke dekho raw JSON keys kya aayin hain.
 
 
 * **`pytest-ordering` order follow nahi kar raha**
@@ -2636,7 +2636,7 @@ Swiggy / Zomato ki API testing. Ek sequence banta hai: `POST /login` (get Auth T
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** Developer ek single E2E test function/class banata hai jo pehle `create_user` API call karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer ek single E2E test function/class banata hai jo pehle `create_user` API call karta hai.
 * **Fixing/Iteration Phase:** Wahan se `user_id` extract karta hai, phir us `user_id` ko pass karke `create_order` API call karta hai.
 * **Live Production Phase:** Aakhir mein yeh test script verify karta hai ki us specific user ka order lag gaya (GET) aur cleanup (DELETE) bhi sahi kaam kar raha hai (Full CRUD Lifecycle), ensuring real users ko smooth journey mile.
 
@@ -2662,12 +2662,12 @@ Swiggy / Zomato ki API testing. Ek sequence banta hai: `POST /login` (get Auth T
 
 * **Q:** API chaining kaise implement karte hain automation mein?
 * **A:** API chaining mein hum pehle API request marte hain, uske JSON response ko parse karke specific key/id extract karte hain (jaise `response.json()['id']`). Us extracted variable ko hum class level state ya fixture dictionary mein store kar lete hain, aur phir agle request ki URL endpoint ya payload mein use dynamically inject karte hain.
-* **Q:** pytest-ordering ki zaroorat kab padti hai?
-* **A:** Default roop se Pytest tests ko independent maanta hai aur file name/function name ke alphabetical order mein run karta hai. E2E flows mein jahan CRUD cycle ko ek strict sequence mein run hona hota hai, hum `@pytest.mark.run(order=X)` use karke sequence fix karte hain.
+* [[HL::**Q:** pytest-ordering ki zaroorat kab padti hai?::HL]]
+* [[HL::**A:** Default roop se Pytest tests ko independent maanta hai aur file name/function name ke alphabetical order mein run karta hai. E2E flows mein jahan CRUD cycle ko ek strict sequence mein run hona hota hai, hum `@pytest.mark.run(order=X)` use karke sequence fix karte hain.::HL]]
 * **Q:** Ek independent test suite aur E2E suite mein kya farq hai?
 * **A:** Independent tests isolated hote hain, kisi par nirbhar nahi karte, aur unhe parallel mein chalaya ja sakta hai. E2E (End-to-End) test ek complete user journey ko represent karta hai, yeh stateful hota hai, data steps ke beech pass hota hai, aur isse sequence mein hi chalana padta hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "API chaining ek relay race ki tarah hai, pehli API apna output/ID doosri API ke haath mein baton ki tarah pakdati hai."
 
@@ -2714,39 +2714,39 @@ Swiggy / Zomato ki API testing. Ek sequence banta hai: `POST /login` (get Auth T
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-⭐ **"Car dashboard"** analogy. Socho tum gaadi chala rahe ho. Agar kuch kharab ho, toh ek `print()` statement us single "Red Light" ki tarah hai jo bas jal jaati hai, par batati nahi kya kharab hai. Jabki `logging` ek proper dashboard ki tarah hai — yeh tumhe exact RPM, speed, engine temperature, aur critical warnings batata hai (timestamp aur severity ke saath). Isliye ⭐ **"print() ko bhool jaao. logging use karo"**.
+⭐ **"Car dashboard"** analogy. Socho tum gaadi chala rahe ho. Agar kuch kharab ho, toh ek `print()` statement us single "Red Light" ki tarah hai jo bas jal jaati hai, par batati nahi kya kharab hai. Jabki `logging` ek proper dashboard ki tarah hai — yeh tumhe exact RPM, speed, engine temperature, aur critical warnings batata hai (timestamp aur severity ke saath). Isliye ⭐ **"print() ko bhool jaao. logging [[HL::use karo"**.::HL]]
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** Logging is the systematic recording of structured messages with varying severity levels (DEBUG, INFO, WARNING, ERROR, CRITICAL) to track an application's or test suite's execution flow and diagnose issues, replacing raw standard output.
-* **Hinglish Simplification:** Code mein kya chal रहा hai aur kahan fail hua, uski ek structured diary (logs) maintain karna, bajaye iske ki sirf screen par raw text (`print`) fek diya jaye.
+* [[HL::**Precise English:** Logging is the systematic recording of structured messages with varying severity levels (DEBUG, INFO, WARNING, ERROR, CRITICAL) to track an application's or test suite's execution flow and diagnose issues, replacing raw standard output.::HL]]
+* [[HL::**Hinglish Simplification:** Code mein kya chal रहा hai aur kahan fail hua, uski ek structured diary (logs) maintain karna, bajaye iske ki sirf screen par raw text (`print`) fek diya jaye.::HL]]
 
-#### 🧠 4. Why This Matters
+#### [[HL::🧠 4. Why This Matters::HL]]
 
-* **Problem:** Jab tum 500 tests CI/CD server pe chalate ho aur 1 fail hota hai, toh tumhe nahi pata chalta kaunsi API call fail hui kyunki `print()` ka data wahan kho jaata hai ya samajh nahi aata kis time pe print hua.
-* **Solution:** Logging use karo jo har message ke aage date, time, aur severity (INFO/ERROR) laga deta hai.
-* **What breaks if we don't use it?** Production ya pipeline mein fail hue tests ko debug karna namumkin ho jayega. Tumhe wapas local machine pe test chala kar `print` dekhne padenge.
-* **✅ Kab use karo:** Har automation framework mein pehle din se. API ka URL hit hone se pehle (INFO) aur `response.text` ya status code fail hone par (ERROR) log karo.
-* **❌ Kab mat karo / Alternative:** (Yeh concept har professional project mein mandatory hai. Par agar tum sirf ek 5-line script likh rahe ho kisi tool ka output test karne ke liye, tab `print` se kaam chala sakte ho).
+* [[HL::**Problem:** Jab tum 500 tests CI/CD server pe chalate ho aur 1 fail hota hai, toh tumhe nahi pata chalta kaunsi API call fail hui kyunki `print()` ka data wahan kho jaata hai ya samajh nahi aata kis time pe print hua.::HL]]
+* [[HL::**Solution:** Logging use karo jo har message ke aage date, time, aur severity (INFO/ERROR) laga deta hai.::HL]]
+* [[HL::**What breaks if we don't use it?** Production ya pipeline mein fail hue tests ko debug karna namumkin ho jayega. Tumhe wapas local machine pe test chala kar `print` dekhne padenge.::HL]]
+* **✅ Kab [[HL::use karo:**::HL]] Har automation framework mein pehle din se. API ka URL hit hone se pehle (INFO) aur `response.text` ya status code fail hone par (ERROR) log karo.
+* **❌ Kab mat karo / Alternative:** (Yeh concept har professional project mein mandatory hai. Par agar tum sirf ek [[HL::5-line::HL]] script likh rahe ho kisi tool ka output test karne ke liye, tab `print` se kaam chala sakte ho).
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 ```text
-# print() ka output:
-{ "user": "test" }
+# [[HL::print() ka output:::HL]]
+[[HL::{ "user": "test" }::HL]]
 
-# logging ka output (Terminal/Dashboard mein):
-2026-06-28 18:05:10 [INFO] test_api.py: Sending POST request to /users
-2026-06-28 18:05:11 [DEBUG] test_api.py: Payload was: { "user": "test" }
+# [[HL::logging ka output (Terminal/Dashboard mein):::HL]]
+[[HL::2026-06-28 18:05:10 [INFO] test_api.py: Sending POST request to /users::HL]]
+[[HL::2026-06-28 18:05:11 [DEBUG] test_api.py: Payload was: { "user": "test"::HL]] }
 
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Python mein built-in `logging` module hota hai.
-2. Hum ek logger object banate hain: `getLogger(__name__)`. `__name__` current file ka naam automatically utha leta hai.
+1. [[HL::Python mein built-in `logging` module hota hai.::HL]]
+2. [[HL::Hum ek logger object banate hain: `getLogger(__name__)`. `__name__` current file ka naam automatically utha leta hai.::HL]]
 3. Phir hum `basicConfig` ke through format set karte hain (e.g., pehle time, phir level, phir message).
-4. Jab hum `logger.info("message")` call karte hain, toh logger check karta hai ki kya uski `level` INFO ya usse higher set hai? Agar haan, toh format apply karke message console ya file mein bhej deta hai.
+4. [[HL::Jab hum `logger.info("message")` call karte hain, toh logger check karta hai ki kya uski `level` INFO ya usse higher set hai? Agar haan, toh format apply karke message console ya file mein bhej deta hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -2788,8 +2788,8 @@ PASSED
 
 #### 🔬 Code Explanation
 
-* **Line 6:** `basicConfig` setup karta hai. Yahan level `INFO` hai, isliye **Line 14** ka `logger.debug` print nahi hua (kyunki DEBUG chhota level hai).
-* **Line 7:** `getLogger(__name__)` humesha use karna chahiye. Isse file ka naam logs mein aayega, jisse pata chalega error kis file se aayi.
+* [[HL::**Line::HL]] 6:** `basicConfig` setup karta hai. Yahan level `INFO` hai, isliye [[HL::**Line::HL]] 14** ka `logger.debug` print nahi hua (kyunki DEBUG chhota level hai).
+* [[HL::**Line::HL]] 7:** `getLogger(__name__)` humesha use karna chahiye. Isse file ka naam logs mein aayega, jisse pata chalega error kis file se aayi.
 * **CLI Flags in Prose:** `--log-cli-level=INFO` flag Pytest ko batata hai ki console pe INFO aur usse upar ke logs dikhao. `--capture=no` (ya `-s`) Pytest ko output hide karne se rokta hai, taaki logs screen pe dikhein. Agar test fail hoke ruk jaye, toh wahan ruk kar variable inspect karne ke liye hum `breakpoint()` (Python ka inbuilt debugger) laga sakte hain.
 
 #### 🔒 8. Security-First Check
@@ -2798,21 +2798,21 @@ PASSED
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Industry frameworks mein ek centralized `conftest.py` mein logger setup hota hai. Production pipelines mein console (screen) pe log nahi hote, balki `.log` files mein write hote hain aur wahan se ELK stack (Elasticsearch, Logstash, Kibana) ya Datadog mein bhej diye jaate hain. `CRITICAL` logs aate hi Senior Engineers ko Slack/PagerDuty pe alert aa jata hai.
+Industry frameworks mein ek centralized `conftest.py` mein logger setup hota hai. Production [[HL::pipelines::HL]] mein console (screen) pe log nahi hote, balki `.log` files mein write hote hain aur wahan se ELK stack (Elasticsearch, Logstash, Kibana) ya Datadog mein bhej diye jaate hain. `CRITICAL` logs aate hi Senior Engineers ko Slack/PagerDuty pe alert aa jata hai.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
 * **❌ Mistake:** Har API response ko `print(response.text)` se console pe fekna.
 * **🤦 Why:** Beginner code chalta hua dekhna chahta hai bina setup ke.
-* **✅ The 'Pro' Way:** `logger.debug()` use karo response body ke liye, taaki normal execution mein console clean rahe, par jab chahiye ho tab `--log-cli-level=DEBUG` flag laga kar dekha ja sake.
+* **✅ The 'Pro' Way:** `logger.debug()` [[HL::use karo::HL]] response body ke liye, taaki normal execution mein console clean rahe, par jab chahiye ho tab `--log-cli-level=DEBUG` flag laga kar dekha ja sake.
 * **⚡ Consequences:** Agar CI/CD pe 1000 tests chalenge, aur sab apna poora raw JSON print karenge, toh server ka console buffer crash ho jayega aur log file GBs mein chali jayegi.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Logging levels ka order kya hota hai?"**
-* **Galat soch:** Sab levels same hain, jo marzi use karo.
-* **Actually:** Order yeh hai (Lowest to Highest): `DEBUG` -> `INFO` -> `WARNING` -> `ERROR` -> `CRITICAL`. Agar tum level `WARNING` set karoge, toh `INFO` aur `DEBUG` hide ho jayenge, sirf `WARNING`, `ERROR`, aur `CRITICAL` dikhenge.
-* **Prove karo:** Upar wale code mein `level=logging.WARNING` karke run karo — tumhe screen par koi output nahi dikhega kyunki tumne sirf `INFO` aur `DEBUG` logs likhe hain.
+* [[HL::**Confusion 1 — "Logging levels ka order kya hota hai?"**::HL]]
+* [[HL::**Galat soch:** Sab levels same hain, jo marzi use karo.::HL]]
+* [[HL::**Actually:** Order yeh hai (Lowest to Highest): `DEBUG` -> `INFO` -> `WARNING` -> `ERROR` -> `CRITICAL`. Agar tum level `WARNING` set karoge, toh `INFO` aur `DEBUG` hide ho jayenge, sirf `WARNING`, `ERROR`, aur `CRITICAL` dikhenge.::HL]]
+* [[HL::**Prove karo:** Upar wale code mein `level=logging.WARNING` karke run karo — tumhe screen par koi output nahi dikhega kyunki tumne sirf `INFO` aur `DEBUG` logs likhe hain.::HL]]
 
 
 * **Confusion 2 — "Pytest ka `caplog` fixture kya hai?"**
@@ -2845,13 +2845,13 @@ Industry frameworks mein ek centralized `conftest.py` mein logger setup hota hai
 
 #### 🌍 14. Real-World Use Case
 
-Raat ke 3 baje production mein API test fail hota hai. CI/CD pipeline report bhejti hai. Agar wahan `print` hota toh QA ko samajh nahi aata. Lekin logging ki wajah se report mein likha hota hai: `[ERROR] - test_customers.py - response.text: "Database timeout"`. Developer turant bug fix kar deta hai bina dobara test run kiye.
+Raat ke 3 baje production mein API test fail hota hai. CI/CD [[HL::pipeline::HL]] report bhejti hai. Agar wahan `print` hota toh QA ko samajh nahi aata. Lekin logging ki wajah se report mein likha hota hai: `[ERROR] - test_customers.py - response.text: "Database timeout"`. Developer turant bug fix kar deta hai bina dobara test run kiye.
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** Developer local debugging ke liye temporary `print()` use karta hai kyunki woh jaldi type hota hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer local debugging ke liye temporary `print()` use karta hai kyunki woh jaldi type hota hai.
 * **Fixing/Iteration Phase:** Lekin final code git commit karne se pehle, sabhi prints hata kar structured `logging` laga deta hai.
-* **Live Production Phase:** CI/CD pipeline par jab test fail hota hai, toh logs dekh kar error ki severity (INFO vs ERROR) turant samajh aati hai aur fix quickly deploy hota hai.
+* **Live Production Phase:** CI/CD [[HL::pipeline::HL]] par jab test fail hota hai, toh logs dekh kar error ki severity (INFO vs ERROR) turant samajh aati hai aur fix quickly deploy hota hai.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -2869,11 +2869,11 @@ Raat ke 3 baje production mein API test fail hota hai. CI/CD pipeline report bhe
 * **Q:** Automation mein `print()` ki jagah `logging` kyun prefer karte hain?
 * **A:** `print()` structured nahi hota, usme timestamps nahi hote, aur production scale par usko control (on/off) karna namumkin hai. `logging` humein severity levels (INFO, ERROR) deta hai, jise hum environment ke hisaab se switch kar sakte hain (e.g., DEV mein DEBUG, PROD mein INFO).
 * **Q:** Pytest mein hum logs ko terminal par explicitly kaise dekh sakte hain?
-* **A:** Pytest logs aur prints ko stdout mein capture kar leta hai. Unhe dekhne ke liye humein command line args pass karne hote hain: `--log-cli-level=INFO` jisse live logs console pe aate hain, aur `-s` (ya `--capture=no`) jisse capture disable ho jata hai.
+* **A:** Pytest logs aur prints ko stdout mein capture kar leta hai. Unhe dekhne ke liye humein command [[HL::line::HL]] args pass karne hote hain: `--log-cli-level=INFO` jisse live logs console pe aate hain, aur `-s` (ya `--capture=no`) jisse capture disable ho jata hai.
 * **Q:** `logger = logging.getLogger(__name__)` mein `__name__` ka kya fayda hai?
 * **A:** `__name__` ek special Python variable hai jo current script ka naam hota hai (jaise `requests_helper`). Jab hum yeh pass karte hain, toh log message mein module ka naam bhi print hota hai. Isse 1000 files ke project mein exactly pata chal jata hai ki kis file se log generate hua tha.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Print kachra phelata hai, Logger sab kuch ek file mein date aur time ke saath saja kar rakhta hai."
 
@@ -2881,7 +2881,7 @@ Raat ke 3 baje production mein API test fail hota hai. CI/CD pipeline report bhe
 
 ```text
 🔑 Keywords Coverage Check — Logging Basics (Print vs Logger)
-✅ Covered   : print(), raw, logging, DEBUG, INFO, WARNING, ERROR, CRITICAL, getLogger, __name__, basicConfig, level, response.text, pytest --log-cli-level=INFO, --capture=no, caplog, assert, breakpoint(), ⭐"print() ko bhool jaao. logging use karo"
+✅ Covered   : print(), raw, logging, DEBUG, INFO, WARNING, ERROR, CRITICAL, getLogger, __name__, basicConfig, level, response.text, pytest --log-cli-level=INFO, --capture=no, caplog, assert, breakpoint(), ⭐"print() ko bhool jaao. logging [[HL::use karo"::HL]]
 ⚠️ Mentioned but needs more depth : (none)
 ❌ MISSED    : (none — all keywords covered)
 
@@ -2902,14 +2902,14 @@ Raat ke 3 baje production mein API test fail hota hai. CI/CD pipeline report bhe
 #### 📖 3. Technical Definition
 
 * **Precise English:** API Schema validation is the process of verifying that an API's JSON response strictly adheres to a predefined data contract (blueprint), ensuring correct data types, required fields, and formats, often implemented using libraries like `pydantic` or `jsonschema`.
-* **Hinglish Simplification:** Ek rulebook banana jo define kare ki API ke response mein kaunsi chabi (key) aayegi aur uski value kis type ki (string, int) hogi. Isse manual, lamba-chauda data checking ka kaam automatically ek line mein ho jata hai.
+* **Hinglish Simplification:** Ek rulebook banana jo define kare ki API ke response mein kaunsi chabi (key) aayegi aur uski value kis type ki (string, int) hogi. Isse manual, lamba-chauda data checking ka kaam automatically ek [[HL::line::HL]] mein ho jata hai.
 
 #### 🧠 4. Why This Matters
 
 * **Problem:** API ka response bohot bada ho sakta hai (e.g., 50 fields). Agar frontend developer string expect kar raha hai aur backend ne galti se ID ko integer bana diya, toh app UI pe crash ho jayegi.
 * **Solution:** **Contract Testing** karo. `pydantic` se schema blueprint define karo. Yeh saare **tedious checks** (jaise email format sahi hai ya nahi) automatically handle karega.
 * **What breaks if we don't use it?** Tumhare tests **brittle** (asani se tootne wale) ho jayenge, kyunki tumhe har field ke liye alag `assert isinstance(...)` likhna padega.
-* **✅ Kab use karo:** Har us API GET/POST endpoint par jahan se complex JSON response wapas aa raha ho, taaki guarantee ho sake ki contract toda nahi gaya hai.
+* **✅ Kab [[HL::use karo:**::HL]] Har us API GET/POST endpoint par jahan se complex JSON response wapas aa raha ho, taaki guarantee ho sake ki contract toda nahi gaya hai.
 * **❌ Kab mat karo / Alternative:** Jab API sirf ek simple `204 No Content` ya `{ "status": "ok" }` bhejti ho. Wahan poora pydantic setup karna zaroorat se zyada hai, simple dictionary check kaafi hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -2921,7 +2921,7 @@ assert type(response['name']) == str
 assert "@" in response['email']
 
 # Schema ke saath (Clean):
-CustomerResponseSchema(**response)  # Ek line mein 100 checks pass!
+CustomerResponseSchema(**response)  # Ek [[HL::line::HL]] mein 100 checks pass!
 
 ```
 
@@ -2982,10 +2982,10 @@ test_schema.py::test_customer_schema_invalid PASSED
 
 #### 🔬 Code Explanation
 
-* **Line 6:** `BaseModel` Pydantic ka core hai. Jo class isse inherit karti hai, usme likhe gaye typing hints (`int`, `EmailStr`) actually runtime rules ban jaate hain.
-* **Line 21:** `response_data` dictionary ko unpack karta hai (e.g., `id=101, email='user@gmail.com'`).
-* **Line 24:** `pytest.fail` directly Pytest ko signal deta hai ki aage mat bado, test fail hai kyunki backend ka contract (schema) badal gaya hai.
-* **Line 29:** `pytest.raises(ValidationError)` negative testing hai. Humein pata hai `bad_data` galat hai, isliye hum assert kar rahe hain ki Pydantic ko `ValidationError` throw karni *chahiye*.
+* [[HL::**Line::HL]] 6:** `BaseModel` Pydantic ka core hai. Jo class isse inherit karti hai, usme likhe gaye typing hints (`int`, `EmailStr`) actually runtime rules ban jaate hain.
+* [[HL::**Line::HL]] 21:** `response_data` dictionary ko unpack karta hai (e.g., `id=101, email='user@gmail.com'`).
+* [[HL::**Line::HL]] 24:** `pytest.fail` directly Pytest ko signal deta hai ki aage mat bado, test fail hai kyunki backend ka contract (schema) badal gaya hai.
+* [[HL::**Line::HL]] 29:** `pytest.raises(ValidationError)` negative testing hai. Humein pata hai `bad_data` galat hai, isliye hum assert kar rahe hain ki Pydantic ko `ValidationError` throw karni *chahiye*.
 
 #### 🔒 8. Security-First Check
 
@@ -2993,13 +2993,13 @@ Schema validation security ke liye ek bada shield hai (Data Validation). Agar ko
 
 #### 🏗️ 9. Scalability & Industry Context
 
-`jsonschema` (ek plain dictionary-based rulebook format) bhi industry mein common hai, par Python duniya mein ab `pydantic` gold standard hai (FastAPI isi par bana hai). Enterprise applications mein hundreds of APIs hoti hain. Senior engineers apne Test Repositories mein ek `schemas/` folder banate hain aur API ka har version wahin store karte hain. Schema validation CI/CD pipeline mein pehla gate hota hai — agar contract fail hai, toh aage ke data checks (value verification) skip kar diye jate hain.
+`jsonschema` (ek plain dictionary-based rulebook format) bhi industry mein common hai, par Python duniya mein ab `pydantic` gold standard hai (FastAPI isi par bana hai). Enterprise applications mein hundreds of APIs hoti hain. Senior engineers apne Test Repositories mein ek `schemas/` folder banate hain aur API ka har version wahin store karte hain. Schema validation CI/CD [[HL::pipeline::HL]] mein pehla gate hota hai — agar contract fail hai, toh aage ke data checks (value verification) skip kar diye jate hain.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
 * **❌ Mistake:** Har JSON field ko manual code se test karna: `isinstance(data['id'], int)`.
 * **🤦 Why:** Beginner ko pydantic nahi pata hota, toh wo if/else ya assert ka lamba spaghetti code likh deta hai.
-* **✅ The 'Pro' Way:** Hamesha `pydantic.BaseModel` use karo. Ek line mein 100 type checks ho jayenge.
+* **✅ The 'Pro' Way:** Hamesha `pydantic.BaseModel` [[HL::use karo.::HL]] Ek [[HL::line::HL]] mein 100 type checks ho jayenge.
 * **⚡ Consequences:** Agar API mein kal 10 fields add hui, toh manual checking code bohot bada (tedious) aur maintain karne mein mushkil (brittle) ho jayega.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -3034,15 +3034,15 @@ Schema validation security ke liye ek bada shield hai (Data Validation). Agar ko
 | Method | Code Length | Maintainability | Error Reporting |
 | --- | --- | --- | --- |
 | **Manual Asserts (`isinstance`)** | Bohot lamba | Brittle & Poor | Vague ("assert False") |
-| **Pydantic Validation** | 1 Line | Highly scalable | Exact field name & reason |
+| **Pydantic Validation** | 1 [[HL::Line::HL]] | Highly scalable | Exact field name & reason |
 
 #### 🌍 14. Real-World Use Case
 
-Netflix ki backend APIs hundreds of microservices se baat karti hain. Agar ek service 'Movie Duration' ko "120" (string) ki jagah `120` (integer) bhejne lage, toh frontend UI crash ho jayega. Wahan Contract Testing (Schema Validation) ensure karta hai ki release se pehle hi CI/CD pipeline Pydantic ke zariye is type mismatch ko pakad le.
+Netflix ki backend APIs hundreds of microservices se baat karti hain. Agar ek service 'Movie Duration' ko "120" (string) ki jagah `120` (integer) bhejne lage, toh frontend UI crash ho jayega. Wahan Contract Testing (Schema Validation) ensure karta hai ki release se pehle hi CI/CD [[HL::pipeline::HL]] Pydantic ke zariye is type mismatch ko pakad le.
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** Developer Swagger documentation padh kar ek `BaseModel` (schema blueprint) banata hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer Swagger documentation padh kar ek `BaseModel` (schema blueprint) banata hai.
 * **Fixing/Iteration Phase:** Jab API ka test run hota hai, response ko sidha schema model se guzara jata hai. Agar backend dev galti se datatype (jaise string to int) change kar de...
 * **Live Production Phase:** Toh schema validation turant error dega (`ValidationError`), deployment rok dega, aur live frontend app crash hone se bach jayegi.
 
@@ -3066,7 +3066,7 @@ Netflix ki backend APIs hundreds of microservices se baat karti hain. Agar ek se
 * **Q:** Agar API response mein extra unknown fields aane lagein, toh kya pydantic schema fail ho jayega?
 * **A:** Default roop se Pydantic extra fields ko silently ignore kar deta hai (validation pass hoti hai). Par agar tum explicitly chaho ki extra fields aane par fail ho, toh `model_config = {'extra': 'forbid'}` set karna padta hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Pydantic schema API ke data ka bouncer hai — identity (type/format) galat hui toh club ke andar (test mein) entry nahi."
 
@@ -3101,8 +3101,8 @@ Netflix ki backend APIs hundreds of microservices se baat karti hain. Agar ek se
 
 * **Problem:** Database writing ya message queues asynchronous hote hain (background mein chalte hain). API ne `202 Accepted` de diya, par DB mein data 3 second baad aayega. Agar GET API turant call hui, toh test fail ho jayega. Agli baar shayed DB tez chale toh pass ho jaye. Ise **Flaky test** kehte hain.
 * **Solution:** `tenacity` library use karke ya while loop se ek polling mechanism (Dynamic wait) banao jo har 1 second mein check kare ki data aaya ya nahi.
-* **What breaks if we don't use it?** Pipeline randomly fail hoti rahegi (Flakiness). Developers tests par se bharosa utha denge aur fail hone par unhe ignore karna shuru kar denge (Boy who cried wolf syndrome).
-* **✅ Kab use karo:** Jab test un APIs par depend kare jo Kafka, RabbitMQ, Celery ya kisi bhi async background worker se processed hote hain.
+* **What breaks if we don't use it?** [[HL::Pipeline::HL]] randomly fail hoti rahegi (Flakiness). Developers tests par se bharosa utha denge aur fail hone par unhe ignore karna shuru kar denge (Boy who cried wolf syndrome).
+* **✅ Kab [[HL::use karo:**::HL]] Jab test un APIs par depend kare jo Kafka, RabbitMQ, Celery ya kisi bhi async background worker se processed hote hain.
 * **❌ Kab mat karo / Alternative:** Jab API exactly synchronous (live) data return karti ho — wahan loop/retry lagane se sirf code slow hoga. Wahan fail matlab directly bug hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -3170,9 +3170,9 @@ Data found at attempt 3
 
 #### 🔬 Code Explanation
 
-* **Line 9-14:** Yeh dynamic wait ka dil hai. Maximum 5 baar chalega. Jaise hi `200` aaya, `break` trigger hota hai aur time bachta hai. Agar data 1st try mein aata toh baaki try aur wait skip ho jaate.
-* **Line 17:** Loop ke andar chhota `time.sleep` theek hai, problem bahar bada static sleep lagane mein hai.
-* **Line 23:** `@retry` ek function decorator hai. Iska kaam hai function (`get_customer_pro`) ko run karna. Agar wahan se exception (Line 27) aati hai, toh yeh khud 2 sec ruk kar dobara run karega (max 5 baar).
+* [[HL::**Line::HL]] 9-14:** Yeh dynamic wait ka dil hai. Maximum 5 baar chalega. Jaise hi `200` aaya, `break` trigger hota hai aur time bachta hai. Agar data 1st try mein aata toh baaki try aur wait skip ho jaate.
+* [[HL::**Line::HL]] 17:** Loop ke andar chhota `time.sleep` theek hai, problem bahar bada static sleep lagane mein hai.
+* [[HL::**Line::HL]] 23:** `@retry` ek function decorator hai. Iska kaam hai function (`get_customer_pro`) ko run karna. Agar wahan se exception [[HL::(Line::HL]] 27) aati hai, toh yeh khud 2 sec ruk kar dobara run karega (max 5 baar).
 
 #### 🔒 8. Security-First Check
 
@@ -3180,13 +3180,13 @@ Jab loop ya retries lagao (jaise login endpoints ya OTP endpoints par), toh chec
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Industry mein "Flakiness" CI/CD pipelines ka sabse bada dushman hai. 1 flaky test poore 1000 developers ki deployment ko block kar deta hai. Senior SDETs (Software Dev in Test) `tenacity` library ka bohot use karte hain aur exponential backoff (pehle 2s wait, phir 4s, phir 8s) lagate hain taaki server par load na pade.
+Industry mein "Flakiness" CI/CD [[HL::pipelines::HL]] ka sabse bada dushman hai. 1 flaky test poore 1000 developers ki deployment ko block kar deta hai. Senior SDETs (Software Dev in Test) `tenacity` library ka bohot use karte hain aur exponential backoff (pehle 2s wait, phir 4s, phir 8s) lagate hain taaki server par load na pade.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
 * **❌ Mistake:** Flaky test dekhte hi `time.sleep(15)` laga dena.
 * **🤦 Why:** Beginner ko lagta hai ki data aane mein 5 second lagte hain toh safe side 15 lag deta hu.
-* **✅ The 'Pro' Way:** Hamesha dynamic retry (Polling) use karo jaise `@retry` (tenacity).
+* **✅ The 'Pro' Way:** Hamesha dynamic retry (Polling) [[HL::use karo::HL]] jaise `@retry` (tenacity).
 * **⚡ Consequences:** Agar har test mein tumne 15 sec waste kiye, toh tumhara test suite ghanto chalega. Aur worst case mein agar DB bohot slow hua aur 16 sec lag gaye, toh test phir fail ho jayega.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -3202,7 +3202,7 @@ Industry mein "Flakiness" CI/CD pipelines ka sabse bada dushman hai. 1 flaky tes
 
 * **Test loop mein infinite fasa hua hai aur bahar nahi aa raha**
 * **Root Cause:** Tumne `max_retries` counter implement nahi kiya ya while(True) laga kar bhool gaye.
-* **Fix:** Hamesha fail-safe (e.g., `for attempt in range(5):`) use karo taaki test ek point pe timeout hoke fail declare ho.
+* **Fix:** Hamesha fail-safe (e.g., `for attempt in range(5):`) [[HL::use karo::HL]] taaki test ek point pe timeout hoke fail declare ho.
 
 
 * **Tenacity retry nahi kar rahi, pehle try mein fail ho jati hai**
@@ -3224,8 +3224,8 @@ Banking APIs mein NEFT transfer ki request bhejne ke baad paisa aslyiat mein pro
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** Developer test likhte waqt backend ki async nature samajhta hai aur code mein static sleep() lagane ki bajaye ek dynamic retry loop ya `tenacity` implement karta hai.
-* **Fixing/Iteration Phase:** Jab test CI/CD pipeline mein chalta hai toh yeh flaky nahi hota kyunki woh DB mein write hone ka intelligently wait karta hai bina pipeline delay kiye.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer test likhte waqt backend ki async nature samajhta hai aur code mein static sleep() lagane ki bajaye ek dynamic retry loop ya `tenacity` implement karta hai.
+* **Fixing/Iteration Phase:** Jab test CI/CD [[HL::pipeline::HL]] mein chalta hai toh yeh flaky nahi hota kyunki woh DB mein write hone ka intelligently wait karta hai bina [[HL::pipeline::HL]] delay kiye.
 * **Live Production Phase:** Real systems mein data microservices ke through aane mein network latency ya async delay lagta hai, jise ye pattern properly mimic aur handle karta hai.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
@@ -3250,11 +3250,11 @@ Banking APIs mein NEFT transfer ki request bhejne ke baad paisa aslyiat mein pro
 * **Q:** Flaky Test kya hota hai aur yeh danger kyun hai?
 * **A:** Flaky test ek aisa test hota hai jo code mein bina kisi change ke kabhi pass hota hai aur kabhi fail. Yeh mainly timing issues, network latency ya async operations ki wajah se hota hai. Yeh danger isliye hai kyunki developers is par se bharosa kho dete hain aur asli bugs aane par bhi sochte hain ki "yeh toh test flaky hoga, mera code theek hai".
 * **Q:** Static wait (`time.sleep`) ko automation ka sabse bada anti-pattern kyun mana jata hai?
-* **A:** Kyunki static wait code ko explicitly paralyze kar deta hai. Agar app fast perform kar rahi hai tab bhi test wahi rukhega, jisse CI/CD pipeline slow hoti hai. Aur agar system anticipated time se zyada slow hua, toh test fail ho jata hai.
+* **A:** Kyunki static wait code ko explicitly paralyze kar deta hai. Agar app fast perform kar rahi hai tab bhi test wahi rukhega, jisse CI/CD [[HL::pipeline::HL]] slow hoti hai. Aur agar system anticipated time se zyada slow hua, toh test fail ho jata hai.
 * **Q:** Dynamic Wait aur Polling kaise implement karte hain API testing mein?
 * **A:** Hum ek while ya for loop use karte hain jo specified max retries tak chalta hai. Har loop run mein ek condition evaluate hoti hai (jaise status==200). Agar condition true ho, toh loop `break` kar jata hai (time bachta hai), warna chhota sa interval wait (e.g. 2 sec) karke dobara retry karta hai. `tenacity` library Python mein is kaam ko easily handle karti hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Andha sleep mat lagao, loop lagakar baar-baar darwaza khatkhatao jab tak data bahar na aa jaye."
 
@@ -3276,7 +3276,7 @@ Banking APIs mein NEFT transfer ki request bhejne ke baad paisa aslyiat mein pro
 
 *(Ek hi automation code ko alag-alag servers (DEV, QA, PROD) aur API versions pe dynamically run karne ka architecture)*
 
-> ⚠️ **Notes Guru Alert:** Is subtopic ke liye skeleton mein `🔑 KEYWORDS DUMP` aur detailed notes missing the. Yeh concepts aur terms maine khud API Test Strategy ke industry standards se extract kiye hain taaki pipeline architecture complete ho sake.
+> ⚠️ **Notes Guru Alert:** Is subtopic ke liye skeleton mein `🔑 KEYWORDS DUMP` aur detailed notes missing the. Yeh concepts aur terms maine khud API Test Strategy ke industry standards se extract kiye hain taaki [[HL::pipeline::HL]] architecture complete ho sake.
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -3285,14 +3285,14 @@ Socho tum ek stage actor ho jise same natak 3 alag sheharon (Delhi, Mumbai, Pune
 #### 📖 3. Technical Definition
 
 * **Precise English:** Multi-environment setup involves decoupling environment-specific configurations (like Base URLs, Credentials) from the test scripts using `pytest` hooks (like `pytest_addoption`), `.env` files, or CLI flags, allowing the same test suite to run seamlessly across DEV, QA, Staging, and Production.
-* **Hinglish Simplification:** Apne test URLs aur passwords ko test file se nikal kar ek central config file ya command line argument mein rakhna, taaki kal ko "qa.com" ki jagah "prod.com" pe test karna ho toh code touch na karna pade.
+* **Hinglish Simplification:** Apne test URLs aur passwords ko test file se nikal kar ek central config file ya command [[HL::line::HL]] argument mein rakhna, taaki kal ko "qa.com" ki jagah "prod.com" pe test karna ho toh code touch na karna pade.
 
 #### 🧠 4. Why This Matters
 
 * **Problem:** Agar URL code mein `base_url = "https://dev.api.com"` hardcode kar di, toh production testing ke liye tumhe poora code manually modify karna padega.
 * **Solution:** Config-driven architecture banao jahan URL aur tokens environment config file (`.env` ya JSON) se load hote hain.
 * **What breaks if we don't use it?** Galti se DEV server ka code PROD server par data delete kar sakta hai agar environment boundaries strictly define nahi hain.
-* **✅ Kab use karo:** Har professional test automation framework day 1 se environment-agnostic (kisi ek environment pe dependant nahi) hona chahiye.
+* **✅ Kab [[HL::use karo:**::HL]] Har professional test automation framework day 1 se environment-agnostic (kisi ek environment pe dependant nahi) hona chahiye.
 * **❌ Kab mat karo / Alternative:** (No avoidance scenario. Hardcoding URLs is always bad practice.)
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -3359,9 +3359,9 @@ PASSED
 
 #### 🔬 Code Explanation
 
-* **Line 5-6:** `pytest_addoption` ek built-in hook hai. Pytest load hote waqt parser mein ek custom flag `--env` add karta hai jiska default "QA" set hai.
-* **Line 10-11:** `request` fixture Pytest ka system object hai jo CLI options fetch karta hai. `.upper()` case sensitivity khatam karta hai (qa == QA).
-* **Line 15-17:** API versioning (`/v1`) URL string ka hi part hoti hai. Agar API upgrade hoke v2 aaye, toh hume saare tests modify karne ki jagah sirf is file mein `/v2` update karna padta hai.
+* [[HL::**Line 5-6:**::HL]] `pytest_addoption` ek built-in hook hai. Pytest load hote waqt parser mein ek custom flag `--env` add karta hai jiska default "QA" set hai.
+* [[HL::**Line::HL]] 10-11:** `request` fixture Pytest ka system object hai jo CLI options fetch karta hai. `.upper()` case sensitivity khatam karta hai (qa == QA).
+* [[HL::**Line::HL]] 15-17:** API versioning (`/v1`) URL string ka hi part hoti hai. Agar API upgrade hoke v2 aaye, toh hume saare tests modify karne ki jagah sirf is file mein `/v2` update karna padta hai.
 
 #### 🔒 8. Security-First Check
 
@@ -3369,7 +3369,7 @@ Environment files (`.env` ya tokens dictionary) ko kabhi bhi Git par commit (pus
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Large organizations mein ek hi test framework DEV, QA, Staging, aur PRE-PROD par chalta hai. Multi-environment architecture CI/CD pipeline ka dil hai. Nightly jobs (raat mein chalne wali execution) generally `QA` target karti hain, aur release se 1 ghanta pehle `PRE-PROD` target kiya jata hai, sab kuch sirf bash script ka ek CLI word `--env` change karke.
+Large organizations mein ek hi test framework DEV, QA, Staging, aur PRE-PROD par chalta hai. Multi-environment architecture CI/CD [[HL::pipeline::HL]] ka dil hai. Nightly jobs (raat mein chalne wali execution) generally `QA` target karti hain, aur release se 1 ghanta pehle `PRE-PROD` target kiya jata hai, sab kuch sirf bash script ka ek CLI word `--env` change karke.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
@@ -3402,11 +3402,11 @@ Large organizations mein ek hi test framework DEV, QA, Staging, aur PRE-PROD par
 
 #### 🌍 14. Real-World Use Case
 
-Microsoft mein jab koi feature deploy hota hai, toh pipeline command run karti hai `make test ENV=dev`. Agar woh pass hota hai, toh automatically code agle stage mein jata hai aur command badal kar `make test ENV=staging` chalti hai. Test code 100% same rehta hai, sirf background platform badalta hai.
+Microsoft mein jab koi feature deploy hota hai, toh [[HL::pipeline::HL]] command run karti hai `make test ENV=dev`. Agar woh pass hota hai, toh automatically code agle stage mein jata hai aur command badal kar `make test ENV=staging` chalti hai. Test code 100% same rehta hai, sirf background platform badalta hai.
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** QA local dev server pe `--env=DEV` chala kar tests verify karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** QA local dev server pe `--env=DEV` chala kar tests verify karta hai.
 * **Fixing/Iteration Phase:** Jenkins/GitHub Actions raat mein `--env=QA` ke saath test trigger karta hai fresh build par.
 * **Live Production Phase:** Deployment din par `--env=PROD` (jahan strictly sensitive data ya read-only operations allow hote hain) chalaya jata hai final verification ke liye.
 
@@ -3431,9 +3431,9 @@ CLI: `pytest --env=QA`
 * **Q:** Automation framework ko environment-independent kaise banate hain?
 * **A:** Config files, environment variables, ya pytest hooks (jaise `pytest_addoption`) ka use karke. Data (URLs/Tokens) aur Test Logic ko decouple kar diya jata hai.
 * **Q:** `conftest.py` mein `pytest_addoption` ka primary purpose kya hai?
-* **A:** Iska purpose custom command-line arguments register karna hai taaki execution ke time hum parameters (jaise env, browser, tags) explicitly paas kar sakein, bina code change kiye.
+* **A:** Iska purpose custom [[HL::command-line::HL]] arguments register karna hai taaki execution ke time hum parameters (jaise env, browser, tags) explicitly paas kar sakein, bina code change kiye.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Test tumhara neta hai jo script ratta hua hai, Environment flag decide karta hai ki aaj rally kis gaon (server) mein hogi."
 
@@ -3498,55 +3498,55 @@ Yahan DAO (Data Access Object) woh Kitchen Manager hai — jo directly Database 
 #### 📖 3. Technical Definition
 
 * **Precise English:** The Data Access Object (DAO) pattern is an architectural design that isolates the application/business logic from the database layer by providing an abstract interface (usually a helper class or module) for database operations.
-* **Hinglish Simplification:** DAO ek aisi coding technique hai jahan hum database se baat karne wala saara code (connect karna, data lana, save karna) ek alag file mein rakhte hain, taaki baaki ka program bina DB ki details jaane data access kar sake.
+* [[HL::**Hinglish Simplification:** DAO ek aisi coding technique hai jahan hum database se baat karne wala saara code (connect karna, data lana, save karna) ek alag file mein rakhte hain, taaki baaki ka program bina DB ki details jaane data access kar sake.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Agar hum apne har test script ke andar direct SQL (Structured Query Language — database se baat karne ki bhasha) queries likhne lagenge, toh code bohot messy aur repetitive (boilerplate) ho jayega.
-* **Solution:** Hum ek `db_helper.py` file banate hain jo DAO pattern follow karti hai. Test script sirf is helper ko call karti hai, aur helper DB se data laakar deta hai. Isse **Separation of Concerns** (har file ka apna ek fixed kaam hona) maintain hota hai.
-* **What breaks if we don't use it?** Agar kal ko DB ka password change hua ya table ka naam badla, toh tumhe 100 alag-alag test files mein ja kar query update karni padegi. Test maintainability khatam ho jayegi.
-* **✅ Kab use karo (Use this when):** Jab bhi tumhare tests ko database se data read/write karna ho. ⭐ *Rule of thumb: Apne test scripts ke andar kabhi direct SQL queries mat likho. Hamesha DAO layer (db_helper) banao.*
+* [[HL::**Problem:** Agar hum apne har test script ke andar direct SQL (Structured Query Language — database se baat karne ki bhasha) queries likhne lagenge, toh code bohot messy aur repetitive (boilerplate) ho jayega.::HL]]
+* [[HL::**Solution:** Hum ek `db_helper.py` file banate hain jo DAO pattern follow karti hai. Test script sirf is helper ko call karti hai, aur helper DB se data laakar deta hai. Isse **Separation of Concerns** (har file ka apna ek fixed kaam hona) maintain hota hai.::HL]]
+* [[HL::**What breaks if we don't use it?** Agar kal ko DB ka password change hua ya table ka naam badla, toh tumhe 100 alag-alag test files mein ja kar query update karni padegi. Test maintainability khatam ho jayegi.::HL]]
+* [[HL::**✅ Kab use karo (Use this when):** Jab bhi tumhare tests ko database se data read/write karna ho. ⭐ *Rule of thumb: Apne test scripts ke andar kabhi direct SQL queries mat likho. Hamesha DAO layer (db_helper) banao.*::HL]]
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab tumhara test purely UI (User Interface) based hai aur backend verification ki koi zaroorat nahi hai (which is rare in deep testing). Wahan tum mocks/stubs use kar sakte ho.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 ```text
-project_root/
-├── tests/
-│   ├── test_users_api.py      # Yahan sirf API testing hogi
-│   └── conftest.py
-└── utils/
-    └── db_helper.py           # DAO Layer: Saari SQL queries yahan hongi
+[[HL::project_root/::HL]]
+[[HL::├── tests/::HL]]
+[[HL::│   ├── test_users_api.py      # Yahan sirf API testing hogi::HL]]
+[[HL::│   └── conftest.py::HL]]
+[[HL::└── utils/::HL]]
+    [[HL::└── db_helper.py           # DAO Layer: Saari SQL queries yahan hongi::HL]]
 
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-Layered Architecture aise kaam karti hai:
+[[HL::Layered Architecture aise kaam karti hai:::HL]]
 
-1. `test_users_api.py` (Test Script) -> Call karta hai `get_user_from_db(email)`.
-2. `db_helper.py` (DAO Layer) -> Yeh underlying SQL query (`SELECT * FROM users WHERE email=...`) banata hai aur DB ko bhejta hai.
-3. **Database** -> Query run karke result DAO ko wapas karta hai.
-4. `db_helper.py` -> Us raw DB data ko clean Python dictionary ya object mein convert karke Test Script ko bhej deta hai (Abstraction).
+1. [[HL::`test_users_api.py` (Test Script) -> Call karta hai `get_user_from_db(email)`.::HL]]
+2. [[HL::`db_helper.py` (DAO Layer) -> Yeh underlying SQL query (`SELECT * FROM users WHERE email=...`) banata hai aur DB ko bhejta hai.::HL]]
+3. [[HL::**Database** -> Query run karke result DAO ko wapas karta hai.::HL]]
+4. [[HL::`db_helper.py` -> Us raw DB data ko clean Python dictionary ya object mein convert karke Test Script ko bhej deta hai (Abstraction).::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
-Chalo ek simple `db_helper.py` banate hain jo CRUD (Create, Read, Update, Delete — 4 basic DB operations) ka 'Read' operation perform karta hai.
+[[HL::Chalo ek simple `db_helper.py` banate hain jo CRUD (Create, Read, Update, Delete — 4 basic DB operations) ka 'Read' operation perform karta hai.::HL]]
 
 ```python
 # Python 3.10+ | PyMySQL 1.1+
 1  import pymysql                             # PyMySQL (Python se MySQL DB connect karne ki library) import kar rahe hain
 2  
-3  class DBHelper:                            # DAO class bana rahe hain taaki saare DB operations ek jagah group rahein
-4      def __init__(self, connection):        # Constructor method — jab DBHelper banega, tab connection object maangega
-5          self.conn = connection             # DB connection ko class instance variable mein store kar rahe hain
-6          
-7      def get_user_from_db(self, email):     # Helper method: API test directly isko call karega
-8          cursor = self.conn.cursor()        # cursor() = DB mein query run karne wala executor object
-9          # SQL query: users table se saara data lao jahan email match ho
-10         query = f"SELECT id, name, email FROM users WHERE email = '{email}'" 
-11         cursor.execute(query)              # Cursor se query chalwa rahe hain
-12         result = cursor.fetchone()         # fetchone() = query ka pehla result (ek user) laakar result mein store karo
+3  [[HL::class DBHelper:                            # DAO class bana rahe hain taaki saare DB operations ek jagah group rahein::HL]]
+[[HL::4      def __init__(self, connection):        # Constructor method — jab DBHelper banega, tab connection object maangega::HL]]
+[[HL::5          self.conn = connection             # DB connection ko class instance variable mein store kar rahe hain::HL]]
+[[HL::6::HL]]          
+[[HL::7      def get_user_from_db(self, email):     # Helper method: API test directly isko call karega::HL]]
+[[HL::8          cursor = self.conn.cursor()        # cursor() = DB mein query run karne wala executor object::HL]]
+[[HL::9          # SQL query: users table se saara data lao jahan email match ho::HL]]
+[[HL::10         query = f"SELECT id, name, email FROM users WHERE email = '{email}'"::HL]] 
+[[HL::11         cursor.execute(query)              # Cursor se query chalwa rahe hain::HL]]
+[[HL::12::HL]]         result = cursor.fetchone()         # fetchone() = query ka pehla result (ek user) laakar result mein store karo
 13         cursor.close()                     # Cursor ka kaam khatam, memory bachaane ke liye close kar do
 14         return result                      # Test file ko result waapas bhej do
 
@@ -3558,14 +3558,14 @@ Chalo ek simple `db_helper.py` banate hain jo CRUD (Create, Read, Update, Delete
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 12:** `cursor.fetchone()` — Yeh DB se sirf single row nikaalta hai. Agar hume multiple users chahiye hote, toh hum `fetchall()` use karte. Yeh raw Tuple format mein data deta hai.
+* [[HL::**Line::HL]] 12:** `cursor.fetchone()` — Yeh DB se sirf single row nikaalta hai. Agar hume multiple users chahiye hote, toh hum `fetchall()` use karte. Yeh raw Tuple format mein data deta hai.
 
 #### 🔒 8. Security-First Check
 
-* **How can this be hacked?** Line 10 mein humne f-string use karke email directly query mein daal diya hai. Yeh **SQL Injection** (hacker input mein malicious SQL code daal de jisse poora DB delete ho jaye) ka bohot bada risk hai!
-* **How to secure it?** Hamesha Parameterized Queries use karo. Line 10 & 11 ko aise likho: `cursor.execute("SELECT * FROM users WHERE email = %s", (email,))`. Isse PyMySQL khud SQL injection se bachayega.
+* **How can this be hacked?** [[HL::Line::HL]] 10 mein humne f-string use karke email directly query mein daal diya hai. Yeh **SQL Injection** (hacker input mein malicious SQL code daal de jisse poora DB delete ho jaye) ka bohot bada risk hai!
+* **How to secure it?** Hamesha Parameterized Queries [[HL::use karo. Line::HL]] 10 & 11 ko aise likho: `cursor.execute("SELECT * FROM users WHERE email = %s", (email,))`. Isse PyMySQL khud SQL injection se bachayega.
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -3574,8 +3574,8 @@ Chalo ek simple `db_helper.py` banate hain jo CRUD (Create, Read, Update, Delete
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
 * **❌ Mistake:** Test file ke andar hi `cursor.execute("SELECT...")` likhna.
-* **🤦 Why:** Beginners ko lagta hai ki 2 line ki query ke liye alag file kyun banana.
-* **✅ The 'Pro' Way:** Hamesha abstraction layer (DAO) use karo, chahe 1 hi query ho.
+* **🤦 Why:** Beginners ko lagta hai ki 2 [[HL::line::HL]] ki query ke liye alag file kyun banana.
+* **✅ The 'Pro' Way:** Hamesha abstraction layer (DAO) [[HL::use karo,::HL]] chahe 1 hi query ho.
 * **⚡ Consequences:** Agar test file mein query likh di, aur table structure update hua, toh saare tests fail ho jayenge aur ek-ek karke sabko dhoondh kar fix karna padega (Maintenance nightmare).
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -3613,7 +3613,7 @@ Swiggy ya Zomato ki API testing mein, jab test script ek new order place karti h
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer ek alag `db_helper.py` file banata hai jismein saare DB queries (fetch user, delete order) functions ke roop mein hote hain, taaki API tests unhe directly call kar sakein.
+* [[HL::**Testing/Offline Phase:** Developer ek alag `db_helper.py` file banata hai jismein saare DB queries (fetch user, delete order) functions ke roop mein hote hain, taaki API tests unhe directly call kar sakein.::HL]]
 * **Fixing/Iteration Phase:** Agar kal ko DB ka schema change hota hai, dev test files ko haath nahi lagata, sirf `db_helper.py` ko update kar deta hai.
 * **Live Production Phase:** (Yeh purely testing architecture hai, production application code mein iska apna alag DAO layer hota hai.)
 
@@ -3661,7 +3661,7 @@ Swiggy ya Zomato ki API testing mein, jab test script ek new order place karti h
 
 
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 ⭐ "Test script mein SQL query likhna paap hai, saara DB ka kaam DAO helper (Kitchen Manager) par chhod do!"
 
@@ -3685,41 +3685,41 @@ Swiggy ya Zomato ki API testing mein, jab test script ek new order place karti h
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-⭐ **"Secure Phone Line"**
-Database se connect karna bilkul ek 'Secure Phone Line' milane jaisa hai. Har nayi baat (har naya test) karne ke liye naya phone dial karna, aur call khatam hone par cut karke agle test ke liye firse dial karna bohot time waste karega (function scope). Iski jagah, ek baar call lagao (session scope), connection on rakho, saari baatein (100 tests) kar lo, aur poora din khatam hone ke baad end mein phone safely kaat do (cleanup/close). Isse system par load kam padta hai!
+⭐ **"Secure Phone [[HL::Line"**::HL]]
+Database se connect karna bilkul ek 'Secure Phone [[HL::Line'::HL]] milane jaisa hai. Har nayi baat (har naya test) karne ke liye naya phone dial karna, aur call khatam hone par cut karke agle test ke liye firse dial karna bohot time waste karega (function scope). Iski jagah, ek baar call lagao (session scope), connection on rakho, saari baatein (100 tests) kar lo, aur poora din khatam hone ke baad end mein phone safely kaat do (cleanup/close). Isse system par load kam padta hai!
 
 #### 📖 3. Technical Definition
 
 * **Precise English:** Database connection fixtures in testing frameworks (like Pytest) are configuration functions that establish a connection to the database once per test session, yield the connection to the tests, and handle the teardown (closing the connection) safely after execution.
-* **Hinglish Simplification:** Fixture ek aisa setup function hai jo test run hone se pehle DB connect karta hai, sabhi tests ko woh connection use karne deta hai (yield keyword se), aur test khatam hone ke baad automatically connection close kar deta hai.
+* [[HL::**Hinglish Simplification:** Fixture ek aisa setup function hai jo test run hone se pehle DB connect karta hai, sabhi tests ko woh connection use karne deta hai (yield keyword se), aur test khatam hone ke baad automatically connection close kar deta hai.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Database ke paas limited connection slots hote hain. Agar tumhara framework har test case mein naya DB connection open karega, toh jaldi hi server crash ho jayega (Max Connections Error) aur Memory Leak hogi.
-* **Solution:** Hum Pytest ka `@pytest.fixture(scope="session")` use karte hain jo puri test run cycle mein sirf ek connection banata hai aur usko Connection Pooling (multiple requests ko ek hi connection dena) jaisa treat karata hai.
-* **What breaks if we don't use it?** Agar tumne connection close (cleanup) nahi kiya, toh DB server par inactive open connections reh jayenge aur nayi API requests ko DB handle nahi kar payega.
-* **✅ Kab use karo (Use this when):** Jab tumhare framework mein 100+ DB related tests hon, aur tum speed + resource efficiency chahte ho.
-* **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Agar tumhara test yeh verify kar raha hai ki naya database creation aur dropping theek kaam kar raha hai (jaise DevOps pipeline tests), toh wahan shayad tumhe har baar fresh DB connection chahiye ho.
+* [[HL::**Problem:** Database ke paas limited connection slots hote hain. Agar tumhara framework har test case mein naya DB connection open karega, toh jaldi hi server crash ho jayega (Max Connections Error) aur Memory Leak hogi.::HL]]
+* [[HL::**Solution:** Hum Pytest ka `@pytest.fixture(scope="session")` use karte hain jo puri test run cycle mein sirf ek connection banata hai aur usko Connection Pooling (multiple requests ko ek hi connection dena) jaisa treat karata hai.::HL]]
+* [[HL::**What breaks if we don't use it?** Agar tumne connection close (cleanup) nahi kiya, toh DB server par inactive open connections reh jayenge aur nayi API requests ko DB handle nahi kar payega.::HL]]
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Jab tumhare framework mein 100+ DB related tests hon, aur tum speed + resource efficiency chahte ho.
+* **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Agar tumhara test yeh verify kar raha hai ki naya database creation aur dropping theek kaam kar raha hai (jaise DevOps [[HL::pipeline::HL]] tests), toh wahan shayad tumhe har baar fresh DB connection chahiye ho.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
-Pytest mein fixtures ko globally available karne ke liye hum unhe hamesha `conftest.py` naam ki special file mein rakhte hain.
+[[HL::Pytest mein fixtures ko globally available karne ke liye hum unhe hamesha `conftest.py` naam ki special file mein rakhte hain.::HL]]
 
 ```text
-tests/
-├── conftest.py    # Fixtures yahan hote hain
-└── test_api.py    # Test file automatically in fixtures ko use kar sakti hai
+[[HL::tests/::HL]]
+[[HL::├── conftest.py    # Fixtures yahan hote hain::HL]]
+[[HL::└── test_api.py    # Test file automatically in fixtures ko use kar sakti hai::HL]]
 
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-Fixture Lifecycle with `yield`:
+[[HL::Fixture Lifecycle with `yield`:::HL]]
 
-1. **Setup Phase:** Pytest start hota hai. Fixture DB credentials read karke `connect()` call karta hai.
+1. [[HL::**Setup Phase:** Pytest start hota hai. Fixture DB credentials read karke `connect()` call karta hai.::HL]]
 2. **Yield (Hold State):** Fixture execution pause karta hai aur DB connection object test scripts ko de deta hai (`yield db_connection`).
 3. **Execution:** Saare API test cases run hote hain, is single connection ko share karke.
-4. **Teardown Phase:** Jab saare test cases khatam ho jate hain, code `yield` ke theek neeche wali line se dobara shuru hota hai jahan `db_connection.close()` call hoke DB safely disconnect ho jata hai.
+4. **Teardown Phase:** Jab saare test cases khatam ho jate hain, code `yield` ke theek neeche wali [[HL::line::HL]] se dobara shuru hota hai jahan `db_connection.close()` call hoke DB safely disconnect ho jata hai.
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -3755,19 +3755,19 @@ Fixture Lifecycle with `yield`:
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 5:** `@pytest.fixture(scope="session")` — Pytest ko bata raha hai ki is setup ko sab tests ke start mein mat chalana, balki jab poori testing process shuru ho tab 1 baar chalana. ⭐ *"DB connection hamesha 'session' scope par rakho, warna har test naya connection banakar DB ko crash kar dega."*
-* **Line 8-10:** `os.environ.get()` — Hum username/password code mein hardcode nahi kar rahe. Yeh system ke environment variables se read karega. Agar set nahi hai, toh default ("localhost", "root") lega.
-* **Line 16:** `yield` — Yeh Python ka keyword hai (generator function). Jab pytest isey dekhta hai, woh samajh jata hai ki "jo cheez yield ho rahi hai usko test mein paas kardo, aur jab testing khatam ho jaye, toh wapas aakar iske neeche ki line chala do". Yeh `return` ki tarah hai but function ko fully kill nahi karta.
+* [[HL::**Line 5:** `@pytest.fixture(scope="session")` — Pytest ko bata raha hai ki is setup ko sab tests ke start mein mat chalana, balki jab poori testing process shuru ho tab 1 baar chalana. ⭐ *"DB connection hamesha 'session' scope par rakho, warna har test naya connection banakar DB ko crash kar dega."*::HL]]
+* [[HL::**Line::HL]] 8-10:** `os.environ.get()` — Hum username/password code mein hardcode nahi kar rahe. Yeh system ke environment variables se read karega. Agar set nahi hai, toh default ("localhost", "root") lega.
+* [[HL::**Line 16:** `yield` — Yeh Python ka keyword hai (generator function). Jab pytest isey dekhta hai, woh samajh jata hai ki "jo cheez yield ho rahi hai usko test mein paas kardo, aur jab testing khatam ho jaye, toh wapas aakar iske neeche ki line chala do". Yeh `return` ki tarah hai but function ko fully kill nahi karta.::HL]]
 
 #### 🔒 8. Security-First Check
 
-Kabhi bhi DB passwords ya credentials ko test script mein plain text mein nahi likhna chahiye (hardcoding). Is code mein humne `os.environ` (Environment Variables — system ki hidden secure memory jahan passwords command line terminal se pass kiye jaate hain) use karke secure tareeka apnaya hai.
+Kabhi bhi DB passwords ya credentials ko test script mein plain text mein nahi likhna chahiye (hardcoding). Is code mein humne `os.environ` (Environment Variables — system ki hidden secure memory jahan passwords command [[HL::line::HL]] terminal se pass kiye jaate hain) use karke secure tareeka apnaya hai.
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Large test suites mein jahan 500+ tests chalte hain (CI/CD pipelines mein), wahan ek connection open rakhna theek hai. Lekin agar parallel testing chal rahi ho (multi-threading via `pytest-xdist`), toh wahan DB connections manage karne ke liye SQLAlchemy (Python ORM library) ka Connection Pooling feature use kiya jaata hai jo dynamically connections recycle karta hai. MySQL ke liye `PyMySQL` aur PostgreSQL ke liye `psycopg2` standard drivers hain.
+Large test suites mein jahan 500+ tests chalte hain (CI/CD [[HL::pipelines::HL]] mein), wahan ek connection open rakhna theek hai. Lekin agar parallel testing chal rahi ho (multi-threading via `pytest-xdist`), toh wahan DB connections manage karne ke liye SQLAlchemy (Python ORM library) ka Connection Pooling feature use kiya jaata hai jo dynamically connections recycle karta hai. MySQL ke liye `PyMySQL` aur PostgreSQL ke liye `psycopg2` standard drivers hain.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
@@ -3780,7 +3780,7 @@ Large test suites mein jahan 500+ tests chalte hain (CI/CD pipelines mein), waha
 
 * **Confusion 1 — "Mujhe kaise pata ki test close hone ke baad Teardown sach mein chala?"**
 * **Galat soch:** Pytest error aane par shayad crash ho jaye aur teardown miss ho jaye.
-* **Actually:** Pytest ka architecture bohot smart hai. Chahe test pass ho, fail ho, ya error maar de — `yield` ke baad waali lines GUARANTEED execute hoti hain.
+* **Actually:** Pytest ka architecture bohot smart hai. Chahe test pass ho, fail ho, ya error maar de — `yield` ke baad waali [[HL::lines::HL]] GUARANTEED execute hoti hain.
 * **Prove karo:** Ek test likho jismein `assert 1 == 2` karke janbujh kar fail karo. Pytest output mein tum tab bhi `[TEARDOWN] Closing DB connection...` print hote hue dekhoge!
 
 
@@ -3812,13 +3812,13 @@ Large test suites mein jahan 500+ tests chalte hain (CI/CD pipelines mein), waha
 
 #### 🌍 14. Real-World Use Case
 
-Netflix ke payment gateway testing mein, QA pipeline AWS ke test database se connect karti hai. Woh `psycopg2` ka session fixture banate hain, hazaron transaction tests karte hain, aur end mein connection gracefully close kar dete hain taaki AWS bill na badhe.
+Netflix ke payment gateway testing mein, QA [[HL::pipeline::HL]] AWS ke test database se connect karti hai. Woh `psycopg2` ka session fixture banate hain, hazaron transaction tests karte hain, aur end mein connection gracefully close kar dete hain taaki AWS bill na badhe.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer `conftest.py` mein DB connect karne ka fixture likhta hai. Pytest start hone par ek connection banta hai, 100 tests wahi connection use karte hain.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer `conftest.py` mein DB connect karne ka fixture likhta hai. Pytest start hone par ek connection banta hai, 100 tests wahi connection use karte hain.
 * **Fixing/Iteration Phase:** Agar connection drop timeout ho raha hai toh developer teardown setup verify karke ensure karta hai ki connection cleanly end ho (safe close).
-* **Live Production Phase:** (Test runner pipeline teardown complete karke pass/fail report generate karti hai, CI pipeline close ho jati hai).
+* **Live Production Phase:** (Test runner [[HL::pipeline::HL]] teardown complete karke pass/fail report generate karti hai, CI [[HL::pipeline::HL]] close ho jati hai).
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -3842,28 +3842,28 @@ Netflix ke payment gateway testing mein, QA pipeline AWS ke test database se con
 
 #### ❓ 17. Interview Q&A
 
-* **Q: What is a fixture in Pytest and how is it used for database setups?**
-* **A:** Fixture ek special function hai jo tests ko unki zaroorat ki cheezein (jaise DB connection, test data) provide karta hai aur environment setup/teardown handle karta hai. Hum isey setup code centralized rakhne ke liye use karte hain.
+* [[HL::**Q: What is a fixture in Pytest and how is it used for database setups?**::HL]]
+* [[HL::**A:** Fixture ek special function hai jo tests ko unki zaroorat ki cheezein (jaise DB connection, test data) provide karta hai aur environment setup/teardown handle karta hai. Hum isey setup code centralized rakhne ke liye use karte hain.::HL]]
 
 
-* **Q: Explain the difference between `scope="function"` and `scope="session"` in Pytest.**
-* **A:** Function scope ka setup aur teardown har test case ke liye separately run hota hai. Session scope puri test execution cycle mein sirf ek baar chalega. DB connection hamesha session scope hona chahiye resource bachaane ke liye.
+* [[HL::**Q: Explain the difference between `scope="function"` and `scope="session"` in Pytest.**::HL]]
+* [[HL::**A:** Function scope ka setup aur teardown har test case ke liye separately run hota hai. Session scope puri test execution cycle mein sirf ek baar chalega. DB connection hamesha session scope hona chahiye resource bachaane ke liye.::HL]]
 
 
-* **Q: What does the `yield` keyword do in a database fixture?**
-* **A:** `yield` fixture execution ko pause karta hai aur test ko connection de deta hai. Test execution finish hone ke baad control wapas `yield` ke baad ki line par aa jata hai taaki connection cleanup (teardown) ho sake.
+* [[HL::**Q: What does the `yield` keyword do in a database fixture?**::HL]]
+* [[HL::**A:** `yield` fixture execution ko pause karta hai aur test ko connection de deta hai. Test execution finish hone ke baad control wapas `yield` ke baad ki line par aa jata hai taaki connection cleanup (teardown) ho sake.::HL]]
 
 
-* **Q: Why should we explicitly close DB connections during teardown?**
-* **A:** Agar connection explicitly close na kiya jaye, toh database server par open idle connections badhte jayenge (Memory Leak). Jab server ka max connections limit hit hoga, system nayi requests block kar dega (crash).
+* [[HL::**Q: Why should we explicitly close DB connections during teardown?**::HL]]
+* [[HL::**A:** Agar connection explicitly close na kiya jaye, toh database server par open idle connections badhte jayenge (Memory Leak). Jab server ka max connections limit hit hoga, system nayi requests block kar dega (crash).::HL]]
 
 
 * **Q: How can you pass secure database credentials to your tests without hardcoding them?**
-* **A:** Hum `os.environ` module use karke system ke Environment Variables read karte hain. CI/CD pipelines (jaise Jenkins ya GitHub Actions) mein credentials directly inject kiye jaate hain, test scripts mein nahi likhe jaate.
+* **A:** Hum `os.environ` module use karke system ke Environment Variables read karte hain. CI/CD [[HL::pipelines::HL]] (jaise Jenkins ya GitHub Actions) mein credentials directly inject kiye jaate hain, test scripts mein nahi likhe jaate.
 
 
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 ⭐ "Fixture ka Yield bolta hai: Yeh lo connection, main idhar hi ruka hoon, test karke aao fir phone cut karunga."
 
@@ -3871,7 +3871,7 @@ Netflix ke payment gateway testing mein, QA pipeline AWS ke test database se con
 
 ```text
 🔑 Keywords Coverage Check — Topic 2: Database Connection Fixtures (Setup & Teardown)
-✅ Covered    : PyMySQL, psycopg2, SQLAlchemy, connection, cursor, @pytest.fixture, scope="session", yield, db_connection.close(), memory leak, max connections error, credentials, os.environ, ⭐"Secure Phone Line"
+✅ Covered    : PyMySQL, psycopg2, SQLAlchemy, connection, cursor, @pytest.fixture, scope="session", yield, db_connection.close(), memory leak, max connections error, credentials, os.environ, ⭐"Secure Phone [[HL::Line"::HL]]
 ⚠️ Mentioned but needs more depth : (none)
 ❌ MISSED     : (none — all keywords covered)
 
@@ -3911,14 +3911,14 @@ Socho tumne ATM se 5000 rupeey jama (deposit) kiye. ATM ki screen par "Cash Depo
 #### 📖 3. Technical Definition
 
 * **Precise English:** End-to-End (E2E) Verification in backend testing ensures Data Integrity by asserting that the data returned in the HTTP response payload perfectly matches the actual state persisted in the database (the True Source of Truth).
-* **Hinglish Simplification:** E2E verification ka matlab hai yeh confirm karna ki API ne jo data wapas bheja hai, exactly wahi same data system ke database mein permanently save hua hai ya nahi.
+* [[HL::**Hinglish Simplification:** E2E verification ka matlab hai yeh confirm karna ki API ne jo data wapas bheja hai, exactly wahi same data system ke database mein permanently save hua hai ya nahi.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** ⭐ *Sabse khatarnaak bug woh hai jahan API 201 Created bolti hai, par DB mein kuch save nahi hota (isey Phantom Write kehte hain).* Agar tum sirf API response check karoge, toh test "False Positive" dega (matlab test pass ho jayega, par actual system mein bug hoga).
-* **Solution:** Test script mein pehle API ka response pakdo, phir DB se direct data nikaalo, aur dono ko aapas mein compare (`assert`) karo. Isse Data Integrity (data ki shuddhata aur correctness) maintain rehti hai.
-* **What breaks if we don't use it?** Production mein users ka data loss ho jayega. User ko lagega usne order place kar diya (API Success), par backend mein order exist hi nahi karega.
-* **✅ Kab use karo (Use this when):** Jab bhi tum koi POST (data create karna), PUT/PATCH (data update karna), ya DELETE (data hatana) API request test kar rahe ho. State change humesha DB mein verify hona chahiye.
+* [[HL::**Problem:** ⭐ *Sabse khatarnaak bug woh hai jahan API 201 Created bolti hai, par DB mein kuch save nahi hota (isey Phantom Write kehte hain).* Agar tum sirf API response check karoge, toh test "False Positive" dega (matlab test pass ho jayega, par actual system mein bug hoga).::HL]]
+* [[HL::**Solution:** Test script mein pehle API ka response pakdo, phir DB se direct data nikaalo, aur dono ko aapas mein compare (`assert`) karo. Isse Data Integrity (data ki shuddhata aur correctness) maintain rehti hai.::HL]]
+* [[HL::**What breaks if we don't use it?** Production mein users ka data loss ho jayega. User ko lagega usne order place kar diya (API Success), par backend mein order exist hi nahi karega.::HL]]
+* [[HL::**✅ Kab use karo (Use this when):** Jab bhi tum koi POST (data create karna), PUT/PATCH (data update karna), ya DELETE (data hatana) API request test kar rahe ho. State change humesha DB mein verify hona chahiye.::HL]]
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab test purely kisi third-party external API ka hai jiska DB tumhare control mein nahi hai. Wahan tum sirf unke mock responses ya API contracts verify kar sakte ho.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -3982,12 +3982,12 @@ test_api.py::test_create_user_e2e_verification PASSED                    [100%]
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 11:** `payload = response.json()` — API se jo data aaya hai, use Python dictionary (`payload`) mein convert karta hai. Yeh humari "ATM Receipt" hai.
-* **Line 19:** `db_row = db.get_user_from_db(...)` — Yeh DB se actual record (Tuple format mein) lata hai. Yeh humari "Passbook" hai.
-* **Line 22:** `assert db_row is not None` — Agar API ne 201 Success diya par DB mein row nahi mili (None), toh yeh test yahi fail ho jayega aur **Phantom Write** pakda jayega.
-* **Line 24-25:** `assert payload["name"] == db_row[1]` — Hum manually ek-ek column mila rahe hain. `db_row` ek tuple hai (id, name, email), isliye index `1` aur `2` use kiye hain.
+* [[HL::**Line 11:** `payload = response.json()` — API se jo data aaya hai, use Python dictionary (`payload`) mein convert karta hai. Yeh humari "ATM Receipt" hai.::HL]]
+* [[HL::**Line::HL]] 19:** `db_row = db.get_user_from_db(...)` — Yeh DB se actual record (Tuple format mein) lata hai. Yeh humari "Passbook" hai.
+* [[HL::**Line::HL]] 22:** `assert db_row is not None` — Agar API ne 201 Success diya par DB mein row nahi mili (None), toh yeh test yahi fail ho jayega aur **Phantom Write** pakda jayega.
+* [[HL::**Line::HL]] 24-25:** `assert payload["name"] == db_row[1]` — Hum manually ek-ek column mila rahe hain. `db_row` ek tuple hai (id, name, email), isliye index `1` aur `2` use kiye hain.
 
 #### 🔒 8. Security-First Check
 
@@ -4006,9 +4006,9 @@ Industry mein Microservices architecture (jahan bohot saari alag-alag API servic
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Phantom Write exactly kya bimari hai?"**
-* **Galat soch:** Agar API success bolti hai toh data DB mein gaya hi hoga.
-* **Actually:** Kayi baar developer code mein `try-catch` block banata hai, data insert fail ho jata hai, par catch block galti se `200 OK` return kar deta hai (swallowing the exception). Ya phir DB transaction ko `.commit()` karna bhool jata hai. Toh API success bolegi, par DB mein kuch nahi gaya hoga — isey Phantom Write kehte hain.
+* [[HL::**Confusion 1 — "Phantom Write exactly kya bimari hai?"**::HL]]
+* [[HL::**Galat soch:** Agar API success bolti hai toh data DB mein gaya hi hoga.::HL]]
+* [[HL::**Actually:** Kayi baar developer code mein `try-catch` block banata hai, data insert fail ho jata hai, par catch block galti se `200 OK` return kar deta hai (swallowing the exception). Ya phir DB transaction ko `.commit()` karna bhool jata hai. Toh API success bolegi, par DB mein kuch nahi gaya hoga — isey Phantom Write kehte hain.::HL]]
 * **Prove karo:** API dev ko bolo ki DB connection temporary band kar de aur API hit karke dekhe. Ek badly written API abhi bhi 200 degi!
 
 
@@ -4031,7 +4031,7 @@ Industry mein Microservices architecture (jahan bohot saari alag-alag API servic
 * **Fix:** Assertion se pehle type cast karo: `assert int(payload['id']) == db_row['id']`.
 
 
-* **`AssertionError: assert None is not None` (Line 22 par)**
+* **`AssertionError: assert None is not None` [[HL::(Line::HL]] 22 par)**
 * **Root Cause:** API request pass ho gayi, par DB mein data nahi aaya (Phantom Write bug detected!).
 * **Fix:** Backend developer ko report karo ki "API 201 de rahi hai par data DB mein persist/commit nahi ho raha". Tumhara test perfectly kaam kar raha hai!
 
@@ -4051,9 +4051,9 @@ Amazon E-commerce testing mein: Jab QA "Place Order" API test karta hai, toh woh
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer pehle API par `POST /users` call karta hai. Phir woh `db_helper.get_user(email)` call karta hai. Aur aakhir mein `assert api_response["name"] == db_result["name"]` karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer pehle API par `POST /users` call karta hai. Phir woh `db_helper.get_user(email)` call karta hai. Aur aakhir mein `assert api_response["name"] == db_result["name"]` karta hai.
 * **Fixing/Iteration Phase:** Agar backend dev ne API response mein success bhej diya par DB mein likhna bhool gaya (Phantom Write), toh yeh test turant fail hokar bug pakad lega. Dev usko fix karke code dobara push karega.
-* **Live Production Phase:** (Testing architecture phase hone ke naate yeh tests CI/CD pipeline mein release block karte hain agar data DB mein commit na ho raha ho.)
+* **Live Production Phase:** (Testing architecture phase hone ke naate yeh tests CI/CD [[HL::pipeline::HL]] mein release block karte hain agar data DB mein commit na ho raha ho.)
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -4104,7 +4104,7 @@ TEST ---------------------> API CONTROLLER
 
 
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 ⭐ "Sabse khatarnaak bug Phantom Write hai — API ki Receipt par andha bharosa mat karo, hamesha Database ki Passbook check karo!"
 
@@ -4176,7 +4176,7 @@ Socho tumhare paas ek bohot badi Excel Sheet hai jismein hazaron rows hain. Agar
 * **Problem:** API test karte waqt agar API ne "200 OK" de diya, par actual mein database mein galat data save hua, toh tumhe pata hi nahi chalega.
 * **Solution:** SQL queries run karke hum directly database verify kar sakte hain ki backend ne apna kaam imandari se kiya ya nahi.
 * **What breaks if we don't use it?** Data corruption production mein chala jayega, aur user ko frontend par galat info dikhegi (jaise amount deduct ho gaya par order DB mein nahi hai).
-* **✅ Kab use karo:** Jab API ka POST/PUT request chalne ke baad ensure karna ho ki naya data DB mein sahi se insert/update hua hai ya nahi. (⭐ **Note:** "90% DB validation queries aisi dikhengi: `SELECT * FROM table_name WHERE id = 1`").
+* **✅ Kab [[HL::use karo:**::HL]] Jab API ka POST/PUT request chalne ke baad ensure karna ho ki naya data DB mein sahi se insert/update hua hai ya nahi. (⭐ **Note:** "90% DB validation queries aisi dikhengi: `SELECT * FROM table_name WHERE id = 1`").
 * **❌ Kab mat karo / Alternative prefer karo:** Jab tumhe poora table delete ya modify karna हो (uske liye DDL/DML update commands lagti hain, select nahi).
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -4200,10 +4200,10 @@ mysql> SELECT * FROM users WHERE id=1;
 #### 💻 7. Hands-On — Runnable Example
 
 ```sql
--- MySQL 8.0+
-1  SELECT * -- SELECT = data laao; * (All Columns Asterisk) = table ke saare columns laao
-2  FROM users                             -- FROM = kis table se data laana hai
-3  WHERE id = 1 AND status = 'active';    -- WHERE = filter condition; id=1 = exact match; AND = dono conditions true honi chahiye
+-- [[HL::MySQL 8.0+::HL]]
+[[HL::1  SELECT * -- SELECT = data laao; * (All Columns Asterisk) = table ke saare columns laao::HL]]
+[[HL::2  FROM users                             -- FROM = kis table se data laana hai::HL]]
+[[HL::3  WHERE id = 1 AND status = 'active';    -- WHERE = filter condition; id=1 = exact match; AND = dono conditions true honi chahiye::HL]]
 
 ```
 
@@ -4214,35 +4214,35 @@ id | username | status
 
 ```
 
-**Subqueries aur IN Clause:**
+[[HL::**Subqueries aur IN Clause:**::HL]]
 
 ```sql
--- MySQL 8.0+
-1  SELECT DISTINCT city                   -- DISTINCT = duplicate values hata kar sirf unique values laao
-2  FROM customers                         -- customers table se
-3  WHERE id IN (                          -- IN = Static List Filtering; in brackets ke andar ki values se match karo
-4      SELECT customer_id                 -- Subquery (Nested Query) = query ke andar ek aur query; yeh list generate karegi
-5      FROM orders 
-6      WHERE amount > 1000
-7  );
+-- [[HL::MySQL 8.0+::HL]]
+[[HL::1  SELECT DISTINCT city                   -- DISTINCT = duplicate values hata kar sirf unique values laao::HL]]
+[[HL::2  FROM customers                         -- customers table se::HL]]
+[[HL::3  WHERE id IN (                          -- IN = Static List Filtering; in brackets ke andar ki values se match karo::HL]]
+[[HL::4      SELECT customer_id                 -- Subquery (Nested Query) = query ke andar ek aur query; yeh list generate karegi::HL]]
+[[HL::5      FROM orders::HL]] 
+[[HL::6      WHERE amount > 1000::HL]]
+[[HL::7::HL]]  );
 
 ```
 
 ```text
-# 📤 Expected Output:
-city
-Mumbai
-Delhi
+# 📤 [[HL::Expected Output:::HL]]
+[[HL::city::HL]]
+[[HL::Mumbai::HL]]
+[[HL::Delhi::HL]]
 
 ```
 
-**LIKE aur Pattern Matching:**
+[[HL::**LIKE aur Pattern Matching:**::HL]]
 
 ```sql
--- MySQL 8.0+
-1  SELECT invoice_id                      -- invoice_id column fetch karo
-2  FROM invoices 
-3  WHERE invoice_id LIKE 'INV-2025-%';    -- LIKE = partial match operator; % (Wildcard Percent) = iske baad kuch bhi ho sakta hai (Starts With)
+-- [[HL::MySQL 8.0+::HL]]
+[[HL::1  SELECT invoice_id                      -- invoice_id column fetch karo::HL]]
+[[HL::2  FROM invoices::HL]] 
+[[HL::3  WHERE invoice_id LIKE 'INV-2025-%';    -- LIKE = partial match operator; % (Wildcard Percent) = iske baad kuch bhi ho sakta hai (Starts With)::HL]]
 
 ```
 
@@ -4254,42 +4254,42 @@ INV-2025-099
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
 * **`Collation` (Under the Hood concept):** MySQL string match karte waqt case-insensitive hota hai (agar collation `utf8mb4_general_ci` hai, jahan `ci` ka matlab case-insensitive hai). Toh `'A' = 'a'` True hota hai.
-* **`LIKE` Wildcards:** - `%` (Percent): Zero ya kitne bhi characters match karta hai. (e.g., `%admin%` = Contains, `admin%` = Starts With, `%admin` = Ends With).
-* `_` (Underscore): Sirf aur sirf ONE single character match karta hai (e.g., `_dmin`).
+* [[HL::**`LIKE` Wildcards:** - `%` (Percent): Zero ya kitne bhi characters match karta hai. (e.g., `%admin%` = Contains, `admin%` = Starts With, `%admin` = Ends With).::HL]]
+* [[HL::`_` (Underscore): Sirf aur sirf ONE single character match karta hai (e.g., `_dmin`).::HL]]
 
 
 
 #### 🔒 8. Security-First Check
 
 * **Risk:** Agar frontend ka input bina check kiye seedha `SELECT` query mein daal diya, toh **SQL Injection** (hacker malicious query bhej kar DB hack kar lega) ho sakta hai.
-* **Fix:** Hamesha Parameterized queries/ORMs use karo (jaise Python mein `cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))`).
+* **Fix:** Hamesha Parameterized queries/ORMs [[HL::use karo::HL]] (jaise Python mein `cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))`).
 
 #### 🏗️ 9. Scalability & Industry Context
 
-* **Performance issue:** `LIKE '%text%'` (Contains pattern) query bohot slow hoti hai bade data mein kyunki yeh index use nahi kar paati (ise Full Table Scan karna padta hai).
-* **Pro Tip:** Hamesha `LIKE Starts With` (`'text%'`) ko prefer dein over `Contains`, kyunki 'Starts With' indexes ka fayda utha sakta hai.
+* [[HL::**Performance issue:** `LIKE '%text%'` (Contains pattern) query bohot slow hoti hai bade data mein kyunki yeh index use nahi kar paati (ise Full Table Scan karna padta hai).::HL]]
+* [[HL::**Pro Tip:** Hamesha `LIKE Starts With` (`'text%'`) ko prefer dein over `Contains`, kyunki 'Starts With' indexes ka fayda utha sakta hai.::HL]]
 
-#### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
+#### [[HL::⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
 
-* **❌ Mistake:** Har jagah `SELECT *` use karna.
-* **🤦 Why:** Developers aalsi hote hain, unhe lagta hai "sab manga lo, code mein filter kar lenge".
-* **✅ The 'Pro' Way:** `SELECT Specific Columns` (jaise `SELECT id, name`) use karo.
-* **⚡ Consequences:** Agar table mein 50 columns hain aur millions of rows, toh `*` use karne se memory aur network bandwidth dono crash ho sakte hain.
+* [[HL::**❌ Mistake:** Har jagah `SELECT *` use karna.::HL]]
+* [[HL::**🤦 Why:** Developers aalsi hote hain, unhe lagta hai "sab manga lo, code mein filter kar lenge".::HL]]
+* [[HL::**✅ The 'Pro' Way:** `SELECT Specific Columns` (jaise `SELECT id, name`) use karo.::HL]]
+* [[HL::**⚡ Consequences:** Agar table mein 50 columns hain aur millions of rows, toh `*` use karne se memory aur network bandwidth dono crash ho sakte hain.::HL]]
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
+#### [[HL::🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)::HL]]
 
-* **Confusion 1 — "`=` aur `LIKE` mein kya fark hai?"**
-* **Galat soch:** Dono string match karte hain toh koi bhi use kar lo.
-* **Actually:** `=` Exact match ke liye hai (fast hota hai). `LIKE` partial match ke liye hai (wildcards ke saath, thoda slow hota hai).
-* **Prove karo:** `WHERE name = 'Ami'` check karega jiska naam exactly 'Ami' hai. `WHERE name LIKE 'Ami%'` check karega Amit, Amish, Amiya sabko.
+* [[HL::**Confusion 1 — "`=` aur `LIKE` mein kya fark hai?"**::HL]]
+* [[HL::**Galat soch:** Dono string match karte hain toh koi bhi use kar lo.::HL]]
+* [[HL::**Actually:** `=` Exact match ke liye hai (fast hota hai). `LIKE` partial match ke liye hai (wildcards ke saath, thoda slow hota hai).::HL]]
+* [[HL::**Prove karo:** `WHERE name = 'Ami'` check karega jiska naam exactly 'Ami' hai. `WHERE name LIKE 'Ami%'` check karega Amit, Amish, Amiya sabko.::HL]]
 
 
-* **Confusion 2 — "`IN` kyun use karein jab `OR` laga sakte hain?"**
-* **Galat soch:** `id = 1 OR id = 2 OR id = 3` likhna easy hai.
-* **Actually:** Jab list badi ho (50 IDs), toh `OR` likhna messy ho jata hai. `IN (1,2,3...50)` clean aur jyada optimized hai.
+* [[HL::**Confusion 2 — "`IN` kyun use karein jab `OR` laga sakte hain?"**::HL]]
+* [[HL::**Galat soch:** `id = 1 OR id = 2 OR id = 3` likhna easy hai.::HL]]
+* [[HL::**Actually:** Jab list badi ho (50 IDs), toh `OR` likhna messy ho jata hai. `IN (1,2,3...50)` clean aur jyada optimized hai.::HL]]
 
 
 
@@ -4319,7 +4319,7 @@ E-commerce app mein jab tum apne "Past Orders" dekhte ho, toh backend DB par ek 
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer DB validation ke dauran `SELECT` use karke verify karta hai ki API ne data sahi se likha ya nahi. Test scripts mein multiple IDs ko ek saath check karne ke liye `IN` aur auto-generated format (jaise INV-2025) check karne ke liye `LIKE` use hota hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer DB validation ke dauran `SELECT` use karke verify karta hai ki API ne data sahi se likha ya nahi. Test scripts mein multiple IDs ko ek saath check karne ke liye `IN` aur auto-generated format (jaise INV-2025) check karne ke liye `LIKE` use hota hai.
 * **Fixing/Iteration Phase:** Agar API 200 de rahi hai but data nahi hai, tester DB mein select query se verify karke bug raise karta hai.
 * **Live Production Phase:** Prod APIs millions of `SELECT` queries fast response dene ke liye use karti hain, indexed columns par.
 
@@ -4339,18 +4339,18 @@ API Request ---> DB Validation Test
 
 #### ❓ 17. Interview Q&A
 
-* **Q: LIKE mein `%` aur `_` mein kya difference hai?**
-* **A:** `%` kisi bhi length ke string (0 ya zyada characters) ko match karta hai. Jaise `A%` "A", "Apple", "Animation" sabko match karega. Wahi `_` strictly ek single character ko match karta hai. Jaise `A_` sirf "An", "Ab" jaise 2-letter words ko match karega jo A se start hote hain.
+* [[HL::**Q: LIKE mein `%` aur `_` mein kya difference hai?**::HL]]
+* [[HL::**A:** `%` kisi bhi length ke string (0 ya zyada characters) ko match karta hai. Jaise `A%` "A", "Apple", "Animation" sabko match karega. Wahi `_` strictly ek single character ko match karta hai. Jaise `A_` sirf "An", "Ab" jaise 2-letter words ko match karega jo A se start hote hain.::HL]]
 * **Q: DB test validation ke liye sabse common approach kya hoti hai?**
 * **A:** 90% DB validation queries simple exact match hoti hain: `SELECT * FROM table_name WHERE id = %s`. API ne jo resource create kiya uska ID utha kar hum seedha DB mein query karte hain aur assert karte hain ki backend ne values theek save ki hain ya nahi.
 * **Q: LIKE query ko fast kaise banaya jaye?**
 * **A:** LIKE query mein `%` ko starting mein lagane se (Contains match) avoid karna chahiye kyunki woh index use nahi karta. Hamesha Starts With (`text%`) prefer karein jisse database index tree scan kar sake aur output bohot fast aaye.
-* **Q: DISTINCT aur IN kab ek saath useful hote hain?**
-* **A:** Jab humein kisi table se specific category ke unique identifiers nikalne hon aur unhe kisi doosri query (Subquery) mein pass karna ho. Jaise orders table se unique `customer_id` nikalna jo active hain, aur unhe user table ke `IN` clause mein bhej kar unka naam lana.
+* [[HL::**Q: DISTINCT aur IN kab ek saath useful hote hain?**::HL]]
+* [[HL::**A:** Jab humein kisi table se specific category ke unique identifiers nikalne hon aur unhe kisi doosri query (Subquery) mein pass karna ho. Jaise orders table se unique `customer_id` nikalna jo active hain, aur unhe user table ke `IN` clause mein bhej kar unka naam lana.::HL]]
 * **Q: Collation ka kya impact hota hai read queries pe?**
 * **A:** Collation decide karta hai ki characters kaise compare honge. Agar collation case-insensitive (`_ci`) hai, toh `UPPERCASE` aur `lowercase` strings same treat honge (`'John' = 'john'`). Is wajah se login validations (jahan case matter karta hai) mein careful rehna padta hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "SELECT tumhari aankh hai, WHERE tumhara chashma hai, aur IN/LIKE tumhari doorbeen (binoculars) hain data dhoondhne ke liye!" (⭐ "90% DB validation queries aisi dikhengi: SELECT * FROM table_name WHERE id = ?")
 
@@ -4374,26 +4374,26 @@ API Request ---> DB Validation Test
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-* **JOINs:** Socho ek register mein students ke Roll No. aur Naam hain, aur doosre register mein Roll No. aur unke Marks. Agar tumhe Naam ke saath Marks dekhne hain, toh tum dono registers ko Roll No. ke basis par "Match" karoge. Excel mein isko "VLOOKUP" kehte hain, SQL mein isse **JOIN** kehte hain.
-* **Aggregations:** Socho Class Teacher principal ko report bhej rahi hai. Principal yeh nahi kahega "Saare 50 bacchon ka full report card do (SELECT *)". Principal poochega "Total bacche kitne hain? (COUNT) aur Average marks kitne hain? (AVG)". Aggregation database ko hi calculation karne deta hai.
+* [[HL::**JOINs:** Socho ek register mein students ke Roll No. aur Naam hain, aur doosre register mein Roll No. aur unke Marks. Agar tumhe Naam ke saath Marks dekhne hain, toh tum dono registers ko Roll No. ke basis par "Match" karoge. Excel mein isko "VLOOKUP" kehte hain, SQL mein isse **JOIN** kehte hain.::HL]]
+* [[HL::**Aggregations:** Socho Class Teacher principal ko report bhej rahi hai. Principal yeh nahi kahega "Saare 50 bacchon ka full report card do (SELECT *)". Principal poochega "Total bacche kitne hain? (COUNT) aur Average marks kitne hain? (AVG)". Aggregation database ko hi calculation karne deta hai.::HL]]
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** Relational queries utilize `JOIN` commands to combine rows from two or more tables based on a related column between them. Aggregations use built-in functions like `COUNT`, `SUM`, and `MAX` to perform calculations on a set of values and return a single scalar value.
-* **Hinglish Simplification:** Do alag tables ko ek common connection ke through jodna JOIN kahlata hai. Aur bahut saari rows pe calculation karke ek single result (jaise total ya average) laane ko Aggregation kehte hain.
+* [[HL::**Precise English:** Relational queries utilize `JOIN` commands to combine rows from two or more tables based on a related column between them. Aggregations use built-in functions like `COUNT`, `SUM`, and `MAX` to perform calculations on a set of values and return a single scalar value.::HL]]
+* [[HL::**Hinglish Simplification:** Do alag tables ko ek common connection ke through jodna JOIN kahlata hai. Aur bahut saari rows pe calculation karke ek single result (jaise total ya average) laane ko Aggregation kehte hain.::HL]]
 
-#### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
+#### [[HL::🧠 4. Why This Matters (Zaroorat Kyun Hai?)::HL]]
 
-* **Problem:** Data hamesha alag-alag tables mein toota hua hota hai (Data Integrity maintain karne ke liye). Bina JOINs ke, tumhe do baar alag-alag query likh kar Python mein data merge karna padega, jo memory-heavy hai.
-* **Solution:** JOIN ek hi database query mein dono tables ka data merge karke de deta hai.
-* **What breaks if we don't use it?** Agar tum database se saari rows Python mein laakar count karoge (e.g., `len(results)`), toh millions of rows tumhare backend server ka RAM crash kar dengi.
-* **✅ Kab use karo:** Jab do related entities ka data ek saath check karna ho (jaise User details aur uske Orders). (⭐ **Note:** "Data ko Python mein laakar calculate mat karo. DB ko SUM, COUNT karne do.")
-* **❌ Kab mat karo / Alternative prefer karo:** Badi tables par bina Index ke JOIN mat lagao. RIGHT JOINs avoid karo kyunki 99% kaam INNER aur LEFT JOIN se ho jata hai.
+* [[HL::**Problem:** Data hamesha alag-alag tables mein toota hua hota hai (Data Integrity maintain karne ke liye). Bina JOINs ke, tumhe do baar alag-alag query likh kar Python mein data merge karna padega, jo memory-heavy hai.::HL]]
+* [[HL::**Solution:** JOIN ek hi database query mein dono tables ka data merge karke de deta hai.::HL]]
+* [[HL::**What breaks if we don't use it?** Agar tum database se saari rows Python mein laakar count karoge (e.g., `len(results)`), toh millions of rows tumhare backend server ka RAM crash kar dengi.::HL]]
+* [[HL::**✅ Kab use karo:** Jab do related entities ka data ek saath check karna ho (jaise User details aur uske Orders). (⭐ **Note:** "Data ko Python mein laakar calculate mat karo. DB ko SUM, COUNT karne do.")::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo:** Badi tables par bina Index ke JOIN mat lagao. RIGHT JOINs avoid karo kyunki 99% kaam INNER aur LEFT JOIN se ho jata hai.::HL]]
 
-#### 🔍 5. Visual / Editor Mein Kya Dikhega
+#### [[HL::🔍 5. Visual / Editor Mein Kya Dikhega::HL]]
 
 ```text
-mysql> SELECT u.name, SUM(o.amount) FROM users u JOIN orders o ON u.id = o.user_id GROUP BY u.name;
+[[HL::mysql> SELECT u.name, SUM(o.amount) FROM users u JOIN orders o ON u.id = o.user_id GROUP BY u.name;::HL]]
 +-------+---------------+
 | name  | SUM(o.amount) |
 +-------+---------------+
@@ -4405,19 +4405,19 @@ mysql> SELECT u.name, SUM(o.amount) FROM users u JOIN orders o ON u.id = o.user_
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. **(1) JOIN Execution:** Engine pehle "ON" condition (`customer_id = id`) check karta hai. Agar **INNER JOIN** hai, toh sirf wahi rows aayengi jo DONO tables mein match karti hain. Agar **LEFT JOIN** hai, toh Left table ki saari rows aayengi, chahe match ho ya na ho (jo match nahi hongi wahan `NULL` — matlab empty value, aa jayega).
-2. **(2) Aggregation:** Data merge hone ke baad, DB un grouped rows par math operation (`SUM`, `COUNT`) chalata hai. Python tak aane se pehle hi DB saara bhari kaam kar chuka hota hai (Optimized approach).
+1. [[HL::**(1) JOIN Execution:** Engine pehle "ON" condition (`customer_id = id`) check karta hai. Agar **INNER JOIN** hai, toh sirf wahi rows aayengi jo DONO tables mein match karti hain. Agar **LEFT JOIN** hai, toh Left table ki saari rows aayengi, chahe match ho ya na ho (jo match nahi hongi wahan `NULL` — matlab empty value, aa jayega).::HL]]
+2. [[HL::**(2) Aggregation:** Data merge hone ke baad, DB un grouped rows par math operation (`SUM`, `COUNT`) chalata hai. Python tak aane se pehle hi DB saara bhari kaam kar chuka hota hai (Optimized approach).::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
 **JOINs Example:**
 
 ```sql
--- MySQL 8.0+
-1  SELECT c.name, o.amount                -- c aur o (Table Aliases = tables ke short name) use karke data laao
-2  FROM customers c                       -- Left table
-3  INNER JOIN orders o                    -- INNER JOIN = sirf wahi customers laao jinka order table mein data hai
-4  ON c.id = o.customer_id;               -- ON Condition = yeh wo common dhaaga hai jo dono tables ko jodta hai
+-- [[HL::MySQL 8.0+::HL]]
+[[HL::1  SELECT c.name, o.amount                -- c aur o (Table Aliases = tables ke short name) use karke data laao::HL]]
+[[HL::2  FROM customers c                       -- Left table::HL]]
+[[HL::3  INNER JOIN orders o                    -- INNER JOIN = sirf wahi customers laao jinka order table mein data hai::HL]]
+[[HL::4  ON c.id = o.customer_id;               -- ON Condition = yeh wo common dhaaga hai jo dono tables ko jodta hai::HL]]
 
 ```
 
@@ -4429,31 +4429,31 @@ Neha  | 1200
 
 ```
 
-**Aggregations & LEFT JOIN:**
+[[HL::**Aggregations & LEFT JOIN:**::HL]]
 
 ```sql
--- MySQL 8.0+
-1  SELECT c.name, COUNT(o.id) as total_orders  -- COUNT(id) = kitne orders hain gino; 'as total_orders' alias assign kiya output ke liye
-2  FROM customers c 
-3  LEFT JOIN orders o                          -- LEFT JOIN = saare customers dikhao, chahe unka koi order NULL kyu na ho
-4  ON c.id = o.customer_id
-5  GROUP BY c.name;                            -- GROUP BY = har ek unique name (customer) ke liye calculation alag-alag karo
+-- [[HL::MySQL 8.0+::HL]]
+[[HL::1  SELECT c.name, COUNT(o.id) as total_orders  -- COUNT(id) = kitne orders hain gino; 'as total_orders' alias assign kiya output ke liye::HL]]
+[[HL::2  FROM customers c::HL]] 
+[[HL::3  LEFT JOIN orders o                          -- LEFT JOIN = saare customers dikhao, chahe unka koi order NULL kyu na ho::HL]]
+[[HL::4  ON c.id = o.customer_id::HL]]
+[[HL::5  GROUP BY c.name;                            -- GROUP BY = har ek unique name (customer) ke liye calculation alag-alag karo::HL]]
 
 ```
 
 ```text
-# 📤 Expected Output:
-name  | total_orders
-Amit  | 2
-Neha  | 1
-Ravi  | 0             <-- Ravi left join ki wajah se aaya, order NULL tha isliye count 0
+# 📤 [[HL::Expected Output:::HL]]
+[[HL::name::HL]]  | [[HL::total_orders::HL]]
+[[HL::Amit::HL]]  | [[HL::2::HL]]
+[[HL::Neha::HL]]  | [[HL::1::HL]]
+[[HL::Ravi::HL]]  | [[HL::0             <-- Ravi left join ki wajah se aaya, order NULL tha isliye count 0::HL]]
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **`COUNT(*)` vs `COUNT(column)`:** `COUNT(*)` poori table ki total rows ginta hai (including NULLs). Jabki `COUNT(id)` sirf un rows ko ginta hai jahan `id` mein koi valid value ho (NULL values ignore hoti hain).
-* **Other Aggregates:** `SUM` (total add karna), `AVG` (average/mean nikalna), `MAX` (sabse badi value), `MIN` (sabse choti value). Har function database engine efficiently C/C++ level pe calculate karta hai, jo Python lists processing se hazar guna fast hai.
+* [[HL::**`COUNT(*)` vs `COUNT(column)`:** `COUNT(*)` poori table ki total rows ginta hai (including NULLs). Jabki `COUNT(id)` sirf un rows ko ginta hai jahan `id` mein koi valid value ho (NULL values ignore hoti hain).::HL]]
+* [[HL::**Other Aggregates:** `SUM` (total add karna), `AVG` (average/mean nikalna), `MAX` (sabse badi value), `MIN` (sabse choti value). Har function database engine efficiently C/C++ level pe calculate karta hai, jo Python lists processing se hazar guna fast hai.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -4463,7 +4463,7 @@ Ravi  | 0             <-- Ravi left join ki wajah se aaya, order NULL tha isliye
 #### 🏗️ 9. Scalability & Industry Context
 
 * **Industry Standard:** Jab backend mein dashboard API (e.g., total sales) banti hai, toh hum hazaron rows nikal ke Python mein calculate nahi karte. Hum seedha DB se single aggregated value (jaise `SUM(amount)`) mangwate hain. Yeh network data transfer (bandwidth) bachata hai.
-* **RIGHT JOIN ignore:** Industry mein 99% queries INNER ya LEFT join hoti hain. RIGHT JOIN dimaag ko confuse karta hai, isliye developers simply tables ki position swap karke LEFT JOIN lagana prefer karte hain.
+* [[HL::**RIGHT JOIN ignore:** Industry mein 99% queries INNER ya LEFT join hoti hain. RIGHT JOIN dimaag ko confuse karta hai, isliye developers simply tables ki position swap karke LEFT JOIN lagana prefer karte hain.::HL]]
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -4474,28 +4474,28 @@ Ravi  | 0             <-- Ravi left join ki wajah se aaya, order NULL tha isliye
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "INNER aur LEFT JOIN mein hamesha confusion hoti hai"**
-* **Galat soch:** Dono same data laate hain.
-* **Actually:** INNER JOIN strict hota hai — dono tables mein data hoga tabhi row dikhegi. LEFT JOIN thoda chill hai — first (Left) table ki SAARI rows dikhayega, chahe second table mein data ho ya na ho (wahan NULL dikhega).
+* [[HL::**Confusion 1 — "INNER aur LEFT JOIN mein hamesha confusion hoti hai"**::HL]]
+* [[HL::**Galat soch:** Dono same data laate hain.::HL]]
+* [[HL::**Actually:** INNER JOIN strict hota hai — dono tables mein data hoga tabhi row dikhegi. LEFT JOIN thoda chill hai — first (Left) table ki SAARI rows dikhayega, chahe second table mein data ho ya na ho (wahan NULL dikhega).::HL]]
 * **Prove karo:** Upar waale LEFT JOIN example mein dekho, 'Ravi' ka koi order nahi tha, fir bhi woh list mein aaya. Agar yahan INNER JOIN hota, toh Ravi dikhta hi nahi.
 
 
-* **Confusion 2 — "GROUP BY kab lagana zaroori hota hai?"**
-* **Galat soch:** Har aggregate function ke saath lagta hai.
-* **Actually:** Agar tum sir `SELECT SUM(amount) FROM orders` likhte ho, toh ek total value aayegi (koi GROUP BY nahi chahiye). Par jab tum kis column ke base pe total chahte ho (jaise "HAR CUSTOMER ka total amount"), toh jis column ko tum select kar rahe ho (`customer_id`), usko `GROUP BY` mein likhna COMPULSORY hai.
+* [[HL::**Confusion 2 — "GROUP BY kab lagana zaroori hota hai?"**::HL]]
+* [[HL::**Galat soch:** Har aggregate function ke saath lagta hai.::HL]]
+* [[HL::**Actually:** Agar tum sir `SELECT SUM(amount) FROM orders` likhte ho, toh ek total value aayegi (koi GROUP BY nahi chahiye). Par jab tum kis column ke base pe total chahte ho (jaise "HAR CUSTOMER ka total amount"), toh jis column ko tum select kar rahe ho (`customer_id`), usko `GROUP BY` mein likhna COMPULSORY hai.::HL]]
 
 
 
 #### 🛠️ 12. Troubleshooting Flowchart
 
-* **`Error: Column 'id' in field list is ambiguous`**
-* **Root Cause:** Tumne query mein sirf `id` likha, par dono join hone wali tables mein `id` naam ka column hai. DB confuse hai kaunsa laana hai.
-* **Fix:** Table Aliases use karo (e.g., `SELECT u.id` ya `SELECT o.id`).
+* [[HL::**`Error: Column 'id' in field list is ambiguous`**::HL]]
+* [[HL::**Root Cause:** Tumne query mein sirf `id` likha, par dono join hone wali tables mein `id` naam ka column hai. DB confuse hai kaunsa laana hai.::HL]]
+* [[HL::**Fix:** Table Aliases use karo (e.g., `SELECT u.id` ya `SELECT o.id`).::HL]]
 
 
 * **LEFT JOIN karne par bohot saari NULL values aa rahi hain, calculations fail ho rahi hain**
 * **Root Cause:** Second table mein match nahi mila toh calculations mein NULL ghus gaya (kisi number + NULL hamesha NULL hota hai).
-* **Fix:** SQL mein `COALESCE(amount, 0)` (ek function jo NULL ko 0 bana deta hai) use karo taaki math fail na ho.
+* **Fix:** SQL mein `COALESCE(amount, 0)` (ek function jo NULL ko 0 bana deta hai) [[HL::use karo::HL]] taaki math fail na ho.
 
 
 
@@ -4512,7 +4512,7 @@ Swiggy ya Zomato ki API test karte waqt: "Kya kisi user ke paas bina kisi valid 
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Tester Data Integrity verify karne ke liye `LEFT JOIN` chalata hai (jaise check karna ki bina customer ke koi order toh nahi). Test scripts mein DB se 10 lakh rows Python mein laane ki bajaye, directly `COUNT(*)` ya `SUM()` run karke single value assert ki jaati hai (jaise `assert result == 100`).
+* [[HL::**Testing/Offline::HL]] Phase:** Tester Data Integrity verify karne ke liye `LEFT JOIN` chalata hai (jaise check karna ki bina customer ke koi order toh nahi). Test scripts mein DB se 10 lakh rows Python mein laane ki bajaye, directly `COUNT(*)` ya `SUM()` run karke single value assert ki jaati hai (jaise `assert result == 100`).
 * **Fixing/Iteration Phase:** `POST /customer` API chalne ke baad, tester verify karta hai: `SELECT COUNT(*) FROM customers WHERE email='test@test.com'`, aur phir assert count == 1 se ensure karta hai duplicate issue nahi hai.
 * **Live Production Phase:** Analytics APIs saara aggregation engine directly DB mein hi chalati hain performance optimization ke liye.
 
@@ -4543,7 +4543,7 @@ Ravi -> NULL (Included but blank)
 * **Q: Data Integrity test karne ke liye konsa JOIN use hota hai?**
 * **A:** LEFT JOIN. Hum child table ko left rakhte hain aur parent ko right, phir WHERE condition lagate hain ki "parent is NULL". Isse humein turant "Orphan records" (wo data jinka master data delete ho gaya hai, jo galat hai) mil jate hain.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "VLOOKUP is JOIN, Class Report is Aggregation. Hamesha yaad rakhna: Data math hamesha DB ko karne do, Python ko nahi!"
 
@@ -4592,14 +4592,14 @@ Ravi -> NULL (Included but blank)
 #### 📖 3. Technical Definition
 
 * **Precise English:** Built-in SQL functions perform scalar operations on specific data types (like String or Date) during query execution. The `INSERT INTO` DML (Data Manipulation Language — data modify karne wali commands) statement is used to add new records (rows) to a table.
-* **Hinglish Simplification:** SQL functions column ke data ko on-the-fly change karte hain (jaise naam bada karna ya date lagana), aur INSERT command table mein ek nayi line (row) data add karne ke kaam aati hai.
+* **Hinglish Simplification:** SQL functions column ke data ko on-the-fly change karte hain (jaise naam bada karna ya date lagana), aur INSERT command table mein ek nayi [[HL::line::HL]] (row) data add karne ke kaam aati hai.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * **Problem:** Data hamesha perfect format mein nahi hota, aur testing ke liye DB mein "Dummy user" (fake data) chahiye hota hai, warna API test kaise karoge?
 * **Solution:** Functions se data format hota hai aur `INSERT INTO` se hum directly DB mein data bhejte hain (isko Seeding kehte hain — test se pehle initial data dalna).
 * **What breaks if we don't use it?** Automation scripts har baar nayi email ID generate nahi kar payengi, aur testing ke dauran purane tests ke data pe depend rehna padega (jo flaky/unreliable hota hai).
-* **✅ Kab use karo:** Jab test script ke "Arrange" phase mein background data (dummy user) banana ho bina API call kiye, aur jab text/date validation karni ho.
+* **✅ Kab [[HL::use karo:**::HL]] Jab test script ke "Arrange" phase mein background data (dummy user) banana ho bina API call kiye, aur jab text/date validation karni ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab hazaron rows insert karni hon — ek-ek karke `INSERT` mat chalao, ek hi query mein bulk insert karo.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -4644,12 +4644,12 @@ AMIT       | amit@test.com | 4        | Amit (active)
 
 ```
 
-**INSERT INTO (The ⭐ "Safe Tareeka"):**
+[[HL::**INSERT INTO (The ⭐ "Safe Tareeka"):**::HL]]
 
 ```sql
--- MySQL 8.0+
-1  INSERT INTO users (username, email, created_at)  -- (username, email...) = Hamesha column names specify karo, yeh safe tareeka hai
-2  VALUES ('tester1', 'test1@test.com', NOW());     -- VALUES = ek tuple (comma separated values) pass karo; NOW() = current date+time dega
+-- [[HL::MySQL 8.0+::HL]]
+[[HL::1  INSERT INTO users (username, email, created_at)  -- (username, email...) = Hamesha column names specify karo, yeh safe tareeka hai::HL]]
+[[HL::2  VALUES ('tester1', 'test1@test.com', NOW());     -- VALUES = ek tuple (comma separated values) pass karo; NOW() = current date+time dega::HL]]
 
 ```
 
@@ -4659,10 +4659,10 @@ AMIT       | amit@test.com | 4        | Amit (active)
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
 * **Functions:** `CURDATE()` (sirf YYYY-MM-DD format mein date deta hai, bina time ke) vs `NOW()` (poora timestamp YYYY-MM-DD HH:MM:SS deta hai). MySQL case-insensitive hai mostly, par exact matching ke waqt `UPPER()`/`LOWER()` use karke compare karna safe rehta hai.
-* **Line 1 (The Safe Way):** Hamesha `INSERT INTO table (col1, col2)` likho. Agar tum sirf `INSERT INTO table VALUES ('val')` likhoge, aur kal kisi DBA (Database Administrator) ne table mein naya column add kar diya, toh tumhari query toot jayegi kyunki order mismatch ho jayega.
+* [[HL::**Line::HL]] 1 (The Safe Way):** Hamesha `INSERT INTO table (col1, col2)` likho. Agar tum sirf `INSERT INTO table VALUES ('val')` likhoge, aur kal kisi DBA (Database Administrator) ne table mein naya column add kar diya, toh tumhari query toot jayegi kyunki order mismatch ho jayega.
 
 #### 🔒 8. Security-First Check
 
@@ -4683,9 +4683,9 @@ AMIT       | amit@test.com | 4        | Amit (active)
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "AUTO_INCREMENT hai toh ID khud kyun nahi daali INSERT mein?"**
-* **Galat soch:** Mujhe batana padega ki ID 5 hai.
-* **Actually:** `AUTO_INCREMENT` ka matlab hi yahi hai ki DB apna register khud maintain karega. Tum ID column aur uski value mat bhejo, DB usko automatically +1 karke append kar dega.
+* [[HL::**Confusion 1 — "AUTO_INCREMENT hai toh ID khud kyun nahi daali INSERT mein?"**::HL]]
+* [[HL::**Galat soch:** Mujhe batana padega ki ID 5 hai.::HL]]
+* [[HL::**Actually:** `AUTO_INCREMENT` ka matlab hi yahi hai ki DB apna register khud maintain karega. Tum ID column aur uski value mat bhejo, DB usko automatically +1 karke append kar dega.::HL]]
 * **Prove karo:** Upar wale INSERT statement mein `id` mention nahi kiya gaya hai, phir bhi row successfully save hoti hai ek nayi ID ke saath.
 
 
@@ -4721,7 +4721,7 @@ E-commerce test automation mein: Jab test "Checkout Flow" ka hota hai, toh pehle
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Test run hone se pehle (Arrange phase) automation script `INSERT INTO` aur `NOW()` ka use karke dummy users ya products DB mein seed karti hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Test run hone se pehle (Arrange phase) automation script `INSERT INTO` aur `NOW()` ka use karke dummy users ya products DB mein seed karti hai.
 * **Fixing/Iteration Phase:** Data format check karne ke liye tester string functions (`LOWER()`) ko SQL query ke andar hi process kar leta hai (Assertion ke liye).
 * **Live Production Phase:** Jab real user frontend pe "Signup" form bharta hai, toh backend server background mein yahi `INSERT INTO` query chalata hai.
 
@@ -4744,7 +4744,7 @@ INSERT INTO users (name, email, created_at) VALUES
 * **Q: INSERT command mein explicitly column names specify karna kyun zaroori hai?**
 * **A:** Agar column names skip kiye aur kal ko database schema (structure) change ho gaya (koi column add/remove ho gaya ya order badal gaya), toh hamari code mein likhi insert query fail ho jayegi (Column count mismatch). Column names deny se query resilient (strong) banti hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Excel formula = SQL Function. Nayi blank row = INSERT INTO. Aur hamesha yaad rakho, bina Column Name bataye Insert karna andhere mein teer chalane jaisa hai!"
 
@@ -4768,12 +4768,12 @@ INSERT INTO users (name, email, created_at) VALUES
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-Socho tumhare paas ek nayi notebook hai.
+[[HL::Socho tumhare paas ek nayi notebook hai.::HL]]
 
-* **CREATE TABLE:** Notebook ke ek blank page par lines kheenchna aur headings daalna ("Name", "Roll No").
-* **DELETE:** Page se pencil se likha ek naam eraser se mitana (Sirf data gaya, framework wahi hai).
-* **TRUNCATE:** Poora page phaad kar phek dena, par notebook bachi hui hai.
-* **DROP:** Poori notebook pe petrol daal kar jala dena (Structure, heading, page — sab khatam). (⭐ **Note:** "DROP Production mein KABHI NAHI").
+* [[HL::**CREATE TABLE:** Notebook ke ek blank page par lines kheenchna aur headings daalna ("Name", "Roll No").::HL]]
+* [[HL::**DELETE:** Page se pencil se likha ek naam eraser se mitana (Sirf data gaya, framework wahi hai).::HL]]
+* [[HL::**TRUNCATE:** Poora page phaad kar phek dena, par notebook bachi hui hai.::HL]]
+* [[HL::**DROP:** Poori notebook pe petrol daal kar jala dena (Structure, heading, page — sab khatam). (⭐ **Note:** "DROP Production mein KABHI NAHI").::HL]]
 
 #### 📖 3. Technical Definition
 
@@ -4785,7 +4785,7 @@ Socho tumhare paas ek nayi notebook hai.
 * **Problem:** Agar table mein rules nahi hain, toh koi User email ki jagah number daal dega. Aur agar testing ke baad data clean nahi kiya, toh naya test fail hoga duplicate data hone ki wajah se.
 * **Solution:** `CREATE TABLE` se Constraints (strict rules) lagate hain. Aur Teardown (cleanup phase) mein `DELETE`/`TRUNCATE` use karte hain.
 * **What breaks if we don't use it?** TDM (Test Data Management) na hone se tests flaky ho jate hain (kabhi paas, kabhi fail). Aur galat cleanup command se production ka saara data permanent ud sakta hai.
-* **✅ Kab use karo:** Jab naya project shuru ho (`CREATE`) ya jab automation suite complete ho kar environment clean kar raha ho (`DELETE` for single test, `TRUNCATE` for full DB reset in test env).
+* **✅ Kab [[HL::use karo:**::HL]] Jab naya project shuru ho (`CREATE`) ya jab automation suite complete ho kar environment clean kar raha ho (`DELETE` for single test, `TRUNCATE` for full DB reset in test env).
 * **❌ Kab mat karo / Alternative prefer karo:** (⭐ **Note:** "DROP Production mein KABHI NAHI"). Tester kabhi khud DBA (Database Administrator) ke production table DROP ya create nahi karta, sirf padh kar logic samjhta hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -4799,9 +4799,9 @@ Query OK, 0 rows affected (0.04 sec)  <-- Data safa-chatt, ID counter reset to 1
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
 1. **(1) Constraint Validation:** Jab DBA table banata hai toh rules (Constraints) likhta hai. Agar tumne `UNIQUE KEY` constraint (ek email 2 baar nahi aa sakti) toda, toh DB level par ek internal lock lagta hai aur API ko `409 Conflict` status (ya `UniqueConstraintViolation` error) phek diya jata hai.
-2. **(2) Delete vs Truncate Mechanism:**
-* **`DELETE`**: Ek-ek row scan karta hai, lock lagata hai, delete karta hai, aur transaction log banata hai. (Slow but safe).
-* **`TRUNCATE`**: Disk level pe seedha table ki file ka data block uda deta hai aur naya empty block assign kar deta hai. `AUTO_INCREMENT` index wapas 1 se shuru ho jata hai. (Super fast, but cannot be rolled back easily).
+2. [[HL::**(2) Delete vs Truncate Mechanism:**::HL]]
+* [[HL::**`DELETE`**: Ek-ek row scan karta hai, lock lagata hai, delete karta hai, aur transaction log banata hai. (Slow but safe).::HL]]
+* [[HL::**`TRUNCATE`**: Disk level pe seedha table ki file ka data block uda deta hai aur naya empty block assign kar deta hai. `AUTO_INCREMENT` index wapas 1 se shuru ho jata hai. (Super fast, but cannot be rolled back easily).::HL]]
 
 
 
@@ -4830,11 +4830,11 @@ Query OK, 0 rows affected (0.05 sec)
 
 ```sql
 -- MySQL 8.0+
-1  DELETE FROM users WHERE email = 'test@t.com';  -- DELETE = sirf specific test data udayega (Test setup ke liye INSERT, Teardown ke liye DELETE)
-2
-3  TRUNCATE TABLE users;                          -- TRUNCATE = Table ke saare records permanently uda dega, par table wahi rahega (test suite start setup)
-4
-5  DROP TABLE users;                              -- DROP = Table poori tarah destroy ho jayega (PRODUCTION MEIN KABHI NAHI)
+1  [[HL::DELETE FROM users WHERE email = 'test@t.com';  -- DELETE = sirf specific test data udayega (Test setup ke liye INSERT, Teardown ke liye DELETE)::HL]]
+[[HL::2::HL]]
+[[HL::3  TRUNCATE TABLE users;                          -- TRUNCATE = Table ke saare records permanently uda dega, par table wahi rahega (test suite start setup)::HL]]
+[[HL::4::HL]]
+[[HL::5  DROP TABLE users;                              -- DROP = Table poori tarah destroy ho jayega (PRODUCTION MEIN KABHI NAHI)::HL]]
 
 ```
 
@@ -4844,7 +4844,7 @@ Query OK, 0 rows affected (0.05 sec)
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
 * **Data Types:** `INT` (Numbers), `VARCHAR` (Variable Character — max length batani padti hai, e.g., 255. Memory bachata hai). `CHAR` (Fixed length — agar size 10 diya aur data 2 letter ka hai, toh baaki jagah spaces se fill kar dega). `TEXT` (Bohot bada paragraph store karne ke liye).
 * **Constraints:** `PRIMARY KEY` (ID), `UNIQUE KEY` (ek jaise 2 username/email nahi), `NOT NULL` (mandatory field). In constraints ko todne par hi backend exceptions throw karta hai.
@@ -4867,9 +4867,9 @@ Query OK, 0 rows affected (0.05 sec)
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "TRUNCATE aur DELETE without WHERE mein kya fark hai?"**
-* **Galat soch:** Dono saara data uda dete hain toh result same hi hai.
-* **Actually:** Data saaf dono karte hain. Par `DELETE` ek-ek karke karta hai, aur tumhara `AUTO_INCREMENT` counter wahin rehta hai (agar last ID 10 thi, naya insert ID 11 banega). `TRUNCATE` flash memory jaisa clean karta hai, aur counter zero se reset kar deta hai (naya insert ID 1 banega).
+* [[HL::**Confusion 1 — "TRUNCATE aur DELETE without WHERE mein kya fark hai?"**::HL]]
+* [[HL::**Galat soch:** Dono saara data uda dete hain toh result same hi hai.::HL]]
+* [[HL::**Actually:** Data saaf dono karte hain. Par `DELETE` ek-ek karke karta hai, aur tumhara `AUTO_INCREMENT` counter wahin rehta hai (agar last ID 10 thi, naya insert ID 11 banega). `TRUNCATE` flash memory jaisa clean karta hai, aur counter zero se reset kar deta hai (naya insert ID 1 banega).::HL]]
 
 
 * **Confusion 2 — "UniqueConstraintViolation kyun aata hai jab main API se naya user banata hoon?"**
@@ -4901,11 +4901,11 @@ Query OK, 0 rows affected (0.05 sec)
 
 #### 🌍 14. Real-World Use Case
 
-Cypress ya Playwright mein jab end-to-end (E2E) UI testing hoti hai, toh suite run hone se pehle environment ko clean karne ke liye CI/CD (Continuous Integration/Continuous Deployment — code push hote hi automated run) pipeline mein `TRUNCATE` command pass ki jaati hai taaki environment 100% fresh (clean state) ho.
+Cypress ya Playwright mein jab end-to-end (E2E) UI testing hoti hai, toh suite run hone se pehle environment ko clean karne ke liye CI/CD (Continuous Integration/Continuous Deployment — code push hote hi automated run) [[HL::pipeline::HL]] mein `TRUNCATE` command pass ki jaati hai taaki environment 100% fresh (clean state) ho.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Tester code likhne se pehle `CREATE TABLE` query padh kar schema rules samjhta hai (e.g., unique email) taaki validation accurately likh sake. Test suite start hone par `TRUNCATE` se poora DB clean karta hai, aur single test ke teardown mein `DELETE` use karke sirf test data remove karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Tester code likhne se pehle `CREATE TABLE` query padh kar schema rules samjhta hai (e.g., unique email) taaki validation accurately likh sake. Test suite start hone par `TRUNCATE` se poora DB clean karta hai, aur single test ke teardown mein `DELETE` use karke sirf test data remove karta hai.
 * **Fixing/Iteration Phase:** Agar API `409` return karti hai frequently, tester teardown script fix karta hai taaki stale data DB mein na rahe.
 * **Live Production Phase:** Production DB par tester account ko `DROP` ya `TRUNCATE` command ki permission completely block ki jaati hai. (⭐ "DROP Production mein KABHI NAHI").
 
@@ -4934,7 +4934,7 @@ Table: users
 * **Q: Tester ka `CREATE TABLE` query (Schema) ke saath kya interaction hota hai?**
 * **A:** Tester directly production tables create nahi karta (woh kaam DBA ka hai). Par tester DB ka schema zaroor read karta hai. Jab tester ko pata hota hai ki kis column pe `NOT NULL` ya `VARCHAR(50)` limit hai, tabhi woh effective API boundary tests (e.g., 51 characters bhej kar `400 Bad Request` check karna) likh pata hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "DELETE matlab ek panna mitana, TRUNCATE matlab saare panne phaad dena, aur DROP matlab poori notebook mein aag laga dena (Production mein DROP mat lagana!)."
 
@@ -5008,14 +5008,14 @@ Socho tumhe ek game khelna hai.
 #### 📖 3. Technical Definition
 
 * **Precise English:** Docker is a platform that packages applications and their dependencies into lightweight, isolated boxes called containers, ensuring consistency across different environments.
-* **Hinglish Simplification:** Docker ek aisa tool hai jo tumhare code aur uske liye zaroori saari cheezon ko ek isolated box mein pack kar deta hai, taaki woh kisi bhi computer par bina error ke chal sake.
+* [[HL::**Hinglish Simplification:** Docker ek aisa tool hai jo tumhare code aur uske liye zaroori saari cheezon ko ek isolated box mein pack kar deta hai, taaki woh kisi bhi computer par bina error ke chal sake.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Developer kehta hai "It works on my machine" (mere laptop pe toh chal raha tha), par tester ya production server pe fail ho jata hai kyunki wahan Python ka version alag hota hai ya dependencies missing hoti hain.
-* **Solution:** Docker **Consistency** aur **Isolation** deta hai. Tumhara code aur uski environment (OS, libraries) ek saath pack ho jaate hain.
+* [[HL::**Problem:** Developer kehta hai "It works on my machine" (mere laptop pe toh chal raha tha), par tester ya production server pe fail ho jata hai kyunki wahan Python ka version alag hota hai ya dependencies missing hoti hain.::HL]]
+* [[HL::**Solution:** Docker **Consistency** aur **Isolation** deta hai. Tumhara code aur uski environment (OS, libraries) ek saath pack ho jaate hain.::HL]]
 * **What breaks if we don't use it?** Deployment nightmare ban jaati hai. Har server pe manual setup karna padta hai, aur versions mismatch ke karan ajeeb errors aate hain.
-* **✅ Kab use karo:** Jab team mein multiple log kaam kar rahe hon (MacOS, Windows, Linux), ya jab code ko CI/CD (Continuous Integration/Continuous Deployment — code ko automatically test aur live karne ka process) ke through server pe bhejna ho.
+* **✅ Kab [[HL::use karo:**::HL]] Jab team mein multiple log kaam kar rahe hon (MacOS, Windows, Linux), ya jab code ko CI/CD (Continuous Integration/Continuous Deployment — code ko automatically test aur live karne ka process) ke through server pe bhejna ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab tum ek choti si one-off script apne personal use ke liye likh rahe ho aur usse share nahi karna — wahan plain Python environment kaafi hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -5033,10 +5033,10 @@ my-api-project/
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-Virtual Machine (VM) aur Docker mein zameen-aasman ka fark hai:
+[[HL::Virtual Machine (VM) aur Docker mein zameen-aasman ka fark hai:::HL]]
 
-1. **VM (Virtual Machine):** Host OS (tumhara laptop) ke upar ek Hypervisor chalta hai, jo poora ka poora naya **Guest OS** (jaise 50GB ka Windows/Ubuntu) boot karta hai. Yeh bhari (heavy) hota hai aur boot hone mein minute lagata hai.
-2. **Container:** Host OS ke upar seedha **Docker Engine** chalta hai. Yeh containers Host OS ka hi **Kernel** (OS ka core engine) share karte hain. Isliye yeh **lightweight** hote hain aur milliseconds (Speed) mein start ho jate hain.
+1. [[HL::**VM (Virtual Machine):** Host OS (tumhara laptop) ke upar ek Hypervisor chalta hai, jo poora ka poora naya **Guest OS** (jaise 50GB ka Windows/Ubuntu) boot karta hai. Yeh bhari (heavy) hota hai aur boot hone mein minute lagata hai.::HL]]
+2. [[HL::**Container:** Host OS ke upar seedha **Docker Engine** chalta hai. Yeh containers Host OS ka hi **Kernel** (OS ka core engine) share karte hain. Isliye yeh **lightweight** hote hain aur milliseconds (Speed) mein start ho jate hain.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -5057,18 +5057,18 @@ Chalo ek basic Dockerfile banate hain apne tests run karne ke liye.
 
 *(Yeh sirf code file hai, run karne par output agle topic mein aayega)*
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 1:** `FROM ⭐python:3.10-slim` — Hum scratch se OS nahi banate. Hum ek bani banayi **Base Image** use karte hain. `slim` version zyada chota hota hai (less space).
-* **Line 4:** `RUN pip install ⭐--no-cache-dir -r requirements.txt` — `--no-cache-dir` flag pip ko bolta hai ki downloaded packages ki cache save na kare. **Yeh explicitly emphasized hai kyunki yeh image size ko 'chota' (small) rakhta hai.**
-* **Line 6:** `CMD ["pytest"]` — Jab tiffin box (image) se container banega, toh sabse pehle kya hoga? Woh automatically `pytest` (Python ka testing framework) run karega.
+* [[HL::**Line::HL]] 1:** `FROM ⭐python:3.10-slim` — Hum scratch se OS nahi banate. Hum ek bani banayi **Base Image** use karte hain. `slim` version zyada chota hota hai (less space).
+* [[HL::**Line::HL]] 4:** `RUN pip install ⭐--no-cache-dir -r requirements.txt` — `--no-cache-dir` flag pip ko bolta hai ki downloaded packages ki cache save na kare. **Yeh explicitly emphasized hai kyunki yeh image size ko 'chota' (small) rakhta hai.**
+* [[HL::**Line::HL]] 6:** `CMD ["pytest"]` — Jab tiffin box (image) se container banega, toh sabse pehle kya hoga? Woh automatically `pytest` (Python ka testing framework) run karega.
 
 *(Note: Agar tumhare Dockerfile ka naam kuch aur hai, toh docker build ke time `⭐-f flag` (file flag — specific filename batane ke liye) use karna padta hai).*
 
 #### 🔒 8. Security-First Check
 
 * **Mistake:** Container ke andar sab kuch `root` (super admin) user banke run karna.
-* **Fix:** Production mein hamesha ek non-root user create karke usse use karo, taaki agar container hack bhi ho jaye, toh hacker ko host machine ka full control na mile.
+* **Fix:** Production mein hamesha ek non-root user create karke usse [[HL::use karo,::HL]] taaki agar container hack bhi ho jaye, toh hacker ko host machine ka full control na mile.
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -5077,7 +5077,7 @@ Industry mein Microservices architecture use hota hai. Ek badi app ko 100 chhote
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
 * **❌ Mistake:** `COPY . .` ko `RUN pip install` se pehle likhna.
-* **🤦 Why:** Docker har line ko cache karta hai. Agar code ki ek line bhi change hui, toh Docker sochega cache toot gaya, aur woh poori `requirements.txt` dobara download karega har build pe!
+* **🤦 Why:** Docker har [[HL::line::HL]] ko cache karta hai. Agar code ki ek [[HL::line::HL]] bhi change hui, toh Docker sochega cache toot gaya, aur woh poori `requirements.txt` dobara download karega har build pe!
 * **✅ The 'Pro' Way:** Pehle sirf `requirements.txt` copy karo, phir `pip install` karo, aur sabse aakhir mein baaki code `COPY . .` karo (jaise upar example mein hai).
 * **⚡ Consequences:** Tumhara build time 10 seconds ki jagah 5 minutes lega har chhote code change par.
 
@@ -5118,7 +5118,7 @@ Spotify apni saari services containers mein chalata hai. Jab tum playlist create
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer apne local machine par Dockerfile (recipe) likhta hai taaki test environment consistent rahe.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer apne local machine par Dockerfile (recipe) likhta hai taaki test environment consistent rahe.
 * **Fixing/Iteration Phase:** Developer base image (jaise `python:3.10-slim`) update karta hai agar purane version mein security bug ho.
 * **Live Production Phase:** Jo container local par chala tha, wahi exact same isolated box production server par chalta hai bina kisi "it works on my machine" problem ke.
 
@@ -5151,7 +5151,7 @@ Spotify apni saari services containers mein chalata hai. Jab tum playlist create
 * **Q:** Image size ko chhota rakhne ke liye kya practices follow karni chahiye?
 * **A:** Hamesha `alpine` ya `slim` variants (jaise `python:3.10-slim`) as base image use karni chahiye. Aur `pip install` karte waqt `--no-cache-dir` flag use karna chahiye taaki temporary install files image ka size na badhayein.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Dockerfile ek recipe hai, Image tiffin box hai, aur Container us tiffin box se khana khaata hua zinda insaan hai!"
 
@@ -5190,7 +5190,7 @@ Pichle topic ki analogy ko aage badhate hain:
 * **Problem:** Developer ne Dockerfile toh bana li, par usko as a software kaise chalaye?
 * **Solution:** `build` aur `run` commands us raw file ko zinda environment mein badal dete hain.
 * **What breaks if we don't use it?** Bina iske tumhare paas sirf ek text file (`Dockerfile`) hogi, code kabhi isolated box mein run nahi hoga.
-* **✅ Kab use karo:** Jab bhi code mein naya change aaye aur use test karna ho, ya jab usse server par bhejna ho.
+* **✅ Kab [[HL::use karo:**::HL]] Jab bhi code mein naya change aaye aur use test karna ho, ya jab usse server par bhejna ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab tumhe 10 alag-alag containers (DB, API, Tests) ek saath start karne hon — wahan single `docker run` ki jagah Docker Compose (aage aayega) use karna chahiye.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -5206,7 +5206,7 @@ Successfully built 8a9b7c6d5e4f
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Jab tum `docker build` chalate ho, Docker Engine Dockerfile ki har line ko padhta hai aur ek read-only **layer** banata hai. Sab layers mil kar ek Image banati hain.
+1. Jab tum `docker build` chalate ho, Docker Engine Dockerfile ki har [[HL::line::HL]] ko padhta hai aur ek read-only **layer** banata hai. Sab layers mil kar ek Image banati hain.
 2. Jab tum `docker run` chalate ho, Docker us read-only image ke upar ek patli si **writeable layer** (jise container layer kehte hain) chadha deta hai jisme program apna execution karta hai.
 
 #### 💻 7. Hands-On — Runnable Example
@@ -5222,11 +5222,11 @@ Successfully built 8a9b7c6d5e4f
 # 📤 Expected Output:
 
 ```text
-# Line 1 (build) ka output:
+# [[HL::Line::HL]] 1 (build) ka output:
 [+] Building 12.5s (10/10) FINISHED
  => => naming to docker.io/library/my-api-tests:v1
 
-# Line 3 (run) ka output:
+# [[HL::Line::HL]] 3 (run) ka output:
 ============================= test session starts ==============================
 collected 5 items
 test_api.py .....                                                        [100%]
@@ -5234,38 +5234,38 @@ test_api.py .....                                                        [100%]
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 1:** `docker build -t my-api-tests:v1 .`
+* [[HL::**Line::HL]] 1:** `docker build -t my-api-tests:v1 .`
 * `-t` (Tag flag): Iske bina image ka koi naam nahi hota, sirf ek random ID hoti hai (jaise `f3d4b2...`). `-t` hume ek human-readable naam (`my-api-tests`) aur version (`v1`) dene deta hai.
 * `.` (Dot): Yeh batata hai ki Dockerfile kahan rakhi hai. Dot matlab "current folder".
 
 
-* **Line 3:** `docker run ⭐--rm my-api-tests:v1`
+* [[HL::**Line::HL]] 3:** `docker run ⭐--rm my-api-tests:v1`
 * `⭐--rm` (Remove flag): **Yeh 'bahut' zaroori hai.** Jab pytest apna execution khatm karta hai, container stop ho jata hai, par hard drive par pada rehta hai. `--rm` us dead container ko instantly delete (automatically delete) kar deta hai taaki system clean rahe (housekeeping). Agar yeh na lagayein, toh hazaaron ruke hue containers system mein ikatthe ho jayenge aur disk space bhar jayegi.
 
 
 
 #### 🔒 8. Security-First Check
 
-Images internet se download hoti hain. Hamesha official base images (jo green tick ke saath aati hain Docker Hub par) use karo taaki pre-installed malware tumhare server tak na pohoch jaye.
+Images internet se download hoti hain. Hamesha official base images (jo green tick ke saath aati hain Docker Hub par) [[HL::use karo::HL]] taaki pre-installed malware tumhare server tak na pohoch jaye.
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Modern companies **CI/CD pipeline** (Jenkins, GitHub Actions — automation platforms jo developers ke code push karte hi servers par automated tests chalate hain) use karti hain. CI/CD pipeline ka pehla automated step yahi `docker build` aur `docker run` hota hai. Isse guarantee milti hai ki har naya code update isolate environment mein perfectly test ho raha hai.
+Modern companies **CI/CD [[HL::pipeline**::HL]] (Jenkins, GitHub Actions — automation platforms jo developers ke code push karte hi servers par automated tests chalate hain) use karti hain. CI/CD [[HL::pipeline::HL]] ka pehla automated step yahi `docker build` aur `docker run` hota hai. Isse guarantee milti hai ki har naya code update isolate environment mein perfectly test ho raha hai.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
 * **❌ Mistake:** `docker run` command mein `--rm` lagana bhool jana test runs ke liye.
 * **🤦 Why:** Beginners ko lagta hai container rukne ke baad delete ho gaya.
-* **✅ The 'Pro' Way:** Hamesha short-lived tasks (jaise tests, batch jobs) ke liye `--rm` use karo.
+* **✅ The 'Pro' Way:** Hamesha short-lived tasks (jaise tests, batch jobs) ke liye `--rm` [[HL::use karo.::HL]]
 * **⚡ Consequences:** Disk space bharti jayegi, server crash ho sakta hai "No space left on device" error ke saath, aur naye containers start nahi honge.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
 * **Confusion 1 — "Test fail hone par exit code 1 kya hota hai?"**
 * **Galat soch:** Agar test fail hua toh matlab Docker fail ho gaya.
-* **Actually:** Docker perfectly chala! Par andar jo command (pytest) thi, usne error bataya aur **non-zero exit code** (jaise exit code 1) return kiya (failure signal). CI/CD (jaise Jenkins) is 1 (non-zero) ko dekh kar pipeline ko rok (fail) deta hai. Exit code 0 matlab success.
+* **Actually:** Docker perfectly chala! Par andar jo command (pytest) thi, usne error bataya aur **non-zero exit code** (jaise exit code 1) return kiya (failure signal). CI/CD (jaise Jenkins) is 1 (non-zero) ko dekh kar [[HL::pipeline::HL]] ko rok (fail) deta hai. Exit code 0 matlab success.
 * **Prove karo:** Ek failing test likho aur `docker run` chalao. Phir terminal mein `echo $?` (Mac/Linux) chalake dekho, output `1` aayega.
 
 
@@ -5274,7 +5274,7 @@ Modern companies **CI/CD pipeline** (Jenkins, GitHub Actions — automation plat
 
 * **`invalid reference format` ya `repository name must be lowercase**`
 * **Root Cause:** Tumne image ke naam (tag) mein capital letters use kiye hain (e.g., `docker build -t My-App .`).
-* **Fix:** Docker images ka naam hamesha lowercase letters mein hona chahiye: `my-app` use karo.
+* **Fix:** Docker images ka naam hamesha lowercase letters mein hona chahiye: `my-app` [[HL::use karo.::HL]]
 
 
 
@@ -5291,9 +5291,9 @@ Netflix apne GitHub repo mein jab bhi koi naya code merge karta hai, toh backgro
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Local venv mein tests chalaane ke baad, developer terminal mein `docker build` aur `docker run` chala kar verify karta hai ki tests actually us isolated container mein chalenge ya nahi.
+* [[HL::**Testing/Offline::HL]] Phase:** Local venv mein tests chalaane ke baad, developer terminal mein `docker build` aur `docker run` chala kar verify karta hai ki tests actually us isolated container mein chalenge ya nahi.
 * **Fixing/Iteration Phase:** Agar test container mein fail hota hai, toh developer fix karke dobara `build` aur `run` chalata hai.
-* **Live Production Phase:** Yahi same commands CI/CD pipeline (jaise Jenkins ya GitHub Actions) ka pehla step ban jate hain jahan automation ke thru images build aur run hoti hain production server par bhejne se pehle.
+* **Live Production Phase:** Yahi same commands CI/CD [[HL::pipeline::HL]] (jaise Jenkins ya GitHub Actions) ka pehla step ban jate hain jahan automation ke thru images build aur run hoti hain production server par bhejne se pehle.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -5311,11 +5311,11 @@ Netflix apne GitHub repo mein jab bhi koi naya code merge karta hai, toh backgro
 * **Q:** `docker run` mein `--rm` flag ka kya kaam hai aur yeh testing ke waqt kyun critical hai?
 * **A:** `--rm` flag Docker ko instruct karta hai ki container ka process khatam hote hi (jaise hi tests complete hon) us container ko system se automatically delete kar de. Testing ke waqt hum din mein saikdo baar containers start karte hain; bina `--rm` ke yeh saare stopped containers disk par ikatthe ho jayenge aur server ki memory full kar denge.
 * **Q:** Agar container ke andar pytest mein ek test fail ho jata hai, toh Docker host ko kaise pata chalta hai?
-* **A:** Jab command (pytest) fail hoti hai, toh woh ek non-zero exit code (usually `exit code 1`) return karti hai. Docker container us exit code ko pakad kar host environment (ya CI/CD pipeline) ko pass kar deta hai. Pipeline is non-zero exit code ko dekh kar samajh jaati hai ki run fail ho gaya hai.
+* **A:** Jab command (pytest) fail hoti hai, toh woh ek non-zero exit code (usually `exit code 1`) return karti hai. Docker container us exit code ko pakad kar host environment (ya CI/CD [[HL::pipeline)::HL]] ko pass kar deta hai. [[HL::Pipeline::HL]] is non-zero exit code ko dekh kar samajh jaati hai ki run fail ho gaya hai.
 * **Q:** `docker build -t my-api-tests:v1 .` mein dot (`.`) ka kya significance hai?
 * **A:** Dot (`.`) build context define karta hai. Yeh Docker engine ko batata hai ki Dockerfile aur zaroori files (jaise code, requirements.txt) current working directory mein dhundni hain. Docker is directory ka saara data build daemon ko bhej deta hai taaki image ban sake.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Dot (`.`) ne banaya Tiffin (build), `--rm` ne kiya safaai (run), aur non-zero ne bataya ki test fail ho gaya bhai."
 
@@ -5323,7 +5323,7 @@ Netflix apne GitHub repo mein jab bhi koi naya code merge karta hai, toh backgro
 
 ```text
 🔑 Keywords Coverage Check — Running Tests in a Docker Container
-✅ Covered   : docker build, docker run, CI/CD pipeline, Jenkins, GitHub Actions, -t, Tag, my-api-tests:v1, ., current folder, ⭐--rm, automatically delete, housekeeping, non-zero exit code, failure, exit code 1
+✅ Covered   : docker build, docker run, CI/CD [[HL::pipeline,::HL]] Jenkins, GitHub Actions, -t, Tag, my-api-tests:v1, ., current folder, ⭐--rm, automatically delete, housekeeping, non-zero exit code, failure, exit code 1
 ⚠️ Mentioned but needs more depth : (none)
 ❌ MISSED    : (none)
 
@@ -5383,14 +5383,14 @@ Lekin agar tumhe check karna hai ki khaane mein namak sahi hai ya nahi, toh tumh
 #### 📖 3. Technical Definition
 
 * **Precise English:** `docker exec` is a command that allows a user to run a new, secondary process (like an interactive shell) inside an already running container namespace.
-* **Hinglish Simplification:** `docker exec` ek aisi command hai jo tumhe kisi already chalte hue container ke andar naya terminal (shell) kholne aur commands chalane ki permission deti hai.
+* [[HL::**Hinglish Simplification:** `docker exec` ek aisi command hai jo tumhe kisi already chalte hue container ke andar naya terminal (shell) kholne aur commands chalane ki permission deti hai.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * **Problem:** Normal `docker run` command chalaane ke baad container ya toh pass hota hai ya fail hoke exit ho jata hai. Agar fail hua toh andar ki files ya paths check karne ka time hi nahi milta.
 * **Solution:** Hum container ko forcefully background mein zinda rakhte hain, aur phir `docker exec` use karke uske andar ghus kar debugging karte hain.
 * **What breaks if we don't use it?** Tum andhe ho jaoge. Agar container mein path `FileNotFoundError` aa rahi hai, toh bina andar ghuse tum verify nahi kar paoge ki actual path kya tha.
-* **✅ Kab use karo:** Jab test container mein fail ho raha ho but tumhare laptop par pass ho raha ho (debugging stage mein).
+* **✅ Kab [[HL::use karo:**::HL]] Jab test container mein fail ho raha ho but tumhare laptop par pass ho raha ho (debugging stage mein).
 * **❌ Kab mat karo / Alternative prefer karo:** Production systems mein manual fixes karne ke liye iska use nahi karna chahiye — hamesha Dockerfile update karke naya build banao.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -5434,29 +5434,29 @@ Chalo ek container ko background mein zinda rakhte hain aur uske andar jaate hai
 # 📤 Expected Output:
 
 ```text
-# Line 1 output (Container ID):
+# [[HL::Line::HL]] 1 output (Container ID):
 8f9a3c2b1e4da23...
 
-# Line 3 output (Prompt change ho jayega):
+# [[HL::Line::HL]] 3 output (Prompt change ho jayega):
 root@8f9a3c2b1e4d:/app# 
 
-# Line 6 (ls) output:
+# [[HL::Line::HL]] 6 (ls) output:
 Dockerfile  requirements.txt  test_api.py
 
-# Line 8 (pytest) output:
+# [[HL::Line::HL]] 8 (pytest) output:
 ============================= test session starts ==============================
 ...
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 1:** `docker run -d --name my-test-runner my-api-tests:v1 sleep infinity`
+* [[HL::**Line::HL]] 1:** `docker run -d --name my-test-runner my-api-tests:v1 sleep infinity`
 * `-d` (Detached mode): Container terminal ko block kiye bina background mein chalega.
 * `sleep infinity`: Yeh image ke default `pytest` CMD ko hata kar uski jagah "so jao hamesha ke liye" command chala deta hai. Isse container zinda (alive) rehta hai aur turant exit nahi hota.
 
 
-* **Line 3:** `docker exec ⭐-it my-test-runner bash`
+* [[HL::**Line::HL]] 3:** `docker exec ⭐-it my-test-runner bash`
 * `⭐-it` (Interactive TTY flag combination): Yeh literally tumhara "ultimate weapon" ya Brahmastra hai! `-i` (Interactive) tumhare keyboard (`stdin`) ko container se jodata hai, aur `-t` (TTY) ek proper text-terminal UI deta hai jisse output saaf dikhe. Inke bina prompt stuck ho jayega aur input nahi lega.
 * `bash` (ya `sh`): Yeh ek interactive shell (command prompt) ka naam hai jo hum open kar rahe hain.
 
@@ -5513,7 +5513,7 @@ Agar AWS par ek API container baar-baar 500 Server Error de raha hai, aur logs m
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer container ko detached mode (`-d`) aur `sleep infinity` ke saath background mein start karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer container ko detached mode (`-d`) aur `sleep infinity` ke saath background mein start karta hai.
 * **Fixing/Iteration Phase:** Test fail hone par developer container ke andar (`exec -it`) bash shell mein ghus kar manually variables, paths aur files (`ls`, `cat`, `pytest`) check karke debug karta hai.
 * **Live Production Phase:** (N/A — yeh purely local debugging workflow hai, production mein containers immutable hote hain).
 
@@ -5544,7 +5544,7 @@ Agar AWS par ek API container baar-baar 500 Server Error de raha hai, aur logs m
 * **Q:** `sleep infinity` override karke kyu pass karna padta hai?
 * **A:** By default, Docker container tabhi tak zinda rehta hai jab tak uska main process (jaise `pytest` ya API server) chal raha ho. `pytest` seconds mein exit ho jata hai aur container mar jata hai. `sleep infinity` ek continuous chalne wali command hai jo container ko indefinite time tak zinda (running state mein) rakhti hai, taaki hum `exec` se usme enter kar sakein.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "`docker run` naya ghar banata hai, aur `docker exec -it` us bane hue ghar ka darwaza tod kar ghusne ka Brahmastra hai."
 
@@ -5581,7 +5581,7 @@ Iska solution? Hum ek **Custom Bridge Network** (ek internal intercom system ya 
 * **Problem:** Jab tum test chalate ho, code `localhost:3306` par database dhundhta hai. Par container ke andar `localhost` ka matlab container khud hai, host machine nahi. Toh connection fail ho jata hai.
 * **Solution:** `docker network` dono containers ko same virtual LAN par lata hai.
 * **What breaks if we don't use it?** Tumhare API tests kabhi DB se connect nahi honge, `Connection Refused` error aata rahega.
-* **✅ Kab use karo:** Jab tumhare project mein multiple services hon (jaise Test Runner, MySQL Database, Redis cache) jo aapas mein data exchange karti hon.
+* **✅ Kab [[HL::use karo:**::HL]] Jab tumhare project mein multiple services hon (jaise Test Runner, MySQL Database, Redis cache) jo aapas mein data exchange karti hon.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab tumhe sirf ek single standalone container (jaise purely unit tests bina kisi external DB ke) run karna ho, tab extra network banana zaroori nahi.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -5597,11 +5597,11 @@ DB_HOST=my-mysql-db
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-Jab hum custom network banate hain:
+[[HL::Jab hum custom network banate hain:::HL]]
 
-1. Docker ek naya virtual network interface (jaise `docker0` ki tarah ek bridge network) banata hai.
-2. Is network ke andar ek embedded **DNS** (Domain Name System — jo naam ko IP mein convert karta hai) server chalta hai.
-3. Jab "Test Container", "MySQL Container" ka naam pukarta hai, toh embedded DNS turant "my-mysql-db" ko uski internal IP (e.g., `172.18.0.2`) mein resolve (convert) kar deta hai.
+1. [[HL::Docker ek naya virtual network interface (jaise `docker0` ki tarah ek bridge network) banata hai.::HL]]
+2. [[HL::Is network ke andar ek embedded **DNS** (Domain Name System — jo naam ko IP mein convert karta hai) server chalta hai.::HL]]
+3. [[HL::Jab "Test Container", "MySQL Container" ka naam pukarta hai, toh embedded DNS turant "my-mysql-db" ko uski internal IP (e.g., `172.18.0.2`) mein resolve (convert) kar deta hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -5609,41 +5609,41 @@ Hum pehle ek virtual network banayenge, usme DB start karenge, aur phir tests ru
 
 ```bash
 # Docker 20.10+
-1  # 1. Pehle ek isolated virtual network banao
-2  docker network create my-test-network                                            # docker network create = naya bridge network banao
-3  
-4  # 2. Database container ko us network mein chalao
-5  docker run -d --name my-mysql-db --network my-test-network \                     # --network = is container ko naye network se jodo
-6    -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=testdb ⭐mysql:8.0               # -e (Environment Variable) = DB pass/name set karo; mysql:8.0 = official base image
-7    
-8  # 3. Apne test container ko bhi usi network mein chalao aur connection details do
-9  docker run --rm --network my-test-network \                                      # test runner ko bhi same network mein daalo
-10   -e DB_HOST=my-mysql-db -e DB_USER=root -e DB_PASSWORD=root -e DB_NAME=testdb \ # -e DB_HOST = 'my-mysql-db' set karo (Container ka naam)
-11   my-api-tests:v1                                                                # image name
+1  # 1. [[HL::Pehle ek isolated virtual network banao::HL]]
+[[HL::2  docker network create my-test-network                                            # docker network create = naya bridge network banao::HL]]
+[[HL::3::HL]]  
+[[HL::4  # 2. Database container ko us network mein chalao::HL]]
+[[HL::5  docker run -d --name my-mysql-db --network my-test-network \                     # --network = is container ko naye network se jodo::HL]]
+[[HL::6    -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=testdb ⭐mysql:8.0               # -e (Environment Variable) = DB pass/name set karo; mysql:8.0 = official base image::HL]]
+[[HL::7::HL]]    
+[[HL::8  # 3. Apne test container ko bhi usi network mein chalao aur connection details do::HL]]
+[[HL::9  docker run --rm --network my-test-network \                                      # test runner ko bhi same network mein daalo::HL]]
+[[HL::10   -e DB_HOST=my-mysql-db -e DB_USER=root -e DB_PASSWORD=root -e DB_NAME=testdb \ # -e DB_HOST = 'my-mysql-db' set karo (Container ka naam)::HL]]
+[[HL::11   my-api-tests:v1                                                                # image name::HL]]
 
 ```
 
 # 📤 Expected Output:
 
 ```text
-# Line 2 (network creation) output:
+# [[HL::Line::HL]] 2 (network creation) output:
 1a2b3c4d5e6f...
 
-# Line 5 (DB startup) output:
+# [[HL::Line 5::HL]] (DB startup) output:
 5d6e7f8a9b0c...
 
-# Line 9 (Test run) output:
+# [[HL::Line::HL]] 9 (Test run) output:
 ============================= test session starts ==============================
 test_db_connection.py .                                                   [100%]
 ============================== 1 passed in 1.2s ================================
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 2:** `docker network create my-test-network` — Yeh ek custom "kamra" banata hai jahan humare dono containers saath rahenge.
-* **Line 5:** `--name my-mysql-db` aur `--network my-test-network` — Humne MySQL container ka exact naam `my-mysql-db` rakha hai aur use naye network mein daal diya hai.
-* **Line 10:** `-e DB_HOST=my-mysql-db` — Yeh Python ke `os.environ.get('DB_HOST')` (jo code code mein environment variables padhta hai) ko value deta hai. **Explicit Emphasis in notes: DB host ka naam 'localhost' 'nahi' (127.0.0.1 nahi), balki 'DB container ka naam' (my-mysql-db) rakho.** Yeh kaam isliye karta hai kyunki custom network us naam ko resolve (pehchan) kar leta hai.
+* [[HL::**Line 2:** `docker network create my-test-network` — Yeh ek custom "kamra" banata hai jahan humare dono containers saath rahenge.::HL]]
+* [[HL::**Line 5:** `--name my-mysql-db` aur `--network my-test-network` — Humne MySQL container ka exact naam `my-mysql-db` rakha hai aur use naye network mein daal diya hai.::HL]]
+* [[HL::**Line 10:** `-e DB_HOST=my-mysql-db` — Yeh Python ke `os.environ.get('DB_HOST')` (jo code code mein environment variables padhta hai) ko value deta hai. **Explicit Emphasis in notes: DB host ka naam 'localhost' 'nahi' (127.0.0.1 nahi), balki 'DB container ka naam' (my-mysql-db) rakho.** Yeh kaam isliye karta hai kyunki custom network us naam ko resolve (pehchan) kar leta hai.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -5658,7 +5658,7 @@ Local development mein hum manually `docker network create` karte hain. Producti
 
 * **❌ Mistake:** `DB_HOST=127.0.0.1` ya `localhost` use karke connection try karna.
 * **🤦 Why:** Beginner bhool jaata hai ki har container ka apna khud ka loopback (`localhost`) hota hai. Test container ka localhost, MySQL container nahi hai!
-* **✅ The 'Pro' Way:** Hamesha `--name` se container ko naam do, aur same naam as a hostname use karo.
+* **✅ The 'Pro' Way:** Hamesha `--name` se container ko naam do, aur same naam as a hostname [[HL::use karo.::HL]]
 * **⚡ Consequences:** Tests fail honge aur error aayega "Can't connect to MySQL server on '127.0.0.1' (Connection refused)".
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -5691,7 +5691,7 @@ Jira (issue tracking tool) ki self-hosted deployment mein do main containers hot
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer terminal mein ek custom bridge network banata hai taaki test container aur database container isolated environment mein run ho sakein, aur aapas mein DNS name (container name) ke through connect kar sakein bina actual IP address find kiye.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer terminal mein ek custom bridge network banata hai taaki test container aur database container isolated environment mein run ho sakein, aur aapas mein DNS name (container name) ke through connect kar sakein bina actual IP address find kiye.
 * **Fixing/Iteration Phase:** Agar connection issue aaye, toh developer environment variables (`-e DB_HOST`) check karta hai ki spelling sahi hai ya nahi.
 * **Live Production Phase:** (N/A — Production mein usually managed DB jaise AWS RDS use hota hai, toh container-to-container DB locally connect karne ki jagah AWS ka endpoint use hota hai).
 
@@ -5720,7 +5720,7 @@ Jira (issue tracking tool) ki self-hosted deployment mein do main containers hot
 * **Q:** `os.environ.get()` ka kya role hai is setup mein?
 * **A:** Python code ke andar `os.environ.get('DB_HOST')` OS ke environment variables ko read karta hai. Hum `docker run -e DB_HOST=my-mysql-db` command se container ke OS mein yeh variable inject (daalte) karte hain. Yeh code aur infrastructure ko separate rakhta hai (12-Factor App methodology), jisse hume code change kiye bina connection configuration switch karne mein madad milti hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Custom Network banega intercom system, aur container ka naam banega dusre ka phone number!"
 
@@ -5792,8 +5792,8 @@ Par kya ho agar tumhe "Kamre ke baahar (Host Laptop) khade vyakti ko intercom se
 * **Problem:** **Test agar `localhost:8000` ko call karega, toh woh apne hi container ke localhost ko call karega, jahan kuch nahi chal raha hai.** API server toh tumhare laptop (Mac/Windows) pe start hua tha!
 * **Solution:** Hum `localhost` ki jagah `host.docker.internal` use karte hain, jisse Docker samajh jata hai ki request container ke bahar laptop par bhejni hai.
 * **What breaks if we don't use it?** Tests fail honge with `ConnectionRefusedError`, kyunki container ke internal `localhost:8000` par koi API server listen hi nahi kar raha.
-* **✅ Kab use karo:** Development phase mein jab tum API ko apne laptop pe manually (`uvicorn` ya `python manage.py runserver` se) chala rahe ho, aur tests container mein run karne hain.
-* **❌ Kab mat karo / Alternative prefer karo:** Production ya CI/CD pipeline mein iska use mat karo. Wahan best practice yeh hai ki API, Database aur Tests teeno ko container mein chala kar same virtual network par rakha jaye (jaise humne Topic 4 mein seekha).
+* **✅ Kab [[HL::use karo:**::HL]] Development phase mein jab tum API ko apne laptop pe manually (`uvicorn` ya `python manage.py runserver` se) chala rahe ho, aur tests container mein run karne hain.
+* **❌ Kab mat karo / Alternative prefer karo:** Production ya CI/CD [[HL::pipeline::HL]] mein iska use mat karo. Wahan best practice yeh hai ki API, Database aur Tests teeno ko container mein chala kar same virtual network par rakha jaye (jaise humne Topic 4 mein seekha).
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -5850,11 +5850,11 @@ Pehle test script (Python) dekhte hain, phir usse run karne ki bash command.
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 5 (Python):** `os.environ.get("API_BASE_URL")` — Test framework ko directly batane ke bajaye ki URL kya hai, humne isse dynamic bana diya. Ab code same rahega, bas hum baahar se URL badal sakte hain.
-* **Line 2 (Bash):** `-e API_BASE_URL=[http://host.docker.internal:8000](http://host.docker.internal:8000)` — Yeh command container ko start karte waqt `API_BASE_URL` variable inject karti hai, jise Line 5 ka Python code padhega.
-* **Line 6 (Bash):** `--add-host=host.docker.internal:host-gateway` — **Linux** users ke liye yeh line crucial hai. Docker Desktop (Windows/Mac) default DNS mapping khud kar deta hai, par Linux native engine ko manually `host-gateway` keyword ke thru host OS ki IP assign karni padti hai.
+* [[HL::**Line 5::HL]] (Python):** `os.environ.get("API_BASE_URL")` — Test framework ko directly batane ke bajaye ki URL kya hai, humne isse dynamic bana diya. Ab code same rahega, bas hum baahar se URL badal sakte hain.
+* [[HL::**Line::HL]] 2 (Bash):** `-e API_BASE_URL=[http://host.docker.internal:8000](http://host.docker.internal:8000)` — Yeh command container ko start karte waqt `API_BASE_URL` variable inject karti hai, jise [[HL::Line 5::HL]] ka Python code padhega.
+* [[HL::**Line::HL]] 6 (Bash):** `--add-host=host.docker.internal:host-gateway` — **Linux** users ke liye yeh [[HL::line::HL]] crucial hai. Docker Desktop (Windows/Mac) default DNS mapping khud kar deta hai, par Linux native engine ko manually `host-gateway` keyword ke thru host OS ki IP assign karni padti hai.
 
 #### 🔒 8. Security-First Check
 
@@ -5902,7 +5902,7 @@ Jab developer frontend app (jaise React) container ke andar run kar raha hota ha
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Jab API laptop (host) par chal rahi ho aur tests container mein chal rahe hon, developer terminal mein command run karta hai aur `host.docker.internal` inject karta hai taaki test container laptop ki API ko hit kar sake.
+* [[HL::**Testing/Offline::HL]] Phase:** Jab API laptop (host) par chal rahi ho aur tests container mein chal rahe hon, developer terminal mein command run karta hai aur `host.docker.internal` inject karta hai taaki test container laptop ki API ko hit kar sake.
 * **Fixing/Iteration Phase:** Agar connection issue aaye toh developer Linux ke liye `--add-host` flag add karke issue resolve karta hai.
 * **Live Production Phase:** (N/A — Production mein teeno (API, DB, Tests) containerize hokar cloud virtual network par deploy hote hain, wahan `host.docker.internal` ka use nahi hota).
 
@@ -5931,7 +5931,7 @@ Jab developer frontend app (jaise React) container ke andar run kar raha hota ha
 * **Q:** Kya `host.docker.internal` production mein use karna chahiye?
 * **A:** Bilkul nahi. Yeh purely development workflow feature hai. Production mein services alag-alag servers (nodes) par ho sakti hain, wahan host-level mapping kaam nahi karegi aur secure bhi nahi hogi. Wahan humesha Kubernetes Services ya Docker network names use karne chahiye.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "`localhost` se container khud ko dekhta hai, aur `host.docker.internal` se container khidki se bahar Laptop ko dekhta hai!"
 
@@ -5963,7 +5963,7 @@ Ab jab tum apne kamre ki table (Host folder) par koi nayi book rakhte ho, toh wo
 * **Problem:** Developer code likhta hai, run karta hai, phir ek chhota sa comma (`,`) theek karta hai aur wapas test karna chahta hai. Bina Volume ke, use har choti change ke baad dobara `docker build` (tiffin pack) karni padegi, jisme minute lag sakte hain.
 * **Solution:** `docker run -v` command host folder aur container target folder ko sync kar deti hai, matlab bahar jo code change hoga woh andar turant (live sync) ho jayega.
 * **What breaks if we don't use it?** Development process extremely slow aur frustrating ho jayegi. Tumhara 90% time sirf images rebuild hone ka wait karne mein jayega.
-* **✅ Kab use karo:** **Explicit emphasis:** "'Development' (code likhte) waqt, 'hamesha' -v (Volume) 'use' karo. docker build ka 'time' bachao."
+* **✅ Kab [[HL::use karo:**::HL]] **Explicit emphasis:** "'Development' (code likhte) waqt, 'hamesha' -v (Volume) [[HL::'use' karo.::HL]] docker build ka 'time' bachao."
 * **❌ Kab mat karo / Alternative prefer karo:** Production environment mein kabhi source code ko bind mount mat karo! Wahan container ke andar `COPY` kiya hua fixed code hi hona chahiye taaki container fully self-contained (portable) rahe.
 
 #### 💻 7. Hands-On — Runnable Example
@@ -5990,21 +5990,21 @@ Chalo ek container start karte hain jisme humara current working directory (Pres
 # 📤 Expected Output:
 
 ```text
-# Line 2 (Start container) output:
+# [[HL::Line::HL]] 2 (Start container) output:
 1f2d3e4c5b6a...
 
-# Line 11 (Exec) output:
+# [[HL::Line::HL]] 11 (Exec) output:
 root@1f2d3e4c:/app#
 
-# Line 12 (Pytest) output:
+# [[HL::Line::HL]] 12 (Pytest) output:
 ============================= test session starts ==============================
 ... 1 passed in 0.3s
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 2:** `-v "$(pwd):/app"` — Yeh command ka dil hai (Bind Mount).
+* [[HL::**Line::HL]] 2:** `-v "$(pwd):/app"` — Yeh command ka dil hai (Bind Mount).
 * `-v` = Volume flag.
 * `"$(pwd)"` = Colon (`:`) se pehle wali side Host folder hoti hai. `$(pwd)` terminal command hai jo tumhara pura local path (e.g., `/Users/dev/my-api-project`) utha legi.
 * `/app` = Colon (`:`) ke baad wali side Container ka target folder hoti hai.
@@ -6041,7 +6041,7 @@ Volumes host machine ko read/write access dete hain. Agar test container malicio
 
 * **`docker: Error response from daemon: create $(pwd): "$(pwd)" includes invalid characters for a local volume name`**
 * **Root Cause:** Tum Windows OS par bash style `$(pwd)` use kar rahe ho, jo cmd ya PowerShell samajh nahi pata aur usse plain text string ki tarah treat kar leta hai.
-* **Fix:** OS/Terminal ke hisaab se variable use karo. Windows CMD mein `"%cd%"` aur PowerShell mein `"${pwd}"` use karo.
+* **Fix:** OS/Terminal ke hisaab se variable [[HL::use karo.::HL]] Windows CMD mein `"%cd%"` aur PowerShell mein `"${pwd}"` [[HL::use karo.::HL]]
 
 
 
@@ -6051,7 +6051,7 @@ Volumes host machine ko read/write access dete hain. Agar test container malicio
 | --- | --- | --- |
 | Sync Type | Static (One-time snapshot pack ho gaya) | Dynamic (Live Sync) |
 | Speed for Dev | Slow (Requires Rebuild every time) | Instant (No rebuild required) |
-| Best For | Production deployment & CI/CD pipeline | Local Development & Debugging |
+| Best For | Production deployment & CI/CD [[HL::pipeline::HL]] | Local Development & Debugging |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
@@ -6059,7 +6059,7 @@ Jab Frontend devs ReactJS mein kaam karte hain, toh woh `docker-compose` mein ho
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer local environment setup karta hai `-v` flag (bind mount) ke saath, jisse host ka code container directory se live sync ho jata hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer local environment setup karta hai `-v` flag (bind mount) ke saath, jisse host ka code container directory se live sync ho jata hai.
 * **Fixing/Iteration Phase:** Developer host machine par VS Code mein code change (`assert False` add karke) save karta hai, aur background mein chal rahe container ke andar immediately wahi `pytest` wapas run karke live sync test karta hai bina image rebuild kiye.
 * **Live Production Phase:** (N/A — Production mein `-v` host mounts completely avoid kiye jate hain; `COPY` commands ka use hota hai).
 
@@ -6072,7 +6072,7 @@ Jab Frontend devs ReactJS mein kaam karte hain, toh woh `docker-compose` mein ho
 * **Q:** Agar main code change karta hu toh volume kaam karta hai, par naya pip package install karne pe kyun fail hota hai?
 * **A:** Volume sirf static files/folders ko host se container tak sync karta hai. Yeh automatically OS-level environment setup ya software commands (`pip install`) fire nahi karta. Libraries environment ka hissa hoti hain, isliye naya dependency aane par volume se disconnect hokar naya image build karna zaroori hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Volume flag (`-v`) Anyhwere Door hai — baahar changes karo, andar khud update ho jayega."
 
@@ -6135,14 +6135,14 @@ Ek **Wrapper Script** ek **Universal Remote** jaisa hai jismein ek button dabane
 #### 📖 3. Technical Definition
 
 * **Precise English:** A wrapper script is a shell script that encapsulates multiple, complex terminal commands (like Docker build, network creation, and run commands) into a single executable file, streamlining execution and reducing human error.
-* **Hinglish Simplification:** Wrapper script ek text file hoti hai jisme hum apni saari terminal commands line-by-line likh dete hain, taaki baad mein sirf us ek file ko run karke saara kaam automatically ho jaye.
+* **Hinglish Simplification:** Wrapper script ek text file hoti hai jisme hum apni saari terminal commands [[HL::line-by-line::HL]] likh dete hain, taaki baad mein sirf us ek file ko run karke saara kaam automatically ho jaye.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * **Problem:** `docker run --rm -it --network my-test-network -e DB_HOST=my-mysql-db my-api-tests:v1` — aisi complex Docker commands type karna frustrating hota hai aur typos (spelling mistakes) hone ke chances bohot hote hain.
 * **Solution:** In sabko ek `.sh` (shell script) file mein daal do. Apni lambi docker commands ko Wrapper Script mein daal do. Aapka future self aapko thanks bolega!
 * **What breaks if we don't use it?** Naye developers team join karenge toh unhe `README.md` (project documentation file) se commands copy-paste karni padengi, jo unke liye confusing ho sakta hai.
-* **✅ Kab use karo:** Jab project mein image build karni ho, network create karna ho, DB start karna ho, aur tests chalane hon — sab ek specific order mein.
+* **✅ Kab [[HL::use karo:**::HL]] Jab project mein image build karni ho, network create karna ho, DB start karna ho, aur tests chalane hon — sab ek specific order mein.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab tumhare paas command sirf 2-3 words ki ho (jaise `pytest` directly locally run karna) — wahan poori script banana **overkill** (bina baat ka bojh) hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -6158,7 +6158,7 @@ my-api-project/
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Jab tum script run karte ho, OS us file ki pehli line (**Shebang**) padhta hai. Yeh line OS ko batati hai ki kis interpreter (jaise Bash) se baaki code run karna hai.
+1. Jab tum script run karte ho, OS us file ki pehli [[HL::line::HL]] (**Shebang**) padhta hai. Yeh [[HL::line::HL]] OS ko batati hai ki kis interpreter (jaise Bash) se baaki code run karna hai.
 2. Uske baad OS file ko upar se neeche tak padhta hai aur har command waise hi fire karta hai jaise tumne manually type ki hoti.
 3. Agar tumne `strict mode` on kiya hai, toh beech mein koi bhi error aane par OS script ko wahi rok deta hai.
 
@@ -6216,12 +6216,12 @@ Running Tests...
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 2:** `set -euo pipefail` — Yeh script ki life insurance hai. Bina iske, bash errors ko ignore karke aage badh jata hai. Agar Line 9 pe build fail hua, toh yeh script tests chalane ki koshish nahi karegi, wahi rukk jayegi.
-* **Line 12:** `|| true` — `docker network create` error phekta hai agar network pehle se maujood ho. `|| true` lagane se woh error aane pe output `true` (success) maan liya jata hai aur strict mode script ko nahi rokta.
-* **Line 15:** `docker ps -q | grep ...` — Hum check kar rahe hain ki DB zinda hai ya nahi. Agar nahi, toh start karo.
-* **Line 18:** `sleep 10` — MySQL container toh 1 second mein run ho jata hai, par uske andar ki actual service start hone mein 10 second lagte hain. Isliye tests fail hone se bachane ke liye hum artificially wait karte hain.
+* [[HL::**Line::HL]] 2:** `set -euo pipefail` — Yeh script ki life insurance hai. Bina iske, bash errors ko ignore karke aage badh jata hai. Agar [[HL::Line::HL]] 9 pe build fail hua, toh yeh script tests chalane ki koshish nahi karegi, wahi rukk jayegi.
+* [[HL::**Line::HL]] 12:** `|| true` — `docker network create` error phekta hai agar network pehle se maujood ho. `|| true` lagane se woh error aane pe output `true` (success) maan liya jata hai aur strict mode script ko nahi rokta.
+* [[HL::**Line::HL]] 15:** `docker ps -q | grep ...` — Hum check kar rahe hain ki DB zinda hai ya nahi. Agar nahi, toh start karo.
+* [[HL::**Line::HL]] 18:** `sleep 10` — MySQL container toh 1 second mein run ho jata hai, par uske andar ki actual service start hone mein 10 second lagte hain. Isliye tests fail hone se bachane ke liye hum artificially wait karte hain.
 
 #### 🔒 8. Security-First Check
 
@@ -6229,7 +6229,7 @@ Script ke andar apne personal passwords (jaise DB password) hardcode mat karo. U
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Industry mein **CI/CD** pipelines (Jenkins, GitHub Actions) yahi scripts use karti hain. CI/CD platform mein lambe steps likhne ke bajaye, configuration file sirf `./run_tests.sh` ko trigger karti hai. Isse local aur CI/CD environment 100% same behave karte hain.
+Industry mein **CI/CD** [[HL::pipelines::HL]] (Jenkins, GitHub Actions) yahi scripts use karti hain. CI/CD platform mein lambe steps likhne ke bajaye, configuration file sirf `./run_tests.sh` ko trigger karti hai. Isse local aur CI/CD environment 100% same behave karte hain.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -6255,7 +6255,7 @@ Industry mein **CI/CD** pipelines (Jenkins, GitHub Actions) yahi scripts use kar
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 
 * **`/bin/bash^M: bad interpreter: No such file or directory`**
-* **Root Cause:** Tumne script Windows notepad mein banayi aur Linux container/VM mein bheji. Windows line endings (CRLF, jo `^M` dikhta hai) use karta hai, aur Linux (LF) use karta hai. Bash confuse ho jata hai.
+* **Root Cause:** Tumne script Windows notepad mein banayi aur Linux container/VM mein bheji. Windows [[HL::line::HL]] endings (CRLF, jo `^M` dikhta hai) use karta hai, aur Linux (LF) use karta hai. Bash confuse ho jata hai.
 * **Fix:** Apne VS Code ke bottom right corner mein `CRLF` par click karke usse `LF` mein change karo aur save karo.
 
 
@@ -6274,9 +6274,9 @@ Jab developer team ek nayi open-source AI project open karti hai, usme zyadatar 
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer lambi commands (build, network create, run) ko ek `.sh` file mein store kar deta hai taaki kal aakar sirf `./run_tests.sh` type karke poora environment set up ho jaye.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer lambi commands (build, network create, run) ko ek `.sh` file mein store kar deta hai taaki kal aakar sirf `./run_tests.sh` type karke poora environment set up ho jaye.
 * **Fixing/Iteration Phase:** Script mein `set -euo pipefail` (strict mode) aur `|| true` jaise checks lagaye jate hain, taaki error aane pe debugging aasaan ho jaye.
-* **Live Production Phase:** CI/CD pipelines (jaise Jenkins) aise hi wrapper scripts ko background mein trigger karti hain taaki automated, predictable testing ho sake bina manual intervention ke.
+* **Live Production Phase:** CI/CD [[HL::pipelines::HL]] (jaise Jenkins) aise hi wrapper scripts ko background mein trigger karti hain taaki automated, predictable testing ho sake bina manual intervention ke.
 
 #### ❓ 17. Interview Q&A (FAQ)
 
@@ -6287,7 +6287,7 @@ Jab developer team ek nayi open-source AI project open karti hai, usme zyadatar 
 * **Q:** Tumhare naye developer ko `Permission denied` error aa raha hai script chalate waqt. Kya issue ho sakta hai?
 * **A:** Issue execution permissions ka hai. Unix-based systems mein nayi text files ko by default execute (run) karne ki permission nahi milti. Developer ko terminal mein `chmod +x run_tests.sh` command chalani padegi jisse file executable ban jayegi, uske baad `./run_tests.sh` successfully run ho jayegi.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Lambi commands ko chhota banana hai, toh shebang lagao aur wrapper script chalana hai."
 
@@ -6324,7 +6324,7 @@ Pytest ki colors (Red for fail, Green for pass) tumhara "Color TV" hai. Docker k
 * **Problem:** Developer 100 tests run karta hai. Agar output black and white hai, toh single fail hone wale test ko dhundhne mein aankhein dukh jati hain. Readability zero hoti hai.
 * **Solution:** Color output (Red F, Green .) clear visual indication deta hai.
 * **What breaks if we don't use it?** Koi technical function nahi tootega, but developer experience bohot kharab ho jayega aur bugs miss hone ke chances badh jayenge.
-* **✅ Kab use karo:** Jab test results (Pytest/Jest) docker run command se dekhne hon — chahe local laptop ho ya remote CI/CD platform.
+* **✅ Kab [[HL::use karo:**::HL]] Jab test results (Pytest/Jest) docker run command se dekhne hon — chahe local laptop ho ya remote CI/CD platform.
 * **❌ Kab mat karo / Alternative prefer karo:** Agar tum tests ka output kisi `.txt` file ya `.xml` report (JUnit) mein save kar rahe ho, wahan color codes (ANSI characters) kachra (garbage characters `[0m31`) daal dete hain. Us case mein colors strictly OFF hone chahiye.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -6363,7 +6363,7 @@ Yahan color wapas laane ke 3 tareeke hain. **(Explicit emphasis: Tareeka 2 sabse
 
 ```dockerfile
 # Tareeka 3: Dockerfile mein Environment Variables set karna
-1  # Apni Dockerfile ke andar yeh do lines daal do:
+1  # Apni Dockerfile ke andar yeh do [[HL::lines::HL]] daal do:
 2  ENV PYTHONUNBUFFERED=1                                      # unbuffered output = Output ko buffer (hold) karne ke bajaye directly terminal par phekta hai (jaldi dikhta hai)
 3  ENV FORCE_COLOR=1                                           # FORCE_COLOR = Bahut saari libraries is standard env var ko dekh kar automatically color on kar deti hain
 
@@ -6383,11 +6383,11 @@ test_api.py \e[32m.\e[0m\e[32m.\e[0m\e[32m.\e[0m\e[32m.\e[0m\e[32m.\e[0m        
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Tareeka 1 (Line 1):** `-t` (Allocate a TTY) — Yeh flag ek **Pseudo-TTY** (nakli terminal connection) banata hai. Isse python ko lagta hai ki saamne user screen par dekh raha hai, isliye woh default behavior mein color on kar deta hai. Par yeh kabhi-kabhi CI/CD (Jenkins, GitHub Actions) mein fail ho jata hai (jahan real keyboard `-i` input fail ho jata hai).
-* **Tareeka 2 (Line 1):** `pytest --color=yes` — Yeh tarika pure Docker limitations ko bypass kar deta hai. Hum seedha framework ko bolte hain "Mujhe farq nahi padta environment kaisa hai, color emit karo".
-* **Tareeka 3 (Line 2):** `ENV PYTHONUNBUFFERED=1` — Python sometimes test output ko memory mein save karke rakhta hai jab tak container khatam na ho (unbuffered output nahi deta). Yeh variable real-time streaming enable karta hai.
+* **Tareeka 1 [[HL::(Line::HL]] 1):** `-t` (Allocate a TTY) — Yeh flag ek **Pseudo-TTY** (nakli terminal connection) banata hai. Isse python ko lagta hai ki saamne user screen par dekh raha hai, isliye woh default behavior mein color on kar deta hai. Par yeh kabhi-kabhi CI/CD (Jenkins, GitHub Actions) mein fail ho jata hai (jahan real keyboard `-i` input fail ho jata hai).
+* **Tareeka 2 [[HL::(Line::HL]] 1):** `pytest --color=yes` — Yeh tarika pure Docker limitations ko bypass kar deta hai. Hum seedha framework ko bolte hain "Mujhe farq nahi padta environment kaisa hai, color emit karo".
+* **Tareeka 3 [[HL::(Line::HL]] 2):** `ENV PYTHONUNBUFFERED=1` — Python sometimes test output ko memory mein save karke rakhta hai jab tak container khatam na ho (unbuffered output nahi deta). Yeh variable real-time streaming enable karta hai.
 
 #### 🔒 8. Security-First Check
 
@@ -6399,10 +6399,10 @@ Industry scale par jab tumhare Jenkins (automation server) par hazaro test logs 
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Jenkins pipeline ke shell step mein `docker run -it` lagana.
+* **❌ Mistake:** Jenkins [[HL::pipeline::HL]] ke shell step mein `docker run -it` lagana.
 * **🤦 Why:** CI/CD servers background mein chalte hain, wahan koi active keyboard (interactive terminal) nahi hota.
-* **✅ The 'Pro' Way:** CI pipeline mein kabhi `-it` mat bhejo. Sirf `docker run` chalake command mein `pytest --color=yes` pass karo.
-* **⚡ Consequences:** Pipeline error phekegi: `the input device is not a TTY` aur tests run hi nahi honge.
+* **✅ The 'Pro' Way:** CI [[HL::pipeline::HL]] mein kabhi `-it` mat bhejo. Sirf `docker run` chalake command mein `pytest --color=yes` pass karo.
+* **⚡ Consequences:** [[HL::Pipeline::HL]] error phekegi: `the input device is not a TTY` aur tests run hi nahi honge.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -6430,24 +6430,24 @@ Industry scale par jab tumhare Jenkins (automation server) par hazaro test logs 
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Slack/Discord bots jab developers ko Jenkins build fail hone ka notification bhejte hain, toh un logs mein syntax highlighting aur color lane ke liye internally `FORCE_COLOR=1` environment variables pipeline config mein set hote hain, taaki log messages human-readable lagein.
+Slack/Discord bots jab developers ko Jenkins build fail hone ka notification bhejte hain, toh un logs mein syntax highlighting aur color lane ke liye internally `FORCE_COLOR=1` environment variables [[HL::pipeline::HL]] config mein set hote hain, taaki log messages human-readable lagein.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer tests ke terminal output ko readable banane ke liye local terminal par `-t` ya `--color` flags pass karta hai taaki pass/fail result visually jaldi dikh sake.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer tests ke terminal output ko readable banane ke liye local terminal par `-t` ya `--color` flags pass karta hai taaki pass/fail result visually jaldi dikh sake.
 * **Fixing/Iteration Phase:** (N/A)
 * **Live Production Phase:** CI/CD server par run karte waqt pseudo-TTY (`-t`) fail hone wale issues avoid karne ke liye, yaml configuration mein explicit `pytest --color=yes` override lagaya jata hai, jisse log viewers mein perfect color support bana rahe.
 
 #### ❓ 17. Interview Q&A (FAQ)
 
-* **Q:** Jab hum CI/CD pipeline mein normal `docker run pytest` chalate hain toh color hat kyu jata hai?
-* **A:** Default behavior mein command line tools (jaise Python, Pytest) detect karte hain ki unka output ek interactive TTY (insaan ka terminal) par ja raha hai ya piped file stream mein. CI/CD mein koi physical screen nahi hoti, isliye tools smartly color (ANSI escape characters) band kar dete hain taaki pure text read ho. Hume `--color=yes` pass karke is limitation ko deliberately bypass karna padta hai.
+* **Q:** Jab hum CI/CD [[HL::pipeline::HL]] mein normal `docker run pytest` chalate hain toh color hat kyu jata hai?
+* **A:** Default behavior mein command [[HL::line::HL]] tools (jaise Python, Pytest) detect karte hain ki unka output ek interactive TTY (insaan ka terminal) par ja raha hai ya piped file stream mein. CI/CD mein koi physical screen nahi hoti, isliye tools smartly color (ANSI escape characters) band kar dete hain taaki pure text read ho. Hume `--color=yes` pass karke is limitation ko deliberately bypass karna padta hai.
 * **Q:** `docker run -t` command mein `-t` flag ka actual kaam kya hai?
 * **A:** `-t` flag container ko ek **Pseudo-TTY** (nakli teletype) allocate karta hai. Yeh guest operating system ko illusion deta hai ki output kisi active terminal (text interface) se juda hua hai. Iske bina container sirf standard I/O streams maintain karta hai, jiske karan output formatting ya terminal signals (like colors ya layout) kaam nahi karte.
 * **Q:** `PYTHONUNBUFFERED=1` Docker containers mein kyu standard practice maani jati hai?
 * **A:** Python by default console output ko disk ya network bandwidth bachane ke liye tab tak memory (buffer) mein hold karta hai jab tak buffer full na ho jaye. Docker environment mein iska effect yeh hota hai ki stdout logs console par turant nahi dikhte. `PYTHONUNBUFFERED=1` set karne se output directly stream hota hai, jisse container crash hone par bhi aakhri print statement logs mein safe rehti hai, aur unbuffered real-time output milta hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Black and White output bore karega, `--color=yes` usme jaan dalega!"
 
@@ -6502,7 +6502,7 @@ Slack/Discord bots jab developers ko Jenkins build fail hone ka notification bhe
 #### 🐣 2. Simple Analogy (Hinglish)
 
 Socho tumhare ghar ke bahar ek chori ho gayi aur tum recording dekh rahe ho. Agar video fast-forward mein chalti rahe toh chor ko pehchanna mushkil hai.
-PDB us CCTV video player ke "Pause" aur "Playback" button jaisa hai. Tum code ko ek specific line par pause (breakpoint) kar sakte ho, variables ke andar jhaank kar (check variables) dekh sakte ho, aur ek-ek step aage badha sakte ho.
+PDB us CCTV video player ke "Pause" aur "Playback" button jaisa hai. Tum code ko ek specific [[HL::line::HL]] par pause (breakpoint) kar sakte ho, variables ke andar jhaank kar (check variables) dekh sakte ho, aur ek-ek step aage badha sakte ho.
 
 #### 📖 3. Technical Definition
 
@@ -6514,7 +6514,7 @@ PDB us CCTV video player ke "Pause" aur "Playback" button jaisa hai. Tum code ko
 * **Problem:** Normal tests bahut tezi se execute hoke band ho jate hain. Complex logic bugs (jaise wrong data parsing) mein sirf error message dekh kar samajh nahi aata ki value kahan galat hui.
 * **Solution:** Code mein `breakpoint()` laga kar execution rok dete hain aur interactive debugging karte hain.
 * **What breaks if we don't use it?** Tumhe 50 `print()` statements lagani padengi, har baar container rebuild karna padega, jo developer ka bohot time waste karta hai.
-* **✅ Kab use karo:** Jab test failure ka root cause samajh nahi aa raha aur tumhe live variables ki memory state dekhni ho.
+* **✅ Kab [[HL::use karo:**::HL]] Jab test failure ka root cause samajh nahi aa raha aur tumhe live variables ki memory state dekhni ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Production code mein kabhi breakpoint mat chhodo — yeh server ko hamesha ke liye hang kar dega kyunki wahan keyboard input dene wala koi insaan nahi hota.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -6527,7 +6527,7 @@ PDB us CCTV video player ke "Pause" aur "Playback" button jaisa hai. Tum code ko
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Python code mein jab execution `breakpoint()` line par aati hai, toh interpreter ek `SIGTRAP` signal bhejta hai aur process ko pause kar deta hai.
+1. Python code mein jab execution `breakpoint()` [[HL::line::HL]] par aati hai, toh interpreter ek `SIGTRAP` signal bhejta hai aur process ko pause kar deta hai.
 2. PDB (Python Debugger) host keyboard ke `stdin` (Standard Input) ka wait karta hai.
 3. Agar tumne `docker run` bina interactive flags ke chalaya hai, toh PDB ko tumhara keyboard input nahi milega aur woh infinity tak stuck (hang) ho jayega.
 
@@ -6541,7 +6541,7 @@ Pehle Python test file mein debug point lagate hain:
 2      a = 10                                                       # a variable mein 10 assign kiya
 3      b = 20                                                       # b variable mein 20 assign kiya
 4      breakpoint()                                                 # breakpoint() = PDB (Python Debugger) ko trigger karega aur code yahan pause ho jayega (Purane python mein 'import pdb; pdb.set_trace()' use hota tha)
-5      c = a + b                                                    # calculation line (yahan aane se pehle code rukega)
+5      c = a + b                                                    # calculation [[HL::line::HL]] (yahan aane se pehle code rukega)
 6      assert c == 30                                               # assert = test pass hone ki condition
 
 ```
@@ -6574,15 +6574,15 @@ Ab isey Docker mein interactive mode ke saath run karte hain:
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 4 (Python):** `breakpoint()` — Yeh inbuilt Python function hai. Yeh internally `import pdb; pdb.set_trace()` (debugger library import karke trace chalu karna) ko call karta hai.
-* **Line 2 (Bash):** `docker run --rm ⭐-it ...` — **Explicit Emphasis: (Sabse Zaroori) -it: Hamare keyboard ko PDB se jodo aur output terminal par dikhao.**
+* [[HL::**Line::HL]] 4 (Python):** `breakpoint()` — Yeh inbuilt Python function hai. Yeh internally `import pdb; pdb.set_trace()` (debugger library import karke trace chalu karna) ko call karta hai.
+* [[HL::**Line::HL]] 2 (Bash):** `docker run --rm ⭐-it ...` — **Explicit Emphasis: (Sabse Zaroori) -it: Hamare keyboard ko PDB se jodo aur output terminal par dikhao.**
 * `-i` (Interactive): Tumhare host keyboard input (`stdin`) ko container ke andar phekta hai taaki PDB tumhari commands sun sake.
 * `-t` (TTY): Fake terminal UI allocate karta hai jisse `(Pdb)` ka prompt (user input maangne wala cursor) sahi se render hota hai.
 
 
-* **Line 2 (Bash):** `pytest -k test_debug_in_docker` — `-k` (Keyword) flag sirf us specific test ko run karta hai jiske naam mein yeh word ho. Baki tests skip ho jate hain taaki debugger jaldi trigger ho.
+* [[HL::**Line::HL]] 2 (Bash):** `pytest -k test_debug_in_docker` — `-k` (Keyword) flag sirf us specific test ko run karta hai jiske naam mein yeh word ho. Baki tests skip ho jate hain taaki debugger jaldi trigger ho.
 * **Inside PDB Console:**
 * `p a` — `p` matlab print. Yeh variable `a` ki value (10) screen par dikhayega.
 * `p b` — `b` ki value (20) dikhayega.
@@ -6610,7 +6610,7 @@ Local development mein CLI-based PDB commonly use hota hai, par senior engineers
 * **Confusion 1 — "`breakpoint()` aur `pdb.set_trace()` mein kya fark hai?"**
 * **Galat soch:** Dono alag-alag libraries hain.
 * **Actually:** Dono ek hi cheez hain! Python 3.7+ se pehle hume manually `import pdb; pdb.set_trace()` likhna padta tha jo bohot lamba tha. Uske baad Python ne builtin `breakpoint()` function de diya jo internally same wahi purana PDB code trigger karta hai.
-* **Prove karo:** Python 3.7+ container mein dono commands alag-alag line par likh kar test karo, dono same `(Pdb)` prompt denge.
+* **Prove karo:** Python 3.7+ container mein dono commands alag-alag [[HL::line::HL]] par likh kar test karo, dono same `(Pdb)` prompt denge.
 
 
 * **Confusion 2 — "Kya main chalte hue API (FastAPI/Django) container mein `docker exec -it` se debug kar sakta hu?"**
@@ -6640,14 +6640,14 @@ Jab koi 3rd party API (jaise Stripe Payment Gateway) ka response unexpected aa r
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** (N/A — Developer seedha test nahi karta, pehle test likhta hai, error aane ka wait karta hai)
-* **Fixing/Iteration Phase:** Test fail hone ke baad developer code mein line-by-line check karne ke liye `breakpoint()` lagata hai. Container ko interactive flags (`-it`) ke saath start karta hai. Jese hi test pause hota hai, developer live variables print karke logic check karta hai aur bug theek karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** (N/A — Developer seedha test nahi karta, pehle test likhta hai, error aane ka wait karta hai)
+* **Fixing/Iteration Phase:** Test fail hone ke baad developer code mein [[HL::line-by-line::HL]] check karne ke liye `breakpoint()` lagata hai. Container ko interactive flags (`-it`) ke saath start karta hai. Jese hi test pause hota hai, developer live variables print karke logic check karta hai aur bug theek karta hai.
 * **Live Production Phase:** (N/A — Production mein debuggers totally prohibited hote hain).
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
 ```text
-[Execution Line] -> a=10 -> b=20 -> [BREAKPOINT] -> c=a+b -> END
+[Execution [[HL::Line]::HL]] -> a=10 -> b=20 -> [BREAKPOINT] -> c=a+b -> END
                                         |
                             (Code Execution Paused)
                                         |
@@ -6660,15 +6660,15 @@ Jab koi 3rd party API (jaise Stripe Payment Gateway) ka response unexpected aa r
 * **Q:** PDB use karte waqt agar main `docker run` mein `-i` flag na dun, toh kya problem aayegi?
 * **A:** `-i` (Interactive) flag docker ko batata hai ki host ke standard input (`stdin`) ko container ke process se attach rakho. Bina iske, PDB keyboard inputs sun nahi payega aur prompt par aakar infinite wait karta rahega, jisse container stuck (hang) state mein chala jayega aur koi error bhi print nahi hoga.
 * **Q:** `import pdb; pdb.set_trace()` aur `breakpoint()` mein kya difference hai?
-* **A:** Functionally koi farq nahi hai. `breakpoint()` Python 3.7+ mein introduce hua ek built-in function hai jo internally PDB ko hi call karta hai. Yeh bas syntactic sugar (chhota aur aasaan code) hai jisse developer ko import line baar-baar nahi likhni padti.
+* **A:** Functionally koi farq nahi hai. `breakpoint()` Python 3.7+ mein introduce hua ek built-in function hai jo internally PDB ko hi call karta hai. Yeh bas syntactic sugar (chhota aur aasaan code) hai jisse developer ko import [[HL::line::HL]] baar-baar nahi likhni padti.
 * **Q:** Agar tumhare pytest suite mein 500 tests hain aur tumhe PDB se sirf ek fail hone wala test debug karna hai, toh tum kya approach loge?
 * **A:** Main `docker run` command chalate waqt `pytest -k <test_function_name>` (Keyword flag) use karunga. Isse Pytest sirf wahi specific test run karega aur seedha breakpoint par ruk jayega, baki 499 tests automatically skip ho jayenge, jisse development time bachega.
-* **Q:** `(Pdb)` prompt aane ke baad main aage ka code line-by-line kaise execute karunga?
-* **A:** PDB ke andar hum `n` (next) command type karte hain next line execute karne ke liye, `s` (step) function ke andar ghusne ke liye, `c` (continue) aage bina roke execute karne ke liye, aur `p <variable_name>` variables ki current value print karne ke liye.
+* **Q:** `(Pdb)` prompt aane ke baad main aage ka code [[HL::line-by-line::HL]] kaise execute karunga?
+* **A:** PDB ke andar hum `n` (next) command type karte hain next [[HL::line::HL]] execute karne ke liye, `s` (step) function ke andar ghusne ke liye, `c` (continue) aage bina roke execute karne ke liye, aur `p <variable_name>` variables ki current value print karne ke liye.
 * **Q:** Container ko gracefully band karne ke liye PDB se bahar kaise aate hain?
 * **A:** Hum `q` (quit) use kar sakte hain, par isse achanak process kill ho jata hai jisse Pytest error phekta hai. Better way hai ki hum `c` (continue) type karein jisse code aage flow karke normally finish ho, aur humara container properly exit aur clean (`--rm` trigger) ho.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "CCTV ko pause karna hai toh `breakpoint()` lagao, aur remote (keyboard) chalu rakhne ke liye `-it` lagao!"
 
@@ -6706,7 +6706,7 @@ Bina Compose ke: Tum pehle sadak banaoge, phir ek majdoor ko school banane bhejo
 * **Problem:** Topic 7 mein humne shell script (`.sh`) banayi thi. Par shell scripts (Windows/Mac/Linux) mein alag-alag tarah se behave karti hain aur inki error handling (healthcheck etc.) complex hoti hai.
 * **Solution:** **Explicit Emphasis: Docker Compose aapka best friend hai. Yeh saari complexity chhipa leta hai aur ek `up` command se poora environment khada kar deta hai.** Yeh completely cross-platform (har OS pe same chalta hai) hota hai.
 * **What breaks if we don't use it?** Developer ko 10 manual commands yaad rakhni padengi. Agar ek parameter (jaise volume ya port) galat type ho gaya, toh poora system fail ho jayega.
-* **✅ Kab use karo:** Jab bhi project mein 1 se zyada containers (multiple containers) hon — jaise API + Database + Redis Cache + Test runner.
+* **✅ Kab [[HL::use karo:**::HL]] Jab bhi project mein 1 se zyada containers (multiple containers) hon — jaise API + Database + Redis Cache + Test runner.
 * **❌ Kab mat karo / Alternative prefer karo:** Badi production (thousands of users) ke liye ise direct use nahi karte. Wahan Kubernetes (container orchestration for large scale) use hota hai jo apne aap servers badha/ghata sakta hai. Compose mainly local dev aur CI/CD ke liye hota hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -6792,12 +6792,12 @@ my-test-runner  | test_db_connection.py .                                       
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 11-15 (YAML):** `healthcheck` — Yeh block Topic 7 ke `sleep 10` hack ka solid industry replacement hai. Database process start hote hi connections access nahi karta (usme tables banti hain). `mysqladmin ping` command check karti hai ki actual database engine request accept kar raha hai ya nahi.
-* **Line 24 (YAML):** `condition: service_healthy` — `depends_on` by default sirf check karta hai ki container ON hua ya nahi. `service_healthy` ensure karta hai ki test runner tab tak ruka rahe (wait state) jab tak DB ka healthcheck explicitly pass na ho jaye. Isse `Connection Refused` error life mein kabhi nahi aayega!
-* **Line 18 (YAML):** `build: .` — Compose ko bata rahe hain ki image download mat karo, is folder `.` ki Dockerfile uthao aur local build run karo automatically.
-* **Line 4 (Bash):** `docker-compose down` — Yeh sabse safe cleanup hai. Yeh saare chalte containers ko marta hai aur banaya hua virtual network delete (clean) kar deta hai.
+* [[HL::**Line::HL]] 11-15 (YAML):** `healthcheck` — Yeh block Topic 7 ke `sleep 10` hack ka solid industry replacement hai. Database process start hote hi connections access nahi karta (usme tables banti hain). `mysqladmin ping` command check karti hai ki actual database engine request accept kar raha hai ya nahi.
+* [[HL::**Line::HL]] 24 (YAML):** `condition: service_healthy` — `depends_on` by default sirf check karta hai ki container ON hua ya nahi. `service_healthy` ensure karta hai ki test runner tab tak ruka rahe (wait state) jab tak DB ka healthcheck explicitly pass na ho jaye. Isse `Connection Refused` error life mein kabhi nahi aayega!
+* [[HL::**Line::HL]] 18 (YAML):** `build: .` — Compose ko bata rahe hain ki image download mat karo, is folder `.` ki Dockerfile uthao aur local build run karo automatically.
+* [[HL::**Line::HL]] 4 (Bash):** `docker-compose down` — Yeh sabse safe cleanup hai. Yeh saare chalte containers ko marta hai aur banaya hua virtual network delete (clean) kar deta hai.
 
 #### 🔒 8. Security-First Check
 
@@ -6806,7 +6806,7 @@ Apne database passwords aur API keys ko seedha `docker-compose.yml` mein hardcod
 #### 🏗️ 9. Scalability & Industry Context
 
 Local development mein hum base file (`docker-compose.yml`) aur ek **override file** (`docker-compose.override.yml` — jisme development specific settings jaise volumes/ports hote hain) use karte hain. Docker by default dono ko merge kar deta hai.
-Jab yahi code CI/CD pipeline par jata hai, toh hum override file ko skip kar dete hain, jisse purely production-ready environment deploy hota hai.
+Jab yahi code CI/CD [[HL::pipeline::HL]] par jata hai, toh hum override file ko skip kar dete hain, jisse purely production-ready environment deploy hota hai.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -6832,9 +6832,9 @@ Jab yahi code CI/CD pipeline par jata hai, toh hum override file ko skip kar det
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 
-* **`yaml: line 10: mapping values are not allowed in this context` ya parsing errors**
+* **`yaml: [[HL::line::HL]] 10: mapping values are not allowed in this context` ya parsing errors**
 * **Root Cause:** YAML file mein tumne TAB (`\t`) key press kardi hai, ya spaces sahi align nahi kiye hain. YAML indentation (spacing) par chalti hai.
-* **Fix:** Hamesha 2 spaces (Spacebar key) ka indent use karo. Code editor (VS Code) mein setting change karo taaki TAB key tabhi spaces mein convert ho.
+* **Fix:** Hamesha 2 spaces (Spacebar key) ka indent [[HL::use karo.::HL]] Code editor (VS Code) mein setting change karo taaki TAB key tabhi spaces mein convert ho.
 
 
 
@@ -6852,9 +6852,9 @@ Jab ek MERN stack (Mongo, Express, React, Node) developer naya laptop khareedta 
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer terminal mein sirf `docker-compose up --build` chalaata hai jisse database, networking rules, volumes, aur test runners sab ek command mein automatically setup aur run ho jate hain.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer terminal mein sirf `docker-compose up --build` chalaata hai jisse database, networking rules, volumes, aur test runners sab ek command mein automatically setup aur run ho jate hain.
 * **Fixing/Iteration Phase:** Agar test fail hota hai, toh developer code change karta hai aur `docker-compose up --build` wapas chalata hai. Agar tests ke andar live interact karna ho, toh woh chalte hue compose service mein `docker-compose exec tests bash` se enter kar sakta hai.
-* **Live Production Phase:** Yehi Compose file (.yml) CI/CD pipelines (GitHub Actions/Jenkins) ke liye standard environment definition ki tarah use hoti hai. Automation server par exactly wahi command (`docker-compose up`) chalti hai jo developer ke laptop pe chali thi.
+* **Live Production Phase:** Yehi Compose file (.yml) CI/CD [[HL::pipelines::HL]] (GitHub Actions/Jenkins) ke liye standard environment definition ki tarah use hoti hai. Automation server par exactly wahi command (`docker-compose up`) chalti hai jo developer ke laptop pe chali thi.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -6890,7 +6890,7 @@ Jab ek MERN stack (Mongo, Express, React, Node) developer naya laptop khareedta 
 * **Q:** Kya main `docker-compose` mein base file aur dev file ko alag rakh sakta hu?
 * **A:** Haan. Industry best practice yahi hai ki base setup `docker-compose.yml` mein rakhein, aur development-specific configs (jaise volume mounts, debug ports) ko `docker-compose.override.yml` mein rakhein. `docker-compose up` automatically in dono files ko merge kar leta hai development experience enhance karne ke liye.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Manual commands hain kachra-box, Docker Compose hai Magic Lego Box — `up` kiya aur building ready!"
 
@@ -6962,7 +6962,7 @@ API ki duniya mein, Guard sirf token check kar raha hai, par yeh nahi dekh raha 
 * **Problem:** Developer check lagata hai ki "kya user logged in hai?" par yeh bhool jata hai check karna ki "kya user is specific data ka owner hai?".
 * **Solution:** Har API request par server ko ownership verify karni chahiye.
 * **What breaks if we don't use it?** Attacker URL mein ID change karke doosre user ki private profile dekh sakta hai, uska order cancel kar sakta hai ya uska password badal sakta hai.
-* **✅ Kab use karo (Use this when):** Har us API endpoint par jahan URL mein ID pass hoti hai (e.g., `GET /users/5`, `DELETE /orders/99`) — wahan IDOR ka test zaroori hai.
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Har us API endpoint par jahan URL mein ID pass hoti hai (e.g., `GET /users/5`, `DELETE /orders/99`) — wahan IDOR ka test zaroori hai.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Public APIs jahan data sabke liye open hai (jaise public weather data) — wahan ownership ka concept hi nahi hota, toh IDOR test relevant nahi hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -7021,8 +7021,8 @@ FAILED test_security.py::test_idor_vulnerability - AssertionError: Expected 403,
 
 ##### 🔬 Code Explanation
 
-* **Line 4:** `@pytest.mark.security` — Yeh decorator test ko categorize karta hai. Isse hum command line se sirf security tests run kar sakte hain: `pytest -m security`.
-* **Line 24:** `assert status_code in [403, 404]` — Agar Unauthorized Resource Access ki koshish ho, toh server ko either **403 Forbidden** (tumhe permission nahi hai) ya **404 Not Found** (yeh data exist nahi karta) dena chahiye. Agar **200 OK** aa gaya, matlab access mil gaya aur yeh **⭐IDOR BUG!** hai.
+* [[HL::**Line::HL]] 4:** `@pytest.mark.security` — Yeh decorator test ko categorize karta hai. Isse hum command [[HL::line::HL]] se sirf security tests run kar sakte hain: `pytest -m security`.
+* [[HL::**Line::HL]] 24:** `assert status_code in [403, 404]` — Agar Unauthorized Resource Access ki koshish ho, toh server ko either **403 Forbidden** (tumhe permission nahi hai) ya **404 Not Found** (yeh data exist nahi karta) dena chahiye. Agar **200 OK** aa gaya, matlab access mil gaya aur yeh **⭐IDOR BUG!** hai.
 
 #### 🔒 8. Security-First Check
 
@@ -7081,7 +7081,7 @@ Tinder mein ek famous IDOR bug aaya tha jahan ek API endpoint `GET /api/users/[I
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** Automation test ke dauraan check kiya jata hai ki API sirf ID par bharosa kar rahi hai ya owner verify kar rahi hai. Developer do users banakar ek ke token se doosre ka data access karne ki koshish karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Automation test ke dauraan check kiya jata hai ki API sirf ID par bharosa kar rahi hai ya owner verify kar rahi hai. Developer do users banakar ek ke token se doosre ka data access karne ki koshish karta hai.
 * **Fixing/Iteration Phase:** Bug milne par backend dev DB query mein filter lagata hai: `SELECT * FROM data WHERE user_id = {current_logged_in_user_id}`.
 * **Live Production Phase:** Agar ise prevent na kiya jaye toh attacker doosre user ki profile dekh sakta hai, order cancel kar sakta hai ya password badal sakta hai.
 
@@ -7113,7 +7113,7 @@ Attacker gets User B's Data (200 OK) -> 🚨 IDOR BUG!
 * **Q:** IDOR prevent karne ke liye backend 403 Forbidden deta hai. Par kuch cases mein 404 Not Found kyun prefer kiya jata hai?
 * **A:** Security mein isey "Information Leakage" rokna kehte hain. Agar API 403 deti hai, toh hacker ko confirm ho jata hai ki wo specific ID (jaise order #500) system mein exist karti hai (bas use permission nahi hai). Agar API 404 (Not Found) de, toh hacker confuse ho jata hai ki kya sach mein uske paas permission nahi hai, ya wo item sach mein exist hi nahi karta. Isse system ki internal state chhipi rehti hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Guard ne ID card dekha, par room number match nahi kiya — yahi IDOR hai."
 
@@ -7171,7 +7171,7 @@ Yeh SQL injection hai — jab application User Input ko normal data samajhne ki 
 * **Problem:** Agar user input ko sanitize (clean) nahi kiya gaya, toh attacker database par full control pa sakta hai.
 * **Solution:** Input ko sanitize karna ya ORM (Object-Relational Mapper — Python objects ko directly database tables se map karta hai, raw SQL likhne ki zaroorat nahi) ke through query parametrization use karna.
 * **What breaks if we don't use it?** Attacker poora user data leak (chori) kar sakta hai ya `DROP TABLE` command chala kar poora database delete kar sakta hai.
-* **✅ Kab use karo (Use this when):** Jab bhi API user se koi input leti hai (search query, username, id, text fields) aur use database search/save ke liye use karti hai.
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Jab bhi API user se koi input leti hai (search query, username, id, text fields) aur use database search/save ke liye use karti hai.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** (Yeh concept har situation mein applicable hai — koi genuine avoid-scenario nahi hai. Har DB interaction secure hona hi chahiye.)
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -7224,8 +7224,8 @@ E       AssertionError: 🚨 500 Internal Server Error returned! Server crashed 
 
 ##### 🔬 Code Explanation
 
-* **Line 5-9:** `@pytest.mark.parametrize` — Yeh test ko teen baar run karega. Har baar `malicious_input` variable ki value list mein se ek hogi. Isme **⭐' OR '1'='1** sabse classic auth-bypass payload hai. `%27` (single quote ka URL-encoded form) check karta hai ki server character decoding mein fail toh nahi hota.
-* **Line 16:** `assert response.status_code != 500` — Agar server SQL code chala kar fail hota hai toh DB engine exception phekta hai jisse backend crash (unhandled exception) hota hai aur **500 Internal Server Error** aata hai.
+* [[HL::**Line 5-9:**::HL]] `@pytest.mark.parametrize` — Yeh test ko teen baar run karega. Har baar `malicious_input` variable ki value list mein se ek hogi. Isme **⭐' OR '1'='1** sabse classic auth-bypass payload hai. `%27` (single quote ka URL-encoded form) check karta hai ki server character decoding mein fail toh nahi hota.
+* [[HL::**Line::HL]] 16:** `assert response.status_code != 500` — Agar server SQL code chala kar fail hota hai toh DB engine exception phekta hai jisse backend crash (unhandled exception) hota hai aur **500 Internal Server Error** aata hai.
 
 #### 🔒 8. Security-First Check
 
@@ -7233,13 +7233,13 @@ Modern applications raw SQL nahi likhte. Wo ORM frameworks jaise SQLAlchemy (Pyt
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Industry mein SQLi detect karne ke liye manually tests kam aur automated vulnerability scanners jaise sqlmap (open source penetration testing tool — jo automatic SQL flaws dhoondhta hai) ka use hota hai. Par critical inputs par automated Pytest CI/CD (Continuous Integration pipeline) mein likhna best practice hai taaki regression (purana theek kiya bug wapas na aa jaye) na ho.
+Industry mein SQLi detect karne ke liye manually tests kam aur automated vulnerability scanners jaise sqlmap (open source penetration testing tool — jo automatic SQL flaws dhoondhta hai) ka use hota hai. Par critical inputs par automated Pytest CI/CD (Continuous Integration [[HL::pipeline)::HL]] mein likhna best practice hai taaki regression (purana theek kiya bug wapas na aa jaye) na ho.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 
 * **❌ Mistake:** String formatting use karke SQL query banana: `f"SELECT * FROM users WHERE name='{user_input}';"` (Ise raw SQL kehte hain).
 * **🤦 Why:** Developers ko lagta hai yeh fast aur aasan hai bina ORM seekhe.
-* **✅ The 'Pro' Way:** Hamesha ORM use karo, ya DB drivers (jaise psycopg2) ke built-in parametrization parameters use karo: `cursor.execute("SELECT * FROM users WHERE name=%s", (user_input,))`.
+* **✅ The 'Pro' Way:** Hamesha ORM [[HL::use karo,::HL]] ya DB drivers (jaise psycopg2) ke built-in parametrization parameters [[HL::use karo:::HL]] `cursor.execute("SELECT * FROM users WHERE name=%s", (user_input,))`.
 * **⚡ Consequences:** Attacker `user_input` mein `; DROP TABLE users;` daal dega aur ek single request mein poori company ka data gayab ho jayega.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -7282,7 +7282,7 @@ Industry mein SQLi detect karne ke liye manually tests kam aur automated vulnera
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** Pytest automation mein developer search box ya login mein SQL jaisa character (jaise single quote `%27`) bhej kar check karta hai ki server gracefually 400 series error de raha hai ya 500 crash kar raha hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Pytest automation mein developer search box ya login mein SQL jaisa character (jaise single quote `%27`) bhej kar check karta hai ki server gracefually 400 series error de raha hai ya 500 crash kar raha hai.
 * **Fixing/Iteration Phase:** Bug milne par Devs codebase scan karke saari raw SQL queries ko hata kar ORM (SQLAlchemy) logic implement karte hain.
 * **Live Production Phase:** Attacker SQL code inject karke poora database chori kar sakta hai ya DROP TABLE chala kar delete kar sakta hai agar raw SQL use hua ho. Modern ORMs is input ko command banne se rokte hain.
 
@@ -7312,7 +7312,7 @@ Result: DB looks for a user literally named "admin' --". Fails gracefully. 🔒
 * **Q:** `OR '1'='1` payload SQLi mein itna common kyun hai?
 * **A:** Kyunki backend query mein usually `WHERE username = 'X' AND password = 'Y'` hota hai. Agar hum username mein `admin' OR '1'='1` daalte hain, toh statement ban jati hai: `WHERE username='admin' OR TRUE`. SQL engines OR true dekhte hi poori statement ko True maan lete hain, chahe password galat hi kyun na ho, aur login successful ho jata hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Input ko command samajh lena SQLi hai, aur Input ko sirf text man-na Parametrization hai."
 
@@ -7387,7 +7387,7 @@ API ki duniya mein bhi yahi hota hai. Agar koi limit na ho, toh hacker 1 second 
 * **What breaks if we don't use it?** 1. **Denial of Service (DoS Attack):** Server overload hoke genuine users ke liye down ho jayega.
 2. **Brute Force Attack:** Hackers saare possible combinations try karke accounts hack kar lenge.
 3. **Cost Control:** Agar tumhari API Cloud (jaise AWS) par host hai, toh lakho requests ka bill aayega.
-* **✅ Kab use karo (Use this when):** Login endpoints, OTP generation, password resets, aur public APIs (jahan free users ka quota limit karna ho).
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Login endpoints, OTP generation, password resets, aur public APIs (jahan free users ka quota limit karna ho).
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Internal microservices (ek server doosre server se baat kar raha ho secure network mein) jahan high throughput zaroori hai aur throttling (slow down karna) app ko tod sakti hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -7451,9 +7451,9 @@ API ki duniya mein bhi yahi hota hai. Agar koi limit na ho, toh hacker 1 second 
 
 ##### 🔬 Code Explanation
 
-* **Line 5:** `@pytest.mark.slow` — Rate limiting tests loops chalate hain isliye thode slow hote hain. Inhe main CI/CD (development pipeline) run se alag rakhna chahiye.
-* **Line 16-24:** Yeh loop ek "burst of requests" bhejta hai. Hum jaan-boojh kar allowed limit (5) se zyada requests (7) bhej rahe hain ye dekhne ke liye ki API limit impose karti hai ya nahi.
-* **Line 27:** Check karta hai ki kam se kam ek block hua ho. Agar `fail_responses == 0` hai, matlab Rate Limiter kaam nahi kar raha.
+* [[HL::**Line 5:**::HL]] `@pytest.mark.slow` — Rate limiting tests loops chalate hain isliye thode slow hote hain. Inhe main CI/CD (development [[HL::pipeline)::HL]] run se alag rakhna chahiye.
+* [[HL::**Line::HL]] 16-24:** Yeh loop ek "burst of requests" bhejta hai. Hum jaan-boojh kar allowed limit (5) se zyada requests (7) bhej rahe hain ye dekhne ke liye ki API limit impose karti hai ya nahi.
+* [[HL::**Line::HL]] 27:** Check karta hai ki kam se kam ek block hua ho. Agar `fail_responses == 0` hai, matlab Rate Limiter kaam nahi kar raha.
 
 #### 🔒 8. Security-First Check
 
@@ -7468,7 +7468,7 @@ Industry mein Rate Limit testing thodi **flaky** (unreliable) maani jati hai aut
 * **❌ Mistake:** Pure automation suite mein heavy loop requests lagana.
 * **🤦 Why:** QA/Devs sochte hain real traffic simulate karke hi test hoga.
 * **✅ The 'Pro' Way:** Rate limit functionality ko mock service se test karo ya lower environments (staging) par chalao.
-* **⚡ Consequences:** Tumhari pipeline itni slow ho jayegi ki ek build pass hone mein 30 minute lagenge. Aur network hiccups se tests randomly flaky (kabhi pass, kabhi fail) honge.
+* **⚡ Consequences:** Tumhari [[HL::pipeline::HL]] itni slow ho jayegi ki ek build pass hone mein 30 minute lagenge. Aur network hiccups se tests randomly flaky (kabhi pass, kabhi fail) honge.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -7479,7 +7479,7 @@ Industry mein Rate Limit testing thodi **flaky** (unreliable) maani jati hai aut
 
 * **Confusion 2 — "Kya `time.sleep()` lagana best practice hai?"**
 * **Galat soch:** Automation mein wait karne ke liye hamesha sleep laga do.
-* **Actually:** Flaky tests ka sabse bada kaaran hardcoded `sleep` hai. Hamesha dynamic wait (retry logic) use karna chahiye. Par yahan (Line 24) hum jaan-boojh kar ek chhota sa gap de rahe hain taaki local machine ka network port exhaust (block) na ho.
+* **Actually:** Flaky tests ka sabse bada kaaran hardcoded `sleep` hai. Hamesha dynamic wait (retry logic) use karna chahiye. Par yahan [[HL::(Line::HL]] 24) hum jaan-boojh kar ek chhota sa gap de rahe hain taaki local machine ka network port exhaust (block) na ho.
 
 
 
@@ -7492,7 +7492,7 @@ Industry mein Rate Limit testing thodi **flaky** (unreliable) maani jati hai aut
 
 * **Test flaky hai (kabhi pass, kabhi fail)**
 * **Root Cause:** Network lag ki wajah se "burst" requests server par fail ke bajaye spread-out hoke jaa rahi hain.
-* **Fix:** Local environment mein hit karo ya Threading/Async requests use karo taaki saari requests exactly same microsecond par server hit karein.
+* **Fix:** Local environment mein hit karo ya Threading/Async requests [[HL::use karo::HL]] taaki saari requests exactly same microsecond par server hit karein.
 
 
 
@@ -7510,7 +7510,7 @@ Twitter API free tier pe limit lagati hai ki ek user 15 minute mein sirf 900 twe
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** Developer API documentation se limit pata karta hai, phir test mein ek loop chala kar burst of requests bhejta hai taaki confirm kar sake ki limit cross hone par 429 response aa raha hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer API documentation se limit pata karta hai, phir test mein ek loop chala kar burst of requests bhejta hai taaki confirm kar sake ki limit cross hone par 429 response aa raha hai.
 * **Fixing/Iteration Phase:** Agar flaky tests aate hain, developer timeout aur async mechanisms se burst pattern fix karta hai.
 * **Live Production Phase:** Production mein attacker ek second mein 1000 passwords try kar sakta hai ya API ko choke kar sakta hai agar yeh limit properly enforced na ho.
 
@@ -7532,12 +7532,12 @@ Hacker --> 6th Request -> [ API GATEWAY ] --> STOP! Limit Reached!
 
 * **Q:** DoS attack aur Brute Force attack mein rate limiting kaise madad karti hai?
 * **A:** DoS attack ka goal server ko fake requests se overload karna hota hai, aur Brute Force ka goal lagatar attempts se password guess karna hota hai. Rate limiting dono scenarios mein ek IP ya user ID ke requests count ko monitor karti hai. Jaise hi request limit cross hoti hai, API 429 (Too Many Requests) throw karti hai aur agle requests ko server tak pahunchne se pehle hi drop kar deti hai.
-* **Q:** Tumhare automated rate limiting tests CI pipeline mein flaky ho rahe hain. Tum isey kaise fix karoge?
+* **Q:** Tumhare automated rate limiting tests CI [[HL::pipeline::HL]] mein flaky ho rahe hain. Tum isey kaise fix karoge?
 * **A:** Flaky rate limit tests generally network latency ki wajah se hote hain (requests spread out ho jati hain). Isey fix karne ke do tarike hain: 1) Python `asyncio` ya multithreading use karke requests ek hi waqt (concurrently) bhejna, ya 2) Pure end-to-end environment mein in tests ko run karne ki bajaye, application ke andar Unit Tests likhna jo rate limiter function ki mock limit (e.g., 2 requests) test karein without network boundary.
 * **Q:** Kya Rate Limiting hamesha IP based hoti hai?
 * **A:** Nahi. IP-based limit common hai, par NAT (jaise ek office/college ka network jahan hazaron log ek hi public IP share karte hain) ki wajah se legitimate users bhi block ho sakte hain. Isliye modern APIs API Keys, Bearer Tokens, ya User ID ke basis par (Token-bucket algorithm) rate limit lagati hain.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Zaroorat se zyada maangoge toh API 429 ka thappad maar ke baithne bolegi."
 
@@ -7597,7 +7597,7 @@ Doosra tarika (BDD) yeh hai ki Malik aur Architect aam English mein baat karein:
 * **Problem:** Normal Pytest code (asserts, fixtures) ek Business Analyst ya Product Manager nahi padh sakta. Test Coverage (kitna code test hua hai) ka proof managers ke paas nahi hota.
 * **Solution:** **Gherkin Syntax** (Plain English format: Given, When, Then) use karna jo ek **Living Documentation** ban jaata hai (matlab aisi documentation jo test code ki tarah run ho sake).
 * **What breaks if we don't use it?** Development team aur Business team ke beech communication gap hoga. Jo feature build hoga wo business requirement se mismatch ho sakta hai.
-* **✅ Kab use karo (Use this when):** Complex business logic, UI tests, aur End-to-End (E2E) testing mein jahan business logic confirm karna zaruri ho.
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Complex business logic, UI tests, aur End-to-End (E2E) testing mein jahan business logic confirm karna zaruri ho.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Simple Unit Tests (jaise 2+2=4 function check karna) mein. Wahan BDD over-engineering (faltu ka bojh) hai, wahan plain Pytest prefer karo.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -7616,7 +7616,7 @@ Feature: User Login
 
 1. **`.feature` file:** Hum Gherkin syntax mein test likhte hain.
 2. **Parser (pytest-bdd plugin):** Jab hum pytest run karte hain, yeh plugin us `.feature` file ko read karta hai.
-3. **Step Definitions (Python file):** Plugin us `.feature` file ki har line (Given/When/Then) ke liye hamari likhi hui ek Python function (decorator ke saath) dhoondhta hai.
+3. **Step Definitions (Python file):** Plugin us `.feature` file ki har [[HL::line::HL]] (Given/When/Then) ke liye hamari likhi hui ek Python function (decorator ke saath) dhoondhta hai.
 4. **Execution:** Jab match mil jata hai, pytest us python logic ko chala deta hai, variables pass karta hai aur pass/fail ka result deta hai.
 
 #### 💻 7. Hands-On — Runnable Example
@@ -7638,7 +7638,7 @@ Feature: API Login Testing
 
 ```python
 # Python 3.10+ | pytest 7.x+ | pytest-bdd 6.x+
-1  from pytest_bdd import scenarios, given, when, then          # pytest-bdd module — Gherkin lines ko python me map karne ke functions
+1  from pytest_bdd import scenarios, given, when, then          # pytest-bdd module — Gherkin [[HL::lines::HL]] ko python me map karne ke functions
 2  import pytest
 3  import requests
 4
@@ -7650,11 +7650,11 @@ Feature: API Login Testing
 10 def context():                                               # context() = ek khali dictionary return karta hai
 11     return {}                                                # state share karne ke liye khali dict {}
 12
-13 # 3. Step Definitions (Mapping lines to code)
-14 @given("API is running")                                     # @given = Map karta hai feature file ki 'Given API is running' line ko
+13 # 3. Step Definitions (Mapping [[HL::lines::HL]] to code)
+14 @given("API is running")                                     # @given = Map karta hai feature file ki 'Given API is running' [[HL::line::HL]] ko
 15 def check_api_running(context):                              # test function, context fixture ko inject kiya
 16     context["url"] = "https://api.test/login"                # dict mein URL store kiya
-17     # Asli code mein hum check kar sakte hain ki server online hai ya nahi
+17     # Asli code mein hum check kar sakte hain ki server [[HL::online::HL]] hai ya nahi
 18
 19 @when("User sends valid credentials")                        # @when = 'When User sends valid credentials'
 20 def send_credentials(context):
@@ -7678,10 +7678,10 @@ test_login_bdd.py::test_login_successful PASSED [100%]
 
 ##### 🔬 Code Explanation
 
-* **Line 1:** `pytest-bdd` ke functions. Isey chalane ke liye pehle terminal mein `pip install pytest-bdd` (Python package manager se plugin install karna) karna padta hai.
-* **Line 6:** `scenarios('login.feature')` — Yeh line sabse critical hai. Yahi command Pytest ko bolti hai ki "Bhai, ja kar `login.feature` padho, usme jitne `@scenario` hain, un sabko ek-ek alag test bana kar chalao."
-* **Line 10-11:** `context` (dictionary — Python ka data structure jisme keys/values hoti hain). BDD mein **Given** function apna data **When** tak kaise pahunchayega? Is `context` (ya pytest fixture) ke zariye.
-* **Line 14, 19, 25:** Dekho kaise decorator ke andar ka text EXACTLY `.feature` file ki line se match kar raha hai. Agar spelling mistake hui, toh plugin fail ho jayega.
+* [[HL::**Line::HL]] 1:** `pytest-bdd` ke functions. Isey chalane ke liye pehle terminal mein `pip install pytest-bdd` (Python package manager se plugin install karna) karna padta hai.
+* [[HL::**Line::HL]] 6:** `scenarios('login.feature')` — Yeh [[HL::line::HL]] sabse critical hai. Yahi command Pytest ko bolti hai ki "Bhai, ja kar `login.feature` padho, usme jitne `@scenario` hain, un sabko ek-ek alag test bana kar chalao."
+* [[HL::**Line::HL]] 10-11:** `context` (dictionary — Python ka data structure jisme keys/values hoti hain). BDD mein **Given** function apna data **When** tak kaise pahunchayega? Is `context` (ya pytest fixture) ke zariye.
+* [[HL::**Line::HL]] 14, 19, 25:** Dekho kaise decorator ke andar ka text EXACTLY `.feature` file ki [[HL::line::HL]] se match kar raha hai. Agar spelling mistake hui, toh plugin fail ho jayega.
 
 #### 🔒 8. Security-First Check
 
@@ -7744,7 +7744,7 @@ Banking and Finance apps (jaise Barclays ya PayPal) mein Business Analysts (jinh
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** QA aur PMs milkar Gherkin (.feature) mein test likhte hain jise developer Python step definitions ke zariye real Pytest code se link karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** QA aur PMs milkar Gherkin (.feature) mein test likhte hain jise developer Python step definitions ke zariye real Pytest code se link karta hai.
 * **Fixing/Iteration Phase:** Agar requirement change hoti hai (jaise loan interest badh gaya), toh pehle PM feature file ka Then step update karta hai, phir test fail hota hai, aur Dev naya code implement karta hai.
 * **Live Production Phase:** (N/A — BDD development phase ka concept hai, production environment ka nahi).
 
@@ -7771,7 +7771,7 @@ Banking and Finance apps (jaise Barclays ya PayPal) mein Business Analysts (jinh
 * **Q:** Gherkin kya hota hai?
 * **A:** Gherkin ek plain-text bhasha (language) hai jo strict structure (Feature, Scenario, Given, When, Then) follow karti hai. Ise specifically behaviour-driven development mein test cases describe karne ke liye banaya gaya tha. Yeh naturally samajh aane wali English hoti hai jise BDD parsers padh sakte hain.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "BDD mein Malik ne English mein order diya, aur Architect (Dev) ne Python se us order ko verify kar diya."
 
@@ -7842,7 +7842,7 @@ Lekin Performance Testing yeh check karti hai ki "agar is pul par 1000 trucks ek
 * **Problem:** Functional tests pass ho jate hain kyunki wahan sirf 1 user (automation bot) API hit karta hai. Par real world mein traffic unpredictable hota hai.
 * **Solution:** Load Testing tools (jaise Locust ya k6) use karke hazaron Virtual users simulate karna.
 * **What breaks if we don't use it?** E-commerce site ki sale wale din server 500 Errors (Internal Server Error) dene lagega kyunki CPU aur database requests handle nahi kar payenge.
-* **✅ Kab use karo (Use this when):** Major feature release se pehle, ya expected high-traffic events (jaise Black Friday, flash sales) se pehle.
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Major feature release se pehle, ya expected high-traffic events (jaise Black Friday, flash sales) se pehle.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Development ke shuruati phase mein jab code abhi stable hi nahi hai, wahan load test time waste hai — pehle unit/functional tests paas karo.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -7932,8 +7932,8 @@ Industry mein CPU aur memory usage track karne ke liye Locust ke saath Datadog (
 #### 🛠️ 12. Troubleshooting Flowchart
 
 * **`ConnectionRefusedError: [Errno 61] Connection refused`**
-* **Root Cause:** Tumne host specify nahi kiya ya API server offline hai.
-* **Fix:** Command line mein `--host=http://localhost:8000` (ya jo bhi URL ho) add karo aur check karo API chal rahi hai ya nahi.
+* **Root Cause:** Tumne host specify nahi kiya ya API server [[HL::offline::HL]] hai.
+* **Fix:** Command [[HL::line::HL]] mein `--host=http://localhost:8000` (ya jo bhi URL ho) add karo aur check karo API chal rahi hai ya nahi.
 
 
 * **Port 8089 is already in use**
@@ -7957,7 +7957,7 @@ Hotstar ne IPL live streaming ke waqt millions of concurrent users handle karne 
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** Developer/QA Locust UI (port 8089) kholkar 1000 virtual users spawn karte hain aur dekhte hain ki Response Time kitna slow ho raha hai ya errors toh nahi aa rahe.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer/QA Locust UI (port 8089) kholkar 1000 virtual users spawn karte hain aur dekhte hain ki Response Time kitna slow ho raha hai ya errors toh nahi aa rahe.
 * **Fixing/Iteration Phase:** Test ke baad DB ya CPU ke bottlenecks identify aur fix kiye jate hain (jaise missing SQL index lagana).
 * **Live Production Phase:** Yeh ensure karta hai ki production mein launch ke baad asli users ka sudden load aane par API crash na ho aur seamless experience de.
 
@@ -7983,7 +7983,7 @@ Hotstar ne IPL live streaming ke waqt millions of concurrent users handle karne 
 * **Q:** Bottleneck se aap kya samajhte hain load testing context mein?
 * **A:** Bottleneck system ka wo sabse kamzor point (weakest link) hota hai jiski wajah se poora system slow ho jata hai. Jaise ek bottle ki neck patli hoti hai toh paani dheere nikalta hai. Web apps mein commonly database queries ya network bandwidth bottleneck ban jate hain jab heavy load aata hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Pytest check karta hai Engine theek hai ya nahi, Locust check karta hai ki Engine pahad par chadh payega ya nahi."
 
@@ -8035,15 +8035,15 @@ Lekin agar tumhe ek aisa **Red Button** chahiye jo dabane par automatically tumh
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** Custom Pytest Plugins allow developers to extend Pytest's core functionality by hooking into its execution lifecycle (via Hook Entry Points) to add custom command-line options, alter test collection, or generate custom reports.
+* **Precise English:** Custom Pytest Plugins allow developers to extend Pytest's core functionality by hooking into its execution lifecycle (via Hook Entry Points) to add custom [[HL::command-line::HL]] options, alter test collection, or generate custom reports.
 * **Hinglish Simplification:** Pytest ke internal system mein apna code ghusana (Hooks ke zariye) taaki hum uske default kaam karne ke tarike ko badal sakein ya naye features (jaise naye terminal commands) add kar sakein.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Tum chahte ho ki test chalte waqt tum command line se bata sako ki environment kaunsa hai (staging ya prod), par Pytest mein by default aisi koi flag (`--env`) nahi hoti.
+* **Problem:** Tum chahte ho ki test chalte waqt tum command [[HL::line::HL]] se bata sako ki environment kaunsa hai (staging ya prod), par Pytest mein by default aisi koi flag (`--env`) nahi hoti.
 * **Solution:** `conftest.py` file mein custom Pytest Hooks aur parser options define karna.
 * **What breaks if we don't use it?** Teams code ke andar variables hardcode karne lagti hain, jisse same test alag-alag environments par chalana mushkil (brittle) ho jata hai.
-* **✅ Kab use karo (Use this when):** Jab tumhe Pytest ki custom reporting chahiye, external tools (Slack/Jira) se integrate karna ho, ya nayi command-line arguments add karni hon.
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Jab tumhe Pytest ki custom reporting chahiye, external tools (Slack/Jira) se integrate karna ho, ya nayi [[HL::command-line::HL]] arguments add karni hon.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab wahi kaam kisi standard open-source plugin se (jaise pytest-xdist parallel testing ke liye) ho sakta ho. Wheel reinvent (dobara banana) mat karo.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -8077,7 +8077,7 @@ In steps par jo apne function lagaye jate hain, unhe **Hooks** (ya Entry Points)
 # Python 3.10+ | Pytest 7.x+
 1  import pytest                                                # pytest framework
 2  
-3  # 1. Custom Command Line Options Hook
+3  # 1. Custom Command [[HL::Line::HL]] Options Hook
 4  def pytest_addoption(parser):                                # pytest_addoption = Built-in hook jo terminal arguments add karne deta hai. parser = CLI arg parser
 5      parser.addoption(                                        # addoption() method call
 6          "--env",                                             # --env flag ka naam
@@ -8112,10 +8112,10 @@ In steps par jo apne function lagaye jate hain, unhe **Hooks** (ya Entry Points)
 
 ##### 🔬 Code Explanation
 
-* **Line 4:** `pytest_addoption` hook. Iska naam EXACTLY yahi hona chahiye warna Pytest ise pehchanega nahi. `parser` object Pytest automatically pass karta hai.
-* **Line 7:** `action="store"` ka matlab hai `--env=prod` likhne par "prod" string store hogi. (Ek aur hota hai `action="store_true"` jo boolean `True` deta hai agar flag ho).
-* **Line 19:** `pytest_runtest_makereport` hook lifecycle ke test-execution phase mein ghusta hai. `item` current test case hota hai, aur `call` yeh batata hai ki test setup ho raha hai, run ho raha hai, ya teardown.
-* **Line 25:** `setattr()` Python ka default function hai jo runtime par objects ke andar nayi properties (jaise test chalne ka `duration`) inject kar deta hai.
+* [[HL::**Line::HL]] 4:** `pytest_addoption` hook. Iska naam EXACTLY yahi hona chahiye warna Pytest ise pehchanega nahi. `parser` object Pytest automatically pass karta hai.
+* [[HL::**Line::HL]] 7:** `action="store"` ka matlab hai `--env=prod` likhne par "prod" string store hogi. (Ek aur hota hai `action="store_true"` jo boolean `True` deta hai agar flag ho).
+* [[HL::**Line::HL]] 19:** `pytest_runtest_makereport` hook lifecycle ke test-execution phase mein ghusta hai. `item` current test case hota hai, aur `call` yeh batata hai ki test setup ho raha hai, run ho raha hai, ya teardown.
+* [[HL::**Line::HL]] 25:** `setattr()` Python ka default function hai jo runtime par objects ke andar nayi properties (jaise test chalne ka `duration`) inject kar deta hai.
 
 #### 🔒 8. Security-First Check
 
@@ -8173,11 +8173,11 @@ Shuru mein saare custom hooks `conftest.py` mein likhe jate hain. Par jab projec
 
 #### 🌍 14. Real-World Use Case
 
-Netflix apni microservices testing ke liye custom pytest plugins use karta hai. Unka ek hook automatically test ka result, test duration, aur fail hone par error traceback seedha unke internal metrics dashboard (Atlas) par bhej deta hai, bina test script mein koi extra logging line likhe.
+Netflix apni microservices testing ke liye custom pytest plugins use karta hai. Unka ek hook automatically test ka result, test duration, aur fail hone par error traceback seedha unke internal metrics dashboard (Atlas) par bhej deta hai, bina test script mein koi extra logging [[HL::line::HL]] likhe.
 
 #### 🔄 15. Real-World Flow (End-to-End)
 
-* **Testing/Offline Phase:** Developer apni project zaroorat ke hisaab se `conftest.py` mein custom hooks (jaise `--env` flag ya automatic bug creation on fail) likhta hai aur local execute karke verify karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer apni project zaroorat ke hisaab se `conftest.py` mein custom hooks (jaise `--env` flag ya automatic bug creation on fail) likhta hai aur local execute karke verify karta hai.
 * **Fixing/Iteration Phase:** Agar custom flag missing ho toh script usay handle karne ka error phekhti hai, jise Dev default values dekar fix karta hai.
 * **Live Production Phase:** (N/A — Plugins testing infrastructure ka part hain). Par contextually, agar plugin bada aur complex ho jaye, toh use local `conftest` se hatakar ek independent Python package bana diya jata hai aur `pip` se install kiya jata hai taaki doosri teams bhi us Red Button ka fayda utha sakein.
 
@@ -8215,7 +8215,7 @@ End Execution
 * **Q:** Pytest plugin banane ke steps mein `setup.py` ki zaroorat kab padti hai?
 * **A:** Jab aap apne custom logic ko `conftest.py` se bahar nikal kar ek shareable library (installable Python package) banana chahte hain. `setup.py` (ya `pyproject.toml`) mein aap `pytest11` entry-point define karte hain taaki pip install hote hi Pytest auto-discover kar le ki yeh ek external plugin hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Hooks Pytest ke secret darwaze hain jahan se tum framework ka behavior hack kar sakte ho."
 
@@ -8239,7 +8239,7 @@ End Execution
 * [x] conftest.py Capabilities
 * [x] Pytest Hooks
 * [x] Hook Entry Points
-* [x] Custom Command Line Options
+* [x] Custom Command [[HL::Line::HL]] Options
 * [x] Fixture Integration
 * [x] Local Plugin Packaging
 
@@ -8293,7 +8293,7 @@ Modern applications mein user ki identity aur permissions securely pass karne ka
 * **Problem:** Traditional systems mein har API request par server ko database check karna padta tha yeh dekhne ke liye ki session valid hai ya nahi. Yeh slow aur unscalable tha.
 * **Solution:** JWT self-contained hota hai. User ki saari zaroori info token ke andar hi hoti hai.
 * **What breaks if we don't use it?** Agar scale badhega (lakhs of users), toh database har request authenticate karne mein overload hokar crash ho jayega (bottleneck ban jayega).
-* **✅ Kab use karo:** Jab stateless authentication (jahan server session yaad nahi rakhta) chahiye ho, ya modern microservices architecture mein jahan ek service ko dusri service se securely baat karni ho.
+* **✅ Kab [[HL::use karo:**::HL]] Jab stateless authentication (jahan server session yaad nahi rakhta) chahiye ho, ya modern microservices architecture mein jahan ek service ko dusri service se securely baat karni ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab tumhe strictly server-side session invalidation (e.g., user ko force logout karna turant) chahiye ho. Tab traditional server-side Sessions (database-backed) better hote hain kyunki JWT jab tak expire nahi hota, valid rehta hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -8353,15 +8353,15 @@ Decoded Claims: {'sub': '1234567890', 'role': 'admin', 'exp': 4696456499, 'iss':
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 8-11:** `jwt.decode()` yahan magic karta hai. API se jo response aata hai woh Base64 (data encoding format jo text ko garbled dikhata hai but easily readable wapas ban sakta hai) format mein hota hai. `decode` function usko wapas dictionary bana deta hai. `verify_signature=False` (argument — batata hai ki token ki authenticity secret key se check mat karo) testing ke liye zaroori hai kyunki test script ke paas hamesha backend ka secret password nahi hota, aur hume sirf claims test karne hain.
-* **Line 18:** `exp` hamesha Unix Timestamp (seconds since 1970) mein hota hai. Hum check kar rahe hain ki token ki expiry `time.time()` (current time) se badi ho, matlab token abhi zinda hai.
+* [[HL::**Line::HL]] 8-11:** `jwt.decode()` yahan magic karta hai. API se jo response aata hai woh Base64 (data encoding format jo text ko garbled dikhata hai but easily readable wapas ban sakta hai) format mein hota hai. `decode` function usko wapas dictionary bana deta hai. `verify_signature=False` (argument — batata hai ki token ki authenticity secret key se check mat karo) testing ke liye zaroori hai kyunki test script ke paas hamesha backend ka secret password nahi hota, aur hume sirf claims test karne hain.
+* [[HL::**Line::HL]] 18:** `exp` hamesha Unix Timestamp (seconds since 1970) mein hota hai. Hum check kar rahe hain ki token ki expiry `time.time()` (current time) se badi ho, matlab token abhi zinda hai.
 
 #### 🔒 8. Security-First Check
 
 * **Token tampering:** Agar koi payload mein apna role "user" se "admin" Base64 decode karke change kar de, toh server usse pakad lega. Kyun? Kyunki change karte hi **Signature** match nahi karega aur token invalid ho jayega.
-* **Security Rule:** Hamesha HTTPS use karo jab token pass kar rahe ho, warna koi bhi network par token chura sakta hai (man-in-the-middle attack). Aur server pe humesha signature verify hona hi chahiye.
+* **Security Rule:** Hamesha HTTPS [[HL::use karo::HL]] jab token pass kar rahe ho, warna koi bhi network par token chura sakta hai (man-in-the-middle attack). Aur server pe humesha signature verify hona hi chahiye.
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -8416,9 +8416,9 @@ Uber aur Netflix jaisi companies microservices use karti hain. Jab aap login kar
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer login API hit karta hai, test script mein token nikalta hai, aur `jwt.decode` (with `verify_signature=False`) karke assert karta hai ki token mein `"role": "admin"` aur expiry future ki date hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer login API hit karta hai, test script mein token nikalta hai, aur `jwt.decode` (with `verify_signature=False`) karke assert karta hai ki token mein `"role": "admin"` aur expiry future ki date hai.
 * **Fixing/Iteration Phase:** Agar expiry time system mein galat configure hua ho (jaise seconds ki jagah milliseconds de diya ho), toh upar wala test turant pakad leta hai. Developer jaakar auth server ka code fix karta hai.
-* **Live Production Phase:** Microservices isi token ko bina database hit kiye trust karti hain, isliye pipeline mein iska structure test karna critical tha.
+* **Live Production Phase:** Microservices isi token ko bina database hit kiye trust karti hain, isliye [[HL::pipeline::HL]] mein iska structure test karna critical tha.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -8453,7 +8453,7 @@ Uber aur Netflix jaisi companies microservices use karti hain. Jab aap login kar
 * **Q:** Role-Based Access Control (RBAC) JWT ke through kaise implement hota hai?
 * **A:** API login par server check karta hai ki user kon hai. Agar woh admin hai, toh JWT payload dictionary mein ek extra key-value pair daal deta hai `{"role": "admin"}`. Agli baar jab koi admin-only API hit hoti hai, toh code sirf JWT ko decode karke check karta hai `if token['role'] == 'admin'` toh access do, warna 403 Forbidden return kardo.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "JWT ek VIP wristband hai jise padh toh koi bhi sakta hai, par tamper koi nahi kar sakta kyunki uspe server ka invisible digital signature (thappa) hota hai."
 
@@ -8489,7 +8489,7 @@ Hum API keys aur database passwords ko secure kaise rakhein? Code ke andar hardc
 * **Problem:** Agar password code mein hai aur us code ko GitHub pe push kar diya, toh woh Git history mein hamesha ke liye record ho jayega. Koi bad actor public repo se tumhari AWS/Database keys chura lega (Security Breach).
 * **Solution:** Environment variables aur `.env` files ka use karte hain, jo code se bilkul alag hoti hain aur Git par upload nahi ki jati (`.gitignore` ke zariye).
 * **What breaks if we don't use it?** Ek minor galti ki wajah se hackers poore company ka database delete kar sakte hain ya company ke paiso se crypto mine kar sakte hain agar AWS keys leak ho gayi.
-* **✅ Kab use karo:** Har baar jab tum koi API test kar rahe ho jisme token, password, connection string, ya client secret ki zaroorat padti hai.
+* **✅ Kab [[HL::use karo:**::HL]] Har baar jab tum koi API test kar rahe ho jisme token, password, connection string, ya client secret ki zaroorat padti hai.
 * **❌ Kab mat karo / Alternative prefer karo:** (Yeh concept har situation mein applicable hai — passwords ko code mein hardcode karne ka koi genuine avoid-scenario nahi hai. Humesha secrets manage karne hi hain.)
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -8543,10 +8543,10 @@ Iske liye humein `python-dotenv` (Python library — `.env` file se variables ko
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 5:** `load_dotenv()` invisible tareeqe se kaam karti hai. Yeh hamesha script execution ke start mein honi chahiye. Agar tumhare system mein `.env` file nahi hai, toh yeh gracefully ignore ho jayegi (jisse production environment mein error nahi aati).
-* **Line 8:** `os.getenv("API_SECRET_KEY")` OS se data fetch kar raha hai. Agar file mein variable define nahi hai toh application crash nahi karegi, sirf `None` return hoga.
+* [[HL::**Line 5:**::HL]] `load_dotenv()` invisible tareeqe se kaam karti hai. Yeh hamesha script execution ke start mein honi chahiye. Agar tumhare system mein `.env` file nahi hai, toh yeh gracefully ignore ho jayegi (jisse production environment mein error nahi aati).
+* [[HL::**Line::HL]] 8:** `os.getenv("API_SECRET_KEY")` OS se data fetch kar raha hai. Agar file mein variable define nahi hai toh application crash nahi karegi, sirf `None` return hoga.
 
 #### 🔒 8. Security-First Check
 
@@ -8559,7 +8559,7 @@ Local level par `.env` theek hai, but Enterprise level (AWS/Production) par hum 
 
 * **AWS Secrets Manager** (AWS ki cloud service jo passwords aur keys securely store aur rotate karti hai)
 * **Vault** (HashiCorp Vault — secrets manage karne ka dedicated enterprise tool)
-use karte hain. Pipeline seedha in system se passwords fetch karke container ke environment mein runtime pe daalti hai.
+use karte hain. [[HL::Pipeline::HL]] seedha in system se passwords fetch karke container ke environment mein runtime pe daalti hai.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -8570,9 +8570,9 @@ use karte hain. Pipeline seedha in system se passwords fetch karke container ke 
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Local machine par `.env` use kar raha hoon, par CI/CD pipeline (Jenkins/GitHub) pe yeh file kahan se aayegi?"**
-* **Galat soch:** CI/CD pipeline pe bhi mujhe manually `.env` file banani padegi.
-* **Actually:** Nahi! CI/CD server pe `.env` file nahi hoti. Tools jaise **GitHub Secrets** (GitHub repo ki secure settings jahan action pipelines ke liye keys save hoti hain) aur **Jenkins Credentials** (Jenkins CI/CD server ka secure storage) directly OS environment mein secrets inject karte hain jab code wahan run hota hai. Hamara code (`os.getenv`) bina `.env` file ke bhi wahan seamless kaam karta hai kyunki variables sidha OS level pe available ho jate hain.
+* **Confusion 1 — "Local machine par `.env` use kar raha hoon, par CI/CD [[HL::pipeline::HL]] (Jenkins/GitHub) pe yeh file kahan se aayegi?"**
+* **Galat soch:** CI/CD [[HL::pipeline::HL]] pe bhi mujhe manually `.env` file banani padegi.
+* **Actually:** Nahi! CI/CD server pe `.env` file nahi hoti. Tools jaise **GitHub Secrets** (GitHub repo ki secure settings jahan action [[HL::pipelines::HL]] ke liye keys save hoti hain) aur **Jenkins Credentials** (Jenkins CI/CD server ka secure storage) directly OS environment mein secrets inject karte hain jab code wahan run hota hai. Hamara code (`os.getenv`) bina `.env` file ke bhi wahan seamless kaam karta hai kyunki variables sidha OS level pe available ho jate hain.
 * **Prove karo:** Apna code GitHub Actions pe chalao (bina repo mein `.env` push kiye) aur wahan settings mein secret add karo. Code perfectly run hoga!
 
 
@@ -8595,13 +8595,13 @@ use karte hain. Pipeline seedha in system se passwords fetch karke container ke 
 
 #### 🌍 14. Real-World Use Case
 
-Netflix ke engineers apne local machines pe testing ke waqt `.env` use karte hain. Par jab code production mein deploy hota hai, Jenkins CI/CD pipeline HashiCorp Vault server se automatically secure database password mangti hai, aur seedha microservice ke RAM mein start-up pe inject kar deti hai.
+Netflix ke engineers apne local machines pe testing ke waqt `.env` use karte hain. Par jab code production mein deploy hota hai, Jenkins CI/CD [[HL::pipeline::HL]] HashiCorp Vault server se automatically secure database password mangti hai, aur seedha microservice ke RAM mein start-up pe inject kar deti hai.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer apne local machine par `.env` file banata hai jise Git track nahi karta (`.gitignore` ke karan). Test file mein `os.getenv("DB_PASSWORD")` use hota hai apna suite run karne ke liye.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer apne local machine par `.env` file banata hai jise Git track nahi karta (`.gitignore` ke karan). Test file mein `os.getenv("DB_PASSWORD")` use hota hai apna suite run karne ke liye.
 * **Fixing/Iteration Phase:** (N/A — Secrets environment set hote hain, iterate usually code par hota hai).
-* **Live Production Phase:** CI/CD pipeline (Jenkins/GitHub) apne secure vault/settings se actual production passwords fetch karke inject karti hai jab Docker container run hota hai. Application ka codebase (jo `os.getenv` use kar raha tha) bina single line code change kiye perfectly authenticate kar leta hai.
+* **Live Production Phase:** CI/CD [[HL::pipeline::HL]] (Jenkins/GitHub) apne secure vault/settings se actual production passwords fetch karke inject karti hai jab Docker container run hota hai. Application ka codebase (jo `os.getenv` use kar raha tha) bina single [[HL::line::HL]] code change kiye perfectly authenticate kar leta hai.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -8624,14 +8624,14 @@ GitHub Secrets/Vault -------> OS Env Vars (NO .env file needed here)
 * **A:** Sabse pehla step `.env` ko Git history se delete karna NAHI hai. Sabse pehla step immediately us compromised API key, database password, ya token ko apne provider (AWS, Stripe, etc.) ke dashboard mein jaakar REVOKE ya ROTATE karna hai. Kyunki bot scrapers microseconds mein key read kar lete hain. Key invalid karne ke baad hum file ko Git history (rebase/BFG repo cleaner se) remove kar sakte hain.
 * **Q:** `os.getenv` aur `os.environ` mein Python script mein kya farq hota hai aur konsa better hai?
 * **A:** `os.environ['KEY_NAME']` ek dictionary lookup hai; agar key environment mein nahi mili toh yeh seedha `KeyError` throw karega aur program crash ho jayega. `os.getenv('KEY_NAME')` safe retrieval method hai; agar key nahi mili toh yeh gracefully `None` return karta hai. Production code mein graceful error handling ke liye `os.getenv` ya `os.environ.get()` prefer kiya jata hai.
-* **Q:** GitHub Secrets pipeline ko kaise secure karte hain?
-* **A:** Jab hum GitHub actions ki YAML pipeline likhte hain, toh repository settings > secrets mein values store karte hain. YAML run hote waqt `env: PASSWORD: ${{ secrets.MY_DB_PASS }}` bind kiya jata hai, jo OS environment variable ban jata hai docker container mein. Yeh logs mein bhi by default mask (`***`) ho jata hai taaki print karne par bhi leak na ho.
+* **Q:** GitHub Secrets [[HL::pipeline::HL]] ko kaise secure karte hain?
+* **A:** Jab hum GitHub actions ki YAML [[HL::pipeline::HL]] likhte hain, toh repository settings > secrets mein values store karte hain. YAML run hote waqt `env: PASSWORD: ${{ secrets.MY_DB_PASS }}` bind kiya jata hai, jo OS environment variable ban jata hai docker container mein. Yeh logs mein bhi by default mask (`***`) ho jata hai taaki print karne par bhi leak na ho.
 * **Q:** Secrets auto-rotation kya hota hai AWS Secrets Manager mein?
 * **A:** Enterprise security ka man-na hai ki password kitna bhi safe ho, use time-to-time change karna chahiye. Auto-rotation ek feature hai jahan AWS apne aap (jaise har 30 din mein) database se connect karke naya random password generate karke set kar deta hai, aur Secrets Manager mein value update kar deta hai. Application bina kisi downtime ya human intervention ke hamesha secure rehti hai.
 * **Q:** Agar `.env` file cloud/production par upload nahi karni, toh wahan env varibles kaise maintain hote hain?
-* **A:** Wahan container orchestration platforms (jaise Kubernetes ya Docker Compose) configuration handles use karte hain. Deployment pipeline vault ya manager services se values mangwati hain, aur seedha running container ke virtual OS mein environment variables banakar inject kar deti hain start ke time par.
+* **A:** Wahan container orchestration platforms (jaise Kubernetes ya Docker Compose) configuration handles use karte hain. Deployment [[HL::pipeline::HL]] vault ya manager services se values mangwati hain, aur seedha running container ke virtual OS mein environment variables banakar inject kar deti hain start ke time par.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Ghar ki chaabi door-mat par (hardcoded) nahi, bank locker (Secrets Manager/.env) mein rakho."
 
@@ -8695,7 +8695,7 @@ Is topic mein hum seekhenge ki kaise frontend aur backend teams ek "contract" si
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-Socho ek **Business Agreement** (contract) sign ho raha hai. Frontend team (Consumer) aur Backend team (Provider) ek paper par likh kar sign karte hain (jo actual mein ek JSON file hoti hai) ki frontend kya request bhejega aur backend kya response dega. Agar backend team achanak apna rule badal kar naya response dena chahe, toh pipeline (automated deployment system) contract check karegi aur code deploy hone se rok degi, taaki koi ek party achanak agreement na tode.
+Socho ek **Business Agreement** (contract) sign ho raha hai. Frontend team (Consumer) aur Backend team (Provider) ek paper par likh kar sign karte hain (jo actual mein ek JSON file hoti hai) ki frontend kya request bhejega aur backend kya response dega. Agar backend team achanak apna rule badal kar naya response dena chahe, toh [[HL::pipeline::HL]] (automated deployment system) contract check karegi aur code deploy hone se rok degi, taaki koi ek party achanak agreement na tode.
 
 #### 📖 3. Technical Definition
 
@@ -8707,7 +8707,7 @@ Socho ek **Business Agreement** (contract) sign ho raha hai. Frontend team (Cons
 * **Problem:** Microservices (chhote independent apps ka network) mein End-to-End (E2E) tests likhna bohot mushkil, slow aur flaky (kabhi pass, kabhi fail) hote hain. Agar backend team ne API ka response change kar diya (e.g., `userName` se `user_name` kar diya) toh schema mismatch (data structure galat hona) ki wajah se production mein app crash ho jati hai.
 * **Solution:** Pact framework contract testing enable karta hai jisse errors deploy hone se pehle "fail fast" (jaldi error pakad lena) approach se pakde jaate hain.
 * **What breaks if we don't use it?** E2E test environments hamesha toote rahenge, aur teams ek doosre ko blame karti rahengi ki "Mera code toh local pe chal raha tha."
-* **✅ Kab use karo (Use this when):** Jab 10+ microservices hon aur multiple teams independently deploy karna chahti hon. Jab E2E tests chalne mein ghanto lag rahe hon.
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Jab 10+ microservices hon aur multiple teams independently deploy karna chahti hon. Jab E2E tests chalne mein ghanto lag rahe hon.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab tumhara app ek single Monolith (ek hi bada app bina alag services ke) ho. Wahan simple unit tests aur integration tests kaafi hain — Pact use karna over-engineering hogi.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -8726,7 +8726,7 @@ project_root/
 1. **Consumer** (Frontend) ek test likhta hai expectations (ummeed) ke baare mein.
 2. Test run hota hai aur ek **JSON Contract File** generate hoti hai.
 3. Yeh file **Pact Broker** (ek central server jo contracts store karta hai) par upload hoti hai.
-4. **Provider** (Backend) apni CI/CD pipeline mein Pact Broker se yeh JSON download karta hai.
+4. **Provider** (Backend) apni CI/CD [[HL::pipeline::HL]] mein Pact Broker se yeh JSON download karta hai.
 5. Provider in interactions (request/response sets) ko apne code par run karke verify karta hai ki kya woh sahi response de raha hai ya nahi.
 
 #### 💻 7. Hands-On — Runnable Example
@@ -8766,14 +8766,14 @@ Chalo `pact-python` (Pact ka Python library) se ek basic Consumer test dekhte ha
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 5:** `Consumer('FrontendApp').has_pact_with(Provider('BackendAPI'))` — Yahan hum contract object banate hain. Agar yeh line nahi likhi toh framework ko pata nahi chalega contract kiske beech hai.
-* **Line 8-17:** Yeh poora block ek interaction define kar raha hai. `given()` state set karta hai, `with_request()` mock input deta hai, aur `will_respond_with()` mock output define karta hai. Yeh JSON contract file ka base banta hai.
+* [[HL::**Line 5:**::HL]] `Consumer('FrontendApp').has_pact_with(Provider('BackendAPI'))` — Yahan hum contract object banate hain. Agar yeh [[HL::line::HL]] nahi likhi toh framework ko pata nahi chalega contract kiske beech hai.
+* [[HL::**Line::HL]] 8-17:** Yeh poora block ek interaction define kar raha hai. `given()` state set karta hai, `with_request()` mock input deta hai, aur `will_respond_with()` mock output define karta hai. Yeh JSON contract file ka base banta hai.
 
 #### 🔒 8. Security-First Check
 
-Pact Broker publicly accessible nahi hona chahiye. Hamesha authentication tokens (secret keys) use karo jab CI/CD pipeline contract upload ya download kare, warna attackers internal API schemas dekh sakte hain.
+Pact Broker publicly accessible nahi hona chahiye. Hamesha authentication tokens (secret keys) [[HL::use karo::HL]] jab CI/CD [[HL::pipeline::HL]] contract upload ya download kare, warna attackers internal API schemas dekh sakte hain.
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -8827,8 +8827,8 @@ Spotify apni microservices architecture mein Pact use karta hai. Jab search team
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Frontend team ek "Pact" test likhti hai ki unhe backend se kya data chahiye. Yeh test run karke ek JSON contract generate karti hai aur Pact Broker par upload karti hai.
-* **Fixing/Iteration Phase:** Backend developer jab code push karta hai, uski pipeline us contract ko Pact Broker se download karti hai aur backend par chala kar verify karti hai ki API ne contract toda toh nahi.
+* [[HL::**Testing/Offline::HL]] Phase:** Frontend team ek "Pact" test likhti hai ki unhe backend se kya data chahiye. Yeh test run karke ek JSON contract generate karti hai aur Pact Broker par upload karti hai.
+* **Fixing/Iteration Phase:** Backend developer jab code push karta hai, uski [[HL::pipeline::HL]] us contract ko Pact Broker se download karti hai aur backend par chala kar verify karti hai ki API ne contract toda toh nahi.
 * **Live Production Phase:** Agar sab pass hai, toh dono confidently production mein deploy hote hain bina ek doosre ko break kiye.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
@@ -8853,7 +8853,7 @@ Spotify apni microservices architecture mein Pact use karta hai. Jab search team
 * **Q:** Microservices mein E2E testing ke bajaye CDC (Consumer-Driven Contracts) kyun prefer karte hain?
 * **A:** Kyunki E2E testing ke liye poora environment setup karna padta hai jo slow, fragile aur costly hota hai. CDC se har team independently apna code test kar leti hai sirf schema verify karke, jo extremely fast hota hai aur flakiness avoid karta hai.
 * **Q:** Pact Broker ka kya role hai architecture mein?
-* **A:** Pact Broker ek central repository hai jahan Consumer apne generated JSON contracts upload karta hai aur Provider apni CI pipeline mein wahan se contract download karke verify karta hai. Yeh version control aur contract sharing ko manage karta hai.
+* **A:** Pact Broker ek central repository hai jahan Consumer apne generated JSON contracts upload karta hai aur Provider apni CI [[HL::pipeline::HL]] mein wahan se contract download karke verify karta hai. Yeh version control aur contract sharing ko manage karta hai.
 * **Q:** Agar backend API ko ek naya field add karna hai response mein, toh kya contract break hoga?
 * **A:** Aam taur par nahi. Pact "robustelness principle" (Postel's Law) follow karta hai — agar Provider (backend) extra data bhejta hai jo Consumer (frontend) ne contract mein nahi maanga tha, toh test fail nahi hota. Lekin agar required field delete ya rename kiya, toh contract toot jayega.
 * **Q:** "Schema mismatch" ka real-world impact kya hai?
@@ -8861,7 +8861,7 @@ Spotify apni microservices architecture mein Pact use karta hai. Jab search team
 * **Q:** Pact mein Provider Verification fail hone par kya karna chahiye?
 * **A:** Provider code ko roll back karna chahiye ya Consumer team se baat karke contract update karna chahiye taaki naye rules ke mutabiq naya JSON contract upload ho sake.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Contract testing ek Business Agreement hai — Consumer likhta hai list, Provider karta hai verify, Broker rakhta hai copy."
 
@@ -8896,11 +8896,11 @@ Yeh bilkul ek **Flight Simulator** ki tarah hai. Jab pilots training lete hain, 
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Apne CI/CD pipelines mein third-party APIs (jaise Stripe/PayPal) ko hit karna expensive hota hai, rate limits ban kar sakti hain, aur agar unka server down hua toh tumhara test fail ho jayega bina tumhari galti ke.
+* **Problem:** Apne CI/CD [[HL::pipelines::HL]] mein third-party APIs (jaise Stripe/PayPal) ko hit karna expensive hota hai, rate limits ban kar sakti hain, aur agar unka server down hua toh tumhara test fail ho jayega bina tumhari galti ke.
 * **Solution:** WireMock ek local container mein chalao jo exactly wahi response dega jo Stripe deta hai, aur tumhe network timeout ya errors simulate karne ki azaadi dega.
 * **What breaks if we don't use it?** Tests slow ho jayenge, flaky honge, aur external APIs ka limit cross hone par billing charges lag sakte hain.
-* **✅ Kab use karo (Use this when):** Jab external dependencies (Google Maps API, Stripe, Twilio) ko call karne wala code test karna ho.
-* **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab tumhe apne hi database queries test karni hon. Wahan WireMock nahi, seedha test database ya In-Memory DB (jaise SQLite) use karo.
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Jab external dependencies (Google Maps API, Stripe, Twilio) ko call karne wala code test karna ho.
+* **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab tumhe apne hi database queries test karni hon. Wahan WireMock nahi, seedha test database ya In-Memory DB (jaise SQLite) [[HL::use karo.::HL]]
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -8971,22 +8971,22 @@ disable-banner:               false
 
 ##### 🔬 Command Explanation
 
-* **Line 3 (`-v $PWD/mappings...`):** Yeh line bohot important hai. `-v` flag volume mount karta hai. Tumhara local `mappings` folder seedha WireMock container ke andar chala jaata hai taaki jo bhi JSON tum update karo, WireMock usko bina restart kiye padh le.
+* [[HL::**Line::HL]] 3 (`-v $PWD/mappings...`):** Yeh [[HL::line::HL]] bohot important hai. `-v` flag volume mount karta hai. Tumhara local `mappings` folder seedha WireMock container ke andar chala jaata hai taaki jo bhi JSON tum update karo, WireMock usko bina restart kiye padh le.
 
 #### 🔒 8. Security-First Check
 
-Apne test environment aur WireMock stubs mein galti se bhi real API keys (jaise `sk_live_123...`) hardcode mat karna. Mocks mein hamesha fake keys (e.g., `sk_test_fake`) use karo.
+Apne test environment aur WireMock stubs mein galti se bhi real API keys (jaise `sk_live_123...`) hardcode mat karna. Mocks mein hamesha fake keys (e.g., `sk_test_fake`) [[HL::use karo.::HL]]
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Production pipelines mein Mountebank (ek aur mock framework) ya WireMock ko Docker Compose ke through poore system ke saath isolate karke chalate hain, jisse hazaron tests locally aur fast run hote hain, network bottlenecks ke bina.
+Production [[HL::pipelines::HL]] mein Mountebank (ek aur mock framework) ya WireMock ko Docker Compose ke through poore system ke saath isolate karke chalate hain, jisse hazaron tests locally aur fast run hote hain, network bottlenecks ke bina.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** CI/CD pipeline se real Stripe test environment ko hit karna.
+* **❌ Mistake:** CI/CD [[HL::pipeline::HL]] se real Stripe test environment ko hit karna.
 * **🤦 Why:** Lagta hai ki test environment free toh hai, real system test hoga.
 * **✅ The 'Pro' Way:** WireMock se mock karo.
-* **⚡ Consequences:** Agar 50 developers ek saath code push karein, toh Stripe tumhara IP block kar dega due to rate-limiting, aur sabki pipelines fail ho jayengi.
+* **⚡ Consequences:** Agar 50 developers ek saath code push karein, toh Stripe tumhara IP block kar dega due to rate-limiting, aur sabki [[HL::pipelines::HL]] fail ho jayengi.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -9024,7 +9024,7 @@ Amazon jaisi e-commerce companies checkout page test karte waqt real payment gat
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer Docker mein WireMock chalata hai. Payment API ko mock karta hai jisse fake 200 Success ya 500 Error return hota hai taaki test kar sake ki app un conditions mein kaise react karegi.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer Docker mein WireMock chalata hai. Payment API ko mock karta hai jisse fake 200 Success ya 500 Error return hota hai taaki test kar sake ki app un conditions mein kaise react karegi.
 * **Fixing/Iteration Phase:** Developer timeout stubs run karke dekhta hai ki usne apne code mein `timeout=5` argument lagaya hai ya nahi. Agar request hang ho rahi hai, toh woh apna code fix karta hai.
 * **Live Production Phase:** (N/A — WireMock ya koi bhi Mocking production server par kabhi deploy nahi hoti, yeh sirf local/CI environments tak seemit hai).
 
@@ -9049,11 +9049,11 @@ Amazon jaisi e-commerce companies checkout page test karte waqt real payment gat
 * **Q:** Kya Mocking se real bug chhup sakte hain?
 * **A:** Haan. Agar third-party API (jaise Stripe) ne actually apna response structure change kar diya, toh tumhara WireMock stub purana fake data hi deta rahega aur test pass hota rahega, jabki production fail ho jayegi. Isliye mocks ko time-to-time real API documentation ke saath update karna zaroori hai.
 * **Q:** Rate limits mock servers kaise solve karte hain?
-* **A:** CI/CD pipeline jab din mein 1000 baar chalti hai, toh real API block kar degi. WireMock local environment mein chalta hai (no external internet hop), isliye us par infinite requests free mein bheji jaa sakti hain.
+* **A:** CI/CD [[HL::pipeline::HL]] jab din mein 1000 baar chalti hai, toh real API block kar degi. WireMock local environment mein chalta hai (no external internet hop), isliye us par infinite requests free mein bheji jaa sakti hain.
 * **Q:** Delay simulation kyun zaroori hai?
 * **A:** System ki resilience test karne ke liye. Agar external API response aane mein 10 second lagaye, toh test karna zaroori hai ki humara app infinite hang na ho jaye, balki gracefully timeout error de.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "WireMock third-party APIs ka Flight Simulator hai — bina asli jahaz udaye, error handling ki practice karo."
 
@@ -9099,9 +9099,9 @@ Yeh bilkul ek **⭐"Nakli Samundar (Wave Pool)"** jaisa hai. Agar tumhe ek nayi 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * **Problem:** Jab tum AWS S3 (AWS ka storage service — files/images rakhne ke liye) ya DynamoDB (AWS ka NoSQL database) use karte ho, toh har test run mein API calls real AWS pe jaati hain. Isse Cloud costs (bill) badhta hai aur tests slow ho jaate hain. "Tests chalane ke liye AWS ka asli bill mat badhao."
-* **Solution:** Local laptop par LocalStack use karo. Tumhara app sochega ki woh AWS se baat kar raha hai, par actual mein woh local container se baat kar raha hoga.
-* **What breaks if we don't use it?** CI/CD pipeline mein agar internet down hua toh saare tests fail ho jayenge. Developer ka flow break hota hai kyunki cloud pe deploy karke test karne mein time lagta hai.
-* **✅ Kab use karo (Use this when):** Serverless testing aur Infrastructure integration test karne ke liye, jab tumhe multiple AWS services (S3, SQS Queue — messages ko line mein lagane ke liye) ko ek saath test karna ho.
+* **Solution:** Local laptop par LocalStack [[HL::use karo.::HL]] Tumhara app sochega ki woh AWS se baat kar raha hai, par actual mein woh local container se baat kar raha hoga.
+* **What breaks if we don't use it?** CI/CD [[HL::pipeline::HL]] mein agar internet down hua toh saare tests fail ho jayenge. Developer ka flow break hota hai kyunki cloud pe deploy karke test karne mein time lagta hai.
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Serverless testing aur Infrastructure integration test karne ke liye, jab tumhe multiple AWS services (S3, SQS Queue — messages ko [[HL::line::HL]] mein lagane ke liye) ko ek saath test karna ho.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab tumhe real AWS IAM (Identity and Access Management) policies ka deep security audit karna ho ya exact real-world latency measure karni ho — tab real AWS Dev/Test account hi use karna padega.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -9169,24 +9169,24 @@ Hum `docker-compose.yml` (multi-container run karne ki configuration file) aur P
 
 ```
 
-##### 🔬 Code Explanation (LINE-BY-LINE)
+##### 🔬 Code Explanation [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 6:** `endpoint_url='http://localhost:4566'` — Yeh line magic hai. Agar yeh nahi likhoge, toh `boto3` seedha asli `s3.amazonaws.com` par hit karega. Isey set karke hum traffic divert karte hain apne Docker container pe.
-* **Line 7-8:** LocalStack asli credentials check nahi karta, par `boto3` ko function karne ke liye *kuch* strings chahiye hoti hain, isliye hum `'test'` pass karte hain.
+* [[HL::**Line::HL]] 6:** `endpoint_url='http://localhost:4566'` — Yeh [[HL::line::HL]] magic hai. Agar yeh nahi likhoge, toh `boto3` seedha asli `s3.amazonaws.com` par hit karega. Isey set karke hum traffic divert karte hain apne Docker container pe.
+* [[HL::**Line::HL]] 7-8:** LocalStack asli credentials check nahi karta, par `boto3` ko function karne ke liye *kuch* strings chahiye hoti hain, isliye hum `'test'` pass karte hain.
 
 #### 🔒 8. Security-First Check
 
-Local tests mein humesha `test` aur `test` jaise dummy credentials use karo. Galti se bhi apne asli AWS credentials (`AWS_ACCESS_KEY_ID`, etc.) code mein hardcode mat karo. Agar woh Github par push ho gaye, toh attackers minute bhar mein tumhara account hack karke hazaron dollars ka bill bana denge (Crypto mining ke liye).
+Local tests mein humesha `test` aur `test` jaise dummy credentials [[HL::use karo.::HL]] Galti se bhi apne asli AWS credentials (`AWS_ACCESS_KEY_ID`, etc.) code mein hardcode mat karo. Agar woh Github par push ho gaye, toh attackers minute bhar mein tumhara account hack karke hazaron dollars ka bill bana denge (Crypto mining ke liye).
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Large teams mein har developer ka apna alag AWS environment setup karna bohot costly aur manage karne mein mushkil hota hai. LocalStack se har developer ke laptop pe isolated cloud environment ban jaata hai. CI/CD (Continuous Integration/Continuous Deployment) mein bhi parallel pipelines ek saath apne alag-alag LocalStack containers spin up kar sakti hain, bina kisi interference ke.
+Large teams mein har developer ka apna alag AWS environment setup karna bohot costly aur manage karne mein mushkil hota hai. LocalStack se har developer ke laptop pe isolated cloud environment ban jaata hai. CI/CD (Continuous Integration/Continuous Deployment) mein bhi parallel [[HL::pipelines::HL]] ek saath apne alag-alag LocalStack containers spin up kar sakti hain, bina kisi interference ke.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
 * **❌ Mistake:** Har developer ko test run karne ke liye ek shared real AWS Dev/Staging account dena.
 * **🤦 Why:** Teams sochti hain ki real AWS pe test karna hi "true" test hota hai.
-* **✅ The 'Pro' Way:** Day-to-day development aur unit/integration tests ke liye LocalStack use karo, aur sirf final deployment se pehle Pre-Production environment mein real AWS hit karo.
+* **✅ The 'Pro' Way:** Day-to-day development aur unit/integration tests ke liye LocalStack [[HL::use karo,::HL]] aur sirf final deployment se pehle Pre-Production environment mein real AWS hit karo.
 * **⚡ Consequences:** Agar shared dev account use kiya, toh Dev A S3 bucket mein kuch delete karega aur Dev B ka test fail ho jayega kyunki resource gaayab ho gaya (State clash).
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -9221,17 +9221,17 @@ Large teams mein har developer ka apna alag AWS environment setup karna bohot co
 | Feature | LocalStack | Real AWS Account |
 | --- | --- | --- |
 | Cost | Free (Cloud costs Reduction) | Pay-as-you-go (Bill aata hai) |
-| Internet Needed | ❌ Nahi (Fully offline) | ✅ Haan |
+| Internet Needed | ❌ Nahi (Fully [[HL::offline)::HL]] | ✅ Haan |
 | Speed / Latency | Extremely fast (localhost) | Network hops ki wajah se slight delay |
 | Behavior match | ~95% accurate (mocks) | 100% accurate (real thing) |
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Data Engineering teams jab ETL (Extract, Transform, Load) pipelines banati hain jo S3 bucket se files read karti hain aur processed data DynamoDB mein likhti hain, toh woh CI (GitHub Actions) mein LocalStack spin karti hain. Pipeline test data S3 mein dalti hai, script run karti hai, aur DynamoDB verify karti hai — sab kuch ek temporary isolated Docker container mein.
+Data Engineering teams jab ETL (Extract, Transform, Load) [[HL::pipelines::HL]] banati hain jo S3 bucket se files read karti hain aur processed data DynamoDB mein likhti hain, toh woh CI (GitHub Actions) mein LocalStack spin karti hain. [[HL::Pipeline::HL]] test data S3 mein dalti hai, script run karti hai, aur DynamoDB verify karti hai — sab kuch ek temporary isolated Docker container mein.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer apne `docker-compose.yml` mein WireMock aur MySQL ke saath 'LocalStack' bhi add karta hai. API jab file upload karti hai, toh woh asli AWS ki jagah LocalStack container ke andar mock S3 bucket mein jati hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer apne `docker-compose.yml` mein WireMock aur MySQL ke saath 'LocalStack' bhi add karta hai. API jab file upload karti hai, toh woh asli AWS ki jagah LocalStack container ke andar mock S3 bucket mein jati hai.
 * **Fixing/Iteration Phase:** Test script turant verify kar leti hai ki API ne LocalStack S3 bucket mein sahi file format push kiya ya nahi, bina internet ya AWS credentials ke. Agar galat upload hua, toh code fix kiya jata hai.
 * **Live Production Phase:** (N/A — Mocking/LocalStack production server par deploy nahi hota. Production mein hum asli `s3.amazonaws.com` aur real IAM roles use karte hain).
 
@@ -9264,7 +9264,7 @@ Data Engineering teams jab ETL (Extract, Transform, Load) pipelines banati hain 
 * **Q:** Serverless testing mein LocalStack kaise help karta hai?
 * **A:** Serverless architectures heavily AWS services (Lambda, API Gateway, S3) par rely karte hain. LocalStack in sabhi services ko ek container mein mock kar deta hai, jisse tum apni Lambda functions locally test kar sakte ho bina AWS par deploy kiye.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "LocalStack laptop ka apna chhota AWS hai — bill zero, speed hero."
 
@@ -9337,7 +9337,7 @@ GraphQL ek Buffet system hai — aap server ko ek plate (Query) pakdate hain aur
 * **Problem:** REST API mein ek simple user profile dikhane ke liye kai baar multiple endpoints (`/users/1`, `/users/1/posts`, `/users/1/followers`) call karne padte the (Under-fetching) ya phir ek hi call mein duniya bhar ka unnecessary data aa jata tha (Over-fetching).
 * **Solution:** GraphQL ek single endpoint (`/graphql`) deta hai. Aap ek hi call mein user, posts, aur followers ka data ek sath mangwa sakte hain.
 * **What breaks if we don't use it?** Mobile apps slow network par struggle karte hain kyunki REST APIs bohot heavy payloads (data size) bhejti hain jinki UI pe zaroorat nahi hoti.
-* **✅ Kab use karo (Use this when):** Jab mobile apps ka data usage optimize karna ho, ya jab frontend UI bohot complex ho aur usko multiple sources se data ek sath chahiye ho.
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Jab mobile apps ka data usage optimize karna ho, ya jab frontend UI bohot complex ho aur usko multiple sources se data ek sath chahiye ho.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab app bohot simple ho (like a basic CRUD blog). Wahan GraphQL ka setup overkill hai, simple REST better hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -9405,9 +9405,9 @@ GraphQL ek Buffet system hai — aap server ko ek plate (Query) pakdate hain aur
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 26:** `if "errors" in data:` — Yeh sabse critical test assertion hai. REST mein hum `response.status_code == 200` assert karte the. GraphQL mein server hamesha `HTTP 200 OK` bhejta hai (chahe backend phat jaye). Isliye actual error `"errors"` key (array format) ke andar check karni padti hai.
+* [[HL::**Line::HL]] 26:** `if "errors" in data:` — Yeh sabse critical test assertion hai. REST mein hum `response.status_code == 200` assert karte the. GraphQL mein server hamesha `HTTP 200 OK` bhejta hai (chahe backend phat jaye). Isliye actual error `"errors"` key (array format) ke andar check karni padti hai.
 
 #### 🔒 8. Security-First Check
 
@@ -9466,7 +9466,7 @@ Facebook (jisne GraphQL banaya tha) iska best example hai. Facebook ke newsfeed 
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer `requests.post()` se `/graphql` par query string bhejta hai. Status code assert karne ke bajaye, woh assert karta hai ki `response.json()` mein "errors" key `None` ho.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer `requests.post()` se `/graphql` par query string bhejta hai. Status code assert karne ke bajaye, woh assert karta hai ki `response.json()` mein "errors" key `None` ho.
 * **Fixing/Iteration Phase:** Agar array mein `"errors"` aate hain, toh QA check karta hai ki kya query syntax galat tha ya variables properly pass nahi hue the.
 * **Live Production Phase:** Mobile apps bandwidth bachane ke liye GraphQL use karti hain kyunki unhe sirf wahi data milta hai jo unhone manga hota hai, internet slow hone par bhi app smoothly chalti hai.
 
@@ -9493,7 +9493,7 @@ Server -> Only returns Name and Post Titles in 1 Request.
 * **Q:** Query aur Mutation mein kya antar hai?
 * **A:** GraphQL mein 'Query' ka use data read karne (fetch karne) ke liye hota hai, jo REST ke GET request jaisa hai. 'Mutation' ka use data modify karne (create, update, delete) ke liye hota hai, jo REST ke POST, PUT, aur DELETE operations ke equivalent hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 ⭐ "REST API thaali hai, GraphQL buffet hai — par yaad rakhna, GraphQL hamesha 200 OK ka sabse bada dhokha deta hai!"
 
@@ -9529,9 +9529,9 @@ Kafka/RabbitMQ ek Post Office ya Restaurant Token System ki tarah hai. Aap McDon
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * **Problem:** Agar aapne Swiggy par order kiya aur REST API backend restaurant system ko synchronously call karti rahi, aur restaurant ka server down hai, toh aapki app hang ho jayegi aur time-out aa jayega (Blocking I/O).
-* **Solution:** Asynchronous Messaging (Kafka/RabbitMQ) order ko ek queue (line) mein daal deta hai (fire-and-forget). App turant free ho jati hai. Jab restaurant online aayega, usko message mil jayega. Real-time location dikhane ke liye WebSockets use karte hain taaki data continuous aata rahe.
+* **Solution:** Asynchronous Messaging (Kafka/RabbitMQ) order ko ek queue [[HL::(line)::HL]] mein daal deta hai (fire-and-forget). App turant free ho jati hai. Jab restaurant [[HL::online::HL]] aayega, usko message mil jayega. Real-time location dikhane ke liye WebSockets use karte hain taaki data continuous aata rahe.
 * **What breaks if we don't use it?** High traffic wale applications (jaise Uber ya WhatsApp) normal REST APIs se completely crash ho jayenge kyunki connection hold karke rakhna memory intensive hota hai.
-* **✅ Kab use karo (Use this when):** Jab real-time chat, live tracking, ya background video processing jaise heavy jobs ko handle karna ho.
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Jab real-time chat, live tracking, ya background video processing jaise heavy jobs ko handle karna ho.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Jab client ko turant (instant) success/failure status chahiye usi waqt. (e.g., Payment gateway pe transaction success status — yahan REST/synchronous flow zaroori hai).
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -9593,10 +9593,10 @@ Yahan hum asyncio (Python library — concurrent code likhne ke liye) ka use kar
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 8:** `async with websockets.connect(uri) as ws:` — REST API (requests) har call ke baad connection close kar deti hai. WebSockets `async with` ka use karke ek tunnel open rakhte hain. Data dono direction mein stream ho sakta hai (full-duplex) jab tak hum connection manually close na karein.
-* **Line 16:** `await ws.recv()` — Yeh line execution ko tab tak rokti hai jab tak naya message na aaye, lekin baaki program ko block nahi karti (Non-blocking). Yahi asynchronous execution ki power hai.
+* [[HL::**Line::HL]] 8:** `async with websockets.connect(uri) as ws:` — REST API (requests) har call ke baad connection close kar deti hai. WebSockets `async with` ka use karke ek tunnel open rakhte hain. Data dono direction mein stream ho sakta hai (full-duplex) jab tak hum connection manually close na karein.
+* [[HL::**Line::HL]] 16:** `await ws.recv()` — Yeh [[HL::line::HL]] execution ko tab tak rokti hai jab tak naya message na aaye, lekin baaki program ko block nahi karti (Non-blocking). Yahi asynchronous execution ki power hai.
 
 #### 🔒 8. Security-First Check
 
@@ -9649,7 +9649,7 @@ Uber ki live car tracking. Jab driver phone mein move karta hai, app lagatar RES
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer ek test script likhta hai jo API par POST request bhejta hai. Test turant verify nahi karta, balki `kafka-python` consumer ban kar wait karta hai ki DB update hone ke baad "UserCreated" ka event broker mein aaya ya nahi.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer ek test script likhta hai jo API par POST request bhejta hai. Test turant verify nahi karta, balki `kafka-python` consumer ban kar wait karta hai ki DB update hone ke baad "UserCreated" ka event broker mein aaya ya nahi.
 * **Fixing/Iteration Phase:** Agar asynchronous process fail hoti hai, toh QA check karta hai ki failed message automatically retry hua ya nahi, aur max retries ke baad DLQ (Dead Letter Queue) mein gaya ya permanent lost ho gaya.
 * **Live Production Phase:** Chat applications, Uber live tracking, aur Swiggy order updates isi fire-and-forget event-driven architecture par smoothly aur independently run hote hain.
 
@@ -9673,7 +9673,7 @@ Uber ki live car tracking. Jab driver phone mein move karta hai, app lagatar RES
 * **Q:** WebSockets (ws://) aur HTTP mein kya basic difference hai?
 * **A:** HTTP request-response model par kaam karta hai — client humesha pehle request bhejta hai tabhi server reply deta hai, aur phir connection close ho jata hai. WebSocket ek open pipe hai jahan connection open rehta hai, aur server bina client ki nayi request ke bhi khud-b-khud (push) real-time data bhej sakta hai (full-duplex).
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 ⭐ "REST turant jawaab ka Phone Call hai, Kafka fursat se process hone wala Post Office hai, aur WebSockets continuous chalta Walkie-Talkie hai!"
 
@@ -9714,7 +9714,7 @@ Uber ki live car tracking. Jab driver phone mein move karta hai, app lagatar RES
 #### 🐣 2. Simple Analogy (Hinglish)
 
 ⭐ **"Ticket Counter"** aur **"100 calls ek saath"** iski perfect analogy hai.
-Socho movie ki sirf 1 seat bachi hai. `requests` library ka matlab hai ek single line mein lag kar ticket lena. Ek banda poochega, usko seat mil jayegi, tab tak dusra line mein wait karega (koi gadbad nahi hogi).
+Socho movie ki sirf 1 seat bachi hai. `requests` library ka matlab hai ek single [[HL::line::HL]] mein lag kar ticket lena. Ek banda poochega, usko seat mil jayegi, tab tak dusra [[HL::line::HL]] mein wait karega (koi gadbad nahi hogi).
 Par `httpx` + `asyncio` ka matlab hai 100 logon ko ek hi millisecond mein bheed banakar counter par bhej dena. Ab counter wala (API/Database) confuse ho sakta hai aur galti se 2 logon ko wahi 1 seat de sakta hai. Yahi gadbad (Race Condition) hume testing mein pakadni hoti hai.
 
 #### 📖 3. Technical Definition
@@ -9727,7 +9727,7 @@ Par `httpx` + `asyncio` ka matlab hai 100 logon ko ek hi millisecond mein bheed 
 * **Problem:** Normal `requests library` Blocking I/O (ek kaam poora hone tak agle kaam ko rokna) par kaam karti hai. Agar aap loop lagakar 100 requests bhejoge, toh pehli request jayegi, uska response aayega, tab doosri jayegi. Isse API ki concurrency test hi nahi hoti.
 * **Solution:** `httpx` library (Python library — modern async HTTP client, requests jaisi API but faster) aur `asyncio` mil kar concurrent execution (ek hi waqt mein ek saath multiple kaam karna) allow karte hain (Non-blocking).
 * **What breaks if we don't use it?** Race Conditions (jab do processes ek hi time pe same data change karne ki koshish karein aur logic toot jaye). Agar backend properly secured nahi hai, toh do users ek hi email se 2 account bana lenge agar request exact same time pe aayi.
-* **✅ Kab use karo (Use this when):** Load testing, parallel API testing, aur race conditions verify karne ke liye. Jab check karna ho ki API simultaneous DB writes kaise handle karti hai.
+* **✅ Kab [[HL::use karo::HL]] (Use this when):** Load testing, parallel API testing, aur race conditions verify karne ke liye. Jab check karna ho ki API simultaneous DB writes kaise handle karti hai.
 * **❌ Kab mat karo / Alternative prefer karo (Avoid when):** Simple functional test jahan sirf ek payload bhej kar 200 OK check karna hai. Wahan `requests` simple aur sufficient hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -9798,10 +9798,10 @@ Total Successful Accounts Created: 1
 
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### 🔬 Code Explanation Rule [[HL::(LINE-BY-LINE)::HL]]
 
-* **Line 7:** `await client.post(...)` — Yeh sabse zaroori word hai (`await`). Agar ye nahi lagaya toh function response ka wait hi nahi karega aur turant aage badh jayega bina data liye (coroutine object return ho jayega). Await ensure karta hai ki flow yahan pause ho, par CPU free rahe dusri requests bhejne ke liye.
-* **Line 21:** `await asyncio.gather(*tasks)` — `gather` function saare pending `make_request` tasks ko Event Loop mein daal kar parallel execute karwata hai. `*tasks` list ko unpack (khol kar) arguments mein convert karta hai. Jo output list aayegi (results), uska order wahi hoga jis order mein tasks bheje the.
+* [[HL::**Line::HL]] 7:** `await client.post(...)` — Yeh sabse zaroori word hai (`await`). Agar ye nahi lagaya toh function response ka wait hi nahi karega aur turant aage badh jayega bina data liye (coroutine object return ho jayega). Await ensure karta hai ki flow yahan pause ho, par CPU free rahe dusri requests bhejne ke liye.
+* [[HL::**Line::HL]] 21:** `await asyncio.gather(*tasks)` — `gather` function saare pending `make_request` tasks ko Event Loop mein daal kar parallel execute karwata hai. `*tasks` list ko unpack (khol kar) arguments mein convert karta hai. Jo output list aayegi (results), uska order wahi hoga jis order mein tasks bheje the.
 
 #### 🔒 8. Security-First Check
 
@@ -9850,8 +9850,8 @@ Production mein Concurrency APIs ke liye bohot badi headache hai. Jab aap parall
 | Feature | `requests` (Synchronous) | `httpx` + `asyncio` (Asynchronous) |
 | --- | --- | --- |
 | **Execution** | Blocking I/O (One by one) | Non-blocking I/O (Parallel) |
-| **Speed (100 calls)** | Very Slow (Lagatar line by line) | Ultra Fast (Ek sath) |
-| **Analogy** | Single Ticket Counter Line | ⭐ 100 calls ek saath at the counter |
+| **Speed (100 calls)** | Very Slow (Lagatar [[HL::line::HL]] by [[HL::line)::HL]] | Ultra Fast (Ek sath) |
+| **Analogy** | Single Ticket Counter [[HL::Line::HL]] | ⭐ 100 calls ek saath at the counter |
 | **Best For** | Simple functional automation | Race Condition / Load Testing |
 
 #### 🌍 14. Real-World Use Case (Production Application)
@@ -9860,7 +9860,7 @@ IRCTC Tatkal Booking. Subah 10:00:00 baje lakhon users ek hi exact millisecond p
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer apni test script mein `httpx` aur `asyncio.gather` ka use karke 50 concurrent (parallel) POST requests same email ID ya same product ID (like remaining stock = 1) pe bhejta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer apni test script mein `httpx` aur `asyncio.gather` ka use karke 50 concurrent (parallel) POST requests same email ID ya same product ID (like remaining stock = 1) pe bhejta hai.
 * **Fixing/Iteration Phase:** Test script verify karti hai. Agar array output mein ek 201 aur baki 49 requests ko properly `409 Conflict` ya `400 Bad Request` mila hai, toh test PASS hai. Agar DB mein 2 accounts ban gaye (Race Condition bug detected), toh developer backend mein DB locking sahi karta hai.
 * **Live Production Phase:** High-scale apps like Swiggy Flash Sales aur BookMyShow movie bookings inn tests ke baad hi confidently massive concurrent traffic without data loss/corruption handle kar paati hain.
 
@@ -9893,9 +9893,9 @@ Done
 * **Q:** `asyncio.gather()` ka kya kaam hota hai aapki load testing script mein?
 * **A:** `asyncio.gather` ek function hai jo ek list of awaitable objects (tasks/requests) accept karta hai aur un sabko concurrently (ek sath) background mein execute karta hai. Jab saari requests poori ho jati hain, tab yeh un sabke results ko ek simple list banakar return karta hai jise hum verify kar sakte hain.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
-⭐ "requests library ek line mein lagwata hai, par `httpx` poori bheed ek saath counter pe bhejta hai — bheed manage hui toh API pass!"
+⭐ "requests library ek [[HL::line::HL]] mein lagwata hai, par `httpx` poori bheed ek saath counter pe bhejta hai — bheed manage hui toh API pass!"
 
 #### 🔑 19. Keywords Coverage Verification
 
@@ -9973,7 +9973,7 @@ Socho tum ek car ki safety test kar rahe ho. Ek tarika hai ki car ko sirf ek baa
 * **Problem:** Normal tests mein hum 2-3 hardcoded data use karte hain (jaise `test@gmail.com`). Yeh "flaky" (jo kabhi pass aur kabhi fail hote hain bina code change ke) bugs aur hidden edge cases ko miss kar dete hain.
 * **Solution:** Dynamic data generation se hum ek hi test ko hundreds of unexpected variations par run kar sakte hain.
 * **What breaks if we don't use it?** Production mein jab user koi ajeeb sa input (jaise naam mein emoji ya negative age) daalega, toh API crash ho jayegi kyunki aapne sirf "John" daal kar test kiya tha.
-* **✅ Kab use karo:** Jab API complex calculations kar rahi ho, data validation (emails, phone numbers) strict ho, ya limit testing (system ki boundary check karna) karni ho.
+* **✅ Kab [[HL::use karo:**::HL]] Jab API complex calculations kar rahi ho, data validation (emails, phone numbers) strict ho, ya limit testing (system ki boundary check karna) karni ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab test sirf simple UI click ya static text check karna ho. Wahan simple assert kaafi hai, property-based testing overkill (bina zaroorat ka complex) hogi.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -10021,7 +10021,7 @@ Python ki `hypothesis` (property-based testing library) use karke email validati
 
 **↓ Detailed Explanation (Complex concepts):**
 
-* **Line 1 & 5 — `st.emails()`:** Yeh Hypothesis ki strategy hai. Yeh ek test mein 10 hardcoded email likhne se acha hai, Hypothesis ko bolo ki 100 random valid aur invalid formats (jaise 'a@b.co', 'user.name+tag@example.com') fire kare.
+* [[HL::**Line::HL]] 1 & 5 — `st.emails()`:** Yeh Hypothesis ki strategy hai. Yeh ek test mein 10 hardcoded email likhne se acha hai, Hypothesis ko bolo ki 100 random valid aur invalid formats (jaise 'a@b.co', 'user.name+tag@example.com') fire kare.
 
 #### 🔒 8. Security-First Check
 
@@ -10029,13 +10029,13 @@ Fuzzing (random data injection) security ke liye best hai. Yeh uncover karta hai
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Limit testing mein yeh best hai. Industry mein jab microservices deploy hoti hain, toh property-based tests CI/CD (Continuous Integration/Continuous Deployment — code push hote hi auto-test) pipeline mein run hote hain taaki developer ke commit karne se pehle hi hidden edge cases pakde jayein.
+Limit testing mein yeh best hai. Industry mein jab microservices deploy hoti hain, toh property-based tests CI/CD (Continuous Integration/Continuous Deployment — code push hote hi auto-test) [[HL::pipeline::HL]] mein run hote hain taaki developer ke commit karne se pehle hi hidden edge cases pakde jayein.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
 * **❌ Mistake:** 10 alag alag hardcoded data variables banana (`email1="a@b.com"`, `email2="test@test.com"`).
 * **🤦 Why:** Isse code lamba hota hai, aur tum wahi data likhte ho jo tumhare dimaag mein aata hai (human bias).
-* **✅ The 'Pro' Way:** `pip install hypothesis` karo aur `st.text()` ya `st.integers()` strategies use karo.
+* **✅ The 'Pro' Way:** `pip install hypothesis` karo aur `st.text()` ya `st.integers()` strategies [[HL::use karo.::HL]]
 * **⚡ Consequences:** Agar hardcoded data use kiya, toh production mein koi ajeeb Unicode character ya weird format aate hi system crash ho jayega aur tumhe pata bhi nahi chalega.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -10079,7 +10079,7 @@ Stripe (payment gateway) API jab credit card validation test karti hai, toh woh 
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer apne test file mein `@given(st.emails())` lagata hai aur commit karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer apne test file mein `@given(st.emails())` lagata hai aur commit karta hai.
 * **Fixing/Iteration Phase:** Pytest automatically test ko 100 baar alag-alag ajeeb (but valid) emails bhej kar API ki robust limit check karta hai. Agar API phat ti hai (e.g. email character limit cross), dev fix karta hai.
 * **Live Production Phase:** Jab real users ajeeb formats mein data daalte hain, API handle kar leti hai kyunki test phase mein uski practice already ho chuki hai.
 
@@ -10104,7 +10104,7 @@ Stripe (payment gateway) API jab credit card validation test karti hai, toh woh 
 * **Q:** Fuzzing aur Property-based testing kaise related hain?
 * **A:** Fuzzing generally totally random, garbage data system mein inject karta hai (security focus). Property-based testing ek "smart/structured fuzzing" hai jahan hum data type aur constraints (jaise `st.integers()`) control karte hain logical edge cases dhundhne ke liye.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 ⭐ "Ek test mein 10 hardcoded email likhne se acha hai, Hypothesis ko bolo ki 100 random valid aur invalid formats fire kare."
 
@@ -10141,7 +10141,7 @@ Log puchte hain, "Kya AI QA ki job kha jayega?" Isko ek Iron Man ke Exoskeleton 
 * **Problem:** Ek badi API response aati hai (jaise 50 fields ka JSON). Uske liye Pytest validation models (Pydantic schemas) likhne mein 2 ghante ka boring boilerplate (repetitive code jo likhna padta hai) type karna padta hai.
 * **Solution:** AI tools (LLMs) ek click mein us JSON ko perfect code validation schema mein convert kar dete hain. Traceback (error ki lambi history report) samajhne mein AI instantly Root Cause bata deta hai.
 * **What breaks if we don't use it?** Aap manually code likhne mein slow rahoge aur market mein un QA engineers se peeche chhut jaoge jo AI se apna output 10x badha chuke hain.
-* **✅ Kab use karo:** Jab naye API specs (Swagger/OpenAPI docs) se test cases generate karne hon, lamba JSON to Model conversion karna ho, ya complex error tracebacks (Root Cause Analysis - RCA) samajhna ho.
+* **✅ Kab [[HL::use karo:**::HL]] Jab naye API specs (Swagger/OpenAPI docs) se test cases generate karne hon, lamba JSON to Model conversion karna ho, ya complex error tracebacks (Root Cause Analysis - RCA) samajhna ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab company ka highly secure, sensitive, proprietary (private) business logic ho (kabhi public ChatGPT par paste mat karo).
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -10149,7 +10149,7 @@ Log puchte hain, "Kya AI QA ki job kha jayega?" Isko ek Iron Man ke Exoskeleton 
 ```text
 # Aap ChatGPT/Claude ke UI mein prompt daalenge:
 Prompt: "Convert this JSON response into Pydantic BaseModel for Pytest validation."
-[AI generates 50 lines of perfect Python code]
+[AI generates 50 [[HL::lines::HL]] of perfect Python code]
 # Aap VS Code/Cursor mein paste karenge. Done.
 
 ```
@@ -10199,11 +10199,11 @@ Validation failed successfully!
 
 **↓ Detailed Explanation:**
 
-* **Line 1 — `Pydantic`:** Yeh Python ki sabse popular library hai jo classes aur type hints use karke data validate karti hai. AI ne automatically samajh liya ki `"email"` string sirf string nahi, ek `EmailStr` honi chahiye. Yeh human typing se fast aur error-free tha.
+* [[HL::**Line::HL]] 1 — `Pydantic`:** Yeh Python ki sabse popular library hai jo classes aur type hints use karke data validate karti hai. AI ne automatically samajh liya ki `"email"` string sirf string nahi, ek `EmailStr` honi chahiye. Yeh human typing se fast aur error-free tha.
 
 #### 🔒 8. Security-First Check
 
-SABSE BADA DANGER: Kabhi bhi apni company ka live customer data, private API keys, ya proprietary source code public LLMs (jaise ChatGPT free version) mein paste mat karna. Yeh data leakage hai. Hamesha mock data (fake data) ya GitHub Copilot (enterprise tier) use karo jo secure data agreements ke saath aata hai.
+SABSE BADA DANGER: Kabhi bhi apni company ka live customer data, private API keys, ya proprietary source code public LLMs (jaise ChatGPT free version) mein paste mat karna. Yeh data leakage hai. Hamesha mock data (fake data) ya GitHub Copilot (enterprise tier) [[HL::use karo::HL]] jo secure data agreements ke saath aata hai.
 
 #### 🏗️ 9. Scalability & Industry Context
 
@@ -10213,7 +10213,7 @@ Industry mein modern SDETs GitHub Copilot apne IDE mein use karte hain. Jab woh 
 
 * **❌ Mistake:** AI ka diya hua code bina check kiye blindly production test suite mein push kar dena.
 * **🤦 Why:** AI hallucinate kar sakta hai aur aisi assertions likh sakta hai jo hamesha "Pass" dikhayengi chahe code phata ho (False Positives).
-* **✅ The 'Pro' Way:** ⭐ "AI ek smart intern hai, aap uske manager ho." generated code ko line-by-line verify karo.
+* **✅ The 'Pro' Way:** ⭐ "AI ek smart intern hai, aap uske manager ho." generated code ko [[HL::line-by-line::HL]] verify karo.
 * **⚡ Consequences:** Agar validation hi galat hai, toh production bug live user tak pahunch jayega, aur logs mein dikhega "All tests passed", jo debugging ko nightmare bana dega.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -10247,8 +10247,8 @@ Industry mein modern SDETs GitHub Copilot apne IDE mein use karte hain. Jab woh 
 | Task | Manual Way | AI-Assisted Way |
 | --- | --- | --- |
 | **JSON to Model** | 2 Ghante typing | 2 Second mein generation |
-| **RCA (Root Cause)** | Lambe Traceback padhna | AI summary "Line 43 index out of bounds" |
-| **Logic** | 100% human thought | AI gives baseline, human verifies |
+| **RCA (Root Cause)** | Lambe Traceback padhna | AI summary [[HL::"Line::HL]] 43 index out of bounds" |
+| **Logic** | 100% human thought | AI gives [[HL::baseline,::HL]] human verifies |
 
 #### 🌍 14. Real-World Use Case
 
@@ -10256,7 +10256,7 @@ Netflix ke developers apne complex tracebacks (lambe log files jab error aati ha
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer API ka lamba JSON response copy karke ChatGPT ko deta hai: "Convert this JSON into a Pydantic schema for Pytest". 2 ghante ka boilerplate code 2 second mein AI likhta hai. Dev verify karke test framework mein add kar leta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer API ka lamba JSON response copy karke ChatGPT ko deta hai: "Convert this JSON into a Pydantic schema for Pytest". 2 ghante ka boilerplate code 2 second mein AI likhta hai. Dev verify karke test framework mein add kar leta hai.
 * **Fixing/Iteration Phase:** Agar CI/CD mein error aati hai, dev traceback (error logs) Copilot mein pass karke RCA puchta hai aur quickly bug fix kar leta hai.
 * **Live Production Phase:** AI se generate kiye gaye high-quality edge cases ensure karte hain ki API robust ho, jisse users ko seamless experience mile.
 
@@ -10285,11 +10285,11 @@ Netflix ke developers apne complex tracebacks (lambe log files jab error aati ha
 * **Q:** Why do we say "AI is an intern, you are the manager"?
 * **A:** Kyunki AI models hallucinate karte hain aur galat code likh sakte hain jo superficially sahi lagta hai. Ek intern code quickly type toh kar sakta hai, par logic accuracy, negative edge cases, aur system impact ki deeper understanding (validation) human QA (manager) ko hi karni hoti hai.
 * **Q:** What is Root Cause Analysis (RCA) using AI?
-* **A:** Jab Pytest ek lamba, complex traceback error throw karta hai, us poore log ko padhna time-consuming hota hai. AI ko woh traceback feed karne par, woh instantly exact issue (Root Cause) summarize kar deta hai (e.g. "Null reference in line 24").
+* **A:** Jab Pytest ek lamba, complex traceback error throw karta hai, us poore log ko padhna time-consuming hota hai. AI ko woh traceback feed karne par, woh instantly exact issue (Root Cause) summarize kar deta hai (e.g. "Null reference in [[HL::line::HL]] 24").
 * **Q:** What role does Prompt Engineering play in SDET?
 * **A:** Prompt Engineering determines the quality of code generated. Ek generic prompt bad code dega, jabki ek detailed prompt (giving role, libraries to use, exact JSON format, and constraints) ek production-ready robust code generate karega.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 ⭐ "AI Exoskeleton ki tarah hai — yeh code likhne ka gaddha-mazdoori (boilerplate) seconds mein karega, par QA manager ban kar logic verify karna tumhara kaam hai."
 
@@ -10344,7 +10344,7 @@ Netflix ke developers apne complex tracebacks (lambe log files jab error aati ha
 * **Problem:** Monolithic (ek single bada server) apps mein error ek hi jagah aati thi. Lekin Microservices (app ko chhote independent servers mein todna) mein ek request 5 alag services (Auth -> Order -> Payment -> Inventory) se guzarti hai. Agar Payment service phat gayi, toh user ko bas "500 Server Error" dikhega, aur developer ko samajh nahi aayega ki kaunsi service fail hui (ise blind spot kehte hain).
 * **Solution:** Header injection (request ke header mein data daalna) ke through hum `X-Correlation-ID` ya `X-Request-ID` bhejte hain. Saari services isi ID ke saath apna error log karti hain.
 * **What breaks if we don't use it?** ⭐ "Microservices mein bina Correlation ID ke bug dhoondhna andhere kamre mein kaali billi dhoondhne jaisa hai." Tum hazaron log files padhte rahoge par error ka source nahi milega.
-* **✅ Kab use karo:** Jab system distributed ho (backend alag alag APIs mein divided ho) aur tum Testing in Production (live environment mein safe testing) kar rahe ho taaki traceability (track karne ki kshamta) bani rahe.
+* **✅ Kab [[HL::use karo:**::HL]] Jab system distributed ho (backend alag alag APIs mein divided ho) aur tum Testing in Production (live environment mein safe testing) kar rahe ho taaki traceability (track karne ki kshamta) bani rahe.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab tumhara backend sirf ek chhota single server (monolith) ho — wahan plain terminal logs kaafi hote hain, distributed tracing system setup karna overkill hoga.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -10411,7 +10411,7 @@ Tracking Request with ID: a1b2c3d4-e5f6-4a1b-8c9d-1234567890ab
 
 **↓ Detailed Explanation (Complex concepts):**
 
-* **Line 6 & 10 — `uuid4()` & `X-Correlation-ID`:** Agar hum hardcoded ID bhejte, toh purani testing logs aur nayi logs mix ho jaati. `uuid.uuid4()` guarantee karta hai ki har test run ki ID bilkul unique hogi. `X-Correlation-ID` (kabhi kabhi `X-Request-ID` bhi bolte hain) standard HTTP header convention hai custom data bhejne ke liye.
+* [[HL::**Line::HL]] 6 & 10 — `uuid4()` & `X-Correlation-ID`:** Agar hum hardcoded ID bhejte, toh purani testing logs aur nayi logs mix ho jaati. `uuid.uuid4()` guarantee karta hai ki har test run ki ID bilkul unique hogi. `X-Correlation-ID` (kabhi kabhi `X-Request-ID` bhi bolte hain) standard HTTP header convention hai custom data bhejne ke liye.
 
 #### 🔒 8. Security-First Check
 
@@ -10449,7 +10449,7 @@ Industry mein Centralized Logging platforms use hote hain taaki millions of logs
 
 * **`Logs not found for Correlation ID in Datadog/ELK`**
 * **Root Cause:** Ya toh log sync hone mein delay hai, ya header name mismatch hai (e.g., tumne `X-Request-ID` bheja aur backend `X-Correlation-ID` dhundh raha hai).
-* **Fix:** Backend code check karo ki woh kis exact header string par parse kar raha hai aur Pytest mein same header use karo.
+* **Fix:** Backend code check karo ki woh kis exact header string par parse kar raha hai aur Pytest mein same header [[HL::use karo.::HL]]
 
 
 * **`Tracing chain broken (half logs show ID, half don't)`**
@@ -10472,7 +10472,7 @@ Uber mein jab tum "Book Cab" click karte ho, toh piche 50+ microservices chalti 
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Pytest script API request bhejte waqt header mein ek unique `X-Correlation-ID` generate karke bhejti hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Pytest script API request bhejte waqt header mein ek unique `X-Correlation-ID` generate karke bhejti hai.
 * **Fixing/Iteration Phase:** Agar test fail hota hai (500 Error server se aaya), toh QA Datadog/Splunk kholta hai, wahi UUID search karta hai, aur instantly pata chal jata hai ki 5 microservices mein se kis service ki wajah se API phati (kaali billi mil gayi). Developer ko exact service ka log report hota hai.
 * **Live Production Phase:** Same mechanism live users ke liye chalta hai. Agar kisi user ki request fail ho, frontend ek Trace ID dikhata hai "Contact Support with this ID", jisse support team exactly check kar sakti hai kya hua.
 
@@ -10504,7 +10504,7 @@ Uber mein jab tum "Book Cab" click karte ho, toh piche 50+ microservices chalti 
 * **Q:** "Testing in Production" ka matlab kya hai? Isme tracing ka kya role hai?
 * **A:** Testing in Production matlab live system par users ke saath safe dummy data ya hidden features check karna. Tracing isme critical hai kyunki agar production test phata, toh hum users ko disrupt kiye bina, specific trace ID ke base par apne test user ka exact log isolate karke issue dhundh sakte hain bina kisi ko disturb kiye.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 ⭐ "Microservices mein bina Correlation ID ke bug dhoondhna andhere kamre mein kaali billi dhoondhne jaisa hai — AWB Tracking Number zaruri hai!"
 
@@ -10540,7 +10540,7 @@ Uber mein jab tum "Book Cab" click karte ho, toh piche 50+ microservices chalti 
 * **Problem:** ⭐ Apni company ka private API logic ya database schema public ChatGPT par paste karna sabse bada security risk hai (ise Prompt Leakage ya Data Leakage kehte hain). Code public hone se hack ho sakta hai.
 * **Solution:** Local AI (jo bina internet tumhare PC pe chalta hai) aur MCP Server setup karo. AI ko bolo "test banao", MCP server khud DB schema uthayega, AI usko padhega, aur test de dega.
 * **What breaks if we don't use it?** Agar tumne confidential schema cloud AI pe paste kiya, toh tumhari company ka proprietary data AI ke server pe train ho jayega aur competitor (ya hacker) usse extract kar sakta hai.
-* **✅ Kab use karo:** Jab strict Data Privacy compliance ho (Banks, Healthcare), Autonomous Testing (AI Agent khud E2E flow likhe) setup karna ho, ya Context-Aware (jo current DB state ko samajhta ho) code chahiye ho.
+* **✅ Kab [[HL::use karo:**::HL]] Jab strict Data Privacy compliance ho (Banks, Healthcare), Autonomous Testing (AI Agent khud E2E flow likhe) setup karna ho, ya Context-Aware (jo current DB state ko samajhta ho) code chahiye ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab public, non-sensitive open-source project pe kaam kar rahe ho, wahan seedha Cloud AI use karna faster aur zyada intelligent result dega.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -10640,7 +10640,7 @@ Traditional QA mein test E2E flow aur DB validation likhne mein aadha din lagta 
 
 * **❌ Mistake:** Apna poora `schema.sql` file ChatGPT ki public window mein paste kar dena taaki AI tests generate kar sake.
 * **🤦 Why:** Aasan lagta hai, aur log sochte hain "kuch nahi hoga".
-* **✅ The 'Pro' Way:** ⭐ "Apni company ka private API logic public ChatGPT par paste karna sabse bada security risk hai." Hamesha Local AI (Ollama) aur MCP server setup use karo.
+* **✅ The 'Pro' Way:** ⭐ "Apni company ka private API logic public ChatGPT par paste karna sabse bada security risk hai." Hamesha Local AI (Ollama) aur MCP server setup [[HL::use karo.::HL]]
 * **⚡ Consequences:** Agar company ne AI usage audit kiya, toh pata chalega ki aapne proprietary DB layout internet pe leak kar diya hai. Legal action aur immediate termination (job loss) ho sakta hai.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -10684,9 +10684,9 @@ Anthropic (Claude AI ki parent company) ne MCP ko introduce hi isliye kiya taaki
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** QA engineer apne laptop par Ollama se local AI chalata hai. Woh Cursor IDE mein "MySQL MCP Server" configure karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** QA engineer apne laptop par Ollama se local AI chalata hai. Woh Cursor IDE mein "MySQL MCP Server" configure karta hai.
 * **Fixing/Iteration Phase:** QA AI ko prompt deta hai: *"Write a Pytest E2E flow for the /checkout API and verify the order status in the database"*. Kyunki MCP active hai, AI khud local DB ka schema padhta hai, sahi SQL query (DAO) likhta hai, aur ekdum perfect, ready-to-run Pytest code generate kar deta hai bina data internet par leak kiye.
-* **Live Production Phase:** (N/A — Local workflow only. Yeh pura setup sirf offline security aur generation speed-up ke liye hai, production servers pe AI tests likhne nahi jaata.)
+* **Live Production Phase:** (N/A — Local workflow only. Yeh pura setup sirf [[HL::offline::HL]] security aur generation speed-up ke liye hai, production servers pe AI tests likhne nahi jaata.)
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
@@ -10713,13 +10713,13 @@ Anthropic (Claude AI ki parent company) ne MCP ko introduce hi isliye kiya taaki
 * **Q:** Zero-shot Generation testing mein kaise useful hai?
 * **A:** Zero-shot matlab AI ko pehle se example diye bina task complete karna. MCP ke saath jab AI context gather kar leta hai, toh prompt dete hi ("verify order in DB") woh without explicit training or example tests, first try (zero-shot) mein correct E2E test de deta hai.
 * **Q:** Can an AI with MCP replace a QA engineer?
-* **A:** Nahi. AI with MCP ek advanced "Assistant with Keys" hai. Woh DB fetch karke E2E test flow jaldi likh dega, par konsa test likhna hai, security boundaries kya hain, aur final code production pipeline mein merge karna safely chal raha hai ya nahi, yeh strategy abhi bhi SDET QA Engineer banayega.
+* **A:** Nahi. AI with MCP ek advanced "Assistant with Keys" hai. Woh DB fetch karke E2E test flow jaldi likh dega, par konsa test likhna hai, security boundaries kya hain, aur final code production [[HL::pipeline::HL]] mein merge karna safely chal raha hai ya nahi, yeh strategy abhi bhi SDET QA Engineer banayega.
 * **Q:** Cursor IDE ka kya advantage hai traditional VS Code ke upar in terms of AI?
 * **A:** Cursor essentially VS Code hi hai (uske codebase pe bana hai) par natively AI-first hai. Yeh MCP features, local AI connections, aur context-aware codebase indexing natively support karta hai, jabki plain VS Code mein external heavy plugins chahiye hote hain is integration ke liye.
 * **Q:** Llama-3 ko Ollama se chalane ka exactly kya architecture hota hai?
 * **A:** Ollama ek lightweight background server (daemon) hai jo model weights (Llama-3 files) ko GPU/CPU memory mein load karta hai aur localhost:11434 pe ek API endpoint expose karta hai. Cursor us local endpoint pe HTTP request bhejta hai instead of sending it over the internet to OpenAI servers.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 ⭐ "Public AI 'blindfolded assistant' hai jise sab samjhana padta hai aur leak ka darr hai; MCP wala Local AI 'chaabi wala intern' hai jo safe network mein khud kaam dhoondh leta hai."
 
@@ -10780,36 +10780,36 @@ Socho `pytest-html` ek **⭐Black and white newspaper** hai — isme sirf text l
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Management aur clients ko `pytest-html` samajh nahi aata. Unhe technical terminal output se koi matlab nahi, unhe business metrics chahiye.
-* **Solution:** Allure rich HTML Reports generate karta hai jo Test execution trend aur Flaky tests (woh tests jo kabhi pass kabhi fail hote hain bina code change kiye) ka dashboard deta hai.
+* [[HL::**Problem:** Management aur clients ko `pytest-html` samajh nahi aata. Unhe technical terminal output se koi matlab nahi, unhe business metrics chahiye.::HL]]
+* [[HL::**Solution:** Allure rich HTML Reports generate karta hai jo Test execution trend aur Flaky tests (woh tests jo kabhi pass kabhi fail hote hain bina code change kiye) ka dashboard deta hai.::HL]]
 * **What breaks if we don't use it?** Agar test fail hua, toh error ka context (jaise JSON response) report mein nahi hoga. Debugging ke liye terminal logs mein time waste karna padega.
-* **✅ Kab use karo:** Jab project Enterprise grade ho, client ko daily reports bhejni ho, ya jab API tests mein JSON responses ko report ke andar as an attachment save karna ho.
+* **✅ Kab [[HL::use karo:**::HL]] Jab project Enterprise grade ho, client ko daily reports bhejni ho, ya jab API tests mein JSON responses ko report ke andar as an attachment save karna ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab aap ek chhota personal script bana rahe ho aur sirf terminal output se kaam chal raha ho. Tab `pytest-html` (simple single-file HTML report) kaafi hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 ```text
-Browser mein Allure Dashboard khulega:
+[[HL::Browser mein Allure Dashboard khulega:::HL]]
 +---------------------------------------------------+
-| 📊 ALLURE REPORT      [Pie Chart: 80% Green, 20% Red]
+| [[HL::📊 ALLURE REPORT      [Pie Chart: 80% Green, 20% Red]::HL]]
 | 
-| 📂 Suites:
-|   ✅ test_login (3s) -> Steps: 1. Click Login 2. Enter Pass
-|   ❌ test_payment (5s) -> 📎 Attached: error_response.json
+| [[HL::📂 Suites:::HL]]
+|   [[HL::✅ test_login (3s) -> Steps: 1. Click Login 2. Enter Pass::HL]]
+|   [[HL::❌ test_payment (5s) -> 📎 Attached: error_response.json::HL]]
 +---------------------------------------------------+
 
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. **Execution:** Jab aap `pytest --alluredir=reports` run karte ho, `allure-pytest` (pytest ka plugin) har test ka data XML (eXtensible Markup Language — tag-based data format) ya JSON (key-value data format) files mein save karta hai.
-2. **Collection:** Yeh raw data ek folder (`reports/`) mein jama hota hai. Yeh files directly browser mein nahi khulti.
-3. **Rendering:** Jab aap `allure serve` command chalate ho, Allure CLI (Command Line Interface) in raw files ko process karta hai aur ek local web server start karke ek rich HTML dashboard browser mein render kar deta hai.
+1. [[HL::**Execution:** Jab aap `pytest --alluredir=reports` run karte ho, `allure-pytest` (pytest ka plugin) har test ka data XML (eXtensible Markup Language — tag-based data format) ya JSON (key-value data format) files mein save karta hai.::HL]]
+2. [[HL::**Collection:** Yeh raw data ek folder (`reports/`) mein jama hota hai. Yeh files directly browser mein nahi khulti.::HL]]
+3. [[HL::**Rendering:** Jab aap `allure serve` command chalate ho, Allure CLI (Command Line Interface) in raw files ko process karta hai aur ek local web server start karke ek rich HTML dashboard browser mein render kar deta hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
-Pehle libraries install karo:
-`pip install allure-pytest`
+[[HL::Pehle libraries install karo:::HL]]
+[[HL::`pip install allure-pytest`::HL]]
 
 ```python
 # Python 3.10+ | allure-pytest 2.13+
@@ -10817,36 +10817,36 @@ Pehle libraries install karo:
 2  import pytest                                      # pytest framework import karo
 3  import json                                        # json module — dictionary ko string mein convert karne ke liye
 4
-5  @allure.feature("Authentication")                  # @allure.feature = High-level feature (e.g., Login module)
-6  @allure.story("User Login Process")                # @allure.story = Us feature ka specific use-case
-7  def test_valid_login():                            # Test function start
-8      
-9      @allure.step("Step 1: Enter username and password")  # @allure.step = Report mein dikhane ke liye ek step define karta hai
-10     def enter_credentials():                       # Helper function for step 1
-11         pass                                       # (Yahan real code aayega)
-12
-13     @allure.step("Step 2: Verify API Response")    # Dusra step define kiya
-14     def verify_response():                         # Helper function for step 2
-15         dummy_response = {"status": "success", "token": "abc123xyz"}  # Dummy JSON response
-16         # allure.attach = Report ke andar external file ya text attach karta hai
-17         # body= : Kya data attach karna hai (json.dumps se string banaya)
-18         # name= : Attachment ka naam report mein
-19         # attachment_type= : File ka format (JSON)
-20         allure.attach(
-21             body=json.dumps(dummy_response, indent=2), 
-22             name="JSON response attachment", 
-23             attachment_type=allure.attachment_type.JSON
-24         )
-25     
-26     enter_credentials()                            # Step 1 ko call kiya
-27     verify_response()                              # Step 2 ko call kiya
+5  [[HL::@allure.feature("Authentication")                  # @allure.feature = High-level feature (e.g., Login module)::HL]]
+[[HL::6  @allure.story("User Login Process")                # @allure.story = Us feature ka specific use-case::HL]]
+[[HL::7  def test_valid_login():                            # Test function start::HL]]
+[[HL::8::HL]]      
+[[HL::9      @allure.step("Step 1: Enter username and password")  # @allure.step = Report mein dikhane ke liye ek step define karta hai::HL]]
+[[HL::10     def enter_credentials():                       # Helper function for step 1::HL]]
+[[HL::11         pass                                       # (Yahan real code aayega)::HL]]
+[[HL::12::HL]]
+[[HL::13     @allure.step("Step 2: Verify API Response")    # Dusra step define kiya::HL]]
+[[HL::14     def verify_response():                         # Helper function for step 2::HL]]
+[[HL::15         dummy_response = {"status": "success", "token": "abc123xyz"}  # Dummy JSON response::HL]]
+[[HL::16         # allure.attach = Report ke andar external file ya text attach karta hai::HL]]
+[[HL::17         # body= : Kya data attach karna hai (json.dumps se string banaya)::HL]]
+[[HL::18         # name= : Attachment ka naam report mein::HL]]
+[[HL::19         # attachment_type= : File ka format (JSON)::HL]]
+[[HL::20         allure.attach(::HL]]
+[[HL::21             body=json.dumps(dummy_response, indent=2),::HL]] 
+[[HL::22             name="JSON response attachment",::HL]] 
+[[HL::23             attachment_type=allure.attachment_type.JSON::HL]]
+[[HL::24         )::HL]]
+[[HL::25::HL]]     
+[[HL::26     enter_credentials()                            # Step 1 ko call kiya::HL]]
+[[HL::27     verify_response()                              # Step 2 ko call kiya::HL]]
 
 ```
 
-**🖥️ Command Clarity:**
+[[HL::**🖥️ Command Clarity:**::HL]]
 
-* **Command:** `pytest --alluredir=allure-results` (Test run karke raw data save karo)
-* **Command:** `allure serve allure-results` (Raw data se report generate karke browser mein kholo)
+* [[HL::**Command:** `pytest --alluredir=allure-results` (Test run karke raw data save karo)::HL]]
+* [[HL::**Command:** `allure serve allure-results` (Raw data se report generate karke browser mein kholo)::HL]]
 
 ```text
 # 📤 Expected Output (Terminal for `allure serve`):
@@ -10875,9 +10875,9 @@ Jab aapke paas 5000+ tests hote hain, toh terminal logs padhna namumkin ho jata 
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Kya pytest-html aur allure same hai?"**
-* **Galat soch:** Dono HTML report banate hain toh same hi honge.
-* **Actually:** `pytest-html` sirf ek single `.html` file banata hai jo kisi ko bhi email kar sakte ho. Lekin Allure ek poora web application banata hai jise web server pe host karna padta hai (`allure serve`). Allure mein history aur charts hote hain jo `pytest-html` mein nahi hote.
+* [[HL::**Confusion 1 — "Kya pytest-html aur allure same hai?"**::HL]]
+* [[HL::**Galat soch:** Dono HTML report banate hain toh same hi honge.::HL]]
+* [[HL::**Actually:** `pytest-html` sirf ek single `.html` file banata hai jo kisi ko bhi email kar sakte ho. Lekin Allure ek poora web application banata hai jise web server pe host karna padta hai (`allure serve`). Allure mein history aur charts hote hain jo `pytest-html` mein nahi hote.::HL]]
 * **Prove karo:** `pytest-html` ki file double-click karke khulti hai. Allure folder double-click se kaam nahi karta, uske liye CLI command chalani padti hai.
 
 
@@ -10915,7 +10915,7 @@ Tech companies (jaise Swiggy ya Zomato) mein jab QA team 1000 APIs test karti ha
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer apne local tests ko `@allure.step()`, `@allure.feature()`, aur `@allure.story()` se decorate karta hai taaki report mein dikhe ki pehle "Create User" hua, phir "Login" hua.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer apne local tests ko `@allure.step()`, `@allure.feature()`, aur `@allure.story()` se decorate karta hai taaki report mein dikhe ki pehle "Create User" hua, phir "Login" hua.
 * **Fixing/Iteration Phase:** Test fail hone par QA engineer terminal ki jagah browser mein Allure report kholta hai. Wahan use API ka poora request aur JSON response attachment directly attached mil jata hai.
 * **Live Production Phase:** Managers dashboard par historical trend dekhte hain ki pichle 10 din se API pass percentage badh raha hai ya gir raha hai.
 
@@ -10935,13 +10935,13 @@ Tech companies (jaise Swiggy ya Zomato) mein jab QA team 1000 APIs test karti ha
 #### ❓ 17. Interview Q&A
 
 * **Q:** Allure report mein test execution history kaise maintain hoti hai?
-* **A:** Allure by default history save nahi karta. History maintain karne ke liye purani generated report ke `history/` folder ko naye `allure-results/` folder mein copy karna padta hai execution se pehle. CI/CD pipelines (jaise Jenkins) mein Allure plugin yeh kaam automatically karta hai jisse trend graph banta hai.
+* [[HL::**A:** Allure by default history save nahi karta. History maintain karne ke liye purani generated report ke `history/` folder ko naye `allure-results/` folder mein copy karna padta hai execution se pehle. CI/CD pipelines (jaise Jenkins) mein Allure plugin yeh kaam automatically karta hai jisse trend graph banta hai.::HL]]
 * **Q:** `@allure.feature` aur `@allure.story` mein kya relation hai?
 * **A:** Yeh Behavior Driven Development (BDD - jahan software ka behavior test hota hai) ke concepts hain. `feature` ek bada module hota hai (e.g., "Checkout"), aur `story` us module ke andar ka ek specific scenario (e.g., "Checkout with Credit Card"). Isse report mein tests perfectly categorize aur group ho jate hain.
 * **Q:** Agar ek test fail hua aur main chahta hoon report mein API ka exact response dikhe, toh kya karunga?
 * **A:** Hum `allure.attach()` use karenge. Usme API ke JSON response ko `json.dumps()` se string banakar pass karenge aur attachment type `allure.attachment_type.JSON` set karenge.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Pytest-HTML sirf text bill hai, Allure poora graphical passbook hai jismein ⭐Full-color Interactive Magazine jaisa maza hai."
 
@@ -10961,26 +10961,26 @@ Tech companies (jaise Swiggy ya Zomato) mein jab QA team 1000 APIs test karti ha
 
 ---
 
-### 🎯 2. CI/CD Pipelines (GitHub Actions / Jenkins YAML)
+### 🎯 2. CI/CD [[HL::Pipelines::HL]] (GitHub Actions / Jenkins YAML)
 
 *Code likhna aur test karna aadhi picture hai. Is topic mein hum khelenge DevOps engineers ki tarah — kaise code cloud par automatically test aur deploy hota hai bina kisi insaan ke button dabaye.*
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-Socho ek **⭐Car Assembly Line**. Jab aap ek nayi car ka frame (code) factory ke belt par rakhte ho (push karte ho), toh belt usse aage le jati hai. Machine automatically us par paint (setup) karti hai, tyre lagati hai (install dependencies), aur break test (pytest) karti hai. Agar test fail hua, toh belt ruk jati hai. Yeh automatic belt hi aapki **CI/CD Pipeline** hai. Code push karna ek raw material daalna hai, aur pipeline usko automatically check karke bahar nikalti hai.
+Socho ek **⭐Car Assembly [[HL::Line**.::HL]] Jab aap ek nayi car ka frame (code) factory ke belt par rakhte ho (push karte ho), toh belt usse aage le jati hai. Machine automatically us par paint (setup) karti hai, tyre lagati hai (install dependencies), aur break test (pytest) karti hai. Agar test fail hua, toh belt ruk jati hai. Yeh automatic belt hi aapki **CI/CD [[HL::Pipeline**::HL]] hai. Code push karna ek raw material daalna hai, aur [[HL::pipeline::HL]] usko automatically check karke bahar nikalti hai.
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** Continuous Integration (CI) and Continuous Deployment (CD) is an automated pipeline that automatically builds, tests, and deploys code changes using configuration files like YAML whenever a developer pushes code to a repository.
+* **Precise English:** Continuous Integration (CI) and Continuous Deployment (CD) is an automated [[HL::pipeline::HL]] that automatically builds, tests, and deploys code changes using configuration files like YAML whenever a developer pushes code to a repository.
 * **Hinglish Simplification:** CI/CD ek automatic system hai jo aapke code GitHub pe aate hi khud-ba-khud ek naya computer (server) start karta hai, saare tests run karta hai, aur report banata hai.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * **Problem:** Developer apne laptop par test run karna bhool sakta hai. Agar kharab code production mein gaya toh server crash ho jayega.
-* **Solution:** CI/CD pipelines (jaise GitHub Actions ya GitLab CI) ensure karti hain ki "Aapka automation tab tak complete nahi hai, jab tak woh kisi pipeline par scheduled (**⭐raat 12 baje**) na chal raha ho."
+* **Solution:** CI/CD [[HL::pipelines::HL]] (jaise GitHub Actions ya GitLab CI) ensure karti hain ki "Aapka automation tab tak complete nahi hai, jab tak woh kisi [[HL::pipeline::HL]] par scheduled (**⭐raat 12 baje**) na chal raha ho."
 * **What breaks if we don't use it?** "It works on my machine" wali problem aayegi. Developer ke laptop pe chalega, par server pe fail hoga kyunki versions alag honge.
-* **✅ Kab use karo:** Har modern software project mein jahan 2 se zyada log kaam kar rahe hon. Code merge hone se pehle tests ka pass hona mandatory karne ke liye (Quality Gate).
-* **❌ Kab mat karo / Alternative prefer karo:** Agar project purely experimental hai ya 1 din ka script hai jo kabhi update nahi hoga, tab pipeline setup karna overkill (time waste) ho sakta hai.
+* **✅ Kab [[HL::use karo:**::HL]] Har modern software project mein jahan 2 se zyada log kaam kar rahe hon. Code merge hone se pehle tests ka pass hona mandatory karne ke liye (Quality Gate).
+* **❌ Kab mat karo / Alternative prefer karo:** Agar project purely experimental hai ya 1 din ka script hai jo kabhi update nahi hoga, tab [[HL::pipeline::HL]] setup karna overkill (time waste) ho sakta hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -10989,7 +10989,7 @@ GitHub repository ke "Actions" tab mein:
 workflow.yml
  🟢 setup-python (1s)
  🟢 pip install -r requirements.txt (15s)
- 🔴 pytest tests/ (45s)  <-- Pipeline Failed (Red Cross)
+ 🔴 pytest tests/ (45s)  <-- [[HL::Pipeline::HL]] Failed (Red Cross)
 
 ```
 
@@ -11008,15 +11008,15 @@ workflow.yml
 
 ```yaml
 # GitHub Actions YAML | Version: v1
-1  name: API Regression Suite                           # Pipeline ka naam jo UI pe dikhega
+1  name: API Regression Suite                           # [[HL::Pipeline::HL]] ka naam jo UI pe dikhega
 2
-3  on:                                                  # Kab chalegi yeh pipeline?
+3  on:                                                  # Kab chalegi yeh [[HL::pipeline?::HL]]
 4    push:                                              # on: push = Jab bhi koi code push kare
 5      branches: [ "master" ]                           # Sirf master branch pe
 6    schedule:
 7      - cron: '0 0 * * *'                              # cron job = Time-based scheduler (Yahan raat 12 baje / Midnight set hai)
 8
-9  jobs:                                                # Pipeline ke andar ke tasks
+9  jobs:                                                # [[HL::Pipeline::HL]] ke andar ke tasks
 10   test-api:                                          # Job ka naam
 11     runs-on: ubuntu-latest                           # Kahan chalega? Ubuntu Linux cloud server par
 12
@@ -11060,25 +11060,25 @@ Run actions/upload-artifact@v3
 
 #### 🔒 8. Security-First Check
 
-Pipeline (YAML file) mein kabhi bhi API keys ya database passwords directly mat likho (e.g., `API_KEY=123xyz`). Agar repo public hai toh koi bhi aapki key chura lega. Hamesha GitHub Secrets use karo aur YAML mein `${{ secrets.API_KEY }}` likho. Isse key logs mein mask (`***`) ho jati hai.
+[[HL::Pipeline::HL]] (YAML file) mein kabhi bhi API keys ya database passwords directly mat likho (e.g., `API_KEY=123xyz`). Agar repo public hai toh koi bhi aapki key chura lega. Hamesha GitHub Secrets [[HL::use karo::HL]] aur YAML mein `${{ secrets.API_KEY }}` likho. Isse key logs mein mask (`***`) ho jati hai.
 
 #### 🏗️ 9. Scalability & Industry Context
 
-Large companies mein ek pipeline mein thousands of tests hote hain. Unhe ek saath chalane mein ghanto lag sakte hain. Isliye CI/CD mein "Parallel Execution" ya "Matrix builds" use karte hain jahan 5 alag-alag Ubuntu servers ek saath start hote hain aur tests ko aapas mein divide kar lete hain, jisse 1 ghante ka kaam 10 minute mein ho jata hai. Nightly Execution (Raat mein chalne wala test suite) heaviest regression tests ke liye industry standard hai.
+Large companies mein ek [[HL::pipeline::HL]] mein thousands of tests hote hain. Unhe ek saath chalane mein ghanto lag sakte hain. Isliye CI/CD mein "Parallel Execution" ya "Matrix builds" use karte hain jahan 5 alag-alag Ubuntu servers ek saath start hote hain aur tests ko aapas mein divide kar lete hain, jisse 1 ghante ka kaam 10 minute mein ho jata hai. Nightly Execution (Raat mein chalne wala test suite) heaviest regression tests ke liye industry standard hai.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
 * **❌ Mistake:** `if: always()` flag use na karna artifact upload (upload-artifact) step mein.
 * **🤦 Why:** GitHub Actions ka default rule hai ki agar koi step fail hota hai (jaise test fail hua), toh aage ke saare steps skip ho jate hain.
 * **✅ The 'Pro' Way:** Reporting/upload steps mein hamesha `if: always()` lagao.
-* **⚡ Consequences:** Agar tests fail huye toh pipeline wahin ruk jayegi aur report upload hi nahi hogi. Aapko kabhi pata nahi chalega ki kaunsa test fail hua tha kyunki server report banaye bina hi destroy ho gaya!
+* **⚡ Consequences:** Agar tests fail huye toh [[HL::pipeline::HL]] wahin ruk jayegi aur report upload hi nahi hogi. Aapko kabhi pata nahi chalega ki kaunsa test fail hua tha kyunki server report banaye bina hi destroy ho gaya!
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
 * **Confusion 1 — "GitHub Actions aur Jenkins mein kya fark hai? Kya dono alag programming hain?"**
 * **Galat soch:** Mujhe Jenkins aata hai, ab Actions seekhne ke liye naya code sikhna padega.
 * **Actually:** Dono exact same concept (CI/CD) par kaam karte hain! Sirf syntax ka fark hai. Jenkins mein `Jenkinsfile` use hoti hai, GitHub mein `.yml`. Dono ka kaam naya server banakar usme terminal commands chalana hi hai.
-* **Prove karo:** Upar code dekho — `run: pytest` wahi same command hai jo aap apne laptop ke terminal mein likhte ho. Pipeline koi jaadu nahi hai, bas ek remote terminal hai.
+* **Prove karo:** Upar code dekho — `run: pytest` wahi same command hai jo aap apne laptop ke terminal mein likhte ho. [[HL::Pipeline::HL]] koi jaadu nahi hai, bas ek remote terminal hai.
 
 
 * **Confusion 2 — "YAML file kaam nahi kar rahi, error aa raha hai"**
@@ -11090,13 +11090,13 @@ Large companies mein ek pipeline mein thousands of tests hote hain. Unhe ek saat
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 
 * **`Workflow does not exist or invalid YAML`**
-* **Root Cause:** YAML file mein spaces ki galti hai. `jobs:` aur `steps:` ki line-up galat hai ya Tab character use kiya hai.
-* **Fix:** YAML validator tool (online) mein code daal kar check karo aur Tabs ko 2 Spaces se replace karo.
+* **Root Cause:** YAML file mein spaces ki galti hai. `jobs:` aur `steps:` ki [[HL::line-up::HL]] galat hai ya Tab character use kiya hai.
+* **Fix:** YAML validator tool [[HL::(online)::HL]] mein code daal kar check karo aur Tabs ko 2 Spaces se replace karo.
 
 
 * **`Error: process completed with exit code 1 (Test failed)`**
-* **Root Cause:** Aapke Python tests mein ek ya ek se zyada tests fail huye hain. Pytest red state return karta hai jo GitHub pipeline ko fail kar deta hai.
-* **Fix:** Artifact download karke Allure report check karo ki kaunsa specific test fail hua, pipeline ka behavior bilkul sahi hai (yahi uski job hai — kharab code ko pakadna).
+* **Root Cause:** Aapke Python tests mein ek ya ek se zyada tests fail huye hain. Pytest red state return karta hai jo GitHub [[HL::pipeline::HL]] ko fail kar deta hai.
+* **Fix:** Artifact download karke Allure report check karo ki kaunsa specific test fail hua, [[HL::pipeline::HL]] ka behavior bilkul sahi hai (yahi uski job hai — kharab code ko pakadna).
 
 
 
@@ -11110,12 +11110,12 @@ Large companies mein ek pipeline mein thousands of tests hote hain. Unhe ek saat
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-Spotify ya Netflix mein, jab koi developer naya feature code karta hai, toh woh code sidha main system mein nahi jata. Beech mein ek Quality Gate (pipeline ka strict check) hota hai. Pipeline code pull karti hai, saare tests run karti hai. Agar code pipeline mein pass hua, tabhi "Merge" button green hota hai. Agar fail hua, toh button lock ho jata hai jisse production hamesha safe rehti hai.
+Spotify ya Netflix mein, jab koi developer naya feature code karta hai, toh woh code sidha main system mein nahi jata. Beech mein ek Quality Gate [[HL::(pipeline::HL]] ka strict check) hota hai. [[HL::Pipeline::HL]] code pull karti hai, saare tests run karti hai. Agar code [[HL::pipeline::HL]] mein pass hua, tabhi "Merge" button green hota hai. Agar fail hua, toh button lock ho jata hai jisse production hamesha safe rehti hai.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer `.yml` file likhta hai jismein rules hote hain ki jab bhi koi Master branch mein code push kare, toh kaunsi terminal commands chalengi.
-* **Fixing/Iteration Phase:** Developer ne code push kiya, GitHub Actions ne naya container banaya, dependencies install ki, tests run kiye. Agar ek bhi test fail hua, toh pipeline "Red" (Fail) ho jayegi aur code merge hone se rok degi (Quality Gate).
+* [[HL::**Testing/Offline::HL]] Phase:** Developer `.yml` file likhta hai jismein rules hote hain ki jab bhi koi Master branch mein code push kare, toh kaunsi terminal commands chalengi.
+* **Fixing/Iteration Phase:** Developer ne code push kiya, GitHub Actions ne naya container banaya, dependencies install ki, tests run kiye. Agar ek bhi test fail hua, toh [[HL::pipeline::HL]] "Red" (Fail) ho jayegi aur code merge hone se rok degi (Quality Gate).
 * **Live Production Phase:** Regression suite automatically raat 12 baje (Cron job) chalta hai aur subah QA team aate hi reports analyse karti hai.
 
 #### 🎨 16. Visual Diagram (ASCII Art)
@@ -11141,22 +11141,22 @@ Spotify ya Netflix mein, jab koi developer naya feature code karta hai, toh woh 
 
 * **Q:** CI aur CD mein kya difference hai?
 * **A:** CI (Continuous Integration) ka matlab hai multiple developers ke code ko continuously ek jagah (repo) merge karna aur automatically test karna (using tools like GitHub Actions). CD (Continuous Deployment) ka matlab hai us tested code ko automatically production servers par deploy kar dena bina manual intervention ke.
-* **Q:** Github Actions pipeline mein jobs parallel mein kaise run karte hain?
+* **Q:** Github Actions [[HL::pipeline::HL]] mein jobs parallel mein kaise run karte hain?
 * **A:** By default, agar aap `.yml` mein multiple `jobs` (jaise `test-api` aur `test-ui`) define karte hain, toh GitHub Actions unhe parallel (ek saath) run karta hai. Agar ek job ko dusre ke baad run karna hai toh hume `needs: [job_name]` keyword use karna padta hai.
 * **Q:** Artifacts kya hote hain CI/CD mein?
-* **A:** Pipeline ka server ephemeral (temporary) hota hai. Job khatam hote hi server aur uska saara data delete ho jata hai. Agar hume test reports ya logs bachane hain, toh hum unhe "Artifacts" ke roop mein GitHub UI par upload (`upload-artifact`) kar dete hain taaki pipeline khatam hone ke baad bhi user unhe download kar sake.
+* **A:** [[HL::Pipeline::HL]] ka server ephemeral (temporary) hota hai. Job khatam hote hi server aur uska saara data delete ho jata hai. Agar hume test reports ya logs bachane hain, toh hum unhe "Artifacts" ke roop mein GitHub UI par upload (`upload-artifact`) kar dete hain taaki [[HL::pipeline::HL]] khatam hone ke baad bhi user unhe download kar sake.
 * **Q:** Agar ek step fail ho jaye lekin main chahta hoon ki agla step phir bhi chale, toh kya karunga?
 * **A:** Aap agle step mein `if: always()` condition lagayenge. Yeh GitHub Actions ko force karta hai ki chahe pichla step fail ya cancel ho gaya ho, is step ko zaroor execute karna hai (usually reporting ke liye use hota hai).
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
-"CI/CD ek ⭐Car Assembly Line hai — code daalo, test lagao, aur fail hone par belt (Quality Gate) wahin rok do!"
+"CI/CD ek ⭐Car Assembly [[HL::Line::HL]] hai — code daalo, test lagao, aur fail hone par belt (Quality Gate) wahin rok do!"
 
 #### 🔑 19. Keywords Coverage Verification
 
 ```text
-🔑 Keywords Coverage Check — CI/CD Pipelines (GitHub Actions / Jenkins YAML)
-✅ Covered   : CI/CD, Continuous Integration, Pipeline, GitHub Actions, GitLab CI, Jenkinsfile, .yml, .github/workflows, on: push, cron job, actions/checkout, actions/setup-python, pip install -r, pytest, upload-artifact, Quality Gate, Nightly Execution, ⭐"Car Assembly Line", ⭐"raat 12 baje"
+🔑 Keywords Coverage Check — CI/CD [[HL::Pipelines::HL]] (GitHub Actions / Jenkins YAML)
+✅ Covered   : CI/CD, Continuous Integration, [[HL::Pipeline,::HL]] GitHub Actions, GitLab CI, Jenkinsfile, .yml, .github/workflows, on: push, cron job, actions/checkout, actions/setup-python, pip install -r, pytest, upload-artifact, Quality Gate, Nightly Execution, ⭐"Car Assembly [[HL::Line",::HL]] ⭐"raat 12 baje"
 ⚠️ Mentioned but needs more depth : (none)
 ❌ MISSED    : (none)
 
@@ -11168,7 +11168,7 @@ Spotify ya Netflix mein, jab koi developer naya feature code karta hai, toh woh 
 
 > **--- 🛑 PART 1 FINISHED. Type 'CONTINUE' for the next subtopics ---**
 > ✅ **Topics Covered in this message:** > - Topic 1: Enterprise Reporting with Allure (`allure-pytest`)
-> * Topic 2: CI/CD Pipelines (GitHub Actions / Jenkins YAML)
+> * Topic 2: CI/CD [[HL::Pipelines::HL]] (GitHub Actions / Jenkins YAML)
 > ⏳ **Remaining Topics (in order):** > - Topic 3: Enterprise Code Quality & Git Hooks (`pre-commit`, `ruff`, `mypy`)
 > * Topic 4: Automated CI/CD Alerts (Slack & MS Teams Webhooks)
 > 📊 **Progress:** 2 subtopics done / 4 subtopics total
@@ -11182,7 +11182,7 @@ Spotify ya Netflix mein, jab koi developer naya feature code karta hai, toh woh 
 
 ### 🎯 3. Enterprise Code Quality & Git Hooks (`pre-commit`, `ruff`, `mypy`)
 
-*Bade projects mein hazaaron lines ka code hota hai. Is topic mein hum seekhenge ki kharab ya format na kiya hua code GitHub tak pohochne se pehle hi developers ke laptop par kaise block kiya jaye.*
+*Bade projects mein hazaaron [[HL::lines::HL]] ka code hota hai. Is topic mein hum seekhenge ki kharab ya format na kiya hua code GitHub tak pohochne se pehle hi developers ke laptop par kaise block kiya jaye.*
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -11195,10 +11195,10 @@ Socho ek **⭐Airport Security Check**. Jaise plane (GitHub repository) par bait
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-* **Problem:** Developer kabhi extra spaces chhod deta hai, kabhi variables galat naam se likh deta hai. Agar yeh code CI/CD pipeline par jayega toh wahan ja kar fail hoga, jismein 10-15 minute waste hote hain.
-* **Solution:** Ganda code CI/CD pipeline par fail hone ka wait nahi karna chahiye. Code ko developer ke laptop par hi block kar do.
+* **Problem:** Developer kabhi extra spaces chhod deta hai, kabhi variables galat naam se likh deta hai. Agar yeh code CI/CD [[HL::pipeline::HL]] par jayega toh wahan ja kar fail hoga, jismein 10-15 minute waste hote hain.
+* **Solution:** Ganda code CI/CD [[HL::pipeline::HL]] par fail hone ka wait nahi karna chahiye. Code ko developer ke laptop par hi block kar do.
 * **What breaks if we don't use it?** Pull Request (PR) mein dusre developers logic check karne ki bajaye spacing aur formatting errors point out karne mein time waste karenge (Code Review etiquette kharab hota hai).
-* **✅ Kab use karo:** Har Python project mein jahan ek se zyada log code likh rahe hain, taaki sabka code ek jaisa dikhe (Code Standardization).
+* **✅ Kab [[HL::use karo:**::HL]] Har Python project mein jahan ek se zyada log code likh rahe hain, taaki sabka code ek jaisa dikhe (Code Standardization).
 * **❌ Kab mat karo / Alternative prefer karo:** Agar aap live production issue ko emergency mein fix kar rahe ho aur formatting ka time nahi hai (tab `git commit --no-verify` se temporarily bypass kar sakte hain).
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -11242,7 +11242,7 @@ Pehle `.pre-commit-config.yaml` banani hoti hai repository ke root mein:
 
 ```
 
-Phirse apne Python file (`app.py`) mein Type Hints use karo (Python 3.5+ ka feature jo specify karta hai variable kis type ka hona chahiye):
+Phirse apne Python file (`app.py`) mein Type Hints [[HL::use karo::HL]] (Python 3.5+ ka feature jo specify karta hai variable kis type ka hona chahiye):
 
 ```python
 # Python 3.10+
@@ -11283,7 +11283,7 @@ Industry mein purane tools jaise `flake8` (linting ke liye) aur `black` (formatt
 * **❌ Mistake:** Config file bana dena par `pre-commit install` command na chalana.
 * **🤦 Why:** Beginner sochta hai ki file banate hi magic shuru ho jayega.
 * **✅ The 'Pro' Way:** Hamesha naye project mein jaate hi `pre-commit install` run karo.
-* **⚡ Consequences:** Agar install nahi kiya, toh aap ganda code push kar doge, CI/CD pipeline usko test karegi aur 15 minute baad pipeline red (fail) ho jayegi. Aapka waqt barbaad hoga.
+* **⚡ Consequences:** Agar install nahi kiya, toh aap ganda code push kar doge, CI/CD [[HL::pipeline::HL]] usko test karegi aur 15 minute baad [[HL::pipeline::HL]] red (fail) ho jayegi. Aapka waqt barbaad hoga.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
@@ -11326,7 +11326,7 @@ Microsoft aur Google ke open-source Python projects (jaise FastAPI, LangChain) m
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Developer code likh kar jab `git commit -m "added new test"` chalata hai, toh automatically `pre-commit` hook trigger hota hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Developer code likh kar jab `git commit -m "added new test"` chalata hai, toh automatically `pre-commit` hook trigger hota hai.
 * **Fixing/Iteration Phase:** Agar code mein koi extra space, unused import, ya type mismatch (`mypy` error) hota hai, toh commit ruk jata hai (fail). Developer error fix karta hai, `git add` dobara karta hai, aur phir se commit karta hai.
 * **Live Production Phase:** Yeh workflow ensure karta hai ki GitHub repo mein hamesha 100% clean, standardized (PEP8), aur error-free Python code hi push ho.
 
@@ -11356,13 +11356,13 @@ Blocked!  Successful! 🚀
 #### ❓ 17. Interview Q&A
 
 * **Q:** Pre-commit hooks kya hote hain aur hum unhe kyun use karte hain?
-* **A:** Pre-commit hooks scripts hoti hain jo `git commit` command chalane par automatically trigger hoti hain. Hum inka use isliye karte hain taaki code repo mein push hone se pehle hi developers ki local machine par Code Quality (linting, formatting, type checking) enforce ki ja sake, jisse CI/CD pipeline par basic syntax errors aane se bach jayein.
+* **A:** Pre-commit hooks scripts hoti hain jo `git commit` command chalane par automatically trigger hoti hain. Hum inka use isliye karte hain taaki code repo mein push hone se pehle hi developers ki local machine par Code Quality (linting, formatting, type checking) enforce ki ja sake, jisse CI/CD [[HL::pipeline::HL]] par basic syntax errors aane se bach jayein.
 * **Q:** Python mein Type Hints (`-> dict`, `: int`) ka kya fayda hai jabki Python automatically type samajh leta hai?
 * **A:** Type hints se code ki readability badhti hai aur IDEs (jaise VS Code) mein better autocomplete milta hai. Sath hi, jab hum `mypy` jaise static type checker use karte hain, toh woh code run hone se pehle hi un bugs ko pakad leta hai jo galat data type pass karne se aate, jisse runtime crashes (TypeError) bach jate hain.
 * **Q:** Agar kisi emergency fix mein pre-commit baar-baar fail ho raha ho aur aapko turant push karna ho, toh kya approach hogi?
 * **A:** Aise rare emergency cases mein hum `git commit --no-verify` (ya `-n`) flag use karke pre-commit hooks ko temporarily bypass kar sakte hain. Lekin yeh best practice nahi hai, isko sirf severe production outages mein use karna chahiye.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Pre-commit aapke repo ka ⭐Airport Security Check hai — ganda code bag mein hoga toh GitHub (plane) par commit hi na ho sakega!"
 
@@ -11388,20 +11388,20 @@ Blocked!  Successful! 🚀
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
-Socho ek **⭐Fire Alarm**. Agar building mein aag lagti hai, toh kya aap baar-baar ghadi dekh kar check karne jate ho ki "Kahin aag toh nahi lagi?" Nahi! Aag lagne par alarm khud bajta hai taaki aapko pata chal jaye. Waise hi CI/CD pipeline mein, test fail hone par Slack ya MS Teams pe notification khud aana chahiye (Push). Engineer ko ja kar check nahi karna padna chahiye (Pull). **⭐"Push framework, pull nahi."**
+Socho ek **⭐Fire Alarm**. Agar building mein aag lagti hai, toh kya aap baar-baar ghadi dekh kar check karne jate ho ki "Kahin aag toh nahi lagi?" Nahi! Aag lagne par alarm khud bajta hai taaki aapko pata chal jaye. Waise hi CI/CD [[HL::pipeline::HL]] mein, test fail hone par Slack ya MS Teams pe notification khud aana chahiye (Push). Engineer ko ja kar check nahi karna padna chahiye (Pull). **⭐"Push framework, pull nahi."**
 
 #### 📖 3. Technical Definition
 
 * **Precise English:** Webhooks are user-defined HTTP callbacks. An Incoming Webhook allows external services (like GitHub Actions) to send automated JSON payloads (messages/Alerting) to chat applications like Slack or MS Teams when a specific event occurs.
-* **Hinglish Simplification:** Webhook ek special URL (link) hota hai. Jab pipeline mein koi test fail hota hai, toh GitHub us URL par ek invisible HTTP request bhejta hai, jisse aapke company ke chat software (Slack) par automatically ek message type ho jata hai.
+* [[HL::**Hinglish Simplification:** Webhook ek special URL (link) hota hai. Jab pipeline mein koi test fail hota hai, toh GitHub us URL par ek invisible HTTP request bhejta hai, jisse aapke company ke chat software (Slack) par automatically ek message type ho jata hai.::HL]]
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
 * **Problem:** Nightly regression (raat mein chalne wale tests) ka status check karne ke liye developer ko subah uthkar GitHub kholna padta hai. Yeh ek "Pull" framework hai jahan aapko information leni padti hai.
 * **Solution:** Webhooks "Push" framework banate hain. Agar kuch fail hua, toh app aapko khud batayega. Isse Faster Feedback Loop banta hai.
-* **What breaks if we don't use it?** Agar pipeline fail ho gayi aur kisi ne GitHub khol ke nahi dekha, toh kharab code production mein pohoch jayega aur team ko pata hi nahi chalega.
-* **✅ Kab use karo:** Har Enterprise project mein Alerting aur Notifications setup karne ke liye, especially jab tests fail hote hain (`if: failure()`).
-* **❌ Kab mat karo / Alternative prefer karo:** Jab pipeline din mein 500 baar chalti ho. Tab har success/failure pe message bhejoge toh Slack channel spam ho jayega (log alarm ko mute kar denge). Sirf "Failure" par alerts rakho.
+* **What breaks if we don't use it?** Agar [[HL::pipeline::HL]] fail ho gayi aur kisi ne GitHub khol ke nahi dekha, toh kharab code production mein pohoch jayega aur team ko pata hi nahi chalega.
+* **✅ Kab [[HL::use karo:**::HL]] Har Enterprise project mein Alerting aur Notifications setup karne ke liye, especially jab tests fail hote hain (`if: failure()`).
+* **❌ Kab mat karo / Alternative prefer karo:** Jab [[HL::pipeline::HL]] din mein 500 baar chalti ho. Tab har success/failure pe message bhejoge toh Slack channel spam ho jayega (log alarm ko mute kar denge). Sirf "Failure" par alerts rakho.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
@@ -11419,10 +11419,10 @@ Result: 3 Tests Failed!
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1. Team Admin Slack/MS Teams par ja kar ek "Incoming Webhook" app add karta hai.
-2. Slack ek secret URL deta hai (e.g., `https://hooks.slack.com/...`). Yeh Incoming Webhook URL ek API endpoint ki tarah kaam karta hai.
-3. Github Actions pipeline jab fail hoti hai, toh woh `cURL` (Command line URL tool - HTTP requests bhejne ke liye) ya pre-built Actions use karke us Slack URL par ek **JSON payload** (formatted text) bhejti hai.
-4. Slack us JSON ko padhta hai aur channel mein display kar deta hai.
+1. [[HL::Team Admin Slack/MS Teams par ja kar ek "Incoming Webhook" app add karta hai.::HL]]
+2. [[HL::Slack ek secret URL deta hai (e.g., `https://hooks.slack.com/...`). Yeh Incoming Webhook URL ek API endpoint ki tarah kaam karta hai.::HL]]
+3. [[HL::Github Actions pipeline jab fail hoti hai, toh woh `cURL` (Command line URL tool - HTTP requests bhejne ke liye) ya pre-built Actions use karke us Slack URL par ek **JSON payload** (formatted text) bhejti hai.::HL]]
+4. [[HL::Slack us JSON ko padhta hai aur channel mein display kar deta hai.::HL]]
 
 #### 💻 7. Hands-On — Runnable Example
 
@@ -11433,7 +11433,7 @@ Pehle Slack se Webhook URL lo aur usko GitHub Secrets mein `SLACK_WEBHOOK_URL` k
 1  - name: Send Slack Notification on Failure      # Step ka naam
 2    if: failure()                                 # CRITICAL: if: failure() = Yeh step SIRF tab chalega jab upar ka koi step (jaise test) fail hua ho.
 3    run: |                                        # run = bash commands chalao
-4      # cURL (Client URL) ek command line tool hai HTTP POST request bhejne ke liye
+4      # cURL (Client URL) ek command [[HL::line::HL]] tool hai HTTP POST request bhejne ke liye
 5      # -X POST = POST request bhej rahe hain
 6      # -H "Content-type: application/json" = Bata rahe hain ki data JSON format mein hai
 7      # --data = Jo actual JSON payload (message content) bhejna hai
@@ -11446,7 +11446,7 @@ Pehle Slack se Webhook URL lo aur usko GitHub Secrets mein `SLACK_WEBHOOK_URL` k
 
 **🖥️ Command Clarity:**
 
-* **Command:** Upar diya gaya `curl` command pipeline ke server pe chalta hai. Agar ise local terminal pe test karna ho:
+* **Command:** Upar diya gaya `curl` command [[HL::pipeline::HL]] ke server pe chalta hai. Agar ise local terminal pe test karna ho:
 `curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello from Terminal"}' https://hooks.slack.com/services/YOUR/WEBHOOK/URL`
 
 ```text
@@ -11490,12 +11490,12 @@ Industry mein MS Teams Connectors aur Slack Integration advanced hote hain. Sirf
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 
-* **Pipeline successfully chali, URL sahi hai, par Slack pe message nahi aaya**
+* [[HL::**Pipeline::HL]] successfully chali, URL sahi hai, par Slack pe message nahi aaya**
 * **Root Cause:** Aapne jo JSON bheja hai (`--data`), usme syntax error (jaise quotes mismatch) hai ya format Slack ke standard se match nahi kar raha.
 * **Fix:** JSON payload ki format ko Slack Block Kit builder (Slack ka official JSON validator) par test karo.
 
 
-* **Pipeline mein curl failed with HTTP 403 / 404**
+* [[HL::**Pipeline::HL]] mein curl failed with HTTP 403 / 404**
 * **Root Cause:** Aapka Webhook URL invalid hai, expire ho gaya hai, ya Workspace Admin ne delete kar diya hai.
 * **Fix:** Slack/Teams mein wapas jao, naya webhook generate karo aur GitHub Secrets mein update karo.
 
@@ -11510,18 +11510,18 @@ Industry mein MS Teams Connectors aur Slack Integration advanced hote hain. Sirf
 
 #### 🌍 14. Real-World Use Case (Production Application)
 
-E-commerce companies (jaise Amazon) mein "Incident Management" system (e.g., PagerDuty) webhooks se integrated hota hai. Jaise hi CI/CD pipeline production deployment mein fail hoti hai, webhook PagerDuty ko hit karta hai, aur PagerDuty automatically On-call engineer ke mobile phone par physically call/ring karta hai raat ke 2 baje taaki aag turant bujhai (fix) ja sake.
+E-commerce companies (jaise Amazon) mein "Incident Management" system (e.g., PagerDuty) webhooks se integrated hota hai. Jaise hi CI/CD [[HL::pipeline::HL]] production deployment mein fail hoti hai, webhook PagerDuty ko hit karta hai, aur PagerDuty automatically On-call engineer ke mobile phone par physically call/ring karta hai raat ke 2 baje taaki aag turant bujhai (fix) ja sake.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 
-* **Testing/Offline Phase:** Engineer webhook URL generate karta hai aur YAML file mein `cURL` request setup karke GitHub secrets configure karta hai.
+* [[HL::**Testing/Offline::HL]] Phase:** Engineer webhook URL generate karta hai aur YAML file mein `cURL` request setup karke GitHub secrets configure karta hai.
 * **Fixing/Iteration Phase:** (Not directly applicable here as this is a reactive setup).
-* **Live Production Phase:** Jaise hi GitHub Actions par raat 12 baje regression suite fail hota hai, pipeline turant `if: failure()` step me jaati hai aur Slack channel `#qa-alerts` par ek red message bhejti hai: "🚨 API Regression Failed! Click here to view Allure Report."
+* **Live Production Phase:** Jaise hi GitHub Actions par raat 12 baje regression suite fail hota hai, [[HL::pipeline::HL]] turant `if: failure()` step me jaati hai aur Slack channel `#qa-alerts` par ek red message bhejti hai: "🚨 API Regression Failed! Click here to view Allure Report."
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 
 ```text
-[ GitHub Actions Pipeline ]
+[ GitHub Actions [[HL::Pipeline::HL]] ]
        │
       Test Fails ❌
        │
@@ -11544,7 +11544,7 @@ E-commerce companies (jaise Amazon) mein "Incident Management" system (e.g., Pag
 * **Q:** Webhooks kaise kaam karte hain?
 * **A:** Webhook ek user-defined HTTP callback URL hota hai. Jab source application (jaise GitHub) mein koi trigger event hota hai (jaise Push ya Failed Job), toh GitHub us URL par ek HTTP POST request bhejta hai along with a JSON payload, jise target application (Slack) receive karke action leti hai.
 
-#### 📝 18. One-Line Memory Hook
+#### 📝 18. [[HL::One-Line::HL]] Memory Hook
 
 "Webhook ek ⭐Fire Alarm hai — Slack pe 'Push' karta hai, taaki Engineer ko GitHub mein 'Pull' karke na dekhna pade!"
 

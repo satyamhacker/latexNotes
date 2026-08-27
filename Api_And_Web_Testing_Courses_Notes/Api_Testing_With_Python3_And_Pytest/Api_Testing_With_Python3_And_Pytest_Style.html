@@ -28,17 +28,6 @@ body {
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     margin: 0;
-    padding: 0;
-}
-
-#loader {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.5rem;
-    color: var(--accent-blue);
-    z-index: 1000;
 }
 
 h1 {
@@ -110,11 +99,6 @@ h3:not(.topic-section) {
     padding-bottom: 0.4rem;
 }
 
-p, ul, ol {
-    margin-bottom: 1rem;
-    line-height: 1.7;
-}
-
 /* Mac-Style Code Blocks */
 pre.mac-window {
     background: #0d1115;
@@ -123,10 +107,9 @@ pre.mac-window {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     margin: 2rem 0;
     
-    /* STRICT WRAPPING FOR PDF */
-    white-space: pre-wrap !important;
-    word-break: break-word !important; 
-    overflow-x: hidden !important;
+    overflow-x: auto !important;
+    white-space: pre !important; 
+    word-break: normal !important;
 }
 
 .code-header {
@@ -143,8 +126,8 @@ pre.mac-window {
 
 code {
     font-family: 'Fira Code', monospace;
-    white-space: pre-wrap !important; 
-    word-wrap: break-word !important;
+    white-space: inherit !important; 
+    word-wrap: normal !important;
 }
 
 /* Inline Code Styling */
@@ -185,32 +168,24 @@ tr:hover {
 
 /* Sidebar */
 .sidebar {
-    width: 280px;
+    width: 260px;
     height: 100vh;
     background: var(--bg-secondary);
     border-right: 1px solid var(--border-color);
     padding: 2rem 1rem;
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
     overflow-y: auto;
     flex-shrink: 0;
+    box-sizing: border-box;
 }
 
 .sidebar h3 {
-    color: var(--accent-blue);
-    margin-bottom: 1rem;
+    margin-top: 0;
+    color: var(--text-primary);
     font-size: 1.2rem;
-}
-
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar li {
-    margin: 0.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .sidebar a {
@@ -231,15 +206,52 @@ tr:hover {
 .layout {
     display: flex;
     min-height: 100vh;
+    background: #090a0c; /* Darker backdrop for pages */
 }
 
 .main-content {
     flex: 1;
-    margin-left: 280px;
-    padding: 3rem 4rem;
-    max-width: 1000px;
+    padding: 2rem 0;
+    margin: 0;
     line-height: 1.7;
     font-size: 1.05rem;
+}
+
+/* UI Page Simulation */
+.a4-page {
+    width: 210mm;
+    height: 297mm;
+    background: var(--bg-primary);
+    margin: 0 auto 2rem auto;
+    padding: 20mm;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content {
+    flex: 1;
+    overflow-y: auto; /* Handle oversized elements like massive code blocks */
+    padding-right: 5px;
+}
+
+/* Custom scrollbar for page-content */
+.page-content::-webkit-scrollbar { width: 6px; }
+.page-content::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+
+.page-footer {
+    height: 10mm;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    border-top: 1px solid var(--border-color);
+    padding-top: 5mm;
+    margin-top: 5mm;
 }
 
 /* Content Links */
@@ -286,22 +298,14 @@ blockquote {
     font-style: italic;
 }
 
-.copy-btn {
-    background: var(--accent-blue);
-    color: white;
-    border: none;
-    padding: 4px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85rem;
-}
-
-.copy-btn:hover {
-    opacity: 0.8;
-}
-
 /* CRITICAL PRINT STYLES - DO NOT MODIFY */
 @media print {
+    /* Set page margins so browser can inject page numbers (Headers & Footers) */
+    @page {
+        margin-top: 10mm;
+        margin-bottom: 15mm;
+    }
+
     * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
@@ -317,9 +321,6 @@ blockquote {
         min-height: 100vh;
         width: 100%;
         margin: 0; padding: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
     }
 
     /* Force white text for readability */
@@ -339,11 +340,32 @@ blockquote {
 
     .layout {
         display: block;
+        background: none;
     }
     
-    .main-content { margin-left: 0 !important; padding: 2rem !important; margin: 0 auto; max-width: 100%; }
+    .a4-page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        height: auto !important;
+        page-break-after: auto !important;
+        padding: 0 !important;
+        display: block !important;
+    }
     
-    a { text-decoration: none !important; border-bottom: none !important; }
+    .page-content {
+        display: block !important;
+        overflow: visible !important;
+    }
+    
+    .page-footer {
+        display: none !important; /* Let the browser print its own page numbers, or hide this if it conflicts */
+    }
+    
+    .main-content { padding: 0 !important; margin: 0 auto; max-width: 100%; }
+    
+    a { text-decoration: none !important; border-bottom: none !important; color: #79c0ff !important; }
 
     /* PDF Page Breaking Rules */
     .module-section {
@@ -355,9 +377,65 @@ blockquote {
         page-break-after: avoid; /* Prevent header at the bottom of a page */
     }
     
-    pre, blockquote, table, img {
-        page-break-inside: avoid; /* Prevent code blocks and tables from splitting across pages */
+    pre.mac-window, pre.mac-window code {
+        white-space: pre-wrap !important;
+        word-break: break-all !important; 
+        overflow-x: hidden !important;
+        font-size: 11px !important; /* Shrink to fit ~120 chars per line so ASCII art doesn't wrap */
+        line-height: 1.4 !important;
     }
+    
+    pre, blockquote, img {
+        page-break-inside: avoid; /* Prevent code blocks from splitting across pages */
+    }
+    
+    table {
+        page-break-inside: avoid;
+        table-layout: fixed !important; /* Force table to respect 100% width and not bleed off page */
+        width: 100% !important;
+    }
+    
+    td, th {
+        word-wrap: break-word !important; /* Break long strings inside table cells */
+        overflow-wrap: break-word !important;
+    }
+}
+
+/* 🟡 PREMIUM HIGHLIGHT STYLES */
+mark.yellow-highlight {
+    background-color: rgba(253, 224, 71, 0.2) !important;
+    color: #fde047 !important;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-weight: 600;
+    box-shadow: 0 0 8px rgba(253, 224, 71, 0.1);
+}
+
+/* Fix ASCII alignment by removing horizontal padding in code blocks */
+pre mark.yellow-highlight {
+    padding: 0.15em 0 !important;
+}
+
+@media print {
+    mark.yellow-highlight {
+        background-color: #fff000 !important;
+        color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        box-shadow: none !important;
+    }
+}
+
+#loader {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    z-index: 9999;
 }
     </style>
 </head>
@@ -369,7 +447,7 @@ blockquote {
         <div class="layout">
             <nav class="sidebar" id="sidebar">
                 <h3><i class="fas fa-list"></i> Table of Contents</h3>
-                <ul id="toc"></ul>
+                <div id="toc"></div>
             </nav>
             <main class="main-content" id="content-area">
                 <!-- Markdown content goes here -->
@@ -379,9 +457,8 @@ blockquote {
 
     <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const contentArea = document.getElementById('content-area');
-    const loader = document.getElementById('loader');
-    const tocList = document.getElementById('toc');
+    const contentArea = document.getElementById("content-area");
+    const loader = document.getElementById("loader");
 
     // Fetch MD logic (with local file support)
     fetch("Api_Testing_With_Python3_And_Pytest.md")
@@ -413,17 +490,33 @@ document.addEventListener("DOMContentLoaded", () => {
     // Safety check: Cast code to string to avoid [object Object] crash
     renderer.code = function(code, language) {
         const safeCode = code ? String(code) : '';
-        // Robust highlighting with Auto-detection
-        let highlighted = safeCode;
-        const validLang = language || 'plaintext';
+        
+        // 🟡 1. Extract highlights BEFORE hljs runs to protect them
+        let hlCount = 0;
+        let hlMap = {};
+        let rawCode = safeCode.replace(/\[\[HL::(.*?)::HL\]\]/g, function(match, p1) {
+            let key = `HLTOKEN${hlCount}ENDHL`;
+            hlMap[key] = p1;
+            hlCount++;
+            return key;
+        });
+
+        // 2. Robust highlighting with Auto-detection
+        let highlighted = rawCode;
         // If language is provided and valid, use it
         if (language && hljs.getLanguage(language)) {
             try {
-                highlighted = hljs.highlight(safeCode, { language: language }).value;
-            } catch (e) { highlighted = hljs.highlightAuto(safeCode).value; }
+                highlighted = hljs.highlight(rawCode, { language: language }).value;
+            } catch (e) { highlighted = hljs.highlightAuto(rawCode).value; }
         } else {
             // Otherwise, or if 'plaintext', force auto-detection
-            highlighted = hljs.highlightAuto(safeCode).value;
+            highlighted = hljs.highlightAuto(rawCode).value;
+        }
+        
+        // 🟡 3. Restore highlights as HTML tags safely
+        for (let i = 0; i < hlCount; i++) {
+            let key = `HLTOKEN${i}ENDHL`;
+            highlighted = highlighted.replace(key, `<mark class="yellow-highlight">${hlMap[key]}</mark>`);
         }
         
         return `
@@ -434,9 +527,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span class="control yellow"></span>
                     <span class="control green"></span>
                 </div>
-                <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                <button style="background:none; border:none; color:var(--accent-blue); cursor:pointer;" onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.innerText)"><i class="fas fa-copy"></i> Copy</button>
             </div>
-            <code class="hljs language-${validLang}">${highlighted}</code>
+            <code class="hljs language-${language || 'plaintext'}">${highlighted}</code>
         </pre>`;
     };
     
@@ -494,40 +587,86 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // 3. Render
-    contentArea.innerHTML = marked.parse(processed, { renderer: renderer });
+    let finalHtml = marked.parse(processed, { renderer: renderer });
     
-    // TOC Generation
-    const headings = contentArea.querySelectorAll('h1, h2, h3');
-    headings.forEach(heading => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = `#${heading.id}`;
-        a.textContent = heading.textContent;
-        // Make indents based on heading level
-        const level = parseInt(heading.tagName[1]);
-        a.style.paddingLeft = `${(level - 1) * 0.8}rem`;
-        li.appendChild(a);
-        tocList.appendChild(li);
-    });
+    // Replace remaining [[HL::text::HL]] outside of code blocks
+    // Fix hanging newline tags that break HTML blocks
+    finalHtml = finalHtml.replace(/\n::HL\]\]/g, '::HL]]\n');
+    
+    // Replace remaining [[HL::text::HL]] outside of code blocks
+    finalHtml = finalHtml.replace(/\[\[HL::([\s\S]*?)::HL\]\]/g, '<mark class="yellow-highlight">$1</mark>');
+    
+    // HEALING OVERLAPPING HTML DOM TAGS
+    // Fix cases where <mark> starts inside a <strong> tag but ends outside it
+    // Ex: <strong><mark>Text:</strong> More Text</mark> -> <mark><strong>Text:</strong> More Text</mark>
+    // Since browser DOM fixes overlap destructively, we fix it in the raw HTML string first
+    finalHtml = finalHtml.replace(/<strong>([^<]*?)<mark class="yellow-highlight">/g, '<mark class="yellow-highlight"><strong>$1');
+    finalHtml = finalHtml.replace(/<em>([^<]*?)<mark class="yellow-highlight">/g, '<mark class="yellow-highlight"><em>$1');
+    finalHtml = finalHtml.replace(/<\/mark>([^<]*?)<\/strong>/g, '$1</strong></mark>');
+    finalHtml = finalHtml.replace(/<\/mark>([^<]*?)<\/em>/g, '$1</em></mark>');
+    
+    // UI Pagination Logic
+    contentArea.innerHTML = '';
+    
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = finalHtml;
+    
+    let pageNumber = 1;
+    let currentPage, currentContent;
+    
+    function createNewPage(num) {
+        const page = document.createElement('div');
+        page.className = 'a4-page';
+        page.innerHTML = `
+            <div class="page-content"></div>
+            <div class="page-footer">Page ${num}</div>
+        `;
+        contentArea.appendChild(page);
+        return page;
+    }
+    
+    currentPage = createNewPage(pageNumber);
+    currentContent = currentPage.querySelector('.page-content');
+    
+    const children = Array.from(tempDiv.children);
+    for (let i = 0; i < children.length; i++) {
+        const el = children[i];
+        currentContent.appendChild(el);
+        
+        // Force synchronous layout calculation
+        if (currentContent.scrollHeight > currentContent.clientHeight) {
+            // If the page was not empty before adding this element, move it to a new page
+            if (currentContent.children.length > 1) {
+                currentContent.removeChild(el);
+                pageNumber++;
+                currentPage = createNewPage(pageNumber);
+                currentContent = currentPage.querySelector('.page-content');
+                currentContent.appendChild(el);
+            }
+        }
+    }
 
+    // Generate TOC
+    const headings = contentArea.querySelectorAll('h1, h2.module-section, h3.topic-section');
+    const tocContainer = document.getElementById('toc');
+    let tocHTML = '';
+    headings.forEach(h => {
+        let indent = '0';
+        if(h.tagName === 'H2') indent = '1rem';
+        if(h.tagName === 'H3') indent = '2rem';
+        tocHTML += `<a href="#${h.id}" style="margin-left: ${indent}; display: block; color: var(--text-secondary); text-decoration: none; padding: 0.4rem 0.75rem; border-radius: 6px; font-size: 0.875rem; transition: background 0.2s, color 0.2s;">${h.innerText}</a>`;
+    });
+    tocContainer.innerHTML = tocHTML;
+
+    // Hide loader
     loader.style.display = 'none';
+
         })
         .catch(err => {
             console.error(err);
-            document.getElementById("loader").innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error loading notes (Is CORS blocking local files?)';
+            loader.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;Error loading notes (Is CORS blocking local files?)';
         });
 });
-
-function copyCode(btn) {
-    const pre = btn.closest('pre');
-    const code = pre.querySelector('code').innerText;
-    navigator.clipboard.writeText(code).then(() => {
-        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-        setTimeout(() => {
-            btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
-        }, 2000);
-    });
-}
     </script>
 </body>
 </html>
