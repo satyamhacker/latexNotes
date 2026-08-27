@@ -466,3 +466,12 @@ Your Python script MUST use a robust fuzzy matching algorithm or regex that igno
 
 ### Rule 44 — TABLE PIPES (|) MUST REMAIN OUTSIDE
 If a highlight spans across multiple cells in a Markdown table, your script MUST explicitly split the [[HL:: and ::HL]] tags at the column boundaries. You must NEVER wrap a pipe (|) character inside the highlight tag (e.g., [[HL:: cell 1 | cell 2 ::HL]] is FORBIDDEN). It must be [[HL:: cell 1 ::HL]] | [[HL:: cell 2 ::HL]]. Wrapping a pipe breaks the Markdown table parser entirely.
+
+### Rule 45 — PROTECTING LINE-LEVEL MARKDOWN SYNTAX IN SCRIPTS
+If you write a Python script to apply highlights, your regex or boundary injection logic MUST actively push `[[HL::` tags *after* leading line-level Markdown syntax. 
+If a user requests highlighting an entire line or heading, your script MUST NOT wrap the `# ` or ` ``` ` or `> ` inside the highlight tags.
+- ❌ `[[HL::# 📤 Expected Output:::HL]]` (Breaks the heading parser, turning it into a paragraph)
+- ✅ `# [[HL::📤 Expected Output:::HL]]` (Correct: The `[[HL::` is safely injected AFTER the `# `)
+- ❌ `[[HL::```bash::HL]]` (Breaks the code block parser)
+- ✅ ` ```bash\n[[HL::...::HL]]` (Correct: Tags are strictly inside the block boundaries)
+Your script must use regex groups (e.g., `^(\s*(?:#+\s+|[-*+]\s+|\d+\.\s+|>\s*))?`) to parse and preserve these leading markers, injecting the `[[HL::` tag strictly *after* them.

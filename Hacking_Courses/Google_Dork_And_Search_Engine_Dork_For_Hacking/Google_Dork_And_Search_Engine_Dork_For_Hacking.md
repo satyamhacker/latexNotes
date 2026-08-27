@@ -15,13 +15,13 @@ Google ek bohot badi library ki tarah hai. Normal search karna aisa hai jaise tu
 ### 📖 3. Technical Definition
 
 * **Precise English:** Google Dorking is an OSINT (Open Source Intelligence) reconnaissance technique that uses advanced search operators to find sensitive information, hidden endpoints, or vulnerable files indexed by search engines.
-* **Hinglish Simplification:** Google Dorking ek aisi technique hai jisme hum special symbols aur keywords (operators) use karke Google se target ki chhipi hui sensitive information (jaise passwords, backup files) nikalte hain.
+* [[HL::**Hinglish Simplification:** Google Dorking ek aisi technique hai jisme hum special symbols aur keywords (operators) use karke Google se target ki chhipi hui sensitive information (jaise passwords, backup files) nikalte hain::HL]].
 
 ### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-* **Problem:** Normal search se bohot zyada "noise" (irrelevant data) aata hai. Target ki public footprint samajhne aur exposed endpoints dhoondhne ke liye normal search fail ho jaati hai.
-* **Solution:** Dorking se hum exact files, login pages, aur configurations dhoondh sakte hain jo public nahi honi chahiye thi.
-* **What breaks if we don't know this?** Tum target ke aise easy-to-find sensitive endpoints miss kar doge jo pehle se hi public domain mein exposed hain.
+* [[HL::**Problem:** Normal search se bohot zyada "noise" (irrelevant data) aata hai. Target ki public footprint samajhne aur exposed endpoints dhoondhne ke liye normal search fail ho jaati hai.::HL]]
+* [[HL::**Solution:** Dorking se hum exact files, login pages, aur configurations dhoondh sakte hain jo public nahi honi chahiye thi::HL]].
+* [[HL::**What breaks if we don't know this?** Tum target ke aise easy-to-find sensitive endpoints miss kar doge jo pehle se hi public domain mein exposed hain::HL]].
 * **✅ Kab use karo (Use in engagement when):** Pre-Engagement phase ya Offline Testing Phase mein jab target ka public attack surface map karna ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Active exploitation phase mein iska kaam nahi hai, wahan scanners (jaise Nmap) aur exploit frameworks use hote hain.
 
@@ -31,23 +31,23 @@ Browser mein Google ke search results dikhenge jisme sirf targeted files (jaise 
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)
 
-1. **Target Action:** Target (jaise XYZ Bank) galti se apni sensitive Excel file ko public web directory mein rakh deta hai.
-2. **Google Indexing:** Google ka crawler us file ko padhta hai aur apne database (index) mein save kar leta hai.
-3. **Attacker Query:** Attacker `operator:value keyword` format mein query bhejta hai (e.g., `filetype:xls`).
-4. **Result Filter:** Google sirf wahi results dikhata hai jo strict criteria match karte hain.
+1. [[HL::**Target Action:** Target (jaise XYZ Bank) galti se apni sensitive Excel file ko public web directory mein rakh deta hai::HL]].
+2. [[HL::**Google Indexing:** Google ka crawler us file ko padhta hai aur apne database (index) mein save kar leta hai::HL]].
+3. [[HL::**Attacker Query:** Attacker `operator:value keyword` format mein query bhejta hai (e.g., `filetype:xls`).::HL]]
+4. [[HL::**Result Filter:** Google sirf wahi results dikhata hai jo strict criteria match karte hain.::HL]]
 
-### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
+### [[HL::💻 7. Hands-On — Runnable Example (Lab-Ready Commands)::HL]]
 
-Google Dorking operators directly browser ke search bar mein type hote hain.
+[[HL::Google Dorking operators directly browser ke search bar mein type hote hain::HL]].
 
 ```bash
-# Browser / Google Search Bar (Manual Execution)
-1  "penetration testing" -course     # "exact phrase" match ke liye quotes; -keyword noise hatane ke liye (course word ko exclude karo)
-2  "index of" "backup" filetype:sql site:edu  # "index of" directory listing ke liye; filetype:sql sirf SQL database backups dhoondhne ke liye; site:edu sirf educational websites target karne ke liye
-3  site:example.com                  # site:operator sirf example.com domain ke results dikhayega
-4  admin OR root                     # OR (ya | operator) dono mein se koi ek word dhoondhega
-5  password * login                  # * (wildcard) beech mein kisi bhi word ko fill kar dega
-6  $100..$200                        # .. (number range) values ke beech ke results dega
+# [[HL::Browser / Google Search Bar (Manual Execution)::HL]]
+[[HL::1  "penetration testing" -course     # "exact phrase" match ke liye quotes; -keyword noise hatane ke liye (course word ko exclude karo)::HL]]
+[[HL::2  "index of" "backup" filetype:sql site:edu  # "index of" directory listing ke liye; filetype:sql sirf SQL database backups dhoondhne ke liye; site:edu sirf educational websites target karne ke liye::HL]]
+[[HL::3  site:example.com                  # site:operator sirf example.com domain ke results dikhayega::HL]]
+[[HL::4  admin OR root                     # OR (ya | operator) dono mein se koi ek word dhoondhega::HL]]
+[[HL::5  password * login                  # * (wildcard) beech mein kisi bhi word ko fill kar dega::HL]]
+[[HL::6  $100..$200                        # .. (number range) values ke beech ke results dega::HL]]
 
 ```
 
@@ -77,16 +77,16 @@ Bug bounty programs mein "Look, Don't Touch" (dekho par target pe unauthorized a
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Kya Google Dorking illegal hai?"**
-* **Galat soch:** Log sochte hain Google par hacking search karna crime hai.
-* **Actually:** Google Dorking 100% legal hai kyunki tum sirf publicly available data dhoondh rahe ho.
+* [[HL::**Confusion 1 — "Kya Google Dorking illegal hai?"::HL]]**
+* [[HL::**Galat soch:** Log sochte hain Google par hacking search karna crime hai.::HL]]
+* [[HL::**Actually:** Google Dorking 100% legal hai kyunki tum sirf publicly available data dhoondh rahe ho::HL]].
 * **Prove karo:** Try karo `site:example.com` search karna. Yeh sirf ek filter hai. Illegal tab hota hai jab tum "Look, Don't Touch" rule tod kar kisi aur ka password use karke login karte ho.
 
 
 * **Confusion 2 — "Kya sabhi operators ek sath use kiye ja sakte hain?"**
-* **Galat soch:** Ek search mein sirf ek hi dork lag sakta hai.
-* **Actually:** Tum multiple operators (jaise `site:`, `filetype:`, aur quotes) chain/combine kar sakte ho.
-* **Prove karo:** Search karo: `site:gov filetype:pdf "report"` aur dekho kaise 3 filters ek sath kaam karte hain.
+* [[HL::**Galat soch:** Ek search mein sirf ek hi dork lag sakta hai.::HL]]
+* [[HL::**Actually:** Tum multiple operators (jaise `site:`, `filetype:`, aur quotes) chain/combine kar sakte ho.::HL]]
+* [[HL::**Prove karo:** Search karo: `site:gov filetype:pdf "report"` aur dekho kaise 3 filters ek sath kaam karte hain::HL]].
 
 
 
@@ -174,8 +174,8 @@ Socho tum pizza order kar rahe ho. **Exact match (`"..."`)** lagana matlab tum r
 
 ### 📖 3. Technical Definition
 
-* **Precise English:** The Exact Match operator (`""`) forces the search engine to return results containing the exact phrase enclosed in quotes. The Exclude operator (`-`) removes any results that contain the specified word or phrase immediately following the minus sign.
-* **Hinglish Simplification:** Exact match se Google ko bolte hain ki "yeh word strictly isi format mein chahiye", aur Exclude se bolte hain "yeh word mere result mein bilkul nahi aana chahiye."
+* [[HL::**Precise English:** The Exact Match operator (`""`) forces the search engine to return results containing the exact phrase enclosed in quotes. The Exclude operator (`-`) removes any results that contain the specified word or phrase immediately following the minus sign.::HL]]
+* [[HL::**Hinglish Simplification:** Exact match se Google ko bolte hain ki "yeh word strictly isi format mein chahiye", aur Exclude se bolte hain "yeh word mere result mein bilkul nahi aana chahiye::HL]]."
 
 ### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
@@ -197,59 +197,58 @@ Search results dramatically shrink ho jayenge. Agar pehle 10,000 results the (ji
 
 ### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
 
-Yahan exact strings dhyan se dekhna. **⭐NO SPACE** (minus ke baad space nahi hona chahiye).
+[[HL::Yahan exact strings dhyan se dekhna. **⭐NO SPACE** (minus ke baad space nahi hona chahiye::HL]]).
 
 ```bash
-# Browser / Google Search Bar
-1  "SQL syntax error" site:target.com          # "SQL syntax error" = Exact Match operator (yeh phrase as-is hona chahiye error message hunting ke liye)
-2  "Apache/2.4.29" "Server at"                 # "Apache/2.4.29" = Version-Specific Search (vulnerable version ⭐Apache 2.4.29[version] extract karne ke liye)
-3  penetration testing -course -tutorial -training  # - (Exclude operator) noise filter karta hai. Note: minus aur word ke beech ⭐NO SPACE hai
-4  "wp-config.php" "DB_PASSWORD"               # Exact config file aur uske andar ka variable dhoondhne ke liye
-5  "Index of /" "Parent Directory" "backup.sql" -forum -stackoverflow # Directory traversal dhoondho lekin forums aur stackoverflow jaisi noise sites ko filter out karo
-6  site:gov "confidential" -pdf                # .gov sites pe confidential information dhoondho, lekin PDF files exclude kardo
+# [[HL::Browser / Google Search Bar::HL]]
+[[HL::1  "SQL syntax error" site:target.com          # "SQL syntax error" = Exact Match operator (yeh phrase as-is hona chahiye error message hunting ke liye)::HL]]
+[[HL::2  "Apache/2.4.29" "Server at"                 # "Apache/2.4.29" = Version-Specific Search (vulnerable version ⭐Apache 2.4.29[version] extract karne ke liye)::HL]]
+[[HL::3  penetration testing -course -tutorial -training  # - (Exclude operator) noise filter karta hai. Note: minus aur word ke beech ⭐NO SPACE hai::HL]]
+[[HL::4  "wp-config.php" "DB_PASSWORD"               # Exact config file aur uske andar ka variable dhoondhne ke liye::HL]]
+[[HL::5  "Index of /" "Parent Directory" "backup.sql" -forum -stackoverflow # Directory traversal dhoondho lekin forums aur stackoverflow jaisi noise sites ko filter out karo::HL]]
+[[HL::6  site:gov "confidential" -pdf                # .gov sites pe confidential information dhoondho, lekin PDF files exclude kardo::HL]]
 
 ```
+# [[HL::📤 Expected Output:::HL]]
 
-# 📤 Expected Output:
+[[HL::Filtered results. For example, command 4 will show actual exposed `wp-config.php` files instead of tutorials explaining how to configure them.::HL]]
 
-Filtered results. For example, command 4 will show actual exposed `wp-config.php` files instead of tutorials explaining how to configure them.
+### [[HL::🔒 8. Attack Surface & Defense (Dual Perspective)::HL]]
 
-### 🔒 8. Attack Surface & Defense (Dual Perspective)
+**[[HL::🔴 Attacker Perspective:** TechCorp naam ki company ka scenario socho. Attacker dork banata hai `"TechCorp" "password" site:pastebin.com -tutorial`. Is exact match aur noise reduction (Exclude) ke combination se attacker ko employee credentials mil jaate hain (Targeted Recon).::HL]]
+**[[HL::🔵 Defender Perspective:** Defenders ko web servers (jaise Apache) configure karne chahiye ki wo apna version (e.g., Apache/2.4.29) header/error page mein disclose na karein. Application layer pe custom error pages banane chahiye taaki `"SQL syntax error"` index na ho.::HL]]
 
-**🔴 Attacker Perspective:** TechCorp naam ki company ka scenario socho. Attacker dork banata hai `"TechCorp" "password" site:pastebin.com -tutorial`. Is exact match aur noise reduction (Exclude) ke combination se attacker ko employee credentials mil jaate hain (Targeted Recon).
-**🔵 Defender Perspective:** Defenders ko web servers (jaise Apache) configure karne chahiye ki wo apna version (e.g., Apache/2.4.29) header/error page mein disclose na karein. Application layer pe custom error pages banane chahiye taaki `"SQL syntax error"` index na ho.
+### [[HL::🌍 9. Real-World Penetration Testing Use-Case::HL]]
 
-### 🌍 9. Real-World Penetration Testing Use-Case
-
-Bug bounty hunter TechCorp ke external attack surface ko test kar raha hai. Target bada hai, toh sirf `TechCorp` search karne par hazaron news articles aate hain (False Positives). Hunter Exact Match aur Exclude operator use karke Pastebin par exposed source code dhoondhta hai. Exact queries se noise filter karke use leaked credentials milte hain, jise wo report karke bounty jeetta hai.
+[[HL::Bug bounty hunter TechCorp ke external attack surface ko test kar raha hai. Target bada hai, toh sirf `TechCorp` search karne par hazaron news articles aate hain (False Positives). Hunter Exact Match aur::HL]] Exclude operator use karke Pastebin par exposed source code dhoondhta hai. Exact queries se noise filter karke use leaked credentials milte hain, jise wo report karke bounty jeetta hai.
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Exclude sign ke baad space laga dena (e.g., `- tutorial`).
-* **🤦 Why:** Beginners typing mein aadat se space de dete hain.
-* **✅ The 'Pro' Way:** Hamesha ensure karo ki minus aur keyword ke beech **⭐NO SPACE** ho (`-tutorial`).
-* **⚡ Consequences:** Agar space laga diya, toh Google exclude karne ki jagah search results mein minus sign dhoondhne lagega, aur tumhara noise reduction fail ho jayega.
+* **❌ [[HL::Mistake:** Exclude sign ke baad space laga dena (e.g., `- tutorial`).::HL]]
+* [[HL::**🤦 Why:** Beginners typing mein aadat se space de dete hain.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Hamesha ensure karo ki minus aur keyword ke beech **⭐NO SPACE** ho (`-tutorial`).::HL]]
+* [[HL::**⚡ Consequences:** Agar space laga diya, toh Google exclude karne ki jagah search results mein minus sign dhoondhne lagega, aur tumhara noise reduction fail ho jayega::HL]].
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Single word ko quotes mein likhne ka kya fayda?"**
-* **Galat soch:** Quotes sirf lambe phrases ke liye hote hain.
-* **Actually:** Google kabhi-kabhi single words ke synonyms (jaise 'car' search karne par 'automobile') dikhata hai. Agar tumhe exact wahi word chahiye, toh single word pe bhi quotes (`"car"`) lagana padta hai.
+* [[HL::**Confusion 1 — "Single word ko quotes mein likhne ka kya fayda?"::HL]]**
+* [[HL::**Galat soch:** Quotes sirf lambe phrases ke liye hote hain.::HL]]
+* [[HL::**Actually:** Google kabhi-kabhi single words ke synonyms (jaise 'car' search karne par 'automobile') dikhata hai. Agar tumhe exact wahi word chahiye, toh single word pe bhi quotes (`"car"`) lagana padta hai::HL]].
 * **Prove karo:** Google par `password` bina quotes ke aur `"password"` quotes ke sath try karke results ka difference dekho.
 
 
-* **Confusion 2 — "Minus sign kaam nahi kar raha, error aara hai."**
-* **Galat soch:** Operator deprecated ho gaya hoga.
-* **Actually:** 99% time typing mistake hoti hai — tumne space daal diya hoga.
-* **Prove karo:** `apple -fruit` aur `apple - fruit` try karo, dekho kaise space logic tod deta hai.
+* [[HL::**Confusion 2 — "Minus sign kaam nahi kar raha, error aara hai."::HL]]**
+* [[HL::**Galat soch:** Operator deprecated ho gaya hoga.::HL]]
+* [[HL::**Actually:** 99% time typing mistake hoti hai — tumne space daal diya hoga.::HL]]
+* [[HL::**Prove karo:** `apple -fruit` aur `apple - fruit` try karo, dekho kaise space logic tod deta hai::HL]].
 
 
 
 ### 🛠️ 12. Troubleshooting Flowchart (Tool/Exploit Issues)
 
 * **`[Irrelevant pages like StackOverflow are still appearing in results]`**
-* **Root Cause:** Tumne exclude filter galat lagaya hai ya minus ke baad space de diya hai.
-* **Fix:** Apne query ko `-"stackoverflow.com"` ya `-site:stackoverflow.com` mein change karo bina kisi space ke.
+* [[HL::**Root Cause:** Tumne exclude filter galat lagaya hai ya minus ke baad space de diya hai.::HL]]
+* [[HL::**Fix:** Apne query ko `-"stackoverflow.com"` ya `-site:stackoverflow.com` mein change karo bina kisi space ke::HL]].
 
 
 
@@ -284,14 +283,14 @@ Bug bounty hunter TechCorp ke external attack surface ko test kar raha hai. Targ
 
 ### ❓ 16. Interview & Certification Exam Q&A
 
-* **Q:** Google dorking mein Version-Specific Search ka kya importance hai aur isse kaise perform karte hain?
-* **A:** Version-specific search attacker ko target pe chal rahe exact software version (e.g., Apache 2.4.29) dhoondhne mein help karti hai. Hum Exact Match operator use karte hain (jaise `"Apache/2.4.29"`). Ek baar exact version mil jaye, toh hum exploit databases pe uska known exploit dhoondh sakte hain.
-* **Q:** Tum Google dorks chalate waqt false positives kaise reduce karoge?
-* **A:** Main Exclude (`-`) operator use karunga. For example, agar mujhe kisi company ke leaks dhoondhne hain par news articles nahi chahiye, toh main query ke aage `-news -press -article` laga dunga (ensuring there's no space after the minus sign).
+* [[HL::**Q:** Google dorking mein Version-Specific Search ka kya importance hai aur isse kaise perform karte hain?::HL]]
+* [[HL::**A:** Version-specific search attacker ko target pe chal rahe exact software version (e.g., Apache 2.4.29) dhoondhne mein help karti hai. Hum Exact Match operator use karte hain (jaise `"Apache/2.4.29"`). Ek baar exact version mil jaye, toh hum exploit databases pe uska known exploit dhoondh sakte hain::HL]].
+* **Q:** Tum [[HL::Google dorks chalate waqt false positives kaise reduce karoge?::HL]]
+* [[HL::**A:** Main Exclude (`-`) operator use karunga. For example, agar mujhe kisi company ke leaks dhoondhne hain par news articles nahi chahiye, toh main query ke aage `-news -press -article` laga dunga (ensuring there's no space after the minus sign::HL]]).
 
 ### 📝 17. One-Line Memory Hook
 
-"Quotes (`" "`) lagao toh Google utna hi dega jitna manga, Minus (`-`) bina space ke lagao toh kachra (noise) nikal jayega!"
+"[[HL::Quotes (`" "`) lagao toh Google utna hi dega jitna manga, Minus (`-`) bina space ke lagao toh kachra (noise) nikal jayega::HL]]!"
 
 ### 🔑 18. Keywords Coverage Verification
 
@@ -343,14 +342,14 @@ Restaurant mein food order karne ka example socho. Agar tum bolte ho "Mujhe Pizz
 
 ### 📖 3. Technical Definition
 
-* **Precise English:** The Logical OR operator (`|` or `OR`) tells Google to find pages that contain at least one of the given terms. The Grouping operator `( )` is used to group multiple operators and terms logically to control the order of evaluation. Space acts as the Default behavior for Logical AND.
-* **Hinglish Simplification:** Space ka matlab hai AND (dono words chahiye), `|` (pipe) ka matlab hai OR (koi ek word chahiye), aur brackets `( )` ka use karke hum in sharto (conditions) ko ek sath neatly pack karte hain taaki Google sahi result de.
+* [[HL::**Precise English:** The Logical OR operator (`|` or `OR`) tells Google to find pages that contain at least one of the given terms. The Grouping operator `( )` is used to group multiple operators and terms logically to::HL]] [[HL::control the order of evaluation. Space acts as the Default behavior for Logical AND.::HL]]
+* [[HL::**Hinglish Simplification:** Space ka matlab hai AND (dono words chahiye), `|` (pipe) ka matlab hai OR (koi ek word chahiye), aur brackets `( )` ka use karke hum in sharto (conditions) ko ek sath neatly pack karte hain taaki Google sahi result de::HL]].
 
 ### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-* **Problem:** Ek badi company (jaise MegaCorp) ke paas multiple subdomains (`dev`, `staging`, `test`) aur file extensions (`.xls`, `.xlsx`) hote hain. Har ek ke liye alag-alag search karna bohot time-consuming hai.
-* **Solution:** OR aur Grouping ka use karke hum ek hi "master dork" bana sakte hain jo saare environments aur File Type Variations ko ek baar mein scan kar lega (Multiple Targets Search).
-* **What breaks if we don't know this?** Tumhari recon adhoori reh jayegi kyunki tumne `.xls` toh dhoondh liya par `.xlsx` (jo naya format hai) check karna bhool gaye.
+* [[HL::**Problem:** Ek badi company (jaise MegaCorp) ke paas multiple subdomains (`dev`, `staging`, `test`) aur file extensions (`.xls`, `.xlsx`) hote hain. Har ek ke liye alag-alag search karna bohot time-consuming hai::HL]].
+* [[HL::**Solution:** OR aur Grouping ka use karke hum ek hi "master dork" bana sakte hain jo saare environments aur File Type Variations ko ek baar mein scan kar lega (Multiple Targets Search::HL]]).
+* [[HL::**What breaks if we don't know this?** Tumhari recon adhoori reh jayegi kyunki tumne `.xls` toh dhoondh liya par `.xlsx` (jo naya format hai) check karna bhool gaye::HL]].
 * **✅ Kab use karo (Use in engagement when):** Jab target ki alag-alag dev environments dhoondhni ho, ya jab specific data (jaise credentials) alag-alag file extensions mein chhupi ho sakti hai.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab query bohot lambi aur over-complex ho jaye (Google maximum 32 words allow karta hai) — aisi situation mein custom script (jaise Python recon tools) prefer karo.
 
@@ -360,22 +359,22 @@ Search results mein ab sirf ek type ka page nahi aayega, balki alag-alag subdoma
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)
 
-1. **Query Parsing:** Jab tum `(admin | root)` likhte ho, parser ise ek logical logic block manta hai.
-2. **Boolean Logic Evaluation:** Google ka backend pehle brackets solve karta hai (BODMAS rule ki tarah). Agar ek term `(A | B)` True hai, aur doosri term `(C | D)` True hai, aur beech mein space (AND) hai, toh page result mein aayega.
-3. **⭐space = AND:** Google backend automatically har space ko AND logical constraint mein badal deta hai. Pipe (`|`) ke aas-paas spaces safe hain, isse query nahi tootti.
+1. [[HL::**Query Parsing:** Jab tum `(admin | root)` likhte ho, parser ise ek logical logic block manta hai.::HL]]
+2. [[HL::**Boolean Logic Evaluation:** Google ka backend pehle brackets solve karta hai (BODMAS rule ki tarah). Agar ek term `(A | B)` True hai, aur doosri term `(C | D)` True hai, aur beech mein space (AND) hai, toh page result mein aayega.::HL]]
+3. [[HL::**⭐space = AND:** Google backend automatically har space ko AND logical constraint mein badal deta hai. Pipe (`|`) ke aas-paas spaces safe hain, isse query nahi tootti::HL]].
 
 ### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
 
-Dhyan do ki complex logic kaise brackets ke andar nest ho raha hai.
+[[HL::Dhyan do ki complex logic kaise brackets ke andar nest ho raha hai::HL]].
 
 ```bash
-# Browser / Google Search Bar
-1  site:domain1.com | site:domain2.com         # | (OR operator) use karke do alag-alag domains ko ek sath scan karna
-2  (administrator | admin | root) login        # Grouping ( ) ka use; in teeno mein se koi ek word zaroori hai, aur "login" word bhi hona chahiye (kyunki beech mein space hai, jo default AND hai)
-3  filetype:xls | filetype:xlsx "password"     # File Type Variations: purani (.xls) aur nayi (.xlsx) excel files dono mein "password" exact phrase dhoondho
-4  "Apache" ("2.4.29" | "2.4.30" | "2.4.49")   # Apache (web server software) ke specific 3 versions mein se koi ek dhoondho
-5  site:target.com (admin | administrator | root) # Target domain pe specific admin interface names ki Synonym Search
-6  (site:staging.target.com | site:dev.target.com | site:test.target.com) (filetype:env | filetype:config | filetype:ini) ("DB_PASSWORD" | "DATABASE_PASSWORD" | "MYSQL_PASSWORD") # MegaCorp scenario: Ek single Master Dork jo saare test servers pe, saare configuration files mein, saare password synonyms dhoondh lega
+# [[HL::Browser / Google Search Bar::HL]]
+[[HL::1  site:domain1.com | site:domain2.com         # | (OR operator) use karke do alag-alag domains ko ek sath scan karna::HL]]
+[[HL::2  (administrator | admin | root) login        # Grouping ( ) ka use; in teeno mein se koi ek word zaroori hai, aur "login" word bhi hona chahiye (kyunki beech mein space hai, jo default AND hai)::HL]]
+[[HL::3  filetype:xls | filetype:xlsx "password"     # File Type Variations: purani (.xls) aur nayi (.xlsx) excel files dono mein "password" exact phrase dhoondho::HL]]
+[[HL::4  "Apache" ("2.4.29" | "2.4.30" | "2.4.49")   # Apache (web server software) ke specific 3 versions mein se koi ek dhoondho::HL]]
+[[HL::5  site:target.com (admin | administrator | root) # Target domain pe specific admin interface names ki Synonym Search::HL]]
+[[HL::6  (site:staging.target.com | site:dev.target.com | site:test.target.com) (filetype:env | filetype:config | filetype:ini) ("DB_PASSWORD" | "DATABASE_PASSWORD" | "MYSQL_PASSWORD") # MegaCorp scenario: Ek single Master Dork jo saare test servers pe, saare configuration files mein, saare password synonyms dhoondh lega::HL]]
 
 ```
 
@@ -401,15 +400,15 @@ MegaCorp ke external network pentest ke dauran, ek attacker ko individually saar
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "OR capital mein likhna zaroori hai kya?"**
-* **Galat soch:** or, Or, OR sab ek jaise kaam karenge.
-* **Actually:** Google Boolean operators case-sensitive hote hain. Tumhe hamesha uppercase `OR` likhna padega. Usse bhi behtar hai `|` (pipe) symbol use karo, usme casing ka issue nahi hota.
-* **Prove karo:** `apple or banana` search karo, aur fir `apple OR banana` search karo. Pehle case mein 'or' ko word manega, doosre mein logical operator.
+* [[HL::**Confusion 1 — "OR capital mein likhna zaroori hai kya?"::HL]]**
+* [[HL::**Galat soch:** or, Or, OR sab ek jaise kaam karenge.::HL]]
+* [[HL::**Actually:** Google Boolean operators case-sensitive hote hain. Tumhe hamesha uppercase `OR` likhna padega. Usse bhi behtar hai `|` (pipe) symbol use karo, usme casing ka issue nahi hota::HL]].
+* [[HL::**Prove karo:** `apple or banana` search karo, aur fir `apple OR banana` search karo. Pehle case mein 'or' ko word manega, doosre mein logical operator::HL]].
 
 
-* **Confusion 2 — "Kya AND likhne ki zaroorat hai?"**
-* **Galat soch:** Mujhe strictly `keyword1 AND keyword2` likhna padega.
-* **Actually:** Default behavior is AND. ⭐space = AND. Toh space dena kaafi hai.
+* [[HL::**Confusion 2 — "Kya AND likhne ki zaroorat hai?"::HL]]**
+* [[HL::**Galat soch:** Mujhe strictly `keyword1 AND keyword2` likhna padega.::HL]]
+* [[HL::**Actually:** Default behavior is AND. ⭐space = AND. Toh space dena kaafi hai::HL]].
 
 
 
@@ -452,10 +451,10 @@ Result: 1. dev.domain.com/config.env (MATCH)
 
 ### ❓ 16. Interview & Certification Exam Q&A
 
-* **Q:** Google dorks mein Grouping `( )` operator kyu zaroori hai jab hum `|` (OR) use kar rahe hon?
-* **A:** Grouping isliye zaroori hai kyunki Google ka default behavior Space = AND hota hai. Bina brackets ke, operator precedence mix ho jayega. Example: `site:target.com admin | root` Google ko bata dega "mujhe target.com pe admin dhoondh ke do, YA poore internet par kahin bhi root dhoondh ke do", jisse noise aayegi. `site:target.com (admin | root)` correct logic hai.
-* **Q:** Tum kisi target ke 3 alag-alag dev environments pe specific backup files kaise dhoondhoge?
-* **A:** Main Logical OR aur Grouping use karunga: `(site:dev1.com | site:dev2.com | site:dev3.com) (filetype:bak | filetype:sql)`.
+* [[HL::**Q:** Google dorks mein Grouping `( )` operator kyu zaroori hai jab hum `|` (OR) use kar rahe hon::HL]]?
+* [[HL::**A:** Grouping isliye zaroori hai kyunki Google ka default behavior Space = AND hota hai. Bina brackets ke, operator precedence mix ho jayega. Example: `site:target.com admin | root` Google ko bata dega "mujhe target.com pe admin dhoondh ke do, YA poore internet par kahin bhi root dhoondh ke do", jisse noise aayegi. `site:target.com (admin | root)` correct logic hai.::HL]]
+* [[HL::**Q:** Tum kisi target ke 3 alag-alag dev environments pe specific backup files kaise dhoondhoge?::HL]]
+* [[HL::**A:** Main Logical OR aur Grouping use karunga: `(site:dev1.com | site:dev2.com | site:dev3.com) (filetype:bak | filetype:sql::HL]])`.
 
 ### 📝 17. One-Line Memory Hook
 
@@ -495,16 +494,16 @@ Is topic mein hum Google search mein **Pattern Matching** seekhenge. **Wildcard 
 
 ### 📖 3. Technical Definition
 
-* **Precise English:** The Wildcard operator (`*`) acts as a placeholder for any unknown word or phrase in a query (useful for pattern matching). The Range operator (`..`) searches for numbers falling within a defined numerical range (e.g., prices, years, or version numbers) without any spaces.
-* **Hinglish Simplification:** Star (`*`) ka matlab hai "yahan par Google koi bhi word fit kar de", aur Do-Dots (`..`) ka matlab hai "number 1 se lekar number 2 ke beech ki har cheez dhoondho."
+* [[HL::**Precise English:** The Wildcard operator (`*`) acts as a placeholder for any unknown word or phrase in a query (useful for pattern matching). The Range operator (`..`) searches for numbers falling within a defined numerical range (e.g., prices, years, or version numbers) without any spaces.::HL]]
+* [[HL::**Hinglish Simplification:** Star (`*`) ka matlab hai "yahan par Google koi bhi word fit kar de", aur Do-Dots (`..`) ka matlab hai "number 1 se lekar number 2 ke beech ki har cheez dhoondho::HL]]."
 
 ### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-* **Problem:** Kai baar tumhe exact error message yaad nahi hota, ya target pe chal raha vulnerable software kisi range mein hota hai (jaise "FinanceApp" ka version 2.1 se 2.5 tak vulnerable hai). Har version ko individually search karna tedious hai.
-* **Solution:** Wildcard se hum unknown portions fill kar lete hain (Pattern Matching), aur Range se hum ek sath saari vulnerable Version Hunting aur Year-Based Search kar lete hain.
-* **What breaks if we don't know this?** Tum exact match dhoondhte rahoge jabki target kisi minor update version (jaise 2.4.1) par chal raha hoga aur tumhara dork use miss kar dega.
-* **✅ Kab use karo (Use in engagement when):** Jab kisi framework ki poori version series (jaise WordPress 5.x) check karni ho, ya CVE database ke specific years (2019-2021) ke exploits correlate karne hon.
-* **❌ Kab mat karo / Alternative prefer karo:** Jab single, exact version confirm ho chuka ho (tab Exact Match `""` use karo).
+* [[HL::**Problem:** Kai baar tumhe exact error message yaad nahi hota, ya target pe chal raha vulnerable software kisi range mein hota hai (jaise "FinanceApp" ka version 2.1 se 2.5 tak vulnerable hai). Har version ko individually search karna tedious hai.::HL]]
+* [[HL::**Solution:** Wildcard se hum unknown portions fill kar lete hain (Pattern Matching), aur Range se hum ek sath saari vulnerable Version Hunting aur Year-Based Search kar lete hain.::HL]]
+* [[HL::**What breaks if we don't know this?** Tum exact match dhoondhte rahoge jabki target kisi minor update version (jaise 2.4.1) par chal raha hoga aur tumhara dork use miss kar dega::HL]].
+* **✅ [[HL::Kab use karo (Use in engagement when):** Jab kisi framework ki poori version series (jaise WordPress 5.x) check karni ho, ya CVE database ke specific years (2019-2021) ke exploits correlate karne hon.::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo:** Jab single, exact version confirm ho chuka ho (tab Exact Match `""` use karo::HL]]).
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
@@ -512,27 +511,27 @@ Search results mein tumhe alag-alag variations milengi. Range use karne par tum 
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)
 
-1. **Wildcard Indexing:** Jab Google `"admin * login"` dekhta hai, toh uska regex-like engine aise sentences dhoondhta hai jahan 'admin' aur 'login' ke beech ek ya multiple words hon (e.g., "admin portal login", "admin secure access login").
-2. **Numerical Range Mapping:** `number1..number2` lagane par parser usse ek mathematical boundary `(x >= number1 AND x <= number2)` mein convert kar deta hai. Isliye Range mein spaces nahi hone chahiye — spaces se parser equation tod dega.
+1. [[HL::**Wildcard Indexing:** Jab Google `"admin * login"` dekhta hai, toh uska regex-like engine aise sentences dhoondhta hai jahan 'admin' aur 'login' ke beech ek ya multiple words hon (e.g., "admin portal login", "admin secure access login::HL]]").
+2. [[HL::**Numerical Range Mapping:** `number1..number2` lagane par parser usse ek mathematical boundary `(x >= number1 AND x <= number2)` mein convert kar deta hai. Isliye Range mein spaces nahi hone chahiye — spaces se parser equation tod dega::HL]].
 
 ### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
 
-Dhyan do ki Range operator (`..`) ke aaju-baaju spaces bilkul nahi hain. Yeh critical hai.
+[[HL::Dhyan do ki Range operator (`..`) ke aaju-baaju spaces bilkul nahi hain. Yeh critical hai::HL]].
 
 ```bash
-# Browser / Google Search Bar
-1  "keyword * keyword"                 # Wildcard (*) = quotes ke andar kisi bhi random word se fill ho jayega
-2  number1..number2                    # Range (..) = do numbers ke beech ke results dega (NO SPACES ALLOWED HERE)
-3  "admin * login"                     # Pattern Matching: "admin panel login", "admin portal login" sab catch karega
-4  "iPhone" $300..$600                 # E-commerce example (price range)
-5  site:target.com "powered by WordPress 5.*" inurl:wp-admin # Version Hunting: Target pe ⭐WordPress 5.*[version] (5.1, 5.2, 5.8 etc.) dhundo aur login page target karo
-6  site:target.com filetype:pdf "confidential" 2019..2021    # Historical data: 2019 se 2021 ke beech ke PDF reports dhoondho
+# [[HL::Browser / Google Search Bar::HL]]
+[[HL::1  "keyword * keyword"                 # Wildcard (*) = quotes ke andar kisi bhi random word se fill ho jayega::HL]]
+[[HL::2  number1..number2                    # Range (..) = do numbers ke beech ke results dega (NO SPACES ALLOWED HERE)::HL]]
+[[HL::3  "admin * login"                     # Pattern Matching: "admin panel login", "admin portal login" sab catch karega::HL]]
+[[HL::4  "iPhone" $300..$6::HL]]00                 # E-commerce example (price range)
+[[HL::5  site:target.com "powered by WordPress 5.*" inurl:wp-admin # Version Hunting: Target pe ⭐WordPress 5.*[version] (5.1, 5.2, 5.8 etc.) dhundo aur login page target karo::HL]]
+[[HL::6  site:target.com filetype:pdf "confidential" 2019..2021    # Historical data: 2019 se 2021 ke beech ke PDF reports dhoondho::HL]]
 
 ```
 
 # 📤 Expected Output:
 
-Results matching multiple variations. Command 5 will return domains showing "powered by WordPress 5.2" as well as "powered by WordPress 5.8".
+Result[[HL::s matching multiple variations. Command 5 will return domains showing "powered by WordPress 5.2" as well as "powered by WordPress 5.8::HL]]".
 
 ### 🔒 8. Attack Surface & Defense (Dual Perspective)
 
@@ -545,23 +544,23 @@ Ek Bug Bounty hunter FinanceApp naam ke software par test kar raha tha. Use pata
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Range operator ke beech space dena (`2019 .. 2021` ya `2019.. 2021`).
-* **🤦 Why:** Beginners ko lagta hai spaces query read karne mein aasan banayenge.
-* **✅ The 'Pro' Way:** Range mein spaces bilkul nahi hone chahiye (`2019..2021`).
+* **❌ [[HL::Mistake:** Range operator ke beech space dena (`2019 .. 2021` ya `2019.. 2021`).::HL]]
+* [[HL::**🤦 Why:** Beginners ko lagta hai spaces query read karne mein aasan banayenge.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Range mein spaces bilkul nahi hone chahiye (`2019..2021`::HL]]).
 * **⚡ Consequences:** Agar space laga diya, toh Google Range function ko break karke usse normal dots `.` aur words ki tarah padhega, jisse range filter puri tarah fail ho jayega.
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Kya Wildcard sirf ek single character ko replace karta hai?"**
-* **Galat soch:** Jaise Linux terminal mein `?` ek character replace karta hai, waisa hi Google mein hota hoga.
-* **Actually:** Google ka Wildcard `*` poore-poore words (1 ya 1 se zyada) ko replace karta hai. Yeh character-level regex nahi hai.
-* **Prove karo:** `"how to * a computer"` search karo. Tumhe "how to hack a computer" aur "how to build a gaming computer" (multiple words) dono milenge.
+* [[HL::**Confusion 1 — "Kya Wildcard sirf ek single character ko replace karta hai?"::HL]]**
+* [[HL::**Galat soch:** Jaise Linux terminal mein `?` ek character replace karta hai, waisa hi Google mein hota hoga.::HL]]
+* [[HL::**Actually:** Google ka Wildcard `*` poore-poore words (1 ya 1 se zyada) ko replace karta hai. Yeh character-level regex nahi hai.::HL]]
+* [[HL::**Prove karo:** `"how to * a computer"` search karo. Tumhe "how to hack a computer" aur "how to build a gaming computer" (multiple words) dono milenge::HL]].
 
 
-* **Confusion 2 — "Kya Range letters ke liye use hota hai? jaise A..Z"**
-* **Galat soch:** Alphabetical range bhi possible hai.
-* **Actually:** Google ka Range operator `..` sirf numbers aur monetary values (currency) ke liye design kiya gaya hai.
-* **Prove karo:** `A..Z` search karne ka try karo, yeh range evaluate nahi hoga.
+* [[HL::**Confusion 2 — "Kya Range letters ke liye use hota hai? jaise A..Z"::HL]]**
+* [[HL::**Galat soch:** Alphabetical range bhi possible hai.::HL]]
+* [[HL::**Actually:** Google ka Range operator `..` sirf numbers aur monetary values (currency) ke liye design kiya gaya hai.::HL]]
+* [[HL::**Prove karo:** `A..Z` search karne ka try karo, yeh range evaluate nahi hoga::HL]].
 
 
 
@@ -673,12 +672,12 @@ Socho ek bohot bada shopping mall (Internet) hai jahan laakhon dukaanein hain. A
 ### 📖 3. Technical Definition
 
 * **Precise English:** The `site:` operator restricts search results to a specific domain, subdomain, or Top-Level Domain (TLD), forming the basis for passive subdomain enumeration and scope restriction during reconnaissance.
-* **Hinglish Simplification:** `site:` operator Google ko bolta hai ki sirf usi website, domain ya extension (.gov, .com) ke andar search karo jo humne specify kiya hai.
+* [[HL::**Hinglish Simplification:** `site:` operator Google ko bolta hai ki sirf usi website, domain ya extension (.gov, .com) ke andar search karo jo humne specify kiya hai::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Bug bounty ya Client Engagement (jab client tumhe hack karne ka contract deta hai) mein target ka scope strictly defined hota hai. Agar tum scope ke bahar scan/hack karoge toh Scope Violation (unauthorized hacking) ho jayega.
-* **Solution:** `site:` operator directly target domain ko lock kar deta hai, taaki tumhari recon target tak hi seemit rahe.
+* [[HL::**Problem:** Bug bounty ya Client Engagement (jab client tumhe hack karne ka contract deta hai) mein target ka scope strictly defined hota hai. Agar tum scope ke bahar scan/hack karoge toh Scope Violation (unauthorized hacking) ho jayega.::HL]]
+* [[HL::**Solution:** `site:` operator directly target domain ko lock kar deta hai, taaki tumhari recon target tak hi seemit rahe::HL]].
 * **What breaks?** Bina iske, tumhara search data doosri websites ke noise se bhar jayega, aur tum real target pe focus nahi kar paoge.
 * **✅ Kab use karo:** Subdomain Enumeration (target ke chhupe hue sub-parts dhoondhna) ke waqt, competitor analysis ke liye, ya jab specific extension jaise `.gov` mein vulnerabilities dhoondhni ho.
 * **❌ Kab mat karo:** Jab tumhe broad general knowledge chahiye ya jab tum GitHub dorks mein multiple random domains pe credentials hunt kar rahe ho.
@@ -689,16 +688,16 @@ Google search bar mein dork type karne ke baad result pages mein sirf wahi URLs 
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)
 
-(1) Attacker wildcard query `site:*.target.com` Google mein daalta hai. -> (2) Google ka index filter hota hai aur woh target.com ke saare subdomains (dev, api, test) list karta hai. -> (3) Attacker is passive data ko Subfinder (passive subdomain enumeration tool — public sources se subdomains collect karta hai) ya Amass (advanced asset discovery tool) ke results ke saath cross-verify karta hai.
+([[HL::1) Attacker wildcard query `site:*.target.com` Google mein daalta hai. -> (2) Google ka index filter hota hai aur woh target.com ke saare subdomains (dev, api, test) list karta hai. -> (3) Attacker is passive data ko Subfinder (passive subdomain enumeration tool — public sources se subdomains collect karta hai) ya Amass (advanced asset discovery tool) ke results ke saath cross-verify karta hai::HL]].
 
 ### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
 
 **Exact Domain & TLD-Specific Search:**
 
 ```text
-# Browser | Google Search
+# [[HL::Browser | Google Search
 1  site:example.com                           # site: = domain filter operator; example.com = target domain (sirf is domain ke pages dikhenge)
-2  site:gov                                   # gov = Top-Level Domain (sirf government websites ke results aayenge)
+2  site:gov                                   # gov = Top-Level Domain (sirf government websites ke results aayenge)::HL]]
 
 ```
 
@@ -709,9 +708,9 @@ Google search bar mein dork type karne ke baad result pages mein sirf wahi URLs 
 **Subdomain Discovery & Wildcards:**
 
 ```text
-# Browser | Google Search
+# [[HL::Browser | Google Search
 1  site:*.example.com                         # *. = wildcard (example.com ke aage kuch bhi ho jaise dev.example.com, api.example.com sab dikhao)
-2  site:example.com -www                      # - = exclude operator; www = common subdomain (www ko chhodkar baaki saare subdomains dikhao)
+2  site:example.com -www                      # - = exclude operator; www = common subdomain (www ko chhodkar baaki saare subdomains dikhao)::HL]]
 
 ```
 
@@ -722,11 +721,11 @@ Google search bar mein dork type karne ke baad result pages mein sirf wahi URLs 
 **Combining Domains & Keywords:**
 
 ```text
-# Browser | Google Search
-1  site:example.com | site:example.org        # | = OR operator (ya toh example.com ya example.org ke results dikhao)
-2  site:github.com password                   # site:github.com = github isolate karo; password = text dhoondho (GitHub pe password leaks hunt karne ke liye)
-3  site:*.target.com inurl:admin -www         # *.target.com = sab subdomains; inurl:admin = URL mein 'admin' ho; -www = www exclude karo
-4  site:tesla.com filetype:pdf confidential   # site:tesla.com = domain; filetype:pdf = PDF file ho; confidential = andar text ho
+# [[HL::Browser | Google Search::HL]]
+[[HL::1  site:example.com | site:example.org        # | = OR operator (ya toh example.com ya example.org ke results dikhao)::HL]]
+[[HL::2  site:github.com password                   # site:github.com = github isolate karo; password = text dhoondho (GitHub pe password leaks hunt karne ke liye)::HL]]
+[[HL::3  site:*.target.com inurl:admin -www         # *.target.com = sab subdomains; inurl:admin = URL mein 'admin' ho; -www = www exclude karo::HL]]
+[[HL::4  site:tesla.com filetype:pdf confidential   # site:tesla.com = domain; filetype:pdf = PDF file ho; confidential = andar text::HL]] ho
 
 ```
 
@@ -745,9 +744,9 @@ Google search bar mein dork type karne ke baad result pages mein sirf wahi URLs 
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Likhna `site: example.com` (colon ke baad space dena).
-* **🤦 Why:** Beginners sochte hain grammar ki tarah space aayega.
-* **✅ The 'Pro' Way:** **NO SPACE!** Hamesha `site:example.com` likho. Space dene se Google usse operator nahi maanta.
+* **❌ [[HL::Mistake:** Likhna `site: example.com` (colon ke baad space dena).::HL]]
+* [[HL::**🤦 Why:** Beginners sochte hain grammar ki tarah space aayega.::HL]]
+* [[HL::**✅ The 'Pro' Way:** **NO SPACE!** Hamesha `site:example.com` likho. Space dene se Google usse operator nahi maanta::HL]].
 * **⚡ Consequences:** Agar space diya, toh Google "site" word ko aur "example.com" ko alag-alag search karega aur poora internet ka kachra result mein aayega.
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
@@ -806,12 +805,12 @@ Query: site:*.target.com -www
 
 * **Q:** Tumhe kisi client ka external attack surface map karna hai passively. Sabse pehla dork kya use karoge aur noise kaise kam karoge?
 * **A:** Main `site:*.client.com -www` use karunga. Isse saare subdomains milenge aur main website (www) ka marketing noise exclude ho jayega, jisse dev aur staging environments aasani se mil jayenge.
-* **Q:** `site:gov` kya karta hai aur yeh kab useful hai?
-* **A:** Yeh TLD-specific search hai jo results ko sirf .gov domains tak limit karta hai. Yeh government infrastructure pe pattern-based bugs ya data leaks hunt karne ke liye bohot useful hai.
+* **Q:** [[HL::`site:gov` kya karta hai aur yeh kab useful hai?::HL]]
+* [[HL::**A:** Yeh TLD-specific search hai jo results ko sirf .gov domains tak limit karta hai. Yeh government infrastructure pe pattern-based bugs ya data leaks hunt karne ke liye bohot useful hai::HL]].
 
 ### 📝 17. One-Line Memory Hook
 
-"`site:` matlab sniper mode ON — aur yaad rakhna, operator aur domain ke beech ⭐NO SPACE!"
+"`site:` [[HL::matlab sniper mode ON — aur yaad rakhna, operator aur domain ke beech ⭐NO SPACE::HL]]!"
 
 ### 🔑 18. Keywords Coverage Verification
 
@@ -837,16 +836,16 @@ Agar `site:` operator tumhe us dukan (domain) tak le gaya, toh `inurl:` tumhe us
 
 ### 📖 3. Technical Definition
 
-* **Precise English:** `inurl:` searches for a specified string within the URL structure (including paths and parameters). `allinurl:` mandates that *all* subsequent keywords must be present within the URL.
-* **Hinglish Simplification:** `inurl:` check karta hai ki tumhara diya hua word URL ke kisi bhi hisse (link) mein aata hai ya nahi. `allinurl:` bolta hai ki aage diye gaye saare words URL mein hone hi chahiye.
+* [[HL::**Precise English:** `inurl:` searches for a specified string within the URL structure (including paths and parameters). `allinurl:` mandates that *all* subsequent keywords must be present within the URL.::HL]]
+* [[HL::**Hinglish Simplification:** `inurl:` check karta hai ki tumhara diya hua word URL ke kisi bhi hisse (link) mein aata hai ya nahi. `allinurl:` bolta hai ki aage diye gaye saare words URL mein hone hi chahiye::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Target ke paas hazaron pages ho sakte hain. Humein login portals, Backup Files, aur Development Environments jaldi dhoondhne hain bina active directory brute-force (tools like Gobuster) kiye taaki block na hon.
-* **Solution:** Pattern-Based Hunting se hum URLs mein common names (admin, dev, staging) dhoondh lete hain jo Admin Panel Discovery aur Endpoint Enumeration (URL paths list karna) mein help karta hai.
-* **What breaks?** Bina iske, tumhe har link manually click karke check karna padega, aur tum URLs paramters mein chhupi API URLs miss kar doge.
+* [[HL::**Problem:** Target ke paas hazaron pages ho sakte hain. Humein login portals, Backup Files, aur Development Environments jaldi dhoondhne hain bina active directory brute-force (tools like Gobuster) kiye taaki block na hon.::HL]]
+* [[HL::**Solution:** Pattern-Based Hunting se hum URLs mein common names (admin, dev, staging) dhoondh lete hain jo Admin Panel Discovery aur Endpoint Enumeration (URL paths list karna) mein help karta hai::HL]].
+* [[HL::**What breaks?** Bina iske, tumhe har link manually click karke check karna padega, aur tum URLs paramters mein chhupi API URLs miss kar doge::HL]].
 * **✅ Kab use karo:** Jab target CMS (WordPress, cPanel) identify karna ho, API paths (v1, graphql) discover karne hon, ya Directory Traversal (URL path mein ghoomna) points dhoondhne hon.
-* **❌ Kab mat karo:** `allinurl:` mein 3-4 se zyada words mat daalo, kyunki URLs usually itne complex nahi hote aur tumhe 0 results milenge.
+* **❌ [[HL::Kab mat karo:** `allinurl:` mein 3-4 se zyada words mat daalo, kyunki URLs usually itne complex nahi hote aur tumhe 0 results milenge::HL]].
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
@@ -861,41 +860,41 @@ Search results ke green text (URL section) mein tumhare search kiye hue words hi
 **Basic Endpoint & Admin Hunting:**
 
 ```text
-# Browser | Google Search
-1  inurl:admin                                # inurl = URL mein dhoondho; admin = keyword (URL mein admin hona chahiye)
-2  inurl:login                                # login page dhoondhne ke liye
-3  inurl:dashboard                            # dashboard / portal dhoondhne ke liye
-4  inurl:backup                               # backup files dhoondhne ke liye (e.g., /backup/db.sql)
-5  inurl:old | inurl:temp                     # purane ya temporary folders (yahan security weak hoti hai)
+# [[HL::Browser | Google Search::HL]]
+[[HL::1  inurl:admin                                # inurl = URL mein dhoondho; admin = keyword (URL mein admin hona chahiye)::HL]]
+[[HL::2  inurl:login                                # login page dhoondhne ke liye::HL]]
+[[HL::3  inurl:dashboard                            # dashboard / portal dhoondhne ke liye::HL]]
+[[HL::4  inurl:backup                               # backup files dhoondhne ke liye (e.g., /backup/db.sql)::HL]]
+[[HL::5  inurl:old | inurl:temp                     # purane ya temporary folders (yahan security weak hoti hai::HL]])
 
 ```
 
 # 📤 Expected Output:
 
-(URLs containing the exact words 'admin', 'login', etc.)
+([[HL::URLs containing the exact words 'admin', 'login', etc.)::HL]]
 
-**API Discovery & Development Environments:**
+**[[HL::API Discovery & Development Environments::HL]]:**
 
 ```text
-# Browser | Google Search
-1  inurl:api                                  # API endpoints dhoondho
-2  inurl:/v1/                                 # API versions (slashes use karna exact match deta hai)
-3  inurl:graphql                              # GraphQL endpoints dhoondho
-4  inurl:dev | inurl:staging | inurl:test     # Development aur testing environments (aksar auth bypass vulnerable)
-5  inurl:config | inurl:swagger               # Configuration files aur Swagger API documentation (API map karne ke liye best)
+# [[HL::Browser | Google Search::HL]]
+[[HL::1  inurl:api                                  # API endpoints dhoondho::HL]]
+[[HL::2  inurl:/v1/                                 # API versions (slashes use karna exact match deta hai)::HL]]
+[[HL::3  inurl:graphql                              # GraphQL endpoints dhoondho::HL]]
+[[HL::4  inurl:dev | inurl:staging | inurl:test     # Development aur testing environments (aksar auth bypass vulnerable)::HL]]
+[[HL::5  inurl:config | inurl:swagger               # Configuration files aur Swagger API documentation (API map karne ke liye best::HL]])
 
 ```
 
 **Targeted Advanced Hunting (Combining with site: and excludes):**
 
 ```text
-# Browser | Google Search
-1  inurl:admin site:target.com                # Target.com pe specifically admin URLs dhoondho
-2  allinurl:admin login                       # URL mein 'admin' AUR 'login' dono words hone chahiye
-3  inurl:admin | inurl:login                  # Ya toh 'admin' ho YA 'login' ho
-4  inurl:admin -inurl:wordpress               # WordPress (wp-admin) ke URLs hata do noise kam karne ke liye
-5  site:*.target.com (inurl:admin | inurl:login | inurl:dashboard) -inurl:wordpress -inurl:wp-admin  # Mega dork: Saare subdomains pe login panels dhoondho, WP hata do
-6  site:api.target.com inurl:/v1/ (inurl:users | inurl:admin | inurl:internal) # API enumeration
+# [[HL::Browser | Google Search::HL]]
+[[HL::1  inurl:admin site:target.com                # Target.com pe specifically admin URLs dhoondho::HL]]
+[[HL::2  allinurl:admin login                       # URL mein 'admin' AUR 'login' dono words hone chahiye::HL]]
+[[HL::3  inurl:admin | inurl:login                  # Ya toh 'admin' ho YA 'login' ho::HL]]
+[[HL::4  inurl:admin -inurl:wordpress               # WordPress (wp-admin) ke URLs hata do noise kam karne ke liye::HL]]
+[[HL::5  site:*.target.com (inurl:admin | inurl:login | inurl:dashboard) -inurl:wordpress -inurl:wp-admin  # Mega dork: Saare subdomains pe login panels dhoondho, WP hata do::HL]]
+[[HL::6  site:api.target.com inurl:/v1/ (inurl:users | inurl:admin | inurl:internal) # API enumeration::HL]]
 
 ```
 
@@ -910,26 +909,26 @@ Search results ke green text (URL section) mein tumhare search kiye hue words hi
 
 ### 🌍 9. Real-World Penetration Testing Use-Case
 
-**FinTech Startup Scenario:** Ek attacker ne FinTech Startup par test karte waqt `site:fintechstartup.com inurl:swagger` use kiya. Use ek URL mila `internal-api.fintechstartup.com/api/swagger-ui.html`. Yeh Swagger documentation publicly exposed tha aur isme auth check missing tha. Attacker ne API ko directly Swagger interface se test kiya, auth bypass exploit kiya aur sensitive data extract kiya. Usne responsibly report kiya, company ne access restrict kiya aur developer/attacker ko bonus (bounty) diya.
+**[[HL::FinTech Startup Scenario:** Ek attacker ne FinTech Startup par test karte waqt `site:fintechstartup.com inurl:swagger` use kiya. Use ek URL mila `internal-api.fintechstartup.com/api/swagger-ui.html`. Yeh Swagger documentation publicly exposed tha aur isme auth check missing tha. Attacker ne API ko directly Swagger interface se test kiya, auth bypass exploit kiya aur sensitive data extract kiya. Usne responsibly report kiya, company ne access restrict kiya aur developer/attacker ko bonus (bounty) diya::HL]].
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Likhna `inurl: admin` (operator ke baad space).
-* **🤦 Why:** Same reason as `site:` — Google isse operator ki tarah treat nahi karega.
-* **✅ The 'Pro' Way:** Hamesha `inurl:admin` likho. NO SPACE.
-* **❌ Mistake 2:** `allinurl:api v1 users auth admin` likhna.
-* **⚡ Consequences:** Itne saare terms URL mein ek saath nahi milenge, Google 0 results dega. `allinurl` ko 2-3 words tak limit rakho.
+* **❌ [[HL::Mistake:** Likhna `inurl: admin` (operator ke baad space).::HL]]
+* [[HL::**🤦 Why:** Same reason as `site:` — Google isse operator ki tarah treat nahi karega.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Hamesha `inurl:admin` likho. NO SPACE.::HL]]
+* [[HL::**❌ Mistake 2:** `allinurl:api v1 users auth admin` likhna.::HL]]
+* [[HL::**⚡ Consequences:** Itne saare terms URL mein ek saath nahi milenge, Google 0 results dega. `allinurl` ko 2-3 words tak limit rakho::HL]].
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "`site:` aur `inurl:` mein kya difference hai?"**
-* **Galat soch:** Dono ek hi cheez filter karte hain.
-* **Actually:** `site:` sirf base domain (jaise facebook.com) check karta hai. `inurl:` URL ki poori lambai (jaise [facebook.com/settings/security](https://www.google.com/search?q=https://facebook.com/settings/security)) check karta hai. Agar URL ke path mein keyword dhoondhna hai toh `inurl:` lagega.
+* **[[HL::Confusion 1 — "`site:` aur `inurl:` mein kya difference hai?"::HL]]**
+* [[HL::**Galat soch:** Dono ek hi cheez filter karte hain.::HL]]
+* [[HL::**Actually:** `site:` sirf base domain (jaise facebook.com) check karta hai. `inurl:` URL ki poori lambai (jaise [facebook.com/settings/security](https://www.google.com/search?q=https://facebook.com/settings/security)) check karta hai. Agar URL ke path mein keyword dhoondhna hai toh `inurl:` lagega.::HL]]
 
 
-* **Confusion 2 — "Slashes (`/`) use karna zaroori hai kya?"**
-* **Galat soch:** `inurl:v1` aur `inurl:/v1/` same results denge.
-* **Actually:** `inurl:v1` tumhe "nav1gation" jaise ajeeb words bhi de dega jahan "v1" chhupa ho. Slashes lagane se exact directory match hoti hai.
+* [[HL::**Confusion 2 — "Slashes (`/`) use karna zaroori hai kya?"::HL]]**
+* [[HL::**Galat soch:** `inurl:v1` aur `inurl:/v1/` same results denge.::HL]]
+* [[HL::**Actually:** `inurl:v1` tumhe "nav1gation" jaise ajeeb words bhi de dega jahan "v1" chhupa ho. Slashes lagane se exact directory match hoti hai::HL]].
 
 
 
@@ -943,10 +942,10 @@ Search results ke green text (URL section) mein tumhare search kiye hue words hi
 
 ### ⚖️ 13. Comparison
 
-| Feature | `inurl:` | `allinurl:` |
+| [[HL::Feature::HL]] | [[HL::inurl:::HL]] | [[HL::llinurl:::HL]] |
 | --- | --- | --- |
-| Behavior | Sirf us ek specific word ko URL mein dhoondhta hai. | Uske baad aane wale SAARE words ko URL mein dhoondhta hai. |
-| Example | `inurl:admin login` (URL mein 'admin' hona chahiye, 'login' text mein bhi ho sakta hai) | `allinurl:admin login` (URL mein 'admin' AUR 'login' DONO hone chahiye) |
+| [[HL::Behavior::HL]] | [[HL::Sirf us ek specific word ko URL mein dhoondhta hai.::HL]] | [[HL::Uske baad aane wale SAARE words ko URL mein dhoondhta hai.::HL]] |
+| [[HL::Example::HL]] | [[HL::inurl:admin login (URL mein 'admin' hona chahiye, 'login' text mein bhi ho sakta hai)::HL]] | [[HL::llinurl:admin login (URL mein 'admin' AUR 'login' DONO hone chahiye)::HL]] |
 
 ### 🔄 14. Kill Chain & Attack Phase Flow
 
@@ -958,21 +957,21 @@ Search results ke green text (URL section) mein tumhare search kiye hue words hi
 ### 🎨 15. Visual Diagram (URL Anatomy Matching)
 
 ```text
-URL: https://api.megacorp.com/v1/internal/users?id=5
+[[HL::URL: https://api.megacorp.com/v1/internal/users?id=5::HL]]
 
-site:megacorp.com MATCHES --> api.megacorp.com
-inurl:api MATCHES     --> api... OR .../api/... (Matches subdomain here)
-inurl:/v1/ MATCHES    --> .../v1/... (Matches exact path)
-inurl:internal MATCHES--> .../internal/...
+[[HL::site:megacorp.com MATCHES --> api.megacorp.com::HL]]
+[[HL::inurl:api MATCHES     --> api... OR .../api/... (Matches subdomain here)::HL]]
+[[HL::inurl:/v1/ MATCHES    --> .../v1/... (Matches exact path)::HL]]
+[[HL::inurl:internal MATCHES--> .../internal::HL]]/...
 
 ```
 
 ### ❓ 16. Interview & Certification Exam Q&A
 
-* **Q:** Tumhe ek target ki API directories map karni hain bina active brute-force ke. Tum kaunse operators use karoge?
-* **A:** Main `site:target.com inurl:api | inurl:v1 | inurl:graphql | inurl:swagger` use karunga. Yeh Google index se publicly exposed API endpoints aur documentation nikal dega bina target pe direct traffic bheje.
-* **Q:** `inurl:admin` bohot zyada kachra results de raha hai (jaise news articles about admin). Isko admin portal tak kaise limit karoge?
-* **A:** Main usko login parameters ke saath combine karunga: `inurl:admin (intitle:login | intext:password)`. Isse wahi admin pages aayenge jahan authentication required hai.
+* [[HL::**Q:** Tumhe ek target ki API directories map karni hain bina active brute-force ke. Tum kaunse operators use karoge?::HL]]
+* [[HL::**A:** Main `site:target.com inurl:api | inurl:v1 | inurl:graphql | inurl:swagger` use karunga. Yeh Google index se publicly exposed API endpoints aur documentation nikal dega bina target pe direct traffic::HL]] bheje.
+* [[HL::**Q:** `inurl:admin` bohot zyada kachra results de raha hai (jaise news articles about admin). Isko admin portal tak kaise limit karoge?::HL]]
+* [[HL::**A:** Main usko login parameters ke saath combine karunga: `inurl:admin (intitle:login | intext:password)`. Isse wahi admin pages aayenge jahan authentication required hai::HL]].
 
 ### 📝 17. One-Line Memory Hook
 
@@ -1014,7 +1013,7 @@ inurl:internal MATCHES--> .../internal/...
 
 ### 🎯 3. Topic 3: intitle: & allintitle: Operators (Finding Specific Page Titles)
 
-Is topic mein hum `intitle:` aur `allintitle:` operators ka use karke Default Installations (jaise monitoring tools), Exposed Dashboards, aur Error Pages dhoondhna seekhenge. Yeh GHDB (Google Hacking Database — dorks ka collection) ka ek bohot bada hissa hai.
+[[HL::Is topic mein hum `intitle:` aur `allintitle:` operators ka use karke Default Installations (jaise monitoring tools), Exposed Dashboards, aur Error Pages dhoondhna seekhenge. Yeh GHDB (Google Hacking Database — dorks ka collection) ka ek bohot bada hissa hai::HL]].
 
 ### 🐣 2. Simple Analogy (Hinglish)
 
@@ -1022,16 +1021,16 @@ Socho tum ek library mein ho aur tumhe specific topics ki kitabein chahiye. `int
 
 ### 📖 3. Technical Definition
 
-* **Precise English:** The `intitle:` operator restricts search results to web pages where the specified keyword appears within the HTML `<title>` tag.
-* **Hinglish Simplification:** `intitle:` sirf webpage ke tab (browser tab) ke naam mein tumhara keyword dhoondhta hai.
+* [[HL::**Precise English:** The `intitle:` operator restricts search results to web pages where the specified keyword appears within the HTML `<title>` tag.::HL]]
+* [[HL::**Hinglish Simplification:** `intitle:` sirf webpage ke tab (browser tab) ke naam mein tumhara keyword dhoondhta hai::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Sysadmins aksar internal tools install karke default settings aur default tab titles chhod dete hain (e.g., "Dashboard [Jenkins]"). Inko manually target karna mushkil hai.
-* **Solution:** `intitle:` un Default Pages aur Default Installations ko instantly Google index se filter kar leta hai. Error Page Discovery (SQL errors dhundhna) ke liye bhi best hai kyunki error aane par aksar page title "Error" ya "Exception" ho jata hai.
-* **What breaks?** Bina iske, tum un systems ko miss kar doge jo URL mein "admin" nahi rakhte par unka page title "Admin Dashboard" hota hai.
-* **✅ Kab use karo:** Jab target ka Monitoring Tools (jaise Jenkins, Grafana, Kibana) discover karna ho, ya specific error-based SQL injections (SQLi) ke targets nikalne hon.
-* **❌ Kab mat karo:** Jab keyword bohot generic ho (jaise "Home" ya "Index"), tab iska result purely noise hoga.
+* [[HL::**Problem:** Sysadmins aksar internal tools install karke default settings aur default tab titles chhod dete hain (e.g., "Dashboard [Jenkins]"). Inko manually target karna mushkil hai.::HL]]
+* [[HL::**Solution:** `intitle:` un Default Pages aur Default Installations ko instantly Google index se filter kar leta hai. Error Page Discovery (SQL errors dhundhna) ke liye bhi best hai kyunki error aane par aksar page title::HL]] "[[HL::Error" ya "Exception" ho jata hai::HL]].
+* [[HL::**What breaks?** Bina iske, tum un systems ko miss kar doge jo URL mein "admin" nahi rakhte par unka page title "Admin Dashboard" hota hai::HL]].
+* **✅ [[HL::Kab use karo:** Jab target ka Monitoring Tools (jaise Jenkins, Grafana, Kibana) discover karna ho, ya specific error-based SQL injections (SQLi) ke targets nikalne hon.::HL]]
+* [[HL::**❌ Kab mat karo:** Jab keyword bohot generic ho (jaise "Home" ya "Index"), tab iska result purely noise hoga::HL]].
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
@@ -1039,45 +1038,45 @@ Google search results mein sabse bada blue clickable text (jo page ka title hota
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)
 
-(1) Target admin ek Grafana (monitoring dashboard tool) server setup karta hai aur usko internet pe expose kar deta hai. -> (2) Page ka HTML `<title>Grafana</title>` render hota hai. -> (3) Google bot us tag ko index karta hai. -> (4) Attacker `intitle:"Grafana"` search karke us exposed dashboard tak pahunch jata hai.
+(1) [[HL::Target admin ek Grafana (monitoring dashboard tool) server setup karta hai aur usko internet pe expose kar deta hai. -> (2) Page ka HTML `<title>Grafana</title>` render hota hai. -> (3) Google bot us tag ko index karta hai. -> (4) Attacker `intitle:"Grafana"` search karke us exposed dashboard tak pahunch jata hai.::HL]]
 
-### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
+### [[HL::💻 7. Hands-On — Runnable Example (Lab-Ready Commands)::HL]]
 
-**Default Panels & Dashboards:**
+**[[HL::Default Panels & Dashboards::HL]]:**
 
 ```text
-# Browser | Google Search
-1  intitle:"phpMyAdmin" | intitle:"cPanel"    # phpMyAdmin (database manager) ya cPanel (hosting dashboard) dhoondho
-2  intitle:"Grafana" | intitle:"Kibana"       # Grafana ya Kibana (log visualization tools) dashboards
-3  intitle:"admin login" | intitle:"dashboard login" # Login pages
+# [[HL::Browser | Google Search::HL]]
+[[HL::1  intitle:"phpMyAdmin" | intitle:"cPanel"    # phpMyAdmin (database manager) ya cPanel (hosting dashboard) dhoondho::HL]]
+[[HL::2  intitle:"Grafana" | intitle:"Kibana"       # Grafana ya Kibana (log visualization tools) dashboards::HL]]
+[[HL::3  intitle:"admin login" | intitle:"dashboard login" # Login pages::HL]]
 
 ```
 
 # 📤 Expected Output:
 
-(Results where the page title matches exactly these panels)
+[[HL::(Results where the page title matches exactly these panels)::HL]]
 
-**Error Hunting & Directory Listings:**
+**[[HL::Error Hunting & Directory Listings:::HL]]**
 
 ```text
-# Browser | Google Search
+# [[HL::Browser | Google Search
 1  intitle:"error" | intitle:"warning"        # Error Page Discovery (SQL ya PHP errors)
 2  intitle:"index of"                         # Open directory listings (jab folder bina index.html ke open ho)
-3  intitle:"index of" "parent directory" site:edu # Education sites pe open directories
+3  intitle:"index of" "parent directory" site:edu # Education sites pe open directories::HL]]
 
 ```
 
-**Targeted Advanced Hunting (The GHDB Way):**
+**[[HL::Targeted Advanced Hunting (The GHDB Way):::HL]]**
 
 ```text
-# Browser | Google Search
+# [[HL::Browser | Google Search
 1  intitle:"exact phrase"                     # Quotes ("") use karo agar poora sentence/phrase ek saath chahiye
 2  allintitle:keyword1 keyword2               # Title mein DONO words aane chahiye (order matter nahi karta)
 3  intitle:admin site:target.com              # Target ke andar 'admin' title wale pages
 4  intitle:login -intitle:wordpress           # Login pages lao, par WordPress wale hata do
 5  intitle:"Dashboard [Jenkins]" -site:github.com # Jenkins (CI/CD automation tool) panels dhoondho, GitHub code results exclude karo
 6  site:target.com (intitle:"error" | intitle:"warning" | intitle:"exception") (sql | mysql | database) # Mega Dork: Target pe database errors dhoondho
-7  intitle:"Grafana" -login -signin           # Aise Grafana dashboards jo seedha khulte hain (auth bypass/no login required)
+7  intitle:"Grafana" -login -signin           # Aise Grafana dashboards jo seedha khulte hain (auth bypass/no login required)::HL]]
 
 ```
 
@@ -1092,42 +1091,42 @@ Google search results mein sabse bada blue clickable text (jo page ka title hota
 
 ### 🌍 9. Real-World Penetration Testing Use-Case
 
-**Enterprise Pentest Scenario:** Ek pentester Fortune 500 company ko test kar raha tha. Usne simple `intitle:"Dashboard [Jenkins]" site:fortune500.com` search kiya. Usse ek internal Jenkins server mil gaya jismein koi authentication nahi tha (anonymous read/write enable tha). Wahan se pentester ne directly server access (RCE — Remote Code Execution) execute kiya aur Hall of Fame mein jagah banayi. Iske baad company ne us Jenkins server par turant authentication enable kar diya.
+**[[HL::Enterprise Pentest Scenario:** Ek pentester Fortune 500 company ko test kar raha tha. Usne simple `intitle:"Dashboard [Jenkins]" site:fortune500.com` search kiya. Usse ek internal Jenkins server mil gaya jismein koi authentication nahi tha (anonymous read/write enable tha). Wahan se pentester ne directly server access (RCE — Remote Code Execution) execute kiya aur Hall of Fame mein jagah banayi. Iske baad company ne us Jenkins server par turant authentication enable kar diya::HL]].
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Likhna `intitle:admin dashboard` (bina quotes ke).
-* **🤦 Why:** Iska matlab hai Google "admin" word title mein dhoondhega, aur "dashboard" word poore page mein kahin bhi (content mein).
-* **✅ The 'Pro' Way:** Exact phrase chahiye toh hamesha quotes lagao: `intitle:"admin dashboard"`.
-* **⚡ Consequences:** Mix-up hone se results inaccurate aate hain aur pentester time waste karta hai.
+* **❌ [[HL::Mistake:** Likhna `intitle:admin dashboard` (bina quotes ke).::HL]]
+* [[HL::**🤦 Why:** Iska matlab hai Google "admin" word title mein dhoondhega, aur "dashboard" word poore page mein kahin bhi (content mein).::HL]]
+* [[HL::**✅ The 'Pro' Way:** Exact phrase chahiye toh hamesha quotes lagao: `intitle:"admin dashboard"`.::HL]]
+* [[HL::**⚡ Consequences:** Mix-up hone se results inaccurate aate hain aur pentester time waste karta hai::HL]].
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "`inurl:` aur `intitle:` mein better kya hai login pages ke liye?"**
-* **Galat soch:** `inurl:` humesha best hai.
-* **Actually:** `intitle:` zyada accurate hota hai. Kai modern SPAs (Single Page Applications) URL mein `/admin` nahi dikhate (e.g., `app.target.com/user/`), lekin unka page title "Admin Dashboard" hota hai. Triple confirmation ke liye dono combine karo.
+* [[HL::**Confusion 1 — "`inurl:` aur `intitle:` mein better kya hai login pages ke liye?"::HL]]**
+* [[HL::**Galat soch:** `inurl:` humesha best hai.::HL]]
+* [[HL::**Actually:** `intitle:` zyada accurate hota hai. Kai modern SPAs (Single Page Applications) URL mein `/admin` nahi dikhate (e.g., `app.target.com/user/`), lekin unka page title "Admin Dashboard" hota hai. Triple confirmation ke liye dono combine karo::HL]].
 
 
-* **Confusion 2 — "Kya quotes `""` sach mein zaroori hain?"**
-* **Galat soch:** `intitle:index of` aur `intitle:"index of"` same hai.
-* **Actually:** Bina quotes ke, Google "index" ko title mein aur "of" ko stop-word samajh ke ignore kar dega. Quotes forces an EXACT match. Prove karo lab mein check karke!
+* [[HL::**Confusion 2 — "Kya quotes `""` sach mein zaroori hain::HL]]?"**
+* [[HL::**Galat soch:** `intitle:index of` aur `intitle:"index of"` same hai.::HL]]
+* [[HL::**Actually:** Bina quotes ke, Google "index" ko title mein aur "of" ko stop-word samajh ke ignore kar dega. Quotes forces an EXACT match. Prove karo lab mein check karke::HL]]!
 
 
 
 ### 🛠️ 12. Troubleshooting Flowchart
 
 * **`[Lots of StackOverflow or Reddit threads showing up instead of actual targets]`**
-* **Root Cause:** Jab tum `intitle:"error"` search karte ho, toh forums jahan log errors discuss karte hain (unka tab title bhi error hota hai) woh aa jate hain.
-* **Fix:** Search mein filters add karo: `intitle:"error" -site:stackoverflow.com -site:reddit.com -forum`.
+* **Root [[HL::Cause:** Jab tum `intitle:"error"` search karte ho, toh forums jahan log errors discuss karte hain (unka tab title bhi error hota hai) woh aa jate hain.::HL]]
+* [[HL::**Fix:** Search mein filters add karo: `intitle:"error" -site:stackoverflow.com -site:reddit.com::HL]] -forum`.
 
 
 
 ### ⚖️ 13. Comparison
 
-| Feature | `intitle:` | `allintitle:` |
+| [[HL::Feature::HL]] | [[HL::`intitle:`::HL]] | [[HL::`allintitle:` ::HL]] |
 | --- | --- | --- |
-| Multiple Words | `intitle:admin login` = "admin" title mein hoga, "login" kahin bhi ho sakta hai page par. | `allintitle:admin login` = "admin" AUR "login" dono words title tag ke andar hone chahiye. |
-| Speed / Flexibility | Zyada flexible, baaki operators (jaise `site:`) ke saath combine karna aasan hai. | Strict hota hai, iske saath aur operator lagane par Google error de sakta hai. |
+| [[HL:: Multiple Words::HL]] | [[HL::`intitle:admin login` = "admin" title mein hoga, "login" kahin bhi ho sakta hai page par.::HL]] | [[HL::`allintitle:admin login` = "admin" AUR "login" dono words title tag ke andar hone chahiye. ::HL]] |
+| [[HL:: Speed / Flexibility::HL]] | [[HL::Zyada flexible, baaki operators (jaise `site:`) ke saath combine karna aasan hai.::HL]] | [[HL::Strict hota hai, iske saath aur operator lagane par Google error de sakta hai::HL]]. |
 
 ### 🔄 14. Kill Chain & Attack Phase Flow
 
@@ -1185,16 +1184,16 @@ Yeh aisa hai jaise ek newspaper mein specific article ke andar ke words padhna. 
 
 ### 📖 3. Technical Definition
 
-* **Precise English:** The `intext:` operator forces Google to search exclusively within the visible body text of a webpage, ignoring metadata, HTML tags, and URLs.
-* **Hinglish Simplification:** `intext:` Google ko bolta hai ki us website pe jo text normal user ko screen par dikh raha hai, sirf usme keyword dhoondho (code ya hidden tags mein nahi).
+* [[HL::**Precise English:** The `intext:` operator forces Google to search exclusively within the visible body text of a webpage, ignoring metadata, HTML tags, and URLs::HL]].
+* [[HL::**Hinglish Simplification:** `intext:` Google ko bolta hai ki us website pe jo text normal user ko screen par dikh raha hai, sirf usme keyword dhoondho (code ya hidden tags mein nahi::HL]]).
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Developers galti se database passwords, AWS keys, ya Email Addresses plain text files ya GitHub/Pastebin jaisi sites par chhod dete hain.
-* **Solution:** `intext:` se hum Documentation Leaks aur Password Leaks ko exact keywords (jaise "DB_PASSWORD") se identify kar lete hain.
-* **What breaks?** Bina iske, tum un credentials ko dhundhne mein hafte laga doge jo Google ne already index kar rakhe hain.
-* **✅ Kab use karo:** Credential Hunting (passwords dhundhna), API keys extract karna, ya database error messages jahan credentials dikh rahe hon.
-* **❌ Kab mat karo:** `intext:` ko kabhi akela (bina `site:` ya `filetype:` ke) use mat karo, warna arbo (billions) results aayenge jo bilkul bekaar honge.
+* [[HL::**Problem:** Developers galti se database passwords, AWS keys, ya Email Addresses plain text files ya GitHub/Pastebin jaisi sites par chhod dete hain.::HL]]
+* [[HL::**Solution:** `intext:` se hum Documentation Leaks aur Password Leaks ko exact keywords (jaise "DB_PASSWORD") se identify kar lete hain::HL]].
+* [[HL::**What breaks?** Bina iske, tum un credentials ko dhundhne mein hafte laga doge jo Google ne already index kar rakhe hain::HL]].
+* **✅ [[HL::Kab use karo:** Credential Hunting (passwords dhundhna), API keys extract karna, ya database error messages jahan credentials dikh rahe hon::HL]].
+* **❌ [[HL::Kab mat karo:** `intext:` ko kabhi akela (bina `site:` ya `filetype:` ke) use mat karo, warna arbo (billions) results aayenge jo bilkul bekaar honge::HL]].
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
@@ -1206,44 +1205,44 @@ Google ke search results mein title ke neeche jo description (snippet) hota hai,
 
 ### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
 
-**Credential Hunting & Password Leaks:**
+**[[HL::Credential Hunting & Password Leaks::HL]]:**
 
 ```text
-# Browser | Google Search
-1  intext:"password is" | intext:"your password"  # Default generated passwords dhoondho
-2  intext:"exact phrase"                          # Exact phrase match ke liye quotes lagao
-3  intext:password site:target.com                # Target pe word "password"
-4  allintext:keyword1 keyword2                    # Page ki body mein dono keywords hone hi chahiye
+# [[HL::Browser | Google Search::HL]]
+[[HL::1  intext:"password is" | intext:"your password"  # Default generated passwords dhoondho::HL]]
+[[HL::2  intext:"exact phrase"                          # Exact phrase match ke liye quotes lagao::HL]]
+[[HL::3  intext:password site:target.com                # Target pe word "password"::HL]]
+[[HL::4  allintext:keyword1 keyword2                    # Page ki body mein dono keywords hone hi chahiye::HL]]
 
 ```
 
-**Database & Config Exposure:**
+**[[HL::Database & Config Exposure:::HL]]**
 
 ```text
-# Browser | Google Search
+# [[HL::Browser | Google Search
 1  intext:"DB_PASSWORD" | intext:"database password"  # Database credentials 
 2  site:target.com intext:"DB_PASSWORD" (intext:"mysql" | intext:"postgres") filetype:txt # Target par txt files jisme DB passwords hon
-3  intext:"@company.com"                          # Email Addresses harvest karne ke liye (phishing recon)
+3  intext:"@company.com"                          # Email Addresses harvest karne ke liye (phishing recon)::HL]]
 
 ```
 
-**API Keys & Critical Secrets:**
+**[[HL::API Keys & Critical Secrets:::HL]]**
 
 ```text
-# Browser | Google Search
+# [[HL::Browser | Google Search
 1  intext:"api_key" | intext:"api key"            # API Keys dhundho
 2  intext:"api_key" (intext:"sk_live" | intext:"pk_live") site:github.com  # GitHub pe Stripe ki live secret keys dhoondho
 3  intext:"BEGIN RSA PRIVATE KEY"                 # SSH private keys dhoondho
-4  intext:"AWS_SECRET_ACCESS_KEY"                 # AWS S3 (Cloud Storage) ki access keys
+4  intext:"AWS_SECRET_ACCESS_KEY"                 # AWS S3 (Cloud Storage) ki access keys::HL]]
 
 ```
 
-**Filtering Noise (The Pro Way):**
+**[[HL::Filtering Noise (The Pro Way):::HL]]**
 
 ```text
-# Browser | Google Search
+# [[HL::Browser | Google Search
 1  intext:password -tutorial                      # "password" dhoondho, lekin tutorial word wale pages hata do
-2  intext:"password is" -tutorial -forum site:pastebin.com # Pastebin (text sharing site) pe password leaks, forums/tutorials ignore karo
+2  intext:"password is" -tutorial -forum site:pastebin.com # Pastebin (text sharing site) pe password leaks, forums/tutorials ignore karo::HL]]
 
 ```
 
@@ -1258,25 +1257,25 @@ Google ke search results mein title ke neeche jo description (snippet) hota hai,
 
 ### 🌍 9. Real-World Penetration Testing Use-Case
 
-**CloudTech AWS S3 Leakage:** Ek pentester ne target CloudTech ke liye search kiya: `site:github.com intext:"AWS_SECRET_ACCESS_KEY" "CloudTech"`. Use ek developer ka public GitHub commit mila jismein ti galti se AWS keys upload ho gayi thin. Pentester ne keys ka read-only access AWS CLI se verify kiya, ethical reporting protocol follow karke turant report kiya. Company ne keys revoke aur delete kar di, aur pentester ko massive bounty mili.
+**[[HL::CloudTech AWS S3 Leakage:** Ek pentester ne target CloudTech ke liye search kiya: `site:github.com intext:"AWS_SECRET_ACCESS_KEY" "CloudTech"`. Use ek developer ka public GitHub commit mila jismein ti galti se AWS keys upload ho gayi thin. Pentester ne keys ka read-only access AWS CLI se verify kiya, ethical reporting protocol follow karke turant report kiya. Company ne keys revoke aur delete kar di, aur pentester ko massive bounty mili::HL]].
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Sochna ki `intext:` source code ke HTML comments (``) ya meta tags bhi index karega.
-* **🤦 Why:** Beginners samajhte hain `intext:` poore HTML source code ko scan karta hai.
-* **✅ The 'Pro' Way:** Yaad rakho, `intext:` SIRF visible text dhundhta hai. HTML comments dhoondhne hain toh target source code proxy/BurpSuite mein dekhna padega, Google dorking se nahi hota.
-* **⚡ Consequences:** Tum hidden comments pe dorking try karoge aur fail ho jaoge, thinking target safe hai.
+* **❌ Mistak[[HL::e:** Sochna ki `intext:` source code ke HTML comments (``) ya meta tags bhi index karega.::HL]]
+* [[HL::**🤦 Why:** Beginners samajhte hain `intext:` poore HTML source code ko scan karta hai::HL]].
+* **✅ [[HL::The 'Pro' Way:** Yaad rakho, `intext:` SIRF visible text dhundhta hai. HTML comments dhoondhne hain toh target source code proxy/BurpSuite mein dekhna padega, Google dorking se nahi hota.::HL]]
+* [[HL::**⚡ Consequences:** Tum hidden comments pe dorking try karoge aur fail ho jaoge, thinking target safe hai::HL]].
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "`allintext:` aur normal search (bina operator ke) mein kya farq hai?"**
-* **Galat soch:** Dono ek hi cheez hain.
-* **Actually:** Agar tum bas `admin login` likhoge, Google 'admin' URL mein dhundh sakta hai aur 'login' title mein. Lekin `allintext:admin login` Google ko force karta hai ki dono words page ki PURE BODY mein hi hone chahiye.
+* [[HL::**Confusion 1 — "`allintext:` aur normal search (bina operator ke) mein kya farq hai?"::HL]]**
+* [[HL::**Galat soch:** Dono ek hi cheez hain.::HL]]
+* [[HL::**Actually:** Agar tum bas `admin login` likhoge, Google 'admin' URL mein dhundh sakta hai aur 'login' title mein. Lekin `allintext:admin login` Google ko force karta hai ki dono words page ki PURE BODY mein hi hone chahiye::HL]].
 
 
-* **Confusion 2 — "Kya main password dhoondhne ke liye seedha `intext:password` daal doon?"**
-* **Galat soch:** Seedha password likhne se leak mil jayega.
-* **Actually:** `intext:password` tumhe har woh login page dega jahan "Forgot Password" likha hai. Hamesha specific raho jaise `intext:"DB_PASSWORD"` ya phrases use karo `intext:"password is"`.
+* [[HL::**Confusion 2 — "Kya main password dhoondhne ke liye seedha `intext:password` daal doon?"::HL]]**
+* [[HL::**Galat soch:** Seedha password likhne se leak mil jayega.::HL]]
+* [[HL::**Actually:** `intext:password` tumhe har woh login page dega jahan "Forgot Password" likha hai. Hamesha::HL]] [[HL::specific raho jaise `intext:"DB_PASSWORD"` ya phrases use karo::HL]] `intext:"password is"`.
 
 
 
@@ -1310,21 +1309,20 @@ Google ke search results mein title ke neeche jo description (snippet) hota hai,
 | Title: Secure Portal (Ignored)        |
 +---------------------------------------+
 | [BODY]                                |
-| Welcome to the portal.                | <-- intext: operator is block
-|                                       |     mein scan karta hai.
-| Please use your AWS Key:              |
-| AWS_SECRET_ACCESS_KEY=AKIA...         | <-- BOOM! Match found!
+| Welcome to the portal.                | <-- [[HL::intext: operator is block::HL]]
+[[HL::|                                       |     mein scan karta hai.::HL]]
+| [[HL:: Please use your AWS Key:              ::HL]] |
+[[HL::| AWS_SECRET_ACCESS_KEY=AKIA...         | <-- BOOM! Match found!::HL]]
 |                                       |
-+---------------------------------------+
+[[HL::+---------------------------------------+::HL]]
 
 ```
+### [[HL::❓ 16. Interview & Certification Exam Q&A::HL]]
 
-### ❓ 16. Interview & Certification Exam Q&A
-
-* **Q:** Tumhe GitHub pe ek company ka galti se leak hua data dhundhna hai. Kaunsa exact dork use karoge?
-* **A:** `site:github.com intext:"company_name" (intext:"password" | intext:"api_key" | intext:"secret")`. Isse us company ke references ke saath hardcoded secrets mil jayenge.
-* **Q:** Kya `intext:` ek hidden input field `<input type="hidden" value="secret">` ko dhundh payega?
-* **A:** Nahi. `intext:` sirf browser mein physically visible text index karta hai. Hidden elements aur HTML source code ke liye yeh kaam nahi karega.
+* [[HL::**Q:** Tumhe GitHub pe ek company ka galti se leak hua data dhundhna hai. Kaunsa exact dork use karoge?::HL]]
+* [[HL::**A:** `site:github.com intext:"company_name" (intext:"password" | intext:"api_key" | intext:"secret")`. Isse us company ke references ke saath hardcoded secrets mil jayenge.::HL]]
+* [[HL::**Q:** Kya `intext:` ek hidden input field `<input type="hidden" value="secret">` ko dhundh payega?::HL]]
+* [[HL::**A:** Nahi. `intext:` sirf browser mein physically visible text index karta hai. Hidden elements aur HTML source code ke liye yeh kaam nahi karega::HL]].
 
 ### 📝 17. One-Line Memory Hook
 
@@ -1346,22 +1344,22 @@ Google ke search results mein title ke neeche jo description (snippet) hota hai,
 
 ### 🎯 5. Topic 5: filetype: Operator (Hunting for Sensitive Files)
 
-Is topic mein hum specific file extensions (.pdf, .sql, .env) target karna seekhenge. `filetype:` operator Document Leaks aur Database Dumps nikalne ka sabse powerful aur dangerous dork hai.
+[[HL::Is topic mein hum specific file extensions (.pdf, .sql, .env) target karna seekhenge. `filetype:` operator Document Leaks aur Database Dumps nikalne ka sabse powerful aur dangerous dork hai::HL]].
 
 ### 🐣 2. Simple Analogy (Hinglish)
 
-Internet ek bohot bada Filing cabinet (almari) hai jahan har webpage ek folder hai. Tum jab `filetype:pdf` bolte ho, toh tum Google roopi assistant ko bol rahe ho "mujhe sirf aur sirf wohi documents nikal ke do jo PDF format mein hain, baaki webpages (HTML) mujhe nahi chahiye."
+[[HL::Internet ek bohot bada Filing cabinet (almari) hai jahan har webpage ek folder hai. Tum jab `filetype:pdf` bolte ho, toh tum Google roopi assistant ko bol rahe ho "mujhe sirf aur sirf wohi documents nikal ke do jo PDF format mein hain, baaki webpages (HTML) mujhe nahi chahiye::HL]]."
 
 ### 📖 3. Technical Definition
 
 * **Precise English:** The `filetype:` operator (also known as `ext:`) instructs the search engine to only return results that end in a specific file extension, allowing for targeted discovery of misconfigured or leaked files.
-* **Hinglish Simplification:** `filetype:` operator search results ko strictly ek file format (jaise SQL dump, PDF, ya config file) tak limit kar deta hai.
+* [[HL::**Hinglish Simplification:** `filetype:` operator search results ko strictly ek file format (jaise SQL dump, PDF, ya config file) tak limit kar deta hai::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Log Sensitive Files (jaise database backups ya system configs) galti se web-accessible folder (e.g., `public_html`) mein daal dete hain, jinhe Google index kar leta hai.
-* **Solution:** `filetype:` sidha un High-Value File Types ko target karta hai, jisse unauthenticated direct system access ke flaws milte hain.
-* **What breaks?** Bina file extension filter kiye, tumhe web pages (HTML) padhne padenge, jabki real secrets aksar `.bak`, `.sql`, ya `.env` files mein hote hain.
+* [[HL::**Problem:** Log Sensitive Files (jaise database backups ya system configs) galti se web-accessible folder (e.g., `public_html`) mein daal dete hain, jinhe Google index kar leta hai.::HL]]
+* [[HL::**Solution:** `filetype:` sidha un High-Value File Types ko target karta hai, jisse unauthenticated direct system access ke flaws milte hain.::HL]]
+* [[HL::**What breaks?** Bina file extension filter kiye, tumhe web pages (HTML) padhne padenge, jabki real secrets aksar `.bak`, `.sql`, ya `.env` files mein hote hain::HL]].
 * **✅ Kab use karo:** Jab Confidential Docs, Spreadsheets, Log Files ya Environment Files (server config) dhundhni ho.
 * **❌ Kab mat karo:** Aise extensions (`.php`, `.aspx`) jo server-side execute hote hain unme directly source code dhoondhne ke liye (kyunki browser ko source code nahi, HTML output milta hai).
 
@@ -1371,7 +1369,7 @@ Google search results mein URL ke theek aage ek tag dikhega: `[PDF]`, `[TXT]`, `
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)
 
-(1) Ek dev production database ka backup leta hai: `backup.sql`. -> (2) Wo use server ke root folder mein bhool jata hai. -> (3) Google bot us file ko dekhta hai aur uska content parse kar leta hai. -> (4) Attacker `site:target.com filetype:sql` search karta hai aur poora Database Dumps ek click mein download kar leta hai.
+([[HL::1) Ek dev production database ka backup leta hai: `backup.sql`. -> (2) Wo use server ke root folder mein bhool jata hai. -> (3) Google bot us file ko dekhta hai aur uska content parse kar leta hai. -> (4) Attacker `site:target.com filetype:sql` search karta hai aur poora Database Dumps ek click mein download kar leta hai::HL]].
 
 ### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
 
@@ -1386,35 +1384,35 @@ Google search results mein URL ke theek aage ek tag dikhega: `[PDF]`, `[TXT]`, `
 
 ```
 
-**Database Dumps & Backups (High Impact):**
+**[[HL::Database Dumps & Backups (High Impact):::HL]]**
 
 ```text
-# Browser | Google Search
+# [[HL::Browser | Google Search
 1  filetype:sql site:target.com               # Target ke database backups (SQL dumps)
 2  sql, db, sqlite, mdb                       # Common database extensions
 3  bak, old, backup, zip                      # Purane/backup files (jaise config.php.bak) jismein code leak hota hai
-4  filetype:sql intext:"INSERT INTO" intext:"users" (intext:"password" | intext:"email") # Exactly wo SQL dump laao jisme 'users' table aur unke passwords hon
+4  filetype:sql intext:"INSERT INTO" intext:"users" (intext:"password" | intext:"email") # Exactly wo SQL dump laao jisme 'users' table aur unke passwords hon::HL]]
 
 ```
 
-**Config Files & Log Files (Critical Secrets):**
+**[[HL::Config Files & Log Files (Critical Secrets::HL]]):**
 
 ```text
-# Browser | Google Search
+# [[HL::Browser | Google Search
 1  filetype:env "password"                    # .env files jisme "password" word ho
 2  filetype:log -site:github.com              # Log files dhoondho (GitHub exclude karke)
 3  env, config, ini, cfg, conf, yaml, yml     # Common config extensions jahan system passwords hote hain
 4  php, asp, aspx, jsp, log, txt              # Web/Log files
 5  site:target.com filetype:env (intext:"DB_PASSWORD" | intext:"API_KEY" | intext:"SECRET") # Target ki .env file jisme API ya DB secret ho
-6  site:target.com filetype:log (intext:"error" | intext:"exception") intext:"password"     # Aise logs dhoondho jahan password galti se log ho gaya ho
+6  site:target.com filetype:log (intext:"error" | intext:"exception") intext:"password"     # Aise logs dhoondho jahan password galti se log ho gaya ho::HL]]
 
 ```
 
-**The Ultimate GHDB Dork:**
+**[[HL::The Ultimate GHDB Dork:::HL]]**
 
 ```text
-# Browser | Google Search
-1  filetype:env "DB_PASSWORD" "AWS_ACCESS_KEY_ID"  # Yeh .env (Environment Files) dhoondhne ka sabse dangerous dork hai.
+# [[HL::Browser | Google Search
+1  filetype:env "DB_PASSWORD" "AWS_ACCESS_KEY_ID"  # Yeh .env (Environment Files) dhoondhne ka sabse dangerous dork hai.::HL]]
 
 ```
 
@@ -1424,26 +1422,26 @@ Google search results mein URL ke theek aage ek tag dikhega: `[PDF]`, `[TXT]`, `
 
 ### 🔒 8. Attack Surface & Defense
 
-**🔴 Attacker:** Attacker `filetype:env` use karta hai. `.env` files sabse dangerous hain kyunki inmein plain text credentials (database, SMTP, API keys) hote hain. Ek `.env` file target ko poori tarah compromise kar sakti hai.
-**🔵 Defender:** Web server (Apache/Nginx) config mein `.env` aur `.git` jaise files ko public block karo (`Deny from all`). Google ne galti se index kar liya ho toh Google Search Console mein URL Remove tool se turant hatao.
+**🔴 [[HL::Attacker:** Attacker `filetype:env` use karta hai. `.env` files sabse dangerous hain kyunki inmein plain text credentials (database, SMTP, API keys) hote hain. Ek `.env` file target ko poori tarah compromise kar sakti hai.::HL]]
+**[[HL::🔵 Defender:** Web server (Apache/Nginx) config mein `.env` aur `.git` jaise files ko public block karo (`Deny from all`). Google ne galti se index kar liya ho toh Google Search Console mein URL Remove tool se turant hatao::HL]].
 
 ### 🌍 9. Real-World Penetration Testing Use-Case
 
-**Startup Environment File Leak:** Ek pentester GHDB se dorks try kar raha tha. Usne search kiya `filetype:env "DB_PASSWORD"`. Result mein ek tech startup ki production `.env` file expose ho gayi. Us file mein startup ke main AWS aur production Database passwords the. Pentester ne us file ko download karke direct system access verify kiya aur responsibly disclose kiya. Company ne turant server route fix kiya, saare credentials rotate kiye aur pentester ko highest severity reward diya.
+**[[HL::Startup Environment File Leak:** Ek pentester GHDB se dorks try kar raha tha. Usne search kiya `filetype:env "DB_PASSWORD"`. Result mein ek tech startup ki production `.env` file expose ho gayi. Us file mein startup ke main AWS aur production Database passwords the. Pentester ne us file ko download karke direct system access verify kiya aur responsibly disclose kiya. Company ne turant server route fix kiya, saare credentials rotate kiye aur pentester ko highest severity reward diya::HL]].
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Likhna `filetype:.pdf` ya `ext:.sql` (extension se pehle dot lagana).
-* **🤦 Why:** Beginners sochte hain ki file naam ki tarah extension mein bhi dot (.) zaroori hai.
-* **✅ The 'Pro' Way:** **⭐NO DOT!** Hamesha `filetype:pdf` likho. Operator khud dot ko handle kar leta hai.
-* **⚡ Consequences:** Agar dot laga diya, toh Google dork fail ho jayega aur result nahi aayega.
-* **❌ Mistake 2:** `filetype:zip` ke andar ka data dhoondhne ki koshish karna. Google zip ka naam read kar sakta hai (jaise `backup.zip`), par uske andar ki files index nahi karta.
+* **❌ [[HL::Mistake:** Likhna `filetype:.pdf` ya `ext:.sql` (extension se pehle dot lagana).::HL]]
+* [[HL::**🤦 Why:** Beginners sochte hain ki file naam ki tarah extension mein bhi dot (.) zaroori hai::HL]].
+* **✅ [[HL::The 'Pro' Way:** **⭐NO DOT!** Hamesha::HL]] `filetype:pdf` [[HL::likho. Operator khud dot ko handle kar leta hai::HL]].
+* **⚡ [[HL::Consequences:** Agar dot laga diya, toh Google dork fail ho jayega aur result nahi aayega.::HL]]
+* [[HL::**❌ Mistake 2:** `filetype:zip` ke andar ka data dhoondhne ki koshish karna. Google zip ka naam read kar sakta hai (jaise `backup.zip`), par uske andar ki files index nahi karta::HL]].
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "`filetype:` aur `ext:` mein kya fark hai?"**
-* **Galat soch:** Dono alag alag kaam karte hain.
-* **Actually:** Dono exactly SAME hain. Google mein `ext:pdf` likho ya `filetype:pdf` likho, same results aayenge. Yeh dono alias hain.
+* [[HL::**Confusion 1 — "`filetype:` aur `ext:` mein kya fark hai?"::HL]]**
+* [[HL::**Galat soch:** Dono alag alag kaam karte hain.::HL]]
+* [[HL::**Actually:** Dono exactly SAME hain. Google mein `ext:pdf` likho ya `filetype:pdf` likho, same results aayenge. Yeh dono alias hain::HL]].
 
 
 * **Confusion 2 — "Kya `filetype:php` dhoondhne se mujhe server ka PHP source code mil jayega?"**
@@ -1488,8 +1486,8 @@ Google search results mein URL ke theek aage ek tag dikhega: `[PDF]`, `[TXT]`, `
 
 ### ❓ 16. Interview & Certification Exam Q&A
 
-* **Q:** Ek web app mein log file leak ho rahi hai. Tum `filetype:` operator ko dusre operators ke saath combine karke exact error exceptions kaise dhoondhoge?
-* **A:** Main use karunga `site:target.com filetype:log (intext:"exception" | intext:"error" | intext:"stack trace")`. Isse sirf wahi log files aayengi jinme errors hain, jo aage debugging ya exploitation mein help karengi.
+* [[HL::**Q:** Ek web app mein log file leak ho rahi hai. Tum `filetype:` operator ko dusre operators ke saath combine karke exact error exceptions kaise dhoondhoge?::HL]]
+* [[HL::**A:** Main use karunga `site:target.com filetype:log (intext:"exception" | intext:"error" | intext:"stack trace")`. Isse sirf wahi log files aayengi jinme errors hain, jo aage debugging ya exploitation mein help karengi::HL]].
 * **Q:** Ek client ne bola hai ki uska source code chori ho gaya hai. Tumhe doubt hai ki uski backup zip root folder mein padi hai. Dork batao.
 * **A:** `site:client.com filetype:zip (inurl:backup | inurl:src | inurl:www)`.
 
@@ -1539,7 +1537,7 @@ Is section mein hum target site ki history, competitors, backlinks, aur indexing
 
 ### 🎯 1. Topic 1: cache: Operator (Recovering Old Data)
 
-Is topic mein hum `cache:` operator ke baare mein seekhenge jo deleted content, old snapshots, aur sensitive evidence recover karne mein kaam aata hai, especially jab target ne koi galti se exposed file remove kar di ho.
+[[HL::Is topic mein hum `cache:` operator ke baare mein seekhenge jo deleted content, old snapshots, aur sensitive evidence recover karne mein kaam aata hai, especially jab target ne koi galti se exposed file remove kar di ho::HL]].
 
 ### 🐣 2. Simple Analogy (Hinglish)
 
@@ -1547,16 +1545,16 @@ Socho ek meeting room ka whiteboard hai jispe kisi ne secret password likha aur 
 
 ### 📖 3. Technical Definition
 
-* **Precise English:** The `cache:` operator allows users to view the most recently saved snapshot of a web page as indexed by Google, bypassing the live server.
-* **Hinglish Simplification:** `cache:` dork Google ke database mein save ki hui target website ki purani copy (1-2 weeks purani) dikhata hai, chahe ab woh live site se delete hi kyun na ho gayi ho.
+* [[HL::**Precise English:** The `cache:` operator allows users to view the most recently saved snapshot of a web page as indexed by Google, bypassing the live server.::HL]]
+* [[HL::**Hinglish Simplification:** `cache:` dork Google ke database mein save ki hui target website ki purani copy (1-2 weeks purani) dikhata hai, chahe ab woh live site se delete hi kyun na ho gayi ho::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Bug bounty mein developers galti se sensitive data (jaise passwords) upload karte hain aur jaldi se delete kar dete hain (404 error aata hai live site pe).
-* **Solution:** `cache:` operator us page ki history nikal leta hai aur deleted evidence recover kar deta hai.
-* **What breaks?** Bina cache aur archive history check kiye, tum ek bada attack vector miss kar doge kyunki live pages humesha secure dikhte hain.
-* **✅ Kab use karo:** Jab koi page live site pe 404 (Not Found) de raha ho, jab `.env` file (environment variables ki file jisme secrets hote hain) delete ho gayi ho, ya jab admin password recovery karni ho old indexed pages se.
-* **❌ Kab mat karo:** Jab page **dynamic pages** (jo real-time data load karte hain) par depend karta ho, ya jab page `robots.txt` (file jo crawlers ko block karti hai) se index hone se roka gaya ho. Tab Wayback Machine prefer karo.
+* [[HL::**Problem:** Bug bounty mein developers galti se sensitive data (jaise passwords) upload karte hain aur jaldi se delete kar dete hain (404 error aata hai live site pe).::HL]]
+* [[HL::**Solution:** `cache:` operator us page ki history nikal leta hai aur deleted evidence recover kar deta hai::HL]].
+* [[HL::**What breaks?** Bina cache aur archive history check kiye, tum ek bada attack vector miss kar doge kyunki live pages humesha secure dikhte hain.::HL]]
+* [[HL::**✅ Kab use karo:** Jab koi page live site pe 404 (Not Found) de raha ho, jab `.env` file (environment variables ki file jisme secrets hote hain) delete ho gayi ho, ya jab admin password recovery karni ho old indexed pages se.::HL]]
+* [[HL::**❌ Kab mat karo:** Jab page **dynamic pages** (jo real-time data load karte hain) par depend karta ho, ya jab page `robots.txt` (file jo crawlers ko block karti hai) se index hone se roka gaya ho. Tab Wayback Machine prefer karo::HL]].
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
@@ -1564,54 +1562,54 @@ Browser mein webpage khulega, jiske top par ek grey bar hogi likha hoga: "This i
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)
 
-(1) Googlebot (Google ka crawler) website visit karta hai aur page ka HTML save kar leta hai (snapshot).
-(2) Admin galti se sensitive page live site se delete kar deta hai.
-(3) Pentester browser mein `cache:[target.com/secret](https://target.com/secret)` type karta hai.
-(4) Request target server ke paas jaane ke bajaye directly Google ke cache server pe jaati hai (bypassing target's live restrictions).
-(5) Google saved snapshot return kar deta hai.
+(1) [[HL::Googlebot (Google ka crawler) website visit karta hai aur page ka HTML save kar leta hai (snapshot).::HL]]
+[[HL::(2) Admin galti se sensitive page live site se delete kar deta hai.::HL]]
+[[HL::(3) Pentester browser mein `cache:[target.com/secret](https://target.com/secret)` type karta hai.::HL]]
+[[HL::(4) Request target server ke paas jaane ke bajaye directly Google ke cache server pe jaati hai (bypassing target's live restrictions).::HL]]
+[[HL::(5) Google saved snapshot return kar deta hai::HL]].
 
 ### 💻 7. Hands-On — Lab-Ready Commands
 
-**Basic Cache Request:**
+**[[HL::Basic Cache Request::HL]]:**
 
 ```bash
-# Web Browser URL Bar | Google Search
-1  cache:example.com    # cache: = operator; example.com = target website ka URL bina space diye
+# [[HL::Web Browser URL Bar | Google Search::HL]]
+[[HL::1  cache:example.com    # cache: = operator; example.com = target website ka URL::HL]] [[HL::bina space diye::HL]]
 
 ```
 
 ```
-# 📤 Expected Output:
-Browser shows the cached version of example.com with Google's snapshot header.
+# 📤 [[HL::Expected Output:::HL]]
+[[HL::Browser shows the cached version of example.com with Google's snapshot header::HL]].
 
 ```
 
-**Recovering Deleted API Docs (TechCorp Scenario):**
+**[[HL::Recovering Deleted API Docs (TechCorp Scenario):::HL]]**
 
 ```bash
-# Web Browser URL Bar | Google Search
-1  cache:test.techcorp.com/api-docs    # cache: = operator; test.techcorp.com/api-docs = specific target page jahan se API keys delete hui hain
+# [[HL::Web Browser URL Bar | Google Search
+1  cache:test.techcorp.com/api-docs    # cache: = operator; test.techcorp.com/api-docs = specific target page jahan se API keys delete hui hain::HL]]
 
 ```
 
 ```
-# 📤 Expected Output:
-Browser displays the old HTML of the API documentation page containing forgotten endpoints and keys.
+# 📤 [[HL::Expected Output:::HL]]
+[[HL::Browser displays the old HTML of the API documentation page containing forgotten endpoints and keys::HL]].
 
 ```
 
-**Combining with Filetypes (Hunting .env):**
+**[[HL::Combining with Filetypes (Hunting .env):::HL]]**
 
 ```bash
-# Web Browser URL Bar | Google Search
+# [[HL::Web Browser URL Bar | Google Search
 1  site:target.com filetype:env    # site: = target restrict karo; filetype:env = sirf .env files dhoondho (agar index hui ho)
-2  # Agar link mile aur 404 ho, toh us link ke aage 'cache:' laga ke open karo.
+2  # Agar link mile aur 404 ho, toh us link ke aage 'cache:' laga ke open karo.::HL]]
 
 ```
 
 ```
-# 📤 Expected Output:
-Shows cached .env file with DB_PASSWORD and API_SECRET exposed.
+# 📤 [[HL::Expected Output:::HL]]
+[[HL::Shows cached .env file with DB_PASSWORD and API_SECRET exposed::HL]].
 
 ```
 
@@ -1622,52 +1620,52 @@ Shows cached .env file with DB_PASSWORD and API_SECRET exposed.
 
 ### 🌍 9. Real-World Penetration Testing Use-Case
 
-**Scenario:** Ek pentester TechCorp ki testing kar raha tha. Usne `inurl:test` dork lagaya aur `[test.techcorp.com/api-docs](https://test.techcorp.com/api-docs)` mila. Target site par gaya toh 404 Not Found aaya (file delete ho chuki thi). Usne URL mein `cache:` lagaya. Google ke paas uska 1 week purana snapshot tha! Wahan se usne admin password aur secret endpoints nikal liye aur bug bounty jeeti. Deep historical recon ke liye usne `archive.org` (Wayback Machine — internet ka archive jo saalon purana data rakhta hai) bhi use kiya.
+**[[HL::Scenario:** Ek pentester TechCorp ki testing kar raha tha. Usne `inurl:test` dork lagaya aur `[test.techcorp.com/api-docs](https://test.techcorp.com/api-docs)` mila. Target site par gaya toh 404 Not Found aaya (file delete ho chuki thi). Usne URL mein `cache:` lagaya. Google ke paas uska 1 week purana snapshot tha! Wahan se usne admin password aur secret endpoints nikal liye aur bug bounty jeeti. Deep historical recon ke liye usne `archive.org` (Wayback Machine — internet ka archive jo saalon purana data rakhta hai) bhi use kiya::HL]].
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes
 
-* **❌ Mistake:** `cache: example.com` (colon ke baad space dena).
-* **🤦 Why:** Beginner typo karta hai. Space hone se Google usko normal search treat karega.
-* **✅ The 'Pro' Way:** `cache:example.com` (No space).
-* **⚡ Consequences:** Operator kaam nahi karega aur time waste hoga.
+* **❌ [[HL::Mistake:** `cache: example.com` (colon ke baad space dena).::HL]]
+* [[HL::**🤦 Why:** Beginner typo karta hai. Space hone se Google usko normal search treat karega.::HL]]
+* [[HL::**✅ The 'Pro' Way:** `cache:example.com` (No space).::HL]]
+* [[HL::**⚡ Consequences:** Operator kaam nahi karega aur time waste hoga::HL]].
 
 
-* **❌ Mistake:** Sochna ki cache saalon purana data dega.
-* **🤦 Why:** Google cache usually bas **1-2 weeks** purana snapshot rakhta hai.
-* **✅ The 'Pro' Way:** Purane data ke liye Wayback Machine (`archive.org`) use karo.
-* **⚡ Consequences:** Purani evidence miss ho jayegi.
+* **❌ [[HL::Mistake:** Sochna ki cache saalon purana data dega.::HL]]
+* [[HL::**🤦 Why:** Google cache usually bas **1-2 weeks** purana snapshot rakhta hai.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Purane data ke liye Wayback Machine (`archive.org`) use karo.::HL]]
+* [[HL::**⚡ Consequences:** Purani evidence miss ho jayegi::HL]].
 
 
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Kya main kisi aisi site ka cache dekh sakta hoon jo Google index hi nahi karta?"**
-* **Galat soch:** Main `cache:` lagaunga toh bypass ho jayega.
-* **Actually:** Nahi. Googlebot jahan crawl karta hai, sirf wahi cache hota hai. Agar site pe `robots.txt` laga hai block karne ke liye, toh cache bhi nahi hoga.
-* **Prove karo:** `cache:[bbc.com/news/technology](https://bbc.com/news/technology)` search karo, dikhega. Par kisi private intranet IP ka `cache:` search karo, error aayega.
+* **[[HL::Confusion 1 — "Kya main kisi aisi site ka cache dekh sakta hoon jo Google index hi nahi karta?"::HL]]**
+* [[HL::**Galat soch:** Main `cache:` lagaunga toh bypass ho jayega.::HL]]
+* [[HL::**Actually:** Nahi. Googlebot jahan crawl karta hai, sirf wahi cache hota hai. Agar site pe::HL]] [[HL::`robots.txt` laga hai block karne ke liye, toh cache bhi nahi hoga.::HL]]
+* [[HL::**Prove karo:** `cache:[bbc.com/news/technology](https://bbc.com/news/technology)` search karo, dikhega. Par kisi private intranet IP ka `cache:` search karo, error aayega.::HL]]
 
 
-* **Confusion 2 — "Wayback Machine aur Google Cache mein kya farq hai?"**
-* **Galat soch:** Dono same tools hain.
-* **Actually:** Google Cache sirf sabse recent snapshot rakhta hai (short-term). Wayback Machine years purani history maintain karta hai aur usme timeline slider hota hai.
-
-
-
-### 🛠️ 12. Troubleshooting Flowchart
-
-* **`[Error 404 on Google Cache page]`**
-* **Root Cause:** Page kabhi index hi nahi hua, ya site owner ne Google ko cache delete karne ki request bhej di.
-* **Fix:** Wayback Machine (`archive.org`) check karo.
+* [[HL::**Confusion 2 — "Wayback Machine aur Google Cache mein kya farq hai?"::HL]]**
+* [[HL::**Galat soch:** Dono same tools hain.::HL]]
+* [[HL::**Actually:** Google Cache sirf sabse recent snapshot rakhta hai (short-term). Wayback Machine years purani history maintain karta hai aur usme timeline slider hota hai.::HL]]
 
 
 
-### ⚖️ 13. Comparison
+### [[HL::🛠️ 12. Troubleshooting Flowchart::HL]]
 
-| Feature | `cache:` Operator | Wayback Machine (`archive.org`) |
+* [[HL::**`[Error 404 on Google Cache page]`::HL]]**
+* [[HL::**Root Cause:** Page kabhi index hi nahi hua, ya site owner ne Google ko cache delete karne ki request bhej di.::HL]]
+* [[HL::**Fix:** Wayback Machine (`archive.org`) check karo.::HL]]
+
+
+
+### [[HL::⚖️ 13. Comparison::HL]]
+
+| [[HL:: Feature::HL]] | [[HL::`cache:` Operator::HL]] | [[HL::Wayback Machine (`archive.org`) ::HL]] |
 | --- | --- | --- |
-| **Timeframe** | Sirf sabse recent snapshot (1-2 weeks) | Multiple years ki history aur timeline |
-| **Speed** | Instant, Google search se chalta hai | Slow, external website pe jana padta hai |
-| **Deep Crawl** | Restricted by current `robots.txt` | Purane snapshots dikha dega agar tab block nahi tha |
+| [[HL:: **Timeframe::HL]]** | [[HL::Sirf sabse recent snapshot (1-2 weeks)::HL]] | [[HL::Multiple years ki history aur timeline ::HL]] |
+| [[HL:: **Speed::HL]]** | [[HL::Instant, Google search se chalta hai::HL]] | [[HL::Slow, external website pe jana padta hai ::HL]] |
+| [[HL:: **Deep Crawl::HL]]** | [[HL::Restricted by current `robots.txt`::HL]] | [[HL::Purane snapshots dikha dega agar tab block nahi tha::HL]] |
 
 ### 🔄 14. Kill Chain & Attack Phase Flow
 
@@ -1692,8 +1690,8 @@ Shows cached .env file with DB_PASSWORD and API_SECRET exposed.
 
 ### ❓ 16. Interview & Certification Exam Q&A
 
-* **Q:** Ek client ne sensitive `.env` file delete kar di hai jo kal tak public thi. Ab live site par 404 hai. Tum usse recover karne ke liye sabse pehla step kya loge?
-* **A:** Main Google pe `cache:[target.com/.env](https://target.com/.env)` ya specific URL search karunga taaki Google ka recent snapshot access ho sake. Agar wahan nahi milta, toh main Wayback Machine (`archive.org`) check karunga.
+* [[HL::**Q:** Ek client ne sensitive::HL]] `.env` [[HL::file delete kar di hai jo kal tak public thi. Ab live site par 404 hai. Tum usse recover karne ke liye sabse pehla step kya loge::HL]]?
+* [[HL::**A:** Main Google pe `cache:[target.com/.env](https://target.com/.env)` ya specific URL search karunga taaki Google ka recent snapshot access ho sake. Agar wahan nahi milta, toh main Wayback Machine (`archive.org`) check karunga::HL]].
 
 
 
@@ -1726,85 +1724,82 @@ Agar tum ek naye shehar mein gaye aur tumhe ek Chinese restaurant bohot pasand a
 ### 📖 3. Technical Definition
 
 * **Precise English:** The `related:` operator queries Google's algorithm to identify and return a list of domain names that share similar content, user demographics, or business models with the target domain.
-* **Hinglish Simplification:** `related:` operator ek URL input leta hai aur usse milti-julti competitor ya similar category ki websites find karta hai.
+* [[HL::**Hinglish Simplification:** `related:` operator ek URL input leta hai aur usse milti-julti competitor ya similar category ki websites find karta hai::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Bug bounty mein agar tum sirf ek main application (e.g., `main.company.com`) target karoge, toh competition high hoga aur bugs milna mushkil hoga.
-* **Solution:** `related:` operator se tum target ki less-known partner sites ya subsidiaries (expanded scope) dhoondh sakte ho.
+* [[HL::**Problem:** Bug bounty mein agar tum sirf ek main application (e.g., `main.company.com`) target karoge, toh competition high hoga aur bugs milna mushkil hoga.::HL]]
+* [[HL::**Solution:** `related:` operator se tum target ki less-known partner sites ya subsidiaries (expanded scope) dhoondh sakte ho::HL]].
 * **What breaks?** Bina industry mapping ke tum "tunnel vision" ka shikar ho jaoge aur external attack vectors miss kar doge.
-* **✅ Kab use karo:** Jab target ka scope "wildcard" ho (kisi bhi related asset ko hack karna allowed ho), jab competitors discover karne ho, ya jab specific tech stack wali sites dhoondhni ho (jaise `pastebin.com` ke alternatives).
-* **❌ Kab mat karo:** Jab target strictly ek single IP ya ek single subdomain tak limited ho. Wahan related sites hack karna out-of-scope aur illegal (unauthorized) hoga.
+* [[HL::**✅ Kab use karo:** Jab target ka scope "wildcard" ho (kisi bhi related asset ko hack karna allowed ho), jab competitors discover karne ho, ya jab specific tech stack wali sites dhoondhni ho (jaise `pastebin.com` ke alternatives).::HL]]
+* [[HL::**❌ Kab mat karo:** Jab target strictly ek single IP ya ek single subdomain tak limited ho. Wahan related sites hack karna out-of-scope aur illegal (unauthorized) hoga.::HL]]
 
-### 🔍 5. Visual / Terminal Mein Kya Dikhega
+### [[HL::🔍 5. Visual / Terminal Mein Kya Dikhega::HL]]
 
-Terminal nahi, directly Google Search results aayenge jo normal format mein honge, par search term se match karne ke bajaye, woh target website ke similar competitors ke homepages dikhayenge.
+[[HL::Terminal nahi, directly Google Search results aayenge jo normal format mein honge, par search term se match karne ke bajaye, woh target website ke similar competitors ke homepages dikhayenge.::HL]]
 
-### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)
+### [[HL::⚙️ 6. Under the Hood (Deep Dive — Attack Flow)::HL]]
 
-(1) Attacker ko target milta hai (e.g., StartupX).
-(2) Attacker `related:StartupX.com` type karta hai.
-(3) Google apna semantic analysis aur linking algorithm use karke un websites ko fetch karta hai jo StartupX ke users commonly visit karte hain.
-(4) Attacker un nayi websites pe target ka same attack vector (e.g., `inurl:api-docs`) dhoondhta hai.
+[[HL::(1) Attacker ko target milta hai (e.g., StartupX).::HL]]
+[[HL::(2) Attacker `related:StartupX.com` type karta hai.::HL]]
+[[HL::(3) Google apna semantic analysis aur linking algorithm use karke un websites ko fetch karta hai jo StartupX ke users commonly visit karte hain.::HL]]
+[[HL::(4) Attacker un nayi websites pe target ka same attack vector (e.g., `inurl:api-docs`) dhoondhta hai.::HL]]
 
-### 💻 7. Hands-On — Lab-Ready Commands
+### [[HL::💻 7. Hands-On — Lab-Ready Commands::HL]]
 
-**Basic Competitor Discovery:**
+**[[HL::Basic Competitor Discovery::HL]]:**
 
 ```bash
-# Web Browser URL Bar | Google Search
-1  related:example.com    # related: = operator; example.com = target domain
+# [[HL::Web Browser URL Bar | Google Search::HL]]
+[[HL::1  related:example.com    # related: = operator; example.com = target domain::HL]]
 
 ```
 
 ```
-# 📤 Expected Output:
-Google returns sites similar to example.com.
+# 📤 [[HL::Expected Output:::HL]]
+[[HL::Google returns sites similar to example.com::HL]].
 
 ```
 
 **E-commerce Mapping Example:**
 
 ```bash
-# Web Browser URL Bar | Google Search
-1  related:amazon.com    # amazon ke competitors find karna
+# [[HL::Web Browser URL Bar | Google Search::HL]]
+[[HL::1  related:amazon.com    # amazon ke competitors find karna::HL]]
 
 ```
-
 ```
-# 📤 Expected Output:
-ebay.com, walmart.com, alibaba.com
+# [[HL::📤 Expected Output:::HL]]
+[[HL::ebay.com, walmart.com, alibaba.com::HL]]
 
 ```
 
 **Discovering Paste Sites for OSINT (Data Leak Hunting):**
 
 ```bash
-# Web Browser URL Bar | Google Search
-1  related:pastebin.com    # pastebin = text sharing site jahan aksar passwords leak hote hain
+# [[HL::Web Browser URL Bar | Google Search::HL]]
+[[HL::1  related:pastebin.com    # pastebin = text sharing site jahan aksar passwords leak hote hain::HL]]
 
 ```
+```
+# [[HL::📤 Expected Output:::HL]]
+[[HL::hastebin.com, ghostbin.co, controlc.com (yeh saari sites pe attacker target ke leaks dhoondh sakta hai)::HL]]
 
 ```
-# 📤 Expected Output:
-hastebin.com, ghostbin.co, controlc.com (yeh saari sites pe attacker target ke leaks dhoondh sakta hai)
+### [[HL::🔒 8. Attack Surface & Defense::HL]]
 
-```
+**[[HL::🔴 Attacker:** Is operator ko industry mapping aur attack surface expansion ke liye use karta hai. Agar target site secure hai, toh attacker uski similar partner site (jaise PaymentGatewayA) dhoondhta hai jo kam secure ho.::HL]]
+**[[HL::🔵 Defender:** Isse direct patch nahi kiya ja sakta kyunki yeh Google ka feature hai. Defender apna **DNS enumeration** (target ke saare subdomains aur DNS records find karna) aur OSINT strong rakhe taaki unko pata ho ki unki industry mein aur kaunse domains hain.::HL]]
 
-### 🔒 8. Attack Surface & Defense
+### [[HL::🌍 9. Real-World Penetration Testing Use-Case::HL]]
 
-**🔴 Attacker:** Is operator ko industry mapping aur attack surface expansion ke liye use karta hai. Agar target site secure hai, toh attacker uski similar partner site (jaise PaymentGatewayA) dhoondhta hai jo kam secure ho.
-**🔵 Defender:** Isse direct patch nahi kiya ja sakta kyunki yeh Google ka feature hai. Defender apna **DNS enumeration** (target ke saare subdomains aur DNS records find karna) aur OSINT strong rakhe taaki unko pata ho ki unki industry mein aur kaunse domains hain.
+**[[HL::Scenario:** Ek pentester bug bounty kar raha tha aur target tha StartupX. Usne dekha ki StartupX `gitlab` use kar raha hai jiska ek specific misconfiguration leak ho gaya tha. Usne `related:gitlab.com` search kiya toh usko Bitbucket aur aur similar platforms mile. Usne same attack pattern (e.g., `inurl:api-docs`) wahan automate kiya scripts se. Halanki related results limited (5-10) hote hain, isliye pro pentesters isko LinkedIn, Crunchbase, Shodan.io (IoT devices ka search engine), Censys, aur ZoomEye jaisi sites ke manual research ke saath combine karte hain.::HL]]
 
-### 🌍 9. Real-World Penetration Testing Use-Case
+### [[HL::⚠️ 10. Pentest Anti-Patterns & Common Mistakes::HL]]
 
-**Scenario:** Ek pentester bug bounty kar raha tha aur target tha StartupX. Usne dekha ki StartupX `gitlab` use kar raha hai jiska ek specific misconfiguration leak ho gaya tha. Usne `related:gitlab.com` search kiya toh usko Bitbucket aur aur similar platforms mile. Usne same attack pattern (e.g., `inurl:api-docs`) wahan automate kiya scripts se. Halanki related results limited (5-10) hote hain, isliye pro pentesters isko LinkedIn, Crunchbase, Shodan.io (IoT devices ka search engine), Censys, aur ZoomEye jaisi sites ke manual research ke saath combine karte hain.
-
-### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes
-
-* **❌ Mistake:** Expecting 100+ results from `related:`.
-* **🤦 Why:** Google intentionally results ko 5-10 top matches tak limit rakhta hai.
-* **✅ The 'Pro' Way:** Ise as a starting point use karo, phir Shodan aur Crunchbase se deep mapping karo.
+* **❌ [[HL::Mistake:** Expecting 100+ results from `related:`.::HL]]
+* [[HL::**🤦 Why:** Google intentionally results ko 5-10 top matches tak limit rakhta hai.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Ise as a starting point use karo, phir Shodan aur Crunchbase se deep mapping karo::HL]].
 * **⚡ Consequences:** Recon incomplete reh jayegi agar sirf `related:` pe depend rahe.
 
 
@@ -1817,24 +1812,24 @@ hastebin.com, ghostbin.co, controlc.com (yeh saari sites pe attacker target ke l
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion — "Kya `related:` subdomains dhoondhne ke kaam aata hai (Subdomain Discovery)?"**
-* **Galat soch:** Main `related:company.com` daalunga toh uske dev.company.com milenge.
-* **Actually:** Nahi. `related:` completely alag domains (competitors/similar entities) nikalta hai. Subdomains ke liye `site:company.com` use hota hai (ya tools like Amass/Subfinder).
-* **Prove karo:** `related:google.com` search karo. Tumhe yahoo, bing milenge, na ki mail.google.com.
+* [[HL::**Confusion — "Kya `related:` subdomains dhoondhne ke kaam aata hai (Subdomain Discovery)?"::HL]]**
+* [[HL::**Galat soch:** Main `related:company.com` daalunga toh uske dev.company.com milenge.::HL]]
+* [[HL::**Actually:** Nahi. `related:` completely alag domains (competitors/similar entities) nikalta hai. Subdomains ke liye `site:company.com` use hota hai (ya tools like Amass/Subfinder).::HL]]
+* [[HL::**Prove karo:** `related:google.com` search karo. Tumhe yahoo, bing milenge, na ki mail.google.com.::HL]]
 
 
 
-### 🛠️ 12. Troubleshooting Flowchart
+### [[HL::🛠️ 12. Troubleshooting Flowchart::HL]]
 
-* **`[Google shows "Your search - related:target.com - did not match any documents."]`**
-* **Root Cause:** Target website bohot nayi hai ya Google ke algorithm ke hisaab se uski koi distinct similar entities nahi hain.
-* **Fix:** Crunchbase ya LinkedIn pe target company ke "Competitors" tab mein manually search karo.
+* [[HL::**`[Google shows "Your search - related:target.com - did not match any documents."]`::HL]]**
+* [[HL::**Root Cause:** Target website bohot nayi hai ya Google ke algorithm ke hisaab se uski koi distinct similar entities nahi hain.::HL]]
+* [[HL::**Fix:** Crunchbase ya LinkedIn pe target company ke "Competitors" tab mein manually search karo.::HL]]
 
 
 
-### ⚖️ 13. Comparison
+### [[HL::⚖️ 13. Comparison::HL]]
 
-| Tool/Technique | Purpose | Results Volume |
+| [[HL:: Tool/Technique::HL]] | Purpose | Results Volume |
 | --- | --- | --- |
 | `related:` Operator | Similar websites / Competitors find karna | Low (5-10) |
 | `site:` Operator | Ek hi domain ke internal pages/subdomains find karna | High (All indexed) |
@@ -1912,8 +1907,8 @@ Agar tumhe kisi anjaan insaan ke baare mein jaanna hai, toh tum uske doston se p
 
 ### 📖 3. Technical Definition
 
-* **Precise English:** Backlink discovery is the process of finding external websites that contain hyperlinks pointing to the target domain. Historically, the `link:` operator performed this in Google, but it is now deprecated.
-* **Hinglish Simplification:** Internet par kaunsi aisi doosri websites hain jinke pages par target website ka URL/link likha hua hai, yeh dhoondhne ko backlink discovery kehte hain.
+* [[HL::**Precise English:** Backlink discovery is the process of finding external websites that contain hyperlinks::HL]] [[HL::pointing to the target domain. Historically, the `link:` operator performed this in Google, but it is now deprecated.::HL]]
+* [[HL::**Hinglish Simplification:** Internet par kaunsi aisi doosri websites hain jinke pages par target website ka URL/link likha hua hai, yeh dhoondhne ko backlink discovery kehte hain::HL]].
 
 ### 🧠 4. Why This Matters
 
@@ -1921,7 +1916,7 @@ Agar tumhe kisi anjaan insaan ke baare mein jaanna hai, toh tum uske doston se p
 * **Solution:** Backlink discovery se humein target ke partners, vendors, aur subsidiaries milte hain. Hum main target ki jagah un less-secure partners pe attack karte hain (Supply Chain Analysis).
 * **What breaks?** Bina relationship map kiye, tum ek impenetrable wall pe sar marte rahoge aur weak entry points miss kar doge.
 * **✅ Kab use karo:** Jab target ek large enterprise ho jiske bohot saare B2B partners hon, ya jab company ke less-known subdomains (jo doosri sites pe linked hain) dhoondhne hon.
-* **❌ Kab mat karo:** Google Search mein `link:` operator par bharosa mat karo (woh ab officially deprecate/band ho chuka hai). Iske bajaye alternative tools use karo.
+* **❌ Kab [[HL::mat karo:** Google Search mein `link:` operator par bharosa mat karo (woh ab officially deprecate/band ho chuka hai). Iske bajaye alternative tools use karo::HL]].
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
@@ -2066,15 +2061,15 @@ Jaise kisi insaan ka "profile card" ya visiting card hota hai jismein uski basic
 ### 📖 3. Technical Definition
 
 * **Precise English:** The `info:` operator returns Google's summary information for a specific web address, effectively testing its indexed status and providing shortcut links to other operators (like cache, related, etc.).
-* **Hinglish Simplification:** `info:` dork check karta hai ki kya Google ne us website ko apne database mein save (index) kiya hai ya nahi, aur uske related search shortcuts ek jagah dikhata hai.
+* [[HL::**Hinglish Simplification:** `info:` dork check karta hai ki kya Google ne us website ko apne database mein save (index) kiya hai ya nahi, aur uske related search shortcuts ek jagah dikhata hai::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Pentesters ko check karna hota hai ki target ka ek specific dev subdomain Google ne leak/index kiya hai ya nahi.
-* **Solution:** `info:` operator ek instant "visibility test" hai. Agar info page aagaya, matlab Google usse janta hai.
+* [[HL::**Problem:** Pentesters ko check karna hota hai ki target ka ek specific dev subdomain Google ne leak/index kiya hai ya nahi.::HL]]
+* [[HL::**Solution:** `info:` operator ek instant "visibility test" hai. Agar info page aagaya, matlab Google usse janta hai::HL]].
 * **What breaks?** Tum un assets pe time waste karoge jo search engines pe indexed hi nahi hain (OSINT fail ho jayega).
-* **✅ Kab use karo:** Jab target list bohot badi ho aur automatically check karna ho ki kaunse subdomains publicly Google ke index mein baithe hain.
-* **❌ Kab mat karo:** Jab deep vulnerabilities dhoondhni hon. Yeh operator sirf basic information deta hai, koi direct exploit ya hidden file nahi nikalta.
+* **✅ [[HL::Kab use karo:** Jab target list bohot badi ho aur automatically check karna ho ki kaunse subdomains publicly Google ke index mein baithe hain.::HL]]
+* [[HL::**❌ Kab mat karo:** Jab deep vulnerabilities dhoondhni hon. Yeh operator sirf basic information deta hai, koi direct exploit ya hidden file nahi nikalta::HL]].
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
@@ -2086,18 +2081,18 @@ Browser mein ek simple page khulega jisme target site ka title aur description h
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)
 
-(1) Pentester ke paas subdomains ki ek list hai.
-(2) Woh list ko ek script mein daalta hai jo har subdomain ke aage `info:` laga ke Google ko query bhejti hai.
-(3) Jin domains par Google "No information available" deta hai — matlab un par `robots.txt` ka restriction hai, ya woh naye/internal hain.
-(4) Pentester un unindexed (hidden) subdomains par directly Nmap/BurpSuite scan start karta hai kyunki unhe intentionally chupaya gaya tha.
+([[HL::1) Pentester ke paas subdomains ki ek list hai.::HL]]
+[[HL::(2) Woh list ko ek script mein daalta hai jo har subdomain ke aage `info:` laga ke Google ko query bhejti hai.::HL]]
+[[HL::(3) Jin domains par Google "No information available" deta hai — matlab un par `robots.txt` ka restriction hai, ya woh naye/internal hain.::HL]]
+[[HL::(4) Pentester un unindexed (hidden) subdomains par directly Nmap/BurpSuite scan start karta hai kyunki unhe intentionally chupaya gaya tha.::HL]]
 
-### 💻 7. Hands-On — Lab-Ready Commands
+### [[HL::💻 7. Hands-On — Lab-Ready Commands::HL]]
 
-**Basic Visibility Test:**
+**[[HL::Basic Visibility Test::HL]]:**
 
 ```bash
-# Web Browser URL Bar | Google Search
-1  info:example.com    # info: = operator; example.com = target domain
+# [[HL::Web Browser URL Bar | Google Search::HL]]
+[[HL::1  info:example.com    # info: = operator; example.com = target domain::HL]]
 
 ```
 
@@ -2107,13 +2102,13 @@ Summary of the site with shortcuts to cache, related, and site: operators.
 
 ```
 
-**Checking Valid vs Invalid Indexing:**
+**[[HL::Checking Valid vs Invalid Indexing:::HL]]**
 
 ```bash
-# Web Browser URL Bar | Google Search
-1  info:google.com                        # Ek highly indexed site
-2  info:github.com                        # Ek aur public site
-3  info:thissubdomaindoesnotexist123.github.com  # Ek fake/unindexed subdomain
+# [[HL::Web Browser URL Bar | Google Search::HL]]
+[[HL::1  info:google.com                        # Ek highly indexed site::HL]]
+[[HL::2  info:github.com                        # Ek aur public site::HL]]
+[[HL::3  info:thissubdomaindoesnotexist123.github.com  # Ek fake/unindexed subdomain::HL]]
 
 ```
 
@@ -2131,13 +2126,13 @@ Line 3 returns "Your search - info:thissubdomain... - did not match any document
 
 ### 🌍 9. Real-World Penetration Testing Use-Case
 
-**Scenario:** Ek bug bounty hunter StartupY ki testing kar raha tha. Uske paas 100 subdomains the. Usne ek script banayi jo check karti thi ki kaunsa subdomain Google mein indexed hai. `info:StartupY.com` index tha. Par jab script ne `info:dev.startupy.com` chalaya toh Google ne kuch nahi dikhaya. Matlab dev site Google se chupi hui thi. Hunter samajh gaya ki yeh development/internal testing area hai. Usne directly dev site ko access kiya aur bina authentication ke usko developer dashboard mil gaya. Hidden sites are often the most vulnerable!
+**[[HL::Scenario:** Ek bug bounty hunter StartupY ki testing kar raha tha. Uske paas 100 subdomains the. Usne ek script banayi jo check karti thi ki kaunsa subdomain Google mein indexed hai. `info:StartupY.com` index tha. Par jab script ne `info:dev.startupy.com` chalaya toh Google ne kuch nahi dikhaya. Matlab dev site Google se chupi hui thi. Hunter samajh gaya ki yeh development/internal testing area hai. Usne directly dev site ko access kiya aur bina authentication ke usko developer dashboard mil gaya. Hidden sites are often the most vulnerable::HL]]!
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes
 
-* **❌ Mistake:** Sochna ki `info:` se passwords ya vulnerabilities milengi.
-* **🤦 Why:** Yeh sirf meta-information aur indexing status ka tool hai.
-* **✅ The 'Pro' Way:** Ise as a "dashboard" use karo pehli nazar dalne ke liye, phir `site:` ya `cache:` se deep dive karo.
+* **❌ [[HL::Mistake:** Sochna ki `info:` se passwords ya vulnerabilities milengi.::HL]]
+* [[HL::**🤦 Why:** Yeh sirf meta-information aur indexing status ka tool hai.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Ise as a "dashboard" use karo pehli nazar dalne ke liye, phir `site:` ya `cache:` se deep dive karo::HL]].
 * **⚡ Consequences:** Agar isse exploit tool samjhoge toh nirash hoge aur time waste hoga.
 
 
@@ -2247,13 +2242,13 @@ GHDB ek **"recipe book"** ki tarah hai. Agar tumhe koi naya attack vector dhoond
 ### 📖 3. Technical Definition
 
 * **Precise English:** The Google Hacking Database (GHDB) is an authoritative index of search queries (dorks) curated by Exploit-DB, designed to uncover publicly exposed sensitive information, misconfigured servers, and vulnerable web applications using advanced Google search operators.
-* **Hinglish Simplification:** GHDB ek aisi directory hai jahan hazaron pre-made Google search queries stored hain, jinse web par galti se leak hua sensitive data ya vulnerable sites dhundhi ja sakti hain.
+* [[HL::**Hinglish Simplification:** GHDB ek aisi directory hai jahan hazaron pre-made Google search queries stored hain, jinse web par galti se leak hua sensitive data ya vulnerable sites dhundhi ja sakti hain::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Target par manual hunting aur directory brute-forcing noisy hoti hai aur WAF (Web Application Firewall — malicious traffic block karne wala system) tumhe block kar dega.
-* **Solution:** GHDB queries directly Google ke cached data ko query karti hain, target server ko touch kiye bina. Yeh pentester ko "wheel reinvent" karne se bachata hai.
-* **What breaks?** Bina GHDB ke, tum shayad woh sensitive directories ya backup files miss kar do jo directly Google par publicly available the aur tum tools chalate reh gaye.
+* [[HL::**Problem:** Target par manual hunting aur directory brute-forcing noisy hoti hai aur WAF (Web Application Firewall — malicious traffic block karne wala system) tumhe block kar dega.::HL]]
+* [[HL::**Solution:** GHDB queries directly Google ke cached data ko query karti hain, target server ko touch kiye bina. Yeh pentester ko "wheel reinvent" karne se bachata hai::HL]].
+* [[HL::**What breaks?** Bina GHDB ke, tum shayad woh sensitive directories ya backup files miss kar do jo directly Google par publicly available the aur tum tools chalate reh gaye::HL]].
 * **✅ Kab use karo:** Reconnaissance phase ke start mein, quick wins nikalne ke liye, aur jab target ka attack surface samajhna ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab internal network (post-breach) ki hunting kar rahe ho, kyunki wahan Google ka access nahi hota (wahan internal tools jaise BloodHound ya PowerView lagte hain).
 
@@ -2264,18 +2259,18 @@ Ek searchable table jisme categories, dork queries (jaise `filetype:env`), aur u
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)
 
-1. **Misconfiguration:** Ek web admin galti se `.env` (environment variables file jisme passwords hote hain) ko web root mein chhod deta hai bina access control ke.
-2. **Indexing:** Google ka bot (crawler) site visit karta hai aur us file ko padh kar apne database mein index kar leta hai.
-3. **Dorking:** Pentester GHDB se dork uthata hai aur Google par search karta hai.
-4. **Exposure:** Target server alert nahi hota, lekin pentester ko Google ke search results se seedha plain-text passwords mil jaate hain.
+1. [[HL::**Misconfiguration:** Ek web admin galti se `.env` (environment variables file jisme passwords hote hain) ko web root mein chhod deta hai bina access control ke.::HL]]
+2. [[HL::**Indexing:** Google ka bot (crawler) site visit karta hai aur us file ko padh kar apne database mein index kar leta hai.::HL]]
+3. [[HL::**Dorking:** Pentester GHDB se dork uthata hai aur Google par search karta hai.::HL]]
+4. [[HL::**Exposure:** Target server alert nahi hota, lekin pentester ko Google ke search results se seedha plain-text passwords mil jaate hain.::HL]]
 
-### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
+### [[HL::💻 7. Hands-On — Runnable Example (Lab-Ready Commands)::HL]]
 
-Yahan kuch classic GHDB dorks hain jo commonly use hote hain:
+[[HL::Yahan kuch classic GHDB dorks hain jo commonly use hote hain::HL]]:
 
 ```bash
-# Google Search Bar mein type karo (Browser)
-1  filetype:env "DB_PASSWORD"  # filetype:env = sirf .env files dhoondho; "DB_PASSWORD" = file ke andar yeh exact text hona chahiye (usually database passwords expose karta hai)
+# [[HL::Google Search Bar mein type karo (Browser)::HL]]
+[[HL::1  filetype:env "DB_PASSWORD"  # filetype:env = sirf .env files dhoondho; "DB_PASSWORD" = file ke andar yeh exact text hona chahiye (usually database passwords expose karta hai::HL]])
 
 ```
 
@@ -2287,8 +2282,8 @@ Index of /
 ```
 
 ```bash
-# Admin Panels Discovery
-1  intitle:"Admin Login" inurl:admin  # intitle = webpage ke title tab mein "Admin Login" hona chahiye; inurl = URL ke andar "admin" word hona chahiye
+# [[HL::Admin Panels Discovery::HL]]
+[[HL::1  intitle:"Admin Login" inurl:admin  # intitle = webpage ke title tab mein "Admin Login" hona chahiye; inurl = URL ke andar "admin" word hona chahiye::HL]]
 
 ```
 
@@ -2299,23 +2294,23 @@ Admin Login - TargetCorp (https://target.com/admin/login.php)
 ```
 
 ```bash
-# Backup files aur logs nikalna
-1  intitle:"index of" "backup.sql"  # intitle:"index of" = open directories (jahan files list ho rahi hain) dhoondho; "backup.sql" = SQL database backup file dhundho
-2  filetype:log inurl:"password.log" # .log files dhoondho jinke URL mein password.log ho
+# [[HL::Backup files aur logs nikalna::HL]]
+[[HL::1  intitle:"index of" "backup.sql"  # intitle:"index of" = open directories (jahan files list ho rahi hain) dhoondho; "backup.sql" = SQL database backup file dhundho::HL]]
+[[HL::2  filetype:log inurl:"password.log" # .log files dhoondho jinke URL mein password.log ho::HL]]
 
 ```
 
 ```text
-# 📤 Expected Output:
-Index of /backups/
-backup.sql  (Contains full database dump)
+# 📤 [[HL::Expected Output:::HL]]
+[[HL::Index of /backups/::HL]]
+[[HL::backup.sql  (Contains full database dump::HL]])
 
 ```
 
 **Targeted Recon (Specific company pe dorking):**
 
 ```bash
-1  site:target.com filetype:log inurl:"password.log"  # site:target.com = sirf is specific company/domain ke andar dhoondho
+1  [[HL::site:target.com filetype:log inurl:"password.log"  # site:target.com = sirf is specific company/domain ke andar dhoondho::HL]]
 
 ```
 
@@ -2326,7 +2321,7 @@ backup.sql  (Contains full database dump)
 
 ### 🌍 9. Real-World Penetration Testing Use-Case
 
-Bug bounty mein, jab pentester naye target pe hunting shuru karta hai, toh woh manually dork banane mein time waste nahi karta. Woh Exploit-DB par GHDB ki categories browse karta hai. Ek recent bug bounty writeup mein, ek researcher ne sirf `site:company.com filetype:env` use kiya, jisse production database ke credentials mil gaye. Result? Bina ek bhi packet send kiye target ko, usne $5,000 ki bounty claim ki.
+[[HL::Bug bounty mein, jab pentester naye target pe hunting shuru karta hai, toh woh manually dork banane mein time waste nahi karta. Woh Exploit-DB par GHDB ki categories browse karta hai. Ek recent bug bounty writeup mein, ek researcher ne sirf `site:company.com filetype:env` use kiya, jisse production database ke credentials mil gaye. Result? Bina ek bhi packet send kiye target ko, usne $5,000 ki bounty claim ki::HL]].
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -2343,9 +2338,9 @@ Bug bounty mein, jab pentester naye target pe hunting shuru karta hai, toh woh m
 * **Prove karo:** `intitle:"index of"` search karo, yeh public data hai. Crime tab hota hai jab tum us data ko use karke system mein unauthorized login karte ho.
 
 
-* **Confusion 2 — "Main khud apne dorks submit kar sakta hoon kya?"**
-* **Galat soch:** GHDB sirf admins update karte hain.
-* **Actually:** GHDB community-driven hai. Agar tumhe koi naya pattern milta hai jo previously unknown vulnerabilities expose karta hai, tum Exploit-DB par apna dork submit kar sakte ho.
+* [[HL::**Confusion 2 — "Main khud apne dorks submit kar sakta hoon kya?"::HL]]**
+* [[HL::**Galat soch:** GHDB sirf admins update karte hain.::HL]]
+* [[HL::**Actually:** GHDB community-driven hai. Agar tumhe koi naya pattern milta hai jo previously unknown vulnerabilities expose karta hai, tum Exploit-DB par apna dork submit kar sakte ho::HL]].
 
 
 
@@ -2359,20 +2354,20 @@ Bug bounty mein, jab pentester naye target pe hunting shuru karta hai, toh woh m
 
 ### ⚖️ 13. Comparison (Manual Dorking vs Scanners)
 
-| Feature | Google Dorking (GHDB) | Active Scanners (e.g., Dirb/Gobuster) |
+| [[HL::Feature::HL]] | [[HL::Google Dorking (GHDB)::HL]] | [[HL::Active Scanners (e.g., Dirb/Gobuster) ::HL]] |
 | --- | --- | --- |
-| **Noise Level** | Zero noise (Target logs mein tumhara IP nahi jayega) | Highly noisy (Target ke logs mein hazaron requests dikhengi) |
-| **Speed** | Instant results from Google cache | Slow (Har directory brute-force hoti hai) |
-| **Completeness** | Sirf wohi dikhega jo Google ne index kiya hai | Hidden files bhi mil sakti hain jo Google se blocked hain |
+| [[HL:: **Noise Level::HL]]** | [[HL::Zero noise (Target logs mein tumhara IP nahi jayega)::HL]] | [[HL::Highly noisy (Target ke logs mein hazaron requests dikhengi) ::HL]] |
+| [[HL:: **Speed::HL]]** | [[HL::Instant results from Google cache::HL]] | [[HL::Slow (Har directory brute-force hoti hai) ::HL]] |
+| [[HL:: **Completeness::HL]]** | [[HL::Sirf wohi dikhega jo Google ne index kiya hai::HL]] | [[HL::Hidden files bhi mil sakti hain jo Google se blocked hain ::HL]] |
 
-### 🔄 14. Kill Chain & Attack Phase Flow
+### [[HL::🔄 14. Kill Chain & Attack Phase Flow::HL]]
 
-* ⚔️ **Attack Phase:** Reconnaissance / OSINT (Open Source Intelligence)
-* 📍 **Kill Chain Position:** Step 1 - Discovery
-* 🔗 **This connects to:** Initial Access (Footholds)
-* 🔄 **Flow:** Exploit-DB (GHDB) categories browse karo -> Relevant dorks select karo -> Target (site:target.com) par run karo -> Exposed assets (passwords/backups) nikalo -> Report karo (Live Production Phase).
+* [[HL::⚔️ **Attack Phase:** Reconnaissance / OSINT (Open Source Intelligence)::HL]]
+* [[HL::📍 **Kill Chain Position:** Step 1 - Discovery::HL]]
+* [[HL::🔗 **This connects to:** Initial Access (Footholds)::HL]]
+* [[HL::🔄 **Flow:** Exploit-DB (GHDB) categories browse karo -> Relevant dorks select karo -> Target (site:target.com) par run karo -> Exposed assets (passwords/backups) nikalo -> Report karo (Live Production Phase).::HL]]
 
-### 🎨 15. Visual Diagram (ASCII Art)
+### [[HL::🎨 15. Visual Diagram (ASCII Art::HL]])
 
 ```text
 [Pentester]
@@ -2390,8 +2385,8 @@ Bug bounty mein, jab pentester naye target pe hunting shuru karta hai, toh woh m
 
 ### ❓ 16. Interview & Certification Exam Q&A
 
-* **Q:** GHDB kya hai aur yeh reconnaissance mein kyun critical hai?
-* **A:** GHDB Exploit-DB ka ek database hai jisme pre-built Google search operators (dorks) hote hain. Yeh critical hai kyunki isse hum target server ko interact kiye bina publicly exposed sensitive files, admin panels aur vulnerabilities dhoondh sakte hain (passive recon).
+* [[HL::**Q:** GHDB kya hai aur yeh reconnaissance mein kyun critical hai?::HL]]
+* [[HL::**A:** GHDB Exploit-DB ka ek database hai jisme pre-built Google search operators (dorks) hote hain. Yeh critical hai kyunki isse hum target server ko interact kiye bina publicly exposed sensitive files, admin panels aur vulnerabilities dhoondh sakte hain (passive recon::HL]]).
 
 
 * **Q:** "Footholds" category in GHDB ka kya matlab hai?
@@ -2428,12 +2423,12 @@ Socho ek ghar (website) ka main darwaza (homepage) toh sabko pata hai, par hum *
 ### 📖 3. Technical Definition
 
 * **Precise English:** Login page dorking involves using advanced search operators to uncover authentication interfaces, administrative panels, and backend CMS portals that are unintentionally indexed by search engines, expanding the target's attack surface.
-* **Hinglish Simplification:** Dorks ka use karke target website ke un login aur admin pages ko dhoondhna jo public nahi hone chahiye the, par galti se Google pe aa gaye.
+* [[HL::**Hinglish Simplification:** Dorks ka use karke target website ke un login aur admin pages ko dhoondhna jo public nahi hone chahiye the, par galti se Google pe aa gaye::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Brute force (password guess karna) ya credential stuffing (chori kiye gaye passwords try karna) karne ke liye, tumhe pehle ek login form (authentication endpoint) chahiye.
-* **Solution:** Dorking tumhe deep, hidden, aur weak authentication portals (jaise old CMS versions) nikal kar deta hai jahan security bypass aasaan hoti hai.
+* [[HL::**Problem:** Brute force (password guess karna) ya credential stuffing (chori kiye gaye passwords try karna) karne ke liye, tumhe pehle ek login form (authentication endpoint) chahiye.::HL]]
+* [[HL::**Solution:** Dorking tumhe deep, hidden, aur weak authentication portals (jaise old CMS versions) nikal kar deta hai jahan security bypass aasaan hoti hai::HL]].
 * **What breaks?** Sirf main page ke login par attack karoge toh easily block ho jaoge (high security). Hidden panels pe dhyan na dene se easy wins miss ho jayenge.
 * **✅ Kab use karo:** Jab target ka external attack surface discover kar rahe ho, ya jab default CMS credentials try karne ka scope ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab target strictly API-based ho (wahan Postman/Burp Suite se API endpoints fuzz karne padte hain).
@@ -2453,20 +2448,20 @@ Ek browser window jisme purana, unstyled ya default CMS login prompt khula ho (e
 **Basic Patterns (General Logins):**
 
 ```bash
-# General login pages dhoondhna
-1  intitle:login  # Page ke title mein login hona chahiye
-2  inurl:admin    # URL structure mein admin hona chahiye
-3  intitle:"admin login"  # Exact phrase "admin login" title mein ho
-4  intitle:"Admin Panel"  # Title mein "Admin Panel" ho
+# [[HL::General login pages dhoondhna::HL]]
+[[HL::1  intitle:login  # Page ke title mein login hona chahiye::HL]]
+[[HL::2  inurl:admin    # URL structure mein admin hona chahiye::HL]]
+[[HL::3  intitle:"admin login"  # Exact phrase "admin login" title mein ho::HL]]
+[[HL::4  intitle:"Admin Panel"  # Title mein "Admin Panel" ho::HL]]
 
 ```
 
-**Advanced Combinations (Targeting a specific site with OR operators `|`):**
+**[[HL::Advanced Combinations (Targeting a specific site with OR operators::HL]] `|`):**
 
 ```bash
-# RetailCorp ke kisi bhi login panel ko dhoondhna
-1  site:retailcorp.com (intitle:"admin login" | intitle:"administrator login" | intitle:"admin panel") (inurl:admin | inurl:login | inurl:dashboard) 
-# Explanation: 'site:' domain restrict karta hai; '(A | B)' OR logic lagata hai ki inmein se koi bhi match kare.
+# [[HL::RetailCorp ke kisi bhi login panel ko dhoondhna::HL]]
+[[HL::1  site:retailcorp.com (intitle:"admin login" | intitle:"administrator login" | intitle:"admin panel") (inurl:admin | inurl:login | inurl:dashboard) ::HL]]
+# [[HL::Explanation: 'site:' domain restrict karta hai; '(A | B)' OR logic lagata hai ki inmein se koi bhi match kare::HL]].
 
 ```
 
@@ -2479,10 +2474,10 @@ Admin Dashboard - RetailCorp (https://old-admin.retailcorp.com/dashboard/login.p
 **CMS Specific Discovery (WordPress, Joomla, Drupal):**
 
 ```bash
-1  inurl:wp-admin  # WordPress admin panels
-2  inurl:administrator  # Joomla admin login
-3  inurl:user/login  # Drupal login path
-4  intitle:phpMyAdmin inurl:index.php  # phpMyAdmin (database management) portals dhoondhna
+[[HL::1  inurl:wp-admin  # WordPress admin panels::HL]]
+[[HL::2  inurl:administrator  # Joomla admin login::HL]]
+[[HL::3  inurl:user/login  # Drupal login path::HL]]
+[[HL::4  intitle:phpMyAdmin inurl:index.php  # phpMyAdmin (database management) portals dhoondhna::HL]]
 
 ```
 
@@ -2496,7 +2491,7 @@ Tum `github.com` aur `stackoverflow.com` pe bhi target ka naam daal kar unke int
 
 ### 🌍 9. Real-World Penetration Testing Use-Case
 
-**RetailCorp Scenario:** Ek bug bounty hunter ne dekha ki `retailcorp.com` ka main site highly secure hai. Usne dork chalaya: `site:retailcorp.com inurl:admin`. Use ek result mila: `old-admin.retailcorp.com`. Yeh panel unmaintained tha aur usme default credentials chal rahe the. Company ne turant use band kiya aur pentester ko bounty di.
+**[[HL::RetailCorp Scenario:** Ek bug bounty hunter ne dekha ki `retailcorp.com` ka main site highly secure hai. Usne dork chalaya: `site:retailcorp.com inurl:admin`. Use ek result mila: `old-admin.retailcorp.com`. Yeh panel unmaintained tha aur usme default credentials chal rahe the. Company ne turant use band kiya aur pentester ko bounty di::HL]].
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
@@ -2507,9 +2502,9 @@ Tum `github.com` aur `stackoverflow.com` pe bhi target ka naam daal kar unke int
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "inurl aur intitle mein kya fark hai?"**
-* **Galat soch:** Dono same cheez dhoondhte hain.
-* **Actually:** `inurl` sirf URL link string ke andar dekhta hai (jaise `example.com/login`), jabki `intitle` browser ke tab ke upar likhe naam ko dekhta hai. Dono combine karne se accuracy badhti hai.
+* **Confu[[HL::sion 1 — "inurl aur intitle mein kya fark hai?"::HL]]**
+* [[HL::**Galat soch:** Dono same cheez dhoondhte hain.::HL]]
+* [[HL::**Actually:** `inurl` sirf URL link string ke andar dekhta hai (jaise `example.com/login`), jabki `intitle` browser ke tab ke upar likhe naam ko dekhta hai. Dono combine karne se accuracy badhti hai::HL]].
 
 
 * **Confusion 2 — "Kya panel milna automatically vulnerability hai?"**
@@ -2637,10 +2632,10 @@ Browser mein seedha plain text file dikhegi jisme `DB_PASSWORD=securepass123` ya
 **High-Priority File Types & API Keys:**
 
 ```bash
-# Environment & Config Discovery
-1  filetype:env "DB_PASSWORD" | "API_KEY" | "SECRET"  # filetype:env = .env extension dhundho; OR logic se koi bhi sensitive keyword match karo
-2  filetype:config "DATABASE_PASSWORD" | "MYSQL_PASSWORD"  # .config files mein database passwords dhundho
-3  filetype:ini "SECRET_KEY"  # .ini initialization files dhundho
+# [[HL::Environment & Config Discovery::HL]]
+[[HL::1  filetype:env "DB_PASSWORD" | "API_KEY" | "SECRET"  # filetype:env = .env extension dhundho; OR logic se koi bhi sensitive keyword match karo::HL]]
+[[HL::2  filetype:config "DATABASE_PASSWORD" | "MYSQL_PASSWORD"  # .config files mein database passwords dhundho::HL]]
+[[HL::3  filetype:ini "SECRET_KEY"  # .ini initialization files dhundho::HL]]
 
 ```
 
@@ -2790,12 +2785,12 @@ Yeh aisa hai jaise ek **"hospital medical report"** jisme patient ki saari inter
 ### 📖 3. Technical Definition
 
 * **Precise English:** Vulnerability report dorking is the use of search engine queries to discover publicly exposed, confidential penetration testing reports or automated vulnerability scanner outputs (like Nessus or Acunetix), which provide a comprehensive blueprint of a target's security flaws.
-* **Hinglish Simplification:** Google ka use karke kisi company ki leak hui security checkup reports dhundhna, jisme unki saari kamzoriyan (vulnerabilities) detail mein likhi hoti hain.
+* [[HL::**Hinglish Simplification:** Google ka use karke kisi company ki leak hui security checkup reports dhundhna, jisme unki saari kamzoriyan (vulnerabilities) detail mein likhi hoti hain::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Companies audits karwati hain par un reports ko secure rakhna bhool jati hain. In reports mein internal IP addresses, database schemas, aur critical vulnerabilities step-by-step exploit karne ke tareeke hote hain.
-* **Solution:** Ek pentester ke liye, yeh reports "Quick Recon" aur historical data ka best source hain, kyunki inme directly un systems ka pata chalta hai jo historically weak rahe hain.
+* [[HL::**Problem:** Companies audits karwati hain par un reports ko secure rakhna bhool jati hain. In reports mein internal IP addresses, database schemas, aur critical vulnerabilities step-by-step exploit karne ke tareeke hote hain::HL]].
+* [[HL::**Solution:** Ek pentester ke liye, yeh reports "Quick Recon" aur historical data ka best source hain, kyunki inme directly un systems ka pata chalta hai jo historically weak rahe hain::HL]].
 * **What breaks?** Attacker zero-day (unknown vulnerability) dhoondhne ke bajaye pehle in leaked reports mein mentioned n-day (known but unpatched) vulnerabilities ko direct exploit kar lega.
 * **✅ Kab use karo:** Reconnaissance phase mein, especially jab enterprise clients target hon jo regular compliance audits karwate hain.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab target ek naya startup ho jisne kabhi pentest nahi karwaya; wahan direct attack surface discovery prefer karo.
@@ -2807,8 +2802,8 @@ Ek PDF viewer jisme "Confidential - Penetration Test Report" likha hoga, aur usm
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)
 
 1. **Security Audit:** Ek third-party company target ka pentest karti hai aur PDF report deti hai.
-2. **Mismanagement:** Target ka ek IT employee us report ko ek third-party site (jaise scribd.com ya open S3 bucket) par upload kar deta hai backup ke liye.
-3. **Discovery:** Attacker `filetype:pdf intitle:"penetration test report"` dork karta hai.
+2. [[HL::**Mismanagement:** Target ka ek IT employee us report ko ek third-party site (jaise scribd.com ya open S3 bucket) par upload kar deta hai backup ke liye.::HL]]
+3. [[HL::**Discovery:** Attacker `filetype:pdf intitle:"penetration test report"` dork karta hai::HL]].
 4. **Exploitation:** Attacker report mein padhta hai ki server X vulnerable hai, aur bina scanning (noise) kiye direct exploit launch kar deta hai.
 
 ### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
@@ -2816,8 +2811,8 @@ Ek PDF viewer jisme "Confidential - Penetration Test Report" likha hoga, aur usm
 **Common Report Types (Scanners & Audits):**
 
 ```bash
-# Automated Scanner reports dhoondhna
-1  intitle:"Nessus scan report" | intitle:"Acunetix report" filetype:pdf  # Nessus (popular network vulnerability scanner) aur Acunetix (web vulnerability scanner) ki generated PDF reports dhoondho
+# [[HL::Automated Scanner reports dhoondhna::HL]]
+[[HL::1  intitle:"Nessus scan report" | intitle:"Acunetix report" filetype:pdf  # Nessus (popular network vulnerability scanner) aur Acunetix (web vulnerability scanner) ki generated PDF reports dhoondho::HL]]
 
 ```
 
@@ -2830,24 +2825,24 @@ Ek PDF viewer jisme "Confidential - Penetration Test Report" likha hoga, aur usm
 **Consulting / Audit Reports:**
 
 ```bash
-# General penetration test reports
-1  intitle:"penetration test report" | intitle:"vulnerability assessment" | intitle:"security audit" filetype:pdf | filetype:doc | filetype:docx | filetype:html  # Alag alag formats mein audit reports dhoondho
+# [[HL::General penetration test reports::HL]]
+[[HL::1  intitle:"penetration test report" | intitle:"vulnerability assessment" | intitle:"security audit" filetype:pdf | filetype:doc | filetype:docx | filetype:html  # Alag alag formats mein audit reports dhoondho::HL]]
 
 ```
 
 **Finding High/Critical issues within a specific timeframe:**
 
 ```bash
-# Specific target aur severity filter
-1  site:target.com (intext:"critical" | intext:"high") intitle:"vulnerability" filetype:pdf 2020..2023  # 2020 se 2023 ke beech ki aisi PDF dhundho jisme critical ya high likha ho
+# [[HL::Specific target aur severity filter::HL]]
+[[HL::1  site:target.com (intext:"critical" | intext:"high") intitle:"vulnerability" filetype:pdf 2020..2023  # 2020 se 2023 ke beech ki aisi PDF dhundho jisme critical ya high likha ho::HL]]
 
 ```
 
 **Third-Party Platform Recon:**
 
 ```bash
-# Document sharing sites par leaks
-1  site:slideshare.net | site:scribd.com | site:academia.edu | site:youtube.com "Target Company Name" "penetration test"  # SlideShare/Scribd jaisi sites par galti se uploaded reports dhoondho
+# [[HL::Document sharing sites par leaks::HL]]
+[[HL::1  site:slideshare.net | site:scribd.com | site:academia.edu | site:youtube.com "Target Company Name" "penetration test"  # SlideShare/Scribd jaisi sites par galti se uploaded reports dhoondho::HL]]
 
 ```
 
@@ -2952,12 +2947,12 @@ Yeh aisa hai jaise kisi ne apne ghar mein bohot mehnge **"CCTV cameras"** lagaye
 ### 📖 3. Technical Definition
 
 * **Precise English:** Exposed device dorking involves using search operators to find network-attached hardware (such as routers, webcams, and printers) that are inadvertently exposed to the public internet, often with default or no authentication, acting as vectors for network intrusion or privacy violations.
-* **Hinglish Simplification:** Google ka use karke aise devices (cameras, routers, printers) dhundhna jinhe internet se connect kiya gaya hai lekin un par password nahi lagaya gaya hai.
+* [[HL::**Hinglish Simplification:** Google ka use karke aise devices (cameras, routers, printers) dhundhna jinhe internet se connect kiya gaya hai lekin un par password nahi lagaya gaya hai::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Log hardware kharidte hain, network cable lagate hain, aur default settings pe chhod dete hain. Yeh devices physical security risk aur internal network ka gateway ban jate hain.
-* **Solution:** In exposed devices ko discover karke pentester target network mein "pivot" (ek device se doosre device pe jump karna) kar sakta hai.
+* [[HL::**Problem:** Log hardware kharidte hain, network cable lagate hain, aur default settings pe chhod dete hain. Yeh devices physical security risk aur internal network ka gateway ban jate hain.::HL]]
+* [[HL::**Solution:** In exposed devices ko discover karke pentester target network mein "pivot" (ek device se doosre device pe jump karna) kar sakta hai::HL]].
 * **What breaks?** WAF ya secure web apps ka koi fayda nahi agar company ka network router hi default `admin:admin` password ke saath public internet pe khula pada hai.
 * **✅ Kab use karo:** External infrastructure mapping ke dauran, ya jab client physical security audit ki request kare.
 * **❌ Kab mat karo / Alternative prefer karo:** **Ethical boundary:** Kabhi bhi kisi private webcam ya home router ko access karne ki koshish mat karo bina explicit written permission ke. IoT scanning ke liye Shodan Google se behtar alternative hai.
@@ -2968,8 +2963,8 @@ Browser mein router ka login panel (`MikroTik RouterOS`) ya kisi factory/office 
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)
 
-1. **Misconfiguration:** IT team remote management ke liye router/camera ko public IP de deti hai, par port forward rules restrict karna bhool jati hai.
-2. **Indexing:** Google (ya Shodan) bots aisi IPs ko scan/crawl karke index kar lete hain jahan web interface chal raha hota hai (`inurl:admin.html`).
+1. [[HL::**Misconfiguration:** IT team remote management ke liye router/camera ko public IP de deti hai, par port forward rules restrict karna bhool jati hai::HL]].
+2. [[HL::**Indexing:** Google (ya Shodan) bots aisi IPs ko scan/crawl karke index kar lete hain jahan web interface chal raha hota hai (`inurl:admin.html`::HL]]).
 3. **Exploitation:** Attacker dork run karta hai, device ke web panel tak pahunchta hai, aur default credentials use karke device compromise kar leta hai, jisse internal network ka rasta khul jata hai.
 
 ### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
@@ -2977,9 +2972,9 @@ Browser mein router ka login panel (`MikroTik RouterOS`) ya kisi factory/office 
 **Router & Gateway Discovery:**
 
 ```bash
-# Common Router/Firewall Admin panels dhundhna
-1  intitle:"DD-WRT" | intitle:"pfSense" | intitle:"MikroTik" | intitle:"Cisco" inurl:admin  # DD-WRT/pfSense/MikroTik = popular router firmware aur firewalls; inurl:admin = admin path
-2  intitle:"router" | intitle:"gateway" inurl:admin  # Generic routers dhoondhna
+# [[HL::Common Router/Firewall Admin panels dhundhna::HL]]
+[[HL::1  intitle:"DD-WRT" | intitle:"pfSense" | intitle:"MikroTik" | intitle:"Cisco" inurl:admin  # DD-WRT/pfSense/MikroTik = popular router firmware aur firewalls; inurl:admin = admin path::HL]]
+[[HL::2  intitle:"router" | intitle:"gateway" inurl:admin  # Generic routers dhoondhna::HL]]
 
 ```
 
@@ -2992,18 +2987,18 @@ WebConfigurator - pfSense (https://target-ip/admin)
 **Camera Discovery (The Ethical Minefield):**
 
 ```bash
-# Publicly accessible IP cameras
-1  intitle:"webcam" | intitle:"IP Camera" | intitle:"Network Camera" inurl:view/index.shtml  # Axis cameras (popular brand) ke default viewing paths
-2  intitle:"WEB CAM 7" inurl:admin.html  # Webcam 7 software interfaces
-3  intitle:"public" intext:"traffic" | intext:"weather"  # INTENTIONALLY public cameras (yeh dekhna generally ethical hai)
+# [[HL::Publicly accessible IP cameras::HL]]
+[[HL::1  intitle:"webcam" | intitle:"IP Camera" | intitle:"Network Camera" inurl:view/index.shtml  # Axis cameras (popular brand) ke default viewing paths::HL]]
+[[HL::2  intitle:"WEB CAM 7" inurl:admin.html  # Webcam 7 software interfaces::HL]]
+[[HL::3  intitle:"public" intext:"traffic" | intext:"weather"  # INTENTIONALLY public cameras (yeh dekhna generally ethical hai)::HL]]
 
 ```
 
 **Printer Discovery:**
 
 ```bash
-# Exposed network printers
-1  intitle:"printer" | intitle:"HP LaserJet" | intitle:"Canon" inurl:status  # HP ya Canon printers ke status pages jahan se ink levels aur recent print jobs dikh sakte hain
+# [[HL::Exposed network printers::HL]]
+[[HL::1  intitle:"printer" | intitle:"HP LaserJet" | intitle:"Canon" inurl:status  # HP ya Canon printers ke status pages jahan se ink levels aur recent print jobs dikh sakte::HL]] hain
 
 ```
 
@@ -3030,9 +3025,9 @@ WebConfigurator - pfSense (https://target-ip/admin)
 * **Actually:** Jo cameras explicitly public purposes ke liye intentionally khule rakhe gaye hain (jaise highway traffic ya weather monitor), unhe dekhna legal hai. Par kisi ka personal, factory, ya office camera intentionally public nahi hota.
 
 
-* **Confusion 2 — "Kya device dorking ke liye Google best hai?"**
-* **Galat soch:** Google pe sab kuch mil jayega.
-* **Actually:** Google web pages (HTML) index karta hai. IoT devices dhundhne ke liye Shodan.io (Search engine for Internet-connected devices) Google se bohot bada aur behtar alternative hai, kyunki wo ports aur service banners scan karta hai.
+* [[HL::**Confusion 2 — "Kya device dorking ke liye Google best hai?"::HL]]**
+* [[HL::**Galat soch:** Google pe sab kuch mil jayega.::HL]]
+* [[HL::**Actually:** Google web pages (HTML) index karta hai. IoT devices dhundhne ke liye Shodan.io (Search engine for Internet-connected devices) Google se bohot bada aur behtar alternative hai, kyunki wo ports aur service banners scan karta hai::HL]].
 
 
 
@@ -3046,11 +3041,11 @@ WebConfigurator - pfSense (https://target-ip/admin)
 
 ### ⚖️ 13. Comparison (GHDB vs Shodan)
 
-| Feature | GHDB (Google Dorks) | Shodan.io |
+| [[HL::Feature::HL]] | [[HL::GHDB (Google Dorks)::HL]] | [[HL::Shodan.io ::HL]] |
 | --- | --- | --- |
-| **Primary Target** | Web pages, Documents, Exposed Files | Hardware, IoT devices, Servers, Open Ports |
-| **Indexing Method** | Web Crawler (links follow karta hai) | Port Scanner (direct IPs se baat karta hai) |
-| **Best For** | Admin panels, SQL dumps, PDFs | Cameras, Routers, Industrial Control Systems (SCADA) |
+| [[HL:: **Primary Target::HL]]** | [[HL::Web pages, Documents, Exposed Files::HL]] | [[HL::Hardware, IoT devices, Servers, Open Ports ::HL]] |
+| [[HL:: **Indexing Method::HL]]** | [[HL::Web Crawler (links follow karta hai)::HL]] | [[HL::Port Scanner (direct IPs se baat karta hai) ::HL]] |
+| [[HL:: **Best For::HL]]** | [[HL::Admin panels, SQL dumps, PDFs::HL]] | [[HL::Cameras, Routers, Industrial Control Systems (SCADA::HL]]) |
 
 ### 🔄 14. Kill Chain & Attack Phase Flow
 
@@ -3143,7 +3138,7 @@ Yeh aisa hai jaise kisi company ne apne **"digital godown ke darwaze khule chhod
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
-Browser screen par ek plain white background wala page dikhega jiske top par `Index of /` ya `Index of /backups/` likha hoga, aur niche files aur folders ki ek clickable list hogi.
+[[HL::Browser screen par ek plain white background wala page dikhega jiske top par `Index of /` ya `Index of /backups/` likha hoga, aur niche files aur folders ki ek clickable list hogi::HL]].
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)
 
@@ -3156,35 +3151,35 @@ Browser screen par ek plain white background wala page dikhega jiske top par `In
 **"Index of" Mastery (Finding Open Directories):**
 
 ```bash
-# Basic Open Directory Signature
-1  intitle:"index of" "parent directory"  # intitle:"index of" = open directory ka default title; "parent directory" = default navigation link jo har open directory mein hota hai
-2  intitle:"index of" intext:api_key.txt  # open directories mein specific sensitive file dhoondhna
-3  intitle:"index of" "DCIM"              # DCIM = Digital Camera Images (mobile phone/camera backups dhoondhna)
+# [[HL::Basic Open Directory Signature::HL]]
+[[HL::1  intitle:"index of" "parent directory"  # intitle:"index of" = open directory ka default title; "parent directory" = default navigation link jo har open directory mein hota hai::HL]]
+[[HL::2  intitle:"index of" intext:api_key.txt  # open directories mein specific sensitive file dhoondhna::HL]]
+[[HL::3  intitle:"index of" "DCIM"              # DCIM = Digital Camera Images (mobile phone/camera backups dhoondhna::HL]])
 
 ```
 
 ```text
-# 📤 Expected Output:
-Index of /admin_backups/
-[DIR] Parent Directory
-[TXT] api_key.txt
+# 📤 [[HL::Expected Output:::HL]]
+[[HL::Index of /admin_backups/::HL]]
+[[HL::[DIR] Parent Directory::HL]]
+[[HL::[TXT] api_key.txt::HL]]
 
 ```
 
 **Advanced Dorking with Extension Exclusion (The Magic Trick):**
 
 ```bash
-# Premium Courses / Media files nikalna fake blogs ko hata ke
-1  intitle:"index of" (mp4 | mkv | pdf | zip) "ethical hacking" -html -htm -php -jsp  # (mp4 | mkv...) = file types chahiye; "ethical hacking" = subject; -html -htm -php -jsp = ⭐ yeh Minus (-) operator open directories ka best friend hai, yeh saare blogs aur forums hata dega
+# [[HL::Premium Courses / Media files nikalna fake blogs ko hata ke::HL]]
+[[HL::1  intitle:"index of" (mp4 | mkv | pdf | zip) "ethical hacking" -html -htm -php -jsp  # (mp4 | mkv...) = file types chahiye; "ethical hacking" = subject; -html -htm -php -jsp = ⭐ yeh Minus (-) operator open directories ka best friend hai, yeh saare blogs aur forums hata dega::HL]]
 
 ```
 
-**Google Drive & Mega.nz Searching:**
+**[[HL::Google Drive & Mega.nz Searching:::HL]]**
 
 ```bash
-# Publicly shared cloud drive folders
-1  site:drive.google.com "CEH" | "OSCP" | "course"  # Google Drive pe publicly accessible courses dhoondhna
-2  site:mega.nz "leak" | "password"                 # Mega.nz pe data leaks ya password lists dhoondhna
+# [[HL::Publicly shared cloud drive folders::HL]]
+[[HL::1  site:drive.google.com "CEH" | "OSCP" | "course"  # Google Drive pe publicly accessible courses dhoondhna::HL]]
+[[HL::2  site:mega.nz "leak" | "password"                 # Mega.nz pe data leaks ya password lists dhoondhna::HL]]
 
 ```
 
@@ -3213,9 +3208,9 @@ Bug bounty hunter apne target domain par scan chala raha tha par sab protected t
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Minus (-) operator kaise kaam karta hai?"**
-* **Galat soch:** Yeh kisi file ko delete karta hai.
-* **Actually:** Yeh search results se un pages ko filter out karta hai jinke URL ya text mein woh specific word ho. `-html` ka matlab hai "woh result mat dikhao jisme .html ho".
+* [[HL::**Confusion 1 — "Minus (-) operator kaise kaam karta hai?"::HL]]**
+* [[HL::**Galat soch:** Yeh kisi file ko delete karta hai.::HL]]
+* [[HL::**Actually:** Yeh search results se un pages ko filter out karta hai jinke URL ya text mein woh specific word ho. `-html` ka matlab hai "woh result mat dikhao jisme .html ho::HL]]".
 
 
 * **Confusion 2 — "Kya Google Drive pe course search karna illegal hai?"**
@@ -3308,32 +3303,32 @@ Socho ek restaurant (Website) ka menu public hai, par **JavaScript files** us re
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Modern websites (React, Angular, Vue) Single Page Applications (SPAs) hoti hain jahan HTML mein kuch nahi hota; sab kuch JS control karta hai. Agar tum JS analyze nahi kar rahe, toh tum target ka 80% attack surface miss kar rahe ho.
-* **Solution:** JS recon se tum hidden administrator endpoints, internal API routes, aur third-party service tokens (AWS/Stripe keys) frontend code se hi utha sakte ho.
+* [[HL::**Problem:** Modern websites (React, Angular, Vue) Single Page Applications (SPAs) hoti hain jahan HTML mein kuch nahi hota; sab kuch JS control karta hai. Agar tum JS analyze nahi kar rahe, toh tum target ka 80% attack surface miss kar rahe ho.::HL]]
+* [[HL::**Solution:** JS recon se tum hidden administrator endpoints, internal API routes, aur third-party service tokens (AWS/Stripe keys) frontend code se hi utha sakte ho::HL]].
 * **What breaks?** Bina Source Maps (`.js.map`) ke, tumhe hazaron lines ka minified (ek line mein compressed aur unreadable) code padhna padega jo humanly impossible hai.
 * **✅ Kab use karo:** Bug bounty engagements mein, khaaskar un targets par jo React, Vue ya Angular jaisi modern frontend frameworks use karte hain.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab target ek bohot purani legacy site ho (e.g., pure PHP, no JS framework), wahan traditional directory brute forcing zyada kaam aayegi.
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
-Browser mein hazaron lines ka JavaScript code dikhega jisme `/api/v2/internal/` jaise routes aur `bearer_token = "ey..."` jaise strings dikhenge.
+Browser mein hazaron lines ka JavaScript code dikhega jisme `/[[HL::api/v2/internal/` jaise routes aur `bearer_token = "ey..."` jaise strings dikhenge.::HL]]
 
-### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)
+### [[HL::⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)::HL]]
 
-1. **Developer Process:** Developers code likhte hain (readable), phir use minify/compress karte hain (unreadable `app.min.js`) taaki site fast load ho. Debugging ke liye wo ek `.js.map` (Source Map) generate karte hain jo compressed code ko wapas readable code mein map karta hai.
-2. **Mistake:** Deploy karte waqt developer `.js.map` files ko bhi production server par push kar deta hai.
-3. **Exploitation:** Attacker Google dork ya automated tools se un `.map` files ko dhoondhta hai. Map milte hi attacker ko pura un-minified (readable, original) frontend source code mil jata hai jisme developers ke comments aur internal routes hote hain.
+1. [[HL::**Developer Process:** Developers code likhte hain (readable), phir use minify/compress karte hain (unreadable `app.min.js`) taaki site fast load ho. Debugging ke liye wo ek `.js.map` (Source Map) generate karte hain jo compressed code ko wapas readable code mein map karta hai.::HL]]
+2. [[HL::**Mistake:** Deploy karte waqt developer `.js.map` files ko bhi production server par push kar deta hai.::HL]]
+3. [[HL::**Exploitation:** Attacker Google dork ya automated tools se un `.map` files ko dhoondhta hai. Map milte hi attacker ko pura un-minified (readable, original) frontend source code mil jata hai jisme developers ke comments aur internal routes hote hain.::HL]]
 
-### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
+### [[HL::💻 7. Hands-On — Runnable Example (Lab-Ready Commands)::HL]]
 
-**Google Dorks for JS & Maps:**
+**[[HL::Google Dorks for JS & Maps::HL]]:**
 
 ```bash
-# Basic JS file hunting
-1  site:target.com ext:js | filetype:js  # Target ki saari indexed javascript files list karo (ext aur filetype yahan same kaam karte hain)
+# [[HL::Basic JS file hunting::HL]]
+[[HL::1  site:target.com ext:js | filetype:js  # Target ki saari indexed javascript files list karo (ext aur filetype yahan same kaam karte hain)::HL]]
 
-# Source Map Hunting (The Holy Grail)
-2  site:target.com inurl:".js.map" | filetype:map  # Target ke expose hue Source Maps dhoondho
+# [[HL::Source Map Hunting (The Holy Grail)::HL]]
+[[HL::2  site:target.com inurl:".js.map" | filetype:map  # Target ke expose hue Source Maps dhoondho::HL]]
 
 ```
 
@@ -3510,20 +3505,20 @@ Browser screen par target ka subdomain (`blog.target.com`) khulne par company ki
 **AWS S3 Buckets Takeovers:**
 
 ```bash
-# S3 buckets jo delete ho chuke hain par DNS abhi bhi unki taraf point kar raha hai
-1  site:target.com intext:"NoSuchBucket"  # intext = webpage ki body mein AWS ka exact error message dhoondho
-2  site:target.com intext:"The specified bucket does not exist"
+# [[HL::S3 buckets jo delete ho chuke hain par DNS abhi bhi unki taraf point kar raha hai::HL]]
+[[HL::1  site:target.com intext:"NoSuchBucket"  # intext = webpage ki body mein AWS ka exact error message dhoondho::HL]]
+[[HL::2  site:target.com intext:"The specified bucket does not exist::HL]]"
 
 ```
 
 **GitHub Pages & Heroku Takeovers:**
 
 ```bash
-# Abandoned GitHub Pages
-1  site:target.com intext:"There isn't a GitHub Pages site here"  # GitHub ka default error jab repo delete ho jati hai
+# [[HL::Abandoned GitHub Pages::HL]]
+[[HL::1  site:target.com intext:"There isn't a GitHub Pages site here"  # GitHub ka default error jab repo delete ho jati hai::HL]]
 
-# Abandoned Heroku Apps (Platform as a Service)
-2  site:target.com intext:"No such app" | intext:"Heroku | No such app"
+# [[HL::Abandoned Heroku Apps (Platform as a Service)::HL]]
+[[HL::2  site:target.com intext:"No such app" | intext:"Heroku | No such app::HL]]"
 
 ```
 
@@ -3537,8 +3532,8 @@ There isn't a GitHub Pages site here. If you're trying to publish...
 **Helpdesk / Zendesk Takeovers:**
 
 ```bash
-# Zendesk customer support portals jo expire ho gaye hain
-1  site:target.com intext:"Help Center Closed"
+# [[HL::Zendesk customer support portals jo expire ho gaye hain::HL]]
+[[HL::1  site:target.com intext:"Help Center Closed::HL]]"
 
 ```
 
@@ -3560,9 +3555,9 @@ Bug bounty hunter ne ek telecom company pe dork chalaya: `site:telecom.com intex
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "CNAME Record kya hota hai?"**
-* **Galat soch:** Yeh server ka IP address hota hai.
-* **Actually:** CNAME (Canonical Name) ek DNS record hai jo IP address nahi deta, balki ek naam ko doosre naam se jodta hai (Alias). Jaise `blog.target.com` ko `target.github.io` ka alias bana diya. Agar GitHub ki site hateygi, par alias bacha rahega, tab SDTO hota hai.
+* [[HL::**Confusion 1 — "CNAME Record kya hota hai?"::HL]]**
+* [[HL::**Galat soch:** Yeh server ka IP address hota hai.::HL]]
+* [[HL::**Actually:** CNAME (Canonical Name) ek DNS record hai jo IP address nahi deta, balki ek naam ko doosre naam se jodta hai (Alias). Jaise `blog.target.com` ko `target.github.io` ka alias bana diya. Agar GitHub ki site hateygi, par alias bacha rahega, tab SDTO hota hai::HL]].
 
 
 * **Confusion 2 — "Kya A-Record mein subdomain takeover ho sakta hai?"**
@@ -3703,33 +3698,33 @@ Google aur Bing dono libraries hain, lekin different books hain. Ek library mein
 ### 🧠 4. Why This Matters
 
 * **Problem:** Agar pentester sirf Google par depend karta hai, toh yeh ek **single point of failure** ban jata hai. Google bohot saari spammy ya sensitive looking files (jaise `.env`) ko index se nikal deta hai. Plus, Google par bohot zyada dorking karne se jaldi **CAPTCHA** (bot verification challenge) lag jata hai.
-* **Solution:** Bing OSINT ke liye ek parallel data source hai. Iska **indexing algorithm** alag hai, iska **US/EU data** par focus thoda alag ho sakta hai, aur iske filters **less restrictive** hote hain.
-* **✅ Kab use karo:** Jab Google par target ka footprint chhota lage, jab API keys ya database credentials dhoondhne ho, ya jab Google tumhe baar-baar CAPTCHA de raha ho.
-* **❌ Kab mat karo / Alternative prefer karo:** Jab tumhe extreme local/regional (e.g., specific Asian region) data chahiye ho (tab Baidu ya Yandex prefer karo).
+* [[HL::**Solution:** Bing OSINT ke liye ek parallel data source hai. Iska **indexing algorithm** alag hai, iska **US/EU data** par focus thoda alag ho sakta hai, aur iske filters **less restrictive** hote hain::HL]].
+* **✅ [[HL::Kab use karo:** Jab Google par target ka footprint chhota lage, jab API keys ya database credentials dhoondhne ho, ya jab Google tumhe baar-baar CAPTCHA de raha ho.::HL]]
+* [[HL::**❌ Kab mat karo / Alternative prefer karo:** Jab tumhe extreme local/regional (e.g., specific Asian region) data chahiye ho (tab Baidu ya Yandex prefer karo::HL]]).
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
-Bing ke search interface par target domain ke woh subdomains ya files dikhenge jo Google ke `site:` search mein completely gayab the.
+[[HL::Bing ke search interface par target domain ke woh subdomains ya files dikhenge jo Google ke `site:` search mein completely gayab the.::HL]]
 
-### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)
+### [[HL::⚙️ 6. Under the Hood (Deep Dive — Attack Flow)::HL]]
 
-1. Target ek nayi staging website ya API banata hai (e.g., `api.techstartup.com`).
-2. Google ka crawler isse dekhta hai, par shayad usme proper content na hone ki wajah se index nahi karta.
-3. Bing ka bot usse crawl karta hai aur apni index mein daal leta hai.
-4. Attacker Bing par dork chalata hai aur seedha us exposed server tak pohoch jata hai.
+1. [[HL::Target ek nayi staging website ya API banata hai (e.g., `api.techstartup.com`).::HL]]
+2. [[HL::Google ka crawler isse dekhta hai, par shayad usme proper content na hone ki wajah se index nahi karta.::HL]]
+3. [[HL::Bing ka bot usse crawl karta hai aur apni index mein daal leta hai.::HL]]
+4. [[HL::Attacker Bing par dork chalata hai aur seedha us exposed server tak pohoch jata hai.::HL]]
 
-### 💻 7. Hands-On — Lab-Ready Commands
+### [[HL::💻 7. Hands-On — Lab-Ready Commands::HL]]
 
-**Bing pe Basic and Unique Syntax Options:**
-Bing mein Google jaise hi `site:`, `filetype:`, `intitle:`, aur `inurl:` kaam karte hain, par iske kuch apne operators bhi hain.
+**[[HL::Bing pe Basic and Unique Syntax Options:::HL]]**
+[[HL::Bing mein Google jaise hi `site:`, `filetype:`, `intitle:`, aur `inurl:` kaam karte hain, par iske kuch apne::HL]] operators bhi hain.
 
 ```bash
-# Web Browser | Bing Search Box
-1  site:example.com filetype:pdf                  # site: = sirf is domain me dhoondho; filetype: = sirf PDF files dikhao
-2  intitle:admin inurl:login                      # intitle: = page ke title me 'admin' ho; inurl: = URL me 'login' word ho
-3  contains:admin                                 # contains: = us page ko dikhao jisme 'admin' file ka link maujood ho
-4  feed:keyword                                   # feed: = RSS/news feeds dhoondho jisme 'keyword' ho
-5  hasfeed:example.com                            # hasfeed: = us website ko dhoondho jiske paas apna RSS feed ho
+# [[HL::Web Browser | Bing Search Box::HL]]
+[[HL::1  site:example.com filetype:pdf                  # site: = sirf is domain me dhoondho; filetype: = sirf PDF files dikhao::HL]]
+[[HL::2  intitle:admin inurl:login                      # intitle: = page ke title me 'admin' ho; inurl: = URL me 'login' word ho::HL]]
+[[HL::3  contains:admin                                 # contains: = us page ko dikhao jisme 'admin' file ka link maujood ho::HL]]
+[[HL::4  feed:keyword                                   # feed: = RSS/news feeds dhoondho jisme 'keyword' ho::HL]]
+[[HL::5  hasfeed:example.com                            # hasfeed: = us website ko dhoondho jiske paas apna RSS feed ho::HL]]
 
 ```
 
@@ -3739,12 +3734,12 @@ Bing mein Google jaise hi `site:`, `filetype:`, `intitle:`, aur `inurl:` kaam ka
 
 ```
 
-**Cross-Platform Strategy (GitHub + Bing):**
-Hum Bing ko use karke third-party sites par bhi target ka data dhoondh sakte hain.
+**[[HL::Cross-Platform Strategy (GitHub + Bing):::HL]]**
+[[HL::Hum Bing ko use karke third-party sites par bhi target ka data dhoondh sakte hain.::HL]]
 
 ```bash
-# Web Browser | Bing Search Box
-1  site:github.com filetype:env "API_KEY"         # site:github.com = Github pe dhoondho; filetype:env = .env extension wali files; "API_KEY" = exact match text
+# [[HL::Web Browser | Bing Search Box::HL]]
+[[HL::1  site:github.com filetype:env "API_KEY"         # site:github.com = Github pe dhoondho; filetype:env = .env extension wali files; "API_KEY" = exact match text::HL]]
 
 ```
 
@@ -3773,15 +3768,15 @@ Ek pentester target `TechStartup` par bug bounty kar raha tha. Google par dorkin
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Kya Bing aur Google dorks exactly same hote hain?"**
-* **Galat soch:** Jo dork Google par chalega, woh Bing par bhi chalega.
-* **Actually:** Mostly basic operators (`site:`, `filetype:`) same hain, lekin Bing ke paas apne unique operators hain jaise `ip:`, `contains:`, `feed:` jo Google support nahi karta.
-* **Prove karo:** Bing par `ip:8.8.8.8` likh kar search karo, tumhe websites milengi. Google par yeh kaam nahi karega.
+* [[HL::**Confusion 1 — "Kya Bing aur Google dorks exactly same hote hain?"::HL]]**
+* [[HL::**Galat soch:** Jo dork Google par chalega, woh Bing par bhi chalega.::HL]]
+* [[HL::**Actually:** Mostly basic operators (`site:`, `filetype:`) same hain, lekin Bing ke paas apne unique operators hain jaise `ip:`, `contains:`, `feed:` jo Google support nahi karta.::HL]]
+* [[HL::**Prove karo:** Bing par `ip:8.8.8.8` likh kar search karo, tumhe websites milengi. Google par yeh kaam nahi karega::HL]].
 
 
-* **Confusion 2 — "ViewDNS ya SecurityTrails use karein ya Bing ka ip: operator?"**
-* **Galat soch:** Bing ka `ip:` operator tools ko replace kar dega.
-* **Actually:** **ViewDNS** aur **SecurityTrails** (OSINT tools — IP aur domain history database) historical data aur deep records dete hain. Bing sirf wohi dikhayega jo current uski index mein us IP se juda hai. Dono saath mein use hote hain.
+* [[HL::**Confusion 2 — "ViewDNS ya SecurityTrails use karein ya Bing ka ip: operator?"::HL]]**
+* [[HL::**Galat soch:** Bing ka `ip:` operator tools ko replace kar dega.::HL]]
+* [[HL::**Actually:** **ViewDNS** aur **SecurityTrails** (OSINT tools — IP aur domain history database) historical data aur deep records dete hain. Bing sirf wohi dikhayega jo current uski index mein us IP se juda hai. Dono saath mein use hote hain::HL]].
 * **Prove karo:** Ek IP ko SecurityTrails par dalo (100+ domains milenge) aur phir Bing par `ip:` se check karo (index hui active domains milengi).
 
 
@@ -3801,11 +3796,11 @@ Ek pentester target `TechStartup` par bug bounty kar raha tha. Google par dorkin
 
 ### ⚖️ 13. Comparison: Google vs Bing for Pentesting
 
-| Feature | Google Search | Bing Search |
+| [[HL::Feature::HL]] | [[HL::Google Search::HL]] | [[HL::Bing Search ::HL]] |
 | --- | --- | --- |
-| **Indexing Strictness** | High (Filters spam/sensitive files) | Lower (More likely to show raw/sensitive files) |
-| **Unique Pentest Operators** | `cache:`, `related:` | `ip:`, `contains:`, `hasfeed:` |
-| **CAPTCHA Trigger** | Bohot jaldi aa jata hai | Thoda late aata hai |
+| [[HL:: **Indexing Strictness::HL]]** | [[HL::High (Filters spam/sensitive files)::HL]] | [[HL::Lower (More likely to show raw/sensitive files) ::HL]] |
+| [[HL:: **Unique Pentest Operators::HL]]** | [[HL::`cache:`, `related:`::HL]] | [[HL::`ip:`, `contains:`, `hasfeed:` ::HL]] |
+| [[HL:: **CAPTCHA Trigger::HL]]** | [[HL::Bohot jaldi aa jata hai::HL]] | [[HL::Thoda late aata hai::HL]] |
 
 ### 🔄 14. Kill Chain & Attack Phase Flow
 
@@ -3829,10 +3824,10 @@ Ek pentester target `TechStartup` par bug bounty kar raha tha. Google par dorkin
 
 ### ❓ 16. Interview & Certification Exam Q&A
 
-* **Q:** Google hacking database (GHDB) ke dorks hone ke bawajood humein Bing kyun use karna chahiye?
-* **A:** Kyunki Bing ka indexing algorithm Google se alag hai. Bing aksar un files aur staging subdomains ko index kar leta hai jinhe Google ka strict algorithm drop kar deta hai, isliye yeh ek parallel discovery vector provide karta hai.
-* **Q:** Bing ka kaunsa operator reverse IP lookup ke liye directly use ho sakta hai jo Google mein nahi hota?
-* **A:** Bing ka `ip:` operator. E.g., `ip:192.168.1.1` search karne se us IP par hosted saari indexed websites show ho jati hain.
+* [[HL::**Q:** Google hacking database (GHDB) ke dorks hone ke bawajood humein Bing kyun use karna chahiye::HL]]?
+* **A:** [[HL::Kyunki Bing ka indexing algorithm Google se alag hai. Bing aksar un files aur staging subdomains ko index kar leta hai jinhe Google ka strict algorithm drop kar deta hai, isliye yeh ek parallel discovery vector provide karta hai::HL]].
+* [[HL::**Q:** Bing ka kaunsa operator reverse IP lookup ke liye directly use ho sakta hai jo Google mein nahi hota?::HL]]
+* [[HL::**A:** Bing ka `ip:` operator. E.g., `ip:192.168.1.1` search karne se us IP par hosted saari indexed websites show ho jati h::HL]]ain.
 
 ### 📝 17. One-Line Memory Hook
 
@@ -3865,13 +3860,13 @@ Socho ek apartment building hai (yeh tumhara IP address hai). Is building mein b
 ### 📖 3. Technical Definition
 
 * **Precise English:** The `ip:` operator in Bing performs an indexed reverse IP lookup, revealing multiple fully qualified domain names (FQDNs) hosted on the same IP address, typically in a shared hosting or virtual host environment.
-* **Hinglish Simplification:** Bing ka `ip:` operator ek IP address check karta hai aur batata hai ki us single IP ke peeche kaun kaun si doosri websites chal rahi hain.
+* [[HL::**Hinglish Simplification:** Bing ka `ip:` operator ek IP address check karta hai aur batata hai ki us single IP ke peeche kaun kaun si doosri websites chal rahi hain::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Agar target company ki main website bohot secure hai, toh hume lagta hai penetration testing khatam. Lekin agar target **shared hosting** use kar raha hai, toh us IP par unki purani dev site ya kisi aur ki weak site ho sakti hai.
-* **Solution:** **Virtual host enumeration** (ek server par multiple domains dhoondhna) attack surface ko expand karta hai. Bing ka `ip:` operator bina kisi heavy tool ke browser se hi yeh kaam kar deta hai. Yeh tumhara ⭐ **X-ray vision** hai.
-* **✅ Kab use karo:** Jab target ka IP address mil jaye (through `nslookup` / `dig`) aur tumhe dekhna ho ki wahan koi **staging environment** (testing server) ya internal tool toh host nahi ho raha.
+* [[HL::**Problem:** Agar target company ki main website bohot secure hai, toh hume lagta hai penetration testing khatam. Lekin agar target **shared hosting** use kar raha hai, toh us IP par unki purani dev site ya kisi aur ki weak site ho sakti hai::HL]].
+* [[HL::**Solution:** **Virtual host enumeration** (ek server par multiple domains dhoondhna) attack surface ko expand karta hai. Bing ka `ip:` operator bina kisi heavy tool ke browser se hi yeh kaam kar deta hai. Yeh tumhara ⭐ **X-ray vision** hai::HL]].
+* **✅ [[HL::Kab use karo:** Jab target ka IP address mil jaye (through `nslookup` / `dig`) aur tumhe dekhna ho ki wahan koi **staging environment** (testing server) ya internal tool toh host nahi ho raha::HL]].
 * **❌ Kab mat karo:** Agar target Cloudflare ya kisi CDN (Content Delivery Network) ke peeche hide hai, toh reverse IP CDN ke hazaro random domains dikhayega, target ke nahi.
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
@@ -3880,9 +3875,9 @@ Bing search results mein tumhe alag-alag domain names dikhenge jo dikhne mein ta
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)
 
-1. Web servers jaise **Apache** aur **Nginx** (web server softwares) ek hi server/IP par multiple websites chalane ki facility dete hain (jise virtual routing kehte hain).
-2. DNS record mein in saare alag-alag domains ko ek hi public IP (e.g., `104.21.45.67`) par point kiya jata hai.
-3. Attacker Bing mein `ip:104.21.45.67` dhalta hai. Bing apna database check karta hai aur dekhta hai ki kis-kis domain ka DNS resolution is IP par tha jab usne crawl kiya.
+1. [[HL::Web servers jaise **Apache** aur **Nginx** (web server softwares) ek hi server/IP par multiple websites chalane ki facility dete hain (jise virtual routing kehte hain).::HL]]
+2. [[HL::DNS record mein in saare alag-alag domains ko ek hi public IP (e.g., `104.21.45.67`) par point kiya jata hai.::HL]]
+3. [[HL::Attacker Bing mein `ip:104.21.45.67` dhalta hai. Bing apna database check karta hai aur dekhta hai ki kis-kis domain ka DNS resolution is IP par tha jab usne crawl kiya::HL]].
 
 ### 💻 7. Hands-On — Lab-Ready Commands
 
@@ -3909,8 +3904,8 @@ Sabse pehle main domain ka IP nikalna padega taaki hum use Bing ko de sakein.
 Ab us IP ko Bing ke search box mein dalo. (Note: **Private IPs** jaise `192.168.1.1` internet pe host nahi hote, isliye Bing par sirf **Public IPs** search karo).
 
 ```bash
-# Web Browser | Bing Search Box
-1  ip:203.0.113.50                                  # ip: = reverse lookup operator; target ka exact public IP dalo
+# [[HL::Web Browser | Bing Search Box::HL]]
+[[HL::1  ip:203.0.113.50                                  # ip: = reverse lookup operator; target ka exact public IP dalo::HL]]
 
 ```
 
@@ -3924,11 +3919,11 @@ Ab us IP ko Bing ke search box mein dalo. (Note: **Private IPs** jaise `192.168.
 Ab `ip:` ke saath doosre dorks mila kar precise attacks karo:
 
 ```bash
-# Web Browser | Bing Search Box
-1  ip:104.21.45.67 filetype:pdf                     # Us server par jitni bhi websites hain, un sab ke PDFs nikal lo
-2  ip:104.21.45.67 inurl:admin                      # Us IP par chalne wali kisi bhi site ka admin panel dhoondho
-3  ip:104.21.45.67 filetype:env                     # Is server par kisi ne .env config file expose toh nahi ki?
-4  ip:140.82.121.4 (inurl:admin | inurl:login | inurl:dashboard)  # | = OR operator; admin, login, ya dashboard panel dhoondho
+# [[HL::Web Browser | Bing Search Box::HL]]
+[[HL::1  ip:104.21.45.67 filetype:pdf                     # Us server par jitni bhi websites hain, un sab ke PDFs nikal lo::HL]]
+[[HL::2  ip:104.21.45.67 inurl:admin                      # Us IP par chalne wali kisi bhi site ka admin panel dhoondho::HL]]
+[[HL::3  ip:104.21.45.67 filetype:env                     # Is server par kisi ne .env config file expose toh nahi ki?::HL]]
+[[HL::4  ip:140.82.121.4 (inurl:admin | inurl:login | inurl:dashboard)  # | = OR operator; admin, login, ya dashboard panel dhoondho::HL]]
 
 ```
 
@@ -4052,7 +4047,7 @@ hits wall       via Bing ip:        blog and gets server root!
 
 ### 🎯 3. Bing Dork: contains: (Finding File Links)
 
-Is topic mein hum Bing ke ek aur unique operator, `contains:`, ke baare mein samjhenge jo un web pages ko dhoondhne mein madad karta hai jinme kisi specific file (jaise PDF, SQL, backup) ka direct link maujood ho.
+[[HL::Is topic mein hum Bing ke ek aur unique operator, `contains:`, ke baare mein samjhenge jo un web pages ko dhoondhne mein madad karta hai jinme kisi specific file (jaise PDF, SQL, backup) ka direct link maujood ho::HL]].
 
 ### 🐣 2. Simple Analogy (Hinglish)
 
@@ -4060,13 +4055,13 @@ Socho ek badi directory (kitab) hai jismein alag-alag dukaano (shops) ke address
 
 ### 📖 3. Technical Definition
 
-* **Precise English:** The `contains:` operator in Bing isolates web pages that contain an HTML hyper-reference (`href`) link to a specific file type or resource name, highly useful for identifying directory listings or aggregation pages.
-* **Hinglish Simplification:** Bing ka `contains:` operator tumhe woh web pages filter karke deta hai jin pages ke andar tumhare diye gaye keyword ya file-type ka link (URL) maujood hota hai.
+* [[HL::**Precise English:** The `contains:` operator in Bing isolates web pages that contain an HTML hyper-reference (`href`) link to a specific file type or resource name, highly useful for identifying directory listings or aggregation pages.::HL]]
+* [[HL::**Hinglish Simplification:** Bing ka `contains:` operator tumhe woh web pages filter karke deta hai jin pages ke andar tumhare diye gaye keyword ya file-type ka link (URL) maujood hota hai::HL]].
 
 ### 🧠 4. Why This Matters
 
 * **Problem:** Kai baar sensitive files (jaise `.sql` backups) search engine mein directly index nahi hoti, lekin server par **directory listings** (web server ki misconfiguration jahan web page ki jagah files ki list dikhti hai) enable hoti hai jahan unka link hota hai. Google par isko directly dhoondhna mushkil ho sakta hai.
-* **Solution:** `contains:` operator hume un **navigation pages** ya directory listings tak pohocha deta hai jahan se hum sensitive files ko download kar sakein. Halanki yeh ⭐ **bonus feature** hai — useful hai lekin akele game-changer nahi.
+* [[HL::**Solution:** `contains:` operator hume un **navigation pages** ya directory listings tak pohocha deta hai jahan se hum sensitive files ko download kar sakein. Halanki yeh ⭐ **bonus feature** hai — useful hai lekin akele game-changer nahi::HL]].
 * **✅ Kab use karo:** Jab tumhe target ki website par exposed backups, confidential PDFs, ya hidden admin links dhoondhne hon jo kisi index page par list ho gaye hon.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab tumhe exactly us file ke andar ka content dhoondhna ho (uske liye `filetype:` prefer karo).
 
@@ -4083,15 +4078,15 @@ Bing ke search result mein tumhe ek web page (jaise `Index of /backups`) dikhega
 
 ### 💻 7. Hands-On — Lab-Ready Commands
 
-**Syntax Options & Link Discovery:**
-Neeche diye gaye dorks browser ke Bing search bar mein enter karne hain.
+**[[HL::Syntax Options & Link Discovery:::HL]]**
+[[HL::Neeche::HL]] [[HL::diye gaye dorks browser ke Bing search bar mein enter karne hain::HL]].
 
 ```bash
-# Web Browser | Bing Search Box
-1  contains:admin site:edu                                      # site:edu (educational sites) mein woh pages dhoondho jinme 'admin' ka link ho
-2  contains:backup site:target.com                              # target.com par woh pages jahan 'backup' file ka link ho
-3  contains:download site:github.com                            # github.com par aise pages jinme 'download' ka link ho
-4  contains:admin site:target.com -inurl:wordpress              # -inurl (exclude word in URL) = target.com par 'admin' link dhoondho, par URL me 'wordpress' nahi hona chahiye (noise reduce karne ke liye)
+# [[HL::Web Browser | Bing Search Box::HL]]
+[[HL::1  contains:admin site:edu                                      # site:edu (educational sites) mein woh pages dhoondho jinme 'admin' ka link ho::HL]]
+[[HL::2  contains:backup site:target.com                              # target.com par woh pages jahan 'backup' file ka link ho::HL]]
+[[HL::3  contains:download site:github.com                            # github.com par aise pages jinme 'download' ka link ho::HL]]
+[[HL::4  contains:admin site:target.com -inurl:wordpress              # -inurl (exclude word in URL) = target.com par 'admin' link dhoondho, par URL me 'wordpress' nahi hona chahiye (noise reduce karne ke liye)::HL]]
 
 ```
 
@@ -4125,21 +4120,21 @@ Hum `contains:` ko doosre `contains:` ya operators ke saath mila sakte hain deep
 ### 🌍 9. Real-World Penetration Testing Use-Case
 
 **DocumentCorp Confidential Data Leak:**
-Ek pentester `DocumentCorp` ka assessment kar raha tha. Usne `site:documentcorp.com contains:confidential` dork Bing par run kiya. Usse ek aisi directory listing ka page mila (`Index of /internal_docs/`) jismein saare employees ke PDFs aur salary sheets (confidential files) ke links publicly clickable the. Result? Page publicly accessible hone ki wajah se direct data breach hua, jise report karke usne aachi bounty earn ki.
+Ek pentester `DocumentCorp` ka assessment kar raha tha. Usne `site:documentcorp.com contains:confidential` dork Bing par run kiya. Usse ek aisi directory listing ka page mila ([[HL::`Index of /internal_docs/`) jismein saare employees ke PDFs aur salary sheets (confidential files) ke links publicly clickable the. Result? Page publicly accessible hone ki wajah se direct data breach hua, jise report karke usne aachi bounty earn ki.::HL]]
 
-### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes
+### [[HL::⚠️ 10. Pentest Anti-Patterns & Common Mistakes::HL]]
 
-* **❌ Mistake:** File dhoondhne ke liye `contains:pdf` use karna jabki tumhe actual PDF open karni hai.
-* **🤦 Why:** Beginners `contains:` aur `filetype:` mein confuse ho jate hain.
-* **✅ The 'Pro' Way:** Agar directly PDF dekhni hai toh `filetype:pdf` use karo. Agar wo page dekhna hai *jispar* PDF download karne ka link hai, toh `contains:pdf` use karo.
-* **⚡ Consequences:** Galat operator use karne se tumhara time waste hoga aur tum un files tak nahi pohoch paoge jo directly indexed hain.
+* [[HL::**❌ Mistake:** File dhoondhne ke liye `contains:pdf` use karna jabki tumhe actual PDF open karni hai.::HL]]
+* [[HL::**🤦 Why:** Beginners `contains:` aur `filetype:` mein confuse ho jate hain.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Agar directly PDF dekhni hai toh `filetype:pdf` use karo. Agar wo page dekhna hai *jispar* PDF download karne ka link hai, toh `contains:pdf` use karo.::HL]]
+* [[HL::**⚡ Consequences:** Galat operator use karne se tumhara time waste hoga aur tum un files tak nahi pohoch paoge jo directly indexed hain.::HL]]
 
-### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
+### [[HL::🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)::HL]]
 
-* **Confusion 1 — "filetype: aur contains: mein kya farq hai?"**
-* **Galat soch:** Dono same files dhoondh kar dete hain.
-* **Actually:** `filetype:` tumhe seedha file ke andar le jata hai (direct resource). `contains:` tumhe ek normal HTML page par le jata hai jisme us file ka click karne wala link hota hai.
-* **Prove karo:** Bing par `filetype:pdf` likho (results seedha PDF honge). Ab `contains:pdf` likho (results normal websites hongi jinke andar PDF ka link hoga).
+* [[HL::**Confusion 1 — "filetype: aur contains: mein kya farq hai?"::HL]]**
+* [[HL::**Galat soch:** Dono same files dhoondh kar dete hain.::HL]]
+* [[HL::**Actually:** `filetype:` tumhe seedha file ke andar le jata hai (direct resource). `contains:` tumhe ek normal HTML page par le jata hai jisme us file ka click karne wala link hota hai.::HL]]
+* [[HL::**Prove karo:** Bing par `filetype:pdf` likho (results seedha PDF honge). Ab `contains:pdf` likho (results normal websites hongi jinke andar PDF ka link hoga::HL]]).
 
 
 
@@ -4217,9 +4212,9 @@ Google ek smart assistant hai jo general "cheezein (objects)" dhoondhta hai. Lek
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Target company ka CEO ya admin apne social media accounts hide kar sakta hai. Google unke faces ko privacy reasons se index nahi karta. Wahi OSINT testing mein baar-baar alag-alag tools par ja kar search karna time-consuming hota hai.
-* **Solution:** **Yandex Image Search** aur **PimEyes / FaceCheck.id** (facial recognition OSINT tools) uncensored face-tracking karte hain. Aur **DDG Bangs** workflow ko super-fast banate hain.
-* **✅ Kab use karo:** Jab target employee ka face match karke uski hidden forum profile nikalni ho, ya jab target company **Eastern Europe / Asian** region mein base karti ho (tab Yandex aur **Baidu** best hain).
+* [[HL::**Problem:** Target company ka CEO ya admin apne social media accounts hide kar sakta hai. Google unke faces ko privacy reasons se index nahi karta. Wahi OSINT testing mein baar-baar alag-alag tools par ja kar search karna time-consuming hota hai.::HL]]
+* [[HL::**Solution:** **Yandex Image Search** aur **PimEyes / FaceCheck.id** (facial recognition OSINT tools) uncensored face-tracking karte hain. Aur **DDG Bangs** workflow ko super-fast banate hain::HL]].
+* **✅ Kab use [[HL::karo:** Jab target employee ka face match karke uski hidden forum profile nikalni ho, ya jab target company **Eastern Europe / Asian** region mein base karti ho (tab Yandex aur **Baidu** best hain::HL]]).
 * **❌ Kab mat karo / Alternative prefer karo:** Jab basic western company ka generic SEO web content dhoondhna ho (tab Google prefer karo).
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
@@ -4228,8 +4223,8 @@ Yandex par image upload karne par tumhe exact us insaan ki photos milengi jo doo
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack Flow)
 
-1. Privacy laws (jaise GDPR) ki wajah se Google apne reverse image search ko chehro (faces) ke bajaye objects (jaise kapde, background) par focus karne ke liye modify kar chuka hai.
-2. Yandex in strict western laws ko follow nahi karta, isliye iska algorithm aggressive **Facial tracking** karta hai.
+1. [[HL::Privacy laws (jaise GDPR) ki wajah se Google apne reverse image search ko chehro (faces) ke bajaye objects (jaise kapde, background) par focus karne ke liye modify kar chuka hai.::HL]]
+2. [[HL::Yandex in strict western laws ko follow nahi karta, isliye iska algorithm aggressive **Facial tracking** karta hai::HL]].
 3. DDG Bangs (`!`) DuckDuckGo ke engine ko signal dete hain ki user ko apni site ka result mat dikhao, balki user ki query uthao aur seedha target platform (jaise Wikipedia ya Shodan) ke URL API mein inject karke wahan redirect kar do.
 
 ### 💻 7. Hands-On — Lab-Ready Commands
@@ -4255,12 +4250,12 @@ Bangs humesha exclamation mark `!` se shuru hote hain. Isse tum **Cross-Engine V
 
 ```
 
-**Yandex Reverse Image Search Flow:**
-*(Isme terminal command nahi hoti, yeh GUI workflow hai)*
+**[[HL::Yandex Reverse Image Search Flow:::HL]]**
+[[HL::*(Isme terminal command nahi hoti, yeh GUI workflow hai)*::HL]]
 
-1. Target ki LinkedIn profile picture download karo.
-2. `yandex.com/images` par jao.
-3. Image upload karo. Yandex **uncensored results** dega. Agar same photo kisi underground hacking forum ya personal blog par use hui hai, Yandex use nikal kar de dega.
+1. [[HL::Target ki LinkedIn profile picture download karo.::HL]]
+2. [[HL::`yandex.com/images` par jao.::HL]]
+3. [[HL::Image upload karo. Yandex **uncensored results** dega. Agar same photo kisi underground hacking forum ya personal blog par use hui hai, Yandex use nikal kar de dega::HL]].
 
 ### 🔒 8. Attack Surface & Defense
 
@@ -4312,8 +4307,8 @@ Ek pentester ek Russian company ka test kar raha tha. Google results completely 
 
 ### ❓ 16. Interview & Certification Exam Q&A
 
-* **Q:** Agar ek target organization Russia ya Eastern Europe based hai, toh aap apni OSINT strategy mein kya change karenge?
-* **A:** Main Google ke bajaye un region-specific search engines jaise Yandex par focus karunga kyunki woh local indexing mein superior hain aur western platforms ke mukable kam censored hote hain.
+* [[HL::**Q:** Agar ek target organization Russia ya Eastern Europe based hai, toh aap apni OSINT strategy mein kya change karenge?::HL]]
+* [[HL::**A:** Main Google ke bajaye un region-specific search engines jaise Yandex par focus karunga kyunki woh local indexing mein superior hain aur western platforms ke mukable kam censored hote hain::HL]].
 * **Q:** Ek pentester ke workflow mein DuckDuckGo Bangs kaise time save karte hain?
 * **A:** Bangs ek direct query parameter forwarding mechanism hain. `!shodan` ya `!gh` use karke pentester bina UI navigate kiye seedha target tool par search execute kar sakta hai, jo rapid reconnaissance mein madad karta hai.
 
@@ -4372,14 +4367,14 @@ Google ek librarian hai jo books (web pages) organize karta hai. Shodan ek secur
 ### 📖 3. Technical Definition
 
 * **Precise English:** Shodan is a specialized search engine that crawls the internet to discover internet-facing devices (IoT, ICS/SCADA, servers) by performing port scanning and banner grabbing.
-* **Hinglish Simplification:** Shodan internet se connected har device ko scan karke uski details (OS, software version, open ports) apne database mein save karta hai taaki hackers aur researchers unhe easily dhundh sakein.
+* [[HL::**Hinglish Simplification:** Shodan internet se connected har device ko scan karke uski details (OS, software version, open ports) apne database mein save karta hai taaki hackers aur researchers unhe easily dhundh sakein::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Pentesting mein **Missing Attack Surface Risk** ek bada issue hai. Agar hum sirf known IPs scan karein, toh company ke bhule hue vulnerable cloud servers ya exposed devices miss ho jayenge.
-* **Solution:** Shodan aapko bina directly target ko touch kiye (passive recon) unke saare public devices ki list de deta hai.
-* **✅ Kab use karo:** Reconnaissance phase mein, jab target ka external attack surface map karna ho bina unhe alert kiye.
-* **❌ Kab mat karo:** Jab internal network (intranet) test kar rahe ho, kyunki Shodan sirf publicly exposed internet-facing IP addresses ko index karta hai.
+* [[HL::**Problem:** Pentesting mein **Missing Attack Surface Risk** ek bada issue hai. Agar hum sirf known IPs scan karein, toh company ke bhule hue vulnerable cloud servers ya exposed devices miss ho jayenge.::HL]]
+* [[HL::**Solution:** Shodan aapko bina directly target ko touch kiye (passive recon) unke saare public devices ki list de deta hai.::HL]]
+* [[HL::**✅ Kab use karo:** Reconnaissance phase mein, jab target ka external attack surface map karna ho bina unhe alert kiye::HL]].
+* **❌ [[HL::Kab mat karo:** Jab internal network (intranet) test kar rahe ho, kyunki Shodan sirf publicly exposed internet-facing IP addresses ko index karta hai::HL]].
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
@@ -4387,42 +4382,42 @@ Aapko [https://www.shodan.io](https://www.shodan.io) ki website par ek search ba
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)
 
-Shodan internet par continuously devices ko scan karta hai (**port scanning alternative** for attackers) aur unka **banner** read karta hai.
-Banner ek text response hota hai jo server tab bhejta hai jab koi usse connect karta hai.
+[[HL::Shodan internet par continuously devices ko scan karta hai (**port scanning alternative** for attackers) aur unka **banner** read karta hai.::HL]]
+[[HL::Banner ek text response hota hai jo server tab bhejta hai jab koi usse connect karta hai.::HL]]
 
-**(1) Shodan Scanner Connects -> (2) Server sends Banner -> (3) Shodan Indexes it**
+**[[HL::(1) Shodan Scanner Connects -> (2) Server sends Banner -> (3) Shodan Indexes it::HL]]**
 
-Ek typical HTTP banner aisi details leak karta hai:
+[[HL::Ek typical HTTP banner aisi details leak karta hai:::HL]]
 
-* `HTTP/1.1 200 OK` (Status code)
-* `Server: Apache/2.4.29 (Ubuntu)` (Exact web server aur OS)
-* `X-Powered-By: PHP/7.2.10` (Backend technology)
+* [[HL::`HTTP/1.1 200 OK` (Status code)::HL]]
+* [[HL::`Server: Apache/2.4.29 (Ubuntu)` (Exact web server aur OS)::HL]]
+* [[HL::`X-Powered-By: PHP/7.2.10` (Backend technology)::HL]]
 
-Is banner ko padh kar attacker ko bina exploit kiye pata chal jata hai ki server vulnerable hai ya nahi.
+[[HL::Is banner ko padh kar attacker ko bina exploit kiye pata chal jata hai ki server vulnerable hai ya nahi::HL]].
 
 ### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
 
-Shodan web interface (shodan.io) par ya CLI par hum yeh basic search syntax use karte hain:
+[[HL::Shodan web interface (shodan.io) par ya CLI par hum yeh basic search syntax use karte hain::HL]]:
 
 ```bash
-# Kali Linux | Shodan CLI Tool (Requires API Key)
-1  shodan search "apache"                  # shodan = CLI tool; search = command; "apache" = keyword search, apache servers dhundega
-2  shodan search "port:80"                 # port:80 = filter, sirf HTTP web servers dikhayega
-3  shodan search "country:IN"              # country:IN = filter, sirf India (IN) ke devices dikhayega
-4  shodan search "webcam"                  # webcam = keyword, exposed cameras dhundega
-5  shodan search "webcam country:US"       # combined filter = US ke andar exposed webcams dhundega
-6  shodan search "port:3306 country:IN"    # port:3306 = MySQL default port; India mein exposed databases
-7  shodan search "port:22"                 # port:22 = SSH service ke liye open ports
-8  shodan search "port:3389"               # port:3389 = RDP (Remote Desktop Protocol) services
-9  shodan search "city:\"Mumbai\""         # city:"Mumbai" = exact city match
-10 shodan search "os:\"Windows\""          # os:"Windows" = specific operating system filter
+# [[HL::Kali Linux | Shodan CLI Tool (Requires API Key)::HL]]
+[[HL::1  shodan search "apache"                  # shodan = CLI tool; search = command; "apache" = keyword search, apache servers dhundega::HL]]
+[[HL::2  shodan search "port:80"                 # port:80 = filter, sirf HTTP web servers dikhayega::HL]]
+[[HL::3  shodan search "country:IN"              # country:IN = filter, sirf India (IN) ke devices dikhayega::HL]]
+[[HL::4  shodan search "webcam"                  # webcam = keyword, exposed cameras dhundega::HL]]
+[[HL::5  shodan search "webcam country:US"       # combined filter = US ke andar exposed webcams dhundega::HL]]
+[[HL::6  shodan search "port:3306 country:IN"    # port:3306 = MySQL default port; India mein exposed databases::HL]]
+[[HL::7  shodan search "port:22"                 # port:22 = SSH service ke liye open ports::HL]]
+[[HL::8  shodan search "port:3389"               # port:3389 = RDP (Remote Desktop Protocol) services::HL]]
+[[HL::9  shodan search "city:\"Mumbai\""         # city:"Mumbai" = exact city match::HL]]
+[[HL::10 shodan search "os:\"Windows\""          # os:"Windows" = specific operating system filter::HL]]
 
 ```
 
 ```
-# 📤 Expected Output:
-203.0.113.5    80    HTTP/1.1 200 OK Server: Apache/2.4.29
-198.51.100.12  3389  \x03\x00\x00\x13\x0e\xe0\x00\x00... (RDP Banner)
+# [[HL::📤 Expected Output:::HL]]
+[[HL::203.0.113.5    80    HTTP/1.1 200 OK Server: Apache/2.4.29::HL]]
+[[HL::198.51.100.12  3389  \x03\x00\x00\x13\x0e\xe0\x00\x00... (RDP Banner)::HL]]
 
 ```
 
@@ -4447,7 +4442,7 @@ Agar target "TechCorp Inc" hai:
 ### 🔒 8. Attack Surface & Defense
 
 **🔴 Attacker Perspective:**
-Attackers Shodan ko use karke **ICS/SCADA** (Industrial Control Systems — factories, power plants) dhundhte hain. Agar koi **has_screenshot:true** filter lagaye, toh Shodan un webcams ya RDP sessions ke live screenshots dikha deta hai bina password ke!
+[[HL::Attackers Shodan ko use karke **ICS/SCADA** (Industrial Control Systems — factories, power plants) dhundhte hain. Agar koi **has_screenshot:true** filter lagaye, toh Shodan un webcams ya RDP sessions ke live screenshots dikha deta hai bina password ke::HL]]!
 **🔵 Defender Perspective:**
 Defenders (aur **US-CERT** jaise organizations) Shodan ka use karte hain apni company ke rogue assets dhundhne ke liye aur unhe internet se hide karne ke liye. Firewall rules strict karke banners ko mask kiya jata hai.
 
@@ -4465,12 +4460,12 @@ Jab **Heartbleed** (OpenSSL vulnerability) aur **Log4j** (Java logging vulnerabi
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Kya Shodan aur Google same hain?"**
-* **Actually:** Nahi. Google websites (port 80/443) index karta hai. Shodan backend infrastructure, IoT, aur non-web ports (like 22, 3389) index karta hai.
+* [[HL::**Confusion 1 — "Kya Shodan aur Google same hain?"::HL]]**
+* [[HL::**Actually:** Nahi. Google websites (port 80/443) index karta hai. Shodan backend infrastructure, IoT, aur non-web ports (like 22, 3389) index karta hai::HL]].
 
 
-* **Confusion 2 — "Free vs Paid Account mein kya fark hai?"**
-* **Actually:** Free account mein queries limit hoti hain aur kuch advanced filters kaam nahi karte. Paid account mein full API access aur unlimited queries milti hain.
+* [[HL::**Confusion 2 — "Free vs Paid Account mein kya fark hai?"::HL]]**
+* [[HL::**Actually:** Free account mein queries limit hoti hain aur kuch advanced filters kaam nahi karte. Paid account mein full API access aur unlimited queries milti hain::HL]].
 
 
 
@@ -4551,13 +4546,13 @@ Socho Shodan ek warehouse hai jismein millions devices (servers, cameras) rakhe 
 ### 📖 3. Technical Definition
 
 * **Precise English:** Shodan filters are specific search operators that allow users to refine their queries based on metadata such as geolocation, open ports, and Autonomous System Numbers (ASN)/Organizations.
-* **Hinglish Simplification:** Filters wo commands hain jo Shodan ko batati hain ki sirf specific port, city, ya company ke devices hi dikhao taaki result narrow down ho sake.
+* [[HL::**Hinglish Simplification:** Filters wo commands hain jo Shodan ko batati hain ki sirf specific port, city, ya company ke devices hi dikhao taaki result narrow down ho sake::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Information overload! Agar aap sirf "Apache" search karenge toh millions of results aayenge. Aapke scope ki company ka server kahan hai, pata nahi chalega.
-* **Solution:** **Organization Focus** aur **Geolocation Targeting** filters use karke hum noise hata dete hain.
-* **✅ Kab use karo:** Jab target ka scope strictly defined ho (e.g., "Sirf HealthCare Corp ke Mumbai servers scan karne hain").
+* [[HL::**Problem:** Information overload! Agar aap sirf "Apache" search karenge toh millions of results aayenge. Aapke scope ki company ka server kahan hai, pata nahi chalega.::HL]]
+* [[HL::**Solution:** **Organization Focus** aur **Geolocation Targeting** filters use karke hum noise hata dete hain.::HL]]
+* [[HL::**✅ Kab use karo:** Jab target ka scope strictly defined ho (e.g., "Sirf HealthCare Corp ke Mumbai servers scan karne hain::HL]]").
 * **❌ Kab mat karo:** Jab aap broad vulnerability research kar rahe ho aur kisi specific location tak limited nahi rehna chahte.
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
@@ -4574,72 +4569,70 @@ Multiple filters space se separate hote hain (jo implicit `AND` operator ki tara
 Here is the **Common Port Cheat Sheet** aur unke syntax combinations:
 
 ```bash
-# Shodan Search Queries Syntax and Combinations
-1  shodan search "port:22"                      # SSH (Secure Shell) service ke liye
-2  shodan search "port:80"                      # HTTP (Insecure web) ke liye
-3  shodan search "port:443"                     # HTTPS (Secure web) ke liye
-4  shodan search "port:3306"                    # MySQL database port
-5  shodan search "port:3389"                    # RDP (Remote Desktop Protocol) port
-6  shodan search "port:27017"                   # MongoDB database port
-7  shodan search "port:5432"                    # PostgreSQL database port
-8  shodan search "country:IN"                   # Geolocation: India
-9  shodan search "country:US"                   # Geolocation: United States
-10 shodan search "country:CN"                   # Geolocation: China
-11 shodan search "city:\"Mumbai\""              # Specific city match
-12 shodan search "city:\"New York\""            # City with space needs quotes
-13 shodan search "org:\"Google\""               # Organization: Google
-14 shodan search "org:\"Company Name\""         # Generic organization filter
-15 shodan search "FTP"                          # Keyword for File Transfer Protocol
-16 shodan search "SSH"                          # Keyword for Secure Shell
-17 shodan search "Telnet"                       # Keyword for Telnet (Insecure)
+# [[HL::Shodan Search Queries Syntax and Combinations::HL]]
+[[HL::1  shodan search "port:22"                      # SSH (Secure Shell) service ke liye::HL]]
+[[HL::2  shodan search "port:80"                      # HTTP (Insecure web) ke liye::HL]]
+[[HL::3  shodan search "port:443"                     # HTTPS (Secure web) ke liye::HL]]
+[[HL::4  shodan search "port:3306"                    # MySQL database port::HL]]
+[[HL::5  shodan search "port:3389"                    # RDP (Remote Desktop Protocol) port::HL]]
+[[HL::6  shodan search "port:27017"                   # MongoDB database port::HL]]
+[[HL::7  shodan search "port:5432"                    # PostgreSQL database port::HL]]
+[[HL::8  shodan search "country:IN"                   # Geolocation: India::HL]]
+[[HL::9  shodan search "country:US"                   # Geolocation: United States::HL]]
+[[HL::10 shodan search "country:CN"                   # Geolocation: China::HL]]
+[[HL::11 shodan search "city:\"Mumbai\""              # Specific city match::HL]]
+[[HL::12 shodan search "city:\"New York\""            # City with space needs quotes::HL]]
+[[HL::13 shodan search "org:\"Google\""               # Organization: Google::HL]]
+[[HL::14 shodan search "org:\"Company Name\""         # Generic organization filter::HL]]
+[[HL::15 shodan search "FTP"                          # Keyword for File Transfer Protocol::HL]]
+[[HL::16 shodan search "SSH"                          # Keyword for Secure Shell::HL]]
+[[HL::17 shodan search "Telnet::HL]]"                       # Keyword for Telnet (Insecure)
 
 ```
 
 **Practical Targeted Search Examples:**
 
 ```bash
-# Combine filters for sniper precision
-1  shodan search "org:\"TechCorp\" port:80"     # TechCorp ke HTTP servers
-2  whois techcorp.com                           # Domain info nikalne ke liye
-3  # Using OR operator for multiple databases:
-4  shodan search "org:\"TechCorp Inc\" (port:3306 OR port:27017 OR port:5432)" 
-5  shodan search "city:\"Mumbai\" port:3389"    # Mumbai mein open RDP servers
-6  shodan search "org:\"Microsoft\" port:443"   # Microsoft ke secure web servers
+# [[HL::Combine filters for sniper precision::HL]]
+[[HL::1  shodan search "org:\"TechCorp\" port:80"     # TechCorp ke HTTP servers::HL]]
+[[HL::2  whois techcorp.com                           # Domain info nikalne ke liye::HL]]
+[[HL::3  # Using OR operator for multiple databases:::HL]]
+[[HL::4  shodan search "org:\"TechCorp Inc\" (port:3306 OR port:27017 OR port:5432)" ::HL]]
+[[HL::5  shodan search "city:\"Mumbai\" port:3389"    # Mumbai mein open RDP servers::HL]]
+[[HL::6  shodan search "org:\"Microsoft\" port:443"   # Microsoft ke secure web servers::HL]]
 
 ```
+```
+# [[HL::📤 Expected Output:::HL]]
+[[HL::111.222.333.44  3389   Mumbai   TechCorp Inc  (RDP Banner)::HL]]
 
 ```
-# 📤 Expected Output:
-111.222.333.44  3389   Mumbai   TechCorp Inc  (RDP Banner)
+### [[HL::🔒 8. Attack Surface & Defense::HL]]
 
-```
+**[[HL::🔴 Attacker Perspective:::HL]]**
+[[HL::Attackers specific services like **RDP** ya **Telnet** ko filter karke target karte hain kyunki inmein brute force ya known exploits lagna aasaan hota hai.::HL]]
+**[[HL::🔵 Defender Perspective:::HL]]**
+[[HL::Defenders apni org ka naam daal kar check karte hain ki kahin internal databases galti se public internet par expose toh nahi ho gaye (Scope violation).::HL]]
 
-### 🔒 8. Attack Surface & Defense
+### [[HL::🌍 9. Real-World Penetration Testing Use-Case::HL]]
 
-**🔴 Attacker Perspective:**
-Attackers specific services like **RDP** ya **Telnet** ko filter karke target karte hain kyunki inmein brute force ya known exploits lagna aasaan hota hai.
-**🔵 Defender Perspective:**
-Defenders apni org ka naam daal kar check karte hain ki kahin internal databases galti se public internet par expose toh nahi ho gaye (Scope violation).
-
-### 🌍 9. Real-World Penetration Testing Use-Case
-
-**Company Assessment Example:** Ek pentester "HealthCare Corp" ka assessment kar raha tha. Usne `org:"HealthCare Corp" port:3389` filter use kiya aur 15 exposed RDP servers dhoondhe. Inme se 5 aise unknown/forgotten assets the jo **Windows Server 2012** par chal rahe the aur critically vulnerable the **BlueKeep** exploit (**CVE-2019-0708** — ek dangerous RCE vulnerability jo RDP port ko exploit karti hai) se.
+**[[HL::Company Assessment Example:** Ek pentester "HealthCare Corp" ka assessment kar raha tha. Usne `org:"HealthCare Corp" port:3389` filter use kiya aur 15 exposed RDP servers dhoondhe. Inme se 5 aise unknown/forgotten assets the jo **Windows Server 2012** par chal rahe the aur critically vulnerable the **BlueKeep** exploit (**CVE-2019-0708** — ek dangerous RCE vulnerability jo RDP port ko exploit karti hai) se::HL]].
 
 ### ⚠️ 10. Pentest Anti-Patterns & Common Mistakes (Beginner Traps)
 
-* **❌ Mistake:** Spaces ko galat jagah use karna (e.g., `port: 80` instead of `port:80`).
-* **🤦 Why:** Shodan ise "port" keyword aur "80" alag-alag samajhta hai.
-* **✅ The 'Pro' Way:** Filter key aur value ke beech mein kabhi space mat do. `org:"Name"` double quotes use karo agar space hai.
+* **❌ [[HL::Mistake:** Spaces ko galat jagah use karna (e.g., `port: 80` instead of `port:80`).::HL]]
+* [[HL::**🤦 Why:** Shodan ise "port" keyword aur "80" alag-alag samajhta hai.::HL]]
+* [[HL::**✅ The 'Pro' Way:** Filter key aur value ke beech mein kabhi space mat do. `org:"Name"` double quotes use karo agar space hai::HL]].
 * **⚡ Consequences:** Galat syntax se millions of irrelevant results aayenge (Information overload).
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Multiple filters kaise lagau?"**
-* **Actually:** Bas space dekar likho: `country:US port:22`. Yeh `AND` condition ki tarah kaam karta hai (Dono match hone chahiye).
+* [[HL::**Confusion 1 — "Multiple filters kaise lagau?"::HL]]**
+* [[HL::**Actually:** Bas space dekar likho: `country:US port:22`. Yeh `AND` condition ki tarah kaam karta hai (Dono match hone chahiye::HL]]).
 
 
-* **Confusion 2 — "OR operator kab use hota hai?"**
-* **Actually:** Jab tumhe ek se zyada chizein ek hi filter mein dekhni hon. E.g., `(port:80 OR port:443)`.
+* [[HL::**Confusion 2 — "OR operator kab use hota hai?"::HL]]**
+* [[HL::**Actually:** Jab tumhe ek se zyada chizein ek hi filter mein dekhni hon. E.g., `(port:80 OR port:443::HL]])`.
 
 
 
@@ -4664,8 +4657,8 @@ Defenders apni org ka naam daal kar check karte hain ki kahin internal databases
 
 ### ❓ 16. Interview & Certification Exam Q&A
 
-* **Q:** How do you find all databases associated with a specific company on Shodan?
-* **A:** Hum OR operator aur org filter combine karenge: `org:"CompanyName" (port:3306 OR port:5432 OR port:27017)`.
+* **Q:** [[HL::How do you find all databases associated with a specific company on Shodan?::HL]]
+* [[HL::**A:** Hum OR operator aur org filter combine karenge: `org:"CompanyName" (port:3306 OR port:5432 OR port:27017::HL]])`.
 
 ### 📝 17. One-Line Memory Hook
 
@@ -4716,7 +4709,7 @@ Basic filters 'Mumbai mein restaurants' dhoondhte hain. Advanced filters 'Mumbai
 ### 📖 3. Technical Definition
 
 * **Precise English:** Advanced Shodan filters parse specific metadata fields from service banners (like precise OS builds, software product names, and exact version strings) to conduct highly targeted vulnerability hunting and technology stack fingerprinting.
-* **Hinglish Simplification:** Advanced filters seedha server ke banner ke andar ghus kar exact software (jaise Apache), uska version (jaise 2.4.49), aur operating system match karte hain taaki attacker direct vulnerable targets dhundh sake.
+* [[HL::**Hinglish Simplification:** Advanced filters seedha server ke banner ke andar ghus kar exact software (jaise Apache), uska version (jaise 2.4.49), aur operating system match karte hain taaki attacker direct vulnerable targets dhundh sake::HL]].
 
 ### 🧠 4. Why This Matters
 
@@ -4923,13 +4916,13 @@ Basic filters 'restaurants' dhoondhte hain. Pentester filters 'restaurants jahan
 ### 📖 3. Technical Definition
 
 * **Precise English:** Pentester filters are premium Shodan query parameters that leverage internal scanning scripts, image rendering algorithms, and categorical tagging to instantly discover confirmed vulnerable endpoints, exposed visual interfaces, and critical infrastructure systems.
-* **Hinglish Simplification:** Yeh premium filters Shodan ko explicitly batate hain ki seedha woh devices dikhao jinke andar confirm vulnerability hai, jinke live desktop ya camera ke screenshots available hain, ya jo kisi tag (jaise factory ka controller) se jude hain.
+* [[HL::**Hinglish Simplification:** Yeh premium filters Shodan ko explicitly batate hain ki seedha woh devices dikhao jinke andar confirm vulnerability hai, jinke live desktop ya camera ke screenshots available hain, ya jo kisi tag (jaise factory ka controller) se jude h::HL]]ain.
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Banner information manually verify karna time-consuming hota hai. Kabhi kabhi version number hone ke baad bhi server patched hota hai.
-* **Solution:** `vuln:` filter Shodan ke apne internal tests par based hota hai, isliye false positives kam hote hain. Screenshots se bina login kiye visual proof mil jata hai.
-* **✅ Kab use karo:** Jab target par exact CVE ki presence confirm karni ho, ya physical security / exposed interfaces ki intelligence gather karni ho (using screenshots).
+* [[HL::**Problem:** Banner information manually verify karna time-consuming hota hai. Kabhi kabhi version number hone ke baad bhi server patched hota hai.::HL]]
+* [[HL::**Solution:** `vuln:` filter Shodan ke apne internal tests par based hota hai, isliye false positives kam hote hain. Screenshots se bina login kiye visual proof mil jata hai.::HL]]
+* [[HL::**✅ Kab use karo:** Jab target par exact CVE ki presence confirm karni ho, ya physical security / exposed interfaces ki intelligence gather karni ho (using screenshots::HL]]).
 * **❌ Kab mat karo / Alternative prefer karo:** Jab aapke paas free account ho (yeh chalenge nahi), ya jab aap kisi critical infrastructure (`tag:ics`) ko directly interact karne ka soch rahe hon. **⭐CRITICAL: Kisi bhi result par click MAT karo, access MAT karo!**
 
 ### 🔍 5. Visual / Terminal Mein Kya Dikhega
@@ -4938,16 +4931,16 @@ Web interface mein aapko target IPs ke sath **actual images** (RDP logins, webca
 
 ### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)
 
-Shodan ke paas apni scanning engines hoti hain.
+[[HL::Shodan ke paas apni scanning engines hoti hain.::HL]]
 
-* **Screenshot grabbing:** Jab Shodan ko port 3389 (RDP) ya port 5900 (VNC) open milta hai, woh ek virtual display script chalata hai jo pehli frame (login screen) ka screenshot capture kar leti hai.
-* **Vuln scanning:** Shodan known vulnerabilities (jaise Heartbleed) ke liye safe, non-destructive test packets bhejta hai. Agar vulnerable response aata hai, toh us IP ke aage `vuln:CVE-XXXX` tag lag jata hai.
+* [[HL::**Screenshot grabbing:** Jab Shodan ko port 3389 (RDP) ya port 5900 (VNC) open milta hai, woh ek virtual display script chalata hai jo pehli frame (login screen) ka screenshot capture kar leti hai.::HL]]
+* [[HL::**Vuln scanning:** Shodan known vulnerabilities (jaise Heartbleed) ke liye safe, non-destructive test packets bhejta hai. Agar vulnerable response aata hai, toh us IP ke aage `vuln:CVE-XXXX` tag lag jata hai.::HL]]
 
-### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
+### [[HL::💻 7. Hands-On — Runnable Example (Lab-Ready Commands)::HL]]
 
-*(⚠️ Note: These commands require a Paid/Academic Shodan Account)*
+[[HL::*(⚠️ Note: These commands require a Paid/Academic Shodan Account)*::HL]]
 
-**🔴 Vulnerability Filters (Direct CVE Search):**
+**[[HL::🔴 Vulnerability Filters (Direct CVE Search::HL]]):**
 
 ```bash
 # Kali Linux | Shodan CLI (Paid feature)
@@ -4962,10 +4955,10 @@ Shodan ke paas apni scanning engines hoti hain.
 **🔴 Visual Filters (Screenshot-Based Recon):**
 
 ```bash
-# Kali Linux | Visual Confirmation
-1  shodan search "has_screenshot:true"                  # Saare devices jinke paas visual interface/photo hai
-2  shodan search "has_screenshot:true port:3389"        # Windows ke RDP login screens ke screenshots
-3  shodan search "has_screenshot:true webcam"           # Exposed web cameras ki actual live feed frames
+# [[HL::Kali Linux | Visual Confirmation::HL]]
+[[HL::1  shodan search "has_screenshot:true"                  # Saare devices jinke paas visual interface/photo hai::HL]]
+[[HL::2  shodan search "has_screenshot:true port:3389"        # Windows ke RDP login screens ke screenshots::HL]]
+[[HL::3  shodan search "has_screenshot:true webcam"           # Exposed web cameras ki actual live feed frames::HL]]
 
 ```
 
@@ -5739,12 +5732,12 @@ Socho har website ki ek photo album hai jismein har saal ki photos hain. Wayback
 #### 📖 3. Technical Definition
 
 * **Precise English:** The Wayback Machine is a digital archive of the World Wide Web, allowing security researchers to perform Historical Intelligence and Evidence Collection by retrieving snapshots of deleted pages and past infrastructure states.
-* **Hinglish Simplification:** Wayback Machine internet ka time machine hai jo websites ki purani state (snapshots) save karta hai, jisse hume target ka deleted data aur purana tech stack mil jata hai.
+* [[HL::**Hinglish Simplification:** Wayback Machine internet ka time machine hai jo websites ki purani state (snapshots) save karta hai, jisse hume target ka deleted data aur purana tech stack mil jata hai::HL]].
 
 #### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-* **Problem:** Target hamesha apne live server ko secure rakhta hai. Agar tum sirf live site ko scan karoge, toh tumhe hidden ya forgotten APIs nahi milenge.
-* **Solution:** Wayback Machine se humein Historical Intelligence milti hai — jaise `sitemap.xml` (website ke saare URLs ki list) ke purane versions, jo Subdomain Discovery / Subdomain Enumeration mein help karte hain.
+* [[HL::**Problem:** Target hamesha apne live server ko secure rakhta hai. Agar tum sirf live site ko scan karoge, toh tumhe hidden ya forgotten APIs nahi milenge.::HL]]
+* [[HL::**Solution:** Wayback Machine se humein Historical Intelligence milti hai — jaise `sitemap.xml` (website ke saare URLs ki list) ke purane versions, jo Subdomain Discovery / Subdomain Enumeration mein help karte hain::HL]].
 * **What breaks if we don't know this?** Tum ek Custom CMS (Custom Content Management System — target ka apna banaya hua software) ka admin panel miss kar doge jo live site se link nahi hai par abhi bhi server par exist karta hai.
 * **✅ Kab use karo (Use in engagement when):** Jab target ki bug bounty scope badi ho, jab target ka live attack surface bohot secure ho, aur jab tumhe purane endpoints (jaise `/api/v1/`) dhoondhne hon.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab tumhe real-time active vulnerabilities scan karni hon (iske liye Nmap ya Burp Suite use karo).
@@ -5807,9 +5800,9 @@ Yahan **YYYYMMDDHHMMSS** timestamp hai (Year, Month, Day, Hour, Minute, Second).
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Kya Wayback Machine par sab kuch mil jata hai?"**
-* **Galat soch:** Internet ki har website ka har page archive.org par hamesha saved rehta hai.
-* **Actually:** Nahi. Wayback Machine unhi pages ko save karta hai jahan uska crawler (spider) gaya ho. Agar page authentication (login) ke peeche tha, toh archive nahi hoga.
+* [[HL::**Confusion 1 — "Kya Wayback Machine par sab kuch mil jata hai?"::HL]]**
+* [[HL::**Galat soch:** Internet ki har website ka har page archive.org par hamesha saved rehta hai.::HL]]
+* [[HL::**Actually:** Nahi. Wayback Machine unhi pages ko save karta hai jahan uska crawler (spider) gaya ho. Agar page authentication (login) ke peeche tha, toh archive nahi hoga::HL]].
 * **Prove karo:** Kisi banking site ke dashboard/login ke baad ka URL Wayback par daal kar dekho — kuch nahi milega.
 
 
@@ -5868,8 +5861,8 @@ Attacker attacks Live Server using this forgotten endpoint!
 
 #### ❓ 16. Interview & Certification Exam Q&A
 
-* **Q: OSCP/Bug Bounty mein `waybackurls` ka primary use kya hai?**
-* **A:** Iska primary use hidden, unlinked, aur forgotten endpoints dhoondhna hai. Aksar developers API v2 banate hain aur v1 ko website se hata dete hain par server se nahi. Waybackurls us v1 ka link de deta hai, jo unpatched aur vulnerable ho sakta hai.
+* [[HL::**Q: OSCP/Bug Bounty mein `waybackurls` ka primary use kya hai?::HL]]**
+* [[HL::**A:** Iska primary use hidden, unlinked, aur forgotten endpoints dhoondhna hai. Aksar developers API v2 banate hain aur v1 ko website se hata dete hain par server se nahi. Waybackurls us v1 ka link de deta hai, jo unpatched aur vulnerable ho sakta hai::HL]].
 
 
 * **Q: Wayback Machine snapshot URL mein `YYYYMMDDHHMMSS` kya signify karta hai?**
@@ -5908,12 +5901,12 @@ Socho ek company ek locked building hai. Tum building ke lock ko bahar se todne 
 #### 📖 3. Technical Definition
 
 * **Precise English:** Human OSINT (Open Source Intelligence) involves gathering intelligence from human factors, specifically leveraging platforms like LinkedIn, Indeed, and GitHub to map an organization's Tech Stack, internal infrastructure, and software version information.
-* **Hinglish Simplification:** Company ke current aur purane employees ki LinkedIn profiles aur company ki job postings padh kar yeh pata lagana ki company internally kaunsi technologies aur server versions use kar rahi hai.
+* [[HL::**Hinglish Simplification:** Company ke current aur purane employees ki LinkedIn profiles aur company ki job postings padh kar yeh pata lagana ki company internally kaunsi technologies aur server versions use kar rahi hai::HL]].
 
 #### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-* **Problem:** Target par direct port scanning (`Nmap`) noisy hoti hai aur WAF (Web Application Firewall) use block kar deta hai.
-* **Solution:** Tech Stack Discovery ke liye Human OSINT 100% stealthy (chupchap) hai. Target ko kabhi pata nahi chalega ki tumne unka infrastructure map kar liya hai. Yeh Social Engineering Prep aur spear-phishing campaigns ke liye bhi crucial data deta hai.
+* [[HL::**Problem:** Target par direct port scanning (`Nmap`) noisy hoti hai aur WAF (Web Application Firewall) use block kar deta hai.::HL]]
+* [[HL::**Solution:** Tech Stack Discovery ke liye Human OSINT 100% stealthy (chupchap) hai. Target ko kabhi pata nahi chalega ki tumne unka infrastructure map kar liya hai. Yeh Social Engineering Prep aur spear-phishing campaigns ke liye bhi crucial data deta hai::HL]].
 * **What breaks if we don't know this?** Tum andhe hokar Windows exploits chalate rahoge jabki target actually Linux/AWS par chal raha hoga.
 * **✅ Kab use karo (Use in engagement when):** Red Teaming engagements mein jahan stealth (chupe rehna) priority ho, ya jab initial recon mein target ke infrastructure ki koi technical details na mil rahi ho.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab tumhare paas strictly "No Social Engineering" rules hon, toh dhyan rakho ki passive OSINT (sirf padhna) allow hota hai, lekin actively employees ko message karna (Active Recon) mana hota hai.
@@ -5924,8 +5917,8 @@ Job portals par simple text dikhega, lekin tools like **⭐theHarvester** run ka
 
 #### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)
 
-1. **(1) The Leak:** Target company ek naya job post karti hai: *"We need a developer experienced in ⭐**Docker**, ⭐**Kubernetes**, and migrating from ⭐**MySQL 5.7** to ⭐**PostgreSQL 12**."*
-2. **(2) Version Information Collection:** Attacker job posting analysis karta hai aur note karta hai ki company abhi `MySQL 5.7` use kar rahi hai jo outdated hai.
+1. [[HL::**(1) The Leak:** Target company ek naya job post karti hai: *"We need a developer experienced in ⭐**Docker**, ⭐**Kubernetes**, and migrating from ⭐**MySQL 5.7** to ⭐**PostgreSQL 12**."*::HL]]
+2. [[HL::**(2) Version Information Collection:** Attacker job posting analysis karta hai aur note karta hai ki company abhi `MySQL 5.7` use kar rahi hai jo outdated hai::HL]].
 3. **(3) CVE Research:** Attacker exploit databases mein `MySQL 5.7` ke known vulnerabilities dhoondhta hai.
 4. **(4) Employee Profile Analysis:** Attacker ek engineer ki LinkedIn dekhta hai jisne resume mein likha hai: *"Managed ⭐**AWS EC2**, **S3**, **RDS**, and ⭐**Redis** caching. Automated deployments via **GitLab CI/CD** using `.gitlab-ci.yml` and `KUBE_CONFIG`."*
 5. **(5) Attack Vector:** Ab attacker ko pata hai ki AWS S3 buckets scan karni hain aur GitLab CI/CD pipelines target karni hain.
@@ -6107,7 +6100,7 @@ Aaj kal, hackers employees ke CVs padh kar dekhte hain ki kya woh `Grafana` ya `
 
 ### 🎯 1. File Metadata (EXIF Data Analysis)
 
-Is topic mein hum seekhenge ki kaise public images aur documents (PDFs, DOCX) ke andar chhupi hui invisible information (metadata) ko extract karke target ki GPS location, employee names, aur vulnerable software versions ka pata lagaya jata hai.
+[[HL::Is topic mein hum seekhenge ki kaise public images aur documents (PDFs, DOCX) ke andar chhupi hui invisible information (metadata) ko extract karke target ki GPS location, employee names, aur vulnerable software versions ka pata lagaya jata hai::HL]].
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -6116,7 +6109,7 @@ Socho ek photo hai. Upar se sirf picture dikhti hai, lekin us picture ke peeche 
 #### 📖 3. Technical Definition
 
 * **Precise English:** Metadata Analysis involves extracting EXIF (Exchangeable Image File Format) data from media and documents to perform Location Discovery, Software Identification, and Timeline Analysis for OSINT and Forensics purposes.
-* **Hinglish Simplification:** File ke source code/properties mein chhupe hue details nikalna, jaise photo kahan kheenchi gayi ya document kis computer par banaya gaya, taaki target ka profile banaya ja sake.
+* [[HL::**Hinglish Simplification:** File ke source code/properties mein chhupe hue details nikalna, jaise photo kahan kheenchi gayi ya document kis computer par banaya gaya, taaki target ka profile banaya ja sake::HL]].
 
 #### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
@@ -6272,7 +6265,7 @@ Create Date                     : 2023:05:12 14:22:11
 
 ### 🎯 4. Censys & ZoomEye (Shodan Alternatives) + Module Conclusion
 
-Is topic mein hum seekhenge ki Shodan ke alawa internet-connected devices ko scan karne ke liye **Censys** aur **ZoomEye** ka use kaise karte hain. Ek engine se 70% milta hai, teen engines se 100%! Hum SSL Certificates aur SANs (Subject Alternative Names) extract karke hidden subdomains dhoondhna seekhenge.
+[[HL::Is topic mein hum seekhenge ki Shodan ke alawa internet-connected devices ko scan karne ke liye **Censys** aur **ZoomEye** ka use kaise karte hain. Ek engine se 70% milta hai, teen engines se 100%! Hum SSL Certificates aur SANs (Subject Alternative Names) extract karke hidden subdomains dhoondhna seekhenge::HL]].
 
 #### 🐣 2. Simple Analogy (Hinglish)
 
@@ -6282,19 +6275,19 @@ Shodan shehar ke main darwaze check karta hai. ZoomEye shehar ke andari aur fore
 #### 📖 3. Technical Definition
 
 * **Precise English:** Censys and ZoomEye are passive search engines that continuously scan the IPv4/IPv6 space. They allow researchers to perform Cross-Verification of internet-facing assets and discover hidden infrastructure via Certificate Search and protocol-specific queries.
-* **Hinglish Simplification:** Yeh Shodan jaise search engines hain jo pure internet ke open ports aur IPs ka database banate hain. Inse hum bina target ko ping kiye uske exposed servers dhoondh sakte hain.
+* [[HL::**Hinglish Simplification:** Yeh Shodan jaise search engines hain jo pure internet ke open ports aur IPs ka database banate hain. Inse hum bina target ko ping kiye uske exposed servers dhoondh sakte hain::HL]].
 
 #### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-* **Problem:** Agar tumhara `nslookup` ya brute-force tool target ke dev server (`dev-internal.techcorp.com`) ka IP nahi dhoondh pata kyunki woh hidden hai.
-* **Solution:** SSL/TLS certificates mein **SANs** (Subject Alternative Names — ek certificate kitne subdomains ke liye valid hai uski list) hoti hain. Censys in certificates ko index karta hai, jisse tum hidden subdomains nikal sakte ho.
-* **What breaks if we don't know this?** Tum Shodan par rely karoge aur target ke aadhe se zyada exposed assets (jo shayad ZoomEye ne index kiye hon) miss kar doge.
+* [[HL::**Problem:** Agar tumhara `nslookup` ya brute-force tool target ke dev server (`dev-internal.techcorp.com`) ka IP nahi dhoondh pata kyunki woh hidden hai.::HL]]
+* [[HL::**Solution:** SSL/TLS certificates mein **SANs** (Subject Alternative Names — ek certificate kitne subdomains ke liye valid hai uski list) hoti hain. Censys in certificates ko index karta hai, jisse tum hidden subdomains nikal sakte ho.::HL]]
+* [[HL::**What breaks if we don't know this?** Tum Shodan par rely karoge aur target ke aadhe se zyada exposed assets (jo shayad ZoomEye ne index kiye hon) miss kar doge::HL]].
 * **✅ Kab use karo (Use in engagement when):** Jab tumhe target ka external footprint comprehensively map karna ho, ya jab Shodan par API limit/credits khatam ho gaye hon (Censys/ZoomEye ke Free Tiers Benefits acche hain).
 * **❌ Kab mat karo / Alternative prefer karo:** Jab tumhe target network ke andar (internal LAN) scan karna ho. Yeh engines sirf public internet ko scan karte hain.
 
 #### 🔍 5. Visual / Terminal Mein Kya Dikhega
 
-Web browser mein Censys ya ZoomEye ke dashboard par target domain ke associated hazaron IP addresses, open ports (jaise port:22, port 3306), aur HTTP response headers ki list dikhegi, sath hi web pages ke Screenshots bhi milenge.
+[[HL::Web browser mein Censys ya ZoomEye ke dashboard par target domain ke associated hazaron IP addresses, open ports (jaise port:22, port 3306), aur HTTP response headers ki list dikhegi, sath hi web pages ke Screenshots bhi milenge::HL]].
 
 #### ⚙️ 6. Under the Hood (Deep Dive — Attack/Defense Flow)
 
@@ -6450,7 +6443,7 @@ Is module mein humne advanced recon ka arsenal build kiya.
 
 ### 🎯 5. Web Archive Alternatives (Archive.today & Archive.is)
 
-Is topic mein hum seekhenge ki jab target ka server Wayback Machine ko block kar de, tab hum uski web history aur deleted pages nikalne ke liye Wayback Machine alternative tools jaise Archive.today aur Archive.is ka use kaise karte hain taaki hamari OSINT investigations na rukein.
+Is [[HL::topic mein hum seekhenge ki jab target ka server Wayback Machine ko block kar de, tab hum uski web history aur deleted pages nikalne ke liye Wayback Machine alternative tools jaise Archive.today aur Archive.is ka use kaise karte hain taaki hamari OSINT investigations na rukein::HL]].
 
 *(Note: Is topic ka Scope Signal "Practical Only" aur "Moderate Depth" hai, isliye hum theory ko brief rakhkar seedha practical snapshot capture aur robots.txt bypass par focus karenge.)*
 
@@ -6460,13 +6453,13 @@ Socho Wayback Machine ek aisa reporter hai jo kisi building ke bahar lage "No En
 
 #### 📖 3. Technical Definition
 
-* **Precise English:** Archive.today (and its mirror Archive.is) is a time capsule and web archiving tool that intentionally bypasses `robots.txt` restrictions to capture and store snapshots of web pages for OSINT investigations.
-* **Hinglish Simplification:** Ek aisi website jo target page ka permanent screenshot aur HTML copy (snapshot) save karti hai, chahe target ne usse hide karne ki kitni bhi koshish ki ho.
+* [[HL::**Precise English:** Archive.today (and its mirror Archive.is) is a time capsule and web archiving tool that intentionally bypasses `robots.txt` restrictions to capture and store snapshots of web pages for OSINT investigations.::HL]]
+* [[HL::**Hinglish Simplification:** Ek aisi website jo target page ka permanent screenshot aur HTML copy (snapshot) save karti hai, chahe target ne usse hide karne ki kitni bhi koshish ki ho::HL]].
 
 #### 🧠 4. Why This Matters (Pentester/Red Teamer ke liye Zaroorat Kyun Hai?)
 
-* **Problem:** Target company apne `robots.txt` (ek file jo search engines ko batati hai kya index karna hai aur kya nahi) mein `Disallow: /` daal deti hai. Wayback Machine us rule ko manta hai aur apne database se target ka saara purana data delete kar deta hai.
-* **Solution:** Archive.is `robots.txt` bypass karta hai. Jo purana data Wayback se hat gaya, woh yahan mil jayega. Sath hi, tum khud sensitive pages ka manual snapshot capture karke evidence save kar sakte ho.
+* [[HL::**Problem:** Target company apne `robots.txt` (ek file jo search engines ko batati hai kya index karna hai aur kya nahi) mein `Disallow: /` daal deti hai. Wayback Machine us rule ko manta hai aur apne database se target ka saara purana data delete kar deta hai.::HL]]
+* [[HL::**Solution:** Archive.is `robots.txt` bypass karta hai. Jo purana data Wayback se hat gaya, woh yahan mil jayega. Sath hi, tum khud sensitive pages ka manual snapshot capture karke evidence save kar sakte ho::HL]].
 * **✅ Kab use karo (Use in engagement when):** Jab Wayback Machine par target ka data na mile, ya jab target ki website par koi sensitive data (jaise leak hui API key) mile aur tumhe report mein proof (evidence) dena ho bina target ke delete kiye.
 * **❌ Kab mat karo / Alternative prefer karo:** Jab target par heavy client-side JavaScript (React/Angular) chal rahi ho, kyunki Archive.is kabhi-kabhi heavy JS pages ko dhang se render nahi kar pata.
 
@@ -7513,7 +7506,7 @@ Socho ek **ghar ka darwaza** khula hai. Aap footpath se andar jhaank sakte ho �
 
 #### 📖 3. Technical Definition
 - **Precise English:** The "Look, Don't Touch" rule mandates that during passive reconnaissance or OSINT, an analyst may only observe publicly accessible information without performing any active interaction, authentication attempt, or data alteration that could constitute unauthorized access under laws like the Computer Fraud & Abuse Act (CFAA, 18 U.S.C. § 1030) or IT Act 2000.
-- **Hinglish Simplification:** "Look, Don't Touch" ka matlab — jo cheez publicly dikh rahi hai use sirf **note down** karo, uske saath **interact** mat karo (login try, click, download restricted files). Interaction = crime.
+- [[HL::**Hinglish Simplification:** "Look, Don't Touch" ka matlab — jo cheez publicly dikh rahi hai use sirf **note down** karo, uske saath **interact** mat karo (login try, click, download restricted files). Interaction = crime::HL]].
 
 ---
 
@@ -8334,8 +8327,8 @@ Bug bounty programs mein "Firebase mein `.json` lagana bug bounty ka sabse aasan
 
 ### ❓ 16. Interview & Certification Exam Q&A
 
-* **Q:** Bug bounty hunting mein Firebase database leak kaise find karte hain?
-* **A:** Target ki mobile app ya JS files reverse engineer karke `site:firebaseio.com` format ki URL nikalte hain. Phir us URL ke end mein `.json` lagate hain. Agar database rules properly set nahi hain, toh database ka poora content JSON format mein load ho jata hai.
+* [[HL::**Q:** Bug bounty hunting mein Firebase database leak kaise find karte hain?::HL]]
+* [[HL::**A:** Target ki mobile app ya JS files reverse engineer karke `site:firebaseio.com` format ki URL nikalte hain. Phir us URL ke end mein `.json` lagate hain. Agar database rules properly set nahi hain, toh database ka poora content JSON format mein load ho jata hai::HL]].
 * **Q:** GraphQL Introspection query kyu dangerous hoti hai production mein?
 * **A:** Introspection API ka map return karti hai (schema, types, queries, mutations). Isse attacker ko hidden backend logic, deprecated functions, aur internal data structures pata chal jate hain, jisse BOLA (Broken Object Level Authorization) dhoondhna aasaan ho jata hai.
 * **Q:** `site:core.windows.net` dork kya dhoondhne ke liye use hota hai?
@@ -9102,12 +9095,12 @@ Socho ek company ka secret meeting room hai jiske bahar bada sa lock laga hai (D
 ### 📖 3. Technical Definition
 
 * **Precise English:** Instant Messaging OSINT involves leveraging search engine operators (Google Dorks) and specialized scraping tools to uncover exposed credentials, internal infrastructure discussions, and threat intelligence from platforms like Telegram, Discord, Twitter, and Reddit.
-* **Hinglish Simplification:** Telegram aur Discord ke public groups, invite links, aur chats ko search/scrape karke target company ka sensitive data aur leaked passwords dhoondhna.
+* [[HL::**Hinglish Simplification:** Telegram aur Discord ke public groups, invite links, aur chats ko search/scrape karke target company ka sensitive data aur leaked passwords dhoondhna::HL]].
 
 ### 🧠 4. Why This Matters
 
-* **Problem:** Companies apne internal networks ko toh secure kar leti hain, par employees external platforms (Discord/Reddit) par technical rants (shikayatein) karte waqt infrastructure details leak kar dete hain.
-* **Solution:** Telegram Dorking aur Discord Chat Indexing se hume attack se pehle hi target ki kamzoriyaan, leaked credentials, aur active threat actors ka pata chal jata hai.
+* [[HL::**Problem:** Companies apne internal networks ko toh secure kar leti hain, par employees external platforms (Discord/Reddit) par technical rants (shikayatein) karte waqt infrastructure details leak kar dete hain.::HL]]
+* [[HL::**Solution:** Telegram Dorking aur Discord Chat Indexing se hume attack se pehle hi target ki kamzoriyaan, leaked credentials, aur active threat actors ka pata chal jata hai::HL]].
 * **What breaks?** Bina IM OSINT ke tum sirf external IPs scan karte reh jaoge, jabki admin ka password kisi Telegram "premium leak channel" mein publicly available hoga.
 * **✅ Kab use karo:** Reconnaissance phase mein jab target company ke employees ki digital footprinting karni हो, ya threat intel (threat intelligence — hackers ki current activities ko monitor karna) gather karna ho.
 * **❌ Kab mat karo:** Jab scope strictly internal network pentest tak limited ho aur external OSINT explicitly out of bounds (mana) ho.
@@ -9118,40 +9111,40 @@ Terminal mein tumhe custom scraping tools (jaise Telepathy) ke JSON outputs dikh
 
 ### ⚙️ 6. Under the Hood
 
-1. **Target Identification:** Attacker target company ("target.com") decide karta hai.
-2. **Dork Crafting:** Google search engine ko specific instructions (Dorks) diye jaate hain ki sirf `t.me` (Telegram) ya `discord.com` par search kare.
-3. **Data Indexing:** Google ke bots jo Telegram ke public channels ko index karte hain, wo cached results show karte hain. Telegago (custom Google search engine explicitly for Telegram) is process ko aur refine karta hai.
-4. **Extraction:** Attacker Telegram/Discord join karke ya tools (DiscordScraper) use karke messages ko scrape aur analyze karta hai.
+1. [[HL::**Target Identification:** Attacker target company ("target.com") decide karta hai.::HL]]
+2. [[HL::**Dork Crafting:** Google search engine ko specific instructions (Dorks) diye jaate hain ki sirf `t.me` (Telegram) ya `discord.com` par search kare::HL]].
+3. [[HL::**Data Indexing:** Google ke bots jo Telegram ke public channels ko index karte hain, wo cached results show karte hain. Telegago (custom Google search engine explicitly for Telegram) is process ko aur refine karta hai::HL]].
+4. [[HL::**Extraction:** Attacker Telegram/Discord join karke ya tools (DiscordScraper) use karke messages ko scrape aur analyze karta hai::HL]].
 
 ### 💻 7. Hands-On — Lab-Ready Commands
 
-Yahan hum Google Dorks (advanced search queries jo specific file types ya sites dhoondhti hain) ko terminal ya browser mein use karne ka tarika dekhenge.
+[[HL::Yahan hum Google Dorks (advanced search queries jo specific file types ya sites dhoondhti hain) ko terminal ya browser mein use karne ka tarika dekhenge.::HL]]
 
 **Telegram Reconnaissance Dorks:**
 
 ```bash
-# Web Browser Search Bar / CLI Search Tool
-1  site:t.me "target.com"                  # site: = sirf is domain pe search karo; t.me = Telegram web portal; "target.com" = exact string match
-2  site:t.me "database dump" | "combo"     # | = OR operator (ya toh dump dhoondo ya combo); combo = username:password lists
+# [[HL::Web Browser Search Bar / CLI Search Tool::HL]]
+[[HL::1  site:t.me "target.com"                  # site: = sirf is domain pe search karo; t.me = Telegram web portal; "target.com" = exact string match::HL]]
+[[HL::2  site:t.me "database dump" | "combo"     # | = OR operator (ya toh dump dhoondo ya combo); combo = username:password lists::HL]]
 
 ```
 
 ```text
-# 📤 Expected Output:
-[Google Search Results]
-1. t.me/PremiumLeaks - "target.com 500k user database dump..."
-2. t.me/HackersCombo - "combo list including admin@target.com..."
+# 📤 [[HL::Expected Output:::HL]]
+[[HL::[Google Search Results]::HL]]
+1. [[HL::t.me/PremiumLeaks - "target.com 500k user database dump..."::HL]]
+2. [[HL::t.me/HackersCombo - "combo list including admin@target.com::HL]]..."
 
 ```
 
 **Discord & Sysadmin Rant Recon:**
 
 ```bash
-# Web Browser Search Bar / CLI Search Tool
-1  site:discord.com/invite "target"        # target company ke unofficial/official Discord servers dhoondhna
-2  inurl:discord.gg                        # inurl: = URL ke andar ye text hona chahiye; discord.gg = discord invite links
-3  site:reddit.com "sysadmin" "target.com" # sysadmin rants dhoondhna jahan infra details discuss ho rahi ho
-4  site:twitter.com "target.com" "down" | "server" # outages ya server issues ke baare mein employee/user tweets
+# [[HL::Web Browser Search Bar / CLI Search Tool::HL]]
+[[HL::1  site:discord.com/invite "target"        # target company ke unofficial/official Discord servers dhoondhna::HL]]
+[[HL::2  inurl:discord.gg                        # inurl: = URL ke andar ye text hona chahiye; discord.gg = discord invite links::HL]]
+[[HL::3  site:reddit.com "sysadmin" "target.com" # sysadmin rants dhoondhna jahan infra details discuss ho rahi ho::HL]]
+[[HL::4  site:twitter.com "target.com" "down" | "server" # outages ya server issues ke baare mein employee/user tweets::HL]]
 
 ```
 
@@ -9196,24 +9189,24 @@ Bug bounty hunters live production phase mein Discord aur Telegram par hackers k
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Kya main kisi ka private Telegram chat padh sakta hu in dorks se?"**
-* **Galat soch:** Google dorks se Telegram end-to-end encryption toot jati hai.
-* **Actually:** Nahi. Dorks sirf un public Telegram channels aur groups ka data dikhate hain jinko Google ke search bots ne index kiya hai (`t.me` portal ke through). Private chats completely invisible hoti hain.
-* **Prove karo:** Apna khud ka private Telegram group banao aur usko Google pe `site:t.me "tumhara_group_naam"` se search karo — kuch nahi milega.
+* **Conf[[HL::usion 1 — "Kya main kisi ka private Telegram chat padh sakta hu in dorks se?"::HL]]**
+* [[HL::**Galat soch:** Google dorks se Telegram end-to-end encryption toot jati hai.::HL]]
+* [[HL::**Actually:** Nahi. Dorks sirf un public Telegram channels aur groups ka data dikhate hain jinko Google ke::HL]] [[HL::search bots ne index kiya hai::HL]] ([[HL::`t.me` portal ke through). Private chats completely invisible hoti hain.::HL]]
+* [[HL::**Prove karo:** Apna khud ka private Telegram group banao aur usko Google pe `site:t.me "tumhara_group_naam"` se search karo — kuch nahi milega.::HL]]
 
 
-* **Confusion 2 — "Dark Web aur Telegram leak channels mein kya better hai?"**
-* **Galat soch:** Asli data sirf Dark Web (Tor) par milta hai.
-* **Actually:** "Aajkal hackers dark web nahi, Telegram use karte hain" kyunki Telegram fast hai, easy to access hai, aur anonymity maintain karta hai. Breach data aksar pehle Telegram par sell/leak hota hai.
-* **Prove karo:** Kisi recent breach ka naam Telegago pe search karo, tumhe Tor se pehle wahan results mil jayenge.
+* [[HL::**Confusion 2 — "Dark Web aur Telegram leak channels mein kya better hai?"::HL]]**
+* [[HL::**Galat soch:** Asli data sirf Dark Web (Tor) par milta hai.::HL]]
+* [[HL::**Actually:** "Aajkal hackers dark web nahi, Telegram use karte hain" kyunki Telegram fast hai, easy to access hai, aur anonymity maintain karta hai. Breach data aksar pehle Telegram par sell/leak hota hai.::HL]]
+* [[HL::**Prove karo:** Kisi recent breach ka naam Telegago pe search karo, tumhe Tor se pehle wahan results mil jayenge.::HL]]
 
 
 
-### 🛠️ 12. Troubleshooting Flowchart
+### [[HL::🛠️ 12. Troubleshooting Flowchart::HL]]
 
-* **`Google returns no results for site:t.me`**
-* **Root Cause:** Dork syntax galat hai ya target ka naam bohot generic hai.
-* **Fix:** Quotes `" "` ka use exactly karo, jaise `site:t.me "company_name"`.
+* [[HL::**`Google returns no results for site:t.me`::HL]]**
+* [[HL::**Root Cause:** Dork syntax galat hai ya target ka naam bohot generic hai.::HL]]
+* [[HL::**Fix:** Quotes::HL]] `" "` ka use exactly karo, jaise `site:t.me "company_name"`.
 
 
 * **`DiscordScraper tool API rate limit error de raha hai`**
@@ -9259,10 +9252,10 @@ Bug bounty hunters live production phase mein Discord aur Telegram par hackers k
 
 ### ❓ 16. Interview & Certification Q&A
 
-* **Q:** How can you passively find employee discussions about a company's internal server misconfigurations without touching their network?
-* **A:** Hum Reddit ya Twitter par specific Google dorks use kar sakte hain, jaise `site:reddit.com "sysadmin" "target.com"`. Yeh passively forum posts ko index karega jahan employees rant kar rahe ho, jisse internal tech stack leak ho sakta hai.
-* **Q:** What is Telegago and why is it preferred over a standard Google search for Telegram?
-* **A:** Telegago ek Custom Search Engine (CSE) hai jo specifically `t.me` URLs ke index ko refine aur optimize karta hai. Standard Google search mein noise bohot hota hai, jabki Telegago filtered aur accurate Telegram channel results deta hai.
+* [[HL::**Q:** How can you passively find employee discussions about a company's internal server misconfigurations without touching their network?::HL]]
+* [[HL::**A:** Hum Reddit ya Twitter par specific Google dorks use kar sakte hain, jaise `site:reddit.com "sysadmin" "target.com"`. Yeh passively forum posts ko index karega jahan employees rant kar rahe ho, jisse internal tech stack leak ho sakta hai::HL]].
+* [[HL::**Q:** What is Telegago and why is it preferred over a standard Google search for Telegram?::HL]]
+* [[HL::**A:** Telegago ek Custom Search Engine (CSE) hai jo specifically `t.me` URLs ke index ko refine aur optimize karta hai. Standard Google search mein noise bohot hota hai, jabki Telegago filtered aur accurate Telegram channel results deta hai::HL]].
 
 ### 📝 17. One-Line Memory Hook
 
@@ -9499,7 +9492,7 @@ Socho ki normal internet (Google) sirf surface water hai. **⭐IntelX** (Intelli
 ### 📖 3. Technical Definition
 
 * **Precise English:** Dark Web recon involves querying overlay networks (like Tor) and indexed breach databases to identify compromised credentials, sensitive corporate pastes, and threat actor discussions related to a specific target.
-* **Hinglish Simplification:** Dark Web recon matlab un hidden networks aur leaked databases mein target ka data dhoondhna jahan hackers chori kiye hue passwords aur documents share ya sell karte hain.
+* [[HL::**Hinglish Simplification:** Dark Web recon matlab un hidden networks aur leaked databases mein target ka data dhoondhna jahan hackers chori kiye hue passwords aur documents share ya sell karte hain::HL]].
 
 ### 🧠 4. Why This Matters
 
@@ -9522,28 +9515,28 @@ Leaked passwords ka cycle kaise chalta hai:
 1. **Breach Happens:** Ek third-party service (e.g., LinkedIn, Canva) hack hoti hai.
 2. **Hash Dumped:** Hackers database nikalte hain jisme passwords **MD5** ya **SHA256** (hashing algorithms — jo text ko ek fixed-length garbled string mein convert karte hain) mein encrypt/hash hote hain.
 3. **Hash Cracked:** Threat actors in hashes ko crack karte hain.
-4. **Data Uploaded:** Crack kiye hue passwords BreachForums (cybercrime forum) ya **Exploit.in** (Russian hacker forum) par post hote hain.
-5. **Archived:** **DeHashed.com**, **Leak-lookup.com**, aur **Snusbase** (saare premium leak search engines hain) in databases ko apne index mein daal lete hain.
+4. [[HL::**Data Uploaded:** Crack kiye hue passwords BreachForums (cybercrime forum) ya **Exploit.in** (Russian hacker forum) par post hote hain::HL]].
+5. [[HL::**Archived:** **DeHashed.com**, **Leak-lookup.com**, aur **Snusbase** (saare premium leak search engines hain) in databases ko apne index mein daal lete hain::HL]].
 6. **Pentester Searches:** Aap email to password reversal (kisi specific email ka clear-text password dhoondhna) perform karte hain.
 
 ### 💻 7. Hands-On — Runnable Example (Lab-Ready Commands)
 
-**Rule #1 of Dark Web Recon: "Dark web par dhoondho, par khud ko dox mat karo. ⭐VPN + Tor hamesha!"**
+**[[HL::Rule #1 of Dark Web Recon: "Dark web par dhoondho, par khud ko dox mat karo. ⭐VPN + Tor hamesha::HL]]!"**
 
-**Target domain ko Tor network par dhoondhna (Google Dorking for Tor):**
+**[[HL::Target domain ko Tor network par dhoondhna (Google Dorking for Tor::HL]]):**
 
 ```bash
-# Kali Linux | Terminal / Browser
-1  # Apna VPN on karo pehle (e.g., ProtonVPN, Mullvad)
-2  # Phir Tor Browser (anonymizing web browser) open karo aur Ahmia.fi (Dark web search engine) par jao
-3  # Search bar mein yeh dork type karo:
-4  site:*.onion "target.com"  # site:*.onion = sirf Tor hidden services par dhoondho; "target.com" = target ka exact domain match
+# [[HL::Kali Linux | Terminal / Browser::HL]]
+[[HL::1  # Apna VPN on karo pehle (e.g., ProtonVPN, Mullvad)::HL]]
+[[HL::2  # Phir Tor Browser (anonymizing web browser) open karo aur Ahmia.fi (Dark web search engine) par jao::HL]]
+[[HL::3  # Search bar mein yeh dork type karo:::HL]]
+[[HL::4  site:*.onion "target.com"  # site:*.onion = sirf Tor hidden services par dhoondho; "target.com" = target ka exact domain match::HL]]
 
 ```
 
 ```
 # 📤 Expected Output:
-(Ahmia.fi ya Torch search engine aapko wo saari .onion links dikhayega jahan target ka naam mention hua hai, e.g., ransomware blogs)
+([[HL::Ahmia.fi ya Torch search engine aapko wo saari .onion links dikhayega jahan target ka naam mention hua hai, e.g., ransomware blogs::HL]])
 
 ```
 
@@ -9584,15 +9577,15 @@ Real red team engagement (e.g., banking sector) mein, pentester sabse pehle **De
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
-* **Confusion 1 — "Kya Dark Web aur Deep Web same hai?"**
-* **Galat soch:** Internet ke neeche sab kuch Dark Web hai.
-* **Actually:** Deep Web wo saara data hai jo Google index nahi karta (e.g., aapka private email inbox, bank account dashboard). Dark Web Deep Web ka ek chhota, intentionally hidden hissa hai jise access karne ke liye Tor Browser jaisi special software chahiye aur iski websites `.onion` par end hoti hain.
+* [[HL::**Confusion 1 — "Kya Dark Web aur Deep Web same hai?"::HL]]**
+* [[HL::**Galat soch:** Internet ke neeche sab kuch Dark Web hai.::HL]]
+* [[HL::**Actually:** Deep Web wo saara data hai jo Google index nahi karta (e.g., aapka private email inbox, bank account dashboard). Dark Web Deep Web ka ek chhota, intentionally hidden hissa hai jise access karne ke liye Tor Browser jaisi special software chahiye aur iski websites `.onion` par end hoti hain::HL]].
 * **Prove karo:** Apna Gmail kholo — wo Deep Web hai. Tor browser download karke Ahmia.fi kholo — wo Dark Web hai.
 
 
-* **Confusion 2 — "HaveIBeenPwned aur DeHashed mein kya farq hai?"**
-* **Galat soch:** Dono same information dete hain.
-* **Actually:** HIBP sirf yeh batata hai ki aapka email hack hua hai ya nahi (safe check). DeHashed premium attacker tool hai jo exact chori hua **clear-text password** dikhata hai.
+* [[HL::**Confusion 2 — "HaveIBeenPwned aur DeHashed mein kya farq hai?"::HL]]**
+* [[HL::**Galat soch:** Dono same information dete hain.::HL]]
+* [[HL::**Actually:** HIBP sirf yeh batata hai ki aapka email hack hua hai ya nahi (safe check). DeHashed premium attacker tool hai jo exact chori hua **clear-text password** dikhata hai::HL]].
 
 
 
@@ -10099,9 +10092,9 @@ Exposed Vector DBs ko dhoondhne ke liye **Shodan AI hunting** dorks sabse effect
 **Shodan Dorking for Vector DBs:**
 
 ```bash
-# Shodan Search Interface
-1  port:19530                               # port:19530 = Milvus (popular Vector DB) ka default port search karo
-2  port:8000 product:"Chroma"               # port:8000 product:"Chroma" = ChromaDB (ek aur common Vector DB) ko uske default port aur product signature se dhoondho
+# [[HL::Shodan Search Interface::HL]]
+[[HL::1  port:19530                               # port:19530 = Milvus (popular Vector DB) ka default port search karo::HL]]
+[[HL::2  port:8000 product:"Chroma"               # port:8000 product:"Chroma" = ChromaDB (ek aur common Vector DB) ko uske default port aur product signature se dhoondho::HL]]
 
 ```
 
