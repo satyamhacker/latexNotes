@@ -19,8 +19,8 @@ Socho tum ek professional F1 car driver ho aur tum ek "Advanced Pitstop Strategy
 - **Hinglish Simplification:** Yeh course aapke pehle se bane hue UI aur API tests ko AI ki madad se smart, self-healing aur fast banane par focused hai, framework development ke basics par nahi.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Traditional UI testing mein **fragile UI automation** sabse badi problem hai — chhota sa UI change hote hi test fail ho jata hai. Saath hi, naye API tests likhna time-consuming hota hai.
-- **Solution:** **AI driven Test Automation** use karke hum AI ko code generation aur self-healing ke liye use karte hain, jisse maintenance time zero ho jata hai.
+- [[HL::**Problem:** Traditional UI testing mein **fragile UI automation** sabse badi problem hai — chhota sa UI change hote hi test fail ho jata hai. Saath hi, naye API tests likhna time-consuming hota hai.::HL]]
+- [[HL::**Solution:** **AI driven Test Automation** use karke hum AI ko code generation aur self-healing ke liye use karte hain, jisse maintenance time zero ho jata hai::HL]].
 - **What breaks if we don't use it?** Aapki team apna 80% time sirf existing test code ko fix karne mein laga degi, naye features test karne ka time hi nahi milega.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -28,8 +28,8 @@ Socho tum ek professional F1 car driver ho aur tum ek "Advanced Pitstop Strategy
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 Is course ka foundation approach kaise kaam karta hai:
-1. **Tooling & Setup:** Hum GitHub Copilot `(AI pair programmer — code autocomplete aur generate karta hai)` ya Cloud Code `(Google ka IDE plugin — cloud development ke liye)` jaise **vibe coding tool** use karte hain. 
-2. **Context Connection:** IDE ko browser ya API se jodne ke liye **MCP servers** (Model Context Protocol) aur **Chrome dev tool MCP** use hote hain. Yeh AI ko aapke page ka exact DOM (Document Object Model) dikhate hain.
+1. [[HL::**Tooling & Setup:** Hum GitHub Copilot `(AI pair programmer — code autocomplete aur generate karta hai)` ya Cloud Code `(Google ka IDE plugin — cloud development ke liye)` jaise **vibe coding tool** use karte hain. ::HL]]
+2. [[HL::**Context Connection:** IDE ko browser ya API se jodne ke liye **MCP servers** (Model Context Protocol) aur **Chrome dev tool MCP** use hote hain. Yeh AI ko aapke page ka exact DOM (Document Object Model) dikhate hain::HL]].
 3. **Execution:** Jab hum **code execution** karte hain, toh local ya **cloud models** us context ko samajh kar **visual testing** ya **API testing** (using correct **API schema**) perform karte hain.
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
@@ -95,12 +95,12 @@ Large fin-tech companies apne 2000+ **fragile UI automation** tests ko AI ke saa
 - **A:** Industry mein **Selenium (Python)** legacy aur stable enterprise apps mein widely use hota hai, jabki **playwright (JavaScript)** modern web apps aur fast execution ke liye preferred hai. AI automation dono frameworks par effectively apply kiya ja sakta hai.
 - **Q:** Vibe coding aur traditional coding mein kya difference hai?
 - **A:** Traditional coding mein aap line-by-line syntax likhte hain. Vibe coding mein aap ek **AI powered tool** ko intent (vibe) samjhate hain natural language mein, aur woh tool boilerplate aur logic generate karta hai. Lekin **code control** hamesha dev ke paas hota hai.
-- **Q:** "Fragile UI automation" ko AI kaise fix karta hai?
-- **A:** Jab UI mein chhota change aata hai (e.g., ID badal gayi), traditional tests fail ho jaate hain. AI (via **self-healing**) page ka context read karta hai, naya element dhoondhta hai aur test ko pass karwata hai, jisse test "fragile" (nazuk) nahi rehta.
+- [[HL::**Q:** "Fragile UI automation" ko AI kaise fix karta hai?::HL]]
+- [[HL::**A:** Jab UI mein chhota change aata hai (e.g., ID badal gayi), traditional tests fail ho jaate hain. AI (via **self-healing**) page ka context read karta hai, naya element dhoondhta hai aur test ko pass karwata hai, jisse test "fragile" (nazuk) nahi rehta::HL]].
 - **Q:** Agar meri company cloud models allow nahi karti toh main AI automation kaise karunga?
 - **A:** Aap ek **local large language model** setup kar sakte hain using tools like Ollama. Yeh models locally aapke machine par execute hote hain, isliye koi proprietary data internet par nahi jata aur security maintain rehti hai.
-- **Q:** MCP servers (Model Context Protocol) ka testing mein kya role hai?
-- **A:** MCP servers AI model aur aapke external tools (jaise Chrome dev tools ya database) ke beech ek bridge ka kaam karte hain. Yeh AI ko exact, live context (jaise DOM tree ya API schema) feed karte hain taaki AI accurate code ya locator generate kar sake.
+- [[HL::**Q:** MCP servers (Model Context Protocol) ka testing mein kya role hai?::HL]]
+- [[HL::**A:** MCP servers AI model aur aapke external tools (jaise Chrome dev tools ya database) ke beech ek bridge ka kaam karte hain. Yeh AI ko exact, live context (jaise DOM tree ya API schema) feed karte hain taaki AI accurate code ya locator generate kar sake::HL]].
 
 #### 📝 18. One-Line Memory Hook
 "Yeh course basics sikhane ka school nahi hai — yeh tumhare Playwright aur Selenium code ko AI ka dimaag (self-healing) dene ki factory hai!"
@@ -133,34 +133,34 @@ Maan lo tum Google Maps use karke Delhi se Jaipur ja rahe ho. Achanak raste mein
 
 #### 📖 3. Technical Definition
 - **Precise English:** Self-healing in test automation is an AI-driven mechanism where the test execution dynamically identifies alternative locators using a Large Language Model when the original locator throws a "no such element" exception, thereby preventing the test from abruptly failing.
-- **Hinglish Simplification:** Jab test chalte waqt element apni jagah par na mile, toh test fail hone ke bajaye AI ko bulata hai, AI page scan karke naya element dhoondhta hai aur test ko aage badhata hai.
+- [[HL::**Hinglish Simplification:** Jab test chalte waqt element apni jagah par na mile, toh test fail hone ke bajaye AI ko bulata hai, AI page scan karke naya element dhoondhta hai aur test ko aage badhata hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Developers aksar page UI update karte hain (IDs ya classes change karte hain), jisse purana locator ek **obsolete look error** ya exception fekta hai. Ise **breaking change** kehte hain aur isse **fragile UI** ki problem aati hai.
-- **Solution:** **Self-healing test** is problem ko resolve karta hai by dynamically finding a working alternative.
+- [[HL::**Problem:** Developers aksar page UI update karte hain (IDs ya classes change karte hain), jisse purana locator ek **obsolete look error** ya exception fekta hai. Ise **breaking change** kehte hain aur isse **fragile UI** ki problem aati hai.::HL]]
+- [[HL::**Solution:** **Self-healing test** is problem ko resolve karta hai by dynamically finding a working alternative::HL]].
 - **What breaks if we don't use it?** Har chhote UI change par poora automation suite laal (fail) ho jayega, CI/CD pipeline ruk jayegi, aur manual intervention ki zaroorat padegi.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 Project folder ke root mein ek nayi JSON file automatically generate hui dikhegi:
 ```json
-// healed_locators.json (healed locator JSON file)
-{
-  "login_button": {
-    "broken_locator": "//button[@id='btn-login-old']",
-    "working_locator": "//button[text()='Sign In']",
-    "timestamp": "2026-04-18T20:25:00Z"
-  }
-}
+[[HL::// healed_locators.json (healed locator JSON file)::HL]]
+[[HL::{::HL]]
+[[HL::  "login_button": {::HL]]
+[[HL::    "broken_locator": "//button[@id='btn-login-old']",::HL]]
+[[HL::    "working_locator": "//button[text()='Sign In']",::HL]]
+[[HL::    "timestamp": "2026-04-18T20:25:00Z"::HL]]
+[[HL::  }::HL]]
+[[HL::}::HL]]
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-Jab **login page** par test run hota hai jisme **scrambled locators** (jaan-bhoojh kar galat kiye hue locators) hote hain, tab flow yeh hota hai:
-1. **Original locator** fail hota hai (DOM mein nahi milta).
-2. Framework turant exception catch karta hai aur ek custom **AI find element** function ko trigger karta hai.
-3. Yeh function current DOM structure **large language model** (specifically **OpenAI model**) ko bhejta hai prompt ke saath: "Bhai, 'login' button dhoondh do is HTML mein."
-4. AI analyze karke kareeb **15 seconds** baad ek **alternative locator** (the **working locator**) return karta hai.
-5. Framework is naye locator se element click karta hai.
-6. Execution khatam hone ke baad, result ek **healed locator JSON file** mein save ho jata hai aur dev team ko **Slack** `(team messaging app)` par alert chala jata hai.
+[[HL::Jab **login page** par test run hota hai jisme **scrambled locators** (jaan-bhoojh kar galat kiye hue locators) hote hain, tab flow yeh hota hai:::HL]]
+1. [[HL::**Original locator** fail hota hai (DOM mein nahi milta).::HL]]
+2. [[HL::Framework turant exception catch karta hai aur ek custom **AI find element** function ko trigger karta hai.::HL]]
+3. [[HL::Yeh function current DOM structure **large language model** (specifically **OpenAI model**) ko bhejta hai prompt ke saath: "Bhai, 'login' button dhoondh do is HTML mein."::HL]]
+4. [[HL::AI analyze karke kareeb **15 seconds** baad ek **alternative locator** (the **working locator**) return karta hai.::HL]]
+5. [[HL::Framework is naye locator se element click karta hai.::HL]]
+6. [[HL::Execution khatam hone ke baad, result ek **healed locator JSON file** mein save ho jata hai aur dev team ko **Slack** `(team messaging app)` par alert chala jata hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 *Yahan ek conceptual Python Selenium code hai jo Page Object Model aur AI find element ko demonstrate karta hai:*
@@ -220,12 +220,12 @@ Jab **login page** par test run hota hai jisme **scrambled locators** (jaan-bhoo
 Jab aap DOM HTML ko **OpenAI model** ko bhejte hain, dhyaan rahe ki usme personally identifiable information (PII) ya sensitive banking details (jaise account numbers) na hon. Data bhejne se pehle DOM ko sanitize karna (sensitive text remove karna) best practice hai.
 
 #### 🏗️ 9. Scalability & Industry Context
-Socho 1000 tests run ho rahe hain. Agar har step par AI call kiya (jo **15 seconds** leta hai), toh execution hours mein chali jayegi. Isliye **caching** aur **persistency approach** critical hai. Ek baar element heal ho gaya, toh uska **cached locator** (ya **persistent locator**) JSON mein save ho jata hai. Next run mein JSON se **working locator** fetch hota hai bina AI delay ke.
+[[HL::Socho 1000 tests run ho rahe hain. Agar har step par AI call kiya (jo **15 seconds** leta hai), toh execution hours mein chali jayegi. Isliye **caching** aur **persistency approach** critical hai. Ek baar element heal ho gaya, toh uska **cached locator** (ya **persistent locator**) JSON mein save ho jata hai. Next run mein JSON se **working locator** fetch hota hai bina AI delay ke::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
-- **❌ Mistake:** Test fail hote hi execution abruptly stop kar dena.
-- **🤦 Why:** Isse pipeline block hoti hai aur developer ko manually fix karna padta hai.
-- **✅ The 'Pro' Way:** ⭐ **"don't fail the test"** aur ensure karo ki test ⭐ **"still continued executing"** using AI fallback and reporting the healed locators later.
+- **❌ [[HL::Mistake:** Test fail hote hi execution abruptly stop kar dena.::HL]]
+- [[HL::**🤦 Why:** Isse pipeline block hoti hai aur developer ko manually fix karna padta hai.::HL]]
+- [[HL::**✅ The 'Pro' Way:** ⭐ **"don't fail the test"** aur ensure karo ki test ⭐ **"still continued executing"** using AI fallback and reporting the healed locators later::HL]].
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 - **Confusion 1:** "Kya AI ne mere source code mein locator change kar diya?" → Nahi! AI ne runtime par element dhundha aur ek JSON (**healed locator JSON file**) mein log kiya. Aapka actual `login_page.py` ka source code dev hi change karega us JSON ko dekh kar.
@@ -236,19 +236,19 @@ Socho 1000 tests run ho rahe hain. Agar har step par AI call kiya (jo **15 secon
 - Error: `NoSuchElementException` phir bhi aa rahi hai? -> DOM completely redesign ho chuka hai (not just a minor **obsolete look error**). Ab **alternative locator** available hi nahi hai, code update required.
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
-| Feature | Standard Page Object Model | AI-Powered POM |
+| [[HL::Feature | Standard Page Object Model | AI-Powered POM::HL]] |
 |---|---|---|
-| Broken Locator Handle | Fails the test immediately | Uses **AI find element**, heals, continues |
-| Execution Time (Error case) | 1 second (Fail) | **15 seconds** delay to heal |
+| [[HL::Broken Locator Handle | Fails the test immediately | Uses **AI find element**, heals, continues::HL]] |
+| [[HL::Execution Time (Error case) | 1 second (Fail) | **15 seconds** delay to heal::HL]] |
 | CI/CD Pipeline Impact | Pipeline breaks | Pipeline passes with warnings/alerts to **Slack** |
 
 #### 🌍 14. Real-World Use Case (Production Application)
-Amazon jaisi e-commerce sites A/B testing ke liye "Add to Cart" button ka `class` lagatar change karti rehti hain. Wahan QA team AI automation use karti hai. Jab bhi button ki class badalti hai (**breaking change**), AI text aur DOM tree read karke button click kar deta hai, aur sham ko dev team ko **Slack** pe bata deta hai ki "Aaj 4 locators heal kiye the."
+[[HL::Amazon jaisi e-commerce sites A/B testing ke liye "Add to Cart" button ka `class` lagatar change karti rehti hain. Wahan QA team AI automation use karti hai. Jab bhi button ki class badalti hai (**breaking change**), AI text aur DOM tree read karke button click kar deta hai, aur sham ko dev team ko **Slack** pe bata deta hai ki "Aaj 4 locators heal kiye::HL]] the."
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
-- **Testing/Offline Phase:** Tester ne **login page** ke liye script likhi. Kuch din baad UI team ne intentionally ya galti se **scrambled locators** push kar diye (e.g., ID change kar di).
-- **Live Production Phase (Test Run):** Jenkins pe test run hota hai. **Original locator** toot jata hai. Test fail nahi hota (⭐ **"don't fail the test"**), AI **15 seconds** lekar **working locator** nikalta hai aur execution poori karta hai (⭐ **"still continued executing"**). Result ek JSON aur **Slack** pe push hota hai.
-- **Fixing/Iteration Phase:** Agle run se pehle, test JSON se **cached locator** (jo ab ek **persistent locator** ban chuka hai) uthata hai (**caching/persistency approach**). Dev baad mein us JSON ko dekh kar actual repository mein **broken locator** ko replace kar deta hai.
+- [[HL::**Testing/Offline Phase:** Tester ne **login page** ke liye script likhi. Kuch din baad UI team ne intentionally ya galti se **scrambled locators** push kar diye (e.g., ID change kar di).::HL]]
+- [[HL::**Live Production Phase (Test Run):** Jenkins pe test run hota hai. **Original locator** toot jata hai. Test fail nahi hota (⭐ **"don't fail the test"**), AI **15 seconds** lekar **working locator** nikalta hai aur execution poori karta hai (⭐ **"still continued executing"**). Result ek JSON aur **Slack** pe push hota hai.::HL]]
+- [[HL::**Fixing/Iteration Phase:** Agle run se pehle, test JSON se **cached locator** (jo ab ek **persistent locator** ban chuka hai) uthata hai (**caching/persistency approach**). Dev baad mein us JSON ko dekh kar actual repository mein **broken locator** ko replace kar deta hai::HL]].
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 ```text
@@ -269,17 +269,17 @@ Amazon jaisi e-commerce sites A/B testing ke liye "Add to Cart" button ka `class
 [ Test ⭐ "still continued executing" ] ---> (Sends Slack Alert later)
 ```
 
-#### ❓ 17. Interview Q&A (FAQ)
-- **Q:** "Self-healing test" concept exactly kya hai?
-- **A:** Yeh ek intelligent error handling mechanism hai. Jab traditional automation mein locator fail hota hai (jaise `NoSuchElementException`), toh test abruptly stop nahi hota. Woh page source ko AI model ko bhejta hai, AI ek alternative locator dhoondhta hai, test ko continue karta hai aur team ko notify karta hai.
-- **Q:** Self-healing mein "persistency approach" ya "caching" kyu use ki jati hai?
-- **A:** Large language models (jaise OpenAI) ko call karna slow (approx 15 seconds) aur expensive hota hai. Jab AI ek working locator dhoondh leta hai, toh use JSON file mein store (cache) kar lete hain. Taaki next test run mein, AI ko call karne ki bajaye directly us cached/persistent locator ko fast execute kiya ja sake.
-- **Q:** Agar self-healing sab theek kar deta hai, toh kya hume framework update karne ki zaroorat nahi?
-- **A:** Nahi, framework update karna zaroori hai. Self-healing ek temporary band-aid aur safety net hai taaki pipeline na tute. AI ek healed locator JSON file generate karta hai, jise dekh kar developers ko apne Page Object Model mein permanent changes (fix) karne hi padte hain.
-- **Q:** Is process ka CI/CD pipeline par kya fayda hai?
-- **A:** Minor UI changes ki wajah se (fragile UI) test suite false alarms generate nahi karta. Pipeline green (pass) rehti hai, releases block nahi hote (⭐"don't fail the test"), aur team ko report mil jati hai ki kis test ne heal hoke execution continue ki (⭐"still continued executing").
-- **Q:** AI alternative locator kaise find karta hai?
-- **A:** WebDriver page ka current DOM extract karta hai aur LLM ko prompt deta hai (e.g., "Find the xpath for a button with text 'Login' or similar intent"). LLM page structure aur semantic meaning analyze karke sabse best matching element ka XPath ya CSS selector return karta hai.
+#### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
+- [[HL::**Q:** "Self-healing test" concept exactly kya hai?::HL]]
+- [[HL::**A:** Yeh ek intelligent error handling mechanism hai. Jab traditional automation mein locator fail hota hai (jaise `NoSuchElementException`), toh test abruptly stop nahi hota. Woh page source ko AI model ko bhejta hai, AI ek alternative locator dhoondhta hai, test ko continue karta hai aur team ko notify karta hai.::HL]]
+- [[HL::**Q:** Self-healing mein "persistency approach" ya "caching" kyu use ki jati hai?::HL]]
+- [[HL::**A:** Large language models (jaise OpenAI) ko call karna slow (approx 15 seconds) aur expensive hota hai. Jab AI ek working locator dhoondh leta hai, toh use JSON file mein store (cache) kar lete hain. Taaki next test run mein, AI ko call karne ki bajaye directly us cached/persistent locator ko fast execute kiya ja sake.::HL]]
+- [[HL::**Q:** Agar self-healing sab theek kar deta hai, toh kya hume framework update karne ki zaroorat nahi?::HL]]
+- [[HL::**A:** Nahi, framework update karna zaroori hai. Self-healing ek temporary band-aid aur safety net hai taaki pipeline na tute. AI ek healed locator JSON file generate karta hai, jise dekh kar developers ko apne Page Object Model mein permanent changes (fix) karne hi padte hain.::HL]]
+- [[HL::**Q:** Is process ka CI/CD pipeline par kya fayda hai?::HL]]
+- [[HL::**A:** Minor UI changes ki wajah se (fragile UI) test suite false alarms generate nahi karta. Pipeline green (pass) rehti hai, releases block nahi hote (⭐"don't fail the test"), aur team ko report mil jati hai ki kis test ne heal hoke execution continue ki (⭐"still continued executing").::HL]]
+- [[HL::**Q:** AI alternative locator kaise find karta hai?::HL]]
+- [[HL::**A:** WebDriver page ka current DOM extract karta hai aur LLM ko prompt deta hai (e.g., "Find the xpath for a button with text 'Login' or similar intent"). LLM page structure aur semantic meaning analyze karke sabse best matching element ka XPath ya CSS selector return karta hai::HL]].
 
 #### 📝 18. One-Line Memory Hook
 "Test toota? Rona nahi, AI ko bulana, naya raasta nikalna aur test chalate rehna (Don't fail, still continue)!"
@@ -327,26 +327,26 @@ Bachpan mein newspaper mein "Spot the difference" (do pictures ke beech antar dh
 - **Hinglish Simplification:** Application ka UI kaisa dikh raha hai — colors, alignment aur styling — ise AI ke through automatically check karne ko visual testing kehte hain.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Normal automation code sirf **functionalities** test karta hai. Agar ek 'Submit' button page ke bahar chala gaya (CSS toot gayi), par woh DOM mein exist karta hai, toh standard test pass ho jayega — jabki user us par click hi nahi kar sakta!
-- **Solution:** **Visual testing** UI ka screenshot leti hai aur ensure karti hai ki cheezein waise hi dikh rahi hain jaisi dikhni chahiye.
+- [[HL::**Problem:** Normal automation code sirf **functionalities** test karta hai. Agar ek 'Submit' button page ke bahar chala gaya (CSS toot gayi), par woh DOM mein exist karta hai, toh standard test pass ho jayega — jabki user us par click hi nahi kar sakta!::HL]]
+- [[HL::**Solution:** **Visual testing** UI ka screenshot leti hai aur ensure karti hai ki cheezein waise hi dikh rahi hain jaisi dikhni chahiye::HL]].
 - **What breaks if we don't use it?** Application smoothly chalegi (no errors), par users ko toota hua, unaligned ya overlap hota hua layout dikhega, jisse brand ki image kharab hoti hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 `(N/A — yeh ek introductory preview topic hai, isme specific code ya editor visual nahi hai)`
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-Yeh concept do steps par nirbhar karta hai:
-1. **Baseline Creation:** Pehli baar jab test chalta hai, ek perfect screenshot save hota hai (baseline).
-2. **Vision Model Analysis:** Next runs mein, tool naya screenshot leta hai aur ek AI **vision model** (jaise GPT-4 Vision ya dedicated tools) ko bhejta hai. Yeh model dono images ko compare karta hai aur har ek **single pixel** ka difference analyze karke error highlight karta hai.
+[[HL::Yeh concept do steps par nirbhar karta hai:::HL]]
+1. [[HL::**Baseline Creation:** Pehli baar jab test chalta hai, ek perfect screenshot save hota hai (baseline).::HL]]
+2. [[HL::**Vision Model Analysis:** Next runs mein, tool naya screenshot leta hai aur ek AI **vision model** (jaise GPT-4 Vision ya dedicated tools) ko bhejta hai. Yeh model dono images ko compare karta hai aur har ek **single pixel** ka difference analyze karke error highlight karta hai::HL]].
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
 *Yeh purely conceptual topic hai (Depth Level: Surface) — Hands-On section ki jagah Concept Visualization de raha hoon:*
 
-**Visual Testing ka AI Flow:**
-1. Test execute hota hai aur page load hone par screenshot leta hai.
-2. Yeh image ek **vision model** ko bheji jati hai.
-3. Model us image ko baseline (purani perfect image) se milaata hai.
-4. Agar ek button 2 **pixel** bhi shift hua hai, ya color blue se red ho gaya hai (jabki **functionalities** same hain), toh model fail ka flag raise karta hai aur difference ka visual overlay (red marks) dikhata hai.
+[[HL::**Visual Testing ka AI Flow:**::HL]]
+1. [[HL::Test execute hota hai aur page load hone par screenshot leta hai.::HL]]
+2. [[HL::Yeh image ek **vision model** ko bheji jati hai.::HL]]
+3. [[HL::Model us image ko baseline (purani perfect image) se milaata hai.::HL]]
+4. [[HL::Agar ek button 2 **pixel** bhi shift hua hai, ya color blue se red ho gaya hai (jabki **functionalities** same hain), toh model fail ka flag raise karta hai aur difference ka visual overlay (red marks) dikhata hai::HL]].
 
 #### 🔒 8. Security-First Check
 Jab aap app ke screenshots **vision model** (jo cloud par ho sakta hai) ko bhejte hain, toh dhyan rakhein ki us page par live customer ka data ya passwords na dikh rahe hon. Sensitive areas ko image bhejne se pehle "mask" (blackout) karna zaroori hota hai.
@@ -474,7 +474,7 @@ Socho tum roz ola/uber (API) se office jaate ho. Har kilometer ka paisa lagta ha
 
 #### 📖 3. Technical Definition
 - **Precise English:** Ollama is an open-source tool that allows developers to run, manage, and interact with open-weight Large Language Models locally on their own machines, completely avoiding external API costs.
-- **Hinglish Simplification:** Ollama ek aisa software hai jiske through aap bade AI models ko apne laptop ya computer par free mein chala sakte ho, bina kisi internet API ko paise diye.
+- [[HL::**Hinglish Simplification:** Ollama ek aisa software hai jiske through aap bade AI models ko apne laptop ya computer par free mein chala sakte ho, bina kisi internet API ko paise diye::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 - **Problem:** Agar aap apne automation tests mein OpenAI ya kisi aur **API platform** ko use karte ho, toh har prompt aur response par tokens count hote hain. Production mein millions of tests run karne par yeh **openai.com** ya **Cloud Anthropic Platform** `(Claude models banane wali company)` ko **"so much of money"** dene ke barabar ho jayega.
@@ -490,11 +490,11 @@ Socho tum roz ola/uber (API) se office jaate ho. Har kilometer ka paisa lagta ha
 **The LLM Hosting Landscape:**
 1. **Cloud Hosted (Paid):** Yahan aap **API login** karte ho aur models use karte ho jaise **Google Gemini platform** `(Google ka AI platform)`, openai.com, etc. Har API call ka paisa lagta hai.
 2. **Local Hosted (Free with Ollama):** Aap Ollama download karte ho. Yeh sabhi major OS ko support karta hai — **Mac OS**, **Linux**, aur **Windows**.
-3. **Available Models:** Aap alag alag capabilities wale models locally chala sakte ho:
-   - Text/Reasoning: **deep C R1** `(DeepSeek-R1 — advanced reasoning model)`, **Lama** `(Meta ka Llama model)`, **Lambda theta r2** `(Llama 3.2 ka transcript error name)`, **Mistral quan Qn 2.5** `(Mistral Qwen 2.5)`
-   - Special Purpose: **vision** models `(images dekhne ke liye)` aur **embedding** models `(text ko numbers/vectors mein convert karne ke liye)`
+3. [[HL::**Available Models:** Aap alag alag capabilities wale models locally chala sakte ho:::HL]]
+   - [[HL::Text/Reasoning: **deep C R1** `(DeepSeek-R1 — advanced reasoning model)`, **Lama** `(Meta ka Llama model)`, **Lambda theta r2** `(Llama 3.2 ka transcript error name)`, **Mistral quan Qn 2.5** `(Mistral Qwen 2.5)`::HL]]
+   - [[HL::Special Purpose: **vision** models `(images dekhne ke liye)` aur **embedding** models::HL]] `(text ko numbers/vectors mein convert karne ke liye)`
    - **Tool support:** Kuch models specially external tools (jaise web search, calculator) connect karne ke liye optimized hote hain (e.g., **3.3 70 billion parameter** wala Llama model).
-   - *Hardware edge-case:* Chhote models yahan tak ki ek **Pi four** `(Raspberry Pi 4 — ek chhota credit-card sized computer)` par bhi chal sakte hain!
+   - [[HL::*Hardware edge-case:* Chhote models yahan tak ki ek **Pi four** `(Raspberry Pi 4 — ek chhota credit-card sized computer)` par bhi chal sakte hain::HL]]!
 
 #### 🔒 8. Security-First Check
 Company ka proprietary testing code ya internal API data (jaise **API** keys ya user data) OpenAI ko bhejna data breach ho sakta hai. Local LLMs ensure karte hain ki aapka data aapki machine se bahar nahi jata (100% data privacy).
@@ -503,9 +503,9 @@ Company ka proprietary testing code ya internal API data (jaise **API** keys ya 
 Local execution DevOps pipelines (jaise Jenkins/GitLab) ke andar isolated network environments mein AI laane ka best tarika hai. Aap containerized local models ko multiple build agents par scale kar sakte ho bina cloud costs kiye.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
-- **❌ Mistake:** Har choti testing task ke liye seedha GPT-4 (paid **API**) use karna.
-- **🤦 Why:** Isse bahut jaldi **money** burn hota hai aur internet latency (delay) aati hai.
-- **✅ The 'Pro' Way:** Basic data parsing aur code generation ke liye Ollama ke through local models use karo.
+- **❌ [[HL::Mistake:** Har choti testing task ke liye seedha GPT-4 (paid **API**) use karna.::HL]]
+- [[HL::**🤦 Why:** Isse bahut jaldi **money** burn hota hai aur internet latency (delay) aati hai.::HL]]
+- [[HL::**✅ The 'Pro' Way:** Basic data parsing aur code generation ke liye Ollama ke through local models use karo::HL]].
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 - **Confusion 1:** "Kya Ollama khud ek LLM hai?" → Nahi! Ollama ek 'engine' (runner) hai, jaise video game console. Models (Llama, DeepSeek) us console ke games hain jo aap alag se download karte ho.
@@ -553,10 +553,10 @@ Apple apni internal testing aur development mein external (OpenAI) APIs ka use r
 - **A:** Cloud platforms jaise OpenAI ya Anthropic per-token charge karte hain. Automated testing mein jahan hazaron logs analyze karne hote hain, wahan token consumption jaldi 1 million tokens cross kar leta hai. Local LLMs yeh recurring cost completely eliminate kar dete hain.
 - **Q:** Kya local models internet connection require karte hain?
 - **A:** Sirf pehli baar model weights download karne ke liye internet chahiye hota hai. Ek baar pull ho gaya, toh execution 100% offline hoti hai.
-- **Q:** Vision aur Embedding models mein kya antar hai?
-- **A:** Vision models images ko analyze karte hain (jaise screenshot testing ke liye). Embedding models text ko mathematical arrays (vectors) mein convert karte hain taaki similarity search ya RAG (Retrieval-Augmented Generation) perform kiya ja sake.
-- **Q:** Tool support model kya hota hai?
-- **A:** Yeh woh models hote hain (jaise Llama 3.3 70B) jinhe is tarah fine-tune kiya gaya hai ki woh sirf text reply nahi karte, balki JSON format mein external functions/APIs ko call karne ke instructions (arguments) generate kar sakte hain.
+- [[HL::**Q:** Vision aur Embedding models mein kya antar hai?::HL]]
+- [[HL::**A:** Vision models images ko analyze karte hain (jaise screenshot testing ke liye). Embedding models text ko mathematical arrays (vectors) mein convert karte hain taaki similarity search ya RAG (Retrieval-Augmented Generation) perform kiya ja sake::HL]].
+- [[HL::**Q:** Tool support model kya hota hai?::HL]]
+- [[HL::**A:** Yeh woh models hote hain (jaise Llama 3.3 70B) jinhe is tarah fine-tune kiya gaya hai ki woh sirf text reply nahi karte, balki JSON format mein external functions/APIs ko call karne ke instructions (arguments) generate kar sakte hain::HL]].
 - **Q:** Kya main Windows aur Mac dono par Ollama use kar sakta hoon?
 - **A:** Haan, Ollama cross-platform hai. Yeh natively Mac OS, Linux, aur Windows (via native installer ya WSL) ko support karta hai.
 
@@ -584,7 +584,7 @@ Agar tum badi team ko chhote kamre mein ghusaoge (kam RAM), toh system crash ho 
 
 #### 📖 3. Technical Definition
 - **Precise English:** Model parameters represent the internal weights and biases learned during training. Larger parameter counts increase logic capabilities but linearly increase the required GPU/CPU RAM and processing power for inferencing.
-- **Hinglish Simplification:** Parameters AI ka dimaag hote hain. Jitne zyada parameters (billions mein), AI utna smart hoga, lekin use chalane ke liye utni hi zyada RAM aur powerful graphic card chahiye.
+- [[HL::**Hinglish Simplification:** Parameters AI ka dimaag hote hain. Jitne zyada parameters (billions mein), AI utna smart hoga, lekin use chalane ke liye utni hi zyada RAM aur powerful graphic card chahiye::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 - **Problem:** Aap soch sakte ho ki main sabse bada model (e.g., **llama 3.1 405 billion**) download kar lun, par use chalane ke liye **processing power** aur **Ram power** chahiye jo normal laptops mein nahi hoti.
@@ -597,7 +597,7 @@ Agar tum badi team ko chhote kamre mein ghusaoge (kam RAM), toh system crash ho 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 Deep dive into **Transformer model** `(AI architecture jo context samajhne mein master hai)` metrics:
 1. **Model Weights:** Ek standard LLM FP16 (16-bit float) mein save hota hai. Matlab har 1 Billion parameter = ~2GB file size/RAM.
-2. **Quantization Concept:** Models ko compress kiya jata hai. **Quantization version two** (jaise 4-bit quantization) accuracy thodi kam karta hai par size drastically ghata deta hai. Example: **7 billion parameter** model normally 14GB ka hoga, par quantization ke baad sirf **4.7 gig** space leta hai!
+2. [[HL::**Quantization Concept:** Models ko compress kiya jata hai. **Quantization version two** (jaise 4-bit quantization) accuracy thodi kam karta hai par size drastically ghata deta hai. Example: **7 billion parameter** model normally 14GB ka hoga, par quantization ke baad sirf **4.7 gig** space leta hai::HL]]!
 3. **Internal Architecture:** Models attention mechanism use karte hain (jiski configuration **total head count 28** aur **head count KB 128** jaise metrics se define hoti hai) jo directly aapki **CPU power** aur **GPU power** consume karti hai.
 
 #### 💡 7. Concept Visualization & Interactive Tool
@@ -663,8 +663,8 @@ Model Size      Quantized Size    Required Hardware
 ```
 
 #### ❓ 17. Interview Q&A (FAQ)
-- **Q:** Transformer model mein parameters ka exactly kya matlab hota hai?
-- **A:** Parameters woh numerical weights aur biases hote hain jo neural network ne apne training phase mein seekhe hote hain. Zyada parameters matlab network ke paas zyada "knowledge" aur complex patterns samajhne ki power hai, isliye 70B model 8B se hamesha zyada smart hota hai.
+- **Q:** [[HL::Transformer model mein parameters ka exactly kya matlab hota hai?::HL]]
+- [[HL::**A:** Parameters woh numerical weights aur biases hote hain jo neural network ne apne training phase mein seekhe hote hain. Zyada parameters matlab network ke paas zyada "knowledge" aur complex patterns samajhne ki power hai, isliye 70B model 8B se hamesha zyada smart hota hai::HL]].
 - **Q:** Quantization kaise kaam karta hai aur iska kya faayda hai?
 - **A:** Quantization model ke weights ki precision ko kam karta hai (e.g., 16-bit floating point se 4-bit integer tak). Isse model ka size drastically shrink ho jata hai (jaise 14GB se 4.7 GB). Faayda yeh hai ki yeh chhote consumer GPUs (jaise RTX 2080) par fit ho jata hai.
 - **Q:** Chhote models use karne ka sabse bada risk kya hai?
@@ -757,10 +757,10 @@ Yahan hum **hyper terminal** `(ek modern command-line application)` use karke mo
 
 **Scenario 1: Running a small, non-reasoning model**
 ```bash
-1  olama list                            # olama list = dekho pehle se kaunse models downloaded hain
-2  olama run qwen:1.8b                   # olama run = model download aur start karo; qwen:1.8b = Alibaba Cloud ka ek bahut chhota model (transcript mein QN1:1.8 billion)
-3  # Model prompt open hone ke baad aapne type kiya:
-4  >>> write a selenium Python code to open google.com  # Prompt = ChatGPT prompt jaisa sawal poochna
+1  [[HL::olama list                            # olama list = dekho pehle se kaunse models downloaded hain::HL]]
+[[HL::2  olama run qwen:1.8b                   # olama run = model download aur start karo; qwen:1.8b = Alibaba Cloud ka ek bahut chhota model (transcript mein QN1:1.8 billion)::HL]]
+[[HL::3  # Model prompt open hone ke baad aapne type kiya:::HL]]
+[[HL::4  >>> write a selenium Python code to open google.com  # Prompt = ChatGPT prompt jaisa sawal poochna::HL]]
 ```
 
 ```text
@@ -790,9 +790,9 @@ from selenium import webdriver
 driver = webdriver.Chrome()
 driver.get("https://www.google.com")
 ```
-##### 🔬 Command Explanation Rule (LINE-BY-LINE)
-- **`olama list`:** Yeh aapki local registry dikhata hai (jaise `docker images`). Yeh check karne ke liye zaroori hai ki disk space kahan ja rahi hai.
-- **`/bye`:** Yeh bahut important command hai. Agar aap `/bye` type nahi karte aur `Ctrl+C` dabate ho, toh kabhi kabhi model memory (RAM) mein hang reh jata hai. Isliye gracefully exit karna zaroori hai.
+##### 🔬 [[HL::Command Explanation Rule (LINE-BY-LINE)::HL]]
+- [[HL::**`olama list`:** Yeh aapki local registry dikhata hai (jaise `docker images`). Yeh check karne ke liye zaroori hai ki disk space kahan ja rahi hai.::HL]]
+- [[HL::**`/bye`:** Yeh bahut important command hai. Agar aap `/bye` type nahi karte aur `Ctrl+C` dabate ho, toh kabhi kabhi model memory (RAM) mein hang reh jata hai. Isliye gracefully exit karna zaroori hai::HL]].
 
 #### 🔒 8. Security-First Check
 `(N/A — is concept mein direct security surface nahi hai, local execution completely secure hoti hai kyunki data internet par nahi jata)`
@@ -844,10 +844,10 @@ QA Engineers daily apne **PyCharm** mein test likhte hain. Jab unhe complex **pl
 #### ❓ 17. Interview Q&A (FAQ)
 - **Q:** Local code generation ke waqt chhote models (like 1.8B) kya mistake karte hain?
 - **A:** Chhote models ke paas sufficient "world knowledge" aur logical depth nahi hoti. Agar aap unse Selenium WebDriver ka code mangenge, toh woh context loose karke `requests` ya `urllib` jaisi basic HTML fetching libraries ka galat code generate kar dete hain.
-- **Q:** Ek 'reasoning model' standard LLM se kaise alag behave karta hai?
-- **A:** Reasoning models (jaise DeepSeek-R1 ya OpenAI o1) answer generate karne se pehle ek internal "Chain of Thought" (thinking process) execute karte hain. Woh problem ko steps mein todte hain, `<think>` tags ke andar plan banate hain, aur phir final accurate code output karte hain.
-- **Q:** Terminal se model chat ko gracefully exit karne ki command kya hai aur kyun zaroori hai?
-- **A:** Command `/bye` (ya slash by) hai. Ise use karne se Ollama safely model ko memory se unload kar deta hai aur process ko clean up kar deta hai. `Ctrl+C` use karne se kabhi kabhi background thread hang reh sakti hai.
+- [[HL::**Q:** Ek 'reasoning model' standard LLM se kaise alag behave karta hai?::HL]]
+- [[HL::**A:** Reasoning models (jaise DeepSeek-R1 ya OpenAI o1) answer generate karne se pehle ek internal "Chain of Thought" (thinking process) execute karte hain. Woh problem ko steps mein todte hain, `<think>` tags ke andar plan banate hain, aur phir final accurate code output karte hain.::HL]]
+- [[HL::**Q:** Terminal se model chat ko gracefully exit karne ki command kya hai aur kyun zaroori hai?::HL]]
+- [[HL::**A:** Command `/bye` (ya slash by) hai. Ise use karne se Ollama safely model ko memory se unload kar deta hai aur process ko clean up kar deta hai. `Ctrl+C` use karne se kabhi kabhi background thread hang reh sakti hai::HL]].
 - **Q:** Ollama mein 'manifest' file ka kya role hota hai?
 - **A:** Jab aap koi naya model pull karte ho, toh sabse pehle manifest file download hoti hai. Yeh ek configuration file hai (just like a Docker image manifest) jo batati hai ki is model ke weights kahan hain, iska architecture kya hai, aur kitne layers download hone baaki hain.
 - **Q:** Kya main ek hi time par alag alag terminals mein Python aur JavaScript code maang sakta hoon?
@@ -1036,8 +1036,8 @@ Terminal/CLI ko ek manual car (gear wali gaadi) samjho — powerful hai, par cha
 - **Hinglish Simplification:** Terminal commands likhne ke bajaye, ek normal chat app (jaise WhatsApp ya ChatGPT) download karke apne local AI model se chat karne ka tarika.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Har user (khaskar non-developers ya manual testers) CLI use karne mein comfortable nahi hota. Terminal mein lambe code snippets copy-paste karna mushkil hota hai aur chat history maintain nahi rehti.
-- **Solution:** **GUI interface** tools jaise **Misty dot app** (Msty) ya **GPT for all I o** (GPT4All) install karna jo backend mein Ollama ko use karte hain.
+- **Problem:** [[HL::Har user (khaskar non-developers ya manual testers) CLI use karne mein comfortable nahi hota. Terminal mein lambe code snippets copy-paste karna mushkil hota hai aur chat history maintain nahi rehti.::HL]]
+- [[HL::**Solution:** **GUI interface** tools jaise **Misty dot app** (Msty) ya **GPT for all I o** (GPT4All) install karna jo backend mein Ollama ko use karte hain::HL]].
 - **What breaks if we don't use it?** Teams ki productivity slow ho jayegi kyunki non-technical log terminal commands se darenge aur locally AI adopt nahi kar payenge.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -1144,8 +1144,8 @@ Ek QA engineer ek highly secure flight mein travel kar raha hai jahan Wi-Fi nahi
 - **A:** GUI tools accessibility improve karte hain. Woh multi-chat history maintain karte hain, formatted code blocks (syntax highlighting) dete hain, aur vision models ke liye image drag-and-drop feature support karte hain jo CLI mein karna bahut complex hota hai.
 - **Q:** Kya GUI tools run karne ke liye internet chahiye hota hai?
 - **A:** Nahi. Speaker ne zor diya hai ki aap ⭐"stop the internet" karke bhi inhe use kar sakte hain. Internet sirf pehli baar app aur models download karne ke liye chahiye. Uske baad execution 100% offline hoti hai.
-- **Q:** GUI app aur Ollama ke beech communication kaise hota hai?
-- **A:** GUI app local system par hi Ollama ke REST API server (`localhost:11434`) par HTTP POST requests bhejti hai. Msty frontend hai aur Ollama uska backend engine.
+- [[HL::**Q:** GUI app aur Ollama ke beech communication kaise hota hai?::HL]]
+- [[HL::**A:** GUI app local system par hi Ollama ke REST API server (`localhost:11434`) par HTTP POST requests bhejti hai. Msty frontend hai aur Ollama uska backend engine::HL]].
 - **Q:** Vision models GUI mein kaise use hote hain?
 - **A:** Vision models (jaise LLaVA) images ko input ke roop mein accept karte hain. GUI apps mein aap UI screenshot attach karke prompt de sakte hain "Find the login button in this image", aur model image ko locally process karke answer dega.
 - **Q:** Agar meri company ChatGPT allow nahi karti, toh kya local GUI use karna compliance-friendly hai?
@@ -1172,7 +1172,7 @@ Ollama ko ek local restaurant ka kitchen samjho. Jab tum terminal use karte ho, 
 
 #### 📖 3. Technical Definition
 - **Precise English:** Ollama runs a local HTTP REST API server on port 11434, allowing external scripts, frameworks (like LangChain), and tools like Postman to interact programmatically with downloaded large language models via JSON payloads.
-- **Hinglish Simplification:** Ollama background mein ek local web server chalata hai taaki aapki programming language (Python/JS) sidhe HTTP request bhej kar AI model se text generate karwa sake.
+- [[HL::**Hinglish Simplification:** Ollama background mein ek local web server chalata hai taaki aapki programming language (Python/JS) sidhe HTTP request bhej kar AI model se text generate karwa sake::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 - **Problem:** AI-driven automation framework (jaise Playwright/Selenium integration) command line (terminal) mein type karke run nahi ho sakta. Software ko software se baat karne ka ek standard tarika chahiye.
@@ -1198,24 +1198,24 @@ Jab aap Ollama install karte ho:
 1  import requests                              # requests = (Python library — HTTP REST calls karne ke liye)
 2  import json                                  # json = python dictionary ko JSON string mein convert/parse karne ke liye
 3
-4  # Step 1: Define API endpoint (localhost 11434 API)
-5  url = "http://localhost:11434/api/generate"  # url = /api/generate endpoint jo text generate karega
-6
-7  # Step 2: Create JSON Payload (POST operation body)
-8  payload = {                                  # payload = data jo hum server ko bhejenge
-9      "model": "llama3.2",                     # model = kis model se answer chahiye (e.g., llama 3.2)
-10     "prompt": "why is sky blue",             # prompt = humara sawal ("why is sky blue")
-11     "stream": False                          # stream = ⭐stream as false (poora answer ek sath chahiye, chunks mein nahi)
-12 }
+4  # [[HL::Step 1: Define API endpoint (localhost 11434 API)::HL]]
+[[HL::5  url = "http://localhost:11434/api/generate"  # url = /api/generate endpoint jo text generate karega::HL]]
+[[HL::6::HL]]
+[[HL::7  # Step 2: Create JSON Payload (POST operation body)::HL]]
+[[HL::8  payload = {                                  # payload = data jo hum server ko bhejenge::HL]]
+[[HL::9      "model": "llama3.2",                     # model = kis model se answer chahiye (e.g., llama 3.2)::HL]]
+[[HL::10     "prompt": "why is sky blue",             # prompt = humara sawal ("why is sky blue")::HL]]
+[[HL::11     "stream": False                          # stream = ⭐stream as false (poora answer ek sath chahiye, chunks mein nahi)::HL]]
+[[HL::12::HL]] }
 13
 14 # Step 3: Hit the API and print response
 15 print("Sending request to Ollama... wait")
 16 response = requests.post(url, json=payload)  # requests.post() = actual HTTP call marna local server pe
 17 
 18 # Step 4: Parse the JSON response
-19 if response.status_code == 200:              # 200 = Success HTTP status code
-20     response_data = response.json()          # json() = text string ko proper dictionary banata hai
-21     print("\n🤖 AI Reply:\n", response_data["response"]) # "response" key mein actual text hota hai
+19 if resp[[HL::onse.status_code == 200:              # 200 = Success HTTP status code::HL]]
+[[HL::20     response_data = response.json()          # json() = text string ko proper dictionary banata hai::HL]]
+[[HL::21     print("\n🤖 AI Reply:\n", response_data["response"]) # "response" key mein actual text hota hai::HL]]
 22 else:
 23     print("Error:", response.text)
 ```
@@ -1230,7 +1230,7 @@ Sending request to Ollama... wait
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 - **Line 5:** `http://localhost:11434/api/generate` — Yeh official endpoint hai text generation ke liye. Agar yahan `/api/chat` likhte toh chat format mein array dena padta.
-- **Line 11:** `"stream": False` — ⭐ Speaker ne explicitly emphasize kiya hai ki yeh bahut zaroori hai! Agar aap ise `True` chhod doge (jo default hai), toh server data ka chhota **chunk** bhejna shuru kar dega (jaise `{"response":"The"}`, phir `{"response":"sky"}`). Code usko easily parse nahi kar payega. `False` karne se API rukega, wait karega, aur poora text ek hi JSON mein dega.
+- [[HL::**Line 11:** `"stream": False` — ⭐ Speaker ne explicitly emphasize kiya hai ki yeh bahut zaroori hai! Agar aap ise `True` chhod doge (jo default hai), toh server data ka chhota **chunk** bhejna shuru kar dega (jaise `{"response":"The"}`, phir `{"response":"sky"}`). Code usko easily parse nahi kar payega. `False` karne se API rukega, wait karega, aur poora text ek hi JSON mein dega::HL]].
 
 #### 🔒 8. Security-First Check
 Ollama by default sirf `localhost` (127.0.0.1) ki requests accept karta hai. Agar aapne configuration change karke `OLLAMA_HOST=0.0.0.0` set kar diya, toh network (IP address) pe connected koi bhi insaan aapke models run kar sakta hai bina authentication ke (kyunki Ollama API mein password nahi hota). Hamesha ise localhost tak limited rakhein unless strict firewall setup ho.
@@ -1345,12 +1345,12 @@ Total keywords across all subtopics in this topic: 18
 ==================================================================================
 
 
-### section 3. Fundamentals Understanding Prompt Engineering, Context Engineering & Vibe Code (Selenium: Python, Playwright: JavaScript)
+### [[HL::section 3. Fundamentals Understanding Prompt Engineering, Context Engineering & Vibe Code (Selenium: Python, Playwright: JavaScript)::HL]]
 
 
-**Section 3: Fundamentals Understanding Prompt Engineering, Context Engineering & Vibe Code**
+[[HL::**Section 3: Fundamentals Understanding Prompt Engineering, Context Engineering & Vibe Code**::HL]]
 
-Is section mein hum automation testing ka naya era explore karenge. Traditional coding se aage badhkar, AI aur Large Language Models ko use karke smart, self-healing frameworks kaise banaye jaate hain, hum woh step-by-step khelenge.
+[[HL::Is section mein hum automation testing ka naya era explore karenge. Traditional coding se aage badhkar, AI aur Large Language Models ko use karke smart, self-healing frameworks kaise banaye jaate hain, hum woh step-by-step khelenge::HL]].
 
 ### 🎬 Video 1: Fundamentals of Prompt and Context Engineering
 *(Is video mein hum prompt engineering, context engineering, aur AI agents ke core fundamentals aur unka practical usage samjhenge, specifically Selenium aur Playwright ke context mein.)*
@@ -1364,29 +1364,29 @@ Socho tum ek restaurant mein gaye ho. Waiter ko bolna "Kuch badhiya khila do" ek
 
 #### 📖 3. Technical Definition
 - **Precise English:** The foundational process of designing optimal instructions (prompts) and providing relevant environmental data (context) to guide AI agents and large language models in generating accurate, self-healing automation test code.
-- **Hinglish Simplification:** AI ko sahi instruction dena (prompt) aur background details dena (context) taaki woh hamare liye perfect aur error-free automation code likh sake.
+- [[HL::**Hinglish Simplification:** AI ko sahi instruction dena (prompt) aur background details dena (context) taaki woh hamare liye perfect aur error-free automation code likh sake::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** AI ke paas duniya bhar ka knowledge hai, par tumhare specific project ka nahi. Bina context ke AI galat code (hallucination) dega.
-- **Solution:** In concepts ko use karke hum AI ko ek narrow, focused track pe late hain. Speaker kehta hai: ⭐ **"make sure that you understand these concepts very clearly"** kyunki yeh aage ke saare advanced topics ka base hai.
+- [[HL::**Problem:** AI ke paas duniya bhar ka knowledge hai, par tumhare specific project ka nahi. Bina context ke AI galat code (hallucination) dega.::HL]]
+- [[HL::**Solution:** In concepts ko use karke hum AI ko ek narrow, focused track pe late hain. Speaker kehta hai: ⭐ **"make sure that you understand these concepts very clearly"** kyunki yeh aage ke saare advanced topics ka base::HL]] hai.
 - **What breaks if we don't use it?** Tumhara AI generated code framework level code pe fail ho jayega aur manual debugging mein zyada time waste hoga.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 *(N/A — yeh purely conceptual topic hai, isme abhi code editor ki zarurat nahi hai)*
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. **User Request:** Developer ek natural language prompt likhta hai.
-2. **Context Addition:** Developer saath mein test case requirements document (ek file jisme test details hain) ya BDD test cases (human-readable test steps) AI ko feed karta hai.
-3. **AI Agents Processing:** Large language models (huge AI brains) us context ko padhte hain aur Vibe coding (AI-assisted flow) ke through framework level code generate karte hain.
+1. [[HL::**User Request:** Developer ek natural language prompt likhta hai.::HL]]
+2. [[HL::**Context Addition:** Developer saath mein test case requirements document (ek file jisme test details hain) ya BDD test cases (human-readable test steps) AI ko feed karta hai.::HL]]
+3. [[HL::**AI Agents Processing:** Large language models (huge AI brains) us context ko padhte hain aur Vibe coding (AI-assisted flow) ke through framework level code generate karte hain::HL]].
 4. **Self-Healing Code:** AI aisa automation test code banata hai jo minor UI changes aane par khud ko fix kar sake (self-healing code).
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
 *(Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.)*
 
-**Step-by-Step Flow:**
-1. **Raw Input:** Tumne bola "Login test likho". (Bad Prompt)
-2. **Engineered Input:** Tumne bola "Selenium Python mein login test likho." (Prompt Engineering)
-3. **Contextual Input:** Tumne bola "Yeh raha mera 'test case requirements document', iske basis pe Selenium Python mein login test likho." (Context Engineering)
+[[HL::**Step-by-Step Flow:**::HL]]
+1. [[HL::**Raw Input:** Tumne bola "Login test likho". (Bad Prompt)::HL]]
+2. [[HL::**Engineered Input:** Tumne bola "Selenium Python mein login test likho." (Prompt Engineering)::HL]]
+3. [[HL::**Contextual Input:** Tumne bola "Yeh raha mera 'test case requirements document', iske basis pe Selenium Python mein login test likho." (Context Engineering::HL]])
 4. **Agent Action:** AI Agents (smart autonomous bots) is request ko lete hain, BDD test cases (jaise Cucumber) generate karte hain, aur final automation test code output karte hain.
 
 #### 🔒 8. Security-First Check
@@ -1396,9 +1396,9 @@ Socho tum ek restaurant mein gaye ho. Waiter ko bolna "Kuch badhiya khila do" ek
 Large enterprise apps mein hazaron test cases hote hain. Har test manually likhna scalable nahi hai. Context engineering se hum AI ko poora requirement document ek saath dekar hundreds of test cases minutes mein generate karwa sakte hain.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
-- **❌ Mistake:** AI ko sirf ek line ka prompt dena ("write automation code").
-- **🤦 Why:** AI ko tumhara HTML structure aur framework rules pata hi nahi hain.
-- **✅ The 'Pro' Way:** Hamesha context provide karo (jaise HTML snippet ya requirement doc) taaki output 100% accurate aaye.
+- **❌ [[HL::Mistake:** AI ko sirf ek line ka prompt dena ("write automation code").::HL]]
+- [[HL::**🤦 Why:** AI ko tumhara HTML structure aur framework rules pata hi nahi hain.::HL]]
+- [[HL::**✅ The 'Pro' Way:** Hamesha context provide karo (jaise HTML snippet ya requirement doc) taaki output 100% accurate aaye::HL]].
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 - **Confusion 1:** "Prompt Engineering aur Context Engineering mein kya farq hai?" → Prompt tumhara *sawal* ya *instruction* hai (jaise: "Translate this"). Context tumhara *data* hai (jaise: "English to French, aur tone formal rakhna").
@@ -1416,7 +1416,7 @@ Large enterprise apps mein hazaron test cases hote hain. Har test manually likhn
 | **Requirements** | Syntax yaad rakhna padta hai | Logic aur clear prompts zaroori hain |
 
 #### 🌍 14. Real-World Use Case (Production Application)
-Companies jaise Netflix aur Spotify apne qa teams ko AI agents de rahi hain. QA engineer sirf **test case requirements document** AI ko deta hai, aur AI **framework level code** (page objects, test files) khud generate kar deta hai.
+[[HL::Companies jaise Netflix aur Spotify apne qa teams ko AI agents de rahi hain. QA engineer sirf **test case requirements document** AI ko deta hai, aur AI **framework level code** (page objects, test files) khud generate kar deta hai::HL]].
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 - **Testing/Offline Phase:** QA engineer ek test case ya BDD doc ready karta hai aur samajhta hai ki kaunse AI agents aur tools best rahenge.
@@ -1441,8 +1441,8 @@ Companies jaise Netflix aur Spotify apne qa teams ko AI agents de rahi hain. QA 
 - **A:** Vibe coding ek natural language driven development style hai. QA engineer manually syntax likhne ke bajaye AI se chat karta hai ("Click the login button, then verify the dashboard"). AI is 'vibe' ya intent ko actual test scripts mein convert karta hai.
 - **Q:** Self-healing code kya hota hai?
 - **A:** Self-healing code woh automation code hai jo agar element ka ID ya XPath change ho jaye, toh fail hone ke bajaye smartly dusre attributes (jaise name, text) se element ko dhundh leta hai. AI agents is process ko dynamically runtime pe handle kar sakte hain.
-- **Q:** BDD test cases ko AI ke saath kaise use kiya jata hai?
-- **A:** BDD (Behavior Driven Development) feature files human-readable hoti hain (Given, When, Then). Hum in files ko as a context AI ko feed karte hain, aur AI automatically inke corresponding Python/JavaScript step definitions aur Page Object functions generate kar deta hai.
+- **Q:** [[HL::BDD test cases ko AI ke saath kaise use kiya jata hai?::HL]]
+- [[HL::**A:** BDD (Behavior Driven Development) feature files human-readable hoti hain (Given, When, Then). Hum in files ko as a context AI ko feed karte hain, aur AI automatically inke corresponding Python/JavaScript step definitions aur Page Object functions generate kar deta hai::HL]].
 
 #### 📝 18. One-Line Memory Hook
 "⭐ **Make sure that you understand these concepts very clearly**: Prompt instruction hai, Context data hai, aur Vibe coding in dono ka magic hai!"
@@ -1468,61 +1468,61 @@ Maan lo tumhe ek naye shehar mein kisi ka ghar dhundhna hai. Agar tum kisi se si
 - **Hinglish Simplification:** AI ko aise clear instructions dena taaki woh internet pe ja kar website ka HTML code padhe aur hame locators ek clean JSON format (name, type, value) mein de.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** UI automation mein locators (XPath, IDs) nikalna sabse boring aur time-consuming task hai. 
-- **Solution:** Hum ChatGPT ya Claude Desktop (desktop app for Claude AI) jise Generative AI Models ko ek static instruction de sakte hain. AI khud multi-agent systems use karke website ko crawl karega aur saare locators nikal kar dega.
-- **What breaks if we don't use it?** Hume manually browser ka "Inspect Element" khol kar ek-ek username field aur password fields ka XPath copy karna padega.
+- [[HL::**Problem:** UI automation mein locators (XPath, IDs) nikalna sabse boring aur time-consuming task hai. ::HL]]
+- [[HL::**Solution:** Hum ChatGPT ya Claude Desktop (desktop app for Claude AI) jise Generative AI Models ko ek static instruction de sakte hain. AI khud multi-agent systems use karke website ko crawl karega aur saare locators nikal kar dega.::HL]]
+- [[HL::**What breaks if we don't use it?** Hume manually browser ka "Inspect Element" khol kar ek-ek username field aur password fields ka XPath copy karna padega::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```json
-// AI ka output Claude desktop mein kuch aaisa clean JSON dikhega:
-{
-  "locators": [
-    {"name": "username field", "type": "id", "value": "user_name_input"},
-    {"name": "password fields", "type": "css", "value": ".pass-input"}
+// [[HL::AI ka output Claude desktop mein kuch aaisa clean JSON dikhega:::HL]]
+[[HL::{::HL]]
+[[HL::  "locators": [::HL]]
+[[HL::    {"name": "username field", "type": "id", "value": "user_name_input"},::HL]]
+[[HL::    {"name": "password fields", "type": "css", "value": ".pass-input::HL]]"}
   ]
 }
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. **Static Instruction:** Tum Claude desktop mein ek clear prompt likhte ho ki tumhe ek login page ke locators chahiye.
-2. **Tool Invocation:** Sonnet 4.5 model (Anthropic ka ek powerful AI model) realize karta hai ki uske training data mein is current webpage ka HTML source code nahi hai.
-3. **Multi-Agent Systems:** AI agent internal web search tool invoke karta hai. 
-4. **Context Retrieval:** Web search tool live page pe ja kar HTML code lata hai (this is where context engineering mixes with prompt engineering).
+1. [[HL::**Static Instruction:** Tum Claude desktop mein ek clear prompt likhte ho ki tumhe ek login page ke locators chahiye.::HL]]
+2. [[HL::**Tool Invocation:** Sonnet 4.5 model (Anthropic ka ek powerful AI model) realize karta hai ki uske training data mein is current webpage ka HTML source code nahi hai.::HL]]
+3. [[HL::**Multi-Agent Systems:** AI agent internal web search tool invoke karta hai. ::HL]]
+4. [[HL::**Context Retrieval:** Web search tool live page pe ja kar HTML code lata hai (this is where context engineering mixes with prompt engineering::HL]]).
 5. **Schema Formatting:** AI data ko parse karta hai aur tumhare maange gaye JSON format schema mein pack karke result print karta hai.
 
 #### 💻 7. Hands-On — Runnable Example
 Yahan hum code nahi, balki ek actual **Prompt** aur uska **Expected JSON Output** dekh rahe hain, jo hum Claude Desktop mein use karenge.
 
 ```text
-1  # PROMPT ENGINEERING EXAMPLE:
-2  Act as an expert QA Automation Engineer.              # Role assign kiya
-3  Use your web search tool to visit 'example.com/login'. # Tool invocation instruction
-4  Extract the HTML source code for the login form.       # Task definition
-5  Find locators for the username field and password fields. # Specific elements requested
-6  Output ONLY in the following JSON format schema:       # Enforcing strict output structure
-7  { "element_name": "...", "locator_type": "...", "locator_value": "..." }
+1  # [[HL::PROMPT ENGINEERING EXAMPLE:::HL]]
+[[HL::2  Act as an expert QA Automation Engineer.              # Role assign kiya::HL]]
+[[HL::3  Use your web search tool to visit 'example.com/login'. # Tool invocation instruction::HL]]
+[[HL::4  Extract the HTML source code for the login form.       # Task definition::HL]]
+[[HL::5  Find locators for the username field and password fields. # Specific elements requested::HL]]
+[[HL::6  Output ONLY in the following JSON format schema:       # Enforcing strict output structure::HL]]
+[[HL::7  { "element_name": "...", "locator_type": "...", "locator_value": "..." }::HL]]
 ```
 
 ```text
-# 📤 Expected Output (from Sonnet 4.5 model):
-[
-  {
-    "element_name": "username field",
-    "locator_type": "id",
-    "locator_value": "user-name"
-  },
-  {
-    "element_name": "password fields",
-    "locator_type": "name",
-    "locator_value": "password"
-  }
-]
+# [[HL::📤 Expected Output (from Sonnet 4.5 model):::HL]]
+[[HL::[::HL]]
+[[HL::  {::HL]]
+[[HL::    "element_name": "username field",::HL]]
+[[HL::    "locator_type": "id",::HL]]
+[[HL::    "locator_value": "user-name"::HL]]
+[[HL::  },::HL]]
+[[HL::  {::HL]]
+[[HL::    "element_name": "password fields",::HL]]
+[[HL::    "locator_type": "name",::HL]]
+[[HL::    "locator_value": "password"::HL]]
+[[HL::  }::HL]]
+[[HL::]::HL]]
 ```
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
-- **Line 2:** Role assigning. AI ko pehle se context mil gaya ki use QA perspective se sochna hai.
-- **Line 3 & 4:** Hum directly model ko explicitly force kar rahe hain ki woh apna web search agent use kare aur raw HTML extract kare.
-- **Line 6 & 7:** Yeh sabse important part hai — **schema definition**. Iske bina AI kahani likh dega, par hume JSON format chahiye taaki humara framework is data ko seedha read kar sake.
+- [[HL::**Line 2:** Role assigning. AI ko pehle se context mil gaya ki use QA perspective se sochna hai.::HL]]
+- [[HL::**Line 3 & 4:** Hum directly model ko explicitly force kar rahe hain ki woh apna web search agent use kare aur raw HTML extract kare.::HL]]
+- [[HL::**Line 6 & 7:** Yeh sabse important part hai — **schema definition**. Iske bina AI kahani likh dega, par hume JSON format chahiye taaki humara framework is data ko seedha read kar sake.::HL]]
 
 #### 🔒 8. Security-First Check
 Generative AI Models cloud par data bhejte hain. Kabhi bhi apne production environment ke real internal URLs ya production username field / password fields ki real default values prompts mein mat daalna. Mock data use karo.
@@ -1531,13 +1531,13 @@ Generative AI Models cloud par data bhejte hain. Kabhi bhi apne production envir
 Is approach ko CI/CD pipeline mein automate kiya ja sakta hai. Ek script har roz AI agent ko prompt bhej sakti hai naye pages ke locators nikalne ke liye, aur JSON schema format hone ki wajah se tumhara code directly us JSON ko parse karke test update kar sakta hai.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
-- **❌ Mistake:** Prompt mein likhna "Get locators for this page".
-- **🤦 Why:** AI plain text mein ek lamba essay likh dega jise tumhara code read nahi kar payega.
-- **✅ The 'Pro' Way:** Hamesha strict JSON format schema mango aur static instruction do.
+- **❌ [[HL::Mistake:** Prompt mein likhna "Get locators for this page".::HL]]
+- [[HL::**🤦 Why:** AI plain text mein ek lamba essay likh dega jise tumhara code read nahi kar payega.::HL]]
+- [[HL::**✅ The 'Pro' Way:** Hamesha strict JSON format schema mango aur static instruction do::HL]].
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Sonnet 4.5 model aur ChatGPT mein kya difference hai?" → Dono Generative AI models hain, par Sonnet 4.5 Claude ka model hai jo coding aur structured JSON format dene mein exceptionally acha mana jata hai.
-- **Confusion 2:** "Multi-agent systems kya karte hain?" → Ek AI brain (agent) user se baat karta hai, aur background mein dusre chote AI bots (agents) web search karna, HTML parse karna jaise alag-alag tasks handle karte hain. Inke group ko multi-agent systems kehte hain.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Sonnet 4.5 model aur ChatGPT mein kya difference hai?" → Dono Generative AI models hain, par Sonnet 4.5 Claude ka model hai jo coding aur structured JSON format dene mein exceptionally acha mana jata hai.::HL]]
+- [[HL::**Confusion 2:** "Multi-agent systems kya karte hain?" → Ek AI brain (agent) user se baat karta hai, aur background mein dusre chote AI bots (agents) web search karna, HTML parse karna jaise alag-alag tasks handle karte hain. Inke group ko multi-agent systems kehte hain::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart
 - AI ne web page padhne se mana kar diya? → Check karo kya prompt mein explicit web search tool use karne ka instruction diya tha.
@@ -1551,7 +1551,7 @@ Is approach ko CI/CD pipeline mein automate kiya ja sakta hai. Ek script har roz
 | **Format** | Copy-paste plain text | Clean JSON format schema |
 
 #### 🌍 14. Real-World Use Case (Production Application)
-E-commerce companies mein jab UI team login page redesign karti hai, QA team Claude desktop kholti hai, apna static instruction (prompt) chalati hai, AI naya HTML source code padhta hai aur naye username field / password fields ke locators JSON mein de deta hai. Is JSON se test framework automatically update ho jata hai.
+[[HL::E-commerce companies mein jab UI team login page redesign karti hai, QA team Claude desktop kholti hai, apna static instruction (prompt) chalati hai, AI naya HTML source code padhta hai aur naye username field / password fields ke locators JSON mein de deta hai. Is JSON se test framework automatically update ho jata hai::HL]].
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 - **Testing/Offline Phase:** User ek static instruction (prompt) likhta hai Claude desktop mein webpage ke locators nikalne ke liye.
@@ -1576,16 +1576,16 @@ E-commerce companies mein jab UI team login page redesign karti hai, QA team Cla
 ```
 
 #### ❓ 17. Interview Q&A (FAQ)
-- **Q:** Generative AI models se structured data (jaise locators) lene ka best tarika kya hai?
-- **A:** Best tarika hai prompt mein explicit "JSON format schema" provide karna. AI ko clear examples dena chahiye ki "element_name", "locator_type", aur "locator_value" keys use kare. Isse AI plain text essay ke bajaye machine-readable code block return karta hai.
-- **Q:** Multi-agent systems ka kya role hai prompt engineering mein?
-- **A:** Multi-agent systems tab kaam aate hain jab ek complex task ko break karna ho. Jaise ek agent prompt samajhta hai, dusra agent web search karke HTML source code lata hai, aur teesra agent us data ko JSON mein parse karta hai. Yeh sab seamlessly background mein hota hai.
+- **Q:** [[HL::Generative AI models se structured data (jaise locators) lene ka best tarika kya hai?::HL]]
+- [[HL::**A:** Best tarika hai prompt mein explicit "JSON format schema" provide karna. AI ko clear examples dena chahiye ki "element_name", "locator_type", aur "locator_value" keys use kare. Isse AI plain text essay ke bajaye machine-readable code block return karta hai.::HL]]
+- [[HL::**Q:** Multi-agent systems ka kya role hai prompt engineering mein?::HL]]
+- [[HL::**A:** Multi-agent systems tab kaam aate hain jab ek complex task ko break karna ho. Jaise ek agent prompt samajhta hai, dusra agent web search karke HTML source code lata hai, aur teesra agent us data ko JSON mein parse karta hai. Yeh sab seamlessly background mein hota hai::HL]].
 - **Q:** AI agent purani ya galat web information kyun laata hai, aur ise kaise fix karein?
 - **A:** AI apni purani training data pe rely karta hai. Ise fix karne ke liye hum use explicit 'static instruction' dete hain ki "USE WEB SEARCH TOOL to fetch the latest HTML". Yeh model ko force karta hai live data lane ke liye.
-- **Q:** Claude Desktop use karte waqt agar web search fail ho jaye toh kya alternative context engineering use kar sakte hain?
-- **A:** Agar web search tool fail hota hai (due to firewalls ya bot protection), toh hum manually browser mein "Inspect Page Source" karke HTML source code copy kar sakte hain, aur us text block ko directly as context AI prompt mein paste kar sakte hain.
-- **Q:** AI se username field aur password fields nikalte waqt accuracy kaise ensure karein?
-- **A:** AI ko prompt mein specific instruction do ki woh unstable locators (jaise absolute XPath) avoid kare aur priority "id", "name", ya "data-testid" ko de. Context engineering ke through hum AI ko ek "good locators ruleset" pass kar sakte hain.
+- [[HL::**Q:** Claude Desktop use karte waqt agar web search fail ho jaye toh kya alternative context engineering use kar sakte hain?::HL]]
+- [[HL::**A:** Agar web search tool fail hota hai (due to firewalls ya bot protection), toh hum manually browser mein "Inspect Page Source" karke HTML source code copy kar sakte hain, aur us text block ko directly as context AI prompt mein paste kar sakte hain.::HL]]
+- [[HL::**Q:** AI se username field aur password fields nikalte waqt accuracy kaise ensure karein?::HL]]
+- [[HL::**A:** AI ko prompt mein specific instruction do ki woh unstable locators (jaise absolute XPath) avoid kare aur priority "id", "name", ya "data-testid" ko de. Context engineering ke through hum AI ko ek "good locators ruleset" pass kar sakte hain::HL]].
 
 #### 📝 18. One-Line Memory Hook
 "Prompt mein clear JSON schema daalo, aur AI tumhara saara HTML source code filter karke clean locators de dega!"
@@ -1627,11 +1627,11 @@ Speaker ne Context engineering ko **"prompt engineering plus"** kaha hai. Isko a
 
 #### 📖 3. Technical Definition
 - **Precise English:** The systematic practice of providing structured contextual data (via RAG, system prompts, or files) to AI models, significantly reducing hallucination and enabling high-accuracy task specialization.
-- **Hinglish Simplification:** AI ko sirf sawal nahi, balki us sawal ka poora background, rules, aur files (context) dena taaki AI bina guess kiye (hallucination ke bina) ek expert ki tarah kaam kare.
+- [[HL::**Hinglish Simplification:** AI ko sirf sawal nahi, balki us sawal ka poora background, rules, aur files (context) dena taaki AI bina guess kiye (hallucination ke bina) ek expert ki tarah kaam kare::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** AI models ke paas duniya ka general knowledge hota hai, par unhe tumhare specific project ke rules nahi pata hote. Is lack of context ki wajah se woh **hallucination** (galat ya fake information confidently batana) karte hain.
-- **Solution:** Hum unhe **shared context** (jaise test scripts, requirement documents) dete hain. Isse AI mein **task specialization** aati hai — matlab woh ek specific domain (jaise UI automation) ka expert ban jata hai.
+- [[HL::**Problem:** AI models ke paas duniya ka general knowledge hota hai, par unhe tumhare specific project ke rules nahi pata hote. Is lack of context ki wajah se woh **hallucination** (galat ya fake information confidently batana) karte hain.::HL]]
+- [[HL::**Solution:** Hum unhe **shared context** (jaise test scripts, requirement documents) dete hain. Isse AI mein **task specialization** aati hai — matlab woh ek specific domain (jaise UI automation) ka expert ban jata hai::HL]].
 - **What breaks if we don't use it?** AI bilkul generic code likhega jo tumhare framework mein fit nahi baithega aur tumhe use manually fix karne mein ghanton lag jayenge.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -1656,8 +1656,8 @@ project-folder/
 *(Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.)*
 
 **Context Engineering Implementation Flow:**
-- **Level 1 (Basic):** Tum chat prompt mein seedha copy-paste karke context dete ho.
-- **Level 2 (File Level):** Tum `instruction.md` banate ho jisme framework ke saare rules likhe hote hain. AI is file ko padh kar **task specialization** (jaise sirf Python Selenium code likhna) achieve karta hai.
+- [[HL::**Level 1 (Basic):** Tum chat prompt mein seedha copy-paste karke context dete ho.::HL]]
+- [[HL::**Level 2 (File Level):** Tum `instruction.md` banate ho jisme framework ke saare rules likhe hote hain. AI is file ko padh kar **task specialization** (jaise sirf Python Selenium code likhna) achieve karta hai::HL]].
 - **Level 3 (Advanced):** AI agents alag-alag **chat modes** (jaise coder mode, reviewer mode) switch karte hain aur directly tumhare **file system database access** ke through files read karke apna context khud build karte hain.
 - **Level 4 (Enterprise RAG):** AI directly **search results** se company ke hazaron **scenario documents** padhta hai. Is process ko **Retrieval Augmented Generation** kehte hain.
 
@@ -1665,12 +1665,12 @@ project-folder/
 Jab tum file system access ya requirement documents AI ko dete ho, toh make sure karo ki usme PII (Personally Identifiable Information) ya database credentials (passwords, API keys) na hon. Public LLMs is data ko apni training mein use kar sakte hain.
 
 #### 🏗️ 9. Scalability & Industry Context
-Large teams mein har developer alag prompt likhta hai. Isko standardize karne ke liye companies `instruction.md` ya `agent.md` jaise **structured context file** apne repository mein commit kar deti hain. Isse poori team ka AI ek hi **shared context** share karta hai aur consistent code deta hai.
+Large [[HL::teams mein har developer alag prompt likhta hai. Isko standardize karne ke liye companies `instruction.md` ya `agent.md` jaise **structured context file** apne repository mein commit kar deti hain. Isse poori team ka AI ek hi **shared context** share karta hai aur consistent code deta hai.::HL]]
 
-#### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
-- **❌ Mistake:** Har prompt mein baar-baar same rules type karna.
-- **🤦 Why:** Time waste hota hai aur kabhi koi rule chhut jaye toh AI galat code deta hai.
-- **✅ The 'Pro' Way:** `instruction.md` ya **system prompts** mein ek baar rules set kar do (preloaded instruction). AI automatically use har prompt mein as context add kar lega.
+#### [[HL::⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)::HL]]
+- [[HL::**❌ Mistake:** Har prompt mein baar-baar same rules type karna.::HL]]
+- [[HL::**🤦 Why:** Time waste hota hai aur kabhi koi rule chhut jaye toh AI galat code deta hai.::HL]]
+- [[HL::**✅ The 'Pro' Way:** `instruction.md` ya **system prompts** mein ek baar rules set kar do (preloaded instruction). AI automatically use har prompt mein as context add kar lega::HL]].
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 - **Confusion 1:** "RAG aur simple Context mein kya farq hai?" → Simple context matlab tumne manually ek 2-page ka document chat mein upload kar diya. RAG (Retrieval-Augmented Generation) ek automated system hai jo 10,000 pages ke database mein se sirf relevant 2 pages search karke AI ko deta hai.
@@ -1712,8 +1712,8 @@ JPMorgan jaise banks apne internal AI assistants ko seedha internet access nahi 
 - **A:** Hallucination tab hota hai jab AI confidently galat information invent kar deta hai kyunki uske paas correct knowledge nahi hoti. Context Engineering usko explicitly ground truth (actual data documents) provide karti hai, jisse AI sirf usi data ke basis pe answer deta hai, guessing band ho jati hai.
 - **Q:** Structured context file (jaise instruction.md) ka IDEs mein kya role hai?
 - **A:** Modern AI IDEs (jaise Cursor ya Windsurf) project root mein rakhi `instruction.md` ya `agent.md` ko automatically as a system prompt padh lete hain. Isse developer ko baar-baar coding standards (e.g., "always use explicit waits in Selenium") nahi batane padte.
-- **Q:** RAG (Retrieval Augmented Generation) ka fundamental concept kya hai?
-- **A:** RAG ek technique hai jahan AI ek large database mein se pehle relevant information search karta hai (Retrieval), aur phir us information ko context ki tarah use karke final answer banata hai (Generation). Yeh huge documentation ke liye best hai.
+- **Q:** [[HL::RAG (Retrieval Augmented Generation) ka fundamental concept kya hai?::HL]]
+- [[HL::**A:** RAG ek technique hai jahan AI ek large database mein se pehle relevant information search karta hai (Retrieval), aur phir us information ko context ki tarah use karke final answer banata hai (Generation). Yeh huge documentation ke liye best hai::HL]].
 - **Q:** AI agent file system database access ka use kaise karte hain?
 - **A:** Advanced AI agents locally tumhari machine pe run ho sakte hain aur unhe permissions di ja sakti hain ki woh tumhare code folders padh sakein. Isse jab tum ek bug fix karne bolte ho, toh woh poore folder ka context khud gather kar lete hain, explicitly files attach karne ki zaroorat nahi padti.
 
@@ -1738,81 +1738,81 @@ Speaker ne ek bohot badhiya analogy di hai: Bina web search ke, model bilkul ek 
 
 #### 📖 3. Technical Definition
 - **Precise English:** The practical application of context engineering where an AI model (like Claude Sonnet 4.5) utilizes web search capabilities to dynamically fetch and parse an active webpage's source code to extract precise HTML locators into a structured format.
-- **Hinglish Simplification:** Claude model ka web search feature on karke usko live website ka link dena, taaki woh khud HTML code inspect kare aur hame button/inputs ke exact XPath aur CSS selectors dhundh ke de.
+- [[HL::**Hinglish Simplification:** Claude model ka web search feature on karke usko live website ka link dena, taaki woh khud HTML code inspect kare aur hame button/inputs ke exact XPath aur CSS selectors dhundh ke de::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Automation testers ka maximum time "Inspect Page" karke elements ke **name, ID, CSS selectors, XPath** dhundhne mein nikal jata hai.
-- **Solution:** Hum **Claude Sonet model** (Anthropic ka AI) ko use karke poore page ke locators seconds mein extract karwa sakte hain by enabling its **web search capability**. 
+- **Probl[[HL::em:** Automation testers ka maximum time "Inspect Page" karke elements ke **name, ID, CSS selectors, XPath** dhundhne mein nikal jata hai::HL]].
+- [[HL::**Solution:** Hum **Claude Sonet model** (Anthropic ka AI) ko use karke poore page ke locators seconds mein extract karwa sakte hain by enabling its **web search capability**::HL]]. 
 - **What breaks if we don't use it?** Agar web search off hai toh model **handicapped** state mein rahega aur sirf guess karega, jisse tumhare test cases galat locators ki wajah se fail ho jayenge.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```text
-[Claude Desktop UI]
---------------------------------------------------
-🌐 Web Search: [ ON ] (Toggle switch turned on)
---------------------------------------------------
-User: Visit example.com/login and get locators in JSON format.
+[[HL::[Claude Desktop UI]::HL]]
+[[HL::--------------------------------------------------::HL]]
+[[HL::🌐 Web Search: [ ON ] (Toggle switch turned on)::HL]]
+[[HL::--------------------------------------------------::HL]]
+[[HL::User: Visit example.com/login and get locators in JSON format.::HL]]
 
-AI: *Browsing example.com/login...*
-    *Reading HTML structure...*
-    Here are your locators:
-    { ... JSON OUTPUT ... }
+[[HL::AI: *Browsing example.com/login...*::HL]]
+[[HL::    *Reading HTML structure...*::HL]]
+[[HL::    Here are your locators:::HL]]
+[[HL::    { ... JSON OUTPUT ... }::HL]]
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. **Model Execution without Tool:** Agar web search off hai, AI sirf apne internal knowledge se batayega ki "Generally login page pe username ka ID 'username' hota hai" (Guessing).
-2. **Enabling Tool:** Web search toggle on karne par, AI backend mein ek headless browser use karke us URL ko visit karta hai.
+1. [[HL::**Model Execution without Tool:** Agar web search off hai, AI sirf apne internal knowledge se batayega ki "Generally login page pe username ka ID 'username' hota hai" (Guessing).::HL]]
+2. [[HL::**Enabling Tool:** Web search toggle on karne par, AI backend mein ek headless browser use karke us URL ko visit karta hai::HL]].
 3. **HTML Extraction:** AI live **page source code** nikalta hai.
 4. **Parsing & Filtering:** AI us lambe HTML structure mein se **login page** elements (jaise **Remember Me checkbox**, **register as a new page link**) ko dhundhta hai.
 5. **JSON Structuring:** AI un elements ka **unique locator** banata hai aur strictly **JSON format** mein format karta hai.
 
 #### 💻 7. Hands-On — Runnable Example
-Yahan hum woh exact Prompt Flow aur uski Output dekhte hain jo Speaker ne demo kiya hai Claude desktop mein.
+[[HL::Yahan hum woh exact Prompt Flow aur uski Output dekhte hain jo Speaker ne demo kiya hai Claude desktop mein.::HL]]
 
 ```python
-1  # PROMPT ENGINEERING IN CLAUDE (Make sure Web Search is ON 🌐)
-2  # Task: Extracting locators from a Login Page
+1  # [[HL::PROMPT ENGINEERING IN CLAUDE (Make sure Web Search is ON 🌐)::HL]]
+[[HL::2  # Task: Extracting locators from a Login Page::HL]]
 3  
-4  "Go to https://practicetestautomation.com/practice-test-login/"  # Target URL diya
-5  "Analyze the HTML structure of the login page."                  # Context engineering step
-6  "Extract a unique locator for the following elements:"           # Specific requirements
-7  "- username field"
-8  "- password field"
-9  "- Remember Me checkbox (if exists)"
-10 "- register as a new page link (if exists)"
-11 "Provide the output STRICTLY in JSON format with keys: locator name, locator type, locator value."
+[[HL::4  "Go to https://practicetestautomation.com/practice-test-login/"  # Target URL diya::HL]]
+[[HL::5  "Analyze the HTML structure of the login page."                  # Context engineering step::HL]]
+[[HL::6  "Extract a unique locator for the following elements:"           # Specific requirements::HL]]
+[[HL::7  "- username field"::HL]]
+[[HL::8  "- password field"::HL]]
+[[HL::9  "- Remember Me checkbox (if exists)"::HL]]
+[[HL::10 "- register as a new page link (if exists)"::HL]]
+[[HL::11 "Provide the output STRICTLY in JSON format with keys: locator name, locator type, locator value."::HL]]
 ```
 
 ```text
-# 📤 Expected Output (from Sonnet 4.5 model):
-[
-  {
-    "locator name": "username",
-    "locator type": "ID",
-    "locator value": "username"
-  },
-  {
-    "locator name": "password",
-    "locator type": "name",
-    "locator value": "password"
-  },
-  {
-    "locator name": "Remember Me checkbox",
-    "locator type": "CSS selectors",
-    "locator value": "input[type='checkbox']"
-  },
-  {
-    "locator name": "register as a new page link",
-    "locator type": "XPath",
-    "locator value": "//a[contains(text(),'Register')]"
-  }
-]
+# [[HL::📤 Expected Output (from Sonnet 4.5 model):::HL]]
+[[HL::[::HL]]
+[[HL::  {::HL]]
+[[HL::    "locator name": "username",::HL]]
+[[HL::    "locator type": "ID",::HL]]
+[[HL::    "locator value": "username"::HL]]
+[[HL::  },::HL]]
+[[HL::  {::HL]]
+[[HL::    "locator name": "password",::HL]]
+[[HL::    "locator type": "name",::HL]]
+[[HL::    "locator value": "password"::HL]]
+[[HL::  },::HL]]
+[[HL::  {::HL]]
+[[HL::    "locator name": "Remember Me checkbox",::HL]]
+[[HL::    "locator type": "CSS selectors",::HL]]
+[[HL::    "locator value": "input[type='checkbox']"::HL]]
+[[HL::  },::HL]]
+[[HL::  {::HL]]
+[[HL::    "locator name": "register as a new page link",::HL]]
+[[HL::    "locator type": "XPath",::HL]]
+[[HL::    "locator value": "//a[contains(text(),'Register')]"::HL]]
+[[HL::  }::HL]]
+[[HL::]::HL]]
 ```
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
-- **Line 4:** Target URL define karta hai. Model apna web search agent ispe bhejega.
-- **Line 6 to 10:** Hum clearly elements bata rahe hain (jaise **username**, **Remember Me checkbox**). Agar explicitly nahi batayenge toh AI har chote bade tag (jaise `<footer>`) ko extract kar lega.
-- **Line 11:** Yeh command enforce karti hai ki data clean JSON mein aaye. Humne exactly 3 keys maangi hain: **locator name**, **locator type**, aur **locator value**. Iske bina JSON malformed ho sakta hai.
+- [[HL::**Line 4:** Target URL define karta hai. Model apna web search agent ispe bhejega.::HL]]
+- [[HL::**Line 6 to 10:** Hum clearly elements bata rahe hain (jaise **username**, **Remember Me checkbox**). Agar explicitly nahi batayenge toh AI har chote bade tag (jaise `<footer>`) ko extract kar lega.::HL]]
+- [[HL::**Line 11:** Yeh command enforce karti hai ki data clean JSON mein aaye. Humne exactly 3 keys maangi hain: **locator name**, **locator type**, aur **locator value**. Iske bina JSON malformed ho sakta hai::HL]].
 
 #### 🔒 8. Security-First Check
 Agar tumhara application internal (VPN/Intranet protected) hai, toh Claude ka Cloud-based Web Search tool us URL tak nahi pahunch payega. Us case mein tumhe manual page source code copy-paste karna padega as context, taaki secure internal pages ka data leak ya block na ho.
@@ -1825,13 +1825,13 @@ Is approach se UI test maintenance bohot scalable ho jati hai. Agar developer UI
 - **🤦 Why:** AI bol dega "Main internet browse nahi kar sakta", ya fir galat (hallucinated) locators de dega.
 - **✅ The 'Pro' Way:** Hamesha check karo ki Sonnet 4.5 model ka web search tool enabled ho, ya fir fallback ke liye HTML manually paste karo.
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "AI multiple elements ke ID same hone par kya karega?" → Ek acha model (jaise Sonnet 4.5) HTML structure padh ke samajh jata hai aur automatically ek complex CSS selector ya XPath generate karta hai taaki **unique locator** mil sake.
-- **Confusion 2:** "Agar website bot protection (jaise Cloudflare) use kar rahi ho toh?" → AI ka web search tool block ho jayega. Us case mein speaker ki trick use karo: Manually browser mein page kholo, HTML copy karo, aur chat mein text ki tarah paste kardo.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "AI multiple elements ke ID same hone par kya karega?" → Ek acha model (jaise Sonnet 4.5) HTML structure padh ke samajh jata hai aur automatically ek complex CSS selector ya XPath generate karta hai taaki **unique locator** mil sake.::HL]]
+- [[HL::**Confusion 2:** "Agar website bot protection (jaise Cloudflare) use kar rahi ho toh?" → AI ka web search tool block ho jayega. Us case mein speaker ki trick use karo: Manually browser mein page kholo, HTML copy karo, aur chat mein text ki tarah paste kardo::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 - AI returns "I cannot access the URL" → Check karo ki **web search capability** toggle ON hai.
-- AI returns wrong locators that don't exist on page → Iska matlab AI ne internet search nahi kiya aur guess kiya hai. Use explicitly bolo "Use your web search tool to inspect page".
+- AI [[HL::returns wrong locators that don't exist on page → Iska matlab AI ne internet search nahi kiya aur guess kiya hai. Use explicitly bolo "Use your web search tool to inspect page::HL]]".
 - Page VPN ke piche hai? → Web search kaam nahi karega, **manual page source context** technique use karo.
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
@@ -1866,12 +1866,12 @@ Retail companies ke QA engineers apne daily test scripts update karne ke liye Cl
 #### ❓ 17. Interview Q&A (FAQ)
 - **Q:** Automation scripts likhne mein "web search capability" models (like Claude Sonnet) ko kaise empower karti hai?
 - **A:** Web search model ko live internet se connect karta hai. Iske bina model "handicapped" hota hai aur sirf apni purani training pe depend karta hai. Web search se model live HTML fetch karke accurate aur fresh locators extract kar sakta hai.
-- **Q:** Agar ek application VPN ke andar hai, toh AI se locators kaise extract karwayenge?
-- **A:** VPN ke andar web search tool kaam nahi karega. Iske liye hum "Manual Context Engineering" use karte hain. Developer browser mein 'Inspect Element' khol kar us specific section ka 'HTML source code' copy karta hai aur AI ko as a text message prompt mein deta hai.
-- **Q:** JSON format mein locators mangne ka primary faida kya hai?
-- **A:** JSON format machine-readable hota hai. Agar AI plain text mein locators de, toh framework (jaise Selenium) usko directly padh nahi sakta. JSON format (locator name, type, value) mangne se hum us output ko directly deserialize karke object repository ya Page Object Model mein use kar sakte hain.
-- **Q:** AI se unique locators ensure karne ke liye prompt mein kya include karna chahiye?
-- **A:** Prompt mein explicitly likhna chahiye ki "Find a UNIQUE locator". Sath hi, preference rules set karne chahiye: "Prefer ID or Name attributes. If not present, use robust CSS selectors, and use XPath as a last resort." Yeh hallucination aur fragile locators banne se rokta hai.
+- **Q:** [[HL::Agar ek application VPN ke andar hai, toh AI se locators kaise extract karwayenge?::HL]]
+- [[HL::**A:** VPN ke andar web search tool kaam nahi karega. Iske liye hum "Manual Context Engineering" use karte hain. Developer browser mein 'Inspect Element' khol kar us specific section ka 'HTML source code' copy karta hai aur AI ko as a text message prompt mein deta hai.::HL]]
+- [[HL::**Q:** JSON format mein locators mangne ka primary faida kya hai?::HL]]
+- [[HL::**A:** JSON format machine-readable hota hai. Agar AI plain text mein locators de, toh framework (jaise Selenium) usko directly padh nahi sakta. JSON format (locator name, type, value) mangne se hum us output ko directly deserialize karke object repository ya Page Object Model mein use kar sakte hain.::HL]]
+- [[HL::**Q:** AI se unique locators ensure karne ke liye prompt mein kya include karna chahiye?::HL]]
+- [[HL::**A:** Prompt mein explicitly likhna chahiye ki "Find a UNIQUE locator". Sath hi, preference rules set karne chahiye: "Prefer ID or Name attributes. If not present, use robust CSS selectors, and use XPath as a last resort." Yeh hallucination aur fragile locators banne se rokta hai::HL]].
 - **Q:** Model 'Remember Me' checkbox aur 'Register' link extract karne mein confuse kyun ho sakta hai?
 - **A:** Checkboxes aur links aksar nested HTML (divs/spans ke andar) mein hote hain. Agar context poorly defined ho, AI galat parent element ka locator de sakta hai. Isliye clear prompt aur proper HTML structure ka extract hona zaroori hai.
 
@@ -1940,18 +1940,18 @@ Socho tum jungle mein ho aur internet kaam nahi kar raha. Agar tumhe rasta dhund
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 
-  - **Problem:** Kai baar AI external websites access nahi kar pata (due to firewalls, bot protection, ya local environments).
-  - **Solution:** Hum manually HTML block copy karke AI ko dete hain. Speaker strongly kehta hai: ⭐ **"understand these concepts clearly"** kyunki bina iske tum secure environments mein automation nahi kar paoge.
+  - [[HL::**Problem:** Kai baar AI external websites access nahi kar pata (due to firewalls, bot protection, ya local environments).::HL]]
+  - [[HL::**Solution:** Hum manually HTML block copy karke AI ko dete hain. Speaker strongly kehta hai: ⭐ **"understand these concepts clearly"** kyunki bina iske tum secure environments mein automation nahi kar paoge::HL]].
   - **What breaks if we don't use it?** AI model guess karega (hallucinate) aur tumhare **smarter automation test** scripts fail ho jayenge kyunki unhe accurate locators nahi milenge.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 
 ```text
-[ Browser Elements Tab ]
-▼ <div id="login-form">  <-- Yeh specific 'div' (due control) copy karna hai
-    <img src="logo.png">
-    <input name="username">
-  </div>
+[ [[HL::Browser Elements Tab ]::HL]]
+[[HL::▼ <div id="login-form">  <-- Yeh specific 'div' (due control) copy karna hai::HL]]
+[[HL::    <img src="logo.png">::HL]]
+[[HL::    <input name="username">::HL]]
+[[HL::  </div::HL]]>
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
@@ -2012,13 +2012,13 @@ Yeh process fully manual hai, isliye production scale pe thoda slow hai. Par hig
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 
-  - **❌ Mistake:** Poore webpage ka HTML (\<html\> to \</html\>) copy karke paste kar dena.
-  - **🤦 Why:** Model ka token limit cross ho jata hai ya woh itne bade data mein confuse ho jata hai.
-  - **✅ The 'Pro' Way:** Sirf target section (e.g., login **form** ya specific div/due control) copy karo.
+  - **❌ [[HL::Mistake:** Poore webpage ka HTML (\<html\> to \</html\>) copy karke paste kar dena.::HL]]
+  - [[HL::**🤦 Why:** Model ka token limit cross ho jata hai ya woh itne bade data mein confuse ho jata hai.::HL]]
+  - [[HL::**✅ The 'Pro' Way:** Sirf target section (e.g., login **form** ya specific div/due control) copy karo::HL]].
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
 
-  - **Confusion 1:** "Agar web search on hai toh main copy-paste kyun karun?" → Agar page internal hai (localhost) ya usme captcha hai, toh web search us page tak nahi pahunch payega. Tab manual HTML zaroori hai.
+  - [[HL::**Confusion 1:** "Agar web search on hai toh main copy-paste kyun karun?" → Agar page internal hai (localhost) ya usme captcha hai, toh web search us page tak nahi pahunch payega. Tab manual HTML zaroori hai::HL]].
   - **Confusion 2:** "Token kya hota hai HTML mein?" → Ek **request verification token** ek hidden security code hota hai jo server form submit karte waqt check karta hai taaki fake submissions na hon. AI ise easily raw HTML se nikal leta hai.
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
@@ -2062,8 +2062,8 @@ QA Engineers Healthcare IT companies mein Patient Portal ko automate karte hain.
 
   - **Q:** Automation mein manual HTML context passing ka kya use case hai?
   - **A:** Jab testing application secure network (localhost ya VPN) pe ho jahan AI ka web crawler nahi pahunch sakta, tab hum manual HTML context passing use karte hain taaki AI us code ko padh kar accurately locators aur scripts bana sake.
-  - **Q:** Web page ka saara source code copy karne ke bajaye sirf 'div' control copy karna kyun behtar hai?
-  - **A:** LLMs (Large Language Models) ki ek token window (memory limit) hoti hai. Poora page paste karne se context window bhar sakti hai aur AI noise mein fass sakta hai. Sirf relevant section dene se focus aur accuracy badhti hai.
+  - [[HL::**Q:** Web page ka saara source code copy karne ke bajaye sirf 'div' control copy karna kyun behtar hai?::HL]]
+  - [[HL::**A:** LLMs (Large Language Models) ki ek token window (memory limit) hoti hai. Poora page paste karne se context window bhar sakti hai aur AI noise mein fass sakta hai. Sirf relevant section dene se focus aur accuracy badhti hai::HL]].
   - **Q:** AI 'request verification token' jaise hidden fields ko HTML se kaise samajhta hai?
   - **A:** AI raw text ko parse karta hai. HTML mein yeh input tag `type="hidden"` hota hai. Model apni training se janta hai ki yeh forms ko secure karne wala token hai, aur woh as-is uska locator return kar deta hai.
   - **Q:** "Self-correcting mechanisms" mein manual HTML context kaise foundation banta hai?
@@ -2097,12 +2097,12 @@ Pehle tumhara AI sirf ek text box tak seemit tha, jaise ek clerk jo apni desk se
 #### 📖 3. Technical Definition
 
   - **Precise English:** Integrations within the Model Context Protocol (MCP) that allow AI models to directly access external data sources (like GitHub, SharePoint) and execute active tools (like Control Chrome) to enrich their context dynamically without manual copy-pasting.
-  - **Hinglish Simplification:** Aise plugins ya tools (connectors) jo AI ko allow karte hain ki woh khud GitHub, files, ya browser ko control kare aur wahan se data padh ke apna context khud bada kare.
+  - [[HL::**Hinglish Simplification:** Aise plugins ya tools (connectors) jo AI ko allow karte hain ki woh khud GitHub, files, ya browser ko control kare aur wahan se data padh ke apna context khud bada kare.::HL]]
 
-#### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
+#### [[HL::🧠 4. Why This Matters (Zaroorat Kyun Hai?)::HL]]
 
-  - **Problem:** Har baar manual code copy karna, ya requirements type karna slow aur error-prone hota hai. AI ko **hallucinated message** (galat code) dene ki aadat lag sakti hai agar uske paas full picture nahi hai.
-  - **Solution:** Hum **model context protocols (MCP)** (ek naya open standard jo AI ko tools se jodne ka format define karta hai) aur **connectors** use karte hain taaki AI khud background files aur chat history access kar sake.
+  - [[HL::**Problem:** Har baar manual code copy karna, ya requirements type karna slow aur error-prone hota hai. AI ko **hallucinated message** (galat code) dene ki aadat lag sakti hai agar uske paas full picture nahi hai.::HL]]
+  - [[HL::**Solution:** Hum **model context protocols (MCP)** (ek naya open standard jo AI ko tools se jodne ka format define karta hai) aur **connectors** use karte hain taaki AI khud background files aur chat history access kar sake::HL]].
   - **What breaks if we don't use it?** AI tumhara project architecture nahi samajh payega aur har task isolated (alag-alag) treat karega, jisse complex **unit test** likhna impossible ho jayega.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -2118,26 +2118,26 @@ Pehle tumhara AI sirf ek text box tak seemit tha, jaise ek clerk jo apni desk se
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 
-1.  **Model Context Protocols (MCP):** Yeh ek universal standard hai jisse LLMs kisi bhi external tool se securely baat karte hain.
-2.  **Data Connectors:** AI **cloud desktop** app (jaise Claude) se directly **SharePoint page**, **requirement documents**, ya **GitHub** (source code hosting platform) repo padh sakta hai.
-3.  **Action Connectors (Control Chrome):** AI sirf data nahi padhta, woh action le sakta hai. Woh browser command bhejta hai: **open URL**, **current tab** switch karna, naya **switch tab** karna, **get page content** karna, ya directly **execute JavaScript** karna.
+1.  [[HL::**Model Context Protocols (MCP):** Yeh ek universal standard hai jisse LLMs kisi bhi external tool se securely baat karte hain.::HL]]
+2.  [[HL::**Data Connectors:** AI **cloud desktop** app (jaise Claude) se directly **SharePoint page**, **requirement documents**, ya **GitHub** (source code hosting platform) repo padh sakta hai.::HL]]
+3.  [[HL::**Action Connectors (Control Chrome):** AI sirf data nahi padhta, woh action le sakta hai. Woh browser command bhejta hai: **open URL**, **current tab** switch karna, naya **switch tab** karna, **get page content** karna, ya directly **execute JavaScript** karna::HL]].
 4.  **History Connectors:** AI tumhari current **chat conversation** ko as a living context treat karta hai taaki context hamesha updated rahe.
 
 #### 💻 7. Hands-On — Runnable Example
 
-Maan lo hum AI ko GitHub ka context de rahe hain aur Control Chrome use karwa rahe hain.
+[[HL::Maan lo hum AI ko GitHub ka context de rahe hain aur Control Chrome use karwa rahe hain.::HL]]
 
 ```json
-1  // Background mein MCP connector aise API request bhejta hai:
-2  {
-3    "action": "execute_tool",                // Tool chalane ki command
-4    "tool_name": "Control Chrome",           // Kaunsa tool
-5    "parameters": {
-6      "command": "open URL",                 // Action
-7      "url": "https://company.sharepoint.com", // Kahan jana hai
-8      "next_step": "get page content"        // Uske baad kya karna hai
-9    }
-10 }
+1  // [[HL::Background mein MCP connector aise API request bhejta hai:::HL]]
+[[HL::2  {::HL]]
+[[HL::3    "action": "execute_tool",                // Tool chalane ki command::HL]]
+[[HL::4    "tool_name": "Control Chrome",           // Kaunsa tool::HL]]
+[[HL::5    "parameters": {::HL]]
+[[HL::6      "command": "open URL",                 // Action::HL]]
+[[HL::7      "url": "https://company.sharepoint.com", // Kahan jana hai::HL]]
+[[HL::8      "next_step": "get page content"        // Uske baad kya karna hai::HL]]
+[[HL::9    }::HL]]
+[[HL::10 }::HL]]
 ```
 
 ```text
@@ -2145,10 +2145,10 @@ Maan lo hum AI ko GitHub ka context de rahe hain aur Control Chrome use karwa ra
 "Maine SharePoint page visit kar liya hai aur requirement documents padh liye hain. Ab main bina hallucinate kiye aapka unit test likhne ke liye ready hoon."
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
+##### [[HL::🔬 Code Explanation Rule (LINE-BY-LINE)::HL]]
 
-  - **Line 3 & 4:** AI decide karta hai ki usko ek external tool (`Control Chrome`) chalana hai context ikkatha karne ke liye.
-  - **Line 6 to 8:** AI kehta hai "Pehela URL kholo, fir uska saara content padh lo." Yeh data AI ka "Extended Context" ban jayega.
+  - [[HL::**Line 3 & 4:** AI decide karta hai ki usko ek external tool (`Control Chrome`) chalana hai context ikkatha karne ke liye.::HL]]
+  - [[HL::**Line 6 to 8:** AI kehta hai "Pehela URL kholo, fir uska saara content padh lo." Yeh data AI ka "Extended Context" ban jayega.::HL]]
 
 #### 🔒 8. Security-First Check
 
@@ -2164,9 +2164,9 @@ Modern software teams mein, developer prompt mein sirf issue ticket number dalta
   - **🤦 Why:** Manual kaam se version mismatch hota hai (purani file copy ho gayi).
   - **✅ The 'Pro' Way:** Hamesha **upload a file** feature ya live connectors (like SharePoint/GitHub) use karo taaki AI ko fresh data mile.
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
 
-  - **Confusion 1:** "MCP kya bala hai?" → Jaise USB ek standard hai kisi bhi pendrive ko computer se jodne ke liye, waise hi MCP ek naya software standard hai kisi bhi AI ko kisi bhi tool se jodne ke liye.
+  - [[HL::**Confusion 1:** "MCP kya bala hai?" → Jaise USB ek standard hai kisi bhi pendrive ko computer se jodne ke liye, waise hi MCP ek naya software standard hai kisi bhi AI ko kisi bhi tool se jodne ke liye::HL]].
   - **Confusion 2:** "Control Chrome kaise kaam karta hai?" → Yeh ek special connector hai jo AI ko literally ek invisible mouse aur keyboard deta hai. AI URL open kar sakta hai, JavaScript chala sakta hai, aur live page ka data la sakta hai.
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
@@ -2207,12 +2207,12 @@ Ek tester ko naya feature test karna hai. Woh Claude ko bolta hai "SharePoint se
 
 #### ❓ 17. Interview Q\&A (FAQ)
 
-  - **Q:** Model Context Protocol (MCP) ka kya fayda hai?
-  - **A:** MCP ek standard architecture provide karta hai jisse LLMs external data sources (jaise databases, IDEs, ya cloud files) se connect ho sakte hain. Isse model ki dependency manual prompts se hatt kar live data pe aati hai, jo accuracy drastically badhati hai.
+  - **Q:** [[HL::Model Context Protocol (MCP) ka kya fayda hai?::HL]]
+  - [[HL::**A:** MCP ek standard architecture provide karta hai jisse LLMs external data sources (jaise databases, IDEs, ya cloud files) se connect ho sakte hain. Isse model ki dependency manual prompts se hatt kar live data pe aati hai, jo accuracy drastically badhati hai::HL]].
   - **Q:** Control Chrome connector automation mein kaise madad karta hai?
   - **A:** Control Chrome AI ko allow karta hai ki woh browser ko natively drive kare. AI khud naye tabs (switch tab) khol sakta hai, URL navigate kar sakta hai, aur background mein execute JavaScript karke DOM (Document Object Model) element extract kar sakta hai, bina human intervention ke.
-  - **Q:** Chat conversation history ko as a context use karne ka kya risk hai?
-  - **A:** Agar conversation history bohot lambi ho jaye (context window full ho jaye), toh AI purane rules bhulne lagta hai (jise "lost in the middle" problem kehte hain). Isliye context ko clear rakhne ke liye naya session start karna better hota hai.
+  - [[HL::**Q:** Chat conversation history ko as a context use karne ka kya risk hai?::HL]]
+  - [[HL::**A:** Agar conversation history bohot lambi ho jaye (context window full ho jaye), toh AI purane rules bhulne lagta hai (jise "lost in the middle" problem kehte hain). Isliye context ko clear rakhne ke liye naya session start karna better hota hai::HL]].
   - **Q:** AI hallucination ko prevent karne mein GitHub/SharePoint connectors kaise kaam karte hain?
   - **A:** Hallucination tab hota hai jab AI "guess" karta hai. In connectors se AI direct company ki actual code repo ya requirement documents padh leta hai. Ground truth milne ke baad AI ko guess karne ki zaroorat nahi padti.
   - **Q:** Execution ke dauran agar AI ko nayi file chahiye toh woh kya karega?
@@ -2270,11 +2270,11 @@ AI chat model ek smart library assistant jaisa hai jo tumhe answer bata sakta ha
 
 *(Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.)*
 
-**The Evolution Flow:**
+**The [[HL::Evolution Flow:**::HL]]
 
-  - **Past (2023):** ChatGPT (Text In, Text Out).
-  - **Present (2024):** **Microsoft 365 copilot** (AI jo tumhare emails/Word docs mein suggestions deta hai, par final click tum karte ho).
-  - **Future (2025+):** **Agent Stores** khulenge (jaise App Store). Tum wahan se ek "QA Testing Agent" download karoge. Woh tumhara code repository padhega, khud sochega, bugs dhundhega aur JIRA mein khud ticket raise karega. The system is completely autonomous.
+  - [[HL::**Past (2023):** ChatGPT (Text In, Text Out).::HL]]
+  - [[HL::**Present (2024):** **Microsoft 365 copilot** (AI jo tumhare emails/Word docs mein suggestions deta hai, par final click tum karte ho).::HL]]
+  - [[HL::**Future (2025+):** **Agent Stores** khulenge (jaise App Store). Tum wahan se ek "QA Testing Agent" download karoge. Woh tumhara code repository padhega, khud sochega, bugs dhundhega aur JIRA mein khud ticket raise karega. The system is completely autonomous::HL]].
 
 #### 🔒 8. Security-First Check
 
@@ -2293,7 +2293,7 @@ Enterprise level pe, ek insaan din mein 50 invoices validate kar sakta hai. Par 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 
   - **Confusion 1:** "Copilot aur Agent mein kya farq hai?" → Copilot tumhara assistant hai (driver tum ho, copilot rasta batata hai). Agent autonomous hai (jaise self-driving car, woh khud tumhari destination pe pahuncha dega).
-  - **Confusion 2:** "Multi-agent system ka kya matlab hai?" → Ek building banate waqt sirf architect se kaam nahi chalta; plumber, electrician sab chahiye. Waise hi jab bohot saare specific agents mil kar ek bada task karte hain, use multi-agent system kehte hain.
+  - [[HL::**Confusion 2:** "Multi-agent system ka kya matlab hai?" → Ek building banate waqt sirf architect se kaam nahi chalta; plumber, electrician sab chahiye. Waise hi jab bohot saare specific agents mil kar ek bada task karte hain, use multi-agent system kehte hain::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 
@@ -2335,8 +2335,8 @@ Enterprise level pe, ek insaan din mein 50 invoices validate kar sakta hai. Par 
 
 #### ❓ 17. Interview Q\&A (FAQ)
 
-  - **Q:** 2025 ko 'Year of AI Agents' kyun consider kiya ja raha hai?
-  - **A:** Ab tak LLMs sirf generative capability pe focus kar rahe the. Ab MCP (Model Context Protocol) aur tool-calling ki wajah se models "Action" le sakte hain. Yeh shift passive AI se active autonomous systems ki taraf hai, isliye agents naya paradigm hain.
+  - **Q:** [[HL::2025 ko 'Year of AI Agents' kyun consider kiya ja raha hai?::HL]]
+  - [[HL::**A:** Ab tak LLMs sirf generative capability pe focus kar rahe the. Ab MCP (Model Context Protocol) aur tool-calling ki wajah se models "Action" le sakte hain. Yeh shift passive AI se active autonomous systems ki taraf hai, isliye agents naya paradigm hain::HL]].
   - **Q:** "Thinks, desired and acts" framework ek AI agent ke liye kaise kaam karta hai?
   - **A:** Agent pehle user ki request analyze karta hai (Thinks). Fir woh ek goal aur path decide karta hai (Desired/Planning). Finally, woh us plan ko execute karne ke liye APIs ya tools invoke karta hai (Acts) aur feedback loop mein result check karta hai.
   - **Q:** Enterprise platforms (jaise ServiceNow, Salesforce) AI agents ko kyun integrate kar rahe hain?
@@ -2385,63 +2385,63 @@ Enterprise level pe, ek insaan din mein 50 invoices validate kar sakta hai. Par 
 Socho ek multinational company hai jahan alag-alag desh ke log kaam karte hain aur unhe aapas mein baat karne mein problem hoti hai. Fir company ek naya rule banati hai ki office mein sab sirf "English" mein baat karenge. Yeh common language ek universal bridge ban gayi. **MCP (Model Context Protocol)** exactly yahi "common language" hai. Yeh ek universal open source standard hai jo alag-alag AI models (jaise Claude, OpenAI) ko tumhare system ke tools (jaise File System, Chrome) se bina kisi confusion ke baat karne deta hai. 
 
 #### 📖 3. Technical Definition
-- **Precise English:** Model Context Protocol (MCP) is an open-source standard based on a client-server architecture that provides a unified way for AI models (Clients) to discover, interact with, and invoke external custom tools (Servers) like databases or web browsers.
-- **Hinglish Simplification:** Ek standard ruleset jiske zariye koi bhi AI (Client) tumhare local computer ke tools ya data (Server) se safely judd sakta hai aur commands execute kar sakta hai.
+- [[HL::**Precise English:** Model Context Protocol (MCP) is an open-source standard based on a client-server architecture that provides a unified way for AI models (Clients) to discover, interact with, and invoke external custom tools (Servers) like databases or web browsers.::HL]]
+- [[HL::**Hinglish Simplification:** Ek standard ruleset jiske zariye koi bhi AI (Client) tumhare local computer ke tools ya data (Server) se safely judd sakta hai aur commands execute kar sakta hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Pehle agar Claude ko file read karni hoti thi, toh uska alag code banta tha. ChatGPT ke liye alag code banta tha. Har naye AI ke liye naye **toolings** (tools ko integrate karne ka process) likhne padte the.
-- **Solution:** **Model context protocol (MCP)** ne ek standard **client server architecture** bana diya. Ab tool ek baar banta hai (as an MCP Server) aur koi bhi AI usse connect kar sakta hai.
-- **What breaks if we don't use it?** Developer ko hazaron lines ka custom code likhna padega sirf ek database connect karne ke liye, jo maintain karna namumkin ho jayega.
+- [[HL::**Problem:** Pehle agar Claude ko file read karni hoti thi, toh uska alag code banta tha. ChatGPT ke liye alag code banta tha. Har naye AI ke liye naye **toolings** (tools ko integrate karne ka process) likhne padte the.::HL]]
+- [[HL::**Solution:** **Model context protocol (MCP)** ne ek standard **client server architecture** bana diya. Ab tool ek baar banta hai (as an MCP Server) aur koi bhi AI usse connect kar sakta hai.::HL]]
+- [[HL::**What breaks if we don't use it?** Developer ko hazaron lines ka custom code likhna padega sirf ek database connect karne ke liye, jo maintain karna namumkin ho jayega::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 *(N/A — yeh conceptual architecture ka topic hai, direct code editor visual applicable nahi hai)*
 
-#### ⚙️ 6. Under the Hood (Deep Dive)
-1. **The Client:** Tumhara IDE jaise **VS Code** (code editor), **cursor IDE** (AI-first code editor), **windsurf IDE** (advanced AI editor), ya **Gemini CLI** (command-line AI tool) ek **cloud desktop client** ki tarah act karta hai. Yeh Client AI model ko host karta hai.
-2. **The Connection:** Client ek standard JSON format mein request bhejta hai (yeh MCP protocol hai).
-3. **The Server:** Tumhare laptop par chal raha ek **file system MCP server** (jo files read karta hai) ya **Chrome server** (jo browser chalata hai) us request ko receive karta hai.
-4. **Execution:** Server actual kaam karta hai (jaise **web search** karna, **query a database** karna, ya **calling an API**).
-5. **Response:** Server data wapas Client (AI) ko MCP format mein bhej deta hai taaki AI apna answer generate kar sake.
+#### ⚙️ 6. Under [[HL::the Hood (Deep Dive)::HL]]
+1. [[HL::**The Client:** Tumhara IDE jaise **VS Code** (code editor), **cursor IDE** (AI-first code editor), **windsurf IDE** (advanced AI editor), ya **Gemini CLI** (command-line AI tool) ek **cloud desktop client** ki tarah act karta hai. Yeh Client AI model ko host karta hai.::HL]]
+2. [[HL::**The Connection:** Client ek standard JSON format mein request bhejta hai (yeh MCP protocol hai).::HL]]
+3. [[HL::**The Server:** Tumhare laptop par chal raha ek **file system MCP server** (jo files read karta hai) ya **Chrome server** (jo browser chalata hai) us request ko receive karta hai.::HL]]
+4. [[HL::**Execution:** Server actual kaam karta hai (jaise **web search** karna, **query a database** karna, ya **calling an API**).::HL]]
+5. [[HL::**Response:** Server data wapas Client (AI) ko MCP format mein bhej deta hai taaki AI apna answer generate kar sake::HL]].
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
 *(Yeh architecture topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.)*
 
-**Step-by-Step Flow of MCP Architecture:**
-1. **User Request:** Tumne Cursor IDE mein likha: "Database se test user dhoondho."
-2. **AI Client Action:** AI dekhta hai ki uske paas "Database MCP Server" connect hai.
-3. **Protocol Communication:** AI standard MCP format mein ek query pack karke bhejta hai.
-4. **Server Execution:** Local database MCP server us query ko SQL mein convert karta hai aur DB run karta hai.
-5. **Result Return:** Data wapas AI ke paas aata hai aur AI tumhe human-readable format mein answer deta hai.
-*Yahan AI ko SQL connection ki tension nahi leni padti, yeh kaam server ka hai.*
+[[HL::**Step-by-Step Flow of MCP Architecture:**::HL]]
+1. [[HL::**User Request:** Tumne Cursor IDE mein likha: "Database se test user dhoondho."::HL]]
+2. [[HL::**AI Client Action:** AI dekhta hai ki uske paas "Database MCP Server" connect hai.::HL]]
+3. [[HL::**Protocol Communication:** AI standard MCP format mein ek query pack karke bhejta hai.::HL]]
+4. [[HL::**Server Execution:** Local database MCP server us query ko SQL mein convert karta hai aur DB run karta hai::HL]].
+5. [[HL::**Result Return:** Data wapas AI ke paas aata hai aur AI tumhe human-readable format mein answer deta hai.::HL]]
+[[HL::*Yahan AI ko SQL connection ki tension nahi leni padti, yeh kaam server ka hai::HL]].*
 
 #### 🔒 8. Security-First Check
 MCP architecture exactly isliye banaya gaya hai taaki security control tumhare paas rahe. Tumhare **local MCP servers** sirf unhi folders ya databases ko expose karte hain jinhe tum allow karte ho. AI client directly tumhare poore hard-drive ko access nahi kar sakta (unlike older plugin models).
 
 #### 🏗️ 9. Scalability & Industry Context
-MCP ko industry standard banaya ja raha hai. Agar kal ko ek naya AI model aata hai, toh usko existing **custom tools** (jaise internal JIRA ya Jenkins server) se jodne ke liye zero code changes chahiye honge. Sirf MCP server ko naye client pe configure karna padega.
+[[HL::MCP ko industry standard banaya ja raha hai. Agar kal ko ek naya AI model aata hai, toh usko existing **custom tools** (jaise internal JIRA ya Jenkins server) se jodne ke liye zero code changes chahiye honge. Sirf MCP server ko naye client pe configure karna padega::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 - **❌ Mistake:** Har naye AI ke liye naya native plugin banana.
 - **🤦 Why:** Tech ecosystem bohot fast change ho raha hai. Jo plugin GPT-4 ke liye likha, woh Claude mein nahi chalega.
 - **✅ The 'Pro' Way:** MCP standard adopt karo taaki ek tool likho aur woh GitHub Copilot, Cursor, Windsurf sab jagah chal jaye.
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "MCP Client aur Server mein kya farq hai?" → Client hamesha tumhara AI interface hota hai (jaise Claude Desktop app). Server woh chota sa background program hota hai jo actual tool chala raha hota hai (jaise File System server ya Postgres database server).
-- **Confusion 2:** "Kya MCP API jaisa hai?" → Haan, par yeh AI ke liye banayi gayi ek specific 'API format' hai. AI ko pata hota hai ki MCP server ke errors ko kaise handle karna hai aur tools ko kaise call karna hai bina explicitly sikhaye.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "MCP Client aur Server mein kya farq hai?" → Client hamesha tumhara AI interface hota hai (jaise Claude Desktop app). Server woh chota sa background program hota hai jo actual tool chala raha hota hai (jaise File System server ya Postgres database server).::HL]]
+- [[HL::**Confusion 2:** "Kya MCP API jaisa hai?" → Haan, par yeh AI ke liye banayi gayi ek specific 'API format' hai. AI ko pata hota hai ki MCP server ke errors ko kaise handle karna hai aur tools ko kaise call karna hai bina explicitly sikhaye::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
-- Claude bol raha hai "Tool not found"? → Check karo kya tumhara MCP Server running mode mein hai.
+- [[HL::Claude bol raha hai "Tool not found"? → Check karo kya tumhara MCP Server running mode mein hai::HL]].
 - Permission Error aa raha hai? → Check karo kya MCP server ko us specific folder/API ko read karne ka access OS (Operating System) ne diya hai?
 
-#### ⚖️ 13. Comparison (Ye vs Woh)
-| Feature | Custom AI Plugins | MCP Architecture |
+#### ⚖️ [[HL::13. Comparison (Ye vs Woh)::HL]]
+| [[HL::Feature::HL]] | [[HL::Custom AI Plugins::HL]] | [[HL::MCP Architecture::HL]] |
 | :--- | :--- | :--- |
-| **Compatibility** | Specific to one AI (e.g., ChatGPT only) | Universal (Works on Cursor, Claude, etc.) |
-| **Setup location** | Hosted on Cloud | Runs locally (High Privacy) |
-| **Maintenance** | Hard (Vendor lock-in) | Easy (Open Source Standard) |
+| [[HL::**Compatibility**::HL]] | [[HL::Specific to one AI (e.g., ChatGPT only)::HL]] | [[HL::Universal (Works on Cursor, Claude, etc.)::HL]] |
+| [[HL::**Setup location**::HL]] | [[HL::Hosted on Cloud::HL]] | [[HL::Runs locally (High Privacy)::HL]] |
+| [[HL::**Maintenance**::HL]] | [[HL::Hard (Vendor lock-in)::HL]] | [[HL::Easy (Open Source Standard)::HL]] |
 
 #### 🌍 14. Real-World Use Case (Production Application)
-Large QA teams apne internal Jenkins (CI/CD pipeline tool) ke liye ek MCP Server build karti hain. Ab QA engineer **GitHub Copilot** ya **Gemini CLI** kholta hai aur type karta hai: "Run the regression suite for Login module". Copilot Jenkins MCP server ko command bhejta hai aur test automatically trigger ho jate hain.
+[[HL::Large QA teams apne internal Jenkins (CI/CD pipeline tool) ke liye ek MCP Server build karti hain. Ab QA engineer **GitHub Copilot** ya **Gemini CLI** kholta hai aur type karta hai: "Run the regression suite for Login module". Copilot Jenkins MCP server ko command bhejta hai aur test automatically trigger ho jate hain::HL]].
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 - **Testing/Offline Phase:** Developer ek MCP architecture setup karta hai jisme AI IDE (**VS Code/Cursor**) client banta hai aur local database ya file system backend server banta hai.
@@ -2458,17 +2458,17 @@ Large QA teams apne internal Jenkins (CI/CD pipeline tool) ke liye ek MCP Server
 +-------------------------+                                 +----------------------+
 ```
 
-#### ❓ 17. Interview Q&A (FAQ)
-- **Q:** Model Context Protocol (MCP) kya hai aur yeh kyun zaroori hai?
-- **A:** MCP ek open-source standard hai jo AI models (clients) aur external data sources/tools (servers) ke beech communication standardize karta hai. Iske bina har AI aur tool ke integration ke liye alag se custom code likhna padta.
-- **Q:** MCP Architecture mein 'Server Client Architecture' kaise kaam karta hai?
-- **A:** Isme AI assistant (jaise Claude ya Cursor) 'Client' hota hai jo query aur reasoning karta hai. Tool (jaise File System ya Browser automation tool) 'Server' hota hai jo actual command execute karta hai aur results wapas AI ko pass karta hai.
-- **Q:** Kya MCP use karne ke liye humara data cloud par jana zaroori hai?
-- **A:** Nahi. MCP ka sabse bada faida local execution hai. 'Local MCP servers' tumhari machine pe run hote hain. AI model (client) query bhejta hai, par execution (jaise query a database) tumhare secure local environment mein hota hai.
+#### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
+- [[HL::**Q:** Model Context Protocol (MCP) kya hai aur yeh kyun zaroori hai?::HL]]
+- [[HL::**A:** MCP ek open-source standard hai jo AI models (clients) aur external data sources/tools (servers) ke beech communication standardize karta hai. Iske bina har AI aur tool ke integration ke liye alag se custom code likhna padta::HL]].
+- [[HL::**Q:** MCP Architecture mein 'Server Client Architecture' kaise kaam karta hai?::HL]]
+- [[HL::**A:** Isme AI assist::HL]][[HL::ant (jaise Claude ya Cursor) 'Client' hota hai jo query aur reasoning karta hai. Tool (jaise File System ya Browser automation tool) 'Server' hota hai jo actual command execute karta hai aur results wapas AI ko pass karta ha::HL]]i.
+- [[HL::**Q:** Kya MCP use karne ke liye humara data cloud par jana zaroori hai?::HL]]
+- [[HL::**A:** Nahi. MCP ka sabse bada faida local execution hai. 'Local MCP servers' tumhari machine pe run hote hain. AI model (client) query bhejta hai, par execution (jaise query a database) tumhare secure local environment mein hota hai::HL]].
 - **Q:** 'Windsurf IDE' ya 'Cursor IDE' jaise tools mein MCP ka kya role hai?
 - **A:** Yeh IDEs directly MCP clients ke roop mein act karte hain. Tum inme MCP servers configure kar sakte ho jisse AI directly local APIs call kar sake, command line chala sake, aur file system se context ikkatha kar sake bina developer ke manually files kholne ke.
-- **Q:** Custom tools ko AI se integrate karne ke liye MCP best approach kyun hai?
-- **A:** Kyunki MCP ek universal abstraction deta hai. Agar ek company apni internal API ke liye ek MCP server banati hai, toh woh ek hi server Claude, Gemini CLI, aur VS Code Copilot sabke sath chalega. Vendor lock-in nahi hota.
+- [[HL::**Q:** Custom tools ko AI se integrate karne ke liye MCP best approach kyun hai?::HL]]
+- [[HL::**A:** Kyunki MCP ek universal abstraction deta hai. Agar ek company apni internal API ke liye ek MCP server banati hai, toh woh ek hi server Claude, Gemini CLI, aur VS Code Copilot sabke sath chalega. Vendor lock-in nahi hota::HL]].
 
 #### 📝 18. One-Line Memory Hook
 "MCP AI ka universal adapter hai — ek baar tool lagao, kisi bhi AI ke sath chalao."
@@ -2491,59 +2491,59 @@ Maan lo tumne ek naya smart TV (Claude Desktop) kharida hai. TV mein by default 
 
 #### 📖 3. Technical Definition
 - **Precise English:** The process of explicitly configuring the Microsoft Playwright tool as an MCP server within the Claude Desktop application's configuration file (JSON), followed by a mandatory application restart to enable native browser automation capabilities.
-- **Hinglish Simplification:** Claude app ki settings (JSON file) mein Playwright ka path add karna, aur app ko band karke chalu karna taaki AI khud browser open karke test kar sake.
+- [[HL::**Hinglish Simplification:** Claude app ki settings (JSON file) mein Playwright ka path add karna, aur app ko band karke chalu karna taaki AI khud browser open karke test kar sake::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** By default, AI sirf **file system MCP server** (files padhna) ya basic web search kar sakta hai. Woh dynamically buttons pe click ya complex browser actions nahi kar sakta.
-- **Solution:** Hum **Microsoft Playwright MCP server** (ek advanced browser automation tool) ko Claude se attach karte hain via configuration.
-- **What breaks if we don't use it?** AI tumhe code toh likh ke de dega, par usko live website pe khud execute karke test nahi kar payega.
+- [[HL::**Problem:** By default, AI sirf **file system MCP server** (files padhna) ya basic web search kar sakta hai. Woh dynamically buttons pe click ya complex browser actions nahi kar sakta.::HL]]
+- [[HL::**Solution:** Hum **Microsoft Playwright MCP server** (ek advanced browser automation tool) ko Claude se attach karte hain via configuration.::HL]]
+- [[HL::**What breaks if we don't use it?** AI tumhe code toh likh ke de dega, par usko live website pe khud execute karke test nahi kar payega::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```text
-[ Claude Desktop Menu ]
--> Claude
-   -> Settings...
-      -> Developer
-         -> [ Edit Config ]  <-- Yahan click karne par ek JSON file khulegi
+[ [[HL::Claude Desktop Menu ]::HL]]
+[[HL::-> Claude::HL]]
+[[HL::   -> Settings...::HL]]
+[[HL::      -> Developer::HL]]
+[[HL::         -> [ Edit Config ]  <-- Yahan click karne par ek JSON file khulegi::HL]]
 
-(After Restart, at the bottom of the chat UI)
-[ 📎 File ] [ 🌐 Web Search ] [ 🎭 Playwright ] <-- Naya 'playwright tool knob' dikhega
+[[HL::(After Restart, at the bottom of the chat UI)::HL]]
+[[HL::[ 📎 File ] [ 🌐 Web Search ] [ 🎭 Playwright ] <-- Naya 'playwright tool knob' dikhega::HL]]
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. Developer Claude desktop app ki **developer settings** kholta hai.
-2. Wahan "edit config" par click karta hai, jo ek configuration **JSON file** open karta hai.
-3. Us JSON file ke **MCP servers root** mein woh Playwright ki specific command aur package link add karta hai (jo normally **GitHub page** pe documentation mein mil jati hai).
-4. File save karne ke baad, yeh settings memory mein load nahi hoti jab tak app refresh na ho.
-5. Developer actively **restart cloud desktop** process follow karta hai.
-6. Restart hone par, Claude naye **local MCP servers** boot karta hai aur UI mein ek naya **playwright tool knob** (ek icon/button) attach kar deta hai for **browser automation**.
+1. [[HL::Developer Claude desktop app ki **developer settings** kholta hai.::HL]]
+2. [[HL::Wahan "edit config" par click karta hai, jo ek configuration **JSON file** open karta hai.::HL]]
+3. [[HL::Us JSON file ke **MCP servers root** mein woh Playwright ki specific command aur package link add karta hai (jo normally **GitHub page** pe documentation mein mil jati hai).::HL]]
+4. [[HL::File save karne ke baad, yeh settings memory mein load nahi hoti jab tak app refresh na ho.::HL]]
+5. [[HL::Developer actively **restart cloud desktop** process follow karta hai.::HL]]
+6. [[HL::Restart hone par, Claude naye **local MCP servers** boot karta hai aur UI mein ek naya **playwright tool knob** (ek icon/button) attach kar deta hai for **browser automation**::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
-Yahan dekho actual `claude_desktop_config.json` file kaisi dikhti hai jab hum Playwright ko configure karte hain.
+[[HL::Yahan dekho actual `claude_desktop_config.json` file kaisi dikhti hai jab hum Playwright ko configure karte hain.::HL]]
 
 ```json
-1  {                                                    // JSON file ki shuruaat
-2    "mcpServers": {                                    // mcpServers root key — yahan saare tools list hote hain
-3      "playwright": {                                  // Naye server ka naam "playwright" diya
-4        "command": "npx",                              // command = npx (Node package execute karne ke liye)
-5        "args": [                                      // args = npx ke sath pass hone wale arguments
-6          "-y",                                        // -y = without asking yes/no, package install and run karo
-7          "@modelcontextprotocol/server-playwright"    // Official Microsoft Playwright MCP server package ka naam
-8        ]
-9      }
-10   }
-11 }
+[[HL::1  {                                                    // JSON file ki shuruaat::HL]]
+[[HL::2    "mcpServers": {                                    // mcpServers root key — yahan saare tools list hote hain::HL]]
+[[HL::3      "playwright": {                                  // Naye server ka naam "playwright" diya::HL]]
+[[HL::4        "command": "npx",                              // command = npx (Node package execute karne ke liye)::HL]]
+[[HL::5        "args": [                                      // args = npx ke sath pass hone wale arguments::HL]]
+[[HL::6          "-y",                                        // -y = without asking yes/no, package install and run karo::HL]]
+[[HL::7          "@modelcontextprotocol/server-playwright"    // Official Microsoft Playwright MCP server package ka naam::HL]]
+[[HL::8        ]::HL]]
+[[HL::9      }::HL]]
+[[HL::10   }::HL]]
+[[HL::11 }::HL]]
 ```
 
 ```text
-# 📤 Expected Output:
-(App restart karne ke baad)
-Claude Desktop Chat UI mein attachment section ke paas "Playwright" tool ka icon/knob enable ho jayega.
+# [[HL::📤 Expected Output:::HL]]
+[[HL::(App restart karne ke baad)::HL]]
+[[HL::Claude Desktop Chat UI mein attachment section ke paas "Playwright" tool ka icon/knob enable ho jayega.::HL]]
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
-- **Line 2:** `mcpServers` — Yeh Claude app ka entry point hai external tools ke liye. Agar yahan galti hui toh koi tool load nahi hoga.
-- **Line 4 & 5:** Hum `npx` command use kar rahe hain kyunki Playwright ek JavaScript based tool hai. Claude local environment ka Node.js use karega isko chalane ke liye.
+##### [[HL::🔬 Code Explanation Rule (LINE-BY-LINE)::HL]]
+- [[HL::**Line 2:** `mcpServers` — Yeh Claude app ka entry point hai external tools ke liye. Agar yahan galti hui toh koi tool load nahi hoga.::HL]]
+- [[HL::**Line 4 & 5:** Hum `npx` command use kar rahe hain kyunki Playwright ek JavaScript based tool hai. Claude local environment ka Node.js use karega isko chalane ke liye.::HL]]
 - **Line 6 & 7:** Yeh exact woh package hai jo Playwright ne officially publish kiya hai. `-y` ensure karta hai ki terminal prompt pe atak na jaye aur silently execute ho jaye.
 
 #### 🔒 8. Security-First Check
@@ -2559,7 +2559,7 @@ Is tarah ki JSON configuration ko infrastructure as code (IaC) ke through poori 
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 - **Confusion 1:** "Playwright tool knob kya hai?" → Knob ek technical UI term hai. Simple bhasha mein yeh ek 'icon' ya 'button' hai jo Claude app ke chat box ke neeche dikhai deta hai, indicating ki Playwright connect ho gaya hai.
-- **Confusion 2:** "GitHub page ka zikr kyun aaya?" → Playwright MCP server ka exact JSON syntax (jo line 7 mein humne likha) Playwright ki official GitHub repository ki documentation page pe explicitly diya hota hai. Wahi se developer ise copy karta hai.
+- [[HL::**Confusion 2:** "GitHub page ka zikr kyun aaya?" → Playwright MCP server ka exact JSON syntax (jo line 7 mein humne likha) Playwright ki official GitHub repository ki documentation page pe explicitly diya hota hai. Wahi se developer ise copy karta hai::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 - Playwright tool knob nahi dikh raha? → App completely close (Quit) karke reopen karo.
@@ -2573,7 +2573,7 @@ Is tarah ki JSON configuration ko infrastructure as code (IaC) ke through poori 
 | **Use Case** | Formal test suites in CI/CD | Exploratory vibe coding and test generation |
 
 #### 🌍 14. Real-World Use Case (Production Application)
-Startups mein jab developer naya form UI banata hai, toh woh QA engineer ka wait nahi karta. Developer simply apne Claude Desktop mein, jahan Playwright MCP configured hai, likhta hai "Test this new sign-up form". Claude khud browser kholta hai, Playwright use karke form fill karta hai, aur developer ko seconds mein testing feedback de deta hai.
+[[HL::Startups mein jab developer naya form UI banata hai, toh woh QA engineer ka wait nahi karta. Developer simply apne Claude Desktop mein, jahan Playwright MCP configured hai, likhta hai "Test this new sign-up form". Claude khud browser kholta hai, Playwright use karke form fill karta hai, aur developer ko seconds mein testing feedback de deta hai::HL]].
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 - **Testing/Offline Phase:** Developer Claude Desktop ki settings mein jata hai, **developer settings** se **edit config** kholta hai, aur JSON file mein **Microsoft Playwright MCP server** ki nayi entry add karta hai.
@@ -2595,10 +2595,10 @@ Startups mein jab developer naya form UI banata hai, toh woh QA engineer ka wait
 ```
 
 #### ❓ 17. Interview Q&A (FAQ)
-- **Q:** Claude desktop configuration mein Playwright ko integrate karne ka step-by-step process kya hai?
-- **A:** Developer settings open karo, 'Edit Config' pe click karke `claude_desktop_config.json` file open karo. Phir `mcpServers` object ke andar Playwright ka package add karo. File save karne ke baad Claude app ko completely restart karo taaki naya UI tool knob enable ho jaye.
-- **Q:** Config file edit karne ke baad Cloud Desktop restart karna kyun mandatory hai?
-- **A:** Kyunki MCP servers application boot time pe load hote hain. Jab tak app background processes ko kill karke fresh JSON memory mein load nahi karti, naya server aur uski corresponding UI (tools knob) active nahi hote.
+- **Q:** [[HL::Claude desktop configuration mein Playwright ko integrate karne ka step-by-step process kya hai?::HL]]
+- [[HL::**A:** Developer settings open karo, 'Edit Config' pe click karke `claude_desktop_config.json` file open karo. Phir `mcpServers` object ke andar Playwright ka package add karo. File save karne ke baad Claude app ko completely restart karo taaki naya UI tool knob enable ho jaye.::HL]]
+- [[HL::**Q:** Config file edit karne ke baad Cloud Desktop restart karna kyun mandatory hai?::HL]]
+- [[HL::**A:** Kyunki MCP servers application boot time pe load hote hain. Jab tak app background processes ko kill karke fresh JSON memory mein load nahi karti, naya server aur uski corresponding UI (tools knob) active nahi hote::HL]].
 - **Q:** MCP setup ke context mein 'Playwright tool knob' kya denote karta hai?
 - **A:** Yeh chat interface ke bottom mein aane wala ek visual indicator (icon/button) hai jo batata hai ki Playwright MCP server successfully connect ho gaya hai aur ab user AI ko browser automation commands de sakta hai.
 - **Q:** JSON config file mein 'npx' command kyun use ki jati hai Playwright server load karne ke liye?
@@ -2627,7 +2627,7 @@ Pehle tum remote control car chalate the (Selenium script jisme har turn ka code
 
 #### 📖 3. Technical Definition
 - **Precise English:** An interactive session demonstrating a large language model utilizing an MCP server to autonomously navigate webpages, interpret UI state via screenshots, prompt users for missing sensitive data, and execute complex workflows like form filling without explicit step-by-step code.
-- **Hinglish Simplification:** Ek live demo jisme AI khud website kholta hai, screen dekh kar samajhta hai kya chal raha hai, jarurat padne pe user se password mangta hai, aur automatically pura form bhar ke test pass kar deta hai.
+- [[HL::**Hinglish Simplification:** Ek live demo jisme AI khud website kholta hai, screen dekh kar samajhta hai kya chal raha hai, jarurat padne pe user se password mangta hai, aur automatically pura form bhar ke test pass kar deta hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 - **Problem:** Traditional automation mein agar ek button ka ID badal jaye toh test fail ho jata hai aur script maintain karna headache ban jata hai.
@@ -2825,13 +2825,13 @@ Socho tum ek movie ke Director ho aur AI tumhara Actor hai. Director khud camera
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
 *(Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.)*
 
-**The Vibe Coding Loop:**
-- **Step 1:** 🗣️ Prompt (You): "Create a login test."
-- **Step 2:** 🤖 Generate (AI): AI writes 50 lines of Selenium code.
-- **Step 3:** 🔍 Review (You): "Wait, this doesn't use Page Object Model."
-- **Step 4:** 🗣️ **Refine and debug code** (You): "Refactor this into POM structure."
-- **Step 5:** 🤖 Update (AI): AI reorganizes the code into proper folders.
-*Yahan developer ne code ki ek bhi line type nahi ki, sirf system ko 'direct' kiya.*
+[[HL::**The Vibe Coding Loop:**::HL]]
+- [[HL::**Step 1:** 🗣️ Prompt (You): "Create a login test."::HL]]
+- [[HL::**Step 2:** 🤖 Generate (AI): AI writes 50 lines of Selenium code.::HL]]
+- [[HL::**Step 3:** 🔍 Review (You): "Wait, this doesn't use Page Object Model."::HL]]
+- [[HL::**Step 4:** 🗣️ **Refine and debug code** (You): "Refactor this into POM structure."::HL]]
+- [[HL::**Step 5:** 🤖 Update (AI): AI reorganizes the code into proper folders.::HL]]
+[[HL::*Yahan developer ne code ki ek bhi line type nahi ki, sirf system ko 'direct' kiya::HL]].*
 
 #### 🔒 8. Security-First Check
 *(N/A — is concept mein direct security surface nahi hai, par dhyan rahe ki vibe coding karte waqt AI ko prompt mein production API keys ya passwords type karke na diye jayein.)*
@@ -2842,7 +2842,7 @@ Traditional way mein ek 100-page ki application ka framework banane mein mahino 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 - **❌ Mistake:** AI ka diya hua pehla draft blindly production mein push kar dena.
 - **🤦 Why:** AI shortcuts leta hai aur edge cases miss kar deta hai.
-- **✅ The 'Pro' Way:** Vibe coding ka matlab AI pe depend hona nahi hai. Code generate karwao, par hamesha manually review aur **optimize** karo.
+- **✅ [[HL::The 'Pro' Way:** Vibe coding ka matlab AI pe depend hona nahi hai. Code generate karwao, par hamesha manually review aur **optimize** karo::HL]].
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 - **Confusion 1:** "Prompt Engineering aur Vibe Coding mein kya difference hai?" → Prompt engineering ek single command likhne ki art hai. Vibe coding ek continuous conversation (workflow) hai jahan tum AI ke sath milkar iteratively ek poora software banate ho.
@@ -2917,46 +2917,46 @@ Agar tumhare paas ek smartphone (VS Code) hai, toh woh default apps se chalta ha
 
 #### 📖 3. Technical Definition
 - **Precise English:** The configuration process of integrating the GitHub Copilot extension into VS Code, selecting the Claude 4.5 model, and installing the Playwright MCP server via the command palette to enable native browser automation from the IDE.
-- **Hinglish Simplification:** VS Code editor mein GitHub Copilot extension install karna, powerful Claude model select karna, aur MCP marketplace se Playwright tool jodna taaki tumhara editor khud browser chala sake.
+- [[HL::**Hinglish Simplification:** VS Code editor mein GitHub Copilot extension install karna, powerful Claude model select karna, aur MCP marketplace se Playwright tool jodna taaki tumhara editor khud browser chala sake::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Developer ko bar-bar code editor aur Claude desktop app ke beech switch karna padta hai, jo bohot distracting hai.
-- **Solution:** Hum **VS Code** (Microsoft ka code editor) mein hi **GitHub Copilot** extension aur **playwright MCP server** install kar lete hain.
+- [[HL::**Problem:** Developer ko bar-bar code editor aur Claude desktop app ke beech switch karna padta hai, jo bohot distracting hai.::HL]]
+- [[HL::**Solution:** Hum **VS Code** (Microsoft ka code editor) mein hi **GitHub Copilot** extension aur **playwright MCP server** install kar lete hain::HL]].
 - **What breaks if we don't use it?** Tumhe AI ko apne framework ki files manually copy-paste karke deni padengi, aur AI direct tumhare editor se browser test run nahi kar payega.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```text
-[ VS Code Editor ]
-1. Left Sidebar mein GitHub Copilot ka chat icon dikhega.
-2. Command Palette kholne pe:
-   > MCP: List Servers
-   > MCP: Install Server
+[ [[HL::VS Code Editor ]::HL]]
+1. [[HL::Left Sidebar mein GitHub Copilot ka chat icon dikhega.::HL]]
+2. [[HL::Command Palette kholne pe:::HL]]
+   > [[HL::MCP: List Servers::HL]]
+   > [[HL::MCP: Install Server::HL]]
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. Developer **VS Code** open karta hai.
-2. Extensions marketplace se **GitHub Copilot** (Microsoft ka AI coding assistant) install karta hai.
-3. Copilot mein default model ki jagah dropdown se **Claude 4.5 model** select karta hai (Note: Yeh features **paid version** mein aate hain, **free tier** mein limited models hote hain).
-4. Developer shortcut **Command shift P** (Mac) ya **Control shift P** (Windows) dabata hai command palette kholne ke liye.
-5. Wahan command type karta hai: **MCP list server** aur marketplace **enable MCP Server Marketplace** karta hai.
-6. List mein se Playwright dhundh kar **add server** pe click karta hai ya **browse MCP server** karke Playwright ko finally **install** kar leta hai.
+1. [[HL::Developer **VS Code** open karta hai.::HL]]
+2. [[HL::Extensions marketplace se **GitHub Copilot** (Microsoft ka AI coding assistant) install karta hai.::HL]]
+3. [[HL::Copilot mein default model ki jagah dropdown se **Claude 4.5 model** select karta hai (Note: Yeh features **paid version** mein aate hain, **free tier** mein limited models hote hain).::HL]]
+4. [[HL::Developer shortcut **Command shift P** (Mac) ya **Control shift P** (Windows) dabata hai command palette kholne ke liye.::HL]]
+5. [[HL::Wahan command type karta hai: **MCP list server** aur marketplace **enable MCP Server Marketplace** karta hai.::HL]]
+6. [[HL::List mein se Playwright dhundh kar **add server** pe click karta hai ya **browse MCP server** karke Playwright ko finally **install** kar leta hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 Yahan VS Code mein command palette use karne ke exact steps dikhaye gaye hain:
 
 ```text
-1  # VS Code Keyboard Shortcuts
-2  # Mac User: Press `Cmd + Shift + P`
-3  # Windows User: Press `Ctrl + Shift + P`
-4  
-5  # Type this in the Command Palette search bar:
-6  > GitHub Copilot Chat: MCP List Servers
-7  
-8  # Expected options visible on screen:
-9  - Enable MCP Marketplace
-10 - Browse MCP Servers
-11 
-12 # Search for "Playwright" and click [Install]
+1  # [[HL::VS Code Keyboard Shortcuts::HL]]
+[[HL::2  # Mac User: Press `Cmd + Shift + P`::HL]]
+[[HL::3  # Windows User: Press `Ctrl + Shift + P`::HL]]
+[[HL::4  ::HL]]
+[[HL::5  # Type this in the Command Palette search bar:::HL]]
+[[HL::6  > GitHub Copilot Chat: MCP List Servers::HL]]
+[[HL::7  ::HL]]
+[[HL::8  # Expected options visible on screen:::HL]]
+[[HL::9  - Enable MCP Marketplace::HL]]
+[[HL::10 - Browse MCP Servers::HL]]
+[[HL::11 ::HL]]
+[[HL::12 # Search for "Playwright" and click [Install::HL]]]
 ```
 
 ```text
@@ -2966,10 +2966,10 @@ VS Code notification bottom right corner mein dikhega:
 Aur GitHub copilot chat box ke attach menu mein Playwright icon aa jayega.
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
-- **Line 2 & 3:** Yeh VS Code ka sabse important shortcut hai. Ise 'Command Palette' kehte hain jahan se saare hidden commands run hote hain.
-- **Line 6:** Hum Copilot chat ki settings access kar rahe hain. "MCP" search karne se system external tools ki list dikhata hai.
-- **Line 9 & 12:** By default MCP marketplace disable ho sakta hai security ke liye. Ise enable karke official Playwright server add karna hota hai.
+##### 🔬 [[HL::Code Explanation Rule (LINE-BY-LINE)::HL]]
+- [[HL::**Line 2 & 3:** Yeh VS Code ka sabse important shortcut hai. Ise 'Command Palette' kehte hain jahan se saare hidden commands run hote hain.::HL]]
+- [[HL::**Line 6:** Hum Copilot chat ki settings access kar rahe hain. "MCP" search karne se system external tools ki list dikhata hai.::HL]]
+- [[HL::**Line 9 & 12:** By default MCP marketplace disable ho sakta hai security ke liye. Ise enable karke official Playwright server add karna hota hai::HL]].
 
 #### 🔒 8. Security-First Check
 Jab tum **GitHub copilot chat** ke through MCP servers (jaise Playwright) install karte ho, toh VS Code aapse "Workspace Trust" ki permission mangta hai. Kabhi bhi untrusted downloaded code repo mein MCP server enable mat karo, warna third-party script tumhare browser ka control le sakti hai.
@@ -2984,7 +2984,7 @@ Large teams mein, developer environments ko standardize karne ke liye `.vscode/e
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 - **Confusion 1:** "GitHub Copilot aur Claude ka kya link hai?" → GitHub Copilot ek "Gaadi" (Tool) hai. Claude 4.5 uska "Engine" (AI Model) hai. Tum Copilot ke andar dropdown se choose kar sakte ho ki konsa engine chalana hai.
-- **Confusion 2:** "MCP server install karne se VS Code bhari (heavy) toh nahi ho jayega?" → Nahi, MCP servers bohot lightweight JSON/Node scripts hote hain jo background mein silently run hote hain.
+- [[HL::**Confusion 2:** "MCP server install karne se VS Code bhari (heavy) toh nahi ho jayega?" → Nahi, MCP servers bohot lightweight JSON/Node scripts hote hain jo background mein silently run hote hain::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 - "MCP: List Servers" command nahi dikh rahi? → Check karo kya GitHub Copilot aur Copilot Chat extensions updated hain.
@@ -2998,12 +2998,12 @@ Large teams mein, developer environments ko standardize karne ke liye `.vscode/e
 | **Setup** | Claude JSON edit karna | VS Code UI se click karke install karna |
 
 #### 🌍 14. Real-World Use Case (Production Application)
-Spotify ki automation QA team apne test scripts VS Code mein rakhti hai. Jab unhe naya test add karna hota hai, woh **Command shift P** dabate hain, Copilot ko invoke karte hain, aur Playwright MCP ke through direct editor se hi bolte hain: "Login flow test run karo". Editor khud browser kholta hai, test karta hai, aur result chat mein bata deta hai.
+[[HL::Spotify ki automation QA team apne test scripts VS Code mein rakhti hai. Jab unhe naya test add karna hota hai, woh **Command shift P** dabate hain, Copilot ko invoke karte hain, aur Playwright MCP ke through direct editor se hi bolte hain: "Login flow test run karo". Editor khud browser kholta hai, test karta hai, aur result chat mein bata deta hai::HL]].
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
-- **Testing/Offline Phase:** Developer **VS Code** mein **GitHub Copilot** extension install karta hai aur **Command shift P** use karke **MCP list server** open karta hai.
-- **Fixing/Iteration Phase:** Developer marketplace se Playwright MCP server **install** karta hai taaki VS Code copilot browser automation ko locally execute kar sake.
-- **Live Production Phase:** Ab developer ko code aur AI chat ke beech toggle nahi karna padta. Poora Vibe Coding workflow ek hi IDE mein seamless aur secure tarike se chalta hai.
+- [[HL::**Testing/Offline Phase:** Developer **VS Code** mein **GitHub Copilot** extension install karta hai aur **Command shift P** use karke **MCP list server** open karta hai.::HL]]
+- [[HL::**Fixing/Iteration Phase:** Developer marketplace se Playwright MCP server **install** karta hai taaki VS Code copilot browser automation ko locally execute kar sake.::HL]]
+- [[HL::**Live Production Phase:** Ab developer ko code aur AI chat ke beech toggle nahi karna padta. Poora Vibe Coding workflow ek hi IDE mein seamless aur secure tarike se chalta hai::HL]].
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 ```text
@@ -3030,8 +3030,8 @@ Spotify ki automation QA team apne test scripts VS Code mein rakhti hai. Jab unh
 - **A:** Free tier mein limited context window, kam powerful models, aur per-day request limits hoti hain. Enterprise grade applications generate karne ke liye lamba context chahiye, jiske liye Paid version (with advanced models) mandatory ho jata hai taaki model beech mein code truncate na kare.
 - **Q:** VS Code mein MCP server install karne ke baad 'Workspace Trust' kyun important hai?
 - **A:** MCP server tumhare local system aur files pe execute hota hai. Agar tum kisi untrusted repository mein server run karte ho, toh malicious AI prompt ya code tumhara system data compromise kar sakta hai.
-- **Q:** Kya Playwright MCP Server exclusively VS Code ke liye hai?
-- **A:** Nahi, MCP ek open standard hai. Jo Playwright MCP server hum VS Code mein install kar rahe hain, wahi exactly Claude Desktop ya Cursor IDE mein bhi chalta hai.
+- [[HL::**Q:** Kya Playwright MCP Server exclusively VS Code ke liye hai?::HL]]
+- [[HL::**A:** Nahi, MCP ek open standard hai. Jo Playwright MCP server hum VS Code mein install kar rahe hain, wahi exactly Claude Desktop ya Cursor IDE mein bhi chalta hai::HL]].
 
 #### 📝 18. One-Line Memory Hook
 "VS Code ka Command Palette (Ctrl+Shift+P) davao, MCP marketplace enable karo, aur Playwright install karke IDE mein jaan daal do!"
@@ -3054,46 +3054,46 @@ Pehle ek tester ko naya website diya jata tha aur bola jata tha: "Har button dab
 
 #### 📖 3. Technical Definition
 - **Precise English:** The process of utilizing an AI agent equipped with browser automation (Playwright MCP) to autonomously explore an application, discover functionalities, and generate a comprehensive markdown document detailing permutations, combinations, and edge cases for manual testing.
-- **Hinglish Simplification:** AI ko khuli chhoot (Agent mode) dena taaki woh khud browser chalaye, app ko explore kare, aur saare possible test cases (kya chalega, kya fatega) ek file mein note kar de.
+- [[HL::**Hinglish Simplification:** AI ko khuli chhoot (Agent mode) dena taaki woh khud browser chalaye, app ko explore kare, aur saare possible test cases (kya chalega, kya fatega) ek file mein note kar de::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Ek badi website ke hazaron **permutations and combinations** (e.g., galat email, empty password, correct email but wrong password) manually sochna aur document karna bohot boring aur time-consuming hai.
-- **Solution:** Hum AI ka **agent mode** aur **playwright MCP server** use karte hain. AI automatically poori site crawl karta hai aur ek **comprehensive test case document** bana deta hai.
-- **What breaks if we don't use it?** Human testers aksar **empty fields** ya **invalid email** jaise **negative scenarios** document karna bhool jate hain, jisse production mein bugs leak ho jate hain.
+- [[HL::**Problem:** Ek badi website ke hazaron **permutations and combinations** (e.g., galat email, empty password, correct email but wrong password) manually sochna aur document karna bohot boring aur time-consuming hai.::HL]]
+- [[HL::**Solution:** Hum AI ka **agent mode** aur **playwright MCP server** use karte hain. AI automatically poori site crawl karta hai aur ek **comprehensive test case document** bana deta hai.::HL]]
+- [[HL::**What breaks if we don't use it?** Human testers aksar **empty fields** ya **invalid email** jaise **negative scenarios** document karna bhool jate hain, jisse production mein bugs leak ho jate hain::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```text
-[ VS Code Explorer ]
-project_folder/
-├── src/
-└── test case.md   <-- Yeh file AI ne khud generate aur save ki hai
+[ [[HL::VS Code Explorer ]::HL]]
+[[HL::project_folder/::HL]]
+[[HL::├── src/::HL]]
+[[HL::└── test case.md   <-- Yeh file AI ne khud generate aur save ki hai::HL]]
 ```
 File ke andar ka format (Markdown):
 ```markdown
-# Test Cases for HR Application
-## 1. Login Page Tests
-- [Positive] Login with valid credentials
-- [Negative] Login with mismatched password
-- [Negative] Login with empty fields
+# [[HL::Test Cases for HR Application::HL]]
+## [[HL::1. Login Page Tests::HL]]
+- [[HL::[Positive] Login with valid credentials::HL]]
+- [[HL::[Negative] Login with mismatched password::HL]]
+- [[HL::[Negative] Login with empty fields::HL]]
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 1. Developer Copilot chat mein **tool gear symbol** (settings icon) pe click karta hai aur **agent mode** ON karta hai. (Agent mode AI ko system level action lene ki power deta hai).
-2. Developer AI ko **allow in workspace** permission deta hai, taaki AI code folder mein file save kar sake.
-3. AI Playwright MCP invoke karta hai aur website par **monkey testing** shuru karta hai — random clicks, **navigating to the login page**, **creating a new account page**, **employee list page**, aur **search functionality** sab try karta hai.
-4. Har screen ke interaction se AI **positive and negative scenarios** (jaise **user registration operation** with **mismatched password** ya **invalid email**) extract karta hai.
-5. End mein AI saari testing findings ko ek structured format mein **test case.md file** mein (jaise **home page test case** alag, login alag) write kar deta hai.
+2. Developer AI ko **allow in workspace** permission deta hai, taaki [[HL::AI code folder mein file save kar sake.::HL]]
+3. [[HL::AI Playwright MCP invoke karta hai aur website par **monkey testing** shuru karta hai — random clicks, **navigating to the login page**, **creating a new account page**, **employee list page**, aur **search functionality** sab try karta hai.::HL]]
+4. [[HL::Har screen ke interaction se AI **positive and negative scenarios** (jaise **user registration operation** with **mismatched password** ya **invalid email**) extract karta hai.::HL]]
+5. [[HL::End mein AI saari testing findings ko ek structured format mein **test case.md file** mein (jaise **home page test case** alag, login alag) write kar deta hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 Yahan VS Code Copilot Chat ka exact Vibe Coding prompt dekhte hain:
 
 ```text
-1  # PROMPT IN GITHUB COPILOT CHAT (Agent Mode: ON)
-2  "Use Playwright MCP to visit https://hr-app-demo.com."
-3  "Explore the entire application, acting like a QA performing monkey testing."
-4  "Navigate through the login page, creating a new account page, and employee list page."
-5  "Identify all positive and negative scenarios (e.g., empty fields, invalid email)."
-6  "Once done, generate manual test cases and save them in a file named 'test case.md' in my current workspace."
+[[HL::1  # PROMPT IN GITHUB COPILOT CHAT (Agent Mode: ON)::HL]]
+[[HL::2  "Use Playwright MCP to visit https://hr-app-demo.com."::HL]]
+[[HL::3  "Explore the entire application, acting like a QA performing monkey testing."::HL]]
+[[HL::4  "Navigate through the login page, creating a new account page, and employee list page."::HL]]
+[[HL::5  "Identify all positive and negative scenarios (e.g., empty fields, invalid email)."::HL]]
+[[HL::6  "Once done, generate manual test cases and save them in a file named 'test case.md' in my current workspace."::HL]]
 ```
 
 ```text
@@ -3109,23 +3109,23 @@ AI Chat: "I have explored the application. Playwright navigated through 5 pages.
 - **Line 6:** File creation command. Kyunki **allow in workspace** permission on hai, AI khud file create karke disk pe save kar dega.
 
 #### 🔒 8. Security-First Check
-"Monkey testing" ke dauran AI app pe random forms submit karta hai. Agar URL galti se Production environment ka de diya, toh AI actual clients ko hazaron garbage emails bhej sakta hai ya live database mein garbage data bhar dega. **Hamesha is feature ko strictly staging/test environments pe run karein.**
+"Monkey testing" ke dauran AI app pe random forms submit karta hai. Agar URL galti se Production environment ka de diya, toh AI actual clients ko hazaron garbage emails bhej sakta hai ya live database mein garbage data bhar dega. **Hamesha [[HL::is feature ko strictly staging/test environments pe run karein.**::HL]]
 
-#### 🏗️ 9. Scalability & Industry Context
-Is ek prompt aur MCP connection se "Test Planning" ka pura phase automate ho jata hai. Pehle Test Leads ko test plan banane mein hafte lagte the. Ab ek Vibe Coding session se base **test case.md file** seconds mein ban jati hai, aur test lead usme bas company-specific custom rules add karta hai.
+#### [[HL::🏗️ 9. Scalability & Industry Context::HL]]
+[[HL::Is ek prompt aur MCP connection se "Test Planning" ka pura phase automate ho jata hai. Pehle Test Leads ko test plan banane mein hafte lagte the. Ab ek Vibe Coding session se base **test case.md file** seconds mein ban jati hai, aur test lead usme bas company-specific custom rules add karta hai::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 - **❌ Mistake:** Agent Mode turn on kiye bina Copilot ko file create karne bolna.
 - **🤦 Why:** Standard chat mode mein AI sirf tumhe text dega, file khud create nahi kar sakta aur browser nahi khol sakta.
 - **✅ The 'Pro' Way:** Ensure karo ki chat interface mein **Agent Mode** (jo AI ko tools use karne ki permission deta hai) activated ho.
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Positive aur Negative scenarios kya hote hain?" → Positive matlab "Sahi email, sahi password = Login Success". Negative matlab "Galat email daala = Error dikhna chahiye". Test case doc mein dono hone zaroori hain.
-- **Confusion 2:** "Permutations and Combinations ka yahan kya matlab hai?" → Ek form mein 3 fields hain. Pura test karna matlab: Field A khali, Field B bhara. Fir Field A bhara, Field B khali. In sab situations (combinations) ko test karne ko kehte hain.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Positive aur Negative scenarios kya hote hain?" → Positive matlab "Sahi email, sahi password = Login Success". Negative matlab "Galat email daala = Error dikhna chahiye". Test case doc mein dono hone zaroori hain.::HL]]
+- [[HL::**Confusion 2:** "Permutations and Combinations ka yahan kya matlab hai?" → Ek form mein 3 fields hain. Pura test karna matlab: Field A khali, Field B bhara. Fir Field A bhara, Field B khali. In sab situations (combinations) ko test karne ko kehte hain::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
-- AI file save nahi kar pa raha? → VS Code notifications check karo, shayad usne **allow in workspace** permission mangi ho aur tumne deny kar di ho.
-- AI bas login page pe atak gaya? → Prompt mein specifically batao ki login hone ke baad kya click karna hai (e.g., Go to Employee List).
+- [[HL::AI file save nahi kar pa raha? → VS Code notifications check karo, shayad usne **allow in workspace** permission mangi ho aur tumne deny kar di ho.::HL]]
+- [[HL::AI bas login page pe atak gaya? → Prompt mein specifically batao ki login hone ke baad kya click karna hai (e.g., Go to Employee List::HL]]).
 
 #### ⚖️ 13. Comparison (Ye vs Woh)
 | Task | Human Manual QA | AI Agent Mode (Monkey Testing) |
@@ -3199,38 +3199,38 @@ Socho tumhe ek 26 kamron ka ghar (mansion) banana hai. Traditional tareeke mein 
 
 #### 📖 3. Technical Definition
 - **Precise English:** The rapid, AI-driven generation of a complete, structurally sound Page Object Model (POM) test automation framework in Selenium with Python, using a markdown test specification document as the primary context.
-- **Hinglish Simplification:** AI ko apna manual test document dekar use bolna ki "Mere liye pura Selenium Python ka Page Object Model framework bana do", jisse base classes, test files aur utilities automatically code ho jayein.
+- [[HL::**Hinglish Simplification:** AI ko apna manual test document dekar use bolna ki "Mere liye pura Selenium Python ka Page Object Model framework bana do", jisse base classes, test files aur utilities automatically code ho jayein::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Ek naya **automated test framework code** zero se start karna bohot tedious hai. **Selenium with Python** mein folders banana, driver initialize karna, aur helper methods likhne mein din lag jate hain.
-- **Solution:** Hum **test case.md** ko as a context use karke AI (specifically **sonnet 4.5 model**) se instantly ek standard **Page Object Model** scaffold karwa lete hain.
+- [[HL::**Problem:** Ek naya **automated test framework code** zero se start karna bohot tedious hai. **Selenium with Python** mein folders banana, driver initialize karna, aur helper methods likhne mein din lag jate hain.::HL]]
+- [[HL::**Solution:** Hum **test case.md** ko as a context use karke AI (specifically **sonnet 4.5 model**) se instantly ek standard **Page Object Model** scaffold karwa lete hain::HL]].
 - **What breaks if we don't use it?** Agar hum manual setup karenge toh human error ke chances zyada honge, aur team ka costly time sirf boilerplate (basic setup) code likhne mein waste ho jayega.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```text
-[ VS Code Explorer - 26 files automatically generated ]
-project_root/
-├── base/
-│   └── test_base.py        <-- Driver setup / teardown
-├── pages/
-│   ├── base_page.py        <-- Common elements & waits
-│   ├── home_page.py
-│   └── employee_create_page.py
-├── tests/
-│   └── test_employee.py    <-- Actual test scripts
-├── utils/
-│   ├── webdriver_factory.py <-- Driver instantiation
-│   └── helper_utilities.py  <-- Screenshot, random data generator
-└── pytest.ini               <-- Test configuration
+[ [[HL::VS Code Explorer - 26 files automatically generated ]::HL]]
+[[HL::project_root/::HL]]
+[[HL::├── base/::HL]]
+[[HL::│   └── test_base.py        <-- Driver setup / teardown::HL]]
+[[HL::├── pages/::HL]]
+[[HL::│   ├── base_page.py        <-- Common elements & waits::HL]]
+[[HL::│   ├── home_page.py::HL]]
+[[HL::│   └── employee_create_page.py::HL]]
+[[HL::├── tests/::HL]]
+[[HL::│   └── test_employee.py    <-- Actual test scripts::HL]]
+[[HL::├── utils/::HL]]
+[[HL::│   ├── webdriver_factory.py <-- Driver instantiation::HL]]
+[[HL::│   └── helper_utilities.py  <-- Screenshot, random data generator::HL]]
+[[HL::└── pytest.ini               <-- Test configuration::HL]]
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. **Context Reading:** AI sabse pehle tumhari workspace se `test case.md` padhta hai.
-2. **Project Scaffolding:** AI ek command run karke **create project structure** (folders and sub-folders) execute karta hai.
-3. **Core Initialization:** AI ek **WebDriver factory** banata hai jo browser instance start karta hai, aur **playwright setup** ya **selenium tier down** ke rules define karta hai.
-4. **Base Class Creation:** AI ek **base page** (ya **base class**) banata hai jisme **configurable weighting** (jaise **wait for element**, **wait for element to be clicked**, **wait for element to disappear**, **wait for page load**) aur **web driver extensions** hote hain.
-5. **Page Classes:** Har test screen ke liye ek class banti hai (e.g., **employee create page**) jisme element locators (**is element present**, **is element displayed**) store hote hain.
-6. **Utilities Integration:** AI **helper utilities** add karta hai jaise **screenshot utilities**, **test generator utilities**, aur **random data generation** functions.
+1. [[HL::**Context Reading:** AI sabse pehle tumhari workspace se `test case.md` padhta hai.::HL]]
+2. [[HL::**Project Scaffolding:** AI ek command run karke **create project structure** (folders and sub-folders) execute karta hai.::HL]]
+3. [[HL::**Core Initialization:** AI ek **WebDriver factory** banata hai jo browser instance start karta hai, aur **playwright setup** ya **selenium tier down** ke rules define karta hai.::HL]]
+4. [[HL::**Base Class Creation:** AI ek **base page** (ya **base class**) banata hai jisme **configurable weighting** (jaise **wait for element**, **wait for element to be clicked**, **wait for element to disappear**, **wait for page load**) aur **web driver extensions** hote hain.::HL]]
+5. [[HL::**Page Classes:** Har test screen ke liye ek class banti hai (e.g., **employee create page**) jisme element locators (**is element present**, **is element displayed**) store hote hain.::HL]]
+6. [[HL::**Utilities Integration:** AI **helper utilities** add karta hai jaise **screenshot utilities**, **test generator utilities**, aur **random data generation** functions::HL]].
 7. **Test Assembly:** Finally, AI **test classes** generate karta hai aur unke upar **configurations** (jaise **test configuration** for environment variables) apply karta hai. Total lagbhag **26 files** automatically generate ho jati hain.
 
 #### 💻 7. Hands-On — Runnable Example
@@ -3267,16 +3267,16 @@ Yahan hum dekhte hain ki AI ne automatically `base_page.py` kaise likhi jo ki PO
 AI generate karte waqt kabhi-kabhi dummy passwords ya localhost URLs directly `.py` files mein likh deta hai. Production framework mein kabhi bhi credentials hardcode mat karo. Unhe `.env` file se read karne ka logic apne Vibe Coding prompt mein specifically mention karo.
 
 #### 🏗️ 9. Scalability & Industry Context
-Page Object Model (POM) automation ka gold standard hai. Jab company scaling karti hai (10 se 1000 test cases tak), toh UI change hone pe tumhe 1000 files theek nahi karni padti. Tum sirf ek Page File (e.g., `login_page.py`) mein locator update karte ho aur saare test classes jo us page ko use karte hain, automatically theek ho jate hain.
+[[HL::Page Object Model (POM) automation ka gold standard hai. Jab company scaling karti hai (10 se 1000 test cases tak), toh UI change hone pe tumhe 1000 files theek nahi karni padti. Tum sirf ek Page File (e.g., `login_page.py`) mein locator update karte ho aur saare test classes jo us page ko use karte hain, automatically theek ho jate hain::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
-- **❌ Mistake:** Saara logic (locators, actions, aur assertions) ek hi test file mein likh dena (Linear Scripting).
-- **🤦 Why:** UI mein ek chhota sa change hota hai aur 50 test scripts fail ho jati hain. Maintain karna namumkin hai.
-- **✅ The 'Pro' Way:** Page Object Model use karo jahan Locators+Actions ek file mein hon (Pages) aur assertions dusri file mein (Tests). AI isko directly strictly follow karta hai.
+- **❌ [[HL::Mistake:** Saara logic (locators, actions, aur assertions) ek hi test file mein likh dena (Linear Scripting).::HL]]
+- [[HL::**🤦 Why:** UI mein ek chhota sa change hota hai aur 50 test scripts fail ho jati hain. Maintain karna namumkin hai.::HL]]
+- [[HL::**✅ The 'Pro' Way:** Page Object Model use karo jahan Locators+Actions ek file mein hon (Pages) aur assertions dusri file mein (Tests). AI isko directly strictly follow karta hai::HL]].
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Base Page ka actual kaam kya hai?" → Socho Base Page ek 'Toolbox' hai. Jisme click karna, wait karna, scroll karna jaise tools hain. Har nayi web page class is toolbox ko inherit karti hai (leti hai) taaki use apne tools khud na banane padein.
-- **Confusion 2:** "Configurable weighting kya hai aur iski kya zaroorat hai?" → Net slow ho sakta hai, button load hone mein time lag sakta hai. Explicit waits (weighting mechanism) script ko bolte hain "Maximum 10 second ruko button aane ka, agar pehle aa jaye toh click kardo aur aage badho". Yeh tests ko fast aur reliable banata hai.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Base Page ka actual kaam kya hai?" → Socho Base Page ek 'Toolbox' hai. Jisme click karna, wait karna, scroll karna jaise tools hain. Har nayi web page class is toolbox ko inherit karti hai (leti hai) taaki use apne tools khud na banane padein.::HL]]
+- [[HL::**Confusion 2:** "Configurable weighting kya hai aur iski kya zaroorat hai?" → Net slow ho sakta hai, button load hone mein time lag sakta hai. Explicit waits (weighting mechanism) script ko bolte hain "Maximum 10 second ruko button aane ka, agar pehle aa jaye toh click kardo aur aage badho". Yeh tests ko fast aur reliable banata hai::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 - AI ne linear test scripts bana di instead of POM? → Apne prompt ko refine karo: "Enforce strict Page Object Model design pattern with separate BasePage."
@@ -3299,39 +3299,39 @@ Large QA teams, jaise e-commerce giants (Amazon, Flipkart), apne test cases Jira
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 ```text
-[ test case.md ] (Context Input)
+[ [[HL::test case.md ] (Context Input)::HL]]
         |
-        v
-+-----------------------+     +-------------------+
-|    TEST CLASSES       |---->| ASSERTIONS / RUNS |
-| (e.g. test_login.py)  |     +-------------------+
-+-----------------------+
-        | (Uses)
-        v
-+-----------------------+     +-------------------+
-|    PAGE CLASSES       |---->| LOCATORS / ACTIONS|
-| (e.g. login_page.py)  |     +-------------------+
-+-----------------------+
-        | (Inherits)
-        v
-+-----------------------+     +-------------------+
-|    BASE PAGE          |---->| HELPER METHODS &  |
-|   (base_page.py)      |     | CONFIGURABLE WAITS|
-+-----------------------+     +-------------------+
-        | (Relies on)
-        v
-+-----------------------+
-|  WEBDRIVER FACTORY    |
+[[HL::        v::HL]]
+[[HL::+-----------------------+     +-------------------+::HL]]
+|    [[HL::TEST CLASSES       |---->| ASSERTIONS / RUNS::HL]] |
+| [[HL::(e.g. test_login.py)  |     +-------------------+::HL]]
+[[HL::+-----------------------+::HL]]
+        | [[HL::(Uses)::HL]]
+[[HL::        v::HL]]
+[[HL::+-----------------------+     +-------------------+::HL]]
+|    [[HL::PAGE CLASSES       |---->| LOCATORS / ACTIONS::HL]]|
+| [[HL::(e.g. login_page.py)  |     +-------------------+::HL]]
+[[HL::+-----------------------+::HL]]
+        | [[HL::(Inherits)::HL]]
+[[HL::        v::HL]]
+[[HL::+-----------------------+     +-------------------+::HL]]
+|    [[HL::BASE PAGE          |---->| HELPER METHODS &::HL]]  |
+|   [[HL::(base_page.py)      |     | CONFIGURABLE WAITS::HL]]|
+[[HL::+-----------------------+     +-------------------+::HL]]
+        | [[HL::(Relies on)::HL]]
+[[HL::        v::HL]]
+[[HL::+-----------------------+::HL]]
+|  [[HL::WEBDRIVER FACTORY::HL]]    |
 +-----------------------+
 ```
 
 #### ❓ 17. Interview Q&A (FAQ)
-- **Q:** Automation testing mein Page Object Model (POM) design pattern ke primary benefits kya hain?
-- **A:** POM ka sabse bada faida code reusability aur maintainability hai. UI elements aur unke actions test logic se alag rehte hain. Agar UI update hota hai, toh sirf page class change karni padti hai, har single test script nahi.
+- **Q:** [[HL::Automation testing mein Page Object Model (POM) design pattern ke primary benefits kya hain?::HL]]
+- [[HL::**A:** POM ka sabse bada faida code reusability aur maintainability hai. UI elements aur unke actions test logic se alag rehte hain. Agar UI update hota hai, toh sirf page class change karni padti hai, har single test script nahi::HL]].
 - **Q:** 'WebDriver Factory' class ka ek enterprise framework mein kya function hota hai?
 - **A:** WebDriver factory ek centralized class hoti hai jo browser instances (Chrome, Firefox) initialize karti hai aur desired capabilities ya arguments (jaise headless mode) inject karti hai. Isse cross-browser testing configure karna bohot aasaan ho jata hai bina base classes ko chhede.
-- **Q:** AI se generated 'configurable weighting' mechanism ka real-world impact kya hai?
-- **A:** Web applications dynamic hoti hain (elements async load hote hain). Agar hardcoded sleep (`time.sleep()`) use kiya toh tests slow aur flaky (kabhi pass, kabhi fail) honge. AI-generated explicit waits (`wait for element to be clicked`) browser DOM se sync karte hain, ensuring stability.
+- [[HL::**Q:** AI se generated 'configurable weighting' mechanism ka real-world impact kya hai?::HL]]
+- [[HL::**A:** Web applications dynamic hoti hain (elements async load hote hain). Agar hardcoded sleep (`time.sleep()`) use kiya toh tests slow aur flaky (kabhi pass, kabhi fail) honge. AI-generated explicit waits (`wait for element to be clicked`) browser DOM se sync karte hain, ensuring stability::HL]].
 - **Q:** Framework scaffold karte waqt AI context (test case.md) ko effectively kaise map karta hai?
 - **A:** AI markdown file se headings ko Page Classes mein convert karta hai (e.g., "Login Tests" -> `login_page.py`), aur bullet points ko un pages ke andar methods mein (e.g., "Login with valid details" -> `test_valid_login()` inside `test_login.py`). Yeh mapping semantic analysis ke through hoti hai.
 - **Q:** Helper utilities jaise 'random data generation' automated testing mein kyun critical hain?
@@ -3354,58 +3354,58 @@ Large QA teams, jaise e-commerce giants (Amazon, Flipkart), apne test cases Jira
 ### 🎯 5. BDD Pytest-BDD Generation & Local LLM Transition
 
 #### 🐣 2. Simple Analogy (Hinglish)
-Pehle tumhare paas ek recipe book thi jo sirf chefs (coders) ko samajh aati thi (standard Python code). Ab tumne us recipe book ko BDD (Behavior Driven Development) mein convert kar diya hai. Yeh aisi book hai jise restaurant ka owner (Business Analyst) aur customer (Product Manager) bhi padh ke samajh sakta hai: "Given main page pe hoon, When maine login dabaya, Then success aana chahiye". Sath hi, kyunki tumhari recipe secret hai, tum apna saara AI kaam ek secured, private locker room (**Local LLM**) mein shift kar rahe ho taaki koi cloud pe usse chura na sake.
+[[HL::Pehle tumhare paas ek recipe book thi jo sirf chefs (coders) ko samajh aati thi (standard Python code). Ab tumne us recipe book ko BDD (Behavior Driven Development) mein convert kar diya hai. Yeh aisi book hai jise restaurant ka owner (Business Analyst) aur customer (Product Manager) bhi padh ke samajh sakta hai: "Given main page pe hoon, When maine login dabaya, Then success aana chahiye". Sath hi, kyunki tumhari recipe secret hai, tum apna saara AI kaam ek secured, private locker room (**Local LLM**) mein shift kar rahe ho taaki koi cloud pe usse chura na sake::HL]].
 
 #### 📖 3. Technical Definition
 - **Precise English:** The process of refactoring an existing test suite into a Behavior-Driven Development (BDD) framework using pytest-bdd, which separates plain-text feature files from Python step definitions. Additionally, it highlights the transition from Cloud LLMs to Local LLMs for executing these tasks securely on isolated machines.
-- **Hinglish Simplification:** Python test code ko aise format (Pytest-BDD) mein badalna jahan business logic simple English (feature files) mein likha ho aur code piche (step definitions) chal raha ho. Aur iske baad testing ko cloud se hata kar apni personal secure machine (Local LLM) pe lana taaki data leak na ho.
+- [[HL::**Hinglish Simplification:** Python test code ko aise format (Pytest-BDD) mein badalna jahan business logic simple English (feature files) mein likha ho aur code piche (step definitions) chal raha ho. Aur iske baad testing ko cloud se hata kar apni personal secure machine (Local LLM) pe lana taaki data leak na ho::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Normal test code non-technical stakeholders (managers, business analysts) nahi padh sakte. Aur enterprise test data ko public cloud (jaise OpenAI/Claude) par process karna data breach ka risk hota hai.
-- **Solution:** Hum **BDD format test cases** generate karte hain using **pytest-bdd driven tests** jo sabko samajh aate hain. Security ke liye, speaker next course phase mein **local large language model** pe shift hone ko emphasize karta hai.
-- **What breaks if we don't use it?** Business aur QA team ke beech communication gap aayega. Aur agar sensitive **security testing** data public cloud pe gaya, toh company compliance regulations fail kar jayegi.
+- [[HL::**Problem:** Normal test code non-technical stakeholders (managers, business analysts) nahi padh sakte. Aur enterprise test data ko public cloud (jaise OpenAI/Claude) par process karna data breach ka risk hota hai.::HL]]
+- [[HL::**Solution:** Hum **BDD format test cases** generate karte hain using **pytest-bdd driven tests** jo sabko samajh aate hain. Security ke liye, speaker next course phase mein **local large language model** pe shift hone ko emphasize karta hai.::HL]]
+- [[HL::**What breaks if we don't use it?** Business aur QA team ke beech communication gap aayega. Aur agar sensitive **security testing** data public cloud pe gaya, toh company compliance regulations fail kar jayegi::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```text
-[ VS Code Explorer - Pytest-BDD Structure ]
-project/
-├── features/
-│   ├── login.feature       <-- Plain English Gherkin format
-│   └── registration.feature
-└── tests/
-    └── step_definitions/
-        └── test_login_steps.py <-- Python code mapping
+[ [[HL::VS Code Explorer - Pytest-BDD Structure ]::HL]]
+[[HL::project/::HL]]
+[[HL::├── features/::HL]]
+[[HL::│   ├── login.feature       <-- Plain English Gherkin format::HL]]
+[[HL::│   └── registration.feature::HL]]
+[[HL::└── tests/::HL]]
+[[HL::    └── step_definitions/::HL]]
+[[HL::        └── test_login_steps.py <-- Python code mapping::HL]]
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. **Context Provision:** Developer pichle step ka **employee app dot tests folder** (jisme Python test files the) aur **test case.md file** AI ko as context deta hai.
-2. **Framework Conversion:** Developer AI ko command deta hai ki in tests ko **end unit framework** se convert karke ek proper **BDD framework** mein badlo. AI automatically `pytest-bdd` **update the package** (install) karta hai.
-3. **Feature Generation:** AI raw text ko `.feature` files (jaise **home page**, **registration page**, **login page**) mein convert karta hai using Gherkin syntax (Given, When, Then). Inme **table structures** (data tables) aur execution labels (**tag**) add kiye jate hain (jaise `@user_login_testing`).
+1. [[HL::**Context Provision:** Developer pichle step ka **employee app dot tests folder** (jisme Python test files the) aur **test case.md file** AI ko as context deta hai.::HL]]
+2. [[HL::**Framework Conversion:** Developer AI ko command deta hai ki in tests ko **end unit framework** se convert karke ek proper **BDD framework** mein badlo. AI automatically `pytest-bdd` **update the package** (install) karta hai.::HL]]
+3. [[HL::**Feature Generation:** AI raw text ko `.feature` files (jaise **home page**, **registration page**, **login page**) mein convert karta hai using Gherkin syntax (Given, When, Then). Inme **table structures** (data tables) aur execution labels (**tag**) add kiye jate hain (jaise `@user_login_testing`::HL]]).
 4. **Step Def Generation:** AI har English line ke liye corresponding Python logic (called **step definition**) generate karta hai.
 5. **The Transition (Security Shift):** Is pure demo ke baad, speaker highlight karta hai ki **cloud 4.5 model** (Sonnet) ya **3.7 model** public internet use karte hain. Enterprise safety (jaise **user registration testings** with real-like PII) ke liye, humein in models ko replace karke **secure**, locally hosted AI models (Local LLMs) apni **local machine** pe chalane chahiye.
 
 #### 💻 7. Hands-On — Runnable Example
-Yahan Vibe Coding prompt se kaise BDD `.feature` file aur uski `step definition` generate hui, uska example:
+[[HL::Yahan Vibe Coding prompt se kaise BDD `.feature` file aur uski `step definition` generate hui, uska example:::HL]]
 
 ```python
-1  # Generated by AI: features/login.feature (Plain English File)
-2  @user_login_testing                                     # tag = test execution filter
-3  Feature: User Login Functionality                       # Feature declaration
-4    Scenario: Successful login with valid credentials     # Scenario description
-5      Given I navigate to the login page                  # Given = Initial state/pre-condition
-6      When I enter username "admin" and password "123"    # When = Action taken
-7      Then I should see the dashboard                     # Then = Expected outcome
+1  # [[HL::Generated by AI: features/login.feature (Plain English File)::HL]]
+[[HL::2  @user_login_testing                                     # tag = test execution filter::HL]]
+[[HL::3  Feature: User Login Functionality                       # Feature declaration::HL]]
+[[HL::4    Scenario: Successful login with valid credentials     # Scenario description::HL]]
+[[HL::5      Given I navigate to the login page                  # Given = Initial state/pre-condition::HL]]
+[[HL::6      When I enter username "admin" and password "123"    # When = Action taken::HL]]
+[[HL::7      Then I should see the dashboard                     # Then = Expected outcome::HL]]
 ```
 
 ```python
-1  # Generated by AI: step_definitions/test_login_steps.py (Python Mapping)
-2  from pytest_bdd import given, when, then, parsers       # BDD decorators (maps English to Python)
-3  from pages.login_page import LoginPage                  # Importing POM class
-4  
-5  @given("I navigate to the login page")                  # English string mapping decorator
-6  def navigate_to_login(driver):                          # Python function executed when above line is hit
-7      login_page = LoginPage(driver)                      # Instantiate page object
-8      login_page.navigate_to_url("example.com/login")     # Call actual method
+1  # [[HL::Generated by AI: step_definitions/test_login_steps.py (Python Mapping)::HL]]
+[[HL::2  from pyte[::HL]][HL::st_bdd import given, when, then, parsers       # BDD decorators (maps English to Python)::HL]]
+[[HL::3  from pages.login_page import LoginPage                  # Importing POM class::HL]]
+[[HL::4  ::HL]]
+[[HL::5  @given("I navigate to the login page")                  # English string mapping decorator::HL]]
+[[HL::6  def navigate_to_login(driver):                          # Python function executed when above line is hit::HL]]
+[[HL::7      login_page = LoginPage(driver)                      # Instantiate page object::HL]]
+[[HL::8      login_page.navigate_to_url("example.com/login")     # Call actual method::HL]]
 ```
 
 ```text
@@ -3477,8 +3477,8 @@ Finance sector (jaise Barclays bank) mein strict compliance rules hote hain. Wah
 #### ❓ 17. Interview Q&A (FAQ)
 - **Q:** Automation testing mein BDD (Behavior Driven Development) approach kyun adopt kiya jata hai?
 - **A:** BDD technical (QA/Dev) aur non-technical (BA/Product Manager) teams ke beech communication gap bridge karta hai. Test cases simple English (Gherkin syntax) mein likhe jate hain jise koi bhi padh ke verify kar sakta hai ki feature requirement meet hui ya nahi.
-- **Q:** Pytest-BDD framework mein 'Feature files' aur 'Step definitions' ka separation kaise kaam karta hai?
-- **A:** Feature file sirf test ka flow describe karti hai. Us file ke andar likha koi code directly execute nahi hota. Pytest-BDD use read karta hai, us line se match hone wala `@given` ya `@when` string 'Step Definition' Python file mein dhundhta hai, aur us function ko execute kar deta hai.
+- [[HL::**Q:** Pytest-BDD framework mein 'Feature files' aur 'Step definitions' ka separation kaise kaam karta hai?::HL]]
+- [[HL::**A:** Feature file sirf test ka flow describe karti hai. Us file ke andar likha koi code directly execute nahi hota. Pytest-BDD use read karta hai, us line se match hone wala `@given` ya `@when` string 'Step Definition' Python file mein dhundhta hai, aur us function ko execute kar deta hai::HL]].
 - **Q:** Cloud LLM (jaise Claude 4.5 model) se Local LLM par transition ki enterprise zarurat kya hai?
 - **A:** Privacy aur Data Security. Cloud models external servers pe API hits bhejte hain, jahan company ka source code ya sensitive test data third-party servers pe store ho sakta hai. Local LLM tumhare khud ke infrastructure pe run hota hai, providing 100% data residency aur zero network exposure.
 - **Q:** BDD feature files mein 'Data Tables' ya 'Table Structures' ka role kya hota hai?
@@ -3545,42 +3545,42 @@ Socho tumhe roz office jaana hai. **AI-First Approach** aisi hai jaise tum roz e
 
 ### 📖 3. Technical Definition
 - **Precise English:** AI-First testing relies on AI agents to continuously read requirements and generate entire test scripts, resulting in high token costs. AI-Assisted testing uses traditional code as the foundation and invokes AI solely for dynamic locator resolution (healing) during runtime failures.
-- **Hinglish Simplification:** AI-First mein AI poora code shuru se likhta hai (jo mehenga hai), jabki AI-Assisted mein hum apna likha code use karte hain aur AI ko sirf tab call karte hain jab test fail hota hai.
+- [[HL::**Hinglish Simplification:** AI-First mein AI poora code shuru se likhta hai (jo mehenga hai), jabki AI-Assisted mein hum apna likha code use karte hain aur AI ko sirf tab call karte hain jab test fail hota hai::HL]].
 
 ### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Agar hum **AI first testing** use karte hain aur **artificial intelligence** ya **AI agents** ko poora **boilerplate code** likhne dete hain, toh **token usage** bohot high ho jaati hai. Ek **premium request** cloud models (jaise **cloud 4.5 model[unclear]** ya Claude **4.5**) par bhejne ka bill bohot zyada aata hai. Saath hi, developers ko **wipe coding** (apna hi likha code bhool jana) ka risk hota hai kyunki unki **full dependency** AI par ho jaati hai.
-- **Solution:** **AI assisted approach** mein hum sirf **healing test** run karte hain. Isse cost drastically kam ho jaati hai aur developer control maintain rehta hai.
+- [[HL::**Problem:** Agar hum **AI first testing** use karte hain aur **artificial intelligence** ya **AI agents** ko poora **boilerplate code** likhne dete hain, toh **token usage** bohot high ho jaati hai. Ek **premium request** cloud models (jaise **cloud 4.5 model[unclear]** ya Claude **4.5**) par bhejne ka bill bohot zyada aata hai. Saath hi, developers ko **wipe coding** (apna hi likha code bhool jana) ka risk hota hai kyunki unki **full dependency** AI par ho jaati hai.::HL]]
+- [[HL::**Solution:** **AI assisted approach** mein hum sirf **healing test** run karte hain. Isse cost drastically kam ho jaati hai aur developer control maintain rehta hai::HL]].
 - **What breaks if we don't use it?** Companies automation ka budget cross kar jayengi aur team ki coding skills zero ho jayengi.
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
 *(N/A — yeh purely cost aur strategy ka conceptual topic hai, koi direct editor state is stage par applicable nahi hai, but conceptually tum apna code **VS Code** (Microsoft ka popular code editor — code likhne aur run karne ke liye) mein dekhte ho).*
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-**AI First Approach Flow:**
-1. AI agent ek **MD file** ya **markdown file** (plain text file jisme formatting hoti hai) padhta hai.
-2. Woh **playwright MCP servers** (Model Context Protocol — AI ko local tools aur browser se connect karne ka bridge) use karke pura **BDD test** (Behavior-Driven Development — English sentences jaise format mein tests) generate karta hai.
+[[HL::**AI First Approach Flow:**::HL]]
+1. [[HL::AI agent ek **MD file** ya **markdown file** (plain text file jisme formatting hoti hai) padhta hai.::HL]]
+2. [[HL::Woh **playwright MCP servers** (Model Context Protocol — AI ko local tools aur browser se connect karne ka bridge) use karke pura **BDD test** (Behavior-Driven Development — English sentences jaise format mein tests) generate karta hai::HL]].
 3. Yeh setup ek **cloud desktop** (virtual computer hosted on internet) par run hota hai aur har line of code ke liye tokens burn hote hain.
 
-**AI Assisted Approach Flow:**
-1. Developer traditional framework likhta hai.
-2. Jab UI change ke karan koi locator fail hota hai, tabhi ek API request LLM ko jaati hai.
-3. LLM sirf naya locator return karta hai, jisse cost fraction of a cent aati hai.
+[[HL::**AI Assisted Approach Flow:**::HL]]
+1. [[HL::Developer traditional framework likhta hai.::HL]]
+2. [[HL::Jab UI change ke karan koi locator fail hota hai, tabhi ek API request LLM ko jaati hai.::HL]]
+3. [[HL::LLM sirf naya locator return karta hai, jisse cost fraction of a cent aati hai::HL]].
 
 ### 💡 7. Concept Visualization (Theory Topic ke liye)
 Yeh purely conceptual topic hai jahan cost calculation ko samjhna zaroori hai. Speaker ne calculation details share kiye hain:
 
-**The $4500/month Trap (AI-First):**
-- Agar ek badi company daily **1000 tests per day** run karti hai.
-- Har test mein AI se multiple interactions hote hain.
-- Pura script generate karne ki cost approximately **$150 per day** aati hai.
-- Monthly bill: `$150 * 30 = $4500 per month`.
-- Stats mention kiye gaye: Say **42%** tests need full logic updates and **20%** need minor tweaks, AI-First mein sab kuch regenerate hota hai.
+[[HL::**The $4500/month Trap (AI-First):**::HL]]
+- [[HL::Agar ek badi company daily **1000 tests per day** run karti hai.::HL]]
+- [[HL::Har test mein AI se multiple interactions hote hain.::HL]]
+- [[HL::Pura script generate karne ki cost approximately **$150 per day** aati hai.::HL]]
+- [[HL::Monthly bill: `$150 * 30 = $4500 per month`.::HL]]
+- [[HL::Stats mention kiye gaye: Say **42%** tests need full logic updates and **20%** need minor tweaks, AI-First mein sab kuch regenerate hota hai.::HL]]
 
-**The Solution Calculation (AI-Assisted):**
-- Hum sirf broken elements pe healing trigger karte hain.
-- Maan lo daily **50 healing test per day** (ya **50 actions**) trigger hote hain.
-- Ek simple API call ki token cost approx **0.3003** cents ya overall **$0.15** per day aati hai.
-- Result: Yeh approach AI-First se literally **⭐1000 times cheaper** hai!
+[[HL::**The Solution Calculation (AI-Assisted):**::HL]]
+- [[HL::Hum sirf broken elements pe healing trigger karte hain.::HL]]
+- [[HL::Maan lo daily **50 healing test per day** (ya **50 actions**) trigger hote hain.::HL]]
+- [[HL::Ek simple API call ki token cost approx **0.3003** cents ya overall **$0.15** per day aati hai.::HL]]
+- [[HL::Result: Yeh approach AI-First se literally **⭐1000 times cheaper** hai::HL]]!
 
 ### 🔒 8. Security-First Check
 (N/A — is concept mein direct security surface nahi hai, but cloud APIs use karte waqt test data internet par bhejne ka privacy risk hamesha rehta hai).
@@ -3589,11 +3589,11 @@ Yeh purely conceptual topic hai jahan cost calculation ko samjhna zaroori hai. S
 Industry mein enterprise-level par 1000+ tests daily run hote hain. AI-First approach enterprise scale par financially viable nahi hai. Scale karne ke liye AI-Assisted model hi practical hai kyunki yeh bandwidth aur budget dono bachata hai.
 
 ### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
-- **❌ Mistake:** Sochna ki AI sab kuch automate kar dega aur developers ki zaroorat nahi padegi.
-- **🤦 Why:** Isse "wipe coding" situation banti hai jahan maintenance nightmare ban jaata hai.
-- **✅ The 'Pro' Way:** AI ko as a "copilot" (assistant) use karo, "autopilot" (replacement) nahi.
-- **❌ Mistake:** Free AI tools use karke sochna ki cost hamesha zero rahegi.
-- **🤦 Why:** Production mein premium request aur API tokens ka bill exponential hota hai.
+- **❌ [[HL::Mistake:** Sochna ki AI sab kuch automate kar dega aur developers ki zaroorat nahi padegi.::HL]]
+- [[HL::**🤦 Why:** Isse "wipe coding" situation banti hai jahan maintenance nightmare ban jaata hai.::HL]]
+- [[HL::**✅ The 'Pro' Way:** AI ko as a "copilot" (assistant) use karo, "autopilot" (replacement) nahi.::HL]]
+- [[HL::**❌ Mistake:** Free AI tools use karke sochna ki cost hamesha zero rahegi.::HL]]
+- [[HL::**🤦 Why:** Production mein premium request aur API tokens ka bill exponential hota hai::HL]].
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 - **Confusion 1:** "Wipe coding kya hoti hai?" → Jab developers pura code AI se likhwate hain aur samay ke saath khud code likhna/debug karna bhool jaate hain. Unki manual coding skills "wipe" (erase) ho jaati hain.
@@ -3638,8 +3638,8 @@ Traditional Test -> Runs normally -> SUCCESS -> $0.00 Burned
   **A:** AI-First mein LLM poora script (thousands of tokens) har test ke liye generate karta hai. AI-assisted mein sirf fail hue element ka context bheja jaata hai (few tokens). Isliye cost $4500/month se drop hoke cents mein aa jaati hai.
 - **Q:** Token usage cost automation ko kaise affect karti hai?
   **A:** Cloud LLMs token-based pricing use karte hain. Pura boilerplate code aur architecture baar-baar generate karne se premium requests lagti hain, jisse cloud bills IT budget ko exceed kar sakte hain, rendering AI unfeasible.
-- **Q:** Playwright MCP servers ka role AI testing mein kya hota hai?
-  **A:** Model Context Protocol (MCP) servers AI agents ko local environment (jaise file system, browser, ya editor) interact karne ki power dete hain. AI inhi servers ka use karke MD files padhta hai aur Playwright actions execute karta hai.
+- **Q:** [[HL::Playwright MCP servers ka role AI testing mein kya hota hai?::HL]]
+[[HL::  **A:** Model Context Protocol (MCP) servers AI agents ko local environment (jaise file system, browser, ya editor) interact karne ki power dete hain. AI inhi servers ka use karke MD files padhta hai aur Playwright actions execute karta hai::HL]].
 
 ### 📝 18. One-Line Memory Hook
 "AI se puri testing karwana Uber khareedne jaisa mehenga hai, AI ko sirf mechanic (healer) ki tarah use karo — ⭐1000 times cheaper padega!"
@@ -3684,24 +3684,24 @@ $ ollama run llama3
 4. AI local memory mein data process karta hai, **lower latency** (kam delay) ke saath naya locator nikalta hai, aur **self-healing coatings[unclear]** (layer of self-healing scripts) test ko theek kar deti hai.
 
 ### 💻 7. Hands-On — Runnable Example
-Yahan hum dekhte hain ki python se ek local LLM (Ollama) ko offline kaise call kiya jaata hai bina internet ke.
+[[HL::Yahan hum dekhte hain ki python se ek local LLM (Ollama) ko offline kaise call kiya jaata hai bina internet ke.::HL]]
 
 ```python
-1  import requests                                   # Python ka library — HTTP APIs ko call karne ke liye
-2  import json                                       # JSON module — data ko encode/decode karne ke liye
-3
-4  def call_local_llm(prompt):                       # call_local_llm() = local server pe prompt bhejne ka function
-5      url = "http://localhost:11434/api/generate"   # url= : Ollama ka default local address (bina internet)
-6      
-7      payload = {                                   # payload= : Data jo hum AI ko bhej rahe hain
-8          "model": "llama3",                        # model= : Konsa open source model run karna hai (e.g., Meta's Llama)
-9          "prompt": prompt,                         # prompt= : Humara query (e.g., fix this obsolete locator)
-10         "stream": False                           # stream= : False matlab pura answer ek saath do, tukdo mein nahi
-11     }
-12     
-13     response = requests.post(url, json=payload)   # requests.post() = payload ko URL par bhej kar response laata hai
-14     return response.json()['response']            # return = JSON me se sirf actual text answer extract karta hai
-15
+[[HL::1  import requests                                   # Python ka library — HTTP APIs ko call karne ke liye::HL]]
+[[HL::2  import json                                       # JSON module — data ko encode/decode karne ke liye::HL]]
+[[HL::3::HL]]
+[[HL::4  def call_local_llm(prompt):                       # call_local_llm() = local server pe prompt bhejne ka function::HL]]
+[[HL::5      url = "http://localhost:11434/api/generate"   # url= : Ollama ka default local address (bina internet)::HL]]
+[[HL::6      ::HL]]
+[[HL::7      payload = {                                   # payload= : Data jo hum AI ko bhej rahe hain::HL]]
+[[HL::8          "model": "llama3",                        # model= : Konsa open source model run karna hai (e.g., Meta's Llama)::HL]]
+[[HL::9          "prompt": prompt,                         # prompt= : Humara query (e.g., fix this obsolete locator)::HL]]
+[[HL::10         "stream": False                           # stream= : False matlab pura answer ek saath do, tukdo mein nahi::HL]]
+[[HL::11     }::HL]]
+[[HL::12     ::HL]]
+[[HL::13     response = requests.post(url, json=payload)   # requests.post() = payload ko URL par bhej kar response laata hai::HL]]
+[[HL::14     return response.json()['response']            # return = JSON me se sirf actual text answer extract karta hai::HL]]
+[[HL::15::HL]]
 16 print(call_local_llm("Fix this locator: id='logins'")) # print() = screen par function ka output dikhata hai
 ```
 
@@ -3710,9 +3710,9 @@ Yahan hum dekhte hain ki python se ek local LLM (Ollama) ko offline kaise call k
 Based on standard login pages, the correct locator should likely be id='login' or name='username'.
 ```
 
-#### 🔬 Code Explanation Rule (LINE-BY-LINE)
-- **Line 13:** `requests.post(url, json=payload)` — Yeh internet par nahi jaa raha, balki tumhare apne computer (`localhost`) par chal rahe Ollama service ko data bhej raha hai. Iska faida yeh hai ki API cost zero hai aur data privacy 100% hai.
-- **Line 14:** `response.json()['response']` — Ollama ek bada JSON object return karta hai, usme se `'response'` key ke andar LLM ka text answer hota hai.
+#### 🔬 Code Explanation Rule ([[HL::LINE-BY-LINE)::HL]]
+- [[HL::**Line 13:** `requests.post(url, json=payload)` — Yeh internet par nahi jaa raha, balki tumhare apne computer (`localhost`) par chal rahe Ollama service ko data bhej raha hai. Iska faida yeh hai ki API cost zero hai aur data privacy 100% hai.::HL]]
+- [[HL::**Line 14:** `response.json()['response']` — Ollama ek bada JSON object return karta hai, usme se `'response'` key ke andar LLM ka text answer hota hai::HL]].
 
 ### 🔒 8. Security-First Check
 Yeh topic completely security-driven hai. **100% data privacy** achieve karne ke liye banking aur healthcare apps ko mandatory corporate firewalls ke andar local LLMs run karne hote hain. External APIs (OpenAI) use karne se proprietary HTML/DOM data leak ho sakta hai.
@@ -3810,7 +3810,7 @@ Maan lo tum ek building bana rahe ho (automation framework). **Python** aur **Se
 
 ### 📖 3. Technical Definition
 - **Precise English:** Self-healing architecture involves building a communication bridge between a traditional automation script (using Python/JS) and an LLM via APIs or pip packages, driven by prompt engineering to dynamically replace failed locators.
-- **Hinglish Simplification:** Ek aisa setup jahan humara standard testing code directly AI se baat kar sake (API ke through), taaki jab bhi test fail ho, AI turant naya locator dhoondh kar de de.
+- [[HL::**Hinglish Simplification:** Ek aisa setup jahan humara standard testing code directly AI se baat kar sake (API ke through), taaki jab bhi test fail ho, AI turant naya locator dhoondh kar de de::HL]].
 
 ### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 - **Problem:** AI aur automation tools naturally ek dusre se baat nahi karte. Bina proper architecture ke, AI test failures ko samajh nahi payega.
@@ -3820,21 +3820,21 @@ Maan lo tum ek building bana rahe ho (automation framework). **Python** aur **Se
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
 *(N/A — yeh purely framework architecture ka conceptual topic hai, koi direct visual state nahi hai).*
 
-### ⚙️ 6. Under the Hood (Deep Dive)
-Architecture mein 3 main pillars hote hain:
-1. **The Core Framework:** Yeh **selenium with Python core** ya **playwright with JavaScript code** (Playwright — modern testing framework jo fast aur reliable hai) mein likha hota hai. Iska kaam hai browser chalana aur elements interact karna.
-2. **The Bridge:** Jab element nahi milta, framework ek **API** (Application Programming Interface — do softwares ka connection bridge) call initiate karta hai. Iske liye hum **OpenAI pip package** (Python library — OpenAI API ko connect karne ke liye) ya custom HTTP requests use karte hain.
-3. **The Brain:** Request ya toh **local large language model** ke paas jaati hai, ya **cloud large language models** (jaise **Ola cloud models[unclear]** — shayad Ollama/Cloud models ka reference tha) ke paas jaati hai jo **self-healing locator** return karte hain.
+### ⚙️ 6. Under [[HL::the Hood (Deep Dive)::HL]]
+[[HL::Architecture mein 3 main pillars hote hain:::HL]]
+1. [[HL::**The Core Framework:** Yeh **selenium with Python core** ya **playwright with JavaScript code** (Playwright — modern testing framework jo fast aur reliable hai) mein likha hota hai. Iska kaam hai browser chalana aur elements interact karna.::HL]]
+2. [[HL::**The Bridge:** Jab element nahi milta, framework ek **API** (Application Programming Interface — do softwares ka connection bridge) call initiate karta hai. Iske liye hum **OpenAI pip package** (Python library — OpenAI API ko connect karne ke liye) ya custom HTTP requests use karte hain.::HL]]
+3. [[HL::**The Brain:** Request ya toh **local large language model** ke paas jaati hai, ya **cloud large language models** (jaise **Ola cloud models[unclear]** — shayad Ollama/Cloud models ka reference tha) ke paas jaati hai jo **self-healing locator** return karte hain::HL]].
 
 ### 💡 7. Concept Visualization (Theory Topic ke liye)
 *Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon taaki architecture samajh aaye.*
 
 **The Self-Healing Pipeline (Step-by-Step Flow):**
-1. **Script Execution:** Developer apne IDE jaise **VS Code** (Microsoft ka lightweight editor) ya **PyCharm** (JetBrains ka Python IDE — specialized for Python) mein test run karta hai.
-2. **Element Not Found Exception:** Jaise hi locator fail hota hai, script crash hone ke bajaye error ko "catch" (pakad) leti hai.
-3. **Context Engineering:** Framework us failure ka aas-paas ka HTML code uthata hai. Yahan **prompt engineering** (AI se sahi sawal puchhne ki art) aur **context engineering** (AI ko background info dene ka process) kaam aati hai. Hum AI ko clear instruction dete hain.
-4. **API Request:** Context ko HTTP payload mein pack karke LLM ko bheja jaata hai.
-5. **AI Response:** LLM naya locator deta hai aur framework us naye locator se test ko aage badhata hai.
+1. [[HL::**Script Execution:** Developer apne IDE jaise **VS Code** (Microsoft ka lightweight editor) ya **PyCharm** (JetBrains ka Python IDE — specialized for Python) mein test run karta hai.::HL]]
+2. [[HL::**Element Not Found Exception:** Jaise hi locator fail hota hai, script crash hone ke bajaye error ko "catch" (pakad) leti hai.::HL]]
+3. [[HL::**Context Engineering:** Framework us failure ka aas-paas ka HTML code uthata hai. Yahan **prompt engineering** (AI se sahi sawal puchhne ki art) aur **context engineering** (AI ko background info dene ka process) kaam aati hai. Hum AI ko clear instruction dete hain.::HL]]
+4. [[HL::**API Request:** Context ko HTTP payload mein pack karke LLM ko bheja jaata hai.::HL]]
+5. [[HL::**AI Response:** LLM naya locator deta hai aur framework us naye locator se test ko aage badhata hai::HL]].
 
 ### 🔒 8. Security-First Check
 Cloud models ko API call karte waqt hamesha API Keys ka use hota hai. Kabhi bhi API keys ko code mein hardcode mat karo. Unhe `.env` (environment variables) files mein store karo taaki GitHub pe push hone se bachein.
@@ -3887,12 +3887,12 @@ Large service companies jab apne clients ke liye custom test automation framewor
 ```
 
 ### ❓ 17. Interview Q&A (FAQ)
-- **Q:** Automation architecture mein Context Engineering ka kya role hai?
-  **A:** AI ke paas aakhein nahi hotin. Jab hum usko bolte hain ki "element nahi mil raha", toh humein page ka relevant HTML (context) nikal kar usko dena padta hai. Is process ko context engineering bolte hain, jiske bina AI ek valid self-healing locator generate nahi kar sakta.
+- **Q:** [[HL::Automation architecture mein Context Engineering ka kya role hai?::HL]]
+[[HL::  **A:** AI ke paas aakhein nahi hotin. Jab hum usko bolte hain ki "element nahi mil raha", toh humein page ka relevant HTML (context) nikal kar usko dena padta hai. Is process ko context engineering bolte hain, jiske bina AI ek valid self-healing locator generate nahi kar sakta::HL]].
 - **Q:** Ek local AI se communicate karne ke liye kis tarah ki request bheji jaati hai?
   **A:** Local AI (jaise Ollama) ek local server run karta hai. Hum apne test script se standard HTTP POST requests bhejte hain jisme JSON body hoti hai (jisme prompt aur HTML hota hai), bilkul waise hi jaise hum kisi cloud API se baat karte hain.
-- **Q:** Selenium aur Playwright dono mein AI integration kaise alag hota hai?
-  **A:** Core logic same rehta hai (API call karna), lekin tech stack alag hota hai. Selenium with Python core mein hum synchronous HTTP calls ya Python pip packages use karte hain. Playwright with JS mein hum async/await pattern aur Node.js tools (`fetch`) use karte hain.
+- [[HL::**Q:** Selenium aur Playwright dono mein AI integration kaise alag hota hai?::HL]]
+[[HL::  **A:** Core logic same rehta hai (API call karna), lekin tech stack alag hota hai. Selenium with Python core mein hum synchronous HTTP calls ya Python pip packages use karte hain. Playwright with JS mein hum async/await pattern aur Node.js tools (`fetch`) use karte hain::HL]].
 - **Q:** Hum HTTP requests manually likhne ke bajaye OpenAI pip package kyun use karenge?
   **A:** Pip package (SDK) bohot saara boilerplate code (jaise headers set karna, retries handle karna, JSON parsing) chupa leta hai. Isse code clean rehta hai aur developer ko sirf business logic pe focus karna padta hai.
 - **Q:** AI framework ko tightly couple karna ek bad practice kyun hai?
@@ -3919,10 +3919,10 @@ Traditional automation aisa hai jaise tumhare paas ek dost ke ghar ka strictly e
 
 ### 📖 3. Technical Definition
 - **Precise English:** Traditional test automation relies on hardcoded static locators. When UI changes, it throws an element not found exception. Classical self-healing (legacy approach) attempted to solve this by maintaining a static collection of fallback locators, rather than dynamically interpreting the DOM like modern LLMs do.
-- **Hinglish Simplification:** Purane testing scripts ek fix address se button dhoondhte the, UI thoda bhi change hua toh script fail. Us failure ko bachane ke liye purane tools multiple addresses (XPath, CSS, ID) ka ek backup list rakhte the, jise classical healing kehte hain.
+- [[HL::**Hinglish Simplification:** Purane testing scripts ek fix address se button dhoondhte the, UI thoda bhi change hua toh script fail. Us failure ko bachane ke liye purane tools multiple addresses (XPath, CSS, ID) ka ek backup list rakhte the, jise classical healing kehte hain::HL]].
 
 ### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Jab hum **traditional test** likhte hain **selenium** aur **Python** mein, UI changes unavoidable hote hain. Ek simple button ka ID change hone se test **unable to locate the element** error de kar band ho jaata hai.
+- [[HL::**Problem:** Jab hum **traditional test** likhte hain **selenium** aur **Python** mein, UI changes unavoidable hote hain. Ek simple button ka ID change hone se test **unable to locate the element** error de kar band ho jaata::HL]] hai.
 - **Solution:** Failure nature ko samajhna pehla step hai. Hum dekhte hain ki purane time mein **Test projects** (ek purana automation tool) jaise tools kaise ek **collection** (list) of locators maintain karte the as a classical workaround.
 - **What breaks if we don't use it?** Agar fail hone ka core mechanism nahi samjhenge, toh hume modern AI healing ki actual power aur value samajh nahi aayegi.
 
@@ -3934,10 +3934,10 @@ IDE mein jab test run hoga:
    `selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element...`
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-1. Developer **page object model** pattern follow karte hue ek **constructor operation** (class initialize karne wala function) banata hai jahan elements declare hote hain (e.g., `self.login_link = "id"`, etc.).
-2. Test ek **HTTP request** ke through **ChromeDriver** (Chrome browser ko chalane wala driver engine) ko command bhejta hai.
-3. WebDriver DOM (HTML tree) mein exact match dhoondhta hai. Agar developer ne `id='login'` likha hai aur UI mein `id='logins'` ho gaya hai, DOM search fail ho jaati hai.
-4. Classical tools is point pe **no element found** aane par array se agla locator (jaise XPath ya CSS) try karte the.
+1. [[HL::Developer **page object model** pattern follow karte hue ek **constructor operation** (class initialize karne wala function) banata hai jahan elements declare hote hain (e.g., `self.login_link = "id"`, etc.).::HL]]
+2. [[HL::Test ek **HTTP request** ke through **ChromeDriver** (Chrome browser ko chalane wala driver engine) ko command bhejta hai.::HL]]
+3. [[HL::WebDriver DOM (HTML tree) mein exact match dhoondhta hai. Agar developer ne `id='login'` likha hai aur UI mein `id='logins'` ho gaya hai, DOM search fail ho jaati hai.::HL]]
+4. [[HL::Classical tools is point pe **no element found** aane par array se agla locator (jaise XPath ya CSS) try karte the::HL]].
 
 ### 💻 7. Hands-On — Runnable Example
 Yahan hum **PyCharm** (Speaker highly recommends PyCharm on **Mac** / **Windows** / **Linux**, jo **non-commercial use only license** / Community Edition mein free aata hai) use karke ek dummy website ka failure simulate karenge.
@@ -3989,27 +3989,27 @@ Error occurred: unable to locate the element - logins
 Is tarah ke brittle (nazuk) tests scale pe ek nightmare ban jaate hain. Maan lo tumhare paas 500 **enhanced tests** hain jo navigation links (**employee details link**, **manage user link**, **log off link**) verify karte hain. Agar navbar update ho gaya, saare 500 tests ek saath red fail ho jayenge. Isliye hume **large language model** (ek AI **overlord**) chahiye jo is maintainability issue ko solve kare.
 
 ### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
-- **❌ Mistake:** Absolute XPaths use karna (e.g., `/html/body/div/div[2]/a`).
-- **🤦 Why:** Ek chota sa UI change poora path break kar deta hai.
-- **✅ The 'Pro' Way:** Relative locators ya Data-Test-IDs use karo jab tak AI completely takeover na kar le.
-- **❌ Mistake:** Classical array of locators manually banana.
-- **🤦 Why:** Har element ke 5 backup likhne mein development time dugna lag jaata hai.
+- **❌ [[HL::Mistake:** Absolute XPaths use karna (e.g., `/html/body/div/div[2]/a`).::HL]]
+- [[HL::**🤦 Why:** Ek chota sa UI change poora path break kar deta hai.::HL]]
+- [[HL::**✅ The 'Pro' Way:** Relative locators ya Data-Test-IDs use karo jab tak AI completely takeover na kar le.::HL]]
+- [[HL::**❌ Mistake:** Classical array of locators manually banana.::HL]]
+- [[HL::**🤦 Why:** Har element ke 5 backup likhne mein development time dugna lag jaata hai::HL]].
 
-### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "XPath aur CSS Selector mein kya better hai?" → CSS fast hota hai aur less brittle hota hai. XPath complex queries (jaise parent dhoondhna) ke liye acha hai par break jaldi hota hai.
+### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "XPath aur CSS Selector mein kya better hai?" → CSS fast hota hai aur less brittle hota hai. XPath complex queries (jaise parent dhoondhna) ke liye acha hai par break jaldi hota hai::HL]].
 - **Confusion 2:** "PyCharm VS Code se better kyun hai?" → Speaker PyCharm explicitly isliye recommend karta hai kyunki uska Python environment setup, debugging aur refactoring tools specially Python testing ke liye industry standard mane jaate hain (VS Code general purpose hai).
 
 ### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
-- Element nahi mil raha? → **Chrome dev tool** open karo (`F12`).
-- **inspect the element** tool use karke us button par jao.
-- Check karo kya uska **ID**, **name**, ya **class** wohi hai jo tumhare Page Object Model mein likha hai. Agar nahi, tab failure justified hai.
+- [[HL::Element nahi mil raha? → **Chrome dev tool** open karo (`F12`).::HL]]
+- [[HL::**inspect the element** tool use karke us button par jao.::HL]]
+- [[HL::Check karo kya uska **ID**, **name**, ya **class** wohi hai jo tumhare Page Object Model mein likha hai. Agar nahi, tab failure justified hai::HL]].
 
-### ⚖️ 13. Comparison (Ye vs Woh)
-| Feature | Traditional Approach | Classical Healing (Legacy) | Modern AI Healing |
+### ⚖️ [[HL::13. Comparison (Ye vs Woh)::HL]]
+| [[HL::Feature::HL]] | [[HL::Traditional Approach::HL]] | [[HL::Classical Healing (Legacy)::HL]] | [[HL::Modern AI Healing::HL]] |
 | :--- | :--- | :--- | :--- |
-| **Locator Strategy** | Single static locator | Array of fallback locators | Dynamic prediction |
-| **When UI changes** | Fails immediately | Tries backups, fails if all bad | LLM reads DOM, predicts new one |
-| **Maintenance** | Very High | Extremely High | Very Low |
+| [[HL::**Locator Strategy**::HL]] | [[HL::Single static locator::HL]] | [[HL::Array of fallback locators::HL]] | [[HL::Dynamic prediction::HL]] |
+| [[HL::**When UI changes**::HL]] | [[HL::Fails immediately::HL]] | [[HL::Tries backups, fails if all bad::HL]] | [[HL::LLM reads DOM, predicts new one::HL]] |
+| [[HL::**Maintenance**::HL]] | [[HL::Very High::HL]] | [[HL::Extremely High::HL]] | [[HL::Very Low::HL]] |
 
 ### 🌍 14. Real-World Use Case (Production Application)
 Pehle ek popular tool tha **Test projects** (ab deprecate ho chuka hai). Usme classical healing built-in thi. Jab tum usme record karte the, toh woh ek element ke 10 attributes save kar leta tha. Run time pe agar ID fail hoti, toh woh chupchap CSS se try karta tha bina test fail kiye. Aaj yahi kaam hum AI se code level pe karwana chahte hain.
@@ -4035,14 +4035,14 @@ Attempt 3: By.XPath("//a") ------> SUCCESS! (Test Passes)
 ### ❓ 17. Interview Q&A (FAQ)
 - **Q:** Automation testing mein "Element Not Found" exception kab aur kyun aata hai?
   **A:** Yeh exception tab throw hota hai jab Selenium WebDriver ko HTML DOM execute karne par woh exact locator nahi milta jo script mein hardcoded tha. Yeh mostly UI changes (ID, class ya tag change hone) ke karan hota hai.
-- **Q:** Page Object Model (POM) pattern traditional failures ko track karne mein kaise help karta hai?
-  **A:** POM mein hum saare locators ko ek class (jaise LoginPage) mein centralized rakhte hain (`self.username`, `self.password`). Agar koi locator fail hota hai, toh hume poore test file mein dhoondhne ke bajaye sirf us ek constructor operation mein jake update karna padta hai.
-- **Q:** Classical Self Healing (jaise Test Projects tool mein thi) AI healing se alag kaise hai?
-  **A:** Classical healing essentially ek brute-force technique thi jahan ek element ke liye multiple locators (ID, name, XPath, CSS) ka array maintain hota tha. AI healing dynamic hai; yeh DOM samajhta hai aur naya locator khud invent/predict karta hai bina manual arrays ke.
+- [[HL::**Q:** Page Object Model (POM) pattern traditional failures ko track karne mein kaise help karta hai?::HL]]
+[[HL::  **A:** POM mein hum saare locators ko ek class (jaise LoginPage) mein centralized rakhte hain (`self.username`, `self.password`). Agar koi locator fail hota hai, toh hume poore test file mein dhoondhne ke bajaye sirf us ek constructor operation mein jake update karna padta hai.::HL]]
+- [[HL::**Q:** Classical Self Healing (jaise Test Projects tool mein thi) AI healing se alag kaise hai?::HL]]
+[[HL::  **A:** Classical healing essentially ek brute-force technique thi jahan ek element ke liye multiple locators (ID, name, XPath, CSS) ka array maintain hota tha. AI healing dynamic hai; yeh DOM samajhta hai aur naya locator khud invent/predict karta hai bina manual arrays ke::HL]].
 - **Q:** Speaker ne PyCharm IDE ko VS Code par Python Selenium automation ke liye kyun prefer kiya?
   **A:** Speaker ne PyCharm ko highly recommend kiya (which has a non-commercial use only license for the community edition) kyunki PyCharm ke code introspection, refactoring tools, aur virtual environment management specially heavy Python testing suites ke liye bohot powerful aur stable hote hain.
-- **Q:** Jab ek traditional test fail hota hai, toh developer manually kya action leta hai?
-  **A:** Developer apne browser mein Chrome Dev Tools open karta hai, 'inspect the element' feature use karta hai, HTML code analyze karta hai, naya ID, XPath ya CSS locator find karta hai, aur manually code mein jaake use replace karta hai.
+- [[HL::**Q:** Jab ek traditional test fail hota hai, toh developer manually kya action leta hai?::HL]]
+[[HL::  **A:** Developer apne browser mein Chrome Dev Tools open karta hai, 'inspect the element' feature use karta hai, HTML code analyze karta hai, naya ID, XPath ya CSS locator find karta hai, aur manually code mein jaake use replace karta hai::HL]].
 
 ### 📝 18. One-Line Memory Hook
 "Traditional testing ek ziddi bachha hai jo exact khilauna na milne par rone lagta hai (crash) — Classical healing usko 3 options deti thi chup karane ke liye."
@@ -4096,7 +4096,7 @@ Normal test ek fast train ki tarah hai jo 7 seconds mein destination pahunch jaa
 
 ### 📖 3. Technical Definition
 - **Precise English:** AI Self-Healing implementation involves configuring application settings to route failed locator queries to an LLM provider using asynchronous programming, accepting longer execution times in exchange for robust, crash-free enhanced tests.
-- **Hinglish Simplification:** AI self-healing setup mein hum configuration file mein LLM ki details daalte hain, aur jab test fail hota hai, toh code background mein AI se naya locator mangwata hai. Isse test slow zaroor hota hai, par fail nahi hota.
+- [[HL::**Hinglish Simplification:** AI self-healing setup mein hum configuration file mein LLM ki details daalte hain, aur jab test fail hota hai, toh code background mein AI se naya locator mangwata hai. Isse test slow zaroor hota hai, par fail nahi hota::HL]].
 
 ### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 - **Problem:** **Traditional test approach** mein tests fast (e.g., **7 seconds** ya **14 seconds**) hote hain, par brittle (fragile) hote hain.
@@ -4124,23 +4124,23 @@ IDE ke explorer panel mein ek `appsettings.json` file dikhegi, aur terminal mein
 Yahan hum dekhenge ki `app settings` kaise configure hoti hain aur ek asynchronous mock self-healing function kaise kaam karta hai.
 
 ```python
-1  import asyncio                                           # asyncio module — asynchronous programming (background tasks) ke liye
+1  [[HL::import asyncio                                           # asyncio module — asynchronous programming (background tasks) ke liye::HL]]
 2  import time                                              # time module — execution delay measure karne ke liye
 3
-4  # Simulate the app settings configuration loaded from utilities section
-5  app_settings = {                                         # app settings: Framework ki configuration dictionary
-6      "provider": "local",                                 # provider= : Kahan request bhejni hai (local vs cloud)
-7      "API key": "not-needed-for-local",                   # API key= : Local LLM (Olama) ke liye API key blank hoti hai
-8      "base URL": "http://localhost:11434/api",            # base URL= : olama serve (local server) ka address
-9      "temperature": 0.1,                                  # temperature= : AI kitna creative hoga (0.1 matlab strict/logical)
-10     "max tokens": 50                                     # max tokens= : Answer ki maximum length (tokens mein)
-11 }
-12
-13 async def find_element_with_healing(friendly_name):      # async def = asynchronous function jo execution ko completely freeze nahi karta
-14     print(f"Normal search failed for '{friendly_name}'. Starting magic time...") # magic time = healing trigger
-15     # LLM latency simulation based on hardware
-16     await asyncio.sleep(18)                              # await asyncio.sleep() = 18 seconds background mein ruko (simulating LLM processing)
-17     return f"Healed Locator for {friendly_name}"         # returned string = AI ne naya locator dhundh liya
+4  # [[HL::Simulate the app settings configuration loaded from utilities section::HL]]
+[[HL::5  app_settings = {                                         # app settings: Framework ki configuration dictionary::HL]]
+[[HL::6      "provider": "local",                                 # provider= : Kahan request bhejni hai (local vs cloud)::HL]]
+[[HL::7      "API key": "not-needed-for-local",                   # API key= : Local LLM (Olama) ke liye API key blank hoti hai::HL]]
+[[HL::8      "base URL": "http://localhost:11434/api",            # base URL= : olama serve (local server) ka address::HL]]
+[[HL::9      "temperature": 0.1,                                  # temperature= : AI kitna creative hoga (0.1 matlab strict/logical)::HL]]
+[[HL::10     "max tokens": 50                                     # max tokens= : Answer ki maximum length (tokens mein)::HL]]
+[[HL::11 }::HL]]
+[[HL::12::HL]]
+[[HL::13 async def find_element_with_healing(friendly_name):      # async def = asynchronous function jo execution ko completely freeze nahi karta::HL]]
+[[HL::14     print(f"Normal search failed for '{friendly_name}'. Starting magic time...") # magic time = healing trigger::HL]]
+[[HL::15     # LLM latency simulation based on hardware::HL]]
+[[HL::16     await asyncio.sleep(18)                              # await asyncio.sleep() = 18 seconds background mein ruko (simulating LLM processing)::HL]]
+[[HL::17     return f"Healed Locator for {friendly_name}"         # returned string = AI ne naya locator dhundh liya::HL]]
 18
 19 async def run_enhanced_test():                           # main enhanced test function
 20     start_time = time.time()                             # timer start kiya
@@ -4151,8 +4151,8 @@ Yahan hum dekhenge ki `app settings` kaise configure hoti hain aur ek asynchrono
 25     # Output formatting to match transcript exact timing: 18 seconds 953 milliseconds
 26     print(f"Test Completed. Execution time: {int(duration)} seconds 953 milliseconds") 
 27
-28 # Run the async event loop
-29 asyncio.run(run_enhanced_test())                         # asyncio.run() = asynchronous function ko standard code mein chalane ka engine
+28 # [[HL::Run the async event loop::HL]]
+[[HL::29 asyncio.run(run_enhanced_test())                         # asyncio.run() = asynchronous function ko standard code mein chalane ka engine::HL]]
 ```
 
 ```text
@@ -4161,11 +4161,11 @@ Normal search failed for 'username field'. Starting magic time...
 Test Completed. Execution time: 18 seconds 953 milliseconds
 ```
 
-#### 🔬 Code Explanation Rule (LINE-BY-LINE)
-- **Line 8:** `base URL` — Jab tum terminal pe `olama serve` chalate ho, toh local model is URL pe start hota hai. AI first tests isi URL pe communicate karte hain.
-- **Line 9 & 10:** `temperature` & `max tokens` — Yeh LLM configuration parameters hain. Hum temperature low rakhte hain taaki AI test locators ke mamle mein strictly act kare, hallucinate (kahaniyan banana) na kare.
-- **Line 13:** `async def` — Self-healing API calls mein network delay hota hai. `async` use karne se framework doosre background tasks process kar sakta hai jab tak AI soch raha hai.
-- **Line 16:** `await asyncio.sleep(18)` — Isse thread block nahi hota. Speaker ne clearly mention kiya tha ki unka script lagbhag **18 seconds 953 milliseconds** le raha tha ek element heal karne ke liye.
+#### 🔬 Code Explanation Rule ([[HL::LINE-BY-LINE)::HL]]
+- [[HL::**Line 8:** `base URL` — Jab tum terminal pe `olama serve` chalate ho, toh local model is URL pe start hota hai. AI first tests isi URL pe communicate karte hain.::HL]]
+- [[HL::**Line 9 & 10:** `temperature` & `max tokens` — Yeh LLM configuration parameters hain. Hum temperature low rakhte hain taaki AI test locators ke mamle mein strictly act kare, hallucinate (kahaniyan banana) na kare.::HL]]
+- [[HL::**Line 13:** `async def` — Self-healing API calls mein network delay hota hai. `async` use karne se framework doosre background tasks process kar sakta hai jab tak AI soch raha hai.::HL]]
+- [[HL::**Line 16:** `await asyncio.sleep(18)` — Isse thread block nahi hota. Speaker ne clearly mention kiya tha ki unka script lagbhag **18 seconds 953 milliseconds** le raha tha ek element heal karne ke liye::HL]].
 
 ### 🔒 8. Security-First Check
 Agar cloud provider use kar rahe ho (jaise **ChatGPT** ka API), toh **API key** ko hardcode karna ek massive security risk hai. Hamesha secrets manager ya environment variables (`os.environ`) use karo. Lekin yahan **local large language model** setup hone ke karan bahar jaane ka data risk zero hai.
@@ -4184,8 +4184,8 @@ Execution time direct hardware pe depend karta hai.
 - **❌ Mistake:** CI/CD pipeline timeout limits update na karna.
 - **🤦 Why:** CI server sochega test atak gaya aur usko cancel kar dega jabki woh heal ho raha tha.
 
-### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Asynchronous aur Synchronous mein kya fark hai?" → Synchronous line mein khade hone jaisa hai (jab tak aage wala clear nahi hota, tum ruko). Asynchronous token system jaisa hai (order dekar apna kaam karo, token number aane pe order pick kar lo). Playwright async hai, standard Selenium sync hai.
+### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Asynchronous aur Synchronous mein kya fark hai?" → Synchronous line mein khade hone jaisa hai (jab tak aage wala clear nahi hota, tum ruko). Asynchronous token system jaisa hai (order dekar apna kaam karo, token number aane pe order pick kar lo). Playwright async hai, standard Selenium sync hai::HL]].
 - **Confusion 2:** "M1 Max pe 45 seconds kyun lage jabki yeh powerful chip hai?" → M1 2021 ka architecture hai jab LLMs mainstream nahi the. Naye processors (M3/M4/M5) mein NPU (AI chip) hoti hai jo execution fast karti hai.
 
 ### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
@@ -4228,8 +4228,8 @@ Test Resumes -> Element Clicked -> Test Completed (Total: 18s 953ms)
   **A:** LLM API calls network aur processing latency introduce karte hain. Async programming ensure karti hai ki framework completely freeze ya lock na ho jaye jab tak API ka response na aaye. Background mein other non-blocking operations chal sakte hain.
 - **Q:** "Friendly Name" ka self-healing architecture mein kya importance hai?
   **A:** Jab original exact locator (e.g., `id="logins_123"`) fail ho jata hai, AI ko pata hona chahiye hum dhoondh kya rahe the. "Friendly Name" (e.g., 'username field on login page') us intent ko human-readable format mein express karta hai taaki AI DOM mein se sahi element predict kar sake.
-- **Q:** App settings configuration mein 'Temperature' parameter ko low kyun rakha jata hai?
-  **A:** Temperature LLM ki creativity control karta hai. Automation testing mein humein exact, deterministic code/locators chahiye hote hain, na ki creative stories. Isliye temperature ko 0.1 ya 0 par rakhte hain to avoid hallucinations.
+- [[HL::**Q:** App settings configuration mein 'Temperature' parameter ko low kyun rakha jata hai?::HL]]
+[[HL::  **A:** Temperature LLM ki creativity control karta hai. Automation testing mein humein exact, deterministic code/locators chahiye hote hain, na ki creative stories. Isliye temperature ko 0.1 ya 0 par rakhte hain to avoid hallucinations::HL]].
 - **Q:** Hardware (jaise M1 Max vs M5/Nvidia NPU) self healing strategy ko kaise affect karta hai?
   **A:** Local AI processing directly GPU aur VRAM speed pe rely karti hai. Purane chips (M1 Max) par ek prompt process hone mein 45 seconds lag sakte hain jisse timeouts aayenge. Naye machines with NPUs (Nvidia spark) ise milliseconds mein reduce karke local healing ko feasible banate hain.
 
@@ -4276,36 +4276,36 @@ Browser mein: Developer webpage par right-click karega `->` **inspect** ya `->` 
 Yahan hum **Python code** nahi, balki us actual prompt string aur **proper JSON syntax** ka structure dekhenge jo API ko bheja jata hai.
 
 ```json
-# Prompt Engineering Flow (Terminal/Chat simulation)
+# [[HL::Prompt Engineering Flow (Terminal/Chat simulation)::HL]]
 
-1  # ❌ STEP 1: Bad Prompt (Beginner Mistake)
-2  Prompt: "Find the username field on this page: <URL>"
-3  # Result: "Sorry, I don't have internet access to visit that URL."
-4
-5  # ⚠️ STEP 2: Initial Manual Prompt (Better, but noisy)
-6  Prompt: "Here is the HTML source code. Find page locators for the login form and give me variations."
-7  HTML_PAYLOAD: "<html>...<input id='user1' alt='user_alt' class='input_field'>...</html>"
-8  # Result: AI returns non-standard elements like CSS alt and bad syntax.
-9
-10 # ✅ STEP 3: The Optimized Meta-Prompted String (The 'Pro' Way)
-11 Final_Prompt = """
-12 You are an expert QA automation engineer. Look at the provided HTML source code.
-13 Extract the interactive elements for the 'login form' (like username).
-14 You MUST return ONLY a well structured JSON format object.
-15 Do NOT include unsupported locators like CSS alt or CSS type.
-16 Only provide: ID, XPath, CSS, name, link text, class name.
-17 Ensure proper double quotes for proper JSON syntax. Do not output anything else.
-18 
-19 HTML: <html>...</html>
-20 """
+[[HL::1  # ❌ STEP 1: Bad Prompt (Beginner Mistake)::HL]]
+[[HL::2  Prompt: "Find the username field on this page: <URL>"::HL]]
+[[HL::3  # Result: "Sorry, I don't have internet access to visit that URL."::HL]]
+[[HL::4::HL]]
+[[HL::5  # ⚠️ STEP 2: Initial Manual Prompt (Better, but noisy)::HL]]
+[[HL::6  Prompt: "Here is the HTML source code. Find page locators for the login form and give me variations."::HL]]
+[[HL::7  HTML_PAYLOAD: "<html>...<input id='user1' alt='user_alt' class='input_field'>...</html>"::HL]]
+[[HL::8  # Result: AI returns non-standard elements like CSS alt and bad syntax.::HL]]
+[[HL::9::HL]]
+[[HL::10 # ✅ STEP 3: The Optimized Meta-Prompted String (The 'Pro' Way)::HL]]
+[[HL::11 Final_Prompt = """::HL]]
+[[HL::12 You are an expert QA automation engineer. Look at the provided HTML source code.::HL]]
+[[HL::13 Extract the interactive elements for the 'login form' (like username).::HL]]
+[[HL::14 You MUST return ONLY a well structured JSON format object.::HL]]
+[[HL::15 Do NOT include unsupported locators like CSS alt or CSS type.::HL]]
+[[HL::16 Only provide: ID, XPath, CSS, name, link text, class name.::HL]]
+[[HL::17 Ensure proper double quotes for proper JSON syntax. Do not output anything else.::HL]]
+[[HL::18 ::HL]]
+[[HL::19 HTML: <html>...</html>::HL]]
+[[HL::20 """::HL]]
 
-# 📤 Expected Output (from AI model based on Final_Prompt):
-{
-  "login form elements": {
-    "username": {
-      "ID": "user1",
-      "CSS": ".input_field",
-      "XPath": "//input[@id='user1']"
+# [[HL::📤 Expected Output (from AI model based on Final_Prompt):::HL]]
+[[HL::{::HL]]
+[[HL::  "login form elements": {::HL]]
+[[HL::    "username": {::HL]]
+[[HL::      "ID": "user1",::HL]]
+[[HL::      "CSS": ".input_field",::HL]]
+[[HL::      "XPath": "//input[@id='user1::HL]]']"
     }
   }
 }
@@ -4324,14 +4324,14 @@ Jab tum raw **page source** copy karke bahar cloud model (jaise **sonnet 4.5 mod
 Is process ko hum scale par manual copy-paste se nahi kar sakte. Yeh manual iteration sirf "Golden Prompt" (perfect prompt string) dhundhne ke liye thi. Ek baar jab humein theek json format mil jata hai, tab hum apna **Python code** likhte hain jo automatically selenium command `driver.page_source` se html nikalta hai aur api payload mein bhej deta hai.
 
 ### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
-- **❌ Mistake:** LLM ko bolna "give me the code to click the button".
-- **🤦 Why:** Model pura framework specific code dega jo parse nahi hoga. Humein sirf "Data" (Locators JSON) chahiye.
-- **✅ The 'Pro' Way:** Explicit instructions likho for **JSON object** only output.
+- **❌ [[HL::Mistake:** LLM ko bolna "give me the code to click the button".::HL]]
+- [[HL::**🤦 Why:** Model pura framework specific code dega jo parse nahi hoga. Humein sirf "Data" (Locators JSON) chahiye.::HL]]
+- [[HL::**✅ The 'Pro' Way:** Explicit instructions likho for **JSON object** only output::HL]].
 - **❌ Mistake:** Prompt mein URL bhejna expecting **web search feature** to work on isolated machines.
 - **🤦 Why:** AI hallucinates because it can't reach the page.
 
-### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Meta-Prompting kya hota hai?" → Meta ka matlab hai "about itself". Jab tum AI ko bolte ho, "Tumhara purana answer bakwas tha, us answer ko analyze karo aur ek behtar prompt banao mere liye", use meta-prompting kehte hain.
+### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Meta-Prompting kya hota hai?" → Meta ka matlab hai "about itself". Jab tum AI ko bolte ho, "Tumhara purana answer bakwas tha, us answer ko analyze karo aur ek behtar prompt banao mere liye", use meta-prompting kehte hain::HL]].
 - **Confusion 2:** "Playwright MCP Server ka kya kaam hai agar hum manual paste kar rahe hain?" → Agar MCP server setup ho, toh woh manually copy-paste ki zaroorat khatam kar deta hai kyunki woh AI ko command-line se browser interact karne ki power de deta hai. Par beginner tutorial mein speaker manually dikha raha hai taaki basics clear hon.
 
 ### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
@@ -4369,11 +4369,11 @@ Attempt 3: "Return strict JSON format ONLY. Double quotes. Valid attributes (ID/
            -> Output: Perfect JSON object -> PASS
 ```
 
-### ❓ 17. Interview Q&A (FAQ)
-- **Q:** Automation AI mein "Meta-Prompting" kis technique ko bolte hain?
-  **A:** Meta-prompting ek ai-iteration technique hai jahan developer AI ka hi use karke ek existing prompt ko improve karwata hai. Example: Developer AI ko batata hai ki "tumhara pichla output JSON valid nahi tha, ek aisa naya prompt likh ke do mere liye jisko follow karke tum future mein yeh mistake nahi karoge."
-- **Q:** Local LLMs ko testing ke liye URL dena ek fail pattern kyun hai?
-  **A:** Local LLMs offline environments (behind firewalls) mein run hote hain jahan internet access ya native web scraping tools nahi hote. Agar hum URL denge, toh AI wahan navigate nahi kar payega aur hallucinated results dega. Humein locally extract kiya hua 'Page Source' HTML payload mein bhej kar dena padta hai.
+### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
+- [[HL::**Q:** Automation AI mein "Meta-Prompting" kis technique ko bolte hain?::HL]]
+[[HL::  **A:** Meta-prompting ek ai-iteration technique hai jahan developer AI ka hi use karke ek existing prompt ko improve karwata hai. Example: Developer AI ko batata hai ki "tumhara pichla output JSON valid nahi tha, ek aisa naya prompt likh ke do mere liye jisko follow karke tum future mein yeh mistake nahi karoge."::HL]]
+- [[HL::**Q:** Local LLMs ko testing ke liye URL dena ek fail pattern kyun hai?::HL]]
+[[HL::  **A:** Local LLMs offline environments (behind firewalls) mein run hote hain jahan internet access ya native web scraping tools nahi hote. Agar hum URL denge, toh AI wahan navigate nahi kar payega aur hallucinated results dega. Humein locally extract kiya hua 'Page Source' HTML payload mein bhej kar dena padta hai::HL]].
 - **Q:** AI prompt output mein strict JSON structure aur 'Proper Double Quotes' ki demand kyun ki jaati hai?
   **A:** Kyunki AI ka final output ultimately ek software component (Python json library) parse karega, koi human nahi. Agar AI conversational english, markdown backticks, ya single quotes (Python dictionary style) mein data dega, toh `json.loads()` parser exception throw karega aur framework crash ho jayega.
 - **Q:** Prompt Engineering karte waqt kis tarah ke locators ko explicitly reject karna zaroori hai?
@@ -4424,7 +4424,7 @@ Total keywords across all subtopics in this topic: 79
 ### section 5. Building Foundational Component Talking with Local LLMs and Cloud AI LLMs (Selenium: Python, Playwright: JavaScript)
 
 ### 🎬 Video 1 Overview: Building Foundational Component Talking with Local LLMs and Cloud AI LLMs (Selenium: Python, Playwright: JavaScript)
-Is section mein hum dekhenge ki kaise ek automation framework ko smart banaya jaye. Hum local AI aur cloud AI ko Python/JavaScript code ke through integrate karenge taaki ek "self-healing" (khud ko theek karne wala) system ban sake.
+Is [[HL::section mein hum dekhenge ki kaise ek automation framework ko smart banaya jaye. Hum local AI aur cloud AI ko Python/JavaScript code ke through integrate karenge taaki ek "self-healing" (khud ko theek karne wala) system ban sake::HL]].
 
 ---
 
@@ -4438,9 +4438,9 @@ Socho tum car chala rahe ho aur raste mein tyre puncture ho gaya. Normal car wah
 - **Hinglish Simplification:** Ek aisa automation framework jo test fail hone par AI ki madad se automatically naya web element dhoondh leta hai, taaki test bich mein na ruke.
 
 ### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** UI development bohot fast hoti hai. Kal jo button ka ID `btn-submit` tha, aaj woh `btn-primary` ho gaya. Is wajah se automated tests lagataar fail hote hain (brittle tests).
-- **Solution:** AI agents aur context engineering ka use karke hum framework ko bolte hain: "Agar purana locator na chale, toh AI se naya pooch lo aur test resume karo."
-- **What breaks if we don't use it?** Testers ka 80% time sirf purane, toote hue locators (maintenance) ko fix karne mein chala jayega, nayi testing ruk jayegi.
+- [[HL::**Problem:** UI development bohot fast hoti hai. Kal jo button ka ID `btn-submit` tha, aaj woh `btn-primary` ho gaya. Is wajah se automated tests lagataar fail hote hain (brittle tests).::HL]]
+- [[HL::**Solution:** AI agents aur context engineering ka use karke hum framework ko bolte hain: "Agar purana locator na chale, toh AI se naya pooch lo aur test resume karo."::HL]]
+- [[HL::**What breaks if we don't use it?** Testers ka 80% time sirf purane, toote hue locators (maintenance) ko fix karne mein chala jayega, nayi testing ruk jayegi::HL]].
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```text
@@ -4453,11 +4453,11 @@ Socho tum car chala rahe ho aur raste mein tyre puncture ho gaya. Normal car wah
 ```
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-1. **Failure Detect:** Script element (e.g., `register link`) dhoondhne ki koshish karti hai par fail ho jati hai.
-2. **Context Engineering:** Script current page ka HTML source aur failed element ka naam uthati hai (isko WIP coding ya Work-In-Progress coding logic kehte hain jahan context build hota hai).
-3. **AI Request:** Ek AI agent (Local ya Cloud) ko prompt aur HTML bheja jata hai. 
-4. **AI Processing:** AI model naya ID ya XPath banata hai aur strictly JSON format mein answer wapas bhejta hai.
-5. **Deserialization & Retry:** Python ya JavaScript (Playwright) us JSON response ko deserialize (text se object mein convert) karta hai aur naye locator selection strategy ko use karke element dhoondhta hai.
+1. [[HL::**Failure Detect:** Script element (e.g., `register link`) dhoondhne ki koshish karti hai par fail ho jati hai.::HL]]
+2. [[HL::**Context Engineering:** Script current page ka HTML source aur failed element ka naam uthati hai (isko WIP coding ya Work-In-Progress coding logic kehte hain jahan context build hota hai).::HL]]
+3. [[HL::**AI Request:** Ek AI agent (Local ya Cloud) ko prompt aur HTML bheja jata hai. ::HL]]
+4. [[HL::**AI Processing:** AI model naya ID ya XPath banata hai aur strictly JSON format mein answer wapas bhejta hai.::HL]]
+5. [[HL::**Deserialization & Retry:** Python ya JavaScript (Playwright) us JSON response ko deserialize (text se object mein convert) karta hai aur naye locator selection strategy ko use karke element dhoondhta hai::HL]].
 
 ### 💻 7. Hands-On — Runnable Example (Conceptual Pseudo-code)
 Yahan hum Python (Selenium) ka architecture flow demonstrate kar rahe hain:
@@ -4487,7 +4487,7 @@ Yahan hum Python (Selenium) ka architecture flow demonstrate kar rahe hain:
 ```
 
 #### 🔬 Code Explanation
-- **Line 11:** `json.loads()` — Yeh function raw text ko read karke usko usable object mein badalta hai (deserialization). Agar hum yeh na karein, toh string se direct "new_xpath" nikalna bohot mushkil aur error-prone hota hai.
+- [[HL::**Line 11:** `json.loads()` — Yeh function raw text ko read karke usko usable object mein badalta hai (deserialization). Agar hum yeh na karein, toh string se direct "new_xpath" nikalna bohot mushkil aur error-prone hota hai::HL]].
 - Yeh code chahe tum PyCharm (Python IDE) mein chalao ya VS Code (Code editor) mein, flow same rahega.
 
 ### 🔒 8. Security-First Check
@@ -4502,12 +4502,12 @@ Local vs Cloud Models ka selection crucial hai. Cloud models (OpenAI) bohot smar
 - **🤦 Why:** Isse raat ko chalne wale automation suites 10% pe hi ruk jate hain.
 - **✅ The 'Pro' Way:** AI Agents ko retry aur self-heal system mein integrate karna.
 
-### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Selenium aur Playwright dono alag tools hain, toh self-healing dono mein alag banegi?" → Logic (AI prompt, JSON format) exactly same rahega! Sirf UI interact karne ka code (Python for Selenium, JavaScript for Playwright) thoda change hoga. Architecture universal hai.
+### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Selenium aur Playwright dono alag tools hain, toh self-healing dono mein alag banegi?" → Logic (AI prompt, JSON format) exactly same rahega! Sirf UI interact karne ka code (Python for Selenium, JavaScript for Playwright) thoda change hoga. Architecture universal hai::HL]].
 - **Confusion 2:** "Ola client kya hai?" → Notes/transcripts mein kabhi kabhi voice-to-text error se "Ollama client" (AI model runner) ko "Ola client" likh diya jata hai. Yeh cab wali Ola nahi, balki local AI server hai!
 
 ### 🛠️ 12. Troubleshooting Flowchart
-- `JSONDecodeError` aa raha hai? → Check karo ki AI ne response ke aage-peeche markdown ticks (```json) toh nahi laga diye. Deserialization se pehle unhe hatao.
+- [[HL::`JSONDecodeError` aa raha hai? → Check karo ki AI ne response ke aage-peeche markdown ticks (```json) toh nahi laga diye. Deserialization se pehle unhe hatao::HL]].
 - `Element Not Found` even after healing? → Ho sakta hai page load hi na hua ho. AI magic nahi hai, page source mein element hona zaroori hai.
 
 ### ⚖️ 13. Comparison (Ye vs Woh)
@@ -4548,20 +4548,20 @@ Amazon jaisi e-commerce sites A/B testing karti hain, jahan "Add to Cart" button
 ```
 
 ### ❓ 17. Interview Q&A
-- **Q:** Self-healing test automation kya hai aur yeh brittle tests ko kaise fix karta hai?
-- **A:** Brittle tests woh hote hain jo chhote UI changes (jaise ID change) hone par fail ho jate hain. Self-healing automation mein jab locator fail hota hai, tab hum page ka current HTML AI ko bhejte hain (context engineering). AI us HTML ko padh kar automatically alternate locator (jaise XPath) return karta hai jisse test resume ho jata hai.
+- **Q:** [[HL::Self-healing test automation kya hai aur yeh brittle tests ko kaise fix karta hai?::HL]]
+- [[HL::**A:** Brittle tests woh hote hain jo chhote UI changes (jaise ID change) hone par fail ho jate hain. Self-healing automation mein jab locator fail hota hai, tab hum page ka current HTML AI ko bhejte hain (context engineering). AI us HTML ko padh kar automatically alternate locator (jaise XPath) return karta hai jisse test resume ho jata hai::HL]].
 
 - **Q:** Local Models aur Cloud Models mein automation ke context mein kya difference hai?
 - **A:** Cloud models (OpenAI) bohot intelligent aur fast hote hain par paid hote hain aur data bahar bhejte hain. Local models (Ollama) humari apni machine pe chalte hain, completely free aur secure hote hain. Architecture dono ke liye same rehna chahiye taaki hum easily switch kar sakein.
 
-- **Q:** AI response ko JSON format mein kyu maanga jata hai, plain text mein kyu nahi?
-- **A:** Plain text response (jaise "Aapka naya XPath yeh hai: //div") ko code ke through padhna mushkil hai. JSON ek structured dictionary format deta hai (`{"xpath": "//div"}`). Isko hum code mein easily deserialize karke variable mein extract kar sakte hain.
+- [[HL::**Q:** AI response ko JSON format mein kyu maanga jata hai, plain text mein kyu nahi?::HL]]
+- [[HL::**A:** Plain text response (jaise "Aapka naya XPath yeh hai: //div") ko code ke through padhna mushkil hai. JSON ek structured dictionary format deta hai (`{"xpath": "//div"}`). Isko hum code mein easily deserialize karke variable mein extract kar sakte hain::HL]].
 
 - **Q:** "WIP coding" concept ka AI prompt mein kya role hai?
 - **A:** WIP (Work-In-Progress) coding ka matlab hai AI ko exact wahi context dena jis par system abhi fasa hua hai. Hum AI ko blank question nahi puchte, balki us current point ka page source aur failed element ka type bhejte hain, taaki AI us limited context ke andar deeply analyze kare aur accurate locator de.
 
-- **Q:** Deserialization kya hoti hai self-healing workflow mein?
-- **A:** Jab AI (LLM) reply karta hai, toh woh HTTP ke through ek lambi string (text) hoti hai. Us text string ko Python dictionary (ya JSON object) mein convert karne ke process ko deserialization kehte hain, jiske baad hum us object se `.get("xpath")` karke specific data fetch kar sakte hain.
+- [[HL::**Q:** Deserialization kya hoti hai self-healing workflow mein?::HL]]
+- [[HL::**A:** Jab AI (LLM) reply karta hai, toh woh HTTP ke through ek lambi string (text) hoti hai. Us text string ko Python dictionary (ya JSON object) mein convert karne ke process ko deserialization kehte hain, jiske baad hum us object se `.get("xpath")` karke specific data fetch kar sakte hain::HL]].
 
 ### 📝 18. One-Line Memory Hook
 "Self-healing tyre mein hawa bharne jaisa hai — UI tutega, AI JSON mein naya locator dega, deserialization code padhega aur test aage badhega!"
@@ -4584,7 +4584,7 @@ Agar tumhe restaurant se khana mangwana hai, toh do tarike hain: Ya toh Swiggy (
 
 ### 📖 3. Technical Definition
 - **Precise English:** The API integration strategy involves using a native or lightweight HTTP client to make direct REST API POST requests to an LLM endpoint, avoiding heavy vendor-specific SDKs (like the OpenAI pip package) to maintain a decoupled and flexible framework.
-- **Hinglish Simplification:** LLM models se baat karne ke liye kisi specific company ki external library download karne ke bajaye, directly HTTP request (raw web call) use karna taaki code kisi ek platform pe dependent na rahe.
+- [[HL::**Hinglish Simplification:** LLM models se baat karne ke liye kisi specific company ki external library download karne ke bajaye, directly HTTP request (raw web call) use karna taaki code kisi ek platform pe dependent na::HL]] rahe.
 
 ### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 - **Problem:** Agar hum OpenAI Python (library) use karte hain, toh code strictly OpenAI ke liye lock ho jata hai. Kal ko agar Local LLM (Ollama) use karna ho, toh saara code rewrite karna padega.
@@ -4614,36 +4614,36 @@ Body   : {
 Is section mein hum Postman/HTTP ka concept Python code ke through samjhenge (using `requests` module):
 
 ```python
-1  import requests                                   # requests = Python ka HTTP client library, APIs call karne ke liye
-2  import json                                       # json module data structure format karne ke liye
-3  
-4  url = "http://localhost:11434/api/generate"       # url = Local Ollama AI ka default endpoint jahan API sun rahi hai
-5  
-6  # Raw Body JSON define kar rahe hain
-7  payload = {
-8      "model": "llama3",                            # model = kaunsa LLM use hoga
-9      "prompt": "Find an alternative XPath",        # prompt = humara sawal
-10     "stream": False                               # stream = False: Pura answer ek sath aane do, chunks mein nahi
-11 }
-12 
-13 # POST operation
-14 response = requests.post(                         # post() = server ko naya data create/generate karne ke liye bolta hai
-15     url, 
-16     data=json.dumps(payload),                     # json.dumps() = dictionary ko valid JSON string mein convert karta hai
-17     headers={'Content-Type': 'application/json'}  # header = server ko batata hai ki data JSON format mein hai
-18 )
-19 
-20 print(response.json())                            # response.json() = API se aaye response ko wapas dictionary mein badal ke print karo
+[[HL::1  import requests                                   # requests = Python ka HTTP client library, APIs call karne ke liye::HL]]
+[[HL::2  import json                                       # json module data structure format karne ke liye::HL]]
+[[HL::3  ::HL]]
+[[HL::4  url = "http://localhost:11434/api/generate"       # url = Local Ollama AI ka default endpoint jahan API sun rahi hai::HL]]
+[[HL::5  ::HL]]
+[[HL::6  # Raw Body JSON define kar rahe hain::HL]]
+[[HL::7  payload = {::HL]]
+[[HL::8      "model": "llama3",                            # model = kaunsa LLM use hoga::HL]]
+[[HL::9      "prompt": "Find an alternative XPath",        # prompt = humara sawal::HL]]
+[[HL::10     "stream": False                               # stream = False: Pura answer ek sath aane do, chunks mein nahi::HL]]
+[[HL::11 }::HL]]
+[[HL::12 ::HL]]
+[[HL::13 # POST operation::HL]]
+[[HL::14 response = requests.post(                         # post() = server ko naya data create/generate karne ke liye bolta hai::HL]]
+[[HL::15     url, ::HL]]
+[[HL::16     data=json.dumps(payload),                     # json.dumps() = dictionary ko valid JSON string mein convert karta hai::HL]]
+[[HL::17     headers={'Content-Type': 'application/json'}  # header = server ko batata hai ki data JSON format mein hai::HL]]
+[[HL::18 )::HL]]
+[[HL::19 ::HL]]
+[[HL::20 print(response.json())                            # response.json() = API se aaye response ko wapas dictionary mein badal ke print karo::HL]]
 ```
 
 ```text
-# 📤 Expected Output:
-{'model': 'llama3', 'created_at': '...', 'response': '{"xpath": "//div"}', 'done': True}
+# [[HL::📤 Expected Output:::HL]]
+[[HL::{'model': 'llama3', 'created_at': '...', 'response': '{"xpath": "//div"}', 'done': True}::HL]]
 ```
 
 #### 🔬 Code Explanation
 - **Line 10:** `stream: False` — Agar isko `True` rakhte (jo default hota hai), toh response tukdo (chunks) mein aata (jaise ChatGPT pe letters type hote hue dikhte hain). Automation test ke liye hume streaming nahi chahiye, poora data ek sath chahiye.
-- **Line 16:** `json.dumps()` aur `json.loads()` mein farq yaad rakho. `dumps` Python object ko JSON text mein badalta hai bhejne ke liye. `loads` JSON text ko Python object mein badalta hai padhne ke liye.
+- [[HL::**Line 16:** `json.dumps()` aur `json.loads()` mein farq yaad rakho. `dumps` Python object ko JSON text mein badalta hai bhejne ke liye. `loads` JSON text ko Python object mein badalta hai padhne ke liye::HL]].
 
 ### 🔒 8. Security-First Check
 Agar hum direct HTTP requests use kar rahe hain kisi cloud model (jaise GPT 4.5) ke liye, toh HTTP body/headers mein API keys plain text mein bhejni padti hain. Humesha environment variables (env vars) use karo `.env` file mein — API key ko directly code mein kabhi copy-paste (hardcode) mat karo.
@@ -4758,11 +4758,11 @@ Maan lo tumhe kisi government office mein form submit karna hai. Agar tum form a
 
 ### 📖 3. Technical Definition
 - **Precise English:** Implementing Python `requests` with an `async def` approach involves constructing an anonymous request body, serializing it into UTF-8 JSON format, executing an HTTP POST operation, and finally deserializing the text response into a dictionary to extract specific string values.
-- **Hinglish Simplification:** Python ki `requests` library use karke data ko JSON mein pack karna, API ko asynchrounously bhejna, aur aane wale raw text jawab ko wapas dictionary mein badal kar apne kaam ki information nikalna.
+- [[HL::**Hinglish Simplification:** Python ki `requests` library use karke data ko JSON mein pack karna, API ko asynchrounously bhejna, aur aane wale raw text jawab ko wapas dictionary mein badal kar apne kaam ki information nikalna::HL]].
 
 ### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** AI models ka computation time fix nahi hota — kabhi 1 second, kabhi 5 second. Agar humara test code wait karta rahega (synchronous), toh poora framework freeze ho jayega.
-- **Solution:** ⭐ "You need to call an `async def` in your test code. If not, it is not going to work." Async functions framework ko block nahi karte.
+- [[HL::**Problem:** AI models ka computation time fix nahi hota — kabhi 1 second, kabhi 5 second. Agar humara test code wait karta rahega (synchronous), toh poora framework freeze ho jayega.::HL]]
+- [[HL::**Solution:** ⭐ "You need to call an `async def` in your test code. If not, it is not going to work." Async functions framework ko block nahi karte::HL]].
 - **What breaks if we don't use it?** Agar API payload ko sahi se serialize (`json.dumps`) nahi kiya, toh server ko data samajh nahi aayega (HTTP 400 error). Agar code async nahi hua, toh UI execution atak jayegi.
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -4774,9 +4774,9 @@ Extracted String = '{"xpath": "//id"}'
 ```
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-1. **Body Creation:** Hum ek anonymous type (ya dictionary) banate hain jisme `stream: false` aur `temperature: 0.1` jaise options hote hain.
-2. **Serialization:** `json.dumps` us dictionary ko UTF-8 encoded `application/json` format (HTTP content) mein convert karta hai.
-3. **POST Request:** `requests.post()` server ko data bhejta hai.
+1. [[HL::**Body Creation:** Hum ek anonymous type (ya dictionary) banate hain jisme `stream: false` aur `temperature: 0.1` jaise options hote hain.::HL]]
+2. [[HL::**Serialization:** `json.dumps` us dictionary ko UTF-8 encoded `application/json` format (HTTP content) mein convert karta hai.::HL]]
+3. [[HL::**POST Request:** `requests.post()` server ko data bhejta hai::HL]].
 4. **Validation:** `raise_for_status()` check karta hai ki server ne HTTP 200 (Success) diya hai ya nahi.
 5. **Deserialization:** Response ka raw `text` wapas JSON decoder ke through Python `dict` mein convert hota hai.
 6. **Extraction:** Hum `.get("response")` use karke sirf core answer nikalte hain aur usko `str()` mein cast karte hain.
@@ -4789,24 +4789,24 @@ Extracted String = '{"xpath": "//id"}'
 2  import json                                       # json = data format ko text se object aur object se text mein badalne ke liye
 3  import asyncio                                    # asyncio = asynchronous programming ke liye built-in module
 4  
-5  async def get_healed_locator():                   # async def = asynchronous function banata hai jo execution block nahi karta
-6      url = "http://localhost:11434/api/generate"   # url = target API ka endpoint address
-7      
-8      # Request body (anonymous type equivalent in Python is a dict)
-9      payload = {                                   # payload = data jo hum server ko bhejenge
-10         "model": "llama3",                        # model = AI ka naam
-11         "prompt": "Find locator",                 # prompt = humari instruction
-12         "stream": False,                          # stream = chunks ki jagah ek saath answer aane do
-13         "options": { "temperature": 0.1 }         # temperature = 0.1: model ko strict aur logical banata hai (creative nahi)
-14     }
+5  [[HL::async def get_healed_locator():                   # async def = asynchronous function banata hai jo execution block nahi karta::HL]]
+[[HL::6      url = "http://localhost:11434/api/generate"   # url = target API ka endpoint address::HL]]
+[[HL::7      ::HL]]
+[[HL::8      # Request body (anonymous type equivalent in Python is a dict)::HL]]
+[[HL::9      payload = {                                   # payload = data jo hum server ko bhejenge::HL]]
+[[HL::10         "model": "llama3",                        # model = AI ka naam::HL]]
+[[HL::11         "prompt": "Find locator",                 # prompt = humari instruction::HL]]
+[[HL::12         "stream": False,                          # stream = chunks ki jagah ek saath answer aane do::HL]]
+[[HL::13         "options": { "temperature": 0.1 }         # temperature = 0.1: model ko strict aur logical banata hai (creative nahi)::HL]]
+[[HL::14::HL]]     }
 15     
 16     # HTTP Post Operation with Serialize
 17     # await asyncio.to_thread is basically non-blocking call for requests
-18     response = await asyncio.to_thread(           # await = tab tak wait karo jab tak response na aa jaye, par framework ko block mat karo
+18     [[HL::response = await asyncio.to_thread(           # await = tab tak wait karo jab tak response na aa jaye, par framework ko block mat karo::HL]]
 19         requests.post,                            # post() = naya data bhejne ka method
 20         url,
-21         data=json.dumps(payload),                 # json.dumps() = dictionary ko UTF8 JSON string (Serialize) mein convert karta hai
-22         headers={'Content-Type': 'application/json'} # headers = server ko batata hai ki body application/json format mein hai
+21         data=[[HL::json.dumps(payload),                 # json.dumps() = dictionary ko UTF8 JSON string (Serialize) mein convert karta hai::HL]]
+[[HL::22         headers={'Content-Type': 'application/json'} # headers = server ko batata hai ki body application/json format mein hai::HL]]
 23     )
 24     
 25     response.raise_for_status()                   # raise_for_status() = agar HTTP error (e.g., 404, 500) aaya toh turant exception fainko
@@ -4830,7 +4830,7 @@ Extracted String = '{"xpath": "//id"}'
 ```
 
 #### 🔬 Code Explanation
-- **Line 5 (`async def`)**: ⭐ Speaker ka strict warning tha: "you need to call an async def... If not, it is not going to work." Automation tools (jaise Playwright) async nature par chalte hain. Agar sync function laga diya, toh poora UI test atak jayega.
+- [[HL::**Line 5 (`async def`)**: ⭐ Speaker ka strict warning tha: "you need to call an async def... If not, it is not going to work." Automation tools (jaise Playwright) async nature par chalte hain. Agar sync function laga diya, toh poora UI test atak jayega::HL]].
 - **Line 21 (`json.dumps`)**: Isko **Serialization** kehte hain. Tumhara Python ka `dict` network cable ke through travel nahi kar sakta. Usko raw UTF8 bytes/text mein convert karna padta hai.
 - **Line 25 (`raise_for_status()`)**: Yeh best practice hai. Agar API error de (jaise model not found), toh code aage badh kar `Object reference exception` (jab tum kisi aisi cheez ko use karne ki koshish karo jo bani hi nahi hai/None hai) dega kyunki JSON hi nahi hoga. Yeh line wahin code rok kar error clear kar deti hai.
 - **Line 32 (`get().str()`)**: Hum bracket syntax `dict["response"]` use kar sakte the, par `.get("response")` safe hai — agar key nahi mili toh code crash hone ki jagah `None` deta hai, jisko `str()` string mein cast kar deta hai. API `model created at` jaisi faltu metadata bhi bhejti hai, par humein sirf `response` string chahiye.
@@ -4839,15 +4839,15 @@ Extracted String = '{"xpath": "//id"}'
 Jab external payloads ko `json.loads` karke dictionary banate ho, toh yaad rakho ki AI "hallucinate" (galat information generate) kar sakta hai. Isliye `.get()` use karna zaroori hai. Agar directly access karoge aur AI ne expected key return nahi ki, toh tumhara system crash ho jayega (DoS by exception).
 
 ### 🏗️ 9. Scalability & Industry Context
-`temperature: 0.1` ek industry standard hai automation ke liye. Temperature 0 se 1 ke beech hota hai. `0.1` ka matlab hai model mathematically most probable answer dega (strict). Agar isko `0.9` kar diya, toh model har baar naya aur creative XPath dega, jisse test bar-bar tootega.
+[[HL::`temperature: 0.1` ek industry standard hai automation ke liye. Temperature 0 se 1 ke beech hota hai. `0.1` ka matlab hai model mathematically most probable answer dega (strict). Agar isko `0.9` kar diya, toh model har baar naya aur creative XPath dega, jisse test bar-bar tootega::HL]].
 
 ### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
 - **❌ Mistake:** Direct `eval()` ya raw string parsing use karke JSON padhna.
 - **🤦 Why:** Code bohot fragile (brittle) ho jata hai. Ek extra space ya comma code break kar dega.
 - **✅ The 'Pro' Way:** Humesha `json.loads()` aur uske baad `.get()` use karo taaki object cleanly Deserialize ho.
 
-### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Serialization aur Deserialization mein kya farq hai?" → Serial (ek seedhi line). Apne complex Python object ko ek seedhi text string mein badalna taaki network pe bheja ja sake = Serialization (`json.dumps`). Wapas us string ko Python object mein badalna = Deserialization (`json.loads`).
+### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Serialization aur Deserialization mein kya farq hai?" → Serial (ek seedhi line). Apne complex Python object ko ek seedhi text string mein badalna taaki network pe bheja ja sake = Serialization (`json.dumps`). Wapas us string ko Python object mein badalna = Deserialization (`json.loads`::HL]]).
 - **Confusion 2:** "Object reference exception kya hota hai?" → Speaker ne bataya ki unhone pehle requests initialize karna miss kar diya tha. Toh memory mein object tha hi nahi (None), aur usme se `.text` nikalne par compiler ne "Object Reference" (tum hawa ko point kar rahe ho) error diya.
 
 ### 🛠️ 12. Troubleshooting Flowchart
@@ -4889,12 +4889,12 @@ Uber aur Netflix jaise platforms apni internal testing mein similar async HTTP c
 [ Final Extracted String ] ---> "//div"
 ```
 
-### ❓ 17. Interview Q&A
-- **Q:** Automation scripts mein HTTP API calls ke liye `async def` ka use kyu mandatory samjha jata hai?
-- **A:** Test automation frameworks jaise Playwright asynchronous nature ke hote hain. Agar hum synchronous HTTP call (`requests.post`) karte hain bina kisi thread ya async wrapper ke, toh poora execution thread block ho jayega aur framework freeze ho jayega jab tak AI server se response nahi aata. Async execution flow ko seamless rakhti hai.
+### ❓ 17. Interview [[HL::Q&A::HL]]
+- [[HL::**Q:** Automation scripts mein HTTP API calls ke liye `async def` ka use kyu mandatory samjha jata hai?::HL]]
+- [[HL::**A:** Test automation frameworks jaise Playwright asynchronous nature ke hote hain. Agar hum synchronous HTTP call (`requests.post`) karte hain bina kisi thread ya async wrapper ke, toh poora execution thread block ho jayega aur framework freeze ho jayega jab tak AI server se response nahi aata. Async execution flow ko seamless rakhti hai.::HL]]
 
-- **Q:** API testing mein Serialization aur Deserialization ka kya role hai?
-- **A:** Serialization (`json.dumps`) hamare in-memory Python objects (like dicts) ko network-friendly plain text format (JSON) mein convert karta hai taaki server usko padh sake. Deserialization (`json.loads`) server se aane wale text data ko wapas Python object mein convert karta hai taaki hum `.get()` jaisi methods lagakar deeply nested data nikal sakein.
+- [[HL::**Q:** API testing mein Serialization aur Deserialization ka kya role hai?::HL]]
+- [[HL::**A:** Serialization (`json.dumps`) hamare in-memory Python objects (like dicts) ko network-friendly plain text format (JSON) mein convert karta hai taaki server usko padh sake. Deserialization (`json.loads`) server se aane wale text data ko wapas Python object mein convert karta hai taaki hum `.get()` jaisi methods lagakar deeply nested data nikal sakein::HL]].
 
 - **Q:** HTTP call ke baad `raise_for_status()` function lagana kyu better practice hai?
 - **A:** Agar API down ho ya auth error (404, 401) aaye, toh response object JSON nahi hota (HTML error page ho sakta hai). Agar hum directly `json.loads` lagayenge toh code obscure (unclear) parsing errors dega. `raise_for_status()` specifically check karta hai ki response 200 OK tha ya nahi, aur na hone pe ek clear HTTP exception fainkta hai.
@@ -4902,8 +4902,8 @@ Uber aur Netflix jaise platforms apni internal testing mein similar async HTTP c
 - **Q:** Speaker ne anonymous request body kyun banayi aur `.get().str()` chain kyun use kiya?
 - **A:** AI payload structure dynamic hota hai, isliye explicitly class banakar map karne ki jagah speaker ne ek anonymous dictionary use ki jo quick aur flexible hai. `.get("response")` isliye use kiya taaki missing key pe app crash (Object Reference Exception) na ho, aur `.str()` se explicitly enforce kiya ki returning data valid string (locator) ho.
 
-- **Q:** LLM API payload mein `temperature: 0.1` kyu pass kiya jata hai?
-- **A:** Temperature model ki creativity control karta hai. High temperature (e.g., 0.8) chatbot ke liye theek hai jahan naye answers chahiye. Par code automation (XPath/CSS locator generation) ke liye hume consistency aur logic chahiye, creativity nahi. `0.1` ensures ki model humesha most standard aur robust code output hi dega.
+- **Q:** [[HL::LLM API payload mein `temperature: 0.1` kyu pass kiya jata hai?::HL]]
+- [[HL::**A:** Temperature model ki creativity control karta hai. High temperature (e.g., 0.8) chatbot ke liye theek hai jahan naye answers chahiye. Par code automation (XPath/CSS locator generation) ke liye hume consistency aur logic chahiye, creativity nahi. `0.1` ensures ki model humesha most standard aur robust code output hi dega::HL]].
 
 ### 📝 18. One-Line Memory Hook
 "Python dict ko serialize (dumps) karke bhejo, text ko deserialize (loads) karke lo, aur .get() se core string nikal lo!"
@@ -5130,14 +5130,14 @@ Body (raw JSON):
 
 ```json
 1  {
-2    "model": "gpt-4o-mini",                     // model = Kaunsa GPT four mini model use karna hai (cost-efficient model)
-3    "messages": [                               // messages = array jisme puri conversation history hoti hai
-4      {
-5        "role": "user",                         // role = 'user' (matlab human ne sawal pucha hai)
-6        "content": "Write selenium with Python code for google.com" // content = hamara actual prompt ya sawal
-7      }
-8    ]
-9  }
+[[HL::2    "model": "gpt-4o-mini",                     // model = Kaunsa GPT four mini model use karna hai (cost-efficient model)::HL]]
+[[HL::3    "messages": [                               // messages = array jisme puri conversation history hoti hai::HL]]
+[[HL::4      {::HL]]
+[[HL::5        "role": "user",                         // role = 'user' (matlab human ne sawal pucha hai)::HL]]
+[[HL::6        "content": "Write selenium with Python code for google.com" // content = hamara actual prompt ya sawal::HL]]
+[[HL::7      }::HL]]
+[[HL::8    ]::HL]]
+[[HL::9::HL]]  }
 ```
 
 ```text
@@ -5160,8 +5160,8 @@ Body (raw JSON):
 ```
 
 #### 🔬 Code Explanation
-- **Line 3 (`messages` array):** Local AI ko hum seedha ek string prompt (jaise "Hello") bhej dete the. Par OpenAI "Chat Completion" system pe chalta hai, usko hamesha ek array chahiye jisme multiple messages ho sakte hain (taaki memory maintain rahe).
-- **Line 5 (`role`):** OpenAI 3 roles samajhta hai: `system` (AI ka behaviour set karna), `user` (humara sawal), aur `assistant` (AI ka purana jawab).
+- [[HL::**Line 3 (`messages` array):** Local AI ko hum seedha ek string prompt (jaise "Hello") bhej dete the. Par OpenAI "Chat Completion" system pe chalta hai, usko hamesha ek array chahiye jisme multiple messages ho sakte hain (taaki memory maintain rahe).::HL]]
+- [[HL::**Line 5 (`role`):** OpenAI 3 roles samajhta hai: `system` (AI ka behaviour set karna), `user` (humara sawal), aur `assistant` (AI ka purana jawab::HL]]).
 
 ### 🔒 8. Security-First Check
 Postman mein testing karte waqt apni secret API key kabhi bhi public Postman Workspace mein save mat karna. Postman Cloud tumhari team ke saath sync ho jata hai, aur dusre log tumhara `bearer token` dekh sakte hain. Hamesha "Current Value" variable mein token daalo (jo cloud pe sync nahi hota).
@@ -5298,8 +5298,8 @@ def call_openai_async(prompt):
 16                 "content": prompt                 # content = actual prompt jo pass kiya gaya hai
 17             }
 18         ],
-19         "temperature": 0.1,                       # temperature = 0.1: model responses consistent rakhta hai
-20         "max_tokens": 100                         # max token = AI kitne words generate kar sakta hai (controls cost)
+19         "[[HL::temperature": 0.1,                       # temperature = 0.1: model responses consistent rakhta hai::HL]]
+[[HL::20         "max_tokens": 100                         # max token = AI kitne words generate kar sakta hai (controls cost::HL]])
 21     }
 22     
 23     # Default request headers setup
@@ -5327,7 +5327,7 @@ def call_openai_async(prompt):
 ```
 
 #### 🔬 Code Explanation
-- **Line 20 (`max_tokens`):** Yeh OpenAI specific parameter hai. Local AI free tha isliye limit nahi lagai, par Cloud AI mein per-word cost lagti hai. Agar limit na lagao toh error aane pe AI 1000 words ka explanation de dega jo account ka balance uda dega.
+- [[HL::**Line 20 (`max_tokens`):** Yeh OpenAI specific parameter hai. Local AI free tha isliye limit nahi lagai, par Cloud AI mein per-word cost lagti hai. Agar limit na lagao toh error aane pe AI 1000 words ka explanation de dega jo account ka balance uda dega::HL]].
 - **Line 27 (`headers.update`):** Hum chahain toh direct `.post(headers={...})` mein bhej sakte the, par `update()` karna default request headers ke liye achha practice hai, khas kar jab framework bada ho.
 - **Line 28 (`f-strings`):** `f"Bearer {API_KEY}"` use karne se hume `+` operator use karke strings nahi jodni padti. Yeh syntax clean aur readable hota hai.
 
@@ -5611,22 +5611,22 @@ Socho tum roz office jate ho aur har din GPS mein manually "Sector 14, Gurgaon" 
 
 ### 📖 3. Technical Definition
 - **Precise English:** Configuration setup involves abstracting static and sensitive operational parameters (like API keys, base URLs) out of the executable codebase into a distinct `config.json` file, mapped to an `LMConfig` class that loads into the Python runtime output directory.
-- **Hinglish Simplification:** Code ke andar manually likhi gayi API keys aur URLs ko nikal kar ek alag `config.json` file mein daalna, aur usko ek Python class ke through read karna taaki code clean aur maintainable rahe.
+- [[HL::**Hinglish Simplification:** Code ke andar manually likhi gayi API keys aur URLs ko nikal kar ek alag `config.json` file mein daalna, aur usko ek Python class ke through read karna taaki code clean aur maintainable rahe::HL]].
 
 ### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Agar humne open API key aur URLs direct functions mein likh diye, toh jab model change karna hoga ya API key expire hogi, humein hazaron line ka code dhoondh kar manually update karna padega.
-- **Solution:** Ek `LM config class` aur `app settings dot JSON` ya `config.json` file banate hain jo saari settings ek jagah manage karti hai.
+- **Probl[[HL::em:** Agar humne open API key aur URLs direct functions mein likh diye, toh jab model change karna hoga ya API key expire hogi, humein hazaron line ka code dhoondh kar manually update karna padega.::HL]]
+- [[HL::**Solution:** Ek `LM config class` aur `app settings dot JSON` ya `config.json` file banate hain jo saari settings ek jagah manage karti hai::HL]].
 - **What breaks if we don't use it?** Hardcoded keys GitHub pe leak ho sakti hain, aur framework multi-environment (Dev, QA, Prod) mein easily scale nahi ho payega.
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```text
-# IDE Project Structure:
-MyAutomationProject/
-├── config.json            <-- Nayi file (yahan saari settings hain)
-├── utils/
-│   └── lm_config.py       <-- Nayi class (jo JSON ko padhegi)
-└── tests/
-    └── test_ai.py         <-- Yahan hum class use karenge
+# [[HL::IDE Project Structure:::HL]]
+[[HL::MyAutomationProject/::HL]]
+[[HL::├── config.json            <-- Nayi file (yahan saari settings hain)::HL]]
+[[HL::├── utils/::HL]]
+[[HL::│   └── lm_config.py       <-- Nayi class (jo JSON ko padhegi)::HL]]
+[[HL::└── tests/::HL]]
+[[HL::    └── test_ai.py         <-- Yahan hum class use karenge::HL]]
 ```
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
@@ -5673,8 +5673,8 @@ MyAutomationProject/
 #### 🔬 Code Explanation
 - **JSON Structure (Line 3 & 10):** Humne configuration ko sections mein divide kiya hai — ek "openai" ke liye aur ek "local" ke liye. Aage chalkar code inhi groups ko use karke dynamically endpoint switch karega.
 
-### 🔒 8. Security-First Check
-Agar aap framework setup kar rahe hain, toh make sure ki `.gitignore` mein `config.json` added ho agar usme real API keys hain! Hardcoded ya configuration dono jagah se keys leak nahi honi chahiye. Best practice hai ek `config.example.json` banana (jisme fake keys ho) team ko format dikhane ke liye.
+### 🔒 8. [[HL::Security-First Check::HL]]
+[[HL::Agar aap framework setup kar rahe hain, toh make sure ki `.gitignore` mein `config.json` added ho agar usme real API keys hain! Hardcoded ya configuration dono jagah se keys leak nahi honi chahiye. Best practice hai ek `config.example.json` banana (jisme fake keys ho) team ko format dikhane ke liye::HL]].
 
 ### 🏗️ 9. Scalability & Industry Context
 Large frameworks (Selenium/Playwright) enterprise level par "copy if newer" mechanism pe rely karte hain jab Python modules package hoke Docker containers ya CI/CD pipelines mein jate hain. Isse guarantee milti hai ki code hamesha latest settings read kar raha hai bina execution folder clean kiye.
@@ -6100,7 +6100,7 @@ Payment Gateways (jaise Razorpay vs Stripe) bilkul isi if/elif routing se chalte
 ---
 
 ### 🎬 Video 4 Overview: Self-Healing Strategy and Alternative Locators
-Is final section mein hum core self-healing logic implement karenge. Hum dekhenge ki kaise brittle (kacche/nazuk) locators failure ko handle kiya jata hai, page source kaise nikala jata hai, string slicing se locator ki metadata kaise extract hoti hai, aur sabse important — LLM se strict JSON format mein alternative locators kaise mange jate hain.
+[[HL::Is final section mein hum core self-healing logic implement karenge. Hum dekhenge ki kaise brittle (kacche/nazuk) locators failure ko handle kiya jata hai, page source kaise nikala jata hai, string slicing se locator ki metadata kaise extract hoti hai, aur sabse important — LLM se strict JSON format mein alternative locators kaise mange jate hain::HL]].
 
 ---
 
@@ -6111,50 +6111,50 @@ Socho tum ek Google Map (navigation app) use kar rahe ho aur raste mein ek pul (
 
 ### 📖 3. Technical Definition
 - **Precise English:** The problem statement for self-healing architecture identifies that brittle UI locators (like fragile IDs or link texts) break automated tests frequently. The strategy involves capturing the current `driver.page_source` and the failed locator's type/value context to request dynamic alternative locators from a local large language model.
-- **Hinglish Simplification:** Web automation mein locators jaldi toot (brittle) jate hain. Is problem ko solve karne ke liye hum test fail hone par poore page ka HTML code aur purane locator ki details AI ko bhejte hain, taaki AI ek naya aur majboot locator dhoondh kar de sake.
+- [[HL::**Hinglish Simplification:** Web automation mein locators jaldi toot (brittle) jate hain. Is problem ko solve karne ke liye hum test fail hone par poore page ka HTML code aur purane locator ki details AI ko bhejte hain, taaki AI ek naya aur majboot locator dhoondh kar de sake::HL]].
 
 ### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Modern user interfaces bohot tezi se badalte hain. Aaj ka `login link text` kal `Sign In` ho sakta hai. In brittle locators ki wajah se CI/CD pipelines roz lal (fail) hoti hain.
-- **Solution:** Alternative locators strategy apply karna. Hum AI (local large language model) ko page source bhej kar automatically naye locators banwa lete hain.
+- [[HL::**Problem:** Modern user interfaces bohot tezi se badalte hain. Aaj ka `login link text` kal `Sign In` ho sakta hai. In brittle locators ki wajah se CI/CD pipelines roz lal (fail) hoti hain.::HL]]
+- [[HL::**Solution:** Alternative locators strategy apply karna. Hum AI (local large language model) ko page source bhej kar automatically naye locators banwa lete hain::HL]].
 - **What breaks if we don't use it?** Testers ka saara waqt sirf Page Object Model (POM — design pattern jahan web pages ko class objects mein map kiya jata hai) ko update aur maintain karne mein chala jayega, nayi testing nahi ho payegi.
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
 `(N/A — is concept mein koi direct visual/editor state nahi hota, yeh architecture planning phase hai)`
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-1. **Failure Trigger:** Test script ek element ko interact karne ki koshish karti hai (e.g., ID se) par element UI mein nahi milta.
-2. **Context Gathering:** Framework fail hone se pehle do cheezein uthata hai:
-   - `locator type`: (Jaise XPath, ID, CSS).
-   - `locator value`: (Jaise "btn-submit").
-3. **Environment Snapshot:** Framework `driver.page_source` command call karke current browser screen ka poora raw HTML code memory mein nikal leta hai.
+1. [[HL::**Failure Trigger:** Test script ek element ko interact karne ki koshish karti hai (e.g., ID se) par element UI mein nahi milta.::HL]]
+2. [[HL::**Context Gathering:** Framework fail hone se pehle do cheezein uthata hai:::HL]]
+   - [[HL::`locator type`: (Jaise XPath, ID, CSS).::HL]]
+   - [[HL::`locator value`: (Jaise "btn-submit").::HL]]
+3. [[HL::**Environment Snapshot:** Framework `driver.page_source` command call karke current browser screen ka poora raw HTML code memory mein nikal leta hai::HL]].
 4. **AI Processing:** Yeh teeno cheezein (type, value, source) milakar LLM ko bheji jati hain taaki wo `str() method` ya parse karke alternative nikal sake.
 
 > **💡 7. Concept Visualization (Theory Topic ke liye):**
 > *Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.*
 > 
-> **Step-by-Step Flow:**
-> 1. **Brittle State:** `driver.find_element(By.ID, "old-login")` → 💥 **CRASH (ElementNotFound)**
-> 2. **Context State:** Framework kehta hai "Ruko, crash mat karo. Mujhe current HTML de do (`driver.page_source`)".
-> 3. **Healing State:** Framework AI se puchta hai: "Purana ID 'old-login' tha, is HTML mein ab naya ID kya hai?"
-> 4. **Resume State:** AI naya locator deta hai aur test successful ho jata hai.
+> [[HL::**Step-by-Step Flow:**::HL]]
+> [[HL::1. **Brittle State:** `driver.find_element(By.ID, "old-login")` → 💥 **CRASH (ElementNotFound)**::HL]]
+> [[HL::2. **Context State:** Framework kehta hai "Ruko, crash mat karo. Mujhe current HTML de do (`driver.page_source`::HL]])".
+> 3. [[HL::**Healing State:** Framework AI se puchta hai: "Purana ID 'old-login' tha, is HTML mein ab naya ID kya hai::HL]]?"
+> 4. [[HL::**Resume State:** AI naya locator deta hai aur test successful ho jata hai::HL]].
 
 ### 🔒 8. Security-First Check
 Page source (HTML) mein sensitive data ho sakta hai jaise bank account balances, session tokens, ya emails. Isliye cloud models ko poora page source bhejna PII (Personally Identifiable Information) leak kar sakta hai. Yahan local large language model (jaise Ollama) ka istemal data privacy ke liye sabse secure rasta hai kyunki data machine se bahar nahi jata.
 
 ### 🏗️ 9. Scalability & Industry Context
-Traditional Page Object Model (POM) bohot rigid hota hai. Agar ek web app mein 5000 locators hain, toh manually maintain karna impossible hai. Self-healing us POM ko dynamic banata hai — jab element milna band ho jaye, system us object ko memory mein automatically update kar leta hai.
+[[HL::Traditional Page Object Model (POM) bohot rigid hota hai. Agar ek web app mein 5000 locators hain, toh manually maintain karna impossible hai. Self-healing us POM ko dynamic banata hai — jab element milna band ho jaye, system us object ko memory mein automatically update kar leta hai::HL]].
 
 ### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
-- **❌ Mistake:** XPath mein absolute paths (`/html/body/div[1]/div[2]/a`) use karna.
-- **🤦 Why:** Yeh sabse zayada brittle locators hote hain. Ek extra `div` aane pe test fail ho jayega.
-- **✅ The 'Pro' Way:** AI ke through relative aur semantic alternative locators generate karwana jo UI hierarchy badalne par bhi easily na tootein.
+- **❌ [[HL::Mistake:** XPath mein absolute paths (`/html/body/div[1]/div[2]/a`) use karna.::HL]]
+- [[HL::**🤦 Why:** Yeh sabse zayada brittle locators hote hain. Ek extra `div` aane pe test fail ho jayega.::HL]]
+- [[HL::**✅ The 'Pro' Way:** AI ke through relative aur semantic alternative locators generate karwana jo UI hierarchy badalne par bhi easily na tootein::HL]].
 
-### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Brittle locators ka exact matlab kya hai?" → Brittle ka matlab hota hai jo jaldi toot jaye (jaise kanch). Aise locators jo UI mein ek chota sa color ya text badalne par test fail kar dein, unhe brittle kehte hain (e.g., exact match link texts).
-- **Confusion 2:** "Locator Type aur Locator Value mein kya fark hai?" → Agar tum likhte ho `By.ID = 'login'`, toh yahan "ID" tumhara `Locator Type` hai (dhoondhne ka tarika), aur "login" tumhara `Locator Value` hai (exact naam jo dhoondhna hai).
+### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Brittle locators ka exact matlab kya hai?" → Brittle ka matlab hota hai jo jaldi toot jaye (jaise kanch). Aise locators jo UI mein ek chota sa color ya text badalne par test fail kar dein, unhe brittle kehte hain (e.g., exact match link texts).::HL]]
+- [[HL::**Confusion 2:** "Locator Type aur Locator Value mein kya fark hai?" → Agar tum likhte ho `By.ID = 'login'`, toh yahan "ID" tumhara `Locator Type` hai (dhoondhne ka tarika), aur "login" tumhara `Locator Value` hai (exact naam jo dhoondhna hai::HL]]).
 
 ### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
-- AI galat locator de raha hai? → Check karo ki kya failed state pe `driver.page_source` capture theek se hua tha, ya wahan loading spinner ghoom raha tha. Loading HTML kisi kaam ka nahi hota.
+- [[HL::AI galat locator de raha hai? → Check karo ki kya failed state pe::HL]] `driver.page_source` capture theek se [[HL::hua tha, ya wahan loading spinner ghoom raha tha. Loading HTML kisi kaam ka nahi hota::HL]].
 
 ### ⚖️ 13. Comparison (Ye vs Woh)
 | Strategy | Static Page Object Model | Self-Healing Architecture |
@@ -6163,11 +6163,11 @@ Traditional Page Object Model (POM) bohot rigid hota hai. Agar ek web app mein 5
 | **Maintenance Cost** | Very High (Manual updates needed) | Low (AI updates it dynamically) |
 
 ### 🌍 14. Real-World Use Case
-Healthcare web portals har week update hote hain. Agar appointment booking flow ka `login link text` update hone se test break ho jaye, toh raat ki poori CI/CD pipeline ruk jati hai. Self-healing framework subah tak khud alternative locator nikal kar report mein bata deta hai ki "Maine naya rasta nikal liya tha."
+[[HL::Healthcare web portals har week update hote hain. Agar appointment booking flow ka `login link text` update hone se test break ho jaye, toh raat ki poori CI/CD pipeline ruk jati hai. Self-healing framework subah tak khud alternative locator nikal kar report mein bata deta hai ki "Maine naya rasta nikal liya tha::HL]]."
 
 ### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
 - **Testing/Offline Phase:** Developer test likhte waqt anticipate karta hai ki modern front-end frameworks mein classes auto-generate hoti hain, isliye locators brittle ho sakte hain. 
-- **Fixing/Iteration Phase:** Test fail hone par, developer manually update karne ke bajaye ek system design karta hai jo automatically LLM ko current failing locator (uski type aur value) aur poora page source pass karega context ke roop mein.
+- [[HL::**Fixing/Iteration Phase:** Test fail hone par, developer manually update karne ke bajaye ek system design karta hai jo automatically LLM ko current failing locator (uski type aur value) aur poora page source pass karega context ke roop mein::HL]].
 - **Live Production Phase:** Nightly automation suite chalta hai. Jaise hi UI change detect hota hai, system exception catch karta hai, `str()` method se details nikalta hai aur background mein AI hit karke element interact kar leta hai bina pipeline break kiye. *(Inferred Live Phase for completeness)*
 
 ### 🎨 16. Visual Diagram (ASCII Art)
@@ -6191,17 +6191,17 @@ Healthcare web portals har week update hote hain. Agar appointment booking flow 
 - **Q:** Brittle locators kya hote hain aur automation testing mein ye problem kyun hain?
 - **A:** Brittle locators wo elements hote hain jo web page ke chote se structural change (jaise class name change, text change) se kaam karna band kar dete hain. Yeh problem isliye hain kyunki inki wajah se tests unnecessarily fail hote hain aur team ka zyadatar time maintenance mein waste hota hai.
 
-- **Q:** Self-healing architecture mein 'Context' LLM ko kaise madad karta hai?
-- **A:** LLM apne aap magic nahi kar sakta. Jab hum usko `driver.page_source` (us waqt ka pura HTML) aur failing locator ki jankari (type aur value) context ke roop mein pass karte hain, toh LLM purane locator ki property ko naye HTML element ke sath map karke ek robust alternative bana pata hai.
+- [[HL::**Q:** Self-healing architecture mein 'Context' LLM ko kaise madad karta hai?::HL]]
+- [[HL::**A:** LLM apne aap magic nahi kar sakta. Jab hum usko `driver.page_source` (us waqt ka pura HTML) aur failing locator ki jankari (type aur value) context ke roop mein pass karte hain, toh LLM purane locator ki property ko naye HTML element ke sath map karke ek robust alternative bana pata hai.::HL]]
 
-- **Q:** Locator Type aur Locator Value mein practically kya relation hai?
-- **A:** Locator Type yeh define karta hai ki framework web page mein element ko kis technique se dhoondega (e.g., CSS Selector, XPath, ID). Locator Value us technique ki exact searching value hoti hai (e.g., "//div[@class='header']"). Dono milkar ek proper locator banate hain.
+- [[HL::**Q:** Locator Type aur Locator Value mein practically kya relation hai?::HL]]
+- [[HL::**A:** Locator Type yeh define karta hai ki framework web page mein element ko kis technique se dhoondega (e.g., CSS Selector, XPath, ID). Locator Value us technique ki exact searching value hoti hai (e.g., "//div[@class='header']"). Dono milkar ek proper locator banate hain::HL]].
 
 - **Q:** Kya local large language models (jaise Ollama) cloud models se behtar hain page source process karne ke liye?
 - **A:** Data privacy ke angle se local models superior hain. Page source mein sensitive tokens aur user data ho sakta hai. Agar hum use OpenAI jaisi cloud APIs ko bhejenge toh compliance violations (jaise GDPR) ho sakte hain. Local model data ko internal network mein hi rakhta hai.
 
-- **Q:** Page Object Model (POM) ko self-healing kaise enhance karta hai?
-- **A:** Standard POM mein hum locators file mein hardcode kar dete hain. Self-healing mechanism POM ko fallback capabilities deta hai. Agar POM ka hardcoded locator fail hota hai, toh self-healing dynamically us element ko alternative tarike se dhoondh kar POM ko runtime par robust bana deta hai.
+- [[HL::**Q:** Page Object Model (POM) ko self-healing kaise enhance karta hai?::HL]]
+- [[HL::**A:** Standard POM mein hum locators file mein hardcode kar dete hain. Self-healing mechanism POM ko fallback capabilities deta hai. Agar POM ka hardcoded locator fail hota hai, toh self-healing dynamically us element ko alternative tarike se dhoondh kar POM ko runtime par robust bana deta hai::HL]].
 
 ### 📝 18. One-Line Memory Hook
 "Kaccha locator jab fail ho jaye, HTML source AI ko bhejo aur naya rasta banwaye!"
@@ -6375,11 +6375,11 @@ Agar tum kisi naye employee ko bolo "Ek report bana do", toh wo apne hisab se 10
 
 ### 📖 3. Technical Definition
 - **Precise English:** Strict JSON prompt execution is the process of constructing an explicit multiline f-string prompt instructing an LLM to analyze the provided page source and failed locator metadata, and critically, return a completely valid JSON object containing alternative locators while explicitly forbidding any conversational text or explanations.
-- **Hinglish Simplification:** Ek lamba aur clear f-string prompt likhna jisme AI ko saaf bola jaye ki web element dhoondho aur jawaab strictly JSON format mein hi dena. Koi explanation ya faltu text add mat karna taaki code crash na ho.
+- [[HL::**Hinglish Simplification:** Ek lamba aur clear f-string prompt likhna jisme AI ko saaf bola jaye ki web element dhoondho aur jawaab strictly JSON format mein hi dena. Koi explanation ya faltu text add mat karna taaki code crash na ho.::HL]]
 
-### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** LLMs ko aadat hoti hai politely answer karne ki: "Sure, here is your locator...". Automation code strings padhna nahi janta, use pure data (JSON) chahiye. Ek bhi text word aaya toh `JSONDecodeError` aayega aur test fail hoga.
-- **Solution:** Prompt engineering! ⭐ "Do not include explanations or commons, just return the JSON object... this is very, very important."
+### [[HL::🧠 4. Why This Matters (Zaroorat Kyun Hai?)::HL]]
+- [[HL::**Problem:** LLMs ko aadat hoti hai politely answer karne ki: "Sure, here is your locator...". Automation code strings padhna nahi janta, use pure data (JSON) chahiye. Ek bhi text word aaya toh `JSONDecodeError` aayega aur test fail hoga.::HL]]
+- [[HL::**Solution:** Prompt engineering! ⭐ "Do not include explanations or commons, just return the JSON object... this is very, very important::HL]]."
 - **What breaks if we don't use it?** Framework fail hota rahega kyunki deserializer (json.loads) text paragraph ko dictionary mein convert nahi kar payega.
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -6488,8 +6488,8 @@ Is tarah ka strict prompt engineering AI agents (jaise AutoGPT ya Langchain tool
 - **🤦 Why:** AI sometimes markdown backticks ```json ... ``` laga deta hai, jo invalid JSON hota hai.
 - **✅ The 'Pro' Way:** Explicit structure sample dena aur strictly bolna "Do not include explanations".
 
-### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Square brackets aur double quotes kyu explicitly mention kiye?" → Kuch older models single quotes `'key': 'value'` return kar dete hain, jo Python dictionary mein toh chalta hai par standard `json.loads` use fail (JSONDecodeError) kar deta hai. Isliye 'proper JSON with double quotes' instruction imp hai.
+### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Square brackets aur double quotes kyu explicitly mention kiye?" → Kuch older models single quotes `'key': 'value'` return kar dete hain, jo Python dictionary mein toh chalta hai par standard `json.loads` use fail (JSONDecodeError) kar deta hai. Isliye 'proper JSON with double quotes' instruction imp hai::HL]].
 - **Confusion 2:** "Cloud desktop context kya hai?" → Speaker test environment ko refer kar raha hai jahan script AWS/Azure pe ek remote desktop instance pe chal rahi hoti hai. Wahan local screen access nahi hota isliye robust self-healing architecture mandatory hota hai.
 
 ### 🛠️ 12. Troubleshooting Flowchart
@@ -6600,7 +6600,7 @@ Socho tum ek foreign country gaye ho aur wahan tumhe ek letter milta hai jo Span
 
 #### 📖 3. Technical Definition
 - **Precise English:** Deserialization is the process of converting a structured data format (like JSON string) into a native programming object (like a strongly typed Python class) for easier data manipulation.
-- **Hinglish Simplification:** Ek text format (jaise JSON) ko read karke usko proper Python object mein badalne ke process ko deserialization kehte hain.
+- [[HL::**Hinglish Simplification:** Ek text format (jaise JSON) ko read karke usko proper Python object mein badalne ke process ko deserialization kehte hain::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 - **Problem:** AI models generally data JSON format (raw string) mein return karte hain. String ko directly code mein use karna (e.g., dictionary keys yaad rakhna) error-prone aur mushkil hota hai.
@@ -6627,11 +6627,11 @@ IDE (jaise VS Code/PyCharm) mein tumhare framework ke andar ek `Models` folder h
 6          self.xpath = xpath                          # self.xpath = class ka instance variable
 7          self.css = css                              # self.css = dusra instance variable
 8
-9  # Step 2: Dummy JSON response (jo AI se aaya)
-10 json_response = '{"xpath": "//div[@id=\'login\']", "css": ".btn-login"}'  # Raw JSON string
-11
-12 # Step 3: Deserialization process
-13 data_dict = json.loads(json_response)               # json.loads() = JSON string ko Python dictionary mein convert karta hai
+9  # [[HL::Step 2: Dummy JSON response (jo AI se aaya)::HL]]
+[[HL::10 json_response = '{"xpath": "//div[@id=\'login\']", "css": ".btn-login"}'  # Raw JSON string::HL]]
+[[HL::11::HL]]
+[[HL::12 # Step 3: Deserialization process::HL]]
+[[HL::13 data_dict = json.loads(json_response)               # json.loads() = JSON string ko Python dictionary mein convert karta hai::HL]]
 14 suggestions = LocatorSuggestions(**data_dict)       # ** operator = dictionary keys ko as keyword arguments pass karta hai class mein
 15
 16 print(f"Deserialized XPath: {suggestions.xpath}")   # print() = class property ko safely access aur print kar rahe hain
@@ -6642,8 +6642,8 @@ IDE (jaise VS Code/PyCharm) mein tumhare framework ke andar ek `Models` folder h
 Deserialized XPath: //div[@id='login']
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
-- **Line 13:** `json.loads(json_response)` — Yeh Python ka built-in method hai jo raw JSON string ko dictionary mein map karta hai. Agar string properly formatted JSON nahi hai toh `json.decoder.JSONDecodeError` aayega.
+##### 🔬 Code Explanation Rule ([[HL::LINE-BY-LINE)::HL]]
+- [[HL::**Line 13:** `json.loads(json_response)` — Yeh Python ka built-in method hai jo raw JSON string ko dictionary mein map karta hai. Agar string properly formatted JSON nahi hai toh `json.decoder.JSONDecodeError` aayega::HL]].
 - **Line 14:** `LocatorSuggestions(**data_dict)` — Hum directly dictionary ko apni strongly typed class mein unpack kar rahe hain. Isse ab hum `suggestions['xpath']` ki jagah `suggestions.xpath` (object-oriented way) use kar sakte hain.
 
 #### 🔒 8. Security-First Check
@@ -6683,9 +6683,9 @@ Selenium automation team jab dynamic UI test karti hai, toh woh UI ka HTML AI ko
                                                                         └──> LocatorSuggestions Object
 ```
 
-#### ❓ 17. Interview Q&A
-- **Q:** Automation framework mein deserialization kyun zaroori hai?
-- **A:** Deserialization isliye zaroori hai kyunki API ya LLM se aane wala data raw text (JSON) hota hai. Us text ko system samajh nahi sakta. Deserialization us text ko strongly typed objects mein convert karta hai jisse data safe, structured aur IDE friendly ho jata hai.
+#### ❓ 17. Interview [[HL::Q&A::HL]]
+- [[HL::**Q:** Automation framework mein deserialization kyun zaroori hai?::HL]]
+- [[HL::**A:** Deserialization isliye zaroori hai kyunki API ya LLM se aane wala data raw text (JSON) hota hai. Us text ko system samajh nahi sakta. Deserialization us text ko strongly typed objects mein convert karta hai jisse data safe, structured aur IDE friendly ho jata hai::HL]].
 
 - **Q:** Local models ke badle Cloud LLMs (jaise Command R) use karne ka kya faida hai?
 - **A:** Cloud LLMs super-duper fast hote hain kyunki unki processing massive servers par hoti hai. Local hardware par 480 billion parameter models run karna practically impossible hai bina heavy investment ke. Free SKUs local testing ko fast aur easy banate hain.
@@ -6693,8 +6693,8 @@ Selenium automation team jab dynamic UI test karti hai, toh woh UI ka HTML AI ko
 - **Q:** Strongly typed class kya hoti hai?
 - **A:** Strongly typed class ek aisi blueprint hoti hai jisme pehle se defined hota hai ki data ka type aur properties kya hongi (jaise `xpath` ek string hoga). Yeh dynamic dictionaries ke comparison mein strict hoti hai jisse runtime errors kam hote hain.
 
-- **Q:** `json.loads()` ka main function kya hai?
-- **A:** Yeh Python ka `json` module ka method hai. Iska kaam ek valid JSON formatted string ko parse karke usko Python ke native data structure (dictionary ya list) mein convert karna hota hai.
+- [[HL::**Q:** `json.loads()` ka main function kya hai?::HL]]
+- [[HL::**A:** Yeh Python ka `json` module ka method hai. Iska kaam ek valid JSON formatted string ko parse karke usko Python ke native data structure (dictionary ya list) mein convert karna hota hai::HL]].
 
 - **Q:** Agar JSON payload class schema se match na kare toh kya hoga?
 - **A:** Agar JSON mein extra keys hain aur class constructor usko handle (via `**kwargs`) nahi karta, toh Python `TypeError` throw karega (unexpected keyword argument). Isliye payload aur class ki mapping perfect honi chahiye.
@@ -6723,8 +6723,8 @@ Maan lo tumhare paas ek master chabi ka guccha (collection) hai. Agar pehli chab
 - **Hinglish Simplification:** AI se aaye JSON ko Python objects mein badal kar, ek list (collection) banana jisme alag-alag locators ho, taaki agar ek fail ho jaye toh script automatically next locator try kar sake.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** ⭐ **"20 years struggle"** — Speaker ne bataya ki pichle 20 saalon se UI change hone par test scripts fail ho jati thi, aur manual collection (arrays of alternative locators) banakar auto healing logic likhna bohot mushkil aur non-scalable tha.
-- **Solution:** AI real time page source (DOM) padh kar naye alternative locators bhejta hai. Deserialization se hum unhe turant useable collection mein badal dete hain.
+- [[HL::**Problem:** ⭐ **"20 years struggle"** — Speaker ne bataya ki pichle 20 saalon se UI change hone par test scripts fail ho jati thi, aur manual collection (arrays of alternative locators) banakar auto healing logic likhna bohot mushkil aur non-scalable tha.::HL]]
+- [[HL::**Solution:** AI real time page source (DOM) padh kar naye alternative locators bhejta hai. Deserialization se hum unhe turant useable collection mein badal dete hain::HL]].
 - **What breaks if we don't use it?** Agar hum DOM break hone pe fallback locators dynamically nahi nikalenge, toh CI/CD pipeline mein test turant fail ho jayega.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -6741,22 +6741,22 @@ IDE ke console mein tumhe JSON string Python dictionary/object mein convert hoti
 ```python
 1  import json                                                   # json module import kiya deserialization ke liye
 2
-3  # Mock API response (jo AI ne Dom/page source read karke bheja)
-4  response = '{"id": "loginBtn", "xpath": "//button", "css_selector": null}' # Raw JSON response (CSS yahan None/null hai)
-5
-6  # Deserialize JSON response into Python dict
-7  locatorStrategy = json.loads(response)                        # json.loads() = JSON ko Python dictionary mein badal raha hai
-8
-9  # Collection of alternative locators (dictionary)
-10 alternative_locator_collection = {                            # Dictionary banayi alternative locators hold karne ke liye
-11     "ID": locatorStrategy.get("id"),                          # .get() = dictionary se value nikalta hai, safe tarika hai
-12     "XPath": locatorStrategy.get("xpath"),
-13     "CSS": locatorStrategy.get("css_selector"),
-14     "Class Name": locatorStrategy.get("class_name"),
-15     "Link Text": locatorStrategy.get("link_text")
-16 }
-17
-18 print("Iterating over auto healing collection:")              # print() = terminal pe message show karne ke liye
+3  # [[HL::Mock API response (jo AI ne Dom/page source read karke bheja)::HL]]
+[[HL::4  response = '{"id": "loginBtn", "xpath": "//button", "css_selector": null}' # Raw JSON response (CSS yahan None/null hai)::HL]]
+[[HL::5::HL]]
+[[HL::6  # Deserialize JSON response into Python dict::HL]]
+[[HL::7  locatorStrategy = json.loads(response)                        # json.loads() = JSON ko Python dictionary mein badal raha hai::HL]]
+[[HL::8::HL]]
+[[HL::9  # Collection of alternative locators (dictionary)::HL]]
+[[HL::10 alternative_locator_collection = {                            # Dictionary banayi alternative locators hold karne ke liye::HL]]
+[[HL::11     "ID": locatorStrategy.get("id"),                          # .get() = dictionary se value nikalta hai, safe tarika hai::HL]]
+[[HL::12     "XPath": locatorStrategy.get("xpath"),::HL]]
+[[HL::13     "CSS": locatorStrategy.get("css_selector"),::HL]]
+[[HL::14     "Class Name": locatorStrategy.get("class_name"),::HL]]
+[[HL::15     "Link Text": locatorStrategy.get("link_text")::HL]]
+[[HL::16 }::HL]]
+[[HL::17::HL]]
+[[HL::18 print("Iterating over auto healing collection::HL]]:")              # print() = terminal pe message show karne ke liye
 19
 20 # Iterate over collection to find valid locators
 21 for strategy_name, locator_value in alternative_locator_collection.items():  # .items() = dict ke key-value pairs (tuples) pe loop chalata hai
@@ -6827,11 +6827,11 @@ E-commerce websites mein marketing team baar baar buttons ke class names change 
 ```
 
 #### ❓ 17. Interview Q&A
-- **Q:** Auto healing mein "iterating over collection" ka kya matlab hai?
-- **A:** Jab main locator fail ho jata hai, toh framework ke paas multiple fallback locators (XPath, CSS, ID) ki ek list hoti hai. Iterate karne ka matlab hai us list mein loop lagakar ek-ek karke un locators ko try karna jab tak element mil na jaye.
+- **Q:** [[HL::Auto healing mein "iterating over collection" ka kya matlab hai?::HL]]
+- [[HL::**A:** Jab main locator fail ho jata hai, toh framework ke paas multiple fallback locators (XPath, CSS, ID) ki ek list hoti hai. Iterate karne ka matlab hai us list mein loop lagakar ek-ek karke un locators ko try karna jab tak element mil na jaye::HL]].
 
-- **Q:** Speaker ne manual fallback system ko '20 years struggle' kyun kaha hai?
-- **A:** Kyunki bina AI ke, test engineer ko khud script ke andar har element ke liye 4-5 backup locators hardcode karne padte the. Yeh maintain karna bohot mushkil tha. AI ne page source read karke dynamically locators dekar is problem ko solve kar diya.
+- **Q:** [[HL::Speaker ne manual fallback system ko '20 years struggle' kyun kaha hai?::HL]]
+- **A:** Kyunki bina [[HL::AI ke, test engineer ko khud script ke andar har element ke liye 4-5 backup locators hardcode karne padte the. Yeh maintain karna bohot mushkil tha. AI ne page source read karke dynamically locators dekar is problem ko solve kar diya::HL]].
 
 - **Q:** AI dwara bheje gaye "None locators" ko kaise handle karte hain?
 - **A:** JSON deserialize karne ke baad loop ke andar hum ek `if value is None:` ka check lagate hain. Agar locator None ya empty hai, toh hum `continue` keyword use karke usse skip kar dete hain, taaki test us par time waste na kare.
@@ -6877,23 +6877,23 @@ Socho tum apne ek dost ke ghar use dhoondhne jaate ho (Phase 1). Agar woh wahan 
 
 #### 📖 3. Technical Definition
 - **Precise English:** A multi-tiered architectural workflow that manages UI operations by systematically traversing from primary Page Object Model locators to cached alternative collections, and ultimately triggering AI-based DOM analysis if all deterministic methods fail.
-- **Hinglish Simplification:** Ek step-by-step process jisme Selenium pehle purane locator ko try karta hai, fail hone par apne backup options check karta hai, aur sab fail hone par AI se naya rasta nikalwata hai.
+- [[HL::**Hinglish Simplification:** Ek step-by-step process jisme Selenium pehle purane locator ko try karta hai, fail hone par apne backup options check karta hai, aur sab fail hone par AI se naya rasta nikalwata hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** UI elements frequently change hote hain, jisse existing locators **obsolete locator** (purane aur useless) ban jaate hain aur test fail ho jata hai.
-- **Solution:** Ek structured **locator strategy method** hone se framework randomly crash nahi hota, balki intelligently layers mein fallback karta hai.
+- [[HL::**Problem:** UI elements frequently change hote hain, jisse existing locators **obsolete locator** (purane aur useless) ban jaate hain aur test fail ho jata hai.::HL]]
+- [[HL::**Solution:** Ek structured **locator strategy method** hone se framework randomly crash nahi hota, balki intelligently layers mein fallback karta hai::HL]].
 - **What breaks if we don't use it?** Agar hum sidha AI ko har baar call karenge bina local check kiye, toh system bohot slow ho jayega aur API bills bohot badh jayenge.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 *(N/A — is concept mein koi direct visual/editor state nahi hota, yeh internal logical workflow hai)*
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. **Phase 1** tab start hota hai jab Selenium ek **UI operation** (jaise click) karne ki koshish karta hai.
-2. System sabse pehle **FindLocatorInPageObjectModel** function call karta hai (Page Object Model/Pom ek design pattern hai jahan UI elements alag files mein store hote hain).
-3. Agar yeh fail hota hai, toh flow **CheckAlternativeLocators** ki taraf jaata hai. Yeh ek local **alternative locator collection** check karta hai (first run pe yeh list khali hoti hai).
-4. Agar list khali hai ya saare options fail ho gaye, toh framework **AI healing process** trigger karta hai jo ⭐**DOM** (Document Object Model) padhta hai.
-5. AI naye locators ko laakar ek **collection DB** (in-memory dictionary) mein save karta hai taaki agli baar jaldi mil sake.
-6. **Phase 2:** Agar AI healing multiple baar try karne ke baad bhi fail ho jati hai, iska matlab element sach mein exist nahi karta. Yahan auto healing give up karti hai aur exception throw karti hai.
+1. [[HL::**Phase 1** tab start hota hai jab Selenium ek **UI operation** (jaise click) karne ki koshish karta hai.::HL]]
+2. [[HL::System sabse pehle **FindLocatorInPageObjectModel** function call karta hai (Page Object Model/Pom ek design pattern hai jahan UI elements alag files mein store hote hain).::HL]]
+3. [[HL::Agar yeh fail hota hai, toh flow **CheckAlternativeLocators** ki taraf jaata hai. Yeh ek local **alternative locator collection** check karta hai (first run pe yeh list khali hoti hai).::HL]]
+4. [[HL::Agar list khali hai ya saare options fail ho gaye, toh framework **AI healing process** trigger karta hai jo ⭐**DOM** (Document Object Model) padhta hai.::HL]]
+5. [[HL::AI naye locators ko laakar ek **collection DB** (in-memory dictionary) mein save karta hai taaki agli baar jaldi mil sake.::HL]]
+6. [[HL::**Phase 2:** Agar AI healing multiple baar try karne ke baad bhi fail ho jati hai, iska matlab element sach mein exist nahi karta. Yahan auto healing give up karti hai aur exception throw karti hai::HL]].
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
 *(Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.)*
@@ -6928,13 +6928,13 @@ Speaker ne is flow ko explicitly diagram ke through samjhaya hai. Yeh raha uska 
 Is architecture ka sabse bada scalable point **collection DB** hai. Ek baar jab AI kisi element ko heal kar deta hai, toh uska naya locator framework ke local memory (CheckAlternativeLocators) mein cache ho jaata hai. Isse framework agle hazaaron runs ke liye bina AI API ko hit kiye super-fast chalta hai.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
-- **❌ Mistake:** Phase 1 aur CheckAlternativeLocators ko skip karke har fail element ke liye seedha AI ko call karna.
-- **🤦 Why:** Har API call latency add karti hai aur expensive hoti hai. Local cache check na karna bohot slow architecture banata hai.
-- **✅ The 'Pro' Way:** Pehle Pom, phir Alternative Collection, aur sirf aakhri raste ke roop mein AI Healing Process trigger karo.
+- **❌ [[HL::Mistake:** Phase 1 aur CheckAlternativeLocators ko skip karke har fail element ke liye seedha AI ko call karna.::HL]]
+- [[HL::**🤦 Why:** Har API call latency add karti hai aur expensive hoti hai. Local cache check na karna bohot slow architecture banata hai.::HL]]
+- [[HL::**✅ The 'Pro' Way:** Pehle Pom, phir Alternative Collection, aur sirf aakhri raste ke roop mein AI Healing Process trigger karo::HL]].
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 - **Confusion 1:** "Phase 1 aur Phase 2 alag-alag scripts hain kya?" → Nahi. Yeh ek hi logical function ke do hisse hain. Phase 1 attempt karne ka naam hai, aur Phase 2 tab hota hai jab sab fail hone pe hum test fail ghoshit kar dete hain (DOM broken).
-- **Confusion 2:** "First time CheckAlternativeLocators hamesha khali kyun hota hai?" → Kyunki abhi tak test fail hi nahi hua tha aur AI ne koi naya backup rasta dhoondh ke DB mein save nahi kiya tha. Woh run-time pe populate hota hai.
+- [[HL::**Confusion 2:** "First time CheckAlternativeLocators hamesha khali kyun hota hai?" → Kyunki abhi tak test fail hi nahi hua tha aur AI ne koi naya backup rasta dhoondh ke DB mein save nahi kiya tha. Woh run-time pe populate hota hai::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart
 - Test execution intermediate state mein atka hua hai? → Check karo ki kya AI API response de raha hai, ya system CheckAlternativeLocators loop mein anant baar ghoom raha hai.
@@ -6949,9 +6949,9 @@ Is architecture ka sabse bada scalable point **collection DB** hai. Ek baar jab 
 Swiggy ya Zomato ki app testing mein, UI teams frequently 'Checkout' button ka id change karti rehti hain. Yeh 3-phase system ensure karta hai ki CI/CD pipeline mein test raton-raat fail na hon, kyunki CheckAlternativeLocators aur AI unhe on-the-fly fix karte rahenge.
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
-- **Testing/Offline Phase:** Automation test initially Page Object Model (POM) mein defined default locators ko use karke element dhoondhne ki koshish karta hai.
-- **Fixing/Iteration Phase:** (Phase 1) Agar POM locator fail hota hai, system `CheckAlternativeLocators` ke through collection verify karta hai. Agar wahan bhi khali hai, toh `AI healing process` trigger hota hai ek naya locator dhoondhne ke liye.
-- **Live Production Phase:** (Phase 2) Agar AI healing multiple attempts ke baad bhi fail ho jati hai, iska matlab UI/DOM completely break ho chuka hai. System healing give up karke test ko formally fail kar deta hai.
+- [[HL::**Testing/Offline Phase:** Automation test initially Page Object Model (POM) mein defined default locators ko use karke element dhoondhne ki koshish karta hai.::HL]]
+- [[HL::**Fixing/Iteration Phase:** (Phase 1) Agar POM locator fail hota hai, system `CheckAlternativeLocators` ke through collection verify karta hai. Agar wahan bhi khali hai, toh `AI healing process` trigger hota hai ek naya locator dhoondhne ke liye.::HL]]
+- [[HL::**Live Production Phase:** (Phase 2) Agar AI healing multiple attempts ke baad bhi fail ho jati hai, iska matlab UI/DOM completely break ho chuka hai. System healing give up karke test ko formally fail kar deta hai::HL]].
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 *(Upar Concept Visualization mein detailed architecture map cover ho gaya hai)*
@@ -6963,14 +6963,14 @@ Swiggy ya Zomato ki app testing mein, UI teams frequently 'Checkout' button ka i
 - **Q:** Agar DOM puri tarah change ho jaye (jaise page redesign), toh yeh architecture kaise react karega?
 - **A:** Framework pehle Phase 1 se Phase 2 ki taraf move karega. AI check karega ki element exist karta hai ya nahi. Agar page completely redesign ho gaya hai aur button sach mein gayab hai, toh AI healing kuch attempts ke baad gracefully fail ho jayegi (DOM Failure Scenario) aur correct exception throw karegi.
 
-- **Q:** Is workflow mein AI ko sirf last resort kyun banaya gaya hai?
-- **A:** Kyunki cloud LLMs ko request bhejna aur JSON deserialize karna time-consuming hota hai. Test suite ko fast aur free (cost-effective) rakhne ke liye pehle local Page Object Model (Pom) aur in-memory collections ko priority di jati hai.
+- [[HL::**Q:** Is workflow mein AI ko sirf last resort kyun banaya gaya hai?::HL]]
+- [[HL::**A:** Kyunki cloud LLMs ko request bhejna aur JSON deserialize karna time-consuming hota hai. Test suite ko fast aur free (cost-effective) rakhne ke liye pehle local Page Object Model (Pom) aur in-memory collections ko priority di jati hai::HL]].
 
 - **Q:** Obsolete locator kya hota hai aur uski wajah se auto healing operation kab trigger hota hai?
 - **A:** Obsolete locator woh purana web element address hai (jaise purana XPath) jo dev team dwara HTML update karne ke baad kaam nahi karta. Jab `FindLocatorInPageObjectModel` is obsolete locator pe fail hota hai, tab jaakar system ka auto healing operation activate hota hai.
 
-- **Q:** 'Collection DB' kya database hai jo alag server pe host hota hai?
-- **A:** Nahi, Selenium testing ke is specific context mein, Collection DB aam taur pe ek in-memory dictionary ya file-based storage hota hai jo current test execution session ke dauran alternative locators ko store karta hai.
+- [[HL::**Q:** 'Collection DB' kya database hai jo alag server pe host hota hai?::HL]]
+- [[HL::**A:** Nahi, Selenium testing ke is specific context mein, Collection DB aam taur pe ek in-memory dictionary ya file-based storage hota hai jo current test execution session ke dauran alternative locators ko store karta hai::HL]].
 
 #### 📝 18. One-Line Memory Hook
 "Pehle POM mein dhundo, phir Collection check karo, dono khali niklein toh AI ko ⭐DOM dekar Phase 1 ko bacha lo!"
@@ -7145,26 +7145,26 @@ Socho tum ek taale (lock) par ek master key (primary locator) laga rahe ho, par 
 
 #### 📖 3. Technical Definition
 - **Precise English:** A fallback mechanism that iterates through an immutable dictionary of alternative locator strategies. If a cached valid element is located, it dynamically overwrites the primary locator to optimize subsequent UI operations.
-- **Hinglish Simplification:** Ek loop system jo AI dwara dhunde gaye backup locators (dictionary) mein ek-ek karke element dhundta hai, aur jo option chal jaye, usko naya main rasta (primary locator) ghoshit kar deta hai.
+- [[HL::**Hinglish Simplification:** Ek loop system jo AI dwara dhunde gaye backup locators (dictionary) mein ek-ek karke element dhundta hai, aur jo option chal jaye, usko naya main rasta (primary locator) ghoshit kar deta hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Main locator fail hone ke baad, agar hum directly naya API call marenge AI ko, toh time bohot kharab hoga.
-- **Solution:** Ek local **locator collection** iterate karke framework automatically bache huye rasto (XPath, CSS, etc.) ko fast check karta hai.
+- [[HL::**Problem:** Main locator fail hone ke baad, agar hum directly naya API call marenge AI ko, toh time bohot kharab hoga.::HL]]
+- [[HL::**Solution:** Ek local **locator collection** iterate karke framework automatically bache huye rasto (XPath, CSS, etc.) ko fast check karta hai::HL]].
 - **What breaks if we don't use it?** Agar hum **update strategy** nahi karenge (naya locator set nahi karenge), toh aage ke saare interactions usi purane kharab locator se fir try honge aur baar-baar fail honge.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 Terminal pe tumhe logs dikhenge jo print karenge: "Trying alternative ID... failed. Trying alternative XPath... SUCCESS! Replacing Primary Locator."
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. Class mein ek `locatorStrategies` naam ki **read only dictionary (dict)** hoti hai. Dictionary keys (jaise **string** type mein "XPath", "ID") aur values (Selenium ke **By** objects/tuples) hold karti hai.
-2. Initialize hone pe isme sirf 1 item hota hai — humari **primary key** / **primary locator**.
-3. **TryAlternativeStrategies** method chalta hai. Agar `locatorStrategies.Count <= 1` hai (matlab AI ne abhi koi naya fallback nahi bheja), toh yeh turant exit maar deta hai, seedha **Step 3** (**AI auto healing**) ki taraf.
-4. Agar list mein alternative options hain, toh ek **for...in loop** chalta hai.
-5. Loop dictionary ko **tuples** mein todta hai (key: **strategy name**, value: **strategy**).
-6. Agar koi strategy valid nahi hai toh `continue` trigger hota hai next item ke liye.
-7. Har strategy ke liye `driver.find_element` dobara call hota hai.
-8. Jaise hi koi **successful strategy** milti hai, sabse CRITICAL step hota hai: `self.currentStrategy = strategy`. Isse purana rasta **update strategy** logic ke under replace ho jata hai.
-9. Final **return element** execution wapas script ko de deta hai.
+1. [[HL::Class mein ek `locatorStrategies` naam ki **read only dictionary (dict)** hoti hai. Dictionary keys (jaise **string** type mein "XPath", "ID") aur values (Selenium ke **By** objects/tuples) hold karti hai.::HL]]
+2. [[HL::Initialize hone pe isme sirf 1 item hota hai — humari **primary key** / **primary locator**.::HL]]
+3. [[HL::**TryAlternativeStrategies** method chalta hai. Agar `locatorStrategies.Count <= 1` hai (matlab AI ne abhi koi naya fallback nahi bheja), toh yeh turant exit maar deta hai, seedha **Step 3** (**AI auto healing**) ki taraf.::HL]]
+4. [[HL::Agar list mein alternative options hain, toh ek **for...in loop** chalta hai.::HL]]
+5. [[HL::Loop dictionary ko **tuples** mein todta hai (key: **strategy name**, value: **strategy**).::HL]]
+6. [[HL::Agar koi strategy valid nahi hai toh `continue` trigger hota hai next item ke liye.::HL]]
+7. [[HL::Har strategy ke liye `driver.find_element` dobara call hota hai.::HL]]
+8. [[HL::Jaise hi koi **successful strategy** milti hai, sabse CRITICAL step hota hai: `self.currentStrategy = strategy`. Isse purana rasta **update strategy** logic ke under replace ho jata hai.::HL]]
+9. [[HL::Final **return element** execution wapas script ko de deta hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 ```python
@@ -7276,8 +7276,8 @@ LinkedIn ki test automation mein, "Connect" button ka XPath har release me chang
 - **Q:** Successful element milne par currentStrategy replace karna kyu ek "Pro" move hai?
 - **A:** Taaki aage jab test code usi element ke saath dobara interact kare (e.g., pehle enter text, phir click), toh usko fir se obsolete locator aur fallback loops face na karne pade. Woh direct valid strategy use karega.
 
-- **Q:** Collection mein Dictionary kyu use hui, List kyu nahi?
-- **A:** Dictionary keys duplicate allowed nahi karti, toh humare paas 2 XPaths aane ka dar nahi rehta. Dusra, debugging aasaan ho jati hai kyunki har locator ek human-readable string key (jaise 'CSS' ya 'LinkText') se map hota hai tuples iteration ke dauran.
+- **Q:** Coll[[HL::ection mein Dictionary kyu use hui, List kyu nahi?::HL]]
+- [[HL::**A:** Dictionary keys duplicate allowed nahi karti, toh humare paas 2 XPaths aane ka dar nahi rehta. Dusra, debugging aasaan ho jati hai kyunki har locator ek human-readable string key (jaise 'CSS' ya 'LinkText') se map hota hai tuples iteration ke dauran::HL]].
 
 - **Q:** 'continue' keyword ka loop ke andar kya role hai?
 - **A:** Agar koi specific strategy fail ho jati hai (`NoSuchElementException` throw hota hai), tab `continue` keyword use karke Python loop ke current attempt ko wahin rok deta hai aur sidha agli dictionary item (strategy) pe skip maar deta hai.
@@ -7333,52 +7333,52 @@ Agar tumhara normal doctor (framework) kisi bimari (broken locator) ko samajh na
 
 #### 📖 3. Technical Definition
 - **Precise English:** The extraction of LLM communication logic into a dedicated static helper class, utilizing context engineering to send the DOM state and receive deserialized locator suggestions without cluttering the primary framework architecture.
-- **Hinglish Simplification:** AI se baat karne ka saara code ek alag static class mein daal dena, taaki main test framework clean rahe aur AI API easily call ho sake.
+- [[HL::**Hinglish Simplification:** AI se baat karne ka saara code ek alag static class mein daal dena, taaki main test framework clean rahe aur AI API easily call ho sake::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Agar LLM API call, JSON parsing, aur prompts sab kuchh `SelfHealingLocators` class ke andar likh diya, toh code bohot messy aur hard to maintain ho jayega ("Spaghetti code").
-- **Solution:** Hum **prompt engineering** aur API call logic ko ek **static helper class** (`get_locators_from_llm`) mein move kar dete hain.
+- [[HL::**Problem:** Agar LLM API call, JSON parsing, aur prompts sab kuchh `SelfHealingLocators` class ke andar likh diya, toh code bohot messy aur hard to maintain ho jayega ("Spaghetti code").::HL]]
+- [[HL::**Solution:** Hum **prompt engineering** aur API call logic ko ek **static helper class** (`get_locators_from_llm`) mein move kar dete hain::HL]].
 - **What breaks if we don't use it?** Agar future mein Claude se GPT-4 pe switch karna ho, toh tumhe saari core classes change karni padengi, jo bohot risky hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
-Folder structure mein `ai_helpers.py` jaisi nayi file dikhegi jisme `get_locators_from_llm` naam ki class hogi. Main healing logic file clean aur chhoti ho jayegi.
+[[HL::Folder structure mein `ai_helpers.py` jaisi nayi file dikhegi jisme `get_locators_from_llm` naam ki class hogi. Main healing logic file clean aur chhoti ho jayegi::HL]].
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. Jab main locator aur saare alternative locators fail ho jaate hain, toh framework `heal_using_ai` naam ka method call karta hai.
-2. Yeh method current **locator type** (e.g., ID), **locator value** (e.g., "loginBtn"), aur **page source** nikalta hai.
-3. Yeh data **context engineering** (AI model ko precise information dena taaki woh accurate answer de sake) ke through prompt mein wrap hota hai.
-4. `get_locators_from_llm` naam ki **static helper class** trigger hoti hai.
+1. Jab [[HL::main locator aur saare alternative locators fail ho jaate hain, toh framework `heal_using_ai` naam ka method call karta hai.::HL]]
+2. [[HL::Yeh method current **locator type** (e.g., ID), **locator value** (e.g., "loginBtn"), aur **page source** nikalta hai.::HL]]
+3. [[HL::Yeh data **context engineering** (AI model ko precise information dena taaki woh accurate answer de sake) ke through prompt mein wrap hota hai.::HL]]
+4. [[HL::`get_locators_from_llm` naam ki **static helper class** trigger hoti hai::HL]].
 5. Yeh helper class **llm_client** (API connection manager) use karke AI model ko request bhejti hai.
 6. Wahan se JSON response aata hai, jise hum turant **deserialize** karte hain taaki **suggested locators** mil sakein aur `get_healed_locator` usko wapas main script ko de sake.
 
 #### 💻 7. Hands-On — Runnable Example
 ```python
-1  import asyncio                                                       # asyncio module — background tasks (async def) handle karne ke liye
-2
-3  # Static helper class — isko bina object banaye use kar sakte hain
-4  class AIHelper:                                                      # get_locators_from_llm logic yahan aayega
-5      @staticmethod                                                    # @staticmethod decorator = is function ko class instance ki zaroorat nahi
-6      async def get_locators_from_llm(llm_client, locator_type, value, page_source): # async def = API call slow hoti hai, toh wait karne ke liye async banaya
-7          print("Sending prompt engineering data to AI...")            # prompt engineering = AI ko instructions bhejna
-8          # Fake API response for demonstration
-9          return {"xpath": "//button[@id='newLogin']", "id": "newLogin"} # JSON dictionary deserialize hoke return hui
-10
-11 class SelfHealingLocators:
-12     def __init__(self, driver):
-13         self.driver = driver
-14         self.llm_client = "MockClient_v1"                            # llm_client initialize kiya (real app mein valid API client hoga)
-15
-16     # Yeh method fail hone pe chalega
-17     async def heal_using_ai(self, locator_type, locator_value):      # heal_using_ai = main async function jo healing start karta hai
-18         print("Executing Step 3: AI Auto Healing...")
-19         page_source = "<html><button id='newLogin'>Login</button></html>" # Browser se page_source nikalenge (dummy string)
-20
-21         # Static helper call (Context engineering data pass kar rahe hain)
-22         suggested_locators = await AIHelper.get_locators_from_llm(   # await = jab tak AI answer na de, code rukega
-23             self.llm_client, locator_type, locator_value, page_source # Saara raw data bheja LLM ko
-24         )
-25         print(f"Received suggested locators: {suggested_locators}")  # Output print kiya
-26         return suggested_locators                                    # get_healed_locator logic ke liye return kiya
+1  import asyncio                                                       # asyncio module — [[HL::background tasks (async def) handle karne ke liye::HL]]
+[[HL::2::HL]]
+[[HL::3  # Static helper class — isko bina object banaye use kar sakte hain::HL]]
+[[HL::4  class AIHelper:                                                      # get_locators_from_llm logic yahan aayega::HL]]
+[[HL::5      @staticmethod                                                    # @staticmethod decorator = is function ko class instance ki zaroorat nahi::HL]]
+[[HL::6      async def get_locators_from_llm(llm_client, locator_type, value, page_source): # async def = API call slow hoti hai, toh wait karne ke liye async banaya::HL]]
+[[HL::7          print("Sending prompt engineering data to AI...")            # prompt engineering = AI ko instructions bhejna::HL]]
+[[HL::8          # Fake API response for demonstration::HL]]
+[[HL::9          return {"xpath": "//button[@id='newLogin']", "id": "newLogin"} # JSON dictionary deserialize hoke return hui::HL]]
+[[HL::10::HL]]
+[[HL::11 class SelfHealingLocators:::HL]]
+[[HL::12     def __init__(self, driver):::HL]]
+[[HL::13         self.driver = driver::HL]]
+[[HL::14         self.llm_client = "MockClient_v1"                            # llm_client initialize kiya (real app mein valid API client hoga)::HL]]
+[[HL::15::HL]]
+[[HL::16     # Yeh method fail hone pe chalega::HL]]
+[[HL::17     async def heal_using_ai(self, locator_type, locator_value):      # heal_using_ai = main async function jo healing start karta hai::HL]]
+[[HL::18         print("Executing Step 3: AI Auto Healing...")::HL]]
+[[HL::19         page_source = "<html><button id='newLogin'>Login</button></html>" # Browser se page_source nikalenge (dummy string)::HL]]
+[[HL::20::HL]]
+[[HL::21         # Static helper call (Context engineering data pass kar rahe hain)::HL]]
+[[HL::22         suggested_locators = await AIHelper.get_locators_from_llm(   # await = jab tak AI answer na de, code rukega::HL]]
+[[HL::23             self.llm_client, locator_type, locator_value, page_source # Saara raw data bheja LLM ko::HL]]
+[[HL::24         )::HL]]
+[[HL::25         print(f"Received suggested locators: {suggested_locators}")  # Output print kiya::HL]]
+[[HL::26         return suggested_locators                                    # get_healed_locator logic ke liye return kiya::HL]]
 ```
 
 ```
@@ -7388,8 +7388,8 @@ Sending prompt engineering data to AI...
 Received suggested locators: {'xpath': "//button[@id='newLogin']", 'id': 'newLogin'}
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
-- **Line 6:** `async def get_locators_from_llm` — Isme hum `llm_client`, `locator_type`, `locator_value`, aur `page_source` pass kar rahe hain. Is data combination ko pass karne ko **context engineering** aur **prompt engineering** bolte hain kyunki AI ko bina context ke nahi pata ki woh kis HTML mein kya dhoondh raha hai.
+##### 🔬 [[HL::Code Explanation Rule (LINE-BY-LINE)::HL]]
+- [[HL::**Line 6:** `async def get_locators_from_llm` — Isme hum `llm_client`, `locator_type`, `locator_value`, aur `page_source` pass kar rahe hain. Is data combination ko pass karne ko **context engineering** aur **prompt engineering** bolte hain kyunki AI ko bina context ke nahi pata ki woh kis HTML mein kya dhoondh raha hai::HL]].
 - **Line 22:** `await AIHelper.get_locators_from_llm(...)` — Hum static helper ko call maar rahe hain. Is structure ko aage jaake hum **dependency injections** (ek design pattern — jisme ek object dusre object ko khud create karne ke bajaye parameters ke through bahar se receive karta hai) ke through aur decoupled bana sakte hain jaisa speaker ne hint kiya.
 
 #### 🔒 8. Security-First Check
@@ -7403,9 +7403,9 @@ Dependency Injections use karke API clients ko inject karna enterprise level arc
 - **🤦 Why:** Code file bohot lambi ho jati hai aur Single Responsibility Principle (SRP) break hota hai.
 - **✅ The 'Pro' Way:** API calls aur prompts ko humesha ek `static helper class` mein isolate karke clean architecture follow karo.
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Static class ka kya matlab hai?" → Normal classes ka tumhe object banana padta hai `obj = AIHelper()`. Static class/methods directly class name se call ho jaate hain `AIHelper.method()`. Inko current system memory (state) ki zaroorat nahi hoti.
-- **Confusion 2:** "Async await kyu use kiya?" → Network calls (AI ko HTML bhejna) slow hoti hain. Async lagane se system freeze nahi hota aur dusre background kaam chalte rehte hain.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Static class ka kya matlab hai?" → Normal classes ka tumhe object banana padta hai `obj = AIHelper()`. Static class/methods directly class name se call ho jaate hain `AIHelper.method()`. Inko current system memory (state) ki zaroorat nahi hoti.::HL]]
+- [[HL::**Confusion 2:** "Async await kyu use kiya?" → Network calls (AI ko HTML bhejna) slow hoti hain. Async lagane se system freeze nahi hota aur dusre background kaam chalte rehte hain::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart
 - API call fail ho rahi hai? → Check karo ki `llm_client` initialize hua hai ya nahi, aur kya authentication token `.env` se properly load ho raha hai.
@@ -7445,8 +7445,8 @@ Swiggy ke automation framework mein ek alag library hoti hai `swiggy-ai-helpers`
 - **Q:** 'heal_using_ai' method ka primarily kya role hai?
 - **A:** Yeh method core framework aur AI communication layer ke beech ek bridge ka kaam karta hai. Jab saari traditional strategies fail ho jati hain, toh yeh method required data ikhatta karke external LLM process ko invoke karta hai.
 
-- **Q:** Context engineering kya hai is specific scenario mein?
-- **A:** AI model ko randomly HTML dene se woh confuse ho sakta hai. Context engineering ka matlab hai ki prompt mein saaf saaf likhna ki "Mujhe ek naya XPath chahiye button ke liye, jiska purana naam 'login' tha aur yeh raha current page_source". Isse precise answers milte hain.
+- [[HL::**Q:** Context engineering kya hai is specific scenario mein?::HL]]
+- [[HL::**A:** AI model ko randomly HTML dene se woh confuse ho sakta hai. Context engineering ka matlab hai ki prompt mein saaf saaf likhna ki "Mujhe ek naya XPath chahiye button ke liye, jiska purana naam 'login' tha aur yeh raha current page_source". Isse precise answers milte hain::HL]].
 
 - **Q:** 'get_locators_from_llm' ko static kyun banaya gaya?
 - **A:** Kyunki AI ko call karne ka function independent hai. Usko selenium `driver` ki state apne andar store karne ki zaroorat nahi hai. Data input lo, data output do. Static helper resources bachata hai aur testing mein mock karna easy hota hai.
@@ -7454,8 +7454,8 @@ Swiggy ke automation framework mein ek alag library hoti hai `swiggy-ai-helpers`
 - **Q:** Speaker ne Dependency Injections ka zikra kyun kiya?
 - **A:** Taki kal ko agar `llm_client` ka class structure badle (jaise OpenAI se Azure OpenAI par jana ho), toh base `SelfHealingLocators` class break na ho. Client object bahar se inject kiya jayega, jisse code tightly coupled nahi rahega.
 
-- **Q:** async def ka is architecture mein kya impact hota hai?
-- **A:** Selenium test sequential hote hain. Agar API request mein 3 second lage, toh synchronous code pura system freeze kar dega. `async def` lagane se network bound API call efficient ho jati hai aur CPU resource waste nahi hota.
+- [[HL::**Q:** async def ka is architecture mein kya impact hota hai?::HL]]
+- [[HL::**A:** Selenium test sequential hote hain. Agar API request mein 3 second lage, toh synchronous code pura system freeze kar dega. `async def` lagane se network bound API call efficient ho jati hai aur CPU resource waste nahi hota::HL]].
 
 #### 📝 18. One-Line Memory Hook
 "Main class ko rakho clean, AI call ke liye Helper class ko banao supreme!"
@@ -7478,25 +7478,25 @@ Maan lo AI ne ek box (JSON response) bheja jisme alag alag packets (ID, XPath, C
 
 #### 📖 3. Technical Definition
 - **Precise English:** The parsing module that iterates over AI-provided JSON responses, translating string-based locator types into native Selenium `By` objects via conditional mapping, while dynamically filtering out null or empty string values and keeping track of the valid insertion count.
-- **Hinglish Simplification:** AI se aayi hui plain text ko padh kar, usko Selenium ki language (`By.Id`, `By.XPath`) mein badalna, khali data ko nikaal dena, aur naye locators ko dictionary mein populate karna.
+- [[HL::**Hinglish Simplification:** AI se aayi hui plain text ko padh kar, usko Selenium ki language (`By.Id`, `By.XPath`) mein badalna, khali data ko nikaal dena, aur naye locators ko dictionary mein populate karna.::HL]]
 
-#### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** AI sirf text strings (`"id": "login"`) deta hai, lekin Selenium framework ko objects chahiye hote hain (`By.ID("login")`). Agar khali string (`""`) pass ho gayi toh test galat direction mein crash hoga.
-- **Solution:** Ek function `TryCreateLocatorStrategy` banate hain jo in strings ko parse karta hai, validate karta hai, aur properly **locator strategies collection** mein map karta hai.
+#### [[HL::🧠 4. Why This Matters (Zaroorat Kyun Hai?)::HL]]
+- [[HL::**Problem:** AI sirf text strings (`"id": "login"`) deta hai, lekin Selenium framework ko objects chahiye hote hain (`By.ID("login")`). Agar khali string (`""`) pass ho gayi toh test galat direction mein crash hoga.::HL]]
+- [[HL::**Solution:** Ek function `TryCreateLocatorStrategy` banate hain jo in strings ko parse karta hai, validate karta hai, aur properly **locator strategies collection** mein map karta hai::HL]].
 - **What breaks if we don't use it?** Agar **None or whitespace** ko filter nahi kiya, toh framework anant baar invalid locators execute karne ki koshish karega (AI healing failed error).
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 Console/Terminal mein "Successfully added 3 new AI locators" jaisa print dikhega kyunki `AddedCount` track ho raha hai. 
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. AI API ka response deserialize hone ke baad string parameters aate hain.
-2. Hum `TryCreateLocatorStrategy` function likhte hain jo in parameters ko handle kare.
-3. System check karta hai ki value **None or whitespace** (khali) toh nahi. Agar hai toh 0 return karta hai.
-4. Agar valid hai, toh ek **switch statement** (Python mein if-elif ya match-case) evaluate hota hai.
-5. Agar type **ID** hai -> convert to **By.Id**. Agar **Name** hai -> convert to **By.Name**. Agar **XPath** hai -> `By.XPATH`, and so on.
-6. Valid conversions humari purani **locator strategies collection** dictionary mein add hote hain.
-7. Har naye addition pe ek variable **AddedCount** increment hota hai (+1) taaki track kar sakein ki kitne actual options mile.
-8. Agar conversion step pe fail hua (invalid string), toh ek **try-except block** error suppress kar deta hai (so **AI healing failed** issue pura code na thapay).
+1. AI [[HL::API ka response deserialize hone ke baad string parameters aate hain.::HL]]
+2. [[HL::Hum `TryCreateLocatorStrategy` function likhte hain jo in parameters ko handle kare.::HL]]
+3. [[HL::System check karta hai ki value **None or whitespace** (khali) toh nahi. Agar hai toh 0 return karta hai.::HL]]
+4. [[HL::Agar valid hai, toh ek **switch statement** (Python mein if-elif ya match-case) evaluate hota hai.::HL]]
+5. [[HL::Agar type **ID** hai -> convert to **By.Id**. Agar **Name** hai -> convert to **By.Name**. Agar **XPath** hai -> `By.XPATH`, and so on.::HL]]
+6. [[HL::Valid conversions humari purani **locator strategies collection** dictionary mein add hote hain.::HL]]
+7. [[HL::Har naye addition pe ek variable **AddedCount** increment hota hai (+1) taaki track kar sakein ki kitne actual options mile.::HL]]
+8. [[HL::Agar conversion step pe fail hua (invalid string), toh ek **try-except block** error suppress kar deta hai (so **AI healing failed** issue pura code na thapay::HL]]).
 
 #### 💻 7. Hands-On — Runnable Example
 ```python
@@ -7507,25 +7507,25 @@ Console/Terminal mein "Successfully added 3 new AI locators" jaisa print dikhega
 5          self.locator_strategies_collection = {}               # locator strategies collection = dictionary jahan naye locators save honge
 6          self.AddedCount = 0                                   # AddedCount = track karega kitne naye locators add huye
 7
-8      def TryCreateLocatorStrategy(self, locator_type, locator_value): # TryCreateLocatorStrategy = String ko Selenium 'By' object mein convert karta hai
-9          # Check karo agar AI ne khali value bheji ho
-10         if not locator_value or str(locator_value).strip() == "": # None or whitespace filter logic
-11             return 0                                          # khali hai toh zero return karo (skip)
-12
-13         try:                                                  # try-except block = parsing errors ko safely catch karne ke liye
-14             # switch statement equivalent in Python (match-case supported in Python 3.10+)
-15             match str(locator_type).upper():                  # match case = Type ko match karega
-16                 case "ID":
-17                     by_strategy = By.ID                       # By.Id assign hoga
-18                 case "NAME":
-19                     by_strategy = By.NAME                     # By.Name assign hoga
-20                 case "XPATH":
-21                     by_strategy = By.XPATH                    # XPath handling
-22                 case "CSS":
-23                     by_strategy = By.CSS_SELECTOR             # CSS handling
-24                 case _:                                       # Default fallback
-25                     print("AI healing failed to recognize type.") # AI healing failed logging
-26                     return 0
+8      def TryCreateLocatorStrategy(self, locator_type, locator_value): # TryCreateL[[HL::ocatorStrategy = String ko Selenium 'By' object mein convert karta hai::HL]]
+[[HL::9          # Check karo agar AI ne khali value bheji ho::HL]]
+[[HL::10         if not locator_value or str(locator_value).strip() == "": # None or whitespace filter logic::HL]]
+[[HL::11             return 0                                          # khali hai toh zero return karo (skip)::HL]]
+[[HL::12::HL]]
+[[HL::13         try:                                                  # try-except block = parsing errors ko safely catch karne ke liye::HL]]
+[[HL::14             # switch statement equivalent in Python (match-case supported in Python 3.10+)::HL]]
+[[HL::15             match str(locator_type).upper():                  # match case = Type ko match karega::HL]]
+[[HL::16                 case "ID":::HL]]
+[[HL::17                     by_strategy = By.ID                       # By.Id assign hoga::HL]]
+[[HL::18                 case "NAME":::HL]]
+[[HL::19                     by_strategy = By.NAME                     # By.Name assign hoga::HL]]
+[[HL::20                 case "XPATH":::HL]]
+[[HL::21                     by_strategy = By.XPATH                    # XPath handling::HL]]
+[[HL::22                 case "CSS":::HL]]
+[[HL::23                     by_strategy = By.CSS_SELECTOR             # CSS handling::HL]]
+[[HL::24                 case _:                                       # Default fallback::HL]]
+[[HL::25                     print("AI healing failed to recognize type.") # AI healing failed logging::HL]]
+[[HL::26                     return 0::HL]]
 27
 28             # Dictionary populating
 29             self.locator_strategies_collection[locator_type] = (by_strategy, locator_value) # Tuple add kiya dictionary mein
@@ -7555,7 +7555,7 @@ Collection: {'ID': ('id', 'login_new'), 'XPATH': ('xpath', "//div[@class='hi']")
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 - **Line 10:** `if not locator_value or str(locator_value).strip() == ""` — AI model hallucinations ke chalte khali strings bhej sakta hai. Yeh check zaroori hai warna baad mein Selenium `InvalidSelectorException` throw karega empty string pe.
-- **Line 15-24:** `match ... case` block — Yeh speaker ke bataye gaye **switch statement** ka Python translation hai. Yeh `if-elif` se zyada cleaner hota hai string values map karne ke liye (ID -> `By.Id`, Name -> `By.Name`, etc.).
+- [[HL::**Line 15-24:** `match ... case` block — Yeh speaker ke bataye gaye **switch statement** ka Python translation hai. Yeh `if-elif` se zyada cleaner hota hai string values map karne ke liye (ID -> `By.Id`, Name -> `By.Name`, etc::HL]].).
 - **Line 29-30:** Naya parsed tuple dictionary mein chala jata hai aur **AddedCount** badhta hai. Agar terminal pe AddedCount 0 print ho raha hai, toh dev samajh jayega ki AI ne ek bhi valid cheez nahi dhoondhi.
 
 #### 🔒 8. Security-First Check
@@ -7565,12 +7565,12 @@ Collection: {'ID': ('id', 'login_new'), 'XPATH': ('xpath', "//div[@class='hi']")
 `AddedCount` track karna Analytics aur Observability ka part hai. Jab CI/CD pipeline mein thousands of tests chalte hain, toh telemetry dashboards (jaise Grafana/Kibana) pe track hota hai ki kitne locators successfully heal huye vs kitne test completely fail huye. Is reporting ke liye AddedCount variable pass karna industry standard hai.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes
-- **❌ Mistake:** Switch case logic likhte waqt `string.lower()` ya `upper()` use na karna.
-- **🤦 Why:** AI kabhi `"xpath"` dega, kabhi `"XPath"`. Case sensitivity ki wajah se switch cases break ho jayenge aur valid locators bhi discard ho jayenge.
+- **❌ [[HL::Mistake:** Switch case logic likhte waqt `string.lower()` ya `upper()` use na karna.::HL]]
+- [[HL::**🤦 Why:** AI kabhi `"xpath"` dega, kabhi `"XPath"`. Case sensitivity ki wajah se switch cases break ho jayenge aur valid locators bhi discard ho jayenge::HL]].
 - **✅ The 'Pro' Way:** Hamesha AI strings ko standardize karo (e.g., `upper()`) mapping logic mein bhejne se pehle.
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Switch statement Python mein nahi hota na?" → Pehle nahi hota tha (hum `if-elif` ya dictionary mapping use karte the). Par Python 3.10 ke baad se `match-case` aa gaya hai jo exactly C#/Java ke switch statement jaisa behave karta hai.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Switch statement Python mein nahi hota na?" → Pehle nahi hota tha (hum `if-elif` ya dictionary mapping use karte the). Par Python 3.10 ke baad se `match-case` aa gaya hai jo exactly C#/Java ke switch statement jaisa behave karta hai::HL]].
 - **Confusion 2:** "Hum TryCreate kyu use kar rahe hain, Create kyu nahi?" → Programming mein `Try...` methods ka convention hota hai ki "Agar fail ho jau toh error crash mat karna, bas safely fail (False/0) ho jana". Yeh safety ensure karta hai.
 
 #### 🛠️ 12. Troubleshooting Flowchart
@@ -7648,72 +7648,72 @@ Maan lo tum customer care ko call lagate ho (healing). Call drop ho jati hai aur
 
 #### 📖 3. Technical Definition
 - **Precise English:** The implementation of a decrementing retry counter to prevent infinite recursive loops during the AI auto-healing phase. Once the counter reaches zero, the system aborts the healing attempt and throws a deterministic exception.
-- **Hinglish Simplification:** Ek safety switch lagana taaki agar AI baar-baar same fail locators de raha ho, toh code khud ko anant baar call na kare (infinite loop). Attempts khatam hone pe script properly error dekar ruk jaye.
+- [[HL::**Hinglish Simplification:** Ek safety switch lagana taaki agar AI baar-baar same fail locators de raha ho, toh code khud ko anant baar call na kare (infinite loop). Attempts khatam hone pe script properly error dekar ruk jaye::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Jab element nahi milta toh AI call hoti hai. AI ne jo locators diye, agar woh bhi fail ho gaye, toh system wapas fail loop mein jayega aur AI ko call karega -> **recursion problem** (infinite loop) start ho jayega.
-- **Solution:** Hum **retry attempts** count set karte hain (jaise 2 baar). Jab bhi loop chale, usko **minus one** karte hain.
-- **What breaks if we don't use it?** Script kabhi rukegi nahi. RAM freeze ho jayegi (StackOverflow Error aayega) aur cloud API (AI model) ko hazaron request bhej kar bill massive kar degi.
+- [[HL::**Problem:** Jab element nahi milta toh AI call hoti hai. AI ne jo locators diye, agar woh bhi fail ho gaye, toh system wapas fail loop mein jayega aur AI ko call karega -> **recursion problem** (infinite loop) start ho jayega.::HL]]
+- [[HL::**Solution:** Hum **retry attempts** count set karte hain (jaise 2 baar). Jab bhi loop chale, usko **minus one** karte hain.::HL]]
+- [[HL::**What breaks if we don't use it?** Script kabhi rukegi nahi. RAM freeze ho jayegi (StackOverflow Error aayega) aur cloud API (AI model) ko hazaron request bhej kar bill massive kar degi::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 Console mein error message throw hoga aur script execution ruk jayega, usually with a red stack trace in terminal.
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. `heal_using_ai` function apne parameter mein ek `retryAttempts=2` leta hai.
-2. Jab function start hota hai, pehle check hota hai ki kya attempts **greater than zero** hain?
-3. Agar fallback dictionary mein saare try fail ho gaye aur function ko dobara khud ko call (recursion) karna hai, toh woh current **retry attempts minus one** karke pass karta hai (`heal_using_ai(retries=1)`).
-4. Jab retries zero hote hain, toh function loop band kar deta hai aur formally decide kar leta hai ki **failed to locate the element after healing attempts**.
-5. Final step mein system manually ek **NoSuchElementException** raise karta hai taaki test suite properly framework ki aadat ke mutabiq test case fail kar sake.
+1. [[HL::`heal_using_ai` function apne parameter mein ek `retryAttempts=2` leta hai.::HL]]
+2. [[HL::Jab function start hota hai, pehle check hota hai ki kya attempts **greater than zero** hain?::HL]]
+3. [[HL::Agar fallback dictionary mein saare try fail ho gaye aur function ko dobara khud ko call (recursion) karna hai, toh woh current **retry attempts minus one** karke pass karta hai (`heal_using_ai(retries=1)`).::HL]]
+4. [[HL::Jab retries zero hote hain, toh function loop band kar deta hai aur formally decide kar leta hai ki **failed to locate the element after healing attempts**.::HL]]
+5. [[HL::Final step mein system manually ek **NoSuchElementException** raise karta hai taaki test suite properly framework ki aadat ke mutabiq test case fail kar sake::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 ```python
-1  from selenium.common.exceptions import NoSuchElementException # Exception class load ki
-2
-3  class SelfHealingLocators:
-4      # Default retry attempt 2 set kiya as standard practice
-5      def execute_healing_cycle(self, retry_attempts=2):        # retry attempts = kitni baar AI logic fail ho sakti hai
-6          print(f"Starting healing cycle. Remaining attempts: {retry_attempts}")
-7
-8          # Step 1: Check karo kya recursion ki limit khatam ho gayi?
-9          if retry_attempts <= 0:                               # recursion problem se bachne ka check
-10             print("Error: failed to locate the element after healing attempts") # Final failure print
-11             # Script crash karwao deliberately
-12             raise NoSuchElementException("Element permanently lost despite AI Healing.") # NoSuchElementException trigger
-13
-14         try:
-15             # Step 2: Dummy operation jo element dhundhne ka natak kar raha hai
-16             # (Assume yahan element dhundha aur fail ho gaya)
-17             print("Simulating failure... Element not found in this cycle.")
-18             raise ValueError("Fail!")                         # Explicit fail trigger kiya test ke liye
-19
-20         except Exception:
-21             # Step 3: Recursion ho rahi hai (function apne aap ko call kar raha hai)
-22             # retry attempts minus one karna ZAROORI hai
-23             new_attempts = retry_attempts - 1                 # retry attempts minus one
-24             print("Retrying...\n")
-25             self.execute_healing_cycle(new_attempts)          # Recursive call wapas run hogi
-26
-27 # Run the code
-28 healer = SelfHealingLocators()
-29 try:
-30     healer.execute_healing_cycle(retry_attempts=2)            # call function greater than zero
-31 except Exception as e:
-32     print(f"Exception Caught at Base Level: {e}")
+[[HL::1  from selenium.common.exceptions import NoSuchElementException # Exception class load ki::HL]]
+[[HL::2::HL]]
+[[HL::3  class SelfHealingLocators:::HL]]
+[[HL::4      # Default retry attempt 2 set kiya as standard practice::HL]]
+[[HL::5      def execute_healing_cycle(self, retry_attempts=2):        # retry attempts = kitni baar AI logic fail ho sakti hai::HL]]
+[[HL::6          print(f"Starting healing cycle. Remaining attempts: {retry_attempts}")::HL]]
+[[HL::7::HL]]
+[[HL::8          # Step 1: Check karo kya recursion ki limit khatam ho gayi?::HL]]
+[[HL::9          if retry_attempts <= 0:                               # recursion problem se bachne ka check::HL]]
+[[HL::10             print("Error: failed to locate the element after healing attempts") # Final failure print::HL]]
+[[HL::11             # Script crash karwao deliberately::HL]]
+[[HL::12             raise NoSuchElementException("Element permanently lost despite AI Healing.") # NoSuchElementException trigger::HL]]
+[[HL::13::HL]]
+[[HL::14         try:::HL]]
+[[HL::15             # Step 2: Dummy operation jo element dhundhne ka natak kar raha hai::HL]]
+[[HL::16             # (Assume yahan element dhundha aur fail ho gaya)::HL]]
+[[HL::17             print("Simulating failure... Element not found in this cycle.")::HL]]
+[[HL::18             raise ValueError("Fail!")                         # Explicit fail trigger kiya test ke liye::HL]]
+[[HL::19::HL]]
+[[HL::20         except Exception:::HL]]
+[[HL::21             # Step 3: Recursion ho rahi hai (function apne aap ko call kar raha hai)::HL]]
+[[HL::22             # retry attempts minus one karna ZAROORI hai::HL]]
+[[HL::23             new_attempts = retry_attempts - 1                 # retry attempts minus one::HL]]
+[[HL::24             print("Retrying...\n")::HL]]
+[[HL::25             self.execute_healing_cycle(new_attempts)          # Recursive call wapas run hogi::HL]]
+[[HL::26::HL]]
+[[HL::27 # Run the code::HL]]
+[[HL::28 healer = SelfHealingLocators()::HL]]
+[[HL::29 try:::HL]]
+[[HL::30     healer.execute_healing_cycle(retry_attempts=2)            # call function greater than zero::HL]]
+[[HL::31 except Exception as e:::HL]]
+[[HL::32     print(f"Exception Caught at Base Level: {e}")::HL]]
 ```
 
 ```
-# 📤 Expected Output:
-Starting healing cycle. Remaining attempts: 2
-Simulating failure... Element not found in this cycle.
-Retrying...
-
-Starting healing cycle. Remaining attempts: 1
-Simulating failure... Element not found in this cycle.
-Retrying...
-
-Starting healing cycle. Remaining attempts: 0
-Error: failed to locate the element after healing attempts
-Exception Caught at Base Level: Message: Element permanently lost despite AI Healing.
+# [[HL::📤 Expected Output:::HL]]
+[[HL::Starting healing cycle. Remaining attempts: 2::HL]]
+[[HL::Simulating failure... Element not found in this cycle.::HL]]
+[[HL::Retrying...::HL]]
+[[HL:: ::HL]]
+[[HL::Starting healing cycle. Remaining attempts: 1::HL]]
+[[HL::Simulating failure... Element not found in this cycle.::HL]]
+[[HL::Retrying...::HL]]
+[[HL:: ::HL]]
+[[HL::Starting healing cycle. Remaining attempts: 0::HL]]
+[[HL::Error: failed to locate the element after healing attempts::HL]]
+[[HL::Exception Caught at Base Level: Message: Element permanently lost despite AI Healing.::HL]]
 ```
 
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
@@ -7732,7 +7732,7 @@ Is framework pattern mein retries ko global configuration `.env` file (`AI_RETRY
 - **✅ The 'Pro' Way:** Hamesha entry check laga kar limits enforced rakho.
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Raise kyu kiya exception, pehle toh hum catch kar rahe the bachane ke liye?" → Pehle hum catch isliye kar rahe the taaki AI healing try kar saken. Par jab healing limit bhi exhaust ho gayi, toh test ko "Pass" nahi keh sakte na? Ab sach mein test fail karna hi padega, isliye formally error `raise` karte hain.
+- **Confusi[[HL::on 1:** "Raise kyu kiya exception, pehle toh hum catch kar rahe the bachane ke liye?" → Pehle hum catch isliye kar rahe the taaki AI healing try kar saken. Par jab healing limit bhi exhaust ho gayi, toh test ko "Pass" nahi keh sakte na? Ab sach mein test fail karna hi padega, isliye formally error `raise` karte hain::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart
 - Script stuck ho gayi hai aur API limit exceed errors aa rahe hain? → Tumhara recursion limit (retryAttempts) loop ke andar minus nahi ho raha hai. Woh infinitely call kar raha hai.
@@ -7822,23 +7822,23 @@ Socho tum ek treasure hunt (happy path) pe ho jahan clue card pe likha hai "Jao 
 
 #### 📖 3. Technical Definition
 - **Precise English:** The end-to-end integration test of the self-healing architecture, verifying that the system correctly transitions from a primary locator failure, invokes an asynchronous DOM traversal via an LLM, updates its local collection cache, and successfully dispatches the action (like a click) on the newly identified web element.
-- **Hinglish Simplification:** Ek live test run jisme hum jaan-boojh ke code todte hain yeh dekhne ke liye ki kya hamara framework sach mein AI ki madad se naya locator laakar us button pe successfully click kar pata hai ya nahi.
+- [[HL::**Hinglish Simplification:** Ek live test run jisme hum jaan-boojh ke code todte hain yeh dekhne ke liye ki kya hamara framework sach mein AI ki madad se naya locator laakar us button pe successfully click kar pata hai ya nahi::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Code likhne aur usey actual run hone mein fark hota hai. Hume nahi pata ki AI valid JSON dega ya script Step 2 (collection checking) mein phans jayegi.
-- **Solution:** Hum jaan-boojh ke ek **faulty locator** inject karte hain aur debugger lagakar **happy path** flow verify karte hain.
-- **What breaks if we don't use it?** Agar is live validation ko verify kiye bina production pipeline mein code merge kar diya, toh jab real error aayega toh auto-healing fat jayegi aur test fail ho jayenge.
+- [[HL::**Problem:** Code likhne aur usey actual run hone mein fark hota hai. Hume nahi pata ki AI valid JSON dega ya script Step 2 (collection checking) mein phans jayegi.::HL]]
+- [[HL::**Solution:** Hum jaan-boojh ke ek **faulty locator** inject karte hain aur debugger lagakar **happy path** flow verify karte hain.::HL]]
+- [[HL::**What breaks if we don't use it?** Agar is live validation ko verify kiye bina production pipeline mein code merge kar diya, toh jab real error aayega toh auto-healing fat jayegi aur test fail ho jayenge::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 Debugger mode mein code rukega. Pehle attempt `invalid locator` pe break hoke `except` block catch karega. Phir AI call dikhegi, aur finally browser par physically ek automated mouse click hota hua dikhega **login link** par!
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. Tester ek **SelfHealingLocator** ka naya instance banata hai aur element property (e.g., id="logins") ko deliberately galat pass karta hai (**obsolete code** / **invalid locator** banata hai).
-2. Code ka execution **Step 1** se shuru hota hai — `find_element_async` us galat value par **element** dhundhta hai aur fail ho jata hai.
-3. Flow **Step 2** (Alternative Collection) pe jata hai. Abhi AI ne list nahi bhari, toh **dictionary (dict) count** 1 ya usse kam hoti hai, isliye yeh skip ho jata hai.
-4. Flow **Step 3** pe pahuchta hai jahan DOM pass hota hai AI API ko.
-5. AI lagbhag 5 naye suggestions wapas deta hai. Dictionary count update ho jata hai.
-6. System dobara loop/recursion chalata hai, naya ID dhoondh nikalta hai, usko wait karke (**await keyword**) variable mein daalta hai, aur finally uss par **Click operation** perform karta hai browser par. ⭐**successful AI auto healing code** ka asar dikhta hai.
+1. [[HL::Tester ek **SelfHealingLocator** ka naya instance banata hai aur element property (e.g., id="logins") ko deliberately galat pass karta hai (**obsolete code** / **invalid locator** banata hai).::HL]]
+2. [[HL::Code ka execution **Step 1** se shuru hota hai — `find_element_async` us galat value par **element** dhundhta hai aur fail ho jata hai.::HL]]
+3. [[HL::Flow **Step 2** (Alternative Collection) pe jata hai. Abhi AI ne list nahi bhari, toh **dictionary (dict) count** 1 ya usse kam hoti hai, isliye yeh skip ho jata hai.::HL]]
+4. [[HL::Flow **Step 3** pe pahuchta hai jahan DOM pass hota hai AI API ko.::HL]]
+5. [[HL::AI lagbhag 5 naye suggestions wapas deta hai. Dictionary count update ho jata hai.::HL]]
+6. [[HL::System dobara loop/recursion chalata hai, naya ID dhoondh nikalta hai, usko wait karke (**await keyword**) variable mein daalta hai, aur finally uss par **Click operation** perform karta hai browser par. ⭐**successful AI auto healing code** ka asar dikhta hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 ```python
@@ -7918,7 +7918,7 @@ Is demonstration ka sabse strong point yeh hai ki Page Object classes (jahan tes
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 - **Confusion 1:** "Obsolete code aur Faulty locator mein kya fark hai?" → Dono practically same cheezein refer kar rahe hain. Purana code jo pehle kaam karta tha par HTML update ki wajah se ab nahi karta usse obsolete code kehte hain, aur woh locator execution time pe faulty kehlata hai.
-- **Confusion 2:** "await keyword agar hang ho gaya toh?" → Async functions mein hamesha `timeout` flags pass hone chahiye API client se taaki code forever hang na kare agar LLM sever down ho.
+- [[HL::**Confusion 2:** "await keyword agar hang ho gaya toh?" → Async functions mein hamesha `timeout` flags pass hone chahiye API client se taaki code forever hang na kare agar LLM sever down ho::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart
 - Debugger `Step 3` tak hi nahi pahucha? -> Iska matlab ya toh `Step 1` ka exception silently nigal (swallow) liya gaya hai without recursion trigger kiye, ya pehle hi dictionary count 2 dikha rahi hai jiske chalte check loop me atak gaya.
@@ -8024,8 +8024,8 @@ Socho tumhari car mein ek purana music system hai. **Dirty way** (galat tarika) 
 - **Hinglish Simplification:** Python mein ek aisi external static class/method banana jo existing WebDriver (browser control karne wala tool) ki functionalities ko badha de, bina original source code ko modify kiye.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Agar hum self-healing locator code ko directly har login page ya home page ke enhanced test mein "dirty way" mein likhenge, toh code bohot repetitive aur messy ho jayega (literally a pain in the butt).
-- **Solution:** Helper method use karke hum ek centralized self-healing class banate hain jo pure framework mein easily reuse ho sakti hai.
+- [[HL::**Problem:** Agar hum self-healing locator code ko directly har login page ya home page ke enhanced test mein "dirty way" mein likhenge, toh code bohot repetitive aur messy ho jayega (literally a pain in the butt).::HL]]
+- [[HL::**Solution:** Helper method use karke hum ek centralized self-healing class banate hain jo pure framework mein easily reuse ho sakti hai::HL]].
 - **What breaks if we don't use it?** Code maintenance nightmare ban jayega. Agar kal ko AI logic change karna ho, toh saare pages mein jaa kar manually update karna padega.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -8051,7 +8051,7 @@ Python (popular high-level programming language) mein C# jaisi direct extension 
 4  
 5  class WebDriverExtensions:                                   # web driver extensions ke liye ek static class banayi
 6      
-7      @staticmethod                                            # @staticmethod decorator - bina class instantiate kiye is method ko call kar sakte hain
+7      @[[HL::staticmethod                                            # @staticmethod decorator - bina class instantiate kiye is method ko call kar sakte hain::HL]]
 8      async def find_element_async(driver: WebDriver, by: str, value: str) -> WebElement:  # async def se Helper method banaya jo awaitable WebElement return karega
 9          try:
 10             # Pehle standard finite element method call karne ki koshish (regular find)
@@ -8140,8 +8140,8 @@ BrowserStack ya Sauce Labs jaise cloud testing platforms ke frameworks mein, nat
 - **A:** Hum helper functions ya wrapper classes (jaise `WebDriverExtensions`) create karte hain. In Python, hum `@staticmethod` use karke custom functions define karte hain jo WebDriver instance ko as an argument accept karte hain. Isse existing types bina recompile kiye extend ho jate hain.
 - **Q:** What is the issue with implementing the healing logic directly inside the Page Object classes?
 - **A:** Isko "dirty way" kehte hain. Yeh DRY (Don't Repeat Yourself) principle break karta hai. Har page (jaise login page) mein duplicate logic hota hai, jisse code maintainability nightmare ban jati hai (a true pain in the butt).
-- **Q:** Why use `async def` for the self-healing helper method?
-- **A:** Self-healing usually ek external LLM (Large Language Model) API ko call karta hai (e.g., via network requests). `async def` lagane se hum asynchronous execution enable karte hain, jisse jab tak API ka response aaye, program freeze nahi hota aur resources free rehte hain.
+- [[HL::**Q:** Why use `async def` for the self-healing helper method?::HL]]
+- [[HL::**A:** Self-healing usually ek external LLM (Large Language Model) API ko call karta hai (e.g., via network requests). `async def` lagane se hum asynchronous execution enable karte hain, jisse jab tak API ka response aaye, program freeze nahi hota aur resources free rehte hain::HL]].
 - **Q:** Mention a key limitation of Python compared to C# when extending types.
 - **A:** C# mein native "extension methods" hote hain jo lagta hai ki ussi object ka part hain (e.g., `driver.MyNewMethod()`). Python mein aisa clean native syntax nahi hai; hume helper method mein object paas karna padta hai (e.g., `Helper.MyNewMethod(driver)`) ya monkey-patching karni padti hai.
 - **Q:** WebDriverExtensions static class kyun banayi gayi?
@@ -8298,7 +8298,7 @@ Socho tumhare office mein ek manager hai jiska naam "Rahul" hai, aur ek naya int
 
 #### 📖 3. Technical Definition
 - **Precise English:** Resolving method signature collisions between standard synchronous WebDriver methods and custom asynchronous helper methods by renaming the custom implementation.
-- **Hinglish Simplification:** Apne custom Helper method ka naam change karke kuch unique rakhna (jaise `AIfind_element`) taaki original Selenium ke `find_element` function ke saath clash (conflict) na ho.
+- [[HL::**Hinglish Simplification:** Apne custom Helper method ka naam change karke kuch unique rakhna (jaise `AIfind_element`) taaki original Selenium ke `find_element` function ke saath clash (conflict) na ho::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 - **Problem:** Agar humne apna function bhi `find_element` rakha, toh Python overriding rules (precedence) ke hisaab se framework confuse ho jayega. Standard method ek normal WebElement return karta hai, jabki humara custom async method ek `Coroutine of WebElement` (future reference of element) return karta hai.
@@ -8378,9 +8378,9 @@ Modern cloud test executions mein, `AIfind_element` jaise custom methods ka naam
 - **🤦 Why:** Yeh method precedence rules todta hai aur `WebDriver search context` ko confuse kar deta hai.
 - **✅ The 'Pro' Way:** Clean naming convention use karo, jaise `ai_find_element` ya `AIfind_element` taaki clear distinction rahe ki yeh custom wrapper hai.
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Coroutine of WebElement kya hota hai?" → Normal function turant return karta hai (WebElement). Async function turant ek promise return karta hai ki "main baad mein WebElement dunga", us promise ko hi Coroutine bolte hain. Isliye usse kholne ke liye `await` lagana padta hai.
-- **Confusion 2:** "HTTP post kyun asynchronous hona chahiye?" → Kyunki HTTP call internet par travel karti hai. Agar synchronous rakhenge, toh jab tak server ka reply nahi aata, poora program (test suite) ruk jayega.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Coroutine of WebElement kya hota hai?" → Normal function turant return karta hai (WebElement). Async function turant ek promise return karta hai ki "main baad mein WebElement dunga", us promise ko hi Coroutine bolte hain. Isliye usse kholne ke liye `await` lagana padta hai.::HL]]
+- [[HL::**Confusion 2:** "HTTP post kyun asynchronous hona chahiye?" → Kyunki HTTP call internet par travel karti hai. Agar synchronous rakhenge, toh jab tak server ka reply nahi aata, poora program (test suite) ruk jayega::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 - `TypeError: object WebElement can't be used in 'await' expression` → Tum synchronous code par `await` laga rahe ho. Check function definition.
@@ -8449,22 +8449,22 @@ Maan lo tumne restaurant mein pizza (WebElement) order kiya. Waiter ne tumhe ek 
 
 #### 📖 3. Technical Definition
 - **Precise English:** Developing custom asynchronous extension methods (`click_async` and `send_keys_async`) to handle actions on WebElement coroutines, ensuring the element is fully awaited before interaction.
-- **Hinglish Simplification:** Jo hume token/promise mila hai uspar direct click fail ho jata hai. Isliye hum aise naye custom extensions (wrappers) banate hain jo pehle internally element ka wait karte hain aur fir uspe click ya type karte hain.
+- [[HL::**Hinglish Simplification:** Jo hume token/promise mila hai uspar direct click fail ho jata hai. Isliye hum aise naye custom extensions (wrappers) banate hain jo pehle internally element ka wait karte hain aur fir uspe click ya type karte hain.::HL]]
 
-#### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Normal selenium mein hum chain karte hain: `driver.find_element(...).click()`. Lekin ab humara `AIfind_element` ek coroutine return kar raha hai. Coroutine object pe `.click()` ya `.send_keys()` run karoge toh error aayega (asynchronous operation ka issue).
-- **Solution:** Hume web element helpers/extensions banane padenge: `click_async` aur `send_keys_async`.
+#### [[HL::🧠 4. Why This Matters (Zaroorat Kyun Hai?)::HL]]
+- [[HL::**Problem:** Normal selenium mein hum chain karte hain: `driver.find_element(...).click()`. Lekin ab humara `AIfind_element` ek coroutine return kar raha hai. Coroutine object pe `.click()` ya `.send_keys()` run karoge toh error aayega (asynchronous operation ka issue).::HL]]
+- [[HL::**Solution:** Hume web element helpers/extensions banane padenge: `click_async` aur `send_keys_async`::HL]].
 - **What breaks if we don't use it?** Existing scripts break ho jayengi kyunki Python runtime `AttributeError` phekega ("coroutine object has no attribute 'click'"). Speaker ne explicitly kaha ki "all your existing code will not work unless until you change it this way".
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```text
-# IDE code change before vs after:
+# [[HL::IDE code change before vs after:::HL]]
 
-# Old (Synchronous / Breaks now):
-login_link.click()
+# [[HL::Old (Synchronous / Breaks now):::HL]]
+[[HL::login_link.click()::HL]]
 
-# New (Async Wrapper):
-await click_async(login_link)
+# [[HL::New (Async Wrapper):::HL]]
+[[HL::await click_async(login_link::HL]])
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
@@ -8525,9 +8525,9 @@ Native send_keys fired with 'admin_user'.
 Typed text: admin_user
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
-- **Line 10:** `element = await locator_coroutine` — Yeh sabse crucial line hai. Jo `login_link_locator` test se aaya, woh abhi sirf promise tha. `await` usse process karke actual `MockWebElement` mein convert karta hai jiske andar native `click()` method hota hai.
-- **Line 11:** `element.click()` — Ab kyunki element properly resolve ho chuka hai, original Selenium driver ka `.click()` safely call ho jata hai.
+##### 🔬 Code Explanation Rule ([[HL::LINE-BY-LINE)::HL]]
+- [[HL::**Line 10:** `element = await locator_coroutine` — Yeh sabse crucial line hai. Jo `login_link_locator` test se aaya, woh abhi sirf promise tha. `await` usse process karke actual `MockWebElement` mein convert karta hai jiske andar native `click()` method hota hai.::HL]]
+- [[HL::**Line 11:** `element.click()` — Ab kyunki element properly resolve ho chuka hai, original Selenium driver ka `.click()` safely call ho jata hai::HL]].
 
 #### 🔒 8. Security-First Check
 *(N/A — is concept mein direct security surface nahi hai)*
@@ -8536,9 +8536,9 @@ Typed text: admin_user
 Is tarah ke wrappers **Playwright** (modern automation tool — JavaScript/Python test framework jo fast web testing ke liye use hota hai) mein native hote hain. Playwright JavaScript mein aap directly `fill()` use karte ho. Selenium mein hume manually yeh async custom extensions banane padte hain large scale async frameworks handle karne ke liye.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
-- **❌ Mistake:** Coroutine par bina await kiye `locator.click()` call kar dena.
-- **🤦 Why:** Coroutine object par `.click()` method exist nahi karta, script turant crash hogi.
-- **✅ The 'Pro' Way:** Dedicated web element extensions (jaise `click_async`) banayein taaki usages clean rahein aur boilerplate `await` code tests mein na bharna pade.
+- **❌ [[HL::Mistake:** Coroutine par bina await kiye `locator.click()` call kar dena.::HL]]
+- [[HL::**🤦 Why:** Coroutine object par `.click()` method exist nahi karta, script turant crash hogi.::HL]]
+- [[HL::**✅ The 'Pro' Way:** Dedicated web element extensions (jaise `click_async`) banayein taaki usages clean rahein aur boilerplate `await` code tests mein na bharna pade::HL]].
 
 #### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 - **Confusion 1:** "Hume directly test mein await karke `.click()` kyun nahi kar lena chahiye?" → Kar sakte ho, like: `(await find_element()).click()`. Par syntax dirty lagta hai. Wrappers (custom extensions) code ko clean aur readable rakhte hain, especially non-technical QA engineers ke liye.
@@ -8574,14 +8574,14 @@ Data scraping bots jo bohot zyada asynchronous network tasks handle karte hain, 
 ```
 
 #### ❓ 17. Interview Q&A (FAQ)
-- **Q:** Why do direct `.click()` and `.send_keys()` fail when returning an element asynchronously?
-- **A:** Jab function async hota hai, toh woh WebElement return karne ke bajaye "Coroutine object" return karta hai. Coroutine Python ka internal awaitable object hai jiske paas web element extensions (native methods) nahi hote. Usko click karne ke liye pehle `await` karna padta hai.
+- [[HL::**Q:** Why do direct `.click()` and `.send_keys()` fail when returning an element asynchronously?::HL]]
+- [[HL::**A:** Jab function async hota hai, toh woh WebElement return karne ke bajaye "Coroutine object" return karta hai. Coroutine Python ka internal awaitable object hai jiske paas web element extensions (native methods) nahi hote. Usko click karne ke liye pehle `await` karna padta hai.::HL]]
 - **Q:** What is the purpose of creating custom `click_async` wrappers instead of awaiting inline?
 - **A:** Inline use karne se code bohot messy dikhta hai jaise: `(await driver.AIfind_element(...)).click()`. Custom extensions code usages ko clean rakhte hain aur future error logging bhi ek central place se manage karne dete hain.
 - **Q:** Do wrapper functions like `click_async` need to return anything?
 - **A:** Nahi, click ya text type karne wale operations normally state change karte hain UI par. Isliye function signature mein inka "optional return" usually `None` hota hai.
 - **Q:** How does Playwright handle this scenario differently from Selenium?
-- **A:** Playwright natively asynchronous hai aur built-in wrappers provide karta hai. For example, Playwright mein `.fill()` ya `.click()` implicitly element ka wait aur resolve kar lete hain, jo Selenium mein hume custom `click_async` banakar achieve karna pada.
+- [[HL::**A:** Playwright natively asynchronous hai aur built-in wrappers provide karta hai. For example, Playwright mein `.fill()` ya `.click()` implicitly element ka wait aur resolve kar lete hain, jo Selenium mein hume custom `click_async` banakar achieve karna pada::HL]].
 - **Q:** What would happen if we forget the `await` keyword before `click_async`?
 - **A:** Python compiler runtime warning dega ki "coroutine was never awaited", aur click operation trigger hi nahi hoga kyunki async function ka event loop mein schedule hona baaki rah jayega.
 
@@ -8605,7 +8605,7 @@ Socho tum map use karke kisi dukan ja rahe ho, par dukan ka naam board par mit g
 
 #### 📖 3. Technical Definition
 - **Precise English:** Verifying the integration of Large Language Models to successfully resolve and interact with broken or scrambled locators dynamically during runtime within ~15 seconds.
-- **Hinglish Simplification:** Jaan-bujh kar apne Selenium code mein galat/scrambled IDs daal kar test chalana, aur dekhna ki AI (auto healing mechanism) khud se sahi element dhund kar test pass karwata hai ya nahi.
+- [[HL::**Hinglish Simplification:** Jaan-bujh kar apne Selenium code mein galat/scrambled IDs daal kar test chalana, aur dekhna ki AI (auto healing mechanism) khud se sahi element dhund kar test pass karwata hai ya nahi::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 - **Problem:** UI development bohot dynamic hoti hai, developers roz IDs ('username' se 'usernames' kar dete hain) change karte hain jisse saare tests fail ho jate hain.
@@ -8685,8 +8685,8 @@ Jab page source LLM ko bhej rahe ho context engineering ke dauran, dhyaan rakho 
 - **🤦 Why:** Ek page load hone mein 1 minute (15 seconds * 4 fields) lag jayega, jo ki cloud infra bills aasmaan mein pahuncha dega.
 - **✅ The 'Pro' Way:** Hamesha original `find_element` ek `try` block mein chalao, aur sirf `except` mein fallback/healing AI trigger karo.
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "LLM (AI) ko kaise pata chalega ki 'usernames' galat tha aur sahi ID kya hai?" → Yahi **prompt engineering** aur **context engineering** ka magic hai. Framework page ka poora HTML tree AI ko bhejta hai aur prompt deta hai: "Mujhe aisi field dhund kar do jo username jaisi dikhti ho". AI DOM (Document Object Model) analyse karke actual ID nikalta hai.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "LLM (AI) ko kaise pata chalega ki 'usernames' galat tha aur sahi ID kya hai?" → Yahi **prompt engineering** aur **context engineering** ka magic hai. Framework page ka poora HTML tree AI ko bhejta hai aur prompt deta hai: "Mujhe aisi field dhund kar do jo username jaisi dikhti ho". AI DOM (Document Object Model) analyse karke actual ID nikalta hai::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 - Test 1 minute se upar stuck hai → LLM API token expire ho gaya hoga ya rate limit exceed ho gayi hogi. Exception catch block check karo.
@@ -8810,7 +8810,7 @@ Socho tumne purani petrol car (Selenium) bech kar nayi electric car (Playwright)
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
 Speaker ne explicitly emphasize kiya hai: **⭐"Not even a single change in the strategy"**.
-1. **Phase One Similarities:** Intelligent Playwright automation ka architecture Selenium jaisa hi hai. DOM abhi bhi JSON elements ke form mein extract hota hai.
+1. [[HL::**Phase One Similarities:** Intelligent Playwright automation ka architecture Selenium jaisa hi hai. DOM abhi bhi JSON elements ke form mein extract hota hai::HL]].
 2. **Local Realm Mapping:** Jab element fail hota hai, system local selection strategies (jaise Map) check karta hai. 
 3. **LLM Prompting:** Agar local realm mein fix nahi milta, toh prompt ke through LLM ko DOM data bheja jata hai. LLM ko ab nayi list of locators di gayi hai.
 4. **Resolution:** AI naya locator deta hai (e.g., `getByTestId`), aur Playwright usse try karta hai. Yeh pura process developer ke liye ek cakewalk (bohot aasaan kaam) ho jata hai kyunki core logic change nahi hua.
@@ -8942,11 +8942,11 @@ Purane zamane mein (Selenium), browser chalane ke liye ek middleman hota tha jis
 
 ### 📖 3. Technical Definition
 - **Precise English:** Moving to Playwright requires migrating from Selenium's WebDriver object to Playwright's native `Page` and `Locator` objects, along with installing its specific npm dependencies and using simple string locators instead of `By` classes.
-- **Hinglish Simplification:** Playwright mein hum WebDriver hata dete hain. Browser tab ko control karne ke liye `Page` object use hota hai, aur elements ko dhundhne ke liye `Locator` object aur simple strings (jaise `text="login"`) use karte hain.
+- [[HL::**Hinglish Simplification:** Playwright mein hum WebDriver hata dete hain. Browser tab ko control karne ke liye `Page` object use hota hai, aur elements ko dhundhne ke liye `Locator` object aur simple strings (jaise `text="login"`) use karte hain::HL]].
 
 ### 🧠 4. Why This Matters
-- **Problem:** Selenium ka code Playwright mein nahi chalega kyunki unki foundation alag hai.
-- **Solution:** Fresh project mein dependency install karke, Page Object Model code ko Playwright ke types (`Page`, `Locator`) se replace karna padta hai.
+- [[HL::**Problem:** Selenium ka code Playwright mein nahi chalega kyunki unki foundation alag hai.::HL]]
+- [[HL::**Solution:** Fresh project mein dependency install karke, Page Object Model code ko Playwright ke types (`Page`, `Locator`) se replace karna padta hai::HL]].
 - **What breaks if we don't use it?** Agar tum `WebDriver` pass karne ki koshish karoge, toh framework crash ho jayega kyunki Playwright use pehchanta hi nahi.
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -8986,23 +8986,23 @@ found 0 vulnerabilities
 5      constructor(page) {                               // constructor mein WebDriver nahi, 'page' object aayega
 6          this.page = page;                             // page object ko class property bana liya
 7          
-8          // Root locators - Playwright mein Locator object use hota hai (not By)
-9          this.loginBtn = page.locator('text="login"');               // string locator text="login" use kar rahe hain
-10         this.empDetails = page.locator('text="employee details"');  // string locator text="employee details"
-11         this.manageUser = page.locator('text="manage user"');       // string locator text="manage user"
-12         this.logOff = page.locator('text="log off"');               // string locator text="log off"
-13     }
-14     
-15     async doLogin() {                                 // Pseudocode for login action
-16         await this.loginBtn.click();                  // Locator object pe action perform karo
-17         console.log("Clicked login button");
-18     }
-19 }
-20 
-21 // Test execution pseudocode
-22 // VS Code runners ke through run karenge
-23 test('should login', async ({ page }) => {            // Browser ka page object inject ho raha hai
-24     const loginPage = new LoginPage(page);            // Page object inject karo
+8          // [[HL::Root locators - Playwright mein Locator object use hota hai (not By)::HL]]
+[[HL::9          this.loginBtn = page.locator('text="login"');               // string locator text="login" use kar rahe hain::HL]]
+[[HL::10         this.empDetails = page.locator('text="employee details"');  // string locator text="employee details"::HL]]
+[[HL::11         this.manageUser = page.locator('text="manage user"');       // string locator text="manage user"::HL]]
+[[HL::12         this.logOff = page.locator('text="log off"');               // string locator text="log off"::HL]]
+[[HL::13     }::HL]]
+[[HL::14     ::HL]]
+[[HL::15     async doLogin() {                                 // Pseudocode for login action::HL]]
+[[HL::16         await this.loginBtn.click();                  // Locator object pe action perform karo::HL]]
+[[HL::17         console.log("Clicked login button");::HL]]
+[[HL::18     }::HL]]
+[[HL::19 }::HL]]
+[[HL::20 ::HL]]
+[[HL::21 // Test execution pseudocode::HL]]
+[[HL::22 // VS Code runners ke through run karenge::HL]]
+[[HL::23 test('should login', async ({ page }) => {            // Browser ka page object inject ho raha hai::HL]]
+[[HL::24     const loginPage = new LoginPage(page::HL]]);            // Page object inject karo
 25     await loginPage.doLogin();
 26 });
 ```
@@ -9013,7 +9013,7 @@ Clicked login button
 ```
 
 #### 🔬 Code Explanation
-- **Line 5:** Yahan sabse bada change hai. Selenium mein `constructor(driver)` hota tha, yahan `constructor(page)` hai.
+- [[HL::**Line 5:** Yahan sabse bada change hai. Selenium mein `constructor(driver)` hota tha, yahan `constructor(page)` hai::HL]].
 - **Lines 9-12:** Hum Playwright ke native `Locator` objects bana rahe hain. Notice karo ki hum `text="xyz"` format (String Locators) use kar rahe hain, yeh Playwright ka bohot powerful feature hai jo seedha text pe element find karta hai.
 
 ### 🔒 8. Security-First Check
@@ -9027,9 +9027,9 @@ Playwright JavaScript/Node.js environment mein bohot fast hai kyunki iska `Page`
 - **🤦 Why:** Developers apni purani aadat nahi chhodte.
 - **✅ The 'Pro' Way:** Accept karo ki WebDriver nahi hai. Sirf `Page` object aur `.locator()` methods use karo.
 
-### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Page aur Locator mein kya difference hai?" → `Page` poora browser tab hai (jisme URL dalte ho, navigation karte ho). `Locator` us tab ke andar ka ek specific element hai (jaise ek button ya textbox).
-- **Confusion 2:** "String locators kaise kaam karte hain?" → Playwright automatically string ko parse karta hai. Jab tum `text="login"` dete ho, Playwright ka engine implicitly DOM mein woh text search karta hai bina kisi complex XPath ke.
+### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Page aur Locator mein kya difference hai?" → `Page` poora browser tab hai (jisme URL dalte ho, navigation karte ho). `Locator` us tab ke andar ka ek specific element hai (jaise ek button ya textbox).::HL]]
+- [[HL::**Confusion 2:** "String locators kaise kaam karte hain?" → Playwright automatically string ko parse karta hai. Jab tum `text="login"` dete ho, Playwright ka engine implicitly DOM mein woh text search karta hai bina kisi complex XPath ke::HL]].
 
 ### 🛠️ 12. Troubleshooting Flowchart
 - Error `page is undefined`? → Check karo ki tumne constructor mein page object pass kiya hai ya nahi jab class ka instance banaya tha.
@@ -9065,11 +9065,11 @@ Selenium POM                       Playwright POM
 +-------------------+              +-------------------+
 ```
 
-### ❓ 17. Interview Q&A
-- **Q:** Playwright mein element find karne ke liye primary object kya use hota hai?
-- **A:** Playwright mein "WebDriver" jaisa koi concept nahi hai. Hum elements se interact karne ke liye `Page` object ka use karte hain, jo us specific browser context (tab) ko represent karta hai, aur element references store karne ke liye `Locator` object ka use karte hain.
-- **Q:** Root locators ya string locators Playwright mein kaise use hote hain?
-- **A:** Selenium mein hum `By.id()` ya `By.xpath()` methods use karte the. Playwright string selectors ko directly support karta hai. Jaise `page.locator('text="employee details"')` seedha us element ko locate kar lega jiska text match hoga. Yeh code ko bohot clean banata hai.
+### ❓ 17. Interview [[HL::Q&A::HL]]
+- [[HL::**Q:** Playwright mein element find karne ke liye primary object kya use hota hai?::HL]]
+- [[HL::**A:** Playwright mein "WebDriver" jaisa koi concept nahi hai. Hum elements se interact karne ke liye `Page` object ka use karte hain, jo us specific browser context (tab) ko represent karta hai, aur element references store karne ke liye `Locator` object ka use karte hain.::HL]]
+- [[HL::**Q:** Root locators ya string locators Playwright mein kaise use hote hain?::HL]]
+- [[HL::**A:** Selenium mein hum `By.id()` ya `By.xpath()` methods use karte the. Playwright string selectors ko directly support karta hai. Jaise `page.locator('text="employee details"')` seedha us element ko locate kar lega jiska text match hoga. Yeh code ko bohot clean banata hai::HL]].
 - **Q:** JavaScript/Node.js environment mein hum Playwright ko kaise setup karte hain?
 - **A:** Hum terminal mein `npm i -D @playwright/test` run karke dependencies install karte hain ek fresh project mein. Phir apni test files mein `@playwright/test` package se ES6 imports ka use karke test run karte hain.
 - **Q:** VS Code runners ka kya benefit hai Playwright ke saath?
@@ -9120,8 +9120,8 @@ Agar tum ek naye, bohot fast assistant ko hire karte ho, toh tum usko seedha "ka
 - **Hinglish Simplification:** Hum apni khud ki functions (wrappers) banate hain jo Playwright ke methods (jaise click karna ya text dalna) ko chalate hain. Yeh functions `async/await` use karte hain aur fail hone par humara AI healing logic trigger karte hain.
 
 ### 🧠 4. Why This Matters
-- **Problem:** Playwright natively `sendKeys` support nahi karta. Agar purana Selenium code direct run kiya jahan `sendKeys` hai, toh test crash ho jayega. Saath hi, Playwright `async` (asynchronous) hai, isliye actions ka wait karna padta hai.
-- **Solution:** Hum ek `playwrightHelpers.js` file banate hain utilities folder mein, jisme hum `async fill()` aur `async click()` jaise custom wrapper functions define karte hain.
+- **Probl[[HL::em:** Playwright natively `sendKeys` support nahi karta. Agar purana Selenium code direct run kiya jahan `sendKeys` hai, toh test crash ho jayega. Saath hi, Playwright `async` (asynchronous) hai, isliye actions ka wait karna padta hai::HL]].
+- [[HL::**Solution:** Hum ek `playwrightHelpers.js` file banate hain utilities folder mein, jisme hum `async fill()` aur `async click()` jaise custom wrapper functions define karte hain::HL]].
 - **What breaks if we don't use it?** Humara test suite har us jagah fail ho jayega jahan `sendKeys` use hua hai, aur bina wrappers ke, hum har click se pehle manually self-healing logic nahi likh sakte.
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -9134,8 +9134,8 @@ Agar tum ek naye, bohot fast assistant ko hire karte ho, toh tum usko seedha "ka
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
 1. **The missing sendKeys:** Speaker ko realize hota hai ki Playwright JavaScript mein `sendKeys` exist hi nahi karta. Isko completely `fill()` method se replace karna padta hai.
-2. **Async/Await Pattern:** JavaScript Promises (asynchronous operations ka result handle karne ka object) par kaam karta hai. Isliye har Playwright interaction ko `await` keyword chahiye taaki code next line pe tab tak na jaye jab tak current action pura na ho.
-3. **Wrapper Creation:** Humare custom methods (`fillAsync`, `clickAsync`) banaye jate hain. Yeh methods andar pehle element ko locate karte hain, zarurat padne par `aiLocator` (self-healing) ko call karte hain, aur phir actual Playwright `click()` ya `fill()` execute karte hain.
+2. [[HL::**Async/Await Pattern:** JavaScript Promises (asynchronous operations ka result handle karne ka object) par kaam karta hai. Isliye har Playwright interaction ko `await` keyword chahiye taaki code next line pe tab tak na jaye jab tak current action pura na ho.::HL]]
+3. [[HL::**Wrapper Creation:** Humare custom methods (`fillAsync`, `clickAsync`) banaye jate hain. Yeh methods andar pehle element ko locate karte hain, zarurat padne par `aiLocator` (self-healing) ko call karte hain, aur phir actual Playwright `click()` ya `fill()` execute karte hain::HL]].
 
 ### 💻 7. Hands-On — Runnable Example
 
@@ -9146,13 +9146,13 @@ Agar tum ek naye, bohot fast assistant ko hire karte ho, toh tum usko seedha "ka
 4          this.page = page;                                            // page object ko class level pe set kar diya
 5      }
 6  
-7      // Custom async method for clicking
-8      async clickAsync(stringSelector) {                               // string selector receive karta hai (jaise '#UserName')
-9          // Yahan hum try-catch laga ke self-healing (aiLocator) inject kar sakte hain
-10         const locatorType = this.page.locator(stringSelector);       // page.locator() se string selector ko Locator object banaya
-11         await locatorType.click();                                   // Playwright native click() ko await kiya
-12         console.log(`Clicked on element: ${stringSelector}`);        // Success log
-13     }
+7      // [[HL::Custom async method for clicking::HL]]
+[[HL::8      async clickAsync(stringSelector) {                               // string selector receive karta hai (jaise '#UserName')::HL]]
+[[HL::9          // Yahan hum try-catch laga ke self-healing (aiLocator) inject kar sakte hain::HL]]
+[[HL::10         const locatorType = this.page.locator(stringSelector);       // page.locator() se string selector ko Locator object banaya::HL]]
+[[HL::11         await locatorType.click();                                   // Playwright native click() ko await kiya::HL]]
+[[HL::12         console.log(`Clicked on element: ${stringSelector}`);        // Success log::HL]]
+[[HL::13::HL]]     }
 14 
 15     // Custom async method for entering text (Replacement for sendKeys)
 16     async fillAsync(stringSelector, textValue) {                     // string selector aur jo text dalna hai woh receive karta hai
@@ -9164,7 +9164,7 @@ Agar tum ek naye, bohot fast assistant ko hire karte ho, toh tum usko seedha "ka
 22 
 23 // Test Usage (pseudocode for login page class setup):
 24 const helper = new PlaywrightHelpers(page);                          // Helper ka instance banaya
-25 await helper.fillAsync('#UserName', 'admin123');                     // CSS selector #UserName mein value dali
+25 [[HL::await helper.fillAsync('#UserName', 'admin123::HL]]');                     // CSS selector #UserName mein value dali
 26 await helper.fillAsync('#Password', 'Secret!1');                     // CSS selector #Password mein value dali
 27 await helper.clickAsync('.login-btn');                               // button pe click kiya
 ```
@@ -9194,8 +9194,8 @@ Jab hum `fill()` method se text input field mein data bhejte hain, toh testing f
 - **🤦 Why:** Code aage badh jayega bina click hue aur test flaky/fail ho jayega.
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "`click()` aur `clickAsync()` mein kya fark hai?" → `click()` Playwright ka apna in-built function hai. `clickAsync()` humara banaya hua custom function hai jiske andar humne pehle apna self-healing/logging ka logic dala hai, aur phir andar Playwright ke `click()` ko call kiya hai.
-- **Confusion 2:** "Constructor mein page pass kyun karna hai baar baar?" → Kyunki `page` hi wo connection hai jo tumhari script ko actual browser tab se jodta hai. Uske bina tumhara helper class andha hai.
+- [[HL::**Confusion 1:** "`click()` aur `clickAsync()` mein kya fark hai?" → `click()` Playwright ka apna in-built function hai. `clickAsync()` humara banaya hua custom function hai jiske andar humne pehle apna self-healing/logging ka logic dala hai, aur phir andar Playwright ke `click()` ko call kiya hai::HL]].
+- [[HL::**Confusion 2:** "Constructor mein page pass kyun karna hai baar baar?" → Kyunki `page` hi wo connection hai jo tumhari script ko actual browser tab se jodta hai. Uske bina tumhara helper class andha hai::HL]].
 
 ### 🛠️ 12. Troubleshooting Flowchart
 - Error `TypeError: locatorType.sendKeys is not a function` aa raha hai? → Turant apna code check karo, `sendKeys` hatai ke usko `fill` se replace karo.
@@ -9236,13 +9236,13 @@ Playwright Native Engine (Page)
 Browser executes Action
 ```
 
-### ❓ 17. Interview Q&A
-- **Q:** Playwright mein hum inputs enter karne ke liye kya use karte hain aur kyu?
-- **A:** Playwright JavaScript mein hum `.fill()` method use karte hain. Selenium ka popular method `.sendKeys()` Playwright JS mein explicitly exist nahi karta. `fill()` zyada robust hai kyunki yeh text enter karne se pehle field ko clear karta hai aur focus events fire karta hai.
-- **Q:** Helper classes jaise `PlaywrightHelpers` banane ka mukhya fayda kya hai?
-- **A:** Sabse bada fayda centralization hai. Agar hume har click action se pehle AI self-healing logic (aiLocator) chalana hai, toh hume use pure project mein copy-paste nahi karna padta. Hum sirf ek helper class mein logic likhte hain aur pure project mein wahi custom methods (jaise `clickAsync`) use karte hain.
-- **Q:** Kya Playwright mein `async/await` lagana mandatory hai? Agar na lagayein toh kya hoga?
-- **A:** Haan, Playwright JS ka architecture purely asynchronous hai. Agar hum `.click()` ya `.fill()` ke aage `await` nahi lagate, toh JavaScript Promise resolve hone ka wait nahi karegi aur agli line of code execute ho jayegi, jisse UI sync out ho jayega aur test flaky/fail ho jayega.
+### ❓ 17. Interview [[HL::Q&A::HL]]
+- [[HL::**Q:** Playwright mein hum inputs enter karne ke liye kya use karte hain aur kyu?::HL]]
+- [[HL::**A:** Playwright JavaScript mein hum `.fill()` method use karte hain. Selenium ka popular method `.sendKeys()` Playwright JS mein explicitly exist nahi karta. `fill()` zyada robust hai kyunki yeh text enter karne se pehle field ko clear karta hai aur focus events fire karta hai.::HL]]
+- [[HL::**Q:** Helper classes jaise `PlaywrightHelpers` banane ka mukhya fayda kya hai?::HL]]
+- [[HL::**A:** Sabse bada fayda centralization hai. Agar hume har click action se pehle AI self-healing logic (aiLocator) chalana hai, toh hume use pure project mein copy-paste nahi karna padta. Hum sirf ek helper class mein logic likhte hain aur pure project mein wahi custom methods (jaise `clickAsync`) use karte hain.::HL]]
+- [[HL::**Q:** Kya Playwright mein `async/await` lagana mandatory hai? Agar na lagayein toh kya hoga?::HL]]
+- [[HL::**A:** Haan, Playwright JS ka architecture purely asynchronous hai. Agar hum `.click()` ya `.fill()` ke aage `await` nahi lagate, toh JavaScript Promise resolve hone ka wait nahi karegi aur agli line of code execute ho jayegi, jisse UI sync out ho jayega aur test flaky/fail ho jayega::HL]].
 - **Q:** Jab hum `.locator()` ko pass karte hain, toh kis format mein selector dete hain?
 - **A:** Hum simple string format (string selector) mein selector pass karte hain, jaise CSS selector `#UserName` ya XPath. Playwright ka engine automatically us string ko parse karke element dhundh leta hai.
 - **Q:** Page object class setup ke waqt constructor ka kya role hota hai helper class mein?
@@ -9272,8 +9272,8 @@ Maan lo ek factory mein ek bohot purani aur powerful machine hai ("the beast") j
 - **Hinglish Simplification:** Jo humara main self-healing engine (selfHealingLocator) hai, usme hum Selenium ke purane types (jaise `browser` object) ko hata kar Playwright ke nayi cheezein (`page` aur string locators) lagate hain, taaki framework crash na ho. Lekin isse humara bahar ka client code (LMS client) bilkul unchanged rehta hai.
 
 ### 🧠 4. Why This Matters
-- **Problem:** Migration ke baad purani self-healing class (jise speaker "beast" bulata hai) mein multiple runtime errors aate hain kyunki TypeScript/JavaScript ko purane `browser` aur `By` data types nahi milte. 
-- **Solution:** Hum class properties ko refactor karte hain. `browser` ko `page` se replace karte hain aur location strategy ko `string` type mein convert karte hain.
+- [[HL::**Problem:** Migration ke baad purani self-healing class (jise speaker "beast" bulata hai) mein multiple runtime errors aate hain kyunki TypeScript/JavaScript ko purane `browser` aur `By` data types nahi milte. ::HL]]
+- [[HL::**Solution:** Hum class properties ko refactor karte hain. `browser` ko `page` se replace karte hain aur location strategy ko `string` type mein convert karte hain::HL]].
 - **What breaks if we don't use it?** Core AI component start hi nahi hoga, red underline errors poori file mein aayenge (jaise ES6 imports fail hona) aur test execution block ho jayega.
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -9426,7 +9426,7 @@ Total Topics: 4 | Total Keywords: 61 | Missed: 0
 
 ### 📚 Section Overview: Persistence Cache Implementation (Selenium: Python)
 
-Is section mein hum apne existing self-healing locator (jo AI use karta hai) ko aur smart banayenge. AI baar-baar same fail hone wale locators ke liye expensive API calls karta hai. Isko rokne ke liye hum ek persistence cache (local memory/file storage) build karenge taaki ek baar heal hua locator locally save ho jaye aur next time bina AI ke instantly execute ho. Chalo isey step-by-step todte hain!
+[[HL::Is section mein hum apne existing self-healing locator (jo AI use karta hai) ko aur smart banayenge. AI baar-baar same fail hone wale locators ke liye expensive API calls karta hai. Isko rokne ke liye hum ek persistence cache (local memory/file storage) build karenge taaki ek baar heal hua locator locally save ho jaye aur next time bina AI ke instantly execute ho. Chalo isey step-by-step todte hain::HL]]!
 
 ---
 
@@ -9440,9 +9440,9 @@ Socho tum ek rasta bhool gaye ho aur rasta puchne ke liye har baar ek expert gui
 - **Hinglish Simplification:** Abhi hamara system self-healing toh kar raha hai, par uski memory sirf ek test run tak seemit hai (no persistence). Har naye test run mein woh fail hone par wapas AI ko call karta hai naya locator dhoondhne ke liye.
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Jab element ka primary locator (jaise missing ID) fail hota hai, system dictionary (dict — Python ka key-value data structure) mein save hui in-memory collection ko use karta hai. Par test end hote hi yeh wipe ho jati hai. Isse LLMs (Large Language Models — AI models jaise GPT jo text process karte hain) ko baar-baar call karna padta hai.
-- **Solution:** Ek local cache system banana padega jo test run ke baad bhi data yaad rakhe (persistence).
-- **What breaks if we don't use it?** Ek normal test jo 4 seconds max mein complete hona chahiye, AI delays ki wajah se 15 to 20s le raha hai, aur token usage (AI API ka cost metric) bohot badh raha hai.
+- [[HL::**Problem:** Jab element ka primary locator (jaise missing ID) fail hota hai, system dictionary (dict — Python ka key-value data structure) mein save hui in-memory collection ko use karta hai. Par test end hote hi yeh wipe ho jati hai. Isse LLMs (Large Language Models — AI models jaise GPT jo text process karte hain) ko baar-baar call karna padta hai.::HL]]
+- [[HL::**Solution:** Ek local cache system banana padega jo test run ke baad bhi data yaad rakhe (persistence).::HL]]
+- [[HL::**What breaks if we don't use it?** Ek normal test jo 4 seconds max mein complete hona chahiye, AI delays ki wajah se 15 to 20s le raha hai, aur token usage (AI API ka cost metric) bohot badh raha hai::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 *(N/A — is concept mein koi direct visual/editor state nahi hota, yeh purely architectural problem hai)*
@@ -9477,8 +9477,8 @@ Cloud CI/CD pipelines mein jahan hazaro tests parallel mein run hote hain, wahan
 - **🤦 Why:** Log sochte hain "AI sab sambhal lega", par token cost aur execution time bhool jate hain.
 - **✅ The 'Pro' Way:** AI ko sirf first time fail hone pe use karo (as a fallback), aur uska result local storage mein cache kar lo.
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "AI test pass kar raha hai toh problem kya hai?" → Problem execution speed aur cost ki hai. 4s ka test 20s le raha hai, jo automation ke main purpose (speed) ko harata hai.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "AI test pass kar raha hai toh problem kya hai?" → Problem execution speed aur cost ki hai. 4s ka test 20s le raha hai, jo automation ke main purpose (speed) ko harata hai::HL]].
 - **Confusion 2:** "Visibility kam hone ka kya matlab hai?" → Agar test pass ho gaya, toh developer code review nahi karega. Missing ID ek actual bug hai jo AI ne mask kar diya. Hamein log/report chahiye taaki developers isko fix karein.
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
@@ -9529,8 +9529,8 @@ BrowserStack ya Sauce Labs (cloud testing platforms — jahan tests remote brows
 - **Q:** Token usage kya hota hai aur yeh testing cost ko kaise badhata hai?
 - **A:** Jab hum LLMs (jaise OpenAI/Claude) ko API ke through use karte hain, toh woh input/output text ko 'tokens' mein count karte hain aur us basis pe charge karte hain. Baar-baar fail hone wale tests agar baar-baar LLM call karenge, toh billing cost unexpectedly high ho jayegi.
 
-- **Q:** Ek standard test mein alternative locator kya hota hai?
-- **A:** Agar tumhara test `By.Id("login-btn")` dhoondh raha hai (original locator) aur woh fail ho gaya, toh AI us element tak pahunchne ka dusra rasta dhoondhta hai, jaise `By.CssSelector(".btn-primary")`. Isey alternative locator kehte hain.
+- **Q:** Ek [[HL::standard test mein alternative locator kya hota hai?::HL]]
+- [[HL::**A:** Agar tumhara test `By.Id("login-btn")` dhoondh raha hai (original locator) aur woh fail ho gaya, toh AI us element tak pahunchne ka dusra rasta dhoondhta hai, jaise `By.CssSelector(".btn-primary")`. Isey alternative locator kehte hain::HL]].
 
 #### 📝 18. One-Line Memory Hook
 "Bina persistence ke AI gajni ban jata hai — har baar naya rasta dhoondhta hai aur bill badhata hai!"
@@ -9554,31 +9554,31 @@ Puraane approach mein tum direct doctor (AI) ke paas ja rahe the. Ab humne beech
 
 #### 📖 3. Technical Definition
 - **Precise English:** The new architecture introduces a persistence layer acting as a "Step 1.5" middleware. It intercepts locator failures, checks a JSON file in the `__pycache__` folder for previously healed alternative locators, and directly utilizes them, falling back to the Large Language Model only if no cached entry exists.
-- **Hinglish Simplification:** Ek naya model banaya ja raha hai jahan AI ke paas jane se pehle system ek local JSON file (cache) check karega. Agar kaam karne wala locator pehle se saved hai toh seedha use kar lega, aur agar AI naya locator dhoondhta hai toh use is file mein update kar dega.
+- [[HL::**Hinglish Simplification:** Ek naya model banaya ja raha hai jahan AI ke paas jane se pehle system ek local JSON file (cache) check karega. Agar kaam karne wala locator pehle se saved hai toh seedha use kar lega, aur agar AI naya locator dhoondhta hai toh use is file mein update kar dega::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Direct large language model (LLM — AI models jo human jaisi text processing karte hain) pe hit karna time aur paisa waste karta hai.
-- **Solution:** Ek persistence cache banaya gaya hai. Yeh essentially ek file hai jo tumhare project folder mein hi rahegi aur pehle dhoondhe gaye alternative locators ko yaad rakhegi.
+- [[HL::**Problem:** Direct large language model (LLM — AI models jo human jaisi text processing karte hain) pe hit karna time aur paisa waste karta hai.::HL]]
+- [[HL::**Solution:** Ek persistence cache banaya gaya hai. Yeh essentially ek file hai jo tumhare project folder mein hi rahegi aur pehle dhoondhe gaye alternative locators ko yaad rakhegi::HL]].
 - **What breaks if we don't use it?** Wahi purani slower testing aur heavy billing. 
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```text
-MySeleniumProject/
-│
-├── tests/
-│   └── login_test.py
-│
-├── __pycache__/             <-- Python is folder ko internally use karta hai
-│   └── healed-locator.json  <-- Hamara cache file yahan save hoga
+[[HL::MySeleniumProject/::HL]]
+[[HL::│::HL]]
+[[HL::├── tests/::HL]]
+[[HL::│   └── login_test.py::HL]]
+[[HL::│::HL]]
+[[HL::├── __pycache__/             <-- Python is folder ko internally use karta hai::HL]]
+[[HL::│   └── healed-locator.json  <-- Hamara cache file yahan save hoga::HL]]
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-Hamari new workflow mein ek Healed Locator model banaya gaya hai:
-1. **Step 1:** WebDriver original locator (`By.Id`, value: "username" ya `By.LinkText`) se element dhoondhne ki koshish karta hai.
-2. **⭐ 1.5 step (Check Cache):** Fail hone par turant AI ke paas jane ke bajaye, system cache check karta hai. Woh `original locator` ke string version (`.__str__()`) ko as a key dhundhta hai.
-3. **If Found:** Agar cache mein working locator type aur working locator value mil jaye, toh seedha usko use karta hai.
-4. **If Not Found (Call AI):** Agar cache mein kuch nahi milta, toh AI call hota hai ek alternative locator dhoondhne ke liye.
-5. **Update Cache:** AI jo naya locator dhoondhta hai, use wapas cache JSON file mein ISO type data date and time (e.g., `2026-04-18T23:10:26Z`) ke saath update/save kar diya jata hai.
+[[HL::Hamari new workflow mein ek Healed Locator model banaya gaya hai:::HL]]
+1. [[HL::**Step 1:** WebDriver original locator (`By.Id`, value: "username" ya `By.LinkText`) se element dhoondhne ki koshish karta hai.::HL]]
+2. [[HL::**⭐ 1.5 step (Check Cache):** Fail hone par turant AI ke paas jane ke bajaye, system cache check karta hai. Woh `original locator` ke string version (`.__str__()`) ko as a key dhundhta hai.::HL]]
+3. [[HL::**If Found:** Agar cache mein working locator type aur working locator value mil jaye, toh seedha usko use karta hai.::HL]]
+4. [[HL::**If Not Found (Call AI):** Agar cache mein kuch nahi milta, toh AI call hota hai ek alternative locator dhoondhne ke liye.::HL]]
+5. [[HL::**Update Cache:** AI jo naya locator dhoondhta hai, use wapas cache JSON file mein ISO type data date and time (e.g., `2026-04-18T23:10:26Z`) ke saath update/save kar diya jata hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 *(Yeh ek architecture model demo hai ki data kaisa dikhega. Full class logic aage aayega)*
@@ -9587,46 +9587,46 @@ Hamari new workflow mein ek Healed Locator model banaya gaya hai:
 1  import json           # json module — Python dictionaries aur JSON files ke beech data convert karta hai
 2  import datetime       # datetime module — current date/time nikalne ke liye
 3
-4  # Yeh Healed Locator ka data model hai jo JSON file mein save hoga
-5  cache_data = {
-6      "By.id('username')": {                              # original locator ka string representation (.__str__())
-7          "working_locator_type": "css selector",         # working locator type
-8          "working_locator_value": "[name='user_name']",  # working locator value
-9          "healed_at": datetime.datetime.now().isoformat() # ISO type data date and time string
-10     }
-11 }
+4  # [[HL::Yeh Healed Locator ka data model hai jo JSON file mein save hoga::HL]]
+[[HL::5  cache_data = {::HL]]
+[[HL::6      "By.id('username')": {                              # original locator ka string representation (.__str__())::HL]]
+[[HL::7          "working_locator_type": "css selector",         # working locator type::HL]]
+[[HL::8          "working_locator_value": "[name='user_name']",  # working locator value::HL]]
+[[HL::9          "healed_at": datetime.datetime.now().isoformat() # ISO type data date and time string::HL]]
+[[HL::10     }::HL]]
+[[HL::11::HL]] }
 12
 13 print(json.dumps(cache_data, indent=2))                 # json.dumps() — dictionary ko readable JSON string mein format karta hai
 ```
 
 ```text
-# 📤 Expected Output:
-{
-  "By.id('username')": {
-    "working_locator_type": "css selector",
-    "working_locator_value": "[name='user_name']",
-    "healed_at": "2026-04-18T23:10:26.123456"
-  }
-}
+# [[HL::📤 Expected Output:::HL]]
+[[HL::{::HL]]
+[[HL::  "By.id('username')": {::HL]]
+[[HL::    "working_locator_type": "css selector",::HL]]
+[[HL::    "working_locator_value": "[name='user_name']",::HL]]
+[[HL::    "healed_at": "2026-04-18T23:10:26.123456"::HL]]
+[[HL::  }::HL]]
+[[HL::}::HL]]
 ```
 ##### 🔬 Code Explanation
-- **Line 6:** `By.id('username')` ek example hai ki `.__str__()` (Python ka built-in string conversion method) output kaisa dega. Isko hum dictionary ki key banayenge.
+- [[HL::**Line 6:** `By.id('username')` ek example hai ki `.__str__()` (Python ka built-in string conversion method) output kaisa dega. Isko hum dictionary ki key banayenge.::HL]]
 - **Line 9:** `.isoformat()` standard ISO format mein time deta hai, jo JSON mein easily parse ho jata hai alag-alag languages mein.
 
 #### 🔒 8. Security-First Check
-Cache file (`healed-locator.json`) mein hum sirf UI locators save kar rahe hain. Isme kabhi bhi user data, passwords, ya sensitive info log nahi honi chahiye. File permissions strict rakhni chahiye taaki koi malicious script test ko manipulate karke galat elements click na karwa de.
+[[HL::Cache file (`healed-locator.json`) mein hum sirf UI locators save kar rahe hain. Isme kabhi bhi user data, passwords, ya sensitive info log nahi honi chahiye::HL]]. File permissions strict rakhni chahiye taaki koi malicious script test ko manipulate karke galat elements click na karwa de.
 
 #### 🏗️ 9. Scalability & Industry Context
-Humein is chote se kaam ke liye SQL server database ya MongoDB (NoSQL database — documents store karne ke liye) jaisi heavy dependencies set up karne ki zaroorat nahi hai. Local project ke liye flat JSON file `__pycache__` directory mein kaafi scalable, portable aur lightweight hai.
+[[HL::Humein is chote se kaam ke liye SQL server database ya MongoDB (NoSQL database — documents store karne ke liye) jaisi heavy dependencies set up karne ki zaroorat nahi hai. Local project ke liye flat JSON file `__pycache__` directory mein kaafi scalable, portable aur lightweight hai::HL]].
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
 - **❌ Mistake:** Cache logic ko test method ke andar hi likh dena.
 - **🤦 Why:** Code bohot messy ho jayega aur reusability zero ho jayegi.
 - **✅ The 'Pro' Way:** Is logic ko ek middle layer (⭐ 1.5 step) mein encapsulate karo, jise framework dynamically inject kare.
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Database use kyun nahi kiya, JSON file kyun?" → Ek choti testing team ko simple testing script chalane ke liye pura SQL server database ya MongoDB set up karna over-engineering hai. JSON file track karna aur version control se ignore karna easy hota hai.
-- **Confusion 2:** "`__pycache__` folder hi kyun use kiya?" → Kyunki yeh folder by default `.gitignore` mein hota hai. Hum nahi chahte ki ek dev ka local healed cache dusre dev ke machine par commit ho jaye.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Database use kyun nahi kiya, JSON file kyun?" → Ek choti testing team ko simple testing script chalane ke liye pura SQL server database ya MongoDB set up karna over-engineering hai. JSON file track karna aur version control se ignore karna easy hota hai.::HL]]
+- [[HL::**Confusion 2:** "`__pycache__` folder hi kyun use kiya?" → Kyunki yeh folder by default `.gitignore` mein hota hai. Hum nahi chahte ki ek dev ka local healed cache dusre dev ke machine par commit ho jaye::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 - Cache check nahi ho raha? -> Check karo JSON file ka path sahi hai ya nahi.
@@ -9665,9 +9665,9 @@ Playwright (browser automation tool — modern web testing ke liye) aur Cypress 
              [Update Cache with ISO Date]
 ```
 
-#### ❓ 17. Interview Q&A (FAQ)
-- **Q:** "Step 1.5" architecture ka self-healing framework mein kya role hai?
-- **A:** Step 1 hota hai original locator ka fail hona, aur Step 2 hota hai AI ko call karna. "Step 1.5" in dono ke beech ka middle layer hai jahan framework local persistence cache check karta hai taaki unnecessary AI calls ko bypass kiya ja sake.
+#### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
+- [[HL::**Q:** "Step 1.5" architecture ka self-healing framework mein kya role hai?::HL]]
+- [[HL::**A:** Step 1 hota hai original locator ka fail hona, aur Step 2 hota hai AI ko call karna. "Step 1.5" in dono ke beech ka middle layer hai jahan framework local persistence cache check karta hai taaki unnecessary AI calls ko bypass kiya ja sake::HL]].
 
 - **Q:** SQL database ya MongoDB ki jagah JSON file kyun prefer ki gayi is architecture mein?
 - **A:** Testing framework ko lightweight aur portable rakhne ke liye. Agar hum SQL server database add karenge, toh environment setup complex ho jayega. `__pycache__` mein JSON file local storage ka kaam safely aur fast kar deti hai bina overhead ke.
@@ -9743,13 +9743,13 @@ Selenium_Project/
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. Speaker explicitly batata hai ki playwright self-healing test project ko is execution se bahar rakha gaya hai, humara pura focus strictly selenium self-healing test project par hai.
-2. **Healed Locator class** mein 4 properties hongi:
-   - `locator`: Original string jo fail hui.
-   - `working_locator_types`: AI ne konsa naya rasta diya (e.g., CSS).
-   - `working_locator_values`: Us raste ki actual value.
-   - `healed_at`: Date aur time.
-3. **Locator Cache class** ka kaam hai locators ko store locators, get locators, aur load locator functions handle karna.
+1. Speaker [[HL::explicitly batata hai ki playwright self-healing test project ko is execution se bahar rakha gaya hai, humara pura focus strictly selenium self-healing test project par hai.::HL]]
+2. [[HL::**Healed Locator class** mein 4 properties hongi:::HL]]
+   - [[HL::`locator`: Original string jo fail hui.::HL]]
+   - [[HL::`working_locator_types`: AI ne konsa naya rasta diya (e.g., CSS).::HL]]
+   - [[HL::`working_locator_values`: Us raste ki actual value.::HL]]
+   - [[HL::`healed_at`: Date aur time.::HL]]
+3. [[HL::**Locator Cache class** ka kaam hai locators ko store locators, get locators, aur load locator functions handle karna::HL]].
 4. Sabse critical part hai **cache path** nikalna. Hardcoded string path (jaise `C:/Users/dev/...`) kaam nahi karega, isliye hum `os.path.dirname(__file__)` use karenge jo automatically current script ka relative path nikalta hai.
 
 #### 💻 7. Hands-On — Runnable Example
@@ -9838,8 +9838,8 @@ Large automation repositories jo Docker (containerization tool — app ko isolat
 - **Q:** Hardcoded paths automation frameworks mein kyun avoid karne chahiye?
 - **A:** Hardcoded paths project ko ek specific machine (machine-dependent) se baandh dete hain. Jab project Git ke through kisi aur server ya colleague ke system par clone hota hai, toh folder structure alag hone ki wajah se execution crash ho jayega.
 
-- **Q:** Healed Locator class kya properties contain karta hai?
-- **A:** Is class mein fail hui original locator string, working locator types, working locator values, aur `healed_at` timestamp save hoti hai.
+- [[HL::**Q:** Healed Locator class kya properties contain karta hai?::HL]]
+- [[HL::**A:** Is class mein fail hui original locator string, working locator types, working locator values, aur `healed_at` timestamp save hoti hai::HL]].
 
 - **Q:** Playwright aur Selenium mein se speaker ne kise chuna aur kyun?
 - **A:** Speaker ne purely selenium self-healing test project ko chuna hai demo ke liye, jabki playwright self-healing test ko intentionally exclude kiya hai taaki concept ek hi architecture pe deeply samjhaya ja sake.
@@ -9868,11 +9868,11 @@ Yeh process bilkul phonebook mein naya number update karne jaisa hai. Tumhara do
 
 #### 📖 3. Technical Definition
 - **Precise English:** Implementing the core logic within the framework's fallback mechanism (`tryAlternativeStrategies`) to save the successfully healed locator. It involves checking for existing entries using Python's `next()` function, updating them if found, or adding a new record to the cache list.
-- **Hinglish Simplification:** Jab AI element dhoondh leta hai, hum use cache mein save karte hain. Pehle check karte hain ki kya purana record pehle se exist karta hai, agar haan toh use update karo, warna list mein naya entry add kar do.
+- [[HL::**Hinglish Simplification:** Jab AI element dhoondh leta hai, hum use cache mein save karte hain. Pehle check karte hain ki kya purana record pehle se exist karta hai, agar haan toh use update karo, warna list mein naya entry add kar do::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Agar hum check bina kiye bas locators ko file mein dalte jayenge, toh ek hi element ki 100 duplicate entries ban jayengi jo JSON size ko bloat kar dengi.
-- **Solution:** Duplicate entry check aur update logic (`SaveHealedLocator`) lagana zaroori hai.
+- [[HL::**Problem:** Agar hum check bina kiye bas locators ko file mein dalte jayenge, toh ek hi element ki 100 duplicate entries ban jayengi jo JSON size ko bloat kar dengi.::HL]]
+- [[HL::**Solution:** Duplicate entry check aur update logic (`SaveHealedLocator`) lagana zaroori hai::HL]].
 - **What breaks if we don't use it?** Cache file ka size GBs mein badh sakta hai aur execution actually fast hone ki jagah slow ho jayega.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -9888,14 +9888,14 @@ Yeh process bilkul phonebook mein naya number update karne jaisa hai. Tumhara do
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 Execution workflow ko dhyan se samjho:
-1. Framework ke andar ek main method hota hai: `tryAlternativeStrategies` (jo fail hone par alternate ways try karta hai).
-2. Jab yahan success milta hai, hum ek naya method call karte hain `SaveHealedLocator`.
-3. Hum input mein pass karte hain **original locator string** (e.g., `By.find_element` ki parameter like `Name`, value: `Login`). Us object pe `.__str__()` call hota hai taaki woh ek readable text ban jaye.
-4. Framework current strategy se **locator type** (kaunsa rasta) aur **locator value** (uski ID/Class) nikalta hai.
-5. Cache dictionary/list mein check lagta hai `next()` function se ki kya `existing != None` hai?
-6. **Update:** Agar `existing` milta hai, toh uska `existing.workingLocatorType` overwrite hota hai aur `existing.healedAt` mein `datetime.now()` se current time dalta hai.
-7. **Add:** Agar nahi milta, toh list mein `_cache.Add` method use karke naya object push hota hai.
-*(Note: Abhi data sirf memory mein save to a file logic ke bina list mein jama ho raha hai. Actual JSON file write next lecture mein aayega).*
+1. [[HL::Framework ke andar ek main method hota hai: `tryAlternativeStrategies` (jo fail hone par alternate ways try karta hai).::HL]]
+2. [[HL::Jab yahan success milta hai, hum ek naya method call karte hain `SaveHealedLocator`.::HL]]
+3. [[HL::Hum input mein pass karte hain **original locator string** (e.g., `By.find_element` ki parameter like `Name`, value: `Login`). Us object pe `.__str__()` call hota hai taaki woh ek readable text ban jaye.::HL]]
+4. [[HL::Framework current strategy se **locator type** (kaunsa rasta) aur **locator value** (uski ID/Class) nikalta hai.::HL]]
+5. [[HL::Cache dictionary/list mein check lagta hai `next()` function se ki kya `existing != None` hai?::HL]]
+6. [[HL::**Update:** Agar `existing` milta hai, toh uska `existing.workingLocatorType` overwrite hota hai aur `existing.healedAt` mein `datetime.now()` se current time dalta hai.::HL]]
+7. [[HL::**Add:** Agar nahi milta, toh list mein `_cache.Add` method use karke naya object push hota hai.::HL]]
+[[HL::*(Note: Abhi data sirf memory mein save to a file logic ke bina list mein jama ho raha hai. Actual JSON file write next lecture mein aayega::HL]]).*
 
 #### 💻 7. Hands-On — Runnable Example
 ```python
@@ -10107,7 +10107,7 @@ __pycache__/
 ```
 
 ##### 🔬 Code Explanation
-- **Line 10-19 (`try-except`):** File handling system level operation hai. OS kisi bhi wajah se operation reject kar sakta hai. `try-except` script ko crash hone se bachata hai.
+- [[HL::**Line 10-19 (`try-except`):** File handling system level operation hai. OS kisi bhi wajah se operation reject kar sakta hai. `try-except` script ko crash hone se bachata hai::HL]].
 - **Line 12 (`json.dumps`):** Speaker ke `json.Serialize` aur `WriteIndented = true` (jo C# / `net 9` syntax hai) ka python equivalent `json.dumps(..., indent=4)` hai. Yeh list ko human-readable JSON string banata hai.
 - **Line 15 (`open(..., "w")`):** "w" mode purani file ko truncate (delete karke zero se start) kar deta hai. Agar framework ne memory load nahi ki (jo constructor bug ki wajah se ho raha hai), toh poori file blank se overwrite ho jayegi.
 
@@ -10318,8 +10318,8 @@ Jab tum Chrome browser accidentally band kar dete ho aur restart karne pe "Resto
 - **A:** Exception aane ki jagah framework directly next block of code mein jump karta hai jahan ek new list initialize `[]` hoti hai, jo ki perfectly normal state hai pehle test execution ke liye.
 - **Q:** `open(file).read()` function kaise internally memory handle karta hai?
 - **A:** Woh hard drive file system se pure blocks padh kar poora buffer memory ki ek string variable mein load kar deta hai jiske upar JSON parser deserialization process chala sake.
-- **Q:** `json.loads` aur `json.dumps` ka relation framework mein kis tarah dikh raha hai?
-- **A:** Dono exact opposite function perform kar rahe hain. `loads` data ko JSON string se system object (List) mein lata hai (reading layer pe), aur `dumps` object se JSON string banata hai (writing/save layer pe).
+- [[HL::**Q:** `json.loads` aur `json.dumps` ka relation framework mein kis tarah dikh raha hai?::HL]]
+- [[HL::**A:** Dono exact opposite function perform kar rahe hain. `loads` data ko JSON string se system object (List) mein lata hai (reading layer pe), aur `dumps` object se JSON string banata hai (writing/save layer pe::HL]]).
 - **Q:** Python mein try-except construct read logic mein lagana kya benefit deta hai yahan?
 - **A:** JSON files read hote waqt external manipulation se easily corrupt ho jati hain (JSONDecodeError). Try-except un exceptions ko gracefully catch karke test fail hone se pehle user ko proper debug error print kara deta hai.
 
@@ -10370,24 +10370,24 @@ Socho tumhare paas ek recipe book (JSON file) hai jisme Hindi mein likha hai "Na
 
 #### 📖 3. Technical Definition
 - **Precise English:** Implementing the "Step 1.5" layer by parsing JSON strings and dynamically typecasting them into Selenium `By` class objects using a refactored `if/elif` routing mechanism (`create_by_type`), safely executing the locator via a `try_find_with_cached_locator` wrapper handling `NoSuchElementException`.
-- **Hinglish Simplification:** JSON mein data string format mein hota hai. Hum us string (jaise "Id", "Name") ko Selenium ke aslee locator objects (`By.ID`, `By.NAME`) mein convert karne ka logic bana rahe hain taaki script cached locator ko successfully dhoondh sake.
+- [[HL::**Hinglish Simplification:** JSON mein data string format mein hota hai. Hum us string (jaise "Id", "Name") ko Selenium ke aslee locator objects (`By.ID`, `By.NAME`) mein convert karne ka logic bana rahe hain taaki script cached locator ko successfully dhoondh sake::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Python ka JSON parser sab kuch string (`"By.Id"`) bana deta hai. Par Selenium ka `driver.find_element` function string accept nahi karta, usko ek object/Tuple chahiye hota hai.
-- **Solution:** Ek helper function `create_by_type` banana jo strings map kare (if/elif routing) aur ek execution wrapper `try_find_with_cached_locator` banana jo ishe safely run kare.
-- **What breaks if we don't use it?** Framework crash ho jayega `TypeError` dekar kyunki Selenium strings ko invalid locator type manta hai.
+- [[HL::**Problem:** Python ka JSON parser sab kuch string (`"By.Id"`) bana deta hai. Par Selenium ka `driver.find_element` function string accept nahi karta, usko ek object/Tuple chahiye hota hai.::HL]]
+- [[HL::**Solution:** Ek helper function `create_by_type` banana jo strings map kare (if/elif routing) aur ek execution wrapper `try_find_with_cached_locator` banana jo ishe safely run kare.::HL]]
+- [[HL::**What breaks if we don't use it?** Framework crash ho jayega `TypeError` dekar kyunki Selenium strings ko invalid locator type manta hai::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 *(Yeh practical concept hai jisme code architecture refactor hoga. Editor mein framework layer ka if/elif block expand hota hua dikhega)*
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
 Execution architecture is tarah kaam karta hai:
-1. **Step 1.5 (Cache Execution):** Original locator fail hone ke baad, framework turant `try_get_healed_locator` method ko call karta hai cache mein check karne ke liye.
-2. Agar entry milti hai, toh yeh function ek **return tuple pattern** (Tuple — Python ka data structure jo data change nahi hone deta, like `(type, value)`) return karta hai jisme `working locator type` aur `working locator value` hote hain.
-3. Phir yeh data `try_find_with_cached_locator` method mein jata hai.
-4. Yahan string type ko actual `By class` (Selenium ka built-in class — jo UI elements locate karne ke methods deta hai) mein convert karne ke liye ek **refactored** `create_by_type` function call hota hai. Isme ek lambi **if/elif routing** chain hoti hai (e.g., `if type == "Id": return By.ID`).
-5. Conversion ke baad, system nayi **current strategy** ko `driver.find_element` mein pass karta hai.
-6. **Exception Handling:** Kyunki UI dynamic hai, ho sakta hai cached element bhi fail ho jaye. Isliye yeh pura block `NoSuchElementException` (Selenium ka built-in error — jab element DOM mein nahi milta) catch karne ke liye try-except mein wrapped hota hai.
+1. [[HL::**Step 1.5 (Cache Execution):** Original locator fail hone ke baad, framework turant `try_get_healed_locator` method ko call karta hai cache mein check karne ke liye.::HL]]
+2. [[HL::Agar entry milti hai, toh yeh function ek **return tuple pattern** (Tuple — Python ka data structure jo data change nahi hone deta, like `(type, value)`) return karta hai jisme `working locator type` aur `working locator value` hote hain.::HL]]
+3. [[HL::Phir yeh data `try_find_with_cached_locator` method mein jata hai.::HL]]
+4. [[HL::Yahan string type ko actual `By class` (Selenium ka built-in class — jo UI elements locate karne ke methods deta hai) mein convert karne ke liye ek **refactored** `create_by_type` function call hota hai. Isme ek lambi **if/elif routing** chain hoti hai (e.g., `if type == "Id": return By.ID`).::HL]]
+5. [[HL::Conversion ke baad, system nayi **current strategy** ko `driver.find_element` mein pass karta hai.::HL]]
+6. [[HL::**Exception Handling:** Kyunki UI dynamic hai, ho sakta hai cached element bhi fail ho jaye. Isliye yeh pura block `NoSuchElementException` (Selenium ka built-in error — jab element DOM mein nahi milta) catch karne ke liye try-except mein wrapped hota hai::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 ```python
@@ -10449,8 +10449,8 @@ Is logic ko software engineering mein **"Factory Pattern"** ya **"Adapter Patter
 - **🤦 Why:** Code runtime pe `TypeError` dekar toot jayega. String aur class properties match nahi hotin.
 - **✅ The 'Pro' Way:** Hamesha data boundary layer (JSON parser) aur system layer (Selenium actions) ke beech mein ek typecasting/refactor helper rakho (jaise `create_by_type`).
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1:** "Tuple pattern kyu use kiya, list kyun nahi?" → Tuples read-only hote hain (immutable) aur lightweight hote hain. Framework ko pata hai ki usko return value change nahi karni, bas read karni hai.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1:** "Tuple pattern kyu use kiya, list kyun nahi?" → Tuples read-only hote hain (immutable) aur lightweight hote hain. Framework ko pata hai ki usko return value change nahi karni, bas read karni hai::HL]].
 - **Confusion 2:** "`try_find_with_cached_locator` aur `try_get_healed_locator` mein confuse ho gaye?" → `get` wala function sirf memory mein search karke data lata hai. `find_with` wala function us data ko lekar actual Selenium browser window pe perform (execute) karta hai.
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
@@ -10708,7 +10708,7 @@ Total keywords across all subtopics in this topic: 30
 
 # 🌟 Section 10: Building Visual Testing using Vision Models (Locally and OpenAI) (Selenium: Python, Playwright: JavaScript)
 
-Is section mein hum traditional test automation ke aage badhenge aur AI Vision Models ko use karke **Visual Testing** implement karenge. Hum dekhenge ki kaise Selenium ya Playwright ke conventional tests UI breaks miss kar dete hain, aur kaise hum base64 images LLMs (jaise OpenAI ya local models) ko bhej kar ek "logical" UI diff nikal sakte hain.
+Is [[HL::section mein hum traditional test automation ke aage badhenge aur AI Vision Models ko use karke **Visual Testing** implement karenge. Hum dekhenge ki kaise Selenium ya Playwright ke conventional tests UI breaks miss kar dete hain, aur kaise hum base64 images LLMs (jaise OpenAI ya local models) ko bhej kar ek "logical" UI diff nikal sakte hain::HL]].
 
 Hum video-by-video (segment-by-segment) aage badhenge.
 
@@ -10724,20 +10724,20 @@ Socho tum ek "Spot the difference" wali puzzle solve kar rahe ho. Ek normal func
 
 #### 📖 3. Technical Definition
 - **Precise English:** Visual testing is a software testing technique that evaluates the visible output of an application to ensure the user interface (UI) appears correctly to the end-user, catching rendering issues that DOM-based functional tests miss.
-- **Hinglish Simplification:** Visual testing ek aisi testing hai jo verify karti hai ki application ka UI actually user ko kaisa dikh raha hai — colors, alignment aur layout bilkul sahi hone chahiye.
+- [[HL::**Hinglish Simplification:** Visual testing ek aisi testing hai jo verify karti hai ki application ka UI actually user ko kaisa dikh raha hai — colors, alignment aur layout bilkul sahi hone chahiye.::HL]]
 
-#### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Functional testing sirf HTML/DOM elements check karti hai. Agar koi **style sheet** load nahi hui aur **UI completely broken** hai, tab bhi functional test pass ho sakta hai kyunki element DOM mein present hai.
-- **Solution:** Visual testing screen ko validate karti hai taaki **color change** ya **button alignment** jaisi actual visual bugs pakdi ja sakein.
-- **What breaks if we don't use it?** Production mein users ko overlap hote hue buttons ya invisible text dikhega, jabki CI/CD pipeline mein saare tests green honge.
+#### [[HL::🧠 4. Why This Matters (Zaroorat Kyun Hai?)::HL]]
+- [[HL::**Problem:** Functional testing sirf HTML/DOM elements check karti hai. Agar koi **style sheet** load nahi hui aur **UI completely broken** hai, tab bhi functional test pass ho sakta hai kyunki element DOM mein present hai.::HL]]
+- [[HL::**Solution:** Visual testing screen ko validate karti hai taaki **color change** ya **button alignment** jaisi actual visual bugs pakdi ja sakein.::HL]]
+- [[HL::**What breaks if we don't use it?** Production mein users ko overlap hote hue buttons ya invisible text dikhega, jabki CI/CD pipeline mein saare tests green honge::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 *(N/A — yeh ek conceptual topic hai, isliye iska koi direct code/editor state nahi hai)*
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. **Functional Testing:** Code execute hota hai -> DOM query chalti hai -> Agar `id="submit-btn"` mila, test PASS.
-2. **Visual Testing:** Page load hota hai -> Screenshot capture hota hai -> Baseline (purane) screenshot ke saath usme **pixel changes** ko compare kiya jaata hai.
-3. Agar thoda sa bhi difference aaya (e.g., CSS rendering issue), test FAIL ho jata hai.
+1. [[HL::**Functional Testing:** Code execute hota hai -> DOM query chalti hai -> Agar `id="submit-btn"` mila, test PASS.::HL]]
+2. [[HL::**Visual Testing:** Page load hota hai -> Screenshot capture hota hai -> Baseline (purane) screenshot ke saath usme **pixel changes** ko compare kiya jaata hai.::HL]]
+3. [[HL::Agar thoda sa bhi difference aaya (e.g., CSS rendering issue), test FAIL ho jata hai::HL]].
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
 *Yeh purely conceptual topic hai — Hands-On section ki jagah Concept Visualization de raha hoon.*
@@ -10758,13 +10758,13 @@ Traditional visual testing tools jaise **Applitools** `(cloud-based visual testi
 Modern web apps mein hazaron pages hote hain aur unko 10 alag browsers/devices par test karna parta hai. Manual checking impossible hai. **Cross-browser testing** ke waqt UI breaks pakadne ke liye automated visual validation extreme scale par zaroori hota hai taaki **CSS breaks** turant pakde ja sakein.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
-- **❌ Mistake:** Sirf functional tests par 100% rely karna.
-- **🤦 Why:** Functional test button click kar dega chahe woh screen ke bahar (off-screen) hi kyun na hidden ho.
-- **✅ The 'Pro' Way:** Critical UI components aur user journeys ke liye Visual validation add karna.
+- **❌ [[HL::Mistake:** Sirf functional tests par 100% rely karna.::HL]]
+- [[HL::**🤦 Why:** Functional test button click kar dega chahe woh screen ke bahar (off-screen) hi kyun na hidden ho.::HL]]
+- [[HL::**✅ The 'Pro' Way:** Critical UI components aur user journeys ke liye Visual validation add karna::HL]].
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1: "Functional test aur visual test alag kyun hain?"** → Functional check karta hai ki logic chal raha hai ya nahi (jaise login button dabane se API call hui ya nahi). Visual check karta hai ki login button sahi jagah pe, sahi color mein dikh raha hai ya nahi.
-- **Confusion 2: "CSS tootne par test kaise pass ho sakta hai?"** → Kyunki functional tool (jaise basic Selenium) HTML structure padhta hai. Agar CSS gayab hai toh page ugly dikhega, par button ka HTML tag wahi rahega, isliye script button dhundh kar click kar legi.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1: "Functional test aur visual test alag kyun hain?"** → Functional check karta hai ki logic chal raha hai ya nahi (jaise login button dabane se API call hui ya nahi). Visual check karta hai ki login button sahi jagah pe, sahi color mein dikh raha hai ya nahi.::HL]]
+- [[HL::**Confusion 2: "CSS tootne par test kaise pass ho sakta hai?"** → Kyunki functional tool (jaise basic Selenium) HTML structure padhta hai. Agar CSS gayab hai toh page ugly dikhega, par button ka HTML tag wahi rahega, isliye script button dhundh kar click kar legi::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 - UI production mein tuta hua hai? -> Check karo kya functional tests pass the?
@@ -10778,21 +10778,21 @@ Modern web apps mein hazaron pages hote hain aur unko 10 alag browsers/devices p
 | Catches CSS Breaks? | ❌ Nahi | ✅ Haan |
 
 #### 🌍 14. Real-World Use Case (Production Application)
-E-commerce sites (jaise Amazon) par "Add to Cart" button ka location aur color revenue ke liye critical hai. Agar ek naye release mein CSS update se "Add to Cart" button screen ke bahar chala gaya (`margin-top: 5000px`), toh sales zero ho jayengi. Visual testing aisi disaster rokti hai.
+[[HL::E-commerce sites (jaise Amazon) par "Add to Cart" button ka location aur color revenue ke liye critical hai. Agar ek naye release mein CSS update se "Add to Cart" button screen ke bahar chala gaya (`margin-top: 5000px`), toh sales zero ho jayengi. Visual testing aisi disaster rokti hai::HL]].
 
 #### 🔄 15. Real-World Flow (End-to-End 3-Phase Picture)
-- **Testing/Offline Phase:** Developer visual testing use karta hai taaki style sheet changes aur UI breaks catch ho sakein jo normal functional tests miss kar dete hain (e.g., button placed from one location to another).
-- **Fixing/Iteration Phase:** Report mein tester dekhta hai ki naye code se login form misalign ho gaya hai, aur developer CSS fix karta hai.
-- **Live Production Phase:** User ko ek perfect, pixel-perfect UI milta hai bina kisi hidden layout issue ke.
+- [[HL::**Testing/Offline Phase:** Developer visual testing use karta hai taaki style sheet changes aur UI breaks catch ho sakein jo normal functional tests miss kar dete hain (e.g., button placed from one location to another).::HL]]
+- [[HL::**Fixing/Iteration Phase:** Report mein tester dekhta hai ki naye code se login form misalign ho gaya hai, aur developer CSS fix karta hai.::HL]]
+- [[HL::**Live Production Phase:** User ko ek perfect, pixel-perfect UI milta hai bina kisi hidden layout issue ke::HL]].
 
 #### 🎨 16. Visual Diagram (ASCII Art)
 ```text
-(User View)                  (Code View - DOM)
-[ Login Button ]      vs     <button id="login">Login</button>
-  |-- Color OK?                |-- Exists? (Yes)
-  |-- Position OK?             |-- Clickable? (Yes)
+([[HL::User View)                  (Code View - DOM)::HL]]
+[[HL::[ Login Button ]      vs     <button id="login">Login</button>::HL]]
+  |[[HL::-- Color OK?                |-- Exists? (Yes)::HL]]
+  |[[HL::-- Position OK?             |-- Clickable? (Yes)::HL]]
   
-Visual Test checks left.   Functional Test checks right.
+[[HL::Visual Test checks left.   Functional Test checks right::HL]].
 ```
 
 #### ❓ 17. Interview Q&A (FAQ)
@@ -10833,47 +10833,47 @@ Lekin agar tum ek intelligent Teacher (AI Vision Model) ko wahi photos doge, toh
 
 #### 📖 3. Technical Definition
 - **Precise English:** The AI Vision Models comparison workflow utilizes large multimodal language models (like LLaVA or Qwen-VL) to logically analyze two images (a baseline and a current screenshot) and output structured JSON data containing similarity scores and detailed semantic differences, overcoming the brittleness of traditional pixel-to-pixel comparison.
-- **Hinglish Simplification:** AI vision models (jo photos dekh aur samajh sakte hain) ka use karke hum do screenshots (purana aur naya) LLM ko bhejte hain, aur woh hume logically bata deta hai ki kya actually break hua hai, bajaay sirf pixels compare karne ke.
+- [[HL::**Hinglish Simplification:** AI vision models (jo photos dekh aur samajh sakte hain) ka use karke hum do screenshots (purana aur naya) LLM ko bhejte hain, aur woh hume logically bata deta hai ki kya actually break hua hai, bajaay sirf pixels compare karne ke::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** ⭐ "Playwright's visual comparison only does a pixel by pixel comparison." Yeh itna **conservative** (strict) hai ki agar browser ka shadow halka sa change hua, toh test fail ho jata hai.
-- **Solution:** Hum **vision models** (jaise Qwen-VL ya LLaVA) ko **prompt engineering** ke through guide karte hain ki "dono images dekho aur sirf logical UI differences batao".
+- [[HL::**Problem:** ⭐ "Playwright's visual comparison only does a pixel by pixel comparison." Yeh itna **conservative** (strict) hai ki agar browser ka shadow halka sa change hua, toh test fail ho jata hai.::HL]]
+- [[HL::**Solution:** Hum **vision models** (jaise Qwen-VL ya LLaVA) ko **prompt engineering** ke through guide karte hain ki "dono images dekho aur sirf logical UI differences batao::HL]]".
 - **What breaks if we don't use it?** Pixel-diff tools se CI/CD pipeline mein roz false alarms (flaky tests) aayenge, aur engineers tang aakar visual tests disable kar denge.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 Folder structure kuch aisa dikhega:
 ```text
-project_root/
- ├── __pycache__/            ← Python ka internal cache folder
- ├── screenshots/
- │    ├── baseline.png       ← Baseline screenshot (Source of truth)
- │    └── current.png        ← Current screenshot (Jo test run par bana)
- └── test_login.py
+[[HL::project_root/::HL]]
+[[HL:: ├── __pycache__/            ← Python ka internal cache folder::HL]]
+[[HL:: ├── screenshots/::HL]]
+[[HL:: │    ├── baseline.png       ← Baseline screenshot (Source of truth)::HL]]
+[[HL:: │    └── current.png        ← Current screenshot (Jo test run par bana)::HL]]
+[[HL:: └── test_login.py::HL]]
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. Test execute hota hai aur application ka current state capture karke **current screenshot** banata hai.
-2. Code disk se **baseline screenshot** uthata hai.
-3. Dono images ko Base64 encode karke ek structured JSON prompt mein wrap karke Vision LLM (e.g., LLaVA) ko bheja jata hai.
-4. LLM analyze karta hai aur ek structured **JSON response** deta hai.
-5. Us response ko humari application ek Python object (**VisionComparisonResult**) mein map (deserialize) karti hai, jisme **similarity scores** (e.g., **95 to 100**), **differences**, aur **issues identified** listed hote hain.
+1. [[HL::Test execute hota hai aur application ka current state capture karke **current screenshot** banata hai.::HL]]
+2. [[HL::Code disk se **baseline screenshot** uthata hai.::HL]]
+3. [[HL::Dono images ko Base64 encode karke ek structured JSON prompt mein wrap karke Vision LLM (e.g., LLaVA) ko bheja jata hai.::HL]]
+4. [[HL::LLM analyze karta hai aur ek structured **JSON response** deta hai.::HL]]
+5. [[HL::Us response ko humari application ek Python object (**VisionComparisonResult**) mein map (deserialize) karti hai, jisme **similarity scores** (e.g., **95 to 100**), **differences**, aur **issues identified** listed hote hain.::HL]]
 
 #### 💡 7. Concept Visualization (Theory Topic ke liye)
 *Yeh section workflow samjhane ke liye hai, actual coding next video mein aayegi.*
 
 **AI Visual Diff Flow:**
 ```text
-[Baseline Screenshot] ------\
-                             \
-                            (Prompt: "Compare them logically") ---> [LLaVA / Qwen-VL Model]
-                             /                                            |
-[Current Screenshot] -------/                                             v
-                                                          {
-                                                            "similarity_score": 98,
-                                                            "are_equals": true,
-                                                            "differences": "Margin increased slightly",
-                                                            "issues_identified": "None"
-                                                          } -> Deserialized to VisionComparisonResult
+[[HL::[Baseline Screenshot] ------\::HL]]
+[[HL::                             \::HL]]
+[[HL::                            (Prompt: "Compare them logically") ---> [LLaVA / Qwen-VL Model]::HL]]
+[[HL::                             /                                            |::HL]]
+[[HL::[Current Screenshot] -------/                                             v::HL]]
+[[HL::                                                          {::HL]]
+[[HL::                                                            "similarity_score": 98,::HL]]
+[[HL::                                                            "are_equals": true,::HL]]
+[[HL::                                                            "differences": "Margin increased slightly",::HL]]
+[[HL::                                                            "issues_identified": "None"::HL]]
+[[HL::                                                          } -> Deserialized to VisionComparisonResult::HL]]
 ```
 *Note: Yeh process cloud APIs mein **10.9 million times** scale par run hoti hai enterprise environments (jaise **Cloud Desktop** environments) mein, jahan Playwright.dev ke native diffing limits cross ho jate hain.*
 
@@ -10985,11 +10985,11 @@ Socho tum ek courier service (VisionClient) chala rahe ho jo photos deliver kart
 
 #### 📖 3. Technical Definition
 - **Precise English:** The Vision Client is a wrapper class responsible for converting image binaries into base64 format and constructing the provider-specific payload (such as OpenAI's nested message structure) to asynchronously interact with vision LLMs.
-- **Hinglish Simplification:** VisionClient ek aisi helper class hai jo tumhari images ko Base64 text mein convert karti hai aur us request payload ko OpenAI ya local LLMs ke expected format mein set karke API call karti hai.
+- [[HL::**Hinglish Simplification:** VisionClient ek aisi helper class hai jo tumhari images ko Base64 text mein convert karti hai aur us request payload ko OpenAI ya local LLMs ke expected format mein set karke API call karti hai::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** AI models direct `.png` ya `.jpeg` files accept nahi karte via standard text APIs. Saath hi, OpenAI ka structure normal local models se bilkul alag aur complex hai.
-- **Solution:** Hum **Base64 Image Conversion** use karte hain (binary ko text mein badalna) aur ek dedicated class banate hain jo model-specific prompt format handle karti hai.
+- [[HL::**Problem:** AI models direct `.png` ya `.jpeg` files accept nahi karte via standard text APIs. Saath hi, OpenAI ka structure normal local models se bilkul alag aur complex hai.::HL]]
+- [[HL::**Solution:** Hum **Base64 Image Conversion** use karte hain (binary ko text mein badalna) aur ek dedicated class banate hain jo model-specific prompt format handle karti hai::HL]].
 - **What breaks if we don't use it?** Agar hum payload sahi format mein nahi bhejenge, toh OpenAI server `400 Bad Request` reject kar dega kyunki woh nested content object array expect karta hai.
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
@@ -11001,11 +11001,11 @@ project_root/
 ```
 
 #### ⚙️ 6. Under the Hood (Deep Dive)
-1. Do screenshots (base & actual) liye jate hain.
-2. Code unhe **base64_image1** aur **base64_image2** strings mein convert karta hai.
-3. **OpenAI** ke case mein, request payload mein `messages` array banta hai jiska **role user** hota hai.
-4. Us user message ke andar ek **content object array** hota hai jisme pehla object **type text** (jisme prompt hota hai) aur baaki objects **image_url** type ke hote hain (jisme base64 data hota hai).
-5. Yeh payload network ke through bheja jata hai `call_vision_ai` jaise method se.
+1. [[HL::Do screenshots (base & actual) liye jate hain.::HL]]
+2. [[HL::Code unhe **base64_image1** aur **base64_image2** strings mein convert karta hai.::HL]]
+3. [[HL::**OpenAI** ke case mein, request payload mein `messages` array banta hai jiska **role user** hota hai.::HL]]
+4. [[HL::Us user message ke andar ek **content object array** hota hai jisme pehla object **type text** (jisme prompt hota hai) aur baaki objects **image_url** type ke hote hain (jisme base64 data hota hai).::HL]]
+5. [[HL::Yeh payload network ke through bheja jata hai `call_vision_ai` jaise method se::HL]].
 
 #### 💻 7. Hands-On — Runnable Example
 *Yeh code dikhata hai ki OpenAI ka structure kaise banta hai aur async network call kaise hoti hai.*
@@ -11018,27 +11018,27 @@ project_root/
 5      def __init__(self):                                         # Constructor — class banne pe call hota hai
 6          self.client = AsyncOpenAI(api_key="mock_key")           # client initialize karo mock key ke sath
 7  
-8      async def get_vision_completion(self, prompt, base64_image1, base64_image2):  # get_vision_completion() — main async function jo images aur prompt leta hai
-9          # ⭐ "In the OpenAI world, this is how the OpenAI team expects you to pass the images"
-10         payload = [                                             # payload — main array jo request mein jayega
-11             {
-12                 "role": "user",                                 # role user — batata hai ki yeh prompt user ne diya hai
-13                 "content": [                                    # content object array — iske andar multiple types ka data jayega
-14                     {
-15                         "type": "text",                         # type text — pehla item humara instructions (prompt) hoga
-16                         "text": prompt                          # text: prompt — actual instruction variable pass kiya
-17                     },
-18                     {
-19                         "type": "image_url",                    # type image_url — dusra item image format batata hai
-20                         "image_url": { "url": f"data:image/jpeg;base64,{base64_image1}" } # base64_image1 inject kiya
-21                     },
-22                     {
-23                         "type": "image_url",                    # type image_url — teesra item dusri image ke liye
-24                         "image_url": { "url": f"data:image/jpeg;base64,{base64_image2}" } # base64_image2 inject kiya
-25                     }
-26                 ]
-27             }
-28         ]
+8      [[HL::async def get_vision_completion(self, prompt, base64_image1, base64_image2):  # get_vision[[H::HL]]L::_completion() — main async function jo images aur prompt leta hai::HL]]
+[[HL::9          # ⭐ "In the OpenAI world, this is how the OpenAI team expects you to pass the images"::HL]]
+[[HL::10         payload = [                                             # payload — main array jo request mein jayega::HL]]
+[[HL::11             {::HL]]
+[[HL::12                 "role": "user",                                 # role user — batata hai ki yeh prompt user ne diya hai::HL]]
+[[HL::13                 "content": [                                    # content object array — iske andar multiple types ka data jayega::HL]]
+[[HL::14                     {::HL]]
+[[HL::15                         "type": "text",                         # type text — pehla item humara instructions (prompt) hoga::HL]]
+[[HL::16                         "text": prompt                          # text: prompt — actual instruction variable pass kiya::HL]]
+[[HL::17                     },::HL]]
+[[HL::18                     {::HL]]
+[[HL::19                         "type": "image_url",                    # type image_url — dusra item image format batata hai::HL]]
+[[HL::20                         "image_url": { "url": f"data:image/jpeg;base64,{base64_image1}" } # base64_image1 inject kiya::HL]]
+[[HL::21                     },::HL]]
+[[HL::22                     {::HL]]
+[[HL::23                         "type": "image_url",                    # type image_url — teesra item dusri image ke liye::HL]]
+[[HL::24                         "image_url": { "url": f"data:image/jpeg;base64,{base64_image2}" } # base64_image2 inject kiya::HL]]
+[[HL::25                     }::HL]]
+[[HL::26                 ]::HL]]
+[[HL::27             }::HL]]
+[[HL::28::HL]]         ]
 29         
 30         return await self.call_openai_vision(payload)           # call_openai_vision() ko call karke wait (await) karo
 31         
@@ -11050,13 +11050,13 @@ project_root/
 37     async def call_local_vision_llm(self, prompt, images):      # call_local_vision_llm() — local Ollama models ke liye alag method
 38         pass                                                    # local ka format simple hota hai, uski implementation skip ki hai
 39         
-40 # --- Execution Block ---
-41 async def call_vision_ai():                                     # call_vision_ai() — test script function jo client use karega
-42     client = VisionClient()                                     # client object banaya
-43     res = await client.get_vision_completion("Compare these", "b64_1", "b64_2") # function run kiya mock base64 ke sath
-44     print(f"Result: {res}")                                     # response print kiya
-45     
-46 asyncio.run(call_vision_ai())                                   # event loop start karke function run karo
+[[HL::40 # --- Execution Block ---::HL]]
+[[HL::41 async def call_vision_ai():                                     # call_vision_ai() — test script function jo client use karega::HL]]
+[[HL::42     client = VisionClient()                                     # client object banaya::HL]]
+[[HL::43     res = await client.get_vision_completion("Compare these", "b64_1", "b64_2") # function run kiya mock base64 ke sath::HL]]
+[[HL::44     print(f"Result: {res}")                                     # response print kiya::HL]]
+[[HL::45     ::HL]]
+[[HL::46 asyncio.run(call_vision_ai())                                   # event loop start karke function run karo::HL]]
 ```
 
 ```text
@@ -11070,19 +11070,19 @@ Result: {"similarity_score": 98}
 - **Lines 10 to 28 — The OpenAI nested structure:** Yeh line skeleton ke explicit emphasis ko cover karti hai. OpenAI expects `role user` -> jiske andar `content object array` hota hai. Us array ke elements ek `type text` dictionary aur do `type image_url` dictionaries rakhte hain. Is format ke bina API turant fail ho jayegi.
 
 #### 🔒 8. Security-First Check
-Jab Base64 images convert hoti hain, toh woh bohot lambi strings ban jati hain (millions of characters). Kabhi bhi in base64 strings ko `print()` ya logger mein poora log mat karo, varna tumhara CI/CD (e.g., Jenkins) server ka log storage memory out of bounds dekar crash ho jayega.
+[[HL::Jab Base64 images convert hoti hain, toh woh bohot lambi strings ban jati hain (millions of characters). Kabhi bhi in base64 strings ko `print()` ya logger mein poora log mat karo, varna tumhara CI/CD (e.g., Jenkins) server ka log storage memory out of bounds dekar crash ho jayega::HL]].
 
 #### 🏗️ 9. Scalability & Industry Context
 Is logic ko **Async** rakhna production-level automation ke liye super critical hai. Playwright `(browser automation framework — JS/Python ke liye)` naturally asynchronous hota hai. Jab tum grid par 50 tests parallel chalate ho, toh async vision calls server ka CPU waste nahi karti aur tests bohot fast execute hote hain.
 
 #### ⚠️ 10. Industry Anti-Patterns & Common Mistakes (Beginner Traps)
-- **❌ Mistake:** OpenAI ko direct raw image file object (`open('img.png', 'rb')`) bhej dena.
-- **🤦 Why:** OpenAI Vision API HTTP JSON expect karti hai, multipart file upload nahi (for this specific endpoint).
-- **✅ The 'Pro' Way:** Hamesha file ko buffer mein read karke usko strongly-encoded Base64 text banakar payload mein inject karo.
+- **❌ [[HL::Mistake:** OpenAI ko direct raw image file object (`open('img.png', 'rb')`) bhej dena.::HL]]
+- [[HL::**🤦 Why:** OpenAI Vision API HTTP JSON expect karti hai, multipart file upload nahi (for this specific endpoint).::HL]]
+- [[HL::**✅ The 'Pro' Way:** Hamesha file ko buffer mein read karke usko strongly-encoded Base64 text banakar payload mein inject karo::HL]].
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1: "Base64 kya hota hai aur kyun chahiye?"** → Base64 ek tarika hai kisi bhi image (ya file) ko normal A-Z, 0-9 characters mein likhne ka. Kyunki JSON ek text format hai, hum JSON ke andar photo nahi daal sakte, par photo ka Base64 "text version" daal sakte hain.
-- **Confusion 2: "Async/Await kyun use kiya?"** → Network call aane mein 3-5 seconds lag sakte hain. `await` lagane se code wahan rukta nahi hai, balki system ko free kar deta hai taaki doosre parallel tests tab tak chal sakein.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1: "Base64 kya hota hai aur kyun chahiye?"** → Base64 ek tarika hai kisi bhi image (ya file) ko normal A-Z, 0-9 characters mein likhne ka. Kyunki JSON ek text format hai, hum JSON ke andar photo nahi daal sakte, par photo ka Base64 "text version" daal sakte hain.::HL]]
+- [[HL::**Confusion 2: "Async/Await kyun use kiya?"** → Network call aane mein 3-5 seconds lag sakte hain. `await` lagane se code wahan rukta nahi hai, balki system ko free kar deta hai taaki doosre parallel tests tab tak chal sakein::HL]].
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
 - API call fail ho rahi hai (HTTP 400)? -> Check karo payload structure `content object array` properly formatted hai ya nahi.
@@ -11119,12 +11119,12 @@ Large scale platforms (jaise BrowserStack) jab cloud pe devices run karte hain, 
 [ OpenAI API Server ]
 ```
 
-#### ❓ 17. Interview Q&A (FAQ)
-- **Q:** What is the purpose of converting images to Base64 in visual testing?
-- **A:** JSON (JavaScript Object Notation) payloads natively binary file transfers support nahi karte. Isliye hum images ko Base64 string format mein convert karte hain taaki unhe REST API request ke JSON payload mein safely embed karke LLM server tak bheja ja sake.
+#### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
+- [[HL::**Q:** What is the purpose of converting images to Base64 in visual testing?::HL]]
+- [[HL::**A:** JSON (JavaScript Object Notation) payloads natively binary file transfers support nahi karte. Isliye hum images ko Base64 string format mein convert karte hain taaki unhe REST API request ke JSON payload mein safely embed karke LLM server tak bheja ja sake.::HL]]
 
-- **Q:** How does OpenAI's payload structure for vision differ from a standard text LLM prompt?
-- **A:** Standard LLM prompt mein `role user` ke andar seedha string pass hoti hai. Vision request mein OpenAI ek specific `content object array` expect karta hai jisme ek element `type text` (for prompt) aur dusre elements `type image_url` hone chahiye.
+- [[HL::**Q:** How does OpenAI's payload structure for vision differ from a standard text LLM prompt?::HL]]
+- [[HL::**A:** Standard LLM prompt mein `role user` ke andar seedha string pass hoti hai. Vision request mein OpenAI ek specific `content object array` expect karta hai jisme ek element `type text` (for prompt) aur dusre elements `type image_url` hone chahiye::HL]].
 
 - **Q:** Why did we build a wrapper class instead of calling OpenAI directly inside our Selenium test?
 - **A:** Abstraction aur separation of concerns ke liye. Agar hum API logic directly test mein likhenge toh test bloated ho jayega. Wrapper class API complexities (jaise nested structure banane) ko chupa leti hai, taaki framework clean rahe.
@@ -11157,7 +11157,7 @@ Large scale platforms (jaise BrowserStack) jab cloud pe devices run karte hain, 
 ---
 
 ## 🎥 video 3: Response Deserialization & Comparison Execution (Selenium: Python, Playwright: JavaScript) =====
-*Is section mein hum samjhenge ki LLM se jo text aayega, usko actually code mein object ki tarah kaise use karna hai taaki test framework easily result assert kar sake.*
+*Is [[HL::section mein hum samjhenge ki LLM se jo text aayega, usko actually code mein object ki tarah kaise use karna hai taaki test framework easily result assert kar sake::HL]].*
 
 ### 🎯 1. Result Model & Execution Logic
 
@@ -11166,7 +11166,7 @@ Socho tumhe parcel mein poori ek fully-assembled cycle aayi hai (raw text respon
 
 #### 📖 3. Technical Definition
 - **Precise English:** Response Deserialization is the process of parsing the raw JSON string returned by the LLM and mapping it into a strongly typed Python dataclass/model (VisionComparisonResult) using a static helper method, enabling safer and structured property access during test assertions.
-- **Hinglish Simplification:** Jo string result LLM bhejta hai, use Python dictionary se ek clean Class Object (`VisionComparisonResult`) mein convert karna taaki test mein `result.similarityScore` jaise strongly-typed attributes ko dot notation se access kiya ja sake.
+- [[HL::**Hinglish Simplification:** Jo string result LLM bhejta hai, use Python dictionary se ek clean Class Object (`VisionComparisonResult`) mein convert karna taaki test mein `result.similarityScore` jaise strongly-typed attributes ko dot notation se access kiya ja sake::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 - **Problem:** AI Models output text JSON string mein dete hain. Agar tum test mein string manipulation (`if "true" in response_text`) karke check karोगे toh code bohot brittle hoga. Ek space extra aaya toh test fail.
@@ -11253,7 +11253,7 @@ Equal?: False
 ##### 🔬 Code Explanation Rule (LINE-BY-LINE)
 - **Line 5 & 6 — `@dataclass class VisionComparisonResult:`:** Hum string JSON ko map karne ke liye ek Python data holder class banate hain. `@dataclass` use karne se humein lambi `__init__` constructor likhne ki zaroorat nahi padti.
 - **Line 14 — `@staticmethod`:** Yeh decorator batata hai ki is function ko memory mein separate `self` context nahi chahiye. Tum seedha class name se ise call kar sakte ho (`ScreenshotComparisonHelper.compare_screenshots_async()`).
-- **Line 26 — `json.loads(raw_response)`:** Sabse crucial step. LLM se aaya hua "text" Python runtime ke liye bas ek random lamba word hai. `json.loads()` us text ko padh kar usse key-value pair wali Python Dictionary banata hai (Deserialization phase 1).
+- [[HL::**Line 26 — `json.loads(raw_response)`:** Sabse crucial step. LLM se aaya hua "text" Python runtime ke liye bas ek random lamba word hai. `json.loads()` us text ko padh kar usse key-value pair wali Python Dictionary banata hai (Deserialization phase 1::HL]]).
 - **Line 29 — `VisionComparisonResult(**parsed_json_dict)`:** Yeh dictionary unpacking (**) hai jo dictionary keys ko direct class ke argument parameters mein inject kar deta hai (Deserialization phase 2).
 - **Line 33 — method refactoring:** Framework ki clean architecture ke liye humne main logic static helper mein rakha, aur us helper ko `get_screenshot_comparison_from_llm` global function se expose (refactor) kiya.
 
@@ -11268,8 +11268,8 @@ JSON Deserialization hamesha risky hota hai agar input untrusted source se aaye.
 - **🤦 Why:** Typing mistake (`'similarityscore'`) ki wajah se test runtime pe fail ho jayega (KeyError), compile time pe nahi.
 - **✅ The 'Pro' Way:** Hamesha raw text JSON ko Strongly Typed Class (`VisionComparisonResult`) mein **deserialize** karo taaki IDE auto-complete suggest kare aur typo error bachein.
 
-#### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1: "json.loads() aur json.dumps() mein kya farq hai?"** → `loads` (load string) ka kaam hai JSON text ko Python object (dictionary) banana. `dumps` (dump string) ulta karta hai — Python object ko wapas text JSON banata hai bhejne ke liye. Deserialization = `loads`.
+#### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1: "json.loads() aur json.dumps() mein kya farq hai?"** → `loads` (load string) ka kaam hai JSON text ko Python object (dictionary) banana. `dumps` (dump string) ulta karta hai — Python object ko wapas text JSON banata hai bhejne ke liye. Deserialization = `loads`::HL]].
 - **Confusion 2: "method refactoring kya hota hai?"** → Code ko bina uska outcome change kiye, zyada clean aur logically structure karne ko refactoring kehte hain. Yahan static helper methods banakar code encapsulate kiya gaya.
 
 #### 🛠️ 12. Troubleshooting Flowchart (Mental Model)
@@ -11363,12 +11363,12 @@ Socho tum ek factory inspector ho. Tum pehli baar jab factory visit karte ho, to
 
 #### 📖 3. Technical Definition
 - **Precise English:** Capturing and passing screenshots in Selenium involves using the WebDriver API to save the browser's current viewport state as a base `.png` file on the local file system, encoding both the base and actual images into base64 byte arrays, and passing them to the Vision LLM client for visual regression testing.
-- **Hinglish Simplification:** Selenium web driver se screen ki photo khinch kar usko folder mein `.png file` ki tarah save karna, aur phir us file ko read karke base64 text banakar AI model ko bhejna.
+- [[HL::**Hinglish Simplification:** Selenium web driver se screen ki photo khinch kar usko folder mein `.png file` ki tarah save karna, aur phir us file ko read karke base64 text banakar AI model ko bhejna::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
-- **Problem:** Visual testing ke liye hume ek source of truth (baseline) chahiye. Agar hum screenshot ko disk pe save nahi karenge, toh system ko pata kaise chalega ki kal kaisa dikhta tha?
-- **Solution:** Hum `get_screenshot_as_file()` use karke **base image** disk par rakhte hain, aur run-time par **actual image** capture karte hain.
-- **What breaks if we don't use it?** Bina saved baseline ke, **visual regression testing** impossible hai kyunki AI ke paas compare karne ke liye koi reference point (purani image) nahi hoga.
+- [[HL::**Problem:** Visual testing ke liye hume ek source of truth (baseline) chahiye. Agar hum screenshot ko disk pe save nahi karenge, toh system ko pata kaise chalega ki kal kaisa dikhta tha?::HL]]
+- [[HL::**Solution:** Hum `get_screenshot_as_file()` use karke **base image** disk par rakhte hain, aur run-time par **actual image** capture karte hain.::HL]]
+- [[HL::**What breaks if we don't use it?** Bina saved baseline ke, **visual regression testing** impossible hai kyunki AI ke paas compare karne ke liye koi reference point (purani image) nahi hoga::HL]].
 
 #### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```text
@@ -11430,10 +11430,10 @@ project_root/
 (koi output nahi aayega — file bin/screenshots/base_image.png successfully create ho jayegi)
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
-- **Line 11 — `os.path.join()`:** Hardcoded paths (`C:\folder\file`) Windows pe chalte hain par Linux pe fail hote hain. `os.path.join` automatically OS ke hisab se slash (`\` ya `/`) add karta hai.
-- **Line 13 & 14 — `os.path.exists()` & `os.makedirs()`:** Agar folder pehle se hai toh dobara banane par error aayega. Isliye pehle condition check karte hain (Safety check).
-- **Line 22 & 23 — `open(file, "rb")`:** `rb` ka matlab 'read binary' hai. `.png` text file nahi hai, isme raw bytes hote hain jise pehle `byte array` mein read karna zaroori hai.
+##### 🔬 Code Explanation Rule ([[HL::LINE-BY-LINE)::HL]]
+- [[HL::**Line 11 — `os.path.join()`:** Hardcoded paths (`C:\folder\file`) Windows pe chalte hain par Linux pe fail hote hain. `os.path.join` automatically OS ke hisab se slash (`\` ya `/`) add karta hai.::HL]]
+- [[HL::**Line 13 & 14::HL]] — `os.path.exists()` & `os.makedirs()`:** Agar folder pehle se hai toh dobara banane par error aayega. Isliye pehle condition check karte hain (Safety check).
+- [[HL::**Line 22 & 23 — `open(file, "rb")`:** `rb` ka matlab 'read binary' hai. `.png` text file nahi hai, isme raw bytes hote hain jise pehle `byte array` mein read karna zaroori hai::HL]].
 
 #### 🔒 8. Security-First Check
 Images save karte waqt OS path traversal vulnerabilities (`../../../etc/passwd` injection in file path) ka risk hota hai agar folder ka naam dynamic user input se aa raha ho. Is case mein paths strictly test framework level par hardcoded/controlled hain, so risk low hai.
@@ -11485,17 +11485,17 @@ Browser UI ---> driver.get_screenshot_as_base64()         v
 - **Q:** How do you ensure the directory exists before saving a screenshot in Python?
 - **A:** Hum `os.path.exists()` check use karte hain. Agar folder (jaise `bin/screenshots`) exist nahi karta, toh hum `os.makedirs()` call karte hain jo poori path structure safely disk pe bana deta hai.
 
-- **Q:** What is the difference between reading a file as "r" vs "rb"?
-- **A:** "r" ka matlab read mode (for plain text files jaise .txt, .json). "rb" ka matlab read binary (for images like .png, zip files). Images ko "r" mein open karne se UTF-8 encoding error aayega kyunki unme non-text binary/byte data hota hai.
+- **Q:** What is [[HL::the difference between reading a file as "r" vs "rb"?::HL]]
+- [[HL::**A:** "r" ka matlab read mode (for plain text files jaise .txt, .json). "rb" ka matlab read binary (for images like .png, zip files). Images ko "r" mein open karne se UTF-8 encoding error aayega kyunki unme non-text binary/byte data hota hai.::HL]]
 
-- **Q:** Why do we convert the byte array to a Base64 encoded string?
-- **A:** Byte arrays raw memory objects hote hain jinhe internet network par directly JSON REST APIs (jaise OpenAI/Ollama) ke andar securely nahi bheja ja sakta. Base64 un binary bytes ko standard ASCII characters mein convert kar deta hai jo JSON payload ke andar completely safe hote hain.
+- [[HL::**Q:** Why do we convert the byte array to a Base64 encoded string?::HL]]
+- [[HL::**A:** Byte arrays raw memory objects hote hain jinhe internet network par directly JSON REST APIs (jaise OpenAI/Ollama) ke andar securely nahi bheja ja sakta. Base64 un binary bytes ko standard ASCII characters mein convert kar deta hai jo JSON payload ke andar completely safe hote hain::HL]].
 
 - **Q:** What does `get_screenshot_as_file` actually do under the hood?
 - **A:** Yeh WebDriver protocol ka internal command trigger karta hai jo browser engine (jaise Chromium) ko instruct karta hai ki current viewport ko render karke us pixel data ko operating system ke file stream ke through designated local file path par `.png` format mein flush (write) kare.
 
-- **Q:** Why would a visual regression test fail on a path issue?
-- **A:** Agar `os.path.join()` properly use nahi kiya gaya, aur OS specific slashes (like `\` for Windows instead of `/` for Mac) hardcode kiye gaye, toh CI/CD server (jo usually Linux hota hai) par script base image ko locate nahi kar payegi aur execution crash ho jayegi.
+- [[HL::**Q:** Why would a visual regression test fail on a path issue?::HL]]
+- [[HL::**A:** Agar `os.path.join()` properly use nahi kiya gaya, aur OS specific slashes (like `\` for Windows instead of `/` for Mac) hardcode kiye gaye, toh CI/CD server (jo usually Linux hota hai) par script base image ko locate nahi kar payegi aur execution crash ho jayegi::HL]].
 
 #### 📝 18. One-Line Memory Hook
 "Pehle photo khicho aur folder mein dalo (`as_file`), doosri photo memory mein hi rakhlo (`as_base64`), dono ko byte se text (Base64) banakar LLM ko bhej do."
@@ -11860,7 +11860,7 @@ Pichle topic mein humne dekha tha ki OpenAI ne proper JSON ko ek Markdown lifaaf
 
 #### 📖 3. Technical Definition
 - **Precise English:** JSON Response Cleaning involves applying string manipulation techniques (such as `.startswith()`, `.strip()`, and slicing) to strip away markdown wrappers from LLM responses, ensuring safe deserialization, followed by assertions on the strongly typed properties to evaluate the test outcome and implement structural framework refactorings.
-- **Hinglish Simplification:** LLM ke answer se aage aur peeche ke bekaar markdown characters hata kar ek pure JSON string nikalna (`cleaned_response`), aur phir us basis pe test ko properly Pass ya Fail (Assert) karna, saath hi code ko helpers mein refactor karna.
+- [[HL::**Hinglish Simplification:** LLM ke answer se aage aur peeche ke bekaar markdown characters hata kar ek pure JSON string nikalna (`cleaned_response`), aur phir us basis pe test ko properly Pass ya Fail (Assert) karna, saath hi code ko helpers mein refactor karna::HL]].
 
 #### 🧠 4. Why This Matters (Zaroorat Kyun Hai?)
 - **Problem:** **deserialization problem** tab tak aati rahegi jab tak string mein **markdown format** rahega. Agar parser break hua, toh test ka final **assert** execute hi nahi hoga aur script error out ho jayegi.
@@ -11937,9 +11937,9 @@ Test Score: 90, Equals: False
 ✅ Assertion Passed! Break caught successfully.
 ```
 
-##### 🔬 Code Explanation Rule (LINE-BY-LINE)
-- **Line 14 — `.strip()`:** JSON extraction se pehle safety step. Agar API ne response mein shuruwat mein blank enter (newline) daal diya, toh `startswith()` fail ho jayega.
-- **Line 17 — `.lower().startswith(...)`:** `.lower() comparison` zaroori hai kyunki LLM kabhi galti se uppercase JSON bhi bhej sakta hai. Yahan dynamically check ho raha hai.
+##### 🔬 Code Explanation Rule ([[HL::LINE-BY-LINE)::HL]]
+- [[HL::**Line 14 — `.strip()`:** JSON extraction se pehle safety step. Agar API ne response mein shuruwat mein blank enter (newline) daal diya, toh `startswith()` fail ho jayega.::HL]]
+- [[HL::**Line 17 — `.lower().startswith(...)`:** `.lower() comparison`::HL]] zaroori hai kyunki LLM kabhi galti se uppercase JSON bhi bhej sakta hai. Yahan dynamically check ho raha hai.
 - **Line 22 — `cleaned_response[7:-3]`:** Yeh actual **string slicing()** hai. `[7:]` ka matlab index 0 se 6 tak ignore karo, aur index 7 se bacha hua utha lo. `[:-3]` ka matlab **Length minus three** — aakhri ke 3 characters (ticks) chhod do.
 
 #### 🔒 8. Security-First Check
@@ -11991,9 +11991,9 @@ Cleaned Output: {"score":90}
 [ json.loads() & Assert ] ---> Execution PASS / FAIL
 ```
 
-#### ❓ 17. Interview Q&A (FAQ)
-- **Q:** How can you handle the LLM markdown wrapping problem in Python?
-- **A:** Hum string manipulation methods use kar sakte hain. Pehle `.strip()` se extra whitespace hatate hain. Phir `.startswith()` verify karke hum `.lower() comparison` karte hain. Uske baad hum string slicing `[7:-3]` apply karte hain.
+#### ❓ 17. Interview [[HL::Q&A (FAQ)::HL]]
+- [[HL::**Q:** How can you handle the LLM markdown wrapping problem in Python?::HL]]
+- [[HL::**A:** Hum string manipulation methods use kar sakte hain. Pehle `.strip()` se extra whitespace hatate hain. Phir `.startswith()` verify karke hum `.lower() comparison` karte hain. Uske baad hum string slicing `[7:-3]` apply karte hain::HL]].
 
 - **Q:** Why did the speaker emphasize checking `.startswith` before slicing the string?
 - **A:** AI response hamesha predictable nahi hote. Agar model ne properly valid JSON (bina kisi markdown ke) return kiya, aur humne explicitly `[7:-3]` slice laga diya, toh wo valid response destroy ho jayega.
@@ -12048,7 +12048,7 @@ Total keywords across all subtopics in this topic: 35
 
 # 📚 Section 11: Passing Semantic Context for Locator to make LLMs more intelligent for Self Heal (Selenium: Python, Playwright: JavaScript)
 
-**Section Overview:** Is section mein hum apne AI-driven self-healing framework ko next level par le jayenge. Pehle hum samjhenge ki JSON se Database caching par shift hona kyun zaroori hai for enterprise reporting. Phir hum core problem tackle karenge: jab developers HTML attributes ko itna buri tarah badal dein ki woh bilkul meaningless lagne lagein. Iska solution hai **"Semantic Context"** (element ka human-readable purpose) LLM ko pass karna. 
+[[HL::**Section Overview:** Is section mein hum apne AI-driven self-healing framework ko next level par le jayenge. Pehle hum samjhenge ki JSON se Database caching par shift hona kyun zaroori hai for enterprise reporting. Phir hum core problem tackle karenge: jab developers HTML attributes ko itna buri tarah badal dein ki woh bilkul meaningless lagne lagein. Iska solution hai **"Semantic Context"** (element ka human-readable purpose) LLM ko pass karna::HL]]. 
 
 ---
 
@@ -12064,35 +12064,35 @@ Socho tum roz ke kharche ek personal pocket diary (JSON file) mein likhte ho. Ye
 
 ### 📖 3. Technical Definition
 - **Precise English:** Upgrading the self-healing architecture from local flat-file storage (JSON) to a centralized database system to enable cross-pipeline caching and enterprise-level dashboard reporting.
-- **Hinglish Simplification:** Apne theek kiye hue locators ko local file ki jagah ek central database mein store karna taaki saari testing teams aur dashboards us data ko easily access kar sakein.
+- [[HL::**Hinglish Simplification:** Apne theek kiye hue locators ko local file ki jagah ek central database mein store karna taaki saari testing teams aur dashboards us data ko easily access kar sakein::HL]].
 
 ### 🧠 4. Why This Matters
-- **Problem:** Abhi hamara **AI find element method** healed locators ko ek local **JSON file** mein save karta hai. Agar test kisi aur machine ya **CI CD pipeline** (Continuous Integration/Continuous Deployment — code ko automatically test aur server par bhejne ka process) mein chal raha hai, toh woh local JSON file wahan access nahi ho payegi.
-- **Solution:** Ek centralized **database caching** mechanism use karna, jisse **reporting purpose** ke liye data easily fetch ho sake.
-- **What breaks if we don't use it?** Teams ko pata hi nahi chalega ki konsa locator fail hua tha aur kaise heal hua, aur real-time monitoring namumkin ho jayegi.
+- [[HL::**Problem:** Abhi hamara **AI find element method** healed locators ko ek local **JSON file** mein save karta hai. Agar test kisi aur machine ya **CI CD pipeline** (Continuous Integration/Continuous Deployment — code ko automatically test aur server par bhejne ka process) mein chal raha hai, toh woh local JSON file wahan access nahi ho payegi.::HL]]
+- [[HL::**Solution:** Ek centralized **database caching** mechanism use karna, jisse **reporting purpose** ke liye data easily fetch ho sake.::HL]]
+- [[HL::**What breaks if we don't use it?** Teams ko pata hi nahi chalega ki konsa locator fail hua tha aur kaise heal hua, aur real-time monitoring namumkin ho jayegi::HL]].
 
 ### 💡 5. Concept Visualization (Theory Topic ke liye)
 *(N/A — Is concept mein koi direct visual/editor state nahi hota, yeh purely conceptual hai. Hum Hands-On ki jagah iska flow dekhenge)*
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-1. **Current Flow:** Automation script fail hoti hai -> **large language model** naya locator dhundhta hai -> naya locator local `locators.json` mein save hota hai.
-2. **Proposed Centralized Flow:** Script fail hoti hai -> LLM naya locator laata hai -> Framework ek **API** (Application Programming Interface — do softwares ko aapas mein baat karwane wala bridge) call karta hai.
-3. Yeh API ek **back end** server par jaati hai.
-4. Server us data ko **SQL server** (Relational database — data ko tables/rows mein store karta hai) ya **MongoDB** (NoSQL database — data ko document format mein store karta hai) mein insert karta hai.
-5. Ek **centralized dashboard** is database se query karke charts aur metrics dikhata hai.
+1. [[HL::**Current Flow:** Automation script fail hoti hai -> **large language model** naya locator dhundhta hai -> naya locator local `locators.json` mein save hota hai.::HL]]
+2. [[HL::**Proposed Centralized Flow:** Script fail hoti hai -> LLM naya locator laata hai -> Framework ek **API** (Application Programming Interface — do softwares ko aapas mein baat karwane wala bridge) call karta hai.::HL]]
+3. [[HL::Yeh API ek **back end** server par jaati hai.::HL]]
+4. [[HL::Server us data ko **SQL server** (Relational database — data ko tables/rows mein store karta hai) ya **MongoDB** (NoSQL database — data ko document format mein store karta hai) mein insert karta hai.::HL]]
+5. [[HL::Ek **centralized dashboard** is database se query karke charts aur metrics dikhata hai::HL]].
 
 ### 💡 7. Concept Visualization (Replacing Hands-On for Theory)
 Yeh purely conceptual topic hai jahan speaker ne code nahi likha, sirf architecture samjhaya hai. Isliye Code ki jagah hum Concept Visualization dekh rahe hain.
 
 **Step-by-Step Flow:**
-1. Test execution start hota hai CI/CD environment mein.
-2. `LoginButton` ka locator fail hota hai.
-3. Healing trigger hoti hai aur naya locator mil jata hai.
-4. Framework local file mein likhne ke bajaye ek HTTP POST request bhejta hai:
-   `POST /api/save-healed-locator`
-   `Payload: { "element": "LoginButton", "old": "id=btn-log", "new": "id=submit-2024" }`
-5. Database us entry ko log karta hai.
-6. QA Manager subah apna web dashboard kholta hai aur dekhta hai: "5 locators healed today."
+1. [[HL::Test execution start hota hai CI/CD environment mein.::HL]]
+2. [[HL::`LoginButton` ka locator fail hota hai.::HL]]
+3. [[HL::Healing trigger hoti hai aur naya locator mil jata hai.::HL]]
+4. [[HL::Framework local file mein likhne ke bajaye ek HTTP POST request bhejta hai:::HL]]
+[[HL::   `POST /api/save-healed-locator`::HL]]
+[[HL::   `Payload: { "element": "LoginButton", "old": "id=btn-log", "new": "id=submit-2024" }`::HL]]
+5. [[HL::Database us entry ko log karta hai.::HL]]
+6. [[HL::QA Manager subah apna web dashboard kholta hai aur dekhta hai: "5 locators healed today::HL]]."
 
 ### 🔒 8. Security-First Check
 Database credentials (username, password, API keys) ko kabhi bhi test code mein hardcode mat karo. Hamesha Environment Variables (`.env`) ya secret management tools use karo taaki agar code leak ho, toh database hack na ho.
@@ -12105,9 +12105,9 @@ Local machine par testing ke liye **SQLite database** (Lightweight file-based da
 - **🤦 Why:** CI/CD runners (jaise GitHub Actions) ephemeral (temporary) hote hain. Job khatam hote hi JSON file delete ho jayegi aur caching ka faida nahi milega.
 - **✅ The 'Pro' Way:** Hamesha remote database cache ya artifact storage use karo.
 
-### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
-- **Confusion 1: "Kya JSON use karna galat hai?"** → Chhote projects ya single-developer environment mein JSON best hai. Database architecture sirf large teams aur enterprise dashboards ke liye discuss hua hai.
-- **Confusion 2: "SQLite aur SQL Server mein kya fark hai?"** → SQLite ek single file hoti hai jo system pe rehti hai (not for heavy traffic), jabki SQL Server ek dedicated running engine hota hai jo thousands of connections handle karta hai.
+### 🤔 11. Agar Dimag Ghoom Raha Hai? ([[HL::Confusion Clarifier)::HL]]
+- [[HL::**Confusion 1: "Kya JSON use karna galat hai?"** → Chhote projects ya single-developer environment mein JSON best hai. Database architecture sirf large teams aur enterprise dashboards ke liye discuss hua hai.::HL]]
+- [[HL::**Confusion 2: "SQLite aur SQL Server mein kya fark hai?"** → SQLite ek single file hoti hai jo system pe rehti hai (not for heavy traffic), jabki SQL Server ek dedicated running engine hota hai jo thousands of connections handle karta hai::HL]].
 
 ### 🛠️ 12. Troubleshooting Flowchart
 - Database connection error? → Check karo ki firewall rules API access block toh nahi kar rahe.
@@ -12144,21 +12144,21 @@ BrowserStack ya SauceLabs jaisi platforms apna ek dedicated dashboard deti hain.
          [ Centralized Dashboard ]
 ```
 
-### ❓ 17. Interview Q&A
-- **Q:** Ek local JSON file CI/CD environments mein effectively caching ke liye kaam kyun nahi karti?
-- **A:** CI/CD environments jaise Jenkins ya GitHub Actions temporary virtual machines (containers) banate hain. Jab test khatam hota hai, container destroy ho jata hai aur uske sath aapki `locators.json` bhi delete ho jati hai. Isliye agli baar cache reset ho jata hai, unless hum data database mein bhejain.
+### ❓ 17. Interview Q&[[HL::A::HL]]
+- [[HL::**Q:** Ek local JSON file CI/CD environments mein effectively caching ke liye kaam kyun nahi karti?::HL]]
+- [[HL::**A:** CI/CD environments jaise Jenkins ya GitHub Actions temporary virtual machines (containers) banate hain. Jab test khatam hota hai, container destroy ho jata hai aur uske sath aapki `locators.json` bhi delete ho jati hai. Isliye agli baar cache reset ho jata hai, unless hum data database mein bhejain.::HL]]
 
-- **Q:** SQL vs NoSQL (MongoDB) kaunsa behtar hai healed locators store karne ke liye?
-- **A:** MongoDB (NoSQL) behtar choice hai kyunki web elements aur locators ka structure dynamic hota hai (kabhi xpath, kabhi id). JSON-like documents ko directly save karna MongoDB mein bohot fast aur schema-less hota hai, jo flexible automation data ke liye perfect hai.
+- [[HL::**Q:** SQL vs NoSQL (MongoDB) kaunsa behtar hai healed locators store karne ke liye?::HL]]
+- [[HL::**A:** MongoDB (NoSQL) behtar choice hai kyunki web elements aur locators ka structure dynamic hota hai (kabhi xpath, kabhi id). JSON-like documents ko directly save karna MongoDB mein bohot fast aur schema-less hota hai, jo flexible automation data ke liye perfect hai.::HL]]
 
-- **Q:** "Reporting purpose" ke liye centralized database ka kya role hai?
-- **A:** Leadership ko yeh dekhna hota hai ki "AI ne kitne man-hours save kiye". Agar data local files mein hai, toh metric nikalna impossible hai. Database hone se hum direct SQL queries likh sakte hain: `SELECT count(*) from healed_locators where date=today`.
+- [[HL::**Q:** "Reporting purpose" ke liye centralized database ka kya role hai?::HL]]
+- [[HL::**A:** Leadership ko yeh dekhna hota hai ki "AI ne kitne man-hours save kiye". Agar data local files mein hai, toh metric nikalna impossible hai. Database hone se hum direct SQL queries likh sakte hain: `SELECT count(*) from healed_locators where date=today`::HL]].
 
 - **Q:** AI Find Element method kya hota hai?
 - **A:** Yeh framework ka woh core function hai jo traditional `driver.find_element` ko replace karta hai. Jab normal locator fail hota hai, toh yeh method page source code aur LLM ka use karke naya working locator automatically dhundh nikalta hai.
 
-- **Q:** SQLite production CI/CD ke liye kyun recommend nahi kiya jata?
-- **A:** SQLite ek lightweight file-based DB hai. Yeh multiple concurrent write operations (agar 50 tests ek sath fail hon aur naya locator save karna chahein) handle karne mein struggle karta hai aur "Database Locked" errors deta hai.
+- **Q:** [[HL::SQLite production CI/CD ke liye kyun recommend nahi kiya jata?::HL]]
+- [[HL::**A:** SQLite ek lightweight file-based DB hai. Yeh multiple concurrent write operations (agar 50 tests ek sath fail hon aur naya locator save karna chahein) handle karne mein struggle karta hai aur "Database Locked" errors deta hai::HL]].
 
 ### 📝 18. One-Line Memory Hook
 "JSON laptop ke liye hai, Database company ke dashboard ke liye."
@@ -12184,12 +12184,12 @@ Agar Raju ne galti se neeli shirt pehan li (UI changed to irrelevant locator), t
 
 ### 📖 3. Technical Definition
 - **Precise English:** Semantic context is the process of passing human-readable intent or functional description of a UI element to the LLM, bridging the gap when technical DOM attributes become completely obfuscated or meaningless.
-- **Hinglish Simplification:** LLM ko sirf technical ID/Class mat batao, usko yeh bhi batao ki us element ka 'matlab' ya 'kaam' kya hai (jaise "yeh login button hai"), taaki HTML badalne par bhi LLM sahi element pehchan sake.
+- [[HL::**Hinglish Simplification:** LLM ko sirf technical ID/Class mat batao, usko yeh bhi batao ki us element ka 'matlab' ya 'kaam' kya hai (jaise "yeh login button hai"), taaki HTML badalne par bhi LLM sahi element pehchan sake::HL]].
 
 ### 🧠 4. Why This Matters
-- **Problem:** Developers kabhi kabhi **technical implementations** mein IDs aur **classes** ko bilkul meaningless names se replace kar dete hain. Jaise username ki ID pehle `"username"` thi, ab unhone `"new text"` ya `"some text"` kar di. LLM source code mein `"new text"` padh kar confuse ho jata hai kyunki usme username jaisa kuch nahi likha.
-- **Solution:** Hum **natural language** mein element ka context (jaise `"username field"`) pass karte hain.
-- **What breaks if we don't use it?** Agar DOM mein identifiers bilkul random aur irrevelant ban gaye, toh even the smartest LLM bhi fail ho jayega sahi element identify karne mein.
+- [[HL::**Problem:** Developers kabhi kabhi **technical implementations** mein IDs aur **classes** ko bilkul meaningless names se replace kar dete hain. Jaise username ki ID pehle `"username"` thi, ab unhone `"new text"` ya `"some text"` kar di. LLM source code mein `"new text"` padh kar confuse ho jata hai kyunki usme username jaisa kuch nahi likha.::HL]]
+- [[HL::**Solution:** Hum **natural language** mein element ka context (jaise `"username field"`) pass karte hain.::HL]]
+- [[HL::**What breaks if we don't use it?** Agar DOM mein identifiers bilkul random aur irrevelant ban gaye, toh even the smartest LLM bhi fail ho jayega sahi element identify karne mein::HL]].
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```html
@@ -12199,11 +12199,11 @@ Agar Raju ne galti se neeli shirt pehan li (UI changed to irrelevant locator), t
 ```
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
-1. System ko element dhundhna hai jiska purana **locator ID** badal gaya hai.
-2. Nayi source code **page source code** mein aati hai.
-3. Wahan fields ke IDs completely irrelevant hain (e.g., **client ID**, **auth details**, **some text**).
-4. Hum prompt mein LLM ko bolte hain: "Find the element that functionally matches this description: *username field*."
-5. LLM ab tags, input types aur aas-paas ke text ko analyze karke us meaningless ID wale element ko correctly map kar leta hai.
+1. [[HL::System ko element dhundhna hai jiska purana **locator ID** badal gaya hai.::HL]]
+2. [[HL::Nayi source code **page source code** mein aati hai.::HL]]
+3. [[HL::Wahan fields ke IDs completely irrelevant hain (e.g., **client ID**, **auth details**, **some text**::HL]]).
+4. [[HL::Hum prompt mein LLM ko bolte hain: "Find the element that functionally matches this description: *username field*."::HL]]
+5. [[HL::LLM ab tags, input types aur aas-paas ke text ko analyze karke us meaningless ID wale element ko correctly map kar leta hai::HL]].
 
 ### 💻 7. Hands-On — Runnable Example
 *(Next video mein hum iski full implementation dekhenge, par yahan ek conceptual pseudo-code samajhte hain ki parameter kaisa dikhega)*
@@ -12271,15 +12271,15 @@ Enterprise apps mein often security updates hote hain jahan **password input fie
                [ Healed Locator: id="new text" ]
 ```
 
-### ❓ 17. Interview Q&A
-- **Q:** Semantic context pass karna kab zaroori ho jata hai?
-- **A:** Jab technical implementations mein element ke attributes (IDs, classes) uske functional purpose se completely alag ya meaningless ho jate hain (jaise id="some text"). Tab LLM ko element ka sahi intent samjhane ke liye semantic context ki zaroorat hoti hai.
+### ❓ 17. Interview [[HL::Q&A::HL]]
+- [[HL::**Q:** Semantic context pass karna kab zaroori ho jata hai?::HL]]
+- [[HL::**A:** Jab technical implementations mein element ke attributes (IDs, classes) uske functional purpose se completely alag ya meaningless ho jate hain (jaise id="some text"). Tab LLM ko element ka sahi intent samjhane ke liye semantic context ki zaroorat hoti hai::HL]].
 
 - **Q:** Agar HTML mein id "client ID" aur password ki jagah "auth details" likha ho, toh AI kaise fail ho sakta hai bina semantic context ke?
 - **A:** AI purely DOM pattern matching pe depend karta hai. Agar username field ka purana id `user` tha, aur naya `client ID` ban gaya, toh AI relate nahi kar payega kyunki words completely different hain. Semantic context "username field" dene se usko relation mil jata hai.
 
-- **Q:** Semantic context ko likhne ka best practice kya hai?
-- **A:** Isko short aur descriptive hona chahiye. Sirf "button" likhne ki jagah "login button field" likhna chahiye taaki page par baki buttons se differentiate ho sake.
+- [[HL::**Q:** Semantic context ko likhne ka best practice kya hai?::HL]]
+- [[HL::**A:** Isko short aur descriptive hona chahiye. Sirf "button" likhne ki jagah "login button field" likhna chahiye taaki page par baki buttons se differentiate ho sake::HL]].
 
 - **Q:** Kya is approach se hum traditional page object model se door jaa rahe hain?
 - **A:** Nahi, hum Page Object Model (POM — design pattern jisme web pages ko classes mein define karte hain) ke andar hi locators ke sath ye string store karte hain. POM aur strong ho raha hai isse.
@@ -12334,17 +12334,17 @@ Ab agar item number 45 se 50 bhi ho gaya, toh waiter "spicy paneer" wali descrip
 - **Hinglish Simplification:** Apne core functions mein ek naya parameter add karna taaki hum AI ko element ka kaam/matlab bata sakein, aur AI ke prompt ko update karna taaki woh is information ko use kare.
 
 ### 🧠 4. Why This Matters
-- **Problem:** LLM sirf source code ko andhe ki tarah pattern-match kar raha tha. Agar original locator poori tarah badal gaya (jaise ID 'user' se 'auth' ho gayi), toh AI fail ho jayega.
-- **Solution:** Hum **prompt engineering** use karke AI ko ek **element description** (semantic context) pass karte hain.
-- **What breaks if we don't use it?** Highly dynamic web apps mein jahan IDs har release par change hoti hain, wahan self-healing framework completely useless ho jayega.
+- [[HL::**Problem:** LLM sirf source code ko andhe ki tarah pattern-match kar raha tha. Agar original locator poori tarah badal gaya (jaise ID 'user' se 'auth' ho gayi), toh AI fail ho jayega.::HL]]
+- [[HL::**Solution:** Hum **prompt engineering** use karke AI ko ek **element description** (semantic context) pass karte hain.::HL]]
+- [[HL::**What breaks if we don't use it?** Highly dynamic web apps mein jahan IDs har release par change hoti hain, wahan self-healing framework completely useless ho jayega::HL]].
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```python
-# IDE mein function signature pehle aisa tha:
-def get_healed_locator(original_locator: str): ...
+# [[HL::IDE mein function signature pehle aisa tha:::HL]]
+[[HL::def get_healed_locator(original_locator: str): ...::HL]]
 
-# Ab aisa dikhega:
-def get_healed_locator(original_locator: str, semantic_context: Optional[str] = None): ...
+# [[HL::Ab aisa dikhega:::HL]]
+[[HL::def get_healed_locator(original_locator: str, semantic_context: Optional[str] = None::HL]]): ...
 ```
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
@@ -12363,29 +12363,29 @@ Yahan hum core prompt generator function ko update kar rahe hain.
 1  from typing import Optional      # Optional library — type hinting ke liye ki parameter None bhi ho sakta hai
 2  import json                      # JSON module — string ko JSON object mein parse karne ke liye
 3
-4  def get_healed_locator(          # get_healed_locator() = function jo AI prompt banata hai
-5      page_source: str,            # page_source= : Browser ka current HTML code
-6      original_locator: str,       # original_locator= : Puraana fail hua locator (e.g., 'id=btn-login')
-7      semantic_context: Optional[str] = None  # semantic_context= : Optional[str] type, default parameter None hai taaki purana code break na ho
-8  ):
-9      # Prompt engineering: LLM ko strict instructions dena
-10     prompt = f"""
-11     You are an expert QA Automation Engineer.
-12     Find the new locator for the element that used to be located by: {original_locator}
-13     """
-14     
-15     if semantic_context:         # Agar user ne context bheja hai, toh usko prompt mein jodo
-16         # Double quotes use kiye taaki string formatting break na ho
-17         prompt += f"The element description / purpose is: '{semantic_context}'. Use this to identify the correct element."
-18     
-19     # Explicit constraints for the AI
-20     prompt += """
-21     Analyze the page source provided below.
-22     Return ONLY a valid JSON object with 'locator_type' (must be ID, name, XPath, CSS class name, or link text) and 'locator_value'.
-23     CRITICAL RULE: ⭐ prefer robust locators over the fragile ones!
-24     
-25     Page Source:
-26     """ + page_source
+4  [[HL::def get_healed_locator(          # get_healed_locator() = function jo AI prompt banata hai::HL]]
+[[HL::5      page_source: str,            # page_source= : Browser ka current HTML code::HL]]
+[[HL::6      original_locator: str,       # original_locator= : Puraana fail hua locator (e.g., 'id=btn-login')::HL]]
+[[HL::7      semantic_context: Optional[str] = None  # semantic_context= : Optional[str] type, default parameter None hai taaki purana code break na ho::HL]]
+[[HL::8  ):::HL]]
+[[HL::9      # Prompt engineering: LLM ko strict instructions dena::HL]]
+[[HL::10     prompt = f"""::HL]]
+[[HL::11     You are an expert QA Automation Engineer.::HL]]
+[[HL::12     Find the new locator for the element that used to be located by: {original_locator}::HL]]
+[[HL::13     """::HL]]
+[[HL::14     ::HL]]
+[[HL::15     if semantic_context:         # Agar user ne conte::HL]]xt bheja hai, toh usko prompt mein jodo
+16         # [[HL::Double quotes use kiye taaki string formatting break na ho::HL]]
+[[HL::17         prompt += f"The element description / purpose is: '{semantic_context}'. Use this to identify the correct element."::HL]]
+[[HL::18     ::HL]]
+[[HL::19     # Explicit constraints for the AI::HL]]
+[[HL::20     prompt += """::HL]]
+[[HL::21     Analyze the page source provided below.::HL]]
+[[HL::22     Return ONLY a valid JSON object with 'locator_type' (must be ID, name, XPath, CSS class name, or link text) and 'locator_value'.::HL]]
+[[HL::23     CRITICAL RULE: ⭐ prefer robust locators over the fragile ones!::HL]]
+[[HL::24     ::HL]]
+[[HL::25     Page Source:::HL]]
+[[HL::26     """ + page_source::HL]]
 27     
 28     return prompt                # Final prompt string return karo LLM ko bhejne ke liye
 ```
@@ -12414,7 +12414,7 @@ Optional parameters (jaise `=None`) scalability ka core rule hain. Ek enterprise
 
 ### 🤔 11. Agar Dimag Ghoom Raha Hai? (Confusion Clarifier)
 - **Confusion 1: "`Optional[str]` kya hai?"** → Python dynamically typed hai, par `typing` module se hum hints de sakte hain. `Optional[str]` ka matlab hai "Ya toh yeh string hoga, ya phir None". Yeh bas padhne walo aur IDE ke aasaani ke liye hai.
-- **Confusion 2: "Robust vs Fragile locators kya hote hain?"** → Fragile (kamzor) = `/html/body/div[2]/span/button` (thoda sa HTML hila toh tut jayega). Robust (mazboot) = `//button[@id='submit']` (yeh hamesha kaam karega).
+- [[HL::**Confusion 2: "Robust vs Fragile locators kya hote hain?"** → Fragile (kamzor) = `/html/body/div[2]/span/button` (thoda sa HTML hila toh tut jayega). Robust (mazboot) = `//button[@id='submit']` (yeh hamesha kaam karega::HL]]).
 
 ### 🛠️ 12. Troubleshooting Flowchart
 - LLM response JSON parse nahi ho raha? → Check karo kya prompt mein explicitly "Return ONLY a valid JSON object" likha hai. LLM aadat se majboor hoke explanation likh deta hai.
@@ -12486,23 +12486,23 @@ Google Maps ka socho. Jab tum pehli baar kisi naye gaon ka rasta dhundhte ho, to
 - **Hinglish Simplification:** Apne page classes (POM) se seedha semantic context pass karna, aur phir framework ko chala kar dekhna ki pehli baar AI se heal hone mein kitna time lagta hai, aur doosri baar cache ki wajah se test kitna fast ho jata hai.
 
 ### 🧠 4. Why This Matters
-- **Problem:** AI APIs (jaise OpenAI) ko call karna slow hota hai (often taking seconds to respond). Agar har baar UI test LLM ko call karega, toh suite bohot slow ho jayegi.
-- **Solution:** Ek strong **caching mechanism** banaya. POM se element dhoondhte waqt, framework pehle cache check karega, nahi mila toh AI se layega aur phir usko cache kar dega.
+- [[HL::**Problem:** AI APIs (jaise OpenAI) ko call karna slow hota hai (often taking seconds to respond). Agar har baar UI test LLM ko call karega, toh suite bohot slow ho jayegi.::HL]]
+- [[HL::**Solution:** Ek strong **caching mechanism** banaya. POM se element dhoondhte waqt, framework pehle cache check karega, nahi mila toh AI se layega aur phir usko cache kar dega::HL]].
 - **What breaks if we don't use it?** Tests slow rahenge, API costs aasmaan chhu lengi, aur **resilient automation** ka sapna poora nahi hoga.
 
 ### 🔍 5. Visual / Editor Mein Kya Dikhega
 ```
-# Project folder structure mein cache:
-my_framework/
- ├── pages/
- │    └── login_page.py
- ├── __pycache__/            <-- Yahan cached data/compiled bytes save hote hain
- └── locators_cache.json     <-- Yahan naye locators save hote hain
+# Proj[[HL::ect folder structure mein cache:::HL]]
+[[HL::my_framework/::HL]]
+[[HL:: ├── pages/::HL]]
+[[HL:: │    └── login_page.py::HL]]
+[[HL:: ├── __pycache__/            <-- Yahan cached data/compiled bytes save hote hain::HL]]
+[[HL:: └── locators_cache.json     <-- Yahan naye locators save hote hain::HL]]
  
-# Console Output after run 1:
-Executed in 40.2s
-# Console Output after run 2:
-Executed in 7.1s
+# [[HL::Console Output after run 1:::HL]]
+[[HL::Executed in 40.2s::HL]]
+# [[HL::Console Output after run 2:::HL]]
+[[HL::Executed in 7.1s::HL]]
 ```
 
 ### ⚙️ 6. Under the Hood (Deep Dive)
@@ -12604,8 +12604,8 @@ Netflix ke QA engineers hundreds of devices par test karte hain. Agar ek main UI
 ```
 
 ### ❓ 17. Interview Q&A
-- **Q:** Execution time 40 seconds se 7 seconds tak drop kyun ho gaya dusre run mein?
-- **A:** Pehle run mein framework ko locator nahi mila, isliye usne network request bheji LLM API (AI) ko, jo data process karke return karne mein time lagati hai (40s). Dusre run mein, framework ko naya locator local hard drive ke cache file se turant mil gaya, isliye time (7s) laga.
+- **Q:** [[HL::Execution time 40 seconds se 7 seconds tak drop kyun ho gaya dusre run mein?::HL]]
+- [[HL::**A:** Pehle run mein framework ko locator nahi mila, isliye usne network request bheji LLM API (AI) ko, jo data process karke return karne mein time lagati hai (40s). Dusre run mein, framework ko naya locator local hard drive ke cache file se turant mil gaya, isliye time (7s) laga::HL]].
 - **Q:** Page Object Model (POM) mein semantic context kahan aur kyun dalte hain?
 - **A:** POM mein elements ke locators define hote hain (e.g., `self.btn = self.driver.find_element(locator="id=btn")`). Hum semantic context yahin parameter ke roop mein dalte hain taaki test level logic (assertions) aur element identification logic cleanly separated rahein.
 - **Q:** Custom "web driver extension" banane ka kya faida hai?
