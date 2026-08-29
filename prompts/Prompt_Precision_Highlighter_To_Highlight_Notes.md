@@ -306,6 +306,45 @@ Zotero annotations frequently contain internal quotation marks (e.g., `“Confus
 If you write extraction scripts using naive regex like `re.findall(r'[“"](.*?)["”]', content)`, it will incorrectly stop at the first internal straight quote (`"`), prematurely chopping the annotation into broken pieces and causing document matching to fail.
 **CRITICAL VERIFICATION STEP:** Your extraction logic must strictly pair the outermost curly quotes (e.g., `re.findall(r'“([\s\S]*?)”', content)`) or use block-based parsing (splitting by `\n\n`) to ensure the entire annotation is captured intact without breaking on nested quotes.
 
+### Rule 39 — CONTEXTUAL BULLETS (Root Cause, Fix, Actually, Mistake, Line X)
+When extracting highlights, be hyper-vigilant about contextual sub-bullets like `* **Root Cause:**`, `* **Fix:**`, `* **Galat soch:**`, `* **Actually:**`, `* **Mistake:**`, and particularly `* **Line X:**` (in code explanations). Naive string-matching scripts often miss them entirely or split them incorrectly due to line breaks, spaces, or bold tags in the Markdown that aren't perfectly mirrored in the Annotations file. You must explicitly verify that these contextual prefixes are fully wrapped in `[[HL::` tags.
+
+### Rule 40 — BACKTICK SPACING & CUSTOM JS RENDERER QUIRKS
+1. **Inline Code Spacing:** Never place an `[[HL::...::HL]]` tag immediately adjacent to an inline backtick without a space. Markdown parsers need a space to recognize the inline code block correctly. (e.g., use `[[HL::Text::HL]] `.ext``, NOT `[[HL::Text::HL]]`.ext``).
+2. **Block-Level Code (` ``` `):** The custom `STYLE_PROMPT.md` JS renderer *specifically* supports and intercepts `[[HL::` tags INSIDE ` ```text ` blocks. If an annotation requires highlighting text inside a code block (like an `Expected Output` section), you MUST apply the `[[HL::...::HL]]` tags directly around the text inside the ` ``` ` block.
+3. **Dangling Code Blocks:** When modifying code blocks, be extremely careful not to leave a stray/dangling ` ``` ` tag. A single unclosed backtick block will swallow the rest of the 8,000-line document into a single unformatted Mac-window box!
+### Rule 41 — COMPLEX MULTI-LINE SNIPPETS (FALLBACK SCRIPTING)
+If a requested annotation is a massive, multi-line block containing complex formatting (like raw code blocks, indented formulas, or tables), standard fuzzy matching will often fail due to spacing/punctuation drifts. Do NOT silently skip these annotations. You must actively implement specific fallback matching (e.g. explicitly searching for unique sub-strings within the block) or inject them manually to guarantee 100% coverage.
+
+### Rule 42 — AVOID DOM OVERLAPPING IN SCRIPTS (CRITICAL FOR HTML RENDERER)
+If you write a Python script to automate highlighting, you CANNOT rely on naive content.replace() or basic regex. Your script MUST include explicit boundary-correction logic to prevent generating overlapping Markdown tags (which result in overlapping HTML tags and silently broken highlights in the browser).
+Specifically:
+1. **Bold/Italic Tags (**, *, _):** If a highlight starts or ends adjacent to these tags, your script must algorithmically expand the [[HL:: and ::HL]] tags OUTWARDS so they completely enclose the Markdown syntax (e.g., [[HL::**Text:**::HL]]). Do NOT generate straddling tags like **[[HL::Text:**::HL]].
+2. **Multi-Line & Bullet Points:** If a highlight spans across newlines or list items, your script must split the highlight into single-line segments, re-opening [[HL:: and re-closing ::HL]] on EVERY single line/bullet point. NEVER wrap multiple list items in a single tag.
+
+Failing to implement this in your script will cause catastrophic, invisible truncation of highlights when the document is rendered to HTML.
+
+
+### Rule 43 — ROBUST FUZZY MATCHING FOR MARKDOWN CHARACTERS
+When users provide terms to highlight, they often provide plain text (e.g., Mistake: Browser app mein require('module') use karna), while the actual Markdown document contains formatting characters (e.g., **❌ Mistake:** Browser app mein equire('module')\ use karna.). 
+Your Python script MUST use a robust fuzzy matching algorithm or regex that ignores/strips Markdown characters (*, _, \`, <, >) during the string matching phase. If your script relies on strict .find() or strict regex without accounting for hidden backticks or bold tags, it will silently fail to find the text.
+
+### Rule 44 — TABLE PIPES (|) MUST REMAIN OUTSIDE
+If a highlight spans across multiple cells in a Markdown table, your script MUST explicitly split the [[HL:: and ::HL]] tags at the column boundaries. You must NEVER wrap a pipe (|) character inside the highlight tag (e.g., [[HL:: cell 1 | cell 2 ::HL]] is FORBIDDEN). It must be [[HL:: cell 1 ::HL]] | [[HL:: cell 2 ::HL]]. Wrapping a pipe breaks the Markdown table parser entirely.
+
+### Rule 45 — PROTECTING LINE-LEVEL MARKDOWN SYNTAX IN SCRIPTS
+If you write a Python script to apply highlights, your regex or boundary injection logic MUST actively push `[[HL::` tags *after* leading line-level Markdown syntax. 
+If a user requests highlighting an entire line or heading, your script MUST NOT wrap the `# ` or ` ``` ` or `> ` inside the highlight tags.
+- ❌ `[[HL::# 📤 Expected Output:::HL]]` (Breaks the heading parser, turning it into a paragraph)
+- ✅ `# [[HL::📤 Expected Output:::HL]]` (Correct: The `[[HL::` is safely injected AFTER the `# `)
+- ❌ `[[HL::```bash::HL]]` (Breaks the code block parser)
+- ✅ ` ```bash\n[[HL::...::HL]]` (Correct: Tags are strictly inside the block boundaries)
+Your script must use regex groups (e.g., `^(\s*(?:#+\s+|[-*+]\s+|\d+\.\s+|>\s*))?`) to parse and preserve these leading markers, injecting the `[[HL::` tag strictly *after* them.
+
+### Rule 46 — DISJOINT SENTENCES CONCATENATED IN ANNOTATIONS
+Sometimes the user will provide a single requested term that consists of two completely disjoint sentences concatenated together with separators like `----` or `...` (e.g., `Sentence A ---- Sentence B`). In the actual document, these two sentences might be separated by large gaps of text, intervening bullet points, or paragraphs.
+When you see this, do NOT treat it as a single contiguous string. You must intelligently split the request, locate `Sentence A` and `Sentence B` independently, and highlight both of them exactly where they appear in the document.
+
 ---
 
 ## 🔄 PROCESSING ORDER (Follow This Exactly)
@@ -405,10 +444,6 @@ A [[HL::reverse shell::HL]] gives the attacker remote access.
 - Version tag comment line left untouched (it's code content, not a protected zone — but `nmap` inside it would be highlighted if it appeared there)
 - `Nmap` in the header preserved original capitalization (user asked `nmap`, document had `Nmap`)
 
-### Rule 23 — DISJOINT SENTENCES CONCATENATED IN ANNOTATIONS
-Sometimes the user will provide a single requested term that consists of two completely disjoint sentences concatenated together with separators like `----` or `...` (e.g., `Sentence A ---- Sentence B`). In the actual document, these two sentences might be separated by large gaps of text, intervening bullet points, or paragraphs.
-When you see this, do NOT treat it as a single contiguous string. You must intelligently split the request, locate `Sentence A` and `Sentence B` independently, and highlight both of them exactly where they appear in the document.
-
 ---
 
 ## ❌ COMMON MISTAKES TO NEVER MAKE
@@ -441,37 +476,47 @@ When you see this, do NOT treat it as a single contiguous string. You must intel
 | Missing space before inline code after a highlight | Forbidden — E.g., `[[HL::text::HL]]`.ext` breaks Markdown inline code parsing. Always leave a space: `[[HL::text::HL]] `.ext`. |
 | Leaving a dangling/unclosed ` ``` ` code block | Forbidden — A stray ` ``` ` will swallow the entire rest of the document into a giant box! |
 
-### Rule 39 — CONTEXTUAL BULLETS (Root Cause, Fix, Actually, Mistake, Line X)
-When extracting highlights, be hyper-vigilant about contextual sub-bullets like `* **Root Cause:**`, `* **Fix:**`, `* **Galat soch:**`, `* **Actually:**`, `* **Mistake:**`, and particularly `* **Line X:**` (in code explanations). Naive string-matching scripts often miss them entirely or split them incorrectly due to line breaks, spaces, or bold tags in the Markdown that aren't perfectly mirrored in the Annotations file. You must explicitly verify that these contextual prefixes are fully wrapped in `[[HL::` tags.
+---
 
-### Rule 40 — BACKTICK SPACING & CUSTOM JS RENDERER QUIRKS
-1. **Inline Code Spacing:** Never place an `[[HL::...::HL]]` tag immediately adjacent to an inline backtick without a space. Markdown parsers need a space to recognize the inline code block correctly. (e.g., use `[[HL::Text::HL]] `.ext``, NOT `[[HL::Text::HL]]`.ext``).
-2. **Block-Level Code (` ``` `):** The custom `STYLE_PROMPT.md` JS renderer *specifically* supports and intercepts `[[HL::` tags INSIDE ` ```text ` blocks. If an annotation requires highlighting text inside a code block (like an `Expected Output` section), you MUST apply the `[[HL::...::HL]]` tags directly around the text inside the ` ``` ` block.
-3. **Dangling Code Blocks:** When modifying code blocks, be extremely careful not to leave a stray/dangling ` ``` ` tag. A single unclosed backtick block will swallow the rest of the 8,000-line document into a single unformatted Mac-window box!
-### Rule 41 — COMPLEX MULTI-LINE SNIPPETS (FALLBACK SCRIPTING)
-If a requested annotation is a massive, multi-line block containing complex formatting (like raw code blocks, indented formulas, or tables), standard fuzzy matching will often fail due to spacing/punctuation drifts. Do NOT silently skip these annotations. You must actively implement specific fallback matching (e.g. explicitly searching for unique sub-strings within the block) or inject them manually to guarantee 100% coverage.
+## 🐍 🚨 THE PYTHON AUTOMATION SCRIPT SURVIVAL GUIDE (CRITICAL LESSONS LEARNED)
 
-### Rule 42 — AVOID DOM OVERLAPPING IN SCRIPTS (CRITICAL FOR HTML RENDERER)
-If you write a Python script to automate highlighting, you CANNOT rely on naive content.replace() or basic regex. Your script MUST include explicit boundary-correction logic to prevent generating overlapping Markdown tags (which result in overlapping HTML tags and silently broken highlights in the browser).
-Specifically:
-1. **Bold/Italic Tags (**, *, _):** If a highlight starts or ends adjacent to these tags, your script must algorithmically expand the [[HL:: and ::HL]] tags OUTWARDS so they completely enclose the Markdown syntax (e.g., [[HL::**Text:**::HL]]). Do NOT generate straddling tags like **[[HL::Text:**::HL]].
-2. **Multi-Line & Bullet Points:** If a highlight spans across newlines or list items, your script must split the highlight into single-line segments, re-opening [[HL:: and re-closing ::HL]] on EVERY single line/bullet point. NEVER wrap multiple list items in a single tag.
+If you decide to write a Python script to automate highlighting across a massive document, you MUST follow these hard-learned lessons. Naive Python scripts using `difflib`, `re.sub()`, or 'Total Line Wrap' approaches routinely cause catastrophic DOM destruction in Markdown viewers.
 
-Failing to implement this in your script will cause catastrophic, invisible truncation of highlights when the document is rendered to HTML.
+### Scripting Law 1: The 'Total Line Wrap' Destroyer (Tables & Blockquotes)
+**The Mistake:** Your Python script finds a matched line and simply wraps the entire line: `new_line = f"[[HL::{line}::HL]]"`
+**The Consequence:**
+- For Tables: `[[HL::| Feature | ... |::HL]]` pushes the tag BEFORE the `|`. The Markdown parser stops seeing it as a table. The entire table collapses into unformatted raw text.
+- For Blockquotes/Lists: `[[HL::> Text::HL]]` or `[[HL::* Text::HL]]` pushes the tag BEFORE the marker, destroying the list rendering.
+**The Fix:** Your script MUST isolate the content *after* the leading Markdown markers. For tables, your script MUST split the row by the pipe character (`|`), and wrap the text *inside* each individual cell (e.g., `| [[HL::Feature::HL]] |`), leaving the pipes untouched.
 
+### Scripting Law 2: The HTML Tag Death Trap
+**The Mistake:** Wrapping a line that contains raw HTML tags (e.g., `* Line 8: Tumhe <h1> tag nahi likhna padta.`) inside a single `[[HL::` wrapper.
+**The Consequence:** The viewer translates `[[HL::` to `<mark>`. This creates `<mark>...<h1>...</h1>...</mark>`. The browser DOM parser considers this invalid (a block element `<h1>` inside an inline element `<mark>`). It auto-closes the tags unpredictably, often causing the browser to swallow (hide) the entire sentence or render the whole page as a giant heading!
+**The Fix:** Your script MUST explicitly check for raw HTML tags (like `<br>`, `<h1>`, `<div>`) inside matched lines. If found, the script MUST split the highlight tags *around* the HTML tags (e.g., `[[HL::Tumhe ::HL]]<h1>[[HL:: tag nahi likhna padta::HL]]`).
 
-### Rule 43 — ROBUST FUZZY MATCHING FOR MARKDOWN CHARACTERS
-When users provide terms to highlight, they often provide plain text (e.g., Mistake: Browser app mein require('module') use karna), while the actual Markdown document contains formatting characters (e.g., **❌ Mistake:** Browser app mein equire('module')\ use karna.). 
-Your Python script MUST use a robust fuzzy matching algorithm or regex that ignores/strips Markdown characters (*, _, \`, <, >) during the string matching phase. If your script relies on strict .find() or strict regex without accounting for hidden backticks or bold tags, it will silently fail to find the text.
+### Scripting Law 3: The Code Block Wrapper Paradox
+**The Mistake:** Highlighting a multi-line `Expected Output` code block by injecting `[[HL::` inside the block, or replacing the backticks.
+**The Consequence:** The syntax highlighter (e.g., Highlight.js) crashes when it encounters raw `<mark>` tags inside a ````text`` block, turning the text invisible or throwing errors.
+**The Fix:** If the user requests to highlight an ENTIRE code block (like an `# 📤 Expected Output:` block), your script should wrap the highlight tags OUTSIDE the backticks:
+```markdown
+[[HL::```text
+# 📤 Expected Output:
+...
+```::HL]]
+```
+*(Note: For individual lines *inside* a code block, use caution. If it's a language like Python, the syntax highlighter might tolerate `<mark>` in comments, but for `text` or `bash`, it may crash. When in doubt, prefer wrapping the whole block if the annotation covers the whole block.)*
 
-### Rule 44 — TABLE PIPES (|) MUST REMAIN OUTSIDE
-If a highlight spans across multiple cells in a Markdown table, your script MUST explicitly split the [[HL:: and ::HL]] tags at the column boundaries. You must NEVER wrap a pipe (|) character inside the highlight tag (e.g., [[HL:: cell 1 | cell 2 ::HL]] is FORBIDDEN). It must be [[HL:: cell 1 ::HL]] | [[HL:: cell 2 ::HL]]. Wrapping a pipe breaks the Markdown table parser entirely.
+### Scripting Law 4: Zotero Plaintext vs Markdown Formatting
+**The Mistake:** Relying on exact string matching or `difflib.SequenceMatcher` directly on the raw Markdown lines.
+**The Consequence:** Zotero exports annotations as pure plaintext. The Markdown file has `**bold**`, `` `code` ``, and emojis. The script fails to find 50% of the quotes because the formatting characters cause the match ratio to drop below the threshold.
+**The Fix:** Your script MUST create a "clean" alphanumeric version of the Markdown line (stripping all punctuation, backticks, asterisks, and emojis) and compare it against a "clean" version of the Zotero annotation. Once a match is found, apply the highlights to the *original* formatted Markdown line, respecting all the rules above.
 
-### Rule 45 — PROTECTING LINE-LEVEL MARKDOWN SYNTAX IN SCRIPTS
-If you write a Python script to apply highlights, your regex or boundary injection logic MUST actively push `[[HL::` tags *after* leading line-level Markdown syntax. 
-If a user requests highlighting an entire line or heading, your script MUST NOT wrap the `# ` or ` ``` ` or `> ` inside the highlight tags.
-- ❌ `[[HL::# 📤 Expected Output:::HL]]` (Breaks the heading parser, turning it into a paragraph)
-- ✅ `# [[HL::📤 Expected Output:::HL]]` (Correct: The `[[HL::` is safely injected AFTER the `# `)
-- ❌ `[[HL::```bash::HL]]` (Breaks the code block parser)
-- ✅ ` ```bash\n[[HL::...::HL]]` (Correct: Tags are strictly inside the block boundaries)
-Your script must use regex groups (e.g., `^(\s*(?:#+\s+|[-*+]\s+|\d+\.\s+|>\s*))?`) to parse and preserve these leading markers, injecting the `[[HL::` tag strictly *after* them.
+### Scripting Law 5: Whitespace & Newline Drift
+**The Mistake:** Using exact string matching when the Zotero annotation spans multiple lines.
+**The Consequence:** Zotero often exports a paragraph as a single continuous line, but in the Markdown file, the text might be hard-wrapped with newline characters (`\n`). If your Python script doesn't normalize whitespace, multi-line quotes will instantly fail to match.
+**The Fix:** Your script MUST globally normalize all whitespace in both the annotation and the target text before comparison (e.g., `re.sub(r'\s+', ' ', text).strip()`). 
+
+### Scripting Law 6: Typographical Quote Mismatches (Curly vs Straight)
+**The Mistake:** Assuming exact character parity between Zotero and Markdown.
+**The Consequence:** Zotero PDF extraction frequently converts straight quotes (`"`, `'`) into curly typographic quotes (`“`, `”`, `‘`, `’`). Markdown files almost exclusively use straight quotes. A strict string comparison of `don’t` vs `don't` will fail.
+**The Fix:** Your script MUST explicitly normalize all curly quotes to straight quotes (e.g., replacing `‘` and `’` with `'`, and `“` and `”` with `"`) in BOTH the source document and the Zotero annotations prior to matching.
