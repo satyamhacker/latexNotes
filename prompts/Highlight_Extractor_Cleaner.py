@@ -11,40 +11,49 @@ def extract_and_clean_highlights(input_file, output_file):
     inside_code_block = False
     current_code_block = []
     has_highlight_in_code = False
+    
+    inside_table = False
+    current_table = []
+    has_highlight_in_table = False
+    
+    inside_blockquote = False
+    current_blockquote = []
+    has_highlight_in_blockquote = False
+    
     hl_balance = 0
     last_extracted_index = -1
     
     # Ye separator hum har naye extraction block ke beech daalenge
     separator = '\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n'
     
+    def commit_block(block_lines, start_idx, end_idx):
+        nonlocal last_extracted_index
+        if last_extracted_index != -1 and start_idx > last_extracted_index + 1:
+            extracted_content.append(separator)
+        extracted_content.extend(block_lines)
+        extracted_content.append('\n')
+        last_extracted_index = end_idx
+
     for i, line in enumerate(lines):
+        is_table_line = line.strip().startswith('|')
+        is_blockquote_line = line.strip().startswith('>')
+        is_code_fence = line.strip().startswith("```")
+        has_hl = "[[HL::" in line
+        
         # 1. Handle Code Blocks (` ``` `)
-        if line.strip().startswith("```"):
+        if is_code_fence:
             if not inside_code_block:
-                # Entering a code block
                 inside_code_block = True
                 current_code_block = [line]
-                has_highlight_in_code = False
-                if "[[HL::" in line:
-                    has_highlight_in_code = True
+                has_highlight_in_code = has_hl
             else:
-                # Exiting a code block
                 current_code_block.append(line)
-                if "[[HL::" in line:
-                    has_highlight_in_code = True
-                    
-                # If there was a highlight anywhere in the block, keep the whole block
-                if has_highlight_in_code:
-                    # Agar humne original file me kuch un-highlighted lines skip ki thi, toh gap+separator de do
-                    block_start_index = i - len(current_code_block) + 1
-                    if last_extracted_index != -1 and block_start_index > last_extracted_index + 1:
-                        extracted_content.append(separator)
-                        
-                    extracted_content.extend(current_code_block)
-                    extracted_content.append('\n') # Space after block
-                    last_extracted_index = i
+                has_highlight_in_code = has_highlight_in_code or has_hl
                 
-                # Reset state
+                if has_highlight_in_code:
+                    start_idx = i - len(current_code_block) + 1
+                    commit_block(current_code_block, start_idx, i)
+                
                 inside_code_block = False
                 current_code_block = []
                 has_highlight_in_code = False
@@ -52,30 +61,69 @@ def extract_and_clean_highlights(input_file, output_file):
             
         if inside_code_block:
             current_code_block.append(line)
-            if "[[HL::" in line:
-                has_highlight_in_code = True
+            has_highlight_in_code = has_highlight_in_code or has_hl
             continue
 
-        # 2. Handle Prose, Bullets and Multi-line highlights
+        # 2. Handle Tables
+        if is_table_line:
+            if not inside_table:
+                inside_table = True
+                current_table = [line]
+                has_highlight_in_table = has_hl
+            else:
+                current_table.append(line)
+                has_highlight_in_table = has_highlight_in_table or has_hl
+            continue
+        else:
+            if inside_table:
+                if has_highlight_in_table:
+                    start_idx = i - len(current_table)
+                    commit_block(current_table, start_idx, i - 1)
+                inside_table = False
+                current_table = []
+                has_highlight_in_table = False
+
+        # 3. Handle Blockquotes
+        if is_blockquote_line:
+            if not inside_blockquote:
+                inside_blockquote = True
+                current_blockquote = [line]
+                has_highlight_in_blockquote = has_hl
+            else:
+                current_blockquote.append(line)
+                has_highlight_in_blockquote = has_highlight_in_blockquote or has_hl
+            continue
+        else:
+            if inside_blockquote:
+                if has_highlight_in_blockquote:
+                    start_idx = i - len(current_blockquote)
+                    commit_block(current_blockquote, start_idx, i - 1)
+                inside_blockquote = False
+                current_blockquote = []
+                has_highlight_in_blockquote = False
+
+        # 4. Handle Prose, Bullets and Multi-line highlights
         opens = line.count("[[HL::")
         closes = line.count("::HL]]")
         
-        # If we are currently inside a multi-line highlight, OR the current line has a highlight tag
         if hl_balance > 0 or opens > 0 or closes > 0:
-            # Agar balance 0 tha (yani naya highlight shuru hua hai) aur humne lines skip ki hain original file mein
             if hl_balance == 0 and last_extracted_index != -1 and i > last_extracted_index + 1:
-                extracted_content.append(separator) # Naye extract se pehle separator
+                extracted_content.append(separator)
                 
             extracted_content.append(line)
             last_extracted_index = i
             
         hl_balance += (opens - closes)
-        
-        # Safety net for formatting quirks
         if hl_balance < 0:
             hl_balance = 0
 
-    # 3. Clean up empty lines AND remove the [[HL:: tags
+    # Catch remaining blocks at EOF
+    if inside_table and has_highlight_in_table:
+        commit_block(current_table, len(lines) - len(current_table), len(lines) - 1)
+    if inside_blockquote and has_highlight_in_blockquote:
+        commit_block(current_blockquote, len(lines) - len(current_blockquote), len(lines) - 1)
+
+    # Clean up empty lines AND remove the [[HL:: tags
     final_content = []
     prev_empty = False
     for line in extracted_content:
@@ -83,13 +131,11 @@ def extract_and_clean_highlights(input_file, output_file):
         if is_empty and prev_empty:
             continue
         
-        # Remove the tags completely from the output
         cleaned_line = line.replace("[[HL::", "").replace("::HL]]", "")
         final_content.append(cleaned_line)
         
         prev_empty = is_empty
 
-    # 4. Save to output file
     with open(output_file, 'w', encoding='utf-8') as f:
         f.writelines(final_content)
         
